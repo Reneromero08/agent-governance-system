@@ -62,7 +62,12 @@ def main() -> int:
     parser.add_argument(
         "--repo-dir",
         required=True,
-        help="Path to repository root containing RELEASE_MANIFEST.json",
+        help="Path to repository root",
+    )
+    parser.add_argument(
+        "--version",
+        required=True,
+        help="Release version to verify (e.g., v3.9.0)",
     )
     parser.add_argument(
         "--pubkey",
@@ -90,7 +95,7 @@ def main() -> int:
         return 2
 
     # Verify
-    result = verify_seal(repo_dir, public_key_path)
+    result = verify_seal(repo_dir, args.version, public_key_path)
 
     if args.json:
         print(json.dumps(result.to_dict(), indent=2))

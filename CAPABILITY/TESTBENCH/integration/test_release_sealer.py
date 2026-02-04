@@ -47,9 +47,14 @@ from CAPABILITY.PRIMITIVES.release_sealer import (
     seal_repo,
     verify_seal,
     get_tracked_files,
+    get_release_dir,
     MANIFEST_FILENAME,
     SIGNATURE_FILENAME,
 )
+
+
+# Test version constant
+TEST_VERSION = "v0.0.0-test"
 
 
 # =============================================================================
@@ -249,18 +254,20 @@ class TestSealRepo:
     def test_seal_creates_manifest(self, tmp_repo: Path, tmp_keys: tuple[Path, Path]):
         """seal_repo() creates RELEASE_MANIFEST.json."""
         private_path, _ = tmp_keys
-        receipt = seal_repo(tmp_repo, private_path)
+        receipt = seal_repo(tmp_repo, private_path, TEST_VERSION)
 
-        manifest_path = tmp_repo / MANIFEST_FILENAME
+        release_dir = get_release_dir(tmp_repo, TEST_VERSION)
+        manifest_path = release_dir / MANIFEST_FILENAME
         assert manifest_path.exists()
         assert receipt.file_count > 0
 
     def test_seal_creates_signature(self, tmp_repo: Path, tmp_keys: tuple[Path, Path]):
         """seal_repo() creates RELEASE_MANIFEST.json.sig."""
         private_path, _ = tmp_keys
-        seal_repo(tmp_repo, private_path)
+        seal_repo(tmp_repo, private_path, TEST_VERSION)
 
-        signature_path = tmp_repo / SIGNATURE_FILENAME
+        release_dir = get_release_dir(tmp_repo, TEST_VERSION)
+        signature_path = release_dir / SIGNATURE_FILENAME
         assert signature_path.exists()
 
         # Verify signature format
@@ -272,17 +279,18 @@ class TestSealRepo:
     def test_seal_includes_all_tracked_files(self, tmp_repo: Path, tmp_keys: tuple[Path, Path]):
         """seal_repo() includes all git-tracked files."""
         private_path, _ = tmp_keys
-        receipt = seal_repo(tmp_repo, private_path)
+        receipt = seal_repo(tmp_repo, private_path, TEST_VERSION)
 
         tracked = get_tracked_files(tmp_repo)
         # Exclude manifest/sig files from count
-        tracked = [f for f in tracked if f not in (MANIFEST_FILENAME, SIGNATURE_FILENAME)]
+        tracked = [f for f in tracked if not f.endswith(MANIFEST_FILENAME) and not f.endswith(SIGNATURE_FILENAME)]
 
         # Receipt count should match
         assert receipt.file_count == len(tracked)
 
         # Verify manifest contents
-        manifest_data = json.loads((tmp_repo / MANIFEST_FILENAME).read_text())
+        release_dir = get_release_dir(tmp_repo, TEST_VERSION)
+        manifest_data = json.loads((release_dir / MANIFEST_FILENAME).read_text())
         manifest_paths = [f["path"] for f in manifest_data["files"]]
 
         for tracked_file in tracked:
@@ -293,18 +301,19 @@ class TestSealRepo:
     def test_seal_deterministic(self, tmp_repo: Path, tmp_keys: tuple[Path, Path]):
         """Same repo produces same manifest hash (excluding timestamp)."""
         private_path, _ = tmp_keys
+        release_dir = get_release_dir(tmp_repo, TEST_VERSION)
 
         # First seal
-        receipt1 = seal_repo(tmp_repo, private_path)
-        manifest1 = json.loads((tmp_repo / MANIFEST_FILENAME).read_text())
+        receipt1 = seal_repo(tmp_repo, private_path, TEST_VERSION)
+        manifest1 = json.loads((release_dir / MANIFEST_FILENAME).read_text())
 
         # Remove manifest/sig for re-seal
-        (tmp_repo / MANIFEST_FILENAME).unlink()
-        (tmp_repo / SIGNATURE_FILENAME).unlink()
+        (release_dir / MANIFEST_FILENAME).unlink()
+        (release_dir / SIGNATURE_FILENAME).unlink()
 
         # Second seal
-        receipt2 = seal_repo(tmp_repo, private_path)
-        manifest2 = json.loads((tmp_repo / MANIFEST_FILENAME).read_text())
+        receipt2 = seal_repo(tmp_repo, private_path, TEST_VERSION)
+        manifest2 = json.loads((release_dir / MANIFEST_FILENAME).read_text())
 
         # Merkle roots should match (file hashes are same)
         assert receipt1.merkle_root == receipt2.merkle_root
@@ -319,10 +328,12 @@ class TestSealRepo:
         receipt = seal_repo(
             tmp_repo,
             private_path,
+            TEST_VERSION,
             exclude_patterns=["src/"],
         )
 
-        manifest_data = json.loads((tmp_repo / MANIFEST_FILENAME).read_text())
+        release_dir = get_release_dir(tmp_repo, TEST_VERSION)
+        manifest_data = json.loads((release_dir / MANIFEST_FILENAME).read_text())
         manifest_paths = [f["path"] for f in manifest_data["files"]]
 
         # src/ files should be excluded
@@ -341,9 +352,9 @@ class TestVerifySeal:
     def test_verify_valid_repo_passes(self, tmp_repo: Path, tmp_keys: tuple[Path, Path]):
         """verify_seal() passes for valid sealed repo."""
         private_path, public_path = tmp_keys
-        seal_repo(tmp_repo, private_path)
+        seal_repo(tmp_repo, private_path, TEST_VERSION)
 
-        result = verify_seal(tmp_repo, public_path)
+        result = verify_seal(tmp_repo, TEST_VERSION, public_path)
 
         assert result.passed
         assert result.status == VerificationStatus.PASS
@@ -352,22 +363,22 @@ class TestVerifySeal:
     def test_verify_without_pubkey(self, tmp_repo: Path, tmp_keys: tuple[Path, Path]):
         """verify_seal() works with embedded public key."""
         private_path, _ = tmp_keys
-        seal_repo(tmp_repo, private_path)
+        seal_repo(tmp_repo, private_path, TEST_VERSION)
 
         # No public key provided - uses embedded key from signature
-        result = verify_seal(tmp_repo)
+        result = verify_seal(tmp_repo, TEST_VERSION)
 
         assert result.passed
 
     def test_verify_tampered_file_fails(self, tmp_repo: Path, tmp_keys: tuple[Path, Path]):
         """verify_seal() detects tampered files."""
         private_path, public_path = tmp_keys
-        seal_repo(tmp_repo, private_path)
+        seal_repo(tmp_repo, private_path, TEST_VERSION)
 
         # Tamper with a file
         (tmp_repo / "README.md").write_text("# TAMPERED\n", encoding="utf-8")
 
-        result = verify_seal(tmp_repo, public_path)
+        result = verify_seal(tmp_repo, TEST_VERSION, public_path)
 
         assert not result.passed
         assert result.status == VerificationStatus.TAMPERED_FILE
@@ -379,12 +390,12 @@ class TestVerifySeal:
     def test_verify_missing_file_fails(self, tmp_repo: Path, tmp_keys: tuple[Path, Path]):
         """verify_seal() detects missing files."""
         private_path, public_path = tmp_keys
-        seal_repo(tmp_repo, private_path)
+        seal_repo(tmp_repo, private_path, TEST_VERSION)
 
         # Delete a file (but not from git index)
         (tmp_repo / "LICENSE").unlink()
 
-        result = verify_seal(tmp_repo, public_path)
+        result = verify_seal(tmp_repo, TEST_VERSION, public_path)
 
         assert not result.passed
         assert result.status == VerificationStatus.MISSING_FILE
@@ -393,7 +404,7 @@ class TestVerifySeal:
     def test_verify_invalid_signature_fails(self, tmp_repo: Path, tmp_keys: tuple[Path, Path]):
         """verify_seal() detects invalid signatures."""
         private_path, public_path = tmp_keys
-        seal_repo(tmp_repo, private_path)
+        seal_repo(tmp_repo, private_path, TEST_VERSION)
 
         # Generate different keypair
         other_private, other_public = generate_keypair()
@@ -401,7 +412,7 @@ class TestVerifySeal:
         other_pub_path.write_text(_bytes_to_hex(other_public))
 
         # Verify with wrong key
-        result = verify_seal(tmp_repo, other_pub_path)
+        result = verify_seal(tmp_repo, TEST_VERSION, other_pub_path)
 
         assert not result.passed
         assert result.status == VerificationStatus.INVALID_SIGNATURE
@@ -411,7 +422,7 @@ class TestVerifySeal:
         _, public_path = tmp_keys
 
         # No seal performed, manifest doesn't exist
-        result = verify_seal(tmp_repo, public_path)
+        result = verify_seal(tmp_repo, TEST_VERSION, public_path)
 
         assert not result.passed
         assert result.status == VerificationStatus.MANIFEST_NOT_FOUND
@@ -419,12 +430,13 @@ class TestVerifySeal:
     def test_verify_missing_signature_fails(self, tmp_repo: Path, tmp_keys: tuple[Path, Path]):
         """verify_seal() fails if signature is missing."""
         private_path, public_path = tmp_keys
-        seal_repo(tmp_repo, private_path)
+        seal_repo(tmp_repo, private_path, TEST_VERSION)
 
         # Delete signature
-        (tmp_repo / SIGNATURE_FILENAME).unlink()
+        release_dir = get_release_dir(tmp_repo, TEST_VERSION)
+        (release_dir / SIGNATURE_FILENAME).unlink()
 
-        result = verify_seal(tmp_repo, public_path)
+        result = verify_seal(tmp_repo, TEST_VERSION, public_path)
 
         assert not result.passed
         assert result.status == VerificationStatus.SIGNATURE_NOT_FOUND
@@ -432,12 +444,13 @@ class TestVerifySeal:
     def test_verify_corrupted_manifest_fails(self, tmp_repo: Path, tmp_keys: tuple[Path, Path]):
         """verify_seal() fails if manifest is corrupted."""
         private_path, public_path = tmp_keys
-        seal_repo(tmp_repo, private_path)
+        seal_repo(tmp_repo, private_path, TEST_VERSION)
 
         # Corrupt manifest
-        (tmp_repo / MANIFEST_FILENAME).write_text("not valid json", encoding="utf-8")
+        release_dir = get_release_dir(tmp_repo, TEST_VERSION)
+        (release_dir / MANIFEST_FILENAME).write_text("not valid json", encoding="utf-8")
 
-        result = verify_seal(tmp_repo, public_path)
+        result = verify_seal(tmp_repo, TEST_VERSION, public_path)
 
         assert not result.passed
         assert result.status == VerificationStatus.MANIFEST_CORRUPTED
@@ -489,6 +502,7 @@ class TestSealReleaseCLI:
                 "seal",
                 "--repo-dir", str(tmp_repo),
                 "--private-key", str(private_path),
+                "--version", TEST_VERSION,
             ],
             capture_output=True,
             text=True,
@@ -501,8 +515,9 @@ class TestSealReleaseCLI:
         assert output["file_count"] > 0
 
         # Verify files created
-        assert (tmp_repo / MANIFEST_FILENAME).exists()
-        assert (tmp_repo / SIGNATURE_FILENAME).exists()
+        release_dir = get_release_dir(tmp_repo, TEST_VERSION)
+        assert (release_dir / MANIFEST_FILENAME).exists()
+        assert (release_dir / SIGNATURE_FILENAME).exists()
 
 
 class TestVerifyReleaseCLI:
@@ -511,13 +526,14 @@ class TestVerifyReleaseCLI:
     def test_cli_verify_pass(self, tmp_repo: Path, tmp_keys: tuple[Path, Path]):
         """CLI verify returns 0 for valid seal."""
         private_path, public_path = tmp_keys
-        seal_repo(tmp_repo, private_path)
+        seal_repo(tmp_repo, private_path, TEST_VERSION)
 
         result = subprocess.run(
             [
                 sys.executable,
                 str(REPO_ROOT / "CAPABILITY" / "TOOLS" / "catalytic" / "verify_release.py"),
                 "--repo-dir", str(tmp_repo),
+                "--version", TEST_VERSION,
                 "--pubkey", str(public_path),
             ],
             capture_output=True,
@@ -530,7 +546,7 @@ class TestVerifyReleaseCLI:
     def test_cli_verify_fail_tampered(self, tmp_repo: Path, tmp_keys: tuple[Path, Path]):
         """CLI verify returns 1 for tampered file."""
         private_path, public_path = tmp_keys
-        seal_repo(tmp_repo, private_path)
+        seal_repo(tmp_repo, private_path, TEST_VERSION)
 
         # Tamper
         (tmp_repo / "README.md").write_text("# TAMPERED\n", encoding="utf-8")
@@ -540,6 +556,7 @@ class TestVerifyReleaseCLI:
                 sys.executable,
                 str(REPO_ROOT / "CAPABILITY" / "TOOLS" / "catalytic" / "verify_release.py"),
                 "--repo-dir", str(tmp_repo),
+                "--version", TEST_VERSION,
                 "--pubkey", str(public_path),
             ],
             capture_output=True,
@@ -553,7 +570,7 @@ class TestVerifyReleaseCLI:
     def test_cli_verify_json_output(self, tmp_repo: Path, tmp_keys: tuple[Path, Path]):
         """CLI verify outputs valid JSON with --json flag."""
         private_path, public_path = tmp_keys
-        seal_repo(tmp_repo, private_path)
+        seal_repo(tmp_repo, private_path, TEST_VERSION)
 
         result = subprocess.run(
             [
@@ -561,6 +578,7 @@ class TestVerifyReleaseCLI:
                 str(REPO_ROOT / "CAPABILITY" / "TOOLS" / "catalytic" / "verify_release.py"),
                 "--json",
                 "--repo-dir", str(tmp_repo),
+                "--version", TEST_VERSION,
                 "--pubkey", str(public_path),
             ],
             capture_output=True,

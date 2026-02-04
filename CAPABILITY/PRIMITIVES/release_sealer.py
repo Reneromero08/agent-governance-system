@@ -55,8 +55,24 @@ from .signature import (
 # CONSTANTS
 # =============================================================================
 
+RELEASES_DIR = "NAVIGATION/PROOFS/RELEASES"
 MANIFEST_FILENAME = "RELEASE_MANIFEST.json"
 SIGNATURE_FILENAME = "RELEASE_MANIFEST.json.sig"
+
+
+def get_release_dir(repo_dir: Path, version: str) -> Path:
+    """Get the directory for a specific release version."""
+    return repo_dir / RELEASES_DIR / version
+
+
+def get_manifest_path(repo_dir: Path, version: str) -> Path:
+    """Get the manifest path for a specific release version."""
+    return get_release_dir(repo_dir, version) / MANIFEST_FILENAME
+
+
+def get_signature_path(repo_dir: Path, version: str) -> Path:
+    """Get the signature path for a specific release version."""
+    return get_release_dir(repo_dir, version) / SIGNATURE_FILENAME
 
 
 # =============================================================================
@@ -111,29 +127,58 @@ def get_git_commit(repo_dir: Path) -> Optional[str]:
         return None
 
 
-def get_git_normalized_hash(repo_dir: Path, rel_path: str) -> Optional[str]:
+def get_git_normalized_hash(repo_dir: Path, rel_path: str, from_working_tree: bool = False) -> Optional[str]:
     """
-    Get SHA-256 hash of file content as Git sees it (normalized).
+    Get SHA-256 hash of file content as Git normalizes it.
 
-    Uses: git show :path
-
-    This gets the file content with Git's filters applied (including
-    line ending normalization via .gitattributes), then SHA-256 hashes it.
+    Args:
+        repo_dir: Repository root
+        rel_path: Relative path to file
+        from_working_tree: If True, hash the working tree file through git's filters.
+                          If False, read from git index (staged content).
 
     Returns:
-        64-char SHA-256 hex hash, or None if file not in index
+        64-char SHA-256 hex hash, or None if file not found
     """
     import hashlib
-    try:
-        result = subprocess.run(
-            ["git", "show", f":{rel_path}"],
-            cwd=repo_dir,
-            capture_output=True,
-            check=True,
-        )
-        return hashlib.sha256(result.stdout).hexdigest()
-    except subprocess.CalledProcessError:
-        return None
+
+    if from_working_tree:
+        # Hash working tree file through git's filters
+        # This catches modifications that haven't been staged
+        try:
+            result = subprocess.run(
+                ["git", "hash-object", "--stdin-paths"],
+                cwd=repo_dir,
+                input=rel_path.encode(),
+                capture_output=True,
+                check=True,
+            )
+            # hash-object returns the git blob hash (SHA-1, 40 chars)
+            # We need to get the actual content and SHA-256 it
+            blob_sha = result.stdout.decode().strip()
+
+            # Now get the content using the blob hash
+            result = subprocess.run(
+                ["git", "cat-file", "blob", blob_sha],
+                cwd=repo_dir,
+                capture_output=True,
+                check=True,
+            )
+            return hashlib.sha256(result.stdout).hexdigest()
+        except subprocess.CalledProcessError:
+            return None
+    else:
+        # Read from git index (normalized by git's filters)
+        try:
+            result = subprocess.run(
+                ["git", "show", f":{rel_path}"],
+                cwd=repo_dir,
+                capture_output=True,
+                check=True,
+            )
+            return hashlib.sha256(result.stdout).hexdigest()
+        except subprocess.CalledProcessError:
+            return None
 
 
 # =============================================================================
@@ -144,19 +189,21 @@ def get_git_normalized_hash(repo_dir: Path, rel_path: str) -> Optional[str]:
 def seal_repo(
     repo_dir: Path,
     private_key_path: Path,
+    version: str,
     *,
     exclude_patterns: Optional[list[str]] = None,
 ) -> SealReceipt:
     """
     Seal a repository by creating a signed manifest of all tracked files.
 
-    This creates:
+    This creates in NAVIGATION/PROOFS/RELEASES/{version}/:
     - RELEASE_MANIFEST.json: Manifest with file hashes
     - RELEASE_MANIFEST.json.sig: Ed25519 signature
 
     Args:
         repo_dir: Path to the git repository root
         private_key_path: Path to Ed25519 private key file (hex encoded)
+        version: Release version (e.g., "v3.9.0")
         exclude_patterns: Optional list of path prefixes to exclude
 
     Returns:
@@ -186,10 +233,10 @@ def seal_repo(
             if not any(f.startswith(p) for p in exclude_patterns)
         ]
 
-    # Exclude manifest and signature files themselves
+    # Exclude manifest and signature files (in any releases directory)
     tracked_files = [
         f for f in tracked_files
-        if f not in (MANIFEST_FILENAME, SIGNATURE_FILENAME)
+        if not (f.endswith(MANIFEST_FILENAME) or f.endswith(SIGNATURE_FILENAME))
     ]
 
     if not tracked_files:
@@ -244,15 +291,19 @@ def seal_repo(
     # Sign the manifest
     signature_bundle = sign_proof(manifest_dict, private_key)
 
+    # Create release directory
+    release_dir = get_release_dir(repo_dir, version)
+    release_dir.mkdir(parents=True, exist_ok=True)
+
     # Write manifest
-    manifest_path = repo_dir / MANIFEST_FILENAME
+    manifest_path = release_dir / MANIFEST_FILENAME
     manifest_path.write_text(
         json.dumps(manifest_dict, indent=2, ensure_ascii=False),
         encoding="utf-8",
     )
 
     # Write signature
-    signature_path = repo_dir / SIGNATURE_FILENAME
+    signature_path = release_dir / SIGNATURE_FILENAME
     signature_path.write_text(
         json.dumps(signature_bundle.to_dict(), indent=2, ensure_ascii=False),
         encoding="utf-8",
@@ -277,19 +328,21 @@ def seal_repo(
 
 def verify_seal(
     repo_dir: Path,
+    version: str,
     public_key_path: Optional[Path] = None,
 ) -> VerificationReceipt:
     """
     Verify a sealed repository.
 
     Checks:
-    1. RELEASE_MANIFEST.json exists
+    1. RELEASE_MANIFEST.json exists in NAVIGATION/PROOFS/RELEASES/{version}/
     2. RELEASE_MANIFEST.json.sig exists
     3. Signature is valid
     4. All files in manifest exist with correct hashes
 
     Args:
         repo_dir: Path to the git repository root
+        version: Release version to verify (e.g., "v3.9.0")
         public_key_path: Path to Ed25519 public key file (hex encoded).
                         If None, uses the public key from the signature.
 
@@ -298,8 +351,8 @@ def verify_seal(
     """
     repo_dir = Path(repo_dir).resolve()
 
-    manifest_path = repo_dir / MANIFEST_FILENAME
-    signature_path = repo_dir / SIGNATURE_FILENAME
+    manifest_path = get_manifest_path(repo_dir, version)
+    signature_path = get_signature_path(repo_dir, version)
 
     # Check manifest exists
     if not manifest_path.is_file():
@@ -384,10 +437,11 @@ def verify_seal(
                 expected_hash=file_entry.sha256,
             )
 
-        # Check file hash using git-normalized content for cross-platform consistency
-        actual_hash = get_git_normalized_hash(repo_dir, file_entry.path)
+        # Check file hash using working tree content (through git's filters)
+        # This detects tampering even if changes aren't staged
+        actual_hash = get_git_normalized_hash(repo_dir, file_entry.path, from_working_tree=True)
         if not actual_hash:
-            # Fallback to raw hash if not in git index
+            # Fallback to raw hash
             actual_hash = sha256_file(file_path)
         if actual_hash != file_entry.sha256:
             return VerificationReceipt(
