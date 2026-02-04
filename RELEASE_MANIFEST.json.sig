@@ -1,7 +1,0 @@
-{
-  "signature": "426ca8aaa800362e836ebefad27efcde195d95129b7cece64917deceaae90b2873b12fcaf6bd365109a77623f6871070d17fc71a686d8db4338e2e0dbe782e0a",
-  "public_key": "81d3b53d654dc5117b2d158612ba27e28b42e598127c1d560b5997f9c6df6822",
-  "key_id": "92cfe4a4",
-  "algorithm": "Ed25519",
-  "timestamp": "2026-02-04T01:46:44.015179+00:00"
-}

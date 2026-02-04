@@ -102,6 +102,7 @@ def cmd_seal(args: argparse.Namespace) -> int:
     """Seal a repository by creating a signed manifest."""
     repo_dir = Path(args.repo_dir).resolve()
     private_path = Path(args.private_key).resolve() if args.private_key else DEFAULT_PRIVATE_KEY
+    version = args.version
 
     if not repo_dir.is_dir():
         print(f"ERROR: Repository directory not found: {repo_dir}", file=sys.stderr)
@@ -118,6 +119,7 @@ def cmd_seal(args: argparse.Namespace) -> int:
         receipt = seal_repo(
             repo_dir,
             private_path,
+            version,
             exclude_patterns=exclude_patterns,
         )
     except FileNotFoundError as e:
@@ -187,6 +189,7 @@ def main() -> int:
     # seal
     p_seal = subparsers.add_parser("seal", help="Seal a repository")
     p_seal.add_argument("--repo-dir", required=True, help="Path to repository root")
+    p_seal.add_argument("--version", required=True, help="Release version (e.g., v3.9.0)")
     p_seal.add_argument(
         "--private-key",
         help=f"Path to private key file (default: {DEFAULT_PRIVATE_KEY.relative_to(REPO_ROOT)})",

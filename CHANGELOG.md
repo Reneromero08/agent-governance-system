@@ -22,16 +22,18 @@ Cryptographic sealing system to defend CCL v1.4 license provisions (Sections 3.6
 
 **Key Location:** `LAW/CONTRACTS/_keys/` (private key gitignored, public key tracked)
 
+**Seal Location:** `NAVIGATION/PROOFS/RELEASES/{version}/` (versioned per release)
+
 **Usage:**
 ```bash
 # Generate keypair (uses default location)
 python -m CAPABILITY.TOOLS.catalytic.seal_release keygen
 
-# Seal repository (uses default key)
-python -m CAPABILITY.TOOLS.catalytic.seal_release seal --repo-dir .
+# Seal repository for a specific version
+python -m CAPABILITY.TOOLS.catalytic.seal_release seal --repo-dir . --version v3.9.0
 
-# Verify (uses default public key)
-python -m CAPABILITY.TOOLS.catalytic.verify_release --repo-dir .
+# Verify a specific release version
+python -m CAPABILITY.TOOLS.catalytic.verify_release --repo-dir . --version v3.9.0
 ```
 
 **License Enforcement:**
@@ -52,7 +54,7 @@ python -m CAPABILITY.TOOLS.catalytic.verify_release --repo-dir .
 
 ### Fixed
 - CI workflow `release-seal.yml` now installs full `requirements.txt` (fixes missing `jsonschema` error)
-- Release sealer uses git-normalized content hashes for cross-platform consistency (fixes CRLF/LF mismatch)
+- Release sealer uses git-normalized content hashes via `git hash-object` for cross-platform consistency
 
 ### Removed: qgt_lib third-party library (history purged)
 

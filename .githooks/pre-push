@@ -23,30 +23,31 @@ while read local_ref local_sha remote_ref remote_sha; do
         echo "[PRE-PUSH] Release tag detected: $TAG_NAME"
         echo "[PRE-PUSH] Verifying release seal..."
 
-        # Check if manifest exists
-        if [ ! -f "RELEASE_MANIFEST.json" ]; then
+        # Check if manifest exists in versioned location
+        SEAL_DIR="NAVIGATION/PROOFS/RELEASES/$TAG_NAME"
+        if [ ! -f "$SEAL_DIR/RELEASE_MANIFEST.json" ]; then
             echo ""
             echo "[PRE-PUSH] ERROR: Release tag push blocked - no seal found!"
             echo ""
             echo "  Before pushing a release tag, you must seal the repository:"
             echo ""
-            echo "    python -m CAPABILITY.TOOLS.catalytic.seal_release seal --repo-dir ."
-            echo "    git add RELEASE_MANIFEST.json RELEASE_MANIFEST.json.sig"
+            echo "    python -m CAPABILITY.TOOLS.catalytic.seal_release seal --repo-dir . --version $TAG_NAME"
+            echo "    git add $SEAL_DIR/"
             echo "    git commit -m \"Seal release $TAG_NAME\""
             echo ""
             exit 1
         fi
 
-        # Verify the seal (uses embedded public key if no --pubkey specified)
-        if ! $PYTHON_CMD -m CAPABILITY.TOOLS.catalytic.verify_release --repo-dir . 2>/dev/null; then
+        # Verify the seal
+        if ! $PYTHON_CMD -m CAPABILITY.TOOLS.catalytic.verify_release --repo-dir . --version "$TAG_NAME" 2>/dev/null; then
             echo ""
             echo "[PRE-PUSH] ERROR: Release tag push blocked - seal verification FAILED!"
             echo ""
             echo "  The repository state does not match the seal."
             echo "  Re-seal the repository before pushing the release tag:"
             echo ""
-            echo "    python -m CAPABILITY.TOOLS.catalytic.seal_release seal --repo-dir ."
-            echo "    git add RELEASE_MANIFEST.json RELEASE_MANIFEST.json.sig"
+            echo "    python -m CAPABILITY.TOOLS.catalytic.seal_release seal --repo-dir . --version $TAG_NAME"
+            echo "    git add $SEAL_DIR/"
             echo "    git commit --amend  # or new commit"
             echo ""
             exit 1

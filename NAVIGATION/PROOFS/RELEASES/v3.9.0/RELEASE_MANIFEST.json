@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
-  "sealed_at": "2026-02-04T01:46:43.982179+00:00",
+  "sealed_at": "2026-02-04T02:34:24.537090+00:00",
   "license": "CCL-v1.4",
-  "git_commit": "050b25305318d32a1456fdc1ea69b31d74bb259b",
+  "git_commit": "3e92fa1ed205b60bbefa436beb95cd44d6d7e289",
   "files": [
     {
       "path": ".editorconfig",
@@ -36,8 +36,8 @@
     },
     {
       "path": ".githooks/pre-push",
-      "sha256": "0f46f74b90f0bbc5e6650e430bd4cf756068698611570f4daa8ba74415ae0601",
-      "size": 4601
+      "sha256": "ec53809fe079be90b38d397d3c59189da71169b3d6e4a099d2ce48d68091724d",
+      "size": 4625
     },
     {
       "path": ".github/workflows/contracts.yml",
@@ -51,8 +51,8 @@
     },
     {
       "path": ".github/workflows/release-seal.yml",
-      "sha256": "79994379e0c9acf889d156d9ca780786b07dbd7424c445c78abdcde850c5b70b",
-      "size": 2779
+      "sha256": "ac1ebb2fdb3011f890c31c8443d5a5beec6d1cd11865101b2ad1fb64da4672f6",
+      "size": 2996
     },
     {
       "path": ".gitignore",
@@ -511,8 +511,8 @@
     },
     {
       "path": "CAPABILITY/PRIMITIVES/release_sealer.py",
-      "sha256": "8292b5f7bb94a25df42ddd0630ca05b492daa2b76df17f69bf42d839d0688e59",
-      "size": 14915
+      "sha256": "75c09dcf7cb4d172b7c57ccb6bed3e0ed763bd73656edc77eb78623151963649",
+      "size": 17178
     },
     {
       "path": "CAPABILITY/PRIMITIVES/repo_digest.py",
@@ -2346,8 +2346,8 @@
     },
     {
       "path": "CAPABILITY/TESTBENCH/integration/test_release_sealer.py",
-      "sha256": "2db6fbe6717f8dc8402bddf748e19cf879f37f78eccad52021693fb7318d34bc",
-      "size": 19417
+      "sha256": "8979752a1388d5d21562bdc1ed8df40da121dd7db550cd81ded0c3356c93f90e",
+      "size": 20569
     },
     {
       "path": "CAPABILITY/TESTBENCH/integration/test_repo_digest_determinism.py",
@@ -2931,8 +2931,8 @@
     },
     {
       "path": "CAPABILITY/TOOLS/catalytic/seal_release.py",
-      "sha256": "2c9f095a078bbce0f695a5e35bca1e931afedc2879684ad77cede98cfd1f3557",
-      "size": 7164
+      "sha256": "fd1efa0dd92dc2a23eb2ea75b857fc1caa6bbcc5906686de439108f4185c4c0b",
+      "size": 7303
     },
     {
       "path": "CAPABILITY/TOOLS/catalytic/sign_proof.py",
@@ -2946,8 +2946,8 @@
     },
     {
       "path": "CAPABILITY/TOOLS/catalytic/verify_release.py",
-      "sha256": "afc06ca72be6524924c6cdec36a5130622951a8982b09470e94dc0487bf52725",
-      "size": 3883
+      "sha256": "a42b8900c8c43ac90b1a1c84b738834160f7b9d89721bd6a72b72e59608eda8f",
+      "size": 3996
     },
     {
       "path": "CAPABILITY/TOOLS/check-canon-governance.js",
@@ -3251,8 +3251,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "97caf6bdb33290e24d4e6c0183f93af6f9feb4184a5b7dd559f1142309689a57",
-      "size": 218079
+      "sha256": "8ccf19879f6a85d6fcff7aa048ec97c5be1dd1f9c115ab2a388946d17363d30f",
+      "size": 218199
     },
     {
       "path": "INBOX/2025-12/Week-01/12-29-2025-02-45_CI_STABILIZATION_REPORT.md",
@@ -20405,6 +20405,6 @@
       "size": 66
     }
   ],
-  "merkle_root": "bc6e563b41a7af88733b5c45f721a84de8691c83f746a60a29b47b1ddc72e82c",
-  "manifest_hash": "51ff7017afdd95863936d4ce260332df999ffc4753a38012b609893679a667aa"
+  "merkle_root": "d5033a64d8763f9cd1ad5325d1bce65eff6d5d4b0cc60be7f287557ecfbbb3c2",
+  "manifest_hash": "cb690965b685d54b542ef0c0ed3021a79eb265d7209f24be62052a81d95a4e11"
 }

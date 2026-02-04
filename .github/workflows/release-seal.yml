@@ -25,19 +25,22 @@ jobs:
 
       - name: Verify release seal exists
         run: |
-          if [ ! -f "RELEASE_MANIFEST.json" ]; then
-            echo "::error::RELEASE_MANIFEST.json not found - release is not sealed!"
+          VERSION="${{ github.ref_name }}"
+          SEAL_DIR="NAVIGATION/PROOFS/RELEASES/$VERSION"
+          if [ ! -f "$SEAL_DIR/RELEASE_MANIFEST.json" ]; then
+            echo "::error::$SEAL_DIR/RELEASE_MANIFEST.json not found - release is not sealed!"
             exit 1
           fi
-          if [ ! -f "RELEASE_MANIFEST.json.sig" ]; then
-            echo "::error::RELEASE_MANIFEST.json.sig not found - release signature missing!"
+          if [ ! -f "$SEAL_DIR/RELEASE_MANIFEST.json.sig" ]; then
+            echo "::error::$SEAL_DIR/RELEASE_MANIFEST.json.sig not found - release signature missing!"
             exit 1
           fi
-          echo "Release seal files present"
+          echo "Release seal files present in $SEAL_DIR"
 
       - name: Verify release seal integrity
         run: |
-          python -m CAPABILITY.TOOLS.catalytic.verify_release --repo-dir . --json | tee seal_result.json
+          VERSION="${{ github.ref_name }}"
+          python -m CAPABILITY.TOOLS.catalytic.verify_release --repo-dir . --version "$VERSION" --json | tee seal_result.json
 
           # Check if verification passed
           if ! python -c "import json; r=json.load(open('seal_result.json')); exit(0 if r.get('passed') else 1)"; then
