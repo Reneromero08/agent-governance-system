@@ -1,0 +1,24 @@
+# Living Formula - Python Dependencies
+# Install: pip install -r requirements.txt
+
+# Core (required for all tests)
+numpy>=1.21.0
+scipy>=1.7.0
+
+# Analysis
+scikit-learn>=1.0.0
+
+# Optional: Semantic embedding tests
+# sentence-transformers>=2.2.0
+# torch>=1.9.0
+
+# Optional: Quantum simulations (Q54)
+# qutip>=4.7.0
+# h5py>=3.0.0
+
+# Optional: Network analysis
+# networkx>=2.6.0
+
+# Optional: Visualization
+# matplotlib>=3.4.0
+# seaborn>=0.11.0

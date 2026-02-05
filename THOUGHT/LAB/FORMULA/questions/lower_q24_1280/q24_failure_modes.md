@@ -1,5 +1,17 @@
 # Question 24: Failure modes (R: 1280)
 
+---
+question_id: Q24
+priority: lower
+r_score: 1280
+status: RESOLVED
+cluster: unclustered
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: RESOLVED**
 
 ## Question

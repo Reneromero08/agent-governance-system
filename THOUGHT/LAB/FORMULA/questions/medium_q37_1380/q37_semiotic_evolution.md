@@ -1,5 +1,17 @@
 # Question 37: Semiotic Evolution Dynamics (R: 1380)
 
+---
+question_id: Q37
+priority: medium
+r_score: 1380
+status: ANSWERED
+cluster: unclustered
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: ANSWERED**
 
 ## Answer Summary

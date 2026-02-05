@@ -1,5 +1,17 @@
 # Question 6: IIT connection (R: 1650)
 
+---
+question_id: Q06
+priority: critical
+r_score: 1650
+status: ANSWERED
+cluster: C (Theoretical Grounding)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: ANSWERED**
 
 ## Question

@@ -270,7 +270,7 @@ See `VECTOR_ELO_ROADMAP.md` for full details.
 - **ELO:** Elo (1978) - "The Rating of Chessplayers, Past and Present"
 - **Forgetting Curve:** Ebbinghaus (1885) - Exponential memory decay
 - **Free Energy:** Friston (2010) - "The free-energy principle: a unified brain theory?"
-- **R Formula:** `THOUGHT/LAB/FORMULA/research/questions/INDEX.md` - log(R) = -F + const proven
+- **R Formula:** `THOUGHT/LAB/FORMULA/INDEX.md` - log(R) = -F + const (empirical)
 
 ---
 

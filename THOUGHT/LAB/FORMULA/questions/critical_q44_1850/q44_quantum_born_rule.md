@@ -1,5 +1,17 @@
 # Q44: Does R Compute the Quantum Born Rule?
 
+---
+question_id: Q44
+priority: critical
+r_score: 1850
+status: ANSWERED
+cluster: C (Theoretical Grounding)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **R-Score:** 1850 (CRITICAL)
 **Status:** **ANSWERED**
 **Result:** **E = |⟨ψ|φ⟩|² CONFIRMED (r = 0.977)**

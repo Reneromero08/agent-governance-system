@@ -1,5 +1,17 @@
 # Question 28: Attractors (R: 1200)
 
+---
+question_id: Q28
+priority: lower
+r_score: 1200
+status: RESOLVED
+cluster: F (Dynamical Systems)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: RESOLVED - HYPOTHESIS SUPPORTED**
 
 ## Question

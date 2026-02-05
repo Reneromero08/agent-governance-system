@@ -6,6 +6,21 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.12.0] - 2026-02-05
+
+### Changed: Formula Lab Integrity Audit
+
+**Canon file fix:**
+- `LAW/CANON/SEMANTIC/VECTOR_ELO_SPEC.md`: Fix broken R Formula path (research/questions/INDEX.md -> INDEX.md), clarify empirical status
+- `LAW/CANON/SEMANTIC/CODEBOOK_SYNC_REFERENCE.md`: Fix 2 broken Q33/Q35 paths to use new question folder structure
+
+**FORMULA Lab overhaul (THOUGHT/LAB/FORMULA/):**
+- INDEX.md: Q54 VALIDATED->EXPLORATORY, Q25 DERIVED->PARTIAL, Q32 ANSWERED->PARTIAL; fix 10 broken cross-references; honest assessment of validation results
+- New: GLOSSARY.md, SPECIFICATION.md, SEMIOTIC_AXIOMS.md, requirements.txt, config.yaml
+- Add standardized YAML metadata headers to all 54 question documents
+- CHANGELOG.md: Add v8.1.0 entry with legacy path deprecation note
+- CLAUDE_SYNTHESIS_REPORT.md: Add caveat distinguishing narrative from formal claims
+
 ## [3.11.0] - 2026-02-05
 
 ### Added: System Audit - Safety, Consolidation, Infrastructure, Hardening

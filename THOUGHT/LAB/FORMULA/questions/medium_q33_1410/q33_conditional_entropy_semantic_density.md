@@ -1,6 +1,18 @@
 # Question 33: Conditional entropy vs semantic density (R: 1410)
 
-**STATUS: ✅ ANSWERED**
+---
+question_id: Q33
+priority: medium
+r_score: 1410
+status: ANSWERED
+cluster: unclustered
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
+**STATUS: ANSWERED**
 
 ## Question
 What is the principled relationship between "semantic density" and information-theoretic quantities like conditional entropy `H(X|S)`?

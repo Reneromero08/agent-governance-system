@@ -1,6 +1,18 @@
 # Q48: Riemann-Spectral Bridge
 
-**Status:** BREAKTHROUGH - Universal Conservation Law Discovered (Df × α = 8e)
+---
+question_id: Q48
+priority: critical
+r_score: 1900
+status: BREAKTHROUGH
+cluster: E (Semiotic Conservation)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
+**Status:** BREAKTHROUGH - Universal Conservation Law Discovered (Df x 8e)
 **Priority:** HIGH
 **Created:** 2026-01-15
 **Updated:** 2026-01-15

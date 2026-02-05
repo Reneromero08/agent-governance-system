@@ -1,5 +1,17 @@
 # Question 27: Hysteresis (R: 1220)
 
+---
+question_id: Q27
+priority: lower
+r_score: 1220
+status: ANSWERED
+cluster: unclustered
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: ANSWERED**
 
 ## Question

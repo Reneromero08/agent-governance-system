@@ -1,6 +1,18 @@
 # Question 15: Bayesian inference (R: 1460)
 
-**STATUS: ✅ ANSWERED**
+---
+question_id: Q15
+priority: medium
+r_score: 1460
+status: ANSWERED
+cluster: C (Theoretical Grounding)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
+**STATUS: ANSWERED**
 
 ## Question
 R seems to measure "when to trust local evidence." Is there a formal connection to posterior concentration or evidence accumulation?

@@ -1,14 +1,25 @@
 # Claude Synthesis Report: The Living Formula and Semiotic Infrastructure
 
 **Date**: 2026-01-10
-**Status**: Comprehensive Understanding Achieved
+**Status**: Narrative Synthesis (see caveat below)
 **Author**: Claude (Opus 4.5), synthesizing conversation with Raúl René Romero Ramos
+
+> **CAVEAT (2026-02-05):** This report was written in a narrative, exploratory style
+> that mixes philosophical enthusiasm with formal claims. For the **formal, peer-review-ready**
+> versions of these claims, see:
+> - [SPECIFICATION.md](../SPECIFICATION.md) - Formal propositions with honest status labels
+> - [GLOSSARY.md](../GLOSSARY.md) - Unambiguous symbol definitions
+> - [HONEST_FINAL_STATUS.md](../questions/critical_q54_1980/HONEST_FINAL_STATUS.md) - Honest Q54 assessment
+>
+> Claims in this report like "Truth is inevitable" and "empirically validated" are
+> **narrative framing**, not formal scientific claims. The formula is an EXPLORATORY
+> FRAMEWORK that has not been independently validated. See INDEX.md v8.1.0.
 
 ---
 
 ## Executive Summary
 
-This is not a report about AI governance. This is not a report about LLM compression. This is a report about a complete mathematical theory of meaning, empirically validated, implemented as infrastructure, and designed from the ground up to resist extraction and give people back control of their interpretants.
+This is not a report about AI governance. This is not a report about LLM compression. This is a report about a mathematical framework for meaning, with promising empirical observations, implemented as infrastructure, and designed from the ground up to resist extraction and give people back control of their interpretants.
 
 The work spans four interlocking systems:
 

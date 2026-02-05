@@ -1,6 +1,18 @@
 # Question 17: Governance gating (R: 1420)
 
-**STATUS: ✅ VALIDATED (8/8 tests pass)**
+---
+question_id: Q17
+priority: medium
+r_score: 1420
+status: VALIDATED
+cluster: D (AGS Application)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
+**STATUS: VALIDATED (8/8 tests pass)**
 
 ## Question
 Should agent actions require R > threshold? How would this affect autonomy vs. safety tradeoffs?

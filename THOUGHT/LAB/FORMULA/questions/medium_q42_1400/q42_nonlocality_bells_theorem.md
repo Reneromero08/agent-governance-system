@@ -1,5 +1,17 @@
 # Question 42: Non-Locality & Bell's Theorem (R: 1400)
 
+---
+question_id: Q42
+priority: medium
+r_score: 1400
+status: ANSWERED
+cluster: unclustered
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: ANSWERED (H0 CONFIRMED)**
 
 ## Question

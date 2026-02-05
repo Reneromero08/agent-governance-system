@@ -1,5 +1,17 @@
 # Question 21: Rate of change (dR/dt) (R: 1340)
 
+---
+question_id: Q21
+priority: lower
+r_score: 1340
+status: ANSWERED
+cluster: unclustered
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: ANSWERED**
 **Date: 2026-01-16**
 

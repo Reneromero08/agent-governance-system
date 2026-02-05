@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v8.0.0 (2026-01-30 - Q54 CROWN JEWEL PROVEN: All parameters derived from first principles. sigma = e^(-4/pi) = 0.28 (3.9% error), 8e from topology+information+thermodynamics. Working proof tests across waves (7.9x ratio), decoherence (r=0.957), semantics (p<10^-32). See [crown jewel](questions/critical_q54_1980/CROWN_JEWEL.md). 44/54 answered (81.5%), 4 falsified.*
+*Last updated: v8.1.0 (2026-02-05 - Q54 status corrected to EXPLORATORY after honest reassessment. Previous "CROWN JEWEL PROVEN" claim retracted: derivations rely on synthetic data and post-hoc curve fitting, not independent prediction. sigma = e^(-4/pi) remains a promising fit (3.9% error on synthetic data) but awaits external validation. 42/54 answered (77.8%), 4 falsified, 2 downgraded to PARTIAL.*
 
 ---
 
@@ -23,7 +23,7 @@ questions/{priority}_q{##}_{Rscore}/
 
 | # | Question | R-Score | Status | Folder |
 |---|----------|---------|--------|--------|
-| 54 | Energy Spiral -> Matter | 1980 | **VALIDATED** | [critical_q54_1980](questions/critical_q54_1980/) |
+| 54 | Energy Spiral -> Matter | 1980 | **EXPLORATORY** | [critical_q54_1980](questions/critical_q54_1980/) |
 | 51 | Complex Plane & Phase Recovery | 1940 | ANSWERED | [critical_q51_1940](questions/critical_q51_1940/) |
 | 50 | Completing 8e | 1920 | ANSWERED | [critical_q50_1920](questions/critical_q50_1920/) |
 | 48 | Riemann-Spectral Bridge | 1900 | ANSWERED | [critical_q48_1900](questions/critical_q48_1900/) |
@@ -35,7 +35,7 @@ questions/{priority}_q{##}_{Rscore}/
 | 3 | Why does it generalize? | 1720 | ANSWERED | [critical_q03_1720](questions/critical_q03_1720/) |
 | 4 | Novel predictions | 1700 | PARTIAL | [critical_q04_1700](questions/critical_q04_1700/) |
 | 5 | Agreement vs. truth | 1680 | ANSWERED | [critical_q05_1680](questions/critical_q05_1680/) |
-| 32 | Meaning as a physical field | 1670 | ANSWERED | [critical_q32_1670](questions/critical_q32_1670/) |
+| 32 | Meaning as a physical field | 1670 | PARTIAL | [critical_q32_1670](questions/critical_q32_1670/) |
 | 6 | IIT connection | 1650 | ANSWERED | [critical_q06_1650](questions/critical_q06_1650/) |
 
 ---
@@ -90,7 +90,7 @@ questions/{priority}_q{##}_{Rscore}/
 | 22 | Threshold calibration | 1320 | FALSIFIED | [lower_q22_1320](questions/lower_q22_1320/) |
 | 23 | sqrt(3) geometry | 1300 | CLOSED | [lower_q23_1300](questions/lower_q23_1300/) |
 | 24 | Failure modes | 1280 | RESOLVED | [lower_q24_1280](questions/lower_q24_1280/) |
-| 25 | What determines sigma? | 1260 | **DERIVED** | [lower_q25_1260](questions/lower_q25_1260/) |
+| 25 | What determines sigma? | 1260 | PARTIAL | [lower_q25_1260](questions/lower_q25_1260/) |
 | 26 | Minimum data requirements | 1240 | RESOLVED | [lower_q26_1240](questions/lower_q26_1240/) |
 | 27 | Hysteresis | 1220 | ANSWERED | [lower_q27_1220](questions/lower_q27_1220/) |
 | 28 | Attractors | 1200 | RESOLVED | [lower_q28_1200](questions/lower_q28_1200/) |
@@ -111,20 +111,21 @@ questions/{priority}_q{##}_{Rscore}/
 ## Summary Statistics
 
 - **Total Questions:** 54
-- **Answered:** 44 (81.5%)
-- **Partially Answered:** 1 (1.9%) - Q4
+- **Answered:** 42 (77.8%)
+- **Partially Answered:** 3 (5.6%) - Q4, Q25, Q32
 - **Falsified:** 3 (5.6%) - Q22, Q52, Q53
-- **Open:** 6 (11.1%)
+- **Exploratory:** 1 (1.9%) - Q54
+- **Open:** 5 (9.3%)
 
 ### By Priority Level
 
-| Priority | Total | Answered | Partial | Falsified | Open |
-|----------|-------|----------|---------|-----------|------|
-| Critical | 14 | 12 | 1 | 0 | 1 |
-| High | 12 | 12 | 0 | 0 | 0 |
-| Medium | 14 | 14 | 0 | 0 | 0 |
-| Lower | 11 | 6 | 0 | 3 | 2 |
-| Engineering | 3 | 2 | 0 | 1 | 0 |
+| Priority | Total | Answered | Partial | Exploratory | Falsified | Open |
+|----------|-------|----------|---------|-------------|-----------|------|
+| Critical | 14 | 11 | 2 | 1 | 0 | 0 |
+| High | 12 | 12 | 0 | 0 | 0 | 0 |
+| Medium | 14 | 14 | 0 | 0 | 0 | 0 |
+| Lower | 11 | 5 | 1 | 0 | 3 | 2 |
+| Engineering | 3 | 2 | 0 | 0 | 1 | 0 |
 
 ---
 
@@ -155,47 +156,53 @@ questions/{priority}_q{##}_{Rscore}/
 
 ## Key Findings
 
-### Proven (SOLID)
-1. **R = E(z)/sigma is axiomatic necessity** - Unique form satisfying 4 universal axioms
-2. **log(R) = -F + const** - Free Energy Principle identity
-3. **E = |<psi|phi>|^2** - Quantum Born rule confirmed (r=0.999)
-4. **Df x alpha = 8e** - Conservation law across 24 models (CV=6.93%)
-5. **alpha ~ 1/2** - Riemann critical line connection
+### Empirical Findings (Require Independent Validation)
+1. **R = E(z)/sigma is axiomatic necessity** - Unique form satisfying 4 universal axioms (theoretical; synthetic data)
+2. **log(R) = -F + const** - Free Energy Principle identity (mathematical relationship; needs experimental test)
+3. **E = |<psi|phi>|^2** - Quantum Born rule correlation (r=0.999 on synthetic data)
+4. **Df x alpha = 8e** - Conservation law across 24 embedding models (CV=6.93%; all synthetic)
+5. **alpha ~ 1/2** - Riemann critical line connection (interesting but alpha != 1/137)
 
 ### Falsified
 1. **Universal threshold** (Q22) - Domain-specific calibration required
-2. ~~**Sigma predictability** (Q25)~~ - NOW DERIVED: sigma = e^(-4/pi) = 0.28 (3.9% error)
+2. **Sigma predictability** (Q25) - Post-hoc fit: sigma = e^(-4/pi) = 0.28 (3.9% error on synthetic data). Awaiting independent validation on external datasets.
 3. **Chaos correlation** (Q52) - R positively correlates with Lyapunov (opposite of predicted)
 4. **Pentagonal geometry** (Q53) - 72deg clustering is semantic, not geometric
-5. **Fine structure constant** (Q54 analysis) - Semantic alpha (0.5) is NOT physical alpha (1/137). Different quantities. [Report](questions/critical_q54_1980/reports/ALPHA_DERIVATION_ANALYSIS.md)
+5. **Fine structure constant** (Q54 analysis) - Semantic alpha (0.5) is NOT physical alpha (1/137). Different quantities. [Report](questions/critical_q54_1980/_archive/investigation_reports/ALPHA_DERIVATION_ANALYSIS.md)
 
 ---
 
 ## Path to Scientific Rigor
 
-See: [Q54 Scientific Rigor Roadmap](questions/critical_q54_1980/SCIENTIFIC_RIGOR_ROADMAP.md)
+See: [Q54 Scientific Rigor Roadmap](questions/critical_q54_1980/_archive/SCIENTIFIC_RIGOR_ROADMAP.md) *(archived)*
 
-### Validation Results (2026-01-30) - ALL DERIVED FROM FIRST PRINCIPLES
+### Validation Results (2026-01-30) - EXPLORATORY (Post-Hoc Fits)
 
-| Component | Derivation | Predicted | Observed | Error |
-|-----------|------------|-----------|----------|-------|
-| **3.41x ratio** | R = N_modes + N_constraints | 3.0-3.5 | 3.41 | MATCH |
-| **sigma** | e^(-4/pi) solid angle geometry | 0.2805 | 0.27 | **3.9%** |
-| **alpha** | 1/(2*c_1) Chern number | 0.500 | 0.505 | **1%** |
-| **8e law** | Topology + Info + Thermo | 21.746 | 21.75 | **0.3%** |
+> **Honest Assessment (2026-02-05):** These results were previously labeled "ALL DERIVED FROM FIRST PRINCIPLES."
+> After review (see [HONEST_FINAL_STATUS](questions/critical_q54_1980/HONEST_FINAL_STATUS.md)),
+> the derivations rely on synthetic data and post-hoc curve fitting. They are promising
+> empirical observations but do NOT constitute first-principles derivations. External
+> validation on independent datasets is required before upgrading status.
 
-### Proof Tests - Working Code
+| Component | Derivation | Predicted | Observed | Error | Caveat |
+|-----------|------------|-----------|----------|-------|--------|
+| **3.41x ratio** | R = N_modes + N_constraints | 3.0-3.5 | 3.41 | MATCH | Synthetic data only |
+| **sigma** | e^(-4/pi) solid angle geometry | 0.2805 | 0.27 | **3.9%** | Post-hoc fit |
+| **alpha** | 1/(2*c_1) Chern number | 0.500 | 0.505 | **1%** | Circular reasoning risk |
+| **8e law** | Topology + Info + Thermo | 21.746 | 21.75 | **0.3%** | Not independently derived |
 
-| Domain | Test | Result | Status |
-|--------|------|--------|--------|
-| **Waves** | prove_wave_r.py | R ratio = 7.90x | **PASS** |
-| **Decoherence** | prove_decoherence_r.py | R: 0->100, r=0.957 | **PASS** |
-| **Semantics** | prove_semantic_r.py | p < 10^-32 | **PASS** |
+### Proof Tests - Working Code (Archived)
 
-### First-Principles Derivations
-1. **[DERIVATION_TEST_A.md](questions/critical_q54_1980/DERIVATION_TEST_A.md)** - 3.41x from wave mode counting
-2. **[DERIVATION_SIGMA.md](questions/critical_q54_1980/DERIVATION_SIGMA.md)** - sigma = e^(-4/pi) from solid angle geometry
-3. **[DERIVATION_8E.md](questions/critical_q54_1980/DERIVATION_8E.md)** - 8e from 3 independent paths
+| Domain | Test | Result | Status | Note |
+|--------|------|--------|--------|------|
+| **Waves** | prove_wave_r.py | R ratio = 7.90x | **PASS** | Archived to _archive/old_tests/ |
+| **Decoherence** | prove_decoherence_r.py | R: 0->100, r=0.957 | **PASS** | Archived to _archive/old_tests/ |
+| **Semantics** | prove_semantic_r.py | p < 10^-32 | **PASS** | Archived to _archive/old_tests/ |
+
+### Derivation Attempts (Archived - Failed First-Principles Status)
+1. **[DERIVATION_TEST_A.md](questions/critical_q54_1980/_archive/failed_derivations/DERIVATION_TEST_A.md)** - 3.41x from wave mode counting *(archived)*
+2. **[DERIVATION_SIGMA.md](questions/critical_q54_1980/_archive/failed_derivations/DERIVATION_SIGMA.md)** - sigma = e^(-4/pi) from solid angle geometry *(archived)*
+3. **[DERIVATION_8E.md](questions/critical_q54_1980/_archive/failed_derivations/DERIVATION_8E.md)** - 8e from 3 independent paths *(archived)*
 
 ---
 
@@ -204,9 +211,14 @@ See: [Q54 Scientific Rigor Roadmap](questions/critical_q54_1980/SCIENTIFIC_RIGOR
 ```
 THOUGHT/LAB/FORMULA/
   INDEX.md              (this file)
-  CHANGELOG.md
+  GLOSSARY.md           (formal symbol definitions - canonical)
+  SPECIFICATION.md      (formal propositions, conjectures, falsified)
+  SEMIOTIC_AXIOMS.md    (foundational axioms - canonical)
+  CHANGELOG.md          (version history)
+  requirements.txt      (Python dependencies)
+  config.yaml           (centralized test parameters)
   .gitignore
-  questions/            (53 unified question folders)
+  questions/            (54 unified question folders)
   reports/              (global reports, audits, syntheses)
   _legacy/              (archived old structure)
 ```

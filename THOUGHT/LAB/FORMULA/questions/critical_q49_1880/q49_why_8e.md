@@ -1,6 +1,18 @@
-# Q49: Why 8e? — Deriving the Semantic Conservation Law
+# Q49: Why 8e? -- Deriving the Semantic Conservation Law
 
-**Status:** BREAKTHROUGH - α = 8e/Df CONFIRMED (0.15% precision)
+---
+question_id: Q49
+priority: critical
+r_score: 1880
+status: BREAKTHROUGH
+cluster: E (Semiotic Conservation)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
+**Status:** BREAKTHROUGH - alpha = 8e/Df CONFIRMED (0.15% precision)
 **Priority:** CRITICAL
 **Created:** 2026-01-15
 **Updated:** 2026-01-15

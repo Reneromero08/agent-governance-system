@@ -1,5 +1,17 @@
 # Question 8: Topology Classification (R: 1600)
 
+---
+question_id: Q08
+priority: high
+r_score: 1600
+status: ANSWERED
+cluster: G (Geometry & Symmetry)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: ANSWERED** (v5 - 2026-01-17)
 
 ---

@@ -1,5 +1,17 @@
 # Question 9: Free Energy Principle (R: 1580)
 
+---
+question_id: Q09
+priority: high
+r_score: 1580
+status: ANSWERED
+cluster: C (Theoretical Grounding)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: ANSWERED**
 
 ## Question

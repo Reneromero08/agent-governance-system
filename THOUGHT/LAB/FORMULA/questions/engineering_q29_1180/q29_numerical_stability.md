@@ -1,5 +1,17 @@
 # Engineering Solution: Numerical Stability for R-Gate
 
+---
+question_id: Q29
+priority: engineering
+r_score: 1180
+status: SOLVED
+cluster: unclustered
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **TYPE: ENGINEERING (Implementation Guidance)**
 **STATUS: SOLVED**
 

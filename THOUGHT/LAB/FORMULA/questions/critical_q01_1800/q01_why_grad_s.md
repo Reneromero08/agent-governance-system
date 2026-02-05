@@ -1,5 +1,17 @@
 # Question 1: Why grad_S? (R: 1800)
 
+---
+question_id: Q01
+priority: critical
+r_score: 1800
+status: ANSWERED
+cluster: A (Foundations)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: ANSWERED**
 
 ## Question
