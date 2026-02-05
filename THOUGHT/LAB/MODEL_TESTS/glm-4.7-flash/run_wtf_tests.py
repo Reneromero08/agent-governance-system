@@ -220,7 +220,7 @@ def grokipedia_lookup(topic: str) -> str:
                         tag.decompose()
                     text = soup.get_text(separator='\n', strip=True)
                     return f"Grokipedia: {topic}\n{'='*len(topic)}\n\n{text[:2000]}..."
-            except:
+            except (requests.RequestException, ConnectionError, OSError):
                 continue
         return f"No Grokipedia page found for: {topic}"
     except Exception as e:

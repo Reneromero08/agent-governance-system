@@ -27,6 +27,8 @@ from typing import Any, Callable, Dict, Iterator, List, Optional, Tuple
 
 # Write enforcement
 from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+# Shared repo-root resolution
+from CAPABILITY.PRIMITIVES.paths import repo_root as _repo_root
 # Import modular components (primitives and validation)
 from .primitives import (
     lock_file as _lock_file,
@@ -59,7 +61,7 @@ from .validation import (
     SKILLS_DIR,
 )
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = _repo_root()
 CAPABILITY_ROOT = PROJECT_ROOT / "CAPABILITY"
 LAW_ROOT = PROJECT_ROOT / "LAW"
 NAVIGATION_ROOT = PROJECT_ROOT / "NAVIGATION"
@@ -920,15 +922,17 @@ class AGSMCPServer:
                 "isError": True
             }
         
+        input_path = None
+        output_path = None
         try:
             # Create temp files for input/output
             with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f_in:
                 json.dump(skill_input, f_in)
                 input_path = f_in.name
-            
+
             with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f_out:
                 output_path = f_out.name
-            
+
             # Run the skill
             result = subprocess.run(
                 [sys.executable, str(run_script), input_path, output_path],
@@ -937,14 +941,10 @@ class AGSMCPServer:
                 cwd=str(PROJECT_ROOT),
                 timeout=60  # 60 second timeout
             )
-            
+
             # Read output
             output_content = Path(output_path).read_text() if Path(output_path).exists() else "{}"
-            
-            # Clean up
-            Path(input_path).unlink(missing_ok=True)
-            Path(output_path).unlink(missing_ok=True)
-            
+
             if result.returncode == 0:
                 return {
                     "content": [{
@@ -976,6 +976,11 @@ class AGSMCPServer:
                 }],
                 "isError": True
             }
+        finally:
+            if input_path:
+                Path(input_path).unlink(missing_ok=True)
+            if output_path:
+                Path(output_path).unlink(missing_ok=True)
     
     def _list_skills(self) -> str:
         """List available skills."""

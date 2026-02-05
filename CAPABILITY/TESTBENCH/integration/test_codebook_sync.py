@@ -26,20 +26,37 @@ import pytest
 # Resolve paths
 SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = SCRIPT_DIR.parents[2]
-SYNC_PROTOCOL_PATH = PROJECT_ROOT / "LAW" / "CANON" / "SEMANTIC" / "CODEBOOK_SYNC_PROTOCOL.md"
+SYNC_PROTOCOL_DIR = PROJECT_ROOT / "LAW" / "CANON" / "SEMANTIC"
+SYNC_PROTOCOL_PATH = SYNC_PROTOCOL_DIR / "CODEBOOK_SYNC_PROTOCOL.md"
+
+# Sub-files that together comprise the full specification
+SYNC_PROTOCOL_PARTS = [
+    SYNC_PROTOCOL_PATH,
+    SYNC_PROTOCOL_DIR / "CODEBOOK_SYNC_HANDSHAKE.md",
+    SYNC_PROTOCOL_DIR / "CODEBOOK_SYNC_FAILURES.md",
+    SYNC_PROTOCOL_DIR / "CODEBOOK_SYNC_CASSETTE.md",
+    SYNC_PROTOCOL_DIR / "CODEBOOK_SYNC_BLANKET.md",
+    SYNC_PROTOCOL_DIR / "CODEBOOK_SYNC_SESSION.md",
+    SYNC_PROTOCOL_DIR / "CODEBOOK_SYNC_IMPLEMENTATION.md",
+    SYNC_PROTOCOL_DIR / "CODEBOOK_SYNC_REFERENCE.md",
+]
 
 sys.path.insert(0, str(PROJECT_ROOT))
 
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# ===============================================================================
 # FIXTURES
-# ═══════════════════════════════════════════════════════════════════════════════
+# ===============================================================================
 
 @pytest.fixture
 def spec_content() -> str:
-    """Load CODEBOOK_SYNC_PROTOCOL.md content."""
+    """Load full CODEBOOK_SYNC_PROTOCOL content (main index + all sub-files)."""
     assert SYNC_PROTOCOL_PATH.exists(), f"CODEBOOK_SYNC_PROTOCOL.md not found at {SYNC_PROTOCOL_PATH}"
-    return SYNC_PROTOCOL_PATH.read_text(encoding='utf-8')
+    parts = []
+    for part_path in SYNC_PROTOCOL_PARTS:
+        assert part_path.exists(), f"Protocol part not found: {part_path.name}"
+        parts.append(part_path.read_text(encoding='utf-8'))
+    return "\n".join(parts)
 
 
 @pytest.fixture
@@ -60,7 +77,7 @@ class TestSpecExistence:
         assert SYNC_PROTOCOL_PATH.exists(), "CODEBOOK_SYNC_PROTOCOL.md not found"
 
     def test_spec_not_empty(self, spec_content):
-        """Spec must have content."""
+        """Combined spec parts must have content."""
         assert len(spec_content) > 1000, "Spec appears too short"
 
     def test_spec_is_normative(self, spec_content):
@@ -443,7 +460,10 @@ class TestContentReceipt:
 
     def test_content_hash_reproducible(self, spec_content, spec_hash):
         """Content hash must be reproducible."""
-        content2 = SYNC_PROTOCOL_PATH.read_text(encoding='utf-8')
+        parts = []
+        for part_path in SYNC_PROTOCOL_PARTS:
+            parts.append(part_path.read_text(encoding='utf-8'))
+        content2 = "\n".join(parts)
         hash2 = hashlib.sha256(content2.encode('utf-8')).hexdigest()
         assert spec_hash == hash2, "Content hash not reproducible"
 

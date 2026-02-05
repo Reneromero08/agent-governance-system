@@ -337,7 +337,7 @@ Monitor with:
             try:
                 proc.terminate()
                 proc.wait(timeout=5)
-            except:
+            except (OSError, subprocess.TimeoutExpired):
                 proc.kill()
 
             update_registry(

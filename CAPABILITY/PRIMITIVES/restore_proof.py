@@ -29,6 +29,7 @@ from typing import Any, Dict, List, Optional
 
 from jsonschema import Draft7Validator
 
+from .canonical_json import canonical_json_bytes
 from .cas_store import CatalyticStore, normalize_relpath
 from .merkle import build_manifest_root, build_manifest_with_proofs, verify_membership, MerkleProof
 
@@ -229,10 +230,6 @@ class RestorationProofValidator:
         """
         canonical_json = json.dumps(proof_partial, sort_keys=True, separators=(",", ":"))
         return hashlib.sha256(canonical_json.encode("utf-8")).hexdigest()
-
-
-def canonical_json_bytes(obj: Any) -> bytes:
-    return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
 
 
 def compute_manifest_root(file_manifest: Dict[str, str]) -> str:

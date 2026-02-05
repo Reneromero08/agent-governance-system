@@ -59,7 +59,7 @@ class CatalyticChat:
                 start, end = map(int, range_str.split(':'))
                 sliced = '\n'.join(lines[start:end])
                 return sliced
-            except:
+            except (ValueError, IndexError):
                 return content[:500] + "..."  # Fallback
         
         return content[:500] + "..."

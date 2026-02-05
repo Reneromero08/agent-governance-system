@@ -120,8 +120,6 @@ A successful connection is confirmed when:
 
 **Only after establishing a successful cortex connection should agents proceed to Section 1.**
 
-**Quick Reference**: For detailed tool usage and common query patterns, see `INBOX/reports/cortex-quick-reference.md`.
-
 ### 0.7 MCP-First Principle (Token Efficiency)
 
 **🚨 CRITICAL: NO TOKEN WASTE 🚨**

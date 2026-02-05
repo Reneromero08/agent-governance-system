@@ -3,8 +3,9 @@
 
 set -euo pipefail
 
-TEST_DIR="/tmp/ags_lint_test_$$"
+TEST_DIR="$(mktemp -d)"
 mkdir -p "$TEST_DIR/PHASE_01"
+trap 'rm -rf "$TEST_DIR"' EXIT
 
 # Create minimal manifest
 cat > "$TEST_DIR/PROMPT_PACK_MANIFEST.json" <<'EOF'
@@ -133,6 +134,4 @@ echo "=== Test 3: Empty Bullet (should WARN with exit 2) ==="
 bash "$(dirname "$0")/lint_prompt_pack.sh" "$TEST_DIR" || echo "Exit code: $?"
 echo ""
 
-# Cleanup
-rm -rf "$TEST_DIR"
-echo "✓ Tests complete"
+echo "Tests complete (cleanup via trap)"

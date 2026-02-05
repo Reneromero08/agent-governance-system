@@ -229,7 +229,7 @@ class OllamaClient:
     def warm(self, model: str) -> None:
         try:
             self.generate({"model": model, "prompt": "warmup", "stream": False, "options": {"num_predict": 1}}, 10)
-        except: pass
+        except (requests.RequestException, ConnectionError, OSError, RuntimeError): pass
 
     def generate(self, payload: Dict[str, Any], timeout: int) -> str:
         s = self._session()
@@ -334,7 +334,7 @@ def run_proposals(client: OllamaClient, cfg: SquadConfig, instruction: str, erro
         pl = {"model": cfg.member_model, "prompt": p, "stream": False, "options": {"temperature": 0.4, "num_ctx": cfg.member_ctx, "num_predict": cfg.member_predict}}
         try:
             return extract_code(client.generate(pl, cfg.proposal_timeout_s))
-        except: return None
+        except (requests.RequestException, ConnectionError, OSError, RuntimeError): return None
         
     proposals = {}
     with ThreadPoolExecutor(max_workers=3) as ex:

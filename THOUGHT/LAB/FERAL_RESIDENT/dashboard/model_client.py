@@ -91,7 +91,7 @@ def is_model_server_running() -> bool:
     try:
         resp = requests.get(f"{MODEL_SERVER_URL}/health", timeout=1)
         return resp.status_code == 200
-    except:
+    except (requests.RequestException, ConnectionError, OSError):
         return False
 
 

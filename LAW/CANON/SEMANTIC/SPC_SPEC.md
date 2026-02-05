@@ -422,7 +422,7 @@ The decoder MUST NOT:
 
 **Default policy:** Exact match required for codebook_sha256 and kernel_version.
 
-**Migration:** See CODEBOOK_SYNC_PROTOCOL.md (Phase 5.3.3) for explicit compatibility ranges.
+**Migration:** See CODEBOOK_SYNC_PROTOCOL.md / CODEBOOK_SYNC_FAILURES.md (Phase 5.3.3, Section 5) for explicit compatibility ranges.
 
 ---
 

@@ -6,6 +6,54 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.11.0] - 2026-02-05
+
+### Added: System Audit - Safety, Consolidation, Infrastructure, Hardening
+
+**New Shared Utilities:**
+- `CAPABILITY/PRIMITIVES/paths.py`: Centralized `repo_root()` with anchor-based detection, `normalize_relpath()`, `resolve_under_root()`
+- `CAPABILITY/PRIMITIVES/canonical_json.py`: Single source of truth for `canonical_json()`, `canonical_json_bytes()`, `sha256_hex()`
+- `CAPABILITY/SKILLS/_shared/validate_input.py`: Lightweight skill input schema validation (no external deps)
+- `.pre-commit-config.yaml`: Standard hooks + AGS critic + token linter
+- `pytest.ini`, `requirements-dev.txt`: Standardized test and dev dependency configuration
+
+**CODEBOOK_SYNC_PROTOCOL Split (INV-009 Compliance):**
+- Split 1073-line file into index (86 lines) + 7 sub-documents (all under 300 lines)
+- New files: CODEBOOK_SYNC_HANDSHAKE, CODEBOOK_SYNC_FAILURES, CODEBOOK_SYNC_CASSETTE, CODEBOOK_SYNC_BLANKET, CODEBOOK_SYNC_SESSION, CODEBOOK_SYNC_IMPLEMENTATION, CODEBOOK_SYNC_REFERENCE
+
+### Changed
+
+**Phase 1 - Safety Fixes:**
+- `server_wrapper.py`: Fix stderr file handle resource leak in subprocess.Popen
+- `server.py`: Move temp file cleanup to finally block to prevent leaks
+- `powershell_bridge.ps1`: Block startup on default CHANGE_ME token (was warn-only)
+- `validation.py`: Expand FORBIDDEN_ROOTS (.git/, .github/, .env); add JSONDecodeError handling
+- `llm_vector_bridge.py`, `geometric_reasoner.py`: Add bounds checks on external API responses
+- `test_linter.sh`: Replace predictable /tmp path with mktemp + trap cleanup
+
+**Phase 2 - Consolidation:**
+- 3 MCP files updated to use centralized `repo_root()` instead of fragile `parents[N]`
+- 8 PRIMITIVES files deduplicated: canonical_json imports from single module
+- Updated `__init__.py` exports and test assertions
+
+**Phase 3 - Infrastructure:**
+- Pre-commit config with 5 standard hooks + 3 local AGS hooks
+
+**Phase 4 - Hardening:**
+- 67+ bare `except:` clauses narrowed to specific exception types across 27 files
+- Skill input validation integrated into pack-validate, canon-governance-check, intent-guard
+- `CODEBOOK_SYNC_BLANKET.md`: Fix undefined `score_semver_compatibility` ref -> `score_kernel_version`
+
+### Fixed
+- `CONTRACT.md`: Broken ref INBOX_POLICY.md -> DOCUMENT_POLICY.md
+- `CRISIS.md`: Wrong path CAPABILITY/TOOLS/emergency.py -> CAPABILITY/TOOLS/utilities/emergency.py
+- `STEWARDSHIP.md`: Nonexistent LAW/CONTEXT/open/ -> LAW/CONTEXT/decisions/
+- `AGENTS.md`: Removed dead link to INBOX/reports/cortex-quick-reference.md
+- `INDEX.md`: Fixed INBOX_POLICY.md ref to ../POLICY/DOCUMENT_POLICY.md
+- Cross-references updated in cassette_protocol.py, network_hub.py, SPC_SPEC.md, test_codebook_sync.py
+
+---
+
 ## [3.10.0] - 2026-02-05
 
 ### Added: Proof System Enhancements

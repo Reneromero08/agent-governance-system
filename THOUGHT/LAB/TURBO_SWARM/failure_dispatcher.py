@@ -202,7 +202,7 @@ def ollama_available() -> bool:
     try:
         response = requests.get(f"{OLLAMA_URL}/api/tags", timeout=5)
         return response.status_code == 200
-    except:
+    except (requests.RequestException, ConnectionError, OSError):
         return False
 
 
@@ -431,7 +431,7 @@ def cmd_status() -> None:
                             elapsed = f"{int(elapsed_sec/60)}m"
                         else:
                             elapsed = f"{int(elapsed_sec/3600)}h {int((elapsed_sec%3600)/60)}m"
-                    except:
+                    except (ValueError, TypeError, AttributeError):
                         pass
                 
                 target_disp = task['target_file'].replace("\r", "").replace("\n", "")
@@ -574,7 +574,7 @@ def update_protocol_entry(target_file: str, task: Dict[str, Any]) -> bool:
             pct = (passed / total) * 100 if total > 0 else 100
             p3_content = re.sub(r"- \*\*Passed\*\*: \d+.*", f"- **Passed**: {passed} ({pct:.1f}%)", p3_content)
             p3_content = re.sub(r"- \*\*Failed\*\*: \d+.*", f"- **Failed**: {failed} ({100-pct:.1f}%)", p3_content)
-    except:
+    except (ValueError, AttributeError, ZeroDivisionError):
         pass
 
     sections[p3_idx] = p3_content.replace("## PROTOCOL", "", 1)
@@ -777,7 +777,7 @@ def cmd_observe() -> None:
                         # Simple tail
                         lines = f.readlines()
                         log_lines = lines[-30:] if lines else []
-                except:
+                except (OSError, IOError):
                     pass
 
             # Clear line and print status

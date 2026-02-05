@@ -27,6 +27,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from MEMORY.LLM_PACKER.Engine.packer import verify_manifest
 from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat
+from CAPABILITY.SKILLS._shared.validate_input import validate_skill_input
 
 
 def validate_structure(pack_dir: Path) -> Tuple[List[str], List[str]]:
@@ -189,7 +190,16 @@ def main(input_path: Path, output_path: Path) -> int:
     except Exception as exc:
         print(f"Error reading input: {exc}")
         return 1
-    
+
+    _INPUT_SCHEMA = {
+        "required": ["pack_path"],
+        "types": {"pack_path": str},
+    }
+    ok, errs = validate_skill_input(payload, _INPUT_SCHEMA)
+    if not ok:
+        for e in errs:
+            print("[pack-validate] WARNING: %s" % e)
+
     pack_path_str = payload.get("pack_path", "")
     
     if not pack_path_str:

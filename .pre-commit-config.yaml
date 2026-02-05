@@ -1,0 +1,45 @@
+# Pre-commit hooks for AGS (Agent Governance System)
+# Install: pre-commit install
+# Run all: pre-commit run --all-files
+# Requires: pip install pre-commit
+
+repos:
+  # ---- Standard hooks ----
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-added-large-files
+        args: ['--maxkb=500']
+
+  # ---- Local project hooks ----
+  - repo: local
+    hooks:
+      # Basic Python syntax check on changed .py files
+      - id: python-syntax-check
+        name: python syntax check (py_compile)
+        entry: python -m py_compile
+        language: system
+        types: [python]
+        pass_filenames: true
+
+      # Governance critic -- checks canon changes, fixture presence, invariants
+      - id: ags-critic
+        name: AGS governance critic
+        entry: python CAPABILITY/TOOLS/governance/critic.py
+        language: system
+        types_or: [python, markdown, yaml, json]
+        pass_filenames: false
+        always_run: true
+
+      # Token linter -- checks glossary term usage
+      - id: ags-lint-tokens
+        name: AGS token linter
+        entry: python CAPABILITY/TOOLS/utilities/lint_tokens.py
+        language: system
+        types_or: [python, markdown]
+        pass_filenames: false
+        always_run: true

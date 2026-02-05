@@ -55,7 +55,7 @@ def get_available_models() -> List[str]:
         resp = requests.get(f"{LLM_STUDIO_BASE}/v1/models", timeout=5)
         if resp.status_code == 200:
             return [m["id"] for m in resp.json().get("data", [])]
-    except:
+    except (requests.RequestException, ConnectionError, OSError, ValueError, KeyError):
         pass
     return []
 

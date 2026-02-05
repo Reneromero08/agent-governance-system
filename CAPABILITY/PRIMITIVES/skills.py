@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import hashlib
 import json
 from dataclasses import dataclass
 from pathlib import Path
@@ -21,16 +20,6 @@ class CapabilityHashMismatch(SkillError):
 
 class RegistryError(SkillError):
     """Registry is malformed or invalid."""
-
-
-def canonical_json(obj: Any) -> bytes:
-    """Canonicalize JSON object per SPECTRUM-04 v1.1.0."""
-    return json.dumps(
-        obj,
-        sort_keys=True,
-        separators=(',', ':'),
-        ensure_ascii=False
-    ).encode('utf-8')
 
 
 @dataclass(frozen=True)

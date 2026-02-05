@@ -174,7 +174,10 @@ class LLMVectorBridge:
         response.raise_for_status()
 
         data = response.json()
-        return data["choices"][0]["message"]["content"]
+        choices = data.get("choices", [])
+        if not choices:
+            raise ValueError("LLM response contained no choices")
+        return choices[0]["message"]["content"]
 
     def vector_to_llm(
         self,

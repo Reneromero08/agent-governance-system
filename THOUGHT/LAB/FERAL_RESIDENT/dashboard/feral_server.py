@@ -1531,7 +1531,7 @@ async def get_memory_stats():
                     above_threshold += 1
                 else:
                     below_threshold += 1
-        except:
+        except (ValueError, TypeError, RuntimeError):
             continue
 
     return {
@@ -2007,7 +2007,8 @@ def main():
                 import requests
                 resp = requests.get("http://localhost:8421/health", timeout=1)
                 model_server_running = resp.status_code == 200
-            except:
+            except Exception:
+                # Intentionally broad: covers ImportError, network errors, and request failures
                 model_server_running = False
 
             if model_server_running:

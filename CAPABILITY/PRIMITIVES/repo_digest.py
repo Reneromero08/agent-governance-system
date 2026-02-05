@@ -35,15 +35,11 @@ from typing import Any, Dict, List, Optional, Set
 REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT))
 
+from CAPABILITY.PRIMITIVES.canonical_json import canonical_json_bytes
 from CAPABILITY.PRIMITIVES.write_firewall import WriteFirewall, FirewallViolation
 
 # Module version for deterministic tracking
 MODULE_VERSION = "1.5b.0"
-
-
-def canonical_json_bytes(obj: Any) -> bytes:
-    """Canonical JSON serialization with sorted keys and no whitespace."""
-    return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
 
 
 def normalize_path(path: Path, repo_root: Path) -> str:

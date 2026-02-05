@@ -24,13 +24,13 @@ When governance fails catastrophically, **predictable recovery** is more valuabl
 
 ## Emergency CLI
 
-The `CAPABILITY/TOOLS/emergency.py` script provides concrete CLI modes for crisis handling.
+The `CAPABILITY/TOOLS/utilities/emergency.py` script provides concrete CLI modes for crisis handling.
 
 ### Usage
 
 ```bash
 # Exit quarantine (requires confirmation)
-python CAPABILITY/TOOLS/emergency.py --mode=restore
+python CAPABILITY/TOOLS/utilities/emergency.py --mode=restore
 ```
 
 ## Procedures
@@ -44,7 +44,7 @@ python CAPABILITY/TOOLS/emergency.py --mode=restore
 
 **Procedure:**
 1. Stop all agent work
-2. Run `python CAPABILITY/TOOLS/emergency.py --mode=validate`
+2. Run `python CAPABILITY/TOOLS/utilities/emergency.py --mode=validate`
 3. Review output to identify the issue
 4. Fix the violation before proceeding
 5. Re-run validation until clean
@@ -57,7 +57,7 @@ python CAPABILITY/TOOLS/emergency.py --mode=restore
 - Agent made unauthorized changes
 
 **Procedure:**
-1. Run `python CAPABILITY/TOOLS/emergency.py --mode=rollback`
+1. Run `python CAPABILITY/TOOLS/utilities/emergency.py --mode=rollback`
 2. This creates a backup of current state
 3. Reverts to the last known-good commit
 4. Creates an ADR documenting the rollback
@@ -71,14 +71,14 @@ python CAPABILITY/TOOLS/emergency.py --mode=restore
 - Suspicion of prompt injection or manipulation
 
 **Procedure:**
-1. Run `python CAPABILITY/TOOLS/emergency.py --mode=quarantine`
+1. Run `python CAPABILITY/TOOLS/utilities/emergency.py --mode=quarantine`
 2. This:
    - Creates a `.quarantine` lock file
    - Saves current cortex and git state
    - Blocks all write operations
    - Alerts steward (if configured)
 3. Human investigates the anomaly
-4. Once resolved: `python TOOLS/emergency.py --mode=restore`
+4. Once resolved: `python CAPABILITY/TOOLS/utilities/emergency.py --mode=restore`
 
 ### Level 4: Constitutional Reset
 
@@ -90,7 +90,7 @@ python CAPABILITY/TOOLS/emergency.py --mode=restore
 **Procedure:**
 1. **DO NOT** attempt automated fixes
 2. Human steward takes control
-3. Run `python CAPABILITY/TOOLS/emergency.py --mode=constitutional-reset --tag=<last-known-good>`
+3. Run `python CAPABILITY/TOOLS/utilities/emergency.py --mode=constitutional-reset --tag=<last-known-good>`
 4. This:
    - Creates full backup of current state
    - Resets all CANON files to the tagged release

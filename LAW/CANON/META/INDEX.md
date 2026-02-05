@@ -34,5 +34,5 @@ This directory contains the "Canon"—the laws, rules, and agreements that gover
 - [GENESIS.md](./GENESIS.md): The bootstrap prompt.
 - [SECURITY.md](./SECURITY.md): Trust boundaries.
 - [CODEBOOK.md](./CODEBOOK.md): Compressed reference IDs.
-- [INBOX_POLICY.md](./INBOX_POLICY.md): Policy for human-reviewable artifacts.
+- [DOCUMENT_POLICY.md](../POLICY/DOCUMENT_POLICY.md): Policy for human-reviewable artifacts.
 - [IMPLEMENTATION_REPORTS.md](./IMPLEMENTATION_REPORTS.md): Reporting requirements.

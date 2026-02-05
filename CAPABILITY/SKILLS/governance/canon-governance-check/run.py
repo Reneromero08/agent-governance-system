@@ -24,6 +24,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat
+from CAPABILITY.SKILLS._shared.validate_input import validate_skill_input
 
 try:
     from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
@@ -112,6 +113,16 @@ def main(argv: List[str]) -> int:
         sys.exit(1)
         
     inp = _load_json(input_path)
+
+    _INPUT_SCHEMA = {
+        "required": [],
+        "types": {"changed_files": list, "verbose": bool},
+    }
+    ok, errs = validate_skill_input(inp, _INPUT_SCHEMA)
+    if not ok:
+        for e in errs:
+            print("[canon-governance-check] WARNING: %s" % e)
+
     verbose = bool(inp.get("verbose", False))
     changed_files = inp.get("changed_files")
     if changed_files is not None:

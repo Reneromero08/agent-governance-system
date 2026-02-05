@@ -223,7 +223,7 @@ def run_all(parallel=1, resume=True):
                     if data.get('status') == 'completed':
                         safe_print(f"SKIP: {test_id} (already completed)")
                         skip = True
-            except:
+            except (OSError, IOError, json.JSONDecodeError, ValueError):
                 pass
         if not skip:
             pending.append((test_id, prompt))

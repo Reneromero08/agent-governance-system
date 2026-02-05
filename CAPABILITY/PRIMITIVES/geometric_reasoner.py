@@ -42,6 +42,8 @@ try:
             resp = requests.post("http://localhost:8421/embed", json={"texts": texts}, timeout=30)
             resp.raise_for_status()
             result = np.array(resp.json()["embeddings"])
+            if len(result) == 0:
+                raise ValueError("Embedding endpoint returned empty result")
             return result if len(texts) > 1 else result[0]
         def get_sentence_embedding_dimension(self):
             return self.dim
