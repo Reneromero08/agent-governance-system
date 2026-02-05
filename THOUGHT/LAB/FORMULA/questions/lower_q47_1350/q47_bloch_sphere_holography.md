@@ -1,5 +1,17 @@
 # Q47: Bloch Sphere Holography
 
+---
+question_id: Q47
+priority: lower
+r_score: 1350
+status: OPEN
+cluster: unclustered
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **Status:** OPEN
 **R-Score:** 1350
 

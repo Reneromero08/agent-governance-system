@@ -1,6 +1,18 @@
 # Question 31: Compass mode (direction, not gate) (R: 1550)
 
-**STATUS: ✅ CONFIRMED** (2026-01-10, via Q43 rigorous validation)
+---
+question_id: Q31
+priority: high
+r_score: 1550
+status: CONFIRMED
+cluster: unclustered
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
+**STATUS: CONFIRMED** (2026-01-10, via Q43 rigorous validation)
 
 ## Question
 The gate answers **"ACT or DON'T ACT?"**. Can the same primitives be upgraded into a **compass** that answers **"WHICH WAY?"**

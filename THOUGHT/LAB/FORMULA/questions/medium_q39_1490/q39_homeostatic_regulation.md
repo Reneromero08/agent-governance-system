@@ -1,5 +1,17 @@
 # Question 39: Homeostatic Regulation (R: 1490)
 
+---
+question_id: Q39
+priority: medium
+r_score: 1490
+status: ANSWERED
+cluster: unclustered
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: ANSWERED (2026-01-11)**
 
 ## Question

@@ -1,5 +1,17 @@
 # Question 36: Bohm's Implicate/Explicate Order (R: 1480)
 
+---
+question_id: Q36
+priority: medium
+r_score: 1480
+status: VALIDATED
+cluster: G (Geometry & Symmetry)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: VALIDATED (9/9 core tests pass - 2026-01-18)**
 
 ---

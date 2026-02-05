@@ -1,5 +1,17 @@
 # Question 7: Multi-scale composition (R: 1620)
 
+---
+question_id: Q07
+priority: high
+r_score: 1620
+status: CONFIRMED
+cluster: unclustered
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: CONFIRMED (with qualifications)**
 
 ## Question

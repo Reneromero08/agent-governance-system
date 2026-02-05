@@ -1,5 +1,17 @@
 # Question 12: Phase transitions (R: 1520)
 
+---
+question_id: Q12
+priority: high
+r_score: 1520
+status: ANSWERED
+cluster: F (Dynamical Systems)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: ANSWERED - PHASE TRANSITION CONFIRMED (2026-01-19)**
 
 ## Question

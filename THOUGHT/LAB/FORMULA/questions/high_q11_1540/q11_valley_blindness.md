@@ -1,5 +1,17 @@
 # Question 11: Valley Blindness (R: 1540)
 
+---
+question_id: Q11
+priority: high
+r_score: 1540
+status: ANSWERED
+cluster: unclustered
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: ANSWERED (2026-01-19)**
 
 ## Question

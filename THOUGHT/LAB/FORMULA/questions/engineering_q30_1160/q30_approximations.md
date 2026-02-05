@@ -1,5 +1,17 @@
 # Question 30: Approximations (R: 1160)
 
+---
+question_id: Q30
+priority: engineering
+r_score: 1160
+status: RESOLVED
+cluster: unclustered
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: RESOLVED - VALIDATED**
 
 ## Question

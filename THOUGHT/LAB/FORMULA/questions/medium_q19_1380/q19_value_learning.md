@@ -1,5 +1,17 @@
 # Question 19: Value learning (R: 1380)
 
+---
+question_id: Q19
+priority: medium
+r_score: 1380
+status: CONDITIONALLY CONFIRMED
+cluster: D (AGS Application)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: CONDITIONALLY CONFIRMED**
 
 ## Question

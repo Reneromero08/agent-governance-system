@@ -1,5 +1,17 @@
 # Question 41: Geometric Langlands & Sheaf Cohomology (R: 1500)
 
+---
+question_id: Q41
+priority: high
+r_score: 1500
+status: ANSWERED
+cluster: unclustered
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: ANSWERED - ALL 8 TIERs PASS (Including Hard Tests)**
 
 > **Note (Pass 7):** Mathematical audit completed 2026-01-11. 17 bugs identified and fixed.

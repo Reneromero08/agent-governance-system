@@ -1,5 +1,17 @@
 # Question 26: Minimum data requirements (R: 1240)
 
+---
+question_id: Q26
+priority: lower
+r_score: 1240
+status: RESOLVED
+cluster: unclustered
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: RESOLVED - Rigorous multi-model testing complete**
 
 ## Question

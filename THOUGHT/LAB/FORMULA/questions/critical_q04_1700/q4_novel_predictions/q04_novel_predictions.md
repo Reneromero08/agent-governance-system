@@ -1,5 +1,17 @@
 # Question 4: Novel predictions (R: 1700)
 
+---
+question_id: Q04
+priority: critical
+r_score: 1700
+status: PARTIALLY ANSWERED
+cluster: B (Scientific Rigor)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: PARTIALLY ANSWERED**
 
 ## Question

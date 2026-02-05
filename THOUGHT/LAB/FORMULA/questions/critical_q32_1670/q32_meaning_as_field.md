@@ -1,6 +1,18 @@
 # Question 32: Meaning as a physical field (R: 1670)
 
-**STATUS: ✅ ANSWERED** (Semiosphere field claim; Phases 1-7 receipted; 2026-01-11)
+---
+question_id: Q32
+priority: critical
+r_score: 1670
+status: PARTIAL
+cluster: A (Foundations)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
+**STATUS: PARTIAL** (Semiosphere field claim; Phases 1-7 receipted; 2026-01-11)
 
 > **Note:** The "fundamental physical force in spacetime" additional track (Phase 8) remains open. The core Q32 claim—that meaning can be operationalized as a measurable field `M:=log(R)` with dynamics, predictions, and falsifiers—is answered.
 

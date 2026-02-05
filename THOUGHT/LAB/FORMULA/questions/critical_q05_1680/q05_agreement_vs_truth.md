@@ -1,5 +1,17 @@
 # Question 5: Agreement vs. truth (R: 1680)
 
+---
+question_id: Q05
+priority: critical
+r_score: 1680
+status: ANSWERED
+cluster: A (Foundations)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: ANSWERED**
 
 ## Question

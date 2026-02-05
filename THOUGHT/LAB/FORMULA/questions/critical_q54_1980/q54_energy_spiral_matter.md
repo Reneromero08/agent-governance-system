@@ -1,6 +1,18 @@
 # Q54: Does Energy Spiral Into Matter?
 
-**Status:** OPEN
+---
+question_id: Q54
+priority: critical
+r_score: 1980
+status: EXPLORATORY
+cluster: E (Semiotic Conservation)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
+**Status:** EXPLORATORY
 **R-Score:** 1980
 **Priority:** CRITICAL
 

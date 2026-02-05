@@ -1,5 +1,17 @@
 # Question 20: Tautology risk (R: 1360)
 
+---
+question_id: Q20
+priority: medium
+r_score: 1360
+status: CIRCULAR VALIDATION CONFIRMED
+cluster: B (Scientific Rigor)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: CIRCULAR VALIDATION CONFIRMED - 8e IS TEXT-EMBEDDING SPECIFIC**
 
 ## Question

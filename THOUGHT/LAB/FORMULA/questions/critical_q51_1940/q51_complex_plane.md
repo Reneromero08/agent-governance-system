@@ -1,5 +1,17 @@
 # Q51: Complex Plane & Phase Recovery
 
+---
+question_id: Q51
+priority: critical
+r_score: 1940
+status: ANSWERED
+cluster: E (Semiotic Conservation)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **Status:** ANSWERED
 **Priority:** Critical (R = 1940)
 **Dependencies:** Q48-Q50 (Semiotic Conservation Law)

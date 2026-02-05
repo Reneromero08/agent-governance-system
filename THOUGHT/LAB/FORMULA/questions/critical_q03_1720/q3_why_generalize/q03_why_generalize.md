@@ -1,6 +1,18 @@
 # Question 3: Why does it generalize? (R: 1720)
 
-**STATUS: ✅ ANSWERED**
+---
+question_id: Q03
+priority: critical
+r_score: 1720
+status: ANSWERED
+cluster: A (Foundations)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
+**STATUS: ANSWERED**
 
 ## Question
 The formula wasn't designed for quantum mechanics, yet it works. Is this a deep isomorphism between meaning and physics, or a coincidence of mathematical form?

@@ -1,5 +1,17 @@
 # Question 10: Alignment detection (R: 1560)
 
+---
+question_id: Q10
+priority: high
+r_score: 1560
+status: ANSWERED
+cluster: D (AGS Application)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: ANSWERED (Scope clarified, limitations are fundamental)**
 
 ## Question

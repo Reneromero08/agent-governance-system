@@ -1,6 +1,18 @@
 # Question 35: Markov Blankets & System Boundaries (R: 1450)
 
-**STATUS: ✅ ANSWERED (2026-01-11)**
+---
+question_id: Q35
+priority: medium
+r_score: 1450
+status: ANSWERED
+cluster: unclustered
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
+**STATUS: ANSWERED (2026-01-11)**
 
 ## Question
 How do Markov blankets (boundaries that separate systems while allowing information exchange) relate to R-gating? Do R-gates define Markov blankets in the semiosphere?

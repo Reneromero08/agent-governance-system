@@ -1,5 +1,17 @@
 # Question 18: Intermediate scales (R: 1400)
 
+---
+question_id: Q18
+priority: medium
+r_score: 1400
+status: UNRESOLVED
+cluster: unclustered
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: UNRESOLVED - Audit Revealed Methodological Issues**
 
 *Last updated: 2026-01-26 - Adversarial audit complete*

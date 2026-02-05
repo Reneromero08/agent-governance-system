@@ -1,5 +1,17 @@
 # Question 23: sqrt(3) geometry (R: 1300)
 
+---
+question_id: Q23
+priority: lower
+r_score: 1300
+status: CLOSED
+cluster: unclustered
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: CLOSED - EMPIRICAL NOT GEOMETRIC**
 
 ## Question

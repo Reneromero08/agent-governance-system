@@ -1,6 +1,18 @@
 # Question 40: Quantum Error Correction (R: 1420)
 
-**STATUS: ✅ PROVEN (2026-01-17)**
+---
+question_id: Q40
+priority: medium
+r_score: 1420
+status: PROVEN
+cluster: unclustered
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
+**STATUS: PROVEN (2026-01-17)**
 
 ## Question
 Is the M field an error-correcting code? Does R-gating implement quantum error correction, protecting meaning from noise?

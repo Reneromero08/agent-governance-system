@@ -1,5 +1,17 @@
 # Question 13: The 36x ratio (R: 1500)
 
+---
+question_id: Q13
+priority: high
+r_score: 1500
+status: ANSWERED
+cluster: unclustered
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: ANSWERED (10/10 tests passed)**
 
 ## Question

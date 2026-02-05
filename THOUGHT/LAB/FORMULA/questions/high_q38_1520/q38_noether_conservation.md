@@ -1,5 +1,17 @@
 # Question 38: Noether's Theorem - Conservation Laws (R: 1520)
 
+---
+question_id: Q38
+priority: high
+r_score: 1520
+status: ANSWERED
+cluster: G (Geometry & Symmetry)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: ANSWERED**
 
 ## Question

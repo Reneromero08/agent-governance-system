@@ -1,4 +1,16 @@
-# Q50: Completing the 8e Picture — Five Questions
+# Q50: Completing the 8e Picture -- Five Questions
+
+---
+question_id: Q50
+priority: critical
+r_score: 1920
+status: RESOLVED
+cluster: E (Semiotic Conservation)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
 
 **Status:** RESOLVED - All five questions answered
 **Priority:** HIGH

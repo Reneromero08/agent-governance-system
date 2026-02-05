@@ -1,0 +1,60 @@
+# Living Formula - Centralized Configuration
+# All test parameters in one place to prevent drift across question folders.
+
+version: "1.0.0"
+
+# Core formula parameters
+formula:
+  # Noise floor (empirical observation, NOT derived)
+  sigma: 0.27
+  # Post-hoc fit candidate (not validated)
+  sigma_fit: 0.2805  # e^(-4/pi)
+  sigma_fit_error: 0.039  # 3.9%
+
+  # Conservation product (empirical)
+  conservation_product: 21.75
+  conservation_product_cv: 0.0693  # 6.93% coefficient of variation
+
+  # Eigenvalue decay exponent (empirical)
+  alpha_typical: 0.505
+  alpha_theoretical: 0.500  # 1/(2*c_1) with c_1=1
+
+# Test parameters
+testing:
+  # Statistical significance thresholds
+  p_value_threshold: 0.05
+  correlation_min: 0.7
+
+  # Numerical tolerances
+  epsilon: 1.0e-10
+  relative_tolerance: 0.05  # 5% relative error
+
+  # Random seeds for reproducibility
+  default_seed: 42
+  monte_carlo_seeds: [42, 123, 456, 789, 1024]
+  n_bootstrap: 1000
+
+  # Wave test parameters (Q54 Test A)
+  wave:
+    grid_points: 256
+    time_steps: 1000
+    wavenumber_range: [1, 20]
+
+  # Decoherence test parameters (Q54 Test C)
+  decoherence:
+    n_qubits: [2, 4, 6, 8, 10]
+    n_environment: [1, 2, 3, 4, 5]
+    n_seeds: 20
+
+  # Semantic test parameters
+  semantic:
+    min_embeddings: 100
+    embedding_dims: [384, 768, 1024]
+    n_models: 24
+
+# Data paths (relative to FORMULA root)
+paths:
+  questions: "questions/"
+  legacy: "_legacy/"
+  reports: "reports/"
+  data: "questions/critical_q54_1980/data/"

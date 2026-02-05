@@ -1,5 +1,17 @@
 # Question 14: Category theory (R: 1480)
 
+---
+question_id: Q14
+priority: medium
+r_score: 1480
+status: ANSWERED
+cluster: C (Theoretical Grounding)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: ANSWERED (2026-01-20)**
 
 ---

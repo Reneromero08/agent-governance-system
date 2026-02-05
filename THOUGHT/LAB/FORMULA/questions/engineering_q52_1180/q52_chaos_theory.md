@@ -1,5 +1,17 @@
 # Question 52: Chaos Theory Connections (R: 1180)
 
+---
+question_id: Q52
+priority: engineering
+r_score: 1180
+status: RESOLVED
+cluster: F (Dynamical Systems)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: RESOLVED - HYPOTHESIS FALSIFIED**
 
 ## Question

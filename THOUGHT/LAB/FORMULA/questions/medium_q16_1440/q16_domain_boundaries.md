@@ -1,5 +1,17 @@
 # Question 16: Domain boundaries (R: 1440)
 
+---
+question_id: Q16
+priority: medium
+r_score: 1440
+status: CONFIRMED
+cluster: unclustered
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: CONFIRMED**
 
 ## Question

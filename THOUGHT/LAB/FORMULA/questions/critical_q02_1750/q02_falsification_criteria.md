@@ -1,5 +1,17 @@
 # Question 2: Falsification criteria (R: 1750)
 
+---
+question_id: Q02
+priority: critical
+r_score: 1750
+status: ANSWERED
+cluster: B (Scientific Rigor)
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: ANSWERED**
 
 ## Question

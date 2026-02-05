@@ -1,5 +1,17 @@
 # Question 22: Threshold calibration (R: 1320)
 
+---
+question_id: Q22
+priority: lower
+r_score: 1320
+status: FALSIFIED
+cluster: unclustered
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
 **STATUS: FALSIFIED - No Universal Threshold Exists**
 
 ## Question

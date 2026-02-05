@@ -1,6 +1,18 @@
 # Question 25: What determines sigma? (R: 1260)
 
-**STATUS: RESOLVED - SIGMA IS PREDICTABLE**
+---
+question_id: Q25
+priority: lower
+r_score: 1260
+status: PARTIAL
+cluster: unclustered
+last_reviewed: 2026-02-05
+references:
+  - GLOSSARY.md
+  - SPECIFICATION.md
+---
+
+**STATUS: PARTIAL**
 
 ## Question
 Is there a principled way to derive sigma, or is it always empirical?

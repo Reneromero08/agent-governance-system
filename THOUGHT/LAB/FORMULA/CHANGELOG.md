@@ -1,5 +1,30 @@
 # FORMULA Lab Changelog
 
+> **Path Note:** Entries before v5.0.0 reference the old `research/questions/` path
+> structure. These paths were reorganized in v5.0.0 to `questions/{priority}_q{##}_{Rscore}/`.
+> Old paths are preserved as historical record; see `_legacy/` for archived content.
+
+## [8.1.0] - 2026-02-05
+
+### Integrity Audit and Honest Reassessment
+
+- **Q54 status corrected:** "CROWN JEWEL PROVEN" / "VALIDATED" downgraded to "EXPLORATORY"
+  after review of HONEST_FINAL_STATUS.md. Derivations rely on synthetic data and post-hoc
+  curve fitting, not independent prediction.
+- **Q25 status corrected:** "DERIVED" downgraded to "PARTIAL". sigma = e^(-4/pi) is a
+  post-hoc fit, not a first-principles derivation.
+- **Q32 status corrected:** "ANSWERED" downgraded to "PARTIAL". Phase 8 remains pending.
+- Fixed 10 broken cross-references in INDEX.md, VECTOR_ELO_SPEC.md, CODEBOOK_SYNC_REFERENCE.md
+- Added honest assessment notes to Validation Results section in INDEX.md
+- "Proven (SOLID)" section renamed to "Empirical Findings (Require Independent Validation)"
+
+### New Files
+- `GLOSSARY.md` - Formal definitions resolving E (Essence) equivocation across domains
+- `SPECIFICATION.md` - Formal Definitions/Propositions/Conjectures/Falsified structure
+- `SEMIOTIC_AXIOMS.md` - Canonical axiom file (relocated from _legacy/research/)
+- `requirements.txt` - Python dependency management
+- `config.yaml` - Centralized test parameters
+
 ## [5.0.0] - 2026-01-28
 
 ### Major Refactoring: Unified Per-Question Structure
