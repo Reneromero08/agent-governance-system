@@ -153,7 +153,7 @@ def step2_reset_manifest():
         # Read content for metadata extraction
         try:
             content = paper_path.read_text(encoding='utf-8', errors='replace')
-        except:
+        except (OSError, IOError):
             content = ""
 
         short_name = extract_short_name(arxiv_id, content)
@@ -409,7 +409,7 @@ def step6_verify():
         try:
             meta = json.loads(row[0])
             print(f"    - {meta.get('paper_id', '?')}: {meta.get('heading', '?')[:50]}")
-        except:
+        except (json.JSONDecodeError, ValueError, TypeError):
             pass
 
     # Final status

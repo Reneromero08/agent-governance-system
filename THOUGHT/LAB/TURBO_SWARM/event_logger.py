@@ -41,7 +41,7 @@ class SimpleLock:
     def __exit__(self, exc_type, exc_val, exc_tb):
         try:
             os.rmdir(self.lock_path)
-        except:
+        except OSError:
             pass
 
 def emit_event(type: str, payload: dict, inbox_root: Path) -> None:

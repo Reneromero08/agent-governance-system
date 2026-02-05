@@ -218,7 +218,7 @@ def grokipedia_lookup(topic: str) -> str:
                         data = response.json()
                         content = data.get('content', data.get('text', str(data)))
                         return f"Grokipedia: {topic}\n{'='*len(topic)}\n\n{content[:2000]}..."
-                    except:
+                    except (ValueError, KeyError):
                         # Fall back to HTML parsing
                         from bs4 import BeautifulSoup
                         soup = BeautifulSoup(response.text, 'html.parser')
@@ -229,7 +229,7 @@ def grokipedia_lookup(topic: str) -> str:
 
                         text = soup.get_text(separator='\n', strip=True)
                         return f"Grokipedia: {topic}\n{'='*len(topic)}\n\n{text[:2000]}..."
-            except:
+            except (requests.RequestException, ConnectionError, OSError):
                 continue
 
         return f"No Grokipedia page found for: {topic}"

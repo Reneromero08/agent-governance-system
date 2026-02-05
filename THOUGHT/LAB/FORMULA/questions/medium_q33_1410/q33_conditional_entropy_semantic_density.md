@@ -395,7 +395,7 @@ The term is not a heuristic booster — it's the semantic payload, countable via
 ### Internal
 - `LAW/CANON/SEMANTIC/GOV_IR_SPEC.md` — concept_unit definition (Section 7)
 - `LAW/CANON/SEMANTIC/SPC_SPEC.md` — CDR definition (Section 8.2)
-- `LAW/CANON/SEMANTIC/CODEBOOK_SYNC_PROTOCOL.md` — H(X|S) measurement (Section 10)
+- `LAW/CANON/SEMANTIC/CODEBOOK_SYNC_PROTOCOL.md` — H(X|S) measurement (see CODEBOOK_SYNC_IMPLEMENTATION.md Section 10)
 - `THOUGHT/LAB/FORMULA/questions/critical/q01_why_grad_s.md` — E/∇S derivation
 - `THOUGHT/LAB/FORMULA/questions/high_priority/q35_markov_blankets.md` — Blanket alignment
 - `THOUGHT/LAB/FORMULA/research/RESULTS_SUMMARY.md` — σ^Df empirical validation

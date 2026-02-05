@@ -101,7 +101,7 @@ class SemanticNetworkHub:
     def _verify_cassette_sync(self, handshake: Dict) -> Dict:
         """Verify cassette's sync tuple matches hub's.
 
-        Per CODEBOOK_SYNC_PROTOCOL Section 5.1: Exact match required.
+        Per CODEBOOK_SYNC_PROTOCOL (CODEBOOK_SYNC_FAILURES.md Section 5.1): Exact match required.
 
         Args:
             handshake: Cassette handshake data
@@ -459,7 +459,7 @@ class SemanticNetworkHub:
     def broadcast_resync(self) -> Dict:
         """Resync all cassettes in the network.
 
-        Per CODEBOOK_SYNC_PROTOCOL Section 6.3: Network-wide sync.
+        Per CODEBOOK_SYNC_PROTOCOL (CODEBOOK_SYNC_CASSETTE.md Section 6.3): Network-wide sync.
 
         Returns:
             Dict with resync results for all cassettes

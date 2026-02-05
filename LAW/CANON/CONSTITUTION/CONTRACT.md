@@ -32,7 +32,7 @@ This document defines the non-negotiable rules and the authority gradient for th
    - All INBOX documents MUST include content hash: `<!-- CONTENT_HASH: <sha256> -->`
    - INBOX documents SHOULD use @Symbol references to CORTEX instead of duplicating content
    - Pre-commit hook enforces INBOX placement and hash requirements
-   See `LAW/CANON/POLICY/INBOX_POLICY.md` for full policy.
+   See `LAW/CANON/POLICY/DOCUMENT_POLICY.md` for full policy.
 
 4. **No behavior change without ceremony.** Any change to the behavior of the system must:
    - create an ADR (Architecture Decision Record) under `LAW/CONTEXT/decisions/` to document the decision, rationale, and consequences (required for governance decisions; recommended for significant code changes);

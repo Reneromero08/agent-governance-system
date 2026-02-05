@@ -61,7 +61,8 @@ if ($config.allowed_prefixes) {
 }
 
 if ($token -eq "CHANGE_ME") {
-    Write-Log "Token is still CHANGE_ME. Update powershell_bridge_config.json" "WARN"
+    Write-Log "SECURITY: Token is still CHANGE_ME. Update powershell_bridge_config.json before starting." "ERROR"
+    throw "SECURITY: Bridge token not configured. Update powershell_bridge_config.json"
 }
 
 $listener = New-Object System.Net.HttpListener

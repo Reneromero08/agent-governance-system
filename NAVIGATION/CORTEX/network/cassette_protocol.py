@@ -85,7 +85,7 @@ class DatabaseCassette(ABC):
     def get_sync_tuple(self) -> Dict:
         """Return sync tuple for codebook synchronization.
 
-        Per CODEBOOK_SYNC_PROTOCOL Section 6.4:
+        Per CODEBOOK_SYNC_PROTOCOL (CODEBOOK_SYNC_CASSETTE.md Section 6.4):
         - codebook_id: Identifier for the codebook
         - codebook_sha256: Hash for mismatch detection
         - codebook_semver: Version for compatibility checking
@@ -118,7 +118,7 @@ class DatabaseCassette(ABC):
     def verify_sync(self, remote_sync_tuple: Dict) -> Dict:
         """Verify sync against a remote sync tuple.
 
-        Per CODEBOOK_SYNC_PROTOCOL Section 5.1: Exact match policy.
+        Per CODEBOOK_SYNC_PROTOCOL (CODEBOOK_SYNC_FAILURES.md Section 5.1): Exact match policy.
 
         Args:
             remote_sync_tuple: Sync tuple from remote party
@@ -180,7 +180,7 @@ class DatabaseCassette(ABC):
         }
 
     def get_blanket_health(self, session_ttl: int = 3600, elapsed_seconds: float = 0) -> Dict:
-        """Get blanket health metrics per CODEBOOK_SYNC_PROTOCOL Section 8.4.
+        """Get blanket health metrics per CODEBOOK_SYNC_PROTOCOL (CODEBOOK_SYNC_SESSION.md Section 8.4).
 
         Args:
             session_ttl: Session TTL in seconds

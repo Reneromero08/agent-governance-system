@@ -43,7 +43,7 @@ def check_dependencies():
             resp = requests.get("http://localhost:11434/api/tags", timeout=2)
             if resp.status_code != 200:
                 missing.append("ollama (not responding)")
-        except:
+        except (requests.RequestException, ConnectionError, OSError):
             missing.append("ollama (not running - start with 'ollama serve')")
     except ImportError:
         missing.append("requests")
@@ -127,7 +127,7 @@ def run_demo(model_name: str, context_window: int):
     if db_path.exists():
         try:
             db_path.unlink()
-        except:
+        except (OSError, IOError):
             pass
 
     # Initialize components

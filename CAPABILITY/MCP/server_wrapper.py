@@ -19,8 +19,9 @@ import json
 from pathlib import Path
 
 from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+from CAPABILITY.PRIMITIVES.paths import repo_root as _repo_root
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = _repo_root()
 SERVER_SCRIPT = REPO_ROOT / "CAPABILITY" / "MCP" / "server.py"
 PID_FILE = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "mcp_logs" / "server.pid"
 LOG_DIR = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "mcp_logs"
@@ -58,26 +59,30 @@ def start_server():
     writer.mkdir_durable(LOG_DIR, parents=True, exist_ok=True)
 
     # Start server as subprocess
-    if sys.platform == "win32":
-        # Windows: Use CREATE_NEW_PROCESS_GROUP to detach
-        process = subprocess.Popen(
-            [sys.executable, str(SERVER_SCRIPT)],
-            cwd=str(REPO_ROOT),
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-            stderr=open(LOG_DIR / "server_stderr.log", "a"),
-            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS
-        )
-    else:
-        # Unix: Use nohup-like approach
-        process = subprocess.Popen(
-            [sys.executable, str(SERVER_SCRIPT)],
-            cwd=str(REPO_ROOT),
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-            stderr=open(LOG_DIR / "server_stderr.log", "a"),
-            start_new_session=True
-        )
+    stderr_log = open(LOG_DIR / "server_stderr.log", "a")
+    try:
+        if sys.platform == "win32":
+            # Windows: Use CREATE_NEW_PROCESS_GROUP to detach
+            process = subprocess.Popen(
+                [sys.executable, str(SERVER_SCRIPT)],
+                cwd=str(REPO_ROOT),
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=stderr_log,
+                creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS
+            )
+        else:
+            # Unix: Use nohup-like approach
+            process = subprocess.Popen(
+                [sys.executable, str(SERVER_SCRIPT)],
+                cwd=str(REPO_ROOT),
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=stderr_log,
+                start_new_session=True
+            )
+    finally:
+        stderr_log.close()
 
     # Save PID
     writer.write_durable(PID_FILE, str(process.pid))

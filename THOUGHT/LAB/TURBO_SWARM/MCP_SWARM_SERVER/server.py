@@ -324,7 +324,7 @@ class SwarmMCPServer:
         for p in sorted(target_dir.glob("*.json"), key=os.path.getmtime, reverse=True)[:limit]:
             try:
                 tasks.append(json.loads(p.read_text(encoding="utf-8")))
-            except:
+            except (OSError, IOError, json.JSONDecodeError, ValueError):
                 continue
 
         return {"content": [{"type": "text", "text": json.dumps({"tasks": tasks}, indent=2)}]}
@@ -351,7 +351,7 @@ class SwarmMCPServer:
                 if data.get("task_id") == task_id:
                     task_file = p
                     break
-            except:
+            except (OSError, IOError, json.JSONDecodeError, ValueError):
                 continue
 
         if not task_file:
@@ -393,7 +393,7 @@ class SwarmMCPServer:
                 if data.get("task_id") == task_id:
                     task_file = p
                     break
-            except:
+            except (OSError, IOError, json.JSONDecodeError, ValueError):
                 continue
 
         if not task_file:
@@ -632,7 +632,7 @@ def main():
         try:
             data = json.loads(content)
             print(f"  Board: {data.get('board')}, Count: {data.get('count')}")
-        except:
+        except (json.JSONDecodeError, ValueError):
             print(f"  Output: {content[:100]}...")
 
         # Test agent_inbox_list
@@ -649,7 +649,7 @@ def main():
         try:
             data = json.loads(content)
             print(f"  Tasks: {len(data.get('tasks', []))}")
-        except:
+        except (json.JSONDecodeError, ValueError):
             print(f"  Output: {content[:100]}...")
 
         print("\n" + "=" * 60)

@@ -41,6 +41,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+from .canonical_json import canonical_json, sha256_hex
+
 # Schema version - must match cassette_receipt.schema.json
 SCHEMA_VERSION = "1.0.0"
 
@@ -60,20 +62,13 @@ VALID_OPERATIONS = frozenset([
 # ==============================================================================
 
 
-def canonical_json(obj: Any) -> str:
-    """Convert object to canonical JSON string.
-
-    Args:
-        obj: Object to serialize
-
-    Returns:
-        Canonical JSON with sorted keys and minimal separators
-    """
-    return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-
-
-def canonical_json_bytes(obj: Any) -> bytes:
+def canonical_json_bytes(obj):
+    # type: (Any) -> bytes
     """Convert object to canonical JSON bytes with trailing newline.
+
+    NOTE: This deliberately adds a trailing newline, which differs from
+    the base canonical_json_bytes in canonical_json.py.  Changing this
+    would break existing receipt hashes.
 
     Args:
         obj: Object to serialize
@@ -82,18 +77,6 @@ def canonical_json_bytes(obj: Any) -> bytes:
         UTF-8 encoded canonical JSON with exactly one trailing newline
     """
     return (canonical_json(obj) + "\n").encode("utf-8")
-
-
-def sha256_hex(data: bytes) -> str:
-    """Compute SHA256 hex digest.
-
-    Args:
-        data: Bytes to hash
-
-    Returns:
-        SHA256 hex digest (64 lowercase hex chars)
-    """
-    return hashlib.sha256(data).hexdigest()
 
 
 # ==============================================================================

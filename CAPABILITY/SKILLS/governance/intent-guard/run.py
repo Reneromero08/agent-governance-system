@@ -16,6 +16,7 @@ from CAPABILITY.PIPELINES.pipeline_runtime import _slug  # type: ignore
 from CAPABILITY.PRIMITIVES.restore_proof import canonical_json_bytes  # type: ignore
 
 from CAPABILITY.TOOLS.utilities.intent import generate_intent
+from CAPABILITY.SKILLS._shared.validate_input import validate_skill_input
 
 try:
     from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
@@ -64,6 +65,16 @@ def _setup_pipeline(pipeline_id: str, runs_root: str, writer: Any) -> Path:
 
 def main(input_path: Path, actual_path: Path) -> int:
     data = json.loads(input_path.read_text(encoding="utf-8"))
+
+    _INPUT_SCHEMA = {
+        "required": ["pipeline_id"],
+        "types": {"pipeline_id": str, "mode": str, "allow_repo_write": bool, "run_id": str},
+    }
+    ok, errs = validate_skill_input(data, _INPUT_SCHEMA)
+    if not ok:
+        for e in errs:
+            print("[intent-guard] WARNING: %s" % e)
+
     pipeline_id = data["pipeline_id"]
     runs_root = data.get("runs_root", "LAW/CONTRACTS/_runs")
     mode = data.get("mode", "artifact-only")

@@ -111,7 +111,7 @@ class AgentsWidget(Static):
                     progress = logs[-1]["message"][:25] if logs else "Starting..."
                     tid = data.get("task_id", "?")[-8:]
                     active_tasks[agent] = {"tid": tid, "progress": progress}
-                except:
+                except (OSError, IOError, json.JSONDecodeError, ValueError, KeyError, IndexError):
                     pass
         
         # Get Ollama models
@@ -121,7 +121,8 @@ class AgentsWidget(Static):
             with urllib.request.urlopen(req, timeout=2) as resp:
                 models_data = json.loads(resp.read().decode())
                 models = [m["name"] for m in models_data.get("models", [])]
-        except:
+        except Exception:
+            # Intentionally broad: covers ImportError, network errors, JSON parse errors
             models = ["(Ollama offline)"]
         
         # Display each model
@@ -176,7 +177,7 @@ class LogWidget(Log):
                             # Sanitize to ASCII-safe for Windows
                             safe_line = line.encode('ascii', 'replace').decode('ascii')
                             self.write_line(safe_line)
-        except:
+        except (OSError, IOError):
             pass
 
 
@@ -303,13 +304,13 @@ class SwarmDashboard(App):
             
             try:
                 self.query_one(LogWidget).write_line(">>> SWARM LAUNCHED")
-            except:
-                pass
+            except Exception:
+                pass  # Widget may not be mounted yet
         except Exception as e:
             try:
                 self.query_one(LogWidget).write_line(f"[ERR] Spawn failed: {e}")
-            except:
-                pass
+            except Exception:
+                pass  # Widget may not be mounted yet
     
     def run_cmd(self, cmd: str, silent: bool = False) -> None:
         try:
@@ -325,8 +326,8 @@ class SwarmDashboard(App):
             if not silent:
                 log = self.query_one(LogWidget)
                 log.write_line(f">>> {cmd.upper()}")
-        except:
-            pass
+        except Exception:
+            pass  # Subprocess launch or widget access may fail
     
     def reset_stuck_tasks(self) -> None:
         """Reset tasks that have been active for more than 30 minutes."""
@@ -362,9 +363,9 @@ class SwarmDashboard(App):
                         log = self.query_one(LogWidget)
                         tid = data.get("task_id", "?")
                         log.write_line(f"[RESET] {tid} was stuck for {int(elapsed_minutes)}m")
-                    except:
-                        pass
-            except:
+                    except Exception:
+                        pass  # Widget may not be mounted yet
+            except (OSError, IOError, json.JSONDecodeError, ValueError):
                 pass
     
     def prune_ledger(self) -> None:
@@ -414,7 +415,7 @@ class SwarmDashboard(App):
             if archive_path.exists():
                 try:
                     existing = json.loads(archive_path.read_text(encoding="utf-8"))
-                except:
+                except (OSError, IOError, json.JSONDecodeError, ValueError):
                     pass
             existing.extend(archived)
             archive_path.write_text(json.dumps(existing, indent=2), encoding="utf-8")
@@ -423,9 +424,9 @@ class SwarmDashboard(App):
             try:
                 log = self.query_one(LogWidget)
                 log.write_line(f"[PRUNE] Archived {len(archived)} tasks, {len(active)} remain")
-            except:
-                pass
-        except:
+            except Exception:
+                pass  # Widget may not be mounted yet
+        except (OSError, IOError, json.JSONDecodeError, ValueError):
             pass
     
     def action_quit(self) -> None:
@@ -443,8 +444,8 @@ class SwarmDashboard(App):
         try:
             log = self.query_one(LogWidget)
             log.write_line(f"[GUARD] Auto-guard is now {status}")
-        except:
-            pass
+        except Exception:
+            pass  # Widget may not be mounted yet
     
     def action_kill_all(self) -> None:
         """Kill all running swarm orchestrator processes."""
@@ -476,19 +477,19 @@ class SwarmDashboard(App):
                         new_path = PENDING_DIR / f.name
                         new_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
                         f.unlink()
-                    except:
+                    except (OSError, IOError, json.JSONDecodeError, ValueError):
                         pass
-            
+
             try:
                 log = self.query_one(LogWidget)
                 log.write_line("[KILL] All swarms stopped, guard OFF")
-            except:
-                pass
+            except Exception:
+                pass  # Widget may not be mounted yet
         except Exception as e:
             try:
                 self.query_one(LogWidget).write_line(f"[ERR] Kill failed: {e}")
-            except:
-                pass
+            except Exception:
+                pass  # Widget may not be mounted yet
 
 
 if __name__ == "__main__":

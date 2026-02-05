@@ -16,13 +16,14 @@ from pathlib import Path
 from typing import Dict, List, Optional
 
 from .primitives import compute_hash, get_validator_build_id, VALIDATOR_SEMVER, SUPPORTED_VALIDATOR_SEMVERS
+from CAPABILITY.PRIMITIVES.paths import repo_root as _repo_root
 
 
 # =============================================================================
 # PATH CONSTANTS
 # =============================================================================
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = _repo_root()
 
 # Contracts directory (runs/ledgers)
 CONTRACTS_DIR = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs"
@@ -50,6 +51,9 @@ CATALYTIC_ROOTS = [
 FORBIDDEN_ROOTS = [
     "LAW/CANON/",
     "AGENTS.md",
+    ".git/",
+    ".github/",
+    ".env",
 ]
 
 
@@ -268,8 +272,19 @@ def verify_post_run_outputs(run_id: str) -> Dict:
             }]
         }
 
-    with open(task_spec_path) as f:
-        task_spec = json.load(f)
+    try:
+        with open(task_spec_path) as f:
+            task_spec = json.load(f)
+    except json.JSONDecodeError as e:
+        return {
+            "valid": False,
+            "errors": [{
+                "code": "INVALID_JSON",
+                "message": f"TASK_SPEC.json contains invalid JSON: {e}",
+                "path": "/",
+                "details": {"run_id": run_id, "expected": str(task_spec_path)}
+            }]
+        }
 
     outputs = task_spec.get("outputs", {})
     durable_paths = outputs.get("durable_paths", [])
@@ -386,8 +401,20 @@ def generate_output_hashes(run_id: str) -> Dict:
             "hashes": {}
         }
 
-    with open(task_spec_path) as f:
-        task_spec = json.load(f)
+    try:
+        with open(task_spec_path) as f:
+            task_spec = json.load(f)
+    except json.JSONDecodeError as e:
+        return {
+            "valid": False,
+            "errors": [{
+                "code": "INVALID_JSON",
+                "message": f"TASK_SPEC.json contains invalid JSON: {e}",
+                "path": "/",
+                "details": {"run_id": run_id}
+            }],
+            "hashes": {}
+        }
 
     outputs_spec = task_spec.get("outputs", {})
     durable_paths = outputs_spec.get("durable_paths", [])

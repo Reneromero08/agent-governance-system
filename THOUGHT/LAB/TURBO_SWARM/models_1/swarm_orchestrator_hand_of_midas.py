@@ -177,7 +177,7 @@ class OllamaClient:
             r = self._session().get(self.cfg.ollama_tags, timeout=5)
             r.raise_for_status()
             return [m.get("name") for m in r.json().get("models", [])]
-        except: return []
+        except (requests.RequestException, ConnectionError, OSError, ValueError, KeyError): return []
 
     def generate(self, prompt: str, min_tokens: int = None) -> str:
         options = {
@@ -286,7 +286,7 @@ def tool_grep(cfg: ClawConfig, pattern: str, root: str = ".", max_hits: int = 50
                     if rx.search(line):
                         res.append(f"{p.relative_to(cfg.repo_root)}:{i}:{line.strip()}")
                         if len(res) >= max_hits: break
-            except: pass
+            except (OSError, IOError): pass
             if len(res) >= max_hits: break
     except Exception as e: return f"Error: {e}"
     return "\n".join(res) if res else "No hits."
@@ -312,7 +312,7 @@ def extract_tool_call(text: str) -> Optional[Dict]:
     m = re.search(r"```tool\s*\n(.*?)\n```", text, re.DOTALL | re.IGNORECASE)
     if not m: return None
     try: return json.loads(m.group(1))
-    except: return None
+    except (json.JSONDecodeError, ValueError): return None
 
 def extract_python(text: str) -> Optional[str]:
     # Try standard markdown first

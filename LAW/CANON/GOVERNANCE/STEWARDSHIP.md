@@ -61,7 +61,7 @@ Stewardship contacts are configured in `.steward.json` (gitignored for privacy):
 ## Escalation Procedure
 
 1. **Agent detects issue** outside its authority
-2. **Agent stops and documents** in `LAW/CONTEXT/open/`, notifies user, waits
+2. **Agent stops and documents** in `LAW/CONTEXT/decisions/`, notifies user, waits
 3. **Human reviews** and decides (documents in ADR if generalizable)
 4. **Resolution** — agent receives decision and proceeds
 

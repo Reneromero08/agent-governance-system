@@ -10,6 +10,7 @@ if str(REPO_ROOT) not in sys.path:
 from CAPABILITY.PRIMITIVES import (
     SkillRegistry,
     canonical_json,
+    canonical_json_bytes,
     resolve_adapter,
     SkillNotFoundError,
     RegistryError,
@@ -22,8 +23,9 @@ def test_skill_not_found_raises():
 
 def test_canonical_json_determinism():
     data = {"b": 2, "a": 1}
-    # canonical_json returns BYTES and is COMPACT (no spaces)
-    assert canonical_json(data) == b'{"a":1,"b":2}'
+    # canonical_json returns str; canonical_json_bytes returns bytes
+    assert canonical_json(data) == '{"a":1,"b":2}'
+    assert canonical_json_bytes(data) == b'{"a":1,"b":2}'
 
     data2 = {"a": 1, "b": 2}
-    assert canonical_json(data) == canonical_json(data2)  # Fixed: was comparing canonical_json(data) with canonical_json(data2)
+    assert canonical_json(data) == canonical_json(data2)

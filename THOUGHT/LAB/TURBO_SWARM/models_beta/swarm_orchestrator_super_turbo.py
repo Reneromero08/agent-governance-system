@@ -57,7 +57,7 @@ def preload_models():
                 timeout=30
             )
             print(" ✅")
-        except:
+        except (requests.RequestException, ConnectionError, OSError):
             print(" ⚠️")
     print()
 
@@ -71,7 +71,7 @@ def get_live_model(requested):
             for e in existing:
                 if e.startswith(requested.split(':')[0]): return e
         return TIER_2_FOREMAN
-    except:
+    except (requests.RequestException, ConnectionError, OSError, ValueError, KeyError):
         return TIER_2_FOREMAN
 
 def get_cached_file(file_path: str) -> str:
@@ -110,7 +110,7 @@ def _compile_python(path: Path) -> bool:
             timeout=5
         )
         return result.returncode == 0
-    except:
+    except (OSError, subprocess.SubprocessError, subprocess.TimeoutExpired):
         return False
 
 def run_agent_raw(model: str, prompt: str, timeout: int = 90) -> str:
@@ -131,11 +131,11 @@ def run_agent_raw(model: str, prompt: str, timeout: int = 90) -> str:
                 },
                 timeout=timeout
             )
-        
+
         if response.status_code == 200:
             return response.json().get('response', '')
         return ""
-    except:
+    except (requests.RequestException, ConnectionError, OSError, ValueError):
         return ""
 
 # --------------------------------------------------------------------------------
@@ -220,13 +220,13 @@ def process_task(task):
         tmp_path = Path(str(target_path) + ".swarm_tmp")
         try:
             tmp_path.write_text(fixed_code, encoding='utf-8')
-            
+
             if _compile_python(tmp_path) and fast_verify(fixed_code):
                 tmp_path.replace(target_path)
                 return "success", file_path, "ant_direct", time.monotonic() - start_time, {"model": TIER_1_ANT}
-            
+
             tmp_path.unlink(missing_ok=True)
-        except:
+        except (OSError, IOError):
             if tmp_path.exists(): tmp_path.unlink()
     
     # ESCALATION: Ant failed, use Architect planning

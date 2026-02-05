@@ -231,7 +231,7 @@ def pca_winding_angle(path: np.ndarray, closed: bool = True) -> float:
     try:
         U, S, Vt = np.linalg.svd(centered, full_matrices=False)
         proj_2d = centered @ Vt[:2].T
-    except:
+    except (np.linalg.LinAlgError, ValueError):
         return 0.0
 
     if proj_2d.shape[1] < 2:

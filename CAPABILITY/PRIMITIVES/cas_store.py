@@ -17,6 +17,8 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT))
 
+from CAPABILITY.PRIMITIVES.canonical_json import canonical_json_bytes as canonical_json
+
 # Exit codes
 EXIT_SUCCESS = 0
 EXIT_ERROR = 1
@@ -60,10 +62,6 @@ def sha256_file(path: Path) -> str:
 
 def sha256_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
-
-
-def canonical_json(obj) -> bytes:
-    return json.dumps(obj, separators=(',', ':'), sort_keys=True).encode('utf-8')
 
 
 def normalize_path(rel: str) -> str:

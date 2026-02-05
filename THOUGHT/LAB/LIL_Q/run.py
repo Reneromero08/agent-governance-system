@@ -95,7 +95,8 @@ Respond authentically from your position in meaning-space."""
 
         result = ollama.generate(model='dolphin3', prompt=prompt, system=system)
         return result['response'].strip()
-    except:
+    except Exception:
+        # Intentionally broad: covers ImportError, network errors, and ollama API failures
         pass
 
     # Fallback: just echo with E

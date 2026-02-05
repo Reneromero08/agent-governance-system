@@ -31,11 +31,11 @@ Usage:
 
 from __future__ import annotations
 
-import hashlib
-import json
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Dict, Optional
+
+from .canonical_json import canonical_json, sha256_hex
 
 # Schema version
 SCHEMA_VERSION = "1.0.0"
@@ -50,21 +50,6 @@ VALID_CACHE_OPERATIONS = frozenset([
 
 # Token cost for warm query (hash confirmation only)
 TOKENS_WARM = 1
-
-
-# ==============================================================================
-# CANONICAL JSON UTILITIES
-# ==============================================================================
-
-
-def canonical_json(obj: Any) -> str:
-    """Convert object to canonical JSON string."""
-    return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-
-
-def sha256_hex(data: bytes) -> str:
-    """Compute SHA256 hex digest."""
-    return hashlib.sha256(data).hexdigest()
 
 
 # ==============================================================================

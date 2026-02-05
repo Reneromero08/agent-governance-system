@@ -117,7 +117,7 @@ def get_governor_hint() -> Optional[str]:
         data = json.loads(res["result"]["content"][0]["text"])
         if data["items"]:
             return data["items"][0]["message"]
-    except:
+    except (json.JSONDecodeError, ValueError, KeyError, IndexError, TypeError):
         pass
     return None
 

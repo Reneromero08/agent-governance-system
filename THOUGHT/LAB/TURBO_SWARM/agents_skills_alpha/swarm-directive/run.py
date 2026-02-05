@@ -102,7 +102,7 @@ def send_directive(input_file: str, output_file: str):
         try:
             with open(output_file, 'w') as f:
                 json.dump(error_output, f, indent=2)
-        except:
+        except (OSError, IOError):
             pass
 
         print(json.dumps(error_output, indent=2), file=sys.stderr)

@@ -328,7 +328,7 @@ def main():
         resp = requests.get(f"{LLM_STUDIO_BASE}/v1/models", timeout=5)
         models = [m["id"] for m in resp.json().get("data", [])]
         print(f"Available models: {models}")
-    except:
+    except (requests.RequestException, ConnectionError, OSError, ValueError, KeyError):
         print(f"Error: Cannot connect to LLM Studio at {LLM_STUDIO_BASE}")
         sys.exit(1)
 
