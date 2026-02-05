@@ -25,6 +25,13 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from .firewall_writer import PackerWriter
 
+# Import WSL compatibility module (if available)
+try:
+    from CAPABILITY.PRIMITIVES.wsl_compat import get_temp_directory
+    HAS_WSL_COMPAT = True
+except ImportError:
+    HAS_WSL_COMPAT = False
+
 # Proof directories (relative to project root)
 PROOFS_DIR = Path("NAVIGATION/PROOFS")
 RUNS_DIR = PROOFS_DIR / "_RUNS"
@@ -56,8 +63,14 @@ def _run_command(
     """
     env = os.environ.copy()
     # Avoid pytest/capture tmpfile issues by forcing a stable temp root.
+    # Use platform-safe temp directory from wsl_compat if available.
     try:
-        tmp_root = (cwd / "LAW" / "CONTRACTS" / "_runs" / "pytest_tmp").resolve()
+        if HAS_WSL_COMPAT:
+            # Use platform-aware temp directory
+            tmp_root = get_temp_directory().resolve()
+        else:
+            # Fallback: use repo-relative path
+            tmp_root = (cwd / "LAW" / "CONTRACTS" / "_runs" / "pytest_tmp").resolve()
         tmp_root.mkdir(parents=True, exist_ok=True)
         env["TMPDIR"] = str(tmp_root)
         env["TMP"] = str(tmp_root)
