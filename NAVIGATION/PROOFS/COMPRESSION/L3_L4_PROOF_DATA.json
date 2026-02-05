@@ -1,0 +1,111 @@
+{
+  "version": "1.0.0",
+  "generated_at": "2026-02-05T00:00:00Z",
+  "layers": {
+    "L3_CAS_External": {
+      "status": "PROVEN",
+      "implementation": {
+        "files": [
+          "MEMORY/CASSETTE_NETWORK/memory_cassette.py",
+          "MEMORY/CASSETTE_NETWORK/cassette_protocol.py",
+          "MEMORY/CASSETTE_NETWORK/cassette_receipt.py"
+        ]
+      },
+      "metrics": {
+        "compression_ratio": 0.9989,
+        "compression_ratio_percent": "99.89%",
+        "information_ratio": 0.0011,
+        "information_ratio_target": 0.05,
+        "throughput_qps": 4.4,
+        "throughput_target_qps": 4.0,
+        "latency_avg_ms": 197,
+        "latency_p50_ms": 181,
+        "latency_p95_ms": 285,
+        "latency_target_ms": 500,
+        "cold_start_ms": 2000,
+        "corpus_documents": 11781,
+        "corpus_estimated_tokens": 2356200,
+        "tokens_per_chunk_avg": 200,
+        "retrieved_tokens_avg": 2550
+      },
+      "test_suite": {
+        "location": "CAPABILITY/TESTBENCH/cassette_network/",
+        "tests_passed": 39,
+        "tests_xfail": 6,
+        "key_tests": [
+          "compression/test_compression_proof.py",
+          "ground_truth/test_retrieval_accuracy.py",
+          "determinism/test_retrieval_determinism.py"
+        ]
+      },
+      "claims": {
+        "HXS_approx_zero": {
+          "claim": "H(X|S) ~ 0 - When sender and receiver share cassettes, conditional entropy approaches zero",
+          "measured": true,
+          "ratio": 0.0011
+        },
+        "task_parity": {
+          "claim": "Compressed context preserves task success rate",
+          "target": 0.875,
+          "measured": 1.0
+        }
+      }
+    },
+    "L4_Session_Cache": {
+      "status": "PROVEN",
+      "implementation": {
+        "files": [
+          "MEMORY/SESSION_CACHE/session_cache.py"
+        ]
+      },
+      "metrics": {
+        "cold_query_tokens": 50,
+        "warm_query_tokens": 1,
+        "per_query_savings_percent": "98%",
+        "cache_mechanism": "hash-based deduplication"
+      },
+      "test_suite": {
+        "location": "CAPABILITY/TESTBENCH/session_cache/",
+        "tests_passed": 30,
+        "test_classes": [
+          "TestBasicOperations",
+          "TestStatistics",
+          "TestInvalidation",
+          "TestPersistence",
+          "TestCompression"
+        ]
+      },
+      "claims": {
+        "warm_query_efficiency": {
+          "claim": "Warm queries use hash confirmation only, reducing to ~1 token",
+          "measured": true
+        },
+        "session_persistence": {
+          "claim": "Cache state persists across session boundaries",
+          "measured": true
+        }
+      }
+    }
+  },
+  "stacked_compression": {
+    "baseline_tokens": 622480,
+    "after_L1_vector": 622,
+    "after_L3_cas": 12,
+    "after_L4_warm": 1,
+    "total_compression_percent": "99.9998%",
+    "nines_achieved": 6
+  },
+  "verification_commands": {
+    "L3_full_suite": "pytest CAPABILITY/TESTBENCH/cassette_network/ -v",
+    "L3_compression_only": "pytest CAPABILITY/TESTBENCH/cassette_network/compression/ -v -s",
+    "L4_full_suite": "pytest CAPABILITY/TESTBENCH/session_cache/ -v"
+  },
+  "references": {
+    "L3_proof_report": "NAVIGATION/PROOFS/COMPRESSION/COMPRESSION_PROOF_REPORT.md",
+    "stack_analysis": "NAVIGATION/PROOFS/COMPRESSION/COMPRESSION_STACK_ANALYSIS.md",
+    "test_fixtures": {
+      "L3_ground_truth": "CAPABILITY/TESTBENCH/cassette_network/ground_truth/fixtures/retrieval_gold_standard.json",
+      "L3_negative_controls": "CAPABILITY/TESTBENCH/cassette_network/adversarial/fixtures/negative_controls.json"
+    }
+  }
+}

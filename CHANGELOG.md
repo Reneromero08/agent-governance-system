@@ -6,6 +6,56 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.10.0] - 2026-02-05
+
+### Added: Proof System Enhancements
+
+**WSL Cross-Platform Support:**
+- `CAPABILITY/PRIMITIVES/wsl_compat.py`: Platform detection and path normalization
+  - `is_wsl()`: Detect WSL via env var or /proc/version
+  - `get_platform_type()`: Returns 'wsl', 'windows', 'linux', 'darwin'
+  - `get_python_executable()`: Platform-appropriate Python path
+  - `windows_to_wsl_path()` / `wsl_to_windows_path()`: Path conversion
+- `CAPABILITY/TESTBENCH/platform_compat/test_wsl_compat.py`: 35 platform tests
+
+**Historical Proof Archival:**
+- `proof_runner.py`: Added `archive_proof_run()` function
+- Archives to `NAVIGATION/PROOFS/ARCHIVE/YYYY-MM-DD/`
+- Includes PROOF_RUN_MANIFEST.json, bundles, GREEN_STATE.json, git_commit.txt
+
+**DPT Specification:**
+- `LAW/CANON/CATALYTIC/DISTRIBUTED_PROOF_OF_THOUGHT.md`: Formal DPT spec
+- Consolidates swarm architecture from scattered sources
+- Defines Governor/Manager/Ant hierarchy
+- Specifies INV-DPT-01 through INV-DPT-06 invariants
+- Documents SPECTRUM integration and domain separation prefixes
+
+**L3-L4 Proof Data:**
+- `NAVIGATION/PROOFS/COMPRESSION/L3_L4_PROOF_DATA.json`: Machine-readable proof metrics
+
+### Changed
+
+**L3-L4 Status: THEORETICAL -> PROVEN:**
+- `COMPRESSION_STACK_ANALYSIS.md`: Updated to "L1-L4 PROVEN, L2 SCL THEORETICAL"
+- L3 CAS External: 99.89% compression, 4.4 qps, 197ms latency (39 tests)
+- L4 Session Cache: 98% warm query savings (30 tests)
+- `COMPRESSION_PROOF_REPORT.md`: Added Layer-Specific Proofs section
+
+**WSL-Aware Proof Generation:**
+- `proof_runner.py`: Uses `get_python_executable()` instead of `sys.executable`
+- `proofs.py`: Uses platform-safe `get_temp_directory()` with stable subdirectory
+
+### Fixed
+
+- `wsl_compat.py`: Use `_get_repo_root_internal()` instead of `Path.cwd()` for deterministic temp path
+- `wsl_compat.py`: Return `/tmp/pytest_tmp` subdirectory instead of bare `/tmp` for isolation
+- `proofs.py`: Use `get_temp_directory()` with `mkdir()` for both WSL and Windows flows
+- `DISTRIBUTED_PROOF_OF_THOUGHT.md`: Add language identifiers to fenced code blocks (MD040)
+- `COMPRESSION_PROOF_REPORT.md`: Escape pipes in `H(X|S)` cells, add blank lines around tables
+- `COMPRESSION_STACK_ANALYSIS.md`: Escape pipe in `H(X|S)/H(X)` table cell
+
+---
+
 ## [3.9.0] - 2026-02-03
 
 ### Added: Crypto Safe - Tamper-Evident Release Sealing

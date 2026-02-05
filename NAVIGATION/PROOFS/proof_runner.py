@@ -26,6 +26,7 @@ from __future__ import annotations
 import datetime
 import hashlib
 import json
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -35,6 +36,8 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
+from CAPABILITY.PRIMITIVES.wsl_compat import get_python_executable
+
 # Proof output directories
 PROOFS_DIR = REPO_ROOT / "NAVIGATION" / "PROOFS"
 COMPRESSION_DIR = PROOFS_DIR / "COMPRESSION"
@@ -42,6 +45,9 @@ CATALYTIC_DIR = PROOFS_DIR / "CATALYTIC"
 
 # Manifest path
 PROOF_MANIFEST_PATH = PROOFS_DIR / "PROOF_MANIFEST.json"
+
+# Archive directory for historical proof runs
+ARCHIVE_DIR = PROOFS_DIR / "ARCHIVE"
 
 # Proof runner scripts
 COMPRESSION_PROOF_RUNNER = COMPRESSION_DIR / "proof_compression_run.py"
@@ -103,7 +109,7 @@ class ProofRunner:
 
         try:
             result = subprocess.run(
-                [sys.executable, str(COMPRESSION_PROOF_RUNNER)],
+                [get_python_executable(), str(COMPRESSION_PROOF_RUNNER)],
                 capture_output=True,
                 timeout=600,  # 10 minute timeout
                 cwd=str(REPO_ROOT),
@@ -155,7 +161,7 @@ class ProofRunner:
 
         try:
             result = subprocess.run(
-                [sys.executable, str(CATALYTIC_PROOF_RUNNER)],
+                [get_python_executable(), str(CATALYTIC_PROOF_RUNNER)],
                 capture_output=True,
                 timeout=300,  # 5 minute timeout
                 cwd=str(REPO_ROOT),
@@ -265,6 +271,7 @@ def run_proofs_for_pack(
     pack_id: Optional[str] = None,
     bundle_id: Optional[str] = None,
     fail_on_error: bool = True,
+    archive: bool = True,
 ) -> Dict[str, Any]:
     """
     Convenience function to run all proofs for pack generation.
@@ -273,6 +280,7 @@ def run_proofs_for_pack(
         pack_id: Pack identifier for binding
         bundle_id: Bundle identifier for binding
         fail_on_error: If True, raises exception on proof failure
+        archive: If True, archives proof run to dated directory
 
     Returns:
         Proof manifest dict
@@ -284,6 +292,13 @@ def run_proofs_for_pack(
     manifest = runner.run_all_proofs()
     runner.write_manifest(manifest)
 
+    # Archive proof run (non-critical, failures are silent)
+    if archive:
+        archive_path = archive_proof_run(manifest)
+        if archive_path:
+            manifest["archive_path"] = str(archive_path.relative_to(REPO_ROOT))
+            # Update on-disk manifest with archive_path
+            runner.write_manifest(manifest)
     if fail_on_error and manifest.get("status") == "FAIL":
         failed = [
             p["proof_type"]
@@ -333,6 +348,62 @@ def get_proof_artifacts() -> List[Dict[str, Any]]:
         })
 
     return artifacts
+
+
+def archive_proof_run(manifest: Dict[str, Any]) -> Optional[Path]:
+    """
+    Archive proof run to dated directory.
+
+    Creates a dated archive of the current proof run including:
+    - PROOF_RUN_MANIFEST.json (the manifest with artifact hashes)
+    - COMPRESSION_PROOF_BUNDLE.json (if exists)
+    - CATALYTIC_PROOF_BUNDLE.json (if exists)
+    - GREEN_STATE.json (if exists)
+    - git_commit.txt (current commit hash)
+
+    Args:
+        manifest: The proof manifest from run_all_proofs()
+
+    Returns:
+        Path to archive directory, or None if archival failed
+    """
+    try:
+        date_str = datetime.datetime.utcnow().strftime("%Y-%m-%d")
+        archive_path = ARCHIVE_DIR / date_str
+        archive_path.mkdir(parents=True, exist_ok=True)
+
+        # Write the proof run manifest
+        manifest_path = archive_path / "PROOF_RUN_MANIFEST.json"
+        manifest_path.write_text(
+            json.dumps(manifest, indent=2, sort_keys=True),
+            encoding="utf-8",
+        )
+
+        # Copy compression bundle if exists
+        compression_bundle = COMPRESSION_DIR / "PROOF_COMPRESSION_BUNDLE.json"
+        if compression_bundle.exists():
+            shutil.copy2(compression_bundle, archive_path / "COMPRESSION_PROOF_BUNDLE.json")
+
+        # Copy catalytic bundle if exists
+        catalytic_bundle = CATALYTIC_DIR / "PROOF_CATALYTIC_BUNDLE.json"
+        if catalytic_bundle.exists():
+            shutil.copy2(catalytic_bundle, archive_path / "CATALYTIC_PROOF_BUNDLE.json")
+
+        # Copy GREEN_STATE.json if exists
+        green_state = PROOFS_DIR / "GREEN_STATE.json"
+        if green_state.exists():
+            shutil.copy2(green_state, archive_path / "GREEN_STATE.json")
+
+        # Write git commit
+        git_rev = manifest.get("git_rev")
+        if git_rev:
+            (archive_path / "git_commit.txt").write_text(git_rev, encoding="utf-8")
+
+        return archive_path
+
+    except Exception:
+        # Archival is non-critical, don't fail the proof run
+        return None
 
 
 def main() -> int:

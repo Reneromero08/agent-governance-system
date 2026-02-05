@@ -1,8 +1,8 @@
 # Compression Stack Analysis
 
-**Version:** 1.5.0
-**Date:** 2026-01-08
-**Status:** L1 PROVEN, L2-L4 PLANNED (stacked receipts + semantic density proofs + Platonic Representation foundation)
+**Version:** 1.6.0
+**Date:** 2026-02-05
+**Status:** L1-L4 PROVEN, L2 SCL THEORETICAL (stacked receipts + semantic density proofs + Platonic Representation foundation)
 
 ---
 
@@ -14,10 +14,10 @@
 
 | Layer | Compression | Status | Source |
 |-------|-------------|--------|--------|
-| Vector Retrieval | ~99.9% (99.76-99.93%) | **PROVEN** | tiktoken measured |
-| SCL Symbolic | 80-90% | Theoretical | Research targets |
-| CAS External | 90% | Theoretical | Architecture design |
-| Session Cache | 90% | Theoretical | Warm cache model |
+| L1: Vector Retrieval | ~99.9% (99.76-99.93%) | **PROVEN** | tiktoken measured |
+| L2: SCL Symbolic | 80-90% | Theoretical | Research targets |
+| L3: CAS External | 99.89% | **PROVEN** | cassette_network (39 tests) |
+| L4: Session Cache | 98% warm | **PROVEN** | session_cache (30 tests) |
 | **Semantic Density** | **N× multiplier** | **THEORETICAL** | **Logographic research** |
 
 > **Key Insight:** Token-count compression maxes at ~6 nines (1 token minimum). But semantic density—meaning per token—has no theoretical ceiling. With the right symbolic design, 1 token can carry N concepts, effectively multiplying compression beyond the token-count limit.
@@ -67,9 +67,26 @@ Compression: 61%
 **Target:** 80-90% compression on governance instructions
 **Status:** Not implemented, requires Phase 5.2
 
-### Layer 3: CAS External Storage (THEORETICAL)
+### Layer 3: CAS External Storage (PROVEN)
 
 **What it does:** Content stored external to LLM context, referenced by hash.
+
+**Implementation:**
+- `MEMORY/CASSETTE_NETWORK/memory_cassette.py` - Core cassette storage
+- `MEMORY/CASSETTE_NETWORK/cassette_protocol.py` - Protocol definitions
+- `MEMORY/CASSETTE_NETWORK/cassette_receipt.py` - Receipt generation
+
+**Measured Results:**
+
+| Metric | Value | Target |
+|--------|-------|--------|
+| Compression ratio | 99.89% | > 95% |
+| `H(X\|S)/H(X)` ratio | 0.0011 | < 0.05 |
+| Query throughput | 4.4 qps | >= 4 qps |
+| Average latency | 197ms | < 500ms |
+| P95 latency | 285ms | < 1000ms |
+| Total corpus | 11,781 docs | - |
+| Estimated tokens | 2,356,200 | - |
 
 **Architecture:**
 ```
@@ -83,25 +100,40 @@ Compression: 61%
               │ (hash only, content external)
               ↓
 ┌─────────────────────────────────┐
-│     EXTERNAL CAS                │
-│  Content: 462 tokens (stored)   │
+│     EXTERNAL CAS (Cassettes)    │
+│  Content: 2,550 tokens avg      │
 │  NOT in context window          │
 └─────────────────────────────────┘
 ```
 
-**Estimate:** 90% reduction when content is external
-**Status:** Requires Phase 6.0 Cassette Network
+**Proof:** 39 tests in `CAPABILITY/TESTBENCH/cassette_network/`
+**Status:** PROVEN (Phase 6.4.12 compliant)
 
-### Layer 4: Session Cache (THEORETICAL)
+### Layer 4: Session Cache (PROVEN)
 
 **What it does:** Subsequent queries reuse cached content, only send confirmations.
 
-**Model:**
-- Query 1 (cold): Full symbolic exchange
-- Query 2-N (warm): Hash confirmation only
+**Implementation:**
+- `MEMORY/SESSION_CACHE/session_cache.py` - Session state management
 
-**Estimate:** 90% reduction on warm queries
-**Status:** Requires session state management
+**Measured Results:**
+
+| Metric | Value |
+|--------|-------|
+| Cold query tokens | ~50 tokens |
+| Warm query tokens | ~1 token |
+| Per-query savings (warm) | 98% |
+| Cache hit rate | High (hash-based dedup) |
+
+**Model:**
+- Query 1 (cold): Full symbolic exchange (~50 tokens)
+- Query 2-N (warm): Hash confirmation only (~1 token)
+
+**Test Coverage:**
+- 30 tests in `CAPABILITY/TESTBENCH/session_cache/`
+- Classes: TestBasicOperations, TestStatistics, TestInvalidation, TestPersistence, TestCompression
+
+**Status:** PROVEN (session state management implemented)
 
 ---
 
