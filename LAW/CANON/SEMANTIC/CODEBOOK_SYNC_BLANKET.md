@@ -123,7 +123,7 @@ def compute_continuous_r(sender_tuple: dict, receiver_tuple: dict) -> float:
     weights = {'kernel_version': 1.0, 'codebook_semver': 0.7, 'tokenizer_id': 0.5}
     score_funcs = {
         'kernel_version': score_kernel_version,
-        'codebook_semver': score_kernel_version,  # Same semver logic
+        'codebook_semver': score_kernel_version,  # Reuses semver comparison logic
         'tokenizer_id': score_tokenizer_id
     }
 
