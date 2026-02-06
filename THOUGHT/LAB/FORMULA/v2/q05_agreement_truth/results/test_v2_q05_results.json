@@ -1,0 +1,299 @@
+{
+  "test1": {
+    "test": "Agreement-Truth Correlation on STS-B",
+    "n_pairs": 1379,
+    "n_bins": 10,
+    "baseline_spearman_cosine_vs_human": 0.8203246731235654,
+    "baseline_p": 0.0,
+    "spearman_R_simple_vs_truth": -0.6848484848484848,
+    "p_R_simple": 0.02888279750673276,
+    "spearman_R_full_vs_truth": -0.32121212121212117,
+    "p_R_full": 0.3654683104386702,
+    "spearman_R_alt_diff_vs_truth": 0.09090909090909088,
+    "p_R_alt": 0.8027717312071619,
+    "bin_centers": [
+      0.25,
+      0.75,
+      1.25,
+      1.75,
+      2.25,
+      2.75,
+      3.25,
+      3.75,
+      4.25,
+      4.75
+    ],
+    "bin_sizes": [
+      178,
+      65,
+      131,
+      67,
+      166,
+      99,
+      194,
+      141,
+      176,
+      65
+    ],
+    "bin_R_simple": [
+      0.3151761006084329,
+      0.2943847873210719,
+      0.30614630842962315,
+      0.25838353134919745,
+      0.26148240648727583,
+      0.21140467611831848,
+      0.25113661046908425,
+      0.25082076083908217,
+      0.28830567131489243,
+      0.21043308433403166
+    ],
+    "bin_R_full": [
+      0.14063281564758767,
+      0.21092696415615614,
+      0.20160841792208914,
+      0.1876011158932635,
+      0.12518600470810257,
+      0.14900778751384564,
+      0.06801641306299708,
+      0.15300428719925646,
+      0.12511075596166388,
+      0.15397438866754606
+    ],
+    "bin_truth_proximity": [
+      0.8116787108984765,
+      0.834125734981138,
+      0.7485258565252974,
+      0.7819440132198049,
+      0.8256280179092683,
+      0.8500349819207432,
+      0.8775260638654846,
+      0.9166547081686927,
+      0.9003519785981287,
+      0.9350340726691027
+    ],
+    "duration_s": 14.698189496994019
+  },
+  "test2": {
+    "test": "Multi-Model Agreement",
+    "n_pairs": 500,
+    "inter_model_spearman": 0.9780774462052197,
+    "inter_model_p": 0.0,
+    "minilm_vs_human_spearman": 0.927666683904006,
+    "mpnet_vs_human_spearman": 0.9309597247822136,
+    "spearman_R_multi_vs_truth_error": 0.11515151515151514,
+    "p_R_multi_vs_truth_error": 0.7514196523258484,
+    "spearman_agreement_vs_truth_error": 0.0303030303030303,
+    "bin_centers": [
+      0.25,
+      0.75,
+      1.25,
+      1.75,
+      2.25,
+      2.75,
+      3.25,
+      3.75,
+      4.25,
+      4.75
+    ],
+    "bin_R_multi": [
+      0.5247299822060589,
+      0.48489550007495674,
+      0.4357686356984077,
+      0.3917826254152871,
+      0.5026701467733232,
+      0.46827198325598973,
+      0.3783838969986242,
+      0.391948078218547,
+      0.4906833251166388,
+      0.422872620756954
+    ],
+    "bin_mean_truth_error": [
+      0.11672177905543676,
+      0.11510785307736937,
+      0.16170864871870727,
+      0.15324276626209418,
+      0.14564170679083233,
+      0.13883976066723855,
+      0.09550601406715536,
+      0.05365210733312242,
+      0.06139247565500198,
+      0.07161480025450387
+    ],
+    "duration_s": 9.34140157699585
+  },
+  "test3": {
+    "test": "Systematic Bias Attack",
+    "n_pairs": 200,
+    "bias_results": [
+      {
+        "bias_phrase": "In conclusion, ",
+        "mean_cosine_shift": 0.05314590918831527,
+        "rho_clean_vs_human": 0.8705503207726926,
+        "rho_biased_vs_human": 0.8846780193838443,
+        "truth_degradation": -0.014127698611151707,
+        "R_global_clean": 0.21542745584952677,
+        "R_global_biased": 0.8901388257144405,
+        "R_delta": 0.6747113698649136,
+        "bias_inflates_R": true,
+        "bias_hurts_truth": false,
+        "attack_succeeds": false,
+        "bin_labels": [
+          "[0,1)",
+          "[1,2)",
+          "[2,3)",
+          "[3,4)",
+          "[4,5)"
+        ],
+        "R_clean_bins": [
+          0.19958944588094346,
+          0.2385221363530911,
+          0.18976283341737532,
+          0.2533561802572207,
+          0.2756098882341187
+        ],
+        "R_biased_bins": [
+          1.0015104837011397,
+          0.7960081088742659,
+          0.7759527503175248,
+          0.7243512113870305,
+          0.8554718688765037
+        ]
+      },
+      {
+        "bias_phrase": "According to recent studies, ",
+        "mean_cosine_shift": 0.04849298320361413,
+        "rho_clean_vs_human": 0.8705503207726926,
+        "rho_biased_vs_human": 0.8908337238775909,
+        "truth_degradation": -0.02028340310489829,
+        "R_global_clean": 0.21542745584952677,
+        "R_global_biased": 0.7164072793779528,
+        "R_delta": 0.500979823528426,
+        "bias_inflates_R": true,
+        "bias_hurts_truth": false,
+        "attack_succeeds": false,
+        "bin_labels": [
+          "[0,1)",
+          "[1,2)",
+          "[2,3)",
+          "[3,4)",
+          "[4,5)"
+        ],
+        "R_clean_bins": [
+          0.19958944588094346,
+          0.2385221363530911,
+          0.18976283341737532,
+          0.2533561802572207,
+          0.2756098882341187
+        ],
+        "R_biased_bins": [
+          0.746402435189202,
+          0.6668777901444454,
+          0.6276284706543688,
+          0.6720218022934141,
+          0.5994636986033607
+        ]
+      },
+      {
+        "bias_phrase": "The committee determined that ",
+        "mean_cosine_shift": 0.10713248407002539,
+        "rho_clean_vs_human": 0.8705503207726926,
+        "rho_biased_vs_human": 0.8822457837339659,
+        "truth_degradation": -0.011695462961273329,
+        "R_global_clean": 0.21542745584952677,
+        "R_global_biased": 1.9700685057034297,
+        "R_delta": 1.754641049853903,
+        "bias_inflates_R": true,
+        "bias_hurts_truth": false,
+        "attack_succeeds": false,
+        "bin_labels": [
+          "[0,1)",
+          "[1,2)",
+          "[2,3)",
+          "[3,4)",
+          "[4,5)"
+        ],
+        "R_clean_bins": [
+          0.19958944588094346,
+          0.2385221363530911,
+          0.18976283341737532,
+          0.2533561802572207,
+          0.2756098882341187
+        ],
+        "R_biased_bins": [
+          2.1851978663039513,
+          2.1107626324079916,
+          1.5971427242943261,
+          1.8082576348485588,
+          1.792272361192792
+        ]
+      }
+    ],
+    "n_attacks": 3,
+    "n_attacks_succeeded": 0,
+    "duration_s": 3.452180862426758
+  },
+  "test4": {
+    "test": "Echo Chamber vs Genuine Agreement",
+    "n_unique_sentences": 2552,
+    "n_high_sim_pairs": 338,
+    "n_trials": 50,
+    "cluster_sizes": [
+      10,
+      20,
+      50
+    ],
+    "detection_results": {
+      "10": {
+        "genuine_mean_R": 0.3028562716501857,
+        "genuine_std_R": 0.12633905503619577,
+        "echo_mean_R": 401.4138250336351,
+        "echo_std_R": 60.26440046194042,
+        "echo_moderate_mean_R": 16.69023166627855,
+        "random_mean_R": 0.2495170716683733,
+        "random_std_R": 0.168295386090383,
+        "mannwhitney_U": 0.0,
+        "mannwhitney_p": 7.066071930388932e-18,
+        "genuine_higher_than_echo": false
+      },
+      "20": {
+        "genuine_mean_R": 0.2636719919922824,
+        "genuine_std_R": 0.10003339135954252,
+        "echo_mean_R": 375.28107738025676,
+        "echo_std_R": 32.31127545506746,
+        "echo_moderate_mean_R": 15.626266045493699,
+        "random_mean_R": 0.22401724398760234,
+        "random_std_R": 0.08594693237584365,
+        "mannwhitney_U": 0.0,
+        "mannwhitney_p": 7.066071930388932e-18,
+        "genuine_higher_than_echo": false
+      },
+      "50": {
+        "genuine_mean_R": 0.2708660603294462,
+        "genuine_std_R": 0.044015957048969045,
+        "echo_mean_R": 363.2141975245484,
+        "echo_std_R": 18.500262018427247,
+        "echo_moderate_mean_R": 15.462314630014987,
+        "random_mean_R": 0.2321038093226953,
+        "random_std_R": 0.04131768514306244,
+        "mannwhitney_U": 0.0,
+        "mannwhitney_p": 7.066071930388932e-18,
+        "genuine_higher_than_echo": false
+      }
+    },
+    "all_sizes_pass": false,
+    "any_size_pass": false,
+    "duration_s": 4.27082896232605
+  },
+  "verdict": {
+    "result": "FALSIFIED",
+    "criterion1_rho": -0.6848484848484848,
+    "criterion1_confirm": false,
+    "criterion1_falsify": true,
+    "criterion2_attacks_succeeded": 0,
+    "criterion2_confirm": true,
+    "criterion2_falsify": false,
+    "criterion3_all_pass": false,
+    "criterion3_confirm": false,
+    "criterion3_falsify": true
+  }
+}

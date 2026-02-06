@@ -1,0 +1,61 @@
+{
+  "overall": "INCONCLUSIVE",
+  "confirm_criteria": [
+    [
+      "rho > 0.7 with sqrt(lik_prec)",
+      false
+    ],
+    [
+      "CV < 0.15 (intensive)",
+      false
+    ],
+    [
+      "F1 > 5% better than trivial",
+      true
+    ],
+    [
+      "Falsification does NOT reproduce",
+      true
+    ]
+  ],
+  "falsify_criteria": [
+    [
+      "all rho < 0.2",
+      false
+    ],
+    [
+      "CV > 0.3 (not intensive)",
+      false
+    ],
+    [
+      "F1 within 3% of trivial",
+      false
+    ],
+    [
+      "Falsification reproduces",
+      false
+    ]
+  ],
+  "confirm_count": 2,
+  "falsify_count": 0,
+  "verdict_lines": [
+    "Test 1: R_full vs sqrt(lik_prec): rho=0.562",
+    "        Trivial_R vs sqrt(lik_prec): rho=-0.384",
+    "        Best |rho| for R_full: 0.562",
+    "        Best |rho| for Trivial_R: 0.384",
+    "        Correlation > 0.7? NO",
+    "        R_full adds value over trivial? YES",
+    "Test 2: R_full mean CV = 0.2850 (intensive < 0.15? NO)",
+    "        1/grad_S mean CV = 0.0526",
+    "        post_prec mean CV = 0.9020",
+    "Test 3: R_full F1 = 0.320",
+    "        Trivial_R F1 = 0.211",
+    "        E F1 = 0.545",
+    "        Bayesian F1 = 0.545",
+    "        R_full advantage over trivial: +0.109 (need > 0.05 for confirm)",
+    "Test 4: R_full vs Hessian precision: rho=-0.231 (p=0.0061)",
+    "        R_full vs Fisher info: rho=-0.171 (p=0.0669)",
+    "        R_full vs KL div: rho=-0.171",
+    "        Falsification reproduces? NO"
+  ]
+}
