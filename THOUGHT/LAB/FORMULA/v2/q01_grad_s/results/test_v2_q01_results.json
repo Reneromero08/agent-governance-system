@@ -1,0 +1,138 @@
+{
+  "timestamp": "2026-02-06T01:47:12.285825+00:00",
+  "hypothesis": "E/grad_S is the correct normalization for E",
+  "dataset": "STS-B (train+validation)",
+  "model": "all-MiniLM-L6-v2",
+  "seed": 42,
+  "n_items": 7249,
+  "n_unique_sentences": 13197,
+  "embedding_dim": 384,
+  "test1_normalization_comparison": {
+    "n_clusters": 250,
+    "correlations": {
+      "R_grad_S": {
+        "spearman_rho": 0.13666302503793262,
+        "p_value": 0.03076120584036737,
+        "n_clusters": 250
+      },
+      "R_raw_E": {
+        "spearman_rho": 0.003997599241144001,
+        "p_value": 0.9498532400246938,
+        "n_clusters": 250
+      },
+      "R_grad_S_sq": {
+        "spearman_rho": 0.26521327514530835,
+        "p_value": 2.1500979312491466e-05,
+        "n_clusters": 250
+      },
+      "R_MAD": {
+        "spearman_rho": 0.0054869009192172555,
+        "p_value": 0.9312109339911316,
+        "n_clusters": 250
+      },
+      "R_IQR": {
+        "spearman_rho": 0.013403715102659294,
+        "p_value": 0.8329819133022368,
+        "n_clusters": 250
+      },
+      "SNR": {
+        "spearman_rho": -0.021483997918141724,
+        "p_value": 0.7353417294073525,
+        "n_clusters": 250
+      }
+    },
+    "ranking": [
+      [
+        "R_grad_S_sq",
+        0.26521327514530835
+      ],
+      [
+        "R_grad_S",
+        0.13666302503793262
+      ],
+      [
+        "SNR",
+        0.021483997918141724
+      ],
+      [
+        "R_IQR",
+        0.013403715102659294
+      ],
+      [
+        "R_MAD",
+        0.0054869009192172555
+      ],
+      [
+        "R_raw_E",
+        0.003997599241144001
+      ]
+    ],
+    "wins_vs_alternatives": 4,
+    "losses_vs_alternatives": 1,
+    "pairwise_bootstrap": {
+      "R_raw_E": {
+        "bootstrap_p": 0.1359,
+        "mean_diff": 0.08543664142047039,
+        "ci_95": [
+          -0.10062902457919275,
+          0.16879721574468096
+        ]
+      },
+      "R_grad_S_sq": {
+        "bootstrap_p": 0.9994,
+        "mean_diff": -0.1277475079100328,
+        "ci_95": [
+          -0.18191174972577423,
+          -0.07465961625254187
+        ]
+      },
+      "R_MAD": {
+        "bootstrap_p": 0.1361,
+        "mean_diff": 0.08526900475904838,
+        "ci_95": [
+          -0.09668109222376917,
+          0.1690894907366008
+        ]
+      },
+      "R_IQR": {
+        "bootstrap_p": 0.116,
+        "mean_diff": 0.08492832855653869,
+        "ci_95": [
+          -0.09082544090919835,
+          0.16391641692323705
+        ]
+      },
+      "SNR": {
+        "bootstrap_p": 0.126,
+        "mean_diff": 0.08450634818234508,
+        "ci_95": [
+          -0.056615509955421035,
+          0.21956907440412313
+        ]
+      }
+    },
+    "significant_wins_p01": 0
+  },
+  "test2_bridge": {
+    "n_clusters": 250,
+    "spearman_rho": -0.09762549800796812,
+    "spearman_p": 0.12367286665284032,
+    "pearson_r": -0.1089578636356026,
+    "pearson_p": 0.08556639910581985,
+    "e_cosine_stats": {
+      "min": 0.0015734964981675148,
+      "max": 0.07098161429166794,
+      "mean": 0.028941731924191118,
+      "std": 0.01127057290282697
+    },
+    "e_gaussian_stats": {
+      "min": 0.6919344663619995,
+      "max": 0.7058311700820923,
+      "mean": 0.7004626882076264,
+      "std": 0.0030675366199594944
+    }
+  },
+  "verdict": "FALSIFIED",
+  "verdict_reasoning": "Bridge correlation is -0.0976 < 0.3",
+  "runtime_seconds": 101.7
+}
