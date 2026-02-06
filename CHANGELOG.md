@@ -13,6 +13,7 @@ All notable changes to Agent Governance System will be documented in this file.
 **Canon file fix:**
 - `LAW/CANON/SEMANTIC/VECTOR_ELO_SPEC.md`: Fix broken R Formula path (research/questions/INDEX.md -> INDEX.md), clarify empirical status
 - `LAW/CANON/SEMANTIC/CODEBOOK_SYNC_REFERENCE.md`: Fix 2 broken Q33/Q35 paths to use new question folder structure
+- `LAW/CANON/SEMANTIC/CODEBOOK_SYNC_BLANKET.md`: Clarify comment on codebook_semver score function reuse
 
 **FORMULA Lab overhaul (THOUGHT/LAB/FORMULA/):**
 - INDEX.md: Q54 VALIDATED->EXPLORATORY, Q25 DERIVED->PARTIAL, Q32 ANSWERED->PARTIAL; fix 10 broken cross-references; honest assessment of validation results
