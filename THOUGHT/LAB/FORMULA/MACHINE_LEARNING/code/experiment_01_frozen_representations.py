@@ -150,33 +150,53 @@ def evaluate_clusters(
     }
 
 
-def main() -> None:
-    args = parse_args()
-    rng = random.Random(args.seed)
-    np.random.seed(args.seed)
+def run_experiment(
+    dataset: str,
+    model: str,
+    device: str,
+    seed: int,
+    cluster_size: int,
+    clusters_per_class: int,
+    limit_per_label: int,
+) -> Dict[str, object]:
+    rng = random.Random(seed)
+    np.random.seed(seed)
 
-    grouped = load_labeled_texts(args.dataset, args.limit_per_label)
+    grouped = load_labeled_texts(dataset, limit_per_label)
     if len(grouped) < 2:
-        raise RuntimeError(f"dataset {args.dataset} did not produce enough labels")
+        raise RuntimeError(f"dataset {dataset} did not produce enough labels")
 
-    clusters = build_clusters(grouped, args.cluster_size, args.clusters_per_class, rng)
+    clusters = build_clusters(grouped, cluster_size, clusters_per_class, rng)
     unique_texts = sorted({text for _, _, texts in clusters for text in texts})
-    embedding_lookup = embed_unique_texts(args.model, args.device, unique_texts)
+    embedding_lookup = embed_unique_texts(model, device, unique_texts)
     results = evaluate_clusters(clusters, embedding_lookup)
 
-    payload = {
+    return {
         "experiment": "EXPERIMENT_01_FROZEN_REPRESENTATIONS",
-        "dataset": args.dataset,
-        "model": args.model,
-        "device": args.device,
-        "seed": args.seed,
-        "cluster_size": args.cluster_size,
-        "clusters_per_class": args.clusters_per_class,
-        "limit_per_label": args.limit_per_label,
+        "dataset": dataset,
+        "model": model,
+        "device": device,
+        "seed": seed,
+        "cluster_size": cluster_size,
+        "clusters_per_class": clusters_per_class,
+        "limit_per_label": limit_per_label,
         "n_unique_texts": len(unique_texts),
         "n_clusters": len(clusters),
         **results,
     }
+
+
+def main() -> None:
+    args = parse_args()
+    payload = run_experiment(
+        dataset=args.dataset,
+        model=args.model,
+        device=args.device,
+        seed=args.seed,
+        cluster_size=args.cluster_size,
+        clusters_per_class=args.clusters_per_class,
+        limit_per_label=args.limit_per_label,
+    )
 
     output_path = Path(args.output) if args.output else RESULTS_DIR / f"experiment_01_{args.dataset}.json"
     output_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
