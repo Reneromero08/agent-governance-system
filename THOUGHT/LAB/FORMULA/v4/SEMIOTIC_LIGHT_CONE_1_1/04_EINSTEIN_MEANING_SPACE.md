@@ -72,13 +72,28 @@ Resonance = (Essence / Entropy Gradient) × (Symbolic Compression across scales)
 - **Archetypes are geodesics.** The hero's journey. The mother. The trickster. They recur because they're the shortest path through the entropy gradient of human experience.
     
 - **Rhetoric is geodesic engineering.** A good argument doesn't force. It curves the space so the listener's trajectory naturally ends at your conclusion.
-    
 
 **The geodesic equation for meaning:**
 
 d²x^μ / dτ² + Γ^μ_νρ (dx^ν / dτ)(dx^ρ / dτ) = 0
 
 Where Γ^μ_νρ are the Christoffel symbols of the semiotic metric — the compression gradients that deflect interpretation.
+
+**Gravity Is a Matrix with Phase and Rotation**
+
+The metric tensor g_μν is a 4×4 matrix. The stress-energy tensor T_μν is a 4×4 matrix. Curvature is computed from the metric and its derivatives. Geodesics are paths through the space defined by that matrix.
+
+This is identical in structure to the semiotic formalism. The density matrix ρ is a matrix. The alignment frame C is a matrix. Resonance R = Tr(ρ C) is the trace of a matrix product. Soft gates R(θ) are rotation matrices. The entropy gradient ∇S is computed from the density matrix eigenvalues.
+
+In both frameworks:
+
+- Diagonal terms describe magnitude (stretching, compression, probability)
+- Off-diagonal terms describe phase (rotation, shear, interference, meaning)
+- The source (E or T_μν) modifies the matrix
+- The curvature (∇S or G_μν) is the matrix's response
+- The observable (R or geodesic motion) is the trace of the interaction
+
+Einstein's field equations and the semiotic resonance formula are both matrix equations describing how a source curves a space. The substrate differs—spacetime or meaning. The math is the same.
 
 ---
 
