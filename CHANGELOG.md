@@ -6,6 +6,20 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.12.1] - 2026-05-13
+
+### Changed
+
+- `CAPABILITY/PRIMITIVES/cassette_receipt.py`: CRLF to LF normalization
+
+### Added
+
+- `THOUGHT/LAB/FORMULA/v4/SEMIOTIC_LIGHT_CONE_1_1/`: Imported source documents
+- `THOUGHT/LAB/FORMULA/v4/VALIDATION_ROADMAP.md`: Updated with phase checkboxes
+- `THOUGHT/LAB/FORMULA/v4/LIGHT_CONE_REFERENCES.md`: Updated to local paths
+
+---
+
 ## [3.12.0] - 2026-02-05
 
 ### Changed: Formula Lab Integrity Audit
