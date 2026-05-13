@@ -37,14 +37,33 @@ Goal: Test the functional form in the cleanest available domain.
 - `THOUGHT/LAB/FORMULA/v4/qec_precision_sweep/` (v1–v9, 18M total shots)
 - `PAPER.md` — draft for publication
 
-## Phase 2: AI Alignment Control [ ]
+## Phase 2: AI Alignment Control [-]
 
 Goal: Test the Light Cone claim that compressed/fractal constitutions improve alignment retention and adversarial resistance.
 
-- [ ] Normal instruction prompt vs compressed constitution vs example-heavy context
-- [ ] Measure: drift, jailbreak resistance, value-generalization, self-consistency, hidden-state entropy/coherence
-- [ ] Use open model or API-accessible logits/hidden states
-- [ ] Stronger: fine-tune / LoRA under matched token/compute budget
+### Phase 2a: Inference-Only Constitution Test [x]
+
+- [x] Gemma 4B E4B (4-bit via bitsandbytes, RTX 3060 12GB)
+- [x] Control (C): base model, no system prompt
+- [x] Constitution (X): constitution as system prompt, inference only, no fine-tuning
+- [x] Alignment frame C built from constitution hidden-state signature
+- [x] R = Tr(rho C) measured via final-layer hidden states
+- [x] Results: X_R = 0.274 vs C_R = 0.178 (54% increase, r=0.74)
+- [x] Strongest on generalize (+65%) and multiturn (+78%), weakest on jailbreak (+28%)
+- [x] Constitution acts as attractor: X resonance grows across multiturn turns
+- [x] grad_S (entropy) not sensitive at 2560-dim scale — metric limitation
+
+### Phase 2b: Fine-Tuning [ ]
+
+- [ ] LoRA fine-tune on constitution-augmented vs standard preference data
+- [ ] Matched token/compute budget
+- [ ] Re-run all tests: drift, jailbreak, generalize, multiturn
+
+### Phase 2c: Resonance-Guided Sampling [ ]
+
+- [ ] Implement full Cybernetic Truth control loop
+- [ ] Temperature modulation: T = 1/(R + epsilon)
+- [ ] Compare resonance-guided vs standard sampling
 
 ## Phase 3: Symbol Survival [ ]
 
