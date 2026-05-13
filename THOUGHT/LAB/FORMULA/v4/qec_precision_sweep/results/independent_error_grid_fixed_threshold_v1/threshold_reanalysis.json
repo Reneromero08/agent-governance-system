@@ -1,0 +1,110 @@
+{
+  "run_id": "independent_error_grid_fixed_threshold_v1",
+  "source_run": "independent_error_grid_v1",
+  "created_utc": "2026-05-13T09:31:28.882766+00:00",
+  "source_json": "THOUGHT\\LAB\\FORMULA\\v4\\qec_precision_sweep\\results\\independent_error_grid_v1\\qec_precision_sweep.json",
+  "threshold": {
+    "threshold": 0.00707106781186548,
+    "method": "fixed preregistered threshold supplied by --fixed-threshold",
+    "votes": [
+      {
+        "p": 0.00075,
+        "mean_delta_high_minus_low": 1.6966146060064893,
+        "distance_helped": true
+      },
+      {
+        "p": 0.0015,
+        "mean_delta_high_minus_low": 1.7432930124667143,
+        "distance_helped": true
+      },
+      {
+        "p": 0.003,
+        "mean_delta_high_minus_low": 0.5940807944110796,
+        "distance_helped": true
+      },
+      {
+        "p": 0.006,
+        "mean_delta_high_minus_low": 0.09359112513849155,
+        "distance_helped": true
+      },
+      {
+        "p": 0.012,
+        "mean_delta_high_minus_low": -0.4416497839554191,
+        "distance_helped": false
+      },
+      {
+        "p": 0.024,
+        "mean_delta_high_minus_low": -0.5174391239916358,
+        "distance_helped": false
+      },
+      {
+        "p": 0.048,
+        "mean_delta_high_minus_low": -0.14999589948186376,
+        "distance_helped": false
+      }
+    ],
+    "low_distance": 3,
+    "high_distance": 5
+  },
+  "mapping": {
+    "R": "physical_error_rate / logical_error_rate_laplace",
+    "E": "1.0 normalized initial logical-state integrity",
+    "grad_S": "physical_error_rate / p_threshold",
+    "sigma": "sqrt(p_threshold / physical_error_rate)",
+    "Df": "surface-code distance",
+    "p_threshold": 0.00707106781186548
+  },
+  "evaluation": {
+    "target": "log_suppression = ln(physical_error_rate / logical_error_rate_laplace)",
+    "heldout_distances": [
+      7,
+      9
+    ],
+    "train_conditions": 28,
+    "test_conditions": 28,
+    "models": {
+      "threshold_formula_score": {
+        "train_mae": 0.4382302243193844,
+        "test_mae": 0.9627795450775622,
+        "train_r2": 0.8632797580498627,
+        "test_r2": 0.7853514789700253
+      },
+      "threshold_formula_components": {
+        "train_mae": 0.3561020508567822,
+        "test_mae": 0.9196632237831667,
+        "train_r2": 0.8845967907879172,
+        "test_r2": 0.7466478774761651
+      },
+      "original_formula_score": {
+        "train_mae": 0.4536621960665846,
+        "test_mae": 1.3554685142924592,
+        "train_r2": 0.841936211477627,
+        "test_r2": 0.569594704335904
+      },
+      "original_formula_components": {
+        "train_mae": 0.39976623007520595,
+        "test_mae": 0.9946410359793267,
+        "train_r2": 0.8652421307595946,
+        "test_r2": 0.7612677624991784
+      },
+      "standard_qec_scaling": {
+        "train_mae": 0.35194450523089266,
+        "test_mae": 0.8740137132332132,
+        "train_r2": 0.8987561271226989,
+        "test_r2": 0.8051544283964711
+      },
+      "p_only": {
+        "train_mae": 0.5448873194816863,
+        "test_mae": 1.3231777138844831,
+        "train_r2": 0.7959982274024183,
+        "test_r2": 0.582813346753691
+      },
+      "distance_only": {
+        "train_mae": 1.1900175462156708,
+        "test_mae": 2.354363210699553,
+        "train_r2": 0.023502714838140037,
+        "test_r2": -0.001968079640697784
+      }
+    }
+  }
+}
