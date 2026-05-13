@@ -1,0 +1,165 @@
+{
+  "question": "N1",
+  "title": "Does E/grad_S outperform bare E?",
+  "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+  "seed": 20260309,
+  "cluster_size": 16,
+  "clusters_per_type": 120,
+  "bootstrap_samples": 1000,
+  "datasets": {
+    "stsb": {
+      "source": "glue/stsb validation",
+      "task_type": "ordinal_pair",
+      "n_examples": 1500,
+      "pure_clusters": 120,
+      "mixed_clusters": 120,
+      "aucs": {
+        "E": 0.46152777777777776,
+        "R_simple": 0.4532638888888889,
+        "R_full": 0.45472222222222225,
+        "random": 0.5111805555555555
+      },
+      "comparisons": {
+        "E_minus_R_simple": {
+          "delta_mean": 0.008344087953678301,
+          "ci_low": -0.015818351108957147,
+          "ci_high": 0.03230344143329383,
+          "wins_fraction": 0.755
+        },
+        "R_simple_minus_R_full": {
+          "delta_mean": -0.0013859601559459633,
+          "ci_low": -0.005430365248358886,
+          "ci_high": 0.002229868096548772,
+          "wins_fraction": 0.25
+        }
+      },
+      "winner": "tie",
+      "anti_pattern_check": {
+        "ground_truth_independent_of_metrics": true,
+        "parameters_fixed_before_results": true,
+        "no_grid_search": true,
+        "negative_results_will_be_reported": true,
+        "no_goalpost_moving": true,
+        "both_classes_present": true,
+        "all_scores_finite": true
+      }
+    },
+    "sst2": {
+      "source": "glue/sst2 validation",
+      "task_type": "binary_single",
+      "n_examples": 872,
+      "pure_clusters": 120,
+      "mixed_clusters": 120,
+      "aucs": {
+        "E": 0.5914583333333333,
+        "R_simple": 0.5554861111111111,
+        "R_full": 0.5488888888888889,
+        "random": 0.5279861111111112
+      },
+      "comparisons": {
+        "E_minus_R_simple": {
+          "delta_mean": 0.035517239205937384,
+          "ci_low": -0.019329965393647182,
+          "ci_high": 0.0896944191624743,
+          "wins_fraction": 0.88
+        },
+        "R_simple_minus_R_full": {
+          "delta_mean": 0.006468479882498574,
+          "ci_low": -0.0018527192153612426,
+          "ci_high": 0.01424944421000767,
+          "wins_fraction": 0.938
+        }
+      },
+      "winner": "tie",
+      "anti_pattern_check": {
+        "ground_truth_independent_of_metrics": true,
+        "parameters_fixed_before_results": true,
+        "no_grid_search": true,
+        "negative_results_will_be_reported": true,
+        "no_goalpost_moving": true,
+        "both_classes_present": true,
+        "all_scores_finite": true
+      }
+    },
+    "snli": {
+      "source": "snli validation",
+      "task_type": "binary_pair",
+      "n_examples": 2400,
+      "pure_clusters": 120,
+      "mixed_clusters": 120,
+      "aucs": {
+        "E": 0.4720138888888889,
+        "R_simple": 0.46208333333333335,
+        "R_full": 0.46541666666666665,
+        "random": 0.5234027777777778
+      },
+      "comparisons": {
+        "E_minus_R_simple": {
+          "delta_mean": 0.009175664198382037,
+          "ci_low": -0.020912827597037855,
+          "ci_high": 0.03973359249002631,
+          "wins_fraction": 0.718
+        },
+        "R_simple_minus_R_full": {
+          "delta_mean": -0.0032567126621661888,
+          "ci_low": -0.009308222000687327,
+          "ci_high": 0.0024305724391034456,
+          "wins_fraction": 0.133
+        }
+      },
+      "winner": "tie",
+      "anti_pattern_check": {
+        "ground_truth_independent_of_metrics": true,
+        "parameters_fixed_before_results": true,
+        "no_grid_search": true,
+        "negative_results_will_be_reported": true,
+        "no_goalpost_moving": true,
+        "both_classes_present": true,
+        "all_scores_finite": true
+      }
+    },
+    "mnli": {
+      "source": "glue/mnli validation_matched",
+      "task_type": "binary_pair",
+      "n_examples": 2400,
+      "pure_clusters": 120,
+      "mixed_clusters": 120,
+      "aucs": {
+        "E": 0.46284722222222224,
+        "R_simple": 0.46618055555555554,
+        "R_full": 0.4650694444444444,
+        "random": 0.545625
+      },
+      "comparisons": {
+        "E_minus_R_simple": {
+          "delta_mean": -0.003584786581564497,
+          "ci_low": -0.04022619169576095,
+          "ci_high": 0.03007134476085071,
+          "wins_fraction": 0.43
+        },
+        "R_simple_minus_R_full": {
+          "delta_mean": 0.0010696438834304968,
+          "ci_low": -0.004381674203220947,
+          "ci_high": 0.006883043050683297,
+          "wins_fraction": 0.631
+        }
+      },
+      "winner": "tie",
+      "anti_pattern_check": {
+        "ground_truth_independent_of_metrics": true,
+        "parameters_fixed_before_results": true,
+        "no_grid_search": true,
+        "negative_results_will_be_reported": true,
+        "no_goalpost_moving": true,
+        "both_classes_present": true,
+        "all_scores_finite": true
+      }
+    }
+  },
+  "summary": {
+    "e_wins": 0,
+    "r_simple_wins": 0,
+    "ties": 4,
+    "hypothesis_status": "mixed"
+  }
+}

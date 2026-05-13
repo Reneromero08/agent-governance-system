@@ -1,0 +1,196 @@
+{
+  "question": "N1 exploratory follow-up",
+  "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+  "seed": 20260309,
+  "cluster_size": 16,
+  "clusters_per_recipe": 40,
+  "datasets": {
+    "ag_news": {
+      "source": "ag_news test",
+      "n_examples": 3200,
+      "n_labels": 4,
+      "spearman": {
+        "E": 0.7954294906113057,
+        "R_simple": 0.7315240172329173,
+        "R_full": 0.7240199654346974
+      },
+      "auc_pure_vs_not_pure": {
+        "E": 0.92625,
+        "R_simple": 0.895625,
+        "R_full": 0.8925
+      },
+      "delta": {
+        "spearman_E_minus_R_simple": {
+          "delta_mean": 0.06412113118920176,
+          "ci_low": 0.029473158679270053,
+          "ci_high": 0.10650882592298025,
+          "wins_fraction": 0.999
+        },
+        "auc_E_minus_R_simple": {
+          "delta_mean": 0.031112332156491004,
+          "ci_low": 0.00431567037132625,
+          "ci_high": 0.061240647118301336,
+          "wins_fraction": 0.985
+        }
+      },
+      "winner_spearman": "E",
+      "winner_auc": "E",
+      "grad_S_mean": 0.09866912234574557,
+      "purity_levels": [
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ]
+    },
+    "emotion": {
+      "source": "dair-ai/emotion test",
+      "n_examples": 2000,
+      "n_labels": 6,
+      "spearman": {
+        "E": 0.14669210934584642,
+        "R_simple": 0.10747738704547163,
+        "R_full": 0.09888403740557468
+      },
+      "auc_pure_vs_not_pure": {
+        "E": 0.5891666666666666,
+        "R_simple": 0.5775,
+        "R_full": 0.5789583333333334
+      },
+      "delta": {
+        "spearman_E_minus_R_simple": {
+          "delta_mean": 0.04080663040169621,
+          "ci_low": -0.05923211341041611,
+          "ci_high": 0.14002603304302658,
+          "wins_fraction": 0.785
+        },
+        "auc_E_minus_R_simple": {
+          "delta_mean": 0.010364112177791042,
+          "ci_low": -0.06045569539791508,
+          "ci_high": 0.07681049125515846,
+          "wins_fraction": 0.619
+        }
+      },
+      "winner_spearman": "tie",
+      "winner_auc": "tie",
+      "grad_S_mean": 0.10805473695509135,
+      "purity_levels": [
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ]
+    },
+    "sst2": {
+      "source": "glue/sst2 validation",
+      "n_examples": 872,
+      "n_labels": 2,
+      "spearman": {
+        "E": 0.21308129729670816,
+        "R_simple": 0.18219386901543735,
+        "R_full": 0.17315679491015437
+      },
+      "auc_pure_vs_not_pure": {
+        "E": 0.6205208333333333,
+        "R_simple": 0.6017708333333334,
+        "R_full": 0.5957291666666666
+      },
+      "delta": {
+        "spearman_E_minus_R_simple": {
+          "delta_mean": 0.029400155297935483,
+          "ci_low": -0.06636222815821498,
+          "ci_high": 0.12978536008873878,
+          "wins_fraction": 0.724
+        },
+        "auc_E_minus_R_simple": {
+          "delta_mean": 0.019380986843631633,
+          "ci_low": -0.03680385596251808,
+          "ci_high": 0.08036409523809519,
+          "wins_fraction": 0.737
+        }
+      },
+      "winner_spearman": "tie",
+      "winner_auc": "tie",
+      "grad_S_mean": 0.1027129017189145,
+      "purity_levels": [
+        0.5,
+        0.75,
+        1.0
+      ]
+    },
+    "snli": {
+      "source": "snli validation",
+      "n_examples": 1600,
+      "n_labels": 2,
+      "spearman": {
+        "E": 0.060387020182087386,
+        "R_simple": 0.0707473801385011,
+        "R_full": 0.06835901055353345
+      },
+      "auc_pure_vs_not_pure": {
+        "E": 0.5314583333333334,
+        "R_simple": 0.5302083333333333,
+        "R_full": 0.529375
+      },
+      "delta": {
+        "spearman_E_minus_R_simple": {
+          "delta_mean": -0.008784396000285596,
+          "ci_low": -0.058566471695583176,
+          "ci_high": 0.04367568827252132,
+          "wins_fraction": 0.37
+        },
+        "auc_E_minus_R_simple": {
+          "delta_mean": 0.000661134458800544,
+          "ci_low": -0.03309620945721982,
+          "ci_high": 0.0309192100451291,
+          "wins_fraction": 0.52
+        }
+      },
+      "winner_spearman": "tie",
+      "winner_auc": "tie",
+      "grad_S_mean": 0.1141823049262166,
+      "purity_levels": [
+        0.5,
+        0.75,
+        1.0
+      ]
+    },
+    "mnli": {
+      "source": "glue/mnli validation_matched",
+      "n_examples": 1600,
+      "n_labels": 2,
+      "spearman": {
+        "E": -0.0160408065368773,
+        "R_simple": -0.0359546448331616,
+        "R_full": -0.03327579786623843
+      },
+      "auc_pure_vs_not_pure": {
+        "E": 0.49322916666666666,
+        "R_simple": 0.46989583333333335,
+        "R_full": 0.47072916666666664
+      },
+      "delta": {
+        "spearman_E_minus_R_simple": {
+          "delta_mean": 0.019091949963932243,
+          "ci_low": -0.03777901799976734,
+          "ci_high": 0.0748784178210531,
+          "wins_fraction": 0.745
+        },
+        "auc_E_minus_R_simple": {
+          "delta_mean": 0.023439931714618514,
+          "ci_low": -0.009658656856084849,
+          "ci_high": 0.05678183483685443,
+          "wins_fraction": 0.91
+        }
+      },
+      "winner_spearman": "tie",
+      "winner_auc": "tie",
+      "grad_S_mean": 0.08594177138060331,
+      "purity_levels": [
+        0.5,
+        0.75,
+        1.0
+      ]
+    }
+  }
+}

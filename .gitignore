@@ -151,6 +151,9 @@ THOUGHT/LAB/FORMULA/questions/**/physdata/
 # Q18 real data cache (downloaded biological datasets - too large for git)
 THOUGHT/LAB/FORMULA/experiments/open_questions/q18/real_data/cache/
 
+# Formula lab runtime caches
+THOUGHT/LAB/FORMULA/**/.cache/
+
 # Feral Resident papers (raw PDFs and converted markdown too large for git)
 THOUGHT/LAB/FERAL_RESIDENT/research/papers/raw/
 THOUGHT/LAB/FERAL_RESIDENT/research/papers/markdown/
