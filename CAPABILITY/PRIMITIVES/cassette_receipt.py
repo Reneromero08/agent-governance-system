@@ -41,7 +41,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-from .canonical_json import canonical_json, sha256_hex
+from canonical_json import canonical_json, sha256_hex
 
 # Schema version - must match cassette_receipt.schema.json
 SCHEMA_VERSION = "1.0.0"
