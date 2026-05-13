@@ -32,7 +32,7 @@ RESULTS = ROOT / "results"
 
 def load_sweep(source_dir: str) -> dict[str, Any]:
     src = Path(source_dir)
-    for pattern in ["qec_precision_sweep_v2.json", "qec_precision_sweep.json"]:
+    for pattern in ["combined_sweep.json", "qec_precision_sweep_v2.json", "qec_precision_sweep.json"]:
         candidates = list(src.glob(pattern))
         if candidates:
             return json.loads(candidates[0].read_text(encoding="utf-8"))
