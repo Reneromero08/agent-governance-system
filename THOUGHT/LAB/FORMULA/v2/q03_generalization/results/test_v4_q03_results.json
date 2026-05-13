@@ -1,0 +1,4981 @@
+{
+  "test_id": "Q03_v4",
+  "timestamp": "2026-02-07T02:31:33.262884Z",
+  "methodology_version": "v4",
+  "pre_registration": {
+    "question": "Does R (using cosine E) correlate with domain-appropriate quality metrics across different data types, and does R outperform E alone?",
+    "reframe_note": "v2 uses a single E definition (mean pairwise cosine sim) for all domains. This test does NOT change E per domain. The question is whether cosine-based R is a useful quality statistic beyond E alone.",
+    "v4_fix": "DOMAIN-01 from AUDIT_v3: text_alt replaced with AG News, a genuinely different text corpus (4-class news: World, Sports, Business, Sci/Tech) instead of 20 Newsgroups with a different random seed.",
+    "decision_rule": {
+      "CONFIRMED": "R significantly outperforms E (Steiger p<0.05) in >=2/3 domains",
+      "FALSIFIED": "R does not significantly outperform E in any domain",
+      "INCONCLUSIVE": "otherwise"
+    },
+    "domains": [
+      "text_20ng",
+      "text_agnews",
+      "financial"
+    ],
+    "text_ground_truth": "cluster purity (label-based, not geometric)",
+    "text_agnews_ground_truth": "cluster purity on AG News (genuinely different corpus)",
+    "financial_ground_truth": "sector classification purity (NOT Sharpe ratio)",
+    "financial_note": "Sharpe ratio is algebraically related to mean cosine of return vectors (both measure return consistency). Using sector purity instead provides a genuinely independent ground truth."
+  },
+  "domains": {
+    "text_20ng": {
+      "per_model": {
+        "all-MiniLM-L6-v2": {
+          "model": "all-MiniLM-L6-v2",
+          "corpus": "20newsgroups",
+          "n_clusters": 65,
+          "clusters": [
+            {
+              "cluster_id": 0,
+              "category": "alt.atheism",
+              "noise_fraction": 0.0,
+              "purity": 1.0,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.11604476720094681,
+                "grad_S": 0.12843634188175201,
+                "sigma": 0.12276588895550213,
+                "Df": 0.14916206371856927,
+                "R_simple": 0.9035197164661245,
+                "R_full": 0.6607886669475137,
+                "SNR": 0.9035197164661245
+              }
+            },
+            {
+              "cluster_id": 1,
+              "category": "alt.atheism",
+              "noise_fraction": 0.05,
+              "purity": 0.9533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.1091075912117958,
+                "grad_S": 0.12525518238544464,
+                "sigma": 0.130535287656649,
+                "Df": 0.14884324384242997,
+                "R_simple": 0.871082450513239,
+                "R_full": 0.6433411646636206,
+                "SNR": 0.871082450513239
+              }
+            },
+            {
+              "cluster_id": 2,
+              "category": "alt.atheism",
+              "noise_fraction": 0.1,
+              "purity": 0.9,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.12182511389255524,
+                "grad_S": 0.12573488056659698,
+                "sigma": 0.1350227778885155,
+                "Df": 0.1525656192865327,
+                "R_simple": 0.9689046773940275,
+                "R_full": 0.7138567391167725,
+                "SNR": 0.9689046773940275
+              }
+            },
+            {
+              "cluster_id": 3,
+              "category": "alt.atheism",
+              "noise_fraction": 0.15,
+              "purity": 0.8533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.10958560556173325,
+                "grad_S": 0.12973552942276,
+                "sigma": 0.13052991485281587,
+                "Df": 0.1505892727055586,
+                "R_simple": 0.8446846137624673,
+                "R_full": 0.621627192051997,
+                "SNR": 0.8446846137624673
+              }
+            },
+            {
+              "cluster_id": 4,
+              "category": "alt.atheism",
+              "noise_fraction": 0.2,
+              "purity": 0.8,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.08147167414426804,
+                "grad_S": 0.11511489748954773,
+                "sigma": 0.14970045754630187,
+                "Df": 0.14850561279778865,
+                "R_simple": 0.7077422290339576,
+                "R_full": 0.5338154198357342,
+                "SNR": 0.7077422290339576
+              }
+            },
+            {
+              "cluster_id": 5,
+              "category": "alt.atheism",
+              "noise_fraction": 0.3,
+              "purity": 0.7,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.08972080796957016,
+                "grad_S": 0.12020286917686462,
+                "sigma": 0.15030672100011255,
+                "Df": 0.15202057039656597,
+                "R_simple": 0.7464115339672663,
+                "R_full": 0.5595799289055466,
+                "SNR": 0.7464115339672663
+              }
+            },
+            {
+              "cluster_id": 6,
+              "category": "alt.atheism",
+              "noise_fraction": 0.4,
+              "purity": 0.6,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.0741630271077156,
+                "grad_S": 0.106357142329216,
+                "sigma": 0.16603919497836225,
+                "Df": 0.15185672554830576,
+                "R_simple": 0.6973018029964804,
+                "R_full": 0.5308899770532143,
+                "SNR": 0.6973018029964804
+              }
+            },
+            {
+              "cluster_id": 7,
+              "category": "alt.atheism",
+              "noise_fraction": 0.5,
+              "purity": 0.5,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.05389885976910591,
+                "grad_S": 0.10524529963731766,
+                "sigma": 0.1626218735371409,
+                "Df": 0.14916396798550327,
+                "R_simple": 0.5121260517557077,
+                "R_full": 0.39058287023328164,
+                "SNR": 0.5121260517557077
+              }
+            },
+            {
+              "cluster_id": 8,
+              "category": "alt.atheism",
+              "noise_fraction": 0.6,
+              "purity": 0.4,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.053979285061359406,
+                "grad_S": 0.10517541319131851,
+                "sigma": 0.15333416568357455,
+                "Df": 0.1500856183995356,
+                "R_simple": 0.5132310244711737,
+                "R_full": 0.38733702911878926,
+                "SNR": 0.5132310244711737
+              }
+            },
+            {
+              "cluster_id": 9,
+              "category": "alt.atheism",
+              "noise_fraction": 0.7,
+              "purity": 0.3,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.044918280094861984,
+                "grad_S": 0.09490615129470825,
+                "sigma": 0.16865314971526776,
+                "Df": 0.15040140779874964,
+                "R_simple": 0.4732915567862304,
+                "R_full": 0.36213261021586207,
+                "SNR": 0.4732915567862304
+              }
+            },
+            {
+              "cluster_id": 10,
+              "category": "alt.atheism",
+              "noise_fraction": 0.8,
+              "purity": 0.2,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.04511161893606186,
+                "grad_S": 0.09850627183914185,
+                "sigma": 0.1605781602942501,
+                "Df": 0.14874504765794722,
+                "R_simple": 0.45795681933560484,
+                "R_full": 0.34887859742529004,
+                "SNR": 0.45795681933560484
+              }
+            },
+            {
+              "cluster_id": 11,
+              "category": "alt.atheism",
+              "noise_fraction": 0.9,
+              "purity": 0.1,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.04290253669023514,
+                "grad_S": 0.09535970538854599,
+                "sigma": 0.1692093075773561,
+                "Df": 0.14994342123344662,
+                "R_simple": 0.44990215222905167,
+                "R_full": 0.3446873640152142,
+                "SNR": 0.44990215222905167
+              }
+            },
+            {
+              "cluster_id": 12,
+              "category": "alt.atheism",
+              "noise_fraction": 1.0,
+              "purity": 0.08666666666666667,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.042236730456352234,
+                "grad_S": 0.09329244494438171,
+                "sigma": 0.17070735109952842,
+                "Df": 0.14961473895416025,
+                "R_simple": 0.45273473625364374,
+                "R_full": 0.34751810389177107,
+                "SNR": 0.45273473625364374
+              }
+            },
+            {
+              "cluster_id": 13,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.0,
+              "purity": 1.0,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.20752179622650146,
+                "grad_S": 0.14968544244766235,
+                "sigma": 0.10904876963920267,
+                "Df": 0.15336071961597864,
+                "R_simple": 1.3863859626767756,
+                "R_full": 0.9869450681560882,
+                "SNR": 1.3863859626767756
+              }
+            },
+            {
+              "cluster_id": 14,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.05,
+              "purity": 0.9533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.19135750830173492,
+                "grad_S": 0.15685631334781647,
+                "sigma": 0.10236226789893298,
+                "Df": 0.1504172001082402,
+                "R_simple": 1.2199541364804027,
+                "R_full": 0.8658676599088784,
+                "SNR": 1.2199541364804027
+              }
+            },
+            {
+              "cluster_id": 15,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.1,
+              "purity": 0.9,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.17694975435733795,
+                "grad_S": 0.15904149413108826,
+                "sigma": 0.1119389955230879,
+                "Df": 0.15127194690772022,
+                "R_simple": 1.112601182000271,
+                "R_full": 0.7988717847710294,
+                "SNR": 1.112601182000271
+              }
+            },
+            {
+              "cluster_id": 16,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.15,
+              "purity": 0.8533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.17872413992881775,
+                "grad_S": 0.16531118750572205,
+                "sigma": 0.10681370615805542,
+                "Df": 0.15189663715249457,
+                "R_simple": 1.081137596465644,
+                "R_full": 0.769719830669292,
+                "SNR": 1.081137596465644
+              }
+            },
+            {
+              "cluster_id": 17,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.2,
+              "purity": 0.8,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.15913084149360657,
+                "grad_S": 0.16345594823360443,
+                "sigma": 0.10562957500014807,
+                "Df": 0.14890893835276744,
+                "R_simple": 0.9735396185532716,
+                "R_full": 0.6966049721885638,
+                "SNR": 0.9735396185532716
+              }
+            },
+            {
+              "cluster_id": 18,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.3,
+              "purity": 0.7,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.1352846622467041,
+                "grad_S": 0.15305285155773163,
+                "sigma": 0.10578008224685755,
+                "Df": 0.14977834591863318,
+                "R_simple": 0.8839081459104644,
+                "R_full": 0.6313700348371223,
+                "SNR": 0.8839081459104644
+              }
+            },
+            {
+              "cluster_id": 19,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.4,
+              "purity": 0.6,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.08898675441741943,
+                "grad_S": 0.1382787972688675,
+                "sigma": 0.12055168259357707,
+                "Df": 0.15143482674086306,
+                "R_simple": 0.6435314464327799,
+                "R_full": 0.46711886612468195,
+                "SNR": 0.6435314464327799
+              }
+            },
+            {
+              "cluster_id": 20,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.5,
+              "purity": 0.5,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.07942251861095428,
+                "grad_S": 0.13274312019348145,
+                "sigma": 0.1336759173738849,
+                "Df": 0.15056656024662948,
+                "R_simple": 0.59831740051907,
+                "R_full": 0.44192082311721786,
+                "SNR": 0.59831740051907
+              }
+            },
+            {
+              "cluster_id": 21,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.6,
+              "purity": 0.4,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.06416680663824081,
+                "grad_S": 0.12693265080451965,
+                "sigma": 0.13100302154109053,
+                "Df": 0.15349037229331242,
+                "R_simple": 0.5055185268056818,
+                "R_full": 0.37003964596320105,
+                "SNR": 0.5055185268056818
+              }
+            },
+            {
+              "cluster_id": 22,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.7,
+              "purity": 0.3,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.053693994879722595,
+                "grad_S": 0.10827960819005966,
+                "sigma": 0.14886535679214993,
+                "Df": 0.15009743994665695,
+                "R_simple": 0.49588279619072206,
+                "R_full": 0.37257823833903786,
+                "SNR": 0.49588279619072206
+              }
+            },
+            {
+              "cluster_id": 23,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.8,
+              "purity": 0.2,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.0402185320854187,
+                "grad_S": 0.10314218699932098,
+                "sigma": 0.1537605954399381,
+                "Df": 0.15016365711358176,
+                "R_simple": 0.3899328999653989,
+                "R_full": 0.2943632294191137,
+                "SNR": 0.3899328999653989
+              }
+            },
+            {
+              "cluster_id": 24,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.9,
+              "purity": 0.1,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.041971541941165924,
+                "grad_S": 0.09484709799289703,
+                "sigma": 0.1661132156337329,
+                "Df": 0.15465464015869734,
+                "R_simple": 0.4425179349642212,
+                "R_full": 0.3352453532269156,
+                "SNR": 0.4425179349642212
+              }
+            },
+            {
+              "cluster_id": 25,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 1.0,
+              "purity": 0.1,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.041685208678245544,
+                "grad_S": 0.09338072687387466,
+                "sigma": 0.16830478875389152,
+                "Df": 0.149912007544536,
+                "R_simple": 0.44640055902057785,
+                "R_full": 0.34174903618267266,
+                "SNR": 0.44640055902057785
+              }
+            },
+            {
+              "cluster_id": 26,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.0,
+              "purity": 1.0,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.15055720508098602,
+                "grad_S": 0.12070630490779877,
+                "sigma": 0.13221224681953536,
+                "Df": 0.15058319600549475,
+                "R_simple": 1.2473019134832168,
+                "R_full": 0.9197078018543439,
+                "SNR": 1.2473019134832168
+              }
+            },
+            {
+              "cluster_id": 27,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.05,
+              "purity": 0.9533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.14524413645267487,
+                "grad_S": 0.1242627203464508,
+                "sigma": 0.14075442497748264,
+                "Df": 0.15217415470845583,
+                "R_simple": 1.1688472298669046,
+                "R_full": 0.8673126589390567,
+                "SNR": 1.1688472298669046
+              }
+            },
+            {
+              "cluster_id": 28,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.1,
+              "purity": 0.9,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.13531199097633362,
+                "grad_S": 0.12478799372911453,
+                "sigma": 0.15220786565242336,
+                "Df": 0.1528092887338464,
+                "R_simple": 1.084335014393005,
+                "R_full": 0.8132653628757565,
+                "SNR": 1.084335014393005
+              }
+            },
+            {
+              "cluster_id": 29,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.15,
+              "purity": 0.8533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.1448848396539688,
+                "grad_S": 0.12904466688632965,
+                "sigma": 0.1420599508112925,
+                "Df": 0.15429944323161568,
+                "R_simple": 1.1227495343266851,
+                "R_full": 0.8308253374338297,
+                "SNR": 1.1227495343266851
+              }
+            },
+            {
+              "cluster_id": 30,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.2,
+              "purity": 0.8,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.11924811452627182,
+                "grad_S": 0.1257169544696808,
+                "sigma": 0.14903530298911152,
+                "Df": 0.14920330959349407,
+                "R_simple": 0.9485444109690944,
+                "R_full": 0.7140188467210926,
+                "SNR": 0.9485444109690944
+              }
+            },
+            {
+              "cluster_id": 31,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.3,
+              "purity": 0.7,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.08823224902153015,
+                "grad_S": 0.1223079264163971,
+                "sigma": 0.14859650958168893,
+                "Df": 0.14879871947918366,
+                "R_simple": 0.7213943658986061,
+                "R_full": 0.5432111645006289,
+                "SNR": 0.7213943658986061
+              }
+            },
+            {
+              "cluster_id": 32,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.4,
+              "purity": 0.6,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.08070006966590881,
+                "grad_S": 0.11977344751358032,
+                "sigma": 0.14659173445544138,
+                "Df": 0.14985256438145675,
+                "R_simple": 0.6737726210707825,
+                "R_full": 0.505303989372943,
+                "SNR": 0.6737726210707825
+              }
+            },
+            {
+              "cluster_id": 33,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.5,
+              "purity": 0.5,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.07030194997787476,
+                "grad_S": 0.11543061584234238,
+                "sigma": 0.14849069593763628,
+                "Df": 0.14746511024119255,
+                "R_simple": 0.6090407598092925,
+                "R_full": 0.45972793710682525,
+                "SNR": 0.6090407598092925
+              }
+            },
+            {
+              "cluster_id": 34,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.6,
+              "purity": 0.4,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.05093381181359291,
+                "grad_S": 0.10811468958854675,
+                "sigma": 0.14781630818068894,
+                "Df": 0.14959127902546965,
+                "R_simple": 0.47110907877026026,
+                "R_full": 0.3539314686457535,
+                "SNR": 0.47110907877026026
+              }
+            },
+            {
+              "cluster_id": 35,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.7,
+              "purity": 0.3,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.04314664378762245,
+                "grad_S": 0.0991850197315216,
+                "sigma": 0.16099970647777814,
+                "Df": 0.15076357712395877,
+                "R_simple": 0.435011697375407,
+                "R_full": 0.33030796597762996,
+                "SNR": 0.435011697375407
+              }
+            },
+            {
+              "cluster_id": 36,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.8,
+              "purity": 0.2,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.04309162124991417,
+                "grad_S": 0.10086354613304138,
+                "sigma": 0.15563344271757226,
+                "Df": 0.14910010984924815,
+                "R_simple": 0.42722691102963317,
+                "R_full": 0.3237435006041883,
+                "SNR": 0.42722691102963317
+              }
+            },
+            {
+              "cluster_id": 37,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.9,
+              "purity": 0.1,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.036449506878852844,
+                "grad_S": 0.09379830956459045,
+                "sigma": 0.16628828031083673,
+                "Df": 0.150269351178446,
+                "R_simple": 0.3885944965111908,
+                "R_full": 0.29676728945697156,
+                "SNR": 0.3885944965111908
+              }
+            },
+            {
+              "cluster_id": 38,
+              "category": "soc.religion.christian",
+              "noise_fraction": 1.0,
+              "purity": 0.08,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.039381708949804306,
+                "grad_S": 0.09639357775449753,
+                "sigma": 0.1623953485074269,
+                "Df": 0.14929040690689183,
+                "R_simple": 0.40855116976884737,
+                "R_full": 0.3114531070050099,
+                "SNR": 0.40855116976884737
+              }
+            },
+            {
+              "cluster_id": 39,
+              "category": "comp.graphics",
+              "noise_fraction": 0.0,
+              "purity": 1.0,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.14828991889953613,
+                "grad_S": 0.11534997820854187,
+                "sigma": 0.146437821751397,
+                "Df": 0.15125215915107068,
+                "R_simple": 1.2855652094831085,
+                "R_full": 0.9613850513584509,
+                "SNR": 1.2855652094831085
+              }
+            },
+            {
+              "cluster_id": 40,
+              "category": "comp.graphics",
+              "noise_fraction": 0.05,
+              "purity": 0.9533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.12257862836122513,
+                "grad_S": 0.11771335452795029,
+                "sigma": 0.14582601319102786,
+                "Df": 0.15202790520005835,
+                "R_simple": 1.041331536704441,
+                "R_full": 0.7770851473198316,
+                "SNR": 1.041331536704441
+              }
+            },
+            {
+              "cluster_id": 41,
+              "category": "comp.graphics",
+              "noise_fraction": 0.1,
+              "purity": 0.9,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.12431802600622177,
+                "grad_S": 0.1187560111284256,
+                "sigma": 0.14792748709307887,
+                "Df": 0.1530131401234027,
+                "R_simple": 1.046835649201633,
+                "R_full": 0.7814209971388942,
+                "SNR": 1.046835649201633
+              }
+            },
+            {
+              "cluster_id": 42,
+              "category": "comp.graphics",
+              "noise_fraction": 0.15,
+              "purity": 0.8533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.10768415033817291,
+                "grad_S": 0.12116329371929169,
+                "sigma": 0.14047064840743162,
+                "Df": 0.15240127082028973,
+                "R_simple": 0.88875225353029,
+                "R_full": 0.6589791520511163,
+                "SNR": 0.88875225353029
+              }
+            },
+            {
+              "cluster_id": 43,
+              "category": "comp.graphics",
+              "noise_fraction": 0.2,
+              "purity": 0.8,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.10164051502943039,
+                "grad_S": 0.1186603233218193,
+                "sigma": 0.1550015483763356,
+                "Df": 0.15339155877042596,
+                "R_simple": 0.8565669819874887,
+                "R_full": 0.6435254281829247,
+                "SNR": 0.8565669819874887
+              }
+            },
+            {
+              "cluster_id": 44,
+              "category": "comp.graphics",
+              "noise_fraction": 0.3,
+              "purity": 0.7,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.09265675395727158,
+                "grad_S": 0.12188775092363358,
+                "sigma": 0.14710417138957785,
+                "Df": 0.1516341458780219,
+                "R_simple": 0.7601810129003355,
+                "R_full": 0.568460828919939,
+                "SNR": 0.7601810129003355
+              }
+            },
+            {
+              "cluster_id": 45,
+              "category": "comp.graphics",
+              "noise_fraction": 0.4,
+              "purity": 0.6,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.07408531755208969,
+                "grad_S": 0.11286108195781708,
+                "sigma": 0.1526029053647698,
+                "Df": 0.14996502911378268,
+                "R_simple": 0.6564292692123915,
+                "R_full": 0.4951661054691981,
+                "SNR": 0.6564292692123915
+              }
+            },
+            {
+              "cluster_id": 46,
+              "category": "comp.graphics",
+              "noise_fraction": 0.5,
+              "purity": 0.5,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.06463908404111862,
+                "grad_S": 0.10881153494119644,
+                "sigma": 0.15193913870824363,
+                "Df": 0.15075786817571668,
+                "R_simple": 0.5940462477259479,
+                "R_full": 0.44714720406529224,
+                "SNR": 0.5940462477259479
+              }
+            },
+            {
+              "cluster_id": 47,
+              "category": "comp.graphics",
+              "noise_fraction": 0.6,
+              "purity": 0.4,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.06011726334691048,
+                "grad_S": 0.1019992008805275,
+                "sigma": 0.16364092287764428,
+                "Df": 0.15117747655961197,
+                "R_simple": 0.5893895523488103,
+                "R_full": 0.4482915960172204,
+                "SNR": 0.5893895523488103
+              }
+            },
+            {
+              "cluster_id": 48,
+              "category": "comp.graphics",
+              "noise_fraction": 0.7,
+              "purity": 0.3,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.04439622908830643,
+                "grad_S": 0.09720110893249512,
+                "sigma": 0.16559573135407965,
+                "Df": 0.14999796456252015,
+                "R_simple": 0.4567461171573569,
+                "R_full": 0.3487657460923949,
+                "SNR": 0.4567461171573569
+              }
+            },
+            {
+              "cluster_id": 49,
+              "category": "comp.graphics",
+              "noise_fraction": 0.8,
+              "purity": 0.2,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.04883596673607826,
+                "grad_S": 0.097824327647686,
+                "sigma": 0.1643698174963248,
+                "Df": 0.15194495604170405,
+                "R_simple": 0.4992210824280933,
+                "R_full": 0.3794381873526734,
+                "SNR": 0.4992210824280933
+              }
+            },
+            {
+              "cluster_id": 50,
+              "category": "comp.graphics",
+              "noise_fraction": 0.9,
+              "purity": 0.1,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.03962066397070885,
+                "grad_S": 0.09134993702173233,
+                "sigma": 0.17211745628550137,
+                "Df": 0.15036404198781717,
+                "R_simple": 0.4337240425385626,
+                "R_full": 0.33289635735930617,
+                "SNR": 0.4337240425385626
+              }
+            },
+            {
+              "cluster_id": 51,
+              "category": "comp.graphics",
+              "noise_fraction": 1.0,
+              "purity": 0.07333333333333333,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.043326810002326965,
+                "grad_S": 0.09115400910377502,
+                "sigma": 0.17403514849479226,
+                "Df": 0.15077041735776892,
+                "R_simple": 0.4753143655261636,
+                "R_full": 0.36516694569578506,
+                "SNR": 0.4753143655261636
+              }
+            },
+            {
+              "cluster_id": 52,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.0,
+              "purity": 1.0,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.12028195708990097,
+                "grad_S": 0.11526910215616226,
+                "sigma": 0.1389048304677474,
+                "Df": 0.1507686477422592,
+                "R_simple": 1.0434882795126441,
+                "R_full": 0.7748831717527146,
+                "SNR": 1.0434882795126441
+              }
+            },
+            {
+              "cluster_id": 53,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.05,
+              "purity": 0.9533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.11951363831758499,
+                "grad_S": 0.11575626581907272,
+                "sigma": 0.15009853911961832,
+                "Df": 0.1501882396502593,
+                "R_simple": 1.0324593443985577,
+                "R_full": 0.7765588803736142,
+                "SNR": 1.0324593443985577
+              }
+            },
+            {
+              "cluster_id": 54,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.1,
+              "purity": 0.9,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.09901491552591324,
+                "grad_S": 0.1106104627251625,
+                "sigma": 0.15336329132473628,
+                "Df": 0.15245453187251187,
+                "R_simple": 0.895167718192617,
+                "R_full": 0.6726109797180045,
+                "SNR": 0.895167718192617
+              }
+            },
+            {
+              "cluster_id": 55,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.15,
+              "purity": 0.8533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.0961197167634964,
+                "grad_S": 0.11100301146507263,
+                "sigma": 0.15776443428996592,
+                "Df": 0.15108512359293874,
+                "R_simple": 0.8659199015851989,
+                "R_full": 0.6551018526831842,
+                "SNR": 0.8659199015851989
+              }
+            },
+            {
+              "cluster_id": 56,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.2,
+              "purity": 0.8,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.09506069868803024,
+                "grad_S": 0.11723547428846359,
+                "sigma": 0.14937438825738103,
+                "Df": 0.1531241353545354,
+                "R_simple": 0.8108526814514245,
+                "R_full": 0.6060433708326272,
+                "SNR": 0.8108526814514245
+              }
+            },
+            {
+              "cluster_id": 57,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.3,
+              "purity": 0.7,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.0744340717792511,
+                "grad_S": 0.10481152683496475,
+                "sigma": 0.16264262521489203,
+                "Df": 0.1528961597694803,
+                "R_simple": 0.7101706656411397,
+                "R_full": 0.5379767344612401,
+                "SNR": 0.7101706656411397
+              }
+            },
+            {
+              "cluster_id": 58,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.4,
+              "purity": 0.6,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.057253558188676834,
+                "grad_S": 0.09950758516788483,
+                "sigma": 0.1681273904103534,
+                "Df": 0.15291863290166313,
+                "R_simple": 0.5753687831141832,
+                "R_full": 0.4380583763634533,
+                "SNR": 0.5753687831141832
+              }
+            },
+            {
+              "cluster_id": 59,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.5,
+              "purity": 0.5,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.05950412526726723,
+                "grad_S": 0.1021648421883583,
+                "sigma": 0.1620007587327126,
+                "Df": 0.1501877180749603,
+                "R_simple": 0.5824325080203346,
+                "R_full": 0.44312349359614656,
+                "SNR": 0.5824325080203346
+              }
+            },
+            {
+              "cluster_id": 60,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.6,
+              "purity": 0.4,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.050525564700365067,
+                "grad_S": 0.09816063940525055,
+                "sigma": 0.1637194468071007,
+                "Df": 0.15173356817372446,
+                "R_simple": 0.5147232638916825,
+                "R_full": 0.39113477235373634,
+                "SNR": 0.5147232638916825
+              }
+            },
+            {
+              "cluster_id": 61,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.7,
+              "purity": 0.3,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.048726361244916916,
+                "grad_S": 0.09574974328279495,
+                "sigma": 0.16536193869306978,
+                "Df": 0.15160471459151595,
+                "R_simple": 0.5088928656550502,
+                "R_full": 0.38738027918599655,
+                "SNR": 0.5088928656550502
+              }
+            },
+            {
+              "cluster_id": 62,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.8,
+              "purity": 0.2,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.04099448397755623,
+                "grad_S": 0.08908330649137497,
+                "sigma": 0.1793933482962873,
+                "Df": 0.1517194763374399,
+                "R_simple": 0.46018143681639506,
+                "R_full": 0.3545822436968435,
+                "SNR": 0.46018143681639506
+              }
+            },
+            {
+              "cluster_id": 63,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.9,
+              "purity": 0.1,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.03504621237516403,
+                "grad_S": 0.09252532571554184,
+                "sigma": 0.17093265488481132,
+                "Df": 0.15045123080735387,
+                "R_simple": 0.3787742664414872,
+                "R_full": 0.2903742148518806,
+                "SNR": 0.3787742664414872
+              }
+            },
+            {
+              "cluster_id": 64,
+              "category": "rec.motorcycles",
+              "noise_fraction": 1.0,
+              "purity": 0.08,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.040762461721897125,
+                "grad_S": 0.09387844800949097,
+                "sigma": 0.1677284033385982,
+                "Df": 0.15178527173290823,
+                "R_simple": 0.434204682610178,
+                "R_full": 0.3311320415774926,
+                "SNR": 0.434204682610178
+              }
+            }
+          ],
+          "correlations": {
+            "R_simple_vs_purity": {
+              "rho": 0.9531068352268138,
+              "p_value": 2.0823483341216948e-34,
+              "n": 65
+            },
+            "R_full_vs_purity": {
+              "rho": 0.9517262196970774,
+              "p_value": 5.0867875599271615e-34,
+              "n": 65
+            },
+            "E_vs_purity": {
+              "rho": 0.941010013442458,
+              "p_value": 2.390472107066414e-31,
+              "n": 65
+            },
+            "SNR_vs_purity": {
+              "rho": 0.9531068352268138,
+              "p_value": 2.0823483341216948e-34,
+              "n": 65
+            },
+            "R_full_vs_E": {
+              "rho": 0.9746066433566434,
+              "p_value": 1.1686576989806433e-42,
+              "n": 65
+            },
+            "steiger_Rfull_vs_E": {
+              "z_stat": 10.51498751229189,
+              "p_value": 0.0,
+              "n": 65
+            },
+            "R_simple_vs_E": {
+              "rho": 0.9834353146853148,
+              "p_value": 1.907711795543038e-48,
+              "n": 65
+            },
+            "steiger_Rsimple_vs_E": {
+              "z_stat": 15.299450449984388,
+              "p_value": 0.0,
+              "n": 65
+            }
+          }
+        },
+        "all-mpnet-base-v2": {
+          "model": "all-mpnet-base-v2",
+          "corpus": "20newsgroups",
+          "n_clusters": 65,
+          "clusters": [
+            {
+              "cluster_id": 0,
+              "category": "alt.atheism",
+              "noise_fraction": 0.0,
+              "purity": 1.0,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.1338777244091034,
+                "grad_S": 0.12930645048618317,
+                "sigma": 0.06160913438079053,
+                "Df": 0.13954182251844255,
+                "R_simple": 1.0353522496807588,
+                "R_full": 0.7017670998555434,
+                "SNR": 1.0353522496807588
+              }
+            },
+            {
+              "cluster_id": 1,
+              "category": "alt.atheism",
+              "noise_fraction": 0.05,
+              "purity": 0.9533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.11543062329292297,
+                "grad_S": 0.1262046992778778,
+                "sigma": 0.06670170662496654,
+                "Df": 0.13973047633242053,
+                "R_simple": 0.9146301520735575,
+                "R_full": 0.6265296230407746,
+                "SNR": 0.9146301520735575
+              }
+            },
+            {
+              "cluster_id": 2,
+              "category": "alt.atheism",
+              "noise_fraction": 0.1,
+              "purity": 0.9,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.13196535408496857,
+                "grad_S": 0.13217730820178986,
+                "sigma": 0.06707721939188523,
+                "Df": 0.13842325586863907,
+                "R_simple": 0.9983964409647554,
+                "R_full": 0.6868686934180697,
+                "SNR": 0.9983964409647554
+              }
+            },
+            {
+              "cluster_id": 3,
+              "category": "alt.atheism",
+              "noise_fraction": 0.15,
+              "purity": 0.8533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.12325160205364227,
+                "grad_S": 0.1308896243572235,
+                "sigma": 0.06564298081822549,
+                "Df": 0.14073357408141873,
+                "R_simple": 0.9416453187860363,
+                "R_full": 0.6418388970188056,
+                "SNR": 0.9416453187860363
+              }
+            },
+            {
+              "cluster_id": 4,
+              "category": "alt.atheism",
+              "noise_fraction": 0.2,
+              "purity": 0.8,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.092979796230793,
+                "grad_S": 0.12069154530763626,
+                "sigma": 0.0746495016013503,
+                "Df": 0.13966642535943036,
+                "R_simple": 0.7703919607110216,
+                "R_full": 0.5361810236793021,
+                "SNR": 0.7703919607110216
+              }
+            },
+            {
+              "cluster_id": 5,
+              "category": "alt.atheism",
+              "noise_fraction": 0.3,
+              "purity": 0.7,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.09223207086324692,
+                "grad_S": 0.11655239015817642,
+                "sigma": 0.07906403680850706,
+                "Df": 0.139608089078522,
+                "R_simple": 0.7913357309796587,
+                "R_full": 0.5552770545076436,
+                "SNR": 0.7913357309796587
+              }
+            },
+            {
+              "cluster_id": 6,
+              "category": "alt.atheism",
+              "noise_fraction": 0.4,
+              "purity": 0.6,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.07906737178564072,
+                "grad_S": 0.10775110870599747,
+                "sigma": 0.08357127119816292,
+                "Df": 0.13902916924725722,
+                "R_simple": 0.7337963640019585,
+                "R_full": 0.5196489293537472,
+                "SNR": 0.7337963640019585
+              }
+            },
+            {
+              "cluster_id": 7,
+              "category": "alt.atheism",
+              "noise_fraction": 0.5,
+              "purity": 0.5,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.05724431946873665,
+                "grad_S": 0.10302335023880005,
+                "sigma": 0.08529647338508235,
+                "Df": 0.13925323890995828,
+                "R_simple": 0.5556441266571976,
+                "R_full": 0.3943895669250563,
+                "SNR": 0.5556441266571976
+              }
+            },
+            {
+              "cluster_id": 8,
+              "category": "alt.atheism",
+              "noise_fraction": 0.6,
+              "purity": 0.4,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.059763047844171524,
+                "grad_S": 0.10413407534360886,
+                "sigma": 0.08109297279340738,
+                "Df": 0.13941402879734155,
+                "R_simple": 0.573904820751255,
+                "R_full": 0.4043308029270136,
+                "SNR": 0.573904820751255
+              }
+            },
+            {
+              "cluster_id": 9,
+              "category": "alt.atheism",
+              "noise_fraction": 0.7,
+              "purity": 0.3,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.05415816977620125,
+                "grad_S": 0.09328922629356384,
+                "sigma": 0.08739755137013178,
+                "Df": 0.13922151931595317,
+                "R_simple": 0.5805404538973832,
+                "R_full": 0.4134913298553787,
+                "SNR": 0.5805404538973832
+              }
+            },
+            {
+              "cluster_id": 10,
+              "category": "alt.atheism",
+              "noise_fraction": 0.8,
+              "purity": 0.2,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.051975950598716736,
+                "grad_S": 0.09818742424249649,
+                "sigma": 0.08145901770998772,
+                "Df": 0.13909565477004937,
+                "R_simple": 0.5293544565376329,
+                "R_full": 0.3734762111096541,
+                "SNR": 0.5293544565376329
+              }
+            },
+            {
+              "cluster_id": 11,
+              "category": "alt.atheism",
+              "noise_fraction": 0.9,
+              "purity": 0.1,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.04462594538927078,
+                "grad_S": 0.09354306757450104,
+                "sigma": 0.08593090711773554,
+                "Df": 0.13900092473454387,
+                "R_simple": 0.4770630956027723,
+                "R_full": 0.33917325742827714,
+                "SNR": 0.4770630956027723
+              }
+            },
+            {
+              "cluster_id": 12,
+              "category": "alt.atheism",
+              "noise_fraction": 1.0,
+              "purity": 0.08666666666666667,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.04647960141301155,
+                "grad_S": 0.08899769186973572,
+                "sigma": 0.09020627607102122,
+                "Df": 0.13934537534427066,
+                "R_simple": 0.5222562567245327,
+                "R_full": 0.3735087024836013,
+                "SNR": 0.5222562567245327
+              }
+            },
+            {
+              "cluster_id": 13,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.0,
+              "purity": 1.0,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.24727696180343628,
+                "grad_S": 0.15383315086364746,
+                "sigma": 0.05109936172848381,
+                "Df": 0.13883469068843365,
+                "R_simple": 1.6074361112359603,
+                "R_full": 1.0636946688971922,
+                "SNR": 1.6074361112359603
+              }
+            },
+            {
+              "cluster_id": 14,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.05,
+              "purity": 0.9533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.22084097564220428,
+                "grad_S": 0.1734347939491272,
+                "sigma": 0.04598913118920333,
+                "Df": 0.14048655352752026,
+                "R_simple": 1.2733372042231763,
+                "R_full": 0.8261605769794027,
+                "SNR": 1.2733372042231763
+              }
+            },
+            {
+              "cluster_id": 15,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.1,
+              "purity": 0.9,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.2062550038099289,
+                "grad_S": 0.16568619012832642,
+                "sigma": 0.05317826601252674,
+                "Df": 0.13927508071393793,
+                "R_simple": 1.2448533197014267,
+                "R_full": 0.8272651051939917,
+                "SNR": 1.2448533197014267
+              }
+            },
+            {
+              "cluster_id": 16,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.15,
+              "purity": 0.8533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.21183179318904877,
+                "grad_S": 0.1747644692659378,
+                "sigma": 0.05032170833226978,
+                "Df": 0.13986763729553067,
+                "R_simple": 1.2120987411159982,
+                "R_full": 0.7979130939517728,
+                "SNR": 1.2120987411159982
+              }
+            },
+            {
+              "cluster_id": 17,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.2,
+              "purity": 0.8,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.1738128364086151,
+                "grad_S": 0.17401081323623657,
+                "sigma": 0.05044934114728051,
+                "Df": 0.14117868493805866,
+                "R_simple": 0.9988622728442015,
+                "R_full": 0.6552038719448381,
+                "SNR": 0.9988622728442015
+              }
+            },
+            {
+              "cluster_id": 18,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.3,
+              "purity": 0.7,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.1485930234193802,
+                "grad_S": 0.1632647067308426,
+                "sigma": 0.05013186879373597,
+                "Df": 0.13974506972949674,
+                "R_simple": 0.9101356098005304,
+                "R_full": 0.5990367028758886,
+                "SNR": 0.9101356098005304
+              }
+            },
+            {
+              "cluster_id": 19,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.4,
+              "purity": 0.6,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.10168011486530304,
+                "grad_S": 0.1370357871055603,
+                "sigma": 0.06339634227075891,
+                "Df": 0.14025030362979538,
+                "R_simple": 0.7419967952384411,
+                "R_full": 0.5039543172489961,
+                "SNR": 0.7419967952384411
+              }
+            },
+            {
+              "cluster_id": 20,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.5,
+              "purity": 0.5,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.09656467288732529,
+                "grad_S": 0.14603781700134277,
+                "sigma": 0.06258398699090442,
+                "Df": 0.13926306510750608,
+                "R_simple": 0.6612305967736932,
+                "R_full": 0.4495155515222386,
+                "SNR": 0.6612305967736932
+              }
+            },
+            {
+              "cluster_id": 21,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.6,
+              "purity": 0.4,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.08266675472259521,
+                "grad_S": 0.1294429898262024,
+                "sigma": 0.06711310509014771,
+                "Df": 0.1387936686739998,
+                "R_simple": 0.6386344662896644,
+                "R_full": 0.438955645333052,
+                "SNR": 0.6386344662896644
+              }
+            },
+            {
+              "cluster_id": 22,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.7,
+              "purity": 0.3,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.05646965652704239,
+                "grad_S": 0.1097574532032013,
+                "sigma": 0.07644949796600206,
+                "Df": 0.13925318716546417,
+                "R_simple": 0.5144949602875383,
+                "R_full": 0.359656144584232,
+                "SNR": 0.5144949602875383
+              }
+            },
+            {
+              "cluster_id": 23,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.8,
+              "purity": 0.2,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.0447998084127903,
+                "grad_S": 0.1016150489449501,
+                "sigma": 0.07947397620276225,
+                "Df": 0.13964448896244355,
+                "R_simple": 0.4408776935890723,
+                "R_full": 0.3095569792977667,
+                "SNR": 0.4408776935890723
+              }
+            },
+            {
+              "cluster_id": 24,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.9,
+              "purity": 0.1,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.042604293674230576,
+                "grad_S": 0.0916333794593811,
+                "sigma": 0.08765275907775366,
+                "Df": 0.1388153215103983,
+                "R_simple": 0.46494294901691413,
+                "R_full": 0.3316189436274653,
+                "SNR": 0.46494294901691413
+              }
+            },
+            {
+              "cluster_id": 25,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 1.0,
+              "purity": 0.1,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.042541418224573135,
+                "grad_S": 0.0928635373711586,
+                "sigma": 0.08597398291268944,
+                "Df": 0.13925604403687056,
+                "R_simple": 0.4581068030452346,
+                "R_full": 0.32551492937111987,
+                "SNR": 0.4581068030452346
+              }
+            },
+            {
+              "cluster_id": 26,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.0,
+              "purity": 1.0,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.15201228857040405,
+                "grad_S": 0.12116821855306625,
+                "sigma": 0.06554698479583387,
+                "Df": 0.14050619738149353,
+                "R_simple": 1.2545557769658013,
+                "R_full": 0.8554769202906938,
+                "SNR": 1.2545557769658013
+              }
+            },
+            {
+              "cluster_id": 27,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.05,
+              "purity": 0.9533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.15557453036308289,
+                "grad_S": 0.1268700361251831,
+                "sigma": 0.06740861179208402,
+                "Df": 0.13812876933569604,
+                "R_simple": 1.226251170998146,
+                "R_full": 0.8448728075994031,
+                "SNR": 1.226251170998146
+              }
+            },
+            {
+              "cluster_id": 28,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.1,
+              "purity": 0.9,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.1397978663444519,
+                "grad_S": 0.1218009665608406,
+                "sigma": 0.07379322366569259,
+                "Df": 0.13934679597402194,
+                "R_simple": 1.1477566253517513,
+                "R_full": 0.7981996484792256,
+                "SNR": 1.1477566253517513
+              }
+            },
+            {
+              "cluster_id": 29,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.15,
+              "purity": 0.8533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.1451416164636612,
+                "grad_S": 0.127938911318779,
+                "sigma": 0.07022196692868568,
+                "Df": 0.13903779269093547,
+                "R_simple": 1.134460305840958,
+                "R_full": 0.7841613908532915,
+                "SNR": 1.134460305840958
+              }
+            },
+            {
+              "cluster_id": 30,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.2,
+              "purity": 0.8,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.1216096431016922,
+                "grad_S": 0.1213962584733963,
+                "sigma": 0.07647422533796237,
+                "Df": 0.13863034962300141,
+                "R_simple": 1.0017577529240134,
+                "R_full": 0.701429485949766,
+                "SNR": 1.0017577529240134
+              }
+            },
+            {
+              "cluster_id": 31,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.3,
+              "purity": 0.7,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.09280522167682648,
+                "grad_S": 0.11964255571365356,
+                "sigma": 0.07671542371741688,
+                "Df": 0.14055768133292104,
+                "R_simple": 0.7756873891840107,
+                "R_full": 0.5406901116959073,
+                "SNR": 0.7756873891840107
+              }
+            },
+            {
+              "cluster_id": 32,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.4,
+              "purity": 0.6,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.07567372173070908,
+                "grad_S": 0.11510142683982849,
+                "sigma": 0.07729533606168432,
+                "Df": 0.1390499197498604,
+                "R_simple": 0.6574525078304566,
+                "R_full": 0.4605345216781388,
+                "SNR": 0.6574525078304566
+              }
+            },
+            {
+              "cluster_id": 33,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.5,
+              "purity": 0.5,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.07134522497653961,
+                "grad_S": 0.1133895218372345,
+                "sigma": 0.07639672175202065,
+                "Df": 0.1391534348812778,
+                "R_simple": 0.6292047432650121,
+                "R_full": 0.43991421853281193,
+                "SNR": 0.6292047432650121
+              }
+            },
+            {
+              "cluster_id": 34,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.6,
+              "purity": 0.4,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.05429612100124359,
+                "grad_S": 0.10654456168413162,
+                "sigma": 0.07532750975084342,
+                "Df": 0.138771496707157,
+                "R_simple": 0.5096095018177758,
+                "R_full": 0.3559513862116953,
+                "SNR": 0.5096095018177758
+              }
+            },
+            {
+              "cluster_id": 35,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.7,
+              "purity": 0.3,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.04762357100844383,
+                "grad_S": 0.09592066705226898,
+                "sigma": 0.08496105265588566,
+                "Df": 0.13880726948324204,
+                "R_simple": 0.4964891557988525,
+                "R_full": 0.3525962614050933,
+                "SNR": 0.4964891557988525
+              }
+            },
+            {
+              "cluster_id": 36,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.8,
+              "purity": 0.2,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.04560616612434387,
+                "grad_S": 0.09934677928686142,
+                "sigma": 0.07989733451386184,
+                "Df": 0.13861867007423787,
+                "R_simple": 0.45906033846006394,
+                "R_full": 0.32340018072158594,
+                "SNR": 0.45906033846006394
+              }
+            },
+            {
+              "cluster_id": 37,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.9,
+              "purity": 0.1,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.037633016705513,
+                "grad_S": 0.08917054533958435,
+                "sigma": 0.08879338084127762,
+                "Df": 0.13940342317775395,
+                "R_simple": 0.42203416567877655,
+                "R_full": 0.30112600695262925,
+                "SNR": 0.42203416567877655
+              }
+            },
+            {
+              "cluster_id": 38,
+              "category": "soc.religion.christian",
+              "noise_fraction": 1.0,
+              "purity": 0.08,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.037173062562942505,
+                "grad_S": 0.09168027341365814,
+                "sigma": 0.08497829245406358,
+                "Df": 0.1391429008218874,
+                "R_simple": 0.40546413289169597,
+                "R_full": 0.28772212030579675,
+                "SNR": 0.40546413289169597
+              }
+            },
+            {
+              "cluster_id": 39,
+              "category": "comp.graphics",
+              "noise_fraction": 0.0,
+              "purity": 1.0,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.14169619977474213,
+                "grad_S": 0.11301810294389725,
+                "sigma": 0.0774227436902547,
+                "Df": 0.13944457822840142,
+                "R_simple": 1.2537478163571798,
+                "R_full": 0.8775440669048402,
+                "SNR": 1.2537478163571798
+              }
+            },
+            {
+              "cluster_id": 40,
+              "category": "comp.graphics",
+              "noise_fraction": 0.05,
+              "purity": 0.9533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.11644767224788666,
+                "grad_S": 0.11347504705190659,
+                "sigma": 0.07748722219205813,
+                "Df": 0.13969720519163578,
+                "R_simple": 1.0261962896091184,
+                "R_full": 0.7178917927883551,
+                "SNR": 1.0261962896091184
+              }
+            },
+            {
+              "cluster_id": 41,
+              "category": "comp.graphics",
+              "noise_fraction": 0.1,
+              "purity": 0.9,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.11579636484384537,
+                "grad_S": 0.11817436665296555,
+                "sigma": 0.07658856693418215,
+                "Df": 0.13818433138959754,
+                "R_simple": 0.979877177458429,
+                "R_full": 0.6870377225379241,
+                "SNR": 0.979877177458429
+              }
+            },
+            {
+              "cluster_id": 42,
+              "category": "comp.graphics",
+              "noise_fraction": 0.15,
+              "purity": 0.8533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.10013376921415329,
+                "grad_S": 0.11836990714073181,
+                "sigma": 0.0726974292249539,
+                "Df": 0.13895349736425958,
+                "R_simple": 0.8459394083591085,
+                "R_full": 0.5876832976541774,
+                "SNR": 0.8459394083591085
+              }
+            },
+            {
+              "cluster_id": 43,
+              "category": "comp.graphics",
+              "noise_fraction": 0.2,
+              "purity": 0.8,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.09802185744047165,
+                "grad_S": 0.11317360401153564,
+                "sigma": 0.0821589574620155,
+                "Df": 0.13922784518624798,
+                "R_simple": 0.8661194303795469,
+                "R_full": 0.6116000676692374,
+                "SNR": 0.8661194303795469
+              }
+            },
+            {
+              "cluster_id": 44,
+              "category": "comp.graphics",
+              "noise_fraction": 0.3,
+              "purity": 0.7,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.09087304025888443,
+                "grad_S": 0.11725248396396637,
+                "sigma": 0.07644181156366318,
+                "Df": 0.13989517492246215,
+                "R_simple": 0.7750201717416172,
+                "R_full": 0.5408743633521005,
+                "SNR": 0.7750201717416172
+              }
+            },
+            {
+              "cluster_id": 45,
+              "category": "comp.graphics",
+              "noise_fraction": 0.4,
+              "purity": 0.6,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.0703544169664383,
+                "grad_S": 0.10864796489477158,
+                "sigma": 0.07999545745092589,
+                "Df": 0.1402737086355298,
+                "R_simple": 0.647544728836646,
+                "R_full": 0.4543585214859716,
+                "SNR": 0.647544728836646
+              }
+            },
+            {
+              "cluster_id": 46,
+              "category": "comp.graphics",
+              "noise_fraction": 0.5,
+              "purity": 0.5,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.06538812071084976,
+                "grad_S": 0.10704347491264343,
+                "sigma": 0.07919074587055348,
+                "Df": 0.1397390358817936,
+                "R_simple": 0.6108557365520133,
+                "R_full": 0.42858847047039866,
+                "SNR": 0.6108557365520133
+              }
+            },
+            {
+              "cluster_id": 47,
+              "category": "comp.graphics",
+              "noise_fraction": 0.6,
+              "purity": 0.4,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.06170451641082764,
+                "grad_S": 0.09854555130004883,
+                "sigma": 0.08435468279550852,
+                "Df": 0.1380342658816165,
+                "R_simple": 0.626152227034089,
+                "R_full": 0.44508832329402165,
+                "SNR": 0.626152227034089
+              }
+            },
+            {
+              "cluster_id": 48,
+              "category": "comp.graphics",
+              "noise_fraction": 0.7,
+              "purity": 0.3,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.04190564155578613,
+                "grad_S": 0.0915217250585556,
+                "sigma": 0.08829350263400802,
+                "Df": 0.1393959209569379,
+                "R_simple": 0.45787643894359403,
+                "R_full": 0.3264487900480897,
+                "SNR": 0.45787643894359403
+              }
+            },
+            {
+              "cluster_id": 49,
+              "category": "comp.graphics",
+              "noise_fraction": 0.8,
+              "purity": 0.2,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.04941978678107262,
+                "grad_S": 0.09394633024930954,
+                "sigma": 0.08540299220854852,
+                "Df": 0.13933975761747827,
+                "R_simple": 0.5260427592001213,
+                "R_full": 0.37336427968585373,
+                "SNR": 0.5260427592001213
+              }
+            },
+            {
+              "cluster_id": 50,
+              "category": "comp.graphics",
+              "noise_fraction": 0.9,
+              "purity": 0.1,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.04177039489150047,
+                "grad_S": 0.08668390661478043,
+                "sigma": 0.09283290345405128,
+                "Df": 0.13901633375289732,
+                "R_simple": 0.4818702400795839,
+                "R_full": 0.34627713285168055,
+                "SNR": 0.4818702400795839
+              }
+            },
+            {
+              "cluster_id": 51,
+              "category": "comp.graphics",
+              "noise_fraction": 1.0,
+              "purity": 0.07333333333333333,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.043654680252075195,
+                "grad_S": 0.08739068359136581,
+                "sigma": 0.09270127128507777,
+                "Df": 0.13918376805223337,
+                "R_simple": 0.49953471535023297,
+                "R_full": 0.35875731855582493,
+                "SNR": 0.49953471535023297
+              }
+            },
+            {
+              "cluster_id": 52,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.0,
+              "purity": 1.0,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.11725220829248428,
+                "grad_S": 0.11977401375770569,
+                "sigma": 0.06676686401967556,
+                "Df": 0.13918677118583303,
+                "R_simple": 0.9789453038592926,
+                "R_full": 0.671665227489864,
+                "SNR": 0.9789453038592926
+              }
+            },
+            {
+              "cluster_id": 53,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.05,
+              "purity": 0.9533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.11649210751056671,
+                "grad_S": 0.11708495765924454,
+                "sigma": 0.07513030353989426,
+                "Df": 0.13914594177718828,
+                "R_simple": 0.9949365814317223,
+                "R_full": 0.6940162487173535,
+                "SNR": 0.9949365814317223
+              }
+            },
+            {
+              "cluster_id": 54,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.1,
+              "purity": 0.9,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.10389873385429382,
+                "grad_S": 0.11391164362430573,
+                "sigma": 0.07710846150474197,
+                "Df": 0.13895605889194407,
+                "R_simple": 0.9120993302226796,
+                "R_full": 0.6388490040379651,
+                "SNR": 0.9120993302226796
+              }
+            },
+            {
+              "cluster_id": 55,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.15,
+              "purity": 0.8533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.09371887892484665,
+                "grad_S": 0.11300637573003769,
+                "sigma": 0.07895138709118443,
+                "Df": 0.13782109033538087,
+                "R_simple": 0.8293238175227637,
+                "R_full": 0.584463048068298,
+                "SNR": 0.8293238175227637
+              }
+            },
+            {
+              "cluster_id": 56,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.2,
+              "purity": 0.8,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.0929185226559639,
+                "grad_S": 0.11537140607833862,
+                "sigma": 0.07620278787564831,
+                "Df": 0.13865662998248932,
+                "R_simple": 0.8053860641420203,
+                "R_full": 0.5636142407970159,
+                "SNR": 0.8053860641420203
+              }
+            },
+            {
+              "cluster_id": 57,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.3,
+              "purity": 0.7,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.07068070769309998,
+                "grad_S": 0.10151011496782303,
+                "sigma": 0.08415498093877687,
+                "Df": 0.13795895516901327,
+                "R_simple": 0.696292263243959,
+                "R_full": 0.4948763568377367,
+                "SNR": 0.696292263243959
+              }
+            },
+            {
+              "cluster_id": 58,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.4,
+              "purity": 0.6,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.05621054023504257,
+                "grad_S": 0.0954592302441597,
+                "sigma": 0.08897477222463135,
+                "Df": 0.1383922046004454,
+                "R_simple": 0.5888434265735303,
+                "R_full": 0.4212952465325676,
+                "SNR": 0.5888434265735303
+              }
+            },
+            {
+              "cluster_id": 59,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.5,
+              "purity": 0.5,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.05532091110944748,
+                "grad_S": 0.1008695736527443,
+                "sigma": 0.08170912036659701,
+                "Df": 0.13929248901677857,
+                "R_simple": 0.5484400211692815,
+                "R_full": 0.3869159154333908,
+                "SNR": 0.5484400211692815
+              }
+            },
+            {
+              "cluster_id": 60,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.6,
+              "purity": 0.4,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.05202244967222214,
+                "grad_S": 0.09454398602247238,
+                "sigma": 0.08565555781273275,
+                "Df": 0.14029980204312859,
+                "R_simple": 0.5502459951271443,
+                "R_full": 0.38978283040194467,
+                "SNR": 0.5502459951271443
+              }
+            },
+            {
+              "cluster_id": 61,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.7,
+              "purity": 0.3,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.048645149916410446,
+                "grad_S": 0.09233186393976212,
+                "sigma": 0.08632831792198804,
+                "Df": 0.14036877900407577,
+                "R_simple": 0.5268511631926639,
+                "R_full": 0.3735571711507004,
+                "SNR": 0.5268511631926639
+              }
+            },
+            {
+              "cluster_id": 62,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.8,
+              "purity": 0.2,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.042531587183475494,
+                "grad_S": 0.08579093962907791,
+                "sigma": 0.09419992241132684,
+                "Df": 0.1387773027379649,
+                "R_simple": 0.4957584957964474,
+                "R_full": 0.35718372927645736,
+                "SNR": 0.4957584957964474
+              }
+            },
+            {
+              "cluster_id": 63,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.9,
+              "purity": 0.1,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.03987697884440422,
+                "grad_S": 0.08961854875087738,
+                "sigma": 0.08964455995550573,
+                "Df": 0.1395701004000261,
+                "R_simple": 0.44496345232341,
+                "R_full": 0.3177810547511904,
+                "SNR": 0.44496345232341
+              }
+            },
+            {
+              "cluster_id": 64,
+              "category": "rec.motorcycles",
+              "noise_fraction": 1.0,
+              "purity": 0.08,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.04130902141332626,
+                "grad_S": 0.09078418463468552,
+                "sigma": 0.0879239843289909,
+                "Df": 0.13871620218694544,
+                "R_simple": 0.4550244250091938,
+                "R_full": 0.32476206382118294,
+                "SNR": 0.4550244250091938
+              }
+            }
+          ],
+          "correlations": {
+            "R_simple_vs_purity": {
+              "rho": 0.9484390398643721,
+              "p_value": 3.855140330080093e-33,
+              "n": 65
+            },
+            "R_full_vs_purity": {
+              "rho": 0.9497319972652363,
+              "p_value": 1.7665201599941084e-33,
+              "n": 65
+            },
+            "E_vs_purity": {
+              "rho": 0.9266559948396446,
+              "p_value": 1.8316911712387e-28,
+              "n": 65
+            },
+            "SNR_vs_purity": {
+              "rho": 0.9484390398643721,
+              "p_value": 3.855140330080093e-33,
+              "n": 65
+            },
+            "R_full_vs_E": {
+              "rho": 0.9684877622377621,
+              "p_value": 9.578299198229034e-40,
+              "n": 65
+            },
+            "steiger_Rfull_vs_E": {
+              "z_stat": 16.611658702955623,
+              "p_value": 0.0,
+              "n": 65
+            },
+            "R_simple_vs_E": {
+              "rho": 0.9782342657342656,
+              "p_value": 9.603096936190175e-45,
+              "n": 65
+            },
+            "steiger_Rsimple_vs_E": {
+              "z_stat": 18.938357365619204,
+              "p_value": 0.0,
+              "n": 65
+            }
+          }
+        },
+        "multi-qa-MiniLM-L6-cos-v1": {
+          "model": "multi-qa-MiniLM-L6-cos-v1",
+          "corpus": "20newsgroups",
+          "n_clusters": 65,
+          "clusters": [
+            {
+              "cluster_id": 0,
+              "category": "alt.atheism",
+              "noise_fraction": 0.0,
+              "purity": 1.0,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.12522517144680023,
+                "grad_S": 0.14095155894756317,
+                "sigma": 0.10979858526371657,
+                "Df": 0.15050518421442005,
+                "R_simple": 0.8884270055742095,
+                "R_full": 0.6371278475630627,
+                "SNR": 0.8884270055742095
+              }
+            },
+            {
+              "cluster_id": 1,
+              "category": "alt.atheism",
+              "noise_fraction": 0.05,
+              "purity": 0.9533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.1127861961722374,
+                "grad_S": 0.13648958504199982,
+                "sigma": 0.11717427976943541,
+                "Df": 0.1504153497681816,
+                "R_simple": 0.8263355488811213,
+                "R_full": 0.5985418478593607,
+                "SNR": 0.8263355488811213
+              }
+            },
+            {
+              "cluster_id": 2,
+              "category": "alt.atheism",
+              "noise_fraction": 0.1,
+              "purity": 0.9,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.13238823413848877,
+                "grad_S": 0.1383238434791565,
+                "sigma": 0.12331166522523558,
+                "Df": 0.15100576883622474,
+                "R_simple": 0.957089036919639,
+                "R_full": 0.6977321363282398,
+                "SNR": 0.957089036919639
+              }
+            },
+            {
+              "cluster_id": 3,
+              "category": "alt.atheism",
+              "noise_fraction": 0.15,
+              "purity": 0.8533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.11506815999746323,
+                "grad_S": 0.1399100422859192,
+                "sigma": 0.1200147174776507,
+                "Df": 0.14889466640911414,
+                "R_simple": 0.8224438940723836,
+                "R_full": 0.5998037957534812,
+                "SNR": 0.8224438940723836
+              }
+            },
+            {
+              "cluster_id": 4,
+              "category": "alt.atheism",
+              "noise_fraction": 0.2,
+              "purity": 0.8,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.08626722544431686,
+                "grad_S": 0.13284830749034882,
+                "sigma": 0.12503317125442948,
+                "Df": 0.14991270841407361,
+                "R_simple": 0.649366386926563,
+                "R_full": 0.47546922649584616,
+                "SNR": 0.649366386926563
+              }
+            },
+            {
+              "cluster_id": 5,
+              "category": "alt.atheism",
+              "noise_fraction": 0.3,
+              "purity": 0.7,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.08841810375452042,
+                "grad_S": 0.1291877031326294,
+                "sigma": 0.135136667674884,
+                "Df": 0.14844587857293298,
+                "R_simple": 0.6844157888908882,
+                "R_full": 0.5084952314890379,
+                "SNR": 0.6844157888908882
+              }
+            },
+            {
+              "cluster_id": 6,
+              "category": "alt.atheism",
+              "noise_fraction": 0.4,
+              "purity": 0.6,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.07669299095869064,
+                "grad_S": 0.12119787931442261,
+                "sigma": 0.14026626266446793,
+                "Df": 0.15067396339415107,
+                "R_simple": 0.6327915256646256,
+                "R_full": 0.47068322015580083,
+                "SNR": 0.6327915256646256
+              }
+            },
+            {
+              "cluster_id": 7,
+              "category": "alt.atheism",
+              "noise_fraction": 0.5,
+              "purity": 0.5,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.05271785706281662,
+                "grad_S": 0.12071138620376587,
+                "sigma": 0.13510276941599672,
+                "Df": 0.1508178051971815,
+                "R_simple": 0.43672646566933354,
+                "R_full": 0.32292242222660567,
+                "SNR": 0.43672646566933354
+              }
+            },
+            {
+              "cluster_id": 8,
+              "category": "alt.atheism",
+              "noise_fraction": 0.6,
+              "purity": 0.4,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.0531119666993618,
+                "grad_S": 0.1171698048710823,
+                "sigma": 0.13424622035363987,
+                "Df": 0.15174812254274686,
+                "R_simple": 0.453290561999305,
+                "R_full": 0.3342238615824426,
+                "SNR": 0.453290561999305
+              }
+            },
+            {
+              "cluster_id": 9,
+              "category": "alt.atheism",
+              "noise_fraction": 0.7,
+              "purity": 0.3,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.045417387038469315,
+                "grad_S": 0.1038026362657547,
+                "sigma": 0.15237632295838757,
+                "Df": 0.1502876541094865,
+                "R_simple": 0.43753596895354446,
+                "R_full": 0.3297739510104772,
+                "SNR": 0.43753596895354446
+              }
+            },
+            {
+              "cluster_id": 10,
+              "category": "alt.atheism",
+              "noise_fraction": 0.8,
+              "purity": 0.2,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.043439336121082306,
+                "grad_S": 0.10973118990659714,
+                "sigma": 0.1411310223456646,
+                "Df": 0.14695289729091002,
+                "R_simple": 0.39587045541069715,
+                "R_full": 0.2968845870200284,
+                "SNR": 0.39587045541069715
+              }
+            },
+            {
+              "cluster_id": 11,
+              "category": "alt.atheism",
+              "noise_fraction": 0.9,
+              "purity": 0.1,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.040464963763952255,
+                "grad_S": 0.10267259180545807,
+                "sigma": 0.1544974714634733,
+                "Df": 0.1505730002835209,
+                "R_simple": 0.3941165120349201,
+                "R_full": 0.29750761658841307,
+                "SNR": 0.3941165120349201
+              }
+            },
+            {
+              "cluster_id": 12,
+              "category": "alt.atheism",
+              "noise_fraction": 1.0,
+              "purity": 0.08666666666666667,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.039756059646606445,
+                "grad_S": 0.10116460919380188,
+                "sigma": 0.15382037850449953,
+                "Df": 0.1485358457367499,
+                "R_simple": 0.3929838701837461,
+                "R_full": 0.29758918485946584,
+                "SNR": 0.3929838701837461
+              }
+            },
+            {
+              "cluster_id": 13,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.0,
+              "purity": 1.0,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.21187254786491394,
+                "grad_S": 0.14853817224502563,
+                "sigma": 0.1026516372012401,
+                "Df": 0.1524297464770356,
+                "R_simple": 1.426384508861555,
+                "R_full": 1.0081829890308707,
+                "SNR": 1.426384508861555
+              }
+            },
+            {
+              "cluster_id": 14,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.05,
+              "purity": 0.9533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.19223424792289734,
+                "grad_S": 0.16127265989780426,
+                "sigma": 0.09776478587935146,
+                "Df": 0.14838512143169696,
+                "R_simple": 1.1919828695372974,
+                "R_full": 0.8441665023132515,
+                "SNR": 1.1919828695372974
+              }
+            },
+            {
+              "cluster_id": 15,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.1,
+              "purity": 0.9,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.17777706682682037,
+                "grad_S": 0.16360042989253998,
+                "sigma": 0.10352912391762774,
+                "Df": 0.15157072729965992,
+                "R_simple": 1.086654032288254,
+                "R_full": 0.7705549391894828,
+                "SNR": 1.086654032288254
+              }
+            },
+            {
+              "cluster_id": 16,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.15,
+              "purity": 0.8533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.17954044044017792,
+                "grad_S": 0.1684567928314209,
+                "sigma": 0.10278092831547046,
+                "Df": 0.15105066064567066,
+                "R_simple": 1.065795195447231,
+                "R_full": 0.755827160075301,
+                "SNR": 1.065795195447231
+              }
+            },
+            {
+              "cluster_id": 17,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.2,
+              "purity": 0.8,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.16174562275409698,
+                "grad_S": 0.16856949031352997,
+                "sigma": 0.09972485057072616,
+                "Df": 0.15108736004650578,
+                "R_simple": 0.959518964275558,
+                "R_full": 0.6773067607179009,
+                "SNR": 0.959518964275558
+              }
+            },
+            {
+              "cluster_id": 18,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.3,
+              "purity": 0.7,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.13260005414485931,
+                "grad_S": 0.15748469531536102,
+                "sigma": 0.09973708877632981,
+                "Df": 0.15148599151134468,
+                "R_simple": 0.8419869237409353,
+                "R_full": 0.5938081575588283,
+                "SNR": 0.8419869237409353
+              }
+            },
+            {
+              "cluster_id": 19,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.4,
+              "purity": 0.6,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.09501738846302032,
+                "grad_S": 0.1417824923992157,
+                "sigma": 0.11307532043456865,
+                "Df": 0.15099443768327298,
+                "R_simple": 0.6701630564899418,
+                "R_full": 0.48221896940389997,
+                "SNR": 0.6701630564899418
+              }
+            },
+            {
+              "cluster_id": 20,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.5,
+              "purity": 0.5,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.08746105432510376,
+                "grad_S": 0.1407880187034607,
+                "sigma": 0.1246155157180574,
+                "Df": 0.15378122314485693,
+                "R_simple": 0.6212251236330091,
+                "R_full": 0.4509879991688063,
+                "SNR": 0.6212251236330091
+              }
+            },
+            {
+              "cluster_id": 21,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.6,
+              "purity": 0.4,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.06665052473545074,
+                "grad_S": 0.13549377024173737,
+                "sigma": 0.12008533500816777,
+                "Df": 0.15448488764368765,
+                "R_simple": 0.4919084074237369,
+                "R_full": 0.35455152474811985,
+                "SNR": 0.4919084074237369
+              }
+            },
+            {
+              "cluster_id": 22,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.7,
+              "purity": 0.3,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.05229930207133293,
+                "grad_S": 0.11895228177309036,
+                "sigma": 0.13177852798490283,
+                "Df": 0.15045836187976167,
+                "R_simple": 0.4396662366771361,
+                "R_full": 0.3241129503936901,
+                "SNR": 0.4396662366771361
+              }
+            },
+            {
+              "cluster_id": 23,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.8,
+              "purity": 0.2,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.04254617542028427,
+                "grad_S": 0.11240753531455994,
+                "sigma": 0.13932941573024657,
+                "Df": 0.14981668434028597,
+                "R_simple": 0.378499317694526,
+                "R_full": 0.2817269760215702,
+                "SNR": 0.378499317694526
+              }
+            },
+            {
+              "cluster_id": 24,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 0.9,
+              "purity": 0.1,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.04051844775676727,
+                "grad_S": 0.10340341180562973,
+                "sigma": 0.1505317993432779,
+                "Df": 0.15166750450635055,
+                "R_simple": 0.39184826737565415,
+                "R_full": 0.2940294693621213,
+                "SNR": 0.39184826737565415
+              }
+            },
+            {
+              "cluster_id": 25,
+              "category": "talk.politics.mideast",
+              "noise_fraction": 1.0,
+              "purity": 0.1,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.039868004620075226,
+                "grad_S": 0.10210855305194855,
+                "sigma": 0.152251162695224,
+                "Df": 0.15151065955831847,
+                "R_simple": 0.39044725861301804,
+                "R_full": 0.2935699494111222,
+                "SNR": 0.39044725861301804
+              }
+            },
+            {
+              "cluster_id": 26,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.0,
+              "purity": 1.0,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.1573934257030487,
+                "grad_S": 0.1297387033700943,
+                "sigma": 0.12190316262444707,
+                "Df": 0.14977147941075294,
+                "R_simple": 1.2131570735223567,
+                "R_full": 0.885172972993074,
+                "SNR": 1.2131570735223567
+              }
+            },
+            {
+              "cluster_id": 27,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.05,
+              "purity": 0.9533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.1609390527009964,
+                "grad_S": 0.1397513598203659,
+                "sigma": 0.1261583925962144,
+                "Df": 0.15021805936641494,
+                "R_simple": 1.1516099228505885,
+                "R_full": 0.8438140778686475,
+                "SNR": 1.1516099228505885
+              }
+            },
+            {
+              "cluster_id": 28,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.1,
+              "purity": 0.9,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.1451154351234436,
+                "grad_S": 0.1373252272605896,
+                "sigma": 0.13592585507463797,
+                "Df": 0.14889872240706642,
+                "R_simple": 1.0567281629039014,
+                "R_full": 0.7850784711101177,
+                "SNR": 1.0567281629039014
+              }
+            },
+            {
+              "cluster_id": 29,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.15,
+              "purity": 0.8533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.14859041571617126,
+                "grad_S": 0.1389673799276352,
+                "sigma": 0.12860593480797147,
+                "Df": 0.14835384131948356,
+                "R_simple": 1.069246723896983,
+                "R_full": 0.7887391127692395,
+                "SNR": 1.069246723896983
+              }
+            },
+            {
+              "cluster_id": 30,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.2,
+              "purity": 0.8,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.1265965849161148,
+                "grad_S": 0.14119192957878113,
+                "sigma": 0.1297543076876625,
+                "Df": 0.1486900454117823,
+                "R_simple": 0.8966276280364698,
+                "R_full": 0.6618234553116579,
+                "SNR": 0.8966276280364698
+              }
+            },
+            {
+              "cluster_id": 31,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.3,
+              "purity": 0.7,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.09748569130897522,
+                "grad_S": 0.14121802151203156,
+                "sigma": 0.12699178930601648,
+                "Df": 0.1495865065529458,
+                "R_simple": 0.6903204723107496,
+                "R_full": 0.5069763290249794,
+                "SNR": 0.6903204723107496
+              }
+            },
+            {
+              "cluster_id": 32,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.4,
+              "purity": 0.6,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.07933242619037628,
+                "grad_S": 0.13205546140670776,
+                "sigma": 0.12763975562972443,
+                "Df": 0.1496585527512292,
+                "R_simple": 0.6007508159472955,
+                "R_full": 0.4414662653681647,
+                "SNR": 0.6007508159472955
+              }
+            },
+            {
+              "cluster_id": 33,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.5,
+              "purity": 0.5,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.06830565631389618,
+                "grad_S": 0.12747550010681152,
+                "sigma": 0.12963145707098725,
+                "Df": 0.14902026365912271,
+                "R_simple": 0.5358336014109611,
+                "R_full": 0.3951898797580853,
+                "SNR": 0.5358336014109611
+              }
+            },
+            {
+              "cluster_id": 34,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.6,
+              "purity": 0.4,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.0481344610452652,
+                "grad_S": 0.12042026966810226,
+                "sigma": 0.12661472917796854,
+                "Df": 0.14894451824968885,
+                "R_simple": 0.39972058838542346,
+                "R_full": 0.29381669150105605,
+                "SNR": 0.39972058838542346
+              }
+            },
+            {
+              "cluster_id": 35,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.7,
+              "purity": 0.3,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.039726343005895615,
+                "grad_S": 0.10893816500902176,
+                "sigma": 0.1441898720906927,
+                "Df": 0.1498340205998061,
+                "R_simple": 0.3646687366416137,
+                "R_full": 0.27282134488486676,
+                "SNR": 0.3646687366416137
+              }
+            },
+            {
+              "cluster_id": 36,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.8,
+              "purity": 0.2,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.04376969486474991,
+                "grad_S": 0.11362097412347794,
+                "sigma": 0.1339422203036577,
+                "Df": 0.14957266547748765,
+                "R_simple": 0.3852254850163761,
+                "R_full": 0.28518437879193925,
+                "SNR": 0.3852254850163761
+              }
+            },
+            {
+              "cluster_id": 37,
+              "category": "soc.religion.christian",
+              "noise_fraction": 0.9,
+              "purity": 0.1,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.034719519317150116,
+                "grad_S": 0.10096944123506546,
+                "sigma": 0.15276362093397483,
+                "Df": 0.14968157469442175,
+                "R_simple": 0.34386165648198563,
+                "R_full": 0.25956526289383053,
+                "SNR": 0.34386165648198563
+              }
+            },
+            {
+              "cluster_id": 38,
+              "category": "soc.religion.christian",
+              "noise_fraction": 1.0,
+              "purity": 0.08,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.039257489144802094,
+                "grad_S": 0.10535169392824173,
+                "sigma": 0.14760307918649704,
+                "Df": 0.14790963783659114,
+                "R_simple": 0.3726327283502586,
+                "R_full": 0.2807903644003783,
+                "SNR": 0.3726327283502586
+              }
+            },
+            {
+              "cluster_id": 39,
+              "category": "comp.graphics",
+              "noise_fraction": 0.0,
+              "purity": 1.0,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.13138364255428314,
+                "grad_S": 0.11258063465356827,
+                "sigma": 0.14724841889153714,
+                "Df": 0.15362248733817224,
+                "R_simple": 1.1670181373428499,
+                "R_full": 0.8695037827672133,
+                "SNR": 1.1670181373428499
+              }
+            },
+            {
+              "cluster_id": 40,
+              "category": "comp.graphics",
+              "noise_fraction": 0.05,
+              "purity": 0.9533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.10998368263244629,
+                "grad_S": 0.11601828783750534,
+                "sigma": 0.1442906047927224,
+                "Df": 0.15105858951252937,
+                "R_simple": 0.9479857415797146,
+                "R_full": 0.7076157512254705,
+                "SNR": 0.9479857415797146
+              }
+            },
+            {
+              "cluster_id": 41,
+              "category": "comp.graphics",
+              "noise_fraction": 0.1,
+              "purity": 0.9,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.10915408283472061,
+                "grad_S": 0.11643294245004654,
+                "sigma": 0.14359394802514347,
+                "Df": 0.1526838400418425,
+                "R_simple": 0.9374845343408822,
+                "R_full": 0.6970636251864415,
+                "SNR": 0.9374845343408822
+              }
+            },
+            {
+              "cluster_id": 42,
+              "category": "comp.graphics",
+              "noise_fraction": 0.15,
+              "purity": 0.8533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.09469658881425858,
+                "grad_S": 0.11743241548538208,
+                "sigma": 0.13968922312148535,
+                "Df": 0.1469627755551473,
+                "R_simple": 0.8063922420640862,
+                "R_full": 0.6038333677527348,
+                "SNR": 0.8063922420640862
+              }
+            },
+            {
+              "cluster_id": 43,
+              "category": "comp.graphics",
+              "noise_fraction": 0.2,
+              "purity": 0.8,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.08613193780183792,
+                "grad_S": 0.11248297989368439,
+                "sigma": 0.15469591184921053,
+                "Df": 0.15161926186592758,
+                "R_simple": 0.7657330725345941,
+                "R_full": 0.5770145765867869,
+                "SNR": 0.7657330725345941
+              }
+            },
+            {
+              "cluster_id": 44,
+              "category": "comp.graphics",
+              "noise_fraction": 0.3,
+              "purity": 0.7,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.08281191438436508,
+                "grad_S": 0.11768192052841187,
+                "sigma": 0.14507098734972987,
+                "Df": 0.14969767368577389,
+                "R_simple": 0.7036927508705286,
+                "R_full": 0.5270764818474586,
+                "SNR": 0.7036927508705286
+              }
+            },
+            {
+              "cluster_id": 45,
+              "category": "comp.graphics",
+              "noise_fraction": 0.4,
+              "purity": 0.6,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.05933210998773575,
+                "grad_S": 0.11469120532274246,
+                "sigma": 0.14398078367503922,
+                "Df": 0.14926176640537628,
+                "R_simple": 0.5173204852174538,
+                "R_full": 0.387370660466109,
+                "SNR": 0.5173204852174538
+              }
+            },
+            {
+              "cluster_id": 46,
+              "category": "comp.graphics",
+              "noise_fraction": 0.5,
+              "purity": 0.5,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.06092296540737152,
+                "grad_S": 0.11055826395750046,
+                "sigma": 0.14516320156670148,
+                "Df": 0.15033064302750193,
+                "R_simple": 0.5510484990139753,
+                "R_full": 0.41227896600903,
+                "SNR": 0.5510484990139753
+              }
+            },
+            {
+              "cluster_id": 47,
+              "category": "comp.graphics",
+              "noise_fraction": 0.6,
+              "purity": 0.4,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.05760706216096878,
+                "grad_S": 0.10711494088172913,
+                "sigma": 0.15300183249048974,
+                "Df": 0.1497987359094241,
+                "R_simple": 0.5378060398182507,
+                "R_full": 0.4059702988747674,
+                "SNR": 0.5378060398182507
+              }
+            },
+            {
+              "cluster_id": 48,
+              "category": "comp.graphics",
+              "noise_fraction": 0.7,
+              "purity": 0.3,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.038995277136564255,
+                "grad_S": 0.1033710315823555,
+                "sigma": 0.15220024785020467,
+                "Df": 0.15194495284248613,
+                "R_simple": 0.37723602579603543,
+                "R_full": 0.2833905090127826,
+                "SNR": 0.37723602579603543
+              }
+            },
+            {
+              "cluster_id": 49,
+              "category": "comp.graphics",
+              "noise_fraction": 0.8,
+              "purity": 0.2,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.043892595916986465,
+                "grad_S": 0.10450900346040726,
+                "sigma": 0.15032041277819005,
+                "Df": 0.1504764731363302,
+                "R_simple": 0.41998865613157405,
+                "R_full": 0.31578981977963916,
+                "SNR": 0.41998865613157405
+              }
+            },
+            {
+              "cluster_id": 50,
+              "category": "comp.graphics",
+              "noise_fraction": 0.9,
+              "purity": 0.1,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.035166654735803604,
+                "grad_S": 0.10068018734455109,
+                "sigma": 0.15532790812020664,
+                "Df": 0.14987843389609637,
+                "R_simple": 0.34929071611135476,
+                "R_full": 0.26422431655633266,
+                "SNR": 0.34929071611135476
+              }
+            },
+            {
+              "cluster_id": 51,
+              "category": "comp.graphics",
+              "noise_fraction": 1.0,
+              "purity": 0.07333333333333333,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.04202372953295708,
+                "grad_S": 0.09898947179317474,
+                "sigma": 0.15911211741336093,
+                "Df": 0.15063697518630514,
+                "R_simple": 0.42452726306854166,
+                "R_full": 0.32184930737716533,
+                "SNR": 0.42452726306854166
+              }
+            },
+            {
+              "cluster_id": 52,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.0,
+              "purity": 1.0,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.1257639229297638,
+                "grad_S": 0.11715112626552582,
+                "sigma": 0.1322901745509509,
+                "Df": 0.14804044435484984,
+                "R_simple": 1.0735186842738231,
+                "R_full": 0.7957197941310579,
+                "SNR": 1.0735186842738231
+              }
+            },
+            {
+              "cluster_id": 53,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.05,
+              "purity": 0.9533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.12495571374893188,
+                "grad_S": 0.12047882378101349,
+                "sigma": 0.1394133139983781,
+                "Df": 0.1485789995206955,
+                "R_simple": 1.0371591440505408,
+                "R_full": 0.7739394461441261,
+                "SNR": 1.0371591440505408
+              }
+            },
+            {
+              "cluster_id": 54,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.1,
+              "purity": 0.9,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.10293273627758026,
+                "grad_S": 0.11493432521820068,
+                "sigma": 0.14337284935992087,
+                "Df": 0.14821764738566023,
+                "R_simple": 0.8955787236072807,
+                "R_full": 0.671548337497048,
+                "SNR": 0.8955787236072807
+              }
+            },
+            {
+              "cluster_id": 55,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.15,
+              "purity": 0.8533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.09642936289310455,
+                "grad_S": 0.11487950384616852,
+                "sigma": 0.14955374668638757,
+                "Df": 0.15213681779513522,
+                "R_simple": 0.8393957117209527,
+                "R_full": 0.6286704293402341,
+                "SNR": 0.8393957117209527
+              }
+            },
+            {
+              "cluster_id": 56,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.2,
+              "purity": 0.8,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.09739984571933746,
+                "grad_S": 0.1196463331580162,
+                "sigma": 0.1431871506882526,
+                "Df": 0.1489485687763654,
+                "R_simple": 0.8140646114971368,
+                "R_full": 0.6094414543117009,
+                "SNR": 0.8140646114971368
+              }
+            },
+            {
+              "cluster_id": 57,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.3,
+              "purity": 0.7,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.07847525924444199,
+                "grad_S": 0.11209333688020706,
+                "sigma": 0.1491711110304035,
+                "Df": 0.15069707774703112,
+                "R_simple": 0.7000885282620112,
+                "R_full": 0.5255689067655499,
+                "SNR": 0.7000885282620112
+              }
+            },
+            {
+              "cluster_id": 58,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.4,
+              "purity": 0.6,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.06217904016375542,
+                "grad_S": 0.10731615126132965,
+                "sigma": 0.15232646438536177,
+                "Df": 0.15218724181554796,
+                "R_simple": 0.5794005788778324,
+                "R_full": 0.4351187129061368,
+                "SNR": 0.5794005788778324
+              }
+            },
+            {
+              "cluster_id": 59,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.5,
+              "purity": 0.5,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.05991548299789429,
+                "grad_S": 0.10765150189399719,
+                "sigma": 0.15130053913253932,
+                "Df": 0.15191817276922115,
+                "R_simple": 0.5565689464963727,
+                "R_full": 0.41775517173186183,
+                "SNR": 0.5565689464963727
+              }
+            },
+            {
+              "cluster_id": 60,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.6,
+              "purity": 0.4,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.04807811230421066,
+                "grad_S": 0.10645882040262222,
+                "sigma": 0.1486100222955031,
+                "Df": 0.14998570234840486,
+                "R_simple": 0.45161229593171814,
+                "R_full": 0.3393007428773057,
+                "SNR": 0.45161229593171814
+              }
+            },
+            {
+              "cluster_id": 61,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.7,
+              "purity": 0.3,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.0518515408039093,
+                "grad_S": 0.10363990068435669,
+                "sigma": 0.1515076658821993,
+                "Df": 0.1517408911568603,
+                "R_simple": 0.5003048098417922,
+                "R_full": 0.37572759715278115,
+                "SNR": 0.5003048098417922
+              }
+            },
+            {
+              "cluster_id": 62,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.8,
+              "purity": 0.2,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.04303407296538353,
+                "grad_S": 0.09717665612697601,
+                "sigma": 0.16370675555224629,
+                "Df": 0.15103825846143307,
+                "R_simple": 0.4428437310000974,
+                "R_full": 0.3369337295991637,
+                "SNR": 0.4428437310000974
+              }
+            },
+            {
+              "cluster_id": 63,
+              "category": "rec.motorcycles",
+              "noise_fraction": 0.9,
+              "purity": 0.1,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.03324121981859207,
+                "grad_S": 0.10125910490751266,
+                "sigma": 0.15302332372210897,
+                "Df": 0.15095437238009382,
+                "R_simple": 0.32827882341004005,
+                "R_full": 0.2472740078551926,
+                "SNR": 0.32827882341004005
+              }
+            },
+            {
+              "cluster_id": 64,
+              "category": "rec.motorcycles",
+              "noise_fraction": 1.0,
+              "purity": 0.08,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.03571879491209984,
+                "grad_S": 0.1029902845621109,
+                "sigma": 0.15099633968928564,
+                "Df": 0.1500538286666593,
+                "R_simple": 0.3468171300231597,
+                "R_full": 0.2611567815837238,
+                "SNR": 0.3468171300231597
+              }
+            }
+          ],
+          "correlations": {
+            "R_simple_vs_purity": {
+              "rho": 0.9485924415898984,
+              "p_value": 3.517934703397734e-33,
+              "n": 65
+            },
+            "R_full_vs_purity": {
+              "rho": 0.9491183903631313,
+              "p_value": 2.564861386878458e-33,
+              "n": 65
+            },
+            "E_vs_purity": {
+              "rho": 0.9300965763978761,
+              "p_value": 4.2503349531647195e-29,
+              "n": 65
+            },
+            "SNR_vs_purity": {
+              "rho": 0.9485924415898984,
+              "p_value": 3.517934703397734e-33,
+              "n": 65
+            },
+            "R_full_vs_E": {
+              "rho": 0.9658216783216784,
+              "p_value": 1.188385691330951e-38,
+              "n": 65
+            },
+            "steiger_Rfull_vs_E": {
+              "z_stat": 13.450269212063626,
+              "p_value": 0.0,
+              "n": 65
+            },
+            "R_simple_vs_E": {
+              "rho": 0.9779720279720279,
+              "p_value": 1.3949158882057815e-44,
+              "n": 65
+            },
+            "steiger_Rsimple_vs_E": {
+              "z_stat": 16.60331304739697,
+              "p_value": 0.0,
+              "n": 65
+            }
+          }
+        }
+      },
+      "aggregate": {
+        "R_simple_vs_purity": {
+          "mean_rho": 0.9500461055603614,
+          "std_rho": 0.0021651685986199725,
+          "min_rho": 0.9484390398643721,
+          "max_rho": 0.9531068352268138,
+          "n_models": 3,
+          "individual_rhos": [
+            0.9531068352268138,
+            0.9484390398643721,
+            0.9485924415898984
+          ]
+        },
+        "R_full_vs_purity": {
+          "mean_rho": 0.9501922024418151,
+          "std_rho": 0.0011132639885070138,
+          "min_rho": 0.9491183903631313,
+          "max_rho": 0.9517262196970774,
+          "n_models": 3,
+          "individual_rhos": [
+            0.9517262196970774,
+            0.9497319972652363,
+            0.9491183903631313
+          ]
+        },
+        "E_vs_purity": {
+          "mean_rho": 0.9325875282266596,
+          "std_rho": 0.00611899192528032,
+          "min_rho": 0.9266559948396446,
+          "max_rho": 0.941010013442458,
+          "n_models": 3,
+          "individual_rhos": [
+            0.941010013442458,
+            0.9266559948396446,
+            0.9300965763978761
+          ]
+        },
+        "SNR_vs_purity": {
+          "mean_rho": 0.9500461055603614,
+          "std_rho": 0.0021651685986199725,
+          "min_rho": 0.9484390398643721,
+          "max_rho": 0.9531068352268138,
+          "n_models": 3,
+          "individual_rhos": [
+            0.9531068352268138,
+            0.9484390398643721,
+            0.9485924415898984
+          ]
+        },
+        "steiger_Rfull_vs_E": {
+          "mean_p": 0.0,
+          "min_p": 0.0,
+          "max_p": 0.0,
+          "mean_z": 13.525638475770378,
+          "individual_ps": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "individual_zs": [
+            10.51498751229189,
+            16.611658702955623,
+            13.450269212063626
+          ],
+          "n_models": 3
+        },
+        "steiger_Rsimple_vs_E": {
+          "mean_p": 0.0,
+          "min_p": 0.0,
+          "max_p": 0.0,
+          "mean_z": 16.94704028766685,
+          "individual_ps": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "individual_zs": [
+            15.299450449984388,
+            18.938357365619204,
+            16.60331304739697
+          ],
+          "n_models": 3
+        }
+      },
+      "median_model": "all-mpnet-base-v2",
+      "correlations": {
+        "R_simple_vs_purity": {
+          "rho": 0.9484390398643721,
+          "p_value": 3.855140330080093e-33,
+          "n": 65
+        },
+        "R_full_vs_purity": {
+          "rho": 0.9497319972652363,
+          "p_value": 1.7665201599941084e-33,
+          "n": 65
+        },
+        "E_vs_purity": {
+          "rho": 0.9266559948396446,
+          "p_value": 1.8316911712387e-28,
+          "n": 65
+        },
+        "SNR_vs_purity": {
+          "rho": 0.9484390398643721,
+          "p_value": 3.855140330080093e-33,
+          "n": 65
+        },
+        "R_full_vs_E": {
+          "rho": 0.9684877622377621,
+          "p_value": 9.578299198229034e-40,
+          "n": 65
+        },
+        "steiger_Rfull_vs_E": {
+          "z_stat": 16.611658702955623,
+          "p_value": 0.0,
+          "n": 65
+        },
+        "R_simple_vs_E": {
+          "rho": 0.9782342657342656,
+          "p_value": 9.603096936190175e-45,
+          "n": 65
+        },
+        "steiger_Rsimple_vs_E": {
+          "z_stat": 18.938357365619204,
+          "p_value": 0.0,
+          "n": 65
+        }
+      }
+    },
+    "text_agnews": {
+      "dataset": "ag_news",
+      "dataset_source": "HuggingFace datasets (fancyzhx/ag_news)",
+      "dataset_note": "AG News: 4-class news classification (World, Sports, Business, Sci/Tech). 120,000 training documents. This is a GENUINELY DIFFERENT corpus from 20 Newsgroups (DOMAIN-01 fix from AUDIT_v3).",
+      "per_model": {
+        "all-mpnet-base-v2": {
+          "model": "all-mpnet-base-v2",
+          "corpus": "ag_news",
+          "n_clusters": 52,
+          "clusters": [
+            {
+              "cluster_id": 0,
+              "category": "Sports",
+              "noise_fraction": 0.0,
+              "purity": 1.0,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.11980831623077393,
+                "grad_S": 0.09322385489940643,
+                "sigma": 0.08048585522872578,
+                "Df": 0.13924127681551846,
+                "R_simple": 1.2851680115572732,
+                "R_full": 0.9048798179353446,
+                "SNR": 1.2851680115572732
+              }
+            },
+            {
+              "cluster_id": 1,
+              "category": "Sports",
+              "noise_fraction": 0.05,
+              "purity": 0.9533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.11478262394666672,
+                "grad_S": 0.09675978869199753,
+                "sigma": 0.08006313012701571,
+                "Df": 0.13852135992767173,
+                "R_simple": 1.1862636896824865,
+                "R_full": 0.8361481341288556,
+                "SNR": 1.1862636896824865
+              }
+            },
+            {
+              "cluster_id": 2,
+              "category": "Sports",
+              "noise_fraction": 0.1,
+              "purity": 0.9,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.10843035578727722,
+                "grad_S": 0.09938298165798187,
+                "sigma": 0.08256751910379134,
+                "Df": 0.13858854032737303,
+                "R_simple": 1.0910354466968109,
+                "R_full": 0.7721844179959632,
+                "SNR": 1.0910354466968109
+              }
+            },
+            {
+              "cluster_id": 3,
+              "category": "Sports",
+              "noise_fraction": 0.15,
+              "purity": 0.8533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.09169480204582214,
+                "grad_S": 0.0983254462480545,
+                "sigma": 0.08285522800096444,
+                "Df": 0.13825117637363263,
+                "R_simple": 0.9325643111193757,
+                "R_full": 0.6608992319764181,
+                "SNR": 0.9325643111193757
+              }
+            },
+            {
+              "cluster_id": 4,
+              "category": "Sports",
+              "noise_fraction": 0.2,
+              "purity": 0.8,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.09057214111089706,
+                "grad_S": 0.10007039457559586,
+                "sigma": 0.08483545090329082,
+                "Df": 0.1378393165474477,
+                "R_simple": 0.905084280870667,
+                "R_full": 0.6441764735815728,
+                "SNR": 0.905084280870667
+              }
+            },
+            {
+              "cluster_id": 5,
+              "category": "Sports",
+              "noise_fraction": 0.3,
+              "purity": 0.7,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.0819387435913086,
+                "grad_S": 0.09949085861444473,
+                "sigma": 0.08427645628261443,
+                "Df": 0.13970017280720426,
+                "R_simple": 0.8235806257220519,
+                "R_full": 0.5829443551227856,
+                "SNR": 0.8235806257220519
+              }
+            },
+            {
+              "cluster_id": 6,
+              "category": "Sports",
+              "noise_fraction": 0.4,
+              "purity": 0.6,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.06715085357427597,
+                "grad_S": 0.09160720556974411,
+                "sigma": 0.08903208682001272,
+                "Df": 0.13846624865577822,
+                "R_simple": 0.733030258445679,
+                "R_full": 0.5244082964433389,
+                "SNR": 0.733030258445679
+              }
+            },
+            {
+              "cluster_id": 7,
+              "category": "Sports",
+              "noise_fraction": 0.5,
+              "purity": 0.5,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.0606863796710968,
+                "grad_S": 0.09028036147356033,
+                "sigma": 0.08690636967568614,
+                "Df": 0.1390169584336224,
+                "R_simple": 0.6721991214985279,
+                "R_full": 0.47863904368913557,
+                "SNR": 0.6721991214985279
+              }
+            },
+            {
+              "cluster_id": 8,
+              "category": "Sports",
+              "noise_fraction": 0.6,
+              "purity": 0.4,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.059979986399412155,
+                "grad_S": 0.08846352249383926,
+                "sigma": 0.08870906482767056,
+                "Df": 0.13844933647924418,
+                "R_simple": 0.6780194221136656,
+                "R_full": 0.4848294611966764,
+                "SNR": 0.6780194221136656
+              }
+            },
+            {
+              "cluster_id": 9,
+              "category": "Sports",
+              "noise_fraction": 0.7,
+              "purity": 0.3,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.05712048336863518,
+                "grad_S": 0.08773067593574524,
+                "sigma": 0.08853608162009231,
+                "Df": 0.13846880395263733,
+                "R_simple": 0.6510890604612547,
+                "R_full": 0.4654246762159744,
+                "SNR": 0.6510890604612547
+              }
+            },
+            {
+              "cluster_id": 10,
+              "category": "Sports",
+              "noise_fraction": 0.8,
+              "purity": 0.31333333333333335,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.05932196229696274,
+                "grad_S": 0.08816438913345337,
+                "sigma": 0.09017162258079868,
+                "Df": 0.1388918614304867,
+                "R_simple": 0.6728562731509181,
+                "R_full": 0.4817148303619068,
+                "SNR": 0.6728562731509181
+              }
+            },
+            {
+              "cluster_id": 11,
+              "category": "Sports",
+              "noise_fraction": 0.9,
+              "purity": 0.34,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.06950050592422485,
+                "grad_S": 0.08975764364004135,
+                "sigma": 0.08753438697948425,
+                "Df": 0.13957214742931578,
+                "R_simple": 0.774312951027831,
+                "R_full": 0.5511554828218691,
+                "SNR": 0.774312951027831
+              }
+            },
+            {
+              "cluster_id": 12,
+              "category": "Sports",
+              "noise_fraction": 1.0,
+              "purity": 0.3333333333333333,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.07450254261493683,
+                "grad_S": 0.09400387108325958,
+                "sigma": 0.08519888008914533,
+                "Df": 0.1389884803477646,
+                "R_simple": 0.79254760209768,
+                "R_full": 0.562818011628925,
+                "SNR": 0.79254760209768
+              }
+            },
+            {
+              "cluster_id": 13,
+              "category": "Sci/Tech",
+              "noise_fraction": 0.0,
+              "purity": 1.0,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.10096735507249832,
+                "grad_S": 0.09818617254495621,
+                "sigma": 0.08713520335495566,
+                "Df": 0.13919722738925258,
+                "R_simple": 1.0283256028364758,
+                "R_full": 0.7321642901405738,
+                "SNR": 1.0283256028364758
+              }
+            },
+            {
+              "cluster_id": 14,
+              "category": "Sci/Tech",
+              "noise_fraction": 0.05,
+              "purity": 0.9533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.09772879630327225,
+                "grad_S": 0.10380146652460098,
+                "sigma": 0.08367211412640109,
+                "Df": 0.13834627872415073,
+                "R_simple": 0.9414972598687754,
+                "R_full": 0.6679779328410655,
+                "SNR": 0.9414972598687754
+              }
+            },
+            {
+              "cluster_id": 15,
+              "category": "Sci/Tech",
+              "noise_fraction": 0.1,
+              "purity": 0.9,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.09918897598981857,
+                "grad_S": 0.10230063647031784,
+                "sigma": 0.08464461368103075,
+                "Df": 0.13823629568464227,
+                "R_simple": 0.9695831757468869,
+                "R_full": 0.6891922331012342,
+                "SNR": 0.9695831757468869
+              }
+            },
+            {
+              "cluster_id": 16,
+              "category": "Sci/Tech",
+              "noise_fraction": 0.15,
+              "purity": 0.8533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.09318972378969193,
+                "grad_S": 0.09616879373788834,
+                "sigma": 0.08776153108816993,
+                "Df": 0.1392994673019286,
+                "R_simple": 0.969022488143961,
+                "R_full": 0.6904570885037049,
+                "SNR": 0.969022488143961
+              }
+            },
+            {
+              "cluster_id": 17,
+              "category": "Sci/Tech",
+              "noise_fraction": 0.2,
+              "purity": 0.8,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.07936570048332214,
+                "grad_S": 0.09390760213136673,
+                "sigma": 0.09155162932172799,
+                "Df": 0.13765818716953018,
+                "R_simple": 0.8451467046544111,
+                "R_full": 0.6081307122504744,
+                "SNR": 0.8451467046544111
+              }
+            },
+            {
+              "cluster_id": 18,
+              "category": "Sci/Tech",
+              "noise_fraction": 0.3,
+              "purity": 0.7,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.06781959533691406,
+                "grad_S": 0.09375223517417908,
+                "sigma": 0.0926344976652345,
+                "Df": 0.1379561901308298,
+                "R_simple": 0.7233917699232915,
+                "R_full": 0.5209948959057593,
+                "SNR": 0.7233917699232915
+              }
+            },
+            {
+              "cluster_id": 19,
+              "category": "Sci/Tech",
+              "noise_fraction": 0.4,
+              "purity": 0.6,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.07205932587385178,
+                "grad_S": 0.0894695520401001,
+                "sigma": 0.0934944239433086,
+                "Df": 0.13884980803500585,
+                "R_simple": 0.8054061323740048,
+                "R_full": 0.5795737742995528,
+                "SNR": 0.8054061323740048
+              }
+            },
+            {
+              "cluster_id": 20,
+              "category": "Sci/Tech",
+              "noise_fraction": 0.5,
+              "purity": 0.5,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.06167550012469292,
+                "grad_S": 0.08710458129644394,
+                "sigma": 0.09140954356704635,
+                "Df": 0.13916283997638745,
+                "R_simple": 0.7080626438555745,
+                "R_full": 0.5075517322931442,
+                "SNR": 0.7080626438555745
+              }
+            },
+            {
+              "cluster_id": 21,
+              "category": "Sci/Tech",
+              "noise_fraction": 0.6,
+              "purity": 0.4,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.060499608516693115,
+                "grad_S": 0.08947071433067322,
+                "sigma": 0.08962529100358148,
+                "Df": 0.1396448710092459,
+                "R_simple": 0.6761945399596754,
+                "R_full": 0.4828185672599686,
+                "SNR": 0.6761945399596754
+              }
+            },
+            {
+              "cluster_id": 22,
+              "category": "Sci/Tech",
+              "noise_fraction": 0.7,
+              "purity": 0.3,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.060684140771627426,
+                "grad_S": 0.08468089252710342,
+                "sigma": 0.0943130740331366,
+                "Df": 0.13868560532247842,
+                "R_simple": 0.7166214119933199,
+                "R_full": 0.5165087267980709,
+                "SNR": 0.7166214119933199
+              }
+            },
+            {
+              "cluster_id": 23,
+              "category": "Sci/Tech",
+              "noise_fraction": 0.8,
+              "purity": 0.2733333333333333,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.058566879481077194,
+                "grad_S": 0.08934302628040314,
+                "sigma": 0.08774383846089552,
+                "Df": 0.13891831816026198,
+                "R_simple": 0.6555282703013104,
+                "R_full": 0.46750348996716873,
+                "SNR": 0.6555282703013104
+              }
+            },
+            {
+              "cluster_id": 24,
+              "category": "Sci/Tech",
+              "noise_fraction": 0.9,
+              "purity": 0.31333333333333335,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.05976761877536774,
+                "grad_S": 0.08816961944103241,
+                "sigma": 0.08794024437826818,
+                "Df": 0.13967526919476145,
+                "R_simple": 0.6778708942408462,
+                "R_full": 0.48269868460062154,
+                "SNR": 0.6778708942408462
+              }
+            },
+            {
+              "cluster_id": 25,
+              "category": "Sci/Tech",
+              "noise_fraction": 1.0,
+              "purity": 0.4266666666666667,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.06921511143445969,
+                "grad_S": 0.09119361639022827,
+                "sigma": 0.08441677474784391,
+                "Df": 0.1384518347029762,
+                "R_simple": 0.7589907514828673,
+                "R_full": 0.5390121755538334,
+                "SNR": 0.7589907514828673
+              }
+            },
+            {
+              "cluster_id": 26,
+              "category": "World",
+              "noise_fraction": 0.0,
+              "purity": 1.0,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.09570712596178055,
+                "grad_S": 0.10064811259508133,
+                "sigma": 0.08193502659390951,
+                "Df": 0.13927906470381596,
+                "R_simple": 0.9509083031374972,
+                "R_full": 0.6711316211086193,
+                "SNR": 0.9509083031374972
+              }
+            },
+            {
+              "cluster_id": 27,
+              "category": "World",
+              "noise_fraction": 0.05,
+              "purity": 0.9533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.09062930941581726,
+                "grad_S": 0.1011328399181366,
+                "sigma": 0.08086965420460411,
+                "Df": 0.13952758879448335,
+                "R_simple": 0.8961412483737077,
+                "R_full": 0.6309318103688311,
+                "SNR": 0.8961412483737077
+              }
+            },
+            {
+              "cluster_id": 28,
+              "category": "World",
+              "noise_fraction": 0.1,
+              "purity": 0.9,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.11616998165845871,
+                "grad_S": 0.11367227137088776,
+                "sigma": 0.07508534284627412,
+                "Df": 0.13903846809602746,
+                "R_simple": 1.0219729073541732,
+                "R_full": 0.7130143916826185,
+                "SNR": 1.0219729073541732
+              }
+            },
+            {
+              "cluster_id": 29,
+              "category": "World",
+              "noise_fraction": 0.15,
+              "purity": 0.8533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.0927475243806839,
+                "grad_S": 0.10373348742723465,
+                "sigma": 0.08093918239796721,
+                "Df": 0.13900976457484227,
+                "R_simple": 0.8940943438900865,
+                "R_full": 0.6303862927013848,
+                "SNR": 0.8940943438900865
+              }
+            },
+            {
+              "cluster_id": 30,
+              "category": "World",
+              "noise_fraction": 0.2,
+              "purity": 0.8,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.08725651353597641,
+                "grad_S": 0.10326758027076721,
+                "sigma": 0.08205728003746984,
+                "Df": 0.1397671599527994,
+                "R_simple": 0.8449555350013059,
+                "R_full": 0.5957486798523128,
+                "SNR": 0.8449555350013059
+              }
+            },
+            {
+              "cluster_id": 31,
+              "category": "World",
+              "noise_fraction": 0.3,
+              "purity": 0.7,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.07334654778242111,
+                "grad_S": 0.0939904972910881,
+                "sigma": 0.08754487617555312,
+                "Df": 0.1391077253500446,
+                "R_simple": 0.7803613120086728,
+                "R_full": 0.5560986663230656,
+                "SNR": 0.7803613120086728
+              }
+            },
+            {
+              "cluster_id": 32,
+              "category": "World",
+              "noise_fraction": 0.4,
+              "purity": 0.6,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.07231048494577408,
+                "grad_S": 0.09384267777204514,
+                "sigma": 0.08955919760226472,
+                "Df": 0.13825271952829848,
+                "R_simple": 0.7705501021765888,
+                "R_full": 0.5519849883334436,
+                "SNR": 0.7705501021765888
+              }
+            },
+            {
+              "cluster_id": 33,
+              "category": "World",
+              "noise_fraction": 0.5,
+              "purity": 0.5,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.06946095824241638,
+                "grad_S": 0.09153392910957336,
+                "sigma": 0.08696268621228405,
+                "Df": 0.13829870698130778,
+                "R_simple": 0.7588547647645073,
+                "R_full": 0.5413395820432887,
+                "SNR": 0.7588547647645073
+              }
+            },
+            {
+              "cluster_id": 34,
+              "category": "World",
+              "noise_fraction": 0.6,
+              "purity": 0.4,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.06384745240211487,
+                "grad_S": 0.08822229504585266,
+                "sigma": 0.08970725595915176,
+                "Df": 0.13897294401447002,
+                "R_simple": 0.7237110797098487,
+                "R_full": 0.5176504386649639,
+                "SNR": 0.7237110797098487
+              }
+            },
+            {
+              "cluster_id": 35,
+              "category": "World",
+              "noise_fraction": 0.7,
+              "purity": 0.3,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.056103650480508804,
+                "grad_S": 0.08455470204353333,
+                "sigma": 0.09368913918924725,
+                "Df": 0.138893848034,
+                "R_simple": 0.663518989773314,
+                "R_full": 0.4775593138856581,
+                "SNR": 0.663518989773314
+              }
+            },
+            {
+              "cluster_id": 36,
+              "category": "World",
+              "noise_fraction": 0.8,
+              "purity": 0.36666666666666664,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.05546567589044571,
+                "grad_S": 0.08540407568216324,
+                "sigma": 0.09285585211205494,
+                "Df": 0.1397737702503934,
+                "R_simple": 0.6494499875727804,
+                "R_full": 0.4658783452553711,
+                "SNR": 0.6494499875727804
+              }
+            },
+            {
+              "cluster_id": 37,
+              "category": "World",
+              "noise_fraction": 0.9,
+              "purity": 0.3333333333333333,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.0598880872130394,
+                "grad_S": 0.08483202010393143,
+                "sigma": 0.09283613511145518,
+                "Df": 0.13797494403506178,
+                "R_simple": 0.7059608758540452,
+                "R_full": 0.5085708352074064,
+                "SNR": 0.7059608758540452
+              }
+            },
+            {
+              "cluster_id": 38,
+              "category": "World",
+              "noise_fraction": 1.0,
+              "purity": 0.4,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.06285003572702408,
+                "grad_S": 0.09169694036245346,
+                "sigma": 0.08697310787590957,
+                "Df": 0.13744871378034812,
+                "R_simple": 0.6854103907785223,
+                "R_full": 0.48997115666461116,
+                "SNR": 0.6854103907785223
+              }
+            },
+            {
+              "cluster_id": 39,
+              "category": "Business",
+              "noise_fraction": 0.0,
+              "purity": 1.0,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.10456771403551102,
+                "grad_S": 0.09683473408222198,
+                "sigma": 0.07878819771080872,
+                "Df": 0.139033983671701,
+                "R_simple": 1.0798575018208134,
+                "R_full": 0.758467627981505,
+                "SNR": 1.0798575018208134
+              }
+            },
+            {
+              "cluster_id": 40,
+              "category": "Business",
+              "noise_fraction": 0.05,
+              "purity": 0.9533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.10233153402805328,
+                "grad_S": 0.09837144613265991,
+                "sigma": 0.07910057372088887,
+                "Df": 0.13896914641833147,
+                "R_simple": 1.0402564773730474,
+                "R_full": 0.7311750994554559,
+                "SNR": 1.0402564773730474
+              }
+            },
+            {
+              "cluster_id": 41,
+              "category": "Business",
+              "noise_fraction": 0.1,
+              "purity": 0.9,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.10639765113592148,
+                "grad_S": 0.10232283920049667,
+                "sigma": 0.07837348250427457,
+                "Df": 0.13890500316330465,
+                "R_simple": 1.039823092940574,
+                "R_full": 0.7300523778293224,
+                "SNR": 1.039823092940574
+              }
+            },
+            {
+              "cluster_id": 42,
+              "category": "Business",
+              "noise_fraction": 0.15,
+              "purity": 0.8533333333333334,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.09200246632099152,
+                "grad_S": 0.09882251173257828,
+                "sigma": 0.08412715245015734,
+                "Df": 0.13833185192539926,
+                "R_simple": 0.9309869250232947,
+                "R_full": 0.6610404171344447,
+                "SNR": 0.9309869250232947
+              }
+            },
+            {
+              "cluster_id": 43,
+              "category": "Business",
+              "noise_fraction": 0.2,
+              "purity": 0.8,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.09013603627681732,
+                "grad_S": 0.09816557914018631,
+                "sigma": 0.08386850448097112,
+                "Df": 0.13808130509063896,
+                "R_simple": 0.9182040901332399,
+                "R_full": 0.6520912221134679,
+                "SNR": 0.9182040901332399
+              }
+            },
+            {
+              "cluster_id": 44,
+              "category": "Business",
+              "noise_fraction": 0.3,
+              "purity": 0.7,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.08006735146045685,
+                "grad_S": 0.09379256516695023,
+                "sigma": 0.08821097807989992,
+                "Df": 0.13815984423368116,
+                "R_simple": 0.8536641610978165,
+                "R_full": 0.6103804582300056,
+                "SNR": 0.8536641610978165
+              }
+            },
+            {
+              "cluster_id": 45,
+              "category": "Business",
+              "noise_fraction": 0.4,
+              "purity": 0.6,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.07203209400177002,
+                "grad_S": 0.09112725406885147,
+                "sigma": 0.08926626725834462,
+                "Df": 0.13899352417436092,
+                "R_simple": 0.7904561016108963,
+                "R_full": 0.5649761260680853,
+                "SNR": 0.7904561016108963
+              }
+            },
+            {
+              "cluster_id": 46,
+              "category": "Business",
+              "noise_fraction": 0.5,
+              "purity": 0.5,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.06496273726224899,
+                "grad_S": 0.08832266926765442,
+                "sigma": 0.0910943086708723,
+                "Df": 0.13960730642038516,
+                "R_simple": 0.7355160096598177,
+                "R_full": 0.5264165148183134,
+                "SNR": 0.7355160096598177
+              }
+            },
+            {
+              "cluster_id": 47,
+              "category": "Business",
+              "noise_fraction": 0.6,
+              "purity": 0.4,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.06133023276925087,
+                "grad_S": 0.08623558282852173,
+                "sigma": 0.09221195310327261,
+                "Df": 0.13902069370086131,
+                "R_simple": 0.7111940426170157,
+                "R_full": 0.5105897725700786,
+                "SNR": 0.7111940426170157
+              }
+            },
+            {
+              "cluster_id": 48,
+              "category": "Business",
+              "noise_fraction": 0.7,
+              "purity": 0.3,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.05935763567686081,
+                "grad_S": 0.08672633767127991,
+                "sigma": 0.09164478806768318,
+                "Df": 0.1396688881818906,
+                "R_simple": 0.6844245620268772,
+                "R_full": 0.49018987109452955,
+                "SNR": 0.6844245620268772
+              }
+            },
+            {
+              "cluster_id": 49,
+              "category": "Business",
+              "noise_fraction": 0.8,
+              "purity": 0.32,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.057219963520765305,
+                "grad_S": 0.08515504002571106,
+                "sigma": 0.09331925781803742,
+                "Df": 0.13879181286172143,
+                "R_simple": 0.6719504036812002,
+                "R_full": 0.4834790558047967,
+                "SNR": 0.6719504036812002
+              }
+            },
+            {
+              "cluster_id": 50,
+              "category": "Business",
+              "noise_fraction": 0.9,
+              "purity": 0.36,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.06022315472364426,
+                "grad_S": 0.09068506211042404,
+                "sigma": 0.0859746201117418,
+                "Df": 0.1385544414191798,
+                "R_simple": 0.6640912331328904,
+                "R_full": 0.4726939179921612,
+                "SNR": 0.6640912331328904
+              }
+            },
+            {
+              "cluster_id": 51,
+              "category": "Business",
+              "noise_fraction": 1.0,
+              "purity": 0.38,
+              "n_docs": 150,
+              "metrics": {
+                "E": 0.060776837170124054,
+                "grad_S": 0.08908917754888535,
+                "sigma": 0.08659489689059725,
+                "Df": 0.138905810255148,
+                "R_simple": 0.6822022477059502,
+                "R_full": 0.485651408837998,
+                "SNR": 0.6822022477059502
+              }
+            }
+          ],
+          "correlations": {
+            "R_simple_vs_purity": {
+              "rho": 0.9064638775732767,
+              "p_value": 2.3514567878218763e-20,
+              "n": 52
+            },
+            "R_full_vs_purity": {
+              "rho": 0.9082610585994322,
+              "p_value": 1.4794675809344052e-20,
+              "n": 52
+            },
+            "E_vs_purity": {
+              "rho": 0.9306402413775111,
+              "p_value": 1.780093600108806e-23,
+              "n": 52
+            },
+            "SNR_vs_purity": {
+              "rho": 0.9064638775732767,
+              "p_value": 2.3514567878218763e-20,
+              "n": 52
+            },
+            "R_full_vs_E": {
+              "rho": 0.9785708187483991,
+              "p_value": 5.5367112459281e-36,
+              "n": 52
+            },
+            "steiger_Rfull_vs_E": {
+              "z_stat": -12.156922329104127,
+              "p_value": 0.0,
+              "n": 52
+            },
+            "R_simple_vs_E": {
+              "rho": 0.9830957056262272,
+              "p_value": 1.5520893944482482e-38,
+              "n": 52
+            },
+            "steiger_Rsimple_vs_E": {
+              "z_stat": -14.666703612712594,
+              "p_value": 0.0,
+              "n": 52
+            }
+          }
+        }
+      },
+      "correlations": {
+        "R_simple_vs_purity": {
+          "rho": 0.9064638775732767,
+          "p_value": 2.3514567878218763e-20,
+          "n": 52
+        },
+        "R_full_vs_purity": {
+          "rho": 0.9082610585994322,
+          "p_value": 1.4794675809344052e-20,
+          "n": 52
+        },
+        "E_vs_purity": {
+          "rho": 0.9306402413775111,
+          "p_value": 1.780093600108806e-23,
+          "n": 52
+        },
+        "SNR_vs_purity": {
+          "rho": 0.9064638775732767,
+          "p_value": 2.3514567878218763e-20,
+          "n": 52
+        },
+        "R_full_vs_E": {
+          "rho": 0.9785708187483991,
+          "p_value": 5.5367112459281e-36,
+          "n": 52
+        },
+        "steiger_Rfull_vs_E": {
+          "z_stat": -12.156922329104127,
+          "p_value": 0.0,
+          "n": 52
+        },
+        "R_simple_vs_E": {
+          "rho": 0.9830957056262272,
+          "p_value": 1.5520893944482482e-38,
+          "n": 52
+        },
+        "steiger_Rsimple_vs_E": {
+          "z_stat": -14.666703612712594,
+          "p_value": 0.0,
+          "n": 52
+        }
+      }
+    },
+    "financial": {
+      "n_clusters": 33,
+      "n_valid_tickers": 30,
+      "non_overlapping_windows": true,
+      "ground_truth": "sector_purity",
+      "ground_truth_note": "NOT Sharpe (avoids tautological E-Sharpe relationship)",
+      "clusters": [
+        {
+          "cluster_id": 0,
+          "type": "pure",
+          "dominant_sector": "energy_industrial",
+          "purity": 1.0,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.04790433499527424,
+            "grad_S": 0.24858327282192666,
+            "sigma": 0.08007240731810567,
+            "Df": 0.1178755566491891,
+            "R_simple": 0.19270940659627828,
+            "R_full": 0.1431035306642709,
+            "SNR": 0.19270940659627828
+          }
+        },
+        {
+          "cluster_id": 1,
+          "type": "pure",
+          "dominant_sector": "energy_industrial",
+          "purity": 1.0,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.03605671841324103,
+            "grad_S": 0.14228100897945484,
+            "sigma": 0.15492057425751968,
+            "Df": 0.11651875709062869,
+            "R_simple": 0.2534190520004505,
+            "R_full": 0.20392561498486717,
+            "SNR": 0.2534190520004505
+          }
+        },
+        {
+          "cluster_id": 2,
+          "type": "pure",
+          "dominant_sector": "energy_industrial",
+          "purity": 1.0,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.019825615442073608,
+            "grad_S": 0.16692242068048324,
+            "sigma": 0.10236122218303774,
+            "Df": 0.11592348357914549,
+            "R_simple": 0.1187714350250352,
+            "R_full": 0.09119341056855952,
+            "SNR": 0.1187714350250352
+          }
+        },
+        {
+          "cluster_id": 3,
+          "type": "pure",
+          "dominant_sector": "energy_industrial",
+          "purity": 1.0,
+          "n_windows": 15,
+          "metrics": {
+            "E": -0.0018109467300572418,
+            "grad_S": 0.1639577609068719,
+            "sigma": 0.1289968289118881,
+            "Df": 0.11666065444112575,
+            "R_simple": -0.011045202862253412,
+            "R_full": -0.008697877059908769,
+            "SNR": -0.011045202862253412
+          }
+        },
+        {
+          "cluster_id": 4,
+          "type": "pure",
+          "dominant_sector": "energy_industrial",
+          "purity": 1.0,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.03651510275402942,
+            "grad_S": 0.18840236955398973,
+            "sigma": 0.1436799361153676,
+            "Df": 0.11652772595135581,
+            "R_simple": 0.19381445594592395,
+            "R_full": 0.15459642727487624,
+            "SNR": 0.19381445594592395
+          }
+        },
+        {
+          "cluster_id": 5,
+          "type": "pure",
+          "dominant_sector": "healthcare",
+          "purity": 1.0,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.031643340157505376,
+            "grad_S": 0.17901631793416897,
+            "sigma": 0.09873002228662354,
+            "Df": 0.11591041702792763,
+            "R_simple": 0.17676232269028022,
+            "R_full": 0.13515617457858112,
+            "SNR": 0.17676232269028022
+          }
+        },
+        {
+          "cluster_id": 6,
+          "type": "pure",
+          "dominant_sector": "healthcare",
+          "purity": 1.0,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.0493999040650733,
+            "grad_S": 0.18054935296306662,
+            "sigma": 0.13349647339410647,
+            "Df": 0.11757011739541223,
+            "R_simple": 0.273608867904271,
+            "R_full": 0.21592928666313368,
+            "SNR": 0.273608867904271
+          }
+        },
+        {
+          "cluster_id": 7,
+          "type": "pure",
+          "dominant_sector": "healthcare",
+          "purity": 1.0,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.08337052365909188,
+            "grad_S": 0.2155966532701067,
+            "sigma": 0.10326034144773864,
+            "Df": 0.11606150223835351,
+            "R_simple": 0.38669674317551905,
+            "R_full": 0.2971160834962088,
+            "SNR": 0.38669674317551905
+          }
+        },
+        {
+          "cluster_id": 8,
+          "type": "pure",
+          "dominant_sector": "healthcare",
+          "purity": 1.0,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.029388120063150964,
+            "grad_S": 0.16118988615915042,
+            "sigma": 0.14122080885345753,
+            "Df": 0.11639296052485418,
+            "R_simple": 0.18231987603821917,
+            "R_full": 0.1451737880827082,
+            "SNR": 0.18231987603821917
+          }
+        },
+        {
+          "cluster_id": 9,
+          "type": "pure",
+          "dominant_sector": "healthcare",
+          "purity": 1.0,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.06438914641371367,
+            "grad_S": 0.17292333322253095,
+            "sigma": 0.11374361948242563,
+            "Df": 0.11701884528772098,
+            "R_simple": 0.3723566115328855,
+            "R_full": 0.2887252342454662,
+            "SNR": 0.3723566115328855
+          }
+        },
+        {
+          "cluster_id": 10,
+          "type": "pure",
+          "dominant_sector": "tech",
+          "purity": 1.0,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.05329746662436312,
+            "grad_S": 0.188050756852378,
+            "sigma": 0.10888298411060142,
+            "Df": 0.1171384916245143,
+            "R_simple": 0.28342064406686884,
+            "R_full": 0.21858604358229436,
+            "SNR": 0.28342064406686884
+          }
+        },
+        {
+          "cluster_id": 11,
+          "type": "pure",
+          "dominant_sector": "tech",
+          "purity": 1.0,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.05793668135660552,
+            "grad_S": 0.158819454016864,
+            "sigma": 0.09501006455163426,
+            "Df": 0.11721037335282182,
+            "R_simple": 0.3647958728686575,
+            "R_full": 0.2768432321429722,
+            "SNR": 0.3647958728686575
+          }
+        },
+        {
+          "cluster_id": 12,
+          "type": "pure",
+          "dominant_sector": "tech",
+          "purity": 1.0,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.04113245847975349,
+            "grad_S": 0.13660326135527476,
+            "sigma": 0.13644494148652012,
+            "Df": 0.11742223638473681,
+            "R_simple": 0.3011089052462452,
+            "R_full": 0.2383133479291239,
+            "SNR": 0.3011089052462452
+          }
+        },
+        {
+          "cluster_id": 13,
+          "type": "pure",
+          "dominant_sector": "tech",
+          "purity": 1.0,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.02855978589544808,
+            "grad_S": 0.1404563774254886,
+            "sigma": 0.12221329371316622,
+            "Df": 0.11720123756289531,
+            "R_simple": 0.203335629317358,
+            "R_full": 0.15893613096662285,
+            "SNR": 0.203335629317358
+          }
+        },
+        {
+          "cluster_id": 14,
+          "type": "pure",
+          "dominant_sector": "tech",
+          "purity": 1.0,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.043824101239479836,
+            "grad_S": 0.179717559760867,
+            "sigma": 0.1098238258918787,
+            "Df": 0.11671701472557362,
+            "R_simple": 0.2438498569521664,
+            "R_full": 0.18843235351221554,
+            "SNR": 0.2438498569521664
+          }
+        },
+        {
+          "cluster_id": 15,
+          "type": "mixed_0%",
+          "dominant_sector": "energy_industrial",
+          "purity": 0.9333333333333333,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.04236725795015845,
+            "grad_S": 0.18787280607946874,
+            "sigma": 0.1048491295370638,
+            "Df": 0.11681581807652949,
+            "R_simple": 0.2255103270892618,
+            "R_full": 0.17328178545135156,
+            "SNR": 0.2255103270892618
+          }
+        },
+        {
+          "cluster_id": 16,
+          "type": "mixed_0%",
+          "dominant_sector": "healthcare",
+          "purity": 0.9333333333333333,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.06726304323459897,
+            "grad_S": 0.20573087494454226,
+            "sigma": 0.11658584436864695,
+            "Df": 0.11606944303928082,
+            "R_simple": 0.32694676116421856,
+            "R_full": 0.2547669805380586,
+            "SNR": 0.32694676116421856
+          }
+        },
+        {
+          "cluster_id": 17,
+          "type": "mixed_0%",
+          "dominant_sector": "tech",
+          "purity": 0.9333333333333333,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.019428247915033142,
+            "grad_S": 0.15107697361287067,
+            "sigma": 0.13300125959538228,
+            "Df": 0.11681291200162325,
+            "R_simple": 0.12859833931289444,
+            "R_full": 0.10159922602612657,
+            "SNR": 0.12859833931289444
+          }
+        },
+        {
+          "cluster_id": 18,
+          "type": "mixed_10%",
+          "dominant_sector": "energy_industrial",
+          "purity": 0.9333333333333333,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.0369809694577953,
+            "grad_S": 0.15873800213538308,
+            "sigma": 0.15221793272612535,
+            "Df": 0.11550194584364397,
+            "R_simple": 0.23296859580137144,
+            "R_full": 0.18744358996118793,
+            "SNR": 0.23296859580137144
+          }
+        },
+        {
+          "cluster_id": 19,
+          "type": "mixed_10%",
+          "dominant_sector": "healthcare",
+          "purity": 0.9333333333333333,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.06433175786376345,
+            "grad_S": 0.1429641219821779,
+            "sigma": 0.14191164555899735,
+            "Df": 0.1174293022821326,
+            "R_simple": 0.4499853317868321,
+            "R_full": 0.35778359776741403,
+            "SNR": 0.4499853317868321
+          }
+        },
+        {
+          "cluster_id": 20,
+          "type": "mixed_10%",
+          "dominant_sector": "tech",
+          "purity": 0.9333333333333333,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.06771746223476713,
+            "grad_S": 0.15619181165912221,
+            "sigma": 0.11342186728989671,
+            "Df": 0.1175921156828885,
+            "R_simple": 0.43355321585331114,
+            "R_full": 0.33564656566078005,
+            "SNR": 0.43355321585331114
+          }
+        },
+        {
+          "cluster_id": 21,
+          "type": "mixed_20%",
+          "dominant_sector": "energy_industrial",
+          "purity": 0.8,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.032986853655367916,
+            "grad_S": 0.1810410702200127,
+            "sigma": 0.11622294115742608,
+            "Df": 0.1167109591030615,
+            "R_simple": 0.18220646627464243,
+            "R_full": 0.1417336926542577,
+            "SNR": 0.18220646627464243
+          }
+        },
+        {
+          "cluster_id": 22,
+          "type": "mixed_20%",
+          "dominant_sector": "healthcare",
+          "purity": 0.8,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.010090587323771851,
+            "grad_S": 0.14722945370450105,
+            "sigma": 0.10789813290700685,
+            "Df": 0.11655659345607844,
+            "R_simple": 0.06853647194823059,
+            "R_full": 0.05287046647714104,
+            "SNR": 0.06853647194823059
+          }
+        },
+        {
+          "cluster_id": 23,
+          "type": "mixed_20%",
+          "dominant_sector": "tech",
+          "purity": 0.8,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.07523145991514528,
+            "grad_S": 0.18108633806305832,
+            "sigma": 0.1137734819236264,
+            "Df": 0.11527726276573255,
+            "R_simple": 0.41544525511884833,
+            "R_full": 0.3233678202613738,
+            "SNR": 0.41544525511884833
+          }
+        },
+        {
+          "cluster_id": 24,
+          "type": "mixed_30%",
+          "dominant_sector": "energy_industrial",
+          "purity": 0.7333333333333333,
+          "n_windows": 15,
+          "metrics": {
+            "E": -0.006704799522312756,
+            "grad_S": 0.15850837099057133,
+            "sigma": 0.12602900570766987,
+            "Df": 0.11685112440638583,
+            "R_simple": -0.04229934028349571,
+            "R_full": -0.033206458615032304,
+            "SNR": -0.04229934028349571
+          }
+        },
+        {
+          "cluster_id": 25,
+          "type": "mixed_30%",
+          "dominant_sector": "healthcare",
+          "purity": 0.7333333333333333,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.017946433285261392,
+            "grad_S": 0.15908647049347951,
+            "sigma": 0.12649528744134167,
+            "Df": 0.11690511100861202,
+            "R_simple": 0.11280929943063236,
+            "R_full": 0.08858757306064646,
+            "SNR": 0.11280929943063236
+          }
+        },
+        {
+          "cluster_id": 26,
+          "type": "mixed_30%",
+          "dominant_sector": "tech",
+          "purity": 0.7333333333333333,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.09686060715250419,
+            "grad_S": 0.24171095648350302,
+            "sigma": 0.07681416741696616,
+            "Df": 0.11890487823273974,
+            "R_simple": 0.40072907145653125,
+            "R_full": 0.29534143919527495,
+            "SNR": 0.40072907145653125
+          }
+        },
+        {
+          "cluster_id": 27,
+          "type": "mixed_40%",
+          "dominant_sector": "energy_industrial",
+          "purity": 0.6,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.053388164117056366,
+            "grad_S": 0.1849332539615743,
+            "sigma": 0.12366856842672998,
+            "Df": 0.11585910791461317,
+            "R_simple": 0.2886888267707085,
+            "R_full": 0.2266000240945442,
+            "SNR": 0.2886888267707085
+          }
+        },
+        {
+          "cluster_id": 28,
+          "type": "mixed_40%",
+          "dominant_sector": "healthcare",
+          "purity": 0.6,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.04878567798462588,
+            "grad_S": 0.165722340825209,
+            "sigma": 0.1169581465557398,
+            "Df": 0.11703418588524707,
+            "R_simple": 0.29438202321847,
+            "R_full": 0.22900185032024523,
+            "SNR": 0.29438202321847
+          }
+        },
+        {
+          "cluster_id": 29,
+          "type": "mixed_40%",
+          "dominant_sector": "tech",
+          "purity": 0.6,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.051735878592637806,
+            "grad_S": 0.15667803757770035,
+            "sigma": 0.09864799208033284,
+            "Df": 0.11623125238172288,
+            "R_simple": 0.3302050459176881,
+            "R_full": 0.25226983491667815,
+            "SNR": 0.3302050459176881
+          }
+        },
+        {
+          "cluster_id": 30,
+          "type": "mixed_50%",
+          "dominant_sector": "energy_industrial",
+          "purity": 0.5333333333333333,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.014361918144599643,
+            "grad_S": 0.15718343200294807,
+            "sigma": 0.1561631007023109,
+            "Df": 0.11755377826533207,
+            "R_simple": 0.0913704323769332,
+            "R_full": 0.073452702114491,
+            "SNR": 0.0913704323769332
+          }
+        },
+        {
+          "cluster_id": 31,
+          "type": "mixed_50%",
+          "dominant_sector": "healthcare",
+          "purity": 0.5333333333333333,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.017910784491738576,
+            "grad_S": 0.20308559157558773,
+            "sigma": 0.08269971897114314,
+            "Df": 0.11661848087432715,
+            "R_simple": 0.08819328024594127,
+            "R_full": 0.06594721517480076,
+            "SNR": 0.08819328024594127
+          }
+        },
+        {
+          "cluster_id": 32,
+          "type": "mixed_50%",
+          "dominant_sector": "tech",
+          "purity": 0.5333333333333333,
+          "n_windows": 15,
+          "metrics": {
+            "E": 0.009614517785611487,
+            "grad_S": 0.15785650748429564,
+            "sigma": 0.12364028718623518,
+            "Df": 0.11692675456699635,
+            "R_simple": 0.06090669265926834,
+            "R_full": 0.04769954462035241,
+            "SNR": 0.06090669265926834
+          }
+        }
+      ],
+      "correlations": {
+        "R_simple_vs_purity": {
+          "rho": 0.16295502547972082,
+          "p_value": 0.3648893259277318,
+          "n": 33
+        },
+        "R_full_vs_purity": {
+          "rho": 0.17300744588269062,
+          "p_value": 0.3356391623056727,
+          "n": 33
+        },
+        "E_vs_purity": {
+          "rho": 0.16295502547972082,
+          "p_value": 0.3648893259277318,
+          "n": 33
+        },
+        "SNR_vs_purity": {
+          "rho": 0.16295502547972082,
+          "p_value": 0.3648893259277318,
+          "n": 33
+        },
+        "R_full_vs_E": {
+          "rho": 0.9522058823529411,
+          "p_value": 1.6074335219756918e-17,
+          "n": 33
+        },
+        "steiger_Rfull_vs_E": {
+          "z_stat": 0.18583800919189272,
+          "p_value": 0.8525717966667978,
+          "n": 33
+        },
+        "R_simple_vs_E": {
+          "rho": 0.9535427807486632,
+          "p_value": 1.0451843942443977e-17,
+          "n": 33
+        },
+        "steiger_Rsimple_vs_E": {
+          "z_stat": 0.0,
+          "p_value": 1.0,
+          "n": 33
+        }
+      }
+    }
+  },
+  "snr_verification": {
+    "n_clusters_checked": 150,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "confirmed": true
+  },
+  "verdict": "INCONCLUSIVE",
+  "adjudication": {
+    "domain_outcomes": {
+      "text_20ng": {
+        "best_R_metric": "R_full",
+        "best_R_rho": 0.9497319972652363,
+        "E_rho": 0.9266559948396446,
+        "R_minus_E": 0.023076002425591713,
+        "steiger_z": 16.611658702955623,
+        "steiger_p": 0.0,
+        "significantly_beats_E": true,
+        "passes_rho_threshold": true
+      },
+      "text_agnews": {
+        "best_R_metric": "R_full",
+        "best_R_rho": 0.9082610585994322,
+        "E_rho": 0.9306402413775111,
+        "R_minus_E": -0.022379182778078932,
+        "steiger_z": -12.156922329104127,
+        "steiger_p": 0.0,
+        "significantly_beats_E": false,
+        "passes_rho_threshold": true
+      },
+      "financial": {
+        "best_R_metric": "R_full",
+        "best_R_rho": 0.17300744588269062,
+        "E_rho": 0.16295502547972082,
+        "R_minus_E": 0.010052420402969803,
+        "steiger_z": 0.18583800919189272,
+        "steiger_p": 0.8525717966667978,
+        "significantly_beats_E": false,
+        "passes_rho_threshold": false
+      }
+    },
+    "n_domains": 3,
+    "n_significantly_beats_E": 1,
+    "n_passes_threshold": 2,
+    "required_for_confirm": 2,
+    "verdict": "INCONCLUSIVE",
+    "decision_applied": "CONFIRMED requires 2/3 sig beats. FALSIFIED requires 0/3 sig beats. Got 1/3."
+  },
+  "elapsed_seconds": 302.76157569885254
+}

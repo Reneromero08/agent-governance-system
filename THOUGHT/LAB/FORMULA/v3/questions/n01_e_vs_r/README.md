@@ -57,3 +57,37 @@ Unknown. This is a genuine question. Q10's E>R finding might hold, in which case
 - v2/Q10 (Alignment detection -- where E>R was first found)
 - v2/Q20 (Tautology risk -- if R=E/sigma, is it just SNR?)
 - N2 (What is grad_S? -- explains WHY E beats R, if it does)
+
+## Current Status
+
+Status: EXECUTED ON 2026-03-09
+
+Paper trail:
+- `PREREGISTRATION.md` -- locked hypothesis, prediction, falsification criteria, and fixed parameters
+- `RUNLOG.md` -- prior work reviewed, local environment notes, exact execution command, and run outcome
+- `code/test_n01_e_vs_r.py` -- executable harness for the one-shot evaluation
+- `results/n01_e_vs_r_results.json` -- raw metrics and bootstrap deltas
+- `results/n01_e_vs_r_report.md` -- human-readable result summary
+
+Prior work reviewed for this pass:
+- `THOUGHT/LAB/FORMULA/v2/q10_alignment/README.md`
+- `THOUGHT/LAB/FORMULA/v2/q01_grad_s/README.md`
+- `THOUGHT/LAB/FORMULA/v2/q20_tautology/README.md`
+- `THOUGHT/LAB/FORMULA/v2/GLOSSARY.md`
+- `THOUGHT/LAB/FORMULA/v2/METHODOLOGY.md`
+
+This pass used one fixed design across four external benchmarks:
+- STS-B validation
+- SST-2 validation
+- SNLI validation
+- MNLI validation_matched
+
+Each benchmark is converted into externally labeled pure-vs-mixed clusters with fixed sampling rules, then `E`, `R_simple`, and `R_full` are compared by AUC on that purity task. No parameter search is allowed. If `E` wins, that is the result.
+
+Observed result from the registered run:
+- `E` wins: 0 datasets
+- `R_simple` wins: 0 datasets
+- ties: 4 datasets
+- overall status: INCONCLUSIVE / mixed
+
+Under this fixed test design, `E` and `R_simple` were statistically indistinguishable on all four datasets.
