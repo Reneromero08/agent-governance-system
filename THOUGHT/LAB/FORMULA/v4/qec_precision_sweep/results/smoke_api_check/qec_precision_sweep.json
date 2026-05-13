@@ -1,0 +1,274 @@
+{
+  "run_id": "smoke_api_check",
+  "created_utc": "2026-05-13T09:12:27.237442+00:00",
+  "git_revision": "bb04bbf7293cfe963da2b9d69311287498b49e31",
+  "command": "THOUGHT\\LAB\\FORMULA\\v4\\qec_precision_sweep\\code\\run_qec_precision_sweep.py --shots 100 --distances 3,5 --heldout-distances 5 --physical-error-rates 0.005,0.02 --bases x --run-id smoke_api_check",
+  "config": {
+    "shots": 100,
+    "distances": [
+      3,
+      5
+    ],
+    "heldout_distances": [
+      5
+    ],
+    "physical_error_rates": [
+      0.005,
+      0.02
+    ],
+    "bases": [
+      "x"
+    ],
+    "seed": 20260513
+  },
+  "versions": {
+    "python": "3.11.6 (tags/v3.11.6:8b6ee5b, Oct  2 2023, 14:57:12) [MSC v.1935 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.26100-SP0",
+    "stim": "1.15.0",
+    "pymatching": "2.3.1",
+    "sinter": "1.15.0",
+    "numpy": "1.26.4",
+    "scipy": "1.14.0",
+    "sklearn": "1.8.0"
+  },
+  "mapping": {
+    "R": "physical_error_rate / logical_error_rate_laplace",
+    "E": "1.0 normalized initial logical-state integrity",
+    "grad_S": "H2(physical_error_rate)",
+    "sigma": "1 / sqrt(H2(physical_error_rate))",
+    "Df": "surface-code distance"
+  },
+  "conditions": [
+    {
+      "basis": "x",
+      "distance": 3,
+      "rounds": 3,
+      "physical_error_rate": 0.005,
+      "shots": 100,
+      "seed": 382474657,
+      "logical_error_count": 0,
+      "logical_error_rate": 0.0,
+      "logical_error_rate_laplace": 0.0049504950495049506,
+      "survival": 1.0,
+      "suppression_R": 1.01,
+      "log_suppression": 0.009950330853168092,
+      "E": 1.0,
+      "grad_S": 0.0454146923337941,
+      "sigma": 4.692473317686164,
+      "Df": 3.0,
+      "formula_score": 2275.1448882574455,
+      "formula_log_score": 7.72979901650324,
+      "syndrome_density": 0.06166666666666667,
+      "num_detectors": 24,
+      "num_observables": 1,
+      "duration_seconds": 0.0026675000008253846
+    },
+    {
+      "basis": "x",
+      "distance": 3,
+      "rounds": 3,
+      "physical_error_rate": 0.02,
+      "shots": 100,
+      "seed": 1691208930,
+      "logical_error_count": 20,
+      "logical_error_rate": 0.2,
+      "logical_error_rate_laplace": 0.20297029702970298,
+      "survival": 0.8,
+      "suppression_R": 0.09853658536585365,
+      "log_suppression": -2.3173273747312493,
+      "E": 1.0,
+      "grad_S": 0.14144054254182067,
+      "sigma": 2.6589675866340143,
+      "Df": 3.0,
+      "formula_score": 132.91231308028463,
+      "formula_log_score": 4.889689610639601,
+      "syndrome_density": 0.19875,
+      "num_detectors": 24,
+      "num_observables": 1,
+      "duration_seconds": 0.002040399998804787
+    },
+    {
+      "basis": "x",
+      "distance": 5,
+      "rounds": 5,
+      "physical_error_rate": 0.005,
+      "shots": 100,
+      "seed": 4227246653,
+      "logical_error_count": 1,
+      "logical_error_rate": 0.01,
+      "logical_error_rate_laplace": 0.01485148514851485,
+      "survival": 0.99,
+      "suppression_R": 0.33666666666666667,
+      "log_suppression": -1.0886619578149417,
+      "E": 1.0,
+      "grad_S": 0.0454146923337941,
+      "sigma": 4.692473317686164,
+      "Df": 5.0,
+      "formula_score": 50097.11111847516,
+      "formula_log_score": 10.821718623104536,
+      "syndrome_density": 0.07391666666666667,
+      "num_detectors": 120,
+      "num_observables": 1,
+      "duration_seconds": 0.009200199998304015
+    },
+    {
+      "basis": "x",
+      "distance": 5,
+      "rounds": 5,
+      "physical_error_rate": 0.02,
+      "shots": 100,
+      "seed": 278762986,
+      "logical_error_count": 27,
+      "logical_error_rate": 0.27,
+      "logical_error_rate_laplace": 0.2722772277227723,
+      "survival": 0.73,
+      "suppression_R": 0.07345454545454545,
+      "log_suppression": -2.611088493259412,
+      "E": 1.0,
+      "grad_S": 0.14144054254182067,
+      "sigma": 2.6589675866340143,
+      "Df": 5.0,
+      "formula_score": 939.7044913129173,
+      "formula_log_score": 6.845565454895441,
+      "syndrome_density": 0.2255,
+      "num_detectors": 120,
+      "num_observables": 1,
+      "duration_seconds": 0.009122999999817694
+    }
+  ],
+  "evaluation": {
+    "target": "log_suppression = ln(physical_error_rate / logical_error_rate_laplace)",
+    "heldout_distances": [
+      5
+    ],
+    "train_conditions": 2,
+    "test_conditions": 2,
+    "models": {
+      "formula_score": {
+        "train_mae": 5.516420653606247e-16,
+        "test_mae": 2.7643503086473493,
+        "train_r2": 1.0,
+        "test_r2": -13.487727085546775,
+        "test_predictions": [
+          {
+            "basis": "x",
+            "distance": 5,
+            "physical_error_rate": 0.005,
+            "actual_log_suppression": -1.0886619578149417,
+            "predicted_log_suppression": 2.5435694770192634,
+            "absolute_error": 3.632231434834205
+          },
+          {
+            "basis": "x",
+            "distance": 5,
+            "physical_error_rate": 0.02,
+            "actual_log_suppression": -2.611088493259412,
+            "predicted_log_suppression": -0.7146193107989185,
+            "absolute_error": 1.8964691824604936
+          }
+        ]
+      },
+      "formula_components": {
+        "train_mae": 4.40619762898109e-16,
+        "test_mae": 2.419656374472481,
+        "train_r2": 1.0,
+        "test_r2": -10.181927774205539,
+        "test_predictions": [
+          {
+            "basis": "x",
+            "distance": 5,
+            "physical_error_rate": 0.005,
+            "actual_log_suppression": -1.0886619578149417,
+            "predicted_log_suppression": 2.1212996193249154,
+            "absolute_error": 3.209961577139857
+          },
+          {
+            "basis": "x",
+            "distance": 5,
+            "physical_error_rate": 0.02,
+            "actual_log_suppression": -2.611088493259412,
+            "predicted_log_suppression": -0.9817373214543073,
+            "absolute_error": 1.6293511718051048
+          }
+        ]
+      },
+      "p_only": {
+        "train_mae": 7.73686670285656e-16,
+        "test_mae": 0.6961867035981364,
+        "train_r2": 1.0,
+        "test_r2": -0.11593259887222129,
+        "test_predictions": [
+          {
+            "basis": "x",
+            "distance": 5,
+            "physical_error_rate": 0.005,
+            "actual_log_suppression": -1.0886619578149417,
+            "predicted_log_suppression": 0.009950330853167433,
+            "absolute_error": 1.0986122886681091
+          },
+          {
+            "basis": "x",
+            "distance": 5,
+            "physical_error_rate": 0.02,
+            "actual_log_suppression": -2.611088493259412,
+            "predicted_log_suppression": -2.3173273747312484,
+            "absolute_error": 0.29376111852816367
+          }
+        ]
+      },
+      "distance_only": {
+        "train_mae": 1.1636388527922086,
+        "test_mae": 0.7612132677222352,
+        "train_r2": 0.0,
+        "test_r2": -0.8364476211086627,
+        "test_predictions": [
+          {
+            "basis": "x",
+            "distance": 5,
+            "physical_error_rate": 0.005,
+            "actual_log_suppression": -1.0886619578149417,
+            "predicted_log_suppression": -1.1536885219390407,
+            "absolute_error": 0.06502656412409902
+          },
+          {
+            "basis": "x",
+            "distance": 5,
+            "physical_error_rate": 0.02,
+            "actual_log_suppression": -2.611088493259412,
+            "predicted_log_suppression": -1.1536885219390407,
+            "absolute_error": 1.4573999713203714
+          }
+        ]
+      },
+      "standard_qec_scaling": {
+        "train_mae": 5.516420653606247e-16,
+        "test_mae": 3.273203101860094,
+        "train_r2": 1.0,
+        "test_r2": -18.56773870938312,
+        "test_predictions": [
+          {
+            "basis": "x",
+            "distance": 5,
+            "physical_error_rate": 0.005,
+            "actual_log_suppression": -1.0886619578149417,
+            "predicted_log_suppression": 2.974846346712529,
+            "absolute_error": 4.0635083045274705
+          },
+          {
+            "basis": "x",
+            "distance": 5,
+            "physical_error_rate": 0.02,
+            "actual_log_suppression": -2.611088493259412,
+            "predicted_log_suppression": -0.12819059406669364,
+            "absolute_error": 2.4828978991927184
+          }
+        ]
+      }
+    }
+  },
+  "files": {
+    "csv": "results\\smoke_api_check\\conditions.csv",
+    "json": "results\\smoke_api_check\\qec_precision_sweep.json",
+    "report": "results\\smoke_api_check\\REPORT.md"
+  }
+}

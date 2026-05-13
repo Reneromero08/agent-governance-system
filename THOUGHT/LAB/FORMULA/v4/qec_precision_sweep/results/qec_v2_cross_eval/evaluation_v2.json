@@ -1,0 +1,3091 @@
+{
+  "report_id": "qec_v2_cross_eval",
+  "created_utc": "2026-05-13T09:58:03.995140+00:00",
+  "frozen_p_threshold": 0.007071067811865475,
+  "depol": {
+    "run_id": "qec_v2_depol",
+    "noise_model": "depol",
+    "evaluation": {
+      "target": "log_suppression = ln(physical_error_rate / logical_error_rate_laplace)",
+      "heldout_distances": [
+        7,
+        9
+      ],
+      "train_conditions": 36,
+      "test_conditions": 36,
+      "models": {
+        "formula_score": {
+          "train_mae": 0.41698254677315855,
+          "test_mae": 0.8252491456275103,
+          "train_r2": 0.8735663157975102,
+          "test_r2": 0.8048402007941269,
+          "test_mae_ci_95": [
+            0.5888921049261147,
+            1.0806878286511636
+          ],
+          "test_predictions": [
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 2.813959421453201,
+              "absolute_error": 0.18182285085083194
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 2.590317164195868,
+              "predicted_log_suppression": 1.7346934766750837,
+              "absolute_error": 0.8556236875207845
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 1.9841813606255527,
+              "predicted_log_suppression": 0.6552541640017799,
+              "absolute_error": 1.3289271966237728
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": -0.12327321728195723,
+              "predicted_log_suppression": -0.4245326671178906,
+              "absolute_error": 0.3012594498359334
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": -1.3683773605414244,
+              "predicted_log_suppression": -1.0564569006615145,
+              "absolute_error": 0.3119204598799099
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -2.0921997909948504,
+              "predicted_log_suppression": -1.5050176829121984,
+              "absolute_error": 0.587182108082652
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -2.568163257164369,
+              "predicted_log_suppression": -1.8531061800672461,
+              "absolute_error": 0.715057077097123
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -3.06152853422894,
+              "predicted_log_suppression": -2.9357112905854263,
+              "absolute_error": 0.12581724364351343
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.516688353720081,
+              "predicted_log_suppression": -4.021937493136343,
+              "absolute_error": 1.5052491394162617
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 3.73045169491001,
+              "absolute_error": 0.7346694226059771
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 2.411387341919345,
+              "absolute_error": 1.2775421109446334
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": 1.092149621033492,
+              "absolute_error": 3.2899270123904314
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 0.3838759317547249,
+              "predicted_log_suppression": -0.22743561829872805,
+              "absolute_error": 0.611311550053453
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": -1.2151099949664588,
+              "predicted_log_suppression": -0.9996329283793174,
+              "absolute_error": 0.21547706658714139
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -2.154252579673472,
+              "predicted_log_suppression": -1.547719042305585,
+              "absolute_error": 0.6065335373678868
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -2.724693425293829,
+              "predicted_log_suppression": -1.9730053841735207,
+              "absolute_error": 0.7516880411203082
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -3.1747171864920958,
+              "predicted_log_suppression": -3.29540890290425,
+              "absolute_error": 0.12069171641215437
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.517696875816556,
+              "predicted_log_suppression": -4.621433513667715,
+              "absolute_error": 2.103736637851159
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 2.813959421453201,
+              "absolute_error": 0.18182285085083194
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 1.7346934766750837,
+              "absolute_error": 1.9542359761888946
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 1.8171272759623864,
+              "predicted_log_suppression": 0.6552541640017799,
+              "absolute_error": 1.1618731119606065
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": -0.25749497928150045,
+              "predicted_log_suppression": -0.4245326671178906,
+              "absolute_error": 0.16703768783639017
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": -1.0915936206019747,
+              "predicted_log_suppression": -1.0564569006615145,
+              "absolute_error": 0.03513671994046019
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -1.8760697670127517,
+              "predicted_log_suppression": -1.5050176829121984,
+              "absolute_error": 0.37105208410055335
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -2.3211114798169397,
+              "predicted_log_suppression": -1.8531061800672461,
+              "absolute_error": 0.4680052997496935
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -3.0008563660776786,
+              "predicted_log_suppression": -2.9357112905854263,
+              "absolute_error": 0.06514507549225224
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.5204148158831146,
+              "predicted_log_suppression": -4.021937493136343,
+              "absolute_error": 1.5015226772532282
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 3.73045169491001,
+              "absolute_error": 0.7346694226059771
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 2.411387341919345,
+              "absolute_error": 1.2775421109446334
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 3.2834643447558136,
+              "predicted_log_suppression": 1.092149621033492,
+              "absolute_error": 2.1913147237223214
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 0.6563832061872705,
+              "predicted_log_suppression": -0.22743561829872805,
+              "absolute_error": 0.8838188244859986
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": -0.9885613947037396,
+              "predicted_log_suppression": -0.9996329283793174,
+              "absolute_error": 0.011071533675577783
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -1.9136505162830604,
+              "predicted_log_suppression": -1.547719042305585,
+              "absolute_error": 0.3659314739774753
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -2.4494453395586246,
+              "predicted_log_suppression": -1.9730053841735207,
+              "absolute_error": 0.476439955385104
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -3.1537004661576966,
+              "predicted_log_suppression": -3.29540890290425,
+              "absolute_error": 0.14170843674655353
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.5252285442778284,
+              "predicted_log_suppression": -4.621433513667715,
+              "absolute_error": 2.0962049693898868
+            }
+          ]
+        },
+        "formula_components": {
+          "train_mae": 0.36616742929309787,
+          "test_mae": 0.8603204170914351,
+          "train_r2": 0.8936415241361069,
+          "test_r2": 0.7751118209267915,
+          "test_mae_ci_95": [
+            0.6025637658185953,
+            1.1330407871398422
+          ],
+          "test_predictions": [
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 3.459400883785573,
+              "absolute_error": 0.4636186114815404
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 2.590317164195868,
+              "predicted_log_suppression": 2.1719882293861703,
+              "absolute_error": 0.4183289348096979
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 1.9841813606255527,
+              "predicted_log_suppression": 0.8846212260121827,
+              "absolute_error": 1.09956013461337
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": -0.12327321728195723,
+              "predicted_log_suppression": -0.402654269222945,
+              "absolute_error": 0.2793810519409878
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": -1.3683773605414244,
+              "predicted_log_suppression": -1.1555859500512193,
+              "absolute_error": 0.2127914104902051
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -2.0921997909948504,
+              "predicted_log_suppression": -1.68974591931021,
+              "absolute_error": 0.4024538716846404
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -2.568163257164369,
+              "predicted_log_suppression": -2.104031048660071,
+              "absolute_error": 0.46413220850429804
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -3.06152853422894,
+              "predicted_log_suppression": -3.390564437957391,
+              "absolute_error": 0.3290359037284514
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.516688353720081,
+              "predicted_log_suppression": -4.676144325660699,
+              "absolute_error": 2.159455971940618
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 4.934230154839946,
+              "absolute_error": 1.9384478825359128
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 3.260931310423712,
+              "absolute_error": 0.42799814244026635
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": 1.5876781170328926,
+              "absolute_error": 2.794398516391031
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 0.3838759317547249,
+              "predicted_log_suppression": -0.08548356821906766,
+              "absolute_error": 0.46935949997379256
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": -1.2151099949664588,
+              "predicted_log_suppression": -1.064144199753347,
+              "absolute_error": 0.15096579521311182
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -2.154252579673472,
+              "predicted_log_suppression": -1.7584614083231647,
+              "absolute_error": 0.3957911713503073
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -2.724693425293829,
+              "predicted_log_suppression": -2.296974143668487,
+              "absolute_error": 0.4277192816253419
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -3.1747171864920958,
+              "predicted_log_suppression": -3.9693937229826384,
+              "absolute_error": 0.7946765364905426
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.517696875816556,
+              "predicted_log_suppression": -5.640859800702779,
+              "absolute_error": 3.1231629248862225
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 3.764268740250049,
+              "absolute_error": 0.7684864679460164
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 2.4768560858506463,
+              "absolute_error": 1.212073367013332
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 1.8171272759623864,
+              "predicted_log_suppression": 1.1894890824766589,
+              "absolute_error": 0.6276381934857276
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": -0.25749497928150045,
+              "predicted_log_suppression": -0.09778641275846878,
+              "absolute_error": 0.15970856652303167
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": -1.0915936206019747,
+              "predicted_log_suppression": -0.8507180935867432,
+              "absolute_error": 0.24087552701523152
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -1.8760697670127517,
+              "predicted_log_suppression": -1.3848780628457338,
+              "absolute_error": 0.49119170416701796
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -2.3211114798169397,
+              "predicted_log_suppression": -1.799163192195595,
+              "absolute_error": 0.5219482876213446
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -3.0008563660776786,
+              "predicted_log_suppression": -3.085696581492915,
+              "absolute_error": 0.08484021541523656
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.5204148158831146,
+              "predicted_log_suppression": -4.371276469196223,
+              "absolute_error": 1.8508616533131086
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 5.239098011304422,
+              "absolute_error": 2.243315739000389
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 3.565799166888188,
+              "absolute_error": 0.12313028597579034
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 3.2834643447558136,
+              "predicted_log_suppression": 1.8925459734973686,
+              "absolute_error": 1.390918371258445
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 0.6563832061872705,
+              "predicted_log_suppression": 0.21938428824540857,
+              "absolute_error": 0.43699891794186196
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": -0.9885613947037396,
+              "predicted_log_suppression": -0.759276343288871,
+              "absolute_error": 0.22928505141486866
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -1.9136505162830604,
+              "predicted_log_suppression": -1.4535935518586882,
+              "absolute_error": 0.46005696442437216
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -2.4494453395586246,
+              "predicted_log_suppression": -1.992106287204011,
+              "absolute_error": 0.4573390523546137
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -3.1537004661576966,
+              "predicted_log_suppression": -3.6645258665181624,
+              "absolute_error": 0.5108254003604658
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.5252285442778284,
+              "predicted_log_suppression": -5.335991944238303,
+              "absolute_error": 2.810763399960474
+            }
+          ]
+        },
+        "standard_qec_scaling": {
+          "train_mae": 0.3660906846163649,
+          "test_mae": 0.8421731808428166,
+          "train_r2": 0.8950567872008033,
+          "test_r2": 0.8029606835430355,
+          "test_mae_ci_95": [
+            0.6072478272708374,
+            1.0817811987992478
+          ],
+          "test_predictions": [
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 3.515350513409901,
+              "absolute_error": 0.5195682411058682
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 2.590317164195868,
+              "predicted_log_suppression": 2.2616622628943652,
+              "absolute_error": 0.328654901301503
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 1.9841813606255527,
+              "predicted_log_suppression": 1.0079740123788303,
+              "absolute_error": 0.9762073482467224
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": -0.12327321728195723,
+              "predicted_log_suppression": -0.24571423813670545,
+              "absolute_error": 0.12244102085474823
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": -1.3683773605414244,
+              "predicted_log_suppression": -0.9790748522830031,
+              "absolute_error": 0.3893025082584214
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -2.0921997909948504,
+              "predicted_log_suppression": -1.4994024886522395,
+              "absolute_error": 0.592797302342611
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -2.568163257164369,
+              "predicted_log_suppression": -1.902999958723378,
+              "absolute_error": 0.6651632984409912
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -3.06152853422894,
+              "predicted_log_suppression": -3.1566882092389115,
+              "absolute_error": 0.09515967500997169
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.516688353720081,
+              "predicted_log_suppression": -4.410376459754447,
+              "absolute_error": 1.8936881060343662
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 5.026209820555989,
+              "absolute_error": 2.0304275482519563
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 3.409354280353476,
+              "absolute_error": 0.27957517251050223
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": 1.7924987401509629,
+              "absolute_error": 2.5895778932729607
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 0.3838759317547249,
+              "predicted_log_suppression": 0.17564319994845068,
+              "absolute_error": 0.20823273180627422
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": -1.2151099949664588,
+              "predicted_log_suppression": -0.7701566601532628,
+              "absolute_error": 0.444953334813196
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -2.154252579673472,
+              "predicted_log_suppression": -1.441212340254058,
+              "absolute_error": 0.713040239419414
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -2.724693425293829,
+              "predicted_log_suppression": -1.9617235640195299,
+              "absolute_error": 0.762969861274299
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -3.1747171864920958,
+              "predicted_log_suppression": -3.5785791042220425,
+              "absolute_error": 0.40386191772994673
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.517696875816556,
+              "predicted_log_suppression": -5.195434644424553,
+              "absolute_error": 2.6777377686079973
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 3.820218369874377,
+              "absolute_error": 0.8244360975703442
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 2.5665301193588412,
+              "absolute_error": 1.122399333505137
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 1.8171272759623864,
+              "predicted_log_suppression": 1.3128418688433063,
+              "absolute_error": 0.5042854071190801
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": -0.25749497928150045,
+              "predicted_log_suppression": 0.05915361832777055,
+              "absolute_error": 0.316648597609271
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": -1.0915936206019747,
+              "predicted_log_suppression": -0.674206995818527,
+              "absolute_error": 0.4173866247834477
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -1.8760697670127517,
+              "predicted_log_suppression": -1.1945346321877635,
+              "absolute_error": 0.6815351348249883
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -2.3211114798169397,
+              "predicted_log_suppression": -1.598132102258902,
+              "absolute_error": 0.7229793775580378
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -3.0008563660776786,
+              "predicted_log_suppression": -2.8518203527744355,
+              "absolute_error": 0.14903601330324312
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.5204148158831146,
+              "predicted_log_suppression": -4.105508603289971,
+              "absolute_error": 1.5850937874068567
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 5.331077677020465,
+              "absolute_error": 2.3352954047164323
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 3.714222136817952,
+              "absolute_error": 0.02529268395397377
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 3.2834643447558136,
+              "predicted_log_suppression": 2.097366596615439,
+              "absolute_error": 1.1860977481403747
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 0.6563832061872705,
+              "predicted_log_suppression": 0.4805110564129267,
+              "absolute_error": 0.17587214977434384
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": -0.9885613947037396,
+              "predicted_log_suppression": -0.4652888036887868,
+              "absolute_error": 0.5232725910149528
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -1.9136505162830604,
+              "predicted_log_suppression": -1.136344483789582,
+              "absolute_error": 0.7773060324934784
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -2.4494453395586246,
+              "predicted_log_suppression": -1.6568557075550538,
+              "absolute_error": 0.7925896320035708
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -3.1537004661576966,
+              "predicted_log_suppression": -3.2737112477575665,
+              "absolute_error": 0.12001078159986989
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.5252285442778284,
+              "predicted_log_suppression": -4.890566787960077,
+              "absolute_error": 2.365338243682249
+            }
+          ]
+        },
+        "p_only": {
+          "train_mae": 0.492908630431365,
+          "test_mae": 1.2076269064060665,
+          "train_r2": 0.829945846630208,
+          "test_r2": 0.6088265904630321,
+          "test_mae_ci_95": [
+            0.8892115001985832,
+            1.552989654683448
+          ],
+          "test_predictions": [
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 1.2490615526907707,
+              "absolute_error": 1.7467207196132621
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 2.590317164195868,
+              "predicted_log_suppression": 0.5401242367056996,
+              "absolute_error": 2.0501929274901687
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 1.9841813606255527,
+              "predicted_log_suppression": -0.1688130792793715,
+              "absolute_error": 2.152994439904924
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": -0.12327321728195723,
+              "predicted_log_suppression": -0.8777503952644423,
+              "absolute_error": 0.754477177982485
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": -1.3683773605414244,
+              "predicted_log_suppression": -1.2924521404776133,
+              "absolute_error": 0.0759252200638112
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -2.0921997909948504,
+              "predicted_log_suppression": -1.5866877112495124,
+              "absolute_error": 0.5055120797453381
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -2.568163257164369,
+              "predicted_log_suppression": -1.814914550779147,
+              "absolute_error": 0.753248706385222
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -3.06152853422894,
+              "predicted_log_suppression": -2.523851866764218,
+              "absolute_error": 0.537676667464722
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.516688353720081,
+              "predicted_log_suppression": -3.2327891827492885,
+              "absolute_error": 0.7161008290292075
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 1.2490615526907707,
+              "absolute_error": 1.7467207196132621
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 0.5401242367056996,
+              "absolute_error": 3.1488052161582787
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": -0.1688130792793715,
+              "absolute_error": 4.550889712703295
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 0.3838759317547249,
+              "predicted_log_suppression": -0.8777503952644423,
+              "absolute_error": 1.2616263270191672
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": -1.2151099949664588,
+              "predicted_log_suppression": -1.2924521404776133,
+              "absolute_error": 0.07734214551115448
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -2.154252579673472,
+              "predicted_log_suppression": -1.5866877112495124,
+              "absolute_error": 0.5675648684239596
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -2.724693425293829,
+              "predicted_log_suppression": -1.814914550779147,
+              "absolute_error": 0.9097788745146818
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -3.1747171864920958,
+              "predicted_log_suppression": -2.523851866764218,
+              "absolute_error": 0.650865319727878
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.517696875816556,
+              "predicted_log_suppression": -3.2327891827492885,
+              "absolute_error": 0.7150923069327324
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 1.5539294091552467,
+              "absolute_error": 1.4418528631487861
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 0.8449920931701754,
+              "absolute_error": 2.8439373596938027
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 1.8171272759623864,
+              "predicted_log_suppression": 0.1360547771851045,
+              "absolute_error": 1.681072498777282
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": -0.25749497928150045,
+              "predicted_log_suppression": -0.5728825387999664,
+              "absolute_error": 0.315387559518466
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": -1.0915936206019747,
+              "predicted_log_suppression": -0.9875842840131372,
+              "absolute_error": 0.10400933658883749
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -1.8760697670127517,
+              "predicted_log_suppression": -1.2818198547850366,
+              "absolute_error": 0.5942499122277152
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -2.3211114798169397,
+              "predicted_log_suppression": -1.5100466943146713,
+              "absolute_error": 0.8110647855022683
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -3.0008563660776786,
+              "predicted_log_suppression": -2.218984010299742,
+              "absolute_error": 0.7818723557779368
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.5204148158831146,
+              "predicted_log_suppression": -2.9279213262848125,
+              "absolute_error": 0.40750651040169794
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 1.5539294091552467,
+              "absolute_error": 1.4418528631487861
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 0.8449920931701754,
+              "absolute_error": 2.8439373596938027
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 3.2834643447558136,
+              "predicted_log_suppression": 0.1360547771851045,
+              "absolute_error": 3.147409567570709
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 0.6563832061872705,
+              "predicted_log_suppression": -0.5728825387999664,
+              "absolute_error": 1.229265744987237
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": -0.9885613947037396,
+              "predicted_log_suppression": -0.9875842840131372,
+              "absolute_error": 0.0009771106906023563
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -1.9136505162830604,
+              "predicted_log_suppression": -1.2818198547850366,
+              "absolute_error": 0.6318306614980238
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -2.4494453395586246,
+              "predicted_log_suppression": -1.5100466943146713,
+              "absolute_error": 0.9393986452439533
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -3.1537004661576966,
+              "predicted_log_suppression": -2.218984010299742,
+              "absolute_error": 0.9347164558579548
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.5252285442778284,
+              "predicted_log_suppression": -2.9279213262848125,
+              "absolute_error": 0.4026927820069841
+            }
+          ]
+        },
+        "distance_only": {
+          "train_mae": 1.2259094810706581,
+          "test_mae": 2.273419739422102,
+          "train_r2": 0.021743139906183817,
+          "test_r2": 0.0016437302930666364,
+          "test_mae_ci_95": [
+            1.896992305982951,
+            2.61106943457368
+          ],
+          "test_predictions": [
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": -0.6010299353450644,
+              "absolute_error": 3.5968122076490974
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 2.590317164195868,
+              "predicted_log_suppression": -0.6010299353450644,
+              "absolute_error": 3.1913470995409328
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 1.9841813606255527,
+              "predicted_log_suppression": -0.6010299353450644,
+              "absolute_error": 2.585211295970617
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": -0.12327321728195723,
+              "predicted_log_suppression": -0.6010299353450644,
+              "absolute_error": 0.4777567180631072
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": -1.3683773605414244,
+              "predicted_log_suppression": -0.6010299353450644,
+              "absolute_error": 0.76734742519636
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -2.0921997909948504,
+              "predicted_log_suppression": -0.6010299353450644,
+              "absolute_error": 1.4911698556497859
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -2.568163257164369,
+              "predicted_log_suppression": -0.6010299353450644,
+              "absolute_error": 1.9671333218193046
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -3.06152853422894,
+              "predicted_log_suppression": -0.6010299353450644,
+              "absolute_error": 2.4604985988838752
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.516688353720081,
+              "predicted_log_suppression": -0.6010299353450644,
+              "absolute_error": 1.9156584183750165
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": -0.2826000302293946,
+              "absolute_error": 3.2783823025334273
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": -0.2826000302293946,
+              "absolute_error": 3.9715294830933727
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": -0.2826000302293946,
+              "absolute_error": 4.664676663653318
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 0.3838759317547249,
+              "predicted_log_suppression": -0.2826000302293946,
+              "absolute_error": 0.6664759619841195
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": -1.2151099949664588,
+              "predicted_log_suppression": -0.2826000302293946,
+              "absolute_error": 0.9325099647370642
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -2.154252579673472,
+              "predicted_log_suppression": -0.2826000302293946,
+              "absolute_error": 1.8716525494440774
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -2.724693425293829,
+              "predicted_log_suppression": -0.2826000302293946,
+              "absolute_error": 2.4420933950644343
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -3.1747171864920958,
+              "predicted_log_suppression": -0.2826000302293946,
+              "absolute_error": 2.8921171562627013
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.517696875816556,
+              "predicted_log_suppression": -0.2826000302293946,
+              "absolute_error": 2.2350968455871616
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": -0.29616207888058843,
+              "absolute_error": 3.2919443511846214
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": -0.29616207888058843,
+              "absolute_error": 3.9850915317445668
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 1.8171272759623864,
+              "predicted_log_suppression": -0.29616207888058843,
+              "absolute_error": 2.113289354842975
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": -0.25749497928150045,
+              "predicted_log_suppression": -0.29616207888058843,
+              "absolute_error": 0.038667099599087984
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": -1.0915936206019747,
+              "predicted_log_suppression": -0.29616207888058843,
+              "absolute_error": 0.7954315417213863
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -1.8760697670127517,
+              "predicted_log_suppression": -0.29616207888058843,
+              "absolute_error": 1.5799076881321632
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -2.3211114798169397,
+              "predicted_log_suppression": -0.29616207888058843,
+              "absolute_error": 2.024949400936351
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -3.0008563660776786,
+              "predicted_log_suppression": -0.29616207888058843,
+              "absolute_error": 2.70469428719709
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.5204148158831146,
+              "predicted_log_suppression": -0.29616207888058843,
+              "absolute_error": 2.224252737002526
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 0.02226782623508139,
+              "absolute_error": 2.9735144460689513
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 0.02226782623508139,
+              "absolute_error": 3.6666616266288967
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 3.2834643447558136,
+              "predicted_log_suppression": 0.02226782623508139,
+              "absolute_error": 3.261196518520732
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 0.6563832061872705,
+              "predicted_log_suppression": 0.02226782623508139,
+              "absolute_error": 0.6341153799521891
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": -0.9885613947037396,
+              "predicted_log_suppression": 0.02226782623508139,
+              "absolute_error": 1.010829220938821
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -1.9136505162830604,
+              "predicted_log_suppression": 0.02226782623508139,
+              "absolute_error": 1.9359183425181419
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -2.4494453395586246,
+              "predicted_log_suppression": 0.02226782623508139,
+              "absolute_error": 2.471713165793706
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -3.1537004661576966,
+              "predicted_log_suppression": 0.02226782623508139,
+              "absolute_error": 3.175968292392778
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.5252285442778284,
+              "predicted_log_suppression": 0.02226782623508139,
+              "absolute_error": 2.54749637051291
+            }
+          ]
+        }
+      }
+    },
+    "verdict": {
+      "status": "PASS",
+      "label": "PASS",
+      "pass_conditions": [
+        "formula_score MAE (0.8252) <= standard_qec_scaling MAE * 1.05 (0.8843)",
+        "formula_score MAE (0.8252) < p_only MAE (1.2076)",
+        "formula_components R2 (0.7751) >= 0.0"
+      ],
+      "fail_conditions": []
+    }
+  },
+  "meas": {
+    "run_id": "qec_v2_meas",
+    "noise_model": "meas",
+    "evaluation": {
+      "target": "log_suppression = ln(physical_error_rate / logical_error_rate_laplace)",
+      "heldout_distances": [
+        7,
+        9
+      ],
+      "train_conditions": 36,
+      "test_conditions": 36,
+      "models": {
+        "formula_score": {
+          "train_mae": 0.4701149431432884,
+          "test_mae": 1.4811285044287148,
+          "train_r2": 0.877269489307708,
+          "test_r2": 0.4896546439481174,
+          "test_mae_ci_95": [
+            1.193351389748073,
+            1.7976485278193306
+          ],
+          "test_predictions": [
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 3.7761530698780446,
+              "absolute_error": 0.7803707975740117
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 2.615836517128237,
+              "absolute_error": 1.0730929357357413
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": 1.4553335769180678,
+              "absolute_error": 2.926743056505856
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 2.0307013762604456,
+              "predicted_log_suppression": 0.29445702035536214,
+              "absolute_error": 1.7362443559050833
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": 1.1368835002383493,
+              "predicted_log_suppression": -0.3849233972442551,
+              "absolute_error": 1.5218068974826044
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": 0.16625217366411305,
+              "predicted_log_suppression": -0.8671701530861374,
+              "absolute_error": 1.0334223267502505
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -0.45895587628615236,
+              "predicted_log_suppression": -1.2413993660294231,
+              "absolute_error": 0.7824434897432708
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.1339685026823854,
+              "predicted_log_suppression": -2.405305848860243,
+              "absolute_error": 0.27133734617785743
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.4728578693746313,
+              "predicted_log_suppression": -3.5731053601377987,
+              "absolute_error": 1.1002474907631674
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 4.761471990116805,
+              "absolute_error": 1.765689717812772
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 3.343348671835005,
+              "absolute_error": 0.34558078102897305
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": 1.925038966092844,
+              "absolute_error": 2.45703766733108
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 5.075223813983869,
+              "predicted_log_suppression": 0.5063556439981457,
+              "absolute_error": 4.568868169985723
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": 1.984181360625553,
+              "predicted_log_suppression": -0.32383206386989866,
+              "absolute_error": 2.3080134244954515
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": 0.6746207937370516,
+              "predicted_log_suppression": -0.9130782949753463,
+              "absolute_error": 1.587699088712398
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -0.060574623066393204,
+              "predicted_log_suppression": -1.3703027487954194,
+              "absolute_error": 1.309728125729026
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.2703992242139335,
+              "predicted_log_suppression": -2.7920159971582317,
+              "absolute_error": 0.5216167729442982
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.5194090325446186,
+              "predicted_log_suppression": -4.2176222739677796,
+              "absolute_error": 1.698213241423161
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 3.7761530698780446,
+              "absolute_error": 0.7803707975740117
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 2.615836517128237,
+              "absolute_error": 1.0730929357357413
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": 1.4553335769180678,
+              "absolute_error": 2.926743056505856
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 2.1307848348174283,
+              "predicted_log_suppression": 0.29445702035536214,
+              "absolute_error": 1.836327814462066
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": 0.9268120304914922,
+              "predicted_log_suppression": -0.3849233972442551,
+              "absolute_error": 1.3117354277357474
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -0.05171193580854785,
+              "predicted_log_suppression": -0.8671701530861374,
+              "absolute_error": 0.8154582172775896
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -0.5261567270542514,
+              "predicted_log_suppression": -1.2413993660294231,
+              "absolute_error": 0.7152426389751717
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.1533097649392388,
+              "predicted_log_suppression": -2.405305848860243,
+              "absolute_error": 0.25199608392100403
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.4702187883538467,
+              "predicted_log_suppression": -3.5731053601377987,
+              "absolute_error": 1.102886571783952
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 4.761471990116805,
+              "absolute_error": 1.765689717812772
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 3.343348671835005,
+              "absolute_error": 0.34558078102897305
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": 1.925038966092844,
+              "absolute_error": 2.45703766733108
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 3.1293136649285556,
+              "predicted_log_suppression": 0.5063556439981457,
+              "absolute_error": 2.62295802093041
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": 1.9253408606026194,
+              "predicted_log_suppression": -0.32383206386989866,
+              "absolute_error": 2.2491729244725183
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": 0.7121251891955058,
+              "predicted_log_suppression": -0.9130782949753463,
+              "absolute_error": 1.6252034841708523
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": 0.03308985282824172,
+              "predicted_log_suppression": -1.3703027487954194,
+              "absolute_error": 1.403392601623661
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.241855783432153,
+              "predicted_log_suppression": -2.7920159971582317,
+              "absolute_error": 0.5501602137260786
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.5182007557022548,
+              "predicted_log_suppression": -4.2176222739677796,
+              "absolute_error": 1.6994215182655248
+            }
+          ]
+        },
+        "formula_components": {
+          "train_mae": 0.41220595745925853,
+          "test_mae": 1.8362889697822358,
+          "train_r2": 0.9102633112704789,
+          "test_r2": 0.25185537940750435,
+          "test_mae_ci_95": [
+            1.5123540751224833,
+            2.1747866258245194
+          ],
+          "test_predictions": [
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 5.354744707190216,
+              "absolute_error": 2.358962434886183
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 3.7820972181128125,
+              "absolute_error": 0.0931677652488343
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": 2.2096972099593706,
+              "absolute_error": 2.172379423464553
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 2.0307013762604456,
+              "predicted_log_suppression": 0.6377932808873896,
+              "absolute_error": 1.392908095373056
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": 1.1368835002383493,
+              "predicted_log_suppression": -0.28129841599343286,
+              "absolute_error": 1.4181819162317821
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": 0.16625217366411305,
+              "predicted_log_suppression": -0.9331139965947081,
+              "absolute_error": 1.099366170258821
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -0.45895587628615236,
+              "predicted_log_suppression": -1.438476290547455,
+              "absolute_error": 0.9795204142613028
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.1339685026823854,
+              "predicted_log_suppression": -3.006357154167999,
+              "absolute_error": 0.8723886514856138
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.4728578693746313,
+              "predicted_log_suppression": -4.569068945388875,
+              "absolute_error": 2.096211076014244
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 7.446108577284854,
+              "absolute_error": 4.4503263049808215
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 5.326259827960751,
+              "absolute_error": 1.6373303750967727
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": 3.2066585595606076,
+              "absolute_error": 1.175418073863316
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 5.075223813983869,
+              "predicted_log_suppression": 1.0875533702419249,
+              "absolute_error": 3.987670443741944
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": 1.984181360625553,
+              "predicted_log_suppression": -0.1516305442305762,
+              "absolute_error": 2.135811904856129
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": 0.6746207937370516,
+              "predicted_log_suppression": -1.0305551674868743,
+              "absolute_error": 1.705175961223926
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -0.060574623066393204,
+              "predicted_log_suppression": -1.7120769206708057,
+              "absolute_error": 1.6515022976044125
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.2703992242139335,
+              "predicted_log_suppression": -3.8271590445380506,
+              "absolute_error": 1.556759820324117
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.5194090325446186,
+              "predicted_log_suppression": -5.937072096005629,
+              "absolute_error": 3.4176630634610103
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 5.358684733172762,
+              "absolute_error": 2.362902460868729
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 3.7860372440953585,
+              "absolute_error": 0.09710779123138025
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": 2.2136372359419165,
+              "absolute_error": 2.168439397482007
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 2.1307848348174283,
+              "predicted_log_suppression": 0.6417333068699356,
+              "absolute_error": 1.4890515279474927
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": 0.9268120304914922,
+              "predicted_log_suppression": -0.277358390010887,
+              "absolute_error": 1.204170420502379
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -0.05171193580854785,
+              "predicted_log_suppression": -0.9291739706121621,
+              "absolute_error": 0.8774620348036143
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -0.5261567270542514,
+              "predicted_log_suppression": -1.4345362645649091,
+              "absolute_error": 0.9083795375106577
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.1533097649392388,
+              "predicted_log_suppression": -3.0024171281854533,
+              "absolute_error": 0.8491073632462145
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.4702187883538467,
+              "predicted_log_suppression": -4.565128919406329,
+              "absolute_error": 2.0949101310524827
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 7.4500486032674,
+              "absolute_error": 4.454266330963367
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 5.330199853943297,
+              "absolute_error": 1.6412704010793187
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": 3.2105985855431536,
+              "absolute_error": 1.17147804788077
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 3.1293136649285556,
+              "predicted_log_suppression": 1.0914933962244708,
+              "absolute_error": 2.0378202687040847
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": 1.9253408606026194,
+              "predicted_log_suppression": -0.14769051824803037,
+              "absolute_error": 2.07303137885065
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": 0.7121251891955058,
+              "predicted_log_suppression": -1.0266151415043283,
+              "absolute_error": 1.7387403306998341
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": 0.03308985282824172,
+              "predicted_log_suppression": -1.7081368946882598,
+              "absolute_error": 1.7412267475165015
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.241855783432153,
+              "predicted_log_suppression": -3.8232190185555046,
+              "absolute_error": 1.5813632351233515
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.5182007557022548,
+              "predicted_log_suppression": -5.933132070023083,
+              "absolute_error": 3.414931314320828
+            }
+          ]
+        },
+        "standard_qec_scaling": {
+          "train_mae": 0.22006551787787712,
+          "test_mae": 1.085190109476654,
+          "train_r2": 0.9678313906904472,
+          "test_r2": 0.49921368097404906,
+          "test_mae_ci_95": [
+            0.7164008767614738,
+            1.566905352593616
+          ],
+          "test_predictions": [
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 5.9158941752272005,
+              "absolute_error": 2.9201119029231677
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 4.512147725192176,
+              "absolute_error": 0.823218272328198
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": 3.108401275157151,
+              "absolute_error": 1.2736753582667726
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 2.0307013762604456,
+              "predicted_log_suppression": 1.7046548251221265,
+              "absolute_error": 0.32604655113831904
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": 1.1368835002383493,
+              "predicted_log_suppression": 0.8835157913311934,
+              "absolute_error": 0.2533677089071559
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": 0.16625217366411305,
+              "predicted_log_suppression": 0.30090837508710233,
+              "absolute_error": 0.13465620142298929
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -0.45895587628615236,
+              "predicted_log_suppression": -0.15099704527757365,
+              "absolute_error": 0.3079588310085787
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.1339685026823854,
+              "predicted_log_suppression": -1.5547434953125967,
+              "absolute_error": 0.5792250073697887
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.4728578693746313,
+              "predicted_log_suppression": -2.9584899453476208,
+              "absolute_error": 0.4856320759729895
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 8.383483606647882,
+              "absolute_error": 5.387701334343849
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 6.543671925642568,
+              "absolute_error": 2.8547424727785895
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": 4.703860244637252,
+              "absolute_error": 0.32178361121332877
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 5.075223813983869,
+              "predicted_log_suppression": 2.864048563631937,
+              "absolute_error": 2.211175250351932
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": 1.984181360625553,
+              "predicted_log_suppression": 1.7878277218550769,
+              "absolute_error": 0.19635363877047607
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": 0.6746207937370516,
+              "predicted_log_suppression": 1.024236882626625,
+              "absolute_error": 0.3496160888895734
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -0.060574623066393204,
+              "predicted_log_suppression": 0.43194981320906745,
+              "absolute_error": 0.49252443627546066
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.2703992242139335,
+              "predicted_log_suppression": -1.407861867796248,
+              "absolute_error": 0.8625373564176855
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.5194090325446186,
+              "predicted_log_suppression": -3.2476735488015636,
+              "absolute_error": 0.728264516256945
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 5.9198342012097465,
+              "absolute_error": 2.9240519289057136
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 4.516087751174722,
+              "absolute_error": 0.827158298310744
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": 3.112341301139697,
+              "absolute_error": 1.2697353322842266
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 2.1307848348174283,
+              "predicted_log_suppression": 1.7085948511046725,
+              "absolute_error": 0.42218998371275585
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": 0.9268120304914922,
+              "predicted_log_suppression": 0.8874558173137393,
+              "absolute_error": 0.03935621317775284
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -0.05171193580854785,
+              "predicted_log_suppression": 0.3048484010696483,
+              "absolute_error": 0.3565603368781961
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -0.5261567270542514,
+              "predicted_log_suppression": -0.1470570192950277,
+              "absolute_error": 0.37909970775922375
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.1533097649392388,
+              "predicted_log_suppression": -1.5508034693300508,
+              "absolute_error": 0.602506295609188
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.4702187883538467,
+              "predicted_log_suppression": -2.954549919365075,
+              "absolute_error": 0.48433113101122816
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 8.387423632630428,
+              "absolute_error": 5.391641360326395
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 6.547611951625114,
+              "absolute_error": 2.8586824987611354
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": 4.707800270619798,
+              "absolute_error": 0.3257236371958747
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 3.1293136649285556,
+              "predicted_log_suppression": 2.867988589614483,
+              "absolute_error": 0.26132507531407256
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": 1.9253408606026194,
+              "predicted_log_suppression": 1.7917677478376228,
+              "absolute_error": 0.13357311276499662
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": 0.7121251891955058,
+              "predicted_log_suppression": 1.028176908609171,
+              "absolute_error": 0.31605171941366517
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": 0.03308985282824172,
+              "predicted_log_suppression": 0.4358898391916134,
+              "absolute_error": 0.40279998636337166
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.241855783432153,
+              "predicted_log_suppression": -1.403921841813702,
+              "absolute_error": 0.837933941618451
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.5182007557022548,
+              "predicted_log_suppression": -3.2437335228190176,
+              "absolute_error": 0.7255327671167628
+            }
+          ]
+        },
+        "p_only": {
+          "train_mae": 0.5933279085700821,
+          "test_mae": 1.570738498180261,
+          "train_r2": 0.7961881046953602,
+          "test_r2": 0.3106629019055044,
+          "test_mae_ci_95": [
+            1.1545043013398704,
+            2.008943157187701
+          ],
+          "test_predictions": [
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 2.214510028096178,
+              "absolute_error": 0.7812722442078548
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 1.4648614245165879,
+              "absolute_error": 2.22406802834739
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": 0.7152128209369977,
+              "absolute_error": 3.666863812486926
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 2.0307013762604456,
+              "predicted_log_suppression": -0.03443578264259248,
+              "absolute_error": 2.065137158903038
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": 1.1368835002383493,
+              "predicted_log_suppression": -0.47295210445463143,
+              "absolute_error": 1.6098356046929807
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": 0.16625217366411305,
+              "predicted_log_suppression": -0.7840843862221816,
+              "absolute_error": 0.9503365598862946
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -0.45895587628615236,
+              "predicted_log_suppression": -1.0254173330075316,
+              "absolute_error": 0.5664614567213793
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.1339685026823854,
+              "predicted_log_suppression": -1.775065936587121,
+              "absolute_error": 0.3589025660952643
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.4728578693746313,
+              "predicted_log_suppression": -2.5247145401667113,
+              "absolute_error": 0.051856670792080006
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 2.214510028096178,
+              "absolute_error": 0.7812722442078548
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 1.4648614245165879,
+              "absolute_error": 2.22406802834739
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": 0.7152128209369977,
+              "absolute_error": 3.666863812486926
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 5.075223813983869,
+              "predicted_log_suppression": -0.03443578264259248,
+              "absolute_error": 5.109659596626462
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": 1.984181360625553,
+              "predicted_log_suppression": -0.47295210445463143,
+              "absolute_error": 2.4571334650801844
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": 0.6746207937370516,
+              "predicted_log_suppression": -0.7840843862221816,
+              "absolute_error": 1.4587051799592332
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -0.060574623066393204,
+              "predicted_log_suppression": -1.0254173330075316,
+              "absolute_error": 0.9648427099411384
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.2703992242139335,
+              "predicted_log_suppression": -1.775065936587121,
+              "absolute_error": 0.4953332876268124
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.5194090325446186,
+              "predicted_log_suppression": -2.5247145401667113,
+              "absolute_error": 0.005305507622092698
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 2.2184500540787235,
+              "absolute_error": 0.7773322182253093
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 1.4688014504991336,
+              "absolute_error": 2.2201280023648446
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": 0.7191528469195432,
+              "absolute_error": 3.6629237865043804
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 2.1307848348174283,
+              "predicted_log_suppression": -0.03049575666004678,
+              "absolute_error": 2.161280591477475
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": 0.9268120304914922,
+              "predicted_log_suppression": -0.4690120784720857,
+              "absolute_error": 1.395824108963578
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -0.05171193580854785,
+              "predicted_log_suppression": -0.7801443602396361,
+              "absolute_error": 0.7284324244310882
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -0.5261567270542514,
+              "predicted_log_suppression": -1.0214773070249858,
+              "absolute_error": 0.4953205799707344
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.1533097649392388,
+              "predicted_log_suppression": -1.7711259106045756,
+              "absolute_error": 0.3821838543346632
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.4702187883538467,
+              "predicted_log_suppression": -2.5207745141841658,
+              "absolute_error": 0.05055572583031909
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 2.2184500540787235,
+              "absolute_error": 0.7773322182253093
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 1.4688014504991336,
+              "absolute_error": 2.2201280023648446
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": 0.7191528469195432,
+              "absolute_error": 3.6629237865043804
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 3.1293136649285556,
+              "predicted_log_suppression": -0.03049575666004678,
+              "absolute_error": 3.1598094215886023
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": 1.9253408606026194,
+              "predicted_log_suppression": -0.4690120784720857,
+              "absolute_error": 2.394352939074705
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": 0.7121251891955058,
+              "predicted_log_suppression": -0.7801443602396361,
+              "absolute_error": 1.492269549435142
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": 0.03308985282824172,
+              "predicted_log_suppression": -1.0214773070249858,
+              "absolute_error": 1.0545671598532276
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.241855783432153,
+              "predicted_log_suppression": -1.7711259106045756,
+              "absolute_error": 0.4707298728275775
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.5182007557022548,
+              "predicted_log_suppression": -2.5207745141841658,
+              "absolute_error": 0.0025737584819109927
+            }
+          ]
+        },
+        "distance_only": {
+          "train_mae": 1.2693656556733666,
+          "test_mae": 2.118283959047071,
+          "train_r2": 0.10429406334216895,
+          "test_r2": -0.06763001045649486,
+          "test_mae_ci_95": [
+            1.6787480606857044,
+            2.585318796070736
+          ],
+          "test_predictions": [
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 1.306810186797686,
+              "absolute_error": 1.6889720855063468
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 1.306810186797686,
+              "absolute_error": 2.382119266066292
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": 1.306810186797686,
+              "absolute_error": 3.0752664466262374
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 2.0307013762604456,
+              "predicted_log_suppression": 1.306810186797686,
+              "absolute_error": 0.7238911894627595
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": 1.1368835002383493,
+              "predicted_log_suppression": 1.306810186797686,
+              "absolute_error": 0.16992668655933674
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": 0.16625217366411305,
+              "predicted_log_suppression": 1.306810186797686,
+              "absolute_error": 1.1405580131335729
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -0.45895587628615236,
+              "predicted_log_suppression": 1.306810186797686,
+              "absolute_error": 1.7657660630838383
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.1339685026823854,
+              "predicted_log_suppression": 1.306810186797686,
+              "absolute_error": 3.440778689480071
+            },
+            {
+              "basis": "x",
+              "distance": 7,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.4728578693746313,
+              "predicted_log_suppression": 1.306810186797686,
+              "absolute_error": 3.7796680561723175
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 2.3426159268502915,
+              "absolute_error": 0.6531663454537413
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 2.3426159268502915,
+              "absolute_error": 1.3463135260136867
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": 2.3426159268502915,
+              "absolute_error": 2.039460706573632
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 5.075223813983869,
+              "predicted_log_suppression": 2.3426159268502915,
+              "absolute_error": 2.7326078871335775
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": 1.984181360625553,
+              "predicted_log_suppression": 2.3426159268502915,
+              "absolute_error": 0.35843456622473857
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": 0.6746207937370516,
+              "predicted_log_suppression": 2.3426159268502915,
+              "absolute_error": 1.6679951331132399
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -0.060574623066393204,
+              "predicted_log_suppression": 2.3426159268502915,
+              "absolute_error": 2.4031905499166846
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.2703992242139335,
+              "predicted_log_suppression": 2.3426159268502915,
+              "absolute_error": 4.613015151064225
+            },
+            {
+              "basis": "x",
+              "distance": 9,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.5194090325446186,
+              "predicted_log_suppression": 2.3426159268502915,
+              "absolute_error": 4.86202495939491
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 1.310750212780232,
+              "absolute_error": 1.6850320595238009
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 1.310750212780232,
+              "absolute_error": 2.378179240083746
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": 1.310750212780232,
+              "absolute_error": 3.0713264206436914
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 2.1307848348174283,
+              "predicted_log_suppression": 1.310750212780232,
+              "absolute_error": 0.8200346220371963
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": 0.9268120304914922,
+              "predicted_log_suppression": 1.310750212780232,
+              "absolute_error": 0.38393818228873977
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": -0.05171193580854785,
+              "predicted_log_suppression": 1.310750212780232,
+              "absolute_error": 1.3624621485887798
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": -0.5261567270542514,
+              "predicted_log_suppression": 1.310750212780232,
+              "absolute_error": 1.8369069398344835
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.1533097649392388,
+              "predicted_log_suppression": 1.310750212780232,
+              "absolute_error": 3.4640599777194705
+            },
+            {
+              "basis": "z",
+              "distance": 7,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.4702187883538467,
+              "predicted_log_suppression": 1.310750212780232,
+              "absolute_error": 3.7809690011340784
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.0005,
+              "actual_log_suppression": 2.995782272304033,
+              "predicted_log_suppression": 2.3465559528328375,
+              "absolute_error": 0.6492263194711954
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.001,
+              "actual_log_suppression": 3.688929452863978,
+              "predicted_log_suppression": 2.3465559528328375,
+              "absolute_error": 1.3423735000311408
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.002,
+              "actual_log_suppression": 4.382076633423924,
+              "predicted_log_suppression": 2.3465559528328375,
+              "absolute_error": 2.035520680591086
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.004,
+              "actual_log_suppression": 3.1293136649285556,
+              "predicted_log_suppression": 2.3465559528328375,
+              "absolute_error": 0.7827577120957181
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.006,
+              "actual_log_suppression": 1.9253408606026194,
+              "predicted_log_suppression": 2.3465559528328375,
+              "absolute_error": 0.421215092230218
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.008,
+              "actual_log_suppression": 0.7121251891955058,
+              "predicted_log_suppression": 2.3465559528328375,
+              "absolute_error": 1.6344307636373316
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.01,
+              "actual_log_suppression": 0.03308985282824172,
+              "predicted_log_suppression": 2.3465559528328375,
+              "absolute_error": 2.3134661000045957
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.241855783432153,
+              "predicted_log_suppression": 2.3465559528328375,
+              "absolute_error": 4.588411736264991
+            },
+            {
+              "basis": "z",
+              "distance": 9,
+              "physical_error_rate": 0.04,
+              "actual_log_suppression": -2.5182007557022548,
+              "predicted_log_suppression": 2.3465559528328375,
+              "absolute_error": 4.864756708535092
+            }
+          ]
+        }
+      }
+    },
+    "verdict": {
+      "status": "FAIL",
+      "label": "FAIL",
+      "pass_conditions": [
+        "formula_score MAE (1.4811) < p_only MAE (1.5707)",
+        "formula_components R2 (0.2519) >= 0.0"
+      ],
+      "fail_conditions": [
+        "formula_score MAE (1.4811) > standard_qec_scaling MAE * 1.05 (1.1394)",
+        "standard_qec_scaling MAE (1.0852) < formula_score MAE * 0.90 (1.3330)"
+      ]
+    }
+  },
+  "cross_verdict": {
+    "overall_verdict": "MIXED",
+    "depol_verdict": "PASS",
+    "meas_verdict": "FAIL",
+    "falsification": {
+      "falsified": false,
+      "conditions": [
+        {
+          "noise_model": "depol",
+          "fs_mae": 0.8252491456275103,
+          "sqec_mae": 0.8421731808428166,
+          "ratio": 0.9799043289429268,
+          "fs_worse_than_1_5_sqec": false,
+          "fc_r2_negative": false,
+          "p_only_better_than_fs": false,
+          "all_three": false
+        },
+        {
+          "noise_model": "meas",
+          "fs_mae": 1.4811285044287148,
+          "sqec_mae": 1.085190109476654,
+          "ratio": 1.364856250987218,
+          "fs_worse_than_1_5_sqec": false,
+          "fc_r2_negative": false,
+          "p_only_better_than_fs": false,
+          "all_three": false
+        }
+      ]
+    },
+    "confirmation": {
+      "confirmed": false,
+      "reason": "Both noise models must PASS"
+    }
+  }
+}

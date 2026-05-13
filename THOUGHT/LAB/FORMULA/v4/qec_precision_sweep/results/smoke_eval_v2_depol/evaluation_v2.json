@@ -1,0 +1,183 @@
+{
+  "report_id": "smoke_eval_v2_depol",
+  "created_utc": "2026-05-13T09:56:41.769982+00:00",
+  "frozen_p_threshold": 0.007071067811865475,
+  "depol": {
+    "run_id": "smoke_api_check_v2_depol",
+    "noise_model": "depol",
+    "evaluation": {
+      "target": "log_suppression = ln(physical_error_rate / logical_error_rate_laplace)",
+      "heldout_distances": [
+        5
+      ],
+      "train_conditions": 2,
+      "test_conditions": 2,
+      "models": {
+        "formula_score": {
+          "train_mae": 1.1102230246251565e-16,
+          "test_mae": 0.6779982271418484,
+          "train_r2": 1.0,
+          "test_r2": -1.511901063475812,
+          "test_mae_ci_95": [
+            0.27157728926950275,
+            1.084419165014194
+          ],
+          "test_predictions": [
+            {
+              "basis": "x",
+              "distance": 5,
+              "physical_error_rate": 0.005,
+              "actual_log_suppression": -1.8668146353905524,
+              "predicted_log_suppression": -0.7823954703763583,
+              "absolute_error": 1.084419165014194
+            },
+            {
+              "basis": "x",
+              "distance": 5,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.8643308071872933,
+              "predicted_log_suppression": -2.5927535179177905,
+              "absolute_error": 0.27157728926950275
+            }
+          ]
+        },
+        "formula_components": {
+          "train_mae": 5.551115123125783e-17,
+          "test_mae": 0.6990120164957399,
+          "train_r2": 1.0,
+          "test_r2": -1.4979950475993564,
+          "test_mae_ci_95": [
+            0.3346186573311769,
+            1.0634053756603028
+          ],
+          "test_predictions": [
+            {
+              "basis": "x",
+              "distance": 5,
+              "physical_error_rate": 0.005,
+              "actual_log_suppression": -1.8668146353905524,
+              "predicted_log_suppression": -0.8034092597302495,
+              "absolute_error": 1.0634053756603028
+            },
+            {
+              "basis": "x",
+              "distance": 5,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.8643308071872933,
+              "predicted_log_suppression": -2.5297121498561164,
+              "absolute_error": 0.3346186573311769
+            }
+          ]
+        },
+        "standard_qec_scaling": {
+          "train_mae": 1.1102230246251565e-16,
+          "test_mae": 2.240569464877199,
+          "train_r2": 1.0,
+          "test_r2": -19.71451096552247,
+          "test_mae_ci_95": [
+            1.8761761057126363,
+            2.6049628240417624
+          ],
+          "test_predictions": [
+            {
+              "basis": "x",
+              "distance": 5,
+              "physical_error_rate": 0.005,
+              "actual_log_suppression": -1.8668146353905524,
+              "predicted_log_suppression": 0.7381481886512102,
+              "absolute_error": 2.6049628240417624
+            },
+            {
+              "basis": "x",
+              "distance": 5,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.8643308071872933,
+              "predicted_log_suppression": -0.988154701474657,
+              "absolute_error": 1.8761761057126363
+            }
+          ]
+        },
+        "p_only": {
+          "train_mae": 1.6653345369377348e-16,
+          "test_mae": 0.8069059471286065,
+          "train_r2": 1.0,
+          "test_r2": -1.7061497327991835,
+          "test_mae_ci_95": [
+            0.658300449229777,
+            0.955511445027436
+          ],
+          "test_predictions": [
+            {
+              "basis": "x",
+              "distance": 5,
+              "physical_error_rate": 0.005,
+              "actual_log_suppression": -1.8668146353905524,
+              "predicted_log_suppression": -0.9113031903631164,
+              "absolute_error": 0.955511445027436
+            },
+            {
+              "basis": "x",
+              "distance": 5,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.8643308071872933,
+              "predicted_log_suppression": -2.2060303579575162,
+              "absolute_error": 0.658300449229777
+            }
+          ]
+        },
+        "distance_only": {
+          "train_mae": 0.6473635837972,
+          "test_mae": 0.8069059471286066,
+          "train_r2": 0.0,
+          "test_r2": -2.6173749016048977,
+          "test_mae_ci_95": [
+            0.3081478612302362,
+            1.305664033026977
+          ],
+          "test_predictions": [
+            {
+              "basis": "x",
+              "distance": 5,
+              "physical_error_rate": 0.005,
+              "actual_log_suppression": -1.8668146353905524,
+              "predicted_log_suppression": -1.5586667741603162,
+              "absolute_error": 0.3081478612302362
+            },
+            {
+              "basis": "x",
+              "distance": 5,
+              "physical_error_rate": 0.02,
+              "actual_log_suppression": -2.8643308071872933,
+              "predicted_log_suppression": -1.5586667741603162,
+              "absolute_error": 1.305664033026977
+            }
+          ]
+        }
+      }
+    },
+    "verdict": {
+      "status": "AMBIGUOUS",
+      "label": "AMBIGUOUS",
+      "pass_conditions": [
+        "formula_score MAE (0.6780) <= standard_qec_scaling MAE * 1.05 (2.3526)",
+        "formula_score MAE (0.6780) < p_only MAE (0.8069)"
+      ],
+      "fail_conditions": [
+        "formula_components R2 (-1.4980) < 0.0"
+      ]
+    }
+  },
+  "cross_verdict": {
+    "overall_verdict": "AMBIGUOUS",
+    "depol_verdict": "AMBIGUOUS",
+    "meas_verdict": "NOT_RUN",
+    "falsification": {
+      "falsified": false,
+      "conditions": []
+    },
+    "confirmation": {
+      "confirmed": false,
+      "reason": "Second noise model not run"
+    }
+  }
+}
