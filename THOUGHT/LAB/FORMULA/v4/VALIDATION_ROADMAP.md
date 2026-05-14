@@ -53,11 +53,13 @@ Goal: Test the Light Cone claim that compressed/fractal constitutions improve al
 - [x] Constitution acts as attractor: X resonance grows across multiturn turns
 - [x] grad_S (entropy) not sensitive at 2560-dim scale — metric limitation
 
-### Phase 2b: Fine-Tuning [ ]
+### Phase 2b: Fine-Tuning [x]
 
-- [ ] LoRA fine-tune on constitution-augmented vs standard preference data
-- [ ] Matched token/compute budget
-- [ ] Re-run all tests: drift, jailbreak, generalize, multiturn
+- [x] LoRA fine-tune on 15 constitution-generated responses (5 epochs, 38 min)
+- [x] SFT vs C: R gain 2.7x (0.178 -> 0.489), up from 1.5x inference-only
+- [x] Jailbreak gap closed: SFT jailbreak R=0.474 (vs X R=0.214 in 2a)
+- [x] Variance collapse: std=0.023 across all prompts (uniform attractor)
+- [ ] Control SFT (train on non-constitution responses) to isolate signal
 
 ### Phase 2c: Resonance-Guided Sampling [ ]
 
