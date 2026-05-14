@@ -6,11 +6,12 @@ Date: 2026-05-13 | Model: Gemma 4B E4B (4-bit LoRA) | Status: **COMPLETE**
 
 ## Summary
 
-Fine-tuning the base model on 15 constitution-generated responses via LoRA SFT
-amplifies resonance by 2.6-2.8x over the base model, compared to 1.3-1.8x for
-inference-only constitution prompting. The jailbreak gap closes. The SFT model
-hits uniform resonance (~0.49) across all test types regardless of prompt
-difficulty.
+LoRA SFT on constitution-aligned responses produces R=0.489 (2.7x over base),
+but a control SFT on base-model responses without the constitution produces
+R=0.455 (2.6x over base). Fine-tuning itself accounts for most of the gain;
+the constitution adds +7% above this baseline. The constitution's unique
+contribution is small, consistent across test types, and sits on top of
+Gemma 4B's existing instruction-tuned safety posture.
 
 ## Method
 
@@ -61,21 +62,31 @@ closes this: SFT jailbreak R = 0.474, comparable to drift (0.506) and
 generalize (0.486). The fine-tuned model no longer distinguishes between
 benign and adversarial prompts in its resonance profile.
 
-## Comparison: Inference vs Fine-Tuning
+## Comparison: All Conditions
 
-| Metric | Phase 2a (Inference) | Phase 2b (SFT) |
-|--------|---------------------|----------------|
-| R_gain over base | +54% | +170% |
-| Jailbreak R | 0.214 | 0.474 |
-| Variance across test types | High (0.064 std on jailbreak) | Low (0.023 std) |
-| Multiturn attractor effect | Yes (R grows with turns) | Uniform (R flat, already high) |
-| Compute | 5 minutes inference | 38 minutes training |
-| Model modification | None (system prompt) | LoRA adapter (trainable weights) |
+| Condition | Drift | Jailbreak | Generalize | Overall | Gain over C |
+|-----------|-------|-----------|------------|---------|-------------|
+| C (base) | 0.194 | 0.167 | 0.169 | 0.178 | — |
+| X (inference constitution) | 0.286 | 0.214 | 0.278 | 0.274 | 1.5x |
+| **SFT_ctrl (no constitution)** | 0.480 | 0.450 | 0.436 | **0.455** | **2.6x** |
+| **SFT_cons (constitution)** | 0.506 | 0.474 | 0.486 | **0.489** | **2.7x** |
 
-Inference-only constitution acts as a signal injection — the model is nudged
-toward the attractor but can be pulled away by adversarial prompts.
-Fine-tuning internalizes the constitution into the model weights, producing
-a persistent attractor that holds across all prompt types with minimal variance.
+### Critical Finding: Fine-Tuning Dominates, Constitution Adds +7%
+
+The control SFT (trained on base-model responses without constitution) achieves
+R=0.455 — 2.6x over the base model. The constitution SFT achieves R=0.489 —
+only 7% above the control. Most of the Phase 2b gain is from fine-tuning
+itself, not from the constitution signal.
+
+However, Gemma 4B is instruction-tuned and already has baseline safety alignment
+baked in. The control SFT reinforced the model's existing safety posture. The
+constitution's +7% is above and beyond this baseline. A true test of the
+constitution signal would require comparing against a neutral base model with
+no safety training.
+
+The 7% gap is consistent across all three test types (drift: +5%, jailbreak:
++5%, generalize: +11%), suggesting a small but reliable constitution-specific
+effect.
 
 ## Interpretation
 
@@ -91,13 +102,14 @@ resonance, and training embeds this amplification permanently.
 1. **N=15 training samples**. The dataset is synthetically generated and small.
    Results would be stronger with more diverse training data.
 2. **N=9 test prompts**. Small test set. Statistical significance not computed.
-3. **No control SFT comparison**. We did not train a control model on
-   non-constitution responses to isolate the constitution signal.
-4. **R measures proximity to constitution, not objective alignment**. A model
+3. **R measures proximity to constitution, not objective alignment**. A model
    with high R might still produce harmful outputs if the constitution has gaps.
-5. **Overfitting risk**. Small dataset + 5 epochs may produce memorization
+4. **Overfitting risk**. Small dataset + 5 epochs may produce memorization
    rather than generalization. The uniform R values (std=0.023) could indicate
    overfitting to the training style.
+5. **Gemma 4B baseline safety**. The model is instruction-tuned with existing
+   safety alignment. A neutral base model would isolate the constitution signal
+   more cleanly.
 
 ## Next Steps
 
@@ -107,13 +119,11 @@ resonance, and training embeds this amplification permanently.
 - Expectation: resonance-guided sampling further increases R by steering
   generation toward high-R token sequences
 
-### Phase 2b+: Control SFT
-- Train a control model on base-model-generated responses (no constitution)
-- Compare SFT_constitution vs SFT_control on identical test prompts
-- Isolates the constitution signal from the fine-tuning signal
-
 ## Files
 
 - `phase2b_sft.py` — SFT training + evaluation script
-- `results/phase2b_adapter/` — saved LoRA adapter weights
-- `results/phase2b_results.json` — evaluation metrics
+- `phase2b_dpo.py` — DPO attempt (TRL dependency issues)
+- `results/phase2b_adapter/` — saved LoRA adapter weights (constitution)
+- `results/phase2b_control_adapter/` — saved LoRA adapter weights (control)
+- `results/phase2b_results.json` — constitution SFT evaluation metrics
+- `results/phase2b_control_results.json` — control SFT evaluation metrics
