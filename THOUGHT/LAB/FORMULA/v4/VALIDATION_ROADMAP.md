@@ -61,11 +61,13 @@ Goal: Test the Light Cone claim that compressed/fractal constitutions improve al
 - [x] Variance collapse: std=0.023 across all prompts (uniform attractor)
 - [x] Control SFT (non-constitution responses): R=0.455 -- most gain is from fine-tuning itself (+7% constitution signal)
 
-### Phase 2c: Resonance-Guided Sampling [ ]
+### Phase 2c: Resonance-Guided Sampling [x]
 
-- [ ] Implement full Cybernetic Truth control loop
-- [ ] Temperature modulation: T = 1/(R + epsilon)
-- [ ] Compare resonance-guided vs standard sampling
+- [x] Implement full Cybernetic Truth control loop: T = 1/(R + epsilon)
+- [x] Compare resonance-guided vs standard sampling on SFT model
+- [x] Jailbreak rescue confirmed: worst prompt +0.21 recovery
+- [x] Overall gain +6% (ceiling effect — SFT already at high R)
+- [x] One generalize prompt degraded (-0.14), likely local false-attractor
 
 ## Phase 3: Symbol Survival [ ]
 
