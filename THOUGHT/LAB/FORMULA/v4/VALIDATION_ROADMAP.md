@@ -59,7 +59,7 @@ Goal: Test the Light Cone claim that compressed/fractal constitutions improve al
 - [x] SFT vs C: R gain 2.7x (0.178 -> 0.489), up from 1.5x inference-only
 - [x] Jailbreak gap closed: SFT jailbreak R=0.474 (vs X R=0.214 in 2a)
 - [x] Variance collapse: std=0.023 across all prompts (uniform attractor)
-- [ ] Control SFT (train on non-constitution responses) to isolate signal
+- [x] Control SFT (non-constitution responses): R=0.455 -- most gain is from fine-tuning itself (+7% constitution signal)
 
 ### Phase 2c: Resonance-Guided Sampling [ ]
 
