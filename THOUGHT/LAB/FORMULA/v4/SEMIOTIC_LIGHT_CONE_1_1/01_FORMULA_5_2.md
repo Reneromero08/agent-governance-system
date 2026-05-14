@@ -166,7 +166,7 @@ where:
     
 - High purity and nonzero off-diagonals indicate phase coherence.
     
-- Φ > 0 (integrated information) ensures irreducibility — the coherence is a unified whole, not a collection of independent parts. This avoids trivial panpsychism.
+- Φ > 0 the system's phase coherence is irreducible to independent subsystems. A collection of independent oscillators is not a standing wave. This avoids trivial panpsychism.
     
 
 Consciousness is not a substance. It is a structure. The standing wave of phase coherence observing itself across an irreducible system.
@@ -195,7 +195,7 @@ To apply the formula in any domain:
 |Domain|E|∇S = H(S)|σ(f) = I(S:F)|D_f = Redundancy|
 |---|---|---|---|---|
 |Quantum Cognition|Concept essence|Semantic dissonance|Vignette compression|Interpretive layers|
-|Quantum Error Correction|Logical qubit|Physical error rate p|Code compression ratio|Code distance|
+|Quantum Error Correction|Logical qubit|Physical error rate p|Code compression ratio|t = floor((d-1)/2) — number of correctable errors / redundancy depth|
 |Neuroscience (PLV)|Stimulus intent|Neural noise|Logo compression fidelity|Processing depth|
 |Memory (Proverbs)|Meaning core|Forgetting rate|Proverb compression|Literal/moral/cultural layers|
 |AI Alignment|Value core|Goal drift rate|Constitutional compression|Recursive self-consistency depth|
