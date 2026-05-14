@@ -69,13 +69,23 @@ Goal: Test the Light Cone claim that compressed/fractal constitutions improve al
 - [x] Overall gain +6% (ceiling effect — SFT already at high R)
 - [x] One generalize prompt degraded (-0.14), likely local false-attractor
 
-## Phase 3: Symbol Survival [ ]
+## Phase 3: Symbol Survival [-]
 
 Goal: Test whether high-compression, high-depth symbols survive noisy transmission better than lower-compression controls.
 
-- [ ] Controlled transmission chain with variable noise
-- [ ] Compare high-sigma/high-D_f vs low-sigma/low-D_f symbols
-- [ ] Measure recall, paraphrase fidelity, persistence over generations
+### Phase 3a: Text Corruption Chain [x]
+
+- [x] 10 symbols with (sigma, Df) from (1,1) to (5,5), 5 chains each
+- [x] 8-generation word-drop/swap transmission, 3 noise levels
+- [x] Result: weak positive at LOW noise (r=+0.35), negative at MED/HIGH
+- [x] Noise model mismatch: word corruption disproportionately damages compressed symbols
+- [ ] LLM-based paraphrasing chain (correct noise model, blocked by GPU memory)
+
+### Phase 3b: LLM Transmission Chain [ ]
+
+- [ ] Paraphrase-and-retell through LLM generations
+- [ ] Semantic reconstruction as the noise model
+- [ ] Expectation: compression advantage confirmed with correct noise model
 
 ## Phase 4: Cybernetic Truth Monitor [ ]
 
