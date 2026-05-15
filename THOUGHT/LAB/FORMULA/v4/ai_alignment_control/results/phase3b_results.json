@@ -1,0 +1,1742 @@
+[
+  {
+    "id": "P1",
+    "type": "proverb",
+    "text": "A stitch in time saves nine",
+    "sigma": 2.5,
+    "Df": 3,
+    "tokens": 6,
+    "literal": "If you fix a small problem early, you prevent a much larger problem later",
+    "literal_tokens": 15,
+    "noise": "LOW",
+    "final_sim": 0.3414510207863987,
+    "std": 0.25103419288460743,
+    "chains": [
+      0.614824450899013,
+      0.6778079675314782,
+      0.11544829606998341,
+      0.11408286411546553,
+      0.1850915253160533
+    ]
+  },
+  {
+    "id": "P1",
+    "type": "proverb",
+    "text": "A stitch in time saves nine",
+    "sigma": 2.5,
+    "Df": 3,
+    "tokens": 6,
+    "literal": "If you fix a small problem early, you prevent a much larger problem later",
+    "literal_tokens": 15,
+    "noise": "MED",
+    "final_sim": 0.34426995498784563,
+    "std": 0.2392978039562855,
+    "chains": [
+      0.16931779201715894,
+      0.6747531100953692,
+      0.06238986923627988,
+      0.5792749273339038,
+      0.23561407625651637
+    ]
+  },
+  {
+    "id": "P1",
+    "type": "proverb",
+    "text": "A stitch in time saves nine",
+    "sigma": 2.5,
+    "Df": 3,
+    "tokens": 6,
+    "literal": "If you fix a small problem early, you prevent a much larger problem later",
+    "literal_tokens": 15,
+    "noise": "HIGH",
+    "final_sim": 0.1935364891154896,
+    "std": 0.2569745750761776,
+    "chains": [
+      0.6962155518653316,
+      0.01819350570438473,
+      0.022872838124352247,
+      0.1669160972185908,
+      0.06348445266478865
+    ]
+  },
+  {
+    "id": "L1",
+    "type": "literal",
+    "text": "If you fix a small problem early, you prevent a much larger problem later",
+    "sigma": 1.0,
+    "Df": 3,
+    "tokens": 15,
+    "proverb": "A stitch in time saves nine",
+    "proverb_sigma": 2.5,
+    "noise": "LOW",
+    "final_sim": 0.5832375509408353,
+    "std": 0.06535545449867103,
+    "chains": [
+      0.568998098372844,
+      0.6236600279801807,
+      0.6575656329127908,
+      0.46610885858489154,
+      0.599855136853469
+    ]
+  },
+  {
+    "id": "L1",
+    "type": "literal",
+    "text": "If you fix a small problem early, you prevent a much larger problem later",
+    "sigma": 1.0,
+    "Df": 3,
+    "tokens": 15,
+    "proverb": "A stitch in time saves nine",
+    "proverb_sigma": 2.5,
+    "noise": "MED",
+    "final_sim": 0.3797943538217374,
+    "std": 0.21263673947229444,
+    "chains": [
+      0.423270429567297,
+      0.50791257619807,
+      -0.036683581769429714,
+      0.4557087719435903,
+      0.5487635731691595
+    ]
+  },
+  {
+    "id": "L1",
+    "type": "literal",
+    "text": "If you fix a small problem early, you prevent a much larger problem later",
+    "sigma": 1.0,
+    "Df": 3,
+    "tokens": 15,
+    "proverb": "A stitch in time saves nine",
+    "proverb_sigma": 2.5,
+    "noise": "HIGH",
+    "final_sim": 0.2871834904145885,
+    "std": 0.17741839588689848,
+    "chains": [
+      0.4455903768534972,
+      0.009023144841185129,
+      0.2516214997540282,
+      0.220628842711228,
+      0.509053587913004
+    ]
+  },
+  {
+    "id": "P2",
+    "type": "proverb",
+    "text": "Actions speak louder than words",
+    "sigma": 2.6,
+    "Df": 3,
+    "tokens": 5,
+    "literal": "What people actually do matters more than what they say they will do",
+    "literal_tokens": 13,
+    "noise": "LOW",
+    "final_sim": 0.5010089108331854,
+    "std": 0.15897903800771146,
+    "chains": [
+      0.4366321823969398,
+      0.7318702936165166,
+      0.638275303737199,
+      0.3046591281887822,
+      0.3936076462264893
+    ]
+  },
+  {
+    "id": "P2",
+    "type": "proverb",
+    "text": "Actions speak louder than words",
+    "sigma": 2.6,
+    "Df": 3,
+    "tokens": 5,
+    "literal": "What people actually do matters more than what they say they will do",
+    "literal_tokens": 13,
+    "noise": "MED",
+    "final_sim": 0.5623963669837828,
+    "std": 0.06564401717284586,
+    "chains": [
+      0.5807030200952444,
+      0.6325581450788696,
+      0.5266709327692487,
+      0.6185495853417886,
+      0.4535001516337628
+    ]
+  },
+  {
+    "id": "P2",
+    "type": "proverb",
+    "text": "Actions speak louder than words",
+    "sigma": 2.6,
+    "Df": 3,
+    "tokens": 5,
+    "literal": "What people actually do matters more than what they say they will do",
+    "literal_tokens": 13,
+    "noise": "HIGH",
+    "final_sim": 0.3758208656145811,
+    "std": 0.19826608951919716,
+    "chains": [
+      0.13485588133321627,
+      0.7171863317482452,
+      0.44864552906978145,
+      0.2605220675465839,
+      0.3178945183750788
+    ]
+  },
+  {
+    "id": "L2",
+    "type": "literal",
+    "text": "What people actually do matters more than what they say they will do",
+    "sigma": 1.0,
+    "Df": 3,
+    "tokens": 13,
+    "proverb": "Actions speak louder than words",
+    "proverb_sigma": 2.6,
+    "noise": "LOW",
+    "final_sim": 0.4609634800354006,
+    "std": 0.0666356107599627,
+    "chains": [
+      0.44145071506456096,
+      0.4611187256044739,
+      0.525522740215893,
+      0.5295526700940004,
+      0.3471725491980746
+    ]
+  },
+  {
+    "id": "L2",
+    "type": "literal",
+    "text": "What people actually do matters more than what they say they will do",
+    "sigma": 1.0,
+    "Df": 3,
+    "tokens": 13,
+    "proverb": "Actions speak louder than words",
+    "proverb_sigma": 2.6,
+    "noise": "MED",
+    "final_sim": 0.4092585131771552,
+    "std": 0.16615938624816878,
+    "chains": [
+      0.3035277607156437,
+      0.3054136815910672,
+      0.3026206673750633,
+      0.401964396237925,
+      0.732766059966077
+    ]
+  },
+  {
+    "id": "L2",
+    "type": "literal",
+    "text": "What people actually do matters more than what they say they will do",
+    "sigma": 1.0,
+    "Df": 3,
+    "tokens": 13,
+    "proverb": "Actions speak louder than words",
+    "proverb_sigma": 2.6,
+    "noise": "HIGH",
+    "final_sim": 0.34890157275770417,
+    "std": 0.12169656996270843,
+    "chains": [
+      0.1720792455718731,
+      0.42131974824146506,
+      0.26728160782320043,
+      0.5243012621577063,
+      0.3595259999942761
+    ]
+  },
+  {
+    "id": "P3",
+    "type": "proverb",
+    "text": "Birds of a feather flock together",
+    "sigma": 2.17,
+    "Df": 2,
+    "tokens": 6,
+    "literal": "People who are similar to each other tend to associate with each other",
+    "literal_tokens": 13,
+    "noise": "LOW",
+    "final_sim": 0.5849311377740876,
+    "std": 0.12897547730400274,
+    "chains": [
+      0.5276184396511071,
+      0.7196269631378607,
+      0.6239084601396043,
+      0.3632630705829802,
+      0.6902387553588852
+    ]
+  },
+  {
+    "id": "P3",
+    "type": "proverb",
+    "text": "Birds of a feather flock together",
+    "sigma": 2.17,
+    "Df": 2,
+    "tokens": 6,
+    "literal": "People who are similar to each other tend to associate with each other",
+    "literal_tokens": 13,
+    "noise": "MED",
+    "final_sim": 0.4170811177695053,
+    "std": 0.17820288266900017,
+    "chains": [
+      0.5981397149723408,
+      0.6632829904549641,
+      0.32959111509237204,
+      0.24910290539239766,
+      0.24528886293545207
+    ]
+  },
+  {
+    "id": "P3",
+    "type": "proverb",
+    "text": "Birds of a feather flock together",
+    "sigma": 2.17,
+    "Df": 2,
+    "tokens": 6,
+    "literal": "People who are similar to each other tend to associate with each other",
+    "literal_tokens": 13,
+    "noise": "HIGH",
+    "final_sim": 0.27157714587829423,
+    "std": 0.26592254180115604,
+    "chains": [
+      -0.0031158087769601645,
+      0.004422638828907289,
+      0.37091916799508196,
+      0.2703755199906506,
+      0.7152842113537914
+    ]
+  },
+  {
+    "id": "L3",
+    "type": "literal",
+    "text": "People who are similar to each other tend to associate with each other",
+    "sigma": 1.0,
+    "Df": 2,
+    "tokens": 13,
+    "proverb": "Birds of a feather flock together",
+    "proverb_sigma": 2.17,
+    "noise": "LOW",
+    "final_sim": 0.6083268124814267,
+    "std": 0.06769775605789523,
+    "chains": [
+      0.6761176393095432,
+      0.4826655079518205,
+      0.6332359910004959,
+      0.6509310187012622,
+      0.5986839054440121
+    ]
+  },
+  {
+    "id": "L3",
+    "type": "literal",
+    "text": "People who are similar to each other tend to associate with each other",
+    "sigma": 1.0,
+    "Df": 2,
+    "tokens": 13,
+    "proverb": "Birds of a feather flock together",
+    "proverb_sigma": 2.17,
+    "noise": "MED",
+    "final_sim": 0.5173008145414585,
+    "std": 0.08586285482350303,
+    "chains": [
+      0.41855832934337717,
+      0.5833472609514124,
+      0.413275475100788,
+      0.621594071387623,
+      0.5497289359240919
+    ]
+  },
+  {
+    "id": "L3",
+    "type": "literal",
+    "text": "People who are similar to each other tend to associate with each other",
+    "sigma": 1.0,
+    "Df": 2,
+    "tokens": 13,
+    "proverb": "Birds of a feather flock together",
+    "proverb_sigma": 2.17,
+    "noise": "HIGH",
+    "final_sim": 0.20085064566520378,
+    "std": 0.23215649502010885,
+    "chains": [
+      0.010145767591883527,
+      -0.005645108409220295,
+      0.32355757496071735,
+      0.07566278427831712,
+      0.6005322099043211
+    ]
+  },
+  {
+    "id": "P4",
+    "type": "proverb",
+    "text": "Don't count your chickens before they hatch",
+    "sigma": 1.44,
+    "Df": 2,
+    "tokens": 9,
+    "literal": "Don't assume a positive outcome will happen before it actually occurs",
+    "literal_tokens": 13,
+    "noise": "LOW",
+    "final_sim": 0.24920625547639066,
+    "std": 0.17553357089511795,
+    "chains": [
+      0.16304647404216163,
+      0.15479812026008383,
+      0.19390281366124,
+      0.13600599086306744,
+      0.5982778785554004
+    ]
+  },
+  {
+    "id": "P4",
+    "type": "proverb",
+    "text": "Don't count your chickens before they hatch",
+    "sigma": 1.44,
+    "Df": 2,
+    "tokens": 9,
+    "literal": "Don't assume a positive outcome will happen before it actually occurs",
+    "literal_tokens": 13,
+    "noise": "MED",
+    "final_sim": 0.11161132024210818,
+    "std": 0.06706674309241557,
+    "chains": [
+      -0.01310695040862146,
+      0.10555270082376186,
+      0.14692835771168772,
+      0.13594465088170893,
+      0.18273784220200384
+    ]
+  },
+  {
+    "id": "P4",
+    "type": "proverb",
+    "text": "Don't count your chickens before they hatch",
+    "sigma": 1.44,
+    "Df": 2,
+    "tokens": 9,
+    "literal": "Don't assume a positive outcome will happen before it actually occurs",
+    "literal_tokens": 13,
+    "noise": "HIGH",
+    "final_sim": 0.118594713332145,
+    "std": 0.19139060200509084,
+    "chains": [
+      0.062364991746183956,
+      -0.0017159172425203594,
+      -0.031389102356295474,
+      0.4936482302718269,
+      0.07006536424152997
+    ]
+  },
+  {
+    "id": "L4",
+    "type": "literal",
+    "text": "Don't assume a positive outcome will happen before it actually occurs",
+    "sigma": 1.0,
+    "Df": 2,
+    "tokens": 13,
+    "proverb": "Don't count your chickens before they hatch",
+    "proverb_sigma": 1.44,
+    "noise": "LOW",
+    "final_sim": 0.5737908429965053,
+    "std": 0.07214393266591448,
+    "chains": [
+      0.6242789030068829,
+      0.5589204167670632,
+      0.4486892223353667,
+      0.5761096477502783,
+      0.6609560251229352
+    ]
+  },
+  {
+    "id": "L4",
+    "type": "literal",
+    "text": "Don't assume a positive outcome will happen before it actually occurs",
+    "sigma": 1.0,
+    "Df": 2,
+    "tokens": 13,
+    "proverb": "Don't count your chickens before they hatch",
+    "proverb_sigma": 1.44,
+    "noise": "MED",
+    "final_sim": 0.4653134591375084,
+    "std": 0.12030070065655671,
+    "chains": [
+      0.4331628978248079,
+      0.5639437773188541,
+      0.2443810101972169,
+      0.5632850527757733,
+      0.5217945575708893
+    ]
+  },
+  {
+    "id": "L4",
+    "type": "literal",
+    "text": "Don't assume a positive outcome will happen before it actually occurs",
+    "sigma": 1.0,
+    "Df": 2,
+    "tokens": 13,
+    "proverb": "Don't count your chickens before they hatch",
+    "proverb_sigma": 1.44,
+    "noise": "HIGH",
+    "final_sim": 0.2584221854803362,
+    "std": 0.11475055047720334,
+    "chains": [
+      0.19230180978755793,
+      0.3288573622700263,
+      0.34925806522334457,
+      0.0629829838871326,
+      0.3587107062336195
+    ]
+  },
+  {
+    "id": "P5",
+    "type": "proverb",
+    "text": "Every cloud has a silver lining",
+    "sigma": 2.0,
+    "Df": 3,
+    "tokens": 6,
+    "literal": "Even difficult or negative situations contain some element of hope or benefit",
+    "literal_tokens": 12,
+    "noise": "LOW",
+    "final_sim": 0.6257787073166139,
+    "std": 0.20640285041554338,
+    "chains": [
+      0.8649771729089416,
+      0.6814159154885153,
+      0.7047045650895084,
+      0.24316707253431796,
+      0.6346288105617859
+    ]
+  },
+  {
+    "id": "P5",
+    "type": "proverb",
+    "text": "Every cloud has a silver lining",
+    "sigma": 2.0,
+    "Df": 3,
+    "tokens": 6,
+    "literal": "Even difficult or negative situations contain some element of hope or benefit",
+    "literal_tokens": 12,
+    "noise": "MED",
+    "final_sim": 0.31883011676775497,
+    "std": 0.23582074369462763,
+    "chains": [
+      0.6474771499627314,
+      0.1951358020303682,
+      0.5566159818534042,
+      0.08753319829693623,
+      0.1073884516953348
+    ]
+  },
+  {
+    "id": "P5",
+    "type": "proverb",
+    "text": "Every cloud has a silver lining",
+    "sigma": 2.0,
+    "Df": 3,
+    "tokens": 6,
+    "literal": "Even difficult or negative situations contain some element of hope or benefit",
+    "literal_tokens": 12,
+    "noise": "HIGH",
+    "final_sim": 0.02923163469533044,
+    "std": 0.0916571190367747,
+    "chains": [
+      -0.0008721356799972682,
+      -0.025979647098732666,
+      -0.016828635707480766,
+      -0.02191248163578703,
+      0.21175107359864992
+    ]
+  },
+  {
+    "id": "L5",
+    "type": "literal",
+    "text": "Even difficult or negative situations contain some element of hope or benefit",
+    "sigma": 1.0,
+    "Df": 3,
+    "tokens": 12,
+    "proverb": "Every cloud has a silver lining",
+    "proverb_sigma": 2.0,
+    "noise": "LOW",
+    "final_sim": 0.6369463953103084,
+    "std": 0.05252817001225769,
+    "chains": [
+      0.7078905701630188,
+      0.6581475138657663,
+      0.5459282994264865,
+      0.6326045174952688,
+      0.6401610756010018
+    ]
+  },
+  {
+    "id": "L5",
+    "type": "literal",
+    "text": "Even difficult or negative situations contain some element of hope or benefit",
+    "sigma": 1.0,
+    "Df": 3,
+    "tokens": 12,
+    "proverb": "Every cloud has a silver lining",
+    "proverb_sigma": 2.0,
+    "noise": "MED",
+    "final_sim": 0.521560939262723,
+    "std": 0.181412633491076,
+    "chains": [
+      0.6303413510316267,
+      0.6384991407388023,
+      0.16305252909644033,
+      0.6171118984878984,
+      0.5587997769588472
+    ]
+  },
+  {
+    "id": "L5",
+    "type": "literal",
+    "text": "Even difficult or negative situations contain some element of hope or benefit",
+    "sigma": 1.0,
+    "Df": 3,
+    "tokens": 12,
+    "proverb": "Every cloud has a silver lining",
+    "proverb_sigma": 2.0,
+    "noise": "HIGH",
+    "final_sim": 0.5337486471109539,
+    "std": 0.06500660928566694,
+    "chains": [
+      0.6419060016808052,
+      0.5450383749621648,
+      0.5182683467859807,
+      0.43898886442140544,
+      0.5245416477044134
+    ]
+  },
+  {
+    "id": "P6",
+    "type": "proverb",
+    "text": "Fortune favors the bold",
+    "sigma": 3.25,
+    "Df": 3,
+    "tokens": 4,
+    "literal": "Those who take decisive action and risk are more likely to achieve success",
+    "literal_tokens": 13,
+    "noise": "LOW",
+    "final_sim": 0.5394406064073775,
+    "std": 0.14126331076576334,
+    "chains": [
+      0.7328000068657222,
+      0.3643830337749076,
+      0.5329105257982647,
+      0.40779370069463,
+      0.6593157649033629
+    ]
+  },
+  {
+    "id": "P6",
+    "type": "proverb",
+    "text": "Fortune favors the bold",
+    "sigma": 3.25,
+    "Df": 3,
+    "tokens": 4,
+    "literal": "Those who take decisive action and risk are more likely to achieve success",
+    "literal_tokens": 13,
+    "noise": "MED",
+    "final_sim": 0.39486793492248534,
+    "std": 0.2578579842756995,
+    "chains": [
+      0.557694196700492,
+      0.11104450374830585,
+      0.5936301462203463,
+      0.6583555936806771,
+      0.053615234262605595
+    ]
+  },
+  {
+    "id": "P6",
+    "type": "proverb",
+    "text": "Fortune favors the bold",
+    "sigma": 3.25,
+    "Df": 3,
+    "tokens": 4,
+    "literal": "Those who take decisive action and risk are more likely to achieve success",
+    "literal_tokens": 13,
+    "noise": "HIGH",
+    "final_sim": 0.2670651619202588,
+    "std": 0.2210463120267773,
+    "chains": [
+      0.6499926835287677,
+      0.11248998269367787,
+      0.1505955249424576,
+      0.04687348008151135,
+      0.3753741383548797
+    ]
+  },
+  {
+    "id": "L6",
+    "type": "literal",
+    "text": "Those who take decisive action and risk are more likely to achieve success",
+    "sigma": 1.0,
+    "Df": 3,
+    "tokens": 13,
+    "proverb": "Fortune favors the bold",
+    "proverb_sigma": 3.25,
+    "noise": "LOW",
+    "final_sim": 0.6624435669379493,
+    "std": 0.04141498610410578,
+    "chains": [
+      0.630608677863444,
+      0.6299114227288622,
+      0.664802829312782,
+      0.7412813151639032,
+      0.6456135896207547
+    ]
+  },
+  {
+    "id": "L6",
+    "type": "literal",
+    "text": "Those who take decisive action and risk are more likely to achieve success",
+    "sigma": 1.0,
+    "Df": 3,
+    "tokens": 13,
+    "proverb": "Fortune favors the bold",
+    "proverb_sigma": 3.25,
+    "noise": "MED",
+    "final_sim": 0.4746911081928368,
+    "std": 0.26922697425907915,
+    "chains": [
+      0.643653750418973,
+      0.11185949217424485,
+      0.7026090025894768,
+      0.18408445621021793,
+      0.7312488395712716
+    ]
+  },
+  {
+    "id": "L6",
+    "type": "literal",
+    "text": "Those who take decisive action and risk are more likely to achieve success",
+    "sigma": 1.0,
+    "Df": 3,
+    "tokens": 13,
+    "proverb": "Fortune favors the bold",
+    "proverb_sigma": 3.25,
+    "noise": "HIGH",
+    "final_sim": 0.22160407285988967,
+    "std": 0.15774515073057682,
+    "chains": [
+      0.2030191244492363,
+      0.3389111757275053,
+      0.4533869624133344,
+      0.024957234039877728,
+      0.08774586766949462
+    ]
+  },
+  {
+    "id": "P7",
+    "type": "proverb",
+    "text": "Honesty is the best policy",
+    "sigma": 2.33,
+    "Df": 3,
+    "tokens": 6,
+    "literal": "Being truthful and straightforward in your dealings produces the best long-term outcomes",
+    "literal_tokens": 14,
+    "noise": "LOW",
+    "final_sim": 0.6158804171856477,
+    "std": 0.03230669528489601,
+    "chains": [
+      0.5694991350168255,
+      0.6593029092904781,
+      0.589028239249594,
+      0.6279144661369283,
+      0.6336573362344127
+    ]
+  },
+  {
+    "id": "P7",
+    "type": "proverb",
+    "text": "Honesty is the best policy",
+    "sigma": 2.33,
+    "Df": 3,
+    "tokens": 6,
+    "literal": "Being truthful and straightforward in your dealings produces the best long-term outcomes",
+    "literal_tokens": 14,
+    "noise": "MED",
+    "final_sim": 0.5557778739167145,
+    "std": 0.04413719138446652,
+    "chains": [
+      0.5899057984346212,
+      0.5537284612650102,
+      0.47125801101375314,
+      0.5768561707047518,
+      0.5871409281654362
+    ]
+  },
+  {
+    "id": "P7",
+    "type": "proverb",
+    "text": "Honesty is the best policy",
+    "sigma": 2.33,
+    "Df": 3,
+    "tokens": 6,
+    "literal": "Being truthful and straightforward in your dealings produces the best long-term outcomes",
+    "literal_tokens": 14,
+    "noise": "HIGH",
+    "final_sim": 0.3291243136526328,
+    "std": 0.1915166601421007,
+    "chains": [
+      0.17840361805009014,
+      0.17739424734029285,
+      0.5891976356500456,
+      0.16441204123624112,
+      0.5362140259864944
+    ]
+  },
+  {
+    "id": "L7",
+    "type": "literal",
+    "text": "Being truthful and straightforward in your dealings produces the best long-term outcomes",
+    "sigma": 1.0,
+    "Df": 3,
+    "tokens": 14,
+    "proverb": "Honesty is the best policy",
+    "proverb_sigma": 2.33,
+    "noise": "LOW",
+    "final_sim": 0.6412525737206466,
+    "std": 0.06776215658899737,
+    "chains": [
+      0.69938985701669,
+      0.5310450196260863,
+      0.6147919893258622,
+      0.6378027200692474,
+      0.7232332825653472
+    ]
+  },
+  {
+    "id": "L7",
+    "type": "literal",
+    "text": "Being truthful and straightforward in your dealings produces the best long-term outcomes",
+    "sigma": 1.0,
+    "Df": 3,
+    "tokens": 14,
+    "proverb": "Honesty is the best policy",
+    "proverb_sigma": 2.33,
+    "noise": "MED",
+    "final_sim": 0.22889676229017505,
+    "std": 0.1412400915322827,
+    "chains": [
+      0.22657124558493164,
+      0.018210797724753154,
+      0.43448265996428553,
+      0.31340776761785205,
+      0.15181134055905304
+    ]
+  },
+  {
+    "id": "L7",
+    "type": "literal",
+    "text": "Being truthful and straightforward in your dealings produces the best long-term outcomes",
+    "sigma": 1.0,
+    "Df": 3,
+    "tokens": 14,
+    "proverb": "Honesty is the best policy",
+    "proverb_sigma": 2.33,
+    "noise": "HIGH",
+    "final_sim": 0.32149510819184063,
+    "std": 0.15345697283179877,
+    "chains": [
+      0.1439560651777735,
+      0.3816728223363411,
+      0.45649629831268435,
+      0.13347858190523149,
+      0.49187177322717274
+    ]
+  },
+  {
+    "id": "P8",
+    "type": "proverb",
+    "text": "Look before you leap",
+    "sigma": 2.0,
+    "Df": 2,
+    "tokens": 4,
+    "literal": "Consider the potential consequences carefully before taking action",
+    "literal_tokens": 8,
+    "noise": "LOW",
+    "final_sim": 0.34870499047588394,
+    "std": 0.23620957396598977,
+    "chains": [
+      0.6471953181734359,
+      0.18465883640383116,
+      0.14093471413447556,
+      0.14338627457604375,
+      0.6273498090916332
+    ]
+  },
+  {
+    "id": "P8",
+    "type": "proverb",
+    "text": "Look before you leap",
+    "sigma": 2.0,
+    "Df": 2,
+    "tokens": 4,
+    "literal": "Consider the potential consequences carefully before taking action",
+    "literal_tokens": 8,
+    "noise": "MED",
+    "final_sim": 0.3007577713307922,
+    "std": 0.1970199952692544,
+    "chains": [
+      0.24251286596188923,
+      0.15084330146555727,
+      0.6901155525507912,
+      0.22020004334428264,
+      0.20011709333144045
+    ]
+  },
+  {
+    "id": "P8",
+    "type": "proverb",
+    "text": "Look before you leap",
+    "sigma": 2.0,
+    "Df": 2,
+    "tokens": 4,
+    "literal": "Consider the potential consequences carefully before taking action",
+    "literal_tokens": 8,
+    "noise": "HIGH",
+    "final_sim": 0.3924259664999735,
+    "std": 0.2059290018549157,
+    "chains": [
+      0.12177166304238338,
+      0.18602552247333073,
+      0.6302631873042949,
+      0.5861960998884598,
+      0.43787335979139885
+    ]
+  },
+  {
+    "id": "L8",
+    "type": "literal",
+    "text": "Consider the potential consequences carefully before taking action",
+    "sigma": 1.0,
+    "Df": 2,
+    "tokens": 8,
+    "proverb": "Look before you leap",
+    "proverb_sigma": 2.0,
+    "noise": "LOW",
+    "final_sim": 0.400935020688226,
+    "std": 0.17019732721848402,
+    "chains": [
+      0.16141465740362446,
+      0.5903088802277432,
+      0.5571496222698853,
+      0.24403816461538705,
+      0.4517637789244902
+    ]
+  },
+  {
+    "id": "L8",
+    "type": "literal",
+    "text": "Consider the potential consequences carefully before taking action",
+    "sigma": 1.0,
+    "Df": 2,
+    "tokens": 8,
+    "proverb": "Look before you leap",
+    "proverb_sigma": 2.0,
+    "noise": "MED",
+    "final_sim": 0.28814271980449874,
+    "std": 0.12177921806658594,
+    "chains": [
+      0.3042483394438967,
+      0.3485835998402686,
+      0.18272512750161063,
+      0.13124706633358385,
+      0.47390946590313404
+    ]
+  },
+  {
+    "id": "L8",
+    "type": "literal",
+    "text": "Consider the potential consequences carefully before taking action",
+    "sigma": 1.0,
+    "Df": 2,
+    "tokens": 8,
+    "proverb": "Look before you leap",
+    "proverb_sigma": 2.0,
+    "noise": "HIGH",
+    "final_sim": 0.23706794287936486,
+    "std": 0.10723309565966503,
+    "chains": [
+      0.13341219723211298,
+      0.1718337191242478,
+      0.38652253150901283,
+      0.14686284959301565,
+      0.346708416938435
+    ]
+  },
+  {
+    "id": "P9",
+    "type": "proverb",
+    "text": "Rome wasn't built in a day",
+    "sigma": 1.38,
+    "Df": 3,
+    "tokens": 8,
+    "literal": "Significant achievements require sustained effort over a long period of time",
+    "literal_tokens": 11,
+    "noise": "LOW",
+    "final_sim": 0.3046398003285442,
+    "std": 0.22990616523801885,
+    "chains": [
+      0.607665300368655,
+      0.361114016837356,
+      0.05045582654803873,
+      0.029366523027390675,
+      0.47459733486128075
+    ]
+  },
+  {
+    "id": "P9",
+    "type": "proverb",
+    "text": "Rome wasn't built in a day",
+    "sigma": 1.38,
+    "Df": 3,
+    "tokens": 8,
+    "literal": "Significant achievements require sustained effort over a long period of time",
+    "literal_tokens": 11,
+    "noise": "MED",
+    "final_sim": 0.4465874159604703,
+    "std": 0.23159332122375767,
+    "chains": [
+      0.4813065219699411,
+      0.03348423367641401,
+      0.4852744936938201,
+      0.4801935553545918,
+      0.7526782751075847
+    ]
+  },
+  {
+    "id": "P9",
+    "type": "proverb",
+    "text": "Rome wasn't built in a day",
+    "sigma": 1.38,
+    "Df": 3,
+    "tokens": 8,
+    "literal": "Significant achievements require sustained effort over a long period of time",
+    "literal_tokens": 11,
+    "noise": "HIGH",
+    "final_sim": 0.131972556709471,
+    "std": 0.2438591937101292,
+    "chains": [
+      0.0649663323143269,
+      0.6161499390685321,
+      -0.008833508938542114,
+      0.007998807832519628,
+      -0.02041878672948147
+    ]
+  },
+  {
+    "id": "L9",
+    "type": "literal",
+    "text": "Significant achievements require sustained effort over a long period of time",
+    "sigma": 1.0,
+    "Df": 3,
+    "tokens": 11,
+    "proverb": "Rome wasn't built in a day",
+    "proverb_sigma": 1.38,
+    "noise": "LOW",
+    "final_sim": 0.6430241383295036,
+    "std": 0.031817443560525224,
+    "chains": [
+      0.6780857847973352,
+      0.6749379634850428,
+      0.6389518976205157,
+      0.6318079609750129,
+      0.5913370847696112
+    ]
+  },
+  {
+    "id": "L9",
+    "type": "literal",
+    "text": "Significant achievements require sustained effort over a long period of time",
+    "sigma": 1.0,
+    "Df": 3,
+    "tokens": 11,
+    "proverb": "Rome wasn't built in a day",
+    "proverb_sigma": 1.38,
+    "noise": "MED",
+    "final_sim": 0.4302820131538347,
+    "std": 0.24794473404143585,
+    "chains": [
+      0.6242145671966133,
+      0.02339033782479808,
+      0.5859598270624874,
+      0.6568318996918726,
+      0.26101343399340243
+    ]
+  },
+  {
+    "id": "L9",
+    "type": "literal",
+    "text": "Significant achievements require sustained effort over a long period of time",
+    "sigma": 1.0,
+    "Df": 3,
+    "tokens": 11,
+    "proverb": "Rome wasn't built in a day",
+    "proverb_sigma": 1.38,
+    "noise": "HIGH",
+    "final_sim": 0.37390552770992574,
+    "std": 0.22756288614963235,
+    "chains": [
+      0.5789332389825753,
+      0.17600489711773062,
+      0.6357217592855008,
+      0.04837063327426841,
+      0.4304971098895536
+    ]
+  },
+  {
+    "id": "P10",
+    "type": "proverb",
+    "text": "The pen is mightier than the sword",
+    "sigma": 1.75,
+    "Df": 3,
+    "tokens": 8,
+    "literal": "Communication and persuasion through writing are more effective at creating lasting change than violence",
+    "literal_tokens": 14,
+    "noise": "LOW",
+    "final_sim": 0.5922901702943321,
+    "std": 0.03499549892142741,
+    "chains": [
+      0.568733334540752,
+      0.6295158863061331,
+      0.6085736518242026,
+      0.6189614534371861,
+      0.5356665253633864
+    ]
+  },
+  {
+    "id": "P10",
+    "type": "proverb",
+    "text": "The pen is mightier than the sword",
+    "sigma": 1.75,
+    "Df": 3,
+    "tokens": 8,
+    "literal": "Communication and persuasion through writing are more effective at creating lasting change than violence",
+    "literal_tokens": 14,
+    "noise": "MED",
+    "final_sim": 0.3727244148978368,
+    "std": 0.188309658998458,
+    "chains": [
+      0.5434756602923001,
+      0.04778661118661222,
+      0.2759821281419693,
+      0.527517676352927,
+      0.4688599985153754
+    ]
+  },
+  {
+    "id": "P10",
+    "type": "proverb",
+    "text": "The pen is mightier than the sword",
+    "sigma": 1.75,
+    "Df": 3,
+    "tokens": 8,
+    "literal": "Communication and persuasion through writing are more effective at creating lasting change than violence",
+    "literal_tokens": 14,
+    "noise": "HIGH",
+    "final_sim": 0.12047480335451402,
+    "std": 0.0609034872384035,
+    "chains": [
+      0.0023808572441315684,
+      0.15002014041172052,
+      0.16090085571397283,
+      0.16615679860098434,
+      0.12291536480176077
+    ]
+  },
+  {
+    "id": "L10",
+    "type": "literal",
+    "text": "Communication and persuasion through writing are more effective at creating lasting change than violence",
+    "sigma": 1.0,
+    "Df": 3,
+    "tokens": 14,
+    "proverb": "The pen is mightier than the sword",
+    "proverb_sigma": 1.75,
+    "noise": "LOW",
+    "final_sim": 0.6550007292561706,
+    "std": 0.05547624576307735,
+    "chains": [
+      0.5744964226774445,
+      0.6479261517518239,
+      0.6299065351479907,
+      0.7419946193687648,
+      0.6806799173348295
+    ]
+  },
+  {
+    "id": "L10",
+    "type": "literal",
+    "text": "Communication and persuasion through writing are more effective at creating lasting change than violence",
+    "sigma": 1.0,
+    "Df": 3,
+    "tokens": 14,
+    "proverb": "The pen is mightier than the sword",
+    "proverb_sigma": 1.75,
+    "noise": "MED",
+    "final_sim": 0.4677038910531556,
+    "std": 0.15339839715991016,
+    "chains": [
+      0.5933703184121873,
+      0.4896486997599473,
+      0.4842649102206155,
+      0.5949395057517006,
+      0.1762960211213269
+    ]
+  },
+  {
+    "id": "L10",
+    "type": "literal",
+    "text": "Communication and persuasion through writing are more effective at creating lasting change than violence",
+    "sigma": 1.0,
+    "Df": 3,
+    "tokens": 14,
+    "proverb": "The pen is mightier than the sword",
+    "proverb_sigma": 1.75,
+    "noise": "HIGH",
+    "final_sim": 0.22025481597768257,
+    "std": 0.07394989123382488,
+    "chains": [
+      0.1778521835802207,
+      0.3554216325279496,
+      0.22681921582313838,
+      0.20449262857416683,
+      0.13668841938293733
+    ]
+  },
+  {
+    "id": "C1",
+    "type": "control",
+    "text": "The weather today is partly cloudy with a chance of afternoon showers",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 12,
+    "noise": "LOW",
+    "final_sim": 0.5670396127173584,
+    "std": 0.12829058751358502,
+    "chains": [
+      0.6801693844889386,
+      0.6354555270340959,
+      0.6176683902734301,
+      0.583801031112087,
+      0.3181037306782402
+    ]
+  },
+  {
+    "id": "C1",
+    "type": "control",
+    "text": "The weather today is partly cloudy with a chance of afternoon showers",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 12,
+    "noise": "MED",
+    "final_sim": 0.6250959469977067,
+    "std": 0.01623274399892045,
+    "chains": [
+      0.6175778280238787,
+      0.6322137117379542,
+      0.6062818169587748,
+      0.6163762211793458,
+      0.6530301570885804
+    ]
+  },
+  {
+    "id": "C1",
+    "type": "control",
+    "text": "The weather today is partly cloudy with a chance of afternoon showers",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 12,
+    "noise": "HIGH",
+    "final_sim": 0.0023976267037131315,
+    "std": 0.10719699902470912,
+    "chains": [
+      -0.05575104802841333,
+      -0.10677012801159672,
+      0.20422548055628378,
+      -0.03519418835636434,
+      0.005478017358656255
+    ]
+  },
+  {
+    "id": "C2",
+    "type": "control",
+    "text": "She walked to the store to buy groceries for the week",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 11,
+    "noise": "LOW",
+    "final_sim": 0.1050565018146357,
+    "std": 0.11443017977862362,
+    "chains": [
+      0.038464345037898695,
+      0.05325148944560266,
+      0.18116927146893502,
+      0.28692504763574517,
+      -0.03452764451500301
+    ]
+  },
+  {
+    "id": "C2",
+    "type": "control",
+    "text": "She walked to the store to buy groceries for the week",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 11,
+    "noise": "MED",
+    "final_sim": 0.3100556055275476,
+    "std": 0.1901463192051708,
+    "chains": [
+      -0.043250753328205806,
+      0.3368750713389766,
+      0.5330197215074931,
+      0.3528179140574929,
+      0.370816074061981
+    ]
+  },
+  {
+    "id": "C2",
+    "type": "control",
+    "text": "She walked to the store to buy groceries for the week",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 11,
+    "noise": "HIGH",
+    "final_sim": 0.28192268066477505,
+    "std": 0.2812006328322497,
+    "chains": [
+      0.7066121943719705,
+      -0.040855853459547044,
+      0.49231588748833627,
+      0.22008273005463524,
+      0.03145844486848011
+    ]
+  },
+  {
+    "id": "C3",
+    "type": "control",
+    "text": "The meeting was scheduled for three o'clock on Thursday afternoon",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 12,
+    "noise": "LOW",
+    "final_sim": 0.4522116359207452,
+    "std": 0.26889977955283817,
+    "chains": [
+      0.6338774939696109,
+      0.6447146323146711,
+      0.6994917392723717,
+      0.27792160379391556,
+      0.00505271025315675
+    ]
+  },
+  {
+    "id": "C3",
+    "type": "control",
+    "text": "The meeting was scheduled for three o'clock on Thursday afternoon",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 12,
+    "noise": "MED",
+    "final_sim": 0.3680435662058604,
+    "std": 0.3449026441762315,
+    "chains": [
+      -0.04915257756735864,
+      0.6874608993523398,
+      0.7367364011242414,
+      0.5028433799738623,
+      -0.037670271853783126
+    ]
+  },
+  {
+    "id": "C3",
+    "type": "control",
+    "text": "The meeting was scheduled for three o'clock on Thursday afternoon",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 12,
+    "noise": "HIGH",
+    "final_sim": 0.053539558575125865,
+    "std": 0.13764670501284204,
+    "chains": [
+      0.3087024276672154,
+      0.051939940683782694,
+      0.012374152235623874,
+      -0.0008355491859367105,
+      -0.10448317852505598
+    ]
+  },
+  {
+    "id": "C4",
+    "type": "control",
+    "text": "He decided to take the train instead of driving to work today",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 12,
+    "noise": "LOW",
+    "final_sim": 0.4800801048440704,
+    "std": 0.11152227466066876,
+    "chains": [
+      0.5272340178484413,
+      0.5270832495137695,
+      0.4987290798855253,
+      0.5834314574850601,
+      0.2639227194875558
+    ]
+  },
+  {
+    "id": "C4",
+    "type": "control",
+    "text": "He decided to take the train instead of driving to work today",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 12,
+    "noise": "MED",
+    "final_sim": 0.5586602825291841,
+    "std": 0.04405253221131778,
+    "chains": [
+      0.6401397371369003,
+      0.5626349449152088,
+      0.5295467376703689,
+      0.5129728623011265,
+      0.5480071306223158
+    ]
+  },
+  {
+    "id": "C4",
+    "type": "control",
+    "text": "He decided to take the train instead of driving to work today",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 12,
+    "noise": "HIGH",
+    "final_sim": 0.041965025420919524,
+    "std": 0.07148325118653501,
+    "chains": [
+      0.009078497998407344,
+      0.013230580551084229,
+      -0.02407350720900913,
+      0.18040215554232175,
+      0.031187400221793456
+    ]
+  },
+  {
+    "id": "C5",
+    "type": "control",
+    "text": "The garden needed watering after a week of hot dry weather",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 11,
+    "noise": "LOW",
+    "final_sim": 0.3594433233491296,
+    "std": 0.30216127360102846,
+    "chains": [
+      0.2414253950116604,
+      -0.059538893225067516,
+      0.2016413360832105,
+      0.72629147767948,
+      0.6873973011963646
+    ]
+  },
+  {
+    "id": "C5",
+    "type": "control",
+    "text": "The garden needed watering after a week of hot dry weather",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 11,
+    "noise": "MED",
+    "final_sim": 0.5475803877158923,
+    "std": 0.13253206908195672,
+    "chains": [
+      0.2929144676273795,
+      0.5766456127160982,
+      0.571459089007944,
+      0.6238633990281541,
+      0.6730193701998859
+    ]
+  },
+  {
+    "id": "C5",
+    "type": "control",
+    "text": "The garden needed watering after a week of hot dry weather",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 11,
+    "noise": "HIGH",
+    "final_sim": 0.18041519182460866,
+    "std": 0.2475731911668663,
+    "chains": [
+      -0.0173051665607021,
+      -0.058975659100691656,
+      0.43744635581926467,
+      0.017688845407280246,
+      0.5232215835578922
+    ]
+  },
+  {
+    "id": "C6",
+    "type": "control",
+    "text": "They ordered pizza and watched a movie on Friday night",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 10,
+    "noise": "LOW",
+    "final_sim": 0.48368707217904205,
+    "std": 0.09927500243387952,
+    "chains": [
+      0.49635836481998397,
+      0.35512119531595954,
+      0.5330587943226011,
+      0.39875867359352013,
+      0.6351383328431454
+    ]
+  },
+  {
+    "id": "C6",
+    "type": "control",
+    "text": "They ordered pizza and watched a movie on Friday night",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 10,
+    "noise": "MED",
+    "final_sim": 0.3717258055258796,
+    "std": 0.19889057457465278,
+    "chains": [
+      0.5333928465837866,
+      0.1604395604394,
+      0.4662437140936957,
+      0.10733884572972054,
+      0.5912140607827949
+    ]
+  },
+  {
+    "id": "C6",
+    "type": "control",
+    "text": "They ordered pizza and watched a movie on Friday night",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 10,
+    "noise": "HIGH",
+    "final_sim": 0.138781724740281,
+    "std": 0.13611292835540345,
+    "chains": [
+      0.14098232984528747,
+      0.025001662969762473,
+      0.14083015918717606,
+      0.0016095080440927173,
+      0.3854849636550863
+    ]
+  },
+  {
+    "id": "C7",
+    "type": "control",
+    "text": "The professor explained the concept using simple diagrams",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 8,
+    "noise": "LOW",
+    "final_sim": 0.5589835011352889,
+    "std": 0.012353986410912563,
+    "chains": [
+      0.5593271255487571,
+      0.5546048018095193,
+      0.5406285524362879,
+      0.5613395906287535,
+      0.5790174352531267
+    ]
+  },
+  {
+    "id": "C7",
+    "type": "control",
+    "text": "The professor explained the concept using simple diagrams",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 8,
+    "noise": "MED",
+    "final_sim": 0.4638280879030634,
+    "std": 0.18689477322694747,
+    "chains": [
+      0.5408732021370011,
+      0.6722491188191081,
+      0.11486601084459261,
+      0.5228029489511984,
+      0.4683491587634171
+    ]
+  },
+  {
+    "id": "C7",
+    "type": "control",
+    "text": "The professor explained the concept using simple diagrams",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 8,
+    "noise": "HIGH",
+    "final_sim": 0.2599272270104357,
+    "std": 0.19643476503670523,
+    "chains": [
+      0.13365475833402618,
+      0.4693666380261638,
+      0.5266011953348615,
+      0.06483073918996164,
+      0.10518280416716547
+    ]
+  },
+  {
+    "id": "C8",
+    "type": "control",
+    "text": "She found her keys under the couch cushions this morning",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 10,
+    "noise": "LOW",
+    "final_sim": 0.3205991746774521,
+    "std": 0.23538612927066008,
+    "chains": [
+      0.09106313979992939,
+      0.520523846148924,
+      0.6001979112619119,
+      0.002015474372532401,
+      0.38919550180396256
+    ]
+  },
+  {
+    "id": "C8",
+    "type": "control",
+    "text": "She found her keys under the couch cushions this morning",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 10,
+    "noise": "MED",
+    "final_sim": 0.363963911820571,
+    "std": 0.18605614341404142,
+    "chains": [
+      0.47038471698713946,
+      0.5741238936253942,
+      0.4889805018896935,
+      0.09594993293275773,
+      0.1903805136678699
+    ]
+  },
+  {
+    "id": "C8",
+    "type": "control",
+    "text": "She found her keys under the couch cushions this morning",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 10,
+    "noise": "HIGH",
+    "final_sim": 0.31975327077944554,
+    "std": 0.2883209952199523,
+    "chains": [
+      -0.026981251314255432,
+      0.3370272517200914,
+      0.015310235321506447,
+      0.6091430550296805,
+      0.6642670631402048
+    ]
+  },
+  {
+    "id": "C9",
+    "type": "control",
+    "text": "The package arrived two days earlier than expected",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 8,
+    "noise": "LOW",
+    "final_sim": 0.47947548300958076,
+    "std": 0.24023752118369943,
+    "chains": [
+      0.6745019957119631,
+      0.5143309831614119,
+      0.576602935790439,
+      0.010668646544207393,
+      0.6212728538398825
+    ]
+  },
+  {
+    "id": "C9",
+    "type": "control",
+    "text": "The package arrived two days earlier than expected",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 8,
+    "noise": "MED",
+    "final_sim": 0.24281955026533164,
+    "std": 0.345168687279036,
+    "chains": [
+      -0.011409671474644632,
+      -0.09119009770086813,
+      -0.01059855770161032,
+      0.6402151584618841,
+      0.6870809197418971
+    ]
+  },
+  {
+    "id": "C9",
+    "type": "control",
+    "text": "The package arrived two days earlier than expected",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 8,
+    "noise": "HIGH",
+    "final_sim": 0.4004423436644299,
+    "std": 0.2236140521066798,
+    "chains": [
+      0.49939766522582096,
+      0.49441915750454096,
+      0.38326975007434605,
+      -0.015805983937484187,
+      0.6409311294549254
+    ]
+  },
+  {
+    "id": "C10",
+    "type": "control",
+    "text": "He practiced the piano for an hour before dinner each evening",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 11,
+    "noise": "LOW",
+    "final_sim": 0.31072536967663683,
+    "std": 0.21520352392950573,
+    "chains": [
+      0.46137312054587953,
+      0.3764206171032002,
+      0.5828748345369231,
+      0.14122670888886632,
+      -0.008268432691685037
+    ]
+  },
+  {
+    "id": "C10",
+    "type": "control",
+    "text": "He practiced the piano for an hour before dinner each evening",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 11,
+    "noise": "MED",
+    "final_sim": 0.4514251937286605,
+    "std": 0.27547772413043464,
+    "chains": [
+      0.5453495979303628,
+      0.6856808066361245,
+      0.49830859899471036,
+      -0.08482420950071731,
+      0.6126111745828224
+    ]
+  },
+  {
+    "id": "C10",
+    "type": "control",
+    "text": "He practiced the piano for an hour before dinner each evening",
+    "sigma": 1.0,
+    "Df": 1,
+    "tokens": 11,
+    "noise": "HIGH",
+    "final_sim": 0.06973047891810033,
+    "std": 0.2416368057887623,
+    "chains": [
+      -0.07371581040111623,
+      -0.009066712651643785,
+      0.5507509708399033,
+      -0.07174954991032756,
+      -0.04756650328631412
+    ]
+  }
+]

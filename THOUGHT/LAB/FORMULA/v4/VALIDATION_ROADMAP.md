@@ -81,11 +81,14 @@ Goal: Test whether high-compression, high-depth symbols survive noisy transmissi
 - [x] Noise model mismatch: word corruption disproportionately damages compressed symbols
 - [ ] LLM-based paraphrasing chain (correct noise model, blocked by GPU memory)
 
-### Phase 3b: LLM Transmission Chain [ ]
+### Phase 3b: LLM Transmission Chain [x]
 
-- [ ] Paraphrase-and-retell through LLM generations
-- [ ] Semantic reconstruction as the noise model
-- [ ] Expectation: compression advantage confirmed with correct noise model
+- [x] 30 symbols (10 proverb/literal pairs, 10 controls), sigma measured, Df rated
+- [x] 10-generation LLM paraphrase chains, 3 noise levels, 5 chains each = 450 chains
+- [x] Result: **INCONCLUSIVE** — experiment tested length, not compression
+- [x] Longer texts survive LLM paraphrasing better than shorter texts (trivial)
+- [x] Five flaws: artificial control, misaligned metric, subjective Df, no error-correction channel, small N
+- [ ] Valid Phase 3 requires: error-correction channel, measured Df, recognition metric, N>=30
 
 ## Phase 4: Cybernetic Truth Monitor [ ]
 
