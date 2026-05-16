@@ -6,6 +6,19 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.12.3] - 2026-05-16
+
+### Added
+
+- `CAPABILITY/SKILLS/utilities/coderabbit-comments/`: New skill to retrieve CodeRabbit
+  review comments from the VS Code extension's local storage. Agents can run
+  `skill_run("coderabbit-comments", {"action": "latest"})` to get actionable
+  comments from the most recent review. Auto-discovers the workspace storage
+  path by scanning `%APPDATA%` workspace directories. Includes fixtures for
+  deterministic validation.
+
+---
+
 ## [3.12.2] - 2026-05-16
 
 ### Changed

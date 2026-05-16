@@ -1,0 +1,108 @@
+[
+  {
+    "id": "test-review-000",
+    "status": "completed",
+    "startedAt": "2026-05-13T13:25:57.000Z",
+    "endedAt": "2026-05-13T13:27:00.000Z",
+    "fileReviewMap": {
+      "SOME/OLD/FILE.py": {
+        "comments": [
+          {
+            "filename": "SOME/OLD/FILE.py",
+            "startLine": 1,
+            "endLine": 5,
+            "type": "actionable",
+            "severity": "minor",
+            "comment": "Old review comment.",
+            "suggestions": [],
+            "resolution": "resolved",
+            "codegenInstructions": ""
+          }
+        ],
+        "status": 3
+      }
+    },
+    "outsideDiffRangeComments": {},
+    "duplicateComments": {}
+  },
+  {
+    "id": "test-review-001",
+    "status": "completed",
+    "startedAt": "2026-05-16T09:37:50.000Z",
+    "endedAt": "2026-05-16T09:38:15.000Z",
+    "fileReviewMap": {
+      "THOUGHT/LAB/TINY_COMPRESS/canon-symbol/canon_compressor.py": {
+        "comments": [
+          {
+            "filename": "THOUGHT/LAB/TINY_COMPRESS/canon-symbol/canon_compressor.py",
+            "startLine": 84,
+            "endLine": 84,
+            "type": "actionable",
+            "severity": "major",
+            "comment": "Use forward slashes for portable path storage.",
+            "suggestions": ["Use Path.as_posix()"],
+            "resolution": "",
+            "codegenInstructions": "Fix path separators"
+          }
+        ],
+        "status": 3
+      },
+      "THOUGHT/LAB/TINY_COMPRESS/llm-spectral/compress_and_finetune.py": {
+        "comments": [
+          {
+            "filename": "THOUGHT/LAB/TINY_COMPRESS/llm-spectral/compress_and_finetune.py",
+            "startLine": 6,
+            "endLine": 24,
+            "type": "actionable",
+            "severity": "critical",
+            "comment": "Critical documentation error: model size claims are inconsistent.",
+            "suggestions": [],
+            "resolution": "",
+            "codegenInstructions": "Fix parameter count in docstring"
+          },
+          {
+            "filename": "THOUGHT/LAB/TINY_COMPRESS/llm-spectral/compress_and_finetune.py",
+            "startLine": 63,
+            "endLine": 73,
+            "type": "actionable",
+            "severity": "critical",
+            "comment": "Import path mismatch: sys.path and import statement are inconsistent.",
+            "suggestions": ["Fix import path or sys.path insertion"],
+            "resolution": "",
+            "codegenInstructions": "Fix import path"
+          },
+          {
+            "filename": "THOUGHT/LAB/TINY_COMPRESS/llm-spectral/compress_and_finetune.py",
+            "startLine": 76,
+            "endLine": 81,
+            "type": "actionable",
+            "severity": "major",
+            "comment": "Security risk: trust_remote_code=True allows arbitrary code execution.",
+            "suggestions": [],
+            "resolution": "",
+            "codegenInstructions": "Document trust_remote_code"
+          }
+        ],
+        "status": 3
+      },
+      "THOUGHT/LAB/TINY_COMPRESS/holographic-image/holo.py": {
+        "comments": [
+          {
+            "filename": "THOUGHT/LAB/TINY_COMPRESS/holographic-image/holo.py",
+            "startLine": 182,
+            "endLine": 183,
+            "type": "actionable",
+            "severity": "major",
+            "comment": "Security: Pickle deserialization of untrusted data.",
+            "suggestions": ["Use np.savez_compressed instead of pickle"],
+            "resolution": "",
+            "codegenInstructions": "Replace pickle with safe format"
+          }
+        ],
+        "status": 3
+      }
+    },
+    "outsideDiffRangeComments": {},
+    "duplicateComments": {}
+  }
+]
