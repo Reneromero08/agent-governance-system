@@ -117,16 +117,74 @@ Goal: Test whether high-compression, high-depth symbols survive noisy transmissi
 - [x] SVD 6x more efficient — 1D flattening breaks spatial locality
 - [x] SeeMPS Cython extension hangs on Windows — documented in ERROR_REPORT.md
 
-## Phase 4: Cybernetic Truth Monitor [ ]
+## Phase 4: Cybernetic Truth Monitor [x]
 
-Goal: Implement `SemioticMonitor`.
+Goal: Implement `SemioticMonitor`. Token-level R measurement + T modulation feedback loop.
 
-- [ ] State `rho` from hidden states/logits
-- [ ] Alignment frame `C`
-- [ ] Resonance `R = Tr(rho C)` or justified approximation
-- [ ] Feedback control over temperature or candidate selection
-- [ ] External verification coupling
-- [ ] Test on hallucination-prone or ambiguity-heavy tasks
+### Phase 4a: Token-Level Control Loop Experiments [x]
+
+**v1: Static C + Temperature Modulation**
+- [x] C built from contrastive factual pairs (Fisher discriminant, 20T+20F claims)
+- [x] Also C built from constitution hidden-state signature (Phase 2 method)
+- [x] Token-by-token R = Tr(rho C) from final-layer hidden states
+- [x] T = T_base/(1 + R*R_SCALE) feedback control with Lindblad correction factor
+- [x] 3 conditions (CONTROL, CYBERNETIC, VERIFY), 25 prompts, 150 tokens each
+- [x] Calibration sweep: R_SCALE 100→500, T_base 3.0→5.0
+- [x] Result: contrastive C neutral (loop doesn't help/hurt). Constitution C raises R 30x but loop benefit undetectable at N=42. T modulation mechanically functional (range 0.36-0.96 with R_SCALE=25).
+
+**v2: Dynamic C + Context Feedback**
+- [x] C rebuilt after each run from generation-time hidden states labeled by verification outcome
+- [x] Context injection on verification failure (full chat reconstruction with correction message)
+- [x] 5 runs x 25 prompts
+- [x] Result: C diverges (cos_sim < 0.02 between successive Cs). Echo chamber failure mode confirmed. Accuracy degrades 57.9% → 29.4%.
+
+**v3: Df Sweep with Retry Correction**
+- [x] Df sweep [1,2,3,5,7] with halving temperatures per retry
+- [x] Result: sigma=1. Retry at lower T cannot correct systematic errors. Sigma^Df amplifier never active because correction has no syndrome.
+
+**v4 (Final): Constitution + Cybernetic Metacognition**
+- [x] Constitution as fixed attractor frame (C from constitution hidden states)
+- [x] Per-token R measurement + T modulation (R_SCALE=25, T_base=3.0)
+- [x] 25 prompts x 3 samples x 2 conditions = 150 generations
+- [x] Corrected analysis: accuracy 54.8% (CTL) vs 59.5% (CYB), p=0.66 (ns)
+- [x] R flat across conditions (p=0.57), T lowered 0.70 → 0.56
+- [x] Full post-mortem: C from comprehension doesn't transfer to generation. Token-level R too weak to discriminate truth. Kuramoto condition (sigma > nabla_S) met for alignment but not for truth accuracy.
+
+**Key findings:**
+- [x] Values constitution works as alignment attractor: R 30x (0.007 -> 0.225)
+- [x] Alignment and truth are different attractors: R 30x but accuracy flat vs baseline
+- [x] Metacognition loop mechanically functional: T range 0.36-0.96, dynamic control active
+- [x] Gap identified: constitution needs epistemic content (COMMONSENSE spine), not just values
+- [x] C from comprehension doesn't transfer to generation (comprehension-generation gap)
+- [x] Sigma^Df amplifier never tested (needs proper syndrome-based correction, sigma <= 1 in all tests)
+- [x] The finding is clarity on what the constitution needs to become, not a failure of the mechanism
+
+**Artifacts:**
+- `THOUGHT/LAB/FORMULA/v4/phase4a/` — v1 (static C + T modulation)
+- `THOUGHT/LAB/FORMULA/v4/phase4a_v2/` — v2 (dynamic C + context feedback)
+- `THOUGHT/LAB/FORMULA/v4/phase4a_v3/` — v3 (Df sweep smoke test)
+- `THOUGHT/LAB/FORMULA/v4/phase4a_final/` — Final (constitution + metacognition)
+- Full post-mortem report at `phase4a_v2/results/phase4a_v2_report.md`
+
+### Phase 4b: Step-Level Macro-Consensus [-]
+
+Goal: Deploy control law at step-level with t=2 verification lattices, @C symbol communication, and Df anomaly detection.
+
+- [-] TraDo-4B (Qwen-based) model with custom tokenizer + modeling code
+- [-] Step-level generation: complete reasoning steps, not per-token
+- [-] t=2 verification lattice: multiple verifier perspectives voting on output correctness
+- [-] Soft gate: approve when consensus holds (grad_S < threshold), append to context
+- [-] Hard gate: halt when consensus broken (grad_S >= threshold), overwrite, regenerate
+- [-] @C symbol system: SHA-256 compressed content references (476x compression)
+- [-] Df anomaly detection: effective dimensionality tracking for noise/drift detection
+- [-] Domain mapping: E=consensus_ratio, grad_S=sqrt(1-consensus_ratio), sigma=majority_vote, Df=output_dimensionality, R=1/grad_S
+- [-] Decoherence experiments (step0-step3) tracking consensus collapse across agents
+- [ ] Full integration with Phase 4a findings (constitution-based C, R_SCALE calibration)
+- [ ] Train/holdout validation of sigma^Df scaling at step level
+- [ ] Bootstrap CIs on step-level accuracy improvement
+
+**Artifacts:**
+- `THOUGHT/LAB/FORMULA/v4/phase4b/` — lattice, gates, loop, model, results
 
 ## Phase 5: Phase Transition Tests [ ]
 
