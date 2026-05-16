@@ -6,6 +6,17 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.12.4] - 2026-05-16
+
+### Fixed
+
+- `CAPABILITY/SKILLS/utilities/coderabbit-comments/run.py`: Fixed workspace storage
+  discovery to handle VSCode's Windows backslash encoding (`%5C`). Added fallback:
+  if URI matching fails, returns most recently modified coderabbit database.
+  Added `file_filter` parameter to filter comments by filename pattern.
+
+---
+
 ## [3.12.3] - 2026-05-16
 
 ### Added

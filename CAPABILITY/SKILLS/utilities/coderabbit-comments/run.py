@@ -29,7 +29,11 @@ except ImportError:
 
 
 def _find_storage_path(repo_path: Path) -> Optional[Path]:
-    """Auto-discover the CodeRabbit review database file."""
+    """Auto-discover the CodeRabbit review database file.
+    
+    Prioritizes workspace.json URI match, but falls back to scanning
+    all workspace directories for the most recent coderabbit storage.
+    """
     appdata = os.environ.get("APPDATA")
     if not appdata:
         return None
@@ -38,38 +42,68 @@ def _find_storage_path(repo_path: Path) -> Optional[Path]:
     if not ws_root.exists():
         return None
 
-    # VS Code stores workspace URIs with forward slashes and lowercase
-    # e.g. file:///d%3A/CCC%202.0/AI/agent-governance-system
+    # Build both URI variants (VSCode uses %5C for Windows backslashes)
     import urllib.parse
-    posix_path = str(repo_path.resolve()).replace("\\", "/")
-    repo_uri = "file:///" + urllib.parse.quote(posix_path, safe="/")
-    # Normalize: VS Code uses lowercase drive letter
-    if repo_uri.startswith("file:///") and repo_uri[8].isalpha():
-        repo_uri = repo_uri[:8] + repo_uri[8].lower() + repo_uri[9:]
+    repo_str = str(repo_path.resolve())
+    # Variant 1: forward slashes
+    posix = repo_str.replace("\\", "/")
+    uri_fwd = "file:///" + urllib.parse.quote(posix, safe="/")
+    if uri_fwd[8].isalpha():
+        uri_fwd = uri_fwd[:8] + uri_fwd[8].lower() + uri_fwd[9:]
+    # Variant 2: keep backslashes (VSCode on Windows)
+    uri_bs = "file:///" + urllib.parse.quote(repo_str, safe="/\\")
+    if uri_bs[8].isalpha():
+        uri_bs = uri_bs[:8] + uri_bs[8].lower() + uri_bs[9:]
 
+    candidates = []  # (mod_time, db_path) for fallback
+    
     for ws_dir in ws_root.iterdir():
         if not ws_dir.is_dir():
             continue
         ws_json = ws_dir / "workspace.json"
-        if not ws_json.exists():
-            continue
-        try:
-            ws_data = json.loads(ws_json.read_text(encoding="utf-8"))
-        except Exception:
-            continue
-        if ws_data.get("folder") == repo_uri:
-            cr_dir = ws_dir / "coderabbit.coderabbit-vscode"
-            if cr_dir.exists():
-                # Find the large JSON file (review database)
-                for f in cr_dir.iterdir():
-                    if f.suffix == ".json" and f.name != "categories.json":
-                        try:
-                            data = json.loads(f.read_text(encoding="utf-8"))
-                            if isinstance(data, list) and len(data) > 0:
-                                return f
-                        except Exception:
-                            continue
+        if ws_json.exists():
+            try:
+                ws_data = json.loads(ws_json.read_text(encoding="utf-8"))
+                folder = ws_data.get("folder", "")
+                if folder in (uri_fwd, uri_bs):
+                    cr_dir = ws_dir / "coderabbit.coderabbit-vscode"
+                    if cr_dir.exists():
+                        db = _find_db_in_cr_dir(cr_dir)
+                        if db:
+                            return db
+            except Exception:
+                pass
+        # Fallback: check for coderabbit storage regardless of match
+        cr_dir = ws_dir / "coderabbit.coderabbit-vscode"
+        if cr_dir.exists():
+            db = _find_db_in_cr_dir(cr_dir)
+            if db:
+                candidates.append((db.stat().st_mtime, db))
+    
+    # Fallback: use most recently modified coderabbit database
+    if candidates:
+        candidates.sort(key=lambda x: x[0], reverse=True)
+        return candidates[0][1]
+    
     return None
+
+
+def _find_db_in_cr_dir(cr_dir: Path) -> Optional[Path]:
+    """Find the review database JSON in a coderabbit extension directory."""
+    best = None
+    best_sz = 0
+    for f in cr_dir.iterdir():
+        if f.suffix == ".json" and f.name != "categories.json":
+            try:
+                data = json.loads(f.read_text(encoding="utf-8"))
+                if isinstance(data, list) and len(data) > 0:
+                    sz = f.stat().st_size
+                    if sz > best_sz:
+                        best = f
+                        best_sz = sz
+            except Exception:
+                continue
+    return best
 
 
 def _extract_actionable(comments: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
@@ -93,8 +127,11 @@ def _extract_actionable(comments: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     return result
 
 
-def _action_latest(db_path: Path) -> Dict[str, Any]:
-    """Return the latest completed review with actionable comments."""
+def _action_latest(db_path: Path, file_filter: Optional[str] = None) -> Dict[str, Any]:
+    """Return the latest completed review with actionable comments.
+    
+    If file_filter is provided, only return comments for files matching the pattern.
+    """
     try:
         reviews = json.loads(db_path.read_text(encoding="utf-8"))
     except Exception as exc:
@@ -104,13 +141,14 @@ def _action_latest(db_path: Path) -> Dict[str, Any]:
     if not completed:
         return {"ok": True, "reviews": 0, "latest_review": None}
 
-    # Most recent is last in the array (appended chronologically)
     latest = completed[-1]
     file_review_map = latest.get("fileReviewMap", {})
 
     all_comments = []
     files = []
     for filename, entry in file_review_map.items():
+        if file_filter and file_filter.lower() not in filename.lower():
+            continue
         files.append(filename)
         comments = entry.get("comments", [])
         all_comments.extend(_extract_actionable(comments))
@@ -197,6 +235,7 @@ def main(input_path: Path, output_path: Path) -> int:
 
     action = str(payload.get("action", "latest")).strip().lower()
     storage_path = payload.get("storage_path")
+    file_filter = payload.get("file_filter", None)
 
     if storage_path:
         db_path = Path(storage_path)
@@ -213,7 +252,7 @@ def main(input_path: Path, output_path: Path) -> int:
         db_path = discovered
 
     if action == "latest":
-        result = _action_latest(db_path)
+        result = _action_latest(db_path, file_filter)
     elif action == "list":
         result = _action_list(db_path)
     elif action == "all":
