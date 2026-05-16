@@ -1,0 +1,11 @@
+{
+  "n_true": 20,
+  "n_false": 20,
+  "hidden_dim": 2560,
+  "separation_tstat": 8.230168808156158,
+  "separation_pval": 5.697324623303621e-10,
+  "true_R_mean": 360.987548828125,
+  "false_R_mean": 130.0310821533203,
+  "diff_norm": 8.284693717956543,
+  "w_norm": 1.0
+}
