@@ -74,7 +74,10 @@ print("="*60)
 # Longer text example
 long_text = "the quick brown fox jumps over the lazy dog"
 words = long_text.split()
-addresses = [encode(w) if w in word_to_idx else -1 for w in words]
+unknown_words = [w for w in words if w not in word_to_idx]
+if unknown_words:
+    print(f"Warning: Unknown words skipped: {unknown_words}")
+addresses = [encode(w) for w in words if w in word_to_idx]
 
 text_bytes = len(long_text.encode('utf-8'))
 address_bits = len(words) * bits_needed

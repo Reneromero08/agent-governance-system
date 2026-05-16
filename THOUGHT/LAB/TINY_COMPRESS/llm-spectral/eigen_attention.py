@@ -394,9 +394,9 @@ def train_projectors(
 
     # Set mean
     mean_tensor = torch.tensor(init_proj['mean'], dtype=torch.float32)
-    q_proj.mean = mean_tensor
-    k_proj.mean = mean_tensor
-    v_proj.mean = mean_tensor
+    q_proj.mean.copy_(mean_tensor)
+    k_proj.mean.copy_(mean_tensor)
+    v_proj.mean.copy_(mean_tensor)
 
     device = next(model.parameters()).device
     q_proj = q_proj.to(device)
@@ -529,7 +529,7 @@ def main():
             init_proj = learn_projectors_from_model(model, tokenizer, test_texts * 10, k)
 
             projector = LearnableProjector(model.config.hidden_size, k, init_proj['q'])
-            projector.mean = torch.tensor(init_proj['mean'], dtype=torch.float32)
+            projector.mean.copy_(torch.tensor(init_proj['mean'], dtype=torch.float32))
 
             # Test
             model.eval()

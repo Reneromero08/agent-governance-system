@@ -24,12 +24,12 @@ class BlochProjector:
         self.n_qubits = n_qubits
         self.dim = 2 ** n_qubits  # Hilbert space dimension
 
-    def bytes_to_state(self, data: bytes) -> np.ndarray:
+    def bytes_to_state(self, data: bytes) -> tuple[np.ndarray, float]:
         """
         Encode bytes as quantum state amplitudes.
 
         data: bytes to encode
-        returns: normalized complex amplitude vector
+        returns: (normalized complex amplitude vector, norm)
         """
         # Pad to match Hilbert space dimension
         padded = list(data) + [0] * (self.dim - len(data))

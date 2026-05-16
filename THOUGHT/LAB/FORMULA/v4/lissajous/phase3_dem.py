@@ -167,8 +167,9 @@ print(f"  sigma_emp = {coeffs[0]:.4f} * rationality + {coeffs[1]:.4f}")
 
 # Compare to closed-form baseline
 p_th = 0.00707  # from QEC paper
-cf_sigma = {p: math.sqrt(p_th/p) for p in sig_vals if p > 0}
-cf_arr = np.array([cf_sigma.get(p, 1) for p in sig_vals])
+p_values = sorted(freq_ratios.keys())
+cf_sigma = {p: math.sqrt(p_th/p) for p in p_values if p > 0}
+cf_arr = np.array([cf_sigma[p] for p in p_values])
 A_cf = np.column_stack([cf_arr, np.ones_like(cf_arr)])
 coeffs_cf = np.linalg.lstsq(A_cf, sig_arr, rcond=None)[0]
 pred_cf = coeffs_cf[0] * cf_arr + coeffs_cf[1]

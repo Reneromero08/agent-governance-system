@@ -249,7 +249,7 @@ def collect_activations(model, tokenizer, texts: List[str]) -> Dict[str, np.ndar
     with torch.no_grad():
         for text in texts:
             inputs = tokenizer(text, return_tensors="pt", truncation=True, max_length=512)
-            inputs = {k: v.to(model.device) for k, v in inputs.items()}
+            inputs = {key: val.to(next(model.parameters()).device) for key, val in inputs.items()}
             model(**inputs)
 
     activations = collector.get_stacked()

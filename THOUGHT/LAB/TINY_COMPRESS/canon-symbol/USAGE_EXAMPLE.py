@@ -12,7 +12,7 @@ from pathlib import Path
 repo_root = Path(__file__).resolve().parent.parent.parent.parent
 sys.path.insert(0, str(repo_root))
 
-from CAPABILITY.PRIMITIVES.symbol_resolver import SymbolResolver
+from symbol_resolver import SymbolResolver
 
 
 def example_1_basic_resolution():

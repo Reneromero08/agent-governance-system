@@ -20,15 +20,13 @@ sentences = [
 # Use sentence-transformers for embeddings
 try:
     from sentence_transformers import SentenceTransformer
-    model = SentenceTransformer('all-MiniLM-L6-v2')  # 384 dims, fast
-    embeddings = model.encode(sentences)
 except ImportError:
-    print("Installing sentence-transformers...")
-    import subprocess
-    subprocess.run(['pip', 'install', 'sentence-transformers', '-q'])
-    from sentence_transformers import SentenceTransformer
-    model = SentenceTransformer('all-MiniLM-L6-v2')
-    embeddings = model.encode(sentences)
+    print("ERROR: sentence-transformers not installed.")
+    print("Install: pip install sentence-transformers")
+    import sys
+    sys.exit(1)
+model = SentenceTransformer('all-MiniLM-L6-v2')  # 384 dims, fast
+embeddings = model.encode(sentences)
 
 print(f"Embedding shape: {embeddings.shape}")
 print(f"Original size per sentence: {embeddings.shape[1] * 4} bytes (float32)")

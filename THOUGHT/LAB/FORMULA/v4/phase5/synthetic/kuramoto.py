@@ -21,7 +21,7 @@ def kuramoto_derivative(t, theta, omega, K):
         dtheta[i] = omega[i] + (K / n) * np.sum(np.sin(theta - theta[i]))
     return dtheta
 
-def run_kuramoto(N, gamma, K, T=200, dt_init=50, seed=42):
+def run_kuramoto(N, gamma, K, T=200, seed=42):
     """Run Kuramoto to equilibrium, return final order parameter r."""
     rng = np.random.RandomState(seed)
     omega = gamma * np.tan(np.pi * (rng.rand(N) - 0.5))  # Lorentzian

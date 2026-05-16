@@ -1,4 +1,4 @@
-# TINY_COMPRESS: Holographic Compression Lab -- Final Report
+# TINY_COMPRESS Lab -- Final Report
 
 **Author**: AGS Research
 **Date**: 2026-05-16

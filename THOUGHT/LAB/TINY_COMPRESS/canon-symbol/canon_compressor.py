@@ -81,7 +81,7 @@ class CanonCompressor:
             hash_short = sha256[:12]  # First 12 chars for symbol
 
             # Relative path from CANON
-            rel_path = str(md_file.relative_to(self.canon_dir))
+            rel_path = md_file.relative_to(self.canon_dir).as_posix()
 
             # Create symbol
             symbol = f"@C:{hash_short}"

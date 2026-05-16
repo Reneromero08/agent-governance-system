@@ -55,7 +55,12 @@ for p, pts in tg.items():
     ts_arr = np.array([x[0] for x in pts])
     ls_arr = np.array([x[1] for x in pts])
     A = np.column_stack([ts_arr, np.ones_like(ts_arr)])
-    sigma_emp[p] = math.exp(float(np.linalg.lstsq(A, ls_arr, rcond=None)[0][0]))
+    coeff = float(np.linalg.lstsq(A, ls_arr, rcond=None)[0][0])
+    if not math.isfinite(coeff) or abs(coeff) > 50:
+        print(f"WARNING: Unstable regression coefficient {coeff:.2f} for p={p}")
+        sigma_emp[p] = None
+    else:
+        sigma_emp[p] = math.exp(coeff)
 
 print("=" * 70)
 print("LISSAJOUS HYPOTHESIS: Phase 1 — Frequency Extraction")
@@ -196,7 +201,10 @@ else:
 
 # Save results
 out = ROOT / "phase1_results.json"
-out.write_text(json.dumps({"freq_data": [{"p": d["p"], "sigma_emp": d["sigma_emp"],
-    "mean_ratio_syn": d.get("mean_ratio", 0), "rationality": d["rationality"]} for d in freq_data if "mean_ratio" in d],
-    "correlation": float(r_p), "r2": float(r2)}, indent=2), encoding="utf-8")
-print(f"\nSaved to {out}")
+try:
+    out.write_text(json.dumps({"freq_data": [{"p": d["p"], "sigma_emp": d["sigma_emp"],
+        "mean_ratio_syn": d.get("mean_ratio", 0), "rationality": d["rationality"]} for d in freq_data if "mean_ratio" in d],
+        "correlation": float(r_p), "r2": float(r2)}, indent=2), encoding="utf-8")
+    print(f"\nSaved to {out}")
+except (OSError, IOError) as e:
+    print(f"ERROR: Failed to save results to {out}: {e}")

@@ -30,6 +30,8 @@ import numpy as np
 from PIL import Image
 import pickle
 from pathlib import Path
+import platform
+import subprocess
 
 
 class HolographicImage:
@@ -72,11 +74,16 @@ class HolographicImage:
         """Render a rectangular region."""
         h, w = y2 - y1, x2 - x1
         region = np.zeros((h, w, 3), dtype=np.uint8)
-
+        ps = self.patch_size
+        patch_cache = {}
         for py in range(y1, y2):
             for px in range(x1, x2):
-                region[py - y1, px - x1] = self.render_pixel(px, py)
-
+                patch_key = (px // ps, py // ps)
+                if patch_key not in patch_cache:
+                    cx = patch_key[0] * ps + ps // 2
+                    cy = patch_key[1] * ps + ps // 2
+                    patch_cache[patch_key] = self.render_pixel(cx, cy)
+                region[py - y1, px - x1] = patch_cache[patch_key]
         return region
 
     def render_full(self, render_k=None):
@@ -178,7 +185,9 @@ class HolographicImage:
 
     @classmethod
     def load(cls, path):
-        """Load from .holo format."""
+        """Load from .holo format.
+        WARNING: Uses pickle. Only load .holo files from trusted sources.
+        """
         with open(path, 'rb') as f:
             data = pickle.load(f)
         return cls(
@@ -324,8 +333,15 @@ def view_cmd(args):
         tmp = Path(args.input).with_suffix('.rendered.png')
         Image.fromarray(img).save(tmp)
         print(f"Rendered to: {tmp}")
-        import os
-        os.startfile(str(tmp))
+        import platform
+        import subprocess
+        if platform.system() == 'Windows':
+            import os
+            os.startfile(str(tmp))
+        elif platform.system() == 'Darwin':
+            subprocess.run(['open', str(tmp)])
+        else:
+            subprocess.run(['xdg-open', str(tmp)])
         return
 
     holo = HolographicImage.load(args.input)

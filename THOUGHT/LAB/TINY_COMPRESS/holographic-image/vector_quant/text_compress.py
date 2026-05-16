@@ -3,6 +3,7 @@ Direct text compression using Df formula
 No embeddings, just bytes → compressed bytes
 """
 import numpy as np
+from projector import HolographicProjector
 
 # 10 sentences as raw text
 texts = [
@@ -29,15 +30,12 @@ print(f"Matrix shape: {byte_matrix.shape}")
 original_bytes = sum(len(t) for t in texts)
 print(f"Total raw bytes: {original_bytes}")
 
-# Df formula
-def participation_ratio(X):
-    centered = X - X.mean(axis=0)
-    cov = np.cov(centered.T)
-    eigenvalues = np.linalg.eigvalsh(cov)
-    eigenvalues = eigenvalues[eigenvalues > 1e-10]
-    return (eigenvalues.sum() ** 2) / (eigenvalues ** 2).sum()
-
-Df = participation_ratio(byte_matrix)
+# Df formula using HolographicProjector
+proj = HolographicProjector()
+centered = byte_matrix - byte_matrix.mean(axis=0)
+cov = np.cov(centered.T)
+eigenvalues = np.linalg.eigvalsh(cov)
+Df = proj.participation_ratio(eigenvalues)
 print(f"\nDf = {Df:.1f}")
 
 # SVD compress

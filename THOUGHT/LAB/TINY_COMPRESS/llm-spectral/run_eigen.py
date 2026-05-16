@@ -16,11 +16,17 @@ from pathlib import Path
 
 # Add eigen-alignment to path
 EIGEN_PATH = Path(__file__).parent.parent / "VECTOR_ELO" / "eigen-alignment"
+if not EIGEN_PATH.exists():
+    print(f"ERROR: eigen-alignment path not found: {EIGEN_PATH}", file=sys.stderr)
+    sys.exit(1)
 sys.path.insert(0, str(EIGEN_PATH))
 
 # Import the lib module properly
 import importlib.util
 spec = importlib.util.spec_from_file_location("lib", EIGEN_PATH / "lib" / "__init__.py")
+if spec is None or spec.loader is None:
+    print(f"ERROR: Could not load lib module from {EIGEN_PATH / 'lib' / '__init__.py'}", file=sys.stderr)
+    sys.exit(1)
 lib = importlib.util.module_from_spec(spec)
 sys.modules['lib'] = lib
 spec.loader.exec_module(lib)
@@ -33,7 +39,12 @@ import torch
 def analyze_model(model_name: str):
     """Analyze model spectrum using YOUR math."""
     from transformers import AutoModelForCausalLM, AutoTokenizer
-    from eigen_compress import EigenCompressor, ActivationCompressor
+    try:
+        from eigen_compress import EigenCompressor, ActivationCompressor
+    except ImportError as e:
+        print(f"ERROR: Failed to import eigen_compress: {e}", file=sys.stderr)
+        print("Make sure eigen-alignment is installed or on the Python path.", file=sys.stderr)
+        return
 
     print(f"Loading {model_name}...")
     model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.float32)
@@ -65,7 +76,12 @@ def analyze_model(model_name: str):
 def compress_model(model_name: str, output_dir: str):
     """Compress model using YOUR eigen method."""
     from transformers import AutoModelForCausalLM, AutoTokenizer
-    from eigen_compress import EigenCompressor
+    try:
+        from eigen_compress import EigenCompressor
+    except ImportError as e:
+        print(f"ERROR: Failed to import eigen_compress: {e}", file=sys.stderr)
+        print("Make sure eigen-alignment is installed or on the Python path.", file=sys.stderr)
+        return
 
     print(f"Loading {model_name}...")
     model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.float32)
@@ -97,7 +113,12 @@ def compress_model(model_name: str, output_dir: str):
 def generate_text(model_dir: str, prompt: str):
     """Generate with eigen-compressed model."""
     from transformers import AutoTokenizer
-    from eigen_compress import EigenCompressor, EigenLLM
+    try:
+        from eigen_compress import EigenCompressor, EigenLLM
+    except ImportError as e:
+        print(f"ERROR: Failed to import eigen_compress: {e}", file=sys.stderr)
+        print("Make sure eigen-alignment is installed or on the Python path.", file=sys.stderr)
+        return
 
     model_path = Path(model_dir)
     eigen_path = model_path / "model.eigen"

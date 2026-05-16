@@ -55,6 +55,9 @@ df_scores = {
 # Literal expansions inherit proverb Df (same meaning)
 # Controls: Df = 1 (literal only)
 
+# Locked sigma values from preregistration (PREREGISTRATION_PHASE3B.md)
+locked_sigma = {"P1": 2.10, "P2": 2.00, "P3": 1.80, "P4": 1.88, "P5": 2.44, "P6": 2.43, "P7": 2.44, "P8": 2.00, "P9": 1.78, "P10": 2.50}
+
 # Tokenizer for sigma computation
 print("Computing sigma...", flush=True)
 tokenizer = AutoTokenizer.from_pretrained("google/gemma-4-E4B-it", trust_remote_code=True)
@@ -63,7 +66,7 @@ symbols = []
 for pid, proverb, literal in proverbs:
     tok_p = len(tokenizer.encode(proverb))
     tok_l = len(tokenizer.encode(literal))
-    sigma = round(tok_l / tok_p, 2)
+    sigma = locked_sigma[pid]
     df = df_scores[pid]
     symbols.append({"id": pid, "type": "proverb", "text": proverb, "sigma": sigma, "Df": df,
                     "tokens": tok_p, "literal": literal, "literal_tokens": tok_l})

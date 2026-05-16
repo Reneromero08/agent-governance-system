@@ -8,6 +8,14 @@ This directory stores new research, reports, and roadmaps for user approval.
 
 ---
 
+ - [ ] **[05-16-2026_CODERABBIT_FULL_AUDIT.md](reports/05-16-2026_CODERABBIT_FULL_AUDIT.md)** ⚠️ `698ef3f5...`
+   - **Section:** #report
+   - **Author:** System (via coderabbit-comments skill)
+   - **Priority:** Medium
+   - **Created:** 2026-05-16
+   - **Modified:** 2026-05-16
+   - **Summary:** Full breakdown of 63 CodeRabbit comments across THOUGHT/LAB with severity-sorted triage
+
  - [ ] **[01-05-2026-15-45_PROMPT_PACK_AUDIT_REPORT.md](reports/01-05-2026-15-45_PROMPT_PACK_AUDIT_REPORT.md)** ⚠️ `1bc673e7...`
    - **Section:** #report
    - **Author:** Antigravity

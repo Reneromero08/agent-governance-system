@@ -53,7 +53,9 @@ def build_correlation_matrix(circuit):
             if t.is_logical_observable_id: continue
             dets.append(t.val)
         if len(dets) < 2: continue  # skip independent errors
-        prob = inst.args_copy()[0]
+        args = inst.args_copy()
+        if not args: continue
+        prob = args[0]
         for i in dets:
             if i in det_idx:
                 M[det_idx[i], det_idx[i]] += prob
@@ -61,6 +63,7 @@ def build_correlation_matrix(circuit):
                     if i != j and j in det_idx:
                         M[det_idx[i], det_idx[j]] += prob
     
+    M = (M + M.T) / 2
     return M
 
 def analyze_spectrum(M, label):
@@ -107,6 +110,7 @@ for p_crosstalk_name, p_crosstalk_factor in [("10%", 0.1), ("20%", 0.2)]:
         
         # Save circuit
         circ_path = OUT / "circuits" / f"d{d}_p{p:.4f}_xtalk{p_crosstalk_name}.stim"
+        circ_path.parent.mkdir(parents=True, exist_ok=True)
         circ_path.write_text(str(circuit))
         
         # Correlation matrix

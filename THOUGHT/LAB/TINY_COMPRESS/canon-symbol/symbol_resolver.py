@@ -47,7 +47,7 @@ class SymbolResolver:
             if not self.symbol_table_path.exists():
                 raise FileNotFoundError(
                     f"Symbol table not found at {self.symbol_table_path}. "
-                    "Run: python CAPABILITY/PRIMITIVES/canon_compressor.py --compress"
+                    "Run: python THOUGHT/LAB/TINY_COMPRESS/canon-symbol/canon_compressor.py --compress"
                 )
 
             with open(self.symbol_table_path, 'r', encoding='utf-8') as f:

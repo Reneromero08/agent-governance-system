@@ -39,7 +39,7 @@ def amplitudes_to_classical(amplitudes: np.ndarray, norm: float) -> bytes:
 
 def num_qubits_needed(n_values: int) -> int:
     """Number of qubits to store n values in amplitudes."""
-    return int(np.ceil(np.log2(n_values)))
+    return max(1, int(np.ceil(np.log2(n_values))))
 
 # Test with "word"
 test_word = "word"

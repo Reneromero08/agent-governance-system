@@ -415,7 +415,7 @@ class EigenGPT2(nn.Module):
         from transformers import GPT2Config
 
         path = Path(path)
-        data = torch.load(path / 'model.pt', map_location='cpu')
+        data = torch.load(path / 'model.pt', map_location='cpu', weights_only=True)
 
         config = GPT2Config(**data['config'])
         k = data['k']

@@ -4,13 +4,13 @@
 
 ```bash
 # Compress canon
-python CAPABILITY/PRIMITIVES/canon_compressor.py --compress
+python THOUGHT/LAB/TINY_COMPRESS/canon-symbol/canon_compressor.py --compress
 
 # Resolve symbol to content
-python CAPABILITY/PRIMITIVES/symbol_resolver.py @C:85bc78171225 --path-only
+python THOUGHT/LAB/TINY_COMPRESS/canon-symbol/symbol_resolver.py @C:85bc78171225 --path-only
 
 # Run examples
-python MEMORY/LLM_PACKER/_compressed/USAGE_EXAMPLE.py
+python THOUGHT/LAB/TINY_COMPRESS/canon-symbol/USAGE_EXAMPLE.py
 ```
 
 ## Results
@@ -68,16 +68,16 @@ MEMORY/LLM_PACKER/_compressed/
 ### Example 1: Resolve Symbol to Path
 
 ```bash
-$ python CAPABILITY/PRIMITIVES/symbol_resolver.py @C:85bc78171225 --path-only
-LAW/CANON/CONSTITUTION\FORMULA.md
+$ python THOUGHT/LAB/TINY_COMPRESS/canon-symbol/symbol_resolver.py @C:85bc78171225 --path-only
+LAW/CANON/CONSTITUTION/FORMULA.md
 ```
 
 ### Example 2: Get Metadata
 
 ```bash
-$ python CAPABILITY/PRIMITIVES/symbol_resolver.py @C:85bc78171225 --metadata
+$ python THOUGHT/LAB/TINY_COMPRESS/canon-symbol/symbol_resolver.py @C:85bc78171225 --metadata
 {
-  "path": "LAW/CANON/CONSTITUTION\\FORMULA.md",
+  "path": "LAW/CANON/CONSTITUTION/FORMULA.md",
   "sha256": "85bc78171225c4ffd2ff06bd70df7e05d32e59dc2d6b8ac1c2a1e07f2a1c0e3d",
   "size": 7595
 }
@@ -86,7 +86,7 @@ $ python CAPABILITY/PRIMITIVES/symbol_resolver.py @C:85bc78171225 --metadata
 ### Example 3: Resolve to Full Content (with verification)
 
 ```python
-from CAPABILITY.PRIMITIVES.symbol_resolver import SymbolResolver
+from THOUGHT.LAB.TINY_COMPRESS.canon_symbol.symbol_resolver import SymbolResolver
 
 resolver = SymbolResolver()
 

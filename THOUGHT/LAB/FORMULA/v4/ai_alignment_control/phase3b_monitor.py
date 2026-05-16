@@ -1,5 +1,5 @@
 """Phase 3b monitor — runs in its own terminal window. Shows live progress bar."""
-import json, time, sys
+import json, time, sys, math
 from pathlib import Path
 
 RESULTS = Path(__file__).resolve().parent / "results"

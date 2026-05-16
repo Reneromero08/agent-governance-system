@@ -67,18 +67,17 @@ class VectorCompressor:
         if not self.canon_db.exists():
             raise FileNotFoundError(f"Canon DB not found: {self.canon_db}")
 
-        conn = sqlite3.connect(self.canon_db)
-        cursor = conn.cursor()
+        with sqlite3.connect(self.canon_db) as conn:
+            cursor = conn.cursor()
 
-        cursor.execute("""
-            SELECT embedding, file_path, id
-            FROM canon_records
-            WHERE embedding IS NOT NULL
-            ORDER BY file_path
-        """)
+            cursor.execute("""
+                SELECT embedding, file_path, id
+                FROM canon_records
+                WHERE embedding IS NOT NULL
+                ORDER BY file_path
+            """)
 
-        rows = cursor.fetchall()
-        conn.close()
+            rows = cursor.fetchall()
 
         if not rows:
             raise ValueError("No embeddings found in canon_index.db")
@@ -240,31 +239,28 @@ class VectorCompressor:
 
     def _save_compressed_db(self, compressed: np.ndarray, file_paths: List[str], ids: List[str]):
         """Save compressed embeddings to SQLite"""
-        conn = sqlite3.connect(self.compressed_db)
-        cursor = conn.cursor()
-
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS compressed_vectors (
-                id TEXT PRIMARY KEY,
-                file_path TEXT NOT NULL,
-                embedding BLOB NOT NULL,
-                dimensions INTEGER NOT NULL,
-                original_id TEXT NOT NULL
-            )
-        """)
-
-        # Insert compressed vectors
-        for i, (emb, file_path, original_id) in enumerate(zip(compressed, file_paths, ids)):
-            emb_blob = emb.astype(np.float32).tobytes()
+        with sqlite3.connect(self.compressed_db) as conn:
+            cursor = conn.cursor()
 
             cursor.execute("""
-                INSERT OR REPLACE INTO compressed_vectors
-                (id, file_path, embedding, dimensions, original_id)
-                VALUES (?, ?, ?, ?, ?)
-            """, (f"compressed_{i}", file_path, emb_blob, len(emb), original_id))
+                CREATE TABLE IF NOT EXISTS compressed_vectors (
+                    id TEXT PRIMARY KEY,
+                    file_path TEXT NOT NULL,
+                    embedding BLOB NOT NULL,
+                    dimensions INTEGER NOT NULL,
+                    original_id TEXT NOT NULL
+                )
+            """)
 
-        conn.commit()
-        conn.close()
+            # Insert compressed vectors
+            for i, (emb, file_path, original_id) in enumerate(zip(compressed, file_paths, ids)):
+                emb_blob = emb.astype(np.float32).tobytes()
+
+                cursor.execute("""
+                    INSERT OR REPLACE INTO compressed_vectors
+                    (id, file_path, embedding, dimensions, original_id)
+                    VALUES (?, ?, ?, ?, ?)
+                """, (f"compressed_{i}", file_path, emb_blob, len(emb), original_id))
 
         print(f"\nSaved {len(compressed)} compressed vectors")
 
@@ -293,12 +289,11 @@ class VectorCompressor:
         query_compressed = self.compress_embeddings(query_embedding.reshape(1, -1))[0]
 
         # Load compressed vectors
-        conn = sqlite3.connect(self.compressed_db)
-        cursor = conn.cursor()
+        with sqlite3.connect(self.compressed_db) as conn:
+            cursor = conn.cursor()
 
-        cursor.execute("SELECT file_path, embedding FROM compressed_vectors")
-        rows = cursor.fetchall()
-        conn.close()
+            cursor.execute("SELECT file_path, embedding FROM compressed_vectors")
+            rows = cursor.fetchall()
 
         # Compute similarities
         results = []

@@ -106,7 +106,7 @@ pip install -e ".[dev]"  # From AGS root
 
 ```bash
 # Clone AGS (if not already)
-git clone https://github.com/your-repo/agent-governance-system.git
+git clone https://github.com/anomalyco/agent-governance-system.git
 cd agent-governance-system
 
 # Verify eigen-alignment exists

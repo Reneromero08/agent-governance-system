@@ -245,7 +245,7 @@ class CompressedModelWrapper:
         print(f"Saved projections to {path}")
 
     def load(self, path: Path):
-        """Load learned projections"""
+        """Load learned projections (WARNING: pickle is unsafe - only load from trusted sources)"""
         with open(path, 'rb') as f:
             data = pickle.load(f)
 
@@ -295,7 +295,10 @@ class CompressedModelWrapper:
         original_memory = 2 * n_layers * total_tokens * hidden_dim * 4  # float32
 
         # Compressed KV cache
-        avg_k = np.mean([k for _, _, k in self.projections.values()])
+        if not self.projections:
+            avg_k = hidden_dim
+        else:
+            avg_k = np.mean([k for _, _, k in self.projections.values()])
         compressed_memory = 2 * n_layers * total_tokens * avg_k * 4
 
         stats['original_memory_mb'] = original_memory / (1024 ** 2)

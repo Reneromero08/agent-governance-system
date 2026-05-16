@@ -2,6 +2,7 @@
 Text compression - find data with actual redundancy
 """
 import numpy as np
+from projector import HolographicProjector
 
 # Take a real document with repetition/structure
 document = """
@@ -27,12 +28,13 @@ for i in range(0, len(document) - window_size, 1):
 data = np.array(windows, dtype=np.float32)
 print(f"Windows: {data.shape[0]} × {window_size} bytes")
 
-# Df formula
+# Df formula using HolographicProjector
+proj = HolographicProjector()
 centered = data - data.mean(axis=0)
 cov = np.cov(centered.T)
 eigenvalues = np.linalg.eigvalsh(cov)
 eigenvalues = eigenvalues[eigenvalues > 1e-10]
-Df = (eigenvalues.sum() ** 2) / (eigenvalues ** 2).sum()
+Df = proj.participation_ratio(eigenvalues)
 print(f"\nDf = {Df:.2f}")
 
 # SVD

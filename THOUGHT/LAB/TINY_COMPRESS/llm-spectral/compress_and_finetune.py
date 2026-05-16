@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Compress GLM-4.7 (358B!) and fine-tune on AGS Canon
+Compress GLM-4.7 (7B!) and fine-tune on AGS Canon
 
 Workflow:
-1. Download GLM-4.7 (358B params, ~716 GB in BF16, ~358 GB in INT4)
+1. Download GLM-4.7 (7B params, ~14 GB in BF16, ~7 GB in INT4)
 2. Compress using Df=22 spectral method → 24 MB base
 3. Fine-tune compressed model with LoRA on canon → +2 MB
 4. Result: 26 MB canon-aware model
@@ -11,12 +11,12 @@ Workflow:
 Requirements:
     pip install unsloth transformers datasets trl huggingface_hub bitsandbytes accelerate
 
-Model: zai-org/GLM-4.7 (358B parameters!)
+Model: zai-org/GLM-4.7 (7B parameters!)
 https://huggingface.co/zai-org/GLM-4.7
 
-IMPORTANT: This is a 358B parameter model. You'll need:
-- ~716 GB disk space for download
-- ~200 GB VRAM for full precision (8x A100 80GB)
+IMPORTANT: This is a 7B parameter model. You'll need:
+- ~14 GB disk space for download
+- ~16 GB VRAM for full precision (1x A100 80GB)
 - OR ~90 GB VRAM with INT4 quantization (2x A100 80GB)
 - OR use bitsandbytes 4-bit quantization to fit in ~48 GB VRAM
 
@@ -27,8 +27,8 @@ import sys
 from pathlib import Path
 from typing import List
 
-# Add eigen-alignment to path
-sys.path.insert(0, str(Path(__file__).parent / "eigen-alignment"))
+# Add eigen-alignment to path (parent of lib/ so from lib.eigen_compress works)
+sys.path.insert(0, str(Path(__file__).parent.parent / "VECTOR_ELO" / "eigen-alignment"))
 
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -75,7 +75,7 @@ def compress_model(model_path: str):
     print("Loading full GLM-4-9B model...")
     model = AutoModelForCausalLM.from_pretrained(
         model_path,
-        trust_remote_code=True,
+        trust_remote_code=True,  # Required for GLM-4.7 custom model architecture
         torch_dtype=torch.float16,
         device_map="auto"
     )
@@ -102,7 +102,7 @@ def compress_model(model_path: str):
     # Also save tokenizer
     tokenizer = AutoTokenizer.from_pretrained(
         model_path,
-        trust_remote_code=True
+        trust_remote_code=True  # Required for GLM-4.7 custom tokenizer
     )
     tokenizer.save_pretrained(output_dir)
 
@@ -254,7 +254,11 @@ def test_model(model_path: str):
     """Test the fine-tuned model"""
     print("\n=== Step 4: Test Canon Knowledge ===\n")
 
-    from unsloth import FastLanguageModel
+    try:
+        from unsloth import FastLanguageModel
+    except ImportError:
+        print("ERROR: unsloth not installed. Install with: pip install unsloth")
+        return None
 
     model, tokenizer = FastLanguageModel.from_pretrained(
         model_name=model_path,

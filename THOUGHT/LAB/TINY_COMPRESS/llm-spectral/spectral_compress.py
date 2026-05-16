@@ -150,7 +150,7 @@ class SpectralCompressor:
         total_params = sum(p.numel() for p in model.parameters())
 
         return ModelSpectrum(
-            model_name=model.config._name_or_path if hasattr(model, 'config') else "unknown",
+            model_name=getattr(model.config, '_name_or_path', 'unknown'),
             total_params=total_params,
             total_params_mb=total_params * 4 / (1024 ** 2),  # FP32
             layers=layers,
@@ -228,7 +228,7 @@ class SpectralCompressor:
 
     def load_compressed(self, model_dir: Path) -> Tuple[Dict, ModelSpectrum]:
         """Load compressed model"""
-        weights = torch.load(model_dir / "compressed_weights.pt")
+        weights = torch.load(model_dir / "compressed_weights.pt", weights_only=True)
 
         with open(model_dir / "spectrum.json", 'r') as f:
             data = json.load(f)

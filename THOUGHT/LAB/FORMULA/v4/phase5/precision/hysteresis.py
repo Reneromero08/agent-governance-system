@@ -35,10 +35,12 @@ for K in Ks_forward:
             elapsed = time.perf_counter() - t0
             print(f"  K={K:.2f} r={r:.4f} [{elapsed:.0f}s]", flush=True)
 
+theta_final = theta.copy()
+
 # REVERSE SWEEP
 print("Reverse sweep...", flush=True)
 rev_results = []
-theta = theta_init.copy()  # fresh start from synchronized
+theta = theta_final.copy()  # start from synchronized state
 for K in Ks_reverse:
     for s in range(n_seeds):
         rng2 = np.random.RandomState(100 + s)

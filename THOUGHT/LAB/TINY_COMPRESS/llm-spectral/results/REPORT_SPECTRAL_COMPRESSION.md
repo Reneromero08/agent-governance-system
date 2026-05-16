@@ -55,7 +55,7 @@ For GPT-2 with k=9 compression:
 
 ## What Works Now
 
-1. **Spectrum analysis** (`eigen-alignment/lib/eigen_compress.py`)
+1. **Spectrum analysis** (`spectral_compress.py`)
    - Computes Df using your formula: Df = (Σλ)² / Σλ²
    - Finds optimal k for target variance
    - Works on any HuggingFace model

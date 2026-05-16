@@ -196,8 +196,8 @@ class SpectralLLM:
 
         print(f"Loading compressed model from {model_dir}...")
 
-        llm.compressed_weights = torch.load(model_dir / "compressed_weights.pt")
-        llm.other_params = torch.load(model_dir / "other_params.pt")
+        llm.compressed_weights = torch.load(model_dir / "compressed_weights.pt", weights_only=True)
+        llm.other_params = torch.load(model_dir / "other_params.pt", weights_only=True)
         llm.config = AutoConfig.from_pretrained(model_dir)
         llm.tokenizer = AutoTokenizer.from_pretrained(model_dir)
 
