@@ -51,7 +51,7 @@
 - `THOUGHT/LAB/VECTOR_ELO/research/phase-5/12-29-2025-07-01_SEMIOTIC_COMPRESSION.md` - Full SCL spec
 - `THOUGHT/LAB/VECTOR_ELO/research/phase-5/12-26-2025-06-39_SYMBOLIC_COMPRESSION_BRIEF_1.md` - Token-optimized proposal
 - `LAW/CONTEXT/decisions/ADR-028-semiotic-compression-layer.md` - Architecture decision
-- `THOUGHT/LAB/TINY_COMPRESS/TINY_COMPRESS_ROADMAP.md` - RL compression research
+- `THOUGHT/LAB/TINY_COMPRESS/roadmaps/TINY_COMPRESS_ROADMAP.md` - RL compression research
 
 **Example:**
 ```
@@ -402,7 +402,7 @@ When all layers are receipted, compression claim becomes **fully proven** rather
 ### Implementation
 - `LAW/CANON/SEMANTIC/TOKEN_RECEIPT_SPEC.md` - Token accountability law
 - `THOUGHT/LAB/VECTOR_ELO/PHASE_5_ROADMAP.md` - Implementation roadmap
-- `THOUGHT/LAB/TINY_COMPRESS/TINY_COMPRESS_ROADMAP.md` - RL compression research
+- `THOUGHT/LAB/TINY_COMPRESS/roadmaps/TINY_COMPRESS_ROADMAP.md` - RL compression research
 
 ### Semantic Density Research
 - `THOUGHT/LAB/VECTOR_ELO/research/symbols/12-26-2025_SYMBOLIC_COMPRESSION_BRAINSTORM.md` - **FOUNDATIONAL** Original Kanji/Cuneiform insight

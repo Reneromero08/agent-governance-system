@@ -596,7 +596,7 @@ The infrastructure is being built. The theory is grounded in measured data. The 
 - `♥ Symbolic Compression Brief_1.md` - Original semiotic proposal
 - `symbolic_compression_blog.md` - Chinese ideograph insight
 - `Kimi K2 Symbolic AI.md` - Logographic vs alphabetic tokenization
-- `THOUGHT/LAB/TINY_COMPRESS/TINY_COMPRESS_ROADMAP.md` - RL compression
+- `THOUGHT/LAB/TINY_COMPRESS/roadmaps/TINY_COMPRESS_ROADMAP.md` - RL compression
 
 ### Architecture
 - `THOUGHT/LAB/VECTOR_ELO/research/PHASE_5_ROADMAP.md` - Implementation roadmap

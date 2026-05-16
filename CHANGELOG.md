@@ -6,13 +6,22 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
-## [3.12.1] - 2026-05-13
+## [3.12.2] - 2026-05-16
 
 ### Changed
 
-- `CAPABILITY/PRIMITIVES/cassette_receipt.py`: CRLF to LF normalization
+- `THOUGHT/LAB/TINY_COMPRESS/`: Reorganized by research thread (llm-spectral/,
+  holographic-image/, canon-symbol/, roadmaps/) replacing ambiguous batch-numbered
+  directories. Removed duplicate spectral_compress-01.py. Rewrote README with
+  accurate structure. Added comprehensive FINAL_REPORT.md with code snippets
+  and cross-reference map.
+- `LAW/CANON/POLICY/AGENT_SEARCH_PROTOCOL.md`: Updated TINY_COMPRESS path reference
+- `NAVIGATION/PROOFS/COMPRESSION/COMPRESSION_STACK_ANALYSIS.md`: Updated path references
+- `THOUGHT/LAB/VECTOR_ELO/research/symbols/01-08-2026_COMPRESSION_PARADIGM_SHIFT_FULL_REPORT.md`: Updated path reference
 
 ### Added
+
+- Section READMEs for llm-spectral/, holographic-image/, roadmaps/
 
 - `THOUGHT/LAB/FORMULA/v4/SEMIOTIC_LIGHT_CONE_1_1/`: Imported source documents
 - `THOUGHT/LAB/FORMULA/v4/VALIDATION_ROADMAP.md`: Updated with phase checkboxes

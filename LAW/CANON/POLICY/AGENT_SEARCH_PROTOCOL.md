@@ -55,7 +55,7 @@ tags: ["governance", "agents", "search", "tools"]
 **Example:**
 ```
 Query: "tiny model training with validator reward signal"
-→ Finds: SEMIOTIC_COMPRESSION.md, TINY_COMPRESS_ROADMAP.md
+→ Finds: SEMIOTIC_COMPRESSION.md, roadmaps/TINY_COMPRESS_ROADMAP.md
 ```
 
 ---
