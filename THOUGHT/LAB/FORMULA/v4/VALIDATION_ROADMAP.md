@@ -97,6 +97,20 @@ Goal: Test whether high-compression, high-depth symbols survive noisy transmissi
 - [x] Constant delta across rates confirms R ratio = sigma ratio
 - [x] Third domain validation: formula structure holds in compressive sensing
 
+### Phase 3d: Spin Network RL [x]
+
+- [x] Formula as loss function for 64-spin 2D lattice under Metropolis dynamics
+- [x] Sigma > 1 at all J (0.5-5.0). No threshold crossing.
+- [x] Domain finding: ferromagnetic systems have sigma >= 1 always
+- [x] Threshold crossing is domain-specific (holds for QEC, not for Ising)
+
+### Phase 3e: PINN Semiotic Field Equations [x]
+
+- [x] Tsotchke PINN compiled via WSL (gcc 9.4.0, Make)
+- [x] Semiotic field loss implemented: wave equation + resonance conservation
+- [x] c_sem = sqrt(sigma/grad_S) as semiotic wave speed
+- [x] Compiles and runs with --loss semiotic
+
 ## Phase 4: Cybernetic Truth Monitor [ ]
 
 Goal: Implement `SemioticMonitor`.
