@@ -90,6 +90,13 @@ Goal: Test whether high-compression, high-depth symbols survive noisy transmissi
 - [x] Five flaws: artificial control, misaligned metric, subjective Df, no error-correction channel, small N
 - [ ] Valid Phase 3 requires: error-correction channel, measured Df, recognition metric, N>=30
 
+### Phase 3c: Compressive Sensing [x]
+
+- [x] Hadamard vs random measurement patterns at M/N = 0.01-0.50
+- [x] Hadamard beats random by +4.7 dB (sigma_H/sigma_R ~ 3x)
+- [x] Constant delta across rates confirms R ratio = sigma ratio
+- [x] Third domain validation: formula structure holds in compressive sensing
+
 ## Phase 4: Cybernetic Truth Monitor [ ]
 
 Goal: Implement `SemioticMonitor`.
