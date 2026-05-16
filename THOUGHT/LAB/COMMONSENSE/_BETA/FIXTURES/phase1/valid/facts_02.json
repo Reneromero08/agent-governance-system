@@ -1,0 +1,6 @@
+{
+  "facts": [
+    "domain:jobspec",
+    "job:present"
+  ]
+}

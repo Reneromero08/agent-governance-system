@@ -1,0 +1,28 @@
+{
+  "confidence": 0.9,
+  "id": "LR_TIEBREAK_PRIORITY",
+  "kind": "logic_rule",
+  "rule": {
+    "if_all": [
+      "resolver:choose"
+    ],
+    "then": [
+      {
+        "op": "set",
+        "path": "resolver.tiebreak",
+        "value": [
+          "priority_desc",
+          "confidence_desc",
+          "id_asc"
+        ]
+      }
+    ]
+  },
+  "scope": {
+    "applies_when": [
+      "domain:resolver"
+    ]
+  },
+  "statement": "When multiple entries apply, choose highest priority first, then confidence.",
+  "version": "0.1.0"
+}

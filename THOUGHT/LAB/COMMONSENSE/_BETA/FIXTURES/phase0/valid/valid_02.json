@@ -1,0 +1,21 @@
+{
+  "confidence": 0.65,
+  "id": "CS_PEOPLE_PREFER_LESS_WORK",
+  "kind": "commonsense",
+  "priority": 0,
+  "scope": {
+    "applies_when": [
+      "domain:social"
+    ],
+    "not_when": [
+      "role:athlete_training",
+      "goal:mastery"
+    ]
+  },
+  "statement": "All else equal, people tend to prefer options requiring less effort.",
+  "tags": [
+    "human",
+    "utility"
+  ],
+  "version": "0.1.0"
+}

@@ -1,0 +1,15 @@
+{
+  "confidence": 0.5,
+  "id": "CS_BAD_TAG",
+  "kind": "commonsense",
+  "scope": {
+    "applies_when": [
+      "x"
+    ]
+  },
+  "statement": "x",
+  "tags": [
+    "Bad Tag With Spaces"
+  ],
+  "version": "0.1.0"
+}

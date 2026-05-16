@@ -1,7 +1,7 @@
-"""Deterministic resolver with symbolic fact expansion (Phase 2).
+"""Deterministic resolver with symbolic fact expansion (v2).
 
 Adds:
-  - optional CODEBOOK.json for symbolic handles
+  - CODEBOOK.json with proper symbols section for @-handle expansion
   - expands facts before resolution (translate.expand_facts)
 
 Determinism:
@@ -24,7 +24,7 @@ if str(RESOLVER_DIR) not in sys.path:
 from translate import expand_facts
 
 
-RESOLVER_VERSION = "0.2.0"
+RESOLVER_VERSION = "1.0.0"
 
 
 def load_json(path: Path) -> Any:
@@ -36,8 +36,7 @@ def load_facts(path: Path) -> List[str]:
         obj = load_json(path)
         if isinstance(obj, dict) and "facts" in obj and isinstance(obj["facts"], list):
             return [str(x) for x in obj["facts"]]
-        raise ValueError("facts json must be an object: {\"facts\": [...]}")
-    # text
+        raise ValueError('facts json must be an object: {"facts": [...]}')
     lines = path.read_text(encoding="utf-8").splitlines()
     facts = []
     for line in lines:
@@ -52,11 +51,9 @@ def applies(entry: Dict[str, Any], facts: Set[str]) -> Tuple[bool, str]:
     scope = entry.get("scope") or {}
     applies_when = scope.get("applies_when") or []
     not_when = scope.get("not_when") or []
-    # ALL applies_when required
     for p in applies_when:
         if p not in facts:
             return False, "missing_required_predicate"
-    # ANY veto predicate disables
     for p in not_when:
         if p in facts:
             return False, "veto_predicate"
@@ -81,7 +78,6 @@ def apply_rule_effects(rule: Dict[str, Any], derived: Set[str], emits: List[Any]
             step += 1
             continue
 
-        # derived facts operations
         if path.startswith("facts") or path == "facts":
             if op in ("set", "add"):
                 if isinstance(value, list):

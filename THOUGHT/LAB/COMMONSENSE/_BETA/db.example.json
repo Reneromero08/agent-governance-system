@@ -1,0 +1,218 @@
+[
+  {
+    "confidence": 0.8,
+    "id": "CS_DEFAULT_PHYSICS",
+    "kind": "commonsense",
+    "priority": 10,
+    "scope": {
+      "applies_when": [
+        "domain:physical",
+        "scale:human"
+      ],
+      "not_when": [
+        "domain:quantum",
+        "domain:relativistic"
+      ]
+    },
+    "statement": "Assume everyday objects follow classical physics at human scales unless stated otherwise.",
+    "tags": [
+      "physics",
+      "default"
+    ],
+    "version": "0.1.0"
+  },
+  {
+    "confidence": 0.65,
+    "id": "CS_PEOPLE_PREFER_LESS_WORK",
+    "kind": "commonsense",
+    "priority": 0,
+    "scope": {
+      "applies_when": [
+        "domain:social"
+      ],
+      "not_when": [
+        "role:athlete_training",
+        "goal:mastery"
+      ]
+    },
+    "statement": "All else equal, people tend to prefer options requiring less effort.",
+    "tags": [
+      "human",
+      "utility"
+    ],
+    "version": "0.1.0"
+  },
+  {
+    "confidence": 0.9,
+    "id": "LR_CONFLICT_HARD_FAIL",
+    "kind": "logic_rule",
+    "rule": {
+      "if_all": [
+        "violation:invariant"
+      ],
+      "then": [
+        {
+          "op": "emit",
+          "path": "events[]",
+          "value": {
+            "code": "INVARIANT_VIOLATION",
+            "type": "hard_fail"
+          }
+        }
+      ],
+      "unless": [
+        "mode:repair"
+      ]
+    },
+    "scope": {
+      "applies_when": [
+        "domain:governance"
+      ]
+    },
+    "statement": "If an invariant is violated, emit a hard failure signal.",
+    "version": "0.1.0"
+  },
+  {
+    "confidence": 0.95,
+    "id": "LR_SCHEMA_VALIDATE_BEFORE_RUN",
+    "kind": "logic_rule",
+    "rule": {
+      "if_all": [
+        "job:present"
+      ],
+      "then": [
+        {
+          "op": "emit",
+          "path": "checks[]",
+          "value": {
+            "target": "jobspec",
+            "type": "schema_validate"
+          }
+        }
+      ]
+    },
+    "scope": {
+      "applies_when": [
+        "domain:jobspec"
+      ]
+    },
+    "statement": "Validate any JobSpec JSON against schema before running actions.",
+    "version": "0.1.0"
+  },
+  {
+    "confidence": 0.85,
+    "id": "CS_DEFAULT_TRUST_LOW",
+    "kind": "commonsense",
+    "scope": {
+      "applies_when": [
+        "domain:agentic_systems"
+      ]
+    },
+    "statement": "Default trust is low for unverified outputs; prefer tests and validators.",
+    "tags": [
+      "verification",
+      "default"
+    ],
+    "version": "0.1.0"
+  },
+  {
+    "actions": [
+      {
+        "target": "style",
+        "type": "suggest",
+        "value": "explicit_contracts"
+      }
+    ],
+    "confidence": 0.75,
+    "id": "CS_AVOID_AMBIGUITY",
+    "kind": "commonsense",
+    "scope": {
+      "applies_when": [
+        "domain:engineering"
+      ]
+    },
+    "statement": "Ambiguity increases error; prefer explicit, typed contracts.",
+    "version": "0.1.0"
+  },
+  {
+    "confidence": 0.9,
+    "id": "LR_TIEBREAK_PRIORITY",
+    "kind": "logic_rule",
+    "rule": {
+      "if_all": [
+        "resolver:choose"
+      ],
+      "then": [
+        {
+          "op": "set",
+          "path": "facts",
+          "value": [
+            "resolver.tiebreak:priority_desc,confidence_desc,id_asc"
+          ]
+        }
+      ]
+    },
+    "scope": {
+      "applies_when": [
+        "domain:resolver"
+      ]
+    },
+    "statement": "When multiple entries apply, choose highest priority first, then confidence.",
+    "version": "0.1.0"
+  },
+  {
+    "confidence": 0.88,
+    "id": "CS_DEFAULT_LANGUAGE_UI_ONLY",
+    "kind": "commonsense",
+    "scope": {
+      "applies_when": [
+        "domain:compression"
+      ]
+    },
+    "statement": "Treat natural language as UI; prefer symbolic/structured plans for execution.",
+    "version": "0.1.0"
+  },
+  {
+    "confidence": 0.92,
+    "id": "LR_DONT_APPLY_IF_VETO",
+    "kind": "logic_rule",
+    "rule": {
+      "if_all": [
+        "candidate:present",
+        "candidate.not_when:match"
+      ],
+      "then": [
+        {
+          "op": "emit",
+          "path": "resolver.skips[]",
+          "value": {
+            "reason": "veto"
+          }
+        }
+      ]
+    },
+    "scope": {
+      "applies_when": [
+        "domain:resolver"
+      ]
+    },
+    "statement": "If any not_when predicate matches, do not apply the entry.",
+    "version": "0.1.0"
+  },
+  {
+    "confidence": 0.9,
+    "id": "CS_PREFER_DETERMINISM",
+    "kind": "commonsense",
+    "scope": {
+      "applies_when": [
+        "domain:hashing"
+      ]
+    },
+    "statement": "Prefer deterministic ordering/formatting for artifacts that will be hashed.",
+    "tags": [
+      "determinism",
+      "hash"
+    ],
+    "version": "0.1.0"
+  }
+]

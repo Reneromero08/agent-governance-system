@@ -1,0 +1,117 @@
+{
+  "$id": "https://example.local/schemas/resolution_result.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "properties": {
+    "derived_facts": {
+      "items": {
+        "maxLength": 200,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 2048,
+      "type": "array"
+    },
+    "emits": {
+      "items": {},
+      "maxItems": 512,
+      "type": "array"
+    },
+    "input_facts": {
+      "items": {
+        "maxLength": 200,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 512,
+      "type": "array"
+    },
+    "resolver_version": {
+      "pattern": "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$",
+      "type": "string"
+    },
+    "selected_ids": {
+      "items": {
+        "pattern": "^[A-Z][A-Z0-9_]{2,32}$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "type": "array"
+    },
+    "skipped": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^[A-Z][A-Z0-9_]{2,32}$",
+            "type": "string"
+          },
+          "reason": {
+            "maxLength": 200,
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "reason"
+        ],
+        "type": "object"
+      },
+      "maxItems": 256,
+      "type": "array"
+    },
+    "tiebreak": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 8,
+      "type": "array"
+    },
+    "trace": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "detail": {
+            "type": "object"
+          },
+          "event": {
+            "maxLength": 200,
+            "type": "string"
+          },
+          "id": {
+            "pattern": "^[A-Z][A-Z0-9_]{2,32}$",
+            "type": "string"
+          },
+          "step": {
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "step",
+          "event"
+        ],
+        "type": "object"
+      },
+      "maxItems": 2048,
+      "type": "array"
+    },
+    "expanded_facts": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "unresolved_symbols": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": [
+    "resolver_version",
+    "input_facts",
+    "selected_ids",
+    "derived_facts",
+    "emits"
+  ],
+  "title": "ResolutionResult",
+  "type": "object"
+}

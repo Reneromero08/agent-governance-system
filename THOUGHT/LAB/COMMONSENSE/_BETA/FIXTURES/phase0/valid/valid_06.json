@@ -1,0 +1,19 @@
+{
+  "actions": [
+    {
+      "target": "style",
+      "type": "suggest",
+      "value": "explicit_contracts"
+    }
+  ],
+  "confidence": 0.75,
+  "id": "CS_AVOID_AMBIGUITY",
+  "kind": "commonsense",
+  "scope": {
+    "applies_when": [
+      "domain:engineering"
+    ]
+  },
+  "statement": "Ambiguity increases error; prefer explicit, typed contracts.",
+  "version": "0.1.0"
+}

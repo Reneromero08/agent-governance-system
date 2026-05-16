@@ -1,0 +1,30 @@
+{
+  "actions": [
+    {
+      "target": "assumption",
+      "type": "suggest",
+      "value": "classical_physics"
+    }
+  ],
+  "confidence": 0.8,
+  "id": "CS_DEFAULT_PHYSICS",
+  "kind": "commonsense",
+  "priority": 10,
+  "scope": {
+    "applies_when": [
+      "domain:physical",
+      "scale:human"
+    ],
+    "not_when": [
+      "domain:quantum",
+      "domain:relativistic"
+    ]
+  },
+  "statement": "Assume everyday objects follow classical physics at human scales unless stated otherwise.",
+  "symbolic": "@CS_DEFAULT_PHYSICS",
+  "tags": [
+    "physics",
+    "default"
+  ],
+  "version": "0.1.0"
+}
