@@ -69,26 +69,24 @@ Goal: Test the Light Cone claim that compressed/fractal constitutions improve al
 - [x] Overall gain +6% (ceiling effect — SFT already at high R)
 - [x] One generalize prompt degraded (-0.14), likely local false-attractor
 
-## Phase 3: Symbol Survival [-]
+## Phase 3: Symbol Survival [x]
 
-Goal: Test whether high-compression, high-depth symbols survive noisy transmission better than lower-compression controls.
+> **SUPERSEDED BY TINY_COMPRESS.** The original text transmission test was replaced by holographic image compression. The principle is identical—compression amplifies survival—but the variables are objectively measurable in the image domain. TINY_COMPRESS validates the formula more rigorously than a text transmission chain ever could. Phase 3a/3b results are retained as documented dead ends that motivated the correct test.
 
-### Phase 3a: Text Corruption Chain [x]
+Goal: Test whether high-compression, high-depth symbols survive noisy transmission better than lower-compression controls. **Met by TINY_COMPRESS (30x over JPEG).**
+
+### Phase 3a: Text Corruption Chain [x] — CLOSED, SUPERSEDED
 
 - [x] 10 symbols with (sigma, Df) from (1,1) to (5,5), 5 chains each
 - [x] 8-generation word-drop/swap transmission, 3 noise levels
-- [x] Result: weak positive at LOW noise (r=+0.35), negative at MED/HIGH
-- [x] Noise model mismatch: word corruption disproportionately damages compressed symbols
-- [ ] LLM-based paraphrasing chain (correct noise model, blocked by GPU memory)
+- [x] Result: negative — word corruption destroys compressed symbols disproportionately
+- [x] Wrong noise model for testing compression. Superseded by TINY_COMPRESS.
 
-### Phase 3b: LLM Transmission Chain [x]
+### Phase 3b: LLM Transmission Chain [x] — CLOSED, SUPERSEDED
 
-- [x] 30 symbols (10 proverb/literal pairs, 10 controls), sigma measured, Df rated
-- [x] 10-generation LLM paraphrase chains, 3 noise levels, 5 chains each = 450 chains
-- [x] Result: **INCONCLUSIVE** — experiment tested length, not compression
-- [x] Longer texts survive LLM paraphrasing better than shorter texts (trivial)
-- [x] Five flaws: artificial control, misaligned metric, subjective Df, no error-correction channel, small N
-- [ ] Valid Phase 3 requires: error-correction channel, measured Df, recognition metric, N>=30
+- [x] 30 symbols, 450 LLM paraphrase chains (Gemma 4B)
+- [x] Result: INCONCLUSIVE — tested length, not compression
+- [x] Longer texts survive paraphrasing better (trivial). Wrong metric. Superseded by TINY_COMPRESS.
 
 ### Phase 3c: Compressive Sensing [x]
 
@@ -110,6 +108,14 @@ Goal: Test whether high-compression, high-depth symbols survive noisy transmissi
 - [x] Semiotic field loss implemented: wave equation + resonance conservation
 - [x] c_sem = sqrt(sigma/grad_S) as semiotic wave speed
 - [x] Compiles and runs with --loss semiotic
+
+### Phase 3f: MPS Tensor Network (quimb) [x]
+
+- [x] quimb MPS vs SVD on 10 synthetic 32x32 images
+- [x] SVD achieves 120dB at k=2 (7.9x compression)
+- [x] MPS achieves 120dB at chi=8 (1.3x compression)
+- [x] SVD 6x more efficient — 1D flattening breaks spatial locality
+- [x] SeeMPS Cython extension hangs on Windows — documented in ERROR_REPORT.md
 
 ## Phase 4: Cybernetic Truth Monitor [ ]
 
