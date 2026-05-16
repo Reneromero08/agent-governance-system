@@ -134,7 +134,14 @@ print(f"{'='*60}")
 
 # Load sigma_emp
 def t(d): return (d-1)//2
-sweep_data = json.load(open(ROOT.parent / "qec_precision_sweep" / "v8" / "results" / "v8_depol" / "sweep.json"))
+sweep_path = ROOT.parent / "qec_precision_sweep" / "v8" / "results" / "v8_depol" / "sweep.json"
+try:
+    with open(sweep_path, "r") as f:
+        sweep_data = json.load(f)
+except FileNotFoundError:
+    raise FileNotFoundError(f"Sweep data not found at {sweep_path}")
+except json.JSONDecodeError as e:
+    raise json.JSONDecodeError(f"Failed to parse sweep JSON at {sweep_path}: {e.msg}", e.doc, e.pos)
 g = defaultdict(list)
 for r in sweep_data["conditions"]:
     g[(float(r["physical_error_rate"]), int(r["distance"]))].append(r["log_suppression"])
@@ -176,5 +183,10 @@ for metric_name, metric_key in [("MI", "mutual_info"), ("det", "determinant"),
 
 # Save results
 out_path = OUT / "phase4_results.json"
-out_path.write_text(json.dumps(results, indent=2), encoding="utf-8")
-print(f"\nSaved: {out_path}")
+try:
+    out_path.write_text(json.dumps(results, indent=2), encoding="utf-8")
+    print(f"\nSaved: {out_path}")
+except Exception as e:
+    print(f"ERROR: Failed to save results to {out_path}: {e}", flush=True)
+    import traceback
+    traceback.print_exc()

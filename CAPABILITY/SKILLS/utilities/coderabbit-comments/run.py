@@ -21,11 +21,15 @@ PROJECT_ROOT = Path(__file__).resolve().parents[4]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-try:
-    from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat
-except ImportError:
-    def ensure_canon_compat(skill_dir):
-        return True
+    try:
+        from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat
+    except ImportError:
+        def ensure_canon_compat(skill_dir):
+            raise ImportError(
+                f"ensure_canon_compat not available from CAPABILITY.TOOLS.agents.skill_runtime. "
+                f"Cannot verify canon compatibility for {skill_dir}. "
+                f"Ensure the AGS package is installed and the repository root is on sys.path."
+            )
 
 
 def _find_storage_path(repo_path: Path) -> Optional[Path]:
@@ -139,9 +143,9 @@ def _action_latest(db_path: Path, file_filter: Optional[str] = None) -> Dict[str
 
     completed = [r for r in reviews if r.get("status") == "completed"]
     if not completed:
-        return {"ok": True, "reviews": 0, "latest_review": None}
+        return {"ok": True, "action": "latest", "review_count": 0, "latest_review": None}
 
-    latest = completed[-1]
+    latest = max(completed, key=lambda r: r.get("completedAt") or r.get("endedAt") or r.get("startedAt") or "")
     file_review_map = latest.get("fileReviewMap", {})
 
     all_comments = []
@@ -155,6 +159,7 @@ def _action_latest(db_path: Path, file_filter: Optional[str] = None) -> Dict[str
 
     return {
         "ok": True,
+        "action": "latest",
         "review_count": len(reviews),
         "latest_review": {
             "id": latest.get("id", ""),
@@ -187,6 +192,7 @@ def _action_list(db_path: Path) -> Dict[str, Any]:
 
     return {
         "ok": True,
+        "action": "list",
         "reviews": result,
     }
 
@@ -219,6 +225,7 @@ def _action_all(db_path: Path) -> Dict[str, Any]:
 
     return {
         "ok": True,
+        "action": "all",
         "reviews": completed_actions,
     }
 

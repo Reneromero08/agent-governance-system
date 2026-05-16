@@ -6,6 +6,47 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.12.5] - 2026-05-16
+
+### Fixed
+
+- `CAPABILITY/SKILLS/utilities/coderabbit-comments/run.py`: Added `action` field to
+  all return payloads per ADR-017. Changed `reviews` key to `review_count` for
+  consistency. Replaced list-order `completed[-1]` with timestamp-based `max()` for
+  latest review selection. Changed `ensure_canon_compat` fallback from silent
+  `return True` to `raise ImportError` (fail-closed).
+- `CAPABILITY/SKILLS/utilities/coderabbit-comments/fixtures/basic/expected.json`:
+  Added missing `"action": "latest"` field.
+- `INBOX/`: Renamed `05-16-2026_CODERABBIT_FULL_AUDIT.md` to canonical
+  `05-16-2026-09-38_CODERABBIT_FULL_AUDIT.md` format (MM-DD-YYYY-HH-MM).
+- `THOUGHT/LAB/FORMULA/v4/ai_alignment_control/`: Updated preregistration NOTE to
+  reflect locked sigma usage; added TokenReceipt emission in `transmit()`;
+  added `rp["id"]` validation in monitor id-mapping.
+- `THOUGHT/LAB/FORMULA/v4/lissajous/`: Added error wrapping for `.stim` file writes
+  and `phase4_results.json` writes; replaced silent `except ValueError: pass` with
+  re-raise; separated `logR_freq_data` into own list to prevent KeyErrors from
+  inconsistent dict shapes; replaced `json.load(open(...))` with context manager.
+- `THOUGHT/LAB/FORMULA/v4/phase3/tsotchke_spin/`: Expanded J sweep to include
+  negative values (-5.0 to +5.0); removed `abs()` from sigma formula to allow
+  sigma < 1 for anti-ferromagnetic coupling; removed duplicate MC loop; redirected
+  RESULTS to `LAW/CONTRACTS/_runs/`; updated REPORT.md table to match actual data.
+- `THOUGHT/LAB/FORMULA/v4/phase5/`: Redirected RESULTS to `LAW/CONTRACTS/_runs/`
+  for both hysteresis and kuramoto; wrapped kuramoto experiments in `if __name__`
+  guard.
+- `THOUGHT/LAB/TINY_COMPRESS/canon-symbol/`: Normalized all JSON path values to
+  forward slashes; added backslash normalization in `symbol_resolver.py`; fixed
+  fragile imports in README.md and USAGE_EXAMPLE.py.
+- `THOUGHT/LAB/TINY_COMPRESS/holographic-image/`: Replaced unsafe `pickle` with
+  `np.savez_compressed` in holo.py; fixed `render_region` to cache full patches
+  instead of single pixels; fixed byte clamping to full 0-255 range in text
+  compressors; fixed return type annotation in qubit_compress.py; wrapped
+  SentenceTransformer import in try/except in manifold_text_v2.py.
+- `THOUGHT/LAB/TINY_COMPRESS/llm-spectral/`: Added venv docstring and
+  `ENABLE_TRUST_REMOTE_CODE` config flag; fixed `k` variable shadowing in dict
+  comprehensions; fixed EIGEN_PATH resolution in run_eigen.py.
+
+---
+
 ## [3.12.4] - 2026-05-16
 
 ### Fixed

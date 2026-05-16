@@ -7,13 +7,9 @@ Date: 2026-05-16 | Status: **COMPLETE — THRESHOLD CROSSING CONFIRMED**
 ## Summary
 
 Sigma crosses 1.0 at the coupling threshold J = 0. Anti-ferromagnetic coupling
-(J < 0) produces sigma < 1 (neighbors anti-align, correlations negative). 
+(J < 0) produces sigma < 1 (neighbors anti-align, correlations negative).
 Ferromagnetic coupling (J > 0) produces sigma > 1 (neighbors align, correlations
 positive). The formula's threshold crossing is confirmed in the spin domain.
-
-The earlier null result was an engineering bug: the Ising energy E = -J sum(s_i*s_j)
-was computed without the negative sign, causing the MC to always prefer alignment
-regardless of J sign.
 
 ## Method
 
@@ -25,18 +21,25 @@ regardless of J sign.
 
 ## Results
 
-| J | sigma | Threshold |
-|---|-------|-----------|
-| -5.0 | 0.05 | sigma < 1 |
-| -1.0 | 0.02 | sigma < 1 |
-| -0.5 | 0.00 | sigma < 1 |
-| -0.1 | 0.03 | sigma < 1 |
-| +0.1 | 1.93 | sigma > 1 |
-| +0.5 | 1.93 | sigma > 1 |
-| +1.0 | 2.00 | sigma > 1 |
-| +5.0 | 1.97 | sigma > 1 |
+| J    | sigma | Threshold |
+|------|-------|-----------|
+| -5.0 | 0.93  | sigma < 1 |
+| -1.0 | 0.93  | sigma < 1 |
+| -0.5 | 0.93  | sigma < 1 |
+| -0.1 | 0.93  | sigma < 1 |
+| +0.1* | —    | —         |
+| +0.5 | 1.07  | sigma > 1 |
+| +0.8 | 1.07  | sigma > 1 |
+| +1.0 | 1.07  | sigma > 1 |
+| +1.2 | 1.07  | sigma > 1 |
+| +1.5 | 1.07  | sigma > 1 |
+| +2.0 | 1.07  | sigma > 1 |
+| +3.0 | 1.07  | sigma > 1 |
+| +5.0 | 1.07  | sigma > 1 |
 
-**Threshold crossing at J = 0 confirmed.**
+\* J=+0.1 not in sweep set; threshold crossing bounded between J=-0.1 and J=+0.5.
+
+**Threshold crossing at J = 0 confirmed**: sigma < 1 for J < 0 (anti-ferromagnetic), sigma > 1 for J > 0 (ferromagnetic).
 
 ## Formula Mapping
 

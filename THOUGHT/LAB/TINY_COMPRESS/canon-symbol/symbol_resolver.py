@@ -75,7 +75,8 @@ class SymbolResolver:
             raise KeyError(f"Symbol {symbol} not found in table")
 
         entry = self._symbol_table[symbol]
-        file_path = self.repo_root / entry['path']
+        entry_path = entry['path'].replace('\\', '/')
+        file_path = self.repo_root / entry_path
 
         if not file_path.exists():
             raise FileNotFoundError(f"File not found: {file_path}")

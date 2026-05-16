@@ -131,6 +131,7 @@ print(f"  sigma_emp = {coeffs[0]:.4f} * rationality + {coeffs[1]:.4f}")
 print(f"  R2: {r2:.4f}")
 print(f"  R2 (forced intercept=0): {r2_force0:.4f}")
 
+logR_freq_data = []
 # Phase 2b: Try different frequency definitions
 # What if "frequency" = -log(syndrome_density)? (information-theoretic)
 # What if "frequency" = sqrt(syn)? (our grad_S)
@@ -153,10 +154,9 @@ for p in sorted(sigma_emp):
     if ratios_lr:
         # Rationality of the delta logR (closer to zero = more rational = sigma near 1)
         rat_score = float(np.mean([rationality(abs(d) + 1e-6, alpha=5.0) for d in ratios_lr]))
-        freq_data.append({"logR_rat": True, "rationality": rat_score, "sigma_emp": sigma_emp.get(p, 0),
-                           "p": p})
+        logR_freq_data.append({"p": p, "sigma_emp": sigma_emp.get(p, 0), "rationality": rat_score, "ratios": [], "mean_ratio": 0})
 
-lr_data = [d for d in freq_data if d.get("logR_rat")]
+lr_data = logR_freq_data
 if lr_data:
     lr_rat = np.array([d["rationality"] for d in lr_data])
     lr_sig = np.array([d["sigma_emp"] for d in lr_data])

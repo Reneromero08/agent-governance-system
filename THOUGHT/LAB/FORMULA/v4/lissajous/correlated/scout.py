@@ -35,8 +35,10 @@ def build_correlation_matrix(circuit):
         if inst.type == "error":
             for t in inst.targets_copy():
                 if not t.is_separator:
-                    try: detectors.add(t.val)
-                    except ValueError: pass
+                    try:
+                        detectors.add(t.val)
+                    except ValueError:
+                        raise ValueError(f"Invalid detector target value: t={t} in DEM instruction")
     n = len(detectors)
     if n == 0: return None
     
@@ -110,8 +112,12 @@ for p_crosstalk_name, p_crosstalk_factor in [("10%", 0.1), ("20%", 0.2)]:
         
         # Save circuit
         circ_path = OUT / "circuits" / f"d{d}_p{p:.4f}_xtalk{p_crosstalk_name}.stim"
-        circ_path.parent.mkdir(parents=True, exist_ok=True)
-        circ_path.write_text(str(circuit))
+        try:
+            circ_path.parent.mkdir(parents=True, exist_ok=True)
+            circ_path.write_text(str(circuit))
+        except OSError as e:
+            print(f"ERROR: Failed to write circuit to {circ_path}: {e}", flush=True)
+            raise
         
         # Correlation matrix
         M = build_correlation_matrix(circuit)

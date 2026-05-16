@@ -8,7 +8,7 @@ This directory stores new research, reports, and roadmaps for user approval.
 
 ---
 
- - [ ] **[05-16-2026_CODERABBIT_FULL_AUDIT.md](reports/05-16-2026_CODERABBIT_FULL_AUDIT.md)** ⚠️ `698ef3f5...`
+ - [ ] **[05-16-2026-09-38_CODERABBIT_FULL_AUDIT.md](reports/05-16-2026-09-38_CODERABBIT_FULL_AUDIT.md)** ⚠️ `698ef3f5...`
    - **Section:** #report
    - **Author:** System (via coderabbit-comments skill)
    - **Priority:** Medium

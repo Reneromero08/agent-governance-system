@@ -86,7 +86,10 @@ $ python THOUGHT/LAB/TINY_COMPRESS/canon-symbol/symbol_resolver.py @C:85bc781712
 ### Example 3: Resolve to Full Content (with verification)
 
 ```python
-from THOUGHT.LAB.TINY_COMPRESS.canon_symbol.symbol_resolver import SymbolResolver
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from symbol_resolver import SymbolResolver
 
 resolver = SymbolResolver()
 

@@ -2,7 +2,7 @@
 
 Date: 2026-05-13 | Status: **LOCKED — definitions frozen before execution**
 
-> **NOTE:** The sigma values below were computed by the preregistration author. The experiment code (phase3b_experiment.py) recomputes sigma dynamically from token lengths, producing values that differ from this table. This discrepancy should be resolved by either (a) using these locked values in the experiment or (b) updating this table to reflect the actual computed values.
+> **NOTE:** The sigma values in this table are locked from preregistration. The experiment code (phase3b_experiment.py) uses these locked values directly (`sigma = locked_sigma[pid]`), not dynamically recomputed from token lengths.
 
 ---
 

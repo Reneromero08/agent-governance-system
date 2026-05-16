@@ -2,7 +2,12 @@
 Manifold addressing: 100x compression with universal diffuser
 """
 import numpy as np
-from sentence_transformers import SentenceTransformer
+try:
+    from sentence_transformers import SentenceTransformer
+except ImportError:
+    print("ERROR: sentence-transformers not installed. Install: pip install sentence-transformers")
+    import sys
+    sys.exit(1)
 
 # Larger corpus to train basis (the "diffuser knowledge")
 training_sentences = [

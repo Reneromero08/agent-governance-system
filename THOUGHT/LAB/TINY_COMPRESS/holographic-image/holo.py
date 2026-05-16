@@ -28,7 +28,6 @@ This is Plato's Cave as a file format. The Forms are stored. The shadows are ren
 import argparse
 import numpy as np
 from PIL import Image
-import pickle
 from pathlib import Path
 import platform
 import subprocess
@@ -80,10 +79,10 @@ class HolographicImage:
             for px in range(x1, x2):
                 patch_key = (px // ps, py // ps)
                 if patch_key not in patch_cache:
-                    cx = patch_key[0] * ps + ps // 2
-                    cy = patch_key[1] * ps + ps // 2
-                    patch_cache[patch_key] = self.render_pixel(cx, cy)
-                region[py - y1, px - x1] = patch_cache[patch_key]
+                    patch_cache[patch_key] = self.render_patch(patch_key[1] * self.patches_per_row + patch_key[0])
+                local_x = px - patch_key[0] * ps
+                local_y = py - patch_key[1] * ps
+                region[py - y1, px - x1] = patch_cache[patch_key][local_y, local_x]
         return region
 
     def render_full(self, render_k=None):
@@ -171,31 +170,27 @@ class HolographicImage:
         return np.array(upscaled)
 
     def save(self, path):
-        """Save to .holo format."""
-        data = {
-            'coefficients': self.coefficients.astype(np.float16),
-            'basis': self.basis.astype(np.float16),
-            'mean': self.mean.astype(np.float16),
-            'patch_size': self.patch_size,
-            'image_shape': self.image_shape,
-            'k': self.k
-        }
-        with open(path, 'wb') as f:
-            pickle.dump(data, f)
+        """Save to .holo format using numpy."""
+        np.savez_compressed(
+            path,
+            coefficients=self.coefficients.astype(np.float16),
+            basis=self.basis.astype(np.float16),
+            mean=self.mean.astype(np.float16),
+            patch_size=self.patch_size,
+            image_shape=np.array(self.image_shape),
+            k=self.k
+        )
 
     @classmethod
     def load(cls, path):
-        """Load from .holo format.
-        WARNING: Uses pickle. Only load .holo files from trusted sources.
-        """
-        with open(path, 'rb') as f:
-            data = pickle.load(f)
+        """Load from .holo format using numpy (safe, no pickle)."""
+        data = np.load(path, allow_pickle=False)
         return cls(
             data['coefficients'].astype(np.float32),
             data['basis'].astype(np.float32),
             data['mean'].astype(np.float32),
-            data['patch_size'],
-            data['image_shape']
+            int(data['patch_size']),
+            tuple(data['image_shape'])
         )
 
     @classmethod

@@ -262,7 +262,7 @@ def learn_projectors_from_model(model, tokenizer, texts: List[str], k: int = 9) 
     with torch.no_grad():
         for text in texts[:50]:  # Limit for speed
             inputs = tokenizer(text, return_tensors='pt', truncation=True, max_length=128)
-            inputs = {k: v.to(next(model.parameters()).device) for k, v in inputs.items()}
+            inputs = {key: val.to(next(model.parameters()).device) for key, val in inputs.items()}
             model(**inputs)
 
     # Remove hooks
@@ -417,7 +417,7 @@ def train_projectors(
     with torch.no_grad():
         for text in train_texts:
             inputs = tokenizer(text, return_tensors='pt', truncation=True, max_length=256)
-            inputs = {k: v.to(device) for k, v in inputs.items()}
+            inputs = {key: val.to(device) for key, val in inputs.items()}
             outputs = model(**inputs, output_hidden_states=True)
             # Use last hidden state
             hidden = outputs.last_hidden_state

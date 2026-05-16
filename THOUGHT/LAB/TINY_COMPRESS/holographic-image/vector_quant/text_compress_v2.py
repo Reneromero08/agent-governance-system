@@ -3,6 +3,7 @@ Text compression - find data with actual redundancy
 """
 import numpy as np
 from projector import HolographicProjector
+from sklearn.cluster import MiniBatchKMeans
 
 # Take a real document with repetition/structure
 document = """
@@ -43,7 +44,6 @@ k = max(int(np.ceil(Df)), 1)
 print(f"Using k = {k} components")
 
 # Vector Quantization on projected windows
-from sklearn.cluster import MiniBatchKMeans
 
 # Project to k dimensions
 projected = centered @ Vt[:k].T
@@ -85,5 +85,5 @@ print(f"Max error: {errors.max():.2f}")
 print(f"\n--- Sample Reconstructions ---")
 for i in range(0, 50, 10):
     orig = ''.join(chr(int(c)) for c in data[i])
-    recon = ''.join(chr(max(32, min(126, int(round(c))))) for c in reconstructed[i])
+    recon = ''.join(chr(max(0, min(255, int(round(c))))) for c in reconstructed[i])
     print(f"'{orig}' → '{recon}'")

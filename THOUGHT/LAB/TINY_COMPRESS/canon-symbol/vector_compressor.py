@@ -67,6 +67,8 @@ class VectorCompressor:
         if not self.canon_db.exists():
             raise FileNotFoundError(f"Canon DB not found: {self.canon_db}")
 
+        # Note: MCP does not provide bulk embedding retrieval, so direct
+        # sqlite3 access is used here as a practical exception.
         with sqlite3.connect(self.canon_db) as conn:
             cursor = conn.cursor()
 

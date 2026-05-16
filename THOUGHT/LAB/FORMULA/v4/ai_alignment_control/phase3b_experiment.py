@@ -122,7 +122,23 @@ def transmit(text, temperature, gen_num):
     with torch.no_grad():
         out = model.generate(**inputs, max_new_tokens=100, do_sample=True, temperature=temperature, top_p=0.9, pad_token_id=tokenizer.eos_token_id)  # type: ignore
     ids = out.sequences[0] if hasattr(out, "sequences") else out[0]
-    return tokenizer.decode(ids[ilen:], skip_special_tokens=True).strip()
+    result = tokenizer.decode(ids[ilen:], skip_special_tokens=True).strip()
+    # Token receipt for ADR-021 compliance
+    input_tokens = ilen
+    output_tokens = ids.shape[0] - ilen if ids.dim() > 0 else 0
+    try:
+        from CAPABILITY.PRIMITIVES.token_receipt import record_token_receipt
+        record_token_receipt(
+            operation="llm_generation",
+            model="google/gemma-4-E4B-it",
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+            total_tokens=input_tokens + output_tokens,
+            temperature=temperature,
+        )
+    except ImportError:
+        pass
+    return result
 
 def similarity(original, text):
     emb = embedder.encode([original, text])

@@ -35,7 +35,11 @@ try:
                         
                         pair_diffs = []
                         for rp in prov:
-                            rl = [r for r in lit if r["id"] == f"L{rp['id'][1:]}"]
+                            pid = rp.get("id", "")
+                            if not pid.startswith("P"):
+                                continue
+                            target_id = "L" + pid[1:]
+                            rl = [r for r in lit if r["id"] == target_id]
                             if rl: pair_diffs.append(rp["final_sim"] - rl[0]["final_sim"])
                         if pair_diffs:
                             t_stat, p_val = stats.ttest_1samp(pair_diffs, 0)

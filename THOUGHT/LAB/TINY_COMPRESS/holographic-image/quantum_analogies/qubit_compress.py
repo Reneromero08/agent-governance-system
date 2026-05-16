@@ -10,9 +10,10 @@ Quantum: 32 values encoded in 5 qubits (2^5 = 32 amplitudes)
 BUT: reading requires measurement, which is probabilistic.
 For deterministic readout, need quantum tomography = many measurements.
 """
+from typing import Tuple
 import numpy as np
 
-def classical_to_amplitudes(data: bytes) -> np.ndarray:
+def classical_to_amplitudes(data: bytes) -> Tuple[np.ndarray, float]:
     """
     Encode bytes into quantum amplitudes.
 

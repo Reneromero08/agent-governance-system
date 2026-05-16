@@ -2,7 +2,7 @@
 import numpy as np, json, time
 from pathlib import Path
 
-RESULTS = Path(__file__).resolve().parent / "results"
+RESULTS = Path(__file__).resolve().parent.parent.parent.parent.parent.parent / "LAW" / "CONTRACTS" / "_runs" / "hysteresis"
 RESULTS.mkdir(parents=True, exist_ok=True)
 
 N = 300; gamma = 1.0; dt = 0.03; T = 300; n_seeds = 30

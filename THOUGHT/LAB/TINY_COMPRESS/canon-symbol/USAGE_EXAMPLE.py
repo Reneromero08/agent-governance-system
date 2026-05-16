@@ -8,9 +8,11 @@ Demonstrates how agents can use compressed canon efficiently.
 import sys
 from pathlib import Path
 
-# Add repo to path
-repo_root = Path(__file__).resolve().parent.parent.parent.parent
-sys.path.insert(0, str(repo_root))
+# Add this script's directory to path for importing symbol_resolver
+script_dir = Path(__file__).resolve().parent
+sys.path.insert(0, str(script_dir))
+from pathlib import Path as _Path
+repo_root = _Path(__file__).resolve().parent.parent.parent.parent
 
 from symbol_resolver import SymbolResolver
 

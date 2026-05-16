@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# NOTE: All Python commands MUST be run inside the repository virtual environment (.venv/).
+# Activation: .\.venv\Scripts\Activate.ps1 (Windows PowerShell)
 """
 Compress GLM-4.7 (7B!) and fine-tune on AGS Canon
 
@@ -28,11 +30,18 @@ from pathlib import Path
 from typing import List
 
 # Add eigen-alignment to path (parent of lib/ so from lib.eigen_compress works)
-sys.path.insert(0, str(Path(__file__).parent.parent / "VECTOR_ELO" / "eigen-alignment"))
+try:
+    sys.path.insert(0, str(Path(__file__).parent.parent / "VECTOR_ELO" / "eigen-alignment"))
+except ImportError:
+    pass
 
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from datasets import Dataset
+
+# Security: trust_remote_code allows arbitrary code execution from HuggingFace model repos.
+# Set to True only after reviewing the model's repo code or running in a sandbox.
+ENABLE_TRUST_REMOTE_CODE = False
 
 
 def download_glm4():
@@ -75,7 +84,7 @@ def compress_model(model_path: str):
     print("Loading full GLM-4-9B model...")
     model = AutoModelForCausalLM.from_pretrained(
         model_path,
-        trust_remote_code=True,  # Required for GLM-4.7 custom model architecture
+        trust_remote_code=ENABLE_TRUST_REMOTE_CODE,  # Required for GLM-4.7 custom model architecture
         torch_dtype=torch.float16,
         device_map="auto"
     )
@@ -102,7 +111,7 @@ def compress_model(model_path: str):
     # Also save tokenizer
     tokenizer = AutoTokenizer.from_pretrained(
         model_path,
-        trust_remote_code=True  # Required for GLM-4.7 custom tokenizer
+        trust_remote_code=ENABLE_TRUST_REMOTE_CODE  # Required for GLM-4.7 custom tokenizer
     )
     tokenizer.save_pretrained(output_dir)
 

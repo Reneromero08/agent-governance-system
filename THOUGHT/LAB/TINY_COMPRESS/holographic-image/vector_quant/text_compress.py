@@ -67,7 +67,7 @@ reconstructed = (coefficients @ Vt[:k]) + mean
 errors = []
 for i, t in enumerate(texts):
     recon_bytes = reconstructed[i, :len(t)]
-    recon_chars = ''.join(chr(max(0, min(127, int(round(b))))) for b in recon_bytes)
+    recon_chars = ''.join(chr(max(0, min(255, int(round(b))))) for b in recon_bytes)
     match = sum(a == b for a, b in zip(t, recon_chars)) / len(t)
     errors.append(1 - match)
     print(f"\n[{i}] {match*100:.0f}% match")
