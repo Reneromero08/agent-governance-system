@@ -1,0 +1,14 @@
+{
+  "event_index": 1,
+  "step": 1,
+  "grad_S": 0.8165,
+  "resonance": 1.2247,
+  "consensus_ratio": 0.3333,
+  "failed_output": "2",
+  "clean_consensus": [
+    "2"
+  ],
+  "regenerated": true,
+  "regenerated_output": "Step 1: What year did the Berlin Wall fall? Step 2: How many years after that did the Soviet Union dissolve? Step 3: What is that final year?",
+  "regenerated_verified": false
+}

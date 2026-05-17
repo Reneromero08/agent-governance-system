@@ -1,0 +1,248 @@
+{
+  "phase": "Phase 4b",
+  "date": "2026-05-16",
+  "model": "TraDo-4B-Instruct (mock)",
+  "tests": [
+    {
+      "test": "Node1 passes correct output",
+      "result": "PASS",
+      "details": "verdict=pass, score=1.0"
+    },
+    {
+      "test": "Node1 fails incorrect output",
+      "result": "PASS",
+      "details": "verdict=fail, score=0.0"
+    },
+    {
+      "test": "Node1 abstains on unverifiable prompt",
+      "result": "PASS",
+      "details": "verdict=abstain"
+    },
+    {
+      "test": "Node2 passes with knowledge match",
+      "result": "PASS",
+      "details": "verdict=pass, evidence=KB: capital of burkina faso -> Ouagadougou confirmed; KB: pi"
+    },
+    {
+      "test": "Node2 fails with wrong answer",
+      "result": "PASS",
+      "details": "verdict=fail"
+    },
+    {
+      "test": "Node3 passes consistent reasoning",
+      "result": "PASS",
+      "details": "verdict=pass"
+    },
+    {
+      "test": "Node3 passes adversarial rejection",
+      "result": "PASS",
+      "details": "verdict=pass"
+    },
+    {
+      "test": "Consensus holds when >=2 nodes pass",
+      "result": "PASS",
+      "details": "holds=True, ratio=1.00, grad_S=0.0000"
+    },
+    {
+      "test": "Lattice tolerates 1 node failure (t=2)",
+      "result": "PASS",
+      "details": "holds=True, ratio=0.67"
+    },
+    {
+      "test": "Consensus fails with >=2 node failures",
+      "result": "PASS",
+      "details": "holds=False, ratio=0.33"
+    },
+    {
+      "test": "grad_S = 0 when full consensus",
+      "result": "PASS",
+      "details": "grad_S=0.0"
+    },
+    {
+      "test": "grad_S > 0 when dissonance exists",
+      "result": "PASS",
+      "details": "grad_S=0.8165"
+    },
+    {
+      "test": "R = inf when grad_S = 0 (full consensus)",
+      "result": "PASS",
+      "details": "R=inf"
+    },
+    {
+      "test": "R is finite when grad_S > 0",
+      "result": "PASS",
+      "details": "R=1.2247"
+    },
+    {
+      "test": "Full lattice evaluates all 3 nodes",
+      "result": "PASS",
+      "details": "n_nodes=3"
+    },
+    {
+      "test": "Soft gate records approval event",
+      "result": "PASS",
+      "details": "events=1, step=0"
+    },
+    {
+      "test": "Soft gate stats show approval",
+      "result": "PASS",
+      "details": "n_approvals=1"
+    },
+    {
+      "test": "Hard gate records decoherence event",
+      "result": "PASS",
+      "details": "events=1"
+    },
+    {
+      "test": "Hard gate stores failed output",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "test": "Hard gate stores clean consensus",
+      "result": "PASS",
+      "details": "n_clean=1"
+    },
+    {
+      "test": "Hard gate recovery rate tracks correctly",
+      "result": "PASS",
+      "details": "recovery_rate=1.0"
+    },
+    {
+      "test": "Correction context has 3 messages",
+      "result": "PASS",
+      "details": "n_messages=3"
+    },
+    {
+      "test": "Correction context includes correction message",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "test": "Normal output has moderate Df (not anomalous)",
+      "result": "PASS",
+      "details": "df=31838.03, anomaly=False"
+    },
+    {
+      "test": "Anomalous output detected by Df spike",
+      "result": "PASS",
+      "details": "df=5.59, score=1.00, anomaly=True"
+    },
+    {
+      "test": "Df statistics include anomaly rate",
+      "result": "PASS",
+      "details": "anomaly_rate=0.14"
+    },
+    {
+      "test": "Df anomaly count is correct",
+      "result": "PASS",
+      "details": "count=1"
+    },
+    {
+      "test": "@C symbol compresses content",
+      "result": "PASS",
+      "details": "ratio=489x, original=4400B, compressed=9B"
+    },
+    {
+      "test": "@C symbol resolves to original content",
+      "result": "PASS",
+      "details": "resolved_len=4400"
+    },
+    {
+      "test": "@C symbol returns None for unknown hash",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "test": "@C registry reports compression stats",
+      "result": "PASS",
+      "details": "n_symbols=1"
+    },
+    {
+      "test": "Control loop runs to completion",
+      "result": "PASS",
+      "details": "steps=5"
+    },
+    {
+      "test": "Soft gate fires correctly for correct output",
+      "result": "PASS",
+      "details": "soft=5, hard=0"
+    },
+    {
+      "test": "Hard gate does NOT fire for correct output (good model)",
+      "result": "PASS",
+      "details": "hard=0"
+    },
+    {
+      "test": "Final text passes verification",
+      "result": "PASS",
+      "details": "verified=True"
+    },
+    {
+      "test": "Resonance trajectory is recorded",
+      "result": "PASS",
+      "details": "n_R=5"
+    },
+    {
+      "test": "Df trajectory is recorded",
+      "result": "PASS",
+      "details": "n_Df=5"
+    },
+    {
+      "test": "Control loop runs with failing model",
+      "result": "PASS",
+      "details": "steps=5"
+    },
+    {
+      "test": "Hard gate fires when model produces errors",
+      "result": "PASS",
+      "details": "hard=2"
+    },
+    {
+      "test": "Hard gate recovery rate is tracked",
+      "result": "PASS",
+      "details": "recovery_rate=1.0"
+    },
+    {
+      "test": "Experiment runs all prompts",
+      "result": "PASS",
+      "details": "n_results=3"
+    },
+    {
+      "test": "Aggregated stats computed",
+      "result": "PASS",
+      "details": "n=3"
+    },
+    {
+      "test": "Accuracy computed",
+      "result": "PASS",
+      "details": "acc=1.0"
+    },
+    {
+      "test": "Multi-step verifier works",
+      "result": "PASS",
+      "details": "passed=True, score=1.00"
+    },
+    {
+      "test": "Multi-step verifier detects failure",
+      "result": "PASS",
+      "details": "passed=False, score=0.00"
+    }
+  ],
+  "summary": "45/45 tests passed",
+  "passed": 45,
+  "failed": 0,
+  "total": 45,
+  "architecture_verified": [
+    "t=2 verification lattice (3 nodes)",
+    "Majority vote consensus rule (tolerates 1 failure)",
+    "grad_S = sqrt(dissonance_density) computation",
+    "R = 1/grad_S resonance tracking",
+    "Soft gate (unitary evolution - approve and continue)",
+    "Hard gate (projective measurement - halt, correct, regenerate)",
+    "Context reconstruction for correction",
+    "Df anomaly detection (effective dimensionality spikes)",
+    "@C symbol system (SHA-256 content addressing)",
+    "Full step-level control loop"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "event_index": 3,
+  "step": 4,
+  "grad_S": 0.7071,
+  "resonance": 1.4142,
+  "consensus_ratio": 0.5,
+  "failed_output": "If you have any other questions or concerns, I would be happy to help you with them.",
+  "clean_consensus": [
+    "If you have any other questions or concerns, I would be happy to help you with them."
+  ],
+  "regenerated": true,
+  "regenerated_output": "other questions or concerns, I would be happy to help you.",
+  "regenerated_verified": false
+}
