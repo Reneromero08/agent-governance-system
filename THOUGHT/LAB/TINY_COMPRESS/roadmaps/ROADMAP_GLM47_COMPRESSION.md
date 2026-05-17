@@ -110,7 +110,7 @@ git clone https://github.com/anomalyco/agent-governance-system.git
 cd agent-governance-system
 
 # Verify eigen-alignment exists
-ls THOUGHT/LAB/VECTOR_ELO/eigen-alignment/lib/
+ls THOUGHT/LAB/EIGEN_ALIGNMENT/lib/
 
 # Expected files:
 # - eigen_compress.py

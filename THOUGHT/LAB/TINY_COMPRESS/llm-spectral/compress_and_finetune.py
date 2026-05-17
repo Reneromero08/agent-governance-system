@@ -31,7 +31,7 @@ from typing import List
 
 # Add eigen-alignment to path (parent of lib/ so from lib.eigen_compress works)
 try:
-    sys.path.insert(0, str(Path(__file__).parent.parent / "VECTOR_ELO" / "eigen-alignment"))
+    sys.path.insert(0, str(Path(__file__).parent.parent / "EIGEN_ALIGNMENT"))
 except ImportError:
     pass
 

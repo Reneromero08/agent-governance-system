@@ -48,8 +48,8 @@
 **What it does:** LLM outputs compressed symbolic IR instead of natural language.
 
 **Research Basis:**
-- `THOUGHT/LAB/VECTOR_ELO/research/phase-5/12-29-2025-07-01_SEMIOTIC_COMPRESSION.md` - Full SCL spec
-- `THOUGHT/LAB/VECTOR_ELO/research/phase-5/12-26-2025-06-39_SYMBOLIC_COMPRESSION_BRIEF_1.md` - Token-optimized proposal
+- `THOUGHT/LAB/COMPRESSION/research/phase-5/12-29-2025-07-01_SEMIOTIC_COMPRESSION.md` - Full SCL spec
+- `THOUGHT/LAB/COMPRESSION/research/phase-5/12-26-2025-06-39_SYMBOLIC_COMPRESSION_BRIEF_1.md` - Token-optimized proposal
 - `LAW/CONTEXT/decisions/ADR-028-semiotic-compression-layer.md` - Architecture decision
 - `THOUGHT/LAB/TINY_COMPRESS/roadmaps/TINY_COMPRESS_ROADMAP.md` - RL compression research
 
@@ -257,9 +257,9 @@ The limit isn't token count. The limit is **how much meaning you can pack into a
 4. Receipt: semantic density multiplier becomes measurable
 
 **References:**
-- `THOUGHT/LAB/VECTOR_ELO/research/symbols/12-26-2025_SYMBOLIC_COMPRESSION_BRAINSTORM.md` - Original Kanji/Cuneiform insight
-- `THOUGHT/LAB/VECTOR_ELO/research/symbols/12-28-2025_KIMI_K2_SYMBOLIC_AI.md` - Logographic tokenization research
-- `THOUGHT/LAB/VECTOR_ELO/research/symbols/01-08-2026_COMPRESSION_PARADIGM_SHIFT_FULL_REPORT.md` - Full semantic density report
+- `THOUGHT/LAB/COMPRESSION/research/symbols/12-26-2025_SYMBOLIC_COMPRESSION_BRAINSTORM.md` - Original Kanji/Cuneiform insight
+- `THOUGHT/LAB/COMPRESSION/research/symbols/12-28-2025_KIMI_K2_SYMBOLIC_AI.md` - Logographic tokenization research
+- `THOUGHT/LAB/COMPRESSION/research/symbols/01-08-2026_COMPRESSION_PARADIGM_SHIFT_FULL_REPORT.md` - Full semantic density report
 
 ---
 
@@ -401,20 +401,20 @@ When all layers are receipted, compression claim becomes **fully proven** rather
 
 ### Implementation
 - `LAW/CANON/SEMANTIC/TOKEN_RECEIPT_SPEC.md` - Token accountability law
-- `THOUGHT/LAB/VECTOR_ELO/PHASE_5_ROADMAP.md` - Implementation roadmap
+- `THOUGHT/LAB/COMPRESSION/ROADMAP.md` - Implementation roadmap
 - `THOUGHT/LAB/TINY_COMPRESS/roadmaps/TINY_COMPRESS_ROADMAP.md` - RL compression research
 
 ### Semantic Density Research
-- `THOUGHT/LAB/VECTOR_ELO/research/symbols/12-26-2025_SYMBOLIC_COMPRESSION_BRAINSTORM.md` - **FOUNDATIONAL** Original Kanji/Cuneiform insight
-- `THOUGHT/LAB/VECTOR_ELO/research/symbols/12-26-2025_SYMBOLIC_COMPRESSION_BRIEF.md` - Token-optimized codebook proposal
-- `THOUGHT/LAB/VECTOR_ELO/research/symbols/12-28-2025_KIMI_K2_SYMBOLIC_AI.md` - Logographic vs alphabetic tokenization
-- `THOUGHT/LAB/VECTOR_ELO/research/symbols/01-08-2026_COMPRESSION_PARADIGM_SHIFT_FULL_REPORT.md` - Full 10-part semantic density report
-- `THOUGHT/LAB/VECTOR_ELO/research/symbols/OPUS_9NINES_COMPRESSION_RESEARCH_ELO_REPORT.md` - **EXECUTION** Attack plan + ELO-ranked sources
-- `THOUGHT/LAB/VECTOR_ELO/research/symbols/SYMBOLIC_COMPUTATION_EARLY_FOUNDATIONS.md` - **LITERATURE** VSA, NeuroVSA, LCM, ASG, library learning
+- `THOUGHT/LAB/COMPRESSION/research/symbols/12-26-2025_SYMBOLIC_COMPRESSION_BRAINSTORM.md` - **FOUNDATIONAL** Original Kanji/Cuneiform insight
+- `THOUGHT/LAB/COMPRESSION/research/symbols/12-26-2025_SYMBOLIC_COMPRESSION_BRIEF.md` - Token-optimized codebook proposal
+- `THOUGHT/LAB/COMPRESSION/research/symbols/12-28-2025_KIMI_K2_SYMBOLIC_AI.md` - Logographic vs alphabetic tokenization
+- `THOUGHT/LAB/COMPRESSION/research/symbols/01-08-2026_COMPRESSION_PARADIGM_SHIFT_FULL_REPORT.md` - Full 10-part semantic density report
+- `THOUGHT/LAB/COMPRESSION/research/symbols/OPUS_9NINES_COMPRESSION_RESEARCH_ELO_REPORT.md` - **EXECUTION** Attack plan + ELO-ranked sources
+- `THOUGHT/LAB/COMPRESSION/research/symbols/SYMBOLIC_COMPUTATION_EARLY_FOUNDATIONS.md` - **LITERATURE** VSA, NeuroVSA, LCM, ASG, library learning
 
 ### Theoretical Foundation
 - **Platonic Representation Hypothesis** (arxiv:2405.07987) - As models scale, they converge toward shared semantic representations regardless of tokenizer. Supports cross-model SCL portability.
-- `THOUGHT/LAB/VECTOR_ELO/research/symbols/PLATONIC_COMPRESSION_THESIS.md` - **ONTOLOGY** Truth as attractor, entropy as pull, meaning as territory
+- `THOUGHT/LAB/COMPRESSION/research/symbols/PLATONIC_COMPRESSION_THESIS.md` - **ONTOLOGY** Truth as attractor, entropy as pull, meaning as territory
 
 ### Canon
 - `LAW/CANON/FOUNDATION/THE_SEMIOTIC_FOUNDATION_OF_TRUTH.md` - **FOUNDATION-01** Governing principle for all semantic compression

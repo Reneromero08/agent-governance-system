@@ -20,7 +20,7 @@ Critical Constraint:
 References:
     - Q40: THOUGHT/LAB/FORMULA/research/questions/medium_priority/q40_quantum_error_correction.md
     - Q51: THOUGHT/LAB/FORMULA/research/questions/critical/q51_complex_plane.md
-    - Null Hypothesis: THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/validation/null_hypothesis.py
+    - Null Hypothesis: THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/validation/null_hypothesis.py
 """
 
 __version__ = "0.1.0"

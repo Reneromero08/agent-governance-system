@@ -525,7 +525,7 @@ TINY_COMPRESS is referenced across the AGS ecosystem:
 - **NAVIGATION/PROOFS/RELEASES/v3.9.0/RELEASE_MANIFEST.json**: Lists all TINY_COMPRESS files in v3.9.0 release
 
 ### Cross-lab integration
-- **VECTOR_ELO/eigen-alignment**: Code referenced by `llm-spectral/run_eigen.py` for eigen compression tools
+- **EIGEN_ALIGNMENT**: Code referenced by `llm-spectral/run_eigen.py` for eigen compression tools
 - **FORMULA Living Formula**: The Df formula `R = (E/gradS) x sigma(f)^Df` is the theoretical foundation
 
 ---

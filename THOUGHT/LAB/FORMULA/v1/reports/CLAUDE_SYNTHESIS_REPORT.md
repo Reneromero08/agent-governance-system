@@ -827,7 +827,7 @@ When the cost of lying exceeds the cost of truth, reality wins.
 | Living Formula | LAW/CANON/CONSTITUTION/FORMULA.md |
 | Semiotic Axioms | THOUGHT/LAB/FORMULA/research/THE_SEMIOTIC_AXIOMS.md |
 | Research Questions | THOUGHT/LAB/FORMULA/research/questions/ |
-| Eigen-Alignment | THOUGHT/LAB/VECTOR_ELO/eigen-alignment/ |
+| Eigen-Alignment | THOUGHT/LAB/EIGEN_ALIGNMENT/ |
 | Cassette Network | NAVIGATION/CORTEX/network/ |
 | CAS | CAPABILITY/CAS/ |
 | SPECTRUM | SPECTRUM/ artifacts |

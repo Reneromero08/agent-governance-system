@@ -420,7 +420,7 @@ except CassetteOfflineError:
 - [AGS_ROADMAP_MASTER.md](../../AGS_ROADMAP_MASTER.md) - Phase 6
 
 **Upstream Dependencies (Phase 5):**
-- [PHASE_5_ROADMAP.md](../VECTOR_ELO/PHASE_5_ROADMAP.md) - MemoryRecord contract, compression stack
-- [VECTOR_ELO_ROADMAP.md](../VECTOR_ELO/VECTOR_ELO_ROADMAP.md) - ELO scoring
+- [PHASE_5_ROADMAP.md](../COMPRESSION/ROADMAP.md) - MemoryRecord contract, compression stack
+- [ROADMAP.md](../VECTOR_ELO/ROADMAP.md) - ELO scoring
 - [memory_record.schema.json](../../LAW/SCHEMAS/memory_record.schema.json) - Schema
 - [memory_record.py](../../CAPABILITY/PRIMITIVES/memory_record.py) - Implementation

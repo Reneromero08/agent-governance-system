@@ -151,8 +151,8 @@ Goal: make the field claim survive **time**, **interventions**, and **independen
 #### 4.0 QGT/QGTL integration (geometry instrumentation)
 - [x] Integrate QGTL as an optional geometry backend:
   - Source + built libs are vendored into this worktree under:
-    - `THOUGHT/LAB/VECTOR_ELO/eigen-alignment/_from_wt-eigen-alignment/qgt_lib/`
-    - `THOUGHT/LAB/VECTOR_ELO/eigen-alignment/_from_wt-eigen-alignment/qgt_lib_built/lib/`
+    - `THOUGHT/LAB/EIGEN_ALIGNMENT/_from_wt-eigen-alignment/qgt_lib/`
+    - `THOUGHT/LAB/EIGEN_ALIGNMENT/_from_wt-eigen-alignment/qgt_lib_built/lib/`
 - [x] Define the embedding → state map used for geometry:
   - baseline: normalized embeddings as projective points (gauge-fixed)
   - if Berry/holonomy is used: explicitly define the complex/gauge structure (avoid "0 by construction")

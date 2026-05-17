@@ -264,7 +264,7 @@ This is not just compression. It's proof that **meaning has structure**, and tha
 
 ## References
 
-- `THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/` - QGT implementation
+- `THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/` - QGT implementation
 - `THOUGHT/LAB/FORMULA/research/questions/reports/CLAUDE_SYNTHESIS_REPORT.md` - Full system synthesis
 - `LAW/CANON/CONSTITUTION/FORMULA.md` - The Living Formula
 

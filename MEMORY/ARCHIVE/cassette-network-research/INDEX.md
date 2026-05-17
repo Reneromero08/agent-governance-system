@@ -90,8 +90,8 @@ ESAP (Eigen-Spectrum Alignment Protocol) enables cross-model semantic alignment 
 |------|----------|-------------|
 | [esap_cassette.py](../../../NAVIGATION/CORTEX/network/esap_cassette.py) | NAVIGATION/CORTEX/network/ | ESAP mixin for cassettes |
 | [esap_hub.py](../../../NAVIGATION/CORTEX/network/esap_hub.py) | NAVIGATION/CORTEX/network/ | ESAP-enabled network hub |
-| [UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS](../../VECTOR_ELO/research/vector-substrate/01-08-2026_UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS.md) | VECTOR_ELO/research/ | **VALIDATED** (r=0.99+) |
-| [PROTOCOL_SPEC.md](../../VECTOR_ELO/eigen-alignment/PROTOCOL_SPEC.md) | VECTOR_ELO/eigen-alignment/ | Full ESAP specification |
+| [UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS](../../COMPRESSION/research/vector-substrate/01-08-2026_UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS.md) | COMPRESSION/research/ | **VALIDATED** (r=0.99+) |
+| [PROTOCOL_SPEC.md](../../EIGEN_ALIGNMENT/PROTOCOL_SPEC.md) | EIGEN_ALIGNMENT/ | Full ESAP specification |
 
 ---
 
@@ -100,4 +100,4 @@ ESAP (Eigen-Spectrum Alignment Protocol) enables cross-model semantic alignment 
 - [CASSETTE_NETWORK_ROADMAP.md](../CASSETTE_NETWORK_ROADMAP.md) - Consolidated master roadmap
 - [CASSETTE_NETWORK_SPEC.md](../CASSETTE_NETWORK_SPEC.md) - Architecture specification
 - [AGS_ROADMAP_MASTER.md](../../../AGS_ROADMAP_MASTER.md) - Phase 6 integration
-- [eigen-alignment/](../../VECTOR_ELO/eigen-alignment/) - Full ESAP library implementation
+- [eigen-alignment/](../../EIGEN_ALIGNMENT/) - Full ESAP library implementation

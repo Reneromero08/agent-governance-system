@@ -267,7 +267,7 @@ packet = SVTPPacket.from_bytes(data)
 
 - AlignmentKey: `CAPABILITY/PRIMITIVES/alignment_key.py`
 - Vector Packet: `CAPABILITY/PRIMITIVES/vector_packet.py`
-- Cross-Model Breakthrough: `THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/CROSS_MODEL_BREAKTHROUGH.md`
+- Cross-Model Breakthrough: `THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/CROSS_MODEL_BREAKTHROUGH.md`
 
 ---
 

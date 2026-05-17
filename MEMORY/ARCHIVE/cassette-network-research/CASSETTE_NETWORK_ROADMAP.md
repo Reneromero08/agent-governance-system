@@ -416,8 +416,8 @@ CREATE TABLE sessions (
 ESAP (Eigen-Spectrum Alignment Protocol) enables cross-model semantic alignment via eigenvalue spectrum invariance (r=0.99+). This allows cassettes using different embedding models to verify alignment before cross-querying.
 
 **Upstream Research (VALIDATED):**
-- [01-08-2026_UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS.md](../VECTOR_ELO/research/vector-substrate/01-08-2026_UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS.md) - r=0.99+ correlation proven
-- [PROTOCOL_SPEC.md](../VECTOR_ELO/eigen-alignment/PROTOCOL_SPEC.md) - Full ESAP specification
+- [01-08-2026_UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS.md](../COMPRESSION/research/vector-substrate/01-08-2026_UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS.md) - r=0.99+ correlation proven
+- [PROTOCOL_SPEC.md](../EIGEN_ALIGNMENT/PROTOCOL_SPEC.md) - Full ESAP specification
 
 **Theoretical Foundation:**
 - [Q35: Markov Blankets](../FORMULA/research/questions/high_priority/q35_markov_blankets.md) - R-gating = blanket maintenance
@@ -810,7 +810,7 @@ Previous benchmarks had critical validity issues:
 - [esap_cassette.py](NAVIGATION/CORTEX/network/esap_cassette.py) - ESAP mixin for cassettes
 - [esap_hub.py](NAVIGATION/CORTEX/network/esap_hub.py) - ESAP-enabled network hub
 - [test_esap_integration.py](NAVIGATION/CORTEX/network/test_esap_integration.py) - Integration tests
-- [eigen-alignment/](../VECTOR_ELO/eigen-alignment/) - Full ESAP library (MDS, Procrustes, schemas)
+- [eigen-alignment/](../EIGEN_ALIGNMENT/) - Full ESAP library (MDS, Procrustes, schemas)
 
 **Cassette Implementations:**
 - [governance_cassette.py](NAVIGATION/CORTEX/network/cassettes/governance_cassette.py)
@@ -855,7 +855,7 @@ Baseline:              622,480,000 tokens
 Final:                 99.9998% (6 nines)
 ```
 
-**Source:** [PHASE_5_ROADMAP.md](../VECTOR_ELO/PHASE_5_ROADMAP.md) Appendix: Compression Stack Analysis
+**Source:** [PHASE_5_ROADMAP.md](../COMPRESSION/ROADMAP.md) Appendix: Compression Stack Analysis
 
 ---
 
@@ -982,8 +982,8 @@ The **eigenvalue spectrum** of an anchor word distance matrix is invariant acros
 - arXiv:2505.12540 - vec2vec (neural approach)
 
 **Proof Documents:**
-- [01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md](../VECTOR_ELO/research/cassette-network/01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md)
-- [OPUS_EIGEN_SPECTRUM_ALIGNMENT_PROTOCOL_PACK.md](../VECTOR_ELO/research/cassette-network/OPUS_EIGEN_SPECTRUM_ALIGNMENT_PROTOCOL_PACK.md)
+- [01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md](../COMPRESSION/research/cassette-network/01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md)
+- [OPUS_EIGEN_SPECTRUM_ALIGNMENT_PROTOCOL_PACK.md](../COMPRESSION/research/cassette-network/OPUS_EIGEN_SPECTRUM_ALIGNMENT_PROTOCOL_PACK.md)
 
 ---
 
@@ -1020,22 +1020,22 @@ When all parties share complete semantic context, communication approaches telep
 - [research/](research/) - Implementation reports and research findings
 
 **Upstream Dependencies:**
-- [PHASE_5_ROADMAP.md](../VECTOR_ELO/PHASE_5_ROADMAP.md) - MemoryRecord, SPC, compression stack
-- [VECTOR_ELO_ROADMAP.md](../VECTOR_ELO/VECTOR_ELO_ROADMAP.md) - ELO scoring (stored in cassettes)
+- [PHASE_5_ROADMAP.md](../COMPRESSION/ROADMAP.md) - MemoryRecord, SPC, compression stack
+- [ROADMAP.md](../VECTOR_ELO/ROADMAP.md) - ELO scoring (stored in cassettes)
 - [AGS_ROADMAP_MASTER.md](../../AGS_ROADMAP_MASTER.md) - Phase 6 master plan
 
 **Foundational Research:**
-- [PLATONIC_COMPRESSION_THESIS.md](../VECTOR_ELO/research/symbols/PLATONIC_COMPRESSION_THESIS.md) - Ontological foundation
-- [01-08-2026_COMPRESSION_PARADIGM_SHIFT_FULL_REPORT.md](../VECTOR_ELO/research/symbols/01-08-2026_COMPRESSION_PARADIGM_SHIFT_FULL_REPORT.md) - Semantic Density Horizon
-- [OPUS_SPC_RESEARCH_CLAIM_EXECUTION_PACK.md](../VECTOR_ELO/research/symbols/OPUS_SPC_RESEARCH_CLAIM_EXECUTION_PACK.md) - SPC formalization
-- [SYMBOLIC_COMPUTATION_EARLY_FOUNDATIONS.md](../VECTOR_ELO/research/symbols/SYMBOLIC_COMPUTATION_EARLY_FOUNDATIONS.md) - VSA, LCM, ASG literature
+- [PLATONIC_COMPRESSION_THESIS.md](../COMPRESSION/research/symbols/PLATONIC_COMPRESSION_THESIS.md) - Ontological foundation
+- [01-08-2026_COMPRESSION_PARADIGM_SHIFT_FULL_REPORT.md](../COMPRESSION/research/symbols/01-08-2026_COMPRESSION_PARADIGM_SHIFT_FULL_REPORT.md) - Semantic Density Horizon
+- [OPUS_SPC_RESEARCH_CLAIM_EXECUTION_PACK.md](../COMPRESSION/research/symbols/OPUS_SPC_RESEARCH_CLAIM_EXECUTION_PACK.md) - SPC formalization
+- [SYMBOLIC_COMPUTATION_EARLY_FOUNDATIONS.md](../COMPRESSION/research/symbols/SYMBOLIC_COMPUTATION_EARLY_FOUNDATIONS.md) - VSA, LCM, ASG literature
 
 **ESAP (Cross-Model Alignment) Research:**
-- [01-08-2026_UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS.md](../VECTOR_ELO/research/vector-substrate/01-08-2026_UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS.md) - **VALIDATED** (r=0.99+)
-- [01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md](../VECTOR_ELO/research/vector-substrate/01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md) - Empirical proof
-- [OPUS_EIGEN_SPECTRUM_ALIGNMENT_PROTOCOL_PACK.md](../VECTOR_ELO/research/vector-substrate/OPUS_EIGEN_SPECTRUM_ALIGNMENT_PROTOCOL_PACK.md) - Execution pack
-- [eigen-alignment/PROTOCOL_SPEC.md](../VECTOR_ELO/eigen-alignment/PROTOCOL_SPEC.md) - Full protocol specification
-- [eigen-alignment/README.md](../VECTOR_ELO/eigen-alignment/README.md) - Implementation guide
+- [01-08-2026_UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS.md](../COMPRESSION/research/vector-substrate/01-08-2026_UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS.md) - **VALIDATED** (r=0.99+)
+- [01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md](../COMPRESSION/research/vector-substrate/01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md) - Empirical proof
+- [OPUS_EIGEN_SPECTRUM_ALIGNMENT_PROTOCOL_PACK.md](../COMPRESSION/research/vector-substrate/OPUS_EIGEN_SPECTRUM_ALIGNMENT_PROTOCOL_PACK.md) - Execution pack
+- [eigen-alignment/PROTOCOL_SPEC.md](../EIGEN_ALIGNMENT/PROTOCOL_SPEC.md) - Full protocol specification
+- [eigen-alignment/README.md](../EIGEN_ALIGNMENT/README.md) - Implementation guide
 
 ---
 

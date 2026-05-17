@@ -182,7 +182,7 @@ RECEIPT | INVALID (no receipts = no claim)
 
 ## References
 
-- **Research:** `THOUGHT/LAB/VECTOR_ELO/research/symbols/PLATONIC_COMPRESSION_THESIS.md`
+- **Research:** `THOUGHT/LAB/COMPRESSION/research/symbols/PLATONIC_COMPRESSION_THESIS.md`
 - **Proof:** `NAVIGATION/PROOFS/COMPRESSION/COMPRESSION_STACK_ANALYSIS.md`
 - **Theory:** Platonic Representation Hypothesis (arxiv:2405.07987)
 

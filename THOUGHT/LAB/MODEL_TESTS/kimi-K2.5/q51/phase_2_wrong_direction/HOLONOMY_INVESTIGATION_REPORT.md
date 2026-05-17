@@ -34,7 +34,7 @@ result = qgt.holonomy_angle(loop)  # Missing vector!
 ## 2. The Fix
 
 ### Implementation
-Modified `holonomy_angle()` in `THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/qgt.py`:
+Modified `holonomy_angle()` in `THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/qgt.py`:
 
 ```python
 def holonomy_angle(path: np.ndarray, vector: np.ndarray = None) -> float:
@@ -150,7 +150,7 @@ big->small->short->tall       | 6.283   | 0.002     | 0.034
 
 ## 6. Files Modified
 
-1. **QGT Library:** `THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/qgt.py`
+1. **QGT Library:** `THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/qgt.py`
    - Lines 376-425: Modified `holonomy_angle()` to accept optional vector
 
 2. **Validation Tests:** `test_holonomy_validation.py` (new file)

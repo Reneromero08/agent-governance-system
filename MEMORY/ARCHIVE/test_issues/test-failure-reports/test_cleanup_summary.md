@@ -68,7 +68,7 @@ Created `MEMORY/ARCHIVE/deprecated_tests/` with two archived test files:
 
 ### 6. Eigenstructure/Procrustes Status
 
-**Not Replaced Yet** - The vector communication protocol in THOUGHT/LAB/VECTOR_ELO/eigen-alignment/ shows:
+**Not Replaced Yet** - The vector communication protocol in THOUGHT/LAB/EIGEN_ALIGNMENT/ shows:
 - Active development of Procrustes alignment
 - Vector communication protocol documentation
 - Cross-model alignment research ongoing

@@ -43,7 +43,7 @@ The practical implementation dropped the "train a neural net" idea and instead u
 
 **Key insight**: Compression relied on **shared context** (both parties have the canon locally). The symbol is just a pointer. No neural network needed.
 
-## 3. Generalization: CODIFIER.md (`THOUGHT/LAB/VECTOR_ELO/CODIFIER.md`)
+## 3. Generalization: CODIFIER.md (`THOUGHT/LAB/COMPRESSION/CODIFIER.md`)
 
 The symbol compression concept was generalized into a **two-layer symbolic vocabulary**:
 

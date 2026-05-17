@@ -165,9 +165,9 @@ The "Dark Forest" test proved that semantic meaning is **holographically distrib
 
 ### Files
 
-- `THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/dark_forest_test.py`
-- `THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/dark_forest_results.json`
-- `THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/DARK_FOREST_HOLOGRAPHIC_REPORT.md`
+- `THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/dark_forest_test.py`
+- `THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/dark_forest_results.json`
+- `THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/DARK_FOREST_HOLOGRAPHIC_REPORT.md`
 
 **VERDICT: MEANING IS HOLOGRAPHIC**
 

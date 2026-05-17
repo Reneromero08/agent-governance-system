@@ -721,7 +721,7 @@ AGS Phase 8.1-8.2 (Resident Identity)
 - [AGS_ROADMAP_MASTER.md](../../../AGS_ROADMAP_MASTER.md) - Phase 8
 
 **Research:**
-- [PLATONIC_COMPRESSION_THESIS.md](../VECTOR_ELO/research/symbols/PLATONIC_COMPRESSION_THESIS.md)
+- [PLATONIC_COMPRESSION_THESIS.md](../COMPRESSION/research/symbols/PLATONIC_COMPRESSION_THESIS.md)
 - [SPC_SPEC.md](../../../LAW/SPECS/SPC_SPEC.md)
 
 ---

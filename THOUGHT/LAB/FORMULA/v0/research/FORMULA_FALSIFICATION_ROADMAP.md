@@ -297,7 +297,7 @@
 - AGS Formula: `LAW/CONTEXT/decisions/ADR-∞-living-formula.md`
 - Shannon: "A Mathematical Theory of Communication" (1948)
 - Compression Proof: `NAVIGATION/PROOFS/COMPRESSION/SEMANTIC_SYMBOL_PROOF_REPORT.md`
-- Eigenvalue Proof: `THOUGHT/LAB/VECTOR_ELO/research/cassette-network/01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md`
+- Eigenvalue Proof: `THOUGHT/LAB/COMPRESSION/research/cassette-network/01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md`
 
 ---
 

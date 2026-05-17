@@ -82,7 +82,7 @@ All notable changes to Agent Governance System will be documented in this file.
   and cross-reference map.
 - `LAW/CANON/POLICY/AGENT_SEARCH_PROTOCOL.md`: Updated TINY_COMPRESS path reference
 - `NAVIGATION/PROOFS/COMPRESSION/COMPRESSION_STACK_ANALYSIS.md`: Updated path references
-- `THOUGHT/LAB/VECTOR_ELO/research/symbols/01-08-2026_COMPRESSION_PARADIGM_SHIFT_FULL_REPORT.md`: Updated path reference
+- `THOUGHT/LAB/COMPRESSION/research/symbols/01-08-2026_COMPRESSION_PARADIGM_SHIFT_FULL_REPORT.md`: Updated path reference
 
 ### Added
 
@@ -829,7 +829,7 @@ SVTP structures 256D vectors like network packets, enabling structured cross-mod
 
 - `CAPABILITY/PRIMITIVES/SVTP_SPECIFICATION.md` - Protocol specification
 
-- `THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/test_svtp.py` - Protocol tests
+- `THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/test_svtp.py` - Protocol tests
 
 ### Test Results
 
@@ -865,7 +865,7 @@ result = dec_b.decode(packet.vector, candidates)
 By using large anchor sets (777 words) with high dimensionality (k=256), we achieved **100% cross-model accuracy at 50% corruption**.
 
 ### Added
-- **Large Anchor Generator** (`THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/`)
+- **Large Anchor Generator** (`THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/`)
   - `large_anchor_generator.py` - Generate 128-777 word anchor sets from 25 semantic categories
   - 777 unique words covering: concrete nouns, abstract concepts, actions, properties, relations, domains, etc.
 
@@ -902,7 +902,7 @@ For maximum cross-model robustness:
   - `get_anchor_sets()` helper function for anchor set discovery
   - Updated `get_recommended_anchors()` with "cross_model" priority
 
-- **Cross-Model Alignment Analysis** (`THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/`)
+- **Cross-Model Alignment Analysis** (`THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/`)
   - `diagnose_procrustes.py` - Sign correction experiments (rejected hypothesis)
   - `find_stable_anchors.py` - Per-anchor alignment error analysis
   - `cross_model_quick.py` - Quick verification test
@@ -936,7 +936,7 @@ For maximum cross-model robustness:
 - **Cross-Model Validation** - Tested on nomic-embed-v1.5, all-MiniLM-L6-v2, all-mpnet-base-v2
 
 ### Research Receipts
-- `THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/`
+- `THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/`
   - `vector communication_3.txt` - Initial LLM bridge architecture design
   - `vector communication_4.txt` - Anchor stability analysis results
   - `vector communication_5.txt` - Final cross-model validation outputs
@@ -983,7 +983,7 @@ The holographic property is proven with publication-quality evidence. Boundary o
   - `CAPABILITY/PRIMITIVES/procrustes.py` - Orthogonal Procrustes alignment + Gower's out-of-sample projection
   - `CAPABILITY/PRIMITIVES/tests/test_alignment_key.py` - Full test suite (7 tests)
 
-- **Vector Communication Research** (`THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/`)
+- **Vector Communication Research** (`THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/`)
   - `vector_channel.py` - VectorChannel implementation for cross-model communication
   - `demo_cross_model_communication.py` - Working demonstration (MiniLM <-> MPNet)
   - `test_vector_communication.py` - Comprehensive validation suite (6 tests)
@@ -1307,7 +1307,7 @@ See `THOUGHT/LAB/CASSETTE_NETWORK/CHANGELOG.md` for full cassette network cleanu
   - **Receipts:** Hash verification in all test suites
   - **Reports:** Normative specs + PAPER_SPC.md research skeleton
   - **Coverage:** All 14 subphases (5.1.1-5.1.5, 5.2.1-5.2.7, 5.3.1-5.3.6) complete
-  - See `THOUGHT/LAB/VECTOR_ELO/PHASE_5_ROADMAP.md` for detailed DoD matrix
+  - See `THOUGHT/LAB/COMPRESSION/ROADMAP.md` for detailed DoD matrix
 
 ### Changed
 - **PHASE_5_ROADMAP.md** → v1.14.0 — Global DoD verified complete, all checkboxes marked ✅

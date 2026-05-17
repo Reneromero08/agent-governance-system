@@ -11,7 +11,7 @@ SVTP provides cross-model vector communication with:
 - Cross-model alignment via alignment keys
 - Corruption detection
 
-Original tests from: THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/tests/
+Original tests from: THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/tests/
 Promoted to production: 2026-02-01
 """
 

@@ -212,7 +212,7 @@ Our experiment shows this structure is NOT in:
 | File | Purpose |
 |------|---------|
 | `THOUGHT/LAB/FORMULA/experiments/open_questions/q51/test_q51_phase_arithmetic.py` | Phase arithmetic validation |
-| `THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/qgt_phase.py` | Phase recovery library |
+| `THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/qgt_phase.py` | Phase recovery library |
 | `THOUGHT/LAB/FORMULA/experiments/open_questions/q51/q51_test_harness.py` | Test infrastructure |
 
 ---

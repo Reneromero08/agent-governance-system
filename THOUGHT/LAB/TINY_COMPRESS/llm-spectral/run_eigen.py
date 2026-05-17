@@ -15,7 +15,7 @@ import sys
 from pathlib import Path
 
 # Add eigen-alignment to path
-EIGEN_PATH = Path(__file__).resolve().parents[3] / "VECTOR_ELO" / "eigen-alignment"
+EIGEN_PATH = Path(__file__).resolve().parents[3] / "EIGEN_ALIGNMENT"
 if not EIGEN_PATH.exists():
     print(f"ERROR: eigen-alignment path not found: {EIGEN_PATH}", file=sys.stderr)
     sys.exit(1)

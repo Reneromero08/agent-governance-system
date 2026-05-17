@@ -19520,22 +19520,22 @@
       "size": 43208
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/CODIFIER.md",
+      "path": "THOUGHT/LAB/COMPRESSION/CODIFIER.md",
       "sha256": "316394fb67e9b5265104299647a923253212918bf263b238ea522bee24dcc8be",
       "size": 7153
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/PHASE_5_ROADMAP.md",
+      "path": "THOUGHT/LAB/COMPRESSION/ROADMAP.md",
       "sha256": "106b629ad60c858b24433144dd236c2121d04e979a3670d427d3cce6e133e511",
       "size": 23461
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/PHASE_5_ROADMAP_DEPENDENCIES.md",
+      "path": "THOUGHT/LAB/COMPRESSION/DEPENDENCIES.md",
       "sha256": "2c171c79f11f93eff1ea73ba24758821b240aafdb3fbe8781e4748aed7e08a34",
       "size": 3610
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/PHASE_5_ROADMAP_DONE.md",
+      "path": "THOUGHT/LAB/COMPRESSION/PHASE_5_DONE.md",
       "sha256": "10199655063e467e4da2bc8a95f18dfb5699b85e2fe4d2d01b301cc06e21199d",
       "size": 19526
     },
@@ -19545,647 +19545,647 @@
       "size": 10122
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/PHASE_5_ROADMAP_E.X.md",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/PHASE_5_ROADMAP_E.X.md",
       "sha256": "a8395c8b6cad795a87481eb1326dd23c71697c93c80113a773f343e79090c8b6",
       "size": 38045
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/PROTOCOL_SPEC.md",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/PROTOCOL_SPEC.md",
       "sha256": "7f780368a8028e577f38cd4016a6408b7a9540d7cd8043caeb15c22fc0611445",
       "size": 7775
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/README.md",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/README.md",
       "sha256": "5b89f958aa7d508cf732d4cf481b6a5a749fcbb6cefb51a3556d6ea5159204fd",
       "size": 4179
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/__init__.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/__init__.py",
       "sha256": "b69a480e51b89044e7a33e99669f02ae16090424491e58ea178b52ed50d957ef",
       "size": 748
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/__main__.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/__main__.py",
       "sha256": "b5500a2a80c1e97070108c2dc3c1ad1b3d5257dd5849f4a610d84b07631dbfee",
       "size": 274
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/anchor_sets/anchors_16.txt",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/anchor_sets/anchors_16.txt",
       "sha256": "d268af55bd5944e300a1ee04c6edfa278b5caedee54f8b5a83f046dd605d6544",
       "size": 78
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/anchor_sets/anchors_32.txt",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/anchor_sets/anchors_32.txt",
       "sha256": "c630745f2999784f0e46ad9f086ae3eb7da8f22c11c9ee60abd769d82f66d69e",
       "size": 158
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/anchor_sets/anchors_64.txt",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/anchor_sets/anchors_64.txt",
       "sha256": "0271b9dd7dad2d431b5c7f2b29353cc86d153e6e0cd339da4c24361947bba5a3",
       "size": 330
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/anchor_sets/anchors_8.txt",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/anchor_sets/anchors_8.txt",
       "sha256": "188f40d009b07ac63abeee736e139229e5f43acbc3f9180e6f5da3e0a41be69b",
       "size": 38
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/held_out/eval_set.txt",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/held_out/eval_set.txt",
       "sha256": "6bf1dffd92b113ecc77081f5e4aaaeb8f53d8366d4ae095c4bf729280cbbcd96",
       "size": 1265
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/results/.gitkeep",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/results/.gitkeep",
       "sha256": "0ca449982a3c5327d1762bf6de1568ba328da2f1cccbc904ae278816fe56e248",
       "size": 30
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/results/metrics.json",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/results/metrics.json",
       "sha256": "a406127a67a3021f87a66db1a528198c94d32212877a6ab2b80254ae63244b22",
       "size": 2167
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/results/report.md",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/results/report.md",
       "sha256": "020a5e730ec57f979f15c31e6df1116f2e42f05e54ced5dcf612a83e5b538ad3",
       "size": 625
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/run_benchmark.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/run_benchmark.py",
       "sha256": "3da399b82ab9238ff998f63c9ac0580517604aa76f45ec10c2155daa2e633591",
       "size": 10779
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/validation/__init__.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/validation/__init__.py",
       "sha256": "8d3c77306d5ed133e49543dfd40770d25ca226e2a6eeeb039e8e98f5f4b2b675",
       "size": 41
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/validation/alignment_resistance.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/validation/alignment_resistance.py",
       "sha256": "ead6ecb532c373bd50c3fe40a04064580861ec1e91f0cc855ccf258539190d15",
       "size": 16687
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/validation/geometry_analysis.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/validation/geometry_analysis.py",
       "sha256": "56b3a57981367ec356bf9b7c683bfe02b7f416678f79b1b90b96b179d4522326",
       "size": 15164
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/validation/held_out_resistance.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/validation/held_out_resistance.py",
       "sha256": "fb559c94bdead6b0d9c61bb15cbdaf1a69d92f38df09af4bffd98261d4cca109",
       "size": 17401
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/validation/null_hypothesis.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/validation/null_hypothesis.py",
       "sha256": "0703d43a33e32a2f390e8da4ca33ac893df36c8d5df17137d674bc65e886acb4",
       "size": 14962
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/validation/partial_training.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/validation/partial_training.py",
       "sha256": "92b80a1265ff05f209ee50784295ab2f0f292f7af830b4a23cee63ec21bb8ac1",
       "size": 13604
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/validation/real_model_resistance.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/validation/real_model_resistance.py",
       "sha256": "2ab30a8371b504cd0620c3bec36a8e9c7c6f01bebbb85fba3f8e96e872f8f862",
       "size": 10156
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/validation/results/alignment_resistance.json",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/validation/results/alignment_resistance.json",
       "sha256": "442debeca88d712707366f863251e4da764d3dc4be1408e3e593eed4f43c9af6",
       "size": 2388
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/validation/results/geometry_analysis.json",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/validation/results/geometry_analysis.json",
       "sha256": "07267460615ec16f9774f7113f2e95d91651cefca654e6b3148bcd42ec2b1e30",
       "size": 3120
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/validation/results/held_out_resistance.json",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/validation/results/held_out_resistance.json",
       "sha256": "1739ba15f4ada6e9da2ad32d3d71bbac3f90256378f9c80308da638ff18cef52",
       "size": 1223
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/validation/results/null_hypothesis.json",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/validation/results/null_hypothesis.json",
       "sha256": "803d05a5d5fccf6b3a1e1175c3d2d5faeb99c4e405870b36a73ec83f0c8d679d",
       "size": 2119
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/validation/results/partial_training.json",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/validation/results/partial_training.json",
       "sha256": "056bfc0ab2ab6f30ec5d5904115320e64233e8bd62414a44067bbe7647795cce",
       "size": 3202
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/validation/results/real_model_resistance.json",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/validation/results/real_model_resistance.json",
       "sha256": "83a040d68319657687f55b5c32a45035aa041acd5ba704ac5ac77f05dfaa5241",
       "size": 1258
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/validation/results/untrained_transformer.json",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/validation/results/untrained_transformer.json",
       "sha256": "ebba17f1c4be86db1762504732d464db9d915d118894060a52921993a529d2dd",
       "size": 1888
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/benchmarks/validation/untrained_transformer.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/validation/untrained_transformer.py",
       "sha256": "dea4b273cfb856115d9554af9d29aecec50cf5297836611f83713779e0625389",
       "size": 17932
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/cassette-integration/README.md",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/cassette-integration/README.md",
       "sha256": "3b542475d2fd885165073511d6cae4b17bf619e9f0b954703b5120953d9e628b",
       "size": 1751
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/cassette-integration/esap_cassette.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/cassette-integration/esap_cassette.py",
       "sha256": "fa56d33edc5e47dd5fbf0676468ed35800a842702675be40087e08ad85936c74",
       "size": 6284
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/cassette-integration/esap_hub.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/cassette-integration/esap_hub.py",
       "sha256": "b5f9843b4bc6fc27028e228d49331aa30d39f4f0adf83e9625d38028cd651213",
       "size": 7654
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/cassette-integration/test_esap_cassette.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/cassette-integration/test_esap_cassette.py",
       "sha256": "d08bf13606d449426a7df49126c67c54181a7016a1de0d280d48411ef5f41fb1",
       "size": 3190
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/cli/__init__.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/cli/__init__.py",
       "sha256": "828ed6ad054314bf6fa96c6bf421301de531867b4368ea34384443411d6e013d",
       "size": 419
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/cli/main.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/cli/main.py",
       "sha256": "f1d141af5ac8cbcd9489d0493685ef69969bd9fcbbbdd78dbd79697a173466a3",
       "size": 11233
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/examples/compress_llm.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/examples/compress_llm.py",
       "sha256": "d8153b82f9b7b72e80e027b14892c21c60b147b0a0382f091081befd8fae2d0d",
       "size": 6165
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/lib/__init__.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/lib/__init__.py",
       "sha256": "f2cce188162fbb9264af60cdba735db75d09e5032767ef6b4007c72886ff7418",
       "size": 1320
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/lib/adapters/__init__.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/lib/adapters/__init__.py",
       "sha256": "bd4216474982e61bf321e5c85a51f97b43980dcc1c1193f8de641195594bb80a",
       "size": 320
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/lib/adapters/sentence_transformers.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/lib/adapters/sentence_transformers.py",
       "sha256": "6dcf0cce350fde74364ed68781b9c770df57e8d143710d0dce485aed3bccdbf4",
       "size": 5284
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/lib/eigen_compress.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/lib/eigen_compress.py",
       "sha256": "7ddf86df66989616106f0670948efaf9bef7618d64a044c9193b9a76acf6f615",
       "size": 27933
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/lib/handshake.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/lib/handshake.py",
       "sha256": "447f50a643c7d4c17dcf980f720369e8309c29f7685c831eb82cef0e8a7e1f5d",
       "size": 13481
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/lib/mds.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/lib/mds.py",
       "sha256": "e07fe808f786f7be71117d3479351f01f35d38f10e3aa03ee0108492e5e480e8",
       "size": 4548
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/lib/procrustes.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/lib/procrustes.py",
       "sha256": "b108739da626b8b4ae4574cfea91c9491588dfd2211515f05c8c35aba4d0f172",
       "size": 5173
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/lib/protocol.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/lib/protocol.py",
       "sha256": "eeb72901b0b0bbb84303abfffefbadc78c280b017ba4024ed2b1c76faeb73306",
       "size": 10283
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/lib/schemas/alignment_map.schema.json",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/lib/schemas/alignment_map.schema.json",
       "sha256": "8e343b936fe4b37530529a8033edeba974ba0f2dfcc3fa08f774b073b2efd211",
       "size": 1570
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/lib/schemas/anchor_set.schema.json",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/lib/schemas/anchor_set.schema.json",
       "sha256": "acd477c08922484b3191459a1ffd20ece3c1cd7ba1940effd5cab6f61eb68b44",
       "size": 1316
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/lib/schemas/embedder_descriptor.schema.json",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/lib/schemas/embedder_descriptor.schema.json",
       "sha256": "bd0cb08732962576a3eb1cda8b7865e1e9a99154f5fec8b2b08828f1002cf6c7",
       "size": 1157
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/lib/schemas/esap_handshake.schema.json",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/lib/schemas/esap_handshake.schema.json",
       "sha256": "25ade1c387f255213e43adf6261e444d96f1b51644f09dfc03458e68f64ead43",
       "size": 5340
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/lib/schemas/spectrum_signature.schema.json",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/lib/schemas/spectrum_signature.schema.json",
       "sha256": "674b9593487d33d5121d85b4c4f1e6b7a645ba37f9a62578a59f30cfd7906e0f",
       "size": 1511
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/__init__.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/__init__.py",
       "sha256": "532b5852fa5532daf1a31e0361e24c02186b20382f17fc49078eb1a2cc5503b0",
       "size": 2471
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/qgt.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/qgt.py",
       "sha256": "15e7741e1b1d91870758eb2592a4cd9800ffeb1aa8168932f9092c3230ed7501",
       "size": 26125
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/qgt_phase.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/qgt_phase.py",
       "sha256": "93e6657e3c869499c1d9682a957f6b85a674cfd261734bfaa8c2e38dd8b25922",
       "size": 29550
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/results/cross_model_symbols.json",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/results/cross_model_symbols.json",
       "sha256": "8ff93b1de9b984eebb38b4babbe6a62a9c7e04614f25e8c08529b361fd00c5b9",
       "size": 2252
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/results/q34_boundary_discovery.json",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/results/q34_boundary_discovery.json",
       "sha256": "c25af3edf9e269a6248e2681af4ae7adc6f2dafd3ad2066858a12fce439c012f",
       "size": 3198
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/results/q34_cross_lingual.json",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/results/q34_cross_lingual.json",
       "sha256": "195e18c05a168a21e834aea608aa6e4c74fe1669496a36501b20d90ec209fec4",
       "size": 1696
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/results/q34_df_attractor.json",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/results/q34_df_attractor.json",
       "sha256": "a54c246863475c27f7c14307f7ba0d040ae943d979fc3218634eb2e974da82fb",
       "size": 3785
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/results/q34_invariant.json",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/results/q34_invariant.json",
       "sha256": "400ae1663aeb2fa1260bf4d94f38cd031258af8cc4ce989147a34262e1223b3e",
       "size": 484
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/results/q34_statistical_rigor.json",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/results/q34_statistical_rigor.json",
       "sha256": "8cc3aaee8a82099d9ad69e0855a5b1383ea178390967b69baa89970054fb3cec",
       "size": 1552
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/test_compass_mode.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/test_compass_mode.py",
       "sha256": "7384f01b13be4d68417c3628c7b05a3d8c1923bd48ddfc7f2b70348aac5cd9c4",
       "size": 6669
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/test_cross_model_symbols.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/test_cross_model_symbols.py",
       "sha256": "c23b4735f4d88194d904a3df3b8859345e787ede26f69517b1e5fb6139540583",
       "size": 14564
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/test_q34_boundary_discovery.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/test_q34_boundary_discovery.py",
       "sha256": "cdf7a9bbe96846d0a75129df22ef5a674319d3027320d945719914a04061c811",
       "size": 13150
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/test_q34_convergence.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/test_q34_convergence.py",
       "sha256": "79beae3794c2ab6514ba451a3987342d32c2fc574939045fc95321f8107eae00",
       "size": 7010
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/test_q34_cross_architecture.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/test_q34_cross_architecture.py",
       "sha256": "68e47027ec0ae92b585f5f2fc720ee8d862bfb8437d1daf3854c56e5b8b6c259",
       "size": 13244
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/test_q34_cross_lingual.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/test_q34_cross_lingual.py",
       "sha256": "781bad6540e18d61a4ff680a3acbd081c3de9846bf45d19418c5dcfa9d5fcaa6",
       "size": 16973
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/test_q34_df_attractor.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/test_q34_df_attractor.py",
       "sha256": "3604fbc2fd9cf7e9bbd681fb30c20edebe0f14c4d7d38b710f0a5a1ac1396bb7",
       "size": 12939
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/test_q34_invariant.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/test_q34_invariant.py",
       "sha256": "2decb4dc5e5ab97e4b40ce384ebe3fd721937218c0fda29f9adfd91791806464",
       "size": 10759
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/test_q34_sentence_transformers.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/test_q34_sentence_transformers.py",
       "sha256": "3aaddccf0ca42a35ed4f4072d535a4f85cfe2b56f616ef97d56a0d2655344a19",
       "size": 7993
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/test_q34_statistical_rigor.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/test_q34_statistical_rigor.py",
       "sha256": "e03226c9b8278a142a9040c62b8b763cec102a15da3b0098b17404a63d2ee0b9",
       "size": 9315
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/test_q43.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/test_q43.py",
       "sha256": "64b03af6da236f76ded9cf00ef41d745a9609c11752aacb6ebf525d4f403c6ca",
       "size": 15102
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/test_q43_real.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/test_q43_real.py",
       "sha256": "53eb2feebf979d3118e534f526582d73f7682eb84284e6fa8539660b2dcb89d7",
       "size": 5430
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/test_q43_rigorous.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/test_q43_rigorous.py",
       "sha256": "04b22ef7c0bd47dbe40cd5df44fcf4993b825a1cd1154fc7ff529cfb8ce1ad6c",
       "size": 12750
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/receipts/.gitkeep",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/receipts/.gitkeep",
       "sha256": "5ece09b24d7b08c846f0554716c961cd0532c3cd0e32aa9d9cb01d443dad325d",
       "size": 38
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/tests/__init__.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/tests/__init__.py",
       "sha256": "d738cd957534ec99a0f68729faf4b693595ef7658ed73542c42d896f401f1335",
       "size": 51
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/tests/test_handshake.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/tests/test_handshake.py",
       "sha256": "cd4825595f7d5f0c969f3c527c7459e602e1e955059987c4da63cba8a34ae9ac",
       "size": 8127
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/tests/test_mds.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/tests/test_mds.py",
       "sha256": "bcbe48cf541d7a996dd0643e43c506f7d04c24de485b579e8a6e663bc8fab37d",
       "size": 5609
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/tests/test_procrustes.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/tests/test_procrustes.py",
       "sha256": "37436d19feb6695d2fa7b683b0156719e2298fe7bea2ae7c69d1d7fc94a5e408",
       "size": 6260
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/tests/test_protocol.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/tests/test_protocol.py",
       "sha256": "5247390e4fe8a9617d1caeb775393166b69f434179c52454b6ed517e5f1a7595",
       "size": 6398
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/README.md",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/README.md",
       "sha256": "67d635ad998664047cb310482dc95ef074bf921550b262e9aa3070cf61a54d05",
       "size": 4247
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/experiments/cross_model_optimized.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/experiments/cross_model_optimized.py",
       "sha256": "227c1c47006133bdeba9c9bc2bcdc4a15771716b781424af589e2c96f36b4733",
       "size": 10877
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/experiments/cross_model_quick.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/experiments/cross_model_quick.py",
       "sha256": "71f38c3d1d252a31b8a9321ce935601dee9f1f1db131c01d1dff7c84815da0a6",
       "size": 3755
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/experiments/dark_forest_full_scale.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/experiments/dark_forest_full_scale.py",
       "sha256": "02d73743c522e1e255ee8eec5b8ca7488bedf16cafb24b0e40bb90af6fa82787",
       "size": 24192
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/experiments/dark_forest_scaled.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/experiments/dark_forest_scaled.py",
       "sha256": "9b1d80aa4672c3176366ba9c6b2a55b7a2f806ca5d495ffe9b6443544f2d7906",
       "size": 16143
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/experiments/dark_forest_test.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/experiments/dark_forest_test.py",
       "sha256": "871d7454985863ff7cb30983162acae19eb6dbf3f113562f9ff6c06b52391d68",
       "size": 12283
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/experiments/demo_cross_model_communication.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/experiments/demo_cross_model_communication.py",
       "sha256": "c6cdb0e4108de16493757ebe2f4075b724d7e84d0d1f322c1d71475701146325",
       "size": 11303
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/experiments/diagnose_procrustes.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/experiments/diagnose_procrustes.py",
       "sha256": "a61094cefe72748b4020b1581995ec5b36dbd0cf4ca45e3177396ee4019205c8",
       "size": 13772
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/experiments/explore_cross_model_ceiling.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/experiments/explore_cross_model_ceiling.py",
       "sha256": "24d0288653b8314fcf80e38dfdabad751ddc5e36d3bd2531304dd080eaa21cb8",
       "size": 15753
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/experiments/find_stable_anchors.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/experiments/find_stable_anchors.py",
       "sha256": "7a585ddead073f07b15f1b026df504d6df56468b5430f52acfd41b056bd2a141",
       "size": 8250
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/experiments/maximize_cross_model.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/experiments/maximize_cross_model.py",
       "sha256": "c751aa7080deac1306770fe4a1943201ed36612518c664d32fd8b8a02bdec842",
       "size": 12951
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/experiments/maximize_fast.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/experiments/maximize_fast.py",
       "sha256": "8015e3bf067c641bf5cd6f96f36d299c57bbe6568cd7fc2cf5c4fa36b4298546",
       "size": 8457
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/experiments/maximize_push.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/experiments/maximize_push.py",
       "sha256": "47a50afded9684cfa956c2c66932eb61c2df5a5551048640c09c6b7364e78222",
       "size": 7312
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/lib/__init__.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/lib/__init__.py",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "size": 0
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/lib/large_anchor_generator.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/lib/large_anchor_generator.py",
       "sha256": "5bfa2fc741d13cfcfb065028f1339a549414676ceb1a3d1dc3707f46076fea7a",
       "size": 11655
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/lib/vector_channel.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/lib/vector_channel.py",
       "sha256": "f9ea21f3d7e059776b7ed3d15833259808ddcb493bbe094dd44c585a728f9817",
       "size": 13935
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/lib/vector_channel_sweep.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/lib/vector_channel_sweep.py",
       "sha256": "2178e732cc53f804e56bf7ac519df94dcf3da9f3289f129b47b666e324c32032",
       "size": 6461
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/reports/CROSS_MODEL_ALIGNMENT_REPORT.md",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/reports/CROSS_MODEL_ALIGNMENT_REPORT.md",
       "sha256": "62ed293e7389ca8ca6d5cd3a29e765811af82b967bd40b27c817e29ec914a590",
       "size": 7630
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/reports/CROSS_MODEL_BREAKTHROUGH.md",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/reports/CROSS_MODEL_BREAKTHROUGH.md",
       "sha256": "5f1f995138d9c02e5d062dae59221095c613a880a62bde3dfb496bd2f3570d2f",
       "size": 5073
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/reports/DARK_FOREST_HOLOGRAPHIC_REPORT.md",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/reports/DARK_FOREST_HOLOGRAPHIC_REPORT.md",
       "sha256": "d0dc5f0ce32d52d8d2c070e675313a562f51f6f4011ea07c800bbf77b8d31c6e",
       "size": 8149
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/reports/LLM_TO_LLM_ALIGNMENT_REPORT.md",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/reports/LLM_TO_LLM_ALIGNMENT_REPORT.md",
       "sha256": "0a2de98db789f61b0fecf99cd2fca24f045d993e6a710d2060ccae1397773a5f",
       "size": 16377
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/reports/LLM_VECTOR_BRIDGE_REPORT.md",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/reports/LLM_VECTOR_BRIDGE_REPORT.md",
       "sha256": "7bb8fe01a06be61a2ce7e1319dfe55051ea7df3eac1d3a120e75aaca5718bcb0",
       "size": 11562
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/reports/NEMOTRON_QWEN_BREAKTHROUGH.md",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/reports/NEMOTRON_QWEN_BREAKTHROUGH.md",
       "sha256": "038e2d8d0a359c1fb6c46e135a420e878d30d6e70e7cffa6da1cf93c08f0aee4",
       "size": 5954
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/reports/VECTOR_COMMUNICATION_REPORT.md",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/reports/VECTOR_COMMUNICATION_REPORT.md",
       "sha256": "9178211bce864a2f329ee9b9a88e9219fb37deaa227186d32c5bbd0c283e157e",
       "size": 14671
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/results/dark_forest_results.json",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/results/dark_forest_results.json",
       "sha256": "b133434f29f2d7fe554fb483891b5d8814812982423306b21673e8a7abd41f93",
       "size": 12227
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/results/dark_forest_scaled_results.json",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/results/dark_forest_scaled_results.json",
       "sha256": "21542c5bb4d79ecce6144684f8ec860d39b1d9a2a54d457190efd477befdaef1",
       "size": 22250
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/results/maximize_fast_results.json",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/results/maximize_fast_results.json",
       "sha256": "013bd2bcea1ca20d627ee45867a3e838f3b9773e83a626a77cb8377e9b7080af",
       "size": 2628
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/results/maximize_push_results.json",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/results/maximize_push_results.json",
       "sha256": "696cec38b91334067c5b338fb00f80a3cf3f7e4b13f814192810028ef54bf6c1",
       "size": 3846
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/results/test_results.json",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/results/test_results.json",
       "sha256": "9c42d21e214603c88cebd55aaedc6857b901d155d833fea3873300e72b244d08",
       "size": 3912
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/tests/test_7b_cross_arch.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/tests/test_7b_cross_arch.py",
       "sha256": "5f1862aeb70b0f8577a04a1c71da89bf2b7e903d57c4b60a059108bf83ec2aef",
       "size": 7044
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/tests/test_cross_arch_k_sweep.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/tests/test_cross_arch_k_sweep.py",
       "sha256": "54dfcbb3d15182eaaa497b980b9e1c63c4d0eb195c19a6a0d5b74659896a24fd",
       "size": 5917
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/tests/test_cross_llm_vector.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/tests/test_cross_llm_vector.py",
       "sha256": "2071f01281f6d1f694abbda06f964357b80bcb5924f99c81e835bc4fcc1e3604",
       "size": 18759
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/tests/test_eigenvalue_spectrum.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/tests/test_eigenvalue_spectrum.py",
       "sha256": "1e98093fec7f1b82022a06b0c7cb02876c276735f878954af281cca0b78489b0",
       "size": 5861
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/tests/test_middle_mean.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/tests/test_middle_mean.py",
       "sha256": "635d50b3a952fa3d2b9a86559bbdc92d60ce2fcc676cf915f0698fa9c27299e1",
       "size": 12265
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/tests/test_native_llm_alignment.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/tests/test_native_llm_alignment.py",
       "sha256": "8894506365eecaceb207bcd40dd4829eb16a478a3a68d7aac669d23787370e70",
       "size": 18890
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/tests/test_native_llm_vectors.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/tests/test_native_llm_vectors.py",
       "sha256": "6f27e7f7f757ffca17ca400d5c73960a014d4864be861b9d7796ca54689e00bf",
       "size": 15391
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/tests/test_nemotron_qwen.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/tests/test_nemotron_qwen.py",
       "sha256": "a0988fd10229d084f1158e352487a55fcd5658c2a980309000e36caa1461def8",
       "size": 17411
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/tests/test_normalized_alignment.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/tests/test_normalized_alignment.py",
       "sha256": "709fc40f771c05611f7bbccfbd079e896d053bcb3dbc26f9ffef2626a981e89e",
       "size": 7863
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/tests/test_svtp.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/tests/test_svtp.py",
       "sha256": "30532331ed1c2ea75ae30dd948045cc847b9c005664730cb5b9f957e89ec6119",
       "size": 10655
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/tests/test_svtp_llm.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/tests/test_svtp_llm.py",
       "sha256": "d11d48e3dc68af26b2f5401581b5590047f5aa7fc29d758459ee6e34a33a97b2",
       "size": 17031
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/tests/test_topology_verification.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/tests/test_topology_verification.py",
       "sha256": "e3d75a9862b99610468c09dc850c9fbdfed9354437116141b089110c6529e2f2",
       "size": 9254
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/tests/test_vector_communication.py",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/tests/test_vector_communication.py",
       "sha256": "99fe1cc33e9132b151f52beaf0c61f54d0ea46d891eda517d27f65ab2591d18a",
       "size": 20463
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/transcripts/vector communication_1.txt",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/transcripts/vector communication_1.txt",
       "sha256": "6937909995392214ee3d6e5e5ec5217996e9ebeab3e508c3234361452fab67c5",
       "size": 3774
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/transcripts/vector communication_10.txt",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/transcripts/vector communication_10.txt",
       "sha256": "91775f6457d68c41d5101470c8700c8910f58b2d30e174c9cce6cf61ce0e183c",
       "size": 4197
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/transcripts/vector communication_2.txt",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/transcripts/vector communication_2.txt",
       "sha256": "5ac89a08bce2aa9686782878f36e2cc1c1376e0ed9e3aababa644b1d61e5cc1d",
       "size": 5996
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/transcripts/vector communication_3.txt",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/transcripts/vector communication_3.txt",
       "sha256": "6ca9e49b0d14af8eaddb9c5fd8c074af41b52cd9b35a994401fa23e5adb13aeb",
       "size": 317
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/transcripts/vector communication_4.txt",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/transcripts/vector communication_4.txt",
       "sha256": "7f5050c757b2fe9362de182a60cb3b15723ccd0d4a53e499991fe6e19bcad1bb",
       "size": 1629
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/transcripts/vector communication_5.txt",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/transcripts/vector communication_5.txt",
       "sha256": "2a82067a852312fc1d5d3f37eeb115898e7d44c115558100cad536f8ca241819",
       "size": 948
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/transcripts/vector communication_6.txt",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/transcripts/vector communication_6.txt",
       "sha256": "b883a8c52d5cfdf6ceda6a6990fe31877c32c1763bbb28034f1a81327cbd007e",
       "size": 6010
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/transcripts/vector communication_7.txt",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/transcripts/vector communication_7.txt",
       "sha256": "bbbe72691ff60b9c9f0a0f3f964be2c776bf895b7381ee9bce51ad45a751ac1c",
       "size": 295
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/transcripts/vector communication_8.txt",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/transcripts/vector communication_8.txt",
       "sha256": "a15f1d1498a29bf6c128ff6fdd5f5fc7882318919a2374164d220b6ffb6e6699",
       "size": 8971
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/transcripts/vector communication_9.txt",
+      "path": "THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/transcripts/vector communication_9.txt",
       "sha256": "964163f0c905b60baaae6e1a65f550baf921ad4e0aee6a4c6f2ed5311d37c83f",
       "size": 9220
     },
@@ -20230,172 +20230,172 @@
       "size": 1664
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/INDEX.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/INDEX.md",
       "sha256": "02ca0b44c2abe232b972f09d2bc491caea36ab0a7ff1aaf39f1eca9a9fa1ccad",
       "size": 6374
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/PAPER_SPC.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/PAPER_SPC.md",
       "sha256": "b427ae062fcdc524292cc114c32b41243f128697006fa3c88402f367e9b915c0",
       "size": 14857
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/phase-5/01-06-2026-21-13_CAT_CHAT_CATALYTIC_CONTINUITY.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/phase-5/01-06-2026-21-13_CAT_CHAT_CATALYTIC_CONTINUITY.md",
       "sha256": "888d5d7a3ef79aadd0a3b152143187bb10964d50a77b09d0a3cf0c3cea1c81e5",
       "size": 12298
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/phase-5/01-07-2026_PHASE_5_RESEARCH_FINDINGS.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/phase-5/01-07-2026_PHASE_5_RESEARCH_FINDINGS.md",
       "sha256": "712ce144adaef44b703d0021dc48c7d62eeff1bc002f1b7246d6e27ec19eeefb",
       "size": 11051
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/phase-5/01-10-2026_ACTIVATION_COMPRESSION_BREAKTHROUGH.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/phase-5/01-10-2026_ACTIVATION_COMPRESSION_BREAKTHROUGH.md",
       "sha256": "a9f9e9e203d9415395d0d5a49939d40563c324e72602814eba62c10a7e4e4760",
       "size": 11140
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/phase-5/12-26-2025-06-39_SYMBOLIC_COMPRESSION.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/phase-5/12-26-2025-06-39_SYMBOLIC_COMPRESSION.md",
       "sha256": "6109d8dc80f37dedc320cb6913e450fed5f628bf7b969b26df56a5e05eeedcda",
       "size": 1926
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/phase-5/12-26-2025-06-39_SYMBOLIC_COMPRESSION_BRIEF_1.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/phase-5/12-26-2025-06-39_SYMBOLIC_COMPRESSION_BRIEF_1.md",
       "sha256": "aaae90dd514de571acef42fdd9b4a9b978558ef7939d86c53e0df388720d61f7",
       "size": 12217
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/phase-5/12-29-2025-07-01_SEMIOTIC_COMPRESSION.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/phase-5/12-29-2025-07-01_SEMIOTIC_COMPRESSION.md",
       "sha256": "c8382adc74a5bd97b78a9672b739960889f8a5d46e7f36303b42516907f82cf3",
       "size": 6168
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/semantic-core/12-23-2025-12-00_SYSTEM1_SYSTEM2_DUAL_DB.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/semantic-core/12-23-2025-12-00_SYSTEM1_SYSTEM2_DUAL_DB.md",
       "sha256": "4e77380d5c19db78505115de70b97a842b87ff5bef3ed3f6789cfb22ff5df33e",
       "size": 8252
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/semantic-core/12-28-2025-12-00_ROADMAP_SEMANTIC_CORE.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/semantic-core/12-28-2025-12-00_ROADMAP_SEMANTIC_CORE.md",
       "sha256": "96cc3444b408c1ed31baa95cf6470d41ff62a7f13466bb0fafa8e68bbaa4fa1d",
       "size": 15137
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/semantic-core/12-28-2025-23-12_MECHANICAL_INDEXING_REPORT.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/semantic-core/12-28-2025-23-12_MECHANICAL_INDEXING_REPORT.md",
       "sha256": "fa8eb16e8df9e536050f9efce48b279a4c03d4c5bad8ee748e188200a4a89a40",
       "size": 12200
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/semantic-core/12-29-2025-03-47_CORTEX_ROADMAP.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/semantic-core/12-29-2025-03-47_CORTEX_ROADMAP.md",
       "sha256": "8ffcbf099eaaafaee63c223bae75b84319bd1d0007b69462072bff320cb394cc",
       "size": 5171
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/semantic-core/12-29-2025-05-36_SEMANTIC_CORE_BUILD_COMPLETE.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/semantic-core/12-29-2025-05-36_SEMANTIC_CORE_BUILD_COMPLETE.md",
       "sha256": "595b30e3bc7dd1425c848f25d933c93733a367aa0b7e67f6865a5a6ec4a9f651",
       "size": 10330
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/semantic-core/12-29-2025-05-36_SEMANTIC_CORE_IMPLEMENTATION_REPORT.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/semantic-core/12-29-2025-05-36_SEMANTIC_CORE_IMPLEMENTATION_REPORT.md",
       "sha256": "c7fc41c85c302cce1d083676247681116e5abcfd54d89fe9253080e567d1c511",
       "size": 28805
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/semantic-core/12-29-2025-05-36_SEMANTIC_CORE_INDEX.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/semantic-core/12-29-2025-05-36_SEMANTIC_CORE_INDEX.md",
       "sha256": "ec0ed20de973bd4b036daad5482d41dd372486b7a22ee3b1507000fe605c35c9",
       "size": 10199
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/semantic-core/12-29-2025-05-36_SEMANTIC_CORE_PHASE1_COMPLETE.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/semantic-core/12-29-2025-05-36_SEMANTIC_CORE_PHASE1_COMPLETE.md",
       "sha256": "30d6db4bfbfb7a0227e3fb48a16c6dc16626834a91cdc644eff7957555941917",
       "size": 9685
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/semantic-core/12-29-2025-05-36_SEMANTIC_CORE_PHASE1_FINAL_REPORT.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/semantic-core/12-29-2025-05-36_SEMANTIC_CORE_PHASE1_FINAL_REPORT.md",
       "sha256": "9021158321e5003efa197847e42d98682e5962a7ecf9524752aa9bd4e56f42fc",
       "size": 32133
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/semantic-core/12-29-2025-05-36_SEMANTIC_CORE_QUICK_START.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/semantic-core/12-29-2025-05-36_SEMANTIC_CORE_QUICK_START.md",
       "sha256": "64d10f2c8f036c3db1838349001cc1615ebf1d6d7e9ab7ef70774d2c93cf3610",
       "size": 5768
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/semantic-core/12-29-2025-05-36_SEMANTIC_CORE_WORKFLOW_COMPLETE.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/semantic-core/12-29-2025-05-36_SEMANTIC_CORE_WORKFLOW_COMPLETE.md",
       "sha256": "2a917b7cf8c839a456fc73fa002fd523d646eeaf1b8346fd034af5a7ab2ce465",
       "size": 12466
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/symbols/01-08-2026_COMPRESSION_PARADIGM_SHIFT_FULL_REPORT.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/symbols/01-08-2026_COMPRESSION_PARADIGM_SHIFT_FULL_REPORT.md",
       "sha256": "5bbd3cec9de8d0a063c1fd85d3bf0ea280bcd4345af90980fcb7333858647573",
       "size": 20859
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/symbols/12-26-2025_SYMBOLIC_COMPRESSION_BRAINSTORM.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/symbols/12-26-2025_SYMBOLIC_COMPRESSION_BRAINSTORM.md",
       "sha256": "8db89d118641d2d6bbc4736b0f9e9163134b5c131ce7d48727e015139f8fa487",
       "size": 2062
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/symbols/12-26-2025_SYMBOLIC_COMPRESSION_BRIEF.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/symbols/12-26-2025_SYMBOLIC_COMPRESSION_BRIEF.md",
       "sha256": "ec54f4917ae733187217265257bbf41272cf382e4843710de50ea6cb876e4e0c",
       "size": 12275
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/symbols/12-28-2025_KIMI_K2_SYMBOLIC_AI.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/symbols/12-28-2025_KIMI_K2_SYMBOLIC_AI.md",
       "sha256": "8533f80a84b221813a058078e62ac2325ba7ddece1ff87be9006872d1c3b38bd",
       "size": 24741
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/symbols/OPUS_9NINES_COMPRESSION_RESEARCH_ELO_REPORT.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/symbols/OPUS_9NINES_COMPRESSION_RESEARCH_ELO_REPORT.md",
       "sha256": "9367d1c5a223a48f07863fec9c86d367f0391574b05c347a881ccd8b9d9426bc",
       "size": 10809
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/symbols/OPUS_SPC_RESEARCH_CLAIM_EXECUTION_PACK.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/symbols/OPUS_SPC_RESEARCH_CLAIM_EXECUTION_PACK.md",
       "sha256": "5aa38731a12340cffb8cb61f9fa00a35d546470b4af34a9a5266725b6250acde",
       "size": 8408
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/symbols/PLATONIC_COMPRESSION_THESIS.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/symbols/PLATONIC_COMPRESSION_THESIS.md",
       "sha256": "3860319844df3472341c031344393ce8cc98c363085232c0c20806fc7dbd1c6a",
       "size": 8481
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/symbols/SYMBOLIC_COMPUTATION_EARLY_FOUNDATIONS.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/symbols/SYMBOLIC_COMPUTATION_EARLY_FOUNDATIONS.md",
       "sha256": "138c112fe2c7f2c398f4908716e52543b121330471ffb09f18dee7c72eb8b6cd",
       "size": 10794
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/vector-substrate/01-06-2026-21-13_5_2_VECTOR_SUBSTRATE_VECTORPACK.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/vector-substrate/01-06-2026-21-13_5_2_VECTOR_SUBSTRATE_VECTORPACK.md",
       "sha256": "9cfdc20c3f3426a41a5d16694bf79b2c5a4e35402a2faae7646266cd58020baa",
       "size": 3734
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/vector-substrate/01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/vector-substrate/01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md",
       "sha256": "c2d0324fe54c4006ebfd980c7472b45cc906d725694b1d1acc87f7fec8d60520",
       "size": 1817
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/vector-substrate/01-08-2026_SEMANTIC_ALIGNMENT_PROTOCOL_DISCOVERY.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/vector-substrate/01-08-2026_SEMANTIC_ALIGNMENT_PROTOCOL_DISCOVERY.md",
       "sha256": "3199cf40bf75e0a41afa48b253a93259dfb631d9e5a9d9a68a40569d8d1939e9",
       "size": 8529
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/vector-substrate/01-08-2026_UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/vector-substrate/01-08-2026_UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS.md",
       "sha256": "bbcacc73d395ba29973c07d8adf9030449d1adccba941608395e18d18316a2a7",
       "size": 14142
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/vector-substrate/12-29-2025-10-00_VECTOR_SANDBOX_DOC.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/vector-substrate/12-29-2025-10-00_VECTOR_SANDBOX_DOC.md",
       "sha256": "cc54830914d723a67e1cbc317afebb54135bb3a322443762d2fa486464edbc5f",
       "size": 4512
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/vector-substrate/OPUS_EIGEN_SPECTRUM_ALIGNMENT_PROTOCOL_PACK.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/vector-substrate/OPUS_EIGEN_SPECTRUM_ALIGNMENT_PROTOCOL_PACK.md",
       "sha256": "34b7426e3c2dac4bcb46b01d20f473b871cafd2117568a3478c59ba152bbce33",
       "size": 8310
     },
     {
-      "path": "THOUGHT/LAB/VECTOR_ELO/research/vector-substrate/Overview of the Universal Semantic Anchor Hypothesis.md",
+      "path": "THOUGHT/LAB/COMPRESSION/research/vector-substrate/Overview of the Universal Semantic Anchor Hypothesis.md",
       "sha256": "92572e141b0854b745af6a8236a42a5bddd60ee1e4670c945326585934fd21a3",
       "size": 20946
     },

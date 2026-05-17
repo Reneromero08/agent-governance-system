@@ -151,7 +151,7 @@ def compute_syndrome(observations: np.ndarray) -> float:
 
 - Test suite: `CAPABILITY/TESTBENCH/cassette_network/qec/`
 - Results: `CAPABILITY/TESTBENCH/cassette_network/qec/results/q40_full_results.json`
-- Dark Forest holographic test: `THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/`
+- Dark Forest holographic test: `THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/`
 
 ---
 

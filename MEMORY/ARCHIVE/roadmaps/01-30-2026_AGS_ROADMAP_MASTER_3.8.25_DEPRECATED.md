@@ -226,7 +226,7 @@ Purpose: Anyone can verify a release is untampered.
 - 5.3.6 Research paper — PAPER_SPC.md documenting SPC paradigm
 
 **Deliverables:** 16 test files (529 tests), normative specs, compression infrastructure
-**See:** [PHASE_5_ROADMAP.md](THOUGHT/LAB/VECTOR_ELO/PHASE_5_ROADMAP.md) for detailed DoD matrix
+**See:** [PHASE_5_ROADMAP.md](THOUGHT/LAB/COMPRESSION/ROADMAP.md) for detailed DoD matrix
 
 ---
 
@@ -255,12 +255,12 @@ Purpose: Anyone can verify a release is untampered.
 ### ESAP - Eigenvalue Spectrum Alignment Protocol
 Cross-model semantic alignment via eigenvalue spectrum invariance.
 **Research Status:** VALIDATED (r = 0.99+ eigenvalue correlation across models)
-**Location:** [THOUGHT/LAB/VECTOR_ELO/eigen-alignment/](THOUGHT/LAB/VECTOR_ELO/eigen-alignment/) (EXPERIMENTAL)
-**Proof:** [01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md](THOUGHT/LAB/VECTOR_ELO/research/cassette-network/01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md)
+**Location:** [THOUGHT/LAB/EIGEN_ALIGNMENT/](THOUGHT/LAB/EIGEN_ALIGNMENT/) (EXPERIMENTAL)
+**Proof:** [01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md](THOUGHT/LAB/COMPRESSION/research/cassette-network/01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md)
 
 **Note:** Cassette integration code (esap_cassette.py, esap_hub.py) moved back to LAB on 2026-01-25.
 These were incomplete ports of the full protocol in eigen-alignment/lib/handshake.py.
-See [cassette-integration/README.md](THOUGHT/LAB/VECTOR_ELO/eigen-alignment/cassette-integration/README.md) for graduation criteria.
+See [cassette-integration/README.md](THOUGHT/LAB/EIGEN_ALIGNMENT/cassette-integration/README.md) for graduation criteria.
 
 - [ ] ESAP.1 Implement full protocol per OPUS pack spec
   - Protocol message types: ANCHOR_SET, SPECTRUM_SIGNATURE, ALIGNMENT_MAP
@@ -287,7 +287,7 @@ SVTP is transport (like TCP), ESAP is handshake/alignment (like TLS).
 # Phase 7: Vector ELO (Systemic Intuition) (P1) ✅ CORE COMPLETE
 
 **Status:** Core phases complete (E.1-E.6), MCP integration complete (2026-01-18)
-**Canonical Roadmap:** [VECTOR_ELO_ROADMAP.md](THOUGHT/LAB/VECTOR_ELO/VECTOR_ELO_ROADMAP.md)
+**Canonical Roadmap:** [ROADMAP.md](THOUGHT/LAB/VECTOR_ELO/ROADMAP.md)
 **Specification:** [VECTOR_ELO_SPEC.md](LAW/CANON/SEMANTIC/VECTOR_ELO_SPEC.md) (graduated to CANON)
 
 **Core Principle:** ELO tracks usage. Similarity determines relevance.

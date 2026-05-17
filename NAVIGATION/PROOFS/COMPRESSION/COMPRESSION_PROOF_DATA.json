@@ -60,7 +60,7 @@
           "similarity": 0.428845
         },
         {
-          "file_path": "THOUGHT/LAB/VECTOR_ELO/research/cassette-network/12-28-2025-12-00_ROADMAP_DATABASE_CASSETTE_NETWORK.md",
+          "file_path": "THOUGHT/LAB/COMPRESSION/research/cassette-network/12-28-2025-12-00_ROADMAP_DATABASE_CASSETTE_NETWORK.md",
           "hash": "04a94a433fa29cf5bbc8c6558456097f776f0873b7e4b2740d0d6edacc3745c9",
           "section_name": "Goal",
           "similarity": 0.348155
@@ -84,7 +84,7 @@
           "similarity": 0.333333
         },
         {
-          "file_path": "THOUGHT/LAB/VECTOR_ELO/research/semantic-core/12-28-2025-12-00_ROADMAP_SEMANTIC_CORE.md",
+          "file_path": "THOUGHT/LAB/COMPRESSION/research/semantic-core/12-28-2025-12-00_ROADMAP_SEMANTIC_CORE.md",
           "hash": "58c903341cb860dfb6de962e14d81af93aee5c1eb1c33c55e0359e39b44354d6",
           "section_name": "Overview",
           "similarity": 0.328976
@@ -225,7 +225,7 @@
           "similarity": 0.3125
         },
         {
-          "file_path": "THOUGHT/LAB/VECTOR_ELO/research/semantic-core/12-29-2025-05-36_SEMANTIC_CORE_IMPLEMENTATION_REPORT.md",
+          "file_path": "THOUGHT/LAB/COMPRESSION/research/semantic-core/12-29-2025-05-36_SEMANTIC_CORE_IMPLEMENTATION_REPORT.md",
           "hash": "e791371907b285f52e973ae897912050c04c90e38a69a557bc0f7cfe967fd582",
           "section_name": "Indexing",
           "similarity": 0.306186
@@ -255,7 +255,7 @@
           "similarity": 0.280056
         },
         {
-          "file_path": "THOUGHT/LAB/VECTOR_ELO/research/VECTOR_ELO_ROADMAP.md",
+          "file_path": "THOUGHT/LAB/COMPRESSION/research/VECTOR_ELO_ROADMAP.md",
           "hash": "8e3dfa3f78a9e68416e701d7c0a63f0728421442fe2ee1b1a7ceeec23a3a37a6",
           "section_name": "Dependencies",
           "similarity": 0.246598

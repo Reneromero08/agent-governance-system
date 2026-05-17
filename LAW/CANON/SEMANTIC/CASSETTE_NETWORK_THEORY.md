@@ -433,19 +433,19 @@ When all parties share complete semantic context, communication approaches telep
 
 ### Foundational Theory
 - [PLATONIC_COMPRESSION_THESIS.md](research/symbols/PLATONIC_COMPRESSION_THESIS.md) - Ontological foundation
-- [01-08-2026_COMPRESSION_PARADIGM_SHIFT_FULL_REPORT.md](../VECTOR_ELO/research/symbols/01-08-2026_COMPRESSION_PARADIGM_SHIFT_FULL_REPORT.md) - Semantic Density Horizon
+- [01-08-2026_COMPRESSION_PARADIGM_SHIFT_FULL_REPORT.md](../COMPRESSION/research/symbols/01-08-2026_COMPRESSION_PARADIGM_SHIFT_FULL_REPORT.md) - Semantic Density Horizon
 
 ### Protocol Specifications
-- [OPUS_SPC_RESEARCH_CLAIM_EXECUTION_PACK.md](../VECTOR_ELO/research/symbols/OPUS_SPC_RESEARCH_CLAIM_EXECUTION_PACK.md) - SPC formalization
-- [OPUS_9NINES_COMPRESSION_RESEARCH_ELO_REPORT.md](../VECTOR_ELO/research/symbols/OPUS_9NINES_COMPRESSION_RESEARCH_ELO_REPORT.md) - Attack plan
+- [OPUS_SPC_RESEARCH_CLAIM_EXECUTION_PACK.md](../COMPRESSION/research/symbols/OPUS_SPC_RESEARCH_CLAIM_EXECUTION_PACK.md) - SPC formalization
+- [OPUS_9NINES_COMPRESSION_RESEARCH_ELO_REPORT.md](../COMPRESSION/research/symbols/OPUS_9NINES_COMPRESSION_RESEARCH_ELO_REPORT.md) - Attack plan
 
 ### Implementation
-- [PHASE_5_ROADMAP.md](../VECTOR_ELO/PHASE_5_ROADMAP.md) - MemoryRecord, compression stack
+- [PHASE_5_ROADMAP.md](../COMPRESSION/ROADMAP.md) - MemoryRecord, compression stack
 - [CASSETTE_NETWORK_ROADMAP.md](CASSETTE_NETWORK_ROADMAP.md) - Implementation roadmap
 - [CASSETTE_NETWORK_SPEC.md](CASSETTE_NETWORK_SPEC.md) - Protocol specification
 
 ### Literature
-- [SYMBOLIC_COMPUTATION_EARLY_FOUNDATIONS.md](../VECTOR_ELO/research/symbols/SYMBOLIC_COMPUTATION_EARLY_FOUNDATIONS.md) - VSA, LCM, ASG
+- [SYMBOLIC_COMPUTATION_EARLY_FOUNDATIONS.md](../COMPRESSION/research/symbols/SYMBOLIC_COMPUTATION_EARLY_FOUNDATIONS.md) - VSA, LCM, ASG
 - Shannon (1948) - A Mathematical Theory of Communication
 - Platonic Representation Hypothesis (arxiv:2405.07987)
 

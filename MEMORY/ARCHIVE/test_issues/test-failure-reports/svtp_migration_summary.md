@@ -61,7 +61,7 @@ Migrated pre-SVTP eigenstructure/procrustes tests to archive and promoted LAB SV
 **TestSVTPCrossModel (1 test):**
 - `test_cross_model_communication` - Cross-model A->B and B->A
 
-**Source:** Adapted from `THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/tests/test_svtp.py`
+**Source:** Adapted from `THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/tests/test_svtp.py`
 
 ## Test Suite Status
 

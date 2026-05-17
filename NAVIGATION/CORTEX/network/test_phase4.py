@@ -7,7 +7,7 @@ Tests:
 2. Metrics - Q33 semantic density measurements
 3. Blanket status - Q35 Markov blanket gating
 
-NOTE: ESAP tests moved to THOUGHT/LAB/VECTOR_ELO/eigen-alignment/cassette-integration/
+NOTE: ESAP tests moved to THOUGHT/LAB/EIGEN_ALIGNMENT/cassette-integration/
       ESAP is experimental and not yet production-ready (see AGS_ROADMAP_MASTER.md)
 """
 

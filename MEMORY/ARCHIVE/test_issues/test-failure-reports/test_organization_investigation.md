@@ -122,7 +122,7 @@ The most recent refactor correctly graduated Cassette Network from LAB to produc
 | - | LAW/CONTRACTS/fixtures/cassette_network/ | Production contract tests |
 | - | LAW/CANON/SEMANTIC/ | Specification docs |
 | - | MEMORY/ARCHIVE/cassette-network-research/ | Historical research |
-| - | THOUGHT/LAB/VECTOR_ELO/eigen-alignment/cassette-integration/ | ESAP (still experimental) |
+| - | THOUGHT/LAB/EIGEN_ALIGNMENT/cassette-integration/ | ESAP (still experimental) |
 
 ### 3.2 Tests in LAW/CONTRACTS/fixtures/cassette_network/
 
