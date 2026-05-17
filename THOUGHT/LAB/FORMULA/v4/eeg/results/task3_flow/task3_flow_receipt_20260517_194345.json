@@ -1,0 +1,68 @@
+{
+  "data_hashes": {
+    "high_flow": "269C80ABA71E8139114CA5E631B4A91B59A21D74A201BAF5ED4ACF756E7939CB",
+    "low_flow": "737F53B1C73D194F32CEA2E5B4FE338C211D6B2D78EAB9BF19209A3CC0560BD0"
+  },
+  "params": {
+    "dataset": "EEGBCI Motor Imagery (PhysioNet)",
+    "gamma_band": [
+      20.0,
+      55.0
+    ],
+    "mode": "real",
+    "n_channels": 64,
+    "n_high_flow": 45,
+    "n_low_flow": 45,
+    "n_times_high_flow": 655,
+    "n_times_low_flow": 655,
+    "seed": 42,
+    "sfreq": 160.0,
+    "step_sec": 0.5,
+    "theta_band": [
+      4.0,
+      8.0
+    ],
+    "window_sec": 1.5
+  },
+  "platform": "Windows-10-10.0.26100-SP0",
+  "python": "3.11.6",
+  "results": {
+    "overall_pass": false,
+    "test3a_pac_high_vs_low": {
+      "cohens_d": 0.06624151143083219,
+      "p_value": 0.8402159784021598,
+      "pass": false,
+      "permutation_result": {
+        "mean_a": 0.005455174391130726,
+        "mean_b": 0.005384285515959241,
+        "n_a": 45,
+        "n_b": 45,
+        "n_permutations": 10000,
+        "observed_diff": 7.088887517148462e-05,
+        "p_value": 0.8402159784021598,
+        "std_a": 0.001385228398397674,
+        "std_b": 0.0006096048253747976
+      }
+    },
+    "test3b_sudden_transition": {
+      "cohens_d": 0.2154537251805428,
+      "frac_sudden_high": 0.022222222222222223,
+      "frac_sudden_low": 0.0,
+      "p_value": 0.40385961403859616,
+      "pass": false,
+      "permutation_result": {
+        "mean_a": 0.002053048241500069,
+        "mean_b": 0.0016030421800885338,
+        "n_a": 45,
+        "n_b": 45,
+        "n_permutations": 10000,
+        "observed_diff": 0.00045000606141153534,
+        "p_value": 0.40385961403859616,
+        "std_a": 0.002882835788793513,
+        "std_b": 0.0006435236266931027
+      }
+    }
+  },
+  "test": "task3_flow",
+  "timestamp_utc": "20260517_194345"
+}

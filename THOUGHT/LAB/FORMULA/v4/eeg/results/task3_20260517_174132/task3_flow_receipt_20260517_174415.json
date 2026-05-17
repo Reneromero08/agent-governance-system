@@ -1,0 +1,64 @@
+{
+  "data_hashes": {
+    "high_flow": "5B0E082568EB46DB85A849507B3E0DF6CB018079E0E39593EDBE354CBE3A3B6A",
+    "low_flow": "4FCFE8CC8CC745E992785D9062095A0952053CFB4C5EA9252900E8AE63E9D3C7"
+  },
+  "params": {
+    "gamma_band": [
+      30.0,
+      80.0
+    ],
+    "mode": "synthetic",
+    "n_channels": 64,
+    "n_times": 2500,
+    "seed": 42,
+    "sfreq": 250.0,
+    "step_sec": 0.5,
+    "theta_band": [
+      4.0,
+      8.0
+    ],
+    "window_sec": 2.0
+  },
+  "platform": "Windows-10-10.0.26100-SP0",
+  "python": "3.11.6",
+  "results": {
+    "overall_pass": true,
+    "test3a_pac_high_vs_low": {
+      "cohens_d": 45.40296092671059,
+      "p_value": 9.999000099990002e-05,
+      "pass": true,
+      "permutation_result": {
+        "mean_a": 0.014096528827780692,
+        "mean_b": 0.0027844514726544914,
+        "n_a": 20,
+        "n_b": 20,
+        "n_permutations": 10000,
+        "observed_diff": 0.0113120773551262,
+        "p_value": 9.999000099990002e-05,
+        "std_a": 0.0003474080420381268,
+        "std_b": 5.880096025970764e-05
+      }
+    },
+    "test3b_sudden_transition": {
+      "cohens_d": 32.60569804035572,
+      "frac_sudden_high": 1.0,
+      "frac_sudden_low": 0.1,
+      "p_value": 9.999000099990002e-05,
+      "pass": true,
+      "permutation_result": {
+        "mean_a": 0.005609912851744743,
+        "mean_b": 0.00028941572716517205,
+        "n_a": 20,
+        "n_b": 20,
+        "n_permutations": 10000,
+        "observed_diff": 0.005320497124579571,
+        "p_value": 9.999000099990002e-05,
+        "std_a": 0.00021582473676585794,
+        "std_b": 8.168899751339565e-05
+      }
+    }
+  },
+  "test": "task3_flow",
+  "timestamp_utc": "20260517_174415"
+}

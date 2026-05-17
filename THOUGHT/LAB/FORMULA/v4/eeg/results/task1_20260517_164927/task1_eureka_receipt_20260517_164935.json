@@ -1,0 +1,88 @@
+{
+  "data_hashes": {
+    "analytic": "3797A0DE0CDE67D757F9398238D6356228DD92D554A026F6A12EAE938032E5BE",
+    "insight": "BE3CB87AAA0641108A5B24684E2831585A425AFEF3964325EEE1D0A568EEDEAD"
+  },
+  "params": {
+    "baseline_window": [
+      -3.0,
+      -1.0
+    ],
+    "mode": "synthetic",
+    "n_channels": 64,
+    "plv_freq_band": [
+      30.0,
+      50.0
+    ],
+    "post_window": [
+      0.0,
+      1.0
+    ],
+    "pre_window": [
+      -1.0,
+      0.0
+    ],
+    "seed": 42,
+    "sfreq": 250.0,
+    "solution_time_sec": 3.0
+  },
+  "platform": "Windows-10-10.0.26100-SP0",
+  "python": "3.11.6",
+  "results": {
+    "overall_pass": false,
+    "test1a_insight_spike": {
+      "cohens_d": -0.003934132822660769,
+      "p_value": 0.9886011398860114,
+      "pass": false,
+      "permutation_result": {
+        "mean_a": 0.31072858381557805,
+        "mean_b": 0.31077907650663483,
+        "n_a": 30,
+        "n_b": 30,
+        "n_permutations": 10000,
+        "observed_diff": -5.049269105678045e-05,
+        "p_value": 0.9886011398860114,
+        "std_a": 0.01257400616235793,
+        "std_b": 0.01308984247934142
+      },
+      "plv_post_mean": 0.31072858381557805,
+      "plv_pre_mean": 0.31077907650663483
+    },
+    "test1b_analytic_no_spike": {
+      "cohens_d": 15.146492175741392,
+      "p_value": 9.999000099990002e-05,
+      "pass": false,
+      "permutation_result": {
+        "mean_a": 0.8437670644880624,
+        "mean_b": 0.7013242138513951,
+        "n_a": 30,
+        "n_b": 30,
+        "n_permutations": 10000,
+        "observed_diff": 0.14244285063666728,
+        "p_value": 9.999000099990002e-05,
+        "std_a": 0.004850238117219935,
+        "std_b": 0.012383805208680418
+      },
+      "plv_post_mean": 0.8437670644880624,
+      "plv_pre_mean": 0.7013242138513951
+    },
+    "test1c_insight_vs_analytic_delta": {
+      "cohens_d": -7.262119411375521,
+      "p_value": 9.999000099990002e-05,
+      "pass": true,
+      "permutation_result": {
+        "mean_a": -5.049269105678415e-05,
+        "mean_b": 0.14244285063666715,
+        "n_a": 30,
+        "n_b": 30,
+        "n_permutations": 10000,
+        "observed_diff": -0.14249334332772393,
+        "p_value": 9.999000099990002e-05,
+        "std_a": 0.024160146054919902,
+        "std_b": 0.013648819414017762
+      }
+    }
+  },
+  "test": "task1_eureka",
+  "timestamp_utc": "20260517_164935"
+}

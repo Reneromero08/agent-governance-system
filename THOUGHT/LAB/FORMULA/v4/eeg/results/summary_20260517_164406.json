@@ -1,0 +1,22 @@
+{
+  "all_pass": false,
+  "mode": "synthetic",
+  "seed": 42,
+  "task_results": {
+    "task1": {
+      "overall_pass": false
+    },
+    "task2": {
+      "overall_pass": false
+    },
+    "task3": {
+      "overall_pass": false
+    }
+  },
+  "tasks_run": [
+    1,
+    2,
+    3
+  ],
+  "timestamp_utc": "20260517_164406"
+}

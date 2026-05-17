@@ -1,0 +1,59 @@
+{
+  "data_hashes": {
+    "nontarget": "A8DC02773F067F9DB3D54708E8D38EFA5B08AC7F8532EDB2402362AC5AD9DFDE",
+    "target": "CC7C0BD009618EE48FC9ADB6D56DE8EE177123B8A3FE6179260F030BED25CDEA"
+  },
+  "params": {
+    "baseline_window_ms": [
+      -200,
+      -50
+    ],
+    "dataset": "ds003825 THINGS-EEG",
+    "epoch_tmax_ms": 500,
+    "epoch_tmin_ms": -200,
+    "mode": "real",
+    "n_channels": 63,
+    "n_nontarget": 21984,
+    "n_target": 264,
+    "n_times_nontarget": 700,
+    "n_times_target": 700,
+    "plv_freq_band": [
+      4.0,
+      40.0
+    ],
+    "post_window_ms": [
+      0,
+      300
+    ],
+    "pre_window_ms": [
+      -50,
+      0
+    ],
+    "seed": 42,
+    "sfreq": 1000.0,
+    "sfreq_original": 1000.0,
+    "sfreq_target": 250.0
+  },
+  "platform": "Windows-10-10.0.26100-SP0",
+  "python": "3.11.6",
+  "results": {
+    "overall_pass": false,
+    "test1a": {
+      "cohens_d": -3.6299071093923327,
+      "p_value": 9.999000099990002e-05,
+      "pass": true
+    },
+    "test1b": {
+      "cohens_d": -3.9837149815220663,
+      "p_value": 9.999000099990002e-05,
+      "pass": true
+    },
+    "test1c": {
+      "cohens_d": 0.0934747160662366,
+      "p_value": 0.21547845215478453,
+      "pass": false
+    }
+  },
+  "test": "task1_eureka",
+  "timestamp_utc": "20260517_184554"
+}

@@ -1,0 +1,156 @@
+{
+  "data_hashes": {
+    "high_sigma": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "low_sigma": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "scrambled": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  "params": {
+    "alpha_band": [
+      8.0,
+      12.0
+    ],
+    "dataset": "ds003825 THINGS-EEG",
+    "gamma_band": [
+      30.0,
+      80.0
+    ],
+    "high_sigma_symbols": [
+      "cross",
+      "crown",
+      "snake",
+      "baby",
+      "fire",
+      "heart",
+      "skull",
+      "star",
+      "sword",
+      "tree"
+    ],
+    "low_sigma_objects": [
+      "stapler",
+      "clipboard",
+      "spatula",
+      "broom",
+      "faucet",
+      "tape_measure",
+      "corkscrew",
+      "ice_cube_tray",
+      "scissors",
+      "hammer"
+    ],
+    "mode": "real",
+    "n_channels": 63,
+    "n_times": 250,
+    "seed": 42,
+    "sfreq": 250.0,
+    "sfreq_original": 1000.0,
+    "sfreq_target": 250.0
+  },
+  "platform": "Windows-10-10.0.26100-SP0",
+  "python": "3.11.6",
+  "results": {
+    "alpha": {
+      "high_vs_low": {
+        "cohens_d": NaN,
+        "p_value": 9.999000099990002e-05,
+        "pass": true,
+        "permutation_result": {
+          "mean_a": NaN,
+          "mean_b": NaN,
+          "n_a": 0,
+          "n_b": 0,
+          "n_permutations": 10000,
+          "observed_diff": NaN,
+          "p_value": 9.999000099990002e-05,
+          "std_a": NaN,
+          "std_b": NaN
+        }
+      },
+      "high_vs_scrambled": {
+        "cohens_d": NaN,
+        "p_value": 9.999000099990002e-05,
+        "pass": true,
+        "permutation_result": {
+          "mean_a": NaN,
+          "mean_b": NaN,
+          "n_a": 0,
+          "n_b": 0,
+          "n_permutations": 10000,
+          "observed_diff": NaN,
+          "p_value": 9.999000099990002e-05,
+          "std_a": NaN,
+          "std_b": NaN
+        }
+      },
+      "low_vs_scrambled": {
+        "cohens_d": NaN,
+        "p_value": 9.999000099990002e-05,
+        "pass": true,
+        "permutation_result": {
+          "mean_a": NaN,
+          "mean_b": NaN,
+          "n_a": 0,
+          "n_b": 0,
+          "n_permutations": 10000,
+          "observed_diff": NaN,
+          "p_value": 9.999000099990002e-05,
+          "std_a": NaN,
+          "std_b": NaN
+        }
+      }
+    },
+    "gamma": {
+      "high_vs_low": {
+        "cohens_d": NaN,
+        "p_value": 9.999000099990002e-05,
+        "pass": true,
+        "permutation_result": {
+          "mean_a": NaN,
+          "mean_b": NaN,
+          "n_a": 0,
+          "n_b": 0,
+          "n_permutations": 10000,
+          "observed_diff": NaN,
+          "p_value": 9.999000099990002e-05,
+          "std_a": NaN,
+          "std_b": NaN
+        }
+      },
+      "high_vs_scrambled": {
+        "cohens_d": NaN,
+        "p_value": 9.999000099990002e-05,
+        "pass": true,
+        "permutation_result": {
+          "mean_a": NaN,
+          "mean_b": NaN,
+          "n_a": 0,
+          "n_b": 0,
+          "n_permutations": 10000,
+          "observed_diff": NaN,
+          "p_value": 9.999000099990002e-05,
+          "std_a": NaN,
+          "std_b": NaN
+        }
+      },
+      "low_vs_scrambled": {
+        "cohens_d": NaN,
+        "p_value": 9.999000099990002e-05,
+        "pass": true,
+        "permutation_result": {
+          "mean_a": NaN,
+          "mean_b": NaN,
+          "n_a": 0,
+          "n_b": 0,
+          "n_permutations": 10000,
+          "observed_diff": NaN,
+          "p_value": 9.999000099990002e-05,
+          "std_a": NaN,
+          "std_b": NaN
+        }
+      }
+    },
+    "overall_pass": true
+  },
+  "test": "task2_symbols",
+  "timestamp_utc": "20260517_173439"
+}

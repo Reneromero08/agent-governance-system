@@ -1,0 +1,159 @@
+{
+  "data_hashes": {
+    "high_sigma": "A46530B6AA7D0A35EAB683FC274D58E0D6D7ABD96A4F0F9886C43E1CD432A879",
+    "low_sigma": "E6A40BE5E88501A8B0BB9CF87EB273E4C1E186B8F83E88B0FE63E54C6464F3F2",
+    "scrambled": "5B683273A4D058769D67F7885CD2A6D19A9DC76D801DA8CE668196C999EC1437"
+  },
+  "params": {
+    "alpha_band": [
+      8.0,
+      12.0
+    ],
+    "dataset": "ds003825 THINGS-EEG",
+    "gamma_band": [
+      30.0,
+      80.0
+    ],
+    "high_sigma_symbols": [
+      "cross",
+      "crown",
+      "snake",
+      "baby",
+      "fire",
+      "skull",
+      "star",
+      "sword",
+      "tree",
+      "sun"
+    ],
+    "low_sigma_objects": [
+      "stapler",
+      "clipboard",
+      "spatula",
+      "broom",
+      "faucet",
+      "tape_measure",
+      "corkscrew",
+      "ice_cube_tray",
+      "scissors",
+      "hammer"
+    ],
+    "mode": "real",
+    "n_channels": 63,
+    "n_high_sigma": 96,
+    "n_low_sigma": 108,
+    "n_scrambled": 96,
+    "n_times": 250,
+    "seed": 42,
+    "sfreq": 250.0,
+    "sfreq_original": 1000.0,
+    "sfreq_target": 250.0
+  },
+  "platform": "Windows-10-10.0.26100-SP0",
+  "python": "3.11.6",
+  "results": {
+    "alpha": {
+      "high_vs_low": {
+        "cohens_d": 0.16261261385415496,
+        "p_value": 0.24627537246275372,
+        "pass": false,
+        "permutation_result": {
+          "mean_a": 0.3507451148079506,
+          "mean_b": 0.3384937802596935,
+          "n_a": 96,
+          "n_b": 108,
+          "n_permutations": 10000,
+          "observed_diff": 0.012251334548257109,
+          "p_value": 0.24627537246275372,
+          "std_a": 0.07481669325186628,
+          "std_b": 0.07580274692883315
+        }
+      },
+      "high_vs_scrambled": {
+        "cohens_d": -0.045688614459968406,
+        "p_value": 0.7606239376062394,
+        "pass": false,
+        "permutation_result": {
+          "mean_a": 0.3507451148079506,
+          "mean_b": 0.3540493331535189,
+          "n_a": 96,
+          "n_b": 96,
+          "n_permutations": 10000,
+          "observed_diff": -0.003304218345568266,
+          "p_value": 0.7606239376062394,
+          "std_a": 0.07481669325186628,
+          "std_b": 0.06973478029281513
+        }
+      },
+      "low_vs_scrambled": {
+        "cohens_d": -0.21305520135424835,
+        "p_value": 0.12738726127387262,
+        "pass": false,
+        "permutation_result": {
+          "mean_a": 0.3384937802596935,
+          "mean_b": 0.3540493331535189,
+          "n_a": 108,
+          "n_b": 96,
+          "n_permutations": 10000,
+          "observed_diff": -0.015555552893825375,
+          "p_value": 0.12738726127387262,
+          "std_a": 0.07580274692883315,
+          "std_b": 0.06973478029281513
+        }
+      }
+    },
+    "gamma": {
+      "high_vs_low": {
+        "cohens_d": -0.06922415426719114,
+        "p_value": 0.6231376862313769,
+        "pass": false,
+        "permutation_result": {
+          "mean_a": 0.11621387963701824,
+          "mean_b": 0.11723325492225879,
+          "n_a": 96,
+          "n_b": 108,
+          "n_permutations": 10000,
+          "observed_diff": -0.0010193752852405563,
+          "p_value": 0.6231376862313769,
+          "std_a": 0.014446711400791278,
+          "std_b": 0.014969074136107454
+        }
+      },
+      "high_vs_scrambled": {
+        "cohens_d": 0.2039233586901187,
+        "p_value": 0.15858414158584141,
+        "pass": false,
+        "permutation_result": {
+          "mean_a": 0.11621387963701824,
+          "mean_b": 0.1133885436037783,
+          "n_a": 96,
+          "n_b": 96,
+          "n_permutations": 10000,
+          "observed_diff": 0.0028253360332399363,
+          "p_value": 0.15858414158584141,
+          "std_a": 0.014446711400791278,
+          "std_b": 0.013236637535730822
+        }
+      },
+      "low_vs_scrambled": {
+        "cohens_d": 0.2711227835143794,
+        "p_value": 0.05469453054694531,
+        "pass": false,
+        "permutation_result": {
+          "mean_a": 0.11723325492225879,
+          "mean_b": 0.1133885436037783,
+          "n_a": 108,
+          "n_b": 96,
+          "n_permutations": 10000,
+          "observed_diff": 0.0038447113184804926,
+          "p_value": 0.05469453054694531,
+          "std_a": 0.014969074136107454,
+          "std_b": 0.013236637535730822
+        }
+      }
+    },
+    "overall_pass": false
+  },
+  "test": "task2_symbols",
+  "timestamp_utc": "20260517_174118"
+}

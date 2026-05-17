@@ -1,8 +1,8 @@
 ---
 title: AGS Roadmap V4 (Remaining Work Only)
-version: 4.3.0
-last_updated: 2026-02-03
-scope: Unfinished phases only - Swarm, Omega (Crypto Safe COMPLETE)
+version: 4.4.0
+last_updated: 2026-05-17
+scope: Unfinished phases only - Swarm, Omega (Crypto Safe COMPLETE, EEG Validation COMPLETE)
 style: agent-readable, task-oriented, minimal ambiguity
 status: Active
 supersedes: AGS_ROADMAP_MASTER.md (deprecated)
@@ -256,7 +256,7 @@ Crypto Safe is a **detection system**, not a **prevention system**:
 ## 3.5 ESAP - Eigenvalue Spectrum Alignment Protocol (from Phase 6 Future Work)
 
 **Research Status:** VALIDATED (r = 0.99+ eigenvalue correlation across models)
-**Location:** `THOUGHT/LAB/VECTOR_ELO/eigen-alignment/`
+**Location:** `THOUGHT/LAB/EIGEN_ALIGNMENT/`
 
 Cross-model semantic alignment via eigenvalue spectrum invariance.
 
@@ -307,6 +307,37 @@ Research foundation exists: HDC/VSA papers indexed (5), vec2text papers (5), Cod
 - [ ] 3.8.4 Multi-language SDK (Python, JS, Go)
 - [ ] 3.8.5 DAO governance specification
 
+## 3.9 Formula V4 EEG Validation (from LAB/FORMULA/v4)
+
+**Purpose:** Test Semiotic Wave Mechanics phase coherence predictions against real human EEG data.
+**Status:** COMPLETE (Phase 1: three-test battery designed, implemented, executed)
+**Priority:** P2 (experimental, LAB safe zone)
+**Location:** `THOUGHT/LAB/FORMULA/v4/eeg/`
+
+### Tests Implemented
+
+| Test | Claim | Dataset | Synthetic | Real |
+|------|-------|---------|-----------|------|
+| 1. Eureka | PLV spike at insight/target detection | THINGS-EEG (ds003825) | PASS (d=64.6) | FAIL |
+| 2. Symbols | High-sigma archetypes induce higher PLV | THINGS-EEG (ds003825) | PASS (d=1.51) | FAIL |
+| 3. Flow | Theta-gamma PAC jump at flow/engagement onset | EEGBCI (PhysioNet) | PASS (d=45.4) | FAIL |
+
+### Real Data Findings
+
+All three predictions fail on public EEG data. Root causes: (1) THINGS-EEG uses pre-cued targets, no surprise element; (2) 50ms RSVP images too brief for full phase-locking; (3) single-subject underpowered; (4) motor imagery may not be valid flow proxy. See `THOUGHT/LAB/FORMULA/v4/eeg/REPORT.md` for full analysis.
+
+### Tasks
+
+- [x] 3.9.1 Build shared EEG utilities: PLV, iPLV, ITC, PAC (Tort), bandpass filter, permutation test, synthetic generators
+- [x] 3.9.2 Build Test 1: Eureka synchronization (target detection P300 proxy)
+- [x] 3.9.3 Build Test 2: Symbolic resonance (archetypal vs neutral PLV)
+- [x] 3.9.4 Build Test 3: Flow state phase transition (theta-gamma PAC)
+- [x] 3.9.5 Download THINGS-EEG (ds003825, 738MB) and EEGBCI (7.4MB) datasets
+- [x] 3.9.6 Write comprehensive validation report
+- [ ] 3.9.7 Multi-subject extension for Task 2 (50 subjects available in ds003825)
+- [ ] 3.9.8 Find genuine Eureka/insight EEG dataset to replace target detection proxy
+- [ ] 3.9.9 Find flow-state EEG dataset with adequate sampling rate (>=500Hz)
+
 ---
 
 # Priority Summary
@@ -336,6 +367,7 @@ Research foundation exists: HDC/VSA papers indexed (5), vec2text papers (5), Cod
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 4.4.0 | 2026-05-17 | Added Section 3.9: Formula V4 EEG Validation Phase 1 complete. Three-test battery (Eureka, Symbols, Flow) designed, implemented, executed against real public EEG (THINGS-EEG 738MB + EEGBCI 7.4MB). Synthetic ground truth passes (d=64.6, d=1.51, d=45.4). Real data null across all three. Full report at THOUGHT/LAB/FORMULA/v4/eeg/REPORT.md. |
 | 4.3.0 | 2026-02-03 | Phase 1 Crypto Safe COMPLETE (v3.9.0): seal_repo, verify_seal, CLI tools, 28 tests, VERIFICATION_GUIDE.md |
 | 4.2.0 | 2026-02-03 | Rewrote Phase 1 for license defense framing; removed template export (repo IS the release); linked to CCL 3.6/3.7/4.4 provisions |
 | 4.1.0 | 2026-02-03 | Added Crypto Safe Philosophy section clarifying tamper-evidence vs access control; explicit Non-Goals |

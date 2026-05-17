@@ -1,0 +1,55 @@
+{
+  "data_hashes": {
+    "analytic": "8E2C19337FA6E1523FD2D88EDE81ADA606ABF0AF7323B16671F8EC9F71C1E38E",
+    "insight": "E7064DEF286AA706D34E2E5F81A09237A59CA0C65C8A25D74D76E0F07702DBCB"
+  },
+  "params": {
+    "baseline_window": [
+      -3.0,
+      -1.0
+    ],
+    "mode": "synthetic",
+    "n_channels": 63,
+    "plv_freq_band": [
+      4.0,
+      12.0
+    ],
+    "plv_freq_band_synthetic": [
+      30.0,
+      50.0
+    ],
+    "post_window": [
+      0.0,
+      1.0
+    ],
+    "pre_window": [
+      -1.0,
+      0.0
+    ],
+    "seed": 42,
+    "sfreq": 250.0,
+    "solution_time_sec": 3.0
+  },
+  "platform": "Windows-10-10.0.26100-SP0",
+  "python": "3.11.6",
+  "results": {
+    "overall_pass": true,
+    "test1a": {
+      "cohens_d": 64.58056469411503,
+      "p_value": 9.999000099990002e-05,
+      "pass": true
+    },
+    "test1b": {
+      "cohens_d": 0.15636985427244668,
+      "p_value": 0.5498450154984501,
+      "pass": true
+    },
+    "test1c": {
+      "cohens_d": 33.68170417194118,
+      "p_value": 9.999000099990002e-05,
+      "pass": true
+    }
+  },
+  "test": "task1_eureka",
+  "timestamp_utc": "20260517_190243"
+}
