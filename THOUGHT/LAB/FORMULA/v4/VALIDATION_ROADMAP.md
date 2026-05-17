@@ -135,6 +135,19 @@ Goal: Train low-rank adapters to correct PCA compression of GPT-2 KV cache. Test
 - `THOUGHT/LAB/TINY_COMPRESS/extensions/03_flat_llm/train_adapter.py` — Training script
 - `THOUGHT/LAB/TINY_COMPRESS/extensions/03_flat_llm/train_results.json` — Per-layer metrics
 - `THOUGHT/LAB/TINY_COMPRESS/extensions/03_flat_llm/trained_adapters.pt` — Trained weights
+- `THOUGHT/LAB/TINY_COMPRESS/llm-spectral/sweeps/` — 8-task sweep scripts + results
+
+**Sweep Results (8 tasks):**
+| # | Task | Result | Verdict |
+|---|------|--------|---------|
+| 1 | Push limits k=9→1 | k=3 (256x) matches k=9 (85x) PCA | PASS |
+| 2 | Asymmetric budget | K3V15 beats symmetric k9 +0.025 | PASS |
+| 3 | Bottleneck 32-256 | Knee at 64-128, bn256=0.869 | PASS |
+| 4 | Shared adapter | Gap 0.246 vs per-layer | FAIL |
+| 5 | Cross-model transfer | Gap 0.153 vs native | FAIL |
+| 6 | Joint K+V adapter | Joint 0.747 < separate 0.752 | FAIL |
+| 7 | Warm-start init | Zero init = dead network | FAIL |
+| 8 | Direct decoder | Decoder < PCA (shape bug) | FAIL* |
 
 ## Phase 4: Cybernetic Truth Monitor [x]
 

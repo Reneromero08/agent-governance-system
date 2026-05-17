@@ -255,7 +255,7 @@ def run_task3(device="cpu", epochs=10):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--task", type=int, choices=[1,2,3,4,5], required=True)
+    parser.add_argument("--task", type=int, choices=[1,2,3,4,5,6,7,8], required=True)
     parser.add_argument("--epochs", type=int, default=10)
     parser.add_argument("--device", default="cpu")
     args = parser.parse_args()
@@ -265,6 +265,9 @@ def main():
     elif args.task == 3: run_task3(args.device, args.epochs)
     elif args.task == 4: run_task4(args.device, args.epochs)
     elif args.task == 5: run_task5(args.device, args.epochs)
+    elif args.task == 6: run_task6(args.device, args.epochs)
+    elif args.task == 7: run_task7(args.device, args.epochs)
+    elif args.task == 8: run_task8(args.device, args.epochs)
 
 
 def run_task4(device="cpu", epochs=15):
@@ -484,6 +487,257 @@ def run_task5(device="cpu", epochs=15):
                "native_pca_cos": float(r_native['pca_cos']) if r_native else None}
     json.dump(results, open(OUT_DIR / "sweep_task5.json", 'w'), indent=2)
     return results
+
+
+# ---- Task 6: Joint K+V Adapter ----
+class JointAdapter(nn.Module):
+    """Single adapter: [K_comp, V_comp] -> K_correction, V_correction."""
+
+    def __init__(self, k_K, k_V, hidden=768, bottleneck=64, seed=42):
+        super().__init__()
+        total_in = k_K + k_V
+        rng = torch.Generator().manual_seed(seed)
+        self.W1 = nn.Parameter(torch.randn(bottleneck, total_in, generator=rng) / math.sqrt(total_in))
+        self.W2 = nn.Parameter(torch.randn(hidden * 2, bottleneck, generator=rng) / math.sqrt(bottleneck))
+        self.alpha = nn.Parameter(torch.tensor(0.1))
+
+    def forward(self, z_k, z_v):
+        z = torch.cat([z_k, z_v], dim=-1)
+        h = F.gelu(F.linear(z, self.W1))
+        raw = F.linear(h, self.W2)
+        return raw[..., :768] * self.alpha, raw[..., 768:] * self.alpha
+
+
+def run_task6(device="cpu", epochs=10):
+    """Joint K+V adapter."""
+    print("=" * 60)
+    print("TASK 6: Joint K+V Adapter (out-of-sample)")
+    print("=" * 60)
+    model, tokenizer = load_gpt2(device)
+    train_texts, test_texts = get_train_test_texts()
+    n_layers = model.config.n_layer
+    num_heads = model.config.n_head; hd = model.config.n_embd // num_heads; sc = 1.0 / math.sqrt(hd)
+    acts = collect_activations_all_layers(model, tokenizer, train_texts + test_texts, device)
+
+    for k_dim in [9, 3]:
+        comp = 768 / k_dim
+        joint_p = (64*(k_dim*2) + 1536*64 + 1) // 1000
+        sep_p = ((64*k_dim + 768*64 + 1) * 2) // 1000
+        print(f"\n--- k={k_dim} ({comp:.1f}x) joint={joint_p}K vs sep={sep_p}K params ---")
+        layer_results = []
+        for l in range(n_layers):
+            t0 = time.time()
+            proj_k = EigenProjector(768, k_dim).to(device); proj_k.init_from_pca(acts[l]['k'])
+            proj_v = EigenProjector(768, k_dim).to(device); proj_v.init_from_pca(acts[l]['v'])
+            adapter = JointAdapter(k_dim, k_dim, 768, 64).to(device)
+            opt = torch.optim.Adam(adapter.parameters(), lr=1e-3)
+
+            tr_qkv = []
+            def hk(m, i, o):
+                sz = o.shape[-1]//3; tr_qkv.append((o[...,:sz].detach(), o[...,sz:2*sz].detach(), o[...,2*sz:].detach()))
+            hh = model.transformer.h[l].attn.c_attn.register_forward_hook(hk)
+            with torch.no_grad():
+                for t in train_texts:
+                    inp = tokenizer(t, return_tensors='pt', truncation=True, max_length=128)
+                    _ = model(**{k: v.to(device) for k,v in inp.items()})
+            hh.remove()
+
+            for _ in range(epochs):
+                for q, k, v in tr_qkv:
+                    opt.zero_grad()
+                    kc = proj_k.compress(k); vc = proj_v.compress(v)
+                    kp = proj_k.decompress(kc); vp = proj_v.decompress(vc)
+                    ck, cv = adapter(kc, vc)
+                    o = compute_attention_output_train(q, k, v, num_heads, sc)
+                    a = compute_attention_output_train(q, kp+ck, vp+cv, num_heads, sc)
+                    F.mse_loss(a, o).backward(); opt.step()
+
+            te_qkv = []
+            def hk2(m, i, o):
+                sz = o.shape[-1]//3; te_qkv.append((o[...,:sz].detach(), o[...,sz:2*sz].detach(), o[...,2*sz:].detach()))
+            hh2 = model.transformer.h[l].attn.c_attn.register_forward_hook(hk2)
+            with torch.no_grad():
+                for t in test_texts:
+                    inp = tokenizer(t, return_tensors='pt', truncation=True, max_length=128)
+                    _ = model(**{k: v.to(device) for k,v in inp.items()})
+            hh2.remove()
+
+            pc, ac = [], []
+            for q, k, v in te_qkv:
+                with torch.no_grad():
+                    kc = proj_k.compress(k); vc = proj_v.compress(v)
+                    kp = proj_k.decompress(kc); vp = proj_v.decompress(vc)
+                    ck, cv = adapter(kc, vc)
+                    o = compute_attention_output(q, k, v, num_heads, sc)
+                    pc.append(compute_cosine_sim(o, compute_attention_output(q, kp, vp, num_heads, sc)))
+                    ac.append(compute_cosine_sim(o, compute_attention_output(q, kp+ck, vp+cv, num_heads, sc)))
+            r = {'pca_cos': float(np.mean(pc)), 'ada_cos': float(np.mean(ac))}
+            print(f"  L{l:2d}: PCA={r['pca_cos']:.4f}  Joint={r['ada_cos']:.4f}  dt={time.time()-t0:.1f}s")
+            layer_results.append(r)
+        avg_p = np.mean([rr['pca_cos'] for rr in layer_results])
+        avg_j = np.mean([rr['ada_cos'] for rr in layer_results])
+        print(f"  AVG: PCA={avg_p:.4f}  Joint={avg_j:.4f}")
+        print(f"  Compare Task 1 separate: k=9 Ada=0.752, k=3 Ada=0.694")
+
+    print(f"\nTask 6: Joint adapter. Compare to separate adapter results from Task 1.")
+    json.dump({}, open(OUT_DIR / "sweep_task6.json", 'w'), indent=2)
+    return None
+
+
+# ---- Task 7: Warm-Start Init ----
+def run_task7(device="cpu", epochs=10):
+    """Warm-start adapter from PCA residual mean."""
+    print("=" * 60)
+    print("TASK 7: Warm-Start vs Random Init (out-of-sample, 3 layers)")
+    print("=" * 60)
+    model, tokenizer = load_gpt2(device)
+    train_texts, test_texts = get_train_test_texts()
+    num_heads = model.config.n_head; hd = model.config.n_embd // num_heads; sc = 1.0 / math.sqrt(hd)
+    acts = collect_activations_all_layers(model, tokenizer, train_texts + test_texts, device)
+
+    for k_dim in [9, 3]:
+        print(f"\n--- k={k_dim} ---")
+        for l in range(3):
+            t0 = time.time()
+            proj_k = EigenProjector(768, k_dim).to(device); proj_k.init_from_pca(acts[l]['k'])
+            proj_v = EigenProjector(768, k_dim).to(device); proj_v.init_from_pca(acts[l]['v'])
+
+            all_qkv = []
+            def hk(m, i, o):
+                sz = o.shape[-1]//3; all_qkv.append((o[...,:sz].detach(), o[...,sz:2*sz].detach(), o[...,2*sz:].detach()))
+            hh = model.transformer.h[l].attn.c_attn.register_forward_hook(hk)
+            with torch.no_grad():
+                for t in train_texts + test_texts:
+                    inp = tokenizer(t, return_tensors='pt', truncation=True, max_length=128)
+                    _ = model(**{k: v.to(device) for k,v in inp.items()})
+            hh.remove()
+            tr = all_qkv[:len(train_texts)]; te = all_qkv[len(train_texts):]
+
+            for label, warm in [("random", False), ("warm", True)]:
+                ak = LowRankAdapter(k=k_dim, hidden=768, bottleneck=64, seed=42).to(device)
+                av = LowRankAdapter(k=k_dim, hidden=768, bottleneck=64, seed=43).to(device)
+                ak.set_residual_subspace(proj_k.get_pca_vectors())
+                av.set_residual_subspace(proj_v.get_pca_vectors())
+                if warm:
+                    ak.alpha.data.fill_(0.5); av.alpha.data.fill_(0.5)
+                    ak.W1.data.zero_(); ak.W2.data.zero_(); av.W1.data.zero_(); av.W2.data.zero_()
+                    # Add tiny noise to W2 so GELU gradients can flow
+                    ak.W2.data.normal_(0, 0.01 / math.sqrt(64))
+                    av.W2.data.normal_(0, 0.01 / math.sqrt(64))
+
+                opt = torch.optim.Adam(list(ak.parameters())+list(av.parameters()), lr=1e-3)
+                for _ in range(epochs):
+                    for q, kv, vv in tr:
+                        opt.zero_grad()
+                        kc = proj_k.compress(kv); kp = proj_k.decompress(kc)
+                        vc = proj_v.compress(vv); vp = proj_v.decompress(vc)
+                        ka = ak(kc, kp); va = av(vc, vp)
+                        o = compute_attention_output_train(q, kv, vv, num_heads, sc)
+                        a = compute_attention_output_train(q, ka, va, num_heads, sc)
+                        F.mse_loss(a, o).backward(); opt.step()
+
+                pc, ac = [], []
+                for q, kv, vv in te:
+                    with torch.no_grad():
+                        kc = proj_k.compress(kv); kp = proj_k.decompress(kc)
+                        vc = proj_v.compress(vv); vp = proj_v.decompress(vc)
+                        ka = ak(kc, kp); va = av(vc, vp)
+                        o = compute_attention_output(q, kv, vv, num_heads, sc)
+                        pc.append(compute_cosine_sim(o, compute_attention_output(q, kp, vp, num_heads, sc)))
+                        ac.append(compute_cosine_sim(o, compute_attention_output(q, ka, va, num_heads, sc)))
+                avg_p = float(np.mean(pc)); avg_a = float(np.mean(ac))
+                print(f"  L{l} {label:6s}: PCA={avg_p:.4f} Ada={avg_a:.4f} delta={avg_a-avg_p:+.4f}")
+
+    print(f"\nTask 7: warm-start zeros weights vs random. Compare deltas.")
+    json.dump({}, open(OUT_DIR / "sweep_task7.json", 'w'), indent=2)
+    return None
+
+
+# ---- Task 8: Direct Decoder (No PCA) ----
+class DirectDecoder(nn.Module):
+    def __init__(self, k, hidden=768, bottleneck=128):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Linear(k, bottleneck), nn.GELU(),
+            nn.Linear(bottleneck, bottleneck), nn.GELU(),
+            nn.Linear(bottleneck, hidden))
+
+    def forward(self, z): return self.net(z)
+
+
+def run_task8(device="cpu", epochs=10):
+    """Direct decoder: no PCA basis needed at inference time."""
+    print("=" * 60)
+    print("TASK 8: Direct Decoder — Bypass PCA (out-of-sample)")
+    print("=" * 60)
+    model, tokenizer = load_gpt2(device)
+    train_texts, test_texts = get_train_test_texts()
+    n_layers = model.config.n_layer
+    num_heads = model.config.n_head; hd = model.config.n_embd // num_heads; sc = 1.0 / math.sqrt(hd)
+
+    for k_dim in [9, 3]:
+        comp = 768 / k_dim
+        dp = (k_dim*128 + 128*128 + 128*768) * 2 // 1000
+        print(f"\n--- k={k_dim} ({comp:.1f}x) decoder={dp}K params/layer ---")
+        layer_results = []
+        for l in range(n_layers):
+            t0 = time.time()
+            all_kv = []
+            def hk(m, i, o):
+                sz = o.shape[-1]//3; all_kv.append((o[...,sz:2*sz].detach(), o[...,2*sz:].detach()))
+            hh = model.transformer.h[l].attn.c_attn.register_forward_hook(hk)
+            with torch.no_grad():
+                for t in train_texts + test_texts:
+                    inp = tokenizer(t, return_tensors='pt', truncation=True, max_length=128)
+                    _ = model(**{k: v.to(device) for k,v in inp.items()})
+            hh.remove()
+            tr_kv = all_kv[:len(train_texts)]; te_kv = all_kv[len(train_texts):]
+
+            acts_l = collect_activations_all_layers(model, tokenizer, train_texts, device)
+            pk = EigenProjector(768, k_dim).to(device); pk.init_from_pca(acts_l[l]['k'])
+            pv = EigenProjector(768, k_dim).to(device); pv.init_from_pca(acts_l[l]['v'])
+
+            test_qkv = []
+            def hk2(m, i, o):
+                sz = o.shape[-1]//3; test_qkv.append((o[...,:sz].detach(), o[...,sz:2*sz].detach(), o[...,2*sz:].detach()))
+            hh2 = model.transformer.h[l].attn.c_attn.register_forward_hook(hk2)
+            with torch.no_grad():
+                for t in test_texts:
+                    inp = tokenizer(t, return_tensors='pt', truncation=True, max_length=128)
+                    _ = model(**{k: v.to(device) for k,v in inp.items()})
+            hh2.remove()
+
+            dk = DirectDecoder(k_dim, 768, 128).to(device)
+            dv = DirectDecoder(k_dim, 768, 128).to(device)
+            opt = torch.optim.Adam(list(dk.parameters())+list(dv.parameters()), lr=1e-3)
+            for _ in range(epochs):
+                for kv, vv in tr_kv:
+                    opt.zero_grad()
+                    kc = pk.compress(kv); vc = pv.compress(vv)
+                    kr = dk(kc); vr = dv(vc)
+                    F.mse_loss(kr, kv.reshape(-1,768)).backward(retain_graph=True)
+                    F.mse_loss(vr, vv.reshape(-1,768)).backward()
+                    opt.step()
+
+            pc, dc = [], []
+            for q, kv, vv in test_qkv:
+                with torch.no_grad():
+                    kc = pk.compress(kv); vc = pv.compress(vv)
+                    kr = dk(kc); vr = dv(vc)
+                    kp = pk.decompress(kc); vp = pv.decompress(vc)
+                    o = compute_attention_output(q, kv, vv, num_heads, sc)
+                    pc.append(compute_cosine_sim(o, compute_attention_output(q, kp, vp, num_heads, sc)))
+                    dc.append(compute_cosine_sim(o, compute_attention_output(q, kr, vr, num_heads, sc)))
+            r = {'pca_cos': float(np.mean(pc)), 'dec_cos': float(np.mean(dc))}
+            print(f"  L{l:2d}: PCA={r['pca_cos']:.4f}  Dec={r['dec_cos']:.4f}  dt={time.time()-t0:.1f}s")
+            layer_results.append(r)
+        avg_p = np.mean([rr['pca_cos'] for rr in layer_results])
+        avg_d = np.mean([rr['dec_cos'] for rr in layer_results])
+        print(f"  AVG: PCA={avg_p:.4f}  Decoder={avg_d:.4f}")
+        print(f"  Compare: PCA+adapter k=9 Ada=0.752, k=3 Ada=0.694 (Task 1)")
+
+    json.dump({}, open(OUT_DIR / "sweep_task8.json", 'w'), indent=2)
+    return None
 
 
 if __name__ == '__main__':

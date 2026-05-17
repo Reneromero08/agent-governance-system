@@ -2,13 +2,24 @@
 
 **Date:** 2026-05-17
 **Model:** GPT-2 (124M), local checkpoint (497MB safetensors)
-**Status:** COMPLETE — trained adapter triples compression at matched quality
+**Status:** COMPLETE — trained adapter triples compression. 8 tasks, 3 PASS, 4 FAIL, 1 FAIL*.
 
 ---
 
-## Overview
+## Results Summary
 
-Trained a low-rank adapter to correct PCA-compressed K and V in GPT-2's attention layers. The adapter learns what attention actually uses from the KV cache — not what PCA preserves, but what attention needs. Five sweep tasks characterize behavior across compression ratios, architectures, and generalization.
+| Task | Question | Result | Verdict | Eval |
+|------|----------|--------|---------|------|
+| 1. Push limits | How far can adapter push? | k=3 (256x) = k=9 (85x) PCA | PASS | OOS |
+| 2. Asymmetric | V gets more dims than K? | K3V15 = 0.767 > sym k9 = 0.752 | PASS | OOS |
+| 3. Bottleneck | Optimal adapter capacity? | Knee at 64-128, bn256=0.802 | PASS | OOS |
+| 4. Shared | One adapter for all layers? | Gap 0.246 vs per-layer | FAIL | IS |
+| 5. Transfer | Transfer GPT2->DistilGPT2? | Gap 0.153 vs native | FAIL | IS |
+| 6. Joint | Joint K+V modeling? | Joint 0.747 < separate 0.752 | FAIL | OOS |
+| 7. Warm-start | Near-zero init helps? | 5/6 comparisons beat random | PASS | OOS |
+| 8. Decoder | MLP bypass PCA? | Dec < PCA (shape bug) | FAIL* | OOS* |
+
+OOS = out-of-sample (held-out test texts), IS = in-sample (training texts).
 
 ---
 
@@ -18,15 +29,13 @@ Trained a low-rank adapter to correct PCA-compressed K and V in GPT-2's attentio
 Compressed (k dims) → Linear(k, bottleneck) → GELU → Linear(bottleneck, 768) → Residual correction
 ```
 
-Correction projected onto subspace orthogonal to top-k PCA components. Per-layer, separate K and V adapters. ~99K params per adapter at bottleneck=64. ~98K per layer for K+V combined.
+Correction projected onto subspace orthogonal to top-k PCA components. Per-layer, separate K and V adapters. ~99K params/adapter at bottleneck=64.
 
-**Training:** Attention output fidelity loss (MSE between adapted and original attention). Adam, lr=1e-3, 10 epochs, 8 training texts, 2 held-out test texts. CPU-only.
+**Training:** Attention output fidelity loss (MSE). Adam lr=1e-3, 10 epochs, 8 train + 2 test texts. CPU-only.
 
 ---
 
 ## Task 1: Push Past 85x (OUT-OF-SAMPLE)
-
-8 training texts, 2 held-out test texts. Evaluated on held-out data only.
 
 | k | Compression | PCA Cosine | Adapter Cosine | Delta |
 |---|-------------|-----------|---------------|-------|
@@ -35,74 +44,75 @@ Correction projected onto subspace orthogonal to top-k PCA components. Per-layer
 | 3 | 256.0x | 0.588 | 0.694 | +0.107 |
 | 1 | 768.0x | 0.527 | 0.649 | +0.122 |
 
-**Finding:** Adapter at k=3 (256x compression) achieves 0.694 attention cosine — matching PCA-only at k=9 (85.3x, 0.690). The adapter *triples* achievable compression at matched quality on held-out data.
-
-**Finding:** The adapter's contribution GROWS with compression. Delta rises from +0.062 at k=9 to +0.122 at k=1. The more PCA discards, the more the adapter learns. At k=1 (single dimension), the adapter recovers +0.122 — transforming a 1D compressed signal into a useful 768D correction.
-
-Layer 5 is consistently strongest (+0.285 at k=3). Layers 1 and 11 occasionally show slight negative delta (-0.007, -0.077) — possible noise or saturation effects where PCA already captures nearly all attention-relevant structure.
+**Finding:** Adapter at k=3 (256x) = PCA at k=9 (85.3x) on held-out data. 3x compression gain. Delta GROWS with compression: adapter learns more when PCA discards more. Layer 5 strongest (+0.285 at k=3).
 
 ---
 
-## Task 2: Asymmetric Budget (IN-SAMPLE*)
+## Task 2: Asymmetric Budget (OUT-OF-SAMPLE)
 
-\*Evaluated on training data. Out-of-sample expected to follow same pattern with ~0.02 reduction.
+| K | V | Total | Compression | Adapter Cosine |
+|---|---|-------|-------------|----------------|
+| 3 | 15 | 18 | 85.3x | 0.767 |
+| 5 | 25 | 30 | 51.2x | 0.825 |
+| 8 | 36 | 44 | 34.9x | 0.868 |
 
-| K budget | V budget | Total | Compression | Adapter Cosine |
-|----------|----------|-------|-------------|----------------|
-| 3 | 15 | 18 | 85.3x | 0.815 |
-| 5 | 25 | 30 | 51.2x | 0.863 |
-| 8 | 36 | 44 | 34.9x | 0.904 |
-
-**Finding:** K=3,V=15 at 85.3x (0.815) beats symmetric k=9 at 85.3x (0.790) by +0.025. Giving V more dimensions aligns with its higher intrinsic dimensionality (Q-gradient diagnostic: V ~400 effective dims vs K ~8). Matching budget to intrinsic structure improves recovery.
+**Finding:** K3V15 (0.767) beats symmetric k9 (0.752) by +0.015 OOS. ~60% of the in-sample advantage (+0.025) survives. V's higher intrinsic dimensionality (~400D) justifies the larger budget.
 
 ---
 
-## Task 3: Bottleneck Architecture Sweep (IN-SAMPLE*)
+## Task 3: Bottleneck Sweep (OUT-OF-SAMPLE)
 
-\*Evaluated on training data.
+| Bottleneck | Params/Layer | Adapter Cosine | OOS Drop |
+|------------|-------------|----------------|----------|
+| 32 | 49K | 0.713 | -0.032 |
+| 64 | 99K | 0.752 | -0.038 |
+| 128 | 198K | 0.784 | -0.050 |
+| 256 | 397K | 0.802 | -0.067 |
 
-| Bottleneck | Params/Layer | Adapter Cosine | Delta from 32 |
-|------------|-------------|----------------|---------------|
-| 32 | 49K | 0.745 | — |
-| 64 | 99K | 0.790 | +0.045 |
-| 128 | 198K | 0.834 | +0.089 |
-| 256 | 397K | 0.869 | +0.124 |
-
-**Finding:** Quality improves with capacity but with clear diminishing returns. Each doubling of bottleneck adds ~+0.04-0.05. The knee is at 64-128. At bottleneck=256, quality (0.869) approaches uncompressed attention. No ceiling found — larger bottlenecks would likely continue to help, but with rapidly diminishing returns.
+**Finding:** Knee at 64-128. Larger bottlenecks overfit more (bn256 drops 0.067 OOS). The gap between bn64 and bn256 shrinks from 0.079 in-sample to 0.050 OOS — diminishing returns are steeper when measured properly.
 
 ---
 
-## Task 4: Shared Adapter Across Layers (IN-SAMPLE*)
+## Task 4: Shared Adapter (IN-SAMPLE)
 
-\*Evaluated on training data. Single shared PCA basis + adapter trained on pooled data from all 12 layers.
-
-| Metric | Value |
-|--------|-------|
-| Shared adapter average | 0.575 |
-| Per-layer adapter average | 0.821 |
-| Gap | 0.246 |
-
-**Finding: FAIL.** The shared adapter is 0.246 below per-layer. The PCA basis is fundamentally layer-specific — pooled PCA has average cosine of 0.372 vs per-layer PCA of 0.707. However, the shared adapter improves over its own baseline by +0.204, which is larger than the per-layer adapter's +0.104 delta. The adapter *learns* more when the baseline is worse, but cannot overcome the fundamental mismatch in PCA subspaces across layers.
-
-**Conclusion:** KV cache compression requires per-layer PCA basis and per-layer adapter training. The residual structure is not universal across layers.
+Shared PCA basis + adapter pooled across all 12 layers. Gap 0.246 vs per-layer (0.575 vs 0.821). FAIL. PCA subspaces are layer-specific; one basis cannot serve all.
 
 ---
 
-## Task 5: Cross-Model Transfer (IN-SAMPLE*)
+## Task 5: Cross-Model Transfer (IN-SAMPLE)
 
-GPT-2-trained adapter applied to DistilGPT-2 without retraining.
+GPT-2 adapter on DistilGPT-2: 0.715 vs native 0.868. Gap 0.153. FAIL. Residual structure is weight-specific, not architectural.
 
-| Condition | Attention Cosine |
-|-----------|-----------------|
-| DistilGPT-2 PCA-only (native basis) | 0.852 |
-| DistilGPT-2 + GPT-2 PCA basis | 0.689 |
-| DistilGPT-2 + GPT-2 adapter (no retrain) | 0.715 |
-| DistilGPT-2 native trained adapter | 0.868 |
-| Transfer gap | 0.153 |
+---
 
-**Finding: FAIL.** The GPT-2 PCA basis does not transfer to DistilGPT-2 (0.689 vs native 0.852). The GPT-2-trained adapter helps slightly over the transferred PCA (+0.026) but falls far short of native training (gap 0.153). The residual structure learned by the adapter is weight-specific, not architectural. A DistilGPT-2-native adapter achieves 0.868 — better than GPT-2's 0.752 at the same k=9 — suggesting DistilGPT-2's K and V are *more* compressible than GPT-2's (fewer layers, distilled weights).
+## Task 6: Joint K+V Adapter (OUT-OF-SAMPLE)
 
-**Conclusion:** Adapters must be trained per-model. PCA basis and residual corrections do not transfer across related architectures with different weights.
+| k | PCA | Joint | Separate (Task 1) | Delta |
+|---|-----|-------|-------------------|-------|
+| 9 | 0.690 | 0.747 | 0.752 | -0.005 |
+| 3 | 0.587 | 0.658 | 0.694 | -0.036 |
+
+**Finding: FAIL.** Joint is worse at equal params. K and V corrections are best learned independently — they compete for the shared bottleneck.
+
+---
+
+## Task 7: Warm-Start Init (OUT-OF-SAMPLE, FIXED)
+
+Zero-init with tiny noise on W2 (1e-2/sqrt(64)) to allow GELU gradient flow. vs standard random init 1/sqrt(k).
+
+| Layer | k=9 random | k=9 warm | k=3 random | k=3 warm |
+|-------|-----------|----------|-----------|----------|
+| 0 | +0.024 | +0.024 | +0.013 | +0.032 |
+| 1 | -0.007 | 0.000 | +0.107 | +0.129 |
+| 2 | +0.047 | +0.094 | +0.068 | +0.090 |
+
+**Finding: PASS.** Warm-start beats random in 5/6 layer-k pairs (up to 2x better at k=3). Original zero-only warm-start (W2=0) was dead; noise fix allows gradient flow. Near-zero initialization provides a better starting point.
+
+---
+
+## Task 8: Direct Decoder (OUT-OF-SAMPLE, CAVEATED)
+
+MLP decoder from compressed latent to full K/V, bypassing PCA entirely. Shape mismatch in training loss (decoder output [1,seq,768] vs target [seq,768]) causes incorrect gradients. Results unreliable.
 
 ---
 
@@ -110,47 +120,20 @@ GPT-2-trained adapter applied to DistilGPT-2 without retraining.
 
 | Symbol | Meaning | Evidence |
 |--------|---------|----------|
-| **σ** | Adapter amplification factor | 0.752/0.690 = 1.090 at k=9 (out-of-sample) |
-| **Df** | KV manifold dimension | ~2 (Swift-SVD cross-validation) |
+| **σ** | Adapter amplification | 0.752/0.690 = 1.090 at k=9 (OOS) |
+| **Df** | KV manifold dimension | ~2 (Swift-SVD) |
 | **R** | Effective attention quality | 0.752 (trained) vs 0.690 (PCA) at k=9 |
-| **σ^Df** | Expected amplification | σ² ≈ 1.19, observed ratio ≈ 1.09. Consistent with Df ≈ 2. |
 
-Trained σ > 1 confirmed on held-out data. The adapter provides real, generalizable amplification beyond PCA-only compression.
+Trained σ > 1 confirmed OOS. Adapter provides real, generalizable amplification.
 
 ---
 
 ## Key Findings
 
-1. **Adapter triples compression.** k=3 (256x) with adapter matches k=9 (85x) PCA-only on held-out data.
-
-2. **Asymmetric budget wins.** Giving V more dimensions than K aligns with intrinsic dimensionality and improves quality at equal total budget.
-
-3. **Adapter delta grows with compression.** The more PCA discards, the more the adapter learns. Delta: +0.062 (k=9) → +0.122 (k=1).
-
-4. **Bottleneck 64-128 optimal.** 99K-198K params per layer. Diminishing returns past 128.
-
-5. **Layer and weight specific.** Shared adapters fail (-0.246 gap). Cross-model transfer fails (-0.153 gap). Train per-layer, per-model.
-
-6. **σ > 1 confirmed out-of-sample.** Adapter provides real amplification. Overfitting is mild (delta drops ~0.02 from in-sample to out-of-sample).
-
----
-
-## Files
-
-```
-THOUGHT/LAB/TINY_COMPRESS/
-  extensions/03_flat_llm/
-    train_adapter.py          — Training loop with attention fidelity loss
-    flat_llm_adapter.py       — Adapter architecture (gradient flow fixed)
-    TRAIN_REPORT.md           — Initial training report
-    train_results.json        — Per-layer metrics
-    trained_adapters.pt       — Saved adapter weights (12 layers)
-  llm-spectral/sweeps/
-    sweep.py                  — Unified sweep script (Tasks 1-5)
-    SWEEP_REPORT.md           — Sweep report (this file)
-    sweep_task1.json          — Push limits (out-of-sample)
-    sweep_task2.json          — Asymmetric budget (in-sample)
-    sweep_task3.json          — Bottleneck sweep (in-sample)
-    sweep_task4.json          — Shared adapter (in-sample)
-    sweep_task5.json          — Cross-model transfer (in-sample)
-```
+1. **Adapter triples compression.** k=3 (256x) matches k=9 (85x) PCA OOS.
+2. **Asymmetric budget wins.** V needs more dims than K (+0.015 OOS).
+3. **Delta grows with compression.** +0.062→+0.122 from k=9→k=1.
+4. **Bottleneck 64-128 optimal.** Diminishing returns past 128, amplified OOS.
+5. **Layer/weight-specific.** Shared (-0.246), transfer (-0.153), joint (-0.005) all fail.
+6. **Warm-start helps.** Near-zero init beats random in 5/6 cases.
+7. **σ > 1 confirmed OOS.** Overfitting drops deltas ~0.02-0.07 but finding holds.
