@@ -1,0 +1,80 @@
+{
+  "k": 3,
+  "per_token": [
+    {
+      "token": 0,
+      "attn_cos": 0.40333032608032227,
+      "phase_disp": 0.39512388087513967
+    },
+    {
+      "token": 1,
+      "attn_cos": 0.40936142206192017,
+      "phase_disp": 0.0
+    },
+    {
+      "token": 2,
+      "attn_cos": 0.36603230237960815,
+      "phase_disp": 0.0
+    },
+    {
+      "token": 3,
+      "attn_cos": 0.3233377933502197,
+      "phase_disp": 0.0
+    },
+    {
+      "token": 4,
+      "attn_cos": 0.4354135990142822,
+      "phase_disp": 0.0
+    },
+    {
+      "token": 5,
+      "attn_cos": 0.40121960639953613,
+      "phase_disp": 0.0
+    },
+    {
+      "token": 6,
+      "attn_cos": 0.4833500385284424,
+      "phase_disp": 0.0
+    },
+    {
+      "token": 7,
+      "attn_cos": 0.39826691150665283,
+      "phase_disp": 0.0
+    },
+    {
+      "token": 8,
+      "attn_cos": 0.4662324786186218,
+      "phase_disp": 0.0
+    },
+    {
+      "token": 9,
+      "attn_cos": 0.44428423047065735,
+      "phase_disp": 0.0
+    },
+    {
+      "token": 10,
+      "attn_cos": 0.40178126096725464,
+      "phase_disp": 0.0
+    },
+    {
+      "token": 11,
+      "attn_cos": 0.44235527515411377,
+      "phase_disp": 0.0
+    },
+    {
+      "token": 12,
+      "attn_cos": 0.4152303636074066,
+      "phase_disp": 0.0
+    },
+    {
+      "token": 13,
+      "attn_cos": 0.470416396856308,
+      "phase_disp": 0.0
+    },
+    {
+      "token": 14,
+      "attn_cos": 0.5407734513282776,
+      "phase_disp": 0.0
+    }
+  ]
+}
