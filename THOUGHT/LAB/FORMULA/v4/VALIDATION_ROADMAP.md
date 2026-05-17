@@ -6,7 +6,7 @@ Before running more experiments, create locked mappings for:
 
 - [x] QEC — `v4/DOMAIN_MAPPINGS.md`, operational definitions confirmed in QEC sweep
 - [x] AI alignment / Cybernetic Truth — confirmed by Phase 4a/4b (constitution as attractor, alignment != truth, Kuramoto condition met for alignment)
-- [ ] Memory / symbol survival
+- [x] Memory / symbol survival — superseded by TINY_COMPRESS (holographic compression validates compression->survival more rigorously than text transmission)
 
 Each mapping must define observables, baselines, success criteria, and failure criteria.
 
@@ -240,3 +240,20 @@ Only after empirical traction:
 - [ ] Derive or reject an action principle
 - [ ] Specify gate-to-probability boundary conditions
 - [ ] Clarify GR/QM bridges as structural, approximate, or derivational
+
+## Open Question: Truth Attractor Bootstrap Circularity
+
+To calibrate theta_high, theta_low, I(S:F_i), and fragment weights, the truth
+attractor needs a labeled dataset with ground truth. But the whole point of the
+attractor is to track truth without ground truth. If you have enough labeled
+data to calibrate fragments, you have enough to fine-tune the model directly.
+
+This is the same structure QEC solved (calibrate sigma on training distances,
+test on held-out distances), but QEC's calibration data is free and unlimited
+(physics simulator). The truth attractor's calibration needs human-labeled
+factuality data, which is expensive and domain-specific.
+
+The empirical question: does a small calibration set generalize across domains?
+A truth attractor calibrated on science facts may not transfer to politics or
+philosophy without recalibration. The attractor is structurally complete.
+Whether it works depends on that answer.
