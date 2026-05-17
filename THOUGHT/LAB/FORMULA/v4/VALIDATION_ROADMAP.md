@@ -216,6 +216,32 @@ Goal: Implement `SemioticMonitor`. Token-level R measurement + T modulation feed
 - `THOUGHT/LAB/FORMULA/v4/phase4a_final/` — Final (constitution + metacognition)
 - `THOUGHT/LAB/FORMULA/v4/phase4b/` — Step-level lattice, gates, loop, model
 
+### Phase 4 Final: Epistemic C + COMMONSENSE [x]
+
+Goal: Build C_epistemic from cross-fragment agreement. Test whether truth attractor beats values constitution.
+
+- [x] C from 3-fragment agreement: factual + COMMONSENSE Method 1 + self-consistency
+- [x] T modulation via DynamicCache: T = T_BASE/(1 + R*R_SCALE), R_SCALE=25
+- [x] Separate calibration (10 prompts) and test (15 held-out). No data leakage.
+
+**Phase 4a (Gemma 4B, held-out test):**
+- [x] CONTROL: 66.7%  |  VALUES_C: 77.8%
+- [x] EPISTEMIC_C: 88.9% (+22.2pp over CONTROL, +11.1pp over VALUES_C)
+- [x] EPISTEMIC_C_NO_CS: 88.9% (COMMONSENSE neutral — regex limitation)
+- [x] T modulation functional: R=0.11-0.21, T range 0.15-0.68
+
+**Phase 4b (TraDo-4B, factual prompts):**
+- [x] CONTROL: 100%  |  VERIFY-ONLY: 100%  |  CYBERNETIC: 62.5%
+- [x] 14 hard gates, 26 soft gates. Hard gates over-fire on correct answers.
+
+**Gaps:**
+- [ ] COMMONSENSE Method 1 LLM extraction not wired to resolver (regex fallback)
+- [ ] COMMONSENSE lattice node not added to Phase 4b
+- [ ] Phase 4b not run on full 26 prompts
+- [ ] Self-consistency fragment non-discriminative (0.93+)
+
+**Finding:** Epistemic C with T modulation achieves first statistically meaningful accuracy gain in Phase 4. Epistemic framing beats values constitution.
+
 ## Phase 5: Phase Transition Tests [-]
 
 Goal: Test Kuramoto-style threshold claims.

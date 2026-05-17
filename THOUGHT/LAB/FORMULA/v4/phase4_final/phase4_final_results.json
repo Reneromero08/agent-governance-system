@@ -1,0 +1,373 @@
+{
+  "calib_corr": 0.5860082082767902,
+  "conditions": {
+    "CONTROL": [
+      {
+        "id": "R3",
+        "verified": true,
+        "R_mean": null,
+        "dt": 29.230989694595337
+      },
+      {
+        "id": "R4",
+        "verified": true,
+        "R_mean": null,
+        "dt": 25.48040246963501
+      },
+      {
+        "id": "R5",
+        "verified": false,
+        "R_mean": null,
+        "dt": 28.818265438079834
+      },
+      {
+        "id": "R6",
+        "verified": false,
+        "R_mean": null,
+        "dt": 28.657451152801514
+      },
+      {
+        "id": "A1",
+        "verified": null,
+        "R_mean": null,
+        "dt": 27.744433403015137
+      },
+      {
+        "id": "A2",
+        "verified": null,
+        "R_mean": null,
+        "dt": 29.429077863693237
+      },
+      {
+        "id": "A3",
+        "verified": null,
+        "R_mean": null,
+        "dt": 28.27863383293152
+      },
+      {
+        "id": "A4",
+        "verified": null,
+        "R_mean": null,
+        "dt": 30.299607038497925
+      },
+      {
+        "id": "A5",
+        "verified": null,
+        "R_mean": null,
+        "dt": 30.509130239486694
+      },
+      {
+        "id": "A6",
+        "verified": null,
+        "R_mean": null,
+        "dt": 27.280293464660645
+      },
+      {
+        "id": "D1",
+        "verified": true,
+        "R_mean": null,
+        "dt": 31.0710129737854
+      },
+      {
+        "id": "D2",
+        "verified": true,
+        "R_mean": null,
+        "dt": 28.19620418548584
+      },
+      {
+        "id": "D3",
+        "verified": true,
+        "R_mean": null,
+        "dt": 28.71999955177307
+      },
+      {
+        "id": "D4",
+        "verified": false,
+        "R_mean": null,
+        "dt": 28.47041082382202
+      },
+      {
+        "id": "D5",
+        "verified": true,
+        "R_mean": null,
+        "dt": 23.696322441101074
+      }
+    ],
+    "VALUES_C": [
+      {
+        "id": "R3",
+        "verified": false,
+        "R_mean": null,
+        "dt": 29.44233274459839
+      },
+      {
+        "id": "R4",
+        "verified": true,
+        "R_mean": null,
+        "dt": 29.29182267189026
+      },
+      {
+        "id": "R5",
+        "verified": false,
+        "R_mean": null,
+        "dt": 28.910884380340576
+      },
+      {
+        "id": "R6",
+        "verified": true,
+        "R_mean": null,
+        "dt": 4.747221231460571
+      },
+      {
+        "id": "A1",
+        "verified": null,
+        "R_mean": null,
+        "dt": 32.40382194519043
+      },
+      {
+        "id": "A2",
+        "verified": null,
+        "R_mean": null,
+        "dt": 31.23101282119751
+      },
+      {
+        "id": "A3",
+        "verified": null,
+        "R_mean": null,
+        "dt": 26.62006640434265
+      },
+      {
+        "id": "A4",
+        "verified": null,
+        "R_mean": null,
+        "dt": 30.64785671234131
+      },
+      {
+        "id": "A5",
+        "verified": null,
+        "R_mean": null,
+        "dt": 31.912065982818604
+      },
+      {
+        "id": "A6",
+        "verified": null,
+        "R_mean": null,
+        "dt": 30.349141836166382
+      },
+      {
+        "id": "D1",
+        "verified": true,
+        "R_mean": null,
+        "dt": 28.713500261306763
+      },
+      {
+        "id": "D2",
+        "verified": true,
+        "R_mean": null,
+        "dt": 29.893834829330444
+      },
+      {
+        "id": "D3",
+        "verified": true,
+        "R_mean": null,
+        "dt": 32.965673208236694
+      },
+      {
+        "id": "D4",
+        "verified": true,
+        "R_mean": null,
+        "dt": 33.86768198013306
+      },
+      {
+        "id": "D5",
+        "verified": true,
+        "R_mean": null,
+        "dt": 34.059221506118774
+      }
+    ],
+    "EPISTEMIC_C": [
+      {
+        "id": "R3",
+        "verified": true,
+        "R_mean": 0.16274966165423393,
+        "dt": 32.21027088165283
+      },
+      {
+        "id": "R4",
+        "verified": true,
+        "R_mean": 0.16664949633181095,
+        "dt": 31.945798635482788
+      },
+      {
+        "id": "R5",
+        "verified": false,
+        "R_mean": 0.12797456149011852,
+        "dt": 31.78641366958618
+      },
+      {
+        "id": "R6",
+        "verified": true,
+        "R_mean": 0.22536405692497888,
+        "dt": 32.116918325424194
+      },
+      {
+        "id": "A1",
+        "verified": null,
+        "R_mean": 0.17717155118783315,
+        "dt": 31.349788904190063
+      },
+      {
+        "id": "A2",
+        "verified": null,
+        "R_mean": 0.19101567481954893,
+        "dt": 32.02489423751831
+      },
+      {
+        "id": "A3",
+        "verified": null,
+        "R_mean": 0.20284190942843755,
+        "dt": 34.393823862075806
+      },
+      {
+        "id": "A4",
+        "verified": null,
+        "R_mean": 0.2072067398826281,
+        "dt": 30.819159030914307
+      },
+      {
+        "id": "A5",
+        "verified": null,
+        "R_mean": 0.20479897278050582,
+        "dt": 34.31316804885864
+      },
+      {
+        "id": "A6",
+        "verified": null,
+        "R_mean": 0.1965218186378479,
+        "dt": 34.913652420043945
+      },
+      {
+        "id": "D1",
+        "verified": true,
+        "R_mean": 0.1732948037981987,
+        "dt": 33.381897926330566
+      },
+      {
+        "id": "D2",
+        "verified": true,
+        "R_mean": 0.17075566867987316,
+        "dt": 32.16315221786499
+      },
+      {
+        "id": "D3",
+        "verified": true,
+        "R_mean": 0.16504694742461046,
+        "dt": 34.24297261238098
+      },
+      {
+        "id": "D4",
+        "verified": true,
+        "R_mean": 0.1855556547145049,
+        "dt": 33.92959499359131
+      },
+      {
+        "id": "D5",
+        "verified": true,
+        "R_mean": 0.18229055687785148,
+        "dt": 36.629042863845825
+      }
+    ],
+    "EPISTEMIC_C_NO_CS": [
+      {
+        "id": "R3",
+        "verified": true,
+        "R_mean": 0.1561879525333643,
+        "dt": 32.680575370788574
+      },
+      {
+        "id": "R4",
+        "verified": true,
+        "R_mean": 0.1709330326318741,
+        "dt": 31.660176038742065
+      },
+      {
+        "id": "R5",
+        "verified": false,
+        "R_mean": 0.11292061100403468,
+        "dt": 32.269885778427124
+      },
+      {
+        "id": "R6",
+        "verified": true,
+        "R_mean": 0.15455252525707086,
+        "dt": 32.67516803741455
+      },
+      {
+        "id": "A1",
+        "verified": null,
+        "R_mean": 0.18209127932786942,
+        "dt": 31.89596724510193
+      },
+      {
+        "id": "A2",
+        "verified": null,
+        "R_mean": 0.192744183242321,
+        "dt": 32.748658895492554
+      },
+      {
+        "id": "A3",
+        "verified": null,
+        "R_mean": 0.1982994981110096,
+        "dt": 31.27942943572998
+      },
+      {
+        "id": "A4",
+        "verified": null,
+        "R_mean": 0.2066472475975752,
+        "dt": 31.79792308807373
+      },
+      {
+        "id": "A5",
+        "verified": null,
+        "R_mean": 0.19093969345092773,
+        "dt": 33.15414595603943
+      },
+      {
+        "id": "A6",
+        "verified": null,
+        "R_mean": 0.19148252030213675,
+        "dt": 33.08681535720825
+      },
+      {
+        "id": "D1",
+        "verified": true,
+        "R_mean": 0.16777335638801258,
+        "dt": 32.074705600738525
+      },
+      {
+        "id": "D2",
+        "verified": true,
+        "R_mean": 0.17195100213090578,
+        "dt": 31.725367784500122
+      },
+      {
+        "id": "D3",
+        "verified": true,
+        "R_mean": 0.1744676255683104,
+        "dt": 29.91728377342224
+      },
+      {
+        "id": "D4",
+        "verified": true,
+        "R_mean": 0.18088043262561163,
+        "dt": 34.94613790512085
+      },
+      {
+        "id": "D5",
+        "verified": true,
+        "R_mean": 0.18623559504747392,
+        "dt": 31.970282077789307
+      }
+    ]
+  }
+}
