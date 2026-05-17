@@ -23,7 +23,10 @@ def load_gpt2(device="cpu"):
     return model, tokenizer
 
 
-def run_plv_matrix(device="cpu"):
+def run_plv_matrix(device="cuda"):
+    import torch
+    if device == "cuda" and not torch.cuda.is_available():
+        device = "cpu"
     print("=" * 60)
     print("TASK 1: Phase-Locking Value Matrix (144 heads)")
     print("=" * 60)

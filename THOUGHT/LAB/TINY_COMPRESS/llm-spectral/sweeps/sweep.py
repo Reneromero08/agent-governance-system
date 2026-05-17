@@ -257,7 +257,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--task", type=int, choices=[1,2,3,4,5,6,7,8], required=True)
     parser.add_argument("--epochs", type=int, default=10)
-    parser.add_argument("--device", default="cpu")
+    parser.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     args = parser.parse_args()
 
     if args.task == 1: run_task1(args.device, args.epochs)

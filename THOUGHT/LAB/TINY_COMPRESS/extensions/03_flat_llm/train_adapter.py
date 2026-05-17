@@ -318,7 +318,7 @@ def main():
     parser.add_argument("--k", type=int, nargs="+", default=[9], help="Compression dimensions")
     parser.add_argument("--epochs", type=int, default=20, help="Training epochs")
     parser.add_argument("--lr", type=float, default=1e-3, help="Learning rate")
-    parser.add_argument("--device", default="cpu", help="Device (cpu or cuda)")
+    parser.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu", help="Device (cpu or cuda)")
     args = parser.parse_args()
     run_training(k_values=args.k, epochs=args.epochs, lr=args.lr, device=args.device)
 
