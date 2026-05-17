@@ -1,0 +1,83 @@
+{
+  "baseline_mean": 0.08100584591341178,
+  "baseline_std": 0.030418062349190558,
+  "warn_threshold": 0.1418419706117929,
+  "crit_threshold": 0.17226003296098347,
+  "flags": [
+    {
+      "token": 0,
+      "dispersion": 0.17037679337825185,
+      "flag": "WARN"
+    },
+    {
+      "token": 1,
+      "dispersion": 0.12653682002816724,
+      "flag": "OK"
+    },
+    {
+      "token": 2,
+      "dispersion": 0.05933110160358016,
+      "flag": "OK"
+    },
+    {
+      "token": 3,
+      "dispersion": 0.08592642883341707,
+      "flag": "OK"
+    },
+    {
+      "token": 4,
+      "dispersion": 0.1263032252782088,
+      "flag": "OK"
+    },
+    {
+      "token": 5,
+      "dispersion": 0.06774596087804105,
+      "flag": "OK"
+    },
+    {
+      "token": 6,
+      "dispersion": 0.13555338183399696,
+      "flag": "OK"
+    },
+    {
+      "token": 7,
+      "dispersion": 0.06562199661036708,
+      "flag": "OK"
+    },
+    {
+      "token": 8,
+      "dispersion": 0.05745021238024851,
+      "flag": "OK"
+    },
+    {
+      "token": 9,
+      "dispersion": 0.08018144842614852,
+      "flag": "OK"
+    },
+    {
+      "token": 10,
+      "dispersion": 0.07015670493446578,
+      "flag": "OK"
+    },
+    {
+      "token": 11,
+      "dispersion": 0.1452088673555597,
+      "flag": "WARN"
+    },
+    {
+      "token": 12,
+      "dispersion": 0.06439569407009858,
+      "flag": "OK"
+    },
+    {
+      "token": 13,
+      "dispersion": 0.056336443265313056,
+      "flag": "OK"
+    },
+    {
+      "token": 14,
+      "dispersion": 0.06740774937987859,
+      "flag": "OK"
+    }
+  ]
+}
