@@ -177,3 +177,6 @@ THOUGHT/LAB/FORMULA/questions/critical_q51_1940/try3/results/dataset/questions-w
 # EEG validation data (large files, downloaded from OpenNeuro/PhysioNet)
 THOUGHT/LAB/FORMULA/v4/eeg/data/
 THOUGHT/LAB/FORMULA/v4/eeg/task2_ds003766/
+
+# Chronoflux reference papers (external, large PDFs)
+THOUGHT/LAB/FORMULA/v4/FORMALIZATION/REFERENCES/

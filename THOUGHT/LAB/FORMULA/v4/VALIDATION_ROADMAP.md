@@ -236,7 +236,7 @@ Quantitative refinements, not qualitative gaps. Directional confirmation is suff
 
 Only after empirical traction:
 
-- [ ] Define `hbar_sem`
+- [x] Define `hbar_sem`
 - [ ] Derive or reject an action principle
 - [ ] Specify gate-to-probability boundary conditions
 - [ ] Clarify GR/QM bridges as structural, approximate, or derivational
