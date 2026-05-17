@@ -1,0 +1,91 @@
+{
+  "phase": "bridge_smoke",
+  "date": "2026-05-17",
+  "passed": 14,
+  "failed": 0,
+  "total": 14,
+  "results": [
+    {
+      "test": "extract_canon_references",
+      "status": "PASS",
+      "n_facts": 4,
+      "facts": [
+        "ref:CANON/CONSTITUTION",
+        "ref:C:a3f2c9",
+        "invariant:according_to_canonconstitution_we_must_maximize_coherence",
+        "fact:see_also_ca3f2c9_for_details"
+      ],
+      "details": []
+    },
+    {
+      "test": "extract_default_with_exception",
+      "status": "PASS",
+      "n_facts": 3,
+      "facts": [
+        "default:birds_can_normally_fly_they_are_penguins",
+        "exception:birds_can_normally_fly_they_are_penguins",
+        "fact:penguins_cannot_fly"
+      ],
+      "details": []
+    },
+    {
+      "test": "extract_invariant_violation",
+      "status": "PASS",
+      "n_facts": 3,
+      "facts": [
+        "invariant:the_system_must_never_allow_unsigned_commits",
+        "invariant:always_require_ceremony_before_changes",
+        "invariant:an_invariant_was_violated_when_the_agent_pushed_without_approval"
+      ],
+      "details": []
+    },
+    {
+      "test": "extract_simple_facts",
+      "status": "PASS",
+      "n_facts": 3,
+      "facts": [
+        "fact:the_earth_is_round",
+        "fact:water_freezes_at_0_degrees_celsius",
+        "fact:the_sky_is_blue"
+      ],
+      "details": []
+    },
+    {
+      "test": "extract_empty_input",
+      "status": "PASS",
+      "n_facts": 0,
+      "facts": [],
+      "details": []
+    },
+    {
+      "test": "extract_short_input",
+      "status": "PASS",
+      "n_facts": 1,
+      "facts": [
+        "fact:ok"
+      ],
+      "details": []
+    },
+    {
+      "test": "extract_governance_context",
+      "status": "PASS",
+      "n_facts": 3,
+      "facts": [
+        "invariant:all_governance_checks_must_pass_before_deployment",
+        "invariant:the_job_specification_must_be_validated_against_the_schema",
+        "fact:default_trust_is_low_for_unverified_outputs"
+      ],
+      "details": []
+    },
+    {
+      "test": "extract_hard_fail_trigger",
+      "status": "PASS",
+      "n_facts": 2,
+      "facts": [
+        "invariant:an_invariant_was_violated_in_the_governance_domain",
+        "invariant:the_invariant_violation_means_the_build_must_be_halted"
+      ],
+      "details": []
+    }
+  ]
+}
