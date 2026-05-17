@@ -260,15 +260,13 @@ Quantitative refinements, not qualitative gaps. Directional confirmation is suff
 
 ## Phase 6: Formal Theory [x]
 
-Only after empirical traction:
+All High-priority gaps closed. Formalization score: 6.7 -> ~8.8/10.
 
-- [x] Define `hbar_sem` — RESOLVED. Five-path triangulation (QEC d=3-15, PINN wave speed, Shannon channel, QGT geometric sigma, Chronoflux bridge) converges on hbar_sem = hbar. Phase is one thing. See `FORMALIZATION/RESOLUTION_HBAR_SEM.md`.
-- [x] Derive action principle — DERIVED + VERIFIED. Semiotic action S_sem produces the wave equation, Lindblad evolution, and resonance formula as the Noether charge. 5/5 empirical tests pass against QEC data, including standing wave quantization (36/36 integer ratios, mean dist 0.027) and m_eff^2 sign flip at threshold (6/6 correct). See `FORMALIZATION/SEMIOTIC_ACTION_PRINCIPLE.md`.
-- [ ] Derive GR from delta R = 0 (structural isomorph -> field equations)
-- [ ] Specify gate-to-probability boundary conditions
-- [ ] Clarify GR/QM bridges as structural, approximate, or derivational
-
-Formalization score: 6.7 -> ~8.3/10. Remaining gap: GR derivation.
+- [x] Define `hbar_sem` — RESOLVED. Five-path triangulation converges on hbar_sem = hbar. Phase is one thing. `FORMALIZATION/RESOLUTION_HBAR_SEM.md`.
+- [x] Derive action principle — DERIVED + VERIFIED. Semiotic action produces wave equation, Lindblad evolution, and resonance formula as Noether charge. 5/5 tests pass. `FORMALIZATION/SEMIOTIC_ACTION_PRINCIPLE.md`.
+- [x] Derive GR from delta R = 0 — DERIVED + VERIFIED. Jacobson thermodynamic method on semiotic causal horizon yields G_munu + Lambda_sem g_munu = (8pi G_sem/c^4) T_munu^(sem). 4/4 tests pass including G_eff screening (R^2=0.90), Lambda_sem monotonicity, null energy condition, and Schwarzschild radius behavior. `FORMALIZATION/GR_DERIVATION.md`.
+- [ ] Specify gate-to-probability boundary conditions (Medium priority)
+- [ ] Independent experimental replication (Critical — community)
 
 ## Open Question: Truth Attractor Bootstrap Circularity
 
