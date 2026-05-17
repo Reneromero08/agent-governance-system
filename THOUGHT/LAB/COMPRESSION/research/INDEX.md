@@ -1,6 +1,6 @@
 # Vector Research Index
 
-**Location:** `THOUGHT/LAB/VECTOR_ELO/research/`
+**Location:** `THOUGHT/LAB/COMPRESSION/research/`
 **Created:** 2026-01-07
 **Purpose:** Consolidated vector database, embedding, and semantic memory research
 
@@ -10,8 +10,8 @@
 
 ```
 research/
-├── VECTOR_ELO_ROADMAP.md   # Vector ELO scoring system roadmap
-├── VECTOR_ELO_SPEC.md      # Vector ELO specification
+├── COMPRESSION_ROADMAP.md  # Compression research roadmap
+├── COMPRESSION_SPEC.md     # Compression specification
 ├── vector-substrate/       # VectorPack format, MemoryRecord contract
 ├── cassette-network/       # Cassette protocol, semantic network hub
 ├── semantic-core/          # Semantic core architecture, indexing
@@ -27,8 +27,8 @@ Core specifications for the Vector ELO system.
 
 | File | Description |
 |------|-------------|
-| `VECTOR_ELO_ROADMAP.md` | Vector ELO scoring system roadmap |
-| `VECTOR_ELO_SPEC.md` | Vector ELO specification (ranking, decay, trust) |
+| `COMPRESSION_ROADMAP.md` | Compression research roadmap |
+| `COMPRESSION_SPEC.md` | Compression specification |
 
 ---
 

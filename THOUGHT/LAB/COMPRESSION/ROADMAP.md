@@ -491,7 +491,7 @@ Receipt Hash:    5a4dada2c320480e...
 **Purpose:** Publishable research claim skeleton with measured results only.
 
 ### Deliverables
-- [x] Create `THOUGHT/LAB/VECTOR_ELO/research/PAPER_SPC.md`
+- [x] Create `THOUGHT/LAB/COMPRESSION/research/PAPER_SPC.md`
 
 ### Required Sections
 - [x] **Title & Abstract**

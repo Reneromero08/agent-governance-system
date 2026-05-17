@@ -2,7 +2,7 @@
 
 **Status:** PROVEN (100% bidirectional accuracy demonstrated)
 **Date:** 2026-01-16
-**Location:** `THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/`
+**Location:** `THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/`
 
 ---
 

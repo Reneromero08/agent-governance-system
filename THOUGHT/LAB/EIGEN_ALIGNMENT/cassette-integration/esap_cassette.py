@@ -6,8 +6,8 @@ Enables cross-model semantic alignment via eigenvalue spectrum invariance.
 Based on validated research: r=0.99+ correlation across embedding models.
 
 Reference:
-- THOUGHT/LAB/VECTOR_ELO/research/vector-substrate/01-08-2026_UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS.md
-- THOUGHT/LAB/VECTOR_ELO/eigen-alignment/PROTOCOL_SPEC.md
+- THOUGHT/LAB/COMPRESSION/research/vector-substrate/01-08-2026_UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS.md
+- THOUGHT/LAB/EIGEN_ALIGNMENT/PROTOCOL_SPEC.md
 """
 
 import hashlib

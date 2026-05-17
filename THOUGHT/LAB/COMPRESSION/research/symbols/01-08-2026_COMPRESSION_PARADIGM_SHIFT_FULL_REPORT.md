@@ -599,8 +599,8 @@ The infrastructure is being built. The theory is grounded in measured data. The 
 - `THOUGHT/LAB/TINY_COMPRESS/roadmaps/TINY_COMPRESS_ROADMAP.md` - RL compression
 
 ### Architecture
-- `THOUGHT/LAB/VECTOR_ELO/research/PHASE_5_ROADMAP.md` - Implementation roadmap
-- `THOUGHT/LAB/VECTOR_ELO/research/cassette-network/` - Cassette Network research
+- `THOUGHT/LAB/EIGEN_ALIGNMENT/PHASE_5_ROADMAP.E.X.md` - Implementation roadmap
+- `THOUGHT/LAB/EIGEN_ALIGNMENT/cassette-integration/` - Cassette Network research
 - `LAW/CANON/SEMANTIC/TOKEN_RECEIPT_SPEC.md` - Token accountability
 
 ---

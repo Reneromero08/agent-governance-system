@@ -50,8 +50,8 @@ Cross-model semantic alignment is achievable via:
 
 ## Files
 
-- Proof script: `THOUGHT/LAB/VECTOR_ELO/experiments/eigen_alignment_proof.py`
-- Results: `THOUGHT/LAB/VECTOR_ELO/experiments/eigen_alignment_results.json`
+- Proof script: `THOUGHT/LAB/EIGEN_ALIGNMENT/experiments/eigen_alignment_proof.py`
+- Results: `THOUGHT/LAB/EIGEN_ALIGNMENT/experiments/eigen_alignment_results.json`
 
 ## Related Work
 

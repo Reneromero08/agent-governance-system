@@ -179,14 +179,14 @@ This means:
 
 | File | Description |
 |------|-------------|
-| `THOUGHT/LAB/VECTOR_ELO/experiments/semantic_anchor_test.py` | Cross-model distance matrix testing |
+| `THOUGHT/LAB/EIGEN_ALIGNMENT/experiments/semantic_anchor_test.py` | Cross-model distance matrix testing |
 | `THOUGHT/LAB/VECTOR_ELO/experiments/invariant_search.py` | Invariant discovery (eigenvalues, ratios, etc.) |
 | `THOUGHT/LAB/VECTOR_ELO/experiments/invariant_search_results.json` | Invariant search results |
-| `THOUGHT/LAB/VECTOR_ELO/experiments/eigen_alignment_proof.py` | **MDS + Procrustes proof of concept** |
-| `THOUGHT/LAB/VECTOR_ELO/experiments/eigen_alignment_results.json` | Alignment proof results |
-| `THOUGHT/LAB/VECTOR_ELO/research/cassette-network/01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md` | **Proof report** |
-| `THOUGHT/LAB/VECTOR_ELO/research/cassette-network/OPUS_EIGEN_SPECTRUM_ALIGNMENT_PROTOCOL_PACK.md` | Full protocol spec (GPT) |
-| `THOUGHT/LAB/VECTOR_ELO/research/cassette-network/Overview of the Universal Semantic Anchor Hypothesis.md` | Literature review (GPT) |
+| `THOUGHT/LAB/EIGEN_ALIGNMENT/experiments/eigen_alignment_proof.py` | **MDS + Procrustes proof of concept** |
+| `THOUGHT/LAB/EIGEN_ALIGNMENT/experiments/eigen_alignment_results.json` | Alignment proof results |
+| `THOUGHT/LAB/COMPRESSION/research/vector-substrate/01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md` | **Proof report** |
+| `THOUGHT/LAB/COMPRESSION/research/vector-substrate/OPUS_EIGEN_SPECTRUM_ALIGNMENT_PROTOCOL_PACK.md` | Full protocol spec (GPT) |
+| `THOUGHT/LAB/COMPRESSION/research/vector-substrate/Overview of the Universal Semantic Anchor Hypothesis.md` | Literature review (GPT) |
 
 ---
 
@@ -356,13 +356,13 @@ If the Universal Semantic Anchor hypothesis is validated:
 - arXiv:2405.07987 - "Platonic Representation Hypothesis"
 - arXiv:2512.11255 - "Implicit Weight Modification in Transformers"
 - AGS: `INBOX/reports/01-08-2026_SEMANTIC_ALIGNMENT_PROTOCOL_DISCOVERY.md`
-- AGS: `THOUGHT/LAB/VECTOR_ELO/research/symbols/PLATONIC_COMPRESSION_THESIS.md`
+- AGS: `THOUGHT/LAB/COMPRESSION/research/symbols/PLATONIC_COMPRESSION_THESIS.md`
 
 ---
 
 ## Appendix: Complete Implementation
 
-See `THOUGHT/LAB/VECTOR_ELO/experiments/semantic_anchor_test.py` for the full implementation.
+See `THOUGHT/LAB/EIGEN_ALIGNMENT/experiments/semantic_anchor_test.py` for the full implementation.
 
 **Dependencies:**
 ```bash
@@ -371,7 +371,7 @@ pip install sentence-transformers numpy scipy
 
 **Quick Start:**
 ```bash
-cd THOUGHT/LAB/VECTOR_ELO/experiments
+cd THOUGHT/LAB/EIGEN_ALIGNMENT/experiments
 python semantic_anchor_test.py
 ```
 

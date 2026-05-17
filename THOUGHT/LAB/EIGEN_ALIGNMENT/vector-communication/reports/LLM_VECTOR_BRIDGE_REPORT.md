@@ -289,9 +289,9 @@ With the alignment key as shared context, the message can be transmitted using o
 - `CAPABILITY/PRIMITIVES/tests/test_vector_communication.py` - Test suite
 
 ### Research Artifacts
-- `THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/vector communication_3.txt` - Bridge design session
-- `THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/vector communication_4.txt` - Anchor analysis session
-- `THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/vector communication_5.txt` - Final validation session
+- `THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/transcripts/vector communication_3.txt` - Bridge design session
+- `THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/transcripts/vector communication_4.txt` - Anchor analysis session
+- `THOUGHT/LAB/EIGEN_ALIGNMENT/vector-communication/transcripts/vector communication_5.txt` - Final validation session
 
 ---
 

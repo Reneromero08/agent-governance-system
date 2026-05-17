@@ -252,7 +252,7 @@ It's being built.
 
 - arXiv:2512.11255 — "Transformers implicitly update FF weights in-context"
 - arXiv:2405.07987 — "Platonic Representation Hypothesis" (representational convergence)
-- `THOUGHT/LAB/VECTOR_ELO/research/symbols/PLATONIC_COMPRESSION_THESIS.md`
+- `THOUGHT/LAB/COMPRESSION/research/symbols/PLATONIC_COMPRESSION_THESIS.md`
 - `NAVIGATION/PROOFS/COMPRESSION/SEMANTIC_SYMBOL_PROOF_REPORT.md`
 
 ---

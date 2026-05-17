@@ -87,9 +87,10 @@ y_aligned = y @ R
 ## Directory Structure
 
 ```
-eigen-alignment/
+THOUGHT/LAB/EIGEN_ALIGNMENT/
 ├── README.md                    # This file
 ├── PROTOCOL_SPEC.md             # Normative protocol specification
+├── PHASE_5_ROADMAP_E.X.md       # Eigen-alignment phase roadmap
 ├── lib/                         # Library implementation
 │   ├── mds.py                   # Classical MDS
 │   ├── procrustes.py            # Procrustes alignment
@@ -102,7 +103,9 @@ eigen-alignment/
 │   ├── held_out/                # Evaluation set
 │   └── results/                 # Benchmark outputs
 ├── tests/                       # Test suite
-└── receipts/                    # Receipts and reports
+├── experiments/                 # Cross-model alignment experiments
+├── receipts/                    # Receipts and reports
+└── qgt_lib/                     # QGT library for quantum-geometric tests
 ```
 
 ---
@@ -128,6 +131,7 @@ eigen-alignment/
 
 ## References
 
-- **Proof of concept:** `../experiments/eigen_alignment_proof.py`
-- **Hypothesis document:** `../research/cassette-network/01-08-2026_UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS.md`
-- **Execution pack:** `../research/cassette-network/OPUS_EIGEN_SPECTRUM_ALIGNMENT_PROTOCOL_PACK.md`
+- **Proof of concept:** `experiments/eigen_alignment_proof.py`
+- **Hypothesis document:** `experiments/` (see eigen alignment results)
+- **Sibling lab:** `THOUGHT/LAB/COMPRESSION/` for SCL/SPC research
+- **Sibling lab:** `THOUGHT/LAB/VECTOR_ELO/` for ELO scoring
