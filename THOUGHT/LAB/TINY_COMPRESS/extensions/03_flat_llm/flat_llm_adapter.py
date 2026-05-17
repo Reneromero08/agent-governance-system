@@ -151,30 +151,47 @@ def compute_relative_error(a: torch.Tensor, b: torch.Tensor) -> float:
 @torch.no_grad()
 def collect_activations_all_layers(model, tokenizer, texts: List[str],
                                     device: str = "cpu") -> Dict[int, Dict[str, torch.Tensor]]:
-    """Collect K, V activations from ALL layers of GPT-2."""
+    """Collect K, V activations from ALL layers of GPT-2 using hooks."""
     model.eval()
     n_layers = model.config.n_layer
     layer_data = {i: {'k': [], 'v': []} for i in range(n_layers)}
 
+    # Register hooks to capture K,V at each layer
+    hooks = []
+    def make_hook(layer_idx):
+        def hook(module, input, output):
+            # GPT2Attention output: (attn_output, present) or just a tensor
+            # But we want the K,V BEFORE attention. Use a forward hook on c_attn.
+            pass
+        return hook
+
+    # Instead, intercept the c_attn output per layer
+    def make_qkv_hook(layer_idx):
+        def hook(module, input, output):
+            # output from c_attn: [batch, seq, 3*hidden]
+            split_size = output.shape[-1] // 3
+            k = output[..., split_size:2*split_size]
+            v = output[..., 2*split_size:]
+            layer_data[layer_idx]['k'].append(k.reshape(-1, k.shape[-1]))
+            layer_data[layer_idx]['v'].append(v.reshape(-1, v.shape[-1]))
+        return hook
+
+    for idx in range(n_layers):
+        block = model.transformer.h[idx]
+        h = block.attn.c_attn.register_forward_hook(make_qkv_hook(idx))
+        hooks.append(h)
+
+    # Run forward pass through the model for each text
     for text in texts:
         inputs = tokenizer(text, return_tensors='pt', truncation=True, max_length=256)
         inputs = {k: v.to(device) for k, v in inputs.items()}
+        _ = model(**inputs, output_hidden_states=False)
 
-        hidden = model.transformer.wte(inputs['input_ids']) + model.transformer.wpe(
-            torch.arange(inputs['input_ids'].shape[1], device=device)
-        )
-        hidden = model.transformer.drop(hidden)
+    # Remove hooks
+    for h in hooks:
+        h.remove()
 
-        for idx in range(n_layers):
-            block = model.transformer.h[idx]
-            normed = block.ln_1(hidden)
-            qkv = block.attn.c_attn(normed)
-            q, k, v = qkv.chunk(3, dim=-1)
-            layer_data[idx]['k'].append(k.reshape(-1, k.shape[-1]))
-            layer_data[idx]['v'].append(v.reshape(-1, v.shape[-1]))
-            hidden = block(hidden)[0]
-
-    # Concatenate
+    # Concatenate and pad
     result = {}
     for idx in range(n_layers):
         k_t = torch.cat(layer_data[idx]['k'], dim=0)
@@ -189,6 +206,21 @@ def collect_activations_all_layers(model, tokenizer, texts: List[str],
         result[idx] = {'k': k_t, 'v': v_t}
 
     return result
+
+
+def compute_attention_output_train(q, k, v, num_heads, scale):
+    """Same as compute_attention_output but without no_grad for training."""
+    batch, seq, hidden = q.shape
+    head_dim = hidden // num_heads
+    q_r = q.view(batch, -1, num_heads, head_dim).transpose(1, 2)
+    k_r = k.view(batch, -1, num_heads, head_dim).transpose(1, 2)
+    v_r = v.view(batch, -1, num_heads, head_dim).transpose(1, 2)
+    attn = torch.matmul(q_r, k_r.transpose(-2, -1)) * scale
+    causal = torch.triu(torch.ones(seq, seq, device=q.device) * float('-inf'), diagonal=1)
+    attn = attn + causal
+    attn = F.softmax(attn, dim=-1)
+    out = torch.matmul(attn, v_r)
+    return out.transpose(1, 2).contiguous().view(batch, -1, hidden)
 
 
 @torch.no_grad()

@@ -117,6 +117,25 @@ Goal: Test whether high-compression, high-depth symbols survive noisy transmissi
 - [x] SVD 6x more efficient — 1D flattening breaks spatial locality
 - [x] SeeMPS Cython extension hangs on Windows — documented in ERROR_REPORT.md
 
+### Phase 3.5: KV Cache Adapter Training [x]
+
+Goal: Train low-rank adapters to correct PCA compression of GPT-2 KV cache. Test whether σ > 1 for trained corrections.
+
+- [x] LowRankAdapter architecture: Linear(k, 64) → GELU → Linear(64, 768), residual correction in orthogonal subspace
+- [x] Training loop with attention output fidelity loss (MSE between adapted and original attention)
+- [x] Fixed gradient flow (removed @torch.no_grad from attention computation)
+- [x] Hook-based activation collection for all 12 GPT-2 layers
+- [x] Local GPT-2 model loading (no HF download dependency)
+- [x] Result at k=9 (85.3x compression): trained adapter 0.821 attention cosine vs PCA-only 0.717 (+0.104)
+- [x] Random adapter hurts (-0.199). Training converts liability to asset: 11/12 layers improved
+- [x] Best layer: +0.324 (Layer 5). Worst layer: -0.013 (Layer 11)
+- [x] Trained σ > 1 confirmed — adapter provides real amplification beyond PCA
+
+**Artifacts:**
+- `THOUGHT/LAB/TINY_COMPRESS/extensions/03_flat_llm/train_adapter.py` — Training script
+- `THOUGHT/LAB/TINY_COMPRESS/extensions/03_flat_llm/train_results.json` — Per-layer metrics
+- `THOUGHT/LAB/TINY_COMPRESS/extensions/03_flat_llm/trained_adapters.pt` — Trained weights
+
 ## Phase 4: Cybernetic Truth Monitor [x]
 
 Goal: Implement `SemioticMonitor`. Token-level R measurement + T modulation feedback loop.
