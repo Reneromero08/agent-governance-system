@@ -415,14 +415,16 @@ class AutoFeedbackLoop:
         return {"ppl_ratio": round(avg_ppl_r, 2), "attention_cosine": round(avg_cos, 4), "per_prompt": metrics}
 
     def run_feedback(self, prompts, max_passes=3, max_tokens=40, attn_lambda=0.1,
-                      batch_size=4, layer_gamma=0.85, kl_lambda=0.0, cortex=None):
+                      batch_size=4, layer_gamma=0.85, kl_lambda=0.0, cortex=None,
+                      facts_cassette=None):
         """Run the auto-feedback loop.
 
-        Improvements over v1:
+        Improvements:
         - Per-layer attention weighting: early layers get more gradient (gamma^layer)
-        - Mini-batch gradient accumulation: accumulate over batch_size prompts before stepping
-        - Optional KL loss: compare compressed vs uncompressed logits at each generation step
-        - Optional cortex cache: caches uncompressed attention targets in resident memory
+        - Mini-batch gradient accumulation
+        - Optional KL loss: compare compressed vs uncompressed logits
+        - Optional cortex cache: caches attention targets in resident memory
+        - Optional facts cassette: corrects noisy training targets with ground truth
         """
         n_layers = len(self.model.h)
         layer_weights = torch.tensor(
@@ -443,6 +445,7 @@ class AutoFeedbackLoop:
             total_loss = 0.0
             n_updates = 0
             n_cache_hits = 0
+            n_cassette_fixes = 0
             self.optimizer.zero_grad()
             self.model.train()  # Ensure train mode for gradient computation
 
@@ -465,6 +468,22 @@ class AutoFeedbackLoop:
                             top_p=0.9, do_sample=True,
                             pad_token_id=self.tokenizer.eos_token_id)
                     target_text = self.tokenizer.decode(unc_out[0], skip_special_tokens=True)
+
+                    # 1b. Check facts cassette for correction
+                    if facts_cassette is not None:
+                        fact = facts_cassette.correct(prompt)
+                        if fact:
+                            # Regenerate with fact injected for cleaner training signal
+                            aug_prompt = prompt + " The answer is " + fact + "."
+                            aug_inp = self.tokenizer(aug_prompt, return_tensors="pt")
+                            aug_ids = aug_inp["input_ids"].to(self.device)
+                            with torch.no_grad():
+                                aug_out = self.original.generate(
+                                    aug_ids, max_new_tokens=max_tokens, temperature=0.7,
+                                    top_p=0.9, do_sample=True,
+                                    pad_token_id=self.tokenizer.eos_token_id)
+                            target_text = self.tokenizer.decode(aug_out[0], skip_special_tokens=True)
+                            n_cassette_fixes += 1
 
                     # 2. Extract uncompressed attention (target)
                     with torch.no_grad():
@@ -514,8 +533,10 @@ class AutoFeedbackLoop:
             avg_loss = total_loss / max(n_updates, 1)
             pass_losses.append(avg_loss)
             cache_str = f"  cache_hits={n_cache_hits}" if cache else ""
+            facts_str = f"  facts_fixed={n_cassette_fixes}" if facts_cassette else ""
             print(f"  Pass {pass_idx+1} avg loss: {avg_loss:.4f}  "
-                  f"updates={n_updates//batch_size + (1 if n_updates%batch_size else 0)} steps{cache_str}", flush=True)
+                  f"updates={n_updates//batch_size + (1 if n_updates%batch_size else 0)} steps"
+                  f"{cache_str}{facts_str}", flush=True)
 
             # Early stopping: stop if loss plateaus (improvement < 1% for 2 consecutive passes)
             if pass_idx >= 2:
