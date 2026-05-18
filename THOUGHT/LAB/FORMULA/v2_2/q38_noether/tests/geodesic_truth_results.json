@@ -1,0 +1,67 @@
+{
+  "timestamp": "2026-05-18T01:43:36.227353+00:00",
+  "test_battery": "Q38 Noether Geodesic Truth",
+  "tests": {
+    "semantic_minilm": {
+      "model": "all-MiniLM-L6-v2",
+      "subj_obj": {
+        "mean_true": 1.016356758599481,
+        "mean_false": 1.173402865220653,
+        "t": -5.230243611983012,
+        "p": 9.75097994291638e-07,
+        "mw_p": 1.740917795739434e-06,
+        "d": 1.0608809833953272,
+        "truth_shorter": true
+      },
+      "subjrel_obj": {
+        "mean_true": 1.2018974667796234,
+        "mean_false": 1.3386193630663847,
+        "t": -5.453199511460059,
+        "p": 3.771191693028948e-07,
+        "mw_p": 7.490172606155202e-07,
+        "d": 1.1067129046613304,
+        "truth_shorter": true
+      }
+    },
+    "semantic_mpnet": {
+      "model": "all-mpnet-base-v2",
+      "subj_obj": {
+        "mean_true": 1.0196664393649844,
+        "mean_false": 1.1784324592213156,
+        "t": -5.23970167320936,
+        "p": 9.369544323683642e-07,
+        "mw_p": 1.8008460174621864e-06,
+        "d": 1.062731378038918,
+        "truth_shorter": true
+      },
+      "subjrel_obj": {
+        "mean_true": 1.188266244048589,
+        "mean_false": 1.3316903392215482,
+        "t": -6.005805673650237,
+        "p": 3.314297599883651e-08,
+        "mw_p": 2.1357010699272432e-07,
+        "d": 1.2183083348606094,
+        "truth_shorter": true
+      }
+    },
+    "surprise_distilgpt2": {
+      "r": 0.16322205325667855,
+      "p": 0.04823005015210202,
+      "n": 147
+    },
+    "forced_distilgpt2": {
+      "expected_mean": 9868.387841796875,
+      "unexpected_mean": 5605.9642333984375,
+      "t": 2.526721370527051,
+      "p": 0.017444597176728048,
+      "d": -0.9550109112524092,
+      "expected_smoother": false
+    }
+  },
+  "verdict": {
+    "core_passed": "4/4",
+    "total_passed": "5/6",
+    "status": "VERIFIED",
+    "key_finding": "Truth follows shorter geodesics in semantic space (MiniLM+MPNet). Causal LM hidden states are the wrong manifold."
+  }
+}
