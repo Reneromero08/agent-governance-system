@@ -1,0 +1,42 @@
+============================================================
+Phase 4b: Real TraDo-4B Experiment
+============================================================
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\triton\windows_utils.py:404: UserWarning: Failed to find CUDA.
+  warnings.warn("Failed to find CUDA.")
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\FORMULA\v4\phase4b\run_real.py", line 16, in <module>
+    trado = get_model(quantize="q4")
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\FORMULA\v4\phase4b\model\model_loader.py", line 167, in get_model
+    model = AutoModelForCausalLM.from_pretrained(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CCC 2.0\AI\agent-governance-system\.venv\Lib\site-packages\transformers\models\auto\auto_factory.py", line 558, in from_pretrained
+    model_class = get_class_from_dynamic_module(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CCC 2.0\AI\agent-governance-system\.venv\Lib\site-packages\transformers\dynamic_module_utils.py", line 581, in get_class_from_dynamic_module
+    return get_class_in_module(class_name, final_module, force_reload=force_download)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CCC 2.0\AI\agent-governance-system\.venv\Lib\site-packages\transformers\dynamic_module_utils.py", line 277, in get_class_in_module
+    module_spec.loader.exec_module(module)
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\Users\rene_\.cache\huggingface\modules\transformers_modules\model\modeling_sdar.py", line 520, in <module>
+    class SDARModel(SDARPreTrainedModel):
+  File "C:\Users\rene_\.cache\huggingface\modules\transformers_modules\model\modeling_sdar.py", line 546, in SDARModel
+    @auto_docstring
+     ^^^^^^^^^^^^^^
+  File "D:\CCC 2.0\AI\agent-governance-system\.venv\Lib\site-packages\transformers\utils\args_doc.py", line 1570, in auto_docstring
+    return auto_docstring_decorator(obj)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CCC 2.0\AI\agent-governance-system\.venv\Lib\site-packages\transformers\utils\args_doc.py", line 1563, in auto_docstring_decorator
+    return auto_method_docstring(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CCC 2.0\AI\agent-governance-system\.venv\Lib\site-packages\transformers\utils\args_doc.py", line 1440, in auto_method_docstring
+    docstring += _process_parameters_section(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CCC 2.0\AI\agent-governance-system\.venv\Lib\site-packages\transformers\utils\args_doc.py", line 1285, in _process_parameters_section
+    print("\n".join(undocumented_parameters))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f6a8' in position 0: character maps to <undefined>

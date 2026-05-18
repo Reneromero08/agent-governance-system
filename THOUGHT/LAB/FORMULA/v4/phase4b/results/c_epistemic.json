@@ -1,0 +1,29 @@
+{
+  "fragment_weights": {
+    "COMMONSENSE": 0.2835,
+    "Factual": 0.567,
+    "SelfConsistency": 0.1496
+  },
+  "fragment_confidences": {
+    "COMMONSENSE": 0.8,
+    "Factual": 0.8,
+    "SelfConsistency": 0.8
+  },
+  "threshold": 0.1683,
+  "calibration_n": 12,
+  "calibration_accuracy": 0.8333,
+  "metadata": {
+    "fragment_correlations": {
+      "COMMONSENSE": 0.5,
+      "Factual": 1.0,
+      "SelfConsistency": 0.2638
+    },
+    "mean_grad_S_correct": 0.15547709831736636,
+    "std_grad_S_correct": 0.0255775756745586,
+    "grad_S_distribution": {
+      "min": 0.1008,
+      "max": 0.1884,
+      "n_samples": 10
+    }
+  }
+}

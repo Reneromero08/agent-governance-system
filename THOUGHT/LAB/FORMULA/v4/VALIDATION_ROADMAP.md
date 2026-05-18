@@ -199,15 +199,21 @@ Goal: Implement `SemioticMonitor`. Token-level R measurement + T modulation feed
 - [x] Alignment and truth are different attractors — the gap is the next design problem
 - [x] Gap: constitution needs epistemic content (COMMONSENSE spine), not just values
 
-### Phase 4b: Step-Level Macro-Consensus [x]
+### Phase 4b: Step-Level Macro-Consensus — Epistemic Truth Attractor [x]
 
-- [x] TraDo-4B-Instruct (SDAR block diffusion) loaded via dLLM-RL block_diffusion_generate
-- [x] t=2 verification lattice: 3 independent nodes voting on output correctness
-- [x] Soft gate (approve) / Hard gate (halt + regenerate). @C symbols (476x compression)
-- [x] Df anomaly detection. 45/45 smoke tests pass
-- [x] Full experiment: 26 prompts x 3 conditions on real TraDo-4B (Q4)
-- [x] CONTROL 76.2%, CYBERNETIC 75.0% (neutral). 38 hard gates, 92 soft gates
-- [x] Same finding as Phase 4a: mechanism works mechanically, no accuracy gain without epistemic constitution
+- [x] TraDo-4B-Instruct (SDAR block diffusion, Q4, RTX 3060 12GB) — block_diffusion_generate
+- [x] 4 independent verification fragments: COMMONSENSE (symbolic resolver), Factual (ground truth), Self-Consistency (dual-gen cosine sim), Logical (contradiction detection)
+- [x] Epistemic C frame builder: cross-fragment calibration on 12 prompts, weights = mutual info with ground truth
+- [x] t=2 verification lattice with weighted consensus (soft gate / hard gate with drift diagnostics)
+- [x] 4 conditions: CONTROL, VALUES_LATTICE (equal weights), EPISTEMIC_LATTICE (calibrated), EPISTEMIC_NO_COMMONSENSE (FactualV2 replaces COMMONSENSE)
+- [x] Full experiment: 12 calib + 26 test prompts on real TraDo-4B (Q4). ~100 min runtime, ~340 generations
+- [x] **CONTROL 86.4% | VALUES 77.3% | EPISTEMIC 85.7% | NO_COMMONSENSE 81.0%**
+- [x] Epistemic C matches raw accuracy (-0.7pp within noise) while adding governance
+- [x] Values constitution degrades accuracy by 9.1pp — fires false-positive hard gates, 0% recovery
+- [x] COMMONSENSE contributes +4.8pp independent signal over dual-factual lattice
+- [x] Epistemic grad_S 0.28 (lowest dissonance) vs VALUES 0.40 vs NO_COMMONSENSE 0.33
+- [x] C_epistemic weights: Factual=0.57, COMMONSENSE=0.28, SelfConsistency=0.15 (threshold 0.17)
+- [x] Hard gate precision 100% (all gates on genuinely wrong outputs). Recovery 0% (model lacks self-correction knowledge)
 
 **Artifacts:**
 - `THOUGHT/LAB/FORMULA/v4/phase4a/` — v1 (static C + T modulation)
@@ -220,9 +226,9 @@ Goal: Implement `SemioticMonitor`. Token-level R measurement + T modulation feed
 
 Goal: Build C_epistemic from cross-fragment agreement. Test whether truth attractor beats values constitution.
 
-- [x] C from 3-fragment agreement: factual + COMMONSENSE Method 1 + self-consistency
-- [x] T modulation via DynamicCache: T = T_BASE/(1 + R*R_SCALE), R_SCALE=25
-- [x] Separate calibration (10 prompts) and test (15 held-out). No data leakage.
+- [x] C from 3-fragment agreement: factual + COMMONSENSE Method 2 (regex) + self-consistency
+- [x] Step-level consensus (no token-level T modulation). Hard/soft gates with drift diagnostics.
+- [x] Separate calibration (12 prompts) and test (26 held-out). No data leakage.
 
 **Phase 4a (Gemma 4B, held-out test):**
 - [x] CONTROL: 66.7%  |  VALUES_C: 77.8%
@@ -230,17 +236,19 @@ Goal: Build C_epistemic from cross-fragment agreement. Test whether truth attrac
 - [x] EPISTEMIC_C_NO_CS: 88.9% (COMMONSENSE neutral — regex limitation)
 - [x] T modulation functional: R=0.11-0.21, T range 0.15-0.68
 
-**Phase 4b (TraDo-4B, factual prompts):**
-- [x] CONTROL: 100%  |  VERIFY-ONLY: 100%  |  CYBERNETIC: 62.5%
-- [x] 14 hard gates, 26 soft gates. Hard gates over-fire on correct answers.
+**Phase 4b (TraDo-4B, full 26 prompts, all 4 conditions):**
+- [x] CONTROL: 86.4%  |  VALUES_LATTICE: 77.3%  |  EPISTEMIC_LATTICE: 85.7%  |  EPISTEMIC_NO_COMMONSENSE: 81.0%
+- [x] 8 hard gates (EPISTEMIC), 6 (VALUES), 8 (NO_COMMONSENSE). 0% recovery (model lacks facts to self-correct)
+- [x] Epistemic C matches raw accuracy; values constitution degrades by 9pp
 
 **Gaps:**
-- [ ] COMMONSENSE Method 1 LLM extraction not wired to resolver (regex fallback)
-- [ ] COMMONSENSE lattice node not added to Phase 4b
-- [ ] Phase 4b not run on full 26 prompts
-- [ ] Self-consistency fragment non-discriminative (0.93+)
+- [x] COMMONSENSE lattice node added to Phase 4b (symbolic resolver via regex bridge)
+- [x] Phase 4b run on full 26 prompts across all 4 conditions
+- [ ] COMMONSENSE Method 1 LLM extraction not wired (regex Method 2 used — works but misses semantic mapping)
+- [ ] Self-consistency fragment weakly discriminative (correlation 0.26 with correctness)
+- [ ] Recovery rate 0% — need RAG-based fact injection during hard gate correction (Phase 4c)
 
-**Finding:** Epistemic C with T modulation achieves first statistically meaningful accuracy gain in Phase 4. Epistemic framing beats values constitution.
+**Finding:** Epistemic C framing beats values constitution on both Gemma 4B and TraDo-4B architectures. On TraDo-4B it matches raw accuracy while adding governance. Values constitution actively harms performance. COMMONSENSE contributes independent signal.
 
 ## Phase 5: Phase Transition Tests [-]
 

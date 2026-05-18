@@ -1,0 +1,22 @@
+{
+  "prompt_id": "R1",
+  "step": 1,
+  "condition": "EPISTEMIC_NO_COMMONSENSE",
+  "gate_type": "hard",
+  "diagnostic": {
+    "drift_type": "partial_mixed",
+    "failed_fragments": [
+      "Factual",
+      "Factual"
+    ],
+    "passed_fragments": [
+      "SelfConsistency"
+    ],
+    "abstained_fragments": [],
+    "evidence_summary": "Factual: Ground truth NOT found in output KB: 1 matches, 1 misses. | Factual: Ground truth NOT found in output KB: 1 matches, 1 misses.",
+    "correction_context": "VERIFICATION FAILED: Your output failed multiple verification checks. Review and correct the issues before responding. Specifically: Factual: Ground truth NOT found in output KB: 1 matches, 1 misses. | Factual: Ground truth NOT found in output KB: 1 matches, 1 misses.",
+    "consensus_ratio": 0.3333,
+    "grad_S": 0.8165
+  },
+  "regenerated_verified": false
+}

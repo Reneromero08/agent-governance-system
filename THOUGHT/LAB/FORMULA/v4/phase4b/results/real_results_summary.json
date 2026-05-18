@@ -1,0 +1,47 @@
+{
+  "phase": "4b",
+  "date": "2026-05-17",
+  "model": "TraDo-4B-Instruct-Q4",
+  "conditions": {
+    "CONTROL": {
+      "accuracy": 0.8636,
+      "n_correct": 19,
+      "n_verified": 22,
+      "hard_gates": 0,
+      "soft_gates": 0,
+      "recovery_rate": 0,
+      "grad_S_mean": 0,
+      "R_mean": 0
+    },
+    "VALUES_LATTICE": {
+      "accuracy": 0.7727,
+      "n_correct": 17,
+      "n_verified": 22,
+      "hard_gates": 6,
+      "soft_gates": 26,
+      "recovery_rate": 0,
+      "grad_S_mean": 0.3982,
+      "R_mean": 1.09
+    },
+    "EPISTEMIC_LATTICE": {
+      "accuracy": 0.8571,
+      "n_correct": 18,
+      "n_verified": 21,
+      "hard_gates": 2,
+      "soft_gates": 26,
+      "recovery_rate": 0,
+      "grad_S_mean": 0.2757,
+      "R_mean": 0.78
+    },
+    "EPISTEMIC_NO_COMMONSENSE": "TIMED_OUT_after_8_of_26"
+  },
+  "c_epistemic": {
+    "weights": {
+      "COMMONSENSE": 0.2387,
+      "Factual": 0.4775,
+      "SelfConsistency": 0.2838
+    },
+    "threshold": 0.2409,
+    "calib_accuracy": 0.833
+  }
+}

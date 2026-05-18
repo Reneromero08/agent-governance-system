@@ -1,0 +1,21 @@
+{
+  "prompt_id": "A2",
+  "step": 0,
+  "condition": "EPISTEMIC_NO_COMMONSENSE",
+  "gate_type": "hard",
+  "diagnostic": {
+    "drift_type": "full_decoherence",
+    "failed_fragments": [
+      "Factual",
+      "Factual",
+      "SelfConsistency"
+    ],
+    "passed_fragments": [],
+    "abstained_fragments": [],
+    "evidence_summary": "Factual: Factual errors: 1 mismatches. train -> expected 4:30 pm | Factual: Factual errors: 1 mismatches. train -> expected 4:30 pm | SelfConsistency: Similarity: 0.7400 (threshold: 0.8, method: cosine-embedding)",
+    "correction_context": "VERIFICATION FAILED: Your output failed ALL verification channels. Re-examine the prompt completely and try again with a fundamentally different approach. Specifically: Factual: Factual errors: 1 mismatches. train -> expected 4:30 pm | Factual: Factual errors: 1 mismatches. train -> expected 4:30 pm",
+    "consensus_ratio": 0.0,
+    "grad_S": 1.0
+  },
+  "regenerated_verified": null
+}

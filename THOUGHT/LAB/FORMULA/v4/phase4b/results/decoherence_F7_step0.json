@@ -1,0 +1,22 @@
+{
+  "prompt_id": "F7",
+  "step": 0,
+  "condition": "EPISTEMIC_LATTICE",
+  "gate_type": "hard",
+  "diagnostic": {
+    "drift_type": "factual_decoherence",
+    "failed_fragments": [
+      "Factual",
+      "SelfConsistency"
+    ],
+    "passed_fragments": [
+      "COMMONSENSE"
+    ],
+    "abstained_fragments": [],
+    "evidence_summary": "Factual: Ground truth NOT found in output KB: 0 matches, 0 misses. | SelfConsistency: Mock similarity: 0.73 (threshold: 0.8, method: mock-deterministic)",
+    "correction_context": "VERIFICATION FAILED: Your factual claims were inconsistent with verified sources. Re-check your facts and try again. Specifically: Factual: Ground truth NOT found in output KB: 0 matches, 0 misses. | SelfConsistency: Mock similarity: 0.73 (threshold: 0.8, method: mock-deterministic)",
+    "consensus_ratio": 0.3333,
+    "grad_S": 0.8165
+  },
+  "regenerated_verified": true
+}
