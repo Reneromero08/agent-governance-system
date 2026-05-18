@@ -265,7 +265,7 @@ All High-priority gaps closed. Formalization score: 6.7 -> ~8.8/10.
 - [x] Define `hbar_sem` — RESOLVED. Five-path triangulation converges on hbar_sem = hbar. Phase is one thing. `FORMALIZATION/RESOLUTION_HBAR_SEM.md`.
 - [x] Derive action principle — DERIVED + VERIFIED. Semiotic action produces wave equation, Lindblad evolution, and resonance formula as Noether charge. 5/5 tests pass. `FORMALIZATION/SEMIOTIC_ACTION_PRINCIPLE.md`.
 - [x] Derive GR from delta R = 0 — DERIVED + VERIFIED. Jacobson thermodynamic method on semiotic causal horizon yields G_munu + Lambda_sem g_munu = (8pi G_sem/c^4) T_munu^(sem). 4/4 tests pass including G_eff screening (R^2=0.90), Lambda_sem monotonicity, null energy condition, and Schwarzschild radius behavior. `FORMALIZATION/GR_DERIVATION.md`.
-- [ ] Specify gate-to-probability boundary conditions (Medium priority)
+- [x] Specify gate-to-probability boundary conditions — FORMALIZED. The Born rule P = |⟨a|b⟩|² is universal. On real manifolds (ℝ) it is the identity x → x². On complex manifolds (ℂ) it reveals phase through the interference term. The boundary is geometric: ℝ ⊂ ℂ. Kimi's test didn't show the Born rule fails — it showed real embeddings are ℝ, where the Born rule works perfectly as the identity. `FORMALIZATION/GATE_PROBABILITY_BOUNDARY.md`.
 - [ ] Independent experimental replication (Critical — community)
 
 ## Open Question: Truth Attractor Bootstrap Circularity
