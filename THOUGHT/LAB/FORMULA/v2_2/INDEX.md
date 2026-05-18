@@ -12,7 +12,7 @@
 | Q | Hypothesis | Status | Directory |
 |---|-----------|--------|-----------|
 | Q32 | Meaning behaves like a physical field | OPEN | q32_meaning_field/ |
-| Q51 | Embedding spaces have intrinsic complex structure | OPEN | q51_complex_plane/ |
+| Q51 | Embedding spaces have intrinsic complex structure | CONFIRMED (boundary) | q51_complex_plane/ |
 | Q48 | Eigenvalue statistics connect to Riemann zeta | CONFIRMED | q48_riemann/ |
 | Q49 | Df*alpha = 8e for a derivable reason | FALSIFIED | q49_why_8e/ |
 | Q50 | Df*alpha is conserved across architectures | PARTIALLY VERIFIED | q50_completing_8e/ |
