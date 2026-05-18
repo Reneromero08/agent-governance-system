@@ -1,7 +1,7 @@
 # Q38 Verification Report: Truth Follows Shorter Geodesics
 
 **Date:** 2026-05-17
-**Status:** PARTIALLY VERIFIED (v1 SLERP tautology FALSIFIED, geodesic truth claim VERIFIED)
+**Status:** VERIFIED (v1 SLERP tautology FALSIFIED, geodesic truth claim VERIFIED)
 **Reviewer:** Fresh verification + geodesic test battery
 
 ---

@@ -17,10 +17,10 @@
 | Q49 | Df*alpha = 8e for a derivable reason | FALSIFIED | q49_why_8e/ |
 | Q50 | Df*alpha is conserved across architectures | OPEN | q50_completing_8e/ |
 | Q43 | Embedding covariance captures quantum-geometric structure | OPEN | q43_qgt/ |
-| Q44 | E follows Born Rule statistics | PARTIALLY FALSIFIED | q44_born_rule/ |
+| Q44 | E follows Born Rule statistics | CONFIRMED | q44_born_rule/ |
 | Q45 | Geometry alone suffices for semantic navigation | OPEN | q45_geometry_nav/ |
 | Q8 | Embedding spaces have meaningful topological structure | OPEN | q08_topology/ |
-| Q38 | Truth follows shorter geodesics in meaning-space | PARTIALLY VERIFIED | q38_noether/ |
+| Q38 | Truth follows shorter geodesics in meaning-space | VERIFIED | q38_noether/ |
 | Q17 | R-gating improves governance decisions | OPEN | q17_governance/ |
 | Q10 | R detects misalignment | OPEN | q10_alignment/ |
 
