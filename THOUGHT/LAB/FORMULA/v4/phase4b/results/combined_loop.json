@@ -1,0 +1,12 @@
+{
+  "phase": "combined-loop",
+  "model": "LFM-2.5-1.2B-Instruct-Q8_0",
+  "control_accuracy": 0.333,
+  "combined_accuracy": 0.8,
+  "general_accuracy": 1.0,
+  "ags_accuracy": 0.7,
+  "hard_gates": 10,
+  "recovered": 7,
+  "recovery_rate": 0.7,
+  "n_prompts": 15
+}

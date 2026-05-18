@@ -498,7 +498,7 @@ def run_gguf_demo(device: str = "cpu"):
     backend = GgufBackend(n_ctx=2048, verbose=False)
     info = backend.info()
     print(f"      Model: {info['model']} ({info['arch']})")
-    print(f"      GPU:   {info['gpu']}, {info['layers_offloaded']} layers offloaded")
+    print(f"      GPU:   {info['gpu']}")
     print(f"      EmbD:  {info['n_embd']}, Vocab: {info['n_vocab']}, Layers: {info['n_layers']}")
     print()
 
@@ -551,6 +551,47 @@ def run_gguf_demo(device: str = "cpu"):
     print("  Done.")
 
 
+def run_qwen_demo():
+    """Qwen3.6 35B-A3B MoE GGUF demo with partial GPU offload."""
+    print("=" * 72)
+    print("  Qwen3.6 GGUF Demo (35B-A3B MoE + CUDA)")
+    print("  Phase 3.5: Large MoE model inference")
+    print("=" * 72)
+    print()
+
+    from gguf_backend import GgufBackend, MODELS
+
+    print("[1/3] Loading Qwen3.6 with partial GPU offload (18/42 layers)...")
+    b = GgufBackend(gguf_path=MODELS["qwen"], n_gpu_layers=18, n_ctx=512)
+    info = b.info()
+    print(f"      Model: {info['model']} ({info['arch']})")
+    print(f"      GPU:   {info['gpu']}, {info['n_layers']} layers, 18 offloaded")
+    print(f"      EmbD:  {info['n_embd']}, Vocab: {info['n_vocab']}")
+    print()
+
+    print("[2/3] Text generation (single instance)...")
+    prompts = [
+        "The capital of France is",
+        "The theory of relativity was developed by",
+        "Machine learning is a subset of",
+    ]
+    for text in prompts:
+        out = b.generate(text, max_tokens=24)
+        print(f"      {text}")
+        print(f"      -> {out}")
+        print()
+
+    print("[3/3] Chat completion (Qwen3.6 chat template)...")
+    reply = b.chat([
+        {"role": "user", "content": "Explain what an MoE model is in one sentence."},
+    ], max_tokens=64)
+    print(f"      {reply}")
+    print()
+
+    b.close()
+    print("  Done.")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Low-Rank Adapter Benchmark")
     parser.add_argument("--device", default="cpu", help="Device (cpu or cuda)")
@@ -562,6 +603,7 @@ def main():
                          help="Random seeds for ensemble averaging")
 
     subparsers.add_parser("gguf-demo", help="Run GGUF backend demo (LFM2.5 + CUDA)")
+    subparsers.add_parser("qwen-demo", help="Run Qwen3.6 GGUF demo (35B MoE + CUDA)")
 
     args = parser.parse_args()
 
@@ -569,6 +611,8 @@ def main():
         run_benchmark(args.device, args.k_values, args.seeds)
     elif args.command == "gguf-demo":
         run_gguf_demo(args.device)
+    elif args.command == "qwen-demo":
+        run_qwen_demo()
 
 
 if __name__ == '__main__':
