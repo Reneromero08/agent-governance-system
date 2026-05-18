@@ -106,8 +106,8 @@ class AdapterAttention(nn.Module):
             self.c_proj = nn.Linear(hidden_size, hidden_size)
         self.k_projector = EigenProjector(hidden_size, k)
         self.v_projector = EigenProjector(hidden_size, k)
-        # Scale bottleneck with residual dimension: ~12% of (hidden - k)
-        bn = max(32, (hidden_size - k) // 8)
+        # Bottleneck=64 matches pre-trained checkpoint from train_adapter.py
+        bn = 64
         self.adapter_k = LowRankAdapter(k=k, hidden=hidden_size, bottleneck=bn, seed=42, alpha_init=0.1)
         self.adapter_v = LowRankAdapter(k=k, hidden=hidden_size, bottleneck=bn, seed=43, alpha_init=0.1)
         self.scale = 1.0 / math.sqrt(self.head_dim)
