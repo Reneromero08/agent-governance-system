@@ -406,42 +406,63 @@ class AutoFeedbackLoop:
         return {"ppl_ratio": round(avg_ppl_r, 2), "attention_cosine": round(avg_cos, 4), "per_prompt": metrics}
 
     def run_feedback(self, prompts, max_passes=3, max_tokens=40, attn_lambda=0.1,
-                      batch_size=4, layer_gamma=0.85, kl_lambda=0.0):
+                      batch_size=4, layer_gamma=0.85, kl_lambda=0.0, cortex=None):
         """Run the auto-feedback loop.
 
         Improvements over v1:
         - Per-layer attention weighting: early layers get more gradient (gamma^layer)
         - Mini-batch gradient accumulation: accumulate over batch_size prompts before stepping
         - Optional KL loss: compare compressed vs uncompressed logits at each generation step
+        - Optional cortex cache: caches uncompressed attention targets in resident memory
         """
         n_layers = len(self.model.h)
-        # Per-layer weights: layer 0 = 1.0, layer L-1 = gamma^(L-1)
         layer_weights = torch.tensor(
             [layer_gamma ** i for i in range(n_layers)], device=self.device)
-        layer_weights = layer_weights / layer_weights.sum() * n_layers  # normalize
+        layer_weights = layer_weights / layer_weights.sum() * n_layers
+
+        # Initialize cortex cache if available
+        cache = None
+        if cortex is not None:
+            from cortex_recovery import CortexFeedbackCache
+            cache = CortexFeedbackCache(cortex)
+            print(f"  Cortex cache enabled (agent={cortex.agent_id})", flush=True)
 
         for pass_idx in range(max_passes):
             print(f"\n--- Pass {pass_idx+1}/{max_passes} "
                   f"(batch={batch_size}, gamma={layer_gamma}, kl={kl_lambda}) ---", flush=True)
             total_loss = 0.0
             n_updates = 0
+            n_cache_hits = 0
             self.optimizer.zero_grad()
 
             for i, prompt in enumerate(prompts):
-                # 1. Generate target with uncompressed model
-                inp = self.tokenizer(prompt, return_tensors='pt')
-                ids = inp['input_ids'].to(self.device)
-                with torch.no_grad():
-                    unc_out = self.original.generate(
-                        ids, max_new_tokens=max_tokens, temperature=0.7,
-                        top_p=0.9, do_sample=True,
-                        pad_token_id=self.tokenizer.eos_token_id)
-                target_text = self.tokenizer.decode(unc_out[0], skip_special_tokens=True)
+                # Check cortex cache for pre-computed attention targets
+                cached = None
+                if cache is not None:
+                    cached = cache.get(prompt)
 
-                # 2. Extract uncompressed attention (target)
-                with torch.no_grad():
-                    target_attns = extract_uncompressed_attention(
-                        self.original, self.tokenizer, target_text, self.device)
+                if cached is not None:
+                    target_text, target_attns = cached
+                    n_cache_hits += 1
+                else:
+                    # 1. Generate target with uncompressed model
+                    inp = self.tokenizer(prompt, return_tensors='pt')
+                    ids = inp['input_ids'].to(self.device)
+                    with torch.no_grad():
+                        unc_out = self.original.generate(
+                            ids, max_new_tokens=max_tokens, temperature=0.7,
+                            top_p=0.9, do_sample=True,
+                            pad_token_id=self.tokenizer.eos_token_id)
+                    target_text = self.tokenizer.decode(unc_out[0], skip_special_tokens=True)
+
+                    # 2. Extract uncompressed attention (target)
+                    with torch.no_grad():
+                        target_attns = extract_uncompressed_attention(
+                            self.original, self.tokenizer, target_text, self.device)
+
+                    # Cache for future passes
+                    if cache is not None:
+                        cache.put(prompt, target_text, target_attns)
 
                 # 3. Forward compressed model on target text
                 t_inp = self.tokenizer(target_text, return_tensors='pt', truncation=True, max_length=128)
@@ -479,8 +500,9 @@ class AutoFeedbackLoop:
                           f"tgt_len={len(target_text)}", flush=True)
 
             avg_loss = total_loss / max(n_updates, 1)
+            cache_str = f"  cache_hits={n_cache_hits}" if cache else ""
             print(f"  Pass {pass_idx+1} avg loss: {avg_loss:.4f}  "
-                  f"updates={n_updates//batch_size + (1 if n_updates%batch_size else 0)} steps", flush=True)
+                  f"updates={n_updates//batch_size + (1 if n_updates%batch_size else 0)} steps{cache_str}", flush=True)
 
     def _compute_generation_kl(self, prompt, target_text, max_tokens):
         """Compute KL divergence between compressed and uncompressed logits during generation."""
