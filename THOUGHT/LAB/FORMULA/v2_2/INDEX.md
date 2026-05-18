@@ -15,7 +15,7 @@
 | Q51 | Embedding spaces have intrinsic complex structure | OPEN | q51_complex_plane/ |
 | Q48 | Eigenvalue statistics connect to Riemann zeta | OPEN | q48_riemann/ |
 | Q49 | Df*alpha = 8e for a derivable reason | FALSIFIED | q49_why_8e/ |
-| Q50 | Df*alpha is conserved across architectures | OPEN | q50_completing_8e/ |
+| Q50 | Df*alpha is conserved across architectures | PARTIALLY VERIFIED | q50_completing_8e/ |
 | Q43 | Embedding covariance captures quantum-geometric structure | OPEN | q43_qgt/ |
 | Q44 | E follows Born Rule statistics | CONFIRMED | q44_born_rule/ |
 | Q45 | Geometry alone suffices for semantic navigation | OPEN | q45_geometry_nav/ |
