@@ -17,7 +17,7 @@
 | Q49 | Df*alpha = 8e for a derivable reason | FALSIFIED | q49_why_8e/ |
 | Q50 | Df*alpha is conserved across architectures | OPEN | q50_completing_8e/ |
 | Q43 | Embedding covariance captures quantum-geometric structure | OPEN | q43_qgt/ |
-| Q44 | E follows Born Rule statistics | OPEN | q44_born_rule/ |
+| Q44 | E follows Born Rule statistics | FALSIFIED | q44_born_rule/ |
 | Q45 | Geometry alone suffices for semantic navigation | OPEN | q45_geometry_nav/ |
 | Q8 | Embedding spaces have meaningful topological structure | OPEN | q08_topology/ |
 | Q38 | R obeys Noether-type conservation laws | OPEN | q38_noether/ |
