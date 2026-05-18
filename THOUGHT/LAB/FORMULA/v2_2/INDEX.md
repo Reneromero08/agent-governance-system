@@ -16,7 +16,7 @@
 | Q48 | Eigenvalue statistics connect to Riemann zeta | OPEN | q48_riemann/ |
 | Q49 | Df*alpha = 8e for a derivable reason | FALSIFIED | q49_why_8e/ |
 | Q50 | Df*alpha is conserved across architectures | PARTIALLY VERIFIED | q50_completing_8e/ |
-| Q43 | Embedding covariance captures quantum-geometric structure | OPEN | q43_qgt/ |
+| Q43 | Embedding covariance captures quantum-geometric structure | CONFIRMED (boundary) | q43_qgt/ |
 | Q44 | E follows Born Rule statistics | CONFIRMED | q44_born_rule/ |
 | Q45 | Geometry alone suffices for semantic navigation | OPEN | q45_geometry_nav/ |
 | Q8 | Embedding spaces have meaningful topological structure | OPEN | q08_topology/ |
