@@ -23,6 +23,18 @@ ROOT = Path(__file__).resolve().parent
 RESULTS = ROOT / "results"
 RESULTS.mkdir(parents=True, exist_ok=True)
 
+# Try importing facts cassette for hard gate recovery
+try:
+    import sys as _sys
+    _cassette_path = str(Path(__file__).resolve().parents[5] / "THOUGHT" / "LAB" / "TINY_COMPRESS" / "llm-spectral" / "auto_feedback")
+    if _cassette_path not in _sys.path:
+        _sys.path.insert(0, _cassette_path)
+    from facts_cassette import FactsCassette
+    FACTS_CASSETTE_AVAILABLE = True
+except Exception:
+    FACTS_CASSETTE_AVAILABLE = False
+    FactsCassette = None
+
 # Import components
 from phase4b_prompts_v2 import (
     CALIBRATION_PROMPTS, TEST_PROMPTS, verify_answer,
@@ -415,6 +427,23 @@ def run_lattice_condition(
                 # Build correction
                 correction_msgs = build_correction_messages(
                     diagnostic, prompt_text, generated_text)
+
+                # Inject facts cassette context if available
+                if FACTS_CASSETTE_AVAILABLE:
+                    try:
+                        fc = FactsCassette()
+                        fact = fc.correct(prompt_text)
+                        docs = fc.retrieve_docs(prompt_text, top_k=1)
+                        if fact or docs:
+                            extra = []
+                            if docs:
+                                extra.append("Context: " + docs[0][:300])
+                            if fact:
+                                extra.append("Correct answer: " + fact)
+                            correction_msgs.append({"role": "system", "content": " | ".join(extra)})
+                    except Exception:
+                        pass
+
                 corrected_history = history + correction_msgs
 
                 # Regenerate

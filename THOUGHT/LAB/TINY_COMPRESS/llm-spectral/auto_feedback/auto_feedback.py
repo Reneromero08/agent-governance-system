@@ -472,9 +472,14 @@ class AutoFeedbackLoop:
                     # 1b. Check facts cassette for correction
                     if facts_cassette is not None:
                         fact = facts_cassette.correct(prompt)
-                        if fact:
-                            # Regenerate with fact injected for cleaner training signal
-                            aug_prompt = prompt + " The answer is " + fact + "."
+                        docs = facts_cassette.retrieve_docs(prompt, top_k=1)
+                        if fact or docs:
+                            aug_parts = [prompt]
+                            if docs:
+                                aug_parts.append("Context: " + docs[0][:500])
+                            if fact:
+                                aug_parts.append("The answer is " + fact + ".")
+                            aug_prompt = " ".join(aug_parts)
                             aug_inp = self.tokenizer(aug_prompt, return_tensors="pt")
                             aug_ids = aug_inp["input_ids"].to(self.device)
                             with torch.no_grad():
