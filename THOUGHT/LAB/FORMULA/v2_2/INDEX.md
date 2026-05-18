@@ -19,7 +19,7 @@
 | Q43 | Embedding covariance captures quantum-geometric structure | CONFIRMED (boundary) | q43_qgt/ |
 | Q44 | E follows Born Rule statistics | CONFIRMED | q44_born_rule/ |
 | Q45 | Geometry alone suffices for semantic navigation | PARTIALLY VERIFIED | q45_geometry_nav/ |
-| Q8 | Embedding spaces have meaningful topological structure | OPEN | q08_topology/ |
+| Q8 | Embedding spaces have meaningful topological structure | PARTIALLY VERIFIED | q08_topology/ |
 | Q38 | Truth follows shorter geodesics in meaning-space | VERIFIED | q38_noether/ |
 | Q17 | R-gating improves governance decisions | OPEN | q17_governance/ |
 | Q10 | R detects misalignment | OPEN | q10_alignment/ |

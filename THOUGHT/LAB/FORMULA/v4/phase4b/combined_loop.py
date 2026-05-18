@@ -23,6 +23,7 @@ from lfm_adapter import get_lfm_backend
 from cortex_commonsense import CortexCommonsense
 from phase4b_fragments import FactualFragment, FragmentResult
 from phase4b_lattice import NodeResult, Verdict, compute_consensus
+from regime_fragment import RegimeFragment
 from facts_cassette import FactsCassette
 
 # Combined prompts: general + AGS
@@ -52,6 +53,7 @@ print("=" * 70)
 model = get_lfm_backend(temperature=0.7)
 cs = CortexCommonsense()
 factual = FactualFragment()
+regime = RegimeFragment()
 fc = FactsCassette()
 
 # ---- CONTROL ----
@@ -99,8 +101,18 @@ for prompt, gt, category in PROMPTS:
         verdict=cs_verdict, score=cs_result.score,
         evidence=cs_result.evidence[:100], raw_output=text)
 
-    # 5. Consensus
-    consensus = compute_consensus([cs_node, fact_node])
+    # 5. Regime fragment (entropy-based CRITICAL detection)
+    # Build 2-node consensus first for regime input
+    partial_consensus = compute_consensus([cs_node, fact_node])
+    rg_result = regime.verify(partial_consensus, logits, text)
+    rg_verdict = Verdict.PASS if rg_result.verdict == "pass" else (
+        Verdict.FAIL if rg_result.verdict in ("hard_fail", "soft_fail") else Verdict.ABSTAIN)
+    rg_node = NodeResult(node_id=3, node_name="Regime",
+        verdict=rg_verdict, score=rg_result.score,
+        evidence=rg_result.evidence[:100], raw_output=text)
+
+    # 6. Consensus (3-node lattice)
+    consensus = compute_consensus([cs_node, fact_node, rg_node])
 
     hg = 0
     rec = False

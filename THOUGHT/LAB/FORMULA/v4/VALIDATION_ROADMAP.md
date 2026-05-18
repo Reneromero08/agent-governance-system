@@ -276,7 +276,7 @@ Goal: Build C_epistemic from cross-fragment agreement. Test whether truth attrac
 - [x] COMMONSENSE lattice node added to Phase 4b (symbolic resolver via regex bridge)
 - [x] Phase 4b run on full 26 prompts across all 4 conditions
 - [x] COMMONSENSE Method 1 LLM extraction wired (commonsense_m1.py — LFM extracts facts, CODEBOOK.json resolver limited to governance domain, functional but needs domain expansion)
-- [ ] Self-consistency fragment weakly discriminative (correlation 0.26 with correctness)
+- [x] Self-consistency replaced with Regime fragment (logit entropy + formula R = E/grad_S). Detects CRITICAL regime: high consensus + high entropy = overconfident hallucination. Convergent/Divergent/Critical classification via truth attractor formula.
 - [x] Recovery rate 0% — closed by Phase 4c: cassette retrieval + chat API + system prompt achieves 70% recovery
 
 **Finding:** Epistemic C framing beats values constitution on both Gemma 4B and TraDo-4B architectures. On TraDo-4B it matches raw accuracy while adding governance. Values constitution actively harms performance. COMMONSENSE contributes independent signal.
@@ -307,6 +307,7 @@ Goal: Close the recovery loop. Replace generic correction with cassette retrieva
 **Artifacts:**
 - `THOUGHT/LAB/FORMULA/v4/phase4b/cortex_commonsense.py` — Cassette-backed verification fragment
 - `THOUGHT/LAB/FORMULA/v4/phase4b/lfm_adapter.py` — LFM 2.5 GGUF into Phase 4b interface
+- `THOUGHT/LAB/FORMULA/v4/phase4b/regime_fragment.py` — Formula-based regime detector (replaces self-consistency)
 - `THOUGHT/LAB/FORMULA/v4/phase4b/combined_loop.py` — Full combined loop runner
 - `NAVIGATION/CORTEX/network/reindex_thought.py` — Cassette reindexer
 - `NAVIGATION/CORTEX/semantic/query.py` — FTS5 escaping fix
