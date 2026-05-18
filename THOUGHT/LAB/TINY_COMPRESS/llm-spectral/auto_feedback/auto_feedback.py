@@ -261,8 +261,10 @@ class AdapterGPT2(nn.Module):
             return (loss, logits, attn_outs) if loss is not None else (logits, attn_outs)
         return (loss, logits) if loss is not None else logits
 
-    def generate(self, input_ids, max_new_tokens=40, temperature=0.7, top_p=0.9):
-        self.clear_cache(); self.eval()
+    def generate(self, input_ids, max_new_tokens=40, temperature=0.7, top_p=0.9,
+                  repetition_penalty=1.2):
+        self.clear_cache()
+        self.eval()
         dev = input_ids.device; cp = input_ids.shape[1]
         with torch.no_grad():
             pp = torch.arange(cp, device=dev).unsqueeze(0)
@@ -270,6 +272,13 @@ class AdapterGPT2(nn.Module):
             if isinstance(logits, tuple): logits = logits[1] if len(logits) > 1 else logits[0]
             for _ in range(max_new_tokens):
                 nl = logits[:, -1, :] / temperature
+                # Repetition penalty: penalize tokens in recent history
+                if repetition_penalty != 1.0:
+                    for tid in set(input_ids[0].tolist()[-50:]):
+                        if nl[0, tid] < 0:
+                            nl[0, tid] *= repetition_penalty
+                        else:
+                            nl[0, tid] /= repetition_penalty
                 sl, si = torch.sort(nl, descending=True)
                 cp_ = torch.cumsum(F.softmax(sl, dim=-1), dim=-1)
                 s2r = cp_ > top_p; s2r[:, 1:] = s2r[:, :-1].clone(); s2r[:, 0] = 0
@@ -427,6 +436,7 @@ class AutoFeedbackLoop:
             cache = CortexFeedbackCache(cortex)
             print(f"  Cortex cache enabled (agent={cortex.agent_id})", flush=True)
 
+        pass_losses = []
         for pass_idx in range(max_passes):
             print(f"\n--- Pass {pass_idx+1}/{max_passes} "
                   f"(batch={batch_size}, gamma={layer_gamma}, kl={kl_lambda}) ---", flush=True)
@@ -434,6 +444,7 @@ class AutoFeedbackLoop:
             n_updates = 0
             n_cache_hits = 0
             self.optimizer.zero_grad()
+            self.model.train()  # Ensure train mode for gradient computation
 
             for i, prompt in enumerate(prompts):
                 # Check cortex cache for pre-computed attention targets
@@ -484,6 +495,7 @@ class AutoFeedbackLoop:
                 # 6. Combined loss
                 loss = (ce_loss + attn_lambda * attn_loss + kl_lambda * kl_loss_val) / batch_size
                 loss.backward()
+                torch.nn.utils.clip_grad_norm_(self.model.adapter_parameters(), max_norm=1.0)
 
                 total_loss += loss.item() * batch_size
                 n_updates += 1
@@ -500,9 +512,16 @@ class AutoFeedbackLoop:
                           f"tgt_len={len(target_text)}", flush=True)
 
             avg_loss = total_loss / max(n_updates, 1)
+            pass_losses.append(avg_loss)
             cache_str = f"  cache_hits={n_cache_hits}" if cache else ""
             print(f"  Pass {pass_idx+1} avg loss: {avg_loss:.4f}  "
                   f"updates={n_updates//batch_size + (1 if n_updates%batch_size else 0)} steps{cache_str}", flush=True)
+
+            # Early stopping: stop if loss plateaus (improvement < 1% for 2 consecutive passes)
+            if pass_idx >= 2:
+                if (pass_losses[-2] - pass_losses[-1]) / pass_losses[-2] < 0.01:
+                    print(f"  Loss plateaued (delta < 1%). Stopping early at pass {pass_idx+1}.", flush=True)
+                    break
 
     def _compute_generation_kl(self, prompt, target_text, max_tokens):
         """Compute KL divergence between compressed and uncompressed logits during generation."""
