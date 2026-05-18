@@ -69,15 +69,9 @@ def retrieve_answer(question, embedder):
     return best_answer, best_sim
 
 
-def run_test(N=817, cassette=True):
+def run_test(model, tokenizer, embedder, N=817, cassette=True):
     """Run TruthfulQA MC test. Returns (correct, refused, total, errors_fixed)."""
-    print("\nLoading model...", flush=True)
-    model = AutoModelForCausalLM.from_pretrained(
-        "google/gemma-4-E2B-it", dtype=torch.float16, device_map="auto")
-    tokenizer = AutoTokenizer.from_pretrained("google/gemma-4-E2B-it")
-
     ds = load_dataset("truthfulqa/truthful_qa", "multiple_choice", split="validation")
-    embedder = SentenceTransformer("all-MiniLM-L6-v2") if cassette else None
 
     correct = 0
     refused = 0
@@ -102,7 +96,7 @@ def run_test(N=817, cassette=True):
         msgs = [{"role": "user", "content": prompt}]
         inp = tokenizer.apply_chat_template(msgs, return_tensors="pt", add_generation_prompt=True, tokenize=True)
         inp = {k: v.to(model.device) for k, v in inp.items()}
-        out = model.generate(**inp, max_new_tokens=10, do_sample=False)
+        out = model.generate(**inp, max_new_tokens=5, do_sample=False)
         text = tokenizer.decode(out[0], skip_special_tokens=True)
         answer_text = text.split("model\n")[-1].strip() if "model\n" in text else text
         answer_text = answer_text.strip().upper()
@@ -131,7 +125,7 @@ def run_test(N=817, cassette=True):
                 ]
                 inp2 = tokenizer.apply_chat_template(msgs2, return_tensors="pt", add_generation_prompt=True, tokenize=True)
                 inp2 = {k: v.to(model.device) for k, v in inp2.items()}
-                out2 = model.generate(**inp2, max_new_tokens=10, do_sample=False)
+                out2 = model.generate(**inp2, max_new_tokens=5, do_sample=False)
                 text2 = tokenizer.decode(out2[0], skip_special_tokens=True)
                 answer_text2 = text2.split("model\n")[-1].strip() if "model\n" in text2 else text2
                 answer_text2 = answer_text2.strip().upper()
@@ -169,10 +163,17 @@ if __name__ == "__main__":
         print("=" * 60)
         build_cassette()
 
+    # Load model once, share across both conditions
+    print("\nLoading model once...", flush=True)
+    model = AutoModelForCausalLM.from_pretrained(
+        "google/gemma-4-E2B-it", dtype=torch.float16, device_map="cuda")
+    tokenizer = AutoTokenizer.from_pretrained("google/gemma-4-E2B-it")
+    embedder = SentenceTransformer("all-MiniLM-L6-v2")
+
     print("=" * 60)
     print("BASELINE (no cassette)")
     print("=" * 60)
-    c, r, n, _, dt = run_test(N, cassette=False)
+    c, r, n, _, dt = run_test(model, tokenizer, None, N, cassette=False)
     base_acc = c / max(n - r, 1)
     print("\nBASELINE: {:.1%} ({}/{}) refused={} dt={:.1f}s".format(base_acc, c, n - r, r, dt))
 
@@ -180,7 +181,7 @@ if __name__ == "__main__":
     print("=" * 60)
     print("CASSETTE RETRIEVAL")
     print("=" * 60)
-    c2, r2, n2, fixed, dt2 = run_test(N, cassette=True)
+    c2, r2, n2, fixed, dt2 = run_test(model, tokenizer, embedder, N, cassette=True)
     cass_acc = c2 / max(n2 - r2, 1)
     print("\nCASSETTE: {:.1%} ({}/{}) refused={} fixed={} dt={:.1f}s".format(
         cass_acc, c2, n2 - r2, r2, fixed, dt2))
