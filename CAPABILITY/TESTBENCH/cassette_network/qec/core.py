@@ -11,7 +11,7 @@ import sys
 
 # Add library paths
 REPO_ROOT = Path(__file__).parent.parent.parent.parent.parent
-sys.path.insert(0, str(REPO_ROOT / "THOUGHT" / "LAB" / "VECTOR_ELO" / "eigen-alignment"))
+sys.path.insert(0, str(REPO_ROOT / "THOUGHT" / "LAB" / "EIGEN_ALIGNMENT"))
 
 from lib.mds import squared_distance_matrix, classical_mds, effective_rank
 from lib.procrustes import procrustes_align, cosine_similarity

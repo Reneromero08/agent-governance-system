@@ -156,7 +156,7 @@ def main(argv: List[str]) -> int:
             "-m",
             "pytest",
             "CAPABILITY/TESTBENCH/",
-            "-n", "auto",
+            "-n", "2",
             "-q",
             "--dist=loadfile",
         ],

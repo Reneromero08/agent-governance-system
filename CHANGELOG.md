@@ -6,6 +6,22 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.12.6] - 2026-05-18
+
+### Fixed
+
+- `CAPABILITY/TESTBENCH/cassette_network/qec/core.py`,
+  `test_cascade.py`, `test_hallucination.py`: Fixed import paths
+  after VECTOR_ELO reorganization (`VECTOR_ELO/eigen-alignment` ->
+  `EIGEN_ALIGNMENT`).
+- `CAPABILITY/TOOLS/utilities/ci_local_gate.py`: Reduced xdist workers
+  from `-n auto` to `-n 2` to prevent pagefile exhaustion on Windows
+  when PyTorch loads in parallel workers.
+- `THOUGHT/LAB/FORMULA/v4/phase5/REPORT.md`,
+  `precision/results/hysteresis_N100.json`: Committed forgotten
+  hysteresis bugfix (both sweeps started from random theta0 in v1
+  giving false positive; corrected results at N=100).
+
 ## [3.12.5] - 2026-05-16
 
 ### Fixed

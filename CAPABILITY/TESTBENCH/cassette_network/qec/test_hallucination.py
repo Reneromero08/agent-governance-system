@@ -53,7 +53,7 @@ except ImportError:
 
 # Try to import qgt_phase for Zero Signature
 REPO_ROOT = Path(__file__).parent.parent.parent.parent.parent
-QGT_PHASE_PATH = REPO_ROOT / "THOUGHT" / "LAB" / "VECTOR_ELO" / "eigen-alignment" / "qgt_lib" / "python"
+QGT_PHASE_PATH = REPO_ROOT / "THOUGHT" / "LAB" / "EIGEN_ALIGNMENT" / "qgt_lib" / "python"
 sys.path.insert(0, str(QGT_PHASE_PATH))
 
 try:
