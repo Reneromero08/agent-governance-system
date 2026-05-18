@@ -1,17 +1,21 @@
-"""Facts Cassette — Targeted knowledge graph for model blind spots.
+"""Facts Cassette — Targeted knowledge graph + domain docs for model blind spots.
 
-Stores structured facts as (entity, predicate, value) triples with
-embedding-based retrieval. Targets the specific factual errors observed
-in GPT-2 and TraDo-4B generation.
+Stores structured facts as (entity, predicate, value) triples AND
+rich domain documents with embedding-based retrieval. Targets the
+specific factual errors observed in GPT-2 and TraDo-4B generation.
+
+Lil Q integration: domain docs from THOUGHT/LAB/LIL_Q/test_sandbox/docs/
+provide step-by-step reasoning (math, code, logic, chemistry) alongside
+flat facts. E-gating via Born rule: E = <query|doc> = dot(query_vec, doc_vec).
 
 Schema:
     triples(entity TEXT, predicate TEXT, value TEXT, embedding BLOB)
-    Indexed via cosine similarity against query embedding.
+    docs(doc_id TEXT, domain TEXT, title TEXT, content TEXT, embedding BLOB)
 
 Usage:
     fc = FactsCassette()
     fc.query("capital of France")  -> ["Paris"]
-    fc.query("chemical formula for water") -> ["H2O"]
+    fc.retrieve_docs("quadratic equation") -> ["# Expanding Squares...", ...]
 """
 
 import json, math, sqlite3, struct
@@ -118,30 +122,56 @@ class FactsCassette:
         """)
         conn.execute("CREATE INDEX IF NOT EXISTS idx_entity ON triples(entity)")
         conn.execute("CREATE INDEX IF NOT EXISTS idx_predicate ON triples(entity, predicate)")
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS docs (
+                doc_id TEXT PRIMARY KEY,
+                domain TEXT NOT NULL,
+                title TEXT NOT NULL,
+                content TEXT NOT NULL,
+                embedding BLOB
+            )
+        """)
+        conn.execute("CREATE INDEX IF NOT EXISTS idx_docs_domain ON docs(domain)")
         conn.commit()
         return conn
 
     def build(self):
-        """Populate the database with all facts."""
-        print(f"Building facts cassette with {len(FACTS)} triples...", flush=True)
+        """Populate the database with all facts and domain docs."""
+        print("Building facts cassette with {} triples + domain docs...".format(len(FACTS)), flush=True)
         model = self._get_model()
-
-        # Prepare texts for embedding: "entity predicate"
-        texts = [f"{e} {p}" for e, p, v in FACTS]
-        embeddings = model.encode(texts, normalize_embeddings=True)
-
         conn = self._ensure_db()
-        conn.execute("DELETE FROM triples")  # Fresh build
+        conn.execute("DELETE FROM triples")
+        conn.execute("DELETE FROM docs")
 
+        # Index triples
+        texts = ["{} {}".format(e, p) for e, p, v in FACTS]
+        embeddings = model.encode(texts, normalize_embeddings=True)
         for (entity, predicate, value), emb in zip(FACTS, embeddings):
             emb_bytes = emb.astype(np.float32).tobytes()
             conn.execute(
                 "INSERT INTO triples (entity, predicate, value, embedding) VALUES (?, ?, ?, ?)",
                 (entity, predicate, value, emb_bytes))
 
+        # Index domain docs from Lil Q
+        docs_dir = Path(__file__).resolve().parent / "docs"
+        doc_count = 0
+        if docs_dir.exists():
+            for md_file in sorted(docs_dir.glob("**/*.md")):
+                domain = md_file.parent.name
+                content = md_file.read_text(encoding="utf-8")
+                title = content.split("\n")[0].lstrip("# ").strip() if content.startswith("#") else md_file.stem
+                doc_id = "{}/{}".format(domain, md_file.stem)
+                # Embed the title for retrieval
+                emb = model.encode([title], normalize_embeddings=True)[0]
+                emb_bytes = emb.astype(np.float32).tobytes()
+                conn.execute(
+                    "INSERT OR REPLACE INTO docs (doc_id, domain, title, content, embedding) VALUES (?, ?, ?, ?, ?)",
+                    (doc_id, domain, title, content, emb_bytes))
+                doc_count += 1
+
         conn.commit()
         conn.close()
-        print(f"  Done. {len(FACTS)} triples indexed.", flush=True)
+        print("  Done. {} triples + {} docs indexed.".format(len(FACTS), doc_count), flush=True)
 
     def query(self, query_text: str, predicate: str = None, top_k: int = 3) -> List[Dict]:
         """Semantic search for relevant facts.
@@ -187,20 +217,79 @@ class FactsCassette:
 
     def get_stats(self) -> Dict:
         conn = sqlite3.connect(self.db_path)
-        count = conn.execute("SELECT COUNT(*) FROM triples").fetchone()[0]
-        predicates = conn.execute(
-            "SELECT predicate, COUNT(*) as n FROM triples GROUP BY predicate ORDER BY n DESC"
+        triples = conn.execute("SELECT COUNT(*) FROM triples").fetchone()[0]
+        docs = conn.execute("SELECT COUNT(*) FROM docs").fetchone()[0]
+        domains = conn.execute(
+            "SELECT domain, COUNT(*) as n FROM docs GROUP BY domain ORDER BY n DESC"
         ).fetchall()
         conn.close()
         return {
-            "total_triples": count,
-            "predicates": [{"predicate": p, "count": n} for p, n in predicates],
+            "triples": triples,
+            "docs": docs,
+            "domains": [{"domain": d, "count": n} for d, n in domains],
         }
+
+    def retrieve_docs(self, query_text: str, domain: str = None,
+                       top_k: int = 3, threshold: float = 0.3) -> List[str]:
+        """E-gated document retrieval (Lil Q Born rule).
+
+        Args:
+            query_text: Natural language query
+            domain: Optional domain filter (math, code, logic, chemistry)
+            top_k: Number of documents
+            threshold: E threshold (Born rule, E = <query|doc>)
+
+        Returns:
+            List of document content strings
+        """
+        model = self._get_model()
+        query_emb = model.encode([query_text], normalize_embeddings=True)[0]
+
+        conn = sqlite3.connect(self.db_path)
+        rows = conn.execute("SELECT doc_id, domain, title, content, embedding FROM docs").fetchall()
+
+        results = []
+        for row in rows:
+            doc_id, doc_domain, title, content, emb_bytes = row
+            if domain and doc_domain != domain:
+                continue
+            emb = np.frombuffer(emb_bytes, dtype=np.float32)
+            E = float(np.dot(query_emb, emb))  # Born rule: E = <psi|phi>
+            if E >= threshold:
+                results.append((E, doc_domain, title, content))
+
+        conn.close()
+        results.sort(key=lambda r: r[0], reverse=True)
+        return [content for _, _, _, content in results[:top_k]]
+
+    def retrieve_docs_with_scores(self, query_text: str, domain: str = None,
+                                   top_k: int = 3, threshold: float = 0.3) -> List[dict]:
+        """E-gated retrieval with scores for debugging."""
+        model = self._get_model()
+        query_emb = model.encode([query_text], normalize_embeddings=True)[0]
+
+        conn = sqlite3.connect(self.db_path)
+        rows = conn.execute("SELECT doc_id, domain, title, content, embedding FROM docs").fetchall()
+
+        results = []
+        for row in rows:
+            doc_id, doc_domain, title, content, emb_bytes = row
+            if domain and doc_domain != domain:
+                continue
+            emb = np.frombuffer(emb_bytes, dtype=np.float32)
+            E = float(np.dot(query_emb, emb))
+            if E >= threshold:
+                results.append({"E": round(E, 3), "domain": doc_domain,
+                                "title": title, "content": content[:200]})
+
+        conn.close()
+        results.sort(key=lambda r: r["E"], reverse=True)
+        return results[:top_k]
 
     def retrieve_fact(self, prompt: str) -> List[str]:
         """Retrieve fact values relevant to a prompt. Returns value strings."""
         results = self.query(prompt, top_k=3)
-        return [r["value"] for r in results if r["similarity"] > 0.4]
+        return [r["value"] for r in results if r["similarity"] > 0.3]
 
     def correct(self, prompt: str) -> Optional[str]:
         """Get the correct answer for a factual prompt, if known."""
