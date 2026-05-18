@@ -232,7 +232,7 @@ Goal: Implement `SemioticMonitor`. Token-level R measurement + T modulation feed
 
 ### Phase 4b: Step-Level Macro-Consensus — Epistemic Truth Attractor [x]
 
-- [x] TraDo-4B-Instruct (SDAR block diffusion, Q4, RTX 3060 12GB) — block_diffusion_generate
+- [x] TraDo-4B-Instruct (SDAR block diffusion, Q4, RTX 3060 12GB) — model removed (too slow, ~90min/run). Superseded by LFM 2.5.
 - [x] 4 independent verification fragments: COMMONSENSE (symbolic resolver), Factual (ground truth), Self-Consistency (dual-gen cosine sim), Logical (contradiction detection)
 - [x] Epistemic C frame builder: cross-fragment calibration on 12 prompts, weights = mutual info with ground truth
 - [x] t=2 verification lattice with weighted consensus (soft gate / hard gate with drift diagnostics)
