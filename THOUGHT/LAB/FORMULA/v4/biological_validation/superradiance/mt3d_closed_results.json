@@ -1,0 +1,37 @@
+{
+  "spirals_1": {
+    "N": 104,
+    "L_nm": 8.0,
+    "max_sigma": 3.78,
+    "mean_sigma": 1.2437,
+    "subradiant": 0.433
+  },
+  "spirals_2": {
+    "N": 208,
+    "L_nm": 16.0,
+    "max_sigma": 3.88,
+    "mean_sigma": 1.3601,
+    "subradiant": 0.471
+  },
+  "spirals_3": {
+    "N": 312,
+    "L_nm": 24.0,
+    "max_sigma": 5.09,
+    "mean_sigma": 1.3947,
+    "subradiant": 0.478
+  },
+  "spirals_5": {
+    "N": 520,
+    "L_nm": 40.0,
+    "max_sigma": 5.55,
+    "mean_sigma": 1.4356,
+    "subradiant": 0.444
+  },
+  "spirals_7": {
+    "N": 728,
+    "L_nm": 56.0,
+    "max_sigma": 5.6,
+    "mean_sigma": 1.4401,
+    "subradiant": 0.445
+  }
+}

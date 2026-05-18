@@ -1,0 +1,50 @@
+{
+  "coherent_scale": 100,
+  "spirals_1": {
+    "N": 104,
+    "L_nm": 8.0,
+    "max_sigma": 25.34,
+    "mean_sigma": 1.24,
+    "subradiant": 0.769
+  },
+  "spirals_2": {
+    "N": 208,
+    "L_nm": 16.0,
+    "max_sigma": 27.66,
+    "mean_sigma": 1.2716,
+    "subradiant": 0.697
+  },
+  "spirals_3": {
+    "N": 312,
+    "L_nm": 24.0,
+    "max_sigma": 28.62,
+    "mean_sigma": 1.2711,
+    "subradiant": 0.696
+  },
+  "spirals_5": {
+    "N": 520,
+    "L_nm": 40.0,
+    "max_sigma": 36.05,
+    "mean_sigma": 1.2846,
+    "subradiant": 0.683
+  },
+  "spirals_7": {
+    "N": 728,
+    "L_nm": 56.0,
+    "max_sigma": 46.79,
+    "mean_sigma": 1.3142,
+    "subradiant": 0.681
+  },
+  "spirals_10": {
+    "N": 1040,
+    "L_nm": 80.0,
+    "max_sigma": 54.82,
+    "mean_sigma": 1.3501,
+    "subradiant": 0.669
+  },
+  "calibration": {
+    "coherent_scale": 100,
+    "sigma_vs_target_35": 36.1
+  },
+  "gap": "CLOSED"
+}
