@@ -1,0 +1,11 @@
+{
+  "model": "MiniLM",
+  "angle1_phase_cov_ks_p": 2.8110936201281327e-21,
+  "angle1_phase_cov_ps3": 0.2942708333333333,
+  "angle1_word_phase_ks_p": null,
+  "angle2_berry_connection_max": 0.0,
+  "angle3_octant_R": 0.04000983678841359,
+  "angle3_rayleigh_p": 0.28828332070886903,
+  "angle3_2d_phase_ks_p": 2.741938375874769e-37,
+  "angle3_2d_phase_ps3": 0.31016731016731014
+}

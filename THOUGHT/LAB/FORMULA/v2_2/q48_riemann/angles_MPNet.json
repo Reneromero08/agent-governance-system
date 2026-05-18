@@ -1,0 +1,11 @@
+{
+  "model": "MPNet",
+  "angle1_phase_cov_ks_p": 7.109429672001582e-29,
+  "angle1_phase_cov_ps3": 0.24609375,
+  "angle1_word_phase_ks_p": null,
+  "angle2_berry_connection_max": 0.0,
+  "angle3_octant_R": 0.06543590351780028,
+  "angle3_rayleigh_p": 0.0359005288082596,
+  "angle3_2d_phase_ks_p": 1.3520748094471344e-30,
+  "angle3_2d_phase_ps3": 0.2908622908622909
+}
