@@ -1,0 +1,89 @@
+{
+  "N_sweep": {
+    "N": [
+      5,
+      10,
+      20,
+      30,
+      50,
+      75,
+      100,
+      150,
+      200,
+      300,
+      400
+    ],
+    "max_sigma": [
+      4.81,
+      9.08,
+      16.98,
+      24.73,
+      26.1,
+      46.51,
+      40.58,
+      62.78,
+      64.26,
+      65.29,
+      65.28
+    ],
+    "QY_thermal": [
+      0.3161,
+      0.3662,
+      0.3923,
+      0.3983,
+      0.4049,
+      0.4075,
+      0.4092,
+      0.4104,
+      0.4111,
+      0.4119,
+      0.4121
+    ]
+  },
+  "disorder_sweep": {
+    "N_fixed": 400,
+    "W": [
+      0,
+      10,
+      50,
+      100,
+      200,
+      500,
+      1000
+    ],
+    "max_sigma": [
+      65.28,
+      39.32,
+      40.83,
+      62.12,
+      49.96,
+      27.54,
+      14.91
+    ],
+    "QY_thermal": [
+      0.4121,
+      0.4118,
+      0.4117,
+      0.4113,
+      0.41,
+      0.4015,
+      0.3773
+    ]
+  },
+  "state_distribution": {
+    "N": 400,
+    "subradiant_fraction": 0.932,
+    "superradiant_fraction": 0.068,
+    "mean_Gamma_over_gamma": 1.0,
+    "min_Gamma_over_gamma": 2e-06,
+    "max_Gamma_over_gamma": 65.28
+  },
+  "analysis": {
+    "power_law_alpha": 0.606,
+    "power_law_r2": 0.938,
+    "sublinear_scaling": true,
+    "sigma_at_N200": 65.28,
+    "sigma_extrapolated_N10400": 668.7,
+    "paper_sigma_N10400": 35
+  }
+}

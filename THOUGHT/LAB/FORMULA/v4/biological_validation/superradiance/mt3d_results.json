@@ -1,0 +1,46 @@
+{
+  "spirals_1": {
+    "N": 104,
+    "L_nm": 8.0,
+    "max_sigma": 10.78,
+    "mean_sigma": 1.0,
+    "subradiant_fraction": 0.788
+  },
+  "spirals_2": {
+    "N": 208,
+    "L_nm": 16.0,
+    "max_sigma": 21.19,
+    "mean_sigma": 1.0001,
+    "subradiant_fraction": 0.837
+  },
+  "spirals_3": {
+    "N": 312,
+    "L_nm": 24.0,
+    "max_sigma": 31.61,
+    "mean_sigma": 1.0,
+    "subradiant_fraction": 0.843
+  },
+  "spirals_5": {
+    "N": 520,
+    "L_nm": 40.0,
+    "max_sigma": 41.48,
+    "mean_sigma": 1.0001,
+    "subradiant_fraction": 0.863
+  },
+  "spirals_7": {
+    "N": 728,
+    "L_nm": 56.0,
+    "max_sigma": 47.36,
+    "mean_sigma": 1.0007,
+    "subradiant_fraction": 0.867
+  },
+  "single_TuD": {
+    "N": 8,
+    "max_sigma": 3.44,
+    "mean_sigma": 1.0
+  },
+  "paper_comparison": {
+    "paper_sigma_N10400": 35,
+    "paper_coupling_cm1": 60
+  }
+}
