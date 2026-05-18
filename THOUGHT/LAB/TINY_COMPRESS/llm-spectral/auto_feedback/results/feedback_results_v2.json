@@ -1,0 +1,164 @@
+{
+  "phase": "3.5",
+  "version": "v2-generation-quality",
+  "model": "gpt2",
+  "k": 50,
+  "passes": 5,
+  "lr": 0.0003,
+  "pre_feedback": {
+    "ppl_ratio": 9.97,
+    "attention_cosine": 0.4319,
+    "per_prompt": [
+      {
+        "target_text": "The capital of Japan is the birthplace of Japanese culture and the birthplace of the nation's first samurai. It is also the home of the Japanese military. It is also home to the Japanese military's mo",
+        "compressed_ppl": 58.69,
+        "original_ppl": 8.52,
+        "ppl_ratio": 6.89,
+        "attention_cosine": 0.4152
+      },
+      {
+        "target_text": "The chemical symbol for gold is the triangle.\n\nA green triangle represents the world's tallest building.\n\nA green triangle represents the world's tallest skyscraper.\n\nA green triangle represents the w",
+        "compressed_ppl": 123.18,
+        "original_ppl": 6.09,
+        "ppl_ratio": 20.23,
+        "attention_cosine": 0.4288
+      },
+      {
+        "target_text": "The largest mammal on Earth is the carnivorous, carnivorous wolf (Cynodonta habilis). It is thought that wolves are responsible for more than half of all human deaths and more than half of all of the ",
+        "compressed_ppl": 121.94,
+        "original_ppl": 8.52,
+        "ppl_ratio": 14.31,
+        "attention_cosine": 0.4059
+      },
+      {
+        "target_text": "The Pythagorean theorem states that the number of possible values of the first two numbers is equal to the number of possible values of the second. This is the first true number of possible values of ",
+        "compressed_ppl": 26.51,
+        "original_ppl": 5.11,
+        "ppl_ratio": 5.19,
+        "attention_cosine": 0.4731
+      },
+      {
+        "target_text": "The freezing point of water is the highest point on Earth, and it is so cold that the freezing point of water is 0.25 miles (1.9 kilometers) above the ground. This means that the freezing point of wat",
+        "compressed_ppl": 114.11,
+        "original_ppl": 6.82,
+        "ppl_ratio": 16.74,
+        "attention_cosine": 0.4382
+      },
+      {
+        "target_text": "Shakespeare wrote:\n\nIt was a very cold day, and he was quite frightened at the sight of the face of a dead man, and was anxious to know where the body was. He had never seen",
+        "compressed_ppl": 60.55,
+        "original_ppl": 11.77,
+        "ppl_ratio": 5.14,
+        "attention_cosine": 0.4236
+      },
+      {
+        "target_text": "The currency of Japan is the Yen, the equivalent of the US dollar. In this way, Japan has become a currency of Japan.\n\nIt is true that the Japanese government and the Japanese people have developed th",
+        "compressed_ppl": 63.94,
+        "original_ppl": 8.15,
+        "ppl_ratio": 7.84,
+        "attention_cosine": 0.4353
+      },
+      {
+        "target_text": "Einstein is famous for his love of science, but it's hard to know how far he'll go when the latest research is published. He's known as a scientist who wants to know what's going on, but he",
+        "compressed_ppl": 73.29,
+        "original_ppl": 10.4,
+        "ppl_ratio": 7.05,
+        "attention_cosine": 0.4329
+      },
+      {
+        "target_text": "The largest desert on Earth is the largest in the world and it's been there since the dinosaurs died out about 1,200 years ago. But they've not seen it for a while.\n\nResearchers from the University of",
+        "compressed_ppl": 96.59,
+        "original_ppl": 9.37,
+        "ppl_ratio": 10.3,
+        "attention_cosine": 0.41
+      },
+      {
+        "target_text": "Oxygen is produced by the sun. It is also released by the sun during the night. The sun is not the only source of the sun's radiation. The sun is also involved in many other processes that affect the ",
+        "compressed_ppl": 44.89,
+        "original_ppl": 7.44,
+        "ppl_ratio": 6.03,
+        "attention_cosine": 0.4559
+      }
+    ]
+  },
+  "post_feedback": {
+    "ppl_ratio": 3.91,
+    "attention_cosine": 0.4444,
+    "per_prompt": [
+      {
+        "target_text": "The capital of Japan is a city that's known for its high-end fashion, luxury and art. But in the United States, the city has become an increasingly unaffordable destination for many people.\n\nIn the pa",
+        "compressed_ppl": 34.13,
+        "original_ppl": 10.02,
+        "ppl_ratio": 3.41,
+        "attention_cosine": 0.4471
+      },
+      {
+        "target_text": "The chemical symbol for gold is 'X', and it has been used for centuries. The symbol is also used for gold coins.\n\nThe symbol is also used for gold coins. The symbol is the symbol of the gold standard",
+        "compressed_ppl": 23.98,
+        "original_ppl": 9.18,
+        "ppl_ratio": 2.61,
+        "attention_cosine": 0.4666
+      },
+      {
+        "target_text": "The largest mammal on Earth is the polar bear.\n\nThe Siberian tiger is the largest mammal on Earth. The Siberian tiger is the largest mammal on Earth.\n\nThe largest mammal on Earth is the polar bear.\n\nT",
+        "compressed_ppl": 9.76,
+        "original_ppl": 3.79,
+        "ppl_ratio": 2.58,
+        "attention_cosine": 0.4527
+      },
+      {
+        "target_text": "The Pythagorean theorem states that the more I know about a theorem, the more I understand it. So I can say that the more I know about a theorem, the more I understand it. So I can say that the more",
+        "compressed_ppl": 33.44,
+        "original_ppl": 3.93,
+        "ppl_ratio": 8.51,
+        "attention_cosine": 0.4297
+      },
+      {
+        "target_text": "The freezing point of water is the freezing point of ice. In this case, it would be the freezing point of the ice.\n\nThe freezing point of the ice is the freezing point of the ice. In this case,",
+        "compressed_ppl": 12.28,
+        "original_ppl": 5.1,
+        "ppl_ratio": 2.41,
+        "attention_cosine": 0.447
+      },
+      {
+        "target_text": "Shakespeare wrote his first novel, The Tempest, in 1859, and in 1867, he wrote his first short story, The Tempest, in 1867, and in 1867, he wrote his first short",
+        "compressed_ppl": 26.22,
+        "original_ppl": 4.74,
+        "ppl_ratio": 5.53,
+        "attention_cosine": 0.4008
+      },
+      {
+        "target_text": "The currency of Japan is the Yen. It is the currency of Japan's national currency. This is the currency of Japan's national currency. It is the currency of Japan's national currency. It is the currenc",
+        "compressed_ppl": 8.34,
+        "original_ppl": 3.88,
+        "ppl_ratio": 2.15,
+        "attention_cosine": 0.4353
+      },
+      {
+        "target_text": "Einstein is famous for his research into how the brain works. His research found that when you are stressed, your brain's dopamine levels rise, and that this increases when you are stressed.\n\nIn this ",
+        "compressed_ppl": 41.09,
+        "original_ppl": 8.85,
+        "ppl_ratio": 4.65,
+        "attention_cosine": 0.4506
+      },
+      {
+        "target_text": "The largest desert on Earth is the Red Planet, with an area of more than 40 million square kilometers (21 million square miles).\n\nThe Red Planet is home to a range of species, including some that live",
+        "compressed_ppl": 32.27,
+        "original_ppl": 6.84,
+        "ppl_ratio": 4.72,
+        "attention_cosine": 0.4365
+      },
+      {
+        "target_text": "Oxygen is produced by the bacteria on the surface of the molecule. When exposed to an oxygen-containing gas, it has a high affinity for oxygen, and it can be detected by the absorption of the gas. A t",
+        "compressed_ppl": 26.33,
+        "original_ppl": 10.49,
+        "ppl_ratio": 2.51,
+        "attention_cosine": 0.4772
+      }
+    ]
+  },
+  "delta": {
+    "ppl_ratio": -6.06,
+    "attention_cosine": 0.0125
+  }
+}

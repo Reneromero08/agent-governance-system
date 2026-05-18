@@ -167,10 +167,33 @@ Goal: Train low-rank adapters to correct PCA compression of GPT-2 KV cache. Meas
 - [x] Phase monitor operational: real-time compression failure detection
 - [x] Trained σ > 1 confirmed OOS: adapter provides real amplification beyond PCA
 
+### Phase 3.5b: Auto-Feedback Training Loop [x]
+
+Goal: Close the adapter training loop. Generate with compressed model, measure divergence from uncompressed, one gradient step on adapters. No supervised labels.
+
+- [x] AdapterGPT2: EigenGPT2 with LowRankAdapter at each layer, scaled bottleneck (max(32, (hidden-k)//8))
+- [x] v1: Factual QA verification → 0% accuracy (GPT-2 can't answer questions). Identified model bottleneck, not compression bottleneck.
+- [x] v2: Generation-quality metrics — PPL ratio, self-perplexity, attention cosine, KL divergence
+- [x] k=50 (15x): PPL ratio 12.8x → 2.6x (-80%) after 10 passes (400 gradient steps)
+- [x] k=50 (15x): Self-PPL 300-6400 → 9-12 after 3 passes — matches uncompressed GPT-2 quality on 5/6 prompts
+- [x] k=9 (85x): PPL ratio 33.4x → 14.6x (-56%). PCA cos 0.69 too degraded for adapter to recover.
+- [x] GPT-2-medium (355M, 24 layers): PPL ratio 37.7x → 27.4x (-27%, 2 passes). Architecture scales. Slower convergence from random init.
+- [x] Per-layer weighting, gradient accumulation, KL loss tested. Uniform weights + batch=1 optimal for 20-40 prompt sets.
+- [x] Loss converges at pass 8-10 (3.2). Convergence ceiling for random-init adapters at k=50.
+- [x] Speed-of-light failure mode: compressed model gets stuck on whitespace (self-PPL 3076 post-training). Repetition penalty needed.
+
+| Metric | Random Init | 3 Passes | 5 Passes | 10 Passes |
+|--------|------------|----------|----------|-----------|
+| PPL ratio (k=50) | 12.8x | ~6x | 3.9x | **2.6x** |
+| Self-PPL (avg) | 300-6400 | 9-12 | — | — |
+| Attention cosine | 0.42 | 0.44 | 0.44 | 0.45 |
+| Avg loss | 4.5 | 4.0 | 3.7 | 3.2 |
+
 **Artifacts:**
 - `THOUGHT/LAB/TINY_COMPRESS/extensions/03_flat_llm/` — Adapter training + architecture
 - `THOUGHT/LAB/TINY_COMPRESS/llm-spectral/sweeps/` — 8-task adapter sweep + report
 - `THOUGHT/LAB/TINY_COMPRESS/llm-spectral/phase/` — 5-task phase measurement + report
+- `THOUGHT/LAB/TINY_COMPRESS/llm-spectral/auto_feedback/` — Auto-feedback loop + report + results
 
 ## Phase 4: Cybernetic Truth Monitor [x]
 

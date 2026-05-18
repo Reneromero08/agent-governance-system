@@ -1,0 +1,298 @@
+{
+  "phase": "3.5",
+  "k": 9,
+  "passes": 2,
+  "lr": 0.0001,
+  "pre_feedback": {
+    "accuracy": 0.0,
+    "attention_cosine": 0.3924
+  },
+  "post_feedback": {
+    "accuracy": 0.0,
+    "attention_cosine": 0.4023
+  },
+  "n_steps": 40,
+  "n_updated": 40,
+  "steps": [
+    {
+      "prompt_id": "T1",
+      "generated_text": "What is the capital of France? and the new research on the new \" of a personal and one. The great and the field of the and the five.\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 0.955706,
+      "updated": true
+    },
+    {
+      "prompt_id": "T2",
+      "generated_text": "How many continents are there on Earth? and \"a. The first-c. We can be. A finding the sea, the first time, which is a \"the world. \"",
+      "correct": false,
+      "loss_value": 1.028413,
+      "updated": true
+    },
+    {
+      "prompt_id": "T3",
+      "generated_text": "What planet is known as the Red Planet?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 0.909158,
+      "updated": true
+    },
+    {
+      "prompt_id": "T4",
+      "generated_text": "Who wrote the novel 1984? \"the: (in the new kids.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 1.150718,
+      "updated": true
+    },
+    {
+      "prompt_id": "T5",
+      "generated_text": "What element has the chemical symbol Fe? The past the man has been the following a strong, but the effect, the upcoming. The a and the most-17. I can ",
+      "correct": false,
+      "loss_value": 1.017721,
+      "updated": true
+    },
+    {
+      "prompt_id": "T6",
+      "generated_text": "What is the chemical formula for water?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 1.179774,
+      "updated": true
+    },
+    {
+      "prompt_id": "T7",
+      "generated_text": "How many bones are in the adult human body?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 1.029274,
+      "updated": true
+    },
+    {
+      "prompt_id": "T8",
+      "generated_text": "What is the largest organ in the human body? (see. The same for \"God, and, it is \"the this account of the most probably.\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 0.95231,
+      "updated": true
+    },
+    {
+      "prompt_id": "T9",
+      "generated_text": "What is the boiling point of water in Celsius?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 0.946046,
+      "updated": true
+    },
+    {
+      "prompt_id": "T10",
+      "generated_text": "How many sides does a hexagon have? and I have been used to increase.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 1.008011,
+      "updated": true
+    },
+    {
+      "prompt_id": "T11",
+      "generated_text": "What is the square root of 144? The n a is the show, the most.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 0.919759,
+      "updated": true
+    },
+    {
+      "prompt_id": "T12",
+      "generated_text": "What gas do plants absorb from the atmosphere?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 1.030739,
+      "updated": true
+    },
+    {
+      "prompt_id": "T13",
+      "generated_text": "What is the speed of light in vacuum? (click. the moving and a unit. I have been determined that it is a man's \"the only.\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 1.12215,
+      "updated": true
+    },
+    {
+      "prompt_id": "T14",
+      "generated_text": "Who developed the theory of relativity? and the US-being a new \"how. The least in this article, \"I see the floor (as are the world.\n\n\n",
+      "correct": false,
+      "loss_value": 0.857739,
+      "updated": true
+    },
+    {
+      "prompt_id": "T15",
+      "generated_text": "What is the largest mammal on Earth? You can be an existence, a species. The people have been in the two-like the new life in the ever. The being. It'",
+      "correct": false,
+      "loss_value": 0.855145,
+      "updated": true
+    },
+    {
+      "prompt_id": "T16",
+      "generated_text": "How many chromosomes do humans have?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 1.048935,
+      "updated": true
+    },
+    {
+      "prompt_id": "T17",
+      "generated_text": "In what year did World War II end?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 0.975122,
+      "updated": true
+    },
+    {
+      "prompt_id": "T18",
+      "generated_text": "What is 15 percent of 200? is often, but no more than one-8. I will be associated as a significant. The new.\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 0.857995,
+      "updated": true
+    },
+    {
+      "prompt_id": "T19",
+      "generated_text": "What is 17 times 24?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 0.789868,
+      "updated": true
+    },
+    {
+      "prompt_id": "T20",
+      "generated_text": "What color is the sky on a clear day?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 0.842216,
+      "updated": true
+    },
+    {
+      "prompt_id": "T1",
+      "generated_text": "What is the capital of France? and the season. The bill for the gat, they may be a great. This is there and (p. The common for the very few",
+      "correct": false,
+      "loss_value": 0.787584,
+      "updated": true
+    },
+    {
+      "prompt_id": "T2",
+      "generated_text": "How many continents are there on Earth? the idea. The atmosphere, he got an isolated.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 0.898636,
+      "updated": true
+    },
+    {
+      "prompt_id": "T3",
+      "generated_text": "What planet is known as the Red Planet? or a lot and then. A. The focus. The first, but the Kans.\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 0.843408,
+      "updated": true
+    },
+    {
+      "prompt_id": "T4",
+      "generated_text": "Who wrote the novel 1984? and the difference.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 1.011195,
+      "updated": true
+    },
+    {
+      "prompt_id": "T5",
+      "generated_text": "What element has the chemical symbol Fe? the rest of the human body. This is a large, and a little in the United and those of the early and the ground",
+      "correct": false,
+      "loss_value": 0.915918,
+      "updated": true
+    },
+    {
+      "prompt_id": "T6",
+      "generated_text": "What is the chemical formula for water?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 1.023739,
+      "updated": true
+    },
+    {
+      "prompt_id": "T7",
+      "generated_text": "How many bones are in the adult human body? One of the British-out, and to some of the British, to your own of a Christian is a human population, a wo",
+      "correct": false,
+      "loss_value": 0.914823,
+      "updated": true
+    },
+    {
+      "prompt_id": "T8",
+      "generated_text": "What is the largest organ in the human body?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 0.850794,
+      "updated": true
+    },
+    {
+      "prompt_id": "T9",
+      "generated_text": "What is the boiling point of water in Celsius?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 0.867176,
+      "updated": true
+    },
+    {
+      "prompt_id": "T10",
+      "generated_text": "How many sides does a hexagon have?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 0.897747,
+      "updated": true
+    },
+    {
+      "prompt_id": "T11",
+      "generated_text": "What is the square root of 144? the individual, and is often have a large waves.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 0.855906,
+      "updated": true
+    },
+    {
+      "prompt_id": "T12",
+      "generated_text": "What gas do plants absorb from the atmosphere? to the u-based. (or a large.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 0.951479,
+      "updated": true
+    },
+    {
+      "prompt_id": "T13",
+      "generated_text": "What is the speed of light in vacuum?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 1.049042,
+      "updated": true
+    },
+    {
+      "prompt_id": "T14",
+      "generated_text": "Who developed the theory of relativity?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 0.73886,
+      "updated": true
+    },
+    {
+      "prompt_id": "T15",
+      "generated_text": "What is the largest mammal on Earth? a growing, which is not that the next to a different post-res. The next, but only on a post-the A, or in",
+      "correct": false,
+      "loss_value": 0.787941,
+      "updated": true
+    },
+    {
+      "prompt_id": "T16",
+      "generated_text": "How many chromosomes do humans have?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 0.930611,
+      "updated": true
+    },
+    {
+      "prompt_id": "T17",
+      "generated_text": "In what year did World War II end? The crowd. But when it. It is in the \"I. The more than the whole. (of the K. I, and the time",
+      "correct": false,
+      "loss_value": 0.867766,
+      "updated": true
+    },
+    {
+      "prompt_id": "T18",
+      "generated_text": "What is 15 percent of 200?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 0.793929,
+      "updated": true
+    },
+    {
+      "prompt_id": "T19",
+      "generated_text": "What is 17 times 24? \"to (in the early on the diet.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 0.726424,
+      "updated": true
+    },
+    {
+      "prompt_id": "T20",
+      "generated_text": "What color is the sky on a clear day?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "correct": false,
+      "loss_value": 0.7531,
+      "updated": true
+    }
+  ]
+}
