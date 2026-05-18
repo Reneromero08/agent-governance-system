@@ -50,14 +50,31 @@ class CortexQuery:
     Provides FTS5 search across cassette databases.
     """
 
+    # FTS5 special characters that break unquoted queries
+    _FTS5_SPECIAL = set("-()*")
+
     def __init__(self, db_path: Path = None):
         # Default to canon cassette if no path specified
         self.db_path = db_path or CANON_CASSETTE
         self.cassettes_dir = CASSETTES_DIR
 
+    @staticmethod
+    def _escape_fts5(query: str) -> str:
+        """Escape FTS5 special characters.
+
+        FTS5 treats unquoted hyphens as column subtraction (INV-005 -> INV MINUS 005).
+        Wrapping in double quotes makes it a phrase match.
+        """
+        if any(c in query for c in CortexQuery._FTS5_SPECIAL):
+            # Quote the entire query as a phrase
+            safe = query.replace('"', '""')  # Escape existing double quotes
+            return '"{}"'.format(safe)
+        return query
+
     def search(self, query: str, limit: int = 10) -> List[Dict]:
         """Full-text search across cassette chunks."""
         results = []
+        safe_query = self._escape_fts5(query)
 
         # Search all cassettes
         for db_file in self.cassettes_dir.glob("*.db"):
@@ -76,7 +93,7 @@ class CortexQuery:
                         WHERE chunks_fts MATCH ?
                         ORDER BY rank
                         LIMIT ?
-                    """, (query, limit))
+                    """, (safe_query, limit))
 
                     for row in cursor.fetchall():
                         result = dict(row)

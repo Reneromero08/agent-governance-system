@@ -126,6 +126,11 @@ class GenericCassette(DatabaseCassette):
     
     def _query_fts(self, conn: sqlite3.Connection, fts_table: str, query_text: str, top_k: int) -> List[dict]:
         """Query FTS5 virtual table."""
+        # Escape FTS5 special characters (- is column subtraction, not NOT)
+        safe_query = query_text
+        if any(c in query_text for c in '-()*'):
+            safe_query = '"{}"'.format(query_text.replace('"', '""'))
+
         # Determine base table name (remove _fts suffix)
         base_table = fts_table[:-4] if fts_table.endswith('_fts') else fts_table
 
@@ -150,7 +155,7 @@ class GenericCassette(DatabaseCassette):
                 ORDER BY rank
                 LIMIT ?
             """
-            cursor = conn.execute(query, (self.cassette_id, query_text, top_k))
+            cursor = conn.execute(query, (self.cassette_id, safe_query, top_k))
         else:
             # Fallback: generic FTS query for non-standard schemas
             cursor_info = conn.execute(f"PRAGMA table_info({base_table})")
@@ -175,7 +180,7 @@ class GenericCassette(DatabaseCassette):
                 ORDER BY rank
                 LIMIT ?
             """
-            cursor = conn.execute(query, (query_text, top_k))
+            cursor = conn.execute(query, (safe_query, top_k))
 
         results = []
         for row in cursor.fetchall():
