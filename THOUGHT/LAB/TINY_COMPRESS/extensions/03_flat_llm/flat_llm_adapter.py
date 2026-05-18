@@ -484,6 +484,73 @@ def run_benchmark(device: str = "cpu", k_values: List[int] = None, seeds: List[i
     return all_results
 
 
+def run_gguf_demo(device: str = "cpu"):
+    """GGUF backend demo: load LFM2.5, run inference, extract signals."""
+    print("=" * 72)
+    print("  GGUF Backend Demo (LFM2.5 + CUDA)")
+    print("  Phase 3.5: KV Cache Compression signal extraction")
+    print("=" * 72)
+    print()
+
+    from gguf_backend import GgufBackend
+
+    print("[1/5] Loading LFM2.5 GGUF with full GPU offload...")
+    backend = GgufBackend(n_ctx=2048, verbose=False)
+    info = backend.info()
+    print(f"      Model: {info['model']} ({info['arch']})")
+    print(f"      GPU:   {info['gpu']}, {info['layers_offloaded']} layers offloaded")
+    print(f"      EmbD:  {info['n_embd']}, Vocab: {info['n_vocab']}, Layers: {info['n_layers']}")
+    print()
+
+    test_texts = [
+        "The capital of France is",
+        "The theory of relativity was developed by",
+        "Machine learning is a subset of",
+        "The largest ocean on Earth is",
+        "In computer science, an algorithm is",
+    ]
+
+    print("[2/5] Inference benchmark...")
+    for text in test_texts:
+        out = backend.generate(text, max_tokens=32)
+        print(f"      {text}")
+        print(f"      -> {out[:80]}...")
+        print()
+
+    print("[3/5] Logit extraction (per-token vocabulary distribution)...")
+    for text in ["Hello world", "KV cache compression"]:
+        logits = backend.get_logits(text)
+        # softmax over 65536 vocab
+        logits_stable = logits - logits.max(axis=-1, keepdims=True)
+        probs = np.exp(logits_stable) / np.exp(logits_stable).sum(axis=-1, keepdims=True)
+        top5 = np.argsort(-probs[0])[:5]
+        top5_str = [backend.detokenize(int(t)).strip() or f"<tok_{t}>" for t in top5]
+        top5_p = [probs[0, t] for t in top5]
+        print(f"      Prompt: {repr(text)}")
+        print(f"      Logits shape: {logits.shape}")
+        for i, (t_str, t_p) in enumerate(zip(top5_str, top5_p)):
+            print(f"        Top-{i+1}: {t_str!r:20s}  p={t_p:.6f}  (id={top5[i]})")
+        print()
+
+    print("[4/5] Embedding extraction (sentence-level hidden states)...")
+    for text in test_texts:
+        emb = backend.get_embedding(text)
+        norm = np.linalg.norm(emb)
+        print(f"      {text[:50]:50s}  emb={emb.shape}  norm={norm:.3f}")
+    print()
+
+    print("[5/5] Chat completion (LFM2.5 chat template)...")
+    reply = backend.chat([
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": "Explain KV cache compression in one sentence."},
+    ], max_tokens=64)
+    print(f"      {reply}")
+    print()
+
+    backend.close()
+    print("  Done.")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Low-Rank Adapter Benchmark")
     parser.add_argument("--device", default="cpu", help="Device (cpu or cuda)")
@@ -494,10 +561,14 @@ def main():
     bench_p.add_argument("--seeds", type=int, nargs="+", default=[1, 2, 3],
                          help="Random seeds for ensemble averaging")
 
+    subparsers.add_parser("gguf-demo", help="Run GGUF backend demo (LFM2.5 + CUDA)")
+
     args = parser.parse_args()
 
     if args.command == "benchmark":
         run_benchmark(args.device, args.k_values, args.seeds)
+    elif args.command == "gguf-demo":
+        run_gguf_demo(args.device)
 
 
 if __name__ == '__main__':
