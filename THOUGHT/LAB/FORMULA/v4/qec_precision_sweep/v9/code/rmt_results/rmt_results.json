@@ -1,0 +1,1225 @@
+{
+  "results": [
+    {
+      "d": 3,
+      "p": 0.001,
+      "run": 0,
+      "log_likelihood_ratio": 0.3043166872139658,
+      "ks_wigner": 0.16865358452251478,
+      "ks_poisson": 0.2390042814732403,
+      "mean_spacing_ratio": 0.5253857500953728,
+      "wigner_wins": true
+    },
+    {
+      "d": 3,
+      "p": 0.001,
+      "run": 1,
+      "log_likelihood_ratio": -0.04949047439249405,
+      "ks_wigner": 0.1535513183703477,
+      "ks_poisson": 0.12523246852549758,
+      "mean_spacing_ratio": 0.34795145233095365,
+      "wigner_wins": false
+    },
+    {
+      "d": 3,
+      "p": 0.001,
+      "run": 2,
+      "log_likelihood_ratio": 0.3204437250245242,
+      "ks_wigner": 0.09989207884047024,
+      "ks_poisson": 0.26950794646122156,
+      "mean_spacing_ratio": 0.5522629725644905,
+      "wigner_wins": true
+    },
+    {
+      "d": 3,
+      "p": 0.002,
+      "run": 0,
+      "log_likelihood_ratio": 0.10067857427314052,
+      "ks_wigner": 0.08191429018645746,
+      "ks_poisson": 0.21421265913639803,
+      "mean_spacing_ratio": 0.5640043855896658,
+      "wigner_wins": true
+    },
+    {
+      "d": 3,
+      "p": 0.002,
+      "run": 1,
+      "log_likelihood_ratio": 0.46541745577514554,
+      "ks_wigner": 0.1125596749295857,
+      "ks_poisson": 0.32826731511441426,
+      "mean_spacing_ratio": 0.646937979535217,
+      "wigner_wins": true
+    },
+    {
+      "d": 3,
+      "p": 0.002,
+      "run": 2,
+      "log_likelihood_ratio": 0.1333581406791782,
+      "ks_wigner": 0.11860886259800285,
+      "ks_poisson": 0.23517990594108382,
+      "mean_spacing_ratio": 0.5786970713650463,
+      "wigner_wins": true
+    },
+    {
+      "d": 3,
+      "p": 0.004,
+      "run": 0,
+      "log_likelihood_ratio": 0.34137971020299707,
+      "ks_wigner": 0.25039442605180884,
+      "ks_poisson": 0.2668686480580665,
+      "mean_spacing_ratio": 0.5924310817000348,
+      "wigner_wins": true
+    },
+    {
+      "d": 3,
+      "p": 0.004,
+      "run": 1,
+      "log_likelihood_ratio": 0.026722464981237596,
+      "ks_wigner": 0.3204687321011773,
+      "ks_poisson": 0.19101682289981686,
+      "mean_spacing_ratio": 0.49672620266844075,
+      "wigner_wins": true
+    },
+    {
+      "d": 3,
+      "p": 0.004,
+      "run": 2,
+      "log_likelihood_ratio": 0.22522014582378977,
+      "ks_wigner": 0.15777682116535185,
+      "ks_poisson": 0.23193839297230792,
+      "mean_spacing_ratio": 0.5179136235084418,
+      "wigner_wins": true
+    },
+    {
+      "d": 3,
+      "p": 0.006,
+      "run": 0,
+      "log_likelihood_ratio": 0.299741152337652,
+      "ks_wigner": 0.08293930945848699,
+      "ks_poisson": 0.2118767400961718,
+      "mean_spacing_ratio": 0.48783498474079406,
+      "wigner_wins": true
+    },
+    {
+      "d": 3,
+      "p": 0.006,
+      "run": 1,
+      "log_likelihood_ratio": 0.13314998275315404,
+      "ks_wigner": 0.12653003131437657,
+      "ks_poisson": 0.22163389415411622,
+      "mean_spacing_ratio": 0.49600494394106037,
+      "wigner_wins": true
+    },
+    {
+      "d": 3,
+      "p": 0.006,
+      "run": 2,
+      "log_likelihood_ratio": 0.24949531372532593,
+      "ks_wigner": 0.14440148311098533,
+      "ks_poisson": 0.21863670312565953,
+      "mean_spacing_ratio": 0.5255013286142881,
+      "wigner_wins": true
+    },
+    {
+      "d": 3,
+      "p": 0.008,
+      "run": 0,
+      "log_likelihood_ratio": 0.046586388742174696,
+      "ks_wigner": 0.10113693135801716,
+      "ks_poisson": 0.21645241522372655,
+      "mean_spacing_ratio": 0.43292265564569826,
+      "wigner_wins": true
+    },
+    {
+      "d": 3,
+      "p": 0.008,
+      "run": 1,
+      "log_likelihood_ratio": 0.23976144026753782,
+      "ks_wigner": 0.1778520673816586,
+      "ks_poisson": 0.22262999142328072,
+      "mean_spacing_ratio": 0.5805910000626312,
+      "wigner_wins": true
+    },
+    {
+      "d": 3,
+      "p": 0.008,
+      "run": 2,
+      "log_likelihood_ratio": 0.21451882635349437,
+      "ks_wigner": 0.12759444708056156,
+      "ks_poisson": 0.1555192580694757,
+      "mean_spacing_ratio": 0.4894109168069306,
+      "wigner_wins": true
+    },
+    {
+      "d": 3,
+      "p": 0.01,
+      "run": 0,
+      "log_likelihood_ratio": 0.14978284992476942,
+      "ks_wigner": 0.17220460157171819,
+      "ks_poisson": 0.13643411121157661,
+      "mean_spacing_ratio": 0.4908757644401271,
+      "wigner_wins": true
+    },
+    {
+      "d": 3,
+      "p": 0.01,
+      "run": 1,
+      "log_likelihood_ratio": 0.3309771585675559,
+      "ks_wigner": 0.09993277870375383,
+      "ks_poisson": 0.25989347516076733,
+      "mean_spacing_ratio": 0.5903535775419696,
+      "wigner_wins": true
+    },
+    {
+      "d": 3,
+      "p": 0.01,
+      "run": 2,
+      "log_likelihood_ratio": 0.13673565643484048,
+      "ks_wigner": 0.22643242798191388,
+      "ks_poisson": 0.15739527538517917,
+      "mean_spacing_ratio": 0.40904585736111637,
+      "wigner_wins": true
+    },
+    {
+      "d": 3,
+      "p": 0.02,
+      "run": 0,
+      "log_likelihood_ratio": 0.3039033343532501,
+      "ks_wigner": 0.22667210625417433,
+      "ks_poisson": 0.2561252866841625,
+      "mean_spacing_ratio": 0.47852656257940895,
+      "wigner_wins": true
+    },
+    {
+      "d": 3,
+      "p": 0.02,
+      "run": 1,
+      "log_likelihood_ratio": 0.0853330306347946,
+      "ks_wigner": 0.10193337526502888,
+      "ks_poisson": 0.1626746715877222,
+      "mean_spacing_ratio": 0.5112532957421025,
+      "wigner_wins": true
+    },
+    {
+      "d": 3,
+      "p": 0.02,
+      "run": 2,
+      "log_likelihood_ratio": 0.20258644666941045,
+      "ks_wigner": 0.08176455652355269,
+      "ks_poisson": 0.2973823322284997,
+      "mean_spacing_ratio": 0.5289872519193145,
+      "wigner_wins": true
+    },
+    {
+      "d": 3,
+      "p": 0.04,
+      "run": 0,
+      "log_likelihood_ratio": 0.3456217056558047,
+      "ks_wigner": 0.17089089382003964,
+      "ks_poisson": 0.24463786257880543,
+      "mean_spacing_ratio": 0.5903432582570736,
+      "wigner_wins": true
+    },
+    {
+      "d": 3,
+      "p": 0.04,
+      "run": 1,
+      "log_likelihood_ratio": 0.16603969616440217,
+      "ks_wigner": 0.08433725015934379,
+      "ks_poisson": 0.2537270575574163,
+      "mean_spacing_ratio": 0.5576736756244242,
+      "wigner_wins": true
+    },
+    {
+      "d": 3,
+      "p": 0.04,
+      "run": 2,
+      "log_likelihood_ratio": 0.042344195415167554,
+      "ks_wigner": 0.2566032739470415,
+      "ks_poisson": 0.17336528673179818,
+      "mean_spacing_ratio": 0.4513717860504411,
+      "wigner_wins": true
+    },
+    {
+      "d": 5,
+      "p": 0.001,
+      "run": 0,
+      "log_likelihood_ratio": 0.18612117818981982,
+      "ks_wigner": 0.08833906879770148,
+      "ks_poisson": 0.19514617142796947,
+      "mean_spacing_ratio": 0.5043903907704517,
+      "wigner_wins": true
+    },
+    {
+      "d": 5,
+      "p": 0.001,
+      "run": 1,
+      "log_likelihood_ratio": 0.24953341340493523,
+      "ks_wigner": 0.050341696758479104,
+      "ks_poisson": 0.23079274337365013,
+      "mean_spacing_ratio": 0.5511057065786753,
+      "wigner_wins": true
+    },
+    {
+      "d": 5,
+      "p": 0.001,
+      "run": 2,
+      "log_likelihood_ratio": 0.2665961985931984,
+      "ks_wigner": 0.06578903677066389,
+      "ks_poisson": 0.25634265706468995,
+      "mean_spacing_ratio": 0.5471393637815307,
+      "wigner_wins": true
+    },
+    {
+      "d": 5,
+      "p": 0.002,
+      "run": 0,
+      "log_likelihood_ratio": 0.2607736748008378,
+      "ks_wigner": 0.048495866433881374,
+      "ks_poisson": 0.24090002218141993,
+      "mean_spacing_ratio": 0.5615885421689204,
+      "wigner_wins": true
+    },
+    {
+      "d": 5,
+      "p": 0.002,
+      "run": 1,
+      "log_likelihood_ratio": 0.280406604108431,
+      "ks_wigner": 0.07301556122019914,
+      "ks_poisson": 0.22525639406790487,
+      "mean_spacing_ratio": 0.5277886049601076,
+      "wigner_wins": true
+    },
+    {
+      "d": 5,
+      "p": 0.002,
+      "run": 2,
+      "log_likelihood_ratio": 0.29731214022250196,
+      "ks_wigner": 0.06497673971730067,
+      "ks_poisson": 0.23636375921870323,
+      "mean_spacing_ratio": 0.5866718598264156,
+      "wigner_wins": true
+    },
+    {
+      "d": 5,
+      "p": 0.004,
+      "run": 0,
+      "log_likelihood_ratio": 0.2521395016672327,
+      "ks_wigner": 0.04644432126123531,
+      "ks_poisson": 0.22100086399265315,
+      "mean_spacing_ratio": 0.5026715468077426,
+      "wigner_wins": true
+    },
+    {
+      "d": 5,
+      "p": 0.004,
+      "run": 1,
+      "log_likelihood_ratio": 0.3306777907013934,
+      "ks_wigner": 0.04550560272721038,
+      "ks_poisson": 0.25536380561512384,
+      "mean_spacing_ratio": 0.5712023630002296,
+      "wigner_wins": true
+    },
+    {
+      "d": 5,
+      "p": 0.004,
+      "run": 2,
+      "log_likelihood_ratio": 0.2113859948454947,
+      "ks_wigner": 0.07185432343757348,
+      "ks_poisson": 0.20743267962234144,
+      "mean_spacing_ratio": 0.5041240834586217,
+      "wigner_wins": true
+    },
+    {
+      "d": 5,
+      "p": 0.006,
+      "run": 0,
+      "log_likelihood_ratio": 0.2690161440016417,
+      "ks_wigner": 0.04672889256864943,
+      "ks_poisson": 0.2323456164967539,
+      "mean_spacing_ratio": 0.5408560131055964,
+      "wigner_wins": true
+    },
+    {
+      "d": 5,
+      "p": 0.006,
+      "run": 1,
+      "log_likelihood_ratio": 0.27416405495977025,
+      "ks_wigner": 0.02867984406168811,
+      "ks_poisson": 0.228632743121925,
+      "mean_spacing_ratio": 0.5486245436526435,
+      "wigner_wins": true
+    },
+    {
+      "d": 5,
+      "p": 0.006,
+      "run": 2,
+      "log_likelihood_ratio": 0.2891044592490579,
+      "ks_wigner": 0.04581147100201849,
+      "ks_poisson": 0.20185548952975846,
+      "mean_spacing_ratio": 0.5259940056764043,
+      "wigner_wins": true
+    },
+    {
+      "d": 5,
+      "p": 0.008,
+      "run": 0,
+      "log_likelihood_ratio": 0.1788114467649034,
+      "ks_wigner": 0.05367035369327222,
+      "ks_poisson": 0.24719976703894708,
+      "mean_spacing_ratio": 0.5145349606062103,
+      "wigner_wins": true
+    },
+    {
+      "d": 5,
+      "p": 0.008,
+      "run": 1,
+      "log_likelihood_ratio": 0.2955286440136609,
+      "ks_wigner": 0.04099036698324632,
+      "ks_poisson": 0.23694798154156696,
+      "mean_spacing_ratio": 0.5523657668321822,
+      "wigner_wins": true
+    },
+    {
+      "d": 5,
+      "p": 0.008,
+      "run": 2,
+      "log_likelihood_ratio": 0.2621270340909044,
+      "ks_wigner": 0.037917983219100615,
+      "ks_poisson": 0.22541110601620779,
+      "mean_spacing_ratio": 0.5599844789664599,
+      "wigner_wins": true
+    },
+    {
+      "d": 5,
+      "p": 0.01,
+      "run": 0,
+      "log_likelihood_ratio": 0.23035581602515806,
+      "ks_wigner": 0.09346232714433417,
+      "ks_poisson": 0.2016383160916872,
+      "mean_spacing_ratio": 0.4945777123554777,
+      "wigner_wins": true
+    },
+    {
+      "d": 5,
+      "p": 0.01,
+      "run": 1,
+      "log_likelihood_ratio": 0.2695583848849108,
+      "ks_wigner": 0.040526576443418394,
+      "ks_poisson": 0.22500436541472746,
+      "mean_spacing_ratio": 0.5352742515144865,
+      "wigner_wins": true
+    },
+    {
+      "d": 5,
+      "p": 0.01,
+      "run": 2,
+      "log_likelihood_ratio": 0.21008753166714988,
+      "ks_wigner": 0.09110063079652608,
+      "ks_poisson": 0.23172274422254743,
+      "mean_spacing_ratio": 0.5395290919464698,
+      "wigner_wins": true
+    },
+    {
+      "d": 5,
+      "p": 0.02,
+      "run": 0,
+      "log_likelihood_ratio": 0.26451417387384507,
+      "ks_wigner": 0.05385601386368799,
+      "ks_poisson": 0.23883239339388607,
+      "mean_spacing_ratio": 0.5278231588446063,
+      "wigner_wins": true
+    },
+    {
+      "d": 5,
+      "p": 0.02,
+      "run": 1,
+      "log_likelihood_ratio": 0.11156833343005955,
+      "ks_wigner": 0.10140704255946309,
+      "ks_poisson": 0.17090194290813462,
+      "mean_spacing_ratio": 0.47838278575843923,
+      "wigner_wins": true
+    },
+    {
+      "d": 5,
+      "p": 0.02,
+      "run": 2,
+      "log_likelihood_ratio": 0.23898855470382646,
+      "ks_wigner": 0.05864441028259426,
+      "ks_poisson": 0.22162729420172186,
+      "mean_spacing_ratio": 0.5454414680579078,
+      "wigner_wins": true
+    },
+    {
+      "d": 5,
+      "p": 0.04,
+      "run": 0,
+      "log_likelihood_ratio": 0.2464789047104126,
+      "ks_wigner": 0.0584602586768328,
+      "ks_poisson": 0.2596033260105429,
+      "mean_spacing_ratio": 0.5418630719886712,
+      "wigner_wins": true
+    },
+    {
+      "d": 5,
+      "p": 0.04,
+      "run": 1,
+      "log_likelihood_ratio": 0.22242148131342918,
+      "ks_wigner": 0.04586399904480598,
+      "ks_poisson": 0.21497239565147866,
+      "mean_spacing_ratio": 0.5247219472263366,
+      "wigner_wins": true
+    },
+    {
+      "d": 5,
+      "p": 0.04,
+      "run": 2,
+      "log_likelihood_ratio": 0.25727087922306136,
+      "ks_wigner": 0.05667490907774286,
+      "ks_poisson": 0.2320146357697985,
+      "mean_spacing_ratio": 0.5299573094821303,
+      "wigner_wins": true
+    },
+    {
+      "d": 7,
+      "p": 0.001,
+      "run": 0,
+      "log_likelihood_ratio": 0.29464534943647164,
+      "ks_wigner": 0.0420475347410052,
+      "ks_poisson": 0.22788781396751143,
+      "mean_spacing_ratio": 0.5491979300891382,
+      "wigner_wins": true
+    },
+    {
+      "d": 7,
+      "p": 0.001,
+      "run": 1,
+      "log_likelihood_ratio": 0.2568998133312373,
+      "ks_wigner": 0.03110182434272718,
+      "ks_poisson": 0.20510351857833897,
+      "mean_spacing_ratio": 0.5260166974715986,
+      "wigner_wins": true
+    },
+    {
+      "d": 7,
+      "p": 0.001,
+      "run": 2,
+      "log_likelihood_ratio": 0.2588029387129805,
+      "ks_wigner": 0.0344846023062339,
+      "ks_poisson": 0.2078632157521674,
+      "mean_spacing_ratio": 0.5230651677012643,
+      "wigner_wins": true
+    },
+    {
+      "d": 7,
+      "p": 0.002,
+      "run": 0,
+      "log_likelihood_ratio": 0.260173083806543,
+      "ks_wigner": 0.02999924176424229,
+      "ks_poisson": 0.22278630422386772,
+      "mean_spacing_ratio": 0.5304824148111535,
+      "wigner_wins": true
+    },
+    {
+      "d": 7,
+      "p": 0.002,
+      "run": 1,
+      "log_likelihood_ratio": 0.24091302039657558,
+      "ks_wigner": 0.02893417179653293,
+      "ks_poisson": 0.19861599660925494,
+      "mean_spacing_ratio": 0.5224958433175501,
+      "wigner_wins": true
+    },
+    {
+      "d": 7,
+      "p": 0.002,
+      "run": 2,
+      "log_likelihood_ratio": 0.3079785254272736,
+      "ks_wigner": 0.03768673990238147,
+      "ks_poisson": 0.24323447525819364,
+      "mean_spacing_ratio": 0.5509238997304342,
+      "wigner_wins": true
+    },
+    {
+      "d": 7,
+      "p": 0.004,
+      "run": 0,
+      "log_likelihood_ratio": 0.23023063736605612,
+      "ks_wigner": 0.04465322205348543,
+      "ks_poisson": 0.19931781060595344,
+      "mean_spacing_ratio": 0.5246285873233241,
+      "wigner_wins": true
+    },
+    {
+      "d": 7,
+      "p": 0.004,
+      "run": 1,
+      "log_likelihood_ratio": 0.27914567159991605,
+      "ks_wigner": 0.03270126775406379,
+      "ks_poisson": 0.231454920932345,
+      "mean_spacing_ratio": 0.5428797452676112,
+      "wigner_wins": true
+    },
+    {
+      "d": 7,
+      "p": 0.004,
+      "run": 2,
+      "log_likelihood_ratio": 0.24389682392350445,
+      "ks_wigner": 0.0354657830370686,
+      "ks_poisson": 0.20367148084197836,
+      "mean_spacing_ratio": 0.5480234050857701,
+      "wigner_wins": true
+    },
+    {
+      "d": 7,
+      "p": 0.006,
+      "run": 0,
+      "log_likelihood_ratio": 0.2327742188650846,
+      "ks_wigner": 0.0600567128538011,
+      "ks_poisson": 0.2114053818092577,
+      "mean_spacing_ratio": 0.554548141460609,
+      "wigner_wins": true
+    },
+    {
+      "d": 7,
+      "p": 0.006,
+      "run": 1,
+      "log_likelihood_ratio": 0.30962346914926714,
+      "ks_wigner": 0.026920523221961534,
+      "ks_poisson": 0.23803309438176143,
+      "mean_spacing_ratio": 0.5586581378352299,
+      "wigner_wins": true
+    },
+    {
+      "d": 7,
+      "p": 0.006,
+      "run": 2,
+      "log_likelihood_ratio": 0.21582358718133032,
+      "ks_wigner": 0.049602651738724024,
+      "ks_poisson": 0.1868913979957898,
+      "mean_spacing_ratio": 0.49124418802594694,
+      "wigner_wins": true
+    },
+    {
+      "d": 7,
+      "p": 0.008,
+      "run": 0,
+      "log_likelihood_ratio": 0.2049967736928382,
+      "ks_wigner": 0.0505584750704961,
+      "ks_poisson": 0.1902975188373674,
+      "mean_spacing_ratio": 0.49500719588161146,
+      "wigner_wins": true
+    },
+    {
+      "d": 7,
+      "p": 0.008,
+      "run": 1,
+      "log_likelihood_ratio": 0.195264869446654,
+      "ks_wigner": 0.06719721463042927,
+      "ks_poisson": 0.20287567982709026,
+      "mean_spacing_ratio": 0.5185253404387308,
+      "wigner_wins": true
+    },
+    {
+      "d": 7,
+      "p": 0.008,
+      "run": 2,
+      "log_likelihood_ratio": 0.21550175707232072,
+      "ks_wigner": 0.052856557462299836,
+      "ks_poisson": 0.1975052619895087,
+      "mean_spacing_ratio": 0.5052689420913226,
+      "wigner_wins": true
+    },
+    {
+      "d": 7,
+      "p": 0.01,
+      "run": 0,
+      "log_likelihood_ratio": 0.2862292416640774,
+      "ks_wigner": 0.0191746188130979,
+      "ks_poisson": 0.21788612080876482,
+      "mean_spacing_ratio": 0.5209283991265832,
+      "wigner_wins": true
+    },
+    {
+      "d": 7,
+      "p": 0.01,
+      "run": 1,
+      "log_likelihood_ratio": 0.22153293931759846,
+      "ks_wigner": 0.0524325919072548,
+      "ks_poisson": 0.21602090256968484,
+      "mean_spacing_ratio": 0.5080858907525355,
+      "wigner_wins": true
+    },
+    {
+      "d": 7,
+      "p": 0.01,
+      "run": 2,
+      "log_likelihood_ratio": 0.23987426453704477,
+      "ks_wigner": 0.04819535640994288,
+      "ks_poisson": 0.19614890110258548,
+      "mean_spacing_ratio": 0.507130178429637,
+      "wigner_wins": true
+    },
+    {
+      "d": 7,
+      "p": 0.02,
+      "run": 0,
+      "log_likelihood_ratio": 0.2702710870719164,
+      "ks_wigner": 0.03494438855327417,
+      "ks_poisson": 0.22437347110177958,
+      "mean_spacing_ratio": 0.5334752833086529,
+      "wigner_wins": true
+    },
+    {
+      "d": 7,
+      "p": 0.02,
+      "run": 1,
+      "log_likelihood_ratio": 0.2992055903743334,
+      "ks_wigner": 0.04731680000471017,
+      "ks_poisson": 0.23209603957334546,
+      "mean_spacing_ratio": 0.5485695421759043,
+      "wigner_wins": true
+    },
+    {
+      "d": 7,
+      "p": 0.02,
+      "run": 2,
+      "log_likelihood_ratio": 0.31452903269682025,
+      "ks_wigner": 0.029057415320649566,
+      "ks_poisson": 0.240347173249192,
+      "mean_spacing_ratio": 0.5468804116097089,
+      "wigner_wins": true
+    },
+    {
+      "d": 7,
+      "p": 0.04,
+      "run": 0,
+      "log_likelihood_ratio": 0.2520535190921161,
+      "ks_wigner": 0.03428256455787193,
+      "ks_poisson": 0.23283824763653665,
+      "mean_spacing_ratio": 0.5364729354378127,
+      "wigner_wins": true
+    },
+    {
+      "d": 7,
+      "p": 0.04,
+      "run": 1,
+      "log_likelihood_ratio": 0.27786844168721186,
+      "ks_wigner": 0.0393083631808665,
+      "ks_poisson": 0.23564801298296104,
+      "mean_spacing_ratio": 0.5309068166199046,
+      "wigner_wins": true
+    },
+    {
+      "d": 7,
+      "p": 0.04,
+      "run": 2,
+      "log_likelihood_ratio": 0.2472849953359063,
+      "ks_wigner": 0.03598623590220529,
+      "ks_poisson": 0.2196487712143017,
+      "mean_spacing_ratio": 0.5254556019869908,
+      "wigner_wins": true
+    },
+    {
+      "d": 9,
+      "p": 0.001,
+      "run": 0,
+      "log_likelihood_ratio": 0.29566423644572076,
+      "ks_wigner": 0.016928427990427708,
+      "ks_poisson": 0.21692973748080135,
+      "mean_spacing_ratio": 0.5431301170719878,
+      "wigner_wins": true
+    },
+    {
+      "d": 9,
+      "p": 0.001,
+      "run": 1,
+      "log_likelihood_ratio": 0.2641976010803102,
+      "ks_wigner": 0.02288252101261193,
+      "ks_poisson": 0.20963519128045463,
+      "mean_spacing_ratio": 0.5287392017020248,
+      "wigner_wins": true
+    },
+    {
+      "d": 9,
+      "p": 0.001,
+      "run": 2,
+      "log_likelihood_ratio": 0.2661664426408118,
+      "ks_wigner": 0.02963030912677478,
+      "ks_poisson": 0.21677579598446453,
+      "mean_spacing_ratio": 0.5283918661246128,
+      "wigner_wins": true
+    },
+    {
+      "d": 9,
+      "p": 0.002,
+      "run": 0,
+      "log_likelihood_ratio": 0.2702770399639645,
+      "ks_wigner": 0.03713737509346282,
+      "ks_poisson": 0.2230446416327566,
+      "mean_spacing_ratio": 0.5377067420971567,
+      "wigner_wins": true
+    },
+    {
+      "d": 9,
+      "p": 0.002,
+      "run": 1,
+      "log_likelihood_ratio": 0.2615850137939539,
+      "ks_wigner": 0.020287331889780102,
+      "ks_poisson": 0.2098186382506569,
+      "mean_spacing_ratio": 0.5388280572350714,
+      "wigner_wins": true
+    },
+    {
+      "d": 9,
+      "p": 0.002,
+      "run": 2,
+      "log_likelihood_ratio": 0.3440337091849386,
+      "ks_wigner": 0.03927835791106002,
+      "ks_poisson": 0.254553351390149,
+      "mean_spacing_ratio": 0.5684907542756257,
+      "wigner_wins": true
+    },
+    {
+      "d": 9,
+      "p": 0.004,
+      "run": 0,
+      "log_likelihood_ratio": 0.260502159500126,
+      "ks_wigner": 0.024116871223256897,
+      "ks_poisson": 0.22404920784788857,
+      "mean_spacing_ratio": 0.5226001485285053,
+      "wigner_wins": true
+    },
+    {
+      "d": 9,
+      "p": 0.004,
+      "run": 1,
+      "log_likelihood_ratio": 0.22904304324517188,
+      "ks_wigner": 0.034829252227884744,
+      "ks_poisson": 0.20801137534637146,
+      "mean_spacing_ratio": 0.5186456924160804,
+      "wigner_wins": true
+    },
+    {
+      "d": 9,
+      "p": 0.004,
+      "run": 2,
+      "log_likelihood_ratio": 0.2884363812866937,
+      "ks_wigner": 0.02565758037106125,
+      "ks_poisson": 0.223013574531542,
+      "mean_spacing_ratio": 0.5380387719497716,
+      "wigner_wins": true
+    },
+    {
+      "d": 9,
+      "p": 0.006,
+      "run": 0,
+      "log_likelihood_ratio": 0.22895366714239246,
+      "ks_wigner": 0.03426292446365439,
+      "ks_poisson": 0.2123072485102639,
+      "mean_spacing_ratio": 0.5042252530587817,
+      "wigner_wins": true
+    },
+    {
+      "d": 9,
+      "p": 0.006,
+      "run": 1,
+      "log_likelihood_ratio": 0.26842860874272517,
+      "ks_wigner": 0.02243715116249645,
+      "ks_poisson": 0.23058806956556643,
+      "mean_spacing_ratio": 0.5427479090881118,
+      "wigner_wins": true
+    },
+    {
+      "d": 9,
+      "p": 0.006,
+      "run": 2,
+      "log_likelihood_ratio": 0.281705495176061,
+      "ks_wigner": 0.025390174821128375,
+      "ks_poisson": 0.22176875116867922,
+      "mean_spacing_ratio": 0.5565882345715132,
+      "wigner_wins": true
+    },
+    {
+      "d": 9,
+      "p": 0.008,
+      "run": 0,
+      "log_likelihood_ratio": 0.2463434054223867,
+      "ks_wigner": 0.03595363972434107,
+      "ks_poisson": 0.20665382604107593,
+      "mean_spacing_ratio": 0.5382125828842722,
+      "wigner_wins": true
+    },
+    {
+      "d": 9,
+      "p": 0.008,
+      "run": 1,
+      "log_likelihood_ratio": 0.21735251486334842,
+      "ks_wigner": 0.03884293127810165,
+      "ks_poisson": 0.19505611379203877,
+      "mean_spacing_ratio": 0.5100125806957364,
+      "wigner_wins": true
+    },
+    {
+      "d": 9,
+      "p": 0.008,
+      "run": 2,
+      "log_likelihood_ratio": 0.27677978627969235,
+      "ks_wigner": 0.020379873700177464,
+      "ks_poisson": 0.20987475627056262,
+      "mean_spacing_ratio": 0.540052542659679,
+      "wigner_wins": true
+    },
+    {
+      "d": 9,
+      "p": 0.01,
+      "run": 0,
+      "log_likelihood_ratio": 0.2889051461335586,
+      "ks_wigner": 0.024750412044503345,
+      "ks_poisson": 0.21863665800180795,
+      "mean_spacing_ratio": 0.540107113232582,
+      "wigner_wins": true
+    },
+    {
+      "d": 9,
+      "p": 0.01,
+      "run": 1,
+      "log_likelihood_ratio": 0.2624396456921237,
+      "ks_wigner": 0.0397544081168939,
+      "ks_poisson": 0.22382987097145446,
+      "mean_spacing_ratio": 0.5397784766233328,
+      "wigner_wins": true
+    },
+    {
+      "d": 9,
+      "p": 0.01,
+      "run": 2,
+      "log_likelihood_ratio": 0.27935940294280515,
+      "ks_wigner": 0.02232792609699119,
+      "ks_poisson": 0.2305847967901133,
+      "mean_spacing_ratio": 0.5488856844360112,
+      "wigner_wins": true
+    },
+    {
+      "d": 9,
+      "p": 0.02,
+      "run": 0,
+      "log_likelihood_ratio": 0.26162806000958194,
+      "ks_wigner": 0.03109928000658213,
+      "ks_poisson": 0.21014258719869716,
+      "mean_spacing_ratio": 0.5254016751729104,
+      "wigner_wins": true
+    },
+    {
+      "d": 9,
+      "p": 0.02,
+      "run": 1,
+      "log_likelihood_ratio": 0.2508490254102383,
+      "ks_wigner": 0.029013598056047418,
+      "ks_poisson": 0.20799673377619216,
+      "mean_spacing_ratio": 0.5231729816582291,
+      "wigner_wins": true
+    },
+    {
+      "d": 9,
+      "p": 0.02,
+      "run": 2,
+      "log_likelihood_ratio": 0.28443059238707824,
+      "ks_wigner": 0.024458910827995117,
+      "ks_poisson": 0.2363279961461644,
+      "mean_spacing_ratio": 0.5509875976258308,
+      "wigner_wins": true
+    },
+    {
+      "d": 9,
+      "p": 0.04,
+      "run": 0,
+      "log_likelihood_ratio": 0.27427370783755595,
+      "ks_wigner": 0.016803582032995923,
+      "ks_poisson": 0.2191884523864273,
+      "mean_spacing_ratio": 0.5364505409293303,
+      "wigner_wins": true
+    },
+    {
+      "d": 9,
+      "p": 0.04,
+      "run": 1,
+      "log_likelihood_ratio": 0.2782604601298266,
+      "ks_wigner": 0.0188794707926757,
+      "ks_poisson": 0.2141351589334445,
+      "mean_spacing_ratio": 0.5412296356851324,
+      "wigner_wins": true
+    },
+    {
+      "d": 9,
+      "p": 0.04,
+      "run": 2,
+      "log_likelihood_ratio": 0.25750427348184557,
+      "ks_wigner": 0.02116466748840251,
+      "ks_poisson": 0.21864808242216832,
+      "mean_spacing_ratio": 0.5325728110457117,
+      "wigner_wins": true
+    },
+    {
+      "d": 11,
+      "p": 0.001,
+      "run": 0,
+      "log_likelihood_ratio": 0.2394703328503872,
+      "ks_wigner": 0.037984181541840856,
+      "ks_poisson": 0.20017647503514538,
+      "mean_spacing_ratio": 0.5267969730277648,
+      "wigner_wins": true
+    },
+    {
+      "d": 11,
+      "p": 0.001,
+      "run": 1,
+      "log_likelihood_ratio": 0.2516851862005908,
+      "ks_wigner": 0.021412635513489264,
+      "ks_poisson": 0.20738801075630772,
+      "mean_spacing_ratio": 0.5248670370786389,
+      "wigner_wins": true
+    },
+    {
+      "d": 11,
+      "p": 0.001,
+      "run": 2,
+      "log_likelihood_ratio": 0.2617271345792372,
+      "ks_wigner": 0.01594913221971167,
+      "ks_poisson": 0.22395350889770357,
+      "mean_spacing_ratio": 0.5318141445878429,
+      "wigner_wins": true
+    },
+    {
+      "d": 11,
+      "p": 0.002,
+      "run": 0,
+      "log_likelihood_ratio": 0.28708634778862757,
+      "ks_wigner": 0.019811429766612765,
+      "ks_poisson": 0.2267810891622504,
+      "mean_spacing_ratio": 0.5413469451292611,
+      "wigner_wins": true
+    },
+    {
+      "d": 11,
+      "p": 0.002,
+      "run": 1,
+      "log_likelihood_ratio": 0.2569290916137581,
+      "ks_wigner": 0.02180749097577872,
+      "ks_poisson": 0.21751333996955918,
+      "mean_spacing_ratio": 0.5225959115086689,
+      "wigner_wins": true
+    },
+    {
+      "d": 11,
+      "p": 0.002,
+      "run": 2,
+      "log_likelihood_ratio": 0.25937050248002375,
+      "ks_wigner": 0.02122793383795879,
+      "ks_poisson": 0.2100941252078818,
+      "mean_spacing_ratio": 0.5201319030521627,
+      "wigner_wins": true
+    },
+    {
+      "d": 11,
+      "p": 0.004,
+      "run": 0,
+      "log_likelihood_ratio": 0.2348978179661676,
+      "ks_wigner": 0.03205555456876119,
+      "ks_poisson": 0.20720617962621973,
+      "mean_spacing_ratio": 0.5230910384796434,
+      "wigner_wins": true
+    },
+    {
+      "d": 11,
+      "p": 0.004,
+      "run": 1,
+      "log_likelihood_ratio": 0.2535596812664624,
+      "ks_wigner": 0.03252916051618587,
+      "ks_poisson": 0.20680402696340477,
+      "mean_spacing_ratio": 0.5140433436197,
+      "wigner_wins": true
+    },
+    {
+      "d": 11,
+      "p": 0.004,
+      "run": 2,
+      "log_likelihood_ratio": 0.2430367466737782,
+      "ks_wigner": 0.03495385121855954,
+      "ks_poisson": 0.21571291998946232,
+      "mean_spacing_ratio": 0.528128229904723,
+      "wigner_wins": true
+    },
+    {
+      "d": 11,
+      "p": 0.006,
+      "run": 0,
+      "log_likelihood_ratio": 0.2665795959436002,
+      "ks_wigner": 0.014180213179094237,
+      "ks_poisson": 0.21823774935003154,
+      "mean_spacing_ratio": 0.5351557105814343,
+      "wigner_wins": true
+    },
+    {
+      "d": 11,
+      "p": 0.006,
+      "run": 1,
+      "log_likelihood_ratio": 0.25831616482902586,
+      "ks_wigner": 0.02130522424953757,
+      "ks_poisson": 0.20339242358088358,
+      "mean_spacing_ratio": 0.516507828031752,
+      "wigner_wins": true
+    },
+    {
+      "d": 11,
+      "p": 0.006,
+      "run": 2,
+      "log_likelihood_ratio": 0.2747271777952682,
+      "ks_wigner": 0.02433041813078779,
+      "ks_poisson": 0.2256671229799515,
+      "mean_spacing_ratio": 0.5348977598353195,
+      "wigner_wins": true
+    },
+    {
+      "d": 11,
+      "p": 0.008,
+      "run": 0,
+      "log_likelihood_ratio": 0.21100508042616067,
+      "ks_wigner": 0.03482056240072767,
+      "ks_poisson": 0.1978982751113452,
+      "mean_spacing_ratio": 0.5117914915029312,
+      "wigner_wins": true
+    },
+    {
+      "d": 11,
+      "p": 0.008,
+      "run": 1,
+      "log_likelihood_ratio": 0.24802622141864117,
+      "ks_wigner": 0.02294907265865903,
+      "ks_poisson": 0.21447658306524703,
+      "mean_spacing_ratio": 0.5196168371659567,
+      "wigner_wins": true
+    },
+    {
+      "d": 11,
+      "p": 0.008,
+      "run": 2,
+      "log_likelihood_ratio": 0.2564796797059641,
+      "ks_wigner": 0.01672023690934632,
+      "ks_poisson": 0.21463631498415187,
+      "mean_spacing_ratio": 0.5289252357652627,
+      "wigner_wins": true
+    },
+    {
+      "d": 11,
+      "p": 0.01,
+      "run": 0,
+      "log_likelihood_ratio": 0.31117547044334193,
+      "ks_wigner": 0.01968972368140607,
+      "ks_poisson": 0.22711974566299706,
+      "mean_spacing_ratio": 0.546533147533447,
+      "wigner_wins": true
+    },
+    {
+      "d": 11,
+      "p": 0.01,
+      "run": 1,
+      "log_likelihood_ratio": 0.25236765492017177,
+      "ks_wigner": 0.024999944431899013,
+      "ks_poisson": 0.21505150329458048,
+      "mean_spacing_ratio": 0.5272854882510812,
+      "wigner_wins": true
+    },
+    {
+      "d": 11,
+      "p": 0.01,
+      "run": 2,
+      "log_likelihood_ratio": 0.258534501749552,
+      "ks_wigner": 0.023253527440452892,
+      "ks_poisson": 0.20758583028639033,
+      "mean_spacing_ratio": 0.531379377878982,
+      "wigner_wins": true
+    },
+    {
+      "d": 11,
+      "p": 0.02,
+      "run": 0,
+      "log_likelihood_ratio": 0.28210053538398344,
+      "ks_wigner": 0.015776337056473078,
+      "ks_poisson": 0.22721377752974045,
+      "mean_spacing_ratio": 0.5386319598199223,
+      "wigner_wins": true
+    },
+    {
+      "d": 11,
+      "p": 0.02,
+      "run": 1,
+      "log_likelihood_ratio": 0.25483865755761137,
+      "ks_wigner": 0.032170046031004706,
+      "ks_poisson": 0.21393712283081218,
+      "mean_spacing_ratio": 0.528647104458355,
+      "wigner_wins": true
+    },
+    {
+      "d": 11,
+      "p": 0.02,
+      "run": 2,
+      "log_likelihood_ratio": 0.2695264417184875,
+      "ks_wigner": 0.01822284361618387,
+      "ks_poisson": 0.21927417103324082,
+      "mean_spacing_ratio": 0.5346973487580349,
+      "wigner_wins": true
+    },
+    {
+      "d": 11,
+      "p": 0.04,
+      "run": 0,
+      "log_likelihood_ratio": 0.26488851087239756,
+      "ks_wigner": 0.02446570790187752,
+      "ks_poisson": 0.2118991594085665,
+      "mean_spacing_ratio": 0.527303324893687,
+      "wigner_wins": true
+    },
+    {
+      "d": 11,
+      "p": 0.04,
+      "run": 1,
+      "log_likelihood_ratio": 0.27467246921487626,
+      "ks_wigner": 0.02842847066232923,
+      "ks_poisson": 0.23064551553299933,
+      "mean_spacing_ratio": 0.5317675787268128,
+      "wigner_wins": true
+    },
+    {
+      "d": 11,
+      "p": 0.04,
+      "run": 2,
+      "log_likelihood_ratio": 0.2803773396772791,
+      "ks_wigner": 0.019693843760071106,
+      "ks_poisson": 0.22247065279480316,
+      "mean_spacing_ratio": 0.5420150839617235,
+      "wigner_wins": true
+    }
+  ],
+  "config": {
+    "distances": [
+      3,
+      5,
+      7,
+      9,
+      11
+    ],
+    "error_rates": [
+      0.001,
+      0.002,
+      0.004,
+      0.006,
+      0.008,
+      0.01,
+      0.02,
+      0.04
+    ],
+    "shots": 5000,
+    "runs": 3
+  }
+}
