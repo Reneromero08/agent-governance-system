@@ -76,7 +76,7 @@
 | Q29 | R is numerically stable across the parameter space | OPEN | q29_stability/ |
 | Q30 | Fast approximations of R exist with bounded error | OPEN | q30_approximations/ |
 | Q31 | R enables compass-mode semantic navigation | PARTIALLY VERIFIED | q31_compass/ |
-| Q34 | Embedding models converge to shared geometry | OPEN | q34_platonic/ |
+| Q34 | Embedding models converge to shared geometry | PARTIALLY VERIFIED | q34_platonic/ |
 | Q37 | Embedding statistics evolve with detectable patterns | OPEN | q37_evolution/ |
 | Q39 | R exhibits homeostatic self-regulation | OPEN | q39_homeostasis/ |
 | Q40 | Embeddings exhibit error-correction properties | OPEN | q40_error_correction/ |
