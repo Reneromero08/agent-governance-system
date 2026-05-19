@@ -84,7 +84,11 @@
 - [x] **Feral Resident geodesics discovered**: 8904 vectors, 4381 edges, 99 paper sequences
 - [x] Feral DB paper walks as Core input: **+74.3% phase delta** at d=32 (6x compression)
 - [x] Phase load-bearing at ALL compression ratios: 12x +60.5%, 6x +74.3%, 3x +65.2%
+- [x] Phase hops across concept-paper boundaries: +11.4% delta via context bridges
 - [x] Proven: Feral Resident's paper paragraph chains ARE semantic geodesics
+- [x] NativeEigenReasoner: drop-in GeometricReasoner replacement for VectorResident
+- [x] Points (single vectors) = MiniLM, Geodesics (sequences) = Core
+- [x] Compatible interface: initialize/readout/navigate/entangle/interpolate
 
 ---
 
