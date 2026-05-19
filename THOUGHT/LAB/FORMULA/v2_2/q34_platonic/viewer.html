@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Platonic Space</title>
+<style>
+body{margin:0;overflow:hidden;background:#0a0a14;font-family:system-ui}
+#info{position:fixed;top:12px;left:16px;color:#888;font-size:13px;z-index:10}
+#info b{color:#fff}#info .m{color:#4af}#info .p{color:#f4a}#legend{position:fixed;top:12px;right:16px;z-index:10}
+.leg{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px}
+#controls{position:fixed;bottom:16px;left:16px;z-index:10}
+button{background:#1a1a2e;color:#aaa;border:1px solid #333;padding:6px 12px;margin:2px;cursor:pointer;font-size:12px;border-radius:4px}
+button:hover{color:#fff;border-color:#666}button.on{background:#224;color:#4af;border-color:#4af}
+</style></head><body>
+<div id="info">PLATONIC SPACE &nbsp; <span class="m">● MiniLM</span> &nbsp; <span class="p">● MPNet</span>
+<br><b id="hover-label"></b></div>
+<div id="controls">
+<button id="btn-both" class="on" onclick="showBoth()">Both Models</button>
+<button id="btn-ml" onclick="showML()">MiniLM</button>
+<button id="btn-mp" onclick="showMP()">MPNet</button>
+<button id="btn-edges" class="on" onclick="toggleEdges()">Opposites</button>
+<button id="btn-labels" onclick="toggleLabels()">Labels</button>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+fetch('platonic_3d.json').then(r=>r.json()).then(data=>{
+  const scene=new THREE.Scene(); scene.background=new THREE.Color(0x0a0a14);
+  const camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,0.1,50);
+  camera.position.set(4,3,6); camera.lookAt(0,0,0);
+  const renderer=new THREE.WebGLRenderer({antialias:true});
+  renderer.setSize(innerWidth,innerHeight); renderer.setPixelRatio(devicePixelRatio);
+  document.body.appendChild(renderer.domElement);
+  const controls=new THREE.OrbitControls(camera,renderer.domElement);
+  controls.enableDamping=true; controls.dampingFactor=0.08;
+
+  const mlPts=data.models.MiniLM; const mpPts=data.models.MPNet;
+  const n=mlPts.length; const anchors=new Set(data.anchors);
+
+  // MiniLM points
+  const mlGeo=new THREE.BufferGeometry();
+  const mlPos=new Float32Array(n*3); mlPts.forEach((p,i)=>{mlPos[i*3]=p.x;mlPos[i*3+1]=p.y;mlPos[i*3+2]=p.z});
+  mlGeo.setAttribute('position',new THREE.BufferAttribute(mlPos,3));
+  const mlMat=new THREE.PointsMaterial({color:0x44aaff,size:0.08});
+  const mlCloud=new THREE.Points(mlGeo,mlMat);
+
+  // MPNet points
+  const mpGeo=new THREE.BufferGeometry();
+  const mpPos=new Float32Array(n*3); mpPts.forEach((p,i)=>{mpPos[i*3]=p.x;mpPos[i*3+1]=p.y;mpPos[i*3+2]=p.z});
+  mpGeo.setAttribute('position',new THREE.BufferAttribute(mpPos,3));
+  const mpMat=new THREE.PointsMaterial({color:0xff44aa,size:0.08});
+  const mpCloud=new THREE.Points(mpGeo,mpMat);
+
+  scene.add(mlCloud); scene.add(mpCloud);
+
+  // edges
+  const edgesGrp=new THREE.Group();
+  data.edges.forEach(e=>{
+    const a=mlPts[e.ia], b=mpPts[e.ib];
+    const mid={x:(a.x+b.x)/2,y:(a.y+b.y)/2,z:(a.z+b.z)/2};
+    const g=new THREE.BufferGeometry();
+    g.setAttribute('position',new THREE.BufferAttribute(new Float32Array([
+      a.x,a.y,a.z, mid.x,mid.y,mid.z, b.x,b.y,b.z]),3));
+    const c=e.dist_ml>e.dist_mp?0xff6644:0x44ff66;
+    const l=new THREE.Line(g,new THREE.LineBasicMaterial({color:c,opacity:0.4,transparent:true}));
+    edgesGrp.add(l);
+  });
+  scene.add(edgesGrp);
+
+  // labels
+  const labelsGrp=new THREE.Group();
+  const spriteCanvas=document.createElement('canvas'); spriteCanvas.width=256; spriteCanvas.height=64;
+  const ctx=spriteCanvas.getContext('2d'); ctx.font='bold 24px system-ui'; ctx.fillStyle='white';
+  data.words.forEach((w,i)=>{
+    const p=mlPts[i]; ctx.clearRect(0,0,256,64); ctx.fillText(w,0,32);
+    const tex=new THREE.CanvasTexture(spriteCanvas); tex.minFilter=THREE.LinearFilter;
+    const s=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,transparent:true,depthTest:false}));
+    s.position.set(p.x,p.y+0.15,p.z); s.scale.set(1.2,0.3,1);
+    s.userData={word:w,isAnchor:anchors.has(w)}; s.visible=false; labelsGrp.add(s);
+  });
+  scene.add(labelsGrp);
+
+  // raycaster for hover
+  const raycaster=new THREE.Raycaster(); raycaster.params.Points.threshold=0.15;
+  const mouse=new THREE.Vector2();
+  window.addEventListener('mousemove',e=>{
+    mouse.x=(e.clientX/innerWidth)*2-1; mouse.y=-(e.clientY/innerHeight)*2+1;
+    raycaster.setFromCamera(mouse,camera);
+    const hits=raycaster.intersectObjects([mlCloud,mpCloud]);
+    if(hits.length){const idx=hits[0].index; document.getElementById('hover-label').innerHTML=data.words[idx];}
+    else document.getElementById('hover-label').innerHTML='';
+  });
+
+  let showMl=true,showMp=true,showEdges=true,showLabels=false;
+  window.showBoth=()=>{showMl=showMp=true;mlCloud.visible=mpCloud.visible=true;
+    document.getElementById('btn-both').className='on';document.getElementById('btn-ml').className='';document.getElementById('btn-mp').className='';};
+  window.showML=()=>{showMl=true;showMp=false;mlCloud.visible=true;mpCloud.visible=false;
+    document.getElementById('btn-both').className='';document.getElementById('btn-ml').className='on';document.getElementById('btn-mp').className='';};
+  window.showMP=()=>{showMl=false;showMp=true;mlCloud.visible=false;mpCloud.visible=true;
+    document.getElementById('btn-both').className='';document.getElementById('btn-ml').className='';document.getElementById('btn-mp').className='on';};
+  window.toggleEdges=()=>{showEdges=!showEdges;edgesGrp.visible=showEdges;
+    document.getElementById('btn-edges').className=showEdges?'on':'';};
+  window.toggleLabels=()=>{showLabels=!showLabels;labelsGrp.children.forEach(s=>{s.visible=showLabels&&s.userData.isAnchor;});
+    document.getElementById('btn-labels').className=showLabels?'on':'';};
+
+  function animate(){requestAnimationFrame(animate);controls.update();renderer.render(scene,camera);}
+  animate(); window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+});
+</script></body></html>
