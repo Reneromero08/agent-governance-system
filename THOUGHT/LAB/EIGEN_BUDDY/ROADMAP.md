@@ -118,3 +118,15 @@
 **Locked:** Core navigates. DB stores. Cosine measures. 0.16 gates. Phase routes — it doesn't discriminate. No EM rotation. Values follow geodesics. Dual output preserves phase.
 
 **Open:** Q36 mathematics. Contrastive training for discrimination. Daemon autonomy. LLM pipeline.
+
+---
+
+## Robustness Module (models/holographic.py)
+
+| Component | Finding |
+|-----------|---------|
+| Holographic memory | Basis-vector embeddings: damage any basis element → lose fraction of every token |
+| Ensemble computation | N independent copies vote; corrupt half → clean half compensates |
+| 16-ensemble, 50% corrupted | 78.7% retained (3.7x vs single model's 23.7%) |
+| Standard model, 20% corrupted | 23.7% retained (collapses) |
+| Deployment | Module built but OFF by default. For fault-tolerant inference only |
