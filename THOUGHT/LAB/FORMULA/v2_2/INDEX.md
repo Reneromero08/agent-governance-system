@@ -2,7 +2,7 @@
 
 **Version:** 2.2.0
 **Date:** 2026-05-17
-**Status:** 54/54 re-prioritized against current build trajectory
+**Status:** 56/56 re-prioritized against current build trajectory (Q55, Q56 added)
 **Source:** v2
 
 ---
@@ -48,7 +48,7 @@
 | Q33 | R shows emergent properties at macro scale | OPEN | q33_emergence/ |
 | Q12 | R shows phase transition during model training | PARTIALLY VERIFIED | q12_phase_transitions/ |
 | Q11 | R has predictable failure modes (valley blindness) | OPEN | q11_sensitivity/ |
-| Q7 | R composes across scales | OPEN | q07_multiscale/ |
+| Q7 | R composes across scales | PARTIALLY VERIFIED | q07_multiscale/ |
 | Q18 | R detects deception | OPEN | q18_deception/ |
 | Q21 | dR/dt predicts system degradation | PARTIALLY VERIFIED | q21_rate_of_change/ |
 | Q55 | Kuramoto threshold predicts minimum independent heads for phase coherence | PARTIALLY VERIFIED | q55_kuramoto_heads/ |
