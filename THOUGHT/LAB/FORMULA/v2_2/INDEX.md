@@ -73,7 +73,7 @@
 | Q23 | sqrt(3) has geometric significance for alpha | OPEN | q23_sqrt3/ |
 | Q29 | R is numerically stable across the parameter space | OPEN | q29_stability/ |
 | Q30 | Fast approximations of R exist with bounded error | OPEN | q30_approximations/ |
-| Q31 | R enables compass-mode semantic navigation | OPEN | q31_compass/ |
+| Q31 | R enables compass-mode semantic navigation | PARTIALLY VERIFIED | q31_compass/ |
 | Q34 | Embedding models converge to shared geometry | OPEN | q34_platonic/ |
 | Q37 | Embedding statistics evolve with detectable patterns | OPEN | q37_evolution/ |
 | Q39 | R exhibits homeostatic self-regulation | OPEN | q39_homeostasis/ |
