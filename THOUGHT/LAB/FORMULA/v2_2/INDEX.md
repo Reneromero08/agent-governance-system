@@ -33,7 +33,7 @@
 | Q25 | Sigma is derivable from first principles | OPEN | q25_sigma/ |
 | Q9 | R connects structurally to Free Energy Principle | OPEN | q09_free_energy/ |
 | Q6 | R connects structurally to IIT (Phi) | OPEN | q06_iit/ |
-| Q36 | R connects to Bohm's implicate/explicate order | OPEN | q36_bohm/ |
+| Q36 | R connects to Bohm's implicate/explicate order | PARTIALLY VERIFIED | q36_bohm/ |
 | Q15 | R has a genuine Bayesian interpretation | OPEN | q15_bayesian/ |
 | Q19 | R correlates with human value agreement | OPEN | q19_value_learning/ |
 
