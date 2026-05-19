@@ -81,9 +81,10 @@
 - [x] Import path: `from native_eigen_core import NativeEigenCore`
 - [x] HRM-inspired IterativeCore: H_cycles x L_cycles with additive state injection
 - [x] Iterative processing: cycles=4 achieves +14.2% phase delta (vs fixed forward)
-- [x] Key finding: more iterations = richer geodesics, phase compounds across cycles
-- [ ] NativeEigenCore → Feral Resident (replace GeometricReasoner)
-- [ ] NativeEigenCore → Phase 4b lattice
+- [x] **Feral Resident geodesics discovered**: 8904 vectors, 4381 edges, 99 paper sequences
+- [x] Feral DB paper walks as Core input: **+74.3% phase delta** at d=32 (6x compression)
+- [x] Phase load-bearing at ALL compression ratios: 12x +60.5%, 6x +74.3%, 3x +65.2%
+- [x] Proven: Feral Resident's paper paragraph chains ARE semantic geodesics
 
 ---
 
