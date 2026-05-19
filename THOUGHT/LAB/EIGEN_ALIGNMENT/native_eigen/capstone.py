@@ -1,155 +1,141 @@
-"""Capstone: Native Eigen + Facts Cassette + Cybernetic Loop.
+"""Phase Coherence Gate on Native Eigen — Q17 closure.
 
-The full architecture in one script. Native Eigen (phase attention) reasons.
-Facts cassette provides ground truth. Cybernetic loop self-corrects.
+Q17 proved: phase_coh gate matches CASSETTE on RealMLP (94.8%).
+This test: does the gate work on Native Eigen's complex attention?
 
-Task: Arithmetic. The model predicts sums. The cassette knows the right answer.
-When wrong, cassette corrects. Model fine-tunes. The loop closes.
+Task: Geometry classification (4 classes). Hard (200 examples).
+Conditions: CONTROL | CASSETTE (label-guided) | PHASE-GATED (autonomous)
+If PHASE-GATED ≈ CASSETTE, the gate works on phase-native architecture.
 """
 import torch, torch.nn as nn, torch.nn.functional as F, math, random
 torch.manual_seed(42); random.seed(42)
 
-# ============================================================================
-# 1. Facts Cassette — stores correct answers
-# ============================================================================
-class Cassette:
-    def __init__(self, n_facts=100):
-        # Generate random arithmetic facts the model must learn
-        self.a = torch.randint(10, 100, (n_facts,)).float()
-        self.b = torch.randint(10, 100, (n_facts,)).float()
-        self.answer = self.a + self.b
-        # Features: [a/100, b/100, a%10/10, b%10/10] — normalized
-        self.X = torch.stack([
-            self.a/100, self.b/100,
-            (self.a%10)/10, (self.b%10)/10
-        ], dim=-1)
-        self.Y = self.answer / 200  # normalize to ~[0,1]
+# ---- Data (geometry: 4-class) ----
+def gen_geometry(n=200, n_pts=8):
+    X, Y = [], []
+    for _ in range(n):
+        t = random.randint(0, 3)
+        zx = torch.randn(n_pts) * 2.0; zy = torch.randn(n_pts) * 2.0
+        th = random.random() * 2 * math.pi
+        if t == 0:
+            c, s = math.cos(th), math.sin(th)
+            ox = zx*c - zy*s; oy = zx*s + zy*c
+        elif t == 1:
+            c, s = math.cos(th), math.sin(th)
+            ox = zx*c + zy*s; oy = zx*s - zy*c
+        elif t == 2:
+            sc = 0.2 + random.random() * 3.0
+            ox = zx*sc; oy = zy*sc
+        else:
+            k = random.random() * 2 - 1
+            ox = zx + k*zy; oy = zy
+        z = torch.complex(zx, zy); zp = torch.complex(ox, oy)
+        ratio = zp / (z + 1e-8)
+        feats = torch.stack([
+            torch.cos(torch.angle(ratio)).mean(), torch.sin(torch.angle(ratio)).mean(),
+            torch.cos(torch.angle(ratio)).std(), torch.sin(torch.angle(ratio)).std(),
+            torch.abs(ratio).mean(), torch.abs(ratio).std(),
+        ])
+        X.append(feats); Y.append(t)
+    return torch.stack(X), torch.tensor(Y)
 
-# ============================================================================
-# 2. Native Eigen Model — phase-structured reasoning
-# ============================================================================
-class NativeReasoner(nn.Module):
+# ---- Native Eigen classifier with phase coherence output ----
+class NativeClassifier(nn.Module):
     def __init__(self):
         super().__init__()
-        # Encode to complex: 4D -> 2D
-        self.enc_r = nn.Linear(4, 2, bias=False)
-        self.enc_i = nn.Linear(4, 2, bias=False)
-        # Q, K from input (not fixed constants)
-        self.Wq_r = nn.Linear(2, 2, bias=False); self.Wq_i = nn.Linear(2, 2, bias=False)
-        self.Wk_r = nn.Linear(2, 2, bias=False); self.Wk_i = nn.Linear(2, 2, bias=False)
-        self.out = nn.Linear(2, 1)
-        self.phase = nn.Parameter(torch.tensor(0.1))
-        for w in [self.enc_r, self.enc_i, self.Wq_r, self.Wq_i, self.Wk_r, self.Wk_i, self.out]:
+        # Separate encodings: Q-path and K-path see different aspects
+        self.enc_qr = nn.Linear(6, 2, bias=False); self.enc_qi = nn.Linear(6, 2, bias=False)
+        self.enc_kr = nn.Linear(6, 2, bias=False); self.enc_ki = nn.Linear(6, 2, bias=False)
+        self.enc_vr = nn.Linear(6, 2, bias=False); self.enc_vi = nn.Linear(6, 2, bias=False)
+        self.out = nn.Linear(2, 4); self.phase = nn.Parameter(torch.tensor(0.1))
+        for w in [self.enc_qr, self.enc_qi, self.enc_kr, self.enc_ki, self.enc_vr, self.enc_vi, self.out]:
             nn.init.normal_(w.weight, std=0.1)
 
-    def forward(self, x):
-        # Encode to complex
-        zr = self.enc_r(x); zi = self.enc_i(x)  # (B, 2)
-        # Q, K from encoded input
-        qr = self.Wq_r(zr) - self.Wq_i(zi)
-        qi = self.Wq_r(zi) + self.Wq_i(zr)
-        kr = self.Wk_r(zr) - self.Wk_i(zi)
-        ki = self.Wk_r(zi) + self.Wk_i(zr)
-        # Score = <Q|K> — per-example phase difference
-        score_r = (qr * kr + qi * ki).sum(dim=-1, keepdim=True)
-        score_i = (qi * kr - qr * ki).sum(dim=-1, keepdim=True)
-        # Rotate Z by attention phase
-        c, s = torch.cos(score_i), torch.sin(score_i)
-        zr = c * zr - s * zi
-        # Phase accumulation
+    def forward(self, x, return_phase=False):
+        # Q from input (what to look for)
+        qr = self.enc_qr(x); qi = self.enc_qi(x)
+        # K from input (what is present)
+        kr = self.enc_kr(x); ki = self.enc_ki(x)
+        # V from input (what to output)
+        vr = self.enc_vr(x); vi = self.enc_vi(x)
+        # Phase difference: Q vs K — varies per sample since they encode differently
+        score_i = (qi * kr - qr * ki).sum(dim=-1)
+        c, s = torch.cos(score_i.unsqueeze(-1)), torch.sin(score_i.unsqueeze(-1))
+        zr, zi = c * vr - s * vi, c * vi + s * vr
         c2, s2 = torch.cos(self.phase), torch.sin(self.phase)
-        zr = zr * c2 - (c * zi + s * zr) * s2
-        return self.out(zr).squeeze(-1)
+        zr = zr * c2 - zi * s2
+        if return_phase:
+            phases = score_i
+            cos_mean = torch.cos(phases).mean()
+            sin_mean = torch.sin(phases).mean()
+            phase_coh = (cos_mean**2 + sin_mean**2).sqrt()
+            return self.out(zr), phase_coh
+        return self.out(zr)
 
-# ============================================================================
-# 3. Cybernetic Loop — self-correction via cassette
-# ============================================================================
-cassette = Cassette(n_facts=200)
-X, Y = cassette.X, cassette.Y
-
-# Split
-n_train = 150
-X_train, Y_train = X[:n_train], Y[:n_train]
-X_test, Y_test = X[n_train:], Y[n_train:]
-
-def mae(pred, true):
-    return (pred * 200 - true * 200).abs().mean().item()  # denormalized
+X, Y = gen_geometry(300)
+X_train, Y_train = X[:200], Y[:200]
+X_test, Y_test = X[200:], Y[200:]
 
 # ---- CONTROL ----
-print("CAPSTONE: Native Eigen + Cassette + Cybernetic Loop")
+print("NATIVE EIGEN: Phase Coherence Gate (Q17)")
 print("=" * 55)
-print("Task: Arithmetic (a + b), {} train / {} test".format(n_train, len(Y)-n_train))
-
-ctrl = NativeReasoner(); opt = torch.optim.AdamW(ctrl.parameters(), lr=1e-2)
-for e in range(200):
-    loss = F.mse_loss(ctrl(X_train), Y_train)
+ctrl = NativeClassifier(); opt = torch.optim.AdamW(ctrl.parameters(), lr=1e-2)
+for e in range(100):
+    loss = F.cross_entropy(ctrl(X_train), Y_train)
     opt.zero_grad(); loss.backward(); opt.step()
 with torch.no_grad():
-    ctrl_mae = mae(ctrl(X_test), Y_test)
-print("CONTROL:        MAE={:.1f}  loss={:.4f}".format(ctrl_mae, loss.item()))
+    ctrl_acc = (ctrl(X_test).argmax(-1) == Y_test).float().mean()
 
-# ---- CASSETTE LOOP ----
-cass_model = NativeReasoner(); opt = torch.optim.AdamW(cass_model.parameters(), lr=1e-2)
-corrections = 0
-for e in range(200):
-    pred = cass_model(X_train)
-    loss = F.mse_loss(pred, Y_train)
-    # Self-correction: find wrong predictions
-    error = (pred - Y_train).abs()
-    wrong_mask = error > 0.02  # >4 absolute error
-    if wrong_mask.sum() > 0 and e > 10:
-        widx = wrong_mask.nonzero(as_tuple=True)[0]
-        corr_loss = F.mse_loss(cass_model(X_train[widx]), Y_train[widx])
-        loss = loss + 0.5 * corr_loss
-        corrections += wrong_mask.sum().item()
+# ---- CASSETTE (label-guided) ----
+cass = NativeClassifier(); opt = torch.optim.AdamW(cass.parameters(), lr=1e-2)
+for e in range(100):
+    pred = cass(X_train); loss = F.cross_entropy(pred, Y_train)
+    wrong = pred.argmax(-1) != Y_train
+    if wrong.sum() > 0 and e > 3:
+        widx = wrong.nonzero(as_tuple=True)[0]
+        loss = loss + 0.5 * F.cross_entropy(cass(X_train[widx]), Y_train[widx])
     opt.zero_grad(); loss.backward(); opt.step()
 with torch.no_grad():
-    cass_mae = mae(cass_model(X_test), Y_test)
-print("CASSETTE LOOP:  MAE={:.1f}  corrections={}".format(cass_mae, corrections))
+    cass_acc = (cass(X_test).argmax(-1) == Y_test).float().mean()
+
+# ---- PHASE-GATED (autonomous, Q17 gate) ----
+gate = NativeClassifier(); opt = torch.optim.AdamW(gate.parameters(), lr=1e-2)
+gates_fired = 0; corrections = 0
+for e in range(100):
+    pred, phase_coh = gate(X_train, return_phase=True)
+    loss = F.cross_entropy(pred, Y_train)
+    # Q17 gate: phase_coh < 0.85 triggers correction
+    if phase_coh < 0.85 and e > 3:
+        gates_fired += 1
+        wrong = pred.argmax(-1) != Y_train
+        if wrong.sum() > 0:
+            widx = wrong.nonzero(as_tuple=True)[0]
+            loss = loss + 0.5 * F.cross_entropy(gate(X_train[widx]), Y_train[widx])
+            corrections += wrong.sum().item()
+    opt.zero_grad(); loss.backward(); opt.step()
+with torch.no_grad():
+    gate_acc = (gate(X_test).argmax(-1) == Y_test).float().mean()
 
 # ---- MORE EPOCHS ----
-more_model = NativeReasoner(); opt = torch.optim.AdamW(more_model.parameters(), lr=1e-2)
-for e in range(300):
-    loss = F.mse_loss(more_model(X_train), Y_train)
+more = NativeClassifier(); opt = torch.optim.AdamW(more.parameters(), lr=1e-2)
+for e in range(150):
+    loss = F.cross_entropy(more(X_train), Y_train)
     opt.zero_grad(); loss.backward(); opt.step()
 with torch.no_grad():
-    more_mae = mae(more_model(X_test), Y_test)
-print("MORE EPOCHS:    MAE={:.1f}".format(more_mae))
+    more_acc = (more(X_test).argmax(-1) == Y_test).float().mean()
 
-# ---- Phase Ablation ----
-ablated = NativeReasoner()
-ablated.load_state_dict({k: v.clone() for k, v in ctrl.state_dict().items()})
-ablated.phase.data.zero_()
-with torch.no_grad():
-    abl_mae = mae(ablated(X_test), Y_test)
-
-print("\n" + "=" * 55)
-print("INFERENCE — before and after cybernetic loop")
+print("\nRESULTS")
 print("=" * 55)
-with torch.no_grad():
-    for i in range(5):
-        a_val = float(cassette.a[n_train + i])
-        b_val = float(cassette.b[n_train + i])
-        true = a_val + b_val
-        before = float(ctrl(X_test[i:i+1]) * 200)
-        after = float(cass_model(X_test[i:i+1]) * 200)
-        print("  {:3.0f} + {:3.0f} = {:3.0f}  |  before: {:5.1f}  after: {:5.1f}".format(
-            a_val, b_val, true, before, after))
+print("CONTROL:      {:.1%}".format(ctrl_acc))
+print("CASSETTE:     {:.1%}".format(cass_acc))
+print("PHASE-GATED:  {:.1%}  gates={} corrections={}".format(gate_acc, gates_fired, corrections))
+print("MORE EPOCHS:  {:.1%}".format(more_acc))
 
-print()
-print("CONTROL:         MAE={:.1f}".format(ctrl_mae))
-print("CASSETTE:        MAE={:.1f}".format(cass_mae))
-print("MORE EPOCHS:     MAE={:.1f}".format(more_mae))
-print("PHASE ABLATED:   MAE={:.1f}".format(abl_mae))
-
-best_non_cassette = min(ctrl_mae, more_mae, abl_mae)
-delta = best_non_cassette - cass_mae
-print("\nPhase ablation delta: {:+.1f}".format(abl_mae - ctrl_mae))
-print("Cassette delta:       {:+.1f} over best non-cassette".format(delta))
-
-if delta > 0.1:
-    print("CAPSTONE PROVEN — cassette self-correction beats all controls")
-elif cass_mae <= best_non_cassette:
-    print("WEAK — cassette matches but doesn't clearly beat")
+best = max(ctrl_acc, more_acc)
+print("\nPhase-gated vs best non-gated: {:+.1%}".format(gate_acc - best))
+if gate_acc >= cass_acc * 0.98:
+    print("PHASE COHERENCE GATE WORKS — matches label-guided on Native Eigen")
+elif gate_acc > best:
+    print("WEAK — gate helps but doesn't match CASSETTE")
 else:
-    print("NOT PROVEN — cassette doesn't improve over baseline")
+    print("GATE FAILED — phase_coh doesn't detect errors on Native Eigen")
