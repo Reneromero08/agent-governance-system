@@ -63,22 +63,27 @@
 - [ ] Gate fires with longer training (>12 epochs to build streak) or adaptive threshold
 
 ### Phase 6: Scale
-- [x] Scale sweep complete: best config d=16 h=4 L=6
-- [x] d=8 h=4 L=4: +10.3% | d=16 h=4 L=4: +13.2% | d=16 h=8 L=4: +6.2%
-- [x] d=16 h=4 L=6: +14.0% 8-epoch | d=16 h=4 L=8: +20.3% (5-epoch saturates)
-- [x] Q56 Attack 2 confirmed: depth > head count (L=6 > h=8 by +60pp at 5-epoch)
-- [x] h_c=4 at d=16 matches Q55 dimensional capacity prediction
-- [x] Geometric init fixed to 2pi/H biological spacing (Discovery 8: +57.9% vs +50.5% Fibonacci)
-- [ ] Vocab sweep (2K → 5K → 10K)
-- [ ] d_model sweep to 32
-- [ ] Fine-tune on Gemma 4 2B with LoRA
+- [x] Scale sweep complete across d=8/16/32
+- [x] d=8 h=4 L=4: +10.3% 5ep / +10.9% 8ep, 70K params
+- [x] d=16 h=8 L=4: +6.2% 5ep, 140K params (too many heads)
+- [x] d=16 h=4 L=6: **+66.3% 5ep** / +14.0% 8ep, 144K params (best delta)
+- [x] d=32 h=4 L=4: +19.7% 5ep, 293K params
+- [x] d=32 h=8 L=4: +20.8% 5ep / +4.9% 8ep, 293K params (best PPL 152)
+- [x] Pattern: phase delta peaks at intermediate training before magnitude routing dominates
+- [x] Geometric init fixed to 2pi/H biological spacing (Discovery 8)
+- [x] h_c matches Q55 dimensional capacity prediction
+- [x] Vocab sweep: 2K +10.9% | 5K +1.9% | 10K +0.5% — larger vocab dilutes phase signal
+- [x] Root cause: embedding/output layers grow 10x faster than Core, drowning phase
+- [ ] Fine-tune on Gemma 4 2B with LoRA (Core as phase module in larger architecture)
 
 ### Phase 7: Integration
 - [x] native_eigen_core.py: standalone Core module, zero text dependencies, 12K params
 - [x] Import path: `from native_eigen_core import NativeEigenCore`
+- [x] HRM-inspired IterativeCore: H_cycles x L_cycles with additive state injection
+- [x] Iterative processing: cycles=4 achieves +14.2% phase delta (vs fixed forward)
+- [x] Key finding: more iterations = richer geodesics, phase compounds across cycles
 - [ ] NativeEigenCore → Feral Resident (replace GeometricReasoner)
 - [ ] NativeEigenCore → Phase 4b lattice
-- [ ] Full cybernetic loop: model → lattice → cassette → regenerate → learn
 
 ---
 
@@ -103,6 +108,15 @@
 | dR/dt predicts phase evolution (r=+0.525) | EmbeddingGate.history |
 | Negative dR/dt >10 epochs = vulnerable | EmbeddingGate.should_fire() |
 | Intervention: second Core pass + cassette | fire_embedding() + factual pass |
+
+## HRM-Inspired Iterative Processing
+
+| Finding | Implementation |
+|---------|---------------|
+| Iterative geodesic processing (HRM dual-timescale) | IterativeCore (cycles=4, +14.2% delta) |
+| Additive state injection z + z_init | IterativeCore.forward() |
+| Phase accumulates across iterations | More cycles = higher delta |
+| Stop threshold learns geodesic convergence | self.stop_threshold |
 
 ---
 
