@@ -79,8 +79,27 @@ Independent heads maintain lower phase coherence during training (r ~ 0.3-0.5 fi
 
 None observed. Gap is positive at all h > 1, saturates at h=16.
 
+## Deepening: Task Difficulty Sweep (K_c = nabla_S/sigma)
+
+Tested from Q56 attack suite. Optimal h INCREASES with task difficulty:
+
+| Noise | n_train=50 | n_train=400 |
+|-------|-----------|------------|
+| 0.0 | best h=2 | best h=4 |
+| 0.5 | best h=4 | best h=8 |
+| 1.0 | best h=4 | best h=16 |
+
+More noise → higher optimal h. More data → lower optimal h. This is consistent with Kuramoto theory: collective coupling K from multiple heads overcomes higher noise. When nabla_S rises, more cross-terms (more heads) are needed to exceed K_c.
+
+This also explains the C^8 bottleneck: at native_eigen's embedding dimension (d=2), the effective mid_dim is too small to support h=8 with meaningful pairwise locking. The fix isn't just independent weights — it's matching h to the dimensional capacity.
+
+## Deepening: Layer Depth (Axiom 9)
+
+From Q56 attack suite: 2L x 4h (+87.3%) beats 1L x 8h (+30.0%) by +57.3% delta. Phase compounds across layers — the spiral trajectory is load-bearing. Head count alone is not the variable; depth × independence is the product.
+
 ## Notes
 
 - Task: Geometry classification (rotation, reflection, scale, shear) from cybernetic_loop.py
 - Superradiance data: Babcock et al. (2024), DOI 10.1021/acs.jpcb.3c07936
 - D_f mapping in superradiance: coherent domains, not raw chromophore count — directly parallel to head independence
+- Task difficulty confirms K_c prediction: optimal h scales with noise and inversely with data
