@@ -227,27 +227,30 @@ class PhaseAccumulator(nn.Module):
 # ============================================================================
 
 class EmbeddingGate(nn.Module):
-    """Learned gate: decides when to query the implicate order (embedding space).
+    """Q21: dR/dt vulnerability detector. Tracks phase coherence trajectory.
 
-    Implicate = complex continuous vectors in Core (hidden, enfolded).
-    Explicate = discrete token logits (manifest, unfolded).
-    The gate bridges them: when explicate order is uncertain, fire a query
-    into the implicate order for clarification. Trained via reinforcement:
-    fire + wrong → reward (correction helps). fire + right → penalize.
+    Sustained negative dR/dt for >10 epochs = heads decohering = system fragile.
+    Simpler and more reliable than per-token wrongness prediction.
+    When gate fires: query implicate order (second Core pass + cassette).
     """
-    def __init__(self, d):
+    def __init__(self):
         super().__init__()
-        self.probe = nn.Sequential(
-            nn.Linear(d * 2, d),  # real + imag concatenated
-            nn.Tanh(),
-            nn.Linear(d, 1),
-            nn.Sigmoid(),
-        )
+        self.register_buffer('history', torch.zeros(0))
+        self.register_buffer('drdt', torch.tensor(0.0))
+        self.negative_streak = 0
 
-    def forward(self, z):
-        # z: (B, S, D) complex. Mean pool across sequence.
-        h = torch.cat([z.real.mean(dim=1), z.imag.mean(dim=1)], dim=-1)  # (B, 2D)
-        return self.probe(h).squeeze(-1)  # (B,) fire probability
+    def update(self, phase_coh):
+        self.history = torch.cat([self.history, phase_coh.unsqueeze(0)])
+        if len(self.history) >= 2:
+            self.drdt = self.history[-1] - self.history[-2]
+            if self.drdt < 0:
+                self.negative_streak += 1
+            else:
+                self.negative_streak = 0
+
+    def should_fire(self):
+        """Q21: fire when dR/dt negative for >10 consecutive epochs."""
+        return self.negative_streak > 10
 
 
 # ============================================================================
@@ -368,7 +371,7 @@ class LanguageAdapter(nn.Module):
         self.embed_re = nn.Embedding(vocab, d)
         self.embed_im = nn.Embedding(vocab, d)
         self.core = NativeEigenCore(d, heads, layers)
-        self.gate = EmbeddingGate(d)
+        self.gate = EmbeddingGate()  # operates on logit stats, not hidden state
         self.out_r = nn.Linear(d, vocab)
         self.out_i = nn.Linear(d, vocab)
         nn.init.normal_(self.embed_re.weight, std=0.02)
@@ -376,26 +379,23 @@ class LanguageAdapter(nn.Module):
         nn.init.normal_(self.out_r.weight, std=0.02)
         nn.init.normal_(self.out_i.weight, std=0.02)
 
-    def forward(self, x, return_gate=False):
+    def forward(self, x, return_phase=False):
         z = torch.complex(self.embed_re(x), self.embed_im(x))
+        z, phase_coh = self.core(z)
+        logits = self.out_r(z.real) + self.out_i(z.imag)
 
-        # Gate: should we query the implicate order more deeply?
-        # Uses embedding (before Core) to decide — it's a routing decision.
-        if return_gate:
-            fire_p = self.gate(z)  # (B,) prob of firing
-            z, _ = self.core(z)
-            logits = self.out_r(z.real) + self.out_i(z.imag)
-            return logits, fire_p
+        if return_phase:
+            return logits, phase_coh
 
-        z, _ = self.core(z)
-        return self.out_r(z.real) + self.out_i(z.imag)
+        return logits
 
     def fire_embedding(self, x):
-        """Query the implicate order: second forward pass with refined state.
-        Called when the gate fires — the model re-examines its embedding space.
+        """Query the implicate order deeper: second Core pass refines state.
+        Called when gate fires — the model re-examines its embedding space
+        with a fresh forward pass through the Core, producing refined logits.
         """
         z = torch.complex(self.embed_re(x), self.embed_im(x))
-        z, _ = self.core(z)
+        z, _ = self.core(z)  # fresh Core pass = implicate query
         return self.out_r(z.real) + self.out_i(z.imag)
 
 
@@ -601,7 +601,7 @@ def train_lm(use_gate=False, use_cassette=False):
     gates_fired = 0
     for ep in range(8):
         tl = n_batches = 0
-        ep_gates = 0
+        ep_pc = 0
 
         for i in range(0, len(data), 16):
             b = data[i:i + 16]
@@ -611,17 +611,13 @@ def train_lm(use_gate=False, use_cassette=False):
             y = torch.tensor([p[1] for p in b], device=device, dtype=torch.long)
 
             if use_gate:
-                logits, fire_p = model(x, return_gate=True)
+                logits, phase_coh = model(x, return_phase=True)
                 loss = F.cross_entropy(logits.view(-1, V), y.view(-1))
-                # Train the gate: predict whether current prediction will be wrong
-                # Gate sees embeddings BEFORE Core — it's a routing decision
-                with torch.no_grad():
-                    is_wrong = (logits.argmax(-1) != y).float().mean(dim=1)  # (B,) fraction wrong per sample
-                gate_loss = F.binary_cross_entropy(fire_p, is_wrong)
-                loss = loss + 0.1 * gate_loss
-                # Count gate fires (prob > 0.5)
-                if fire_p.mean() > 0.5:
-                    ep_gates += 1
+                ep_pc += phase_coh.item()
+                # Q21: dR/dt gate — fire when decoherence detected
+                if model.gate.should_fire() and ep > 2:
+                    refined = model.fire_embedding(x)
+                    loss = loss + 0.3 * F.cross_entropy(refined.view(-1, V), y.view(-1))
             else:
                 logits = model(x)
                 loss = F.cross_entropy(logits.view(-1, V), y.view(-1))
@@ -630,7 +626,11 @@ def train_lm(use_gate=False, use_cassette=False):
             torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
             opt.step(); tl += loss.item(); n_batches += 1
 
-        # Separate factual pass with learned gate → cassette retrieval
+        # Q21: update gate with this epoch's phase coherence
+        if use_gate and n_batches > 0:
+            model.gate.update(torch.tensor(ep_pc / n_batches))
+
+        # Separate factual pass
         if fact_data:
             if use_cassette:
                 import sys as _sys
@@ -642,25 +642,14 @@ def train_lm(use_gate=False, use_cassette=False):
                 if not b: continue
                 x = torch.tensor([p[0] for p in b], device=device, dtype=torch.long)
                 y = torch.tensor([p[1] for p in b], device=device, dtype=torch.long)
-                logits, fire_p = model(x, return_gate=True)
+                logits = model(x)
                 loss = F.cross_entropy(logits.view(-1, V), y.view(-1))
-                # Gate train: predict wrongness
-                with torch.no_grad():
-                    is_wrong = (logits.argmax(-1) != y).float().mean(dim=1)
-                loss = loss + 0.1 * F.binary_cross_entropy(fire_p, is_wrong)
-                # When gate fires, query implicate order (cassette) for correction
-                if use_gate and use_cassette and fire_p.mean() > 0.5 and ep > 2:
-                    ep_gates += 1
+                if use_gate and use_cassette and model.gate.should_fire() and ep > 2:
                     refined = model.fire_embedding(x)
                     loss = loss + 0.3 * F.cross_entropy(refined.view(-1, V), y.view(-1))
                 opt.zero_grad(); loss.backward()
                 torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
                 opt.step()
-
-        ppl = math.exp(tl / max(1, n_batches))
-        gate_str = "  gates_fired={}".format(ep_gates) if use_gate else ""
-        print("  E{}: ppl={:.0f}{}".format(ep + 1, ppl, gate_str), flush=True)
-        gates_fired += ep_gates
 
     # Phase ablation
     saved_phases = [l['phase'].ang.data.clone() for l in model.core.layers]

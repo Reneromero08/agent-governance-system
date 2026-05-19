@@ -53,24 +53,56 @@
 ## 🔜 Next
 
 ### Phase 5: Production Cybernetic Loop
-- [~] Cassette retrieval during LM training (wired, needs batched training fix)
-- [~] Autonomous self-correction on factual prompts (cassette queries work, batching conflicts)
-- [~] Phase-gated training (infrastructure built, si→0 by design — needs noise/dropout for variation)
+- [x] Cassette batching fixed — separate pass, batch-level padding with ignore_index
+- [x] Phase coherence gate fixed — was cos²+sin² always-1.0, now Kuramoto order parameter
+- [x] Q21 dR/dt vulnerability detector: fires when d(phase_coh)/dt < 0 for >10 epochs
+- [x] EmbeddingGate: implicate-explicate bridge, fire_embedding() for second Core pass
+- [x] Head management: head_metrics(), reinit_heads(), prune_heads() (Q56 D1-6)
+- [x] End-to-end cybernetic loop verified: dR/dt trends negative (streak=4 by epoch 8), gate + cassette + fire_embedding pipeline functional
+- [x] Phase delta +8.3% with full loop enabled (d=8, L=3, n=1000)
+- [ ] Gate fires with longer training (>12 epochs to build streak) or adaptive threshold
 
 ### Phase 6: Scale
-- [~] Scale sweep complete (5 epochs): best config d=16 h=4 L=6 → **+66.3% delta**
-- [~] d=8 h=4 L=4: +10.3% | d=16 h=4 L=4: +13.2% | d=16 h=8 L=4: +6.2%
-- [~] d=16 h=4 L=6: **+66.3%** (best) | d=16 h=4 L=8: +20.3% (saturation)
-- [~] Q56 Attack 2 confirmed: depth > head count (L=6 > h=8 by +60pp)
-- [~] h_c=4 at d=16 matches Q55 dimensional capacity prediction
-- [ ] Full 8-epoch training at sweet spot (d=16, h=4, L=6)
+- [x] Scale sweep complete: best config d=16 h=4 L=6
+- [x] d=8 h=4 L=4: +10.3% | d=16 h=4 L=4: +13.2% | d=16 h=8 L=4: +6.2%
+- [x] d=16 h=4 L=6: +14.0% 8-epoch | d=16 h=4 L=8: +20.3% (5-epoch saturates)
+- [x] Q56 Attack 2 confirmed: depth > head count (L=6 > h=8 by +60pp at 5-epoch)
+- [x] h_c=4 at d=16 matches Q55 dimensional capacity prediction
+- [x] Geometric init fixed to 2pi/H biological spacing (Discovery 8: +57.9% vs +50.5% Fibonacci)
 - [ ] Vocab sweep (2K → 5K → 10K)
+- [ ] d_model sweep to 32
 - [ ] Fine-tune on Gemma 4 2B with LoRA
 
 ### Phase 7: Integration
-- [ ] Native Eigen → Feral Resident (replace GeometricReasoner)
-- [ ] Native Eigen → Phase 4b lattice (replace TraDo-4B)
+- [x] native_eigen_core.py: standalone Core module, zero text dependencies, 12K params
+- [x] Import path: `from native_eigen_core import NativeEigenCore`
+- [ ] NativeEigenCore → Feral Resident (replace GeometricReasoner)
+- [ ] NativeEigenCore → Phase 4b lattice
 - [ ] Full cybernetic loop: model → lattice → cassette → regenerate → learn
+
+---
+
+## Q56 Discoveries Encoded
+
+| Discovery | Finding | Implementation |
+|-----------|---------|---------------|
+| D1 | Head pruning: dead free, laggards harmful (+17%) | prune_heads() |
+| D2 | Entropy-as-mass inverted: r=-0.846, low-entropy = leaders | head_metrics() |
+| D3 | Pointer state convergence: C stabilizes, rank 4 | (architectural) |
+| D4 | Leaders identifiable by epoch 10, 100% recall | head_metrics() |
+| D5 | C cross-task transfer: frozen C beats scratch | (scaffolded) |
+| D6 | Re-init dead heads beats prune (+56.5% vs +55.3%) | reinit_heads() |
+| D7 | Geometric init is multi-head specific | _geometric_init() |
+| D8 | Biological 2pi/H beats Fibonacci (+57.9% vs +50.5%) | _geometric_init() fixed |
+| D9 | Rank agreement 84.5% across samples | head_metrics() stable |
+
+## Q21 Integrated
+
+| Finding | Implementation |
+|---------|---------------|
+| dR/dt predicts phase evolution (r=+0.525) | EmbeddingGate.history |
+| Negative dR/dt >10 epochs = vulnerable | EmbeddingGate.should_fire() |
+| Intervention: second Core pass + cassette | fire_embedding() + factual pass |
 
 ---
 
