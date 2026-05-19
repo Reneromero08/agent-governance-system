@@ -1,0 +1,55 @@
+{
+    "__doc__": "Native Eigen Architecture v1 configuration. All tunable parameters in one place.",
+
+    "model": {
+        "d_model": 8,
+        "n_heads": 4,
+        "n_layers": 4,
+        "vocab": 2000,
+        "seq_len": 32,
+        "n_seqs": 2000
+    },
+
+    "attention": {
+        "merge": "concat",
+        "__merge_options__": "concat (classical, proven +25.6% delta) | born (Q56 O(H^2) cross-terms, 6.8x anti-saturation, best at classification scale)",
+        "phase_init": 0.1,
+        "weight_init_std": 0.02
+    },
+
+    "curvature": {
+        "weight": 0.3,
+        "__doc__": "CurvatureModulator amplification weight. 0 = disabled."
+    },
+
+    "training": {
+        "lr": 0.001,
+        "weight_decay": 0.01,
+        "epochs": 8,
+        "batch_size": 16,
+        "grad_clip": 1.0
+    },
+
+    "gate": {
+        "threshold": 0.5,
+        "correction_weight": 0.5,
+        "start_epoch": 3,
+        "__doc__": "Phase coherence gate. Si values near-zero in gravity model, gate rarely fires."
+    },
+
+    "c8_test": {
+        "lr": 0.005,
+        "weight_decay": 0.0001,
+        "epochs": 500,
+        "n_channels": 8,
+        "n_train": 1500,
+        "n_test": 500,
+        "__doc__": "C^8 independent complex multiplication test."
+    },
+
+    "data": {
+        "wiki_name": "wikitext",
+        "wiki_config": "wikitext-2-raw-v1",
+        "cassette_path": "THOUGHT/LAB/TINY_COMPRESS/llm-spectral/auto_feedback"
+    }
+}
