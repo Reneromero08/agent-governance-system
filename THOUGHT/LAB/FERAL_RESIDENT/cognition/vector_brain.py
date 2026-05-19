@@ -12,6 +12,7 @@ Minimal intelligence that:
 """
 
 import sys
+import os
 from pathlib import Path
 from typing import List, Dict, Optional, Tuple
 import numpy as np
@@ -132,6 +133,16 @@ class VectorResident:
         self.store = VectorStore(self.db_path, thread_id=thread_id, load_memories=load_memories)
         self.diffusion = SemanticDiffusion(self.store)
         self.reasoner = self.store.reasoner
+
+        # Native Eigen swap: replace GeometricReasoner with phase-native Core
+        if os.environ.get('FERAL_EIGEN', '') == '1':
+            from cognition.native_eigen_reasoner import NativeEigenReasoner
+            eigen = NativeEigenReasoner(d=64, heads=4, layers=4, cycles=4)
+            self.store.memory.reasoner = eigen
+            self.store.reasoner = eigen
+            self.diffusion.reasoner = eigen
+            self.reasoner = eigen
+            print("[FERAL] NativeEigenReasoner active (d=64, +18.9% trained on Feral DB)")
 
         # Configuration
         self.navigation_depth = navigation_depth

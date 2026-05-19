@@ -99,7 +99,8 @@ class GeometricChat:
         model_name: str = 'all-MiniLM-L6-v2',
         E_threshold: float = 0.5,
         cassette_network: Optional['GeometricCassetteNetwork'] = None,
-        auto_routing: bool = False
+        auto_routing: bool = False,
+        reasoner = None
     ):
         """
         Initialize geometric chat.
@@ -126,7 +127,9 @@ class GeometricChat:
         self.turn_history: List[Dict] = []
         self.E_threshold = E_threshold
 
-        # Cassette network integration (I.1)
+        # Reasoner: use provided or lazy-init GeometricReasoner
+        self._reasoner = reasoner
+        self._model_name = model_name
         # Auto-routing loads from cassettes.json if enabled
         self._cassette_network = cassette_network
         self._auto_routing = auto_routing
@@ -143,8 +146,8 @@ class GeometricChat:
         }
 
     @property
-    def reasoner(self) -> 'GeometricReasoner':
-        """Lazy init (pattern from geometric_cassette.py:128-138)"""
+    def reasoner(self):
+        """Lazy init if not provided at construction."""
         if self._reasoner is None:
             self._reasoner = GeometricReasoner(self._model_name)
         return self._reasoner

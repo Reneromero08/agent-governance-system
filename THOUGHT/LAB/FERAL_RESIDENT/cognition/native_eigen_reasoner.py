@@ -1,8 +1,8 @@
 """Native Eigen Reasoner — drop-in GeometricReasoner for Feral Resident.
 
 Points (initialize/readout): MiniLM directly — same as GeometricReasoner.
-Geodesics (navigate/entangle/interpolate): NativeEigenCore — phase-rich path following.
-The Core only activates when there's a SEQUENCE of vectors to process.
+Geodesics (navigate/entangle/interpolate/superpose/project): NativeEigenCore.
+The Core only activates for multi-vector sequences.
 """
 import sys, time, numpy as np, torch
 from pathlib import Path
@@ -21,22 +21,24 @@ class NativeEigenReasoner:
     """Phase-native reasoner. Core only activates for multi-vector geodesics."""
 
     def __init__(self, model_name='all-MiniLM-L6-v2',
-                 d=32, heads=4, layers=4, cycles=4):
+                 d=64, heads=4, layers=4, cycles=4, weights_path=None):
         from sentence_transformers import SentenceTransformer
         self.embed = SentenceTransformer(model_name)
         self.d = d; self.heads = heads; self.layers = layers; self.cycles = cycles
         self.D_emb = 384; self.D = self.D_emb // 2
         self._core = None
-        self.op_count = {'initialize': 0, 'readout': 0, 'navigate': 0, 'entangle': 0}
+        self._weights_path = weights_path or str(
+            Path(__file__).parent.parent.parent / "EIGEN_ALIGNMENT" / "native_eigen" / "feral_core_weights.pt")
+        self.op_count = {'initialize': 0, 'readout': 0, 'navigate': 0,
+                        'entangle': 0, 'superpose': 0, 'project': 0, 'interpolate': 0}
 
     def _init_core(self):
         if self._core is not None: return
-        import torch.nn as nn, importlib.util
+        import torch.nn as nn, importlib.util, os
         spec = importlib.util.spec_from_file_location("nec", EIGEN_PATH / "native_eigen_core.py")
         nec = importlib.util.module_from_spec(spec); spec.loader.exec_module(nec)
         self._core = nec.NativeEigenCore(d=self.d, heads=self.heads,
                         layers=self.layers, merge='concat', geo_init=True)
-        self._core.eval()
         self._in_r = nn.Linear(self.D, self.d, bias=False)
         self._in_i = nn.Linear(self.D, self.d, bias=False)
         self._out_r = nn.Linear(self.d, self.D, bias=False)
@@ -44,8 +46,19 @@ class NativeEigenReasoner:
         for w in [self._in_r, self._in_i, self._out_r, self._out_i]:
             nn.init.normal_(w.weight, std=0.02)
 
+        if os.path.exists(self._weights_path):
+            ckpt = torch.load(self._weights_path, map_location='cpu')
+            cfg = ckpt.get('config', {})
+            if cfg.get('d') == self.d:
+                self._core.load_state_dict(ckpt['core'])
+                self._in_r.load_state_dict(ckpt['in_r'])
+                self._in_i.load_state_dict(ckpt['in_i'])
+                self._out_r.load_state_dict(ckpt['out_r'])
+                self._out_i.load_state_dict(ckpt['out_i'])
+        self._core.eval()
+
     def _core_process(self, seq):
-        """Process a sequence of vectors through the Core, return last output."""
+        """Process a sequence of vectors through the Core, return (result, phase_coh)."""
         z = torch.complex(torch.tensor(seq[:, :self.D], dtype=torch.float32).unsqueeze(0),
                           torch.tensor(seq[:, self.D:], dtype=torch.float32).unsqueeze(0))
         zp = torch.complex(self._in_r(z.real) - self._in_i(z.imag),
@@ -54,11 +67,9 @@ class NativeEigenReasoner:
             z_out, pc = self._core(zp + zp)
         pr = self._out_r(z_out.real) + self._out_i(z_out.imag)
         pi = self._out_r(z_out.imag) - self._out_i(z_out.real)
-        result = torch.cat([pr, pi], dim=-1).detach()
-        return result, float(pc)
+        return torch.cat([pr, pi], dim=-1).detach(), float(pc)
 
     # ---- Points: MiniLM only ----
-
     def initialize(self, text: str) -> GeometricState:
         self.op_count['initialize'] += 1
         return GeometricState(vector=self.embed.encode(text))
@@ -74,7 +85,6 @@ class NativeEigenReasoner:
         return scores[:k]
 
     # ---- Geodesics: Core processes sequences ----
-
     def navigate(self, start: str, end: str, steps: int,
                  corpus: List[str], k=3) -> List[Dict]:
         self.op_count['navigate'] += 1
@@ -107,23 +117,39 @@ class NativeEigenReasoner:
         result, _ = self._core_process(seq)
         return GeometricState(vector=result[0, 1, :].numpy())
 
+    def superpose(self, state1: GeometricState, state2: GeometricState) -> GeometricState:
+        """Phase-rich superposition via Core — used by SemanticDiffusion.navigate()."""
+        self.op_count['superpose'] += 1
+        self._init_core()
+        seq = np.stack([state1.vector, state2.vector])
+        result, _ = self._core_process(seq)
+        return GeometricState(vector=result[0].mean(dim=0).numpy())
+
+    def project(self, state: GeometricState, context: List[GeometricState]) -> GeometricState:
+        """Born rule projection via Core — used by SemanticDiffusion.navigate()."""
+        self.op_count['project'] += 1
+        self._init_core()
+        if not context: return state
+        vecs = [state.vector] + [c.vector for c in context[:7]]
+        seq = np.stack(vecs)
+        result, _ = self._core_process(seq)
+        return GeometricState(vector=result[0].mean(dim=0).numpy())
+
+    def E_with(self, state1: GeometricState, state2: GeometricState) -> float:
+        """Born rule resonance via Core geodesics — replaces cosine similarity.
+
+        Daemon collision: processes both states through the Core as a 2-vector
+        sequence. Phase coherence output IS the E measurement.
+        The 0.16 threshold gates on geodesic alignment, not surface similarity.
+        """
+        self.op_count.setdefault('E_with', 0)
+        self.op_count['E_with'] += 1
+        self._init_core()
+        seq = np.stack([state1.vector, state2.vector])
+        _, pc = self._core_process(seq)
+        return pc  # phase coherence = resonance
+
     def get_stats(self) -> Dict:
         return {'model': 'NativeEigenReasoner', 'core_d': self.d,
                 'core_heads': self.heads, 'core_layers': self.layers,
                 'cycles': self.cycles, 'operations': self.op_count}
-
-
-if __name__ == '__main__':
-    print("NativeEigenReasoner — points=MiniLM, geodesics=Core")
-    r = NativeEigenReasoner(d=32, heads=4, layers=4, cycles=4)
-    s1 = r.initialize("The dog runs through the park")
-    s2 = r.initialize("A pet exercising outdoors")
-    print(f"  init OK, readout: {r.readout(s1, ['animals', 'computers', 'exercise'], k=2)}")
-    e = r.entangle(s1, s2)
-    print(f"  entangle: {e.vector.shape}")
-    i = r.interpolate(s1, s2, 0.5)
-    print(f"  interpolate: {i.vector.shape}")
-    p = r.navigate("water", "ice", steps=2, corpus=["liquid", "solid", "cold", "steam"])
-    print(f"  navigate: {len(p)} steps")
-    print(f"  {r.get_stats()}")
-    print("  READY for VectorResident")

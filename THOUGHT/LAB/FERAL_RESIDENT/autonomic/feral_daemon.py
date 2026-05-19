@@ -22,6 +22,7 @@ The daemon is the scheduler. VectorResident is the brain.
 
 import asyncio
 import json
+import os
 import random
 import time
 import sys
@@ -689,7 +690,14 @@ class FeralDaemon:
         async with self._get_lock():
             # Get mind state and compute E (fast - just vector ops)
             mind_state = self.resident.store.get_mind_state()
-            E = chunk_state.E_with(mind_state) if mind_state is not None else 0.5
+            if mind_state is not None:
+                # Core-based resonance when FERAL_EIGEN=1
+                if os.environ.get('FERAL_EIGEN', '') == '1' and hasattr(self.resident.reasoner, 'E_with'):
+                    E = self.resident.reasoner.E_with(chunk_state, mind_state)
+                else:
+                    E = chunk_state.E_with(mind_state)
+            else:
+                E = 0.5
 
             # Gate decision
             n_memories = len(self.resident.store.memory.memory_history) if self.resident.store.memory else 0
