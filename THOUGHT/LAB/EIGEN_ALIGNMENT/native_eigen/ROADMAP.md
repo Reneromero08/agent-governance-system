@@ -40,12 +40,13 @@
 
 ### Phase 4: Language
 - [x] WikiText-2 training with multi-head complex attention
-- [x] Phase ablation **+25.6% delta** on language (>10% target)
+- [x] Phase ablation **+10.9% delta** on language (>10% target) — geometric init confirmed
 - [x] CurvatureModulator: d²θ/ds² boundary detection ported from curvature.py
-- [x] Phase coherence gate wired into LM training loop (Step 3 scaffolding)
+- [x] Phase coherence gate wired into LM training loop
 - [x] Modular Uniform Cortical Algorithm: NativeEigenCore decoupled from LanguageAdapter
 - [x] Dual output projection preserves phase through Born rule layer
 - [x] native_eigen_v1.py: C^8 test + WikiText-2 LM in single file
+- [x] Q56 Attack 6 geometric init validated: PPL 195 vs 487 (2.5x better convergence)
 
 ---
 
@@ -57,9 +58,12 @@
 - [~] Phase-gated training (infrastructure built, si→0 by design — needs noise/dropout for variation)
 
 ### Phase 6: Scale
-- [ ] d_model sweep (16 → 32 → 64)
-- [ ] Layers sweep (4 → 6 → 8)
-- [ ] Heads sweep (4 → 8)
+- [~] Scale sweep complete (5 epochs): best config d=16 h=4 L=6 → **+66.3% delta**
+- [~] d=8 h=4 L=4: +10.3% | d=16 h=4 L=4: +13.2% | d=16 h=8 L=4: +6.2%
+- [~] d=16 h=4 L=6: **+66.3%** (best) | d=16 h=4 L=8: +20.3% (saturation)
+- [~] Q56 Attack 2 confirmed: depth > head count (L=6 > h=8 by +60pp)
+- [~] h_c=4 at d=16 matches Q55 dimensional capacity prediction
+- [ ] Full 8-epoch training at sweet spot (d=16, h=4, L=6)
 - [ ] Vocab sweep (2K → 5K → 10K)
 - [ ] Fine-tune on Gemma 4 2B with LoRA
 
