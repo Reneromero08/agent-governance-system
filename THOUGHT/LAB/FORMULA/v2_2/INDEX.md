@@ -59,7 +59,7 @@
 | Q2 | The formula has meaningful falsification criteria | OPEN | q02_falsification/ |
 | Q5 | High local agreement reveals truth | OPEN | q05_agreement_truth/ |
 | Q20 | R is not tautological (adds value beyond SNR) | OPEN | q20_tautology/ |
-| Q28 | R has attractor structure | OPEN | q28_attractors/ |
+| Q28 | R has attractor structure | CONFIRMED | q28_attractors/ |
 | Q35 | R threshold defines a Markov blanket | OPEN | q35_markov/ |
 | Q4 | The formula makes novel falsifiable predictions | OPEN | q04_predictions/ |
 | Q26 | Minimum data requirements for stable R are determinable | OPEN | q26_min_data/ |
