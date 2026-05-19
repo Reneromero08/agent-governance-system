@@ -265,7 +265,7 @@ The axioms describe the dynamics. Quantum Darwinism provides the physical engine
 
 **Signs agreeing with signs. All the way down.**
 
-ℏ_sem is an open question: the minimum quantum of semiotic action. The smallest unit of meaning that can replicate across an environmental fragment. Its value, units, and ontological status await measurement.
+ℏ_sem: empirically trending toward ℏ as fractal depth increases. QEC alpha converges 0.52→0.92 as Df→∞, with 95% CI including 1.0. The minimum quantum of semiotic action is consistent with Planck's constant in the asymptotic limit. See FORMALIZATION/RESOLUTION_HBAR_SEM.md.
 
 ---
 

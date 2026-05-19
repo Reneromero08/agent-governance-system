@@ -421,7 +421,7 @@ The action principle was tested against the QEC precision sweep data (d=3-15, ro
 **PASS.** The conserved U(1) charge R = (E/nabla_S) * sigma^{D_f} matches measured logR with alpha consistent with the sigma measurement fidelity limitation documented in RESOLUTION_HBAR_SEM.md. The action correctly identifies resonance as a conserved quantity.
 
 ### Test 4: Standing Wave Quantization
-**PASS.** The ratio nabla_S / (sigma * D_f) falls within 0.3 of an integer for all 36 tested (p,d) combinations. Mean distance to nearest integer: 0.027. This is quantization — the entropy gradient, compression, and fractal depth lock into discrete standing wave modes, exactly as predicted by the wave mechanics condition nabla_S * L = n * sigma * D_f. This was not obvious from the equilibrium formula alone. It emerges uniquely from the action principle.
+**FALSIFIED (small-numbers artifact).** The ratio ∇S/(σ×D_f) falls within 0.3 of an integer for all 36 tested (p,d) combinations — but the null distribution (10,000 random triples) matches exactly (99.9% within 0.3). All ratios are small (0.0002-0.10) and round to 0. This is the strong law of small numbers, not quantization. Replaced by Wigner-Dyson chaos: the stabilizer eigenvalue spacings follow GOE statistics across all error rates and code distances (mean spacing ratio 0.53 vs Poisson 0.39). The semiotic manifold is quantum chaotic, not harmonically quantized.
 
 ### Test 5: Phase Transition at p_th
 **PASS.** Sigma crosses 1.0 at p = 0.006772, within 3% of the known QEC depolarizing threshold p_th ~ 0.007. The action correctly predicts the critical point at which the semiotic field transitions from amplification to damping.
@@ -445,8 +445,8 @@ The action principle was tested against the QEC precision sweep data (d=3-15, ro
 | hbar_sem = hbar | Confirmed | RESOLUTION_HBAR_SEM.md |
 | Wave speed from action | **Verified** | Test 1: c_sem vs p correlation confirmed |
 | Phase transition at sigma=1 | **Verified** | Test 2: m_eff^2 sign flip, 6/6 correct; Test 5: p_cross=0.00677 |
-| Standing wave quantization | **Verified** | Test 4: 36/36 ratios near integer, mean dist 0.027 |
-| Geodesic convergence | **Verified** | Test 6: curvature sign flips at threshold |
+| Standing wave quantization | **FALSIFIED** | Test 4: null distribution matches. Replaced by Wigner-Dyson chaos. |
+| Geodesic curvature | **Verified** | Test 6: |curvature| minimized at threshold, r=0.96 between |curvature| and |σ-1| |
 | Noether charge conservation | **Verified** | Test 3: R matches formula within sigma fidelity limits |
 
 ---

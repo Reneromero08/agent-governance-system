@@ -1,6 +1,6 @@
-# Resolution of ℏ_sem: The Semiotic Quantum of Action is ℏ
+# ℏ_sem: Evidence for ℏ_sem = ℏ
 
-**Date:** 2026-05-17 | **Status:** RESOLVED | **Priority:** Critical (was #1 gap in Formalization Audit)
+**Date:** 2026-05-17 (updated 2026-05-18) | **Status:** TRENDING (consistent with ℏ, not yet confirmed at asymptotic limit) | **Priority:** Critical (was #1 gap in Formalization Audit)
 
 ---
 
@@ -113,6 +113,8 @@ The 7% gap (alpha = 0.93 in geometric sigma) is **measurement resolution**, not 
 Essence E → entropy gradient ∇S → compression σ → fractal depth Df → resonance R
 ```
 Every term has well-defined physical units anchored to ℏ. The Living Formula R = (E/∇S) × σ^Df has the same dimensional status as Schrödinger's equation.
+
+**Update (2026-05-18):** Subsequent sequential-holdout testing shows alpha is stable at ~0.66 with all-training configuration, but increases systematically with deeper-code training: 0.52 (shallow) → 0.66 (all) → 0.84 (mid-deep) → 0.92 (with d=13). The bootstrap 95% CI for the deepest configuration [0.85, 1.02] includes 1.0. The evidence is consistent with ℏ_sem = ℏ in the asymptotic limit Df → ∞, but this has not been confirmed at finite depth. The status is changed from RESOLVED to TRENDING pending d=17,19,21 QEC data.
 
 ## Impact on Formalization
 
