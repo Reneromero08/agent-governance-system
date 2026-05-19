@@ -50,7 +50,7 @@
 | Q11 | R has predictable failure modes (valley blindness) | OPEN | q11_sensitivity/ |
 | Q7 | R composes across scales | OPEN | q07_multiscale/ |
 | Q18 | R detects deception | OPEN | q18_deception/ |
-| Q21 | dR/dt predicts system degradation | OPEN | q21_rate_of_change/ |
+| Q21 | dR/dt predicts system degradation | PARTIALLY VERIFIED | q21_rate_of_change/ |
 | Q55 | Kuramoto threshold predicts minimum independent heads for phase coherence | PARTIALLY VERIFIED | q55_kuramoto_heads/ |
 | Q56 | Projective measurement merge (Born rule) beats concatenation; O(h^2) cross-terms resist saturation | PARTIALLY VERIFIED | q56_entangled_heads/ |
 
