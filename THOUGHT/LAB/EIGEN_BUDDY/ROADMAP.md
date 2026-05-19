@@ -117,7 +117,27 @@
 
 **Locked:** Core navigates. DB stores. Cosine measures. 0.16 gates. Phase routes — it doesn't discriminate. No EM rotation. Values follow geodesics. Dual output preserves phase.
 
-**Open:** Q36 mathematics. Contrastive training for discrimination. Daemon autonomy. LLM pipeline.
+## Gemini Unlocks (2026-05-19)
+
+| Unlock | Finding | Implementation |
+|--------|---------|---------------|
+| 3 — Narrow Boundary | d_token=16, d_model=64: +96.9% phase delta vs +94.0% wide flat | models/narrow.py |
+| 3 — Consistent gap | ~3pp advantage across d_model=32,64 | Complex projection preserves phase geometry |
+| 1 — Contrastive Loss | Max-margin phase discrimination framework | models/contrastive.py (scaffolded) |
+| 2 — Thermodynamic Daemon | Phase diversity monitoring via Kuramoto r | training/thermo.py |
+| 2 — Polar rotation | e^(i*theta) injects entropy, preserves |z| | training/thermo.py |
+| 2 — Core integration | D_f monitoring on Core phase angles (r=1.000 crystallized) | ready for autonomous loop |
+
+## Architecture
+
+```
+Tokens (d_token=16)
+  -> ComplexProjection (d_token -> d_model)
+  -> NativeEigenCore (d_model=64, implicate manifold)
+  -> Output head
+Thermodynamic Daemon monitors phase diversity, injects polar entropy if r > 0.8
+Contrastive loss pushes unrelated pairs to phase opposition (dtheta -> pi)
+```
 
 ---
 
