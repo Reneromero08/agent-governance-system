@@ -5,10 +5,11 @@ Phase 2: Core navigates DB, returns knowledge, updates entries autonomously.
 """
 import torch, torch.nn as nn, torch.nn.functional as F, numpy as np
 import time, sys, sqlite3, hashlib, math, random
+from pathlib import Path
 torch.manual_seed(42); random.seed(42)
 
-sys.path.insert(0, r'THOUGHT/LAB/EIGEN_ALIGNMENT/native_eigen')
-from native_eigen_core import NativeEigenCore
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from core import NativeEigenCore
 from sentence_transformers import SentenceTransformer
 
 # ---- Phase 1: Build knowledge DB ----

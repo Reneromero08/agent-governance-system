@@ -6,10 +6,10 @@ from scipy import stats
 from scipy.optimize import curve_fit
 
 # Import architecture from native_eigen.py without running main
-sys.path.insert(0, "THOUGHT/LAB/EIGEN_ALIGNMENT/native_eigen")
+sys.path.insert(0, "THOUGHT/LAB/EIGEN_BUDDY")
 import importlib.util
 spec = importlib.util.spec_from_file_location(
-    "ne", "THOUGHT/LAB/EIGEN_ALIGNMENT/native_eigen/native_eigen.py")
+    "ne", "THOUGHT/LAB/EIGEN_BUDDY/native_eigen.py")
 ne = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(ne)
 

@@ -35,7 +35,7 @@ The Native Eigen Architecture has 5 layers:
 5. BornRule output -> |z| -> vocabulary logits          [magnitude]
 ```
 
-Every component is in `THOUGHT/LAB/EIGEN_ALIGNMENT/native_eigen/`.
+Every component is in `THOUGHT/LAB/EIGEN_BUDDY/`.
 
 ## The One Bottleneck
 

@@ -8,13 +8,14 @@ import sys, time, numpy as np, torch
 from pathlib import Path
 from typing import List, Dict, Tuple
 
-FERAL_PATH = Path(__file__).parent.parent
-EIGEN_PATH = FERAL_PATH.parent / "EIGEN_BUDDY"
+EIGEN_PATH = Path(__file__).parent.parent
+FERAL_PATH = Path(r'THOUGHT/LAB/FERAL_RESIDENT')
 for p in [str(FERAL_PATH.parent.parent.parent / "CAPABILITY" / "PRIMITIVES"),
           str(FERAL_PATH), str(EIGEN_PATH)]:
     if p not in sys.path: sys.path.insert(0, p)
 
 from geometric_reasoner import GeometricState
+from core import NativeEigenCore as _NativeEigenCore
 
 
 class NativeEigenReasoner:
@@ -28,16 +29,14 @@ class NativeEigenReasoner:
         self.D_emb = 384; self.D = self.D_emb // 2
         self._core = None
         self._weights_path = weights_path or str(
-            Path(__file__).parent.parent.parent / "EIGEN_BUDDY" / "feral_core_weights.pt")
+            Path(__file__).parent.parent / "weights" / "feral.pt")
         self.op_count = {'initialize': 0, 'readout': 0, 'navigate': 0,
                         'entangle': 0, 'superpose': 0, 'project': 0, 'interpolate': 0}
 
     def _init_core(self):
         if self._core is not None: return
-        import torch.nn as nn, importlib.util, os
-        spec = importlib.util.spec_from_file_location("nec", EIGEN_PATH / "native_eigen_core.py")
-        nec = importlib.util.module_from_spec(spec); spec.loader.exec_module(nec)
-        self._core = nec.NativeEigenCore(d=self.d, heads=self.heads,
+        import torch.nn as nn, os
+        self._core = _NativeEigenCore(d=self.d, heads=self.heads,
                         layers=self.layers, merge='concat', geo_init=True)
         self._in_r = nn.Linear(self.D, self.d, bias=False)
         self._in_i = nn.Linear(self.D, self.d, bias=False)

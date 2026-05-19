@@ -101,9 +101,9 @@ Ordered by relevance to the Native Eigen trajectory. Tier from v2_2 INDEX shown 
 8. `INBOX/q32_worktree_autopsy_report.md` — Q32 original worktree audit (30 commits)
 
 ### Architecture & Tools
-9. `THOUGHT/LAB/EIGEN_ALIGNMENT/native_eigen/native_eigen.py` — **The Native Eigen complex transformer (129 lines, ℂ², 14K params)**
-10. `THOUGHT/LAB/EIGEN_ALIGNMENT/native_eigen/curvature.py` — Phase curvature detector (103 lines)
-11. `THOUGHT/LAB/EIGEN_ALIGNMENT/native_eigen/cybernetic_loop.py` — Self-correcting governance (151 lines)
+9. `THOUGHT/LAB/EIGEN_BUDDY/native_eigen.py` — **The Native Eigen complex transformer (129 lines, ℂ², 14K params)**
+10. `THOUGHT/LAB/EIGEN_BUDDY/curvature.py` — Phase curvature detector (103 lines)
+11. `THOUGHT/LAB/EIGEN_BUDDY/cybernetic_loop.py` — Self-correcting governance (151 lines)
 
 ### Semiotic Mechanics Framework
 12. `THOUGHT/LAB/FORMULA/v4/SEMIOTIC_LIGHT_CONE_1_1/`

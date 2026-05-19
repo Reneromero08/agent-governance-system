@@ -8,8 +8,7 @@ import torch, numpy as np, time, sys, sqlite3, math
 torch.manual_seed(42)
 
 sys.path.insert(0, r'THOUGHT/LAB/FERAL_RESIDENT')
-sys.path.insert(0, r'THOUGHT/LAB/EIGEN_ALIGNMENT/native_eigen')
-from cognition.native_eigen_reasoner import NativeEigenReasoner
+from native_eigen_reasoner import NativeEigenReasoner
 
 DB_PATH = r'THOUGHT/LAB/FERAL_RESIDENT/data/db/feral_eternal.db'
 

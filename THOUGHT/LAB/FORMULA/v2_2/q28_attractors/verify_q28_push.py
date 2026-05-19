@@ -5,9 +5,9 @@ import numpy as np
 from scipy.optimize import curve_fit
 from scipy import stats
 
-sys.path.insert(0, "THOUGHT/LAB/EIGEN_ALIGNMENT/native_eigen")
+sys.path.insert(0, "THOUGHT/LAB/EIGEN_BUDDY")
 import importlib.util
-spec = importlib.util.spec_from_file_location("ne", "THOUGHT/LAB/EIGEN_ALIGNMENT/native_eigen/native_eigen.py")
+spec = importlib.util.spec_from_file_location("ne", "THOUGHT/LAB/EIGEN_BUDDY/native_eigen.py")
 ne = importlib.util.module_from_spec(spec); spec.loader.exec_module(ne)
 NativeEigen, load = ne.NativeEigen, ne.load
 torch.manual_seed(42)

@@ -7,9 +7,9 @@ The gate decides how many cycles to run — unbounded compute at bounded params.
 """
 import torch, torch.nn as nn, torch.nn.functional as F, math, random, time
 torch.manual_seed(42); random.seed(42)
-import sys
-sys.path.insert(0, r'THOUGHT/LAB/EIGEN_ALIGNMENT/native_eigen')
-from native_eigen_core import NativeEigenCore
+import sys; from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from core import NativeEigenCore
 
 # ---- Data: token sequences from WikiText-2 ----
 from collections import Counter

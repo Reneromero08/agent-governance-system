@@ -1,9 +1,9 @@
 """Q28: Dropout recovery test — focused."""
 import sys,math,random,torch,torch.nn as nn,torch.nn.functional as F
 import numpy as np
-sys.path.insert(0,"THOUGHT/LAB/EIGEN_ALIGNMENT/native_eigen")
+sys.path.insert(0,"THOUGHT/LAB/EIGEN_BUDDY")
 import importlib.util
-spec=importlib.util.spec_from_file_location("ne","THOUGHT/LAB/EIGEN_ALIGNMENT/native_eigen/native_eigen.py")
+spec=importlib.util.spec_from_file_location("ne","THOUGHT/LAB/EIGEN_BUDDY/native_eigen.py")
 ne=importlib.util.module_from_spec(spec);spec.loader.exec_module(ne)
 NativeEigen,load=ne.NativeEigen,ne.load
 D="cuda" if torch.cuda.is_available() else "cpu";torch.manual_seed(0)

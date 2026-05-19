@@ -107,7 +107,7 @@ The paper's own data (Supporting Information Table S3) confirms:
 
 ## 7. GPU Acceleration via Native Eigen Architecture
 
-The `native_eigen` project (THOUGHT/LAB/EIGEN_ALIGNMENT/native_eigen/) provided the GPU acceleration path:
+The `native_eigen` project (THOUGHT/LAB/EIGEN_BUDDY/) provided the GPU acceleration path:
 
 - PyTorch/CUDA vectorized Hamiltonian build: 1.5s for N=11,232
 - Full dense diagonalization on GPU: 434s for N=11,232 (12.9 GB VRAM)

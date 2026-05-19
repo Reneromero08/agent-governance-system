@@ -12,11 +12,11 @@ from collections import defaultdict
 torch.manual_seed(42); random.seed(42)
 
 DB = Path(r'THOUGHT/LAB/FERAL_RESIDENT/data/db/feral_eternal.db')
-EIGEN_DIR = Path(r'THOUGHT/LAB/EIGEN_ALIGNMENT/native_eigen')
-WEIGHTS_PATH = EIGEN_DIR / 'feral_core_weights.pt'
+EIGEN_DIR = Path(__file__).parent.parent
+WEIGHTS_PATH = EIGEN_DIR / 'weights' / 'feral.pt'
 
 import sys; sys.path.insert(0, str(EIGEN_DIR))
-from native_eigen_core import NativeEigenCore
+from core import NativeEigenCore
 
 conn = sqlite3.connect(str(DB))
 D_emb = 384; D = D_emb // 2  # 192 complex

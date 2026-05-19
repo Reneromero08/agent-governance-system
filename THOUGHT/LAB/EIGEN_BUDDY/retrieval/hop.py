@@ -9,10 +9,10 @@ Test: can phase survive the hop across these structural boundaries?
 """
 import torch, torch.nn as nn, torch.nn.functional as F, math, random, time
 import numpy as np, sqlite3
+import sys; from pathlib import Path
 torch.manual_seed(42); random.seed(42)
-import sys
-sys.path.insert(0, r'THOUGHT/LAB/EIGEN_ALIGNMENT/native_eigen')
-from native_eigen_core import NativeEigenCore
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from core import NativeEigenCore
 
 DB = r'THOUGHT/LAB/FERAL_RESIDENT/data/db/feral_eternal.db'
 conn = sqlite3.connect(DB)
