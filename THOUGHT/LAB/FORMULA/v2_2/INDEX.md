@@ -46,7 +46,7 @@
 | Q24 | R failure modes are characterizable | OPEN | q24_failure_modes/ |
 | Q27 | R exhibits hysteresis | OPEN | q27_hysteresis/ |
 | Q33 | R shows emergent properties at macro scale | OPEN | q33_emergence/ |
-| Q12 | R shows phase transition during model training | OPEN | q12_phase_transitions/ |
+| Q12 | R shows phase transition during model training | PARTIALLY VERIFIED | q12_phase_transitions/ |
 | Q11 | R has predictable failure modes (valley blindness) | OPEN | q11_sensitivity/ |
 | Q7 | R composes across scales | OPEN | q07_multiscale/ |
 | Q18 | R detects deception | OPEN | q18_deception/ |
