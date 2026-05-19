@@ -52,13 +52,13 @@
 ## 🔜 Next
 
 ### Phase 5: Production Cybernetic Loop
-- [ ] Cassette retrieval during LM training
-- [ ] Autonomous self-correction on factual prompts
-- [ ] Phase-gated training beats standard training PPL
+- [~] Cassette retrieval during LM training (wired, needs batched training fix)
+- [~] Autonomous self-correction on factual prompts (cassette queries work, batching conflicts)
+- [~] Phase-gated training (infrastructure built, si→0 by design — needs noise/dropout for variation)
 
 ### Phase 6: Scale
 - [ ] d_model sweep (16 → 32 → 64)
-- [ ] Layers sweep (2 → 3 → 4)
+- [ ] Layers sweep (4 → 6 → 8)
 - [ ] Heads sweep (4 → 8)
 - [ ] Vocab sweep (2K → 5K → 10K)
 - [ ] Fine-tune on Gemma 4 2B with LoRA

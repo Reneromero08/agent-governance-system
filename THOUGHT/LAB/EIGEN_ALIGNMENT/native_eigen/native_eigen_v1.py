@@ -192,10 +192,13 @@ class NativeEigenCore(nn.Module):
             z = layer['phase'](z)
             total_si = total_si + si
 
-        # Phase coherence for cybernetic gate
-        avg_phase = total_si.mean(dim=(-2, -1))
-        phase_coh = (torch.cos(avg_phase)**2 + torch.sin(avg_phase)**2).sqrt()
-        return z, phase_coh.mean()
+        # Kuramoto order parameter per sample: one scalar per batch element
+        # Collapse head/seq dimensions first, then compute coherence across batch
+        per_sample_phase = total_si.mean(dim=(1, 2, 3))  # (B,) one scalar per sample
+        cos_mean = torch.cos(per_sample_phase).mean()
+        sin_mean = torch.sin(per_sample_phase).mean()
+        phase_coh = (cos_mean**2 + sin_mean**2).sqrt()
+        return z, phase_coh
 
 
 class LanguageAdapter(nn.Module):
@@ -363,22 +366,71 @@ def load_wikitext(vocab_size=2000, seq_len=32, n_seqs=2000):
         s = toks[i:i + seq_len + 1]
         if len(s) == seq_len + 1:
             data.append((s[:-1], s[1:]))
-    return data[:n_seqs], len(voc)
+    return data[:n_seqs], len(voc), voc
 
 
-def train_lm(use_gate=False):
+def make_factual_prompts(voc, w2i, n=60):
+    """Generate factual QA prompts from cassette triples for mixed training."""
+    import sys
+    sys.path.insert(0, r'THOUGHT/LAB/TINY_COMPRESS/llm-spectral/auto_feedback')
+    from facts_cassette import FactsCassette
+    fc = FactsCassette()
+
+    queries = ["element", "chemical", "formula", "water", "code", "function",
+               "logic", "math", "true", "false", "algorithm", "reaction"]
+    triples = {}
+    for q in queries:
+        for hit in fc.query(q, top_k=5):
+            key = hit['entity'] + '|' + hit['predicate']
+            if key not in triples:
+                triples[key] = hit
+
+    prompts = []
+    templates = [
+        "Q: What is the {pred} of {entity}? A: {value}",
+        "The {pred} of {entity} is {value}.",
+        "{entity} has {pred} {value}.",
+    ]
+
+    for key, t in list(triples.items())[:n]:
+        tmpl = templates[hash(key) % len(templates)]
+        text = tmpl.format(entity=t['entity'], pred=t['predicate'], value=t['value'])
+        toks = [w2i.get(w, 1) for w in text.split()] + [2]
+        # Pad to 32 with eos (2), not pad (0) — eos blends naturally
+        pad_len = 31 - len(toks)
+        if pad_len > 0:
+            inp = toks + [2] * (pad_len + 1)  # pad with eos
+        else:
+            inp = toks[:32]
+        if len(inp) >= 32:
+            prompts.append((inp[:31], inp[1:32]))
+
+    return prompts
+
+
+def train_lm(use_gate=False, use_cassette=False):
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    data, V = load_wikitext(n_seqs=2000)
+    data, V, voc = load_wikitext(n_seqs=2000)
+    w2i = {w: i for i, w in enumerate(voc)}
+
+    # Mix in cassette factual prompts
+    fact_data = []
+    if use_cassette:
+        fact_data = make_factual_prompts(voc, w2i, n=60)
+        print("Cassette: {} factual prompt fragments loaded".format(len(fact_data)))
+
     model = LanguageAdapter(vocab=V, d=8, heads=4, layers=4).to(device)
     opt = torch.optim.AdamW(model.parameters(), lr=1e-3, weight_decay=0.01)
     P = sum(p.numel() for p in model.parameters())
 
     print("\n" + "=" * 55)
-    print("NATIVE EIGEN LM: V={} seqs={} params={:,} d=8 layers=4 heads=4".format(
-        V, len(data), P))
+    print("NATIVE EIGEN LM: V={} wiki_seqs={} fact_seqs={} params={:,} d=8 layers=4 heads=4".format(
+        V, len(data), len(fact_data), P))
     print("Physics: Semiotic Gravity + Dual Output (phase-preserving)")
     if use_gate:
-        print("Gate: PHASE COHERENCE GATE ENABLED (Step 3)")
+        print("Gate: PHASE COHERENCE GATE ENABLED")
+    if use_cassette:
+        print("Cassette: 60 triples interleaved in training data")
     print("=" * 55)
 
     model.train()
@@ -387,8 +439,17 @@ def train_lm(use_gate=False):
         tl = 0
         n_batches = 0
         ep_gates = 0
-        for i in range(0, len(data), 16):
-            b = data[i:i + 16]
+        # Interleave factual and wiki data
+        all_data = list(data)
+        if fact_data:
+            # Insert a few factual batches per epoch
+            step = max(1, len(data) // max(1, len(fact_data) // 16))
+            for j, f in enumerate(fact_data):
+                idx = min(len(all_data), (j + 1) * step)
+                all_data.insert(idx, f)
+
+        for i in range(0, len(all_data), 16):
+            b = all_data[i:i + 16]
             if not b:
                 continue
             x = torch.tensor([p[0] for p in b], device=device, dtype=torch.long)
@@ -397,8 +458,7 @@ def train_lm(use_gate=False):
             if use_gate:
                 logits, phase_coh = model(x, return_phase=True)
                 loss = F.cross_entropy(logits.view(-1, V), y.view(-1))
-                # Phase coherence gate (Step 3): autonomously reinforce wrong predictions
-                if phase_coh < 0.85 and ep > 2:
+                if phase_coh < 0.5 and ep > 2:
                     ep_gates += 1
                     pred = logits.argmax(-1)
                     wrong = (pred != y)
@@ -470,6 +530,7 @@ if __name__ == "__main__":
     do_train = "--train" in sys.argv
     do_ablate = "--ablate" in sys.argv
     do_gate = "--gate" in sys.argv
+    do_cassette = "--cassette" in sys.argv
 
     # Default: run both if no flags specified
     if len(sys.argv) == 1:
@@ -480,4 +541,4 @@ if __name__ == "__main__":
         acc = train_c8()
 
     if do_train:
-        delta = train_lm(use_gate=do_gate)
+        delta = train_lm(use_gate=do_gate, use_cassette=do_cassette)
