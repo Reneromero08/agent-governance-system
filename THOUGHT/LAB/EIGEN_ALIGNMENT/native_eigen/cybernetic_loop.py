@@ -1,40 +1,30 @@
-"""Cybernetic Loop v0 — Self-correcting Native Eigen on geometry classification.
+"""Cybernetic Loop — Native Eigen vs Real MLP on geometry classification.
 
-Conditions:
-  CONTROL: Model trains on 800 examples, tested on 200.
-  CASSETTE: Model trains, wrong outputs are corrected via cassette, retrained.
-  
-The question: does self-correction via cassette improve accuracy
-beyond the baseline? If yes, the cybernetic loop works.
-
-Control parameters:
-  - Same model architecture across conditions
-  - Same training data, same number of epochs
-  - Only difference: cassette correction loop
+CONTROL: Standard training. CASSETTE: Self-correction. MORE_EPOCHS: Ablation.
+The question: does phase-structured attention learn faster than real MLP?
 """
 import torch, torch.nn as nn, torch.nn.functional as F, math, random
 torch.manual_seed(42); random.seed(42)
 
-# ---- Data + Model (geometry classification from proven architecture) ----
-def gen_transforms(n=1000, n_pts=8):
+# ---- Data ----
+def gen_transforms(n=200, n_pts=8):
     X, Y = [], []
     for _ in range(n):
         t = random.randint(0, 3)
         zx = torch.randn(n_pts) * 2.0; zy = torch.randn(n_pts) * 2.0
         th = random.random() * 2 * math.pi
-        if t == 0:  # Rotation
+        if t == 0:
             c, s = math.cos(th), math.sin(th)
             ox = zx*c - zy*s; oy = zx*s + zy*c
-        elif t == 1:  # Reflection
+        elif t == 1:
             c, s = math.cos(th), math.sin(th)
-            ox = zx*c + zy*s; oy = zx*s - zy*c  # conjugate + rotate
-        elif t == 2:  # Scaling
+            ox = zx*c + zy*s; oy = zx*s - zy*c
+        elif t == 2:
             sc = 0.2 + random.random() * 3.0
             ox = zx*sc; oy = zy*sc
-        else:  # Shear
+        else:
             k = random.random() * 2 - 1
             ox = zx + k*zy; oy = zy
-        # Complex ratio features
         z = torch.complex(zx, zy); zp = torch.complex(ox, oy)
         ratio = zp / (z + 1e-8)
         feats = torch.stack([
@@ -45,91 +35,114 @@ def gen_transforms(n=1000, n_pts=8):
         X.append(feats); Y.append(t)
     return torch.stack(X), torch.tensor(Y)
 
-class GeoNet(nn.Module):
+# ---- Real MLP (baseline) ----
+class RealMLP(nn.Module):
     def __init__(self):
         super().__init__()
         self.net = nn.Sequential(nn.Linear(6, 16), nn.ReLU(), nn.Linear(16, 4))
     def forward(self, x): return self.net(x)
     def clone(self):
-        m = GeoNet(); m.load_state_dict({k:v.clone() for k,v in self.state_dict().items()}); return m
+        m = RealMLP()
+        m.load_state_dict({k: v.clone() for k, v in self.state_dict().items()})
+        return m
+    @property
+    def params(self): return sum(p.numel() for p in self.parameters())
 
-# ---- Cassette (perfect knowledge of correct answers) ----
-class Cassette:
-    def __init__(self, X, Y): self.X = X; self.Y = Y
-    def correct(self, idx): return self.X[idx], self.Y[idx]
+class NativeClassifier(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.qr = nn.Parameter(torch.randn(2) * 0.1)
+        self.qi = nn.Parameter(torch.randn(2) * 0.1)
+        self.kr = nn.Parameter(torch.randn(2) * 0.1)
+        self.ki = nn.Parameter(torch.randn(2) * 0.1)
+        self.vr = nn.Linear(6, 2, bias=False)
+        self.vi = nn.Linear(6, 2, bias=False)
+        nn.init.normal_(self.vr.weight, std=0.1)
+        nn.init.normal_(self.vi.weight, std=0.1)
+        self.out = nn.Linear(2, 4)
+        nn.init.normal_(self.out.weight, std=0.1)
+        self.phase = nn.Parameter(torch.tensor(0.1))
 
-# ---- CONDITIONS ----
-X_train, Y_train = gen_transforms(200)  # Harder: only 200 examples
+    def forward(self, x):
+        B = x.shape[0]
+        vr = self.vr(x); vi = self.vi(x)
+        qr = self.qr.unsqueeze(0); qi = self.qi.unsqueeze(0)
+        kr = self.kr.unsqueeze(0); ki = self.ki.unsqueeze(0)
+        score_r = (qr * kr + qi * ki).sum(dim=-1, keepdim=True)
+        score_i = (qi * kr - qr * ki).sum(dim=-1, keepdim=True)
+        c, s = torch.cos(score_i), torch.sin(score_i)
+        out_r = c * vr - s * vi
+        out_i = c * vi + s * vr
+        c2, s2 = torch.cos(self.phase), torch.sin(self.phase)
+        out_r = out_r * c2 - out_i * s2
+        return self.out(out_r)
+
+    def clone(self):
+        m = NativeClassifier()
+        m.load_state_dict({k: v.clone() for k, v in self.state_dict().items()})
+        return m
+    @property
+    def params(self): return sum(p.numel() for p in self.parameters())
+
+# ---- Test both architectures ----
+def test(model_class, name):
+    m = model_class()
+    print("\n{}: {:,} params".format(name, m.params))
+    
+    # CONTROL
+    ctrl = model_class(); opt = torch.optim.AdamW(ctrl.parameters(), lr=1e-2)
+    for e in range(100):
+        loss = F.cross_entropy(ctrl(X_train), Y_train)
+        opt.zero_grad(); loss.backward(); opt.step()
+    with torch.no_grad():
+        ctrl_acc = (ctrl(X_test).argmax(-1) == Y_test).float().mean()
+    
+    # CASSETTE
+    cass = model_class(); opt = torch.optim.AdamW(cass.parameters(), lr=1e-2)
+    for e in range(100):
+        logits = cass(X_train); preds = logits.argmax(-1)
+        loss = F.cross_entropy(logits, Y_train)
+        wrong = preds != Y_train
+        if wrong.sum() > 0 and e > 3:
+            widx = wrong.nonzero(as_tuple=True)[0]
+            loss = loss + 0.5 * F.cross_entropy(cass(X_train[widx]), Y_train[widx])
+        opt.zero_grad(); loss.backward(); opt.step()
+    with torch.no_grad():
+        cass_acc = (cass(X_test).argmax(-1) == Y_test).float().mean()
+    
+    # MORE EPOCHS
+    more = model_class(); opt = torch.optim.AdamW(more.parameters(), lr=1e-2)
+    for e in range(150):
+        loss = F.cross_entropy(more(X_train), Y_train)
+        opt.zero_grad(); loss.backward(); opt.step()
+    with torch.no_grad():
+        more_acc = (more(X_test).argmax(-1) == Y_test).float().mean()
+    
+    return ctrl_acc, cass_acc, more_acc
+
+X_train, Y_train = gen_transforms(200)
 X_test, Y_test = gen_transforms(200)
 
-# CONDITION A: CONTROL — standard training
-print("=" * 55)
-print("CONDITION A: CONTROL (standard training)")
-ctrl_model = GeoNet()
-opt = torch.optim.AdamW(ctrl_model.parameters(), lr=1e-2)
-for e in range(100):
-    loss = F.cross_entropy(ctrl_model(X_train), Y_train)
-    opt.zero_grad(); loss.backward(); opt.step()
-with torch.no_grad():
-    ctrl_acc = (ctrl_model(X_test).argmax(-1) == Y_test).float().mean()
-print("  Accuracy: {:.1%}".format(ctrl_acc))
+print("=" * 60)
+print("NATIVE EIGEN vs REAL MLP — Cybernetic Loop")
+print("=" * 60)
 
-# CONDITION B: CASSETTE — self-correction loop
-print("\nCONDITION B: CASSETTE (self-correcting)")
-cass_model = GeoNet()
-cassette = Cassette(X_train, Y_train)
-opt = torch.optim.AdamW(cass_model.parameters(), lr=1e-2)
-corrections = 0
-for e in range(100):
-    # Forward
-    logits = cass_model(X_train)
-    preds = logits.argmax(-1)
-    # Standard loss
-    loss = F.cross_entropy(logits, Y_train)
-    
-    # +++ CYBERNETIC LOOP +++
-    # Find wrong predictions
-    wrong_mask = preds != Y_train
-    n_wrong = wrong_mask.sum().item()
-    if n_wrong > 0 and e > 3:  # Start correcting early with small dataset
-        # Cassette provides correct answers
-        wrong_idx = wrong_mask.nonzero(as_tuple=True)[0]
-        correct_logits = cass_model(cassette.X[wrong_idx])
-        correct_targets = cassette.Y[wrong_idx]
-        # Correction loss: push wrong outputs toward correct
-        correction_loss = F.cross_entropy(correct_logits, correct_targets)
-        # Combined loss with higher weight on corrections
-        loss = loss + 0.5 * correction_loss
-        corrections += n_wrong
-    
-    opt.zero_grad(); loss.backward(); opt.step()
+mlp = test(RealMLP, "Real MLP")
+ne = test(NativeClassifier, "Native Eigen")
 
-with torch.no_grad():
-    cass_acc = (cass_model(X_test).argmax(-1) == Y_test).float().mean()
-print("  Accuracy: {:.1%}".format(cass_acc))
-
-# CONDITION C: MORE EPOCHS (ablation — is it just more compute?)
-print("\nCONDITION C: MORE EPOCHS (ablation)")
-more_model = GeoNet()
-opt = torch.optim.AdamW(more_model.parameters(), lr=1e-2)
-for e in range(150):  # 50% more epochs than control
-    loss = F.cross_entropy(more_model(X_train), Y_train)
-    opt.zero_grad(); loss.backward(); opt.step()
-with torch.no_grad():
-    more_acc = (more_model(X_test).argmax(-1) == Y_test).float().mean()
-print("  Accuracy: {:.1%}".format(more_acc))
-
-# ---- RESULTS ----
-print("\n" + "=" * 55)
+print("\n" + "=" * 60)
 print("RESULTS")
-print("=" * 55)
-print("CONTROL:         {:.1%}".format(ctrl_acc))
-print("CASSETTE:        {:.1%}".format(cass_acc))
-print("MORE EPOCHS:     {:.1%}".format(more_acc))
-print()
-if cass_acc > ctrl_acc and cass_acc > more_acc:
-    print("CYBERNETIC LOOP WORKS — correction signal beats pure compute")
-elif cass_acc > ctrl_acc:
-    print("WEAK — cassette helps but not more than extra epochs")
+print("=" * 60)
+print("              REAL MLP    NATIVE EIGEN")
+print("CONTROL:      {:.1%}       {:.1%}".format(mlp[0], ne[0]))
+print("CASSETTE:     {:.1%}       {:.1%}".format(mlp[1], ne[1]))
+print("MORE EPOCHS:  {:.1%}       {:.1%}".format(mlp[2], ne[2]))
+mlp_delta = mlp[1] - mlp[0]; ne_delta = ne[1] - ne[0]
+print("\nCassette delta: MLP={:+.1%}  Native={:+.1%}".format(mlp_delta, ne_delta))
+
+if ne[0] >= mlp[0] and NativeClassifier().params < RealMLP().params:
+    print("FEWER PARAMS, SAME ACCURACY — phase structure is efficient")
+elif ne_delta > mlp_delta:
+    print("LARGER CASSETTE DELTA — phase learns better from corrections")
 else:
-    print("LOOP NOT PROVEN — cassette doesn't improve over baseline")
+    print("Real MLP wins — phase not load-bearing at this scale")
