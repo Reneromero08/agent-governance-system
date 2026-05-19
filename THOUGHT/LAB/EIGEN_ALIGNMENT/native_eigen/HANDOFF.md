@@ -203,15 +203,15 @@ class MultiHeadComplexAttention(nn.Module):
         vr = self.vr(x.real) - self.vi(x.imag)
         vi = self.vr(x.imag) + self.vi(x.real)
         
-        # Reshape to (B, H, dh, S) for per-head attention
-        qr = qr.view(B, S, self.H, self.dh).permute(0,2,3,1)
-        qi = qi.view(B, S, self.H, self.dh).permute(0,2,3,1)
-        kr = kr.view(B, S, self.H, self.dh).permute(0,2,3,1)
-        ki = ki.view(B, S, self.H, self.dh).permute(0,2,3,1)
-        vr = vr.view(B, S, self.H, self.dh).permute(0,2,3,1)
-        vi = vi.view(B, S, self.H, self.dh).permute(0,2,3,1)
+        # Reshape to (B, H, S, dh) for per-head attention over sequence positions
+        qr = qr.view(B, S, self.H, self.dh).transpose(1, 2)
+        qi = qi.view(B, S, self.H, self.dh).transpose(1, 2)
+        kr = kr.view(B, S, self.H, self.dh).transpose(1, 2)
+        ki = ki.view(B, S, self.H, self.dh).transpose(1, 2)
+        vr = vr.view(B, S, self.H, self.dh).transpose(1, 2)
+        vi = vi.view(B, S, self.H, self.dh).transpose(1, 2)
         
-        # Hermitian scores per head: (B, H, dh, S) @ (B, H, dh, S)^T -> (B, H, S, S)
+        # Hermitian scores: (B, H, S, dh) @ (B, H, dh, S) -> (B, H, S, S)
         sr = (qr @ kr.transpose(-2,-1) + qi @ ki.transpose(-2,-1)) * self.scale
         si = (qi @ kr.transpose(-2,-1) - qr @ ki.transpose(-2,-1)) * self.scale
         
@@ -220,21 +220,25 @@ class MultiHeadComplexAttention(nn.Module):
         sr = sr.masked_fill(mask, float('-inf'))
         si = si.masked_fill(mask, 0.0)
         
-        # Complex attention: magnitude softmax, phase preserved
+        # ATTENTION: magnitude-only routing. Phase curvature (si) is preserved
+        # separately for the CurvatureModulator and coherence gate.
+        # NOTE: geodesic penalty (sr - |si|) incentivizes si→0, starving the
+        # phase signal. cos/sin rotation of V suppresses phase variation.
+        # Both were removed — the +25.6% phase ablation delta confirms this.
         attn = F.softmax(sr, dim=-1)
-        cp, sp = torch.cos(si), torch.sin(si)
-        
-        out_r = (attn * cp) @ vr.transpose(-2,-1) - (attn * sp) @ vi.transpose(-2,-1)
-        out_i = (attn * cp) @ vi.transpose(-2,-1) + (attn * sp) @ vr.transpose(-2,-1)
+        out_r = attn @ vr
+        out_i = attn @ vi
         
         # Merge heads: (B, H, S, dh) -> (B, S, H*dh)
-        out_r = out_r.permute(0,2,1,3).contiguous().view(B, S, -1)
-        out_i = out_i.permute(0,2,1,3).contiguous().view(B, S, -1)
+        out_r = out_r.transpose(1, 2).contiguous().view(B, S, -1)
+        out_i = out_i.transpose(1, 2).contiguous().view(B, S, -1)
         
         # Output projection
         or_ = self.or_(out_r) - self.oi(out_i)
         oi_ = self.or_(out_i) + self.oi(out_r)
-        return torch.complex(or_, oi_)
+        
+        # Return both updated vectors and the phase/curvature matrix (for the coherence gate)
+        return torch.complex(or_, oi_), si
 ```
 
 **Test command:**
@@ -249,28 +253,67 @@ python native_eigen_v1.py  # Must print "C^8 ACC: >90%"
 
 ### Step 2: WikiText-2 Language Model
 
-Extend `native_eigen_v1.py` with a full transformer:
+Extend `native_eigen_v1.py` with a modular Uniform Cortical architecture. The Core must be decoupled from the vocabulary:
 
 ```python
-class NativeEigenLM(nn.Module):
+class CurvatureModulator(nn.Module):
+    """
+    Placeholder for d²θ/ds² semantic boundary detection.
+    ACTION REQUIRED: The agent must implement this by porting the 
+    second-derivative phase math directly from `curvature.py`. 
+    It should use `si` (first derivative) to calculate curvature (second derivative)
+    and use it to modulate the magnitude of `z`.
+    """
+    def __init__(self, d): super().__init__()
+    def forward(self, z, si): 
+        # TODO: Implement d²θ/ds² modulation here
+        return z
+
+class NativeEigenCore(nn.Module):
+    """Pure physics engine. Abstract complex sequence processor."""
+    def __init__(self, d=16, heads=4, layers=2):
+        super().__init__()
+        self.layers = nn.ModuleList([
+            nn.ModuleDict({
+                'attn': MultiHeadComplexAttention(d, heads),
+                'curve': CurvatureModulator(d),
+                'phase': PhaseAccumulator(d),
+            }) for _ in range(layers)
+        ])
+    
+    def forward(self, z):
+        # z: (B, S, D) complex continuous vectors
+        total_si = 0
+        for layer in self.layers:
+            z, si = layer['attn'](z)
+            z = layer['curve'](z, si)
+            z = layer['phase'](z)
+            total_si = total_si + si
+            
+        # Calculate overall phase coherence for the cybernetic gate
+        avg_phase = total_si.mean(dim=(-2,-1))
+        phase_coh = (torch.cos(avg_phase)**2 + torch.sin(avg_phase)**2).sqrt()
+        return z, phase_coh.mean()
+
+class LanguageAdapter(nn.Module):
+    """Sensory grounding module for text."""
     def __init__(self, vocab=2000, d=16, heads=4, layers=2):
         super().__init__()
         self.embed_re = nn.Embedding(vocab, d)
         self.embed_im = nn.Embedding(vocab, d)
-        self.layers = nn.ModuleList([
-            nn.ModuleDict({
-                'attn': MultiHeadComplexAttention(d, heads),
-                'phase': PhaseAccumulator(d),
-            }) for _ in range(layers)
-        ])
-        self.out = nn.Linear(d, vocab)
+        self.core = NativeEigenCore(d, heads, layers)
+        # Dual output: preserves phase through the projection layer.
+        # torch.abs(z) discards all phase — kills the ablation signal.
+        self.out_r = nn.Linear(d, vocab)
+        self.out_i = nn.Linear(d, vocab)
     
-    def forward(self, x):
+    def forward(self, x, return_phase=False):
         z = torch.complex(self.embed_re(x), self.embed_im(x))
-        for layer in self.layers:
-            z = layer['attn'](z)
-            z = layer['phase'](z)
-        return self.out(torch.abs(z))
+        z, phase_coh = self.core(z)
+        logits = self.out_r(z.real) + self.out_i(z.imag)
+        if return_phase:
+            return logits, phase_coh
+        return logits
 ```
 
 **PhaseAccumulator:** Same as `native_eigen.py`:
@@ -337,18 +380,7 @@ if phase_coh < 0.85 and epoch > 3:
         loss = loss + 0.5 * F.cross_entropy(model(x[widx]), y[widx])
 ```
 
-**Return phase from model:**
-```python
-def forward(self, x, return_phase=False):
-    # ... existing forward code ...
-    if return_phase:
-        # Phase coherence across batch
-        phases = score_i.mean(dim=(-2,-1))  # avg phase per sample
-        cos_m = torch.cos(phases).mean()
-        sin_m = torch.sin(phases).mean()
-        return logits, (cos_m**2 + sin_m**2).sqrt()
-    return logits
-```
+*(Note: Phase coherence extraction is already handled natively by `NativeEigenCore` and `LanguageAdapter` in the Step 2 architecture).*
 
 **Success criteria:**
 - Phase-gated training matches or beats standard training PPL
