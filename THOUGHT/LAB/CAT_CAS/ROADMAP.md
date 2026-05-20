@@ -49,7 +49,13 @@ This roadmap outlines the milestones for pushing the boundaries of Catalytic Spa
   *   Verify the mathematical relationship between the entropy of the catalytic tape and the run-time of the algorithm.
   *   Experiment with structured data vs. random noise on the tape to see if pre-existing structured patterns can accelerate calculations.
   *   **Result (Passive Tape):** Swept depths 4,6,8,10 (180 solves, 15/depth/tape). Entropy IDENTICAL across random/structured/antistructured at all depths (std=0.0). XOR operands are tree-determined — tape is passive substrate. Bits erased: 0. Restorations: 180/180. Script: `12_structured_tape_acceleration/experiment.py`.
-  *   **Result (Active Cache — EXPLOIT):** Pre-seeding tape with precomputed subtree combined(N) values + checksum validation lets Tape-Aware solver skip entire subtrees. Depth 6: 99.6% XOR reduction, 98.8% faster. Depth 8: 100% XOR reduction, 99.9% faster. Tape becomes active cache — algorithm reads from it to skip redundant computation. Bits erased: 0. Script: `12_structured_tape_acceleration/exploit.py`.
+  *   **Result (Active Cache — 5 EXPLOITS):**
+        1. **Root Cache**: 1 cache entry (root combined value) → 1 XOR solves entire tree. Depth 10: 349,525 XORs → 1 (349,525x reduction). O(1) from tape.
+        2. **Cache Efficiency**: Only 1 entry needed for 100%+ speedup. 127 entries = 1 entry. Diminishing returns beyond root.
+        3. **Multi-Tree**: Unstamped cache false-hits on wrong tree (value 187 ≠ 101). Tree fingerprint in checksum prevents all cross-tree false hits. Stamped cache: 0 false hits, 0% reduction. Own cache: 21,845x speedup.
+        4. **Warm-Tape Replay**: Post-computation tape state retains XOR-accumulated values. Classic solver doesn't exploit it (same XOR count), but tape-aware solver with pre-seeded cache achieves 21,845x speedup.
+        5. **Cross-Depth Transfer**: Cache from depth-6 tree mapped to depth-8 tree. 10 transferred entries → 49.7% XOR reduction (44 cache hits out of 127 internal nodes). Zero false hits.
+      Bits erased: 0 across all exploits. Script: `12_structured_tape_acceleration/exploit.py`.
 
 - [ ] **Computing Near the Landauer Limit (Thermodynamic Reversibility)**
   *   Develop a simulation environment to measure physical heat dissipation at the gate level.
