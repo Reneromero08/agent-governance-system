@@ -4,6 +4,10 @@
 
 Applied the Df formula to images. Images are stored as coefficients + basis vectors -- the full image is NEVER materialized, but rendered through mathematical projection on demand.
 
+`.holo` means dimensional Shannon compression: measure the information spectrum,
+choose the active dimensions, store coordinates in those dimensions, then render
+back into pixels. It is not symbolic recall or content-addressed lookup.
+
 ## Key Results
 
 | Method | Size | vs JPEG | Quality |
@@ -22,6 +26,7 @@ Test image: 2944x2208 photo
 | File | What it does |
 |------|-------------|
 | `holo.py` | Command-line tool for .holo format. Compress, view, focus, zoom, render, super-resolution |
+| `holo_core.py` | Domain-neutral .holo primitives: spectrum, effective dimensions, projection, render, verify |
 
 ### Vector quantization (breakthrough line)
 
@@ -85,3 +90,13 @@ python holo.py info photo.holo
 Rendering: `image = coefficients @ basis + mean`
 
 The image never exists until rendered. This is holographic storage.
+
+The generic `.holo` interface is:
+
+```text
+analyze_spectrum(X) -> spectrum, D_pr, D_shannon
+choose_k(spectrum, policy) -> k
+project(X, k) -> coordinates + basis + mean
+render(coordinates, basis, mean) -> X_hat
+verify(X, X_hat) -> distortion metrics
+```

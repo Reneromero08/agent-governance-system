@@ -10,6 +10,25 @@ Df = (lambda_sum)^2 / lambda_sq_sum
 
 Core insight: information lives on a low-dimensional manifold. Compress by finding the manifold and storing coordinates on it.
 
+## What `.holo` Means
+
+`.holo` is **dimensional Shannon compression**:
+
+```
+high-dimensional observations
+-> information spectrum / effective dimension
+-> low-dimensional coordinates + basis
+-> render back into observable form
+```
+
+It is not CAT/CAS symbolic recall, hash addressing, or pointer compression.
+Those systems replace known content with resolvable symbols. `.holo` measures
+the active information dimensions of the data itself and stores coordinates in
+that reduced space.
+
+See `HOLO_THEORY.md` for the formal math: objects, spectral dimensions,
+projection theorem, quantized codec model, and falsifiable predictions.
+
 ## Key Results
 
 | Method | Size | vs JPEG | Quality |
@@ -35,7 +54,7 @@ TINY_COMPRESS/
     vector_quant/         #   VQ clustering experiments
     quantum_analogies/    #   Bloch/qubit encoding experiments
     results/              #   Holographic & VQ breakthrough reports
-  canon-symbol/           # H(X|S) symbol compression (22.3x on canon)
+  canon-symbol/           # Separate CAT/CAS-adjacent symbol compression line
     canon_compressor.py   #   SHA-256 symbol generation
     symbol_resolver.py    #   @C symbol to content resolution
   roadmaps/               # Shared planning docs
@@ -43,13 +62,13 @@ TINY_COMPRESS/
     ROADMAP_GLM47_COMPRESSION.md
 ```
 
-## Three Lines of Research
+## Research Lines
 
 1. **LLM Spectral Compression** (`llm-spectral/`): Df analysis on GPT-2 activations. Found hidden states have Df approx 2, but attention K,V spreads to 160-460D. Achieved 5x KV cache compression.
 
 2. **Holographic Image Compression** (`holographic-image/`): Applied Df formula to images via patch PCA + VQ. Built `.holo` format where images are stored as coefficients + basis and rendered on demand. **30x smaller than JPEG.**
 
-3. **Canon Symbol Compression** (`canon-symbol/`): H(X|S) compression of AGS canon. 216 KB canon -> 9.7 KB manifest via SHA-256 symbols. 476x for individual file references.
+3. **Canon Symbol Compression** (`canon-symbol/`): Separate H(X|S) / shared-context compression experiment. Useful, but not `.holo`: it compresses by shared references and verification hashes, not by reducing Shannon information dimensions.
 
 ## Theoretical Implications
 
@@ -77,7 +96,7 @@ python holographic-image/holo.py info photo.holo
 # LLM spectral analysis
 python llm-spectral/activation_compress.py --model gpt2 --benchmark
 
-# Canon symbol compression
+# Separate shared-context symbol compression, not .holo
 python canon-symbol/canon_compressor.py --compress
 ```
 
