@@ -165,16 +165,22 @@ def main():
     sweep_results = {}
 
     def pre_read_block(block_idx):
-        """Read block from NVMe in background thread."""
+        """Read SSM/attention tensor from NVMe with zero-copy mmap.
+        Returns weight tensor + bandwidth measurement."""
         gdn = gdn_layers[block_idx*3:block_idx*3+3]
         for name, info in tensors.items():
             for lid in gdn:
                 if f'.{lid}.' in name and ('ssm_out' in name or 'attn_output' in name):
                     off = info['offset']
-                    weight_bytes = bytes(mm[off:off + info['size']])
+                    sz = info['size']
+                    t0 = time.perf_counter()
+                    # Zero-copy: read directly from mmap memoryview
+                    weight_bytes = mm[off:off + sz]
+                    read_time = time.perf_counter() - t0
+                    bw_mbps = (sz / 1e6) / read_time if read_time > 0 else 0
                     w = f16_to_torch(weight_bytes)
-                    return w.reshape(tuple(int(d) for d in info['shape'])), info['size'], name
-        return None, 0, None
+                    return w.reshape(tuple(int(d) for d in info['shape'])), sz, name, bw_mbps
+        return None, 0, None, 0
 
     for n_passes in pass_values:
         # Re-init Core + expansion + gate fresh for each sweep
@@ -197,20 +203,22 @@ def main():
 
         def pre_read_all():
             for bi in range(n_blocks):
-                w, sz, name = pre_read_block(bi)
-                if w is not None:
-                    buf.put((w, sz, name, bi))
+                result = pre_read_block(bi)
+                if result[0] is not None:
+                    buf.put(result)
             buf.put(None)  # sentinel
 
         reader = threading.Thread(target=pre_read_all, daemon=True)
         reader.start()
 
         block_idx = 0
+        bw_samples = []
         while True:
             item = buf.get()
             if item is None: break
-            weight_27b, sz, block_name, bi = item
-            stride_mb = sz / 1e6
+            weight_27b, sz_bytes, block_name, bw_mbps = item
+            stride_mb = sz_bytes / 1e6
+            if bw_mbps > 0: bw_samples.append(bw_mbps)
 
             block_losses = []
             for p in range(n_passes):
@@ -255,25 +263,112 @@ def main():
 
         final_loss = loss_hist[-1] if loss_hist else 0
         final_res = res_hist[-1] if res_hist else 0
-        sweep_results[n_passes] = {'final_loss': final_loss, 'final_res': final_res,
-                                    'mem_mag': phase_memory.abs().mean().item()}
-        final_loss = loss_hist[-1] if loss_hist else 0
-        final_res = res_hist[-1] if res_hist else 0
         final_mem = torch.cuda.memory_allocated() // 1024**2 if DEVICE.type == 'cuda' else 0
+        avg_bw = sum(bw_samples) / len(bw_samples) if bw_samples else 0
         sweep_results[n_passes] = {'final_loss': final_loss, 'final_res': final_res,
-                                    'mem_mag': phase_memory.abs().mean().item()}
-        catalytic = abs(final_mem - mem_baseline) < 10  # within 10MB = catalytic
+                                    'mem_mag': phase_memory.abs().mean().item(),
+                                    'nvme_mbps': avg_bw}
+        catalytic = abs(final_mem - mem_baseline) < 10
         print(f"  passes={n_passes:3d}: L={final_loss:.4f} res={final_res:.4f} "
               f"|mem|={sweep_results[n_passes]['mem_mag']:.4f} "
-              f"mem={final_mem}MB (baseline={mem_baseline}MB) "
+              f"nvme={avg_bw:.0f}MB/s "
+              f"mem={final_mem}MB(baseline={mem_baseline}MB) "
               f"{'CATALYTIC' if catalytic else 'LEAK'}",
               flush=True)
 
-    # Find optimal
+    # Sweep summary
     best = max(sweep_results, key=lambda g: sweep_results[g]['final_res'])
     print(f"\n[sweep] Best passes: {best} (resonance={sweep_results[best]['final_res']:.4f})")
     res_str = " | ".join(f"p={p}:res={v['final_res']:.4f}" for p,v in sweep_results.items())
-    print(f"[sweep] Full: {res_str}")
+    bw_str = " | ".join(f"p={p}:{v['nvme_mbps']:.0f}MB/s" for p,v in sweep_results.items())
+    print(f"[sweep] Resonance: {res_str}")
+    print(f"[sweep] NVMe BW:   {bw_str}")
+
+    # ---- Phase 4: Checkpointed chain — all 21 blocks differentiable, constant memory ----
+    print(f"\n[checkpoint] Pre-reading all {n_blocks} blocks for chained forward pass...")
+    t0 = time.time()
+    all_weights = []
+    for bi in range(n_blocks):
+        w, sz, name, bw = pre_read_block(bi)
+        if w is not None:
+            all_weights.append(w)
+    pre_read_time = time.time() - t0
+    total_mb = sum(w.numel() * w.element_size() / 1e6 for w in all_weights)
+    print(f"[checkpoint] {len(all_weights)} blocks, {total_mb:.0f}MB GPU, "
+          f"pre-read in {pre_read_time:.1f}s")
+
+    # Fresh Core for checkpointed chain
+    core_ckpt = NativeEigenCore(d=192, heads=4, layers=2, merge='concat', geo_init=True).to(DEVICE)
+    expansion_ckpt = nn.Linear(192, 6144, bias=False).to(DEVICE)
+    nn.init.normal_(expansion_ckpt.weight, std=0.02)
+    dim_gate_ckpt = nn.Parameter(torch.zeros(6144, device=DEVICE))
+    phase_mem_ckpt = nn.Parameter(torch.randn(192, dtype=torch.cfloat, device=DEVICE) * 0.01)
+    opt_ckpt = torch.optim.AdamW(
+        list(core_ckpt.parameters()) + list(expansion_ckpt.parameters()) +
+        [dim_gate_ckpt, phase_mem_ckpt], lr=5e-4)
+
+    mem_before = torch.cuda.memory_allocated() // 1024**2 if DEVICE.type == 'cuda' else 0
+    print(f"[checkpoint] Memory before chain: {mem_before}MB")
+
+    # Single massive chained forward: all 21 blocks, one backward pass
+    n_chain_passes = 5
+    chain_losses = []
+    for cp in range(n_chain_passes):
+        idx = torch.randperm(feral.shape[0], device=DEVICE)[:256]
+        B = idx.shape[0]
+        feral_batch = feral[idx]
+
+        total_loss = torch.tensor(0.0, device=DEVICE)
+        phase_mem_current = phase_mem_ckpt.detach().clone()
+
+        for bi, weight_27b in enumerate(all_weights):
+            # Checkpoint this block: activations freed, recomputed during backward
+            def block_forward(w, fb, pm):
+                with torch.no_grad():
+                    proj = project_27b(fb, w)
+                mem_tok = pm.unsqueeze(0).expand(fb.shape[0], 1, 192)
+                z_in = torch.cat([fb.unsqueeze(1), mem_tok], dim=1)
+                z_out, _ = core_ckpt(z_in)
+                z_feral = z_out[:, 0, :]
+                z_mem = z_out[:, 1, :]
+                new_pm = 0.9 * pm + 0.1 * z_mem.mean(dim=0)
+                z_exp = expansion_ckpt(z_feral.real)
+                dg = torch.sigmoid(dim_gate_ckpt)
+                zg = z_exp * dg
+                cn = zg / (zg.norm(dim=1, keepdim=True) + 1e-8)
+                pn = proj / (proj.norm(dim=1, keepdim=True) + 1e-8)
+                res = (cn * pn).sum(dim=1).mean()
+                return 1.0 - res + 0.001 * dg.mean(), new_pm
+
+            loss_i, phase_mem_current = torch.utils.checkpoint.checkpoint(
+                block_forward, weight_27b, feral_batch, phase_mem_current,
+                use_reentrant=False)
+            total_loss = total_loss + loss_i
+
+        avg_loss = total_loss / len(all_weights)
+        chain_losses.append(avg_loss.item())
+        opt_ckpt.zero_grad()
+        avg_loss.backward()
+        torch.nn.utils.clip_grad_norm_(
+            list(core_ckpt.parameters()) + list(expansion_ckpt.parameters()) +
+            [dim_gate_ckpt, phase_mem_ckpt], 1.0)
+        opt_ckpt.step()
+
+        # Update phase memory with accumulated context from chain
+        with torch.no_grad():
+            phase_mem_ckpt.data = phase_mem_current.detach()
+
+        mem_during = torch.cuda.memory_allocated() // 1024**2 if DEVICE.type == 'cuda' else 0
+        print(f"  chain pass {cp}: L={avg_loss.item():.4f} mem={mem_during}MB", flush=True)
+
+    mem_after = torch.cuda.memory_allocated() // 1024**2 if DEVICE.type == 'cuda' else 0
+    final_loss_ckpt = chain_losses[-1] if chain_losses else 0
+    print(f"\n[checkpoint] Memory: {mem_before}MB -> {mem_after}MB "
+          f"(delta={mem_after-mem_before}MB)")
+    print(f"[checkpoint] Loss: {chain_losses[0]:.4f} -> {final_loss_ckpt:.4f} "
+          f"(delta={chain_losses[0]-final_loss_ckpt:+.4f})")
+    print(f"[checkpoint] Phase memory through full landscape: "
+          f"|mem|={phase_mem_ckpt.abs().mean().item():.4f}")
 
 
 if __name__ == '__main__':
