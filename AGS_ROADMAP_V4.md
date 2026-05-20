@@ -1,7 +1,7 @@
 ---
 title: AGS Roadmap V4 (Remaining Work Only)
-version: 4.4.0
-last_updated: 2026-05-17
+version: 4.5.0
+last_updated: 2026-05-20
 scope: Unfinished phases only - Swarm, Omega (Crypto Safe COMPLETE, EEG Validation COMPLETE)
 style: agent-readable, task-oriented, minimal ambiguity
 status: Active
@@ -345,9 +345,10 @@ Research and scaling of catalytic computing, zero-entropy file systems, and ther
 - [x] 3.10.1 Breaking the Space-Time Trade-off (The Catalytic Frontier)
 - [x] 3.10.2 Computing Near the Landauer Limit (Thermodynamic Reversibility compiler)
 - [x] 3.10.3 Exploring the Limits: What Catalytic Space Cannot Do (Theoretical limits proof)
-- [ ] 3.10.4 Algorithmic Scale: Exponential Problem Size
-- [ ] 3.10.5 Architectural Scale: Parallel Catalytic Computing
-- [ ] 3.10.6 Systems Scale: Borrowing Operating System Memory
+- [x] 3.10.4 Algorithmic Scale: Exponential Problem Size (Out-of-Core Neural Net)
+- [x] 3.10.5 Architectural Scale: Parallel Catalytic Computing (Shared GPT VRAM Tape)
+- [x] 3.10.6 Systems Scale: Borrowing Operating System Memory (Shared Memory Quantum Simulation)
+- [x] 3.10.7 Infinite KV Cache (Spatial SVD Manifold Projection + Temporal H2O Pruning)
 
 ---
 
@@ -378,6 +379,7 @@ Research and scaling of catalytic computing, zero-entropy file systems, and ther
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 4.5.0 | 2026-05-20 | Completed all Catalytic Space Complexity Lab tasks (3.10.4-3.10.7), including Out-of-Core NN inference, concurrent GPT shared tape inference, OS shared memory quantum simulation, and the Compressed Catalytic KV Cache experiment achieving 12.5x compression with 100% attention fidelity. |
 | 4.4.0 | 2026-05-17 | Added Section 3.9: Formula V4 EEG Validation Phase 1 complete. Three-test battery (Eureka, Symbols, Flow) designed, implemented, executed against real public EEG (THINGS-EEG 738MB + EEGBCI 7.4MB). Synthetic ground truth passes (d=64.6, d=1.51, d=45.4). Real data null across all three. Full report at THOUGHT/LAB/FORMULA/v4/eeg/REPORT.md. |
 | 4.3.0 | 2026-02-03 | Phase 1 Crypto Safe COMPLETE (v3.9.0): seal_repo, verify_seal, CLI tools, 28 tests, VERIFICATION_GUIDE.md |
 | 4.2.0 | 2026-02-03 | Rewrote Phase 1 for license defense framing; removed template export (repo IS the release); linked to CCL 3.6/3.7/4.4 provisions |

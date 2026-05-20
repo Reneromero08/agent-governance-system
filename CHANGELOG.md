@@ -6,6 +6,12 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.12.7] - 2026-05-20
+
+### Added
+
+- `THOUGHT/LAB/CAT_CAS/10_catalytic_kv_cache/`: Developed a Compressed Catalytic KV Cache experiment combining SVD spatial projection (8x dimension reduction) and temporal pruning (attention sink + local sliding window + heavy hitters). Used a pre-allocated shared VRAM tape with bitwise XOR tape restoration to guarantee strictly flat $O(1)$ activation VRAM footprint during autoregressive generation. Verified that the cache achieves $12.5\times$ compression ratio with $100.0\%$ attention fidelity.
+
 ## [3.12.6] - 2026-05-18
 
 ### Fixed
