@@ -338,6 +338,17 @@ All three predictions fail on public EEG data. Root causes: (1) THINGS-EEG uses 
 - [ ] 3.9.8 Find genuine Eureka/insight EEG dataset to replace target detection proxy
 - [ ] 3.9.9 Find flow-state EEG dataset with adequate sampling rate (>=500Hz)
 
+## 3.10 Catalytic Space Complexity Lab (CAT_CAS)
+
+Research and scaling of catalytic computing, zero-entropy file systems, and thermodynamic compilers.
+
+- [x] 3.10.1 Breaking the Space-Time Trade-off (The Catalytic Frontier)
+- [x] 3.10.2 Computing Near the Landauer Limit (Thermodynamic Reversibility compiler)
+- [x] 3.10.3 Exploring the Limits: What Catalytic Space Cannot Do (Theoretical limits proof)
+- [ ] 3.10.4 Algorithmic Scale: Exponential Problem Size
+- [ ] 3.10.5 Architectural Scale: Parallel Catalytic Computing
+- [ ] 3.10.6 Systems Scale: Borrowing Operating System Memory
+
 ---
 
 # Priority Summary
