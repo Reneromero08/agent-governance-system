@@ -11,7 +11,7 @@ For each 27B weight block read from NVMe via mmap:
 21 blocks = 21 gradient steps. Phase convergence tracked.
 """
 import torch, torch.nn as nn, torch.nn.functional as F
-import numpy as np, mmap, os, struct, hashlib, time, math, sqlite3
+import numpy as np, mmap, os, struct, hashlib, time, math, sqlite3, threading, queue
 from pathlib import Path
 from gguf import GGUFReader
 sys_path = str(Path(__file__).parent.parent)
@@ -139,120 +139,141 @@ def main():
     feral = load_feral_vectors(FERAL_DB, n=300, d=192)
     print(f"[feral] {feral.shape[0]} vectors, D={feral.shape[1]} on {DEVICE}")
 
-    # Phase 2: NativeEigenCore + learned dimension gate
+    # Phase 2: NativeEigenCore + expansion + living dimension gate + phase memory
     core = NativeEigenCore(d=192, heads=4, layers=2, merge='concat', geo_init=True).to(DEVICE)
-    # Expansion: 192 -> 6144 (learns 27B coordinate mapping)
     expansion = nn.Linear(192, 6144, bias=False).to(DEVICE)
     nn.init.normal_(expansion.weight, std=0.02)
-    # Living dimension gate: learns which 6144 dims carry phase signal (VBR-like)
-    # Initialized to 0.5 (agnostic), sigmoid-gated during training
     dim_gate_raw = nn.Parameter(torch.zeros(6144, device=DEVICE))
+    # Recurrent phase memory: accumulates 27B landscape across 21 blocks
+    # Persists between forward calls — the "preserve thinking" track
+    phase_memory = nn.Parameter(torch.randn(192, dtype=torch.cfloat, device=DEVICE) * 0.01)
     core_params = sum(p.numel() for p in core.parameters())
     exp_params = sum(p.numel() for p in expansion.parameters())
     gate_params = dim_gate_raw.numel()
-    total_params = core_params + exp_params + gate_params
+    mem_params = phase_memory.numel()
+    total_params = core_params + exp_params + gate_params + mem_params
     opt = torch.optim.AdamW(
-        list(core.parameters()) + list(expansion.parameters()) + [dim_gate_raw],
-        lr=5e-4)
+        list(core.parameters()) + list(expansion.parameters()) +
+        [dim_gate_raw, phase_memory], lr=5e-4)
     print(f"[core] Core: {core_params:,} + expansion: {exp_params:,} "
-          f"+ dim_gate: {gate_params:,} = {total_params:,} total params")
+          f"+ dim_gate: {gate_params:,} + phase_mem: {mem_params} "
+          f"= {total_params:,} total params")
 
-    # Phase 3: Distillation loop over 21 blocks
+    # Phase 3: Sweep training passes — double-buffered NVMe reads
     n_blocks = len(gdn_layers) // 3
-    print(f"\n[distill] {n_blocks} blocks, each = 1 gradient step")
-    loss_history = []
-    res_history = []
+    pass_values = [3, 5, 10, 20, 50, 100]
+    sweep_results = {}
 
-    for block_idx in range(n_blocks):
+    def pre_read_block(block_idx):
+        """Read block from NVMe in background thread."""
         gdn = gdn_layers[block_idx*3:block_idx*3+3]
-
-        # Find SSM/attention projection tensor for this block
-        block_name = None
-        block_info = None
         for name, info in tensors.items():
             for lid in gdn:
                 if f'.{lid}.' in name and ('ssm_out' in name or 'attn_output' in name):
-                    block_name = name; block_info = info; break
-            if block_name: break
-        if not block_name:
-            continue
+                    off = info['offset']
+                    weight_bytes = bytes(mm[off:off + info['size']])
+                    w = f16_to_torch(weight_bytes)
+                    return w.reshape(tuple(int(d) for d in info['shape'])), info['size'], name
+        return None, 0, None
 
-        # Read 27B weight block from NVMe
-        off = block_info['offset']
-        weight_bytes = bytes(mm[off:off + block_info['size']])
-        weight_27b = f16_to_torch(weight_bytes).reshape(tuple(int(d) for d in block_info['shape']))
-        stride_mb = block_info['size'] / 1e6
+    for n_passes in pass_values:
+        # Re-init Core + expansion + gate fresh for each sweep
+        core = NativeEigenCore(d=192, heads=4, layers=2, merge='concat', geo_init=True).to(DEVICE)
+        expansion = nn.Linear(192, 6144, bias=False).to(DEVICE)
+        nn.init.normal_(expansion.weight, std=0.02)
+        dim_gate_raw = nn.Parameter(torch.zeros(6144, device=DEVICE))
+        phase_memory = nn.Parameter(torch.randn(192, dtype=torch.cfloat, device=DEVICE) * 0.01)
+        opt = torch.optim.AdamW(
+            list(core.parameters()) + list(expansion.parameters()) +
+            [dim_gate_raw, phase_memory], lr=5e-4)
 
-        # Multiple training passes on this block for convergence
-        n_passes = 5
-        block_losses = []
-        for p in range(n_passes):
-            # Random Feral batch
-            idx = torch.randperm(feral.shape[0], device=DEVICE)[:32]
-            feral_batch = feral[idx]  # (32, 192)
+        loss_hist = []
+        res_hist = []
+        mem_baseline = torch.cuda.memory_allocated() // 1024**2 if DEVICE.type == 'cuda' else 0
 
-            # Teacher: project Feral through 27B weights
-            with torch.no_grad():
-                proj_27b = project_27b(feral_batch, weight_27b)  # (32, out_dim)
+        # Pipeline: background thread continuously pre-reads + decodes blocks
+        # GPU trains from queue without ever waiting for NVMe
+        buf = queue.Queue(maxsize=4)  # deep buffer keeps NVMe saturated
 
-            # Student: Core + gated expansion -> full 27B output space
-            z_in = feral_batch.unsqueeze(1)  # (32, 1, 192)
-            z_out, coh = core(z_in)
-            z_core = z_out.mean(dim=1).real  # (32, 192)
-            z_expanded = expansion(z_core)  # (32, 6144)
+        def pre_read_all():
+            for bi in range(n_blocks):
+                w, sz, name = pre_read_block(bi)
+                if w is not None:
+                    buf.put((w, sz, name, bi))
+            buf.put(None)  # sentinel
 
-            # Living dimension gate: soft mask over output dims
-            dim_gate = torch.sigmoid(dim_gate_raw)  # (6144,) in [0,1]
-            z_gated = z_expanded * dim_gate  # weight by learned importance
+        reader = threading.Thread(target=pre_read_all, daemon=True)
+        reader.start()
 
-            # Loss: gated Core output vs 27B projection in full 6144-dim
-            core_norm = z_gated / (z_gated.norm(dim=1, keepdim=True) + 1e-8)
-            proj_norm = proj_27b / (proj_27b.norm(dim=1, keepdim=True) + 1e-8)
-            resonance = (core_norm * proj_norm).sum(dim=1).mean()
-            loss = 1.0 - resonance
+        block_idx = 0
+        while True:
+            item = buf.get()
+            if item is None: break
+            weight_27b, sz, block_name, bi = item
+            stride_mb = sz / 1e6
 
-            # Sparsity bonus: encourage gate to be sparse (fewer active dims)
-            loss = loss + 0.001 * dim_gate.mean()  # L1 penalty on gate activation
-            block_losses.append(loss.item())
+            block_losses = []
+            for p in range(n_passes):
+                # Large batch — saturate GPU compute
+                idx = torch.randperm(feral.shape[0], device=DEVICE)[:256]
+                if feral.shape[0] < 256:
+                    # Repeat vectors if pool is small
+                    reps = (256 + feral.shape[0] - 1) // feral.shape[0]
+                    idx = torch.cat([torch.randperm(feral.shape[0], device=DEVICE)
+                                     for _ in range(reps)])[:256]
+                feral_batch = feral[idx]
+                B = feral_batch.shape[0]
+                with torch.no_grad():
+                    proj_27b = project_27b(feral_batch, weight_27b)
 
-            opt.zero_grad()
-            loss.backward()
-            torch.nn.utils.clip_grad_norm_(list(core.parameters()) + list(expansion.parameters()), 1.0)
-            opt.step()
+                mem_token = phase_memory.unsqueeze(0).expand(B, 1, 192)
+                z_in = torch.cat([feral_batch.unsqueeze(1), mem_token], dim=1)
+                z_out, coh = core(z_in)
+                z_feral_out = z_out[:, 0, :]
+                z_mem_out = z_out[:, 1, :]
 
-        avg_block_loss = sum(block_losses) / len(block_losses)
-        loss_history.append(avg_block_loss)
-        res_history.append(resonance.item())
+                # Update memory with fixed gate
+                with torch.no_grad():
+                    phase_memory.data = 0.9 * phase_memory.data + \
+                                        0.1 * z_mem_out.mean(dim=0).detach()
 
-        print(f"  block {block_idx:2d}: {block_name} {stride_mb:.0f}MB | "
-              f"L={avg_block_loss:.4f} res={resonance.item():.4f} "
-              f"x{n_passes} passes", flush=True)
+                z_expanded = expansion(z_feral_out.real)
+                dim_gate = torch.sigmoid(dim_gate_raw)
+                z_gated = z_expanded * dim_gate
+                core_norm = z_gated / (z_gated.norm(dim=1, keepdim=True) + 1e-8)
+                proj_norm = proj_27b / (proj_27b.norm(dim=1, keepdim=True) + 1e-8)
+                resonance = (core_norm * proj_norm).sum(dim=1).mean()
+                loss = 1.0 - resonance + 0.001 * dim_gate.mean()
+                block_losses.append(loss.item())
+                opt.zero_grad(); loss.backward()
+                torch.nn.utils.clip_grad_norm_(list(core.parameters()) + list(expansion.parameters()) + [dim_gate_raw, phase_memory], 1.0)
+                opt.step()
 
-        # Free GPU memory for this block
-        del weight_27b
+            loss_hist.append(sum(block_losses)/len(block_losses))
+            res_hist.append(resonance.item())
+            del weight_27b
 
-    # Phase 4: Results
-    if loss_history:
-        avg_loss = sum(loss_history) / len(loss_history)
-        final_loss = loss_history[-1]
-        loss_delta = loss_history[0] - loss_history[-1]
-        avg_res = sum(res_history) / len(res_history)
-        active_dims = (torch.sigmoid(dim_gate_raw) > 0.5).sum().item()
-        gate_mean = torch.sigmoid(dim_gate_raw).mean().item()
+        final_loss = loss_hist[-1] if loss_hist else 0
+        final_res = res_hist[-1] if res_hist else 0
+        sweep_results[n_passes] = {'final_loss': final_loss, 'final_res': final_res,
+                                    'mem_mag': phase_memory.abs().mean().item()}
+        final_loss = loss_hist[-1] if loss_hist else 0
+        final_res = res_hist[-1] if res_hist else 0
+        final_mem = torch.cuda.memory_allocated() // 1024**2 if DEVICE.type == 'cuda' else 0
+        sweep_results[n_passes] = {'final_loss': final_loss, 'final_res': final_res,
+                                    'mem_mag': phase_memory.abs().mean().item()}
+        catalytic = abs(final_mem - mem_baseline) < 10  # within 10MB = catalytic
+        print(f"  passes={n_passes:3d}: L={final_loss:.4f} res={final_res:.4f} "
+              f"|mem|={sweep_results[n_passes]['mem_mag']:.4f} "
+              f"mem={final_mem}MB (baseline={mem_baseline}MB) "
+              f"{'CATALYTIC' if catalytic else 'LEAK'}",
+              flush=True)
 
-        print(f"\n[results] {len(loss_history)} blocks distilled")
-        print(f"  Core: {core_params:,} + expansion: {exp_params:,} + dim_gate: {gate_params:,} "
-              f"= {total_params:,} params")
-        print(f"  27B weights: 0 bytes RAM (NVMe mmap)")
-        print(f"  Loss: {avg_loss:.4f} avg, {loss_history[0]:.4f} -> {final_loss:.4f} "
-              f"(delta={loss_delta:+.4f})")
-        print(f"  Resonance: {avg_res:.4f} avg")
-        print(f"  Dimension gate: {active_dims}/6144 dims active "
-              f"({active_dims/6144*100:.1f}%), mean_gate={gate_mean:.3f}")
-        print(f"  Effective information density: {active_dims/192:.1f}x expansion")
-
-        if loss_delta > 0:
-            print(f"  CONVERGING — Core is learning the 27B phase curvature")
+    # Find optimal
+    best = max(sweep_results, key=lambda g: sweep_results[g]['final_res'])
+    print(f"\n[sweep] Best passes: {best} (resonance={sweep_results[best]['final_res']:.4f})")
+    res_str = " | ".join(f"p={p}:res={v['final_res']:.4f}" for p,v in sweep_results.items())
+    print(f"[sweep] Full: {res_str}")
 
 
 if __name__ == '__main__':
