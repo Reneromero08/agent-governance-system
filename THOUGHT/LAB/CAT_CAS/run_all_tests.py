@@ -13,7 +13,8 @@ DIRS = [
     "02_slack_space",
     "03_visual_bmp",
     "04_thermodynamic_cpu",
-    "05_multibit_compiler"
+    "05_multibit_compiler",
+    "06_catalytic_neural_network"
 ]
 for d in DIRS:
     sys.path.insert(0, os.path.join(CAT_CAS_DIR, d))
@@ -99,7 +100,9 @@ def main():
         os.path.join(CAT_CAS_DIR, "02_slack_space", "run_app_cat.py"),
         os.path.join(CAT_CAS_DIR, "03_visual_bmp", "run_image_cat.py"),
         os.path.join(CAT_CAS_DIR, "04_thermodynamic_cpu", "landauer_experiment.py"),
-        os.path.join(CAT_CAS_DIR, "05_multibit_compiler", "compiler_experiment.py")
+        os.path.join(CAT_CAS_DIR, "05_multibit_compiler", "compiler_experiment.py"),
+        os.path.join(CAT_CAS_DIR, "06_catalytic_neural_network", "generate_model_and_data.py"),
+        os.path.join(CAT_CAS_DIR, "06_catalytic_neural_network", "catalytic_inference.py")
     ]
 
     all_passed = True
