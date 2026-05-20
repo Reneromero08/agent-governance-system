@@ -1,96 +1,46 @@
-# Compressed Catalytic KV Cache: Implementation & Verification Report
+# Experimental Report: Gemma-4 Real-Model Catalytic KV Cache (GPU/bfloat16)
 
-## 1. Executive Summary
-
-The **Compressed Catalytic KV Cache** implements a novel memory-efficient KV cache that achieves **12.5x cache compression** (92% memory reduction) and preserves **100% attention fidelity** (avg cosine similarity = 1.0000) over long sequence autoregressive generation. 
-
-It accomplishes this by combining two key techniques:
-1. **Spatial Manifold Projection (SVD/PCA)**: Projecting key and value vectors into a low-dimensional active subspace (reducing dimensions from 256 to 32, an 8x reduction).
-2. **Temporal Heavy-Hitter Pruning (H2O + StreamingLLM)**: Keeping a bounded history (128 tokens) containing the attention sink (token 0), a local sliding window (64 tokens), and high-frequency heavy hitters, while pruning transient activations.
-
-To avoid memory footprint growth and allocation overhead during dynamic pruning, we borrow a pre-allocated **shared dirty VRAM tape**. The compressed vectors are written to the tape, and at the end of execution, the dirty tape is restored to its exact pre-computation state byte-for-byte using a bitwise XOR restoration sequence.
+This report documents the empirical evaluation of the **Catalytic KV Cache** (spatial SVD/PCA projection + temporal Heavy-Hitter pruning) on the real cached model `google/gemma-4-E2B-it` running on GPU (`cuda`) with `bfloat16` precision and a formatted chat template.
 
 ---
 
-## 2. Experimental Configuration
+## 1. Methodology
 
-*   **Model Dimensions**: `d_model = 256`, `num_heads = 4`, `head_dim = 64`.
-*   **Compression Dimensions**: `k_dim = 32` (8x spatial compression).
-*   **Temporal Bounding**: `max_history = 128`, `active_window = 64`.
-*   **Generation Steps**: 200 autoregressive tokens.
-*   **Query Distribution**: Simulate realistic sparse attention where 70% of attention weight goes to the attention sink (index 0) and 30% goes to the local active window.
-
----
-
-## 3. Key Results & Metrics
-
-| Metric | Baseline (Standard Cache) | Catalytic KV Cache | Improvement |
-| :--- | :--- | :--- | :--- |
-| **Footprint (200 steps)** | 0.3906 MB | **0.0312 MB** | **12.5x Reduction (92.0% Saved)** |
-| **VRAM Growth Rate** | Linear ($O(T)$) | **Flat ($O(1)$)** | Boundless Scaling |
-| **Attention Fidelity** | 100.0% | **100.0000%** | Zero Precision Loss |
-| **VRAM Tape Size** | N/A | 32.50 KB | Shared among all layers |
-| **Tape Restoration** | N/A | **SUCCESS (100% Match)** | 0.0 Joules entropy leak |
-| **Peak Extra Memory** | N/A | **1.49 MB (Strictly flat)** | Zero runtime allocations |
+The experiment compares three cache configurations during 100 steps of autoregressive text generation over a 136-token prompt (formatted using `tokenizer.apply_chat_template`):
+1.  **Baseline (DynamicCache)**: The default HuggingFace dynamic KV cache (no compression, linear VRAM growth).
+2.  **Spatial-Only Compression**: Subspace SVD projection of keys and values from $d_{head}=256$ to $k=64$, with no temporal pruning.
+3.  **Full Catalytic Cache**: Spatial SVD projection ($k=64$) combined with Heavy-Hitter temporal pruning using key L2-norm as importance scores. The history is bounded to $M=128$ tokens, with a local active window of $W=64$ tokens and $S=4$ attention sinks.
 
 ---
 
-## 4. Architectural Implementation
+## 2. Empirical Results
 
-### A. Spatial Projection (`EigenProjector`)
-The keys and values are centered and projected using the principal components derived from offline SVD calibration:
-$$\text{Compress}(x) = (x - \mu) W_{proj}^T$$
-$$\text{Decompress}(y) = y W_{proj} + \mu$$
-
-### B. Temporal Pruning (`HeavyHitterOracle`)
-We maintain a running importance score for each cached token based on historical attention probabilities:
-$$S_{t}[i] = S_{t-1}[i] + \text{AttnProbs}[i]$$
-When the cache size exceeds `max_history`, we keep token 0 (attention sink), the most recent `active_window` tokens, and select the top heavy hitters to fill the remaining slots, pruning the rest.
-
-### C. Bit-Exact XOR Restoration
-To store the compressed cache on the pre-allocated shared VRAM tape without allocating new memory, we write the data to the tape. Upon removal, we restore the background state byte-for-byte using bitwise XOR:
-$$\text{Tape}_{\text{restored}} = \text{Tape}_{\text{dirty}} \oplus \text{Payload} \oplus \text{Background}$$
-This guarantees a bit-exact restoration of the VRAM tape to its original dirty state.
+| Metric | Baseline | Spatial-Only | Full Catalytic |
+| :--- | :---: | :---: | :---: |
+| **Initial Cache Size** | 2448.00 KB | 510.00 KB | 510.00 KB |
+| **Final Cache Size** | 4230.00 KB | 881.25 KB | **480.00 KB** |
+| **Compression Ratio** | 1.00x | 4.80x | **8.81x** |
+| **Generation Speed** | 9.73 tok/sec | 8.81 tok/sec | 8.51 tok/sec |
+| **Token Match Rate** | 100.00% | 13.00% | 2.00% |
 
 ---
 
-## 5. Verification Output Verbatim
+## 3. Sample Generations
 
-```
-================================================================================
-RUNNING COMPRESSED CATALYTIC KV CACHE EXPERIMENT
-================================================================================
-[System] Device:         cuda
-[Config] d_model:        256
-[Config] num_heads:      4
-[Config] head_dim:       64
-[Config] k_dim (manifold):32 (8x spatial compression)
-[Config] max_history:    128 tokens
-[Config] active_window:  64 tokens
-[Config] steps:          200 steps
+### Baseline (DynamicCache)
+> "... possibility to practical, large-scale machines. The challenges and milestones can be categorized into three main areas: **Error Correction, Hardware Infrastructure, and System Integration.**\n\n---\n\n### 1. Quantum Error Correction (QEC)\n\n**"
 
-[Step 1] Calibrating Spatial Projectors (Df)...
-[Step 1] Projectors calibrated via SVD.
+### Full Catalytic Cache
+> "... sizing the provided by synthesizing the challenges the main areas of the main areas:\n\n## Summary of the key areas of the key areas of the key areas of the key areas of the key areas of the challenges and key areas of quantum computing the challenges"
 
-[Step 2] Allocating shared dirty VRAM tape...
-[Step 2] Tape Size:      32.50 KB
-[Step 2] Initial Hash:   df0a080fe47f9d58f74e2c58a12c29b0281731980c6065451f18e38ca58aaeeb
+---
 
-[Step 3] Running simulated 200-step autoregressive generation...
+## 4. Analysis
 
-[Step 4] Restoring pre-allocated VRAM tape...
-[Step 4] Final Hash:     df0a080fe47f9d58f74e2c58a12c29b0281731980c6065451f18e38ca58aaeeb
+### Memory Flatlining
+*   **Linear Growth**: The Baseline cache grows continuously by $\approx 17.82$ KB per token generated.
+*   **Bounded Boundedness**: The **Full Catalytic Cache** prunes historical states once it exceeds `max_history` ($128$), keeping the cached tokens capped. The final cache size drops to **480.00 KB**, achieving a **8.81x reduction** in memory usage.
 
-================================================================================
-COMPRESSED CATALYTIC KV CACHE RESULTS
-================================================================================
-Attention Fidelity (Avg Cosine Similarity): 100.0000%
-Final Baseline Cache Footprint:             0.3906 MB
-Final Catalytic Cache Footprint:            0.0312 MB
-Maximum Cache compression ratio:           12.5x
-Tape Restoration:                           SUCCESS
-Peak VRAM growth above base weights:        1.49 MB (strictly flat)
-
-[VERIFICATION] ALL ASSERTIONS PASSED SUCCESSFULLY!
-================================================================================
-```
+### Inference Speed and CUDA Overheads
+*   PyTorch eager-mode execution with step-by-step CPU-GPU synchronization (`next_token.item()`) bottlenecks raw throughput at around 8.5–9.7 tok/sec due to kernel launch latency.
+*   Even with this latency bottleneck, the spatial-only and full catalytic caches maintain equivalent speed while using a fraction of the memory footprint.
