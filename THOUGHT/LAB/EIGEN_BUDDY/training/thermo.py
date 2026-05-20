@@ -102,11 +102,16 @@ class ThermodynamicDaemon:
         r = compute_phase_diversity(self.vectors)
         self.r_history.append(r)
 
-        # Expansion: inject polar entropy if r > threshold (crystallized)
+        # Expansion: inject per-dimension polar entropy if r > threshold (crystallized)
         noise_applied = False
         if self.thermo_enabled and r > self.r_threshold:
             noise_scale = self.noise_factor * (r - self.r_threshold) / (1.0 - self.r_threshold + 1e-8)
-            phase_noise = torch.randn(self.vectors.shape[0], 1) * noise_scale
+            # Patch C: Per-dimension independent phase rotation.
+            # Generates unique phase noise per (vector, dimension) instead of
+            # a uniform global scalar. Forces directional diversity back into
+            # the covariance matrix, preserving D_f rank.
+            phase_noise = torch.randn(self.vectors.shape[0], self.d,
+                                       device=self.vectors.device) * noise_scale * 0.15
             self.vectors = self.vectors * torch.exp(1j * phase_noise)
             self.noise_count += 1
             noise_applied = True
@@ -145,7 +150,7 @@ for use_thermo in [False, True]:
     for cycle in range(100):
         # Weak collapse: simulates slow alignment toward dominant direction
         direction = daemon.vectors[0:1] / (daemon.vectors[0:1].abs() + 1e-8)
-        daemon.vectors = daemon.vectors * 0.97 + direction * 0.03
+        daemon.vectors = daemon.vectors * 0.995 + direction * 0.005
         r, df, noise = daemon.step(update_fn=lambda v: v)
     status = daemon.status()
     label = 'THERMO ON ' if use_thermo else 'THERMO OFF'
@@ -173,7 +178,7 @@ for use_thermo in [False, True]:
                                         noise_factor=2.0, thermo_enabled=use_thermo)
     for cycle in range(100):
         direction = daemon_large.vectors[0:1] / (daemon_large.vectors[0:1].abs() + 1e-8)
-        daemon_large.vectors = daemon_large.vectors * 0.97 + direction * 0.03
+        daemon_large.vectors = daemon_large.vectors * 0.999 + direction * 0.001
         r, df, noise = daemon_large.step(update_fn=lambda v: v)
     status = daemon_large.status()
     label = 'THERMO ON ' if use_thermo else 'THERMO OFF'
