@@ -2,7 +2,7 @@
 
 **Date:** 2026-05-19
 **Sprint:** Foundational proofs → Architecture assembly → Math Curriculum → Catalytic Phase
-**Status:** 14/15 sections passing. Hybrid Core built. Phase = catalytic substrate proven.
+**Status:** 15/15 sections passing. Unified model: 6/7 domains 100%. Ceilings documented.
 
 ---
 
@@ -16,7 +16,7 @@
 | 4 | Polynomials | 99.2% | Iterative spiral (4 cycles) |
 | 5 | f(g(x)) | 99.9% | BidiAttn |
 | 6 | Sequences | 93% | BidiAttn |
-| 7 | 2x2 Systems | 85.4% | BidiAttn (cross-token ceiling) |
+| 7 | 2x2 Systems | **98.5%** | Cramer structural bias + classification |
 | 8 | Derivatives | 100% | BidiAttn |
 | 9 | Trig | 99.8% | BidiAttn |
 | 10 | Complex | 100% | Separate embeddings (key unlock) |
@@ -67,16 +67,41 @@
 | models/narrow.py | Narrow boundary (Unlock 3) |
 | models/contrastive.py | Contrastive loss (Unlock 1) |
 | models/holographic.py | Holographic ensemble (robustness) |
+| models/unified.py | Unified math model (7 domains, 492K params, 6/7 at 100%) |
+| models/close_gaps.py | Gap analysis (focal loss, separate node embedding) |
+| models/capstone_fixes.py | Capstone fix designs (S7 focal, S15 node, Sin bucketize) |
+| models/push_s7.py | S7 structural Cramer bias (98.5%) |
 | training/thermo.py | Thermodynamic daemon (Unlock 2) |
 | feral/reasoner.py | NativeEigenReasoner (Feral integration) |
 
+## Architecture Ceilings
+
+| Section | Ceiling | Root Cause | Fix Designed |
+|---------|---------|-----------|-------------|
+| S7 Systems | 98.5% | Boundary smearing on large determinants | Cramer bias + classification |
+| S15 Graph | 93.7% | Adjacency row ambiguity when rows share correlation | Catalytic rounds |
+| S1 // | 98.0% | Long-tail quotient distribution starves large-value gradients | Oversample |
+| S9 Sin | MAE 9.5 | Continuous regression cannot hit 100% | Bucketize into classification |
+
+## Unified Math Model
+
+| Domain | Result | Key |
+|--------|--------|-----|
+| add | 100% | Per-section A/B embeddings |
+| mult | 100% | 2x data + wider range |
+| linear | 100% | Classification over discrete x |
+| seq | 100% | BidiAttn |
+| deriv | 100% | BidiAttn |
+| sin | MAE 9.5 | Continuous output |
+| bool | 100% | BidiAttn |
+
 ## Next
 
-- [x] Math curriculum 14/15 passing (only S7 at 85.4% below target)
+- [x] Math curriculum 15/15 passing
 - [x] Catalytic phase theory: si = reusable substrate, standard attention already catalytic
-- [ ] Hybrid Core per-task tuning (more std layers for systems, more cat rounds for sets)
+- [x] Hybrid Core per-task tuning (core/hybrid.py built, catalytic rounds for iterative, std for cross-token)
 - [ ] Production daemon loop with Core + Feral DB
-- [ ] Q36 mathematics (implicate/explicate bridge)
+- [x] Q36 mathematics (implicate/explicate bridge) — Rene completed
 - [x] Cassette self-correction (87.5% → 96.0%), Phase coherence gate, Dipole coupling
 
 ### Phase 2: Infrastructure
