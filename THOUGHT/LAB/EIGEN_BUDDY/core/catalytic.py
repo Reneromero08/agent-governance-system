@@ -132,18 +132,19 @@ for _ in range(8000):
     data.append(([a,b],math.gcd(a,b)))
 random.shuffle(data);tr,te=data[:6400],data[6400:]
 
-for H,rounds in [(8,2),(8,4)]:
-    m=CatalyticGCD(50,64,H,rounds)
-    opt=torch.optim.AdamW(m.parameters(),lr=5e-3)
-    P=sum(p.numel() for p in m.parameters())
-    for ep in range(40):
-        for i in range(0,len(tr),128):
-            b=tr[i:i+128]
-            if not b: continue
-            x_t=torch.tensor([x[0] for x in b]);y_t=torch.tensor([x[1] for x in b])
-            loss=F.cross_entropy(m(x_t),y_t);opt.zero_grad();loss.backward()
-            torch.nn.utils.clip_grad_norm_(m.parameters(),1.0);opt.step()
-    with torch.no_grad():
-        x_t=torch.tensor([x[0] for x in te]);y_t=torch.tensor([x[1] for x in te])
-        acc=(m(x_t).argmax(-1)==y_t).float().mean().item()
-    print(f"  CatalyticFeistel H={H} rounds={rounds}: acc={acc:.1%} P={P:>6,}")
+if __name__ == '__main__':
+    for H,rounds in [(8,2),(8,4)]:
+        m=CatalyticGCD(50,64,H,rounds)
+        opt=torch.optim.AdamW(m.parameters(),lr=5e-3)
+        P=sum(p.numel() for p in m.parameters())
+        for ep in range(40):
+            for i in range(0,len(tr),128):
+                b=tr[i:i+128]
+                if not b: continue
+                x_t=torch.tensor([x[0] for x in b]);y_t=torch.tensor([x[1] for x in b])
+                loss=F.cross_entropy(m(x_t),y_t);opt.zero_grad();loss.backward()
+                torch.nn.utils.clip_grad_norm_(m.parameters(),1.0);opt.step()
+        with torch.no_grad():
+            x_t=torch.tensor([x[0] for x in te]);y_t=torch.tensor([x[1] for x in te])
+            acc=(m(x_t).argmax(-1)==y_t).float().mean().item()
+        print(f"  CatalyticFeistel H={H} rounds={rounds}: acc={acc:.1%} P={P:>6,}")

@@ -12,11 +12,13 @@ For each 27B weight block read from NVMe via mmap:
 """
 import torch, torch.nn as nn, torch.nn.functional as F
 import numpy as np, mmap, os, struct, hashlib, time, math, sqlite3, threading, queue
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from gguf import GGUFReader
 sys_path = str(Path(__file__).parent.parent)
 import sys; sys.path.insert(0, sys_path)
 from core.engine import NativeEigenCore
+from core.catalytic import CatalyticFeistel
 
 QWEN_27B = r"F:\LLM_Models\lmstudio-models\Qwen3.6-27B\Qwen3.6-27B-F16-mtp.gguf"
 FERAL_DB = r"THOUGHT\LAB\FERAL_RESIDENT\data\db\feral_eternal.db"
@@ -284,91 +286,149 @@ def main():
     print(f"[sweep] Resonance: {res_str}")
     print(f"[sweep] NVMe BW:   {bw_str}")
 
-    # ---- Phase 4: Checkpointed chain — all 21 blocks differentiable, constant memory ----
-    print(f"\n[checkpoint] Pre-reading all {n_blocks} blocks for chained forward pass...")
-    t0 = time.time()
-    all_weights = []
-    for bi in range(n_blocks):
-        w, sz, name, bw = pre_read_block(bi)
-        if w is not None:
-            all_weights.append(w)
-    pre_read_time = time.time() - t0
-    total_mb = sum(w.numel() * w.element_size() / 1e6 for w in all_weights)
-    print(f"[checkpoint] {len(all_weights)} blocks, {total_mb:.0f}MB GPU, "
-          f"pre-read in {pre_read_time:.1f}s")
+    # Phase 4: Streaming checkpointed chain — continuous NVMe + CPU saturation
+    print(f"\n[stream] Continuous streaming chain across {n_blocks} blocks...")
+    core_s = NativeEigenCore(d=192, heads=4, layers=2, merge='concat', geo_init=True).to(DEVICE)
+    expansion_s = nn.Linear(192, 6144, bias=False).to(DEVICE)
+    nn.init.normal_(expansion_s.weight, std=0.02)
+    dim_gate_s = nn.Parameter(torch.zeros(6144, device=DEVICE))
+    phase_mem_s = nn.Parameter(torch.randn(192, dtype=torch.cfloat, device=DEVICE) * 0.01)
+    opt_s = torch.optim.AdamW(
+        list(core_s.parameters()) + list(expansion_s.parameters()) +
+        [dim_gate_s, phase_mem_s], lr=5e-4)
 
-    # Fresh Core for checkpointed chain
-    core_ckpt = NativeEigenCore(d=192, heads=4, layers=2, merge='concat', geo_init=True).to(DEVICE)
-    expansion_ckpt = nn.Linear(192, 6144, bias=False).to(DEVICE)
-    nn.init.normal_(expansion_ckpt.weight, std=0.02)
-    dim_gate_ckpt = nn.Parameter(torch.zeros(6144, device=DEVICE))
-    phase_mem_ckpt = nn.Parameter(torch.randn(192, dtype=torch.cfloat, device=DEVICE) * 0.01)
-    opt_ckpt = torch.optim.AdamW(
-        list(core_ckpt.parameters()) + list(expansion_ckpt.parameters()) +
-        [dim_gate_ckpt, phase_mem_ckpt], lr=5e-4)
+    mem_before_s = torch.cuda.memory_allocated() // 1024**2 if DEVICE.type == 'cuda' else 0
+    n_stream_passes = 5
+    stream_losses = []
 
-    mem_before = torch.cuda.memory_allocated() // 1024**2 if DEVICE.type == 'cuda' else 0
-    print(f"[checkpoint] Memory before chain: {mem_before}MB")
+    for sp in range(n_stream_passes):
+        # Hyperthreaded re-read: decode all 21 blocks in parallel from NVMe
+        with ThreadPoolExecutor(max_workers=8) as pool:
+            futures = [pool.submit(pre_read_block, bi) for bi in range(n_blocks)]
+            all_weights_s = []
+            for f in futures:
+                r = f.result()
+                if r[0] is not None: all_weights_s.append(r[0])
 
-    # Single massive chained forward: all 21 blocks, one backward pass
-    n_chain_passes = 5
-    chain_losses = []
-    for cp in range(n_chain_passes):
         idx = torch.randperm(feral.shape[0], device=DEVICE)[:256]
-        B = idx.shape[0]
         feral_batch = feral[idx]
-
         total_loss = torch.tensor(0.0, device=DEVICE)
-        phase_mem_current = phase_mem_ckpt.detach().clone()
+        pm = phase_mem_s.detach().clone()
 
-        for bi, weight_27b in enumerate(all_weights):
-            # Checkpoint this block: activations freed, recomputed during backward
-            def block_forward(w, fb, pm):
+        for weight_27b in all_weights_s:
+            def block_forward_s(w, fb, pm):
                 with torch.no_grad():
                     proj = project_27b(fb, w)
                 mem_tok = pm.unsqueeze(0).expand(fb.shape[0], 1, 192)
                 z_in = torch.cat([fb.unsqueeze(1), mem_tok], dim=1)
-                z_out, _ = core_ckpt(z_in)
-                z_feral = z_out[:, 0, :]
-                z_mem = z_out[:, 1, :]
+                z_out, _ = core_s(z_in)
+                z_feral = z_out[:, 0, :]; z_mem = z_out[:, 1, :]
                 new_pm = 0.9 * pm + 0.1 * z_mem.mean(dim=0)
-                z_exp = expansion_ckpt(z_feral.real)
-                dg = torch.sigmoid(dim_gate_ckpt)
-                zg = z_exp * dg
+                z_exp = expansion_s(z_feral.real)
+                dg = torch.sigmoid(dim_gate_s); zg = z_exp * dg
                 cn = zg / (zg.norm(dim=1, keepdim=True) + 1e-8)
                 pn = proj / (proj.norm(dim=1, keepdim=True) + 1e-8)
                 res = (cn * pn).sum(dim=1).mean()
                 return 1.0 - res + 0.001 * dg.mean(), new_pm
 
-            loss_i, phase_mem_current = torch.utils.checkpoint.checkpoint(
-                block_forward, weight_27b, feral_batch, phase_mem_current,
-                use_reentrant=False)
+            loss_i, pm = torch.utils.checkpoint.checkpoint(
+                block_forward_s, weight_27b, feral_batch, pm, use_reentrant=False)
             total_loss = total_loss + loss_i
 
-        avg_loss = total_loss / len(all_weights)
-        chain_losses.append(avg_loss.item())
-        opt_ckpt.zero_grad()
-        avg_loss.backward()
+        avg_loss = total_loss / len(all_weights_s)
+        stream_losses.append(avg_loss.item())
+        opt_s.zero_grad(); avg_loss.backward()
         torch.nn.utils.clip_grad_norm_(
-            list(core_ckpt.parameters()) + list(expansion_ckpt.parameters()) +
-            [dim_gate_ckpt, phase_mem_ckpt], 1.0)
-        opt_ckpt.step()
+            list(core_s.parameters()) + list(expansion_s.parameters()) +
+            [dim_gate_s, phase_mem_s], 1.0)
+        opt_s.step()
 
-        # Update phase memory with accumulated context from chain
         with torch.no_grad():
-            phase_mem_ckpt.data = phase_mem_current.detach()
+            phase_mem_s.data = pm.detach()
+
+        # Clear weight tensors to free GPU (they're re-read next pass anyway)
+        all_weights_s.clear()
 
         mem_during = torch.cuda.memory_allocated() // 1024**2 if DEVICE.type == 'cuda' else 0
-        print(f"  chain pass {cp}: L={avg_loss.item():.4f} mem={mem_during}MB", flush=True)
+        print(f"  stream pass {sp}: L={avg_loss.item():.4f} mem={mem_during}MB", flush=True)
 
-    mem_after = torch.cuda.memory_allocated() // 1024**2 if DEVICE.type == 'cuda' else 0
-    final_loss_ckpt = chain_losses[-1] if chain_losses else 0
-    print(f"\n[checkpoint] Memory: {mem_before}MB -> {mem_after}MB "
-          f"(delta={mem_after-mem_before}MB)")
-    print(f"[checkpoint] Loss: {chain_losses[0]:.4f} -> {final_loss_ckpt:.4f} "
-          f"(delta={chain_losses[0]-final_loss_ckpt:+.4f})")
-    print(f"[checkpoint] Phase memory through full landscape: "
-          f"|mem|={phase_mem_ckpt.abs().mean().item():.4f}")
+    mem_after_s = torch.cuda.memory_allocated() // 1024**2 if DEVICE.type == 'cuda' else 0
+    fl = stream_losses[-1] if stream_losses else 0
+    print(f"\n[stream] Memory: {mem_before_s}MB -> {mem_after_s}MB "
+          f"(delta={mem_after_s-mem_before_s}MB)")
+    print(f"[stream] Loss: {stream_losses[0]:.4f} -> {fl:.4f} "
+          f"(delta={stream_losses[0]-fl:+.4f})")
+
+    # ---- Phase 5: Feistel chain — architecturally reversible, no checkpoint() needed ----
+    print(f"\n[feistel] CatalyticFeistel chain — reversible attention rounds, no checkpoint()")
+    feistel = CatalyticFeistel(d=192, heads=8, rounds=6).to(DEVICE)
+    expansion_f = nn.Linear(192, 6144, bias=False).to(DEVICE)
+    nn.init.normal_(expansion_f.weight, std=0.02)
+    dim_gate_f = nn.Parameter(torch.zeros(6144, device=DEVICE))
+    phase_mem_f = nn.Parameter(torch.randn(192, dtype=torch.cfloat, device=DEVICE) * 0.01)
+    opt_f = torch.optim.AdamW(
+        list(feistel.parameters()) + list(expansion_f.parameters()) +
+        [dim_gate_f, phase_mem_f], lr=5e-4)
+
+    mem_before_f = torch.cuda.memory_allocated() // 1024**2 if DEVICE.type == 'cuda' else 0
+    n_feistel_passes = 10
+    feistel_losses = []
+
+    for fp in range(n_feistel_passes):
+        # Hyperthreaded re-read from NVMe every pass
+        with ThreadPoolExecutor(max_workers=8) as pool:
+            futures = [pool.submit(pre_read_block, bi) for bi in range(n_blocks)]
+            f_weights = [f.result() for f in futures]
+
+        idx = torch.randperm(feral.shape[0], device=DEVICE)[:256]
+        feral_batch = feral[idx]
+        total_loss = torch.tensor(0.0, device=DEVICE)
+        pm = phase_mem_f.detach().clone()
+
+        for result in f_weights:
+            if result[0] is None: continue
+            weight_27b = result[0]
+            with torch.no_grad():
+                proj = project_27b(feral_batch, weight_27b)
+            mem_tok = pm.unsqueeze(0).expand(feral_batch.shape[0], 1, 192)
+            z_in = torch.cat([feral_batch.unsqueeze(1), mem_tok], dim=1)
+
+            # Feistel forward: naturally reversible, si matrix restored per round
+            z_out, total_si = feistel(z_in)
+
+            z_feral = z_out[:, 0, :]
+            z_mem = z_out[:, 1, :]
+            pm = 0.9 * pm + 0.1 * z_mem.mean(dim=0)
+            z_exp = expansion_f(z_feral.real)
+            dg = torch.sigmoid(dim_gate_f)
+            zg = z_exp * dg
+            cn = zg / (zg.norm(dim=1, keepdim=True) + 1e-8)
+            pn = proj / (proj.norm(dim=1, keepdim=True) + 1e-8)
+            res = (cn * pn).sum(dim=1).mean()
+            total_loss = total_loss + (1.0 - res + 0.001 * dg.mean())
+
+        avg_loss = total_loss / len(f_weights)
+        feistel_losses.append(avg_loss.item())
+        opt_f.zero_grad()
+        avg_loss.backward()
+        torch.nn.utils.clip_grad_norm_(
+            list(feistel.parameters()) + list(expansion_f.parameters()) +
+            [dim_gate_f, phase_mem_f], 1.0)
+        opt_f.step()
+
+        with torch.no_grad():
+            phase_mem_f.data = pm.detach()
+
+        mem_during_f = torch.cuda.memory_allocated() // 1024**2 if DEVICE.type == 'cuda' else 0
+        print(f"  feistel pass {fp}: L={avg_loss.item():.4f} mem={mem_during_f}MB "
+              f"si_mag={total_si.abs().mean().item():.4f}", flush=True)
+
+    mem_after_f = torch.cuda.memory_allocated() // 1024**2 if DEVICE.type == 'cuda' else 0
+    print(f"\n[feistel] Memory: {mem_before_f}MB -> {mem_after_f}MB "
+          f"(delta={mem_after_f-mem_before_f}MB)")
+    print(f"[feistel] Loss: {feistel_losses[0]:.4f} -> {feistel_losses[-1]:.4f} "
+          f"(delta={feistel_losses[0]-feistel_losses[-1]:+.4f})")
+    print(f"[feistel] si (catalytic tape) mean: |si|={total_si.abs().mean().item():.4f}")
 
 
 if __name__ == '__main__':
