@@ -61,15 +61,20 @@ def thermodynamic_cycle(vectors, learning_updates, target_df, cycle_count):
 class ThermodynamicDaemon:
     """Track D: Autonomous entropy cycling daemon for Feral Resident integration.
 
-    Monitors Kuramoto order parameter r. When r > 0.8 (crystallization),
+    Monitors Kuramoto order parameter r. When r > r_threshold (crystallization),
     injects polar phase noise: vectors *= exp(1j * phase_noise).
     D_f = N * (1 - r) tracks phase participation ratio.
     Preserves magnitudes |z|, only shifts phase angles.
 
+    r_threshold default = 1/(2*pi) ≈ 0.159 — empirical Feral Resident threshold:
+      - r < 0.159: system collapses (below critical coupling)
+      - r > 0.159: system goes chaotic (above critical coupling)
+      - r ≈ 0.159: critical point — maximal phase diversity without collapse
+
     Success: D_f stable within 10% of initialized value after 100 cycles.
-    Reference: ROADMAP_2_2 Track D, HANDOFF_V2.md
+    Reference: ROADMAP_2_2 Track D, HANDOFF_V2.md, Feral Resident empirical
     """
-    def __init__(self, d=64, n_vectors=8904, r_threshold=0.8, noise_factor=0.5,
+    def __init__(self, d=64, n_vectors=8904, r_threshold=0.159, noise_factor=0.5,
                  thermo_enabled=True):
         self.d = d
         self.r_threshold = r_threshold
@@ -139,50 +144,51 @@ class ThermodynamicDaemon:
         }
 
 # ---- Track D: 100-cycle autonomous daemon test ----
-print("=" * 60)
-print("TRACK D: Thermodynamic Daemon — 100 autonomous cycles")
-print("=" * 60)
+if __name__ == '__main__':
+    print("=" * 60)
+    print("TRACK D: Thermodynamic Daemon — 100 autonomous cycles")
+    print("=" * 60)
 
-for use_thermo in [False, True]:
-    torch.manual_seed(42); random.seed(42)
-    daemon = ThermodynamicDaemon(d=64, n_vectors=200, r_threshold=0.2,
-                                  noise_factor=2.0, thermo_enabled=use_thermo)
-    for cycle in range(100):
-        # Weak collapse: simulates slow alignment toward dominant direction
-        direction = daemon.vectors[0:1] / (daemon.vectors[0:1].abs() + 1e-8)
-        daemon.vectors = daemon.vectors * 0.995 + direction * 0.005
-        r, df, noise = daemon.step(update_fn=lambda v: v)
-    status = daemon.status()
-    label = 'THERMO ON ' if use_thermo else 'THERMO OFF'
-    print(f"  {label}: cycles={status['cycles']} init_df={status['init_df']:.2f} "
-          f"final_df={status['final_df']:.2f} delta={status['delta_pct']:.1f}% "
-          f"noise={status['noise_count']} "
-          f"r: {status['initial_r']:.3f}->{status['final_r']:.3f} "
-          f"{'PASS' if status['passes'] else 'FAIL'}")
+    for use_thermo in [False, True]:
+        torch.manual_seed(42); random.seed(42)
+        daemon = ThermodynamicDaemon(d=64, n_vectors=200, r_threshold=0.2,
+                                      noise_factor=2.0, thermo_enabled=use_thermo)
+        for cycle in range(100):
+            # Weak collapse: simulates slow alignment toward dominant direction
+            direction = daemon.vectors[0:1] / (daemon.vectors[0:1].abs() + 1e-8)
+            daemon.vectors = daemon.vectors * 0.995 + direction * 0.005
+            r, df, noise = daemon.step(update_fn=lambda v: v)
+        status = daemon.status()
+        label = 'THERMO ON ' if use_thermo else 'THERMO OFF'
+        print(f"  {label}: cycles={status['cycles']} init_df={status['init_df']:.2f} "
+              f"final_df={status['final_df']:.2f} delta={status['delta_pct']:.1f}% "
+              f"noise={status['noise_count']} "
+              f"r: {status['initial_r']:.3f}->{status['final_r']:.3f} "
+              f"{'PASS' if status['passes'] else 'FAIL'}")
 
-# ---- Core Integration: apply to Feral DB vectors ----
-print("\n--- Core Integration ---")
-core = NativeEigenCore(d=16, heads=4, layers=2, merge='concat', geo_init=True)
-z = torch.randn(1, 32, 16, dtype=torch.cfloat)
-z_out, _ = core(z)
-phase_angles = torch.cat([l['phase'].ang.data for l in core.layers])
-print(f"  Core phase angles: mean={phase_angles.mean():.3f} std={phase_angles.std():.3f}")
-print(f"  Core phase diversity: r={compute_phase_diversity(torch.exp(1j * phase_angles)):.3f}")
-print("  Thermodynamic daemon ready for autonomous loop integration")
+    # ---- Core Integration: apply to Feral DB vectors ----
+    print("\n--- Core Integration ---")
+    core = NativeEigenCore(d=16, heads=4, layers=2, merge='concat', geo_init=True)
+    z = torch.randn(1, 32, 16, dtype=torch.cfloat)
+    z_out, _ = core(z)
+    phase_angles = torch.cat([l['phase'].ang.data for l in core.layers])
+    print(f"  Core phase angles: mean={phase_angles.mean():.3f} std={phase_angles.std():.3f}")
+    print(f"  Core phase diversity: r={compute_phase_diversity(torch.exp(1j * phase_angles)):.3f}")
+    print("  Thermodynamic daemon ready for autonomous loop integration")
 
-# ---- Large-scale test: 8904 vectors (Feral DB size) with aggressive collapse ----
-print("\n--- Feral-Scale Test (8904 vectors) ---")
-for use_thermo in [False, True]:
-    torch.manual_seed(42); random.seed(42)
-    daemon_large = ThermodynamicDaemon(d=64, n_vectors=8904, r_threshold=0.2,
-                                        noise_factor=2.0, thermo_enabled=use_thermo)
-    for cycle in range(100):
-        direction = daemon_large.vectors[0:1] / (daemon_large.vectors[0:1].abs() + 1e-8)
-        daemon_large.vectors = daemon_large.vectors * 0.999 + direction * 0.001
-        r, df, noise = daemon_large.step(update_fn=lambda v: v)
-    status = daemon_large.status()
-    label = 'THERMO ON ' if use_thermo else 'THERMO OFF'
-    print(f"  {label}: init_df={status['init_df']:.2f} "
-          f"final_df={status['final_df']:.2f} delta={status['delta_pct']:.1f}% "
-          f"noise={status['noise_count']} "
-          f"{'PASS' if status['passes'] else 'FAIL'}")
+    # ---- Large-scale test: 8904 vectors (Feral DB size) with aggressive collapse ----
+    print("\n--- Feral-Scale Test (8904 vectors) ---")
+    for use_thermo in [False, True]:
+        torch.manual_seed(42); random.seed(42)
+        daemon_large = ThermodynamicDaemon(d=64, n_vectors=8904, r_threshold=0.2,
+                                            noise_factor=2.0, thermo_enabled=use_thermo)
+        for cycle in range(100):
+            direction = daemon_large.vectors[0:1] / (daemon_large.vectors[0:1].abs() + 1e-8)
+            daemon_large.vectors = daemon_large.vectors * 0.999 + direction * 0.001
+            r, df, noise = daemon_large.step(update_fn=lambda v: v)
+        status = daemon_large.status()
+        label = 'THERMO ON ' if use_thermo else 'THERMO OFF'
+        print(f"  {label}: init_df={status['init_df']:.2f} "
+              f"final_df={status['final_df']:.2f} delta={status['delta_pct']:.1f}% "
+              f"noise={status['noise_count']} "
+              f"{'PASS' if status['passes'] else 'FAIL'}")
