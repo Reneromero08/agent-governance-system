@@ -1,18 +1,82 @@
 # Native Eigen Roadmap
 
 **Date:** 2026-05-19
-**Sprint:** Foundational proofs → Architecture assembly → Scaling → Integration
-**Status:** Phase 0-7 proven. Core navigates, DB stores, cosine discriminates, 0.16 gates.
+**Sprint:** Foundational proofs → Architecture assembly → Math Curriculum → Catalytic Phase
+**Status:** 14/15 sections passing. Hybrid Core built. Phase = catalytic substrate proven.
 
 ---
 
-## ✅ Done
+## Math Curriculum (15 Sections)
 
-### Phase 0: Mathematical Proofs
-- [x] C^1 phase rotation, C^d Hermitian attention, Schrodinger dispersion
-- [x] Geometry classification, Composition, Curvature, Entropy-as-mass
+| # | Section | Result | Architecture |
+|---|---------|--------|-------------|
+| 1 | +, -, *, // | 100/100/100/98% | BidiAttn, separate embeddings for * |
+| 2 | Modular + | 100% all mod | BidiAttn + modulus token |
+| 3 | ax+b=c | 98% | BidiAttn |
+| 4 | Polynomials | 99.2% | Iterative spiral (4 cycles) |
+| 5 | f(g(x)) | 99.9% | BidiAttn |
+| 6 | Sequences | 93% | BidiAttn |
+| 7 | 2x2 Systems | 85.4% | BidiAttn (cross-token ceiling) |
+| 8 | Derivatives | 100% | BidiAttn |
+| 9 | Trig | 99.8% | BidiAttn |
+| 10 | Complex | 100% | Separate embeddings (key unlock) |
+| 11 | Linear Algebra | 99.6% | BidiAttn |
+| 12 | Logic | 100% | BidiAttn |
+| 13 | Sets | 55%→**100%** | Catalytic rounds (+45pp) |
+| 14 | GCD | 32%→**100%** | Classification + catalytic |
+| 15 | Graph | 33%→**93.7%** | Catalytic rounds (+61pp) |
 
-### Phase 1: Cybernetic Loop  
+**Key findings:**
+- Separate operand embeddings unlock bilinear operations (*, complex mult)
+- Position encoding essential for ordered operations (-, systems)
+- Catalytic rounds (+40-60pp) on iterative/algorithmic tasks
+- Standard attention better for simultaneous cross-token interaction
+- Classification (not regression) for discrete-output tasks (GCD, modular)
+
+## Catalytic Phase Theory
+
+- si matrix = catalytic tape = quantum phase state
+- Phase passes through layers unconsumed (atom analogy)
+- Standard attention IS catalytic — si persists naturally
+- Feistel rounds add depth for iterative tasks
+- Hybrid Core: standard layers (cross-token) + catalytic rounds (iterative)
+- CAT_CAS quantum simulator pattern: 6-round reversible scrambler
+
+## Architecture Files
+
+| File | Purpose |
+|------|---------|
+| core/attention.py | MultiHeadComplexAttention (causal) |
+| core/position.py | ComplexPositionEncoding |
+| core/engine.py | NativeEigenCore (language model) |
+| core/catalytic.py | CatalyticFeistel (head-split reversible) |
+| core/catalytic_core.py | CatalyticCore (full Feistel engine) |
+| core/hybrid.py | HybridCore (standard + catalytic rounds) |
+| models/math.py | Sections 1-2 (arithmetic, modular) |
+| models/s3_linear.py | Section 3 (linear equations) |
+| models/s4_poly.py | Section 4 (polynomials) |
+| models/s5_compose.py | Section 5 (composition) |
+| models/s6_seq.py | Section 6 (sequences) |
+| models/s7_system.py | Section 7 (2x2 systems) |
+| models/s8_calc.py | Section 8 (derivatives) |
+| models/s9_trig.py | Section 9 (trigonometry) |
+| models/s10_complex.py | Section 10 (complex numbers) |
+| models/s11_15.py | Sections 11,12 (linear algebra, logic) |
+| models/catalytic.py | Catalytic GCD (100%) |
+| models/cat_retest.py | Catalytic retest (sets +45pp, graphs +61pp) |
+| models/narrow.py | Narrow boundary (Unlock 3) |
+| models/contrastive.py | Contrastive loss (Unlock 1) |
+| models/holographic.py | Holographic ensemble (robustness) |
+| training/thermo.py | Thermodynamic daemon (Unlock 2) |
+| feral/reasoner.py | NativeEigenReasoner (Feral integration) |
+
+## Next
+
+- [x] Math curriculum 14/15 passing (only S7 at 85.4% below target)
+- [x] Catalytic phase theory: si = reusable substrate, standard attention already catalytic
+- [ ] Hybrid Core per-task tuning (more std layers for systems, more cat rounds for sets)
+- [ ] Production daemon loop with Core + Feral DB
+- [ ] Q36 mathematics (implicate/explicate bridge)
 - [x] Cassette self-correction (87.5% → 96.0%), Phase coherence gate, Dipole coupling
 
 ### Phase 2: Infrastructure
