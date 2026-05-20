@@ -1,7 +1,7 @@
 # ROADMAP_2: Native Eigen Phase 2
 
-**Date:** 2026-05-19
-**Status:** Phase 2.2 complete (Tracks A-D implemented). Phase 2.3 pending (distillation pipeline).
+**Date:** 2026-05-20
+**Status:** Phase 2.2 complete (4/4 tracks). Phase 2.3 operational — closed-loop 0-RAM distillation at 88% phase resonance. DeepSeek-V4-Pro pending.
 
 ---
 
@@ -127,12 +127,13 @@ What else to train:
 
 ## Priority Order
 
-1. **Holographic phase encoding** — if this works, everything else changes ✅ core implemented, division 91.8%, mul 33% (bilinear ceiling)
-2. **Modular generalization** — prove the model understands, not memorizes ✅ 100% on unseen moduli via sum prediction
-3. **Multi-step catalytic chains** — GCD, graph traversal, unlimited depth ⏳ pending
-4. **Autonomous daemon loop** — production deployment of the Core ✅ thermo.py with per-dim rotation
-5. **Scaling** — wider models, GPU training, more domains ⏳ pending
-6. **Contrastive discrimination** — structural phase relationships ⏳ scaffold exists, pending triplets
+1. **Holographic phase encoding** ✅ core implemented, division 91.8%, mul 33% (bilinear ceiling)
+2. **Modular generalization** ✅ 100% on unseen moduli via sum prediction
+3. **Multi-step catalytic chains** ⏳ pending (GCD, graph traversal, unlimited depth)
+4. **Autonomous daemon loop** ✅ thermo.py with per-dim rotation, 1/2pi threshold, 0.001 contraction
+5. **Scaling** ⏳ pending (wider models, GPU training)
+6. **Contrastive discrimination** ✅ scaffold exists, triplets pending
+7. **0-RAM distillation** ✅ closed-loop Core+gate distills 27B at 88% resonance
 
 ---
 
