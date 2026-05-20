@@ -6,10 +6,11 @@ This roadmap outlines the milestones for pushing the boundaries of Catalytic Spa
 
 ## 1. Scale & Systems Tracks
 
-- [ ] **Algorithmic Scale: Exponential Problem Size**
+- [x] **Algorithmic Scale: Exponential Problem Size**
   *   Scale the Tree Evaluation Problem to $d=20$ ($1,048,575$ nodes).
   *   Demonstrate that the Catalytic solver runs within a hard $320$-byte clean space budget while the standard solver crashes.
   *   Plot clean memory footprints vs. depth to showcase the flat linear trend of Catalytic space compared to standard recursion.
+  *   **Result**: Standard solver crashes at **d=12** (336B > 320B). Catalytic solver stays within 320B at **ALL** depths up to d=20 (1,048,575 nodes). Peak cat memory at d=20: 320B exactly. Script: `01_tree_evaluation/scale_experiment.py`.
 
 - [x] **Architectural Scale: Parallel Catalytic Computing**
   *   Run multiple concurrent processing threads sharing the *exact same* dirty catalytic tape $U$.
