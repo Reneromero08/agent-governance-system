@@ -156,7 +156,7 @@ if __name__ == '__main__':
         for cycle in range(100):
             # Weak collapse: simulates slow alignment toward dominant direction
             direction = daemon.vectors[0:1] / (daemon.vectors[0:1].abs() + 1e-8)
-            daemon.vectors = daemon.vectors * 0.995 + direction * 0.005
+            daemon.vectors = daemon.vectors * 0.999 + direction * 0.001
             r, df, noise = daemon.step(update_fn=lambda v: v)
         status = daemon.status()
         label = 'THERMO ON ' if use_thermo else 'THERMO OFF'
