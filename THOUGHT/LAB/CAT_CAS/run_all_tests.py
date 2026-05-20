@@ -108,6 +108,7 @@ def main():
         os.path.join(CAT_CAS_DIR, "06_catalytic_neural_network", "generate_model_and_data.py"),
         os.path.join(CAT_CAS_DIR, "06_catalytic_neural_network", "catalytic_inference.py"),
         os.path.join(CAT_CAS_DIR, "07_quantum_simulator", "experiment.py"),
+        os.path.join(CAT_CAS_DIR, "07_quantum_simulator", "stealth_borrowing.py"),
         os.path.join(CAT_CAS_DIR, "08_catalytic_gpt", "run_experiment.py"),
         os.path.join(CAT_CAS_DIR, "09_borrowing_os_memory", "shared_ram_experiment.py"),
         os.path.join(CAT_CAS_DIR, "10_catalytic_kv_cache", "run_kv_experiment.py")

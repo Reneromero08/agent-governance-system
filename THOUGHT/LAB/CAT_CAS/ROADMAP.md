@@ -56,3 +56,69 @@ This roadmap outlines the milestones for pushing the boundaries of Catalytic Spa
   *   Find the mathematical bounds where catalytic space breaks.
   *   Test the system's behavior when the catalytic tape's integrity is compromised by an external process during run.
   *   Determine the exact minimum tape size required relative to problem size.
+
+- [ ] **Boundary Stress: Live Multi-Process Memory Collision**
+  *   Run the catalytic computation (e.g. quantum simulator or compiler) on a shared tape while a background process continuously writes random noise to the unallocated space.
+  *   Verify if the spatial projection or mathematical restoration guarantees remain intact and detect corruption immediately.
+
+- [ ] **Scale Limits: Million-Token Needle-in-a-Haystack Recall Sweep**
+  *   Simulate a KV cache containing 1,000,000 tokens (approx. 40 GB baseline VRAM).
+  *   Test the Heavy-Hitter Oracle (H2O) to retrieve a single needle fact with an active window limited to 512 tokens.
+
+- [ ] **Orthogonal Subspaces: Multi-Model Coexistence on a Shared Tape**
+  *   Load two distinct model architectures sharing the exact same physical VRAM/RAM tape.
+  *   Define orthogonal projection matrices to verify that their attention activations do not cause cross-talk or output degradation.
+
+- [ ] **Thermodynamics: Landauer Physical Erasure Tracker**
+  *   Instrument the cache pruning steps to count every bit overwritten or discarded during compression.
+  *   Calculate the exact reduction in physical/logical entropy compared to standard baseline caches.
+
+---
+
+## 4. Reality-Breaking & Non-Classical Frontiers
+
+- [ ] **Quantum Catalytic Entanglement: The "Invisible Hand" Borrowing**
+  *   Design a unitary quantum circuit that borrows a register of qubits in a highly entangled superposition.
+  *   Perform a catalytic quantum computation on the state space and restore the register to its exact entangled superposition without collapsing the wavefunction.
+  *   Verify via quantum state tomography that entanglement with the external system remains 100% intact.
+
+- [ ] **Temporal Catalysis: Retrocausal Activation Borrowing**
+  *   Formulate a closed-loop temporal cache where the model's future semantic states are used as the dirty tape to calibrate the current step's SVD projection.
+  *   Verify that the self-consistent feedback loop produces deterministic outputs guided by future activations without violating causal logic.
+
+- [ ] **Superconducting Passive Inference: Zero-Power Attention**
+  *   Model the Catalytic KV cache on a simulated superconducting grid of Josephson junctions.
+  *   Demonstrate that because the SVD projections and restorations yield zero net bit erasure, the entire attention pass can run with zero dynamic power dissipation.
+
+---
+
+## 5. Cosmological & Universe-Breaking Boundaries (Theoretical Limit)
+
+- [ ] **Bekenstein Violator: Non-Holographic Spatial Computation**
+  *   Formulate a catalytic SVD calculation where the volume of active and tape states exceeds the Bekenstein Bound of the local physical system.
+  *   Demonstrate that the zero-erasure, zero-mass-energy catalytic cycle bypasses gravitational collapse (black hole formation) by preserving state invariants.
+
+- [ ] **Temporal Bootstrap: Wormhole-less Closed Timelike Curves**
+  *   Design a catalytic algorithm that solves NP-complete problems by using future vacuum states as a shared tape, resolving self-consistent temporal loops.
+  *   Verify that the physical causal link evaporates upon tape restoration, leaving a zero-entropy bootstrap information package.
+
+- [ ] **Hawking Decompressor: Black Hole Event Horizon Catalysis**
+  *   Model a quantum catalytic observer that treats the microstates of a black hole's event horizon as a dirty tape.
+  *   Perform a unitary decoding operation to reconstruct swallowed information while restoring the horizon to its exact thermodynamic equilibrium.
+
+---
+
+## 6. The Holy Grail Experiments (Physical Realization)
+
+- [ ] **Grail 1: Quantum "Stealth-Borrowing" Entanglement Test**
+  *   Prepare a Bell state between qubits $Q_1$ and $Q_2$.
+  *   Borrow $Q_2$ as a dirty catalytic tape to execute a unitary computation with $Q_3$, restoring $Q_2$'s state perfectly at the output.
+  *   Perform state tomography and verify that the Bell inequality between $Q_1$ and $Q_2$ remains violated, proving entanglement survived the computation.
+
+- [ ] **Grail 2: Calorimetric Landauer Heat Dissipation Benchmark**
+  *   Execute standard vs. catalytic cache runs on a silicon core isolated inside a micro-calorimeter.
+  *   Measure the thermal dissipation in micro-Kelvin to prove that the zero-erasure catalytic cycle operates below the classical energy limits of standard memory-erasure.
+
+
+
+
