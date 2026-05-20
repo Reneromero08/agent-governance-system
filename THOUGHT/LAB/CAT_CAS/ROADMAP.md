@@ -11,11 +11,11 @@ This roadmap outlines the milestones for pushing the boundaries of Catalytic Spa
   *   Demonstrate that the Catalytic solver runs within a hard $320$-byte clean space budget while the standard solver crashes.
   *   Plot clean memory footprints vs. depth to showcase the flat linear trend of Catalytic space compared to standard recursion.
 
-- [ ] **Architectural Scale: Parallel Catalytic Computing**
+- [x] **Architectural Scale: Parallel Catalytic Computing**
   *   Run multiple concurrent processing threads sharing the *exact same* dirty catalytic tape $U$.
   *   Demonstrate that by using structured register maps or commutative operations, threads can execute simultaneously without corrupting the final tape restoration.
 
-- [ ] **Systems Scale: Borrowing Operating System Memory**
+- [x] **Systems Scale: Borrowing Operating System Memory**
   *   Develop an application that borrows active OS memory pages or disk sectors containing existing system data.
   *   Run calculations directly inside this live space and restore the blocks byte-identically, resulting in zero net file creation or space allocation.
 
@@ -32,11 +32,11 @@ This roadmap outlines the milestones for pushing the boundaries of Catalytic Spa
   *   Solve Directed Graph Reachability (NL-Complete) on scale-free graphs up to $10,000$ nodes.
   *   Map the queue and visited state to BMP image pixels using under $16$ bytes of clean RAM.
 
-- [ ] **Milestone 3: Reversible Quantum State Simulation (Classical CTM)**
+- [x] **Milestone 3: Reversible Quantum State Simulation (Classical CTM)**
   *   Simulate a 15-qubit circuit (mapping $2^N$ complex amplitudes to the catalytic tape).
   *   Execute unitary gate operations as reversible permutations and verify 100% tape restoration.
 
-- [ ] **Milestone 4: Thermodynamic Reversible Compiler (Landauer's Limit)**
+- [x] **Milestone 4: Thermodynamic Reversible Compiler (Landauer's Limit)**
   *   Build a transpiler converting Python math expressions to Toffoli/Fredkin reversible logic gates.
   *   Generate a Landauer entropy report verifying $0$ bits of net information erased during computation.
 
