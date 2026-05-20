@@ -118,7 +118,7 @@ Retrospective matches are impressive but can be accused of post-hoc fitting. You
 This shows scope. The QEC precision sweep (d=3-15) now provides the exhaustive single-domain precision test that was missing. The formula's functional form is confirmed across 8 domains with different operationalizations.
 
 **Gap: No precision test in a single domain — resolved.**  
-QEC precision sweep complete: rotated surface codes d=3-15, p=0.0005-0.04, DEPOL+MEAS noise, 18M+ total shots. The formula predicts logical error suppression with alpha=0.75-0.92 depending on training depth. Iso-resonance prediction confirmed (p=0.0014).
+QEC precision sweep complete: rotated surface codes d=3-15, p=0.0005-0.04, DEPOL+MEAS noise, 18M+ total shots. The formula predicts logical error suppression with alpha=0.75-0.92 depending on training depth. Iso-resonance prediction confirmed (p=0.0014). Closed-form sigma question resolved: extracted DEM partition function (6,025 error mechanisms) achieves r=0.89 with fidelity sigma, confirming sigma is a combinatorial property of error-path weight distributions. Fidelity sigma (R2=0.94) is the effective normalized partition function, not a workaround.
 
 ---
 
