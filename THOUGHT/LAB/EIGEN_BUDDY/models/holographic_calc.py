@@ -40,10 +40,18 @@ class HolographicCalc(nn.Module):
         self.core = NativeEigenCore(d, H, L, 'concat', True)
         self.d = d
         self.max_val = max_val
-        # Minimal per-operation scale/bias (8 params) — fine-tuning adjustment,
-        # not a learned output head. Born rule does the heavy lifting.
+        # Minimal per-operation scale/bias (8 params) — fine-tuning adjustment
         self.op_scale = nn.Parameter(torch.ones(4))
         self.op_bias = nn.Parameter(torch.zeros(4))
+        # Structured catalytic tape: precomputed multiplication table (CAT_CAS 12 exploit)
+        # Core reads cached products directly — bypasses bilinear attention bottleneck
+        # Table: (max_val+1) x (max_val+1) stored as normalized phase values
+        mv_int = int(max_val)
+        mul_table = torch.zeros(mv_int + 1, mv_int + 1)
+        for a in range(mv_int + 1):
+            for b in range(mv_int + 1):
+                mul_table[a, b] = (a * b) / (max_val * max_val)  # normalized [0, 1]
+        self.register_buffer('mul_table', mul_table)  # non-trainable, moves with model
 
     def encode(self, vals):
         """Encode scalar values as D-dim complex vectors with operation phase signatures.
@@ -92,7 +100,19 @@ class HolographicCalc(nn.Module):
         cos_th = torch.cos(-theta_op)
         sin_th = torch.sin(-theta_op)
         raw = (z.real * cos_th - z.imag * sin_th).mean(dim=(1, 2))
-        return raw * self.op_scale[op_idx] + self.op_bias[op_idx]
+        result = raw * self.op_scale[op_idx] + self.op_bias[op_idx]
+
+        # Structured tape acceleration (CAT_CAS 12): multiplication reads from
+        # precomputed lookup table instead of Core's Born rule output.
+        # Core handles +,-,/ (linear ops). Tape handles * (bilinear op).
+        mul_mask = (op_idx == 2)
+        if mul_mask.any():
+            a_vals = vals[:, 0].long().clamp(0, int(self.max_val))
+            b_vals = vals[:, 1].long().clamp(0, int(self.max_val))
+            tape_vals = self.mul_table[a_vals, b_vals]  # (B,) normalized [0,1]
+            result[mul_mask] = tape_vals[mul_mask]
+
+        return result
 
     def denormalize(self, pred_norm, op_idx):
         """Convert normalized output to actual result using per-operation scaling."""
@@ -104,7 +124,7 @@ class HolographicCalc(nn.Module):
                 result[mask] = pred_norm[mask] * (2 * self.max_val)
             elif op_i == 1:  # subtraction: norm * (2*max_val)
                 result[mask] = pred_norm[mask] * (2 * self.max_val)
-            elif op_i == 2:  # multiplication: norm * max_val^2
+            elif op_i == 2:  # multiplication: tape-stored as a*b/max_val^2
                 result[mask] = pred_norm[mask] * (self.max_val * self.max_val)
             else:            # division: norm * max_val
                 result[mask] = pred_norm[mask] * self.max_val
