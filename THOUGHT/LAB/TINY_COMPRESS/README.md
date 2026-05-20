@@ -27,7 +27,9 @@ the active information dimensions of the data itself and stores coordinates in
 that reduced space.
 
 See `HOLO_THEORY.md` for the formal math: objects, spectral dimensions,
-projection theorem, quantized codec model, and falsifiable predictions.
+projection theorem, quantized codec model, action-based dimension selection,
+and falsifiable predictions. See `HOLO_MATH_TEST_REPORT.md` for the focused
+math test results.
 
 ## Key Results
 

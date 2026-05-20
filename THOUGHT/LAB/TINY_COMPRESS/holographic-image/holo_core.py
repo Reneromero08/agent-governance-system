@@ -48,6 +48,49 @@ class HoloVerification:
     variance_retained: float
 
 
+@dataclass(frozen=True)
+class HoloRateModel:
+    """First-order payload model for a linear .holo projection.
+
+    The model deliberately stays simple: a retained dimension stores one basis
+    vector of observed_dim values plus one coordinate per sample. This makes the
+    marginal engineering cost of each dimension explicit.
+    """
+
+    samples: int
+    observed_dim: int
+    bits_per_coordinate: int = 16
+    bits_per_basis_value: int = 16
+    metadata_bits: int = 0
+
+    def bits_for_k(self, k: int) -> int:
+        if k < 0:
+            raise ValueError("k must be non-negative")
+        coord_bits = self.samples * k * self.bits_per_coordinate
+        basis_bits = self.observed_dim * k * self.bits_per_basis_value
+        mean_bits = self.observed_dim * self.bits_per_basis_value
+        return int(coord_bits + basis_bits + mean_bits + self.metadata_bits)
+
+    def marginal_bits(self) -> int:
+        return int(
+            self.samples * self.bits_per_coordinate
+            + self.observed_dim * self.bits_per_basis_value
+        )
+
+
+@dataclass(frozen=True)
+class HoloActionCurve:
+    """Rate-distortion/action curve over retained dimensions."""
+
+    k_values: np.ndarray
+    retained_information: np.ndarray
+    tail_information: np.ndarray
+    payload_bits: np.ndarray
+    marginal_information_per_bit: np.ndarray
+    action: np.ndarray
+    best_k: int
+
+
 def analyze_spectrum(observations: np.ndarray, eps: float = 1e-12) -> HoloSpectrum:
     """Measure active information dimensions for observations.
 
@@ -112,6 +155,73 @@ def choose_k(
         raise ValueError(f"unknown k policy: {policy}")
 
     return max(1, min(int(k), max_k))
+
+
+def rate_distortion_action(
+    spectrum: HoloSpectrum,
+    rate_model: HoloRateModel,
+    rate_weight: float,
+    distortion_weight: float = 1.0,
+    eps: float = 1e-12,
+) -> HoloActionCurve:
+    """Compute the engineering action for every retained dimension.
+
+    The normalized action is:
+
+        A(k) = distortion_weight * T(k) + rate_weight * B(k)
+
+    where T(k) is discarded spectral mass and B(k) is payload bits. This is the
+    practical form of "the math is the engineering": dimensions are retained
+    only when the information they preserve justifies their storage cost.
+    """
+    if rate_weight < 0.0:
+        raise ValueError("rate_weight must be non-negative")
+    if distortion_weight <= 0.0:
+        raise ValueError("distortion_weight must be positive")
+
+    p = spectral_probabilities(spectrum, eps=eps)
+    k_values = np.arange(1, p.size + 1, dtype=np.int64)
+    retained = np.cumsum(p)
+    tail = 1.0 - retained
+    payload_bits = np.array([rate_model.bits_for_k(int(k)) for k in k_values], dtype=np.float64)
+    marginal_bits = float(rate_model.marginal_bits())
+    marginal = p / max(marginal_bits, eps)
+    action = distortion_weight * tail + rate_weight * payload_bits
+    best_k = int(k_values[int(np.argmin(action))])
+
+    return HoloActionCurve(
+        k_values=k_values,
+        retained_information=retained.astype(np.float64),
+        tail_information=tail.astype(np.float64),
+        payload_bits=payload_bits,
+        marginal_information_per_bit=marginal.astype(np.float64),
+        action=action.astype(np.float64),
+        best_k=best_k,
+    )
+
+
+def choose_k_by_action(
+    spectrum: HoloSpectrum,
+    rate_model: HoloRateModel,
+    rate_weight: float,
+    distortion_weight: float = 1.0,
+) -> int:
+    """Select k by minimizing the linear .holo rate-distortion action."""
+    return rate_distortion_action(
+        spectrum,
+        rate_model,
+        rate_weight=rate_weight,
+        distortion_weight=distortion_weight,
+    ).best_k
+
+
+def spectral_probabilities(spectrum: HoloSpectrum, eps: float = 1e-12) -> np.ndarray:
+    """Return normalized nonzero eigenvalue mass."""
+    eigenvalues = np.asarray(spectrum.eigenvalues, dtype=np.float64)
+    total = float(eigenvalues.sum())
+    if total <= eps:
+        return np.ones(1, dtype=np.float64)
+    return eigenvalues / total
 
 
 def project(
@@ -191,4 +301,3 @@ def _as_observation_matrix(observations: np.ndarray) -> np.ndarray:
     if x.shape[0] == 0 or x.shape[1] == 0:
         raise ValueError("observations must be non-empty")
     return x
-

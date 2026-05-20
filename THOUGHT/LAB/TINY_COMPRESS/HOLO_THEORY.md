@@ -262,6 +262,44 @@ k_epsilon = argmin_k bits(mu, U_k, Z_k, metadata)
 
 This is the paper-grade target for future codec optimization.
 
+### 6.5 Engineering Action Policy
+
+The semiotic-light-cone material makes the key engineering point: the formula is
+not decorative. The math must be the control law. For `.holo`, the control law
+is an action over retained dimensions.
+
+Let `B(k)` be the payload bits required to store `mu`, `U_k`, `Z_k`, and
+metadata. Let `T(k)` be the spectral tail. Define:
+
+```text
+A(k) = alpha T(k) + beta B(k)
+```
+
+where:
+
+- `alpha` is the cost of lost information,
+- `beta` is the cost of storage/transmission,
+- `T(k)` is the entropy gradient left uncrossed by the codec,
+- `B(k)` is the engineering burden paid to retain dimensions.
+
+Then the operational `.holo` dimension is:
+
+```text
+k* = argmin_k A(k)
+```
+
+Equivalently, retain dimension `i` while its marginal information per bit
+exceeds the rate price:
+
+```text
+p_i / DeltaB_i > beta / alpha
+```
+
+This is the engineering correction to the naive "use Df as k" rule. `D_pr` and
+`D_shannon` diagnose compressibility. They do not by themselves choose the file
+format. The actual codec chooses `k` by the action that trades retained
+information against payload cost.
+
 ## 7. Optimal Linear Projection Theorem
 
 **Theorem 1: PCA optimality for linear `.holo` rendering.**
@@ -406,6 +444,15 @@ Adding independent noise should flatten the spectrum, increasing `D_pr`,
 Failure condition: Controlled noise injection does not increase effective
 dimension or distortion at fixed `k`.
 
+### P6: The Action Chooses the Engineering Point
+
+At fixed source spectrum, increasing the rate price `beta` should monotonically
+lower or preserve the chosen `k*`. Decreasing `beta` should monotonically raise
+or preserve `k*`.
+
+Failure condition: The implementation's selected `k*` moves opposite the
+rate-distortion action under deterministic spectra.
+
 ## 11. Success Criteria
 
 For any `.holo` domain experiment, report:
@@ -464,4 +511,3 @@ metric(raw, raw_hat) -> domain scores
 the effective information dimension of their distribution, storing coordinates
 on the dominant information axes, and rendering observable data as a projection
 from that reduced space.
-
