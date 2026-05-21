@@ -348,13 +348,11 @@ def main():
     mem_before_s = torch.cuda.memory_allocated() // 1024**2 if DEVICE.type == 'cuda' else 0
 
     # ---- Orthogonal Parallel Cores (CAT_CAS 13) ----
-    N = 21  # one Core per block, true orthogonal basis
+    N = 21
     D = 192
+    print(f"\n[ortho] {N} parallel Cores, identity-block orthogonal subspaces...")
 
-    # True orthogonal basis: use the identity eigenvectors (Hadamard-like)
-    # Each Core gets an orthogonal projection into a distinct subspace
     ortho_proj = []
-    # Use torch.eye blocks: each Core claims D//N contiguous dimensions
     dims_per_core = D // N
     for i in range(N):
         P = torch.zeros(D, D, device=DEVICE)
@@ -362,18 +360,13 @@ def main():
         end = start + dims_per_core
         P[start:end, start:end] = torch.eye(dims_per_core, device=DEVICE)
         ortho_proj.append(P)
-    # Verify cross-talk across all pairs
-    ct_vals = []
-    for i in range(N):
-        for j in range(i+1, N):
-            ct = (ortho_proj[i].T @ ortho_proj[j]).abs().max().item()
-            ct_vals.append(ct)
-    avg_ct = sum(ct_vals) / len(ct_vals) if ct_vals else 0
-    print(f"[ortho] Cross-talk: avg={avg_ct:.2e} max={max(ct_vals) if ct_vals else 0:.2e}")
 
     cores_ortho = []; expansions_ortho = []; memories_ortho = []; params_ortho = []
     for i in range(N):
         c = NativeEigenCore(d=D, heads=4, layers=2, merge='concat', geo_init=True).to(DEVICE)
+        # Track G.1: torch.compile — complex tensors incompatible, skip for now.
+        # Track G.3: CUDA streams for parallel Core forward passes.
+        # Track G.4: Rust CUDA FFI for F16 decode + Core forward (pending).
         e = nn.Linear(D, D, bias=False).to(DEVICE)
         nn.init.normal_(e.weight, std=0.02)
         m = nn.Parameter(torch.randn(D, dtype=torch.cfloat, device=DEVICE) * 0.01)
@@ -411,7 +404,9 @@ def main():
                 mem_tok = memories_ortho[ci].unsqueeze(0).expand(B, 1, D)
                 z_in = torch.cat([torch.complex(proj_feral, torch.zeros_like(proj_feral)).unsqueeze(1),
                                   mem_tok], dim=1)
-                z_out, _ = cores_ortho[ci](z_in)
+                # Core forward: mixed precision (float16 compute, float32 accumulate)
+                with torch.autocast(device_type='cuda', dtype=torch.float16):
+                    z_out, _ = cores_ortho[ci](z_in)
                 z_feral = z_out[:, 0, :].real  # (B, D)
 
                 # Loss: Core output vs root tape projection

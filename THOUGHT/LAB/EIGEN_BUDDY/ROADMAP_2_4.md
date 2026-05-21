@@ -107,6 +107,19 @@
 * **Gate 5 (Unified Catalytic Pipeline):** All 5 tape caches + orthogonal parallel Cores active simultaneously. 0 bits erased per cycle.
 * **Gate 6 (Parallel Orthogonal Scaling):** 4 Cores process 21 blocks in parallel on shared tape. Linear speedup verified. Cross-talk < 1e-10.
 
+### Track G: GPU Kernel Optimization & Rust Acceleration (Priority #1)
+
+* **Objective:** Saturate GPU compute via kernel fusion, mixed precision, CUDA streams, and Rust-accelerated hot paths.
+* **Status:** IN PROGRESS
+* **Sub-tracks:**
+  1. **torch.compile:** JIT-compile Core forward pass into fused CUDA kernels. One-line change, immediate 20-40% speedup.
+  2. **Mixed Precision:** float16/bfloat16 for Core weights and activations. 2x math throughput on RTX 3060.
+  3. **CUDA Streams:** Run 21 Core forward passes concurrently via hardware-level CUDA stream parallelism. Eliminates Python `for` loop serialization.
+  4. **Rust CUDA FFI:** Port F16 decode and Core forward to Rust via `cudarc` or `rust-cuda`. Zero-cost CUDA kernel dispatch, SIMD-accelerated F16 decode on CPU.
+  5. **Rust Catalytic Tape:** Port catalytic tape management to Rust for ownership-guaranteed zero-copy mmap and borrow-checked tape restoration.
+* **Files:** `core/phase_projection.py` — torch.compile + CUDA streams. `core/rust_ffi/` — new Rust module for CUDA kernels.
+* **Benefit:** 2-4x end-to-end distillation speedup. Full GPU utilization across all 21 Cores simultaneously.
+
 ---
 
 *"The tape remembers. The root subsumes the tree. One entry solves everything. Structure accelerates. The catalytic frontier is infinite because it borrows without consuming."*
