@@ -422,15 +422,14 @@ def main():
                 mem_tok = memories_ortho[ci].unsqueeze(0).expand(B, 1, D)
                 z_in = torch.cat([torch.complex(proj_feral, torch.zeros_like(proj_feral)).unsqueeze(1),
                                   mem_tok], dim=1)
-                # Core forward: mixed precision (float16 compute, float32 accumulate)
-                with torch.autocast(device_type='cuda', dtype=torch.float16):
-                    z_out, _ = cores_ortho[ci](z_in)
+                z_out, _ = cores_ortho[ci](z_in)
                 z_feral = z_out[:, 0, :].real  # (B, D)
 
-                # Loss: Core output vs root tape projection
-                core_norm = z_feral / (z_feral.norm(dim=1, keepdim=True) + 1e-8)
-                tape_norm = tape_proj / (tape_proj.norm(dim=1, keepdim=True) + 1e-8)
-                res = (core_norm * tape_norm).sum(dim=1).mean()
+                # Project tape into Core's orthogonal subspace (inverse of Q_i)
+                tape_aligned = (ortho_proj[ci].T @ tape_proj.T).T  # Q_i^T @ tape
+                cn = z_feral / (z_feral.norm(dim=1, keepdim=True) + 1e-8)
+                tn = tape_aligned / (tape_aligned.norm(dim=1, keepdim=True) + 1e-8)
+                res = (cn * tn).sum(dim=1).mean()
                 total_loss = total_loss + (1.0 - res)
 
                 # Update memory

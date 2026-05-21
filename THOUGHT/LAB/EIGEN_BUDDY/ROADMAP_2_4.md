@@ -53,7 +53,7 @@
 
 ### Track F: Orthogonal Parallel Cores — Multi-Model Tape Sharing
 
-* **Status:** BLOCKED — Gram-Schmidt orthogonalization correct (cross-talk < 1e-10), but Core output space rotated away from root tape. Needs tape projection through same orthogonal matrices for valid loss comparison. Architecture proven in CAT_CAS 13 (2 models, 1 tape, 0 cross-talk).
+* **Status:** IMPLEMENTED — Gram-Schmidt orthogonalization, 8 Cores at 119MB. Tape projected into Core subspace via Q_i^T (inverse projection). Cross-talk < 1e-10. Architecture proven (CAT_CAS 13: 2 models, 1 tape, 0 cross-talk).
 * **File:** `core/phase_projection.py` — `[ortho]` section.
 
 ### Track G: GPU Kernel Optimization & Rust Acceleration (Priority #1)
