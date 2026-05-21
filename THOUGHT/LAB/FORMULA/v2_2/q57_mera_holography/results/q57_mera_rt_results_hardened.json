@@ -1,0 +1,82 @@
+{
+  "test": "Q57-mera-rt-maxflow-hardened",
+  "timestamp": "2026-05-21T22:32:22.199050+00:00",
+  "parameters": {
+    "N_small": 128,
+    "R_small": 7,
+    "N_full": 4096,
+    "R_full": 12,
+    "M_trials": 100
+  },
+  "test_a_maxflow": {
+    "L_values": [
+      2,
+      4,
+      6,
+      8,
+      12,
+      16,
+      24,
+      32,
+      48,
+      64
+    ],
+    "multiscale_flows": [
+      3,
+      4,
+      5,
+      4,
+      6,
+      4,
+      6,
+      4,
+      4,
+      2
+    ],
+    "standard_flows": [
+      8,
+      16,
+      24,
+      32,
+      48,
+      64,
+      96,
+      128,
+      192,
+      256
+    ],
+    "fits": {
+      "ms_log_log": 0.007508100168024945,
+      "ms_log_const": 0.0,
+      "ms_lin_linear": 0.17289331672893327,
+      "std_log_log": 0.823696997764678,
+      "std_lin_linear": 1.0,
+      "std_lin_const": 0.0
+    },
+    "multiscale_is_constant": true,
+    "standard_is_linear": true
+  },
+  "test_b_empirical": {
+    "8": {
+      "multiscale": 7.51138192086231,
+      "standard": 7.560564514520947,
+      "random": 1.0
+    },
+    "32": {
+      "multiscale": 24.29541739083662,
+      "standard": 24.30044474813185,
+      "random": 1.0
+    },
+    "128": {
+      "multiscale": 55.822159205378284,
+      "standard": 56.174291216399574,
+      "random": 1.0
+    },
+    "512": {
+      "multiscale": 83.33125171905634,
+      "standard": 82.88685327343858,
+      "random": 1.0
+    }
+  },
+  "overall": "GAPPED_PHASE"
+}

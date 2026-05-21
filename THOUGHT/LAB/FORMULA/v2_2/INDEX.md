@@ -53,7 +53,7 @@
 | Q21 | dR/dt predicts system degradation | PARTIALLY VERIFIED | q21_rate_of_change/ |
 | Q55 | Kuramoto threshold predicts minimum independent heads for phase coherence | PARTIALLY VERIFIED | q55_kuramoto_heads/ |
 | Q56 | Projective measurement merge (Born rule) beats concatenation; O(h^2) cross-terms resist saturation | PARTIALLY VERIFIED | q56_entangled_heads/ |
-| Q57 | Multi-scale Feistel fabric exhibits MERA/AdS-CFT holographic structure; Ryu-Takayanagi min-cut scales as log(L) across boundary cuts | PARTIALLY VERIFIED | q57_mera_holography/ |
+| Q57 | Multi-scale Feistel fabric produces gapped (constant min-cut ~4) bulk vs standard Feistel volume-law (min-cut = 4L); topological phase, not CFT | PARTIALLY VERIFIED | q57_mera_holography/ |
 
 ## Tier 4: Theoretical Enrichment (7 Qs)
 
