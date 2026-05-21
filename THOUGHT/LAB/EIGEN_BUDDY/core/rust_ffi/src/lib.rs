@@ -1,14 +1,11 @@
 use pyo3::prelude::*;
 use pyo3::types::{PyBytes, PyDict};
 use numpy::PyArray1;
+use rayon::prelude::*;
 use std::sync::atomic::{AtomicU64, Ordering};
 
 use sha2::Sha256;
 use sha2::Digest as ShaDigest;
-
-// ==================================================================
-// Existing FFI
-// ==================================================================
 
 #[pyfunction]
 fn f16_decode<'py>(py: Python<'py>, data: Bound<'py, PyBytes>) -> PyResult<Bound<'py, PyArray1<f32>>> {
@@ -56,7 +53,7 @@ fn tape_hash(data: Bound<PyBytes>) -> String {
 }
 
 // ==================================================================
-// BEKENSTEIN VIOLATOR — parallel native engine
+// BEKENSTEIN VIOLATOR — RAYON PARALLEL
 // ==================================================================
 
 const HBAR: f64 = 1.054571817e-34;
@@ -65,34 +62,25 @@ const LN2: f64 = std::f64::consts::LN_2;
 const G: f64 = 6.67430e-11;
 const DIE_MASS_KG: f64 = 29e-6;
 const DIE_RADIUS_M: f64 = 1e-3;
-const DIE_ENERGY_J: f64 = DIE_MASS_KG * (C_LIGHT * C_LIGHT);
 const K: usize = 256;
-
-// Precomputed leaf values for all depths up to 14
-fn get_leaf_val(leaf_idx: usize) -> u8 {
-    ((leaf_idx * 17 + 43) % K) as u8
-}
-
-fn combine(left: u8, right: u8) -> u8 {
-    ((left as usize * 7 + right as usize * 13 + 31) % K) as u8
-}
 
 fn ground_truth(depth: usize) -> u8 {
     fn rec(depth: usize, node: usize, cur_depth: usize) -> u8 {
         if cur_depth == depth {
-            let leaf = node - (1 << (depth - 1));
-            return get_leaf_val(leaf);
+            return (((node - (1 << (depth - 1))) * 17 + 43) % K) as u8;
         }
         let left = rec(depth, 2 * node, cur_depth + 1);
         let right = rec(depth, 2 * node + 1, cur_depth + 1);
-        combine(left, right)
+        ((left as usize * 7 + right as usize * 13 + 31) % K) as u8
     }
     rec(depth, 1, 1)
 }
 
-// ==================================================================
-// Parallel Bekenstein sweep
-// ==================================================================
+// Precomputed leaf values for depth 12 (4096 leaves)
+// Index: leaf_idx (0..4096), value: u8
+fn make_leaf_table(max_leaves: usize) -> Vec<u8> {
+    (0..max_leaves).map(|i| ((i * 17 + 43) % K) as u8).collect()
+}
 
 #[pyfunction]
 fn bekenstein_sweep<'py>(
@@ -114,71 +102,64 @@ fn bekenstein_sweep<'py>(
     };
 
     let ground_truths: Vec<u8> = depths.iter().map(|&d| ground_truth(d)).collect();
-    let total_entropy = AtomicU64::new(0);
-    let total_solves = AtomicU64::new(0);
-    let error_count = AtomicU64::new(0);
+    let max_depth = *depths.iter().max().unwrap_or(&10);
+    let leaf_table = make_leaf_table(1 << (max_depth + 1));
 
     let start = std::time::Instant::now();
 
-    // Build flat worklist: (depth_idx, solve_idx, temp_offset, target_reg_start)
-    let mut worklist: Vec<(usize, usize, usize, usize)> = Vec::new();
+    // Build worklist — each solve gets UNIQUE temp_band for rayon safety
+    let mut worklist: Vec<(usize, usize, usize, u8)> = Vec::new();
+    let mut temp_band = 10000usize;
     for (di, &depth) in depths.iter().enumerate() {
-        let temp_offset = depth * 200;
-        let target_start = target_reg_base + di * solves_per_depth;
-        worklist.extend((0..solves_per_depth).map(move |si| {
-            (di, si, temp_offset, target_start)
-        }));
-    }
-
-    // Sequential sweep (tape is shared mutable state, must be sequential)
-    // But we inline the hot loop to reduce function call overhead
-    let gts = &ground_truths;
-    let depths_slice = &depths;
-
-    for (di, _si, temp_offset, target_start) in &worklist {
-        let depth = depths_slice[*di];
-        let gt = gts[*di];
-        let target_reg = target_start + _si;
-
-        let orig = tape[target_reg];
-        let mut ent: u64 = 0;
-
-        // INLINE catalytic solve (no function calls in hot path)
-        catalytic_solve_inline(&mut tape, depth, target_reg, *temp_offset, &mut ent);
-
-        let result = tape[target_reg] ^ orig;
-        tape[target_reg] = (tape[target_reg] ^ result) & 0xFF;
-
-        total_entropy.fetch_add(ent, Ordering::Relaxed);
-        total_solves.fetch_add(1, Ordering::Relaxed);
-        if result != gt {
-            error_count.fetch_add(1, Ordering::Relaxed);
+        let target_band = target_reg_base + di * solves_per_depth;
+        for si in 0..solves_per_depth {
+            worklist.push((depth, target_band + si, temp_band, ground_truths[di]));
+            temp_band += 100;
         }
     }
+    let atomic_errors = AtomicU64::new(0);
+    let atomic_entropy = AtomicU64::new(0);
+    let atomic_errors = AtomicU64::new(0);
+    let tape_addr = tape.as_mut_ptr() as usize;
+    let tape_len = tape.len();
+
+    worklist.par_iter().for_each(|&(depth, target_reg, temp_band, gt)| {
+        let t = unsafe { std::slice::from_raw_parts_mut(tape_addr as *mut u8, tape_len) };
+        let orig = t[target_reg];
+        let mut ent: u64 = 0;
+        eval_node_leaf(&leaf_table, t, depth, 1, 1, target_reg, temp_band, &mut ent);
+        let result = t[target_reg] ^ orig;
+        t[target_reg] = (t[target_reg] ^ result) & 0xFF;
+        atomic_entropy.fetch_add(ent, Ordering::Relaxed);
+        if result != gt {
+            atomic_errors.fetch_add(1, Ordering::Relaxed);
+        }
+    });
 
     let elapsed = start.elapsed().as_secs_f64();
+
+    let total_entropy = atomic_entropy.load(Ordering::Relaxed);
+    let errors = atomic_errors.load(Ordering::Relaxed);
+    let total_solves = worklist.len() as u64;
+
     let final_hash = {
         let mut h = Sha256::new();
         ShaDigest::update(&mut h, &tape);
         format!("{:x}", h.finalize())
     };
 
-    let ent = total_entropy.load(Ordering::Relaxed);
-    let ratio = ent as f64 / tape_capacity_bits as f64;
-    let errors = error_count.load(Ordering::Relaxed);
-    let solves = total_solves.load(Ordering::Relaxed);
+    let ratio = total_entropy as f64 / tape_capacity_bits as f64;
     let restored = initial_hash == final_hash;
-
-    let bekenstein_bound = 2.0 * std::f64::consts::PI * DIE_RADIUS_M * DIE_ENERGY_J
+    let bekenstein_bound = 2.0 * std::f64::consts::PI * DIE_RADIUS_M * DIE_MASS_KG * C_LIGHT * C_LIGHT
         / (HBAR * C_LIGHT * LN2);
-    let required_energy = ent as f64 * HBAR * C_LIGHT * LN2
+    let required_energy = total_entropy as f64 * HBAR * C_LIGHT * LN2
         / (2.0 * std::f64::consts::PI * DIE_RADIUS_M);
     let required_mass = required_energy / (C_LIGHT * C_LIGHT);
     let schwarzschild_r = 2.0 * G * required_mass / (C_LIGHT * C_LIGHT);
 
     let result = pyo3::types::PyDict::new_bound(py);
-    result.set_item("total_entropy", ent)?;
-    result.set_item("total_solves", solves)?;
+    result.set_item("total_entropy", total_entropy)?;
+    result.set_item("total_solves", total_solves)?;
     result.set_item("errors", errors)?;
     result.set_item("elapsed_secs", elapsed)?;
     result.set_item("ratio", ratio)?;
@@ -190,25 +171,14 @@ fn bekenstein_sweep<'py>(
     result.set_item("required_energy", required_energy)?;
     result.set_item("required_mass", required_mass)?;
     result.set_item("schwarzschild_r", schwarzschild_r)?;
-    result.set_item("entropy_per_second", ent as f64 / elapsed)?;
+    result.set_item("entropy_per_second", total_entropy as f64 / elapsed)?;
 
     Ok(result.into())
 }
 
-/// Inlined catalytic solver — single function, zero dynamic dispatch.
 #[inline(always)]
-fn catalytic_solve_inline(
-    tape: &mut [u8],
-    depth: usize,
-    target_reg: usize,
-    temp_offset: usize,
-    entropy_out: &mut u64,
-) {
-    eval_node(tape, depth, 1, 1, target_reg, temp_offset, entropy_out);
-}
-
-#[inline(always)]
-fn eval_node(
+fn eval_node_leaf(
+    leaf_table: &[u8],
     tape: &mut [u8],
     depth: usize,
     node: usize,
@@ -219,7 +189,7 @@ fn eval_node(
 ) {
     if cur_depth == depth {
         let leaf = node - (1 << (depth - 1));
-        let val = ((leaf * 17 + 43) % K) as u8;
+        let val = leaf_table[leaf];
         *entropy += val.count_ones() as u64;
         tape[target_reg] ^= val;
         return;
@@ -230,8 +200,8 @@ fn eval_node(
     let g1 = tape[t1];
     let g2 = tape[t2];
 
-    eval_node(tape, depth, 2 * node, cur_depth + 1, t1, temp_offset, entropy);
-    eval_node(tape, depth, 2 * node + 1, cur_depth + 1, t2, temp_offset, entropy);
+    eval_node_leaf(leaf_table, tape, depth, 2 * node, cur_depth + 1, t1, temp_offset, entropy);
+    eval_node_leaf(leaf_table, tape, depth, 2 * node + 1, cur_depth + 1, t2, temp_offset, entropy);
 
     let left = tape[t1] ^ g1;
     let right = tape[t2] ^ g2;
@@ -239,8 +209,8 @@ fn eval_node(
     *entropy += combined.count_ones() as u64;
     tape[target_reg] ^= combined;
 
-    eval_node(tape, depth, 2 * node + 1, cur_depth + 1, t2, temp_offset, entropy);
-    eval_node(tape, depth, 2 * node, cur_depth + 1, t1, temp_offset, entropy);
+    eval_node_leaf(leaf_table, tape, depth, 2 * node + 1, cur_depth + 1, t2, temp_offset, entropy);
+    eval_node_leaf(leaf_table, tape, depth, 2 * node, cur_depth + 1, t1, temp_offset, entropy);
 }
 
 #[pymodule]
