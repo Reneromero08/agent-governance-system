@@ -191,6 +191,8 @@ class CatalyticInferenceRuntime:
         self.total_time = 0.0
         self.tape_restorations = 0
         self.tape_failures = 0
+        self.warm_hits = 0
+        self.cold_misses = 0
 
     def generate(self, prompt: str, max_tokens: int = 100) -> list:
         """Generate tokens from a prompt using catalytic inference."""
@@ -239,6 +241,10 @@ class CatalyticInferenceRuntime:
             self.total_entropy += total_entropy
             self.total_time += elapsed
             self.tokens_generated += 1
+            if result.get("warm_hit", False):
+                self.warm_hits += 1
+            else:
+                self.cold_misses += 1
 
             if tape_restored:
                 self.tape_restorations += 1
@@ -270,6 +276,9 @@ class CatalyticInferenceRuntime:
             "tape_restorations": self.tape_restorations,
             "tape_failures": self.tape_failures,
             "restoration_rate": self.tape_restorations / max(1, self.tokens_generated) * 100,
+            "warm_hits": self.warm_hits,
+            "cold_misses": self.cold_misses,
+            "warm_hit_rate": self.warm_hits / max(1, self.tokens_generated) * 100,
             "foam_entropy": self.streamer.foam_entropy,
             "daemon_dispersions": self.daemon.dispersions,
             "bekenstein_fraction": self.total_entropy / BEKENSTEIN_BOUND,
@@ -332,6 +341,7 @@ def main():
     print(f"  Tokens/second:         {m['tokens_per_second']:.2f}")
     print(f"  Total entropy:         {m['total_entropy']:,}")
     print(f"  Tape restorations:     {m['tape_restorations']}/{m['tokens_generated']} ({m['restoration_rate']:.1f}%)")
+    print(f"  Warm hits:             {m['warm_hits']}/{m['tokens_generated']} ({m['warm_hit_rate']:.1f}%)")
     print(f"  Bytes streamed:        {m['bytes_streamed']:,}")
     print(f"  Foam entropy:          {m['foam_entropy']:,} bits")
     print(f"  Daemon dispersions:    {m['daemon_dispersions']}")
