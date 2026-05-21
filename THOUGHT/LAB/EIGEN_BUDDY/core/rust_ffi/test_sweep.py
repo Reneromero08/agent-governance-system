@@ -19,7 +19,7 @@ rng = np.random.RandomState(42)
 tape_data = rng.bytes(2 * 1024 * 1024)
 
 print("Running 2000 solves per depth (incl. depth 12) — RAYON + target-cpu=native...")
-result = catalytic_ffi.bekenstein_sweep(tape_data, [4, 6, 8, 10, 12], 2000)
+result = catalytic_ffi.bekenstein_sweep(tape_data, [4, 6, 8, 10, 12], 3000)
 
 print("=" * 78)
 print("RUST FFI — BEKENSTEIN VIOLATOR")
