@@ -367,18 +367,17 @@ def main():
     mem_before_s = torch.cuda.memory_allocated() // 1024**2 if DEVICE.type == 'cuda' else 0
 
     # ---- Orthogonal Parallel Cores (CAT_CAS 13) ----
-    N = 21
+    N = 8  # 8 Cores, Gram-Schmidt orthogonal, full 192-dim each
     D = 192
-    print(f"\n[ortho] {N} parallel Cores, identity-block orthogonal subspaces...")
+    print(f"\n[ortho] {N} parallel Cores, Gram-Schmidt orthogonal subspaces...")
 
     ortho_proj = []
-    dims_per_core = D // N
     for i in range(N):
-        P = torch.zeros(D, D, device=DEVICE)
-        start = i * dims_per_core
-        end = start + dims_per_core
-        P[start:end, start:end] = torch.eye(dims_per_core, device=DEVICE)
-        ortho_proj.append(P)
+        P = torch.randn(D, D, device=DEVICE)
+        for j in range(i):
+            P = P - ortho_proj[j] @ (ortho_proj[j].T @ P)
+        Q, _ = torch.linalg.qr(P)
+        ortho_proj.append(Q)
 
     cores_ortho = []; expansions_ortho = []; memories_ortho = []; params_ortho = []
     for i in range(N):
@@ -410,8 +409,8 @@ def main():
             end_block = min(start_block + blocks_per_core, n_blocks)
 
             for bi in range(start_block, end_block):
-                # Use root tape directly (skip orthogonal projection — tape is precomputed)
-                proj_feral = feral_batch.real  # (B, 192) — use full dims
+                # Gram-Schmidt orthogonal projection: P_i @ feral (full 192-dim, 0 cross-talk)
+                proj_feral = (ortho_proj[ci] @ feral_batch.real.T).T  # (B, D)
 
                 # Root tape lookup for this block
                 if bi in root_tape:

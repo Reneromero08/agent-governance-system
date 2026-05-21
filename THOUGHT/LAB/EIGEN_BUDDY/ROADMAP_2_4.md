@@ -51,9 +51,9 @@
 * **Status:** IMPLEMENTED — ✅ 99.93% resonance on unseen blocks. Train on blocks 0-9, test on blocks 10-20. Near-perfect transfer fidelity. 50% training time reduction confirmed.
 * **File:** `core/phase_projection.py` — `[xfer]` section.
 
-### Track F: Orthogonal Parallel Cores — Multi-Model Tape Sharing (Priority #1)
+### Track F: Orthogonal Parallel Cores — Multi-Model Tape Sharing
 
-* **Status:** PARTIALLY IMPLEMENTED — Identity-block orthogonal subspaces confirmed at 0.00 cross-talk. 21 Cores at 248MB. NaN loss from 9-dim subspaces — needs dim fix (use full 192-dim with Gram-Schmidt instead of identity blocks).
+* **Status:** BLOCKED — Gram-Schmidt orthogonalization correct (cross-talk < 1e-10), but Core output space rotated away from root tape. Needs tape projection through same orthogonal matrices for valid loss comparison. Architecture proven in CAT_CAS 13 (2 models, 1 tape, 0 cross-talk).
 * **File:** `core/phase_projection.py` — `[ortho]` section.
 
 ### Track G: GPU Kernel Optimization & Rust Acceleration (Priority #1)
