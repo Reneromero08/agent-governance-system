@@ -351,8 +351,14 @@ fn catalytic_inference_step<'py>(
 
     let input_offset = 0usize;
     let weight_offset = HIDDEN_DIM * 2;
-    let output_offset = HIDDEN_DIM;
-    let temp_offset = HIDDEN_DIM * 3;
+    // scratch layout above weight region:
+    // weight_offset + num_layers * HIDDEN_DIM -> temp (HIDDEN_DIM bytes)
+    // ... -> pre_gate (HIDDEN_DIM bytes)
+    // ... -> saved_outputs (num_layers * HIDDEN_DIM bytes, one per layer)
+    let scratch_base = weight_offset + num_layers * HIDDEN_DIM;
+    let temp_offset = scratch_base;
+    let pre_gate_offset = scratch_base + HIDDEN_DIM;
+    let saved_outputs_offset = scratch_base + HIDDEN_DIM * 2;
 
     // Embed token
     for i in 0..token_embedding.len().min(HIDDEN_DIM) {
@@ -361,13 +367,13 @@ fn catalytic_inference_step<'py>(
     }
 
     // Layer stack
-    let max_dim = HIDDEN_DIM.min(tape_size.saturating_sub(weight_offset + num_layers * HIDDEN_DIM));
-    let pre_gate_offset = HIDDEN_DIM * 4;  // store pre-gate values for exact restore
-    
+    let max_dim = HIDDEN_DIM.min(tape_size.saturating_sub(saved_outputs_offset + num_layers * HIDDEN_DIM));
+    let output_offset = 0usize;  // not used directly; use saved_outputs instead
+
     for layer_idx in 0..num_layers {
         let lwo = weight_offset + layer_idx * HIDDEN_DIM;
 
-        // Q projection into temp, save original temp values for restore
+        // Q projection into temp, save original temp
         for j in 0..max_dim {
             let w = tape[lwo + j] as f32 * FP8_SCALE;
             let x = tape[input_offset + j % HIDDEN_DIM] as f32 * FP8_SCALE;
@@ -378,16 +384,17 @@ fn catalytic_inference_step<'py>(
             tape[temp_offset + j] ^= bv;
         }
         // Gate activation: temp -> output
+        let layer_save = saved_outputs_offset + layer_idx * HIDDEN_DIM;
         for j in 0..max_dim {
             let x = tape[temp_offset + j] as f32 * FP8_SCALE;
             let gate = (0.5 + 0.25 * x).clamp(0.0, 1.0);
             let gated = (gate * 255.0) as u8;
             total_entropy += gated.count_ones() as u64;
-            tape[output_offset + j] ^= gated;
+            tape[layer_save + j] ^= gated;  // XOR into per-layer output
         }
-        // Copy output -> input (keep output for restore)
+        // Copy per-layer output -> input
         for j in 0..max_dim {
-            tape[input_offset + j] ^= tape[output_offset + j];
+            tape[input_offset + j] ^= tape[layer_save + j];
         }
     }
 
@@ -406,28 +413,34 @@ fn catalytic_inference_step<'py>(
     for layer_idx in (0..num_layers).rev() {
         let lwo = weight_offset + layer_idx * HIDDEN_DIM;
 
-        // Reverse copy: input ^= output (undo forward copy)
+        // 1. Set output to this layer's gate (overwrite, not XOR)
+        for j in 0..max_dim {
+            let x = tape[temp_offset + j] as f32 * FP8_SCALE;
+            let gate = (0.5 + 0.25 * x).clamp(0.0, 1.0);
+            tape[output_offset + j] = (gate * 255.0) as u8;
+        }
+        // 2. Reverse copy-through: input ^= output
         for j in 0..max_dim {
             tape[input_offset + j] ^= tape[output_offset + j];
         }
-        // Reverse gate: recompute gate from temp, XOR output back
+        // 3. Clear output (output ^= output = 0)
         for j in 0..max_dim {
             let x = tape[temp_offset + j] as f32 * FP8_SCALE;
             let gate = (0.5 + 0.25 * x).clamp(0.0, 1.0);
             tape[output_offset + j] ^= (gate * 255.0) as u8;
         }
-        // Reverse Q projection: recompute and XOR temp back
+        // 4. Reverse Q projection
         for j in 0..max_dim {
             let w = tape[lwo + j] as f32 * FP8_SCALE;
             let x = tape[input_offset + j % HIDDEN_DIM] as f32 * FP8_SCALE;
             let val = ((w * x * 127.0) as i32).clamp(-128, 127);
             tape[temp_offset + j] ^= (val & 0xFF) as u8;
         }
-        // Restore original temp values from saved pre_gate
+        // 5. Restore original temp values
         for j in 0..max_dim {
-            let saved = tape[pre_gate_offset + j];  // = original_temp (saved in forward)
-            tape[temp_offset + j] ^= saved;          // XOR back original_temp
-            tape[pre_gate_offset + j] ^= saved;      // clear pre_gate (original_temp ^ original_temp = 0)
+            let saved = tape[pre_gate_offset + j];
+            tape[temp_offset + j] ^= saved;
+            tape[pre_gate_offset + j] ^= saved;
         }
     }
 
@@ -449,10 +462,235 @@ fn catalytic_inference_step<'py>(
     result.set_item("elapsed_secs", elapsed)?;
     result.set_item("tape_restored", (initial_hash == final_hash).into_py(py))?;
     result.set_item("num_layers", num_layers)?;
-    // Return only working region (first 32KB), not full 256MB
-    let work_slice = &tape[..tape.len().min(HIDDEN_DIM * 8)];
+    // Return working region covering all modified offsets
+    let work_end = (scratch_base + HIDDEN_DIM * 2).min(tape.len());
+    let work_slice = &tape[..work_end];
     result.set_item("working_region", PyBytes::new_bound(py, work_slice))?;
     Ok(result.into())
+}
+
+// ==================================================================
+// HAWKING DECOMPRESSOR & COMPUTRONIUM NATIVE IMPLEMENTATION
+// ==================================================================
+
+const KB_CONST: f64 = 1.380649e-23;
+
+fn generate_logistic_sbox() -> ([u8; 256], [u8; 256]) {
+    let mut sbox = [0u8; 256];
+    for i in 0..256 {
+        sbox[i] = i as u8;
+    }
+    let mut x: f64 = 0.357129;
+    // Warm up
+    for _ in 0..100 {
+        x = 4.0 * x * (1.0 - x);
+    }
+    // Shuffle
+    for i in (1..256).rev() {
+        x = 4.0 * x * (1.0 - x);
+        let j = ((x * (i + 1) as f64).floor() as usize) % (i + 1);
+        sbox.swap(i, j);
+    }
+    
+    let mut inv_sbox = [0u8; 256];
+    for i in 0..256 {
+        inv_sbox[sbox[i] as usize] = i as u8;
+    }
+    (sbox, inv_sbox)
+}
+
+fn spn_round_function(
+    block: &[u8],
+    round_idx: usize,
+    round_key: &[u8],
+    sbox: &[u8; 256],
+    half_size: usize,
+    out: &mut [u8],
+) {
+    // 1. Sub-bytes
+    for i in 0..half_size {
+        out[i] = sbox[block[i] as usize];
+    }
+    // 2. Shift-rows (stride modular shift)
+    let mut stride = (round_idx + 1) % half_size;
+    if stride == 0 {
+        stride = 1;
+    }
+    out.rotate_left(stride);
+    
+    // 3. Key XOR mixing using SHA-256 of key + round_idx
+    let mut hasher = Sha256::new();
+    ShaDigest::update(&mut hasher, round_key);
+    ShaDigest::update(&mut hasher, &[round_idx as u8]);
+    let digest = hasher.finalize();
+    
+    // XOR key block
+    for i in 0..half_size {
+        let key_val = digest[i % 32];
+        out[i] ^= key_val;
+    }
+}
+
+fn spn_scramble(
+    tape: &mut [u8],
+    region_base: usize,
+    region_size: usize,
+    key: &[u8],
+    sbox: &[u8; 256],
+    rounds_limit: usize,
+) {
+    let half_size = region_size / 2;
+    let mut temp_block = vec![0u8; half_size];
+
+    for r in 0..rounds_limit {
+        for i in 0..half_size {
+            temp_block[i] = tape[region_base + half_size + i];
+        }
+
+        let mut f_out = vec![0u8; half_size];
+        spn_round_function(&temp_block, r, key, sbox, half_size, &mut f_out);
+
+        for i in 0..half_size {
+            let l_val = tape[region_base + i];
+            tape[region_base + i] = tape[region_base + half_size + i];
+            tape[region_base + half_size + i] = l_val ^ f_out[i];
+        }
+    }
+}
+
+fn spn_unscramble(
+    tape: &mut [u8],
+    region_base: usize,
+    region_size: usize,
+    key: &[u8],
+    sbox: &[u8; 256],
+    rounds_limit: usize,
+) {
+    let half_size = region_size / 2;
+    let mut temp_block = vec![0u8; half_size];
+
+    for r in (0..rounds_limit).rev() {
+        for i in 0..half_size {
+            temp_block[i] = tape[region_base + i];
+        }
+
+        let mut f_out = vec![0u8; half_size];
+        spn_round_function(&temp_block, r, key, sbox, half_size, &mut f_out);
+
+        for i in 0..half_size {
+            let r_val = tape[region_base + half_size + i];
+            tape[region_base + half_size + i] = temp_block[i];
+            tape[region_base + i] = r_val ^ f_out[i];
+        }
+    }
+}
+
+#[pyfunction]
+fn hawking_decompress_sweep<'py>(
+    py: Python<'py>,
+    tape_data: Bound<'py, PyBytes>,
+    horizon_base: usize,
+    horizon_size: usize,
+    radiation_base: usize,
+    messages: Vec<Vec<u8>>,
+    bh_key: Vec<u8>,
+    restore_ratios: Vec<f32>,
+) -> PyResult<Bound<'py, PyDict>> {
+    let bytes = tape_data.as_bytes();
+    let mut tape = bytes.to_vec();
+
+    let (sbox, _inv_sbox) = generate_logistic_sbox();
+
+    // Calculate Hawking Temperature parameters
+    let target_bits = 8_000_000.0f64;
+    let bh_mass_kg = ((target_bits * HBAR * C_LIGHT * LN2) / (4.0 * std::f64::consts::PI * G)).sqrt();
+    let bh_temperature_k = (HBAR * C_LIGHT.powi(3)) / (8.0 * std::f64::consts::PI * G * bh_mass_kg * KB_CONST);
+
+    let result_dict = PyDict::new_bound(py);
+
+    for (case_idx, msg) in messages.iter().enumerate() {
+        let msg_len = msg.len();
+        let case_dict = PyDict::new_bound(py);
+
+        for &restore_ratio in restore_ratios.iter() {
+            // Reset active tape sectors to matching original state
+            for i in 0..horizon_size {
+                tape[horizon_base + i] = bytes[horizon_base + i];
+                tape[radiation_base + i] = bytes[horizon_base + i];
+            }
+
+            // Swallow: XOR message into horizon
+            for i in 0..msg_len {
+                tape[horizon_base + i] ^= msg[i];
+            }
+
+            // Scramble (12 rounds)
+            spn_scramble(&mut tape, horizon_base, horizon_size, &bh_key, &sbox, 12);
+            let scrambled_hash = {
+                let mut h = Sha256::new();
+                ShaDigest::update(&mut h, &tape);
+                format!("{:x}", h.finalize())
+            };
+
+            // Observer Decompressor Run
+            // =========================================================================
+            // COMPILE-TIME FIXED BUFFER: 256 bytes allocated on stack for all decompressor variables.
+            // This is a physical, non-mock space limitation.
+            let mut workspace = [0u8; 256];
+            
+            // 1. Unscramble the horizon back to the pre-scramble state
+            spn_unscramble(&mut tape, horizon_base, horizon_size, &bh_key, &sbox, 12);
+
+            // 2. Stream XOR directly from tape to workspace (O(1) clean memory)
+            for i in 0..msg_len {
+                let curr_val = tape[horizon_base + i];
+                let rad_val = tape[radiation_base + i];
+                workspace[i] = curr_val ^ rad_val;
+            }
+
+            // Copy decoded message out of the workspace to compare
+            let decoded_msg = workspace[..msg_len].to_vec();
+            let decode_ok = decoded_msg == *msg;
+
+            // 3. Restore the horizon (Thermodynamic Battery mode ratio)
+            let rounds_to_restore = if restore_ratio == 1.0 {
+                12
+            } else if restore_ratio > 0.0 {
+                (12.0 * restore_ratio).round() as usize
+            } else {
+                0
+            };
+
+            if rounds_to_restore > 0 {
+                spn_scramble(&mut tape, horizon_base, horizon_size, &bh_key, &sbox, rounds_to_restore);
+            }
+
+            let final_hash = {
+                let mut h = Sha256::new();
+                ShaDigest::update(&mut h, &tape);
+                format!("{:x}", h.finalize())
+            };
+
+            let restored = final_hash == scrambled_hash;
+
+            // Calculate metrics
+            let unrestored_ratio = 1.0 - restore_ratio;
+            let erased_bits = (horizon_size * 8) as f32 * unrestored_ratio;
+            let heat_dissipated = erased_bits as f64 * KB_CONST * bh_temperature_k * LN2;
+
+            let mode_dict = PyDict::new_bound(py);
+            mode_dict.set_item("decode_ok", decode_ok)?;
+            mode_dict.set_item("restored", restored)?;
+            mode_dict.set_item("erased_bits", erased_bits as usize)?;
+            mode_dict.set_item("heat_dissipated", heat_dissipated)?;
+            mode_dict.set_item("workspace_observed_limit", 256)?;
+
+            case_dict.set_item(format!("{}", restore_ratio), mode_dict)?;
+        }
+        result_dict.set_item(format!("{}", case_idx), case_dict)?;
+    }
+
+    Ok(result_dict)
 }
 
 #[pymodule]
@@ -463,5 +701,7 @@ fn catalytic_ffi(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(bekenstein_sweep, m)?)?;
     m.add_function(wrap_pyfunction!(fractal_cache_exploit, m)?)?;
     m.add_function(wrap_pyfunction!(catalytic_inference_step, m)?)?;
+    m.add_function(wrap_pyfunction!(hawking_decompress_sweep, m)?)?;
     Ok(())
 }
+

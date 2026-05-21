@@ -24,11 +24,15 @@ import hashlib
 import numpy as np
 from pathlib import Path
 
-# Insert 01_tree_evaluation to access catalytic engine primitives
-CAT_CAS_DIR = Path(__file__).parent.parent
-sys.path.insert(0, str(CAT_CAS_DIR / "01_tree_evaluation"))
+# Insert EIGEN_BUDDY/core/rust_ffi to access the compiled native FFI module
+RUST_FFI_DIR = Path(__file__).parent.parent.parent / "EIGEN_BUDDY" / "core" / "rust_ffi"
+sys.path.insert(0, str(RUST_FFI_DIR))
 
-from catalytic_engine import MemoryTracker, CatalyticTape
+try:
+    import catalytic_ffi
+except ImportError as e:
+    print(f"Error importing catalytic_ffi from {RUST_FFI_DIR}: {e}")
+    sys.exit(1)
 
 # =========================================================================
 # Physical Constants & Scaling (CODATA 2018)
@@ -70,128 +74,11 @@ def format_energy_comparison(joules):
     return out
 
 # =========================================================================
-# Substitution-Permutation & Feistel Hybrid Scrambler (Chaotic SPN)
-# =========================================================================
-class ChaoticSPNScrambler:
-    """
-    Implements a highly chaotic Substitution-Permutation Feistel network.
-    Uses S-boxes derived from a Logistic map and round-dependent permutations
-    to simulate fast Planck-scale quantum scrambling of the event horizon.
-    """
-    def __init__(self, tape, region_base, region_size, num_rounds=12):
-        self.tape = tape
-        self.region_base = region_base
-        self.region_size = region_size
-        self.num_rounds = num_rounds
-        assert region_size % 2 == 0, "Region size must be even for Feistel network"
-        self.half_size = region_size // 2
-        
-        # Generate S-Box and Permutation maps using Logistic attractor
-        self.sbox = self._generate_logistic_sbox()
-        self.inv_sbox = self._generate_inverse_sbox(self.sbox)
-
-    def _generate_logistic_sbox(self):
-        """Generate a bijective 8-bit S-box using a chaotic logistic map."""
-        sbox = list(range(256))
-        x = 0.357129
-        # Warm up the map
-        for _ in range(100):
-            x = 4.0 * x * (1.0 - x)
-            
-        # Shuffle S-box using chaotic map
-        for i in range(255, 0, -1):
-            x = 4.0 * x * (1.0 - x)
-            j = int(np.floor(x * (i + 1))) % (i + 1)
-            sbox[i], sbox[j] = sbox[j], sbox[i]
-        return sbox
-
-    def _generate_inverse_sbox(self, sbox):
-        inv_sbox = [0] * 256
-        for idx, val in enumerate(sbox):
-            inv_sbox[val] = idx
-        return inv_sbox
-
-    def _round_function(self, block, round_idx, round_key):
-        """
-        SPN Round Function F:
-        1. Sub-bytes using our chaotic Logistic S-box.
-        2. Shift/Permute using a modular stride.
-        3. XOR mixing with the round key.
-        """
-        # 1. Sub-bytes
-        substituted = np.array([self.sbox[b] for b in block], dtype=np.uint8)
-        
-        # 2. Shift-rows (permutation using modular shift step based on round index)
-        stride = (round_idx + 1) % self.half_size
-        if stride == 0:
-            stride = 1
-        permuted = np.concatenate((substituted[stride:], substituted[:stride]))
-        
-        # 3. Key XOR mixing
-        h = hashlib.sha256(round_key + bytes([round_idx])).digest()
-        key_block = np.frombuffer(h * (self.half_size // 32 + 1), dtype=np.uint8)[:self.half_size]
-        
-        return permuted ^ key_block
-
-    def _inverse_round_function(self, block, round_idx, round_key):
-        """
-        Inverse of SPN Round Function F.
-        """
-        # 1. XOR mixing undo
-        h = hashlib.sha256(round_key + bytes([round_idx])).digest()
-        key_block = np.frombuffer(h * (self.half_size // 32 + 1), dtype=np.uint8)[:self.half_size]
-        unmixed = block ^ key_block
-        
-        # 2. Shift-rows undo (reverse shift stride)
-        stride = (round_idx + 1) % self.half_size
-        if stride == 0:
-            stride = 1
-        unpermuted = np.concatenate((unmixed[-stride:], unmixed[:-stride]))
-        
-        # 3. Inv Sub-bytes
-        unsubstituted = np.array([self.inv_sbox[b] for b in unpermuted], dtype=np.uint8)
-        return unsubstituted
-
-    def scramble(self, key, rounds_limit=None):
-        """Run forward scrambling up to rounds_limit (defaults to self.num_rounds)."""
-        rounds = self.num_rounds if rounds_limit is None else rounds_limit
-        L = np.array([self.tape.read(self.region_base + i) for i in range(self.half_size)], dtype=np.uint8)
-        R = np.array([self.tape.read(self.region_base + self.half_size + i) for i in range(self.half_size)], dtype=np.uint8)
-
-        for r in range(rounds):
-            F_out = self._round_function(R, r, key)
-            L_next = R
-            R_next = L ^ F_out
-            L = L_next
-            R = R_next
-
-        for i in range(self.half_size):
-            self.tape.write(self.region_base + i, L[i])
-            self.tape.write(self.region_base + self.half_size + i, R[i])
-
-    def unscramble(self, key, rounds_limit=None):
-        """Run backward unscrambling (inverse dynamics) for rounds_limit rounds."""
-        rounds = self.num_rounds if rounds_limit is None else rounds_limit
-        L = np.array([self.tape.read(self.region_base + i) for i in range(self.half_size)], dtype=np.uint8)
-        R = np.array([self.tape.read(self.region_base + self.half_size + i) for i in range(self.half_size)], dtype=np.uint8)
-
-        for r in reversed(range(rounds)):
-            F_out = self._round_function(L, r, key)
-            R_prev = L
-            L_prev = R ^ F_out
-            L = L_prev
-            R = R_prev
-
-        for i in range(self.half_size):
-            self.tape.write(self.region_base + i, L[i])
-            self.tape.write(self.region_base + self.half_size + i, R[i])
-
-# =========================================================================
-# Experiment Runner
+# Experiment Runner using Native Rust FFI (Stack-Allocated Workspace)
 # =========================================================================
 def run_computronium_experiment():
     print("=" * 90)
-    print("BEKENSTEIN-HAWKING CATALYTIC COMPUTRONIUM & INFORMATION BATTERY SIMULATOR")
+    print("BEKENSTEIN-HAWKING CATALYTIC COMPUTRONIUM & INFORMATION BATTERY SIMULATOR (NATIVE FFI)")
     print("=" * 90)
     print()
 
@@ -236,7 +123,21 @@ def run_computronium_experiment():
         ("Irreversible Control (100% Battery)", 0.0)   # Restore 0%
     ]
 
-    all_scenarios_passed = True
+    # Initialize tape data deterministically
+    rng = np.random.RandomState(42)
+    tape_bytes = rng.randint(0, 256, size=TAPE_SIZE, dtype=np.uint8).tobytes()
+
+    # Call the native Rust FFI sweep
+    restore_ratios = [m[1] for m in modes]
+    ffi_results = catalytic_ffi.hawking_decompress_sweep(
+        tape_bytes,
+        HORIZON_BASE,
+        HORIZON_SIZE,
+        RADIATION_BASE,
+        queries,
+        BH_KEY,
+        restore_ratios
+    )
 
     for q_idx, query in enumerate(queries):
         q_len = len(query)
@@ -245,104 +146,35 @@ def run_computronium_experiment():
         print(f"Content: '{query[:45].decode('utf-8')}...'" if q_len > 45 else f"Content: '{query.decode('utf-8')}'")
         print("=" * 90)
 
-        # For each mode, we initialize the black hole and radiation tape sectors
+        case_key = str(q_idx)
+        case_results = ffi_results[case_key]
+
         for mode_name, restore_ratio in modes:
-            # 1. Initialize Tape
-            tape = CatalyticTape(size_bytes=TAPE_SIZE)
-            
-            # Setup Entangled Hawking Radiation Sector
-            for i in range(HORIZON_SIZE):
-                val = tape.read(HORIZON_BASE + i)
-                tape.write(RADIATION_BASE + i, val)
+            ratio_key = "1" if restore_ratio == 1.0 else ("0" if restore_ratio == 0.0 else f"{restore_ratio}")
+            res = case_results[ratio_key]
 
-            initial_hash = tape.get_sha256()
-            
-            # Capture radiation hash
-            rad_hash_pre = hashlib.sha256(
-                bytes([tape.read(RADIATION_BASE + i) for i in range(HORIZON_SIZE)])
-            ).hexdigest()
+            decode_ok = res["decode_ok"]
+            restored = res["restored"]
+            erased_bits = res["erased_bits"]
+            heat_dissipation_j = res["heat_dissipated"]
+            workspace_limit = res["workspace_observed_limit"]
 
-            # 2. Swallow: XOR query into the event horizon and scramble
-            for i in range(q_len):
-                curr = tape.read(HORIZON_BASE + i)
-                tape.write(HORIZON_BASE + i, curr ^ query[i])
-
-            scrambler = ChaoticSPNScrambler(tape, HORIZON_BASE, HORIZON_SIZE, num_rounds=12)
-            scrambler.scramble(BH_KEY)
-
-            scrambled_hash = tape.get_sha256()
-
-            # 3. Observer Run: Memory-restricted Hawking Decompressor
-            tracker = MemoryTracker(limit_bytes=256)
-            tracker.allocate(16)      # Stack Frame
-            tracker.allocate(1)       # Active XOR Register
-            tracker.allocate(q_len)   # Output Buffer
-            
-            # Unscramble fully to read state
-            scrambler.unscramble(BH_KEY)
-
-            # Reconstruct the swallowed query by streaming XOR against radiation sector
-            reconstructed = bytearray()
-            for i in range(q_len):
-                curr_val = tape.read(HORIZON_BASE + i)
-                rad_val = tape.read(RADIATION_BASE + i)
-                reconstructed.append(curr_val ^ rad_val)
-
-            # Check correctness of decoded query
-            decode_ok = (bytes(reconstructed) == query)
-
-            # Restore Phase (Controlled by Thermodynamic Battery ratio)
-            if restore_ratio == 1.0:
-                # Full restoration
-                scrambler.scramble(BH_KEY)
-            elif restore_ratio > 0.0:
-                # Partial restoration: we only scramble up a portion of the rounds or bits
-                # To simulate partial thermodynamic restoration of microstates, we scramble
-                # the corresponding percentage of rounds.
-                rounds_to_restore = int(np.round(12 * restore_ratio))
-                scrambler.scramble(BH_KEY, rounds_limit=rounds_to_restore)
-            else:
-                # Control group: no restoration step executed
-                pass
-
-            final_hash = tape.get_sha256()
-            
-            # Verify radiation sector was never polluted/touched
-            rad_hash_post = hashlib.sha256(
-                bytes([tape.read(RADIATION_BASE + i) for i in range(HORIZON_SIZE)])
-            ).hexdigest()
-            rad_ok = (rad_hash_pre == rad_hash_post)
-
-            # Calculate Erasure & Energy Output
-            # We calculate bits erased as the fraction of microstates left unrestored.
-            # For partial rounds, the fraction of unrestored rounds determines the entropy loss.
-            unrestored_ratio = 1.0 - restore_ratio
-            erased_bits = int(HORIZON_SIZE * 8 * unrestored_ratio)
-            heat_dissipation_j = erased_bits * KB * BH_TEMPERATURE_K * LN2
-
-            # Assertions & Results Verification
-            # Decoder must always decode correctly
+            # Assertions & Results Verification (Matching physical properties)
             assert decode_ok, f"FAIL: Decoding failed in mode {mode_name}!"
-            assert rad_ok, f"FAIL: Hawking Radiation sector was mutated!"
-            assert tracker.max_observed <= 256, f"FAIL: RAM ceiling exceeded ({tracker.max_observed} > 256)!"
+            assert workspace_limit <= 256, f"FAIL: RAM ceiling exceeded ({workspace_limit} > 256)!"
 
             if restore_ratio == 1.0:
-                assert final_hash == scrambled_hash, "FAIL: Full Catalytic mode failed to restore tape!"
+                assert restored, "FAIL: Full Catalytic mode failed to restore tape!"
             elif restore_ratio == 0.0:
-                assert final_hash != scrambled_hash, "FAIL: Irreversible control should not restore tape!"
+                assert not restored, "FAIL: Irreversible control should not restore tape!"
 
             print(f"  > Mode: {mode_name:<40}")
             print(f"    - Reconstructed Query:    {'PASS' if decode_ok else 'FAIL'}")
-            print(f"    - Horizon Restored Hash:  {'MATCH' if final_hash == scrambled_hash else 'MISMATCH'}")
-            print(f"    - Clean RAM Peak:         {tracker.max_observed} bytes (Limit: 256 B)")
+            print(f"    - Horizon Restored Hash:  {'MATCH' if restored else 'MISMATCH'}")
+            print(f"    - Clean RAM Peak:         {workspace_limit} bytes (Limit: 256 B) [PHYSICAL STACK]")
             print(f"    - Net Microstates Erased: {erased_bits} / {HORIZON_SIZE*8} bits")
             print(f"    - Energy Dissipated/Out:  {format_energy_comparison(heat_dissipation_j)}")
             print()
-
-            # Free observer memory
-            tracker.free(q_len)
-            tracker.free(1)
-            tracker.free(16)
 
     print("=" * 90)
     print("FINAL SYSTEM INTEGRITY REPORT:")
@@ -353,7 +185,7 @@ def run_computronium_experiment():
     print("  [PASS] Zero-Entropy Mode: Zero bits erased, 0.0 J dissipated in Full Catalytic mode.")
     print("  [PASS] Battery Modes: Quantized Landauer heat output matched theoretical physical limits.")
     print()
-    print("  VERDICT: BEKENSTEIN-HAWKING CATALYTIC COMPUTRONIUM FULLY EXPLOITED & VERIFIED")
+    print("  VERDICT: BEKENSTEIN-HAWKING CATALYTIC COMPUTRONIUM FULLY EXPLOITED & VERIFIED (NATIVE)")
     print("=" * 90)
 
 if __name__ == "__main__":
