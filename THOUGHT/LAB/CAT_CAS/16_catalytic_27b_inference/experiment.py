@@ -99,11 +99,22 @@ class HDDWeightStreamer:
         self._mmap = None
         self.bytes_streamed = 0
         self.foam_entropy = 0
+        self.tensors = {}
+        self.data_offset = 0
 
         if os.path.exists(model_path):
             self.file_size = os.path.getsize(model_path)
             self._fd = os.open(model_path, os.O_RDONLY | os.O_BINARY)
             self._mmap = mmap.mmap(self._fd, 0, access=mmap.ACCESS_READ)
+            try:
+                header_size = struct.unpack("<Q", self._mmap[:8])[0]
+                header_json = self._mmap[8:8+header_size].decode('utf-8')
+                import json
+                self.tensors = json.loads(header_json)
+                self.data_offset = 8 + header_size
+            except Exception as e:
+                print(f"Error parsing safetensors header: {e}")
+                self.tensors = {}
         else:
             self.file_size = 0
 
@@ -117,9 +128,27 @@ class HDDWeightStreamer:
                 self.foam_entropy += (b & 0x03).bit_count()
             return HIDDEN_DIM
 
-        # Real HDD: stream from memory-mapped file
-        offset = layer_idx * HIDDEN_DIM * 8  # rough stride
-        chunk = self._mmap[offset:offset + HIDDEN_DIM]
+        # Try to find a tensor for this layer in the safetensors metadata
+        tensor_info = None
+        for name, info in self.tensors.items():
+            if name != "__metadata__" and f"layers.{layer_idx}." in name:
+                tensor_info = info
+                break
+
+        if tensor_info and "data_offsets" in tensor_info:
+            start, end = tensor_info["data_offsets"]
+            chunk_start = self.data_offset + start
+            chunk_end = min(self.data_offset + end, chunk_start + HIDDEN_DIM)
+            chunk = self._mmap[chunk_start:chunk_end]
+            if len(chunk) < HIDDEN_DIM:
+                chunk = chunk + b'\x00' * (HIDDEN_DIM - len(chunk))
+        else:
+            # Fallback to simple offset in mmap
+            offset = layer_idx * HIDDEN_DIM * 8
+            if offset + HIDDEN_DIM <= len(self._mmap):
+                chunk = self._mmap[offset:offset + HIDDEN_DIM]
+            else:
+                chunk = b'\x00' * HIDDEN_DIM
 
         for i, b in enumerate(chunk):
             tape[weight_offset + i] ^= b
@@ -183,7 +212,7 @@ class CatalyticInferenceRuntime:
         rng = np.random.RandomState(42)
         self.tape[:] = rng.randint(0, 256, TAPE_SIZE, dtype=np.uint8).tobytes()
         # Initial hash of working region (enough to cover all modified offsets)
-        self.work_region_size = HIDDEN_DIM * 2 + NUM_LAYERS * HIDDEN_DIM + HIDDEN_DIM * 2  # weight + scratch space
+        self.work_region_size = HIDDEN_DIM * 3 + NUM_LAYERS * HIDDEN_DIM * 3  # weight + scratch space up to warm_tape_offset
         self.initial_hash = hashlib.sha256(bytes(self.tape[:self.work_region_size])).hexdigest()
 
         self.tokens_generated = 0
@@ -209,7 +238,7 @@ class CatalyticInferenceRuntime:
             embedding = self.tokenizer.embed(current_token)
 
             # Stream layer weights into tape
-            for layer_idx in range(min(NUM_LAYERS, 12)):  # demo: 12 layers
+            for layer_idx in range(NUM_LAYERS):
                 weight_offset = HIDDEN_DIM * 2 + layer_idx * HIDDEN_DIM
                 self.streamer.stream_layer_weights(layer_idx, self.tape, weight_offset)
 
@@ -217,26 +246,25 @@ class CatalyticInferenceRuntime:
             tape_bytes = bytes(self.tape)
             t0 = time.perf_counter()
             result = catalytic_ffi.catalytic_inference_step(
-                tape_bytes, embedding, min(NUM_LAYERS, 12), self.model_path
+                tape_bytes, embedding, NUM_LAYERS, self.model_path, step
             )
             elapsed = time.perf_counter() - t0
-
-            # Un-stream weights back out so tape is restored
-            for layer_idx in range(min(NUM_LAYERS, 12)):
-                weight_offset = HIDDEN_DIM * 2 + layer_idx * HIDDEN_DIM
-                self.streamer.stream_layer_weights(layer_idx, self.tape, weight_offset)
 
             # Sync working region back from Rust
             if "working_region" in result:
                 self.tape[:len(result["working_region"])] = bytearray(result["working_region"])
 
+            # Un-stream weights back out so tape is restored
+            for layer_idx in range(NUM_LAYERS):
+                weight_offset = HIDDEN_DIM * 2 + layer_idx * HIDDEN_DIM
+                self.streamer.stream_layer_weights(layer_idx, self.tape, weight_offset)
+
             # Verify Python-side tape restoration on working region
             current_hash = hashlib.sha256(bytes(self.tape[:self.work_region_size])).hexdigest()
-            tape_restored = (current_hash == self.initial_hash)
+            tape_restored = (current_hash == self.initial_hash) and bool(result["tape_restored"])
 
             next_token = result["generated_token"]
             total_entropy = result["total_entropy"]
-            tape_restored = bool(result["tape_restored"])
 
             self.total_entropy += total_entropy
             self.total_time += elapsed
@@ -257,6 +285,7 @@ class CatalyticInferenceRuntime:
             # Thermodynamic daemon: periodic dispersion
             if step % 100 == 0:
                 self.daemon.disperse(self.tape)
+                self.initial_hash = hashlib.sha256(bytes(self.tape[:self.work_region_size])).hexdigest()
 
             if step % 10 == 0:
                 tok_text = self.tokenizer.detokenize(next_token)

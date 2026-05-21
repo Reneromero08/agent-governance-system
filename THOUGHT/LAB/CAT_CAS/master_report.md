@@ -39,6 +39,7 @@ This tracking table maps our progress across the Catalytic Space Complexity Lab 
 | **3.10.5** | Architectural Scale: Parallel Computing | [08_catalytic_gpt/](file:///D:/CCC%202.0/AI/agent-governance-system/THOUGHT/LAB/CAT_CAS/08_catalytic_gpt/) | `COMPLETE` | `python 08_catalytic_gpt/run_multi_outputs.py` | 0 | 0.0 J |
 | **3.10.6** | Systems Scale: Borrowing OS Memory | [09_borrowing_os_memory/](file:///D:/CCC%202.0/AI/agent-governance-system/THOUGHT/LAB/CAT_CAS/09_borrowing_os_memory/) | `COMPLETE` | `python 09_borrowing_os_memory/shared_ram_experiment.py` | 0 | 0.0 J |
 | **3.10.7** | Infinite KV Cache (H2O + SVD) | [10_catalytic_kv_cache/](file:///D:/CCC%202.0/AI/agent-governance-system/THOUGHT/LAB/CAT_CAS/10_catalytic_kv_cache/) | `COMPLETE` | `python 10_catalytic_kv_cache/run_kv_experiment.py` | 0 | 0.0 J |
+| **-** | Hawking Decompressor: BH Catalysis | [18_hawking_decompressor/](file:///D:/CCC%202.0/AI/agent-governance-system/THOUGHT/LAB/CAT_CAS/18_hawking_decompressor/) | `COMPLETE` | `python 18_hawking_decompressor/experiment.py` | 0 | 0.0 J |
 
 ---
 
