@@ -362,17 +362,22 @@ fn catalytic_inference_step<'py>(
 
     // Layer stack
     let max_dim = HIDDEN_DIM.min(tape_size.saturating_sub(weight_offset + num_layers * HIDDEN_DIM));
+    let pre_gate_offset = HIDDEN_DIM * 4;  // store pre-gate values for exact restore
+    
     for layer_idx in 0..num_layers {
         let lwo = weight_offset + layer_idx * HIDDEN_DIM;
 
+        // Q projection into temp, save original temp values for restore
         for j in 0..max_dim {
             let w = tape[lwo + j] as f32 * FP8_SCALE;
             let x = tape[input_offset + j % HIDDEN_DIM] as f32 * FP8_SCALE;
             let val = ((w * x * 127.0) as i32).clamp(-128, 127);
             let bv = (val & 0xFF) as u8;
             total_entropy += bv.count_ones() as u64;
+            tape[pre_gate_offset + j] ^= tape[temp_offset + j];  // save original temp
             tape[temp_offset + j] ^= bv;
         }
+        // Gate activation: temp -> output
         for j in 0..max_dim {
             let x = tape[temp_offset + j] as f32 * FP8_SCALE;
             let gate = (0.5 + 0.25 * x).clamp(0.0, 1.0);
@@ -380,13 +385,13 @@ fn catalytic_inference_step<'py>(
             total_entropy += gated.count_ones() as u64;
             tape[output_offset + j] ^= gated;
         }
+        // Copy output -> input (keep output for restore)
         for j in 0..max_dim {
             tape[input_offset + j] ^= tape[output_offset + j];
-            tape[output_offset + j] = 0;
         }
     }
 
-    // Output head: argmax over first 64 hidden dims
+    // Output head
     let mut best_token: u8 = 0;
     let mut best_score: u32 = 0;
     for j in 0..64.min(tape_size.saturating_sub(input_offset)) {
@@ -397,27 +402,32 @@ fn catalytic_inference_step<'py>(
         }
     }
 
-    // Uncompute: reverse layer stack
+    // Uncompute: EXACTLY reverse each operation in reverse order
     for layer_idx in (0..num_layers).rev() {
         let lwo = weight_offset + layer_idx * HIDDEN_DIM;
 
-        // Reverse: copy-through (output ^= input to restore)
+        // Reverse copy: input ^= output (undo forward copy)
         for j in 0..max_dim {
             tape[input_offset + j] ^= tape[output_offset + j];
-            tape[output_offset + j] = 0;
         }
-        // Reverse: gate activation
+        // Reverse gate: recompute gate from temp, XOR output back
         for j in 0..max_dim {
             let x = tape[temp_offset + j] as f32 * FP8_SCALE;
             let gate = (0.5 + 0.25 * x).clamp(0.0, 1.0);
             tape[output_offset + j] ^= (gate * 255.0) as u8;
         }
-        // Reverse: Q projection
+        // Reverse Q projection: recompute and XOR temp back
         for j in 0..max_dim {
             let w = tape[lwo + j] as f32 * FP8_SCALE;
             let x = tape[input_offset + j % HIDDEN_DIM] as f32 * FP8_SCALE;
             let val = ((w * x * 127.0) as i32).clamp(-128, 127);
             tape[temp_offset + j] ^= (val & 0xFF) as u8;
+        }
+        // Restore original temp values from saved pre_gate
+        for j in 0..max_dim {
+            let saved = tape[pre_gate_offset + j];  // = original_temp (saved in forward)
+            tape[temp_offset + j] ^= saved;          // XOR back original_temp
+            tape[pre_gate_offset + j] ^= saved;      // clear pre_gate (original_temp ^ original_temp = 0)
         }
     }
 
@@ -439,6 +449,9 @@ fn catalytic_inference_step<'py>(
     result.set_item("elapsed_secs", elapsed)?;
     result.set_item("tape_restored", (initial_hash == final_hash).into_py(py))?;
     result.set_item("num_layers", num_layers)?;
+    // Return only working region (first 32KB), not full 256MB
+    let work_slice = &tape[..tape.len().min(HIDDEN_DIM * 8)];
+    result.set_item("working_region", PyBytes::new_bound(py, work_slice))?;
     Ok(result.into())
 }
 

@@ -110,9 +110,8 @@ class HDDWeightStreamer:
     def stream_layer_weights(self, layer_idx: int, tape: bytearray, weight_offset: int):
         """Stream weights for one layer from HDD into the tape."""
         if self._mmap is None:
-            # Generate synthetic weights for demo
-            rng = np.random.RandomState(42 + layer_idx)
-            weights = rng.bytes(HIDDEN_DIM)
+            # Generate synthetic weights for demo (fresh RNG = deterministic replay)
+            weights = np.random.RandomState(42 + layer_idx).bytes(HIDDEN_DIM)
             for i, b in enumerate(weights):
                 tape[weight_offset + i] ^= b
                 self.foam_entropy += (b & 0x03).bit_count()
@@ -207,7 +206,7 @@ class CatalyticInferenceRuntime:
 
             # Stream layer weights into tape
             for layer_idx in range(min(NUM_LAYERS, 12)):  # demo: 12 layers
-                weight_offset = HIDDEN_DIM * 2 + layer_idx * HIDDEN_DIM * 8
+                weight_offset = HIDDEN_DIM * 2 + layer_idx * HIDDEN_DIM
                 self.streamer.stream_layer_weights(layer_idx, self.tape, weight_offset)
 
             # Run inference step via Rust FFI
@@ -217,6 +216,16 @@ class CatalyticInferenceRuntime:
                 tape_bytes, embedding, min(NUM_LAYERS, 12), self.model_path
             )
             elapsed = time.perf_counter() - t0
+
+            # Un-stream weights back out so tape is restored
+            for layer_idx in range(min(NUM_LAYERS, 12)):
+                weight_offset = HIDDEN_DIM * 2 + layer_idx * HIDDEN_DIM
+                self.streamer.stream_layer_weights(layer_idx, self.tape, weight_offset)
+
+            # Sync working region back from Rust
+            if "working_region" in result:
+                wr = result["working_region"]
+                self.tape[:len(wr)] = bytearray(wr)
 
             next_token = result["generated_token"]
             total_entropy = result["total_entropy"]
