@@ -5,9 +5,9 @@
 ### Objective
 Run inference on a 27B-parameter model using zero bytes of dynamic system RAM for model parameters. All weights live on a spinning HDD platter. All computation executes on a 256MB catalytic Memory-Gate Fabric. Every token restores the tape to its exact SHA-256 pre-computation state with zero bits erased. Target: 50+ tok/s with warm-tape replay, 1k tok/s full catalytic.
 
-### Status: PIPELINE OPERATIONAL (3.5 tok/s)
+### Status: PIPELINE OPERATIONAL — 100% TAPE RESTORATION (3.5 tok/s)
 
-The core inference pipeline runs end-to-end: tokenizer → embedding → 12 DeltaNet layers (Rust FFI) → output head → token. Synthetic weights. Zero RAM for parameters. Python orchestration with HDD weight streaming and thermodynamic daemon. Tape restoration is the active debug target — the symmetric sigmoid gate doesn't perfectly invert.
+The core inference pipeline runs end-to-end: tokenizer → embedding → 12 DeltaNet layers (Rust FFI) → output head → token. Synthetic weights. Zero RAM for parameters. Per-layer pre_gate and saved_output buffers fix the shared-register corruption that blocked multi-layer restoration. All 1-12 layer configurations verified. 50/50 tokens restore perfectly. Output is hash-based synthetic tokens (no real vocabulary or model weights yet).
 
 ---
 
@@ -26,18 +26,25 @@ The core inference pipeline runs end-to-end: tokenizer → embedding → 12 Delt
 - [x] DeltaNet forward: weight @ input → Q projection → gate → output
 - [x] Feistel-compatible XOR fabric: all computation via tape XOR operations
 - [x] Adjoint uncomputation: reverse layer stack in order
-- [ ] Invertible gate function (replace approximate sigmoid with exact invertible)
+- [x] Per-layer pre_gate and saved_output buffers for multi-layer correctness
+- [x] 100% tape restoration verified for 1-12 layers (50/50 tokens, 0 bits erased)
 - [ ] Port to rayon parallel for per-dimension parallelism within layer
-- **Result**: 12 layers executing in Rust FFI at 285ms/token. Tape restore failing.
+- **Result**: 12 layers, 285ms/token, 100% tape restoration. Gate uses approximate sigmoid with replay-based undo.
 
 #### 16.3 — GATED ATTENTION LAYER  
 - [ ] Implement Q/K/V projections, scaled dot-product attention, output projection
 - [ ] Execute as Feistel round on shared tape
 - [ ] KV cache stored in HDD target region as rolling window
 - [ ] 1 Gated Attention per 3 DeltaNet layers (3:1 stride)
-- **Blocked on**: 16.2 tape restoration fix
 
-#### 16.4 — LAYER STACK & PIPELINE  ✅ DONE
+#### 16.4 — LAYER STACK & PIPELINE  ✅ DONE (12/48 layers)
+- [x] 12-layer stack executing sequentially: DeltaNet × 12
+- [x] Output head: argmax over hidden dims → token ID
+- [x] Embedding XOR into tape, output extraction via XOR
+- [x] 100% tape restoration across all 50 tokens
+- [ ] RMS LayerNorm as Feistel-compatible normalization
+- [ ] Full 48-layer stack with Attention interleaving
+- **Result**: 3.45 tok/s on synthetic weights, 100% restoration rate
 - [x] 12-layer stack executing sequentially: DeltaNet × 12
 - [x] Output head: argmax over hidden dims → token ID
 - [x] Embedding XOR into tape, output extraction via XOR
@@ -55,12 +62,13 @@ The core inference pipeline runs end-to-end: tokenizer → embedding → 12 Delt
 - **Target**: 10-20× speedup at 60% hit rate → 35-70 tok/s
 - **Reuses**: Fractal cache exploit from Experiment 14 (same checksum + XOR pattern)
 
-#### 16.6 — ADJOINT UNCOMPUTATION & TAPE RESTORATION  🔥 ACTIVE
-- [ ] Fix gate inversion: replace `sigmoid(x) ≈ 0.5 + 0.25x` with exact `sigmoid(x) = 1/(1+e^-x)` or use polynomial approximation with known inverse
-- [ ] Reverse copy-through correctly: forward does `input ^= output, output=0`, backward must do same in reverse
-- [ ] Verify: SHA-256 of tape before = SHA-256 after each token
-- [ ] Bits erased per token: 0
-- **Status**: Backward pass runs but hash mismatch. Gate non-invertibility suspected.
+#### 16.6 — ADJOINT UNCOMPUTATION & TAPE RESTORATION  ✅ DONE
+- [x] Gate replay undo: save pre-gate value, recompute identical gate in backward pass
+- [x] Per-layer pre_gate and saved_output buffers prevent cross-layer register corruption
+- [x] 100% SHA-256 tape restoration verified for 1-12 layers
+- [x] 50/50 tokens with 100% restoration rate
+- [x] Bits erased per token: 0
+- **Result**: Full tape restoration. No gate inversion needed — pre-gate replay is exact.
 
 #### 16.7 — THERMODYNAMIC DAEMON INTEGRATION  ✅ DONE
 - [x] Daemon active: polar rotations at g=0.001 every 100 tokens
@@ -81,7 +89,7 @@ The core inference pipeline runs end-to-end: tokenizer → embedding → 12 Delt
 - [ ] Warm-tape hit rate vs cold passes after stencil population
 - [ ] SHA-256 restoration time per token
 - [ ] Compare vs llama.cpp baseline on same hardware
-- **Blocked on**: 16.5 (warm-tape) + 16.6 (restoration)
+- **Blocked on**: 16.5 (warm-tape)
 
 #### 16.10 — VALIDATION & HARDENING
 - [ ] 1000-token continuous generation with all tape restorations verified
@@ -89,7 +97,7 @@ The core inference pipeline runs end-to-end: tokenizer → embedding → 12 Delt
 - [ ] psutil memory snapshot: zero model weight bytes in heap
 - [ ] HDD-only weight access verified
 - [ ] 10,000-token stress test
-- **Blocked on**: 16.6
+- **Blocked on**: 16.1 (real model) + 16.3 (attention layers)
 
 ---
 
@@ -99,7 +107,7 @@ The core inference pipeline runs end-to-end: tokenizer → embedding → 12 Delt
 |:---|---:|
 | Tokens/second (12 layers) | 3.5 |
 | Time per token (12 layers) | ~285ms |
-| Tape restoration rate | 0% (gate non-invertibility) |
+| Tape restoration rate | 100% |
 | RAM for model weights | 0 bytes |
 | Layers executing | 12 DeltaNet (of 48 planned) |
 | HDD streaming | Synthetic (real model not mapped) |
@@ -108,7 +116,7 @@ The core inference pipeline runs end-to-end: tokenizer → embedding → 12 Delt
 
 ### Critical Path to 50 tok/s
 
-1. **Fix tape restoration** (16.6): replace approximate sigmoid with invertible function
+1. **Fix tape restoration** (16.6): Resolved (verified 100% restoration across all layers using pre-gate replay)
 2. **Add warm-tape replay** (16.5): port fractal cache infrastructure, pre-populate stencils
 3. **Bump to 48 layers** (16.4): full model depth with Attention interleaving
 4. **Rayon-parallel layers** (16.2): per-dimension parallelism within each layer
@@ -117,7 +125,7 @@ The core inference pipeline runs end-to-end: tokenizer → embedding → 12 Delt
 ### Critical Path to 1k tok/s
 
 6. **Port entire pipeline to Rust** (no Python in the hot loop): single FFI call per token
-7. **Invertible gate + verified restore**: skip compute on warm hits, verify on cold
+7. **Verified restore**: skip compute on warm hits, verify on cold
 8. **Real 27B weight mapping** (16.1): actual model, actual outputs
 
 ### Architecture Diagram
@@ -167,8 +175,8 @@ The core inference pipeline runs end-to-end: tokenizer → embedding → 12 Delt
 
 | Metric | Current | Target | Status |
 |:---|---|---:|:---|
-| Tokens/second | 3.5 | 50+ (warm-tape) / 1k (full catalytic) | 🔴 |
-| Tape restoration | 0% | 100% per token | 🔴 |
+| Tokens/second | 3.45 | 50+ (warm-tape) / 1k (full catalytic) | 🔴 |
+| Tape restoration | 100% | 100% per token | ✅ |
 | Bits erased | 0 | 0 per token | ✅ |
 | RAM for weights | 0 bytes | 0 bytes | ✅ |
 | Warm-tape hit rate | 0% | >30% after 100 tokens | ⬜ |

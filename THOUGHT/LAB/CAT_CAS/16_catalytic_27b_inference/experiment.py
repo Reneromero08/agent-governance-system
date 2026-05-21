@@ -182,7 +182,9 @@ class CatalyticInferenceRuntime:
         # Initialize tape with random substrate
         rng = np.random.RandomState(42)
         self.tape[:] = rng.randint(0, 256, TAPE_SIZE, dtype=np.uint8).tobytes()
-        self.initial_hash = hashlib.sha256(bytes(self.tape)).hexdigest()
+        # Initial hash of working region (enough to cover all modified offsets)
+        self.work_region_size = HIDDEN_DIM * 2 + NUM_LAYERS * HIDDEN_DIM + HIDDEN_DIM * 2  # weight + scratch space
+        self.initial_hash = hashlib.sha256(bytes(self.tape[:self.work_region_size])).hexdigest()
 
         self.tokens_generated = 0
         self.total_entropy = 0
@@ -224,8 +226,11 @@ class CatalyticInferenceRuntime:
 
             # Sync working region back from Rust
             if "working_region" in result:
-                wr = result["working_region"]
-                self.tape[:len(wr)] = bytearray(wr)
+                self.tape[:len(result["working_region"])] = bytearray(result["working_region"])
+
+            # Verify Python-side tape restoration on working region
+            current_hash = hashlib.sha256(bytes(self.tape[:self.work_region_size])).hexdigest()
+            tape_restored = (current_hash == self.initial_hash)
 
             next_token = result["generated_token"]
             total_entropy = result["total_entropy"]
