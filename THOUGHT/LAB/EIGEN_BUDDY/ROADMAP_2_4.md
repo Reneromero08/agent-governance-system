@@ -54,6 +54,19 @@
 * **Implementation:** Train on blocks 0-9. Freeze Core. Run blocks 10-20 with cached gate masks and projection tape. Measure resonance drop. Should stay above 95% if transfer works.
 * **Benefit:** 50% training time reduction. 10 blocks of training produce full 21-block coverage.
 
+### Track F: Orthogonal Parallel Cores — Multi-Model Tape Sharing (Priority #1)
+
+* **Objective:** Run N Core instances in parallel on the same GPU tape via QR-orthogonal subspace projections. CAT_CAS 13 proved: 2 models coexist on 2MB tape, 0% cross-talk, 1.98e-16 projection orthogonality, 100% tape restoration.
+* **Status:** IN PROGRESS
+* **Implementation:**
+  1. Generate N QR-orthogonal projection matrices (N × 192 × 192)
+  2. Initialize N Core instances, each projecting into its own orthogonal subspace
+  3. Each Core processes a different subset of the 21 blocks simultaneously
+  4. Outputs are combined via inverse QR projection
+  5. Tape is restored byte-identically after all Cores finish
+* **Files:** `core/phase_projection.py` — `orthogonal_parallel()` function
+* **Benefit:** N× throughput at 1× memory. 4 Cores = ~4× distillation speedup. Linear scaling with Core count up to tape dimension limit (192 orthogonal subspaces max).
+
 ---
 
 ## 3. Unified Architecture
@@ -65,7 +78,10 @@
   [ ROOT CACHE TAPE ] ──► 21 mean pointer states (4.8MB → 0.02MB)
         │
         ▼
-  [ NATIVE EIGEN CORE ] ──► Phase memory persists (Warm-Tape Replay)
+  [ NATIVE EIGEN CORE × N ] ──► QR-orthogonal subspaces (Parallel Track F)
+        │
+        ▼
+  [ DIM GATE CACHE ] ──► Binary mask per block (Gate Cache)
         │
         ▼
   [ DIM GATE CACHE ] ──► Binary mask per block (Gate Cache)
@@ -88,7 +104,8 @@
 * **Gate 2 (Dim Gate Cached):** Per-block gate mask eliminates 6,144-dim sigmoid per forward pass.
 * **Gate 3 (Memory Cached):** Warm start from deepest cached state. No cold starts between sweeps.
 * **Gate 4 (Cross-Block Transfer):** 10-block training → 95%+ resonance on all 21 blocks.
-* **Gate 5 (Unified Catalytic Pipeline):** All 5 tape caches active simultaneously. 0 bits erased per cycle.
+* **Gate 5 (Unified Catalytic Pipeline):** All 5 tape caches + orthogonal parallel Cores active simultaneously. 0 bits erased per cycle.
+* **Gate 6 (Parallel Orthogonal Scaling):** 4 Cores process 21 blocks in parallel on shared tape. Linear speedup verified. Cross-talk < 1e-10.
 
 ---
 

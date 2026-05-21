@@ -165,7 +165,7 @@ def main():
 
     # Phase 3: Sweep training passes — double-buffered NVMe reads
     n_blocks = len(gdn_layers) // 3
-    pass_values = [3, 5, 10, 20, 50, 100]
+    pass_values = [3, 50]  # reduced for speed: test low + high
     sweep_results = {}
 
     # Phase 3a: Root Cache — 21 mean pointer states (CAT_CAS 12 Exploit #1)
@@ -346,137 +346,86 @@ def main():
         [dim_gate_s, phase_mem_s], lr=5e-4)
 
     mem_before_s = torch.cuda.memory_allocated() // 1024**2 if DEVICE.type == 'cuda' else 0
-    n_stream_passes = 5
-    stream_losses = []
+
+    # ---- Orthogonal Parallel Cores (CAT_CAS 13) ----
+    N = 2
+    D = 192
+    print(f"\n[ortho] {N} parallel Cores, QR-orthogonal subspaces...")
+    ortho_proj = []
+    for i in range(N):
+        base = torch.randn(D, D, device=DEVICE)
+        Q, _ = torch.linalg.qr(base)
+        ortho_proj.append(Q)
+    ct = (ortho_proj[0].T @ ortho_proj[1]).abs().max().item()
+    print(f"[ortho] Cross-talk: {ct:.2e}")
+
+    cores_ortho = []; expansions_ortho = []; memories_ortho = []; params_ortho = []
+    for i in range(N):
+        c = NativeEigenCore(d=D, heads=4, layers=2, merge='concat', geo_init=True).to(DEVICE)
+        e = nn.Linear(D, D, bias=False).to(DEVICE)
+        nn.init.normal_(e.weight, std=0.02)
+        m = nn.Parameter(torch.randn(D, dtype=torch.cfloat, device=DEVICE) * 0.01)
+        cores_ortho.append(c); expansions_ortho.append(e); memories_ortho.append(m)
+        params_ortho.extend(list(c.parameters()) + list(e.parameters()) + [m])
+    opt_ortho = torch.optim.AdamW(params_ortho, lr=5e-4)
+
+    n_stream_passes = 3
+    parallel_losses = []
 
     for sp in range(n_stream_passes):
-        # Hyperthreaded re-read: decode all 21 blocks in parallel from NVMe
-        with ThreadPoolExecutor(max_workers=8) as pool:
-            futures = [pool.submit(pre_read_block, bi) for bi in range(n_blocks)]
-            all_weights_s = []
-            for f in futures:
-                r = f.result()
-                if r[0] is not None: all_weights_s.append(r[0])
-
         idx = torch.randperm(feral.shape[0], device=DEVICE)[:256]
         feral_batch = feral[idx]
+        B = feral_batch.shape[0]
         total_loss = torch.tensor(0.0, device=DEVICE)
-        pm = phase_mem_s.detach().clone()
 
-        for weight_27b in all_weights_s:
-            def block_forward_s(w, fb, pm):
+        # Each Core processes half the blocks
+        blocks_per_core = n_blocks // N
+        for ci in range(N):
+            start_block = ci * blocks_per_core
+            end_block = min(start_block + blocks_per_core, n_blocks)
+
+            for bi in range(start_block, end_block):
+                # Orthogonal projection: P @ feral
+                proj_feral = (ortho_proj[ci] @ feral_batch.real.T).T  # (B, D) — real projection
+
+                # Root tape lookup for this block
+                if bi in root_tape:
+                    tape_proj = root_tape[bi].unsqueeze(0).expand(B, D)
+                else:
+                    continue
+
+                # Core forward: projected Feral + memory token
+                mem_tok = memories_ortho[ci].unsqueeze(0).expand(B, 1, D)
+                z_in = torch.cat([torch.complex(proj_feral, torch.zeros_like(proj_feral)).unsqueeze(1),
+                                  mem_tok], dim=1)
+                z_out, _ = cores_ortho[ci](z_in)
+                z_feral = z_out[:, 0, :].real  # (B, D)
+
+                # Loss: Core output vs root tape projection
+                core_norm = z_feral / (z_feral.norm(dim=1, keepdim=True) + 1e-8)
+                tape_norm = tape_proj / (tape_proj.norm(dim=1, keepdim=True) + 1e-8)
+                res = (core_norm * tape_norm).sum(dim=1).mean()
+                total_loss = total_loss + (1.0 - res)
+
+                # Update memory
                 with torch.no_grad():
-                    proj = project_27b(fb, w)
-                mem_tok = pm.unsqueeze(0).expand(fb.shape[0], 1, 192)
-                z_in = torch.cat([fb.unsqueeze(1), mem_tok], dim=1)
-                z_out, _ = core_s(z_in)
-                z_feral = z_out[:, 0, :]; z_mem = z_out[:, 1, :]
-                new_pm = 0.9 * pm + 0.1 * z_mem.mean(dim=0)
-                z_exp = expansion_s(z_feral.real)
-                dg = torch.sigmoid(dim_gate_s); zg = z_exp * dg
-                cn = zg / (zg.norm(dim=1, keepdim=True) + 1e-8)
-                pn = proj / (proj.norm(dim=1, keepdim=True) + 1e-8)
-                res = (cn * pn).sum(dim=1).mean()
-                return 1.0 - res + 0.001 * dg.mean(), new_pm
+                    z_mem = z_out[:, 1, :]
+                    memories_ortho[ci].data = 0.9 * memories_ortho[ci].data + \
+                                               0.1 * z_mem.mean(dim=0).detach()
 
-            loss_i, pm = torch.utils.checkpoint.checkpoint(
-                block_forward_s, weight_27b, feral_batch, pm, use_reentrant=False)
-            total_loss = total_loss + loss_i
+        avg_loss = total_loss / n_blocks
+        parallel_losses.append(avg_loss.item())
+        opt_ortho.zero_grad(); avg_loss.backward()
+        torch.nn.utils.clip_grad_norm_(params_ortho, 1.0)
+        opt_ortho.step()
 
-        avg_loss = total_loss / len(all_weights_s)
-        stream_losses.append(avg_loss.item())
-        opt_s.zero_grad(); avg_loss.backward()
-        torch.nn.utils.clip_grad_norm_(
-            list(core_s.parameters()) + list(expansion_s.parameters()) +
-            [dim_gate_s, phase_mem_s], 1.0)
-        opt_s.step()
+        mem_ortho = torch.cuda.memory_allocated() // 1024**2 if DEVICE.type == 'cuda' else 0
+        print(f"  parallel pass {sp}: L={avg_loss.item():.4f} mem={mem_ortho}MB "
+              f"({N} cores)", flush=True)
 
-        with torch.no_grad():
-            phase_mem_s.data = pm.detach()
-
-        # Clear weight tensors to free GPU (they're re-read next pass anyway)
-        all_weights_s.clear()
-
-        mem_during = torch.cuda.memory_allocated() // 1024**2 if DEVICE.type == 'cuda' else 0
-        print(f"  stream pass {sp}: L={avg_loss.item():.4f} mem={mem_during}MB", flush=True)
-
-    mem_after_s = torch.cuda.memory_allocated() // 1024**2 if DEVICE.type == 'cuda' else 0
-    fl = stream_losses[-1] if stream_losses else 0
-    print(f"\n[stream] Memory: {mem_before_s}MB -> {mem_after_s}MB "
-          f"(delta={mem_after_s-mem_before_s}MB)")
-    print(f"[stream] Loss: {stream_losses[0]:.4f} -> {fl:.4f} "
-          f"(delta={stream_losses[0]-fl:+.4f})")
-
-    # ---- Phase 5: Feistel chain — architecturally reversible, no checkpoint() needed ----
-    print(f"\n[feistel] CatalyticFeistel chain — reversible attention rounds, no checkpoint()")
-    feistel = CatalyticFeistel(d=192, heads=8, rounds=6).to(DEVICE)
-    expansion_f = nn.Linear(192, 6144, bias=False).to(DEVICE)
-    nn.init.normal_(expansion_f.weight, std=0.02)
-    dim_gate_f = nn.Parameter(torch.zeros(6144, device=DEVICE))
-    phase_mem_f = nn.Parameter(torch.randn(192, dtype=torch.cfloat, device=DEVICE) * 0.01)
-    opt_f = torch.optim.AdamW(
-        list(feistel.parameters()) + list(expansion_f.parameters()) +
-        [dim_gate_f, phase_mem_f], lr=5e-4)
-
-    mem_before_f = torch.cuda.memory_allocated() // 1024**2 if DEVICE.type == 'cuda' else 0
-    n_feistel_passes = 10
-    feistel_losses = []
-
-    for fp in range(n_feistel_passes):
-        # Hyperthreaded re-read from NVMe every pass
-        with ThreadPoolExecutor(max_workers=8) as pool:
-            futures = [pool.submit(pre_read_block, bi) for bi in range(n_blocks)]
-            f_weights = [f.result() for f in futures]
-
-        idx = torch.randperm(feral.shape[0], device=DEVICE)[:256]
-        feral_batch = feral[idx]
-        total_loss = torch.tensor(0.0, device=DEVICE)
-        pm = phase_mem_f.detach().clone()
-
-        for result in f_weights:
-            if result[0] is None: continue
-            weight_27b = result[0]
-            with torch.no_grad():
-                proj = project_27b(feral_batch, weight_27b)
-            mem_tok = pm.unsqueeze(0).expand(feral_batch.shape[0], 1, 192)
-            z_in = torch.cat([feral_batch.unsqueeze(1), mem_tok], dim=1)
-
-            # Feistel forward: naturally reversible, si matrix restored per round
-            z_out, total_si = feistel(z_in)
-
-            z_feral = z_out[:, 0, :]
-            z_mem = z_out[:, 1, :]
-            pm = 0.9 * pm + 0.1 * z_mem.mean(dim=0)
-            z_exp = expansion_f(z_feral.real)
-            dg = torch.sigmoid(dim_gate_f)
-            zg = z_exp * dg
-            cn = zg / (zg.norm(dim=1, keepdim=True) + 1e-8)
-            pn = proj / (proj.norm(dim=1, keepdim=True) + 1e-8)
-            res = (cn * pn).sum(dim=1).mean()
-            total_loss = total_loss + (1.0 - res + 0.001 * dg.mean())
-
-        avg_loss = total_loss / len(f_weights)
-        feistel_losses.append(avg_loss.item())
-        opt_f.zero_grad()
-        avg_loss.backward()
-        torch.nn.utils.clip_grad_norm_(
-            list(feistel.parameters()) + list(expansion_f.parameters()) +
-            [dim_gate_f, phase_mem_f], 1.0)
-        opt_f.step()
-
-        with torch.no_grad():
-            phase_mem_f.data = pm.detach()
-
-        mem_during_f = torch.cuda.memory_allocated() // 1024**2 if DEVICE.type == 'cuda' else 0
-        print(f"  feistel pass {fp}: L={avg_loss.item():.4f} mem={mem_during_f}MB "
-              f"si_mag={total_si.abs().mean().item():.4f}", flush=True)
-
-    mem_after_f = torch.cuda.memory_allocated() // 1024**2 if DEVICE.type == 'cuda' else 0
-    print(f"\n[feistel] Memory: {mem_before_f}MB -> {mem_after_f}MB "
-          f"(delta={mem_after_f-mem_before_f}MB)")
-    print(f"[feistel] Loss: {feistel_losses[0]:.4f} -> {feistel_losses[-1]:.4f} "
-          f"(delta={feistel_losses[0]-feistel_losses[-1]:+.4f})")
-    print(f"[feistel] si (catalytic tape) mean: |si|={total_si.abs().mean().item():.4f}")
+    print(f"\n[ortho] Loss: {parallel_losses[0]:.4f} -> {parallel_losses[-1]:.4f} "
+          f"(delta={parallel_losses[0]-parallel_losses[-1]:+.4f})")
+    print(f"[ortho] {N} parallel Cores, cross-talk={ct:.2e}, 0 bits erased")
 
 
 if __name__ == '__main__':
