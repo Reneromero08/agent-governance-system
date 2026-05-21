@@ -16,7 +16,6 @@ panic = "abort"
 [dependencies]
 pyo3 = { version = "0.22", features = ["extension-module"] }
 numpy = "0.22"
-libm = "0.2"
 rayon = "1.10"
 rand = "0.8"
 sha2 = "0.10"
