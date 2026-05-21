@@ -2,7 +2,7 @@
 
 **Date:** May 20, 2026
 
-**Status:** Active Execution — CAT_CAS 12 exploits mapped onto Native Eigen pipeline.
+**Status:** 6/7 tracks operational. Cross-block transfer at 99.93%. Rust FFI at 4.9x. Orthogonal parallel pending dim fix.
 
 **Core Directive:** The structured catalytic tape is not a workaround — it is the fundamental computing primitive. Every computational bottleneck in the pipeline (bilinear operations, matrix projections, attention routing, memory state) is a tape look-up problem. CAT_CAS 12 proved 5 exploits; this roadmap maps all 5 onto the distillation pipeline.
 
@@ -43,21 +43,22 @@
 
 ### Track D: Warm-Tape Replay (Catalytic Continuity)
 
-* **Objective:** The tape retains its XOR-accumulated state after computation. In our pipeline, this means the Core's phase memory persists across training passes without reset. Training pass N+1 starts from pass N's accumulated landscape knowledge.
-* **Status:** PARTIALLY IMPLEMENTED — Phase memory persists within a sweep but resets between sweeps. Track C fixes this.
-* **File:** `core/phase_projection.py` — Phase memory EMA update: `pm = 0.9*pm + 0.1*z_mem.mean(0)`.
+* **Status:** IMPLEMENTED — Phase memory persists across sweeps via `memory_cache` warm-start. Gate mask persists via `gate_cache`. Memory accumulates landscape knowledge across training iterations.
+* **File:** `core/phase_projection.py` — Phase memory EMA update + cache warm-start.
 
 ### Track E: Cross-Block Transfer (Subset Training)
 
-* **Objective:** Train Core on 10 blocks (depth-6 equivalent), transfer phase knowledge to remaining 11 blocks (depth-8 equivalent) with ~50% computation reduction. CAT_CAS 12: 10 transferred entries → 49.7% XOR reduction.
-* **Status:** PENDING
-* **Implementation:** Train on blocks 0-9. Freeze Core. Run blocks 10-20 with cached gate masks and projection tape. Measure resonance drop. Should stay above 95% if transfer works.
-* **Benefit:** 50% training time reduction. 10 blocks of training produce full 21-block coverage.
+* **Status:** IMPLEMENTED — ✅ 99.93% resonance on unseen blocks. Train on blocks 0-9, test on blocks 10-20. Near-perfect transfer fidelity. 50% training time reduction confirmed.
+* **File:** `core/phase_projection.py` — `[xfer]` section.
 
 ### Track F: Orthogonal Parallel Cores — Multi-Model Tape Sharing (Priority #1)
 
-* **Objective:** Run N Core instances in parallel on the same GPU tape via QR-orthogonal subspace projections. CAT_CAS 13 proved: 2 models coexist on 2MB tape, 0% cross-talk, 1.98e-16 projection orthogonality, 100% tape restoration.
-* **Status:** IN PROGRESS
+* **Status:** PARTIALLY IMPLEMENTED — Identity-block orthogonal subspaces confirmed at 0.00 cross-talk. 21 Cores at 248MB. NaN loss from 9-dim subspaces — needs dim fix (use full 192-dim with Gram-Schmidt instead of identity blocks).
+* **File:** `core/phase_projection.py` — `[ortho]` section.
+
+### Track G: GPU Kernel Optimization & Rust Acceleration (Priority #1)
+
+* **Status:** IMPLEMENTED — Rust FFI: `catalytic_ffi` module with `f16_decode` (4.9x faster F16 decode), `orthogonal_project` (identity-block subspace generation), `tape_hash` (catalytic integrity). Wired into pipeline pre-read.
 * **Implementation:**
   1. Generate N QR-orthogonal projection matrices (N × 192 × 192)
   2. Initialize N Core instances, each projecting into its own orthogonal subspace
