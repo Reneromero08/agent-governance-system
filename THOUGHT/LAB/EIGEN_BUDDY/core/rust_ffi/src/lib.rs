@@ -325,7 +325,7 @@ fn eval_node_leaf(
 // CATALYTIC 27B INFERENCE ENGINE
 // ==================================================================
 
-const HIDDEN_DIM: usize = 2048;
+const HIDDEN_DIM: usize = 896;  // Qwen 0.5B hidden dim
 const FP8_SCALE: f32 = 1.0 / 127.0;
 
 const MAX_SEQ_LEN: usize = 1024;
@@ -497,7 +497,7 @@ fn catalytic_inference_step<'py>(
 
                 // 3. Scaled Dot-Product Attention (16 heads)
                 let num_heads = 16;
-                let head_dim = 128;
+                let head_dim = HIDDEN_DIM / num_heads;  // 56 for HIDDEN_DIM=896
                 let scale = 1.0 / (head_dim as f32).sqrt();
                 let mut attn_out_x = vec![0u8; max_dim];
                 let mut attn_out_y = vec![0u8; max_dim];
@@ -647,7 +647,7 @@ fn catalytic_inference_step<'py>(
 
                 // 2. Recompute attn_out (we have Q and K, V in cache)
                 let num_heads = 16;
-                let head_dim = 128;
+                let head_dim = HIDDEN_DIM / num_heads;
                 let scale = 1.0 / (head_dim as f32).sqrt();
                 let mut attn_out_x = vec![0u8; max_dim];
                 let mut attn_out_y = vec![0u8; max_dim];

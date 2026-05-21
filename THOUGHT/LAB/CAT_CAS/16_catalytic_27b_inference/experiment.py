@@ -30,10 +30,10 @@ import catalytic_ffi
 
 TAPE_SIZE_MB = 256
 TAPE_SIZE = TAPE_SIZE_MB * 1024 * 1024
-HDD_MODEL_PATH = str(Path(__file__).parent / "qwen_0.5b" / "model.safetensors")
-TOKENIZER_PATH = str(Path(__file__).parent / "qwen_0.5b" / "tokenizer.json")
+HDD_MODEL_PATH = str(Path(__file__).parent / "gemini_update" / "qwen_0.5b" / "model.safetensors")
+TOKENIZER_PATH = str(Path(__file__).parent / "gemini_update" / "qwen_0.5b" / "tokenizer.json")
 
-HIDDEN_DIM = 2048
+HIDDEN_DIM = 896  # Qwen 0.5B hidden dimension
 NUM_LAYERS = 48  # 36 DeltaNet + 12 Attention
 DELTANET_PER_ATTENTION = 3  # 3:1 stride
 
@@ -49,19 +49,27 @@ BEKENSTEIN_BOUND = 2 * np.pi * 1e-3 * 29e-6 * C_LIGHT**2 / (HBAR * C_LIGHT * LN2
 # ==================================================================
 
 class TokenizerBridge:
-    """Minimal tokenizer: maps text to concept vectors for the memory-gate fabric.
-    
-    In production, this would use the actual Qwen3.6 tokenizer.
-    Here we use a hash-based embedding to demonstrate the pipeline.
-    """
+    """Tokenizer: uses the real Qwen tokenizer.json if available."""
 
     def __init__(self, dim=HIDDEN_DIM, seed=42):
         self.dim = dim
         self.rng = np.random.RandomState(seed)
         self.vocab_cache = {}
+        self._real_embedding_table = None
+        self._qwen_tokenizer = None
+        
+        if os.path.exists(TOKENIZER_PATH):
+            try:
+                from transformers import AutoTokenizer
+                self._qwen_tokenizer = AutoTokenizer.from_pretrained(
+                    str(Path(TOKENIZER_PATH).parent), local_files_only=True
+                )
+            except Exception:
+                pass
 
     def tokenize(self, text: str, max_tokens: int = 2048) -> list:
-        """Convert text to token IDs using hash-based lookup."""
+        if self._qwen_tokenizer is not None:
+            return self._qwen_tokenizer.encode(text, max_length=max_tokens, truncation=True)
         words = text.split()
         tokens = []
         for w in words:
@@ -73,7 +81,8 @@ class TokenizerBridge:
         return tokens
 
     def embed(self, token_id: int) -> bytes:
-        """Convert a token ID to its embedding vector."""
+        if self._real_embedding_table and token_id in self._real_embedding_table:
+            return self._real_embedding_table[token_id]
         if token_id not in self.vocab_cache:
             self.rng.seed(token_id)
             vec = self.rng.randint(0, 256, self.dim * 2, dtype=np.uint8)
@@ -81,7 +90,8 @@ class TokenizerBridge:
         return self.vocab_cache[token_id]
 
     def detokenize(self, token_id: int) -> str:
-        """Convert token ID back to text (approximation)."""
+        if self._qwen_tokenizer is not None:
+            return self._qwen_tokenizer.decode([token_id])
         return f"[tok_{token_id}]"
 
 
@@ -155,6 +165,42 @@ class HDDWeightStreamer:
         self.scrambled_weights = catalytic_ffi.scramble_catalysis_weights(self.raw_weights)
         self.foam_entropy = sum(bin(b & 0x03).count('1') for b in self.scrambled_weights)
 
+        # Extract embedding table from safetensors
+        self.embedding_table = {}
+        self.embedding_np = None
+        if "model.embed_tokens.weight" in self.tensors:
+            einfo = self.tensors["model.embed_tokens.weight"]
+            estart, eend = einfo["data_offsets"]
+            eshape = einfo["shape"]  # [vocab_size, embed_dim]
+            edtype = einfo.get("dtype", "F32")
+            vocab_size, embed_dim = int(eshape[0]), int(eshape[1])
+            ebytes = self._mmap[self.data_offset + estart : self.data_offset + eend]
+            # Convert BF16/F32 to uint8 embeddings (clamp to byte range)
+            embeddings = np.frombuffer(ebytes, dtype=np.uint16 if edtype == "BF16" else np.float32)
+            if edtype == "BF16":
+                # BF16 stored as uint16, reinterpret as float32 via shift
+                embeddings = embeddings.astype(np.uint32) << 16
+                embeddings = embeddings.view(np.float32)
+            # Reshape and quantize to uint8 per dimension
+            embeddings = embeddings.reshape(vocab_size, embed_dim)
+            for token_id in range(vocab_size):
+                vec = embeddings[token_id]
+                # Scale to uint8 range
+                vec_min, vec_max = vec.min(), vec.max()
+                if vec_max > vec_min:
+                    vec = ((vec - vec_min) / (vec_max - vec_min) * 255).astype(np.uint8)
+                else:
+                    vec = np.zeros(embed_dim, dtype=np.uint8)
+                # Interleave XY: store real and imag channels
+                out = np.zeros(HIDDEN_DIM * 2, dtype=np.uint8)
+                out[:embed_dim] = vec[:embed_dim]
+                out[:embed_dim] = vec[:embed_dim]
+                out[HIDDEN_DIM:HIDDEN_DIM+embed_dim] = vec[:embed_dim]
+                self.embedding_table[token_id] = bytes(out)
+        self.embedding_np = embeddings.astype(np.float32) / 255.0  # store as float32 for dot product
+        self.embedding_dim = embed_dim
+        self.vocab_size = vocab_size
+
     def close(self):
         if self._mmap:
             self._mmap.close()
@@ -202,8 +248,10 @@ class CatalyticInferenceRuntime:
     def __init__(self, model_path=HDD_MODEL_PATH):
         self.model_path = model_path
         self.tape = bytearray(TAPE_SIZE)
-        self.tokenizer = TokenizerBridge()
         self.streamer = HDDWeightStreamer(model_path, TAPE_SIZE, num_layers=NUM_LAYERS)
+        self.tokenizer = TokenizerBridge()
+        self.tokenizer._real_embedding_table = self.streamer.embedding_table
+        self._real_embedding_np = self.streamer.embedding_np
         self.daemon = ThermodynamicDaemon()
 
         # Initialize tape with random substrate
@@ -255,6 +303,16 @@ class CatalyticInferenceRuntime:
             # Sync working region back from Rust
             if "working_region" in result:
                 self.tape[:len(result["working_region"])] = bytearray(result["working_region"])
+
+            # lm_head projection: dot product of hidden state against embedding table
+            next_token = result["generated_token"]
+            if self._real_embedding_np is not None:
+                hidden_bytes = bytes(self.tape[:HIDDEN_DIM])
+                hidden = np.frombuffer(hidden_bytes, dtype=np.uint8).astype(np.float32)
+                logits = self._real_embedding_np @ hidden  # [vocab_size, 896] @ [896] = [vocab_size]
+                head_token = int(np.argmax(logits))
+                # Override with lm_head result
+                next_token = head_token
 
             # Verify Python-side tape restoration on working region
             current_hash = hashlib.sha256(bytes(self.tape[:self.work_region_size])).hexdigest()
