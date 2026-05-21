@@ -165,7 +165,7 @@ def main():
 
     # Phase 3: Sweep training passes — double-buffered NVMe reads
     n_blocks = len(gdn_layers) // 3
-    pass_values = [3, 50]  # reduced for speed: test low + high
+    pass_values = [3]  # quick sweep for extreme parallel test
     sweep_results = {}
 
     # Phase 3a: Root Cache — 21 mean pointer states (CAT_CAS 12 Exploit #1)
@@ -348,16 +348,28 @@ def main():
     mem_before_s = torch.cuda.memory_allocated() // 1024**2 if DEVICE.type == 'cuda' else 0
 
     # ---- Orthogonal Parallel Cores (CAT_CAS 13) ----
-    N = 2
+    N = 21  # one Core per block, true orthogonal basis
     D = 192
-    print(f"\n[ortho] {N} parallel Cores, QR-orthogonal subspaces...")
+
+    # True orthogonal basis: use the identity eigenvectors (Hadamard-like)
+    # Each Core gets an orthogonal projection into a distinct subspace
     ortho_proj = []
+    # Use torch.eye blocks: each Core claims D//N contiguous dimensions
+    dims_per_core = D // N
     for i in range(N):
-        base = torch.randn(D, D, device=DEVICE)
-        Q, _ = torch.linalg.qr(base)
-        ortho_proj.append(Q)
-    ct = (ortho_proj[0].T @ ortho_proj[1]).abs().max().item()
-    print(f"[ortho] Cross-talk: {ct:.2e}")
+        P = torch.zeros(D, D, device=DEVICE)
+        start = i * dims_per_core
+        end = start + dims_per_core
+        P[start:end, start:end] = torch.eye(dims_per_core, device=DEVICE)
+        ortho_proj.append(P)
+    # Verify cross-talk across all pairs
+    ct_vals = []
+    for i in range(N):
+        for j in range(i+1, N):
+            ct = (ortho_proj[i].T @ ortho_proj[j]).abs().max().item()
+            ct_vals.append(ct)
+    avg_ct = sum(ct_vals) / len(ct_vals) if ct_vals else 0
+    print(f"[ortho] Cross-talk: avg={avg_ct:.2e} max={max(ct_vals) if ct_vals else 0:.2e}")
 
     cores_ortho = []; expansions_ortho = []; memories_ortho = []; params_ortho = []
     for i in range(N):
@@ -369,7 +381,7 @@ def main():
         params_ortho.extend(list(c.parameters()) + list(e.parameters()) + [m])
     opt_ortho = torch.optim.AdamW(params_ortho, lr=5e-4)
 
-    n_stream_passes = 3
+    n_stream_passes = 5
     parallel_losses = []
 
     for sp in range(n_stream_passes):
@@ -378,9 +390,10 @@ def main():
         B = feral_batch.shape[0]
         total_loss = torch.tensor(0.0, device=DEVICE)
 
-        # Each Core processes half the blocks
-        blocks_per_core = n_blocks // N
-        for ci in range(N):
+        # Distribute blocks across Cores (round-robin)
+        blocks_per_core = (n_blocks + min(N, n_blocks) - 1) // min(N, n_blocks)
+        active_cores = min(N, n_blocks)
+        for ci in range(active_cores):
             start_block = ci * blocks_per_core
             end_block = min(start_block + blocks_per_core, n_blocks)
 
@@ -425,7 +438,7 @@ def main():
 
     print(f"\n[ortho] Loss: {parallel_losses[0]:.4f} -> {parallel_losses[-1]:.4f} "
           f"(delta={parallel_losses[0]-parallel_losses[-1]:+.4f})")
-    print(f"[ortho] {N} parallel Cores, cross-talk={ct:.2e}, 0 bits erased")
+    print(f"[ortho] {active_cores}/{N} Cores active, cross-talk avg={avg_ct:.2e}, 0 bits erased")
 
 
 if __name__ == '__main__':
