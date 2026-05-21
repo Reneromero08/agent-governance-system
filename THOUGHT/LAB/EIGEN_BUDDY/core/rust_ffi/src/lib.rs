@@ -187,11 +187,12 @@ fn fractal_cache_exploit<'py>(
     py: Python<'py>,
     tape_data: Bound<'py, PyBytes>,
     num_cycles: usize,
+    cache_size: usize,  // bytes of cache data; rest of tape is target register space
 ) -> PyResult<Bound<'py, PyDict>> {
     let bytes = tape_data.as_bytes();
     let tape_size = bytes.len();
-    let tape_capacity_bits = (tape_size * 8) as u64;
-    let max_entries = tape_size / CACHE_ENTRY_SIZE;
+    let tape_capacity_bits = (cache_size * 8) as u64;  // only count cache region as "tape"
+    let max_entries = cache_size / CACHE_ENTRY_SIZE;
 
     let mut tape: Vec<u8> = bytes.to_vec();
     let initial_hash = {
@@ -202,52 +203,64 @@ fn fractal_cache_exploit<'py>(
 
     let start = std::time::Instant::now();
     let mut total_entropy: u64 = 0;
-    let mut errors: u64 = 0;
+    let atomic_entropy = AtomicU64::new(0);
+    let atomic_errors = AtomicU64::new(0);
+    let num_threads = rayon::current_num_threads();
+    let target_stride = 1024usize;  // each thread gets its own 1024-byte target region
 
-    // Phase 1: run cache hits — XOR cached value into target register
-    for cycle in 0..num_cycles {
-        let entry_idx = cycle % max_entries;
-        let offset = entry_idx * CACHE_ENTRY_SIZE;
+    // Build cycles into per-thread work
+    let tape_ptr = tape.as_mut_ptr() as usize;
+    let tape_len = tape.len();
 
-        let val = tape[offset];
-        let stored_cs = tape[offset + 1];
-        let depth = u16::from_be_bytes([tape[offset + 2], tape[offset + 3]]);
-        let kval = u16::from_be_bytes([tape[offset + 4], tape[offset + 5]]);
+    (0..num_threads).into_par_iter().for_each(|tid| {
+        let t = unsafe { std::slice::from_raw_parts_mut(tape_ptr as *mut u8, tape_len) };
+        let target_base = cache_size + tid * target_stride;
 
-        let expected_cs = ((depth as usize * 7 + kval as usize * 13 + val as usize * 31) & 0xFF) as u8;
-
-        if stored_cs != expected_cs {
-            errors += 1;
-            continue;
+        // Forward pass
+        let mut local_entropy: u64 = 0;
+        let mut c = tid;
+        while c < num_cycles {
+            let entry_idx = c % max_entries;
+            let offset = entry_idx * CACHE_ENTRY_SIZE;
+            let val = t[offset];
+            let stored_cs = t[offset + 1];
+            let depth = u16::from_be_bytes([t[offset + 2], t[offset + 3]]);
+            let kval = u16::from_be_bytes([t[offset + 4], t[offset + 5]]);
+            let expected_cs = ((depth as usize * 7 + kval as usize * 13 + val as usize * 31) & 0xFF) as u8;
+            if stored_cs != expected_cs {
+                atomic_errors.fetch_add(1, Ordering::Relaxed);
+            } else {
+                let ts = target_base + (c % target_stride);
+                t[ts] ^= val;
+                local_entropy += val.count_ones() as u64;
+            }
+            c += num_threads;
         }
+        atomic_entropy.fetch_add(local_entropy, Ordering::Relaxed);
 
-        // Target registers at the END of tape, beyond cache entries
-        let target_base = tape_size - 2048;
-        let target_slot = target_base + (cycle % 1024);
-        tape[target_slot] ^= val;
-        total_entropy += val.count_ones() as u64;
-    }
-
-    // Phase 2: restore — re-XOR same values back
-    for cycle in (0..num_cycles).rev() {
-        let entry_idx = cycle % max_entries;
-        let offset = entry_idx * CACHE_ENTRY_SIZE;
-        let val = tape[offset];
-        let stored_cs = tape[offset + 1];
-
-        // Only restore entries that passed checksum
-        let depth = u16::from_be_bytes([tape[offset + 2], tape[offset + 3]]);
-        let kval = u16::from_be_bytes([tape[offset + 4], tape[offset + 5]]);
-        let expected_cs = ((depth as usize * 7 + kval as usize * 13 + val as usize * 31) & 0xFF) as u8;
-        if stored_cs == expected_cs {
-            // Target registers at the END of tape, beyond cache entries
-        let target_base = tape_size - 2048;
-        let target_slot = target_base + (cycle % 1024);
-            tape[target_slot] ^= val;
+        // Restore in reverse
+        let last_c = tid + ((num_cycles.saturating_sub(1 + tid)) / num_threads) * num_threads;
+        let mut c_restore = last_c;
+        loop {
+            let entry_idx = c_restore % max_entries;
+            let offset = entry_idx * CACHE_ENTRY_SIZE;
+            let val = t[offset];
+            let stored_cs = t[offset + 1];
+            let depth = u16::from_be_bytes([t[offset + 2], t[offset + 3]]);
+            let kval = u16::from_be_bytes([t[offset + 4], t[offset + 5]]);
+            let expected_cs = ((depth as usize * 7 + kval as usize * 13 + val as usize * 31) & 0xFF) as u8;
+            if stored_cs == expected_cs {
+                let ts = target_base + (c_restore % target_stride);
+                t[ts] ^= val;
+            }
+            if c_restore < num_threads { break; }
+            c_restore -= num_threads;
         }
-    }
+    });
 
     let elapsed = start.elapsed().as_secs_f64();
+    let total_entropy = atomic_entropy.load(Ordering::Relaxed);
+    let errors = atomic_errors.load(Ordering::Relaxed);
     let ratio = total_entropy as f64 / tape_capacity_bits as f64;
 
     let final_hash = {
