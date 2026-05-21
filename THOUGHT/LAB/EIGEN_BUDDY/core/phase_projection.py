@@ -168,12 +168,11 @@ def main():
     pass_values = [3, 5, 10, 20, 50, 100]
     sweep_results = {}
 
-    # Phase 3a: Precompute 27B projection tape (CAT_CAS 12 structured tape)
-    # Cache: pooled proj = mean(W @ pad(feral)) for all vectors x all blocks
-    # Eliminates F16 decode + 6144x192 matrix multiply every training pass
-    print(f"\n[tape] Precomputing projection tape ({feral.shape[0]} vectors x {n_blocks} blocks)...")
+    # Phase 3a: Root Cache — 21 mean pointer states (CAT_CAS 12 Exploit #1)
+    # 1 entry per block instead of 300. Precompute: 77s -> 4s.
+    print(f"\n[tape] Root Cache: 1 mean pointer state per block ({n_blocks} blocks)...")
     t0 = time.time()
-    projection_tape = {}
+    root_tape = {}  # block_idx -> mean 192-dim projection
     for bi in range(n_blocks):
         gdn = gdn_layers[bi*3:bi*3+3]
         for name, info in tensors.items():
@@ -183,17 +182,15 @@ def main():
                     w = f16_to_torch(mm[off:off + info['size']])
                     w = w.reshape(tuple(int(d) for d in info['shape']))
                     with torch.no_grad():
-                        proj_full = project_27b(feral, w)
+                        proj_full = project_27b(feral, w)  # (N, 6144)
                         pool_size = 6144 // 192
                         proj_pooled = proj_full.view(feral.shape[0], 192, pool_size).mean(dim=2)
-                        for vi in range(feral.shape[0]):
-                            projection_tape[(bi, vi)] = proj_pooled[vi].clone()
+                        root_tape[bi] = proj_pooled.mean(dim=0)  # (192,) — the root pointer
                     del w
                     break
-        if bi % 5 == 0:
-            print(f"  tape block {bi}/{n_blocks}...", flush=True)
-    tape_mb = sum(v.numel() * v.element_size() for v in projection_tape.values()) / 1e6
-    print(f"[tape] {len(projection_tape)} entries, {tape_mb:.1f}MB, in {time.time()-t0:.1f}s")
+    tape_mb = sum(v.numel() * v.element_size() for v in root_tape.values()) / 1e6
+    print(f"[tape] {len(root_tape)} entries, {tape_mb:.3f}MB, in {time.time()-t0:.1f}s")
+    print(f"[tape] Reduction: 6,300 -> {len(root_tape)} entries ({6300/len(root_tape):.0f}x)")
 
     def pre_read_block(block_idx):
         """Read SSM/attention tensor from NVMe with zero-copy mmap.
@@ -213,13 +210,24 @@ def main():
                     return w.reshape(tuple(int(d) for d in info['shape'])), sz, name, bw_mbps
         return None, 0, None, 0
 
+    # CAT_CAS 12 tape caches: persist across sweeps
+    gate_cache = None      # (6144,) binary mask from best sweep
+    memory_cache = None    # (192,) complex phase memory from best sweep
+
     for n_passes in pass_values:
-        # Re-init Core + expansion + gate fresh for each sweep
+        # Warm-start from cached gate and memory (Tracks B+C)
+        if gate_cache is not None:
+            dim_gate_raw = nn.Parameter(gate_cache.clone().float())
+        else:
+            dim_gate_raw = nn.Parameter(torch.zeros(6144, device=DEVICE))
+        if memory_cache is not None:
+            phase_memory = nn.Parameter(memory_cache.clone())
+        else:
+            phase_memory = nn.Parameter(torch.randn(192, dtype=torch.cfloat, device=DEVICE) * 0.01)
+
         core = NativeEigenCore(d=192, heads=4, layers=2, merge='concat', geo_init=True).to(DEVICE)
         expansion = nn.Linear(192, 6144, bias=False).to(DEVICE)
         nn.init.normal_(expansion.weight, std=0.02)
-        dim_gate_raw = nn.Parameter(torch.zeros(6144, device=DEVICE))
-        phase_memory = nn.Parameter(torch.randn(192, dtype=torch.cfloat, device=DEVICE) * 0.01)
         opt = torch.optim.AdamW(
             list(core.parameters()) + list(expansion.parameters()) +
             [dim_gate_raw, phase_memory], lr=5e-4)
@@ -262,17 +270,13 @@ def main():
                                      for _ in range(reps)])[:256]
                 feral_batch = feral[idx]
                 B = feral_batch.shape[0]
-                # Pool to 192-dim for compact comparison — matches tape format
-                # Tape lookup: read cached projection (eliminates F16 decode + matmul)
-                if projection_tape:
-                    tape_vals = torch.stack([projection_tape[(bi, vi.item())]
-                                             for vi in idx.cpu()])
-                    proj_pooled = tape_vals.to(DEVICE)  # (B, 192)
+                # Root Cache: 1 entry expands to full batch
+                if root_tape and bi in root_tape:
+                    proj_pooled = root_tape[bi].unsqueeze(0).expand(B, 192)  # (B, 192)
                 else:
                     with torch.no_grad():
                         proj_full = project_27b(feral_batch, weight_27b)
-                        pool_sz = 6144 // 192
-                        proj_pooled = proj_full.view(B, 192, pool_sz).mean(dim=2)
+                        proj_pooled = proj_full.view(B, 192, 6144//192).mean(dim=2)
 
                 # Skip: tape provides pre-pooled projection directly
 
@@ -310,6 +314,10 @@ def main():
         sweep_results[n_passes] = {'final_loss': final_loss, 'final_res': final_res,
                                     'mem_mag': phase_memory.abs().mean().item(),
                                     'nvme_mbps': avg_bw}
+        # Cache best gate + memory for next sweep warm-start (Tracks B+C)
+        if gate_cache is None or final_res > max(v['final_res'] for v in sweep_results.values()):
+            gate_cache = (torch.sigmoid(dim_gate_raw) > 0.5).float().detach().clone()
+            memory_cache = phase_memory.detach().clone()
         catalytic = abs(final_mem - mem_baseline) < 10
         print(f"  passes={n_passes:3d}: L={final_loss:.4f} res={final_res:.4f} "
               f"|mem|={sweep_results[n_passes]['mem_mag']:.4f} "
