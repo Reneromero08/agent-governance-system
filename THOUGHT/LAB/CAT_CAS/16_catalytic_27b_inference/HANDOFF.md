@@ -4,26 +4,51 @@
 
 A zero-RAM catalytic inference engine that runs Qwen 0.5B through a 256MB byte-level XOR fabric (the "tape"). Model weights are SPN-scrambled in a RAM buffer, decatalyzed per-layer into the tape for compute, then re-scrambled after. Every token MUST restore the tape to its SHA-256 pre-computation state — zero bits erased. The ultimate target is coherent English text output from real model weights, at 50+ tok/s with warm-tape replay.
 
-## Current State
+## Current State (Updated 2026-05-21)
 
-**F32 tape engine compiles and runs** with real Qwen 0.5B BF16 weights. Forward pass is deterministic and correct. Uncompute pass fails tape restoration (0% restore rate). Output is real Qwen subword tokens (`'8'`, `'!'`, `']'`, etc.) — not coherent yet because restoration fails and weights accumulate damage across tokens.
+**F32 tape engine compiles and runs** with real Qwen 0.5B BF16 weights. Forward pass is deterministic and correct. **DeltaNet layers now restore correctly** (all 36 layers verified by layer-boundary SHA-256 checkpoints). **The remaining failure is the attention layer uncompute** — only layer 47 (the last attention layer, uncomputed first in reverse) fails the per-layer SHA-256 checkpoint. Warm-hit tokens restore correctly (`rust_restored=True`).
 
 Performance snapshot:
-- 3.2 tok/s, 66% warm-hit rate, 42% on cold runs
+- 2.9 tok/s, 44% warm-hit rate
 - Real Qwen tokenizer and real embedding table (151,936 vocab × 896 dim, BF16→f32)
-- HIDDEN_DIM = 896, byte-level XOR fabric with f32 values stored as 4-byte sequences
-- Complex-plane memory: X channel (real activations) + Y channel (imaginary, currently a placeholder)
+- HIDDEN_DIM = 896, COMPLEX_DIM = 7168 bytes per complex vector
+
+### What Changed Since Last Handoff
+
+**Fixed (6 bugs squashed):**
+1. **IEEE 754 NaN/drift in DeltaNet gate recompute**: The uncompute used to recompute `clamp(0.5 + 0.25 * temp)` during uncompute — the f32 recomputation produced different bit patterns than forward. Fixed by storing gate as raw `f32::to_bits()` bytes in `layer_save` during forward, and reading those exact bytes back during uncompute (no recomputation).
+2. **IEEE 754 NaN/drift in DeltaNet Q recompute**: Same pattern — `w * x` recomputed during uncompute produced different f32 bits. Fixed by storing Q as raw u32 bytes in `pre_gate` during forward, reading back during uncompute.
+3. **Attention output/QKV recompute**: Same IEEE 754 issue in attention layer. Fixed by storing all attention values (output projection, QKV) as raw bytes in `layer_save`/`pre_gate`/`slot` during forward.
+4. **Weight u8 buffer not restored**: The `lwo` (u8 weight buffer at `weight_offset + li * HIDDEN_DIM`) was overwritten with `src_slice` during SPN decatalysis and never restored to original tape bytes. Now `original_weight_u8` is saved and restored alongside `original_weight_f32`.
+5. **Python offset mismatch**: Python used `HIDDEN_DIM * 2` (1792) for pre_gate/layer_save strides, but Rust uses `COMPLEX_DIM` (7168). Python's `work_region_size` was 4x too small, causing false hash mismatches.
+6. **Duplicate `let lwo` declaration** in forward loop (harmless but cleaned up).
+
+### Remaining Issue: Layer 47 Attention Checkpoint Mismatch
+
+The SHA-256 checkpoint at layer 47 (first attention layer to be uncomputed, running in reverse) shows a hash mismatch between pre-forward state and post-uncompute state. Specific findings:
+- `layer_save` and `pre_gate` for layer 47 are correctly zeroed after uncompute
+- `temp` hash does NOT change during the attention uncompute (verified)
+- `input` hash does change during attention uncompute (expected — it's being restored)
+- The overall `work_end` hash (covering input, weight regions, temp, pre_gate, layer_save, warm cache) doesn't match `fwd_hashes[47]`
+- Since `temp` doesn't change, `pg`/`ls` are zeroed, and `input` changes correctly — the remaining divergence is most likely in the **weight regions** (`lwo_f32` or `lwo` for layer 47) that are not being perfectly restored by the SPN scramble/unscramble round-trip. The SPN Feistel network may introduce byte-level changes that don't commute with the save/restore pattern, or the `bh_key`/`sbox` may differ between forward and uncompute paths.
+
+### Rust Tests (all pass)
+
+- `test_f32_xor_idempotent` — f32 XOR is its own inverse ✓
+- `test_delta_net_1layer_restore` — single DeltaNet layer restores ✓
+- `test_delta_net_2layer_restore` — 2 DeltaNet layers restore (raw byte pattern) ✓
+- `test_attention_1layer_restore` — simplified attention restore ✓
+- `test_attention_1layer_engine_style` — engine-layout attention restore ✓
+- `test_4layer_mixed_restore` — 3 delta + 1 attention in engine layout **FAILS** (same root cause as layer 47)
 
 ## Files That Matter
 
 | File | Purpose |
 |------|---------|
-| `THOUGHT/LAB/EIGEN_BUDDY/core/rust_ffi/src/lib.rs` | The entire inference engine: tape helpers, compute, attention, uncompute, SPN scramble |
-| `THOUGHT/LAB/CAT_CAS/16_catalytic_27b_inference/experiment.py` | Python orchestration: tokenizer, weight loading, embedding extraction, FFI calls |
-| `THOUGHT/LAB/CAT_CAS/16_catalytic_27b_inference/ROADMAP.md` | Full roadmap and current status |
-| `THOUGHT/LAB/CAT_CAS/16_catalytic_27b_inference/gemini_update/plan.md` | Complex-plane architecture plan from Gemini |
-| `THOUGHT/LAB/CAT_CAS/16_catalytic_27b_inference/gemini_update/qwen_0.5b/` | Actual Qwen 0.5B model files (0.9GB safetensors + tokenizer) |
-| `THOUGHT/LAB/CAT_CAS/16_catalytic_27b_inference/deprecated/` | Archived u8 quantization path (old engine) |
+| `THOUGHT/LAB/EIGEN_BUDDY/core/rust_ffi/src/lib.rs` | The entire inference engine: tape helpers, compute, attention, uncompute, SPN scramble. 6 tests. |
+| `THOUGHT/LAB/CAT_CAS/16_catalytic_27b_inference/experiment.py` | Python orchestration. COMPLEX_DIM now matches Rust. |
+| `THOUGHT/LAB/CAT_CAS/16_catalytic_27b_inference/ROADMAP.md` | Full roadmap |
+| `THOUGHT/LAB/CAT_CAS/16_catalytic_27b_inference/gemini_update/qwen_0.5b/` | Qwen 0.5B model files |
 
 ## How to Run
 
@@ -32,83 +57,28 @@ cd "D:\CCC 2.0\AI\agent-governance-system"
 
 # Build Rust
 "D:\Reneshizzle\Apps\Rust\.cargo\bin\cargo.exe" build --release
-cp THOUGHT/LAB/EIGEN_BUDDY/core/rust_ffi/target/release/catalytic_ffi.dll THOUGHT/LAB/EIGEN_BUDDY/core/rust_ffi/target/release/catalytic_ffi.pyd
+copy THOUGHT\LAB\EIGEN_BUDDY\core\rust_ffi\target\release\catalytic_ffi.dll THOUGHT\LAB\EIGEN_BUDDY\core\rust_ffi\target\release\catalytic_ffi.pyd
 
-# Run experiment
-.venv\Scripts\python.exe THOUGHT/LAB/CAT_CAS/16_catalytic_27b_inference/experiment.py
+# Run experiment (currently 0% restore, only layer 47 breaks)
+.venv\Scripts\python.exe THOUGHT\LAB\CAT_CAS\16_catalytic_27b_inference\experiment.py
 
-# Run Rust tests (single-layer DeltaNet f32 XOR restore passes)
+# Run Rust tests
 "D:\Reneshizzle\Apps\Rust\.cargo\bin\cargo.exe" test --release --lib
 ```
 
-## The Critical Problem: Tape Restoration (Uncompute)
+## Recommended Next Steps
 
-The single-layer f32 DeltaNet test PASSES (`test_delta_net_1layer_trace` in lib.rs). Forward: XOR input with gate, backward: reads gate from tape, XORs input → restores perfectly. The f32 XOR fabric works at the bit level.
+1. **Investigate SPN round-trip for layer 47**: Verify that `spn_unscramble` followed by `spn_scramble` with the same `bh_key` and `sbox` restores the original bytes at `lwo` for layer 47. The Feistel network uses SHA-256 of `key + round_idx` — if the key or round_idx differs between forward and uncompute, the bytes won't match. Check that `bh_key` and `sbox` are identical in both paths.
+2. **Compare `lwo_f32` bytes for layer 47**: Dump the first 32 bytes of `lwo_f32` at `fwd_hashes[47]` time and after uncompute to see if they differ.
+3. **Disable SPN operations temporarily**: Replace `spn_unscramble`/`spn_scramble` with no-ops to see if the hash passes without them. This isolates whether the SPN is the source of the remaining divergence.
+4. **Fix `test_4layer_mixed_restore`**: Once layer 47 is fixed, the 4-layer test should pass, confirming multi-layer restoration works.
 
-The 48-layer engine fails restoration because:
-1. **Multi-layer interaction**: layer N's uncompute reads from tape regions that layer N+1's forward modified. The per-layer `pre_gate` and `saved_output` buffers are supposed to isolate these, but something still leaks.
-2. **Attention layers (3:1 stride)**: 12 of 48 layers are gated attention with Q·K† dot products on complex coordinates. These touch KV cache regions, RMS norm values, output projections — all of which need correct reversal.
-3. **Weight save/restore**: The forward saves dirty weight substrate bytes, decatalyzes (SPN unscramble), computes, re-scrambles, restores. The uncompute does the same. These MUST produce identical weight values for the gate computations to match.
+## Key Architecture Changes (lib.rs)
 
-### What I Proved Works
+All DeltaNet and attention layers now use **raw byte-level storage and readback** for all computed values:
 
-- `tape_f32()` and `tape_f32_xor()` correctly XOR f32 values at the byte level (test passes)
-- Single DeltaNet layer: forward gate + backward gate XOR restores input perfectly
-- Forward pass is deterministic (same input → same token every time)
-- Real Qwen weights produce real Qwen subword tokens
-- 66% warm-hit rate proves the 256-slot FNV-1a cache is functional
-
-### Debugging Approach
-
-1. **Add SHA-256 checkpoints at each layer boundary**: Compute `Sha256::digest(&tape[0..scratch_base])` at the START of each layer's forward and the END of each layer's uncompute. The layer where they diverge is the broken one.
-2. **Extend the Rust test harness**: Add a `test_delta_net_2layer_restore()` test to isolate multi-layer interaction. Add `test_attention_1layer_restore()` for attention.
-3. **Compare forward vs uncompute per-layer values**: Dump gate values, Q projection values, and attention scores during forward and uncompute for a single layer. They MUST match exactly.
-4. **Verify the SPN weight roundtrip**: `spn_unscramble` followed by `spn_scramble` should restore the original u8 bytes. The dirty substrate save/restore in the uncompute must capture the SAME bytes as the forward.
-
-## Key Rust Architecture (lib.rs)
-
-```rust
-const HIDDEN_DIM: usize = 896;
-const F32_BYTES: usize = 4;
-const F32_DIM: usize = HIDDEN_DIM * 4;  // 3584 bytes
-const COMPLEX_DIM: usize = F32_DIM * 2;   // 7168 bytes (XY channels)
-
-fn tape_f32(tape: &[u8], base: usize, idx: usize) -> f32 { ... }
-fn tape_f32_xor(tape: &mut [u8], base: usize, idx: usize, val: f32) { ... }
-```
-
-Tape layout:
-```
-input_offset = 0 (COMPLEX_DIM = 7168 bytes)
-weight_offset = COMPLEX_DIM (HIDDEN_DIM bytes for u8 scrambled weights)
-weight_f32     = COMPLEX_DIM (HIDDEN_DIM * 4 bytes for f32 weights — OVERLAPS with first 896 bytes of u8 region!)
-scratch_base   = weight_offset + num_layers * HIDDEN_DIM
-temp / pre_gate / saved_outputs / warm_tape_cache / kv_cache
-```
-
-**Critical**: `weight_offset` and `weight_f32` start at the SAME byte offset (7168) but have different sizes (896 vs 3584). The weight save/restore captures 3584 f32 bytes but the decatalysis writes to the first 896 bytes. Ensure the save captures ALL 3584 bytes BEFORE the decatalysis overwrites.
-
-## Python Architecture (experiment.py)
-
-- `HDDWeightStreamer`: Loads safetensors, extracts embedding table, scrambles weights via `catalytic_ffi.scramble_catalysis_weights()`
-- `TokenizerBridge`: Real Qwen AutoTokenizer + hash-based fallback
-- `CatalyticInferenceRuntime`: Orchestrates the FFI call per token, syncs working region, tracks warm hits, runs daemon
-- `ThermodynamicDaemon`: Polar rotations at g=0.001 every 100 tokens
-
-## What's Blocking Completion
-
-1. **Uncompute restoration** (critical): The 48-layer engine must produce `tape_restored=True`. Single layer works. Multi-layer doesn't.
-2. **Real imaginary channel**: The Y channel currently duplicates the X channel. The Gemini plan calls for phase curvature tracking in Y. This would make attention heads actually compute meaningful scores.
-3. **Weight calibration**: Weights are BF16→f32 passed through unchanged. No quantization, which is correct. But the learned Qwen weight distribution may need scaling for the XOR fabric.
-
-## Quick Wins (If Uncompute Is Fixed)
-
-- Warm-tape replay already at 66% — just needs restoration to activate
-- Real Qwen tokenizer already producing actual tokens from Qwen vocabulary
-- lm_head projection already wired (hidden @ embed_tokens.T)
-- 27B model path is configured at `G:/models/qwen3.6-27b-fp8-mtp.safetensors` — just needs the file
-- Complex-plane memory already built
-
-## Contact / Context
-
-This is Experiment 16 in the CAT_CAS (Catalytic Space) lab at `D:\CCC 2.0\AI\agent-governance-system`. The broader project is "Agent Governance System" but the CAT_CAS lab specifically explores catalytic computing: computation on borrowed dirty substrate with zero erase, using black hole thermodynamics as the compute model. Other experiments in the lab include the Hawking Decompressor (#18), Temporal Bootstrap (#17), and Bekenstein Violator (#14).
+- **Gate (DeltaNet)**: `gx.to_bits().to_le_bytes()` stored in `layer_save[j*4+b]` and `input[j*4+b]`. Uncompute reads bytes from `layer_save`, XORs into `input` and `layer_save` — zeroing both.
+- **Q (DeltaNet)**: `vx.to_bits().to_le_bytes()` stored in `pre_gate[j*4+b]`. Uncompute reads bytes back, XORs into `temp` and `pre_gate` — zeroing both.
+- **Output projection (Attention)**: `px.to_bits().to_le_bytes()` stored in `layer_save` and `input`. Uncompute reads bytes back.
+- **QKV (Attention)**: `qx/kx/vx.to_bits().to_le_bytes()` stored in `pre_gate` and `slot`. Uncompute reads bytes back.
+- **Weight regions**: Both `lwo` (u8) and `lwo_f32` (f32) are saved before SPN operations and restored after.

@@ -34,6 +34,9 @@ HDD_MODEL_PATH = str(Path(__file__).parent / "gemini_update" / "qwen_0.5b" / "mo
 TOKENIZER_PATH = str(Path(__file__).parent / "gemini_update" / "qwen_0.5b" / "tokenizer.json")
 
 HIDDEN_DIM = 896  # Qwen 0.5B hidden dimension
+F32_BYTES = 4
+COMPLEX_CH = 2
+COMPLEX_DIM = HIDDEN_DIM * F32_BYTES * COMPLEX_CH  # 7168 bytes — must match Rust
 NUM_LAYERS = 48  # 36 DeltaNet + 12 Attention
 DELTANET_PER_ATTENTION = 3  # 3:1 stride
 
@@ -254,12 +257,12 @@ class CatalyticInferenceRuntime:
         weight_offset = HIDDEN_DIM * 2
         scratch_base = weight_offset + NUM_LAYERS * HIDDEN_DIM
         temp_offset = scratch_base
-        pre_gate_base = temp_offset + HIDDEN_DIM * 2
-        saved_outputs_offset = pre_gate_base + NUM_LAYERS * HIDDEN_DIM * 2
+        pre_gate_base = temp_offset + COMPLEX_DIM
+        saved_outputs_offset = pre_gate_base + NUM_LAYERS * COMPLEX_DIM
         WARM_TAPE_SLOTS = 256
-        warm_tape_offset = saved_outputs_offset + NUM_LAYERS * HIDDEN_DIM * 2
-        warm_tape_stride = 4 + HIDDEN_DIM * 2
-        self.work_region_size = warm_tape_offset
+        warm_tape_offset = saved_outputs_offset + NUM_LAYERS * COMPLEX_DIM
+        warm_tape_stride = 4 + COMPLEX_DIM
+        self.work_region_size = warm_tape_offset + WARM_TAPE_SLOTS * warm_tape_stride  # match Rust work_end
         self.initial_hash = hashlib.sha256(bytes(self.tape[:self.work_region_size])).hexdigest()
 
         self.tokens_generated = 0
@@ -338,9 +341,11 @@ class CatalyticInferenceRuntime:
 
             if step % 10 == 0:
                 tok_text = self.tokenizer.detokenize(next_token)
+                broken = result.get("first_broken_layer", -1)
+                rust_restored = result.get("tape_restored", False)
                 print(f"    [{step:>4}] tok={next_token:>5} '{tok_text}' "
                       f"ent={total_entropy:>10,} time={elapsed*1000:.2f}ms "
-                      f"restored={tape_restored}")
+                      f"rust_restored={rust_restored} py_restored={tape_restored} broken_layer={broken}")
 
         return generated
 
