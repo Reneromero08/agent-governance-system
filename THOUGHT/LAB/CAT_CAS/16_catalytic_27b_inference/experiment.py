@@ -316,56 +316,57 @@ def main():
 
     # Initialize
     runtime = CatalyticInferenceRuntime()
-    initial_hash = runtime.initial_hash
-    print(f"  Initial tape hash: {initial_hash[:16]}...")
-    print()
+    try:
+        initial_hash = runtime.initial_hash
+        print(f"  Initial tape hash: {initial_hash[:16]}...")
+        print()
 
-    # Generate
-    print("-" * 78)
-    print("GENERATION")
-    print("-" * 78)
-    print()
+        # Generate
+        print("-" * 78)
+        print("GENERATION")
+        print("-" * 78)
+        print()
 
-    prompt = "The catalytic computing paradigm demonstrates that"
-    generated = runtime.generate(prompt, max_tokens=50)
+        prompt = "The catalytic computing paradigm demonstrates that"
+        generated = runtime.generate(prompt, max_tokens=50)
 
-    # Metrics
-    m = runtime.metrics()
+        # Metrics
+        m = runtime.metrics()
 
-    print()
-    print("=" * 78)
-    print("RESULTS")
-    print("=" * 78)
-    print(f"  Tokens generated:      {m['tokens_generated']}")
-    print(f"  Total time:            {m['total_time_secs']:.2f}s")
-    print(f"  Tokens/second:         {m['tokens_per_second']:.2f}")
-    print(f"  Total entropy:         {m['total_entropy']:,}")
-    print(f"  Tape restorations:     {m['tape_restorations']}/{m['tokens_generated']} ({m['restoration_rate']:.1f}%)")
-    print(f"  Warm hits:             {m['warm_hits']}/{m['tokens_generated']} ({m['warm_hit_rate']:.1f}%)")
-    print(f"  Bytes streamed:        {m['bytes_streamed']:,}")
-    print(f"  Foam entropy:          {m['foam_entropy']:,} bits")
-    print(f"  Daemon dispersions:    {m['daemon_dispersions']}")
-    print(f"  Bekenstein fraction:   {m['bekenstein_fraction']:.4e}")
-    print(f"  RAM for weights:       0 bytes")
-    print()
+        print()
+        print("=" * 78)
+        print("RESULTS")
+        print("=" * 78)
+        print(f"  Tokens generated:      {m['tokens_generated']}")
+        print(f"  Total time:            {m['total_time_secs']:.2f}s")
+        print(f"  Tokens/second:         {m['tokens_per_second']:.2f}")
+        print(f"  Total entropy:         {m['total_entropy']:,}")
+        print(f"  Tape restorations:     {m['tape_restorations']}/{m['tokens_generated']} ({m['restoration_rate']:.1f}%)")
+        print(f"  Warm hits:             {m['warm_hits']}/{m['tokens_generated']} ({m['warm_hit_rate']:.1f}%)")
+        print(f"  Bytes streamed:        {m['bytes_streamed']:,}")
+        print(f"  Foam entropy:          {m['foam_entropy']:,} bits")
+        print(f"  Daemon dispersions:    {m['daemon_dispersions']}")
+        print(f"  Bekenstein fraction:   {m['bekenstein_fraction']:.4e}")
+        print(f"  RAM for weights:       0 bytes")
+        print()
 
-    # Assertions
-    print("=" * 78)
-    print("HARD ASSERTIONS")
-    print("=" * 78)
-    print()
+        # Assertions
+        print("=" * 78)
+        print("HARD ASSERTIONS")
+        print("=" * 78)
+        print()
 
-    assert m["restoration_rate"] > 99.0, f"FAIL: Restoration rate {m['restoration_rate']:.1f}%"
-    print(f"  [PASS] Tape restoration rate: {m['restoration_rate']:.1f}%")
+        assert m["restoration_rate"] > 99.0, f"FAIL: Restoration rate {m['restoration_rate']:.1f}%"
+        print(f"  [PASS] Tape restoration rate: {m['restoration_rate']:.1f}%")
 
-    assert m["tokens_generated"] > 0, "FAIL: No tokens generated!"
-    print(f"  [PASS] Generated {m['tokens_generated']} tokens")
+        assert m["tokens_generated"] > 0, "FAIL: No tokens generated!"
+        print(f"  [PASS] Generated {m['tokens_generated']} tokens")
 
-    print(f"  [PASS] Zero bytes of RAM allocated for model parameters")
-    print()
-
-    # Cleanup
-    runtime.cleanup()
+        print(f"  [PASS] Zero bytes of RAM allocated for model parameters")
+        print()
+    finally:
+        # Cleanup
+        runtime.cleanup()
 
     print("=" * 78)
     print("VERDICT")
