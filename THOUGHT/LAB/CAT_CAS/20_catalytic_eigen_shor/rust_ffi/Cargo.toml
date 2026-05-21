@@ -1,0 +1,16 @@
+[package]
+name = "eigen_shor_ffi"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "eigen_shor_ffi"
+crate-type = ["cdylib"]
+
+[dependencies]
+rayon = "1.10"
+num-complex = "0.4.5"
+
+[dependencies.pyo3]
+version = "0.20.2"
+features = ["extension-module"]
