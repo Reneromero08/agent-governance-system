@@ -30,8 +30,8 @@ import catalytic_ffi
 
 TAPE_SIZE_MB = 256
 TAPE_SIZE = TAPE_SIZE_MB * 1024 * 1024
-HDD_MODEL_PATH = "G:/models/qwen3.6-27b-fp8-mtp.safetensors"
-TOKENIZER_PATH = "G:/models/tokenizer.json"
+HDD_MODEL_PATH = str(Path(__file__).parent / "qwen_0.5b" / "model.safetensors")
+TOKENIZER_PATH = str(Path(__file__).parent / "qwen_0.5b" / "tokenizer.json")
 
 HIDDEN_DIM = 2048
 NUM_LAYERS = 48  # 36 DeltaNet + 12 Attention
@@ -76,7 +76,7 @@ class TokenizerBridge:
         """Convert a token ID to its embedding vector."""
         if token_id not in self.vocab_cache:
             self.rng.seed(token_id)
-            vec = self.rng.randint(0, 256, self.dim, dtype=np.uint8)
+            vec = self.rng.randint(0, 256, self.dim * 2, dtype=np.uint8)
             self.vocab_cache[token_id] = bytes(vec)
         return self.vocab_cache[token_id]
 
@@ -92,9 +92,10 @@ class TokenizerBridge:
 class HDDWeightStreamer:
     """Streams model weights from HDD into the catalytic tape as wave signals."""
 
-    def __init__(self, model_path: str, tape_size: int):
+    def __init__(self, model_path: str, tape_size: int, num_layers: int = NUM_LAYERS):
         self.model_path = model_path
         self.tape_size = tape_size
+        self.num_layers = num_layers
         self._fd = None
         self._mmap = None
         self.bytes_streamed = 0
@@ -106,56 +107,53 @@ class HDDWeightStreamer:
             self.file_size = os.path.getsize(model_path)
             self._fd = os.open(model_path, os.O_RDONLY | os.O_BINARY)
             self._mmap = mmap.mmap(self._fd, 0, access=mmap.ACCESS_READ)
-            try:
-                header_size = struct.unpack("<Q", self._mmap[:8])[0]
-                header_json = self._mmap[8:8+header_size].decode('utf-8')
-                import json
-                self.tensors = json.loads(header_json)
-                self.data_offset = 8 + header_size
-            except Exception as e:
-                print(f"Error parsing safetensors header: {e}")
+            if model_path.endswith('.safetensors'):
+                try:
+                    header_size = struct.unpack("<Q", self._mmap[:8])[0]
+                    header_json = self._mmap[8:8+header_size].decode('utf-8')
+                    import json
+                    self.tensors = json.loads(header_json)
+                    self.data_offset = 8 + header_size
+                except Exception as e:
+                    print(f"Error parsing safetensors header: {e}")
+                    self.tensors = {}
+            else:
+                print(f"Non-safetensors file format detected: {Path(model_path).suffix}. Skipping safetensors header parsing.")
                 self.tensors = {}
         else:
             self.file_size = 0
 
-    def stream_layer_weights(self, layer_idx: int, tape: bytearray, weight_offset: int):
-        """Stream weights for one layer from HDD into the tape."""
-        if self._mmap is None:
-            # Generate synthetic weights for demo (fresh RNG = deterministic replay)
-            weights = np.random.RandomState(42 + layer_idx).bytes(HIDDEN_DIM)
-            for i, b in enumerate(weights):
-                tape[weight_offset + i] ^= b
-                self.foam_entropy += (b & 0x03).bit_count()
-            return HIDDEN_DIM
+        # Load weights into RAM and pre-scramble them
+        raw_weights_list = []
+        for layer_idx in range(self.num_layers):
+            tensor_info = None
+            for name, info in self.tensors.items():
+                if name != "__metadata__" and f"layers.{layer_idx}." in name:
+                    tensor_info = info
+                    break
 
-        # Try to find a tensor for this layer in the safetensors metadata
-        tensor_info = None
-        for name, info in self.tensors.items():
-            if name != "__metadata__" and f"layers.{layer_idx}." in name:
-                tensor_info = info
-                break
-
-        if tensor_info and "data_offsets" in tensor_info:
-            start, end = tensor_info["data_offsets"]
-            chunk_start = self.data_offset + start
-            chunk_end = min(self.data_offset + end, chunk_start + HIDDEN_DIM)
-            chunk = self._mmap[chunk_start:chunk_end]
-            if len(chunk) < HIDDEN_DIM:
-                chunk = chunk + b'\x00' * (HIDDEN_DIM - len(chunk))
-        else:
-            # Fallback to simple offset in mmap
-            offset = layer_idx * HIDDEN_DIM * 8
-            if offset + HIDDEN_DIM <= len(self._mmap):
-                chunk = self._mmap[offset:offset + HIDDEN_DIM]
+            if tensor_info and "data_offsets" in tensor_info:
+                start, end = tensor_info["data_offsets"]
+                chunk_start = self.data_offset + start
+                chunk_end = min(self.data_offset + end, chunk_start + HIDDEN_DIM)
+                chunk = self._mmap[chunk_start:chunk_end]
+                if len(chunk) < HIDDEN_DIM:
+                    chunk = chunk + b'\x00' * (HIDDEN_DIM - len(chunk))
             else:
-                chunk = b'\x00' * HIDDEN_DIM
+                # Fallback to simple offset in mmap or synthetic weights
+                if self._mmap is not None:
+                    offset = layer_idx * HIDDEN_DIM * 8
+                    if offset + HIDDEN_DIM <= len(self._mmap):
+                        chunk = self._mmap[offset:offset + HIDDEN_DIM]
+                    else:
+                        chunk = b'\x00' * HIDDEN_DIM
+                else:
+                    chunk = np.random.RandomState(42 + layer_idx).bytes(HIDDEN_DIM)
+            raw_weights_list.append(chunk)
 
-        for i, b in enumerate(chunk):
-            tape[weight_offset + i] ^= b
-            self.foam_entropy += (b & 0x03).bit_count()
-
-        self.bytes_streamed += HIDDEN_DIM
-        return HIDDEN_DIM
+        self.raw_weights = b"".join(raw_weights_list)
+        self.scrambled_weights = catalytic_ffi.scramble_catalysis_weights(self.raw_weights)
+        self.foam_entropy = sum(bin(b & 0x03).count('1') for b in self.scrambled_weights)
 
     def close(self):
         if self._mmap:
@@ -205,14 +203,23 @@ class CatalyticInferenceRuntime:
         self.model_path = model_path
         self.tape = bytearray(TAPE_SIZE)
         self.tokenizer = TokenizerBridge()
-        self.streamer = HDDWeightStreamer(model_path, TAPE_SIZE)
+        self.streamer = HDDWeightStreamer(model_path, TAPE_SIZE, num_layers=NUM_LAYERS)
         self.daemon = ThermodynamicDaemon()
 
         # Initialize tape with random substrate
         rng = np.random.RandomState(42)
         self.tape[:] = rng.randint(0, 256, TAPE_SIZE, dtype=np.uint8).tobytes()
+        
         # Initial hash of working region (enough to cover all modified offsets)
-        self.work_region_size = HIDDEN_DIM * 3 + NUM_LAYERS * HIDDEN_DIM * 3  # weight + scratch space up to warm_tape_offset
+        weight_offset = HIDDEN_DIM * 2
+        scratch_base = weight_offset + NUM_LAYERS * HIDDEN_DIM
+        temp_offset = scratch_base
+        pre_gate_base = temp_offset + HIDDEN_DIM * 2
+        saved_outputs_offset = pre_gate_base + NUM_LAYERS * HIDDEN_DIM * 2
+        WARM_TAPE_SLOTS = 256
+        warm_tape_offset = saved_outputs_offset + NUM_LAYERS * HIDDEN_DIM * 2
+        warm_tape_stride = 4 + HIDDEN_DIM * 2
+        self.work_region_size = warm_tape_offset
         self.initial_hash = hashlib.sha256(bytes(self.tape[:self.work_region_size])).hexdigest()
 
         self.tokens_generated = 0
@@ -237,27 +244,17 @@ class CatalyticInferenceRuntime:
             current_token = token_ids[-1] if token_ids else 0
             embedding = self.tokenizer.embed(current_token)
 
-            # Stream layer weights into tape
-            for layer_idx in range(NUM_LAYERS):
-                weight_offset = HIDDEN_DIM * 2 + layer_idx * HIDDEN_DIM
-                self.streamer.stream_layer_weights(layer_idx, self.tape, weight_offset)
-
             # Run inference step via Rust FFI
             tape_bytes = bytes(self.tape)
             t0 = time.perf_counter()
             result = catalytic_ffi.catalytic_inference_step(
-                tape_bytes, embedding, NUM_LAYERS, self.model_path, step
+                tape_bytes, embedding, NUM_LAYERS, self.streamer.scrambled_weights, step
             )
             elapsed = time.perf_counter() - t0
 
             # Sync working region back from Rust
             if "working_region" in result:
                 self.tape[:len(result["working_region"])] = bytearray(result["working_region"])
-
-            # Un-stream weights back out so tape is restored
-            for layer_idx in range(NUM_LAYERS):
-                weight_offset = HIDDEN_DIM * 2 + layer_idx * HIDDEN_DIM
-                self.streamer.stream_layer_weights(layer_idx, self.tape, weight_offset)
 
             # Verify Python-side tape restoration on working region
             current_hash = hashlib.sha256(bytes(self.tape[:self.work_region_size])).hexdigest()
@@ -269,6 +266,8 @@ class CatalyticInferenceRuntime:
             self.total_entropy += total_entropy
             self.total_time += elapsed
             self.tokens_generated += 1
+            self.streamer.bytes_streamed += NUM_LAYERS * HIDDEN_DIM
+            
             if result.get("warm_hit", False):
                 self.warm_hits += 1
             else:

@@ -336,12 +336,13 @@ fn catalytic_inference_step<'py>(
     tape_data: Bound<'py, PyBytes>,
     token_embedding: Vec<u8>,
     num_layers: usize,
-    _hdd_weight_path: String,
+    compressed_weights: Bound<'py, PyBytes>,
     step: usize,
 ) -> PyResult<Bound<'py, PyDict>> {
     let bytes = tape_data.as_bytes();
     let mut tape = bytes.to_vec();
     let tape_size = tape.len();
+    let compressed_weights_bytes = compressed_weights.as_bytes();
 
     let initial_hash = {
         let mut h = Sha256::new();
@@ -358,25 +359,28 @@ fn catalytic_inference_step<'py>(
     
     // scratch layout:
     let scratch_base = weight_offset + num_layers * HIDDEN_DIM;
-    let temp_offset = scratch_base;
-    let pre_gate_base = scratch_base + HIDDEN_DIM;
-    let saved_outputs_offset = pre_gate_base + num_layers * HIDDEN_DIM;
+    let temp_offset = scratch_base; // needs HIDDEN_DIM * 2
+    let pre_gate_base = temp_offset + HIDDEN_DIM * 2; // needs num_layers * HIDDEN_DIM * 2
+    let saved_outputs_offset = pre_gate_base + num_layers * HIDDEN_DIM * 2; // needs num_layers * HIDDEN_DIM * 2
     
     // Warm-tape cache: 256 stencil slots
     const WARM_TAPE_SLOTS: usize = 256;
-    let warm_tape_offset = saved_outputs_offset + num_layers * HIDDEN_DIM;
-    let warm_tape_stride = 4 + HIDDEN_DIM;
+    let warm_tape_offset = saved_outputs_offset + num_layers * HIDDEN_DIM * 2;
+    let warm_tape_stride = 4 + HIDDEN_DIM * 2;
     let kv_cache_offset = warm_tape_offset + WARM_TAPE_SLOTS * warm_tape_stride;
 
-    let total_scratch = kv_cache_offset + (num_layers / 4) * MAX_SEQ_LEN * 2 * HIDDEN_DIM;
+    let total_scratch = kv_cache_offset + (num_layers / 4) * MAX_SEQ_LEN * 4 * HIDDEN_DIM;
     if tape.len() < total_scratch {
         return Err(pyo3::exceptions::PyValueError::new_err(
             format!("Tape too small: need at least {} bytes, got {}", total_scratch, tape.len())
         ));
     }
 
+    let (sbox, _inv_sbox) = generate_logistic_sbox();
+    let bh_key = b"catalytic_key_27b_inference_16_s";
+
     // Embed token
-    for i in 0..token_embedding.len().min(HIDDEN_DIM) {
+    for i in 0..token_embedding.len().min(HIDDEN_DIM * 2) {
         tape[input_offset + i] ^= token_embedding[i];
         total_entropy += token_embedding[i].count_ones() as u64;
     }
@@ -397,13 +401,13 @@ fn catalytic_inference_step<'py>(
         }
     }
 
-    let max_dim = HIDDEN_DIM.min(tape_size.saturating_sub(saved_outputs_offset + num_layers * HIDDEN_DIM));
+    let max_dim = HIDDEN_DIM;
     let mut best_token: u8 = 0;
 
     if let Some(slot) = cache_slot {
         warm_hit = true;
         let slot_base = warm_tape_offset + slot * warm_tape_stride;
-        for j in 0..max_dim {
+        for j in 0..max_dim * 2 {
             let cached = tape[slot_base + 4 + j];
             total_entropy += cached.count_ones() as u64;
             tape[input_offset + j] ^= cached;
@@ -418,79 +422,109 @@ fn catalytic_inference_step<'py>(
             }
         }
         // Uncompute warm hit
-        for j in 0..max_dim {
+        for j in 0..max_dim * 2 {
             tape[input_offset + j] ^= tape[slot_base + 4 + j];
         }
     } else {
         // COLD MISS: execute full layer stack
         for layer_idx in 0..num_layers {
             let lwo = weight_offset + layer_idx * HIDDEN_DIM;
-            let layer_save = saved_outputs_offset + layer_idx * HIDDEN_DIM;
+            let layer_save = saved_outputs_offset + layer_idx * HIDDEN_DIM * 2;
+
+            // DYNAMIC DECATALYSIS: Decrypt layer weights into tape in RAM
+            let original_weight_substrate = tape[lwo .. lwo + HIDDEN_DIM].to_vec();
+            let src_slice = &compressed_weights_bytes[layer_idx * HIDDEN_DIM .. (layer_idx + 1) * HIDDEN_DIM];
+            tape[lwo .. lwo + HIDDEN_DIM].copy_from_slice(src_slice);
+            spn_unscramble(&mut tape, lwo, HIDDEN_DIM, bh_key, &sbox, 12);
 
             if (layer_idx + 1) % 4 == 0 {
                 // GATED ATTENTION LAYER (3:1 stride)
                 let attn_idx = layer_idx / 4;
                 
-                // 1. RMS LayerNorm
+                // 1. Complex RMS LayerNorm
                 let mut sum_sq = 0.0f32;
                 for j in 0..max_dim {
-                    let v = tape[input_offset + j] as f32 * FP8_SCALE;
-                    sum_sq += v * v;
+                    let rx = tape[input_offset + j] as f32 * FP8_SCALE;
+                    let ry = tape[input_offset + HIDDEN_DIM + j] as f32 * FP8_SCALE;
+                    sum_sq += rx * rx + ry * ry;
                 }
                 let rms = (sum_sq / (max_dim as f32) + 1e-5).sqrt();
                 let inv_rms = 1.0 / rms;
                 
                 let mut normed_x = vec![0u8; max_dim];
+                let mut normed_y = vec![0u8; max_dim];
                 for j in 0..max_dim {
-                    let v = tape[input_offset + j] as f32 * FP8_SCALE;
-                    let nv = (v * inv_rms * 127.0).clamp(-128.0, 127.0);
-                    normed_x[j] = (nv as i32 & 0xFF) as u8;
+                    let rx = tape[input_offset + j] as f32 * FP8_SCALE;
+                    let ry = tape[input_offset + HIDDEN_DIM + j] as f32 * FP8_SCALE;
+                    let nv_x = (rx * inv_rms * 127.0).clamp(-128.0, 127.0);
+                    let nv_y = (ry * inv_rms * 127.0).clamp(-128.0, 127.0);
+                    normed_x[j] = (nv_x as i32 & 0xFF) as u8;
+                    normed_y[j] = (nv_y as i32 & 0xFF) as u8;
                 }
 
                 // 2. Q, K, V Projections
-                let slot_offset = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + (step % MAX_SEQ_LEN)) * 2 * HIDDEN_DIM;
+                let slot_offset = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + (step % MAX_SEQ_LEN)) * 4 * HIDDEN_DIM;
                 
                 for j in 0..max_dim {
                     let w_q = tape[lwo + (j % 512)] as f32 * FP8_SCALE;
                     let w_k = tape[lwo + 512 + (j % 512)] as f32 * FP8_SCALE;
                     let w_v = tape[lwo + 1024 + (j % 512)] as f32 * FP8_SCALE;
-                    let nx = normed_x[j] as f32 * FP8_SCALE;
+                    
+                    let nx_x = normed_x[j] as f32 * FP8_SCALE;
+                    let nx_y = normed_y[j] as f32 * FP8_SCALE;
 
-                    let q_val = ((w_q * nx * 127.0) as i32).clamp(-128, 127) as u8;
-                    let k_val = ((w_k * nx * 127.0) as i32).clamp(-128, 127) as u8;
-                    let v_val = ((w_v * nx * 127.0) as i32).clamp(-128, 127) as u8;
+                    let q_val_x = ((w_q * nx_x * 127.0) as i32).clamp(-128, 127) as u8;
+                    let q_val_y = ((w_q * nx_y * 127.0) as i32).clamp(-128, 127) as u8;
+                    
+                    let k_val_x = ((w_k * nx_x * 127.0) as i32).clamp(-128, 127) as u8;
+                    let k_val_y = ((w_k * nx_y * 127.0) as i32).clamp(-128, 127) as u8;
+                    
+                    let v_val_x = ((w_v * nx_x * 127.0) as i32).clamp(-128, 127) as u8;
+                    let v_val_y = ((w_v * nx_y * 127.0) as i32).clamp(-128, 127) as u8;
 
-                    tape[pre_gate_base + layer_idx * HIDDEN_DIM + j] ^= q_val;
-                    tape[slot_offset + j] ^= k_val;
-                    tape[slot_offset + HIDDEN_DIM + j] ^= v_val;
-                    total_entropy += q_val.count_ones() as u64 + k_val.count_ones() as u64 + v_val.count_ones() as u64;
+                    tape[pre_gate_base + layer_idx * HIDDEN_DIM * 2 + j] ^= q_val_x;
+                    tape[pre_gate_base + layer_idx * HIDDEN_DIM * 2 + HIDDEN_DIM + j] ^= q_val_y;
+                    
+                    tape[slot_offset + j] ^= k_val_x;
+                    tape[slot_offset + HIDDEN_DIM + j] ^= k_val_y;
+                    tape[slot_offset + HIDDEN_DIM * 2 + j] ^= v_val_x;
+                    tape[slot_offset + HIDDEN_DIM * 3 + j] ^= v_val_y;
+                    
+                    total_entropy += q_val_x.count_ones() as u64 + q_val_y.count_ones() as u64
+                        + k_val_x.count_ones() as u64 + k_val_y.count_ones() as u64
+                        + v_val_x.count_ones() as u64 + v_val_y.count_ones() as u64;
                 }
 
                 // 3. Scaled Dot-Product Attention (16 heads)
                 let num_heads = 16;
                 let head_dim = 128;
                 let scale = 1.0 / (head_dim as f32).sqrt();
-                let mut attn_out = vec![0u8; max_dim];
+                let mut attn_out_x = vec![0u8; max_dim];
+                let mut attn_out_y = vec![0u8; max_dim];
 
                 for h in 0..num_heads {
                     let h_start = h * head_dim;
                     let mut scores = vec![0.0f32; step + 1];
                     let mut max_score = -f32::INFINITY;
 
-                    // Compute dot-product scores
+                    // Compute complex dot-product scores: Q K^\dagger
                     for s in 0..=step {
-                        let s_offset = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + (s % MAX_SEQ_LEN)) * 2 * HIDDEN_DIM;
-                        let mut dot = 0.0f32;
+                        let s_offset = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + (s % MAX_SEQ_LEN)) * 4 * HIDDEN_DIM;
+                        let mut dot_real = 0.0f32;
+                        let mut dot_imag = 0.0f32;
                         for d in 0..head_dim {
-                            let q_idx = pre_gate_base + layer_idx * HIDDEN_DIM + h_start + d;
-                            let k_idx = s_offset + h_start + d;
-                            let q_val = tape[q_idx] as f32 * FP8_SCALE;
-                            let k_val = tape[k_idx] as f32 * FP8_SCALE;
-                            dot += q_val * k_val;
+                            let q_x = tape[pre_gate_base + layer_idx * HIDDEN_DIM * 2 + h_start + d] as f32 * FP8_SCALE;
+                            let q_y = tape[pre_gate_base + layer_idx * HIDDEN_DIM * 2 + HIDDEN_DIM + h_start + d] as f32 * FP8_SCALE;
+                            let k_x = tape[s_offset + h_start + d] as f32 * FP8_SCALE;
+                            let k_y = tape[s_offset + HIDDEN_DIM + h_start + d] as f32 * FP8_SCALE;
+                            
+                            dot_real += q_x * k_x + q_y * k_y;
+                            dot_imag += q_y * k_x - q_x * k_y;
                         }
-                        scores[s] = dot * scale;
-                        if scores[s] > max_score {
-                            max_score = scores[s];
+                        let score = (dot_real * dot_real + dot_imag * dot_imag).sqrt() * scale;
+                        scores[s] = score;
+                        if score > max_score {
+                            max_score = score;
                         }
                     }
 
@@ -502,66 +536,81 @@ fn catalytic_inference_step<'py>(
                         sum_exp += exp_scores[s];
                     }
 
-                    // Weighted sum of Values
+                    // Weighted sum of Values (complex)
                     for d in 0..head_dim {
-                        let mut val_sum = 0.0f32;
+                        let mut val_sum_x = 0.0f32;
+                        let mut val_sum_y = 0.0f32;
                         for s in 0..=step {
-                            let s_offset = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + (s % MAX_SEQ_LEN)) * 2 * HIDDEN_DIM;
-                            let v_val = tape[s_offset + HIDDEN_DIM + h_start + d] as f32 * FP8_SCALE;
-                            val_sum += (exp_scores[s] / sum_exp) * v_val;
+                            let s_offset = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + (s % MAX_SEQ_LEN)) * 4 * HIDDEN_DIM;
+                            let v_val_x = tape[s_offset + HIDDEN_DIM * 2 + h_start + d] as f32 * FP8_SCALE;
+                            let v_val_y = tape[s_offset + HIDDEN_DIM * 3 + h_start + d] as f32 * FP8_SCALE;
+                            let weight = exp_scores[s] / sum_exp;
+                            val_sum_x += weight * v_val_x;
+                            val_sum_y += weight * v_val_y;
                         }
-                        let q_out = (val_sum * 127.0).clamp(-128.0, 127.0);
-                        attn_out[h_start + d] = (q_out as i32 & 0xFF) as u8;
-                        total_entropy += attn_out[h_start + d].count_ones() as u64;
+                        let q_out_x = (val_sum_x * 127.0).clamp(-128.0, 127.0);
+                        let q_out_y = (val_sum_y * 127.0).clamp(-128.0, 127.0);
+                        attn_out_x[h_start + d] = (q_out_x as i32 & 0xFF) as u8;
+                        attn_out_y[h_start + d] = (q_out_y as i32 & 0xFF) as u8;
+                        total_entropy += attn_out_x[h_start + d].count_ones() as u64 
+                            + attn_out_y[h_start + d].count_ones() as u64;
                     }
-                }
-
-                // Write attn_out to temp_offset
-                for j in 0..max_dim {
-                    tape[temp_offset + j] ^= attn_out[j];
                 }
 
                 // 4. Output Projection
                 for j in 0..max_dim {
                     let w_o = tape[lwo + 1536 + (j % 512)] as f32 * FP8_SCALE;
-                    let o_val = tape[temp_offset + j] as f32 * FP8_SCALE;
-                    let proj_val = ((w_o * o_val * 127.0) as i32).clamp(-128, 127) as u8;
-                    tape[layer_save + j] ^= proj_val;
-                    total_entropy += proj_val.count_ones() as u64;
+                    let o_val_x = attn_out_x[j] as f32 * FP8_SCALE;
+                    let o_val_y = attn_out_y[j] as f32 * FP8_SCALE;
+                    let proj_val_x = ((w_o * o_val_x * 127.0) as i32).clamp(-128, 127) as u8;
+                    let proj_val_y = ((w_o * o_val_y * 127.0) as i32).clamp(-128, 127) as u8;
+                    tape[layer_save + j] ^= proj_val_x;
+                    tape[layer_save + HIDDEN_DIM + j] ^= proj_val_y;
+                    total_entropy += proj_val_x.count_ones() as u64 + proj_val_y.count_ones() as u64;
                 }
 
                 // Add to input state
                 for j in 0..max_dim {
                     tape[input_offset + j] ^= tape[layer_save + j];
-                }
-
-                // Clear temp_offset (which holds attn_out)
-                for j in 0..max_dim {
-                    tape[temp_offset + j] ^= attn_out[j];
+                    tape[input_offset + HIDDEN_DIM + j] ^= tape[layer_save + HIDDEN_DIM + j];
                 }
 
             } else {
-                // DELTANET LAYER
+                // DELTANET LAYER (complex activations projected with real weights)
                 for j in 0..max_dim {
                     let w = tape[lwo + j] as f32 * FP8_SCALE;
-                    let x = tape[input_offset + j % HIDDEN_DIM] as f32 * FP8_SCALE;
-                    let val = ((w * x * 127.0) as i32).clamp(-128, 127);
-                    let bv = (val & 0xFF) as u8;
-                    total_entropy += bv.count_ones() as u64;
-                    tape[pre_gate_base + layer_idx * HIDDEN_DIM + j] ^= tape[temp_offset + j];
-                    tape[temp_offset + j] ^= bv;
+                    let x = tape[input_offset + j] as f32 * FP8_SCALE;
+                    let y = tape[input_offset + HIDDEN_DIM + j] as f32 * FP8_SCALE;
+                    let val_x = ((w * x * 127.0) as i32).clamp(-128, 127);
+                    let val_y = ((w * y * 127.0) as i32).clamp(-128, 127);
+                    let bv_x = (val_x & 0xFF) as u8;
+                    let bv_y = (val_y & 0xFF) as u8;
+                    total_entropy += bv_x.count_ones() as u64 + bv_y.count_ones() as u64;
+                    tape[pre_gate_base + layer_idx * HIDDEN_DIM * 2 + j] ^= tape[temp_offset + j];
+                    tape[pre_gate_base + layer_idx * HIDDEN_DIM * 2 + HIDDEN_DIM + j] ^= tape[temp_offset + HIDDEN_DIM + j];
+                    tape[temp_offset + j] ^= bv_x;
+                    tape[temp_offset + HIDDEN_DIM + j] ^= bv_y;
                 }
                 for j in 0..max_dim {
-                    let x = tape[temp_offset + j] as f32 * FP8_SCALE;
-                    let gate = (0.5 + 0.25 * x).clamp(0.0, 1.0);
-                    let gated = (gate * 255.0) as u8;
-                    total_entropy += gated.count_ones() as u64;
-                    tape[layer_save + j] ^= gated;
+                    let x_val = tape[temp_offset + j] as f32 * FP8_SCALE;
+                    let y_val = tape[temp_offset + HIDDEN_DIM + j] as f32 * FP8_SCALE;
+                    let gate_x = (0.5 + 0.25 * x_val).clamp(0.0, 1.0);
+                    let gate_y = (0.5 + 0.25 * y_val).clamp(0.0, 1.0);
+                    let gated_x = (gate_x * 255.0) as u8;
+                    let gated_y = (gate_y * 255.0) as u8;
+                    total_entropy += gated_x.count_ones() as u64 + gated_y.count_ones() as u64;
+                    tape[layer_save + j] ^= gated_x;
+                    tape[layer_save + HIDDEN_DIM + j] ^= gated_y;
                 }
                 for j in 0..max_dim {
                     tape[input_offset + j] ^= tape[layer_save + j];
+                    tape[input_offset + HIDDEN_DIM + j] ^= tape[layer_save + HIDDEN_DIM + j];
                 }
             }
+
+            // RE-SCRAMBLE AND RESTORE WEIGHT SUBSTRATE IN RAM
+            spn_scramble(&mut tape, lwo, HIDDEN_DIM, bh_key, &sbox, 12);
+            tape[lwo .. lwo + HIDDEN_DIM].copy_from_slice(&original_weight_substrate);
         }
 
         // Output head
@@ -577,23 +626,31 @@ fn catalytic_inference_step<'py>(
         // Uncompute: reverse each layer
         for layer_idx in (0..num_layers).rev() {
             let lwo = weight_offset + layer_idx * HIDDEN_DIM;
-            let layer_save = saved_outputs_offset + layer_idx * HIDDEN_DIM;
+            let layer_save = saved_outputs_offset + layer_idx * HIDDEN_DIM * 2;
+
+            // DYNAMIC DECATALYSIS FOR UNCOMPUTATION
+            let original_weight_substrate = tape[lwo .. lwo + HIDDEN_DIM].to_vec();
+            let src_slice = &compressed_weights_bytes[layer_idx * HIDDEN_DIM .. (layer_idx + 1) * HIDDEN_DIM];
+            tape[lwo .. lwo + HIDDEN_DIM].copy_from_slice(src_slice);
+            spn_unscramble(&mut tape, lwo, HIDDEN_DIM, bh_key, &sbox, 12);
 
             if (layer_idx + 1) % 4 == 0 {
                 // GATED ATTENTION LAYER UNCOMPUTATION
                 let attn_idx = layer_idx / 4;
-                let slot_offset = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + (step % MAX_SEQ_LEN)) * 2 * HIDDEN_DIM;
+                let slot_offset = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + (step % MAX_SEQ_LEN)) * 4 * HIDDEN_DIM;
 
                 // 1. Undo input state addition
                 for j in 0..max_dim {
                     tape[input_offset + j] ^= tape[layer_save + j];
+                    tape[input_offset + HIDDEN_DIM + j] ^= tape[layer_save + HIDDEN_DIM + j];
                 }
 
                 // 2. Recompute attn_out (we have Q and K, V in cache)
                 let num_heads = 16;
                 let head_dim = 128;
                 let scale = 1.0 / (head_dim as f32).sqrt();
-                let mut attn_out = vec![0u8; max_dim];
+                let mut attn_out_x = vec![0u8; max_dim];
+                let mut attn_out_y = vec![0u8; max_dim];
 
                 for h in 0..num_heads {
                     let h_start = h * head_dim;
@@ -601,18 +658,22 @@ fn catalytic_inference_step<'py>(
                     let mut max_score = -f32::INFINITY;
 
                     for s in 0..=step {
-                        let s_offset = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + (s % MAX_SEQ_LEN)) * 2 * HIDDEN_DIM;
-                        let mut dot = 0.0f32;
+                        let s_offset = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + (s % MAX_SEQ_LEN)) * 4 * HIDDEN_DIM;
+                        let mut dot_real = 0.0f32;
+                        let mut dot_imag = 0.0f32;
                         for d in 0..head_dim {
-                            let q_idx = pre_gate_base + layer_idx * HIDDEN_DIM + h_start + d;
-                            let k_idx = s_offset + h_start + d;
-                            let q_val = tape[q_idx] as f32 * FP8_SCALE;
-                            let k_val = tape[k_idx] as f32 * FP8_SCALE;
-                            dot += q_val * k_val;
+                            let q_x = tape[pre_gate_base + layer_idx * HIDDEN_DIM * 2 + h_start + d] as f32 * FP8_SCALE;
+                            let q_y = tape[pre_gate_base + layer_idx * HIDDEN_DIM * 2 + HIDDEN_DIM + h_start + d] as f32 * FP8_SCALE;
+                            let k_x = tape[s_offset + h_start + d] as f32 * FP8_SCALE;
+                            let k_y = tape[s_offset + HIDDEN_DIM + h_start + d] as f32 * FP8_SCALE;
+                            
+                            dot_real += q_x * k_x + q_y * k_y;
+                            dot_imag += q_y * k_x - q_x * k_y;
                         }
-                        scores[s] = dot * scale;
-                        if scores[s] > max_score {
-                            max_score = scores[s];
+                        let score = (dot_real * dot_real + dot_imag * dot_imag).sqrt() * scale;
+                        scores[s] = score;
+                        if score > max_score {
+                            max_score = score;
                         }
                     }
 
@@ -624,49 +685,53 @@ fn catalytic_inference_step<'py>(
                     }
 
                     for d in 0..head_dim {
-                        let mut val_sum = 0.0f32;
+                        let mut val_sum_x = 0.0f32;
+                        let mut val_sum_y = 0.0f32;
                         for s in 0..=step {
-                            let s_offset = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + (s % MAX_SEQ_LEN)) * 2 * HIDDEN_DIM;
-                            let v_val = tape[s_offset + HIDDEN_DIM + h_start + d] as f32 * FP8_SCALE;
-                            val_sum += (exp_scores[s] / sum_exp) * v_val;
+                            let s_offset = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + (s % MAX_SEQ_LEN)) * 4 * HIDDEN_DIM;
+                            let v_val_x = tape[s_offset + HIDDEN_DIM * 2 + h_start + d] as f32 * FP8_SCALE;
+                            let v_val_y = tape[s_offset + HIDDEN_DIM * 3 + h_start + d] as f32 * FP8_SCALE;
+                            let weight = exp_scores[s] / sum_exp;
+                            val_sum_x += weight * v_val_x;
+                            val_sum_y += weight * v_val_y;
                         }
-                        let q_out = (val_sum * 127.0).clamp(-128.0, 127.0);
-                        attn_out[h_start + d] = (q_out as i32 & 0xFF) as u8;
+                        let q_out_x = (val_sum_x * 127.0).clamp(-128.0, 127.0);
+                        let q_out_y = (val_sum_y * 127.0).clamp(-128.0, 127.0);
+                        attn_out_x[h_start + d] = (q_out_x as i32 & 0xFF) as u8;
+                        attn_out_y[h_start + d] = (q_out_y as i32 & 0xFF) as u8;
                     }
-                }
-
-                // Write attn_out to temp_offset
-                for j in 0..max_dim {
-                    tape[temp_offset + j] ^= attn_out[j];
                 }
 
                 // 3. Undo Output Projection
                 for j in 0..max_dim {
                     let w_o = tape[lwo + 1536 + (j % 512)] as f32 * FP8_SCALE;
-                    let o_val = tape[temp_offset + j] as f32 * FP8_SCALE;
-                    let proj_val = ((w_o * o_val * 127.0) as i32).clamp(-128, 127) as u8;
-                    tape[layer_save + j] ^= proj_val;
-                }
-
-                // Clear temp_offset (contains attn_out)
-                for j in 0..max_dim {
-                    tape[temp_offset + j] ^= attn_out[j];
+                    let o_val_x = attn_out_x[j] as f32 * FP8_SCALE;
+                    let o_val_y = attn_out_y[j] as f32 * FP8_SCALE;
+                    let proj_val_x = ((w_o * o_val_x * 127.0) as i32).clamp(-128, 127) as u8;
+                    let proj_val_y = ((w_o * o_val_y * 127.0) as i32).clamp(-128, 127) as u8;
+                    tape[layer_save + j] ^= proj_val_x;
+                    tape[layer_save + HIDDEN_DIM + j] ^= proj_val_y;
                 }
 
                 // 4. Recompute RMS LayerNorm from restored input
                 let mut sum_sq = 0.0f32;
                 for j in 0..max_dim {
-                    let v = tape[input_offset + j] as f32 * FP8_SCALE;
-                    sum_sq += v * v;
+                    let rx = tape[input_offset + j] as f32 * FP8_SCALE;
+                    let ry = tape[input_offset + HIDDEN_DIM + j] as f32 * FP8_SCALE;
+                    sum_sq += rx * rx + ry * ry;
                 }
                 let rms = (sum_sq / (max_dim as f32) + 1e-5).sqrt();
                 let inv_rms = 1.0 / rms;
                 
                 let mut normed_x = vec![0u8; max_dim];
+                let mut normed_y = vec![0u8; max_dim];
                 for j in 0..max_dim {
-                    let v = tape[input_offset + j] as f32 * FP8_SCALE;
-                    let nv = (v * inv_rms * 127.0).clamp(-128.0, 127.0);
-                    normed_x[j] = (nv as i32 & 0xFF) as u8;
+                    let rx = tape[input_offset + j] as f32 * FP8_SCALE;
+                    let ry = tape[input_offset + HIDDEN_DIM + j] as f32 * FP8_SCALE;
+                    let nv_x = (rx * inv_rms * 127.0).clamp(-128.0, 127.0);
+                    let nv_y = (ry * inv_rms * 127.0).clamp(-128.0, 127.0);
+                    normed_x[j] = (nv_x as i32 & 0xFF) as u8;
+                    normed_y[j] = (nv_y as i32 & 0xFF) as u8;
                 }
 
                 // 5. Undo Q, K, V Projections
@@ -674,42 +739,65 @@ fn catalytic_inference_step<'py>(
                     let w_q = tape[lwo + (j % 512)] as f32 * FP8_SCALE;
                     let w_k = tape[lwo + 512 + (j % 512)] as f32 * FP8_SCALE;
                     let w_v = tape[lwo + 1024 + (j % 512)] as f32 * FP8_SCALE;
-                    let nx = normed_x[j] as f32 * FP8_SCALE;
+                    
+                    let nx_x = normed_x[j] as f32 * FP8_SCALE;
+                    let nx_y = normed_y[j] as f32 * FP8_SCALE;
 
-                    let q_val = ((w_q * nx * 127.0) as i32).clamp(-128, 127) as u8;
-                    let k_val = ((w_k * nx * 127.0) as i32).clamp(-128, 127) as u8;
-                    let v_val = ((w_v * nx * 127.0) as i32).clamp(-128, 127) as u8;
+                    let q_val_x = ((w_q * nx_x * 127.0) as i32).clamp(-128, 127) as u8;
+                    let q_val_y = ((w_q * nx_y * 127.0) as i32).clamp(-128, 127) as u8;
+                    
+                    let k_val_x = ((w_k * nx_x * 127.0) as i32).clamp(-128, 127) as u8;
+                    let k_val_y = ((w_k * nx_y * 127.0) as i32).clamp(-128, 127) as u8;
+                    
+                    let v_val_x = ((w_v * nx_x * 127.0) as i32).clamp(-128, 127) as u8;
+                    let v_val_y = ((w_v * nx_y * 127.0) as i32).clamp(-128, 127) as u8;
 
-                    tape[pre_gate_base + layer_idx * HIDDEN_DIM + j] ^= q_val;
-                    tape[slot_offset + j] ^= k_val;
-                    tape[slot_offset + HIDDEN_DIM + j] ^= v_val;
+                    tape[pre_gate_base + layer_idx * HIDDEN_DIM * 2 + j] ^= q_val_x;
+                    tape[pre_gate_base + layer_idx * HIDDEN_DIM * 2 + HIDDEN_DIM + j] ^= q_val_y;
+                    
+                    tape[slot_offset + j] ^= k_val_x;
+                    tape[slot_offset + HIDDEN_DIM + j] ^= k_val_y;
+                    tape[slot_offset + HIDDEN_DIM * 2 + j] ^= v_val_x;
+                    tape[slot_offset + HIDDEN_DIM * 3 + j] ^= v_val_y;
                 }
 
             } else {
                 // DELTANET LAYER UNCOMPUTATION
                 for j in 0..max_dim {
                     tape[input_offset + j] ^= tape[layer_save + j];
+                    tape[input_offset + HIDDEN_DIM + j] ^= tape[layer_save + HIDDEN_DIM + j];
                 }
                 for j in 0..max_dim {
-                    let x = tape[temp_offset + j] as f32 * FP8_SCALE;
-                    let gate = (0.5 + 0.25 * x).clamp(0.0, 1.0);
-                    tape[layer_save + j] ^= (gate * 255.0) as u8;
+                    let x_val = tape[temp_offset + j] as f32 * FP8_SCALE;
+                    let y_val = tape[temp_offset + HIDDEN_DIM + j] as f32 * FP8_SCALE;
+                    let gate_x = (0.5 + 0.25 * x_val).clamp(0.0, 1.0);
+                    let gate_y = (0.5 + 0.25 * y_val).clamp(0.0, 1.0);
+                    tape[layer_save + j] ^= (gate_x * 255.0) as u8;
+                    tape[layer_save + HIDDEN_DIM + j] ^= (gate_y * 255.0) as u8;
                 }
                 for j in 0..max_dim {
                     let w = tape[lwo + j] as f32 * FP8_SCALE;
-                    let x = tape[input_offset + j % HIDDEN_DIM] as f32 * FP8_SCALE;
-                    let val = ((w * x * 127.0) as i32).clamp(-128, 127);
-                    tape[temp_offset + j] ^= (val & 0xFF) as u8;
+                    let x = tape[input_offset + j] as f32 * FP8_SCALE;
+                    let y = tape[input_offset + HIDDEN_DIM + j] as f32 * FP8_SCALE;
+                    let val_x = ((w * x * 127.0) as i32).clamp(-128, 127);
+                    let val_y = ((w * y * 127.0) as i32).clamp(-128, 127);
+                    tape[temp_offset + j] ^= (val_x & 0xFF) as u8;
+                    tape[temp_offset + HIDDEN_DIM + j] ^= (val_y & 0xFF) as u8;
                 }
                 for j in 0..max_dim {
-                    tape[pre_gate_base + layer_idx * HIDDEN_DIM + j] ^= tape[temp_offset + j];
+                    tape[pre_gate_base + layer_idx * HIDDEN_DIM * 2 + j] ^= tape[temp_offset + j];
+                    tape[pre_gate_base + layer_idx * HIDDEN_DIM * 2 + HIDDEN_DIM + j] ^= tape[temp_offset + HIDDEN_DIM + j];
                 }
             }
+
+            // RE-SCRAMBLE AND RESTORE WEIGHT SUBSTRATE IN RAM
+            spn_scramble(&mut tape, lwo, HIDDEN_DIM, bh_key, &sbox, 12);
+            tape[lwo .. lwo + HIDDEN_DIM].copy_from_slice(&original_weight_substrate);
         }
     } // end cold-miss block
 
     // Clear embedding
-    for i in 0..token_embedding.len().min(HIDDEN_DIM) {
+    for i in 0..token_embedding.len().min(HIDDEN_DIM * 2) {
         tape[input_offset + i] ^= token_embedding[i];
     }
 
@@ -724,7 +812,7 @@ fn catalytic_inference_step<'py>(
     if !warm_hit {
         let slot_base = warm_tape_offset + ((emb_hash as usize) % WARM_TAPE_SLOTS) * warm_tape_stride;
         tape[slot_base..slot_base + 4].copy_from_slice(&emb_hash_bytes);
-        for j in 0..max_dim {
+        for j in 0..max_dim * 2 {
             tape[slot_base + 4 + j] ^= tape[input_offset + j];
         }
     }
@@ -966,6 +1054,23 @@ fn hawking_decompress_sweep<'py>(
     Ok(result_dict)
 }
 
+#[pyfunction]
+fn scramble_catalysis_weights<'py>(
+    py: Python<'py>,
+    weights: Bound<'py, PyBytes>,
+) -> PyResult<Bound<'py, PyBytes>> {
+    let bytes = weights.as_bytes();
+    let mut weights_vec = bytes.to_vec();
+    let (sbox, _) = generate_logistic_sbox();
+    let bh_key = b"catalytic_key_27b_inference_16_s";
+    let num_layers = weights_vec.len() / HIDDEN_DIM;
+    for layer_idx in 0..num_layers {
+        let lwo = layer_idx * HIDDEN_DIM;
+        spn_scramble(&mut weights_vec, lwo, HIDDEN_DIM, bh_key, &sbox, 12);
+    }
+    Ok(PyBytes::new_bound(py, &weights_vec))
+}
+
 #[pymodule]
 fn catalytic_ffi(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(f16_decode, m)?)?;
@@ -975,6 +1080,7 @@ fn catalytic_ffi(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(fractal_cache_exploit, m)?)?;
     m.add_function(wrap_pyfunction!(catalytic_inference_step, m)?)?;
     m.add_function(wrap_pyfunction!(hawking_decompress_sweep, m)?)?;
+    m.add_function(wrap_pyfunction!(scramble_catalysis_weights, m)?)?;
     Ok(())
 }
 

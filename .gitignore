@@ -186,3 +186,4 @@ THOUGHT/LAB/CAT_CAS/storage/
 target/  
 **/rust_engine/target/  
 **/rust_ffi/target/ 
+THOUGHT/LAB/CAT_CAS/16_catalytic_27b_inference/gemini_update/qwen_0.5b/ 
