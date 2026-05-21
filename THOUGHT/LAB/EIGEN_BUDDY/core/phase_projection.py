@@ -162,9 +162,38 @@ def main():
           f"= {total_params:,} total params")
 
     # Phase 3: Sweep training passes — double-buffered NVMe reads
+
+    # Phase 3: Sweep training passes — double-buffered NVMe reads
     n_blocks = len(gdn_layers) // 3
     pass_values = [3, 5, 10, 20, 50, 100]
     sweep_results = {}
+
+    # Phase 3a: Precompute 27B projection tape (CAT_CAS 12 structured tape)
+    # Cache: pooled proj = mean(W @ pad(feral)) for all vectors x all blocks
+    # Eliminates F16 decode + 6144x192 matrix multiply every training pass
+    print(f"\n[tape] Precomputing projection tape ({feral.shape[0]} vectors x {n_blocks} blocks)...")
+    t0 = time.time()
+    projection_tape = {}
+    for bi in range(n_blocks):
+        gdn = gdn_layers[bi*3:bi*3+3]
+        for name, info in tensors.items():
+            for lid in gdn:
+                if f'.{lid}.' in name and ('ssm_out' in name or 'attn_output' in name):
+                    off = info['offset']
+                    w = f16_to_torch(mm[off:off + info['size']])
+                    w = w.reshape(tuple(int(d) for d in info['shape']))
+                    with torch.no_grad():
+                        proj_full = project_27b(feral, w)
+                        pool_size = 6144 // 192
+                        proj_pooled = proj_full.view(feral.shape[0], 192, pool_size).mean(dim=2)
+                        for vi in range(feral.shape[0]):
+                            projection_tape[(bi, vi)] = proj_pooled[vi].clone()
+                    del w
+                    break
+        if bi % 5 == 0:
+            print(f"  tape block {bi}/{n_blocks}...", flush=True)
+    tape_mb = sum(v.numel() * v.element_size() for v in projection_tape.values()) / 1e6
+    print(f"[tape] {len(projection_tape)} entries, {tape_mb:.1f}MB, in {time.time()-t0:.1f}s")
 
     def pre_read_block(block_idx):
         """Read SSM/attention tensor from NVMe with zero-copy mmap.
@@ -207,7 +236,7 @@ def main():
             for bi in range(n_blocks):
                 result = pre_read_block(bi)
                 if result[0] is not None:
-                    buf.put(result)
+                    buf.put((bi, result))
             buf.put(None)  # sentinel
 
         reader = threading.Thread(target=pre_read_all, daemon=True)
@@ -218,7 +247,7 @@ def main():
         while True:
             item = buf.get()
             if item is None: break
-            weight_27b, sz_bytes, block_name, bw_mbps = item
+            bi, (weight_27b, sz_bytes, block_name, bw_mbps) = item
             stride_mb = sz_bytes / 1e6
             if bw_mbps > 0: bw_samples.append(bw_mbps)
 
@@ -233,8 +262,19 @@ def main():
                                      for _ in range(reps)])[:256]
                 feral_batch = feral[idx]
                 B = feral_batch.shape[0]
-                with torch.no_grad():
-                    proj_27b = project_27b(feral_batch, weight_27b)
+                # Pool to 192-dim for compact comparison — matches tape format
+                # Tape lookup: read cached projection (eliminates F16 decode + matmul)
+                if projection_tape:
+                    tape_vals = torch.stack([projection_tape[(bi, vi.item())]
+                                             for vi in idx.cpu()])
+                    proj_pooled = tape_vals.to(DEVICE)  # (B, 192)
+                else:
+                    with torch.no_grad():
+                        proj_full = project_27b(feral_batch, weight_27b)
+                        pool_sz = 6144 // 192
+                        proj_pooled = proj_full.view(B, 192, pool_sz).mean(dim=2)
+
+                # Skip: tape provides pre-pooled projection directly
 
                 mem_token = phase_memory.unsqueeze(0).expand(B, 1, 192)
                 z_in = torch.cat([feral_batch.unsqueeze(1), mem_token], dim=1)
@@ -247,13 +287,13 @@ def main():
                     phase_memory.data = 0.9 * phase_memory.data + \
                                         0.1 * z_mem_out.mean(dim=0).detach()
 
-                z_expanded = expansion(z_feral_out.real)
-                dim_gate = torch.sigmoid(dim_gate_raw)
-                z_gated = z_expanded * dim_gate
-                core_norm = z_gated / (z_gated.norm(dim=1, keepdim=True) + 1e-8)
-                proj_norm = proj_27b / (proj_27b.norm(dim=1, keepdim=True) + 1e-8)
+                # Tape provides pre-pooled 192-dim projection.
+                # Compare directly with Core output (skip expansion — same dims)
+                core_real = z_feral_out.real  # (B, 192)
+                core_norm = core_real / (core_real.norm(dim=1, keepdim=True) + 1e-8)
+                proj_norm = proj_pooled / (proj_pooled.norm(dim=1, keepdim=True) + 1e-8)
                 resonance = (core_norm * proj_norm).sum(dim=1).mean()
-                loss = 1.0 - resonance + 0.001 * dim_gate.mean()
+                loss = 1.0 - resonance
                 block_losses.append(loss.item())
                 opt.zero_grad(); loss.backward()
                 torch.nn.utils.clip_grad_norm_(list(core.parameters()) + list(expansion.parameters()) + [dim_gate_raw, phase_memory], 1.0)
