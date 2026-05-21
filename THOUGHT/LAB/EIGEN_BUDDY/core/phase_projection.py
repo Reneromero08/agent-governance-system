@@ -208,6 +208,8 @@ def main():
     tape_mb = sum(v.numel() * v.element_size() for v in root_tape.values()) / 1e6
     print(f"[tape] {len(root_tape)} entries, {tape_mb:.3f}MB, in {time.time()-t0:.1f}s")
     print(f"[tape] Reduction: 6,300 -> {len(root_tape)} entries ({6300/len(root_tape):.0f}x)")
+    torch.save({str(k): v.cpu() for k, v in root_tape.items()}, Path(__file__).parent / "root_tape.pt")
+    print(f"[tape] Saved root_tape.pt for catalytic inference")
 
     def pre_read_block(block_idx):
         """Read SSM/attention tensor from NVMe with zero-copy mmap.
