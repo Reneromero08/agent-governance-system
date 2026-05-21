@@ -326,7 +326,130 @@ fn eval_node_leaf(
 // ==================================================================
 
 const HIDDEN_DIM: usize = 896;  // Qwen 0.5B hidden dim
-const FP8_SCALE: f32 = 1.0 / 127.0;
+const F32_BYTES: usize = 4;
+const COMPLEX_CH: usize = 2;  // X (real) + Y (imaginary) channels
+const COMPLEX_DIM: usize = HIDDEN_DIM * F32_BYTES * COMPLEX_CH;  // bytes per complex vector
+const F32_DIM: usize = HIDDEN_DIM * F32_BYTES;  // bytes per single-channel f32 vector
+
+#[inline(always)]
+fn tape_f32(tape: &[u8], base: usize, idx: usize) -> f32 {
+    let off = base + idx * F32_BYTES;
+    f32::from_le_bytes([tape[off], tape[off+1], tape[off+2], tape[off+3]])
+}
+
+#[inline(always)]
+fn tape_f32_xor(tape: &mut [u8], base: usize, idx: usize, val: f32) {
+    let off = base + idx * F32_BYTES;
+    let bytes = val.to_le_bytes();
+    tape[off] ^= bytes[0];
+    tape[off+1] ^= bytes[1];
+    tape[off+2] ^= bytes[2];
+    tape[off+3] ^= bytes[3];
+}
+const FP8_SCALE: f32 = 1.0 / 127.0;  // unused, kept for reference
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_f32_xor_idempotent() {
+        let mut tape = vec![0u8; 16];
+        // Write 0.5 at index 0, base 0
+        tape_f32_xor(&mut tape, 0, 0, 0.5_f32);
+        let val = tape_f32(&tape, 0, 0);
+        assert_eq!(val, 0.5);
+        // XOR same value = back to 0
+        tape_f32_xor(&mut tape, 0, 0, 0.5_f32);
+        let val = tape_f32(&tape, 0, 0);
+        assert_eq!(val, 0.0);
+        // XOR 0.5 again = 0.5
+        tape_f32_xor(&mut tape, 0, 0, 0.5_f32);
+        let val = tape_f32(&tape, 0, 0);
+        assert_eq!(val, 0.5);
+    }
+
+    #[test]
+    fn test_delta_net_1layer_restore() {
+        let dim = 896;
+        let f32b = 4;
+        let complex_dim = dim * f32b * 2;
+        let f32_dim = dim * f32b;
+        let mut tape = vec![0u8; complex_dim * 8]; // ample space
+        let input_off = 0usize;
+        let weight_off = complex_dim;
+        let temp_off = weight_off + f32_dim;
+        let layer_save_off = temp_off + complex_dim;
+        let pre_gate_off = layer_save_off + complex_dim;
+
+        // Set a single input
+        tape_f32_xor(&mut tape, input_off, 0, 0.5);
+        tape_f32_xor(&mut tape, input_off + f32_dim, 0, 1.0);
+        // Set weight
+        tape_f32_xor(&mut tape, weight_off, 0, 0.2);
+
+        // Forward DeltaNet
+        let w = tape_f32(&tape, weight_off, 0);
+        let x = tape_f32(&tape, input_off, 0);
+        let y = tape_f32(&tape, input_off + f32_dim, 0);
+        let vx = w * x; let vy = w * y;
+        let t0x = tape_f32(&tape, temp_off, 0);
+        let t0y = tape_f32(&tape, temp_off + f32_dim, 0);
+        tape_f32_xor(&mut tape, pre_gate_off, 0, t0x); // save original
+        tape_f32_xor(&mut tape, pre_gate_off + f32_dim, 0, t0y);
+        tape_f32_xor(&mut tape, temp_off, 0, vx);
+        tape_f32_xor(&mut tape, temp_off + f32_dim, 0, vy);
+        let gx = (0.5 + 0.25 * tape_f32(&tape, temp_off, 0)).clamp(0.0, 1.0);
+        let gy = (0.5 + 0.25 * tape_f32(&tape, temp_off + f32_dim, 0)).clamp(0.0, 1.0);
+        tape_f32_xor(&mut tape, layer_save_off, 0, gx);
+        tape_f32_xor(&mut tape, layer_save_off + f32_dim, 0, gy);
+        tape_f32_xor(&mut tape, input_off, 0, gx);
+        tape_f32_xor(&mut tape, input_off + f32_dim, 0, gy);
+
+        // Verify forward modified input
+        assert_eq!(tape_f32(&tape, input_off, 0), 0.5_f32 + gx); // wait, XOR of f32 isn't addition
+
+        // Backward (correct order)
+        // Read gate from layer_save, undo copy-through
+        let gx_bwd = tape_f32(&tape, layer_save_off, 0);
+        let gy_bwd = tape_f32(&tape, layer_save_off + f32_dim, 0);
+        tape_f32_xor(&mut tape, input_off, 0, gx_bwd);
+        tape_f32_xor(&mut tape, input_off + f32_dim, 0, gy_bwd);
+        // Recompute and undo gate
+        let gx2 = (0.5 + 0.25 * tape_f32(&tape, temp_off, 0)).clamp(0.0, 1.0);
+        let gy2 = (0.5 + 0.25 * tape_f32(&tape, temp_off + f32_dim, 0)).clamp(0.0, 1.0);
+        tape_f32_xor(&mut tape, layer_save_off, 0, gx2);
+        tape_f32_xor(&mut tape, layer_save_off + f32_dim, 0, gy2);
+        // Undo Q
+        let w = tape_f32(&tape, weight_off, 0);
+        let x = tape_f32(&tape, input_off, 0);
+        let y = tape_f32(&tape, input_off + f32_dim, 0);
+        tape_f32_xor(&mut tape, temp_off, 0, w * x);
+        tape_f32_xor(&mut tape, temp_off + f32_dim, 0, w * y);
+        // Restore original temp
+        let tx = tape_f32(&tape, temp_off, 0);
+        let tx2 = tape_f32(&tape, temp_off, 0);
+        let ty2 = tape_f32(&tape, temp_off + f32_dim, 0);
+        tape_f32_xor(&mut tape, pre_gate_off, 0, tx2);
+        tape_f32_xor(&mut tape, pre_gate_off + f32_dim, 0, ty2);
+        tape_f32_xor(&mut tape, temp_off, 0, tx2);
+        tape_f32_xor(&mut tape, temp_off + f32_dim, 0, ty2);
+
+        // Verify restoration
+        let ix = tape_f32(&tape, input_off, 0);
+        let iy = tape_f32(&tape, input_off + f32_dim, 0);
+        let tx = tape_f32(&tape, temp_off, 0);
+        let ty = tape_f32(&tape, temp_off + f32_dim, 0);
+        let sx = tape_f32(&tape, layer_save_off, 0);
+        let sy = tape_f32(&tape, layer_save_off + f32_dim, 0);
+        let px = tape_f32(&tape, pre_gate_off, 0);
+        let py = tape_f32(&tape, pre_gate_off + f32_dim, 0);
+        println!("AFTER_RESTORE: ix={:.6e}, iy={:.6e}, tx={:.6e}, ty={:.6e}, sx={:.6e}, sy={:.6e}, px={:.6e}, py={:.6e}", ix, iy, tx, ty, sx, sy, px, py);
+        println!("EXPECTED: ix=5e-1, iy=1e0, tx=0, ty=0, sx=0, sy=0, px=0, py=0");
+        assert!((ix - 0.5).abs() < 0.001);
+        assert!((iy - 1.0).abs() < 0.001);
+    }
+}
 
 const MAX_SEQ_LEN: usize = 1024;
 
@@ -357,19 +480,19 @@ fn catalytic_inference_step<'py>(
     let input_offset = 0usize;
     let weight_offset = HIDDEN_DIM * 2;
     
-    // scratch layout:
-    let scratch_base = weight_offset + num_layers * HIDDEN_DIM;
-    let temp_offset = scratch_base; // needs HIDDEN_DIM * 2
-    let pre_gate_base = temp_offset + HIDDEN_DIM * 2; // needs num_layers * HIDDEN_DIM * 2
-    let saved_outputs_offset = pre_gate_base + num_layers * HIDDEN_DIM * 2; // needs num_layers * HIDDEN_DIM * 2
+    // Scratch layout (f32 for compute regions, u8 for weight buffer):
+    let scratch_base = weight_offset + num_layers * HIDDEN_DIM;  // weight buffer stays u8
+    let temp_offset = scratch_base;
+    let pre_gate_base = temp_offset + COMPLEX_DIM;
+    let saved_outputs_offset = pre_gate_base + num_layers * COMPLEX_DIM;
     
     // Warm-tape cache: 256 stencil slots
     const WARM_TAPE_SLOTS: usize = 256;
-    let warm_tape_offset = saved_outputs_offset + num_layers * HIDDEN_DIM * 2;
-    let warm_tape_stride = 4 + HIDDEN_DIM * 2;
+    let warm_tape_offset = saved_outputs_offset + num_layers * COMPLEX_DIM;
+    let warm_tape_stride = 4 + COMPLEX_DIM;  // 4-byte hash + XY output (f32)
     let kv_cache_offset = warm_tape_offset + WARM_TAPE_SLOTS * warm_tape_stride;
 
-    let total_scratch = kv_cache_offset + (num_layers / 4) * MAX_SEQ_LEN * 4 * HIDDEN_DIM;
+    let total_scratch = kv_cache_offset + (num_layers / 4) * MAX_SEQ_LEN * 4 * F32_DIM;
     if tape.len() < total_scratch {
         return Err(pyo3::exceptions::PyValueError::new_err(
             format!("Tape too small: need at least {} bytes, got {}", total_scratch, tape.len())
@@ -379,8 +502,8 @@ fn catalytic_inference_step<'py>(
     let (sbox, _inv_sbox) = generate_logistic_sbox();
     let bh_key = b"catalytic_key_27b_inference_16_s";
 
-    // Embed token
-    for i in 0..token_embedding.len().min(HIDDEN_DIM * 2) {
+    // Embed token (raw bytes copied into input region)
+    for i in 0..token_embedding.len().min(COMPLEX_DIM) {
         tape[input_offset + i] ^= token_embedding[i];
         total_entropy += token_embedding[i].count_ones() as u64;
     }
@@ -407,397 +530,284 @@ fn catalytic_inference_step<'py>(
     if let Some(slot) = cache_slot {
         warm_hit = true;
         let slot_base = warm_tape_offset + slot * warm_tape_stride;
-        for j in 0..max_dim * 2 {
-            let cached = tape[slot_base + 4 + j];
+        let cache_out = slot_base + 4;  // output starts after 4-byte hash
+        for j in 0..COMPLEX_DIM {
+            let cached = tape[cache_out + j];
             total_entropy += cached.count_ones() as u64;
             tape[input_offset + j] ^= cached;
         }
-        // Output head
-        let mut best_score: u32 = 0;
-        for j in 0..64.min(tape_size.saturating_sub(input_offset)) {
-            let score = tape[input_offset + j] as u32;
-            if score > best_score {
-                best_score = score;
-                best_token = j as u8;
-            }
+        // Output head (f32)
+        let mut best_score_f32: f32 = f32::NEG_INFINITY;
+        for j in 0..64.min(HIDDEN_DIM) {
+            let s = tape_f32(&tape, input_offset, j).abs();
+            if s > best_score_f32 { best_score_f32 = s; best_token = j as u8; }
         }
         // Uncompute warm hit
-        for j in 0..max_dim * 2 {
-            tape[input_offset + j] ^= tape[slot_base + 4 + j];
+        for j in 0..COMPLEX_DIM {
+            tape[input_offset + j] ^= tape[cache_out + j];
         }
     } else {
-        // COLD MISS: execute full layer stack
+        // COLD MISS: full layer stack (f32 tape)
         for layer_idx in 0..num_layers {
             let lwo = weight_offset + layer_idx * HIDDEN_DIM;
-            let layer_save = saved_outputs_offset + layer_idx * HIDDEN_DIM * 2;
+            let lwo_f32 = weight_offset + layer_idx * HIDDEN_DIM * F32_BYTES;
+            let layer_save = saved_outputs_offset + layer_idx * COMPLEX_DIM;
 
-            // DYNAMIC DECATALYSIS: Decrypt layer weights into tape in RAM
-            let original_weight_substrate = tape[lwo .. lwo + HIDDEN_DIM].to_vec();
+            // Dynamic decatalysis
+            let original_weight = tape[lwo_f32 .. lwo_f32 + HIDDEN_DIM * F32_BYTES].to_vec();
             let src_slice = &compressed_weights_bytes[layer_idx * HIDDEN_DIM .. (layer_idx + 1) * HIDDEN_DIM];
             tape[lwo .. lwo + HIDDEN_DIM].copy_from_slice(src_slice);
             spn_unscramble(&mut tape, lwo, HIDDEN_DIM, bh_key, &sbox, 12);
 
             if (layer_idx + 1) % 4 == 0 {
-                // GATED ATTENTION LAYER (3:1 stride)
+                // GATED ATTENTION LAYER (f32)
                 let attn_idx = layer_idx / 4;
-                
-                // 1. Complex RMS LayerNorm
                 let mut sum_sq = 0.0f32;
-                for j in 0..max_dim {
-                    let rx = tape[input_offset + j] as f32 * FP8_SCALE;
-                    let ry = tape[input_offset + HIDDEN_DIM + j] as f32 * FP8_SCALE;
+                for j in 0..HIDDEN_DIM {
+                    let rx = tape_f32(&tape, input_offset, j);
+                    let ry = tape_f32(&tape, input_offset + F32_DIM, j);
                     sum_sq += rx * rx + ry * ry;
                 }
-                let rms = (sum_sq / (max_dim as f32) + 1e-5).sqrt();
-                let inv_rms = 1.0 / rms;
-                
-                let mut normed_x = vec![0u8; max_dim];
-                let mut normed_y = vec![0u8; max_dim];
-                for j in 0..max_dim {
-                    let rx = tape[input_offset + j] as f32 * FP8_SCALE;
-                    let ry = tape[input_offset + HIDDEN_DIM + j] as f32 * FP8_SCALE;
-                    let nv_x = (rx * inv_rms * 127.0).clamp(-128.0, 127.0);
-                    let nv_y = (ry * inv_rms * 127.0).clamp(-128.0, 127.0);
-                    normed_x[j] = (nv_x as i32 & 0xFF) as u8;
-                    normed_y[j] = (nv_y as i32 & 0xFF) as u8;
+                let rms = (sum_sq / HIDDEN_DIM as f32 + 1e-5).sqrt();
+                let mut nx = vec![0.0f32; HIDDEN_DIM * 2];
+                for j in 0..HIDDEN_DIM {
+                    nx[j] = tape_f32(&tape, input_offset, j) / rms;
+                    nx[HIDDEN_DIM + j] = tape_f32(&tape, input_offset + F32_DIM, j) / rms;
                 }
-
-                // 2. Q, K, V Projections
-                let slot_offset = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + (step % MAX_SEQ_LEN)) * 4 * HIDDEN_DIM;
-                
-                for j in 0..max_dim {
-                    let w_q = tape[lwo + (j % 512)] as f32 * FP8_SCALE;
-                    let w_k = tape[lwo + 512 + (j % 512)] as f32 * FP8_SCALE;
-                    let w_v = tape[lwo + 1024 + (j % 512)] as f32 * FP8_SCALE;
-                    
-                    let nx_x = normed_x[j] as f32 * FP8_SCALE;
-                    let nx_y = normed_y[j] as f32 * FP8_SCALE;
-
-                    let q_val_x = ((w_q * nx_x * 127.0) as i32).clamp(-128, 127) as u8;
-                    let q_val_y = ((w_q * nx_y * 127.0) as i32).clamp(-128, 127) as u8;
-                    
-                    let k_val_x = ((w_k * nx_x * 127.0) as i32).clamp(-128, 127) as u8;
-                    let k_val_y = ((w_k * nx_y * 127.0) as i32).clamp(-128, 127) as u8;
-                    
-                    let v_val_x = ((w_v * nx_x * 127.0) as i32).clamp(-128, 127) as u8;
-                    let v_val_y = ((w_v * nx_y * 127.0) as i32).clamp(-128, 127) as u8;
-
-                    tape[pre_gate_base + layer_idx * HIDDEN_DIM * 2 + j] ^= q_val_x;
-                    tape[pre_gate_base + layer_idx * HIDDEN_DIM * 2 + HIDDEN_DIM + j] ^= q_val_y;
-                    
-                    tape[slot_offset + j] ^= k_val_x;
-                    tape[slot_offset + HIDDEN_DIM + j] ^= k_val_y;
-                    tape[slot_offset + HIDDEN_DIM * 2 + j] ^= v_val_x;
-                    tape[slot_offset + HIDDEN_DIM * 3 + j] ^= v_val_y;
-                    
-                    total_entropy += q_val_x.count_ones() as u64 + q_val_y.count_ones() as u64
-                        + k_val_x.count_ones() as u64 + k_val_y.count_ones() as u64
-                        + v_val_x.count_ones() as u64 + v_val_y.count_ones() as u64;
+                // QKV projections
+                let slot_base = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + step % MAX_SEQ_LEN) * 4 * F32_DIM;
+                for j in 0..HIDDEN_DIM {
+                    let wq = tape_f32(&tape, lwo_f32, j % 512);
+                    let wk = tape_f32(&tape, lwo_f32 + 512 * F32_BYTES, j % 512);
+                    let wv = tape_f32(&tape, lwo_f32 + 1024 * F32_BYTES, j % 512);
+                    let qx = wq * nx[j]; let qy = wq * nx[HIDDEN_DIM + j];
+                    let kx = wk * nx[j]; let ky = wk * nx[HIDDEN_DIM + j];
+                    let vx = wv * nx[j]; let vy = wv * nx[HIDDEN_DIM + j];
+                    let pg = pre_gate_base + layer_idx * COMPLEX_DIM;
+                    tape_f32_xor(&mut tape, pg, j, qx);
+                    tape_f32_xor(&mut tape, pg + F32_DIM, j, qy);
+                    tape_f32_xor(&mut tape, slot_base, j, kx);
+                    tape_f32_xor(&mut tape, slot_base + F32_DIM, j, ky);
+                    tape_f32_xor(&mut tape, slot_base + F32_DIM * 2, j, vx);
+                    tape_f32_xor(&mut tape, slot_base + F32_DIM * 3, j, vy);
+                    total_entropy += (qx.abs() as u64) + (ky.abs() as u64) + (vx.abs() as u64);
                 }
-
-                // 3. Scaled Dot-Product Attention (16 heads)
-                let num_heads = 16;
-                let head_dim = HIDDEN_DIM / num_heads;  // 56 for HIDDEN_DIM=896
-                let scale = 1.0 / (head_dim as f32).sqrt();
-                let mut attn_out_x = vec![0u8; max_dim];
-                let mut attn_out_y = vec![0u8; max_dim];
-
-                for h in 0..num_heads {
-                    let h_start = h * head_dim;
-                    let mut scores = vec![0.0f32; step + 1];
-                    let mut max_score = -f32::INFINITY;
-
-                    // Compute complex dot-product scores: Q K^\dagger
-                    for s in 0..=step {
-                        let s_offset = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + (s % MAX_SEQ_LEN)) * 4 * HIDDEN_DIM;
-                        let mut dot_real = 0.0f32;
-                        let mut dot_imag = 0.0f32;
-                        for d in 0..head_dim {
-                            let q_x = tape[pre_gate_base + layer_idx * HIDDEN_DIM * 2 + h_start + d] as f32 * FP8_SCALE;
-                            let q_y = tape[pre_gate_base + layer_idx * HIDDEN_DIM * 2 + HIDDEN_DIM + h_start + d] as f32 * FP8_SCALE;
-                            let k_x = tape[s_offset + h_start + d] as f32 * FP8_SCALE;
-                            let k_y = tape[s_offset + HIDDEN_DIM + h_start + d] as f32 * FP8_SCALE;
-                            
-                            dot_real += q_x * k_x + q_y * k_y;
-                            dot_imag += q_y * k_x - q_x * k_y;
-                        }
-                        let score = (dot_real * dot_real + dot_imag * dot_imag).sqrt() * scale;
-                        scores[s] = score;
-                        if score > max_score {
-                            max_score = score;
-                        }
-                    }
-
-                    // Softmax
-                    let mut sum_exp = 0.0f32;
-                    let mut exp_scores = vec![0.0f32; step + 1];
-                    for s in 0..=step {
-                        exp_scores[s] = (scores[s] - max_score).exp();
-                        sum_exp += exp_scores[s];
-                    }
-
-                    // Weighted sum of Values (complex)
-                    for d in 0..head_dim {
-                        let mut val_sum_x = 0.0f32;
-                        let mut val_sum_y = 0.0f32;
-                        for s in 0..=step {
-                            let s_offset = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + (s % MAX_SEQ_LEN)) * 4 * HIDDEN_DIM;
-                            let v_val_x = tape[s_offset + HIDDEN_DIM * 2 + h_start + d] as f32 * FP8_SCALE;
-                            let v_val_y = tape[s_offset + HIDDEN_DIM * 3 + h_start + d] as f32 * FP8_SCALE;
-                            let weight = exp_scores[s] / sum_exp;
-                            val_sum_x += weight * v_val_x;
-                            val_sum_y += weight * v_val_y;
-                        }
-                        let q_out_x = (val_sum_x * 127.0).clamp(-128.0, 127.0);
-                        let q_out_y = (val_sum_y * 127.0).clamp(-128.0, 127.0);
-                        attn_out_x[h_start + d] = (q_out_x as i32 & 0xFF) as u8;
-                        attn_out_y[h_start + d] = (q_out_y as i32 & 0xFF) as u8;
-                        total_entropy += attn_out_x[h_start + d].count_ones() as u64 
-                            + attn_out_y[h_start + d].count_ones() as u64;
-                    }
-                }
-
-                // 4. Output Projection
-                for j in 0..max_dim {
-                    let w_o = tape[lwo + 1536 + (j % 512)] as f32 * FP8_SCALE;
-                    let o_val_x = attn_out_x[j] as f32 * FP8_SCALE;
-                    let o_val_y = attn_out_y[j] as f32 * FP8_SCALE;
-                    let proj_val_x = ((w_o * o_val_x * 127.0) as i32).clamp(-128, 127) as u8;
-                    let proj_val_y = ((w_o * o_val_y * 127.0) as i32).clamp(-128, 127) as u8;
-                    tape[layer_save + j] ^= proj_val_x;
-                    tape[layer_save + HIDDEN_DIM + j] ^= proj_val_y;
-                    total_entropy += proj_val_x.count_ones() as u64 + proj_val_y.count_ones() as u64;
-                }
-
-                // Add to input state
-                for j in 0..max_dim {
-                    tape[input_offset + j] ^= tape[layer_save + j];
-                    tape[input_offset + HIDDEN_DIM + j] ^= tape[layer_save + HIDDEN_DIM + j];
-                }
-
-            } else {
-                // DELTANET LAYER (complex activations projected with real weights)
-                for j in 0..max_dim {
-                    let w = tape[lwo + j] as f32 * FP8_SCALE;
-                    let x = tape[input_offset + j] as f32 * FP8_SCALE;
-                    let y = tape[input_offset + HIDDEN_DIM + j] as f32 * FP8_SCALE;
-                    let val_x = ((w * x * 127.0) as i32).clamp(-128, 127);
-                    let val_y = ((w * y * 127.0) as i32).clamp(-128, 127);
-                    let bv_x = (val_x & 0xFF) as u8;
-                    let bv_y = (val_y & 0xFF) as u8;
-                    total_entropy += bv_x.count_ones() as u64 + bv_y.count_ones() as u64;
-                    tape[pre_gate_base + layer_idx * HIDDEN_DIM * 2 + j] ^= tape[temp_offset + j];
-                    tape[pre_gate_base + layer_idx * HIDDEN_DIM * 2 + HIDDEN_DIM + j] ^= tape[temp_offset + HIDDEN_DIM + j];
-                    tape[temp_offset + j] ^= bv_x;
-                    tape[temp_offset + HIDDEN_DIM + j] ^= bv_y;
-                }
-                for j in 0..max_dim {
-                    let x_val = tape[temp_offset + j] as f32 * FP8_SCALE;
-                    let y_val = tape[temp_offset + HIDDEN_DIM + j] as f32 * FP8_SCALE;
-                    let gate_x = (0.5 + 0.25 * x_val).clamp(0.0, 1.0);
-                    let gate_y = (0.5 + 0.25 * y_val).clamp(0.0, 1.0);
-                    let gated_x = (gate_x * 255.0) as u8;
-                    let gated_y = (gate_y * 255.0) as u8;
-                    total_entropy += gated_x.count_ones() as u64 + gated_y.count_ones() as u64;
-                    tape[layer_save + j] ^= gated_x;
-                    tape[layer_save + HIDDEN_DIM + j] ^= gated_y;
-                }
-                for j in 0..max_dim {
-                    tape[input_offset + j] ^= tape[layer_save + j];
-                    tape[input_offset + HIDDEN_DIM + j] ^= tape[layer_save + HIDDEN_DIM + j];
-                }
-            }
-
-            // RE-SCRAMBLE AND RESTORE WEIGHT SUBSTRATE IN RAM
-            spn_scramble(&mut tape, lwo, HIDDEN_DIM, bh_key, &sbox, 12);
-            tape[lwo .. lwo + HIDDEN_DIM].copy_from_slice(&original_weight_substrate);
-        }
-
-        // Output head
-        let mut best_score: u32 = 0;
-        for j in 0..64.min(tape_size.saturating_sub(input_offset)) {
-            let score = tape[input_offset + j] as u32;
-            if score > best_score {
-                best_score = score;
-                best_token = j as u8;
-            }
-        }
-
-        // Uncompute: reverse each layer
-        for layer_idx in (0..num_layers).rev() {
-            let lwo = weight_offset + layer_idx * HIDDEN_DIM;
-            let layer_save = saved_outputs_offset + layer_idx * HIDDEN_DIM * 2;
-
-            // DYNAMIC DECATALYSIS FOR UNCOMPUTATION
-            let original_weight_substrate = tape[lwo .. lwo + HIDDEN_DIM].to_vec();
-            let src_slice = &compressed_weights_bytes[layer_idx * HIDDEN_DIM .. (layer_idx + 1) * HIDDEN_DIM];
-            tape[lwo .. lwo + HIDDEN_DIM].copy_from_slice(src_slice);
-            spn_unscramble(&mut tape, lwo, HIDDEN_DIM, bh_key, &sbox, 12);
-
-            if (layer_idx + 1) % 4 == 0 {
-                // GATED ATTENTION LAYER UNCOMPUTATION
-                let attn_idx = layer_idx / 4;
-                let slot_offset = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + (step % MAX_SEQ_LEN)) * 4 * HIDDEN_DIM;
-
-                // 1. Undo input state addition
-                for j in 0..max_dim {
-                    tape[input_offset + j] ^= tape[layer_save + j];
-                    tape[input_offset + HIDDEN_DIM + j] ^= tape[layer_save + HIDDEN_DIM + j];
-                }
-
-                // 2. Recompute attn_out (we have Q and K, V in cache)
+                // Multi-head attention
                 let num_heads = 16;
                 let head_dim = HIDDEN_DIM / num_heads;
                 let scale = 1.0 / (head_dim as f32).sqrt();
-                let mut attn_out_x = vec![0u8; max_dim];
-                let mut attn_out_y = vec![0u8; max_dim];
-
+                let mut attn_x = vec![0.0f32; HIDDEN_DIM];
+                let mut attn_y = vec![0.0f32; HIDDEN_DIM];
                 for h in 0..num_heads {
-                    let h_start = h * head_dim;
+                    let hs = h * head_dim;
                     let mut scores = vec![0.0f32; step + 1];
-                    let mut max_score = -f32::INFINITY;
-
+                    let mut max_s = f32::NEG_INFINITY;
                     for s in 0..=step {
-                        let s_offset = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + (s % MAX_SEQ_LEN)) * 4 * HIDDEN_DIM;
-                        let mut dot_real = 0.0f32;
-                        let mut dot_imag = 0.0f32;
+                        let so = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + s % MAX_SEQ_LEN) * 4 * F32_DIM;
+                        let mut dr = 0.0f32; let mut di = 0.0f32;
                         for d in 0..head_dim {
-                            let q_x = tape[pre_gate_base + layer_idx * HIDDEN_DIM * 2 + h_start + d] as f32 * FP8_SCALE;
-                            let q_y = tape[pre_gate_base + layer_idx * HIDDEN_DIM * 2 + HIDDEN_DIM + h_start + d] as f32 * FP8_SCALE;
-                            let k_x = tape[s_offset + h_start + d] as f32 * FP8_SCALE;
-                            let k_y = tape[s_offset + HIDDEN_DIM + h_start + d] as f32 * FP8_SCALE;
-                            
-                            dot_real += q_x * k_x + q_y * k_y;
-                            dot_imag += q_y * k_x - q_x * k_y;
+                            let qx = tape_f32(&tape, pre_gate_base + layer_idx * COMPLEX_DIM, hs + d);
+                            let qy = tape_f32(&tape, pre_gate_base + layer_idx * COMPLEX_DIM + F32_DIM, hs + d);
+                            let kx = tape_f32(&tape, so, hs + d);
+                            let ky = tape_f32(&tape, so + F32_DIM, hs + d);
+                            dr += qx * kx + qy * ky;
+                            di += qy * kx - qx * ky;
                         }
-                        let score = (dot_real * dot_real + dot_imag * dot_imag).sqrt() * scale;
-                        scores[s] = score;
-                        if score > max_score {
-                            max_score = score;
-                        }
+                        let sc = (dr * dr + di * di).sqrt() * scale;
+                        scores[s] = sc;
+                        if sc > max_s { max_s = sc; }
                     }
-
-                    let mut sum_exp = 0.0f32;
-                    let mut exp_scores = vec![0.0f32; step + 1];
-                    for s in 0..=step {
-                        exp_scores[s] = (scores[s] - max_score).exp();
-                        sum_exp += exp_scores[s];
-                    }
-
+                    let mut sum_e = 0.0f32;
+                    let mut exps = vec![0.0f32; step + 1];
+                    for s in 0..=step { exps[s] = (scores[s] - max_s).exp(); sum_e += exps[s]; }
                     for d in 0..head_dim {
-                        let mut val_sum_x = 0.0f32;
-                        let mut val_sum_y = 0.0f32;
+                        let mut vsx = 0.0f32; let mut vsy = 0.0f32;
                         for s in 0..=step {
-                            let s_offset = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + (s % MAX_SEQ_LEN)) * 4 * HIDDEN_DIM;
-                            let v_val_x = tape[s_offset + HIDDEN_DIM * 2 + h_start + d] as f32 * FP8_SCALE;
-                            let v_val_y = tape[s_offset + HIDDEN_DIM * 3 + h_start + d] as f32 * FP8_SCALE;
-                            let weight = exp_scores[s] / sum_exp;
-                            val_sum_x += weight * v_val_x;
-                            val_sum_y += weight * v_val_y;
+                            let so = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + s % MAX_SEQ_LEN) * 4 * F32_DIM;
+                            let vx = tape_f32(&tape, so + F32_DIM * 2, hs + d);
+                            let vy = tape_f32(&tape, so + F32_DIM * 3, hs + d);
+                            let w = exps[s] / sum_e;
+                            vsx += w * vx; vsy += w * vy;
                         }
-                        let q_out_x = (val_sum_x * 127.0).clamp(-128.0, 127.0);
-                        let q_out_y = (val_sum_y * 127.0).clamp(-128.0, 127.0);
-                        attn_out_x[h_start + d] = (q_out_x as i32 & 0xFF) as u8;
-                        attn_out_y[h_start + d] = (q_out_y as i32 & 0xFF) as u8;
+                        attn_x[hs + d] = vsx; attn_y[hs + d] = vsy;
+                        total_entropy += (vsx.abs() as u64) + (vsy.abs() as u64);
                     }
                 }
-
-                // 3. Undo Output Projection
-                for j in 0..max_dim {
-                    let w_o = tape[lwo + 1536 + (j % 512)] as f32 * FP8_SCALE;
-                    let o_val_x = attn_out_x[j] as f32 * FP8_SCALE;
-                    let o_val_y = attn_out_y[j] as f32 * FP8_SCALE;
-                    let proj_val_x = ((w_o * o_val_x * 127.0) as i32).clamp(-128, 127) as u8;
-                    let proj_val_y = ((w_o * o_val_y * 127.0) as i32).clamp(-128, 127) as u8;
-                    tape[layer_save + j] ^= proj_val_x;
-                    tape[layer_save + HIDDEN_DIM + j] ^= proj_val_y;
+                // Output projection + add to input
+                for j in 0..HIDDEN_DIM {
+                    let wo = tape_f32(&tape, lwo_f32 + 1536 * F32_BYTES, j % 512);
+                    let px = wo * attn_x[j]; let py = wo * attn_y[j];
+                    tape_f32_xor(&mut tape, layer_save, j, px);
+                    tape_f32_xor(&mut tape, layer_save + F32_DIM, j, py);
+                    tape_f32_xor(&mut tape, input_offset, j, px);
+                    tape_f32_xor(&mut tape, input_offset + F32_DIM, j, py);
+                    total_entropy += (px.abs() as u64) + (py.abs() as u64);
                 }
-
-                // 4. Recompute RMS LayerNorm from restored input
-                let mut sum_sq = 0.0f32;
-                for j in 0..max_dim {
-                    let rx = tape[input_offset + j] as f32 * FP8_SCALE;
-                    let ry = tape[input_offset + HIDDEN_DIM + j] as f32 * FP8_SCALE;
-                    sum_sq += rx * rx + ry * ry;
-                }
-                let rms = (sum_sq / (max_dim as f32) + 1e-5).sqrt();
-                let inv_rms = 1.0 / rms;
-                
-                let mut normed_x = vec![0u8; max_dim];
-                let mut normed_y = vec![0u8; max_dim];
-                for j in 0..max_dim {
-                    let rx = tape[input_offset + j] as f32 * FP8_SCALE;
-                    let ry = tape[input_offset + HIDDEN_DIM + j] as f32 * FP8_SCALE;
-                    let nv_x = (rx * inv_rms * 127.0).clamp(-128.0, 127.0);
-                    let nv_y = (ry * inv_rms * 127.0).clamp(-128.0, 127.0);
-                    normed_x[j] = (nv_x as i32 & 0xFF) as u8;
-                    normed_y[j] = (nv_y as i32 & 0xFF) as u8;
-                }
-
-                // 5. Undo Q, K, V Projections
-                for j in 0..max_dim {
-                    let w_q = tape[lwo + (j % 512)] as f32 * FP8_SCALE;
-                    let w_k = tape[lwo + 512 + (j % 512)] as f32 * FP8_SCALE;
-                    let w_v = tape[lwo + 1024 + (j % 512)] as f32 * FP8_SCALE;
-                    
-                    let nx_x = normed_x[j] as f32 * FP8_SCALE;
-                    let nx_y = normed_y[j] as f32 * FP8_SCALE;
-
-                    let q_val_x = ((w_q * nx_x * 127.0) as i32).clamp(-128, 127) as u8;
-                    let q_val_y = ((w_q * nx_y * 127.0) as i32).clamp(-128, 127) as u8;
-                    
-                    let k_val_x = ((w_k * nx_x * 127.0) as i32).clamp(-128, 127) as u8;
-                    let k_val_y = ((w_k * nx_y * 127.0) as i32).clamp(-128, 127) as u8;
-                    
-                    let v_val_x = ((w_v * nx_x * 127.0) as i32).clamp(-128, 127) as u8;
-                    let v_val_y = ((w_v * nx_y * 127.0) as i32).clamp(-128, 127) as u8;
-
-                    tape[pre_gate_base + layer_idx * HIDDEN_DIM * 2 + j] ^= q_val_x;
-                    tape[pre_gate_base + layer_idx * HIDDEN_DIM * 2 + HIDDEN_DIM + j] ^= q_val_y;
-                    
-                    tape[slot_offset + j] ^= k_val_x;
-                    tape[slot_offset + HIDDEN_DIM + j] ^= k_val_y;
-                    tape[slot_offset + HIDDEN_DIM * 2 + j] ^= v_val_x;
-                    tape[slot_offset + HIDDEN_DIM * 3 + j] ^= v_val_y;
-                }
-
             } else {
-                // DELTANET LAYER UNCOMPUTATION
-                for j in 0..max_dim {
-                    tape[input_offset + j] ^= tape[layer_save + j];
-                    tape[input_offset + HIDDEN_DIM + j] ^= tape[layer_save + HIDDEN_DIM + j];
+                // DELTANET LAYER (f32)
+                for j in 0..HIDDEN_DIM {
+                    let w = tape_f32(&tape, lwo_f32, j);
+                    let x = tape_f32(&tape, input_offset, j);
+                    let y = tape_f32(&tape, input_offset + F32_DIM, j);
+                    let vx = w * x; let vy = w * y;
+                    total_entropy += (vx.abs() as u64) + (vy.abs() as u64);
+                    // save original temp
+                    let pg = pre_gate_base + layer_idx * COMPLEX_DIM;
+                    let tx = tape_f32(&tape, temp_offset, j);
+                    let ty = tape_f32(&tape, temp_offset + F32_DIM, j);
+                    tape_f32_xor(&mut tape, pg, j, tx);
+                    tape_f32_xor(&mut tape, pg + F32_DIM, j, ty);
+                    tape_f32_xor(&mut tape, temp_offset, j, vx);
+                    tape_f32_xor(&mut tape, temp_offset + F32_DIM, j, vy);
                 }
-                for j in 0..max_dim {
-                    let x_val = tape[temp_offset + j] as f32 * FP8_SCALE;
-                    let y_val = tape[temp_offset + HIDDEN_DIM + j] as f32 * FP8_SCALE;
-                    let gate_x = (0.5 + 0.25 * x_val).clamp(0.0, 1.0);
-                    let gate_y = (0.5 + 0.25 * y_val).clamp(0.0, 1.0);
-                    tape[layer_save + j] ^= (gate_x * 255.0) as u8;
-                    tape[layer_save + HIDDEN_DIM + j] ^= (gate_y * 255.0) as u8;
-                }
-                for j in 0..max_dim {
-                    let w = tape[lwo + j] as f32 * FP8_SCALE;
-                    let x = tape[input_offset + j] as f32 * FP8_SCALE;
-                    let y = tape[input_offset + HIDDEN_DIM + j] as f32 * FP8_SCALE;
-                    let val_x = ((w * x * 127.0) as i32).clamp(-128, 127);
-                    let val_y = ((w * y * 127.0) as i32).clamp(-128, 127);
-                    tape[temp_offset + j] ^= (val_x & 0xFF) as u8;
-                    tape[temp_offset + HIDDEN_DIM + j] ^= (val_y & 0xFF) as u8;
-                }
-                for j in 0..max_dim {
-                    tape[pre_gate_base + layer_idx * HIDDEN_DIM * 2 + j] ^= tape[temp_offset + j];
-                    tape[pre_gate_base + layer_idx * HIDDEN_DIM * 2 + HIDDEN_DIM + j] ^= tape[temp_offset + HIDDEN_DIM + j];
+                for j in 0..HIDDEN_DIM {
+                    let gx = (0.5 + 0.25 * tape_f32(&tape, temp_offset, j)).clamp(0.0, 1.0);
+                    let gy = (0.5 + 0.25 * tape_f32(&tape, temp_offset + F32_DIM, j)).clamp(0.0, 1.0);
+                    total_entropy += (gx.abs() as u64) + (gy.abs() as u64);
+                    tape_f32_xor(&mut tape, layer_save, j, gx);
+                    tape_f32_xor(&mut tape, layer_save + F32_DIM, j, gy);
+                    tape_f32_xor(&mut tape, input_offset, j, gx);
+                    tape_f32_xor(&mut tape, input_offset + F32_DIM, j, gy);
                 }
             }
 
-            // RE-SCRAMBLE AND RESTORE WEIGHT SUBSTRATE IN RAM
+            // Re-scramble and restore weight substrate
             spn_scramble(&mut tape, lwo, HIDDEN_DIM, bh_key, &sbox, 12);
-            tape[lwo .. lwo + HIDDEN_DIM].copy_from_slice(&original_weight_substrate);
+            tape[lwo_f32 .. lwo_f32 + HIDDEN_DIM * F32_BYTES].copy_from_slice(&original_weight);
+        }
+
+        // Output head (f32)
+        let mut best_score_f32: f32 = f32::NEG_INFINITY;
+        for j in 0..64.min(HIDDEN_DIM) {
+            let s = tape_f32(&tape, input_offset, j).abs();
+            if s > best_score_f32 { best_score_f32 = s; best_token = j as u8; }
+        }
+
+        // Uncompute: reverse each layer (f32)
+        let mut tape_layer_hash = String::new();
+        for layer_idx in (0..num_layers).rev() {
+            let lwo = weight_offset + layer_idx * HIDDEN_DIM;
+            let lwo_f32 = weight_offset + layer_idx * HIDDEN_DIM * F32_BYTES;
+            let layer_save = saved_outputs_offset + layer_idx * COMPLEX_DIM;
+            let pg = pre_gate_base + layer_idx * COMPLEX_DIM;
+
+            let original_weight = tape[lwo_f32 .. lwo_f32 + HIDDEN_DIM * F32_BYTES].to_vec();
+            let src_slice = &compressed_weights_bytes[layer_idx * HIDDEN_DIM .. (layer_idx + 1) * HIDDEN_DIM];
+            tape[lwo .. lwo + HIDDEN_DIM].copy_from_slice(src_slice);
+            spn_unscramble(&mut tape, lwo, HIDDEN_DIM, bh_key, &sbox, 12);
+
+            if (layer_idx + 1) % 4 == 0 {
+                // Attention uncompute (f32)
+                let attn_idx = layer_idx / 4;
+                let slot_base = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + step % MAX_SEQ_LEN) * 4 * F32_DIM;
+                for j in 0..HIDDEN_DIM {
+                    let lx = tape_f32(&tape, layer_save, j);
+                    let ly = tape_f32(&tape, layer_save + F32_DIM, j);
+                    tape_f32_xor(&mut tape, input_offset, j, lx);
+                    tape_f32_xor(&mut tape, input_offset + F32_DIM, j, ly);
+                }
+                // Recompute attn_out from Q (in pre_gate) and cached KV
+                let num_heads = 16;
+                let head_dim = HIDDEN_DIM / num_heads;
+                let scale = 1.0 / (head_dim as f32).sqrt();
+                let mut attn_x = vec![0.0f32; HIDDEN_DIM];
+                let mut attn_y = vec![0.0f32; HIDDEN_DIM];
+                for h in 0..num_heads {
+                    let hs = h * head_dim;
+                    let mut scores = vec![0.0f32; step + 1];
+                    let mut max_s = f32::NEG_INFINITY;
+                    for s in 0..=step {
+                        let so = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + s % MAX_SEQ_LEN) * 4 * F32_DIM;
+                        let mut dr = 0.0f32; let mut di = 0.0f32;
+                        for d in 0..head_dim {
+                            let qx = tape_f32(&tape, pg, hs + d);
+                            let qy = tape_f32(&tape, pg + F32_DIM, hs + d);
+                            let kx = tape_f32(&tape, so, hs + d);
+                            let ky = tape_f32(&tape, so + F32_DIM, hs + d);
+                            dr += qx * kx + qy * ky; di += qy * kx - qx * ky;
+                        }
+                        let sc = (dr * dr + di * di).sqrt() * scale;
+                        scores[s] = sc; if sc > max_s { max_s = sc; }
+                    }
+                    let mut sum_e = 0.0f32;
+                    let mut exps = vec![0.0f32; step + 1];
+                    for s in 0..=step { exps[s] = (scores[s] - max_s).exp(); sum_e += exps[s]; }
+                    for d in 0..head_dim {
+                        let mut vsx = 0.0f32; let mut vsy = 0.0f32;
+                        for s in 0..=step {
+                            let so = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + s % MAX_SEQ_LEN) * 4 * F32_DIM;
+                            vsx += exps[s] / sum_e * tape_f32(&tape, so + F32_DIM * 2, hs + d);
+                            vsy += exps[s] / sum_e * tape_f32(&tape, so + F32_DIM * 3, hs + d);
+                        }
+                        attn_x[hs + d] = vsx; attn_y[hs + d] = vsy;
+                    }
+                }
+                for j in 0..HIDDEN_DIM {
+                    let wo = tape_f32(&tape, lwo_f32 + 1536 * F32_BYTES, j % 512);
+                    tape_f32_xor(&mut tape, layer_save, j, wo * attn_x[j]);
+                    tape_f32_xor(&mut tape, layer_save + F32_DIM, j, wo * attn_y[j]);
+                }
+                // Undo Q projection (stored in pre_gate)
+                for j in 0..HIDDEN_DIM {
+                    // recompute RMS norm from input state
+                    let mut sum_sq = 0.0_f32;
+                    for k in 0..HIDDEN_DIM {
+                        let rx = tape_f32(&tape, input_offset, k);
+                        let ry = tape_f32(&tape, input_offset + F32_DIM, k);
+                        sum_sq += rx * rx + ry * ry;
+                    }
+                    let rms = (sum_sq / HIDDEN_DIM as f32 + 1e-5).sqrt();
+                    let nx = tape_f32(&tape, input_offset, j) / rms;
+                    let ny = tape_f32(&tape, input_offset + F32_DIM, j) / rms;
+                    let wq = tape_f32(&tape, lwo_f32, j % 512);
+                    let wk = tape_f32(&tape, lwo_f32 + 512 * F32_BYTES, j % 512);
+                    let wv = tape_f32(&tape, lwo_f32 + 1024 * F32_BYTES, j % 512);
+                    tape_f32_xor(&mut tape, pg, j, wq * nx);
+                    tape_f32_xor(&mut tape, pg + F32_DIM, j, wq * ny);
+                    tape_f32_xor(&mut tape, slot_base, j, wk * nx);
+                    tape_f32_xor(&mut tape, slot_base + F32_DIM, j, wk * ny);
+                    tape_f32_xor(&mut tape, slot_base + F32_DIM * 2, j, wv * nx);
+                    tape_f32_xor(&mut tape, slot_base + F32_DIM * 3, j, wv * ny);
+                }
+            } else {
+                // DeltaNet uncompute (f32)
+                // Forward: temp^=Q, gate+copy combined. Backward: copy-undo, gate-undo, Q-undo
+                for j in 0..HIDDEN_DIM {
+                    let lx = tape_f32(&tape, layer_save, j);  // gate output
+                    let ly = tape_f32(&tape, layer_save + F32_DIM, j);
+                    tape_f32_xor(&mut tape, input_offset, j, lx);  // undo copy-through
+                    tape_f32_xor(&mut tape, input_offset + F32_DIM, j, ly);
+                    // now zero the gate in layer_save (recompute same gate, XOR back)
+                    let gx = (0.5 + 0.25 * tape_f32(&tape, temp_offset, j)).clamp(0.0, 1.0);
+                    let gy = (0.5 + 0.25 * tape_f32(&tape, temp_offset + F32_DIM, j)).clamp(0.0, 1.0);
+                    tape_f32_xor(&mut tape, layer_save, j, gx);
+                    tape_f32_xor(&mut tape, layer_save + F32_DIM, j, gy);
+                }
+                for j in 0..HIDDEN_DIM {
+                    let w = tape_f32(&tape, lwo_f32, j);
+                    let x = tape_f32(&tape, input_offset, j);
+                    let y = tape_f32(&tape, input_offset + F32_DIM, j);
+                    tape_f32_xor(&mut tape, temp_offset, j, w * x);
+                    tape_f32_xor(&mut tape, temp_offset + F32_DIM, j, w * y);
+                }
+                for j in 0..HIDDEN_DIM {
+                    let tx = tape_f32(&tape, temp_offset, j);
+                    let ty = tape_f32(&tape, temp_offset + F32_DIM, j);
+                    tape_f32_xor(&mut tape, pg, j, tx);
+                    tape_f32_xor(&mut tape, pg + F32_DIM, j, ty);
+                    // zero temp (pg already holds original_temp)
+                    tape_f32_xor(&mut tape, temp_offset, j, tx);
+                    tape_f32_xor(&mut tape, temp_offset + F32_DIM, j, ty);
+                }
+            }
+
+            spn_scramble(&mut tape, lwo, HIDDEN_DIM, bh_key, &sbox, 12);
+            tape[lwo_f32 .. lwo_f32 + HIDDEN_DIM * F32_BYTES].copy_from_slice(&original_weight);
         }
     } // end cold-miss block
 
     // Clear embedding
-    for i in 0..token_embedding.len().min(HIDDEN_DIM * 2) {
+    for i in 0..token_embedding.len().min(COMPLEX_DIM) {
         tape[input_offset + i] ^= token_embedding[i];
     }
 

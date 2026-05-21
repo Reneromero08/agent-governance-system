@@ -85,7 +85,8 @@ class TokenizerBridge:
             return self._real_embedding_table[token_id]
         if token_id not in self.vocab_cache:
             self.rng.seed(token_id)
-            vec = self.rng.randint(0, 256, self.dim * 2, dtype=np.uint8)
+            # f32 fallback: HIDDEN_DIM * 4 * 2 bytes (XY channels)
+            vec = self.rng.bytes(HIDDEN_DIM * 4 * 2)
             self.vocab_cache[token_id] = bytes(vec)
         return self.vocab_cache[token_id]
 
@@ -165,41 +166,32 @@ class HDDWeightStreamer:
         self.scrambled_weights = catalytic_ffi.scramble_catalysis_weights(self.raw_weights)
         self.foam_entropy = sum(bin(b & 0x03).count('1') for b in self.scrambled_weights)
 
-        # Extract embedding table from safetensors
+        # Extract embedding table from safetensors (f32 format)
         self.embedding_table = {}
         self.embedding_np = None
+        F32_PER_DIM = 4  # float32 = 4 bytes per value
+        EMBED_BYTES = HIDDEN_DIM * F32_PER_DIM * 2  # XY channels
         if "model.embed_tokens.weight" in self.tensors:
             einfo = self.tensors["model.embed_tokens.weight"]
             estart, eend = einfo["data_offsets"]
-            eshape = einfo["shape"]  # [vocab_size, embed_dim]
+            eshape = einfo["shape"]
             edtype = einfo.get("dtype", "F32")
             vocab_size, embed_dim = int(eshape[0]), int(eshape[1])
             ebytes = self._mmap[self.data_offset + estart : self.data_offset + eend]
-            # Convert BF16/F32 to uint8 embeddings (clamp to byte range)
             embeddings = np.frombuffer(ebytes, dtype=np.uint16 if edtype == "BF16" else np.float32)
             if edtype == "BF16":
-                # BF16 stored as uint16, reinterpret as float32 via shift
                 embeddings = embeddings.astype(np.uint32) << 16
                 embeddings = embeddings.view(np.float32)
-            # Reshape and quantize to uint8 per dimension
-            embeddings = embeddings.reshape(vocab_size, embed_dim)
+            embeddings = embeddings.reshape(vocab_size, embed_dim).astype(np.float32)
+            self.embedding_np = embeddings
             for token_id in range(vocab_size):
-                vec = embeddings[token_id]
-                # Scale to uint8 range
-                vec_min, vec_max = vec.min(), vec.max()
-                if vec_max > vec_min:
-                    vec = ((vec - vec_min) / (vec_max - vec_min) * 255).astype(np.uint8)
-                else:
-                    vec = np.zeros(embed_dim, dtype=np.uint8)
-                # Interleave XY: store real and imag channels
-                out = np.zeros(HIDDEN_DIM * 2, dtype=np.uint8)
-                out[:embed_dim] = vec[:embed_dim]
-                out[:embed_dim] = vec[:embed_dim]
-                out[HIDDEN_DIM:HIDDEN_DIM+embed_dim] = vec[:embed_dim]
+                vec = embeddings[token_id]  # [embed_dim] float32
+                out = np.zeros(EMBED_BYTES, dtype=np.uint8)
+                # Write real channel (first HIDDEN_DIM float32 values)
+                out[:HIDDEN_DIM * F32_PER_DIM] = np.frombuffer(vec[:HIDDEN_DIM].tobytes(), dtype=np.uint8)
+                # Write imag channel (same values, second half)
+                out[HIDDEN_DIM * F32_PER_DIM:EMBED_BYTES] = np.frombuffer(vec[:HIDDEN_DIM].tobytes(), dtype=np.uint8)
                 self.embedding_table[token_id] = bytes(out)
-        self.embedding_np = embeddings.astype(np.float32) / 255.0  # store as float32 for dot product
-        self.embedding_dim = embed_dim
-        self.vocab_size = vocab_size
 
     def close(self):
         if self._mmap:
