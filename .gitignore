@@ -183,3 +183,6 @@ THOUGHT/LAB/FORMULA/v4/FORMALIZATION/REFERENCES/
 
 # CAT_CAS massive dirty tape storage
 THOUGHT/LAB/CAT_CAS/storage/
+target/  
+**/rust_engine/target/  
+**/rust_ffi/target/ 

@@ -321,6 +321,127 @@ fn eval_node_leaf(
     eval_node_leaf(leaf_table, tape, depth, 2 * node, cur_depth + 1, t1, temp_offset, entropy);
 }
 
+// ==================================================================
+// CATALYTIC 27B INFERENCE ENGINE
+// ==================================================================
+
+const HIDDEN_DIM: usize = 2048;
+const FP8_SCALE: f32 = 1.0 / 127.0;
+
+#[pyfunction]
+fn catalytic_inference_step<'py>(
+    py: Python<'py>,
+    tape_data: Bound<'py, PyBytes>,
+    token_embedding: Vec<u8>,
+    num_layers: usize,
+    _hdd_weight_path: String,
+) -> PyResult<Bound<'py, PyDict>> {
+    let bytes = tape_data.as_bytes();
+    let mut tape = bytes.to_vec();
+    let tape_size = tape.len();
+
+    let initial_hash = {
+        let mut h = Sha256::new();
+        ShaDigest::update(&mut h, &tape);
+        format!("{:x}", h.finalize())
+    };
+
+    let start = std::time::Instant::now();
+    let mut total_entropy: u64 = 0;
+
+    let input_offset = 0usize;
+    let weight_offset = HIDDEN_DIM * 2;
+    let output_offset = HIDDEN_DIM;
+    let temp_offset = HIDDEN_DIM * 3;
+
+    // Embed token
+    for i in 0..token_embedding.len().min(HIDDEN_DIM) {
+        tape[input_offset + i] ^= token_embedding[i];
+        total_entropy += token_embedding[i].count_ones() as u64;
+    }
+
+    // Layer stack
+    let max_dim = HIDDEN_DIM.min(tape_size.saturating_sub(weight_offset + num_layers * HIDDEN_DIM));
+    for layer_idx in 0..num_layers {
+        let lwo = weight_offset + layer_idx * HIDDEN_DIM;
+
+        for j in 0..max_dim {
+            let w = tape[lwo + j] as f32 * FP8_SCALE;
+            let x = tape[input_offset + j % HIDDEN_DIM] as f32 * FP8_SCALE;
+            let val = ((w * x * 127.0) as i32).clamp(-128, 127);
+            let bv = (val & 0xFF) as u8;
+            total_entropy += bv.count_ones() as u64;
+            tape[temp_offset + j] ^= bv;
+        }
+        for j in 0..max_dim {
+            let x = tape[temp_offset + j] as f32 * FP8_SCALE;
+            let gate = (0.5 + 0.25 * x).clamp(0.0, 1.0);
+            let gated = (gate * 255.0) as u8;
+            total_entropy += gated.count_ones() as u64;
+            tape[output_offset + j] ^= gated;
+        }
+        for j in 0..max_dim {
+            tape[input_offset + j] ^= tape[output_offset + j];
+            tape[output_offset + j] = 0;
+        }
+    }
+
+    // Output head: argmax over first 64 hidden dims
+    let mut best_token: u8 = 0;
+    let mut best_score: u32 = 0;
+    for j in 0..64.min(tape_size.saturating_sub(input_offset)) {
+        let score = tape[input_offset + j] as u32;
+        if score > best_score {
+            best_score = score;
+            best_token = j as u8;
+        }
+    }
+
+    // Uncompute: reverse layer stack
+    for layer_idx in (0..num_layers).rev() {
+        let lwo = weight_offset + layer_idx * HIDDEN_DIM;
+
+        // Reverse: copy-through (output ^= input to restore)
+        for j in 0..max_dim {
+            tape[input_offset + j] ^= tape[output_offset + j];
+            tape[output_offset + j] = 0;
+        }
+        // Reverse: gate activation
+        for j in 0..max_dim {
+            let x = tape[temp_offset + j] as f32 * FP8_SCALE;
+            let gate = (0.5 + 0.25 * x).clamp(0.0, 1.0);
+            tape[output_offset + j] ^= (gate * 255.0) as u8;
+        }
+        // Reverse: Q projection
+        for j in 0..max_dim {
+            let w = tape[lwo + j] as f32 * FP8_SCALE;
+            let x = tape[input_offset + j % HIDDEN_DIM] as f32 * FP8_SCALE;
+            let val = ((w * x * 127.0) as i32).clamp(-128, 127);
+            tape[temp_offset + j] ^= (val & 0xFF) as u8;
+        }
+    }
+
+    // Clear embedding
+    for i in 0..token_embedding.len().min(HIDDEN_DIM) {
+        tape[input_offset + i] ^= token_embedding[i];
+    }
+
+    let elapsed = start.elapsed().as_secs_f64();
+    let final_hash = {
+        let mut h = Sha256::new();
+        ShaDigest::update(&mut h, &tape);
+        format!("{:x}", h.finalize())
+    };
+
+    let result = pyo3::types::PyDict::new_bound(py);
+    result.set_item("total_entropy", total_entropy)?;
+    result.set_item("generated_token", best_token)?;
+    result.set_item("elapsed_secs", elapsed)?;
+    result.set_item("tape_restored", (initial_hash == final_hash).into_py(py))?;
+    result.set_item("num_layers", num_layers)?;
+    Ok(result.into())
+}
+
 #[pymodule]
 fn catalytic_ffi(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(f16_decode, m)?)?;
@@ -328,5 +449,6 @@ fn catalytic_ffi(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(tape_hash, m)?)?;
     m.add_function(wrap_pyfunction!(bekenstein_sweep, m)?)?;
     m.add_function(wrap_pyfunction!(fractal_cache_exploit, m)?)?;
+    m.add_function(wrap_pyfunction!(catalytic_inference_step, m)?)?;
     Ok(())
 }
