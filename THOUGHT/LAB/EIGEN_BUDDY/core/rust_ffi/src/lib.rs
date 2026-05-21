@@ -166,11 +166,106 @@ fn bekenstein_sweep<'py>(
     result.set_item("tape_capacity_bits", tape_capacity_bits)?;
     result.set_item("initial_hash", &initial_hash)?;
     result.set_item("final_hash", &final_hash)?;
-    result.set_item("tape_restored", restored)?;
+    result.set_item("tape_restored", restored.into_py(py))?;
     result.set_item("bekenstein_bound", bekenstein_bound)?;
     result.set_item("required_energy", required_energy)?;
     result.set_item("required_mass", required_mass)?;
     result.set_item("schwarzschild_r", schwarzschild_r)?;
+    result.set_item("entropy_per_second", total_entropy as f64 / elapsed)?;
+
+    Ok(result.into())
+}
+
+// ==================================================================
+// FRACTAL CACHE EXPLOIT — 1 XOR per "solve"
+// ==================================================================
+
+const CACHE_ENTRY_SIZE: usize = 16;
+
+#[pyfunction]
+fn fractal_cache_exploit<'py>(
+    py: Python<'py>,
+    tape_data: Bound<'py, PyBytes>,
+    num_cycles: usize,
+) -> PyResult<Bound<'py, PyDict>> {
+    let bytes = tape_data.as_bytes();
+    let tape_size = bytes.len();
+    let tape_capacity_bits = (tape_size * 8) as u64;
+    let max_entries = tape_size / CACHE_ENTRY_SIZE;
+
+    let mut tape: Vec<u8> = bytes.to_vec();
+    let initial_hash = {
+        let mut h = Sha256::new();
+        ShaDigest::update(&mut h, &tape);
+        format!("{:x}", h.finalize())
+    };
+
+    let start = std::time::Instant::now();
+    let mut total_entropy: u64 = 0;
+    let mut errors: u64 = 0;
+
+    // Phase 1: run cache hits — XOR cached value into target register
+    for cycle in 0..num_cycles {
+        let entry_idx = cycle % max_entries;
+        let offset = entry_idx * CACHE_ENTRY_SIZE;
+
+        let val = tape[offset];
+        let stored_cs = tape[offset + 1];
+        let depth = u16::from_be_bytes([tape[offset + 2], tape[offset + 3]]);
+        let kval = u16::from_be_bytes([tape[offset + 4], tape[offset + 5]]);
+
+        let expected_cs = ((depth as usize * 7 + kval as usize * 13 + val as usize * 31) & 0xFF) as u8;
+
+        if stored_cs != expected_cs {
+            errors += 1;
+            continue;
+        }
+
+        // Target registers at the END of tape, beyond cache entries
+        let target_base = tape_size - 2048;
+        let target_slot = target_base + (cycle % 1024);
+        tape[target_slot] ^= val;
+        total_entropy += val.count_ones() as u64;
+    }
+
+    // Phase 2: restore — re-XOR same values back
+    for cycle in (0..num_cycles).rev() {
+        let entry_idx = cycle % max_entries;
+        let offset = entry_idx * CACHE_ENTRY_SIZE;
+        let val = tape[offset];
+        let stored_cs = tape[offset + 1];
+
+        // Only restore entries that passed checksum
+        let depth = u16::from_be_bytes([tape[offset + 2], tape[offset + 3]]);
+        let kval = u16::from_be_bytes([tape[offset + 4], tape[offset + 5]]);
+        let expected_cs = ((depth as usize * 7 + kval as usize * 13 + val as usize * 31) & 0xFF) as u8;
+        if stored_cs == expected_cs {
+            // Target registers at the END of tape, beyond cache entries
+        let target_base = tape_size - 2048;
+        let target_slot = target_base + (cycle % 1024);
+            tape[target_slot] ^= val;
+        }
+    }
+
+    let elapsed = start.elapsed().as_secs_f64();
+    let ratio = total_entropy as f64 / tape_capacity_bits as f64;
+
+    let final_hash = {
+        let mut h = Sha256::new();
+        ShaDigest::update(&mut h, &tape);
+        format!("{:x}", h.finalize())
+    };
+
+    let restored = initial_hash == final_hash && errors == 0;
+
+    let result = pyo3::types::PyDict::new_bound(py);
+    result.set_item("total_entropy", total_entropy)?;
+    result.set_item("cycles", num_cycles)?;
+    result.set_item("errors", errors)?;
+    result.set_item("elapsed_secs", elapsed)?;
+    result.set_item("ratio", ratio)?;
+    result.set_item("tape_capacity_bits", tape_capacity_bits)?;
+    result.set_item("tape_restored", restored)?;
     result.set_item("entropy_per_second", total_entropy as f64 / elapsed)?;
 
     Ok(result.into())
@@ -219,5 +314,6 @@ fn catalytic_ffi(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(orthogonal_project, m)?)?;
     m.add_function(wrap_pyfunction!(tape_hash, m)?)?;
     m.add_function(wrap_pyfunction!(bekenstein_sweep, m)?)?;
+    m.add_function(wrap_pyfunction!(fractal_cache_exploit, m)?)?;
     Ok(())
 }
