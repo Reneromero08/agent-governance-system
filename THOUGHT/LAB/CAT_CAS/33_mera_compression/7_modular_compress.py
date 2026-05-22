@@ -62,8 +62,8 @@ def group_u_matrices(holo_dict, modules):
     return u_groups
 
 
-def compress_group(wt, tensors, compressed, stats, rotation_threshold=0.5, quant_bits=2):
-    """Wormhole-compress a single weight-type group."""
+def compress_group(wt, tensors, compressed, stats, rotation_threshold=0.5, quant_bits=2, skip_threshold=0.01):
+    """Wormhole-compress a single weight-type group with Skip-R identity detection."""
     sorted_l = sorted(tensors.keys())
     if len(sorted_l) < 2:
         for l in sorted_l:
@@ -77,6 +77,7 @@ def compress_group(wt, tensors, compressed, stats, rotation_threshold=0.5, quant
 
     prev = first
     fids_rot = []; fids_quant = []
+    skipped = 0
     orig_bits = L * m * k * 16
     comp_bits = m * k * 16
 
@@ -89,6 +90,16 @@ def compress_group(wt, tensors, compressed, stats, rotation_threshold=0.5, quant
         fid_rot = torch.nn.functional.cosine_similarity(
             curr.flatten().unsqueeze(0), recon_rot.flatten().unsqueeze(0)
         ).item()
+        
+        # B2: Skip-R detection — near-identity rotation, skip entirely
+        # Uses absolute Frobenius norm per PUSHED_REPORT: ||R - I|| < skip_threshold
+        identity_dist = torch.norm(R - torch.eye(k, device=R.device)).item()
+        if identity_dist < skip_threshold:
+            # Zero-copy skip: don't store R or residual. Decoder reuses anchor.
+            compressed[f"{wt}.L{l}.skip"] = torch.tensor(1)  # skip token
+            skipped += 1
+            fids_rot.append(1.0); fids_quant.append(1.0)
+            continue
 
         residual = curr - recon_rot
         res_max = residual.abs().max().item()
@@ -122,13 +133,14 @@ def compress_group(wt, tensors, compressed, stats, rotation_threshold=0.5, quant
         'fid_rot': np.mean(fids_rot), 'fid_quant': np.mean(fids_quant),
         'orig_MB': orig_bits / 8 / 1024**2,
         'comp_MB': comp_bits / 8 / 1024**2,
+        'skipped': skipped,
     }
     stats['total_orig_MB'] += orig_bits / 8 / 1024**2
     stats['total_comp_MB'] += comp_bits / 8 / 1024**2
     stats['fidelities'][wt] = fids_quant
 
 
-def compress_holo_modular(holo_dict, modules, rotation_threshold=0.5, quant_bits=2):
+def compress_holo_modular(holo_dict, modules, rotation_threshold=0.5, quant_bits=2, skip_threshold=0.3):
     """Compress .holo dict into modular wormhole format."""
     u_groups = group_u_matrices(holo_dict, modules)
 
@@ -136,7 +148,7 @@ def compress_holo_modular(holo_dict, modules, rotation_threshold=0.5, quant_bits
     stats = {'groups': {}, 'total_orig_MB': 0, 'total_comp_MB': 0, 'fidelities': {}}
 
     for wt, tensors in sorted(u_groups.items()):
-        compress_group(wt, tensors, compressed, stats, rotation_threshold, quant_bits)
+        compress_group(wt, tensors, compressed, stats, rotation_threshold, quant_bits, skip_threshold)
 
     # Collect compressed prefixes for SVh dedup
     compressed_prefixes = set()
@@ -251,10 +263,10 @@ def main():
     print(f"Compressing...")
     compressed, stats = compress_holo_modular(holo, modules)
 
-    print(f"\n  {'Group':<30} {'L':>4} {'fid_rot':>8} {'fid+res':>8} {'ratio':>6}")
-    print(f"  {'-'*60}")
+    print(f"\n  {'Group':<30} {'L':>4} {'fid_rot':>8} {'fid+res':>8} {'ratio':>6} {'skip':>5}")
+    print(f"  {'-'*65}")
     for wt, s in sorted(stats['groups'].items()):
-        print(f"  {wt:<30} {s['L']:>4} {s['fid_rot']:>8.3f} {s['fid_quant']:>8.3f} {s['ratio']:>5.1f}x")
+        print(f"  {wt:<30} {s['L']:>4} {s['fid_rot']:>8.3f} {s['fid_quant']:>8.3f} {s['ratio']:>5.1f}x {s.get('skipped',0):>5}")
 
     overall_ratio = stats['total_orig_MB'] / stats['total_comp_MB'] if stats['total_comp_MB'] > 0 else 1.0
     mean_fid = np.mean([np.mean(f) for f in stats['fidelities'].values()]) if stats['fidelities'] else 0
