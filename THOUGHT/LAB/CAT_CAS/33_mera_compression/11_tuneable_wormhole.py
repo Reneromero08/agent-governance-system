@@ -68,10 +68,10 @@ class TuneableWeight(nn.Module):
         return self.dR
     
     def get_res_gate(self, layer_idx):
-        """Return sigmoid gate for residual at a given layer."""
+        """Return sigmoid gate for residual at a given layer (full [k] vector)."""
         if layer_idx >= self.n_layers:
-            return 1.0  # out of range, no modification
-        return torch.sigmoid(self.res_gate[layer_idx])
+            return torch.ones(self.k)
+        return torch.sigmoid(self.res_gate[layer_idx])  # [k]
     
     def num_params(self):
         return sum(p.numel() for p in self.parameters())
