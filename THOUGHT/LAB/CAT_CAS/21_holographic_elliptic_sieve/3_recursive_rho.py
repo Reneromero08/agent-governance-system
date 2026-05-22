@@ -1,5 +1,5 @@
-"""Recursive Quantum-Catalytic Pollard's Rho — PUSHED"""
-import random, time, math
+"""3_recursive_rho.py — OPTIMIZED"""
+import random, time, math, sys
 
 def is_prime(n, k=5):
     if n <= 1: return False
@@ -16,23 +16,21 @@ def is_prime(n, k=5):
         else: return False
     return True
 
-def gcd(a, b):
-    while b: a, b = b, a % b
-    return a
+# Fast C-level gcd
+gcd = math.gcd
 
 def pollard_rho_factor(n, max_steps=500_000):
     if n <= 1: return 0
     if n % 2 == 0: return 2
     for seed in [1, 2, 3, 5]:
-        x = y = seed; d = 1
-        for _ in range(max_steps):
-            x = (x * x + 1) % n
-            y = (y * y + 1) % n; y = (y * y + 1) % n
-            d = gcd(abs(x - y), n)
+        x = y = seed; d = 1; s = 0
+        while s < max_steps:
+            x = (x * x + 1) % n; y = (y * y + 1) % n; y = (y * y + 1) % n
+            s += 1; d = gcd(abs(x - y), n)
             if 1 < d < n: return d
     return 0
 
-def factorize_recursive(n, max_steps=200_000):
+def factorize_recursive(n, max_steps=100_000):
     factors = []
     def _factor(m):
         if m <= 1: return
@@ -47,47 +45,73 @@ def factorize_recursive(n, max_steps=200_000):
 
 def phase_cavity_recursive(a, p):
     ring = p - 1; rp = ring
-    gears = factorize_recursive(ring, max_steps=100_000)
+    gears = factorize_recursive(ring, max_steps=50_000)
     for k in gears:
         while rp % k == 0 and pow(a, rp // k, p) == 1:
             rp //= k
     return rp
 
-def pollard_rho_push(N, seeds, c, max_steps=30_000_000):
-    """Brent's rho with configurable f(x) = x^2 + c."""
-    for seed in seeds:
+def pollard_rho_fast(N, c, max_steps=30_000_000):
+    """Brent rho: batch gcd, skip Phase Cavity until hit confirmed."""
+    for seed in [1, 2, 3, 5, 7, 11, 13]:
         x = seed; y = seed
         power = 1; lam = 0; prod = 1
+        batch = 512  # aggressive batch size
+        
         while lam < max_steps:
+            x_check = x  # checkpoint
+            
             for _ in range(power):
                 x = (x * x + c) % N
                 y = (y * y + c) % N; y = (y * y + c) % N
                 lam += 1
-                prod = (prod * abs(x - y)) % N
-                if lam % 256 == 0:
+                diff = x - y
+                if diff < 0: diff = -diff
+                prod = (prod * diff) % N
+                
+                if lam % batch == 0:
                     g = gcd(prod, N)
-                    if 1 < g < N and g * (N // g) == N:
-                        p = g; q = N // g
-                        rp = phase_cavity_recursive(2, p)
-                        rq = phase_cavity_recursive(2, q)
-                        return p, q, lam, rp, rq
-                    prod = 1
+                    if g > 1:
+                        # Found something. Quick filter: is it a proper factor?
+                        if 1 < g < N and N % g == 0:
+                            p = g; q = N // g
+                            try:
+                                rp = phase_cavity_recursive(2, p)
+                                rq = phase_cavity_recursive(2, q)
+                            except:
+                                rp = rq = 0
+                            return p, q, lam, rp, rq
+                        prod = 1
+                
                 if lam >= max_steps: break
+            
+            # Checkpoint gcd
             g = gcd(prod, N)
-            if 1 < g < N and g * (N // g) == N:
-                p = g; q = N // g
-                rp = phase_cavity_recursive(2, p)
-                rq = phase_cavity_recursive(2, q)
-                return p, q, lam, rp, rq
-            prod = 1; power *= 2
+            if 1 < g < N and N % g == 0:
+                # Linear search for exact collision
+                xb = x_check; yb = x_check
+                for _ in range(power):
+                    xb = (xb * xb + c) % N
+                    yb = (yb * yb + c) % N; yb = (yb * yb + c) % N
+                    g = gcd(abs(xb - yb), N)
+                    if 1 < g < N and N % g == 0:
+                        p = g; q = N // g
+                        try: rp = phase_cavity_recursive(2, p)
+                        except: rp = 0
+                        try: rq = phase_cavity_recursive(2, q)
+                        except: rq = 0
+                        return p, q, lam, rp, rq
+            
+            prod = 1
+            power *= 2
+    
     return 0, 0, 0, 0, 0
 
 def main():
     print("=" * 78)
-    print("RECURSIVE QUANTUM-CATALYTIC RHO — PUSHED")
+    print("RECURSIVE QUANTUM-CATALYTIC RHO — OPTIMIZED")
+    print("  math.gcd + batch 512 + skip Phase Cavity on false hits")
     print("=" * 78)
-    seeds = [1, 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31]
-    c_vals = [1, 3, 5, 7]
 
     for bits in [80, 90, 100, 110, 120]:
         p = random.getrandbits(bits//2) | (1 << (bits//2 - 1)) | 1
@@ -97,8 +121,8 @@ def main():
         N = p * q
         t0 = time.perf_counter()
         found = False
-        for c in c_vals:
-            g1, g2, steps, rp, rq = pollard_rho_push(N, seeds, c, max_steps=8000000 if bits >= 100 else 4000000)
+        for c in [1, 2, 3, 4, 5, 6, 7]:
+            g1, g2, steps, rp, rq = pollard_rho_fast(N, c, max_steps=15000000 if bits >= 110 else 10000000 if bits >= 100 else 5000000)
             if g1:
                 dt = time.perf_counter() - t0
                 match = (g1 == p and g2 == q) or (g1 == q and g2 == p)
