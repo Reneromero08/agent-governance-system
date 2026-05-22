@@ -12,7 +12,7 @@
 | Q | Hypothesis | Status | Directory |
 |---|-----------|--------|-----------|
 | Q57 | Multi-scale Feistel fabric in gapped/MBL phase: min-cut ≤ R (O(1) in L), error localization, finite correlation length. Standard Feistel = O(L) thermal. Verified at N=4096. | VERIFIED | q57_mera_holography/ |
-| Q32 | Meaning behaves like a physical field | PARTIALLY VERIFIED | q32_meaning_field/ |
+| Q32 | Meaning behaves like a physical field: semiotic wave operator (multi-scale Laplacian = discrete Box) propagates signal through Feistel fabric; survival ~ 1/(nabla_S_fabric + nabla_S_signal), R2=0.63 | PARTIALLY VERIFIED | q32_meaning_field/ |
 | Q51 | Embedding spaces have intrinsic complex structure | CONFIRMED (boundary) | q51_complex_plane/ |
 | Q48 | Eigenvalue statistics connect to Riemann zeta | CONFIRMED | q48_riemann/ |
 | Q49 | Df*alpha = 8e for a derivable reason | FALSIFIED | q49_why_8e/ |
