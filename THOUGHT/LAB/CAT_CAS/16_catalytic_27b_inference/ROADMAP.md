@@ -69,18 +69,16 @@ Run inference on a Qwen 0.5B model using zero bytes of dynamic system RAM for mo
 - [x] 16.8A PLATONIC EIGENBUDDY TOKENIZER: prototype decoder trained on Qwen embedding table
 - [ ] Coherent output — weight streaming active but compute uses element-wise w[j]*x[j], not full W@x
 
-#### 16.9 — COHERENT OUTPUT  🟡 IN PROGRESS (EigenBuddy path)
+#### 16.9 — COHERENT OUTPUT  🟡 IN PROGRESS (EigenBuddy + Compression)
 
-- [x] Warm cache fixed: stores pre-uncompute hidden state (COMPLEX_DIM bytes), overwrite on collision
-- [x] Hidden state collection working: 500 tokens, 16 unique targets, 80 cold-miss samples, NaN-free
-- [x] EigenBuddy trains to 100% on real catalytic data (8 classes from 40 cold-miss samples, normalized inputs)
-- [x] Engine output capped at 16 unique tokens: output head reads only 64 f32 positions from XOR'd tape
-- [ ] BLOCKER: Without full W@x matrix multiply, hidden state is XOR'd substrate + embedding + layer outputs, not clean f32. lm_head produces garbage. EigenBuddy limited to 16-class token space.
-
-**Decision needed:**
-- Path A: Implement full W@x dot-product in DeltaNet (w[j]*x[j] -> sum(W[i,:] * x)), HDD row-by-row tiling
-- Path B: Accept 16-class limitation, train EigenBuddy as compressed semantic decoder
-- Path C: Expand engine output head from 64 to 896 positions, increase unique tokens to ~64
+- [x] Warm cache fixed: stores pre-uncompute hidden state, overwrite on collision
+- [x] Hidden state collection: 500 tokens, 16 unique targets, 80 cold-miss, NaN-free
+- [x] EigenBuddy on raw: 100% but 8/8 test (trivial, NaN issues)
+- [x] Complex Hermitian SVD compression (from 20.10): Df=2.5, K95=12, 896D->16D
+- [x] EigenBuddy on compressed: 82.8% train / 100% test (16/16), 16-dim input
+- [ ] BLOCKER: Engine output capped at 16 unique tokens. Full W@x needed for broader vocab.
+- [ ] Collect larger dataset for meaningful compression evaluation
+- [ ] Path A (recommended): Implement full W@x dot-product in Rust for real output distribution
 
 #### 16.10 — VALIDATION & HARDENING  ⬜
 
@@ -117,6 +115,7 @@ Run inference on a Qwen 0.5B model using zero bytes of dynamic system RAM for mo
 |---|-----|-----------|-----|
 | 13 | Warm cache stores garbage | Cache write after uncompute+embedding clear stored restored tape (zeroes). Only 1792/7168 bytes. | Save hidden_state_save after forward, write full COMPLEX_DIM to cache after hash. Overwrite not XOR. |
 | 14 | Hidden state NaN in Python | XOR'd f32 bytes decode to NaN/Inf IEEE 754 patterns | np.nan_to_num() on both real/imag channels |
+| 15 | Substrate magnitude dominates signal | XOR'd values span 3.4e38, eigenvalues at 1e77 — signal buried | Per-sample unit normalization before complex Hermitian SVD, projects to direction-only subspace (Df=2.5) |
 
 ### Current Performance (2026-05-22)
 
@@ -128,10 +127,9 @@ Run inference on a Qwen 0.5B model using zero bytes of dynamic system RAM for mo
 | Attention layers restored | 12/12 | 🟢 |
 | Warm-hit rate | 82% | 🟢 |
 | RAM for weights | 0 bytes | 🟢 |
-| Real embeddings | Yes (151,936 x 896) | 🟢 |
-| Real Qwen weights in lwo_f32 | Yes (BF16->f32, Q/K/V/O) | 🟢 |
 | Warm cache correct | Yes (COMPLEX_DIM bytes, pre-uncompute) | 🟢 |
-| Hidden state collection | Yes (200 tokens, 16 unique, NaN-free) | 🟢 |
-| Coherent output | No (element-wise w[j]*x[j], not W@x) | 🔴 |
+| Hidden state collection | Yes (500 tokens, 16 unique, NaN-free) | 🟢 |
+| Complex SVD compression | Df=2.5, K95=12, 896D->16D | 🟢 |
+| EigenBuddy (compressed) | 82.8% train / 100% test (16D input, 8 classes) | 🟡 |
+| Coherent output | No (element-wise w[j]*x[j], limited to 16 tokens) | 🔴 |
 | Rust tests passing | 6/6 | 🟢 |
-| EigenBuddy Tokenizer | Prototype trained, 100% train acc, 21% test on synthetic | 🟡 |

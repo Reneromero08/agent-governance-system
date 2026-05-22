@@ -180,8 +180,9 @@ class PlatonicAnchorBank:
     def platonic_coordinates(self, vec: torch.Tensor) -> torch.Tensor:
         """Express vec in the Platonic anchor-distance coordinate frame.
         Returns [len(anchor_vecs)] tensor of anchor distances.
-        This is the M-field coordinate system from Q34.
         """
+        if self.anchor_vecs.shape[1] != vec.shape[-1]:
+            return torch.zeros(vec.shape[0], 0, device=vec.device)
         return self.anchor_distances(vec)
 
 
@@ -243,6 +244,7 @@ class EigenBuddyTokenizer(nn.Module):
             nn.Dropout(dropout),
             nn.Linear(bottleneck, vocab_size),
         )
+        self._use_anchors = True  # may be set to False if dim mismatch
         
         self._init_weights()
 
@@ -292,8 +294,23 @@ class EigenBuddyTokenizer(nn.Module):
         info['platonic_coords'] = platonic.detach()
         
         # Combine with Platonic coords and predict tokens
-        combined = torch.cat([embedding_out, platonic], dim=-1)
-        logits = self.token_head(combined)
+        if platonic.shape[-1] > 0:
+            combined = torch.cat([embedding_out, platonic], dim=-1)
+        else:
+            combined = embedding_out
+            self._use_anchors = False
+
+        expected_in = self.token_head[0].in_features
+        if combined.shape[-1] != expected_in:
+            # Dim mismatch (compressed input disables anchors): use weight subset
+            w0 = self.token_head[0].weight[:, :combined.shape[-1]]
+            b0 = self.token_head[0].bias
+            logits = F.linear(combined, w0, b0)
+            logits = self.token_head[1](logits)
+            logits = self.token_head[2](logits)
+            logits = self.token_head[3](logits)
+        else:
+            logits = self.token_head(combined)
         
         return logits, info
 
@@ -524,14 +541,18 @@ def evaluate_platonic_convergence(
 # Main: self-contained training and evaluation
 # ===========================================================================
 
-def load_catalytic_data(data_path: str, device: str = 'cpu') -> Tuple[List[torch.Tensor], torch.Tensor, int]:
+def load_catalytic_data(data_path: str, device: str = 'cpu',
+                        compress: bool = True, k_components: int = None
+                        ) -> Tuple[List[torch.Tensor], torch.Tensor, int]:
     """Load real catalytic hidden states and convert to EigenBuddy training format.
 
     Args:
         data_path: Path to .pt file from collect_hidden_states.py
+        compress: If True, apply complex Hermitian SVD subspace compression
+        k_components: Number of top eigenvectors to keep (auto if None, uses K95)
 
     Returns:
-        inputs: List of (1, 1, D) complex tensors
+        inputs: List of (1, 1, D_out) complex tensors
         targets: (N,) long tensor of token IDs
         num_classes: Number of unique target classes
     """
@@ -541,44 +562,99 @@ def load_catalytic_data(data_path: str, device: str = 'cpu') -> Tuple[List[torch
     states_imag = data['states_imag']  # (N, D) float32
     targets = data['targets']          # (N,) int64
 
-    # Replace any remaining NaN/Inf and CLAMP extreme values
+    # Replace any remaining NaN/Inf
     states_real = torch.nan_to_num(states_real, nan=0.0, posinf=0.0, neginf=0.0)
     states_imag = torch.nan_to_num(states_imag, nan=0.0, posinf=0.0, neginf=0.0)
 
-    # Normalize: XOR'd f32 bytes can span full f32 range (-3.4e38 to +3.4e38).
-    # Scale to [-1, 1] using per-channel max absolute value.
-    max_abs_real = states_real.abs().max()
-    max_abs_imag = states_imag.abs().max()
-    if max_abs_real > 0:
-        states_real = states_real / max_abs_real
-    if max_abs_imag > 0:
-        states_imag = states_imag / max_abs_imag
-
     N, D = states_real.shape
-    num_classes = len(set(targets.tolist()))
-
-    print(f"  Loaded {N} samples, {D} dims, {num_classes} unique classes")
-    print(f"  Real range (normalized): [{states_real.min():.4e}, {states_real.max():.4e}]")
-    print(f"  Imag range (normalized): [{states_imag.min():.4e}, {states_imag.max():.4e}]")
 
     # Filter to cold-miss samples only (real compute, not cached)
     if 'cold_mask' in data:
         cold_mask = data['cold_mask']
         n_cold = cold_mask.sum().item()
-        print(f"  Cold-miss samples: {n_cold}/{N}")
         if n_cold > 0:
             states_real = states_real[cold_mask]
             states_imag = states_imag[cold_mask]
             targets = targets[cold_mask]
             N = n_cold
-            num_classes = len(set(targets.tolist()))
-            print(f"  Using {N} cold-miss samples, {num_classes} unique classes")
 
-    # Convert to complex (B, 1, D) format
+    num_classes = len(set(targets.tolist()))
+
+    if compress and N >= 4:
+        # --- Complex Hermitian SVD subspace compression (from 20.10) ---
+        # The XOR'd hidden states have enormous magnitude (3.4e38) from the random
+        # substrate. Normalize per-sample to unit norm first, removing substrate
+        # scale and preserving only the angular/phase structure (Q8: real geometry
+        # is optimal, complexification degrades).
+        import numpy as np
+        Z_raw = np.array(states_real, dtype=np.float64) + 1j * np.array(states_imag, dtype=np.float64)
+
+        # Per-sample unit normalization: removes substrate magnitude, keeps direction
+        norms = np.linalg.norm(Z_raw, axis=1, keepdims=True)
+        norms = np.maximum(norms, 1e-15)
+        Z = Z_raw / norms
+
+        # Center
+        Z_mean = Z.mean(axis=0, keepdims=True)
+        Z_centered = Z - Z_mean
+
+        # Complex Hermitian covariance: C = Z^H @ Z / (N-1)  (D x D)
+        C = (Z_centered.conj().T @ Z_centered) / (N - 1)
+
+        # Eigendecomposition of Hermitian matrix (eigenvalues are real)
+        eigenvalues, eigenvectors = np.linalg.eigh(C)
+        eigenvalues = eigenvalues[::-1]
+        eigenvectors = eigenvectors[:, ::-1]
+
+        total = eigenvalues.sum()
+        probs = eigenvalues / total
+        cumulative = np.cumsum(probs)
+        df = 1.0 / (probs**2).sum()
+        k95 = int(np.searchsorted(cumulative, 0.95) + 1)
+        k50 = int(np.searchsorted(cumulative, 0.50) + 1)
+
+        print(f"  Complex Hermitian SVD: N={N}, D={D}")
+        print(f"  Df={df:.1f}, K50={k50}, K95={k95}")
+        print(f"  Top-10 eigenvalues: {[f'{e:.2e}' for e in eigenvalues[:10]]}")
+        print(f"  Cumulative at K=16: {cumulative[min(15, len(cumulative)-1)]:.4f}")
+        print(f"  Cumulative at K=32: {cumulative[min(31, len(cumulative)-1)]:.4f}")
+        print(f"  Cumulative at K=64: {cumulative[min(63, len(cumulative)-1)]:.4f}")
+
+        # Choose K: user-specified or auto (max of K95, K50 * 2, min(64, N//2))
+        if k_components is None:
+            K = min(max(k95, k50 * 2, 16), min(128, D, N // 2))
+        else:
+            K = min(k_components, D)
+
+        # Project to top K eigenvectors
+        V = eigenvectors[:, :K]  # (D x K) complex
+        Z_proj = Z_centered @ V  # (N x K) complex
+
+        # Convert back to real/imag pairs, normalize per-dimension
+        states_real = torch.from_numpy(Z_proj.real.astype(np.float32))
+        states_imag = torch.from_numpy(Z_proj.imag.astype(np.float32))
+        D_out = K
+
+        print(f"  Projected to K={K} dimensions (from D={D})")
+        print(f"  Compressed real range: [{states_real.min():.4e}, {states_real.max():.4e}]")
+        print(f"  Compressed imag range: [{states_imag.min():.4e}, {states_imag.max():.4e}]")
+    else:
+        # Normalize: XOR'd f32 bytes can span full f32 range (-3.4e38 to +3.4e38).
+        max_abs_real = states_real.abs().max()
+        max_abs_imag = states_imag.abs().max()
+        if max_abs_real > 0:
+            states_real = states_real / max_abs_real
+        if max_abs_imag > 0:
+            states_imag = states_imag / max_abs_imag
+        D_out = D
+
+    print(f"  Loaded {N} samples, {D_out} dims, {num_classes} unique classes")
+
+    # Convert to complex (B, 1, D_out) format
     inputs = []
     for i in range(N):
         z = torch.complex(states_real[i], states_imag[i])
-        inputs.append(z.unsqueeze(0).unsqueeze(0))  # (1, 1, D)
+        inputs.append(z.unsqueeze(0).unsqueeze(0))  # (1, 1, D_out)
 
     return inputs, targets, num_classes
 
@@ -699,13 +775,16 @@ def main():
         train_tgt, test_tgt = targets_remapped[:split], targets_remapped[split:]
         print(f"  Train: {len(train_in)}, Test: {len(test_in)}")
 
-        # Build model with num_classes output head
-        print(f"\n--- Building EigenBuddy (d={DIM}, classes={num_classes}) ---")
+        # Actual input dimension (may be compressed)
+        actual_dim = inputs[0].shape[-1]
+
+        # Build model with actual input dimension
+        print(f"\n--- Building EigenBuddy (d={actual_dim}, classes={num_classes}) ---")
         model = EigenBuddyTokenizer(
-            dim=DIM,
+            dim=actual_dim,
             vocab_size=num_classes,
             eigen_layers=2,
-            eigen_heads=max(2, DIM // 56),
+            eigen_heads=max(2, actual_dim // 56) if actual_dim >= 56 else max(1, actual_dim // 4),
         )
         model.set_anchor_bank(embed_table, token_ids)
         params = sum(p.numel() for p in model.parameters())
@@ -742,7 +821,8 @@ def main():
                 save_results[k] = v.item() if v.numel() == 1 else v.tolist()
         torch.save({
             'model_state': model.state_dict(),
-            'dim': DIM,
+            'dim': actual_dim,
+            'original_dim': DIM,
             'num_classes': num_classes,
             'token_mapping': unique_tokens,
             'token_to_idx': token_to_idx,
