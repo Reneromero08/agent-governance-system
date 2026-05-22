@@ -22,37 +22,39 @@ from collections import defaultdict
 # ---- Project paths ----
 REPO = Path(__file__).resolve().parents[4]
 sys.path.insert(0, str(REPO / "NAVIGATION/CORTEX/network"))
-sys.path.insert(0, str(REPO / "CAPABILITY/PRIMITIVES"))
+sys.path.insert(0, str(REPO / "CAPABILITY"))
 
 from generic_cassette import load_cassettes_from_json
 from network_hub import SemanticNetworkHub
 
-# GeometricState import (may fail if geometric_reasoner deps aren't available)
+# Geometric reasoning and SVTP primitives
 GeometricState = None
-try:
-    from geometric_reasoner import GeometricState
-except ImportError:
-    pass
-
-# SVTP bridge (optional — uses hub directly if unavailable)
+AlignedKeyPair = None
+SVTPCortexBridge = None
 SVTP_AVAILABLE = False
+
 try:
+    from PRIMITIVES.geometric_reasoner import GeometricState
+    from PRIMITIVES.alignment_key import AlignedKeyPair
     from svtp_bridge import SVTPCortexBridge
+    from PRIMITIVES.vector_packet import CrossModelDecoder, CrossModelEncoder, SVTPPacket, SVTP_256
     SVTP_AVAILABLE = True
-except ImportError:
-    pass
+    print("[SVTP] Bridge primitives loaded")
+except ImportError as e:
+    print(f"[SVTP] Unavailable: {e}")
 
 
 class WormholeCassetteAdapter:
     """
     Converts wormhole eigenbasis projections into cassette network queries.
-    Uses the SemanticNetworkHub directly — no SVTP overhead if bridge unavailable.
+    Routes through SVTP bridge when available, falls back to direct hub.
     """
     
     def __init__(self, hub=None, cassettes_config=None, dim=384):
         self.dim = dim
         self.query_count = 0
         self.hit_count = 0
+        self.svtp_bridge = None
         
         # Initialize the cassette network
         if hub is None and cassettes_config is not None:
@@ -65,6 +67,19 @@ class WormholeCassetteAdapter:
                 print(f"  {c.cassette_id}: {status}")
         else:
             self.hub = hub
+        
+        # Initialize SVTP bridge if primitives are available
+        if SVTP_AVAILABLE and self.hub is not None:
+            try:
+                pair = AlignedKeyPair.generate()
+                self.svtp_bridge = SVTPCortexBridge(
+                    hub=self.hub,
+                    aligned_pair=pair,
+                    embed_fn=None  # use default embedding
+                )
+                print(f"[SVTP] Bridge initialized with session token")
+            except Exception as e:
+                print(f"[SVTP] Bridge init failed: {e}")
     
     def eigenbasis_to_geometric_state(self, h_eigen):
         """Convert eigenbasis projection to GeometricState for hub query."""
@@ -96,18 +111,33 @@ class WormholeCassetteAdapter:
         return padded  # raw numpy fallback
     
     def query(self, h_eigen, top_k=5):
-        """Query the cassette network with eigenbasis projection."""
+        """Query the cassette network — SVTP bridge preferred, direct hub fallback."""
         if self.hub is None:
             return [], None
         
         geo = self.eigenbasis_to_geometric_state(h_eigen)
         
+        # Try SVTP bridge first (cryptographically secured, codebook-synced)
+        if self.svtp_bridge is not None:
+            try:
+                # Encode eigenbasis as SVTP packet
+                vec = geo.vector if isinstance(geo, GeometricState) else geo
+                raw_svtp = self.svtp_bridge.encoder.encode_to_other(
+                    json.dumps({"query": vec.tolist()[:200]})
+                ).to_bytes()
+                response = self.svtp_bridge.handle_packet(raw_svtp)
+                if response:
+                    self.hit_count += 1
+                    decoded = json.loads(response.decode('utf-8'))
+                    return decoded, str(decoded)[:200]
+            except Exception:
+                pass
+        
+        # Fallback: direct hub geometric query
         try:
-            # Try geometric query first
             if hasattr(self.hub, 'query_merged_geometric') and GeometricState is not None:
                 results = self.hub.query_merged_geometric(geo, top_k=top_k)
             elif hasattr(self.hub, 'query_all'):
-                # Fall back to text query with vector search
                 results = self.hub.query_all("semantic", top_k=top_k)
             else:
                 return [], None
@@ -128,7 +158,7 @@ class WormholeCassetteAdapter:
                 context_str = " | ".join(ctx_parts[:3]) if ctx_parts else None
                 
                 return results, context_str
-        except Exception as e:
+        except Exception:
             pass
         
         return [], None
