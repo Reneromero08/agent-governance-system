@@ -91,10 +91,10 @@ for each weight type:
 - Total SVh: ~45 MB (shared fp16) -> ~5-8 MB (shared complex + deltas)
 
 **What to figure out:**
-- [ ] Does SVh phase encoding preserve forward pass fidelity?
-- [ ] Phase quantization: how many bits per phase angle?
-- [ ] Born rule retrieval: P = |<x|SVh_complex>|^2 vs standard dot product
-- [ ] Interaction with real-valued U rotations (mixing complex SVh with real U)
+- [x] Does SVh phase encoding preserve forward pass fidelity? — No. cos=-0.007. Phase non-linearity destroys linear structure.
+- [x] Phase quantization: how many bits per phase angle? — 4-bit gives cos=0.88, 6-bit cos=0.99, 8-bit cos=0.9995. Linear quantization, not phase.
+- [x] Born rule retrieval: P = |<x|SVh_complex>|^2 vs standard dot product — Born fails (cos=-0.004). Sign loss is fatal.
+- [x] Interaction with real-valued U rotations (mixing complex SVh with real U) — Fails. Dtype mismatch between complex SVh and real U. Requires full complex pipeline.
 
 ### 3. Catalytic Inference Pipeline (Cassette + Lattice Architecture)
 
@@ -226,7 +226,7 @@ Each forward pass through a layer is a catalytic operation: borrow workspace, pr
 - [x] **A6**: MI-weighted epistemic sieve (I(S:F_i) ranking). Tested: MI 99% cum keeps 252/256 modes vs cosine 255/256 — 3-mode difference (1%). Cosine 0.99 is a fast, sufficient proxy. Cavity K=47 does the real compression.
 
 ### Track B: Storage Floor
-- [ ] **B1**: Complex-phase SVh (Born rule retrieval, 5-8 MB shared SVh)
+- [x] **B1**: Complex-phase SVh — TESTED. Phase encoding (cos→angle→cos) fails: cos=-0.007. Born rule fails: cos=-0.004 (non-linear, sign loss). Linear quantization works: 4-bit cos=0.88, 6-bit cos=0.99, 8-bit cos=0.9995. Use linear quantization, not phase encoding.
 - [ ] **B2**: Skip-R detection (identity rotations -> drop R)
 - [ ] **B3**: D_f block compression (independent rotation chains, not raw layers)
 - [x] **B4**: GOE eigenvalue validation (Wigner-Dyson r=0.5137 — 97% of theoretical 0.5300). All 12 types quantum-chaotic. At Bekenstein bound.

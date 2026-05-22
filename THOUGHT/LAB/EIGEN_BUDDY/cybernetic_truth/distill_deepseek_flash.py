@@ -242,38 +242,61 @@ def distill_module(module_name, safetensors_files, output_path, rank_k=RANK_K):
                 # Load tensor
                 try:
                     t = f.get_tensor(key)
-                except Exception as e:
-                    skipped += 1
-                    continue
+                except:
+                    # Float8 tensors fail on .min() — read raw
+                    info = f.get_slice(key)
+                    shape = tuple(int(x) for x in info.get_shape())
+                    raw = info[:]
+                    buf = raw.tobytes() if hasattr(raw, 'tobytes') else bytes(raw)
+                    dt = str(info.get_dtype())
+                    if 'I8' in dt:
+                        arr = np.frombuffer(buf, dtype=np.int8).astype(np.float32).copy()
+                    elif 'F8' in dt or 'FP8' in dt:
+                        arr = np.frombuffer(buf, dtype=np.uint8).astype(np.float32).copy()
+                    else:
+                        arr = np.frombuffer(buf, dtype=np.float16).astype(np.float32).copy()
+                    t = torch.from_numpy(arr).reshape(shape)
                 
                 if t.ndim != 2:
                     skipped += 1
                     continue
                 
-                # INT8 dequantization for expert weights (DeepSeek V4 Flash)
-                # Expert weights stored as I8 with per-channel FP32 scale
-                # Use raw byte read because torch doesn't support float8 scales
+                # Dequantization: apply scale for I8/F8 quantized expert weights
                 try:
                     info = f.get_slice(key)
-                    if str(info.get_dtype()) == 'I8':
-                        raw = info[:]  # raw bytes
-                        import numpy as np
-                        arr = np.frombuffer(raw.tobytes() if hasattr(raw, 'tobytes') else bytes(raw), dtype=np.int8)
-                        t = torch.from_numpy(arr.astype(np.float32).reshape(info.get_shape()))
-                        # Read scale
+                    dt = str(info.get_dtype())
+                    if 'I8' in dt or 'F8' in dt:
                         scale_key = key.replace('.weight', '.scale')
                         try:
-                            s_raw = f.get_slice(scale_key)[:]
-                            s_arr = np.frombuffer(s_raw.tobytes() if hasattr(s_raw, 'tobytes') else bytes(s_raw), dtype=np.float32)
-                            scale_val = s_arr.reshape(-1)
-                            if scale_val.shape[0] == 1:
-                                t = t * float(scale_val[0])
+                            # Read scale tensor  
+                            s_info = f.get_slice(scale_key)
+                            s_raw = s_info[:]
+                            s_buf = s_raw.tobytes() if hasattr(s_raw, 'tobytes') else bytes(s_raw)
+                            s_dt = str(s_info.get_dtype())
+                            
+                            if 'F32' in s_dt:
+                                s_arr = np.frombuffer(s_buf, dtype=np.float32)
+                            elif 'F16' in s_dt or 'BF16' in s_dt:
+                                s_arr = np.frombuffer(s_buf, dtype=np.float16).astype(np.float32)
+                            elif 'F8' in s_dt:
+                                s_arr = np.frombuffer(s_buf, dtype=np.uint8).astype(np.float32)
                             else:
-                                t = t * torch.from_numpy(scale_val).float()
-                        except:
-                            pass  # no scale, keep as float32
-                except:
-                    pass  # not I8, keep original
+                                s_arr = np.frombuffer(s_buf, dtype=np.float32)
+                            
+                            if s_arr.size == 1:
+                                t = t.float() * float(s_arr[0])
+                            elif s_arr.ndim == 1:
+                                t = t.float() * torch.from_numpy(s_arr).float()
+                            else:
+                                t = t.float() * torch.from_numpy(s_arr.reshape(-1)).float()
+                        except Exception:
+                            t = t.float()  # no scale, just cast
+                except Exception:
+                    t = t.float()
+                
+                if t.ndim != 2:
+                    skipped += 1
+                    continue
                 
                 # Determine weight type for cache
                 wt = extract_weight_type(key, module_name)
