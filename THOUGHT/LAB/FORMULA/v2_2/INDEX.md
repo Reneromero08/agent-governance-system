@@ -31,7 +31,7 @@
 |---|-----------|--------|-----------|
 | Q1 | grad_S is the correct normalization for E | OPEN | q01_grad_s/ |
 | Q3 | R generalizes across genuinely different domains | OPEN | q03_generalization/ |
-| Q25 | Sigma is derivable from first principles | OPEN | q25_sigma/ |
+| Q25 | Sigma is derivable from first principles: sigma = 2^(-h) where h = hash entropy bits per round; R2=1.0000 | VERIFIED | q25_sigma/ |
 | Q9 | R connects structurally to Free Energy Principle | OPEN | q09_free_energy/ |
 | Q6 | R connects structurally to IIT (Phi) | OPEN | q06_iit/ |
 | Q36 | R connects to Bohm's implicate/explicate order | PARTIALLY VERIFIED | q36_bohm/ |
