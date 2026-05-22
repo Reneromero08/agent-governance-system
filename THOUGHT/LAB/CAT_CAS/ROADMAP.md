@@ -87,10 +87,11 @@ This roadmap outlines the milestones for pushing the boundaries of Catalytic Spa
 
 ## 4. Reality-Breaking & Non-Classical Frontiers
 
-- [ ] **Quantum Catalytic Entanglement: The "Invisible Hand" Borrowing**
+- [x] **Quantum Catalytic Entanglement: The "Invisible Hand" Borrowing**
   *   Design a unitary quantum circuit that borrows a register of qubits in a highly entangled superposition.
   *   Perform a catalytic quantum computation on the state space and restore the register to its exact entangled superposition without collapsing the wavefunction.
   *   Verify via quantum state tomography that entanglement with the external system remains 100% intact.
+  *   **Result:** Bell state Q1-Q2 prepared. Q2 borrowed as catalytic tape for computation with Q3 (CZ, Hadamard, Z-rotation, CNOT). All gates unitary — zero measurement. State overlap after restoration: 1.000000. Q3 returned to |0>. Bell entanglement survives intact. The external system (Q1) cannot detect that Q2 was borrowed. Script: `24_quantum_catalytic_entanglement/1_invisible_hand.py`.
 
 - [x] **Temporal Catalysis: Retrocausal Activation Borrowing**
   *   Formulate a closed-loop temporal cache where the model's future semantic states are used as the dirty tape to calibrate the current step's SVD projection.
