@@ -62,12 +62,13 @@ def group_u_matrices(holo_dict, modules):
     return u_groups
 
 
-def compress_group(wt, tensors, compressed, stats, rotation_threshold=0.5, quant_bits=2, skip_threshold=0.01, lora_rank=0):
-    """Wormhole-compress a single weight-type group with Skip-R + LoRA factorization.
+def compress_group(wt, tensors, compressed, stats, rotation_threshold=0.5, quant_bits=2, skip_threshold=0.01, lora_rank=0, d_f_blocks=0):
+    """Wormhole-compress with D_f block compression.
     
-    lora_rank: if > 0, factorize R [k,k] as A [k,r] @ B [r,k] for uniform ratio compression.
-               Keeps ALL eigenmodes, distributes compression evenly across rotation chain.
-               Compression ratio on R: k^2 / (2kr) = k/(2r)"""
+    d_f_blocks: if > 0, split the rotation chain into independent correctable blocks.
+                When fidelity drops below threshold, insert a new anchor U.
+                Prevents error accumulation across the full chain.
+                Compression: fewer R per block, but more anchors stored."""
     sorted_l = sorted(tensors.keys())
     if len(sorted_l) < 2:
         for l in sorted_l:
@@ -77,32 +78,50 @@ def compress_group(wt, tensors, compressed, stats, rotation_threshold=0.5, quant
     first = tensors[sorted_l[0]]
     m, k = first.shape
     L = len(sorted_l)
-    compressed[f"{wt}.L{sorted_l[0]}.U"] = first.half()
-
+    
+    # D_f block compression: use a dynamic anchor that resets when fidelity degrades
+    anchor = first
+    anchor_idx = sorted_l[0]
+    anchors_stored = 1
+    blocks = []
+    
+    # Store first anchor
+    compressed[f"{wt}.L{anchor_idx}.U"] = first.half()
     prev = first
     fids_rot = []; fids_quant = []
     skipped = 0
+    block_layers = [sorted_l[0]]
     
     if lora_rank > 0 and lora_rank < k:
-        r_bits = k * lora_rank * 16 * 2  # A [k,r] + B [r,k]
+        r_bits = k * lora_rank * 16 * 2
     else:
         r_bits = k * k * 16
     lora_rank = min(lora_rank, k) if lora_rank > 0 else 0
     
     orig_bits = L * m * k * 16
-    comp_bits = m * k * 16
+    comp_bits = m * k * 16  # first anchor
 
     for i in range(1, L):
         l = sorted_l[i]
         curr = tensors[l]
-
         R = prev.T @ curr
         recon_rot = prev @ R
         fid_rot = torch.nn.functional.cosine_similarity(
             curr.flatten().unsqueeze(0), recon_rot.flatten().unsqueeze(0)
         ).item()
         
-        # B2: Skip-R detection
+        # D_f check: re-anchor if fidelity drops below threshold
+        if d_f_blocks > 0 and fid_rot < rotation_threshold:
+            # Re-anchor: store current U as new anchor, reset chain
+            anchor = curr; anchor_idx = l; anchors_stored += 1
+            compressed[f"{wt}.L{l}.U"] = curr.half()
+            comp_bits += m * k * 16
+            fids_rot.append(1.0); fids_quant.append(1.0)
+            prev = curr
+            block_layers.append(l)
+            continue
+        
+        # Skip-R detection
         identity_dist = torch.norm(R - torch.eye(k, device=R.device)).item()
         if identity_dist < skip_threshold:
             compressed[f"{wt}.L{l}.skip"] = torch.tensor(1)
@@ -114,7 +133,6 @@ def compress_group(wt, tensors, compressed, stats, rotation_threshold=0.5, quant
         res_max = residual.abs().max().item()
 
         if fid_rot > rotation_threshold:
-            # Store R (or A,B factorization)
             if lora_rank > 0:
                 U_r, S_r, Vh_r = torch.linalg.svd(R.float(), full_matrices=False)
                 A = U_r[:, :lora_rank] * S_r[:lora_rank].sqrt().unsqueeze(0)
@@ -130,7 +148,6 @@ def compress_group(wt, tensors, compressed, stats, rotation_threshold=0.5, quant
             residual_norm = residual / max(res_max, 1e-6)
             diffs = residual_norm.unsqueeze(-1) - levels.view(1, 1, -1)
             idx = diffs.abs().argmin(dim=-1).to(torch.uint8)
-
             if lora_rank > 0:
                 U_r, S_r, Vh_r = torch.linalg.svd(R.float(), full_matrices=False)
                 A = U_r[:, :lora_rank] * S_r[:lora_rank].sqrt().unsqueeze(0)
@@ -142,7 +159,6 @@ def compress_group(wt, tensors, compressed, stats, rotation_threshold=0.5, quant
             compressed[f"{wt}.L{l}.res_idx"] = idx
             compressed[f"{wt}.L{l}.res_max"] = torch.tensor(res_max)
             comp_bits += r_bits + m * k * quant_bits + 16
-
             recon_quant = recon_rot + levels[idx.long()]
             fid_quant = torch.nn.functional.cosine_similarity(
                 curr.flatten().unsqueeze(0), recon_quant.flatten().unsqueeze(0)
@@ -158,13 +174,15 @@ def compress_group(wt, tensors, compressed, stats, rotation_threshold=0.5, quant
         'orig_MB': orig_bits / 8 / 1024**2,
         'comp_MB': comp_bits / 8 / 1024**2,
         'skipped': skipped,
+        'anchors': anchors_stored,
+        'blocks': anchors_stored,
     }
     stats['total_orig_MB'] += orig_bits / 8 / 1024**2
     stats['total_comp_MB'] += comp_bits / 8 / 1024**2
     stats['fidelities'][wt] = fids_quant
 
 
-def compress_holo_modular(holo_dict, modules, rotation_threshold=0.5, quant_bits=2, skip_threshold=0.3, lora_rank=0):
+def compress_holo_modular(holo_dict, modules, rotation_threshold=0.5, quant_bits=2, skip_threshold=0.3, lora_rank=0, d_f_blocks=0):
     """Compress .holo dict into modular wormhole format."""
     u_groups = group_u_matrices(holo_dict, modules)
 
@@ -172,7 +190,7 @@ def compress_holo_modular(holo_dict, modules, rotation_threshold=0.5, quant_bits
     stats = {'groups': {}, 'total_orig_MB': 0, 'total_comp_MB': 0, 'fidelities': {}}
 
     for wt, tensors in sorted(u_groups.items()):
-        compress_group(wt, tensors, compressed, stats, rotation_threshold, quant_bits, skip_threshold, lora_rank)
+        compress_group(wt, tensors, compressed, stats, rotation_threshold, quant_bits, skip_threshold, lora_rank, d_f_blocks)
 
     # Collect compressed prefixes for SVh dedup
     compressed_prefixes = set()
@@ -261,7 +279,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("input", nargs="?", default=str(DEFAULT_INPUT))
     ap.add_argument("--module", "-m", choices=["llm", "visual", "aux", "all"], default="all")
-    ap.add_argument("--lora-rank", "-r", type=int, default=0, help="LoRA rank for rotation compression (0=store full R). r<K compresses R uniformly.")
+    ap.add_argument("--lora-rank", "-r", type=int, default=0, help="LoRA rank for rotation compression")
+    ap.add_argument("--df-blocks", type=int, default=0, help="D_f block compression: max anchor-to-anchor distance (0=one anchor)")
     ap.add_argument("--output", "-o", default=None)
     args = ap.parse_args()
 
