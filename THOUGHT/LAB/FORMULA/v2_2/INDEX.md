@@ -29,7 +29,7 @@
 
 | Q | Hypothesis | Status | Directory |
 |---|-----------|--------|-----------|
-| Q1 | grad_S is the correct normalization for E | OPEN | q01_grad_s/ |
+| Q1 | grad_S is the correct normalization for E: R increases with E, decreases with nabla_S; directional R2=0.58; exact form depends on operator | PARTIALLY VERIFIED | q01_grad_s/ |
 | Q3 | R generalizes across genuinely different domains | OPEN | q03_generalization/ |
 | Q25 | Sigma is derivable from first principles: sigma = 2^(-h) where h = hash entropy bits per round; R2=1.0000 | VERIFIED | q25_sigma/ |
 | Q9 | R connects structurally to Free Energy Principle | OPEN | q09_free_energy/ |
