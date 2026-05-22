@@ -397,6 +397,12 @@ mod tests {
         // ---- FORWARD ALL LAYERS ----
         for layer_idx in 0..num_layers {
             let lwo_f32 = weight_offset + layer_idx * HIDDEN_DIM * F32_BYTES;
+            if (layer_idx + 1) % 4 == 0 && step == 0 {
+                // Save pre-forward input bytes for comparison
+                let _saved_input = tape[input_offset..input_offset+COMPLEX_DIM].to_vec();
+                let _saved_idx = layer_idx;
+            }
+            
             let layer_save = saved_outputs_offset + layer_idx * COMPLEX_DIM;
 
             if (layer_idx + 1) % 4 == 0 {
@@ -1359,8 +1365,15 @@ fn catalytic_inference_step<'py>(
     } else {
         // COLD MISS: full layer stack (f32 tape)
         // Hash checkpoints: capture hash before each forward layer
+        // Also capture per-region hashes for pinpointing divergence
         let mut fwd_hashes: Vec<String> = Vec::with_capacity(num_layers);
+        let mut fwd_input_hashes: Vec<String> = Vec::with_capacity(num_layers);
+        let mut fwd_temp_hashes: Vec<String> = Vec::with_capacity(num_layers);
+        let mut fwd_weight_hashes: Vec<String> = Vec::with_capacity(num_layers);
         let mut bwd_hashes: Vec<String> = Vec::with_capacity(num_layers);
+        let mut bwd_input_hashes: Vec<String> = Vec::with_capacity(num_layers);
+        let mut bwd_temp_hashes: Vec<String> = Vec::with_capacity(num_layers);
+        let mut bwd_weight_hashes: Vec<String> = Vec::with_capacity(num_layers);
         
         for layer_idx in 0..num_layers {
             // SHA-256 checkpoint BEFORE forward
@@ -1370,22 +1383,27 @@ fn catalytic_inference_step<'py>(
                 format!("{:x}", h.finalize())
             };
             fwd_hashes.push(pre_fwd_hash);
-            
-            let lwo = weight_offset + layer_idx * HIDDEN_DIM;
-            let lwo_f32 = weight_offset + layer_idx * HIDDEN_DIM * F32_BYTES;
-            let layer_save = saved_outputs_offset + layer_idx * COMPLEX_DIM;
-
-            // DEBUG: capture pre-forward input/temp hash
-            let _fwd_input_hash: String = {
+            fwd_input_hashes.push({
                 let mut h = Sha256::new();
                 ShaDigest::update(&mut h, &tape[input_offset..input_offset+COMPLEX_DIM]);
                 format!("{:x}", h.finalize())
-            };
-            let _fwd_temp_hash: String = {
+            });
+            fwd_temp_hashes.push({
                 let mut h = Sha256::new();
                 ShaDigest::update(&mut h, &tape[temp_offset..temp_offset+COMPLEX_DIM]);
                 format!("{:x}", h.finalize())
-            };
+            });
+            // Weight region hash: lwo (u8) + lwo_f32 (f32) bytes for this layer
+            let lwo = weight_offset + layer_idx * HIDDEN_DIM;
+            let lwo_f32 = weight_offset + layer_idx * HIDDEN_DIM * F32_BYTES;
+            fwd_weight_hashes.push({
+                let mut h = Sha256::new();
+                ShaDigest::update(&mut h, &tape[lwo..lwo+HIDDEN_DIM]);
+                ShaDigest::update(&mut h, &tape[lwo_f32..lwo_f32+HIDDEN_DIM*F32_BYTES]);
+                format!("{:x}", h.finalize())
+            });
+            
+            let layer_save = saved_outputs_offset + layer_idx * COMPLEX_DIM;
 
             // Dynamic decatalysis — save BOTH lwo (u8) and lwo_f32 (f32)
             let original_weight_f32 = tape[lwo_f32 .. lwo_f32 + HIDDEN_DIM * F32_BYTES].to_vec();
@@ -1539,18 +1557,7 @@ fn catalytic_inference_step<'py>(
             if s > best_score_f32 { best_score_f32 = s; best_token = j as u8; }
         }
 
-        // DEBUG: capture temp hash right before uncompute
-        let pre_uncomp_temp_hash = {
-            let mut h = Sha256::new();
-            ShaDigest::update(&mut h, &tape[temp_offset..temp_offset+COMPLEX_DIM]);
-            format!("{:x}", h.finalize())
-        };
-        let pre_uncomp_input_hash = {
-            let mut h = Sha256::new();
-            ShaDigest::update(&mut h, &tape[input_offset..input_offset+COMPLEX_DIM]);
-            format!("{:x}", h.finalize())
-        };
-
+        // Uncompute: reverse each layer (f32)
         // Uncompute: reverse each layer (f32)
         for layer_idx in (0..num_layers).rev() {
             let lwo = weight_offset + layer_idx * HIDDEN_DIM;
@@ -1661,47 +1668,72 @@ fn catalytic_inference_step<'py>(
             tape[lwo_f32 .. lwo_f32 + HIDDEN_DIM * F32_BYTES].copy_from_slice(&original_weight_f32);
             tape[lwo .. lwo + HIDDEN_DIM].copy_from_slice(&original_weight_u8);
 
-            // SHA-256 checkpoint AFTER uncompute
+            // SHA-256 checkpoint AFTER uncompute — capture per-region hashes
             let post_bwd_hash = {
                 let mut h = Sha256::new();
                 ShaDigest::update(&mut h, &tape[..work_end]);
                 format!("{:x}", h.finalize())
             };
             bwd_hashes.push(post_bwd_hash);
+            bwd_input_hashes.push({
+                let mut h = Sha256::new();
+                ShaDigest::update(&mut h, &tape[input_offset..input_offset+COMPLEX_DIM]);
+                format!("{:x}", h.finalize())
+            });
+            bwd_temp_hashes.push({
+                let mut h = Sha256::new();
+                ShaDigest::update(&mut h, &tape[temp_offset..temp_offset+COMPLEX_DIM]);
+                format!("{:x}", h.finalize())
+            });
+            bwd_weight_hashes.push({
+                let mut h = Sha256::new();
+                ShaDigest::update(&mut h, &tape[lwo..lwo+HIDDEN_DIM]);
+                ShaDigest::update(&mut h, &tape[lwo_f32..lwo_f32+HIDDEN_DIM*F32_BYTES]);
+                format!("{:x}", h.finalize())
+            });
 
             // Check if this layer restored correctly (compare to pre-forward hash)
-            let layer_fwd_idx = layer_idx; // same index in fwd_hashes
+            let layer_fwd_idx = layer_idx;
             if first_broken_layer == -1 && bwd_hashes.last() != fwd_hashes.get(layer_fwd_idx) {
                 first_broken_layer = layer_idx as i32;
-                // Dump the first 32 non-matching byte offsets for debugging
-                let mut diff_count = 0;
-                let pre_hash = {
-                    let mut h = Sha256::new();
-                    ShaDigest::update(&mut h, &tape[..work_end]);
-                    h.finalize()
-                };
-                // Re-create forward hash for this layer
-                // We can't get the old tape bytes, but we can report the mismatch
                 eprintln!("LAYER {} BROKEN: fwd_hash={} bwd_hash={}", 
                     layer_idx,
                     fwd_hashes.get(layer_fwd_idx).unwrap_or(&String::new()),
                     bwd_hashes.last().unwrap_or(&String::new()));
-                let input_sub_hash: String = {
+                
+                // Per-region comparison
+                let empty = String::new();
+                let fwd_in = fwd_input_hashes.get(layer_fwd_idx).unwrap_or(&empty);
+                let bwd_in = bwd_input_hashes.last().unwrap_or(&empty);
+                let fwd_tmp = fwd_temp_hashes.get(layer_fwd_idx).unwrap_or(&empty);
+                let bwd_tmp = bwd_temp_hashes.last().unwrap_or(&empty);
+                let fwd_wt = fwd_weight_hashes.get(layer_fwd_idx).unwrap_or(&empty);
+                let bwd_wt = bwd_weight_hashes.last().unwrap_or(&empty);
+                
+                eprintln!("  input:  fwd={} bwd={} match={}", 
+                    &fwd_in[..16], &bwd_in[..16], fwd_in == bwd_in);
+                eprintln!("  temp:   fwd={} bwd={} match={}", 
+                    &fwd_tmp[..16], &bwd_tmp[..16], fwd_tmp == bwd_tmp);
+                eprintln!("  weight: fwd={} bwd={} match={}", 
+                    &fwd_wt[..16], &bwd_wt[..16], fwd_wt == bwd_wt);
+                
+                // Also check pg and ls regions
+                let pg_hash: String = {
                     let mut h = Sha256::new();
-                    ShaDigest::update(&mut h, &tape[input_offset..input_offset+COMPLEX_DIM]);
+                    ShaDigest::update(&mut h, &tape[pg..pg+COMPLEX_DIM]);
                     format!("{:x}", h.finalize())
                 };
-                let temp_sub_hash: String = {
+                let ls_hash: String = {
                     let mut h = Sha256::new();
-                    ShaDigest::update(&mut h, &tape[temp_offset..temp_offset+COMPLEX_DIM]);
+                    ShaDigest::update(&mut h, &tape[layer_save..layer_save+COMPLEX_DIM]);
                     format!("{:x}", h.finalize())
                 };
-                eprintln!("  input_hash={}, temp_hash={}", input_sub_hash, temp_sub_hash);
-                eprintln!("  pre_uncomp: input={}, temp={}", pre_uncomp_input_hash, pre_uncomp_temp_hash);
+                eprintln!("  pg:  hash={}", &pg_hash[..16]);
+                eprintln!("  ls:  hash={}", &ls_hash[..16]);
+                
                 eprintln!("  Tape bytes [input_off..input_off+32]: {:02x?}", &tape[input_offset..input_offset+32]);
-                eprintln!("  Tape bytes [temp_off..temp_off+32]: {:02x?}", &tape[temp_offset..temp_offset+32]);
-                eprintln!("  Tape bytes [pg..pg+32]: {:02x?}", &tape[pg..pg+32]);
-                eprintln!("  Tape bytes [ls..ls+32]: {:02x?}", &tape[layer_save..layer_save+32]);
+                eprintln!("  Tape bytes [lwo..lwo+32]: {:02x?}", &tape[lwo..lwo+32]);
+                eprintln!("  Tape bytes [lwo_f32..lwo_f32+32]: {:02x?}", &tape[lwo_f32..lwo_f32+32]);
             }
         }
     } // end cold-miss block
@@ -1803,6 +1835,8 @@ fn spn_round_function(
     }
 }
 
+// Multi-scale Feistel scramble — gapped topological phase (Q57)
+// Replaces the standard 2-block Feistel which produces volume-law entanglement
 fn spn_scramble(
     tape: &mut [u8],
     region_base: usize,
@@ -1814,22 +1848,32 @@ fn spn_scramble(
     let half_size = region_size / 2;
     let mut temp_block = vec![0u8; half_size];
 
-    for r in 0..rounds_limit {
-        for i in 0..half_size {
-            temp_block[i] = tape[region_base + half_size + i];
-        }
-
-        let mut f_out = vec![0u8; half_size];
-        spn_round_function(&temp_block, r, key, sbox, half_size, &mut f_out);
-
-        for i in 0..half_size {
-            let l_val = tape[region_base + i];
-            tape[region_base + i] = tape[region_base + half_size + i];
-            tape[region_base + half_size + i] = l_val ^ f_out[i];
+    // Multi-scale: use the largest power-of-2 that fits, up to rounds_limit
+    let max_scale = (half_size as f64).log2().floor() as usize;
+    let scales = (0..max_scale.min(rounds_limit)).collect::<Vec<_>>();
+    let n_scales = scales.len();
+    if n_scales == 0 { return; }
+    
+    for r_idx in 0..n_scales {
+        let scale = 1 << scales[r_idx]; // 1, 2, 4, 8, ...
+        let stride = scale * 2;
+        for i in (0..half_size).step_by(stride) {
+            if i + scale > half_size { break; }
+            for b in 0..scale {
+                temp_block[i + b] = tape[region_base + half_size + i + b];
+            }
+            let mut f_out = vec![0u8; scale];
+            spn_round_function(&temp_block[i..i+scale], r_idx, key, sbox, scale, &mut f_out);
+            for b in 0..scale {
+                let l_val = tape[region_base + i + b];
+                tape[region_base + i + b] = tape[region_base + half_size + i + b];
+                tape[region_base + half_size + i + b] = l_val ^ f_out[b];
+            }
         }
     }
 }
 
+// Multi-scale Feistel unscramble — inverse of multi-scale scramble
 fn spn_unscramble(
     tape: &mut [u8],
     region_base: usize,
@@ -1841,18 +1885,27 @@ fn spn_unscramble(
     let half_size = region_size / 2;
     let mut temp_block = vec![0u8; half_size];
 
-    for r in (0..rounds_limit).rev() {
-        for i in 0..half_size {
-            temp_block[i] = tape[region_base + i];
-        }
-
-        let mut f_out = vec![0u8; half_size];
-        spn_round_function(&temp_block, r, key, sbox, half_size, &mut f_out);
-
-        for i in 0..half_size {
-            let r_val = tape[region_base + half_size + i];
-            tape[region_base + half_size + i] = temp_block[i];
-            tape[region_base + i] = r_val ^ f_out[i];
+    let max_scale = (half_size as f64).log2().floor() as usize;
+    let scales = (0..max_scale.min(rounds_limit)).collect::<Vec<_>>();
+    let n_scales = scales.len();
+    if n_scales == 0 { return; }
+    
+    // Reverse order
+    for r_idx in (0..n_scales).rev() {
+        let scale = 1 << scales[r_idx];
+        let stride = scale * 2;
+        for i in (0..half_size).step_by(stride) {
+            if i + scale > half_size { break; }
+            for b in 0..scale {
+                temp_block[i + b] = tape[region_base + i + b];
+            }
+            let mut f_out = vec![0u8; scale];
+            spn_round_function(&temp_block[i..i+scale], r_idx, key, sbox, scale, &mut f_out);
+            for b in 0..scale {
+                let r_val = tape[region_base + half_size + i + b];
+                tape[region_base + half_size + i + b] = temp_block[i + b];
+                tape[region_base + i + b] = r_val ^ f_out[b];
+            }
         }
     }
 }

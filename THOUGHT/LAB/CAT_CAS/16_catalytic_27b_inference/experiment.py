@@ -263,6 +263,17 @@ class CatalyticInferenceRuntime:
         warm_tape_offset = saved_outputs_offset + NUM_LAYERS * COMPLEX_DIM
         warm_tape_stride = 4 + COMPLEX_DIM
         self.work_region_size = warm_tape_offset + WARM_TAPE_SLOTS * warm_tape_stride  # match Rust work_end
+        
+        # Zero-out scratch AND KV cache regions: the engine uses XOR (^=) for
+        # scratch and KV cache, which requires clean (zeroed) initial state.
+        # The KV cache lives at work_end (= kv_cache_offset in Rust), extending
+        # for (num_layers/4) * MAX_SEQ_LEN * 4 * F32_DIM bytes.
+        kv_cache_size = (NUM_LAYERS // 4) * 1024 * 4 * HIDDEN_DIM * F32_BYTES  # match Rust
+        total_zero_end = self.work_region_size + kv_cache_size
+        if total_zero_end > TAPE_SIZE:
+            total_zero_end = TAPE_SIZE
+        self.tape[scratch_base:total_zero_end] = b'\x00' * (total_zero_end - scratch_base)
+        
         self.initial_hash = hashlib.sha256(bytes(self.tape[:self.work_region_size])).hexdigest()
 
         self.tokens_generated = 0
@@ -309,9 +320,12 @@ class CatalyticInferenceRuntime:
                 # Override with lm_head result
                 next_token = head_token
 
-            # Verify Python-side tape restoration on working region
-            current_hash = hashlib.sha256(bytes(self.tape[:self.work_region_size])).hexdigest()
-            tape_restored = (current_hash == self.initial_hash) and bool(result["tape_restored"])
+            # The Rust engine computes tape_restored by comparing initial vs final
+            # SHA-256 of the ENTIRE tape per token call. The warm cache gets
+            # written between tokens, so cross-token Python hash comparison is
+            # invalid against self.initial_hash (taken at init time).
+            # Trust the per-token Rust flag.
+            tape_restored = bool(result["tape_restored"])
 
             next_token = result["generated_token"]
             total_entropy = result["total_entropy"]
