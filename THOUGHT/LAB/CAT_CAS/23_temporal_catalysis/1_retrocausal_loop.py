@@ -133,7 +133,7 @@ class TemporalCatalysisLoop:
             h, _ = layer.forward_catalytic(h, future_tape=future_tapes[i])
         return h
     
-    def temporal_loop(self, x, max_iterations=20, tolerance=1e-4):
+    def temporal_loop(self, x, max_iterations=50, tolerance=1e-6):
         """
         Retrocausal closed loop.
         
@@ -210,10 +210,10 @@ def main():
     
     # Test configurations
     configs = [
-        (2, 128, 32),   # 2 layers, dim=128, k=32
-        (4, 256, 64),   # 4 layers, dim=256, k=64
-        (6, 256, 64),   # 6 layers, dim=256, k=64
-        (8, 128, 32),   # 8 layers, dim=128, k=32
+        (4, 128, 24),    # 4 layers, dim=128, k=24 (aggressive compression)
+        (6, 256, 32),    # 6 layers, dim=256, k=32 (heavy compression)
+        (8, 256, 48),    # 8 layers, dim=256, k=48
+        (12, 128, 16),   # 12 layers, dim=128, k=16 (extreme)
     ]
     
     for num_layers, dim, k in configs:
