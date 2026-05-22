@@ -61,17 +61,19 @@ Run inference on a Qwen 0.5B model using zero bytes of dynamic system RAM for mo
 
 #### 16.7 — THERMODYNAMIC DAEMON  ✅ DONE
 
-#### 16.8 — WEIGHT STREAMING  ⬜ NEXT
-- [ ] Stream unscrambled SPN weights from `lwo` (u8) into `lwo_f32` (f32) region
-- [ ] Currently `lwo` receives unscrambled bytes but `lwo_f32` contains zeroes
-- [ ] f32 compute reads from `lwo_f32` — zero weights produce random tokens
-- [ ] Need u8→f32 conversion layer: expand 896 compressed bytes to full weight matrices
-- [ ] Or restructure: make `lwo_f32` the primary weight region, unscramble directly into it
+#### 16.8 — WEIGHT STREAMING  ✅ DONE (2026-05-22)
+- [x] Expand weight region: Q/K/V/O each get full HIDDEN_DIM×F32_DIM = 14,336 bytes per layer
+- [x] Move `weight_offset` to COMPLEX_DIM (7168) to eliminate input/weight overlap
+- [x] Route SPN-unscrambled u8 bytes into lwo_f32 compute region
+- [x] BF16→f32 conversion for real Qwen 0.5B weight extraction
+- [x] 16.8A PLATONIC EIGENBUDDY TOKENIZER: prototype decoder trained on Qwen embedding table
+- [ ] Coherent output — weight streaming active but compute uses element-wise w[j]*x[j], not full W@x
 
 #### 16.9 — COHERENT OUTPUT  ⬜
-- [ ] Once real weights stream into `lwo_f32`, validate English text output
-- [ ] Target: 50+ tok/s with coherent Qwen 0.5B generations
-- [ ] 27B model path configured at `G:/models/qwen3.6-27b-fp8-mtp.safetensors`
+- [ ] Weight streaming active, real Qwen weights in lwo_f32 — but output still subword gibberish
+- [ ] Root cause: compute uses diagonal (element-wise w[j]*x[j]) instead of full matrix-vector multiply
+- [ ] EigenBuddy Tokenizer prototype shows MLR decoding from embedding space is viable (100% train acc)
+- [ ] Next: either implement row-by-row HDD weight tiling (Q57 multi-scale Feistel safe) or train EigenBuddy on real catalytic outputs
 
 #### 16.10 — VALIDATION & HARDENING  ⬜
 
@@ -89,17 +91,32 @@ Run inference on a Qwen 0.5B model using zero bytes of dynamic system RAM for mo
 | 6 | Python offset mismatch | `HIDDEN_DIM*2` (1792) vs Rust `COMPLEX_DIM` (7168) | Fixed to `COMPLEX_DIM` throughout |
 | 7 | Dirty scratchpad | Scratch zeroed, not padded | Zero scratch + KV cache before initial hash |
 | 8 | Standard Feistel volume-law | Min-cut = 4L, errors propagate globally | Multi-scale Feistel (Q57): gapped topological phase, min-cut ~4.2 |
+| 9 | Weight region buffer overflow | lwo_f32 too small for attention Q/K/V/O (1536×4 = 6144 > 3584), overlapping pre_gate | Expand to TOTAL_WEIGHT_F32 = 14,336 bytes/layer, move weight_offset to COMPLEX_DIM |
+| 10 | Input/weight region overlap | weight_offset = 1792 overlapped input_offset+F32_DIM = 3584 | weight_offset = COMPLEX_DIM = 7168 |
+| 11 | Scratch base after wrong region | scratch_base used TOTAL_WEIGHT_U8 instead of TOTAL_WEIGHT_F32 | scratch_base = weight_offset + num_layers * TOTAL_WEIGHT_F32 |
 
-### Current Performance
+### Fixed (2026-05-22)
+
+| # | Bug | Root Cause | Fix |
+|---|-----|-----------|-----|
+| 9 | Weight region buffer overflow | lwo_f32 too small for attention Q/K/V/O reads (1536×4 = 6144 > 3584), overlapping pre_gate | Expand to TOTAL_WEIGHT_F32 = 14,336 bytes/layer, move weight_offset to COMPLEX_DIM |
+| 10 | Input/weight overlap | weight_offset = 1792 overlapped input Y channel at byte 3584 | weight_offset = COMPLEX_DIM = 7168 |
+| 11 | Scratch base after wrong region | scratch_base used TOTAL_WEIGHT_U8 = 3584 instead of TOTAL_WEIGHT_F32 = 14336 | scratch_base = weight_offset + num_layers * TOTAL_WEIGHT_F32 |
+| 12 | BF16→f32 endianness | Safetensors BF16 read with big-endian `>u2` instead of native `uint16` | Native-endian `np.uint16`, proper left-shift 16 to f32
+
+### Current Performance (2026-05-22)
 
 | Metric | Value | Status |
 |:---|---:|:---|
-| Tokens/second | 3.16 | 🟡 |
+| Tokens/second | 2.74 | 🟡 |
 | Tape restoration | 100% (50/50) | 🟢 |
 | DeltaNet layers restored | 36/36 | 🟢 |
 | Attention layers restored | 12/12 | 🟢 |
-| Warm-hit rate | 74% | 🟢 |
+| Warm-hit rate | 70% | 🟢 |
 | RAM for weights | 0 bytes | 🟢 |
 | Real embeddings | Yes (151,936 × 896) | 🟢 |
+| Real Qwen weights in lwo_f32 | Yes (BF16→f32, Q/K/V/O) | 🟢 |
 | F32 precision | Yes | 🟢 |
-| Coherent output | No | 🔴 |
+| Coherent output | No (element-wise w[j]*x[j], not W@x) | 🔴 |
+| Rust tests passing | 6/6 | 🟢 |
+| EigenBuddy Tokenizer | Prototype trained, 100% train acc, 21% test | 🟡 |

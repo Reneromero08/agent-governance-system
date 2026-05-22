@@ -37,6 +37,13 @@ HIDDEN_DIM = 896  # Qwen 0.5B hidden dimension
 F32_BYTES = 4
 COMPLEX_CH = 2
 COMPLEX_DIM = HIDDEN_DIM * F32_BYTES * COMPLEX_CH  # 7168 bytes — must match Rust
+F32_DIM = HIDDEN_DIM * F32_BYTES  # 3584
+WEIGHT_Q_OFFSET = 0
+WEIGHT_K_OFFSET = 1 * F32_DIM
+WEIGHT_V_OFFSET = 2 * F32_DIM
+WEIGHT_O_OFFSET = 3 * F32_DIM
+TOTAL_WEIGHT_F32 = 4 * F32_DIM  # 14336 bytes per layer (f32)
+TOTAL_WEIGHT_U8 = 4 * F32_DIM  # 14336 bytes per layer (u8, same size as f32)
 NUM_LAYERS = 48  # 36 DeltaNet + 12 Attention
 DELTANET_PER_ATTENTION = 3  # 3:1 stride
 
@@ -140,30 +147,47 @@ class HDDWeightStreamer:
         # Load weights into RAM and pre-scramble them
         raw_weights_list = []
         for layer_idx in range(self.num_layers):
-            tensor_info = None
-            for name, info in self.tensors.items():
-                if name != "__metadata__" and f"layers.{layer_idx}." in name:
-                    tensor_info = info
-                    break
-
-            if tensor_info and "data_offsets" in tensor_info:
-                start, end = tensor_info["data_offsets"]
-                chunk_start = self.data_offset + start
-                chunk_end = min(self.data_offset + end, chunk_start + HIDDEN_DIM)
-                chunk = self._mmap[chunk_start:chunk_end]
-                if len(chunk) < HIDDEN_DIM:
-                    chunk = chunk + b'\x00' * (HIDDEN_DIM - len(chunk))
-            else:
-                # Fallback to simple offset in mmap or synthetic weights
-                if self._mmap is not None:
-                    offset = layer_idx * HIDDEN_DIM * 8
-                    if offset + HIDDEN_DIM <= len(self._mmap):
-                        chunk = self._mmap[offset:offset + HIDDEN_DIM]
+            layer_chunks = []
+            # Try to find Q,K,V,O projection weights in safetensors
+            weight_suffixes = ['q_proj', 'k_proj', 'v_proj', 'o_proj']
+            for suffix in weight_suffixes:
+                tensor_info = None
+                search_name = f"model.layers.{layer_idx}.self_attn.{suffix}.weight"
+                for name in self.tensors:
+                    if name == search_name:
+                        tensor_info = self.tensors[name]
+                        break
+                
+                if tensor_info and "data_offsets" in tensor_info:
+                    start, end = tensor_info["data_offsets"]
+                    dtype = tensor_info.get("dtype", "F32")
+                    shape = tensor_info.get("shape", [1, 1])
+                    chunk_start = self.data_offset + start
+                    chunk_size = F32_DIM  # first HIDDEN_DIM f32 values
+                    
+                    if dtype == "BF16":
+                        # BF16: 2 bytes per value, big-endian → need HIDDEN_DIM * 2 bytes
+                        raw_bytes = self._mmap[chunk_start:chunk_start + HIDDEN_DIM * 2]
+                        bf16_vals = np.frombuffer(raw_bytes, dtype='>u2').astype(np.uint32) << 16
+                        f32_vals = bf16_vals.view(np.float32)
+                        chunk = f32_vals[:HIDDEN_DIM].tobytes()
+                    elif dtype == "F16":
+                        raw_bytes = self._mmap[chunk_start:chunk_start + HIDDEN_DIM * 2]
+                        f16_vals = np.frombuffer(raw_bytes, dtype='>u2')
+                        # Convert FP16 to FP32 — simple approximate
+                        f32_vals = f16_vals.astype(np.float32)
+                        chunk = f32_vals[:HIDDEN_DIM].tobytes()
                     else:
-                        chunk = b'\x00' * HIDDEN_DIM
+                        # F32: read directly
+                        raw_bytes = self._mmap[chunk_start:chunk_start + F32_DIM]
+                        chunk = bytes(raw_bytes)
+                        if len(chunk) < F32_DIM:
+                            chunk = chunk + b'\x00' * (F32_DIM - len(chunk))
                 else:
-                    chunk = np.random.RandomState(42 + layer_idx).bytes(HIDDEN_DIM)
-            raw_weights_list.append(chunk)
+                    chunk = np.random.RandomState(42 + layer_idx * 4 + len(suffix)).bytes(F32_DIM)
+                layer_chunks.append(chunk)
+            
+            raw_weights_list.append(b"".join(layer_chunks))
 
         self.raw_weights = b"".join(raw_weights_list)
         self.scrambled_weights = catalytic_ffi.scramble_catalysis_weights(self.raw_weights)
@@ -253,21 +277,23 @@ class CatalyticInferenceRuntime:
         rng = np.random.RandomState(42)
         self.tape[:] = rng.randint(0, 256, TAPE_SIZE, dtype=np.uint8).tobytes()
         
-        # Initial hash of working region (enough to cover all modified offsets)
-        weight_offset = HIDDEN_DIM * 2
-        scratch_base = weight_offset + NUM_LAYERS * HIDDEN_DIM
+        # Layout (must match Rust):
+        # input_offset = 0
+        # weight_offset = COMPLEX_DIM
+        # scratch_base = weight_offset + NUM_LAYERS * TOTAL_WEIGHT_F32
+        weight_offset = COMPLEX_DIM
+        scratch_base = weight_offset + NUM_LAYERS * TOTAL_WEIGHT_F32
         temp_offset = scratch_base
         pre_gate_base = temp_offset + COMPLEX_DIM
         saved_outputs_offset = pre_gate_base + NUM_LAYERS * COMPLEX_DIM
         WARM_TAPE_SLOTS = 256
-        warm_tape_offset = saved_outputs_offset + NUM_LAYERS * COMPLEX_DIM
         warm_tape_stride = 4 + COMPLEX_DIM
+        warm_tape_offset = saved_outputs_offset + NUM_LAYERS * COMPLEX_DIM
+        warm_tape_stride = 4 + COMPLEX_DIM  # 4-byte hash + XY output (f32)
         self.work_region_size = warm_tape_offset + WARM_TAPE_SLOTS * warm_tape_stride  # match Rust work_end
         
         # Zero-out scratch AND KV cache regions: the engine uses XOR (^=) for
         # scratch and KV cache, which requires clean (zeroed) initial state.
-        # The KV cache lives at work_end (= kv_cache_offset in Rust), extending
-        # for (num_layers/4) * MAX_SEQ_LEN * 4 * F32_DIM bytes.
         kv_cache_size = (NUM_LAYERS // 4) * 1024 * 4 * HIDDEN_DIM * F32_BYTES  # match Rust
         total_zero_end = self.work_region_size + kv_cache_size
         if total_zero_end > TAPE_SIZE:
@@ -333,7 +359,7 @@ class CatalyticInferenceRuntime:
             self.total_entropy += total_entropy
             self.total_time += elapsed
             self.tokens_generated += 1
-            self.streamer.bytes_streamed += NUM_LAYERS * HIDDEN_DIM
+            self.streamer.bytes_streamed += NUM_LAYERS * TOTAL_WEIGHT_U8
             
             if result.get("warm_hit", False):
                 self.warm_hits += 1

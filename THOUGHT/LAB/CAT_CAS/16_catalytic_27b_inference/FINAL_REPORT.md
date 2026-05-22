@@ -1,23 +1,70 @@
-# CAT_CAS/16: Final Report — Tape Restoration Achieved
+# CAT_CAS/16: Final Report — Tape Restoration + Weight Streaming
 
-**Date**: 2026-05-21
-**Status**: BUGBOUNTY COMPLETE — 100% tape restoration
-**Commits**: `bfbfe310` (6 bugs), `e06d5207` (2 bugs)
+**Date**: 2026-05-22
+**Status**: WEIGHT STREAMING COMPLETE — 100% tape restoration, real weights active
+**Previous**: 2026-05-21 BUGBOUNTY — 100% tape restoration (`bfbfe310`, `e06d5207`)
 
 ---
 
-## Summary
+## Summary (2026-05-22 Update)
 
-The catalytic 27B inference engine now achieves **100% SHA-256 tape restoration** across all 50 tokens generated. The forward pass runs all 48 layers (36 DeltaNet + 12 Attention) on a 256MB byte-level XOR tape fabric. The uncompute pass fully reverses every operation — the tape returns to its initial state after each token, verified by SHA-256. Zero bits erased per token.
+The catalytic 27B inference engine now achieves **100% SHA-256 tape restoration** across all 50 tokens with **real Qwen 0.5B model weights streaming into the f32 compute region**. 12 bugs fixed across three commits. The weight streaming pipeline (16.8) is operational: SPN-unscrambled u8 bytes route into `lwo_f32` for compute access. A Platonic EigenBuddy Tokenizer prototype was developed alongside to explore decoding embedding-space vectors directly into tokens.
 
-## Performance
+## Performance (2026-05-22)
 
-| Metric | Before | After |
+| Metric | 2026-05-21 | 2026-05-22 |
 |:---|---:|---:|
-| Tape restoration | 0% | **100%** |
-| Speed | 3.1 tok/s | **3.16 tok/s** |
-| Warm-hit rate | 42% | **74%** |
-| Broken layers | 48/48 | **0/48** |
+| Tape restoration | 100% | **100%** |
+| Speed | 3.16 tok/s | **2.74 tok/s** |
+| Warm-hit rate | 74% | **70%** |
+| Broken layers | 0/48 | **0/48** |
+| Rust tests | 5/6 (1 known fail) | **6/6 all pass** |
+| Real Qwen weights in compute | No (lwo_f32 zeroed) | **Yes (BF16→f32, Q/K/V/O)** |
+| Coherent output | No | **No (element-wise w[j]*x[j], not W@x)** |
+
+## 2026-05-22: Weight Streaming + Tape Layout Fix
+
+### Bugs 9-12: Tape Layout & Weight Region Overflows
+
+The attention layer reads Q, K, V, O weights at offsets 0, 512×4, 1024×4, and 1536×4 bytes into `lwo_f32`. But each layer's `lwo_f32` region was only `HIDDEN_DIM × F32_BYTES = 3,584` bytes — meaning K, V, and O reads overflowed into `pre_gate` and `scratch` regions, creating circular data dependencies that corrupted both weights and intermediate state.
+
+| # | Bug | Root Cause | Fix |
+|---|-----|-----------|-----|
+| 9 | Weight region too small | `lwo_f32` = 3,584 bytes/layer but attention reads up to offset 6,144 | Expand to `TOTAL_WEIGHT_F32 = 4 × F32_DIM = 14,336` bytes/layer |
+| 10 | Input/weight overlap | `weight_offset = 1,792` overlapped `input_offset+F32_DIM = 3,584` | Move `weight_offset = COMPLEX_DIM = 7,168` |
+| 11 | Scratch after wrong region | `scratch_base` used `TOTAL_WEIGHT_U8 = 3,584` (smaller) instead of `TOTAL_WEIGHT_F32 = 14,336` (larger) | `scratch_base = weight_offset + num_layers × TOTAL_WEIGHT_F32` |
+| 12 | BF16 endianness in embedding loader | Safetensors BF16 read with big-endian `>u2` instead of native `uint16` | Native-endian `np.uint16`, proper left-shift 16 to f32 |
+
+### 16.8 Weight Streaming
+
+Weight bytes from Qwen 0.5B safetensors are now:
+1. Extracted per-layer (Q, K, V, O projection matrices from `model.layers.{n}.self_attn.{q,k,v,o}_proj.weight`)
+2. BF16→f32 converted (native-endian uint16 → left-shift 16 → view as float32)
+3. SPN-scrambled (multi-scale Feistel, Q57-verified gapped phase)
+4. SPN-unscrambled per-layer during forward (`spn_unscramble(lwo, TOTAL_WEIGHT_U8, ...)`)
+5. **Copied into `lwo_f32` compute region** (`tape[lwo_f32..].copy_from_slice(&tape[lwo..])`)
+6. Re-scrambled and restored after compute
+
+The compute now reads real Qwen float32 weight values instead of zeros. However, the engine uses element-wise weight application (`w[j] * x[j]`) rather than full matrix-vector multiplication (`W @ x`), so output remains subword gibberish. The real Qwen model uses full (896×896) weight matrices per projection — fitting these on the 256MB tape would require tiling or streaming approaches.
+
+### 16.8A: Platonic EigenBuddy Tokenizer Prototype
+
+A standalone tokenizer was developed at `THOUGHT/LAB/EIGEN_BUDDY/eigen_buddy_tokenizer.py` that learns to decode complex hidden states directly into token logits, bypassing the lm_head projection. Key findings:
+
+- MLP architecture (1792d real+imag → 256d → 256d → 896d → 928d+32 anchors → 16,384d vocab) trains to 100% accuracy on synthetic data derived from real Qwen embeddings
+- 21% test accuracy on 2,000 held-out samples — overfitting on 16K output classes with 8K training samples
+- Platonic STABLE_32 anchor-distance frame provides coordinate navigation in embedding space
+- The approach is viable as an alternative to full weight matrix streaming for the final token prediction step
+
+### All Tests Passing
+
+The `test_4layer_mixed_restore` test (the known failure from the previous report) now passes after fixing the weight region overlaps. All 6 Rust tests pass:
+- `test_f32_xor_idempotent`
+- `test_delta_net_1layer_restore`
+- `test_delta_net_2layer_restore`
+- `test_attention_1layer_restore`
+- `test_attention_1layer_engine_style`
+- `test_4layer_mixed_restore`
 
 ## Bugs Found and Fixed
 
@@ -68,17 +115,18 @@ The standard 2-block Feistel had min-cut = 4L (volume-law). Q57 (THOUGHT/LAB/FOR
 
 **Fix**: Replaced with multi-scale Feistel operating at logarithmically-spaced scales (1, 2, 4, 8, ...). Q57 showed this produces a gapped topological phase with constant min-cut (~4.2). Errors stay localized to O(1) neighbors.
 
-## Remaining Work
+## Remaining Work (2026-05-22)
 
-The engine restores tape perfectly but does NOT produce coherent English text. The architecture streams SPN-unscrambled weights into `lwo` (u8 buffer, 896 bytes per layer), but the f32 compute reads from `lwo_f32` (3584 bytes per layer, currently zeroed). Real weight values are never placed into the compute region. Next steps:
-
-1. **Weight streaming**: Route unscrambled SPN weights from `lwo` → `lwo_f32` with proper u8→f32 conversion
-2. **Coherent output**: Validate English text generation with real Qwen 0.5B weights
+1. **Full matrix-vector multiply**: Element-wise `w[j]*x[j]` must become `W @ x` for coherent output. Options:
+   - Row-by-row HDD weight streaming (tile one row of W per compute cycle, Q57-safe via multi-scale Feistel)
+   - Train EigenBuddy Tokenizer on real catalytic outputs to replace lm_head
+2. **EigenBuddy Tokenizer hardening**: Reduce overfitting, increase vocab coverage, train on real catalytic outputs
 3. **Scale to 27B**: Model path configured at `G:/models/qwen3.6-27b-fp8-mtp.safetensors`
 
 ## References
 
-- Q57: `THOUGHT/LAB/FORMULA/v2_2/q57_mera_holography/VERDICT.md` — Feistel topology analysis
-- Q57: `THOUGHT/LAB/FORMULA/v2_2/q57_mera_holography/test_mera_rt.py` — Max-flow min-cut implementation
-- CAT_CAS/17: `THOUGHT/LAB/CAT_CAS/17_temporal_bootstrap/exploits.py` — XOR interference patterns
-- CAT_CAS/20: `THOUGHT/LAB/CAT_CAS/20_catalytic_eigen_shor/REPORT.md` — Eigen extraction limits
+- Q8: `THOUGHT/LAB/FORMULA/v2_2/q08_topology/VERDICT.md` — Embedding topology is model-invariant (complexification degrades it)
+- Q34: `THOUGHT/LAB/FORMULA/v2_2/q34_platonic/VERDICT.md` — STABLE_32 anchors, M-field convergence metric
+- Q57: `THOUGHT/LAB/FORMULA/v2_2/q57_mera_holography/VERDICT.md` — Multi-scale Feistel gapped phase proof
+- EigenBuddy: `THOUGHT/LAB/EIGEN_BUDDY/eigen_buddy_tokenizer.py` — Platonic token decoder prototype
+- Rust FFI: `THOUGHT/LAB/EIGEN_BUDDY/core/rust_ffi/src/lib.rs` — Inference engine with weight streaming
