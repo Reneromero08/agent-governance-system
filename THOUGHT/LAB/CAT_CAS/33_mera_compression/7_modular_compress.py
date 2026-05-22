@@ -181,7 +181,7 @@ def compress_holo_modular(holo_dict, modules, rotation_threshold=0.5, quant_bits
         wt = None
 
         # Determine weight type from key
-        for tag_candidate in ('layers', 'blocks'):
+        for tag_candidate in ('layers', 'blocks', 'blk'):
             if tag_candidate in parts:
                 idx = parts.index(tag_candidate)
                 try: int(parts[idx + 1])
