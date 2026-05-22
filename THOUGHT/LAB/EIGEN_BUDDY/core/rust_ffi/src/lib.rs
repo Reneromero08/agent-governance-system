@@ -1369,14 +1369,15 @@ fn catalytic_inference_step<'py>(
         }
     }
 
-    let max_dim = HIDDEN_DIM;
     let mut best_token: u8 = 0;
+    let mut hidden_state_save: Vec<u8> = Vec::new();
     let work_end = (warm_tape_offset + WARM_TAPE_SLOTS * warm_tape_stride).min(tape.len());
 
     if let Some(slot) = cache_slot {
         warm_hit = true;
         let slot_base = warm_tape_offset + slot * warm_tape_stride;
         let cache_out = slot_base + 4;  // output starts after 4-byte hash
+        let cached_hidden: Vec<u8> = tape[cache_out .. cache_out + COMPLEX_DIM].to_vec();
         for j in 0..COMPLEX_DIM {
             let cached = tape[cache_out + j];
             total_entropy += cached.count_ones() as u64;
@@ -1392,6 +1393,7 @@ fn catalytic_inference_step<'py>(
         for j in 0..COMPLEX_DIM {
             tape[input_offset + j] ^= tape[cache_out + j];
         }
+        hidden_state_save = cached_hidden;
     } else {
         // COLD MISS: full layer stack (f32 tape)
         // Hash checkpoints: capture hash before each forward layer
@@ -1590,6 +1592,8 @@ fn catalytic_inference_step<'py>(
             if s > best_score_f32 { best_score_f32 = s; best_token = j as u8; }
         }
 
+        hidden_state_save = tape[input_offset .. input_offset + COMPLEX_DIM].to_vec();
+
         // Uncompute: reverse each layer (f32)
         // Uncompute: reverse each layer (f32)
         for layer_idx in (0..num_layers).rev() {
@@ -1786,13 +1790,11 @@ fn catalytic_inference_step<'py>(
         format!("{:x}", h.finalize())
     };
 
-    // Cache write: AFTER hash computation
+    // Cache write: AFTER hash computation — use captured hidden state (NOT post-restore tape)
     if !warm_hit {
         let slot_base = warm_tape_offset + ((emb_hash as usize) % WARM_TAPE_SLOTS) * warm_tape_stride;
         tape[slot_base..slot_base + 4].copy_from_slice(&emb_hash_bytes);
-        for j in 0..max_dim * 2 {
-            tape[slot_base + 4 + j] ^= tape[input_offset + j];
-        }
+        tape[slot_base + 4 .. slot_base + 4 + COMPLEX_DIM].copy_from_slice(&hidden_state_save);
     }
 
     let result = pyo3::types::PyDict::new_bound(py);
@@ -1806,6 +1808,7 @@ fn catalytic_inference_step<'py>(
     let work_end = (warm_tape_offset + WARM_TAPE_SLOTS * warm_tape_stride).min(tape.len());
     let work_slice = &tape[..work_end];
     result.set_item("working_region", PyBytes::new_bound(py, work_slice))?;
+    result.set_item("hidden_state", PyBytes::new_bound(py, &hidden_state_save))?;
     Ok(result.into())
 }
 

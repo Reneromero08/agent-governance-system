@@ -69,11 +69,18 @@ Run inference on a Qwen 0.5B model using zero bytes of dynamic system RAM for mo
 - [x] 16.8A PLATONIC EIGENBUDDY TOKENIZER: prototype decoder trained on Qwen embedding table
 - [ ] Coherent output — weight streaming active but compute uses element-wise w[j]*x[j], not full W@x
 
-#### 16.9 — COHERENT OUTPUT  ⬜
-- [ ] Weight streaming active, real Qwen weights in lwo_f32 — but output still subword gibberish
-- [ ] Root cause: compute uses diagonal (element-wise w[j]*x[j]) instead of full matrix-vector multiply
-- [ ] EigenBuddy Tokenizer prototype shows MLR decoding from embedding space is viable (100% train acc)
-- [ ] Next: either implement row-by-row HDD weight tiling (Q57 multi-scale Feistel safe) or train EigenBuddy on real catalytic outputs
+#### 16.9 — COHERENT OUTPUT  🟡 IN PROGRESS (EigenBuddy path)
+
+- [x] Warm cache fixed: stores pre-uncompute hidden state (COMPLEX_DIM bytes), overwrite on collision
+- [x] Hidden state collection working: 500 tokens, 16 unique targets, 80 cold-miss samples, NaN-free
+- [x] EigenBuddy trains to 100% on real catalytic data (8 classes from 40 cold-miss samples, normalized inputs)
+- [x] Engine output capped at 16 unique tokens: output head reads only 64 f32 positions from XOR'd tape
+- [ ] BLOCKER: Without full W@x matrix multiply, hidden state is XOR'd substrate + embedding + layer outputs, not clean f32. lm_head produces garbage. EigenBuddy limited to 16-class token space.
+
+**Decision needed:**
+- Path A: Implement full W@x dot-product in DeltaNet (w[j]*x[j] -> sum(W[i,:] * x)), HDD row-by-row tiling
+- Path B: Accept 16-class limitation, train EigenBuddy as compressed semantic decoder
+- Path C: Expand engine output head from 64 to 896 positions, increase unique tokens to ~64
 
 #### 16.10 — VALIDATION & HARDENING  ⬜
 
@@ -102,21 +109,29 @@ Run inference on a Qwen 0.5B model using zero bytes of dynamic system RAM for mo
 | 9 | Weight region buffer overflow | lwo_f32 too small for attention Q/K/V/O reads (1536×4 = 6144 > 3584), overlapping pre_gate | Expand to TOTAL_WEIGHT_F32 = 14,336 bytes/layer, move weight_offset to COMPLEX_DIM |
 | 10 | Input/weight overlap | weight_offset = 1792 overlapped input Y channel at byte 3584 | weight_offset = COMPLEX_DIM = 7168 |
 | 11 | Scratch base after wrong region | scratch_base used TOTAL_WEIGHT_U8 = 3584 instead of TOTAL_WEIGHT_F32 = 14336 | scratch_base = weight_offset + num_layers * TOTAL_WEIGHT_F32 |
-| 12 | BF16→f32 endianness | Safetensors BF16 read with big-endian `>u2` instead of native `uint16` | Native-endian `np.uint16`, proper left-shift 16 to f32
+| 12 | BF16->f32 endianness | Safetensors BF16 read with big-endian `>u2` instead of native `uint16` | Native-endian `np.uint16`, proper left-shift 16 to f32
+
+### Fixed (2026-05-22 — Agent Resume)
+
+| # | Bug | Root Cause | Fix |
+|---|-----|-----------|-----|
+| 13 | Warm cache stores garbage | Cache write after uncompute+embedding clear stored restored tape (zeroes). Only 1792/7168 bytes. | Save hidden_state_save after forward, write full COMPLEX_DIM to cache after hash. Overwrite not XOR. |
+| 14 | Hidden state NaN in Python | XOR'd f32 bytes decode to NaN/Inf IEEE 754 patterns | np.nan_to_num() on both real/imag channels |
 
 ### Current Performance (2026-05-22)
 
 | Metric | Value | Status |
 |:---|---:|:---|
-| Tokens/second | 2.74 | 🟡 |
+| Tokens/second | 2.94 | 🟡 |
 | Tape restoration | 100% (50/50) | 🟢 |
 | DeltaNet layers restored | 36/36 | 🟢 |
 | Attention layers restored | 12/12 | 🟢 |
-| Warm-hit rate | 70% | 🟢 |
+| Warm-hit rate | 82% | 🟢 |
 | RAM for weights | 0 bytes | 🟢 |
-| Real embeddings | Yes (151,936 × 896) | 🟢 |
-| Real Qwen weights in lwo_f32 | Yes (BF16→f32, Q/K/V/O) | 🟢 |
-| F32 precision | Yes | 🟢 |
+| Real embeddings | Yes (151,936 x 896) | 🟢 |
+| Real Qwen weights in lwo_f32 | Yes (BF16->f32, Q/K/V/O) | 🟢 |
+| Warm cache correct | Yes (COMPLEX_DIM bytes, pre-uncompute) | 🟢 |
+| Hidden state collection | Yes (200 tokens, 16 unique, NaN-free) | 🟢 |
 | Coherent output | No (element-wise w[j]*x[j], not W@x) | 🔴 |
 | Rust tests passing | 6/6 | 🟢 |
-| EigenBuddy Tokenizer | Prototype trained, 100% train acc, 21% test | 🟡 |
+| EigenBuddy Tokenizer | Prototype trained, 100% train acc, 21% test on synthetic | 🟡 |

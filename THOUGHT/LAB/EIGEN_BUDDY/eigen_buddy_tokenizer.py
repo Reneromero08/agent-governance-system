@@ -524,22 +524,100 @@ def evaluate_platonic_convergence(
 # Main: self-contained training and evaluation
 # ===========================================================================
 
+def load_catalytic_data(data_path: str, device: str = 'cpu') -> Tuple[List[torch.Tensor], torch.Tensor, int]:
+    """Load real catalytic hidden states and convert to EigenBuddy training format.
+
+    Args:
+        data_path: Path to .pt file from collect_hidden_states.py
+
+    Returns:
+        inputs: List of (1, 1, D) complex tensors
+        targets: (N,) long tensor of token IDs
+        num_classes: Number of unique target classes
+    """
+    data = torch.load(data_path, weights_only=True)
+
+    states_real = data['states_real']  # (N, D) float32
+    states_imag = data['states_imag']  # (N, D) float32
+    targets = data['targets']          # (N,) int64
+
+    # Replace any remaining NaN/Inf and CLAMP extreme values
+    states_real = torch.nan_to_num(states_real, nan=0.0, posinf=0.0, neginf=0.0)
+    states_imag = torch.nan_to_num(states_imag, nan=0.0, posinf=0.0, neginf=0.0)
+
+    # Normalize: XOR'd f32 bytes can span full f32 range (-3.4e38 to +3.4e38).
+    # Scale to [-1, 1] using per-channel max absolute value.
+    max_abs_real = states_real.abs().max()
+    max_abs_imag = states_imag.abs().max()
+    if max_abs_real > 0:
+        states_real = states_real / max_abs_real
+    if max_abs_imag > 0:
+        states_imag = states_imag / max_abs_imag
+
+    N, D = states_real.shape
+    num_classes = len(set(targets.tolist()))
+
+    print(f"  Loaded {N} samples, {D} dims, {num_classes} unique classes")
+    print(f"  Real range (normalized): [{states_real.min():.4e}, {states_real.max():.4e}]")
+    print(f"  Imag range (normalized): [{states_imag.min():.4e}, {states_imag.max():.4e}]")
+
+    # Filter to cold-miss samples only (real compute, not cached)
+    if 'cold_mask' in data:
+        cold_mask = data['cold_mask']
+        n_cold = cold_mask.sum().item()
+        print(f"  Cold-miss samples: {n_cold}/{N}")
+        if n_cold > 0:
+            states_real = states_real[cold_mask]
+            states_imag = states_imag[cold_mask]
+            targets = targets[cold_mask]
+            N = n_cold
+            num_classes = len(set(targets.tolist()))
+            print(f"  Using {N} cold-miss samples, {num_classes} unique classes")
+
+    # Convert to complex (B, 1, D) format
+    inputs = []
+    for i in range(N):
+        z = torch.complex(states_real[i], states_imag[i])
+        inputs.append(z.unsqueeze(0).unsqueeze(0))  # (1, 1, D)
+
+    return inputs, targets, num_classes
+
+
+# ===========================================================================
+# Main: self-contained training and evaluation
+# ===========================================================================
+
 def main():
+    import argparse
+    parser = argparse.ArgumentParser(description='EigenBuddy Tokenizer training')
+    parser.add_argument('--data', type=str, default=None,
+                        help='Path to catalytic_hidden_states.pt for real data training')
+    parser.add_argument('--epochs', type=int, default=50,
+                        help='Training epochs (default: 50 for real data, 10 for synthetic)')
+    parser.add_argument('--lr', type=float, default=1e-4,
+                        help='Learning rate')
+    parser.add_argument('--patience', type=int, default=10,
+                        help='Early stopping patience')
+    args = parser.parse_args()
+
     print("=" * 70)
-    print("PLATONIC EIGENBUDDY TOKENIZER — Prototype")
-    print("  Decoding the Platonic manifold into coherent tokens")
+    print("PLATONIC EIGENBUDDY TOKENIZER")
+    if args.data:
+        print("  Training on REAL catalytic hidden states")
+    else:
+        print("  Training on SYNTHETIC perturbed embeddings")
     print("=" * 70)
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     print(f"\n  Device: {device}")
     
-    # Load Qwen embedding table
+    # Load Qwen embedding table (needed for STABLE_32 anchors)
     print("\n--- Loading Qwen Embeddings ---")
     model_dir = Path(__file__).parent.parent / "CAT_CAS" / "16_catalytic_27b_inference" / "gemini_update" / "qwen_0.5b"
-    
+
     embed_path = model_dir / "model.safetensors"
     tokenizer_path = model_dir / "tokenizer.json"
-    
+
     if not embed_path.exists():
         print(f"  [SKIP] Model not found at {embed_path}")
         print("  Running with synthetic embeddings")
@@ -555,41 +633,39 @@ def main():
             header_size = struct.unpack("<Q", mm[:8])[0]
             header = json.loads(mm[8:8+header_size].decode('utf-8'))
             mm.close()
-        
+
         einfo = header.get("model.embed_tokens.weight", {})
         start, end = einfo['data_offsets']
         shape = einfo['shape']
         vocab_size, dim = int(shape[0]), int(shape[1])
         edtype = einfo.get("dtype", "F32")
-        
+
         with open(embed_path, 'rb') as f:
             f.seek(8 + header_size + start)
             ebytes = f.read(end - start)
-        
-        # BF16→f32: read as uint16 native endian, shift left 16 to f32
+
         if edtype == "BF16":
             embeddings = np.frombuffer(ebytes, dtype=np.uint16)
             embeddings = embeddings.astype(np.uint32) << 16
             embed_table = torch.from_numpy(embeddings.view(np.float32).reshape(vocab_size, dim).copy())
         else:
             embed_table = torch.from_numpy(np.frombuffer(ebytes, dtype=np.float32).reshape(vocab_size, dim).copy())
-        del embeddings  # free memory
-        
+        del embeddings
+
         DIM = dim
+        FULL_VOCAB_SIZE = vocab_size
+
+        embed_table = embed_table[:min(vocab_size, 16384)]
         VOCAB_SIZE = min(vocab_size, 16384)
-        
-        # Fix NaN rows by replacing with random
-        embed_table = embed_table[:VOCAB_SIZE]
         nan_mask = torch.isnan(embed_table).any(dim=1)
         if nan_mask.any():
             n_bad = nan_mask.sum().item()
             print(f"  Fixing {n_bad} NaN embedding rows with random replacement")
             bad_idx = torch.where(nan_mask)[0]
             embed_table[bad_idx] = torch.randn(n_bad, DIM) * embed_table[~nan_mask].std(dim=0).mean() * 0.1
-        
-        print(f"  Loaded: {vocab_size} tokens × {dim} dim (using top {VOCAB_SIZE} for training)")
-        
-        # Load tokenizer vocab
+
+        print(f"  Loaded: {vocab_size} tokens x {dim} dim (using top {VOCAB_SIZE} for anchor bank)")
+
         token_ids = {}
         if tokenizer_path.exists():
             with open(tokenizer_path, 'rb') as f:
@@ -603,7 +679,85 @@ def main():
         else:
             token_ids = {w: i for i, w in enumerate(STABLE_32)}
         print(f"  STABLE_32 anchors in truncated vocab: {sum(1 for w in STABLE_32 if w in token_ids)}/32")
-    
+
+    # Build or load training data
+    if args.data:
+        # --- REAL CATALYTIC DATA PATH ---
+        print(f"\n--- Loading Real Catalytic Data: {args.data} ---")
+        inputs, targets, num_classes = load_catalytic_data(args.data, device='cpu')
+        N = len(inputs)
+
+        # Remap targets to 0..num_classes-1
+        unique_tokens = sorted(set(targets.tolist()))
+        token_to_idx = {t: i for i, t in enumerate(unique_tokens)}
+        targets_remapped = torch.tensor([token_to_idx[t.item()] for t in targets], dtype=torch.long)
+        print(f"  Remapped targets: {num_classes} classes (original tokens: {unique_tokens[:10]}...)")
+
+        # Split train/test
+        split = int(N * 0.8)
+        train_in, test_in = inputs[:split], inputs[split:]
+        train_tgt, test_tgt = targets_remapped[:split], targets_remapped[split:]
+        print(f"  Train: {len(train_in)}, Test: {len(test_in)}")
+
+        # Build model with num_classes output head
+        print(f"\n--- Building EigenBuddy (d={DIM}, classes={num_classes}) ---")
+        model = EigenBuddyTokenizer(
+            dim=DIM,
+            vocab_size=num_classes,
+            eigen_layers=2,
+            eigen_heads=max(2, DIM // 56),
+        )
+        model.set_anchor_bank(embed_table, token_ids)
+        params = sum(p.numel() for p in model.parameters())
+        print(f"  Params: {params:,}")
+
+        # Train
+        print(f"\n--- Training on Real Catalytic Data ---")
+        history = train_eigen_buddy(
+            model, train_in, train_tgt, embed_table,
+            epochs=args.epochs, batch_size=min(32, len(train_in)),
+            lr=args.lr, device=device,
+        )
+
+        # Evaluate
+        print(f"\n--- Evaluation ---")
+        results = evaluate_platonic_convergence(model, test_in, test_tgt, device=device)
+        print(f"\n{'='*70}")
+        print(f"RESULTS (Real Catalytic Data)")
+        print(f"{'='*70}")
+        print(f"  Top-1 accuracy:  {results['top1_acc']:.4f} ({results['top1_correct']}/{results['total']})")
+        print(f"  Top-5 accuracy:  {results['top5_acc']:.4f}")
+        print(f"  Mean M-field:    {results['mean_mfield']:.4f}")
+        print(f"  Final loss:      {history['loss'][-1]:.4f}")
+        print(f"  Final train acc: {history['acc'][-1]:.4f}")
+
+        # Save with token mapping
+        save_path = Path(__file__).parent / "weights" / "eigen_buddy_catalytic.pt"
+        save_path.parent.mkdir(exist_ok=True)
+        save_results = {}
+        for k, v in results.items():
+            if isinstance(v, (int, float, str, bool)):
+                save_results[k] = v
+            elif isinstance(v, torch.Tensor):
+                save_results[k] = v.item() if v.numel() == 1 else v.tolist()
+        torch.save({
+            'model_state': model.state_dict(),
+            'dim': DIM,
+            'num_classes': num_classes,
+            'token_mapping': unique_tokens,
+            'token_to_idx': token_to_idx,
+            'history': history,
+            'results': save_results,
+        }, save_path)
+        print(f"  Saved to {save_path}")
+        print(f"\n{'='*70}")
+        print(f"REAL DATA TRAINING COMPLETE")
+        print(f"  Next: integrate into experiment.py as token decoder")
+        print(f"  Model: weights/eigen_buddy_catalytic.pt")
+        print(f"{'='*70}")
+        return
+
+    # --- SYNTHETIC DATA PATH (fallback) ---
     print(f"\n--- Building EigenBuddy (d={DIM}, vocab={VOCAB_SIZE}) ---")
     
     # Scale model to embedding size
