@@ -1,0 +1,3 @@
+# Large model artifacts (generated, not versioned)
+*.holo
+_models/

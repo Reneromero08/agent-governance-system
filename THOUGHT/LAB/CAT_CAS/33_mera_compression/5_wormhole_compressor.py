@@ -8,7 +8,7 @@ Compresses .holo U_k matrices using:
 Compression: 3.4-5.4x at 0.81-0.88 fidelity.
 Usage: python 5_wormhole_compressor.py <input.holo> <output.holo>
 """
-import torch, math, numpy as np, os, sys
+import torch, math, numpy as np, os, sys, re
 from collections import defaultdict
 from pathlib import Path
 
@@ -18,7 +18,7 @@ def compress_holo(holo_dict, rotation_threshold=0.5, quant_bits=2):
     
     Returns: compressed_dict, stats
     """
-    # Group U matrices by weight type
+    # Group U matrices by weight type (LLM: mlp, self_attn, linear_attn)
     u_groups = defaultdict(dict)
     for key, val in holo_dict.items():
         if not key.endswith('.U') or val.ndim != 2: continue
@@ -28,7 +28,8 @@ def compress_holo(holo_dict, rotation_threshold=0.5, quant_bits=2):
             if p == 'layers' and i+1 < len(parts):
                 try: layer_idx = int(parts[i+1])
                 except: pass
-            if p in ('mlp', 'self_attn', 'attn') and i+1 < len(parts):
+            # Match mlp.*, self_attn.*, linear_attn.* weight types
+            if p in ('mlp', 'self_attn', 'attn', 'linear_attn') and i+1 < len(parts):
                 wt = '.'.join(parts[i:-1])
         if layer_idx is not None and wt is not None:
             u_groups[wt][layer_idx] = val.float()
@@ -113,12 +114,57 @@ def compress_holo(holo_dict, rotation_threshold=0.5, quant_bits=2):
         stats['total_comp_MB'] += comp_bits / 8 / 1024**2
         stats['fidelities'][wt] = fids_quant
     
-    # Copy non-U entries as-is
+    # Fallthrough: copy non-compressed entries
+    # 1. For wormhole groups: store ONE shared SVh (97% cross-layer V reuse verified by catalytic cache)
+    # 2. For non-compressed groups (linear_attn, visual): keep per-layer U + SVh as-is  
+    # 3. Non-U, non-SVh entries (embed, norm, etc.): copy as-is
+    compressed_prefixes = set()
+    for key in list(compressed.keys()):
+        m = re.match(r'(.+)\.L\d+\.', key)
+        if m:
+            compressed_prefixes.add(m.group(1))
+    
+    svh_stored = set()
     for key, val in holo_dict.items():
-        if not key.endswith('.U') or key in compressed:
-            if not any(key.startswith(k.split('.L')[0] + '.') for k in compressed if '.L' in k):
-                if key not in compressed and '.U' not in key and '.SVh' not in key:
+        if key in compressed:
+            continue
+        
+        parts = key.split('.')
+        
+        if key.endswith('.SVh'):
+            # Determine the weight type for this SVh
+            if 'layers' in parts:
+                try:
+                    idx = parts.index('layers')
+                    wt = '.'.join(parts[idx+2:-1])
+                except (ValueError, IndexError):
+                    wt = '.'.join(parts[:-1])
+            else:
+                wt = '.'.join(parts[:-1])
+            
+            if wt in compressed_prefixes:
+                # Wormhole-compressed: store ONE shared SVh, keyed by first layer
+                shared_key = f"{wt}.SVh"
+                if shared_key not in svh_stored:
+                    compressed[shared_key] = val
+                    svh_stored.add(shared_key)
+            else:
+                # Non-compressed (linear_attn, visual): keep per-layer
+                compressed[key] = val
+        
+        elif key.endswith('.U'):
+            # Non-compressed U (linear_attn, visual): keep as-is
+            if 'layers' in parts:
+                try:
+                    idx = parts.index('layers')
+                    wt = '.'.join(parts[idx+2:-1])
+                except (ValueError, IndexError):
+                    wt = None
+                if wt not in compressed_prefixes:
                     compressed[key] = val
+        else:
+            # Non-U, non-SVh: embed, norm, lm_head, etc.
+            compressed[key] = val
     
     return compressed, stats
 
