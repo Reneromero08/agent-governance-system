@@ -309,59 +309,175 @@ def distill_module(module_name, safetensors_files, output_path, rank_k=RANK_K):
     return holo, total_time, misses, hits
 
 
+def compress_to_holo(W, k=RANK_K):
+    """Compress weight matrix to .holo format via randomized SVD."""
+    with torch.no_grad():
+        U, S, Vh = randomized_svd(W.float(), k)
+        SVh = S.unsqueeze(1) * Vh
+    return U.half(), SVh.half()
+
+
 def run_full_distill():
-    """Distill all modules from DeepSeek V4 Flash."""
+    """Distill all modules from DeepSeek V4 Flash — SINGLE PASS per shard."""
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     
-    print(f"DeepSeek V4 Flash Distiller — Modular + Wormhole")
-    print(f"Model: {MODEL_DIR}")
-    print(f"Output: {OUTPUT_DIR}")
-    print(f"Rank: {RANK_K} | Device: {DEVICE} | Rand SVD q={N_POWER_ITER}")
+    print(f"DeepSeek V4 Flash Distiller — Single Pass Multi-Module")
+    print(f"Model: {MODEL_DIR} | Output: {OUTPUT_DIR} | Rank: {RANK_K} | Device: {DEVICE}")
     
-    # Load index
     with open(INDEX_PATH) as f:
         idx = json.load(f)
     wm = idx.get('weight_map', {})
-    
-    # Get ALL safetensors files
     all_files = sorted(set(os.path.join(MODEL_DIR, s) for s in wm.values()))
-    print(f"Safetensors shards: {len(all_files)}")
+    print(f"Shards: {len(all_files)} — SINGLE PASS through each")
     
-    # Distill each module
-    total_time = 0
-    all_stats = {}
+    # Check which modules already have valid .holo files — skip re-distilling those
+    active_modules = {}
+    for m in MODULES:
+        existing = OUTPUT_DIR / f"deepseek_v4_flash_{m}_k{RANK_K}.holo"
+        if existing.exists():
+            try:
+                torch.load(str(existing), map_location='cpu', weights_only=True)
+                print(f"  {m}: already distilled ({existing.stat().st_size/1024**2:.0f} MB) — skipping")
+                continue
+            except:
+                print(f"  {m}: corrupted, re-distilling")
+        active_modules[m] = MODULES[m]
     
-    for mod_name in MODULES:
-        module_holo, dt, misses, hits = distill_module(mod_name, all_files, OUTPUT_DIR)
-        total_time += dt
-        all_stats[mod_name] = {'keys': len(module_holo), 'time': dt, 'misses': misses, 'hits': hits}
+    if not active_modules:
+        print("All modules already distilled. Done.")
+        return
+    
+    # Per-module state for active modules only
+    holo = {m: {} for m in active_modules}
+    cache = {m: {} for m in active_modules}
+    stats = {m: {'misses': 0, 'hits': 0, 'skipped': 0, 'n': 0} for m in active_modules}
+    
+    MODULES_ACTIVE = active_modules  # override for get_module_for_key
+    
+    t0 = time.perf_counter()
+    
+    for si, filepath in enumerate(all_files):
+        fn = os.path.basename(filepath)
+        print(f"\n[{si+1}/{len(all_files)}] {fn}")
         
-        out_path = OUTPUT_DIR / f"deepseek_v4_flash_{mod_name}_k{RANK_K}.holo"
-        torch.save(module_holo, str(out_path))
-        gb = os.path.getsize(out_path) / 1024**3
-        print(f"  Saved: {out_path.name} ({gb:.2f} GB)")
+        with safe_open(filepath, framework='pt', device='cpu') as f:
+            keys = sorted(f.keys())
+            
+            for key in keys:
+                if not key.endswith('.weight'):
+                    continue
+                
+                module_name = get_module_for_key(key)
+                if module_name not in active_modules:
+                    continue  # skip keys for already-distilled modules
+                
+                st = stats[module_name]
+                st['n'] += 1
+                ts = time.perf_counter()
+                
+                # Load tensor
+                try:
+                    t = f.get_tensor(key)
+                except:
+                    st['skipped'] += 1
+                    continue
+                
+                if t.ndim != 2:
+                    st['skipped'] += 1
+                    continue
+                
+                # INT8 dequant for expert weights
+                try:
+                    info = f.get_slice(key)
+                    if str(info.get_dtype()) == 'I8':
+                        raw = info[:]
+                        import numpy as np
+                        arr = np.frombuffer(raw.tobytes() if hasattr(raw, 'tobytes') else bytes(raw), dtype=np.int8)
+                        t = torch.from_numpy(arr.astype(np.float32).copy()).reshape(tuple(int(x) for x in info.get_shape()))
+                        scale_key = key.replace('.weight', '.scale')
+                        try:
+                            s_raw = f.get_slice(scale_key)[:]
+                            s_arr = np.frombuffer(s_raw.tobytes() if hasattr(s_raw, 'tobytes') else bytes(s_raw), dtype=np.float32)
+                            sv = s_arr.reshape(-1)
+                            if sv.shape[0] == 1:
+                                t = t * float(sv[0])
+                            else:
+                                t = t * torch.from_numpy(sv).float()
+                        except:
+                            pass
+                except:
+                    pass
+                
+                wt = extract_weight_type(key, module_name)
+                ch = cache[module_name]
+                kind = "HIT" if wt in ch else "MISS"
+                
+                if kind == "MISS":
+                    st['misses'] += 1
+                    Uk, SVh = compress_to_holo(t, RANK_K)
+                    ch[wt] = SVh
+                else:
+                    st['hits'] += 1
+                    SVh_cache = ch[wt].float()
+                    U_raw = t.float() @ SVh_cache.T
+                    U, _ = torch.linalg.qr(U_raw)
+                    Uk = U[:, :RANK_K].half()
+                    SVh = SVh_cache.half()
+                
+                holo[module_name][f"{key}.U"] = Uk
+                holo[module_name][f"{key}.SVh"] = SVh
+                
+                dt = time.perf_counter() - ts
+                if dt > 2 or st['n'] % 500 == 0:
+                    total_n = sum(s['n'] for s in stats.values())
+                    total_m = sum(s['misses'] for s in stats.values())
+                    total_h = sum(s['hits'] for s in stats.values())
+                    elapsed = time.perf_counter() - t0
+                    print(f"  [{total_n}] {wt}: {kind} {dt:.1f}s | "
+                          f"misses={total_m} hits={total_h} | {elapsed:.0f}s")
     
-    # Embed config for self-containment
+    total_time = time.perf_counter() - t0
+    
+    # Save each module
+    print(f"\n{'='*60}")
+    print(f"Single-pass complete: {total_time:.0f}s")
+    print(f"{'='*60}")
+    
+    # Delete old corrupted files
+    for m in MODULES:
+        old = OUTPUT_DIR / f"deepseek_v4_flash_{m}_k{RANK_K}.holo"
+        if old.exists() and m == 'experts':
+            try:
+                torch.load(str(old), map_location='cpu', weights_only=True)
+                print(f"  {m}: keeping valid file")
+            except:
+                print(f"  {m}: removing corrupted file, will save fresh")
+                old.unlink(missing_ok=True)
+    
+    for m in list(holo.keys()):
+        d = holo[m]
+        if not d:
+            continue
+        out = OUTPUT_DIR / f"deepseek_v4_flash_{m}_k{RANK_K}.holo"
+        # Atomic save: write to temp, then rename
+        tmp = str(out) + ".tmp"
+        torch.save(d, tmp)
+        os.replace(tmp, str(out))
+        gb = os.path.getsize(out) / 1024**3
+        s = stats[m]
+        print(f"  {m:<15}: {len(d):>6} keys, {gb:.2f} GB | "
+              f"misses={s['misses']}, hits={s['hits']} ({100*s['hits']/max(1,s['misses']+s['hits']):.0f}%)")
+    
+    # Embed config
     config_path = os.path.join(MODEL_DIR, 'config.json')
     if os.path.exists(config_path):
         with open(config_path) as f:
-            config = json.load(f)
-        config_holo = {'_config': json.dumps(config).encode('utf-8')}
-        torch.save(config_holo, str(OUTPUT_DIR / "deepseek_v4_flash_config.holo"))
+            torch.save({'_config': json.dumps(json.load(f)).encode('utf-8')},
+                      str(OUTPUT_DIR / "deepseek_v4_flash_config.holo"))
     
-    # Summary
-    print(f"\n{'='*60}")
-    print(f"Distillation Complete: {total_time:.0f}s total")
-    print(f"{'='*60}")
-    for mod, s in all_stats.items():
-        print(f"  {mod:<15}: {s['keys']:>6} keys, {s['time']:>6.0f}s, "
-              f"hits={s['hits']}, misses={s['misses']}")
-    
-    # Total size
     total_gb = sum(os.path.getsize(str(OUTPUT_DIR / f)) / 1024**3
-                   for f in os.listdir(OUTPUT_DIR) if f.endswith('.holo'))
-    print(f"\n  Total output: {total_gb:.2f} GB")
-    print(f"  Output: {OUTPUT_DIR}")
+                   for f in os.listdir(OUTPUT_DIR) if f.endswith('.holo') and '.tmp' not in f)
+    print(f"\n  Total: {total_gb:.2f} GB in {OUTPUT_DIR}")
 
 
 if __name__ == "__main__":

@@ -20,8 +20,8 @@ import _paths
 
 MODULES = {
     "llm": {
-        "tag": ("layers",),
-        "types": ("mlp", "self_attn", "linear_attn"),
+        "tag": ("layers", "blk"),
+        "types": ("mlp", "self_attn", "linear_attn", "ffn", "attn", "ssm", "nextn"),
     },
     "visual": {
         "tag": ("blocks",),
@@ -42,21 +42,16 @@ def group_u_matrices(holo_dict, modules):
     for key, val in holo_dict.items():
         if not key.endswith('.U') or val.ndim != 2: continue
         parts = key.split('.')
-        layer_idx = None; wt = None
-        ok = False
+        layer_idx = None; wt = None; ok = False
         for mod_name, cfg in modules.items():
             for tag in cfg["tag"]:
+                if not tag: continue
                 if tag in parts:
                     i = parts.index(tag)
                     try: layer_idx = int(parts[i + 1])
                     except: pass
                     for t in cfg["types"]:
-                        if t in parts:
-                            # Extract weight type from tag+2 to .weight
-                            # e.g. model.language_model.layers.0.mlp.down_proj.weight.U
-                            #      tag=layers at idx=2, wt starts at idx=4: mlp.down_proj.weight
-                            # e.g. model.visual.blocks.0.attn.qkv.weight.U
-                            #      tag=blocks at idx=2, wt starts at idx=4: attn.qkv.weight
+                        if t in parts or any(t in p for p in parts):
                             wt = '.'.join(parts[i + 2:-1])
                             ok = True
                             break
