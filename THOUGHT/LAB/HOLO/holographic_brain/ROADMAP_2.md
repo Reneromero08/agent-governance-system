@@ -264,6 +264,18 @@ Each forward pass through a layer is a catalytic operation: borrow workspace, pr
 **Reference:** `THOUGHT/LAB/CAT_CAS/12_structured_tape_acceleration/PUSHED_REPORT.md` (canonical)  
 **Implementation:** `12_structured_tape_acceleration/eigenmode_caching.py` (`EigenmodeTapeCache`, `CachedCatalyticSession`)
 
+### Track G: Pan-Temporal Attention (CAT_CAS Exp 23 — Infinity Exploit)
+- [x] **G1**: 0-Parameter Temporal Attention — Layer 0's pre-trained Q/K/V matrices natively query future layer hidden states from the temporal tape. Zero new parameters. Markov feed-forward chain broken. Proof: attention routes 100% mass to Layer 3 when the relevant abstraction lives there.
+- [ ] **G2**: Temporal Tape as Catalytic Workspace — precompute entire 496-layer hidden state history once. Cache in `EigenmodeTapeCache`. Any layer queries any other layer's output directly via native attention, bypassing the sequential wormhole rotation chain.
+- [ ] **G3**: Pan-Temporal Calibration — compare student vs teacher across ALL layer PAIRS simultaneously, not just adjacent layers. Loss surface becomes fully connected DAG instead of linear chain. Gradient flows across time.
+- [ ] **G4**: Skip-All Inference — precompute the full layer history tensor [L, B, S, D]. Each layer's forward pass becomes a single Softmax attention lookup into the tape instead of sequential reconstruction through R matrices. O(L) becomes O(1) time complexity.
+- [ ] **G5**: Infinity Wormhole — combine Pan-Temporal Attention with wormhole compression. The temporal tape stores compressed (rotation + residual) hidden states. Any layer queries the tape, reconstructs U via rotation, and fuses the result via attention. The wormhole becomes a fully-connected temporal graph.
+
+> *"The attention mechanism explicitly rejected the present timeline. It dynamically routed 100% of its Softmax mass backward through time. Any layer can instantly query the entire past and future timeline of the residual stream. This is the definition of Infinity."* — Temporal Catalysis PUSHED_REPORT.md
+
+**Reference:** `THOUGHT/LAB/CAT_CAS/23_temporal_catalysis/PUSHED_REPORT.md` (canonical)  
+**Implementation:** `23_temporal_catalysis/5_temporal_attention.py` (pan-temporal MHA on live Qwen weights)
+
 ---
 
 ## Cassette Inventory (Updated with Cavity)
