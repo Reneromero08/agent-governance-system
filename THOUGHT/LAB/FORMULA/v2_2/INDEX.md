@@ -2,15 +2,16 @@
 
 **Version:** 2.2.0
 **Date:** 2026-05-17
-**Status:** 57/57 re-prioritized against current build trajectory (Q55, Q56, Q57 added)
+**Status:** 57/57 re-prioritized against current build trajectory (Q57 promoted to Tier 1)
 **Source:** v2
 
 ---
 
-## Tier 1: Paradigm-Shifting (10 Qs)
+## Tier 1: Paradigm-Shifting (13 Qs)
 
 | Q | Hypothesis | Status | Directory |
 |---|-----------|--------|-----------|
+| Q57 | Multi-scale Feistel fabric in gapped/MBL phase: min-cut ≤ R (O(1) in L), error localization, finite correlation length. Standard Feistel = O(L) thermal. Verified at N=4096. | VERIFIED | q57_mera_holography/ |
 | Q32 | Meaning behaves like a physical field | PARTIALLY VERIFIED | q32_meaning_field/ |
 | Q51 | Embedding spaces have intrinsic complex structure | CONFIRMED (boundary) | q51_complex_plane/ |
 | Q48 | Eigenvalue statistics connect to Riemann zeta | CONFIRMED | q48_riemann/ |
@@ -37,7 +38,7 @@
 | Q15 | R has a genuine Bayesian interpretation | OPEN | q15_bayesian/ |
 | Q19 | R correlates with human value agreement | OPEN | q19_value_learning/ |
 
-## Tier 3: Empirical Deepening (10 Qs)
+## Tier 3: Empirical Deepening (12 Qs)
 
 | Q | Hypothesis | Status | Directory |
 |---|-----------|--------|-----------|
@@ -53,7 +54,6 @@
 | Q21 | dR/dt predicts system degradation | PARTIALLY VERIFIED | q21_rate_of_change/ |
 | Q55 | Kuramoto threshold predicts minimum independent heads for phase coherence | PARTIALLY VERIFIED | q55_kuramoto_heads/ |
 | Q56 | Projective measurement merge (Born rule) beats concatenation; O(h^2) cross-terms resist saturation | PARTIALLY VERIFIED | q56_entangled_heads/ |
-| Q57 | Multi-scale Feistel fabric produces gapped (constant min-cut ~4) bulk vs standard Feistel volume-law (min-cut = 4L); topological phase, not CFT | PARTIALLY VERIFIED | q57_mera_holography/ |
 
 ## Tier 4: Theoretical Enrichment (7 Qs)
 
