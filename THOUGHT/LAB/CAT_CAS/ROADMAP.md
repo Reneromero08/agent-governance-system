@@ -91,7 +91,7 @@ This roadmap outlines the milestones for pushing the boundaries of Catalytic Spa
   *   Design a unitary quantum circuit that borrows a register of qubits in a highly entangled superposition.
   *   Perform a catalytic quantum computation on the state space and restore the register to its exact entangled superposition without collapsing the wavefunction.
   *   Verify via quantum state tomography that entanglement with the external system remains 100% intact.
-  *   **Result:** Bell state Q1-Q2 prepared. Q2 borrowed as catalytic tape for computation with Q3 (CZ, Hadamard, Z-rotation, CNOT). All gates unitary — zero measurement. State overlap after restoration: 1.000000. Q3 returned to |0>. Bell entanglement survives intact. The external system (Q1) cannot detect that Q2 was borrowed. Script: `24_quantum_catalytic_entanglement/1_invisible_hand.py`.
+  *   **Result:** Bell state Q1-Q2, Q2 borrowed for computation with Q3. All gates unitary — state overlap 1.000000 after restoration. Scales to GHZ (3-qubit), 5-cycle borrow/restore, multi-qubit borrowing — all overlap=1.0. Catalytic gate implementation (no kron) pushes to 18 qubits (262K state). **Shor's algorithm factors N=15 (3x5) and N=21 (7x3) on catalytic simulator.** Schmidt decomposition proves D_pr = r — the Shor state is compressible by 2^n/r. Phase Cavity extracts exact sub-periods (r_p=2,r_q=4 for N=15). Scripts: `24_quantum_catalytic_entanglement/1_invisible_hand.py` through `7_dpr_scaling.py`.
 
 - [x] **Temporal Catalysis: Retrocausal Activation Borrowing**
   *   Formulate a closed-loop temporal cache where the model's future semantic states are used as the dirty tape to calibrate the current step's SVD projection.
