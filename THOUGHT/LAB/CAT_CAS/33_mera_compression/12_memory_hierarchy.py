@@ -27,6 +27,7 @@ import torch, os, time, threading, queue, mmap
 from collections import defaultdict
 from pathlib import Path
 from dataclasses import dataclass, field
+import _paths
 
 # ---- Tier Definitions ----
 
@@ -413,12 +414,7 @@ if __name__ == "__main__":
     sys.path.insert(0, str(Path(__file__).parent))
     graph_mod = importlib.import_module("9_catalytic_graph_loader")
     
-    base = Path("THOUGHT/LAB/CAT_CAS/33_mera_compression")
-    modules = {
-        "llm":    base / "qwen_27b_llm_cavity_wormhole.holo",
-        "visual": base / "qwen_27b_visual_cavity_wormhole.holo",
-        "aux":    base / "qwen_27b_aux_cavity_wormhole.holo",
-    }
+    modules = _paths.MODULE_PATHS
     
     print("=" * 70)
     print("CATALYTIC MEMORY HIERARCHY -- Saturate the Tape")

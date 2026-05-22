@@ -130,6 +130,70 @@ def process(fp, rk):
                 print(f"    [{n}] {tp}: {kind} {dt:.1f}s")
     return holo, time.perf_counter() - t0, misses, hits
 
+
+def embed_standalone(all_holo, index_path, model_dir):
+    """
+    Embed config + embed tokens + norm weights into .holo so it's
+    fully self-contained — no external model directory needed.
+    """
+    import struct, mmap, numpy as np
+    
+    # 1. Embed config.json
+    config_path = os.path.join(model_dir, 'config.json')
+    if os.path.exists(config_path):
+        with open(config_path, 'r') as f:
+            config = json.load(f)
+        all_holo['_config'] = json.dumps(config).encode('utf-8')
+        print(f"  Config embedded: {len(all_holo['_config'])} bytes")
+    
+    # 2. Read safetensors index for non-Linear params
+    with open(index_path) as f:
+        index_data = json.load(f)
+    wm = index_data.get('weight_map', {})
+    weight_names = list(wm.keys())
+    
+    # Embed tokens, norms, biases, and lm_head (non-decomposable params)
+    embed_patterns = ['embed_tokens', 'norm', 'bias', 'lm_head']
+    skip_if_linear = ['weight']  # Don't embed Linear weights (already decomposed)
+    
+    loaded = 0
+    files_read = set()
+    
+    for name in weight_names:
+        # Check if this is an embed/norm/bias key (not already in holo)
+        is_target = any(p in name for p in embed_patterns)
+        if not is_target:
+            continue
+        
+        # Skip if it's a Linear weight (already decomposed as U+SVh)
+        if name.endswith('.weight') and any(k.endswith(name + '.U') for k in all_holo):
+            continue
+        
+        safetensor_file = os.path.join(model_dir, wm[name])
+        
+        # Load tensor from safetensors
+        try:
+            if safetensor_file not in files_read:
+                from safetensors import safe_open
+                st = safe_open(safetensor_file, framework='pt', device='cpu')
+                files_read[safetensor_file] = st
+            else:
+                st = files_read[safetensor_file]
+            
+            t = st.get_tensor(name)
+            safe_key = '_embed.' + name.replace('.', '_') if 'embed' in name else \
+                       '_norm.' + name.replace('.', '_') if 'norm' in name else \
+                       '_bias.' + name.replace('.', '_') if 'bias' in name else \
+                       name
+            all_holo[safe_key] = t
+            loaded += 1
+        except Exception as e:
+            pass  # tensor not found in this shard
+    
+    print(f"  Standalone params embedded: {loaded} (embed/norm/bias)")
+    return all_holo
+
+
 def main():
     print(f"Rank: {RANK_K} | Rust: {'YES' if _RUST else 'torch'} | Mode: CATALYTIC CACHE")
     with open(INDEX_PATH) as f: ix = json.load(f)
@@ -142,6 +206,10 @@ def main():
         holo, dt, m, h = process(fp, RANK_K)
         all_holo.update(holo); tt += dt; tm += m; th += h
         print(f"  {dt:.1f}s | misses={m} hits={h}")
+    # Embed config + embed/norm/bias for self-contained .holo
+    print("\nEmbedding standalone params (config + embed + norm + bias)...")
+    all_holo = embed_standalone(all_holo, INDEX_PATH, MODEL_DIR)
+    
     os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
     print(f"\nSaving {OUTPUT_PATH}...")
     torch.save(all_holo, OUTPUT_PATH)

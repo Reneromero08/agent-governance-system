@@ -11,6 +11,7 @@ Usage: python 5_wormhole_compressor.py <input.holo> <output.holo>
 import torch, math, numpy as np, os, sys, re
 from collections import defaultdict
 from pathlib import Path
+import _paths
 
 def compress_holo(holo_dict, rotation_threshold=0.5, quant_bits=2):
     """
@@ -172,9 +173,8 @@ def compress_holo(holo_dict, rotation_threshold=0.5, quant_bits=2):
 def main():
     if len(sys.argv) < 3:
         print("Usage: python 5_wormhole_compressor.py <input.holo> <output.holo>")
-        REPO = Path(r"d:\CCC 2.0\AI\agent-governance-system")
-        input_path = str(REPO / "THOUGHT/LAB/EIGEN_BUDDY/cybernetic_truth/qwen_0_5b_k128.holo")
-        output_path = str(REPO / "THOUGHT/LAB/CAT_CAS/33_mera_compression/qwen_0_5b_wormhole.holo")
+        input_path = str(_paths.CATALYTIC_05B)
+        output_path = str(_paths.WORMHOLE_05B)
     else:
         input_path = sys.argv[1]
         output_path = sys.argv[2]

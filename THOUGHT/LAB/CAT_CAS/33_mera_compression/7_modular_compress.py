@@ -16,6 +16,7 @@ Usage:
 import torch, math, numpy as np, os, sys, re
 from collections import defaultdict
 from pathlib import Path
+import _paths
 
 MODULES = {
     "llm": {
@@ -28,9 +29,10 @@ MODULES = {
     },
     "aux": {
         "tag": (),
-        "types": (),  # stingy: only lm_head, embed, norm
-        "catch_all": False,  # NOT a catch-all — only explicit matches
-        "explicit_keys": ["lm_head", "embed_tokens", "norm", "model.language_model.norm"],
+        "types": (),
+        "catch_all": False,
+        "explicit_keys": ["lm_head", "embed_tokens", "norm", "model.language_model.norm",
+                          "_config", "_embed", "_norm", "_bias"],  # self-contained holos
     },
 }
 
@@ -220,9 +222,8 @@ def compress_holo_modular(holo_dict, modules, rotation_threshold=0.5, quant_bits
 
 # ---- CLI ----
 
-REPO = Path(r"d:\CCC 2.0\AI\agent-governance-system")
-DEFAULT_INPUT = REPO / "THOUGHT/LAB/EIGEN_BUDDY/cybernetic_truth/qwen_27b_catalytic_k256.holo"
-OUT_DIR = REPO / "THOUGHT/LAB/CAT_CAS/33_mera_compression"
+DEFAULT_INPUT = _paths.CATALYTIC_27B
+OUT_DIR = _paths.HOLO_MODELS
 
 def main():
     import argparse

@@ -22,6 +22,7 @@ Usage:
 import torch, os, sys
 from collections import defaultdict
 from pathlib import Path
+import _paths
 
 
 def cavity_sieve_weight_type(U_list, SVh_list, threshold=0.99, n_test=50):
@@ -226,9 +227,8 @@ def cavity_sieve_holo(holo_path, output_path, threshold=0.99, sample_layers=5):
 
 
 if __name__ == "__main__":
-    REPO = Path(r"D:\CCC 2.0\AI\agent-governance-system")
-    default_in = REPO / "THOUGHT/LAB/EIGEN_BUDDY/cybernetic_truth/qwen_27b_catalytic_k256.holo"
-    default_out = REPO / "THOUGHT/LAB/CAT_CAS/33_mera_compression/qwen_27b_cavitated.holo"
+    default_in = _paths.CATALYTIC_27B
+    default_out = _paths.CAVITATED_27B
     
     in_path = sys.argv[1] if len(sys.argv) > 1 else str(default_in)
     out_path = sys.argv[2] if len(sys.argv) > 2 else str(default_out)

@@ -24,6 +24,7 @@ import torch.nn as nn
 import math, re, json
 from collections import defaultdict
 from pathlib import Path
+import _paths
 
 
 class TuneableWeight(nn.Module):
@@ -329,11 +330,7 @@ if __name__ == "__main__":
     load_graph = graph_mod.load_graph
     CatalyticSession = graph_mod.CatalyticSession
     
-    base = Path("THOUGHT/LAB/CAT_CAS/33_mera_compression")
-    files = {
-        "llm": base / "qwen_27b_llm_cavity_wormhole.holo",
-        "visual": base / "qwen_27b_visual_cavity_wormhole.holo",
-    }
+    files = _paths.MODULE_PATHS
     
     print("Loading catalytic graph...")
     graph = load_graph(files)
@@ -385,7 +382,7 @@ if __name__ == "__main__":
         print(f"    {wt}: grad={gn:.4f}")
     
     # Merge and verify
-    out_merged = str(base / "qwen_27b_llm_tuned.holo")
+    out_merged = str(_paths.LLM_TUNED)
     print(f"\nMerge test: {out_merged}")
     tuner.merge_to_wormhole(out_merged)
     import os

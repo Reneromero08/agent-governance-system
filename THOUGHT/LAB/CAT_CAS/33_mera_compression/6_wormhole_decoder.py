@@ -6,6 +6,7 @@ Shared SVh replicated to exact layers, not ranges.
 """
 import torch, re
 from collections import defaultdict
+import _paths
 
 CAT_PREFIX = "model.language_model.layers"
 
@@ -100,8 +101,8 @@ def decode_wormhole_holo(wormhole_path):
 
 if __name__ == "__main__":
     import sys, os
-    worm_path = sys.argv[1] if len(sys.argv) > 1 else "THOUGHT/LAB/CAT_CAS/33_mera_compression/qwen_27b_wormhole_v2.holo"
-    out_path = sys.argv[2] if len(sys.argv) > 2 else "THOUGHT/LAB/CAT_CAS/33_mera_compression/qwen_27b_decoded.holo"
+    worm_path = sys.argv[1] if len(sys.argv) > 1 else str(_paths.HOLO_MODELS / "qwen_27b_wormhole_v2.holo")
+    out_path = sys.argv[2] if len(sys.argv) > 2 else str(_paths.HOLO_MODELS / "qwen_27b_decoded.holo")
 
     in_size = os.path.getsize(worm_path) / 1024**2
     print(f"Wormhole: {os.path.basename(worm_path)} ({in_size:.0f} MB)")
@@ -122,7 +123,7 @@ if __name__ == "__main__":
 
     # Fidelity spot-check
     if 'THOUGHT' in output.get('', ''): pass  # dummy
-    cat_path = "THOUGHT/LAB/EIGEN_BUDDY/cybernetic_truth/qwen_27b_catalytic_k256.holo"
+    cat_path = str(_paths.CATALYTIC_27B)
     if os.path.exists(cat_path):
         cat = torch.load(cat_path, map_location='cpu', weights_only=True)
         coses = []

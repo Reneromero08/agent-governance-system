@@ -18,13 +18,13 @@ Usage:
 import torch, re
 from collections import defaultdict
 from pathlib import Path
+import _paths
 
-OUT_DIR = Path("THOUGHT/LAB/CAT_CAS/33_mera_compression")
+OUT_DIR = _paths.HOLO_MODELS
 
 MODULE_MAP = {
-    "llm":    OUT_DIR / "qwen_27b_llm_wormhole.holo",
-    "visual": OUT_DIR / "qwen_27b_visual_wormhole.holo",
-    "full":   OUT_DIR / "qwen_27b_full_wormhole.holo",
+    **_paths.MODULE_PATHS,
+    "full": _paths.HOLO_MODELS / "qwen_27b_full_wormhole.holo",
 }
 
 PREFIX_MAP = {

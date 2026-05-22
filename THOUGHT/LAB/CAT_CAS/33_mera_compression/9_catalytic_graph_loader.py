@@ -15,6 +15,7 @@ import torch, json, re
 from collections import defaultdict
 from pathlib import Path
 from dataclasses import dataclass, field
+import _paths
 
 # ---- Data Structures ----
 
@@ -263,14 +264,10 @@ def _graph_from_files(module_files):
 
 if __name__ == "__main__":
     import sys
-    base = Path("THOUGHT/LAB/CAT_CAS/33_mera_compression")
-    files = {
-        "llm": base / "qwen_27b_llm_wormhole.holo",
-        "visual": base / "qwen_27b_visual_wormhole.holo",
-    }
+    files = _paths.MODULE_PATHS
     
     print("Building catalytic manifest...")
-    manifest = build_manifest(files, output_path=str(base / "catalytic_manifest.json"))
+    manifest = build_manifest(files, output_path=str(_paths.CATALYTIC_MANIFEST))
     print(f"  Modules: {len(manifest['modules'])}")
     for m in manifest['modules']:
         print(f"    {m['name']}: {len(m['weight_types'])} types, {m['file_size_mb']:.0f} MB")
