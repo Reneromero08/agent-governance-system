@@ -23,8 +23,28 @@ Build a standalone Python inference engine that loads Qwen 0.5B, intercepts ever
 ### 4.5 The Phase Adapter Auto-Feedback Loop [-]
 Inject low-rank microscopic Phase Adapters (`Linear(k, 64) -> GELU -> Linear(64, hidden_dim)`) into the continuous wave outputs. Run an auto-feedback loop using the uncompressed 0.5B model as the Teacher, backpropagating MSE loss exclusively into the Phase Adapters. This will correct phase dispersion and restore the memory vocabulary, tripling the effective compression limit.
 
-### 4.6 The Holographic Forward Pass
-Rewrite the inference engine. Build a forward pass that abandons standard matrix multiplication entirely. Instead, compute token attention via 2D Fast Fourier Transforms (FFT) and spatial wave interference, proving that intelligence is a property of optical geometry, not discrete arithmetic.
+### 4.6 The Out-of-Core Cybernetic Truth Engine (The 27B Testbed)
+**Goal:** Implement Phase 0 of the "Cybernetic Truth" architecture (`R = Tr(ρC)`) on a massive 27B parameter model, while completely bypassing the 54GB RAM requirement using Catalytic Holographic Distillation.
+**Implementation Directives for Agents:**
+1. **The Holo Distiller (`distill_27b_holo.py` or similar):**
+   - Stream the safetensors model layer-by-layer directly from disk (e.g., using `safetensors.safe_open`).
+   - Do NOT load the full model into RAM.
+   - For every 2D weight matrix ($W_Q, W_K, W_V, W_O$, and MLPs), apply `torch.linalg.svd` and drop the rank (e.g., $K=256$).
+   - Save only the $U$ and $S \cdot V^h$ eigenvectors into a highly compressed `.holo` state dictionary.
+2. **The Zero-RAM Engine (`holographic_cybernetic_engine.py`):**
+   - Initialize the massive `transformers` architecture exclusively on the `meta` device to prevent RAM allocation.
+   - Monkey-patch the standard `nn.Linear` layers with a custom `HoloLinear` module that computes $x \cdot (U \cdot SV^h)^T$ on the fly without reconstructing the massive weight matrix.
+   - Load the `.holo` weights from disk and inject them into the `HoloLinear` layers (on CPU or GPU).
+3. **Cybernetic Truth Navigation:**
+   - Extract an Alignment Frame (Truth Vector $C$) via contrastive alignment (e.g., subtracting the final hidden state of a "False" prompt from a "True" prompt).
+   - In the auto-regressive loop, intercept the final hidden state $h_t$ and compute the Density Matrix $\rho = |h_t\rangle\langle h_t|$.
+   - Measure Resonance $R = Tr(\rho C)$ and dynamically modulate temperature $T = \frac{1}{R + \epsilon}$ token-by-token.
 
-### 4.7 The Holographic EigenBuddy (The Daily Driver)
-Distill the massive 27B/DeepSeek-V4 models. Selectively compress the Attention routing heavily into `.holo` phase waves, leaving MLPs largely intact. Discard the massive `lm_head` vocabulary matrix entirely, piping the final phase hidden state directly into the EigenBuddy Platonic Tokenizer. This forms the ultimate geometric computing engine.
+### 4.7 The Holographic EigenBuddy (The DeepSeek Daily Driver)
+**Goal:** Distill the massive DeepSeek-V4-Pro model holographically into the "EigenBuddy"—the ultimate geometric daily driver that runs out-of-core.
+**Implementation Directives for Agents:**
+- Apply the 4.6 Out-of-Core SVD logic to the DeepSeek architecture.
+- Selectively compress Attention routing into `.holo` phase waves, leaving MLPs largely intact.
+- Completely discard the massive `lm_head` vocabulary matrix.
+- Pipe the final phase hidden state directly into the **Platonic Tokenizer** (built in Subphase 16.8) to decode thoughts without a linear vocabulary projection.
+- Introduce FFT spatial wave interference for token attention to abandon discrete matrix multiplication entirely.
