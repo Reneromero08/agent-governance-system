@@ -47,6 +47,14 @@ TOTAL_WEIGHT_U8 = 4 * F32_DIM  # 14336 bytes per layer (u8, same size as f32)
 NUM_LAYERS = 48  # 36 DeltaNet + 12 Attention
 DELTANET_PER_ATTENTION = 3  # 3:1 stride
 
+# Block-tiled weight streaming (16.9 W@x)
+ROWS_PER_BLOCK = 4  # rows loaded per lwo_f32 block
+FULL_MATRIX_ROWS = HIDDEN_DIM  # 896
+FULL_MATRIX_BLOCKS = FULL_MATRIX_ROWS // ROWS_PER_BLOCK  # 224
+FULL_MATRIX_F32_BYTES = FULL_MATRIX_ROWS * HIDDEN_DIM * F32_BYTES  # 3,211,264
+FULL_MATRIX_BF16_BYTES = FULL_MATRIX_ROWS * HIDDEN_DIM * 2  # 1,605,632
+BLOCK_U8_SIZE = ROWS_PER_BLOCK * HIDDEN_DIM * F32_BYTES  # 14,336
+
 # Physics
 HBAR = 1.054571817e-34
 C_LIGHT = 2.99792458e8
@@ -147,47 +155,97 @@ class HDDWeightStreamer:
         # Load weights into RAM and pre-scramble them
         raw_weights_list = []
         for layer_idx in range(self.num_layers):
-            layer_chunks = []
-            # Try to find Q,K,V,O projection weights in safetensors
+            is_attention = (layer_idx + 1) % 4 == 0
             weight_suffixes = ['q_proj', 'k_proj', 'v_proj', 'o_proj']
-            for suffix in weight_suffixes:
-                tensor_info = None
-                search_name = f"model.layers.{layer_idx}.self_attn.{suffix}.weight"
-                for name in self.tensors:
-                    if name == search_name:
-                        tensor_info = self.tensors[name]
-                        break
-                
-                if tensor_info and "data_offsets" in tensor_info:
-                    start, end = tensor_info["data_offsets"]
-                    dtype = tensor_info.get("dtype", "F32")
-                    shape = tensor_info.get("shape", [1, 1])
-                    chunk_start = self.data_offset + start
-                    chunk_size = F32_DIM  # first HIDDEN_DIM f32 values
-                    
-                    if dtype == "BF16":
-                        # BF16: 2 bytes per value, big-endian → need HIDDEN_DIM * 2 bytes
-                        raw_bytes = self._mmap[chunk_start:chunk_start + HIDDEN_DIM * 2]
-                        bf16_vals = np.frombuffer(raw_bytes, dtype='>u2').astype(np.uint32) << 16
-                        f32_vals = bf16_vals.view(np.float32)
-                        chunk = f32_vals[:HIDDEN_DIM].tobytes()
-                    elif dtype == "F16":
-                        raw_bytes = self._mmap[chunk_start:chunk_start + HIDDEN_DIM * 2]
-                        f16_vals = np.frombuffer(raw_bytes, dtype='>u2')
-                        # Convert FP16 to FP32 — simple approximate
-                        f32_vals = f16_vals.astype(np.float32)
-                        chunk = f32_vals[:HIDDEN_DIM].tobytes()
+
+            if is_attention:
+                # 16.9 W@x: load FULL matrix for attention layers
+                layer_blocks = []
+                for suffix in weight_suffixes:
+                    search_name = f"model.layers.{layer_idx}.self_attn.{suffix}.weight"
+                    tensor_info = self.tensors.get(search_name)
+                    if tensor_info and "data_offsets" in tensor_info:
+                        start, end = tensor_info["data_offsets"]
+                        dtype = tensor_info.get("dtype", "F32")
+                        # Full matrix: shape is (896, 896) = 802,816 values
+                        chunk_start = self.data_offset + start
+                        full_size = FULL_MATRIX_BF16_BYTES if dtype == "BF16" else FULL_MATRIX_F32_BYTES
+                        raw_bytes = self._mmap[chunk_start:chunk_start + full_size]
+
+                        if dtype == "BF16":
+                            bf16_vals = np.frombuffer(raw_bytes, dtype=np.uint16)
+                            bf16_vals = bf16_vals.astype(np.uint32) << 16
+                            f32_mat = bf16_vals.view(np.float32).reshape(FULL_MATRIX_ROWS, HIDDEN_DIM)
+                        elif dtype == "F16":
+                            import struct as _struct
+                            f16_raw = np.frombuffer(raw_bytes, dtype=np.uint16)
+                            f32_mat = np.zeros(FULL_MATRIX_ROWS * HIDDEN_DIM, dtype=np.float32)
+                            for k in range(len(f16_raw)):
+                                sign = (f16_raw[k] >> 15) & 1
+                                exp = (f16_raw[k] >> 10) & 0x1F
+                                mant = f16_raw[k] & 0x3FF
+                                if exp == 0:
+                                    val = mant / 1024.0 * (2.0 ** -14)
+                                else:
+                                    val = (1.0 + mant / 1024.0) * (2.0 ** (exp - 15))
+                                f32_mat[k] = -val if sign else val
+                            f32_mat = f32_mat.reshape(FULL_MATRIX_ROWS, HIDDEN_DIM)
+                        else:
+                            f32_mat = np.frombuffer(raw_bytes, dtype=np.float32).reshape(FULL_MATRIX_ROWS, HIDDEN_DIM)
+
+                        # Pack into blocks of 4 rows: each block = 4 * 896 f32 = 14,336 bytes
+                        for block in range(FULL_MATRIX_BLOCKS):
+                            row_start = block * ROWS_PER_BLOCK
+                            block_data = f32_mat[row_start:row_start + ROWS_PER_BLOCK, :]
+                            layer_blocks.append(block_data.astype(np.float32).tobytes())
                     else:
-                        # F32: read directly
-                        raw_bytes = self._mmap[chunk_start:chunk_start + F32_DIM]
-                        chunk = bytes(raw_bytes)
-                        if len(chunk) < F32_DIM:
-                            chunk = chunk + b'\x00' * (F32_DIM - len(chunk))
-                else:
-                    chunk = np.random.RandomState(42 + layer_idx * 4 + len(suffix)).bytes(F32_DIM)
-                layer_chunks.append(chunk)
-            
-            raw_weights_list.append(b"".join(layer_chunks))
+                        # No weights found: fill with random blocks
+                        for _suffix in weight_suffixes:
+                            for _block in range(FULL_MATRIX_BLOCKS):
+                                layer_blocks.append(
+                                    np.random.RandomState(
+                                        42 + layer_idx * 100 + len(_suffix) * 1000 + _block
+                                    ).bytes(BLOCK_U8_SIZE)
+                                )
+                        break  # one pass through suffixes is enough for random fill
+                raw_weights_list.append(b"".join(layer_blocks))
+            else:
+                # DeltaNet: single-row weight vectors (unchanged)
+                layer_chunks = []
+                for suffix in weight_suffixes:
+                    tensor_info = None
+                    search_name = f"model.layers.{layer_idx}.self_attn.{suffix}.weight"
+                    for name in self.tensors:
+                        if name == search_name:
+                            tensor_info = self.tensors[name]
+                            break
+
+                    if tensor_info and "data_offsets" in tensor_info:
+                        start, end = tensor_info["data_offsets"]
+                        dtype = tensor_info.get("dtype", "F32")
+                        chunk_start = self.data_offset + start
+
+                        if dtype == "BF16":
+                            raw_bytes = self._mmap[chunk_start:chunk_start + HIDDEN_DIM * 2]
+                            bf16_vals = np.frombuffer(raw_bytes, dtype=np.uint16)
+                            bf16_vals = bf16_vals.astype(np.uint32) << 16
+                            f32_vals = bf16_vals.view(np.float32)
+                            chunk = f32_vals[:HIDDEN_DIM].tobytes()
+                        elif dtype == "F16":
+                            raw_bytes = self._mmap[chunk_start:chunk_start + HIDDEN_DIM * 2]
+                            f16_vals = np.frombuffer(raw_bytes, dtype=np.uint16)
+                            f32_vals = f16_vals.astype(np.float32)
+                            chunk = f32_vals[:HIDDEN_DIM].tobytes()
+                        else:
+                            raw_bytes = self._mmap[chunk_start:chunk_start + F32_DIM]
+                            chunk = bytes(raw_bytes)
+                            if len(chunk) < F32_DIM:
+                                chunk = chunk + b'\x00' * (F32_DIM - len(chunk))
+                    else:
+                        chunk = np.random.RandomState(42 + layer_idx * 4 + len(suffix)).bytes(F32_DIM)
+                    layer_chunks.append(chunk)
+
+                raw_weights_list.append(b"".join(layer_chunks))
 
         self.raw_weights = b"".join(raw_weights_list)
         self.scrambled_weights = catalytic_ffi.scramble_catalysis_weights(self.raw_weights)

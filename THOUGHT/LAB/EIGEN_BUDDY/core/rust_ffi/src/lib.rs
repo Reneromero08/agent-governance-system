@@ -339,6 +339,13 @@ const WEIGHT_O_OFFSET: usize = 3 * F32_DIM;
 const TOTAL_WEIGHT_F32: usize = 4 * F32_DIM;  // f32 weight bytes per layer (Q/K/V/O)
 const TOTAL_WEIGHT_U8: usize = 4 * F32_DIM;  // u8 weight bytes per layer (same size as f32)
 
+// Block-tiled dot-product constants for attention layers (16.9 W@x)
+const ROWS_PER_BLOCK: usize = 4;  // 4 rows fit in TOTAL_WEIGHT_F32/TOTAL_WEIGHT_U8
+const BLOCK_F32_STRIDE: usize = ROWS_PER_BLOCK * HIDDEN_DIM;  // f32 entries per block (4*896=3584)
+const BLOCK_U8_SIZE: usize = BLOCK_F32_STRIDE * F32_BYTES;  // bytes per block (14336, same as TOTAL_WEIGHT_U8)
+const FULL_MATRIX_BLOCKS: usize = HIDDEN_DIM / ROWS_PER_BLOCK;  // 224 blocks per full (896,896) matrix
+const FULL_MATRIX_U8: usize = FULL_MATRIX_BLOCKS * BLOCK_U8_SIZE;  // bytes per full matrix (224*14336=3211264)
+
 #[inline(always)]
 fn tape_f32(tape: &[u8], base: usize, idx: usize) -> f32 {
     let off = base + idx * F32_BYTES;
@@ -1347,6 +1354,23 @@ fn catalytic_inference_step<'py>(
     let (sbox, _inv_sbox) = generate_logistic_sbox();
     let bh_key = b"catalytic_key_27b_inference_16_s";
 
+    // Precompute weight buffer offsets: attention layers use full matrices,
+    // DeltaNet layers use single-vector layout (TOTAL_WEIGHT_U8 each)
+    let mut layer_wt_offsets: Vec<usize> = Vec::with_capacity(num_layers);
+    let mut layer_wt_is_attn: Vec<bool> = Vec::with_capacity(num_layers);
+    let mut offset = 0usize;
+    for li in 0..num_layers {
+        layer_wt_offsets.push(offset);
+        let is_attn = (li + 1) % 4 == 0;
+        layer_wt_is_attn.push(is_attn);
+        if is_attn {
+            // 4 full matrices (Q,K,V,O), each FULL_MATRIX_U8 bytes
+            offset += 4 * FULL_MATRIX_U8;
+        } else {
+            offset += TOTAL_WEIGHT_U8;
+        }
+    }
+
     // Embed token (raw bytes copied into input region)
     for i in 0..token_embedding.len().min(COMPLEX_DIM) {
         tape[input_offset + i] ^= token_embedding[i];
@@ -1436,20 +1460,16 @@ fn catalytic_inference_step<'py>(
             });
             
             let layer_save = saved_outputs_offset + layer_idx * COMPLEX_DIM;
+            let lwo = weight_offset + layer_idx * TOTAL_WEIGHT_U8;
+            let lwo_f32 = weight_offset + layer_idx * TOTAL_WEIGHT_F32;
+            let pg = pre_gate_base + layer_idx * COMPLEX_DIM;
 
-            // Dynamic decatalysis — save BOTH lwo (u8) and lwo_f32 (f32)
-            let original_weight_f32 = tape[lwo_f32 .. lwo_f32 + TOTAL_WEIGHT_F32].to_vec();
-            let original_weight_u8 = tape[lwo .. lwo + TOTAL_WEIGHT_U8].to_vec();
-            let src_slice = &compressed_weights_bytes[layer_idx * TOTAL_WEIGHT_U8 .. (layer_idx + 1) * TOTAL_WEIGHT_U8];
-            tape[lwo .. lwo + TOTAL_WEIGHT_U8].copy_from_slice(src_slice);
-            spn_unscramble(&mut tape, lwo, TOTAL_WEIGHT_U8, bh_key, &sbox, 12);
-            // 16.8 WEIGHT STREAMING: route unscrambled u8 bytes into f32 compute region
-            let unscrambled = tape[lwo .. lwo + TOTAL_WEIGHT_U8].to_vec();
-            tape[lwo_f32 .. lwo_f32 + TOTAL_WEIGHT_F32].copy_from_slice(&unscrambled);
-
-            if (layer_idx + 1) % 4 == 0 {
-                // GATED ATTENTION LAYER (f32)
+            if layer_wt_is_attn[layer_idx] {
+                // =========== ATTENTION LAYER: block-tiled W@x dot-product (16.9) ===========
                 let attn_idx = layer_idx / 4;
+                let wt_base = layer_wt_offsets[layer_idx];  // offset into compressed_weights
+
+                // RMS norm (same as before)
                 let mut sum_sq = 0.0f32;
                 for j in 0..HIDDEN_DIM {
                     let rx = tape_f32(&tape, input_offset, j);
@@ -1462,33 +1482,57 @@ fn catalytic_inference_step<'py>(
                     nx[j] = tape_f32(&tape, input_offset, j) / rms;
                     nx[HIDDEN_DIM + j] = tape_f32(&tape, input_offset + F32_DIM, j) / rms;
                 }
-                // QKV projections — store as raw bytes in pre_gate and slot
+
                 let slot_base = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + step % MAX_SEQ_LEN) * 4 * F32_DIM;
-                for j in 0..HIDDEN_DIM {
-                    let wq = tape_f32(&tape, lwo_f32 + WEIGHT_Q_OFFSET, j);
-                    let wk = tape_f32(&tape, lwo_f32 + WEIGHT_K_OFFSET, j);
-                    let wv = tape_f32(&tape, lwo_f32 + WEIGHT_V_OFFSET, j);
-                    let qx = wq * nx[j]; let qy = wq * nx[HIDDEN_DIM + j];
-                    let kx = wk * nx[j]; let ky = wk * nx[HIDDEN_DIM + j];
-                    let vx = wv * nx[j]; let vy = wv * nx[HIDDEN_DIM + j];
-                    let pg = pre_gate_base + layer_idx * COMPLEX_DIM;
-                    let qx_bytes = qx.to_bits().to_le_bytes();
-                    let qy_bytes = qy.to_bits().to_le_bytes();
-                    let kx_bytes = kx.to_bits().to_le_bytes();
-                    let ky_bytes = ky.to_bits().to_le_bytes();
-                    let vx_bytes = vx.to_bits().to_le_bytes();
-                    let vy_bytes = vy.to_bits().to_le_bytes();
-                    total_entropy += (qx.abs() as u64) + (ky.abs() as u64) + (vx.abs() as u64);
-                    for b in 0..4 {
-                        tape[pg + j * 4 + b] ^= qx_bytes[b];
-                        tape[pg + F32_DIM + j * 4 + b] ^= qy_bytes[b];
-                        tape[slot_base + j * 4 + b] ^= kx_bytes[b];
-                        tape[slot_base + F32_DIM + j * 4 + b] ^= ky_bytes[b];
-                        tape[slot_base + F32_DIM * 2 + j * 4 + b] ^= vx_bytes[b];
-                        tape[slot_base + F32_DIM * 3 + j * 4 + b] ^= vy_bytes[b];
+                let original_lwo = tape[lwo .. lwo + TOTAL_WEIGHT_U8].to_vec();
+                let original_lwo_f32 = tape[lwo_f32 .. lwo_f32 + TOTAL_WEIGHT_F32].to_vec();
+
+                // Project Q, K, V via block-tiled dot products (4 rows per block)
+                for mat in 0..3usize {  // 0=Q, 1=K, 2=V
+                    let mat_base = wt_base + mat * FULL_MATRIX_U8;
+                    let (dest_base, dest_imag) = if mat == 0 {
+                        (pg, pg + F32_DIM)  // Q -> pre_gate
+                    } else if mat == 1 {
+                        (slot_base, slot_base + F32_DIM)  // K -> slot
+                    } else {
+                        (slot_base + F32_DIM * 2, slot_base + F32_DIM * 3)  // V -> slot
+                    };
+
+                    for block in 0..FULL_MATRIX_BLOCKS {
+                        let blk_off = mat_base + block * BLOCK_U8_SIZE;
+                        let src = &compressed_weights_bytes[blk_off .. blk_off + BLOCK_U8_SIZE];
+                        tape[lwo .. lwo + BLOCK_U8_SIZE].copy_from_slice(src);
+                        spn_unscramble(&mut tape, lwo, BLOCK_U8_SIZE, bh_key, &sbox, 12);
+                        let unscrambled_o2 = tape[lwo .. lwo + BLOCK_U8_SIZE].to_vec();
+                        tape[lwo_f32 .. lwo_f32 + TOTAL_WEIGHT_F32]
+                            .copy_from_slice(&unscrambled_o2);
+
+                        for ro in 0..ROWS_PER_BLOCK {
+                            let row = block * ROWS_PER_BLOCK + ro;
+                            if row >= HIDDEN_DIM { break; }
+                            let mut dx = 0.0f32; let mut dy = 0.0f32;
+                            let row_base = lwo_f32 + ro * F32_DIM;  // ro * HIDDEN_DIM * 4
+                            for j in 0..HIDDEN_DIM {
+                                let w = tape_f32(&tape, row_base, j);
+                                dx += w * nx[j];
+                                dy += w * nx[HIDDEN_DIM + j];
+                            }
+                            let dx_bytes = dx.to_bits().to_le_bytes();
+                            let dy_bytes = dy.to_bits().to_le_bytes();
+                            total_entropy += dx.abs() as u64;
+                            for b in 0..4 {
+                                tape[dest_base + row * 4 + b] ^= dx_bytes[b];
+                                tape[dest_imag + row * 4 + b] ^= dy_bytes[b];
+                            }
+                        }
+
+                        spn_scramble(&mut tape, lwo, BLOCK_U8_SIZE, bh_key, &sbox, 12);
+                        tape[lwo .. lwo + TOTAL_WEIGHT_U8].copy_from_slice(&original_lwo);
+                        tape[lwo_f32 .. lwo_f32 + TOTAL_WEIGHT_F32].copy_from_slice(&original_lwo_f32);
                     }
                 }
-                // Multi-head attention
+
+                // Multi-head attention (unchanged — reads Q,K,V from pre_gate + slot)
                 let num_heads = 16;
                 let head_dim = HIDDEN_DIM / num_heads;
                 let scale = 1.0 / (head_dim as f32).sqrt();
@@ -1529,22 +1573,54 @@ fn catalytic_inference_step<'py>(
                         total_entropy += (vsx.abs() as u64) + (vsy.abs() as u64);
                     }
                 }
-                // Output projection + add to input — store as raw bytes
-                for j in 0..HIDDEN_DIM {
-                    let wo = tape_f32(&tape, lwo_f32 + WEIGHT_O_OFFSET, j);
-                    let px = wo * attn_x[j]; let py = wo * attn_y[j];
-                    let px_bytes = px.to_bits().to_le_bytes();
-                    let py_bytes = py.to_bits().to_le_bytes();
-                    total_entropy += (px.abs() as u64) + (py.abs() as u64);
-                    for b in 0..4 {
-                        tape[layer_save + j * 4 + b] ^= px_bytes[b];
-                        tape[layer_save + F32_DIM + j * 4 + b] ^= py_bytes[b];
-                        tape[input_offset + j * 4 + b] ^= px_bytes[b];
-                        tape[input_offset + F32_DIM + j * 4 + b] ^= py_bytes[b];
+                // Output projection — block-tiled W_O @ attn (16.9)
+                let o_mat_base = wt_base + 3 * FULL_MATRIX_U8;
+                for block in 0..FULL_MATRIX_BLOCKS {
+                    let blk_off = o_mat_base + block * BLOCK_U8_SIZE;
+                    let src = &compressed_weights_bytes[blk_off .. blk_off + BLOCK_U8_SIZE];
+                        tape[lwo .. lwo + BLOCK_U8_SIZE].copy_from_slice(src);
+                        spn_unscramble(&mut tape, lwo, BLOCK_U8_SIZE, bh_key, &sbox, 12);
+                        let unscrambled_block = tape[lwo .. lwo + BLOCK_U8_SIZE].to_vec();
+                        tape[lwo_f32 .. lwo_f32 + TOTAL_WEIGHT_F32]
+                            .copy_from_slice(&unscrambled_block);
+
+                    for ro in 0..ROWS_PER_BLOCK {
+                        let row = block * ROWS_PER_BLOCK + ro;
+                        if row >= HIDDEN_DIM { break; }
+                        let mut ox = 0.0f32; let mut oy = 0.0f32;
+                        let row_base = lwo_f32 + ro * F32_DIM;
+                        for j in 0..HIDDEN_DIM {
+                            let wo = tape_f32(&tape, row_base, j);
+                            ox += wo * attn_x[j];
+                            oy += wo * attn_y[j];
+                        }
+                        let ox_bytes = ox.to_bits().to_le_bytes();
+                        let oy_bytes = oy.to_bits().to_le_bytes();
+                        total_entropy += ox.abs() as u64;
+                        for b in 0..4 {
+                            tape[layer_save + row * 4 + b] ^= ox_bytes[b];
+                            tape[layer_save + F32_DIM + row * 4 + b] ^= oy_bytes[b];
+                            tape[input_offset + row * 4 + b] ^= ox_bytes[b];
+                            tape[input_offset + F32_DIM + row * 4 + b] ^= oy_bytes[b];
+                        }
                     }
+
+                    spn_scramble(&mut tape, lwo, BLOCK_U8_SIZE, bh_key, &sbox, 12);
+                    tape[lwo .. lwo + TOTAL_WEIGHT_U8].copy_from_slice(&original_lwo);
+                    tape[lwo_f32 .. lwo_f32 + TOTAL_WEIGHT_F32].copy_from_slice(&original_lwo_f32);
                 }
             } else {
-                // DELTANET LAYER (f32) — stores Q as exact u32 bytes in pre_gate
+                // DELTANET LAYER (f32) — element-wise gate, same as before
+                let original_weight_f32 = tape[lwo_f32 .. lwo_f32 + TOTAL_WEIGHT_F32].to_vec();
+                let original_weight_u8 = tape[lwo .. lwo + TOTAL_WEIGHT_U8].to_vec();
+                let wt_off = layer_wt_offsets[layer_idx];
+                let src_slice = &compressed_weights_bytes[wt_off .. wt_off + TOTAL_WEIGHT_U8];
+                tape[lwo .. lwo + TOTAL_WEIGHT_U8].copy_from_slice(src_slice);
+                spn_unscramble(&mut tape, lwo, TOTAL_WEIGHT_U8, bh_key, &sbox, 12);
+                let unscrambled_delta_fwd = tape[lwo .. lwo + TOTAL_WEIGHT_U8].to_vec();
+                tape[lwo_f32 .. lwo_f32 + TOTAL_WEIGHT_F32]
+                    .copy_from_slice(&unscrambled_delta_fwd);
+
                 for j in 0..HIDDEN_DIM {
                     let w = tape_f32(&tape, lwo_f32, j);
                     let x = tape_f32(&tape, input_offset, j);
@@ -1567,7 +1643,6 @@ fn catalytic_inference_step<'py>(
                     let gx = (0.5 + 0.25 * tape_f32(&tape, temp_offset, j)).clamp(0.0, 1.0);
                     let gy = (0.5 + 0.25 * tape_f32(&tape, temp_offset + F32_DIM, j)).clamp(0.0, 1.0);
                     total_entropy += (gx.abs() as u64) + (gy.abs() as u64);
-                    // Store gate as raw bytes (bypasses NaN canonicalization)
                     let gx_bytes = gx.to_bits().to_le_bytes();
                     let gy_bytes = gy.to_bits().to_le_bytes();
                     for b in 0..4 {
@@ -1577,12 +1652,11 @@ fn catalytic_inference_step<'py>(
                         tape[input_offset + F32_DIM + j * 4 + b] ^= gy_bytes[b];
                     }
                 }
+                // Re-scramble and restore weight substrate
+                spn_scramble(&mut tape, lwo, TOTAL_WEIGHT_U8, bh_key, &sbox, 12);
+                tape[lwo_f32 .. lwo_f32 + TOTAL_WEIGHT_F32].copy_from_slice(&original_weight_f32);
+                tape[lwo .. lwo + TOTAL_WEIGHT_U8].copy_from_slice(&original_weight_u8);
             }
-
-            // Re-scramble and restore weight substrate (both u8 and f32 regions)
-            spn_scramble(&mut tape, lwo, TOTAL_WEIGHT_U8, bh_key, &sbox, 12);
-            tape[lwo_f32 .. lwo_f32 + TOTAL_WEIGHT_F32].copy_from_slice(&original_weight_f32);
-            tape[lwo .. lwo + TOTAL_WEIGHT_U8].copy_from_slice(&original_weight_u8);
         }
 
         // Output head (f32)
@@ -1601,18 +1675,10 @@ fn catalytic_inference_step<'py>(
             let lwo_f32 = weight_offset + layer_idx * TOTAL_WEIGHT_F32;
             let layer_save = saved_outputs_offset + layer_idx * COMPLEX_DIM;
             let pg = pre_gate_base + layer_idx * COMPLEX_DIM;
+            let is_attn = layer_wt_is_attn[layer_idx];
 
-            let original_weight_f32 = tape[lwo_f32 .. lwo_f32 + TOTAL_WEIGHT_F32].to_vec();
-            let original_weight_u8 = tape[lwo .. lwo + TOTAL_WEIGHT_U8].to_vec();
-            let src_slice = &compressed_weights_bytes[layer_idx * TOTAL_WEIGHT_U8 .. (layer_idx + 1) * TOTAL_WEIGHT_U8];
-            tape[lwo .. lwo + TOTAL_WEIGHT_U8].copy_from_slice(src_slice);
-            spn_unscramble(&mut tape, lwo, TOTAL_WEIGHT_U8, bh_key, &sbox, 12);
-            // 16.8 WEIGHT STREAMING: route unscrambled u8 bytes into f32 compute region for uncompute
-            let unscrambled_bwd = tape[lwo .. lwo + TOTAL_WEIGHT_U8].to_vec();
-            tape[lwo_f32 .. lwo_f32 + TOTAL_WEIGHT_F32].copy_from_slice(&unscrambled_bwd);
-
-            if (layer_idx + 1) % 4 == 0 {
-                // Attention uncompute — read output as raw bytes from layer_save (no recompute)
+            // Attention uncompute: raw bytes only, no weight loading needed
+            if is_attn {
                 let attn_idx = layer_idx / 4;
                 let slot_base = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + step % MAX_SEQ_LEN) * 4 * F32_DIM;
                 // Step 1: undo output copy-through using raw bytes from layer_save
@@ -1626,7 +1692,6 @@ fn catalytic_inference_step<'py>(
                     for b in 0..4 {
                         tape[input_offset + j * 4 + b] ^= px_bytes[b];
                         tape[input_offset + F32_DIM + j * 4 + b] ^= py_bytes[b];
-                        // Zero layer_save
                         tape[layer_save + j * 4 + b] ^= px_bytes[b];
                         tape[layer_save + F32_DIM + j * 4 + b] ^= py_bytes[b];
                     }
@@ -1656,7 +1721,19 @@ fn catalytic_inference_step<'py>(
                         tape[slot_base + F32_DIM * 3 + j * 4 + b] ^= vy_bytes[b];
                     }
                 }
+                // No weight scramble/restore (forward restores per-block)
             } else {
+                // DeltaNet uncompute — load weights, then read raw bytes
+                let original_weight_f32 = tape[lwo_f32 .. lwo_f32 + TOTAL_WEIGHT_F32].to_vec();
+                let original_weight_u8 = tape[lwo .. lwo + TOTAL_WEIGHT_U8].to_vec();
+                let wt_off = layer_wt_offsets[layer_idx];
+                let src_slice = &compressed_weights_bytes[wt_off .. wt_off + TOTAL_WEIGHT_U8];
+                tape[lwo .. lwo + TOTAL_WEIGHT_U8].copy_from_slice(src_slice);
+                spn_unscramble(&mut tape, lwo, TOTAL_WEIGHT_U8, bh_key, &sbox, 12);
+                let unscrambled_delta_bwd = tape[lwo .. lwo + TOTAL_WEIGHT_U8].to_vec();
+                tape[lwo_f32 .. lwo_f32 + TOTAL_WEIGHT_F32]
+                    .copy_from_slice(&unscrambled_delta_bwd);
+
                 // DeltaNet uncompute — read gate/Q as raw bytes (no f32 canonicalization)
                 for j in 0..HIDDEN_DIM {
                     // Read gate bytes directly from layer_save
@@ -1702,11 +1779,12 @@ fn catalytic_inference_step<'py>(
                         tape[pg + F32_DIM + j * 4 + b] ^= qy_bytes[b];
                     }
                 }
-            }
 
-            spn_scramble(&mut tape, lwo, TOTAL_WEIGHT_U8, bh_key, &sbox, 12);
-            tape[lwo_f32 .. lwo_f32 + TOTAL_WEIGHT_F32].copy_from_slice(&original_weight_f32);
-            tape[lwo .. lwo + TOTAL_WEIGHT_U8].copy_from_slice(&original_weight_u8);
+                // Weight scramble/restore
+                spn_scramble(&mut tape, lwo, TOTAL_WEIGHT_U8, bh_key, &sbox, 12);
+                tape[lwo_f32 .. lwo_f32 + TOTAL_WEIGHT_F32].copy_from_slice(&original_weight_f32);
+                tape[lwo .. lwo + TOTAL_WEIGHT_U8].copy_from_slice(&original_weight_u8);
+            }
 
             // SHA-256 checkpoint AFTER uncompute — capture per-region hashes
             let post_bwd_hash = {
@@ -2102,10 +2180,25 @@ fn scramble_catalysis_weights<'py>(
     let mut weights_vec = bytes.to_vec();
     let (sbox, _) = generate_logistic_sbox();
     let bh_key = b"catalytic_key_27b_inference_16_s";
-    let num_layers = weights_vec.len() / TOTAL_WEIGHT_U8;
-    for layer_idx in 0..num_layers {
-        let lwo = layer_idx * TOTAL_WEIGHT_U8;
-        spn_scramble(&mut weights_vec, lwo, TOTAL_WEIGHT_U8, bh_key, &sbox, 12);
+    let mut offset = 0usize;
+    let mut layer_idx = 0usize;
+    while offset < weights_vec.len() {
+        let is_attn = (layer_idx + 1) % 4 == 0;
+        let layer_size = if is_attn {
+            4 * FULL_MATRIX_BLOCKS * BLOCK_U8_SIZE
+        } else {
+            TOTAL_WEIGHT_U8
+        };
+        if offset + layer_size > weights_vec.len() { break; }
+        // Scramble each block within the layer
+        let mut block_off = offset;
+        let n_blocks = layer_size / BLOCK_U8_SIZE;
+        for _ in 0..n_blocks {
+            spn_scramble(&mut weights_vec, block_off, BLOCK_U8_SIZE, bh_key, &sbox, 12);
+            block_off += BLOCK_U8_SIZE;
+        }
+        offset += layer_size;
+        layer_idx += 1;
     }
     Ok(PyBytes::new_bound(py, &weights_vec))
 }

@@ -69,16 +69,15 @@ Run inference on a Qwen 0.5B model using zero bytes of dynamic system RAM for mo
 - [x] 16.8A PLATONIC EIGENBUDDY TOKENIZER: prototype decoder trained on Qwen embedding table
 - [ ] Coherent output — weight streaming active but compute uses element-wise w[j]*x[j], not full W@x
 
-#### 16.9 — COHERENT OUTPUT  🟡 IN PROGRESS (EigenBuddy + Compression)
+#### 16.9 — COHERENT OUTPUT  🟡 W@x OPERATIONAL
 
-- [x] Warm cache fixed: stores pre-uncompute hidden state, overwrite on collision
-- [x] Hidden state collection: 500 tokens, 16 unique targets, 80 cold-miss, NaN-free
-- [x] EigenBuddy on raw: 100% but 8/8 test (trivial, NaN issues)
-- [x] Complex Hermitian SVD compression (from 20.10): Df=2.5, K95=12, 896D->16D
-- [x] EigenBuddy on compressed: 82.8% train / 100% test (16/16), 16-dim input
-- [ ] BLOCKER: Engine output capped at 16 unique tokens. Full W@x needed for broader vocab.
-- [ ] Collect larger dataset for meaningful compression evaluation
-- [ ] Path A (recommended): Implement full W@x dot-product in Rust for real output distribution
+- [x] Block-tiled W@x dot-product for attention layers (Q, K, V, O): 4 rows per block, 224 blocks per matrix
+- [x] 100% tape restoration maintained with block-tiled dot product
+- [x] Output tokens changed (D, T vs >, K, 6) — confirming dot-product produces different hidden states
+- [x] Warm cache mitigates cold-miss penalty (90% hit rate, 0.3s warm vs 14s cold)
+- [ ] Cold-miss speed: 0.56 tok/s avg (14s per cold miss). Optimize: larger blocks, fewer SPN rounds
+- [ ] DeltaNet still element-wise — output limited to subword tokens. Next: full W@x for DeltaNet or proper gate weights
+- [ ] Expand output head from 64 to 896 positions for broader token coverage
 
 #### 16.10 — VALIDATION & HARDENING  ⬜
 
