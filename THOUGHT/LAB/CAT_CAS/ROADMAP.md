@@ -57,9 +57,10 @@ This roadmap outlines the milestones for pushing the boundaries of Catalytic Spa
         5. **Cross-Depth Transfer**: Cache from depth-6 tree mapped to depth-8 tree. 10 transferred entries → 49.7% XOR reduction (44 cache hits out of 127 internal nodes). Zero false hits.
       Bits erased: 0 across all exploits. Script: `12_structured_tape_acceleration/exploit.py`.
 
-- [ ] **Computing Near the Landauer Limit (Thermodynamic Reversibility)**
+- [x] **Computing Near the Landauer Limit (Thermodynamic Reversibility)**
   *   Develop a simulation environment to measure physical heat dissipation at the gate level.
   *   Verify that running a program in reverse cools/restores thermodynamic states toward Landauer's limit.
+  *   **Result:** Gate-level bit erasure tracker. XOR/NOT: 0 bits erased. Overwrite: 1 bit erased, kT ln 2 J dissipated. Forward pass heats die; reverse pass restores bits and cools it back. Net cycle: 0 J. 10K qubit catalytic circuit: all gates reversible. Heating/cooling cycle proven. Script: `27_landauer_limit/1_gate_thermo.py`.
 
 - [ ] **Exploring the Limits: What Catalytic Space Cannot Do**
   *   Find the mathematical bounds where catalytic space breaks.
@@ -155,3 +156,17 @@ This roadmap outlines the milestones for pushing the boundaries of Catalytic Spa
   *   Simulate dual entangled black holes ($L$ and $R$) connected by a traversable wormhole on the catalytic tape.
   *   Transmit a qubit from $L$ to $R$ using boundary coupling (simulating a negative energy shockwave).
   *   Verify that the uncomputation pass restores the traversable wormhole metric to its exact thermodynamic and gravitational vacuum state, leaving zero geometric residue.
+
+---
+
+### Phase 1: Lattice Holography (Breaking Post-Quantum)
+**Objective:** Solve the Shortest Vector Problem (SVP).
+**Attack Vector:** Map Lattice Basis matrices into 3D optical gratings. Detect the fundamental resonant frequency (the Shortest Vector) via Principal Component wave collapse, bypassing traditional LLL lattice reduction.
+
+### Phase 2: The 3-SAT Optical Solver (Breaking NP-Complete)
+**Objective:** Solve Boolean Satisfiability without brute-force search.
+**Attack Vector:** Map CNF formulas into an array of phase-shifting mirrors ($+1$ for True, $-1$ for False). Feed the formula into the Phase Cavity and measure constructive interference to instantly identify valid assignments.
+
+### Phase 3: Holographic Graph Isomorphism (The Permutation Sieve)
+**Objective:** Instantly identify identical scrambled networks.
+**Attack Vector:** Map Adjacency Matrices into 2D wave topologies. Rely on holographic translation-invariance to generate identical optical diffraction spectra for isomorphic graphs, regardless of vertex permutation.
