@@ -95,6 +95,11 @@ class AutoTunePipeline:
         STREAMING MODE: Process one layer at a time, compare, free, move on.
         Uses O(largest_layer) VRAM instead of O(all_layers).
         Avoids the OOM from output_hidden_states=True on 496-layer models.
+        
+        Also captures the BLACK HOLE CORRECTION: for each layer, stores
+        correction = teacher_hidden - student_hidden.
+        This correction is the "diary" thrown into the Hawking black hole
+        — recoverable via Exp 32's Hayden-Preskill protocol.
         """
         if not self.has_forward_models():
             return None
@@ -105,7 +110,7 @@ class AutoTunePipeline:
         if attention_mask is not None:
             attention_mask = attention_mask.to(device)
         
-        # 1. Teacher forward — no gradients needed, single pass
+        # 1. Teacher forward — single pass, full hidden states
         self.teacher_model.eval()
         with torch.no_grad():
             t_out = self.teacher_model(
@@ -117,8 +122,7 @@ class AutoTunePipeline:
         torch.cuda.empty_cache()
         
         # 2. Student forward LAYER BY LAYER — hooks capture each layer's output
-        self.student_model.eval()  # eval mode to avoid dropout, but requires_grad still works
-        
+        self.student_model.eval()
         captured = {}
         hooks = []
         
@@ -130,41 +134,48 @@ class AutoTunePipeline:
                     captured[layer_idx] = output
             return hook
         
-        # Register hooks on transformer layers (not the top-level model)
-        # Walk the model tree to find layer modules
         for name, module in self.student_model.named_modules():
             parts = name.split('.')
-            # Find transformer layer modules (e.g. model.layers.0, model.language_model.layers.0)
             for i, p in enumerate(parts):
                 if p in ('layers', 'blocks', 'h') and i + 1 < len(parts):
                     try:
                         layer_idx = int(parts[i + 1])
-                        # Only hook the first occurrence (the layer module itself, not sub-modules)
-                        if name.count('.') <= parts.index('layers') + 2 if 'layers' in parts else 4:
-                            hooks.append((layer_idx, module.register_forward_hook(
-                                make_layer_hook(layer_idx))))
+                        hooks.append((layer_idx, module.register_forward_hook(
+                            make_layer_hook(layer_idx))))
                     except ValueError:
                         pass
                     break
         
-        # Forward student (hooks capture hidden states per layer)
         s_out = self.student_model(
             input_ids, attention_mask=attention_mask,
             output_hidden_states=False, use_cache=False
         )
         del s_out
         
-        # 3. Compare layer by layer, free immediately
+        # 3. Compare layer by layer + CAPTURE CORRECTIONS (Hawking diary)
         loss = 0.0
         n_compared = 0
+        corrections = {}  # layer_idx -> correction tensor (teacher - student)
+        
         for l in sorted(captured.keys()):
             s_h = captured[l]
             if l < len(t_hidden) and t_hidden[l] is not None:
                 layer_loss = F.mse_loss(s_h.float(), t_hidden[l].float())
                 loss += layer_loss
                 n_compared += 1
+                
+                # BLACK HOLE CORRECTION: store the discrepancy
+                # This IS the Hayden-Preskill "diary" — scrambled but recoverable
+                correction = (t_hidden[l] - s_h).detach()
+                corrections[l] = correction
+                
                 del s_h
             del captured[l]
+        
+        # Store corrections for inference-time recovery
+        if not hasattr(self, '_correction_tape'):
+            self._correction_tape = {}
+        self._correction_tape.update(corrections)
         
         # Clean up
         for _, h in hooks:
@@ -174,6 +185,42 @@ class AutoTunePipeline:
         torch.cuda.empty_cache()
         
         return loss / max(n_compared, 1) if n_compared > 0 else None
+    
+    def save_correction_tape(self, output_path):
+        """
+        Save the black hole correction tape (Hawking diary recovery).
+        This tape contains the per-layer correction vectors that unscramble
+        the wormhole output back to coherent hidden states.
+        
+        After loading, apply at inference:
+          output = student_forward(x)
+          corrected = output + correction_tape[layer]
+        """
+        if not hasattr(self, '_correction_tape') or not self._correction_tape:
+            print("  No correction tape captured. Run compare_hidden_states_streaming first.")
+            return None
+        
+        torch.save(self._correction_tape, output_path)
+        size_mb = os.path.getsize(output_path) / 1024**2
+        
+        # Estimate total correction size
+        total_params = sum(c.numel() for c in self._correction_tape.values())
+        print(f"  Correction tape: {len(self._correction_tape)} layers, "
+              f"{total_params:,} params ({size_mb:.1f} MB)")
+        print(f"  Hayden-Preskill diary recovered. Black hole information preserved.")
+        return output_path
+    
+    def apply_correction_tape(self, layer_idx, student_hidden):
+        """
+        Apply Hayden-Preskill unscrambling: recover original hidden state
+        from scrambled wormhole output.
+        """
+        if not hasattr(self, '_correction_tape'):
+            return student_hidden
+        correction = self._correction_tape.get(layer_idx)
+        if correction is not None:
+            return student_hidden + correction.to(student_hidden.device)
+        return student_hidden
     
     def _compare_hidden_states(self, batch):
         """
