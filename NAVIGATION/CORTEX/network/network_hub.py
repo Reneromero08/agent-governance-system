@@ -469,6 +469,19 @@ class SemanticNetworkHub:
             results[cassette_id] = self.resync_cassette(cassette_id)
         return results
 
+    def attach_svtp_bridge(self, aligned_pair, embed_fn):
+        """Attach an SVTP bridge to allow cross-model vector querying."""
+        try:
+            from .svtp_bridge import SVTPCortexBridge
+            self.svtp_bridge = SVTPCortexBridge(self, aligned_pair, embed_fn)
+            if self.verbose:
+                print("[NETWORK] Attached SVTP Bridge for cross-model queries", file=sys.stderr)
+            return self.svtp_bridge
+        except ImportError as e:
+            import sys
+            print(f"[NETWORK] Error attaching SVTP bridge: {e}", file=sys.stderr)
+            return None
+
     def print_network_status(self):
         """Print formatted network status including sync information."""
         sync_summary = self.get_sync_summary()
