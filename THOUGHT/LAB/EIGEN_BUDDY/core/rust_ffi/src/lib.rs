@@ -331,6 +331,14 @@ const COMPLEX_CH: usize = 2;  // X (real) + Y (imaginary) channels
 const COMPLEX_DIM: usize = HIDDEN_DIM * F32_BYTES * COMPLEX_CH;  // bytes per complex vector
 const F32_DIM: usize = HIDDEN_DIM * F32_BYTES;  // bytes per single-channel f32 vector
 
+// Weight region sub-offsets per layer: Q, K, V, O (4 x f32 matrices)
+const WEIGHT_Q_OFFSET: usize = 0;
+const WEIGHT_K_OFFSET: usize = 1 * F32_DIM;
+const WEIGHT_V_OFFSET: usize = 2 * F32_DIM;
+const WEIGHT_O_OFFSET: usize = 3 * F32_DIM;
+const TOTAL_WEIGHT_F32: usize = 4 * F32_DIM;  // f32 weight bytes per layer (Q/K/V/O)
+const TOTAL_WEIGHT_U8: usize = 4 * F32_DIM;  // u8 weight bytes per layer (same size as f32)
+
 #[inline(always)]
 fn tape_f32(tape: &[u8], base: usize, idx: usize) -> f32 {
     let off = base + idx * F32_BYTES;
@@ -357,8 +365,8 @@ mod tests {
         // Layers: 0=delta, 1=delta, 2=delta, 3=attention
         let num_layers: usize = 4;
         let input_offset = 0usize;
-        let weight_offset = HIDDEN_DIM * 2;
-        let scratch_base = weight_offset + num_layers * HIDDEN_DIM;
+        let weight_offset = COMPLEX_DIM;
+        let scratch_base = weight_offset + num_layers * TOTAL_WEIGHT_F32;
         let temp_offset = scratch_base;
         let pre_gate_base = temp_offset + COMPLEX_DIM;
         let saved_outputs_offset = pre_gate_base + num_layers * COMPLEX_DIM;
@@ -375,13 +383,18 @@ mod tests {
         tape_f32_xor(&mut tape, input_offset, 0, 0.5);
         tape_f32_xor(&mut tape, input_offset + F32_DIM, 0, 1.0);
 
-        // Set weights for all layers
+        // Set weights for all layers — Q/K/V/O regions
+        let base_weight: f32 = 0.1;
         for li in 0..num_layers {
-            let lwo_f32 = weight_offset + li * HIDDEN_DIM * F32_BYTES;
-            tape_f32_xor(&mut tape, lwo_f32, 0, 0.1 + li as f32 * 0.05);
-            tape_f32_xor(&mut tape, lwo_f32 + 512 * F32_BYTES, 0, 0.1 + li as f32 * 0.05);
-            tape_f32_xor(&mut tape, lwo_f32 + 1024 * F32_BYTES, 0, 0.1 + li as f32 * 0.05);
-            tape_f32_xor(&mut tape, lwo_f32 + 1536 * F32_BYTES, 0, 0.1 + li as f32 * 0.05);
+            let lwo_f32 = weight_offset + li * TOTAL_WEIGHT_F32;
+            let w = base_weight + li as f32 * 0.05;
+            // Set first 512 entries of each weight matrix (enough for j%512 reads in delta + attention)
+            for j in 0..512.min(HIDDEN_DIM) {
+                tape_f32_xor(&mut tape, lwo_f32 + WEIGHT_Q_OFFSET, j, w);
+                tape_f32_xor(&mut tape, lwo_f32 + WEIGHT_K_OFFSET, j, w);
+                tape_f32_xor(&mut tape, lwo_f32 + WEIGHT_V_OFFSET, j, w);
+                tape_f32_xor(&mut tape, lwo_f32 + WEIGHT_O_OFFSET, j, w);
+            }
         }
 
         let hash_before: String = {
@@ -396,7 +409,7 @@ mod tests {
 
         // ---- FORWARD ALL LAYERS ----
         for layer_idx in 0..num_layers {
-            let lwo_f32 = weight_offset + layer_idx * HIDDEN_DIM * F32_BYTES;
+            let lwo_f32 = weight_offset + layer_idx * TOTAL_WEIGHT_F32;
             if (layer_idx + 1) % 4 == 0 && step == 0 {
                 // Save pre-forward input bytes for comparison
                 let _saved_input = tape[input_offset..input_offset+COMPLEX_DIM].to_vec();
@@ -423,9 +436,9 @@ mod tests {
                     nx[HIDDEN_DIM + j] = tape_f32(&tape, input_offset + F32_DIM, j) / rms;
                 }
                 for j in 0..HIDDEN_DIM {
-                    let wq = tape_f32(&tape, lwo_f32, j % 512);
-                    let wk = tape_f32(&tape, lwo_f32 + 512 * F32_BYTES, j % 512);
-                    let wv = tape_f32(&tape, lwo_f32 + 1024 * F32_BYTES, j % 512);
+                    let wq = tape_f32(&tape, lwo_f32 + WEIGHT_Q_OFFSET, j);
+                    let wk = tape_f32(&tape, lwo_f32 + WEIGHT_K_OFFSET, j);
+                    let wv = tape_f32(&tape, lwo_f32 + WEIGHT_V_OFFSET, j);
                     let qx = wq * nx[j]; let qy = wq * nx[HIDDEN_DIM + j];
                     let kx = wk * nx[j]; let ky = wk * nx[HIDDEN_DIM + j];
                     let vx = wv * nx[j]; let vy = wv * nx[HIDDEN_DIM + j];
@@ -448,7 +461,7 @@ mod tests {
                     }
                 }
                 for j in 0..HIDDEN_DIM {
-                    let wo = tape_f32(&tape, lwo_f32 + 1536 * F32_BYTES, j % 512);
+                    let wo = tape_f32(&tape, lwo_f32 + WEIGHT_O_OFFSET, j);
                     let px = wo * attn_x[j]; let py = wo * attn_y[j];
                     tape_f32_xor(&mut tape, layer_save, j, px);
                     tape_f32_xor(&mut tape, layer_save + F32_DIM, j, py);
@@ -496,14 +509,13 @@ mod tests {
 
         // ---- UNCOMPUTE ALL LAYERS ----
         for layer_idx in (0..num_layers).rev() {
-            let lwo_f32 = weight_offset + layer_idx * HIDDEN_DIM * F32_BYTES;
+            let lwo_f32 = weight_offset + layer_idx * TOTAL_WEIGHT_F32;
             let layer_save = saved_outputs_offset + layer_idx * COMPLEX_DIM;
             let pg = pre_gate_base + layer_idx * COMPLEX_DIM;
             let temp_before = tape_f32(&tape, temp_offset, 0);
 
             if (layer_idx + 1) % 4 == 0 {
                 // ATTENTION UNCOMPUTE
-                let attn_idx = layer_idx / 4;
                 let attn_idx = layer_idx / 4;
                 let slot_base = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + step % MAX_SEQ_LEN) * 4 * F32_DIM;
                 for j in 0..HIDDEN_DIM {
@@ -524,7 +536,7 @@ mod tests {
                     }
                 }
                 for j in 0..HIDDEN_DIM {
-                    let wo = tape_f32(&tape, lwo_f32 + 1536 * F32_BYTES, j % 512);
+                    let wo = tape_f32(&tape, lwo_f32 + WEIGHT_O_OFFSET, j);
                     tape_f32_xor(&mut tape, layer_save, j, wo * attn_x2[j]);
                     tape_f32_xor(&mut tape, layer_save + F32_DIM, j, wo * attn_y2[j]);
                 }
@@ -538,9 +550,9 @@ mod tests {
                 for j in 0..HIDDEN_DIM {
                     let nx = tape_f32(&tape, input_offset, j) / rms;
                     let ny = tape_f32(&tape, input_offset + F32_DIM, j) / rms;
-                    let wq = tape_f32(&tape, lwo_f32, j % 512);
-                    let wk = tape_f32(&tape, lwo_f32 + 512 * F32_BYTES, j % 512);
-                    let wv = tape_f32(&tape, lwo_f32 + 1024 * F32_BYTES, j % 512);
+                    let wq = tape_f32(&tape, lwo_f32 + WEIGHT_Q_OFFSET, j);
+                    let wk = tape_f32(&tape, lwo_f32 + WEIGHT_K_OFFSET, j);
+                    let wv = tape_f32(&tape, lwo_f32 + WEIGHT_V_OFFSET, j);
                     tape_f32_xor(&mut tape, pg, j, wq * nx);
                     tape_f32_xor(&mut tape, pg + F32_DIM, j, wq * ny);
                     tape_f32_xor(&mut tape, slot_base, j, wk * nx);
@@ -618,6 +630,9 @@ mod tests {
 
         let ix = tape_f32(&tape, input_offset, 0);
         let iy = tape_f32(&tape, input_offset + F32_DIM, 0);
+        println!("Input raw bytes X [0..4]: {:02x?}", &tape[input_offset..input_offset+4]);
+        println!("Input raw bytes Y [3584..3588]: {:02x?}", &tape[input_offset+F32_DIM..input_offset+F32_DIM+4]);
+        println!("ix={:.6e}, iy={:.6e}", ix, iy);
         assert!((ix - 0.5).abs() < 0.001, "input X not restored: got {ix}");
         assert!((iy - 1.0).abs() < 0.001, "input Y not restored: got {iy}");
     }
@@ -627,8 +642,8 @@ mod tests {
         // Use exact engine layout: attention layer at layer_idx=3 (first attention)
         let num_layers: usize = 4; // layers 0,1,2 are delta, layer 3 is attention
         let input_offset = 0usize;
-        let weight_offset = HIDDEN_DIM * 2;
-        let scratch_base = weight_offset + num_layers * HIDDEN_DIM;
+        let weight_offset = COMPLEX_DIM;
+        let scratch_base = weight_offset + num_layers * TOTAL_WEIGHT_F32;
         let temp_offset = scratch_base;
         let pre_gate_base = temp_offset + COMPLEX_DIM;
         let saved_outputs_offset = pre_gate_base + num_layers * COMPLEX_DIM;
@@ -641,21 +656,19 @@ mod tests {
         let total_scratch = kv_cache_offset + (num_layers / 4) * MAX_SEQ_LEN * 4 * F32_DIM;
         let mut tape = vec![0u8; total_scratch + 4096];
 
-        // Set weight values for attention layer (layer 3 = last layer)
+        // Set weight values for attention layer (layer 3 = last layer) — Q/K/V/O
         let layer_idx: usize = 3;
-        let lwo_f32 = weight_offset + layer_idx * HIDDEN_DIM * F32_BYTES;
-        tape_f32_xor(&mut tape, lwo_f32, 0, 0.1);
-        tape_f32_xor(&mut tape, lwo_f32 + 512 * F32_BYTES, 0, 0.1);
-        tape_f32_xor(&mut tape, lwo_f32 + 1024 * F32_BYTES, 0, 0.1);
-        tape_f32_xor(&mut tape, lwo_f32 + 1536 * F32_BYTES, 0, 0.1);
+        let lwo_f32 = weight_offset + layer_idx * TOTAL_WEIGHT_F32;
+        for j in 0..HIDDEN_DIM {
+            tape_f32_xor(&mut tape, lwo_f32 + WEIGHT_Q_OFFSET, j, 0.1);
+            tape_f32_xor(&mut tape, lwo_f32 + WEIGHT_K_OFFSET, j, 0.1);
+            tape_f32_xor(&mut tape, lwo_f32 + WEIGHT_V_OFFSET, j, 0.1);
+            tape_f32_xor(&mut tape, lwo_f32 + WEIGHT_O_OFFSET, j, 0.1);
+        }
         
         // Set input
         tape_f32_xor(&mut tape, input_offset, 0, 0.5);
         tape_f32_xor(&mut tape, input_offset + F32_DIM, 0, 1.0);
-
-        let (sbox, _) = generate_logistic_sbox();
-        let bh_key = b"catalytic_key_27b_inference_16_s";
-        let empty_weights = vec![0u8; num_layers * HIDDEN_DIM];
 
         let hash_before: String = {
             let mut h = Sha256::new();
@@ -666,9 +679,9 @@ mod tests {
         // Forward: skip delta layers 0,1,2 (they modify input/temp/pre_gate/layer_save but we haven't set up weights)
         // Just run attention layer 3 directly
         {
-            let lwo = weight_offset + 3 * HIDDEN_DIM;
+            let lwo = weight_offset + 3 * TOTAL_WEIGHT_U8;
             let layer_save = saved_outputs_offset + 3 * COMPLEX_DIM;
-            let original_weight = tape[lwo_f32 .. lwo_f32 + HIDDEN_DIM * F32_BYTES].to_vec();
+            let original_weight = tape[lwo_f32 .. lwo_f32 + TOTAL_WEIGHT_F32].to_vec();
             let step = 0usize;
 
             // RMS norm
@@ -689,9 +702,9 @@ mod tests {
             let slot_base = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + step % MAX_SEQ_LEN) * 4 * F32_DIM;
             let pg = pre_gate_base + 3 * COMPLEX_DIM;
             for j in 0..HIDDEN_DIM {
-                let wq = tape_f32(&tape, lwo_f32, j % 512);
-                let wk = tape_f32(&tape, lwo_f32 + 512 * F32_BYTES, j % 512);
-                let wv = tape_f32(&tape, lwo_f32 + 1024 * F32_BYTES, j % 512);
+                let wq = tape_f32(&tape, lwo_f32 + WEIGHT_Q_OFFSET, j);
+                let wk = tape_f32(&tape, lwo_f32 + WEIGHT_K_OFFSET, j);
+                let wv = tape_f32(&tape, lwo_f32 + WEIGHT_V_OFFSET, j);
                 let qx = wq * nx_fwd[j]; let qy = wq * nx_fwd[HIDDEN_DIM + j];
                 let kx = wk * nx_fwd[j]; let ky = wk * nx_fwd[HIDDEN_DIM + j];
                 let vx = wv * nx_fwd[j]; let vy = wv * nx_fwd[HIDDEN_DIM + j];
@@ -718,7 +731,7 @@ mod tests {
             }
             // Output projection
             for j in 0..HIDDEN_DIM {
-                let wo = tape_f32(&tape, lwo_f32 + 1536 * F32_BYTES, j % 512);
+                let wo = tape_f32(&tape, lwo_f32 + WEIGHT_O_OFFSET, j);
                 let px = wo * attn_x[j]; let py = wo * attn_y[j];
                 tape_f32_xor(&mut tape, layer_save, j, px);
                 tape_f32_xor(&mut tape, layer_save + F32_DIM, j, py);
@@ -737,7 +750,7 @@ mod tests {
 
         // Uncompute: attention layer 3 (reverse)
         {
-            let lwo = weight_offset + 3 * HIDDEN_DIM;
+            let lwo = weight_offset + 3 * TOTAL_WEIGHT_U8;
             let layer_save = saved_outputs_offset + 3 * COMPLEX_DIM;
             let pg = pre_gate_base + 3 * COMPLEX_DIM;
             let step = 0usize;
@@ -767,7 +780,7 @@ mod tests {
             }
             // Step 3: undo layer_save
             for j in 0..HIDDEN_DIM {
-                let wo = tape_f32(&tape, lwo_f32 + 1536 * F32_BYTES, j % 512);
+                let wo = tape_f32(&tape, lwo_f32 + WEIGHT_O_OFFSET, j);
                 tape_f32_xor(&mut tape, layer_save, j, wo * attn_x2[j]);
                 tape_f32_xor(&mut tape, layer_save + F32_DIM, j, wo * attn_y2[j]);
             }
@@ -782,9 +795,9 @@ mod tests {
             for j in 0..HIDDEN_DIM {
                 let nx = tape_f32(&tape, input_offset, j) / rms;
                 let ny = tape_f32(&tape, input_offset + F32_DIM, j) / rms;
-                let wq = tape_f32(&tape, lwo_f32, j % 512);
-                let wk = tape_f32(&tape, lwo_f32 + 512 * F32_BYTES, j % 512);
-                let wv = tape_f32(&tape, lwo_f32 + 1024 * F32_BYTES, j % 512);
+                let wq = tape_f32(&tape, lwo_f32 + WEIGHT_Q_OFFSET, j);
+                let wk = tape_f32(&tape, lwo_f32 + WEIGHT_K_OFFSET, j);
+                let wv = tape_f32(&tape, lwo_f32 + WEIGHT_V_OFFSET, j);
                 tape_f32_xor(&mut tape, pg, j, wq * nx);
                 tape_f32_xor(&mut tape, pg + F32_DIM, j, wq * ny);
                 tape_f32_xor(&mut tape, slot_base, j, wk * nx);
@@ -801,6 +814,19 @@ mod tests {
         };
         println!("After uncompute: hash={}", hash_after);
         println!("MATCH: {}", hash_before == hash_after);
+        
+        // Debug per-region hashes
+        let input_hash = { let mut h = Sha256::new(); ShaDigest::update(&mut h, &tape[input_offset..input_offset+COMPLEX_DIM]); format!("{:x}", h.finalize()) };
+        let weight_hash = { let mut h = Sha256::new(); ShaDigest::update(&mut h, &tape[lwo_f32..lwo_f32+TOTAL_WEIGHT_F32]); format!("{:x}", h.finalize()) };
+        let pg3_hash = { let pg = pre_gate_base + 3*COMPLEX_DIM; let mut h = Sha256::new(); ShaDigest::update(&mut h, &tape[pg..pg+COMPLEX_DIM]); format!("{:x}", h.finalize()) };
+        let ls3_hash = { let ls = saved_outputs_offset + 3*COMPLEX_DIM; let mut h = Sha256::new(); ShaDigest::update(&mut h, &tape[ls..ls+COMPLEX_DIM]); format!("{:x}", h.finalize()) };
+        let slot_hash = { let sb = kv_cache_offset; let mut h = Sha256::new(); ShaDigest::update(&mut h, &tape[sb..sb+4*F32_DIM]); format!("{:x}", h.finalize()) };
+        println!("  input: {}", &input_hash[..16]);
+        println!("  weight: {}", &weight_hash[..16]);
+        println!("  pg[3]: {}", &pg3_hash[..16]);
+        println!("  ls[3]: {}", &ls3_hash[..16]);
+        println!("  slot: {}", &slot_hash[..16]);
+        
         assert_eq!(hash_before, hash_after, "attention engine-style hash mismatch");
 
         let ix = tape_f32(&tape, input_offset, 0);
@@ -821,23 +847,25 @@ mod tests {
         let pre_gate_stride = complex_dim;
         let layer_save_stride = complex_dim;
         let slot_size = 4 * f32_dim; // QKV+output per step
+        let total_weight_f32 = 4 * f32_dim; // Q/K/V/O f32 regions
         
         let mut tape = vec![0u8; complex_dim * 8 + pre_gate_stride + layer_save_stride + slot_size + 4096];
         let input_off = 0usize;
         let weight_off = complex_dim; // 7168
-        let temp_off = 0; // unused for attention
-        let pre_gate_off = weight_off + f32_dim; // 7168 + 3584 = 10752
-        let layer_save_off = pre_gate_off + pre_gate_stride; // 10752 + 7168 = 17920
-        let slot_off = layer_save_off + layer_save_stride; // 17920 + 7168 = 25088
+        let pre_gate_off = weight_off + total_weight_f32; // 7168 + 14336 = 21504
+        let layer_save_off = pre_gate_off + pre_gate_stride; // 21504 + 7168 = 28672
+        let slot_off = layer_save_off + layer_save_stride; // 28672 + 7168 = 35840
 
         // Set input (small values)
         tape_f32_xor(&mut tape, input_off, 0, 0.5);
         tape_f32_xor(&mut tape, input_off + f32_dim, 0, 1.0);
-        // Set weights
-        tape_f32_xor(&mut tape, weight_off, 0, 0.2);
-        tape_f32_xor(&mut tape, weight_off + 512 * f32b, 0, 0.15);
-        tape_f32_xor(&mut tape, weight_off + 1024 * f32b, 0, 0.1);
-        tape_f32_xor(&mut tape, weight_off + 1536 * f32b, 0, 0.05);
+        // Set weights — Q/K/V/O regions, fill all entries
+        for j in 0..dim {
+            tape_f32_xor(&mut tape, weight_off, j, 0.2);             // Q
+            tape_f32_xor(&mut tape, weight_off + f32_dim, j, 0.15);   // K
+            tape_f32_xor(&mut tape, weight_off + 2*f32_dim, j, 0.1);  // V
+            tape_f32_xor(&mut tape, weight_off + 3*f32_dim, j, 0.05); // O
+        }
 
         let hash_before = {
             let mut h = Sha256::new();
@@ -862,9 +890,9 @@ mod tests {
         }
         // QKV projections
         for j in 0..dim {
-            let wq = tape_f32(&tape, weight_off, j % 512);
-            let wk = tape_f32(&tape, weight_off + 512 * f32b, j % 512);
-            let wv = tape_f32(&tape, weight_off + 1024 * f32b, j % 512);
+            let wq = tape_f32(&tape, weight_off, j);           // Q at offset 0
+            let wk = tape_f32(&tape, weight_off + f32_dim, j);  // K at offset f32_dim
+            let wv = tape_f32(&tape, weight_off + 2*f32_dim, j); // V at offset 2*f32_dim
             let qx = wq * nx[j]; let qy = wq * nx[dim + j];
             let kx = wk * nx[j]; let ky = wk * nx[dim + j];
             let vx = wv * nx[j]; let vy = wv * nx[dim + j];
@@ -900,7 +928,7 @@ mod tests {
         }
         // Output projection
         for j in 0..dim {
-            let wo = tape_f32(&tape, weight_off + 1536 * f32b, j % 512);
+            let wo = tape_f32(&tape, weight_off + 3*f32_dim, j);
             let px = wo * attn_x[j]; let py = wo * attn_y[j];
             tape_f32_xor(&mut tape, layer_save_off, j, px);
             tape_f32_xor(&mut tape, layer_save_off + f32_dim, j, py);
@@ -938,7 +966,7 @@ mod tests {
         }
         // Step 3: undo layer_save
         for j in 0..dim {
-            let wo = tape_f32(&tape, weight_off + 1536 * f32b, j % 512);
+            let wo = tape_f32(&tape, weight_off + 3*f32_dim, j);
             tape_f32_xor(&mut tape, layer_save_off, j, wo * attn_x2[j]);
             tape_f32_xor(&mut tape, layer_save_off + f32_dim, j, wo * attn_y2[j]);
         }
@@ -956,9 +984,9 @@ mod tests {
             nx[dim + j] = tape_f32(&tape, input_off + f32_dim, j) / rms;
         }
         for j in 0..dim {
-            let wq = tape_f32(&tape, weight_off, j % 512);
-            let wk = tape_f32(&tape, weight_off + 512 * f32b, j % 512);
-            let wv = tape_f32(&tape, weight_off + 1024 * f32b, j % 512);
+            let wq = tape_f32(&tape, weight_off, j);
+            let wk = tape_f32(&tape, weight_off + f32_dim, j);
+            let wv = tape_f32(&tape, weight_off + 2*f32_dim, j);
             let qx = wq * nx[j]; let qy = wq * nx[dim + j];
             let kx = wk * nx[j]; let ky = wk * nx[dim + j];
             let vx = wv * nx[j]; let vy = wv * nx[dim + j];
@@ -1293,10 +1321,12 @@ fn catalytic_inference_step<'py>(
     let mut first_broken_layer: i32 = -1;
 
     let input_offset = 0usize;
-    let weight_offset = HIDDEN_DIM * 2;
+    let weight_offset = COMPLEX_DIM;  // after input XY region (COMPLEX_DIM = 7168 bytes)
     
     // Scratch layout (f32 for compute regions, u8 for weight buffer):
-    let scratch_base = weight_offset + num_layers * HIDDEN_DIM;  // weight buffer stays u8
+    // Both lwo (u8) and lwo_f32 (f32) share the same per-layer starting offset,
+    // but lwo_f32 is 4x larger. scratch must start after the largest region.
+    let scratch_base = weight_offset + num_layers * TOTAL_WEIGHT_F32;  // after f32 weight region
     let temp_offset = scratch_base;
     let pre_gate_base = temp_offset + COMPLEX_DIM;
     let saved_outputs_offset = pre_gate_base + num_layers * COMPLEX_DIM;
@@ -1394,23 +1424,26 @@ fn catalytic_inference_step<'py>(
                 format!("{:x}", h.finalize())
             });
             // Weight region hash: lwo (u8) + lwo_f32 (f32) bytes for this layer
-            let lwo = weight_offset + layer_idx * HIDDEN_DIM;
-            let lwo_f32 = weight_offset + layer_idx * HIDDEN_DIM * F32_BYTES;
+            let lwo = weight_offset + layer_idx * TOTAL_WEIGHT_U8;
+            let lwo_f32 = weight_offset + layer_idx * TOTAL_WEIGHT_F32;
             fwd_weight_hashes.push({
                 let mut h = Sha256::new();
-                ShaDigest::update(&mut h, &tape[lwo..lwo+HIDDEN_DIM]);
-                ShaDigest::update(&mut h, &tape[lwo_f32..lwo_f32+HIDDEN_DIM*F32_BYTES]);
+                ShaDigest::update(&mut h, &tape[lwo..lwo+TOTAL_WEIGHT_U8]);
+                ShaDigest::update(&mut h, &tape[lwo_f32..lwo_f32+TOTAL_WEIGHT_F32]);
                 format!("{:x}", h.finalize())
             });
             
             let layer_save = saved_outputs_offset + layer_idx * COMPLEX_DIM;
 
             // Dynamic decatalysis — save BOTH lwo (u8) and lwo_f32 (f32)
-            let original_weight_f32 = tape[lwo_f32 .. lwo_f32 + HIDDEN_DIM * F32_BYTES].to_vec();
-            let original_weight_u8 = tape[lwo .. lwo + HIDDEN_DIM].to_vec();
-            let src_slice = &compressed_weights_bytes[layer_idx * HIDDEN_DIM .. (layer_idx + 1) * HIDDEN_DIM];
-            tape[lwo .. lwo + HIDDEN_DIM].copy_from_slice(src_slice);
-            spn_unscramble(&mut tape, lwo, HIDDEN_DIM, bh_key, &sbox, 12);
+            let original_weight_f32 = tape[lwo_f32 .. lwo_f32 + TOTAL_WEIGHT_F32].to_vec();
+            let original_weight_u8 = tape[lwo .. lwo + TOTAL_WEIGHT_U8].to_vec();
+            let src_slice = &compressed_weights_bytes[layer_idx * TOTAL_WEIGHT_U8 .. (layer_idx + 1) * TOTAL_WEIGHT_U8];
+            tape[lwo .. lwo + TOTAL_WEIGHT_U8].copy_from_slice(src_slice);
+            spn_unscramble(&mut tape, lwo, TOTAL_WEIGHT_U8, bh_key, &sbox, 12);
+            // 16.8 WEIGHT STREAMING: route unscrambled u8 bytes into f32 compute region
+            let unscrambled = tape[lwo .. lwo + TOTAL_WEIGHT_U8].to_vec();
+            tape[lwo_f32 .. lwo_f32 + TOTAL_WEIGHT_F32].copy_from_slice(&unscrambled);
 
             if (layer_idx + 1) % 4 == 0 {
                 // GATED ATTENTION LAYER (f32)
@@ -1430,9 +1463,9 @@ fn catalytic_inference_step<'py>(
                 // QKV projections — store as raw bytes in pre_gate and slot
                 let slot_base = kv_cache_offset + (attn_idx * MAX_SEQ_LEN + step % MAX_SEQ_LEN) * 4 * F32_DIM;
                 for j in 0..HIDDEN_DIM {
-                    let wq = tape_f32(&tape, lwo_f32, j % 512);
-                    let wk = tape_f32(&tape, lwo_f32 + 512 * F32_BYTES, j % 512);
-                    let wv = tape_f32(&tape, lwo_f32 + 1024 * F32_BYTES, j % 512);
+                    let wq = tape_f32(&tape, lwo_f32 + WEIGHT_Q_OFFSET, j);
+                    let wk = tape_f32(&tape, lwo_f32 + WEIGHT_K_OFFSET, j);
+                    let wv = tape_f32(&tape, lwo_f32 + WEIGHT_V_OFFSET, j);
                     let qx = wq * nx[j]; let qy = wq * nx[HIDDEN_DIM + j];
                     let kx = wk * nx[j]; let ky = wk * nx[HIDDEN_DIM + j];
                     let vx = wv * nx[j]; let vy = wv * nx[HIDDEN_DIM + j];
@@ -1496,7 +1529,7 @@ fn catalytic_inference_step<'py>(
                 }
                 // Output projection + add to input — store as raw bytes
                 for j in 0..HIDDEN_DIM {
-                    let wo = tape_f32(&tape, lwo_f32 + 1536 * F32_BYTES, j % 512);
+                    let wo = tape_f32(&tape, lwo_f32 + WEIGHT_O_OFFSET, j);
                     let px = wo * attn_x[j]; let py = wo * attn_y[j];
                     let px_bytes = px.to_bits().to_le_bytes();
                     let py_bytes = py.to_bits().to_le_bytes();
@@ -1545,9 +1578,9 @@ fn catalytic_inference_step<'py>(
             }
 
             // Re-scramble and restore weight substrate (both u8 and f32 regions)
-            spn_scramble(&mut tape, lwo, HIDDEN_DIM, bh_key, &sbox, 12);
-            tape[lwo_f32 .. lwo_f32 + HIDDEN_DIM * F32_BYTES].copy_from_slice(&original_weight_f32);
-            tape[lwo .. lwo + HIDDEN_DIM].copy_from_slice(&original_weight_u8);
+            spn_scramble(&mut tape, lwo, TOTAL_WEIGHT_U8, bh_key, &sbox, 12);
+            tape[lwo_f32 .. lwo_f32 + TOTAL_WEIGHT_F32].copy_from_slice(&original_weight_f32);
+            tape[lwo .. lwo + TOTAL_WEIGHT_U8].copy_from_slice(&original_weight_u8);
         }
 
         // Output head (f32)
@@ -1560,16 +1593,19 @@ fn catalytic_inference_step<'py>(
         // Uncompute: reverse each layer (f32)
         // Uncompute: reverse each layer (f32)
         for layer_idx in (0..num_layers).rev() {
-            let lwo = weight_offset + layer_idx * HIDDEN_DIM;
-            let lwo_f32 = weight_offset + layer_idx * HIDDEN_DIM * F32_BYTES;
+            let lwo = weight_offset + layer_idx * TOTAL_WEIGHT_U8;
+            let lwo_f32 = weight_offset + layer_idx * TOTAL_WEIGHT_F32;
             let layer_save = saved_outputs_offset + layer_idx * COMPLEX_DIM;
             let pg = pre_gate_base + layer_idx * COMPLEX_DIM;
 
-            let original_weight_f32 = tape[lwo_f32 .. lwo_f32 + HIDDEN_DIM * F32_BYTES].to_vec();
-            let original_weight_u8 = tape[lwo .. lwo + HIDDEN_DIM].to_vec();
-            let src_slice = &compressed_weights_bytes[layer_idx * HIDDEN_DIM .. (layer_idx + 1) * HIDDEN_DIM];
-            tape[lwo .. lwo + HIDDEN_DIM].copy_from_slice(src_slice);
-            spn_unscramble(&mut tape, lwo, HIDDEN_DIM, bh_key, &sbox, 12);
+            let original_weight_f32 = tape[lwo_f32 .. lwo_f32 + TOTAL_WEIGHT_F32].to_vec();
+            let original_weight_u8 = tape[lwo .. lwo + TOTAL_WEIGHT_U8].to_vec();
+            let src_slice = &compressed_weights_bytes[layer_idx * TOTAL_WEIGHT_U8 .. (layer_idx + 1) * TOTAL_WEIGHT_U8];
+            tape[lwo .. lwo + TOTAL_WEIGHT_U8].copy_from_slice(src_slice);
+            spn_unscramble(&mut tape, lwo, TOTAL_WEIGHT_U8, bh_key, &sbox, 12);
+            // 16.8 WEIGHT STREAMING: route unscrambled u8 bytes into f32 compute region for uncompute
+            let unscrambled_bwd = tape[lwo .. lwo + TOTAL_WEIGHT_U8].to_vec();
+            tape[lwo_f32 .. lwo_f32 + TOTAL_WEIGHT_F32].copy_from_slice(&unscrambled_bwd);
 
             if (layer_idx + 1) % 4 == 0 {
                 // Attention uncompute — read output as raw bytes from layer_save (no recompute)
@@ -1664,9 +1700,9 @@ fn catalytic_inference_step<'py>(
                 }
             }
 
-            spn_scramble(&mut tape, lwo, HIDDEN_DIM, bh_key, &sbox, 12);
-            tape[lwo_f32 .. lwo_f32 + HIDDEN_DIM * F32_BYTES].copy_from_slice(&original_weight_f32);
-            tape[lwo .. lwo + HIDDEN_DIM].copy_from_slice(&original_weight_u8);
+            spn_scramble(&mut tape, lwo, TOTAL_WEIGHT_U8, bh_key, &sbox, 12);
+            tape[lwo_f32 .. lwo_f32 + TOTAL_WEIGHT_F32].copy_from_slice(&original_weight_f32);
+            tape[lwo .. lwo + TOTAL_WEIGHT_U8].copy_from_slice(&original_weight_u8);
 
             // SHA-256 checkpoint AFTER uncompute — capture per-region hashes
             let post_bwd_hash = {
@@ -1687,8 +1723,8 @@ fn catalytic_inference_step<'py>(
             });
             bwd_weight_hashes.push({
                 let mut h = Sha256::new();
-                ShaDigest::update(&mut h, &tape[lwo..lwo+HIDDEN_DIM]);
-                ShaDigest::update(&mut h, &tape[lwo_f32..lwo_f32+HIDDEN_DIM*F32_BYTES]);
+                ShaDigest::update(&mut h, &tape[lwo..lwo+TOTAL_WEIGHT_U8]);
+                ShaDigest::update(&mut h, &tape[lwo_f32..lwo_f32+TOTAL_WEIGHT_F32]);
                 format!("{:x}", h.finalize())
             });
 
@@ -1835,8 +1871,22 @@ fn spn_round_function(
     }
 }
 
-// Multi-scale Feistel scramble — gapped topological phase (Q57)
-// Replaces the standard 2-block Feistel which produces volume-law entanglement
+// Fractal bit-reversed indexing — maps linear position to p-adic uniform position.
+// This transforms the Feistel phase space from chaotic (kicked-rotor) to integrable
+// by distributing phase kicks uniformly across the tape in p-adic metric.
+fn fractal_index(i: usize, max_bits: usize) -> usize {
+    let mut rev = 0;
+    let mut n = i;
+    for _ in 0..max_bits {
+        rev = (rev << 1) | (n & 1);
+        n >>= 1;
+    }
+    rev
+}
+
+// Multi-scale Feistel scramble with FRACTAL indexing — gapped topological phase (Q57)
+// Bit-reversed indexing creates p-adic uniform distribution of phase kicks,
+// preventing KAM torus breakdown that causes Layer 47 uncompute failure.
 fn spn_scramble(
     tape: &mut [u8],
     region_base: usize,
@@ -1854,11 +1904,22 @@ fn spn_scramble(
     let n_scales = scales.len();
     if n_scales == 0 { return; }
     
+    let n_blocks_per_scale: Vec<usize> = (0..n_scales)
+        .map(|s| half_size / (1 << (scales[s] + 1)))
+        .collect();
+
     for r_idx in 0..n_scales {
         let scale = 1 << scales[r_idx]; // 1, 2, 4, 8, ...
         let stride = scale * 2;
-        for i in (0..half_size).step_by(stride) {
-            if i + scale > half_size { break; }
+        let n_blocks = n_blocks_per_scale[r_idx];
+        if n_blocks == 0 { continue; }
+        let max_bits = (n_blocks as f64).log2().ceil() as usize;
+
+        // Fractal (bit-reversed) block iteration — p-adic uniform distribution
+        for linear_block in 0..n_blocks {
+            let frac_block = fractal_index(linear_block, max_bits) % n_blocks;
+            let i = frac_block * stride;
+            if i + scale > half_size { continue; }
             for b in 0..scale {
                 temp_block[i + b] = tape[region_base + half_size + i + b];
             }
@@ -1873,7 +1934,7 @@ fn spn_scramble(
     }
 }
 
-// Multi-scale Feistel unscramble — inverse of multi-scale scramble
+// Multi-scale Feistel unscramble with FRACTAL indexing — inverse of fractal scramble
 fn spn_unscramble(
     tape: &mut [u8],
     region_base: usize,
@@ -1889,13 +1950,24 @@ fn spn_unscramble(
     let scales = (0..max_scale.min(rounds_limit)).collect::<Vec<_>>();
     let n_scales = scales.len();
     if n_scales == 0 { return; }
-    
-    // Reverse order
+
+    let n_blocks_per_scale: Vec<usize> = (0..n_scales)
+        .map(|s| half_size / (1 << (scales[s] + 1)))
+        .collect();
+
+    // Reverse order (stack unwinding)
     for r_idx in (0..n_scales).rev() {
         let scale = 1 << scales[r_idx];
         let stride = scale * 2;
-        for i in (0..half_size).step_by(stride) {
-            if i + scale > half_size { break; }
+        let n_blocks = n_blocks_per_scale[r_idx];
+        if n_blocks == 0 { continue; }
+        let max_bits = (n_blocks as f64).log2().ceil() as usize;
+
+        // Same fractal order as scramble — Feistel inverse uses same F
+        for linear_block in 0..n_blocks {
+            let frac_block = fractal_index(linear_block, max_bits) % n_blocks;
+            let i = frac_block * stride;
+            if i + scale > half_size { continue; }
             for b in 0..scale {
                 temp_block[i + b] = tape[region_base + i + b];
             }
@@ -2027,10 +2099,10 @@ fn scramble_catalysis_weights<'py>(
     let mut weights_vec = bytes.to_vec();
     let (sbox, _) = generate_logistic_sbox();
     let bh_key = b"catalytic_key_27b_inference_16_s";
-    let num_layers = weights_vec.len() / HIDDEN_DIM;
+    let num_layers = weights_vec.len() / TOTAL_WEIGHT_U8;
     for layer_idx in 0..num_layers {
-        let lwo = layer_idx * HIDDEN_DIM;
-        spn_scramble(&mut weights_vec, lwo, HIDDEN_DIM, bh_key, &sbox, 12);
+        let lwo = layer_idx * TOTAL_WEIGHT_U8;
+        spn_scramble(&mut weights_vec, lwo, TOTAL_WEIGHT_U8, bh_key, &sbox, 12);
     }
     Ok(PyBytes::new_bound(py, &weights_vec))
 }
