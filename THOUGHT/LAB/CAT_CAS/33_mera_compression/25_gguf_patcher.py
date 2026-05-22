@@ -82,11 +82,11 @@ def extract_gguf_config(gguf_path):
 
 
 def load_wormhole(wormhole_path):
-    """Load wormhole and parse groups + SVh."""
+    """Load wormhole and parse groups + SVh. Handles LoRA-factorized R_A/R_B."""
     import re
     worm = torch.load(wormhole_path, map_location='cpu', weights_only=True)
     pattern = re.compile(r'(.+)\.L(\d+)\.(.+)')
-    groups = defaultdict(lambda: dict(first_U=None, first_l=-1, rots={}, res={}))
+    groups = defaultdict(lambda: dict(first_U=None, first_l=-1, rots={}, rots_A={}, rots_B={}, res={}))
     shared_svh = {}
     
     for key, val in worm.items():
@@ -96,6 +96,8 @@ def load_wormhole(wormhole_path):
             g = groups[wt]
             if field == 'U': g['first_U'] = val; g['first_l'] = l
             elif field == 'R': g['rots'][l] = val
+            elif field == 'R_A': g['rots_A'][l] = val
+            elif field == 'R_B': g['rots_B'][l] = val
             elif field == 'res_idx': g['res'].setdefault(l, {})['idx'] = val
             elif field == 'res_max':
                 if l in g['res']: g['res'][l]['max'] = val
@@ -106,19 +108,24 @@ def load_wormhole(wormhole_path):
 
 
 def reconstruct_U(groups, wt, layer_idx):
-    """Reconstruct U matrix from wormhole rotations."""
+    """Reconstruct U matrix from wormhole rotations. Handles LoRA A@B factorization."""
     g = groups[wt]
     if layer_idx == g['first_l']:
         return g['first_U'].float()
-    if layer_idx in g['rots']:
+    # Try LoRA: R = A @ B
+    if layer_idx in g['rots_A'] and layer_idx in g['rots_B']:
+        U = g['first_U'].float() @ (g['rots_A'][layer_idx].float() @ g['rots_B'][layer_idx].float())
+    elif layer_idx in g['rots']:
         U = g['first_U'].float() @ g['rots'][layer_idx].float()
-        if layer_idx in g['res'] and g['res'][layer_idx].get('idx') is not None:
-            rd = g['res'][layer_idx]
-            mval = rd.get('max', torch.tensor(1e-6)).item()
-            levels = torch.tensor([-1.0, -0.333, 0.333, 1.0]) * max(abs(mval), 1e-6)
-            U = U + levels[rd['idx'].long()]
-        return U
-    return None
+    else:
+        return None
+    
+    if layer_idx in g['res'] and g['res'][layer_idx].get('idx') is not None:
+        rd = g['res'][layer_idx]
+        mval = rd.get('max', torch.tensor(1e-6)).item()
+        levels = torch.tensor([-1.0, -0.333, 0.333, 1.0]) * max(abs(mval), 1e-6)
+        U = U + levels[rd['idx'].long()]
+    return U
 
 
 def wormhole_linear(x, wt, layer_idx, groups, shared_svh):

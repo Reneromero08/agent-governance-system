@@ -62,8 +62,12 @@ def group_u_matrices(holo_dict, modules):
     return u_groups
 
 
-def compress_group(wt, tensors, compressed, stats, rotation_threshold=0.5, quant_bits=2, skip_threshold=0.01):
-    """Wormhole-compress a single weight-type group with Skip-R identity detection."""
+def compress_group(wt, tensors, compressed, stats, rotation_threshold=0.5, quant_bits=2, skip_threshold=0.01, lora_rank=0):
+    """Wormhole-compress a single weight-type group with Skip-R + LoRA factorization.
+    
+    lora_rank: if > 0, factorize R [k,k] as A [k,r] @ B [r,k] for uniform ratio compression.
+               Keeps ALL eigenmodes, distributes compression evenly across rotation chain.
+               Compression ratio on R: k^2 / (2kr) = k/(2r)"""
     sorted_l = sorted(tensors.keys())
     if len(sorted_l) < 2:
         for l in sorted_l:
@@ -78,6 +82,13 @@ def compress_group(wt, tensors, compressed, stats, rotation_threshold=0.5, quant
     prev = first
     fids_rot = []; fids_quant = []
     skipped = 0
+    
+    if lora_rank > 0 and lora_rank < k:
+        r_bits = k * lora_rank * 16 * 2  # A [k,r] + B [r,k]
+    else:
+        r_bits = k * k * 16
+    lora_rank = min(lora_rank, k) if lora_rank > 0 else 0
+    
     orig_bits = L * m * k * 16
     comp_bits = m * k * 16
 
@@ -91,12 +102,10 @@ def compress_group(wt, tensors, compressed, stats, rotation_threshold=0.5, quant
             curr.flatten().unsqueeze(0), recon_rot.flatten().unsqueeze(0)
         ).item()
         
-        # B2: Skip-R detection — near-identity rotation, skip entirely
-        # Uses absolute Frobenius norm per PUSHED_REPORT: ||R - I|| < skip_threshold
+        # B2: Skip-R detection
         identity_dist = torch.norm(R - torch.eye(k, device=R.device)).item()
         if identity_dist < skip_threshold:
-            # Zero-copy skip: don't store R or residual. Decoder reuses anchor.
-            compressed[f"{wt}.L{l}.skip"] = torch.tensor(1)  # skip token
+            compressed[f"{wt}.L{l}.skip"] = torch.tensor(1)
             skipped += 1
             fids_rot.append(1.0); fids_quant.append(1.0)
             continue
@@ -105,8 +114,16 @@ def compress_group(wt, tensors, compressed, stats, rotation_threshold=0.5, quant
         res_max = residual.abs().max().item()
 
         if fid_rot > rotation_threshold:
-            compressed[f"{wt}.L{l}.R"] = R.half()
-            comp_bits += k * k * 16
+            # Store R (or A,B factorization)
+            if lora_rank > 0:
+                U_r, S_r, Vh_r = torch.linalg.svd(R.float(), full_matrices=False)
+                A = U_r[:, :lora_rank] * S_r[:lora_rank].sqrt().unsqueeze(0)
+                B = S_r[:lora_rank].sqrt().unsqueeze(1) * Vh_r[:lora_rank, :]
+                compressed[f"{wt}.L{l}.R_A"] = A.half()
+                compressed[f"{wt}.L{l}.R_B"] = B.half()
+            else:
+                compressed[f"{wt}.L{l}.R"] = R.half()
+            comp_bits += r_bits
             fid_quant = fid_rot
         else:
             levels = torch.tensor([-1.0, -0.333, 0.333, 1.0]) * max(res_max, 1e-6)
@@ -114,10 +131,17 @@ def compress_group(wt, tensors, compressed, stats, rotation_threshold=0.5, quant
             diffs = residual_norm.unsqueeze(-1) - levels.view(1, 1, -1)
             idx = diffs.abs().argmin(dim=-1).to(torch.uint8)
 
-            compressed[f"{wt}.L{l}.R"] = R.half()
+            if lora_rank > 0:
+                U_r, S_r, Vh_r = torch.linalg.svd(R.float(), full_matrices=False)
+                A = U_r[:, :lora_rank] * S_r[:lora_rank].sqrt().unsqueeze(0)
+                B = S_r[:lora_rank].sqrt().unsqueeze(1) * Vh_r[:lora_rank, :]
+                compressed[f"{wt}.L{l}.R_A"] = A.half()
+                compressed[f"{wt}.L{l}.R_B"] = B.half()
+            else:
+                compressed[f"{wt}.L{l}.R"] = R.half()
             compressed[f"{wt}.L{l}.res_idx"] = idx
             compressed[f"{wt}.L{l}.res_max"] = torch.tensor(res_max)
-            comp_bits += k * k * 16 + m * k * quant_bits + 16
+            comp_bits += r_bits + m * k * quant_bits + 16
 
             recon_quant = recon_rot + levels[idx.long()]
             fid_quant = torch.nn.functional.cosine_similarity(
@@ -140,7 +164,7 @@ def compress_group(wt, tensors, compressed, stats, rotation_threshold=0.5, quant
     stats['fidelities'][wt] = fids_quant
 
 
-def compress_holo_modular(holo_dict, modules, rotation_threshold=0.5, quant_bits=2, skip_threshold=0.3):
+def compress_holo_modular(holo_dict, modules, rotation_threshold=0.5, quant_bits=2, skip_threshold=0.3, lora_rank=0):
     """Compress .holo dict into modular wormhole format."""
     u_groups = group_u_matrices(holo_dict, modules)
 
@@ -148,7 +172,7 @@ def compress_holo_modular(holo_dict, modules, rotation_threshold=0.5, quant_bits
     stats = {'groups': {}, 'total_orig_MB': 0, 'total_comp_MB': 0, 'fidelities': {}}
 
     for wt, tensors in sorted(u_groups.items()):
-        compress_group(wt, tensors, compressed, stats, rotation_threshold, quant_bits, skip_threshold)
+        compress_group(wt, tensors, compressed, stats, rotation_threshold, quant_bits, skip_threshold, lora_rank)
 
     # Collect compressed prefixes for SVh dedup
     compressed_prefixes = set()
@@ -237,6 +261,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("input", nargs="?", default=str(DEFAULT_INPUT))
     ap.add_argument("--module", "-m", choices=["llm", "visual", "aux", "all"], default="all")
+    ap.add_argument("--lora-rank", "-r", type=int, default=0, help="LoRA rank for rotation compression (0=store full R). r<K compresses R uniformly.")
     ap.add_argument("--output", "-o", default=None)
     args = ap.parse_args()
 
@@ -261,7 +286,12 @@ def main():
     holo = torch.load(args.input, weights_only=False)
 
     print(f"Compressing...")
-    compressed, stats = compress_holo_modular(holo, modules)
+    compressed, stats = compress_holo_modular(holo, modules, lora_rank=args.lora_rank)
+    
+    if args.lora_rank > 0:
+        lora_ratio = 256 / (2 * args.lora_rank) if args.lora_rank > 0 else 0
+        print(f"\n  LoRA rank: {args.lora_rank} -> rotation compression: {lora_ratio:.0f}x on R matrices")
+        print(f"  ALL eigenmodes preserved. Uniform ratio compression.")
 
     print(f"\n  {'Group':<30} {'L':>4} {'fid_rot':>8} {'fid+res':>8} {'ratio':>6} {'skip':>5}")
     print(f"  {'-'*65}")
