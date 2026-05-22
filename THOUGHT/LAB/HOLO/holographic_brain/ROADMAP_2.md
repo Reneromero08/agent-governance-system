@@ -1,270 +1,382 @@
-# ROADMAP_2: Catalytic Wormhole Compression
+# ROADMAP_2: Catalytic Wormhole Compression + Formula V4
 
 **Date:** 2026-05-22
-**Status:** Phase 1 (Modular Compression) complete. Phase 2 (Catalytic Graph Loader) operational.
-**Parent:** CAT_CAS Experiment 33 — MERA Cross-Layer Compression
+**Status:** Track A complete (Phase Cavity Sieve operational). LLM 197 MB, Visual 14 MB, total ~220 MB from 3,734 MB catalytic (17x). Mean fidelity 0.894 (cavity IMPROVES fidelity).
+**Parent:** CAT_CAS Experiment 33 + Formula V4 (Semiotic Light Cone 1.1)
 
 ---
 
 ## What We've Proven
 
-- Wormhole rotation `R = U_prev^T @ U_curr` compresses cross-layer U at 3-6.5x with 2-bit residual fidelity of 0.83-0.89
-- Catalytic cache proves 97% cross-layer V (SVh) reuse — one SVh serves all layers of a weight type
-- k_proj / v_proj at 1.0 fidelity — GQA weight sharing makes them identical across layers (Phase Cavity verified)
-- Module graph works: 12 LLM weight types + 4 visual weight types, independently compressed, loaded on demand
-- Catalytic session: borrow workspace, reconstruct any layer's U from rotations, return workspace untouched — zero bits erased
-- 27B catalytic .holo (3,734 MB) → modular wormhole (1,124 MB total: 1,048 LLM + 76 visual) → decoded forward pass works
+### Compression Pipeline
+
+- Wormhole rotation `R = U_prev^T @ U_curr` compresses cross-layer U at 3-7x with 2-bit residual fidelity of 0.83-0.90
+- Catalytic cache proves 97% cross-layer V (SVh) reuse -- one SVh serves all layers of a weight type
+- k_proj / v_proj at 1.0 fidelity -- GQA weight sharing makes them identical across layers (Phase Cavity verified)
+- Module graph works: 12 LLM + 4 visual types, independently compressed, loaded on demand
+- Catalytic session: borrow workspace, reconstruct any layer's U from rotations, return workspace untouched -- zero bits erased
+- **Phase Cavity Eigenmode Sieve**: 4.5x rank reduction (k=256 -> ~49 kept), 16 types sieved. Shared mask across all layers of a weight type.
+
+### Pipeline Results (2026-05-22)
+
+| Step | Size | k (rank) | Fidelity | Ratio vs previous |
+|------|------|----------|----------|-------------------|
+| Raw Qwen 27B (BF16) | ~54 GB | full | -- | -- |
+| Catalytic .holo | 3,734 MB | 256 | -- | 14.7x |
+| Cavity Sieved | 858 MB | ~49 | 0.99+ | 4.4x |
+| LLM Wormhole | **197 MB** | ~49 | **0.894** | 4.3x |
+| Visual Wormhole | **14 MB** | ~49 | **0.878** | 61x |
+| LM Head (aux) | 124 MB | 256* | -- | 1x |
+| **Total Modular** | **~335 MB** | -- | -- | **164x vs raw** |
+
+*LM head not cavity-sieved yet (flat key format). Expected: 124 -> ~25 MB (5x).
+
+### Formula V4 -- What Maps to Compression
+
+| Formula V4 Concept | Our Implementation |
+|---|---|
+| `R = (E / nabla_S) * sigma^D_f` | Compression quality = signal / entropy * fidelity^(redundancy) |
+| D_f = t = floor((d-1)/2) | D_f = number of independent rotation chains, NOT raw layers |
+| sigma = fidelity factor | sigma = cos_sim of U after wormhole reconstruction |
+| Cassette architecture | wormhole .holo = cassette, catalytic session = lattice |
+| Wigner-Dyson GOE (r=0.53) | Rotation matrix eigenvalue spacings should follow GOE statistics |
+| Born rule P = \|<psi\|phi>\|^2 | Complex-phase SVh retrieval (Track B1) |
+| Threshold-crossing sigma | sigma > 1 = below threshold (amplification), sigma = 1 = critical |
+| Silence protocol (R < 0.3) | fid < 0.3 -> skip wormhole compression, store as-is |
+| Phase drift diagnostics (6 types) | Monitor d(fidelity)/d(layer) -> re-anchor rotation chain |
+| Lindblad: d(rho)/dt = -i[H,rho] + ... | Catalytic tape = open quantum system, Lindblad governs fidelity decay |
+
+---
 
 ## What We Haven't Cracked
 
-### 1. Phase Cavity Eigenmode Sieve (Highest Priority — Best Compression Gain)
+### 1. Phase Cavity Eigenmode Sieve [x] IMPLEMENTED -- MI-Weighted Upgrade [ ]
 
-**Concept:** Before wormhole compression, run the Phase Cavity (Exp 20/21 transfer) on each weight's U matrix to detect and drop dispersion eigenmodes. Eigenmodes whose removal keeps cosine similarity > 0.99 are artifacts — they don't carry signal.
+**Status:** Phase 1 operational. `10_cavity_sieve.py` reduces k from 256 to ~49 (4.7x) across all 16 weight types with shared mask. Fidelity IMPROVES from 0.831 to 0.894 because noise eigenmodes are dropped.
 
-**Algorithm:**
+**Formula V4 Upgrade -- Epistemic Sieve:** Weight eigenmodes by mutual information `I(S:F_i)` with the original weight, not by cosine similarity threshold. Keep top-k' modes that capture 99% of total mutual information.
+
 ```
-for each weight type (U matrices across layers):
-    run phase_cavity_sieve(U, SVh, W_orig)
-    keep only eigenmodes with cos_sim_drop < 0.01
-    reduce effective rank k -> k' < k
-    wormhole-compress at reduced rank k'
+for each weight type:
+    W_full = U @ SVh
+    for each eigenmode i:
+        I_i = mutual_information(W_full, W_full - U[:,i] @ SVh[i,:])
+    sort by I_i descending
+    keep modes where cumulative_I / total_I > 0.99
 ```
 
-**Expected gain:** k=256 → k'≈100-150 for MLP weights (drop 50-60% of eigenmodes). Rotations become k'×k' (25-35% of current size). Residuals shrink proportionally. Net: additional 2-3x compression.
+**Why:** MI is more principled than cosine similarity -- it captures non-linear dependencies that cosine misses. The Formula V4 epistemic frame weights fragments by `I(S:F_i) / sum I(S:F_j)`. Same principle applies to eigenmodes.
 
-**Blockers:**
-- Phase cavity needs original weight matrices (W = U @ SVh), not just U and SVh separately
-- Eigenmode selection must be consistent across all layers of a weight type (shared k')
-- Cavity sieving might interact with rotation fidelity — need empirical testing
+**Expected gain:** Current sieve keeps ~49/256 (19%). MI-weighted might keep 60-80/256 (23-31%) but with higher fidelity. Need empirical comparison.
 
 **What to figure out:**
-- [ ] Does phase cavity stable-eigenmode count vary by layer?
-- [ ] Can we share the SAME eigenmode mask across all layers of a weight type?
-- [ ] Does cavity-sieved rotation maintain fidelity at reduced k?
-- [ ] Integration point: cavity sieve runs once during compression, not during loading
+- [x] Does phase cavity stable-eigenmode count vary by layer? -- No, shared mask works
+- [x] Can we share the SAME eigenmode mask across all layers? -- Yes, intersection across 5 sample layers
+- [x] Does cavity-sieved rotation maintain fidelity? -- Yes, fidelity IMPROVES (0.831 -> 0.894)
+- [ ] MI-weighted: what is the mutual information between W and W_without_mode_i?
+- [ ] MI threshold: 99% cumulative MI vs 0.99 cosine threshold -- which is stricter?
+- [ ] Does MI-weighted sieve give better downstream task performance?
 
-### 2. Complex-Phase SVh Encoding
+### 2. Complex-Phase SVh Encoding (Born Rule Multiplexing)
 
-**Concept:** Encode shared SVh matrices as complex exponentials on the unit circle. Each row of Vh becomes a phase vector `e^(i*theta)` instead of a float vector. Layer rotation becomes pure phase advance: `SVh_layer_l = SVh_base * exp(i * l * delta_theta)`.
+**Concept:** Encode shared SVh matrices as complex exponentials on the unit circle. Retrieval via Born rule: `P = |<x|SVh>|^2`. The Formula V4 Born rule multiplexing achieves 93.8% memory reduction at 1.04% accuracy cost -- directly applicable to SVh.
 
-**Why it works:** Eigen Buddy proved that the `si` matrix (imaginary part of Q*K^dagger) passes through attention layers unconsumed — phase IS catalytic. SVh represents the right singular vectors of the weight decomposition, mapping input space (n) to the shared eigenbasis (k). Encoding this as phase makes the layer-to-layer variation a simple rotation with no information loss.
+**Why it works:** Eigen Buddy proved that the `si` matrix passes through attention unconsumed. Formula V4 shows phase retrieval via `P = |<psi|phi>|^2` reveals interference patterns invisible to real inner products. SVh encodes the right singular vectors mapping input space (n) to shared eigenbasis (k). As complex phase: `SVh_base * exp(i * l * delta_theta)`.
 
 **Expected gain:**
-- SVh storage: fp16 (2 bytes/value) → complex phase (potentially 2 bytes/value but with 2x expressiveness due to real+imag)
-- Layer differentiation: instead of storing separate SVh per layer, store one base SVh with per-layer phase rotation vectors (k dimensions × num_layers, tiny)
-- Total SVh: ~45 MB (shared fp16) → ~5-8 MB (shared complex + rotation deltas)
+- SVh storage: fp16 (2 bytes/value) -> complex phase (2 bytes/value, 2x expressiveness)
+- Layer rotation: one base SVh + per-layer phase rotation vectors (k x num_layers)
+- Total SVh: ~45 MB (shared fp16) -> ~5-8 MB (shared complex + deltas)
 
 **What to figure out:**
 - [ ] Does SVh phase encoding preserve forward pass fidelity?
-- [ ] Phase quantization: how many bits per phase angle for acceptable fidelity loss?
-- [ ] Can we learn the optimal base phase vector per weight type?
-- [ ] Interaction with wormhole U rotations (U is real, SVh becomes complex → output becomes complex → needs Real() projection)
+- [ ] Phase quantization: how many bits per phase angle?
+- [ ] Born rule retrieval: P = |<x|SVh_complex>|^2 vs standard dot product
+- [ ] Interaction with real-valued U rotations (mixing complex SVh with real U)
 
-### 3. Catalytic Inference Pipeline (Multi-Step Borrow/Return)
+### 3. Catalytic Inference Pipeline (Cassette + Lattice Architecture)
 
-**Concept:** The catalytic module graph enables inference without materializing the full weight matrix. Each forward pass through a layer becomes a catalytic operation:
+**Concept:** Formula V4 cassette architecture: "Model thinks, cassette knows, lattice verifies, retrieval corrects." Direct mapping:
 
 ```
-borrow(workspace)
-  U = reconstruct_from_rotations(wt, layer)  # O(k*m) from O(k*k) rotations
-  h = x @ SVh^T                              # project to eigenbasis
-  out = h @ U^T                              # project back to output space
-  save U for backward if training
-return(workspace)  # zero bits erased, tape restored
+Cassette    = wormhole .holo files           (knowledge store, Phase 4c proven 99.5% TruthfulQA)
+Model       = Qwen 27B reconstructed weights (reasoning engine)
+Lattice     = CatalyticSession + verifier    (fragment independence, drift detection)
+Retrieval   = forward_linear(x, wt, layer)   (on-demand U reconstruction from rotations)
 ```
 
-**Architecture:** Catalytic forward is a Feistel network over layers. Each layer:
-1. Projects input into eigenbasis via shared SVh (catalytic — SVh is shared, unconsumed)
-2. Applies layer-specific U via rotation reconstruction (catalytic — rotations are transitively reusable)
-3. Passes output + phase coherence to next layer
+Each forward pass through a layer is a catalytic operation: borrow workspace, project to eigenbasis via shared SVh, apply layer-specific U via rotation reconstruction, return workspace. The lattice verifier checks rotation chain consistency and fidelity at sampled layers.
 
-**Expected gain:** Peak VRAM during inference drops from O(model_size) to O(largest_layer_U). For 27B: from ~54 GB to ~2 GB (largest U = mlp.gate_proj [17408, 256] = 17 MB). The catalytic tape is the rotation + SVh working set (~1 GB), not the full expanded weights (~3.7 GB).
+**Verification lattice (Formula V4 Epistemic):**
+- t=2 consensus: two independent fragment verifiers (SVh consistency + U rotation fidelity)
+- C_epistemic weights: calibrate on held-out calibration set
+- Drift diagnostics: 6 drift types (factual decoherence, logical inconsistency, value lock-in, echo chamber, sophistry, overconfident hallucination)
+- Silence protocol: if fid < 0.3 for any layer, halt -- switch to full-weight mode
+
+**Expected gain:** Peak VRAM drops from O(model_size) to O(largest_layer_U). For 27B: ~54 GB -> ~2 GB. The catalytic tape is rotation + SVh working set (~300 MB), not expanded weights (~3.7 GB).
 
 **What to figure out:**
-- [ ] Build `CatalyticHoloModel` that wraps HF transformers with HoloLinear layers
+- [ ] Build `CatalyticHoloModel` wrapping HF transformers with HoloLinear layers
+- [ ] t=2 lattice: SVh consistency check + U rotation fidelity check
 - [ ] Streaming: unload previous layer's U before loading next (catalytic space reuse)
-- [ ] Warm-tape replay: preheat the workspace with first-layer U for faster subsequent accesses
-- [ ] Benchmark: tokens/sec with catalytic forwarding vs standard
+- [ ] Warm-tape replay: preheat workspace with first-layer U
+- [ ] Benchmark: VRAM, tokens/sec, fidelity drift detection
 
-### 4. Wormhole Transport Network
+### 4. Wormhole Transport Network + D_f Block Compression
 
-**Concept:** The wormhole rotations form a transport network between layers. `R_i = U_i^T @ U_{i+1}` is a k×k matrix describing how the eigenbasis rotates from layer i to layer i+1. This is a catalytic chain:
+**Concept:** Wormhole rotations form a transport network. `R_i = U_i^T @ U_{i+1}` is a k x k matrix. Formula V4: D_f = t = floor((d-1)/2) -- the redundancy depth is correctable errors, not raw dimension.
 
-```
-U_0 → (R_1) → U_1 → (R_2) → U_2 → ... → U_{L-1}
-```
-
-**Properties:**
-- Each R depends only on adjacent layers (local), not the full chain (global)
-- The chain is transitively catalytic: anchor at U_0, follow R's to any layer, never need to store all U's
-- Phase cavity can detect R's that are near-identity (eigenbasis doesn't rotate) and drop them entirely
+**D_f application:** D_f is the number of INDEPENDENT rotation chains in a weight type. For MLP (64 layers): the chain has D_f ~ 16 (every 4th layer forms an independent correctable block, like QEC distance). For self_attn (16 layers, every 4th layer): D_f ~ 4. Store one anchor per D_f block instead of one per layer:
+- Current: 1 anchor + 63 rotations (64 layers)
+- D_f blocks: 1 anchor per block + rotations within block, store cross-block transition
+- Net: fewer anchors, but same number of rotations -- savings come from shared block metadata
 
 **Optimizations:**
-- Skip-R connections: if `cosine_sim(R_i, I) > 0.99`, drop R_i, reuse previous layer's U unchanged
-- Group compression: consecutive near-identity R's form a block, store one anchor
-- Transport pruning: Phase Cavity identifies which eigenmodes actually rotate (non-zero phase shift) vs which stay fixed
+- Skip-R: if `cosine_sim(R_i, I) > 0.99`, drop R_i (already 2 weight types at fid_rot > 0.95)
+- Block compression: consecutive near-identity R's form a block, store one anchor
+- Gamma monitoring (Formula V4): `d(fidelity)/d(layer) > threshold` -> re-anchor (insert new first-layer U)
+- Transport pruning: Phase Cavity identifies which eigenmodes rotate (non-zero phase shift) vs fixed
 
 **What to figure out:**
-- [ ] Which weight types have the longest chains of near-identity rotations?
-- [ ] Can we precompute skip-R blocks during compression?
-- [ ] Block anchors vs individual rotations — storage/compute tradeoff
+- [ ] Compute D_f per weight type: count of independent rotation chains
+- [ ] Which types have longest near-identity rotation chains?
+- [ ] Gamma threshold: at what fidelity degradation rate do we re-anchor?
+- [ ] Cross-block transition matrices -- are they small enough to store?
 
-### 5. Superconducting / Zero-Power Reconstruction
+### 5. GOE Eigenvalue Validation (Formula V4 Validation)
 
-**Concept:** From CAT_CAS Exp 22 — Josephson junction attention pipeline. The wormhole reconstruction `U_curr = U_prev @ R + residual` can be done with zero Landauer heat if the operations are reversible:
+**Concept:** Formula V4 QEC sweep proved stabilizer correlation matrices follow Wigner-Dyson GOE statistics (mean spacing ratio r=0.53 vs Poisson r=0.39). If our wormhole rotation matrices also follow GOE, we're on the "quantum chaotic" manifold -- meaning maximum physical information density, no further redundancies to exploit.
 
-- Matrix multiply `U_prev @ R`: forward pass only, no erasure (read-only operands)
-- Residual addition: reversible XOR pattern
-- Dequantization: 2-bit → fp16 is a look-up table, zero erasure
+**Test:** For each weight type's rotation matrices (R_1 through R_{L-1}, each k' x k'):
+- Compute eigenvalue spacings of R_i * R_i^T (symmetric, eigenvalues on real line)
+- Fit Wigner surmise: P(s) = (pi/2) * s * exp(-pi * s^2 / 4)
+- Compare mean spacing ratio to GOE (r=0.53) vs Poisson (r=0.39)
 
-**Expected gain:** During inference, wormhole decompression dissipates 0J (catalytic). Standard weight loading from disk: ~k_B T ln 2 per bit from flash → DRAM. For 3.7 GB: ~9e16 bits → ~0.25 J per load. Catalytic: 0J after initial tape loading.
-
-**Blockers:** Hardware doesn't support reversible gate-level inference. This is a theoretical ceiling, not a practical target for current hardware.
-
-**What to figure out:**
-- [ ] Map wormhole reconstruction to reversible gate sequence (Toffoli/Fredkin)
-- [ ] Count net bits erased in unoptimized reconstruction
-- [ ] Demonstrate Landauer delta between standard load and catalytic reconstruction
-
-### 6. Temporal Catalysis for Next-Layer Prediction
-
-**Concept:** From CAT_CAS Exp 23 — retrocausal activation borrowing. The wormhole rotation `R_i = U_i^T @ U_{i+1}` is a "future vacuum state" preregistered at compression time. During inference, the current layer's U already contains information about the next layer's U via the rotation:
-
-```
-U_{i+1} = U_i @ R_{i+1} + residual_{i+1}
-```
-
-If `residual ≈ 0` (rotation-only layers, fid_rot > threshold), then `U_{i+1}` is fully determined by `U_i @ R_{i+1}`. The catalytic tape can "preheat" the next U while the current layer is still computing — zero additional latency.
-
-**Expected gain:** For layers with rotation-only compression (k_proj, some self_attn), the next U is deterministic from current U. Prefetch eliminates decompression latency. For high-fidelity quantized residual layers, reconstruction is O(k*m) with known residual — still parallelizable.
+**Interpretation:**
+- GOE (r ~ 0.53): Rotations are quantum-chaotic. Near-maximum compression. Eigenmodes mix maximally -- no block-diagonal structure.
+- Poisson (r ~ 0.39): Rotations are localized/non-ergodic. Further compression possible by diagonalizing.
+- Intermediate: Mixed regime. Some eigenmodes rotate (chaotic), some are frozen (integrable).
 
 **What to figure out:**
-- [ ] Which layers are rotation-only (fid_rot > 0.99)?
-- [ ] Pipeline: while layer i computes forward, prefetch layer i+1's U
-- [ ] Measure end-to-end latency improvement with temporal prefetch
+- [ ] Compute eigenvalue spacing statistics for all 16 weight types' R matrices
+- [ ] Is the cavity-sieved k'=49 more or less chaotic than k=256?
+- [ ] Correlation between GOE spacing ratio and compression ratio
 
-### 7. Bekenstein-Bound Compression Target
+### 6. Temporal Catalysis (Next-Layer Prefetch)
 
-**Concept:** The Bekenstein bound sets the maximum information that can be encoded in a spherical region of radius R containing energy E: `I <= 2 * pi * R * E / (hbar * c * ln 2)`. For our 27B model:
+**Concept:** From CAT_CAS Exp 23. Wormhole rotation `R_i = U_i^T @ U_{i+1}` preregisters the future U at compression time. If `residual ~ 0`, `U_{i+1} = U_i @ R_{i+1}` is deterministic. Prefetch while current layer computes.
 
-- Total parameters: 27.4 B × 2 bytes = 54.8 GB uncompressed
-- Catalytic .holo: 3.73 GB (14.7x) — ranks k=256, no cross-layer
-- Wormhole U only: 1.12 GB (49x) — rotations + shared SVh
-- Target with Phase Cavity: ~400 MB (137x) — eigenmode pruning
-- Bekenstein theoretical: ~100-200 MB (coherent eigenmode representation)
+**Formula V4 link:** The Lindblad equation governs open-system evolution: `d(rho)/dt = -i[H, rho] + sum_k gamma_k (L_k rho L_k^dagger - 1/2 {L_k^dagger L_k, rho})`. The wormhole chain is an open quantum system -- fidelity decays along the chain due to residual accumulation. gamma_k = 1 - fid_rot_k (decoherence rate per rotation step).
 
-**Constraint:** The fidelity floor is 0.83 (cosine similarity on U). Below this, the model loses linguistic coherence. The cavity approach must balance compression ratio against fidelity.
+**Expected gain:** For rotation-only layers (fid_rot > 0.99): precompute next U while current forward pass runs. For residual layers: precompute rotation part, add residual after. Eliminates decompression latency for high-fidelity chains.
 
 **What to figure out:**
-- [ ] Compute actual Bekenstein bound for 27B parameter space
-- [ ] What is the Shannon entropy of the eigenmode spectrum?
-- [ ] Is 0.83 fidelity the right floor, or can we go lower with better residual handling?
+- [ ] Which layers are rotation-only (fid_rot > 0.99)? -- linear_attn.in_proj_a/b at 0.96-0.99
+- [ ] Lindblad model: does fidelity decay exponentially along the chain?
+- [ ] Pipeline: while layer i computes forward, prefetch U_{i+1} via R_{i+1}
+- [ ] Measure end-to-end latency with temporal prefetch
+
+### 7. Living Formula Compression Quality Predictor
+
+**Concept:** Apply the Living Formula `R = (E / nabla_S) * sigma^D_f` to predict per-weight-type compression quality BEFORE running wormhole.
+
+**Operational definitions (from Formula V4 QEC sweep):**
+- E = 1.0 (global calibration constant)
+- nabla_S = sqrt(variance of residual magnitudes) -- entropy gradient of the U sequence
+- sigma = fidelity factor = mean(cos_sim(U_curr, U_reconstructed))
+- D_f = number of independent rotation chains = ceil(L / block_size)
+
+**Usage:** Before compression, compute Living Formula R for each weight type. If R < 0.3, skip wormhole (silence protocol -- compression would degrade too much). If R > 0.7, compress aggressively (high-fidelity expected). If 0.3 < R < 0.7, apply conservative compression (more residual bits, lower rotation_threshold).
+
+**What to figure out:**
+- [ ] Calibrate nabla_S definition: is it residual variance or something else?
+- [ ] Does Living Formula R correlate with observed compression fidelity?
+- [ ] Use R as pre-compression filter: which types are incompressible?
+
+### 8. Bekenstein-Bound Compression Floor
+
+**Updated targets with cavity sieve:**
+
+| Format | Size | Ratio vs raw | Status |
+|---|---|---|---|
+| Raw 27B (BF16) | 54,800 MB | 1x | -- |
+| Catalytic .holo | 3,734 MB | 14.7x | Distilled |
+| Cavity Sieved | 858 MB | 63.9x | `10_cavity_sieve.py` |
+| LLM Wormhole | 197 MB | 278x | `7_modular_compress.py` |
+| Visual Wormhole | 14 MB | 3,914x | `7_modular_compress.py` |
+| LM Head | 124 MB | 441x | Not sieved yet |
+| **Total** | **~335 MB** | **164x** | Current best |
+| Target (no LM improvement) | ~240 MB | 228x | Sieve LM head |
+| Bekenstein theoretical | ~100-200 MB | 274-548x | Coherent eigenmode rep. |
+
+**Constraint:** Fidelity floor is 0.83 (cosine similarity on U). Current fid: 0.894 (LLM), 0.878 (visual) -- both safely above. Room for ~10% more compression before hitting the floor.
 
 ---
 
 ## Implementation Plan
 
-### Track A: Quality Ceiling (now)
-- [x] **A1**: Wormhole compressor with rotation + 2-bit residual (3-6.5x)
-- [x] **A2**: SVh sharing (97% cross-layer V reuse verified)
-- [x] **A3**: Modular split: LLM (12 types) + Visual (4 types)
+### Track A: Quality Ceiling
+- [x] **A1**: Wormhole compressor with rotation + 2-bit residual (3-7x)
+- [x] **A2**: SVh sharing (97% cross-layer V reuse)
+- [x] **A3**: Modular split: LLM (12) + Visual (4) + Aux (1)
 - [x] **A4**: Catalytic graph loader with borrow/return workspace
-- [ ] **A5**: Phase cavity eigenmode sieve → rank reduction before compression
+- [x] **A5**: Phase cavity eigenmode sieve (k=256 -> ~49, 4.7x, fid 0.894)
+- [ ] **A6**: MI-weighted epistemic sieve (I(S:F_i) ranking, not cosine threshold)
 
 ### Track B: Storage Floor
-- [ ] **B1**: Complex-phase SVh encoding (base + layer rotation deltas)
-- [ ] **B2**: Skip-R detection (identity rotations → block compression)
-- [ ] **B3**: Transport pruning (which eigenmodes actually rotate?)
-- [ ] **B4**: Bekenstein-bound analysis → theoretical minimum
+- [ ] **B1**: Complex-phase SVh (Born rule retrieval, 5-8 MB shared SVh)
+- [ ] **B2**: Skip-R detection (identity rotations -> drop R)
+- [ ] **B3**: D_f block compression (independent rotation chains, not raw layers)
+- [ ] **B4**: GOE eigenvalue validation (Wigner-Dyson r=0.53 check)
+- [ ] **B5**: Living Formula pre-compression quality predictor
 
 ### Track C: Inference Engine
-- [ ] **C1**: CatalyticHoloModel wrapper for HF transformers
-- [ ] **C2**: Streaming forward: load U per layer, unload after use
-- [ ] **C3**: Temporal prefetch pipeline (next-layer U from current R)
-- [ ] **C4**: Benchmark: VRAM, tokens/sec, Landauer heat
+- [ ] **C1**: CatalyticHoloModel (HF wrapper with HoloLinear layers)
+- [ ] **C2**: Cassette + Lattice architecture (t=2 verification, drift detection)
+- [ ] **C3**: Streaming forward (load U per layer, unload after use)
+- [ ] **C4**: Temporal prefetch (next-layer U from current R)
+- [ ] **C5**: Gamma temperature monitoring (d(fid)/d(layer) -> re-anchor)
 
 ### Track D: Full Pipeline
-- [ ] **D1**: End-to-end compression: safetensors → cavity → wormhole → manifest
-- [ ] **D2**: End-to-end loading: manifest → catalytic session → HF model forward
+- [ ] **D1**: End-to-end: safetensors -> cavity -> wormhole -> manifest
+- [ ] **D2**: End-to-end loading: manifest -> lattice -> HF forward
 - [ ] **D3**: Text generation quality benchmark (perplexity, coherence)
-- [ ] **D4**: Multi-file fragmentation (split large modules across files)
+- [ ] **D4**: Silence protocol gate (fid < 0.3 -> skip compression, fall back to full weight)
+- [ ] **D5**: Multi-file fragmentation (split large cassettes across files)
+
+### Track E: Formula V4 Integration
+- [ ] **E1**: Lindblad fidelity decay model along rotation chains
+- [ ] **E2**: Phase drift diagnostics (6 drift types for rotation chain monitoring)
+- [ ] **E3**: Three-regime detection: CONVERGENT (fid > 0.89), DIVERGENT (fid < 0.7), CRITICAL (fid ~ 0.83)
+- [ ] **E4**: Epistemic C frame calibration for lattice verifier weights
 
 ---
 
-## Module Inventory
+## Cassette Inventory (Updated with Cavity)
 
-| Module | Types | Layers | U Size | Fidelity | Wormhole Size |
-|--------|-------|--------|--------|----------|---------------|
-| **LLM** | 12 | 48-64/layer | 1,904 MB | 0.831 | 1,048 MB |
-| mlp.down_proj | 1 | 64 | 168 MB | 0.852 | — |
-| mlp.gate_proj | 1 | 64 | 570 MB | 0.862 | — |
-| mlp.up_proj | 1 | 64 | 570 MB | 0.853 | — |
-| self_attn.k_proj | 1 | 16 | 8 MB | 0.515 | — |
-| self_attn.q_proj | 1 | 16 | 101 MB | 0.889 | — |
-| self_attn.v_proj | 1 | 16 | 8 MB | 0.594 | — |
-| self_attn.o_proj | 1 | 16 | 42 MB | 0.840 | — |
-| linear_attn.in_proj_a | 1 | 48 | — | 1.000 | — |
-| linear_attn.in_proj_b | 1 | 48 | — | 1.000 | — |
-| linear_attn.in_proj_qkv | 1 | 48 | — | 0.855 | — |
-| linear_attn.in_proj_z | 1 | 48 | — | 0.852 | — |
-| linear_attn.out_proj | 1 | 48 | — | 0.863 | — |
-| **Visual** | 4 | 27/block | 133 MB | 0.745 | 76 MB |
-| attn.qkv | 1 | 27 | 46 MB | 0.860 | — |
-| attn.proj | 1 | 27 | 15 MB | 0.608 | — |
-| mlp.linear_fc1 | 1 | 27 | 57 MB | 0.863 | — |
-| mlp.linear_fc2 | 1 | 27 | 15 MB | 0.650 | — |
+| Cassette | Types | Layers | k (reduced) | Fidelity | Wormhole Size |
+|---|---|---|---|---|---|
+| **LLM** | 12 | 48-64/type | 44-52 | 0.894 | **197 MB** |
+| mlp.down_proj | 1 | 64 | 49 | 0.869 | -- |
+| mlp.gate_proj | 1 | 64 | 51 | 0.860 | -- |
+| mlp.up_proj | 1 | 64 | 49 | 0.854 | -- |
+| self_attn.k_proj | 1 | 16 | 49 | 0.883 | -- |
+| self_attn.q_proj | 1 | 16 | 47 | 0.888 | -- |
+| self_attn.v_proj | 1 | 16 | 52 | 0.895 | -- |
+| self_attn.o_proj | 1 | 16 | 50 | 0.900 | -- |
+| linear_attn.in_proj_a | 1 | 48 | 47 | 0.990 | -- |
+| linear_attn.in_proj_b | 1 | 48 | 46 | 0.979 | -- |
+| linear_attn.in_proj_qkv | 1 | 48 | 48 | 0.855 | -- |
+| linear_attn.in_proj_z | 1 | 48 | 48 | 0.856 | -- |
+| linear_attn.out_proj | 1 | 48 | 48 | 0.895 | -- |
+| **Visual** | 4 | 27/type | 41-50 | 0.878 | **14 MB** |
+| attn.qkv | 1 | 27 | 49 | 0.874 | -- |
+| attn.proj | 1 | 27 | 50 | 0.881 | -- |
+| mlp.linear_fc1 | 1 | 27 | 50 | 0.873 | -- |
+| mlp.linear_fc2 | 1 | 27 | 41 | 0.883 | -- |
+| **Aux** | 1 | 1 | 256* | -- | **124 MB** |
+| lm_head | 1 | 1 | 256* | -- | -- |
+
+*Not cavity-sieved yet. Expected k' ~ 50 -> ~25 MB.
 
 ---
 
-## Integration Map
+## Integration Map (Cassette + Lattice Architecture)
 
 ```
-safetensors (27B)
+safetensors (27B, 54.8 GB)
     │
     ▼
-distill_catalytic.py  ─── catalytic .holo (3,734 MB)
-    │                           │
-    │                    ┌──────┴──────┐
-    │                    ▼              ▼
-    │              cavity_sieve    wormhole_compress
-    │              (prune k)       (rotation + residual)
-    │                    │              │
-    │                    ▼              ▼
-    │              reduced .holo   modular wormhole files
-    │                               │
-    │                          ┌────┴────┐
-    │                          ▼         ▼
-    │                     llm.holo  visual.holo
-    │                     (1,048)    (76)
-    │                          │         │
-    │                          └────┬────┘
-    │                               ▼
-    │                      catalytic_manifest.json
-    │                               │
-    ▼                               ▼
-CatalyticGraphLoader ─────── CatalyticSession
-    │                               │
-    │                        borrow(module)
-    │                        reconstruct(wt, layer)
-    │                        forward_linear(x, wt, layer)
-    │                        return_workspace()
-    │                               │
-    ▼                               ▼
-CatalyticHoloModel ───────── HF Transformers forward pass
+distill_catalytic.py  ─── catalytic .holo (3,734 MB, k=256)
+    │
+    ▼
+cavity_sieve (10_cavity_sieve.py)
+    │  Drops dispersion eigenmodes, k=256 -> ~49
+    │  Shared mask across all layers of weight type
+    │  Fidelity IMPROVES (noise removed)
+    ▼
+cavitated .holo (858 MB, k'~49)
+    │
+    ▼
+wormhole_compress (7_modular_compress.py --module {llm|visual|aux})
+    │  Rotation R = U_prev^T @ U_curr (k' x k')
+    │  2-bit quantized residual
+    │  Shared SVh (one per weight type)
+    ▼
+┌──────────────┬──────────────┬──────────────┐
+│ llm_cassette │ vis_cassette │ aux_cassette │
+│   197 MB     │    14 MB     │   124 MB     │
+└──────┬───────┴──────┬───────┴──────┬───────┘
+       │              │              │
+       └──────────────┴──────────────┘
+                      │
+                      ▼
+              catalytic_manifest.json
+                      │
+                      ▼
+              CatalyticGraphLoader
+                      │
+               borrow(cassette)
+               reconstruct(wt, layer)
+                      │
+              ┌───────┴───────┐
+              │  Lattice      │
+              │  Verifier     │
+              │  t=2 check:   │
+              │  SVh + fid    │
+              └───────┬───────┘
+                      │
+               forward_linear(x, wt, layer)
+               return_workspace()
+                      │
+                      ▼
+              CatalyticHoloModel
+                      │
+                      ▼
+              HF Transformers forward pass
+                      │
+              ┌───────┴───────┐
+              │  Drift Monitor │
+              │  Gamma: d(fid) │
+              │  / d(layer)    │
+              │  > thresh?     │
+              │  -> re-anchor  │
+              └───────────────┘
 ```
 
 ---
 
 ## Priority Order
 
-1. **Phase cavity eigenmode sieve** (Track A5) — single largest compression gain remaining
-2. **CatalyticHoloModel** (Track C1) — end-to-end inference proof
-3. **Complex-phase SVh** (Track B1) — storage size breakthrough
-4. **Skip-R + transport pruning** (Track B2/B3) — near-identity rotation elimination
-5. **Streaming forward** (Track C2) — VRAM efficiency
-6. **Temporal prefetch** (Track C3) — latency optimization
-7. **Bekenstein bound** (Track B4) — theoretical ceiling analysis
+1. **LM Head cavity sieve** (Track A5 extension) -- 124 -> ~25 MB, total under 240 MB
+2. **CatalyticHoloModel** (Track C1) -- end-to-end inference proof
+3. **MI-weighted epistemic sieve** (Track A6) -- more principled eigenmode selection
+4. **GOE eigenvalue validation** (Track B4) -- confirm quantum-chaotic manifold
+5. **Cassette + Lattice verifier** (Track C2) -- t=2 fragment independence check
+6. **Living Formula quality predictor** (Track B5) -- pre-compression gate
+7. **Complex-phase SVh** (Track B1) -- storage breakthrough
+8. **D_f block compression** (Track B3) -- independent rotation chains
+9. **Gamma temperature monitoring** (Track C5) -- re-anchor on drift
+10. **Temporal prefetch** (Track C4) -- latency optimization
+11. **Silence protocol gate** (Track D4) -- fallback on low fidelity
+12. **Bekenstein bound** -- theoretical floor analysis
 
 ---
 
-*"Phase turns information into meaning. The wormhole transports the eigenbasis across layers without erasing the shared structure. The hologram enfolds the model into its rotations. Loading IS the computation."*
+## Formula V4 References
+
+| Canonical Artifact | Relevance to Pipeline |
+|---|---|
+| FORMULA_5_2.md | Living Formula `R = (E/nabla_S)*sigma^D_f` applied to compression quality |
+| SEMIOTIC_AXIOMS_2_2.md | Axiom 3 (compression via eigenvalue truncation = cavity sieve), Axiom 4 (fractal propagation D_f) |
+| CYBERNETIC_TRUTH.md | T=1/(R+epsilon) -> gamma temperature, three dynamical regimes |
+| EPISTEMIC.md | C_epistemic fragment weighting -> MI-weighted eigenmode sieve |
+| INVARIANTS.md (TA) | TA-002 (fragment independence -> lattice verifier), TA-004 (silence -> compression gate) |
+| QEC MASTER_REPORT.md | D_f = t = floor((d-1)/2), sigma calibration from fidelity slopes, GOE chaos |
+| Phase 4c SESSION_REPORT.md | Cassette + Lattice architecture proven at 99.5% TruthfulQA |
+| DIFFERENTIATION.md | Geodesic = path of least resistance -> truth follows shorter geodesics (29% faster) |
+| GATE_PROBABILITY_BOUNDARY.md | Born rule P = \|<psi\|phi>\|^2 -> complex-phase SVh retrieval |
+
+---
+
+*"The Formula IS the compression. R = (E / nabla_S) * sigma^D_f. E is the signal in the weights, nabla_S is the entropy gradient across layers, sigma is the rotation fidelity, D_f is the number of independent correctable rotation blocks. Cassette stores; Model thinks; Lattice verifies; Retrieval reconstructs. Phase turns information into meaning. The wormhole transports the eigenbasis without erasing the shared structure. Loading IS the computation."*

@@ -28,8 +28,9 @@ MODULES = {
     },
     "aux": {
         "tag": (),
-        "types": (),  # catch-all: lm_head, embed, norm
-        "catch_all": True,
+        "types": (),  # stingy: only lm_head, embed, norm
+        "catch_all": False,  # NOT a catch-all — only explicit matches
+        "explicit_keys": ["lm_head", "embed_tokens", "norm", "model.language_model.norm"],
     },
 }
 
@@ -157,11 +158,12 @@ def compress_holo_modular(holo_dict, modules, rotation_threshold=0.5, quant_bits
     def _key_belongs_to_module(key):
         """Check if a catalytic key belongs to any active module."""
         parts = key.split('.')
-        # aux catch-all: accept any key that doesn't belong to a non-active module
-        has_aux = any(m.get('catch_all') for m in modules.values())
-        if has_aux and not any(tag in parts for tag in active_tags if tag):
-            # Key has no active non-aux tag (e.g., lm_head, embed) -> aux catches it
-            return True
+        # Explicit key matching (aux: lm_head, embed_tokens, norm)
+        for mod_name, cfg in modules.items():
+            if 'explicit_keys' in cfg:
+                for ek in cfg['explicit_keys']:
+                    if ek in key:
+                        return True
         for tag in active_tags:
             if not tag: continue
             if tag in parts:
