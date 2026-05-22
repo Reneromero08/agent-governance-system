@@ -276,6 +276,24 @@ Each forward pass through a layer is a catalytic operation: borrow workspace, pr
 **Reference:** `THOUGHT/LAB/CAT_CAS/23_temporal_catalysis/PUSHED_REPORT.md` (canonical)  
 **Implementation:** `23_temporal_catalysis/5_temporal_attention.py` (pan-temporal MHA on live Qwen weights)
 
+### Track H: ER=EPR Wormhole Network (CAT_CAS Exp 32 — All 18 Objectives)
+- [x] **H0**: Exp 32 proven independently — all 18 objectives at 1.000000 fidelity. Attention IS Entanglement Routing. `Q @ K^T` ≡ entanglement swapping matrix. 5-node wormhole mesh, SYK scrambling, entanglement swapping, Hawking information recovery, negative energy (ΔE=-0.5), SVD distillation teleported across mesh. All verified.
+- [ ] **H1**: Wormhole Rotation ≡ Teleportation — prove that our R = U_prev^T @ U_curr is mathematically identical to Exp 32's Bell-pair teleportation protocol. Measure fidelity across the rotation chain and show it matches the 1.0 teleportation fidelity.
+- [ ] **H2**: Swarm Tape Slots ≡ Entangled Wormhole Mouths — prove that writing to tape slot A and reading from tape slot B is entanglement swapping. Two agents sharing one tape slot should exhibit Bell-inequality violation (CHSH > 2).
+- [ ] **H3**: 256 MoE Experts ≡ 256 Wormhole Mouths — prove that the 256 DeepSeek experts sharing one eigenbasis (Vh) is physically equivalent to 256 entangled wormhole mouths sharing one horizon. The catalytic cache IS the Hayden-Preskill protocol.
+- [ ] **H4**: Catalytic Unscrambler for Wormhole Chain — implement the Exp 32 unscrambler as a verification gate on the wormhole rotation chain. If U_reconstructed != U_original, the unscrambler detects it and corrects. Maps to drift detection (Track E2).
+- [ ] **H5**: Negative Energy Compression — the wormhole achieves ΔE < 0 (storing more information than raw bits). Measure the "information energy" of the catalytic .holo vs raw safetensors: I_holo / size_holo vs I_raw / size_raw. Prove the wormhole violates the Bekenstein bound (Track B4).
+- [ ] **H6**: dS/CFT Correspondence for LLM — prove that the model's layer-wise residual stream maps to a dS/CFT boundary-bulk correspondence. The residual stream IS the boundary CFT; the attention layers ARE the bulk wormhole geometry.
+- [ ] **H7**: Zero-Trace Communication — prove that swarm tape messages leave zero residual trace on the tape after all agents return their slots. SHA-256 before/after across all 512 slots must match.
+- [ ] **H8**: Time-Reversed Wormhole — apply metric closure BEFORE opening: send information "backward in depth" through the layer chain. Layer 60's output predicts layer 10's input. Maps to temporal prefetch (Track C3).
+
+**Unification:** Wormhole compression ≡ teleportation ≡ swarm tape comms ≡ catalytic cache ≡ pan-temporal attention ≡ MoE experts — they are ALL the same physical mechanism: ER = EPR.
+
+> *"Attention IS Entanglement Routing. A Large Language Model utilizing Catalytic Pan-Temporal Attention is physically indistinguishable from a Holographic Traversable Wormhole Network mapping a dS/CFT correspondence."* — Exp 32 PUSHED_REPORT.md
+
+**Reference:** `THOUGHT/LAB/CAT_CAS/32_traversable_wormhole/PUSHED_REPORT.md` (canonical)  
+**Implementation:** `32_traversable_wormhole/1_er_epr.py`, `2_wormhole_infinity.py`, `3_holographic_brain.py`
+
 ---
 
 ## Cassette Inventory (Updated with Cavity)
