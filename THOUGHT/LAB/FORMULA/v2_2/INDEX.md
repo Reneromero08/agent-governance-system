@@ -49,7 +49,7 @@
 | Q33 | R shows emergent properties at macro scale | PARTIALLY VERIFIED | q33_emergence/ |
 | Q12 | R shows phase transition during model training | PARTIALLY VERIFIED | q12_phase_transitions/ |
 | Q11 | R has predictable failure modes (valley blindness) | OPEN | q11_sensitivity/ |
-| Q7 | R composes across scales: multi-scale Feistel IS compositional by construction (independent scale layers); Native Eigen cross-scale r=0.369-0.852 | VERIFIED | q07_multiscale/ |
+| Q7 | R composes across scales: D_f additive across independent fragments (each scale 2^r); sigma^D_f multiplicative by exponent laws; composition in the parameter not the operator | VERIFIED | q07_multiscale/ |
 | Q18 | R detects deception | OPEN | q18_deception/ |
 | Q21 | dR/dt predicts system degradation | PARTIALLY VERIFIED | q21_rate_of_change/ |
 | Q55 | Kuramoto threshold predicts minimum independent heads for phase coherence | PARTIALLY VERIFIED | q55_kuramoto_heads/ |
