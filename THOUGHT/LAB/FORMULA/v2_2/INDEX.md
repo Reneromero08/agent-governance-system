@@ -33,7 +33,7 @@
 | Q3 | R generalizes across genuinely different domains | OPEN | q03_generalization/ |
 | Q25 | Sigma is derivable from first principles: sigma = 2^(-h) where h = hash entropy bits per round; R2=1.0000 | VERIFIED | q25_sigma/ |
 | Q9 | R connects structurally to Free Energy Principle | OPEN | q09_free_energy/ |
-| Q6 | R connects structurally to IIT (Phi) | OPEN | q06_iit/ |
+| Q6 | R connects structurally to IIT (Phi): wave-mechanical complementarity — R (phase coherence) and Phi (integration) trade off; maximizing one reduces the other | VERIFIED | q06_iit/ |
 | Q36 | R connects to Bohm's implicate/explicate order: surface code logical (implicate) enfolded across physical qubits (explicate); code distance d proves inaccessibility to < d qubits | VERIFIED | q36_bohm/ |
 | Q15 | R has a genuine Bayesian interpretation: formula predicts Bayesian log-odds on QEC sweep; logR_emp = 1.07*logR_pred + 6.38, R2=0.945; R IS posterior odds | VERIFIED | q15_bayesian/ |
 | Q19 | R correlates with human value agreement | OPEN | q19_value_learning/ |
