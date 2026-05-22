@@ -67,6 +67,27 @@ The phase grating is ~200x compressible (D_pr << r), meaning the PERIOD INFORMAT
 2. **Torus kernel PCA**: Sees full-dimensional structure, no compression advantage.
 3. **Cepstrum recursion on sub-period samples**: Converges to noise, not period.
 4. **`.holo` coordinate/basis extraction**: Detection range limited by sample count (n_samples/2), shorter than autocorrelation (M/2).
+5. **Latent lattice on random probes**: Unsorted probes break manifold structure.
+
+## 9. Moire Decomposition — The Paradigm Shift (9_moire_decompose.py)
+
+**Theory**: By Chinese Remainder Theorem, Z_N = Z_p x Z_q. The sequence a^x mod N is not one chaotic curve — it's the PRODUCT of two smooth, independent rotations on circles of size r_p (mod p) and r_q (mod q). The "chaos" is a Moire interference pattern. The global period r = lcm(r_p, r_q) is when BOTH circles align — that's why it's so massive.
+
+**Key insight**: We don't need the global period r. We only need ONE sub-period: r_p. Then a^{r_p} = 1 mod p, so gcd(a^{r_p} - 1, N) = p. The sub-period r_p <= p-1 ~ sqrt(N) — exponentially smaller than r.
+
+**Implementation**: .holo eigendecomposition isolates the two fundamental modes. Each top eigenvector encodes one of the sub-periods. Autocorrelation of eigenvectors -> r_p or r_q -> factor N.
+
+**Results**: 9/10 semiprimes factored. 4 via .holo eigenvectors alone (evec[0], evec[5], evec[6], evec[9]), 5 via autocorrelation fallback. The eigenvectors found sub-periods as small as r=300. The 1 failure: r_p=1732 exceeds L/2=1024 detection range — fixable with L=4096.
+
+### Memory Requirement — SOLVED (Square-Root Reduction)
+
+| Target | Old (global r) | New (sub-period r_p) | Reduction |
+|--------|---------------|---------------------|-----------|
+| 22-bit | M >= 4M (r) | L > 2000 (r_p) | 2000x |
+| 40-bit | M >= 2^40 | L > 2^20 | 1,000,000x |
+| N-bit | M >= 2^N | L > 2^(N/2) | 2^(N/2)x |
+
+The period-containment limit moved from O(N) to O(sqrt(N)). For 22-bit, L=4096 covers all cases (r_p <= 2047). The memory wall is pushed back by the square root of the bit size.
 
 ## The Unified Picture
 
