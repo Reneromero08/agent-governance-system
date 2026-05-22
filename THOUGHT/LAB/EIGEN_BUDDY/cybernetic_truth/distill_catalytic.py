@@ -1,192 +1,157 @@
 """
-Catalytic Distillation v3 — ALL optimizations
-===============================================
-- Power iteration on cache hits (skip SVD)
-- Float16 throughout
-- Parallel files via ThreadPoolExecutor  
-- torch.compile on Hadamard loop
-- Rust Hadamard ready (callout to .pyd)
+Catalytic Distillation v6 — ACTIVE CATALYTIC CACHE
+===================================================
+First layer of each type: FJLT + QR + SVD (cache miss).
+All subsequent layers: PURE PROJECTION (cache hit).
+  U = orth(W @ V_cached) — two matmuls, zero SVD.
+  V = V_cached (borrowed from previous layer, restored).
+
+This IS the catalytic lab: cross-depth active cache,
+borrowed eigenbasis, zero recomputation.
 """
 import os, sys, math, time, json
-import torch
-import torch.nn.functional as F
+import torch, torch.nn.functional as F
 from safetensors import safe_open
 from pathlib import Path
-from concurrent.futures import ThreadPoolExecutor
-import threading
 
 MODEL_DIR = r"F:\LLM_Models\lmstudio-models\Qwen\Qwen3.6-27B"
 INDEX_PATH = os.path.join(MODEL_DIR, "model.safetensors.index.json")
 OUTPUT_PATH = r"d:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\EIGEN_BUDDY\cybernetic_truth\qwen_27b_catalytic_k256.holo"
 RANK_K = 256
-DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-USE_AMP = DEVICE.type == "cuda"
 
-# ---- Fast Hadamard FJLT (torch.compiled) ----
-@torch.compile(dynamic=True)
-def _hadamard_dims(ct, d_qubits, chunk_rows, H):
-    """Apply H to d_qubits dimensions. Compiled for speed."""
-    for t in range(d_qubits):
-        td = t + 1
-        perm = list(range(d_qubits + 1))
-        perm.pop(td)
-        perm = [0, td] + perm[1:]
-        ct = ct.permute(*perm).contiguous().reshape(chunk_rows, 2, -1)
-        ct = torch.matmul(H, ct)
-        inv = [0] * (d_qubits + 1)
-        for j, p in enumerate(perm): inv[p] = j
-        ct = ct.reshape([chunk_rows] + [2]*d_qubits).permute(*inv).contiguous()
-    return ct
+# ---- Rust Hadamard (26-qubit core) ----
+_RUST = None
+try:
+    for d in [
+        str(Path(__file__).parent / "rust_hadamard" / "target" / "release"),
+        str(Path(__file__).parent),
+    ]:
+        sys.path.insert(0, d)
+        try: _RUST = __import__("rust_hadamard"); break
+        except: pass
+except: pass
 
-def quantum_hadamard_fjlt(A, k, chunk_size=8192):
-    """FJLT via Walsh-Hadamard. Float16 for speed on GPU."""
-    m, n = A.shape
-    d = math.ceil(math.log2(n))
-    pad_size = 2**d - n
-    
-    dtype = torch.float16 if USE_AMP else torch.float32
-    A_out = torch.empty((m, k), device=A.device, dtype=dtype)
-    H = torch.tensor([[1, 1], [1, -1]], dtype=torch.float32, device=A.device) / math.sqrt(2)
-    
-    for i in range(0, m, chunk_size):
-        chunk = A[i:i+chunk_size].to(dtype)
-        if pad_size > 0:
-            chunk = F.pad(chunk, (0, pad_size))
-        ct = chunk.reshape([chunk.shape[0]] + [2]*d)
-        ct = _hadamard_dims(ct, d, chunk.shape[0], H)
-        A_out[i:i+chunk_size] = ct.reshape(chunk.shape[0], 2**d)[:, :k].to(A_out.dtype)
-    
-    if USE_AMP: torch.cuda.empty_cache()
-    return A_out
+# Pre-computed Hadamard perms
+_HC = {}
+def _hp(d):
+    if d not in _HC:
+        p, iv = [], []
+        for t in range(d):
+            td = t+1; perm = [0,td]+[j for j in range(1,d+1) if j!=td]
+            inv = [0]*(d+1)
+            for j,pe in enumerate(perm): inv[pe] = j
+            p.append(perm); iv.append(inv)
+        _HC[d] = (p, iv)
+    return _HC[d]
 
-# ---- Weight type extraction ----
-def get_weight_type(key):
-    parts = key.split('.')
-    for i, p in enumerate(parts):
-        if p in ("layers", "blocks"):
-            if i + 2 < len(parts): return ".".join(parts[i+2:-1])
+def fjlt(A, k, chunk=65536):
+    m,n = A.shape; d = math.ceil(math.log2(n)); pad = 2**d - n
+    out = torch.empty((m,k))
+    H = torch.tensor([[1,1],[1,-1]])/math.sqrt(2); perms, invs = _hp(d)
+    for i in range(0,m,chunk):
+        c = A[i:i+chunk]
+        if pad > 0: c = F.pad(c, (0, pad))
+        if _RUST:
+            ct = c.reshape(c.shape[0], 2**d).numpy()
+            ct = _RUST.hadamard_transform(ct)
+            out[i:i+chunk] = torch.from_numpy(ct[:,:k])
+        else:
+            ct = c.reshape([c.shape[0]]+[2]*d)
+            for t in range(d):
+                ct = ct.permute(*perms[t]).contiguous().reshape(c.shape[0],2,-1)
+                ct = torch.matmul(H, ct)
+                ct = ct.reshape([c.shape[0]]+[2]*d).permute(*invs[t]).contiguous()
+            out[i:i+chunk] = ct.reshape(c.shape[0], 2**d)[:,:k]
+    return out
+
+def wt(k):
+    p = k.split(".")
+    for i,x in enumerate(p):
+        if x in ("layers","blocks") and i+2 < len(p): return ".".join(p[i+2:-1])
     return "unknown"
 
-# ---- Catalytic compression with POWER ITERATION ----
-cache_lock = threading.Lock()
+# ---- CATALYTIC CACHE ----
+cache = {}
+import threading; _l = threading.Lock()
 
-def compress_catalytic(tensor, k, cache, weight_type):
+def compress(tensor, k, tp):
     if tensor.ndim != 2: return tensor
-    orig_dtype = tensor.dtype
-    
-    dtype = torch.float16 if USE_AMP else torch.float32
-    t_in = tensor.to(DEVICE, dtype=dtype)
-    k = min(k, t_in.size(1), t_in.size(0))
+    odt = tensor.dtype; t = tensor.float()
+    k = min(k, t.size(1), t.size(0))
+    has = tp in cache
+    if has and cache[tp][0].shape[0] != t.size(1): has = False
     
     try:
-        m, n = t_in.shape
-        
-        # Cache hit: project directly using cached basis
-        with cache_lock:
-            has_cache = weight_type in cache
-        
-        if has_cache:
-            with cache_lock:
-                M = cache[weight_type].to(DEVICE, dtype=dtype)
-            Y = torch.matmul(t_in, M)
+        if has:
+            # CATALYTIC CACHE HIT: pure projection, zero SVD
+            with _l: Vc = cache[tp][0].float()
+            # U = orth(W @ V_cached)
+            U = torch.matmul(t, Vc)  # (m, n) @ (n, k) = (m, k)
+            U, _ = torch.linalg.qr(U)  # re-orthonormalize
+            V = Vc  # borrow V from previous layer, restored unchanged
+            # Singular values via projection
+            Sd = torch.diag(torch.norm(torch.matmul(torch.matmul(U.t(), t), V[:,:k]), dim=0))
         else:
-            D = torch.randint(0, 2, (n,), device=DEVICE, dtype=dtype) * 2 - 1
-            Y = quantum_hadamard_fjlt(t_in * D, k)
+            # CACHE MISS: full FJLT + QR + SVD
+            D = torch.randint(0, 2, (t.size(1),), dtype=torch.float32) * 2 - 1
+            Y = fjlt(t * D, k)
+            Q, _ = torch.linalg.qr(Y)
+            B = torch.matmul(Q.t(), t)
+            Us, Sv, Vh = torch.linalg.svd(B, full_matrices=False)
+            U = torch.matmul(Q, Us[:,:k])
+            V = Vh[:k,:].t()
+            Sd = torch.diag(Sv[:k])
         
-        Q, _ = torch.linalg.qr(Y)
-        B = torch.matmul(Q.t(), t_in.to(torch.float32))  # SVD needs float32
-        
-        # POWER ITERATION: skip full SVD when we have cached V
-        if has_cache:
-            with cache_lock:
-                Vc = cache[weight_type].to(DEVICE, dtype=torch.float32)
-            # Single power iteration: B^T @ B @ Vc, then orthonormalize
-            BV = torch.matmul(B.t(), torch.matmul(B, Vc))
-            Us, _, Vh = torch.linalg.svd(BV, full_matrices=False)
-            V = Vh[:k, :].t()
-            U = torch.matmul(Q, Us[:, :k].to(dtype))
-            S_diag = torch.diag(torch.ones(k, device=DEVICE, dtype=torch.float32))
-            del BV, Vc
-        else:
-            Us, S, Vh = torch.linalg.svd(B, full_matrices=False)
-            U = torch.matmul(Q, Us[:, :k].to(dtype))
-            V = Vh[:k, :].t()
-            S_diag = torch.diag(S[:k])
-        
-        # Cache the new V thread-safely
-        with cache_lock:
-            cache[weight_type] = V.detach().clone().cpu()
-        
-        # Absorb S into SVh
-        SVh = (S_diag @ V.T).to(orig_dtype).cpu()
-        U = U.to(orig_dtype).cpu()
-        
-        del t_in, Y, Q, B, S_diag, V
-        if USE_AMP: torch.cuda.empty_cache()
+        with _l: cache[tp] = (V.detach().clone(), U.detach().clone())
+        SVh = (Sd @ V.T).to(odt); U = U.to(odt)
         return U, SVh
-        
     except Exception as e:
-        print(f"    [Warn] {e}, falling back...")
-        U, S, Vh = torch.linalg.svd(tensor.float(), full_matrices=False)
-        U, S = U[:, :k], S[:k]
-        V = Vh[:k, :].T
-        SVh = (torch.diag(S) @ V.T).to(orig_dtype)
-        return U.to(orig_dtype), SVh
+        print(f"    [Warn] {e}")
+        U,S,Vh = torch.linalg.svd(t, full_matrices=False)
+        U,S = U[:,:k], S[:k]; V = Vh[:k,:].T
+        return U.to(odt), (torch.diag(S) @ V.T).to(odt)
 
-# ---- Parallel file processing ----
-def process_file(fp, cache, rank_k):
-    t0 = time.perf_counter()
-    holo = {}
+def process(fp, rk):
+    t0 = time.perf_counter(); holo = {}; n = 0; misses = 0; hits = 0
     with safe_open(fp, framework="pt", device="cpu") as f:
         for key in f.keys():
-            if "vision" in key or "mtp" in key: continue
-            tensor = f.get_tensor(key)
-            if tensor.ndim == 2:
-                wt = get_weight_type(key)
-                U_k, SVh_k = compress_catalytic(tensor, rank_k, cache, wt)
-                holo[key + ".U"] = U_k
-                holo[key + ".SVh"] = SVh_k
-            else:
-                holo[key] = tensor.clone()
-    return holo, time.perf_counter() - t0, fp
+            if "vision" in key or "mtp" in key or "embed" in key: continue
+            t = f.get_tensor(key)
+            if t.ndim != 2: continue
+            n += 1; ts = time.perf_counter()
+            tp = wt(key)
+            kind = "HIT" if tp in cache else "MISS"
+            if kind == "HIT": hits += 1
+            else: misses += 1
+            Uk, SVh = compress(t, rk, tp)
+            holo[key+".U"] = Uk; holo[key+".SVh"] = SVh
+            dt = time.perf_counter() - ts
+            if dt > 2 or n % 10 == 0:
+                print(f"    [{n}] {tp}: {kind} {dt:.1f}s")
+    return holo, time.perf_counter() - t0, misses, hits
 
 def main():
-    print(f"Device: {DEVICE} | AMP: {USE_AMP} | Rank: {RANK_K}")
-    
-    with open(INDEX_PATH) as f: index = json.load(f)
-    weight_map = index.get("weight_map", {})
-    unique_files = sorted(set(weight_map.values()))
-    print(f"Files: {len(unique_files)}")
-    
-    cache = {}
-    holo_all = {}
-    total_time = 0.0
-    
-    # Sequential for safety (shared cache needs serial access for power iteration)
-    for i, fn in enumerate(unique_files):
+    print(f"Rank: {RANK_K} | Rust: {'YES' if _RUST else 'torch'} | Mode: CATALYTIC CACHE")
+    with open(INDEX_PATH) as f: ix = json.load(f)
+    wm = ix.get("weight_map", {}); files = sorted(set(wm.values()))
+    print(f"Files: {len(files)}")
+    all_holo = {}; tt = 0.0; tm = 0; th = 0
+    for i,fn in enumerate(files):
         fp = os.path.join(MODEL_DIR, fn)
-        print(f"\n[{i+1}/{len(unique_files)}] {fn}")
-        holo, dt, _ = process_file(fp, cache, RANK_K)
-        holo_all.update(holo)
-        total_time += dt
-        print(f"  {dt:.1f}s")
-    
+        print(f"\n[{i+1}/{len(files)}] {fn}")
+        holo, dt, m, h = process(fp, RANK_K)
+        all_holo.update(holo); tt += dt; tm += m; th += h
+        print(f"  {dt:.1f}s | misses={m} hits={h}")
     os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
     print(f"\nSaving {OUTPUT_PATH}...")
-    torch.save(holo_all, OUTPUT_PATH)
-    gb = os.path.getsize(OUTPUT_PATH) / 1024**3
-    print(f"Done! {gb:.2f} GB in {total_time:.0f}s")
+    torch.save(all_holo, OUTPUT_PATH)
+    gb = os.path.getsize(OUTPUT_PATH)/1024**3
+    print(f"Done! {gb:.2f} GB | {tt:.0f}s | misses={tm} hits={th}")
 
 if __name__ == "__main__":
-    if not os.path.exists(MODEL_DIR):
-        print("=" * 60)
-        print(" 26-QUBIT HADAMARD BENCH (v3)")
-        N = 2**26
-        x = torch.randn(1, N, dtype=torch.float32)
-        t0 = time.perf_counter()
-        Y = quantum_hadamard_fjlt(x, 256)
-        print(f" {N:,} -> 256 in {time.perf_counter()-t0:.2f}s ({N/256:.0f}x compression)")
-        print(f" @torch.compile + float16 ready")
-        print("=" * 60)
+    if os.path.exists(MODEL_DIR): main()
     else:
-        main()
+        N = 2**26; x = torch.randn(1,N)
+        t0 = time.perf_counter()
+        Y = fjlt(x, 256)
+        print(f"26q Hadamard: {N:,}->256 in {time.perf_counter()-t0:.2f}s ({N/256:.0f}x)")
