@@ -69,9 +69,10 @@ This roadmap outlines the milestones for pushing the boundaries of Catalytic Spa
   *   Test the system's behavior when the catalytic tape's integrity is compromised by an external process during run.
   *   Determine the exact minimum tape size required relative to problem size.
 
-- [ ] **Boundary Stress: Live Multi-Process Memory Collision**
+- [x] **Boundary Stress: Live Multi-Process Memory Collision**
   *   Run the catalytic computation (e.g. quantum simulator or compiler) on a shared tape while a background process continuously writes random noise to the unallocated space.
   *   Verify if the spatial projection or mathematical restoration guarantees remain intact and detect corruption immediately.
+  *   **Result:** Simulated concurrent collisions during catalytic encryption. Unallocated noise: SURVIVED at all rates. Active noise: CORRUPTED at all rates — single XOR collision detected. Catalytic isolation proven: active regions survive unallocated noise; any active collision breaks XOR chain and is detected by verify_active(). Script: `30_boundary_stress/1_memory_collision.py`.
 
 - [ ] **Scale Limits: Million-Token Needle-in-a-Haystack Recall Sweep**
   *   Simulate a KV cache containing 1,000,000 tokens (approx. 40 GB baseline VRAM).
