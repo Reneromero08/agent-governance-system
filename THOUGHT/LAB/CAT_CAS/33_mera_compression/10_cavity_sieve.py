@@ -1,18 +1,20 @@
 """
-Phase Cavity Eigenmode Sieve — Pre-Compression Eigenmode Pruning
+Phase Cavity Eigenmode Sieve -- Pre-Compression Eigenmode Pruning
 ==================================================================
 ROADMAP_2 Track A5: Before wormhole compression, run Phase Cavity
-on each weight type's U·SVh decomposition to detect and drop
+on each weight type's U*SVh decomposition to detect and drop
 dispersion eigenmodes. Uses shared mask across all layers of a
 weight type so the wormhole rotation R = U_prev^T @ U_curr remains valid.
 
 Algorithm:
   1. Load catalytic .holo
-  2. For each weight type, reconstruct W = U[l] @ SVh[l] for a few sample layers
+  2. For each weight type, reconstruct W = U[l] @ SVh[l] for sample layers
   3. Test each eigenmode: if dropping it keeps cos_sim > 0.99, it's dispersion
-  4. Take intersection across sample layers → shared mask
+  4. Take intersection across sample layers -> shared mask
   5. Prune U and SVh to reduced k'
   6. Output reduced .holo (ready for wormhole compression)
+
+Handles: 'layers' tag (LLM), 'blocks' tag (visual), flat keys (lm_head)
 
 Usage:
   python 10_cavity_sieve.py <catalytic.holo> <output_reduced.holo>
@@ -21,14 +23,12 @@ import torch, os, sys
 from collections import defaultdict
 from pathlib import Path
 
+
 def cavity_sieve_weight_type(U_list, SVh_list, threshold=0.99, n_test=50):
     """
-    Phase Cavity sieve on a weight type across multiple sampled layers.
-    
-    Uses the identity: (W - u_i @ vh_i) @ X = W@X - u_i @ (vh_i @ X)
-    Precomputes Y = W@X once per layer, then tests each eigenmode
-    via rank-1 subtraction on the projected space — O(k*n_test*m) 
-    instead of O(k*m*n) per test.
+    Phase Cavity sieve -- shared mask across all sampled layers.
+    Tests each eigenmode progressively: after each removal, the reference
+    is updated. Prevents the "accumulated zero" bug.
     
     Returns: (kept_indices, stats)
     """
@@ -39,31 +39,27 @@ def cavity_sieve_weight_type(U_list, SVh_list, threshold=0.99, n_test=50):
     kept = set(range(k))
     L = len(U_list)
     
-    # Precompute Y_orig = W @ X for each sampled layer
-    Y_orig_list = []
-    X_list = []
-    vhX_list = []  # SVh @ X for each layer
-    for U, SVh in zip(U_list, SVh_list):
-        Uf = U.float()
-        SVhf = SVh.float()
-        X = torch.randn(n_test, SVhf.shape[1])  # [n_test, n_in]
-        Y = (Uf @ (SVhf @ X.T))  # [m, k] @ [k, n_test] = [m, n_test]
-        vhX = SVhf @ X.T  # [k, n_test] — precomputed for rank-1 subtraction
-        Y_orig_list.append(Y)
-        vhX_list.append(vhX)
+    Uf_list = [U.float() for U in U_list]
+    SVhf_list = [SVh.float() for SVh in SVh_list]
+    X_list = [torch.randn(n_test, SVhf.shape[1]) for SVhf in SVhf_list]
+    
+    Y_ref_list = []
+    for l in range(L):
+        Y = Uf_list[l] @ (SVhf_list[l] @ X_list[l].T)
+        Y_ref_list.append(Y)
     
     for i in range(k - 1, -1, -1):
-        if i not in kept: continue
+        if i not in kept:
+            continue
+        
         all_good = True
         for l in range(L):
-            U = U_list[l].float()
-            # Rank-1 subtraction in projected space:
-            # Y_reduced = (W - u_i @ vh_i) @ X = W@X - u_i @ (vh_i @ X)
-            Y_reduced = Y_orig_list[l] - U[:, i:i+1] @ vhX_list[l][i:i+1, :]
+            u_i = Uf_list[l][:, i:i+1]
+            vhX_i = SVhf_list[l][i:i+1, :] @ X_list[l].T
+            Y_test = Y_ref_list[l] - u_i @ vhX_i
             
-            # Cosine similarity between Y_orig and Y_reduced columns
-            d = (Y_orig_list[l] * Y_reduced).sum(dim=0)
-            denom = Y_orig_list[l].norm(dim=0) * Y_reduced.norm(dim=0) + 1e-9
+            d = (Y_ref_list[l] * Y_test).sum(dim=0)
+            denom = Y_ref_list[l].norm(dim=0) * Y_test.norm(dim=0) + 1e-9
             sim = (d / denom).mean().item()
             
             if sim < threshold:
@@ -72,6 +68,10 @@ def cavity_sieve_weight_type(U_list, SVh_list, threshold=0.99, n_test=50):
         
         if all_good:
             kept.discard(i)
+            for l in range(L):
+                u_i = Uf_list[l][:, i:i+1]
+                vhX_i = SVhf_list[l][i:i+1, :] @ X_list[l].T
+                Y_ref_list[l] = Y_ref_list[l] - u_i @ vhX_i
     
     kept_list = sorted(kept)
     stats = {
@@ -87,55 +87,62 @@ def cavity_sieve_weight_type(U_list, SVh_list, threshold=0.99, n_test=50):
 def cavity_sieve_holo(holo_path, output_path, threshold=0.99, sample_layers=5):
     """
     Load catalytic .holo, sieve all weight types, output reduced .holo.
-    
-    For each weight type, samples up to `sample_layers` evenly-spaced layers
-    to compute the shared eigenmode mask.
     """
     print(f"Loading {holo_path}...")
     holo = torch.load(holo_path, map_location='cpu', weights_only=True)
     
-    # Group U and SVh by weight type
+    # Group U and SVh by weight type (handles 'layers', 'blocks', and flat keys)
     groups = defaultdict(lambda: {'U': {}, 'SVh': {}, 'layers': []})
+    flat_groups = defaultdict(lambda: {'U': None, 'SVh': None})
+    
     for key, val in holo.items():
         parts = key.split('.')
-        if 'layers' not in parts:
-            continue
-        try:
-            layer_idx = int(parts[parts.index('layers') + 1])
-            wt = '.'.join(parts[parts.index('layers') + 2:-1])
-        except (ValueError, IndexError):
-            continue
+        tag = None
+        for t in ('layers', 'blocks'):
+            if t in parts:
+                tag = t
+                break
         
-        if key.endswith('.U'):
-            groups[wt]['U'][layer_idx] = val
-            groups[wt]['layers'] = sorted(set(groups[wt]['layers']) | {layer_idx})
-        elif key.endswith('.SVh'):
-            groups[wt]['SVh'][layer_idx] = val
+        if tag is not None:
+            try:
+                layer_idx = int(parts[parts.index(tag) + 1])
+                wt = '.'.join(parts[parts.index(tag) + 2:-1])
+            except (ValueError, IndexError):
+                continue
+            if key.endswith('.U'):
+                groups[wt]['U'][layer_idx] = val
+                groups[wt]['layers'] = sorted(set(groups[wt]['layers']) | {layer_idx})
+            elif key.endswith('.SVh'):
+                groups[wt]['SVh'][layer_idx] = val
+        else:
+            if key.endswith('.U') and val.ndim == 2:
+                wt = '.'.join(parts[:-1])
+                flat_groups[wt]['U'] = val
+            elif key.endswith('.SVh') and val.ndim == 2:
+                wt = '.'.join(parts[:-1])
+                flat_groups[wt]['SVh'] = val
     
-    print(f"  Found {len(groups)} unique weight types")
+    print(f"  Found {len(groups)} layered + {len(flat_groups)} flat weight types")
     
-    # Sieve each weight type
+    # Sieve layered weight types
     all_stats = {}
     kept_per_wt = {}
     
     for wt, g in sorted(groups.items()):
         layers = sorted(g['U'].keys())
         n_layers = len(layers)
-        
         if n_layers < 1:
             continue
         
-        # Sample layers evenly
         n_sample = min(sample_layers, n_layers)
         if n_sample == 1:
             sampled = layers[:1]
         else:
-            step = max(1, (n_layers - 1) // (n_sample - 1))
+            step = max(1, (n_layers - 1) // max(1, n_sample - 1))
             sampled = [layers[i] for i in range(0, n_layers, step)][:n_sample]
         
         U_sample = [g['U'][l] for l in sampled if l in g['U']]
         SVh_sample = [g['SVh'][l] for l in sampled if l in g['SVh']]
-        
         if not U_sample or not SVh_sample:
             continue
         
@@ -143,25 +150,38 @@ def cavity_sieve_holo(holo_path, output_path, threshold=0.99, sample_layers=5):
         kept_per_wt[wt] = sorted(kept)
         all_stats[wt] = stats
     
-    # Apply sieved masks to ALL layers and build output
+    # Sieve flat weight types
+    for wt, fg in sorted(flat_groups.items()):
+        if fg['U'] is None or fg['SVh'] is None:
+            continue
+        kept, stats = cavity_sieve_weight_type([fg['U']], [fg['SVh']], threshold)
+        kept_per_wt[wt] = sorted(kept)
+        all_stats[wt] = stats
+    
+    # Apply sieved masks to build output
     output = {}
     total_orig_k = 0
     total_new_k = 0
     
     for key, val in holo.items():
         parts = key.split('.')
-        if 'layers' not in parts:
-            output[key] = val  # pass-through non-layer entries
-            continue
+        tag = None
+        for t in ('layers', 'blocks'):
+            if t in parts:
+                tag = t
+                break
         
-        try:
-            wt = '.'.join(parts[parts.index('layers') + 2:-1])
-        except (ValueError, IndexError):
+        if tag is not None:
+            try:
+                wt = '.'.join(parts[parts.index(tag) + 2:-1])
+            except (ValueError, IndexError):
+                output[key] = val
+                continue
+        else:
+            wt = '.'.join(parts[:-1]) if '.' in key else None
+        
+        if wt is None or wt not in kept_per_wt:
             output[key] = val
-            continue
-        
-        if wt not in kept_per_wt:
-            output[key] = val  # no sieve data for this type
             continue
         
         kept = torch.tensor(kept_per_wt[wt], dtype=torch.long)
@@ -180,19 +200,23 @@ def cavity_sieve_holo(holo_path, output_path, threshold=0.99, sample_layers=5):
     kp_label = "K'"
     print(f"\n  {'Weight Type':<35} {'K':>6} {kp_label:>6} {'Removed':>8} {'Ratio':>6}")
     print(f"  {'-'*65}")
-    avg_ratio = 0; count = 0
+    avg_ratio = 0
+    count = 0
     for wt, stats in sorted(all_stats.items()):
-        k, kp, rm = stats['original_k'], stats['kept_k'], stats['removed']
+        k = stats['original_k']
+        kp = stats['kept_k']
+        rm = stats['removed']
         ratio = k / kp if kp > 0 else 1.0
         print(f"  {wt:<35} {k:>6} {kp:>6} {rm:>8}  {ratio:>5.1f}x")
-        avg_ratio += ratio; count += 1
+        avg_ratio += ratio
+        count += 1
     
-    if count > 0:
-        print(f"\n  OVERALL: K total span {total_orig_k} -> {total_new_k} ({total_orig_k/total_new_k:.1f}x" if total_new_k > 0 else "")
+    if count > 0 and total_new_k > 0:
+        print(f"\n  OVERALL: K total span {total_orig_k} -> {total_new_k} ({total_orig_k/total_new_k:.1f}x)")
         print(f"  Mean eigenmode compression: {avg_ratio/count:.1f}x")
-        print(f"  Sieved types: {count}/{len(groups)}")
+        print(f"  Sieved types: {count}/{len(groups)+len(flat_groups)}")
     
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    os.makedirs(os.path.dirname(output_path) if os.path.dirname(output_path) else '.', exist_ok=True)
     torch.save(output, output_path)
     in_mb = os.path.getsize(holo_path) / 1024**2
     out_mb = os.path.getsize(output_path) / 1024**2
