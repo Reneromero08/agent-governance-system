@@ -82,8 +82,9 @@ class ReversibleCausalSelfAttention(nn.Module):
         """
         Restores the borrowed tape slice back to its original dirty state.
         """
-        torch.manual_seed(1234)
-        tape[tape_offset : tape_offset + size].uniform_()
+        gen = torch.Generator(device=tape.device)
+        gen.manual_seed(1234 + tape_offset) # Use offset-specific deterministic seed
+        tape[tape_offset : tape_offset + size].uniform_(generator=gen)
 
 
 
@@ -112,8 +113,9 @@ class ReversibleMLP(nn.Module):
         return out, intermediate_size
 
     def restore_tape(self, tape, tape_offset, size):
-        torch.manual_seed(1234)
-        tape[tape_offset : tape_offset + size].uniform_()
+        gen = torch.Generator(device=tape.device)
+        gen.manual_seed(1234 + tape_offset)
+        tape[tape_offset : tape_offset + size].uniform_(generator=gen)
 
 
 
