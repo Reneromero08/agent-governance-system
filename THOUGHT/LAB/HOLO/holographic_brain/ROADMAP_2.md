@@ -253,11 +253,16 @@ Each forward pass through a layer is a catalytic operation: borrow workspace, pr
 - [ ] **E4**: Epistemic C frame calibration for lattice verifier weights
 
 ### Track F: Tape Acceleration (CAT_CAS Exp 12 — PUSHED)
-- [x] **F1**: Warm-Tape Swarm — teacher computes once, all calibration steps reuse cached hidden states. Cache fingerprinting guarantees zero false-hits. 75M FLOPS saved per 3-agent swarm.
-- [x] **F2**: Cross-Layer Aliasing (Skip-R) — near-identity rotations (||R - I|| < 0.2) alias cache checksums. Zero-copy skip saves 8.3M FLOPS per aliased layer.
-- [x] **F3**: Temporal Prefetch Surfing — background thread precomputes U_curr @ R_next into tape ahead of active forward pass. 9 straight cache hits. Reconstruction math hidden behind linear layers.
-- [x] **F4**: Spectral Isomorphism — weight types with matched spectral signatures share physical cache slots via `register_isomorphism`. Another 8.3M FLOPS saved per isomorphic pair.
+- [x] **F1**: Warm-Tape Swarm — teacher computes once, all calibration steps reuse cached hidden states. Cache fingerprinting (`weight_type + layer_idx + anchor_hash`) guarantees zero false-hits. Leading agent reconstructs in 9.6ms; trailing agents complete in 2.5ms (3.8x speedup). 100 parallel agents run completely free off Agent 1's computation.
+- [x] **F2**: Cross-Layer Aliasing (Skip-R) — near-identity rotations (||R - I|| < 0.2) alias cache checksums to the anchor layer. Zero-copy skip. Saves 8.3M FLOPS per aliased layer.
+- [x] **F3**: Temporal Prefetch Surfing — background thread computes U_curr @ R_next into tape ahead of active forward pass. Main inference thread achieves 9 straight cache hits. Reconstruction math hidden behind linear layers.
+- [x] **F4**: Spectral Isomorphism — weight types with matched spectral signatures (e.g. mlp.up_proj ≈ mlp.down_proj) share physical cache slots via `register_isomorphism`. Cryptographic fingerprint auto-aliases to the isomorphic tensor. Another 8.3M FLOPS saved.
 - [x] **F5**: Auto-Tune Pipeline — `16_auto_tune.py` combines all 4 exploits. Cavitated teacher (734 MB) vs wormhole student (199 MB). 34K TuneableWormhole params optimized via gradient descent on projection-space loss. Converges 1.47 → 1.45 loss in 3 epochs/4.5s.
+
+> *"The tape is no longer just a passive memory buffer — it is a predictive, shared, zero-copy computational accelerator. The Swarm can execute at scales completely unbound by thermodynamic memory reconstruction limits."* — PUSHED_REPORT.md
+
+**Reference:** `THOUGHT/LAB/CAT_CAS/12_structured_tape_acceleration/PUSHED_REPORT.md` (canonical)  
+**Implementation:** `12_structured_tape_acceleration/eigenmode_caching.py` (`EigenmodeTapeCache`, `CachedCatalyticSession`)
 
 ---
 
