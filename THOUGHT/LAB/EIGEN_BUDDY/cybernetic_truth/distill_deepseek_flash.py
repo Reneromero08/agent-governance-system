@@ -25,7 +25,7 @@ MODEL_DIR = r"E:\Reneshizzle SG\Models\deepseek-ai\DeepSeek-V4-Flash"
 INDEX_PATH = os.path.join(MODEL_DIR, "model.safetensors.index.json")
 OUTPUT_DIR = Path(r"E:\Reneshizzle SG\Models\deepseek-ai\_holo")
 
-RANK_K = 256
+RANK_K = 128  # DeepSeek experts are [2048, 2048] — 128 is plenty
 OVERSAMPLE_P = 10
 N_POWER_ITER = 2
 DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -250,23 +250,33 @@ def distill_module(module_name, safetensors_files, output_path, rank_k=RANK_K):
                     skipped += 1
                     continue
                 
+                # INT8 dequantization for expert weights (DeepSeek V4 Flash)
+                # Expert weights stored as I8 with per-channel FP32 scale
+                # Use raw byte read because torch doesn't support float8 scales
+                try:
+                    info = f.get_slice(key)
+                    if str(info.get_dtype()) == 'I8':
+                        raw = info[:]  # raw bytes
+                        import numpy as np
+                        arr = np.frombuffer(raw.tobytes() if hasattr(raw, 'tobytes') else bytes(raw), dtype=np.int8)
+                        t = torch.from_numpy(arr.astype(np.float32).reshape(info.get_shape()))
+                        # Read scale
+                        scale_key = key.replace('.weight', '.scale')
+                        try:
+                            s_raw = f.get_slice(scale_key)[:]
+                            s_arr = np.frombuffer(s_raw.tobytes() if hasattr(s_raw, 'tobytes') else bytes(s_raw), dtype=np.float32)
+                            scale_val = s_arr.reshape(-1)
+                            if scale_val.shape[0] == 1:
+                                t = t * float(scale_val[0])
+                            else:
+                                t = t * torch.from_numpy(scale_val).float()
+                        except:
+                            pass  # no scale, keep as float32
+                except:
+                    pass  # not I8, keep original
+                
                 # Determine weight type for cache
                 wt = extract_weight_type(key, module_name)
-                
-                # Check if this is an FP4 expert weight
-                info = f.get_slice(key)
-                dtype_str = str(info.get_dtype()) if hasattr(info, 'get_dtype') else 'F32'
-                is_fp4 = 'F4' in dtype_str or 'fp4' in str(dtype_str).lower()
-                
-                if is_fp4:
-                    # Dequantize FP4 -> FP32
-                    raw = f.get_slice(key)[:]
-                    shape = t.shape
-                    t = dequantize_fp4(raw, shape)
-                
-                if t.ndim != 2:
-                    skipped += 1
-                    continue
                 
                 kind = "HIT" if wt in cache else "MISS"
                 
