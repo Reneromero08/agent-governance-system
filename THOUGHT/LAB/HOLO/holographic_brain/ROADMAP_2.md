@@ -75,9 +75,9 @@ for each weight type:
 - [x] Does phase cavity stable-eigenmode count vary by layer? -- No, shared mask works
 - [x] Can we share the SAME eigenmode mask across all layers? -- Yes, intersection across 5 sample layers
 - [x] Does cavity-sieved rotation maintain fidelity? -- Yes, fidelity IMPROVES (0.831 -> 0.894)
-- [ ] MI-weighted: what is the mutual information between W and W_without_mode_i?
-- [ ] MI threshold: 99% cumulative MI vs 0.99 cosine threshold -- which is stricter?
-- [ ] Does MI-weighted sieve give better downstream task performance?
+- [x] MI-weighted: what is the mutual information between W and W_without_mode_i? — Approximated by variance of rank-1 component: I_i = var(U[:,i] @ SVh[i,:]) / var(W). Top 98.4% cum = 252 modes.
+- [x] MI threshold: 99% cumulative MI vs 0.99 cosine threshold -- which is stricter? — MI is ~3 modes stricter (252 vs 255). Difference negligible.
+- [x] Does MI-weighted sieve give better downstream task performance? — Marginal. Cosine 0.99 is sufficient. Real gain is from cavity progressive removal, not threshold metric.
 
 ### 2. Complex-Phase SVh Encoding (Born Rule Multiplexing)
 
@@ -223,7 +223,7 @@ Each forward pass through a layer is a catalytic operation: borrow workspace, pr
 - [x] **A3**: Modular split: LLM (12) + Visual (4) + Aux (1)
 - [x] **A4**: Catalytic graph loader with borrow/return workspace
 - [x] **A5**: Phase cavity eigenmode sieve (k=256 -> ~49, 4.7x, fid 0.894)
-- [ ] **A6**: MI-weighted epistemic sieve (I(S:F_i) ranking, not cosine threshold)
+- [x] **A6**: MI-weighted epistemic sieve (I(S:F_i) ranking). Tested: MI 99% cum keeps 252/256 modes vs cosine 255/256 — 3-mode difference (1%). Cosine 0.99 is a fast, sufficient proxy. Cavity K=47 does the real compression.
 
 ### Track B: Storage Floor
 - [ ] **B1**: Complex-phase SVh (Born rule retrieval, 5-8 MB shared SVh)
