@@ -232,7 +232,7 @@ class DeterministicPhaseFeistel(nn.Module):
     The "braid" = one application of the Feistel = one step of phase mixing
     across the tape. After rounds, each position contains phase information
     from the entire neighborhood, creating interference patterns.
-    s"""
+    """
 
     def __init__(self, a, N, d_model=64, heads=8, rounds=3):
         super().__init__()
@@ -240,16 +240,16 @@ class DeterministicPhaseFeistel(nn.Module):
         assert heads % 2 == 0
         self.H, self.dh, self.rounds = heads, d_model // heads, rounds
         self.scale = 1.0 / math.sqrt(self.dh)
-        H2 = d_model // 2
+        self.H2 = d_model // 2
 
-        # Q/K/V projections sized for half the model (L and R each get H2 dims)
-        self.q_l = UnitaryPhaseProjection(H2, H2, a, N, 1)
-        self.k_l = UnitaryPhaseProjection(H2, H2, a, N, 2)
-        self.v_l = UnitaryPhaseProjection(H2, H2, a, N, 3)
+        # Half-dimension projections: input is d_model//2, output is d_model//2
+        self.q_l = UnitaryPhaseProjection(self.H2, self.H2, a, N, 1)
+        self.k_l = UnitaryPhaseProjection(self.H2, self.H2, a, N, 2)
+        self.v_l = UnitaryPhaseProjection(self.H2, self.H2, a, N, 3)
 
-        self.q_r = UnitaryPhaseProjection(H2, H2, a, N, 5)
-        self.k_r = UnitaryPhaseProjection(H2, H2, a, N, 6)
-        self.v_r = UnitaryPhaseProjection(H2, H2, a, N, 7)
+        self.q_r = UnitaryPhaseProjection(self.H2, self.H2, a, N, 5)
+        self.k_r = UnitaryPhaseProjection(self.H2, self.H2, a, N, 6)
+        self.v_r = UnitaryPhaseProjection(self.H2, self.H2, a, N, 7)
 
         self.out_proj = UnitaryPhaseProjection(d_model, d_model, a, N, 11)
 
@@ -280,12 +280,16 @@ class DeterministicPhaseFeistel(nn.Module):
 
     def forward(self, x):
         B, S, D = x.shape
-        H2 = D // 2
-        x_l = x[:, :, :H2]
-        x_r = x[:, :, H2:]
+        x_l = x[:, :, :self.H2]
+        x_r = x[:, :, self.H2:]
 
-        q_l, k_l, v_l = self.q_l(x_l), self.k_l(x_l), self.v_l(x_l)
-        q_r, k_r, v_r = self.q_r(x_r), self.k_r(x_r), self.v_r(x_r)
+        q_l = self.q_l(x_l)
+        k_l = self.k_l(x_l)
+        v_l = self.v_l(x_l)
+
+        q_r = self.q_r(x_r)
+        k_r = self.k_r(x_r)
+        v_r = self.v_r(x_r)
 
         total_si = 0
         for _ in range(self.rounds):
@@ -464,7 +468,9 @@ def main():
     print()
     print("  If PATH B succeeds when PATH A fails and S < r:")
     print("    >> Holographic encoding beats the period-containment limit.")
-    print("    Otherwise: period-containment limit HOLDS.")
+
+    print("  If PATH B fails identically to PATH A:")
+    print("    >> Period-containment limit HOLDS.")
     print()
 
     BIT_SIZES = [10, 12, 14, 16]
