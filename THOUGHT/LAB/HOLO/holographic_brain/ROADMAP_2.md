@@ -195,7 +195,65 @@ Each forward pass through a layer is a catalytic operation: borrow workspace, pr
 - [x] Does Living Formula R correlate with observed compression fidelity?
 - [x] Use R as pre-compression filter: which types are incompressible?
 
-### 8. Bekenstein-Bound Compression Floor
+### 8. EIGEN_ALIGNMENT Saturation Benchmarks (What Dimensions Actually Matter)
+
+Data from `THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/validation/results/` and `q34_df_attractor.json`.
+
+#### LLM Activations (GPT-2 Hidden States)
+| Metric | Value |
+|--------|-------|
+| Effective Df | **1.7** |
+| 95% variance cutoff | k = **9 dims** |
+| Compression possible | **85x** |
+
+#### LLM Weights (Cross-Layer U Matrices)
+| Metric | Value |
+|--------|-------|
+| Participation ratio Df | **~100** |
+| Compression possible | **7x** |
+
+#### Trained Embeddings (768D)
+| Metric | Random | Untrained | Trained |
+|--------|--------|-----------|---------|
+| Df (participation) | 99.4 | 62.3 | **22.2** |
+| Top-10 variance | 0.15 | 0.28 | **0.51** |
+| Geodesic spread | 1.57 rad (pi/2) | 0.27 rad | **0.35 rad** |
+
+#### Cross-Model Df Attractor (9 Models: GloVe, Word2Vec, BERT, mBERT, MiniLM, MPNet, etc.)
+| Statistic | Value |
+|-----------|-------|
+| Mean Df | **39.6** |
+| Range | 16.6 (mBERT) -- 55.0 (MiniLM) |
+| CV | 30.6% |
+| Cross-arch correlation | r = **0.969**, p = 9.92e-14 |
+| Cumulative variance invariant | r = **0.994** |
+
+#### Partial Training Collapse
+| alpha | Df | Phase |
+|-------|-----|-------|
+| 0.00 | 62.5 | Initial |
+| 0.50 | 22.8 | Mid-training |
+| 0.75 | **1.6** | Collapse (pathological) |
+| 0.90 | 22.5 | Recovery |
+| 1.00 | 17.3 | Converged |
+| jump at 0.90->1.00 | **+0.424** | Phase transition |
+
+#### Sweet Spot for Our K Selection
+| K | Our comp | vs Df mean | Verdict |
+|---|---------|-----------|---------|
+| **256** | Full distillation | 39.6 target | 6.5x over-provisioned |
+| **49** (cavity) | 4.7x reduction | 39.6 target | **Optimal** |
+| **9** (activation) | 95% variance | 1.7 Df | 5.3x safety margin |
+
+**Conclusion**: K=49 cavity sieve hits the cross-model Df sweet spot exactly. For the correction tape (hidden states), only 2-9 complex scalars per layer needed — 85x smaller than the already-compressed .holo.
+
+#### Reference Files
+- `THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/validation/results/geometry_analysis.json`
+- `THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/validation/results/partial_training.json`
+- `THOUGHT/LAB/EIGEN_ALIGNMENT/qgt_lib/python/results/q34_df_attractor.json`
+- `THOUGHT/LAB/EIGEN_ALIGNMENT/CHANGELOG.md` (LLM activation Df)
+
+### 9. Bekenstein-Bound Compression Floor
 
 **Updated targets with cavity sieve:**
 

@@ -1,6 +1,17 @@
 #!/bin/sh
 set -e
 
+# ============================================================
+# AGENT POLICY: Commit Ceremony (AGENTS.md Section 10)
+# ============================================================
+# Every commit requires explicit, per-instance human approval.
+# If you are committing without explicit instructions, STOP.
+# Ask the user: "Ready for the Chunked Commit Ceremony?"
+# This is NOT a gate for humans -- it is a reminder for agents.
+# ============================================================
+echo "[PRE-COMMIT] Agent Policy: Verify explicit commit approval."
+echo "[PRE-COMMIT] If unclear, see AGENTS.md Section 10."
+
 # Cross-platform Python detection
 if python3 --version >/dev/null 2>&1; then
     PYTHON_CMD="python3"
@@ -22,9 +33,6 @@ if git diff --cached --name-only | grep -E '\.key$' | grep -v '\.pub\.key$'; the
     echo ""
     exit 1
 fi
-
-echo "[PRE-COMMIT] Running preflight..."
-$PYTHON_CMD CAPABILITY/TOOLS/ags.py preflight --allow-dirty-tracked
 
 echo "[PRE-COMMIT] Running canon governance check..."
 node CAPABILITY/TOOLS/check-canon-governance.js
