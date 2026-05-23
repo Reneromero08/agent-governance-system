@@ -17,7 +17,7 @@ SHARDS = HOLO / "experts_shards"
 AUX_PATH = HOLO / "ds_aux_weights.holo"
 TOKENIZER_PATH = HOLO  # tokenizer files stored alongside holos
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-K, HIDDEN, HEADS = 128, 4096, 64
+K, HIDDEN, HEADS = 256, 4096, 64
 
 class InfinityEngine:
     def __init__(self):
@@ -70,26 +70,46 @@ class InfinityEngine:
         return (x.float() / rms) * weight.float().to(x.device)
     
     def _load_attention(self):
-        d = torch.load(str(HOLO / "deepseek_v4_flash_attention_k128.holo"), weights_only=False, map_location="cpu")
-        svh_deq = {}
-        for wt in d["_svh"]:
-            svh_deq[wt] = d["_svh"][wt].float() * d["_svh_scales"][wt]
+        d = torch.load(str(HOLO / "deepseek_v4_flash_attention_k256.holo"), weights_only=False, map_location="cpu")
         
-        layers = defaultdict(dict)
-        for key in d:
-            if not key.endswith(".U") or key.startswith("_"): continue
-            parts = key.split(".")
-            layer = None
-            for i, p in enumerate(parts):
-                if p == "layers" and i+1 < len(parts):
-                    try: layer = int(parts[i+1])
-                    except: pass; break
-            if layer is None: continue
+        # Detect format: v1 (flat U+SVh) or v2 (_svh + _svh_ref)
+        if '_svh' in d and '_svh_ref' in d:
+            # v2 deduplicated format
+            svh_deq = {}
+            for wt in d["_svh"]:
+                svh_deq[wt] = d["_svh"][wt].float() * d["_svh_scales"][wt]
             
-            U = d[key].float() * d.get(key.replace(".U", ".scale"), 1.0)
-            wt = d["_svh_ref"].get(key, "").replace(".weight.weight", ".weight")
-            if wt in svh_deq:
-                layers[layer][key.replace(".U", "")] = U @ svh_deq[wt]
+            layers = defaultdict(dict)
+            for key in d:
+                if not key.endswith(".U") or key.startswith("_"): continue
+                parts = key.split(".")
+                layer = None
+                for i, p in enumerate(parts):
+                    if p == "layers" and i+1 < len(parts):
+                        try: layer = int(parts[i+1])
+                        except: pass; break
+                if layer is None: continue
+                
+                U = d[key].float() * d.get(key.replace(".U", ".scale"), 1.0)
+                wt = d["_svh_ref"].get(key, "").replace(".weight.weight", ".weight")
+                if wt in svh_deq:
+                    layers[layer][key.replace(".U", "")] = U @ svh_deq[wt]
+        else:
+            # v1 flat format
+            layers = defaultdict(dict)
+            for key in d:
+                if not key.endswith(".U"): continue
+                svh_key = key.replace(".U", ".SVh")
+                if svh_key not in d: continue
+                parts = key.split(".")
+                layer = None
+                for i, p in enumerate(parts):
+                    if p == "layers" and i+1 < len(parts):
+                        try: layer = int(parts[i+1])
+                        except: pass; break
+                if layer is None: continue
+                layers[layer][key.replace(".U", "")] = d[key].float() @ d[svh_key].float()
+        
         return dict(layers)
     
     def _load_experts(self, layer_idx, expert_indices=None):
@@ -292,15 +312,31 @@ if __name__ == "__main__":
         logits = out.float() @ engine.lm_head.T.to(DEVICE)  # [1, seq, vocab]
         next_token = logits[0, -1, :].argmax().item()
     
-    pred_text = tokenizer.decode([next_token], errors='replace')
-    top5_tokens = [t for t in logits[0,-1,:].topk(5).indices.tolist()]
+    # Autoregressive generation
+    print(f"\nGenerating 10 tokens autoregressively...")
+    generated = []
+    t0 = time.perf_counter()
+    
+    for step in range(10):
+        # Full forward through all layers
+        out, stats = engine.forward(x, num_layers=engine.num_layers)
+        
+        # Next token from last position
+        logits = out.float()[0, -1, :] @ engine.lm_head.T.to(DEVICE)
+        next_token = logits.argmax().item()
+        generated.append(next_token)
+        
+        # Embed next token and append to sequence
+        next_embed = engine.embed[next_token].float().unsqueeze(0).unsqueeze(0).to(DEVICE)
+        x = torch.cat([x.to(DEVICE), next_embed], dim=1)
+    
+    dt = time.perf_counter() - t0
+    gen_text = tokenizer.decode(generated, errors='replace')
     
     print(f"\n=== INFINITY REPORT ===")
-    print(f"  Layers processed: {stats['layers']}")
+    print(f"  Layers per step: {stats['layers']}")
     print(f"  Peak GPU: {stats['gpu_peak']:.2f} GB")
-    print(f"  Time: {stats['time']:.1f}s ({stats['layers']/stats['time']:.1f} layers/s)")
-    print(f"  Output shape: {list(out.shape)}")
-    print(f"  Next token: {next_token}")
-    print(f"  Top-5 tokens: {top5_tokens}")
+    print(f"  Time: {dt:.1f}s ({10*43/dt:.0f} layers/s)")
+    print(f"  Generated tokens: {generated}")
     print(f"  Landauer: Delta S = 0.0")
     print(f"\n  INFINITY ACHIEVED.")
