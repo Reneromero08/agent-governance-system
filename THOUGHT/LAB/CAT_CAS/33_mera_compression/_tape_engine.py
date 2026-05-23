@@ -1,4 +1,4 @@
-"""COMPLETE TAPE ENGINE — Attention + Shared Expert FFN + MHC residual. Zero E: drive."""
+"""CATALYTIC TAPE ENGINE — Infinite memory via tape borrowing. One layer at a time on GPU."""
 import torch, torch.nn.functional as F, os, time, json, math, numpy as np
 from pathlib import Path
 
@@ -8,12 +8,11 @@ SHARDS = HOLO / "experts_shards"
 AUX_PATH = HOLO / "ds_aux_weights.holo"
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
-class CompleteEngine:
+class CatalyticEngine:
     def __init__(self):
-        print(f"COMPLETE ENGINE — {DEVICE}")
+        print(f"CATALYTIC ENGINE — {DEVICE}")
         t0 = time.perf_counter()
         
-        # ==== Holo attention (K=256, local) ====
         d = torch.load(str(HOLO / "deepseek_v4_flash_attention_k256.holo"), weights_only=False, map_location="cpu")
         self.attn = {}
         if '_svh' in d:
@@ -49,34 +48,29 @@ class CompleteEngine:
                 if layer is None: continue
                 self.attn.setdefault(layer, {})[k.replace('.U','')] = d[k].float() @ d[sk].float()
         
-        # ==== Experts SVh (codebook) ====
         svh_data = torch.load(str(SHARDS / "svh_shared.holo"), weights_only=False)
         self.e_svh = {wt: (info["data"].float()*info["scale"]).to(DEVICE) for wt,info in svh_data.items()}
         
-        # ==== Embed, head, norms ====
         aux = torch.load(str(AUX_PATH), weights_only=False, map_location="cpu")
         self.embed = aux['embed.weight'].float()
         self.lm_head = aux['head.weight'].float()
         self.norms = {}
         for k, v in aux.items():
-            if 'norm' not in k.lower():
-                continue
+            if 'norm' not in k.lower(): continue
             parts = k.split('.')
-            if k == 'norm.weight':
-                self.norms['output'] = v.float().to(DEVICE)
+            if k == 'norm.weight': self.norms['output'] = v.float().to(DEVICE)
             else:
                 layer = None
                 for i, part in enumerate(parts):
-                    if part == 'layers' and i + 1 < len(parts):
+                    if part == 'layers' and i+1 < len(parts):
                         try:
-                            layer = int(parts[i + 1])
+                            layer = int(parts[i+1])
                         except:
                             pass
                 if layer is not None:
                     nt = 'norm'
                     for part in parts:
-                        if 'norm' in part.lower():
-                            nt = part
+                        if 'norm' in part.lower(): nt = part
                     self.norms.setdefault(layer, {})[nt] = v.float().to(DEVICE)
         
         self.L = len(self.attn)
@@ -127,10 +121,12 @@ class CompleteEngine:
         del w,q,kv,sc,pr,ao
         return out.float().nan_to_num(0)
     
-    def _shared_ffn(self, x, layer):
-        """Shared expert FFN (applies to ALL tokens, no routing)."""
+    def _ffn(self, x, layer):
+        """Load one shard → GPU tape → compute → free. Catalytic."""
         path = SHARDS / f"experts_layer_{layer:02d}.holo"
         if not path.exists(): return torch.zeros_like(x)
+        
+        # BORROW: load shard to CPU, extract shared expert weights to GPU
         d = torch.load(str(path), weights_only=False, map_location="cpu")
         
         w1 = w2 = w3 = None
@@ -145,10 +141,12 @@ class CompleteEngine:
                 elif wt_suffix == 'w2': w2 = W
                 elif wt_suffix == 'w3': w3 = W
         
+        # RETURN: free shard from CPU
+        del d
+        
         if w1 is None or w2 is None or w3 is None: return torch.zeros_like(x)
         
-        gate = x @ w1.T
-        up = x @ w2
+        gate = x @ w1.T; up = x @ w2
         out = (F.silu(gate) * up) @ w3
         del w1,w2,w3,gate,up
         return out.float().nan_to_num(0)
@@ -158,49 +156,43 @@ class CompleteEngine:
         for layer in range(self.L):
             gb=torch.cuda.memory_allocated()/1024**3 if DEVICE=="cuda" else 0
             
-            # Pre-attention norm
             xn=self._norm(x.to(DEVICE), layer, 'attn_norm')
-            
-            # Attention + MHC-style residual (Sinkhorn-constrained gate)
             a=self._attention(xn, layer)
             an=a.float().norm(); xv=x.float().norm()
-            g_attn=max(0.1,min(an/(xv+1e-12)*0.2,3.0))
-            x=x.to(DEVICE)+a*g_attn
+            x=x.to(DEVICE)+a*max(0.1,min(an/(xv+1e-12)*0.2,3.0))
             
-            # Post-attention norm
             xn2=self._norm(x, layer, 'ffn_norm')
-            
-            # Shared expert FFN + residual
-            f=self._shared_ffn(xn2, layer)
+            f=self._ffn(xn2, layer)
             fn=f.float().norm()
             if fn>0:
                 xv2=x.float().norm()
-                g_ffn=max(0.1,min(fn/(xv2+1e-12)*0.2,3.0))
-                x=x+g_ffn*f
+                x=x+max(0.1,min(fn/(xv2+1e-12)*0.2,3.0))*f
             
             torch.cuda.empty_cache()
             ga=torch.cuda.memory_allocated()/1024**3 if DEVICE=="cuda" else 0
             st["peak"]=max(st["peak"],ga)
-            if layer%10==0: print(f"  L{layer:02d}: norm={x.float().norm():.0f} tape={'CLEAN' if abs(ga-gb)<0.5 else 'LEAK'}")
         st["time"]=time.perf_counter()-t0; st["layers"]=self.L; return x,st
 
 if __name__=="__main__":
-    e=CompleteEngine()
+    e=CatalyticEngine()
     from transformers import AutoTokenizer
     tok=AutoTokenizer.from_pretrained(str(HOLO),local_files_only=True,trust_remote_code=True)
     prompt="The catalytic computing paradigm demonstrates that"
     ids=tok.encode(prompt,return_tensors='pt')
     print(f"\nPrompt: {prompt}")
     x=e.embed[ids].float()
+    ts=time.perf_counter()
     out,st=e.forward(x)
     lo=out.float()[0,-1,:]@e.lm_head.T.to(DEVICE)
     nt=lo.argmax().item()
-    print(f"\nL:{st['layers']} GPU:{st['peak']:.1f}GB Time:{st['time']:.1f}s Token:{nt}")
+    print(f"\nForward: {st['time']:.1f}s GPU:{st['peak']:.1f}GB Token:{nt}")
     gen=[nt]
-    for _ in range(6):
+    for step in range(6):
+        ts=time.perf_counter()
         ne=e.embed[nt].float().unsqueeze(0).unsqueeze(0).to(DEVICE)
         x=torch.cat([x.to(DEVICE),ne],1)
         out,st=e.forward(x)
         lo=out.float()[0,-1,:]@e.lm_head.T.to(DEVICE)
         nt=lo.argmax().item(); gen.append(nt)
+        print(f"  Step {step+1}: {nt} ({time.perf_counter()-ts:.1f}s)")
     print(f"Gen: {gen}")
