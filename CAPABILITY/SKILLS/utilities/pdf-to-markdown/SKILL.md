@@ -10,7 +10,7 @@ description: "Use when converting PDF documents to Markdown format for documenta
 
 # Skill: pdf-to-markdown
 
-**Version:** 0.1.0
+**Version:** 0.2.0
 
 **Status:** Draft
 
@@ -28,6 +28,7 @@ Use when converting PDF documents to Markdown format, typically for documentatio
     "pdf_path": "path/to/document.pdf",
     "output_path": "path/to/output.md",
     "options": {
+      "mode": "high",
       "extract_images": false,
       "preserve_formatting": true,
       "page_breaks": "---"
@@ -38,6 +39,7 @@ Use when converting PDF documents to Markdown format, typically for documentatio
 ### Fields:
 - `pdf_path` (required, string): Absolute or relative path to input PDF file
 - `output_path` (required, string): Path where Markdown file will be written
+- `options.mode` (optional, string): Extraction mode. `"standard"` (pdfplumber, basic text) or `"high"` (pymupdf, layout-aware with headers/tables/formatting preserved). Default: `"standard"`
 - `options.extract_images` (optional, boolean): Whether to extract embedded images (default: false)
 - `options.preserve_formatting` (optional, boolean): Attempt to preserve text formatting (default: true)
 - `options.page_breaks` (optional, string): String to insert between pages (default: "---")
@@ -79,8 +81,8 @@ Page 2 content continues...
 
 ## Dependencies
 
-- `pdfplumber>=0.9.0` - PDF text and structure extraction
-- Standard library only (no additional dependencies for basic operation)
+- `pdfplumber>=0.9.0` - PDF text extraction (standard mode)
+- `pymupdf>=1.27.2` - PDF layout-aware extraction (high-fidelity mode; brings `fitz` module)
 
 ## Fixtures
 
