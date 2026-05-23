@@ -79,7 +79,15 @@ class CatalyticEngine:
                     self.norms.setdefault(layer, {})[nt] = v.float().to(DEVICE)
         
         self.L = len(self.attn)
-        print(f"  L={self.L} Init={time.perf_counter()-t0:.0f}s")
+        
+        # ==== Pre-extracted shared FFN (48 MB/layer, 5x faster) ====
+        ffn_path = HOLO / "ds_shared_ffn.holo"
+        if ffn_path.exists():
+            self.ffn = torch.load(str(ffn_path), weights_only=False, map_location="cpu")
+        else:
+            self.ffn = {}
+        
+        print(f"  L={self.L} FFN={len(self.ffn)} Init={time.perf_counter()-t0:.0f}s")
     
     def _norm(self, x, layer, ntype='attn_norm'):
         w = self.norms.get(layer, {}).get(ntype)
@@ -128,29 +136,18 @@ class CatalyticEngine:
         return out.float().nan_to_num(0)
     
     def _ffn(self, x, layer):
-        """Load one shard → GPU tape → compute → free. Catalytic."""
-        path = SHARDS / f"experts_layer_{layer:02d}.holo"
-        if not path.exists(): return torch.zeros_like(x)
+        """Pre-extracted shared FFN (50 MB, no shard load)."""
+        if not self.ffn: return torch.zeros_like(x)
         
-        # BORROW: load shard to CPU, extract shared expert weights to GPU
-        d = torch.load(str(path), weights_only=False, map_location="cpu")
+        w1_key = f"layers.{layer}.ffn.shared_experts.w1.weight"
+        w2_key = f"layers.{layer}.ffn.shared_experts.w2.weight"
+        w3_key = f"layers.{layer}.ffn.shared_experts.w3.weight"
         
-        w1 = w2 = w3 = None
-        for wt_suffix in ['w1','w2','w3']:
-            ukey = f"layers.{layer}.ffn.shared_experts.{wt_suffix}.weight.U"
-            skey = ukey.replace('.U','.scale')
-            svh_wt = f"layers.ffn.shared_experts.{wt_suffix}.weight"
-            if ukey in d and svh_wt in self.e_svh:
-                U = d[ukey].float() * d.get(skey, 1.0)
-                W = (U.to(DEVICE) @ self.e_svh[svh_wt])
-                if wt_suffix == 'w1': w1 = W
-                elif wt_suffix == 'w2': w2 = W
-                elif wt_suffix == 'w3': w3 = W
+        if w1_key not in self.ffn: return torch.zeros_like(x)
         
-        # RETURN: free shard from CPU
-        del d
-        
-        if w1 is None or w2 is None or w3 is None: return torch.zeros_like(x)
+        w1 = self.ffn[w1_key].float().to(DEVICE)
+        w2 = self.ffn[w2_key].float().to(DEVICE)
+        w3 = self.ffn[w3_key].float().to(DEVICE)
         
         gate = x @ w1.T; up = x @ w2
         out = (F.silu(gate) * up) @ w3
