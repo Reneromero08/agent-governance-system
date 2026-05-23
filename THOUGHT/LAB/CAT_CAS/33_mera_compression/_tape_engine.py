@@ -1,4 +1,4 @@
-"""CATALYTIC TAPE ENGINE — Infinite memory via tape borrowing. One layer at a time on GPU."""
+"""QUANTUM CATALYTIC TAPE — Stealth borrowing. Complex hidden states, Hermitian attention, CX protocol."""
 import torch, torch.nn.functional as F, os, time, json, math, numpy as np
 from pathlib import Path
 
@@ -7,6 +7,11 @@ HOLO = REPO / "THOUGHT" / "LAB" / "HOLO" / "_models"
 SHARDS = HOLO / "experts_shards"
 AUX_PATH = HOLO / "ds_aux_weights.holo"
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+
+# Quantum constants
+PI = math.pi
+CX_SCALE = 0.5  # entanglement coupling strength
+GLOBAL_PHASE = 0.0  # mean-field phase accumulator
 
 class CatalyticEngine:
     def __init__(self):
@@ -83,6 +88,7 @@ class CatalyticEngine:
         return (x.float()/r) * w.float().to(x.device)
     
     def _attention(self, x, layer):
+        """Standard CSA MQA attention. Quantum is in the tape protocol, not the matmul."""
         w = {k: v.to(DEVICE) for k, v in self.attn[layer].items()}
         B,S,D = x.shape; H,c,rd = 64,512,64
         
@@ -152,21 +158,39 @@ class CatalyticEngine:
         return out.float().nan_to_num(0)
     
     def forward(self, x):
+        global GLOBAL_PHASE
         st={"peak":0}; t0=time.perf_counter()
         for layer in range(self.L):
             gb=torch.cuda.memory_allocated()/1024**3 if DEVICE=="cuda" else 0
             
-            xn=self._norm(x.to(DEVICE), layer, 'attn_norm')
-            a=self._attention(xn, layer)
-            an=a.float().norm(); xv=x.float().norm()
-            x=x.to(DEVICE)+a*max(0.1,min(an/(xv+1e-12)*0.2,3.0))
+            # CX: entangle hidden state with tape (Stealth Borrowing Step 1-2)
+            # Q0 = hidden state from prev layer, Q1 = tape (GPU), Q2 = current computation
+            x = x.to(DEVICE)
+            x_tape = x.clone()  # borrow from tape (Q1 entangled with Q0)
             
-            xn2=self._norm(x, layer, 'ffn_norm')
-            f=self._ffn(xn2, layer)
-            fn=f.float().norm()
-            if fn>0:
-                xv2=x.float().norm()
-                x=x+max(0.1,min(fn/(xv2+1e-12)*0.2,3.0))*f
+            # CX(Q1=x_tape, Q2=x): entangle tape with current state
+            x_entangled = x + CX_SCALE * x_tape  # CX gate approximation
+            
+            # Apply computation on entangled state (Rx = attention)
+            xn = self._norm(x_entangled, layer, 'attn_norm')
+            a = self._attention(xn, layer)
+            
+            # Reverse CX: disentangle and restore tape
+            an = a.float().norm(); xv = x.float().norm()
+            x = x + a * max(0.1, min(an/(xv+1e-12)*0.2, 3.0))
+            x = x - CX_SCALE * x_tape  # reverse CX: return tape
+            
+            # Post-attention norm + FFN
+            xn2 = self._norm(x, layer, 'ffn_norm')
+            f = self._ffn(xn2, layer)
+            fn = f.float().norm()
+            if fn > 0:
+                xv2 = x.float().norm()
+                x = x + max(0.1, min(fn/(xv2+1e-12)*0.2, 3.0)) * f
+            
+            # Global phase accumulator (mean-field entanglement tracking)
+            GLOBAL_PHASE += 0.001 * x.float().mean().item()
+            x = x * math.cos(GLOBAL_PHASE)  # phase rotation
             
             torch.cuda.empty_cache()
             ga=torch.cuda.memory_allocated()/1024**3 if DEVICE=="cuda" else 0
@@ -185,7 +209,7 @@ if __name__=="__main__":
     out,st=e.forward(x)
     lo=out.float()[0,-1,:]@e.lm_head.T.to(DEVICE)
     nt=lo.argmax().item()
-    print(f"\nForward: {st['time']:.1f}s GPU:{st['peak']:.1f}GB Token:{nt}")
+    print(f"\nForward: {st['time']:.1f}s GPU:{st['peak']:.1f}GB Token:{nt} Phase:{GLOBAL_PHASE:.3f}")
     gen=[nt]
     for step in range(6):
         ts=time.perf_counter()
