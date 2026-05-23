@@ -242,9 +242,19 @@ class InfinityEngine:
                 rms = torch.sqrt(torch.mean(x.float() ** 2, dim=-1, keepdim=True) + 1e-6)
                 x_norm = x.float() / rms
             
-            # Attention + residual
+            # Attention + cybernetic residual gating
             attn_out = self._mla_attention(x_norm, layer)
-            x = x.to(DEVICE) + attn_out
+            
+            # Cybernetic gate: R = cos^2(input, output)
+            x_flat = x_norm.float().flatten()
+            out_flat = attn_out.float().flatten()
+            cos_val = torch.dot(x_flat, out_flat) / (x_flat.norm() * out_flat.norm() + 1e-12)
+            R = (cos_val ** 2).item()
+            epsilon = 0.01
+            T = 1.0 / (R + epsilon)
+            gate = min(T, 10.0)  # cap at 10x to prevent runaway
+            
+            x = x.to(DEVICE) + attn_out * gate
             
             # FFN norm + skip (no FFN weights in holo yet)
             if ffn_norm_w is not None:
@@ -264,6 +274,12 @@ class InfinityEngine:
             if layer % 5 == 0 or layer < 3:
                 print(f"  L{layer:02d}: GPU={gpu_after:.1f}GB dt={dt:.2f}s tape={tape} norm={x.float().norm():.1f}")
         
+        # Apply output norm if available (check shape matches)
+        if 'output' in self.norm_weights:
+            out_norm = self.norm_weights['output']
+            if out_norm.shape[0] == x.shape[-1]:
+                x = self._rms_norm(x, out_norm)
+        
         stats["time"] = time.perf_counter() - t0
         return x, stats
 
@@ -276,7 +292,7 @@ if __name__ == "__main__":
     print(f"\nInput: {list(x.shape)}")
     print(f"Forward through {min(5, engine.num_layers)} layers...")
     
-    out, stats = engine.forward(x, num_layers=min(5, engine.num_layers))
+    out, stats = engine.forward(x, num_layers=min(43, engine.num_layers))
     
     print(f"\n=== INFINITY REPORT ===")
     print(f"  Layers processed: {stats['layers']}")
