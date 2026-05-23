@@ -69,6 +69,23 @@ class InfinityEngine:
         rms = torch.sqrt(torch.mean(x.float() ** 2, dim=-1, keepdim=True) + eps)
         return (x.float() / rms) * weight.float().to(x.device)
     
+    def _load_one_expert(self, layer_idx, expert_idx):
+        """Load one expert's w1/w2/w3 from shard."""
+        path = SHARDS / f"experts_layer_{layer_idx:02d}.holo"
+        if not path.exists(): return None
+        d = torch.load(str(path), weights_only=False, map_location="cpu")
+        
+        weights = {}
+        for wt_suffix in ['w1', 'w2', 'w3']:
+            ukey = f"layers.{layer_idx}.ffn.experts.{expert_idx}.{wt_suffix}.weight.U"
+            skey = ukey.replace('.U', '.scale')
+            svh_wt = f"layers.ffn.experts.{wt_suffix}.weight"
+            if ukey in d and svh_wt in self.svh:
+                U = d[ukey].float() * d.get(skey, 1.0)
+                SVh = self.svh[svh_wt]
+                weights[wt_suffix] = U.to(DEVICE) @ SVh  # on GPU
+        return weights if len(weights) == 3 else None
+    
     def _load_attention(self):
         d = torch.load(str(HOLO / "deepseek_v4_flash_attention_k256.holo"), weights_only=False, map_location="cpu")
         
@@ -144,55 +161,54 @@ class InfinityEngine:
         return weights
     
     def _mla_attention(self, x, layer_idx):
-        """Complex Hermitian attention using holo weights mapped to Eigen Buddy format.
-        Projects real hidden -> split Q/K/V into real/imag channels.
-        Scores = Re(Q)@Re(K)^T + Im(Q)@Im(K)^T (Hermitian inner product)."""
+        """DeepSeek V4 MLA: 64 heads, 448 nope + 64 rope. Decoupled RoPE."""
         w = {k: v.to(DEVICE) for k, v in self.attn_layers[layer_idx].items()}
         B, S, D = x.shape
-        H, head_dim = 32, 64
+        H, head_dim = 64, 512
+        nope_dim, rope_dim, v_dim = 448, 64, 128
         
         wq_a = w[f"layers.{layer_idx}.attn.wq_a.weight"]  # [1024, 4096]
         wq_b = w[f"layers.{layer_idx}.attn.wq_b.weight"]   # [32768, 1024]
         wkv   = w[f"layers.{layer_idx}.attn.wkv.weight"]    # [512, 4096]
         wo_a  = w[f"layers.{layer_idx}.attn.wo_a.weight"]   # [8192, 4096]
         
-        # Q: project through MLA pathway, then split into real/imag
-        q_latent = x.float() @ wq_a.T                              # [B, S, 1024]
-        q_full = q_latent @ wq_b.T                                 # [B, S, 32768]
-        q_hd = q_full.view(B, S, H, -1)                             # [B, S, 32, 1024]
-        q_real = q_hd[..., :head_dim]                               # [B, S, 32, 64]
-        q_imag = q_hd[..., head_dim:2*head_dim]                     # [B, S, 32, 64]
+        # Q: latent -> wq_b -> split into heads (nope + rope)
+        q_latent = x.float() @ wq_a.T                              # [B,S,1024]
+        q_all = q_latent @ wq_b.T                                  # [B,S,32768]
+        q = q_all.view(B, S, H, head_dim)                           # [B,S,64,512]
+        q_nope = q[..., :nope_dim]                                  # [B,S,64,448]
+        q_rope = q[..., nope_dim:]                                  # [B,S,64,64]
         
-        # K: project through wkv, split into real/imag per head
-        kv = x.float() @ wkv.T                                      # [B, S, 512]
-        kv_hd = kv.view(B, S, 1, 512).expand(-1, -1, H, -1)        # [B, S, 32, 512]
-        k_real = kv_hd[..., :head_dim]                              # [B, S, 32, 64]
-        k_imag = kv_hd[..., head_dim:2*head_dim]                    # [B, S, 32, 64]
+        # KV: combined latent + k_rope
+        kv = x.float() @ wkv.T                                      # [B,S,512]
+        kv_latent = kv[..., :448]                                   # kv_lora_rank
+        k_rope_raw = kv[..., 448:]                                  # [B,S,64]
         
-        # V: from KV latent
-        v_real = kv_hd[..., 2*head_dim:3*head_dim]                  # [B, S, 32, 64]
-        v_imag = kv_hd[..., 3*head_dim:4*head_dim]                  # [B, S, 32, 64]
+        # Expand KV latent to K and V for all heads
+        k_nope = kv_latent.view(B, S, 1, 448).expand(-1, -1, H, -1)[..., :nope_dim]  # [B,S,64,448]
+        v_all  = kv_latent.view(B, S, 1, 448).expand(-1, -1, H, -1)[..., :v_dim]      # [B,S,64,128]
         
-        # Hermitian attention: scores = Re(Q)@Re(K)^T + Im(Q)@Im(K)^T
-        scores = (torch.einsum('bshd,bthd->bhst', q_real, k_real) +
-                  torch.einsum('bshd,bthd->bhst', q_imag, k_imag)) * (1.0 / math.sqrt(head_dim))
+        # RoPE on q_rope and k_rope
+        cos, sin = self._rope_frequencies(S, rope_dim)
+        q_rope_rot = self._apply_rope(q_rope, cos, sin)
+        k_rope = k_rope_raw.unsqueeze(2).expand(-1, -1, H, -1)    # [B,S,64,64]
+        k_rope_rot = self._apply_rope(k_rope, cos, sin)
         
+        # Full Q and K (nope + rope)
+        q_full = torch.cat([q_nope, q_rope_rot], dim=-1)           # [B,S,64,512]
+        k_full = torch.cat([k_nope, k_rope_rot], dim=-1)           # [B,S,64,512]
+        
+        # Scaled dot-product attention
+        scale = 1.0 / math.sqrt(head_dim)
+        scores = torch.einsum('bshd,bthd->bhst', q_full, k_full) * scale
         probs = F.softmax(scores, dim=-1).nan_to_num(0)
+        attn_out = torch.einsum('bhst,bthd->bshd', probs, v_all)   # [B,S,64,128]
         
-        # Weighted sum over values (real and imag separately)
-        out_real = torch.einsum('bhst,bthd->bshd', probs, v_real)
-        out_imag = torch.einsum('bhst,bthd->bshd', probs, v_imag)
+        # Output projection
+        out_flat = attn_out.reshape(B, S, H * v_dim)                # [B,S,8192]
+        out = out_flat @ wo_a                                       # [B,S,4096]
         
-        # Merge: interleave real/imag, flatten, project back through wo_a
-        out_merged = torch.zeros(B, S, H, 2*head_dim, device=DEVICE, dtype=torch.float32)
-        out_merged[..., 0::2] = out_real
-        out_merged[..., 1::2] = out_imag
-        out_flat = out_merged.reshape(B, S, H * 2 * head_dim)       # [B, S, 4096]
-        
-        # Return interleaved real/imag output (D=4096 matches hidden size)
-        out = out_flat[..., :D]  # [B, S, 4096]
-        
-        del w, q_latent, q_full, q_hd, kv, scores, probs, out_real, out_imag, out_merged
+        del w, q_latent, q_all, q, scores, probs, attn_out
         return out.float().nan_to_num(0)
     
     def _rope_frequencies(self, seq_len, dim):
@@ -258,13 +274,13 @@ class InfinityEngine:
             phi = self.global_phase
             x = x.float() * math.cos(phi) + x.float() * math.sin(phi)
             
-            # FFN norm + skip (no FFN weights in holo yet)
+            # FFN: skip (gate weight not in holo, needs 4096→2048 projection)
+            ffn_norm_w = self.norm_weights.get(layer, {}).get('ffn_norm')
             if ffn_norm_w is not None:
                 x_norm2 = self._rms_norm(x, ffn_norm_w)
             else:
                 x_norm2 = x
-            
-            x = x + torch.zeros_like(x_norm2)  # FFN skip for now
+            x = x.to(DEVICE) + torch.zeros_like(x_norm2)
             
             torch.cuda.empty_cache()
             gpu_after = torch.cuda.memory_allocated() / 1024**3

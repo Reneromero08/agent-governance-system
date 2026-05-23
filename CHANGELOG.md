@@ -6,6 +6,22 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.12.9] - 2026-05-23
+
+### Added
+
+- `CAPABILITY/SKILLS/agents/catalytic-wormhole/`: Skill documenting the integrated catalytic wormhole compression pipeline (boundary stress, phase cavity sieve, GOE validation, spectral distance).
+
+- `CAPABILITY/SKILLS/utilities/pdf-to-markdown/`: Added `mode: "high"` option using PyMuPDF (`fitz`) for layout-aware PDF-to-Markdown conversion with header detection, bold/italic preservation, and table extraction.
+
+### Changed
+
+- `.githooks/pre-commit`: Removed preflight `--allow-dirty-tracked`. Added agent commit ceremony policy reminder.
+
+- `CAPABILITY/SKILLS/utilities/pdf-to-markdown/run.py`: Added `extract_high_fidelity()` function using `fitz` for structured text extraction. Refactored into `extract_standard()`/`extract_high_fidelity()` dispatch.
+- `CAPABILITY/SKILLS/utilities/pdf-to-markdown/SKILL.md`: Documented `mode` option, bumped version to 0.2.0, updated dependencies.
+
+
 ## [3.12.8] - 2026-05-22
 
 ### Added
