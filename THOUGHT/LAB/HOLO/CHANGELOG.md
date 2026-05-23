@@ -9,6 +9,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.4.2] - 2026-05-23
+
+### Changed
+
+* Directory restructured from flat `holographic_brain/` monolith into a staged pipeline:
+  * `pipeline/01_distill/` — SVD extraction from safetensors
+  * `pipeline/02_cavity/` — Phase cavity eigenmode sieve
+  * `pipeline/03_wormhole/` — Rotation chain compression + MTP
+  * `pipeline/04_calibrate/` — Analytic calibration + correction tape
+  * `pipeline/05_inference/` — Catalytic inference engine
+* `analysis/` separated from pipeline for post-hoc GOE validation, benchmarks, K-sweeps, and Living Formula quality prediction.
+* `docs/` consolidated: ROADMAP.md, ROADMAP_2.md, PAPER_WORMHOLE.md, ENGINE_REPORT.md, CAT_CAS_INTEGRATION_DOSSIER.md, REPORT_4_5.md.
+* `models/` promoted from `_models/` (still gitignored for .holo artifacts, tokenizer files tracked).
+* `archives/` holds historical Phase 4.1-4.5 proofs-of-concept (`eigen_layer_mapping.py`, `holographic_text_generator.py`).
+* `deprecated/` quarantines `_autotune.py` v1 and `superconducting_cavity.py`.
+* `tests/` created for `test_cal.py`, `test_patcher.py`, and future fixtures.
+* All 32 files moved via `git mv` to preserve commit history.
+
+---
+
 ## [0.4.1] - 2026-05-23
 
 *Commits: `12f5043c`, `80faefe4*`
