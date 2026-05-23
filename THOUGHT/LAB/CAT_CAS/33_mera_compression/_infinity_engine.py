@@ -57,6 +57,10 @@ class InfinityEngine:
             self.norm_weights['output'] = aux['norm.weight'].float().to(DEVICE)
         print(f"  Embed: {list(self.embed.shape)}, Head: {list(self.lm_head.shape)}")
         print(f"  Norm weights: {len(self.norm_weights)} layers loaded")
+        # Quantum phase accumulator (Infinity Quantum: mean-field holography)
+        # Replace N×N coupling matrix with single global phase
+        self.global_phase = 0.0  # cumulative rotation phase across layers
+        
         print(f"  Init: {time.perf_counter()-t0:.0f}s")
     
     def _rms_norm(self, x, weight):
@@ -120,59 +124,55 @@ class InfinityEngine:
         return weights
     
     def _mla_attention(self, x, layer_idx):
-        """MLA attention with actual learned norm weights."""
+        """Complex Hermitian attention using holo weights mapped to Eigen Buddy format.
+        Projects real hidden -> split Q/K/V into real/imag channels.
+        Scores = Re(Q)@Re(K)^T + Im(Q)@Im(K)^T (Hermitian inner product)."""
         w = {k: v.to(DEVICE) for k, v in self.attn_layers[layer_idx].items()}
         B, S, D = x.shape
-        H, head_dim, v_dim = 64, 512, 128
-        qk_nope_dim = 448
+        H, head_dim = 32, 64
         
-        wq_a = w[f"layers.{layer_idx}.attn.wq_a.weight"]
-        wq_b = w[f"layers.{layer_idx}.attn.wq_b.weight"]
-        wkv   = w[f"layers.{layer_idx}.attn.wkv.weight"]
-        wo_a  = w[f"layers.{layer_idx}.attn.wo_a.weight"]
+        wq_a = w[f"layers.{layer_idx}.attn.wq_a.weight"]  # [1024, 4096]
+        wq_b = w[f"layers.{layer_idx}.attn.wq_b.weight"]   # [32768, 1024]
+        wkv   = w[f"layers.{layer_idx}.attn.wkv.weight"]    # [512, 4096]
+        wo_a  = w[f"layers.{layer_idx}.attn.wo_a.weight"]   # [8192, 4096]
         
-        # Q pathway with learned q_norm
-        q_latent = x @ wq_a.T
-        q_norm_w = self.norm_weights.get(layer_idx, {}).get('attn.q_norm')
-        if q_norm_w is not None:
-            q_latent = self._rms_norm(q_latent, q_norm_w)
-        q_all = q_latent @ wq_b.T
-        q = q_all.view(B, S, H, head_dim)
-        q_nope = q[..., :qk_nope_dim]
-        q_rope = q[..., qk_nope_dim:]
+        # Q: project through MLA pathway, then split into real/imag
+        q_latent = x.float() @ wq_a.T                              # [B, S, 1024]
+        q_full = q_latent @ wq_b.T                                 # [B, S, 32768]
+        q_hd = q_full.view(B, S, H, -1)                             # [B, S, 32, 1024]
+        q_real = q_hd[..., :head_dim]                               # [B, S, 32, 64]
+        q_imag = q_hd[..., head_dim:2*head_dim]                     # [B, S, 32, 64]
         
-        # KV pathway with learned kv_norm
-        kv = x @ wkv.T
-        kv_norm_w = self.norm_weights.get(layer_idx, {}).get('attn.kv_norm')
-        if kv_norm_w is not None:
-            kv = self._rms_norm(kv, kv_norm_w)
-        kv_latent = kv[..., :448]
-        k_rope_raw = kv[..., 448:]
+        # K: project through wkv, split into real/imag per head
+        kv = x.float() @ wkv.T                                      # [B, S, 512]
+        kv_hd = kv.view(B, S, 1, 512).expand(-1, -1, H, -1)        # [B, S, 32, 512]
+        k_real = kv_hd[..., :head_dim]                              # [B, S, 32, 64]
+        k_imag = kv_hd[..., head_dim:2*head_dim]                    # [B, S, 32, 64]
         
-        # Expand latent to heads
-        k_nope = kv_latent.view(B, S, 1, 448).expand(-1, -1, H, -1)[..., :qk_nope_dim]
-        v_all = kv_latent.view(B, S, 1, 448).expand(-1, -1, H, -1)[..., :v_dim]
+        # V: from KV latent
+        v_real = kv_hd[..., 2*head_dim:3*head_dim]                  # [B, S, 32, 64]
+        v_imag = kv_hd[..., 3*head_dim:4*head_dim]                  # [B, S, 32, 64]
         
-        # RoPE
-        cos, sin = self._rope_frequencies(S, 64)
-        q_rope_rot = self._apply_rope(q_rope, cos, sin)
-        k_rope = k_rope_raw.unsqueeze(2).expand(-1, -1, H, -1)
-        k_rope_rot = self._apply_rope(k_rope, cos, sin)
+        # Hermitian attention: scores = Re(Q)@Re(K)^T + Im(Q)@Im(K)^T
+        scores = (torch.einsum('bshd,bthd->bhst', q_real, k_real) +
+                  torch.einsum('bshd,bthd->bhst', q_imag, k_imag)) * (1.0 / math.sqrt(head_dim))
         
-        q_full = torch.cat([q_nope, q_rope_rot], dim=-1)
-        k_full = torch.cat([k_nope, k_rope_rot], dim=-1)
-        
-        scale = 1.0 / math.sqrt(head_dim)
-        scores = torch.einsum('bshd,bthd->bhst', q_full, k_full) * scale
         probs = F.softmax(scores, dim=-1).nan_to_num(0)
-        attn_out = torch.einsum('bhst,bthd->bshd', probs, v_all)
         
-        out_flat = attn_out.reshape(B, S, H * v_dim)
-        out = out_flat @ wo_a
+        # Weighted sum over values (real and imag separately)
+        out_real = torch.einsum('bhst,bthd->bshd', probs, v_real)
+        out_imag = torch.einsum('bhst,bthd->bshd', probs, v_imag)
         
-        # Keep weights on GPU for catalytic cache (warm for next layer)
-        self._last_attn_gpu = w if not hasattr(self, '_last_attn_gpu') else self._last_attn_gpu
-        del q_latent, q_all, q, scores, probs, attn_out
+        # Merge: interleave real/imag, flatten, project back through wo_a
+        out_merged = torch.zeros(B, S, H, 2*head_dim, device=DEVICE, dtype=torch.float32)
+        out_merged[..., 0::2] = out_real
+        out_merged[..., 1::2] = out_imag
+        out_flat = out_merged.reshape(B, S, H * 2 * head_dim)       # [B, S, 4096]
+        
+        # Return interleaved real/imag output (D=4096 matches hidden size)
+        out = out_flat[..., :D]  # [B, S, 4096]
+        
+        del w, q_latent, q_full, q_hd, kv, scores, probs, out_real, out_imag, out_merged
         return out.float().nan_to_num(0)
     
     def _rope_frequencies(self, seq_len, dim):
@@ -230,6 +230,13 @@ class InfinityEngine:
             gate = min(T, 10.0)  # cap at 10x to prevent runaway
             
             x = x.to(DEVICE) + attn_out * gate
+            
+            # Quantum phase accumulator (Infinity Quantum: mean-field holography)
+            avg_Z = x.float()[..., -1].mean().item()  # magnetization proxy
+            self.global_phase += 0.01 * avg_Z
+            # Phase rotation: x -> x * e^{i*phi} (real projection)
+            phi = self.global_phase
+            x = x.float() * math.cos(phi) + x.float() * math.sin(phi)
             
             # FFN norm + skip (no FFN weights in holo yet)
             if ffn_norm_w is not None:
