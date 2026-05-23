@@ -7,7 +7,7 @@ Pattern from PUSHED_REPORT_INFINITY: borrow→compute→return, ΔS=0.
 MLA attention: Q from wq_a→wq_b, KV from wkv, output from wo_a→wo_b.
 Experts: routed per-token via gate, activated subset loaded from shards.
 """
-import torch, torch.nn.functional as F, os, time, json, math
+import torch, torch.nn.functional as F, os, time, json, math, numpy as np, struct
 from pathlib import Path
 from collections import defaultdict
 
@@ -37,7 +37,60 @@ class InfinityEngine:
         self.attn_layers = self._load_attention()
         self.num_layers = len(self.attn_layers)
         print(f"  Attention: {self.num_layers} layers on CPU")
+        
+        # Load actual RMSNorm weights from safetensors
+        self.norm_weights = self._load_norms()
+        print(f"  Norm weights: {len(self.norm_weights)} layers loaded")
         print(f"  Init: {time.perf_counter()-t0:.0f}s")
+    
+    def _load_norms(self):
+        """Load attn_norm and ffn_norm weights for all layers from safetensors."""
+        MODEL_DIR = r"E:\Reneshizzle SG\Models\deepseek-ai\DeepSeek-V4-Flash"
+        with open(os.path.join(MODEL_DIR, "model.safetensors.index.json")) as f:
+            idx = json.load(f)
+        
+        norms = {}
+        for layer in range(43):
+            norms[layer] = {}
+            for norm_type in ['attn_norm', 'ffn_norm', 'attn.q_norm', 'attn.kv_norm']:
+                key = f"layers.{layer}.{norm_type}.weight"
+                if key not in idx["weight_map"]: continue
+                
+                shard = idx["weight_map"][key]
+                path = os.path.join(MODEL_DIR, shard)
+                with open(path, 'rb') as f:
+                    hl = struct.unpack('<Q', f.read(8))[0]
+                    hdr = json.loads(f.read(hl))
+                    s, e = hdr[key]['data_offsets']
+                    f.seek(8 + hl + s)
+                    data = f.read(e - s)
+                dtype = hdr[key]['dtype']
+                if 'F32' in dtype:
+                    arr = np.frombuffer(data, dtype=np.float32).copy()
+                else:
+                    arr = np.frombuffer(data, dtype=np.float16).astype(np.float32).copy()
+                norms[layer][norm_type] = torch.from_numpy(arr).to(DEVICE)
+        
+        # Output norm
+        if 'norm.weight' in idx['weight_map']:
+            shard = idx['weight_map']['norm.weight']
+            path = os.path.join(MODEL_DIR, shard)
+            with open(path, 'rb') as f:
+                hl = struct.unpack('<Q', f.read(8))[0]
+                hdr = json.loads(f.read(hl))
+                s, e = hdr['norm.weight']['data_offsets']
+                f.seek(8 + hl + s)
+                data = f.read(e - s)
+            arr = np.frombuffer(data, dtype=np.float32).copy()
+            norms['output'] = torch.from_numpy(arr).to(DEVICE)
+        
+        return norms
+    
+    def _rms_norm(self, x, weight):
+        """RMSNorm: x * weight / rms(x)"""
+        eps = 1e-6
+        rms = torch.sqrt(torch.mean(x.float() ** 2, dim=-1, keepdim=True) + eps)
+        return (x.float() / rms) * weight.float().to(x.device)
     
     def _load_attention(self):
         d = torch.load(str(HOLO / "deepseek_v4_flash_attention_k128.holo"), weights_only=False, map_location="cpu")
@@ -94,42 +147,38 @@ class InfinityEngine:
         return weights
     
     def _mla_attention(self, x, layer_idx):
-        """MLA attention with correct DeepSeek V4 dimensions."""
+        """MLA attention with actual learned norm weights."""
         w = {k: v.to(DEVICE) for k, v in self.attn_layers[layer_idx].items()}
         B, S, D = x.shape
-        H = 64  # num_attention_heads
-        head_dim = 512
-        qk_nope_dim = 448  # head_dim - qk_rope_head_dim(64)
-        v_dim = 128
+        H, head_dim, v_dim = 64, 512, 128
+        qk_nope_dim = 448
         
-        wq_a = w[f"layers.{layer_idx}.attn.wq_a.weight"]  # [1024, 4096]
-        wq_b = w[f"layers.{layer_idx}.attn.wq_b.weight"]   # [32768, 4096→1024] wait no
+        wq_a = w[f"layers.{layer_idx}.attn.wq_a.weight"]
+        wq_b = w[f"layers.{layer_idx}.attn.wq_b.weight"]
+        wkv   = w[f"layers.{layer_idx}.attn.wkv.weight"]
+        wo_a  = w[f"layers.{layer_idx}.attn.wo_a.weight"]
         
-        # Check actual shape
-        # wq_b is [32768, 1024]
-        # q_latent [B,S,1024] @ wq_b.T [1024, 32768] = [B,S,32768]
-        # 32768 = 64 * 512 = heads * head_dim ✓
+        # Q pathway with learned q_norm
+        q_latent = x @ wq_a.T
+        q_norm_w = self.norm_weights.get(layer_idx, {}).get('attn.q_norm')
+        if q_norm_w is not None:
+            q_latent = self._rms_norm(q_latent, q_norm_w)
+        q_all = q_latent @ wq_b.T
+        q = q_all.view(B, S, H, head_dim)
+        q_nope = q[..., :qk_nope_dim]
+        q_rope = q[..., qk_nope_dim:]
         
-        wkv   = w[f"layers.{layer_idx}.attn.wkv.weight"]    # [512, 4096]
-        wo_a  = w[f"layers.{layer_idx}.attn.wo_a.weight"]   # [8192, 4096]
+        # KV pathway with learned kv_norm
+        kv = x @ wkv.T
+        kv_norm_w = self.norm_weights.get(layer_idx, {}).get('attn.kv_norm')
+        if kv_norm_w is not None:
+            kv = self._rms_norm(kv, kv_norm_w)
+        kv_latent = kv[..., :448]
+        k_rope_raw = kv[..., 448:]
         
-        # Q: x→latent→heads
-        q_latent = x @ wq_a.T                                    # [B,S,1024]
-        q_all = q_latent @ wq_b.T                                # [B,S,32768]
-        q = q_all.view(B, S, H, head_dim)                        # [B,S,64,512]
-        q_nope = q[..., :qk_nope_dim]                            # [B,S,64,448]
-        q_rope = q[..., qk_nope_dim:]                            # [B,S,64,64]
-        
-        # KV: x→combined KV latent + k_rope
-        kv = x @ wkv.T                                           # [B,S,512]
-        kv_latent = kv[..., :448]                                # kv_lora_rank
-        k_rope_raw = kv[..., 448:]                               # [B,S,64]
-        
-        # Expand KV latent to K and V for all heads
-        # DeepSeek V3: kv_latent [B,S,448] is linearly projected to K[heads,128] + V[heads,128]
-        # For POC: reshape and broadcast
-        k_nope = kv_latent.view(B, S, 1, 448).expand(-1, -1, H, -1)[..., :qk_nope_dim]  # [B,S,64,448]
-        v_all = kv_latent.view(B, S, 1, 448).expand(-1, -1, H, -1)[..., :v_dim]          # [B,S,64,128]
+        # Expand latent to heads
+        k_nope = kv_latent.view(B, S, 1, 448).expand(-1, -1, H, -1)[..., :qk_nope_dim]
+        v_all = kv_latent.view(B, S, 1, 448).expand(-1, -1, H, -1)[..., :v_dim]
         
         # RoPE
         cos, sin = self._rope_frequencies(S, 64)
@@ -137,19 +186,16 @@ class InfinityEngine:
         k_rope = k_rope_raw.unsqueeze(2).expand(-1, -1, H, -1)
         k_rope_rot = self._apply_rope(k_rope, cos, sin)
         
-        # Full Q and K
-        q_full = torch.cat([q_nope, q_rope_rot], dim=-1)         # [B,S,64,512]
-        k_full = torch.cat([k_nope, k_rope_rot], dim=-1)         # [B,S,64,512]
+        q_full = torch.cat([q_nope, q_rope_rot], dim=-1)
+        k_full = torch.cat([k_nope, k_rope_rot], dim=-1)
         
-        # Attention
         scale = 1.0 / math.sqrt(head_dim)
         scores = torch.einsum('bshd,bthd->bhst', q_full, k_full) * scale
         probs = F.softmax(scores, dim=-1).nan_to_num(0)
-        attn_out = torch.einsum('bhst,bthd->bshd', probs, v_all)  # [B,S,64,128]
+        attn_out = torch.einsum('bhst,bthd->bshd', probs, v_all)
         
-        # Output projection
-        out_flat = attn_out.reshape(B, S, H * v_dim)              # [B,S,8192]
-        out = out_flat @ wo_a                                    # [B,S,4096] (wo_a is [8192,4096])
+        out_flat = attn_out.reshape(B, S, H * v_dim)
+        out = out_flat @ wo_a
         
         del w, q_latent, q_all, q, scores, probs, attn_out
         return out.float().nan_to_num(0)
@@ -184,21 +230,29 @@ class InfinityEngine:
             ts = time.perf_counter()
             gpu_before = torch.cuda.memory_allocated() / 1024**3
             
-            # RMSNorm
-            rms = torch.sqrt(torch.mean(x.float() ** 2, dim=-1, keepdim=True) + eps)
-            x_norm = (x.float() / rms).to(DEVICE)
+            x = x.to(DEVICE)
+            
+            # RMSNorm (learned weights from model)
+            attn_norm_w = self.norm_weights.get(layer, {}).get('attn_norm')
+            ffn_norm_w = self.norm_weights.get(layer, {}).get('ffn_norm')
+            
+            if attn_norm_w is not None:
+                x_norm = self._rms_norm(x, attn_norm_w)
+            else:
+                rms = torch.sqrt(torch.mean(x.float() ** 2, dim=-1, keepdim=True) + 1e-6)
+                x_norm = x.float() / rms
             
             # Attention + residual
             attn_out = self._mla_attention(x_norm, layer)
             x = x.to(DEVICE) + attn_out
             
-            # RMSNorm again for FFN
-            rms2 = torch.sqrt(torch.mean(x.float() ** 2, dim=-1, keepdim=True) + eps)
-            x_norm2 = (x.float() / rms2).to(DEVICE)
+            # FFN norm + skip (no FFN weights in holo yet)
+            if ffn_norm_w is not None:
+                x_norm2 = self._rms_norm(x, ffn_norm_w)
+            else:
+                x_norm2 = x
             
-            # FFN: skip for POC (needs routing gate from compressor module)
-            ffn_out = torch.zeros_like(x_norm2)
-            x = x + ffn_out
+            x = x + torch.zeros_like(x_norm2)  # FFN skip for now
             
             torch.cuda.empty_cache()
             gpu_after = torch.cuda.memory_allocated() / 1024**3
