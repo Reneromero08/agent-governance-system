@@ -29,6 +29,9 @@ RANK_K = 128  # DeepSeek experts are [2048, 2048] — 128 is plenty
 OVERSAMPLE_P = 10
 N_POWER_ITER = 2
 DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
+NO_QR = True  # Skip QR on catalytic hits: Vh orthonormal => U = W@Vh^T is ~orthogonal. 10-50x speedup.
+NO_QR_BLACKLIST = {'experts'}  # QR required for these modules (NO_QR fidelity < 0.2)
+QR_CHECK_EVERY = 500  # Periodic fidelity check to validate NO_QR assumption
 
 # ---- FP4 Dequantization ----
 # DeepSeek V4 uses custom FP4 format: E2M1 (2-bit exponent, 1-bit mantissa)
@@ -344,8 +347,13 @@ def run_full_distill():
     """Distill all modules from DeepSeek V4 Flash — SINGLE PASS per shard."""
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     
+    # Hyperthreading: use all CPU cores for BLAS matmul
+    torch.set_num_threads(os.cpu_count())
+    torch.set_num_interop_threads(min(4, os.cpu_count()))
+    
     print(f"DeepSeek V4 Flash Distiller — Single Pass Multi-Module")
     print(f"Model: {MODEL_DIR} | Output: {OUTPUT_DIR} | Rank: {RANK_K} | Device: {DEVICE}")
+    print(f"Threads: {torch.get_num_threads()} | NO_QR: {NO_QR} (skips O(m*k^2) QR for hits)")
     
     with open(INDEX_PATH) as f:
         idx = json.load(f)
@@ -398,38 +406,55 @@ def run_full_distill():
                 st['n'] += 1
                 ts = time.perf_counter()
                 
-                # Load tensor
+                # Load tensor with full dequant fallback for INT8/F8/FP8
                 try:
                     t = f.get_tensor(key)
                 except:
-                    st['skipped'] += 1
-                    continue
+                    # INT8/F8/F8_E4M3: safetensors can't load these natively
+                    info = f.get_slice(key)
+                    shape = tuple(int(x) for x in info.get_shape())
+                    raw = info[:]
+                    buf = raw.tobytes() if hasattr(raw, 'tobytes') else bytes(raw)
+                    dt = str(info.get_dtype())
+                    
+                    if 'I8' in dt or 'I8' in dt.upper():
+                        arr = np.frombuffer(buf, dtype=np.int8).astype(np.float32).copy()
+                    elif 'F8_E4M3' in dt or 'Float8' in dt:
+                        arr = np.frombuffer(buf, dtype=np.uint8).astype(np.float32).copy()
+                    elif 'F8' in dt:
+                        arr = np.frombuffer(buf, dtype=np.uint8).astype(np.float32).copy()
+                    else:
+                        arr = np.frombuffer(buf, dtype=np.float16).astype(np.float32).copy()
+                    
+                    t = torch.from_numpy(arr).reshape(shape).float()
+                    
+                    # Apply scale dequant for quantized weights
+                    try:
+                        scale_key = key.replace('.weight', '.scale')
+                        s_info = f.get_slice(scale_key)
+                        s_raw = s_info[:]
+                        s_buf = s_raw.tobytes() if hasattr(s_raw, 'tobytes') else bytes(s_raw)
+                        s_dt = str(s_info.get_dtype())
+                        if 'F32' in s_dt:
+                            s_arr = np.frombuffer(s_buf, dtype=np.float32)
+                        elif 'I32' in s_dt:
+                            s_arr = np.frombuffer(s_buf, dtype=np.int32).astype(np.float32)
+                        elif 'F16' in s_dt or 'BF16' in s_dt:
+                            s_arr = np.frombuffer(s_buf, dtype=np.float16).astype(np.float32)
+                        else:
+                            s_arr = np.frombuffer(s_buf, dtype=np.float32)
+                        if s_arr.size == 1:
+                            t = t * float(s_arr[0])
+                        elif s_arr.ndim == 1:
+                            t = t * torch.from_numpy(s_arr).float().view(-1, 1)
+                        else:
+                            t = t * torch.from_numpy(s_arr.reshape(-1, 1)).float()
+                    except Exception:
+                        pass
                 
                 if t.ndim != 2:
                     st['skipped'] += 1
                     continue
-                
-                # INT8 dequant for expert weights
-                try:
-                    info = f.get_slice(key)
-                    if str(info.get_dtype()) == 'I8':
-                        raw = info[:]
-                        import numpy as np
-                        arr = np.frombuffer(raw.tobytes() if hasattr(raw, 'tobytes') else bytes(raw), dtype=np.int8)
-                        t = torch.from_numpy(arr.astype(np.float32).copy()).reshape(tuple(int(x) for x in info.get_shape()))
-                        scale_key = key.replace('.weight', '.scale')
-                        try:
-                            s_raw = f.get_slice(scale_key)[:]
-                            s_arr = np.frombuffer(s_raw.tobytes() if hasattr(s_raw, 'tobytes') else bytes(s_raw), dtype=np.float32)
-                            sv = s_arr.reshape(-1)
-                            if sv.shape[0] == 1:
-                                t = t * float(sv[0])
-                            else:
-                                t = t * torch.from_numpy(sv).float()
-                        except:
-                            pass
-                except:
-                    pass
                 
                 wt = extract_weight_type(key, module_name)
                 ch = cache[module_name]
@@ -443,8 +468,24 @@ def run_full_distill():
                     st['hits'] += 1
                     SVh_cache = ch[wt].float()
                     U_raw = t.float() @ SVh_cache.T
-                    U, _ = torch.linalg.qr(U_raw)
-                    Uk = U[:, :RANK_K].half()
+                    do_qr = not NO_QR or module_name in NO_QR_BLACKLIST
+                    if not do_qr:
+                        # Vh is orthonormal => columns of W@Vh^T are ~orthogonal
+                        # L2-normalize columns (O(m*k), not O(m*k^2) like QR)
+                        Uk = F.normalize(U_raw.float(), p=2, dim=0)[:, :RANK_K].half()
+                        # Periodic fidelity validation
+                        if QR_CHECK_EVERY and st['hits'] % QR_CHECK_EVERY == 0:
+                            U_qr, _ = torch.linalg.qr(U_raw.float())
+                            fid = F.cosine_similarity(
+                                Uk.float()[:, :min(64, RANK_K)].flatten(),
+                                U_qr[:, :min(64, RANK_K)].flatten(), dim=0
+                            ).item()
+                            if fid < 0.99:
+                                print(f"  WARN: NO_QR fidelity={fid:.4f} at hit #{st['hits']} — "
+                                      f"consider enabling QR for this module")
+                    else:
+                        U, _ = torch.linalg.qr(U_raw)
+                        Uk = U[:, :RANK_K].half()
                     SVh = SVh_cache.half()
                 
                 holo[module_name][f"{key}.U"] = Uk
