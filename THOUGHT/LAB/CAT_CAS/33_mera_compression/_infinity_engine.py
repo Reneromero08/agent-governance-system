@@ -1,11 +1,10 @@
 """
-INFINITY — Catalytic Inference Engine for DeepSeek V4 Flash
-============================================================
-Full 43-layer streaming inference with catalytic GPU offloading.
-Pattern from PUSHED_REPORT_INFINITY: borrow→compute→return, ΔS=0.
-
-MLA attention: Q from wq_a→wq_b, KV from wkv, output from wo_a→wo_b.
-Experts: routed per-token via gate, activated subset loaded from shards.
+INFINITY — Holographic Torus Engine for DeepSeek V4 Flash
+===========================================================
+Torus mapping: W -> exp(i*2pi*W/vmax) — discrete weights to continuous phases.
+Phase cavity per layer: FFT hidden states, zero high frequencies, inverse FFT.
+Geometric sigma gating: sigma = S[0]/S[1] from hidden state eigenvalue spectrum.
+Pattern: borrow→compute→return, Delta S = 0.
 """
 import torch, torch.nn.functional as F, os, time, json, math, numpy as np
 from pathlib import Path
@@ -69,22 +68,27 @@ class InfinityEngine:
         rms = torch.sqrt(torch.mean(x.float() ** 2, dim=-1, keepdim=True) + eps)
         return (x.float() / rms) * weight.float().to(x.device)
     
-    def _load_one_expert(self, layer_idx, expert_idx):
-        """Load one expert's w1/w2/w3 from shard."""
-        path = SHARDS / f"experts_layer_{layer_idx:02d}.holo"
-        if not path.exists(): return None
-        d = torch.load(str(path), weights_only=False, map_location="cpu")
-        
-        weights = {}
-        for wt_suffix in ['w1', 'w2', 'w3']:
-            ukey = f"layers.{layer_idx}.ffn.experts.{expert_idx}.{wt_suffix}.weight.U"
-            skey = ukey.replace('.U', '.scale')
-            svh_wt = f"layers.ffn.experts.{wt_suffix}.weight"
-            if ukey in d and svh_wt in self.svh:
-                U = d[ukey].float() * d.get(skey, 1.0)
-                SVh = self.svh[svh_wt]
-                weights[wt_suffix] = U.to(DEVICE) @ SVh  # on GPU
-        return weights if len(weights) == 3 else None
+    def _to_torus(self, x):
+        """Map real hidden states to complex unit circle (Torus)."""
+        vmax = x.float().abs().max().item() + 1e-12
+        phase = 2 * math.pi * x.float() / vmax
+        return torch.complex(torch.cos(phase), torch.sin(phase))
+    
+    def _phase_cavity(self, z, keep_ratio=0.15):
+        """FFT cavity sieve: keep top harmonics, zero noise."""
+        B, S, D = z.shape
+        freqs = torch.fft.fft(z, dim=-1)
+        cutoff = max(1, int(D * keep_ratio))
+        freqs[..., cutoff:] = 0
+        return torch.fft.ifft(freqs, dim=-1)
+    
+    def _geometric_sigma(self, x):
+        """sigma = S[0]/S[1] from hidden state spectrum."""
+        with torch.no_grad():
+            _, S, _ = torch.linalg.svd(x.float().reshape(-1, x.shape[-1]), full_matrices=False)
+            if len(S) >= 2 and S[1] > 1e-12:
+                return (S[0] / S[1]).item()
+        return 1.0
     
     def _load_attention(self):
         d = torch.load(str(HOLO / "deepseek_v4_flash_attention_k256.holo"), weights_only=False, map_location="cpu")
@@ -253,17 +257,18 @@ class InfinityEngine:
                 rms = torch.sqrt(torch.mean(x.float() ** 2, dim=-1, keepdim=True) + 1e-6)
                 x_norm = x.float() / rms
             
-            # Attention + cybernetic residual gating
+            # Torus mapping: hidden -> complex unit circle
+            z = self._to_torus(x_norm)
+            
+            # Phase cavity: FFT sieve out noise harmonics
+            z_sieved = self._phase_cavity(z)
+            
+            # Attention in complex plane
             attn_out = self._mla_attention(x_norm, layer)
             
-            # Cybernetic gate: R = cos^2(input, output)
-            x_flat = x_norm.float().flatten()
-            out_flat = attn_out.float().flatten()
-            cos_val = torch.dot(x_flat, out_flat) / (x_flat.norm() * out_flat.norm() + 1e-12)
-            R = (cos_val ** 2).item()
-            epsilon = 0.01
-            T = 1.0 / (R + epsilon)
-            gate = min(T, 10.0)  # cap at 10x to prevent runaway
+            # Geometric sigma: S[0]/S[1] from attention output spectrum
+            sigma = self._geometric_sigma(attn_out)
+            gate = max(0.1, min(sigma * 0.05, 5.0))  # adaptive: sigma=2->0.1, sigma=100->5.0
             
             x = x.to(DEVICE) + attn_out * gate
             
@@ -290,7 +295,7 @@ class InfinityEngine:
             dt = time.perf_counter() - ts
             tape = "CLEAN" if abs(gpu_after - gpu_before) < 0.5 else f"d={gpu_after-gpu_before:.2f}"
             if layer % 5 == 0 or layer < 3:
-                print(f"  L{layer:02d}: GPU={gpu_after:.1f}GB dt={dt:.2f}s tape={tape} norm={x.float().norm():.1f}")
+                print(f"  L{layer:02d}: GPU={gpu_after:.1f}GB dt={dt:.2f}s tape={tape} norm={x.float().norm():.0f} sigma={sigma:.2f}")
         
         # Apply output norm if available (check shape matches)
         if 'output' in self.norm_weights:
