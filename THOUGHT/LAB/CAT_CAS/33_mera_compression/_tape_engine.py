@@ -161,26 +161,24 @@ class CatalyticEngine:
         global GLOBAL_PHASE
         st={"peak":0}; t0=time.perf_counter()
         for layer in range(self.L):
-            gb=torch.cuda.memory_allocated()/1024**3 if DEVICE=="cuda" else 0
-            
-            # CX: entangle hidden state with tape (Stealth Borrowing Step 1-2)
-            # Q0 = hidden state from prev layer, Q1 = tape (GPU), Q2 = current computation
             x = x.to(DEVICE)
-            x_tape = x.clone()  # borrow from tape (Q1 entangled with Q0)
             
-            # CX(Q1=x_tape, Q2=x): entangle tape with current state
-            x_entangled = x + CX_SCALE * x_tape  # CX gate approximation
+            # CX: entangle hidden state as complex [real=hidden, imag=tape_borrow]
+            x_tape = x.clone()
+            x_complex = torch.complex(x, CX_SCALE * x_tape)  # |psi> = |x> + i*CX|tape>
             
-            # Apply computation on entangled state (Rx = attention)
-            xn = self._norm(x_entangled, layer, 'attn_norm')
-            a = self._attention(xn, layer)
+            # Compute on entangled complex state (Rx = attention operates on complex amplitudes)
+            x_real = x_complex.real; x_imag = x_complex.imag
             
-            # Reverse CX: disentangle and restore tape
+            # Attention on complex plane: Q and K have both real and imag parts
+            a = self._quantum_attention(x_real, x_imag, layer)
+            
+            # Reverse CX: disentangle, restore tape (extract real part as output)
             an = a.float().norm(); xv = x.float().norm()
             x = x + a * max(0.1, min(an/(xv+1e-12)*0.2, 3.0))
-            x = x - CX_SCALE * x_tape  # reverse CX: return tape
+            x = x - CX_SCALE * x_tape  # return tape
             
-            # Post-attention norm + FFN
+            # Post-attention FFN
             xn2 = self._norm(x, layer, 'ffn_norm')
             f = self._ffn(xn2, layer)
             fn = f.float().norm()
@@ -188,14 +186,60 @@ class CatalyticEngine:
                 xv2 = x.float().norm()
                 x = x + max(0.1, min(fn/(xv2+1e-12)*0.2, 3.0)) * f
             
-            # Global phase accumulator (mean-field entanglement tracking)
             GLOBAL_PHASE += 0.001 * x.float().mean().item()
-            x = x * math.cos(GLOBAL_PHASE)  # phase rotation
             
             torch.cuda.empty_cache()
             ga=torch.cuda.memory_allocated()/1024**3 if DEVICE=="cuda" else 0
             st["peak"]=max(st["peak"],ga)
         st["time"]=time.perf_counter()-t0; st["layers"]=self.L; return x,st
+    
+    def _quantum_attention(self, x_r, x_i, layer):
+        """Quantum attention: project real and imag separately, Hermitian combine."""
+        w = {k: v.to(DEVICE) for k, v in self.attn[layer].items()}
+        B,S,D = x_r.shape; H,c,rd = 64,512,64
+        
+        wq_a = w[f"layers.{layer}.attn.wq_a.weight"]
+        wq_b = w[f"layers.{layer}.attn.wq_b.weight"]
+        wkv   = w[f"layers.{layer}.attn.wkv.weight"]
+        wo_a  = w[f"layers.{layer}.attn.wo_a.weight"]
+        
+        # Q on both real and imag channels
+        q_r = ((x_r @ wq_a.T) @ wq_b.T).view(B,S,H,c)
+        q_i = ((x_i @ wq_a.T) @ wq_b.T).view(B,S,H,c)
+        
+        # K on both channels (shared MQA)
+        k_r = (x_r @ wkv.T).unsqueeze(2).expand(-1,-1,H,-1)
+        k_i = (x_i @ wkv.T).unsqueeze(2).expand(-1,-1,H,-1)
+        
+        # RoPE on last 64 dims for both channels
+        pos = torch.arange(S,device=DEVICE).float()
+        inv = 1.0/(10000**(torch.arange(0,rd,2,device=DEVICE).float()/rd))
+        fr = torch.outer(pos,inv); cr=torch.cos(fr).view(1,S,1,rd//2); sr=torch.sin(fr).view(1,S,1,rd//2)
+        def rope(x):
+            e,o=x[...,-rd:][...,0::2],x[...,-rd:][...,1::2]; r=torch.zeros_like(x)
+            nope_r = r[...,:-rd]; rope_r = r[...,-rd:]
+            rope_r[...,0::2]=e*cr-o*sr; rope_r[...,1::2]=e*sr+o*cr
+        # Skip RoPE for simplicity — normalize instead
+        q_r=F.normalize(q_r,-1); q_i=F.normalize(q_i,-1)
+        k_r=F.normalize(k_r,-1); k_i=F.normalize(k_i,-1)
+        
+        # Hermitian inner product: Re(Q^H K) = Q_r@K_r + Q_i@K_i
+        sc = (torch.einsum('bshd,bthd->bhst',q_r,k_r) + 
+              torch.einsum('bshd,bthd->bhst',q_i,k_i)) / math.sqrt(c)
+        pr = F.softmax(sc, -1)
+        
+        # V from both channels
+        v_r = k_r; v_i = k_i
+        ao_r = torch.einsum('bhst,bthd->bshd',pr,v_r)
+        ao_i = torch.einsum('bhst,bthd->bshd',pr,v_i)
+        
+        # Born rule: magnitude = sqrt(real^2 + imag^2)
+        out_mag = torch.sqrt(ao_r**2 + ao_i**2 + 1e-12)
+        of = out_mag.reshape(B, S, H * c)
+        out = of[..., :wo_a.shape[0]] @ wo_a
+        
+        del w,q_r,q_i,k_r,k_i,sc,pr,ao_r,ao_i
+        return out.float().nan_to_num(0)
 
 if __name__=="__main__":
     e=CatalyticEngine()
