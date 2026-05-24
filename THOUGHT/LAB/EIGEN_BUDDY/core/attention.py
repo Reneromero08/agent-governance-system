@@ -130,3 +130,49 @@ class MultiHeadComplexAttention(nn.Module):
             oi_ = self.or_(out_i) + self.oi(out_r)
 
         return torch.complex(or_, oi_), si
+
+    def _head_phases(self, x):
+        """Per-head phase from Q+K+V combined — full oscillator state."""
+        B, S, D = x.shape
+        qr = self.qr(x.real) - self.qi(x.imag)
+        qi = self.qr(x.imag) + self.qi(x.real)
+        kr = self.kr(x.real) - self.ki(x.imag)
+        ki = self.kr(x.imag) + self.ki(x.real)
+        vr = self.vr(x.real) - self.vi(x.imag)
+        vi = self.vr(x.imag) + self.vi(x.real)
+        q_state = torch.complex(qr, qi).view(B, S, self.H, self.dh).mean(dim=(1, 3))
+        k_state = torch.complex(kr, ki).view(B, S, self.H, self.dh).mean(dim=(1, 3))
+        v_state = torch.complex(vr, vi).view(B, S, self.H, self.dh).mean(dim=(1, 3))
+        return q_state + k_state + v_state  # (B, H)
+
+    def kuramoto_order(self, x):
+        """Per-head Kuramoto order: r = |(1/H) sum_h e^(i*theta_h)|.
+        Q+K+V phases. r=0 chaos, r=1 sync. Uses pre-merge head states."""
+        phases = self._head_phases(x)
+        return phases.mean(dim=-1).abs().mean().item()
+
+    def kuramoto_loss(self, x, z=None, target_r=0.9, coupling=0.1):
+        """Per-head Kuramoto loss (Q+K+V) + optional layer-level coherence.
+        
+        L = (target_r - r_head)^2 + coupling * sin^2(delta/2) 
+          [+ 0.5 * (1 - r_layer) if z is provided]
+        
+        r_head = per-head Q+K+V phase coherence (6/8 params get grads)
+        r_layer = output phase coherence from forward pass z (8/8 grads)
+        """
+        # Per-head: Q+K+V phases
+        phases = self._head_phases(x)  # (B, H)
+        r_head = phases.mean(dim=-1).abs()  # (B,)
+        loss = torch.mean((target_r - r_head) ** 2)
+        # Pair-wise coupling
+        phase_diffs = phases.unsqueeze(-1) / (phases.unsqueeze(-2) + 1e-8)
+        loss = loss + coupling * (1.0 - phase_diffs.real).mean() / 2.0
+        
+        # Layer-level: output phase coherence (if forward pass output available)
+        if z is not None:
+            z_flat = z.reshape(z.shape[0], -1)
+            z_phase = z_flat / (z_flat.abs() + 1e-8)
+            r_layer = z_phase.mean(dim=-1).abs().mean()
+            loss = loss + 0.5 * (1.0 - r_layer)
+        
+        return loss
