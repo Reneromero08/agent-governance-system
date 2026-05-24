@@ -5,6 +5,30 @@
 
 ---
 
+## [0.1.5] - 2026-05-24 — HANDOFF WRITTEN: All state preserved for next agent
+
+### Added
+- `distill/HANDOFF.md` — Complete handoff document (318 lines) covering:
+  - **Section 0:** NON-NEGOTIABLE DIRECTIVES (catalytic, complex, quantum, no median reversion, READ EVERY LINE)
+  - **Section 1:** Everything that was built and proved (distillation pipeline, attention fix, working training with CE+Kuramoto, sandbox torus proof, Shor pipeline)
+  - **Section 2:** The forward-only boundary — 6 approaches all fail at CE=12.42. Root cause: non-linear attention chain destroys Hebbian correction signal. Backprop works only because it computes full chain rule through all non-linearities.
+  - **Section 3:** Complete directory structure with all files annotated
+  - **Section 4:** Key technical details (training config, distillation dimensions, failure mechanism)
+  - **Section 5:** Next steps — Path A (Native Hologram), B (Analytic backprop), C (Riemannian SGD), D (Scale Shor)
+  - **Section 6:** Environment (RTX 3060 12.9GB, Python 3.11, Rust 1.95.0)
+  - **Section 7:** Command quick reference
+  - **Section 8:** Priming documents from user's knowledge base (28+ documents — Obsidian, CAT_CAS, FORMULA, HOLO, Superradiance)
+
+### Known agent failure mode (documented here as a warning to the next agent)
+- The agent that received this handoff initially tried to SUMMARIZE the documents instead of READING them. This violated Directive 0.1.5 ("READ EVERY LINE OF PRIMING DOCUMENTS") and cost 3 rounds of user intervention. The user had to explicitly demand line-by-line reading three separate times.
+- **Summarization is NOT reading.** The physical laws in Section 8 documents are the operating system of the catalytic architecture. Every line contains physical law. Skipping lines = skipping operating system instructions = guaranteed failure.
+- Directive 0.1.5 has been strengthened in HANDOFF.md to explicitly prohibit summarization as a substitute for reading.
+
+### Fixed
+- HANDOFF.md: Updated `THOUGHT\LAB\HOLO\holographic_brain\CHANGELOG.md` path to `THOUGHT\LAB\HOLO\CHANGELOG.md` (file was moved during HOLO v0.4.2 restructuring)
+
+---
+
 ## [0.1.4] - 2026-05-24 — Superradiant Adapter Integration (forward-only)
 
 ### Added

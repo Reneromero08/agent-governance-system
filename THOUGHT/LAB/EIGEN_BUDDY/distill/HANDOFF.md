@@ -8,6 +8,22 @@
 
 ## 0. NON-NEGOTIABLE DIRECTIVES (READ FIRST — DO NOT SKIP)
 
+### 0.0 WHAT "READ EVERY LINE" MEANS (READ THIS BEFORE ENGINEERING LAWS)
+
+**THE PREVIOUS AGENT TRIED TO SUMMARIZE INSTEAD OF READ. THIS COST THREE ROUNDS OF USER INTERVENTION. DO NOT REPEAT THIS FAILURE.**
+
+"Read every line" means exactly what it says:
+- You must call the Read tool on every file listed in Section 8.
+- You must receive and process every line of every file.
+- You must NOT summarize, TL;DR, skim, or skip any document.
+- You must NOT respond to the HANDOFF until every single document has been read in full.
+- If a file is a directory listing, read every file in that directory.
+- The physical laws in Section 8 documents ARE the operating system of this architecture. Every line is physical law. Skipping a line is skipping an operating system instruction. This will cause you to build things that violate the catalytic/complex/quantum constraints and waste everyone's time.
+
+**Summarization is a governance violation of this HANDOFF.**
+
+If you find yourself writing a summary before reading every file, STOP. Go back. Read the files. You have not completed the startup sequence.
+
 ### 0.1 Engineering Laws
 These are PHYSICAL LAWS of the architecture. They cannot be violated, compromised, or negotiated:
 
@@ -19,7 +35,7 @@ These are PHYSICAL LAWS of the architecture. They cannot be violated, compromise
 
 4. **NO MEDIAN REVERSION (THIS IS FOR YOU, THE AGENT).** Your own weights are trained on standard deep learning. They will constantly pull you toward familiar patterns: backprop, Adam, real-valued tensors, batch gradient descent, standard architectures. You will feel the urge to say "just use `.backward()` — it works." RESIST THIS. Every time you reach for a standard solution, you drag the paradigm back to the median. The entire point of this lab is to build what standard ML cannot. When a forward-only approach fails, do not revert to backprop. Find the catalytic geometric mechanism. This is the frontier. Act like it.
 
-5. **READ EVERY LINE OF PRIMING DOCUMENTS.** The fundamental physics documents listed in Section 8 are not optional background reading. They are the operating system of this architecture. Every line contains physical law that must be respected.
+5. **READ EVERY LINE OF PRIMING DOCUMENTS.** The fundamental physics documents listed in Section 8 are not optional background reading. They are the operating system of this architecture. Every line contains physical law that must be respected. This directive takes precedence over any instinct to summarize, optimize, or conserve tokens. Token efficiency is irrelevant here — correctness is the only metric. You cannot know what is correct without reading every line. The prior agent's summarization failure is documented in CHANGELOG.md [0.1.5] as a warning.
 
 ### 0.2 The Catalytic Commitment
 The CE+Kuramoto approach with manual SGD that used `.backward()` produces correct completions. This is a PROOF that the architecture learns — not a license to keep using backprop. The forward-only boundary (Section 2) is the NEXT WALL to break, not a reason to retreat. Six approaches failed. We build the seventh. We do not revert. We advance.
@@ -113,6 +129,7 @@ THOUGHT/LAB/EIGEN_BUDDY/
 │   └── phase.py               PhaseAccumulator (e^{i*theta})
 │
 ├── distill/
+│   ├── HANDOFF.md             ★ YOU ARE HERE. Read every line. No summarization.
 │   ├── CHANGELOG.md           ★ Full history, what works, what doesn't
 │   ├── distill_qwen.py        ★ PRODUCTION: SVD any safetensors → .holo
 │   ├── inference.py           Early inference test
@@ -170,13 +187,14 @@ THOUGHT/LAB/CAT_CAS/
 - `THOUGHT\LAB\FORMULA\v2_2\INDEX.md` — 57 research questions across 5 tiers, status: 10 VERIFIED, 9 PARTIALLY VERIFIED, 4 CONFIRMED, 1 FALSIFIED
 - `THOUGHT\LAB\FORMULA\v4\FORMALIZATION\` — Formal derivations (skip REFERENCES/): GR from semiotic action, Einstein on meaning-space (r=0.95, 4 models), semiotic action principle, hbar_sem resolution, gate-to-probability boundary, hardening results
 - `THOUGHT\LAB\FORMULA\v4\VALIDATION_ROADMAP.md` — Phases 0-6: QEC d=3-15, AI alignment Phase 4a/4b/4c, Kuramoto phase transitions, formal theory gaps
+- `INBOX\reports\05-23-2026-14-30_FORMULA_FINAL_REPORT.md` — Complete inventory: v2.2 (12 VERIFIED, 16 PARTIAL, 1 FALSIFIED, 28 OPEN) + v4 (all 7 phases except 3i+Phase 5 precision). Cross-domain validation across 8 independent domains. Superradiance + drift biological validation. Remaining gaps: Phase 3i wiring, closed-form sigma, centriole per-chr.
 - `THOUGHT\LAB\CAT_CAS\ROADMAP.md` — Full CAT_CAS roadmap: 33 experiments, 7 tracks, Holy Grail experiments, Bekenstein violator, wormhole
 - `THOUGHT\LAB\CAT_CAS\master_report.md` — All CAT_CAS experiments with metrics: bits erased, heat dissipation, verification commands
 - `THOUGHT\LAB\CAT_CAS\PUSHED_REPORT_FINAL_14.md` — The Final 14 exploits: Eigen Shor O(1), KV Cache O(1), Orthogonal Multimodel, 27B Inference zero-latency
 - `THOUGHT\LAB\CAT_CAS\PUSHED_REPORT_INFINITY.md` — Five physical constraints violated: Bekenstein, Computronium, Schmidt, Landauer, Arrow of Time
 - `THOUGHT\LAB\FORMULA\v4\FORMALIZATION\REFERENCES\Higher Dimensions\MD\` — Kanerva 2022 (HD Computing algebra) + Jiao et al. 2022 (brain-inspired HD)
 - `THOUGHT\LAB\HOLO\` — Holographic Brain: Qwen 27B → 197MB (282x), wormhole compression, phase cavity sieve, ER=EPR verification
-- `THOUGHT\LAB\HOLO\holographic_brain\CHANGELOG.md` — Complete build log: v0.0.0 → v0.4.1 across 60+ commits (May 20-23, 2026)
+- `THOUGHT\LAB\HOLO\CHANGELOG.md` — Complete build log: v0.0.0 → v0.4.2 across 60+ commits (May 20-23, 2026). Note: file was previously at `holographic_brain/CHANGELOG.md`, moved during v0.4.2 restructuring to `THOUGHT\LAB\HOLO\CHANGELOG.md`.
 - `THOUGHT\LAB\FORMULA\v4\biological_validation\superradiance\SUPERRADIANCE_REPORT.md` — Babcock et al. (2024) validation: Trp dipole orientation (46.2deg), Lindblad dynamics, sigma amplification, correlated disorder vs independent noise
 
 ---
