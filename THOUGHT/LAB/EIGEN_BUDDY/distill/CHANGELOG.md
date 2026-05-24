@@ -5,6 +5,57 @@
 
 ---
 
+## [0.3.0] - 2026-05-24 — CLEAN ROOM: V-Shaped Trace PASSES on bAbI Task 1
+
+### Added — Clean Room Training Suite (sandbox/training/)
+Five scripts progressively solving bAbI Task 1 (single supporting fact) using HRR complex
+binding with Qwen 0.5B phase vectors. All catalytic (no backprop, no attention, no autograd).
+
+- **babi_hologram.py** (Phase 1) — Markov chain outer product. FAILED on logical binding. Proved
+  adjacency alone cannot answer "Where is the football?" — correctly identified entities (Mary, John)
+  but could not bind them to locations.
+- **babi_binding.py** (Phase 1.5) — Hardcoded Hadamard binding. PASSED two-hop query
+  (football→Mary, John→hall) using element-wise complex product on 448-dim state vector.
+  Proved HRR binding works but needs automation.
+- **babi_filtered.py** (Phase 2.5) — Automated rolling knot with semantic filter (stopwords +
+  punctuation removed). 3-hop backward trace: football→dropped (rank 1). Hit bidirectional
+  oscillation at Hop 2 (dropped↔football, Mary at rank 2 tied at 1.9e+08). Proved need for
+  directional time binding.
+- **babi_directed.py** (Phase 3) — Directional time binding via complex conjugation.
+  M += Phase_curr * Phase_prev.conj(). Backward: (M * C*)* → P. 3-hop trace: hallway ←
+  Mary ← dropped ← football. Periods created false cross-sentence edge
+  (hallway→Mary in sentence 3). Proved need for sentence firewall.
+- **babi_relational.py** (Phase 4) — Sentence firewall (periods reset chains) + V-shaped trace:
+  backward → pivot → forward. Backward trace PERFECT (dropped←football, Mary←dropped).
+  Hit routing fork at Mary (went vs dropped). Proved need for query-guided routing.
+- **babi_semantic.py** (Phase 5) — Query beam routing. Beam-searches forward branches from
+  Mary, scores two-step destinations against "located" query vector with self-resonance clipping
+  (14 tokens clipped to mean). Selected "went" over "dropped". Final hop: went→bathroom.
+
+### Result — FULL V-TRACE PASSES
+```
+PASS. The football is in the bathroom.
+V-TRACE: bathroom <- went <- Mary <- dropped <- football
+```
+All four hops correct:
+| Hop | Dir | From | To | Rank | Mechanism |
+|-----|-----|------|----|------|-----------|
+| 1 | BWD | football | dropped | 1 | Directed unbind (M * C*)* |
+| 2 | BWD | dropped | Mary | 1 | Directed unbind |
+| 3 | FWD | Mary | went | beam | Beam search on 2-step destinations |
+| 4 | FWD | went | bathroom | 1 | Standard forward unbind |
+
+### Architecture Proven
+- **Firewall filter:** Periods reset sentence boundaries (5 cross-sentence edges skipped)
+- **Directed time binding:** `M += Phase_curr * Phase_prev.conj()` creates directional graph
+- **Backward retrieval:** `(M * C*)* = P + noise` walks causal chain backward
+- **Forward retrieval:** `M * P = C + noise` walks causal chain forward
+- **Query beam:** Multiplicative AND-gate with self-resonance clipping routes superposition
+- **Prism:** Qwen 0.5B embeddings (448 complex dims, 152K tokens) — loaded in seconds, model freed after extraction
+- **Catalytic:** Every operation is linear (Hadamard product, vector add, matrix-vector multiply). Zero Landauer. No backprop. No attention.
+
+---
+
 ## [0.2.0] - 2026-05-24 — HRR COMPLEX BINDING: Two-Hop State Tracking PROVEN
 
 ### Added
