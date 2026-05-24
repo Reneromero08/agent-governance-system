@@ -1,0 +1,8 @@
+K=128 shards=6
+model-00006: 60 rSVD (19.6s SVD, 19.8s total)
+model-00007: 51 rSVD (17.1s SVD, 37.4s total)
+model-00008: 20 rSVD (0.7s SVD, 38.5s total)
+model-00013: 49 rSVD (15.5s SVD, 54.1s total)
+model-00014: 52 rSVD (20.1s SVD, 74.7s total)
+model-00015: 7 rSVD (2.4s SVD, 77.6s total)
+Done: 239 SVDs, 1456256KB grating, 2.5MB .holo in 84.9s
