@@ -1,0 +1,29 @@
+==============================================================================
+20.11i: Incremental Covariance Streaming (Stable Batch SVD Alternative)
+  No LxL covariance. No batch SVD. VRAM: O(L) constant.
+==============================================================================
+
+  N=2034073 = 1861 x 1093  a=2
+  Incremental covariance: M=262,144, L=2048, stride=256
+  Windows: 1,017, accumulating C (2048x2048 complex64 = 33.6 MB)
+  Converged in 0.9s
+  Eigenvector norm: 1.0000
+
+  CONVERGED EIGENVECTOR AUTOCORRELATION PEAKS:
+  tau=256 SNR=0.6
+  tau=768 SNR=0.2
+  tau=512 SNR=0.1
+  tau=724 SNR=0.1
+  tau=58 SNR=0.1
+  tau=980 SNR=0.1
+  tau=468 SNR=0.1
+  tau=6 SNR=0.1|p-1|q-1
+
+  COMPARISON: Batch SVD (same grating)
+  Cosine similarity (Oja vs batch): 0.022159
+
+  PHASE GAP ANALYSIS (Oja eigenvector projection)
+  p=1861: gap=2pi/1861=0.003376 rad, edge_frac=0.189
+  q=1093: gap=2pi/1093=0.005749 rad, edge_frac=0.203
+
+==============================================================================

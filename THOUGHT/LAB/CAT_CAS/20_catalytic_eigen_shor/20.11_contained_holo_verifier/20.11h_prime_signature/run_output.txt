@@ -1,0 +1,120 @@
+==============================================================================
+20.11h: READ THE PRIME FROM THE PHASE GAP
+  Isolate r_p eigenvector -> project -> measure phase gap -> p
+==============================================================================
+
+  N=3922057 = 1933 x 2029  a=2
+
+  STEP 1: Find dominant period eigenvector by autocorrelation SNR
+  evec[0] tau=512 SNR=32.4 
+  evec[0] tau=585 SNR=3.9 
+  evec[0] tau=606 SNR=3.7 
+  evec[0] tau=73 SNR=3.7 
+  evec[0] tau=90 SNR=3.6 
+  evec[1] tau=223 SNR=4.5 
+  evec[1] tau=482 SNR=4.0 
+  evec[1] tau=801 SNR=3.7 
+  evec[1] tau=614 SNR=3.7 
+  evec[1] tau=149 SNR=3.4 
+  evec[2] tau=512 SNR=15.9 
+  evec[2] tau=977 SNR=3.9 
+  evec[2] tau=360 SNR=3.8 
+  evec[2] tau=562 SNR=3.4 
+  evec[2] tau=758 SNR=3.4 
+  evec[3] tau=512 SNR=12.1 
+  evec[3] tau=328 SNR=4.0 
+  evec[3] tau=220 SNR=3.9 
+  evec[3] tau=921 SNR=3.8 
+  evec[3] tau=527 SNR=3.6 
+  evec[4] tau=512 SNR=12.4 
+  evec[4] tau=182 SNR=4.0 
+  evec[4] tau=322 SNR=3.8 |p-1
+  evec[4] tau=454 SNR=3.7 
+  evec[4] tau=866 SNR=3.6 
+  evec[5] tau=512 SNR=8.2 
+  evec[5] tau=346 SNR=4.2 
+  evec[5] tau=161 SNR=3.9 |p-1
+  evec[5] tau=508 SNR=3.9 
+  evec[5] tau=608 SNR=3.7 
+  evec[6] tau=512 SNR=5.0 
+  evec[6] tau=344 SNR=4.7 
+  evec[6] tau=646 SNR=3.8 
+  evec[6] tau=681 SNR=3.8 
+  evec[6] tau=768 SNR=3.7 
+  evec[7] tau=512 SNR=8.6 
+  evec[7] tau=548 SNR=4.1 
+  evec[7] tau=917 SNR=4.0 
+  evec[7] tau=159 SNR=3.8 
+  evec[7] tau=161 SNR=3.8 |p-1
+  evec[8] tau=512 SNR=5.4 
+  evec[8] tau=410 SNR=5.0 
+  evec[8] tau=340 SNR=4.4 
+  evec[8] tau=564 SNR=4.0 
+  evec[8] tau=316 SNR=3.9 
+  evec[9] tau=59 SNR=4.5 
+  evec[9] tau=125 SNR=4.5 
+  evec[9] tau=963 SNR=4.2 
+  evec[9] tau=144 SNR=4.1 
+  evec[9] tau=612 SNR=4.0 
+  evec[10] tau=512 SNR=21.8 
+  evec[10] tau=700 SNR=3.6 
+  evec[10] tau=340 SNR=3.5 
+  evec[10] tau=114 SNR=3.4 
+  evec[10] tau=530 SNR=3.4 
+  evec[11] tau=4 SNR=15.9 |p-1|q-1
+  evec[11] tau=6 SNR=8.9 |p-1|q-1
+  evec[11] tau=13 SNR=6.0 |q-1
+  evec[11] tau=17 SNR=5.8 
+  evec[11] tau=284 SNR=5.8 
+  evec[12] tau=6 SNR=17.8 |p-1|q-1
+  evec[12] tau=2 SNR=14.5 |p-1|q-1
+  evec[12] tau=4 SNR=13.5 |p-1|q-1
+  evec[12] tau=8 SNR=10.2 
+  evec[12] tau=14 SNR=7.9 |p-1
+  evec[13] tau=12 SNR=8.2 |p-1|q-1
+  evec[13] tau=9 SNR=6.9 
+  evec[13] tau=109 SNR=6.5 
+  evec[13] tau=49 SNR=4.7 
+  evec[13] tau=13 SNR=4.7 |q-1
+  evec[14] tau=14 SNR=6.0 |p-1
+  evec[14] tau=2 SNR=5.9 |p-1|q-1
+  evec[14] tau=20 SNR=5.9 
+  evec[14] tau=84 SNR=5.5 |p-1
+  evec[14] tau=25 SNR=5.2 
+  evec[15] tau=4 SNR=8.0 |p-1|q-1
+  evec[15] tau=118 SNR=5.9 
+  evec[15] tau=6 SNR=5.0 |p-1|q-1
+  evec[15] tau=8 SNR=4.7 
+  evec[15] tau=120 SNR=4.5 
+
+  Selected: evec[0] tau=512 SNR=32.4
+
+  METHOD A: 12 phase clusters, gaps=['0.9076', '0.1396', '0.1745', '0.2269', '0.3665', '0.9425', '1.1519', '0.2094']
+
+  METHOD B: Phase modulo candidate gaps from dominant tau=512
+    gap=2pi/1 (6.283185 rad) -> p=3922057  cl_var=0.0690
+    gap=2pi/2 (3.141593 rad) -> p=1961028  cl_var=0.0591
+    gap=2pi/3 (2.094395 rad) -> p=1307352  cl_var=0.0640
+    gap=2pi/4 (1.570796 rad) -> p=980514  cl_var=0.0816
+    gap=2pi/5 (1.256637 rad) -> p=784411  cl_var=0.0903
+    gap=2pi/6 (1.047198 rad) -> p=653676  cl_var=0.1040
+    gap=2pi/8 (0.785398 rad) -> p=490257  cl_var=0.0502
+
+  METHOD C: Exhaustive gap search from phase histogram
+
+  METHOD D: FFT of phase histogram (dominant frequency = p)
+  Dominant FFT peak: freq=0.021240 -> 174 bands per 2pi
+  p_extracted = 174
+  Not a factor. Top 10 FFT peaks:
+    freq_idx=174 -> 174 bands
+    freq_idx=3800 -> 3800 bands
+    freq_idx=1557 -> 1557 bands
+    freq_idx=3974 -> 3974 bands
+    freq_idx=3939 -> 3939 bands
+    freq_idx=2835 -> 2835 bands
+    freq_idx=2600 -> 2600 bands
+    freq_idx=610 -> 610 bands
+    freq_idx=1792 -> 1792 bands
+    freq_idx=2037 -> 2037 bands
+
+==============================================================================
