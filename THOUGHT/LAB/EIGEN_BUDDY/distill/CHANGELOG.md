@@ -5,6 +5,20 @@
 
 ---
 
+## [0.3.3] - 2026-05-24 — AST Pointer Resolution: Double V-Trace PASSES
+
+### Added
+- `sandbox/training/ast_hologram.py` — Abstract Syntax Sandbox. Proves HRR graph traversal
+  works for code-like variable assignment chains.
+  - Tape: `a equals 5 . b equals a . return b .`
+  - Double V-trace resolves pointer indirection: `b → a → 5`
+  - Two-hop resolution at ambiguous "equals" node (shared assignment operator):
+    forward from `a` → `equals`, then forward from `equals` excluding known variables.
+  - All 5 hops correct. Qwen 0.5B prism. Zero backprop. Zero attention.
+  - Verdict: PASS — pointer chain resolved correctly.
+
+---
+
 ## [0.3.2] - 2026-05-24 — Concept Fusion: 3/3 bAbI Benchmark PASSED
 
 ### Added
