@@ -17,20 +17,21 @@ fn mod_exp(mut base: u64, mut exp: u64, modulus: u64) -> u64 {
     result
 }
 
-/// Build catalytic phase grating as complex128 numpy array.
+/// Build catalytic phase grating as complex64 (Complex<f32>) numpy array.
+/// 8 bytes per element. Parallel via rayon.
 #[pyfunction]
 fn build_catalytic_grating<'py>(
     py: Python<'py>,
     a: u64,
     n: u64,
     m: usize,
-) -> PyResult<&'py PyArray1<num_complex::Complex64>> {
+) -> PyResult<&'py PyArray1<num_complex::Complex<f32>>> {
     let n_f64 = n as f64;
     let two_pi = 2.0 * PI;
     let chunk_size: usize = 1_000_000;
     let num_chunks = (m + chunk_size - 1) / chunk_size;
 
-    let mut data: Vec<num_complex::Complex64> = vec![num_complex::Complex64::new(0.0, 0.0); m];
+    let mut data: Vec<num_complex::Complex<f32>> = vec![num_complex::Complex::new(0.0, 0.0); m];
 
     let chunks: Vec<(usize, usize)> = (0..num_chunks)
         .map(|i| (i * chunk_size, std::cmp::min((i + 1) * chunk_size, m)))
@@ -44,7 +45,7 @@ fn build_catalytic_grating<'py>(
             let mut val = if start == 0 { 1u64 } else { mod_exp(a, start as u64, n) };
             for i in 0..len {
                 let angle = two_pi * (val as f64) / n_f64;
-                slice[i] = num_complex::Complex64::new(angle.cos(), angle.sin());
+                slice[i] = num_complex::Complex::new(angle.cos() as f32, angle.sin() as f32);
                 val = ((val as u128 * a as u128) % n as u128) as u64;
             }
         });
