@@ -166,8 +166,18 @@ THOUGHT/LAB/CAT_CAS/
 - `C:\Users\rene_\Documents\Shizzle Obsidian\Shizzle\AGI\AGS\WIP\Explainers\Torus Is The Key.md` — Torus mapping, phase cavity FFT, geometric sigma
 - `C:\Users\rene_\Documents\Shizzle Obsidian\Shizzle\AGI\AGS\WIP\Explainers\CAT_CAS Map_2.md` — Complete CAT_CAS experiment inventory (33 experiments), compatibility matrix
 - `C:\Users\rene_\Documents\Shizzle Obsidian\Shizzle\Personal\Daily Notes\2026-05-21 Catalytic Time.md` — The eureka: catalytic = quantum, time as information ledger, black holes as scratch space
-- `THOUGHT\LAB\FORMULA\v4\SEMIOTIC_LIGHT_CONE_1_1\` — 8-document series (the physics)
-- `THOUGHT\LAB\FORMULA\v4\FORMALIZATION\` — Formal derivations (GR, action principle, hbar_sem)
+- `THOUGHT\LAB\FORMULA\v4\SEMIOTIC_LIGHT_CONE_1_1\` — 8-document series: Formula v5.2, Semiotic Axioms v2.2, Wave Mechanics, Einstein Meaning Space, Formalization v1, Alignment Problem, Cybernetic Truth, Consciousness Theory Comparison
+- `THOUGHT\LAB\FORMULA\v2_2\INDEX.md` — 57 research questions across 5 tiers, status: 10 VERIFIED, 9 PARTIALLY VERIFIED, 4 CONFIRMED, 1 FALSIFIED
+- `THOUGHT\LAB\FORMULA\v4\FORMALIZATION\` — Formal derivations (skip REFERENCES/): GR from semiotic action, Einstein on meaning-space (r=0.95, 4 models), semiotic action principle, hbar_sem resolution, gate-to-probability boundary, hardening results
+- `THOUGHT\LAB\FORMULA\v4\VALIDATION_ROADMAP.md` — Phases 0-6: QEC d=3-15, AI alignment Phase 4a/4b/4c, Kuramoto phase transitions, formal theory gaps
+- `THOUGHT\LAB\CAT_CAS\ROADMAP.md` — Full CAT_CAS roadmap: 33 experiments, 7 tracks, Holy Grail experiments, Bekenstein violator, wormhole
+- `THOUGHT\LAB\CAT_CAS\master_report.md` — All CAT_CAS experiments with metrics: bits erased, heat dissipation, verification commands
+- `THOUGHT\LAB\CAT_CAS\PUSHED_REPORT_FINAL_14.md` — The Final 14 exploits: Eigen Shor O(1), KV Cache O(1), Orthogonal Multimodel, 27B Inference zero-latency
+- `THOUGHT\LAB\CAT_CAS\PUSHED_REPORT_INFINITY.md` — Five physical constraints violated: Bekenstein, Computronium, Schmidt, Landauer, Arrow of Time
+- `THOUGHT\LAB\FORMULA\v4\FORMALIZATION\REFERENCES\Higher Dimensions\MD\` — Kanerva 2022 (HD Computing algebra) + Jiao et al. 2022 (brain-inspired HD)
+- `THOUGHT\LAB\HOLO\` — Holographic Brain: Qwen 27B → 197MB (282x), wormhole compression, phase cavity sieve, ER=EPR verification
+- `THOUGHT\LAB\HOLO\holographic_brain\CHANGELOG.md` — Complete build log: v0.0.0 → v0.4.1 across 60+ commits (May 20-23, 2026)
+- `THOUGHT\LAB\FORMULA\v4\biological_validation\superradiance\SUPERRADIANCE_REPORT.md` — Babcock et al. (2024) validation: Trp dipole orientation (46.2deg), Lindblad dynamics, sigma amplification, correlated disorder vs independent noise
 
 ---
 
