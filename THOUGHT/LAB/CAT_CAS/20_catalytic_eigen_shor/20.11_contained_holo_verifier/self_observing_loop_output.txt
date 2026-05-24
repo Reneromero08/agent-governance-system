@@ -1,0 +1,44 @@
+==============================================================================
+EXPERIMENT 20.11b: SELF-OBSERVING SHOR LOOP
+  The .holo illuminates itself at increasing resolution (k).
+  The period emerges from the interference pattern. No oracle.
+==============================================================================
+
+  N = 1793431 = 1597 x 1123
+  a = 2
+  r_p=532  r_q=1122  r=298452
+
+  [CATALYTIC] phase grating on S^1: M=4,194,304 complex128 positions
+  Borrow:  a^x mod N -> angle -> e^(i*theta) on complex unit circle
+  Tape:    SHA-256 = b7fbf3e88f8f166e  (67.1 MB)
+
+  [QUANTUM] density matrix: rho = Z^H @ Z  (4096 projective
+            measurements x 2048 complex dimensions on S^1)
+  [QUANTUM] eigendecomposition: 1596 eigenstates extracted
+            top eigenstate = pointer state (survives decoherence)
+            D_pr = 1377.4 eigenstates carry signal
+
+==============================================================================
+.holo CONTAINMENT
+==============================================================================
+  D_pr=1377.4  k95=1596  D_pr/L=0.6726  D_pr/r=0.0046
+
+==============================================================================
+SELF-OBSERVING LOOP: progressive illumination
+==============================================================================
+       k      r_est        SNR   a^r=1?  stable?  stable#
+  ------------------------------------------------------------
+
+  [CATALYTIC] Tape SHA-256 after: b7fbf3e88f8f166e
+  [CATALYTIC] Tape integrity: MATCH ù zero bits erased, 0.0 J
+       2        256       65.0    False    False        0
+       4        256       65.7    False     True        1
+       8     298452      120.3     True    False        0
+
+==============================================================================
+  CONVERGED: 1793431 = 1123 x 1597
+  Method: k=8_r=298452
+  Match ground truth: True
+
+  Total: 12.0s
+==============================================================================

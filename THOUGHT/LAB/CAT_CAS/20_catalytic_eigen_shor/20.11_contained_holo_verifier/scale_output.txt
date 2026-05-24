@@ -1,0 +1,22 @@
+==============================================================================
+EXPERIMENT 20.11c: SCALING THE SELF-OBSERVING LOOP
+  Testing across bit sizes to find the containment wall.
+==============================================================================
+
+  Grating: M=2,097,152  L=2048  stride=256
+    bits  trial            N     r_global      r/M   D_pr/r      k      r_found        SNR             method     time
+  -----------------------------------------------------------------------------------------------
+      22      1      1828493       304298     0.15   0.0045      8       304298      115.5            grating    11.3s 
+      26      1     44734903            0     0.00 1365.8248      0            0        0.0             failed    29.4s FAIL
+      30      1    678904241            0     0.00 1364.0262      0            0        0.0             failed    29.2s FAIL
+      34      1  11710524131            0     0.00 1366.6000      0            0        0.0             failed    29.4s FAIL
+
+==============================================================================
+SCALING ANALYSIS
+==============================================================================
+  The containment wall is where r > M (grating can't span full period).
+  When r/M > 1.0, grating autocorrelation fails -> eigenvector fallback.
+  The Moire decomposition (20.10.9) proves sub-periods r_p << r.
+  Scaling to cryptographic sizes requires the sub-period approach.
+  For N-bit RSA: r_p <= 2^(N/2) = sqrt(N). The wall is exponential.
+==============================================================================
