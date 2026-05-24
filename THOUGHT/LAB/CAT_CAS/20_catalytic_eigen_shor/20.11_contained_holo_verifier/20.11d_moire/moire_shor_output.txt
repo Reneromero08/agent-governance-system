@@ -1,0 +1,27 @@
+==============================================================================
+EXPERIMENT 20.11d: MOIRE SELF-OBSERVING SHOR
+  Past the 25-qubit ceiling via sub-period extraction
+  Quantum (S^1, rho, eigenstates) + Catalytic (tape SHA-256)
+==============================================================================
+
+    bits              N          M    r_sub ~        r_p                              method     time   tape
+  ----------------------------------------------------------------------------------------------------
+      22        2140451      8,192      2,048      1,327    evec[0]_tau=884_gcd(a^(tau/2)-1)     7.5s OK
+      26       37045531     32,768      8,192         --                grating_ac_no_factor     7.4s OK
+      30      855272777    131,072     32,768     26,881    evec[0]_tau=192x5_gcd(a^tau_m-1)     8.0s OK
+      34    10177310543    524,288    131,072         --                grating_ac_no_factor     8.3s OK
+      38   124779762421  2,097,152    524,288         --                grating_ac_no_factor     8.8s OK
+      42  2406335337589  8,388,608  2,097,152  1,420,999           grating_ac_tau=710499_gcd    12.0s OK
+      46 41496692002387 33,554,432  8,388,608  6,378,563          grating_ac_tau=6378562_gcd    22.8s OK
+      50 588152476531883 134,217,728 33,554,432         --                grating_ac_no_factor    67.6s OK
+
+==============================================================================
+ANALYSIS
+==============================================================================
+  The sub-period r_p divides p-1, so r_p <= 2^(bits/2).
+  M scales as 2^(bits/2 + 2) to cover the sub-period with margin.
+  The .holo stores k=8 eigenmodes x 2048 complex = 32 KB (constant).
+  The tape is READ-ONLY ù SHA-256 verified, 0.0 J Landauer dissipation.
+  The ceiling is now the grating construction time (O(M) for a^x mod N),
+  not the quantum state vector size (O(2^bits)).
+==============================================================================

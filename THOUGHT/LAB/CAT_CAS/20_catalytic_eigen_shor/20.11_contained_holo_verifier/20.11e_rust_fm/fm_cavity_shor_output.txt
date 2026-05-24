@@ -1,0 +1,28 @@
+==============================================================================
+EXPERIMENT 20.11e: CATALYTIC FM CAVITY SHOR
+  FM FM FM ù Frequency Modulation, recursive cavity sieve
+  Quantum (FFT = basis change) + Catalytic (tape SHA-256)
+==============================================================================
+
+  Device: cuda  VRAM: 12.9 GB
+    bits              N            M       r_sub~                                 method     time   tape
+  ---------------------------------------------------------------------------------------------------------
+      22        2675977        8,192        2,048                     FAIL: fm_exhausted     1.4s OK
+      26       50143711       32,768        8,192                       raw_tau=3099_gcd     0.0s OK
+      30      468370601      131,072       32,768                      raw_tau=44024_gcd     0.0s OK
+      34     4694897041      524,288      131,072                     raw_tau=136080_gcd     0.3s OK
+      38   216521388841    2,097,152      524,288                     FAIL: fm_exhausted     2.4s OK
+      42  3059876519671    8,388,608    2,097,152                    raw_tau=3971540_gcd     3.8s OK
+      46 24209988277549   33,554,432    8,388,608                     FAIL: fm_exhausted    15.8s OK
+      50 584523813740437  134,217,728   33,554,432                     FAIL: fm_exhausted    59.2s OK
+
+==============================================================================
+FM CAVITY ANALYSIS
+==============================================================================
+  The FFT transforms the phase grating from time domain to
+  frequency domain. Dominant frequency = 1/period.
+  Recursive cavity sieve: each cycle keeps more frequencies.
+  Deep cavity = more frequencies retained = finer resolution.
+  All operations are READ-ONLY on the catalytic tape.
+  SHA-256 verified after each cycle. Zero bits erased. 0.0 J.
+==============================================================================

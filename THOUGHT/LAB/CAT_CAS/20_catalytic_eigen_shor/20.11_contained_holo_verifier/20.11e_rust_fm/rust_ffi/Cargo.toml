@@ -1,0 +1,17 @@
+[package]
+name = "catalytic_grating_ffi"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "catalytic_grating_ffi"
+crate-type = ["cdylib"]
+
+[dependencies]
+rayon = "1.10"
+numpy = "0.20"
+num-complex = "0.4"
+
+[dependencies.pyo3]
+version = "0.20.2"
+features = ["extension-module"]
