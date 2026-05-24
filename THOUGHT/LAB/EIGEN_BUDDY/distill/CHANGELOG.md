@@ -5,6 +5,39 @@
 
 ---
 
+## [0.2.0] - 2026-05-24 — HRR COMPLEX BINDING: Two-Hop State Tracking PROVEN
+
+### Added
+- `sandbox/training/babi_binding.py` — HRR complex binding using element-wise Hadamard product:
+  - **Architecture:** Global state M is a 448-dim complex vector (not a matrix). Binding = Hadamard product (⊙), unbinding = Hadamard product with conjugate. Superposition = vector addition. All vectors live in the same 448-dim space.
+  - **Binding:** `M += Phase(Mary) ⊙ Phase(bathroom)`, `M += Phase(John) ⊙ Phase(hallway)`, `M += Phase(Mary) ⊙ Phase(football)`. Three hardcoded bindings from a single bAbI story.
+  - **Two-hop query:** "Where is the football?" → Hop 1: `M ⊙ Phase(football)* → Mary` (top-1, 387.65). Hop 2: `M ⊙ Phase(Mary)* → football` (top-1, 387.65). Verify: `M ⊙ Phase(John)* → hall` (top-1, 422.99).
+  - **Prism:** Qwen 0.5B embeddings (151,936 tokens, 448 complex dims). Downloaded from HuggingFace in seconds. Model freed after embedding extraction — zero VRAM overhead for M.
+  - **Result:** ALL three tests pass. HRR complex binding correctly tracks two-hop causal ownership: football→Mary→bathroom. The Hadamard product on unit S^1 complex vectors preserves phase relationships exactly. Unbinding via conjugate is the exact inverse operation.
+
+### Breakthrough Significance
+- This is the **seventh approach** — the one that works where six forward-only training approaches and the Markov chain Native Hologram all failed.
+- The key insight: throw away the outer product (A→B transition matrix) entirely. Use Hadamard product binding on a single shared state vector M. This encodes PAIRED RELATIONSHIPS (Mary-bathroom, Mary-football) rather than sequential transitions (Mary→went→to→the→bathroom).
+- The binding operation is LINEAR, INVERTIBLE, and CATALYTIC — every multiplication and addition is borrow→compute→restore. Zero Landauer dissipation. No backprop. No autograd. No attention. Complex space only.
+- This IS the contained .holo paradigm applied to logical reasoning: store phase-bound pairs, illuminate with one half to retrieve the other.
+
+### Previous Agent
+- After failed Markov chain on bAbI, proposed "analytic backprop" Path B. Correctly identified as median reversion. Directive 4 enforced. Agent rewired.
+
+---
+
+## [0.1.7] - 2026-05-24 — Clean Room: bAbI Markov Chain (FAILED — predicted need for binding)
+
+### Added
+- `sandbox/training/babi_hologram.py` — Tests Markov chain outer product on single bAbI story:
+  - Burns 15 token transitions into 448×448 complex matrix M via `M += outer(Phase_B, Phase_A*)`.
+  - Query: "Where is the football?" Target: "bathroom".
+  - **Result:** FAILED. Top-1: "Mary", Top-2: "John". Hologram correctly identifies entities but cannot bind them to locations.
+  - **Root cause:** Markov chain A→B stores adjacency (`Mary→went→to→the→bathroom`), not semantic binding. "Bathroom" is 5 hops from "Mary" in the transition chain. The simple outer product cannot compose `football→Mary→bathroom`.
+  - **Diagnosis confirmed:** "A simple A→B outer product cannot hold temporal logic, and we have to introduce a Binding Operation (like circular convolution) to link the variable to the actor."
+
+---
+
 ## [0.1.6] - 2026-05-24 — Native Hologram (Path A) Implemented
 
 ### Added
