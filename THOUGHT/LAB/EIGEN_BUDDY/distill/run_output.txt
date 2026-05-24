@@ -1,8 +1,28 @@
-K=128 shards=6
-model-00006: 60 rSVD (19.6s SVD, 19.8s total)
-model-00007: 51 rSVD (17.1s SVD, 37.4s total)
-model-00008: 20 rSVD (0.7s SVD, 38.5s total)
-model-00013: 49 rSVD (15.5s SVD, 54.1s total)
-model-00014: 52 rSVD (20.1s SVD, 74.7s total)
-model-00015: 7 rSVD (2.4s SVD, 77.6s total)
-Done: 239 SVDs, 1456256KB grating, 2.5MB .holo in 84.9s
+Model: F:\LLM_Models\lmstudio-models\Qwen\Qwen3.6-27B
+Attention shards: 6/15
+Attention key patterns: ['in_proj_qkv.weight', 'k_proj.weight', 'o_proj.weight', 'q_proj.weight', 'qkv.weight', 'v_proj.weight']
+K=128 eigenvectors | Torus mapping: S^1
+==============================================================================
+  model-00006-of-00015.safetensors:  38 rSVD (12.7s SVD, 12.7s total)
+  model-00007-of-00015.safetensors:  25 rSVD (8.7s SVD, 21.7s total)
+  model-00008-of-00015.safetensors:  20 rSVD (0.7s SVD, 22.7s total)
+  model-00013-of-00015.safetensors:  36 rSVD (11.4s SVD, 34.2s total)
+  model-00014-of-00015.safetensors:  21 rSVD (10.4s SVD, 45.0s total)
+  model-00015-of-00015.safetensors:   3 rSVD (1.2s SVD, 46.5s total)
+
+==============================================================================
+Distilled: 143 matrices, 915584 KB phase grating
+Compressed: 1.6 MB .holo (34212x vs 54GB raw)
+Metadata: D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\EIGEN_BUDDY\distill\distilled\eigenbuddy_distilled.json
+
+Top eigenstructure (by D_pr):
+  model.language_model.layers.23.self_attn.v_proj              k=128 dim=  1024 D_pr=127.4
+  model.language_model.layers.35.self_attn.v_proj              k=128 dim=  1024 D_pr=127.3
+  model.language_model.layers.19.self_attn.v_proj              k=128 dim=  1024 D_pr=127.1
+  model.language_model.layers.27.self_attn.v_proj              k=128 dim=  1024 D_pr=126.9
+  model.language_model.layers.55.self_attn.v_proj              k=128 dim=  1024 D_pr=126.8
+  model.language_model.layers.51.self_attn.v_proj              k=128 dim=  1024 D_pr=126.8
+  model.language_model.layers.39.self_attn.v_proj              k=128 dim=  1024 D_pr=126.8
+  model.language_model.layers.43.self_attn.v_proj              k=128 dim=  1024 D_pr=126.8
+  model.language_model.layers.31.self_attn.v_proj              k=128 dim=  1024 D_pr=126.7
+  model.language_model.layers.47.self_attn.v_proj              k=128 dim=  1024 D_pr=126.6

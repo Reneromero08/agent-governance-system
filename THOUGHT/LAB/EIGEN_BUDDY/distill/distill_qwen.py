@@ -58,14 +58,13 @@ def find_attention_shards(model_dir):
     if not shards:
         return [], set()
     
-    # Scan first few shards to find attention key patterns
+    # Scan all shards to find attention key patterns
     attn_patterns = set()
-    for sp in shards[:3]:
+    for sp in shards:
         tensors = st.load_file(str(sp))
         for k in tensors:
             if len(tensors[k].shape) != 2: continue
-            parts = k.split('.')
-            key = '.'.join(parts[-2:])
+            key = '.'.join(k.split('.')[-2:])
             if any(x in key.lower() for x in 
                    ['q_proj', 'k_proj', 'v_proj', 'o_proj', 'qkv', 'attn', 'self_attn']):
                 attn_patterns.add(key)
@@ -154,19 +153,20 @@ def distill(model_dir, out_dir, K=128):
     holo_path = out / "eigenbuddy_distilled.holo"
     save_dict = {k: v['grating'] for k, v in holo.items()}
     np.savez_compressed(str(holo_path), **save_dict)
+    npz_path = Path(str(holo_path) + '.npz')  # savez_compressed appends .npz
     
     # Save metadata JSON
     meta = {k: {kk: vv for kk, vv in v.items() if kk != 'grating'} for k, v in holo.items()}
-    meta_path = out / "eigenbuddy_distilled.json"
-    json.dump(meta, open(str(meta_path), 'w'), indent=2, default=str)
+    json_path = out / "eigenbuddy_distilled.json"
+    json.dump(meta, open(str(json_path), 'w'), indent=2, default=str)
     
-    size_mb = holo_path.with_suffix('.npz').stat().st_size / 1e6
+    size_mb = npz_path.stat().st_size / 1e6
     total_t = time.perf_counter() - t_start
     
     print(f"\n{'='*78}")
     print(f"Distilled: {total_svd} matrices, {grating_kb:.0f} KB phase grating")
     print(f"Compressed: {size_mb:.1f} MB .holo ({54000/size_mb:.0f}x vs 54GB raw)")
-    print(f"Time: {total_t:.1f}s")
+    print(f"Metadata: {json_path}")
     
     # Show top eigenstructure
     by_D_pr = sorted(holo.items(), key=lambda x: x[1]['D_pr'], reverse=True)
@@ -179,7 +179,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Distill any model to .holo phase eigenbasis")
     parser.add_argument("--model", default=r"F:\LLM_Models\lmstudio-models\Qwen\Qwen3.6-27B",
                         help="Path to model directory with safetensors shards")
-    parser.add_argument("--out", default="./distilled", help="Output directory")
+    parser.add_argument("--out", default=str(Path(__file__).parent / "distilled"), help="Output directory")
     parser.add_argument("--k", type=int, default=128, help="Number of eigenvectors to keep")
     args = parser.parse_args()
     distill(args.model, args.out, args.k)
