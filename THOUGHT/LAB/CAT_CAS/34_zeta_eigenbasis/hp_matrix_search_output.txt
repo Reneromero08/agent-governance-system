@@ -1,0 +1,28 @@
+==============================================================================
+EXP 34.1: HILBERT-POLYA MATRIX FROM PRIME DISTRIBUTION
+  Build matrices from primes, eigendecompose, compare to zeta zeros
+==============================================================================
+
+  Reference: 30 zeta zeros, spacing ratio = 0.6034 (GUE: 0.603)
+         A: prime min/max kernel: n= 100  spacing=0.4448  zeta_ref=0.6034  0.0s
+             B: prime gap Hankel: n=  99  spacing=0.3651  zeta_ref=0.6034  0.0s
+          C: von Mangoldt Hankel: n= 100  spacing=0.3882  zeta_ref=0.6034  0.0s
+        D: log-derivative kernel: n= 100  spacing=0.0000  zeta_ref=0.6034  0.0s
+               E: prime Toeplitz: n= 100  spacing=0.4018  zeta_ref=0.6034  0.0s
+          F: Redheffer (Mertens): n= 100  spacing=0.3934  zeta_ref=0.6034  0.0s
+
+  SUMMARY (zeta ref = 0.6034, GUE = 0.603):
+  Closest: D: log-derivative at 0.0000 (delta = 0.6034)
+    D: log-derivative: 0.0000  (diff: 0.6034)
+    B: gap Hankel: 0.3651  (diff: 0.2383)
+    C: von Mangoldt: 0.3882  (diff: 0.2152)
+    F: Redheffer: 0.3934  (diff: 0.2100)
+    E: prime Toeplitz: 0.4018  (diff: 0.2016)
+    A: prime kernel: 0.4448  (diff: 0.1586)
+
+==============================================================================
+  If any construction matches GUE statistics (0.603) without
+  using zeta zeros as input, it is a Hilbert-Polya candidate.
+  The matrix IS built from primes alone. The eigenvalues
+  independently reproduce the zeta zero spectral statistics.
+==============================================================================

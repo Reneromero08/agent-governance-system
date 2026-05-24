@@ -1,0 +1,3 @@
+[60-bit] M=4294M chunks=64 RAM=537MB
+  all 15 bases exhausted
+DONE

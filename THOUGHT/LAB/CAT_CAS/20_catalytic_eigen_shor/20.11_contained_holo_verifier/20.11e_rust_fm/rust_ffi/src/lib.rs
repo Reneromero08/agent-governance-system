@@ -1,6 +1,7 @@
 use pyo3::prelude::*;
-use numpy::{IntoPyArray, PyArray1};
+use numpy::{IntoPyArray, PyArray1, PyReadwriteArray1};
 use rayon::prelude::*;
+use rayon::slice::ParallelSliceMut;
 use std::f64::consts::PI;
 
 fn mod_exp(mut base: u64, mut exp: u64, modulus: u64) -> u64 {
@@ -90,7 +91,38 @@ fn catalytic_grating_ffi(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(build_catalytic_grating, m)?)?;
     m.add_function(wrap_pyfunction!(build_mod_exp_sequence, m)?)?;
     m.add_function(wrap_pyfunction!(build_grating_chunk, m)?)?;
+    m.add_function(wrap_pyfunction!(build_grating_inplace, m)?)?;
     Ok(())
+}
+
+/// ZERO-COPY: Fill pre-allocated complex64 numpy array in-place via rayon.
+/// Python allocates the tape, Rust fills it. No copy, no upcast. 8 bytes/elem.
+#[pyfunction]
+fn build_grating_inplace(
+    mut tape: PyReadwriteArray1<num_complex::Complex<f32>>,
+    a: u64,
+    n: u64,
+    start_offset: u64,
+    sz: usize,
+) {
+    let mut view = tape.as_array_mut();
+    let slice = view.as_slice_mut().expect("numpy array must be contiguous");
+    let actual_sz = sz.min(slice.len());
+    let n_f64 = n as f64;
+    let two_pi = 2.0 * PI;
+    let chunk_size: usize = 1_000_000;
+
+    slice[..actual_sz].par_chunks_mut(chunk_size).enumerate().for_each(|(chunk_idx, chunk)| {
+        let start = start_offset as usize + chunk_idx * chunk_size;
+        let len = chunk.len();
+        if len == 0 { return; }
+        let mut val = if start == 0 { 1u64 } else { mod_exp(a, start as u64, n) };
+        for i in 0..len {
+            let angle = two_pi * (val as f64) / n_f64;
+            chunk[i] = num_complex::Complex::new(angle.cos() as f32, angle.sin() as f32);
+            val = ((val as u128 * a as u128) % n as u128) as u64;
+        }
+    });
 }
 
 /// Build a chunk of the grating starting at `start_offset`.

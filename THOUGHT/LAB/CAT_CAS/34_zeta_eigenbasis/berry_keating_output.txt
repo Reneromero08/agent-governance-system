@@ -1,0 +1,18 @@
+==============================================================================
+EXP 34.2: BERRY-KEATING HAMILTONIAN (xp + px)
+==============================================================================
+
+  Zeta zero ref: spacing ratio = 0.6034 (GUE: 0.603)
+  N=  50: spacing=0.0000  delta_zeta=0.6034
+  N= 100: spacing=0.0000  delta_zeta=0.6034
+  N= 200: spacing=0.0000  delta_zeta=0.6034
+  N= 400: spacing=0.0000  delta_zeta=0.6034
+
+  Top 8 eigenvalues (N=100): ['127.3', '133.7', '140.7', '148.2', '156.7', '166.4', '178.4', '273.1']
+  Zeta zeros (first 8):       ['14.1', '21.0', '25.0', '30.4', '32.9', '37.6', '40.9', '43.3']
+
+==============================================================================
+  Berry-Keating predicts H = xp + px has eigenvalues ~ zeta zeros.
+  The discrete approximation tests whether the operator structure
+  alone (without fitting) produces GUE eigenvalue statistics.
+==============================================================================
