@@ -88,5 +88,31 @@ fn build_mod_exp_sequence<'py>(
 fn catalytic_grating_ffi(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(build_catalytic_grating, m)?)?;
     m.add_function(wrap_pyfunction!(build_mod_exp_sequence, m)?)?;
+    m.add_function(wrap_pyfunction!(build_grating_chunk, m)?)?;
     Ok(())
+}
+
+/// Build a chunk of the grating starting at `start_offset`.
+/// Returns `m` elements: g_{start_offset} through g_{start_offset + m - 1}.
+#[pyfunction]
+fn build_grating_chunk<'py>(
+    py: Python<'py>,
+    a: u64,
+    n: u64,
+    m: usize,
+    start_offset: u64,
+) -> PyResult<&'py PyArray1<num_complex::Complex64>> {
+    let n_f64 = n as f64;
+    let two_pi = 2.0 * PI;
+    
+    let mut data: Vec<num_complex::Complex64> = vec![num_complex::Complex64::new(0.0, 0.0); m];
+    let mut val = if start_offset == 0 { 1u64 } else { mod_exp(a, start_offset, n) };
+    
+    for i in 0..m {
+        let angle = two_pi * (val as f64) / n_f64;
+        data[i] = num_complex::Complex64::new(angle.cos(), angle.sin());
+        val = ((val as u128 * a as u128) % n as u128) as u64;
+    }
+    
+    Ok(data.into_pyarray(py))
 }

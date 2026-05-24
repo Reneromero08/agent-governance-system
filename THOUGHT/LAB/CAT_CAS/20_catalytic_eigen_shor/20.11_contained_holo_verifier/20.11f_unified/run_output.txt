@@ -1,0 +1,27 @@
+==============================================================================
+EXPERIMENT 20.11f: UNIFIED CATALYTIC MOIRE SHOR
+  Moire + Phase Cavity + Complex-Native + Catalytic Tape
+==============================================================================
+  Rust FFI: loaded  |  GPU: cuda
+
+    bits              N          M     D_pr                                   method    time  tape
+  ----------------------------------------------------------------------------------------------------
+      22        2022023      8,192     11.0                          evec[3]_tau=779    8.5s OK
+      26       37446119     32,768     57.4                   FAIL: gpu_ac_no_factor    8.9s OK
+      30      374322521    131,072    223.5                   FAIL: gpu_ac_no_factor   10.1s OK
+      34     6795076319    524,288    680.9                         gpu_ac_tau=14525   17.2s OK
+      38   121039423831  2,097,152   1364.5                   FAIL: gpu_ac_no_factor   35.6s OK
+      42  3279841802729  8,388,608   1365.9                   FAIL: gpu_ac_no_factor   33.7s OK
+      46 33727598233159 33,554,432   1365.4                   FAIL: gpu_ac_no_factor   34.5s OK
+      50 354613709603597 134,217,728   1365.2                      gpu_ac_tau=18271852   39.2s OK
+
+==============================================================================
+UNIFIED PIPELINE
+==============================================================================
+  1. Rust/CPU: build catalytic phase grating on S^1
+  2. CPU: complex Hermitian rho = Z^H @ Z -> eigendecomposition
+  3. CPU: Moire decomposition -> extract sub-periods from eigenvectors
+  4. CPU: Phase cavity -> strip harmonic shadows from candidates
+  5. GPU: grating autocorrelation fallback
+  6. CPU: tape SHA-256 verification -> 0 bits erased, 0.0 J
+==============================================================================
