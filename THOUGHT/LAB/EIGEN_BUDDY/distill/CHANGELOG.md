@@ -5,6 +5,27 @@
 
 ---
 
+## [0.3.2] - 2026-05-24 — Concept Fusion: 3/3 bAbI Benchmark PASSED
+
+### Added
+- `sandbox/training/babi_fusion.py` — Full concept pipeline with precomputed Hadamard-product
+  concept phases for all 76,025 vocab words. Both ingestion and query use concept phases.
+  Retrieval matches waves against concept vocabulary, not raw single-token phases.
+- **Thresholded entity penalty:** Tokens with >2x mean resonance to the query entity get
+  0.1x beam penalty. Prevents recursive loops (football→dropped→Mary→dropping→football)
+  without harming legitimate destinations.
+- **Result: 3/3 PASSED.**
+  - Test 1: `bathroom <- went <- Mary <- dropped` (football query)
+  - Test 2: `office <- travelled <- Daniel <- grabbed` (apple query)
+  - Test 3: `garden <- travelled <- Mary <- grabbed` (milk query)
+
+## [0.3.1] - 2026-05-24 — bAbI Benchmark Engine (2/3)
+
+### Added
+- `sandbox/training/babi_benchmark.py` — Reusable NativeHologram class with vocab mask
+  (76K English tokens, 76K blocked). V-trace query with beam search. 2/3 passed — test 3
+  failed due to Qwen BPE subword splitting (milk→m+ilk, grabbed→grab+bed, etc.).
+
 ## [0.3.0] - 2026-05-24 — CLEAN ROOM: V-Shaped Trace PASSES on bAbI Task 1
 
 ### Added — Clean Room Training Suite (sandbox/training/)
