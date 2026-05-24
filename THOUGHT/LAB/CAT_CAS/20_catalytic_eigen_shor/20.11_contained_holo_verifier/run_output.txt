@@ -1,0 +1,105 @@
+==============================================================================
+EXPERIMENT 20.11: CONTAINED .holo PHASE CAVITY
+  Complex-native (S^1). Catalytic tape. Zero extraction.
+==============================================================================
+
+  N = 1627949 = 1031 x 1579
+  a = 2
+  Sub-periods: r_p=515  r_q=526
+  Global period: r=270890
+
+  [CATALYTIC] Grating: M=2,097,152 on S^1...
+  Built in 0.6s. Tape = grating (no copy).
+
+==============================================================================
+.holo CONTAINMENT
+==============================================================================
+  Observation: 4096 samples x 2048 dims (complex, S^1)
+  D_pr = 1364.3  (participation dimension)
+  k95  = 1591  (95% variance)
+  D_pr/L = 0.6662
+  D_pr/r = 0.0050
+
+==============================================================================
+RECONSTRUCTION: illuminate through stored eigenbasis at various k
+==============================================================================
+       k  storage (KB)       ac_r        snr   verified     comp
+  ------------------------------------------------------------
+       2          64.0     272128       31.4      False    512.0x
+       4         128.0     270890       43.1       True ***    256.0x
+       8         256.0     270890      112.9       True ***    128.0x
+      16         512.0     270890      265.3       True ***     64.0x
+      32        1024.0     270890      560.5       True ***     32.0x
+      64        2048.0     270890      827.4       True ***     16.0x
+     128        4096.0     270890     1024.2       True ***      8.0x
+     256        8192.0     270890     1219.2       True ***      4.0x
+    1591       50912.0     270890     3936.4       True ***      0.6x
+
+  Reloaded .holo: N=1627949, a=2, k=4
+  Grating reconstruction: r=270890, SNR=43.1, CORRECT
+  Verified period from .holo: r=270890, a^r mod N = 1
+  File size: 126,199 bytes = 123.2 KB
+  Stored period? NO -- r is NOT in the file
+
+==============================================================================
+FACTORIZATION (measurement step, OUTSIDE the .holo)
+==============================================================================
+  k=4: autocorrelation finds r=270890 (SNR=43.1)
+  FACTORED: 1627949 = 1031 x 1579
+
+  The .holo stored 4 complex eigenmodes (128.0 KB).
+  The integer r=270890 was extracted by autocorrelation
+  on the RECONSTRUCTED grating -- OUTSIDE the .holo.
+  The .holo itself never computed, stored, or output r.
+
+==============================================================================
+EIGENVECTOR DIAGNOSTIC (the .holo does NOT do this)
+==============================================================================
+  Eigenvalue spectrum (top 8):
+    lambda[0] = 2.894622  cum=0.0014
+    lambda[1] = 2.886813  cum=0.0028
+    lambda[2] = 2.875756  cum=0.0042
+    lambda[3] = 2.866786  cum=0.0056
+    lambda[4] = 2.860849  cum=0.0070
+    lambda[5] = 2.849624  cum=0.0084
+    lambda[6] = 2.826456  cum=0.0098
+    lambda[7] = 2.821917  cum=0.0112
+  Top eigenvector autocorrelation peak: tau=256, val=0.193
+
+==============================================================================
+STORAGE ANALYSIS
+==============================================================================
+  Raw grating:       M=2,097,152 complex128 = 33.6 MB
+  .holo (k=4): eigenvectors = 128.0 KB
+  Compression:       268.4x
+  D_pr/M:            0.000651
+  D_pr/r:            0.0050  (the period is 199x larger than D_pr)
+
+==============================================================================
+KEY INSIGHT
+==============================================================================
+  The .holo stores k=4 complex eigenmodes of the Hermitian
+  covariance of the modular exponentiation phase grating on S^1.
+  The integer r=270890 lives NOWHERE in the .holo.
+  The eigenbasis encodes the period structure as a topological
+  interference pattern -- a physical lens, not a number.
+
+  To USE the .holo:
+    1. Project a signal through the stored eigenbasis
+    2. The filtered signal resonates at the stored period
+    3. Autocorrelation of the filtered signal reveals r
+    4. This measurement happens OUTSIDE the .holo
+
+  The .holo can be composed with other .holo states via superposition
+  on the tape. It can verify candidates by measuring energy
+  concentration in the dominant eigenmodes. It can participate in
+  catalytic computation chains without ever being 'read' as an integer.
+
+  This IS the Cybernetic Truth architecture:
+    .holo eigenbasis  = alignment frame C
+    projection        = R = Tr(rho @ C)
+    autocorrelation   = measurement step (Born rule collapse)
+    containment       = the integer r never materializes
+
+  Total: 89.1s
+==============================================================================
