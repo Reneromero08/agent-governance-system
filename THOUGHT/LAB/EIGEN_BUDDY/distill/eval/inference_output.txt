@@ -1,0 +1,18 @@
+==============================================================================
+EIGEN BUDDY INFERENCE ù Qwen-distilled phase eigenbasis
+  d_model=1024 heads=8 layers=2
+==============================================================================
+
+  Tokenizer: 248044 tokens  pad_id=248044
+  Loaded 143 phase gratings from eigenbuddy_distilled.holo.npz
+  Model: 1,033,261,528 params
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\EIGEN_BUDDY\distill\inference.py", line 139, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\EIGEN_BUDDY\distill\inference.py", line 113, in main
+    if inject_attention(layer, weights, f".{i}."):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\EIGEN_BUDDY\distill\inference.py", line 58, in inject_attention
+    w.data[start:end] = torch.tensor(rotated.real.astype(np.float32)).unsqueeze(0).expand(dh, -1) * 0.1
+                                     ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Tensor' object has no attribute 'astype'. Did you mean: 'dtype'?
