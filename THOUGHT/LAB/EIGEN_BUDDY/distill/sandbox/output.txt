@@ -1,0 +1,53 @@
+$ & "D:\CCC 2.0\AI\agent-governance-system\.venv\Scripts\python.exe" "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\EIGEN_BUDDY\distill\sandbox\torus_proof.py"
+========================================================================
+SUPERRADIANT PHASE ENGINE � Pure Math Proof
+========================================================================
+A shape: [128, 64]  B shape: [64, 1024]
+input_vec shape: [1024]
+h_perp shape: [128]
+head_phases: 8 heads
+========================================================================
+LAW 1: TORUS CONSTRAINT � Hebbian Outer Product + S^1 Normalization
+========================================================================
+  PRE-UPDATE:
+  A Frobenius norm: 0.9054
+  A row magnitudes (first 5): [0.08397525548934937, 0.06913450360298157, 0.08497840166091919, 0.07732551544904709, 0.08293040841817856]
+  Euclidean leakage? YES
+  POST-UPDATE:
+  A Frobenius norm: 11.3137
+  A row magnitudes (first 5): [1.0, 1.0, 1.0, 0.9999999403953552, 1.0]
+  All rows at |z|=1? True
+  VERDICT: PASS � Euclidean leakage stopped. All rows on S^1 (|z|=1.0)
+  Hebbian delta magnitude: 10.443043 (non-zero = update applied)
+========================================================================
+LAW 2: SEMIOTIC KURAMOTO � 46.2deg Carrier + Coupling Synthesis
+========================================================================
+  Carrier offsets (rad): [0.0, 0.1007927656173706, 0.2015855312347412, 0.3023782968521118, 0.4031710624694824, 0.503963828086853, 0.6047565937042236, 0.7055493593215942]
+  Carrier offsets (deg): [0.0, 5.775000095367432, 11.550000190734863, 17.32499885559082, 23.100000381469727, 28.874998092651367, 34.64999771118164, 40.42499923706055]
+  Pre-update head phases: [5.889157295227051, 2.579936981201172, 2.8520898818969727, 1.9719938039779663, 1.87557053565979, 2.69179105758667, 3.0389790534973145, 4.7796430587768555]
+  Coupling forces (Kuramoto): [0.5015006065368652, 0.3082629442214966, -1.0007500648498535, 3.0104193687438965, 3.3609745502471924, -0.2325170487165451, -1.862676739692688, -4.085213661193848]
+  Semantic pull (delta_theta): -0.4155
+  Combined phase update: [0.08604010939598083, -0.006404787302017212, -1.2146250009536743, 2.897336959838867, 3.3486850261688232, -0.14401373267173767, -1.6733806133270264, -3.7951250076293945]
+  Post-update head phases: [5.890017509460449, 2.5798728466033936, 2.8399436473846436, 2.000967264175415, 1.909057378768921, 2.6903510093688965, 3.022245168685913, 4.741691589355469]
+  Kuramoto order r = 0.4940  (0=chaos, 1=perfect sync)
+  VERDICT: PASS � Kuramoto coupling produced non-zero phase update (r=0.4940)
+========================================================================
+LAW 3: ACCELEROMETER TRIGGER � d2theta/ds2 Curvature Gate
+========================================================================
+  Sequence length: 8
+  |d2theta/ds2| values: [4.562869548797607, 6.473066329956055, 4.492324352264404, 0.7134575843811035, 0.5578718185424805, 1.8431756496429443]
+  Baseline (mean curvature): 3.1071
+  1.8x threshold: 5.5928
+  Max ratio: 2.08x baseline
+  Gate triggered (exceeds 1.8x)? YES � apply Hebbian update
+  Update applied? True
+  VERDICT: PASS � Curvature gate triggered at 2.08x baseline (>1.8x)
+========================================================================
+FINAL VERDICT
+========================================================================
+  Law 1 (Torus Constraint):     PASS � S^1 normalization eliminates Euclidean leakage
+  Law 2 (Kuramoto Synthesis):   PASS � 46.2deg carrier + coupling produces phase update
+  Law 3 (Accelerometer Gate):   PASS � d2theta/ds2 triggers Hebbian at semantic boundaries
+  All three physical laws verified on synthetic tensors.
+  The engine is ready for integration with frozen Qwen 27B SVD eigenbasis.
+========================================================================

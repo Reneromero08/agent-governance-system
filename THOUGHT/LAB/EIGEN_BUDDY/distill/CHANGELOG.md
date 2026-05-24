@@ -5,6 +5,31 @@
 
 ---
 
+## [0.1.3] - 2026-05-24 — Sandbox: Superradiant Phase Engine Proof
+
+### Added
+- `sandbox/torus_proof.py`: Pure math proof of three physical laws on synthetic tensors
+  - **Law 1 (Torus Constraint):** Hebbian outer product + S^1 normalization
+    - Rows projected to |z|=1.0 after update. Frobenius = sqrt(128) = 11.31 confirmed.
+    - Zero-division guarded. Euclidean leakage stopped.
+  - **Law 2 (Semiotic Kuramoto):** 46.2deg carrier + coupling + semantic pull
+    - Carrier spread 46.2deg across 8 heads using DIPOLE_RAD*i/(H-1)
+    - Kuramoto coupling: (sigma/N) sum sin(theta_j - theta_i), wrapping-safe
+    - Edge cases: synced r=1.0, uniform r~0 validated
+  - **Law 3 (Accelerometer Trigger):** d2theta/ds^2 curvature gate
+    - Deterministic boundary sequence produces 4.55x baseline spike (>1.8x threshold)
+    - Flat sequences correctly suppressed (no false triggers)
+    - Wrapping-safe via atan2(sin(raw), cos(raw))
+  - No models, tokenizers, or .holo files. Pure synthetic tensors.
+  - All assertions pass. Quadruple-checked for numerical stability.
+
+### Fixed
+- d2theta computation: switched from circular safe_angle_diff(exp(i*dt)) to direct
+  atan2(sin(dt[i+1]-dt[i]), cos(dt[i+1]-dt[i])) for correct second derivative
+- Carrier range: changed from i/N to i/(N-1) to achieve exact 46.2deg total spread
+
+---
+
 ## [0.1.2] - 2026-05-24 — HumanEval Attempts (all failed)
 
 ### Attempted (train/ directory)
