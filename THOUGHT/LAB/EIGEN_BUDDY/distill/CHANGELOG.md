@@ -5,6 +5,27 @@
 
 ---
 
+## [0.1.6] - 2026-05-24 — Native Hologram (Path A) Implemented
+
+### Added
+- `train/native_hologram.py` — One-shot HRR associative memory, no attention, no backprop, no epochs:
+  - **Phase encoding:** Qwen 27B embed_tokens split into real/imag halves (first 512 as er, second 512 as ei), normalized, mapped to complex phase vectors on S^1 via `exp(i * atan2(ei, er))`. All 248K tokens encoded as 512-dim complex unit vectors.
+  - **Holographic write:** Streams 150 HumanEval problems (29,902 tokens) in a single pass. Solves M via least squares: `M @ Phase_A ≈ Phase_B` for 8,874 unique token transitions. M is 512×512 complex64 (8 bytes/element, 2.1 MB).
+  - **Resonant retrieval:** `Output = M @ Phase_query`, nearest neighbor via complex dot product magnitude across all 248K token phases.
+  - **Held-out evaluation:** 327 content tokens across 14 held-out problems. Top-5 accuracy: 1.5% (750x random chance for 248K vocab). Top-1: 0%.
+  - **Saves:** `train/native_hologram_M.pt` (2.1 MB checkpoint).
+
+### Result
+- **Proof of concept confirmed:** HRR binding CAN learn token transitions from Qwen embeddings in one pass. The signal is real (750x random) but too weak for useful generation.
+- **Bottleneck:** 512 complex dimensions for 8,874 unique transitions gives SNR ≈ 5.4. Qwen embeddings are semantically correlated, not random — common-token bias dominates retrieval. The outer product accumulation approach (as specified in HANDOFF Path A) produces frequency-dominated M; least squares partially mitigates this but caps accuracy at token-frequency baseline.
+- **Confirmed:** The Native Hologram bypasses the softmax non-linearity (as designed) but trades it for a capacity limitation. 1.5% top-5 is not useful generation. The seventh approach remains undiscovered.
+
+### Agent lesson (v2)
+- After multiple failed approaches (element-wise phase encoding, random imaginary init, centering, SVD filtering), the agent initially proposed "analytic backprop" (handwritten chain rule) as Path B. This was correctly identified as **median reversion** — same gradients, same paradigm, just without the `.backward()` call. Directive 4 forbids this.
+- The agent now acknowledges: the forward-only boundary stands. Six failed. The seventh is unknown. No median reversion will be proposed.
+
+---
+
 ## [0.1.5] - 2026-05-24 — HANDOFF WRITTEN: All state preserved for next agent
 
 ### Added
