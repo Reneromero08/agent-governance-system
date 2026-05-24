@@ -5,6 +5,30 @@
 
 ---
 
+## [0.1.4] - 2026-05-24 — Superradiant Adapter Integration (forward-only)
+
+### Added
+- `train/train_adapters.py`: Full superradiant physics integrated into LowRankAdapters
+  - **Hebbian+Torus:** ΔA = η * outer(h_perp, projected_input); rows normalized to |z|=1
+  - **Rank-1 eigenmode compression:** dominant PCA component of Δh = h* - h
+  - **Cybernetic gate:** learning rate scaled by 1/(R + ε) — low R amplifies 68x
+  - **Kuramoto synthesis:** 46.2° carrier + sin(θ_j - θ_i) coupling on adapters
+  - **Warm-tape:** pre-computed h* from W_out[target] for zero-compute retrieval
+  - Base .holo FROZEN. 2.3M adapter params trainable. No autograd.
+
+### Result
+- CE stuck at 12.42, r=0.0046 (same as all forward-only approaches)
+- Hebbian outer product direction doesn't map correctly through complex attention
+- 68x amplification doesn't help — the geometric relationship between ΔA and
+  output change is non-linear through softmax + phase rotation
+- **Confirmed:** forward-only approaches cannot train token prediction
+
+### Working baseline
+- `train/train_code.py`: CE+Kuramoto with manual SGD (uses `.backward()`)
+  remains the only approach that produces correct token completions
+
+---
+
 ## [0.1.3] - 2026-05-24 — Sandbox: Superradiant Phase Engine Proof
 
 ### Added
@@ -114,3 +138,4 @@
 | Manual SGD lr=0.005 with grad clip | Prevents NaN at 2+ layers; too weak for 4 layers without Adam |
 | Complex64 phase grating (8 bytes) | Halves RAM vs complex128; 58-bit Shor gating proved this |
 | Frozen Qwen embed + output | Language grounding from pretrained model; only attention adapts |
+| Forward-only cannot train tokens| 6 approaches failed. Hebbian+Torus+Kura doesn't map through attention non-linearity. Backprop required for output→weight error transmission. |
