@@ -1,12 +1,20 @@
-<!-- CONTENT_HASH: c6b827945a7b611c3db4a642e71c5101bc50aca2dd0c08c57a8ebd41b2f1f8a6 -->
+<!-- CONTENT_HASH: f4bde1214e79113959564e50ec5b10b7ecd26f93e35c93c5d4d7d77b751668d2 -->
 
-<!-- CONTENT_HASH: PLACEHOLDER -->
+<!-- CONTENT_HASH: f4bde1214e79113959564e50ec5b10b7ecd26f93e35c93c5d4d7d77b751668d2 -->
 
 # INBOX
 
 This directory stores new research, reports, and roadmaps for user approval.
 
 ---
+
+ - [ ] **[05-23-2026-14-30_FORMULA_FINAL_REPORT.md](reports/05-23-2026-14-30_FORMULA_FINAL_REPORT.md)** ⚠️ `5b832f24...`
+    - **Section:** #report
+    - **Author:** DeepSeek-V4-Pro
+    - **Priority:** High
+    - **Created:** 2026-05-23 14:30
+    - **Modified:** 2026-05-23 14:30
+    - **Summary:** Complete inventory of all discoveries across FORMULA v2.2 (57 Qs) and v4 (7 phases), including biological validation (superradiance + drift), open questions, and remaining gaps.
 
  - [ ] **[05-16-2026-09-38_CODERABBIT_FULL_AUDIT.md](reports/05-16-2026-09-38_CODERABBIT_FULL_AUDIT.md)** ⚠️ `698ef3f5...`
    - **Section:** #report
