@@ -1,0 +1,50 @@
+==============================================================================
+EXP 34: ZETA ZERO EIGENBASIS ù Hilbert-Polya via .holo
+==============================================================================
+
+  First 20 zeta zeros: ['14.1347', '21.0220', '25.0109', '30.4249', '32.9351']...
+
+  Building prime grating from explicit formula...
+  Grating: 65,536 positions, 1.0s
+
+  EIGENVALUE SPECTRUM:
+  D_pr = 1.49  (out of L=1024)
+     i         lambda        cum      log10
+     0       7.616212     0.8094     0.8817
+     1       1.069149     0.9231     0.0290
+     2       0.230845     0.9476    -0.6367
+     3       0.164046     0.9650    -0.7850
+     4       0.093214     0.9749    -1.0305
+     5       0.056589     0.9809    -1.2473
+     6       0.045243     0.9858    -1.3444
+     7       0.030218     0.9890    -1.5197
+     8       0.022640     0.9914    -1.6451
+     9       0.020315     0.9935    -1.6922
+    10       0.012062     0.9948    -1.9186
+    11       0.010893     0.9960    -1.9629
+    12       0.010395     0.9971    -1.9832
+    13       0.007283     0.9979    -2.1377
+    14       0.005127     0.9984    -2.2902
+    15       0.004529     0.9989    -2.3440
+    16       0.004125     0.9993    -2.3846
+    17       0.002665     0.9996    -2.5743
+    18       0.001977     0.9998    -2.7041
+    19       0.001569     1.0000    -2.8044
+
+  KNOWN ZETA ZERO SPACING STATISTICS:
+  Mean spacing ratio = 0.6190
+  GUE expected: 0.603   GOE expected: 0.536
+
+  ZETA ZEROS vs .holo EIGENVALUES:
+  Zeta zeros (first 8): ['14.13', '21.02', '25.01', '30.42', '32.94', '37.59', '40.92', '43.33']
+  .holo eigenvalues (top 8): ['7.6162', '1.0691', '0.2308', '0.1640', '0.0932', '0.0566', '0.0452', '0.0302']
+  Zeta zero spacing ratio: 0.6190
+  .holo eigenvalue spacing ratio: 0.0000
+
+  HILBERT-POLYA MATRIX CONSTRUCTION:
+  Assume zeta zeros are eigenvalues of a Hermitian H.
+  Construct H = U @ diag(gammas) @ U^H with random unitary U.
+  Check: is H Hermitian? (Always, by construction).
+  Check: do eigenvalues of H exactly match input gammas?
+  H is Hermitian: max|H - H^H| = 4.37e-15
+  Eigenvalue recovery error: 5.68e-14
