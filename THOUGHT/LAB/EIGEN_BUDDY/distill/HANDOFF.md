@@ -76,7 +76,7 @@ The CE+Kuramoto approach with manual SGD that used `.backward()` produces correc
 
 ### The Sandbox Proof (PROVEN)
 
-**File:** `sandbox/torus_proof.py`
+**File:** `sandbox/physics/torus_proof.py`
 **What it proves:** Three physical laws on synthetic tensors (no models, no .holo):
 - Law 1: Hebbian outer product + S^1 normalization eliminates Euclidean leakage
 - Law 2: 46.2° Kuramoto carrier + coupling produces non-zero phase updates
@@ -198,7 +198,8 @@ THOUGHT/LAB/EIGEN_BUDDY/
 │   ├── test_weights.py        Verify distilled structure
 │   ├── test_inject.py         Test eigenbasis injection
 │   ├── sandbox/
-│   │   └── torus_proof.py     ★ PROVEN: 3 physical laws on synthetic tensors
+│   │   ├── physics/
+│   │   │   └── torus_proof.py     ★ PROVEN: 3 physical laws on synthetic tensors
 │   ├── train/
 │   │   ├── train_code.py      ★ WORKING: CE+Kuramoto, manual SGD, phrase pairs
 │   │   ├── train_humaneval.py Multi-layer HumanEval (NaN issues)
@@ -386,7 +387,7 @@ python distill_qwen.py --model F:/path/to/model --k 128
 python train/train_code.py
 
 # Run torus proof
-python sandbox/torus_proof.py
+python sandbox/physics/torus_proof.py
 
 # Evaluate HumanEval
 python eval/eval_humaneval.py
