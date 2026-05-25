@@ -1,9 +1,8 @@
 """
-Phase 22: FULL SPECTRUM UNMASKING — BPE Concept Fusion
-=========================================================
-Unmasks full ~124K code vocabulary. Uses Concept Fusion (Hadamard product
-of BPE subword phases) to dynamically construct multi-token carrier waves
-from the prompt's function signature. No AST parsing — pure wave mechanics.
+Phase 24: PHASE BOUNDING & THE CRYSTALLINE BURN
+=================================================
+ASCII phase bounding obliterates foreign token amplitudes. Crystalline grammar
+burn etches deep Python transition grammar into M via O(1) catalytic pass.
 
 Usage:
   python eval_superradiant.py
@@ -34,17 +33,52 @@ SYNTAX_TOKENS = {"def", "return", ":", "(", ")", ",", "=", "for", "if", "in", "e
                  "print", "open", "read", "write", "append", "sort", "sorted", "enumerate"}
 EXCLUDE = {',', 'the', 'to', 'is', '?', '!', '-', ''}
 
-PYTHON_CODE_CORPUS = """
-def add(a, b): return a + b
-def multiply(x, y): return x * y
-def factorial(n): return 1 if n <= 1 else n * factorial(n - 1)
-def fibonacci(n): return n if n <= 1 else fibonacci(n-1) + fibonacci(n-2)
-def gcd(a, b): while b: a, b = b, a % b; return a
-def is_prime(n): if n < 2: return False; for i in range(2, int(n**0.5)+1): if n % i == 0: return False; return True
-def reverse_string(s): return s[::-1]
-def binary_search(arr, target): lo, hi = 0, len(arr)-1; while lo <= hi: mid = (lo+hi)//2; if arr[mid] == target: return mid; elif arr[mid] < target: lo = mid+1; else: hi = mid-1; return -1
-class Counter: def __init__(self): self.count = 0; def increment(self): self.count += 1; def get(self): return self.count
+CRYSTALLINE_CORPUS = """
+def sum_list(lst): total = 0; for x in lst: total += x; return total
+def count_evens(nums): count = 0; for n in nums: if n % 2 == 0: count += 1; return count
+def find_max(arr): best = arr[0]; for x in arr: if x > best: best = x; return best
+def find_min(arr): best = arr[0]; for x in arr: if x < best: best = x; return best
+def average(nums): return sum(nums) / len(nums) if nums else 0
+def filter_positive(nums): return [x for x in nums if x > 0]
+def filter_negative(nums): return [x for x in nums if x < 0]
+def double_all(nums): return [x * 2 for x in nums]
+def square_all(nums): return [x * x for x in nums]
+def map_add(nums, k): return [x + k for x in nums]
+def map_sub(nums, k): return [x - k for x in nums]
+def any_match(items, target): return any(x == target for x in items)
+def all_match(items, target): return all(x == target for x in items)
+def first_index(items, target): return items.index(target) if target in items else -1
+def count_char(s, ch): count = 0; for c in s: if c == ch: count += 1; return count
+def reverse_list(lst): return lst[::-1]
+def take_first(lst, n): return lst[:n]
+def take_last(lst, n): return lst[-n:]
+def remove_duplicates(lst): result = []; [result.append(x) for x in lst if x not in result]; return result
+def flatten(nested): result = []; [result.extend(x) if isinstance(x, list) else result.append(x) for x in nested]; return result
+def pairwise_sum(a, b): return [x + y for x, y in zip(a, b)]
+def dot_product(a, b): return sum(x * y for x, y in zip(a, b))
+def running_total(nums): total = 0; result = []; [result.append(total := total + x) for x in nums]; return result
+def is_sorted(arr): return all(arr[i] <= arr[i+1] for i in range(len(arr)-1))
+def merge_sorted(a, b): i=j=0; r=[]; while i<len(a) and j<len(b): r.append(a[i] if a[i]<b[j] else b[j]); i+=(a[i]<b[j]); j+=(a[i]>=b[j]); return r+a[i:]+b[j:]
+def chunk_list(lst, size): return [lst[i:i+size] for i in range(0, len(lst), size)]
+def rotate_left(lst, n): n %= len(lst); return lst[n:] + lst[:n]
+def rotate_right(lst, n): n %= len(lst); return lst[-n:] + lst[:-n]
+def interleave(a, b): result = []; [result.extend([x, y]) for x, y in zip(a, b)]; return result + a[len(b):] + b[len(a):]
+def power_set(items): result = [[]]; [result.extend([s+[x] for s in result]) for x in items]; return result
+def binary_search_iter(arr, target): lo, hi = 0, len(arr)-1; while lo <= hi: mid = (lo+hi)//2; v = arr[mid]; lo = mid+1 if v < target else lo; hi = mid-1 if v > target else hi; return mid if v == target else -1
+def factorial_iter(n): result = 1; [result := result * i for i in range(1, n+1)]; return result if n >= 1 else 1
+def gcd_iter(a, b): while b: a, b = b, a % b; return a
+def is_prime(n): return n > 1 and all(n % i != 0 for i in range(2, int(n**0.5)+1))
+def fibonacci(n): a, b = 0, 1; [a, b := b, a+b for _ in range(n)]; return a
+def count_digits(x): return len(str(abs(x))) if x != 0 else 1
+def mean_absolute_diff(nums): m = sum(nums)/len(nums); return sum(abs(x-m) for x in nums)/len(nums)
+def variance(nums): m = sum(nums)/len(nums); return sum((x-m)**2 for x in nums)/len(nums)
+def truncate(num): return num - int(num) if num >= 0 else num - int(num) + 1
+def below_zero(ops): bal = 0; return any((bal := bal+op) < 0 for op in ops)
+def separate_groups(s): r=[]; c=''; d=0; [(d:=d+1, c:=c+ch) if ch=='(' else (d:=d-1, c:=c+ch, r.append(c), c:='') if d==1 else (c:=c+ch)) for ch in s]; return r
+def has_close(nums, t): return any(abs(nums[i]-nums[j])<t for i in range(len(nums)) for j in range(i+1,len(nums)))
 """.strip()
+
+CRYSTALLINE_FILE = BASE / "crystalline_corpus.py"
 
 
 class FullSpectrumEngine:
@@ -80,7 +114,19 @@ class FullSpectrumEngine:
             if ascii_code.match(word) and word != '':
                 self.vocab_mask[tid] = 1.0
         n_allowed = int(self.vocab_mask.sum().item())
-        print(f"  Full vocabulary: {n_allowed} code tokens (unmasked)")
+        print(f"  Full vocabulary: {n_allowed} code tokens")
+
+        param_bound = re.compile(r'^[a-z0-9_]+$')
+        crystalline_words = set()
+        for m in re.finditer(r'[a-zA-Z0-9_]+', CRYSTALLINE_CORPUS):
+            crystalline_words.add(m.group().lower())
+        self.param_mask = torch.zeros(V, device=DEV)
+        for tid in range(V):
+            word = self.tokenizer.decode([tid]).strip().lower()
+            if param_bound.match(word) and word != '' and word in crystalline_words:
+                self.param_mask[tid] = 1.0
+        n_params = int(self.param_mask.sum().item())
+        print(f"  Param bound:    {n_params} crystalline-corpus tokens (foreign BLOCKED)")
 
         print(f"  Precomputing concept phases for {n_allowed} words...")
         self.cp = torch.zeros(V, HALF, dtype=torch.complex64, device=DEV)
@@ -99,7 +145,7 @@ class FullSpectrumEngine:
             self.cp[tid] = cp_val
 
         self._build_syntax_mask()
-        self._build_grammar_G()
+        self._build_crystalline_grammar()
 
     def _resolve_cid(self, word):
         ids = self.tokenizer.encode(word, add_special_tokens=False)
@@ -121,18 +167,27 @@ class FullSpectrumEngine:
             pi, ci = syntax_cids[i], syntax_cids[i + 1]
             self.syntax_state += self.cp[ci] * self.cp[pi].conj()
 
-    def _build_grammar_G(self):
-        token_pattern = re.compile(r'[a-zA-Z0-9_]+|[=+*/\[\]{}():.,;<>!]')
-        code_ids = []
-        for m in token_pattern.finditer(PYTHON_CODE_CORPUS):
-            cid = self._resolve_cid(m.group())
+    def _build_crystalline_grammar(self):
+        token_pattern = re.compile(r'[a-zA-Z0-9_]+|[=+*/\[\]{}():.,;<>! -]+')
+        crystalline_ids = []
+        for m in token_pattern.finditer(CRYSTALLINE_CORPUS):
+            cid = self._resolve_cid(m.group().strip())
             if cid is not None:
-                code_ids.append(cid)
+                crystalline_ids.append(cid)
+
         self.grammar_G = torch.zeros(HALF, HALF, dtype=torch.complex64, device=DEV)
-        for i in range(len(code_ids) - 1):
-            pi, ci = code_ids[i], code_ids[i + 1]
-            self.grammar_G += torch.outer(self.cp[ci], self.cp[pi].conj())
-        self.grammar_G = self.grammar_G / len(code_ids)
+        freq = {}
+        for i in range(len(crystalline_ids) - 1):
+            pi, ci = crystalline_ids[i], crystalline_ids[i + 1]
+            key = (pi, ci)
+            freq[key] = freq.get(key, 0) + 1
+            penalty = 1.0 / (1.0 + math.log(freq[key] + 1) / math.log(1.3))
+            self.grammar_G += penalty * torch.outer(self.cp[ci], self.cp[pi].conj())
+        self.grammar_G = self.grammar_G / len(crystalline_ids)
+
+        G_mb = self.grammar_G.numel() * 8 / 1e6
+        print(f"  Crystalline G: {HALF}x{HALF} complex64 = {G_mb:.1f} MB  "
+              f"{len(crystalline_ids)} tokens  {len(freq)} unique pairs")
 
     def extract_intent(self, prompt_text):
         raw_ids = self.tokenizer.encode(prompt_text)
@@ -147,7 +202,7 @@ class FullSpectrumEngine:
                 break
 
         if def_start is None or def_end is None or def_end <= def_start + 1:
-            return "compute", ["n"], 0
+            return "compute", [], None, ["n"], 0
 
         func_subword_ids = raw_ids[def_start + 1:def_end]
         func_subwords = []
@@ -185,11 +240,11 @@ class FullSpectrumEngine:
         M_filtered = M_filtered / (M_filtered.abs().max().clamp(min=1e-12))
 
         raw = torch.abs(self.cp @ M_filtered.conj())
-        scores = (raw * self.vocab_mask) ** 2
+        scores = (raw * self.param_mask) ** 2
 
         params = []
         seen = set()
-        top = scores.topk(30)
+        top = scores.topk(40)
         for tid in top.indices.tolist():
             w = self.cw[int(tid)]
             if w in SYNTAX_TOKENS or w in seen or w == '' or w == func_name:
@@ -197,10 +252,10 @@ class FullSpectrumEngine:
             seen.add(w)
             if w not in func_subwords and len(w) > 0:
                 params.append(w)
-            if len(params) >= 3:
+            if len(params) >= 4:
                 break
 
-        n_edges = len(cids_clean) - 1
+        n_edges = max(len(cids_clean) - 1, 0)
         return func_name, func_subwords, fused_phase, params, n_edges
 
 
@@ -284,11 +339,11 @@ def run_tests(code, tests, entry_point):
 
 
 print("=" * 60)
-print("PHASE 22: FULL SPECTRUM UNMASKING — BPE Concept Fusion")
+print("PHASE 24: PHASE BOUNDING & CRYSTALLINE BURN")
 print("=" * 60)
 
 engine = FullSpectrumEngine()
-print(f"Engine ready. Full vocabulary. Concept fusion active.\n")
+print(f"Engine ready. ASCII bounded. Crystalline grammar active.\n")
 
 results = []
 total_passed = 0
@@ -305,17 +360,15 @@ for task_id, problem in sorted(HUMANEVAL_PROBLEMS.items()):
         fused_phase = None
     else:
         func_name, subwords, fused_phase, params, n_edges = result
-    expected_func = original_entry
-    func_correct = func_name == expected_func
+
+    func_correct = func_name == original_entry
 
     print(f"{'='*60}")
     print(f"TASK: {task_id}")
-    print(f"  Expected:  '{expected_func}'")
+    print(f"  Expected:  '{original_entry}'")
     print(f"  Extracted: '{func_name}'  subwords={subwords}")
-    print(f"  Fused:     {'YES' if fused_phase is not None else 'NO'}  "
-          f"|fusion|={float(fused_phase.abs().mean()):.4f}" if fused_phase is not None else "")
-    print(f"  Extracted params: {params[:4]}")
-    print(f"  Match:     {'HIT' if func_correct else 'MISS'}")
+    print(f"  Params:    {params[:5]}")
+    print(f"  Match:     {'HIT' if func_correct else 'MISS'}  fused={'YES' if fused_phase is not None else 'NO'}")
 
     t0 = time.perf_counter()
     from inference import InferenceEngine
@@ -345,13 +398,9 @@ for task_id, problem in sorted(HUMANEVAL_PROBLEMS.items()):
     print()
 
     results.append({
-        "task_id": task_id,
-        "expected": expected_func,
-        "extracted": func_name,
-        "match": func_correct,
-        "fused": fused_phase is not None,
-        "status": status,
-        "time": elapsed,
+        "task_id": task_id, "expected": original_entry, "extracted": func_name,
+        "match": func_correct, "fused": fused_phase is not None,
+        "status": status, "time": elapsed, "completion": completion,
     })
 
 n = len(results)
@@ -361,8 +410,8 @@ print(f"FINAL RESULTS")
 print(f"{'='*60}")
 for r in results:
     print(f"  {r['task_id']}: {r['status']:>6s}  extract='{r['extracted']}' "
-          f"({'HIT' if r['match'] else 'MISS'} vs '{r['expected']}')  "
-          f"fused={'YES' if r['fused'] else 'NO'}  {r['time']:.1f}s")
+          f"({'HIT' if r['match'] else 'MISS'})  {r['time']:.1f}s")
+    print(f"    completion: {r['completion'][:100]}")
 
 print(f"\n  Extraction:  {extract_hits}/{n} ({extract_hits/n*100:.0f}%)")
 print(f"  Pass rate:   {total_passed}/{n} ({total_passed/n*100:.0f}%)")

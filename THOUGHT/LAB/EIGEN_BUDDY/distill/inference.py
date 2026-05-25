@@ -328,12 +328,12 @@ class InferenceEngine:
 
             if not intent_consumed:
                 intent_consumed = True
-                carrier_active = set(params_list[:3]) | {":", "return"}
+                carrier_active = set(params_list[:3]) | {":"}
                 carrier_active.discard("")
                 Phase_carrier = self._sum_phases(carrier_active)
                 carrier_shifted = True
                 anneal_offset = step + 1
-                skip_set = {"def", ":", ",", "return"}
+                skip_set = {"def", ":", ",", "return", "True", "False", "None", "pass"}
 
             if carrier_shifted and chosen_word in carrier_active:
                 carrier_active.discard(chosen_word)
@@ -342,16 +342,20 @@ class InferenceEngine:
                     anneal_offset = step + 1
                 else:
                     params_consumed = True
-                    Phase_carrier = torch.zeros(HALF, dtype=torch.complex64, device=DEV)
+                    delay_steps = 2
                     GAMMA = 0.0
                     carrier_shifted = False
+
+            if delay_steps > 0:
+                delay_steps -= 1
+                if delay_steps == 0:
+                    GAMMA = 0.0
 
             skip_set.add(chosen_word)
             if carrier_shifted:
                 for sym in params_list[:3]:
                     skip_set.discard(sym)
-                for sym in [":", "return"]:
-                    skip_set.discard(sym)
+                skip_set.discard(":")
 
             new_tok = torch.tensor([[chosen_id]], device=DEV)
             ids = torch.cat([ids, new_tok], dim=1)

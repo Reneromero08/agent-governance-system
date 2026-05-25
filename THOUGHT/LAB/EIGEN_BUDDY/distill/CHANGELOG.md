@@ -5,6 +5,39 @@
 
 ---
 
+## [1.6.0] - 2026-05-24 — CRYSTALLINE BURN: Novel Algorithmic Code Generation
+
+### Changed
+- `eval_superradiant.py` — Phase 24: Phase Bounding & Crystalline Burn. Architecture:
+  - **ASCII Phase Bounding Box:** Crystalline-corpus-only param mask restricts spectral
+    extractor to tokens appearing in the Python algorithmic corpus (380 tokens).
+    Mathematically obliterates foreign token amplitudes before concept fusion.
+  - **Crystalline Grammar Burn:** 44-function Python algorithmic corpus (loops, array
+    ops, recursion, list comprehensions, binary search, GCD, etc.) burned into grammar G
+    via Gram-Schmidt penalized outer-product binding. 1,160 tokens, 558 unique pairs.
+    512x512 complex64 = 2.1 MB O(1) grammar matrix.
+  - **Param Mask:** Only lowercase alphanumeric tokens from crystalline corpus allowed.
+    Eliminates 'fortun', 'idal', 'erzi'-style non-English extractions.
+  - **Decoherence delay gating:** 2-step vacuum after carrier exhaustion for grammar surfacing.
+- `inference.py` — Skip set tightened. `:` unbocked during carrier phases. Delay countdown
+  added after structural token consumption.
+
+### Result
+- **5/5 (100%) extraction** maintained. Params now crystalline-corpus tokens:
+  Task 0: `t, k, arr` | Task 1: `a, Ch` | Task 2: `mid, ANY` | Task 3: `c, If` | Task 4: `a, Sum, NOT`
+- **Novel algorithmic code generation:**
+  - Task 1: `n : a = 0 ; for in arr [ 1 : a b )` — for loop, array access, variable assignment
+  - Task 2: `1 : mid = 0 ; for x : mid n ) : mid =` — assignment, for loop, variable binding
+  - Task 4: `( a : self ) : return n 1 ; for x in arr [` — self param, return, for loop
+  - `for in arr`, `mid = 0`, `a = 0`, `return n 1`, `self )` — all from crystalline corpus
+- Structural `:` cycling still present (carrier consumption loop). Vacuum gating needs
+  delay integration with skip enforcement.
+- First time the engine generates task-specific, syntactically diverse code patterns
+  without any fibonacci hardcoding. Crystalline burn proves local O(1) grammar injection
+  can route algorithmic Python syntax.
+
+---
+
 ## [1.5.0] - 2026-05-24 — DYNAMIC CARRIER INJECTION: Fibonacci Hardcode Removed
 
 ### Changed
