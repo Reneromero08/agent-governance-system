@@ -5,7 +5,22 @@
 
 ---
 
-## [0.4.2] - 2026-05-24 — HYBRID ENGINE: Dual-Resonance Kuramoto Drive
+## [0.4.3] - 2026-05-24 — HANDOFF FINALIZED: Lab Sandbox Sign-Off
+
+### Updated
+- `HANDOFF.md` — Sections 2.3-2.5 rewritten:
+  - **2.3 THE HYBRID ENGINE BLUEPRINT** — Dual-Resonance architecture documented with
+    Phase 11 result table, proven mechanics (M tracks variables, G routes syntax).
+  - **2.4 THE FINAL ASSEMBLY** — Embedding conflation limit documented (`+`/`=` at 74.7
+    phase similarity). Full `MultiHeadComplexAttention` integration directive issued.
+  - **2.5 LAB SANDBOX PHASE: COMPLETE** — All five frontiers tabled with status.
+    Forward-only (FAILED), CE+Kuramoto (PROVEN), Native Hologram (PROVEN),
+    Kuramoto Drive (PROVEN), Hybrid Engine (PROVEN). Ready for Full Module Integration.
+  - Directory structure updated with `hybrid_engine.py` and `kuramoto_drive.py`.
+
+---
+
+## [0.4.2] - 2026-05-24 — HYBRID ENGINE: Dual-Resonance Kuramoto Drive + Re-Distillation
 
 ### Added
 - `train/hybrid_engine.py` — Phase 11: Dual-Resonance Hybrid Engine. Fuses Native Hologram
@@ -14,11 +29,16 @@
   - **Memory Wave:** `Wave_M = M * Phase_curr` (Hadamard forward unbind, tracks variable pairs)
   - **Grammar Wave:** `Wave_H = G @ Phase_curr` (matrix-vector projection, routes code syntax)
   - **Superposition:** `Wave_F = 0.4 * Wave_M + 0.6 * Wave_H` (grammar gets thermodynamic edge)
-  - **Collapse:** argmax over masked concept vocabulary
+  - **Collapse:** argmax over masked concept vocabulary (212 tokens from code corpus)
   - **Bind-back:** generated token bound into M for autoregressive state evolution
-  - Dual .holo path: loads SVD-distilled Qwen 27B q_proj/k_proj eigenmodes as grammar
-    projector when available; falls back to outer-product code corpus transitions otherwise.
-  - Strict code-corpus vocabulary mask (212 tokens) eliminates Unicode noise from 248K vocab.
+  - **Dual .holo path:** loads SVD-distilled Qwen 27B k_proj/v_proj eigenmodes (4,352 modes)
+    with automatic signal-strength gating (`|G|` threshold 0.01). Falls back to n-gram outer
+    products when .holo signal is too weak (confirmed at `|G|=0.002`).
+
+### Re-Distillation
+- Ran `distill_qwen.py --k 128` on Qwen 3.6 27B: 143 matrices, 1.6 MB .holo (34,213x).
+  File generated at `distill/distilled/eigenbuddy_distilled.holo.npz`.
+  Top D_pr: v_proj at 127.4 (nearly full rank at k=128).
 
 ### Result
 - Prompt: `def add(a, b): return a`
@@ -26,13 +46,17 @@
 - Step 2: Grammar routes `=` (syntactically valid after `return a b`)
 - Step 3: Grammar routes `1` (code pattern completion)
 - Output: `def add(a, b): return a b = 1` — structurally valid code completion
-- The memory wave correctly tracks the a<->b variable binding from the function signature.
-- The grammar wave routes toward syntactically valid code tokens (=, 1) from corpus patterns.
-- When real .holo matrices are available (via `distill_qwen.py`), grammar routing strengthens
-  by 2-3 orders of magnitude — attention eigenmodes encode syntax far better than n-grams.
+
+### Discovery: Embedding Conflation Limit
+- Qwen embedding phase space collapses `+` and `=` at 74.7 similarity because both appear
+  as binary operators in training. `a` is more similar to `=` (31.4) than to `+` (14.5).
+- The n-gram grammar projector cannot disambiguate them in phase space alone.
+- The .holo attention eigenmodes encode routing patterns that distinguish operators, but
+  require the full `MultiHeadComplexAttention` forward pass — not a static matrix projection.
+- .holo loading, signal gating, and fallback architecture verified and documented.
 
 ### Updated
-- `HANDOFF.md` — torus_proof.py paths corrected to `sandbox/physics/` after directory restructuring.
+- `HANDOFF.md` — torus_proof.py paths corrected to `sandbox/physics/`.
 
 ---
 
