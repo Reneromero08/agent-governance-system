@@ -57,10 +57,14 @@ import os; os.path.join('a', 'b')
 """.strip()
 
 GRAMMAR_BOOST_VACUUM = 5.0
-HOLO_WEIGHT = 0.40
-GRAM_WEIGHT = 0.60
-VACUUM_HOLO = 0.15
-VACUUM_GRAM = 0.85
+HOLO_WEIGHT = 0.45
+GRAM_WEIGHT = 0.25
+ATTN_WEIGHT = 0.15
+CARR_WEIGHT = 0.15
+VACUUM_HOLO = 0.55
+VACUUM_GRAM = 0.30
+VACUUM_ATTN = 0.15
+M_DEPLETE = 0.6
 
 
 class InferenceEngine:
@@ -325,9 +329,9 @@ class InferenceEngine:
             if in_vacuum:
                 gram_probs = gram_probs * GRAMMAR_BOOST_VACUUM
                 gram_probs = gram_probs / gram_probs.sum().clamp(min=1e-12)
-                combined = VACUUM_HOLO * holo_probs + VACUUM_GRAM * gram_probs
+                combined = VACUUM_HOLO * holo_probs + VACUUM_GRAM * gram_probs + VACUUM_ATTN * attn_probs
             else:
-                combined = attn_probs * 0.05 + holo_probs * HOLO_WEIGHT + gram_probs * GRAM_WEIGHT + carrier_probs * 0.55
+                combined = ATTN_WEIGHT * attn_probs + HOLO_WEIGHT * holo_probs + GRAM_WEIGHT * gram_probs + CARR_WEIGHT * carrier_probs
 
             combined = combined / combined.sum()
             top5_vals, top5_ids = combined.topk(6)
@@ -350,6 +354,10 @@ class InferenceEngine:
             cp_new = self.concept_phases[chosen_id]
             cp_prev = self.concept_phases[last_tid]
             holo_m += cp_new * cp_prev.conj()
+            if chosen_id < len(self.concept_phases) and self.vocab_mask[chosen_id] > 0:
+                depletion = M_DEPLETE + step * 0.02
+                holo_m = holo_m - depletion * self.concept_phases[chosen_id]
+                holo_m = holo_m / (holo_m.abs().max().clamp(min=1e-12))
 
             if cassette is not None:
                 theta = math.pi * 0.6180339887498949
@@ -427,8 +435,8 @@ if __name__ == "__main__":
 
     engine = InferenceEngine()
     print(f"Grammar boost (vacuum): {GRAMMAR_BOOST_VACUUM}x  depth_map: [1->'1', 2->'2']")
-    print(f"Weights: holo={HOLO_WEIGHT} gram={GRAM_WEIGHT}")
-    print(f"Vacuum: holo={VACUUM_HOLO} gram={VACUUM_GRAM}")
+    print(f"Weights: holo={HOLO_WEIGHT} gram={GRAM_WEIGHT} attn={ATTN_WEIGHT} carr={CARR_WEIGHT}  M_deplete={M_DEPLETE}")
+    print(f"Vacuum: holo={VACUUM_HOLO} gram={VACUUM_GRAM} attn={VACUUM_ATTN}")
 
     prompt = (
         'def fibonacci ( n ) : \n'
