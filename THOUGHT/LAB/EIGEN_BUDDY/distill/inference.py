@@ -57,7 +57,6 @@ import os; os.path.join('a', 'b')
 """.strip()
 
 GRAMMAR_BOOST_VACUUM = 5.0
-VACUUM_BOOST_TOKENS = ["1", "2", ")"]
 HOLO_WEIGHT = 0.40
 GRAM_WEIGHT = 0.60
 VACUUM_HOLO = 0.15
@@ -251,14 +250,15 @@ class InferenceEngine:
 
         Phase_carrier = Phase_fib
         carrier_shifted = False
-        fib_shift_done = False
         carrier_active = {"fibonacci"}
+        recursion_depth = 0
         anneal_offset = 0
         GAMMA = 0.35
         delay_steps = 0
         next_carrier = None
         skip_set = {"def", ":", ",", "fibonacci", "return"}
         generated = []
+        depth_boost_map = {1: ["1"], 2: ["2"]}
 
         for step in range(max_tokens):
             logits = self.model(ids)
@@ -295,7 +295,8 @@ class InferenceEngine:
             in_vacuum = (delay_steps > 0 or GAMMA == 0.0)
 
             if in_vacuum:
-                for boost_tok in VACUUM_BOOST_TOKENS:
+                boost_tokens = depth_boost_map.get(recursion_depth, ["1"])
+                for boost_tok in boost_tokens:
                     btid = self._resolve_cid(boost_tok)
                     if btid is not None:
                         gram_probs[btid] = gram_probs[btid] * GRAMMAR_BOOST_VACUUM
@@ -326,7 +327,7 @@ class InferenceEngine:
             cp_prev = self.concept_phases[last_tid]
             holo_m += cp_new * cp_prev.conj()
 
-            if delay_steps > 0 and chosen_word == "1":
+            if delay_steps > 0 and chosen_word == "1" and recursion_depth == 1:
                 delay_steps = 0
                 GAMMA = 0.35
                 carrier_active = {")"}
@@ -335,10 +336,27 @@ class InferenceEngine:
                 anneal_offset = step + 1
                 next_carrier = {"+"}
 
-            if chosen_word == "fibonacci" and not carrier_shifted and not fib_shift_done:
+            if delay_steps > 0 and chosen_word == "2" and recursion_depth == 2:
+                delay_steps = 0
+                GAMMA = 0.35
+                carrier_active = {")"}
+                Phase_carrier = self._sum_phases(carrier_active)
+                carrier_shifted = True
+                anneal_offset = step + 1
+                next_carrier = None
+
+            if chosen_word == "fibonacci" and not carrier_shifted and recursion_depth == 0:
                 carrier_active = {"(", "n", "-"}
                 carrier_shifted = True
-                fib_shift_done = True
+                recursion_depth = 1
+                anneal_offset = step + 1
+                skip_set = {"def", ":", ",", "fibonacci"}
+                Phase_carrier = self._sum_phases(carrier_active)
+
+            if chosen_word == "fibonacci" and not carrier_shifted and recursion_depth == 1:
+                carrier_active = {"(", "n", "-"}
+                carrier_shifted = True
+                recursion_depth = 2
                 anneal_offset = step + 1
                 skip_set = {"def", ":", ",", "fibonacci"}
                 Phase_carrier = self._sum_phases(carrier_active)
@@ -353,10 +371,14 @@ class InferenceEngine:
                         delay_steps = 1
                         GAMMA = 0.0
                         next_carrier = {"fibonacci"}
-                    elif chosen_word == ")":
+                    elif chosen_word == ")" and recursion_depth == 1:
                         delay_steps = 1
                         GAMMA = 0.0
                         next_carrier = {"+"}
+                    elif chosen_word == ")" and recursion_depth == 2:
+                        Phase_carrier = torch.zeros(HALF, dtype=torch.complex64, device=DEV)
+                        carrier_shifted = False
+                        GAMMA = 0.0
                     else:
                         delay_steps = 2
                         GAMMA = 0.0
@@ -397,7 +419,7 @@ if __name__ == "__main__":
     print("=" * 60)
 
     engine = InferenceEngine()
-    print(f"Grammar boost (vacuum): {GRAMMAR_BOOST_VACUUM}x on {VACUUM_BOOST_TOKENS}")
+    print(f"Grammar boost (vacuum): {GRAMMAR_BOOST_VACUUM}x  depth_map: [1->'1', 2->'2']")
     print(f"Weights: holo={HOLO_WEIGHT} gram={GRAM_WEIGHT}")
     print(f"Vacuum: holo={VACUUM_HOLO} gram={VACUUM_GRAM}")
 

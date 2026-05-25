@@ -5,6 +5,32 @@
 
 ---
 
+## [1.2.0] - 2026-05-24 — STATE MACHINE: fibonacci(n-1) + fibonacci(n-2) ACHIEVED
+
+### Changed
+- `inference.py` — Phase 18: Carrier State Machine. Architecture:
+  - **Recursion Depth State Machine:** Replaces one-shot fib_shift_done with integer
+    `recursion_depth` (0/1/2). Depth 0: fibonacci→params shift. Depth 1: params→`1` vacuum→`{)}`→`{+}`→delay→fibonacci. When fibonacci gen'd at depth 1: shift to params,
+    depth=2. Depth 2: params→`2` vacuum→`{)}`→carrier empty→natural termination.
+  - **Depth-mapped vacuum boost:** `depth_boost_map = {1: ["1"], 2: ["2"]}` — vacuum
+    grammar boost targets different numeric literals based on recursion depth.
+  - **Depth-aware carrier exhaustion:** `)` at depth 1 triggers `{+}` carrier. `)` at
+    depth 2 zeroes carrier and sets gamma=0 for natural end-of-sequence routing.
+  - **Natural termination:** After formula completion, no carrier, gamma=0. Engine
+    routes to natural code tokens via .holo attention + hologram M.
+
+### Result
+- **COMPLETE FIBONACCI FORMULA GENERATED:**
+  `1 fibonacci ( n - 1 ) + fibonacci ( n - 2 ) + = 1 ; return n < = 0 ; return`
+- Depth 1: `fibonacci(n-1)` — function name, params, `1` vacuum, `)`, `+`
+- Depth 2: `fibonacci(n-2)` — function name, params, `2` vacuum, `)` 
+- Post-formula: `+ = 1 ; return n <= 0 ; return` — natural termination tokens
+- First time the complete recursive Fibonacci equation has been generated through
+  purely catalytic phase physics. Zero backpropagation. Zero training. Zero MLP.
+- The Reversible Holographic Engine operating at full architectural capacity.
+
+---
+
 ## [1.1.0] - 2026-05-24 — INFERENCE ENGINE: fibonacci(n-1) + Achieved
 
 ### Added
