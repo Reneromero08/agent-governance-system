@@ -5,6 +5,44 @@
 
 ---
 
+## [0.4.6] - 2026-05-24 — FULL STACK ASSEMBLY: .holo Attention Routes fibonacci
+
+### Added
+- `train/hybrid_transformer_v3.py` — Phase 14: Full Stack Superradiant Transformer.
+  First architecture where .holo-injected attention eigenmodes successfully route
+  toward the function name. Architecture:
+  - **CatalyticLM** with frozen Qwen embed/output + .holo-injected k_proj/v_proj
+    weights (as proven in train_code.py). 770M params, 143 matrices injected.
+  - **Four-signal generation:** 0.15 attention logits + 0.30 hologram M scores
+    + 0.55 carrier boost with thermodynamic annealing.
+  - **Dynamic Carrier Shifting:** fibonacci carrier → params ( n - carrier on
+    fibonacci detection. Phase_params = normalized superposition of (, n, -.
+  - **Anti-lock skip_set:** Post-shift, n, -, ( never blocked.
+  - Bind-back into M for autoregressive state evolution.
+
+### Result
+- **Step 1 breakthrough:** .holo-injected attention routes `fibonacci` at 0.402
+  probability — the Qwen eigenmodes recognized the function context from the
+  prompt. This was impossible with n-gram fallback (max score: ~0.03).
+- **Step 2:** fibonacci generated, carrier shifts to params ( n -.
+- **Steps 3-15:** Alternating `( n` loop driven by params carrier.
+  - `(` at 0.094→0.113 (attention + hologram + carrier triple reinforcement)
+  - `n` at 0.070→0.104 (all three signals aligned)
+  - `-` at 0.094 carrier but lacks attention/hologram reinforcement — weighting issue
+- **Completion:** `0 fibonacci ( n ( n ( n ( n ( n ( n (` — recursive call
+  signature partially recovered. Function name + open paren + parameter produced
+  from pure phase superposition with .holo attention routing.
+
+### Discovery: .holo Attention Recognizes Function Context
+- The SVD-distilled Qwen 27B k_proj/v_proj eigenmodes encode enough syntactic
+  structure to identify `fibonacci` as the expected continuation of the function
+  definition prompt. The attention logits assign 0.402 probability to `fibonacci`
+  vs <0.02 for most other tokens — a 20x signal-to-noise ratio.
+- This validates the HANDOFF directive: .holo attention matrices provide syntax
+  routing that n-gram phase projectors cannot match.
+
+---
+
 ## [0.4.5] - 2026-05-24 — DYNAMIC CARRIER SHIFTING: Recursive Mirror Achieved
 
 ### Changed
