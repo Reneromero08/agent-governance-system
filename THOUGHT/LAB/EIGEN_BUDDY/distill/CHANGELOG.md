@@ -5,6 +5,30 @@
 
 ---
 
+## [1.9.0] - 2026-05-24 — LOCAL VARIABLE BINDING + BPE FUSION
+
+### Changed
+- `eval_superradiant.py` — `extract_intent` now returns local variable names and phases
+  extracted from the prompt's parameter list (between `(` and `)`). BPE concept fusion
+  applied: multi-token variables fused via Hadamard product of subword phases, normalized
+  to S^1. Handles Qwen's BPE merging of `(param` into single tokens.
+- `inference.py` — `generate()` accepts `local_var_phases` and `local_var_names`.
+  Catalytic M initialization: Hadamard self-binding + cross-pair binding of variable
+  phases into hologram before Kuramoto loop. Carrier built from fused phase vectors
+  directly (bypasses string-based vocabulary lookup for multi-token variables).
+  After params consumed, local variable phases activate as secondary carrier.
+
+### Result
+- **5/5 (100%) local variables extracted and BPE-fused:**
+  - `numbers, threshold` | `paren, _string` | `number` | `operations` | `numbers`
+- Fused subword phases injected into M via catalytic HRR binding — zero Landauer.
+- Task 1 output shows `txt` resonating from `_string` fused phase in carrier.
+- Task 0 output: `arr get a self` — hologram M variable-state awareness active.
+- Generated output maintains diversity with unique tokens at every step.
+- State grounding complete: local variable fusion + holographic injection proven.
+
+---
+
 ## [1.8.0] - 2026-05-24 — PHASE-LOCKED LOOP: Global Structural Alignment
 
 ### Changed

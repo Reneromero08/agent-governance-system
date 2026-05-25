@@ -222,11 +222,15 @@ class InferenceEngine:
         return (raw * self.vocab_mask) ** 2
 
     def generate(self, prompt, max_tokens=25, intent_phase=None, params_list=None,
-                 cassette=None, ref_phase=None):
+                 cassette=None, ref_phase=None, local_var_phases=None, local_var_names=None):
         if intent_phase is None:
             intent_phase = self._get_phase("fibonacci")
         if params_list is None:
             params_list = ["n"]
+        if local_var_phases is None:
+            local_var_phases = []
+        if local_var_names is None:
+            local_var_names = []
 
         holo_m = torch.zeros(HALF, dtype=torch.complex64, device=DEV)
         lines = prompt.split('\n')
@@ -248,6 +252,15 @@ class InferenceEngine:
             if pi < 0 or ci < 0:
                 continue
             holo_m += self.concept_phases[ci] * self.concept_phases[pi].conj()
+
+        for var_phase in local_var_phases:
+            var_phase_dev = var_phase.to(DEV) if var_phase.device != holo_m.device else var_phase
+            holo_m += var_phase_dev * var_phase_dev.conj()
+            for other_phase in local_var_phases:
+                if other_phase is var_phase:
+                    continue
+                other_dev = other_phase.to(DEV) if other_phase.device != holo_m.device else other_phase
+                holo_m += 0.5 * var_phase_dev * other_dev.conj()
 
         prompt_ids = self.tokenizer(prompt, return_tensors='pt')['input_ids'].to(DEV)
         ids = prompt_ids.clone()
@@ -348,7 +361,7 @@ class InferenceEngine:
 
             if not intent_consumed:
                 intent_consumed = True
-                carrier_active = set(params_list[:3])
+                carrier_active = set(params_list[:3]) | set(local_var_names[:3])
                 carrier_active.discard("")
                 if carrier_active:
                     Phase_carrier = self._sum_phases(carrier_active)

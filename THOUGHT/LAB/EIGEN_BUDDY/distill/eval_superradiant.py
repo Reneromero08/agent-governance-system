@@ -235,6 +235,46 @@ class FullSpectrumEngine:
 
         func_name = "".join(func_subwords) if func_subwords else "compute"
 
+        local_var_names = []
+        local_var_phases = []
+        paren_depth = 0
+        param_start = def_end if def_end else len(raw_ids)
+        param_tokens = []
+
+        if def_end and def_end < len(raw_ids):
+            first_w = self.tokenizer.decode([raw_ids[def_end]]).strip()
+            first_clean = first_w.lstrip('(').rstrip(')').rstrip(':').strip()
+            if first_clean and first_clean not in SYNTAX_TOKENS:
+                param_tokens.append(first_clean)
+
+        for i in range(def_end + 1, len(raw_ids)):
+            w = self.tokenizer.decode([raw_ids[i]]).strip()
+            if '(' in w:
+                paren_depth += w.count('(')
+            if ')' in w:
+                paren_depth -= w.count(')')
+                if paren_depth <= 0:
+                    if ')' in w:
+                        last_clean = w.rstrip(')').rstrip(':').strip()
+                        if last_clean and last_clean not in SYNTAX_TOKENS and last_clean != ',':
+                            param_tokens.append(last_clean)
+                    break
+            if w in SYNTAX_TOKENS or w == '' or w == ',':
+                continue
+            clean = w.strip().rstrip(':').strip()
+            if clean and clean not in SYNTAX_TOKENS and clean != ',':
+                param_tokens.append(clean)
+
+        for pname in param_tokens:
+            pids = self.tokenizer.encode(pname, add_special_tokens=False)
+            if not pids:
+                continue
+            cp = self.pv[pids[0]].clone()
+            for sid in pids[1:]:
+                cp = cp * self.pv[sid]
+            local_var_names.append(pname)
+            local_var_phases.append(cp)
+
         M_prompt = torch.zeros(HALF, dtype=torch.complex64, device=DEV)
         cids_clean = []
         for tid in raw_ids:
@@ -268,7 +308,7 @@ class FullSpectrumEngine:
                 break
 
         n_edges = max(len(cids_clean) - 1, 0)
-        return func_name, func_subwords, fused_phase, params, n_edges
+        return func_name, func_subwords, fused_phase, params, n_edges, local_var_names, local_var_phases
 
 
 HUMANEVAL_PROBLEMS = {
@@ -370,8 +410,14 @@ for task_id, problem in sorted(HUMANEVAL_PROBLEMS.items()):
         func_name, params, n_edges = result
         subwords = []
         fused_phase = None
-    else:
+        local_var_names = []
+        local_var_phases = []
+    elif len(result) == 5:
         func_name, subwords, fused_phase, params, n_edges = result
+        local_var_names = []
+        local_var_phases = []
+    else:
+        func_name, subwords, fused_phase, params, n_edges, local_var_names, local_var_phases = result
 
     func_correct = func_name == original_entry
 
@@ -380,6 +426,8 @@ for task_id, problem in sorted(HUMANEVAL_PROBLEMS.items()):
     print(f"  Expected:  '{original_entry}'")
     print(f"  Extracted: '{func_name}'  subwords={subwords}")
     print(f"  Params:    {params[:5]}")
+    local_vars_str = ", ".join(local_var_names) if local_var_names else "none"
+    print(f"  Local vars: {local_vars_str}")
     print(f"  Match:     {'HIT' if func_correct else 'MISS'}  fused={'YES' if fused_phase is not None else 'NO'}")
 
     t0 = time.perf_counter()
@@ -392,7 +440,9 @@ for task_id, problem in sorted(HUMANEVAL_PROBLEMS.items()):
                          intent_phase=fused_phase if fused_phase is not None else None,
                          params_list=params if params else ["n"],
                          cassette=engine.cassette,
-                         ref_phase=ref_phase)
+                         ref_phase=ref_phase,
+                         local_var_phases=local_var_phases,
+                         local_var_names=local_var_names)
     elapsed = time.perf_counter() - t0
 
     completion = " ".join(tokens)
