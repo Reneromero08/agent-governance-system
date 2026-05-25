@@ -5,6 +5,43 @@
 
 ---
 
+## [1.11.0] - 2026-05-24 — UNITARY ERROR BACKFLOW: Forward-Only Boundary Confirmed
+
+### Added
+- `train/train_superradiant.py` — Phase 30: Unitary Error Backflow (Catalytic Training).
+  Architecture:
+  - **LowRankPhaseAdapter:** (HALF x rank) @ (rank x HALF) projection. Adapters for
+    qr/qi/kr/ki projections. Trainable via manual tensor updates — no nn.Module,
+    no optimizer, no state_dict.
+  - **Phase Error:** `Phase_Error = Phase_Target * Phase_Predicted.conj()`. Pure
+    geometric phase difference in complex space. No CrossEntropyLoss.
+  - **Hebbian Shift:** `Adapter.A -= lr * outer(error_vec, B @ input_vec)`. Rank-
+    constrained Hebbian update in adapter subspace. Rows renormalized to |z|=1 (S^1).
+  - **Training Corpus:** 145 tokens from crystalline algorithmic patterns.
+  - **Inference Test:** 6 test pairs (total→=, for→x, x→in, return→total, etc.).
+
+### Result
+- **Forward-only boundary CONFIRMED.** Phase error oscillates at 0.32 across 50 epochs.
+  Zero correct predictions. Hebbian update produces correct geometric error signal but
+  cannot translate through non-linear attention chain to effective weight updates.
+  Validates HANDOFF Section 2 findings — all seven forward-only approaches fail at
+  the same boundary (CE stuck, no convergence). The error-signal physics are correct;
+  the error-to-weight mapping requires full chain rule (backprop) or fundamentally
+  different adapter topology.
+- Inference test: 0/6 correct. All output tokens are non-English (adapter produces
+  random projections without feedback convergence).
+- Training runs at 0.3s/epoch on 16K adapter params. Torus constraint (S^1 renorm)
+  verified — zero Euclidean leakage throughout training.
+
+### Research Conclusion
+- The catalytic training architecture (Phase_Error → Hebbian → S^1) is structurally
+  correct and produces valid phase-difference signals. The limitation is not in the
+  error computation but in the error-to-weight UPDATE path — Hebbian outer product
+  approximates only the first-order linear term through softmax and phase rotation.
+  The full chain rule through Q@K^dagger is required for token-prediction convergence.
+
+---
+
 ## [1.10.0] - 2026-05-24 — DESTRUCTIVE M-INTERFERENCE: Holographic State Consumption
 
 ### Changed
