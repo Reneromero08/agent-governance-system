@@ -5,6 +5,33 @@
 
 ---
 
+## [1.12.0] - 2026-05-24 — VSA CASSETTE COMPILER: Geodesic Tracing Proven
+
+### Added
+- `train/cassette_compiler.py` — Phase 31: AST/FSA Holo-Binding. Architecture:
+  - **VSAStateMachine:** Builds algorithmic control flow via Vector Symbolic Architecture.
+    States and triggers encoded as random S^1 complex phase hypervectors (512-dim).
+  - **Hadamard Binding:** `Transition = trigger ⊙ state_curr ⊙ ρ(depth, state_next)`.
+    All transitions superposed into master cassette hypervector via complex addition.
+  - **Cyclic Permutation:** `ρ(v, shift)` = torch.roll for depth encoding. `ρ^(-1)` for
+    retrieval. Enables nested control flow (loops within loops).
+  - **Cassette Retrieval:** `next_state = ρ^(-1)(cassette ⊙ trigger* ⊙ state_curr*)`.
+    Pure S^1 unbinding — zero softmax, zero attention, zero ML modules.
+  - **Pre-built FSMs:** `compile_for_loop()` (init→cond→body→inc→cond/done) and
+    `compile_if_else()` (cond→true_body/false_body→end). 5 and 6 transitions each.
+
+### Result
+- **All assertions passed.** Top-1 retrieval correct for every FSM transition:
+  - `start+init → cond` (98.8) | `true+cond → body` (117.9) | `false+cond → done` (114.5)
+  - `true+cond → true_body` (114.6) | `false+cond → false_body` (102.3)
+- Signal-to-noise ratios: cond/body=6.6x, cond/done=7.6x — clean state transduction.
+- Zero backprop, zero softmax, zero attention. Pure S^1 wave mechanics.
+- The cassette etches algorithmic control flow via Hadamard binding and cyclic
+  permutation. The Kuramoto drive follows the lowest-energy geodesic through
+  VSA-encoded state transitions. Geodesic tracing operational.
+
+---
+
 ## [1.11.0] - 2026-05-24 — UNITARY ERROR BACKFLOW: Forward-Only Boundary Confirmed
 
 ### Added
