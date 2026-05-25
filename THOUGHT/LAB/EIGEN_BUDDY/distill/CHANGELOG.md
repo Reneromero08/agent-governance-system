@@ -5,6 +5,19 @@
 
 ---
 
+## [0.5.0] - 2026-05-24 — LAB SIGN-OFF: Architectural Physics Exhausted
+
+### Updated
+- `HANDOFF.md` — Section 2.6 added: The Superradiant Transformer full stack blueprint.
+  Documents all three waves (Hologram M, .holo Attention, Dynamic Carrier), the
+  Superradiant Forward Pass architecture, Phase 14 breakthrough (.holo attention
+  routes fibonacci at 0.402), cybernetic shift mechanics, wave interference
+  weighting gap, and production coefficient tuning directives.
+- Directory structure updated with hybrid_transformer.py, v2, v3 entries.
+- Lab status: Architectural physics exhausted. Ready for coefficient tuning.
+
+---
+
 ## [0.4.6] - 2026-05-24 — FULL STACK ASSEMBLY: .holo Attention Routes fibonacci
 
 ### Added
