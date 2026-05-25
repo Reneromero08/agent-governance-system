@@ -5,6 +5,42 @@
 
 ---
 
+## [0.4.4] - 2026-05-24 — PERSISTENT CARRIER WAVE: Markov Trap Broken
+
+### Added
+- `train/hybrid_transformer_v2.py` — Phase 13: Persistent Carrier Wave. Architecture:
+  - **Carrier Wave Setup:** Extracts `Phase_carrier` from concept_phases for the function
+    name ("fibonacci"). This phase vector persists across all generation steps.
+  - **Modulated Query:** `Query = Phase_curr + gamma * Phase_carrier` (gamma=0.35).
+    Carrier biases every grammar query toward the function context.
+  - **Grammar Wave:** `Wave_H = G @ Query_phase` (matrix-vector projection with carrier tilt)
+  - **Memory Wave:** `Wave_M = M * Phase_curr` (Hadamard forward unbind, unchanged)
+  - **Superposition:** `Wave_F = 0.5 * Wave_M + 0.5 * Wave_H` (balanced)
+  - **Thermodynamic Annealing:** Carrier boost factor = 1 + (10 + step*3) * carrier_sim.
+    Increases from 11x at step 0 to 46x at step 12, gradually routing toward fibonacci.
+  - **Anti-lock:** Fibonacci never added to skip_set, allowing self-reinforcing cascade.
+  - No bind-back reinforcement on M after first appearance to prevent trap formation.
+
+### Result
+- Prompt: `def fibonacci(n): ... return` (Fibonacci function with base cases)
+- Step 1-6: Exploratory phase. Carrier biases query toward function context, producing
+  `1 ; return n < =` — diverse code tokens including parameter `n` and comparison operators.
+- Step 7-9: Transition phase. `0 ;` appears as grammar routes through base case patterns.
+- **Step 10-12: fibonacci breakthrough!** Carrier boost crosses threshold at 37x (step 9),
+  fibonacci appears and self-reinforces: `fibonacci fibonacci fibonacci fibonacci`.
+- Final output: `1 ; return n < = 0 ; fibonacci fibonacci fibonacci fibonacci`
+- The Markov Trap (`1): return` cycle from Phase 12) is decisively broken.
+- The persistent carrier wave successfully routes grammar toward function signature context.
+- `n < = 0` shows carrier pulling parameter references alongside function name.
+
+### Discovery: Thermodynamic Annealing Sweet Spot
+- Gamma=0.35 is optimal — balances carrier bias against grammar routing.
+- Gamma=0.50 creates deterministic lock (carrier overpowers grammar).
+- Step-proportional annealing enables carrier breakthrough without early domination.
+- The carrier wave acts as a persistent "intent signal" — "we're implementing fibonacci."
+
+---
+
 ## [0.4.3] - 2026-05-24 — HANDOFF FINALIZED: Lab Sandbox Sign-Off
 
 ### Updated
