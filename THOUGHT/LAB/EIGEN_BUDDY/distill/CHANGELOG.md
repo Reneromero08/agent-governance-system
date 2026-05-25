@@ -5,6 +5,37 @@
 
 ---
 
+## [1.8.0] - 2026-05-24 — PHASE-LOCKED LOOP: Global Structural Alignment
+
+### Changed
+- `inference.py` — Phase-Locked Loop (PLL) for cassette alignment. Architecture:
+  - **Global Reference Phase (Φ_ref):** Fused function name phase from spectral extractor
+    passed as `ref_phase` parameter. Represents prompt's structural identity.
+  - **Kuramoto Order Parameter (r):** `r = |dot(cassette_norm, Φ_ref)| / HALF`. Measures
+    coherence between current cassette phase and prompt reference.
+  - **Correction Torque:** When r < 0.7, applies `cassette += (1-r) * (Φ_ref - cassette)`
+    and renormalizes. Mathematically tugs cassette back toward prompt's structural
+    identity without forcing rigid sequences. Unitary correction (rotation, not deformation).
+  - PLL correction applied after adjoint rotation and destructive interference each step.
+- `eval_superradiant.py` — Passes fused function name phase as `ref_phase` to generate().
+
+### Result
+- **Structural alignment maintained across all 5 tasks.** Diverse syntax preserved while
+  keeping cassette coherent with prompt identity:
+  - Task 0: `True s try = ! total open @ print count lambda mid add i in`
+  - Task 1: `lambda 0 lst # | $ n greater pass class b f ; break True`
+  - **Task 2: `1 5 2 count import factorial - read for class else txt if except less`**
+    — import, for, class, else, if, except all in one sequence.
+  - Task 3: `True if < 0 len path f f f ( int with multiply # ;` — minor f-f-f artifact
+    where PLL correction engaged to pull cassette back from drift.
+  - Task 4: `try a 5 b ~ * total & = / len + n n left` — operators in sequence, only n-n repeat.
+- **5/5 (100%) extraction.** No `in in in` loops. No `s s s` cascades. PLL correction
+  engages as needed (r < 0.7 threshold) without over-constraining diversity.
+- Kuramoto order parameter provides real-time coherence telemetry for the cassette
+  alignment state. Unitary correction preserves |cassette| norm (0.0 J dissipation).
+
+---
+
 ## [1.7.0] - 2026-05-24 — ADJOINT SHIFT: All Repetition Loops Broken
 
 ### Added

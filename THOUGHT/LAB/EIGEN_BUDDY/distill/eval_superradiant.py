@@ -385,10 +385,14 @@ for task_id, problem in sorted(HUMANEVAL_PROBLEMS.items()):
     t0 = time.perf_counter()
     from inference import InferenceEngine
     ie = InferenceEngine()
+
+    ref_phase = fused_phase if fused_phase is not None else None
+
     tokens = ie.generate(prompt, max_tokens=MAX_GEN_TOKENS,
                          intent_phase=fused_phase if fused_phase is not None else None,
                          params_list=params if params else ["n"],
-                         cassette=engine.cassette)
+                         cassette=engine.cassette,
+                         ref_phase=ref_phase)
     elapsed = time.perf_counter() - t0
 
     completion = " ".join(tokens)

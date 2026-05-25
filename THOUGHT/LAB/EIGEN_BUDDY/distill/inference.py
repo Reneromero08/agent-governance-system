@@ -221,7 +221,8 @@ class InferenceEngine:
         raw = torch.abs(self.concept_phases @ wave.conj())
         return (raw * self.vocab_mask) ** 2
 
-    def generate(self, prompt, max_tokens=25, intent_phase=None, params_list=None, cassette=None):
+    def generate(self, prompt, max_tokens=25, intent_phase=None, params_list=None,
+                 cassette=None, ref_phase=None):
         if intent_phase is None:
             intent_phase = self._get_phase("fibonacci")
         if params_list is None:
@@ -336,6 +337,14 @@ class InferenceEngine:
                 if last_tid < len(self.concept_phases) and self.vocab_mask[last_tid] > 0:
                     cassette = cassette - 0.3 * self.concept_phases[last_tid]
                     cassette = cassette / (cassette.abs().max().clamp(min=1e-12))
+
+                if ref_phase is not None:
+                    c_norm = cassette / (cassette.abs().max().clamp(min=1e-12))
+                    r_coh = float(torch.abs(torch.dot(c_norm.conj(), ref_phase))) / HALF
+                    if r_coh < 0.7:
+                        corr = (1.0 - r_coh) * (ref_phase - c_norm)
+                        cassette = cassette + corr.to(cassette.device)
+                        cassette = cassette / (cassette.abs().max().clamp(min=1e-12))
 
             if not intent_consumed:
                 intent_consumed = True
