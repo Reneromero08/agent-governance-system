@@ -5,6 +5,31 @@
 
 ---
 
+## [0.4.1] - 2026-05-24 — KURAMOTO DRIVE + FINAL HANDOFF: Hybrid Engine Directive
+
+### Added
+- `train/kuramoto_drive.py` — Kuramoto Autoregressive Drive at 27B scale. Forward unbind → coherence
+  measurement → token selection → bind-back memory update. Step 1 correctly predicts 'b' from 'a'
+  using the function signature edge. Steps 2-3 derail due to embedding-only grammar gap.
+
+### Updated
+- `HANDOFF.md` — Section 2 rewritten with:
+  - **2.1 THE SEVENTH APPROACH: THE NATIVE HOLOGRAM (PROVEN)** — Documents all four proven
+    physics mechanisms (HRR binding, directional time, V-trace, Kuramoto drive) with benchmarks.
+  - **2.2 THE FINAL LIMITATION** — Embeddings provide semantic memory but lack syntactic grammar.
+    The `.holo` attention matrices encode the syntax the embeddings can't provide.
+  - **2.3 DIRECTIVE FOR THE NEXT AGENT: THE HYBRID ENGINE** — Two-component architecture:
+    Native Hologram M matrix (semantic state tracker) + Distilled `.holo` Attention (syntax router).
+    Forward pass: Embed → Holo(M) ⊙ Attention(Q,K,V,O) → Output. Key files listed.
+
+### Research Conclusion
+- The forward-only boundary is crossed for relational state tracking and pointer resolution.
+- The remaining boundary is SYNTACTIC — embeddings alone can't generate structured code.
+- The Hybrid Engine (Holo M + .holo attention) is the next architecture to build.
+- Training attention weights remains the open problem; inference on distilled weights is proven.
+
+---
+
 ## [0.4.0] - 2026-05-24 — 27B Scale: Pointer Resolution PASSES
 
 ### Added
