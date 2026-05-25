@@ -79,6 +79,7 @@ def has_close(nums, t): return any(abs(nums[i]-nums[j])<t for i in range(len(num
 """.strip()
 
 CRYSTALLINE_FILE = BASE / "crystalline_corpus.py"
+CASSETTE_PATH = BASE / "distilled" / "grammar_cassette.holo.npz"
 
 
 class FullSpectrumEngine:
@@ -145,7 +146,7 @@ class FullSpectrumEngine:
             self.cp[tid] = cp_val
 
         self._build_syntax_mask()
-        self._build_crystalline_grammar()
+        self._load_cassette()
 
     def _resolve_cid(self, word):
         ids = self.tokenizer.encode(word, add_special_tokens=False)
@@ -167,7 +168,18 @@ class FullSpectrumEngine:
             pi, ci = syntax_cids[i], syntax_cids[i + 1]
             self.syntax_state += self.cp[ci] * self.cp[pi].conj()
 
-    def _build_crystalline_grammar(self):
+    def _load_cassette(self):
+        import numpy as np
+        if CASSETTE_PATH.exists():
+            data = np.load(str(CASSETTE_PATH))
+            self.cassette = torch.tensor(data["cassette"]).to(DEV)
+            n_bytes = self.cassette.numel() * 8
+            print(f"  Ancilla Cassette: {n_bytes/1024:.0f} KB rank-1 complex64  "
+                  f"|c|={float(self.cassette.abs().mean()):.4f}")
+        else:
+            print(f"  Cassette not found, building fallback grammar G...")
+            self._build_crystalline_grammar()
+            self.cassette = None
         token_pattern = re.compile(r'[a-zA-Z0-9_]+|[=+*/\[\]{}():.,;<>! -]+')
         crystalline_ids = []
         for m in token_pattern.finditer(CRYSTALLINE_CORPUS):
@@ -375,7 +387,8 @@ for task_id, problem in sorted(HUMANEVAL_PROBLEMS.items()):
     ie = InferenceEngine()
     tokens = ie.generate(prompt, max_tokens=MAX_GEN_TOKENS,
                          intent_phase=fused_phase if fused_phase is not None else None,
-                         params_list=params if params else ["n"])
+                         params_list=params if params else ["n"],
+                         cassette=engine.cassette)
     elapsed = time.perf_counter() - t0
 
     completion = " ".join(tokens)

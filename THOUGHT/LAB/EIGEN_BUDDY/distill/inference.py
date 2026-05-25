@@ -221,7 +221,7 @@ class InferenceEngine:
         raw = torch.abs(self.concept_phases @ wave.conj())
         return (raw * self.vocab_mask) ** 2
 
-    def generate(self, prompt, max_tokens=25, intent_phase=None, params_list=None):
+    def generate(self, prompt, max_tokens=25, intent_phase=None, params_list=None, cassette=None):
         if intent_phase is None:
             intent_phase = self._get_phase("fibonacci")
         if params_list is None:
@@ -277,9 +277,12 @@ class InferenceEngine:
                 wave_M = holo_m * cp_last
                 holo_scores = self._compute_scores(wave_M)
 
-                query_vec = cp_last + GAMMA * Phase_carrier
-                query_phase = query_vec / (query_vec.abs().max().clamp(min=1e-12))
-                wave_G = self.grammar_G @ query_phase
+                if cassette is not None:
+                    wave_G = cassette * cp_last
+                else:
+                    query_vec = cp_last + GAMMA * Phase_carrier
+                    query_phase = query_vec / (query_vec.abs().max().clamp(min=1e-12))
+                    wave_G = self.grammar_G @ query_phase
                 gram_scores = self._compute_scores(wave_G)
 
                 anneal_step = step - anneal_offset
@@ -326,14 +329,22 @@ class InferenceEngine:
             cp_prev = self.concept_phases[last_tid]
             holo_m += cp_new * cp_prev.conj()
 
+            if cassette is not None:
+                theta = math.pi * 0.6180339887498949
+                U = complex(math.cos(theta), math.sin(theta))
+                cassette = cassette * U
+                if last_tid < len(self.concept_phases) and self.vocab_mask[last_tid] > 0:
+                    cassette = cassette - 0.3 * self.concept_phases[last_tid]
+                    cassette = cassette / (cassette.abs().max().clamp(min=1e-12))
+
             if not intent_consumed:
                 intent_consumed = True
-                carrier_active = set(params_list[:3]) | {":"}
+                carrier_active = set(params_list[:3])
                 carrier_active.discard("")
-                Phase_carrier = self._sum_phases(carrier_active)
-                carrier_shifted = True
-                anneal_offset = step + 1
-                skip_set = {"def", ":", ",", "return", "True", "False", "None", "pass"}
+                if carrier_active:
+                    Phase_carrier = self._sum_phases(carrier_active)
+                    carrier_shifted = True
+                    anneal_offset = step + 1
 
             if carrier_shifted and chosen_word in carrier_active:
                 carrier_active.discard(chosen_word)
@@ -353,8 +364,6 @@ class InferenceEngine:
 
             skip_set.add(chosen_word)
             if carrier_shifted:
-                for sym in params_list[:3]:
-                    skip_set.discard(sym)
                 skip_set.discard(":")
 
             new_tok = torch.tensor([[chosen_id]], device=DEV)
