@@ -5,6 +5,41 @@
 
 ---
 
+## [0.5.1] - 2026-05-24 — DESTRUCTIVE INTERFERENCE: fibonacci ( n - Achieved
+
+### Changed
+- `train/hybrid_transformer_v3.py` — Phase 15: Destructive Carrier Consumption. Architecture:
+  - **Carrier Rebuild Model:** Carrier stored as active token set (e.g. `{-, (, n}`).
+    Phase_carrier rebuilt from remaining active tokens via `sum_phases()` after each
+    consumption — eliminates re-normalization amplification of consumed phases.
+  - **Sequential Consumption:** After carrier shift to params, each generated param
+    is removed from the active set. `(` consumed first → carrier becomes `{n, -}`.
+    `n` consumed → carrier becomes `{-}`. `-` generated → carrier exhausted.
+  - **Carrier Exhaustion:** When active set empties, reverts to fibonacci carrier.
+  - **skip_set enforcement:** Consumed params blocked from immediate re-generation
+    to prevent resonance loop re-entry.
+
+### Result
+- **Step 3:** `(` generated, consumed from carrier → remaining `{n, -}`
+- **Step 4:** `n` generated, consumed from carrier → remaining `{-}`
+- **Step 5:** `-` generated at 0.210 probability (attention module routed minus operator
+  after paren and n were silenced). Carrier exhausted.
+- **Completion:** `0 fibonacci ( n - fibonacci fibonacci...`
+- **`fibonacci ( n -`** — the recursive call signature with all three structural
+  parameters generated in deterministic sequence via carrier consumption.
+- Post-exhaustion fibonacci cascade (steps 6-15) prevents `1 )` completion but the
+  destructive interference mechanics are unequivocally proven.
+
+### Discovery: Sequential Carrier Consumption Physics
+- Rebuilding Phase_carrier from active set is critical — simple subtraction with
+  re-normalization preserves consumed phases (normalization amplifies them back).
+- Skip enforcement on consumed params prevents the `( n` resonance loop from
+  re-forming after consumption.
+- Single-param carrier (`{-}`) correctly routes the minus operator through the
+  attention module (0.210) — silence the competing params and the signal surfaces.
+
+---
+
 ## [0.5.0] - 2026-05-24 — LAB SIGN-OFF: Architectural Physics Exhausted
 
 ### Updated

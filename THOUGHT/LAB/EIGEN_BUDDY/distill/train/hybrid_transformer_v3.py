@@ -282,6 +282,14 @@ Phase_params = Phase_paren + Phase_n + Phase_minus
 Phase_params = Phase_params / (Phase_params.abs().max().clamp(min=1e-12))
 print(f"Phase_fib: |fib|={float(Phase_fib.abs().mean()):.4f}  Phase_params: |(n-|={float(Phase_params.abs().mean()):.4f}")
 
+def sum_phases(tokens):
+    result = torch.zeros(HALF, dtype=torch.complex64, device=DEV)
+    for t in tokens:
+        p = get_phase(t)
+        if p is not None:
+            result = result + p
+    return result / (result.abs().max().clamp(min=1e-12))
+
 model = CatalyticLM(V, D_MODEL, N_HEADS)
 model.er.weight.data.copy_(embed_weight.float())
 model.ei.weight.data.zero_()
@@ -296,6 +304,7 @@ ids = prompt_ids.clone()
 
 Phase_carrier = Phase_fib
 carrier_shifted = False
+carrier_active = {"fibonacci"}  # set of active carrier intents
 anneal_offset = 0
 GAMMA = 0.35
 max_gen = 15
@@ -349,7 +358,7 @@ for step in range(max_gen):
     r1_word = concept_words[r1_tid]
     r1_score = float(top5_vals[0].item())
 
-    carrier_label = "fib" if not carrier_shifted else "params"
+    carrier_label = "fib" if not carrier_shifted else str(carrier_active)
     print(f"\nStep {step+1}: current='{current_word}'  carrier={carrier_label} anneal={anneal_step}")
     print(f"  Attn:    {', '.join(f'{concept_words[int(tid)]}({float(top5_vals[i]):.3f})' for i,tid in enumerate(top5_ids[:3]))}")
     print(f"  Holo:    {', '.join(f'{concept_words[int(tid)]}({float(holo_probs[tid]):.3f})' for tid in holo_probs.topk(3).indices.tolist())}")
@@ -374,11 +383,22 @@ for step in range(max_gen):
     holo_m.bind(cp_new, cp_prev)
 
     if chosen_word == "fibonacci" and not carrier_shifted:
-        Phase_carrier = Phase_params
+        carrier_active = {"(", "n", "-"}
         carrier_shifted = True
         anneal_offset = step + 1
         skip_set = {"def", ":", ")", ",", "fibonacci"}
-        print(f"  *** CARRIER SHIFTED: fibonacci -> params ( n -  skip_set RESET ***")
+        Phase_carrier = sum_phases(carrier_active)
+        print(f"  *** CARRIER SHIFTED: fibonacci -> params {carrier_active}  skip_set RESET ***")
+
+    if carrier_shifted and chosen_word in carrier_active:
+        carrier_active.discard(chosen_word)
+        if carrier_active:
+            Phase_carrier = sum_phases(carrier_active)
+            anneal_offset = step + 1
+            print(f"  *** DESTRUCTIVE INTERFERENCE: consumed '{chosen_word}' -> remaining: {carrier_active} ***")
+        else:
+            Phase_carrier = Phase_fib
+            print(f"  *** CARRIER EXHAUSTED: all params consumed, reverting to fibonacci ***")
 
     current_word = chosen_word
     skip_set.add(chosen_word)
@@ -387,6 +407,8 @@ for step in range(max_gen):
     if carrier_shifted:
         for sym in ["n", "-", "("]:
             skip_set.discard(sym)
+        if chosen_word in carrier_active or chosen_word in {"(", "n", "-"}:
+            skip_set.add(chosen_word)
 
     new_tok = torch.tensor([[chosen_id]], device=DEV)
     ids = torch.cat([ids, new_tok], dim=1)
