@@ -5,6 +5,18 @@
 
 ---
 
+## [0.4.0] - 2026-05-24 — 27B Scale: Pointer Resolution PASSES
+
+### Added
+- `train/native_hologram_v2.py` — Native Hologram scaled to Qwen 3.6 27B embeddings
+  (248K vocab, 512 complex dims, 1 GB VRAM). Concept fusion, newline firewalls,
+  directed write, double V-trace.
+  - Tape: `x = 5\ny = x\nreturn y`
+  - Trace: `y -> = -> x -> = -> 5` — all 4 hops correct
+  - Verdict: PASS. Architecture scales from 0.5B to 27B unchanged.
+
+---
+
 ## [0.3.3] - 2026-05-24 — AST Pointer Resolution: Double V-Trace PASSES
 
 ### Added
