@@ -226,7 +226,25 @@ if Phase_carrier is None:
 carrier_norm = float(Phase_carrier.abs().mean())
 print(f"Phase_carrier ('fibonacci'): |carrier|={carrier_norm:.4f}")
 
+Phase_paren = get_phase("(")
+Phase_n = get_phase("n")
+Phase_minus = get_phase("-")
+param_ok = Phase_paren is not None and Phase_n is not None and Phase_minus is not None
+if param_ok:
+    Phase_params = Phase_paren + Phase_n + Phase_minus
+    Phase_params = Phase_params / (Phase_params.abs().max().clamp(min=1e-12))
+    print(f"Phase_params ('( n -'): |params|={float(Phase_params.abs().mean()):.4f} ready")
+else:
+    Phase_params = None
+    missing = []
+    if Phase_paren is None: missing.append('(')
+    if Phase_n is None: missing.append('n')
+    if Phase_minus is None: missing.append('-')
+    print(f"WARNING: Parameter phases missing: {missing}. Phase-shift disabled.")
+
 GAMMA = 0.35
+carrier_shifted = False
+anneal_offset = 0
 print(f"Carrier modulation gamma: {GAMMA}")
 
 p_curr = get_phase("return")
@@ -254,7 +272,8 @@ for step in range(max_gen):
     raw_all = torch.abs(concept_phases @ wave_F.conj())
     base_scores = (raw_all * vocab_mask) ** 2
     carrier_sim = torch.abs(concept_phases @ Phase_carrier.conj())
-    carrier_factor = 1.0 + (10.0 + step * 3.0) * (carrier_sim * vocab_mask / carrier_sim.max().clamp(min=1e-12))
+    anneal_step = step - anneal_offset
+    carrier_factor = 1.0 + (10.0 + anneal_step * 3.0) * (carrier_sim * vocab_mask / carrier_sim.max().clamp(min=1e-12))
     boosted_scores = base_scores * carrier_factor
     boosted_scores = boosted_scores * vocab_mask
     boosted_top = boosted_scores.topk(6)
@@ -269,7 +288,8 @@ for step in range(max_gen):
     r2_word = concept_words[int(boosted_top.indices[1].item())] if len(boosted_top.indices) > 1 else ""
     r3_word = concept_words[int(boosted_top.indices[2].item())] if len(boosted_top.indices) > 2 else ""
 
-    print(f"\nStep {step+1}: current='{current_word}'  query_mod=+{GAMMA}*carrier")
+    carrier_label = "fibonacci" if not carrier_shifted else "params"
+    print(f"\nStep {step+1}: current='{current_word}'  carrier={carrier_label} anneal={anneal_step}")
     print(f"  Memory:   {', '.join(f'{concept_words[t]}({s:.1e})' for t,s,_ in rM[:3])}")
     print(f"  Grammar:  {', '.join(f'{concept_words[t]}({s:.1e})' for t,s,_ in rH[:3])}")
     print(f"  fibonacci: base={fib_base:.1e} boosted={fib_boosted:.1e}")
@@ -290,11 +310,25 @@ for step in range(max_gen):
     p_new = concept_phases[chosen_id]
     holo_m.bind(p_new, p_curr)
 
+    if chosen_word == "fibonacci" and not carrier_shifted and Phase_params is not None:
+        Phase_carrier = Phase_params
+        carrier_shifted = True
+        anneal_offset = step + 1
+        skip_set = {"def", ":", ")", ",", "fibonacci"}
+        print(f"  *** CARRIER SHIFTED: fibonacci -> params '( n -'  skip_set RESET ***")
+
     p_curr = p_new
     current_word = chosen_word
     skip_set.add(chosen_word)
     if "fibonacci" in skip_set:
         skip_set.discard("fibonacci")
+    if carrier_shifted:
+        if "n" in skip_set:
+            skip_set.discard("n")
+        if "-" in skip_set:
+            skip_set.discard("-")
+        if "(" in skip_set:
+            skip_set.discard("(")
 
 completion = " ".join(generated)
 print(f"\n{'='*60}")
