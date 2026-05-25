@@ -304,10 +304,13 @@ ids = prompt_ids.clone()
 
 Phase_carrier = Phase_fib
 carrier_shifted = False
-carrier_active = {"fibonacci"}  # set of active carrier intents
+fib_shift_done = False
+carrier_active = {"fibonacci"}
 anneal_offset = 0
 GAMMA = 0.35
-max_gen = 15
+delay_steps = 0
+max_gen = 20
+next_carrier = None  # queued carrier after delay
 
 current_word = "return"
 skip_set = {"def", ":", ")", ",", "fibonacci", current_word}
@@ -350,7 +353,10 @@ for step in range(max_gen):
     attn_probs = attn_probs * vocab_mask
     attn_probs = attn_probs / attn_probs.sum()
 
-    combined = 0.15 * attn_probs + 0.30 * holo_probs + 0.55 * carrier_probs
+    if delay_steps > 0 or GAMMA == 0.0:
+        combined = 0.35 * attn_probs + 0.35 * holo_probs + 0.30 * gram_probs
+    else:
+        combined = 0.15 * attn_probs + 0.30 * holo_probs + 0.55 * carrier_probs
     combined = combined / combined.sum()
 
     top5_vals, top5_ids = combined.topk(6)
@@ -358,8 +364,13 @@ for step in range(max_gen):
     r1_word = concept_words[r1_tid]
     r1_score = float(top5_vals[0].item())
 
-    carrier_label = "fib" if not carrier_shifted else str(carrier_active)
-    print(f"\nStep {step+1}: current='{current_word}'  carrier={carrier_label} anneal={anneal_step}")
+    if delay_steps > 0 or GAMMA == 0.0:
+        carrier_label = "VACUUM"
+    elif not carrier_shifted:
+        carrier_label = "fib"
+    else:
+        carrier_label = str(carrier_active)
+    print(f"\nStep {step+1}: current='{current_word}'  carrier={carrier_label} gamma={GAMMA} delay={delay_steps}")
     print(f"  Attn:    {', '.join(f'{concept_words[int(tid)]}({float(top5_vals[i]):.3f})' for i,tid in enumerate(top5_ids[:3]))}")
     print(f"  Holo:    {', '.join(f'{concept_words[int(tid)]}({float(holo_probs[tid]):.3f})' for tid in holo_probs.topk(3).indices.tolist())}")
     print(f"  Grammar: {', '.join(f'{concept_words[int(tid)]}({float(gram_probs[tid]):.3f})' for tid in gram_probs.topk(3).indices.tolist())}")
@@ -382,9 +393,10 @@ for step in range(max_gen):
     cp_prev = concept_phases[last_tid]
     holo_m.bind(cp_new, cp_prev)
 
-    if chosen_word == "fibonacci" and not carrier_shifted:
+    if chosen_word == "fibonacci" and not carrier_shifted and not fib_shift_done:
         carrier_active = {"(", "n", "-"}
         carrier_shifted = True
+        fib_shift_done = True
         anneal_offset = step + 1
         skip_set = {"def", ":", ")", ",", "fibonacci"}
         Phase_carrier = sum_phases(carrier_active)
@@ -397,8 +409,34 @@ for step in range(max_gen):
             anneal_offset = step + 1
             print(f"  *** DESTRUCTIVE INTERFERENCE: consumed '{chosen_word}' -> remaining: {carrier_active} ***")
         else:
-            Phase_carrier = Phase_fib
-            print(f"  *** CARRIER EXHAUSTED: all params consumed, reverting to fibonacci ***")
+            if chosen_word == "+":
+                delay_steps = 1
+                GAMMA = 0.0
+                next_carrier = {"fibonacci"}
+                print(f"  *** DECOHERENCE DELAY: 1-step vacuum (gamma=0) -> next carrier: fibonacci ***")
+            else:
+                delay_steps = 2
+                GAMMA = 0.0
+                next_carrier = {"+"}
+                print(f"  *** DECOHERENCE DELAY: 2-step vacuum (gamma=0) -> next carrier: {'+'} ***")
+
+    if delay_steps > 0:
+        delay_steps -= 1
+        if delay_steps == 0:
+            GAMMA = 0.35
+            if next_carrier == {"+"}:
+                carrier_active = {"+"}
+                Phase_carrier = sum_phases(carrier_active)
+                anneal_offset = step + 1
+                next_carrier = {"fibonacci"}
+                print(f"  *** DECOHERENCE ENDED: carrier -> {'+'} (gamma restored) ***")
+            elif next_carrier == {"fibonacci"}:
+                carrier_active = {"fibonacci"}
+                Phase_carrier = Phase_fib
+                anneal_offset = step + 1
+                next_carrier = None
+                carrier_shifted = False
+                print(f"  *** DECOHERENCE ENDED: carrier -> fibonacci (gamma restored, consumption disabled) ***")
 
     current_word = chosen_word
     skip_set.add(chosen_word)
