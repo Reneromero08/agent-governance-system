@@ -189,6 +189,8 @@ target/
 THOUGHT/LAB/CAT_CAS/16_catalytic_27b_inference/gemini_update/qwen_0.5b/ 
 *.holo
 *.holo.npz
+*.holo.json
+THOUGHT/LAB/EIGEN_BUDDY/distill/distilled/
 *.pyd
 
 *.pt

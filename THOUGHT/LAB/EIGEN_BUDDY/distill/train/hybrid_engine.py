@@ -140,25 +140,41 @@ if holo_available:
     holo = np.load(str(HOLO_NPZ))
     meta = json.load(open(str(HOLO_JSON)))
     print(f"  Loaded {len(holo.files)} phase gratings, {len(meta)} metadata entries")
-    grammar_G = torch.zeros(HALF, HALF, dtype=torch.complex64, device=DEV)
-    count = 0
+
+    Q_stack = []
+    K_stack = []
     for key in holo.files:
         g = torch.tensor(holo[key])
         if g.shape[1] != D_MODEL:
             continue
-        if 'q_proj' in key or 'k_proj' in key:
-            g_real = g[:, :HALF]
-            g_imag = g[:, HALF:]
-            g_complex = torch.complex(g_real, g_imag).to(DEV)
-            n_modes = min(g_complex.shape[0], 16)
-            for i in range(n_modes):
-                v = g_complex[i]
-                grammar_G += torch.outer(v, v.conj())
-                count += 1
-    grammar_G = grammar_G / max(count, 1)
-    print(f"  Grammar matrix: {HALF}x{HALF} complex64, {count} eigenmodes from .holo")
-else:
-    print("No .holo file found. Building outer-product grammar matrix from code corpus...")
+        if g.is_complex():
+            g_comp = g.to(DEV)
+        else:
+            g_comp = torch.complex(g[:, :HALF], g[:, HALF:]).to(DEV)
+        if 'k_proj' in key:
+            K_stack.append(g_comp[:, :HALF])
+        elif 'v_proj' in key:
+            Q_stack.append(g_comp[:, :HALF])
+
+    if Q_stack and K_stack:
+        Q_all = torch.cat([q for q in Q_stack], dim=0)
+        K_all = torch.cat([k for k in K_stack], dim=0)
+        Q_all = Q_all / (Q_all.norm(dim=-1, keepdim=True) + 1e-12)
+        K_all = K_all / (K_all.norm(dim=-1, keepdim=True) + 1e-12)
+        G_holo = (K_all.T.conj() @ Q_all) / K_all.shape[0]
+        G_holo = G_holo.to(DEV)
+        g_strength = G_holo.abs().mean().item()
+        print(f"  .holo grammar: {HALF}x{HALF}, K={K_all.shape[0]}+V={Q_all.shape[0]} modes, |G|={g_strength:.4f}")
+        if g_strength > 0.01:
+            grammar_G = G_holo
+            print(f"  Using .holo grammar projector (signal sufficient).")
+        else:
+            print(f"  .holo signal too weak (|G|={g_strength:.4f} < 0.01). Falling back to n-gram.")
+    else:
+        print(f"  No matching k_proj/v_proj found (K={len(K_stack)}, V={len(Q_stack)}).")
+
+if grammar_G is None:
+    print("Building outer-product grammar matrix from code corpus...")
     code_token_ids = []
     for m in token_pattern.finditer(PYTHON_CODE_CORPUS):
         word = m.group()
