@@ -221,8 +221,11 @@ class InferenceEngine:
         raw = torch.abs(self.concept_phases @ wave.conj())
         return (raw * self.vocab_mask) ** 2
 
-    def generate(self, prompt, max_tokens=25):
-        Phase_fib = self._get_phase("fibonacci")
+    def generate(self, prompt, max_tokens=25, intent_phase=None, params_list=None):
+        if intent_phase is None:
+            intent_phase = self._get_phase("fibonacci")
+        if params_list is None:
+            params_list = ["n"]
 
         holo_m = torch.zeros(HALF, dtype=torch.complex64, device=DEV)
         lines = prompt.split('\n')
@@ -248,17 +251,17 @@ class InferenceEngine:
         prompt_ids = self.tokenizer(prompt, return_tensors='pt')['input_ids'].to(DEV)
         ids = prompt_ids.clone()
 
-        Phase_carrier = Phase_fib
+        Phase_carrier = intent_phase
         carrier_shifted = False
-        carrier_active = {"fibonacci"}
-        recursion_depth = 0
+        intent_consumed = False
+        params_consumed = False
+        carrier_active = {"intent"}
         anneal_offset = 0
         GAMMA = 0.35
         delay_steps = 0
         next_carrier = None
-        skip_set = {"def", ":", ",", "fibonacci", "return"}
+        skip_set = {"def", ":", ",", "return"}
         generated = []
-        depth_boost_map = {1: ["1"], 2: ["2"]}
 
         for step in range(max_tokens):
             logits = self.model(ids)
@@ -295,11 +298,7 @@ class InferenceEngine:
             in_vacuum = (delay_steps > 0 or GAMMA == 0.0)
 
             if in_vacuum:
-                boost_tokens = depth_boost_map.get(recursion_depth, ["1"])
-                for boost_tok in boost_tokens:
-                    btid = self._resolve_cid(boost_tok)
-                    if btid is not None:
-                        gram_probs[btid] = gram_probs[btid] * GRAMMAR_BOOST_VACUUM
+                gram_probs = gram_probs * GRAMMAR_BOOST_VACUUM
                 gram_probs = gram_probs / gram_probs.sum().clamp(min=1e-12)
                 combined = VACUUM_HOLO * holo_probs + VACUUM_GRAM * gram_probs
             else:
@@ -327,39 +326,14 @@ class InferenceEngine:
             cp_prev = self.concept_phases[last_tid]
             holo_m += cp_new * cp_prev.conj()
 
-            if delay_steps > 0 and chosen_word == "1" and recursion_depth == 1:
-                delay_steps = 0
-                GAMMA = 0.35
-                carrier_active = {")"}
+            if not intent_consumed:
+                intent_consumed = True
+                carrier_active = set(params_list[:3]) | {":", "return"}
+                carrier_active.discard("")
                 Phase_carrier = self._sum_phases(carrier_active)
                 carrier_shifted = True
                 anneal_offset = step + 1
-                next_carrier = {"+"}
-
-            if delay_steps > 0 and chosen_word == "2" and recursion_depth == 2:
-                delay_steps = 0
-                GAMMA = 0.35
-                carrier_active = {")"}
-                Phase_carrier = self._sum_phases(carrier_active)
-                carrier_shifted = True
-                anneal_offset = step + 1
-                next_carrier = None
-
-            if chosen_word == "fibonacci" and not carrier_shifted and recursion_depth == 0:
-                carrier_active = {"(", "n", "-"}
-                carrier_shifted = True
-                recursion_depth = 1
-                anneal_offset = step + 1
-                skip_set = {"def", ":", ",", "fibonacci"}
-                Phase_carrier = self._sum_phases(carrier_active)
-
-            if chosen_word == "fibonacci" and not carrier_shifted and recursion_depth == 1:
-                carrier_active = {"(", "n", "-"}
-                carrier_shifted = True
-                recursion_depth = 2
-                anneal_offset = step + 1
-                skip_set = {"def", ":", ",", "fibonacci"}
-                Phase_carrier = self._sum_phases(carrier_active)
+                skip_set = {"def", ":", ",", "return"}
 
             if carrier_shifted and chosen_word in carrier_active:
                 carrier_active.discard(chosen_word)
@@ -367,44 +341,16 @@ class InferenceEngine:
                     Phase_carrier = self._sum_phases(carrier_active)
                     anneal_offset = step + 1
                 else:
-                    if chosen_word == "+":
-                        delay_steps = 1
-                        GAMMA = 0.0
-                        next_carrier = {"fibonacci"}
-                    elif chosen_word == ")" and recursion_depth == 1:
-                        delay_steps = 1
-                        GAMMA = 0.0
-                        next_carrier = {"+"}
-                    elif chosen_word == ")" and recursion_depth == 2:
-                        Phase_carrier = torch.zeros(HALF, dtype=torch.complex64, device=DEV)
-                        carrier_shifted = False
-                        GAMMA = 0.0
-                    else:
-                        delay_steps = 2
-                        GAMMA = 0.0
-                        next_carrier = {"+"}
-
-            if delay_steps > 0:
-                delay_steps -= 1
-                if delay_steps == 0:
-                    GAMMA = 0.35
-                    if next_carrier == {"+"}:
-                        carrier_active = {"+"}
-                        Phase_carrier = self._sum_phases(carrier_active)
-                        anneal_offset = step + 1
-                        next_carrier = {"fibonacci"}
-                    elif next_carrier == {"fibonacci"}:
-                        carrier_active = {"fibonacci"}
-                        Phase_carrier = Phase_fib
-                        anneal_offset = step + 1
-                        next_carrier = None
-                        carrier_shifted = False
+                    params_consumed = True
+                    Phase_carrier = torch.zeros(HALF, dtype=torch.complex64, device=DEV)
+                    GAMMA = 0.0
+                    carrier_shifted = False
 
             skip_set.add(chosen_word)
-            if "fibonacci" in skip_set:
-                skip_set.discard("fibonacci")
             if carrier_shifted:
-                for sym in ["n", "-", "(", ")"]:
+                for sym in params_list[:3]:
+                    skip_set.discard(sym)
+                for sym in [":", "return"]:
                     skip_set.discard(sym)
 
             new_tok = torch.tensor([[chosen_id]], device=DEV)
