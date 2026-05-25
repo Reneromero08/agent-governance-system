@@ -16,7 +16,7 @@ import math
 import json
 import numpy as np
 import torch
-import torch.nn as nn
+import torch.nn.functional as F
 from pathlib import Path
 from transformers import AutoTokenizer
 
@@ -159,22 +159,29 @@ class InferenceEngine:
         self.meta = json.load(open(str(HOLO_JSON)))
 
     def _build_model(self, V):
-        class CatalyticLM(nn.Module):
-            def __init__(self, V_size, D, H):
-                super().__init__()
-                self.er = nn.Embedding(V_size, D)
-                self.ei = nn.Embedding(V_size, D)
-                self.attn = MultiHeadComplexAttention(D, H, geo_init=False)
-                self.out = nn.Linear(D, V_size, bias=False)
-            def forward(self, ids):
-                x = torch.complex(self.er(ids), self.ei(ids))
-                z, _ = self.attn(x)
-                return self.out(z.real)
+        class CatalyticTensorLM:
+            def __init__(self, embed_weight, lm_head_weight, attn):
+                self.er_w = embed_weight.float()
+                self.ei_w = torch.zeros_like(embed_weight)
+                self.attn = attn
+                self.lm_head = lm_head_weight.float()
 
-        self.model = CatalyticLM(V, D_MODEL, N_HEADS)
-        self.model.er.weight.data.copy_(self.embed_weight.float())
-        self.model.ei.weight.data.zero_()
-        self.model.out.weight.data.copy_(self.lm_head_weight.float())
+            def forward(self, ids):
+                x_r = self.er_w[ids]
+                x_i = self.ei_w[ids]
+                x = torch.complex(x_r, x_i)
+                z, _ = self.attn(x)
+                return z.real @ self.lm_head.T
+
+            def to(self, dev):
+                self.er_w = self.er_w.to(dev)
+                self.ei_w = self.ei_w.to(dev)
+                self.lm_head = self.lm_head.to(dev)
+                self.attn = self.attn.to(dev)
+                return self
+
+        from core.attention import MultiHeadComplexAttention
+        attn = MultiHeadComplexAttention(D_MODEL, N_HEADS, geo_init=False)
 
         k_gratings, v_gratings = [], []
         for key in self.holo.files:
@@ -194,7 +201,7 @@ class InferenceEngine:
                 kg = k_gratings[ki] if k_gratings else None
                 vg = v_gratings[vi] if v_gratings else None
                 for pn in ['qr', 'qi', 'kr', 'ki', 'vr', 'vi']:
-                    w = getattr(self.model.attn, pn).weight
+                    w = getattr(attn, pn).weight
                     gr = kg if 'k' in pn and kg is not None else (vg if 'v' in pn and vg is not None else None)
                     if gr is None:
                         continue
@@ -206,8 +213,9 @@ class InferenceEngine:
                     rotated = em * math.cos(rot_angle)
                     w.data[s:e] = rotated.unsqueeze(0).expand(DH, -1) * 0.1
 
-        self.model = self.model.to(DEV)
-        self.model.train()
+        attn = attn.to(DEV)
+        self.model = CatalyticTensorLM(self.embed_weight, self.lm_head_weight, attn)
+        self.model.to(DEV)
 
     def _sum_phases(self, tokens):
         result = torch.zeros(HALF, dtype=torch.complex64, device=DEV)
@@ -278,7 +286,7 @@ class InferenceEngine:
         generated = []
 
         for step in range(max_tokens):
-            logits = self.model(ids)
+            logits = self.model.forward(ids)
             last_logits = logits[0, -1, :]
             last_tid = ids[0, -1].item()
 
@@ -361,10 +369,18 @@ class InferenceEngine:
 
             if not intent_consumed:
                 intent_consumed = True
-                carrier_active = set(params_list[:3]) | set(local_var_names[:3])
+                carrier_active = set(params_list[:3])
                 carrier_active.discard("")
                 if carrier_active:
                     Phase_carrier = self._sum_phases(carrier_active)
+                elif local_var_phases:
+                    Phase_carrier = torch.zeros(HALF, dtype=torch.complex64, device=DEV)
+                    for vp in local_var_phases:
+                        Phase_carrier = Phase_carrier + vp.to(DEV)
+                    Phase_carrier = Phase_carrier / (Phase_carrier.abs().max().clamp(min=1e-12))
+                else:
+                    Phase_carrier = None
+                if Phase_carrier is not None:
                     carrier_shifted = True
                     anneal_offset = step + 1
 
@@ -383,6 +399,16 @@ class InferenceEngine:
                 delay_steps -= 1
                 if delay_steps == 0:
                     GAMMA = 0.0
+
+            if params_consumed and not carrier_shifted and not delay_steps and local_var_phases:
+                Phase_carrier = torch.zeros(HALF, dtype=torch.complex64, device=DEV)
+                for vp in local_var_phases:
+                    Phase_carrier = Phase_carrier + vp.to(DEV)
+                Phase_carrier = Phase_carrier / (Phase_carrier.abs().max().clamp(min=1e-12))
+                carrier_shifted = True
+                params_consumed = False
+                carrier_active = set(local_var_names[:3])
+                anneal_offset = step + 1
 
             skip_set.add(chosen_word)
             if carrier_shifted:

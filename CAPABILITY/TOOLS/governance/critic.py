@@ -371,16 +371,6 @@ CATALYTIC_LEGACY = {
     "train_adapters.py", "train_humaneval.py", "code_ingestion.py",
     "catalytic_train.py",
 }
-CATALYTIC_SAFE = {
-    "inference.py", "hybrid_transformer.py", "hybrid_transformer_v2.py",
-    "hybrid_transformer_v3.py", "hybrid_engine.py", "kuramoto_drive.py",
-    "native_hologram.py", "native_hologram_v2.py", "train_code.py",
-    "corpus_ingestion.py", "crystalline_burn.py", "eval_superradiant.py",
-}
-
-def _is_catalytic_safe(f):
-    fn = f.replace("\\", "/").rsplit("/", 1)[-1] if "/" in f else f
-    return fn in CATALYTIC_SAFE
 
 
 def check_catalytic_compliance(changed_files):
@@ -392,7 +382,7 @@ def check_catalytic_compliance(changed_files):
         if not fp_s.startswith(CATALYTIC_SCOPE):
             continue
         fn = fp_s.rsplit("/", 1)[-1] if "/" in fp_s else fp_s
-        if fn in CATALYTIC_LEGACY or fn in CATALYTIC_SAFE:
+        if fn in CATALYTIC_LEGACY:
             continue
         if not f.endswith(".py"):
             continue

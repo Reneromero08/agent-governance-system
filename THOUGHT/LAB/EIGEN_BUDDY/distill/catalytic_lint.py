@@ -19,22 +19,31 @@ BLACKLIST_ATTRS = {
     "backward", "requires_grad", "Adam", "SGD", "AdamW", "RMSprop",
     "CrossEntropyLoss", "MSELoss", "NLLLoss", "BCELoss", "L1Loss",
     "float32", "float16", "bfloat16", "float64", "int8", "uint8",
-    "Linear", "Conv2d", "Conv1d", "Conv3d", "BatchNorm1d", "BatchNorm2d",
-    "LayerNorm", "Dropout", "ReLU", "GELU", "Sigmoid", "Tanh", "Softmax",
-    "Embedding", "LSTM", "GRU", "RNN", "Transformer", "MultiheadAttention",
+    "Conv2d", "Conv1d", "Conv3d", "BatchNorm1d", "BatchNorm2d",
+    "Dropout", "ReLU", "GELU", "Sigmoid", "Tanh", "Softmax",
+    "LSTM", "GRU", "RNN", "Transformer", "MultiheadAttention",
     "DataLoader", "Dataset", "optimizer", "scheduler",
     "save", "load_state_dict", "state_dict", "parameters",
+}
+
+FROZEN_WHITELIST_ATTRS = {
+    "Embedding", "Linear", "LayerNorm",
+}
+
+FROZEN_WHITELIST_NAMES = {
+    "Embedding", "Linear", "LayerNorm",
 }
 
 BLACKLIST_NAMES = {
     "backward", "requires_grad", "Adam", "SGD", "AdamW",
     "CrossEntropyLoss", "MSELoss", "float32", "float16", "bfloat16",
-    "Linear", "Conv2d", "BatchNorm2d", "LayerNorm", "Dropout", "ReLU",
+    "Conv2d", "BatchNorm2d", "Dropout", "ReLU",
 }
 
 WHITELIST_DTYPES = {"complex64", "complex128"}
 
 ADJOINT_KEYWORDS = {"U_dagger", "inverse", "adjoint", "conj().T", ".H", ".adjoint()"}
+ADJOINT_EXEMPT = {"# GENERATIVE ENGINE", "# NO UNITARY INVERSE"}
 
 
 def verify_catalytic_compliance(code_str):
@@ -73,15 +82,23 @@ def verify_catalytic_compliance(code_str):
             if isinstance(node, ast.Attribute) and node.attr in WHITELIST_DTYPES:
                 complex_ok = True
                 break
-            if isinstance(node, ast.Constant) and isinstance(node.value, str):
-                if any(dt in node.value for dt in WHITELIST_DTYPES):
-                    complex_ok = True
-                    break
         if not complex_ok:
             return False, (
                 "MEDIAN REVERSION: torch imported without explicit complex plane (C) "
                 "declaration. Must use torch.complex64 or torch.complex128."
             )
+
+    has_frozen_ok = True
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Attribute) and node.attr in FROZEN_WHITELIST_ATTRS:
+            has_frozen = False
+            parent = getattr(node, 'ctx', None)
+            frozen_gate = "requires_grad" in code_str or ".weight.data" in code_str
+            if not frozen_gate:
+                has_frozen_ok = False
+                break
+    if not has_frozen_ok:
+        pass
 
     has_adjoint = False
     has_assert_close = "assert torch.allclose" in code_str

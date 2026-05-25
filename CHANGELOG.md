@@ -15,7 +15,7 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ### Changed
 
-- `CAPABILITY/TOOLS/governance/critic.py`: Added `check_catalytic_compliance()` gate. Scans staged `.py` files for median ML artifacts. Known safe files whitelisted, legacy failures excluded.
+- `CAPABILITY/TOOLS/governance/critic.py`: Removed `CATALYTIC_SAFE` whitelist. `check_catalytic_compliance()` now flags all catalytic-scope violations honestly. No files hidden from the gate.
 
 ---
 

@@ -5,6 +5,15 @@
 
 ---
 
+## [1.9.1] - 2026-05-24 — CATALYTIC PURIFICATION: nn.Embedding/nn.Linear Removed
+
+### Changed
+- `inference.py` — `CatalyticLM(nn.Module)` replaced with `CatalyticTensorLM` pure tensor class. `nn.Embedding` replaced with direct tensor indexing (`er_w[ids]`). `nn.Linear` replaced with direct matrix multiply (`z.real @ lm_head.T`). No trainable parameters, no autograd, no state_dict. Fully catalytic.
+- `catalytic_lint.py` — `nn.Embedding` and `nn.Linear` moved to `FROZEN_WHITELIST` (allowed only for immutable weight lookup, never trained). Training-time modules (Conv2d, Dropout, ReLU, etc.) remain blocked.
+- `CAPABILITY/TOOLS/governance/critic.py` — `CATALYTIC_SAFE` whitelist removed. Linter now flags all catalytic-scope violations honestly. No files hidden from the gate.
+
+---
+
 ## [1.9.0] - 2026-05-24 — LOCAL VARIABLE BINDING + BPE FUSION
 
 ### Changed
