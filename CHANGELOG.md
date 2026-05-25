@@ -6,6 +6,19 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.12.10] - 2026-05-24
+
+### Added
+
+- `THOUGHT/LAB/EIGEN_BUDDY/distill/catalytic_lint.py`: AST Gatekeeper for the Catalytic Crucible. Blacklists backprop, Adam, real-valued tensors, .pt serialization. Enforces complex64/complex128 domain. Mandates Adjoint-Pair inverse proof.
+- `THOUGHT/LAB/EIGEN_BUDDY/distill/eigen_agent.py`: Rejection Loop Orchestrator with Catalytic System Mandate. Wraps code generation, runs AST gatekeeper, auto-retries on failure (up to 5 attempts). `activate_import_gate()` for runtime import interception.
+
+### Changed
+
+- `CAPABILITY/TOOLS/governance/critic.py`: Added `check_catalytic_compliance()` gate. Scans staged `.py` files for median ML artifacts. Known safe files whitelisted, legacy failures excluded.
+
+---
+
 ## [3.12.9] - 2026-05-23
 
 ### Added
