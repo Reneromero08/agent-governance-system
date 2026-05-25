@@ -31,13 +31,36 @@ def rho_inverse(vec, shift=1):
 
 
 class VSAStateMachine:
-    def __init__(self):
+    def __init__(self, concept_phases=None, resolve_cid=None):
         self.states = {}
         self.triggers = {}
         self.cassette = torch.zeros(HALF, dtype=torch.complex64, device=DEV)
+        self.cp = concept_phases
+        self.resolve = resolve_cid
+        self.state_tokens = {}
 
     def add_seed(self, name):
         if name not in self.states:
+            self.states[name] = generate_seed()
+        if name not in self.triggers:
+            self.triggers[name] = generate_seed()
+
+    def add_semantic_seed(self, name, tokens):
+        if self.cp is None or self.resolve is None:
+            self.add_seed(name)
+            return
+        phase = torch.zeros(HALF, dtype=torch.complex64, device=DEV)
+        count = 0
+        for tok in tokens:
+            cid = self.resolve(tok)
+            if cid is not None and cid < len(self.cp):
+                phase = phase + self.cp[cid]
+                count += 1
+        if count > 0:
+            phase = phase / (phase.abs().max().clamp(min=1e-12))
+            self.states[name] = phase
+            self.state_tokens[name] = tokens
+        else:
             self.states[name] = generate_seed()
         if name not in self.triggers:
             self.triggers[name] = generate_seed()
@@ -72,9 +95,26 @@ class VSAStateMachine:
         top = raw.topk(min(topk, len(names)))
         return [(names[int(idx)], float(raw[int(idx)])) for idx in top.indices.tolist()]
 
+    def measure_tokens(self, wave, vocab_cp, vocab_mask, tokenizer, topk=5):
+        raw = torch.abs(vocab_cp @ wave.conj())
+        scores = (raw * vocab_mask) ** 2
+        top = scores.topk(topk)
+        return [(tokenizer.decode([int(t)]).strip(), float(scores[int(t)]))
+                for t in top.indices.tolist()]
 
-def compile_for_loop():
-    fsm = VSAStateMachine()
+
+def compile_for_loop(cp=None, resolve=None):
+    fsm = VSAStateMachine(cp, resolve)
+
+    fsm.add_semantic_seed("cond", ["<", ">", "==", "!=", "if"])
+    fsm.add_semantic_seed("body", ["for", "in", "range", "print", "total"])
+    fsm.add_semantic_seed("inc", ["+", "-", "+=", "1", "i"])
+    fsm.add_semantic_seed("init", ["=", "0", "arr", "["])
+    fsm.add_seed("start")
+    fsm.add_seed("true")
+    fsm.add_seed("false")
+    fsm.add_seed("step")
+    fsm.add_seed("done")
 
     fsm.bind_transition("start", "init", "cond")
     fsm.bind_transition("true", "cond", "body")
@@ -86,8 +126,17 @@ def compile_for_loop():
     return fsm
 
 
-def compile_if_else():
-    fsm = VSAStateMachine()
+def compile_if_else(cp=None, resolve=None):
+    fsm = VSAStateMachine(cp, resolve)
+    fsm.add_semantic_seed("cond", ["if", "<", ">", "==", "!="])
+    fsm.add_semantic_seed("true_body", ["return", "True", "result", "="])
+    fsm.add_semantic_seed("false_body", ["return", "False", "0", "pass"])
+    fsm.add_seed("start")
+    fsm.add_seed("init")
+    fsm.add_seed("true")
+    fsm.add_seed("false")
+    fsm.add_seed("done")
+    fsm.add_seed("end")
     fsm.bind_transition("start", "init", "cond")
     fsm.bind_transition("true", "cond", "true_body")
     fsm.bind_transition("false", "cond", "false_body")
@@ -104,7 +153,8 @@ if __name__ == "__main__":
 
     for_loop = compile_for_loop()
     print("\nFOR LOOP FSM:")
-    print(f"  States: {list(for_loop.states.keys())}")
+    for name, tokens in for_loop.state_tokens.items():
+        print(f"  {name}: {tokens}")
     print(f"  Cassette |a|: {for_loop.cassette.abs().mean().item():.4f}")
 
     wave = for_loop.query("start", "init")

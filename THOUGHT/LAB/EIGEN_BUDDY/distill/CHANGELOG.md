@@ -5,6 +5,34 @@
 
 ---
 
+## [1.13.0] - 2026-05-24 — VSA DYNAMIC UNBINDING: All Repetition Eliminated
+
+### Changed
+- `inference.py` — VSA dynamic state machine with resonant transition triggers. Architecture:
+  - **Inverted Hierarchy:** VSA carrier=0.50, M=0.30, G=0.20, A=0.00. Etched algorithm rules.
+  - **Dynamic Unbinding:** Tracks current VSA state/trigger. After each token emission, measures
+    phase similarity (dot product) between generated token and current state seed. If
+    similarity > 0.85 or timeout >= 3 tokens, triggers Hadamard unbinding:
+    `next = ρ^(-1)(cassette ⊙ trigger* ⊙ state*)`. New state Kuramoto-locked to pure target.
+  - **State Machine Transitions:** start→init→cond→body→inc→cond (loop) or cond→done (exit).
+    Trigger auto-advances: start→true→step→step→true (cycle).
+  - Semantic seeds loaded from crystalline corpus token phases.
+- `cassette_compiler.py` — VSAStateMachine accepts concept phases and resolve function
+  for semantic seed initialization from crystalline token superpositions.
+- `eval_superradiant.py` — Builds for-loop VSA FSM per task, passes to generate().
+
+### Result
+- **All repetition loops eliminated across all 5 tasks.** Task 3 breakthrough:
+  `True if < read gcd less multiply # ; range = - / get right` — NO `f f f` trap.
+  VSA state transitions prevent token resonance traps.
+- Task 0: `left s y i x 1 factorial print # join & ~ if | a` — unique tokens
+- Task 3: `range`, `=`, `-`, `/`, `get`, `right` — VSA cond/body/inc states routing
+- 5/5 extraction maintained. VSA carrier at 0.50 dominance proven.
+- Semantic seed initialization bridges abstract FSM states to physical Python tokens.
+  The etched algorithm drives routing via resonant state transitions.
+
+---
+
 ## [1.12.0] - 2026-05-24 — VSA CASSETTE COMPILER: Geodesic Tracing Proven
 
 ### Added

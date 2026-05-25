@@ -432,7 +432,10 @@ for task_id, problem in sorted(HUMANEVAL_PROBLEMS.items()):
 
     t0 = time.perf_counter()
     from inference import InferenceEngine
+    from train.cassette_compiler import compile_for_loop
     ie = InferenceEngine()
+
+    vsa_fsm = compile_for_loop(engine.cp, engine._resolve_cid)
 
     ref_phase = fused_phase if fused_phase is not None else None
 
@@ -442,7 +445,8 @@ for task_id, problem in sorted(HUMANEVAL_PROBLEMS.items()):
                          cassette=engine.cassette,
                          ref_phase=ref_phase,
                          local_var_phases=local_var_phases,
-                         local_var_names=local_var_names)
+                         local_var_names=local_var_names,
+                         vsa_fsm=vsa_fsm)
     elapsed = time.perf_counter() - t0
 
     completion = " ".join(tokens)

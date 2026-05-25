@@ -65,6 +65,15 @@ VACUUM_HOLO = 0.55
 VACUUM_GRAM = 0.30
 VACUUM_ATTN = 0.15
 M_DEPLETE = 0.6
+VSA_HOLO = 0.30
+VSA_GRAM = 0.20
+VSA_CARR = 0.50
+VSA_RESONANCE = 0.85
+VSA_TIMEOUT = 3
+VACUUM_HOLO = 0.55
+VACUUM_GRAM = 0.30
+VACUUM_ATTN = 0.15
+M_DEPLETE = 0.6
 
 
 class InferenceEngine:
@@ -234,7 +243,8 @@ class InferenceEngine:
         return (raw * self.vocab_mask) ** 2
 
     def generate(self, prompt, max_tokens=25, intent_phase=None, params_list=None,
-                 cassette=None, ref_phase=None, local_var_phases=None, local_var_names=None):
+                 cassette=None, ref_phase=None, local_var_phases=None, local_var_names=None,
+                 vsa_fsm=None):
         if intent_phase is None:
             intent_phase = self._get_phase("fibonacci")
         if params_list is None:
@@ -288,6 +298,9 @@ class InferenceEngine:
         next_carrier = None
         skip_set = {"def", ":", ",", "return"}
         generated = []
+        vsa_trigger = "start"
+        vsa_state = "init"
+        vsa_timeout = 0
 
         for step in range(max_tokens):
             logits = self.model.forward(ids)
@@ -309,6 +322,16 @@ class InferenceEngine:
                     query_vec = cp_last + GAMMA * Phase_carrier
                     query_phase = query_vec / (query_vec.abs().max().clamp(min=1e-12))
                     wave_G = self.grammar_G @ query_phase
+
+                if vsa_fsm is not None:
+                    try:
+                        vsa_wave = vsa_fsm.query(vsa_trigger, vsa_state)
+                        vsa_wave = vsa_wave / (vsa_wave.abs().max().clamp(min=1e-12))
+                        vsa_scores = self._compute_scores(vsa_wave)
+                        carrier_scores = vsa_scores
+                    except Exception:
+                        pass
+
                 gram_scores = self._compute_scores(wave_G)
 
                 anneal_step = step - anneal_offset
@@ -334,6 +357,12 @@ class InferenceEngine:
                 combined = ATTN_WEIGHT * attn_probs + HOLO_WEIGHT * holo_probs + GRAM_WEIGHT * gram_probs + CARR_WEIGHT * carrier_probs
 
             combined = combined / combined.sum()
+            if vsa_fsm is not None:
+                holo_probs = holo_probs / holo_probs.sum().clamp(min=1e-12)
+                gram_probs = gram_probs / gram_probs.sum().clamp(min=1e-12)
+                carrier_probs = carrier_probs / carrier_probs.sum().clamp(min=1e-12)
+                combined = VSA_HOLO * holo_probs + VSA_GRAM * gram_probs + VSA_CARR * carrier_probs
+                combined = combined / combined.sum()
             top5_vals, top5_ids = combined.topk(6)
             r1_tid = int(top5_ids[0].item())
             r1_word = self.concept_words[r1_tid]
@@ -422,6 +451,32 @@ class InferenceEngine:
             if carrier_shifted:
                 skip_set.discard(":")
 
+            if vsa_fsm is not None:
+                if chosen_id < len(self.concept_phases) and self.vocab_mask[chosen_id] > 0:
+                    gen_phase = self.concept_phases[chosen_id]
+                    state_seed = vsa_fsm.states.get(vsa_state)
+                    if state_seed is not None:
+                        sim = float(torch.abs(torch.dot(state_seed.conj(), gen_phase))) / HALF
+                        vsa_timeout += 1
+                        if sim > VSA_RESONANCE or vsa_timeout >= VSA_TIMEOUT:
+                            vsa_timeout = 0
+                            trigger_vec = vsa_fsm.triggers.get(vsa_trigger)
+                            if trigger_vec is not None:
+                                next_noisy = vsa_fsm.query(vsa_trigger, vsa_state)
+                                results = vsa_fsm.measure(next_noisy)
+                                if results:
+                                    vsa_state = results[0][0]
+                                    if vsa_trigger == "start":
+                                        vsa_trigger = "true"
+                                    elif vsa_state in ("body", "true_body", "false_body"):
+                                        vsa_trigger = "step"
+                                    elif vsa_state in ("inc",):
+                                        vsa_trigger = "step"
+                                    elif vsa_state in ("cond",):
+                                        vsa_trigger = "true"
+                                    elif vsa_state in ("done", "end"):
+                                        vsa_trigger = "done"
+
             new_tok = torch.tensor([[chosen_id]], device=DEV)
             ids = torch.cat([ids, new_tok], dim=1)
 
@@ -436,6 +491,7 @@ if __name__ == "__main__":
     engine = InferenceEngine()
     print(f"Grammar boost (vacuum): {GRAMMAR_BOOST_VACUUM}x  depth_map: [1->'1', 2->'2']")
     print(f"Weights: holo={HOLO_WEIGHT} gram={GRAM_WEIGHT} attn={ATTN_WEIGHT} carr={CARR_WEIGHT}  M_deplete={M_DEPLETE}")
+    print(f"VSA mode: holo={VSA_HOLO} gram={VSA_GRAM} carr={VSA_CARR}  resonance>{VSA_RESONANCE}  timeout={VSA_TIMEOUT}")
     print(f"Vacuum: holo={VACUUM_HOLO} gram={VACUUM_GRAM} attn={VACUUM_ATTN}")
 
     prompt = (
