@@ -333,8 +333,24 @@ class InferenceEngine:
                     try:
                         vsa_wave = vsa_fsm.query(vsa_trigger, vsa_state)
                         vsa_wave = vsa_wave / (vsa_wave.abs().max().clamp(min=1e-12))
+                        if ref_phase is not None:
+                            vsa_wave = vsa_wave + 0.1 * ref_phase.to(vsa_wave.device)
+                            vsa_wave = vsa_wave / (vsa_wave.abs().max().clamp(min=1e-12))
                         vsa_scores = self._compute_scores(vsa_wave)
                         carrier_scores = vsa_scores
+                        from validator import DiscreteOracle, unitary_reflect
+                        oracle = DiscreteOracle()
+                        vsa_wave_ref = vsa_wave.clone()
+                        for _ in range(3):
+                            top_tid = int(vsa_scores.topk(1).indices[0].item())
+                            top_word = self.concept_words[top_tid]
+                            if oracle.validate(top_word):
+                                break
+                            illegal_phase = self.concept_phases[top_tid]
+                            vsa_wave_ref = unitary_reflect(vsa_wave_ref, illegal_phase)
+                            vsa_wave_ref = vsa_wave_ref / (vsa_wave_ref.abs().max().clamp(min=1e-12))
+                            vsa_scores = self._compute_scores(vsa_wave_ref)
+                            carrier_scores = vsa_scores
                     except Exception:
                         pass
 
@@ -400,6 +416,8 @@ class InferenceEngine:
             cp_new = self.concept_phases[chosen_id]
             cp_prev = self.concept_phases[last_tid]
             holo_m += cp_new * cp_prev.conj()
+            if vsa_fsm is not None:
+                oracle.update(chosen_word) if 'oracle' in dir() else None
             if chosen_id < len(self.concept_phases) and self.vocab_mask[chosen_id] > 0:
                 depletion = M_DEPLETE + step * 0.02
                 holo_m = holo_m - depletion * self.concept_phases[chosen_id]

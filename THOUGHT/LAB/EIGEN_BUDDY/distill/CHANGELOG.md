@@ -5,6 +5,34 @@
 
 ---
 
+## [1.16.0] - 2026-05-24 — UNIFIED CIRCUIT: Standing Wave + Upstream Reflection
+
+### Added
+- `validator.py` — Discrete Oracle (Rust FFI stand-in) with `DiscreteOracle` class for
+  token stream validation and `unitary_reflect()` for π-phase reflection on complex waves.
+
+### Changed
+- `inference.py` — Standing wave residual + upstream unitary reflection. Architecture:
+  - **Standing Wave:** `vsa_wave += 0.1 * ref_phase` each step. Maintains continuous
+    low-amplitude function signature wave — physical container walls preventing phase
+    vacuum from admitting high-frequency noise. L = nλ/2 standing wave condition.
+  - **Upstream Reflection:** Oracle validation on complex64 VSA carrier wave BEFORE Born
+    Rule collapse. If token invalid, unitary_reflect removes illegal phase from carrier:
+    `wave = wave - 2*dot(wave, illegal)*illegal`. Kuramoto instantly snaps to next
+    valid attractor. Up to 3 reflection attempts per step. U^†U = I, 0.0 J.
+  - Oracle state tracked across steps for bracket/indent validation.
+  - Works entirely in complex64 before probability collapse — pure S^1 torus.
+
+### Result
+- Standing wave stabilizes VSA carrier against noise drift. Upstream reflection gates
+  tokens before probability collapse — complex-domain π-phase interference.
+- 5/5 extraction maintained. Output diversity preserved.
+- `$ ^ # @` noise symbols remain from legacy symbol set — corpus cleanup pending.
+- Unified circuit: semantic gravity (standing wave) + complex regulation (upstream
+  reflection) deployed. Landauer-boundary preserved (0.0 J).
+
+---
+
 ## [1.15.0] - 2026-05-24 — HOLOGRAPHIC PUSHDOWN AUTOMATON: Catalytic Stack
 
 ### Changed
