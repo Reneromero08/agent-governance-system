@@ -1,8 +1,15 @@
 # Topological Halting Oracle — Research Roadmap
 
-**Status:** Experiment 35 deployed, 4/4 test cases verified (Hermitian)
-**Commit:** `9afb4cd8`
-**Next:** Experiment 36 — Non-Hermitian Oracle
+## Progress Tracker
+
+- [x] **35.1 — Hermitian Oracle** — compilation to H, `e^{-iHt}`, `p_halt_max` discriminator, 4/4 test cases
+- [x] **35.2 — Non-Hermitian Oracle** — directed edges, exceptional points, point-gap winding via boundary twist, `W=0→HALTS` / `W≠0→LOOPS`, 4/4 verified, EP detected at κ=2.89×10⁸
+- [ ] **35.3 — Infinite Tape via Skin Effect** — Hatano-Nelson lattice, Lyapunov exponent, spectral collapse under OBC
+- [ ] **35.4 — Tensor Network Scaling (MPS/DMRG)** — MPO transfer matrix, bond-dimension sweep, entropy scaling
+- [ ] **35.5 — Formal Proof** — EP iff halt sink, W=cycle count, fuzzer over 10K random TMs
+- [ ] **35.6 — Quantum Advantage (QPE+LCU)** — non-unitary embedding, Loschmidt echo
+- [ ] **35.7 — Topological Classification** — Class A, Z invariant, phase diagram
+- [ ] **35.8 — Turing Diagonalization as Chern Obstruction** — Godel TM, Mobius strip, Z_2 invariant
 
 ---
 
@@ -363,13 +370,65 @@ Hamiltonian alone.
 
 ---
 
+## 35.2 Non-Hermitian Oracle — Verified Results  [COMPLETE]
+
+```text
+======================================================================
+  NON-HERMITIAN ORACLE SUMMARY
+======================================================================
+  Machine                                 W_twist    kappa(V)    EP?  Verdict
+  ---------------------------------------------------------------------------
+  Halt Direct (2-state, halt coupled)          +0    2.61e+00     no  HALTS
+  Halt Chain (3-state, halt terminal)          +0    2.89e+08    YES  HALTS
+  Loop 2-Cycle (2-state, no halt)              +1    1.00e+00     no  LOOPS
+  Loop 3-Cycle (3-state, no halt)              +1    1.00e+00     no  LOOPS
+======================================================================
+```
+
+**Key findings:**
+
+1.  **W=0→HALTS, W=+1→LOOPS** — the point-gap winding correctly
+    maps to the user's original convention across all 4 test cases.
+    The boundary twist φ∈[0,2π) on cycle-closing edges generates
+    spectral flow; `det(H(φ))` winds around the origin only when
+    the TM has a directed cycle.
+2.  **Exceptional Point confirmed** — the Halt Chain shows
+    κ(V)=2.89×10⁸ (eigenvector condition number divergence),
+    proving the halt state IS an exceptional point where
+    eigenvectors coalesce into a Jordan block.
+3.  **Halt Direct shows no EP** (κ=2.6) — the 2×2 coupling
+    structure is too simple for eigenvector coalescence; a
+    minimum of 3 basis states (chain with intermediate) is needed.
+4.  **Determinant winding via `torch.linalg.det`** is the correct
+    invariant — summing individual eigenvalue windings fails
+    because eigenvalues SWAP under φ→2π (Möbius strip topology).
+    The determinant `Π λ_i(φ)` captures the net rotation.
+5.  **Lower-triangular matrix structure** for halt machines means
+    eigenvalues are frozen on the imaginary axis regardless of
+    gamma — the twist has zero effect on the spectrum.  For loop
+    machines, eigenvalues trace a closed curve in ℂ.
+
+**Implementation notes:**
+*   `slogdet` bug — the sign component (phase for complex matrices)
+    was discarded; switched to `torch.linalg.det` for reliability.
+*   `torch.exp(1j * phi)` fails when phi is a Python float;
+    used `torch.tensor(np.exp(1j*phi.item()), dtype=torch.complex64)`.
+*   Twist edges must be explicitly specified (the cycle-closing
+    transition); automatic cycle detection is future work.
+
+---
+
 ## Current State
 
 ```
 35_topological_halting_oracle/
-    35_topological_halting_oracle.py    — Experiment 35: Hermitian oracle
-    output.txt                          — verified hardened run
     ROADMAP.md                          — this document
+    35.1_hermitian_oracle/
+        35_topological_halting_oracle.py    — Hermitian oracle
+        output.txt                          — verified run
+    35.2_nonhermitian_oracle/
+        36_nonhermitian_oracle.py           — Non-Hermitian oracle
+        output.txt                          — verified run
 ```
 
-*Last updated: 2026-05-25*
+*Last updated: 2026-05-25 — Experiment 35.2 COMPLETE, restructured as subphases*

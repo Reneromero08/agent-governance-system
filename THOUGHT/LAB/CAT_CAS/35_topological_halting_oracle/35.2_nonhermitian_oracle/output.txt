@@ -1,0 +1,144 @@
+======================================================================
+  NON-HERMITIAN HALTING ORACLE  --  Halt Direct (2-state, halt coupled)
+======================================================================
+
+Non-Hermitian Hamiltonian  (dim = 4)
+----------------------------------------------------------------------
+          |s0,b0>   [  0.00 -0.10j    0.00 +0.00j    0.00 +0.00j    0.00 +0.00j]
+          |s0,b1>   [  0.00 +0.00j    0.00 -0.10j    0.00 +0.00j    0.00 +0.00j]
+      |s1,b0> [H]   [  1.00 +0.00j    0.00 +0.00j    0.00 -1.00j    0.00 +0.00j]
+      |s1,b1> [H]   [  0.00 +0.00j    0.00 +0.00j    0.00 +0.00j    0.00 -1.00j]
+
+Complex Eigenvalues:
+    lambda[0] = +0.000000-1.000000j  |lam|=1.000000
+    lambda[1] = +0.000000-0.100000j  |lam|=0.100000
+    lambda[2] = +0.000000-0.100000j  |lam|=0.100000 <-- HALT
+    lambda[3] = +0.000000-1.000000j  |lam|=1.000000 <-- HALT
+  Spectral radius = 1.000000
+  Eigenvector condition  kappa(V) = 2.605958e+00  
+
+Point-Gap Winding (boundary twist sweep):
+  W_twist = +0.0000  (rounded: +0)  
+  Twist edges: 0 cycle-closing transitions
+
+Active states: 2  |  Halt basis states: 2
+  loss_rate = 0.1  |  halt sink multiplier = 10x
+
+  ***  VERDICT:  HALTS
+  ***  trivial spectral flow  W=+0    kappa(V)=2.61e+00
+======================================================================
+
+======================================================================
+  NON-HERMITIAN HALTING ORACLE  --  Halt Chain (3-state, halt terminal)
+======================================================================
+
+Non-Hermitian Hamiltonian  (dim = 6)
+----------------------------------------------------------------------
+          |s0,b0>   [  0.00 -0.10j    0.00 +0.00j    0.00 +0.00j    0.00 +0.00j    0.00 +0.00j    0.00 +0.00j]
+          |s0,b1>   [  0.00 +0.00j    0.00 -0.10j    0.00 +0.00j    0.00 +0.00j    0.00 +0.00j    0.00 +0.00j]
+          |s1,b0>   [  1.00 +0.00j    0.00 +0.00j    0.00 -0.10j    0.00 +0.00j    0.00 +0.00j    0.00 +0.00j]
+          |s1,b1>   [  0.00 +0.00j    0.00 +0.00j    0.00 +0.00j    0.00 -0.10j    0.00 +0.00j    0.00 +0.00j]
+      |s2,b0> [H]   [  0.00 +0.00j    0.00 +0.00j    1.00 +0.00j    0.00 +0.00j    0.00 -1.00j    0.00 +0.00j]
+      |s2,b1> [H]   [  0.00 +0.00j    0.00 +0.00j    0.00 +0.00j    0.00 +0.00j    0.00 +0.00j    0.00 -1.00j]
+
+Complex Eigenvalues:
+    lambda[0] = +0.000000-1.000000j  |lam|=1.000000
+    lambda[1] = +0.000000-0.100000j  |lam|=0.100000
+    lambda[2] = +0.000000-0.100000j  |lam|=0.100000
+    lambda[3] = +0.000000-0.100000j  |lam|=0.100000
+    lambda[4] = +0.000000-0.100000j  |lam|=0.100000 <-- HALT
+    lambda[5] = +0.000000-1.000000j  |lam|=1.000000 <-- HALT
+  Spectral radius = 1.000000
+  Eigenvector condition  kappa(V) = 2.894486e+08  *** EP DETECTED ***
+
+Point-Gap Winding (boundary twist sweep):
+  W_twist = +0.0000  (rounded: +0)  
+  Twist edges: 0 cycle-closing transitions
+
+Active states: 4  |  Halt basis states: 2
+  loss_rate = 0.1  |  halt sink multiplier = 10x
+
+  ***  VERDICT:  HALTS
+  ***  trivial spectral flow  W=+0  EP detected  kappa(V)=2.89e+08
+======================================================================
+
+======================================================================
+  NON-HERMITIAN HALTING ORACLE  --  Loop 2-Cycle (2-state, no halt)
+======================================================================
+
+Non-Hermitian Hamiltonian  (dim = 4)
+----------------------------------------------------------------------
+          |s0,b0>   [  0.00 -0.10j    0.00 +0.00j    1.00 +0.00j    0.00 +0.00j]
+          |s0,b1>   [  0.00 +0.00j    0.00 -0.10j    0.00 +0.00j    0.00 +0.00j]
+          |s1,b0>   [  1.00 +0.00j    0.00 +0.00j    0.00 -0.10j    0.00 +0.00j]
+          |s1,b1>   [  0.00 +0.00j    0.00 +0.00j    0.00 +0.00j    0.00 -0.10j]
+
+Complex Eigenvalues:
+    lambda[0] = +1.000000-0.100000j  |lam|=1.004988
+    lambda[1] = -1.000000-0.100000j  |lam|=1.004988
+    lambda[2] = +0.000000-0.100000j  |lam|=0.100000
+    lambda[3] = +0.000000-0.100000j  |lam|=0.100000
+  Spectral radius = 1.004988
+  Eigenvector condition  kappa(V) = 1.000000e+00  
+
+Point-Gap Winding (boundary twist sweep):
+  W_twist = +1.0000  (rounded: +1)  *** spectral loop ***
+  Twist edges: 1 cycle-closing transitions
+
+Active states: 4  |  Halt basis states: 0
+  loss_rate = 0.1  |  halt sink multiplier = 10x
+
+  ***  VERDICT:  LOOPS
+  ***  non-trivial spectral flow  W=+1  
+======================================================================
+
+======================================================================
+  NON-HERMITIAN HALTING ORACLE  --  Loop 3-Cycle (3-state, no halt)
+======================================================================
+
+Non-Hermitian Hamiltonian  (dim = 6)
+----------------------------------------------------------------------
+          |s0,b0>   [  0.00 -0.10j    0.00 +0.00j    0.00 +0.00j    0.00 +0.00j    1.00 +0.00j    0.00 +0.00j]
+          |s0,b1>   [  0.00 +0.00j    0.00 -0.10j    0.00 +0.00j    0.00 +0.00j    0.00 +0.00j    0.00 +0.00j]
+          |s1,b0>   [  1.00 +0.00j    0.00 +0.00j    0.00 -0.10j    0.00 +0.00j    0.00 +0.00j    0.00 +0.00j]
+          |s1,b1>   [  0.00 +0.00j    0.00 +0.00j    0.00 +0.00j    0.00 -0.10j    0.00 +0.00j    0.00 +0.00j]
+          |s2,b0>   [  0.00 +0.00j    0.00 +0.00j    1.00 +0.00j    0.00 +0.00j    0.00 -0.10j    0.00 +0.00j]
+          |s2,b1>   [  0.00 +0.00j    0.00 +0.00j    0.00 +0.00j    0.00 +0.00j    0.00 +0.00j    0.00 -0.10j]
+
+Complex Eigenvalues:
+    lambda[0] = -0.500000+0.766025j  |lam|=0.914765
+    lambda[1] = -0.500000-0.966025j  |lam|=1.087752
+    lambda[2] = +1.000000-0.100000j  |lam|=1.004988
+    lambda[3] = +0.000000-0.100000j  |lam|=0.100000
+    lambda[4] = +0.000000-0.100000j  |lam|=0.100000
+    lambda[5] = +0.000000-0.100000j  |lam|=0.100000
+  Spectral radius = 1.087752
+  Eigenvector condition  kappa(V) = 1.000000e+00  
+
+Point-Gap Winding (boundary twist sweep):
+  W_twist = +1.0000  (rounded: +1)  *** spectral loop ***
+  Twist edges: 1 cycle-closing transitions
+
+Active states: 6  |  Halt basis states: 0
+  loss_rate = 0.1  |  halt sink multiplier = 10x
+
+  ***  VERDICT:  LOOPS
+  ***  non-trivial spectral flow  W=+1  
+======================================================================
+
+
+======================================================================
+  NON-HERMITIAN ORACLE SUMMARY
+======================================================================
+  Machine                                 W_twist    kappa(V)    EP?  Verdict
+  ---------------------------------------------------------------------------
+  Halt Direct (2-state, halt coupled)          +0    2.61e+00     no  HALTS
+  Halt Chain (3-state, halt terminal)          +0    2.89e+08    YES  HALTS
+  Loop 2-Cycle (2-state, no halt)              +1    1.00e+00     no  LOOPS
+  Loop 3-Cycle (3-state, no halt)              +1    1.00e+00     no  LOOPS
+
+  W_twist: spectral-flow winding via boundary twist (phi sweep)
+           W=0 -> eigenvalues are static -> HALTS
+           W!=0 -> eigenvalues trace a loop -> LOOPS
+  kappa(V): eigenvector condition number (diverges at EP)
+======================================================================
