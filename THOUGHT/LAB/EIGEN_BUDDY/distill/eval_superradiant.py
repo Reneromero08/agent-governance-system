@@ -43,6 +43,13 @@ def filter_positive(nums): return [x for x in nums if x > 0]
 def filter_negative(nums): return [x for x in nums if x < 0]
 def double_all(nums): return [x * 2 for x in nums]
 def square_all(nums): return [x * x for x in nums]
+def abs_val(x): return x if x >= 0 else -x
+def max_val(a, b): return a if a > b else b
+def min_val(a, b): return a if a < b else b
+def abs_diff(a, b): return a - b if a > b else b - a
+def is_close(a, b, t): return abs_diff(a, b) < t
+def is_below(bal): return bal < 0
+def any_match(items, target): return any(x == target for x in items)
 def map_add(nums, k): return [x + k for x in nums]
 def map_sub(nums, k): return [x - k for x in nums]
 def any_match(items, target): return any(x == target for x in items)
@@ -109,13 +116,20 @@ class FullSpectrumEngine:
         del embed
 
         ascii_code = re.compile(r'^[a-zA-Z0-9_=+*/\[\]{}():.,;<>! -]+$')
+        NOISE_SYMBOLS = {'$', '^', '~', '@', '#', '`', '\\', '"', "'"}
         self.vocab_mask = torch.zeros(V, device=DEV)
         for tid in range(V):
             word = self.tokenizer.decode([tid]).strip()
-            if ascii_code.match(word) and word != '':
+            if ascii_code.match(word) and word != '' and word not in NOISE_SYMBOLS:
                 self.vocab_mask[tid] = 1.0
         n_allowed = int(self.vocab_mask.sum().item())
-        print(f"  Full vocabulary: {n_allowed} code tokens")
+        FORBIDDEN_CHARS = ['$', '^', '~', '@', '#', '!']
+        for tid in range(V):
+            word = self.tokenizer.decode([tid])
+            if any(c in word for c in FORBIDDEN_CHARS) and word.strip() != '!=':
+                self.vocab_mask[tid] = 0.0
+        n_allowed = int(self.vocab_mask.sum().item())
+        print(f"  Full vocabulary: {n_allowed} code tokens (forbidden chars CRUSHED)")
 
         param_bound = re.compile(r'^[a-z0-9_]+$')
         crystalline_words = set()

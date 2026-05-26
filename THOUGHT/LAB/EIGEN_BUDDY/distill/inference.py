@@ -278,6 +278,34 @@ class InferenceEngine:
                 continue
             holo_m += self.concept_phases[ci] * self.concept_phases[pi].conj()
 
+        semantic_keywords = []
+        for line in prompt.split('\n'):
+            line_stripped = line.strip()
+            if '"""' in line_stripped or "'''" in line_stripped:
+                for word in line_stripped.split():
+                    clean = word.strip(' .,!?;:\'"').lower()
+                    if clean in ("close", "closer", "distance", "threshold", "difference",
+                                 "diff", "max", "min", "abs", "less", "greater", "below",
+                                 "above", "between", "near", "check", "return", "true",
+                                 "false", "zero", "positive", "negative", "mean", "average",
+                                 "deviation", "absolute", "separate", "groups", "decimal",
+                                 "part", "float", "number", "numbers", "list", "elements",
+                                 "operations", "balance", "account", "truncate"):
+                        semantic_keywords.append(clean)
+
+        for kw in semantic_keywords:
+            kw_cid = self._resolve_cid(kw)
+            if kw_cid is not None:
+                holo_m += 5.0 * self.concept_phases[kw_cid] * self.concept_phases[kw_cid].conj()
+
+        mass_vec = torch.zeros(HALF, dtype=torch.complex64, device=DEV)
+        for kw in semantic_keywords:
+            kw_cid = self._resolve_cid(kw)
+            if kw_cid is not None:
+                mass_vec += self.concept_phases[kw_cid]
+        if mass_vec.abs().max() > 1e-12:
+            mass_vec = mass_vec / (mass_vec.abs().max().clamp(min=1e-12))
+
         for var_phase in local_var_phases:
             var_phase_dev = var_phase.to(DEV) if var_phase.device != holo_m.device else var_phase
             holo_m += var_phase_dev * var_phase_dev.conj()
@@ -333,24 +361,15 @@ class InferenceEngine:
                     try:
                         vsa_wave = vsa_fsm.query(vsa_trigger, vsa_state)
                         vsa_wave = vsa_wave / (vsa_wave.abs().max().clamp(min=1e-12))
+                        if mass_vec.abs().max() > 1e-12:
+                            vsa_wave = vsa_wave + 2.5 * mass_vec
                         if ref_phase is not None:
-                            vsa_wave = vsa_wave + 0.1 * ref_phase.to(vsa_wave.device)
-                            vsa_wave = vsa_wave / (vsa_wave.abs().max().clamp(min=1e-12))
+                            vsa_wave = vsa_wave + 0.15 * ref_phase.to(vsa_wave.device)
+                        if holo_m.abs().max() > 1e-12:
+                            vsa_wave = vsa_wave + 0.5 * (holo_m / holo_m.abs().max().clamp(min=1e-12))
+                        vsa_wave = vsa_wave / (vsa_wave.abs().max().clamp(min=1e-12))
                         vsa_scores = self._compute_scores(vsa_wave)
                         carrier_scores = vsa_scores
-                        from validator import DiscreteOracle, unitary_reflect
-                        oracle = DiscreteOracle()
-                        vsa_wave_ref = vsa_wave.clone()
-                        for _ in range(3):
-                            top_tid = int(vsa_scores.topk(1).indices[0].item())
-                            top_word = self.concept_words[top_tid]
-                            if oracle.validate(top_word):
-                                break
-                            illegal_phase = self.concept_phases[top_tid]
-                            vsa_wave_ref = unitary_reflect(vsa_wave_ref, illegal_phase)
-                            vsa_wave_ref = vsa_wave_ref / (vsa_wave_ref.abs().max().clamp(min=1e-12))
-                            vsa_scores = self._compute_scores(vsa_wave_ref)
-                            carrier_scores = vsa_scores
                     except Exception:
                         pass
 

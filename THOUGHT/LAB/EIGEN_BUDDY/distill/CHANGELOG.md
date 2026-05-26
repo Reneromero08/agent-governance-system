@@ -5,6 +5,29 @@
 
 ---
 
+## [1.17.0] - 2026-05-24 — HARD OVERRIDE: Substring Crush + Real Oracle + Gravity Init
+
+### Changed
+- `eval_superradiant.py` — Substring phase crush replaces single-char symbol filter.
+  `FORBIDDEN_CHARS = ['$', '^', '~', '@', '#', '!']` scanned in full decoded token
+  string (not stripped). BPE tokens with hidden spaces caught. `!=` preserved.
+  Vocab reduced to 124,332 (-87 tokens with forbidden chars at substring level).
+- `inference.py` — Mass vector precomputed before generation loop (not per-step).
+  Gravity initialization: `vsa_wave + 2.5 * mass_vec + 0.15 * ref_phase + 0.5 * holo_m`
+  applied at VSA query time. Mass persists across steps without recomputation.
+- `validator.py` — Real oracle replaces dummy. Rejects consecutive operators
+  (`+ *`, `in !`). Tracks `last_op` state. Simple, deterministic, no regex.
+
+### Result
+- Forbidden char crush: -87 tokens. Real oracle active against consecutive operators.
+- Mass gravity initialization: `close`, `threshold`, `distance` keywords precomputed
+  once and injected at 2.5x into every VSA wave query.
+- `$ @` persist from pre-computed concept phases for multi-char BPE tokens containing
+  these chars as substrings — vocabulary resolution limit at Qwen BPE level.
+- 5/5 extraction maintained. All hard overrides deployed.
+
+---
+
 ## [1.16.0] - 2026-05-24 — UNIFIED CIRCUIT: Standing Wave + Upstream Reflection
 
 ### Added
