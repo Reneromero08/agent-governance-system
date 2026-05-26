@@ -318,6 +318,8 @@ class InferenceEngine:
 
                 if cassette is not None:
                     wave_G = cassette * cp_last
+                elif vsa_fsm is not None:
+                    wave_G = self.grammar_G @ cp_last
                 else:
                     query_vec = cp_last + GAMMA * Phase_carrier
                     query_phase = query_vec / (query_vec.abs().max().clamp(min=1e-12))
@@ -359,9 +361,11 @@ class InferenceEngine:
             combined = combined / combined.sum()
             if vsa_fsm is not None:
                 holo_probs = holo_probs / holo_probs.sum().clamp(min=1e-12)
-                gram_probs = gram_probs / gram_probs.sum().clamp(min=1e-12)
                 carrier_probs = carrier_probs / carrier_probs.sum().clamp(min=1e-12)
-                combined = VSA_HOLO * holo_probs + VSA_GRAM * gram_probs + VSA_CARR * carrier_probs
+                combined = 0.65 * carrier_probs + 0.35 * holo_probs
+                gram_mask = (gram_scores > gram_scores.max() * 0.05).float()
+                if gram_mask.sum() > 0:
+                    combined = combined * gram_mask
                 combined = combined / combined.sum()
             top5_vals, top5_ids = combined.topk(6)
             r1_tid = int(top5_ids[0].item())
@@ -491,7 +495,7 @@ if __name__ == "__main__":
     engine = InferenceEngine()
     print(f"Grammar boost (vacuum): {GRAMMAR_BOOST_VACUUM}x  depth_map: [1->'1', 2->'2']")
     print(f"Weights: holo={HOLO_WEIGHT} gram={GRAM_WEIGHT} attn={ATTN_WEIGHT} carr={CARR_WEIGHT}  M_deplete={M_DEPLETE}")
-    print(f"VSA mode: holo={VSA_HOLO} gram={VSA_GRAM} carr={VSA_CARR}  resonance>{VSA_RESONANCE}  timeout={VSA_TIMEOUT}")
+    print(f"VSA mode: carrier=0.65 holo=0.35  grammar=multiplicative_mask  resonance>{VSA_RESONANCE}  timeout={VSA_TIMEOUT}")
     print(f"Vacuum: holo={VACUUM_HOLO} gram={VACUUM_GRAM} attn={VACUUM_ATTN}")
 
     prompt = (

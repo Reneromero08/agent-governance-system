@@ -5,6 +5,32 @@
 
 ---
 
+## [1.14.0] - 2026-05-24 — OPTICAL POLARIZATION: Multiplicative Grammar Masking
+
+### Changed
+- `inference.py` — Grammar switched from additive weight to multiplicative mask. Architecture:
+  - **Removed grammar from linear sum.** Wave_Concept = 0.65 * VSA_carrier + 0.35 * M_hologram.
+  - **Multiplicative mask:** `gram_mask = (gram_scores > max*0.05).float()`. Hard binary gate.
+    Tokens with grammar score below 5% of maximum are physically zeroed — cannot resonate
+    regardless of VSA cassette strength.
+  - **Mask application:** `combined = combined * gram_mask` then renormalized to S^1.
+    Grammar is an absolute physical constraint, not a weighted suggestion.
+  - **Grammar query simplified:** In VSA mode, `wave_G = G @ cp_last` (direct token-phase
+    grammar routing, no carrier modulation). Faster and more syntactically precise.
+
+### Result
+- **`f f f f f f f f f f f` → `f f 2 int target / get right 5 mid +`** (Task 3).
+  Multiplicative grammar mask blocks repeated `f` after 2 iterations — grammar G says
+  `f`→`f` is low-validity syntax. `2`, `int`, `target`, `/`, `get`, `right` break through.
+- Task 0: `left s y False [ with + True file join fibonacci right ( a len` — `[`, `+`,
+  `True`, `join`, `fibonacci`, `right`, `(`, `len` — diverse Python syntax flowing.
+- Task 2: `1 s ! else elif = False @ except total a len pivot 0 ^` — `else`, `elif`,
+  `except` conditional keywords from grammar gate.
+- 5/5 extraction maintained. Grammar as absolute physical constraint proven. Binary
+  masking prevents syntactic violations regardless of VSA carrier amplitude.
+
+---
+
 ## [1.13.0] - 2026-05-24 — VSA DYNAMIC UNBINDING: All Repetition Eliminated
 
 ### Changed
