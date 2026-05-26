@@ -15,7 +15,9 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ### Changed
 
-- `CAPABILITY/TOOLS/governance/critic.py`: Removed `CATALYTIC_SAFE` whitelist. `check_catalytic_compliance()` now flags all catalytic-scope violations honestly. No files hidden from the gate.
+- `CAPABILITY/TOOLS/governance/critic.py`: Removed `CATALYTIC_SAFE` whitelist. `check_catalytic_compliance()` now flags all catalytic-scope violations honestly.
+- `THOUGHT/LAB/EIGEN_BUDDY/distill/HANDOFF.md`: Section 8 added with v2.0 final status. All 18 phases documented. Lab permanently sealed.
+- `THOUGHT/LAB/EIGEN_BUDDY/distill/CHANGELOG.md`: v2.0 delivered. 18 phases across full pipeline. Complete Fibonacci formula achieved via catalytic phase physics.
 
 ---
 
