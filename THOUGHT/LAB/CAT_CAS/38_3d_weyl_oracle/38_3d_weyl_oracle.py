@@ -233,5 +233,33 @@ def run_3d_weyl_oracle(L=8, n_kz=24):
 # 4.  Main
 # ======================================================================
 
+def uniform_gamma_sweep_38(L=8, n_kz=16):
+    """Uniform gamma field on Exp 38 (3D Weyl)."""
+    print(f"\n{'=' * 78}")
+    print("  UNIFORM GAMMA ANNIHILATION — Exp 38 (3D Weyl)")
+    print(f"  Gamma on every site (Exp 39 discovery)")
+    print(f"{'=' * 78}")
+    print(f"  {'Gamma':>8s}  {'max|C|':>7s}  {'nonzero':>8s}  {'Verdict'}")
+    print("  " + "-" * 40)
+
+    kz_vals = torch.linspace(0, 2*np.pi, n_kz)
+    for g in [0.0, 0.5, 1.0, 2.0, 5.0, 10.0]:
+        C_gamma = []
+        for kz in kz_vals:
+            H = build_weyl_slice(L, kz.item(), gamma_halt=0.0)
+            for i in range(L * L):
+                H[i, i] -= 1j * g  # uniform on all sites
+            im_s = torch.sort(torch.linalg.eigvals(H).imag).values
+            gaps = im_s[1:] - im_s[:-1]
+            Ef = complex(0, (im_s[gaps.argmax()] + im_s[gaps.argmax()+1]).item()/2)
+            P = spectral_projector(H, E_fermi=Ef)
+            C_gamma.append(bott_index(P, L))
+        maxC = max(abs(c) for c in C_gamma)
+        nz = sum(1 for c in C_gamma if c != 0)
+        v = "LOOPS" if maxC > 0 else "ANNIHILATED"
+        print(f"  {g:8.1f}  {maxC:7d}  {nz:8d}  {v}")
+    print(f"  {'='*78}")
+
 if __name__ == "__main__":
     run_3d_weyl_oracle(L=8, n_kz=24)
+    uniform_gamma_sweep_38()
