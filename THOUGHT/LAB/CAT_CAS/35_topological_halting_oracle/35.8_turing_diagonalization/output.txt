@@ -1,0 +1,54 @@
+======================================================================
+  WINDING TRANSITION ù W(lambda) across the Godel point
+======================================================================
+    lambda     W  Phase
+  ------------------------------
+     0.000     0  HALT
+     0.100     1  LOOP
+     0.200     1  LOOP
+     0.300     1  LOOP
+     0.400     1  LOOP
+     0.450     1  LOOP
+     0.490     1  LOOP
+     0.500     1  LOOP <-- GODEL POINT
+     0.510     1  LOOP
+     0.550     1  LOOP
+     0.600     1  LOOP
+     0.700     1  LOOP
+     0.800     1  LOOP
+     0.900     1  LOOP
+     1.000     0  HALT
+
+  At lambda=0.5 (Godel point): W=1, eigenvalues non-degenerate
+  Winding transitions at boundaries only: lam=0 -> W=0, lam=1 -> W=0
+  For 0 < lam < 1: W=1 (spectral loop from bidirectional coupling)
+======================================================================
+
+======================================================================
+  BERRY PHASE / EIGENVECTOR HOLONOMY
+======================================================================
+    lambda     Berry phase  Topology
+  ---------------------------------------------
+     0.000        0.000000  TRIVIAL
+     0.300        5.357293  phase=5.36
+     0.490        5.119561  phase=5.12
+     0.500        6.283184  TRIVIAL <-- GODEL
+     0.510        1.163626  phase=1.16
+     0.700        0.925893  phase=0.93
+     1.000        0.000000  TRIVIAL
+
+  Berry phase = 2pi (trivial) -> Godel point is topologically trivial
+  Berry phase != 0, 2pi at intermediate lam -> geometric phase from
+  the spectral loop, not a Z_2 obstruction
+======================================================================
+
+======================================================================
+  CHERN NUMBER on (lambda, phi) torus:  C = 0.0000
+  Integer -> Z classification
+
+  The Chern number C = 0.0000.  The eigenvector bundle is TRIVIAL
+  ù winding IS globally defined on this parameter manifold.
+  The Godel obstruction requires a genuinely self-referential
+  Hamiltonian where the TM's own description enters the
+  parameter space, creating a fixed-point singularity.
+======================================================================
