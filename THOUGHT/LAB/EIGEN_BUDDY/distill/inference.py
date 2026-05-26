@@ -70,6 +70,9 @@ VSA_GRAM = 0.20
 VSA_CARR = 0.50
 VSA_RESONANCE = 0.85
 VSA_TIMEOUT = 3
+
+PUSH_TOKENS = {"(", "[", "{", "if", "for", "def", "while", "try", "class", "with", "lambda"}
+POP_TOKENS = {")", "]", "}", "else", "return", "break", "continue", "pass", "except", "finally"}
 VACUUM_HOLO = 0.55
 VACUUM_GRAM = 0.30
 VACUUM_ATTN = 0.15
@@ -301,6 +304,7 @@ class InferenceEngine:
         vsa_trigger = "start"
         vsa_state = "init"
         vsa_timeout = 0
+        stack_S = torch.zeros(HALF, dtype=torch.complex64, device=DEV)
 
         for step in range(max_tokens):
             logits = self.model.forward(ids)
@@ -363,9 +367,18 @@ class InferenceEngine:
                 holo_probs = holo_probs / holo_probs.sum().clamp(min=1e-12)
                 carrier_probs = carrier_probs / carrier_probs.sum().clamp(min=1e-12)
                 combined = 0.65 * carrier_probs + 0.35 * holo_probs
-                gram_mask = (gram_scores > gram_scores.max() * 0.05).float()
-                if gram_mask.sum() > 0:
-                    combined = combined * gram_mask
+                if stack_S.abs().max() > 1e-12:
+                    stack_wave = self.grammar_G @ stack_S
+                    stack_scores = self._compute_scores(stack_wave)
+                    stack_mask = (stack_scores > stack_scores.max() * 0.03).float()
+                    gram_mask = (gram_scores > gram_scores.max() * 0.05).float()
+                    combined_mask = stack_mask * gram_mask
+                    if combined_mask.sum() > 0:
+                        combined = combined * combined_mask
+                else:
+                    gram_mask = (gram_scores > gram_scores.max() * 0.05).float()
+                    if gram_mask.sum() > 0:
+                        combined = combined * gram_mask
                 combined = combined / combined.sum()
             top5_vals, top5_ids = combined.topk(6)
             r1_tid = int(top5_ids[0].item())
@@ -454,6 +467,15 @@ class InferenceEngine:
             skip_set.add(chosen_word)
             if carrier_shifted:
                 skip_set.discard(":")
+
+            if chosen_word in PUSH_TOKENS and chosen_id < len(self.concept_phases):
+                cp_tok = self.concept_phases[chosen_id]
+                stack_S = cp_tok + torch.roll(stack_S, shifts=1)
+                stack_S = stack_S / (stack_S.abs().max().clamp(min=1e-12))
+            elif chosen_word in POP_TOKENS and chosen_id < len(self.concept_phases):
+                cp_tok = self.concept_phases[chosen_id]
+                stack_S = torch.roll(stack_S, shifts=-1) - cp_tok
+                stack_S = stack_S / (stack_S.abs().max().clamp(min=1e-12))
 
             if vsa_fsm is not None:
                 if chosen_id < len(self.concept_phases) and self.vocab_mask[chosen_id] > 0:

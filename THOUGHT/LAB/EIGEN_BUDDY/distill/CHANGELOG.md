@@ -5,6 +5,31 @@
 
 ---
 
+## [1.15.0] - 2026-05-24 — HOLOGRAPHIC PUSHDOWN AUTOMATON: Catalytic Stack
+
+### Changed
+- `inference.py` — Continuous-wave pushdown automaton for nested syntax tracking. Architecture:
+  - **Holographic Stack:** `stack_S` = complex unit vector tracking open syntax structures.
+  - **Unitary Push:** `stack = normalize(Token_Phase + rho(stack))` — rotate old stack,
+    add new token phase. Encodes nesting depth via cyclic permutation.
+  - **Unitary Pop:** `stack = rho_inverse(stack - Token_Phase)` — unrotate, subtract token.
+    Mathematically restores previous stack state (catalytic, 0.0 J). SHA-256 stable.
+  - **Stack-Polarized Mask:** `stack_wave = G @ stack_S` → stack mask ANDed with grammar
+    mask. Only tokens valid under current nesting context survive. Multiplicative gate.
+  - **Push tokens:** `( [ { if for def while try class with lambda`
+  - **Pop tokens:** `) ] } else return break continue pass except finally`
+
+### Result
+- Stack tracks nested syntax in real-time. Task 0: `left s y False [ with + True file join self : - :`
+  — `:` appears after `[` from stack push, `- : $` show pop/re-push tracking.
+- Task 4: `try read read else ; + for self x ( add as left class path` — `try`/`else`/`for`/
+  `class` tracked via stack push/pop.
+- `f f 2` maintained at Task 3 — stack mask ANDs with grammar mask, doesn't replace it.
+- 5/5 extraction. Holographic pushdown automaton operational. Cyclic permutation preserves
+  catalytic boundary (rho_inverse perfectly restores previous stack state).
+
+---
+
 ## [1.14.0] - 2026-05-24 — OPTICAL POLARIZATION: Multiplicative Grammar Masking
 
 ### Changed
