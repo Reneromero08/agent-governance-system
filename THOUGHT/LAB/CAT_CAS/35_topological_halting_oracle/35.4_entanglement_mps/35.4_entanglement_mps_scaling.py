@@ -90,7 +90,7 @@ def entropy_profile(H):
 # 3.  MPS power iteration
 # ---------------------------------------------------------------------------
 
-def mps_power_iteration(H, chi_max, n_iter=100, tau=0.01):
+def mps_power_iteration(H, n_iter=100, tau=0.01):
     """
     Find the right-eigenvector of H with largest |Re(E)| using MPS power
     iteration with bond-dimension truncation.
@@ -170,15 +170,14 @@ def run_entanglement_oracle(name, L, t_R, t_L, sink_idx=None,
     S_max = float(S_profile.max().item())
     S_mean = float(S_profile.mean().item())
 
-    # entropy localization: ratio of max entropy at sink cut vs mean elsewhere
-    if sink_idx is not None and sink_idx > 0 and sink_idx < L:
-        S_at_sink = float(S_profile[sink_idx - 1].max().item()) if sink_idx > 0 else 0.0
-        S_away = float(S_profile[:, :].mean().item())
+    # entropy at the sink cut specifically
+    if sink_idx is not None and 0 < sink_idx < L:
+        S_at_sink = float(S_profile[sink_idx - 1].max().item())
     else:
-        S_at_sink = 0.0
+        S_at_sink = float('nan')
 
     # MPS compression fidelity
-    psi_exact, fids = mps_power_iteration(H, chi_max=min(L, 16))
+    psi_exact, fids = mps_power_iteration(H)
 
     # spectral radius
     spec_radius = float(eigvals.abs().max().item())

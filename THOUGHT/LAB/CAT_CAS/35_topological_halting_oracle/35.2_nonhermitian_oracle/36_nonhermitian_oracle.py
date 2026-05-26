@@ -268,9 +268,9 @@ def run_nonhermitian_oracle(transitions, num_states, name, halt_idx=None,
               f"  {'*** EP DETECTED ***' if ep_detected else ''}")
 
         print(f"\nPoint-Gap Winding (boundary twist sweep):")
-        W_int = int(round(W_twist_raw))
-        print(f"  W_twist = {W_twist_raw:+.4f}  (rounded: {W_int:+d})"
-              f"  {'*** spectral loop ***' if abs(W_int) > 0 else ''}")
+        W_print = int(round(W_twist_raw))
+        print(f"  W_twist = {W_twist_raw:+.4f}  (rounded: {W_print:+d})"
+              f"  {'*** spectral loop ***' if abs(W_print) > 0 else ''}")
         print(f"  Twist edges: {len(twist_edges)} cycle-closing transitions")
 
         print(f"\nActive states: {N_active}  |  Halt basis states: {N_halt}")

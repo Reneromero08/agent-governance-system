@@ -184,12 +184,9 @@ def run_skin_oracle(name, L, t_R, t_L, sink_idx=None,
     H_obc = hatano_nelson_obc(L, t_R, t_L, eps, sink_idx, sink_strength)
     H_pbc = hatano_nelson_pbc(L, t_R, t_L, eps)
 
-    # ----  eigenvalues  --------------------------------------------------
-    eig_obc, _ = LA.eig(H_obc)
+    # ----  eigenvalues + eigenvectors (single eigensolve)  -----------
+    eig_obc, eigvecs_obc = LA.eig(H_obc)
     eig_pbc, _ = LA.eig(H_pbc)
-
-    # ----  IPR of all OBC eigenstates  -----------------------------------
-    _, eigvecs_obc = LA.eig(H_obc)
     ipr_vals = torch.tensor([ipr(eigvecs_obc[:, i])
                               for i in range(L)], dtype=torch.float64)
     ipr_mean = float(ipr_vals.mean().item())

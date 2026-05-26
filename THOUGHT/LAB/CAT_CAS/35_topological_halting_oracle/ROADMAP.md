@@ -3,9 +3,9 @@
 ## Progress Tracker
 
 - [x] **35.1 — Hermitian Oracle** — compilation to H, `e^{-iHt}`, `p_halt_max` discriminator, 4/4 test cases
-- [x] **35.2 — Non-Hermitian Oracle** — directed edges, exceptional points, point-gap winding via boundary twist, `W=0→HALTS` / `W≠0→LOOPS`, 4/4 verified, EP detected at κ=2.89×10⁸
-- [x] **35.3 — Infinite Tape via Skin Effect** — Hatano-Nelson chain, spectral collapse OBC/PBC=10.0 discriminates halt from loop, IPR confirms localization, Lyapunov exponent -inf for directed chains
-- [x] **35.4 — Entanglement + MPS Scaling** — bipartite entropy: halt S=0.056 (localized at sink) vs loop S=0.693 (delocalized), area-law confirmed for single-particle sector, MPS compression fidelity measured vs chi
+- [x] **35.2 — Non-Hermitian Oracle** — directed edges, exceptional points, point-gap winding via boundary twist, `W=0→HALTS` / `W≠0→LOOPS`, 4/4 verified, EP detected at κ=2.89×10⁸  *(hardened: deduplicated W_int)*
+- [x] **35.3 — Infinite Tape via Skin Effect** — Hatano-Nelson chain, spectral collapse OBC/PBC=10.0 discriminates halt from loop, IPR confirms localization, Lyapunov exponent -inf for directed chains  *(hardened: merged duplicate eig call)*
+- [x] **35.4 — Entanglement + MPS Scaling** — bipartite entropy: halt S=0.056 (localized at sink) vs loop S=0.693 (delocalized), area-law confirmed for single-particle sector, MPS compression fidelity measured vs chi  *(hardened: removed dead code)*
 - [ ] **35.5 — Formal Proof** — EP iff halt sink, W=cycle count, fuzzer over 10K random TMs
 - [ ] **35.6 — Quantum Advantage (QPE+LCU)** — non-unitary embedding, Loschmidt echo
 - [ ] **35.7 — Topological Classification** — Class A, Z invariant, phase diagram
@@ -539,4 +539,4 @@ Entropy scaling exponents:
         output.txt                          — verified run
 ```
 
-*Last updated: 2026-05-25 — Experiments 35.1–35.4 COMPLETE*
+*Last updated: 2026-05-25 — Experiments 35.1–35.4 COMPLETE + HARDENED*
