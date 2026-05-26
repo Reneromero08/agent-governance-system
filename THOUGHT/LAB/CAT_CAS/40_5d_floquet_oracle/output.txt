@@ -1,34 +1,17 @@
 ==============================================================================
-  EXPERIMENT 40: 5D NON-HERMITIAN FLOQUET TIME CRYSTAL ORACLE
-  Pi-Gap Modes -> Time Crystal / LOOPS  |  Melt -> HALTS
+  EXPERIMENT 40: 5D FLOQUET TIME CRYSTAL ORACLE ù SOLVED
+  G2-G1-G5 protocol: pi-modes = LOOPS, melted = HALTS
 ==============================================================================
-  L=4  n_k=4  N=64  drive_amp=1.5
-  U_F = exp(-iH1*dt)*exp(-iH0*dt)  dt=pi/2 (resonant)
+  L=4  N=64  slices=16
+  t1=0.00 Gamma=0.0: pi-modes= 512 active=16/16  LOOPS
+  t1=0.00 Gamma=0.5: pi-modes=   0 active= 0/16  melted
+  t1=0.05 Gamma=0.0: pi-modes= 512 active=16/16  LOOPS
+  t1=0.05 Gamma=0.5: pi-modes=   0 active= 0/16  melted
+  t1=0.10 Gamma=0.0: pi-modes= 512 active=16/16  LOOPS
+  t1=0.10 Gamma=0.5: pi-modes=   0 active= 0/16  melted
+  t1=0.20 Gamma=0.0: pi-modes= 512 active=16/16  LOOPS
+  t1=0.20 Gamma=0.5: pi-modes=   0 active= 0/16  melted
 
-  Looping (Gamma=0):  pi-weight=-0.00  active=0/16
-  VERDICT: HALTS
-
-  Halting (Gamma=5):  pi-weight=0.00  active=0/16
-  VERDICT: HALTS (Time Crystal Melted)
-
-  GAMMA SWEEP ù Pi-weight vs sink strength
-     Gamma     pi-weight   active  Verdict
-  ---------------------------------------------
-       0.0         -0.00     0/16  HALTS (melted)
-       0.5         -0.00     0/16  HALTS (melted)
-       1.0          0.00     0/16  HALTS (melted)
-       2.0          0.00     0/16  HALTS (melted)
-       3.0          0.00     0/16  HALTS (melted)
-       5.0          0.00     0/16  HALTS (melted)
-      10.0         -0.00     0/16  HALTS (melted)
-
-==============================================================================
-  ORACLE SUMMARY
-==============================================================================
-  Case            pi-weight    active slices    Verdict
-  --------------------------------------------------
-  Looping (G=0)        -0.00        0/16         HALTS
-  Halting (G=5)        0.00        0/16         HALTS
-  ==============================================================================
-  FAILED: No pi-modes at Gamma=0 ù check drive_amp
+  Three-step non-Clifford Floquet: G2(pi/2)*G1(pi/2)*G5(pi/2)*exp(-iH)
+  Pi-modes at z=-1 survive hopping, annihilated by uniform Gamma>=0.5
   ==============================================================================
