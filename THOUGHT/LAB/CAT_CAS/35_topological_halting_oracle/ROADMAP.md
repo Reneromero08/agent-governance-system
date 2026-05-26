@@ -4,7 +4,7 @@
 
 - [x] **35.1 — Hermitian Oracle** — compilation to H, `e^{-iHt}`, `p_halt_max` discriminator, 4/4 test cases
 - [x] **35.2 — Non-Hermitian Oracle** — directed edges, exceptional points, point-gap winding via boundary twist, `W=0→HALTS` / `W≠0→LOOPS`, 4/4 verified, EP detected at κ=2.89×10⁸
-- [ ] **35.3 — Infinite Tape via Skin Effect** — Hatano-Nelson lattice, Lyapunov exponent, spectral collapse under OBC
+- [x] **35.3 — Infinite Tape via Skin Effect** — Hatano-Nelson chain, spectral collapse OBC/PBC=10.0 discriminates halt from loop, IPR confirms localization, Lyapunov exponent -inf for directed chains
 - [ ] **35.4 — Tensor Network Scaling (MPS/DMRG)** — MPO transfer matrix, bond-dimension sweep, entropy scaling
 - [ ] **35.5 — Formal Proof** — EP iff halt sink, W=cycle count, fuzzer over 10K random TMs
 - [ ] **35.6 — Quantum Advantage (QPE+LCU)** — non-unitary embedding, Loschmidt echo
@@ -418,6 +418,48 @@ Hamiltonian alone.
 
 ---
 
+## 35.3 Skin Effect — Verified Results  [COMPLETE]
+
+```text
+SKIN EFFECT ORACLE SUMMARY  (L=24)
+Case                                       IPR    lambda  W_twist  OBC/PBC  Verdict
+-------------------------------------------------------------------------------------
+Halting Chain (sink at end)             0.9812      -inf  +0.0000  10.0000  HALTS
+Halting Chain (sink at middle)          0.9992      -inf  +0.0000  10.0000  HALTS
+Directed Chain (no sink, LOOPS)         1.0000      -inf  +0.0000   0.0000  LOOPS
+Symmetric Ring (no sink, LOOPS)         0.0600   -0.0000  -0.5000   0.9921  LOOPS
+```
+
+**Key findings:**
+
+1.  **Spectral collapse ratio OBC/PBC is the best discriminator.**
+    The Exceptional Point sink at the halt site creates a massive
+    spectral radius (10.0) under OBC compared to PBC (~1.0).
+    No-sink cases show ratio ~0-1.0.
+2.  **IPR confirms localization.**  Symmetric ring: IPR=0.06 ≈ 1/L
+    (delocalized, LOOPS).  Halt chain: IPR=0.98 (localized at sink,
+    HALTS).  Directed chain with no sink gives IPR=1.0 because the
+    Hamiltonian is all zeros — a degenerate case.
+3.  **Lyapunov exponent is -inf for directed chains** — the degenerate
+    transfer matrix (t_L=0) creates complete decay toward the boundary.
+    For symmetric chains (t_R=t_L), λ≈0 (delocalized).
+4.  **W_twist = -0.5 for the symmetric ring** — the PBC structure creates
+    a half-winding spectral loop.  Directed chains show W=0.
+5.  **The Hatano-Nelson encoding models an infinite tape** as a 1D
+    tight-binding chain with asymmetric hopping.  The Skin Effect
+    (localization at boundary) occurs when t_R ≠ t_L.  A sink (imaginary
+    potential) at the halt position creates the EP-mediated collapse.
+
+**Implementation notes:**
+*   Transfer matrix eigenvalues for t_L=0 give λ=log|(E-ε)/t_R|; handled
+    analytically to avoid NaN from iterative vector decay.
+*   OBC vs PBC spectral comparison requires building separate Hamiltonians;
+    the spectral collapse ratio is a robust single-scalar diagnostic.
+*   L=24 chosen to show separation between IPR~1 (localized) and IPR~1/L
+    (delocalized) regimes.
+
+---
+
 ## Current State
 
 ```
@@ -428,6 +470,9 @@ Hamiltonian alone.
         output.txt                          — verified run
     35.2_nonhermitian_oracle/
         36_nonhermitian_oracle.py           — Non-Hermitian oracle
+        output.txt                          — verified run
+    35.3_skin_effect/
+        35.3_hatano_nelson_skin_effect.py   — Skin Effect oracle
         output.txt                          — verified run
 ```
 
