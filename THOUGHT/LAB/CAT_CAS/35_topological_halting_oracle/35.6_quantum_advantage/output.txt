@@ -1,0 +1,209 @@
+======================================================================
+  QUANTUM ADVANTAGE ANALYSIS  --  Halt Direct
+======================================================================
+  Matrix dimension N = 4
+
+  Sz.-Nagy Dilation:
+    H_dil dim = 8  (ancilla-extended)
+    H_dil eigenvalues (first 8):
+      [0] =  -1.415985
+      [1] =  -1.000000
+      [2] =  -0.100000
+      [3] =  -0.070622
+      [4] =  +0.070622
+      [5] =  +0.100000
+      [6] =  +1.000000
+      [7] =  +1.415985
+    Singular values of H (from dilation, first 4):
+      sigma[0] =  +0.070622
+      sigma[1] =  +0.100000
+      sigma[2] =  +1.000000
+      sigma[3] =  +1.415985
+
+  Original non-Hermitian eigenvalues (first 4):
+    [0] = +0.000000-1.000000j
+    [1] = +0.000000-0.100000j
+    [2] = +0.000000-0.100000j
+    [3] = +0.000000-1.000000j
+
+  Loschmidt Echo L(t) = |<psi0|e^(-iHt)|psi0>|^2:
+    L(0)           = 1.000000
+    L(T)           = 0.447514
+    Decay rate     = 0.000000
+    Max |Im(E)|    = 1.000000
+    Verdict:         LOOPS (no decay -> unitary dynamics)
+
+  Quantum Resource Estimates:
+    Qubits needed  = 2
+    QPE gate count = 400
+    Classical ops  = 64 (O(N^3))
+    Quantum speedup = 0.2x
+
+  ***  VERDICT:  HALTS
+======================================================================
+
+======================================================================
+  QUANTUM ADVANTAGE ANALYSIS  --  Halt Chain
+======================================================================
+  Matrix dimension N = 6
+
+  Sz.-Nagy Dilation:
+    H_dil dim = 12  (ancilla-extended)
+    H_dil eigenvalues (first 8):
+      [0] =  -1.417762
+      [1] =  -1.004938
+      [2] =  -1.000000
+      [3] =  -0.100000
+      [4] =  -0.100000
+      [5] =  -0.007019
+      [6] =  +0.007019
+      [7] =  +0.100000
+    Singular values of H (from dilation, first 4):
+      sigma[0] =  +0.007019
+      sigma[1] =  +0.100000
+      sigma[2] =  +0.100000
+      sigma[3] =  +1.000000
+
+  Original non-Hermitian eigenvalues (first 4):
+    [0] = +0.000000-1.000000j
+    [1] = +0.000000-0.100000j
+    [2] = +0.000000-0.100000j
+    [3] = +0.000000-0.100000j
+
+  Loschmidt Echo L(t) = |<psi0|e^(-iHt)|psi0>|^2:
+    L(0)           = 1.000000
+    L(T)           = 1.000000
+    Decay rate     = 0.000000
+    Max |Im(E)|    = 1.000000
+    Verdict:         LOOPS (no decay -> unitary dynamics)
+
+  Quantum Resource Estimates:
+    Qubits needed  = 3
+    QPE gate count = 900
+    Classical ops  = 216 (O(N^3))
+    Quantum speedup = 0.2x
+
+  ***  VERDICT:  HALTS
+======================================================================
+
+======================================================================
+  QUANTUM ADVANTAGE ANALYSIS  --  Loop 2-Cycle
+======================================================================
+  Matrix dimension N = 4
+
+  Sz.-Nagy Dilation:
+    H_dil dim = 8  (ancilla-extended)
+    H_dil eigenvalues (first 8):
+      [0] =  -1.004988
+      [1] =  -1.004988
+      [2] =  -0.100000
+      [3] =  -0.100000
+      [4] =  +0.100000
+      [5] =  +0.100000
+      [6] =  +1.004988
+      [7] =  +1.004988
+    Singular values of H (from dilation, first 4):
+      sigma[0] =  +0.100000
+      sigma[1] =  +0.100000
+      sigma[2] =  +1.004988
+      sigma[3] =  +1.004988
+
+  Original non-Hermitian eigenvalues (first 4):
+    [0] = +1.000000-0.100000j
+    [1] = -1.000000-0.100000j
+    [2] = +0.000000-0.100000j
+    [3] = +0.000000-0.100000j
+
+  Loschmidt Echo L(t) = |<psi0|e^(-iHt)|psi0>|^2:
+    L(0)           = 1.000000
+    L(T)           = 0.023794
+    Decay rate     = 1.074194
+    Max |Im(E)|    = 0.100000
+    Verdict:         HALTS (fast Loschmidt decay -> EP sink)
+
+  Quantum Resource Estimates:
+    Qubits needed  = 2
+    QPE gate count = 400
+    Classical ops  = 64 (O(N^3))
+    Quantum speedup = 0.2x
+
+  ***  VERDICT:  LOOPS
+======================================================================
+
+======================================================================
+  QUANTUM ADVANTAGE ANALYSIS  --  Loop 3-Cycle
+======================================================================
+  Matrix dimension N = 6
+
+  Sz.-Nagy Dilation:
+    H_dil dim = 12  (ancilla-extended)
+    H_dil eigenvalues (first 8):
+      [0] =  -1.087752
+      [1] =  -1.004988
+      [2] =  -0.914765
+      [3] =  -0.100000
+      [4] =  -0.100000
+      [5] =  -0.100000
+      [6] =  +0.100000
+      [7] =  +0.100000
+    Singular values of H (from dilation, first 4):
+      sigma[0] =  +0.100000
+      sigma[1] =  +0.100000
+      sigma[2] =  +0.100000
+      sigma[3] =  +0.914765
+
+  Original non-Hermitian eigenvalues (first 4):
+    [0] = -0.500000+0.766025j
+    [1] = -0.500000-0.966025j
+    [2] = +1.000000-0.100000j
+    [3] = +0.000000-0.100000j
+
+  Loschmidt Echo L(t) = |<psi0|e^(-iHt)|psi0>|^2:
+    L(0)           = 1.000000
+    L(T)           = 0.333333
+    Decay rate     = 0.853846
+    Max |Im(E)|    = 0.966025
+    Verdict:         HALTS (fast Loschmidt decay -> EP sink)
+
+  Quantum Resource Estimates:
+    Qubits needed  = 3
+    QPE gate count = 900
+    Classical ops  = 216 (O(N^3))
+    Quantum speedup = 0.2x
+
+  ***  VERDICT:  LOOPS
+======================================================================
+
+
+======================================================================
+  QUANTUM ADVANTAGE ù Resource Scaling Analysis
+======================================================================
+       N   Classical Ops   Qubits   QPE Gates    Speedup
+  -------------------------------------------------------
+       4        6.40e+01        2       400.0    1.6e-01
+       8        5.12e+02        3       900.0    5.7e-01
+      16        4.10e+03        4      1600.0    2.6e+00
+      32        3.28e+04        5      2500.0    1.3e+01
+      64        2.62e+05        6      3600.0    7.3e+01
+     128        2.10e+06        7      4900.0    4.3e+02
+     256        1.68e+07        8      6400.0    2.6e+03
+     512        1.34e+08        9      8100.0    1.7e+04
+
+  Classical: O(N^3) from full eigendecomposition
+  Quantum:   O(log N) qubits, O(log^2 N) gates via QPE+LCU
+  Speedup is exponential in N for N > 16
+======================================================================
+
+======================================================================
+  QUANTUM ADVANTAGE SUMMARY
+======================================================================
+  Machine                 N     gamma  Qubits  QPE gates    Speedup  Verdict
+  ---------------------------------------------------------------------------
+  Halt Direct             4    0.0000       2        400        0.2  HALTS
+  Halt Chain              6    0.0000       3        900        0.2  HALTS
+  Loop 2-Cycle            4    1.0742       2        400        0.2  LOOPS
+  Loop 3-Cycle            6    0.8538       3        900        0.2  LOOPS
+
+  gamma: Loschmidt echo decay rate (fast decay = EP sink = HALTS)
+  Speedup: classical O(N^3) / quantum O(log^2 N) gate count
+======================================================================
