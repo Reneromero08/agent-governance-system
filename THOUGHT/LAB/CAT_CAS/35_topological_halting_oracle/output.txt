@@ -1,0 +1,110 @@
+$ .\.venv\Scripts\python.exe THOUGHT\LAB\CAT_CAS\35_topological_halting_oracle\35_topological_halting_oracle.py
+======================================================================
+  TOPOLOGICAL HALTING ORACLE  --  Halt Direct (2-state, halt coupled)
+======================================================================
+Hamiltonian  (dim = 4)
+----------------------------------------------------------------------
+          |s0,b0>   [  1.00    0.00   -1.00    0.00]
+          |s0,b1>   [  0.00    1.00    0.00    0.00]
+      |s1,b0> [H]   [ -1.00    0.00    0.00    0.00]
+      |s1,b1> [H]   [  0.00    0.00    0.00    0.00]
+Spectrum (eigenvalues of H):
+  [-0.618   0.      1.      1.618]
+  Spectral gap stats:  mean=0.7454  std/mean=0.2959  T_period=10.17
+  Resolvent winding  W_res  = -0.000000  (initial-state Green's function)
+  Spectral density at E=0     rho_0  = 3.182463e-03
+  Autocorrelation winding      W_auto = -30.964141
+  Halt-subspace winding        W_halt = +11.700704
+  Halt probability:  max=0.8000  var=0.080084  final=0.5098
+  Mean energy  <E>  = 1.000000
+  Energy range      = 0.000001
+  ***  VERDICT:  HALTS
+  ***  halt reachable  p_halt_max=0.800
+======================================================================
+======================================================================
+  TOPOLOGICAL HALTING ORACLE  --  Halt Chain (3-state, halt terminal)
+======================================================================
+Hamiltonian  (dim = 6)
+----------------------------------------------------------------------
+          |s0,b0>   [  1.00    0.00   -1.00    0.00    0.00    0.00]
+          |s0,b1>   [  0.00    1.00    0.00    0.00    0.00    0.00]
+          |s1,b0>   [ -1.00    0.00    1.00    0.00   -1.00    0.00]
+          |s1,b1>   [  0.00    0.00    0.00    1.00    0.00    0.00]
+      |s2,b0> [H]   [  0.00    0.00   -1.00    0.00    0.00    0.00]
+      |s2,b1> [H]   [  0.00    0.00    0.00    0.00    0.00    0.00]
+Spectrum (eigenvalues of H):
+  [-0.8019   0.       0.555    1.       1.       2.247 ]
+  Spectral gap stats:  mean=0.6098  std/mean=0.7537  T_period=14.12
+  Resolvent winding  W_res  = -0.000000  (initial-state Green's function)
+  Spectral density at E=0     rho_0  = 6.364287e-03
+  Autocorrelation winding      W_auto = -10.701927
+  Halt-subspace winding        W_halt = -10.474917
+  Halt probability:  max=0.7550  var=0.041289  final=0.1836
+  Mean energy  <E>  = 1.000000
+  Energy range      = 0.000001
+  ***  VERDICT:  HALTS
+  ***  halt reachable  p_halt_max=0.755
+======================================================================
+======================================================================
+  TOPOLOGICAL HALTING ORACLE  --  Loop 2-Cycle (2-state, no halt)
+======================================================================
+Hamiltonian  (dim = 4)
+----------------------------------------------------------------------
+          |s0,b0>   [  1.00    0.00   -1.00    0.00]
+          |s0,b1>   [  0.00    1.00    0.00    0.00]
+          |s1,b0>   [ -1.00    0.00    1.00    0.00]
+          |s1,b1>   [  0.00    0.00    0.00    1.00]
+Spectrum (eigenvalues of H):
+  [0.  1.  1.  2.]
+  Spectral gap stats:  mean=0.6667  std/mean=0.8660  T_period=6.28
+  Resolvent winding  W_res  = -0.500000  (initial-state Green's function)
+  Spectral density at E=0     rho_0  = 1.591589e+01
+  Autocorrelation winding      W_auto =  -0.098596
+  Halt-subspace winding        W_halt =  +0.000000
+  Halt probability:  max=0.0000  var=0.000000  final=0.0000
+  Mean energy  <E>  = 1.000000
+  Energy range      = 0.000000
+  ***  VERDICT:  LOOPS
+  ***  halt unreachable  p_halt_max=0.000e+00
+======================================================================
+======================================================================
+  TOPOLOGICAL HALTING ORACLE  --  Loop 3-Cycle (3-state, no halt)
+======================================================================
+Hamiltonian  (dim = 6)
+----------------------------------------------------------------------
+          |s0,b0>   [  1.00    0.00   -1.00    0.00   -1.00    0.00]
+          |s0,b1>   [  0.00    1.00    0.00    0.00    0.00    0.00]
+          |s1,b0>   [ -1.00    0.00    1.00    0.00   -1.00    0.00]
+          |s1,b1>   [  0.00    0.00    0.00    1.00    0.00    0.00]
+          |s2,b0>   [ -1.00    0.00   -1.00    0.00    1.00    0.00]
+          |s2,b1>   [  0.00    0.00    0.00    0.00    0.00    1.00]
+Spectrum (eigenvalues of H):
+  [-1.   1.   1.   1.   2.   2.]
+  Spectral gap stats:  mean=0.6000  std/mean=1.4907  T_period=6.28
+  Resolvent winding  W_res  = -0.000000  (initial-state Green's function)
+  Spectral density at E=0     rho_0  = 1.591430e-03
+  Autocorrelation winding      W_auto = -38.116096
+  Halt-subspace winding        W_halt =  +0.000000
+  Halt probability:  max=0.0000  var=0.000000  final=0.0000
+  Mean energy  <E>  = 1.000000
+  Energy range      = 0.000001
+  ***  VERDICT:  LOOPS
+  ***  halt unreachable  p_halt_max=0.000e+00
+======================================================================
+======================================================================
+  ORACLE SUMMARY  --  Topological Measurement Results
+======================================================================
+  Machine                                   W_res   W_halt  p_halt_max      <E>  Verdict
+  ------------------------------------------------------------------------------------
+  Halt Direct (2-state, halt coupled)     -0.0000  +11.7007    0.800000   1.0000  HALTS
+  Halt Chain (3-state, halt terminal)     -0.0000  -10.4749    0.754983   1.0000  HALTS
+  Loop 2-Cycle (2-state, no halt)         -0.5000  +0.0000    0.000000   1.0000  LOOPS
+  Loop 3-Cycle (3-state, no halt)         -0.0000  +0.0000    0.000000   1.0000  LOOPS
+  Criterion:  p_halt_max > 0.1  -> halt subspace dynamically reachable
+  W_res:  resolvent winding of <psi0|(zI-H)^{-1}|psi0> around z=0
+          counts near-zero eigenmodes overlapping the initial state
+  W_halt: winding of the complex halt-subspace amplitude
+  A non-trivial halt subspace population indicates a topological
+  fixed point:  the computation HALTS.
+  Zero halt population indicates a limit cycle:  the computation LOOPS.
+======================================================================
