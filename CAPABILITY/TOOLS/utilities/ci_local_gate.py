@@ -56,17 +56,29 @@ def _git_lines(args: Sequence[str]) -> List[str]:
     return [line for line in out.splitlines() if line.strip()]
 
 
+def _filter_lab_paths(text: str) -> str:
+    """Filter out THOUGHT/LAB/ paths (governance-exempt per CONTRACT.md Rule 8)."""
+    return "\n".join(
+        line for line in text.splitlines()
+        if line.strip() and not line.strip().replace("\\", "/").startswith("THOUGHT/LAB/")
+    )
+
+
 def _ensure_clean_tree() -> bool:
     staged = _git_stdout(["git", "diff", "--cached", "--name-only"])
     unstaged = _git_stdout(["git", "diff", "--name-only"])
     if staged or unstaged:
+        staged_filtered = _filter_lab_paths(staged) if staged else ""
+        unstaged_filtered = _filter_lab_paths(unstaged) if unstaged else ""
+        if not staged_filtered and not unstaged_filtered:
+            return True
         sys.stderr.write("\n[ci-local-gate] FAIL: working tree is not clean after checks.\n")
-        if staged:
-            sys.stderr.write("\nStaged changes:\n")
-            sys.stderr.write(staged + "\n")
-        if unstaged:
-            sys.stderr.write("\nUnstaged changes:\n")
-            sys.stderr.write(unstaged + "\n")
+        if staged_filtered:
+            sys.stderr.write("\nStaged changes (lab-exempt paths excluded):\n")
+            sys.stderr.write(staged_filtered + "\n")
+        if unstaged_filtered:
+            sys.stderr.write("\nUnstaged changes (lab-exempt paths excluded):\n")
+            sys.stderr.write(unstaged_filtered + "\n")
         sys.stderr.write("\nTip: restore generated tracked files or commit them before pushing.\n")
         return False
     return True
@@ -157,7 +169,7 @@ def main(argv: List[str]) -> int:
             "-m",
             "pytest",
             "CAPABILITY/TESTBENCH/",
-            "-n", "8",
+            "-n", "4",
             "-q",
             "--dist=loadfile",
         ],

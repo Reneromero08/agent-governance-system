@@ -6,6 +6,16 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.12.12] - 2026-05-26
+
+### Fixed
+
+- `CAPABILITY/TOOLS/utilities/ci_local_gate.py`: Exempt `THOUGHT/LAB/` paths
+  from the clean-tree check. Lab is governance-exempt per CONTRACT.md Rule 8
+  — dirty tracked files in lab should never block CI gate or push.
+- `CAPABILITY/TOOLS/utilities/ci_local_gate.py`: Reduce xdist from `-n 8` to
+  `-n 4` to prevent flaky worker crashes (OOM from 8 parallel processes).
+
 ## [3.12.11] - 2026-05-26
 
 ### Fixed
