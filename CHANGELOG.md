@@ -15,6 +15,10 @@ All notable changes to Agent Governance System will be documented in this file.
   — dirty tracked files in lab should never block CI gate or push.
 - `CAPABILITY/TOOLS/utilities/ci_local_gate.py`: Reduce xdist from `-n 8` to
   `-n 4` to prevent flaky worker crashes (OOM from 8 parallel processes).
+- `CAPABILITY/SKILLS/agents/catalytic-wormhole/run.py`: Skip gracefully on CI
+  when model path doesn't exist (prevents CI failure for hardware-dependent skill).
+- `CAPABILITY/SKILLS/agents/catalytic-wormhole/validate.py`: Accept `{"skipped": true}`
+  result as a pass (matches CI skip behavior).
 
 ## [3.12.11] - 2026-05-26
 

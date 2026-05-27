@@ -103,12 +103,21 @@ def compute_chain_fidelity(Us, Rs_cavity, wt):
 def main(input_path: Path, output_path: Path, writer=None) -> int:
     payload = json.loads(input_path.read_text())
     
+    # Check prerequisites — skip gracefully on CI if model not available
+    model_dir = payload.get("model_dir")
+    if model_dir and not Path(model_dir).exists():
+        if os.environ.get("CI") == "true":
+            skip = {"skipped": True, "reason": f"Model not found at {model_dir}"}
+            output_path.write_text(json.dumps(skip, indent=2))
+            print(f"[catalytic-wormhole] SKIP: model not found (CI={os.environ.get('CI')})")
+            return 0
+        raise FileNotFoundError(f"Model directory not found: {model_dir}")
+    
     print(f"Catalytic Wormhole Compressor — Integrated Lab Pipeline")
     print(f"Device: {DEVICE}, K={K}")
     t0 = time.perf_counter()
     
     # Determine input source
-    model_dir = payload.get("model_dir")
     rank_k = payload.get("rank_k", K)
     
     if model_dir:
