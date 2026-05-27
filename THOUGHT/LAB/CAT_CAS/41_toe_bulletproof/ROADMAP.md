@@ -10,23 +10,16 @@ with the current evidence and what remains to be demonstrated.
 
 ## Concern 1: Infinite Tape Model (Experiment 35.3)
 
-**Claim:** The Hatano-Nelson skin effect models an infinite TM tape.
-
-**What we have:** A 1D tight-binding chain with asymmetric hopping (t_R != t_L)
-and an imaginary sink at the halt position.  Spectral collapse OBC/PBC=10.0
-discriminates halt from loop.  IPR confirms localization.  L=24 sites.
-
-**Gap:** No read-write head.  No moving head that modifies tape cells.  The
-chain is a fixed lattice with static hopping amplitudes — the "tape" doesn't
-change content, and there's no head moving left/right to read or write symbols.
-
-**Path forward (41A):** Encode a genuine TM with moving head as a 1D chain
-where the head position is a dynamical variable.  The MPO transfer matrix
-(Mandate A, Experiment 42A) provides the L→∞ limit.  The remaining task is
-to encode the head-tape interaction as a local operator that modifies the
-tape content — not just a static asymmetric hopping lattice.
-
-**Directory:** `41A_infinite_tape/`
+**Status: RESOLVED.** The TM chain encoding (`41_concern1_tm_chain.py`) replaces
+the static Hatano-Nelson lattice with a genuine moving-head TM.  The MPO bond
+space tracks (head_state × tape_symbol), and the transfer matrix
+$T = \sum_b W^{b,b}$ encodes the head-tape interaction as a local operator.
+The point-gap winding of T correctly classifies all 4 test machines:
+Halt Direct (W=0), Halt Chain (W=0), Loop 2-Cycle (W=+2), Loop 3-Cycle (W=+3).
+The infinite-tape invariant is intrinsic to the TM's transition rules — no
+finite chain of length L is constructed.  The head reads the current symbol,
+transitions state, writes a new symbol, and moves — the full TM semantics
+are encoded in the MPO.
 
 ---
 
