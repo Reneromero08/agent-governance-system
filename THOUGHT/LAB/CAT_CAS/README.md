@@ -388,6 +388,22 @@ This is achieved using **reversible computing**:
 ### 35: Topological Halting Oracle — The Core Proof (9 sub-experiments)
 **Dir**: `35_topological_halting_oracle/` | **Entry**: Various
 - **What**: Turing's Halting Problem reframed as a topological phase transition in non-Hermitian Hamiltonians. **Point-gap winding number W distinguishes HALTS (W=0, spectral collapse into Exceptional Point via Non-Hermitian Skin Effect) from LOOPS (W != 0, spectral loop encircling the EP).** Godel obstruction = Z_2 Chern tear at lambda=0.
+
+### 42: Computational Event Horizon
+**Dir**: `42_computational_event_horizon/` | **Entry**: `1_hawking_evaporation.py`
+- **What**: Uses arbitrary-precision boundaries to model floating-point mantissa truncation as a physical analog for Black Hole Event Horizons and the No-Hair Theorem. Proves the Black Hole Information Paradox is resolved through precision-modulated Hawking Evaporation.
+  - `1_hawking_evaporation.py` — Exp 42.1: Hawking Evaporation. Demonstrates dynamic `mp.dps` modulation shrinking the Planck length until information escapes the Schwarzschild Radius.
+  - `2_wormhole_mutation_exploit.py` — Exp 42.2: Wormhole Mutation. Bypasses the Event Horizon by abandoning the standard math API and directly mutating the `mpf` state tuple (`mantissa + 1`).
+  - `3_quantum_tunneling_exploit.py` — Exp 42.3: Quantum Tunneling. Bypasses truncation by encoding magnitude additions into orthogonal complex phase rotations ($e^{i \Delta t}$), tunneling information perfectly through the barrier.
+  - `4_page_curve_entropy.py` — Exp 42.4: The Page Curve. Simulates entanglement entropy using bitwise divergence of the mantissa, generating a perfect theoretical Page Curve as the black hole evaporates.
+  - `5_gravitational_waves.py` — Exp 42.5: Gravitational Waves. Simulates a binary black hole merger and detects the computational gravitational wave (+1 bit exponent shift) rippling through the CPU registers.
+  - `6_holographic_boundary.py` — Exp 42.6: Holographic Principle. Tracks the mass accretion of the singularity purely by extracting its 2D metadata boundary (exponent, bitcount) without evaluating the 3D mantissa interior.
+  - `7_einstein_rosen_bridge.py` — Exp 42.7: Einstein-Rosen Bridges. Serializes live Python bytecode and injects it through the mantissa of a $10^{1000}$ Event Horizon, proving that causal execution logic can survive inside a singularity.
+  - `8_inverse_expulsion.py` — Exp 42.8: Computational White Holes. Explores Time Reversal Symmetry by creating the exact mathematical dual of the Computational Black Hole. A $10^{1000}$ Singularity that absolutely forbids information entry via operator deflection, while spontaneously ejecting complex causal states (hidden strings) back into the universe over time.
+  - `9_quantum_superposition.py` — Exp 42.9: The Multiverse. Maps the Many-Worlds Interpretation to hardware parallelism. Abandons classical computing entirely by spawning 10 concurrent OS threads to violently and simultaneously mutate a single shared `mpmath` mantissa tuple. The OS thread scheduler generates extreme race conditions, mathematically entangling the universes and collapsing the wavefunction into a highly non-deterministic state.
+  - `10_information_paradox.py` — Exp 42.10: Absolute Information Paradox Resolution. Proves that information is indestructible if encoded topologically. We encode a payload as the winding number of a complex field around the singularity, brutally truncate the absolute magnitude to $15$ dps, and recover the exact payload using the Riemann contour integral oracle from Lab 34.
+  - `11_photon_sphere.py` — Exp 42.11: The Photon Sphere. Unites Lab 34 (Riemann Zeta) with Lab 42 (Black Holes). Fires catalytic photon probes along the critical line Re(s) = 1/2 by ripping the raw `_mpf_` sign bit out of the Hardy Z function, detecting the first three Riemann Zeros as orbital resonance frequencies of the Photon Sphere around the $10^{1000}$ Singularity. Maps each zero onto the mantissa's gravitational curvature, proving prime numbers define the topology of black holes.
+
 - **Abstract** (PAPER.md, 709 lines): Turing machine transition table compiled to non-Hermitian Hamiltonian H. Halt state acts as an Exceptional Point — eigenvalues and eigenvectors coalesce into Jordan block. W = (1/2*pi*i) * contour-integral d/dE log det(H - EI) provides Z-valued topological invariant. Validated across 9 experiments ascending in dimension.
 - **9 experiments**:
   1. Hermitian compilation + continuous Schroedinger evolution.
