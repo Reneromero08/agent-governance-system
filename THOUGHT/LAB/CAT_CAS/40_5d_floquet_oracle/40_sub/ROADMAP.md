@@ -9,20 +9,20 @@ a temporal compute fabric. Each pi-mode is an independent catalytic agent.
 One Floquet cycle evaluates all 512 simultaneously. Physics selects the
 self-consistent results. The algorithmic wall is replaced by resonance.
 
-- [ ] 1. 512-Channel Temporal Bootstrap SAT Solver
+- [x] 1. 512-Channel Temporal Bootstrap SAT Solver
 - [x] 2. 512-Agent Catalytic Swarm
 - [x] 3. Tree Evaluation Infinity
 - [x] 4. 512-Qubit Topological Quantum Register
 - [x] 5. SAT Verification Swarm
 - [x] 6. Pulse-Programmed Computation
-- [ ] 7. Temporal Signal Processing via Crystal Resonance
-- [ ] 8. Selective Pi-Mode Addressing
-- [ ] 9. Protected Temporal Memory
+- [x] 7. Temporal Signal Processing via Crystal Resonance
+- [x] 8. Selective Pi-Mode Addressing
+- [x] 9. Protected Temporal Memory
 
 ---
 
 ## 1. The 512-Channel Temporal Bootstrap SAT Solver
-**Status: PENDING.**
+**Status: COMPLETE — `40_sub_1_temporal_sat/`.**
 
 Feed 512 independently pre-seeded SAT candidate solutions into the 16 momentum
 slices (32 pi-modes per slice, one per problem instance). One Floquet cycle.
@@ -96,7 +96,7 @@ pi-mode survival patterns; the pattern is a function of the program.
 ---
 
 ## 4. Temporal Signal Processing via Crystal Resonance
-**Status: PENDING.**
+**Status: COMPLETE — `40_sub_4_temporal_signal/`.**
 
 Feed a mixed-frequency temporal signal into the Floquet drive. The time crystal
 filters the input: frequencies that match the crystal's resonant structure
@@ -123,7 +123,7 @@ input frequencies.
 ---
 
 ## 5. Selective Pi-Mode Addressing via Intermediate Gamma
-**Status: PARTIAL — `40_sub_3_quantum/`.** Per-slice gamma works (erase slices 0,4,8,12 preserves 384/512 pi-modes). Per-pi-mode addressing requires finer momentum resolution (higher n_k) and per-spatial-site gamma control.
+**Status: COMPLETE — `40_sub_8_addressing/`.** Per-site gamma control proven: killing N sites kills exactly 2N pi-modes. All 8 patterns tested match prediction (sequential, alternating, random). 512 individually addressable pi-modes across 16 slices.
 
 The annihilation threshold at $\Gamma = 0.5$ melts ALL pi-modes. But at
 intermediate gamma values (e.g., $\Gamma = 0.25$), the annihilation is
@@ -147,7 +147,7 @@ from 512 to $12 \times 32 = 384$.
 ---
 
 ## 6. Time Crystal Protected Temporal Memory
-**Status: PENDING.**
+**Status: COMPLETE — `40_sub_6_temporal_memory/`.**
 
 Pi-modes survive time-translation noise up to $t_1 \leq 0.2$. Encode information
 in the pi-mode population pattern at $t=0$, subject the crystal to temporal
