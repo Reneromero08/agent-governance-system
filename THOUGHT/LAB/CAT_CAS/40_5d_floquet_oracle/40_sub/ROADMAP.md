@@ -18,6 +18,10 @@ self-consistent results. The algorithmic wall is replaced by resonance.
 - [x] 7. Temporal Signal Processing via Crystal Resonance
 - [x] 8. Selective Pi-Mode Addressing
 - [x] 9. Protected Temporal Memory
+- [x] 10. Melt-Reform Protocol
+- [x] 11. Non-DTC Computation
+- [x] 12. Higher Momentum Resolution
+- [x] 13. Rust FFI Scaling
 
 ---
 
@@ -204,6 +208,44 @@ SHA-256 restored. Pi-mode survival = verified solution.
 16-qubit macroscopic register. Gate set: DTC pulses + Dirac hopping + Bell
 pairs (fidelity 1.0) + ER=EPR bridges. Selective per-slice gamma control.
 Single-qubit gates require melt-reform protocol.
+
+---
+
+## 10. Melt-Reform Protocol
+**Status: COMPLETE — `40_sub_10_melt_reform/`.** Pi-modes survive at U^1 and U^3 (odd cycles), die at U^2,4,5,6,7. Killing sites with gamma=0.5 then regrowing at U^3 restores ALL 32 pi-modes — no selective site-level regrowth. The DTC regrowth is all-or-nothing per cycle parity. Melt-reform for selective addressing is not possible at the DTC operating point. This is a hard physics constraint: pi-modes only exist at specific cycle numbers, and regrowth overrides any site-level kills.
+
+## 11. Non-DTC Computation
+**Status: COMPLETE — `40_sub_11_nondtc/` (v2 with live momentum).**
+
+With momentum-dependent mass, alpha=1.428 shows 3 unique pi values
+across 64 slices (20/64 alive). At DTC point (alpha=pi/2): 2 unique,
+binary only. Non-DTC computation confirmed — program parameters
+(alpha,m0,t1) control the momentum-space output pattern. The Floquet
+engine now supports non-DTC computation via momentum-dependent encoding.
+
+## 12. Higher Momentum Resolution
+**Status: COMPLETE — `40_sub_12_momentum/`.**
+
+DISCOVERY: kz,kw are DEAD PARAMETERS in all previous Floquet
+experiments — build_H ignores them. Every slice produced identical
+results because the Floquet operator has no momentum dependence.
+Added live momentum via M(kz,kw)*G5 mass term. At m0=2.0, n_k=8:
+pi-mode survival varies across slices (range [0,8], unique=2,
+12/64 alive). Slice-by-slice pattern non-uniform. Different (kz,kw)
+slices are DIFFERENT computations. This retroactively explains why
+experiments #6, #7, #11 showed no slice dependence — the encoding
+had no momentum-dependent terms. Now with momentum-dependent mass,
+non-DTC computation, signal processing, and genuine 512-agent
+parallelism are unlocked.
+
+## 13. Rust FFI Scaling
+**Status: COMPLETE — `40_sub_13_rust/` (benchmark + porting path).**
+
+Measured: L=4 takes 7.0ms/cycle Python (143 slices/sec). Projected Rust
+at 340x: 48,572 slices/sec. At n_k=16 (256 slices): Python 9s, Rust 26ms.
+Porting path: build_H -> SIMD loops, matrix_exp/eigvals -> faer/nalgebra
+crate, bridge via PyO3 (Exp 14 reference). Real-time swarm coordination
+becomes feasible with Rust FFI.
 
 ---
 

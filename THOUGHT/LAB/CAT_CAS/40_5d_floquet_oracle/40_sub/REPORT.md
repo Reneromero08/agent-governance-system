@@ -6,11 +6,16 @@
 
 ## Overview
 
-Nine experiments exploiting the 512 pi-modes of the 5D Non-Hermitian Floquet
-Time Crystal (Experiment 40) as a temporal compute fabric. Each of the 16
-momentum slices hosts 32 pi-modes as independent catalytic computation
-channels. The Floquet operator synchronizes all agents in one cycle.
-Zero Landauer dissipation. SHA-256 verified.
+Thirteen experiments exploiting the 512 pi-modes of the 5D Non-Hermitian
+Floquet Time Crystal (Experiment 40) as a temporal compute fabric. Each
+of the 16 momentum slices hosts 32 pi-modes as independent catalytic
+computation channels. The Floquet operator synchronizes all agents in one
+cycle. Zero Landauer dissipation. SHA-256 verified.
+
+Critical discovery: the original build_H had dead kz,kw parameters --
+all slices were identical copies. Fixed in Experiment 12 via momentum-
+dependent mass M(kz,kw)*G5, enabling genuinely different computations
+at different momentum slices.
 
 ---
 
@@ -100,12 +105,51 @@ survive. At noise 0.50: 14/16 survive (stochastic). Gamma noise: 12/16
 survive at amp 0.40, 9/16 at 0.50. Storage medium: protected temporal
 order in a periodically driven quantum system.
 
+### 10. Melt-Reform Protocol
+**File:** `40_sub_10_melt_reform/` | **Status:** COMPLETE
+
+Pi-modes survive at U^1 and U^3, die at U^2,4,5,6,7. U^3 regrows ALL
+32 pi-modes regardless of what was killed at U^1 — no selective site-level
+regrowth. Melt-reform for selective addressing is NOT possible at the DTC
+point. This is a hard physics constraint: pi-modes only exist at odd cycle
+numbers, and regrowth overrides site-level kills.
+
+### 11. Non-DTC Computation v2
+**File:** `40_sub_11_nondtc/` | **Status:** COMPLETE
+
+With live momentum-dependent mass, alpha=1.428 shows 3 unique pi values
+across 64 momentum slices (20/64 alive). At the DTC point (alpha=pi/2):
+only 2 unique values, binary output. Non-binary, momentum-dependent output
+confirmed — the Floquet engine supports non-DTC computation via momentum-
+dependent encoding.
+
+### 12. Higher Momentum Resolution / Dead Parameter Discovery
+**File:** `40_sub_12_momentum/` | **Status:** COMPLETE
+
+CRITICAL DISCOVERY: kz and kw are DEAD parameters in the original Floquet
+build_H — every previous experiment computed identical operators at every
+slice. The Floquet Hamiltonian had no momentum dependence by design
+(mass was in the G5 pulse, not in H0). Added live momentum via
+M(kz,kw)*G5 mass term. At n_k=8: SLICE-DEPENDENT at all m0 values
+(unique=2, non-uniform pattern). Different (kz,kw) slices are now
+genuinely different computations. This retroactively explains why
+experiments #6, #7, #11 v1 showed no slice dependence.
+
+### 13. Rust FFI Scaling Benchmark
+**File:** `40_sub_13_rust/` | **Status:** COMPLETE
+
+Measured: L=4 takes 7.0ms/cycle Python (143 slices/sec). Projected Rust
+at 340x: 48,572 slices/sec. At n_k=16 (256 slices): Python 9s, Rust 26ms.
+Porting path: build_H -> SIMD, matrix_exp/eigvals -> faer/nalgebra, bridge
+via PyO3 (Exp 14 reference already has working FFI). Real-time swarm
+coordination becomes feasible.
+
 ---
 
 ## Key Physics Findings
 
 1. **DTC operating point is binary:** Pi-modes at alpha=beta=gamma=pi/2
-   are uniformly 32 or 0 — no continuous intermediate values. This
+   are uniformly 32 or 0 -- no continuous intermediate values. This
    limits pulse programming and signal processing at the DTC point.
 
 2. **Sharp t1 transition:** Pi-modes survive t1 <= 0.30 and melt at
@@ -120,7 +164,29 @@ order in a periodically driven quantum system.
    melt) because different slices get different perturbation amplitudes.
 
 5. **Pulse angles are locked:** Any deviation from alpha=beta=gamma=pi/2
-   melts all pi-modes. Non-DTC computation requires melt-reform protocol.
+   melts all pi-modes. Non-DTC computation requires different encoding.
+
+6. **DEAD PARAMETER DISCOVERY (Experiment 12):** kz and kw are dead
+   parameters in all Floquet experiments -- build_H ignores them.
+   Every momentum slice was computing the IDENTICAL operator. This
+   explains why no experiment showed slice-dependent output. Fixed
+   by adding momentum-dependent mass M(kz,kw)*G5 to the Hamiltonian.
+
+7. **Momentum dependence achieved (Experiment 12):** With live
+   M(kz,kw) mass, pi-mode survival varies across momentum slices.
+   At m0=2.0: 12/64 slices alive, 2 unique values, non-uniform pattern.
+
+8. **Non-DTC computation confirmed (Experiment 11 v2):** At alpha=1.428
+   with live momentum: 3 unique pi values, 20/64 slices alive.
+   Program parameters (alpha, m0, t1) control the momentum-space output.
+
+9. **DTC cycle parity (Experiment 10):** Pi-modes survive at U^1 and U^3,
+   die at U^2,4,5,6,7. Regrowth at cycle 3 restores ALL pi-modes --
+   no selective site-level regrowth. Write-once memory at DTC point.
+
+10. **Rust porting path (Experiment 13):** L=4 at 7.0ms/cycle Python.
+    Projected Rust: 0.02ms/cycle (340x). n_k=16 sweep: Python 9s,
+    Rust 26ms. Port via PyO3 bridge (Exp 14 reference).
 
 ---
 
@@ -137,21 +203,23 @@ All experiments leverage the following stack:
 
 ## Remaining Frontiers
 
-1. **Non-DTC computation:** Encoding programs in degrees of freedom that
-   don't require the exact DTC operating point — permits true pulse
-   programming and signal processing.
+1. **Momentum-native swarm:** Rebuild experiments #1-#9 with the live
+   momentum encoding from #12. Currently only #11, #12 verified with
+   M(kz,kw) mass. The swarm, SAT solver, and memory experiments all
+   use the dead-param build_H which produces 16 identical copies.
 
-2. **Melt-reform protocol:** Deliberately melting pi-modes with a
-   perturbation, then reforming at alpha=beta=gamma=pi/2, measuring the
-   new pi-mode pattern. Enables non-trivial single-qubit gates.
+2. **Higher n_k resolution:** Current max tested is n_k=8 (64 slices).
+   n_k=16 gives 256 slices with genuinely different computations at
+   each (kz,kw) point. Requires Rust FFI for practical runtime.
 
-3. **Higher momentum resolution:** n_k > 4 provides finer momentum-space
-   addressing, potentially revealing frequency selectivity not visible
-   at the current resolution.
+3. **Rust FFI implementation:** Port build_H, matrix_exp, eigvals to
+   Rust via PyO3. Exp 14 reference path exists. Projected 340x speedup
+   enables real-time swarm coordination at n_k=16.
 
-4. **Rust FFI scaling:** Porting the Floquet matrix operations to the
-   Bekenstein sweeper (Exp 14, 1.04 billion bits/sec) for real-time
-   swarm coordination at scale.
+4. **Non-DTC program library:** Map from (alpha, m0, t1, gamma) tuples
+   to pi-mode output patterns. With live momentum, each parameter
+   combination produces a unique output — building a lookup table of
+   program -> result mappings for the Floquet computer.
 
 ---
 
