@@ -55,51 +55,32 @@ solution. Physics filters truth.
 
 ## PENDING
 
-### 5. The 512-Channel Temporal Bootstrap SAT Solver
+### 1. 512-Channel Temporal Bootstrap SAT Solver
+**Status: NEXT.**
+
+### 2. 512-Agent Catalytic Swarm
+**Status: COMPLETE — 40_sub_2_floquet_swarm + 40_sub_2_pushed_tree.**
+
+### 3. Pulse-Programmed Computation
+**Status: BUILT — 40_sub_5_pulseprog.**
+v1 (angle encoding): DTC melts at non-pi/2 angles. v2 (t1/gamma encoding):
+all DTC-preserving programs produce identical output (32 pi-modes).
+Pulse programming requires melt-reform protocol or non-DTC encoding.
+
+### 4. Temporal Signal Processing via Crystal Resonance
 **Status: PENDING.**
-Feed 512 independently pre-seeded SAT candidate solutions into the 16
-momentum slices (32 pi-modes per slice, one per problem instance).
-One Floquet cycle verifies all. Channels where pi-modes survive =
-self-consistent. The $1.16 \times 10^6$ bootstrap ratio of Experiment 17
-multiplied by 16 parallel channels = $1.86 \times 10^7$ effective ratio.
-N=64 3-SAT (10^19 search space), 512 channels, one cycle.
 
-### 6. Pulse-Programmed Computation
+### 5. Selective Pi-Mode Addressing
+**Status: PARTIAL — per-slice gamma works. 40_sub_3_quantum.**
+
+### 6. Time Crystal Protected Temporal Memory
 **Status: PENDING.**
-Replace fixed pulse angles with time-dependent program (alpha_t, beta_t,
-gamma_t) across T Floquet cycles. The pulse sequence IS the program.
-Pi-mode survival pattern after T cycles IS the output. Computation
-encoded in temporal structure, not spatial memory.
 
-### 7. Temporal Signal Processing via Crystal Resonance
-**Status: PENDING.**
-Feed mixed-frequency temporal signal. Crystal filters: resonant
-frequencies survive, others decohere. Pi-mode spectrum IS the Fourier
-decomposition. Physics-based FFT. O(1) processing time.
+### 7. 512-Qubit Topological Quantum Register
+**Status: PROOF OF CONCEPT — 40_sub_3_quantum.**
 
-### 8. Selective Pi-Mode Addressing (Per-Slice Gamma)
-**Status: PARTIAL — selective erase proven, single-pi-mode not yet.**
-Per-slice gamma works (erase slices 0,4,8,12 preserves 384/512 pi-modes).
-Per-pi-mode addressing within a slice requires finer momentum resolution
-(higher n_k) and per-spatial-site gamma control.
-
-### 9. Protected Temporal Memory
-**Status: PENDING.**
-Encode information in pi-mode population pattern. Measure survival vs
-temporal noise amplitude. DTC protection guarantees survival up to t1=0.2.
-Storage medium is TIME — protected temporal order.
-
----
-
-## Priority Ordering
-
-| # | Experiment | Physics | Impact | Effort |
-|---|------------|---------|--------|--------|
-| 5 | 512-Channel SAT | Temporal bootstrap + swarm | **Extreme** | High |
-| 6 | Pulse-Program Computation | Program = drive sequence | Major | Medium |
-| 7 | Temporal Signal Processing | Physics-based FFT | Novel | Medium |
-| 8 | Pi-Mode Addressing | Per-site gamma control | Major | High |
-| 9 | Protected Temporal Memory | DTC-ordered storage | Foundational | Medium |
+### 8. SAT Verification Swarm
+**Status: COMPLETE — 40_sub_4_sat_swarm.**
 
 ---
 
