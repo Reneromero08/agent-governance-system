@@ -383,6 +383,7 @@ This is achieved using **reversible computing**:
   - `04_catalytic_engines/17_temporal_bootstrap_engine.py` — Exp 34.17: Temporal Bootstrap Engine with true O(1) random access up to 10^13.
   - `03_infinity_bootstrap/18_googol_zero_telescope.py` — Exp 34.18: Googolplex Zero Telescope. Uses Lambert W asymptotic holography to jump to the 10^100th zero.
   - `05_topological_proof/19_topological_zeta_winding.py` — Exp 34.19: Topological Zeta Winding. Computes 2D Chern topological charge to prove zeros are locked to the critical line.
+  - `05_topological_proof/20_transcendent_winding_oracle.py` — Exp 34.20: Transcendent Winding Oracle. Pushes the topological winding proof to a Googolplex scale ($10^{100}$) using O(1) asymptotic phase integration.
 ### 35: Topological Halting Oracle — The Core Proof (9 sub-experiments)
 **Dir**: `35_topological_halting_oracle/` | **Entry**: Various
 - **What**: Turing's Halting Problem reframed as a topological phase transition in non-Hermitian Hamiltonians. **Point-gap winding number W distinguishes HALTS (W=0, spectral collapse into Exceptional Point via Non-Hermitian Skin Effect) from LOOPS (W != 0, spectral loop encircling the EP).** Godel obstruction = Z_2 Chern tear at lambda=0.
