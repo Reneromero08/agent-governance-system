@@ -3,7 +3,7 @@
   "rank_k": 128,
   "weight_types": 3,
   "total_layers": 129,
-  "ratio": 50.0,
+  "ratio": 43.0,
   "total_orig_mb": 86.0,
   "total_comp_mb": 2.0
 }

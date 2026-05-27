@@ -115,6 +115,7 @@ def main(argv: List[str]) -> int:
         "TMPDIR": str(tmp_root),
         "TMP": str(tmp_root),
         "TEMP": str(tmp_root),
+        "CUDA_VISIBLE_DEVICES": "",   # prevent 24 xdist workers from all competing for GPU memory
     }
 
     head = _git_stdout(["git", "rev-parse", "HEAD"])
@@ -156,7 +157,7 @@ def main(argv: List[str]) -> int:
             "-m",
             "pytest",
             "CAPABILITY/TESTBENCH/",
-            "-n", "2",
+            "-n", "8",
             "-q",
             "--dist=loadfile",
         ],
