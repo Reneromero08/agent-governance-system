@@ -1,0 +1,6 @@
+[package]
+name = "exp_17_self_evolving_singularity"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]

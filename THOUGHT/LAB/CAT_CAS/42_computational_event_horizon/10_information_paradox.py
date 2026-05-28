@@ -117,6 +117,7 @@ def run_information_paradox():
     print(f"    -> Original Payload  : {secret_payload}")
     print(f"    -> Extracted Payload : {recovered_data}")
     
+    assert secret_payload == recovered_data, "Topological recovery failed: Paradox remains unresolved!"
     if secret_payload == recovered_data:
         print("\n[SUCCESS] The Information Paradox is resolved!")
         print("[SUCCESS] Classical magnitude is destroyed, but Topological Winding is INDESTRUCTIBLE.")
