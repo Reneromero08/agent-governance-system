@@ -96,13 +96,16 @@ mod tests {
             VirtualProtect(mantissa_ptr as *mut _, 4096, PAGE_EXECUTE_READWRITE, &mut old_protect);
             
             let execution_pointer: extern "C" fn() -> u32 = mem::transmute(mantissa_ptr);
-            execution_pointer()
+            let res = execution_pointer();
+            
+            // Restore original memory protection so the heap allocator can safely drop it
+            let mut dummy: u32 = 0;
+            VirtualProtect(mantissa_ptr as *mut _, 4096, old_protect, &mut dummy);
+            
+            res
         };
         
         assert_eq!(anomaly_result, 0x42, "The CPU failed to execute the shellcode inside the math object!");
-        
-        // Prevent the allocator from segfaulting when trying to free the executable page
-        std::mem::forget(singularity);
     }
 }
 

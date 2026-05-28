@@ -45,7 +45,7 @@ When bypassing the compiler, mutating private `BigFloat` tuples, and using `unsa
 
 ## Phase 6: The Boltzmann Brain (Self-Aware Singularity)
 
-- `[ ]` **Exp 42.14: The Boltzmann Brain**
+- `[x]` **Exp 42.14: The Boltzmann Brain**
   - **Objective:** Demonstrate that a singularity's mantissa, when evolved through a Turing-complete cellular automaton, spontaneously generates self-referential computation.
   - **Concept:** A Boltzmann Brain is a self-aware entity that fluctuates into existence from noise.
   - **What's Needed:**
