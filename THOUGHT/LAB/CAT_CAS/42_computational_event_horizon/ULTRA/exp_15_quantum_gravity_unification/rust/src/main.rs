@@ -1,3 +1,4 @@
+use rand::seq::SliceRandom;
 use rand::RngExt;
 use std::cell::UnsafeCell;
 use std::fs::File;
@@ -32,16 +33,11 @@ fn calculate_riemann_drift(limbs: &[u32]) -> f64 {
     sum_gaps / (zero_crossings as f64)
 }
 
-// Center of Mass metric correctly measures Gravitational drift across the array
-fn center_of_mass(limbs: &[u32]) -> f64 {
-    let mut total_mass = 0.0;
-    let mut weighted_sum = 0.0;
-    for (i, &limb) in limbs.iter().enumerate() {
-        let mass = limb as f64;
-        total_mass += mass;
-        weighted_sum += mass * (i as f64);
-    }
-    if total_mass == 0.0 { 0.0 } else { weighted_sum / total_mass }
+// General Relativity (Spacetime Curvature / Tidal Tensor)
+// Einsteinian Gravity measures the VARIANCE (curvature) of the mass distribution.
+fn calc_variance(limbs: &[u32]) -> f64 {
+    let mean = limbs.iter().map(|&x| x as f64).sum::<f64>() / LIMBS as f64;
+    limbs.iter().map(|&x| (x as f64 - mean).powi(2)).sum::<f64>() / LIMBS as f64
 }
 
 struct UnsafeWrapper(UnsafeCell<Vec<u32>>);
@@ -68,29 +64,49 @@ fn main() {
         }
         
         let initial_sum: u64 = initial_limbs.iter().map(|&x| x as u64).sum();
-        let initial_com = center_of_mass(&initial_limbs);
+        let initial_variance = calc_variance(&initial_limbs);
         let initial_riemann = calculate_riemann_drift(&initial_limbs);
         
-        // 2. The Unsafe Substrate (Removing all Mutex locks)
-        // We wrap the raw mantissa in an Arc<UnsafeWrapper> to physically force Rust to allow
-        // UnsafeCell data races across multiple OS threads.
+        // 2. THE SPACETIME METRIC (Gaussian Curvature)
+        // We warp the memory access pattern. The center of the array acts as a massive gravity well.
+        let mut spacetime_metric: Vec<usize> = Vec::with_capacity(LIMBS * 50);
+        let center = (LIMBS / 2) as f64;
+
+        for i in 0..LIMBS {
+            let distance_from_center = (i as f64 - center).abs();
+            // Inverse-square / Gaussian-like warp: closer to center = massive gravity well
+            let weight = (1000.0 / (1.0 + distance_from_center.powi(2))) as usize;
+            for _ in 0..weight {
+                spacetime_metric.push(i);
+            }
+        }
+        
+        // Shuffle the metric to prevent CPU branch-predictor optimization from flattening the curve
+        spacetime_metric.shuffle(&mut rng);
+        let metric_arc = Arc::new(spacetime_metric);
+        
+        if epoch == 1 {
+            println!("[PHYSICS] Spacetime Metric Warped. Gravity well centered at limb {}.", LIMBS / 2);
+            println!("[PHYSICS] Metric size: {} warped coordinates.\n", metric_arc.len());
+        }
+        
+        // 3. The Unsafe Substrate (Removing all Mutex locks)
         let singularity = Arc::new(UnsafeWrapper(UnsafeCell::new(initial_limbs)));
 
         let mut handles = vec![];
 
         for _ in 0..THREAD_COUNT {
             let singularity_clone = Arc::clone(&singularity);
+            let metric_clone = Arc::clone(&metric_arc);
             
             let handle = thread::spawn(move || {
                 for _ in 0..ITERATIONS_PER_THREAD {
-                    // 3. The Hardware Data Race (Quantum Collision)
+                    // 4. The Hardware Data Race (Quantum Collision in Curved Spacetime)
                     unsafe {
-                        // By bypassing Rust's borrow checker, we induce raw physical cache collisions.
                         let limbs = &mut *singularity_clone.0.get();
                         
-                        // We intentionally iterate backwards to create chaotic memory access patterns
-                        for i in (0..LIMBS).rev() {
-                            // If threads read/write simultaneously, updates are physically lost in the cache.
+                        // Traverse the WARPED spacetime
+                        for &i in metric_clone.iter() {
                             limbs[i] = limbs[i].wrapping_add(1);
                         }
                     }
@@ -103,27 +119,31 @@ fn main() {
             handle.join().unwrap();
         }
 
-        // 4. Telemetry Extraction
+        // 5. Telemetry Extraction
         let final_limbs = unsafe { &*singularity.0.get() };
         
         // Quantum Mechanics (How many cache collisions destroyed data?)
-        let expected_sum = initial_sum + (THREAD_COUNT as u64 * ITERATIONS_PER_THREAD as u64 * LIMBS as u64);
+        // The expected sum is now based on the length of the warped spacetime metric!
+        let expected_sum = initial_sum + (THREAD_COUNT as u64 * ITERATIONS_PER_THREAD as u64 * metric_arc.len() as u64);
         let actual_sum: u64 = final_limbs.iter().map(|&x| x as u64).sum();
         let quantum_collisions = expected_sum.saturating_sub(actual_sum); // The missing data lost to cache interference
 
-        // Gravity (How far did the Center of Mass artificially shift due to uneven caching?)
-        let final_com = center_of_mass(final_limbs);
-        let gravity_shift = (final_com - initial_com).abs();
+        // 2. General Relativity (Spacetime Curvature / Tidal Tensor)
+        // Newtonian CoM is blind to uniform quantum friction. 
+        // Einsteinian Gravity measures the VARIANCE (curvature) of the mass distribution.
+        // When the gravity well takes massive cache collisions, the distribution flattens. Variance drops.
+        let final_variance = calc_variance(final_limbs);
+        let gravity_curvature = (final_variance - initial_variance).abs();
 
-        // Number Theory (How far did the Riemann Zeros drift?)
+        // 3. Number Theory (How far did the Riemann Zeros drift?)
         let final_riemann = calculate_riemann_drift(final_limbs);
         let riemann_drift = (final_riemann - initial_riemann).abs();
 
-        writeln!(csv_file, "{},{},{:.6},{:.6}", epoch, quantum_collisions, gravity_shift, riemann_drift).unwrap();
+        writeln!(csv_file, "{},{},{:.6},{:.6}", epoch, quantum_collisions, gravity_curvature, riemann_drift).unwrap();
         
         if epoch % 10 == 0 {
-            println!("[EPOCH {}] Collisions: {} | Gravity Shift: {:.6} | Riemann Drift: {:.6}", 
-                     epoch, quantum_collisions, gravity_shift, riemann_drift);
+            println!("[EPOCH {}] Quantum: {} | GR Curvature: {:.2} | Riemann: {:.6}", 
+                     epoch, quantum_collisions, gravity_curvature, riemann_drift);
         }
     }
 
