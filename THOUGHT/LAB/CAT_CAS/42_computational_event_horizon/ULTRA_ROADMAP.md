@@ -16,7 +16,7 @@ When bypassing the compiler, mutating private `BigFloat` tuples, and using `unsa
 
 ## Phase 4: Closed Timelike Curves (The Bootstrap Paradox)
 
-- `[ ]` **Exp 42.12: The Bootstrap Paradox**
+- `[x]` **Exp 42.12: The Bootstrap Paradox**
   - **Objective:** Create a singularity that causes its own existence — a causal loop running on the CPU.
   - **Concept:** In General Relativity, a Closed Timelike Curve (CTC) is a worldline that loops back on itself. We will attempt to jump the CPU instruction pointer backward in time.
   - **What's Needed:**
@@ -30,7 +30,7 @@ When bypassing the compiler, mutating private `BigFloat` tuples, and using `unsa
 
 ## Phase 5: Vacuum Decay (False Vacuum Collapse)
 
-- `[ ]` **Exp 42.13: False Vacuum Collapse**
+- `[x]` **Exp 42.13: False Vacuum Collapse**
   - **Objective:** Engineer a single mantissa injection that triggers a cascading precision failure, destroying the entire computational universe.
   - **Concept:** In quantum field theory, our universe may exist in a "false vacuum". A sufficiently energetic event nucleates a bubble of true vacuum that expands at the speed of light.
   - **What's Needed:**

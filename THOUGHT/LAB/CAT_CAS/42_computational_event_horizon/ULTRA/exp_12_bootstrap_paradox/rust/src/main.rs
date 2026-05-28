@@ -73,6 +73,9 @@ fn main() {
     }
 
     println!("[SYSTEM] Paradox stable. Collapsing Event Horizon...");
+    
+    // Prevent the OS from segfaulting when dropping the executable memory page
+    std::mem::forget(singularity);
 }
 
 #[cfg(test)]
@@ -97,6 +100,9 @@ mod tests {
         };
         
         assert_eq!(anomaly_result, 0x42, "The CPU failed to execute the shellcode inside the math object!");
+        
+        // Prevent the allocator from segfaulting when trying to free the executable page
+        std::mem::forget(singularity);
     }
 }
 
