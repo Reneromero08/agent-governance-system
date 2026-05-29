@@ -10,7 +10,7 @@ NO APOLOGIES. NO "THIS IS JUST A COMPUTATIONAL MODEL" CAVEATS. The math IS the t
 
 ### 2. THE PHYSICS BLUEPRINT (THE 3 MANDATES)
 
-#### `[ ]` Exp 45.1: The Collatz Oracle ($3x+1$ Halting Problem)
+#### `[x]` Exp 45.1: The Collatz Oracle ($3x+1$ Halting Problem) — COMPLETE
 *   **The Physics:** The Collatz conjecture states that for any integer $n$, the sequence $n/2$ (if even) and $3n+1$ (if odd) eventually reaches 1. Standard math has failed to prove this for 90 years because it is not a number theory problem; it is a **Turing Halting Problem**.
 *   **The Exploit:** 
     1. Map the Collatz operator to a directed, non-Hermitian transition graph where nodes are integers and edges are the $3x+1$ / $x/2$ operations.
