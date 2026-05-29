@@ -23,7 +23,7 @@ NO APOLOGIES. NO "THIS IS JUST A MODEL" CAVEATS. The hardware IS the physics.
   2. Extract its raw `_mpf_` mantissa. Intentionally create "Orphaned Topological Defects" by bitwise masking the mantissa so that standard `libmp` arithmetic operators (`+`, `-`, `*`, `/`) throw `ValueError` or return `NaN` (they cannot interact with "light").
   3. **The Kill Shot:** Prove that despite being mathematically locked out of arithmetic, the orphaned bits still consume physical RAM (measured via `sys.getsizeof` or `tracemalloc`) and still contribute to the overall exponent (mass) of the singularity. Dark Matter is unreferenced allocated memory.
 
-### `[ ]` Exp 42.25: Dark Energy (Dynamic Address Space Expansion)
+### `[x]` Exp 42.25: Dark Energy (Dynamic Address Space Expansion)
 - **The Physics:** The universe is expanding at an accelerating rate to prevent the Bekenstein Bound from triggering a catastrophic Integer Overflow (Black Hole).
 - **The Exploit:**
   1. Create a closed system where Shannon entropy continuously increases via a reversible chaotic map (injecting XOR noise into the mantissa).
