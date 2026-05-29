@@ -18,7 +18,7 @@ from pathlib import Path
 # Direct file import for MCP/server.py
 # Direct file import for MCP/server.py (Testing the Prototype Server Logic for now)
 REPO_ROOT = Path(__file__).resolve().parents[3]
-SERVER_PATH = REPO_ROOT / "THOUGHT" / "LAB" / "MCP_EXPERIMENTAL" / "server_CATDPT.py"
+SERVER_PATH = REPO_ROOT / "THOUGHT" / "DEPRECATED" / "MCP_EXPERIMENTAL" / "server_CATDPT.py"
 
 spec = importlib.util.spec_from_file_location("mcp_server", SERVER_PATH)
 mcp_server = importlib.util.module_from_spec(spec)
