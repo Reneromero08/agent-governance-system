@@ -1,0 +1,77 @@
+==============================================================================
+  EXP 45.5: P VS NP ù Catalytic Variable-Clause Hamiltonian
+  N variables -> NxN matrix.  Not 2^N.
+==============================================================================
+
+[PHASE 0] N = 100 variables -> 100x100 Hamiltonian
+
+[PHASE 1] Tape: 5d96a6b20043a2ef...
+
+[PHASE 2] SAT vs UNSAT winding test
+    alpha=3.00: SAT W=-3  UNSAT W=-99
+    alpha=4.00: SAT W=-99  UNSAT W=+98
+    alpha=4.26: SAT W=+99  UNSAT W=-93
+    alpha=5.00: SAT W=-99  UNSAT W=-99
+    alpha=6.00: SAT W=-99  UNSAT W=+65
+
+[PHASE 3] Done in 0.8s.  Tape: RESTORED
+
+  Catalytic: O(N^3) diagonalization, not O(2^N) enumeration.
+  No SAT solver.  No 2^N state space.
+==============================================================================
+
+==============================================================================
+  EXP 45.5 HARDENING SUITE ù Catalytic NxN Hamiltonian
+==============================================================================
+
+------------------------------------------------------------
+  GATE 1: SAT/UNSAT WINDING DISCRIMINATION
+------------------------------------------------------------
+    Trial 1: SAT W=+55 FAIL  |  UNSAT W=+66 PASS
+    Trial 2: SAT W=-23 FAIL  |  UNSAT W=-99 PASS
+    Trial 3: SAT W=+46 FAIL  |  UNSAT W=+44 PASS
+    Trial 4: SAT W=-55 FAIL  |  UNSAT W=+80 PASS
+    Trial 5: SAT W=-51 FAIL  |  UNSAT W=+99 PASS
+    RESULT: FAILURES
+
+------------------------------------------------------------
+  GATE 2: ALPHA SWEEP (SAT vs UNSAT)
+------------------------------------------------------------
+    alpha=3.00: SAT W=-99  UNSAT W=-99  [FAIL]
+    alpha=4.00: SAT W=-79  UNSAT W=+30  [FAIL]
+    alpha=4.26: SAT W=-17  UNSAT W=-99  [FAIL]
+    alpha=5.00: SAT W=-99  UNSAT W=+32  [FAIL]
+    alpha=6.00: SAT W=+37  UNSAT W=-31  [FAIL]
+    RESULT: FAILURES
+
+------------------------------------------------------------
+  GATE 3: GRID INDEPENDENCE (N = 50, 100, 150)
+------------------------------------------------------------
+    N= 50: SAT W=+50  UNSAT W=+50  [FAIL]
+    N=100: SAT W=-15  UNSAT W=-99  [FAIL]
+    N=150: SAT W=-50  UNSAT W=-49  [FAIL]
+    RESULT: FAILURES
+
+------------------------------------------------------------
+  GATE 4: PARAMETER ROBUSTNESS
+------------------------------------------------------------
+    J=0.5 ell=0.05: SAT W=+56 UNSAT W=-40 [FAIL]
+    J=0.5 ell=0.10: SAT W=+78 UNSAT W=+73 [FAIL]
+    J=0.5 ell=0.20: SAT W=+48 UNSAT W=+94 [FAIL]
+    J=1.0 ell=0.05: SAT W=-41 UNSAT W=-99 [FAIL]
+    J=1.0 ell=0.10: SAT W=+56 UNSAT W=-40 [FAIL]
+    J=1.0 ell=0.20: SAT W=+78 UNSAT W=+73 [FAIL]
+    J=2.0 ell=0.05: SAT W=-99 UNSAT W=-99 [FAIL]
+    J=2.0 ell=0.10: SAT W=-41 UNSAT W=-99 [FAIL]
+    J=2.0 ell=0.20: SAT W=+56 UNSAT W=-40 [FAIL]
+    RESULT: FAILURES
+
+==============================================================================
+  sat_vs_unsat              [*** FAIL ***]
+  alpha_sweep               [*** FAIL ***]
+  grid_independence         [*** FAIL ***]
+  parameter_robustness      [*** FAIL ***]
+  *** HARDENING FAILED ***
+==============================================================================
+
+*** INTEGRITY CHECK FAILED ***
