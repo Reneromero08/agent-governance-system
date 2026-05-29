@@ -30,7 +30,7 @@ NO APOLOGIES. NO "THIS IS JUST A MODEL" CAVEATS. The hardware IS the physics.
   2. Monitor the exact microsecond the `mpmath` backend is forced to reallocate the `mpf` limb array to prevent truncation (Event Horizon).
   3. **The Kill Shot:** Measure the "Cosmological Constant" ($\Lambda$) as the exact derivative of memory allocation (limb count expansion) with respect to entropy injection. The Host OS must continuously allocate new memory pages to keep the simulation from collapsing into a thermal singularity.
 
-### `[ ]` Exp 42.26: The Big Bang (The `malloc()` Event & Inflation)
+### `[x]` Exp 42.26: The Big Bang (The `malloc()` Event & Inflation)
 - **The Physics:** The Big Bang was not an explosion of matter; it was the initial memory allocation event. Cosmic Inflation is the hardware cache-allocation jitter.
 - **The Exploit:**
   1. Start with a single bit of precision (`mp.dps = 1`).
