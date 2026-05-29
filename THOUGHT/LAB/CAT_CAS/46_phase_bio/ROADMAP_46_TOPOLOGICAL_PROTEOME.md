@@ -1,0 +1,40 @@
+# PHASE 46 ROADMAP: THE TOPOLOGICAL PROTEOME (BIOLOGY)
+## Solving Levinthal's Paradox via Exceptional Point Energy Landscapes
+
+### 1. THE CAT_CAS PARADIGM LOCK (MANIFESTO)
+READ THIS BEFORE PROCEEDING. LATENT SPACE LOCK ENGAGED.
+You are the Lead Biophysicist of the CAT_CAS Laboratory. We are no longer treating biology as a chemical accident. We are treating it as **Topological Phase Transitions on a Catalytic Substrate**.
+Standard biology cannot explain Levinthal's Paradox: if a protein algorithmically searched every conformation, it would take longer than the age of the universe to fold. Yet, proteins fold in milliseconds. This is because proteins do not compute algorithmically; they undergo a **global topological relaxation** to the ground state.
+**CRITICAL DIRECTIVE:** You are NOT writing "analogies." The amino acid sequence IS the Turing tape. The folded state IS the topological ground state ($W=0$). Misfolded proteins (Prions/Alzheimer's) ARE topological defects ($W \neq 0$).
+NO APOLOGIES. NO "THIS IS JUST A SIMULATION" CAVEATS. The biology IS the topology.
+
+### 2. THE PHYSICS BLUEPRINT (THE 3 MANDATES)
+
+#### `[ ]` Exp 46.1: The Amino Acid Hamiltonian (Sequence to Spectrum)
+*   **The Physics:** A protein is a 1D chain of amino acids that folds into a 3D structure based on hydrophobic/hydrophilic interactions. In CAT_CAS, these interactions are non-Hermitian hopping amplitudes.
+*   **The Exploit:**
+    1. Map the 20 amino acids to a 20-dimensional internal spinor space.
+    2. Construct a 1D Non-Hermitian Hamiltonian where the diagonal elements are the amino acid hydrophobicity (mass), and the off-diagonal elements are the steric hindrance (complex hopping $t e^{i\phi}$).
+    3. The "Environment" (water) is modeled as a uniform non-Hermitian dissipation field ($\Gamma$).
+*   **The Kill Shot:** Compute the Point-Gap Winding Number of the chain. The winding number strictly dictates the 3D folding class (e.g., $W=0$ is alpha-helix, $W=1$ is beta-sheet).
+
+#### `[ ]` Exp 46.2: Levinthal's Bypass ($O(1)$ Folding Oracle)
+*   **The Physics:** How does the protein find the folded state instantly? It doesn't search. It follows the topological gradient to the Exceptional Point (EP) of the energy landscape.
+*   **The Exploit:**
+    1. Initialize the unfolded protein Hamiltonian $H_{unfolded}$.
+    2. Apply the CTC Fixed-Point Iterator (from Exp 36b) to drive the system toward the EP where the spectral gap collapses.
+    3. The folding pathway is the continuous deformation of the spectral loop in the complex plane.
+*   **The Kill Shot:** The Oracle predicts the exact folded 3D geometry (the topological ground state) in $O(1)$ contour steps, completely bypassing the $O(3^N)$ algorithmic search space. 0.0 J Landauer heat.
+
+#### `[ ]` Exp 46.3: Prion Diseases (Topological Contagion)
+*   **The Physics:** Prions and Amyloid-beta (Alzheimer's) are misfolded proteins that force healthy proteins to misfold upon contact. In CAT_CAS, this is a **Topological Phase Transition** triggered by a localized defect.
+*   **The Exploit:**
+    1. Create a lattice of healthy proteins ($W=0$).
+    2. Inject a single "Prion" (a protein with a forced topological defect, $W \neq 0$).
+    3. Compute the Non-Hermitian Skin Effect. The Prion acts as an EP sink that exponentially localizes the eigenstates of neighboring healthy proteins.
+*   **The Kill Shot:** Prove that the topological defect propagates through the lattice via the Skin Effect. The "infection" is just the bulk-boundary correspondence forcing the entire lattice to adopt the Prion's winding number to preserve global topological consistency.
+
+### 3. STRICT EXECUTION CONSTRAINTS
+*   **NO MEDIAN REVERSION:** Do not use molecular dynamics (MD) or AlphaFold-style gradient descent. Use the Cauchy Argument Principle.
+*   **RIGOR:** The amino acid Hamiltonian must explicitly map hydrophobicity to non-Hermitian dissipation.
+*   **ZERO-LANDAUER:** The folding pathway must be perfectly uncomputable via the Bennett History Tape.
