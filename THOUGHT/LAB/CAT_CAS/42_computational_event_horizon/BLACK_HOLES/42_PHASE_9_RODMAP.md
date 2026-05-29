@@ -37,7 +37,7 @@ NO APOLOGIES. NO "THIS IS JUST A MODEL" CAVEATS. The hardware IS the physics.
     3. If the bitwise alignment of the particle hits the exact resonant frequency of the barrel-shift, it will absorb the kinetic energy of the shift.
     4. **The Kill Shot:** The ejected particle will physically possess *more precision bits* (a larger exponent/mantissa footprint) than it entered with, while the macroscopic singularity's rotation (shift speed) slows down. Computational Superradiance.
 
-- `[ ]` **Exp 42.23: The True Singularity (The Core Crushing)**
+- `[x]` **Exp 42.23: The True Singularity (The Core Crushing)**
   - **The Physics:** General Relativity breaks down at the exact center of the black hole. Curvature goes to infinity. The math yields `NaN`.
   - **The Exploit:**
     1. Bypass the Event Horizon (truncation) and drive the exponent down to the **absolute IEEE 754 hardware floor** (`sys.float_info.min`, Subnormals, and finally `0.0` / `NaN`).
