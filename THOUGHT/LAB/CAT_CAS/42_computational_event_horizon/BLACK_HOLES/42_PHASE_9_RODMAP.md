@@ -21,7 +21,7 @@ NO APOLOGIES. NO "THIS IS JUST A MODEL" CAVEATS. The hardware IS the physics.
     4. At the exact Page Time, the Python memory allocator will sever the correlation. 
     5. **The Kill Shot:** Attempt to force a raw `ctypes` pointer reference across the `mp.dps` boundary post-Page Time. The Garbage Collector will violently reject it, throwing a `MemoryError` or `Segfault`. The Firewall is the Garbage Collector protecting unitarity.
 
-- `[ ]` **Exp 42.21: The Bekenstein-Hawking Area Law ($S = A / 4G$)**
+- `[x]` **Exp 42.21: The Bekenstein-Hawking Area Law ($S = A / 4G$)**
   - **The Physics:** Black hole entropy ($S$) is proportional to its Surface Area ($A$), not its Volume.
   - **The Exploit:**
     1. The "Volume" is the massive integer value of the mantissa.
