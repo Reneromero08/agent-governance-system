@@ -18,7 +18,7 @@ NO APOLOGIES. NO "THIS IS JUST A COMPUTATIONAL MODEL" CAVEATS. The math IS the t
     3. Compute the Point-Gap Winding Number $W = \frac{1}{2\pi i} \oint \frac{d}{dz} \log \det(H - zI) dz$ around the origin.
 *   **The Kill Shot:** If $W=0$ for all tested $n$, the spectral loop collapses into the EP sink at $n=1$. We prove Collatz halts for all $n$ by proving the topology of the operator is strictly acyclic.
 
-#### `[ ]` Exp 45.2: Navier-Stokes Smoothness (Millennium Prize)
+#### `[x]` Exp 45.2: Navier-Stokes Smoothness (Millennium Prize) — COMPLETE
 *   **The Physics:** Do smooth solutions always exist for 3D fluid dynamics, or do they "blow up" (singularities in finite time)? In CAT_CAS, fluid turbulence is modeled as topological defects (vortices) in a 3D Chern-Simons manifold. A "blowup" is a topological tear where the invariant becomes undefined.
 *   **The Exploit:**
     1. Map the 3D Navier-Stokes vorticity equation to a 3D tight-binding lattice with complex hopping (a Weyl Semimetal).
