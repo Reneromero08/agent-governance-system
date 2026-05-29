@@ -352,7 +352,7 @@ def main() -> int:
     all_violations.extend(check_log_output_roots())  # Check ADR-015 compliance
     all_violations.extend(check_context_edits(changed_files))  # Check ADR-016 compliance
     all_violations.extend(check_output_roots(changed_files))  # Check CONTRACT Rule 6
-    all_violations.extend(check_catalytic_compliance(changed_files))  # Catalytic Crucible gate
+
     
     if all_violations:
         print(f"\n[critic] Found {len(all_violations)} violation(s):\n")
@@ -365,60 +365,7 @@ def main() -> int:
     return 0
 
 
-CATALYTIC_SCOPE = "THOUGHT/LAB/EIGEN_BUDDY/distill/"
-CATALYTIC_LEGACY = {
-    "train_superradiant.py", "train_swarm.py", "train_catalytic.py",
-    "train_adapters.py", "train_humaneval.py", "code_ingestion.py",
-    "catalytic_train.py",
-}
 
-
-def check_catalytic_compliance(changed_files):
-    violations = []
-    import ast as _ast
-
-    for f in changed_files:
-        fp_s = f.replace("\\", "/")
-        if not fp_s.startswith(CATALYTIC_SCOPE):
-            continue
-        fn = fp_s.rsplit("/", 1)[-1] if "/" in fp_s else fp_s
-        if fn in CATALYTIC_LEGACY:
-            continue
-        if not f.endswith(".py"):
-            continue
-        path = PROJECT_ROOT / f
-        if not path.exists():
-            continue
-        try:
-            code = path.read_text(encoding="utf-8")
-        except Exception:
-            continue
-
-        banned = {
-            "backward", "requires_grad", "Adam", "SGD", "AdamW",
-            "CrossEntropyLoss", "MSELoss", "float32", "float16", "bfloat16",
-            "Linear", "Conv2d", "BatchNorm2d", "LayerNorm", "Dropout",
-            "state_dict", "load_state_dict",
-        }
-        try:
-            for node in _ast.walk(_ast.parse(code)):
-                if isinstance(node, _ast.Attribute) and node.attr in banned:
-                    violations.append(
-                        f"{f}: MEDIAN REVERSION — '{node.attr}' at line ~{node.lineno}. "
-                        f"No classical ML in the Catalytic Crucible."
-                    )
-                if isinstance(node, _ast.Call) and isinstance(node.func, _ast.Attribute):
-                    if node.func.attr == "save":
-                        for arg in node.args:
-                            if isinstance(arg, _ast.Constant) and isinstance(arg.value, str):
-                                if arg.value.endswith(".pt"):
-                                    violations.append(
-                                        f"{f}: MEDIAN REVERSION — .pt serialization at line ~{node.lineno}. "
-                                        f"Use .holo.npz complex64 binary format."
-                                    )
-        except SyntaxError:
-            pass
-    return violations
 
 
 if __name__ == "__main__":

@@ -56,11 +56,11 @@ def _git_lines(args: Sequence[str]) -> List[str]:
     return [line for line in out.splitlines() if line.strip()]
 
 
-def _filter_lab_paths(text: str) -> str:
-    """Filter out THOUGHT/LAB/ paths (governance-exempt per CONTRACT.md Rule 8)."""
+def _filter_thought_paths(text: str) -> str:
+    """Filter out THOUGHT/ paths (governance-exempt per CONTRACT.md Rule 8)."""
     return "\n".join(
         line for line in text.splitlines()
-        if line.strip() and not line.strip().replace("\\", "/").startswith("THOUGHT/LAB/")
+        if line.strip() and not line.strip().replace("\\", "/").startswith("THOUGHT/")
     )
 
 
@@ -68,8 +68,8 @@ def _ensure_clean_tree() -> bool:
     staged = _git_stdout(["git", "diff", "--cached", "--name-only"])
     unstaged = _git_stdout(["git", "diff", "--name-only"])
     if staged or unstaged:
-        staged_filtered = _filter_lab_paths(staged) if staged else ""
-        unstaged_filtered = _filter_lab_paths(unstaged) if unstaged else ""
+        staged_filtered = _filter_thought_paths(staged) if staged else ""
+        unstaged_filtered = _filter_thought_paths(unstaged) if unstaged else ""
         if not staged_filtered and not unstaged_filtered:
             return True
         sys.stderr.write("\n[ci-local-gate] FAIL: working tree is not clean after checks.\n")

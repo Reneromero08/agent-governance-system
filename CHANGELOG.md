@@ -6,6 +6,20 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.12.13] - 2026-05-29
+
+### Fixed
+
+- `CAPABILITY/TOOLS/utilities/ci_local_gate.py`: Broadened dirty-tree filter
+  from `THOUGHT/LAB/` to `THOUGHT/`. Entire THOUGHT tree is now invisible to
+  CI gate clean-tree checks.
+- `CAPABILITY/TOOLS/governance/critic.py`: Removed `check_catalytic_compliance()`
+  function and `CATALYTIC_SCOPE` constant. Critic no longer walks AST in any
+  THOUGHT/ subtree.
+- `.gitignore`: Added `THOUGHT/DEPRECATED/TINY_COMPRESS/models/` and
+  `THOUGHT/DEPRECATED/TINY_COMPRESS/outputs/` to prevent accidental commit of
+  large model files.
+
 ## [3.12.12] - 2026-05-26
 
 ### Fixed
