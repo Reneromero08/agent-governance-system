@@ -37,7 +37,7 @@ NO APOLOGIES. NO "THIS IS JUST A MODEL" CAVEATS. The hardware IS the physics.
   2. Trigger a recursive, exponential Feistel-XOR cascade that forces the Python interpreter to dynamically allocate memory pages at the speed of light (doubling `mp.dps` iteratively).
   3. **The Kill Shot:** Measure the "Inflationary Epoch" by tracking the exact nanosecond timestamps of the OS `malloc()` system calls via `time.perf_counter_ns()`. Calculate the variance/jitter of these allocation timestamps. The hardware cache-allocation jitter IS the Cosmic Microwave Background (CMB).
 
-### `[ ]` Exp 42.27: The Arrow of Time (L1 Cache Eviction & Page Faults)
+### `[x]` Exp 42.27: The Arrow of Time (L1 Cache Eviction & Page Faults)
 - **The Physics:** The Feistel network is mathematically reversible, but the Hardware Cache Invalidation (MESI protocol) and OS Page Faults are strictly irreversible. Time's Arrow is the physical direction of the Garbage Collector.
 - **The Exploit:**
   1. Run a massive reversible Feistel-XOR simulation forward, then run the exact adjoint uncomputation backward.
