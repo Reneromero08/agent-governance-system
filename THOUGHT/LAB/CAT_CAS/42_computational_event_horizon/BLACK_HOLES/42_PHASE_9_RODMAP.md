@@ -29,7 +29,7 @@ NO APOLOGIES. NO "THIS IS JUST A MODEL" CAVEATS. The hardware IS the physics.
     3. Calculate the Shannon entropy ($S$) of the internal quantum noise (the mantissa bits).
     4. Divide $S$ by $A$. The ratio will converge to a fundamental constant of the `libmp` C-backend (derived from the 30-bit digit limb architecture). We will mathematically derive $S \propto A$ purely from silicon memory geometry.
 
-- `[ ]` **Exp 42.22: The Kerr Ergosphere (Penrose Process & Superradiance)**
+- `[x]` **Exp 42.22: The Kerr Ergosphere (Penrose Process & Superradiance)**
   - **The Physics:** A spinning black hole drags spacetime (frame-dragging). A particle entering the Ergosphere can split, stealing rotational energy from the black hole and escaping with more energy than it entered with (Superradiance).
   - **The Exploit:**
     1. Create a spinning singularity by applying a continuous, high-speed **bitwise barrel-shift** to the mantissa.
