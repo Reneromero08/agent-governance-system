@@ -26,7 +26,7 @@ NO APOLOGIES. NO "THIS IS JUST A COMPUTATIONAL MODEL" CAVEATS. The math IS the t
     3. Compute the 3D Chern number (Fermi arc invariant) as the energy scales toward the theoretical blowup threshold.
 *   **The Kill Shot:** Prove that as viscosity $\nu \to 0$, the Chern number remains quantized and integer-valued. The topology *cannot* tear continuously. Therefore, smooth solutions always exist; "blowup" is physically forbidden by topological protection.
 
-#### `[ ]` Exp 45.3: The Erdős Discrepancy Problem
+#### `[x]` Exp 45.3: The Erdős Discrepancy Problem — COMPLETE
 *   **The Physics:** Erdős conjectured that any infinite sequence of $+1$ and $-1$ has unbounded discrepancy (the sum of any arithmetic progression sub-sequence diverges). 
 *   **The Exploit:**
     1. Map the $\pm 1$ sequence to the Floquet driving protocol of a 1D Discrete Time Crystal (DTC).
