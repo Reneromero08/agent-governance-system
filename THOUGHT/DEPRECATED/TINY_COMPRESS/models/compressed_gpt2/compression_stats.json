@@ -1,0 +1,658 @@
+{
+  "model_name": "gpt2",
+  "total_original_params": 124439808,
+  "total_compressed_params": 10137494,
+  "total_compression_ratio": 12.275204108628818,
+  "layers": [
+    {
+      "name": "transformer.wte.weight",
+      "original_shape": [
+        50257,
+        768
+      ],
+      "k": 50,
+      "original_params": 38597376,
+      "compressed_params": 2551300,
+      "compression_ratio": 15.12851330694156,
+      "variance_captured": 0.4228091835975647,
+      "effective_rank": 513.4128702548794
+    },
+    {
+      "name": "transformer.wpe.weight",
+      "original_shape": [
+        1024,
+        768
+      ],
+      "k": 50,
+      "original_params": 786432,
+      "compressed_params": 89650,
+      "compression_ratio": 8.772247629670943,
+      "variance_captured": 0.9993541240692139,
+      "effective_rank": 11.784621559184652
+    },
+    {
+      "name": "transformer.h.0.attn.c_attn.weight",
+      "original_shape": [
+        768,
+        2304
+      ],
+      "k": 50,
+      "original_params": 1769472,
+      "compressed_params": 153650,
+      "compression_ratio": 11.51625122030589,
+      "variance_captured": 0.34283316135406494,
+      "effective_rank": 542.7154048106775
+    },
+    {
+      "name": "transformer.h.0.attn.c_proj.weight",
+      "original_shape": [
+        768,
+        768
+      ],
+      "k": 50,
+      "original_params": 589824,
+      "compressed_params": 76850,
+      "compression_ratio": 7.675003253090436,
+      "variance_captured": 0.5434861183166504,
+      "effective_rank": 257.01766794982456
+    },
+    {
+      "name": "transformer.h.0.mlp.c_fc.weight",
+      "original_shape": [
+        768,
+        3072
+      ],
+      "k": 50,
+      "original_params": 2359296,
+      "compressed_params": 192050,
+      "compression_ratio": 12.284800833116376,
+      "variance_captured": 0.23291264474391937,
+      "effective_rank": 637.9130515250358
+    },
+    {
+      "name": "transformer.h.0.mlp.c_proj.weight",
+      "original_shape": [
+        3072,
+        768
+      ],
+      "k": 50,
+      "original_params": 2359296,
+      "compressed_params": 192050,
+      "compression_ratio": 12.284800833116376,
+      "variance_captured": 0.2763739228248596,
+      "effective_rank": 629.5663737802477
+    },
+    {
+      "name": "transformer.h.1.attn.c_attn.weight",
+      "original_shape": [
+        768,
+        2304
+      ],
+      "k": 50,
+      "original_params": 1769472,
+      "compressed_params": 153650,
+      "compression_ratio": 11.51625122030589,
+      "variance_captured": 0.32525184750556946,
+      "effective_rank": 546.4749712946563
+    },
+    {
+      "name": "transformer.h.1.attn.c_proj.weight",
+      "original_shape": [
+        768,
+        768
+      ],
+      "k": 50,
+      "original_params": 589824,
+      "compressed_params": 76850,
+      "compression_ratio": 7.675003253090436,
+      "variance_captured": 0.5473195314407349,
+      "effective_rank": 342.01112809339105
+    },
+    {
+      "name": "transformer.h.1.mlp.c_fc.weight",
+      "original_shape": [
+        768,
+        3072
+      ],
+      "k": 50,
+      "original_params": 2359296,
+      "compressed_params": 192050,
+      "compression_ratio": 12.284800833116376,
+      "variance_captured": 0.2612738013267517,
+      "effective_rank": 642.1196910573278
+    },
+    {
+      "name": "transformer.h.1.mlp.c_proj.weight",
+      "original_shape": [
+        3072,
+        768
+      ],
+      "k": 50,
+      "original_params": 2359296,
+      "compressed_params": 192050,
+      "compression_ratio": 12.284800833116376,
+      "variance_captured": 0.2674575746059418,
+      "effective_rank": 641.12253697495
+    },
+    {
+      "name": "transformer.h.2.attn.c_attn.weight",
+      "original_shape": [
+        768,
+        2304
+      ],
+      "k": 50,
+      "original_params": 1769472,
+      "compressed_params": 153650,
+      "compression_ratio": 11.51625122030589,
+      "variance_captured": 0.2901308536529541,
+      "effective_rank": 581.0560627845407
+    },
+    {
+      "name": "transformer.h.2.attn.c_proj.weight",
+      "original_shape": [
+        768,
+        768
+      ],
+      "k": 50,
+      "original_params": 589824,
+      "compressed_params": 76850,
+      "compression_ratio": 7.675003253090436,
+      "variance_captured": 0.3639645278453827,
+      "effective_rank": 441.9980184623688
+    },
+    {
+      "name": "transformer.h.2.mlp.c_fc.weight",
+      "original_shape": [
+        768,
+        3072
+      ],
+      "k": 50,
+      "original_params": 2359296,
+      "compressed_params": 192050,
+      "compression_ratio": 12.284800833116376,
+      "variance_captured": 0.2803939878940582,
+      "effective_rank": 631.1222489135486
+    },
+    {
+      "name": "transformer.h.2.mlp.c_proj.weight",
+      "original_shape": [
+        3072,
+        768
+      ],
+      "k": 50,
+      "original_params": 2359296,
+      "compressed_params": 192050,
+      "compression_ratio": 12.284800833116376,
+      "variance_captured": 0.28213828802108765,
+      "effective_rank": 624.8699080523359
+    },
+    {
+      "name": "transformer.h.3.attn.c_attn.weight",
+      "original_shape": [
+        768,
+        2304
+      ],
+      "k": 50,
+      "original_params": 1769472,
+      "compressed_params": 153650,
+      "compression_ratio": 11.51625122030589,
+      "variance_captured": 0.2746972143650055,
+      "effective_rank": 612.3000093680232
+    },
+    {
+      "name": "transformer.h.3.attn.c_proj.weight",
+      "original_shape": [
+        768,
+        768
+      ],
+      "k": 50,
+      "original_params": 589824,
+      "compressed_params": 76850,
+      "compression_ratio": 7.675003253090436,
+      "variance_captured": 0.3462631404399872,
+      "effective_rank": 456.16616410094184
+    },
+    {
+      "name": "transformer.h.3.mlp.c_fc.weight",
+      "original_shape": [
+        768,
+        3072
+      ],
+      "k": 50,
+      "original_params": 2359296,
+      "compressed_params": 192050,
+      "compression_ratio": 12.284800833116376,
+      "variance_captured": 0.24537299573421478,
+      "effective_rank": 642.5908346671414
+    },
+    {
+      "name": "transformer.h.3.mlp.c_proj.weight",
+      "original_shape": [
+        3072,
+        768
+      ],
+      "k": 50,
+      "original_params": 2359296,
+      "compressed_params": 192050,
+      "compression_ratio": 12.284800833116376,
+      "variance_captured": 0.29637739062309265,
+      "effective_rank": 608.6895461699521
+    },
+    {
+      "name": "transformer.h.4.attn.c_attn.weight",
+      "original_shape": [
+        768,
+        2304
+      ],
+      "k": 50,
+      "original_params": 1769472,
+      "compressed_params": 153650,
+      "compression_ratio": 11.51625122030589,
+      "variance_captured": 0.29045969247817993,
+      "effective_rank": 596.5644074448998
+    },
+    {
+      "name": "transformer.h.4.attn.c_proj.weight",
+      "original_shape": [
+        768,
+        768
+      ],
+      "k": 50,
+      "original_params": 589824,
+      "compressed_params": 76850,
+      "compression_ratio": 7.675003253090436,
+      "variance_captured": 0.3563803732395172,
+      "effective_rank": 443.6912364737743
+    },
+    {
+      "name": "transformer.h.4.mlp.c_fc.weight",
+      "original_shape": [
+        768,
+        3072
+      ],
+      "k": 50,
+      "original_params": 2359296,
+      "compressed_params": 192050,
+      "compression_ratio": 12.284800833116376,
+      "variance_captured": 0.2601005434989929,
+      "effective_rank": 634.173849081446
+    },
+    {
+      "name": "transformer.h.4.mlp.c_proj.weight",
+      "original_shape": [
+        3072,
+        768
+      ],
+      "k": 50,
+      "original_params": 2359296,
+      "compressed_params": 192050,
+      "compression_ratio": 12.284800833116376,
+      "variance_captured": 0.2742384970188141,
+      "effective_rank": 627.8128722288266
+    },
+    {
+      "name": "transformer.h.5.attn.c_attn.weight",
+      "original_shape": [
+        768,
+        2304
+      ],
+      "k": 50,
+      "original_params": 1769472,
+      "compressed_params": 153650,
+      "compression_ratio": 11.51625122030589,
+      "variance_captured": 0.282805860042572,
+      "effective_rank": 579.1278338846565
+    },
+    {
+      "name": "transformer.h.5.attn.c_proj.weight",
+      "original_shape": [
+        768,
+        768
+      ],
+      "k": 50,
+      "original_params": 589824,
+      "compressed_params": 76850,
+      "compression_ratio": 7.675003253090436,
+      "variance_captured": 0.3336808681488037,
+      "effective_rank": 472.39701800531583
+    },
+    {
+      "name": "transformer.h.5.mlp.c_fc.weight",
+      "original_shape": [
+        768,
+        3072
+      ],
+      "k": 50,
+      "original_params": 2359296,
+      "compressed_params": 192050,
+      "compression_ratio": 12.284800833116376,
+      "variance_captured": 0.2534995377063751,
+      "effective_rank": 635.4761470877921
+    },
+    {
+      "name": "transformer.h.5.mlp.c_proj.weight",
+      "original_shape": [
+        3072,
+        768
+      ],
+      "k": 50,
+      "original_params": 2359296,
+      "compressed_params": 192050,
+      "compression_ratio": 12.284800833116376,
+      "variance_captured": 0.2570960819721222,
+      "effective_rank": 637.3488283692535
+    },
+    {
+      "name": "transformer.h.6.attn.c_attn.weight",
+      "original_shape": [
+        768,
+        2304
+      ],
+      "k": 50,
+      "original_params": 1769472,
+      "compressed_params": 153650,
+      "compression_ratio": 11.51625122030589,
+      "variance_captured": 0.253874808549881,
+      "effective_rank": 603.1992978156661
+    },
+    {
+      "name": "transformer.h.6.attn.c_proj.weight",
+      "original_shape": [
+        768,
+        768
+      ],
+      "k": 50,
+      "original_params": 589824,
+      "compressed_params": 76850,
+      "compression_ratio": 7.675003253090436,
+      "variance_captured": 0.36476144194602966,
+      "effective_rank": 443.05232772329293
+    },
+    {
+      "name": "transformer.h.6.mlp.c_fc.weight",
+      "original_shape": [
+        768,
+        3072
+      ],
+      "k": 50,
+      "original_params": 2359296,
+      "compressed_params": 192050,
+      "compression_ratio": 12.284800833116376,
+      "variance_captured": 0.2520278990268707,
+      "effective_rank": 637.8266245229538
+    },
+    {
+      "name": "transformer.h.6.mlp.c_proj.weight",
+      "original_shape": [
+        3072,
+        768
+      ],
+      "k": 50,
+      "original_params": 2359296,
+      "compressed_params": 192050,
+      "compression_ratio": 12.284800833116376,
+      "variance_captured": 0.24469445645809174,
+      "effective_rank": 642.7738104888997
+    },
+    {
+      "name": "transformer.h.7.attn.c_attn.weight",
+      "original_shape": [
+        768,
+        2304
+      ],
+      "k": 50,
+      "original_params": 1769472,
+      "compressed_params": 153650,
+      "compression_ratio": 11.51625122030589,
+      "variance_captured": 0.2521810531616211,
+      "effective_rank": 610.6466749755424
+    },
+    {
+      "name": "transformer.h.7.attn.c_proj.weight",
+      "original_shape": [
+        768,
+        768
+      ],
+      "k": 50,
+      "original_params": 589824,
+      "compressed_params": 76850,
+      "compression_ratio": 7.675003253090436,
+      "variance_captured": 0.34596502780914307,
+      "effective_rank": 462.88686109639514
+    },
+    {
+      "name": "transformer.h.7.mlp.c_fc.weight",
+      "original_shape": [
+        768,
+        3072
+      ],
+      "k": 50,
+      "original_params": 2359296,
+      "compressed_params": 192050,
+      "compression_ratio": 12.284800833116376,
+      "variance_captured": 0.24588839709758759,
+      "effective_rank": 638.6295480370412
+    },
+    {
+      "name": "transformer.h.7.mlp.c_proj.weight",
+      "original_shape": [
+        3072,
+        768
+      ],
+      "k": 50,
+      "original_params": 2359296,
+      "compressed_params": 192050,
+      "compression_ratio": 12.284800833116376,
+      "variance_captured": 0.23358742892742157,
+      "effective_rank": 649.1490046475966
+    },
+    {
+      "name": "transformer.h.8.attn.c_attn.weight",
+      "original_shape": [
+        768,
+        2304
+      ],
+      "k": 50,
+      "original_params": 1769472,
+      "compressed_params": 153650,
+      "compression_ratio": 11.51625122030589,
+      "variance_captured": 0.22142882645130157,
+      "effective_rank": 642.4484576287313
+    },
+    {
+      "name": "transformer.h.8.attn.c_proj.weight",
+      "original_shape": [
+        768,
+        768
+      ],
+      "k": 50,
+      "original_params": 589824,
+      "compressed_params": 76850,
+      "compression_ratio": 7.675003253090436,
+      "variance_captured": 0.3382476270198822,
+      "effective_rank": 454.2300857627686
+    },
+    {
+      "name": "transformer.h.8.mlp.c_fc.weight",
+      "original_shape": [
+        768,
+        3072
+      ],
+      "k": 50,
+      "original_params": 2359296,
+      "compressed_params": 192050,
+      "compression_ratio": 12.284800833116376,
+      "variance_captured": 0.234393909573555,
+      "effective_rank": 646.3626697010804
+    },
+    {
+      "name": "transformer.h.8.mlp.c_proj.weight",
+      "original_shape": [
+        3072,
+        768
+      ],
+      "k": 50,
+      "original_params": 2359296,
+      "compressed_params": 192050,
+      "compression_ratio": 12.284800833116376,
+      "variance_captured": 0.23060929775238037,
+      "effective_rank": 646.9305528379291
+    },
+    {
+      "name": "transformer.h.9.attn.c_attn.weight",
+      "original_shape": [
+        768,
+        2304
+      ],
+      "k": 50,
+      "original_params": 1769472,
+      "compressed_params": 153650,
+      "compression_ratio": 11.51625122030589,
+      "variance_captured": 0.2000272572040558,
+      "effective_rank": 659.1033073440805
+    },
+    {
+      "name": "transformer.h.9.attn.c_proj.weight",
+      "original_shape": [
+        768,
+        768
+      ],
+      "k": 50,
+      "original_params": 589824,
+      "compressed_params": 76850,
+      "compression_ratio": 7.675003253090436,
+      "variance_captured": 0.27412649989128113,
+      "effective_rank": 500.81124376495524
+    },
+    {
+      "name": "transformer.h.9.mlp.c_fc.weight",
+      "original_shape": [
+        768,
+        3072
+      ],
+      "k": 50,
+      "original_params": 2359296,
+      "compressed_params": 192050,
+      "compression_ratio": 12.284800833116376,
+      "variance_captured": 0.23621642589569092,
+      "effective_rank": 643.6320449683785
+    },
+    {
+      "name": "transformer.h.9.mlp.c_proj.weight",
+      "original_shape": [
+        3072,
+        768
+      ],
+      "k": 50,
+      "original_params": 2359296,
+      "compressed_params": 192050,
+      "compression_ratio": 12.284800833116376,
+      "variance_captured": 0.2177376002073288,
+      "effective_rank": 652.2480728322907
+    },
+    {
+      "name": "transformer.h.10.attn.c_attn.weight",
+      "original_shape": [
+        768,
+        2304
+      ],
+      "k": 50,
+      "original_params": 1769472,
+      "compressed_params": 153650,
+      "compression_ratio": 11.51625122030589,
+      "variance_captured": 0.21627691388130188,
+      "effective_rank": 638.5249924438546
+    },
+    {
+      "name": "transformer.h.10.attn.c_proj.weight",
+      "original_shape": [
+        768,
+        768
+      ],
+      "k": 50,
+      "original_params": 589824,
+      "compressed_params": 76850,
+      "compression_ratio": 7.675003253090436,
+      "variance_captured": 0.27406367659568787,
+      "effective_rank": 520.9250416709432
+    },
+    {
+      "name": "transformer.h.10.mlp.c_fc.weight",
+      "original_shape": [
+        768,
+        3072
+      ],
+      "k": 50,
+      "original_params": 2359296,
+      "compressed_params": 192050,
+      "compression_ratio": 12.284800833116376,
+      "variance_captured": 0.24620003998279572,
+      "effective_rank": 641.0822017726005
+    },
+    {
+      "name": "transformer.h.10.mlp.c_proj.weight",
+      "original_shape": [
+        3072,
+        768
+      ],
+      "k": 50,
+      "original_params": 2359296,
+      "compressed_params": 192050,
+      "compression_ratio": 12.284800833116376,
+      "variance_captured": 0.21177369356155396,
+      "effective_rank": 659.6245870087254
+    },
+    {
+      "name": "transformer.h.11.attn.c_attn.weight",
+      "original_shape": [
+        768,
+        2304
+      ],
+      "k": 50,
+      "original_params": 1769472,
+      "compressed_params": 153650,
+      "compression_ratio": 11.51625122030589,
+      "variance_captured": 0.227084219455719,
+      "effective_rank": 624.9788324200222
+    },
+    {
+      "name": "transformer.h.11.attn.c_proj.weight",
+      "original_shape": [
+        768,
+        768
+      ],
+      "k": 50,
+      "original_params": 589824,
+      "compressed_params": 76850,
+      "compression_ratio": 7.675003253090436,
+      "variance_captured": 0.4750839173793793,
+      "effective_rank": 405.2167996664372
+    },
+    {
+      "name": "transformer.h.11.mlp.c_fc.weight",
+      "original_shape": [
+        768,
+        3072
+      ],
+      "k": 50,
+      "original_params": 2359296,
+      "compressed_params": 192050,
+      "compression_ratio": 12.284800833116376,
+      "variance_captured": 0.26703962683677673,
+      "effective_rank": 630.9021310304927
+    },
+    {
+      "name": "transformer.h.11.mlp.c_proj.weight",
+      "original_shape": [
+        3072,
+        768
+      ],
+      "k": 50,
+      "original_params": 2359296,
+      "compressed_params": 192050,
+      "compression_ratio": 12.284800833116376,
+      "variance_captured": 0.2248540073633194,
+      "effective_rank": 656.1500557860958
+    }
+  ]
+}

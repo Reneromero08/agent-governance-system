@@ -1,0 +1,20 @@
+{
+  "receipts": [
+    {
+      "operation": "register_canonical",
+      "timestamp": "2026-01-12T19:08:34.735539+00:00",
+      "receipt_hash": "c38ee7d4fd70cb9a",
+      "parent_hash": null,
+      "op_type": "register_canonical",
+      "operand_hashes": [],
+      "result_hash": "6dd8857e1a6eaa22",
+      "Df_before": 0.0,
+      "Df_after": 121.4224738404154,
+      "E_with_previous": 0.0
+    }
+  ],
+  "merkle_tree": [
+    "c38ee7d4fd70cb9a"
+  ],
+  "updated_at": "2026-01-12T19:08:34.738537+00:00"
+}
