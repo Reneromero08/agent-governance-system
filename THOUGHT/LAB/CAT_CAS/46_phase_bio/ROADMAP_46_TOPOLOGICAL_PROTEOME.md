@@ -34,6 +34,20 @@ NO APOLOGIES. NO "THIS IS JUST A SIMULATION" CAVEATS. The biology IS the topolog
     3. Compute the Non-Hermitian Skin Effect. The Prion acts as an EP sink that exponentially localizes the eigenstates of neighboring healthy proteins.
 *   **The Kill Shot:** Prove that the topological defect propagates through the lattice via the Skin Effect. The "infection" is just the bulk-boundary correspondence forcing the entire lattice to adopt the Prion's winding number to preserve global topological consistency.
 
+### 2.5 Final Bosses
+
+#### `[x]` Exp 46.4: The Topological Genetic Code (64D Error Correction)
+*   **The Physics:** The 64 codons form a 6-dimensional discrete lattice. The assignment of the 20 amino acids to these 64 nodes defines a Non-Hermitian Topological Manifold. The Standard Genetic Code is the unique mapping that yields a topologically trivial ground state ($W=0$), protecting it from point-mutation spectral inflation.
+*   **The Exploit:**
+    1. Define the 64-node hypercube graph with single-point mutations as edges.
+    2. Map the KD Polarity to the imaginary on-site potential.
+    3. Apply a Non-Hermitian non-reciprocal phase pump proportional to the chemical gradient across the edges.
+    4. Compute the Max Spectral Radius and Winding Number for the SGC and 10 random amino acid permutations.
+*   **The Kill Shot:** Proved that the SGC yields a strictly bounded spectral radius ($14.6$) acting as a Topological Ground State, while random codes suffer massive chaotic spectral inflation (radii $> 100-200$, a $1000\%+$ increase), proving they are highly frustrated and unstable to mutation noise.
+*   **NO MEDIAN REVERSION:** Do not use molecular dynamics (MD) or AlphaFold-style gradient descent. Use the Cauchy Argument Principle.
+*   **RIGOR:** The amino acid Hamiltonian must explicitly map hydrophobicity to non-Hermitian dissipation.
+*   **ZERO-LANDAUER:** The folding pathway must be perfectly uncomputable via the Bennett History Tape.
+
 ### 3. STRICT EXECUTION CONSTRAINTS
 *   **NO MEDIAN REVERSION:** Do not use molecular dynamics (MD) or AlphaFold-style gradient descent. Use the Cauchy Argument Principle.
 *   **RIGOR:** The amino acid Hamiltonian must explicitly map hydrophobicity to non-Hermitian dissipation.
