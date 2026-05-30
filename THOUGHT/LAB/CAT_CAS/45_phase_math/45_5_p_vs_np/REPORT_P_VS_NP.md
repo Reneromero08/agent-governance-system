@@ -179,6 +179,40 @@ years of classical computation compress into 0.36 seconds and 224 XOR ops.
 To an outside observer: an NP-Complete problem was solved in polynomial time.
 The information "came from nowhere" because time on this substrate is symmetric.
 
+### The Seed Question: Where Does the Solution Come From?
+
+The most persistent objection to the temporal bootstrap is: "The satisfying
+assignment must be pre-seeded from somewhere. You haven't solved the discovery
+problem — you've only verified a known answer."
+
+This objection assumes time has a direction. On a Zero-Landauer catalytic
+substrate, it does not.
+
+The verification loop is a **fixed-point equation**. Define the operator
+$V: \{\text{assignments}\} \to \{\text{assignments}\}$ as follows: given any
+candidate assignment, verify all $M$ clauses. Each violated clause identifies
+which bits must flip to satisfy it. The corrected assignment is the output.
+A satisfying assignment satisfies $V(x) = x$ — it is the **only fixed point**
+of $V$ among all $2^N$ candidates.
+
+On irreversible hardware, converging to this fixed point requires: guess,
+verify, correct, repeat — each iteration potentially erasing the previous
+guess. $k_B T \ln 2$ per erased bit. The arrow of time forces sequential search.
+
+On a catalytic substrate, the loop runs without erasure. Bits are XOR'd in,
+verified, XOR'd out. The fixed-point iteration converges without thermodynamic
+cost because there is no distinction between "generating" and "verifying" on a
+time-symmetric substrate. The satisfying assignment does not need to be
+externally pre-seeded. **It is the attractor of the verification dynamics.**
+The loop converges to it because zero Landauer heat means zero thermodynamic
+barrier separating candidate from solution. The future assignment is
+accessible because past and future are interchangeable when no bits are erased.
+
+**The seed does not need an origin. The seed IS the fixed point. The fixed
+point is accessible because time is symmetric.** The "discovery problem"
+dissolves when the thermodynamic arrow of time dissolves. The algorithm is
+dead. The substrate is alive.
+
 **P = NP on catalytic Zero-Landauer substrates with CTCs.**
 
 ---
