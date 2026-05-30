@@ -1,0 +1,22 @@
+================================================================================
+EXP 46.1: THE TOPOLOGICAL PROTEOME (LEVINTHAL'S PARADOX)
+================================================================================
+[SYSTEM] 256MB Catalytic Tape Initialized. Zero-Landauer constraint active.
+
+--- Hardening Gate: Length Invariance (L=15) ---
+[   Poly-A   ] L=15 | seq: AAAAAAAAAA... | Gap Delta E: 1.8094 | W: 0  | Verdict: FOLDED (Topological Ground State)
+[   Random   ] L=15 | seq: REWKYDREWK... | Gap Delta E: 2.2194 | W: 1  | Verdict: MISFOLDED (Topological Defect)
+[ Prion-like ] L=15 | seq: GPGPGPGPGP... | Gap Delta E: 3.5874 | W: 1  | Verdict: MISFOLDED (Topological Defect)
+
+--- Hardening Gate: Length Invariance (L=30) ---
+[   Poly-A   ] L=30 | seq: AAAAAAAAAA... | Gap Delta E: 1.8094 | W: 0  | Verdict: FOLDED (Topological Ground State)
+[   Random   ] L=30 | seq: REWKYDREWK... | Gap Delta E: 2.2039 | W: 1  | Verdict: MISFOLDED (Topological Defect)
+[ Prion-like ] L=30 | seq: GPGPGPGPGP... | Gap Delta E: 3.7450 | W: 1  | Verdict: MISFOLDED (Topological Defect)
+
+--- Hardening Gate: Length Invariance (L=45) ---
+[   Poly-A   ] L=45 | seq: AAAAAAAAAA... | Gap Delta E: 1.8025 | W: 0  | Verdict: FOLDED (Topological Ground State)
+[   Random   ] L=45 | seq: REWKYDREWK... | Gap Delta E: 2.2081 | W: 1  | Verdict: MISFOLDED (Topological Defect)
+[ Prion-like ] L=45 | seq: GPGPGPGPGP... | Gap Delta E: 3.6905 | W: 1  | Verdict: MISFOLDED (Topological Defect)
+
+[SYSTEM] Tape Verification PASS. 0 bits erased. 0.0 J Landauer Heat.
+================================================================================
