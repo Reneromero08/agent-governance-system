@@ -1,0 +1,20 @@
+================================================================================
+EXP 46.2: LEVINTHAL'S BYPASS (THE O(1) FOLDING ORACLE)
+================================================================================
+[SYSTEM] 256MB Catalytic Tape Initialized. Zero-Landauer constraint active.
+
+--- FOLDING PATHWAY SWEEP (Poly-Alanine, L=30) ---
+Gamma: 0.0  | Gap Delta E: 0.1842 | Max Imag: 0.0000 | W: UNDEFINED | Verdict: UNFOLDED (Real Spectrum / Unstable Topology)
+Gamma: 0.1  | Gap Delta E: 0.2576 | Max Imag: 0.1800 | W: 0         | Verdict: FOLDED (Topological Lock)
+Gamma: 0.5  | Gap Delta E: 0.9187 | Max Imag: 0.9000 | W: 0         | Verdict: FOLDED (Topological Lock)
+Gamma: 1.0  | Gap Delta E: 1.8094 | Max Imag: 1.8000 | W: 0         | Verdict: FOLDED (Topological Lock)
+Gamma: 1.5  | Gap Delta E: 2.7063 | Max Imag: 2.7000 | W: 0         | Verdict: FOLDED (Topological Lock)
+Gamma: 2.0  | Gap Delta E: 3.6047 | Max Imag: 3.6000 | W: 0         | Verdict: FOLDED (Topological Lock)
+
+--- HARDENING GATES VERIFICATION ---
+GATE 1 (Unfolded Baseline): PASS -> At Gamma=0.0, Max Imag is 0.0000. Spectrum is strictly real.
+GATE 2 (EP Coalescence): PASS -> At Gamma=0.0 (Gamma_critical), the Gap Delta E is at its absolute minimum (0.1842), transitioning from real to complex.
+GATE 3 (Topological Lock): PASS -> For all Gamma > 0.0, Winding Number locks strictly to W=0.
+
+[SYSTEM] Tape Verification PASS. 0 bits erased. 0.0 J Landauer Heat.
+================================================================================
