@@ -1,0 +1,17 @@
+==========================================================================================
+EXP 46.5: THE NEURAL BINDING PROBLEM (TOPOLOGICAL EDGE STATE)
+==========================================================================================
+[SYSTEM] 256MB Catalytic Tape Initialized. Zero-Landauer constraint active.
+
+--- MANIFOLD TELEMETRY (302-Node Connectome) ---
+[Intact      ] Winding (W): 1  | Gap (Delta E): 0.0060 | ZM IPR: 0.0150 | Verdict: UNIFIED PERCEPT
+[Lesioned    ] Winding (W): 1  | Gap (Delta E): 0.0585 | ZM IPR: 0.0140 | Verdict: UNIFIED PERCEPT
+[Anesthetized] Winding (W): 0  | Gap (Delta E): 0.0038 | ZM IPR: 0.8430 | Verdict: FRAGMENTED
+
+--- HARDENING GATES VERIFICATION ---
+GATE 1 (The Intact Percept): PASS -> Intact connectome yields strict Zero-Mode, spectral gap, and W != 0.
+GATE 2 (Lesion Robustness): PASS -> 60 sensory nodes destroyed. W remains unchanged. Zero-Mode perfectly intact.
+GATE 3 (Anesthetic Collapse): PASS -> Gap closed, W dropped to 0, Zero-Mode shattered into localized fragments.
+
+[SYSTEM] Tape Verification PASS. 0 bits erased. 0.0 J Landauer Heat.
+==========================================================================================
