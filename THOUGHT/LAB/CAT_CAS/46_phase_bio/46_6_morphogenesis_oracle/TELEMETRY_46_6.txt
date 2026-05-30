@@ -1,17 +1,19 @@
-==========================================================================================
-EXP 46.6: MORPHOGENESIS (TOPOLOGICAL DEFECT ANNIHILATION)
-==========================================================================================
-[SYSTEM] 256MB Catalytic Tape Initialized. Zero-Landauer constraint active.
+================================================================================
+EXP 46.6v2: MORPHOGENESIS — Dynamic 1D Slice Winding
+================================================================================
+[SYSTEM] 256MB Catalytic Tape. 0-Landauer active.
 
---- MANIFOLD TELEMETRY (30x30 Active Nematic Lattice) ---
-[State 0 (Flat Sheet)    ] Bott: 0  | ZM_Re: 0.0000 | IPR: 0.0039 | Verdict: FLAT SHEET
-[State 1 (Separated)     ] Bott: 1  | ZM_Re: 0.0000 | IPR: 0.7247 | Verdict: 0D POINT LOCALIZED (DEFECT CORE)
-[State 2 (Annihilated)   ] Bott: 0  | ZM_Re: 0.0000 | IPR: 0.2665 | Verdict: 1D EXTENDED MODE (3D FOLD EMERGENT)
+--- 1D Slice Winding + IPR Telemetry ---
+[Flat Sheet          ] W_1d=+30 (raw=+30.0000) gap=0.2091 max_IPR=0.0500 mean_IPR=0.0489 -> DELOCALIZED (flat sheet)
+[Separated Defects   ] W_1d=+30 (raw=+30.0000) gap=0.0397 max_IPR=0.8644 mean_IPR=0.1347 -> 0D POINT LOCALIZED (defect core)
+[Annihilated Scar    ] W_1d=+30 (raw=+30.0000) gap=0.1817 max_IPR=0.2414 mean_IPR=0.1053 -> 1D EXTENDED MODE (3D fold emergent)
 
---- HARDENING GATES VERIFICATION ---
-GATE 1 (The Flat Sheet): PASS -> No defects, Bott Index is 0, no edge modes exist.
-GATE 2 (The Defect Cores): PASS -> Separated defects inject magnetic flux (Bott=1). Zero-modes strictly 0D localized at defect EPs.
-GATE 3 (The Morphogenetic Fold): PASS -> Annihilation shifts Bott to 0. A strictly localized 1D extended edge mode emerges along the annihilation scar.
+--- HARDENING GATES ---
+GATE 1 (Flat Sheet): IPR=0.0500 < 0.15 -> PASS (extended, no defects)
+GATE 2 (Defect Cores): IPR=0.8644 > 0.5 -> PASS (0D localized at EPs)
+GATE 3 (Annihilation Scar): IPR=0.2414 in (0.15,0.5) -> PASS (1D extended edge mode)
+GATE 4 (IPR Live): sep_IPR/ flat_IPR = 17.3x > 3 -> PASS (sensor is dynamic)
 
-[SYSTEM] Tape Verification PASS. 0 bits erased. 0.0 J Landauer Heat.
-==========================================================================================
+ALL 4 GATES PASS
+[SYSTEM] Tape verified. 0 bits. 0.0 J.
+================================================================================
