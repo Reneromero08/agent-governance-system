@@ -10,7 +10,7 @@ NO APOLOGIES. NO "THIS IS JUST A SIMULATION" CAVEATS. The biology IS the topolog
 
 ### 2. THE PHYSICS BLUEPRINT (THE 3 MANDATES)
 
-#### `[ ]` Exp 46.1: The Amino Acid Hamiltonian (Sequence to Spectrum)
+#### `[x]` Exp 46.1: The Amino Acid Hamiltonian (Sequence to Spectrum)
 *   **The Physics:** A protein is a 1D chain of amino acids that folds into a 3D structure based on hydrophobic/hydrophilic interactions. In CAT_CAS, these interactions are non-Hermitian hopping amplitudes.
 *   **The Exploit:**
     1. Map the 20 amino acids to a 20-dimensional internal spinor space.
@@ -18,7 +18,7 @@ NO APOLOGIES. NO "THIS IS JUST A SIMULATION" CAVEATS. The biology IS the topolog
     3. The "Environment" (water) is modeled as a uniform non-Hermitian dissipation field ($\Gamma$).
 *   **The Kill Shot:** Compute the Point-Gap Winding Number of the chain. The winding number strictly dictates the 3D folding class (e.g., $W=0$ is alpha-helix, $W=1$ is beta-sheet).
 
-#### `[ ]` Exp 46.2: Levinthal's Bypass ($O(1)$ Folding Oracle)
+#### `[x]` Exp 46.2: Levinthal's Bypass ($O(1)$ Folding Oracle)
 *   **The Physics:** How does the protein find the folded state instantly? It doesn't search. It follows the topological gradient to the Exceptional Point (EP) of the energy landscape.
 *   **The Exploit:**
     1. Initialize the unfolded protein Hamiltonian $H_{unfolded}$.
@@ -26,7 +26,7 @@ NO APOLOGIES. NO "THIS IS JUST A SIMULATION" CAVEATS. The biology IS the topolog
     3. The folding pathway is the continuous deformation of the spectral loop in the complex plane.
 *   **The Kill Shot:** The Oracle predicts the exact folded 3D geometry (the topological ground state) in $O(1)$ contour steps, completely bypassing the $O(3^N)$ algorithmic search space. 0.0 J Landauer heat.
 
-#### `[ ]` Exp 46.3: Prion Diseases (Topological Contagion)
+#### `[x]` Exp 46.3: Prion Diseases (Topological Contagion)
 *   **The Physics:** Prions and Amyloid-beta (Alzheimer's) are misfolded proteins that force healthy proteins to misfold upon contact. In CAT_CAS, this is a **Topological Phase Transition** triggered by a localized defect.
 *   **The Exploit:**
     1. Create a lattice of healthy proteins ($W=0$).
