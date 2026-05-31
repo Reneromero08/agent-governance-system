@@ -119,13 +119,13 @@ This is achieved using **reversible computing**:
 **Dir**: `05_multibit_compiler/` | **Entry**: `python compiler_experiment.py`
 - **What**: Compiles `(X+Y)&~Z` etc. to reversible gate sequences. Carry-cleanup uncomputation.
 - **Files**: `reversible_compiler.py` (tokenizer, shunting-yard, instruction generation), `compiler_experiment.py`, `reversible_cpu.py`
-- **Key**: 40-200 gates per expression. 6 test expressions. All pass: 0 bits erased, temp registers verified zero. `05_reversible_compiler/` has `1_infinity_compiler.py` (pushed version).
+- **Key**: 40-200 gates per expression. 6 test expressions. All pass: 0 bits erased, temp registers verified zero. `05_multibit_compiler/infinity/` has `1_infinity_compiler.py` (pushed version).
 
 ### 06: Out-of-Core Catalytic Neural Network (RevNet)
 **Dir**: `06_catalytic_neural_network/` | **Entry**: `python catalytic_inference.py`
 - **What**: XOR-reversible RevNet with 2MB activation state on `user_video.mp4` tape, under 100KB clean RAM limit. Proves catalytic neural inference works on any file-backed substrate.
 - **Files**: `catalytic_inference.py` (Feistel ConvNet with `mmap`-based tape), `classical_inference.py` (control group), `generate_model_and_data.py` (synthetic model/data generator), `report.md`
-- **Mechanism**: Two 1D convolution layers (W1=[3,-1,2], W2=[1,2,-1]) with ReLU+quantize. Layer 1 reads from R half (offset=1MB), writes to L half. Layer 2 reads from L, writes to R. Both are XOR-Feistel: `tape[target] ^= ReLU(Conv1D(source, W))`. Forward: L2(R(L(tape))). Prediction: argmax of first 10 bytes of R. Reverse: execute same layers in opposite order to restore tape. 32KB streaming chunks avoid loading full 2MB into RAM. Group A (classical direct compute) OOM. Group B (catalytic) succeeds, predicts class 2, tape restored. `06_catalytic_nn/` has `1_infinity_nn.py`.
+- **Mechanism**: Two 1D convolution layers (W1=[3,-1,2], W2=[1,2,-1]) with ReLU+quantize. Layer 1 reads from R half (offset=1MB), writes to L half. Layer 2 reads from L, writes to R. Both are XOR-Feistel: `tape[target] ^= ReLU(Conv1D(source, W))`. Forward: L2(R(L(tape))). Prediction: argmax of first 10 bytes of R. Reverse: execute same layers in opposite order to restore tape. 32KB streaming chunks avoid loading full 2MB into RAM. Group A (classical direct compute) OOM. Group B (catalytic) succeeds, predicts class 2, tape restored. `06_catalytic_neural_network/infinity/` has `1_infinity_nn.py`.
 
 ### 07: Reversible Quantum State Simulation
 **Dir**: `07_quantum_simulator/` | **Entry**: `python experiment.py`
@@ -493,13 +493,13 @@ This is achieved using **reversible computing**:
 | `storage/` | Shared data files (quantum tapes, user_video.mp4, synthetic model) |
 | `workspace/` | Shared working files (config, bmps) |
 | `REPORTS/` | Audit reports, completed roadmap, codebase integrity |
-| `REPORTS/CODEBASE_AUDIT_REPORT.md` | **254-line verified audit** — 4 critical bugs, 4 high bugs, 46 bare excepts, 3 inflated PUSHED_REPORT claims, 2 spelling errors. Key bugs: Exp 15 Feistel swap (100/100 failures), Exp 16 F16 weight loading, Exp 30 runtime crash, Exp 13 infinity cross-talk NOT zero |
+| `REPORTS/CODEBASE_AUDIT_REPORT_RESOLVED.md` | **254-line verified audit** — 4 critical bugs, 4 high bugs, 46 bare excepts, 3 inflated PUSHED_REPORT claims, 2 spelling errors. Key bugs: Exp 15 Feistel swap (100/100 failures), Exp 16 F16 weight loading, Exp 30 runtime crash, Exp 13 infinity cross-talk NOT zero |
 
 ---
 
 ## Infinity Script Pattern
 
-Many experiments have `1_infinity_*.py` files in their own dir (e.g., `05_reversible_compiler/1_infinity_compiler.py`, `06_catalytic_nn/1_infinity_nn.py`). These are "pushed" or "scaled" versions of the base experiment, testing asymptotic behavior at larger problem sizes. Check these when an experiment needs scaling confirmation.
+Many experiments have `1_infinity_*.py` files in an `infinity/` subdirectory (e.g., `05_multibit_compiler/infinity/1_infinity_compiler.py`, `06_catalytic_neural_network/infinity/1_infinity_nn.py`). These are "pushed" or "scaled" versions of the base experiment.
 
 ---
 

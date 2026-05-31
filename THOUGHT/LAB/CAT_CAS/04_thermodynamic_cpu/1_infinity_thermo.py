@@ -1,62 +1,60 @@
 """
-Grail: Thermodynamic CPU (Experiment 04)
-========================================
-We push the Thermodynamic CPU to Infinity.
-A standard CPU dissipates heat due to the destruction of information.
-By using a perfectly reversible Catalytic Unitary operator, we compute
-a complex Boolean logic circuit with absolutely 0.000 Joules of heat loss.
+Thermodynamic CPU — Zero-Heat Reversible Computation
+=====================================================
+1M bits processed via XOR-based Feistel network.
+Forward: XOR key into R, then XOR modified R into L.
+Reverse: XOR modified R into L, then XOR key into R.
+XOR is self-inverse: x ^ y ^ y = x. Exact restoration guaranteed.
+Heat = k_B * T * ln(2) * bits_erased. For reversible: bits_erased = 0.
 """
 import torch
 
 print("=" * 80)
-print("THERMODYNAMIC CPU (Absolute Zero Heat Limit)")
+print("THERMODYNAMIC CPU (Zero-Heat Reversible Computation)")
 print("=" * 80)
 
-def infinity_thermo():
-    # 1 Million Boolean variables
-    N = 1000000
-    torch.manual_seed(42)
-    input_state = torch.randint(0, 2, (N,), dtype=torch.float32)
-    
-    # Calculate Shannon Entropy initially
-    p1 = input_state.sum() / N
-    p0 = 1 - p1
-    S_initial = - (p1 * torch.log2(p1) + p0 * torch.log2(p0)).item()
-    
-    # The CPU Logic Gate: We compute a complex Feistel hash
-    # L, R split
-    L = input_state[:N//2]
-    R = input_state[N//2:]
-    
-    # Complex computation (XOR equivalent in continuous space)
-    key = torch.rand(N//2)
-    R_new = torch.fmod(R + torch.round(L * key * 100), 2)
-    L_new = torch.fmod(L + torch.round(R_new * key * 100), 2)
-    
-    computed_state = torch.cat([L_new, R_new])
-    
-    # Entropy during computation
-    p1_comp = computed_state.sum() / N
-    p0_comp = 1 - p1_comp
-    S_compute = - (p1_comp * torch.log2(p1_comp) + p0_comp * torch.log2(p0_comp)).item()
-    
-    # Reversible Uncompute (Zero Heat)
-    L_restored = torch.fmod(L_new - torch.round(R_new * key * 100) + 2, 2)
-    R_restored = torch.fmod(R_new - torch.round(L_restored * key * 100) + 2, 2)
-    
-    restored_state = torch.cat([L_restored, R_restored])
-    
-    mse = torch.nn.functional.mse_loss(restored_state, input_state)
-    heat_dissipated = S_initial - S_initial # Because the state is restored identically
-    
-    print(f"  Circuit Size:           {N} bits")
-    print(f"  Initial Entropy:        {S_initial:.6f}")
-    print(f"  Computation Entropy:    {S_compute:.6f}")
-    print(f"  Restoration MSE:        {mse.item():.6e}")
-    print(f"  Total Heat Dissipated:  {heat_dissipated:.6f} Joules")
-    
-    if abs(heat_dissipated) < 1e-9 and abs(mse.item()) < 1e-9:
-        print("\n  SUCCESS: Computation achieved with Absolute Zero Heat Dissipation.")
+torch.manual_seed(42)
+N = 1_000_000
+kB = 1.380649e-23  # Boltzmann constant
+T = 293.15         # Room temperature
+LANDAUER_PER_BIT = kB * T * 0.693147  # kT ln(2) = 2.805e-21 J
 
-if __name__ == "__main__":
-    infinity_thermo()
+state = torch.randint(0, 2, (N,), dtype=torch.int8)
+original = state.clone()
+
+# Split into L and R, use integer XOR (self-inverse)
+half = N // 2
+key = torch.randint(0, 2, (half,), dtype=torch.int8)
+
+# Forward: Feistel round — XOR key into R, then XOR R into L
+state[half:] ^= key                    # R' = R XOR key
+state[:half] ^= state[half:]           # L' = L XOR R'
+
+# Measure: the state is now scrambled
+scrambled = state.clone()
+
+# Reverse: exact inverse — XOR R into L, then XOR key into R
+state[:half] ^= state[half:]           # L'' = L' XOR R' = (L XOR R') XOR R' = L
+state[half:] ^= key                    # R'' = R' XOR key = (R XOR key) XOR key = R
+
+# Count bits that differ between restored and original
+bits_erased = (state != original).sum().item()
+heat = LANDAUER_PER_BIT * bits_erased
+
+s_initial = -(original.float().mean().item() * torch.log2(torch.tensor(original.float().mean().item() + 1e-15)) + (1-original.float().mean().item()) * torch.log2(torch.tensor(1-original.float().mean().item() + 1e-15))).item()
+s_scrambled = -(scrambled.float().mean().item() * torch.log2(torch.tensor(scrambled.float().mean().item() + 1e-15)) + (1-scrambled.float().mean().item()) * torch.log2(torch.tensor(1-scrambled.float().mean().item() + 1e-15))).item()
+
+print(f"  Circuit Size:           {N} bits")
+print(f"  Initial Entropy:        {s_initial:.6f}")
+print(f"  Scrambled Entropy:      {s_scrambled:.6f}")
+print(f"  Bits Erased:            {bits_erased}")
+print(f"  Landauer Heat:          {heat:.3e} J")
+print(f"  Landauer per bit:       {LANDAUER_PER_BIT:.3e} J/bit")
+print(f"  XOR is self-inverse:    x ^ y ^ y = x (mathematical identity)")
+print(f"  std = 0 (exact integer XOR, no floating-point noise)")
+print()
+if bits_erased == 0:
+    print("  VERIFIED: Zero bits erased. Exact restoration. 0.0 J Landauer heat.")
+    print("  XOR-based Feistel network is genuinely reversible — no information loss.")
+else:
+    print(f"  {bits_erased} bits not restored. Heat would be {heat:.3e} J.")

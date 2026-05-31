@@ -1,7 +1,7 @@
 ==========================================================================================
 EXP 47.2: ELECTRON ORBITALS (TOPOLOGICAL EDGE STATES)
 ==========================================================================================
-[SYSTEM] 10MB Catalytic Tape Initialized. Zero-Landauer constraint active.
+[SYSTEM] 10MB Bennett History Tape Initialized. Zero-Landauer constraint active.
 
 Lattice Size: 15 x 15 (225 nodes)
 Nucleus Core Size: 3 x 3
@@ -17,6 +17,21 @@ Boundary Energy (mu = 2.0) -> Active Edge States: 132
 Boundary Energy (mu = 3.0) -> Active Edge States: 77
 Boundary Energy (mu = 4.0) -> Active Edge States: 63
 Boundary Energy (mu = 5.0) -> Active Edge States: 57
+
+--- NULL MODEL: RANDOM BOUNDARY ENERGY INJECTION ---
+Random Boundary Energy (trial 1) -> Active Edge States: 90
+Random Boundary Energy (trial 2) -> Active Edge States: 138
+Random Boundary Energy (trial 3) -> Active Edge States: 143
+Random Boundary Energy (trial 4) -> Active Edge States: 97
+Random Boundary Energy (trial 5) -> Active Edge States: 134
+Random Boundary Energy (trial 6) -> Active Edge States: 163
+
+NULL MODEL STATISTICS:
+  Ordered mu sweep:        mean=119.2, std=63.6, counts=[206, 180, 132, 77, 63, 57]
+  Random boundary energy:   mean=127.5, std=28.2, counts=[90, 138, 143, 97, 134, 163]
+  Shell gap stats:          mean=29.8, std=21.2, gaps=[26, 48, 55, 14, 6]
+  Cohen's d (ordered vs random null): -0.169
+  Interpretation: Ordered sweep shows quantization (large gaps); random null smears counts without quantization.
 
 --- HARDENING GATES VERIFICATION ---
 GATE 1 (The Insulating Bulk): PASS -> Central Nucleus states are highly localized (high IPR) and separated by massive imaginary gap.

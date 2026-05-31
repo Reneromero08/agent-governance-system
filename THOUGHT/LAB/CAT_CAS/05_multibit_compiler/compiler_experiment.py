@@ -77,8 +77,9 @@ def run_compiled_reversible_expression(expr: str, input_vals: dict[str, int]) ->
 
 def evaluate_classical_expression(expr: str, input_vals: dict[str, int]) -> tuple[int, int]:
     """
-    NULL MODEL: Classical irreversible evaluation is the baseline against which
-    the compiled reversible execution is measured for erasure and correctness.
+    BASELINE: Classical irreversible evaluation tracks bits erased and checks
+    correctness.  The reversible compiler must produce the same result with
+    zero erasure; this baseline verifies correctness and measures Landauer cost.
     """
     compiler = ReversibleCompiler()
     tokens = compiler.tokenize(expr)

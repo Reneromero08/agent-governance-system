@@ -69,9 +69,9 @@ def main():
     tape_mmap = mmap.mmap(fd, TAPE_SIZE, access=mmap.ACCESS_WRITE)
 
     try:
-            tape_mmap.seek(0)
-            tape_bytes = tape_mmap.read(TAPE_SIZE)
-            initial_hash = hashlib.sha256(tape_bytes).hexdigest()
+        tape_mmap.seek(0)
+        tape_bytes = tape_mmap.read(TAPE_SIZE)
+        initial_hash = hashlib.sha256(tape_bytes).hexdigest()
 
         tape_capacity = TAPE_SIZE * 8
         print(f"  Tape capacity: {tape_capacity:,} bits ({TAPE_SIZE / (1024*1024):.0f} MB)")

@@ -69,10 +69,9 @@ class ReversibleCPU:
 
 class IrreversibleCPU:
     """
-    NULL MODEL: The irreversible CPU is the classical baseline against
-    which the ReversibleCPU's zero-Landauer-erasure claim is measured.
-    Simulates a standard CPU where operations overwrite registers,
-    causing logical information erasure. Tracks total bits erased.
+    BASELINE: Tracks bit erasure against which ReversibleCPU's zero-Landauer
+    claim is measured.  Classical overwrite operations destroy information;
+    each overwritten bit contributes kT ln(2) of Landauer heat.
     """
     def __init__(self):
         self.registers = {}

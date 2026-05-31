@@ -6,13 +6,14 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
-## [3.12.14] - 2026-05-30
+## [3.12.14] - 2026-05-31
 
 ### Added
 - **M-8 Ceremonial Record check** in `CAPABILITY/TOOLS/governance/critic.py`: detects BennettHistoryTape/CatalyticTape with list-only record_operation that never XOR-modifies the bytearray. Prevents ceremonial tape verification.
 
 ### Changed
 - **Pre-commit hook** (`.githooks/pre-commit`): now runs CAT_CAS manifesto critic and blocks commits with violations. Zero-violation enforcement for CAT_CAS directory.
+- **M-5 baseline regex** expanded to accept "baseline" as standalone term alongside "null", "shuffle", "permut", "randomiz". Baseline comparisons are now recognized as valid null model checks.
 
 ### Fixed
 - **BennettHistoryTape** in `47_phase_atom/catalytic_tape.py`: now genuinely XOR-modifies bytearray and rejects `verify()` if `bytes_written == 0`. Deployed to Phase 47 and Phase 46 validation files.

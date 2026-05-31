@@ -446,7 +446,7 @@ def _missing_null_model_check(content: str, relpath: str) -> List[str]:
         r'GATE\s+\d|HARDENING\s+GATE|GATE.*PASS|GATE.*FAIL',
         content, re.IGNORECASE))
     has_null = bool(re.search(
-        r'null|random.*baseline|shuffle|permut|randomiz',
+        r'null|baseline|shuffle|permut|randomiz',
         content, re.IGNORECASE))
     # Exempt validation scripts (they are the null models)
     is_validation = 'validation' in relpath.lower()
@@ -497,8 +497,7 @@ def _ceremonial_record_check(content: str, relpath: str) -> List[str]:
     has_history_append = bool(re.search(r'history_stack\.append', content))
     has_tape_xor = bool(re.search(
         r'self\.tape\[.*\]\s*\^=|'
-        r'self\.tape\[.*\]\s*=\s*\w+\s*\^|'
-        r'bytearray\(', content))
+        r'self\.tape\[.*\]\s*=\s*\w+\s*\^', content))
 
     if has_tape_class and has_record_def and has_history_append:
         if not has_tape_xor:

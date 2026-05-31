@@ -10,6 +10,7 @@ class BennettHistoryTape:
         self.initial_hash = hashlib.sha256(self.tape).hexdigest()
         self.history_stack = []
         self.bytes_written = 0
+        self.was_modified = False
         self.next_offset = 0
 
     def _to_bytes(self, data):
@@ -27,6 +28,8 @@ class BennettHistoryTape:
 
         for i, b in enumerate(data_bytes):
             pos = (offset + i) % self.size_bytes
+            if b != 0:
+                self.was_modified = True
             self.tape[pos] ^= b
 
         self.history_stack.append((offset, len(data_bytes), data_bytes))
@@ -41,9 +44,9 @@ class BennettHistoryTape:
                 self.tape[pos] ^= data_bytes[i]
 
     def verify(self):
-        if self.bytes_written == 0:
+        if not self.was_modified:
             raise RuntimeError(
-                "Tautological tape: zero bytes XOR-modified. "
+                "Tautological tape: no non-zero bytes XOR-modified. "
                 "verify() is structurally guaranteed to pass. "
                 "The tape was never borrowed. Not catalytic."
             )

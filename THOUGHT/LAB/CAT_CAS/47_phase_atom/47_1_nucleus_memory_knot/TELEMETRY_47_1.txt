@@ -1,17 +1,27 @@
 ==========================================================================================
 EXP 47.1: THE NUCLEUS (THE PROTECTED MEMORY KNOT)
 ==========================================================================================
-[SYSTEM] 256MB Catalytic Tape Initialized. Zero-Landauer constraint active.
+[SYSTEM] 256MB Bennett History Tape Initialized. Zero-Landauer constraint active.
 
 --- STATE 1: TRITIUM (3 NUCLEONS) ---
-Unbound Latency (Baseline): 1,318,910.00 ns
-Nuclear Knot Latency (GC):  1,354,801.00 ns
-Strong Force Friction:      1.03x Multiplier
+Unbound Latency (Baseline): 1,348,826.00 ns (std=197,160)
+Nuclear Knot Latency (GC):  1,367,257.00 ns (std=103,888)
+Strong Force Friction:      1.01x
+Cohen's d:                  0.12
+Permutation p-value:        0.4476
 
 --- STATE 2: URANIUM-238 (238 NUCLEONS) ---
-Unbound Latency (Baseline): 3,577,653.00 ns
-Nuclear Knot Latency (GC):  15,816,859.00 ns
-Strong Force Friction:      4.42x Multiplier
+Unbound Latency (Baseline): 3,999,381.00 ns (std=1,201,390)
+Nuclear Knot Latency (GC):  15,776,127.00 ns (std=1,797,864)
+Strong Force Friction:      3.94x
+Cohen's d:                  7.66
+Permutation p-value:        0.0010
+
+--- NULL MODEL: PERMUTATION TEST ---
+Null hypothesis: bound/unbound labels are exchangeable (no GC topology effect).
+N=3: p=0.4476 (permutation null, 1000 shuffles) -> cannot reject
+N=238: p=0.0010 (permutation null, 1000 shuffles) -> reject null
+Random baseline: if GC cycle detection had no effect, bound and unbound latencies would be indistinguishable.
 
 --- HARDENING GATES VERIFICATION ---
 GATE 1 (The Unbound Baseline): PASS -> Independent nucleons hit refcount 0 and deallocate with minimal GC friction.
