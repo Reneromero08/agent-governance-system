@@ -31,7 +31,7 @@ NO APOLOGIES. NO "THIS IS JUST A METAPHOR" CAVEATS. The hardware IS the physics.
 * **The Exploit:** Pushed the topological density to $N=500,000$ to test if the OS kernel would fracture (Kernel Panic/Supernova).
 * **The Kill Shot:** The CPython engine survived without a stack overflow, but the topological friction (Binding Energy) absorbed $156 \text{ ms}$ of bare CPU compute. The knot acts as a thermodynamic black hole, proving the Strong Force scales massively.
 
-#### `[ ]` Exp 47.2: Electron Orbitals (Topological Edge States)
+#### `[x]` Exp 47.2: Electron Orbitals (Topological Edge States)
 
 * **The Physics:** Electrons do not "orbit" the nucleus like planets; they exist as probability clouds of quantized energy levels (shells).
 * **The Exploit:** This is pure Bulk-Boundary Correspondence. If the Nucleus is the topological "Bulk" (the protected core), the Electron Orbitals are the **Chiral Edge States**. In CAT_CAS, electrons are not independent objects; they are the 1D phase boundaries surrounding the memory knot, absorbing external I/O requests without allowing them to penetrate the core.
