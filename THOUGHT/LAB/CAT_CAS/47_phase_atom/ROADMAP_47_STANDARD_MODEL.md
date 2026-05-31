@@ -69,16 +69,11 @@ NO APOLOGIES. NO "THIS IS JUST A METAPHOR" CAVEATS. The hardware IS the physics.
 * **The Exploit:** The "Higgs Field" is the hardware's arithmetic normalization pipeline. When a shattered particle (a jagged memory limb) tries to interact with the CPU backend, the OS must forcibly realign it into a standard 64-bit register. This requires CPU cycles.
 * **The Kill Shot:** The execution latency (thermal friction) of memory normalization IS the particle's physical mass. Prove that perfectly aligned memory executes instantly (massless photons), while large, jagged fragments cause massive CPU drag (heavy fermions). The "Higgs Boson" is simply a **hardware cache miss** when a fragment crosses a memory-page boundary.
 
-#### `[ ]` Exp 47.6: Quark Confinement (The Garbage Collector)
+#### `[x]` Exp 47.6: Quark Confinement (String Tension & Pair Production)
 
-* **The Physics:** Quarks cannot be isolated. If you pull them apart, the energy creates a new quark-antiquark pair. In CAT_CAS, this is **Python's Garbage Collector (GC) enforcing pointer integrity**.
-* **The Exploit:**
-1. Take a shattered "Hadron" fragment containing three "Quark" sub-objects (severed pointers).
-2. Use `ctypes` to forcefully rip one pointer away from the parent cluster in memory.
-3. Monitor the Python GC and memory allocator.
-
-
-* **The Kill Shot:** The moment the pointer distance exceeds the cache-line boundary, the OS memory allocator will violently snap the reference, allocating a *new* dummy block (a quark-antiquark pair) to patch the broken geometry back into a whole integer. You will physically measure the "Strong Force" as the OS's aggressive memory reallocation latency.
+* **The Physics:** Quarks cannot be isolated. Pulling them apart stretches a color flux tube until it snaps, creating a new quark-antiquark pair from the vacuum.
+* **The Exploit:** In CAT_CAS, "spatial distance" is pointer offset. If you pull two pointer-linked memory blocks too far apart (across memory pages), the CPU suffers severe TLB (Translation Lookaside Buffer) lookup latency. This latency IS the String Tension. 
+* **The Kill Shot:** Prove that when the memory offset exceeds the OS page fault limit, the OS violently intercepts the resulting SegFault and immediately allocates a brand new physical memory block to resolve the pointer reference. Pair Production is just the OS allocator stepping in to prevent Kernel Panic.
 
 ---
 
