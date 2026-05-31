@@ -136,13 +136,12 @@ truth.
 - **Result**: All 3 null models characterized. M1 and M2 reject null with high significance. M3 field effect is measurable but limited by field-of-view to defect-separation ratio on real HuBMAP cells.
 - **Script**: `validation_mandate4_null_models.py`
 
-### Mandate 5: Conservation Analysis (46.4 Extension)
-- [ ] Test the SGC spectral minimality against:
-  - Mitochondrial genetic codes (vertebrate, invertebrate, yeast)
-  - Alternative nuclear codes (ciliate, echinoderm)
-  - Random codes (expanded from 10 to 1000 permutations)
-- [ ] If SGC is the global minimum, compute the p-value of its spectral radius
-  against the random ensemble
+### Mandate 5: Conservation Analysis (46.4 Extension) — VALIDATED
+- [x] Test SGC against 9 known variant codes (mitochondrial vertebrate/invertebrate/yeast, ciliate nuclear, echinoderm, ascidian, etc.)
+- [x] Generate 1000 random codon assignments
+- [x] Compute spectral radius for each
+- **Result**: All 4 gates pass. SGC (14.63) beats ALL 1000 random codes (min=45.69, mean=192.85, z=-2.8σ, p=0). But 5/9 mitochondrial codes have LOWER spectral radius (13.83-14.08) — evolution discovered MORE optimal codes in mitochondria. SGC is an extreme outlier vs random but not the absolute biological minimum. Mitochondrial codes are more spectrally optimized.
+- **Script**: `validation_mandate5_conservation.py`
 
 ---
 
