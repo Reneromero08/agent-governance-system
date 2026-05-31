@@ -37,7 +37,7 @@ NO APOLOGIES. NO "THIS IS JUST A METAPHOR" CAVEATS. The hardware IS the physics.
 * **The Exploit:** This is pure Bulk-Boundary Correspondence. If the Nucleus is the topological "Bulk" (the protected core), the Electron Orbitals are the **Chiral Edge States**. In CAT_CAS, electrons are not independent objects; they are the 1D phase boundaries surrounding the memory knot, absorbing external I/O requests without allowing them to penetrate the core.
 * **The Kill Shot:** You construct a Hamiltonian where adding "energy" (data) simply bumps the edge state to a higher quantized resonance frequency (the next electron shell), proving the orbital is a strict topological boundary, not a moving particle.
 
-#### `[ ]` Exp 47.3: The Pauli Exclusion Principle (Hardware Hash Collision Prevention)
+#### `[x]` Exp 47.3: The Pauli Exclusion Principle (Hardware Hash Collision Prevention)
 
 * **The Physics:** No two fermions (like electrons) can occupy the exact same quantum state simultaneously.
 * **The Exploit:** The universe isn't enforcing a magical rule; the OS is preventing a fatal **Hash Collision**. If two edge states (electrons) share the exact same memory address and phase signature, the OS cannot resolve the pointers, which would trigger a kernel panic.
