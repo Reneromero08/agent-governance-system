@@ -22,7 +22,7 @@ Pipeline modeled:
 Each step tracked for bit erasure. Goal: prove 0.0 J.
 """
 
-import sys, time, math
+import time, math
 from pathlib import Path
 import torch
 import torch.nn as nn

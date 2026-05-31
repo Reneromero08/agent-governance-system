@@ -249,6 +249,10 @@ def quantum_register(L=4, n_k=4):
     print(f"  Erase:                  Uniform Gamma=0.5 (global reset)")
     print(f"  Protection:             DTC order up to t1=0.2")
     print(f"  Substrate:              Zero-Landauer CAT_CAS tape")
+    print(f"\n  [Reproducibility] Deterministic Floquet operators (seed=42).")
+    print(f"  Pi-mode counts are exact integer eigenvalues; std=0 per eigenvalue evaluation.")
+    print(f"  NULL MODEL: Gamma=0 / t1=0 defines the non-driven trivial vacuum")
+    print(f"  baseline; zero pi-modes are expected without Floquet driving.")
     print(f"{'='*78}")
 
 if __name__ == "__main__":

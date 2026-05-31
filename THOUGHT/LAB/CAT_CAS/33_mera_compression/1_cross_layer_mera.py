@@ -33,7 +33,7 @@ def group_by_type(holo_dict):
         for i, p in enumerate(parts):
             if p in ('layers', 'blocks') and i+1 < len(parts):
                 try: layer_idx = int(parts[i+1])
-                except: pass
+                except Exception: pass
             if p in ('mlp', 'self_attn', 'attn') and i+1 < len(parts):
                 wt = '.'.join(parts[i:-1])
         if layer_idx is None or wt is None: continue
@@ -125,7 +125,7 @@ for holo_path, label in [(HOLO_05B, "0.5B k128"), (HOLO_27B, "27B k256")]:
         for i, p in enumerate(parts):
             if p in ('layers',) and i+1 < len(parts):
                 try: layer_idx = int(parts[i+1])
-                except: pass
+                except Exception: pass
             if p in ('mlp', 'self_attn', 'attn') and i+1 < len(parts):
                 wt = '.'.join(parts[i:-1])
         if layer_idx is not None and wt is not None:
@@ -162,7 +162,7 @@ for wt_name in ['mlp.down_proj', 'mlp.gate_proj', 'mlp.up_proj']:
             for i, p in enumerate(parts):
                 if p == 'layers' and i+1 < len(parts):
                     try: tensors[int(parts[i+1])] = val
-                    except: pass
+                    except Exception: pass
     if len(tensors) < 2: continue
     
     sorted_l = sorted(tensors.keys())

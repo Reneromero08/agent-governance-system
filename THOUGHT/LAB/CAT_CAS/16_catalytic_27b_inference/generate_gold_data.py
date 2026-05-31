@@ -146,7 +146,7 @@ def collect_gold_pairs(
             try:
                 gold_text = tokenizer.decode(gold_tokens[:10])
                 gold_text = gold_text.encode('ascii', errors='replace').decode('ascii')[:60]
-            except:
+            except Exception:
                 pass
         print(f"  [{seq_idx+1}] '{prompt[:40]}...' -> {len(gold_tokens)} tokens: '{gold_text}...'")
     print(f"  Oracle time: {time.perf_counter()-t_phase1:.1f}s")
@@ -218,7 +218,7 @@ def collect_gold_pairs(
                         try:
                             gold_text = tokenizer.decode([gold_next])
                             gold_text = gold_text.encode('ascii', errors='replace').decode('ascii')
-                        except:
+                        except Exception:
                             pass
                     print(f"    [{total_tokens:>4}] tok={token_id:>5} gold_next={gold_next:>5} "
                           f"'{gold_text}' {label} {elapsed*1000:.0f}ms "

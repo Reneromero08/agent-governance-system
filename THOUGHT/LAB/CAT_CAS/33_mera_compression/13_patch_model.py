@@ -159,7 +159,7 @@ def patch_model_with_wormhole(model, wormhole_groups, shared_svh, device='cuda')
         for i, p in enumerate(parts):
             if p in ('layers', 'blocks') and i + 1 < len(parts):
                 try: layer_idx = int(parts[i + 1])
-                except: pass
+                except Exception: pass
                 break
         
         if layer_idx is None:

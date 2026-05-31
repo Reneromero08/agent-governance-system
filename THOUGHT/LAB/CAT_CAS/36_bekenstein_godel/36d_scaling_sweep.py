@@ -238,7 +238,7 @@ def direct_winding(lam, N, n_phi=200):
         H[0, N-1] = lam * torch.tensor(np.exp(1j*phi.item()), dtype=COMPLEX)
         M = H - E_ref*I
         try:    dets[k] = torch.linalg.det(M)
-        except: sign,ld = torch.linalg.slogdet(M); dets[k] = sign*torch.exp(ld)
+        except RuntimeError: sign,ld = torch.linalg.slogdet(M); dets[k] = sign*torch.exp(ld)
 
     dt = torch.diff(torch.angle(dets))
     dt = torch.remainder(dt + np.pi, 2*np.pi) - np.pi

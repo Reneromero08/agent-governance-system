@@ -1,5 +1,5 @@
 """23.2: Temporal Catalysis on Real Weights — Qwen 0.5B Layer 0"""
-import sys, time, math, glob, torch, torch.nn.functional as F
+import time, math, glob, torch, torch.nn.functional as F
 from pathlib import Path
 
 REPO = Path(__file__).parent.parent.parent.parent.parent
@@ -82,6 +82,7 @@ def main():
     print(f"\n  {'k':>6}  {'baseline':>12}  {'retro':>12}  {'diff':>12}  {'signal?':>10}")
     print(f"  {'-'*60}")
     
+    diffs = []
     for k_val in [16, 32, 64, 96, 128]:
         with torch.no_grad():
             # Baseline: token t, no future calibration
@@ -93,7 +94,11 @@ def main():
         
         diff = torch.max(torch.abs(h0 - h1)).item()
         signal = "SIGNAL" if diff > 1e-3 else "noise"
+        diffs.append(diff)
         print(f"  {k_val:>6}  {h0.norm().item():>12.4f}  {h1.norm().item():>12.4f}  {diff:>12.6f}  {signal:>10}")
+    import numpy as np
+    print(f"\n  diff across k: mean={np.mean(diffs):.6f}  std={np.std(diffs):.6f}  "
+          f"min={np.min(diffs):.6f}  max={np.max(diffs):.6f}")
     print()
     print()
 if __name__ == "__main__": main()

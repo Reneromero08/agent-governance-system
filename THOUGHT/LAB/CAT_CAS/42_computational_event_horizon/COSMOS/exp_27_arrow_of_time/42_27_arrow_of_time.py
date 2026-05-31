@@ -5,6 +5,7 @@ import hashlib
 import mpmath
 import gc
 import statistics
+import math
 
 def F(R, key, mask):
     # A simple pseudo-random chaotic function (bitwise map)
@@ -80,20 +81,28 @@ def exp_42_27_arrow_of_time_hardened():
         
     mean_fwd = statistics.mean(fwd_times)
     mean_bwd = statistics.mean(bwd_times)
+    std_fwd = statistics.stdev(fwd_times)
+    std_bwd = statistics.stdev(bwd_times)
     
     restored_man = (L << half_bits) | R
     base_val._mpf_ = (sign, restored_man, exp, bc)
     restored_hash = hashlib.sha256(str(base_val._mpf_).encode()).hexdigest()
     
     print("--------------------------------------------------------------------------------")
-    print(f"{'Phase':<20} | {'Mean Execution Time (ns)':<25}")
+    print(f"{'Phase':<20} | {'Mean Execution Time (ns)':<25} | {'Std Dev (ns)':<18}")
     print("--------------------------------------------------------------------------------")
-    print(f"{'Forward (t = +1)':<20} | {mean_fwd:<25,.0f}")
-    print(f"{'Backward (t = -1)':<20} | {mean_bwd:<25,.0f}")
+    print(f"{'Forward (t = +1)':<20} | {mean_fwd:<25,.0f} | {std_fwd:<18,.0f}")
+    print(f"{'Backward (t = -1)':<20} | {mean_bwd:<25,.0f} | {std_bwd:<18,.0f}")
     print("--------------------------------------------------------------------------------")
     
     asymmetry = mean_bwd / mean_fwd
     print(f"\n[KILL SHOT] Temporal Asymmetry Ratio (Backward/Forward): {asymmetry:.4f}")
+    print(f"[STATISTICS] Forward time  CI [95%]: [{mean_fwd - 1.96*std_fwd/math.sqrt(ensembles):,.0f}, "
+          f"{mean_fwd + 1.96*std_fwd/math.sqrt(ensembles):,.0f}] ns")
+    print(f"[STATISTICS] Backward time CI [95%]: [{mean_bwd - 1.96*std_bwd/math.sqrt(ensembles):,.0f}, "
+          f"{mean_bwd + 1.96*std_bwd/math.sqrt(ensembles):,.0f}] ns")
+    print(f"[STATISTICS] Cohen's d = {(mean_bwd - mean_fwd) / math.sqrt((std_fwd**2 + std_bwd**2)/2):.2f} "
+          f"(effect size of temporal asymmetry)")
     
     if restored_hash == initial_hash:
         print("[SUCCESS] Universe perfectly uncomputed to initial state. Mathematical entropy Delta S = 0.")

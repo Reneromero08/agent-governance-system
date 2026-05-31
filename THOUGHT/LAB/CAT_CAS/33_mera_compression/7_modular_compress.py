@@ -49,7 +49,7 @@ def group_u_matrices(holo_dict, modules):
                 if tag in parts:
                     i = parts.index(tag)
                     try: layer_idx = int(parts[i + 1])
-                    except: pass
+                    except Exception: pass
                     for t in cfg["types"]:
                         if t in parts or any(t in p for p in parts):
                             wt = '.'.join(parts[i + 2:-1])
@@ -221,7 +221,7 @@ def compress_holo_modular(holo_dict, modules, rotation_threshold=0.5, quant_bits
                 idx = parts.index(tag)
                 if idx + 1 < len(parts):
                     try: int(parts[idx + 1])
-                    except: continue
+                    except Exception: continue
                     for t in active_types:
                         if t in parts:
                             return True
@@ -239,7 +239,7 @@ def compress_holo_modular(holo_dict, modules, rotation_threshold=0.5, quant_bits
             if tag_candidate in parts:
                 idx = parts.index(tag_candidate)
                 try: int(parts[idx + 1])
-                except: continue
+                except Exception: continue
                 wt = '.'.join(parts[idx + 2:-1])
                 break
         if wt is None:

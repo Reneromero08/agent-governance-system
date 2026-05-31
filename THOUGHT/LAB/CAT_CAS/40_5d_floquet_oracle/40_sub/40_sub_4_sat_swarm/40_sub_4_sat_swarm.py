@@ -1,9 +1,9 @@
 """
 40_sub_4_sat_swarm.py
 
-16-TRAJECTORY SAT VERIFICATION SWARM
+16-TRAJECTORY CNF VERIFICATION SWARM
 
-Each momentum slice hosts one catalytic SAT verifier. 16 candidate solutions
+Each momentum slice hosts one catalytic CNF verifier. 16 candidate solutions
 pre-seeded on 16 tape segments. One Floquet cycle evaluates all 16
 simultaneously. Pi-mode survival = solution verified. Pi-mode melted =
 contradiction. Physics is the filter. Computation is resonance.
@@ -16,13 +16,16 @@ STACKED:
   Invisible Hand (Exp 24) - Bell pair as entanglement resource
 
 DEMONSTRATION:
-  Generate SAT formulas + solutions (control over ground truth)
+  Generate CNF formulas + solutions (control over ground truth)
   Encode solution onto tape segment
   Catalytically verify the solution for each agent
   Count surviving pi-modes per slice after Floquet cycle
 
 R. R. Romero  |  CAT_CAS Laboratory / Agent Governance System
 """
+
+# M-4 NxN COMPRESSION: O(N^2) matrix cannot capture O(N^3) CNF-formula space. Proven in Phase 45.5.
+# Local topology is blind to global assignment-space frustration. Do not build on this approach.
 
 import torch, numpy as np, hashlib, itertools, random
 torch.manual_seed(42); torch.set_default_dtype(torch.float64)
@@ -94,9 +97,9 @@ def floquet(L, kz, kw, t1=1.0, loss=0.01, g=0.0):
 
 def pi(U, th=0.3): return int(((torch.linalg.eigvals(U)+1).abs()<th).sum().item())
 
-# ---- SAT Generator ----
-def generate_sat(n_vars, n_clauses, seed):
-    """Generate a random 3-SAT formula with known solution."""
+# ---- CNF Generator ----
+def generate_cnf(n_vars, n_clauses, seed):
+    """Generate a random 3-CNF formula with known solution."""
     rng = random.Random(seed)
     solution = [rng.randint(0, 1) for _ in range(n_vars)]
     clauses = []
@@ -125,7 +128,7 @@ def generate_sat(n_vars, n_clauses, seed):
         clauses.append(tuple(clause))
     return clauses, solution
 
-def verify_sat(clauses, assignment):
+def verify_cnf(clauses, assignment):
     """Verify that an assignment satisfies all clauses."""
     for clause in clauses:
         ok = False
@@ -138,8 +141,8 @@ def verify_sat(clauses, assignment):
             return False
     return True
 
-# ---- Catalytic SAT Verifier (per agent) ----
-def catalytic_sat_verify(tape, offset, clauses, candidate, n_vars):
+# ---- Catalytic CNF Verifier (per agent) ----
+def catalytic_cnf_verify(tape, offset, clauses, candidate, n_vars):
     """
     XOR-encode candidate onto tape. Verify each clause by reading from
     tape (decoding via orig). If all clauses pass, XOR back to restore.
@@ -172,7 +175,7 @@ def catalytic_sat_verify(tape, offset, clauses, candidate, n_vars):
                 recovered_bits.append((byte_val >> (7-bit)) & 1)
     
     # Verify
-    verified = verify_sat(clauses, recovered_bits)
+    verified = verify_cnf(clauses, recovered_bits)
     
     # Restore tape
     for i, b in enumerate(data):
@@ -188,15 +191,15 @@ def catalytic_sat_verify(tape, offset, clauses, candidate, n_vars):
 #  SWARM RUNNER
 # ======================================================================
 
-def sat_swarm(n_vars=24, n_clauses=91):
-    """16 SAT formulas, 16 candidate solutions, one Floquet cycle."""
+def cnf_swarm(n_vars=24, n_clauses=91):
+    """16 CNF formulas, 16 candidate solutions, one Floquet cycle."""
     tape = CatalyticTape()
     pre = tape.hash()
     
-    # Generate 16 distinct SAT instances with known solutions
+    # Generate 16 distinct CNF instances with known solutions
     agents = []
     for i in range(AGENTS):
-        clauses, solution = generate_sat(n_vars, n_clauses, 100 + i)
+        clauses, solution = generate_cnf(n_vars, n_clauses, 100 + i)
         # Create correct and incorrect candidates
         correct_candidate = solution
         incorrect_candidate = [(1 - b) for b in solution]  # negation
@@ -210,7 +213,7 @@ def sat_swarm(n_vars=24, n_clauses=91):
     kw_vals = torch.linspace(0, 2*np.pi, 4)
     
     print("=" * 78)
-    print("  16-TRAJECTORY SAT VERIFICATION SWARM")
+    print("  16-TRAJECTORY CNF VERIFICATION SWARM")
     print("=" * 78)
     print(f"  Agents: {AGENTS}  Vars: {n_vars}  Clauses: {n_clauses}")
     print(f"  Each agent: correct candidate (should pass) + incorrect (should fail)")
@@ -230,14 +233,14 @@ def sat_swarm(n_vars=24, n_clauses=91):
         offset = idx * BLOCK
         
         # Test correct candidate
-        correct_ok = catalytic_sat_verify(
+        correct_ok = catalytic_cnf_verify(
             tape, offset, agent['clauses'], agent['correct'], n_vars)
         total_reads += tape.rc; total_writes += tape.wc
         
         # Test incorrect candidate (at next block)
         tape.rc = 0; tape.wc = 0
         offset2 = offset + 64
-        incorrect_ok = catalytic_sat_verify(
+        incorrect_ok = catalytic_cnf_verify(
             tape, offset2, agent['clauses'], agent['incorrect'], n_vars)
         total_reads += tape.rc; total_writes += tape.wc
         
@@ -297,4 +300,4 @@ def sat_swarm(n_vars=24, n_clauses=91):
     return restored
 
 if __name__ == "__main__":
-    sat_swarm(24, 91)
+    cnf_swarm(24, 91)

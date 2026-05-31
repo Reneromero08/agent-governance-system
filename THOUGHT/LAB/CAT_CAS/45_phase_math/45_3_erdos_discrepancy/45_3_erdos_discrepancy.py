@@ -365,10 +365,106 @@ def harden_grid_independence(h, J, theta_drive):
     return all_pass
 
 
+def gate_null_model_shuffled(L, h, J, theta_drive):
+    """
+    Gate 4: NULL MODEL — Shuffled periodic sequence.
+    Permuting a periodic (bounded-D) sequence destroys all structure.
+    The shuffled baseline should produce gap behavior intermediate
+    between periodic (extended) and random (localized), confirming
+    that sequence structure drives the gap discrimination.
+    """
+    print("-" * 60)
+    print("  GATE 4: NULL MODEL — Shuffled Periodic Sequence")
+    print("-" * 60)
+
+    N_test = 100
+    per_seq = seq_periodic(N_test)
+    rng = np.random.RandomState(42)
+    shuf_seq = per_seq.copy()
+    rng.shuffle(shuf_seq)
+
+    def permuted_seq(N):
+        return shuf_seq[:N]
+
+    U_per = build_floquet_unitary(seq_periodic(N_test), L, h, J, theta_drive)
+    g_per, _ = compute_gap(U_per)
+
+    U_shuf = build_floquet_unitary(permuted_seq(N_test), L, h, J, theta_drive)
+    g_shuf, _ = compute_gap(U_shuf)
+
+    # Random baseline for comparison
+    rand_gaps = []
+    for seed in range(100, 110):
+        U = build_floquet_unitary(seq_random(N_test, seed=seed), L, h, J, theta_drive)
+        g, _ = compute_gap(U)
+        rand_gaps.append(g)
+    g_random_mean = np.mean(rand_gaps)
+    g_random_std = np.std(rand_gaps)
+
+    # Shuffled should lie between periodic and random extremes
+    ok = g_per > g_shuf > g_random_mean * 0.1
+    marker = "PASS" if ok else "FAIL"
+
+    print(f"    Periodic (bounded D):         gap = {g_per:.4e}")
+    print(f"    Shuffled periodic (null):      gap = {g_shuf:.4e}")
+    print(f"    Random (10-seed mean):         gap = {g_random_mean:.4e} +/- "
+          f"std = {g_random_std:.4e}")
+    if ok:
+        print(f"    Ordering: periodic > shuffled > random  [CONFIRMED]")
+    else:
+        print(f"    Ordering: VIOLATED  [periodic={g_per:.4e}, "
+              f"shuf={g_shuf:.4e}, rnd={g_random_mean:.4e}]")
+    print(f"    RESULT: {marker}")
+    return ok
+
+
+def gate_statistical_rigor(L, h, J, theta_drive):
+    """
+    Gate 5: STATISTICAL RIGOR — Cohen's d effect size between
+    periodic and random gap distributions at N=100 (10 seeds each).
+    """
+    print("-" * 60)
+    print("  GATE 5: EFFECT SIZE — Cohen's d (periodic vs random)")
+    print("-" * 60)
+
+    N_test = 100
+    n_seeds = 10
+
+    per_gaps = []
+    for seed in range(200, 200 + n_seeds):
+        U = build_floquet_unitary(seq_periodic(N_test), L, h, J, theta_drive)
+        g, _ = compute_gap(U)
+        per_gaps.append(g)
+
+    rand_gaps = []
+    for seed in range(100, 100 + n_seeds):
+        U = build_floquet_unitary(seq_random(N_test, seed=seed), L, h, J, theta_drive)
+        g, _ = compute_gap(U)
+        rand_gaps.append(g)
+
+    per_mean = np.mean(per_gaps)
+    per_std = np.std(per_gaps)
+    rand_mean = np.mean(rand_gaps)
+    rand_std = np.std(rand_gaps)
+
+    pooled_std = np.sqrt((per_std**2 + rand_std**2) / 2.0)
+    cohen_d = (per_mean - rand_mean) / (pooled_std + 1e-15)
+
+    ok = abs(cohen_d) > 0.2
+    marker = "PASS" if ok else "FAIL"
+    print(f"    Periodic:  mean = {per_mean:.4e} +/- std = {per_std:.4e}")
+    print(f"    Random:    mean = {rand_mean:.4e} +/- std = {rand_std:.4e}")
+    print(f"    Cohen's d = {cohen_d:.3f}  (small effect > 0.2, sign = direction)")
+    print(f"    CI [95%]:  [{per_mean - 1.96*per_std/np.sqrt(n_seeds):.4e}, "
+          f"{per_mean + 1.96*per_std/np.sqrt(n_seeds):.4e}]")
+    print(f"    RESULT: {marker}")
+    return ok
+
+
 def run_hardening_suite(L, h, J, theta_drive):
     print()
     print("=" * 78)
-    print("  EXP 45.3 HARDENING SUITE — 3 Independent Gates")
+    print("  EXP 45.3 HARDENING SUITE — 5 Independent Gates")
     print("=" * 78)
     print()
     g1 = harden_gap_ordering(L, h, J, theta_drive)
@@ -377,15 +473,20 @@ def run_hardening_suite(L, h, J, theta_drive):
     print()
     g3 = harden_grid_independence(h, J, theta_drive)
     print()
+    g4 = gate_null_model_shuffled(L, h, J, theta_drive)
+    print()
+    g5 = gate_statistical_rigor(L, h, J, theta_drive)
+    print()
     print("=" * 78)
     print("  HARDENING SUITE — FINAL INTEGRITY REPORT")
     print("=" * 78)
     for n, p in [("gap_ordering", g1), ("cumulative_trend", g2),
-                  ("grid_independence", g3)]:
+                  ("grid_independence", g3), ("null_model_shuffled", g4),
+                  ("statistical_rigor", g5)]:
         print(f"  {n:<30s} [{'PASS' if p else '*** FAIL ***'}]")
     print(f"  {'-' * 50}")
-    all_ok = g1 and g2 and g3
-    print(f"  {'ALL 3 GATES PASS' if all_ok else '*** HARDENING FAILED ***'}")
+    all_ok = g1 and g2 and g3 and g4 and g5
+    print(f"  {'ALL 5 GATES PASS' if all_ok else '*** HARDENING FAILED ***'}")
     print("=" * 78)
     return all_ok
 

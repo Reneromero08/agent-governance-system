@@ -68,7 +68,7 @@ def test_construction(name, M, zeta_zeros_known):
     # For large matrices, use eigvalsh (Hermitian) or eigvals (general)
     try:
         evals = np.linalg.eigvalsh(M)
-    except:
+    except np.linalg.LinAlgError:
         evals = np.linalg.eigvals(M)
         evals = np.sort(np.abs(evals))
     

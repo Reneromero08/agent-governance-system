@@ -35,10 +35,12 @@ def exp_42_23_true_singularity_hardened():
     print(f"{'Regime':<20} | {'Scale (M)':<10} | {'Exp Hex':<10} | {'Man Hex':<15} | {'Phase Delta':<20} | {'Winding'}")
     print("-" * 105)
     
+    winding_values = []
+    phase_deltas = []
+    
     for name, val in scales:
         sign, exp_val, man_val, raw_64 = double_to_bits(val)
         
-        # HARDENING: Push raw 64-bit integer to the Bennett Tape for absolute bit-level restoration
         history_tape.append((name, raw_64))
         
         Noise = val * 0.1
@@ -46,7 +48,6 @@ def exp_42_23_true_singularity_hardened():
         phase_delta = 0.0
         prev_phase = None
         
-        # Hardware memory mapping
         exp_hex = f"0x{exp_val:03X}"
         man_hex = f"0x{man_val:013X}"
         
@@ -54,12 +55,9 @@ def exp_42_23_true_singularity_hardened():
             for i in range(N_pts + 1):
                 theta = 2 * math.pi * i / N_pts
                 z = cmath.exp(1j * theta)
-                
                 fz = val * z + Noise
-                dfz = val  
-                
+                dfz = val
                 quotient = dfz / fz
-                
                 phase = cmath.phase(fz)
                 if prev_phase is not None:
                     d_phase = phase - prev_phase
@@ -69,6 +67,8 @@ def exp_42_23_true_singularity_hardened():
                 prev_phase = phase
             
             W = phase_delta / (2 * math.pi)
+            winding_values.append(W)
+            phase_deltas.append(phase_delta)
             print(f"{name:<20} | {val:<10.1e} | {exp_hex:<10} | {man_hex:<15} | {phase_delta:<20.15f} | {W:<5.1f}")
         except Exception as e:
             print(f"{name:<20} | {val:<10.1e} | {exp_hex:<10} | {man_hex:<15} | {'CRITICAL FAILURE':<20} | {e.__class__.__name__}")
@@ -76,6 +76,15 @@ def exp_42_23_true_singularity_hardened():
             print("[KILL SHOT] Math yields ZeroDivisionError. Curvature is infinite.")
             print("MAPPED THE TRUE SINGULARITY. The mathematical continuum collapses precisely when")
             print("both the IEEE 754 Exponent and Mantissa hardware registers hit 0x000.")
+
+    if len(winding_values) >= 2:
+        mw = sum(winding_values) / len(winding_values)
+        sw = math.sqrt(sum((w - mw)**2 for w in winding_values) / (len(winding_values) - 1))
+        print(f"\n[STATISTICS] N={len(winding_values)} scale regimes, contour winding numbers:")
+        print(f"    Mean winding number  = {mw:.4f}")
+        print(f"    Standard deviation   = {sw:.4f}")
+        print(f"    CI [95%]             = [{mw - 1.96*sw/math.sqrt(len(winding_values)):.4f}, "
+              f"{mw + 1.96*sw/math.sqrt(len(winding_values)):.4f}]")
 
     print("-" * 105)
     print("\n[*] Engaging Bennett History Tape to uncompute the descent...")

@@ -71,6 +71,7 @@ def selective_addressing():
     print("  "+"-"*48)
     
     all_ok=True
+    live_counts = []
     for n_kill in [0,1,2,4,8,16]:
         gamma_arr=np.zeros(n_sites)
         for i in range(min(n_kill,n_sites)):
@@ -80,6 +81,7 @@ def selective_addressing():
         n_pi=pi(U)
         expected=total_pi-2*min(n_kill,n_sites)
         ok=(n_pi==expected)
+        live_counts.append(n_pi)
         if not ok:all_ok=False
         
         print(f"  {n_kill:12d} {0.5:6.1f} {n_pi:10d} {expected:8d} "
@@ -112,6 +114,9 @@ def selective_addressing():
     if all_ok and ok_alt and ok_rnd:
         print("  SELECTIVE ADDRESSING: PROVEN")
         print(f"{'='*78}")
+        import numpy as np
+        print(f"  Pi-mode count stats: mean={np.mean(live_counts):.1f}  std={np.std(live_counts):.1f}  "
+              f"range=[{np.min(live_counts)},{np.max(live_counts)}]")
         print(f"  Each site has exactly {pi_per_site} pi-modes.")
         print(f"  Setting gamma=0.5 on N sites kills exactly 2*N pi-modes.")
         print(f"  The surviving count matches the prediction for all patterns.")

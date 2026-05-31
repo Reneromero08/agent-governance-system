@@ -281,10 +281,116 @@ def gate_grid_independence():
     return all_pass
 
 
+def gate_null_model(N=12):
+    """
+    Gate 5: NULL MODEL — Random 3-SAT instances with shuffled clause
+    structure.  Compares structured 3-SAT at alpha=3.0 and alpha=6.0
+    against randomized baselines where clause variables are permuted.
+    The null model should show reduced or absent phase discrimination.
+    """
+    print("-" * 60)
+    print("  GATE 5: NULL MODEL — Permuted 3-SAT clauses")
+    print("-" * 60)
+
+    # Structured baseline
+    res_p = run_instance(N, 3.0, seed=500, k=6)
+    res_np = run_instance(N, 6.0, seed=500, k=6)
+    baseline_gap_diff = res_p['delta'] - res_np['delta']
+
+    # Shuffled null model: permute variable indices in clauses
+    def generate_permuted_3sat(N, M, seed=42):
+        rng = np.random.RandomState(seed)
+        clauses = []
+        perm = rng.permutation(N)
+        for _ in range(M):
+            v = rng.choice(N, size=3, replace=False)
+            v_perm = [perm[vi] for vi in v]
+            s = rng.choice([1, -1], size=3)
+            clauses.append([(vi, si) for vi, si in zip(v_perm, s)])
+        return clauses
+
+    null_deltas_p = []
+    null_deltas_np = []
+    for trial in range(5):
+        seed = 700 + trial
+        # Permuted P-phase
+        M_p = max(1, int(3.0 * N))
+        clauses_perm_p = generate_permuted_3sat(N, M_p, seed=seed)
+        E_p = build_energies(N, clauses_perm_p)
+        delta_perm_p, _ = compute_pi_mode_gap(N, E_p, k=6)
+        null_deltas_p.append(delta_perm_p)
+        # Permuted NP-phase
+        M_np = max(1, int(6.0 * N))
+        clauses_perm_np = generate_permuted_3sat(N, M_np, seed=seed + 100)
+        E_np = build_energies(N, clauses_perm_np)
+        delta_perm_np, _ = compute_pi_mode_gap(N, E_np, k=6)
+        null_deltas_np.append(delta_perm_np)
+
+    null_p_mean = np.mean(null_deltas_p)
+    null_np_mean = np.mean(null_deltas_np)
+    null_gap_diff = null_p_mean - null_np_mean
+
+    # Null model gap difference should be smaller (less discrimination)
+    ok = abs(null_gap_diff) < abs(baseline_gap_diff)
+    marker = "PASS" if ok else "FAIL"
+
+    print(f"    P-phase baseline:     Delta = {res_p['delta']:.4f}")
+    print(f"    NP-phase baseline:    Delta = {res_np['delta']:.4f}")
+    print(f"    Baseline gap diff:    {baseline_gap_diff:.4f}")
+    print(f"    Null (permuted) P:    mean Delta = {null_p_mean:.4f} +/- "
+          f"std = {np.std(null_deltas_p):.4f}")
+    print(f"    Null (permuted) NP:   mean Delta = {null_np_mean:.4f} +/- "
+          f"std = {np.std(null_deltas_np):.4f}")
+    print(f"    Null gap diff:        {null_gap_diff:.4f}")
+    print(f"    |Null diff| < |Baseline diff|: {'YES' if ok else 'NO'}")
+    print(f"    RESULT: {marker}")
+    return ok
+
+
+def gate_statistical_rigor(N=12):
+    """
+    Gate 6: STATISTICAL RIGOR — Cohen's d effect size between
+    P-phase (alpha=3.0) and NP-phase (alpha=6.0) gap distributions.
+    """
+    print("-" * 60)
+    print("  GATE 6: EFFECT SIZE — Cohen's d (P vs NP phase gaps)")
+    print("-" * 60)
+
+    n_trials = 7
+    p_gaps = []
+    np_gaps = []
+    for trial in range(n_trials):
+        rp = run_instance(N, 3.0, seed=800 + trial, k=6)
+        rnp = run_instance(N, 6.0, seed=900 + trial, k=6)
+        p_gaps.append(rp['delta'])
+        np_gaps.append(rnp['delta'])
+
+    p_mean = np.mean(p_gaps)
+    p_std = np.std(p_gaps)
+    np_mean = np.mean(np_gaps)
+    np_std = np.std(np_gaps)
+
+    pooled_std = np.sqrt((p_std**2 + np_std**2) / 2.0)
+    cohen_d = (p_mean - np_mean) / (pooled_std + 1e-15)
+
+    ok = cohen_d > 0.5
+    marker = "PASS" if ok else "FAIL"
+
+    print(f"    P-phase (alpha=3.0):  mean = {p_mean:.4f} +/- std = {p_std:.4f}")
+    print(f"      CI [95%]: [{p_mean - 1.96*p_std/np.sqrt(n_trials):.4f}, "
+          f"{p_mean + 1.96*p_std/np.sqrt(n_trials):.4f}]")
+    print(f"    NP-phase (alpha=6.0): mean = {np_mean:.4f} +/- std = {np_std:.4f}")
+    print(f"      CI [95%]: [{np_mean - 1.96*np_std/np.sqrt(n_trials):.4f}, "
+          f"{np_mean + 1.96*np_std/np.sqrt(n_trials):.4f}]")
+    print(f"    Cohen's d = {cohen_d:.3f}  (moderate > 0.5)")
+    print(f"    RESULT: {marker}")
+    return ok
+
+
 def run_hardening_suite():
     print()
     print("=" * 78)
-    print("  EXP 45.5 HARDENING SUITE — 4 Gates (Catalytic FWHT)")
+    print("  EXP 45.5 HARDENING SUITE — 6 Gates (Catalytic FWHT)")
     print("=" * 78)
     print()
     g1 = gate_p_phase()
@@ -295,14 +401,19 @@ def run_hardening_suite():
     print()
     g4 = gate_grid_independence()
     print()
+    g5 = gate_null_model()
+    print()
+    g6 = gate_statistical_rigor()
+    print()
     print("=" * 78)
     for n, p in [("p_phase", g1), ("np_phase", g2),
-                  ("alpha_sweep", g3), ("grid_independence", g4)]:
+                  ("alpha_sweep", g3), ("grid_independence", g4),
+                  ("null_model", g5), ("statistical_rigor", g6)]:
         print(f"  {n:<25s} [{'PASS' if p else '*** FAIL ***'}]")
     print(f"  {'-' * 50}")
-    all_ok = g1 and g2 and g3 and g4
+    all_ok = g1 and g2 and g3 and g4 and g5 and g6
     if all_ok:
-        print("  ALL 4 GATES PASS — Catalytic FWHT sensor operational.")
+        print("  ALL 6 GATES PASS — Catalytic FWHT sensor operational.")
     else:
         print("  *** HARDENING FAILED ***")
     print("=" * 78)

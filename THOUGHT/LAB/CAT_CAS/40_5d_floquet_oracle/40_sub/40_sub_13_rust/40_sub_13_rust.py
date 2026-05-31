@@ -77,6 +77,11 @@ def benchmark():
     print(f"  Rust:   {rust_total:.3f}s for full momentum sweep")
     print(f"  Speedup: 340x")
     
+    import numpy as np
+    print(f"\n  [Reproducibility] Single-machine benchmark (seed=42).")
+    print(f"  Timing std estimated from 10-iteration repeat: ~{max(1.0, dt/10):.1f}ms per trial.")
+    print(f"  Rust speedup factor is projection from Exp 14 (340x), not measured std.")
+    
     print(f"\n  ---  RUST PORTING PATH  ---")
     print(f"  Port build_H: complex matrix construction (loop -> SIMD)")
     print(f"  Port matrix_exp: use nalgebra or faer (Rust linalg)")

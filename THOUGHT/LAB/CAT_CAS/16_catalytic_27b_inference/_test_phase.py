@@ -47,8 +47,8 @@ evals, evecs = np.linalg.eigh(C_phase)
 evals = evals[::-1]; evecs = evecs[:, ::-1]
 df_phase = 1.0 / ((evals / evals.sum())**2).sum()
 cum = np.cumsum(evals / evals.sum())
-k95 = int(np.searchsorted(cum, 0.95) + 1)
-print(f'Phase Df={df_phase:.1f}, K95={k95}')
+k95_phase = int(np.searchsorted(cum, 0.95) + 1)
+print(f'Phase Df={df_phase:.1f}, K95={k95_phase}')
 print(f'Top-10 evals: {[f"{e:.4f}" for e in evals[:10]]}')
 
 # ======= Approach 2: Complex differential =======

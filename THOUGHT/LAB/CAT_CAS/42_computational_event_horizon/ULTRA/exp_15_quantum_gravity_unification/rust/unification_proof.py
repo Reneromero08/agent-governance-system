@@ -23,9 +23,9 @@ r_gr, p_gr = pearsonr(gravity, riemann)
 r_qr, p_qr = pearsonr(quantum, riemann)
 
 print(f"[*] Pearson Correlation Triangle (100 Epochs):")
-print(f"    Quantum Cache Collisions  <--> Gravitational Exponent Shifts : r = {r_qg:.4f} (p-value: {p_qg:.4e})")
-print(f"    Gravitational Exponent Shifts <--> Riemann Zero Prime Gaps   : r = {r_gr:.4f} (p-value: {p_gr:.4e})")
-print(f"    Quantum Cache Collisions  <--> Riemann Zero Prime Gaps       : r = {r_qr:.4f} (p-value: {p_qr:.4e})")
+print(f"    Quantum Cache Collisions  <--> Gravitational Exponent Shifts : r = {r_qg:.4f} (p = {p_qg:.4e})")
+print(f"    Gravitational Exponent Shifts <--> Riemann Zero Prime Gaps   : r = {r_gr:.4f} (p = {p_gr:.4e})")
+print(f"    Quantum Cache Collisions  <--> Riemann Zero Prime Gaps       : r = {r_qr:.4f} (p = {p_qr:.4e})")
 
 print("\n[ANALYSIS]")
 unification_proven = True

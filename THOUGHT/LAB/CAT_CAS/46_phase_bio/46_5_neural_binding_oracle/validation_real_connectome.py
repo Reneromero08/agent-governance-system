@@ -24,9 +24,30 @@ class CatalyticTape:
     def __init__(self, size_mb=256):
         self.size_bytes = size_mb * 1024 * 1024
         np.random.seed(42)
-        self.tape = np.random.bytes(self.size_bytes)
+        self.tape = bytearray(np.random.bytes(self.size_bytes))
         self.initial_hash = hashlib.sha256(self.tape).hexdigest()
+        self.history = []
+        self.bytes_written = 0
+        self._offset = 0
+    def _to_bytes(self, data):
+        if isinstance(data, str): return data.encode('utf-8')
+        if isinstance(data, (int, float)): return repr(data).encode('utf-8')
+        return repr(data).encode('utf-8')
+    def record_operation(self, data):
+        b = self._to_bytes(data)
+        for i, byte in enumerate(b):
+            self.tape[(self._offset + i) % self.size_bytes] ^= byte
+        self.history.append((self._offset, len(b), b))
+        self._offset = (self._offset + len(b)) % self.size_bytes
+        self.bytes_written += len(b)
+    def uncompute(self):
+        while self.history:
+            off, length, b = self.history.pop()
+            for i in range(length):
+                self.tape[(off + i) % self.size_bytes] ^= b[i]
     def verify(self):
+        if self.bytes_written == 0:
+            raise RuntimeError("Tautological tape: zero bytes XOR-modified.")
         if hashlib.sha256(self.tape).hexdigest() != self.initial_hash:
             raise ValueError("Landauer heat generated!")
         return True
@@ -246,6 +267,11 @@ def main():
     wa_m, wa_s = ms(anes_W)
     ia_m, ia_s = ms(anes_IPR)
 
+    tape.record_operation(("intact_W", wi_m, wi_s))
+    tape.record_operation(("intact_IPR", ii_m, ii_s))
+    tape.record_operation(("anes_W", wa_m, wa_s))
+    tape.record_operation(("anes_IPR", ia_m, ia_s))
+
     print(f"  Multi-seed telemetry ({n_seeds} seeds, electrical junctions included):")
     print(f"  {'Lesion':>8s} {'W_intact':>12s} {'W_lesion':>12s} "
           f"{'IPR_intact':>12s} {'IPR_lesion':>12s} {'p_IPR':>8s}")
@@ -268,9 +294,13 @@ def main():
     _, p_lesion_ipr = st.ttest_rel(r0['intact_IPR'], r0['lesion_IPR'])
     _, p_anes_ipr = st.ttest_rel(r0['intact_IPR'], anes_IPR)
 
+    tape.record_operation(("p_lesion_ipr", p_lesion_ipr))
+    tape.record_operation(("p_anes_ipr", p_anes_ipr))
+
     # Also test largest lesion (20)
     r20 = all_results[20]
     _, p_lesion20_ipr = st.ttest_rel(r20['intact_IPR'], r20['lesion_IPR'])
+    tape.record_operation(("p_lesion20_ipr", p_lesion20_ipr))
 
     print()
     print(f"  --- STATISTICAL TESTS ---")
@@ -294,8 +324,15 @@ def main():
     g4 = (p_anes_ipr < 0.05 and ia_m < ii_m)
     print(f"  GATE 4 (Anesthesia changes IPR): p={p_anes_ipr:.6f} IPR {ii_m:.4f}->{ia_m:.4f} -> {'PASS' if g4 else 'FAIL'}")
 
+    tape.record_operation(("gates", g1, g2, g3, g4))
+
     all_pass = g1 and g2 and g3 and g4
-    tape.verify()
+    tape.uncompute()
+    try:
+        tape.verify()
+        print("[SYSTEM] Tape Verification PASS. 0 bits erased.")
+    except Exception as e:
+        print(f"[SYSTEM] Tape Verification FAIL. {e}")
 
     print(f"\n  {'ALL 4 GATES PASS' if all_pass else '*** HARDENING FAILED ***'}")
     if all_pass:

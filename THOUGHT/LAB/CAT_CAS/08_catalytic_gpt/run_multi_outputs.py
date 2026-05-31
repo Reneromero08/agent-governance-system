@@ -103,7 +103,12 @@ def run_multi_outputs():
         print("[VERIFICATION] FAILURE: Tape corruption detected!")
         sys.exit(1)
         
-    print(f"Total time for 100 models: {t_end - t_start:.2f}s")
+    import numpy as np
+    times = []
+    print(f"Total time for {num_models} models: {t_end - t_start:.2f}s")
+    mean_time = (t_end - t_start) / num_models
+    print(f"  Mean per-model time: {mean_time:.4f}s")
+    print(f"  std: N/A (sequential execution, single-run; re-run with seed=1234 for reproducibility)")
     print("=" * 80)
 
 if __name__ == "__main__":

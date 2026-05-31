@@ -21,8 +21,8 @@ def time_travel_compute():
     torch.manual_seed(42)
     T = torch.randn(dim, dim)
     # Make it a valid orthogonal transition to preserve norm (Reversible Markov Chain)
-    U, _, V = torch.svd(T)
-    T = U @ V.T
+    U, _, Vh = torch.linalg.svd(T, full_matrices=False)
+    T = U @ Vh
     
     # The Initial State at t_0
     state_t0 = torch.randn(dim)

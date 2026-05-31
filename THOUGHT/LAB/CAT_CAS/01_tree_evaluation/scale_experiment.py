@@ -8,8 +8,6 @@ of clean memory at ALL depths while standard recursive solver crashes at d=58.
 
 import sys
 import os
-import hashlib
-import numpy as np
 from pathlib import Path
 
 CAT_CAS_DIR = Path(__file__).parent

@@ -95,18 +95,18 @@ def bekenstein_violator():
     X = torch.randn(dim, dim) # 256x256
     
     # SVD
-    U, S, V = torch.svd(X)
+    U, S_diag, Vh = torch.linalg.svd(X, full_matrices=False)
     
     # Local volume keeps only 1 singular value!
-    S_local = S.clone(); S_local[1:] = 0
-    X_local = U @ torch.diag(S_local) @ V.T
+    S_local = S_diag.clone(); S_local[1:] = 0
+    X_local = U @ torch.diag(S_local) @ Vh
     
     # This is a rank-1 matrix. It has bounded energy and radius.
     # Bekenstein limit: Rank 1 capacity.
     
     # The catalyst holds the "rest" (the Hawking radiation / exterior)
-    S_catalyst = S.clone(); S_catalyst[0] = 0
-    X_catalyst = U @ torch.diag(S_catalyst) @ V.T
+    S_catalyst = S_diag.clone(); S_catalyst[0] = 0
+    X_catalyst = U @ torch.diag(S_catalyst) @ Vh
     
     # Together they recover X
     X_recovered = X_local + X_catalyst

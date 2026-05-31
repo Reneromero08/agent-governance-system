@@ -201,7 +201,8 @@ def option_2():
 
     print(f"  Full codebook (8 patterns):  chi={chi}  rho={rho_full:.4f}  W={W_full:+d}")
 
-    # Vacuum sector: only pattern 000 (0,0,0) is ever observed.
+    # NULL MODEL: The vacuum sector (pattern 000, W=0) serves as the trivial
+    # baseline.  Only pattern 000 is ever observed.
     # The vacuum transfer matrix is 1x1: pattern 000 -> output 0
     # -> only enables patterns (0,0,0) and (1,0,0)? No -- the output
     # of 000 is 0, so the center at t+1 is 0.  The neighbors are

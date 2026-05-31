@@ -103,9 +103,11 @@ def riemann_zero_telescope():
     print("-" * 100)
     
     locked_count = 0
+    errors = []
     for idx, (zero, residual) in enumerate(discovered_zeros):
         nearest_known = min(known_zeros, key=lambda z: abs(z - zero))
         error = abs(zero - nearest_known)
+        errors.append(error)
         
         if error < 1e-10:
             status = "EXACT  (< 1e-10)"
@@ -134,6 +136,9 @@ def riemann_zero_telescope():
     print(f"  Bisection Tolerance           : 1e-12")
     print(f"  Total Execution Time          : {elapsed:.2f}s")
     print(f"  Pre-seeded Knowledge          : NONE (blind scan)")
+    if errors:
+        print(f"  Mean Discovery Error          : {np.mean(errors):.2e}")
+        print(f"  Std Discovery Error           : {np.std(errors):.2e}")
     print()
     
     if locked_count >= 10:

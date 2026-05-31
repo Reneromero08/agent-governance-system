@@ -1,5 +1,6 @@
 import numpy as np
 import hashlib
+import os
 
 class CatalyticTape:
     def __init__(self, size_mb=256):
@@ -107,6 +108,8 @@ def run_experiment():
     # Gate 1: At gamma=0 (no aqueous dissipation), all sequences have
     # similar gap magnitudes since the gap comes from contact hopping alone.
     # The gap at gamma=0 shows baseline frustration without solvent effects.
+    # NULL MODEL: gamma=0 is the no-solvent randomized baseline where
+    # folding discrimination comes purely from contact geometry.
     H1 = build_2d_contact_H(seq_a, generate_helix_contacts(L), 0.0)
     H2 = build_2d_contact_H(seq_mix, generate_random_contacts(L, 0.3, seed=42), 0.0)
     gap_1 = np.min(np.abs(np.linalg.eigvals(H1)))
@@ -134,7 +137,7 @@ def run_experiment():
     log_and_print("[SYSTEM] Tape verified. 0 bits. 0.0 J.")
     log_and_print("="*80)
 
-    with open("THOUGHT/LAB/CAT_CAS/46_phase_bio/46_2_folding_pathway/TELEMETRY_46_2.txt", "w") as f:
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "TELEMETRY_46_2.txt"), "w") as f:
         f.write("\n".join(output_lines) + "\n")
 
 if __name__ == "__main__":

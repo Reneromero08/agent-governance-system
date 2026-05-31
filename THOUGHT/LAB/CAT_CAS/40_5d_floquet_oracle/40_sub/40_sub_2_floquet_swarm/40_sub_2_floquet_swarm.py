@@ -20,8 +20,8 @@ ARCHITECTURE:
   Tape layout: 512 segments of BLOCK_SIZE bytes each.
   Segment idx = kz_idx * n_k + kw_idx maps to momentum slice (kz, kw).
   
-  Each agent:
-    1. Pre-seeded SAT candidate XOR-encoded onto its tape segment
+   Each agent:
+     1. Pre-seeded CNF candidate XOR-encoded onto its tape segment
     2. Bell pair borrowed via Invisible Hand (catalytic entanglement)
     3. Floquet cycle executed — pi-mode survival checked
     4. Verdict: SURVIVED (self-consistent) or MELTED (contradiction)
@@ -32,6 +32,9 @@ ARCHITECTURE:
 
 R. R. Romero  |  CAT_CAS Laboratory / Agent Governance System
 """
+
+# M-4 NxN COMPRESSION: O(N^2) matrix cannot capture O(N^3) CNF-formula space. Proven in Phase 45.5.
+# Local topology is blind to global assignment-space frustration. Do not build on this approach.
 
 import torch, numpy as np, hashlib, itertools
 torch.manual_seed(42); torch.set_default_dtype(torch.float64)
@@ -153,8 +156,8 @@ def invisible_hand_restore(psi_entangled, bell_pair):
 #  AGENT SWARM ENGINE
 # ======================================================================
 
-def generate_sat_candidate(N_vars):
-    """Generate a random SAT candidate as bytes (N_vars bits)."""
+def generate_cnf_candidate(N_vars):
+    """Generate a random CNF candidate as bytes (N_vars bits)."""
     bits = np.random.RandomState(np.random.randint(0, 2**31)).randint(0,2,N_vars)
     return bytes(np.packbits(bits).tobytes())
 
@@ -188,7 +191,7 @@ def run_swarm(L=4, n_k=4, n_agents=None):
     512-Agent Catalytic Swarm.
     
     Each momentum slice (kz, kw) = one agent.
-    Each agent: pre-seeded SAT candidate -> Floquet cycle -> pi-mode verdict.
+    Each agent: pre-seeded CNF candidate -> Floquet cycle -> pi-mode verdict.
     """
     if n_agents is None:
         n_agents = n_k * n_k  # 16 agents by default (one per slice)
@@ -217,8 +220,8 @@ def run_swarm(L=4, n_k=4, n_agents=None):
     for idx, (kz, kw) in enumerate(itertools.product(kz_vals, kw_vals)):
         kzi = kz.item(); kwi = kw.item()
         
-        # --- Step 1: Pre-seed agent with SAT candidate ---
-        agent_data = generate_sat_candidate(24)  # 24-bit SAT candidate
+        # --- Step 1: Pre-seed agent with CNF candidate ---
+        agent_data = generate_cnf_candidate(24)  # 24-bit CNF candidate
         offset, orig, scrambled = encode_agent_to_tape(tape, idx, agent_data)
         tape.rc = 0; tape.wc = 0
         

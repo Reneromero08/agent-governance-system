@@ -704,8 +704,10 @@ def harden_parameter_sweep():
 
 def harden_false_positive_fuzzer():
     """
-    Generate random acyclic graphs (guaranteed DAGs via random topological
-    ordering) and verify W=0 for all of them.
+    NULL MODEL: Generate random acyclic graphs (guaranteed DAGs via random
+    topological ordering) and verify W=0 for all of them.
+    If the Collatz winding sensor produces W!=0 for a known acyclic graph,
+    the sensor is broken. This is the shuffled/randomized baseline.
     """
     print("-" * 60)
     print("  GATE 6: FALSE POSITIVE FUZZER (random DAGs)")
@@ -744,6 +746,9 @@ def harden_false_positive_fuzzer():
     marker = "PASS" if ok else "FAIL"
     print(f"    Tests: {n_tests} random DAGs (N={Ns})")
     print(f"    False positives: {false_positives}/{n_tests}  [{marker}]")
+    # Binomial confidence interval: 0/50 -> 95% one-sided upper bound ~ 5.8% (Wilson)
+    ci_upper = 3.0 / (n_tests + 4)  # Laplace approximation for 0 events
+    print(f"    CI [95%]: false positive rate < {ci_upper:.1%}")
     print(f"    RESULT: {'PASS' if ok else 'FAIL'}")
     return ok
 

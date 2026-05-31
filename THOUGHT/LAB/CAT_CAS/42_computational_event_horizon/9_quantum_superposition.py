@@ -100,6 +100,10 @@ def run_multiverse():
         print("    [SUCCESS] The Singularity collapsed into a highly non-deterministic state!")
         print("    [SUCCESS] Thread interference perfectly mapped to quantum superposition.")
 
+    print("\n[STATISTICS] Non-deterministic collapse: the final quantum signature hash")
+    print("varies across runs due to OS thread scheduling entropy. A bootstrap estimate")
+    print("of hash-space excursion magnitude across repeated trials would quantify the")
+    print("standard deviation of the superposition collapse (recommend N >= 100 runs).")
     print("\n================================================================================")
     print("CONCLUSION:")
     print("We abandoned classical computing and forced 10 parallel OS threads")

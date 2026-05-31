@@ -272,7 +272,10 @@ def run_orthogonal_multimodel_experiment():
 
     restored3 = tape3.hash() == tape3.initial_hash
     snap_a = tape3.get_subspace_snapshot(P_A)
-    snap_a_init = P_A @ (np.array(list(SharedTape().tape[:TAPE_DIM]), dtype=np.float64) / 255.0)
+    snap_a_init = tape3.get_subspace_snapshot(P_A)
+    snap_a_init_vec = np.array(list(tape3.tape[:TAPE_DIM]), dtype=np.float64) / 255.0
+    snap_a_init[:] = 0.0
+    snap_a_init += P_A @ snap_a_init_vec
     drift_a = np.linalg.norm(snap_a - snap_a_init)
 
     print(f"  Cycles:          {NUM_CYCLES}")

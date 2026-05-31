@@ -295,8 +295,14 @@ def main():
     print()
     print("=" * 70)
     L_ref = L
+    iprs = [r['ipr_mean'] for r in results]
+    lyaps = [r['lyapunov'] for r in results]
+    twists = [r['W_twist'] for r in results]
     print(f"  SKIN EFFECT ORACLE SUMMARY  (L={L_ref})")
     print("=" * 70)
+    print(f"  IPR:       mean={np.mean(iprs):.4f}  std={np.std(iprs):.4f}")
+    print(f"  Lyapunov:  mean={np.mean(lyaps):.4f}  std={np.std(lyaps):.4f}")
+    print(f"  W_twist:   mean={np.mean(twists):.4f}  std={np.std(twists):.4f}")
     header = (f"  {'Case':<38s}  {'IPR':>6s}  "
               f"{'lambda':>8s}  {'W_twist':>7s}  "
               f"{'OBC/PBC':>7s}  {'Verdict'}")

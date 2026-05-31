@@ -185,6 +185,18 @@ def run_computronium_experiment():
     print("  [PASS] Zero-Entropy Mode: Zero bits erased, 0.0 J dissipated in Full Catalytic mode.")
     print("  [PASS] Battery Modes: Quantized Landauer heat output matched theoretical physical limits.")
     print()
+    heats = []; erasures = []
+    for q_idx, query in enumerate(queries):
+        case_key = str(q_idx)
+        for _, restore_ratio in modes:
+            ratio_key = "1" if restore_ratio == 1.0 else ("0" if restore_ratio == 0.0 else f"{restore_ratio}")
+            r = ffi_results[case_key][ratio_key]
+            heats.append(r["heat_dissipated"])
+            erasures.append(r["erased_bits"])
+    print(f"\n  [Statistics across queries/modes]")
+    print(f"  Heat dissipation: mean={np.mean(heats):.4e} J  std={np.std(heats):.4e} J")
+    print(f"  Bits erased:      mean={np.mean(erasures):.1f}  std={np.std(erasures):.1f}")
+    print()
     print("  VERDICT: BEKENSTEIN-HAWKING CATALYTIC COMPUTRONIUM FULLY EXPLOITED & VERIFIED (NATIVE)")
     print("=" * 90)
 

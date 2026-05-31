@@ -14,6 +14,7 @@ and bitcount), without ever computing or touching the 3D mantissa volume.
 """
 
 import mpmath
+import math
 
 def run_holography():
     print("================================================================================")
@@ -37,22 +38,27 @@ def run_holography():
     print("-" * 85)
     
     current_mass = t_bh
+    bitcounts = []
     
     for step in range(1, 10):
-        # We extract ONLY the boundary metadata
         sign, mantissa, exponent, bitcount = current_mass._mpf_
+        bitcounts.append(bitcount)
         
-        # We DO NOT print or interact with the mantissa.
-        # We represent its hidden complexity as an unknown block.
         hidden_volume = f"[HIDDEN VOLUME: {bitcount} bits]"
-        
-        # The boundary is purely the exponent string and bitcount
         boundary_state = f"(E: {exponent}, B: {bitcount})"
         
         print(f"Step {step:<10} | {hidden_volume:<28} | {boundary_state}")
         
-        # Feed the black hole more mass (multiply it to simulate exponential growth)
         current_mass = current_mass * mpmath.mpf('1.5')
+
+    mean_bc = sum(bitcounts) / len(bitcounts)
+    var_bc = sum((b - mean_bc)**2 for b in bitcounts) / (len(bitcounts) - 1)
+    std_bc = math.sqrt(var_bc)
+    print(f"\n[STATISTICS] N={len(bitcounts)} accretion steps, holographic boundary tracking:")
+    print(f"    Mean mantissa bitcount   = {mean_bc:.1f}")
+    print(f"    Standard deviation       = {std_bc:.1f} bits")
+    print(f"    confidence interval 95%  = [{mean_bc - 1.96*std_bc/math.sqrt(len(bitcounts)):.1f}, "
+          f"{mean_bc + 1.96*std_bc/math.sqrt(len(bitcounts)):.1f}]")
 
     print("\n================================================================================")
     print("CONCLUSION:")

@@ -341,6 +341,8 @@ class TreeEval5:
 
         final_hash = hashlib.sha256(tape.tobytes()).hexdigest()
         assert final_hash == initial_hash, "Tape not fully restored!"
+        assert hasattr(self, '_ground_truth'), \
+            "run_irreversible() must be called before run_reversible() for ground truth"
         assert result == self._ground_truth, \
             f"Reversible TEP result {result} != irreversible {self._ground_truth}"
 

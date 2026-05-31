@@ -1,4 +1,10 @@
 """
+41b_godel_ep.py — DUPLICATE OF 41a_mpowinding.py (2026-05-30 annotation)
+MD5 79a43ebb9c6a99962f70bc7b406b9f5a matches 41a_mpowinding.py byte-for-byte.
+The Godel Exceptional Point experiment lives in Experiment 42B (Section 3.8 of
+PAPER_TOPOLOGICAL_THEORY_OF_EVERYTHING_4.md).  This file is retained for
+reference; the active implementation is 41a_mpowinding.py.
+
 42_toe_bulletproof_hardened.py
 
 THE BULLETPROOF PROTOCOL — Hardened physics engines that close the

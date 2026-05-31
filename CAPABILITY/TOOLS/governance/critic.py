@@ -483,6 +483,35 @@ def _missing_statistics_check(content: str, relpath: str) -> List[str]:
     return violations
 
 
+def _ceremonial_record_check(content: str, relpath: str) -> List[str]:
+    """
+    M-8: Detect BennettHistoryTape/CatalyticTape that has record_operation
+    but only appends to a Python list (history_stack) without XOR-modifying
+    the tape bytearray.  This is a ceremonial tape — the bytearray is never
+    borrowed, so verify() is structurally guaranteed to pass.
+    """
+    violations = []
+    has_tape_class = bool(re.search(
+        r'class\s+(BennettHistoryTape|CatalyticTape)', content))
+    has_record_def = bool(re.search(r'def\s+record_operation', content))
+    has_history_append = bool(re.search(r'history_stack\.append', content))
+    has_tape_xor = bool(re.search(
+        r'self\.tape\[.*\]\s*\^=|'
+        r'self\.tape\[.*\]\s*=\s*\w+\s*\^|'
+        r'bytearray\(', content))
+
+    if has_tape_class and has_record_def and has_history_append:
+        if not has_tape_xor:
+            violations.append(
+                f"{relpath}: M-8 CEREMONIAL RECORD — "
+                f"BennettHistoryTape/CatalyticTape defines record_operation "
+                f"but only appends to history_stack (Python list). "
+                f"The tape bytearray is never XOR-modified. "
+                f"This is a ceremonial tape, not catalytic."
+            )
+    return violations
+
+
 def _hardcoded_output_path_check(content: str, relpath: str) -> List[str]:
     """
     M-7: Flag hardcoded file output paths that may break when run from
@@ -526,6 +555,7 @@ def check_cat_cas_manifesto() -> List[str]:
         violations.extend(_missing_null_model_check(content, relpath))
         violations.extend(_missing_statistics_check(content, relpath))
         violations.extend(_hardcoded_output_path_check(content, relpath))
+        violations.extend(_ceremonial_record_check(content, relpath))
 
     return violations
 

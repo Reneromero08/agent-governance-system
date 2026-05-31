@@ -8,6 +8,13 @@ We push this to Infinity: Absolute 0.000000e+00 exact cross-talk.
 By using Lattice Holography (integer-quantized polynomial rings), we pack
 1,000 completely different models into the EXACT SAME physical weights,
 and separate them flawlessly with zero interference.
+
+*** DISPUTED CLAIM (2026-05-30) ***
+The base experiment (2 models, QR subspaces) works correctly with cross-talk
+1.98e-16. The infinity claim of 0.000000 cross-talk at 1000 models is WRONG.
+CODEBASE_AUDIT_REPORT: extraction formula X_signed @ W_shared is mathematically
+incorrect. Tested results: 18,214+ cross-talk at 10 models, 1M+ at 100 models.
+The Hadamard multiplexing approach does not scale beyond the 2-model QR case.
 """
 import torch
 

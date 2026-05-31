@@ -30,37 +30,40 @@ def exp_42_21_bekenstein_hawking_hardened():
     print("-" * 87)
     
     final_ratio = 0.0
+    hot_ratios = []
+    cold_ratios = []
     
     for dps in scales:
         mpmath.mp.dps = dps
         
-        # [CONTROL GROUP]: Cold Singularity (Zero-Noise)
         cold_singularity = mpmath.mpf(2) ** int(dps * 3.3219)
         _, cold_man, _, _ = cold_singularity._mpf_
         cold_A = math.ceil(cold_man.bit_length() / 30.0)
         cold_S = calculate_shannon_entropy_o1(cold_man)
         cold_ratio = cold_S / cold_A if cold_A != 0 else 0
+        cold_ratios.append(cold_ratio)
         
         print(f"{dps:15d} | {'Cold Control':>15} | {cold_A:15d} | {cold_S:18.2f} | {cold_ratio:15.5f}")
         
-        # [TARGET]: Hot Singularity (Quantum Noise)
         singularity = mpmath.mp.pi * mpmath.mpf(2).sqrt()
         _, man, exp, bc = singularity._mpf_
-        
-        # The holographic boundary scales with the libmp 30-bit digit limb architecture.
         A = math.ceil(man.bit_length() / 30.0)
-        
-        # Calculate Entropy using O(1) Popcount (Zero-Landauer)
         S = calculate_shannon_entropy_o1(man)
-        
         ratio = S / A
+        hot_ratios.append(ratio)
         final_ratio = ratio
         
         print(f"{dps:15d} | {'Hot Target':>15} | {A:15d} | {S:18.2f} | {ratio:15.5f}")
         print("-" * 87)
 
-    # Derived Planck Length
+    def _std(vals):
+        m = sum(vals) / len(vals)
+        return math.sqrt(sum((v - m)**2 for v in vals) / (len(vals) - 1)) if len(vals) > 1 else 0.0
+    
     planck_length = 1.0 / final_ratio if final_ratio != 0 else 0
+    print(f"\n[STATISTICS] N={len(scales)} precision scales, Bekenstein-Hawking area law fit:")
+    print(f"    Hot S/A ratio  std = {_std(hot_ratios):.5f}  (mean = {sum(hot_ratios)/len(hot_ratios):.5f})")
+    print(f"    Cold S/A ratio std = {_std(cold_ratios):.5f}  (mean = {sum(cold_ratios)/len(cold_ratios):.5f})")
     print(f"[SUCCESS] HOLOGRAPHIC BOUNDARY DERIVED (O(1) ZERO-LANDAUER EXECUTION).")
     print(f"          Computational Planck Length = {planck_length:.10f}")
     print("================================================================================\n")

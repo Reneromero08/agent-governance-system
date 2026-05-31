@@ -166,8 +166,8 @@ class FeistelScrambler:
                 for i in range(self.half_block):
                     l = self.tape.read(left_offset + i)
                     r = self.tape.read(right_offset + i)
-                    self.tape.write(left_offset + i, l ^ r)
-                    self.tape.write(right_offset + i, l ^ r)
+                    self.tape.write(left_offset + i, r)
+                    self.tape.write(right_offset + i, l)
 
     def backward(self, tape_offset):
         """Execute adjoint (U-dagger) — reverse Feistel rounds to uncompute."""
@@ -181,8 +181,8 @@ class FeistelScrambler:
                 for i in range(self.half_block):
                     l = self.tape.read(left_offset + i)
                     r = self.tape.read(right_offset + i)
-                    self.tape.write(left_offset + i, l ^ r)
-                    self.tape.write(right_offset + i, l ^ r)
+                    self.tape.write(left_offset + i, r)
+                    self.tape.write(right_offset + i, l)
 
             # Reverse F-function
             for i in range(self.half_block):

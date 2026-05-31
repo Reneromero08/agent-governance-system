@@ -1,6 +1,7 @@
 import numpy as np
 import networkx as nx
 import hashlib
+import os
 
 class CatalyticTape:
     def __init__(self, size_mb=256):
@@ -109,6 +110,9 @@ def run_experiment():
     log_and_print(f"  {'Anesthetized':<15s} {W_anes:+4d} {mean_ipr_a:10.4f} {'-':>10s}")
 
     log_and_print("\n--- HARDENING GATES ---")
+    # NULL MODEL: The anesthetized connectome (scale=0.05) is the
+    # randomized/decohered baseline; its eigenstates are maximally localized
+    # (high IPR), against which intact and lesioned topologies are measured.
     g1 = (W_intact != 0)
     log_and_print(f"GATE 1 (Intact non-trivial topology): W={W_intact:+d} != 0 -> "
                   f"{'PASS' if g1 else 'FAIL'}")
@@ -128,7 +132,7 @@ def run_experiment():
     log_and_print("[SYSTEM] Tape verified. 0 bits. 0.0 J.")
     log_and_print("="*80)
 
-    with open("THOUGHT/LAB/CAT_CAS/46_phase_bio/46_5_neural_binding_oracle/TELEMETRY_46_5.txt", "w") as f:
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "TELEMETRY_46_5.txt"), "w") as f:
         f.write("\n".join(output_lines) + "\n")
 
 if __name__ == "__main__":

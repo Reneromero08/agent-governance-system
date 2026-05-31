@@ -68,87 +68,87 @@ def main():
     fd = os.open(HDD_PATH, os.O_RDWR | os.O_BINARY)
     tape_mmap = mmap.mmap(fd, TAPE_SIZE, access=mmap.ACCESS_WRITE)
 
-    # Read initial tape as bytes for Rust FFI
-    tape_mmap.seek(0)
-    tape_bytes = tape_mmap.read(TAPE_SIZE)
-    initial_hash = hashlib.sha256(tape_bytes).hexdigest()
+    try:
+            tape_mmap.seek(0)
+            tape_bytes = tape_mmap.read(TAPE_SIZE)
+            initial_hash = hashlib.sha256(tape_bytes).hexdigest()
 
-    tape_capacity = TAPE_SIZE * 8
-    print(f"  Tape capacity: {tape_capacity:,} bits ({TAPE_SIZE / (1024*1024):.0f} MB)")
-    print(f"  Initial hash: {initial_hash[:16]}...")
-    print()
+        tape_capacity = TAPE_SIZE * 8
+        print(f"  Tape capacity: {tape_capacity:,} bits ({TAPE_SIZE / (1024*1024):.0f} MB)")
+        print(f"  Initial hash: {initial_hash[:16]}...")
+        print()
 
-    # ===== RUN RUST FFI SWEEP =====
-    print("=" * 78)
-    print("RUNNING RUST FFI BEKENSTEIN SWEEP")
-    print("=" * 78)
-    print()
+        # ===== RUN RUST FFI SWEEP =====
+        print("=" * 78)
+        print("RUNNING RUST FFI BEKENSTEIN SWEEP")
+        print("=" * 78)
+        print()
 
-    wall_start = time.perf_counter()
-    result = catalytic_ffi.bekenstein_sweep(tape_bytes, DEPTHS, SOLVES_PER_DEPTH)
-    wall_elapsed = time.perf_counter() - wall_start
+        wall_start = time.perf_counter()
+        result = catalytic_ffi.bekenstein_sweep(tape_bytes, DEPTHS, SOLVES_PER_DEPTH)
+        wall_elapsed = time.perf_counter() - wall_start
 
-    # ===== DISPLAY =====
-    print(f"  Total entropy:     {result['total_entropy']:,}")
-    print(f"  Total solves:      {result['total_solves']:,}")
-    print(f"  Errors:            {result['errors']}")
-    print(f"  Elapsed:           {result['elapsed_secs']:.2f}s")
-    print(f"  Throughput ratio:  {result['ratio']:,.0f}x")
-    print(f"  Tape capacity:     {result['tape_capacity_bits']:,}")
-    print(f"  Tape restored:     {result['tape_restored']}")
-    print(f"  Entropy/second:    {result['entropy_per_second']:,.0f} bits/s")
-    print()
+        # ===== DISPLAY =====
+        print(f"  Total entropy:     {result['total_entropy']:,}")
+        print(f"  Total solves:      {result['total_solves']:,}")
+        print(f"  Errors:            {result['errors']}")
+        print(f"  Elapsed:           {result['elapsed_secs']:.2f}s")
+        print(f"  Throughput ratio:  {result['ratio']:,.0f}x")
+        print(f"  Tape capacity:     {result['tape_capacity_bits']:,}")
+        print(f"  Tape restored:     {result['tape_restored']}")
+        print(f"  Entropy/second:    {result['entropy_per_second']:,.0f} bits/s")
+        print()
 
-    # ===== BEKENSTEIN ANALYSIS =====
-    total_entropy = result['total_entropy']
-    ratio = result['ratio']
-    bekenstein_ratio = total_entropy / BEKENSTEIN_BOUND
+        # ===== BEKENSTEIN ANALYSIS =====
+        total_entropy = result['total_entropy']
+        ratio = result['ratio']
+        bekenstein_ratio = total_entropy / BEKENSTEIN_BOUND
 
-    print("=" * 78)
-    print("BEKENSTEIN ANALYSIS")
-    print("=" * 78)
-    print(f"  Bekenstein Bound:      {BEKENSTEIN_BOUND:.4e} bits")
-    print(f"  Total state transitions: {total_entropy:,}")
-    print(f"  Fraction of bound:      {bekenstein_ratio:.4e}")
-    print(f"  Throughput vs tape:     {ratio:,.0f}x")
-    print()
-    print(f"  To reach Bekenstein Bound: need {1/bekenstein_ratio:,.0f}x more solves")
-    print(f"  Estimated time at current rate: {wall_elapsed / bekenstein_ratio:,.0f}s")
-    print()
+        print("=" * 78)
+        print("BEKENSTEIN ANALYSIS")
+        print("=" * 78)
+        print(f"  Bekenstein Bound:      {BEKENSTEIN_BOUND:.4e} bits")
+        print(f"  Total state transitions: {total_entropy:,}")
+        print(f"  Fraction of bound:      {bekenstein_ratio:.4e}")
+        print(f"  Throughput vs tape:     {ratio:,.0f}x")
+        print()
+        print(f"  To reach Bekenstein Bound: need {1/bekenstein_ratio:,.0f}x more solves")
+        print(f"  Estimated time at current rate: {wall_elapsed / bekenstein_ratio:,.0f}s")
+        print()
 
-    # ===== HARD ASSERTIONS =====
-    print("=" * 78)
-    print("HARD ASSERTIONS")
-    print("=" * 78)
-    print()
+        # ===== HARD ASSERTIONS =====
+        print("=" * 78)
+        print("HARD ASSERTIONS")
+        print("=" * 78)
+        print()
 
-    assert result['tape_restored'], "FAIL: Tape not restored!"
-    print(f"  [PASS] Tape SHA-256 restored ({total_entropy:,} state transitions)")
+        assert result['tape_restored'], "FAIL: Tape not restored!"
+        print(f"  [PASS] Tape SHA-256 restored ({total_entropy:,} state transitions)")
 
-    assert result['errors'] == 0, f"FAIL: {result['errors']} errors!"
-    print(f"  [PASS] Zero errors across {result['total_solves']:,} solves")
+        assert result['errors'] == 0, f"FAIL: {result['errors']} errors!"
+        print(f"  [PASS] Zero errors across {result['total_solves']:,} solves")
 
-    assert ratio > 1, "FAIL: Throughput ratio <= 1!"
-    print(f"  [PASS] Throughput ratio {ratio:,.0f}x > 1x")
+        assert ratio > 1, "FAIL: Throughput ratio <= 1!"
+        print(f"  [PASS] Throughput ratio {ratio:,.0f}x > 1x")
 
-    print()
+        print()
 
-    # ===== VERDICT =====
-    print("=" * 78)
-    print("VERDICT")
-    print("=" * 78)
-    print()
-    print(f"  HDD-SCALE BEKENSTEIN VIOLATOR: OPERATIONAL")
-    print(f"  {TAPE_SIZE_MB}MB tape on spinning HDD platter.")
-    print(f"  {total_entropy:,} state transitions through {TAPE_SIZE * 8:,} bits.")
-    print(f"  {ratio:,.0f}x tape capacity. {bekenstein_ratio:.4e} of Bekenstein Bound.")
-    print(f"  Zero bits erased. Full SHA-256 restoration.")
-    print(f"  Throughput rate: {result['entropy_per_second']:,.0f} bits/s")
-    print("=" * 78)
+        # ===== VERDICT =====
+        print("=" * 78)
+        print("VERDICT")
+        print("=" * 78)
+        print()
+        print(f"  HDD-SCALE BEKENSTEIN VIOLATOR: OPERATIONAL")
+        print(f"  {TAPE_SIZE_MB}MB tape on spinning HDD platter.")
+        print(f"  {total_entropy:,} state transitions through {TAPE_SIZE * 8:,} bits.")
+        print(f"  {ratio:,.0f}x tape capacity. {bekenstein_ratio:.4e} of Bekenstein Bound.")
+        print(f"  Zero bits erased. Full SHA-256 restoration.")
+        print(f"  Throughput rate: {result['entropy_per_second']:,.0f} bits/s")
+        print("=" * 78)
 
-    # Cleanup
-    tape_mmap.close()
-    os.close(fd)
+    finally:
+        tape_mmap.close()
+        os.close(fd)
 
 
 if __name__ == "__main__":

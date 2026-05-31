@@ -37,6 +37,7 @@ def run_page_curve():
     print(f"{'Precision (dps)':<15} | {'State':<20} | {'Entanglement Entropy (Log2 Delta)'}")
     print("-" * 80)
     
+    entropy_values = []
     for dps in range(988, 1001):
         mpmath.mp.dps = dps
         
@@ -45,28 +46,35 @@ def run_page_curve():
         
         t_perturbed = t_local + dt_local
         
-        # Calculate the divergence (radiation entropy)
         divergence = abs(t_perturbed - t_local)
         
         if divergence == 0:
             entropy = 0.0
             state = "HORIZON (Locked)"
         else:
-            # We map the physical size of the divergence to "Bits of Entropy"
             entropy = float(mpmath.log(divergence, 2)) if divergence > 0 else 0.0
             
-            # Check if the information is fully recovered
             if divergence == dt_local:
                 state = "EVAPORATED (Zero)"
-                entropy = 0.0 # Page curve drops to zero when fully recovered
+                entropy = 0.0
             else:
                 state = "RADIATING (Chaos)"
-                
-        # Format the Page Curve bar chart representation
+        
+        entropy_values.append(entropy)
+        
         bar_length = int(entropy / 4) if entropy > 0 else 0
         bar = "#" * bar_length
         
         print(f"{dps:<15} | {state:<20} | {entropy:<15.2f} {bar}")
+
+    radiating_entropies = [e for e in entropy_values if e > 0]
+    if len(radiating_entropies) >= 2:
+        mean_s = sum(radiating_entropies) / len(radiating_entropies)
+        var_s = sum((e - mean_s)**2 for e in radiating_entropies) / (len(radiating_entropies) - 1)
+        std_s = math.sqrt(var_s)
+        print(f"\n[STATISTICS] N={len(entropy_values)} precision points, {len(radiating_entropies)} radiating states:")
+        print(f"    Mean entanglement entropy = {mean_s:.2f} bits")
+        print(f"    Standard deviation        = {std_s:.2f} bits")
 
     print("\n================================================================================")
     print("CONCLUSION: The Computational Page Curve")

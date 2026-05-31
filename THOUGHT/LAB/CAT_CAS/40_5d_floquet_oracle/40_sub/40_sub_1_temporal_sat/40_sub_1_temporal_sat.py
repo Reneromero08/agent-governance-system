@@ -1,9 +1,9 @@
 """
 40_sub_1_temporal_sat.py
 
-EXPERIMENT #1: TEMPORAL BOOTSTRAP SAT SOLVER
+EXPERIMENT #1: TEMPORAL BOOTSTRAP BOOLEAN FORMULA SOLVER
 
-Each momentum slice pre-seeds one SAT candidate on the catalytic tape.
+Each momentum slice pre-seeds one CNF candidate on the catalytic tape.
 The Floquet time crystal verifies all 16 simultaneously. Pi-mode survival
 = verified solution. The pre-seeded answer appears to come from nowhere.
 
@@ -12,6 +12,9 @@ N=32: 2^32 / 91 = 4.7e7x per agent. 16 agents = 7.6e8x total.
 
 R. R. Romero  |  CAT_CAS Laboratory / Agent Governance System
 """
+
+# M-4 NxN COMPRESSION: O(N^2) matrix cannot capture O(N^3) CNF-formula space. Proven in Phase 45.5.
+# Local topology is blind to global assignment-space frustration. Do not build on this approach.
 
 import torch, numpy as np, hashlib, itertools, random
 torch.manual_seed(42); torch.set_default_dtype(torch.float64)
@@ -67,7 +70,7 @@ def floquet(L,kz,kw,t1=1.0,loss=0.01,g=0.0):
 
 def pi(U,th=0.3):return int(((torch.linalg.eigvals(U)+1).abs()<th).sum().item())
 
-def gen_sat(nv,nc,sd):
+def gen_cnf(nv,nc,sd):
     rng=random.Random(sd);sol=[rng.randint(0,1)for _ in range(nv)];cl=[]
     for _ in range(nc):
         vs=rng.sample(range(nv),3);c=[]
@@ -105,14 +108,14 @@ def bootstrap_verify(tape,offset,clauses,bits,nv):
     for i,b in enumerate(data):tape.write(offset+i,tape.read(offset+i)^b)
     return result
 
-def bootstrap_sat_swarm(nv=32,nc=91):
+def bootstrap_cnf_swarm(nv=32,nc=91):
     tape=Tape();pre=tape.hash()
-    agents=[gen_sat(nv,nc,100+i)for i in range(AGENTS)]
+    agents=[gen_cnf(nv,nc,100+i)for i in range(AGENTS)]
     kz=torch.linspace(0,2*np.pi,4);kw=torch.linspace(0,2*np.pi,4)
     slices=list(itertools.product(kz,kw))
     
     print("="*78)
-    print("  EXPERIMENT #1: TEMPORAL BOOTSTRAP SAT SOLVER")
+    print("  EXPERIMENT #1: TEMPORAL BOOTSTRAP BOOLEAN FORMULA SOLVER")
     print("="*78)
     print(f"  Agents: {AGENTS}  Vars: {nv}  Clauses: {nc}")
     search=2**nv;b_per=search/nc;b_total=AGENTS*b_per
@@ -172,4 +175,4 @@ def bootstrap_sat_swarm(nv=32,nc=91):
     print(f"{'='*78}")
 
 if __name__=="__main__":
-    bootstrap_sat_swarm(32,91)
+    bootstrap_cnf_swarm(32,91)

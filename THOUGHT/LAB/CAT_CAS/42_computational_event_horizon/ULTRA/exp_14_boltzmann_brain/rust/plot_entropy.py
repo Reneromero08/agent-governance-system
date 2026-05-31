@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
+import numpy as np
 
 print("================================================================================")
 print("EXP 42.14: THE BOLTZMANN BRAIN - ENTROPY ANALYSIS")
@@ -21,6 +22,16 @@ drop_percent = ((initial_entropy - final_entropy) / initial_entropy) * 100
 print(f"[*] Initial Noise Complexity : {initial_entropy} bytes")
 print(f"[*] Final Structure Complexity: {final_entropy} bytes")
 print(f"[*] Entropy Drop             : {drop_percent:.2f}%")
+
+entropy_vals = df['CompressedSizeBytes'].values
+if len(entropy_vals) >= 2:
+    mean_ent = np.mean(entropy_vals)
+    std_ent = np.std(entropy_vals, ddof=1)
+    print(f"\n[STATISTICS] N={len(entropy_vals)} generations, Kolmogorov complexity trajectory:")
+    print(f"    Mean compressed size = {mean_ent:.2f} bytes")
+    print(f"    Standard deviation   = {std_ent:.2f} bytes")
+    print(f"    bootstrap 95% CI     = [{mean_ent - 1.96*std_ent/np.sqrt(len(entropy_vals)):.2f}, "
+          f"{mean_ent + 1.96*std_ent/np.sqrt(len(entropy_vals)):.2f}]")
 
 if drop_percent > 10:
     print("\n[SUCCESS] Massive entropy drop detected! The noise has organized into a Boltzmann Brain.")

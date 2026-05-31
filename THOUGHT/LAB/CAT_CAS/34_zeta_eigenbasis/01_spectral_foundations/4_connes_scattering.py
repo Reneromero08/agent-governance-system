@@ -86,7 +86,7 @@ def riemann_von_mangoldt_inverse(n_index, phase):
     try:
         E_root = fsolve(func, guess)[0]
         return E_root
-    except:
+    except Exception:
         return 0.0
 
 def main():

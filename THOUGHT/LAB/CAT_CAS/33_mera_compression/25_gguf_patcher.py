@@ -38,7 +38,7 @@ def extract_gguf_config(gguf_path):
             if isinstance(val, list) and len(val) > 100:
                 val = f"<{len(val)} bytes>"
             config[k] = val
-        except:
+        except Exception:
             pass
     
     # Map known GGUF keys to standard config names

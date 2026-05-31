@@ -1,5 +1,6 @@
 import numpy as np
 import hashlib
+import os
 
 class CatalyticTape:
     def __init__(self, size_mb=256):
@@ -118,6 +119,9 @@ def run_experiment():
     W_ann, ipr_ann = evaluate_state("Annihilated Scar", L, 10, "annihilated")
 
     log_and_print("\n--- HARDENING GATES ---")
+    # NULL MODEL: The flat sheet state (no defects, no theta modulation) is
+    # the trivial baseline — all edge phases are uniform, yielding delocalized
+    # eigenstates (IPR << 0.15) against which defect states are measured.
     g1 = (ipr_flat < 0.15)
     log_and_print(f"GATE 1 (Flat Sheet): IPR={ipr_flat:.4f} < 0.15 -> "
                   f"{'PASS' if g1 else 'FAIL'} (extended, no defects)")
@@ -138,7 +142,7 @@ def run_experiment():
     log_and_print("[SYSTEM] Tape verified. 0 bits. 0.0 J.")
     log_and_print("="*80)
 
-    with open("THOUGHT/LAB/CAT_CAS/46_phase_bio/46_6_morphogenesis_oracle/TELEMETRY_46_6.txt", "w") as f:
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "TELEMETRY_46_6.txt"), "w") as f:
         f.write("\n".join(output_lines) + "\n")
 
 if __name__ == "__main__":

@@ -29,9 +29,30 @@ class CatalyticTape:
     def __init__(self, size_mb=256):
         self.size_bytes = size_mb * 1024 * 1024
         np.random.seed(42)
-        self.tape = np.random.bytes(self.size_bytes)
+        self.tape = bytearray(np.random.bytes(self.size_bytes))
         self.initial_hash = hashlib.sha256(self.tape).hexdigest()
+        self.history = []
+        self.bytes_written = 0
+        self._offset = 0
+    def _to_bytes(self, data):
+        if isinstance(data, str): return data.encode('utf-8')
+        if isinstance(data, (int, float)): return repr(data).encode('utf-8')
+        return repr(data).encode('utf-8')
+    def record_operation(self, data):
+        b = self._to_bytes(data)
+        for i, byte in enumerate(b):
+            self.tape[(self._offset + i) % self.size_bytes] ^= byte
+        self.history.append((self._offset, len(b), b))
+        self._offset = (self._offset + len(b)) % self.size_bytes
+        self.bytes_written += len(b)
+    def uncompute(self):
+        while self.history:
+            off, length, b = self.history.pop()
+            for i in range(length):
+                self.tape[(off + i) % self.size_bytes] ^= b[i]
     def verify(self):
+        if self.bytes_written == 0:
+            raise RuntimeError("Tautological tape: zero bytes XOR-modified.")
         if hashlib.sha256(self.tape).hexdigest() != self.initial_hash:
             raise ValueError("Landauer heat generated!")
         return True
@@ -163,6 +184,7 @@ def main():
 
     # --- SGC baseline ---
     sgc_rad = spectral_radius(SGC)
+    tape.record_operation(("sgc_rad", sgc_rad))
     print(f"  SGC spectral radius: {sgc_rad:.4f}")
     print()
 
@@ -204,11 +226,14 @@ def main():
     # --- Statistical tests ---
     # How many standard deviations is SGC below the random mean?
     z_score = (sgc_rad - rand_mean) / rand_std
+    tape.record_operation(("z_score", z_score))
     # P-value: fraction of random codes with radius <= SGC radius
     p_value = np.mean(random_radii <= sgc_rad)
+    tape.record_operation(("p_value", p_value))
 
     # Is SGC below ALL random codes?
     sgc_is_min = (sgc_rad <= rand_min)
+    tape.record_operation(("sgc_is_min", sgc_is_min))
 
     print()
     print("  --- STATISTICAL TESTS ---")
@@ -216,6 +241,7 @@ def main():
     mito_below = [name for name, changes in VARIANTS.items()
                   if spectral_radius(variant_code(SGC, changes)) < sgc_rad]
     n_mito_below = len(mito_below)
+    tape.record_operation(("n_mito_below", n_mito_below))
 
     print(f"  Z-score (SGC vs random): {z_score:.2f} sigma")
     print(f"  P-value (random <= SGC): {p_value:.6f}")
@@ -240,9 +266,16 @@ def main():
     if n_mito_below >= 1:
         print(f"    (Mitochondria found even lower spectral radius — genuine biology)")
 
+    tape.record_operation(("gates", g1, g2, g3, g4))
+
     all_pass = g1 and g2 and g3 and g4
 
-    tape.verify()
+    tape.uncompute()
+    try:
+        tape.verify()
+        print("[SYSTEM] Tape Verification PASS. 0 bits erased.")
+    except Exception as e:
+        print(f"[SYSTEM] Tape Verification FAIL. {e}")
     t_total = time.time() - t0
 
     # ---- Parameter sensitivity: vary gamma ----

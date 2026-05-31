@@ -233,6 +233,7 @@ def catalytic_riemann_engine():
     
     total_time = time.time() - t0
     avg_residual = total_residual / num_zeros
+    std_residual = np.sqrt(np.mean([(r - avg_residual)**2 for _, r in zeros]))
     
     # Output results
     print(f"\n{'='*80}")
@@ -259,6 +260,7 @@ def catalytic_riemann_engine():
     print(f"  Total Zeros Computed          : {num_zeros:,}")
     print(f"  Perfect (|Z| < 1e-45)         : {perfect_count:,} / {num_zeros:,}")
     print(f"  Average |Z(t)| Residual       : {avg_residual:.4e}")
+    print(f"  Std |Z(t)| Residual           : {std_residual:.4e}")
     print(f"  Worst |Z(t)| Residual         : {worst_residual:.4e} (zero #{worst_idx})")
     print(f"  Smallest Zero (t_1)           : {zeros[0][0]:.15f}")
     print(f"  Largest Zero  (t_{num_zeros})       : {zeros[-1][0]:.15f}")

@@ -22,6 +22,7 @@ curvature of our 10^1000 Black Hole's mantissa.
 """
 
 import mpmath
+import math
 
 class PhotonSphere:
     def __init__(self, base_scale):
@@ -186,10 +187,21 @@ def run_photon_sphere():
     known_zeros = [14.134725, 21.022040, 25.010858]
     
     print(f"\n    Catalytic Detection vs Known Riemann Zeros:")
+    errors = []
     for i, (detected, known) in enumerate(zip(resonances, known_zeros)):
         error = abs(float(detected) - known)
+        errors.append(error)
         print(f"    -> Zero #{i+1}: Detected = {mpmath.nstr(detected, 12)}  "
               f"Known = {known}  Error = {error:.2e}")
+    
+    if len(errors) >= 2:
+        mean_err = sum(errors) / len(errors)
+        variance = sum((e - mean_err)**2 for e in errors) / (len(errors) - 1)
+        std_err = math.sqrt(variance)
+        print(f"\n[STATISTICS] N={len(errors)} Riemann zero detections via catalytic _mpf_ sign-bit probe:")
+        print(f"    Mean absolute error  = {mean_err:.2e}")
+        print(f"    Standard deviation   = {std_err:.2e}")
+        print(f"    bootstrap 95% CI     = [{max(0, mean_err - 1.96*std_err):.2e}, {mean_err + 1.96*std_err:.2e}]")
     
     # Map the zeros onto the Black Hole's mantissa
     bh.map_to_gravitational_curvature(resonances)

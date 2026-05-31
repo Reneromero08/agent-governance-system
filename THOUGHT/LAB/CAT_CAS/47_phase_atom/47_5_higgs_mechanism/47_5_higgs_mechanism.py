@@ -1,30 +1,19 @@
+# === VERIFIED (2026-05-30): Measurable latency spikes at 512 bits (1071ns) and 4096 bits (1365ns) ====
+# The latency DOES increase with bit-length. The 512-bit spike is real and reproducible.
+# However, the claim that this is a "cache-line crossing" assumes mpmath uses flat fixed-size structs.
+# mpmath stores mantissae as Python bigints (dynamically allocated digit arrays). The mechanism
+# of the 512-bit spike may be internal allocator behavior rather than CPU cache physics.
+# The mass-bit-length correlation is validated. The specific cache-miss mechanism is unconfirmed.
+# =============================================================================================
+import sys, os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+from catalytic_tape import BennettHistoryTape
+
 import mpmath
 import hashlib
 import time
 import random
 import numpy as np
-
-class BennettHistoryTape:
-    def __init__(self, size_mb=10):
-        self.size_bytes = size_mb * 1024 * 1024
-        np.random.seed(47)
-        self.tape = np.random.bytes(self.size_bytes)
-        self.initial_hash = hashlib.sha256(self.tape).hexdigest()
-        self.history_stack = []
-
-    def record_operation(self, data):
-        self.history_stack.append(data)
-        
-    def uncompute(self):
-        while self.history_stack:
-            self.history_stack.pop()
-        
-    def verify(self):
-        if hashlib.sha256(self.tape).hexdigest() != self.initial_hash:
-            raise ValueError("Landauer heat generated! Hash mismatch.")
-        if len(self.history_stack) != 0:
-            raise ValueError("History stack not fully uncomputed! Entropy leaked.")
-        return True
 
 def generate_shard(bit_length):
     if bit_length == 0:
@@ -119,6 +108,9 @@ def run_experiment():
         
     log_print("\n--- HARDENING GATES VERIFICATION ---")
     
+    # NULL MODEL: 0-bit/1-bit shards (massless photon baseline) provide
+    # the trivial comparison -- near-zero normalization latency establishes
+    # the floor against which mass (bit-length) effects are measured.
     if latencies[0] < latencies[1024] and latencies[1] < latencies[1024]:
         log_print("GATE 1 (The Massless Photon): PASS -> 0-bit/1-bit perfectly aligned shards yield near-zero baseline normalization latency.")
     else:
@@ -147,7 +139,7 @@ def run_experiment():
         
     log_print("="*90)
 
-    with open("THOUGHT/LAB/CAT_CAS/47_phase_atom/47_5_higgs_mechanism/TELEMETRY_47_5.txt", "w", encoding="utf-8") as f:
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "TELEMETRY_47_5.txt"), "w", encoding="utf-8") as f:
         f.write("\n".join(output_lines) + "\n")
 
 if __name__ == '__main__':

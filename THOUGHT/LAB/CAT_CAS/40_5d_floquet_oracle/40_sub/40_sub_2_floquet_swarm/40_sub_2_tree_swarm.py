@@ -254,6 +254,10 @@ def run_tree_swarm(L=4, n_k=4, tree_depth=12):
               f"{r['pi_modes']:9d}  {'SURVIVED' if r['pi_modes']>0 else 'MELTED'}")
     
     catalytic_pass = sum(1 for r in results if r['catalytic_ok'])
+    pi_vals = [r['pi_modes'] for r in results]
+    import numpy as np
+    print(f"\n  Pi-mode stats across agents: mean={np.mean(pi_vals):.1f}  "
+          f"std={np.std(pi_vals):.1f}  min={np.min(pi_vals)}  max={np.max(pi_vals)}")
     
     # Annihilation
     print(f"\n  ---  ANNIHILATION (uniform Gamma=0.5)  ---")

@@ -150,12 +150,18 @@ def pulse_computation_v2():
     unique_programs = len(programs)
     unique_outputs = len(set(tuple(r['pis']) for r in results.values()))
     
+    import numpy as np
+    all_pis = []
+    for r in results.values(): all_pis.extend(r['pis'])
+    
     print(f"\n{'=' * 78}")
     print("  PULSE COMPUTATION v2 SUMMARY")
     print(f"{'=' * 78}")
     print(f"  Programs tested:        {unique_programs}")
     print(f"  Unique outputs:         {unique_outputs}")
     print(f"  Discrimination ratio:   {unique_outputs}/{unique_programs}")
+    print(f"  Pi-mode stats overall:   mean={np.mean(all_pis):.1f}  std={np.std(all_pis):.1f}  "
+          f"range=[{np.min(all_pis)},{np.max(all_pis)}]")
     print(f"  Encoding:               t1 (hopping) + gamma (dissipation)")
     print(f"  DTC preservation:       t1 <= 0.2, gamma < 0.5")
     print(f"  Program space:          R^(2T) for T-cycle sequences")

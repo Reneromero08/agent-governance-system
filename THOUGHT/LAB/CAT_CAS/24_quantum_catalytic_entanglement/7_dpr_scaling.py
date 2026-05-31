@@ -32,6 +32,7 @@ print("=" * 78)
 print(f"  {'n':>4}  {'state':>10}  {'D_pr(uniform)':>14}  {'D_pr(entangled)':>16}  {'compress':>12}  {'scaling':>12}")
 print(f"  {'-'*75}")
 
+dpr_us = []; dpr_es = []
 for n in range(4, 18):
     N = 2**n
     if N > 500000: break  # memory limit
@@ -51,9 +52,12 @@ for n in range(4, 18):
     else:
         dpr_e = 0.0
     
+    dpr_us.append(dpr_u); dpr_es.append(dpr_e)
     dt = time.perf_counter() - t0
     ratio = N / max(dpr_u, 1)
     print(f"  {n:>10}  {N:>12,}  {dpr_u:>14.1f}  {dpr_e:>16.1f}  {ratio:>14.1f}x  ({dt:.2f}s)")
 
-print(f"\n  D_pr grows with qubits. Question: linear, sqrt, or log?")
+print(f"\n  D_pr stats: uniform mean={np.mean(dpr_us):.1f} std={np.std(dpr_us):.1f} | "
+      f"entangled mean={np.mean([e for e in dpr_es if e>0]):.1f} std={np.std([e for e in dpr_es if e>0]):.1f}")
+print(f"  D_pr grows with qubits. Question: linear, sqrt, or log?")
 print("=" * 78)

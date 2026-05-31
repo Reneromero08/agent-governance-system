@@ -56,6 +56,7 @@ def nondtc_v2():
     kz=torch.linspace(0,2*np.pi,n_k);kw=torch.linspace(0,2*np.pi,n_k)
     slices=list(itertools.product(kz,kw))
     
+    collected_pi = []
     print("="*78)
     print("  EXPERIMENT #11 v2: NON-DTC COMPUTATION (MOMENTUM-LIVE)")
     print("="*78)
@@ -72,6 +73,7 @@ def nondtc_v2():
             for kzi,kwi in slices:
                 U=uf(L,kzi.item(),kwi.item(),alpha,m0=m0,t1=0.1)
                 pi_vals.append(pi(U))
+                collected_pi.append(pi(U))
             unique=len(set(pi_vals))
             alive=sum(1 for p in pi_vals if p>0)
             rng=f"[{min(pi_vals)},{max(pi_vals)}]"
@@ -103,6 +105,10 @@ def nondtc_v2():
     print(f"  Max unique pi values: {best_unique}")
     print(f"  This is non-DTC computation: program = (alpha,m0,t1)")
     print(f"  Output = pi-mode survival pattern across momentum torus.")
+    if collected_pi:
+        import numpy as np
+        print(f"  Pi-mode stats: mean={np.mean(collected_pi):.1f}  std={np.std(collected_pi):.1f}  "
+              f"range=[{np.min(collected_pi)},{np.max(collected_pi)}]")
     print(f"{'='*78}")
 
 if __name__=="__main__":

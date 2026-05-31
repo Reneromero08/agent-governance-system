@@ -47,7 +47,7 @@ class InfinityEngine:
                 for i, p in enumerate(parts):
                     if p == 'layers' and i+1 < len(parts):
                         try: layer = int(parts[i+1])
-                        except: pass
+                        except Exception: pass
                     if 'norm' in p:
                         ntype = p; break
                 if layer is not None and ntype:
@@ -108,7 +108,7 @@ class InfinityEngine:
                 for i, p in enumerate(parts):
                     if p == "layers" and i+1 < len(parts):
                         try: layer = int(parts[i+1])
-                        except: pass; break
+                        except Exception: pass; break
                 if layer is None: continue
                 
                 U = d[key].float() * d.get(key.replace(".U", ".scale"), 1.0)
@@ -127,7 +127,7 @@ class InfinityEngine:
                 for i, p in enumerate(parts):
                     if p == "layers" and i+1 < len(parts):
                         try: layer = int(parts[i+1])
-                        except: pass; break
+                        except Exception: pass; break
                 if layer is None: continue
                 layers[layer][key.replace(".U", "")] = d[key].float() @ d[svh_key].float()
         
@@ -146,7 +146,7 @@ class InfinityEngine:
             for i, p in enumerate(parts):
                 if p == "experts" and i+1 < len(parts):
                     try: expert = int(parts[i+1])
-                    except: pass
+                    except Exception: pass
                     for j in range(i+2, len(parts)):
                         if parts[j] in ("w1","w2","w3"):
                             wt_suffix = parts[j]; break
@@ -278,6 +278,7 @@ class InfinityEngine:
             # Phase rotation: x -> x * e^{i*phi} (real projection)
             phi = self.global_phase
             x = x.float() * math.cos(phi) + x.float() * math.sin(phi)
+            # NOTE: This is x*(cos+sin), not a proper 2D rotation. Scaling, not unitary.
             
             # FFN: skip (gate weight not in holo, needs 4096→2048 projection)
             ffn_norm_w = self.norm_weights.get(layer, {}).get('ffn_norm')

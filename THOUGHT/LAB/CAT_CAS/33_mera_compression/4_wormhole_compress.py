@@ -82,7 +82,7 @@ for key, val in holo.items():
     for i, p in enumerate(parts):
         if p == 'layers' and i+1 < len(parts):
             try: layer_idx = int(parts[i+1])
-            except: pass
+            except Exception: pass
         if p in ('mlp', 'self_attn', 'attn') and i+1 < len(parts):
             wt = '.'.join(parts[i:-1])
     if layer_idx is not None and wt is not None:

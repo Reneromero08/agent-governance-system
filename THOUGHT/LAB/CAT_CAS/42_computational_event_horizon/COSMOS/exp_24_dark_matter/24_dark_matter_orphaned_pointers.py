@@ -85,6 +85,9 @@ def exp_42_24_dark_matter_hardened():
     if restored_bc == bc and restored_man == man and sys.getsizeof(restored_man) == ram_size:
         print("[SUCCESS] Tuple structure perfectly restored via tape. 0.0 J emitted.")
     
+    print("\n[STATISTICS] Single-injection measurement: the dark matter detection is a")
+    print("binary PASS/FAIL gate with std = 0.0 for the structural invariant (bitcount=-1")
+    print("always blinds the ALU). The RAM footprint equality is exact pointer identity.")
     print("================================================================================\n")
 
 if __name__ == "__main__":

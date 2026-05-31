@@ -1,5 +1,6 @@
 import numpy as np
 import hashlib
+import os
 
 class CatalyticTape:
     def __init__(self, size_mb=256):
@@ -131,6 +132,9 @@ def run_experiment():
         log_and_print(f"{J:12.1f} {mean_ipr:12.6f} {max_ipr:12.6f}")
 
     log_and_print("\n--- HARDENING GATES ---")
+    # NULL MODEL: The healthy poly-A protein (W=0 at baseline) serves as
+    # the null comparison. The prion seed is detected as a deviation from
+    # this trivial folded state via IPR elevation.
     # Gate 1: At J=0 with prion seed, IPR is measurably higher than
     # a pure healthy lattice (which would have IPR ~ 1/dim = 1/200).
     # Prion seed = impurity -> localized states -> elevated IPR.
@@ -161,7 +165,7 @@ def run_experiment():
     log_and_print("[SYSTEM] Tape verified. 0 bits. 0.0 J.")
     log_and_print("="*80)
 
-    with open("THOUGHT/LAB/CAT_CAS/46_phase_bio/46_3_prion_contagion/TELEMETRY_46_3.txt", "w") as f:
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "TELEMETRY_46_3.txt"), "w") as f:
         f.write("\n".join(output_lines) + "\n")
 
 if __name__ == "__main__":

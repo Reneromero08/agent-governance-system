@@ -68,14 +68,19 @@ print("=" * 78)
 print(f"  {'n':>6}  {'ent':>5}  {'cyc':>5}  {'dep':>5}  {'state':>10}  {'overlap':>10}  {'time':>8}")
 print(f"  {'-'*65}")
 
+import numpy as np
+overlaps = []
 for n, ent, cyc, dep in [(10,5,2,2),(12,6,3,2),(14,7,2,3),(16,8,3,3),(18,9,4,3)]:
     t0 = time.perf_counter()
     try:
         initial, final = test(n, ent, cyc, dep)
         ov = overlap(initial, final)
         dt = time.perf_counter() - t0
+        overlaps.append(ov)
         print(f"  {n:>6}  {ent:>5}  {cyc:>5}  {dep:>5}  {2**n:>10,}  {ov:>10.6f}  {dt:>7.2f}s")
     except Exception as e:
         print(f"  {n:>6}  {ent:>5}  {cyc:>5}  {dep:>5}  {2**n:>10,}  {'ERR':>10}  {str(e)[:30]}")
 
+print(f"\n  Overlap stats: mean={np.mean(overlaps):.6f}  std={np.std(overlaps):.6f}  "
+      f"min={np.min(overlaps):.6f}  max={np.max(overlaps):.6f}")
 print("=" * 78)

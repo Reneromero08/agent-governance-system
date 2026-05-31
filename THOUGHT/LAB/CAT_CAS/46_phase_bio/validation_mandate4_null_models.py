@@ -23,6 +23,8 @@ import urllib.request
 import xlrd
 import time
 import hashlib
+import struct
+import os
 
 PI = np.pi
 
@@ -33,10 +35,22 @@ class CatalyticTape:
         np.random.seed(42)
         self.tape = np.random.bytes(self.size_bytes)
         self.initial_hash = hashlib.sha256(self.tape).hexdigest()
+        self.op_count = 0
+        self.op_offset = 0
     def verify(self):
         if hashlib.sha256(self.tape).hexdigest() != self.initial_hash:
             raise ValueError("Landauer heat generated!")
         return True
+    def record_operation(self, data_bytes):
+        if self.op_offset + len(data_bytes) >= self.size_bytes:
+            self.op_offset = 0
+        ba = bytearray(self.tape)
+        for i, b in enumerate(data_bytes):
+            pos = (self.op_offset + i) % self.size_bytes
+            ba[pos] ^= b
+        self.tape = bytes(ba)
+        self.op_offset = (self.op_offset + len(data_bytes)) % self.size_bytes
+        self.op_count += 1
 
 
 # ======================================================================
@@ -128,7 +142,7 @@ def bootstrap_ci(native, null, n_boot=2000):
     return np.percentile(ds, [2.5, 97.5])
 
 
-def null_model_m1():
+def null_model_m1(tape):
     print("=" * 78)
     print("  M1 NULL MODEL: Shuffled contacts + native sequence")
     print("=" * 78)
@@ -136,6 +150,7 @@ def null_model_m1():
             "1BTA","1VQB","1PGB","1APS","1FKB","1HZ6","1WLA","2RN2","1CSP","1IGD"]
 
     native_iprs = []; null_iprs = []
+    tape.record_operation(struct.pack('=i', len(pdbs)))
 
     for pdb_id in pdbs:
         pdb_text = fetch_pdb(pdb_id)
@@ -168,6 +183,10 @@ def null_model_m1():
     snr = abs(np.mean(native_iprs) / np.mean(null_iprs) - 1)
 
     d_ci = bootstrap_ci(native_iprs, null_iprs)
+
+    tape.record_operation(struct.pack('=ddd', float(np.mean(native_iprs)),
+                                      float(np.mean(null_iprs)), float(d)))
+    tape.record_operation(struct.pack('=dd', float(t), float(p)))
 
     print(f"  Proteins: {len(native_iprs)}")
     print(f"  Native IPR:  {np.mean(native_iprs):.4f} +/- {np.std(native_iprs):.4f}")
@@ -248,7 +267,7 @@ def shuffle_edges(W):
         W_shuf[rows[idx], cols[idx]] = vals[idx]
     return W_shuf
 
-def null_model_m2():
+def null_model_m2(tape):
     print()
     print("=" * 78)
     print("  M2 NULL MODEL: Degree-preserving random connectome")
@@ -257,6 +276,7 @@ def null_model_m2():
     _, _, Wc, We = fetch_connectome()
 
     native_iprs = []; null_iprs = []
+    tape.record_operation(struct.pack('=ii', Wc.shape[0], Wc.shape[0]))
     for seed in range(100, 110):
         H_nat = build_connectome_H(Wc, We, seed=seed)
         _, ev = np.linalg.eig(H_nat)
@@ -275,6 +295,10 @@ def null_model_m2():
     snr = abs(np.mean(native_iprs)/np.mean(null_iprs)-1)
     d_ci = bootstrap_ci(native_iprs, null_iprs)
 
+    tape.record_operation(struct.pack('=ddd', float(np.mean(native_iprs)),
+                                      float(np.mean(null_iprs)), float(d)))
+    tape.record_operation(struct.pack('=dd', float(t), float(p)))
+
     print(f"  Native IPR: {np.mean(native_iprs):.4f} +/- {np.std(native_iprs):.4f}")
     print(f"  Null IPR:   {np.mean(null_iprs):.4f} +/- {np.std(null_iprs):.4f}")
     print(f"  Cohen's d:  {d:.3f}  95% CI [{d_ci[0]:.3f}, {d_ci[1]:.3f}]")
@@ -283,12 +307,13 @@ def null_model_m2():
     print(f"  {'*** SIGNIFICANT ***' if p < 0.001 else 'SIGNIFICANT' if p < 0.01 else 'NOT significant'}")
     return p < 0.01
 
-
+# ======================================================================
+# M3 NULL MODEL: No nematic field (theta=0)
 # ======================================================================
 # M3 NULL MODEL: No nematic field (theta=0)
 # ======================================================================
 
-CSV_PATH = "THOUGHT/LAB/CAT_CAS/46_phase_bio/46_6_morphogenesis_oracle/cell_data/23_09_CODEX_HuBMAP_alldata_Dryad_merged.csv"
+CSV_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "46_6_morphogenesis_oracle", "cell_data", "23_09_CODEX_HuBMAP_alldata_Dryad_merged.csv")
 EPI_TYPES = {'enterocyte','goblet','paneth','neuroendocrine','ta','cycling ta'}
 
 def load_cells(n=500):
@@ -345,6 +370,12 @@ def build_morph_H(coords, use_nematic=True, state="separated"):
         if ip is not None: H[ip,ip] += 1j*5.0
         if im is not None: H[im,im] += -1j*5.0
     elif state == "annihilated":
+        # HARDCODED INVARIANT: residual = 5.0 is hardcoded by state. This should be
+        # dynamically computed from the nematic field gradient and defect separation
+        # rather than fixed at 5.0 * 0.3 = 1.5. The constant 5.0 represents the active
+        # stress amplitude (1j*5.0 in separated state) and 0.3 is the annihilation
+        # attenuation factor. Both are physical invariants of HuBMAP colon morphology
+        # that should be derived from the actual cell density and tissue curvature.
         residual = 5.0 * 0.3
         for i in range(N):
             xi, yi = cn[i,0], cn[i,1]
@@ -356,7 +387,7 @@ def build_morph_H(coords, use_nematic=True, state="separated"):
         H[i,i] += rng.uniform(-0.01,0.01) + 1j*rng.uniform(-0.005,0.005)
     return H
 
-def null_model_m3():
+def null_model_m3(tape):
     print()
     print("=" * 78)
     print("  M3 NULL MODEL: No nematic field (theta=0)")
@@ -366,6 +397,7 @@ def null_model_m3():
 
     native_iprs = []
     null_iprs = []
+    tape.record_operation(struct.pack('=i', len(cells)))
     for state in ["flat", "separated", "annihilated"]:
         H_nat = build_morph_H(cells, use_nematic=True, state=state)
         _, ev = np.linalg.eig(H_nat)
@@ -387,6 +419,8 @@ def null_model_m3():
     # Key test: does nematic field amplify the defect signal?
     sep_ratio = native_iprs[1] / null_iprs[1] if null_iprs[1] > 0 else 0
     ann_ratio = native_iprs[2] / null_iprs[2] if null_iprs[2] > 0 else 0
+    tape.record_operation(struct.pack('=dd', sep_ratio, ann_ratio))
+    tape.record_operation(struct.pack('=ddd', native_iprs[0], native_iprs[1], native_iprs[2]))
     print(f"\n  Nematic field amplifies separated IPR: {sep_ratio:.2f}x")
     print(f"  Nematic field amplifies annihilated IPR: {ann_ratio:.2f}x")
     # Honest: at 50um separation on real HuBMAP cells, the nematic field
@@ -416,9 +450,9 @@ def main():
     tape = CatalyticTape()
     t0 = time.time()
 
-    m1 = null_model_m1()
-    m2 = null_model_m2()
-    m3 = null_model_m3()
+    m1 = null_model_m1(tape)
+    m2 = null_model_m2(tape)
+    m3 = null_model_m3(tape)
 
     tape.verify()
     t_total = time.time() - t0

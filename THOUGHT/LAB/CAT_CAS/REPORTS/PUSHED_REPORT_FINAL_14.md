@@ -8,13 +8,22 @@ The `CAT_CAS` protocol has completed the final ascension. The remaining 14 modul
 **The Exploit:** We bypassed the need for a Quantum Computer to run Shor's algorithm. Instead of running a quantum Fourier transform, we routed the modular exponentiation matrix $U$ into the continuous Eigen-Space of the Feistel SPN.
 **The Proof:** By extracting the spectral phases (Eigen-Angles), we perfectly extracted the exact integer period $r$ in $O(1)$ constant time, allowing instantaneous factorization of the RSA-equivalent modulus.
 
-### 2. `10` Catalytic KV Cache (Infinite Context in O(1) VRAM)
-**The Exploit:** The bottleneck of all modern LLMs is the $O(N)$ memory scaling of the KV cache. We eliminated the cache.
-**The Proof:** By utilizing Linearized Entanglement Routing, we compressed $100,000$ tokens of Keys and Values into a single fixed $O(1)$ Rank-1 phase vector. The compression ratio scaled to $3076.9\times$ and effectively approaches $\infty$, with $2.83 \times 10^{-16}$ MSE fidelity. 
+### 2. `10` Catalytic KV Cache (12.5x Compressed KV Cache)
+**The Exploit:** Standard KV caches grow linearly with sequence length. We compressed the cache via SVD spatial projection + Heavy-Hitter temporal pruning on a catalytic tape.
+**Verified Output (2026-05-30):**
+- Maximum compression ratio: **12.5x** (0.0312 MB catalytic vs 0.3906 MB standard)
+- Attention fidelity (avg cosine similarity): **99.27%**
+- Tape restored: SUCCESS. Peak VRAM growth: 1.49 MB (flat).
+- 8x spatial compression (d_model=256, k_dim=32) + H2O temporal pruning (128 max, 64 active).
+- Run command: `python 10_catalytic_kv_cache/run_kv_experiment.py`
 
-### 3. `13` Orthogonal Multimodel (Absolute 0.00e+00 Cross-Talk)
-**The Exploit:** We eliminated the $1.98 \times 10^{-16}$ floating-point noise floor in multi-model multiplexing. 
-**The Proof:** Utilizing integer-quantized Lattice Holography (Walsh-Hadamard signature matrices), we perfectly multiplexed $1,000$ independent model architectures into a single shared weight tensor. Cross-talk noise was mathematically proven to be exactly $0.000000$ integers. Total perfect isolation.
+### 3. `13` Orthogonal Multimodel (2-Model QR Subspace Sharing)
+**The Exploit:** Two distinct model architectures share a single 2MB tape via QR-orthogonal projections.
+**Verified Output (2026-05-30):**
+- Base experiment (2 models, QR subspaces): cross-talk **1.98e-16**. Works correctly.
+- 1000 interleaved cycles: 100% correct outputs, tape restored. Subspace drift: 0.00e+00.
+- The `1_infinity_multimodel.py` claim of 0.000000 cross-talk at 1000 models via Hadamard matrices is WRONG. The extraction formula `X_signed @ W_shared` is mathematically incorrect. The 1024x1024 int64 Hadamard computation also times out (>60s).
+- Run command: `python 13_orthogonal_multimodel/experiment.py`
 
 ### 4. `16` Catalytic 27B Inference (Zero-Latency Generation)
 **The Exploit:** Autoregressive token generation is an archaic $O(N)$ sequential latency limit. We broke it.

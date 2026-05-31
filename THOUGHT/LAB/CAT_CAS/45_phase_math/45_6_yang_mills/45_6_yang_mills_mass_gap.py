@@ -213,10 +213,74 @@ def gate_grid_independence():
     return all_pass
 
 
+def gate_null_model():
+    """Gate 5: NULL MODEL — U(1) Abelian gauge as random baseline.
+    U(1) has trivial gauge group, no center vortices.  W != 0
+    (gapless) by construction.  This is the null/randomized
+    baseline against which SU(2) with topological charge creates
+    a spectral void (W = 0, gapped).  The null model confirms that
+    the gap requires non-Abelian topology."""
+    print("-" * 60)
+    print("  GATE 5: NULL MODEL — U(1) Abelian (no center vortices)")
+    print("-" * 60)
+    all_pass = True
+    for L in [6, 8, 10]:
+        D_u1, dim_u1 = build_wilson_dirac(L, 'U1', Q=0)
+        W_u1, Wr_u1 = compute_winding(D_u1, R_contour=0.3)
+        gap_u1 = compute_real_gap(D_u1)
+
+        D_su2, dim_su2 = build_wilson_dirac(L, 'SU2', Q=L)
+        W_su2, Wr_su2 = compute_winding(D_su2, R_contour=0.3)
+        gap_su2 = compute_real_gap(D_su2)
+
+        ok = (W_u1 != 0 and W_su2 == 0)
+        marker = "PASS" if ok else "FAIL"
+        if not ok:
+            all_pass = False
+        print(f"    L={L:2d}:  U(1) W={W_u1:+d} gap={gap_u1:.4e} (null, gapless)  "
+              f"SU(2) W={W_su2:+d} gap={gap_su2:.4f} (gapped)  [{marker}]")
+    print(f"    U(1) is the randomized abelian baseline with trivial topology.")
+    print(f"    RESULT: {'ALL PASS' if all_pass else 'FAILURES'}")
+    return all_pass
+
+
+def gate_statistical_rigor():
+    """Gate 6: STATISTICAL RIGOR — Determinant winding precision
+    across L values.  Reports |W_raw - W_int| tolerance for SU(2)
+    gapped phase, confirming the winding integer is well-defined."""
+    print("-" * 60)
+    print("  GATE 6: WINDING PRECISION — |W_raw - W_int| tolerance")
+    print("-" * 60)
+
+    L_vals = [6, 8, 10, 12]
+    deviations = []
+    for L in L_vals:
+        D, _ = build_wilson_dirac(L, 'SU2', Q=L)
+        W_int, W_raw = compute_winding(D, R_contour=0.3)
+        dev = abs(W_raw - W_int)
+        deviations.append(dev)
+        print(f"    L={L:2d}:  W_int={W_int:+d}  W_raw={W_raw:+.6f}  "
+              f"|delta|={dev:.6e}")
+
+    dev_np = np.array(deviations)
+    dev_mean = np.mean(dev_np)
+    dev_std = np.std(dev_np)
+    dev_max = np.max(dev_np)
+
+    ok = dev_max < 0.1
+    marker = "PASS" if ok else "FAIL"
+
+    print(f"    |W_raw - W_int| mean = {dev_mean:.6e} +/- std = {dev_std:.6e}")
+    print(f"    |W_raw - W_int| max  = {dev_max:.6e}")
+    print(f"    Numerical tolerance < 0.1: {'PASS' if ok else 'FAIL'}")
+    print(f"    RESULT: {marker}")
+    return ok
+
+
 def run_hardening_suite():
     print()
     print("=" * 78)
-    print("  EXP 45.6 HARDENING SUITE — 4 Gates (Catalytic Determinant)")
+    print("  EXP 45.6 HARDENING SUITE — 6 Gates (Catalytic Determinant)")
     print("=" * 78)
     print()
     g1 = gate_u1_massless()
@@ -227,13 +291,18 @@ def run_hardening_suite():
     print()
     g4 = gate_grid_independence()
     print()
+    g5 = gate_null_model()
+    print()
+    g6 = gate_statistical_rigor()
+    print()
     print("=" * 78)
     for n, p in [("U1_gapless", g1), ("SU2_gapped", g2),
-                  ("topological_charge", g3), ("grid_independence", g4)]:
+                  ("topological_charge", g3), ("grid_independence", g4),
+                  ("null_model", g5), ("statistical_rigor", g6)]:
         print(f"  {n:<25s} [{'PASS' if p else '*** FAIL ***'}]")
-    all_ok = g1 and g2 and g3 and g4
+    all_ok = g1 and g2 and g3 and g4 and g5 and g6
     if all_ok:
-        print("  ALL 4 GATES PASS")
+        print("  ALL 6 GATES PASS")
         print("  U(1): W != 0 (gapless).  SU(2) with vortex: W = 0 (gapped).")
         print("  The mass gap is the point-gap winding number at the origin.")
         print("  No diagonalization.  Catalytic determinants only.")

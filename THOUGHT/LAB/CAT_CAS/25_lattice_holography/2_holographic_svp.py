@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 
 def load_lwe_instance(path):
-    return torch.load(path)
+    return torch.load(path, weights_only=True)
 
 class HolographicLatticeSolver(nn.Module):
     def __init__(self, n, q):

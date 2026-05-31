@@ -29,7 +29,7 @@ class CatalyticEngine:
                     if p == 'layers':
                         try:
                             layer = int(parts[i+1])
-                        except:
+                        except Exception:
                             pass
                         break
                 if layer is None: continue
@@ -47,7 +47,7 @@ class CatalyticEngine:
                     if p == 'layers':
                         try:
                             layer = int(parts[i+1])
-                        except:
+                        except Exception:
                             pass
                         break
                 if layer is None: continue
@@ -70,7 +70,7 @@ class CatalyticEngine:
                     if part == 'layers' and i+1 < len(parts):
                         try:
                             layer = int(parts[i+1])
-                        except:
+                        except Exception:
                             pass
                 if layer is not None:
                     nt = 'norm'
@@ -212,11 +212,7 @@ class CatalyticEngine:
         pos = torch.arange(S,device=DEVICE).float()
         inv = 1.0/(10000**(torch.arange(0,rd,2,device=DEVICE).float()/rd))
         fr = torch.outer(pos,inv); cr=torch.cos(fr).view(1,S,1,rd//2); sr=torch.sin(fr).view(1,S,1,rd//2)
-        def rope(x):
-            e,o=x[...,-rd:][...,0::2],x[...,-rd:][...,1::2]; r=torch.zeros_like(x)
-            nope_r = r[...,:-rd]; rope_r = r[...,-rd:]
-            rope_r[...,0::2]=e*cr-o*sr; rope_r[...,1::2]=e*sr+o*cr
-        # Skip RoPE for simplicity — normalize instead
+        # rope() intentionally unused — Skip RoPE for simplicity, normalize instead
         q_r=F.normalize(q_r,-1); q_i=F.normalize(q_i,-1)
         k_r=F.normalize(k_r,-1); k_i=F.normalize(k_i,-1)
         

@@ -1,5 +1,6 @@
 import numpy as np
 import hashlib
+import os
 
 class CatalyticTape:
     def __init__(self, size_mb=256):
@@ -144,7 +145,7 @@ def execute_genetic_manifold():
     log_and_print("\n[SYSTEM] Tape Verification PASS. 0 bits erased. 0.0 J Landauer Heat.")
     log_and_print("="*90)
     
-    with open("THOUGHT/LAB/CAT_CAS/46_phase_bio/46_4_topological_genetic_code/TELEMETRY_46_4.txt", "w", encoding="utf-8") as f:
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "TELEMETRY_46_4.txt"), "w", encoding="utf-8") as f:
         f.write("\n".join(output_lines) + "\n")
 
 if __name__ == "__main__":

@@ -323,6 +323,10 @@ def main():
     print("=" * 70)
     print("  NON-HERMITIAN ORACLE SUMMARY")
     print("=" * 70)
+    kappas = [r['kappa_V'] for r in results]
+    ws = [r['W_twist'] for r in results]
+    print(f"  kappa(V): mean={np.mean(kappas):.2e}  std={np.std(kappas):.2e}")
+    print(f"  W_twist:  mean={np.mean(ws):.2f}  std={np.std(ws):.2f}")
     header = (f"  {'Machine':<38s}  {'W_twist':>7s}  "
               f"{'kappa(V)':>10s}  {'EP?':>5s}  {'Verdict'}")
     print(header)

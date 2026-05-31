@@ -35,7 +35,7 @@ def find_expert_keys(expert_idx=0):
             for i, p in enumerate(parts):
                 if p == "layers":
                     try: layer = int(parts[i+1])
-                    except: pass
+                    except Exception: pass
                 if p == "experts":
                     for j in range(i+2, len(parts)):
                         if parts[j] in ("w1", "w2", "w3"):

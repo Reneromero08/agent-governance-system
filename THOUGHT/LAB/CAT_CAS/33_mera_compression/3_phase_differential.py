@@ -143,7 +143,7 @@ for holo_path, label in [(HOLO_05B, "0.5B k128")]:
         for i, p in enumerate(parts):
             if p == 'layers' and i+1 < len(parts):
                 try: layer_idx = int(parts[i+1])
-                except: pass
+                except Exception: pass
             if p in ('mlp', 'self_attn', 'attn') and i+1 < len(parts):
                 wt = '.'.join(parts[i:-1])
         if layer_idx is not None and wt is not None:
@@ -172,7 +172,7 @@ for key, val in torch.load(HOLO_05B, weights_only=False).items():
         for i, p in enumerate(parts):
             if p == 'layers' and i+1 < len(parts):
                 try: tensors[int(parts[i+1])] = val
-                except: pass
+                except Exception: pass
 
 sorted_l = sorted(tensors.keys())
 prev = tensors[sorted_l[0]]

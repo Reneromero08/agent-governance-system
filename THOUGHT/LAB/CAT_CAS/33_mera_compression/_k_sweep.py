@@ -59,8 +59,8 @@ for wt in ["w1"]:  # just w1 for chain
 print(f"\n{'='*70}")
 print(f"K SWEEP RESULTS")
 print(f"{'='*70}")
-print(f"{'K':>5} {'fid_w1':>8} {'fid_w2':>8} {'fid_w3':>8} {'mean_fid':>9} {'GB':>8} {'fid_chain':>10} {'stable':>8}")
-print(f"{'-'*70}")
+print(f"{'K':>5} {'fid_w1':>8} {'fid_w2':>8} {'fid_w3':>8} {'mean_fid':>9} {'std_fid':>8} {'GB':>8} {'fid_chain':>10} {'stable':>8}")
+print(f"{'-'*78}")
 
 results = []
 for k in K_VALUES:
@@ -78,6 +78,7 @@ for k in K_VALUES:
         del U, S, Vh, Uk, Vhk, W_recon
     
     mean_fid = np.mean(list(fids.values()))
+    std_fid = np.std(list(fids.values()))
     
     # Storage estimate (INT8, deduplicated SVh)
     # U tensors: 33_792 * m * k bytes (INT8)
@@ -108,12 +109,12 @@ for k in K_VALUES:
     stable = "YES" if mean_fid ** LAYERS > 1e-6 else "NO"
     
     results.append({
-        'k': k, 'fids': fids, 'mean_fid': mean_fid,
+        'k': k, 'fids': fids, 'mean_fid': mean_fid, 'std_fid': std_fid,
         'gb': total_gb, 'chain_fid': chain_fid, 'stable': stable
     })
     
     print(f"{k:>5} {fids['w1']:>8.4f} {fids['w2']:>8.4f} {fids['w3']:>8.4f} "
-          f"{mean_fid:>9.4f} {total_gb:>8.1f} {chain_fid:>10.4f} {stable:>8}")
+          f"{mean_fid:>9.4f} {std_fid:>8.4f} {total_gb:>8.1f} {chain_fid:>10.4f} {stable:>8}")
 
 # Summary
 print(f"\n{'='*70}")
@@ -121,7 +122,7 @@ print(f"SWEET SPOT ANALYSIS")
 print(f"{'='*70}")
 for r in results:
     decay = r['mean_fid'] ** LAYERS
-    print(f"  K={r['k']:>3}: fid={r['mean_fid']:.4f}  "
+    print(f"  K={r['k']:>3}: fid={r['mean_fid']:.4f}+/-{r['std_fid']:.4f}  "
           f"fid^{LAYERS}={decay:.2e}  "
           f"{r['gb']:.1f} GB  "
           f"chain={r['chain_fid']:.4f}  "

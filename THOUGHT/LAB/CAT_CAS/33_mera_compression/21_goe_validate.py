@@ -72,6 +72,7 @@ def test_goe(wormhole_path):
     print("-" * 70)
     
     all_ratios = []
+    all_vals = []
     for wt, g in sorted(groups.items()):
         R_list = [g['rots'][l].float() for l in sorted(g['rots'].keys())]
         if not R_list:
@@ -82,6 +83,7 @@ def test_goe(wormhole_path):
             continue
         
         all_ratios.append((wt, r_mean, n))
+        all_vals.append(r_mean)
         
         # GOE: r ~ 0.53, Poisson: r ~ 0.39
         if r_mean > 0.48:
@@ -95,8 +97,9 @@ def test_goe(wormhole_path):
     
     if all_ratios:
         avg_r = np.mean([r for _, r, _ in all_ratios])
+        std_r = np.std(all_vals)
         goe_types = sum(1 for _, r, _ in all_ratios if r > 0.48)
-        print(f"\n  Mean spacing ratio: {avg_r:.4f}")
+        print(f"\n  Mean spacing ratio: {avg_r:.4f}  std={std_r:.4f}")
         print(f"  GOE (r > 0.48): {goe_types}/{len(all_ratios)} types")
         print(f"  Theoretical GOE: 0.5300")
         print(f"  Theoretical Poisson: 0.3900")

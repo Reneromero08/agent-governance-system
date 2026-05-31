@@ -22,7 +22,7 @@ for i, k in enumerate(u_keys[:5]):
         if tag in parts:
             idx = parts.index(tag)
             try: layer = int(parts[idx+1])
-            except: layer = None
+            except Exception: layer = None
             print(f'  Tag {tag}: idx={idx} layer={layer}')
             
             for t in cfg['types']:

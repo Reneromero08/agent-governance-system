@@ -55,7 +55,7 @@ def infinity_thermo():
     print(f"  Restoration MSE:        {mse.item():.6e}")
     print(f"  Total Heat Dissipated:  {heat_dissipated:.6f} Joules")
     
-    if heat_dissipated == 0.0 and mse == 0.0:
+    if abs(heat_dissipated) < 1e-9 and abs(mse.item()) < 1e-9:
         print("\n  SUCCESS: Computation achieved with Absolute Zero Heat Dissipation.")
 
 if __name__ == "__main__":

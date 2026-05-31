@@ -46,7 +46,7 @@ class UnifiedEngine:
             for i, p in enumerate(parts):
                 if p == 'layers':
                     try: layer = int(parts[i+1])
-                    except: pass
+                    except Exception: pass
                 if 'norm' in p.lower():
                     ntype = p
             if layer is not None:
@@ -72,7 +72,7 @@ class UnifiedEngine:
                 for i, p in enumerate(parts):
                     if p == 'layers':
                         try: layer = int(parts[i+1])
-                        except: pass; break
+                        except Exception: pass; break
                 if layer is None: continue
                 U = d[k].float() * d.get(k.replace('.U','.scale'), 1.0)
                 wt = d['_svh_ref'].get(k, '').replace('.weight.weight','.weight')
@@ -88,7 +88,7 @@ class UnifiedEngine:
                 for i, p in enumerate(parts):
                     if p == 'layers':
                         try: layer = int(parts[i+1])
-                        except: pass; break
+                        except Exception: pass; break
                 if layer is None: continue
                 layers[layer][k.replace('.U','')] = d[k].float() @ d[sk].float()
         return dict(layers)
@@ -111,7 +111,7 @@ class UnifiedEngine:
         try:
             _, S, _ = torch.linalg.svd(x.float().reshape(-1, x.shape[-1]), full_matrices=False)
             return (S[0] / S[1]).item() if len(S) > 1 and S[1] > 1e-12 else 1.0
-        except: return 1.0
+        except Exception: return 1.0
     
     # ==== HD BINDING: RMSNorm ====
     def _norm(self, x, layer):

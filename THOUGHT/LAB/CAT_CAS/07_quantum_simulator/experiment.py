@@ -148,7 +148,7 @@ def run_experiment():
     # ---- Post-circuit snapshot ------------------------------------ #
     post = sim.sample_amplitudes(state, probes)
     prob_sample_post = sampled_probability(state, N_STATES)
-    conserved = (prob_sample_post == prob_sample_pre)
+    conserved = abs(prob_sample_post - prob_sample_pre) < 1e-12
     scrambled = sum(1 for idx in probes if post[idx] != pre[idx])
     print(f"\n[Measurement] Sampled |psi|^2 conservation: "
           f"{'EXACT' if conserved else 'VIOLATED'}")

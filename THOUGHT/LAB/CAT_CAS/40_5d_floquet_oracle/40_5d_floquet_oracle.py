@@ -62,6 +62,7 @@ def run_oracle(L=4,n_k=4):
     print("="*78)
     print(f"  L={L}  N={(L*L*4)}  slices={n_k*n_k}")
 
+    all_nz = []
     for t1 in [0.0,0.05,0.1,0.2]:
         for g in [0.0,0.5]:
             total=0; nz=0
@@ -72,7 +73,10 @@ def run_oracle(L=4,n_k=4):
                     total+=n
                     if n>0: nz+=1
             v="LOOPS" if nz>0 else "melted"
+            all_nz.append(nz)
             print(f"  t1={t1:.2f} Gamma={g:.1f}: pi-modes={total:4d} active={nz:2d}/{n_k*n_k}  {v}")
+    print(f"\n  Active slice stats: mean={np.mean(all_nz):.1f}  std={np.std(all_nz):.1f}  "
+          f"min={np.min(all_nz)}  max={np.max(all_nz)}")
 
     print(f"\n  Three-step non-Clifford Floquet: G2(pi/2)*G1(pi/2)*G5(pi/2)*exp(-iH)")
     print(f"  Pi-modes at z=-1 survive hopping, annihilated by uniform Gamma>=0.5")

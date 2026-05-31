@@ -81,7 +81,7 @@ for key in expert_keys:
     for i, p in enumerate(parts):
         if p == "layers" and i+1 < len(parts):
             try: layer = int(parts[i+1])
-            except: pass
+            except Exception: pass
             break
     
     if layer is None: continue

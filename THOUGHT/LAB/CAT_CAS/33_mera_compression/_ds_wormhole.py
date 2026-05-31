@@ -57,7 +57,7 @@ for key, val in holo.items():
     for i, p in enumerate(parts):
         if p == 'experts' and i+1 < len(parts):
             try: expert = int(parts[i+1])
-            except: pass
+            except Exception: pass
             break
     if expert == 0:
         slim[key] = val.half() if val.dtype != torch.float16 else val
@@ -76,7 +76,7 @@ for key, val in slim.items():
     for i, p in enumerate(parts):
         if p == 'layers' and i+1 < len(parts):
             try: layer = int(parts[i+1])
-            except: pass
+            except Exception: pass
         if p == 'experts' and i+1 < len(parts):
             for j in range(i+3, len(parts)-1):
                 if parts[j] in ('w1', 'w2', 'w3'):

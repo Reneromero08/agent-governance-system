@@ -31,6 +31,9 @@ import math, sys, os
 R_CONVERGENT = 0.89    # Above: trust rotation, close gate
 R_CRITICAL  = 0.70     # Below: full residual, re-anchor needed
 EPSILON     = 0.01     # Temperature floor (prevents division by zero)
+# NULL MODEL: R=0.5 returned by compute_resonance when no teacher eigenbasis
+# is available; this is the randomized/no-alignment baseline against which
+# the cybernetic gating is measured.
 
 
 class CyberneticState:
@@ -231,7 +234,7 @@ class TuneableHoloModel:
             for i, p in enumerate(parts):
                 if p in ('layers', 'blocks') and i + 1 < len(parts):
                     try: li = int(parts[i+1])
-                    except: pass; break
+                    except Exception: pass; break
             if wt and li is not None:
                 hooks.append(module.register_forward_hook(make_hook(wt, li)))
         
@@ -286,7 +289,7 @@ class TuneableHoloModel:
             for i, p in enumerate(parts):
                 if p in ('layers', 'blocks') and i + 1 < len(parts):
                     try: li = int(parts[i+1])
-                    except: pass; break
+                    except Exception: pass; break
             if wt is None or li is None:
                 continue
             
@@ -582,7 +585,7 @@ class TruthAnchor:
                         wt = '.'.join(parts[idx+2:-1])
                         hf_key = key.replace('.U', '.weight')
                         all_layers.append((wt, l, hf_key, None))
-                    except:
+                    except Exception:
                         pass
         
         sampled = random.sample(all_layers, min(n_samples, len(all_layers)))
@@ -677,7 +680,7 @@ def safe_auto_tune(teacher_model, student_tuner, calibration_texts, tokenizer,
     try:
         from _paths import CAVITATED_27B
         teacher_holo = torch.load(str(CAVITATED_27B), map_location='cpu', weights_only=True)
-    except:
+    except Exception:
         teacher_holo = {}
     
     print(f"\n[Truth Anchor] External ground truth verification (Lindblad)...")

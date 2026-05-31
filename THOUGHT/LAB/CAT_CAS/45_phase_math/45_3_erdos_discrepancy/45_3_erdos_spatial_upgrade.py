@@ -311,10 +311,97 @@ def harden_grid_and_params():
     return all_pass
 
 
+def gate_null_model_shuffled():
+    """
+    Gate 4: NULL MODEL — Shuffled periodic sequence.
+    Permuting a periodic (extended) sequence destroys the spatial
+    structure. The shuffled baseline should produce intermediate
+    IPR scaling (critical/fractal) between extended Bloch waves
+    and Anderson localized states.  This randomized null confirms
+    that the spatial sensor requires non-trivial structure.
+    """
+    print("-" * 60)
+    print("  GATE 4: NULL MODEL — Shuffled Periodic Sequence")
+    print("-" * 60)
+
+    N_vals = [100, 200, 400, 800]
+    per_seq = seq_periodic(800)
+    rng = np.random.RandomState(42)
+    shuf_seq = per_seq.copy()
+    rng.shuffle(shuf_seq)
+
+    def seq_shuffled(N):
+        return shuf_seq[:N]
+
+    alpha, r_sq, data = compute_scaling_exponent(seq_shuffled, N_vals)
+
+    # Periodic extended reference
+    alpha_per, _, _ = compute_scaling_exponent(seq_periodic, N_vals)
+
+    # Shuffled should be intermediate (not extended, not fully localized)
+    ok = alpha < 0.85
+    marker = "PASS" if ok else "FAIL"
+    state_type = ("EXTENDED" if alpha > 0.85 else
+                  "LOCALIZED" if alpha < 0.3 else "CRITICAL")
+    ipr_str = ", ".join([f"N={n}: {ipr:.4f}" for n, ipr in data])
+    print(f"    Shuffled periodic (null):  alpha = {alpha:.4f}  "
+          f"R2 = {r_sq:.4f}  [{state_type}]  [{marker}]")
+    print(f"      {ipr_str}")
+    print(f"    Periodic (reference):      alpha = {alpha_per:.4f}")
+    print(f"    Shuffling destroys spatial structure: alpha drops from "
+          f"{alpha_per:.3f} to {alpha:.3f}")
+    print(f"    RESULT: {marker}")
+    return ok
+
+
+def gate_statistical_rigor():
+    """
+    Gate 5: STATISTICAL RIGOR — Bootstrap confidence intervals
+    on scaling exponents for periodic and random sequences.
+    """
+    print("-" * 60)
+    print("  GATE 5: BOOTSTRAP CONFIDENCE — IPR scaling exponents")
+    print("-" * 60)
+
+    N_vals = [100, 200, 400, 800]
+    n_bootstrap = 10
+    alpha_per_samples = []
+    alpha_rnd_samples = []
+
+    for seed in range(n_bootstrap):
+        alpha_per, _, _ = compute_scaling_exponent(seq_periodic, N_vals,
+                                                    random_base_seed=seed + 500)
+        alpha_per_samples.append(alpha_per)
+        alpha_rnd, _, _ = compute_scaling_exponent(
+            lambda N, s=seed: seq_random(N, seed=s + 600), N_vals,
+            random_base_seed=seed + 600)
+        alpha_rnd_samples.append(alpha_rnd)
+
+    per_mean = np.mean(alpha_per_samples)
+    per_std = np.std(alpha_per_samples)
+    rnd_mean = np.mean(alpha_rnd_samples)
+    rnd_std = np.std(alpha_rnd_samples)
+
+    cohen_d = (per_mean - rnd_mean) / (np.sqrt((per_std**2 + rnd_std**2) / 2.0) + 1e-15)
+    ok = cohen_d > 1.0
+    marker = "PASS" if ok else "FAIL"
+
+    print(f"    Bootstrap samples:          n = {n_bootstrap}")
+    print(f"    Periodic:  alpha mean = {per_mean:.4f} +/- std = {per_std:.4f}")
+    print(f"      CI [95%]: [{per_mean - 1.96*per_std:.4f}, "
+          f"{per_mean + 1.96*per_std:.4f}]")
+    print(f"    Random:    alpha mean = {rnd_mean:.4f} +/- std = {rnd_std:.4f}")
+    print(f"      CI [95%]: [{rnd_mean - 1.96*rnd_std:.4f}, "
+          f"{rnd_mean + 1.96*rnd_std:.4f}]")
+    print(f"    Cohen's d = {cohen_d:.3f}  (large effect > 1.0)")
+    print(f"    RESULT: {marker}")
+    return ok
+
+
 def run_hardening_suite():
     print()
     print("=" * 78)
-    print("  EXP 45.3 UPGRADE — HARDENING SUITE (3 Gates)")
+    print("  EXP 45.3 UPGRADE — HARDENING SUITE (5 Gates)")
     print("=" * 78)
     print()
     g1 = harden_sequence_independence()
@@ -323,17 +410,23 @@ def run_hardening_suite():
     print()
     g3 = harden_grid_and_params()
     print()
+    g4 = gate_null_model_shuffled()
+    print()
+    g5 = gate_statistical_rigor()
+    print()
     print("=" * 78)
     print("  HARDENING SUITE — FINAL INTEGRITY REPORT")
     print("=" * 78)
     for n, p in [("sequence_localization+counterex", g1),
                   ("periodic_extended", g2),
-                  ("parameter_grid_sweep", g3)]:
+                  ("parameter_grid_sweep", g3),
+                  ("null_model_shuffled", g4),
+                  ("statistical_rigor", g5)]:
         print(f"  {n:<35s} [{'PASS' if p else '*** FAIL ***'}]")
     print(f"  {'-' * 50}")
-    all_ok = g1 and g2 and g3
+    all_ok = g1 and g2 and g3 and g4 and g5
     if all_ok:
-        print("  ALL 3 GATES PASS")
+        print("  ALL 5 GATES PASS")
     else:
         print("  *** HARDENING FAILED ***")
     print("=" * 78)

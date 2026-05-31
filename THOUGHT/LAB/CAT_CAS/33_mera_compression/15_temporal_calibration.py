@@ -45,6 +45,7 @@ def compute_calibration(catalytic_path, wormhole_path, device='cpu'):
     CAT_PREFIX = 'model.language_model.layers'
     calibration = {}  # {wt: per_layer_fidelity [n_layers]}
     
+    all_fids = []
     for wt, g in sorted(groups.items()):
         all_layers = [g['first_l']] + sorted(g['rots'].keys())
         fidelities = []
@@ -74,9 +75,15 @@ def compute_calibration(catalytic_path, wormhole_path, device='cpu'):
             import numpy as np
             mean_fid = np.mean(fidelities)
             min_fid = np.min(fidelities)
+            std_fid = np.std(fidelities)
             # Store mean fidelity + decay info
-            calibration[wt] = {'mean': mean_fid, 'min': min_fid, 'n': len(fidelities)}
+            calibration[wt] = {'mean': mean_fid, 'min': min_fid, 'std': std_fid, 'n': len(fidelities)}
+            all_fids.extend(fidelities)
     
+    if all_fids:
+        import numpy as np
+        print(f"  Global fidelity: mean={np.mean(all_fids):.4f}  std={np.std(all_fids):.4f}  "
+              f"min={np.min(all_fids):.4f}")
     del cat, worm
     return calibration
 
@@ -121,7 +128,7 @@ def calibrate_and_merge(catalytic_path, wormhole_llm_path, output_path):
     
     print(f"\nPer-layer fidelity calibration ({len(calibration)} weight types):")
     for wt, info in sorted(calibration.items()):
-        print(f"  {wt:<30} mean_fid={info['mean']:.4f} min={info['min']:.4f} n={info['n']}")
+        print(f"  {wt:<30} mean_fid={info['mean']:.4f} std={info['std']:.4f} min={info['min']:.4f} n={info['n']}")
     
     # Load wormhole into tuneable session
     graph_mod = importlib.import_module("9_catalytic_graph_loader")

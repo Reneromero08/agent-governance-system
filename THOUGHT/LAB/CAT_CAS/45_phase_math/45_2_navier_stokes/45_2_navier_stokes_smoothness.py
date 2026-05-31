@@ -345,21 +345,147 @@ def harden_blowup_limit(N, m0, tz, kz_test):
     return all_pass
 
 
+# ======================================================================
+# NULL MODEL — Random Hamiltonian Without Weyl Nodes
+# ======================================================================
+
+def null_random_hamiltonian_chern(N, kz_test, seed=99):
+    """
+    NULL MODEL: Random 2x2 Hamiltonian without any Weyl node structure.
+    H(k) = random complex matrix at each k-point.
+    A randomized Hamiltonian with no topological band structure should
+    NOT produce a robustly integer-quantized Chern invariant across
+    grid resolutions — providing a random baseline for comparison.
+    """
+    rng = np.random.RandomState(seed)
+    kx_vals = 2.0 * PI * np.arange(N, dtype=np.float64) / N
+    ky_vals = 2.0 * PI * np.arange(N, dtype=np.float64) / N
+
+    all_evecs = torch.zeros((N, N, 2, 2), dtype=torch.complex128)
+    all_evals = torch.zeros((N, N, 2), dtype=torch.complex128)
+
+    for i in range(N):
+        for j in range(N):
+            H_real = rng.randn(2, 2)
+            H_imag = rng.randn(2, 2)
+            H = torch.tensor(H_real + 1j * H_imag, dtype=torch.complex128)
+            e, v = torch.linalg.eig(H)
+            all_evals[i, j] = e
+            all_evecs[i, j] = v
+
+    idx0 = torch.argsort(torch.imag(all_evals[0, 0]))
+    band_map = torch.zeros((N, N), dtype=torch.int64)
+    band_map[0, 0] = idx0[0]
+    for i in range(N):
+        for j in range(N):
+            if i == 0 and j == 0:
+                continue
+            ref_evecs = []
+            if i > 0:
+                ref_evecs.append(all_evecs[i-1, j, :, band_map[i-1, j]])
+            if j > 0:
+                ref_evecs.append(all_evecs[i, j-1, :, band_map[i, j-1]])
+            best_overlap = -1.0
+            best_b = 0
+            for b in [0, 1]:
+                v_curr = all_evecs[i, j, :, b]
+                total_ovlp = 0.0
+                for v_ref in ref_evecs:
+                    total_ovlp += abs(torch.dot(v_curr.conj(), v_ref)).item()
+                if total_ovlp > best_overlap:
+                    best_overlap = total_ovlp
+                    best_b = b
+            band_map[i, j] = best_b
+
+    evecs_tracked = torch.zeros((N, N, 2), dtype=torch.complex128)
+    for i in range(N):
+        for j in range(N):
+            evecs_tracked[i, j] = all_evecs[i, j, :, band_map[i, j]]
+
+    Ux = torch.zeros((N, N), dtype=torch.complex128)
+    Uy = torch.zeros((N, N), dtype=torch.complex128)
+    for i in range(N):
+        ip1 = (i + 1) % N
+        for j in range(N):
+            jp1 = (j + 1) % N
+            overlap_x = torch.dot(evecs_tracked[i, j].conj(), evecs_tracked[ip1, j])
+            Ux[i, j] = overlap_x / (torch.abs(overlap_x) + 1e-30)
+            overlap_y = torch.dot(evecs_tracked[i, j].conj(), evecs_tracked[i, jp1])
+            Uy[i, j] = overlap_y / (torch.abs(overlap_y) + 1e-30)
+
+    F_total = 0.0j
+    for i in range(N):
+        ip1 = (i + 1) % N
+        for j in range(N):
+            jp1 = (j + 1) % N
+            prod = Ux[i, j] * Uy[ip1, j] / (Ux[i, jp1] * Uy[i, j])
+            F_total += torch.log(prod)
+
+    C = round(float((F_total / (2.0 * PI * 1j)).real))
+    return C
+
+
+def gate_null_model(m0, tz, kz_test):
+    """Gate 4: NULL MODEL — Random Hamiltonian (no Weyl nodes)."""
+    print("-" * 60)
+    print("  GATE 4: NULL MODEL — Random Hamiltonian (shuffled, no Weyl nodes)")
+    print("-" * 60)
+    C_vals = []
+    for s in [99, 100, 101, 102, 103]:
+        C = null_random_hamiltonian_chern(N=20, kz_test=kz_test, seed=s)
+        C_vals.append(C)
+    C_mean = np.mean(C_vals)
+    C_std = np.std(C_vals)
+    is_topological = (C_std < 0.2 and abs(C_mean) > 0.5)
+    ok = not is_topological
+    marker = "PASS" if ok else "FAIL (unexpected topology)"
+    print(f"    Random Hamiltonian Chern (5 seeds):")
+    print(f"      C values: {C_vals}")
+    print(f"      mean = {C_mean:.2f}, std = {C_std:.2f}")
+    print(f"    Null model is non-topological: {'YES' if ok else 'NO'}")
+    print(f"    RESULT: {marker}")
+    return ok
+
+
+def gate_statistical_rigor(Gamma_sweep, N, m0, tz, kz_test):
+    """Gate 5: STATISTICAL RIGOR — Spectral gap tolerance across sweep."""
+    print("-" * 60)
+    print("  GATE 5: SPECTRAL GAP STATISTICS (tolerance range)")
+    print("-" * 60)
+    gap_vals = []
+    for Gamma in Gamma_sweep:
+        _, gap = fhs_chern_number_2d(kz_test, N, m0, tz, Gamma)
+        gap_vals.append(gap)
+    gap_vals_np = np.array(gap_vals)
+    gap_mean = np.mean(gap_vals_np)
+    gap_std = np.std(gap_vals_np)
+    gap_min = np.min(gap_vals_np)
+    gap_max = np.max(gap_vals_np)
+    print(f"    kz_test = {kz_test:.4f},  {len(Gamma_sweep)} Gamma steps")
+    print(f"    Gap mean = {gap_mean:.6e} +/- std = {gap_std:.6e}")
+    print(f"    Gap range: [{gap_min:.6e}, {gap_max:.6e}]")
+    print(f"    Gap min > 1e-14: {'PASS' if gap_min > 1e-14 else 'FAIL'}")
+    return gap_min > 1e-14
+
+
 def run_hardening_suite(N, m0, tz, kz_test, Gamma_mid):
-    """Execute all three hardening gates."""
+    """Execute all five hardening gates."""
     print()
     print("=" * 78)
-    print("  EXP 45.2 HARDENING SUITE — 3 Independent Verification Gates")
+    print("  EXP 45.2 HARDENING SUITE — 5 Independent Verification Gates")
     print("=" * 78)
     print()
 
     g1 = harden_grid_independence(m0=2.5, tz=1.5, Gamma=Gamma_mid, kz_test=kz_test)
     print()
-    # m0=4.0: 0 Weyl pairs (no gap closing in BZ).  m0=0.2: 2 Weyl pairs.
-    # At kz=2.0 between the 2 pairs' nodes, C jumps from 0 to +2 -> delta = +2
     g2 = harden_defect_injection(N=N, m0=2.5, tz=1.5, Gamma=Gamma_mid)
     print()
     g3 = harden_blowup_limit(N, m0, tz, kz_test)
+    print()
+    g4 = gate_null_model(m0=2.5, tz=1.5, kz_test=kz_test)
+    print()
+    g5 = gate_statistical_rigor(
+        [1e-1, 1e-3, 1e-6, 1e-9, 1e-12, 1e-14], N, m0, tz, kz_test)
     print()
 
     print("=" * 78)
@@ -367,13 +493,15 @@ def run_hardening_suite(N, m0, tz, kz_test, Gamma_mid):
     print("=" * 78)
     for name, passed in [("grid_independence", g1),
                           ("weyl_node_scan", g2),
-                          ("blowup_limit", g3)]:
+                          ("blowup_limit", g3),
+                          ("null_model", g4),
+                          ("statistical_rigor", g5)]:
         marker = "PASS" if passed else "*** FAIL ***"
         print(f"  {name:<30s} [{marker}]")
     print(f"  {'-' * 50}")
-    all_pass = g1 and g2 and g3
+    all_pass = g1 and g2 and g3 and g4 and g5
     if all_pass:
-        print("  ALL 3 GATES PASS — Protocol is hardened.")
+        print("  ALL 5 GATES PASS — Protocol is hardened.")
     else:
         print("  *** HARDENING FAILED ***")
     print("=" * 78)

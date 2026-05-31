@@ -54,6 +54,7 @@ def test_h1_rotation_is_teleportation(wormhole_path):
     
     fidelities = {}
     total_layers = 0
+    all_energies = []
     for wt, g in sorted(groups.items()):
         coses = []
         for l in sorted(g['rots'].keys()):
@@ -69,6 +70,7 @@ def test_h1_rotation_is_teleportation(wormhole_path):
             
             energy_ratio = teleported.norm() / (g['first_U'].float().norm() + 1e-9)
             coses.append(energy_ratio.item())
+            all_energies.append(energy_ratio.item())
             total_layers += 1
         
         if coses:
@@ -76,9 +78,10 @@ def test_h1_rotation_is_teleportation(wormhole_path):
     
     if fidelities:
         avg_energy = np.mean(list(fidelities.values()))
+        std_energy = np.std(all_energies)
         # Perfect teleportation: energy ratio = 1.0 (no loss, no gain)
         proven = abs(avg_energy - 1.0) < 0.3
-        print(f"  Mean energy ratio: {avg_energy:.4f} (1.0 = perfect teleportation)")
+        print(f"  Mean energy ratio: {avg_energy:.4f}  std={std_energy:.4f} (1.0 = perfect teleportation)")
         print(f"  {'VERIFIED' if proven else 'DEVIATION DETECTED'}: R preserves {avg_energy*100:.1f}% of subspace energy")
         for wt, fid in sorted(fidelities.items())[:5]:
             print(f"    {wt:<35}: energy={fid:.4f}")
@@ -212,7 +215,7 @@ def test_h7_zero_trace_communication(swarm_tape_module="18_swarm_tape_comm"):
     
     try:
         mod = importlib.import_module(swarm_tape_module)
-    except:
+    except Exception:
         print("  Swarm tape module not available. Skipping.")
         return None
     

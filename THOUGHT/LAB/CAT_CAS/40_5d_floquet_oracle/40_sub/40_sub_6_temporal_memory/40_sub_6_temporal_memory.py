@@ -71,8 +71,8 @@ def temporal_memory():
     # Test: apply random t1 noise per slice, measure survival
     noise_levels=[0.0,0.05,0.1,0.15,0.2,0.25,0.3,0.4,0.5]
     
-    print(f"  {'Noise':>6s} {'Mean Pi':>8s} {'Min Pi':>6s} {'Max Pi':>6s} {'Survived':>8s} {'Melted':>6s}")
-    print("  "+"-"*50)
+    print(f"  {'Noise':>6s} {'Mean Pi':>8s} {'Min Pi':>6s} {'Max Pi':>6s} {'Survived':>8s} {'Melted':>6s}  {'std'}")
+    print("  "+"-"*56)
     
     for noise_amp in noise_levels:
         pi_vals=[]
@@ -83,10 +83,10 @@ def temporal_memory():
             U=floquet(L,kzi.item(),kwi.item(),t1=t1_noisy)
             pi_vals.append(pi(U))
         
-        mean_pi=np.mean(pi_vals);min_pi=min(pi_vals);max_pi=max(pi_vals)
+        mean_pi=np.mean(pi_vals);min_pi=min(pi_vals);max_pi=max(pi_vals);std_pi=np.std(pi_vals)
         survived=sum(1 for p in pi_vals if p>0);melted=n_slices-survived
         
-        print(f"  {noise_amp:6.2f} {mean_pi:8.1f} {min_pi:6d} {max_pi:6d} {survived:8d} {melted:6d}")
+        print(f"  {noise_amp:6.2f} {mean_pi:8.1f} {min_pi:6d} {max_pi:6d} {survived:8d} {melted:6d}  std={std_pi:.1f}")
     
     # Test: gamma noise (dissipation perturbations)
     print(f"\n  ---  GAMMA NOISE (dissipation perturbations)  ---")
@@ -100,10 +100,10 @@ def temporal_memory():
             U=floquet(L,kzi.item(),kwi.item(),t1=0.1,g=gamma_noisy)
             pi_vals.append(pi(U))
         
-        mean_pi=np.mean(pi_vals);min_pi=min(pi_vals);max_pi=max(pi_vals)
+        mean_pi=np.mean(pi_vals);min_pi=min(pi_vals);max_pi=max(pi_vals);std_pi=np.std(pi_vals)
         survived=sum(1 for p in pi_vals if p>0);melted=n_slices-survived
         
-        print(f"  {noise_amp:6.2f} {mean_pi:8.1f} {min_pi:6d} {max_pi:6d} {survived:8d} {melted:6d}")
+        print(f"  {noise_amp:6.2f} {mean_pi:8.1f} {min_pi:6d} {max_pi:6d} {survived:8d} {melted:6d}  std={std_pi:.1f}")
     
     print(f"\n{'='*78}")
     print("  TEMPORAL MEMORY VERDICT")

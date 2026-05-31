@@ -85,59 +85,6 @@ def _noise_write(tape, mode):
     tape.tape[pos] ^= random.randint(0, 255)
 
 
-def rogue_process(tape, mode):
-    """Persistent rogue: keeps writing noise until encryption stops."""
-    # Wait for active regions to be marked
-    tape.barrier.wait()
-    
-    while tape.running:
-        if mode == 'active':
-            pos = random.choice(list(tape.active))
-            tape.collisions_active += 1
-        elif mode == 'unalloc':
-            # Find unallocated position
-            for _ in range(100):
-                pos = random.randint(0, tape.size - 1)
-                if pos not in tape.active:
-                    break
-            tape.collisions_unalloc += 1
-        else:  # random
-            pos = random.randint(0, tape.size - 1)
-            if pos in tape.active:
-                tape.collisions_active += 1
-            else:
-                tape.collisions_unalloc += 1
-        
-        tape.tape[pos] ^= random.randint(0, 255)
-
-
-def run_test(tape_size, msg_size, mode):
-    tape = SharedTape(tape_size)
-    pt = os.urandom(msg_size); key = os.urandom(32)
-    result = {}
-    
-    rogue = threading.Thread(target=rogue_process, args=(tape, mode))
-    enc = threading.Thread(target=catalytic_encrypt, args=(tape, pt, key, result))
-    
-    t0 = time.perf_counter()
-    rogue.start(); enc.start()
-    enc.join(); rogue.join()
-    dt = time.perf_counter() - t0
-    
-    active_ok = tape.verify_active()
-    all_ok = tape.verify_all()
-    enc_ok = result.get('ok', False)
-    
-    return {
-        'active_ok': active_ok,
-        'all_ok': all_ok,
-        'enc_ok': enc_ok,
-        'collisions_active': tape.collisions_active,
-        'collisions_unalloc': tape.collisions_unalloc,
-        'time': dt,
-    }
-
-
 print("=" * 78)
 print("BOUNDARY STRESS — Simulated Concurrent Memory Collision")
 print("=" * 78)

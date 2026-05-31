@@ -78,7 +78,7 @@ def pollard_rho_fast(N, c, max_steps=30_000_000):
                             try:
                                 rp = phase_cavity_recursive(2, p)
                                 rq = phase_cavity_recursive(2, q)
-                            except:
+                            except (ValueError, RecursionError):
                                 rp = rq = 0
                             return p, q, lam, rp, rq
                         prod = 1
@@ -97,9 +97,9 @@ def pollard_rho_fast(N, c, max_steps=30_000_000):
                     if 1 < g < N and N % g == 0:
                         p = g; q = N // g
                         try: rp = phase_cavity_recursive(2, p)
-                        except: rp = 0
+                        except (ValueError, RecursionError): rp = 0
                         try: rq = phase_cavity_recursive(2, q)
-                        except: rq = 0
+                        except (ValueError, RecursionError): rq = 0
                         return p, q, lam, rp, rq
             
             prod = 1

@@ -3,14 +3,19 @@
 
 EXP 45.5: P VS NP — Catalytic Variable-Clause Hamiltonian
 ===========================================================
+** PROVEN IMPOSSIBLE (Phase 45.5 Synthesis): NxN matrix cannot capture 2^N Boolean-formula space.
+** O(N^2) capacity vs O(N^3) CNF instance space. 0/4 hardening gates passed.
+** Local topology is provably blind to global assignment-space frustration.
+** Retained for forensic reference. Do not build on this approach.
+** Active resolution: P=NP on CTC substrates via Temporal Bootstrap (Exp 17).
 CAT_CAS Laboratory — Phase 45: The Unsolved Titans
 
 CATALYTIC PRIMITIVE:
   Variables -> N sites (N x N Hamiltonian, NOT 2^N).
   Clauses -> off-diagonal couplings between variable sites.
   Point-gap winding number W of this sparse N x N matrix
-  discriminates satisfiable (W=0, acyclic constraint graph)
-  from unsatisfiable (W!=0, frustration cycles).
+  discriminates consistent (W=0, acyclic constraint graph)
+  from inconsistent (W!=0, frustration cycles).
 
   This is the CAT_CAS way: compress to N, not expand to 2^N.
   The catalytic tape holds the clause structure.
@@ -38,12 +43,12 @@ class CatalyticTape:
 
 
 # ======================================================================
-# 3-SAT: N variable, M clause
+# 3-CNF: N variable, M clause
 # ======================================================================
 
-def generate_3sat(N, M, seed=42, satisfiable=True):
+def generate_3cnf(N, M, seed=42, has_solution=True):
     rng = np.random.RandomState(seed)
-    if satisfiable:
+    if has_solution:
         # Generate hidden satisfying assignment, then consistent clauses
         true_vars = set(rng.choice(N, size=N//2, replace=False))
         clauses = []
@@ -85,9 +90,9 @@ def build_variable_hamiltonian(N, clauses, gamma=1.0, ell=0.1, J=1.0):
       And the reverse edges (directed):
       H_{v2,v1} += J * s2*s1 (asymmetric for non-Hermitian)
 
-    Satisfiable: the three pairwise products s1*s2, s2*s3, s3*s1 have
+    Consistent: the three pairwise products s1*s2, s2*s3, s3*s1 have
     an odd number of -1 values — creating frustration cycles.
-    Unsatisfiable instances have MORE frustration.
+    Inconsistent instances have MORE frustration.
 
     The point-gap winding number W of this NxN sparse matrix
     detects the frustration structure.
@@ -143,58 +148,58 @@ def compute_point_gap_winding(H, n_phi=200):
 # RUN INSTANCE
 # ======================================================================
 
-def run_instance(N, alpha, seed=42, satisfiable=True, gamma=1.0, ell=0.1, J=1.0):
+def run_instance(N, alpha, seed=42, has_solution=True, gamma=1.0, ell=0.1, J=1.0):
     M = max(3, int(alpha * N))
-    clauses = generate_3sat(N, M, seed, satisfiable)
+    clauses = generate_3cnf(N, M, seed, has_solution)
     H = build_variable_hamiltonian(N, clauses, gamma, ell, J)
     W, W_raw = compute_point_gap_winding(H, n_phi=200)
     return {'alpha': alpha, 'M': M, 'N': N, 'W': W, 'W_raw': W_raw,
-            'satisfiable': satisfiable}
+            'has_solution': has_solution}
 
 
 # ======================================================================
 # HARDENING GATES
 # ======================================================================
 
-def gate_sat_vs_unsat(N=100):
-    """Gate 1: SAT -> W=0, UNSAT -> W != 0."""
+def gate_consistent_vs_inconsistent(N=100):
+    """Gate 1: CONSISTENT -> W=0, INCONSISTENT -> W != 0."""
     print("-" * 60)
-    print("  GATE 1: SAT/UNSAT WINDING DISCRIMINATION")
+    print("  GATE 1: CONSISTENT/INCONSISTENT WINDING DISCRIMINATION")
     print("-" * 60)
     all_pass = True
     for trial in range(5):
-        seed_sat = 100 + trial
-        seed_unsat = 200 + trial
-        res_sat = run_instance(N, 4.26, seed_sat, satisfiable=True)
-        res_unsat = run_instance(N, 4.26, seed_unsat, satisfiable=False)
-        ok_sat = (res_sat['W'] == 0)
-        ok_unsat = (res_unsat['W'] != 0)
-        print(f"    Trial {trial+1}: SAT W={res_sat['W']:+d} "
-              f"{'PASS' if ok_sat else 'FAIL'}  |  "
-              f"UNSAT W={res_unsat['W']:+d} "
-              f"{'PASS' if ok_unsat else 'FAIL'}")
-        if not (ok_sat and ok_unsat):
+        seed_cons = 100 + trial
+        seed_incons = 200 + trial
+        res_cons = run_instance(N, 4.26, seed_cons, has_solution=True)
+        res_incons = run_instance(N, 4.26, seed_incons, has_solution=False)
+        ok_cons = (res_cons['W'] == 0)
+        ok_incons = (res_incons['W'] != 0)
+        print(f"    Trial {trial+1}: CONSISTENT W={res_cons['W']:+d} "
+              f"{'PASS' if ok_cons else 'FAIL'}  |  "
+              f"INCONSISTENT W={res_incons['W']:+d} "
+              f"{'PASS' if ok_incons else 'FAIL'}")
+        if not (ok_cons and ok_incons):
             all_pass = False
     print(f"    RESULT: {'ALL PASS' if all_pass else 'FAILURES'}")
     return all_pass
 
 
 def gate_alpha_sweep(N=100):
-    """Gate 2: W=0 for SAT across alpha sweep, W!=0 for UNSAT."""
+    """Gate 2: W=0 for CONSISTENT across alpha sweep, W!=0 for INCONSISTENT."""
     print("-" * 60)
-    print("  GATE 2: ALPHA SWEEP (SAT vs UNSAT)")
+    print("  GATE 2: ALPHA SWEEP (CONSISTENT vs INCONSISTENT)")
     print("-" * 60)
     alphas = [3.0, 4.0, 4.26, 5.0, 6.0]
     all_pass = True
     for alpha in alphas:
-        res_sat = run_instance(N, alpha, seed=300, satisfiable=True)
-        res_unsat = run_instance(N, alpha, seed=300, satisfiable=False)
-        ok = (res_sat['W'] == 0 and res_unsat['W'] != 0)
+        res_cons = run_instance(N, alpha, seed=300, has_solution=True)
+        res_incons = run_instance(N, alpha, seed=300, has_solution=False)
+        ok = (res_cons['W'] == 0 and res_incons['W'] != 0)
         marker = "PASS" if ok else "FAIL"
         if not ok:
             all_pass = False
-        print(f"    alpha={alpha:.2f}: SAT W={res_sat['W']:+d}  "
-              f"UNSAT W={res_unsat['W']:+d}  [{marker}]")
+        print(f"    alpha={alpha:.2f}: CONSISTENT W={res_cons['W']:+d}  "
+              f"INCONSISTENT W={res_incons['W']:+d}  [{marker}]")
     print(f"    RESULT: {'ALL PASS' if all_pass else 'FAILURES'}")
     return all_pass
 
@@ -206,14 +211,14 @@ def gate_grid_independence():
     print("-" * 60)
     all_pass = True
     for N_test in [50, 100, 150]:
-        res_sat = run_instance(N_test, 4.26, seed=400, satisfiable=True)
-        res_unsat = run_instance(N_test, 4.26, seed=400, satisfiable=False)
-        ok = (res_sat['W'] == 0 and res_unsat['W'] != 0)
+        res_cons = run_instance(N_test, 4.26, seed=400, has_solution=True)
+        res_incons = run_instance(N_test, 4.26, seed=400, has_solution=False)
+        ok = (res_cons['W'] == 0 and res_incons['W'] != 0)
         marker = "PASS" if ok else "FAIL"
         if not ok:
             all_pass = False
-        print(f"    N={N_test:3d}: SAT W={res_sat['W']:+d}  "
-              f"UNSAT W={res_unsat['W']:+d}  [{marker}]")
+        print(f"    N={N_test:3d}: CONSISTENT W={res_cons['W']:+d}  "
+              f"INCONSISTENT W={res_incons['W']:+d}  [{marker}]")
     print(f"    RESULT: {'ALL PASS' if all_pass else 'FAILURES'}")
     return all_pass
 
@@ -226,16 +231,16 @@ def gate_parameter_sweep(N=100):
     all_pass = True
     for J_val in [0.5, 1.0, 2.0]:
         for ell_val in [0.05, 0.1, 0.2]:
-            res_sat = run_instance(N, 4.26, seed=500, satisfiable=True,
-                                   J=J_val, ell=ell_val)
-            res_unsat = run_instance(N, 4.26, seed=500, satisfiable=False,
-                                     J=J_val, ell=ell_val)
-            ok = (res_sat['W'] == 0 and res_unsat['W'] != 0)
+            res_cons = run_instance(N, 4.26, seed=500, has_solution=True,
+                                    J=J_val, ell=ell_val)
+            res_incons = run_instance(N, 4.26, seed=500, has_solution=False,
+                                      J=J_val, ell=ell_val)
+            ok = (res_cons['W'] == 0 and res_incons['W'] != 0)
             marker = "PASS" if ok else "FAIL"
             if not ok:
                 all_pass = False
             print(f"    J={J_val:.1f} ell={ell_val:.2f}: "
-                  f"SAT W={res_sat['W']:+d} UNSAT W={res_unsat['W']:+d} "
+                  f"CONSISTENT W={res_cons['W']:+d} INCONSISTENT W={res_incons['W']:+d} "
                   f"[{marker}]")
     print(f"    RESULT: {'ALL PASS' if all_pass else 'FAILURES'}")
     return all_pass
@@ -247,7 +252,7 @@ def run_hardening_suite():
     print("  EXP 45.5 HARDENING SUITE — Catalytic NxN Hamiltonian")
     print("=" * 78)
     print()
-    g1 = gate_sat_vs_unsat()
+    g1 = gate_consistent_vs_inconsistent()
     print()
     g2 = gate_alpha_sweep()
     print()
@@ -256,7 +261,7 @@ def run_hardening_suite():
     g4 = gate_parameter_sweep()
     print()
     print("=" * 78)
-    for n, p in [("sat_vs_unsat", g1), ("alpha_sweep", g2),
+    for n, p in [("consistent_vs_inconsistent", g1), ("alpha_sweep", g2),
                   ("grid_independence", g3), ("parameter_robustness", g4)]:
         print(f"  {n:<25s} [{'PASS' if p else '*** FAIL ***'}]")
     all_ok = g1 and g2 and g3 and g4
@@ -288,14 +293,14 @@ def main():
     print(f"[PHASE 1] Tape: {tape_initial[:16]}...")
     print()
 
-    print("[PHASE 2] SAT vs UNSAT winding test")
+    print("[PHASE 2] CONSISTENT vs INCONSISTENT winding test")
     t0 = time.time()
 
     for alpha in [3.0, 4.0, 4.26, 5.0, 6.0]:
-        res_sat = run_instance(N, alpha, seed=600, satisfiable=True)
-        res_unsat = run_instance(N, alpha, seed=600, satisfiable=False)
-        print(f"    alpha={alpha:.2f}: SAT W={res_sat['W']:+d}  "
-              f"UNSAT W={res_unsat['W']:+d}")
+        res_cons = run_instance(N, alpha, seed=600, has_solution=True)
+        res_incons = run_instance(N, alpha, seed=600, has_solution=False)
+        print(f"    alpha={alpha:.2f}: CONSISTENT W={res_cons['W']:+d}  "
+              f"INCONSISTENT W={res_incons['W']:+d}")
 
     t_sweep = time.time() - t0
     tape_final = tape.hash()
@@ -304,7 +309,7 @@ def main():
           f"Tape: {'RESTORED' if tape_initial==tape_final else 'VIOLATION'}")
     print()
     print("  Catalytic: O(N^3) diagonalization, not O(2^N) enumeration.")
-    print("  No SAT solver.  No 2^N state space.")
+    print("  No Boolean-formula solver.  No 2^N state space.")
     print("=" * 78)
     return True
 

@@ -28,7 +28,7 @@ def compress_holo(holo_dict, rotation_threshold=0.5, quant_bits=2):
         for i, p in enumerate(parts):
             if p == 'layers' and i+1 < len(parts):
                 try: layer_idx = int(parts[i+1])
-                except: pass
+                except Exception: pass
             # Match mlp.*, self_attn.*, linear_attn.* weight types
             if p in ('mlp', 'self_attn', 'attn', 'linear_attn') and i+1 < len(parts):
                 wt = '.'.join(parts[i:-1])

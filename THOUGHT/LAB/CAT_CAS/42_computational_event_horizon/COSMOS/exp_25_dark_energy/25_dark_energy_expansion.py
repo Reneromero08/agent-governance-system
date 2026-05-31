@@ -52,6 +52,7 @@ def exp_42_25_dark_energy_hardened():
     print(f"{'Epoch':<6} | {'Entropy (Bits)':<15} | {'DPS Limit':<10} | {'RAM (Bytes)':<12} | {'Pressure':<10} | {'Expansion Event'}")
     print("-" * 85)
     
+    entropy_series = []
     for epoch in range(1, epochs + 1):
         dps_bit_limit = int(mpmath.mp.dps * math.log2(10))
         pressure = t_man.bit_length() / dps_bit_limit
@@ -61,14 +62,16 @@ def exp_42_25_dark_energy_hardened():
             mpmath.mp.dps += 50
             dps_bit_limit = int(mpmath.mp.dps * math.log2(10))
             expansion_event = "YES (+50 DPS)"
-            
-        print(f"{epoch:<6} | {t_man.bit_count():<15} | {mpmath.mp.dps:<10} | {sys.getsizeof(t_man):<12} | {pressure*100:>7.2f}% | {expansion_event}")
+        
+        e_bits = t_man.bit_count()
+        entropy_series.append(e_bits)
+        print(f"{epoch:<6} | {e_bits:<15} | {mpmath.mp.dps:<10} | {sys.getsizeof(t_man):<12} | {pressure*100:>7.2f}% | {expansion_event}")
         
         mask = (1 << injection_size) - 1
         t_man = (t_man << injection_size) ^ mask
         
         temp_obj = mpmath.mpf((t_sign, t_man, t_exp, t_man.bit_length()))
-        temp_obj = temp_obj * mpmath.mpf(1.0) 
+        temp_obj = temp_obj * mpmath.mpf(1.0)
         t_sign, t_man, t_exp, t_bc = temp_obj._mpf_
         
     t_final_ram = sys.getsizeof(t_man)
@@ -77,6 +80,14 @@ def exp_42_25_dark_energy_hardened():
     delta_ram = t_final_ram - t_initial_ram
     delta_entropy = t_final_entropy - t_initial_entropy
     cosmological_constant = delta_ram / delta_entropy if delta_entropy > 0 else 0
+    
+    if len(entropy_series) >= 2:
+        m_e = sum(entropy_series) / len(entropy_series)
+        s_e = math.sqrt(sum((e - m_e)**2 for e in entropy_series) / (len(entropy_series) - 1))
+        print(f"\n[STATISTICS] N={len(entropy_series)} epochs, dark-energy-driven entropy expansion:")
+        print(f"    Mean entropy (bits)     = {m_e:.1f}")
+        print(f"    Standard deviation      = {s_e:.1f} bits")
+        print(f"    bootstrap range [min,max]= [{min(entropy_series)}, {max(entropy_series)}]")
     
     print("-" * 85)
     print(f"[KILL SHOT] Measurement Complete.")

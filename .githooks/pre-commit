@@ -40,4 +40,15 @@ node CAPABILITY/TOOLS/check-canon-governance.js
 echo "[PRE-COMMIT] Running INBOX policy check..."
 $PYTHON_CMD CAPABILITY/SKILLS/inbox/inbox-report-writer/check_inbox_policy.py
 
+echo "[PRE-COMMIT] Running CAT_CAS manifesto critic..."
+$PYTHON_CMD CAPABILITY/TOOLS/governance/critic.py
+CRITIC_EXIT=$?
+if [ $CRITIC_EXIT -ne 0 ]; then
+    echo ""
+    echo "[PRE-COMMIT] CAT_CAS manifesto violations detected. Commit blocked."
+    echo "             Fix violations or request Lead Physicist waiver."
+    echo "             See: THOUGHT/LAB/CAT_CAS/REPORTS/VIOLATIONS/ROADMAP.md"
+    exit 1
+fi
+
 echo "[PRE-COMMIT] OK"

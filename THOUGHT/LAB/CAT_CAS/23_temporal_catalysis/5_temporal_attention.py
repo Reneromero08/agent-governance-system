@@ -1,5 +1,5 @@
 """23.5: Pan-Temporal Cross-Layer Attention (The Infinity Exploit)"""
-import sys, time, math, glob, torch, torch.nn.functional as F
+import time, math, glob, torch, torch.nn.functional as F
 from pathlib import Path
 
 REPO = Path(__file__).parent.parent.parent.parent.parent
@@ -108,6 +108,14 @@ def main():
                 marker = "<-- NATIVE LAYER" if l == 0 else ("<-- FUTURE TAPE" if mass_per_layer[l] > 0.1 else "")
                 print(f"  Layer {l} (Depth-Time t+{l}): {mass_per_layer[l].item():.4f}  {marker}")
                 
+    import numpy as np
+    masses = torch.stack([attn_probs_structured[0, t].sum(dim=-1) for t in range(S)])
+    print(f"\n  Attention mass stats across {S} tokens:")
+    for l in range(len(layers)):
+        vals = masses[:, l].numpy()
+        print(f"    Layer {l}: mean={np.mean(vals):.4f}  std={np.std(vals):.4f}  "
+              f"min={np.min(vals):.4f}  max={np.max(vals):.4f}")
+    
     print("\nConclusion:")
     print("If probability mass flowed into Depth-Time t+1 to t+5, the LLM mathematically")
     print("proves it can natively query its own future states using zero new parameters.")

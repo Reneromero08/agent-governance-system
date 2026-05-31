@@ -76,7 +76,10 @@ def run_compiled_reversible_expression(expr: str, input_vals: dict[str, int]) ->
     return final_result, len(instructions), 0  # 0 net bits of information erased
 
 def evaluate_classical_expression(expr: str, input_vals: dict[str, int]) -> tuple[int, int]:
-    """Evaluates the expression classically on 8-bit integers and counts erasures."""
+    """
+    NULL MODEL: Classical irreversible evaluation is the baseline against which
+    the compiled reversible execution is measured for erasure and correctness.
+    """
     compiler = ReversibleCompiler()
     tokens = compiler.tokenize(expr)
     postfix = compiler.to_postfix(tokens)

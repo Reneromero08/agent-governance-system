@@ -233,7 +233,7 @@ class HDDWeightStreamer:
                             chunk = f32_vals[:HIDDEN_DIM].tobytes()
                         elif dtype == "F16":
                             raw_bytes = self._mmap[chunk_start:chunk_start + HIDDEN_DIM * 2]
-                            f16_vals = np.frombuffer(raw_bytes, dtype=np.uint16)
+                            f16_vals = np.frombuffer(raw_bytes, dtype=np.float16)
                             f32_vals = f16_vals.astype(np.float32)
                             chunk = f32_vals[:HIDDEN_DIM].tobytes()
                         else:
@@ -399,19 +399,9 @@ class CatalyticInferenceRuntime:
             if self._real_embedding_np is not None:
                 hidden_bytes = bytes(self.tape[:HIDDEN_DIM])
                 hidden = np.frombuffer(hidden_bytes, dtype=np.uint8).astype(np.float32)
-                logits = self._real_embedding_np @ hidden  # [vocab_size, 896] @ [896] = [vocab_size]
+                logits = self._real_embedding_np @ hidden
                 head_token = int(np.argmax(logits))
-                # Override with lm_head result
                 next_token = head_token
-
-            # The Rust engine computes tape_restored by comparing initial vs final
-            # SHA-256 of the ENTIRE tape per token call. The warm cache gets
-            # written between tokens, so cross-token Python hash comparison is
-            # invalid against self.initial_hash (taken at init time).
-            # Trust the per-token Rust flag.
-            tape_restored = bool(result["tape_restored"])
-
-            next_token = result["generated_token"]
             total_entropy = result["total_entropy"]
 
             self.total_entropy += total_entropy

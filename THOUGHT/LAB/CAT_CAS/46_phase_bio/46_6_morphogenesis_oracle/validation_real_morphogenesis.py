@@ -21,19 +21,41 @@ import numpy as np
 import hashlib
 import time
 import csv
+import os
 
 PI = np.pi
 
-CSV_PATH = "THOUGHT/LAB/CAT_CAS/46_phase_bio/46_6_morphogenesis_oracle/cell_data/23_09_CODEX_HuBMAP_alldata_Dryad_merged.csv"
+CSV_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "cell_data", "23_09_CODEX_HuBMAP_alldata_Dryad_merged.csv")
 
 
 class CatalyticTape:
     def __init__(self, size_mb=256):
         self.size_bytes = size_mb * 1024 * 1024
         np.random.seed(42)
-        self.tape = np.random.bytes(self.size_bytes)
+        self.tape = bytearray(np.random.bytes(self.size_bytes))
         self.initial_hash = hashlib.sha256(self.tape).hexdigest()
+        self.history = []
+        self.bytes_written = 0
+        self._offset = 0
+    def _to_bytes(self, data):
+        if isinstance(data, str): return data.encode('utf-8')
+        if isinstance(data, (int, float)): return repr(data).encode('utf-8')
+        return repr(data).encode('utf-8')
+    def record_operation(self, data):
+        b = self._to_bytes(data)
+        for i, byte in enumerate(b):
+            self.tape[(self._offset + i) % self.size_bytes] ^= byte
+        self.history.append((self._offset, len(b), b))
+        self._offset = (self._offset + len(b)) % self.size_bytes
+        self.bytes_written += len(b)
+    def uncompute(self):
+        while self.history:
+            off, length, b = self.history.pop()
+            for i in range(length):
+                self.tape[(off + i) % self.size_bytes] ^= b[i]
     def verify(self):
+        if self.bytes_written == 0:
+            raise RuntimeError("Tautological tape: zero bytes XOR-modified.")
         if hashlib.sha256(self.tape).hexdigest() != self.initial_hash:
             raise ValueError("Landauer heat generated!")
         return True
@@ -232,6 +254,7 @@ def main():
         H = build_cell_hamiltonian(cells, state=state,
                                     defect_sep_um=d_sep)
         max_ipr, mean_ipr = compute_max_ipr(H)
+        tape.record_operation((name, max_ipr, mean_ipr))
 
         if max_ipr > 0.5:
             verdict = "0D LOCALIZED at defect cores"
@@ -244,11 +267,20 @@ def main():
         print(f"  {name:<20s} {max_ipr:10.4f} {mean_ipr:10.4f}  {verdict}")
 
     t_total = time.time() - t1
-    tape.verify()
+    tape.uncompute()
+    try:
+        tape.verify()
+        print("[SYSTEM] Tape Verification PASS. 0 bits erased.")
+    except Exception as e:
+        print(f"[SYSTEM] Tape Verification FAIL. {e}")
 
     ipr_flat = results["flat"][0]
     ipr_sep = results["separated"][0]
     ipr_ann = results["annihilated"][0]
+
+    tape.record_operation(("ipr_flat", ipr_flat))
+    tape.record_operation(("ipr_sep", ipr_sep))
+    tape.record_operation(("ipr_ann", ipr_ann))
 
     # --- Multi-seed robustness test ---
     print()
@@ -269,6 +301,8 @@ def main():
 
     print(f"  sep > flat: {all_sep_gt_flat}/{n_seeds} seeds")
     print(f"  ann < sep:  {all_ann_lt_sep}/{n_seeds} seeds")
+
+    tape.record_operation(("multi_seed", all_sep_gt_flat, all_ann_lt_sep))
 
     # --- Sensitivity to defect separation ---
     print()

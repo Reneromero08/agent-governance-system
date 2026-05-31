@@ -76,8 +76,10 @@ def temporal_signal():
     print("  "+"-"*(12+5*len(slices)))
     
     results=[]
+    all_pi = []
     for t1 in t1_vals:
         pi_vals=[pi(floquet(L,kzi.item(),kwi.item(),t1=t1)) for kzi,kwi in slices]
+        all_pi.extend(pi_vals)
         active=sum(1 for p in pi_vals if p>0)
         pattern=''.join('X' if p>0 else '.' for p in pi_vals)
         
@@ -99,6 +101,9 @@ def temporal_signal():
     print(f"  Uniform survive (all 32): {len(uniform_survive)} t1 values")
     print(f"  Partial survival:         {len(partial)} t1 values")
     print(f"  Uniform melt (all 0):     {len(uniform_melt)} t1 values")
+    import numpy as np
+    print(f"  Pi-mode stats across all (t1, slice): mean={np.mean(all_pi):.1f}  "
+          f"std={np.std(all_pi):.1f}  range=[{np.min(all_pi)},{np.max(all_pi)}]")
     
     if partial:
         print(f"\n  PARTIAL SURVIVAL REGIME (crystal acts as frequency filter):")

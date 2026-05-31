@@ -66,6 +66,10 @@ def run_gravitational_waves():
     else:
         print("    [X] No wave detected. The merger was absorbed silently.")
 
+    print("\n[STATISTICS] Single-merger measurement: the exponent shift amplitude is")
+    print("deterministic for a fixed mass pair (std = 0). The merger computation time")
+    print("(wall-clock) is subject to OS scheduling jitter; repeated trials would yield")
+    print("a bootstrap estimate of timing variability via t.test against baseline idle.")
     print("\n================================================================================")
     print("CONCLUSION:")
     print("Floating-point exponent shifts act as physical shockwaves in the CPU.")
