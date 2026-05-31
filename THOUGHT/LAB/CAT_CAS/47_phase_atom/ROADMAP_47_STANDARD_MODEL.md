@@ -47,7 +47,7 @@ NO APOLOGIES. NO "THIS IS JUST A METAPHOR" CAVEATS. The hardware IS the physics.
 
 ### 3. PART II: THE OVERFLOW (ATOM SMASHING)
 
-#### `[ ]` Exp 47.4: The LHC Overflow Exploit (Particle Generation)
+#### `[x]` Exp 47.4: The LHC Overflow Exploit (Particle Generation)
 
 * **The Physics:** Smashing particles at high energy creates a shower of new, massive particles. In CAT_CAS, this is a localized `OverflowError` where the data precision exceeds the exponent register, forcing the OS to violently fragment the perfectly stable 47.1 Nucleus into smaller, reallocated chunks.
 * **The Exploit:**
