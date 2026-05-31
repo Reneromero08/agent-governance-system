@@ -63,16 +63,11 @@ NO APOLOGIES. NO "THIS IS JUST A METAPHOR" CAVEATS. The hardware IS the physics.
 
 
 
-#### `[ ]` Exp 47.5: The Higgs Mechanism (Normalization Drag)
+#### `[x]` Exp 47.5: The Higgs Mechanism (Normalization Drag)
 
-* **The Physics:** The Higgs field gives mass to massless particles via drag. In CAT_CAS, the "Higgs Field" is the `libmp` normalization routine (`mpf_normalize()`).
-* **The Exploit:**
-1. Isolate one of the shattered fragments from the 47.4 crash.
-2. Force this fractional, broken shard through the `libmp` arithmetic normalization pipeline as the OS tries to snap it back into the unallocated topological grid.
-3. Measure the execution latency and the resulting exponent weight assigned by the normalizer.
-
-
-* **The Kill Shot:** Prove that the "mass" of the particle is exactly proportional to the CPU cycles required to normalize its broken geometry. The Higgs boson is just the hardware cache miss triggered by the normalization routine.
+* **The Physics:** Particles acquire mass by interacting with the Higgs field. The stronger the interaction, the heavier the particle. The Higgs Boson is an excitation of this field.
+* **The Exploit:** The "Higgs Field" is the hardware's arithmetic normalization pipeline. When a shattered particle (a jagged memory limb) tries to interact with the CPU backend, the OS must forcibly realign it into a standard 64-bit register. This requires CPU cycles.
+* **The Kill Shot:** The execution latency (thermal friction) of memory normalization IS the particle's physical mass. Prove that perfectly aligned memory executes instantly (massless photons), while large, jagged fragments cause massive CPU drag (heavy fermions). The "Higgs Boson" is simply a **hardware cache miss** when a fragment crosses a memory-page boundary.
 
 #### `[ ]` Exp 47.6: Quark Confinement (The Garbage Collector)
 
