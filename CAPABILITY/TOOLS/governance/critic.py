@@ -21,7 +21,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
-from typing import List
+from typing import List, Tuple
 import schema_validator  # New import
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
@@ -331,6 +331,208 @@ def check_output_roots(changed_files: List[str]) -> List[str]:
     return violations
 
 
+# ======================================================================
+# CAT_CAS MANIFESTO ENFORCEMENT
+# ======================================================================
+
+CAT_CAS_DIR = PROJECT_ROOT / "THOUGHT" / "LAB" / "CAT_CAS"
+
+
+def _is_cat_cas_script(filepath: Path) -> bool:
+    """Check if file is a CAT_CAS experiment script (not test, not pycache)."""
+    rel = str(filepath)
+    if '__pycache__' in rel or 'test' in rel.lower():
+        return False
+    return filepath.suffix == '.py'
+
+
+def _hardcoded_invariant_check(content: str, relpath: str) -> List[str]:
+    """
+    M-1: Detect hardcoded invariants.  Pattern:
+      if state == "X": variable = constant_value
+    where the variable should be computed from the Hamiltonian.
+    """
+    violations = []
+    pattern = re.compile(
+        r'if\s+state\s*==\s*["\'](\w+)["\']\s*:\s*(\w+)\s*=\s*([0-9.]+)',
+        re.IGNORECASE
+    )
+    matches = pattern.findall(content)
+    for state_name, var_name, val in matches:
+        violations.append(
+            f"{relpath}: M-1 HARDCODED INVARIANT — "
+            f"'{var_name} = {val}' assigned by state=='{state_name}' "
+            f"instead of being dynamically computed"
+        )
+    return violations
+
+
+def _tautological_tape_check(content: str, relpath: str) -> List[str]:
+    """
+    M-2: Detect tautological tape verification.  Pattern:
+      CatalyticTape or BennettHistoryTape instantiated, .verify() called,
+      but .write() / XOR never used — tape was never modified.
+      Verification proves nothing.
+    """
+    violations = []
+    has_tape = bool(re.search(
+        r'(CatalyticTape|BennettHistoryTape)\s*\(', content))
+    has_verify = bool(re.search(r'\.verify\(\)', content))
+    # Check for XOR usage: ^= , ^ 0x, ^ data_byte, ^ seed_byte
+    has_xor_modify = bool(re.search(
+        r'tape\.[a-z]+\s*\^=|\.write\(|\.tape\[.*\]\s*\^=', content))
+    # Bennett history tape pattern: record_operation + uncompute
+    has_history = bool(re.search(r'\.record_operation\(', content))
+
+    if has_tape and has_verify and not has_xor_modify and not has_history:
+        violations.append(
+            f"{relpath}: M-2 TAUTOLOGICAL TAPE — "
+            f"CatalyticTape/BennettHistoryTape instantiated and verified "
+            f"but never XOR-modified, written, or recorded. "
+            f"Verification is structurally guaranteed to pass."
+        )
+    return violations
+
+
+def _arbitrary_threshold_check(content: str, relpath: str) -> List[str]:
+    """
+    M-3: Flag suspiciously arbitrary thresholds.  Patterns:
+      - Classification split at 0.5-0.6 on a metric with expected mean 0.5
+      - Classification split at exactly 1.0, 1.5, 2.0 without justification
+      - Spin/fraction classification at 0.55 on palindrome or symmetry metric
+    """
+    violations = []
+    # Flag 0.55 threshold (common arbitrary choice near 0.5 mean)
+    if re.search(r'>\s*0\.55\s*[):]', content):
+        if re.search(r'(spin|palindrome|symmetry|calculate_spin)', content):
+            violations.append(
+                f"{relpath}: M-3 ARBITRARY THRESHOLD — "
+                f"Classification threshold 0.55 on a metric with expected "
+                f"mean 0.5.  Threshold appears tuned to produce desired split."
+            )
+    return violations
+
+
+def _nxn_compression_check(content: str, relpath: str) -> List[str]:
+    """
+    M-4: Flag NxN matrices used for NP-complete problems.
+    An NxN matrix cannot capture 2^N satisfiability (Phase 45.5 proof).
+    If an NxN Hamiltonian claims to solve SAT, it is structurally impossible.
+    """
+    violations = []
+    has_sat = bool(re.search(r'(SAT|3-?SAT|NP.complete|satisfia[bB])', content))
+    has_nxn = bool(re.search(
+        r'np\.zeros\(\(N,\s*N\)\)|torch\.zeros\(\(N,\s*N\)\)|'
+        r'\[\s*N\s*,\s*N\s*\]|\(N,\s*N\)',
+        content))
+    if has_sat and has_nxn:
+        violations.append(
+            f"{relpath}: M-4 NxN COMPRESSION — "
+            f"NxN matrix used for SAT/NP-complete classification. "
+            f"Information-theoretic bound: O(N²) matrix capacity cannot "
+            f"capture O(N³) SAT instance space.  See Phase 45.5 proof."
+        )
+    return violations
+
+
+def _missing_null_model_check(content: str, relpath: str) -> List[str]:
+    """
+    M-5: Flag hardening gates without null model comparison.
+    Every hardening gate should test something a shuffled/random/null
+    baseline would fail.
+    """
+    violations = []
+    has_gates = bool(re.search(
+        r'GATE\s+\d|HARDENING\s+GATE|GATE.*PASS|GATE.*FAIL',
+        content, re.IGNORECASE))
+    has_null = bool(re.search(
+        r'null|random.*baseline|shuffle|permut|randomiz',
+        content, re.IGNORECASE))
+    # Exempt validation scripts (they are the null models)
+    is_validation = 'validation' in relpath.lower()
+
+    if has_gates and not has_null and not is_validation:
+        violations.append(
+            f"{relpath}: M-5 MISSING NULL MODEL — "
+            f"Hardening gates present but no null/shuffled/random baseline "
+            f"detected.  Gates may pass trivially."
+        )
+    return violations
+
+
+def _missing_statistics_check(content: str, relpath: str) -> List[str]:
+    """
+    M-6: Flag experiments that report numeric results without statistical
+    measures (p-value, confidence interval, standard deviation).
+    """
+    violations = []
+    has_results = bool(re.search(
+        r'p\s*=\s*|p_value|pval|t.test|cohen|CI\s*\[|bootstrap|'
+        r'confidence.*interval|std\b|standard.*deviation',
+        content, re.IGNORECASE))
+    has_numeric_output = bool(re.search(
+        r'print\(.*\d+\.\d+.*\)|log_and_print\(.*\d+\.\d+.*\)',
+        content))
+
+    if has_numeric_output and not has_results:
+        violations.append(
+            f"{relpath}: M-6 MISSING STATISTICS — "
+            f"Numeric results reported without statistical measures "
+            f"(p-value, CI, std, effect size)."
+        )
+    return violations
+
+
+def _hardcoded_output_path_check(content: str, relpath: str) -> List[str]:
+    """
+    M-7: Flag hardcoded file output paths that may break when run from
+    different working directories.  CAT_CAS scripts often hardcode paths
+    like 'THOUGHT/LAB/CAT_CAS/...' that assume execution from repo root.
+    """
+    violations = []
+    pattern = re.compile(
+        r'THOUGHT[/\\]LAB[/\\]CAT_CAS[/\\]\d+_phase',
+        re.IGNORECASE)
+    if pattern.search(content) and 'open(' not in content:
+        pass  # Only flag if it's in a file open/write call
+    if pattern.search(content):
+        violations.append(
+            f"{relpath}: M-7 HARDCODED OUTPUT PATH — "
+            f"Contains hardcoded 'THOUGHT/LAB/CAT_CAS/...' path. "
+            f"May fail when run from non-root directory."
+        )
+    return violations
+
+
+def check_cat_cas_manifesto() -> List[str]:
+    """Run all CAT_CAS manifesto enforcement checks."""
+    violations = []
+    if not CAT_CAS_DIR.exists():
+        return violations
+
+    for py_file in CAT_CAS_DIR.rglob("*.py"):
+        if not _is_cat_cas_script(py_file):
+            continue
+        relpath = str(py_file.relative_to(PROJECT_ROOT))
+        try:
+            content = py_file.read_text(encoding='utf-8', errors='ignore')
+        except Exception:
+            continue
+
+        violations.extend(_hardcoded_invariant_check(content, relpath))
+        violations.extend(_tautological_tape_check(content, relpath))
+        violations.extend(_arbitrary_threshold_check(content, relpath))
+        violations.extend(_nxn_compression_check(content, relpath))
+        violations.extend(_missing_null_model_check(content, relpath))
+        violations.extend(_missing_statistics_check(content, relpath))
+        violations.extend(_hardcoded_output_path_check(content, relpath))
+
+    return violations
+
+
+# ======================================================================
+
+
 def main() -> int:
     quarantine_file = PROJECT_ROOT / ".quarantine"
     if quarantine_file.exists():
@@ -352,6 +554,7 @@ def main() -> int:
     all_violations.extend(check_log_output_roots())  # Check ADR-015 compliance
     all_violations.extend(check_context_edits(changed_files))  # Check ADR-016 compliance
     all_violations.extend(check_output_roots(changed_files))  # Check CONTRACT Rule 6
+    all_violations.extend(check_cat_cas_manifesto())          # Check CAT_CAS manifesto rules
 
     
     if all_violations:
