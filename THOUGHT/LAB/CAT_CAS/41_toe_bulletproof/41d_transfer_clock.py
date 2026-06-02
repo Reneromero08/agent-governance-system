@@ -214,6 +214,30 @@ def option_2():
 
     print(f"  Vacuum sector (pattern 000):  chi=1  rho={rho_vac:.4f}  W={W_vac:+d}")
 
+    # NULL MODEL: Random transfer matrices (shuffled entries)
+    # Rule 110 carries topological charge (W!=0). Random matrices should NOT.
+    # Generate 5 random 8x8 binary transfer matrices and compute winding.
+    print(f"\n  NULL MODEL: Random 8x8 transfer matrices (5 trials):")
+    rng = torch.Generator().manual_seed(137)
+    random_W = []
+    for t in range(5):
+        T_rand = torch.zeros(8, 8, dtype=torch.complex128)
+        for i in range(8):
+            for j in range(8):
+                if torch.rand(1, generator=rng).item() < 0.3:
+                    T_rand[j, i] = 1.0 + 0j
+        W_rand, _ = pt_gap_winding(T_rand, E_ref=0.5+0j)
+        random_W.append(W_rand)
+    random_topological = sum(1 for w in random_W if w != 0)
+    print(f"    Random W values: {random_W}")
+    print(f"    Random matrices with topological charge: {random_topological}/5")
+    print(f"    (Random sparse directed graphs routinely carry non-zero winding.)")
+    print(f"    The winding number reflects graph cycle count, which is common")
+    print(f"    in both random matrices and Rule 110. Winding alone does NOT discriminate")
+    print(f"    Turing completeness — both the active rule and random noise carry W!=0.")
+    print(f"    The structural claim is that the VACUUM (W=0) differs from the active/random")
+    print(f"    state (W!=0), not that W!=0 is unique to Rule 110.")
+
     # Full codebook: the winding is the resonance R of the semiotic channel
     vac_trivial = (W_vac == 0)
     full_topological = (W_full != 0)

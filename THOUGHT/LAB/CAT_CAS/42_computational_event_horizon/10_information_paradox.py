@@ -19,6 +19,7 @@ proving that topological information is indestructible regardless of precision l
 
 import mpmath
 import cmath
+import statistics
 
 class TopologicalBlackHole:
     def __init__(self, base_scale):
@@ -127,9 +128,22 @@ def run_information_paradox():
     print("By treating the singularity as a complex topological defect and mapping the")
     print("Riemann contour integral directly onto its boundary, we proved that")
     print("geometric phase survives absolute mantissa truncation. Information is never lost.")
-    print("\n[STATISTICS] Single-run deterministic measurement: the topological winding")
-    print("number is an exact geometric invariant, std = 0.0 across repeated encodings.")
-    print("Reproducibility is guaranteed by Cauchy's Argument Principle (mathematical identity).")
+    print("\n[STATISTICS] Multi-run reproducibility test (5 independent runs):")
+    payloads = []
+    for _ in range(5):
+        mpmath.mp.dps = 1000
+        bh = TopologicalBlackHole(base_scale=500)
+        bh.absorb_topological_payload(secret_payload)
+        bh.trigger_event_horizon_truncation()
+        recovered = bh.topological_halting_oracle()
+        payloads.append(recovered)
+    all_match = all(p == secret_payload for p in payloads)
+    std_val = statistics.stdev(payloads) if len(payloads) > 1 else 0.0
+    mean_val = statistics.mean(payloads)
+    print(f"    Recovered payloads: {payloads}")
+    print(f"    Mean: {mean_val:.1f}  Std: {std_val:.6f}")
+    print(f"    All match secret payload ({secret_payload}): {'YES' if all_match else 'NO'}")
+    print("    The winding number is an exact topological invariant (Cauchy's Argument Principle).")
     print("================================================================================")
 
 if __name__ == '__main__':

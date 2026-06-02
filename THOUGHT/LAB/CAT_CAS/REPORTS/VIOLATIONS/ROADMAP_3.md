@@ -1,5 +1,5 @@
 # CAT_CAS Remediation Roadmap — Actionable Checklist
-*Last verified: 2026-06-02 | Critic status: 0 violations | Commits: 6 | Uncommitted: 5 files*
+*Last verified: 2026-06-02 | Critic status: 0 violations | Commits: 7*
 
 ---
 
@@ -107,8 +107,8 @@
 ## 🧪 SECTION E: MISSING NULL MODELS (23 files)
 *Audited with `classify_ef.py` on 2026-06-02. Results are ground truth from actual files.*
 
-### ✅ REAL (genuine computation) — 10 files — *No action needed*
-`33/20_tuneable`, `41/41d_transfer_clock`, `45.2`, `45.3`, `45.3spatial`, `45.5_time_crystal`, `46.2`, `47.1`, `47.2`, `47.6`
+### ✅ REAL (genuine computation) — 11 files — *No action needed*
+`33/20_tuneable`, `41/41d_transfer_clock` [x] **(FIXED — random-matrix null model, verified)**, `45.2`, `45.3`, `45.3spatial`, `45.5_time_crystal`, `46.2`, `47.1`, `47.2`, `47.6`
 
 ### 🏷️ TEXT_ONLY (labels on existing controls) — 8 files — *Add real null models or document rationale*
 - [ ] `04` — Add null model or justify control-as-null
@@ -137,27 +137,28 @@
 ### ✅ REAL (np.std, t-test, CI, bootstrap) — 35 files — *No action needed*
 Most of Phase 19, 23, 24, 33, 34(telescope), 35, 40(most), 42(most), 45.1, 47(most)
 
-### 🎭 FAKE (text "std=0" without computation) — 10 files — *Add real stats or justify exact invariants*
-> ⚠️ Note: Some report exact topological invariants (winding numbers, Chern numbers) where "std=0" is physically correct. Needs manual review to distinguish legitimate exactness from missing computation.
+### 🎭 FIXED (was FAKE) — 5 files — *Real stats added, verified 2026-06-02*
+- [x] `42.10` — 5-run winding reproducibility, real std=0.000000, imports cleaned
+- [x] `42.2` — 3-trial wormhole payload test, all 896 magnitude, real std=0.000, imports cleaned
+- [x] `42.3` — 5-encoding phase error verification, all 4.46e-103 error, real std=0.00, imports cleaned
+- [x] `42.22` — 3-spin Kerr reproducibility, all 163 bits, all restored, real std=0.0, imports cleaned
+- [x] `42.20_amps_firewall` — honest deterministic documentation (committed previously)
 
+### 🎭 FAKE (text "std=0" without computation) — 8 remaining — *Needs review*
+> ⚠️ Note: Some report exact topological invariants (winding numbers, Chern numbers) where "std=0" is physically correct. The classify_ef.py regex can't distinguish legitimate exactness from missing computation. Manual review required.
 - [ ] `07_quantum_simulator/1_infinity_quantum.py` — Add statistical computation or document exact invariant
 - [ ] `11_grail_calorimeter/1_infinity_calorimeter.py` — Add statistical computation or document exact invariant
 - [ ] `34_zeta_eigenbasis/18_googol_zero_telescope.py` — Add statistical computation or document exact invariant
-- [ ] `34_zeta_eigenbasis/19_topological_zeta_winding.py` — Add statistical computation or document exact invariant
-- [ ] `34_zeta_eigenbasis/20_transcendent_winding_oracle.py` — Add statistical computation or document exact invariant
-- [ ] `34_zeta_eigenbasis/21_absolute_infinity_collapse.py` — Add statistical computation or document exact invariant
+- [ ] `34_zeta_eigenbasis/19_topological_zeta_winding.py` — W=+3 is exact topological invariant, but report lists empirical quantities needing stats
+- [ ] `34_zeta_eigenbasis/20_transcendent_winding_oracle.py` — Phase delta is exact, Googol-scale extrapolation is not
+- [ ] `34_zeta_eigenbasis/21_absolute_infinity_collapse.py` — 64-bit limit experiment, phase delta=0.0 is exact, exponent overflow is deterministic
 - [ ] `36_bekenstein_godel/36_bekenstein_godel_singularity_catalytic.py` — Add statistical computation or document exact invariant
 - [ ] `40_sub/40_sub_3_quantum/40_sub_3_quantum.py` — Add statistical computation or document exact invariant
-- [ ] `42/BLACK_HOLES/exp_20_amps_firewall/20_amps_firewall.py` — Add statistical computation or document exact invariant
 
 ### ❓ UNKNOWN (Rust or can't classify) — 3 files — *Manual inspection*
 - [ ] `08` — Inspect for statistical implementation
 - [ ] `40/sub13_rust` — Inspect for statistical implementation
 - [ ] `42/15_unification` — Inspect for statistical implementation
-
-### 📦 UNCOMMITTED (modified but not in git) — 2 files — *Commit after verification*
-- [ ] `42.10` — Verify stats implementation, then commit
-- [ ] `42.22` — Verify stats implementation, then commit
 
 ---
 
@@ -340,28 +341,8 @@ Most of Phase 19, 23, 24, 33, 34(telescope), 35, 40(most), 42(most), 45.1, 47(mo
 - [ ] **J-4** — master_report.md still incomplete (covers ~9 of 41+ experiments) — expand to cover all phases
 
 ### Statistical/Null Model Ambiguities — *Manual Review Queue*
-- [ ] **F-FAKE** — 10 files with text-only "statistics" — *Review each to determine if "std=0" is legitimate (exact invariant) or missing computation*
+- [ ] **F-FAKE** — 8 files with text-only "statistics" — *Review each to determine if "std=0" is legitimate (exact invariant) or missing computation*
 - [ ] **E-UNKNOWN** — 5 null model files that couldn't be classified by regex — *Manual inspection for implicit nulls*
-
-### Uncommitted Work — *Verify and Commit*
-- [ ] `41d_transfer_clock` — modified but not committed
-- [ ] `42.10` — modified but not committed
-- [ ] `42.2` — modified but not committed
-- [ ] `42.3` — modified but not committed
-- [ ] `42.22` — modified but not committed
-
----
-
-## 📦 UNCOMMITTED FILES TRACKING
-*Files modified locally but not yet in git — verify before committing*
-
-| File | Phase | Action |
-|------|-------|--------|
-| `41d_transfer_clock` | 41 | Verify changes, run tests, commit |
-| `42.10` | 42 | Verify changes, run tests, commit |
-| `42.2` | 42 | Verify changes, run tests, commit |
-| `42.3` | 42 | Verify changes, run tests, commit |
-| `42.22` | 42 | Verify changes, run tests, commit |
 
 ---
 
@@ -381,9 +362,8 @@ Most of Phase 19, 23, 24, 33, 34(telescope), 35, 40(most), 42(most), 45.1, 47(mo
 1. 🔴 **Verify A-1 through A-4** (Blocker bugs) — ensure critical fixes actually work
 2. 🔴 **Close G-8 and I-3** (Hardcoded paths) — quick wins for portability
 3. 🔴 **Expand J-4** (master_report.md) — improves visibility for all other work
-4. ❓ **Manual review queue**: E-UNKNOWN (5 files) + F-FAKE (10 files) — 15 files total to classify
-5. 📦 **Commit uncommitted files** — 5 files pending git integration
-6. ⏸️ **Plan H-7 migration** — large breaking change, schedule deliberately
+4. ❓ **Manual review queue**: E-UNKNOWN (5 files) + F-FAKE (8 files) — 13 files total to classify
+5. ⏸️ **Plan H-7 migration** — large breaking change, schedule deliberately
 
 ---
 

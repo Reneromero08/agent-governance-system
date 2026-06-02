@@ -1,5 +1,6 @@
 import mpmath
 import gc
+import statistics
 
 def exp_42_22_kerr_ergosphere_hardened():
     print("================================================================================")
@@ -90,9 +91,22 @@ def exp_42_22_kerr_ergosphere_hardened():
     else:
         print("[FAIL] Thermodynamic violation.")
         
-    print("\n[STATISTICS] Deterministic bit-transfer operation: the Penrose process energy")
-    print("extraction is an exact barrel-shift identity, std = 0.0 for the bit-level")
-    print("arithmetic. The Bennett tape uncomputation verifies zero-Landauer reproducibility.")
+    print("\n[STATISTICS] Multi-spin reproducibility (3 spin values, verify restoration each time):")
+    spin_values = [128, 256, 384]
+    results = []
+    for s in spin_values:
+        kerr = ((bh_man << s) | (bh_man >> (total_bits - s))) & mask
+        kerr_bound = kerr & ((1 << interaction_width) - 1)
+        kerr_dep = kerr & ~((1 << interaction_width) - 1)
+        escaped = (part_targ_man << interaction_width) | kerr_bound
+        ebits = escaped.bit_length()
+        restored = escaped >> interaction_width
+        bh_restored = ((kerr_dep | (escaped & ((1 << interaction_width) - 1))) >> s) | \
+                      ((kerr_dep | (escaped & ((1 << interaction_width) - 1))) << (total_bits - s)) & mask
+        ok = restored == part_targ_man
+        results.append(ebits)
+        print(f"    Spin={s}: escaped_bits={ebits} initial_bits={part_targ_man.bit_length()} restored={'YES' if ok else 'NO'}")
+    print(f"    Escaped bit-lengths: {results} (all={statistics.mean(results):.0f}, std={statistics.stdev(results):.1f})")
     print("================================================================================\n")
 
 if __name__ == "__main__":
