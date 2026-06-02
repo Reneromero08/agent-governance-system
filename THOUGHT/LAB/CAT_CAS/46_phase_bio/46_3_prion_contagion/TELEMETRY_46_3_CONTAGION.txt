@@ -1,0 +1,27 @@
+======================================================================
+EXP 46.3: PRION CONTAGION VIA NON-RECIPROCAL COUPLING
+======================================================================
+Healthy: AAAAAAAAAA (W=0)
+Prion:   GPGPGPGPGP (W=10)
+
+J=0.1 asym=0.00: W=[0, 0, 0, 0, 0, 10, 0, 0, 0, 0] infected=0/9
+J=0.5 asym=0.00: W=[0, 0, 0, 0, 0, 10, 0, 0, 0, 0] infected=0/9
+J=1.0 asym=0.00: W=[0, 0, 0, 0, 0, 10, 0, 0, 0, 0] infected=0/9
+J=2.0 asym=0.00: W=[0, 0, 0, 0, 0, 10, 0, 0, 0, 0] infected=0/9
+J=0.1 asym=0.50: W=[0, 0, 0, 0, 0, 10, 0, 0, 0, 0] infected=0/9
+J=0.5 asym=0.50: W=[0, 0, 0, 0, 0, 10, 0, 0, 0, 0] infected=0/9
+J=1.0 asym=0.50: W=[0, 0, 0, 0, 0, 10, 0, 0, 0, 0] infected=0/9
+J=2.0 asym=0.50: W=[0, 0, 0, 0, 0, 10, 0, 0, 0, 0] infected=0/9
+J=0.1 asym=0.80: W=[0, 0, 0, 0, 0, 10, 0, 0, 0, 0] infected=0/9
+J=0.5 asym=0.80: W=[0, 0, 0, 0, 0, 10, 0, 0, 0, 0] infected=0/9
+J=1.0 asym=0.80: W=[0, 0, 0, 0, 0, 10, 0, 0, 0, 0] infected=0/9
+J=2.0 asym=0.80: W=[0, 0, 0, 0, 0, 10, 0, 0, 0, 0] infected=0/9
+J=0.1 asym=0.95: W=[0, 0, 0, 0, 0, 10, 0, 0, 0, 0] infected=0/9
+J=0.5 asym=0.95: W=[0, 0, 0, 0, 0, 10, 0, 0, 0, 0] infected=0/9
+J=1.0 asym=0.95: W=[0, 0, 0, 0, 0, 10, 0, 0, 0, 0] infected=0/9
+J=2.0 asym=0.95: W=[0, 0, 0, 0, 0, 10, 0, 0, 0, 0] infected=0/9
+
+--- VERDICT ---
+If non-reciprocal coupling (asym>0) causes neighboring proteins to adopt
+W!=0, the Skin Effect propagation is genuine. If infection stays 0 regardless,
+the prion defect does NOT propagate in this model.

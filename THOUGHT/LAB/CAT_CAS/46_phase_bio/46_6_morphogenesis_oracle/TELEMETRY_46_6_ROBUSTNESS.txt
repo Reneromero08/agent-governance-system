@@ -1,0 +1,24 @@
+46.6 ROBUSTNESS: IPR vs L and defect separation
+==================================================
+
+L=20:
+  d= 6: flat=0.0085 ann=0.0438 sep=0.7282 OK
+  d=10: flat=0.0085 ann=0.0788 sep=0.7247 OK
+  d=13: flat=0.0085 ann=0.0682 sep=0.7238 OK
+
+L=25:
+  d= 8: flat=0.0050 ann=0.0857 sep=0.7260 OK
+  d=12: flat=0.0050 ann=0.0681 sep=0.7238 OK
+  d=16: flat=0.0050 ann=0.0535 sep=0.7228 OK
+
+L=30:
+  d=10: flat=0.0039 ann=0.0788 sep=0.7247 OK
+  d=15: flat=0.0039 ann=0.0600 sep=0.7232 OK
+  d=20: flat=0.0039 ann=0.0439 sep=0.7222 OK
+
+L=35:
+  d=11: flat=0.0025 ann=0.0788 sep=0.7247 OK
+  d=17: flat=0.0025 ann=0.0535 sep=0.7228 OK
+  d=23: flat=0.0025 ann=0.0403 sep=0.7220 OK
+
+VERDICT: IPR ordering flat < annihilated < separated must hold at all L,d.

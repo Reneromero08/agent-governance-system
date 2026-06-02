@@ -1,0 +1,33 @@
+======================================================================
+EXP 46.2: OPEN-CHAIN EP + CTC FOLDING ITERATOR
+======================================================================
+
+--- Poly-A (uniform) (L=15) ---
+  lam=0 (FOLDED):  sep=0.00e+00  cond=inf  EP=YES
+  lam=1 (UNFOLDED): sep=1.14e-02
+  CTC: 100 steps -> lam=5.153014e-01  sep=8.17e-03  cond=2.23e+02
+  O(1) (<30 steps): NO  EP reached: NO
+
+--- Poly-R (uniform) (L=15) ---
+  lam=0 (FOLDED):  sep=0.00e+00  cond=inf  EP=YES
+  lam=1 (UNFOLDED): sep=1.14e-02
+  CTC: 100 steps -> lam=5.153014e-01  sep=8.17e-03  cond=2.23e+02
+  O(1) (<30 steps): NO  EP reached: NO
+
+--- GP-repeat (prion) (L=15) ---
+  lam=0 (FOLDED):  sep=0.00e+00  cond=1.31e+132  EP=YES
+  lam=1 (UNFOLDED): sep=5.70e-02
+  CTC: 1 steps -> lam=1.000000e+00  sep=5.70e-02  cond=7.59e+09
+  O(1) (<30 steps): YES  EP reached: YES
+
+--- AV-repeat (L=15) ---
+  lam=0 (FOLDED):  sep=0.00e+00  cond=3.37e+129  EP=YES
+  lam=1 (UNFOLDED): sep=8.00e-02
+  CTC: 1 steps -> lam=1.000000e+00  sep=8.00e-02  cond=8.52e+11
+  O(1) (<30 steps): YES  EP reached: YES
+
+--- Random mix (L=15) ---
+  lam=0 (FOLDED):  sep=0.00e+00  cond=1.34e+50  EP=YES
+  lam=1 (UNFOLDED): sep=5.07e-02
+  CTC: 1 steps -> lam=1.000000e+00  sep=5.07e-02  cond=1.99e+12
+  O(1) (<30 steps): YES  EP reached: YES

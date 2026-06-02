@@ -1,0 +1,21 @@
+======================================================================
+46.1 HYPOTHESIS TEST: Does winding number predict folding class?
+======================================================================
+
+Roadmap claim: W=0 -> alpha-helix, W=1 -> beta-sheet
+
+Sequence                          W  Expected         Match?
+------------------------------------------------------------
+Poly-A (L=12)                    +2  alpha-helix      NO
+Poly-A (L=24)                    +6  alpha-helix      NO
+Poly-A (L=48)                   +14  alpha-helix      NO
+Leu zipper (L=28)                +6  alpha-helix      NO
+AV repeat (L=24)                 +0  beta-sheet       NO
+KL repeat (L=24)                 +0  beta-sheet       NO
+GP repeat (L=24)                +18  random coil      ANY
+Random (L=24)                    +4  random coil      ANY
+Poly-R (L=24)                    +0  random coil      ANY
+
+--- VERDICT ---
+W=0 for helical, W!=0 for sheet: 0/9 correct (0%)
+HYPOTHESIS NOT SUPPORTED: Winding number does not predict fold class.

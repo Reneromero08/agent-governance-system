@@ -1,0 +1,25 @@
+======================================================================
+EXP 46.3 CORRECTED: LOCAL SPECTRAL GAP COLLAPSE (CONTAGION)
+======================================================================
+
+Contagion = eigenstate sequestration via Skin Effect.
+Healthy proteins near the prion: local spectral gap COLLAPSES.
+Healthy proteins far from prion: local spectral gap PRESERVED.
+
+BASELINE (all healthy, no prion):
+  Global W = +0
+  Local gaps = [0.0000 ... 0.0000] (all should be healthy)
+
+J=0.1 asym=0.80 W=+10: near=0.0000 far=0.0000 ratio=1.0x  infected: near=0/6 far=0/9
+J=0.1 asym=0.95 W=+10: near=0.0000 far=0.0000 ratio=1.0x  infected: near=0/6 far=0/9
+J=0.3 asym=0.80 W=+10: near=0.0000 far=0.0000 ratio=1.0x  infected: near=0/6 far=0/9
+J=0.3 asym=0.95 W=+10: near=0.0000 far=0.0000 ratio=1.0x  infected: near=0/6 far=0/9
+J=0.5 asym=0.80 W=+10: near=0.0000 far=0.0000 ratio=1.0x  infected: near=0/6 far=0/9
+J=0.5 asym=0.95 W=+10: near=0.0000 far=0.0000 ratio=1.0x  infected: near=0/6 far=0/9
+J=1.0 asym=0.80 W=+38: near=0.0000 far=0.0000 ratio=1.0x  infected: near=0/6 far=0/9
+J=1.0 asym=0.95 W=+10: near=0.0000 far=0.0000 ratio=1.0x  infected: near=0/6 far=0/9
+
+--- VERDICT ---
+If local spectral gap collapses near the prion (near << far),
+and remains healthy far from the prion, contagion via eigenstate
+sequestration is confirmed.

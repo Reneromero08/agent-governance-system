@@ -33,13 +33,9 @@ torch.manual_seed(42)
 torch.set_default_dtype(torch.float64)
 PI = np.pi
 
-
-class CatalyticTape:
-    def __init__(self, size_bytes=256 * 1024 * 1024, seed=42):
-        rng = np.random.RandomState(seed)
-        self.tape = rng.randint(0, 256, size=size_bytes, dtype=np.uint8)
-    def hash(self):
-        return hashlib.sha256(self.tape.tobytes()).hexdigest()
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), '..'))
+from catalytic_tape import CatalyticTape
 
 
 # ======================================================================
@@ -454,10 +450,15 @@ def main():
               f"t={res['t_floquet']:.1f}s  [{phase}]")
 
     t_sweep = time.time() - t0
+    tape.record_operation(("time_crystal_done", len(alphas)))
+    tape.uncompute()
     tape_final = tape.hash()
-
-    print(f"\n[PHASE 3] Done in {t_sweep:.1f}s.  "
-          f"Tape: {'RESTORED' if tape_initial==tape_final else 'VIOLATION'}")
+    try:
+        tape.verify()
+        print(f"\n[PHASE 3] Done in {t_sweep:.1f}s.  "
+              f"Tape: {'RESTORED' if tape_initial==tape_final else 'VIOLATION'}")
+    except RuntimeError as e:
+        print(f"\n[PHASE 3] Tape: {e}")
     print()
     print("  Catalytic FWHT: O(N*2^N) per matvec, not O(8^N).")
     print("  No SAT solver used.  No dense diagonalization.")

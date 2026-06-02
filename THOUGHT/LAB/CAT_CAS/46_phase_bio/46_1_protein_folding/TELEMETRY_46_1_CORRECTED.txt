@@ -1,0 +1,31 @@
+======================================================================
+EXP 46.1 CORRECTED: WINDING = FOLDABILITY (THERMODYNAMIC FRUSTRATION)
+======================================================================
+
+Sequence                     W  Expected      Match?
+-------------------------------------------------------
+Poly-A (L=15)               +0  FOLDABLE      YES
+GP-repeat (L=15)            +2  FRUSTRATED    YES
+Poly-A (L=30)               +0  FOLDABLE      YES
+GP-repeat (L=30)            +6  FRUSTRATED    YES
+Poly-A (L=45)               +0  FOLDABLE      YES
+GP-repeat (L=45)           +10  FRUSTRATED    YES
+Random (L=15)               +0  FRUSTRATED    NO
+Random (L=30)               +0  FRUSTRATED    NO
+Random (L=45)               +0  FRUSTRATED    NO
+Mixed polar (L=15)          +0  FRUSTRATED    NO
+Mixed polar (L=30)          +0  FRUSTRATED    NO
+Mixed polar (L=45)          +0  FRUSTRATED    NO
+
+--- VERDICT ---
+Correct: 6/12 (50%)
+W=0 <=> foldable (low frustration), W!=0 <=> misfolded (high frustration)
+
+Poly-A foldable at all L: YES
+GP-repeat frustrated at all L: YES
+  Random L=15: W=0 (unexpectedly foldable)
+  Random L=30: W=0 (unexpectedly foldable)
+  Random L=45: W=0 (unexpectedly foldable)
+Random sequences frustrated at all L: NO
+
+HYPOTHESIS VERIFIED: PARTIAL

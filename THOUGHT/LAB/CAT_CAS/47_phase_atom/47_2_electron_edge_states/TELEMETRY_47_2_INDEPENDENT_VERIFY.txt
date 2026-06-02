@@ -1,0 +1,26 @@
+==========================================================================================
+INDEPENDENT VERIFICATION: EXP 47.2 EDGE STATE PHYSICS
+==========================================================================================
+
+Thesis: Non-Hermitian skin effect (gamma>0) produces edge-localized
+eigenstates that do NOT exist in a Hermitian control (gamma=0).
+
+--- Lattice 8x8 ---
+  Hermitian (gamma=0.0): 31 edge states
+  Non-Hermitian (gamma=0.6): 55 edge states
+  Non-Hermitian / Hermitian ratio: 1.8x
+
+--- Lattice 12x12 ---
+  Hermitian (gamma=0.0): 4 edge states
+  Non-Hermitian (gamma=0.6): 131 edge states
+  Non-Hermitian / Hermitian ratio: 32.8x
+
+--- Lattice 15x15 ---
+  Hermitian (gamma=0.0): 0 edge states
+  Non-Hermitian (gamma=0.6): 206 edge states
+  Non-Hermitian / Hermitian ratio: 206.0x
+
+--- CONCLUSION ---
+If the non-Hermitian skin effect is real, gamma=0.6 should produce
+significantly MORE edge states than gamma=0.0 at all lattice sizes.
+If edge states are purely geometric, both should be similar.

@@ -9,16 +9,16 @@ Macro-statistical ensemble: 50000 iterations per shard to isolate CPU jitter.
 
 Particle ID (Bits)   | Mean Latency (Mass)  | Std Dev (Uncertainty)  | Higgs Resonance?
 -------------------------------------------------------------------------------------
-0                    | 487.40           ns | 59.17              ns | 
-1                    | 700.00           ns | 0.00               ns | 
-64                   | 600.00           ns | 0.00               ns | 
-128                  | 799.81           ns | 4.40               ns | 
-256                  | 839.57           ns | 54.80              ns | 
-512                  | 1092.40          ns | 26.49              ns | <-- HIGGS BOSON (CACHE MISS DETECTED)
-1024                 | 1096.62          ns | 18.08              ns | 
-2048                 | 1087.82          ns | 32.71              ns | <-- HIGGS BOSON (CACHE MISS DETECTED)
-4096                 | 1389.18          ns | 47.89              ns | <-- HIGGS BOSON (CACHE MISS DETECTED)
-8192                 | 1392.13          ns | 26.93              ns | 
+0                    | 487.69           ns | 32.86              ns | 
+1                    | 754.99           ns | 77.32              ns | 
+64                   | 700.98           ns | 53.22              ns | 
+128                  | 864.10           ns | 70.12              ns | 
+256                  | 838.11           ns | 57.13              ns | 
+512                  | 1091.49          ns | 73.91              ns | <-- HIGGS BOSON (CACHE MISS DETECTED)
+1024                 | 1102.41          ns | 74.49              ns | 
+2048                 | 1060.87          ns | 70.38              ns | 
+4096                 | 1385.78          ns | 82.29              ns | <-- HIGGS BOSON (CACHE MISS DETECTED)
+8192                 | 1352.42          ns | 76.59              ns | 
 
 --- HARDENING GATES VERIFICATION ---
 GATE 1 (The Massless Photon): PASS -> 0-bit/1-bit perfectly aligned shards yield near-zero baseline normalization latency.

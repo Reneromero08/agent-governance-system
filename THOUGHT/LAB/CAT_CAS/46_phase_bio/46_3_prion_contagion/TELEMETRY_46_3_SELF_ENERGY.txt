@@ -1,0 +1,43 @@
+======================================================================
+EXP 46.3: SELF-ENERGY BROADENING (PRION SEQUESTRATION)
+======================================================================
+BASELINE (all healthy):
+  Global W = +0
+  Seq rate range: 0.5400 - 0.5400
+
+J=0.1 asym=0.80 W=+10: near=0.5400 far=0.5400 ratio=1.0x infected=0/6
+J=0.1 asym=0.95 W=+10: near=0.5400 far=0.5400 ratio=1.0x infected=0/6
+J=0.3 asym=0.80 W=+10: near=0.5400 far=0.5400 ratio=1.0x infected=0/6
+J=0.3 asym=0.95 W=+10: near=0.5400 far=0.5400 ratio=1.0x infected=0/6
+J=0.5 asym=0.80 W=+10: near=0.5400 far=3.4002 ratio=0.2x infected=0/6
+J=0.5 asym=0.95 W=+10: near=0.5400 far=0.5400 ratio=1.0x infected=0/6
+J=1.0 asym=0.80 W=+38: near=1.7895 far=667687.6203 ratio=0.0x infected=1/6
+J=1.0 asym=0.95 W=+10: near=0.5400 far=28.4162 ratio=0.0x infected=0/6
+
+--- DETAILED PROFILE (J=0.5, asym=0.95) ---
+  Dist |  Seq Rate  | Baseline  | Status
+    10 |     0.5400 |     0.5400 | healthy
+     9 |     0.5400 |     0.5400 | healthy
+     8 |     0.5400 |     0.5400 | healthy
+     7 |     0.5400 |     0.5400 | healthy
+     6 |     0.5400 |     0.5400 | healthy
+     5 |     0.5400 |     0.5400 | healthy
+     4 |     0.5400 |     0.5400 | healthy
+     3 |     0.5400 |     0.5400 | healthy
+     2 |     0.5400 |     0.5400 | healthy
+     1 |     0.5400 |     0.5400 | healthy
+     0 |     1.3810 |     0.5400 | PRION
+     1 |     0.5400 |     0.5400 | healthy
+     2 |     0.5400 |     0.5400 | healthy
+     3 |     0.5400 |     0.5400 | healthy
+     4 |     0.5400 |     0.5400 | healthy
+     5 |     0.5400 |     0.5400 | healthy
+     6 |     0.5400 |     0.5400 | healthy
+     7 |     0.5400 |     0.5400 | healthy
+     8 |     0.5400 |     0.5400 | healthy
+     9 |     0.5400 |     0.5400 | healthy
+
+--- VERDICT ---
+If sequestration rate (self-energy broadening) is significantly higher
+near the prion than far from it, contagion via eigenstate sequestration
+is mathematically proven.

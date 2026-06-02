@@ -29,18 +29,13 @@ import torch
 import numpy as np
 import hashlib
 import time
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), '..'))
+from catalytic_tape import CatalyticTape
 
 torch.manual_seed(42)
 torch.set_default_dtype(torch.float64)
 PI = np.pi
-
-
-class CatalyticTape:
-    def __init__(self, size_bytes=256*1024*1024, seed=42):
-        rng = np.random.RandomState(seed)
-        self.tape = rng.randint(0, 256, size=size_bytes, dtype=np.uint8)
-    def hash(self):
-        return hashlib.sha256(self.tape.tobytes()).hexdigest()
 
 
 # ======================================================================
@@ -362,10 +357,15 @@ def main():
               f"{W_su2:+4d}  {gap_su2:10.4f}  {'GAPPED':>18s}")
 
     t_sweep = time.time() - t0
+    tape.record_operation(("gribov_sweep", gap_su2, "U1_gapless", gap_u1))
+    tape.uncompute()
     tape_final = tape.hash()
-
-    print(f"\n[PHASE] Done in {t_sweep:.1f}s.  "
-          f"Tape: {'RESTORED' if tape_initial==tape_final else 'VIOLATION'}")
+    try:
+        tape.verify()
+        print(f"\n[PHASE] Done in {t_sweep:.1f}s.  "
+              f"Tape: {'RESTORED' if tape_initial==tape_final else 'VIOLATION'}")
+    except RuntimeError as e:
+        print(f"\n[PHASE] Tape: {e}")
     print("   U(1): Hermitian Laplacian -> zero mode -> gapless.")
     print("   SU(2): Non-Hermitian ghost operator -> spectral void -> gapped.")
     print("   The mass gap IS the Gribov horizon.")

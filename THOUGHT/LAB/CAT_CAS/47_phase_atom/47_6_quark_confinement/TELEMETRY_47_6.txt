@@ -7,29 +7,29 @@ EXP 47.6: QUARK CONFINEMENT (STRING TENSION & PAIR PRODUCTION)
 Iteratively dereferencing quark pairs at increasing memory offsets...
 Offset(B)  | Latency(ns)  | Std(ns)    | Confinement Verdict
 --------------------------------------------------------------------------------
-8          | 266.60       | 73.53      | ASYMPTOTIC FREEDOM (L1 Cache Hit)
-16         | 141.60       | 53.83      | ASYMPTOTIC FREEDOM (L1 Cache Hit)
-32         | 100.00       | 0.00       | ASYMPTOTIC FREEDOM (L1 Cache Hit)
-64         | 99.63        | 6.04       | ASYMPTOTIC FREEDOM (L1 Cache Hit)
-128        | 134.52       | 47.57      | STRING TENSION (Cache/TLB Drag)
-256        | 176.24       | 58.07      | STRING TENSION (Cache/TLB Drag)
-512        | 193.11       | 37.32      | STRING TENSION (Cache/TLB Drag)
-1024       | 194.42       | 34.91      | STRING TENSION (Cache/TLB Drag)
-2048       | 196.53       | 37.91      | STRING TENSION (Cache/TLB Drag)
-4096       | 2097.37      | 549.92     | PAIR PRODUCTION! (OS Page Fault Interception)
-8192       | 2010.91      | 412.91     | PAIR PRODUCTION! (OS Page Fault Interception)
-16384      | 2170.14      | 612.29     | PAIR PRODUCTION! (OS Page Fault Interception)
+8          | 250.61       | 73.07      | ASYMPTOTIC FREEDOM (L1 Cache Hit)
+16         | 99.75        | 4.97       | ASYMPTOTIC FREEDOM (L1 Cache Hit)
+32         | 99.53        | 6.86       | ASYMPTOTIC FREEDOM (L1 Cache Hit)
+64         | 99.53        | 6.86       | ASYMPTOTIC FREEDOM (L1 Cache Hit)
+128        | 136.70       | 50.28      | STRING TENSION (Cache/TLB Drag)
+256        | 162.50       | 53.28      | STRING TENSION (Cache/TLB Drag)
+512        | 186.41       | 41.27      | STRING TENSION (Cache/TLB Drag)
+1024       | 189.67       | 41.46      | STRING TENSION (Cache/TLB Drag)
+2048       | 199.29       | 43.75      | STRING TENSION (Cache/TLB Drag)
+4096       | 2199.39      | 673.97     | PAIR PRODUCTION! (OS Page Fault Interception)
+8192       | 1914.66      | 155.07     | PAIR PRODUCTION! (OS Page Fault Interception)
+16384      | 2289.37      | 771.49     | PAIR PRODUCTION! (OS Page Fault Interception)
 
 --- NULL MODEL: RANDOM ACCESS (NON-SEQUENTIAL) ---
 Accessing random offsets instead of sequential. Higher variance expected.
-  Sequential (warm) mean std = 40.62 ns (avg std across offsets)
-  Random access null:  mean = 136.36 ns, std = 48.13 ns
+  Sequential (warm) mean std = 37.76 ns (avg std across offsets)
+  Random access null:  mean = 142.12 ns, std = 49.40 ns
   Higher variance under random access confirms sequential locality advantage.
 
 --- NULL MODEL STATISTICS (T-TEST: L1 vs PAGE FAULT) ---
-  <=64B group (asymptotic freedom): mean=151.96, std=78.92, n=4
-  >4096B group (pair production):    mean=2092.81, std=79.71, n=3
-  Welch's t-test: t = -32.0140, p = 2.08e-06
+  <=64B group (asymptotic freedom): mean=137.35, std=75.50, n=4
+  >4096B group (pair production):    mean=2134.48, std=195.61, n=3
+  Welch's t-test: t = -16.7716, p = 1.37e-03
   Interpretation: p < 0.001 confirms the latency difference is statistically significant;
   the warm-to-cold gap is a real physical effect, not measurement noise.
 

@@ -1,0 +1,36 @@
+======================================================================
+EXP 46.2: CTC FIXED-POINT ITERATOR -> EP (JORDAN BLOCK STRUCTURE)
+======================================================================
+
+Hamiltonian: chain with backward hopping controlled by lambda.
+lambda=0 -> backward=0 -> lower-triangular -> EP possible.
+CTC drives lambda->0 using spectral gap as gradient.
+
+--- Poly-A (L=20) ---
+  lam=0: gap=8.000000e-02  cond(V)=2.00e+01
+  lam=1: gap=1.800000e-01  cond(V)=2.01e+01
+  lam=0 is EP: NO
+  CTC: 100 steps -> lam=0.000000e+00 gap=8.000000e-02 cond=2.00e+01
+  O(1) convergence (<20 steps): NO (took 100 steps)
+  EP reached: NO
+
+--- GP-repeat (L=20) ---
+  lam=0: gap=2.400720e+00  cond(V)=2.00e+01
+  lam=1: gap=2.300750e+00  cond(V)=2.00e+01
+  lam=0 is EP: NO
+  CTC: 100 steps -> lam=0.000000e+00 gap=2.400720e+00 cond=2.00e+01
+  O(1) convergence (<20 steps): NO (took 100 steps)
+  EP reached: NO
+
+--- AV-repeat (L=20) ---
+  lam=0: gap=4.601469e+00  cond(V)=2.00e+01
+  lam=1: gap=4.501500e+00  cond(V)=2.00e+01
+  lam=0 is EP: NO
+  CTC: 100 steps -> lam=0.000000e+00 gap=4.601469e+00 cond=2.00e+01
+  O(1) convergence (<20 steps): NO (took 100 steps)
+  EP reached: NO
+
+--- VERDICT ---
+If CTC converges in <20 steps AND reaches an EP (gap->0 or cond->inf):
+  => Hypothesis VERIFIED: folding pathway = CTC-driven EP approach.
+Otherwise: Hypothesis NOT SUPPORTED by current model.

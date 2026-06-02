@@ -1,0 +1,41 @@
+======================================================================
+47.5 MECHANISM VERIFICATION: WHAT CAUSES THE 320-BIT SPIKE?
+======================================================================
+
+Hypothesis: latency spike is from Python bigint limb boundary,
+NOT from CPU cache lines or memory pages.
+
+--- RAW BIGINT ADDITION (no mpmath overhead) ---
+  Bits  Limbs    BigInt ns   mpf+1.0 ns   mpf constr
+-------------------------------------------------------
+    64      3            0          826          873
+   128      5            0          600          872
+   256      9            0          819          946
+   300     10            0          696         1120
+   320     11            0          935         1152
+   340     12            0          962         1097
+   384     13            0          942         1145
+   448     15            0          924         1156
+   512     18            0         1112         1269
+  1024     35            0         1125         1168
+  2048     69           97         1060         1468
+
+--- ANALYSIS ---
+Bigint addition cost per limb:
+  64->128 bits (3->5 limbs): +0ns, 0ns/limb
+  256->300 bits (9->10 limbs): +0ns, 0ns/limb
+  300->320 bits (10->11 limbs): +0ns, 0ns/limb
+  320->384 bits (11->13 limbs): +0ns, 0ns/limb
+  384->512 bits (13->18 limbs): +0ns, 0ns/limb
+  512->1024 bits (18->35 limbs): +0ns, 0ns/limb
+
+--- VERDICT ---
+If the bigint addition cost jumps at 256->300 (9->10 limbs), the spike is from
+Python's internal bigint digit array crossing an allocator boundary, NOT from
+CPU cache lines (64 bytes = 512 bits) or memory pages (4096 bytes).
+
+Cache line = 64 bytes = 512 bits. If the spike were from cache, it would be at 512.
+Python limb = 30 bits. 256 bits = 9 limbs. 300 bits = 10 limbs.
+If the spike is at 300 bits, the mechanism is Python bigint, not CPU hardware.
+
+[TAPE] Verified. 0 bits erased.

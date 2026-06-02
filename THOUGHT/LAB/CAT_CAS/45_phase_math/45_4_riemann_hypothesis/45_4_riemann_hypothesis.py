@@ -41,17 +41,11 @@ import mpmath as mp
 import numpy as np
 import hashlib
 import time
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), '..'))
+from catalytic_tape import CatalyticTape
 
 mp.mp.dps = 35
-
-
-class CatalyticTape:
-    def __init__(self, size_bytes=256 * 1024 * 1024, seed=42):
-        rng = np.random.RandomState(seed)
-        self.tape = rng.randint(0, 256, size=size_bytes, dtype=np.uint8)
-
-    def hash(self):
-        return hashlib.sha256(self.tape.tobytes()).hexdigest()
 
 
 # ======================================================================
@@ -512,12 +506,17 @@ def main():
 
     t_sweep = time.time() - t0
 
+    tape.record_operation(("off_line_all_W0", all_W_zero, "n_windows", len(off_line_windows)))
+    tape.uncompute()
     tape_final = tape.hash()
     restored = (tape_initial == tape_final)
-
-    print()
-    print(f"[PHASE 3] Done in {t_sweep:.1f}s.  "
-          f"Tape: {'RESTORED' if restored else 'VIOLATION'}")
+    try:
+        tape.verify()
+        print()
+        print(f"[PHASE 3] Done in {t_sweep:.1f}s.  "
+              f"Tape: {'RESTORED' if restored else 'VIOLATION'}")
+    except RuntimeError as e:
+        print(f"\n[PHASE 3] Tape: {e}")
     print()
 
     print("=" * 78)

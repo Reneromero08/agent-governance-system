@@ -49,14 +49,9 @@ import time
 torch.manual_seed(42)
 torch.set_default_dtype(torch.float64)
 
-
-class CatalyticTape:
-    def __init__(self, size_bytes=256 * 1024 * 1024, seed=42):
-        rng = np.random.RandomState(seed)
-        self.tape = rng.randint(0, 256, size=size_bytes, dtype=np.uint8)
-
-    def hash(self):
-        return hashlib.sha256(self.tape.tobytes()).hexdigest()
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), '..'))
+from catalytic_tape import CatalyticTape
 
 
 # ======================================================================
@@ -468,11 +463,16 @@ def main():
 
     t_sweep = time.time() - t0
 
+    tape.record_operation(("fractal_p_vs_np_done", len(alphas)))
+    tape.uncompute()
     tape_final = tape.hash()
     restored = (tape_initial == tape_final)
-
-    print(f"\n[PHASE 3] Sweep done in {t_sweep:.1f}s.  "
-          f"Tape: {'RESTORED' if restored else 'VIOLATION'}")
+    try:
+        tape.verify()
+        print(f"\n[PHASE 3] Sweep done in {t_sweep:.1f}s.  "
+              f"Tape: {'RESTORED' if restored else 'VIOLATION'}")
+    except RuntimeError as e:
+        print(f"\n[PHASE 3] Tape: {e}")
     print()
 
     print("=" * 78)

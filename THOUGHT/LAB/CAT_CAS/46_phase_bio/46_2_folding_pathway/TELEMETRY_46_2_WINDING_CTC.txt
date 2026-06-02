@@ -1,0 +1,29 @@
+======================================================================
+EXP 46.2: CTC FOLDING ITERATOR -> W=0 (FOLDED GROUND STATE)
+======================================================================
+
+Uses verified 46.1 chain model. CTC drives frustration scale lam->0.
+At lam=0: uniform sequences have W=0 (FOLDED).
+Non-uniform sequences reach lam_c where W transitions to 0.
+
+--- Poly-A (L=30) ---
+  UNFOLDED (lam=1): W=+0 gap=0.5404
+  FOLDED (lam=1.000000): W=+0 gap=0.5404
+  Steps: 1  W->0: YES  O(1): YES
+--- GP-repeat (L=30) ---
+  UNFOLDED (lam=1): W=+30 gap=0.9182
+  FOLDED (lam=0.000000): W=+0 gap=0.1212
+  Steps: 5  W->0: YES  O(1): YES
+--- Random (L=30) ---
+  UNFOLDED (lam=1): W=+30 gap=1.9294
+  FOLDED (lam=0.100000): W=+0 gap=0.1084
+  Steps: 4  W->0: YES  O(1): YES
+--- AV-repeat (L=30) ---
+  UNFOLDED (lam=1): W=+30 gap=1.5372
+  FOLDED (lam=0.100000): W=+0 gap=0.4705
+  Steps: 4  W->0: YES  O(1): YES
+
+--- VERDICT ---
+CTC iterator should drive W->0 in O(1) steps.
+This implements Levinthal's bypass: the protein doesn't search,
+it follows the topological gradient to the ground state.

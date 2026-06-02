@@ -1,18 +1,16 @@
+# DEPRECATED (2026-06-01): Replaced by 46_1_foldability_oracle.py
+# This file used 2D contact map IPR with arbitrary thresholds (IPR<0.10=FOLDED)
+# and a ceremonial tape (never XOR-modified). The corrected experiment uses
+# 1D chain point-gap winding number to measure thermodynamic frustration.
+# See: 46_1_foldability_oracle.py for the canonical verified implementation.
+# See: VERIFICATION_REPORT.md for the full audit and corrected hypothesis.
 import numpy as np
 import hashlib
 import os
 
-class CatalyticTape:
-    def __init__(self, size_mb=256):
-        self.size_bytes = size_mb * 1024 * 1024
-        np.random.seed(42)
-        self.tape = np.random.bytes(self.size_bytes)
-        self.initial_hash = hashlib.sha256(self.tape).hexdigest()
-        
-    def verify(self):
-        if hashlib.sha256(self.tape).hexdigest() != self.initial_hash:
-            raise ValueError("Landauer heat generated!")
-        return True
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), '..', '..', '47_phase_atom'))
+from catalytic_tape import BennettHistoryTape
 
 KD = {
     'A': 1.8, 'R': -4.5, 'N': -3.5, 'D': -3.5, 'C': 2.5, 'Q': -3.5, 'E': -3.5,
@@ -93,8 +91,8 @@ def run_experiment():
     log_and_print("="*80)
     log_and_print("EXP 46.1v2: 2D CONTACT MAP — IPR FOLDING SENSOR")
     log_and_print("="*80)
-    tape = CatalyticTape()
-    log_and_print("[SYSTEM] 256MB Catalytic Tape. 0-Landauer active.\n")
+    tape = BennettHistoryTape()
+    log_and_print("[SYSTEM] 256MB BennettHistoryTape. 0-Landauer active.\n")
 
     for L in [15, 30, 45]:
         log_and_print(f"--- L={L} ---")

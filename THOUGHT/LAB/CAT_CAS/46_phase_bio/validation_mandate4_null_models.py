@@ -37,7 +37,14 @@ class CatalyticTape:
         self.initial_hash = hashlib.sha256(self.tape).hexdigest()
         self.op_count = 0
         self.op_offset = 0
+        self.was_modified = False
     def verify(self):
+        if not self.was_modified:
+            raise RuntimeError(
+                "Tautological tape: no non-zero bytes XOR-modified. "
+                "verify() is structurally guaranteed to pass. "
+                "The tape was never borrowed. Not catalytic."
+            )
         if hashlib.sha256(self.tape).hexdigest() != self.initial_hash:
             raise ValueError("Landauer heat generated!")
         return True
@@ -48,6 +55,8 @@ class CatalyticTape:
         for i, b in enumerate(data_bytes):
             pos = (self.op_offset + i) % self.size_bytes
             ba[pos] ^= b
+            if b != 0:
+                self.was_modified = True
         self.tape = bytes(ba)
         self.op_offset = (self.op_offset + len(data_bytes)) % self.size_bytes
         self.op_count += 1
@@ -370,16 +379,22 @@ def build_morph_H(coords, use_nematic=True, state="separated"):
         if ip is not None: H[ip,ip] += 1j*5.0
         if im is not None: H[im,im] += -1j*5.0
     elif state == "annihilated":
-        # HARDCODED INVARIANT: residual = 5.0 is hardcoded by state. This should be
-        # dynamically computed from the nematic field gradient and defect separation
-        # rather than fixed at 5.0 * 0.3 = 1.5. The constant 5.0 represents the active
-        # stress amplitude (1j*5.0 in separated state) and 0.3 is the annihilation
-        # attenuation factor. Both are physical invariants of HuBMAP colon morphology
-        # that should be derived from the actual cell density and tissue curvature.
-        residual = 5.0 * 0.3
+        # Dynamic residual: active stress (5.0) attenuated by scar cell density.
+        # Scar region: cells with |y - y_mid| < 0.04 spanning the defect gap.
+        # attenuation = (cells in scar) / (cells expected if uniform density)
+        active_stress = 5.0
+        scar_cells = 0
+        scar_slice_width = 0.04
         for i in range(N):
             xi, yi = cn[i,0], cn[i,1]
-            if abs(yi - y_mid) < 0.04:
+            if abs(yi - y_mid) < scar_slice_width:
+                scar_cells += 1
+        expected_cells = N * (2 * scar_slice_width / 1.0)
+        attenuation = scar_cells / max(expected_cells, 1)
+        residual = active_stress * attenuation
+        for i in range(N):
+            xi, yi = cn[i,0], cn[i,1]
+            if abs(yi - y_mid) < scar_slice_width:
                 if xi < x_mid: H[i,i] += 1j*residual
                 elif xi > x_mid: H[i,i] += -1j*residual
     rng = np.random.RandomState(42)

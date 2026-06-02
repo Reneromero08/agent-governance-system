@@ -1,0 +1,39 @@
+======================================================================
+EXP 46.1: FOLDABILITY ORACLE (WINDING = THERMODYNAMIC FRUSTRATION)
+======================================================================
+[TAPE] 256MB Catalytic Tape. 0-Landauer active.
+
+--- L=15 ---
+  Poly-A (foldable)    W=  +0  FOLDABLE      [PASS]
+  Poly-R (foldable)    W=  +0  FOLDABLE      [PASS]
+  GP-repeat (prion)    W= +14  FRUSTRATED    [PASS]
+  AV alternate         W= +14  FRUSTRATED    [PASS]
+  Random-1             W= +15  FRUSTRATED    [PASS]
+  Random-2             W= +15  FRUSTRATED    [PASS]
+  Random-3             W= +15  FRUSTRATED    [PASS]
+
+--- L=30 ---
+  Poly-A (foldable)    W=  +0  FOLDABLE      [PASS]
+  Poly-R (foldable)    W=  +0  FOLDABLE      [PASS]
+  GP-repeat (prion)    W= +30  FRUSTRATED    [PASS]
+  AV alternate         W= +30  FRUSTRATED    [PASS]
+  Random-1             W= +30  FRUSTRATED    [PASS]
+  Random-2             W= +30  FRUSTRATED    [PASS]
+  Random-3             W= +30  FRUSTRATED    [PASS]
+
+--- L=45 ---
+  Poly-A (foldable)    W=  +0  FOLDABLE      [PASS]
+  Poly-R (foldable)    W=  +0  FOLDABLE      [PASS]
+  GP-repeat (prion)    W= +44  FRUSTRATED    [PASS]
+  AV alternate         W= +44  FRUSTRATED    [PASS]
+  Random-1             W= +45  FRUSTRATED    [PASS]
+  Random-2             W= +45  FRUSTRATED    [PASS]
+  Random-3             W= +45  FRUSTRATED    [PASS]
+
+--- HARDENING GATES ---
+GATE 1 (Poly-A foldable): W=0 -> PASS
+GATE 2 (GP-repeat frustrated): W!=0 -> PASS
+GATE 3 (Random sequences frustrated): 10/10 -> PASS
+
+ALL GATES PASS
+[TAPE] Verified. 0 bits erased. 0.0 J.
