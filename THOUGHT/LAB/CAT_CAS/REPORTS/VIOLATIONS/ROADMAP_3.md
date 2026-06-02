@@ -15,44 +15,6 @@
 
 ---
 
-## ⚙️ SECTION C: CRITIC RULES M-1 THROUGH M-4 (10 items)
-
-### M-1: Hardcoded Invariants
-- [x] **C-1** — M-1 hardcoded invariant  
-  📄 `46/validation_mandate4_null_models.py` | Status: ✅ DONE | Notes: Fixed by Session 2 agent (dynamic computation).
-
-### M-2: Ceremonial Tapes (genuine XOR-modifying required)
-- [x] **C-2** — M-2 ceremonial tape  
-  📄 `46/validation_mandate4_null_models.py` | Status: ✅ DONE | Notes: Genuine XOR tape with `was_modified` flag.
-
-- [ ] **C-3** — M-2 ceremonial tape  
-  📄 `46/validation_mandate5_conservation.py` | Status: ⚠️ DONE-UNVERIFIED
-
-- [ ] **C-4** — M-2 ceremonial tape  
-  📄 `46/validation_real_connectome.py` | Status: ⚠️ DONE-UNVERIFIED
-
-- [ ] **C-5** — M-2 ceremonial tape  
-  📄 `46/validation_real_morphogenesis.py` | Status: ⚠️ DONE-UNVERIFIED
-
-### M-3: Arbitrary Thresholds
-- [x] **C-6** — M-3 arbitrary threshold 0.55  
-  📄 `47_4_lhc_overflow_exploit.py` | Status: ✅ DONE | Notes: Resolved by B-1 refactor.
-
-### M-4: NxN SAT Claims (annotation-only fixes)
-- [x] **C-7** — M-4 NxN SAT  
-  📄 `40_sub_1_temporal_sat.py` | Status: 🎨 COSMETIC | Notes: Annotated as "proven impossible" — no code change.
-
-- [x] **C-8** — M-4 NxN SAT  
-  📄 `40_sub_2_floquet_swarm.py` | Status: 🎨 COSMETIC | Notes: Same — annotation only.
-
-- [x] **C-9** — M-4 NxN SAT  
-  📄 `40_sub_4_sat_swarm.py` | Status: 🎨 COSMETIC | Notes: Same — annotation only.
-
-- [x] **C-10** — M-4 NxN SAT  
-  📄 `45_5_p_vs_np_catalytic.py` | Status: 🎨 COSMETIC | Notes: Same — annotation only. Phase 45.5 report already admits "UNIVERSAL FAILURE."
-
----
-
 ## 🎭 SECTION D: PHASE 47 CEREMONIAL TAPE CRISIS (6 items)
 *All 6 fixed. Shared `47_phase_atom/catalytic_tape.py` created with genuine XOR-modifying tape.*
 

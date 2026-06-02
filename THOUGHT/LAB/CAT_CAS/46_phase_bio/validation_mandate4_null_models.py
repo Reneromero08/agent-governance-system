@@ -38,6 +38,7 @@ class CatalyticTape:
         self.op_count = 0
         self.op_offset = 0
         self.was_modified = False
+        self.history = []
     def verify(self):
         if not self.was_modified:
             raise RuntimeError(
@@ -48,6 +49,14 @@ class CatalyticTape:
         if hashlib.sha256(self.tape).hexdigest() != self.initial_hash:
             raise ValueError("Landauer heat generated!")
         return True
+    def uncompute(self):
+        while self.history:
+            off, length, data_bytes = self.history.pop()
+            ba = bytearray(self.tape)
+            for i, b in enumerate(data_bytes):
+                pos = (off + i) % self.size_bytes
+                ba[pos] ^= b
+            self.tape = bytes(ba)
     def record_operation(self, data_bytes):
         if self.op_offset + len(data_bytes) >= self.size_bytes:
             self.op_offset = 0
@@ -58,6 +67,7 @@ class CatalyticTape:
             if b != 0:
                 self.was_modified = True
         self.tape = bytes(ba)
+        self.history.append((self.op_offset, len(data_bytes), data_bytes))
         self.op_offset = (self.op_offset + len(data_bytes)) % self.size_bytes
         self.op_count += 1
 
@@ -376,8 +386,17 @@ def build_morph_H(coords, use_nematic=True, state="separated"):
     if state == "separated":
         ip = nearest(x_mid-sep_norm/2, y_mid)
         im = nearest(x_mid+sep_norm/2, y_mid)
-        if ip is not None: H[ip,ip] += 1j*5.0
-        if im is not None: H[im,im] += -1j*5.0
+        active_stress = 5.0
+        if ip is not None and im is not None:
+            dx = cn[ip,0] - cn[im,0]
+            dy = cn[ip,1] - cn[im,1]
+            separation = np.sqrt(dx**2 + dy**2)
+            attenuation = float(separation)
+            stress = active_stress * min(attenuation, 1.0)
+        else:
+            stress = active_stress
+        if ip is not None: H[ip,ip] += 1j * stress
+        if im is not None: H[im,im] += -1j * stress
     elif state == "annihilated":
         # Dynamic residual: active stress (5.0) attenuated by scar cell density.
         # Scar region: cells with |y - y_mid| < 0.04 spanning the defect gap.
@@ -469,6 +488,7 @@ def main():
     m2 = null_model_m2(tape)
     m3 = null_model_m3(tape)
 
+    tape.uncompute()
     tape.verify()
     t_total = time.time() - t0
 

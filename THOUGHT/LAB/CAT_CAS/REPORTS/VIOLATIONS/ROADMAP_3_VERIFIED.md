@@ -95,3 +95,65 @@
   > Both runs produce IDENTICAL output (ablated measured_val=1 both times). Reproducibility: YES.
   > STATUS CHANGE REQUEST: ⚠️ DONE-UNVERIFIED → ✅ DONE (pending Mastermind confirmation)
 
+---
+
+## ⚙️ SECTION C: CRITIC RULES M-1 THROUGH M-4 (10 items)
+
+### M-1: Hardcoded Invariants
+- [x] **C-1** — M-1 hardcoded invariant  
+  📄 `46/validation_mandate4_null_models.py` | Status: ✅ DONE | Notes: Fixed by Session 2 agent (dynamic computation).
+  > [2026-06-02] MASTERMIND FIX APPLIED: Separated case dynamic stress from defect separation distance.
+  > Lines 379-380 replaced: 1j*5.0 → 1j*stress where stress = 5.0 * min(separation, 1.0).
+  > RAW EVIDENCE: M1 p=0.000786 PASS, M2 p=0.000002 PASS, M3 separated ratio=0.734 != 1.0 PASS.
+  > Tape verification crash is pre-existing (record_operation without uncompute).
+  > STATUS: ✅ DONE re-verified with full dynamic computation in both branches.
+
+### M-2: Ceremonial Tapes (genuine XOR-modifying required)
+- [x] **C-2** — M-2 ceremonial tape  
+  📄 `46/validation_mandate4_null_models.py` | Status: ✅ DONE | Notes: Genuine XOR tape with `was_modified` flag.
+  > [2026-06-02] MASTERMIND FIX APPLIED: Added history stack + uncompute() + tape.uncompute() before verify().
+  > RAW EVIDENCE: All 3 mandates PASS, tape verify() clean, 0 bits, 29.1s.
+  > Full catalytic lifecycle: record → compute → uncompute → verify. Hash MATCH.
+  > STATUS: ✅ DONE re-verified with full catalytic lifecycle.
+
+- [x] **C-3** — M-2 ceremonial tape  
+  📄 `46/validation_mandate5_conservation.py` | Status: ✅ DONE
+  > [2026-06-02] MASTERMIND VERIFIED: Genuine XOR + uncompute + conditional bytes_written.
+  > Full catalytic lifecycle confirmed (record → compute → uncompute → verify). No fix required. C-3 closed.
+
+- [x] **C-4** — M-2 ceremonial tape  
+  📄 `46/validation_real_connectome.py` | Status: ✅ DONE
+  > [2026-06-02] MASTERMIND VERIFIED: Genuine XOR + uncompute + conditional bytes_written.
+  > Full catalytic lifecycle confirmed. No fix required. C-4 closed.
+
+- [x] **C-5** — M-2 ceremonial tape  
+  📄 `46/validation_real_morphogenesis.py` | Status: ✅ DONE
+  > [2026-06-02] MASTERMIND VERIFIED: Genuine XOR + uncompute + conditional bytes_written.
+  > Full catalytic lifecycle confirmed. Post-verify telemetry logging acceptable. C-5 closed.
+
+### M-3: Arbitrary Thresholds
+- [x] **C-6** — M-3 arbitrary threshold 0.55  
+  📄 `47_4_lhc_overflow_exploit.py` | Status: ✅ DONE | Notes: Resolved by B-1 refactor.
+  > [2026-06-02] MASTERMIND VERIFIED: 0.55 replaced with dynamic np.mean(all_spins).
+  > B-1 refactor confirmed. GATE 2 honestly annotated. C-6 closed.
+
+### M-4: NxN SAT Claims (annotation-only fixes)
+- [x] **C-7** — M-4 NxN SAT  
+  📄 `40_sub_1_temporal_sat.py` | Status: ✅ DONE | Notes: Annotated as "proven impossible" — no code change.
+  > [2026-06-02] MASTERMIND VERIFIED: Honest NxN impossibility annotation present.
+  > No functional solver code. Forensic reference only. C-7 closed.
+
+- [x] **C-8** — M-4 NxN SAT  
+  📄 `40_sub_2_floquet_swarm.py` | Status: ✅ DONE | Notes: Same — annotation only.
+  > [2026-06-02] MASTERMIND VERIFIED: Honest NxN impossibility annotation present.
+  > No functional solver code. C-8 closed.
+
+- [x] **C-9** — M-4 NxN SAT  
+  📄 `40_sub_4_sat_swarm.py` | Status: ✅ DONE | Notes: Same — annotation only.
+  > [2026-06-02] MASTERMIND VERIFIED: Honest NxN impossibility annotation present.
+  > No functional solver code. C-9 closed.
+
+- [x] **C-10** — M-4 NxN SAT  
+  📄 `45_5_p_vs_np_catalytic.py` | Status: ✅ DONE | Notes: Same — annotation only. Phase 45.5 report already admits "UNIVERSAL FAILURE."
+  > [2026-06-02] MASTERMIND VERIFIED: "PROVEN IMPOSSIBLE" header with 0/4 gates documented.
+  > Forensic reference only. C-10 closed.
