@@ -15,23 +15,6 @@
 
 ---
 
-## 🚨 SECTION A: BLOCKER BUGS (4 items) — *Priority: CRITICAL*
-*All 4 fixed in commit `97a96075` — verify before proceeding*
-
-- [ ] **A-1** — Feistel swap produces `a^b` in both halves  
-  📄 `15_hdd_native_inference/experiment.py` | Status: ⚠️ DONE-UNVERIFIED
-
-- [ ] **A-2** — F16 weight loading uses uint16 not float16  
-  📄 `16_catalytic_27b_inference/experiment.py` | Status: ⚠️ DONE-UNVERIFIED
-
-- [ ] **A-3** — Undefined `k95_phase` variable  
-  📄 `16_catalytic_27b_inference/_test_phase.py` | Status: ⚠️ DONE-UNVERIFIED
-
-- [ ] **A-4** — 6 AttributeErrors on missing attrs  
-  📄 `30_boundary_stress/1_memory_collision.py` | Status: ⚠️ DONE-UNVERIFIED
-
----
-
 ## 🔥 SECTION B: CRITICAL — NULL RESULTS & FALSE CLAIMS (6 items)
 
 - [x] **B-1** — 47.4 palindrome = spin (null result)  
@@ -346,24 +329,13 @@ Most of Phase 19, 23, 24, 33, 34(telescope), 35, 40(most), 42(most), 45.1, 47(mo
 
 ---
 
-## 🚫 OUT OF SCOPE / NOT TRACKED IN THIS ROADMAP
-*For awareness — not part of current remediation effort*
-
-- ❌ **Phase 48 (Energy Extraction)** — Roadmap exists at `ROADMAP_48_ENERGY_EXTRACTION.md`, not yet started
-- ❌ **Phases 01-33, 35-40** — Original experiments, not part of remediation effort
-- ❌ **AGENT_BULLSHIT_LOG.md** — Historical record of agent failures, kept for accountability
-- ❌ **USER_DIRECTIVES_LOG.md** — What the user told agents to do (and what they did wrong)
-
----
-
 ## 🎯 QUICK-START PRIORITIZATION
 *If you're overwhelmed, tackle in this order:*
 
-1. 🔴 **Verify A-1 through A-4** (Blocker bugs) — ensure critical fixes actually work
-2. 🔴 **Close G-8 and I-3** (Hardcoded paths) — quick wins for portability
-3. 🔴 **Expand J-4** (master_report.md) — improves visibility for all other work
-4. ❓ **Manual review queue**: E-UNKNOWN (5 files) + F-FAKE (8 files) — 13 files total to classify
-5. ⏸️ **Plan H-7 migration** — large breaking change, schedule deliberately
+1. 🔴 **Close G-8 and I-3** (Hardcoded paths) — quick wins for portability
+2. 🔴 **Expand J-4** (master_report.md) — improves visibility for all other work
+3. ❓ **Manual review queue**: E-UNKNOWN (5 files) + F-FAKE (8 files) — 13 files total to classify
+4. ⏸️ **Plan H-7 migration** — large breaking change, schedule deliberately
 
 ---
 

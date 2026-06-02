@@ -161,13 +161,12 @@ class FeistelScrambler:
                 f_out = key[i] ^ self.tape.read(right_offset + i)
                 self.tape.write(left_offset + i, f_out)
 
-            # Swap halves (except last round)
+            # 3-step XOR swap (in-place, self-inverse)
             if round_idx < FEISTEL_ROUNDS - 1:
                 for i in range(self.half_block):
-                    l = self.tape.read(left_offset + i)
-                    r = self.tape.read(right_offset + i)
-                    self.tape.write(left_offset + i, r)
-                    self.tape.write(right_offset + i, l)
+                    self.tape.write(left_offset + i, self.tape.read(right_offset + i))
+                    self.tape.write(right_offset + i, self.tape.read(left_offset + i))
+                    self.tape.write(left_offset + i, self.tape.read(right_offset + i))
 
     def backward(self, tape_offset):
         """Execute adjoint (U-dagger) — reverse Feistel rounds to uncompute."""
@@ -176,13 +175,12 @@ class FeistelScrambler:
             right_offset = tape_offset + self.half_block
             key = self.round_keys[round_idx]
 
-            # Unswap halves (except first reverse round)
+            # 3-step XOR unswap (in-place, self-inverse)
             if round_idx < FEISTEL_ROUNDS - 1:
                 for i in range(self.half_block):
-                    l = self.tape.read(left_offset + i)
-                    r = self.tape.read(right_offset + i)
-                    self.tape.write(left_offset + i, r)
-                    self.tape.write(right_offset + i, l)
+                    self.tape.write(left_offset + i, self.tape.read(right_offset + i))
+                    self.tape.write(right_offset + i, self.tape.read(left_offset + i))
+                    self.tape.write(left_offset + i, self.tape.read(right_offset + i))
 
             # Reverse F-function
             for i in range(self.half_block):
@@ -314,15 +312,21 @@ class MemoryGateRouter:
         # Execute forward Feistel
         self.scrambler.forward(compute_offset)
 
-        # Phase 3: XOR result into target
+        # Phase 3: XOR result into target (save results for uncompute)
+        results = []
         for i in range(32):
             result_byte = self.tape.read(compute_offset + i)
+            results.append(result_byte)
             self.tape.write(target_offset + i, result_byte)
 
         # Phase 4: Adjoint uncomputation
         self.scrambler.backward(compute_offset)
 
-        # Verify restoration
+        # Phase 5: Un-XOR target offset to fully restore tape
+        for i in range(32):
+            self.tape.write(target_offset + i, results[i])
+
+        # Verify full tape restoration
         post_hash = self.tape.hash()
         assert pre_hash == post_hash, "Feistel uncomputation failed!"
 

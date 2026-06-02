@@ -819,3 +819,42 @@ Phase 42 (8 of 17 independently verified — see below), 45.2, 45.4, 45.6 (gribo
 
 ### Summary
 The previous agent falsified by: (1) wrong comparison objects, (2) wrong statistical test, (3) wrong code version. All 3 isomorphisms hold when properly tested.
+
+---
+
+## 2026-06-01 SECTION A BLOCKER VERIFICATION (RAW PROBES)
+
+### PROBE A-1: Feistel Swap Index Symmetry
+- FILE: `15_hdd_native_inference/experiment.py`
+- FORWARD LOOP (lines 152-170): `forward()` calls `self.tape.write(left_offset + i, f_out)` where `f_out = key[i] ^ self.tape.read(right_offset + i)`. Write method (line 101-102) uses `tape[offset % self.size] ^= val & 0xFF` — XOR-accumulation.
+- BACKWARD LOOP (lines 172-190): `backward()` uses identical expressions `right_offset + i` and `left_offset + i`, calls same `tape.write()` with same `f_out`.
+- INDEX SYMMETRY: Both forward and backward use identical modulo wrapping (`offset % self.size` in read line 99 and write line 102). Both compute indices identically (`right_offset + i`, `left_offset + i`).
+- RUNTIME RESULT (N=100): `AssertionError: Feistel uncomputation failed!` at token 0. `pre_hash != post_hash` on line 327.
+- STATUS: Index arithmetic IS symmetric. The bug is NOT in index wrapping. The bug is in `write()` XOR-accumulation semantics — `tape[left] ^= (key[i] ^ tape[right])` is not self-inverse because `tape[right]` changes between forward and backward passes.
+
+### PROBE A-2: F16 Weight Loading Type Check
+- FILE: `16_catalytic_27b_inference/experiment.py`
+- ATTENTION F16 PATH (lines 179-192): Manual uint16→float32 via sign/exp/mant bit extraction. Does NOT use `np.float16` dtype.
+- DELTANET F16 PATH (lines 234-238): Uses `np.frombuffer(raw_bytes, dtype=np.float16)` — CORRECT.
+- DEBUG OUTPUT: `DEBUG dtype=float32, shape=(38664192,), sample=[ 0.00253296 -0.00024796  0.01550293]`
+- LINE COUNT: 552 before debug insertion, 552 after debug removal.
+- STATUS: Attention F16 uses manual uint16 bit-manipulation (produces valid float32 output). DeltaNet F16 uses correct np.float16. The uint16→float32 manual decode is mathematically correct but verbose.
+
+### PROBE A-3: k95_phase Definition Check
+- FILE: `16_catalytic_27b_inference/_test_phase.py`
+- LINE 47-51: `evals = evals[::-1]; ... cum = np.cumsum(evals / evals.sum())` then `k95_phase = int(np.searchsorted(cum, 0.95) + 1)`
+- DEFINITION: Local computation on line 50. NOT imported from any module. NOT undefined.
+- LINE 51: `print(f'Phase Df={df_phase:.1f}, K95={k95_phase}')` — first use.
+- LINE 89: `print(f'Phase-only:  Df={df_phase:.1f}, K95={k95_phase}')` — summary use.
+- RUNTIME RESULT: Script runs to completion. Output: `Phase Df=25.2, K95=25 / Complex diff Df=24.4, K95=24 / Raw complex Df=25.3, K95=25`. No NameError.
+- STATUS: k95_phase is defined at line 50. No undefined variable crash. The original bug report claiming "k95_phase never defined" does not reproduce.
+
+### PROBE A-4: Memory Collision Attribute Errors
+- FILE: `30_boundary_stress/1_memory_collision.py`
+- RUNTIME RESULT (full stdout):
+```
+Unallocated noise (rate=0.01,0.05,0.10,0.50): all SURVIVED active_ok=True match=True
+Active noise (rate=0.01,0.05,0.10,0.50): all CORRUPTED active_ok=False match=True
+Random noise (rate=0.01,0.05,0.10,0.50): all CORRUPTED active_ok=False match=True
+```
+- STATUS: NO ERRORS. All 12 test cases execute without AttributeError. No traceback. No missing attrs.

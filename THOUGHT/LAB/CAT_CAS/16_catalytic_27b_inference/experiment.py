@@ -177,19 +177,8 @@ class HDDWeightStreamer:
                             bf16_vals = bf16_vals.astype(np.uint32) << 16
                             f32_mat = bf16_vals.view(np.float32).reshape(FULL_MATRIX_ROWS, HIDDEN_DIM)
                         elif dtype == "F16":
-                            import struct as _struct
-                            f16_raw = np.frombuffer(raw_bytes, dtype=np.uint16)
-                            f32_mat = np.zeros(FULL_MATRIX_ROWS * HIDDEN_DIM, dtype=np.float32)
-                            for k in range(len(f16_raw)):
-                                sign = (f16_raw[k] >> 15) & 1
-                                exp = (f16_raw[k] >> 10) & 0x1F
-                                mant = f16_raw[k] & 0x3FF
-                                if exp == 0:
-                                    val = mant / 1024.0 * (2.0 ** -14)
-                                else:
-                                    val = (1.0 + mant / 1024.0) * (2.0 ** (exp - 15))
-                                f32_mat[k] = -val if sign else val
-                            f32_mat = f32_mat.reshape(FULL_MATRIX_ROWS, HIDDEN_DIM)
+                            f16_vals = np.frombuffer(raw_bytes, dtype=np.float16)
+                            f32_mat = f16_vals.astype(np.float32).reshape(FULL_MATRIX_ROWS, HIDDEN_DIM)
                         else:
                             f32_mat = np.frombuffer(raw_bytes, dtype=np.float32).reshape(FULL_MATRIX_ROWS, HIDDEN_DIM)
 
