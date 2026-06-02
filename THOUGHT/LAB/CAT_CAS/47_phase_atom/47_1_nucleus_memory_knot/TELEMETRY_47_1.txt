@@ -4,22 +4,22 @@ EXP 47.1: THE NUCLEUS (THE PROTECTED MEMORY KNOT)
 [SYSTEM] 256MB Bennett History Tape Initialized. Zero-Landauer constraint active.
 
 --- STATE 1: TRITIUM (3 NUCLEONS) ---
-Unbound Latency (Baseline): 1,207,449.00 ns (std=38,436)
-Nuclear Knot Latency (GC):  1,336,997.00 ns (std=60,015)
-Strong Force Friction:      1.11x
-Cohen's d:                  2.56
-Permutation p-value:        0.0010
+Unbound Latency (Baseline): 1,409,584.00 ns (std=254,783)
+Nuclear Knot Latency (GC):  1,460,561.00 ns (std=228,779)
+Strong Force Friction:      1.04x
+Cohen's d:                  0.21
+Permutation p-value:        0.1349
 
 --- STATE 2: URANIUM-238 (238 NUCLEONS) ---
-Unbound Latency (Baseline): 2,915,241.00 ns (std=461,086)
-Nuclear Knot Latency (GC):  12,499,266.00 ns (std=1,706,677)
-Strong Force Friction:      4.29x
-Cohen's d:                  7.63
+Unbound Latency (Baseline): 3,461,513.00 ns (std=665,748)
+Nuclear Knot Latency (GC):  14,944,695.00 ns (std=1,489,810)
+Strong Force Friction:      4.32x
+Cohen's d:                  9.90
 Permutation p-value:        0.0010
 
 --- NULL MODEL: PERMUTATION TEST ---
 Null hypothesis: bound/unbound labels are exchangeable (no GC topology effect).
-N=3: p=0.0010 (permutation null, 1000 shuffles) -> reject null
+N=3: p=0.1349 (permutation null, 1000 shuffles) -> cannot reject
 N=238: p=0.0010 (permutation null, 1000 shuffles) -> reject null
 Random baseline: if GC cycle detection had no effect, bound and unbound latencies would be indistinguishable.
 

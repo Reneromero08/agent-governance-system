@@ -24,7 +24,7 @@ import catalytic_ffi
 # ==================================================================
 # Configuration
 # ==================================================================
-HDD_PATH = "G:/bekenstein_tape.bin"
+HDD_PATH = os.environ.get("HDD_TAPE_PATH", "G:/bekenstein_tape.bin")
 TAPE_SIZE_MB = 512  # Use 512MB of the HDD (can scale to 500GB)
 TAPE_SIZE = TAPE_SIZE_MB * 1024 * 1024
 SOLVES_PER_DEPTH = 50000

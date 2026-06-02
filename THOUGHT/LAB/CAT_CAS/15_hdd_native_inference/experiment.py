@@ -596,8 +596,9 @@ def run_hdd_native_inference(model_path: str, num_tokens: int = 1000):
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model", type=str, default="G:/",
-                        help="Path to model file or HDD mount point")
+    parser.add_argument("--model", type=str,
+                        default=os.environ.get("HDD_MODEL_PATH", "G:/"),
+                        help="Path to model file or HDD mount point (or set HDD_MODEL_PATH env var)")
     parser.add_argument("--tokens", type=int, default=1000,
                         help="Number of tokens to process")
     args = parser.parse_args()

@@ -2,18 +2,10 @@ import numpy as np
 import networkx as nx
 import hashlib
 import os
+import sys
 
-class CatalyticTape:
-    def __init__(self, size_mb=256):
-        self.size_bytes = size_mb * 1024 * 1024
-        np.random.seed(42)
-        self.tape = np.random.bytes(self.size_bytes)
-        self.initial_hash = hashlib.sha256(self.tape).hexdigest()
-        
-    def verify(self):
-        if hashlib.sha256(self.tape).hexdigest() != self.initial_hash:
-            raise ValueError("Landauer heat generated!")
-        return True
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '47_phase_atom'))
+from catalytic_tape import BennettHistoryTape
 
 def build_connectome(L=302, p_rewire=0.15, scale=1.0, theta=0.0, lesion_nodes=None):
     G = nx.watts_strogatz_graph(L, k=6, p=p_rewire, seed=42)
@@ -74,8 +66,8 @@ def run_experiment():
     log_and_print("="*80)
     log_and_print("EXP 46.5v2: NEURAL BINDING — Dynamic Winding + Proper Lesioning")
     log_and_print("="*80)
-    tape = CatalyticTape()
-    log_and_print("[SYSTEM] 256MB Catalytic Tape. 0-Landauer active.\n")
+    tape = BennettHistoryTape()
+    log_and_print("[SYSTEM] 10MB Bennett History Tape. 0-Landauer active.\n")
 
     L = 150  # smaller connectome for speed
 
@@ -128,6 +120,11 @@ def run_experiment():
     all_pass = g1 and g2 and g3
     log_and_print(f"\n{'ALL GATES PASS' if all_pass else '*** HARDENING FAILED ***'}")
 
+    # Catalytic: XOR-encode connectome measurements into tape, then uncompute
+    tape.record_operation(("intact", W_intact, mean_ipr_i, min_ipr_i))
+    tape.record_operation(("lesioned", W_lesion, mean_ipr_l))
+    tape.record_operation(("anesthetized", W_anes, mean_ipr_a))
+    tape.uncompute()
     tape.verify()
     log_and_print("[SYSTEM] Tape verified. 0 bits. 0.0 J.")
     log_and_print("="*80)

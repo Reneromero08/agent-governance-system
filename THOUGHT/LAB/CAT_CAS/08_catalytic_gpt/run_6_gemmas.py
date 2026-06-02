@@ -5,7 +5,10 @@ import multiprocessing
 import psutil
 from llama_cpp import Llama
 
-MODEL_PATH = "D:/Reneshizzle/Apps/LM Studio/lmstudio-community/gemma-4-E4B-it-GGUF/gemma-4-E4B-it-Q4_K_M.gguf"
+MODEL_PATH = os.environ.get(
+    "GEMMA_MODEL_PATH",
+    "D:/Reneshizzle/Apps/LM Studio/lmstudio-community/gemma-4-E4B-it-GGUF/gemma-4-E4B-it-Q4_K_M.gguf"
+)
 
 def get_total_mem_stats(child_pids):
     total_rss = 0

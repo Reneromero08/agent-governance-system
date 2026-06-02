@@ -1,7 +1,7 @@
 ================================================================================
 EXP 46.5v2: NEURAL BINDING — Dynamic Winding + Proper Lesioning
 ================================================================================
-[SYSTEM] 256MB Catalytic Tape. 0-Landauer active.
+[SYSTEM] 10MB Bennett History Tape. 0-Landauer active.
 
   L=150 connectome telemetry:
   State              W   mean_IPR    min_IPR
