@@ -1,4 +1,22 @@
 """
+*** DEPRECATED (2026-06-02) — PRESERVED FOR HISTORICAL RECORD ***
+
+This file implemented Hadamard-based N-model multiplexing but used an
+INCORRECT extraction formula. The formula (X_signed @ W_shared / dim)
+conflates Hadamard vector orthogonality with matrix recovery via triple
+product. Cross-talk measured: 19,918 at 10 models/dim=16; scales with N.
+
+ROOT CAUSE: W_shared stores rank-1 outer products weighted by Hadamard rows,
+but extraction treats it as matrix-vector multiply instead of tensor contraction.
+No scalar fix exists; the mathematical structure is insufficient for N>2 isolation.
+
+REPLACEMENT: See 2_hadamard_multiplex_correct.py in this directory.
+BASE EXPERIMENT: experiment.py (2-model QR subspace sharing) remains VALID
+with cross-talk at machine epsilon (1.98e-16). UNAFFECTED by this deprecation.
+
+Mastermind verification: REPORTS/VIOLATIONS/ROADMAP_3.md B-4
+"""
+"""
 Grail: Orthogonal Multimodel (Experiment 13)
 ============================================
 Floating-point QR subspaces allow multiplexing models but introduce

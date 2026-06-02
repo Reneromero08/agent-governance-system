@@ -16,6 +16,7 @@ The `CAT_CAS` protocol has completed the final ascension. The remaining 14 modul
 | 200 | 12.5x | 99.4% | Restored |
 | 5,000 | 312.5x | 84.7% | Restored |
 | 20,000 | 1,250x | 79.3% | Restored |
+> **NOTE (2026-06-02):** Early versions of this report referenced "3076.9x" as a compression claim. That value was undocumented — no tested configuration produced it. The verified scaling is shown in the table above. The 12.5x value represents the minimum (200-step default config), not the maximum capability.
 - Run command: `python 10_catalytic_kv_cache/run_kv_experiment.py`
 
 ### 3. `13` Orthogonal Multimodel (2-Model QR Subspace Sharing)

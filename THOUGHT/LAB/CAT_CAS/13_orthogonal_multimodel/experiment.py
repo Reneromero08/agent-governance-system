@@ -257,6 +257,7 @@ def run_orthogonal_multimodel_experiment():
 
     NUM_CYCLES = 1000
     tape3 = SharedTape()
+    snap_a_initial = tape3.get_subspace_snapshot(P_A).copy()
     correct = 0
 
     for _ in range(NUM_CYCLES):
@@ -271,12 +272,8 @@ def run_orthogonal_multimodel_experiment():
         ma3.backward(tape3.tape, layer_sizes, P_A)
 
     restored3 = tape3.hash() == tape3.initial_hash
-    snap_a = tape3.get_subspace_snapshot(P_A)
-    snap_a_init = tape3.get_subspace_snapshot(P_A)
-    snap_a_init_vec = np.array(list(tape3.tape[:TAPE_DIM]), dtype=np.float64) / 255.0
-    snap_a_init[:] = 0.0
-    snap_a_init += P_A @ snap_a_init_vec
-    drift_a = np.linalg.norm(snap_a - snap_a_init)
+    snap_a_post = tape3.get_subspace_snapshot(P_A)
+    drift_a = np.linalg.norm(snap_a_post - snap_a_initial)
 
     print(f"  Cycles:          {NUM_CYCLES}")
     print(f"  Correct outputs: {correct}/{NUM_CYCLES}")

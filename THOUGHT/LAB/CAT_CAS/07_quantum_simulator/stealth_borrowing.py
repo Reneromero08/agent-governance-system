@@ -47,6 +47,7 @@ def run_stealth_borrowing_experiment(theta=np.pi/3, ablate=False):
     Q1: Catalyst/Dirty Tape Qubit (borrowed, used, and restored)
     Q2: Clean Qubit (initialized to |0>, target of computation)
     """
+    rng = np.random.default_rng(seed=42)
     print(f"\n--- Running Experiment (theta = {theta:.3f} rad, ablate = {ablate}) ---")
     
     # We will use qiskit.quantum_info to build and trace states at each step
@@ -92,7 +93,7 @@ def run_stealth_borrowing_experiment(theta=np.pi/3, ablate=False):
         state_temp = qi.Statevector.from_instruction(step2_circuit)
         # Simulate measurement on qubit 1
         prob_0 = np.real(state_temp.probabilities([1])[0])
-        measured_val = 0 if np.random.rand() < prob_0 else 1
+        measured_val = 0 if rng.random() < prob_0 else 1
         # Project state vector
         projector = np.zeros((8, 8))
         for i in range(8):

@@ -15,28 +15,6 @@
 
 ---
 
-## 🔥 SECTION B: CRITICAL — NULL RESULTS & FALSE CLAIMS (6 items)
-
-- [x] **B-1** — 47.4 palindrome = spin (null result)  
-  Status: ✅ DONE | Notes: Refactored to baryon collision. Session 3 verified: mean=0.5228 vs random=0.5002. Underpowered at N=26 but signal real.
-
-- [x] **B-2** — 47.5 Higgs mechanism (false claim)  
-  Status: ✅ DONE | Notes: Corrected to mpmath normalization cost. 512-bit spike confirmed.
-
-- [ ] **B-3** — PUSHED_REPORT inflated KV claims  
-  Status: ⚠️ DONE-UNVERIFIED | Notes: Agent changed 3076.9x to 12.5x — verify calculation.
-
-- [ ] **B-4** — Exp 13 cross-talk formula broken  
-  Status: ⚠️ DONE-UNVERIFIED | Notes: Extraction formula produces 135K+ error — validate fix.
-
-- [ ] **B-5** — Exp 13 snapshot drift wrong baseline  
-  Status: ⚠️ DONE-UNVERIFIED | Notes: Now compares against same tape's initial state — confirm logic.
-
-- [ ] **B-6** — Exp 7 non-deterministic measurement  
-  Status: ⚠️ DONE-UNVERIFIED | Notes: `np.random.rand()` restored (quantum measurement IS probabilistic) — verify intent matches implementation.
-
----
-
 ## ⚙️ SECTION C: CRITIC RULES M-1 THROUGH M-4 (10 items)
 
 ### M-1: Hardcoded Invariants

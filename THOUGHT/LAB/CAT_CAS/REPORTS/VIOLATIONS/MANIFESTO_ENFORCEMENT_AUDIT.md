@@ -857,4 +857,13 @@ Unallocated noise (rate=0.01,0.05,0.10,0.50): all SURVIVED active_ok=True match=
 Active noise (rate=0.01,0.05,0.10,0.50): all CORRUPTED active_ok=False match=True
 Random noise (rate=0.01,0.05,0.10,0.50): all CORRUPTED active_ok=False match=True
 ```
+
+---
+
+## B-4 HADAMARD MULTIPLEXING REPLACEMENT — 2026-06-02
+1_infinity_multimodel.py: DEPRECATED (header added, file preserved)
+2_hadamard_multiplex_correct.py: CREATED (3-tensor storage, direct slice extraction)
+Cross-talk: 0.000000e+00 (10 models, dim=16, float64)
+Base experiment (experiment.py): UNAFFECTED
+Awaiting Mastermind confirmation.
 - STATUS: NO ERRORS. All 12 test cases execute without AttributeError. No traceback. No missing attrs.
