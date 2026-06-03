@@ -21,7 +21,7 @@ def cond_number(H):
     try:
         Vi=np.linalg.inv(V)
         return float(np.linalg.norm(V)*np.linalg.norm(Vi))
-    except: return float('inf')
+    except np.linalg.LinAlgError: return float('inf')
 
 for lam in [0.0, 0.001, 0.01, 0.1, 1.0]:
     H=build_H('A'*10, lam)

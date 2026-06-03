@@ -102,7 +102,7 @@ def fetch_pdb(pdb_id):
     try:
         with urllib.request.urlopen(url, timeout=30) as f:
             return f.read().decode('utf-8')
-    except:
+    except OSError:
         return None
 
 def parse_ca_coords(pdb_text):
@@ -112,7 +112,7 @@ def parse_ca_coords(pdb_text):
             try:
                 coords.append((float(line[30:38]), float(line[38:46]), float(line[46:54])))
                 residues.append(line[17:20].strip())
-            except:
+            except (ValueError, IndexError):
                 continue
     return coords, residues
 
@@ -232,7 +232,7 @@ def fetch_connectome():
         n2 = str(sheet.cell_value(row,1)).strip()
         stype = str(sheet.cell_value(row,2)).strip()
         try: count = int(sheet.cell_value(row,3))
-        except: count = 1
+        except (ValueError, TypeError): count = 1
         neurons.add(n1); neurons.add(n2)
         if stype in ('S','Sp'):
             if n1 not in chem_sends:

@@ -26,7 +26,7 @@ def resources():
     cpu=psutil.cpu_percent()
     mem=psutil.virtual_memory()
     try: gpu=torch.cuda.utilization() if DEVICE.type=="cuda" else 0
-    except: gpu=0
+    except RuntimeError: gpu=0
     return f"CPU:{cpu:>3}% RAM:{mem.percent:>3}% GPU:{gpu:>3}%"
 
 def gcd(a,b):

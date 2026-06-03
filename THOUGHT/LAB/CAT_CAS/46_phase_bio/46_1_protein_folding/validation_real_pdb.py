@@ -29,7 +29,7 @@ def fetch_pdb(pdb_id):
     try:
         with urllib.request.urlopen(url, timeout=30) as f:
             return f.read().decode('utf-8')
-    except:
+    except OSError:
         return None
 
 def parse_ca_coords(pdb_text):
@@ -43,7 +43,7 @@ def parse_ca_coords(pdb_text):
                 res_name = line[17:20].strip()
                 coords.append((x, y, z))
                 residues.append(res_name)
-            except:
+            except (ValueError, IndexError):
                 continue
     return coords, residues
 

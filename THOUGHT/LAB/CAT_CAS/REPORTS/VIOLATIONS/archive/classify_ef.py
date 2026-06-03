@@ -127,7 +127,7 @@ for phase, rel_path in SECTION_E:
     try:
         with open(path, encoding='utf-8') as f:
             content = f.read()
-    except:
+    except (OSError, UnicodeDecodeError):
         print(f"MISSING: {phase}/{rel_path}")
         continue
     status = classify_null_model(content)
@@ -142,7 +142,7 @@ for phase, rel_path in SECTION_F:
     try:
         with open(path, encoding='utf-8') as f:
             content = f.read()
-    except:
+    except (OSError, UnicodeDecodeError):
         print(f"MISSING: {phase}/{rel_path}")
         continue
     status = classify_statistics(content)

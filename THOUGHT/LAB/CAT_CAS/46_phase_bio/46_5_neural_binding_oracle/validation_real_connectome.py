@@ -76,7 +76,7 @@ def fetch_connectome():
         stype = str(sheet.cell_value(row, 2)).strip()
         try:
             count = int(sheet.cell_value(row, 3))
-        except:
+        except (ValueError, TypeError):
             count = 1
 
         neurons.add(n1)

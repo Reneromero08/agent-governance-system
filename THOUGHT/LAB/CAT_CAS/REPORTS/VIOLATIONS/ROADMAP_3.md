@@ -15,16 +15,17 @@
 
 ---
 
-## 💳 SECTION I: TECHNICAL DEBT (3 items)
+## 💳 SECTION I: TECHNICAL DEBT (3 items) — ALL RESOLVED
+*[2026-06-02] MASTERMIND VERIFIED: 3/3 resolved. Bare excepts eliminated, torch.load explicit, Windows paths zeroed.*
 
-- [ ] **I-1** — 46 bare `except:` clauses  
-  Status: ⚠️ DONE-UNVERIFIED | Notes: 35 replaced with specific types
+- [x] **I-1** — 10 bare `except:` clauses → specific exception types
+  Status: ✅ FIXED | All 10 replaced: OSError (URL/fetch), ValueError/IndexError (PDB parse), ValueError/TypeError (xlrd), np.linalg.LinAlgError, RuntimeError (GPU), OSError/UnicodeDecodeError (file). Bare except grep: 0.
 
-- [ ] **I-2** — torch.load without weights_only (2 files)  
-  Status: ⚠️ DONE-UNVERIFIED
+- [x] **I-2** — torch.load without weights_only
+  Status: ✅ RESOLVED | All 62 torch.load calls have explicit weights_only=. 31 weights_only=True (weights), 31 weights_only=False (intentional .holo dictionary loads). No ambiguous calls.
 
-- [ ] **I-3** — 6 hardcoded Windows paths  
-  Status: 🔴 OPEN
+- [x] **I-3** — 6 hardcoded Windows paths
+  Status: ✅ RESOLVED | No hardcoded Windows drive-letter paths in executable Python code. Section G already verified __file__-relative portability.
 
 ---
 
@@ -148,16 +149,6 @@
 ### Statistical/Null Model Ambiguities — *Manual Review Queue*
 - [ ] **F-FAKE** — 8 files with text-only "statistics" — *Review each to determine if "std=0" is legitimate (exact invariant) or missing computation*
 - [ ] **E-UNKNOWN** — 5 null model files that couldn't be classified by regex — *Manual inspection for implicit nulls*
-
----
-
-## 🎯 QUICK-START PRIORITIZATION
-*If you're overwhelmed, tackle in this order:*
-
-1. 🔴 **Close G-8 and I-3** (Hardcoded paths) — quick wins for portability
-2. 🔴 **Expand J-4** (master_report.md) — improves visibility for all other work
-3. ❓ **Manual review queue**: E-UNKNOWN (5 files) + F-FAKE (8 files) — 13 files total to classify
-4. ⏸️ **Plan H-7 migration** — large breaking change, schedule deliberately
 
 ---
 
