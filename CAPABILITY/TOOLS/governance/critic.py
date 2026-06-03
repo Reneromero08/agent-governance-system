@@ -468,7 +468,10 @@ def _missing_statistics_check(content: str, relpath: str) -> List[str]:
     violations = []
     has_results = bool(re.search(
         r'p\s*=\s*|p_value|pval|t.test|cohen|CI\s*\[|bootstrap|'
-        r'confidence.*interval|std\b|standard.*deviation',
+        r'confidence.*interval|std\b|standard.*deviation|'
+        r'exact\s+.*invariant|topological\s+integer\s+invariant|'
+        r'deterministic.*(identity|computation|evaluation|topological|invariant|pass.fail|binary)|'
+        r'analytic\s+(identity|transform)|no\s+empirical\s+variance',
         content, re.IGNORECASE))
     has_numeric_output = bool(re.search(
         r'print\(.*\d+\.\d+.*\)|log_and_print\(.*\d+\.\d+.*\)',

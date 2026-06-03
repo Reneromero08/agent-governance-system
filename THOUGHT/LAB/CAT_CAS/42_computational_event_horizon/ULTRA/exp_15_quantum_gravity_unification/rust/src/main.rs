@@ -140,6 +140,7 @@ fn main() {
         let riemann_drift = (final_riemann - initial_riemann).abs();
 
         writeln!(csv_file, "{},{},{:.6},{:.6}", epoch, quantum_collisions, gravity_curvature, riemann_drift).unwrap();
+        csv_file.flush().unwrap();
         
         if epoch % 10 == 0 {
             println!("[EPOCH {}] Quantum: {} | GR Curvature: {:.2} | Riemann: {:.6}", 

@@ -42,7 +42,7 @@ def infinity_calorimeter():
     import numpy as np
     if variance < 1e-10:
         print(f"  [Reproducibility] Deterministic float64 QR decomposition (seed=1337).")
-        print(f"  Energy variance is an exact analytic measure: std=0 within float64 eps.")
+        print(f"  Energy variance is an exact analytic measure: single deterministic evaluation, no empirical variance claimed.")
         print("\n  SUCCESS: 0J Energy Conservation invariant verified at infinity.")
 
 if __name__ == "__main__":

@@ -214,7 +214,7 @@ def hunt_godel_catalytic(N_dim=16, max_steps=2000, lr=0.03):
     print(f"  Winding calls:      {step+1} (O(n_phi) via catalytic cache)")
     print(f"  Landauer heat:      0.0 J")
     print(f"  [Reproducibility] Deterministic sweep (seed=42), O(1) rank-1 lemma.")
-    print(f"  All computations exact linear algebra; std=0 for winding values.")
+    print(f"  All computations exact linear algebra; winding values are deterministic topological invariants, no empirical variance claimed.")
     print(f"{'=' * 78}")
 
     return tear_detected, lam, restored

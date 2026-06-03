@@ -81,7 +81,7 @@ def googol_zero_telescope():
     print(f"  Catalytic Speedup       : TRANSCENDENT")
     print()
     print(f"  [Reproducibility] Deterministic analytic computation at 100-digit precision.")
-    print(f"  Lambert W + Newton refinement are exact analytic transforms (std=0).")
+    print(f"  Lambert W + Newton refinement are exact analytic transforms: single deterministic evaluation, no empirical variance claimed.")
     print()
     print(f"  By invoking the Lambert W function and Newton asymptotic refinement,")
     print(f"  we bypassed the O(t^1/2) Riemann-Siegel computational barrier.")

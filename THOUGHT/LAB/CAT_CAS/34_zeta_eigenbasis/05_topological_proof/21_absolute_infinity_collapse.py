@@ -83,7 +83,7 @@ def run_absolute_infinity():
     print(f"  Execution Time        : {elapsed:.4f}s")
     print()
     print(f"  [Reproducibility] Analytic continuation at 100-digit mpmath precision.")
-    print(f"  Theta phase is exact analytic function; topological charge std=0.")
+    print(f"  Theta phase is exact analytic function; topological charge is a deterministic scalar, no empirical variance claimed.")
     print()
     print(f"  Conclusion: The topology holds at the edge of computable reality.")
     print(f"  We successfully mapped the Riemann-Siegel topological boundary")

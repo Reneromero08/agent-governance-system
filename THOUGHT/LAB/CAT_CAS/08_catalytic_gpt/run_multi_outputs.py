@@ -52,7 +52,10 @@ def run_multi_outputs():
     unique_outputs = {}
     t_start = time.time()
     
+    import numpy as np
+    times = []
     for i in range(1, num_models + 1):
+        t_model = time.time()
         # Seed differently for each model instance to get unique weights & outputs
         torch.manual_seed(1000 + i)
         model = CatalyticGPT(vocab_size, embed_dim, num_heads, num_layers).to(device)
@@ -82,6 +85,7 @@ def run_multi_outputs():
         # This keeps base model weights memory from stacking up, proving we can cycle infinite models!
         del model
         torch.cuda.empty_cache()
+        times.append(time.time() - t_model)
         
     t_end = time.time()
     
@@ -103,12 +107,13 @@ def run_multi_outputs():
         print("[VERIFICATION] FAILURE: Tape corruption detected!")
         sys.exit(1)
         
-    import numpy as np
-    times = []
+    times_arr = np.array(times)
     print(f"Total time for {num_models} models: {t_end - t_start:.2f}s")
     mean_time = (t_end - t_start) / num_models
     print(f"  Mean per-model time: {mean_time:.4f}s")
-    print(f"  std: N/A (sequential execution, single-run; re-run with seed=1234 for reproducibility)")
+    print(f"  Per-model timing distribution (sequential execution, {len(times)} models):")
+    print(f"    mean={np.mean(times_arr):.4f}s  std={np.std(times_arr):.4f}s  "
+          f"min={np.min(times_arr):.4f}s  max={np.max(times_arr):.4f}s")
     print("=" * 80)
 
 if __name__ == "__main__":

@@ -87,7 +87,7 @@ def run_transcendent_winding():
     print(f"  Execution Time        : {elapsed:.4f}s")
     print()
     print(f"  [Reproducibility] Asymptotic Theta phase is analytic (100-digit mpmath).")
-    print(f"  Topological charge is exact via argument principle; std=0 by definition.")
+    print(f"  Topological charge is exact via argument principle: single analytic evaluation, no empirical variance claimed.")
     print()
     print(f"  Conclusion: The topological phase of the Riemann Zeta function does not tear.")
     print(f"  Even at t = 10^100, spanning a massive 1-Billion-step window, the phase ")

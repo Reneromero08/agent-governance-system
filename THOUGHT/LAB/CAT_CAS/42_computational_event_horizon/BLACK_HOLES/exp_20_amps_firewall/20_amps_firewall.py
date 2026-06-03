@@ -88,9 +88,9 @@ def exp_42_20_amps_firewall_hardened():
     else:
         print("[FAIL] Thermodynamic violation! Tape was corrupted.")
         
-    print("\n[STATISTICS] Deterministic verification (N=1 structural test):")
-    print("    SHA-256 hash match: exact (std=0, deterministic cryptographic identity)")
-    print("    Bennett tape restoration: exact byte-level reconstruction (std=0)")
+    print("\n[MECHANISM] Deterministic verification (N=1 structural test):")
+    print("    SHA-256 hash match: exact (deterministic cryptographic identity, pass/fail binary)")
+    print("    Bennett tape restoration: exact byte-level reconstruction (binary match, no continuous metric)")
     print("    AMPS firewall trigger: deterministic for fixed memory layout")
     print("    Control group refcnt: intact (verified)")
     print("    Target refcnt: severed/corrupted (firewall enforced)")

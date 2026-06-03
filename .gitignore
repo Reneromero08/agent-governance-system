@@ -197,3 +197,14 @@ THOUGHT/LAB/EIGEN_BUDDY/distill/distilled/
 
 *.pt
 THOUGHT/LAB/CAT_CAS/46_phase_bio/46_6_morphogenesis_oracle/cell_data/
+
+# Rust build artifacts
+target/
+*.pyd
+*.exe
+*.dll
+*.lib
+*.so
+*.dylib
+*.bak
+*.csv.bak*

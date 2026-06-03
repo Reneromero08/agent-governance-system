@@ -2,6 +2,11 @@
 
 # Changelog
 
+## 2026-06-02
+
+### Changed
+- critic.py: M-6 exact-invariant exemption added. Files documenting deterministic topological invariants, analytic identities, or pass/fail binary exactness are now recognized as valid M-6 exemptions. Regex expanded with patterns: `exact.*invariant`, `topological integer invariant`, `deterministic.*(identity|computation|invariant|pass.fail|binary)`, `analytic (identity|transform)`, `no empirical variance`.
+
 All notable changes to Agent Governance System will be documented in this file.
 
 ---

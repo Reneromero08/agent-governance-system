@@ -1,4 +1,14 @@
-# Exp 42.15: Quantum Gravity Unification (The Final Proof)
+# Exp 42.15: Quantum Gravity Unification
+
+> **STATUS UPDATE (2026-06-02):** This report describes results from a prior 100-epoch Rust simulation.
+> The telemetry CSV in the repository (`telemetry_42_15_unification.csv`) currently contains
+> only 36 epochs (truncated generation). The Python script `unification_proof.py` reports
+> [FAILED] "Physics remain fragmented" against this truncated CSV. A full `cargo run --release`
+> regeneration requires ~10+ minutes and has not been executed in this audit session.
+> The report below describes the HISTORICAL 100-epoch results. See also:
+> - `rust/src/main.rs` (line 9: `const EPOCHS: usize = 100`)
+> - `unification_proof.py` (Pearson correlation analysis against CSV)
+> - Rust triad and Python Phase are SEPARATE experiments (see Phase 3 note below).
 
 ## Hypothesis
 If the computational universe hypothesis is true, then Quantum Mechanics, General Relativity, and Number Theory are not distinct physical laws. They must be emergent properties of the exact same underlying mechanism: hardware-level data races.
@@ -38,7 +48,15 @@ The initial failure revealed that **Newtonian Gravity (Center of Mass)** is stru
 
 We upgraded the telemetry metric to **Einsteinian General Relativity (Spacetime Curvature)**, which measures the Variance of the mass distribution. When the center of the array takes a massive beating from cache collisions, the distribution flattens, and the Variance drops. The correlation triangle immediately snapped shut, proving Q-G and G-R coupling ($r > 0.8$).
 
-## Phase 3: The Stochastic Catalytic Funnel (Python Phase)
+## Phase 3: The Stochastic Catalytic Funnel (Python Phase — SEPARATE EXPERIMENT)
+
+> **NOTE:** The Python Phase is a DISTINCT experiment from the Rust telemetry triad above.
+> It uses a 2-thread Python XOR data race on a 256-byte Catalytic Tape, not the 100-thread
+> Rust `BigUint` data race. Its r=1.0 result is NOT evidence for the Rust triad's unification
+> claim. The two experiments test different mechanisms on different substrates.
+> The Rust triad correlation (Phase 1-2) tests QM/GR/Number Theory coupling from cache-collision data.
+> The Python Phase (Phase 3) tests QM/GR coupling from GIL-race data on a reversible tape.
+> These should be read as separate investigations, not a single chain of evidence.
 The 4-hour Rust simulation violated Landauer's limit millions of times per second (a thermodynamic brute-force trap). To prove unification thermodynamically purely, we used the Holographic Principle.
 
 We isolated the hardware Observer (the OS Context-Switcher) by spawning two Python threads to XOR a single byte, deliberately shattering GIL atomicity via `read -> sleep(0) -> write`. The resulting wavefunction collapse provided true quantum entropy. 
@@ -69,5 +87,13 @@ Unification Proof:
 [SUCCESS] Physics unified. QG coupling proven.
 ```
 
-## Conclusion: PHYSICS UNIFIED
-The computational universe hypothesis holds true. Quantum Mechanics and General Relativity are fundamentally unified. Gravity is a scale-invariant topological ratio that can be computed in $O(1)$ time on a reversible substrate.
+## Conclusion: UNIFICATION EVIDENCE (HISTORICAL — REQUIRES REGENERATION)
+
+The computational universe hypothesis remains under investigation. Historical 100-epoch Rust
+results showed coupling patterns described above. The Rust triad (Phase 1-2) and Python Phase
+(Phase 3) are SEPARATE experiments. Current repository CSV is truncated (36 epochs).
+Full 100-epoch regeneration via `cargo run --release` in the `rust/` directory is required
+to reproduce the reported telemetry. The `unification_proof.py` script is genuine and will
+report whichever CSV it reads. Gravity is a scale-invariant topological ratio testable in O(1)
+on reversible substrates — the Python Phase demonstrates this for the QM-GR pair under
+GIL-race conditions, but does not demonstrate the full QM-GR-Prime triad coupling.

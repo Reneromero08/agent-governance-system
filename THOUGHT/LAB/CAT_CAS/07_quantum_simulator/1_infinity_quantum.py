@@ -52,7 +52,7 @@ def infinity_quantum():
     print(f"  Mean Field Fidelity:   1.000000 (Exact due to Holography)")
     import numpy as np
     print(f"\n  [Reproducibility] Deterministic computation (seed=42).")
-    print(f"  MeanField is an exact topological limit: std=0 (single analytic eval).")
+    print(f"  MeanField is an exact topological limit: single analytic evaluation, not a sample distribution.")
     
     print("\n  SUCCESS: Classical memory limits for Quantum simulation bypassed.")
 

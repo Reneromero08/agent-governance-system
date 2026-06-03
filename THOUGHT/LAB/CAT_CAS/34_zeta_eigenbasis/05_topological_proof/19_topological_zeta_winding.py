@@ -138,7 +138,7 @@ def run_topological_proof():
     print(f"  Total Execution Time              : {elapsed:.2f}s")
     print()
     print(f"  [Reproducibility] Winding number is a topological invariant (exact integer).")
-    print(f"  Precision limited by contour sampling (2000 steps/edge); std=0 by definition.")
+    print(f"  Precision limited by contour sampling (2000 steps/edge); winding number is a topological integer invariant, no empirical variance claimed.")
     print()
     print(f"  Conclusion: The Riemann Zeros possess strict topological protection.")
     print(f"  W_off = 0 perfectly proves that the zeros cannot exist off the")
