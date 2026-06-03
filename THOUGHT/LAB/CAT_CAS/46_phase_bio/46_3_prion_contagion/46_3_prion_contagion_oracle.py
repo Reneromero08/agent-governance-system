@@ -132,15 +132,43 @@ def run_experiment():
         log_and_print(f"{J:12.1f} {mean_ipr:12.6f} {max_ipr:12.6f}")
 
     log_and_print("\n--- HARDENING GATES ---")
-    # NULL MODEL: The healthy poly-A protein (W=0 at baseline) serves as
-    # the null comparison. The prion seed is detected as a deviation from
-    # this trivial folded state via IPR elevation.
-    # Gate 1: At J=0 with prion seed, IPR is measurably higher than
-    # a pure healthy lattice (which would have IPR ~ 1/dim = 1/200).
-    # Prion seed = impurity -> localized states -> elevated IPR.
-    g1 = (ipr_vals[0] > 0.05)
-    log_and_print(f"GATE 1 (Prion impurity detected via IPR): "
-                  f"IPR={ipr_vals[0]:.6f} > 0.05 -> {'PASS' if g1 else 'FAIL'}")
+    # GATE 1 (NULL MODEL): Compare prion-seeded IPR against random-impurity null.
+    # Build N=50 lattices with the prion seed at random positions and
+    # compute the IPR distribution. If the center-seeded prion IPR
+    # exceeds the null, the impurity detection is genuine.
+    N_null = 50
+    rng = np.random.RandomState(42)
+    null_iprs = []
+    for trial in range(N_null):
+        rand_seed_pos = rng.randint(0, N_proteins)
+        H_null = np.zeros((dim, dim), dtype=np.complex128)
+        for p in range(N_proteins):
+            rs = p * L_seq
+            H_p = build_protein_H(prion_seq if p == rand_seed_pos else healthy_seq)
+            H_null[rs:rs+L_seq, rs:rs+L_seq] = H_p
+        for p in range(N_proteins - 1):
+            rs1 = p * L_seq; rs2 = (p+1) * L_seq
+            H_null[rs1+L_seq-1, rs2] = 0.0
+            H_null[rs2, rs1+L_seq-1] = 0.0
+            H_null[rs2+L_seq-1, rs1] = 0.0
+            H_null[rs1, rs2+L_seq-1] = 0.0
+        _, ev_n = np.linalg.eig(H_null)
+        iprs_n = np.sum(np.abs(ev_n)**4, axis=0) / (np.sum(np.abs(ev_n)**2, axis=0)**2)
+        null_iprs.append(float(np.mean(iprs_n)))
+    null_mean = np.mean(null_iprs)
+    null_std = np.std(null_iprs, ddof=1)
+    log_and_print(f"  NULL MODEL: Random impurity position ({N_null} trials, J=0, decoupled)")
+    log_and_print(f"    Null IPR: mean={null_mean:.6f}  std={null_std:.6f}")
+    prion_ipr = ipr_vals[0]
+    signal_null_ratio = prion_ipr / null_mean if null_mean > 0 else 0.0
+    g1 = (prion_ipr > null_mean + 2.0 * null_std)
+    log_and_print(f"GATE 1 (Prion IPR > null + 2sigma): "
+                  f"prion={prion_ipr:.6f}  null_2sigma={null_mean+2*null_std:.6f}  "
+                  f"ratio={signal_null_ratio:.2f}x  -> {'PASS' if g1 else 'FAIL'}")
+    if not g1:
+        log_and_print(f"  HONEST: Prion seed IPR indistinguishable from random-impurity null at J=0.")
+        log_and_print(f"  The prion IS detectable via winding number (W=-1) but NOT via IPR elevation.")
+        log_and_print(f"  Previous 0.05 hardcoded threshold was always satisfied — this null proves it.")
 
     # Gate 2: At J>0, the IPR drops as states spread across lattice.
     # The prion does NOT propagate winding — it acts as an impurity

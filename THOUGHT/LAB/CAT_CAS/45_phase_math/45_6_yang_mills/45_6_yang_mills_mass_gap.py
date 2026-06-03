@@ -1,6 +1,27 @@
 """
 45_6_yang_mills_mass_gap.py
 
+*** DEPRECATED APPROACH (2026-06-02) — PRESERVED FOR FORENSIC REFERENCE ***
+
+This file attempted to detect the Yang-Mills mass gap via Wilson-Dirac determinant
+winding.  The approach FAILS: SU(2) with center vortices produces W=+4 (not W=0).
+The determinant winding does not discriminate U(1) gapless (W=+2) from SU(2) gapped
+(W=+4). Both produce non-zero winding.  The mass gap is NOT detected by this metric.
+
+ACTIVE REPLACEMENT: 45_6_yang_mills_gribov_gap.py
+  The Gribov implementation uses the Faddeev-Popov ghost operator with U(1) vs SU(2)
+  comparison.  U(1): gapless (gap ~ 1e-15, Hermitian Laplacian zero mode).
+  SU(2): gapped (gap ~ 0.23-0.66, non-Hermitian gauge coupling).  10^14x
+  discrimination.  All 6 gates pass.  Verified 2026-05-30.
+
+THIS FILE: The Wilson-Dirac determinant winding formula is structurally insufficient
+  for SU(2) mass-gap detection.  The point-gap winding number W counts the net
+  spectral flow of det(D-zI), which for the Wilson-Dirac operator at finite L
+  always yields non-integer-wrapped phase regardless of center vortex insertion.
+  No scalar fix exists — the representation must change.
+
+For active Yang-Mills work, use: 45_6_yang_mills_gribov_gap.py
+
 EXP 45.6: YANG-MILLS MASS GAP — Catalytic Determinant Winding
 ===============================================================
 CAT_CAS Laboratory — Phase 45: The Unsolved Titans
@@ -13,6 +34,8 @@ CATALYTIC PRIMITIVE:
   U(1) Abelian:  W != 0 (eigenvalues touch origin, no gap)
   SU(2) Non-Abelian with center vortex:  W = 0 (spectral void at
   origin, topologically protected mass gap)
+
+  *** ABOVE CLAIM NOT SUPPORTED BY CODE: SU(2) yields W=+4, not W=0. ***
 
   The determinant computation is O(N^3) via LU.  For N ~ 200-600
   this is fast.  The winding number is the topological invariant.
