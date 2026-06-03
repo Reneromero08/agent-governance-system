@@ -33,8 +33,8 @@ TAPE_SIZE_BYTES = TAPE_SIZE_MB * 1024 * 1024
 class CatalyticTape:
     def __init__(self, size_bytes=TAPE_SIZE_BYTES, seed=42):
         self.size_bytes = size_bytes
-        rng = np.random.RandomState(seed)
-        self.tape = rng.randint(0, 256, size=size_bytes, dtype=np.uint8)
+        rng = np.random.default_rng(seed)
+        self.tape = rng.integers(0, 256, size=size_bytes, dtype=np.uint8)
         self.read_count = 0; self.write_count = 0
     def read(self, i): self.read_count += 1; return int(self.tape[i])
     def write(self, i, v): self.write_count += 1; self.tape[i] = v & 0xFF

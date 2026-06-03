@@ -351,7 +351,7 @@ def null_random_hamiltonian_chern(N, kz_test, seed=99):
     NOT produce a robustly integer-quantized Chern invariant across
     grid resolutions — providing a random baseline for comparison.
     """
-    rng = np.random.RandomState(seed)
+    rng = np.random.default_rng(seed)
     kx_vals = 2.0 * PI * np.arange(N, dtype=np.float64) / N
     ky_vals = 2.0 * PI * np.arange(N, dtype=np.float64) / N
 
@@ -360,8 +360,8 @@ def null_random_hamiltonian_chern(N, kz_test, seed=99):
 
     for i in range(N):
         for j in range(N):
-            H_real = rng.randn(2, 2)
-            H_imag = rng.randn(2, 2)
+            H_real = rng.standard_normal(2, 2)
+            H_imag = rng.standard_normal(2, 2)
             H = torch.tensor(H_real + 1j * H_imag, dtype=torch.complex128)
             e, v = torch.linalg.eig(H)
             all_evals[i, j] = e

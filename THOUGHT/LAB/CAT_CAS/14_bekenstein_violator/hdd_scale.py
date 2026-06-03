@@ -55,7 +55,7 @@ def main():
     print(f"  Opening tape file: {HDD_PATH}")
     if not os.path.exists(HDD_PATH):
         print(f"  Creating {TAPE_SIZE_MB}MB tape file on HDD...")
-        rng = np.random.RandomState(42)
+        rng = np.random.default_rng(42)
         with open(HDD_PATH, "wb") as f:
             chunk = 1024 * 1024
             for _ in range(TAPE_SIZE_MB):

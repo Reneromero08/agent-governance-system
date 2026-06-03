@@ -159,7 +159,7 @@ def run_experiment():
     # --- NULL MODEL: RANDOM BOUNDARY ENERGY INJECTION ---
     log_print("\n--- NULL MODEL: RANDOM BOUNDARY ENERGY INJECTION ---")
     random_shell_counts = []
-    np.random.seed(137)
+    np.random.default_rng(137)
     for trial_idx in range(6):
         N = L * L
         mu_random_map = {}

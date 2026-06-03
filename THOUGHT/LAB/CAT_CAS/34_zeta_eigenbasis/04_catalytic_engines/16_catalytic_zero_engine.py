@@ -30,8 +30,8 @@ class CatalyticTape:
     """Dirty memory tape. Random garbage. Must be restored byte-for-byte."""
     def __init__(self, size_bytes=1024*1024):
         self.size_bytes = size_bytes
-        rng = np.random.RandomState(42)
-        self.tape = rng.randint(0, 256, size=size_bytes, dtype=np.uint8)
+        rng = np.random.default_rng(42)
+        self.tape = rng.integers(0, 256, size=size_bytes, dtype=np.uint8)
         self.write_count = 0
         self.read_count = 0
         self.xor_count = 0

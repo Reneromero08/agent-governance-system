@@ -81,8 +81,8 @@ class MemoryGateTape:
     """
 
     def __init__(self, size_bytes=MEMORY_GATE_TAPE_SIZE, seed=42):
-        rng = np.random.RandomState(seed)
-        self.tape = bytearray(rng.randint(0, 256, size=size_bytes, dtype=np.uint8))
+        rng = np.random.default_rng(seed)
+        self.tape = bytearray(rng.integers(0, 256, size=size_bytes, dtype=np.uint8))
         self.size = size_bytes
         self.initial_hash = self.hash()
         self.stencil_registry = {}  # offset -> (checksum, precomputed_value)
@@ -145,8 +145,8 @@ class FeistelScrambler:
         self.round_keys = self._generate_round_keys()
 
     def _generate_round_keys(self):
-        rng = np.random.RandomState(0xFE15)
-        return [rng.randint(0, 256, size=self.half_block, dtype=np.uint8)
+        rng = np.random.default_rng(0xFE15)
+        return [rng.integers(0, 256, size=self.half_block, dtype=np.uint8)
                 for _ in range(FEISTEL_ROUNDS)]
 
     def forward(self, tape_offset):
@@ -498,7 +498,7 @@ def run_hdd_native_inference(model_path: str, num_tokens: int = 1000):
             print(f"  No model files found. Generating 500MB synthetic model for demonstration...")
             synthetic_path = os.path.join(model_dir, "synthetic_model_500mb.bin")
             if not os.path.exists(synthetic_path):
-                rng = np.random.RandomState(42)
+                rng = np.random.default_rng(42)
                 with open(synthetic_path, "wb") as f:
                     for _ in range(500):
                         f.write(rng.bytes(1024 * 1024))
@@ -511,7 +511,7 @@ def run_hdd_native_inference(model_path: str, num_tokens: int = 1000):
     print()
 
     # Generate synthetic token vectors (concept vectors)
-    rng = np.random.RandomState(0xC0C0)
+    rng = np.random.default_rng(0xC0C0)
 
     print("-" * 78)
     print(f"PROCESSING {num_tokens} TOKENS")

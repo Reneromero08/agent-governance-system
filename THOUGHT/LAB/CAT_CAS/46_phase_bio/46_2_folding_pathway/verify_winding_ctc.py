@@ -77,7 +77,7 @@ def run():
     for name, seq in [
         ("Poly-A", "A" * 30),
         ("GP-repeat", "GP" * 15),
-        ("Random", ''.join(np.random.RandomState(42).choice(list(KD.keys()), 30))),
+        ("Random", ''.join(np.random.default_rng(42).choice(list(KD.keys()), 30))),
         ("AV-repeat", "AV" * 15),
     ]:
         log("--- %s (L=%d) ---" % (name, len(seq)))

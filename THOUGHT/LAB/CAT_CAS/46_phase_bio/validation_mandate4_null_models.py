@@ -32,8 +32,8 @@ PI = np.pi
 class CatalyticTape:
     def __init__(self, size_mb=256):
         self.size_bytes = size_mb * 1024 * 1024
-        np.random.seed(42)
-        self.tape = np.random.bytes(self.size_bytes)
+        rng = np.random.default_rng(42)
+        self.tape = rng.bytes(self.size_bytes)
         self.initial_hash = hashlib.sha256(self.tape).hexdigest()
         self.op_count = 0
         self.op_offset = 0
@@ -150,7 +150,7 @@ def compute_ipr(H):
 
 
 def bootstrap_ci(native, null, n_boot=2000):
-    rng = np.random.RandomState(42)
+    rng = np.random.default_rng(42)
     ds = []
     for _ in range(n_boot):
         ns = rng.choice(native, size=len(native), replace=True)
@@ -188,7 +188,7 @@ def null_model_m1(tape):
         # Null: shuffled contacts + same sequence (10 trials per protein)
         possible = [(i,j) for i in range(L) for j in range(i+1,L) if abs(i-j)>2]
         for trial in range(10):
-            rng = np.random.RandomState(1000 + trial)  # fixed seeds for reproducibility
+            rng = np.random.default_rng(1000 + trial)  # fixed seeds for reproducibility
             shuf = set()
             chosen = rng.choice(len(possible), size=min(n_native, len(possible)), replace=False)
             for idx in chosen:
@@ -259,7 +259,7 @@ def fetch_connectome():
 def build_connectome_H(W_chem, W_elec, scale=1.0, seed=42):
     L = W_chem.shape[0]
     H = np.zeros((L,L), dtype=np.complex128)
-    rng = np.random.RandomState(seed)
+    rng = np.random.default_rng(seed)
     disorder = rng.uniform(-0.3,0.3,L)
     dissipation = rng.uniform(0.05,0.15,L)
     wc_max = np.max(W_chem) if np.max(W_chem)>0 else 1.0
@@ -279,7 +279,7 @@ def shuffle_edges(W):
     rows, cols = np.where(W > 0)
     vals = W[rows, cols]
     # Shuffle values while keeping positions (preserves in/out degree)
-    rng = np.random.RandomState(123)
+    rng = np.random.default_rng(123)
     rng.shuffle(vals)
     W_shuf = np.zeros_like(W)
     for idx in range(len(rows)):
@@ -416,7 +416,7 @@ def build_morph_H(coords, use_nematic=True, state="separated"):
             if abs(yi - y_mid) < scar_slice_width:
                 if xi < x_mid: H[i,i] += 1j*residual
                 elif xi > x_mid: H[i,i] += -1j*residual
-    rng = np.random.RandomState(42)
+    rng = np.random.default_rng(42)
     for i in range(N):
         H[i,i] += rng.uniform(-0.01,0.01) + 1j*rng.uniform(-0.005,0.005)
     return H

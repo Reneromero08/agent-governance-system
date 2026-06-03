@@ -63,9 +63,9 @@ class WormholeEmbedFn:
         vectors = np.zeros((len(texts), self.k_dim), dtype=np.float32)
         for i, text in enumerate(texts):
             h_val = hash(text) % (2**31)
-            rng = np.random.RandomState(h_val)
+            rng = np.random.default_rng(h_val)
             n_in = self._svh.shape[1]  # SVh is [k, n_in]
-            hidden = rng.randn(n_in).astype(np.float32)
+            hidden = rng.standard_normal(n_in).astype(np.float32)
             h_eigen = hidden @ self._svh.numpy().T  # [n_in] @ [k, n_in]^T = [k]
             norm = np.linalg.norm(h_eigen) + 1e-9
             vectors[i] = h_eigen / norm
@@ -97,8 +97,8 @@ class CassetteEmbedFn:
         # Fallback: deterministic projection
         vectors = np.zeros((len(texts), self._dim), dtype=np.float32)
         for i, text in enumerate(texts):
-            rng = np.random.RandomState(hash(text) % (2**31))
-            v = rng.randn(self._dim).astype(np.float32)
+            rng = np.random.default_rng(hash(text) % (2**31))
+            v = rng.standard_normal(self._dim).astype(np.float32)
             vectors[i] = v / (np.linalg.norm(v) + 1e-9)
         return vectors
     

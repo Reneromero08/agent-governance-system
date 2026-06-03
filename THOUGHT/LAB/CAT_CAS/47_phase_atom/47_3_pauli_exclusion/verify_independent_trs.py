@@ -61,7 +61,7 @@ def run():
 
         # Random complex perturbation on the boundary (Hermitian base + noise on boundary edges)
         H_r = H_b.copy()
-        np.random.seed(137)
+        np.random.default_rng(137)
         for i in boundary_indices:
             for j in boundary_indices:
                 if i != j and abs(H_b[i,j]) < 0.001:

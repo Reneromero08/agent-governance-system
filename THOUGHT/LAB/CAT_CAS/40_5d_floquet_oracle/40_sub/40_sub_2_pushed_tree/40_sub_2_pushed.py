@@ -31,7 +31,7 @@ AGENTS = 16; AGENT_SEGMENT = 65536
 
 class Tape:
     def __init__(s,sz=TAPE_SIZE,sd=42):
-        r=np.random.RandomState(sd); s.d=r.randint(0,256,sz,dtype=np.uint8); s.rc=0;s.wc=0
+        r=np.random.default_rng(sd); s.d=r.integers(0,256,sz,dtype=np.uint8); s.rc=0;s.wc=0
     def read(s,i): s.rc+=1; return int(s.d[i])
     def write(s,i,v): s.wc+=1; s.d[i]=v&255
     def hash(s): return hashlib.sha256(s.d.tobytes()).hexdigest()
@@ -69,8 +69,8 @@ def pi(U,th=0.3):return int(((torch.linalg.eigvals(U)+1).abs()<th).sum().item())
 class Agent:
     def __init__(s,aid,depth):
         s.aid=aid;s.depth=depth;s.nl=2**(depth-1);s.nn=2**depth-1
-        r=np.random.RandomState(42+aid)
-        s.leaves=r.randint(0,256,s.nl,dtype=np.uint8)
+        r=np.random.default_rng(42+aid)
+        s.leaves=r.integers(0,256,s.nl,dtype=np.uint8)
         s.expected=s._classic()
     def _classic(s):
         v=s.leaves.astype(np.int32).tolist()

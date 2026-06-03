@@ -5,8 +5,7 @@ import os
 class CatalyticTape:
     def __init__(self, size_mb=256):
         self.size_bytes = size_mb * 1024 * 1024
-        np.random.seed(42)
-        self.tape = np.random.bytes(self.size_bytes)
+        rng = np.random.default_rng(42)`n        self.tape = rng.bytes(self.size_bytes)
         self.initial_hash = hashlib.sha256(self.tape).hexdigest()
         
     def verify(self):
@@ -36,7 +35,7 @@ def generate_helix_contacts(L):
     return contacts
 
 def generate_random_contacts(L, density=0.3, seed=42):
-    rng = np.random.RandomState(seed)
+    rng = np.random.default_rng(seed)
     contacts = set()
     for i in range(L):
         for j in range(L):

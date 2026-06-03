@@ -23,8 +23,8 @@ import time
 class CatalyticTape:
     def __init__(self, size_mb=256):
         self.size_bytes = size_mb * 1024 * 1024
-        np.random.seed(42)
-        self.tape = bytearray(np.random.bytes(self.size_bytes))
+        rng = np.random.default_rng(42)
+        self.tape = bytearray(rng.bytes(self.size_bytes))
         self.initial_hash = hashlib.sha256(self.tape).hexdigest()
         self.history = []
         self.bytes_written = 0
@@ -121,7 +121,7 @@ def build_connectome_H(W_chem, W_elec, scale=1.0, theta=0.0,
     L = W_chem.shape[0]
     H = np.zeros((L, L), dtype=np.complex128)
 
-    rng = np.random.RandomState(seed)
+    rng = np.random.default_rng(seed)
     disorder = rng.uniform(-0.3, 0.3, L)
     dissipation = rng.uniform(0.05, 0.15, L)
 

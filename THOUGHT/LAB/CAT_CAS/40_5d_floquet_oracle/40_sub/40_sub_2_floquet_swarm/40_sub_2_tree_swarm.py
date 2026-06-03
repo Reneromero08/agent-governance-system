@@ -38,8 +38,8 @@ AGENT_SEGMENT = 65536  # 64KB per agent tape segment
 
 class CatalyticTape:
     def __init__(self, size_bytes=TAPE_SIZE, seed=42):
-        rng = np.random.RandomState(seed)
-        self.data = rng.randint(0,256,size=size_bytes,dtype=np.uint8)
+        rng = np.random.default_rng(seed)
+        self.data = rng.integers(0,256,size=size_bytes,dtype=np.uint8)
         self.rc = 0; self.wc = 0
     def read(self, i): self.rc += 1; return int(self.data[i])
     def write(self, i, v): self.wc += 1; self.data[i] = v & 0xFF
@@ -95,7 +95,7 @@ def count_pi_modes(U, thresh=0.3):
 bell_plus = torch.tensor([1,0,0,1],dtype=COMPLEX)/np.sqrt(2)
 
 def invisible_hand_verify():
-    psi = torch.randn(4,dtype=COMPLEX); psi/=psi.norm()
+    psi = torch.standard_normal(4,dtype=COMPLEX); psi/=psi.norm()
     H_ent = 0.1*torch.kron(torch.kron(
         torch.tensor([[1,0],[0,-1]],dtype=COMPLEX), torch.eye(2,dtype=COMPLEX)),
         torch.kron(torch.eye(2,dtype=COMPLEX), torch.tensor([[1,0],[0,-1]],dtype=COMPLEX)))
@@ -115,8 +115,8 @@ class CatalyticTreeAgent:
         self.num_nodes = 2**depth - 1
         self.num_leaves = 2**(depth-1)
         # Build random tree values
-        rng = np.random.RandomState(42+agent_id)
-        self.leaves = rng.randint(0,256,size=self.num_leaves,dtype=np.uint8)
+        rng = np.random.default_rng(42+agent_id)
+        self.leaves = rng.integers(0,256,size=self.num_leaves,dtype=np.uint8)
         self.expected_root = self._compute_root_classical()
     
     def _compute_root_classical(self):

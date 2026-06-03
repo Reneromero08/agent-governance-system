@@ -31,8 +31,8 @@ CSV_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "cell_data",
 class CatalyticTape:
     def __init__(self, size_mb=256):
         self.size_bytes = size_mb * 1024 * 1024
-        np.random.seed(42)
-        self.tape = bytearray(np.random.bytes(self.size_bytes))
+        rng = np.random.default_rng(42)
+        self.tape = bytearray(rng.bytes(self.size_bytes))
         self.initial_hash = hashlib.sha256(self.tape).hexdigest()
         self.history = []
         self.bytes_written = 0
@@ -190,7 +190,7 @@ def build_cell_hamiltonian(coords, state="flat", defect_sep_um=50.0,
                         H[i, i] += -1j * residual
 
     # Cell-to-cell variation
-    rng = np.random.RandomState(seed)
+    rng = np.random.default_rng(seed)
     for i in range(N):
         H[i, i] += rng.uniform(-0.01, 0.01) + 1j * rng.uniform(-0.005, 0.005)
 

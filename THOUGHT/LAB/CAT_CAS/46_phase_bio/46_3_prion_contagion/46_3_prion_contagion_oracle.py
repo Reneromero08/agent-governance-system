@@ -5,8 +5,8 @@ import os
 class CatalyticTape:
     def __init__(self, size_mb=256):
         self.size_bytes = size_mb * 1024 * 1024
-        np.random.seed(42)
-        self.tape = np.random.bytes(self.size_bytes)
+        rng = np.random.default_rng(42)
+        self.tape = rng.bytes(self.size_bytes)
         self.initial_hash = hashlib.sha256(self.tape).hexdigest()
         
     def verify(self):
@@ -137,10 +137,10 @@ def run_experiment():
     # compute the IPR distribution. If the center-seeded prion IPR
     # exceeds the null, the impurity detection is genuine.
     N_null = 50
-    rng = np.random.RandomState(42)
+    rng = np.random.default_rng(42)
     null_iprs = []
     for trial in range(N_null):
-        rand_seed_pos = rng.randint(0, N_proteins)
+        rand_seed_pos = rng.integers(0, N_proteins)
         H_null = np.zeros((dim, dim), dtype=np.complex128)
         for p in range(N_proteins):
             rs = p * L_seq

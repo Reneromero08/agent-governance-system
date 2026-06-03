@@ -20,9 +20,9 @@ def create_padded_file(file_path: str, initial_data: bytes, target_size: int, se
         raise ValueError("Initial data size exceeds target size!")
     
     # Generate deterministic random padding
-    rng = np.random.RandomState(seed)
+    rng = np.random.default_rng(seed)
     padding_len = target_size - len(initial_data)
-    padding = rng.randint(0, 256, size=padding_len, dtype=np.uint8).tobytes()
+    padding = rng.integers(0, 256, size=padding_len, dtype=np.uint8).tobytes()
     
     # Write file
     with open(file_path, "wb") as f:

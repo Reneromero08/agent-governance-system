@@ -24,7 +24,7 @@ TAPE_SIZE = 256*1024*1024; AGENTS = 16; BLOCK = 4096
 
 class Tape:
     def __init__(s, sz=TAPE_SIZE, sd=42):
-        r = np.random.RandomState(sd); s.d = r.randint(0,256,sz,dtype=np.uint8)
+        r = np.random.default_rng(sd); s.d = r.integers(0,256,sz,dtype=np.uint8)
         s.rc=0; s.wc=0
     def read(s,i): s.rc+=1; return int(s.d[i])
     def write(s,i,v): s.wc+=1; s.d[i]=v&255
@@ -71,7 +71,7 @@ def floquet(L,kz,kw,t1=1.0,loss=0.01,g=0.0):
 def pi(U,th=0.3):return int(((torch.linalg.eigvals(U)+1).abs()<th).sum().item())
 
 def gen_cnf(nv,nc,sd):
-    rng=random.Random(sd);sol=[rng.randint(0,1)for _ in range(nv)];cl=[]
+    rng=random.Random(sd);sol=[rng.integers(0,1)for _ in range(nv)];cl=[]
     for _ in range(nc):
         vs=rng.sample(range(nv),3);c=[]
         for v in vs:c.append(v+1 if rng.random()<0.5 else -(v+1))

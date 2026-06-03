@@ -60,7 +60,7 @@ def run():
         sequences.append((f"Poly-A (L={L})", "A" * L, "FOLDABLE"))
         sequences.append((f"GP-repeat (L={L})", "GP" * (L//2), "FRUSTRATED"))
 
-    rng = np.random.RandomState(42)
+    rng = np.random.default_rng(42)
     aa_list = list(KD.keys())
     for L in [15, 30, 45]:
         seq = ''.join(rng.choice(aa_list, L))
@@ -98,7 +98,7 @@ def run():
     log(f"GP-repeat frustrated at all L: {'YES' if gp_ok else 'NO'}")
 
     # Random is ALWAYS frustrated
-    rng2 = np.random.RandomState(99)
+    rng2 = np.random.default_rng(99)
     rand_ok = True
     for L in [15, 30, 45]:
         s = ''.join(rng2.choice(aa_list, L))

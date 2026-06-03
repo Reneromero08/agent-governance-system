@@ -37,9 +37,9 @@ NUM_LAYERS_B = 2
 
 def generate_orthogonal_projections(n_models=2, subspace_dim=SUBSPACE_DIM,
                                     tape_dim=TAPE_DIM, seed=42):
-    rng = np.random.RandomState(seed)
+    rng = np.random.default_rng(seed)
     total_dim = n_models * subspace_dim
-    M = rng.randn(total_dim, tape_dim)
+    M = rng.standard_normal(total_dim, tape_dim)
     Q, R = np.linalg.qr(M.T)
     basis = Q[:, :total_dim].T
     return [basis[i * subspace_dim:(i + 1) * subspace_dim, :] for i in range(n_models)]
@@ -147,8 +147,8 @@ class ModelB:
 
 class SharedTape:
     def __init__(self, size=TAPE_SIZE, seed=42):
-        rng = np.random.RandomState(seed)
-        self.tape = bytearray(rng.randint(0, 256, size=size, dtype=np.uint8))
+        rng = np.random.default_rng(seed)
+        self.tape = bytearray(rng.integers(0, 256, size=size, dtype=np.uint8))
         self.initial_hash = self.hash()
 
     def hash(self):

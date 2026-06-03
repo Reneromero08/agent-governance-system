@@ -99,7 +99,7 @@ def selective_addressing():
           f"{'YES' if ok_alt else 'NO'}")
     
     # Test: random pattern
-    rng=np.random.RandomState(42)
+    rng=np.random.default_rng(42)
     gamma_rnd=rng.choice([0.0,0.5],size=n_sites)
     U_rnd=floquet(L,kz,kw,t1=0.1,gamma_by_site=gamma_rnd)
     n_pi_rnd=pi(U_rnd)

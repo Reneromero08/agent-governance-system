@@ -57,8 +57,8 @@ from catalytic_tape import CatalyticTape
 # ======================================================================
 
 def seq_random(N, seed=123):
-    rng = np.random.RandomState(seed)
-    return [1 if rng.rand() < 0.5 else -1 for _ in range(N)]
+    rng = np.random.default_rng(seed)
+    return [1 if rng.random() < 0.5 else -1 for _ in range(N)]
 
 
 def seq_all_ones(N):
@@ -374,7 +374,7 @@ def gate_null_model_shuffled(L, h, J, theta_drive):
 
     N_test = 100
     per_seq = seq_periodic(N_test)
-    rng = np.random.RandomState(42)
+    rng = np.random.default_rng(42)
     shuf_seq = per_seq.copy()
     rng.shuffle(shuf_seq)
 

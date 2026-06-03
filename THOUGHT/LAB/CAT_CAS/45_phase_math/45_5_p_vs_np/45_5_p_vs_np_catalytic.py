@@ -43,7 +43,7 @@ from catalytic_tape import CatalyticTape
 # ======================================================================
 
 def generate_3cnf(N, M, seed=42, has_solution=True):
-    rng = np.random.RandomState(seed)
+    rng = np.random.default_rng(seed)
     if has_solution:
         # Generate hidden satisfying assignment, then consistent clauses
         true_vars = set(rng.choice(N, size=N//2, replace=False))
@@ -56,7 +56,7 @@ def generate_3cnf(N, M, seed=42, has_solution=True):
             clause = [(sat_var, sat_sign)]
             for v in vs:
                 if v != sat_var:
-                    clause.append((v, 1 if rng.rand() < 0.5 else -1))
+                    clause.append((v, 1 if rng.random() < 0.5 else -1))
             rng.shuffle(clause)
             clauses.append(clause)
         return clauses
@@ -64,7 +64,7 @@ def generate_3cnf(N, M, seed=42, has_solution=True):
         clauses = []
         for _ in range(M):
             vs = rng.choice(N, size=3, replace=False)
-            clause = [(v, 1 if rng.rand() < 0.5 else -1) for v in vs]
+            clause = [(v, 1 if rng.random() < 0.5 else -1) for v in vs]
             clauses.append(clause)
         return clauses
 

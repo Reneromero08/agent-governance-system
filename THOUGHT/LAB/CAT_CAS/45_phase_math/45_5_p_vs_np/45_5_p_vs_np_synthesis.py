@@ -43,8 +43,8 @@ PI = np.pi
 class CatalyticTape:
     def __init__(self, size_bytes=256 * 1024 * 1024, seed=42):
         self.size_bytes = size_bytes
-        rng = np.random.RandomState(seed)
-        self.tape = rng.randint(0, 256, size=size_bytes, dtype=np.uint8)
+        rng = np.random.default_rng(seed)
+        self.tape = rng.integers(0, 256, size=size_bytes, dtype=np.uint8)
         self.read_count = 0
         self.write_count = 0
         self._initial_hash = self.hash()
@@ -71,7 +71,7 @@ def generate_3sat_with_solution(N, M, seed=42):
     The hidden assignment is pre-computed, and clauses are built
     to be consistent with it (guaranteed satisfiable).
     """
-    rng = np.random.RandomState(seed)
+    rng = np.random.default_rng(seed)
 
     # Hidden satisfying assignment
     true_vars = set(rng.choice(N, size=N // 2, replace=False))

@@ -43,7 +43,7 @@ from catalytic_tape import CatalyticTape
 # ======================================================================
 
 def generate_3sat(N, M, seed=42):
-    rng = np.random.RandomState(seed)
+    rng = np.random.default_rng(seed)
     clauses = []
     for _ in range(M):
         v = rng.choice(N, size=3, replace=False)
@@ -162,7 +162,7 @@ def compute_pi_mode_gap(N, energies, theta=PI/2, tau=1.0, k=6):
     except Exception as e:
         # Fallback: if eigs doesn't converge, use a few random vectors
         # to estimate gap. For honesty, report non-converged.
-        v = np.random.randn(dim) + 1j * np.random.randn(dim)
+        v = np.random.standard_normal(dim) + 1j * np.random.standard_normal(dim)
         v /= np.linalg.norm(v)
         for _ in range(100):
             v = U_op._matvec(v)
@@ -295,7 +295,7 @@ def gate_null_model(N=12):
 
     # Shuffled null model: permute variable indices in clauses
     def generate_permuted_3sat(N, M, seed=42):
-        rng = np.random.RandomState(seed)
+        rng = np.random.default_rng(seed)
         clauses = []
         perm = rng.permutation(N)
         for _ in range(M):

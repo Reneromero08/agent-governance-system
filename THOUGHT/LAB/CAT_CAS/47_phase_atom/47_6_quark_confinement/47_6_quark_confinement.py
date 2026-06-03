@@ -124,7 +124,7 @@ def run_experiment():
     log_print("\n--- NULL MODEL: RANDOM ACCESS (NON-SEQUENTIAL) ---")
     log_print("Accessing random offsets instead of sequential. Higher variance expected.")
     random_offsets = [random.randint(0, warm_vacuum_size - max(offsets) - 1) for _ in range(iterations)]
-    np.random.seed(137)
+    np.random.default_rng(137)
     random_indices = np.random.randint(0, len(offsets) - 1, iterations)
     times_random = np.zeros(iterations)
     for i in range(iterations):

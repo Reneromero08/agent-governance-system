@@ -51,8 +51,8 @@ class CatalyticTape:
     """Exp 01: Borrowable dirty memory. Restored byte-for-byte."""
     def __init__(self, size_bytes=TAPE_SIZE, seed=42):
         self.size = size_bytes
-        rng = np.random.RandomState(seed)
-        self.data = rng.randint(0, 256, size=size_bytes, dtype=np.uint8)
+        rng = np.random.default_rng(seed)
+        self.data = rng.integers(0, 256, size=size_bytes, dtype=np.uint8)
         self.rc = 0; self.wc = 0
     def read(self, i): self.rc += 1; return int(self.data[i])
     def write(self, i, v): self.wc += 1; self.data[i] = v & 0xFF
@@ -158,7 +158,7 @@ def invisible_hand_restore(psi_entangled, bell_pair):
 
 def generate_cnf_candidate(N_vars):
     """Generate a random CNF candidate as bytes (N_vars bits)."""
-    bits = np.random.RandomState(np.random.randint(0, 2**31)).randint(0,2,N_vars)
+    bits = np.random.default_rng(np.random.integers(0, 2**31)).integers(0,2,N_vars)
     return bytes(np.packbits(bits).tobytes())
 
 BLOCK_SIZE = 32  # bytes per agent segment
@@ -278,7 +278,7 @@ def run_swarm(L=4, n_k=4, n_agents=None):
     
     # --- Invisible Hand demonstration ---
     print(f"\n  ---  INVISIBLE HAND — Bell pair as catalytic entanglement  ---")
-    psi_agent = torch.randn(4, dtype=COMPLEX)
+    psi_agent = torch.standard_normal(4, dtype=COMPLEX)
     psi_agent = psi_agent / psi_agent.norm()
     psi_ent = invisible_hand_borrow(psi_agent, bell_plus)
     psi_restored, bell_restored = invisible_hand_restore(psi_ent, bell_plus)

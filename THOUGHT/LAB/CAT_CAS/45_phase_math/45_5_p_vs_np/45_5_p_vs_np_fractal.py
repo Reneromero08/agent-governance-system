@@ -60,7 +60,7 @@ from catalytic_tape import CatalyticTape
 
 def generate_3sat(N, M, seed=42):
     """Generate a random 3-SAT instance with N variables and M clauses."""
-    rng = np.random.RandomState(seed)
+    rng = np.random.default_rng(seed)
     clauses = []
     for _ in range(M):
         vars_used = rng.choice(N, size=3, replace=False)
@@ -277,10 +277,10 @@ def gate_p_phase(N=10):
     for trial in range(3):
         seed = 500 + trial
         # Build H with random diagonal entries, same off-diagonal structure
-        rng = np.random.RandomState(seed)
+        rng = np.random.default_rng(seed)
         dim = 2**N
         H_null = torch.zeros((dim, dim), dtype=torch.complex128)
-        random_energies = rng.randint(0, 10, size=dim).astype(np.float64)
+        random_energies = rng.integers(0, 10, size=dim).astype(np.float64)
         for x in range(dim):
             hash_phase = sum(np.sin(bit*1.7) for bit in range(N) if (x>>bit)&1)
             H_null[x,x] = complex(random_energies[x], 0.3 * hash_phase)

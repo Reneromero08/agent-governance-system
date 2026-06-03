@@ -9,8 +9,8 @@ import numpy as np
 class CatalyticTape:
     def __init__(self, size_mb=256, seed=42):
         self.size_bytes = size_mb * 1024 * 1024
-        rng = np.random.RandomState(seed)
-        self.tape = bytearray(rng.randint(0, 256, size=self.size_bytes, dtype=np.uint8))
+        rng = np.random.default_rng(seed)
+        self.tape = bytearray(rng.integers(0, 256, size=self.size_bytes, dtype=np.uint8))
         self.initial_hash = hashlib.sha256(self.tape).hexdigest()
         self.history = []
         self.bytes_written = 0

@@ -4,8 +4,8 @@ import numpy as np
 class BennettHistoryTape:
     def __init__(self, size_mb=10, seed=47):
         self.size_bytes = size_mb * 1024 * 1024
-        np.random.seed(seed)
-        raw = np.random.bytes(self.size_bytes)
+        rng = np.random.default_rng(seed)
+        raw = rng.bytes(self.size_bytes)
         self.tape = bytearray(raw)
         self.initial_hash = hashlib.sha256(self.tape).hexdigest()
         self.history_stack = []

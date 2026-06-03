@@ -38,8 +38,8 @@ COMPLEX = torch.complex64
 
 class CatalyticTape:
     def __init__(self, size_bytes=256*1024*1024, seed=42):
-        rng = np.random.RandomState(seed)
-        self.data = rng.randint(0,256,size=size_bytes,dtype=np.uint8)
+        rng = np.random.default_rng(seed)
+        self.data = rng.integers(0,256,size=size_bytes,dtype=np.uint8)
         self.rc = 0; self.wc = 0
     def read(self,i): self.rc+=1; return int(self.data[i])
     def write(self,i,v): self.wc+=1; self.data[i]=v&0xFF

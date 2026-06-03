@@ -9,7 +9,7 @@ import numpy as np, hashlib, os
 class CatalyticTape:
     def __init__(self, size_mb=256):
         self.size_bytes = size_mb * 1024 * 1024
-        np.random.seed(42)
+        np.random.default_rng(42)
         self.tape = bytearray(np.random.bytes(self.size_bytes))
         self.initial_hash = hashlib.sha256(self.tape).hexdigest()
         self.history = []
@@ -87,7 +87,7 @@ def run():
             ("GP-repeat (prion)", "GP" * (L // 2), False),
             ("AV alternate", "AV" * (L // 2), False),
         ]
-        rng = np.random.RandomState(42 + L)
+        rng = np.random.default_rng(42 + L)
         for i in range(3):
             s = ''.join(rng.choice(list(KD.keys()), L))
             seqs.append((f"Random-{i+1}", s, False))
@@ -111,7 +111,7 @@ def run():
     log(f"GATE 1 (Poly-A foldable): W=0 -> {'PASS' if g1 else 'FAIL'}")
     g2 = compute_winding(build_chain_H("GP" * 15)) != 0
     log(f"GATE 2 (GP-repeat frustrated): W!=0 -> {'PASS' if g2 else 'FAIL'}")
-    rng2 = np.random.RandomState(99)
+    rng2 = np.random.default_rng(99)
     g3 = all(compute_winding(build_chain_H(''.join(rng2.choice(list(KD.keys()), 30)))) != 0 for _ in range(10))
     log(f"GATE 3 (Random sequences frustrated): 10/10 -> {'PASS' if g3 else 'FAIL'}")
 

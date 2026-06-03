@@ -5,8 +5,8 @@ import os
 class CatalyticTape:
     def __init__(self, size_mb=256):
         self.size_bytes = size_mb * 1024 * 1024
-        np.random.seed(42)
-        self.tape = np.random.bytes(self.size_bytes)
+        rng = np.random.default_rng(42)
+        self.tape = rng.bytes(self.size_bytes)
         self.initial_hash = hashlib.sha256(self.tape).hexdigest()
         
     def verify(self):

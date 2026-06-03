@@ -71,7 +71,7 @@ class TokenizerBridge:
 
     def __init__(self, dim=HIDDEN_DIM, seed=42):
         self.dim = dim
-        self.rng = np.random.RandomState(seed)
+        self.rng = np.random.default_rng(seed)
         self.vocab_cache = {}
         self._real_embedding_table = None
         self._qwen_tokenizer = None
@@ -192,7 +192,7 @@ class HDDWeightStreamer:
                         for _suffix in weight_suffixes:
                             for _block in range(FULL_MATRIX_BLOCKS):
                                 layer_blocks.append(
-                                    np.random.RandomState(
+                                    np.random.default_rng(
                                         42 + layer_idx * 100 + len(_suffix) * 1000 + _block
                                     ).bytes(BLOCK_U8_SIZE)
                                 )
@@ -231,7 +231,7 @@ class HDDWeightStreamer:
                             if len(chunk) < F32_DIM:
                                 chunk = chunk + b'\x00' * (F32_DIM - len(chunk))
                     else:
-                        chunk = np.random.RandomState(42 + layer_idx * 4 + len(suffix)).bytes(F32_DIM)
+                        chunk = np.random.default_rng(42 + layer_idx * 4 + len(suffix)).bytes(F32_DIM)
                     layer_chunks.append(chunk)
 
                 raw_weights_list.append(b"".join(layer_chunks))
@@ -321,8 +321,8 @@ class CatalyticInferenceRuntime:
         self.daemon = ThermodynamicDaemon()
 
         # Initialize tape with random substrate
-        rng = np.random.RandomState(42)
-        self.tape[:] = rng.randint(0, 256, TAPE_SIZE, dtype=np.uint8).tobytes()
+        rng = np.random.default_rng(42)
+        self.tape[:] = rng.integers(0, 256, TAPE_SIZE, dtype=np.uint8).tobytes()
         
         # Layout (must match Rust):
         # input_offset = 0
@@ -403,7 +403,7 @@ class CatalyticInferenceRuntime:
             else:
                 self.cold_misses += 1
 
-            if tape_restored:
+            if result.get("tape_restored", False):
                 self.tape_restorations += 1
             else:
                 self.tape_failures += 1

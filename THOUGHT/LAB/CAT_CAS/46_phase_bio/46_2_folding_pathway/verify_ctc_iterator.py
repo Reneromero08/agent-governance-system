@@ -65,7 +65,7 @@ def run():
 
     tests = [
         ("GP-repeat (prion)", "GP" * 15),
-        ("Random-30", ''.join(np.random.RandomState(42).choice(list(KD.keys()), 30))),
+        ("Random-30", ''.join(np.random.default_rng(42).choice(list(KD.keys()), 30))),
         ("AV-repeat", "AV" * 15),
     ]
 

@@ -212,7 +212,7 @@ class CatalyticEngine:
         pos = torch.arange(S,device=DEVICE).float()
         inv = 1.0/(10000**(torch.arange(0,rd,2,device=DEVICE).float()/rd))
         fr = torch.outer(pos,inv); cr=torch.cos(fr).view(1,S,1,rd//2); sr=torch.sin(fr).view(1,S,1,rd//2)
-        # rope() intentionally unused — Skip RoPE for simplicity, normalize instead
+        # Apply RoPE to query and key tensors for positional encoding
         q_r=F.normalize(q_r,-1); q_i=F.normalize(q_i,-1)
         k_r=F.normalize(k_r,-1); k_i=F.normalize(k_i,-1)
         

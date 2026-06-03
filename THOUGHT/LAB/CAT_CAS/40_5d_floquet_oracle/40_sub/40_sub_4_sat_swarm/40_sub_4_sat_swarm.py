@@ -40,8 +40,8 @@ AGENTS = 16; BLOCK = 2048
 
 class CatalyticTape:
     def __init__(self, sz=TAPE_SIZE, sd=42):
-        r = np.random.RandomState(sd)
-        self.d = r.randint(0, 256, sz, dtype=np.uint8)
+        r = np.random.default_rng(sd)
+        self.d = r.integers(0, 256, sz, dtype=np.uint8)
         self.rc = 0; self.wc = 0
     def read(self, i): self.rc += 1; return int(self.d[i])
     def write(self, i, v): self.wc += 1; self.d[i] = v & 0xFF
@@ -101,7 +101,7 @@ def pi(U, th=0.3): return int(((torch.linalg.eigvals(U)+1).abs()<th).sum().item(
 def generate_cnf(n_vars, n_clauses, seed):
     """Generate a random 3-CNF formula with known solution."""
     rng = random.Random(seed)
-    solution = [rng.randint(0, 1) for _ in range(n_vars)]
+    solution = [rng.integers(0, 1) for _ in range(n_vars)]
     clauses = []
     for _ in range(n_clauses):
         vs = rng.sample(range(n_vars), 3)

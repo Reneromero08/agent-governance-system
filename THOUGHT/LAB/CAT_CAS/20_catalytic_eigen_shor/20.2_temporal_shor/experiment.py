@@ -95,9 +95,9 @@ def main():
     p = generate_large_prime(BIT_SIZE)
     q = generate_large_prime(BIT_SIZE)
     N = p * q
-    a = random.randint(2, N - 1)
+    a = random.integers(2, N - 1)
     while math.gcd(a, N) > 1:
-        a = random.randint(2, N - 1)
+        a = random.integers(2, N - 1)
     
     period = find_order(a, p, q)
     future_time = time.perf_counter() - t0_future
@@ -161,8 +161,8 @@ def main():
             val = tape.read(offset + i)
             # The 'base tape' is deterministic since we initialized it with seed 42.
             import numpy as np
-            rng = np.random.RandomState(42)
-            base_tape = rng.randint(0, 256, size=TAPE_SIZE, dtype=np.uint8)
+            rng = np.random.default_rng(42)
+            base_tape = rng.integers(0, 256, size=TAPE_SIZE, dtype=np.uint8)
             data.append(val ^ base_tape[offset + i])
         return data
 

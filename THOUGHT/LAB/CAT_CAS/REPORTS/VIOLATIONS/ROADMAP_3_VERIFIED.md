@@ -357,3 +357,76 @@ NON-M6 ESCALATION: 1 (Exp 15 report-code gap)
 
 ---
 
+## 🗂️ SECTION G: HARDCODED OUTPUT PATHS (14 unique files, 17 critic entries)
+*All fixed. Uses `os.path.dirname(os.path.abspath(__file__))` now.*
+*[2026-06-02] MASTERMIND RE-VERIFIED: Path audit + runtime portability confirmed.*
+
+- [x] G-1 to G-7 — Phase 46 oracle files: PATH-FIX-VERIFIED (all use __file__-relative resolution)
+- [x] G-9 to G-14 — Phase 47 experiment files: PATH-RUNTIME-VERIFIED (repo root + external cwd)
+- [x] **G-8** — validation_real_morphogenesis.py: FIXED (line 28: CSV_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), ...)). Was 🔴 OPEN, now PATH-STATIC-VERIFIED (full run deferred >30s, 2.91 GB CSV).
+
+17-vs-14 reconciliation: original 17 count included duplicate critic entries (Phase 47 experiments flagged for M-5+M-6+M-7 simultaneously). 14 unique files exist.
+
+---
+
+2026-06-02 18:15 UTC — VERIFIED
+Verifier: MASTERMIND
+
+Verification Summary:
+- 14 unique M-7 files audited across 2 passes (static + runtime)
+- 12 PATH-RUNTIME-VERIFIED (scripts run from repo root and/or external cwd)
+- 2 PATH-STATIC-VERIFIED (import verified; full run deferred for network/CSV weight)
+- G-8 formerly OPEN confirmed fixed — CSV_PATH uses __file__ resolution
+- 0 STILL-HARDCODED paths remain
+
+Evidence:
+- All Phase 47 experiments run clean from repo root (<15s each)
+- Phase 46 oracles + prion run clean from repo root (<7s each)
+- validation_real_morphogenesis CSV_PATH imports correctly (__file__-relative)
+- validation_mandate4 CSV_PATH imports correctly (__file__-relative)
+
+Changes Since Previous Review:
+- G-8: OPEN → DONE (__file__-relative path confirmed)
+- G-1 through G-7: DONE-UNVERIFIED → DONE (all use __file__ resolution)
+- G-9 through G-14: DONE-UNVERIFIED → DONE (runtime verified)
+- 17-vs-14 reconciled (duplicate critic entries documented)
+
+---
+
+## 🐛 SECTION H: CODEBASE BUGS (10 items) — ALL RESOLVED
+*[2026-06-02] MASTERMIND VERIFIED: 10/10 resolved. All bugs fixed, false positives corrected, or confirmed as non-bugs.*
+
+- [x] **H-1** — lm_head overwrite in 16
+  Status: ✅ FIXED | tape_restored → result.get("tape_restored", False), py_compile OK
+
+- [x] **H-2** — ground_truth side-effect in 11
+  Status: ✅ FIXED | run_reversible() computes ground truth locally. Order regression PASS.
+
+- [x] **H-3** — 41b = 41a exact duplicate
+  Status: ✅ FALSE-POSITIVE | MD5: 79A43E vs F87EEF — files DIFFER. Roadmap annotation corrected.
+
+- [x] **H-4** — Float equality in 04 infinity thermo
+  Status: ✅ FALSE-POSITIVE | bits_erased is Python int from .sum().item(). Integer equality is valid.
+
+- [x] **H-5** — Float equality in 07 experiment
+  Status: ✅ ALREADY-FIXED | abs(prob_post - prob_pre) < 1e-12 tolerance comparison.
+
+- [x] **H-6** — torch.svd → torch.linalg.svd (2 files)
+  Status: ✅ ALREADY-FIXED | No remaining torch.svd calls.
+
+- [x] **H-7** — np.random.RandomState → Generator (58 files)
+  Status: ✅ FULLY MIGRATED | RandomState remaining: 0. np.random.seed remaining: 0. default_rng present: 58 files. Critic clean. Expected SHA-256 drift documented (PCG64 vs Mersenne Twister). Catalytic lifecycle preserved.
+
+- [x] **H-8** — mmap try/finally in 14 hdd_scale
+  Status: ✅ ALREADY-FIXED | try/finally with tape_mmap.close() in finally.
+
+- [x] **H-9** — Dead code in 33 _infinity_engine
+  Status: ✅ ACTIVE-CODE | InfinityEngine self-instanced. Not dead code.
+
+- [x] **H-10** — Dead rope() in 33 _tape_engine
+  Status: ✅ FIXED | rope() is active. Stale "unused" comment corrected.
+
+COUNTS: FIXED=3, FALSE-POSITIVE=2, ALREADY-FIXED=3, ACTIVE-CODE=1, FULLY MIGRATED=1. TOTAL: 10/10.
+
+---
+

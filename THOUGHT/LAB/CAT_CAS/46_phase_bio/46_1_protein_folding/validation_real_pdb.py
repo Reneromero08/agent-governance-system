@@ -197,7 +197,7 @@ def main():
                     if abs(i - j) > 2]
         ipr_shuf_vals = []
         for trial in range(10):
-            rng = np.random.RandomState(100 + trial)
+            rng = np.random.default_rng(100 + trial)
             shuf = set()
             chosen = rng.choice(len(possible),
                                size=min(n_native, len(possible)),
@@ -240,7 +240,7 @@ def main():
     for seq, name in IDP_SEQUENCES:
         L = len(seq)
         # Random contacts at globular-average density (~2.8 per residue)
-        rng = np.random.RandomState(42)
+        rng = np.random.default_rng(42)
         n_c = int(L * 2.8)
         idp_contacts = set()
         possible = [(i, j) for i in range(L) for j in range(i+1, L)
@@ -344,7 +344,7 @@ def main():
 
     # --- Bootstrap CI for Cohen's d (raw IPR) ---
     n_boot = 2000
-    rng = np.random.RandomState(123)
+    rng = np.random.default_rng(123)
     d_raw_boot = []
     for _ in range(n_boot):
         gs = rng.choice(glob_ipr, size=len(glob_ipr), replace=True)

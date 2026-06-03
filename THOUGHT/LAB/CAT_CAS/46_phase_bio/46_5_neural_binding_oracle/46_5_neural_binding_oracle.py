@@ -11,9 +11,9 @@ def build_connectome(L=302, p_rewire=0.15, scale=1.0, theta=0.0, lesion_nodes=No
     G = nx.watts_strogatz_graph(L, k=6, p=p_rewire, seed=42)
     H = np.zeros((L, L), dtype=np.complex128)
     
-    np.random.seed(42)
-    disorder = np.random.uniform(-0.5, 0.5, L)
-    dissipation = np.random.uniform(0.8, 1.2, L)
+    rng = np.random.default_rng(42)
+    disorder = rng.uniform(-0.5, 0.5, L)
+    dissipation = rng.uniform(0.8, 1.2, L)
     
     for u, v in G.edges():
         if lesion_nodes and (u in lesion_nodes or v in lesion_nodes):
@@ -80,7 +80,7 @@ def run_experiment():
     min_ipr_i = float(np.min(iprs_i))
 
     # Lesioned: SAME graph, but 20% of nodes lesioned (removed from edges)
-    np.random.seed(123)
+    np.random.default_rng(123)
     lesion_set = set(np.random.choice(L, size=int(L*0.2), replace=False))
     H_lesion = build_connectome(L, scale=1.0, lesion_nodes=lesion_set)
     W_lesion = compute_winding(H_lesion)

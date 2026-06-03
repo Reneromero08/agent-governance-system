@@ -124,8 +124,8 @@ def run_computronium_experiment():
     ]
 
     # Initialize tape data deterministically
-    rng = np.random.RandomState(42)
-    tape_bytes = rng.randint(0, 256, size=TAPE_SIZE, dtype=np.uint8).tobytes()
+    rng = np.random.default_rng(42)
+    tape_bytes = rng.integers(0, 256, size=TAPE_SIZE, dtype=np.uint8).tobytes()
 
     # Call the native Rust FFI sweep
     restore_ratios = [m[1] for m in modes]

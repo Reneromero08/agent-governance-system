@@ -47,8 +47,7 @@ def verify_gauge_symmetry():
     
     # Test RND
     aa_vals = list(sgc_map.values())
-    np.random.seed(42)
-    np.random.shuffle(aa_vals)
+    rng = np.random.default_rng(42)`n    rng.shuffle(aa_vals)
     rnd_map = {CODONS[j]: aa_vals[j] for j in range(64)}
     
     H_rnd = build_conservative_H(rnd_map)

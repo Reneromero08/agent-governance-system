@@ -31,8 +31,8 @@ mpmath.mp.dps = 50
 class CatalyticTape:
     def __init__(self, size_bytes=1024*1024):
         self.size_bytes = size_bytes
-        rng = np.random.RandomState(42)
-        self.tape = rng.randint(0, 256, size=size_bytes, dtype=np.uint8)
+        rng = np.random.default_rng(42)
+        self.tape = rng.integers(0, 256, size=size_bytes, dtype=np.uint8)
 
     def xor_bytes(self, offset, data_bytes):
         for i, b in enumerate(data_bytes):

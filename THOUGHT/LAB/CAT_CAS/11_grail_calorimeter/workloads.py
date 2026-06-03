@@ -220,8 +220,8 @@ class TreeEval5:
         import numpy as np, hashlib
 
         tape_size = 100_000
-        rng = np.random.RandomState(42)
-        tape = rng.randint(0, 256, size=tape_size, dtype=np.uint8)
+        rng = np.random.default_rng(42)
+        tape = rng.integers(0, 256, size=tape_size, dtype=np.uint8)
 
         # Zero-out the stack region
         stack_base = 10 + 2 * self.DEPTH
@@ -341,9 +341,11 @@ class TreeEval5:
 
         final_hash = hashlib.sha256(tape.tobytes()).hexdigest()
         assert final_hash == initial_hash, "Tape not fully restored!"
-        assert hasattr(self, '_ground_truth'), \
-            "run_irreversible() must be called before run_reversible() for ground truth"
+        # Verify against ground truth (compute locally if not already set)
+        if not hasattr(self, '_ground_truth'):
+            cpu = IrreversibleCPU()
+            self._ground_truth = self._recurse(1, 1, cpu)
         assert result == self._ground_truth, \
-            f"Reversible TEP result {result} != irreversible {self._ground_truth}"
+            f"Reversible TEP result {result} != ground truth {self._ground_truth}"
 
         return 0  # zero bits erased

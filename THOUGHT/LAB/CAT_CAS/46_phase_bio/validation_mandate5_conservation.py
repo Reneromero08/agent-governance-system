@@ -28,8 +28,8 @@ from scipy import stats
 class CatalyticTape:
     def __init__(self, size_mb=256):
         self.size_bytes = size_mb * 1024 * 1024
-        np.random.seed(42)
-        self.tape = bytearray(np.random.bytes(self.size_bytes))
+        rng = np.random.default_rng(42)
+        self.tape = bytearray(rng.bytes(self.size_bytes))
         self.initial_hash = hashlib.sha256(self.tape).hexdigest()
         self.history = []
         self.bytes_written = 0
@@ -205,7 +205,7 @@ def main():
     aa_values = list(SGC.values())
     n_random = 1000
     random_radii = []
-    rng = np.random.RandomState(42)
+    rng = np.random.default_rng(42)
     print(f"  Generating {n_random} random codon assignments...")
 
     for i in range(n_random):
@@ -287,7 +287,7 @@ def main():
             return float(np.max(np.abs(np.linalg.eigvals(H))))
         sgc_r = rad_at_gamma(SGC)
         # Quick random check (100 codes for speed)
-        rng2 = np.random.RandomState(42)
+        rng2 = np.random.default_rng(42)
         rand_rs = []
         aa_v = list(SGC.values())
         for _ in range(100):
@@ -302,7 +302,7 @@ def main():
     # ---- Reproducibility: different seed ----
     print()
     print("  --- ROBUSTNESS: Reproducibility (seed=123) ---")
-    rng3 = np.random.RandomState(123)
+    rng3 = np.random.default_rng(123)
     aa_v3 = list(SGC.values())
     rep_radii = []
     for _ in range(1000):
@@ -319,7 +319,7 @@ def main():
     print()
     print("  --- ROBUSTNESS: Bootstrap rank of SGC vs random ---")
     boot_ranks = []
-    rng4 = np.random.RandomState(42)
+    rng4 = np.random.default_rng(42)
     for _ in range(500):
         # Resample random radii and count how many beat SGC
         samp = rng4.choice(random_radii, size=1000, replace=True)

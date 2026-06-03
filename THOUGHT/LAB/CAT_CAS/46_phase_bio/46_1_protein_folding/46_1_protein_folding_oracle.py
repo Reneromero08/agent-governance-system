@@ -35,7 +35,7 @@ def generate_helix_contacts(L):
     return contacts
 
 def generate_random_contacts(L, density=0.3, seed=42):
-    rng = np.random.RandomState(seed)
+    rng = np.random.default_rng(seed)
     contacts = set()
     for i in range(L):
         for j in range(L):

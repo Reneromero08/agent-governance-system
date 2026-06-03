@@ -32,7 +32,7 @@ print(f"    Quantum Cache Collisions  <--> Riemann Zero Prime Gaps       : r = {
 COUPLING = 0.5   # Cohen's large effect
 SIG = 0.01        # Bonferroni-corrected significance
 
-np.random.seed(42)
+np.random.default_rng(42)
 pairs = [("Q-G", quantum, gravity, r_qg), ("G-R", gravity, riemann, r_gr), ("Q-R", quantum, riemann, r_qr)]
 
 print("\n[NULL BOOTSTRAP]")

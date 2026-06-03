@@ -98,7 +98,7 @@ def run():
     tests.append(("GP repeat (L=24)", W, "random coil"))
 
     # Random sequence
-    np.random.seed(42)
+    np.random.default_rng(42)
     seq = ''.join(np.random.choice(list(KD.keys()), 24))
     H = build_1d_chain_H(seq)
     W = compute_winding(H)

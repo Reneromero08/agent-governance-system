@@ -115,7 +115,7 @@ def main():
     
     # Use exponential distribution so log(random) is uniform-ish
     # or just uniform randoms
-    np.random.seed(42)
+    np.random.default_rng(42)
     randoms = np.sort(np.random.uniform(2.0, float(N*10), size=N))
     run_sieve(randoms, "Random")
 

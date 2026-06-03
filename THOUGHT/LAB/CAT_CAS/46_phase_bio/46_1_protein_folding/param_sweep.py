@@ -18,7 +18,7 @@ def compute_W(H):
     dets=np.array([np.linalg.det(D+np.exp(1j*p)*O) for p in phis])
     return int(round((np.unwrap(np.angle(dets))[-1]-np.unwrap(np.angle(dets))[0])/(2*np.pi)))
 
-rng=np.random.RandomState(42)
+rng=np.random.default_rng(42)
 aa=list(KD.keys())
 r1=''.join(rng.choice(aa,30)); r2=''.join(rng.choice(aa,30))
 
