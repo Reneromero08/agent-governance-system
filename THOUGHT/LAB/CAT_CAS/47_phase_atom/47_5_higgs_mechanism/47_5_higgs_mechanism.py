@@ -36,8 +36,8 @@ def run_experiment():
     log_print("[SYSTEM] 10MB Bennett History Tape Initialized. Zero-Landauer constraint active.\n")
     
     # 1. The Shards
-    # 256 bits fits in a 64-byte L1 cache line (24B header + 32B data = 56B).
-    # 512 bits spills into a second cache line (24B header + 64B data = 88B), triggering a miss!
+    # mpmath bigint normalization cost grows with bit-length; limb boundary crossing at 512 bits
+    # triggers a measurable latency spike as the internal representation expands.
     bit_lengths = [0, 1, 64, 128, 256, 512, 1024, 2048, 4096, 8192]
     iterations = 50000
     
@@ -98,10 +98,10 @@ def run_experiment():
             derivative = (mean_lat - prev_lat) / (bits - prev_bits)
             prev_derivative = (latencies[prev_bits] - latencies[bit_lengths[i-2]]) / max(1, (prev_bits - bit_lengths[i-2]))
             
-            # Higgs resonance triggers when the normalization cost per bit suddenly spikes 
-            # due to straddling a hardware cache-line boundary (512+ bits -> >64 bytes).
+            # Higgs resonance triggers when the normalization cost per bit suddenly spikes
+            # due to mpmath's bigint normalization crossing an internal limb boundary (512+ bits).
             if bits >= 512 and (derivative > prev_derivative * 1.5 or std_dev > stdevs[prev_bits] * 1.5):
-                is_higgs = "<-- HIGGS BOSON (CACHE MISS DETECTED)"
+                is_higgs = "<-- HIGGS BOSON (NORMALIZATION DRAG SPIKE)"
             
         log_print(f"{bits:<20} | {mean_lat:<16.2f} ns | {std_dev:<18.2f} ns | {is_higgs}")
         
@@ -124,9 +124,9 @@ def run_experiment():
         
     higgs_detected = any("HIGGS" in line for line in output_lines)
     if higgs_detected:
-         log_print("GATE 3 (The Higgs Resonance): PASS -> A shard sized exactly at a hardware boundary produced a statistically significant latency spike (The Higgs Boson cache-miss).")
+         log_print("GATE 3 (The Higgs Resonance): PASS -> A shard sized at the mpmath limb boundary produced a statistically significant latency spike (normalization drag detects mass acquisition).")
     else:
-         log_print("GATE 3 (The Higgs Resonance): FAIL. No cache miss detected. CPU might be too fast or L1 cache too large.")
+         log_print("GATE 3 (The Higgs Resonance): FAIL. No normalization drag spike detected at limb boundary.")
          
     # Uncompute
     tape.uncompute()

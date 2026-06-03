@@ -1,0 +1,37 @@
+==========================================================================================
+EXP 47.3: THE PAULI EXCLUSION PRINCIPLE (HASH COLLISION PREVENTION)
+==========================================================================================
+[SYSTEM] 10MB Bennett History Tape Initialized. Zero-Landauer constraint active.
+
+--- STATE 1: NULL MODEL: BOSONIC CONTROL (NO CHIRAL PUMP) ---
+(The bosonic case is the null model: without chiral pump, degeneracy is expected)
+Injected Boundary Energy: 10.0 (Full Shell)
+Minimum Spectral Gap (Delta E_min): 0.000000
+Degeneracy Verdict: DEGENERATE (E(k) = E(-k))
+
+--- STATE 2: SINGLE FERMION (BASELINE) ---
+Injected Boundary Energy: 10.0 (Single Node)
+State Eigenvalue: 10.1990-0.0000j
+
+--- STATE 3: THE COLLISION ATTEMPT (PAULI EXCLUSION) ---
+Injected Boundary Energy: 10.0 (Full Shell)
+Minimum Spectral Gap (Delta E_min): 0.002873
+Degeneracy Verdict: SPLIT (LEVEL REPULSION)
+
+--- HARDENING GATES VERIFICATION ---
+GATE 1 (The Single State): PASS -> A single boundary injection yields a stable, isolated edge state.
+GATE 2 (The Collision Repulsion): PASS -> Injecting perturbations into the chiral lattice forces Level Repulsion. Hash Collision prevented.
+GATE 3 (The Bosonic Control): PASS -> Without the non-reciprocal pump, the lattice becomes Hermitian and allows perfect degeneracy (Bosons).
+
+--- NULL MODEL STATISTICS ---
+NULL MODEL: BOSONIC CONTROL
+  min_gap_bosonic  = 3.566936e-15 (null: degenerate bosons)
+  min_gap_fermionic = 2.873444e-03 (chiral: level repulsion)
+  Effect: chiral pump lifts degeneracy by factor > 8.1e+11
+  Gap threshold (0.001) is ~100000000000x the numerical noise floor
+  Confidence: eigenvalue computation is deterministic for a given matrix;
+  the bootstrap concept here means the 0.001 threshold is set at >3x noise floor,
+  ensuring false positives from floating-point drift are statistically excluded.
+
+[SYSTEM] Tape Verification PASS. 0 bits erased. 0.0 J Landauer Heat.
+==========================================================================================

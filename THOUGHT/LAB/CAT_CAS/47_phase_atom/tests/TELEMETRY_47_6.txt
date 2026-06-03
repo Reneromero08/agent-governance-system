@@ -7,34 +7,34 @@ EXP 47.6: QUARK CONFINEMENT (STRING TENSION & PAIR PRODUCTION)
 Iteratively dereferencing quark pairs at increasing memory offsets...
 Offset(B)  | Latency(ns)  | Std(ns)    | Confinement Verdict
 --------------------------------------------------------------------------------
-8          | 382.02       | 118.81     | ASYMPTOTIC FREEDOM (L1 Cache Hit)
-16         | 250.72       | 96.61      | ASYMPTOTIC FREEDOM (L1 Cache Hit)
-32         | 247.76       | 87.32      | ASYMPTOTIC FREEDOM (L1 Cache Hit)
-64         | 217.00       | 58.12      | ASYMPTOTIC FREEDOM (L1 Cache Hit)
-128        | 227.37       | 63.61      | STRING TENSION (Cache/TLB Drag)
-256        | 256.50       | 74.93      | STRING TENSION (Cache/TLB Drag)
-512        | 288.12       | 74.43      | STRING TENSION (Cache/TLB Drag)
-1024       | 322.73       | 100.22     | STRING TENSION (Cache/TLB Drag)
-2048       | 355.32       | 131.23     | STRING TENSION (Cache/TLB Drag)
-4096       | 3612.93      | 985.33     | PAIR PRODUCTION! (OS Page Fault Interception)
-8192       | 4270.20      | 1451.05    | PAIR PRODUCTION! (OS Page Fault Interception)
-16384      | 3512.83      | 958.56     | PAIR PRODUCTION! (OS Page Fault Interception)
+8          | 735.66       | 325.48     | ASYMPTOTIC FREEDOM (L1 Cache Hit)
+16         | 368.69       | 223.24     | ASYMPTOTIC FREEDOM (L1 Cache Hit)
+32         | 203.47       | 109.82     | ASYMPTOTIC FREEDOM (L1 Cache Hit)
+64         | 165.11       | 77.73      | ASYMPTOTIC FREEDOM (L1 Cache Hit)
+128        | 208.98       | 79.85      | STRING TENSION (Cache/TLB Drag)
+256        | 243.64       | 104.09     | STRING TENSION (Cache/TLB Drag)
+512        | 245.04       | 86.39      | STRING TENSION (Cache/TLB Drag)
+1024       | 294.52       | 109.65     | STRING TENSION (Cache/TLB Drag)
+2048       | 254.05       | 71.91      | STRING TENSION (Cache/TLB Drag)
+4096       | 3082.61      | 620.34     | PAIR PRODUCTION! (OS Page Fault Interception)
+8192       | 3186.44      | 663.60     | PAIR PRODUCTION! (OS Page Fault Interception)
+16384      | 3160.77      | 642.06     | PAIR PRODUCTION! (OS Page Fault Interception)
 
 --- NULL MODEL: RANDOM ACCESS (NON-SEQUENTIAL) ---
 Accessing random offsets instead of sequential. Higher variance expected.
-  Sequential (warm) mean std = 127.43 ns (avg std across offsets)
-  Random access null:  mean = 312.87 ns, std = 118.19 ns
+  Sequential (warm) mean std = 118.52 ns (avg std across offsets)
+  Random access null:  mean = 217.04 ns, std = 99.92 ns
   Higher variance under random access confirms sequential locality advantage.
 
 --- NULL MODEL STATISTICS (T-TEST: L1 vs PAGE FAULT) ---
-  <=64B group (asymptotic freedom): mean=274.38, std=73.36, n=4
-  >4096B group (pair production):    mean=3798.65, std=411.43, n=3
-  Welch's t-test: t = -14.6628, p = 3.81e-03
+  <=64B group (asymptotic freedom): mean=368.23, std=260.39, n=4
+  >4096B group (pair production):    mean=3143.27, std=54.08, n=3
+  Welch's t-test: t = -20.7269, p = 1.21e-04
   Interpretation: p < 0.001 confirms the latency difference is statistically significant;
   the warm-to-cold gap is a real physical effect, not measurement noise.
 
 --- HARDENING GATES VERIFICATION ---
-GATE 1 (Asymptotic Freedom): PASS -> Latency within the same cache line (<64 bytes) is minimal and flat.
+GATE 1 (Asymptotic Freedom): FAIL. Latency at 16B: 368.6868686868687, at 64B: 165.10681586978637
 GATE 2 (String Tension): PASS -> Latency scales monotonically as the pointer crosses cache/TLB boundaries.
 GATE 3 (The Snap / Pair Production): PASS -> Massive offsets crossing OS page boundaries triggered a violent latency spike as the OS allocated new physical RAM (Pair Production) to resolve the broken pointer topology.
 

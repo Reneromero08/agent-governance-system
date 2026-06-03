@@ -4,17 +4,17 @@ EXP 47.1: THE NUCLEUS (THE PROTECTED MEMORY KNOT)
 [SYSTEM] 256MB Bennett History Tape Initialized. Zero-Landauer constraint active.
 
 --- STATE 1: TRITIUM (3 NUCLEONS) ---
-Unbound Latency (Baseline): 1,311,568.00 ns (std=155,853)
-Nuclear Knot Latency (GC):  1,387,698.00 ns (std=102,027)
+Unbound Latency (Baseline): 1,258,548.00 ns (std=106,735)
+Nuclear Knot Latency (GC):  1,328,690.00 ns (std=90,788)
 Strong Force Friction:      1.06x
-Cohen's d:                  0.58
+Cohen's d:                  0.70
 Permutation p-value:        0.0010
 
 --- STATE 2: URANIUM-238 (238 NUCLEONS) ---
-Unbound Latency (Baseline): 4,219,233.00 ns (std=1,412,023)
-Nuclear Knot Latency (GC):  17,719,138.00 ns (std=3,310,149)
-Strong Force Friction:      4.20x
-Cohen's d:                  5.28
+Unbound Latency (Baseline): 3,771,055.00 ns (std=756,051)
+Nuclear Knot Latency (GC):  15,760,124.00 ns (std=1,552,548)
+Strong Force Friction:      4.18x
+Cohen's d:                  9.77
 Permutation p-value:        0.0010
 
 --- NULL MODEL: PERMUTATION TEST ---

@@ -93,7 +93,6 @@ def run_experiment():
 
     # 1. Base State (mu = 0.0)
     H_base, core_indices, boundary_indices = build_hamiltonian(L, 0.0)
-    tape.record_operation(("base_mu", 0.0))
     evals_base, evecs_base = np.linalg.eig(H_base)
     
     # Sort by real part
@@ -197,6 +196,14 @@ def run_experiment():
     log_print(f"  Shell gap stats:          mean={gap_mean:.1f}, std={gap_std:.1f}, gaps={list(gaps)}")
     log_print(f"  Cohen's d (ordered vs random null): {cohens_d:.3f}")
     log_print(f"  Interpretation: Ordered sweep shows quantization (large gaps); random null smears counts without quantization.")
+
+    # Record measured values on catalytic tape
+    tape.record_operation(("edge_states_count", edge_states_count))
+    tape.record_operation(("max_core_overlap", float(max_core_overlap_for_edge)))
+    tape.record_operation(("mean_core_ipr", float(np.mean(core_iprs))))
+    tape.record_operation(("shell_counts", shell_counts))
+    tape.record_operation(("null_counts", random_shell_counts))
+    tape.record_operation(("cohens_d", float(cohens_d)))
 
     log_print("\n--- HARDENING GATES VERIFICATION ---")
     
