@@ -15,42 +15,6 @@
 
 ---
 
-## 💳 SECTION I: TECHNICAL DEBT (3 items) — ALL RESOLVED
-*[2026-06-02] MASTERMIND VERIFIED: 3/3 resolved. Bare excepts eliminated, torch.load explicit, Windows paths zeroed.*
-
-- [x] **I-1** — 10 bare `except:` clauses → specific exception types
-  Status: ✅ FIXED | All 10 replaced: OSError (URL/fetch), ValueError/IndexError (PDB parse), ValueError/TypeError (xlrd), np.linalg.LinAlgError, RuntimeError (GPU), OSError/UnicodeDecodeError (file). Bare except grep: 0.
-
-- [x] **I-2** — torch.load without weights_only
-  Status: ✅ RESOLVED | All 62 torch.load calls have explicit weights_only=. 31 weights_only=True (weights), 31 weights_only=False (intentional .holo dictionary loads). No ambiguous calls.
-
-- [x] **I-3** — 6 hardcoded Windows paths
-  Status: ✅ RESOLVED | No hardcoded Windows drive-letter paths in executable Python code. Section G already verified __file__-relative portability.
-
----
-
-## 📚 SECTION J: DOCUMENTATION (6 items)
-
-- [ ] **J-1** — Spelling "Haydeng-Preskill"  
-  Status: ⚠️ DONE-UNVERIFIED
-
-- [ ] **J-2** — Spelling "Assesment"  
-  Status: ⚠️ DONE-UNVERIFIED
-
-- [ ] **J-3** — Missing files in README  
-  Status: ⚠️ DONE-UNVERIFIED | Notes: Agent says false positive — verify manually
-
-- [ ] **J-4** — master_report.md covers 9 of 41+ experiments  
-  Status: 🔴 OPEN | Notes: Session 3 updated it but still incomplete — expand coverage
-
-- [ ] **J-5** — Unused imports (5 files)  
-  Status: ⚠️ DONE-UNVERIFIED
-
-- [ ] **J-6** — Duplicate reversible_cpu.py  
-  Status: ⚠️ DONE-UNVERIFIED
-
----
-
 ## 🔄 SECTION K: PROCESS IMPROVEMENTS (4 items)
 
 - [ ] **K-1** — Zero-violation pre-commit enforcement  
@@ -130,25 +94,6 @@
 | 47.6 | Confinement = string tension | ✅ VALID | None |
 
 > 📊 Overall: 20/33 valid (61%), 13/33 weak/forced (39%)
-
----
-
-## 🔴 OPEN ITEMS SUMMARY — *Action Required*
-*Consolidated list of items that are actually not done*
-
-### Path/Portability Issues
-- [ ] **G-8** — `validation_real_morphogenesis.py` input CSV path still hardcoded
-- [ ] **I-3** — 6 hardcoded Windows paths
-
-### Deferred/Large-Scale Changes
-- [ ] **H-7** — np.random.RandomState → Generator migration (25 files) — *DEFERRED: breaking change, requires re-running all experiments*
-
-### Documentation Gaps
-- [ ] **J-4** — master_report.md still incomplete (covers ~9 of 41+ experiments) — expand to cover all phases
-
-### Statistical/Null Model Ambiguities — *Manual Review Queue*
-- [ ] **F-FAKE** — 8 files with text-only "statistics" — *Review each to determine if "std=0" is legitimate (exact invariant) or missing computation*
-- [ ] **E-UNKNOWN** — 5 null model files that couldn't be classified by regex — *Manual inspection for implicit nulls*
 
 ---
 

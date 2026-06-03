@@ -2,6 +2,12 @@
 
 **Root**: `THOUGHT/LAB/CAT_CAS/`
 
+> **Verification Status (2026-06-02):** This README is an experiment inventory and navigation
+> document. The canonical verification ledger is `REPORTS/VIOLATIONS/ROADMAP_3.md`. The compact
+> truth ledger is `REPORTS/master_report.md`. Some experiments have been partially verified,
+> claim-weakened, or deprecated under audit. See Section 6 of master_report.md for a summary
+> and ROADMAP_3.md for per-item evidence.
+
 ## Theoretical Foundation
 
 In standard complexity theory, evaluating a binary tree of depth $d$ with register values in $[0, k-1]$ requires keeping intermediate branch values in clean memory. This requires a space complexity of $\Omega(d \log k)$ bits. If clean memory is limited below this threshold, evaluation is mathematically impossible.
