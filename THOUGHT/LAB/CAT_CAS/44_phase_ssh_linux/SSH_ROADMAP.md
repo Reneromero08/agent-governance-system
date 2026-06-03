@@ -116,7 +116,7 @@ This stretches Phase 1 and 2 slightly but produces cleaner data. The original ro
 
 ---
 
-## Phase 2: The Phase-Locked Oscillator Network — IN PROGRESS
+## Phase 2: The Phase-Locked Oscillator Network — IN PROGRESS (2.1, 2.2 COMPLETE, 2.4 PATCH PREPARED)
 
 **Objective:** Demonstrate that multiple cores at different frequencies produce measurable coupling via the shared power grid, and measure the coupling channel characteristics.
 
@@ -136,11 +136,22 @@ This stretches Phase 1 and 2 slightly but produces cleaner data. The original ro
 - [x] Reproducibility run confirmed: peak locations flip between runs
 - [x] **Conclusion: Passive TSC jitter cannot resolve oscillator coupling at current SNR. VRM switching noise dominates.**
 
-### 2.3 Active Phase Measurement [CURRENT]
+### 2.3 Active Phase Measurement [PAUSED — see 2.4]
 - [ ] Pivot from passive TSC jitter to active phase communication
 - [ ] Shared L3 cache line phase measurement between oscillators
 - [ ] Direct phase difference via atomic stores/loads on cache-aligned buffer
 - [ ] Measure phase lock/drift between PPU-A and PPU-B in real time
+
+### 2.4 AGESA Voltage Normalizer Reversal — PATCH PREPARED
+- [x] AGESA OrochiPI v1.5.0.5 voltage normalizer identified at BIOS offset `0x00366de6`
+- [x] Function forces VID fields to lower numeric value (higher voltage) in P-state MSRs
+- [x] One-byte patch: `0x76` (JBE) → `0x73` (JAE) at offset `0x00366e3e`
+- [x] FFS checksum fix: `0x8e` → `0x91` at offset `0x00340059`
+- [x] Patch reverses comparison logic: now selects higher numeric VID (lower voltage)
+- [x] Module is uncompressed in `AmdProcessorInitPeim` — direct hex edit possible
+- [x] Patched BIOS image created at `/tmp/bios_patched.bin`
+- [ ] Flash patched BIOS, reboot, verify P-state MSRs accept lower VID values
+- [ ] Attempt sub-threshold voltage on Core 4 (~0.825V target)
 
 ### 2.A ADDENDUM: Operational Definition of Phase (GPT)
 
@@ -382,8 +393,10 @@ If the coupled oscillator network at the edge of chaos produces Wigner-Dyson eig
 ## Immediate Action Items (Next Session)
 
 1. **SSH into the Phenom** — `ssh root@192.168.137.100` (Windows SSH)
-2. **Phase 3.6: .holo Eigenbasis Encoding** — encode eigenmode weights as XOR values on tape slots, use Phase Master (Core 5) as reference, verify reversible encoding/decoding with SHA-256
-3. **Update roadmap** with .holo encoding results
+2. **Phase 2.4: Flash AGESA-patched BIOS** — flash `/tmp/bios_patched.bin`, reboot, verify P-state MSRs accept lower VID values
+3. **Phase 1.2 reattempt: Sub-threshold voltage on Core 4** — target ~0.825V with AGESA voltage normalizer reversed
+4. **Phase 3.6: .holo Eigenbasis Encoding** — if voltage drops successfully, re-test coupling at lower voltage; otherwise encode eigenbasis at nominal voltage
+5. **Update roadmap** with flash/voltage results
 
 ---
 
