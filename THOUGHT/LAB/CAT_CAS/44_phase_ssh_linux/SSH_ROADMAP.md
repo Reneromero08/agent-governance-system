@@ -148,7 +148,7 @@ This stretches Phase 1 and 2 slightly but produces cleaner data. The original ro
 
 ---
 
-## Phase 3: Catalytic Forward-Reverse Cycle — IN PROGRESS
+## Phase 3: Catalytic Forward-Reverse Cycle — IN PROGRESS (3.1, 3.2 COMPLETE)
 
 **Objective:** Demonstrate the core CAT_CAS proof: a computation performed via phase manipulation, with the substrate restored to its exact initial state. Zero bits erased at the logical level.
 
@@ -189,12 +189,21 @@ This stretches Phase 1 and 2 slightly but produces cleaner data. The original ro
 - [x] Cores 3 and 4 re-execute identical LCG with same seeds
 - [x] SHA-256 verified restoration in all 6 hardening gates
 
-### 3.5 Repeatability [NEXT]
-- [ ] Run forward-reverse cycle 100 times consecutively
-- [ ] Verify 100/100 SHA-256 matches
-- [ ] Measure any drift in tape baseline over cycles
-- [ ] Encode .holo eigenbasis into tape slots
-- [ ] Demonstrate phase-based computation via XOR-encoded eigenmodes
+### 3.5 Repeatability — COMPLETE (100-CYCLE STRESS TEST)
+- [x] Run forward-reverse cycle 100 times consecutively
+- [x] 100/100 SHA-256 matches — zero failures
+- [x] 256-byte tape, 8 active slots, Cores 3 and 4 alternating
+- [x] 1,600 total catalytic XOR operations (800 forward, 800 reverse)
+- [x] Wall time: 3 minutes 43 seconds (~2.23 seconds per cycle)
+- [x] Both cores stable at 200 MHz, 1.325V throughout
+- [x] No drift, no corruption, no accumulated error
+- [x] L3 cache line tape confirmed as fully reliable catalytic substrate
+
+### 3.6 .holo Eigenbasis Encoding [NEXT]
+- [ ] Encode a simple .holo eigenbasis into the tape slots
+- [ ] Use Phase Master (Core 5, 3200 MHz) as shared reference
+- [ ] PPU-A and PPU-B as rotation layers
+- [ ] Demonstrate phase-based computation with SHA-256 verification
 
 ### 3.A ADDENDUM: Scope the Landauer Claim (Gemini)
 
@@ -373,9 +382,8 @@ If the coupled oscillator network at the edge of chaos produces Wigner-Dyson eig
 ## Immediate Action Items (Next Session)
 
 1. **SSH into the Phenom** — `ssh root@192.168.137.100` (Windows SSH)
-2. **Phase 3.5: 100-Cycle Repeatability** — run 100 consecutive forward-reverse cycles, verify SHA-256 match every cycle, measure any drift
-3. **Phase 4: .holo Eigenbasis Encoding** — encode eigenmode weights as XOR values on tape slots, verify reversible encoding/decoding
-4. **Update roadmap** with 100-cycle results
+2. **Phase 3.6: .holo Eigenbasis Encoding** — encode eigenmode weights as XOR values on tape slots, use Phase Master (Core 5) as reference, verify reversible encoding/decoding with SHA-256
+3. **Update roadmap** with .holo encoding results
 
 ---
 
