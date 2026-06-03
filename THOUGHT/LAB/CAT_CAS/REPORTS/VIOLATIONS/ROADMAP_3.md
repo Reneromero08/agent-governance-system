@@ -15,32 +15,6 @@
 
 ---
 
-## 🔄 SECTION K: PROCESS IMPROVEMENTS (4 items)
-
-- [ ] **K-1** — Zero-violation pre-commit enforcement  
-  Status: 🔴 OPEN | Notes: pre-commit hook exists but not tested — add CI test
-
-- [x] **K-2** — BennettHistoryTape fail-safe (bytes_written check)  
-  Status: ✅ DONE
-
-- [x] **K-3** — Isomorphism audit per phase  
-  Status: ✅ DONE | Notes: Phases 42, 45, 46, 47 audited (see Isomorphism Audits section below)
-
-- [ ] **K-4** — M-8 critic check for ceremonial tapes  
-  Status: ⚠️ DONE-UNVERIFIED
-
----
-
-## 📌 SECTION L: PHASE 46 LIMITATIONS (4 items)
-*All documented. No code changes needed — track for future work.*
-
-- [x] **L-1** — IPR signal degrades at large L | Status: ⚠️ DONE-UNVERIFIED | Notes: Documented
-- [x] **L-2** — Prion doesn't propagate in static lattice | Status: ⚠️ DONE-UNVERIFIED | Notes: Documented
-- [x] **L-3** — Connectome validation (synthetic vs real) | Status: ⚠️ DONE-UNVERIFIED | Notes: C. elegans validation added
-- [x] **L-4** — Bott Index fails at Exceptional Points | Status: ⚠️ DONE-UNVERIFIED | Notes: 1D slice IPR workaround documented
-
----
-
 ## 🔍 ISOMORPHISM AUDITS SUMMARY (Session 3 — 33 experiments)
 *Full reports in `PHASE_*_ISOMORPHISM_AUDIT.md`*
 

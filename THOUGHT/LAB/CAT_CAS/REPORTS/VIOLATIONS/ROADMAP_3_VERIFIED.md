@@ -467,3 +467,42 @@ COUNTS: FIXED=3, FALSE-POSITIVE=2, ALREADY-FIXED=3, ACTIVE-CODE=1, FULLY MIGRATE
 
 ---
 
+## 🔄 SECTION K: PROCESS IMPROVEMENTS (4 items) — ALL RESOLVED
+*[2026-06-02] MASTERMIND VERIFIED: 4/4 items verified.*
+
+- [x] **K-1** — Zero-violation pre-commit enforcement
+  Status: ✅ DONE | .pre-commit-config.yaml with ags-critic hook. contracts.yml CI on push/PR. Artificial M-6 violation detected: [FAIL] M-6 MISSING STATISTICS. Violation removed, final critic clean.
+
+- [x] **K-2** — BennettHistoryTape fail-safe (bytes_written check)
+  Status: ✅ DONE | bytes_written + was_modified guards. 10/10 tests pass. Untouched tape rejects.
+
+- [x] **K-3** — Isomorphism audit per phase
+  Status: ✅ DONE | PHASE_42/45/46/47 reports verified. 33 experiments audited.
+
+- [x] **K-4** — M-8 critic check for ceremonial tapes
+  Status: ✅ DONE | critic.py:489 _ceremonial_record_check. Artificial ceremonial tape (no XOR) detected: [FAIL] M-8 CEREMONIAL RECORD. Violation removed, final critic clean.
+
+---
+
+## 📌 SECTION L: PHASE 46 LIMITATIONS (4 items) — VERIFIED / DOCUMENTED / TRACKED
+*[2026-06-02] MASTERMIND VERIFIED: Section L is verified as limitation documentation, not scientific closure. No code repair was required. These items remain active future experimental work.*
+
+- [x] **L-1** — IPR signal degrades at large L | Status: ✅ VERIFIED-DOCUMENTED
+  REFACTORING_AUDIT.md:43-44: "Signal weakens at larger L (IPR ~ 1/L) but the directional ordering holds."
+  FUTURE WORK: Improve large-L robustness via normalized IPR, multifractal spectrum, or alternate localization sensor.
+
+- [x] **L-2** — Prion doesn't propagate in static lattice | Status: ✅ VERIFIED-DOCUMENTED
+  46_3 code:185 + REPORT_EXP_46_3.md:54,77: "does NOT propagate... requires dynamical coupling." Aligned with Section E 46.3 CLAIM-WEAKENED.
+  FUTURE WORK: Build dynamic prion propagation model with time-evolution coupling, not static impurity-only sensor.
+
+- [x] **L-3** — Connectome validation (synthetic vs real) | Status: ✅ VERIFIED-DOCUMENTED
+  VERIFICATION_REPORT.md: C. elegans Varshney et al. (2011) from WormAtlas. 283 neurons, 2194 chemical + 514 electrical. Multi-lesion (5/10/20 hubs), multi-seed (10). Structural validation, not full biological proof.
+  FUTURE WORK: Deeper biological validation across datasets, perturbations, and neural dynamics.
+
+- [x] **L-4** — Bott Index fails at Exceptional Points | Status: ✅ VERIFIED-DOCUMENTED
+  REPORT_EXP_46_6.md:27: "Bott Index via spectral projector became ill-conditioned at Exceptional Points. 1D slice approach avoids this entirely." Workaround, not full fix.
+  FUTURE WORK: Develop EP-safe Bott/topological sensor or stronger non-Hermitian invariant.
+
+  ---
+
+  
