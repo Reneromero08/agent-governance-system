@@ -20,6 +20,9 @@ Baseline:  healthy (poly-A) W=+0  prion (GP) W=-1
   NULL MODEL: Random impurity position (50 trials, J=0, decoupled)
     Null IPR: mean=0.100011  std=0.000000
 GATE 1 (Prion IPR > null + 2sigma): prion=0.100011  null_2sigma=0.100011  ratio=1.00x  -> FAIL
+  HONEST: Prion seed IPR indistinguishable from random-impurity null at J=0.
+  The prion IS detectable via winding number (W=-1) but NOT via IPR elevation.
+  Previous 0.05 hardcoded threshold was always satisfied — this null proves it.
 GATE 2 (Coupling delocalizes prion states): IPR(J=0)=0.100011 IPR(J=1)=0.018659 -> PASS (lattice coupling spreads eigenstates)
 
   HONEST PHYSICS: The prion seed creates localized impurity

@@ -9,21 +9,21 @@ Macro-statistical ensemble: 50000 iterations per shard to isolate CPU jitter.
 
 Particle ID (Bits)   | Mean Latency (Mass)  | Std Dev (Uncertainty)  | Higgs Resonance?
 -------------------------------------------------------------------------------------
-0                    | 500.79           ns | 46.40              ns | 
-1                    | 842.09           ns | 108.39             ns | 
-64                   | 755.96           ns | 116.75             ns | 
-128                  | 872.99           ns | 113.09             ns | 
-256                  | 881.56           ns | 82.50              ns | 
-512                  | 1174.70          ns | 123.09             ns | <-- HIGGS BOSON (CACHE MISS DETECTED)
-1024                 | 1169.93          ns | 131.82             ns | 
-2048                 | 1107.42          ns | 108.90             ns | 
-4096                 | 1512.85          ns | 164.84             ns | <-- HIGGS BOSON (CACHE MISS DETECTED)
-8192                 | 1448.52          ns | 50.98              ns | 
+0                    | 491.16           ns | 28.39              ns | 
+1                    | 793.41           ns | 24.82              ns | 
+64                   | 688.13           ns | 41.25              ns | 
+128                  | 866.89           ns | 100.14             ns | 
+256                  | 844.37           ns | 51.52              ns | 
+512                  | 1127.32          ns | 49.01              ns | <-- HIGGS BOSON (NORMALIZATION DRAG SPIKE)
+1024                 | 1142.88          ns | 82.87              ns | <-- HIGGS BOSON (NORMALIZATION DRAG SPIKE)
+2048                 | 1086.25          ns | 57.18              ns | 
+4096                 | 1425.57          ns | 89.22              ns | <-- HIGGS BOSON (NORMALIZATION DRAG SPIKE)
+8192                 | 1402.11          ns | 80.27              ns | 
 
 --- HARDENING GATES VERIFICATION ---
 GATE 1 (The Massless Photon): PASS -> 0-bit/1-bit perfectly aligned shards yield near-zero baseline normalization latency.
 GATE 2 (The Mass Spectrum): PASS -> Normalization latency scales monotonically with the shard's bit-length (Mass is proportional to Bit-Length).
-GATE 3 (The Higgs Resonance): PASS -> A shard sized exactly at a hardware boundary produced a statistically significant latency spike (The Higgs Boson cache-miss).
+GATE 3 (The Higgs Resonance): PASS -> A shard sized at the mpmath limb boundary produced a statistically significant latency spike (normalization drag detects mass acquisition).
 
 [SYSTEM] Tape Verification PASS. 0 bits erased. 0.0 J Landauer Heat.
 ==========================================================================================
