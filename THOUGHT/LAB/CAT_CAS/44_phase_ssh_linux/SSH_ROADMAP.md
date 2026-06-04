@@ -116,7 +116,34 @@ This stretches Phase 1 and 2 slightly but produces cleaner data. The original ro
 
 ---
 
-## Phase 2: The Phase-Locked Oscillator Network — IN PROGRESS (2.1, 2.2 COMPLETE, 2.4 PATCH PREPARED)
+## Exp44 Checkpoint: Phase 2 Software Routes Exhausted — 2026-06-04
+
+**Executive status:** `PHASE2_SOFTWARE_ROUTES_EXHAUSTED`
+
+Current Exp44 evidence moves the Phenom II work to an external-observability boundary. The working software routes do not prove Kuramoto phase lock, GOE behavior, Ising behavior, or a byte-ready P4-safe voltage control surface.
+
+| Route | Status label | Current finding | Evidence |
+|---|---|---|---|
+| Phase 0 foundation | `DONE` | Debian 13, SSH, toolchain, core isolation, MSR decoding, and k10temp monitoring are complete. | `REPORT.md`, this roadmap |
+| Phase 1 runtime VID floor | `RUNTIME_VID_CLAMPED` | Runtime P4 lower-VID MSR write reads back, but COFVID_STS stays at CpuVid `0x1A`; lower-VID runtime route is clamped. | `cpu_sing_1/RUNTIME_VID_DECIDER_PACK.md` |
+| Passive TSC route | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | Passive TSC readout is dominated by a fixed ~2.67 MHz VRM/infrastructure artifact. | `cpu_sing_2/PHASE2_BASELINE.md`, `cpu_sing_2/PHASE2_KURAMOTO_FINAL_PACK.md` |
+| Active phase route | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | Active phase probes found no lock and no null separation. | `cpu_sing_2/PHASE2_ACTIVE_PHASE.md`, `cpu_sing_2/PHASE2_KURAMOTO_METRIC.md` |
+| Coupling channels | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | Software-visible coupling channels are exhausted without reliable phase-lock evidence. | `cpu_sing_2/PHASE2_COUPLING_CHANNELS.md` |
+| Detuning route | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | DID/frequency detuning was not reproducible as a coupling/lock route. | `cpu_sing_2/PHASE2_DETUNING.md` |
+| GOE route | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | GOE spacing behavior was not observed. | `cpu_sing_2/PHASE2_GOE.md` |
+| Ising route | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | Ising behavior was not observed. | `cpu_sing_2/PHASE2_ISING_MAP.md` |
+| AGESA global branch edit | `AGESA_GLOBAL_PATCH_REJECTED` | Global `JBE -> JAE` at `0x00366E3E` is rejected. It is not P4-safe and the prior attempt caused no boot; backup BIOS recovered after battery removal. | `cpu_hack/PATCH_ANALYSIS.md`, `gpt_research/UNDERVOLT_PATHWAY_1_BIOS_AGESA.md` |
+| P4-safe AGESA route | `AGESA_P4_SAFE_ROUTE_NOT_BYTE_READY` | Current BIOS/PE32/disassembly artifacts do not prove a P4-only table record or executable code cave. | `cpu_sing_2/PHASE2_AGESA_P4_SAFE_FINAL_PACK.md` |
+| External observability | `EXTERNAL_OBSERVABILITY_REQUIRED` | Next boundary is external measurement: board/VRM identification, physical probe points, and non-invasive external capture before more voltage-route claims. | `cpu_sing_2/PHASE2_DEEP_3_EXTERNAL_MEASURE.md` |
+| Catalytic tape / `.holo` tape | `CATALYTIC_TAPE_WORKING_NON_KURAMOTO` | Catalytic tape and `.holo` restoration work, but this is not Phase 2 Kuramoto success. | `cpu_sing_1/CPU_SING_GOAL_FINAL_PACK.md`, `cpu_sing_1/GOAL_ROUTE_7_HOLO.md` |
+
+**Do not repeat:** no BIOS flash, no global AGESA branch edit, no voltage writes, no P0-P3 undervolt, and no claim that catalytic tape restoration proves phase lock.
+
+**Next required boundary:** external observability before further Phase 2 hardware claims.
+
+---
+
+## Phase 2: The Phase-Locked Oscillator Network — CLOSED FOR SOFTWARE ROUTES
 
 **Objective:** Demonstrate that multiple cores at different frequencies produce measurable coupling via the shared power grid, and measure the coupling channel characteristics.
 
@@ -136,22 +163,22 @@ This stretches Phase 1 and 2 slightly but produces cleaner data. The original ro
 - [x] Reproducibility run confirmed: peak locations flip between runs
 - [x] **Conclusion: Passive TSC jitter cannot resolve oscillator coupling at current SNR. VRM switching noise dominates.**
 
-### 2.3 Active Phase Measurement [PAUSED — see 2.4]
-- [ ] Pivot from passive TSC jitter to active phase communication
-- [ ] Shared L3 cache line phase measurement between oscillators
-- [ ] Direct phase difference via atomic stores/loads on cache-aligned buffer
-- [ ] Measure phase lock/drift between PPU-A and PPU-B in real time
+### 2.3 Active Phase Measurement — CLOSED / NO LOCK
+- [x] Pivoted from passive TSC jitter to active software phase probes.
+- [x] Shared software channels and marker harnesses created.
+- [x] Active phase route found no lock and no null separation.
+- [x] Verdict: `PHASE2_SOFTWARE_ROUTES_EXHAUSTED`.
 
-### 2.4 AGESA Voltage Normalizer Reversal — PATCH PREPARED
-- [x] AGESA OrochiPI v1.5.0.5 voltage normalizer identified at BIOS offset `0x00366de6`
-- [x] Function forces VID fields to lower numeric value (higher voltage) in P-state MSRs
-- [x] One-byte patch: `0x76` (JBE) → `0x73` (JAE) at offset `0x00366e3e`
-- [x] FFS checksum fix: `0x8e` → `0x91` at offset `0x00340059`
-- [x] Patch reverses comparison logic: now selects higher numeric VID (lower voltage)
-- [x] Module is uncompressed in `AmdProcessorInitPeim` — direct hex edit possible
-- [x] Patched BIOS image created at `/tmp/bios_patched.bin`
-- [ ] Flash patched BIOS, reboot, verify P-state MSRs accept lower VID values
-- [ ] Attempt sub-threshold voltage on Core 4 (~0.825V target)
+### 2.4 AGESA Voltage Normalizer Route — REJECTED / NOT BYTE-READY
+- [x] AGESA OrochiPI v1.5.0.5 voltage normalizer identified at BIOS offset `0x00366de6`.
+- [x] Function selects the lower numeric VID in compared P-state fields.
+- [x] Prior global one-byte edit `0x00366e3e: 0x76 -> 0x73` plus checksum compensation is rejected.
+- [x] Prior global edit caused no boot; backup BIOS recovered after battery removal.
+- [x] P4-safe route inspected through CFG, VID source, table search, and cave search.
+- [x] No P4-only table record found from current artifacts.
+- [x] No suitable executable cave found from current artifacts.
+- [x] Verdict: `AGESA_GLOBAL_PATCH_REJECTED` and `AGESA_P4_SAFE_ROUTE_NOT_BYTE_READY`.
+- [ ] Reopen only with external recovery, verified stock dump, decompiler-grade constructor map or P4 table proof, and human approval.
 
 ### 2.A ADDENDUM: Operational Definition of Phase (GPT)
 
@@ -393,10 +420,10 @@ If the coupled oscillator network at the edge of chaos produces Wigner-Dyson eig
 ## Immediate Action Items (Next Session)
 
 1. **SSH into the Phenom** — `ssh root@192.168.137.100` (Windows SSH)
-2. **Phase 2.4: Flash AGESA-patched BIOS** — flash `/tmp/bios_patched.bin`, reboot, verify P-state MSRs accept lower VID values
-3. **Phase 1.2 reattempt: Sub-threshold voltage on Core 4** — target ~0.825V with AGESA voltage normalizer reversed
-4. **Phase 3.6: .holo Eigenbasis Encoding** — if voltage drops successfully, re-test coupling at lower voltage; otherwise encode eigenbasis at nominal voltage
-5. **Update roadmap** with flash/voltage results
+2. **External observability boundary** — identify VRM/board probe points and plan non-invasive measurement before more Phase 2 claims
+3. **Do not flash AGESA-patched BIOS** — the global branch edit is rejected and the P4-safe route is not byte-ready
+4. **Continue `.holo` / catalytic tape work separately** — tape restoration is working but is not Kuramoto evidence
+5. **Update this roadmap** only with externally observed voltage/phase evidence or new byte-ready firmware proof
 
 ---
 

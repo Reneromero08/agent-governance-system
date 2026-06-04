@@ -208,3 +208,36 @@ target/
 *.dylib
 *.bak
 *.csv.bak*
+
+# Exp44 / CAT_CAS bare-metal generated and heavy artifacts
+# Keep markdown reports, scripts, small configs, and manifests trackable.
+*.bin
+*.rom
+*.fd
+*.cap
+*.dat
+*.raw
+*.wav
+*.npz
+*.pcap
+*.vcd
+*.csv
+*.o
+a.out
+tmp/
+temp/
+*_tmp.*
+*.scope
+*.wfm
+*.trc
+*.sr
+*.sal
+*.logicdata
+*.env
+*.local
+id_rsa*
+id_ed25519*
+known_hosts*
+THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/cpu_hack/bios_dump.bin.dump/
+THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/cpu_hack/_tmp_coreboot_*/
+THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/cpu_hack/tools/
