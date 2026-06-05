@@ -207,7 +207,7 @@ python3 session_scripts/msr_p4_readonly_observer.py --cores 0-5 --samples 100 --
 
 ---
 
-## Phase 3: Catalytic Computing Ladder — IN PROGRESS (3.1-3.9 COMPLETE, 3.10 NEXT)
+## Phase 3: Catalytic Computing Ladder — IN PROGRESS (3.1-3.10 COMPLETE, 3.11 NEXT)
 
 **Objective:** Prove CAT_CAS can perform meaningful reversible/catalytic computation on the Phenom II, not merely restore bytes. The shared L3 cache is a genuine catalytic tape — borrow, compute, restore, verify — and this phase elevates it from tape restoration to a full operator library, semiotic token bridge, and oracle-style path search.
 
@@ -336,15 +336,24 @@ python3 session_scripts/msr_p4_readonly_observer.py --cores 0-5 --samples 100 --
 - [x] Source: `session_scripts/catalytic_sign.c`
 - [x] Hardened: non-tautological interference check, LCG state saved between passes
 
-### 3.10 Oracle-Style Path Restoration
+### 3.10 Oracle-Style Path Restoration — COMPLETE (2026-06-05)
 
-- [ ] Run multiple reversible candidate paths
-- [ ] Each path modifies tape, emits score/resonance/cost, then restores
-- [ ] Keep only external classical summary of invariant result
-- [ ] Tape must return to baseline after ALL paths complete
-- [ ] This bridges to recursive intelligence: simulate path → read invariant → restore tape
-- [ ] Output artifact: `PHASE3_10_PATH_RESTORATION.md`
-- [ ] Success: multiple paths explored, winner/invariant selected, tape restored
+- [x] Catalytic oracle pattern proven on bare metal
+- [x] Multiple reversible candidate paths, winner selected, tape restored
+
+| Test | Description | Result |
+|------|-------------|--------|
+| Minimum Score Oracle | 3 paths, find lowest transformed value | Winner correct, slots restored, tape restored |
+| Tiebreak Handling | All slots equal, first best wins | Correct winner, tape restored |
+| Randomized (4 seeds) | Different initial values, same oracle logic | 4/4 slots restored, 4/4 tape restored |
+
+- [x] Architecture: work slots (0-3), output slot (4), score slot (5), path ID slot (6), checksum slot (7)
+- [x] Each path: apply transform → compute score → compare to best → update if better → reverse transform
+- [x] After all paths: read winner → clear output/score → verify tape matches baseline
+- [x] Checksum covers slots 0-6 only, never modified during path ops
+- [x] 8-slot baseline save/restore with SHA-256 verification
+- [x] Bare-metal instantiation of temporal bootstrap + phase cavity pattern: simulate candidate → read invariant → restore substrate
+- [x] Source: `session_scripts/oracle_paths.c`
 
 ### 3.11 Baseline Comparison
 
@@ -391,7 +400,8 @@ PHASE3_HOLO_EIGENBASIS_COMPLETE
 PHASE3_OPERATOR_LIBRARY_COMPLETE
 PHASE3_MEANINGFUL_COMPUTATION_COMPLETE
 PHASE3_CATALYTIC_SIGN_COMPLETE
-PHASE3_ORACLE_PATH_NEXT
+PHASE3_ORACLE_PATH_COMPLETE
+PHASE3_BASELINE_COMPARISON_NEXT
 ```
 
 ### Do Not Claim (Phase 3)
@@ -401,7 +411,7 @@ PHASE3_ORACLE_PATH_NEXT
 - Do not claim zero Landauer heat
 - Do not claim physical limit violation
 - Do not claim .holo eigenbasis complete until 3.6 passes  ← DONE
-- Do not claim oracle computation until 3.10 passes
+- Do not claim oracle computation until 3.10 passes  ← DONE
 - Do not claim catalytic token/sign complete until 3.9 passes  ← DONE
 
 ### Why Phase 3 Matters
@@ -584,8 +594,8 @@ If the coupled oscillator network at the edge of chaos produces Wigner-Dyson eig
 ## Immediate Action Items (Next Session)
 
 1. **SSH into the Phenom** — `ssh root@192.168.137.100` (Windows SSH)
-2. **Phase 3.10: Oracle-Style Path Restoration** — multiple reversible candidate paths, winner selected, tape restored
-3. **Update roadmap** with Phase 3.10 results
+2. **Phase 3.11: Baseline Comparison** — reversible vs destructive metrics on same hardware
+3. **Update roadmap** with Phase 3.11 results
 
 ---
 
