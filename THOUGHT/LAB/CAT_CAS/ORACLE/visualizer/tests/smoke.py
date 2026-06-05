@@ -462,6 +462,15 @@ def test_http_endpoints():
     assert r["verdict"] == "HALTS"
     r = client.get("/api/dim1/run", params={"machine": "loop_2cycle"}).json()
     assert r["verdict"] == "LOOPS"
+    # 1D machines listing (used by the dim1 view's dropdown)
+    ml = client.get("/api/dim1/machines").json()
+    assert "halt_direct" in ml["machines"]
+    assert ml["machines"]["halt_direct"]["expected"] == "HALTS"
+    assert ml["machines"]["loop_2cycle"]["expected"] == "LOOPS"
+    # 1D build endpoint (used for flow restart)
+    b = client.get("/api/dim1/build", params={"machine": "loop_2cycle"}).json()
+    assert "H" in b and "labels" in b and "halt_mask" in b
+    assert b["N"] == 4
 
     # 2D
     r = client.get("/api/dim2/run", params={"L": 8, "gamma_halt": 0.0,

@@ -25,7 +25,7 @@ CAT_CAS_DIR = os.path.normpath(os.path.join(HERE, "..", "..", ".."))
 sys.path.insert(0, CAT_CAS_DIR)
 
 # Bump this as phases land.
-PHASE = 1
+PHASE = 2
 
 
 # ---- App -----------------------------------------------------------------

@@ -182,45 +182,70 @@ circle (|z| ~ 0.99).
 
 ---
 
-## Phase 2 — 1D view (mechanism)
+## Phase 2 — 1D view (mechanism) — DONE (2026-06-04)
 
-**Goal**: Show WHY halting works, not just that it does.
+**Goal**: Show WHY halting works, not just that it does. Mechanism view.
 
-- [ ] `frontend/js/views/graph_view.js`:
-  - [ ] Render directed graph: nodes = states, edges = transitions
-  - [ ] Halt node = red, animated pulse
-  - [ ] Edge thickness = transition magnitude (gamma)
-  - [ ] Click a node to set as |psi0>
-- [ ] `frontend/js/views/probability_flow.js`:
-  - [ ] Animate |psi(t+dt) = exp(-i*H*dt) |psi(t)>
-  - [ ] Use small dt, e.g., 0.05, with 60 fps
-  - [ ] Node size = sqrt(|psi_i|^2)
-  - [ ] Edge arrow opacity = |psi_source|^2 * |H_edge| * dt
-  - [ ] Halt machine: probability visibly drains into halt node
-  - [ ] Loop machine: probability circulates indefinitely
-- [ ] `frontend/js/views/spectrum.js`:
-  - [ ] Scatter eigenvalues in complex plane (Re vs Im)
-  - [ ] Halt eigenvalue: large red dot
-  - [ ] Other eigenvalues: cyan dots
-  - [ ] Axes labeled, grid lines
-- [ ] `frontend/js/views/det_trace.js`:
-  - [ ] Plot det(H(phi)) as phi sweeps [0, 2π]
-  - [ ] Mark current phi with gold dot
-  - [ ] W_raw / W_int displayed
-  - [ ] Verdict (HALTS/LOOPS) shown
-- [ ] `frontend/js/tabs/dim1.js`:
-  - [ ] Machine picker (halt_direct, halt_chain, loop_2cycle, loop_3cycle)
-  - [ ] Sliders: gamma (0.1-3), loss_rate (0.01-0.5), halt_mult (2-50), n_phi (60-800)
-  - [ ] Twist mode toggle (boundary / global)
-  - [ ] "PLAY" / "PAUSE" button for time evolution
-- [ ] `frontend/css/viz.css` — animate classes for halt pulse, flow particles
+### Layout
+- [x] Side panel (320px) with: machine picker, gamma/loss/n_phi sliders, Run/Animate/Reset buttons
+- [x] Verdict banner (HALTS/LOOPS) with W, kappa_V, rho, halt-sink KPI tiles
+- [x] Machine spec readout (transitions, twist edges, labels, halt index)
+- [x] Mechanism explanation text (per-machine)
+- [x] 3 viz panels: state graph + flow (top-left), spectrum (top-right), det curve (bottom)
+- [x] `frontend/css/dim1.css` — layout, verdict banner, machine spec styles
+
+### State graph (`frontend/js/dim1_stategraph.js`)
+- [x] N nodes arranged in a circle, each labeled with |s, b> basis state
+- [x] Edges drawn for non-zero H[i,j] entries, thickness = |H_ij|, color = teal/halt-red
+- [x] Halt nodes colored red, |psi|^2 inner dot + radial glow
+- [x] Reset on Run; click Animate flow to start the time evolution
+- [x] Layout: circle of radius 0.40 * min(w,h), node radius scales with canvas
+
+### Wavepacket flow (`frontend/js/dim1_flow.js`)
+- [x] Animate psi(t+dt) = psi(t) - i*dt * H*psi(t) (Euler step at dt=0.05, 4 steps/frame)
+- [x] Periodic re-normalization to keep |psi| on the unit sphere
+- [x] Driven by requestAnimationFrame, cancel on pause/reset
+- [x] Pause/Reset buttons toggle state
+
+### Spectrum (`frontend/js/dim1_spectrum.js`)
+- [x] Scatter eigenvalues in complex plane (Re right, Im up)
+- [x] Halt-mask eigenvalues colored red, others teal
+- [x] Unit-circle reference (point-gap radius)
+- [x] |max lambda| and N captions
+- [x] Outer glow per eigenvalue
+
+### Det curve (`frontend/js/dim1_detcurve.js`)
+- [x] Closed curve det(1 - e^{i*phi} H) for phi in [0, 2*pi)
+- [x] Origin marked, reference circles at 25/50/75/100%
+- [x] Winding number (W) banner top-right (color matches verdict)
+- [x] phi = 0, pi/2, pi, 3pi/2 markers along the curve
+- [x] |det(phi)| mini-strip at the bottom (one-row histogram)
+
+### Complex math helper (`frontend/js/complex.js`)
+- [x] H parsed once into flat (re, im) Float32Arrays
+- [x] zgemv (complex general matrix-vector multiply)
+- [x] Euler step: psi += -i*dt * (H*psi)
+- [x] Normalize, |psi|^2, uniform/delta initial states
+
+### API extensions (`engine/api_routes_1d.py`)
+- [x] GET /api/dim1/machines — list machines with expected verdict + summary
+- [x] GET /api/dim1/build — return H only (cheap, for flow restart)
+- [x] GET /api/dim1/run — full run (H, spectrum, winding)
+
+### Controller (`frontend/js/dim1.js`)
+- [x] Wires all 4 viz modules + flow animator
+- [x] URL param overrides: ?machine=...&gamma=...&loss=...&nphi=...
+- [x] Auto-init on first health check (no tab click required)
+- [x] Per-machine mechanism explanation text
 
 **Verify**:
-- Open `http://localhost:8000/`, 1D tab active
-- `halt_direct`: press PLAY → see probability flow from s0 to halt (red), halt node grows
-- `loop_2cycle`: press PLAY → see probability circulate between s0 and s1 forever
-- Verdict: HALTS for halt machines, LOOPS for loops
-- Winding W=0 for halt (det is single point), W=±1 for loops (circle)
+- [x] `python -m tests.smoke` exits 0 (engines unchanged)
+- [x] `http://localhost:8000/` loads dim1 view automatically
+- [x] `loop_2cycle` (default): verdict=LOOPS, W=+1, det curve winds once
+- [x] `loop_3cycle`: 6-node state graph, same W=+1 behavior
+- [x] `halt_direct` (via ?machine=halt_direct): verdict=HALTS, W=0, halt nodes red with strong sink
+- [x] Headless Chrome screenshot: 3 cases render correctly
+- [x] Node `--check` on all 10 JS modules: OK
 
 ---
 

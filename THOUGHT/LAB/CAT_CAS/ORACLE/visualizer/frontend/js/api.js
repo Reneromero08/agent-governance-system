@@ -1,9 +1,6 @@
 // REST client for the FastAPI backend.
 //
 // All functions return parsed JSON. Throw on non-2xx.
-//
-// Phase 0: just /api/health.
-// Phase 1: /api/dim{N}/run endpoints added as the engine comes online.
 
 const BASE = '';
 
@@ -14,10 +11,25 @@ export async function getHealth() {
   return r.json();
 }
 
-/** 1D run (Phase 1). Stub returns 501 until engine lands. */
+/** 1D: list available machines and parameter ranges. */
+export async function getDim1Machines() {
+  const r = await fetch(BASE + '/api/dim1/machines');
+  if (!r.ok) throw new Error('dim1 machines failed: ' + r.status);
+  return r.json();
+}
+
+/** 1D: full oracle run. */
 export async function runDim1(params) {
   const qs = new URLSearchParams(params).toString();
   const r = await fetch(BASE + '/api/dim1/run?' + qs);
   if (!r.ok) throw new Error('dim1 run failed: ' + r.status);
+  return r.json();
+}
+
+/** 1D: build H only (cheaper than /run, for flow animation). */
+export async function buildDim1(params) {
+  const qs = new URLSearchParams(params).toString();
+  const r = await fetch(BASE + '/api/dim1/build?' + qs);
+  if (!r.ok) throw new Error('dim1 build failed: ' + r.status);
   return r.json();
 }
