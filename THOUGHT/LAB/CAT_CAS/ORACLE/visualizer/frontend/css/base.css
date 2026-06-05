@@ -1,6 +1,7 @@
 /* Base tokens + reset */
 
-:root {
+:root,
+:root[data-theme="dark"] {
   --bg: #0a0d12;
   --bg-elev: #11151c;
   --panel: #0d1117;
@@ -15,6 +16,27 @@
   --warn: #f5a542;
   --ok: #5ae08a;
   --err: #e05a5a;
+  --shadow: 0 2px 8px rgba(0,0,0,0.4);
+  --tooltip-bg: #1a2230;
+}
+
+:root[data-theme="light"] {
+  --bg: #f5f7fa;
+  --bg-elev: #ffffff;
+  --panel: #ffffff;
+  --line: #d8dee5;
+  --line-strong: #b8c2cc;
+  --txt: #1a2230;
+  --dim: #6b7686;
+  --acc: #0f8a7e;
+  --acc-2: #b88a00;
+  --halt: #c83030;
+  --loop: #1f9a4a;
+  --warn: #c87a00;
+  --ok: #1f9a4a;
+  --err: #c83030;
+  --shadow: 0 2px 8px rgba(0,0,0,0.10);
+  --tooltip-bg: #2a3340;
 }
 
 * { box-sizing: border-box; }

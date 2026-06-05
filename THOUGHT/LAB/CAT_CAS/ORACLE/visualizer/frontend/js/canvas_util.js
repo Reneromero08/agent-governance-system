@@ -1,8 +1,6 @@
 // Canvas helpers: high-DPI sizing, color tokens, basic drawing.
 
-import { CSS_VARS } from './theme.js';
-
-const T = CSS_VARS;
+import { getT } from './theme.js';
 
 export function getCssVar(name) {
   return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
@@ -21,8 +19,8 @@ export function setupCanvas(canvas) {
   return { ctx, w, h };
 }
 
-export function clear(ctx, w, h, bg = T.bg) {
-  ctx.fillStyle = bg;
+export function clear(ctx, w, h, bg) {
+  ctx.fillStyle = bg || getT().bg;
   ctx.fillRect(0, 0, w, h);
 }
 

@@ -1,10 +1,8 @@
 // det curve viz: the closed curve det(1 - e^{i*phi} H) in the complex plane.
 // The origin is the reference point. Winding around origin = W.
 
-import { CSS_VARS } from './theme.js';
+import { getT } from './theme.js';
 import { setupCanvas, clear, path } from './canvas_util.js';
-
-const T = CSS_VARS;
 
 export class DetCurveViz {
   constructor(canvas) {
@@ -14,6 +12,7 @@ export class DetCurveViz {
     this.Wint = 0;
     this._ro = new ResizeObserver(() => this.draw());
     this._ro.observe(canvas);
+    document.addEventListener('themechange', () => this.draw());
   }
 
   setData(curve, absArr, Wint) {
@@ -26,13 +25,15 @@ export class DetCurveViz {
   clear() {
     this.curve = null;
     this.absArr = null;
+    const T = getT();
     const { ctx, w, h } = setupCanvas(this.canvas);
-    clear(ctx, w, h);
+    clear(ctx, w, h, T.bg);
   }
 
   draw() {
+    const T = getT();
     const { ctx, w, h } = setupCanvas(this.canvas);
-    clear(ctx, w, h);
+    clear(ctx, w, h, T.bg);
 
     if (!this.curve) {
       ctx.fillStyle = T.dim;

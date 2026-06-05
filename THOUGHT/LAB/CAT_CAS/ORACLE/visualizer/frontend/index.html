@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="/static/css/panels.css">
   <link rel="stylesheet" href="/static/css/viz.css">
   <link rel="stylesheet" href="/static/css/dim1.css">
+  <link rel="stylesheet" href="/static/css/polish.css">
 </head>
 <body>
   <header>
@@ -16,6 +17,10 @@
     <div class="status-bar">
       <span id="health-pill" class="pill pill-pending">checking...</span>
       <span class="phase-label">Phase 2 &mdash; 1D Mechanism</span>
+      <button class="theme-toggle" id="theme-toggle" title="Toggle theme (T)">
+        <span class="icon" id="theme-icon">&#9788;</span><span id="theme-label">dark</span>
+      </button>
+      <button class="theme-toggle" id="help-toggle" title="Keyboard shortcuts (?)">?</button>
     </div>
   </header>
 
@@ -32,29 +37,44 @@
       <div class="dim1-layout">
         <aside class="side-panel dim1-controls">
           <div class="section">
-            <h3>Machine</h3>
+            <h3>Machine
+              <span class="info" tabindex="0"
+                    data-tooltip="Pick a Turing-machine topology. Each has a different halt/loop structure. See summary on the right.">?</span>
+            </h3>
             <div class="control-row">
               <label for="dim1-machine">Topology</label>
               <select id="dim1-machine"></select>
             </div>
             <div class="control-row">
-              <label for="dim1-gamma">&gamma; (loss)</label>
+              <label for="dim1-gamma">
+                &gamma;
+                <span class="info" tabindex="0"
+                      data-tooltip="Transition coupling. Off-diagonal H[i,j] magnitude. Drives probability flow between states.">?</span>
+              </label>
               <input type="range" id="dim1-gamma" min="0" max="2" step="0.01" value="0.5">
               <span class="val" id="dim1-gamma-val">0.50</span>
             </div>
             <div class="control-row">
-              <label for="dim1-loss">loss</label>
+              <label for="dim1-loss">
+                loss
+                <span class="info" tabindex="0"
+                      data-tooltip="Uniform on-site dissipation rate. Sets Im(H_ii) at non-halt sites. Larger = faster decay.">?</span>
+              </label>
               <input type="range" id="dim1-loss" min="0" max="0.5" step="0.005" value="0.1">
               <span class="val" id="dim1-loss-val">0.10</span>
             </div>
             <div class="control-row">
-              <label for="dim1-nphi">n<sub>&phi;</sub></label>
+              <label for="dim1-nphi">
+                n<sub>&phi;</sub>
+                <span class="info" tabindex="0"
+                      data-tooltip="Number of twist angles phi sampled for the det-curve winding integral. Higher = more accurate W, slower compute.">?</span>
+              </label>
               <input type="number" id="dim1-nphi" min="40" max="1600" step="40" value="400">
             </div>
             <div class="control-row" style="margin-top: 10px;">
-              <button id="dim1-run">Run</button>
-              <button id="dim1-animate" disabled>Animate flow</button>
-              <button id="dim1-reset" disabled>Reset</button>
+              <button id="dim1-run" title="Run (R)">Run</button>
+              <button id="dim1-animate" disabled title="Play/Pause (Space)">Animate flow</button>
+              <button id="dim1-reset" disabled title="Reset flow">Reset</button>
             </div>
           </div>
 
@@ -63,19 +83,35 @@
             <div id="dim1-verdict-banner" class="verdict-banner unknown">UNSET</div>
             <div class="kpi-grid">
               <div class="kpi">
-                <div class="kpi-label">W (winding)</div>
+                <div class="kpi-label">
+                  W
+                  <span class="info" tabindex="0"
+                        data-tooltip="Winding number of det(1 - e^{i phi} H) around the origin. W = 0 -> HALT, W != 0 -> LOOP.">?</span>
+                </div>
                 <div class="kpi-value" id="dim1-kpi-w">&mdash;</div>
               </div>
               <div class="kpi">
-                <div class="kpi-label">&kappa;<sub>V</sub></div>
+                <div class="kpi-label">
+                  &kappa;<sub>V</sub>
+                  <span class="info" tabindex="0"
+                        data-tooltip="Petermann factor / eigenvector condition number. Large kappa_V = ill-conditioned spectrum (gaps near closing).">?</span>
+                </div>
                 <div class="kpi-value" id="dim1-kpi-kappa">&mdash;</div>
               </div>
               <div class="kpi">
-                <div class="kpi-label">&rho; (radius)</div>
+                <div class="kpi-label">
+                  &rho;
+                  <span class="info" tabindex="0"
+                        data-tooltip="Spectral radius max |lambda_i|. If > 1, some modes grow; if < 1, all modes decay.">?</span>
+                </div>
                 <div class="kpi-value" id="dim1-kpi-rho">&mdash;</div>
               </div>
               <div class="kpi">
-                <div class="kpi-label">Halt sink</div>
+                <div class="kpi-label">
+                  sink
+                  <span class="info" tabindex="0"
+                        data-tooltip="max |Im(H_ii)| at halt sites. The drain strength. Strong sink = machine halts fast.">?</span>
+                </div>
                 <div class="kpi-value" id="dim1-kpi-halt">&mdash;</div>
               </div>
             </div>
@@ -85,20 +121,37 @@
             <h3>Machine spec</h3>
             <div id="dim1-spec" class="machine-spec muted">No data yet.</div>
           </div>
+
+          <div class="section">
+            <h3>Export / share</h3>
+            <div class="export-row">
+              <button id="dim1-copy-url" title="Copy a URL that reproduces the current state">Copy URL</button>
+              <button id="dim1-download-json" title="Download the full run result as JSON">JSON</button>
+              <button id="dim1-download-png" title="Save the current 1D view as a PNG">PNG</button>
+            </div>
+          </div>
         </aside>
 
         <div class="dim1-main">
           <div class="dim1-viz-row">
             <div class="viz-panel dim1-viz-state">
               <div class="viz-header">
-                <span class="viz-title">State graph &amp; flow</span>
+                <span class="viz-title">
+                  State graph &amp; flow
+                  <span class="info" tabindex="0"
+                        data-tooltip="Nodes are basis states |s, b>. Edges are non-zero H[i,j]. Glowing nodes are where the wavepacket concentrates. Halt sites are red.">?</span>
+                </span>
                 <span class="viz-sub" id="dim1-state-sub">uniform</span>
               </div>
               <canvas id="dim1-canvas-state"></canvas>
             </div>
             <div class="viz-panel dim1-viz-spectrum">
               <div class="viz-header">
-                <span class="viz-title">Eigenvalues (complex plane)</span>
+                <span class="viz-title">
+                  Eigenvalues
+                  <span class="info" tabindex="0"
+                        data-tooltip="Spectrum of H in the complex plane. Halt eigenvalues (red) sit deep below the real axis. Loop eigenvalues (teal) sit on or near the unit circle.">?</span>
+                </span>
                 <span class="viz-sub" id="dim1-spec-sub">N = &mdash;</span>
               </div>
               <canvas id="dim1-canvas-spectrum"></canvas>
@@ -107,7 +160,11 @@
 
           <div class="viz-panel dim1-viz-det">
             <div class="viz-header">
-              <span class="viz-title">det(1 &minus; e<sup>i&phi;</sup> H) &mdash; winding probe</span>
+              <span class="viz-title">
+                det(1 &minus; e<sup>i&phi;</sup> H) &mdash; winding probe
+                <span class="info" tabindex="0"
+                      data-tooltip="As phi sweeps [0, 2 pi), det(1 - e^{i phi} H) traces a closed curve. W = how many times it winds the origin. Bottom strip shows |det(phi)|.">?</span>
+              </span>
               <span class="viz-sub" id="dim1-det-sub">&phi; &isin; [0, 2&pi;]</span>
             </div>
             <canvas id="dim1-canvas-det"></canvas>
@@ -153,6 +210,33 @@
       </div>
     </section>
   </main>
+
+  <footer class="status-footer">
+    <div class="left">
+      <span id="footer-status" class="pill-mini idle">idle</span>
+      <span id="footer-msg">no requests yet</span>
+    </div>
+    <div class="right">
+      <span class="muted">cat_cas oracle visualizer</span>
+      <button id="footer-cancel" title="Cancel in-flight request" disabled>cancel</button>
+    </div>
+  </footer>
+
+  <div class="modal-backdrop" id="help-modal">
+    <div class="modal" role="dialog" aria-labelledby="help-title">
+      <h2 id="help-title">Keyboard shortcuts</h2>
+      <table>
+        <tr><td><kbd>R</kbd></td><td>Run current machine</td></tr>
+        <tr><td><kbd>Space</kbd></td><td>Play / pause wavepacket flow (1D only)</td></tr>
+        <tr><td><kbd>1</kbd> &ndash; <kbd>5</kbd></td><td>Switch dimension tab</td></tr>
+        <tr><td><kbd>T</kbd></td><td>Toggle dark / light theme</td></tr>
+        <tr><td><kbd>U</kbd></td><td>Copy shareable URL of current state</td></tr>
+        <tr><td><kbd>?</kbd></td><td>Show this help</td></tr>
+        <tr><td><kbd>Esc</kbd></td><td>Close this dialog</td></tr>
+      </table>
+      <div class="close-row">press <kbd>Esc</kbd> to close</div>
+    </div>
+  </div>
 
   <script type="module" src="/static/js/main.js"></script>
 </body>

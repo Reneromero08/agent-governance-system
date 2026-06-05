@@ -1,10 +1,8 @@
 // State graph viz: nodes = basis states, edges = H[i,j] transitions.
 // Animated probability density glow from the wavepacket flow.
 
-import { CSS_VARS } from './theme.js';
+import { getT } from './theme.js';
 import { setupCanvas, clear } from './canvas_util.js';
-
-const T = CSS_VARS;
 
 export class StateGraphViz {
   constructor(canvas) {
@@ -14,6 +12,7 @@ export class StateGraphViz {
     this.pos = null;        // Array<{x, y}>  layout positions (cached)
     this._ro = new ResizeObserver(() => this.draw());
     this._ro.observe(canvas);
+    document.addEventListener('themechange', () => this.draw());
   }
 
   setData(data) {
@@ -31,8 +30,9 @@ export class StateGraphViz {
     this.data = null;
     this.psi = null;
     this.pos = null;
+    const T = getT();
     const { ctx, w, h } = setupCanvas(this.canvas);
-    clear(ctx, w, h);
+    clear(ctx, w, h, T.bg);
   }
 
   _layout() {
@@ -50,8 +50,9 @@ export class StateGraphViz {
 
   draw() {
     if (!this.data) return;
+    const T = getT();
     const { ctx, w, h } = setupCanvas(this.canvas);
-    clear(ctx, w, h);
+    clear(ctx, w, h, T.bg);
 
     const N = this.data.N;
     const cx = w / 2;

@@ -1,9 +1,7 @@
 // Spectrum viz: eigenvalues in the complex plane, with point-gap reference.
 
-import { CSS_VARS } from './theme.js';
+import { getT } from './theme.js';
 import { setupCanvas, clear, dot } from './canvas_util.js';
-
-const T = CSS_VARS;
 
 export class SpectrumViz {
   constructor(canvas) {
@@ -13,6 +11,7 @@ export class SpectrumViz {
     this.haltMask = null;
     this._ro = new ResizeObserver(() => this.draw());
     this._ro.observe(canvas);
+    document.addEventListener('themechange', () => this.draw());
   }
 
   setData(eigvals, haltMask) {
@@ -24,13 +23,15 @@ export class SpectrumViz {
   clear() {
     this.eigvals = null;
     this.haltMask = null;
+    const T = getT();
     const { ctx, w, h } = setupCanvas(this.canvas);
-    clear(ctx, w, h);
+    clear(ctx, w, h, T.bg);
   }
 
   draw() {
+    const T = getT();
     const { ctx, w, h } = setupCanvas(this.canvas);
-    clear(ctx, w, h);
+    clear(ctx, w, h, T.bg);
 
     if (!this.eigvals) {
       ctx.fillStyle = T.dim;

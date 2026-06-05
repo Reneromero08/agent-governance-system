@@ -19,17 +19,17 @@ export async function getDim1Machines() {
 }
 
 /** 1D: full oracle run. */
-export async function runDim1(params) {
+export async function runDim1(params, opts = {}) {
   const qs = new URLSearchParams(params).toString();
-  const r = await fetch(BASE + '/api/dim1/run?' + qs);
+  const r = await fetch(BASE + '/api/dim1/run?' + qs, opts);
   if (!r.ok) throw new Error('dim1 run failed: ' + r.status);
   return r.json();
 }
 
 /** 1D: build H only (cheaper than /run, for flow animation). */
-export async function buildDim1(params) {
+export async function buildDim1(params, opts = {}) {
   const qs = new URLSearchParams(params).toString();
-  const r = await fetch(BASE + '/api/dim1/build?' + qs);
+  const r = await fetch(BASE + '/api/dim1/build?' + qs, opts);
   if (!r.ok) throw new Error('dim1 build failed: ' + r.status);
   return r.json();
 }

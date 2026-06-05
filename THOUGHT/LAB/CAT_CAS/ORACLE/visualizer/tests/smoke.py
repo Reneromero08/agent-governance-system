@@ -521,6 +521,112 @@ def test_summary_table():
     print("  " + "=" * 58)
 
 
+# ---- Phase 2: 1D view + polish layer -----------------------------------
+
+def test_polish_assets():
+    """All polish JS/CSS files must be served and parse OK."""
+    import urllib.request
+    from pathlib import Path
+    import time
+
+    print("    [a] local files...")
+    t0 = time.time()
+    js_files = [
+        "polish.css", "keyboard.js", "export.js", "debounce.js",
+        "status.js", "main.js", "api.js", "dim1.js",
+        "dim1_stategraph.js", "dim1_spectrum.js", "dim1_detcurve.js",
+        "dim1_flow.js", "complex.js", "canvas_util.js", "theme.js",
+    ]
+    base = Path(VISUALIZER_DIR) / "frontend"
+
+    # Files exist locally.
+    for f in js_files:
+        if f.endswith(".css"):
+            p = base / "css" / f
+        else:
+            p = base / "js" / f
+        assert p.exists(), f"missing local file: {p}"
+    print(f"    [a] {len(js_files)} files exist locally ({time.time()-t0:.2f}s)")
+
+    # Files served by the server.
+    print("    [b] TestClient serving...")
+    t0 = time.time()
+    from fastapi.testclient import TestClient
+    import importlib, sys
+    sys.path.insert(0, VISUALIZER_DIR)
+    if "server" in sys.modules:
+        del sys.modules["server"]
+    import server as _server
+    client = TestClient(_server.app)
+    for f in js_files:
+        if f.endswith(".css"):
+            url = f"/static/css/{f}"
+        else:
+            url = f"/static/js/{f}"
+        r = client.get(url)
+        assert r.status_code == 200, f"{url} -> {r.status_code}"
+    print(f"    [b] {len(js_files)} files served ({time.time()-t0:.2f}s)")
+
+    # JS syntax check.
+    print("    [c] node --check...")
+    t0 = time.time()
+    import subprocess
+    n = 0
+    for f in js_files:
+        if f.endswith(".css"):
+            continue
+        p = base / "js" / f
+        out = subprocess.run(["node", "--check", str(p)], capture_output=True, text=True)
+        assert out.returncode == 0, f"{f} syntax error: {out.stderr}"
+        n += 1
+    print(f"    [c] node --check on {n} JS files ({time.time()-t0:.2f}s)  OK")
+    print(f"  All {len(js_files)} polish+view files OK")
+
+
+def test_polish_index_html():
+    """index.html has the polish hooks (theme toggle, help modal, export panel)."""
+    from pathlib import Path
+    p = Path(VISUALIZER_DIR) / "frontend" / "index.html"
+    txt = p.read_text()
+    needed = [
+        "polish.css",
+        "theme-toggle", "help-toggle", "help-modal",
+        "footer-status", "footer-cancel", "status-footer",
+        "dim1-copy-url", "dim1-download-json", "dim1-download-png",
+        "data-tooltip",
+        "data-theme=\"dark\"",
+    ]
+    for s in needed:
+        assert s in txt, f"index.html missing: {s!r}"
+    print(f"  index.html has all polish hooks  OK")
+
+
+def test_polish_endpoints_via_http():
+    """Phase 2 endpoints: /api/dim1/machines and /api/dim1/build are live."""
+    from fastapi.testclient import TestClient
+    import sys, importlib
+    sys.path.insert(0, VISUALIZER_DIR)
+    if "server" in sys.modules:
+        del sys.modules["server"]
+    import server as _server
+    client = TestClient(_server.app)
+
+    # /machines
+    r = client.get("/api/dim1/machines")
+    assert r.status_code == 200
+    body = r.json()
+    assert "machines" in body and "params" in body
+    for name in ["halt_direct", "halt_chain", "loop_2cycle", "loop_3cycle"]:
+        assert name in body["machines"]
+
+    # /build
+    r = client.get("/api/dim1/build", params={"machine": "loop_2cycle"})
+    assert r.status_code == 200
+    body = r.json()
+    assert "H" in body and "labels" in body and "halt_mask" in body
+    assert body["N"] == 4
+    print(f"  /api/dim1/machines and /api/dim1/build both live  OK")
+
 # ---- Main entry point ---------------------------------------------------
 
 if __name__ == "__main__":
@@ -582,6 +688,13 @@ if __name__ == "__main__":
     test_against_lab_source_outputs()
     test_http_endpoints()
     test_summary_table()
+    print()
+    print("=" * 60)
+    print("  SMOKE TESTS: Phase 2 (1D view + polish)")
+    print("=" * 60)
+    test_polish_assets()
+    test_polish_index_html()
+    test_polish_endpoints_via_http()
 
     elapsed = time.time() - t_start
     print("=" * 60)

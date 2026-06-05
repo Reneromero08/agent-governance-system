@@ -5,6 +5,9 @@ import { StateGraphViz } from './dim1_stategraph.js';
 import { SpectrumViz } from './dim1_spectrum.js';
 import { DetCurveViz } from './dim1_detcurve.js';
 import { FlowAnimator } from './dim1_flow.js';
+import { debounce } from './debounce.js';
+import { beginRequest, endRequest, failRequest, note } from './status.js';
+import { copyShareUrl, downloadJson, canvasesToPng, savePng } from './export.js';
 
 const MECHANISM_TEXT = {
   halt_direct:
@@ -27,6 +30,7 @@ export class Dim1Controller {
   constructor() {
     this.machines = null;
     this.runResult = null;
+    this._inflight = null;
     this.stateViz = new StateGraphViz(document.getElementById('dim1-canvas-state'));
     this.spectrumViz = new SpectrumViz(document.getElementById('dim1-canvas-spectrum'));
     this.detViz = new DetCurveViz(document.getElementById('dim1-canvas-det'));
@@ -41,6 +45,9 @@ export class Dim1Controller {
     this.runBtn = document.getElementById('dim1-run');
     this.animBtn = document.getElementById('dim1-animate');
     this.resetBtn = document.getElementById('dim1-reset');
+    this.copyUrlBtn = document.getElementById('dim1-copy-url');
+    this.dlJsonBtn = document.getElementById('dim1-download-json');
+    this.dlPngBtn = document.getElementById('dim1-download-png');
     this.verdictBanner = document.getElementById('dim1-verdict-banner');
     this.kpiW = document.getElementById('dim1-kpi-w');
     this.kpiKappa = document.getElementById('dim1-kpi-kappa');
@@ -56,16 +63,61 @@ export class Dim1Controller {
   }
 
   _wire() {
+    const onGamma = debounce(() => this.run(), 250);
+    const onLoss = debounce(() => this.run(), 250);
+    const onNphi = debounce(() => this.run(), 350);
+
     this.gammaIn.addEventListener('input', () => {
       this.gammaVal.textContent = parseFloat(this.gammaIn.value).toFixed(2);
+      onGamma();
     });
     this.lossIn.addEventListener('input', () => {
       this.lossVal.textContent = parseFloat(this.lossIn.value).toFixed(2);
+      onLoss();
     });
+    this.nphiIn.addEventListener('change', onNphi);
     this.runBtn.addEventListener('click', () => this.run());
     this.animBtn.addEventListener('click', () => this.toggleAnimate());
     this.resetBtn.addEventListener('click', () => this.resetFlow());
     this.machineSel.addEventListener('change', () => this.run());
+    this.copyUrlBtn.addEventListener('click', () => this._copyUrl());
+    this.dlJsonBtn.addEventListener('click', () => this._downloadJson());
+    this.dlPngBtn.addEventListener('click', () => this._downloadPng());
+  }
+
+  _currentState() {
+    return {
+      machine: this.machineSel.value,
+      gamma: parseFloat(this.gammaIn.value),
+      loss: parseFloat(this.lossIn.value),
+      nphi: parseInt(this.nphiIn.value, 10),
+    };
+  }
+
+  async _copyUrl() {
+    await copyShareUrl(this._currentState());
+  }
+
+  _downloadJson() {
+    if (!this.runResult) { note('Run a machine first'); return; }
+    const stamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const m = this.runResult.machine;
+    const g = this.runResult.gamma;
+    downloadJson(`oracle-1d-${m}-g${g}-${stamp}`, this.runResult);
+  }
+
+  _downloadPng() {
+    const canvases = [
+      { canvas: document.getElementById('dim1-canvas-state'), w: 0, h: 0 },
+      { canvas: document.getElementById('dim1-canvas-spectrum'), w: 0, h: 0 },
+      { canvas: document.getElementById('dim1-canvas-det'), w: 0, h: 0 },
+    ].map(o => o.canvas);
+    const m = this._currentState();
+    const label = `1D ${m.machine}  gamma=${m.gamma}  loss=${m.loss}  nphi=${m.nphi}`;
+    const url = canvasesToPng(canvases, label);
+    if (!url) { note('Nothing to save'); return; }
+    const stamp = new Date().toISOString().replace(/[:.]/g, '-');
+    savePng(`oracle-1d-${m.machine}-${stamp}.png`, url);
   }
 
   async init() {
@@ -78,7 +130,6 @@ export class Dim1Controller {
       this._error('cannot load machines: ' + e.message);
       return;
     }
-    // Allow URL params to override defaults: ?machine=halt_direct&gamma=0.3&loss=0.05&nphi=200
     const url = new URL(window.location.href);
     const m = url.searchParams.get('machine');
     if (m && this.machines[m]) this.machineSel.value = m;
@@ -135,6 +186,13 @@ export class Dim1Controller {
   }
 
   async run() {
+    if (this._inflight) {
+      // Another run is already pending; the latest call wins.
+      this._inflight.abort();
+    }
+    const controller = new AbortController();
+    this._inflight = controller;
+
     const params = {
       machine: this.machineSel.value,
       gamma: parseFloat(this.gammaIn.value),
@@ -143,19 +201,29 @@ export class Dim1Controller {
       n_phi: parseInt(this.nphiIn.value, 10),
     };
     this._setVerdict('RUNNING...');
+    this.runBtn.classList.add('busy');
     this.runBtn.disabled = true;
     this.animBtn.disabled = true;
     this.resetBtn.disabled = true;
     this.flow.cancel();
+
+    beginRequest(`/api/dim1/run ${params.machine}`);
+
     try {
-      const r = await runDim1(params);
+      const r = await runDim1(params, { signal: controller.signal });
+      if (controller.signal.aborted) return;
       this.runResult = r;
       this._renderResult(r);
+      note(`1D ${params.machine}: ${r.verdict}, W=${r.winding.Wint}`);
     } catch (e) {
+      if (e.name === 'AbortError') { note('cancelled'); return; }
       this._setVerdict('ERROR');
       this.specEl.textContent = 'Error: ' + e.message;
+      failRequest('run', e.message);
       console.error(e);
     } finally {
+      if (this._inflight === controller) this._inflight = null;
+      this.runBtn.classList.remove('busy');
       this.runBtn.disabled = false;
       this.animBtn.disabled = false;
       this.resetBtn.disabled = false;
@@ -163,35 +231,26 @@ export class Dim1Controller {
   }
 
   _renderResult(r) {
-    // Verdict
     this._setVerdict(r.verdict);
-    // KPIs
     this.kpiW.textContent = String(r.winding.Wint);
     this.kpiW.className = 'kpi-value ' + (r.winding.Wint === 0 ? 'halt' : 'loop');
     this.kpiKappa.textContent = r.spectrum.kappa_V.toFixed(3);
     this.kpiRho.textContent = r.spectrum.spectral_radius.toFixed(3);
-    // Halt sink strength: diagonal |Im(H_ii)| for halt sites
     let haltSink = 0;
     for (let i = 0; i < r.N; i++) {
       if (r.halt_mask[i]) haltSink = Math.max(haltSink, Math.abs(r.H[i][i].im));
     }
     this.kpiHalt.textContent = haltSink.toFixed(3);
     this.kpiHalt.className = 'kpi-value ' + (haltSink > 0.1 ? 'loop' : 'halt');
-    // Spec
     this._setMachineSpec(r);
-    // Mechanism
     this._setMechanism(r.machine);
-    // Vizes
     this.stateViz.setData(r);
     this.spectrumViz.setData(r.spectrum.eigvals, r.halt_mask);
     this.detViz.setData(r.winding.det_curve, r.winding.det_abs, r.winding.Wint);
-    // Sub-labels
     this.specSub.innerHTML = `N = ${r.N}`;
     this.detSub.innerHTML = `\u03c6 \u2208 [0, 2\u03c0]`;
     this.stateSub.textContent = 'uniform';
-    // Reset flow to uniform
     this.flow.reset(r.H);
-    // Enable flow controls
     this.animBtn.disabled = false;
     this.resetBtn.disabled = false;
   }
