@@ -28,6 +28,35 @@ PROJECT_ROOT = Path(__file__).resolve().parents[3]
 CANON_DIR = PROJECT_ROOT / "LAW" / "CANON"
 SKILLS_DIR = PROJECT_ROOT / "CAPABILITY" / "SKILLS"
 CONTEXT_DIR = PROJECT_ROOT / "LAW" / "CONTEXT"
+CRITICIGNORE_PATH = PROJECT_ROOT / ".criticignore"
+
+
+def _load_criticignore() -> List[str]:
+    """Load ignore patterns from .criticignore at repo root."""
+    if not CRITICIGNORE_PATH.exists():
+        return []
+    return [
+        line.strip()
+        for line in CRITICIGNORE_PATH.read_text(encoding="utf-8").splitlines()
+        if line.strip() and not line.strip().startswith("#")
+    ]
+
+
+def _is_critic_ignored(relpath: str, patterns: List[str]) -> bool:
+    """Check if a repo-relative path matches any ignore pattern."""
+    from fnmatch import fnmatch
+    normalized = relpath.replace("\\", "/")
+    for pattern in patterns:
+        if pattern.endswith("/**"):
+            prefix = pattern[:-3]
+            if normalized.startswith(prefix):
+                return True
+        if fnmatch(normalized, pattern):
+            return True
+    return False
+
+
+CRITICIGNORE_PATTERNS = _load_criticignore()
 CHANGELOG_PATH = CANON_DIR / "CHANGELOG.md"
 
 # Allowed output roots per CONTRACT Rule 6
@@ -545,6 +574,8 @@ def check_cat_cas_manifesto() -> List[str]:
         if not _is_cat_cas_script(py_file):
             continue
         relpath = str(py_file.relative_to(PROJECT_ROOT))
+        if _is_critic_ignored(relpath, CRITICIGNORE_PATTERNS):
+            continue
         try:
             content = py_file.read_text(encoding='utf-8', errors='ignore')
         except Exception:

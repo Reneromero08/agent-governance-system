@@ -1,0 +1,8 @@
+# Critic ignore patterns (glob syntax, repo-relative)
+# Lines starting with # are comments
+
+# Exp 44: Phenom II Bare Metal Lab
+# Session scripts are diagnostic probes (raw MSR reads, hardware state checks)
+# not experiments producing publishable results. M-6 (MISSING STATISTICS) is
+# a false positive for hardware diagnostic tools.
+THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/**

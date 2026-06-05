@@ -4,6 +4,8 @@
 
 ## 2026-06-02
 
+- **Governance:** Added `.criticignore` system to `critic.py`. Supports glob patterns at repo root to exempt directories/files from CAT_CAS manifesto checks. Designed for diagnostic probe scripts that produce raw hardware reads rather than experimental results requiring statistical measures. Whitelisted `THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/**`.
+
 ### Changed
 - critic.py: M-6 exact-invariant exemption added. Files documenting deterministic topological invariants, analytic identities, or pass/fail binary exactness are now recognized as valid M-6 exemptions. Regex expanded with patterns: `exact.*invariant`, `topological integer invariant`, `deterministic.*(identity|computation|invariant|pass.fail|binary)`, `analytic (identity|transform)`, `no empirical variance`.
 
