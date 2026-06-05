@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CAT_CAS Oracle Visualizer</title>
+  <link rel="stylesheet" href="/static/css/base.css">
+  <link rel="stylesheet" href="/static/css/layout.css">
+  <link rel="stylesheet" href="/static/css/panels.css">
+  <link rel="stylesheet" href="/static/css/viz.css">
+</head>
+<body>
+  <header>
+    <h1>CAT_CAS Oracle Visualizer</h1>
+    <div class="status-bar">
+      <span id="health-pill" class="pill pill-pending">checking...</span>
+      <span class="phase-label">Phase 0 &mdash; Foundation</span>
+    </div>
+  </header>
+
+  <nav class="tab-bar">
+    <button class="tab active" data-tab="dim1">1D &mdash; Halting Oracle</button>
+    <button class="tab" data-tab="dim2" disabled>2D &mdash; Chern Insulator</button>
+    <button class="tab" data-tab="dim3" disabled>3D &mdash; Weyl Annihilation</button>
+    <button class="tab" data-tab="dim4" disabled>4D &mdash; Axion / Second Chern</button>
+    <button class="tab" data-tab="dim5" disabled>5D &mdash; Floquet Time Crystal</button>
+  </nav>
+
+  <main>
+    <section id="tab-dim1" class="tab-content active">
+      <div class="placeholder">
+        <h2>1D &mdash; Topological Halting Oracle (35.2)</h2>
+        <p>State graph, probability flow, det(H(&phi;)) trace, spectrum.</p>
+        <p class="muted">Phase 2 will populate this view.</p>
+      </div>
+    </section>
+
+    <section id="tab-dim2" class="tab-content">
+      <div class="placeholder">
+        <h2>2D &mdash; Non-Hermitian Chern Oracle (37)</h2>
+        <p>Lattice, (k<sub>x</sub>,k<sub>y</sub>) momentum torus, Bott index.</p>
+        <p class="muted">Phase 3 will populate this view.</p>
+      </div>
+    </section>
+
+    <section id="tab-dim3" class="tab-content">
+      <div class="placeholder">
+        <h2>3D &mdash; Weyl Annihilation Oracle (38)</h2>
+        <p>2D slice stack, C(k<sub>z</sub>) profile, Weyl node markers.</p>
+        <p class="muted">Phase 4 will populate this view.</p>
+      </div>
+    </section>
+
+    <section id="tab-dim4" class="tab-content">
+      <div class="placeholder">
+        <h2>4D &mdash; Topological Axion Oracle (39)</h2>
+        <p>(k<sub>z</sub>, k<sub>w</sub>) grid, C<sub>1</sub> map, second Chern number C<sub>2</sub>.</p>
+        <p class="muted">Phase 5 will populate this view.</p>
+      </div>
+    </section>
+
+    <section id="tab-dim5" class="tab-content">
+      <div class="placeholder">
+        <h2>5D &mdash; Floquet Time Crystal Oracle (40) &mdash; SOLVED</h2>
+        <p>Quasi-energy spectrum on unit circle, pi-mode count.</p>
+        <p class="muted">Phase 6 will populate this view.</p>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="/static/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+/* KPI tiles, control rows, sections for future use */
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.kpi {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 8px 10px;
+}
+
+.kpi-label {
+  color: var(--dim);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.kpi-value {
+  font-size: 16px;
+  margin-top: 2px;
+  font-variant-numeric: tabular-nums;
+  color: var(--txt);
+}
+
+.kpi-value.halt { color: var(--halt); }
+.kpi-value.loop { color: var(--loop); }
+.kpi-value.warn { color: var(--warn); }
+
+.control-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0;
+}
+
+.control-row label {
+  min-width: 90px;
+  color: var(--dim);
+  font-size: 11px;
+}
+
+.control-row input[type=range] { flex: 1; }
+
+.control-row .val {
+  min-width: 50px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--acc);
+  font-size: 11px;
+}
+
+.section {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: var(--panel);
+}
+
+.section h3 {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--dim);
+  margin-bottom: 8px;
+  font-weight: normal;
+}
