@@ -1,0 +1,62 @@
+AmdProcessorInitPeim xrefs for constructor path 0xFFF737A3
+
+Source artifact:
+- cpu_hack/bios_dump.bin.dump/5 8C8CE578-8A3D-4F1C-9935-896185C32DD3/0 AmdProcessorInitPeim/1 PE32 image section/body.bin
+- Image base: 0xFFF4008C
+
+Function and block:
+- Containing function entry: 0xFFF7371A
+- Constructor block: 0xFFF737A3-0xFFF73A90
+- Return: 0xFFF73A93
+
+Direct E8 call xrefs:
+- To 0xFFF7371A: none found.
+- To 0xFFF737A3: none found.
+
+Raw pointer / table xrefs:
+- 0xFFF8D11E contains little-endian pointer 0xFFF7371A.
+- Section: .dG3_DXE
+- Surrounding table bytes include other function pointers and adjacent CPU model strings:
+  - 0xFFF7329E
+  - 0xFFF732FD
+  - 0xFFF7332D
+  - 0xFFF735F5
+  - 0xFFF7332E
+  - 0xFFF7371A
+  - 0xFFF7339A
+  - 0xFFF73418
+  - 0xFFF7348D
+- Nearby strings include "AMD Opteron(tm) Processor 62", "AMD Opteron(tm) Processor 63", and "AMD Opteron(tm) Processor 42".
+
+Direct helper call xrefs inside function 0xFFF7371A:
+- 0xFFF7372B -> 0xFFF49AAD
+- 0xFFF73753 -> 0xFFF47AF3
+- 0xFFF73767 -> 0xFFF4794D
+- 0xFFF73782 -> 0xFFF4CF55
+- 0xFFF737C2 -> 0xFFF44E76
+- 0xFFF737D7 -> 0xFFF73559
+- 0xFFF7385F -> 0xFFF44E91
+- 0xFFF73870 -> 0xFFF44E91
+- 0xFFF7388D -> 0xFFF49445
+- 0xFFF738B3 -> 0xFFF49572
+- 0xFFF738D4 -> 0xFFF44E76
+- 0xFFF73906 -> 0xFFF44E76
+- 0xFFF73928 -> 0xFFF44E76
+- 0xFFF73940 -> 0xFFF44E91
+- 0xFFF7394F -> 0xFFF49445
+- 0xFFF73970 -> 0xFFF49572
+- 0xFFF739AD -> 0xFFF44E76
+- 0xFFF739D1 -> 0xFFF73559
+- 0xFFF73A6B -> 0xFFF44E91
+
+Helper xref notes:
+- helper_fff73559 direct call sites in PE32 body include 0xFFF73611, 0xFFF73641, 0xFFF737D7, 0xFFF739D1.
+- selector_helper_fff4cf55 direct call sites in PE32 body include 0xFFF4D1FC, 0xFFF4EDCE, 0xFFF73782.
+- platform_service_A_fff47af3 direct call sites include many locations; the constructor function calls it at 0xFFF73753.
+- platform_service_B_fff4794d direct call sites include many locations; the constructor function calls it at 0xFFF73767.
+
+Xref conclusion:
+- No direct call reaches 0xFFF7371A from ordinary E8 call encoding.
+- The function is referenced by a .dG3_DXE table pointer at 0xFFF8D11E.
+- The caller/dispatcher that consumes the .dG3_DXE table was not identified from direct xref scanning.
+- The next exact artifact needed to prove the upstream source is a decompiler or annotated xref export for the .dG3_DXE dispatch table consumer.

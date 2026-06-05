@@ -26,6 +26,9 @@ This index preserves the existing Exp44 phase layout. No files are reorganized i
 | `cpu_sing_2/PHASE2_ISING_MAP.md` | `cpu_sing_2/` | Phase 2 | Ising route map. | Yes | Supports Ising not observed. |
 | `cpu_sing_2/PHASE2_AGESA_P4_SAFE_FINAL_PACK.md` | `cpu_sing_2/` | Phase 2 firmware route | P4-safe AGESA analysis final pack. | Yes | Supports `AGESA_P4_SAFE_ROUTE_NOT_BYTE_READY`. |
 | `cpu_sing_2/PHASE2_DEEP_3_EXTERNAL_MEASURE.md` | `cpu_sing_2/` | Phase 2 external boundary | External measurement boundary report. | Yes | Supports `EXTERNAL_OBSERVABILITY_REQUIRED`. |
+| `cpu_sing_3/AGESA_GATE*.md` | `cpu_sing_3/` | Phase 3 AGESA recursive gate | CFG, table hunt, no-op workflow, injection, and patch-candidate gate artifacts. | Yes | Records recursive AGESA route blockers and exact next artifacts. |
+| `cpu_sing_3/AGESA_NEXT_*.md` | `cpu_sing_3/` | Phase 3 AGESA next gate | Constructor decompile/xrefs, table reopen, no-op rebuild, actionability, and final pack. | Yes | Records the next-gate progress: function `0xFFF7371A`, `.dG3_DXE` pointer `0xFFF8D11E`, and missing rebuild tool. |
+| `cpu_sing_3/AGESA_RECURSIVE_FINAL_PACK.md` | `cpu_sing_3/` | Phase 3 AGESA recursive gate | Recursive AGESA final pack. | Yes | Preserves route-alive / missing-artifact verdict. |
 | `gpt_research/*.md` | `gpt_research/` | Research pathway | Undervolt pathway research and evidence inventory. | Yes | Markdown research reports are small and reproducible. |
 | `gpt_research/UNDERVOLT_PATHWAY_1_BIOS_AGESA.md` | `gpt_research/` | Research pathway | BIOS/AGESA undervolt pathway evidence. | Yes | Supports rejected global AGESA patch route. |
 | `cpu_hack/PATCH_ANALYSIS.md` | `cpu_hack/` | Firmware lab | Patch analysis for AGESA/global branch/P4-safe route. | Yes | Primary firmware decision evidence. |
@@ -34,6 +37,8 @@ This index preserves the existing Exp44 phase layout. No files are reorganized i
 | `cpu_hack/pstate_targeted_disasm.txt` | `cpu_hack/` | Firmware lab | Targeted disassembly text. | Yes | Small text disassembly evidence. |
 | `cpu_hack/check_ics.ps1` | `cpu_hack/` | Firmware/board lab | Local board/clock inspection helper. | Yes | Source script, not generated artifact. |
 | `cpu_hack/check_ics2.ps1` | `cpu_hack/` | Firmware/board lab | Second local board/clock inspection helper. | Yes | Source script, not generated artifact. |
+| `cpu_hack/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt` | `cpu_hack/` | Firmware lab text evidence | Annotated local decompile/pseudocode for the function containing `0xFFF737A3`. | Yes | Small text evidence proving function entry and constructor base flow. |
+| `cpu_hack/AmdProcessorInitPeim_fff737a3_xrefs.txt` | `cpu_hack/` | Firmware lab text evidence | Xref export for the constructor function and dispatch pointer. | Yes | Small text evidence proving no direct call xrefs and `.dG3_DXE` pointer reference. |
 | `cpu_hack/bios_dump.bin` | `cpu_hack/` | Firmware lab raw artifact | Raw BIOS dump image. | No | Binary/heavy/sensitive artifact; preserve locally and describe through reports. |
 | `cpu_hack/bios_dump.bin.guids.csv` | `cpu_hack/` | Firmware lab generated artifact | GUID export from BIOS dump tooling. | No | Generated CSV; can be regenerated from local dump. |
 | `cpu_hack/bios_dump.bin.dump/` | `cpu_hack/` | Firmware lab generated tree | Extracted BIOS dump tree. | No | Large generated extraction tree. |

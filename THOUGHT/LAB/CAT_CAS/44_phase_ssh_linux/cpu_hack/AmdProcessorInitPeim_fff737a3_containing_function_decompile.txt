@@ -1,0 +1,130 @@
+AmdProcessorInitPeim containing function for constructor block 0xFFF737A3
+
+Source artifact:
+- cpu_hack/bios_dump.bin.dump/5 8C8CE578-8A3D-4F1C-9935-896185C32DD3/0 AmdProcessorInitPeim/1 PE32 image section/body.bin
+- PE32 body SHA-256: BF92A1321B98908E7D74299A6C1E629EC3583599F164DEC6E774BFF040FBDF2A
+- Image base: 0xFFF4008C
+
+Containing function:
+- Entry: 0xFFF7371A
+- Constructor block of interest: 0xFFF737A3-0xFFF73A90
+- Epilogue/return: 0xFFF73A8D-0xFFF73A93
+- Section: .tG3_DXE
+- Function pointer table reference found in .dG3_DXE at VA 0xFFF8D11E.
+
+Stack frame:
+- push ebp / mov ebp, esp / sub esp, 0x38
+- Preserved registers: ebx, esi, edi
+- [ebp+0x0C] is the caller-supplied constructor/table context pointer.
+- [ebp+0x10] is the wrapper/context pointer used for MSR and service calls.
+- [ebp-0x08] is the selected per-P-state structure base pointer.
+- [ebp-0x20] receives dword [context + 0x00], used as an entry/search count.
+- [ebp+0x0C] is reused as loop index and later as current MSR number.
+- [ebp-0x1C] is the current record byte offset, incremented by 0x18.
+- [ebp-0x20] is reused as current P-state index in the multi-entry constructor path.
+
+Annotated disassembly / pseudocode:
+
+0xFFF7371A:
+    prologue();
+    ebx = arg_10;
+    edi = arg_0C;                       // constructor/table context
+    count_or_search_count = *(uint32_t *)(edi + 0x00);
+    local_0C = 0;
+
+    // Default selected structure base.
+    esi = edi + 0x08;
+    local_selected_base = esi;           // [ebp-8] = edi + 8
+
+    // Platform/service discovery calls. These feed locals used later for selector matching.
+    setup_helper_fff49aad(ebx, &local_28);
+    helper_fff47af3(ebx, &local_24, &local_2C, &local_30, &local_14);
+    helper_fff4794d(ebx, local_24, local_2C, &local_0C, &local_14);
+
+    // Optional search over substructures. This is the only code before 0xFFF737A3
+    // that can change [ebp-8].
+    if (count_or_search_count > 0) {
+        uint32_t i = 0;
+        do {
+            helper_fff4cf55(&local_selected_base, edi, i, ebx);
+            uint8_t probe = *(uint8_t *)(local_selected_base + 0x08);
+            if (probe == local_24) {
+                break;
+            }
+            i++;
+        } while (i < count_or_search_count);
+    }
+
+0xFFF737A3:
+    ecx = local_selected_base;
+    // esi remains the default base edi+8 from above. Its +4 byte selects
+    // the single/current path versus the multi-entry 0x18-stride path.
+    if (*(uint8_t *)(esi + 0x04) != 0) {
+        uint8_t pstate = *(uint8_t *)(ecx + 0x0F);
+        uint32_t msr = pstate - 0x3FFEFF9C;   // maps to 0xC0010064 + pstate index
+        uint64_t value = rdmsr_wrapper(msr, ebx);
+
+        helper_fff73559(*(uint32_t *)(ecx + 0x14), &local_14, &local_18, &local_10);
+        value = update_low_fields_from_helper(value, local_18, local_10);
+        value = set_low_byte_from_context(value, *(uint8_t *)(ecx + 0x1C));
+        value = set_two_bit_field(value, *(uint32_t *)(ecx + 0x20) & 3);
+        value |= 0x8000000000000000;
+
+        wrmsr_wrapper(msr, value, ebx);
+        wrmsr_wrapper(0xC0010065 + pstate, value, ebx);
+        transition_wait_sequence();
+        return 0;
+    }
+
+    // Multi-entry constructor path.
+    uint8_t max_pstate = *(uint8_t *)(ecx + 0x0B);
+    uint8_t pstate = *(uint8_t *)(ecx + 0x0F);
+    if (pstate > max_pstate) {
+        return 0;
+    }
+
+    uint32_t msr = pstate - 0x3FFEFF9C;
+    uint32_t record_offset = pstate * 0x18;
+
+    do {
+        uint8_t *record = local_selected_base + record_offset;
+        uint64_t value = rdmsr_wrapper(msr, ebx);
+
+        if (*(uint32_t *)(record + 0x10) == 1) {
+            uint32_t status = helper_fff73559(*(uint32_t *)(record + 0x14),
+                                              &local_14,
+                                              &local_18,
+                                              &local_10);
+            if (status != 5) {
+                value = update_low_fields_from_helper(value, local_18, local_10);
+            }
+
+            value = set_low_byte_from_record(value, *(uint8_t *)(record + 0x1C));
+            value = set_two_bit_field(value, *(uint32_t *)(record + 0x20) & 3);
+            value |= 0x8000000000000000;
+        } else {
+            value &= ~0x8000000000000000;
+        }
+
+        wrmsr_wrapper(msr, value, ebx);
+
+        record_offset += 0x18;
+        pstate++;
+        msr++;
+    } while (pstate <= *(uint8_t *)(local_selected_base + 0x0B));
+
+    return 0;
+
+Field provenance:
+- +0x0B: max P-state index from selected_base.
+- +0x0F: initial/current P-state index from selected_base.
+- +0x10: per-record enable flag in selected_base + pstate*0x18.
+- +0x14: per-record encoded frequency input passed to helper_fff73559.
+- +0x1C: per-record byte field inserted into the constructed MSR low dword.
+- +0x20: per-record dword masked with 3, shifted into bits 8-9 of the constructed high dword.
+
+Conclusion:
+- 0xFFF737A3 is not a function entry. It is a block inside function 0xFFF7371A.
+- The constructor consumes a caller-supplied/runtime structure selected through arg_0C and helper_fff4cf55.
+- The static backing source for arg_0C is not proven by this local disassembly alone.
+- A function pointer to 0xFFF7371A exists in .dG3_DXE at 0xFFF8D11E, adjacent to CPU model strings and other function pointers, indicating dispatch-table selection rather than direct call.
