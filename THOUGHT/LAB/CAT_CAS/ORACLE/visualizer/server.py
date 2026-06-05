@@ -49,9 +49,11 @@ async def health():
 from engine.api_routes_1d import router as dim1_router  # noqa: E402
 from engine.api_routes_2d import router as dim2_router  # noqa: E402
 from engine.api_routes_3d import router as dim3_router  # noqa: E402
+from engine.api_routes_4d import router as dim4_router  # noqa: E402
 app.include_router(dim1_router)
 app.include_router(dim2_router)
 app.include_router(dim3_router)
+app.include_router(dim4_router)
 
 
 # ---- Static frontend -----------------------------------------------------

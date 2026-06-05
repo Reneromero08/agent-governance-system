@@ -101,14 +101,32 @@ so the run completes and reports the topology as numerically collapsed.
 - [x] Live HTTP: /api/dim3/run?L=8&n_kz=24&gamma_halt=0 returns verdict=LOOPS
 - [x] Live HTTP: /api/dim3/run?L=8&n_kz=24&gamma_halt=15 returns verdict=HALTS
 
-### 1D: 4D engine (39)
-- [ ] Write `engine/oracle_4d.py`:
-  - [ ] `build_slice(L, kz, kw, t1, tz, tw, m0, loss, gamma_halt) -> H`
-  - [ ] `c1_grid(L, n_k, gamma_halt) -> [[C1 at (kz,kw)]]`
-  - [ ] `second_chern(c1_grid) -> C2`
-  - [ ] `run(L, n_k, gamma_halt) -> {c1_grid, C2, verdict}`
-  - [ ] Import from `39_4d_axion_oracle.py`
-- [ ] Write `engine/api_routes_4d.py` — `/api/dim4/run?L=...&n_k=...&gamma_halt=...`
+### 1D: 4D engine (39) — DONE (2026-06-04)
+- [x] Write `engine/oracle_4d.py`:
+  - [x] `build_slice(L, kz, kw, t1, tz, tw, m0, loss, gamma_halt) -> {H, N, N_sp, M_kw, ...}`
+  - [x] `c1_grid(L, n_k, gamma_halt, ...) -> {kz, kw, C1_grid [n_k][n_k], C1_profile, C2, nonzero, total}`
+  - [x] `second_chern(c1_grid) -> C2`
+  - [x] `gamma_sweep(L, n_k, gammas, ...) -> {results: [{gamma, C2, nonzero, verdict, C1_profile}]}`
+  - [x] `run(L, n_k, gamma_halt, ...) -> {verdict, grid, ...}`
+  - [x] Import from `39_4d_axion_oracle.py` (build_4d_slice, spectral_projector, bott_index_spinor, compute_second_chern)
+- [x] Write `engine/api_routes_4d.py` — `/api/dim4/slice`, `/api/dim4/run`, `/api/dim4/gamma_sweep`
+
+**Physics note**: 4D Dirac monopoles are robust — single-site EP cannot cleanly
+annihilate them.  The source itself documents this in `gamma_at_topological`
+and `uniform_gamma_annihilation` expansions.  L=4 is too small for robust
+quantization; L=6 is the working default.  gamma_sweep may show non-monotonic
+C2 vs gamma_halt — this is real physics, not a bug.
+
+**Verify**:
+- [x] `python -m tests.smoke` exits 0 (1D + 2D + 3D + 4D)
+- [x] L=6, n_k=4, gamma=0 -> C2=-2  nonzero=16/16  LOOPS
+- [x] C1_grid shape: 4x4, C1_profile length = 16
+- [x] N = 4*L*L (4-component spinor on LxL spatial lattice)
+- [x] M(kz, kw) = m0 - tz*cos(kz) - tw*cos(kw): corner checks pass
+- [x] Halt site Im(H) = -(loss + gamma_halt) = -10.05 at gamma=10
+- [x] gamma_sweep runs and returns structured output
+- [x] Live HTTP: /api/dim4/run?L=6&n_k=4&gamma_halt=0 returns C2=-2, verdict=LOOPS
+- [x] Live HTTP: /api/dim4/run?L=4&n_k=4&gamma_halt=0 returns C2=0 (lattice too small)
 
 ### 1E: 5D engine (40)
 - [ ] Write `engine/oracle_5d.py`:

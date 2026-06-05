@@ -14,7 +14,7 @@ VISUALIZER_DIR = os.path.dirname(HERE)
 if VISUALIZER_DIR not in sys.path:
     sys.path.insert(0, VISUALIZER_DIR)
 
-from engine import oracle_1d, oracle_2d, oracle_3d
+from engine import oracle_1d, oracle_2d, oracle_3d, oracle_4d
 
 
 def test_1d_all_machines():
@@ -205,6 +205,79 @@ def test_3d_weyl_node_count():
     print(f"  Weyl node count: 2 when |m0/tz|<1, 0 when m0>tz  OK")
 
 
+# ---- 4D (Phase 1D) -----------------------------------------------------
+
+def test_4d_dim():
+    """N = 4 * L * L (4-component spinor on LxL spatial lattice)."""
+    for L in (4, 6):
+        r = oracle_4d.run(L=L, n_k=4, gamma_halt=0.0)
+        assert r["N"] == 4 * L * L, f"L={L}: N={r['N']}, expected {4*L*L}"
+    print(f"  N = 4*L*L for L in 4,6  OK")
+
+
+def test_4d_c2_quantized():
+    """L=6, n_k=4, gamma=0 -> C2 is a nonzero integer (LOOPS).
+
+    This is the source's scale-up: 4D Dirac monopoles are robust at L>=6.
+    """
+    r = oracle_4d.run(L=6, n_k=4, gamma_halt=0.0)
+    assert r["L"] == 6
+    assert r["N"] == 144
+    assert r["n_k"] == 4
+    assert r["grid"]["C2"] != 0, f"expected nonzero C2, got {r['grid']['C2']}"
+    assert r["verdict"] == "LOOPS (4D Dirac monopoles protected)"
+    print(f"  L=6  n_k=4 loop:  C2={r['grid']['C2']:+d}  nonzero={r['grid']['nonzero']}/{r['grid']['total']}  LOOPS  OK")
+
+
+def test_4d_c1_grid_shape():
+    """C1_grid is [n_k][n_k] integers, total = n_k*n_k."""
+    g = oracle_4d.c1_grid(L=4, n_k=4, gamma_halt=0.0)
+    assert len(g["C1_grid"]) == 4
+    for row in g["C1_grid"]:
+        assert len(row) == 4
+    assert g["total"] == 16
+    assert len(g["C1_profile"]) == 16
+    print(f"  C1_grid shape: 4x4, C1_profile len=16  OK")
+
+
+def test_4d_gamma_sweep():
+    """4D gamma_sweep runs without error and produces structured output."""
+    gs = oracle_4d.gamma_sweep(L=4, n_k=4, gammas=[0.0, 5.0, 15.0])
+    assert len(gs["results"]) == 3
+    for r in gs["results"]:
+        assert "C2" in r
+        assert "verdict" in r
+        assert r["verdict"] in (
+            "LOOPS (4D protected)",
+            "HALTS (monopoles annihilated)",
+        )
+    print(f"  L=4  gamma_sweep: 3 gammas, all complete  OK")
+
+
+def test_4d_mass_formula():
+    """M(kz, kw) = m0 - tz*cos(kz) - tw*cos(kw).
+
+    At kz=0, kw=0:  M = m0 - tz - tw = 1 - 1 - 1 = -1.
+    At kz=pi, kw=pi:  M = m0 - tz*(-1) - tw*(-1) = 1 + 1 + 1 = 3.
+    """
+    s = oracle_4d.build_slice(L=4, kz=0.0, kw=0.0)
+    assert abs(s["M_kw"] - (-1.0)) < 1e-6
+    s = oracle_4d.build_slice(L=4, kz=float(__import__('numpy').pi),
+                              kw=float(__import__('numpy').pi))
+    assert abs(s["M_kw"] - 3.0) < 1e-6
+    print(f"  M(kz,kw) = m0 - tz*cos(kz) - tw*cos(kw): corner checks OK")
+
+
+def test_4d_halt_site_imag():
+    """At the halt site, Im(H_site_site) = -(loss + gamma_halt)."""
+    r = oracle_4d.run(L=4, n_k=2, gamma_halt=10.0)
+    s = oracle_4d.build_slice(L=4, kz=0.0, kw=0.0, gamma_halt=10.0)
+    H_site = s["H"][s["halt_site"]][s["halt_site"]]
+    expected_im = -(0.05 + 10.0)
+    assert abs(H_site["im"] - expected_im) < 1e-3
+    print(f"  L=4  halt site: Im(H)={H_site['im']:.4f}  (expected {expected_im})  OK")
+
+
 if __name__ == "__main__":
     print("=" * 60)
     print("  SMOKE TESTS: 1D engine (Phase 1A)")
@@ -231,5 +304,15 @@ if __name__ == "__main__":
     test_3d_gamma_sweep()
     test_3d_slice_mass()
     test_3d_weyl_node_count()
+    print()
+    print("=" * 60)
+    print("  SMOKE TESTS: 4D engine (Phase 1D)")
+    print("=" * 60)
+    test_4d_dim()
+    test_4d_c2_quantized()
+    test_4d_c1_grid_shape()
+    test_4d_gamma_sweep()
+    test_4d_mass_formula()
+    test_4d_halt_site_imag()
     print("=" * 60)
     print("  ALL PASSED")
