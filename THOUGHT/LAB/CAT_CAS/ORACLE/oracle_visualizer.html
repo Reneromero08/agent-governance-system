@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CAT_CAS Oracle — Phase Torus Visualizer</title>
+<style>
+  :root{
+    --bg:#0a0d12; --panel:#11151c; --line:#1e2631; --txt:#cfd6e0;
+    --dim:#6b7686; --acc:#4fd1c5; --gold:#f5c542; --red:#e05a5a; --green:#5ae08a;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--txt);
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;overflow:hidden}
+  #app{display:grid;grid-template-columns:1fr 340px;height:100%}
+  #stage{position:relative;background:radial-gradient(ellipse at center,#0e131b 0%,#07090d 100%)}
+  canvas{display:block;width:100%;height:100%;cursor:grab}
+  canvas:active{cursor:grabbing}
+  #hud{position:absolute;top:10px;left:12px;pointer-events:none;opacity:.85}
+  #hud div{margin:2px 0}
+  #legend{position:absolute;bottom:12px;left:12px;display:flex;align-items:center;gap:8px;
+    background:rgba(10,13,18,.7);padding:6px 10px;border:1px solid var(--line);border-radius:4px}
+  #legend .bar{width:180px;height:8px;background:linear-gradient(90deg,#5ae08a,#4fd1c5,#c8a84f,#e05a5a,#6b1f1f);border-radius:2px}
+  #panel{background:var(--panel);border-left:1px solid var(--line);padding:14px;overflow:auto}
+  h1{font-size:13px;margin:0 0 4px;letter-spacing:.08em;color:var(--acc)}
+  .sub{color:var(--dim);font-size:11px;margin-bottom:12px}
+  .grp{border:1px solid var(--line);border-radius:4px;padding:10px;margin-bottom:10px;background:#0d1117}
+  .row{display:flex;justify-content:space-between;align-items:center;margin:6px 0;gap:8px}
+  label{color:var(--dim);font-size:11px;min-width:60px}
+  input[type=range]{flex:1;accent-color:var(--acc)}
+  select,button{background:#0d1117;color:var(--txt);border:1px solid var(--line);padding:5px 8px;
+    border-radius:3px;font-family:inherit;font-size:11px;cursor:pointer}
+  button:hover{border-color:var(--acc)}
+  button.pri{background:#14322e;border-color:#1f5a52;color:var(--acc)}
+  .val{color:var(--acc);font-variant-numeric:tabular-nums;min-width:70px;text-align:right}
+  .kpi{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .kpi div{background:#0d1117;border:1px solid var(--line);padding:6px;border-radius:3px}
+  .kpi .l{color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.06em}
+  .kpi .v{font-size:14px;color:var(--txt);margin-top:2px}
+  #residualCv{width:100%;height:140px;background:#0a0d12;border:1px solid var(--line);border-radius:3px;display:block}
+  .btnrow{display:flex;gap:6px;flex-wrap:wrap}
+  .btnrow button{flex:1}
+  .tag{display:inline-block;padding:1px 6px;border:1px solid var(--line);border-radius:2px;
+    color:var(--dim);font-size:10px;margin-right:4px}
+  .tag.on{color:var(--acc);border-color:#1f5a52}
+  #zeroList{max-height:90px;overflow:auto;font-size:10px;color:var(--dim);margin-top:6px}
+  #zeroList span{cursor:pointer;padding:1px 4px;border-radius:2px}
+  #zeroList span:hover{background:#1a2029;color:var(--acc)}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="stage">
+    <canvas id="cv"></canvas>
+    <div id="hud">
+      <div style="color:var(--acc);font-weight:bold">CAT_CAS · PHASE TORUS</div>
+      <div style="color:var(--dim)">state-space T² = (θ_p, θ_q)  ·  η_N(½+it) residual field</div>
+    </div>
+    <div id="legend">
+      <span style="color:var(--dim)">|η_N| low (well)</span>
+      <div class="bar"></div>
+      <span style="color:var(--dim)">high (peak)</span>
+    </div>
+  </div>
+  <div id="panel">
+    <h1>ORACLE ENGINE</h1>
+    <div class="sub">θ_p(t) = t·log(p) mod 2π · η_N(½+it) = Σ (-1)ⁿ⁻¹ n^(-½) e^(-it log n)</div>
+
+    <div class="grp">
+      <div class="row">
+        <label>Prime pair</label>
+        <select id="pairSel">
+          <option value="2,3">(2,3)</option>
+          <option value="2,5" selected>(2,5)</option>
+          <option value="3,5">(3,5)</option>
+          <option value="5,7">(5,7)</option>
+          <option value="7,11">(7,11)</option>
+          <option value="11,13">(11,13)</option>
+          <option value="13,17">(13,17)</option>
+        </select>
+      </div>
+      <div class="row">
+        <label>N (terms)</label>
+        <input type="range" id="nSl" min="3" max="120" value="30">
+        <span class="val" id="nVal">30</span>
+      </div>
+      <div class="row">
+        <label>t</label>
+        <input type="range" id="tSl" min="0" max="200" step="0.01" value="14.13">
+        <span class="val" id="tVal">14.13</span>
+      </div>
+      <div class="row">
+        <label>speed</label>
+        <input type="range" id="spdSl" min="0" max="5" step="0.05" value="0.6">
+        <span class="val" id="spdVal">0.60</span>
+      </div>
+    </div>
+
+    <div class="grp btnrow">
+      <button id="playBtn" class="pri">▶ PLAY</button>
+      <button id="snapBtn">SNAP ZERO</button>
+      <button id="resetBtn">RESET VIEW</button>
+    </div>
+
+    <div class="grp">
+      <div style="color:var(--dim);font-size:10px;letter-spacing:.08em;margin-bottom:6px">RESIDUAL η_N(½+it) ∈ ℂ</div>
+      <canvas id="residualCv"></canvas>
+      <div class="kpi" style="margin-top:8px">
+        <div><div class="l">|η_N|</div><div class="v" id="absVal">—</div></div>
+        <div><div class="l">cancel</div><div class="v" id="cancelVal">—</div></div>
+        <div><div class="l">arg</div><div class="v" id="argVal">—</div></div>
+        <div><div class="l">θ_p, θ_q</div><div class="v" id="phaseVal">—</div></div>
+      </div>
+    </div>
+
+    <div class="grp">
+      <div style="color:var(--dim);font-size:10px;letter-spacing:.08em">KNOWN ZERO ORDINATES → T²</div>
+      <div id="zeroList"></div>
+    </div>
+
+    <div class="grp" style="font-size:10px;color:var(--dim);line-height:1.5">
+      <span class="tag on">exact</span>θ_p, η_N finite sum, torus embedding<br>
+      <span class="tag">approx</span>scalar field from trajectory sampling over t∈[0,4000]
+    </div>
+  </div>
+</div>
+
+<script>
+(()=>{
+'use strict';
+
+// ====== Constants ======
+const ZEROS = [14.134725,21.022040,25.010858,30.424876,32.935062,37.586178,40.918719,43.327073,48.005151,49.773832,52.970321,56.446248,59.347044,60.831779,65.112544];
+const TWO_PI = Math.PI*2;
+
+// ====== State ======
+const state = {
+  pair:[2,5], N:30, t:14.134725, playing:false, speed:0.6,
+  rotX:-0.35, rotY:0.6, zoom:1.0,
+  dragging:false, lastX:0, lastY:0,
+  field:null, fieldReady:false,
+  traj:[], trajWindow:40
+};
+
+// ====== Math ======
+function phase(p,t){ return ((t*Math.log(p))%TWO_PI + TWO_PI)%TWO_PI; }
+
+function etaN(t,N){
+  let re=0,im=0;
+  for(let n=1;n<=N;n++){
+    const sgn = (n&1)?1:-1;
+    const mag = 1/Math.sqrt(n);
+    const ph = -t*Math.log(n);
+    re += sgn*mag*Math.cos(ph);
+    im += sgn*mag*Math.sin(ph);
+  }
+  return {re,im,abs:Math.hypot(re,im)};
+}
+
+function cancelScore(absEta){
+  // scale so typical |eta|~0.5 gives ~0.8, |eta|~2 gives ~0.2
+  const c = 2.0;
+  return 1/(1 + c*absEta*absEta);
+}
+
+function torusPoint(u,v,R=2.0,r=0.72){
+  const cv=Math.cos(v),sv=Math.sin(v),cu=Math.cos(u),su=Math.sin(u);
+  return { x:(R+r*cv)*cu, y:(R+r*cv)*su, z:r*sv, u, v };
+}
+
+// ====== Color ======
+function cancelColor(score,alpha=1){
+  // score in [0,1]: 1 = well (bright green/cyan), 0 = peak (dark red)
+  // multi-stop
+  const stops=[
+    [0.0, [60,15,20]],
+    [0.25,[200,70,60]],
+    [0.5, [200,160,75]],
+    [0.75,[80,200,175]],
+    [1.0, [110,230,150]]
+  ];
+  let i=0;
+  while(i<stops.length-2 && stops[i+1][0]<score) i++;
+  const [t0,c0]=stops[i],[t1,c1]=stops[i+1];
+  const k=(score-t0)/(t1-t0);
+  const r=c0[0]+(c1[0]-c0[0])*k|0;
+  const g=c0[1]+(c1[1]-c0[1])*k|0;
+  const b=c0[2]+(c1[2]-c0[2])*k|0;
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+// ====== Field precomputation ======
+// Sample trajectory for large T, bin |eta| into (u,v) grid
+function buildField(){
+  const [p,q]=state.pair, N=state.N;
+  const GU=72, GV=48;
+  const sum=new Float64Array(GU*GV), cnt=new Float32Array(GU*GV);
+  const TMAX=4000, DT=0.05;
+  const steps=TMAX/DT|0;
+  // precompute log(n) and signs
+  const logs=new Float64Array(N+1), mags=new Float64Array(N+1), sgns=new Int8Array(N+1);
+  for(let n=1;n<=N;n++){ logs[n]=Math.log(n); mags[n]=1/Math.sqrt(n); sgns[n]=(n&1)?1:-1; }
+  const lp=Math.log(p), lq=Math.log(q);
+  for(let s=0;s<steps;s++){
+    const t=s*DT;
+    let re=0,im=0;
+    for(let n=1;n<=N;n++){
+      const ph=-t*logs[n];
+      re += sgns[n]*mags[n]*Math.cos(ph);
+      im += sgns[n]*mags[n]*Math.sin(ph);
+    }
+    const absE=Math.hypot(re,im);
+    const u=((t*lp)%TWO_PI+TWO_PI)%TWO_PI;
+    const v=((t*lq)%TWO_PI+TWO_PI)%TWO_PI;
+    const iu=(u/TWO_PI*GU)|0, iv=(v/TWO_PI*GV)|0;
+    const idx = (iv%GV)*GU + (iu%GU);
+    sum[idx]+=absE; cnt[idx]++;
+  }
+  // convert to score, handle empty cells by neighbor fill later
+  const grid=new Float32Array(GU*GV);
+  let gmin=1e9,gmax=-1e9;
+  for(let i=0;i<GU*GV;i++){
+    if(cnt[i]>0){
+      const avg=sum[i]/cnt[i];
+      grid[i]=cancelScore(avg);
+      if(grid[i]<gmin)gmin=grid[i];
+      if(grid[i]>gmax)gmax=grid[i];
+    } else grid[i]=NaN;
+  }
+  // fill NaNs by iterative nearest
+  for(let pass=0;pass<20;pass++){
+    let any=false;
+    for(let iv=0;iv<GV;iv++){
+      for(let iu=0;iu<GU;iu++){
+        const idx=iv*GU+iu;
+        if(!isNaN(grid[idx]))continue;
+        let s=0,c=0;
+        for(let dv=-1;dv<=1;dv++)for(let du=-1;du<=1;du++){
+          if(!du&&!dv)continue;
+          const nu=(iu+du+GU)%GU, nv=(iv+dv+GV)%GV;
+          const v=grid[nv*GU+nu];
+          if(!isNaN(v)){s+=v;c++;}
+        }
+        if(c>0){grid[idx]=s/c;any=true;}
+      }
+    }
+    if(!any)break;
+  }
+  state.field={grid,GU,GV};
+  state.fieldReady=true;
+}
+
+// ====== Canvas setup ======
+const cv=document.getElementById('cv');
+const ctx=cv.getContext('2d');
+const rcv=document.getElementById('residualCv');
+const rctx=rcv.getContext('2d');
+
+function resize(){
+  const dpr=window.devicePixelRatio||1;
+  cv.width=cv.clientWidth*dpr; cv.height=cv.clientHeight*dpr;
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  rcv.width=rcv.clientWidth*dpr; rcv.height=rcv.clientHeight*dpr;
+  rctx.setTransform(dpr,0,0,dpr,0,0);
+}
+window.addEventListener('resize',resize);
+
+// ====== Projection ======
+function project(p3){
+  // rotate around Y then X
+  const cy=Math.cos(state.rotY),sy=Math.sin(state.rotY);
+  const cx=Math.cos(state.rotX),sx=Math.sin(state.rotX);
+  let x=p3.x,y=p3.y,z=p3.z;
+  // Y rot
+  let x1= x*cy + z*sy;
+  let z1=-x*sy + z*cy;
+  let y1=y;
+  // X rot
+  let y2= y1*cx - z1*sx;
+  let z2= y1*sx + z1*cx;
+  let x2=x1;
+  // orthographic
+  const scale=Math.min(cv.clientWidth,cv.clientHeight)*0.22*state.zoom;
+  return { x:cv.clientWidth/2 + x2*scale, y:cv.clientHeight/2 - y2*scale, z:z2 };
+}
+
+// ====== Build mesh ======
+function buildMesh(){
+  const NU=64, NV=36;
+  const verts=[];
+  for(let j=0;j<=NV;j++){
+    for(let i=0;i<=NU;i++){
+      const u=(i/NU)*TWO_PI, v=(j/NV)*TWO_PI;
+      verts.push(torusPoint(u,v));
+    }
+  }
+  const tris=[];
+  for(let j=0;j<NV;j++){
+    for(let i=0;i<NU;i++){
+      const a=j*(NU+1)+i, b=a+1, c=a+(NU+1), d=c+1;
+      tris.push([a,b,c]); tris.push([b,d,c]);
+    }
+  }
+  return {verts,tris,NU,NV};
+}
+const MESH=buildMesh();
+
+function triColor(u,v){
+  if(!state.fieldReady) return cancelColor(0.5);
+  const {grid,GU,GV}=state.field;
+  const iu=((u/TWO_PI)*GU|0)%GU;
+  const iv=((v/TWO_PI)*GV|0)%GV;
+  const s=grid[iv*GU+iu];
+  return cancelColor(isNaN(s)?0.5:s);
+}
+
+// ====== Render ======
+function render(){
+  const W=cv.clientWidth,H=cv.clientHeight;
+  ctx.clearRect(0,0,W,H);
+
+  // subtle grid
+  ctx.strokeStyle='rgba(40,55,75,0.3)';
+  ctx.lineWidth=1;
+  ctx.beginPath();
+  for(let x=0;x<W;x+=40){ctx.moveTo(x,0);ctx.lineTo(x,H);}
+  for(let y=0;y<H;y+=40){ctx.moveTo(0,y);ctx.lineTo(W,y);}
+  ctx.stroke();
+
+  // compute projected verts
+  const pv=new Array(MESH.verts.length);
+  for(let i=0;i<MESH.verts.length;i++) pv[i]=project(MESH.verts[i]);
+
+  // build triangle render list with depth + normal (back-face cull)
+  const rlist=[];
+  for(const [a,b,c] of MESH.tris){
+    const A=MESH.verts[a],B=MESH.verts[b],C=MESH.verts[c];
+    // face normal in world
+    const ux=B.x-A.x,uy=B.y-A.y,uz=B.z-A.z;
+    const vx=C.x-A.x,vy=C.y-A.y,vz=C.z-A.z;
+    const nx=uy*vz-uz*vy, ny=uz*vx-ux*vz, nz=ux*vy-uy*vx;
+    // view direction after rotation = (0,0,1) in view space -> inverse rotate to world
+    // simpler: compute normal in view space
+    const pA=pv[a],pB=pv[b],pC=pv[c];
+    const u2x=pB.x-pA.x,u2y=pB.y-pA.y;
+    const v2x=pC.x-pA.x,v2y=pC.y-pA.y;
+    const nzv=u2x*v2y-u2y*v2x;
+    if(nzv>0) continue; // back face (screen CCW when facing away)
+    // center
+    const cu=(A.u+B.u+C.u)/3, cvv=(A.v+B.v+C.v)/3;
+    const depth=(pA.z+pB.z+pC.z)/3;
+    rlist.push({a:pA,b:pB,c:pC,depth,u:cu,v:cvv,nx,ny,nz,
+      nlen:Math.hypot(nx,ny,nz)});
+  }
+  rlist.sort((x,y)=>x.depth-y.depth); // far first
+
+  // draw triangles
+  for(const t of rlist){
+    // lighting: dot with view-from-front
+    // rotate normal to view space (same rotation as points)
+    const cy=Math.cos(state.rotY),sy=Math.sin(state.rotY);
+    const cx=Math.cos(state.rotX),sx=Math.sin(state.rotX);
+    let nX=t.nx/t.nlen, nY=t.ny/t.nlen, nZ=t.nz/t.nlen;
+    let x1=nX*cy+nZ*sy, z1=-nX*sy+nZ*cy, y1=nY;
+    let y2=y1*cx-z1*sx, z2=y1*sx+z1*cx;
+    // light from +z view
+    const li=Math.max(0.25, 0.35 + 0.65*Math.max(0,z2));
+    const base=triColor(t.u,t.v);
+    ctx.beginPath();
+    ctx.moveTo(t.a.x,t.a.y); ctx.lineTo(t.b.x,t.b.y); ctx.lineTo(t.c.x,t.c.y);
+    ctx.closePath();
+    // parse base color and apply lighting
+    const m=/rgba\((\d+),(\d+),(\d+),([\d.]+)\)/.exec(base);
+    if(m){
+      const r=Math.min(255,(+m[1]*li)|0);
+      const g=Math.min(255,(+m[2]*li)|0);
+      const b=Math.min(255,(+m[3]*li)|0);
+      ctx.fillStyle=`rgba(${r},${g},${b},${m[4]})`;
+    } else ctx.fillStyle=base;
+    ctx.fill();
+    ctx.strokeStyle='rgba(0,0,0,0.18)';
+    ctx.lineWidth=0.5;
+    ctx.stroke();
+  }
+
+  // latitude/longitude reference lines
+  ctx.strokeStyle='rgba(79,209,197,0.15)';
+  ctx.lineWidth=0.8;
+  for(let k=0;k<6;k++){
+    const v=(k/6)*TWO_PI;
+    ctx.beginPath();
+    for(let i=0;i<=80;i++){
+      const u=(i/80)*TWO_PI;
+      const p=project(torusPoint(u,v));
+      if(i===0)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y);
+    }
+    ctx.stroke();
+  }
+  for(let k=0;k<8;k++){
+    const u=(k/8)*TWO_PI;
+    ctx.beginPath();
+    for(let i=0;i<=40;i++){
+      const v=(i/40)*TWO_PI;
+      const p=project(torusPoint(u,v));
+      if(i===0)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y);
+    }
+    ctx.stroke();
+  }
+
+  // Zero ordinate wells
+  const [p,q]=state.pair;
+  for(const tz of ZEROS){
+    const u=phase(p,tz), v=phase(q,tz);
+    const pt=torusPoint(u,v);
+    const pp=project(pt);
+    // only draw if front-facing (approx: check rotated z of surface normal)
+    const cy=Math.cos(state.rotY),sy=Math.sin(state.rotY);
+    const cx=Math.cos(state.rotX),sx=Math.sin(state.rotX);
+    // surface normal on torus at (u,v) = (cos v cos u, cos v sin u, sin v)
+    let nx=Math.cos(v)*Math.cos(u), ny=Math.cos(v)*Math.sin(u), nz=Math.sin(v);
+    let x1=nx*cy+nz*sy, z1=-nx*sy+nz*cy, y1=ny;
+    let y2=y1*cx-z1*sx, z2=y1*sx+z1*cx;
+    if(z2<0.1) continue; // back side
+    // well rings
+    for(let r=14;r>=4;r-=3){
+      ctx.beginPath();
+      ctx.arc(pp.x,pp.y,r,0,TWO_PI);
+      ctx.strokeStyle=`rgba(90,224,138,${0.08+(14-r)*0.03})`;
+      ctx.lineWidth=1;
+      ctx.stroke();
+    }
+    ctx.beginPath();
+    ctx.arc(pp.x,pp.y,2.5,0,TWO_PI);
+    ctx.fillStyle='#5ae08a';
+    ctx.fill();
+    ctx.fillStyle='rgba(207,214,224,0.7)';
+    ctx.font='9px ui-monospace,monospace';
+    ctx.fillText(tz.toFixed(1),pp.x+6,pp.y-4);
+  }
+
+  // Trajectory
+  if(state.traj.length>1){
+    for(let i=1;i<state.traj.length;i++){
+      const a=state.traj[i-1], b=state.traj[i];
+      if(Math.abs(b.t-a.t)>1) continue; // break at wrap
+      const pa=project(torusPoint(a.u,a.v));
+      const pb=project(torusPoint(b.u,b.v));
+      ctx.beginPath();
+      ctx.moveTo(pa.x,pa.y); ctx.lineTo(pb.x,pb.y);
+      const alpha = 0.15 + 0.85*(i/state.traj.length);
+      ctx.strokeStyle=cancelColor(b.cancel, alpha);
+      ctx.lineWidth=1.6;
+      ctx.stroke();
+    }
+  }
+
+  // Current state marker
+  const up=phase(p,state.t), vp=phase(q,state.t);
+  const cp=project(torusPoint(up,vp));
+  // halo
+  const grd=ctx.createRadialGradient(cp.x,cp.y,0,cp.x,cp.y,22);
+  grd.addColorStop(0,'rgba(245,197,66,0.55)');
+  grd.addColorStop(1,'rgba(245,197,66,0)');
+  ctx.fillStyle=grd;
+  ctx.beginPath(); ctx.arc(cp.x,cp.y,22,0,TWO_PI); ctx.fill();
+  ctx.beginPath(); ctx.arc(cp.x,cp.y,5,0,TWO_PI);
+  ctx.fillStyle='#f5c542'; ctx.fill();
+  ctx.strokeStyle='#fff'; ctx.lineWidth=1.5; ctx.stroke();
+
+  // Residual widget
+  renderResidual();
+}
+
+function renderResidual(){
+  const W=rcv.clientWidth,H=rcv.clientHeight;
+  rctx.clearRect(0,0,W,H);
+  const cx=W/2, cy=H/2;
+  // grid
+  rctx.strokeStyle='rgba(40,55,75,0.5)';
+  rctx.lineWidth=1;
+  rctx.beginPath();
+  rctx.moveTo(0,cy);rctx.lineTo(W,cy);
+  rctx.moveTo(cx,0);rctx.lineTo(cx,H);
+  rctx.stroke();
+  // unit circle (scale)
+  const scale=Math.min(W,H)*0.35;
+  rctx.strokeStyle='rgba(79,209,197,0.25)';
+  rctx.beginPath(); rctx.arc(cx,cy,scale,0,TWO_PI); rctx.stroke();
+  rctx.beginPath(); rctx.arc(cx,cy,scale*0.5,0,TWO_PI); rctx.stroke();
+  // trajectory trace in complex plane (recent eta samples)
+  if(state.traj.length>1){
+    rctx.strokeStyle='rgba(79,209,197,0.3)';
+    rctx.lineWidth=1;
+    rctx.beginPath();
+    let first=true;
+    for(const s of state.traj){
+      const x=cx+s.eta.re*scale, y=cy-s.eta.im*scale;
+      if(first){rctx.moveTo(x,y);first=false;}else rctx.lineTo(x,y);
+    }
+    rctx.stroke();
+  }
+  // current eta vector
+  const e=etaN(state.t,state.N);
+  const ex=cx+e.re*scale, ey=cy-e.im*scale;
+  rctx.strokeStyle='#f5c542'; rctx.lineWidth=2;
+  rctx.beginPath(); rctx.moveTo(cx,cy); rctx.lineTo(ex,ey); rctx.stroke();
+  // arrow head
+  const ang=Math.atan2(cy-ey,ex-cx);
+  rctx.beginPath();
+  rctx.moveTo(ex,ey);
+  rctx.lineTo(ex-8*Math.cos(ang-0.4), ey+8*Math.sin(ang-0.4));
+  rctx.lineTo(ex-8*Math.cos(ang+0.4), ey+8*Math.sin(ang+0.4));
+  rctx.closePath();
+  rctx.fillStyle='#f5c542'; rctx.fill();
+  rctx.beginPath(); rctx.arc(ex,ey,3,0,TWO_PI); rctx.fillStyle='#fff'; rctx.fill();
+
+  // update KPI
+  document.getElementById('absVal').textContent=e.abs.toFixed(4);
+  document.getElementById('cancelVal').textContent=cancelScore(e.abs).toFixed(3);
+  document.getElementById('argVal').textContent=(Math.atan2(e.im,e.re)).toFixed(3)+' rad';
+  const [p,q]=state.pair;
+  document.getElementById('phaseVal').textContent=
+    (phase(p,state.t)/Math.PI).toFixed(2)+'π, '+(phase(q,state.t)/Math.PI).toFixed(2)+'π';
+}
+
+// ====== Trajectory update ======
+function updateTrajectory(){
+  // build trajectory over [t-window, t]
+  const dt=0.05;
+  const steps=(state.trajWindow/dt)|0;
+  const arr=[];
+  const [p,q]=state.pair;
+  const t0=state.t-state.trajWindow;
+  for(let i=0;i<=steps;i++){
+    const tt=t0 + i*dt;
+    const e=etaN(tt,state.N);
+    arr.push({
+      t:tt,
+      u:phase(p,tt), v:phase(q,tt),
+      cancel:cancelScore(e.abs),
+      eta:e
+    });
+  }
+  state.traj=arr;
+}
+
+// ====== Interaction ======
+cv.addEventListener('mousedown',e=>{
+  state.dragging=true; state.lastX=e.clientX; state.lastY=e.clientY;
+});
+window.addEventListener('mouseup',()=>state.dragging=false);
+window.addEventListener('mousemove',e=>{
+  if(!state.dragging)return;
+  const dx=e.clientX-state.lastX, dy=e.clientY-state.lastY;
+  state.lastX=e.clientX; state.lastY=e.clientY;
+  state.rotY += dx*0.008;
+  state.rotX += dy*0.008;
+  state.rotX=Math.max(-Math.PI/2+0.05,Math.min(Math.PI/2-0.05,state.rotX));
+});
+cv.addEventListener('wheel',e=>{
+  e.preventDefault();
+  state.zoom *= (e.deltaY<0)?1.1:0.9;
+  state.zoom=Math.max(0.3,Math.min(4,state.zoom));
+},{passive:false});
+
+// touch
+let pinchDist=0;
+cv.addEventListener('touchstart',e=>{
+  if(e.touches.length===1){
+    state.dragging=true;
+    state.lastX=e.touches[0].clientX; state.lastY=e.touches[0].clientY;
+  } else if(e.touches.length===2){
+    pinchDist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,
+                         e.touches[0].clientY-e.touches[1].clientY);
+  }
+});
+cv.addEventListener('touchmove',e=>{
+  e.preventDefault();
+  if(e.touches.length===1 && state.dragging){
+    const dx=e.touches[0].clientX-state.lastX, dy=e.touches[0].clientY-state.lastY;
+    state.lastX=e.touches[0].clientX; state.lastY=e.touches[0].clientY;
+    state.rotY += dx*0.008; state.rotX += dy*0.008;
+    state.rotX=Math.max(-Math.PI/2+0.05,Math.min(Math.PI/2-0.05,state.rotX));
+  } else if(e.touches.length===2){
+    const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,
+                       e.touches[0].clientY-e.touches[1].clientY);
+    state.zoom *= d/pinchDist; pinchDist=d;
+    state.zoom=Math.max(0.3,Math.min(4,state.zoom));
+  }
+},{passive:false});
+cv.addEventListener('touchend',()=>state.dragging=false);
+
+// ====== Controls ======
+const pairSel=document.getElementById('pairSel');
+const nSl=document.getElementById('nSl');
+const tSl=document.getElementById('tSl');
+const spdSl=document.getElementById('spdSl');
+const playBtn=document.getElementById('playBtn');
+const snapBtn=document.getElementById('snapBtn');
+const resetBtn=document.getElementById('resetBtn');
+
+function rebuild(){
+  buildField();
+  updateTrajectory();
+}
+
+pairSel.addEventListener('change',()=>{
+  state.pair=pairSel.value.split(',').map(Number);
+  rebuild();
+});
+nSl.addEventListener('input',()=>{
+  state.N=+nSl.value;
+  document.getElementById('nVal').textContent=state.N;
+  rebuild();
+});
+tSl.addEventListener('input',()=>{
+  state.t=+tSl.value;
+  document.getElementById('tVal').textContent=state.t.toFixed(2);
+  updateTrajectory();
+});
+spdSl.addEventListener('input',()=>{
+  state.speed=+spdSl.value;
+  document.getElementById('spdVal').textContent=state.speed.toFixed(2);
+});
+playBtn.addEventListener('click',()=>{
+  state.playing=!state.playing;
+  playBtn.textContent=state.playing?'❚❚ PAUSE':'▶ PLAY';
+});
+snapBtn.addEventListener('click',()=>{
+  // find nearest zero to current t, or cycle
+  let best=ZEROS[0], bd=Infinity;
+  for(const z of ZEROS){ const d=Math.abs(z-state.t); if(d<bd){bd=d;best=z;} }
+  state.t=best;
+  tSl.value=state.t;
+  document.getElementById('tVal').textContent=state.t.toFixed(3);
+  updateTrajectory();
+});
+resetBtn.addEventListener('click',()=>{
+  state.rotX=-0.35; state.rotY=0.6; state.zoom=1.0;
+});
+
+// zero list
+const zl=document.getElementById('zeroList');
+ZEROS.forEach(z=>{
+  const s=document.createElement('span');
+  s.textContent='t='+z.toFixed(3)+' ';
+  s.onclick=()=>{
+    state.t=z; tSl.value=z;
+    document.getElementById('tVal').textContent=z.toFixed(3);
+    updateTrajectory();
+  };
+  zl.appendChild(s);
+});
+
+// ====== Loop ======
+let last=performance.now();
+function loop(now){
+  const dt=(now-last)/1000; last=now;
+  if(state.playing){
+    state.t += state.speed*dt*4;
+    if(state.t>200) state.t-=200;
+    tSl.value=state.t;
+    document.getElementById('tVal').textContent=state.t.toFixed(2);
+    updateTrajectory();
+  }
+  render();
+  requestAnimationFrame(loop);
+}
+
+// ====== Init ======
+resize();
+rebuild();
+requestAnimationFrame(loop);
+
+})();
+</script>
+</body>
+</html>
