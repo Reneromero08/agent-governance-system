@@ -14,7 +14,7 @@ VISUALIZER_DIR = os.path.dirname(HERE)
 if VISUALIZER_DIR not in sys.path:
     sys.path.insert(0, VISUALIZER_DIR)
 
-from engine import oracle_1d, oracle_2d
+from engine import oracle_1d, oracle_2d, oracle_3d
 
 
 def test_1d_all_machines():
@@ -135,6 +135,76 @@ def test_2d_dim():
     print(f"  N = L*L for L in 4,6,8,10  OK")
 
 
+# ---- 3D (Phase 1C) -----------------------------------------------------
+
+def test_3d_loop_L8():
+    """L=8, n_kz=24, gamma_halt=0 -> nonzero C slices -> LOOPS.
+
+    Matches 38_3d_weyl_oracle.py run_3d_weyl_oracle default:
+      Non-zero slices: 14/24  Max |C| = 2  -> LOOPS
+    """
+    r = oracle_3d.run(L=8, n_kz=24, gamma_halt=0.0)
+    assert r["L"] == 8
+    assert r["n_kz"] == 24
+    assert r["profile"]["max_abs_C"] == 2
+    assert r["profile"]["nonzero"] == 14
+    assert r["verdict"] == "LOOPS (Fermi arc exists)"
+    # Weyl node positions for m0=0.5, tz=1.5
+    expected_nodes = [1.2309594173407747, 5.052225889350412]
+    assert abs(r["profile"]["weyl_nodes"][0] - expected_nodes[0]) < 1e-3
+    assert abs(r["profile"]["weyl_nodes"][1] - expected_nodes[1]) < 1e-3
+    print(f"  L=8  loop:  maxC={r['profile']['max_abs_C']}  nonzero={r['profile']['nonzero']}/24  LOOPS  OK")
+
+
+def test_3d_halt_L8():
+    """L=8, gamma_halt=15 -> all slices C=0 -> HALTS.
+
+    Lab source's bott_index raises ValueError on NaN at high gamma;
+    the engine wrapper catches it and records C=0.
+    """
+    r = oracle_3d.run(L=8, n_kz=24, gamma_halt=15.0)
+    assert r["profile"]["max_abs_C"] == 0
+    assert r["profile"]["nonzero"] == 0
+    # nan_slices should be present and non-empty (source crashed on these)
+    assert "nan_slices" in r["profile"]
+    assert len(r["profile"]["nan_slices"]) > 0
+    assert r["verdict"] == "HALTS (no Fermi arc)"
+    print(f"  L=8  halt:  maxC=0  nonzero=0/24  nan_slices={len(r['profile']['nan_slices'])}  HALTS  OK")
+
+
+def test_3d_gamma_sweep():
+    """gamma_sweep L=8, n_kz=12. Low g -> nonzero; g=15 -> all 0."""
+    gs = oracle_3d.gamma_sweep(L=8, n_kz=12, gammas=[0.0, 5.0, 15.0])
+    assert gs["L"] == 8
+    assert gs["n_kz"] == 12
+    assert len(gs["results"]) == 3
+    # g=0, 5 -> LOOPS
+    assert gs["results"][0]["verdict"].startswith("LOOPS")
+    assert gs["results"][1]["verdict"].startswith("LOOPS")
+    # g=15 -> HALTS
+    assert gs["results"][2]["verdict"].startswith("HALTS")
+    print(f"  L=8  gamma_sweep: g=0,5 LOOPS; g=15 HALTS  OK")
+
+
+def test_3d_slice_mass():
+    """M(kz) = m0 - tz*cos(kz). For kz=0: M = m0 - tz = 0.5 - 1.5 = -1.0."""
+    s = oracle_3d.build_slice(L=6, kz=0.0)
+    assert abs(s["M_kz"] - (-1.0)) < 1e-6
+    s = oracle_3d.build_slice(L=6, kz=float(__import__('numpy').pi))
+    assert abs(s["M_kz"] - 2.0) < 1e-6  # M(pi) = 0.5 - 1.5*(-1) = 2.0
+    print(f"  L=6  M(kz) = m0 - tz*cos(kz): kz=0->-1, kz=pi->+2  OK")
+
+
+def test_3d_weyl_node_count():
+    """For |m0/tz| < 1, there are exactly 2 Weyl nodes in [0, 2*pi)."""
+    p = oracle_3d.c1_profile(L=8, n_kz=24, gamma_halt=0.0, m0=0.5, tz=1.5)
+    assert len(p["weyl_nodes"]) == 2
+    # For m0/tz > 1, no Weyl nodes (M never zero)
+    p2 = oracle_3d.c1_profile(L=8, n_kz=12, gamma_halt=0.0, m0=5.0, tz=1.0)
+    assert len(p2["weyl_nodes"]) == 0
+    print(f"  Weyl node count: 2 when |m0/tz|<1, 0 when m0>tz  OK")
+
+
 if __name__ == "__main__":
     print("=" * 60)
     print("  SMOKE TESTS: 1D engine (Phase 1A)")
@@ -152,5 +222,14 @@ if __name__ == "__main__":
     test_2d_sink_strength_sweep()
     test_2d_halt_site_imag()
     test_2d_dim()
+    print()
+    print("=" * 60)
+    print("  SMOKE TESTS: 3D engine (Phase 1C)")
+    print("=" * 60)
+    test_3d_loop_L8()
+    test_3d_halt_L8()
+    test_3d_gamma_sweep()
+    test_3d_slice_mass()
+    test_3d_weyl_node_count()
     print("=" * 60)
     print("  ALL PASSED")

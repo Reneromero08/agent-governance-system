@@ -75,14 +75,31 @@
 - [x] Live HTTP: /api/dim2/run?L=8&gamma_halt=10  returns C=0
 - [x] L=6 loop case: C=0 (finite-size gap collapse with default phi=pi/4, t2=0.5) — real physics, not a bug
 
-### 1C: 3D engine (38)
-- [ ] Write `engine/oracle_3d.py`:
-  - [ ] `build_slice(L, kz, t1, t2, phi, tz, m0, loss, gamma_halt) -> H`
-  - [ ] `c1_profile(L, n_kz, gamma_halt) -> [{kz, M, C}]`
-  - [ ] `uniform_gamma_sweep(L, n_kz, gammas) -> [{Gamma, maxC, nonzero}]`
-  - [ ] `run(L, n_kz, gamma_halt) -> {profile, maxC, nonzero, verdict}`
-  - [ ] Import from `38_3d_weyl_oracle.py`
-- [ ] Write `engine/api_routes_3d.py` — `/api/dim3/run?L=...&n_kz=...&gamma_halt=...`
+### 1C: 3D engine (38) — DONE (2026-06-04)
+- [x] Write `engine/oracle_3d.py`:
+  - [x] `build_slice(L, kz, t1, t2, phi, tz, m0, loss, gamma_halt) -> {H, N, M_kz, ...}`
+  - [x] `find_fermi(L, kz_ref, ...) -> {E_fermi_im, gap_width, ...}`
+  - [x] `c1_profile(L, n_kz, gamma_halt, ...) -> {kz, M_kz, C, max_abs_C, nonzero, weyl_nodes, nan_slices, ...}`
+  - [x] `gamma_sweep(L, n_kz, gammas, ...) -> {results: [{gamma, max_abs_C, nonzero, verdict, C, kz}]}`
+  - [x] `run(L, n_kz, gamma_halt, ...) -> {verdict, profile, ...}`
+  - [x] Import from `38_3d_weyl_oracle.py` (build_weyl_slice, spectral_projector, bott_index)
+- [x] Write `engine/api_routes_3d.py` — `/api/dim3/slice`, `/api/dim3/run`, `/api/dim3/gamma_sweep`
+
+**Robustness fix**: Lab source's `bott_index` raises ValueError("cannot convert
+float NaN to integer") at high gamma_halt where the spectral projector becomes
+degenerate.  Source itself crashes (see 38_3d_weyl_oracle/output.txt line 75).
+Engine wrapper catches this and records C=0 with index in `nan_slices` list,
+so the run completes and reports the topology as numerically collapsed.
+
+**Verify**:
+- [x] `python -m tests.smoke` exits 0 (1D + 2D + 3D)
+- [x] L=8, n_kz=24, gamma=0  -> maxC=2  nonzero=14/24  LOOPS  (matches lab output)
+- [x] L=8, n_kz=24, gamma=15 -> maxC=0  nonzero=0/24  nan_slices=24  HALTS
+- [x] gamma_sweep: g=0,5 LOOPS; g=15 HALTS
+- [x] M(kz) = m0 - tz*cos(kz): kz=0 -> -1.0, kz=pi -> +2.0
+- [x] Weyl node count: 2 when |m0/tz|<1, 0 when m0>tz
+- [x] Live HTTP: /api/dim3/run?L=8&n_kz=24&gamma_halt=0 returns verdict=LOOPS
+- [x] Live HTTP: /api/dim3/run?L=8&n_kz=24&gamma_halt=15 returns verdict=HALTS
 
 ### 1D: 4D engine (39)
 - [ ] Write `engine/oracle_4d.py`:
