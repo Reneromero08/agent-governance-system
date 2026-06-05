@@ -1,0 +1,170 @@
+AmdProcessorInitPeim .dG3_DXE dispatch/table consumer artifact
+
+Source artifact:
+- cpu_hack/bios_dump.bin.dump/5 8C8CE578-8A3D-4F1C-9935-896185C32DD3/0 AmdProcessorInitPeim/1 PE32 image section/body.bin
+- PE32 body SHA-256: BF92A1321B98908E7D74299A6C1E629EC3583599F164DEC6E774BFF040FBDF2A
+- Image base: 0xFFF4008C
+
+Tooling used:
+- pefile local PE parse
+- Capstone 5.0.7 local x86 32-bit disassembly
+- No firmware write, no replacement, no flash, no patch bytes
+
+Relevant PE sections:
+- .tG3_DXE VA 0xFFF726AC-0xFFF7D8E9, raw 0x032620-0x03D860
+- .dG3_DXE VA 0xFFF8D0EC-0xFFF94790, raw 0x04D060-0x054720
+
+Static .dG3_DXE window:
+
+0xFFF8D0EC:
+  +0x00 0x0000A019  IDS/HDT or IDS control style heap handle, generation-dependent
+  +0x04 0x534F4B54  SOCKET_DIE_MAP_HANDLE, local source comment: 'sokt'
+  +0x08 0x4E4F4445  NODE_ID_MAP_HANDLE, local source comment: 'node'
+  +0x0C 0x414D4258  LOCAL_AP_MAIL_BOX_CACHE_HANDLE in the F10 source drop, comment: 'ambx'
+  +0x10 0x0000A01A  IDS/perf or HT IDS heap handle, generation-dependent
+  +0x14 0x0000A00A  AMD_S3_SCRIPT_SAVE_TABLE_HANDLE
+  +0x18 0x0000A01E  AMD PP/PCIe heap handle, generation-dependent
+  +0x1C 0x00000000  alignment/terminator before function pointer array
+
+Function pointer array after heap-handle list:
+  0xFFF8D10A -> 0xFFF7329E
+  0xFFF8D10E -> 0xFFF732FD
+  0xFFF8D112 -> 0xFFF7332D
+  0xFFF8D116 -> 0xFFF735F5
+  0xFFF8D11A -> 0xFFF7332E
+  0xFFF8D11E -> 0xFFF7371A
+  0xFFF8D122 -> 0xFFF7339A
+  0xFFF8D126 -> 0xFFF73418
+  0xFFF8D12A -> 0xFFF7348D
+  0xFFF8D12E -> 0x00000000
+
+Nearby strings:
+- "AMD Opteron(tm) Processor 62"
+- "AMD Opteron(tm) Processor 63"
+- "AMD Opteron(tm) Processor 42"
+
+Code references into .dG3_DXE:
+- 0xFFF72BE1: mov eax, dword ptr [ebx - 0x72f14]
+  - With ebx starting at 0 and incrementing by 4, this reads dwords from 0xFFF8D0EC through 0xFFF8D104.
+- 0xFFF72D85: mov eax, dword ptr [ebx - 0x72f14]
+  - Same base and stride; second pass uses the same heap-handle list.
+
+Consumer function:
+- Entry: 0xFFF72B3C
+- Return: 0xFFF72E22
+- Role: S3/runtime heap table collector/copier for the seven heap handles at 0xFFF8D0EC.
+
+Annotated pseudocode:
+
+0xFFF72B3C:
+    setup_stack(0x84);
+    context = arg_08;
+    trace_or_marker(context, 0xCE);
+
+    total_heap_copy_bytes = 0;
+    live_handle_count = 0;
+    primary_size = 0;
+    primary_ptr = NULL;
+    s3_extra_size = 0;
+    s3_extra_ptr = NULL;
+
+    // Try CPU NB P-state workaround / alternate heap sources first.
+    query.BufferHandle = 0xA027;
+    if (locate_heap(context, &query) == SUCCESS) {
+        primary_size = 0;
+    } else {
+        query.BufferHandle = 0xA025;
+        if (locate_heap(context, &query) == SUCCESS) {
+            primary_size = query.BufferSize;
+            primary_ptr = query.BufferPtr + 4;
+        } else if (get_aux_heap(&s3_extra_ptr, context) && s3_extra_ptr != NULL) {
+            primary_size = copy_or_measure_heap(s3_extra_ptr, 0, context);
+        }
+    }
+
+    if (*(uint8_t *)0xFFF7F686 != 0) {
+        for (offset = 0; offset < 0x1C; offset += 4) {
+            handle = *(uint32_t *)(0xFFF8D0EC + offset);
+            query.BufferHandle = handle;
+            if (locate_heap(context, &query) == SUCCESS) {
+                live_handle_count++;
+                total_heap_copy_bytes += query.BufferSize;
+                saved_ptr[offset / 4] = query.BufferPtr;
+                saved_size[offset / 4] = query.BufferSize;
+            } else {
+                saved_ptr[offset / 4] = NULL;
+                saved_size[offset / 4] = 0;
+            }
+        }
+
+        if (live_handle_count != 0) {
+            total_heap_copy_bytes += live_handle_count * 0x1D + 0x10;
+        }
+
+        if (get_s3_save_table(&s3_extra_ptr, context) && s3_extra_ptr != NULL) {
+            s3_extra_size = copy_or_measure_heap(s3_extra_ptr, 1, context);
+        }
+
+        total_alloc = primary_size + total_heap_copy_bytes + s3_extra_size;
+    } else {
+        total_alloc = primary_size;
+    }
+
+    if (primary_size != 0 || total_alloc != 0) {
+        alloc.RequestedBufferSize = total_alloc + primary_size;
+        alloc.BufferHandle = 0xD007;
+        alloc.Persist = 0;
+        allocate_heap(context, &alloc);
+
+        if (primary_size != 0) {
+            if (primary_ptr != NULL) {
+                memcpy(alloc.BufferPtr, primary_ptr, primary_size, context);
+            } else {
+                copy_or_measure_heap(s3_extra_ptr, 0, alloc.BufferPtr, &primary_size, context);
+            }
+        }
+
+        context->field_ba = primary_size;
+
+        if (total_heap_copy_bytes != 0) {
+            heap_header = alloc.BufferPtr + primary_size;
+            heap_header->signature = 0x50414548; // HEAP
+            heap_header->used_size = total_heap_copy_bytes;
+            heap_header->first_active = 0;
+            heap_header->first_free = 0;
+            heap_header->free_node.size = total_heap_copy_bytes - 0x1E;
+            context->heap_state = HEAP_S3_RESUME;
+            context->heap_ptr = heap_header;
+
+            for (offset = 0; offset < 0x1C; offset += 4) {
+                if (saved_ptr[offset / 4] != NULL) {
+                    handle = *(uint32_t *)(0xFFF8D0EC + offset);
+                    node.BufferSize = saved_size[offset / 4];
+                    node.BufferHandle = handle;
+                    node.Persist = 6;
+                    allocate_heap(context, &node);
+                    if (node.BufferPtr != NULL) {
+                        memcpy(node.BufferPtr, saved_ptr[offset / 4], saved_size[offset / 4], context);
+                    }
+                }
+            }
+        }
+
+        if (s3_extra_size != 0) {
+            copy_or_measure_heap(s3_extra_ptr, alloc.BufferPtr + primary_size + total_heap_copy_bytes + 0x10, 1, &s3_extra_size, context);
+        }
+
+        context->field_c2 = alloc.BufferPtr + total_heap_copy_bytes + s3_extra_size + 0x10;
+    }
+
+    // Current image callback at [0xFFF7E740] resolves to 0xFFF4DCBD, a null stub:
+    // 0xFFF4DCBD: xor eax, eax; ret
+    return null_callback(context);
+
+Conclusion for Route A:
+- The heap-handle consumer for .dG3_DXE is recovered from current bytes.
+- The seven dwords at 0xFFF8D0EC are heap handles, not P-state records.
+- The function pointer 0xFFF8D11E -> 0xFFF7371A is in a nearby static function-pointer array, not reached by a direct E8 call.
+- Function 0xFFF7371A is a static firmware entry point, but the P-state structure it consumes through arg_0C is runtime/heap-selected.
+- arg_0C is best classified as a CPU-family/runtime dispatch record or heap-selected table context, not a byte-ready static P4 table row.
+- No P4-only static editable table target is proven by this artifact.

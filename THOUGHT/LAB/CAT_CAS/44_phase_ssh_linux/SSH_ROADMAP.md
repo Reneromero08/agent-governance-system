@@ -133,13 +133,13 @@ Current Exp44 evidence moves the Phenom II work to an external-observability bou
 | GOE route | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | GOE spacing behavior was not observed. | `cpu_sing_2/PHASE2_GOE.md` |
 | Ising route | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | Ising behavior was not observed. | `cpu_sing_2/PHASE2_ISING_MAP.md` |
 | AGESA global branch edit | `AGESA_GLOBAL_PATCH_REJECTED` | Global `JBE -> JAE` at `0x00366E3E` is rejected. It is not P4-safe and the prior attempt caused no boot; backup BIOS recovered after battery removal. | `cpu_hack/PATCH_ANALYSIS.md`, `gpt_research/UNDERVOLT_PATHWAY_1_BIOS_AGESA.md` |
-| P4-safe AGESA route | `AGESA_P4_SAFE_ROUTE_NOT_BYTE_READY` | Current BIOS/PE32/disassembly artifacts do not prove a P4-only table record or executable code cave. The next-gate pass found the containing function for `0xFFF737A3` at `0xFFF7371A`, a `.dG3_DXE` dispatch pointer at `0xFFF8D11E`, and no local replace/save-image tool beyond extraction-only `UEFIExtract`. | `cpu_sing_2/PHASE2_AGESA_P4_SAFE_FINAL_PACK.md`, `cpu_sing_3/AGESA_NEXT_GATE_FINAL_PACK.md` |
-| External observability | `EXTERNAL_OBSERVABILITY_REQUIRED` | Next boundary is external measurement: board/VRM identification, physical probe points, and non-invasive external capture before more voltage-route claims. | `cpu_sing_2/PHASE2_DEEP_3_EXTERNAL_MEASURE.md` |
+| P4-safe AGESA route | `AGESA_P4_SAFE_ROUTE_NOT_BYTE_READY` | Current BIOS/PE32/disassembly artifacts do not prove a P4-only table record or executable code cave. The master pass found the `.dG3_DXE` heap/table consumer at `0xFFF72B3C`, confirmed `0xFFF8D11E -> 0xFFF7371A` as a static function-pointer entry, and classified `arg_0C` as runtime/heap-selected table context rather than a byte-ready static P4 record. | `cpu_sing_2/PHASE2_AGESA_P4_SAFE_FINAL_PACK.md`, `cpu_sing_3/AGESA_NEXT_GATE_FINAL_PACK.md`, `cpu_sing_3/PHASE2_MASTER_A_DISPATCH_SOURCE.md` |
+| External observability | `EXTERNAL_MEASUREMENT_READY` | Next boundary is non-invasive external capture with marker correlation. The existing marker harness plus `session_scripts/phase2_external_align.py` can align Core3/Core4/Core5 workload states to VRM/rail waveform capture and reject the fixed 2.67 MHz artifact unless marker-modulated. | `cpu_sing_2/PHASE2_DEEP_3_EXTERNAL_MEASURE.md`, `cpu_sing_3/PHASE2_MASTER_D_EXTERNAL_OBSERVABILITY.md` |
 | Catalytic tape / `.holo` tape | `CATALYTIC_TAPE_WORKING_NON_KURAMOTO` | Catalytic tape and `.holo` restoration work, but this is not Phase 2 Kuramoto success. | `cpu_sing_1/CPU_SING_GOAL_FINAL_PACK.md`, `cpu_sing_1/GOAL_ROUTE_7_HOLO.md` |
 
 **Do not repeat:** no BIOS flash, no global AGESA branch edit, no voltage writes, no P0-P3 undervolt, and no claim that catalytic tape restoration proves phase lock.
 
-**Next required boundary:** external observability before further Phase 2 hardware claims.
+**Next required boundary:** non-invasive external measurement with marker correlation before further Phase 2 hardware claims.
 
 ---
 
@@ -179,10 +179,14 @@ Current Exp44 evidence moves the Phenom II work to an external-observability bou
 - [x] No suitable executable cave found from current artifacts.
 - [x] Next-gate constructor pass identified the containing function as `0xFFF7371A`; `0xFFF737A3` is an internal block, not a function entry.
 - [x] Constructor source now points to a runtime/dispatch-selected base: `selected_base = arg_0C + 8`, optionally updated by helper `0xFFF4CF55`, then consumed as `selected_base + pstate*0x18`.
-- [x] `.dG3_DXE` contains a function pointer at `0xFFF8D11E -> 0xFFF7371A`; the dispatch table consumer remains the exact next source artifact.
+- [x] `.dG3_DXE` contains a function pointer at `0xFFF8D11E -> 0xFFF7371A`.
+- [x] Master dispatcher pass recovered the `.dG3_DXE` heap/table consumer at `0xFFF72B3C`; it walks heap handles at `0xFFF8D0EC-0xFFF8D104`, not P-state records.
+- [x] Route A verdict: `DISPATCH_SOURCE_FOUND`; entry source is static function-pointer table, but `arg_0C` remains runtime/heap-selected table context, not a proven static P4 row.
 - [x] Local rebuild tool search found only extraction-capable `UEFIExtract`; no local replace/save-image UEFI tool was found, so no no-op rebuild was performed.
-- [x] Verdict: `AGESA_GLOBAL_PATCH_REJECTED`, `AGESA_P4_SAFE_ROUTE_NOT_BYTE_READY`, and `MISSING_ARTIFACT_BLOCKER`.
-- [ ] Reopen only with external recovery, verified stock dump, decompiler-grade constructor map or P4 table proof, and human approval.
+- [x] Public GA-970A-DS3P BIOS-mod donor workflow found for rebuild/checksum study; no local donor-vs-stock image pair is available.
+- [x] Route D verdict: `EXTERNAL_MEASUREMENT_READY`; offline marker/waveform analyzer added at `session_scripts/phase2_external_align.py`.
+- [x] Verdict: `AGESA_GLOBAL_PATCH_REJECTED`, `AGESA_P4_SAFE_ROUTE_NOT_BYTE_READY`, `DISPATCH_SOURCE_FOUND`, `PUBLIC_MOD_DONOR_FOUND`, `EXTERNAL_MEASUREMENT_READY`, and `HUMAN_APPROVAL_REQUIRED` for physical probing.
+- [ ] Continue with non-invasive external marker capture, or acquire a rebuild-capable UEFI tool for no-op replacement proof.
 
 ### 2.A ADDENDUM: Operational Definition of Phase (GPT)
 
@@ -425,7 +429,7 @@ If the coupled oscillator network at the edge of chaos produces Wigner-Dyson eig
 
 1. **SSH into the Phenom** — `ssh root@192.168.137.100` (Windows SSH)
 2. **External observability boundary** — identify VRM/board probe points and plan non-invasive measurement before more Phase 2 claims
-3. **AGESA next exact artifact** — recover `cpu_hack/AmdProcessorInitPeim_dG3_DXE_dispatch_table_consumer_decompile.txt` to prove what feeds `arg_0C` for function `0xFFF7371A`
+3. **AGESA dispatcher follow-up** — use `cpu_hack/AmdProcessorInitPeim_dG3_DXE_dispatch_table_consumer_decompile.txt` as the recovered consumer artifact; only continue firmware if the caller/dispatcher that invokes the `0xFFF8D11E -> 0xFFF7371A` array can prove a P4-only table context
 4. **No-op rebuild exact tool** — add a local replace/save-image tool such as `cpu_hack/tools/uefitool_rebuild/UEFITool.exe`; `UEFIExtract` is extraction-only and does not satisfy this gate
 5. **Do not flash AGESA-patched BIOS** — the global branch edit is rejected and the P4-safe route is not byte-ready
 6. **Continue `.holo` / catalytic tape work separately** — tape restoration is working but is not Kuramoto evidence
