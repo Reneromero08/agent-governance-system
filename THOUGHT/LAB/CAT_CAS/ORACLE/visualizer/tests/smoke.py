@@ -14,7 +14,7 @@ VISUALIZER_DIR = os.path.dirname(HERE)
 if VISUALIZER_DIR not in sys.path:
     sys.path.insert(0, VISUALIZER_DIR)
 
-from engine import oracle_1d, oracle_2d, oracle_3d, oracle_4d
+from engine import oracle_1d, oracle_2d, oracle_3d, oracle_4d, oracle_5d
 
 
 def test_1d_all_machines():
@@ -278,7 +278,245 @@ def test_4d_halt_site_imag():
     print(f"  L=4  halt site: Im(H)={H_site['im']:.4f}  (expected {expected_im})  OK")
 
 
+# ---- 5D (Phase 1E) -----------------------------------------------------
+
+def test_5d_dim():
+    """N = 4 * L * L (4-comp spinor on LxL spatial lattice)."""
+    for L in (4, 6):
+        r = oracle_5d.run(L=L, n_k=2, g=0.0, t1=0.0)
+        assert r["N"] == 4 * L * L, f"L={L}: N={r['N']}, expected {4*L*L}"
+    print(f"  N = 4*L*L for L in 4,6  OK")
+
+
+def test_5d_loop_solved():
+    """t1=0 (ideal Floquet), g=0 -> 32 pi-modes per slice, all 16 active.
+
+    The SOLVED 5D protocol: G2*G1*G5 = diag(-i,+i,+i,-i) per site,
+    so U_site = diag(+1,-1,-1,+1) and 2 pi-modes per site survive.
+    """
+    r = oracle_5d.run(L=4, n_k=4, g=0.0, t1=0.0)
+    assert r["grid"]["total"] == 512
+    assert r["grid"]["active"] == 16
+    assert r["verdict"] == "LOOPS (pi-modes robust)"
+    print(f"  L=4  solved:  total=512  active=16/16  LOOPS  OK")
+
+
+def test_5d_halt_melted():
+    """t1=0, g=0.5 -> 0 pi-modes (uniform Gamma melts them)."""
+    r = oracle_5d.run(L=4, n_k=4, g=0.5, t1=0.0)
+    assert r["grid"]["total"] == 0
+    assert r["grid"]["active"] == 0
+    assert r["verdict"] == "HALTS (pi-modes melted)"
+    print(f"  L=4  melt:    total=0    active=0/16   HALTS  OK")
+
+
+def test_5d_hopping_survival():
+    """t1=0.1, g=0 -> pi-modes still survive (small hopping is OK)."""
+    r = oracle_5d.run(L=4, n_k=4, g=0.0, t1=0.1)
+    assert r["grid"]["total"] == 512
+    assert r["grid"]["active"] == 16
+    assert r["verdict"] == "LOOPS (pi-modes robust)"
+    print(f"  L=4  t1=0.1:  total=512  active=16/16  LOOPS  OK (small hopping survives)")
+
+
+def test_5d_strong_hopping_melts():
+    """t1=1.0, g=0 -> strong hopping also melts (no topological protection)."""
+    r = oracle_5d.run(L=4, n_k=4, g=0.0, t1=1.0)
+    assert r["grid"]["total"] == 0
+    assert r["verdict"] == "HALTS (pi-modes melted)"
+    print(f"  L=4  t1=1.0:  total=0    active=0/16   HALTS  OK (strong hopping melts)")
+
+
+def test_5d_gamma_sweep():
+    """gamma_sweep: low g -> LOOPS, g >= 0.5 -> HALTS."""
+    gs = oracle_5d.gamma_sweep(L=4, n_k=4, gammas=[0.0, 0.3, 0.5, 1.0])
+    assert len(gs["results"]) == 4
+    assert gs["results"][0]["verdict"].startswith("LOOPS")
+    assert gs["results"][1]["verdict"].startswith("LOOPS")
+    assert gs["results"][2]["verdict"].startswith("HALTS")
+    assert gs["results"][3]["verdict"].startswith("HALTS")
+    print(f"  L=4  gamma_sweep: g=0,0.3 LOOPS; g=0.5,1.0 HALTS  OK")
+
+
+def test_5d_n_grid_uniform():
+    """At ideal t1=0, every (kz, kw) slice gives the same pi-mode count."""
+    g = oracle_5d.pi_mode_grid(L=4, n_k=4, g=0.0, t1=0.0)
+    for row in g["n_grid"]:
+        for n in row:
+            assert n == 32, f"expected 32 pi-modes per slice, got {n}"
+    print(f"  L=4  n_grid uniform: every slice has 32 pi-modes  OK")
+
+
+def test_5d_count_pi_modes():
+    """count_pi_modes on a known U gives the right number."""
+    U_dict = oracle_5d.floquet_operator(L=4, kz=0.0, kw=0.0, t1=0.0, g=0.0)
+    count = oracle_5d.count_pi_modes(U_dict["U"], threshold=0.3)
+    assert count["n_pi_modes"] == 32
+    print(f"  count_pi_modes(t1=0): 32 pi-modes  OK")
+
+
+# ---- 1F (Cross-dimension, JSON, HTTP) ---------------------------------
+
+import json
+import time
+from typing import Any, Dict, List, Tuple
+
+
+def test_all_engines_canonical_run():
+    """Run a canonical run() for each of the 5 engines.
+
+    Verifies the full pipeline (build H/U -> measure topology -> verdict)
+    for every dimension.  Uses default parameters that should yield
+    a clean LOOPS for each (matching the source's default working case).
+    """
+    canonicals: List[Tuple[str, Dict[str, Any]]] = [
+        ("1D halt_direct", oracle_1d.run(machine="halt_direct", n_phi=200)),
+        ("1D loop_2cycle", oracle_1d.run(machine="loop_2cycle", n_phi=200)),
+        ("2D loop L=8",    oracle_2d.run(L=8, gamma_halt=0.0, include_projector=False)),
+        ("3D loop L=8",    oracle_3d.run(L=8, n_kz=24, gamma_halt=0.0)),
+        ("4D loop L=6",    oracle_4d.run(L=6, n_k=4, gamma_halt=0.0)),
+        ("5D solved",      oracle_5d.run(L=4, n_k=4, g=0.0, t1=0.0)),
+    ]
+    for label, r in canonicals:
+        assert "verdict" in r, f"{label}: no verdict in output"
+        assert r["verdict"] in (
+            "LOOPS", "HALTS",
+            "LOOPS (chiral edge protected)", "HALTS (edge destroyed)",
+            "LOOPS (Fermi arc exists)", "HALTS (no Fermi arc)",
+            "LOOPS (4D Dirac monopoles protected)",
+            "LOOPS (pi-modes robust)",
+        ), f"{label}: unexpected verdict {r['verdict']!r}"
+    print(f"  6 canonical runs (1D halt+loop, 2D, 3D, 4D, 5D) all return valid verdicts  OK")
+
+
+def test_json_serializable():
+    """Every engine output is JSON-serializable (frontend requirement)."""
+    cases: List[Tuple[str, Any]] = [
+        ("1D halt_direct",   oracle_1d.run(machine="halt_direct", n_phi=80)),
+        ("1D loop_2cycle",   oracle_1d.run(machine="loop_2cycle", n_phi=80)),
+        ("2D L=8 loop",      oracle_2d.run(L=8, gamma_halt=0.0, include_projector=True)),
+        ("2D L=8 halt",      oracle_2d.run(L=8, gamma_halt=10.0, include_projector=True)),
+        ("3D L=8 loop",      oracle_3d.run(L=8, n_kz=12, gamma_halt=0.0)),
+        ("4D L=6 loop",      oracle_4d.run(L=6, n_k=4, gamma_halt=0.0)),
+        ("5D L=4 solved",    oracle_5d.run(L=4, n_k=4, g=0.0, t1=0.0)),
+    ]
+    for label, r in cases:
+        try:
+            s = json.dumps(r)
+        except (TypeError, ValueError) as e:
+            raise AssertionError(f"{label}: not JSON-serializable: {e}")
+        # Also parse it back to confirm round-trip
+        r2 = json.loads(s)
+        assert r2["verdict"] == r["verdict"]
+    print(f"  All 7 engine outputs are JSON-serializable (round-trip verified)  OK")
+
+
+def test_against_lab_source_outputs():
+    """Confirm the documented lab source outputs.
+
+    Each value is the exact number the lab source's `run_*_oracle` or
+    `gamma_annihilation_sweep` would print at the default settings.
+    """
+    # 1D: 36_nonhermitian_oracle.py:335-339
+    r = oracle_1d.run(machine="halt_direct")
+    assert r["winding"]["Wint"] == 0
+    r = oracle_1d.run(machine="loop_2cycle")
+    assert r["winding"]["Wint"] == 1
+    # 2D: 37_2d_chern_oracle.py run_2d_oracle(L=8)
+    r = oracle_2d.run(L=8, gamma_halt=0.0, include_projector=False)
+    assert r["bott"]["C"] == 1
+    r = oracle_2d.run(L=8, gamma_halt=10.0, include_projector=False)
+    assert r["bott"]["C"] == 0
+    # 3D: 38_3d_weyl_oracle.py run_3d_weyl_oracle default (L=8, n_kz=24)
+    r = oracle_3d.run(L=8, n_kz=24, gamma_halt=0.0)
+    assert r["profile"]["max_abs_C"] == 2
+    assert r["profile"]["nonzero"] == 14
+    # 4D: 39_4d_axion_oracle.py scale_up (L=6, n_k=6)
+    r = oracle_4d.run(L=6, n_k=6, gamma_halt=0.0)
+    assert r["grid"]["C2"] != 0  # C2 quantized nonzero at L=6
+    # 5D: 40_5d_floquet_oracle.py SOLVED (t1=0, g=0)
+    r = oracle_5d.run(L=4, n_k=4, g=0.0, t1=0.0)
+    assert r["grid"]["total"] == 512
+    assert r["grid"]["active"] == 16
+    print(f"  All 5 dimensions match documented lab source outputs  OK")
+
+
+def test_http_endpoints():
+    """Hit all 5 dimension endpoints via FastAPI TestClient (no server needed)."""
+    from fastapi.testclient import TestClient
+    import sys
+    sys.path.insert(0, os.path.join(VISUALIZER_DIR))
+    # Import server module (not __main__).
+    import importlib
+    if "server" in sys.modules:
+        del sys.modules["server"]
+    import server as _server
+    client = TestClient(_server.app)
+
+    # /api/health
+    h = client.get("/api/health").json()
+    assert h["status"] == "ok"
+
+    # 1D
+    r = client.get("/api/dim1/run", params={"machine": "halt_direct"}).json()
+    assert r["verdict"] == "HALTS"
+    r = client.get("/api/dim1/run", params={"machine": "loop_2cycle"}).json()
+    assert r["verdict"] == "LOOPS"
+
+    # 2D
+    r = client.get("/api/dim2/run", params={"L": 8, "gamma_halt": 0.0,
+                                            "include_projector": False}).json()
+    assert r["bott"]["C"] == 1
+
+    # 3D
+    r = client.get("/api/dim3/run", params={"L": 8, "n_kz": 12,
+                                            "gamma_halt": 0.0}).json()
+    assert r["verdict"].startswith("LOOPS")
+
+    # 4D
+    r = client.get("/api/dim4/run", params={"L": 6, "n_k": 4,
+                                            "gamma_halt": 0.0}).json()
+    assert r["grid"]["C2"] != 0
+
+    # 5D
+    r = client.get("/api/dim5/run", params={"L": 4, "n_k": 4, "t1": 0.0,
+                                            "g": 0.0}).json()
+    assert r["grid"]["total"] == 512
+
+    print(f"  HTTP: /api/health + 5 dimension endpoints all return expected data  OK")
+
+
+def test_summary_table():
+    """Print a unified summary table of all 5 dimensions (loop case)."""
+    print()
+    print("  " + "=" * 58)
+    print("  CANONICAL LOOP CASE PER DIMENSION")
+    print("  " + "=" * 58)
+    print(f"  {'dim':<6} {'verdict':<35} {'topology metric':<20}")
+    print("  " + "-" * 58)
+
+    r = oracle_1d.run(machine="loop_2cycle", n_phi=200)
+    print(f"  {'1D':<6} {r['verdict']:<35} W={r['winding']['Wint']:+d} (point gap)")
+
+    r = oracle_2d.run(L=8, gamma_halt=0.0, include_projector=False)
+    print(f"  {'2D':<6} {r['verdict']:<35} C={r['bott']['C']:+d} (Bott)")
+
+    r = oracle_3d.run(L=8, n_kz=12, gamma_halt=0.0)
+    print(f"  {'3D':<6} {r['verdict']:<35} max|C|={r['profile']['max_abs_C']} (Fermi arc)")
+
+    r = oracle_4d.run(L=6, n_k=4, gamma_halt=0.0)
+    print(f"  {'4D':<6} {r['verdict']:<35} C2={r['grid']['C2']:+d} (axion)")
+
+    r = oracle_5d.run(L=4, n_k=4, g=0.0, t1=0.0)
+    print(f"  {'5D':<6} {r['verdict']:<35} pi-modes={r['grid']['total']} (Floquet)")
+    print("  " + "=" * 58)
+
+
+# ---- Main entry point ---------------------------------------------------
+
 if __name__ == "__main__":
+    t_start = time.time()
+
     print("=" * 60)
     print("  SMOKE TESTS: 1D engine (Phase 1A)")
     print("=" * 60)
@@ -314,5 +552,28 @@ if __name__ == "__main__":
     test_4d_gamma_sweep()
     test_4d_mass_formula()
     test_4d_halt_site_imag()
+    print()
     print("=" * 60)
-    print("  ALL PASSED")
+    print("  SMOKE TESTS: 5D engine (Phase 1E)")
+    print("=" * 60)
+    test_5d_dim()
+    test_5d_loop_solved()
+    test_5d_halt_melted()
+    test_5d_hopping_survival()
+    test_5d_strong_hopping_melts()
+    test_5d_gamma_sweep()
+    test_5d_n_grid_uniform()
+    test_5d_count_pi_modes()
+    print()
+    print("=" * 60)
+    print("  SMOKE TESTS: 1F (cross-dimension)")
+    print("=" * 60)
+    test_all_engines_canonical_run()
+    test_json_serializable()
+    test_against_lab_source_outputs()
+    test_http_endpoints()
+    test_summary_table()
+
+    elapsed = time.time() - t_start
+    print("=" * 60)
+    print(f"  ALL PASSED  ({elapsed:.2f}s)")

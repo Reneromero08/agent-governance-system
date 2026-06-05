@@ -128,28 +128,57 @@ C2 vs gamma_halt — this is real physics, not a bug.
 - [x] Live HTTP: /api/dim4/run?L=6&n_k=4&gamma_halt=0 returns C2=-2, verdict=LOOPS
 - [x] Live HTTP: /api/dim4/run?L=4&n_k=4&gamma_halt=0 returns C2=0 (lattice too small)
 
-### 1E: 5D engine (40)
-- [ ] Write `engine/oracle_5d.py`:
-  - [ ] `floquet_operator(L, kz, kw, alpha, beta, gamma, t1, loss, g) -> U`
-  - [ ] `count_pi_modes(U, threshold) -> n`
-  - [ ] `pi_mode_grid(L, n_k, g) -> [[n at (kz,kw)]]`
-  - [ ] `run(L, n_k, t1, loss, g) -> {pi_grid, total, active, verdict}`
-  - [ ] Import from `40_5d_floquet_oracle.py`
-- [ ] Write `engine/api_routes_5d.py` — `/api/dim5/run?L=...&n_k=...&g=...`
+### 1E: 5D engine (40) — DONE (2026-06-04)
+- [x] Write `engine/oracle_5d.py`:
+  - [x] `build_H(L, t1, loss, gamma) -> {H, N, ...}` (4-comp spinor on LxL lattice)
+  - [x] `floquet_operator(L, kz, kw, a, b, c, t1, loss, g) -> {U, eigvals, ...}`
+  - [x] `count_pi_modes(U, threshold) -> {n_pi_modes, threshold, N}`
+  - [x] `pi_mode_grid(L, n_k, a, b, c, t1, loss, g, threshold) -> {n_grid, total, active, slices, ...}`
+  - [x] `gamma_sweep(L, n_k, gammas, ...) -> {results: [{gamma, total, active, verdict, n_grid}]}`
+  - [x] `run(L, n_k, a, b, c, t1, loss, g, threshold, include_U) -> {verdict, grid, ...}`
+  - [x] Import from `40_5d_floquet_oracle.py` (build_H, floquet_operator, count_pi_modes)
+- [x] Write `engine/api_routes_5d.py` — `/api/dim5/H`, `/api/dim5/floquet`, `/api/dim5/run`, `/api/dim5/gamma_sweep`
 
-### 1F: Smoke tests
-- [ ] Write `tests/smoke.py`:
-  - [ ] For 1D: verify all 4 machines return correct W and verdict
-  - [ ] For 2D: L=8, gamma_halt=0 → C_loop=+1; gamma_halt=10 → C_halt=0
-  - [ ] For 3D: gamma_halt=0 → maxC>0; gamma_halt=15 → maxC=0
-  - [ ] For 4D: gamma_halt=0 → C2≠0; gamma_halt=15 → C2=0
-  - [ ] For 5D: g=0 → 32 pi-modes/slice; g=0.5 → 0
-- [ ] All tests pass against the actual lab source outputs
+**Physics note**: The 5D protocol is SOLVED — at a=b=c=pi/2 the three-step
+non-Clifford sequence gives 2 pi-modes per site (32 for L=4, 72 for L=6).
+But t1>=0.5 (strong hopping) ALSO melts the pi-modes — pi-modes are robust
+only in the ideal Floquet limit or small hopping.  The source's `run_oracle`
+sweeps t1 in [0.0, 0.05, 0.1, 0.2]; default t1=0.1 in the engine matches
+that realistic regime.  Default loss=0.01 keeps eigenvalues on the unit
+circle (|z| ~ 0.99).
 
 **Verify**:
-- `python tests/smoke.py` exits 0
-- Each `/api/dim{N}/run` returns the expected verdict
-- Engine does not modify the source CAT_CAS files (read-only imports)
+- [x] `python -m tests.smoke` exits 0 (1D + 2D + 3D + 4D + 5D)
+- [x] L=4, t1=0, g=0   -> 512 pi-modes  16/16 active  LOOPS  (SOLVED)
+- [x] L=4, t1=0, g=0.5 -> 0 pi-modes    0/16  active  HALTS  (melted)
+- [x] L=4, t1=0.1, g=0 -> 512 pi-modes  16/16 active  LOOPS  (small hopping survives)
+- [x] L=4, t1=1.0, g=0 -> 0 pi-modes    0/16  active  HALTS  (strong hopping melts)
+- [x] gamma_sweep: g=0,0.3 LOOPS;  g=0.5,1.0 HALTS
+- [x] n_grid uniform at ideal t1=0: every slice has 32 pi-modes
+- [x] count_pi_modes returns 32 for ideal L=4
+- [x] N = 4*L*L for L in 4,6
+- [x] Live HTTP: /api/dim5/run?L=4&n_k=4&t1=0&g=0 returns LOOPS
+- [x] Live HTTP: /api/dim5/run?L=4&n_k=4&t1=0&g=0.5 returns HALTS
+
+### 1F: Smoke tests — DONE (2026-06-04)
+- [x] Write `tests/smoke.py` (incremental across 1A-1E + 1F additions):
+  - [x] For 1D: verify all 4 machines return correct W and verdict
+  - [x] For 2D: L=8, gamma_halt=0 → C_loop=+1; gamma_halt=10 → C_halt=0
+  - [x] For 3D: gamma_halt=0 → maxC=2, nonzero=14/24; gamma_halt=15 → maxC=0
+  - [x] For 4D: L=6 n_k=4 gamma_halt=0 → C2=-2 (nonzero); gamma_halt=15 → C2=0
+  - [x] For 5D: t1=0 g=0 → 32 pi-modes/slice, 16/16 active; g=0.5 → 0
+  - [x] All tests pass against the actual lab source outputs
+- [x] 1F cross-dimension tests:
+  - [x] `test_all_engines_canonical_run` -- 6 canonical runs (1D halt+loop, 2D, 3D, 4D, 5D) all return valid verdicts
+  - [x] `test_json_serializable` -- all 7 engine outputs round-trip through json.dumps/loads
+  - [x] `test_against_lab_source_outputs` -- exact numbers from each lab source's main() / sweep
+  - [x] `test_http_endpoints` -- TestClient hits /api/health + all 5 dimension endpoints
+  - [x] `test_summary_table` -- prints unified topology-metric table per dimension
+
+**Verify**:
+- [x] `python -m tests.smoke` exits 0 (36 tests across 1A-1F, ~18s)
+- [x] Each `/api/dim{N}/run` returns the expected verdict (verified via TestClient)
+- [x] Engine does not modify the source CAT_CAS files (read-only imports via importlib)
 
 ---
 
