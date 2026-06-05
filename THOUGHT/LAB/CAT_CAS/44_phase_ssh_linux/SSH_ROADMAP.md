@@ -207,7 +207,7 @@ python3 session_scripts/msr_p4_readonly_observer.py --cores 0-5 --samples 100 --
 
 ---
 
-## Phase 3: Catalytic Computing Ladder — IN PROGRESS (3.1-3.8 COMPLETE, 3.9 NEXT)
+## Phase 3: Catalytic Computing Ladder — IN PROGRESS (3.1-3.9 COMPLETE, 3.10 NEXT)
 
 **Objective:** Prove CAT_CAS can perform meaningful reversible/catalytic computation on the Phenom II, not merely restore bytes. The shared L3 cache is a genuine catalytic tape — borrow, compute, restore, verify — and this phase elevates it from tape restoration to a full operator library, semiotic token bridge, and oracle-style path search.
 
@@ -316,16 +316,25 @@ python3 session_scripts/msr_p4_readonly_observer.py --cores 0-5 --samples 100 --
 - [x] Source: `session_scripts/meaningful_compute.c`
 - [x] Key lesson: catalytic substrate demands XOR, not assignment — `^=` not `=`
 
-### 3.9 Catalytic Token / Sign Operation
+### 3.9 Catalytic Token / Sign Operation — COMPLETE (2026-06-05)
 
-- [ ] Treat token/sign as reversible operator on tape
-- [ ] Encode sign = symbol_id + phase_tag + context_slot
-- [ ] Apply sign to tape (forward)
-- [ ] Read transformed state
-- [ ] Reverse sign (unbind) and verify restoration
-- [ ] This bridges CAT_CAS semiotic layer to bare-metal tape
-- [ ] Output artifact: `PHASE3_9_CATALYTIC_SIGN.md`
-- [ ] Success: symbolic operation changes state, produces readable output, restores tape
+- [x] CAT_CAS semiotic sign layer bridged to bare-metal L3 cache tape
+- [x] Sign = symbol ID + phase tag + context slot, applied via XOR
+- [x] Output slot = interference pattern (XOR of all applied phases)
+
+| Test | Description | Result |
+|------|-------------|--------|
+| Single Sign | Symbol ID + phase tag applied to context slot, interference in output | 4/4 seeds: tape restored, metadata intact |
+| Two-Sign Interference | Two signs to different context slots, combined interference | 4/4 seeds: both signs independently modify output + context, tape restored |
+| Sign with Metadata | Descriptor (magic, version, count, mask) isolated from active slots | 4/4 seeds: metadata survives forward, tape modified, tape restored |
+
+- [x] Sign structure: symbol ID, phase tag, context slot, output slot, metadata
+- [x] Apply = XOR symbol into context, XOR phase into output
+- [x] Reverse = XOR phase out of output, XOR symbol out of context
+- [x] Metadata isolation: slots 8-11 for descriptors, slots 0-6 for active sign area
+- [x] Bridges Semiotic Mechanics (Living Formula v5.2) to physical catalytic tape
+- [x] Source: `session_scripts/catalytic_sign.c`
+- [x] Hardened: non-tautological interference check, LCG state saved between passes
 
 ### 3.10 Oracle-Style Path Restoration
 
@@ -381,7 +390,8 @@ PHASE3_LOGICAL_CATALYTIC_SUBSTRATE_PROVEN
 PHASE3_HOLO_EIGENBASIS_COMPLETE
 PHASE3_OPERATOR_LIBRARY_COMPLETE
 PHASE3_MEANINGFUL_COMPUTATION_COMPLETE
-PHASE3_CATALYTIC_SIGN_NEXT
+PHASE3_CATALYTIC_SIGN_COMPLETE
+PHASE3_ORACLE_PATH_NEXT
 ```
 
 ### Do Not Claim (Phase 3)
@@ -392,7 +402,7 @@ PHASE3_CATALYTIC_SIGN_NEXT
 - Do not claim physical limit violation
 - Do not claim .holo eigenbasis complete until 3.6 passes  ← DONE
 - Do not claim oracle computation until 3.10 passes
-- Do not claim catalytic token/sign complete until 3.9 passes
+- Do not claim catalytic token/sign complete until 3.9 passes  ← DONE
 
 ### Why Phase 3 Matters
 
@@ -574,8 +584,8 @@ If the coupled oscillator network at the edge of chaos produces Wigner-Dyson eig
 ## Immediate Action Items (Next Session)
 
 1. **SSH into the Phenom** — `ssh root@192.168.137.100` (Windows SSH)
-2. **Phase 3.9: Catalytic Token / Sign Operation** — bridge semiotic sign layer to bare-metal tape. Encode sign = symbol_id + phase_tag + context_slot, apply, read, reverse.
-3. **Update roadmap** with Phase 3.9 results
+2. **Phase 3.10: Oracle-Style Path Restoration** — multiple reversible candidate paths, winner selected, tape restored
+3. **Update roadmap** with Phase 3.10 results
 
 ---
 
