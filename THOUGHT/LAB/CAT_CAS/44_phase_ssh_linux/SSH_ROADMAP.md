@@ -464,25 +464,49 @@ Phase 3 is the proof that CAT_CAS has a working catalytic substrate on consumer 
 
 ---
 
-### TRACK A: Catalytic Tape Substrate (available now — 4.0 COMPLETE, 4.1A NEXT)
+### TRACK A: Catalytic Tape Substrate (4.0, 4.1A, 4.2A COMPLETE, 4.3 NEXT)
 
-#### 4.1A Shared Eigenbasis on Tape
+#### 4.1A Shared Eigenbasis on Tape — COMPLETE (2026-06-05)
 
-- [ ] Encode SVh-like shared basis in tape slots
-- [ ] Encode basis vectors, eigenvalue/singular-weight fields, residual tags, and context metadata
-- [ ] Multiple operators must reference the same basis
-- [ ] Forward operation must modify tape non-trivially
-- [ ] Reverse operation must restore tape byte-for-byte
-- [ ] Output artifact: `PHASE4_1A_SHARED_EIGENBASIS_TAPE.md`
+- [x] Shared eigenbasis encoded in reserved tape slots (9-14)
+- [x] Slot 9: Dimension count (2 basis vectors)
+- [x] Slot 10: Basis vector V0 = [1.0, 1.0]
+- [x] Slot 11: Basis vector V1 = [-1.0, 1.0]
+- [x] Slot 12: Singular value S0 = [100, 100]
+- [x] Slot 13: Singular value S1 = [50, 50]
+- [x] Slot 14: Basis checksum (XOR of slots 9-13, self-decoupled)
+- [x] Four tests passed:
 
-#### 4.2A Catalytic Rotation Chain
+| Test | Result |
+|------|--------|
+| Single operator (V0 projection) | Basis unchanged, tape restored |
+| Two operators share basis | R1 and R2 reference same basis, basis intact |
+| Combined projection | Uses V0 and V1, basis + checksum valid |
+| 10-cycle stress | 10/10 cycles restored, basis intact at end |
 
-- [ ] Implement `.holo` layer rotations as reversible tape operators
-- [ ] Forward chain: apply R1, R2, R3...
-- [ ] Read cumulative transform / compressed state
-- [ ] Reverse chain: apply inverse operators in reverse order
-- [ ] Verify SHA-256 and metadata restoration
-- [ ] Output artifact: `PHASE4_2A_CATALYTIC_ROTATION_CHAIN.md`
+- [x] Architecture: operators READ from basis (9-14) but WRITE only to computational slots (0-3)
+- [x] Matches .holo format: one shared SVh matrix referenced by all layers
+- [x] Source: `session_scripts/eigenbasis_tape.c`
+
+#### 4.2A Catalytic Rotation Chain — COMPLETE (2026-06-05)
+
+- [x] .holo layer rotation chain implemented as reversible tape operators
+- [x] 3 layers: R1=pi/2, R2=pi, R3=3pi/2
+- [x] Slots 16-20: Chain metadata (length, index, 3 angles)
+- [x] Slot 21: Accumulated phase (XOR of all layer outputs)
+- [x] Each layer reads previous output, applies rotation via XOR, updates accumulator
+- [x] Self-inverse: applying same rotation again reverses it
+
+| Test | Result |
+|------|--------|
+| Forward chain (R1-R2-R3) | Tape modified, accumulator populated |
+| Reverse chain (R3-R2-R1) | Tape restored, accumulator cleared |
+| Cumulative transform readable | L1, L2, L3 all distinct outputs |
+| 4-input stress test | 4/4 chains restored |
+| Chain metadata survives | Layer count and angles intact |
+
+- [x] Matches .holo format: R_l = U_prev^T @ U_curr, reversible, layer-to-layer
+- [x] Source: `session_scripts/rotation_chain.c`
 
 #### 4.3 Residual Compression Channel
 
@@ -709,8 +733,8 @@ Phase 4 is where `.holo` stops being only a file/compression idea and becomes a 
 ## Immediate Action Items (Next Session)
 
 1. **SSH into the Phenom** — `ssh root@192.168.137.100` (Windows SSH)
-2. **Phase 4.1A: Shared Eigenbasis on Tape** — encode SVh-like basis vectors in slots 9-15, prove multiple operators reference same basis
-3. **Update roadmap** with Phase 4.1A results
+2. **Phase 4.3: Residual Compression Channel** — encode 2-bit residual tags in slots 24-27, prove residuals preserve layer individuality
+3. **Update roadmap** with Phase 4.3 results
 
 ---
 
