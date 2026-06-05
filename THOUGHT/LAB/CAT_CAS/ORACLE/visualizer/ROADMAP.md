@@ -36,16 +36,23 @@
 
 **Goal**: Each dimension callable as a uniform function. 1:1 with the source.
 
-### 1A: 1D engine (35.2)
-- [ ] Write `engine/__init__.py`
-- [ ] Write `engine/serialize.py` — `torch.Tensor` → list of `{re, im}`; `np.ndarray` → list
-- [ ] Write `engine/oracle_1d.py`:
-  - [ ] `build_H(machine, gamma, loss_rate, halt_mult) -> {H: list, labels: list, halt_mask: list, twist_indices: list}`
-  - [ ] `get_spectrum(H) -> {eigvals: [{re, im}], kappa_V: float}`
-  - [ ] `point_gap_winding(H, twist_indices, E_ref, n_phi) -> {Wraw, Wint, det_curve: [{re, abs}]}`
-  - [ ] `run(machine, params) -> {H, spectrum, winding, verdict, ...}`
-  - [ ] Import `build_nonhermitian_H`, `point_gap_winding`, `get_spectral_data` from `36_nonhermitian_oracle.py`
-- [ ] Write `engine/api_routes_1d.py` — FastAPI route `/api/dim1/run?machine=...&gamma=...&...`
+### 1A: 1D engine (35.2) — DONE (2026-06-04)
+- [x] Write `engine/__init__.py`
+- [x] Write `engine/serialize.py` — `torch.Tensor` → list of `{re, im}`; `np.ndarray` → list
+- [x] Write `engine/oracle_1d.py`:
+  - [x] `build_H(machine, gamma, loss_rate, halt_mult) -> {H: list, labels: list, halt_mask: list, twist_indices: list}`
+  - [x] `get_spectrum(H) -> {eigvals: [{re, im}], kappa_V: float}`
+  - [x] `point_gap_winding(H, twist_indices, E_ref, n_phi) -> {Wraw, Wint, det_curve, det_abs}`
+  - [x] `run(machine, params) -> {H, spectrum, winding, verdict, ...}`
+  - [x] Import `build_nonhermitian_H`, `point_gap_winding`, `get_spectral_data` from `36_nonhermitian_oracle.py`
+- [x] Write `engine/api_routes_1d.py` — FastAPI route `/api/dim1/run?machine=...&gamma=...&...`
+- [x] Write `tests/smoke.py` — 4 machines + halt_mult sweep + gamma=0 decoupling + dim check (all pass)
+
+**Verify**:
+- [x] `python tests/smoke.py` exits 0
+- [x] `/api/dim1/run?machine=halt_direct` → W=0, verdict=HALTS
+- [x] `/api/dim1/run?machine=loop_2cycle` → W=+1, verdict=LOOPS
+- [x] Engine imports lab source via `importlib.util.spec_from_file_location` (read-only)
 
 ### 1B: 2D engine (37)
 - [ ] Write `engine/oracle_2d.py`:
