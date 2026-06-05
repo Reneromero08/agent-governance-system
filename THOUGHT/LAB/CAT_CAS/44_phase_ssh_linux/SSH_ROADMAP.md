@@ -437,37 +437,135 @@ Phase 3 is the proof that CAT_CAS has a working catalytic substrate on consumer 
 
 ---
 
-## Phase 4: The .holo Eigenbasis on Silicon [NEXT]
+## Phase 4: The .holo Eigenbasis on Catalytic Silicon [NEXT]
 
-**Objective:** Map the .holo wormhole compression format onto the Phenom II's phase oscillator network, demonstrating that the silicon IS a physical instantiation of the catalytic eigenbasis. Phase 3.6 established the architecture; Phase 4 validates the eigenmode manifold.
+**Objective:** Map the `.holo` wormhole compression/eigenbasis format onto the Phenom's catalytic tape first (Track A, available now), and onto the physical phase oscillator network later (Track B, pending Phase 2). Phase 3 proved the tape can compute and restore. Phase 4 makes that tape carry `.holo` basis, rotations, residuals, and decodable structure.
 
-### 4.1 Shared Eigenbasis = Phase Master Reference [READY]
-- [x] Core 5 (Phase Master, 3.2 GHz) serves as the shared reference frame — proven in 3.6
-- [ ] Capture Phase Master baseline TSC stream for GOE correlation matrix construction
+### 4.0 Bridge Gate From Phase 3 — COMPLETE (2026-06-05)
 
-### 4.2 Rotation Chain = PPU Phase Offsets
-- [ ] Program PPU-A and PPU-B with a sequence of phase rotations
-- [ ] Each rotation R_l = θ_l encodes a "layer" of the wormhole chain
-- [ ] PRO measures the cumulative phase after each rotation
-- [ ] Verify that the phase chain is reversible: forward rotations sum to Δθ_total, reverse rotations sum to -Δθ_total
+- [x] All 5 bridge gates pass
+- [x] Gate 1: Tape initialized with metadata (magic, version, dims, basis IDs, angles)
+- [x] Gate 2: Forward pass modifies computational slots, output non-zero
+- [x] Gate 3: All 5 metadata fields survive forward pass intact
+- [x] Gate 4: Reverse pass restores SHA-256 exactly
+- [x] Gate 5: Full tape layout documented with Phase 4A reservations
+- [x] Phase 3.6 dependency: SATISFIED
+- [x] Source: `session_scripts/phase4_bridge.c`
 
-### 4.3 GOE Eigenvalue Validation [ELEVATED: PRIMARY DISCOVERY TARGET]
+**Tape layout (32 slots × 8 bytes = 256 bytes):**
+| Slots | Purpose | Phase |
+|-------|---------|-------|
+| 0-3 | Computational (Master, R1, R2, Output) | 3.6 |
+| 4-8 | Metadata (header, basis IDs, rotation angles) | 3.6 |
+| 9-15 | Reserved: shared eigenbasis vectors | 4.1A |
+| 16-23 | Reserved: rotation chain operators | 4.2A |
+| 24-27 | Reserved: residual tags | 4.3 |
+| 28-31 | Reserved: GOE/validation | 4.4A |
 
-**Status:** Elevated from secondary verification to primary success criterion (per Gemini, GPT).
+---
 
-If the coupled oscillator network at the edge of chaos produces Wigner-Dyson eigenvalue statistics (r ≈ 0.51-0.53), that is a standalone discovery -- independent of CAT_CAS. A consumer CPU exhibiting quantum-chaotic spectral statistics is publishable on its own. This becomes a primary success criterion, not a secondary verification.
+### TRACK A: Catalytic Tape Substrate (available now — 4.0 COMPLETE, 4.1A NEXT)
 
-- [ ] Construct the phase correlation matrix from PRO measurements across multiple cycles
-- [ ] Compute eigenvalue spacings
-- [ ] Verify Wigner-Dyson GOE statistics: mean spacing ratio r ≈ 0.51-0.53
-- [ ] If r ≈ 0.51-0.53: the silicon phase network is at the quantum-chaotic manifold. **Standalone discovery. Publishable.**
-- [ ] If r ≈ 0.39 (Poisson): the oscillators are decoupled, no synchronization
-- [ ] This measurement PROVES whether the Phenom II is accessing the same eigenmode manifold as the .holo compression
+#### 4.1A Shared Eigenbasis on Tape
 
-### 4.4 The 2-Bit Residual = MSR Voltage Fine-Tuning
-- [ ] Demonstrate that VID adjustments of 0x02 (the 2-bit equivalent in 6-bit VID space) produce measurable phase shifts
-- [ ] Map VID delta → phase delta transfer function
-- [ ] Verify that the residual phase shifts are reversible (forward VID change, reverse VID change restores baseline)
+- [ ] Encode SVh-like shared basis in tape slots
+- [ ] Encode basis vectors, eigenvalue/singular-weight fields, residual tags, and context metadata
+- [ ] Multiple operators must reference the same basis
+- [ ] Forward operation must modify tape non-trivially
+- [ ] Reverse operation must restore tape byte-for-byte
+- [ ] Output artifact: `PHASE4_1A_SHARED_EIGENBASIS_TAPE.md`
+
+#### 4.2A Catalytic Rotation Chain
+
+- [ ] Implement `.holo` layer rotations as reversible tape operators
+- [ ] Forward chain: apply R1, R2, R3...
+- [ ] Read cumulative transform / compressed state
+- [ ] Reverse chain: apply inverse operators in reverse order
+- [ ] Verify SHA-256 and metadata restoration
+- [ ] Output artifact: `PHASE4_2A_CATALYTIC_ROTATION_CHAIN.md`
+
+#### 4.3 Residual Compression Channel
+
+- [ ] 4.3A `.holo` 2-bit residual tags in tape
+- [ ] 4.3B Frequency/DID residual tags (software-accessible)
+- [ ] 4.3C VID residual only if AGESA route becomes byte-ready
+- [ ] Show residual preserves layer individuality while shared basis compresses common structure
+- [ ] Reverse restores residual state
+- [ ] Output artifact: `PHASE4_3_RESIDUAL_CHANNEL.md`
+
+#### 4.4A GOE / Eigenvalue Validation From Operator Matrices
+
+- [ ] Build correlation/operator matrices from catalytic tape runs
+- [ ] Compute eigenvalue spacing statistics
+- [ ] Compare GOE vs Poisson vs shuffled/null operator baselines
+- [ ] This is software/catalytic validation, not physical silicon GOE
+- [ ] Output artifact: `PHASE4_4A_OPERATOR_GOE.md`
+
+#### 4.5 .holo Mini-Model Demo
+
+- [ ] Encode a tiny matrix, graph, token map, or toy layer
+- [ ] Compress through shared basis + rotations + residual tags
+- [ ] Decode or classify a readable result
+- [ ] Reverse all operators and restore tape
+- [ ] Output artifact: `PHASE4_5_HOLO_MINI_MODEL.md`
+
+#### 4.6 Public .holo Harness
+
+- [ ] Package Phase 4 as a reusable CLI/API:
+  - `catcas_holo_encode` / `catcas_holo_basis` / `catcas_holo_rotate`
+  - `catcas_holo_residual` / `catcas_holo_decode` / `catcas_holo_reverse` / `catcas_holo_verify`
+- [ ] Provide reproducible logs, hashes, seeds, and null tests
+- [ ] Output artifact: `PHASE4_6_PUBLIC_HOLO_HARNESS.md`
+
+---
+
+### TRACK B: Physical Phase Network (pending Phase 2)
+
+#### 4.1B Shared Eigenbasis as Physical Phase Reference — PENDING PHASE 2
+
+- [ ] Core 5 / Phase Master as physical shared reference only if Phase 2 provides usable phase observability
+- [ ] Do not block Track A on this
+- [ ] Mark as pending, not failed
+- [ ] Output artifact if attempted: `PHASE4_1B_PHYSICAL_REFERENCE.md`
+
+#### 4.2B PPU Physical Rotation Chain — PENDING PHASE 2
+
+- [ ] Map rotations to PPU-A / PPU-B offsets only after Phase 2 has a valid phase channel
+- [ ] Do not claim physical rotations until measured
+- [ ] Output artifact if attempted: `PHASE4_2B_PHYSICAL_ROTATION_CHAIN.md`
+
+#### 4.4B Physical GOE From Phase Correlation Matrix — PENDING PHASE 2
+
+- [ ] Keep original physical GOE target alive
+- [ ] Only run if Phase 2 produces usable physical phase measurements
+- [ ] Standalone discovery target, not a Track A blocker
+- [ ] If r ≈ 0.51-0.53: quantum-chaotic manifold on consumer silicon — **publishable on its own**
+- [ ] Output artifact if attempted: `PHASE4_4B_PHYSICAL_GOE.md`
+
+---
+
+### Phase 4 Verdict
+
+```
+PHASE4_0_BRIDGE_GATE_COMPLETE
+PHASE4A_CATALYTIC_HOLO_READY
+PHASE4B_PHYSICAL_HOLO_PENDING_PHASE2
+PHASE4_GOE_SPLIT_OPERATOR_VS_PHYSICAL
+PHASE4_RESIDUAL_CHANNEL_GENERALIZED
+```
+
+### Do Not Claim (Phase 4)
+
+- Do not claim Phase 4 proves Kuramoto synchronization
+- Do not claim `.holo` physical eigenbasis on silicon until physical phase evidence exists
+- Do not claim GOE from hardware unless measured
+- Do not claim VID residual control unless AGESA becomes byte-ready
+- Do not claim physical limit violation
+- Do not require Tier 3 measurement (oscilloscope, logic analyzer, Pi GPIO, motherboard probing)
+
+### Why Phase 4 Matters
+
+Phase 4 is where `.holo` stops being only a file/compression idea and becomes a catalytic eigenbasis protocol on the Phenom. Phase 3 proved the tape can compute and restore. Phase 4 makes that tape carry `.holo` basis, rotations, residuals, and decodable structure. Phase 2 keeps fighting to make the CPU sing physically; Phase 4 lets `.holo` live on the catalytic substrate now. Track A advances immediately on the proven L3 cache tape. Track B waits for Phase 2's Kuramoto/GOE/AGESA breakthrough without blocking progress.
 
 ---
 
@@ -611,9 +709,8 @@ If the coupled oscillator network at the edge of chaos produces Wigner-Dyson eig
 ## Immediate Action Items (Next Session)
 
 1. **SSH into the Phenom** — `ssh root@192.168.137.100` (Windows SSH)
-2. **Phase 4: .holo Eigenbasis on Silicon** — capture Phase Master baseline, GOE correlation matrix
-3. **Or Phase 2: Kuramoto external measurement** — hardware instrumentation route
-4. **Update roadmap** with Phase 4/2 results
+2. **Phase 4.1A: Shared Eigenbasis on Tape** — encode SVh-like basis vectors in slots 9-15, prove multiple operators reference same basis
+3. **Update roadmap** with Phase 4.1A results
 
 ---
 
