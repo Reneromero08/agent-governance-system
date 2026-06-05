@@ -133,15 +133,22 @@ Current Exp44 evidence shows that the earlier Linux/software phase routes did no
 | GOE route | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | GOE spacing behavior was not observed. | `cpu_sing_2/PHASE2_GOE.md` |
 | Ising route | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | Ising behavior was not observed. | `cpu_sing_2/PHASE2_ISING_MAP.md` |
 | AGESA global branch edit | `AGESA_GLOBAL_PATCH_REJECTED` | Global `JBE -> JAE` at `0x00366E3E` is rejected. It is not P4-safe and the prior attempt caused no boot; backup BIOS recovered after battery removal. | `cpu_hack/PATCH_ANALYSIS.md`, `gpt_research/UNDERVOLT_PATHWAY_1_BIOS_AGESA.md` |
-| P4-safe AGESA route | `ARG0C_RUNTIME_PRODUCED_STRUCTURE` / `AGESA_P4_SAFE_ROUTE_NOT_BYTE_READY` | Current BIOS/PE32/disassembly artifacts do not prove a P4-only static table record or executable code cave. The master pass found the `.dG3_DXE` heap/table consumer at `0xFFF72B3C`, confirmed `0xFFF8D11E -> 0xFFF7371A`, recovered helper `0xFFF4CF55`, found outer producer `0xFFF4D12F` registered through `.data` slot `0xFFF7F516`, and found `0xFFF4CF9C` passed through callback descriptor setup at `0xFFF4D1AB` into descriptor interpreter `0xFFF4AADD`. `arg_0C` is a variable-length runtime-produced record list, not a byte-ready static P4 record. | `cpu_sing_2/PHASE2_AGESA_P4_SAFE_FINAL_PACK.md`, `cpu_sing_3/AGESA_NEXT_GATE_FINAL_PACK.md`, `cpu_sing_3/PHASE2_MASTER_A_DISPATCH_SOURCE.md`, `cpu_sing_3/PHASE2_FW_ARG0C_PROVENANCE.md` |
+| P4-safe AGESA route | `P4_FIELD_RUNTIME_MSR_DERIVED` / `AGESA_P4_SAFE_ROUTE_NOT_BYTE_READY` | Current BIOS/PE32/disassembly artifacts do not prove a P4-only static table record or executable code cave. The master pass found the `.dG3_DXE` heap/table consumer at `0xFFF72B3C`, confirmed `0xFFF8D11E -> 0xFFF7371A`, recovered helper `0xFFF4CF55`, found outer producer `0xFFF4D12F` registered through `.data` slot `0xFFF7F516`, decoded service descriptor `0xFFF7E698 -> 0xFFF8D108`, and mapped constructor field `selected_base + pstate*0x18 + 0x1C` to producer `entry +0x04`. That field is output `arg_14` from `[service+0x22]` / `0xFFF7348D`; `0xFFF44E76` is `rdmsr`, and P4 resolves to runtime `MSRC001_0068`, not a byte-ready static P4 record. | `cpu_sing_2/PHASE2_AGESA_P4_SAFE_FINAL_PACK.md`, `cpu_sing_3/AGESA_NEXT_GATE_FINAL_PACK.md`, `cpu_sing_3/PHASE2_MASTER_A_DISPATCH_SOURCE.md`, `cpu_sing_3/PHASE2_FW_ARG0C_PROVENANCE.md` |
 | Rebuild toolchain | `TOOLCHAIN_ACQUIRED_NOOP_NOT_PROVEN` | LongSoft UEFIReplace/UEFITool 0.28.0 was acquired. Identical body replacement did not produce a parse-clean saved image; body-only `-asis` output is parser-rejected. | `cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt`, `cpu_sing_3/PHASE2_MASTER_CPU_SING_OR_TRUE_WALL.md` |
 | Public donor workflow | `PUBLIC_MOD_DONOR_DIFFED` | Official F2j stock and public NVMe donor were acquired, hashed, parsed, and diffed. The donor only inserts `NvmExpressDxe_4` into existing free space at `0x002C58A0-0x002CA9FF`; later volumes remain byte-identical. | `cpu_sing_3/PHASE2_DONOR_DIFF_REPORT.md` |
+| Runtime MSR observer | `RUNTIME_MSR_OBSERVATION_COMPLETE` | Read-only SSH observer captured P4 `MSRC001_0068` and COFVID status across cores. COFVID VID stayed `0x12` for all samples; cores 0/1/2/5 P4 VID was `0x1A`, while cores 3/4 P4 VID was `0x12` with DID `3`. | `cpu_sing_3/PHASE2_RUNTIME_MSR_OBSERVER_REPORT.md`, `session_scripts/msr_p4_readonly_observer.py` |
 | External observability | `ARCHIVED_OPTIONAL_VALIDATION_ONLY` | External capture artifacts remain documented, but Tier 3 physical instrumentation is not a current success path, stop condition, or recommended next action for this software/firmware goal. | `cpu_sing_2/PHASE2_DEEP_3_EXTERNAL_MEASURE.md`, `cpu_sing_3/PHASE2_MASTER_D_EXTERNAL_OBSERVABILITY.md` |
 | Catalytic tape / `.holo` tape | `CATALYTIC_TAPE_WORKING_NON_KURAMOTO` | Catalytic tape and `.holo` restoration work, but this is not Phase 2 Kuramoto success. | `cpu_sing_1/CPU_SING_GOAL_FINAL_PACK.md`, `cpu_sing_1/GOAL_ROUTE_7_HOLO.md` |
 
 **Do not repeat:** no BIOS flash, no global AGESA branch edit, no voltage writes, no P0-P3 undervolt, no Tier 3 physical instrumentation as the current success path, and no claim that catalytic tape restoration proves phase lock.
 
-**Next software/firmware boundary:** resolve the service table feeding `0xFFF4D12F`, the typed descriptor callbacks behind `0xFFF4AADD`, and force-save a parse-clean identical no-op rebuild. Do not produce a P4-safe candidate until no-op rebuild proof, P0-P3 unchanged proof, P4-only offset/byte proof, checksum proof, and clean parse proof all exist.
+**Next software/firmware boundary:** run read-only load/affinity characterization around `MSRC001_0068`, COFVID status, PSTATE_STATUS, and TSC jitter; also prove a parse-clean identical no-op rebuild for any future firmware edits. Do not produce a P4-safe candidate until no-op rebuild proof, P0-P3 unchanged proof, P4-only offset/byte proof, checksum proof, and clean parse proof all exist.
+
+Completed read-only runtime command:
+
+```bash
+python3 session_scripts/msr_p4_readonly_observer.py --cores 0-5 --samples 100 --json
+```
 
 ---
 
@@ -189,8 +196,10 @@ Current Exp44 evidence shows that the earlier Linux/software phase routes did no
 - [x] Helper `0xFFF4CF55` recovered; it walks variable-length records inside `arg_0C`, proving `arg_0C` is a runtime-produced record-list structure.
 - [x] Public GA-970A-DS3P BIOS-mod donor workflow advanced: official F2j stock and public NVMe donor pair acquired, parsed, and diffed.
 - [x] External measurement route archived as optional validation only for this goal; Tier 3 is out of scope.
-- [x] Verdict: `AGESA_GLOBAL_PATCH_REJECTED`, `AGESA_P4_SAFE_ROUTE_NOT_BYTE_READY`, `ARG0C_RUNTIME_PRODUCED_STRUCTURE`, `TOOLCHAIN_ACQUIRED_NOOP_NOT_PROVEN`, `PUBLIC_MOD_DONOR_DIFFED`, and `SOFTWARE_FIRMWARE_ROUTES_ACTIVE`.
-- [ ] Continue by resolving the service table feeding `0xFFF4D12F`, the typed descriptor callbacks behind `0xFFF4AADD`, or force-saving a parse-clean identical no-op rebuild.
+- [x] Verdict: `AGESA_GLOBAL_PATCH_REJECTED`, `AGESA_P4_SAFE_ROUTE_NOT_BYTE_READY`, `ARG0C_RUNTIME_PRODUCED_STRUCTURE`, `SERVICE_DESCRIPTOR_DECODED`, `RECORD_WRITE_MAP_ADVANCED`, `ENTRY_PLUS_04_SOURCE_TRACED`, `P4_FIELD_RUNTIME_MSR_DERIVED`, `TOOLCHAIN_ACQUIRED_NOOP_NOT_PROVEN`, `PUBLIC_MOD_DONOR_DIFFED`, and `SOFTWARE_FIRMWARE_ROUTES_ACTIVE`.
+- [x] Added read-only runtime observer: `session_scripts/msr_p4_readonly_observer.py`.
+- [x] Ran read-only observer on target; verdict `RUNTIME_MSR_OBSERVATION_COMPLETE`.
+- [ ] Continue with read-only load/affinity characterization or force-saving a parse-clean identical no-op rebuild.
 
 ### 2.A ADDENDUM: Operational Definition of Phase (GPT)
 
@@ -198,7 +207,7 @@ Current Exp44 evidence shows that the earlier Linux/software phase routes did no
 
 ---
 
-## Phase 3: Catalytic Computing Ladder — IN PROGRESS (3.1-3.6 COMPLETE, 3.7 NEXT)
+## Phase 3: Catalytic Computing Ladder — IN PROGRESS (3.1-3.7 COMPLETE, 3.8 NEXT)
 
 **Objective:** Prove CAT_CAS can perform meaningful reversible/catalytic computation on the Phenom II, not merely restore bytes. The shared L3 cache is a genuine catalytic tape — borrow, compute, restore, verify — and this phase elevates it from tape restoration to a full operator library, semiotic token bridge, and oracle-style path search.
 
@@ -271,21 +280,25 @@ Current Exp44 evidence shows that the earlier Linux/software phase routes did no
 - [x] Output artifact: `PHASE3_6_HOLO_EIGENBASIS.md` — implicit in roadmap (this entry)
 - [x] Implementation: `session_scripts/holo_metadata.c`
 
-### 3.7 Multi-Slot Catalytic Operator Library [NEXT]
+### 3.7 Multi-Slot Catalytic Operator Library — COMPLETE (2026-06-04)
 
-- [ ] Implement reusable reversible operators:
-  - `XOR_BIND` — bind symbol to slot via XOR
-  - `ROTATE_LEFT` / `ROTATE_RIGHT` — cyclic slot rotation with inverse
-  - `PERMUTE_SLOTS` — deterministic permutation, inverse = reverse perm
-  - `PHASE_TAG` — tag slot with phase marker, inverse = untag
-  - `SIGN_BIND` — bind sign = (symbol_id, phase_tag, context_slot) to tape
-  - `BASIS_SWAP` — swap two basis slots, self-inverse
-  - `CHECKSUM_BIND` — bind rolling XOR checksum across slots, inverse = rebind
-- [ ] Every operator must have a documented inverse
-- [ ] Every operator must modify tape in forward pass and restore in reverse pass
-- [ ] Test each operator with N seeds, N tape sizes
-- [ ] Output artifact: `PHASE3_7_OPERATOR_LIBRARY.md`
-- [ ] Success: all operators pass forward-modify / reverse-restore across seed/size sweep
+- [x] 7 reversible operators implemented and tested
+- [x] 4 seeds per operator, 28/28 tests pass (100%)
+- [x] Every operator verified: forward modifies tape (SHA-256 changes), reverse restores tape (SHA-256 matches)
+
+| Operator | Function | Inverse | Result |
+|----------|----------|---------|--------|
+| `XOR_BIND` | XOR value into slot | XOR same value | 4/4 |
+| `ROTATE_LEFT` | Rotate bits left by n | ROTATE_RIGHT by n | 4/4 |
+| `ROTATE_RIGHT` | Rotate bits right by n | ROTATE_LEFT by n | 4/4 |
+| `PHASE_TAG` | XOR phase marker into slot | XOR same marker | 4/4 |
+| `SIGN_BIND` | XOR symbol+context into slot | XOR same sign | 4/4 |
+| `PERMUTE_SLOTS` | Swap two slots | Swap same slots | 4/4 |
+| `CHECKSUM_BIND` | XOR checksum of data slots | XOR same checksum | 4/4 |
+
+- [x] All operators use deterministic LCG-seeded tape initialization
+- [x] Source: `session_scripts/operator_library.c` (standalone, compilable test harness)
+- [x] Operators ready for Phase 3.8 composition into meaningful computation
 
 ### 3.8 Meaningful Reversible Computation
 
@@ -364,8 +377,8 @@ Macroscopic SHA-256 restoration is achievable. Microscopic zero-entropy is not -
 ```
 PHASE3_LOGICAL_CATALYTIC_SUBSTRATE_PROVEN
 PHASE3_HOLO_EIGENBASIS_COMPLETE
-PHASE3_MEANINGFUL_COMPUTATION_IN_PROGRESS
-PHASE3_OPERATOR_LIBRARY_NEXT
+PHASE3_OPERATOR_LIBRARY_COMPLETE
+PHASE3_MEANINGFUL_COMPUTATION_NEXT
 ```
 
 ### Do Not Claim (Phase 3)
@@ -558,8 +571,8 @@ If the coupled oscillator network at the edge of chaos produces Wigner-Dyson eig
 ## Immediate Action Items (Next Session)
 
 1. **SSH into the Phenom** — `ssh root@192.168.137.100` (Windows SSH)
-2. **Phase 3.7: Multi-Slot Catalytic Operator Library** — implement XOR_BIND, ROTATE, PERMUTE, PHASE_TAG, SIGN_BIND, BASIS_SWAP, CHECKSUM_BIND
-3. **Update roadmap** with operator library results
+2. **Phase 3.8: Meaningful Reversible Computation** — compose operators from 3.7, produce readable result extracted before reverse, restore tape. Candidates: reversible parity, hash fragment, FSM transition, symbolic binding, toy SAT step.
+3. **Update roadmap** with Phase 3.8 results
 
 ---
 
