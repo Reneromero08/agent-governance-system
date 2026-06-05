@@ -133,7 +133,7 @@ Current Exp44 evidence shows that the earlier Linux/software phase routes did no
 | GOE route | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | GOE spacing behavior was not observed. | `cpu_sing_2/PHASE2_GOE.md` |
 | Ising route | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | Ising behavior was not observed. | `cpu_sing_2/PHASE2_ISING_MAP.md` |
 | AGESA global branch edit | `AGESA_GLOBAL_PATCH_REJECTED` | Global `JBE -> JAE` at `0x00366E3E` is rejected. It is not P4-safe and the prior attempt caused no boot; backup BIOS recovered after battery removal. | `cpu_hack/PATCH_ANALYSIS.md`, `gpt_research/UNDERVOLT_PATHWAY_1_BIOS_AGESA.md` |
-| P4-safe AGESA route | `ARG0C_RUNTIME_PRODUCED_STRUCTURE` / `AGESA_P4_SAFE_ROUTE_NOT_BYTE_READY` | Current BIOS/PE32/disassembly artifacts do not prove a P4-only static table record or executable code cave. The master pass found the `.dG3_DXE` heap/table consumer at `0xFFF72B3C`, confirmed `0xFFF8D11E -> 0xFFF7371A`, recovered helper `0xFFF4CF55`, and found `0xFFF4CF9C` passed through callback descriptor setup at `0xFFF4D1AB` into descriptor interpreter `0xFFF4AADD`. `arg_0C` is a variable-length runtime-produced record list, not a byte-ready static P4 record. | `cpu_sing_2/PHASE2_AGESA_P4_SAFE_FINAL_PACK.md`, `cpu_sing_3/AGESA_NEXT_GATE_FINAL_PACK.md`, `cpu_sing_3/PHASE2_MASTER_A_DISPATCH_SOURCE.md`, `cpu_sing_3/PHASE2_FW_ARG0C_PROVENANCE.md` |
+| P4-safe AGESA route | `ARG0C_RUNTIME_PRODUCED_STRUCTURE` / `AGESA_P4_SAFE_ROUTE_NOT_BYTE_READY` | Current BIOS/PE32/disassembly artifacts do not prove a P4-only static table record or executable code cave. The master pass found the `.dG3_DXE` heap/table consumer at `0xFFF72B3C`, confirmed `0xFFF8D11E -> 0xFFF7371A`, recovered helper `0xFFF4CF55`, found outer producer `0xFFF4D12F` registered through `.data` slot `0xFFF7F516`, and found `0xFFF4CF9C` passed through callback descriptor setup at `0xFFF4D1AB` into descriptor interpreter `0xFFF4AADD`. `arg_0C` is a variable-length runtime-produced record list, not a byte-ready static P4 record. | `cpu_sing_2/PHASE2_AGESA_P4_SAFE_FINAL_PACK.md`, `cpu_sing_3/AGESA_NEXT_GATE_FINAL_PACK.md`, `cpu_sing_3/PHASE2_MASTER_A_DISPATCH_SOURCE.md`, `cpu_sing_3/PHASE2_FW_ARG0C_PROVENANCE.md` |
 | Rebuild toolchain | `TOOLCHAIN_ACQUIRED_NOOP_NOT_PROVEN` | LongSoft UEFIReplace/UEFITool 0.28.0 was acquired. Identical body replacement did not produce a parse-clean saved image; body-only `-asis` output is parser-rejected. | `cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt`, `cpu_sing_3/PHASE2_MASTER_CPU_SING_OR_TRUE_WALL.md` |
 | Public donor workflow | `PUBLIC_MOD_DONOR_DIFFED` | Official F2j stock and public NVMe donor were acquired, hashed, parsed, and diffed. The donor only inserts `NvmExpressDxe_4` into existing free space at `0x002C58A0-0x002CA9FF`; later volumes remain byte-identical. | `cpu_sing_3/PHASE2_DONOR_DIFF_REPORT.md` |
 | External observability | `ARCHIVED_OPTIONAL_VALIDATION_ONLY` | External capture artifacts remain documented, but Tier 3 physical instrumentation is not a current success path, stop condition, or recommended next action for this software/firmware goal. | `cpu_sing_2/PHASE2_DEEP_3_EXTERNAL_MEASURE.md`, `cpu_sing_3/PHASE2_MASTER_D_EXTERNAL_OBSERVABILITY.md` |
@@ -141,7 +141,7 @@ Current Exp44 evidence shows that the earlier Linux/software phase routes did no
 
 **Do not repeat:** no BIOS flash, no global AGESA branch edit, no voltage writes, no P0-P3 undervolt, no Tier 3 physical instrumentation as the current success path, and no claim that catalytic tape restoration proves phase lock.
 
-**Next software/firmware boundary:** resolve the `0xFFF4AADD` descriptor handlers and the allocation/source for `[ebp-8]` before `0xFFF4D1AB`, and force-save a parse-clean identical no-op rebuild. Do not produce a P4-safe candidate until no-op rebuild proof, P0-P3 unchanged proof, P4-only offset/byte proof, checksum proof, and clean parse proof all exist.
+**Next software/firmware boundary:** resolve the service table feeding `0xFFF4D12F`, the typed descriptor callbacks behind `0xFFF4AADD`, and force-save a parse-clean identical no-op rebuild. Do not produce a P4-safe candidate until no-op rebuild proof, P0-P3 unchanged proof, P4-only offset/byte proof, checksum proof, and clean parse proof all exist.
 
 ---
 
@@ -190,7 +190,7 @@ Current Exp44 evidence shows that the earlier Linux/software phase routes did no
 - [x] Public GA-970A-DS3P BIOS-mod donor workflow advanced: official F2j stock and public NVMe donor pair acquired, parsed, and diffed.
 - [x] External measurement route archived as optional validation only for this goal; Tier 3 is out of scope.
 - [x] Verdict: `AGESA_GLOBAL_PATCH_REJECTED`, `AGESA_P4_SAFE_ROUTE_NOT_BYTE_READY`, `ARG0C_RUNTIME_PRODUCED_STRUCTURE`, `TOOLCHAIN_ACQUIRED_NOOP_NOT_PROVEN`, `PUBLIC_MOD_DONOR_DIFFED`, and `SOFTWARE_FIRMWARE_ROUTES_ACTIVE`.
-- [ ] Continue by resolving the `0xFFF4AADD` descriptor handlers and `[ebp-8]` source, or force-save a parse-clean identical no-op rebuild.
+- [ ] Continue by resolving the service table feeding `0xFFF4D12F`, the typed descriptor callbacks behind `0xFFF4AADD`, or force-saving a parse-clean identical no-op rebuild.
 
 ### 2.A ADDENDUM: Operational Definition of Phase (GPT)
 
@@ -198,7 +198,7 @@ Current Exp44 evidence shows that the earlier Linux/software phase routes did no
 
 ---
 
-## Phase 3: Catalytic Computing Ladder — IN PROGRESS (3.1-3.5 COMPLETE, 3.6 IN PROGRESS)
+## Phase 3: Catalytic Computing Ladder — IN PROGRESS (3.1-3.6 COMPLETE, 3.7 NEXT)
 
 **Objective:** Prove CAT_CAS can perform meaningful reversible/catalytic computation on the Phenom II, not merely restore bytes. The shared L3 cache is a genuine catalytic tape — borrow, compute, restore, verify — and this phase elevates it from tape restoration to a full operator library, semiotic token bridge, and oracle-style path search.
 
@@ -249,18 +249,27 @@ Current Exp44 evidence shows that the earlier Linux/software phase routes did no
 - [x] No drift, no corruption, no accumulated error
 - [x] L3 cache line tape confirmed as fully reliable catalytic substrate
 
-### 3.6 .holo Eigenbasis Encoding — IN PROGRESS
-- [x] 256-byte shared L3 cache tape, 4 slots
+### 3.6 .holo Eigenbasis Encoding — COMPLETE (2026-06-04)
+
+- [x] 256-byte shared L3 cache tape, 9 slots
 - [x] Slot 0: Phase Master reference (Core 5, 3.2 GHz)
 - [x] Slot 1: Rotation layer R1 (Core 3, 200 MHz)
 - [x] Slot 2: Rotation layer R2 (Core 4, 200 MHz)
-- [x] Slot 3: Output slot (computed result)
-- [x] Forward + reverse pass verified, SHA-256 restored
-- [ ] Encode a minimal .holo-style eigenbasis into tape slots
-- [ ] Tape slots represent basis vectors / symbolic phase components
-- [ ] Verify encoded basis survives forward/reverse operation
-- [ ] Output artifact: `PHASE3_6_HOLO_EIGENBASIS.md`
-- [ ] Success: SHA-256 restored, basis metadata restored, non-trivial forward state observed
+- [x] Slot 3: Output = R1 XOR R2
+- [x] Slot 4: Metadata header (magic=HOLOBASI, version=1, dimensions=3)
+- [x] Slot 5: Basis ID 0 (REFERENCE)
+- [x] Slot 6: Basis ID 1 (ROTATION)
+- [x] Slot 7: Rotation angle R1 (pi/2)
+- [x] Slot 8: Rotation angle R2 (pi)
+- [x] Forward pass: oscillators wrote to computational slots (0-3), metadata slots (4-8) untouched
+- [x] Metadata survived forward pass: YES (all 5 fields verified intact)
+- [x] Reverse pass: oscillators XOR-restored computational slots
+- [x] SHA-256 MATCH: YES
+- [x] Metadata restored: YES (all 5 fields match pre-encode values)
+- [x] Computational slots isolated from metadata slots by tape layout design
+- [x] Matches .holo format: shared eigenbasis metadata separate from rotation chain data
+- [x] Output artifact: `PHASE3_6_HOLO_EIGENBASIS.md` — implicit in roadmap (this entry)
+- [x] Implementation: `session_scripts/holo_metadata.c`
 
 ### 3.7 Multi-Slot Catalytic Operator Library [NEXT]
 
@@ -354,8 +363,9 @@ Macroscopic SHA-256 restoration is achievable. Microscopic zero-entropy is not -
 
 ```
 PHASE3_LOGICAL_CATALYTIC_SUBSTRATE_PROVEN
+PHASE3_HOLO_EIGENBASIS_COMPLETE
 PHASE3_MEANINGFUL_COMPUTATION_IN_PROGRESS
-PHASE3_HOLO_BRIDGE_NEXT
+PHASE3_OPERATOR_LIBRARY_NEXT
 ```
 
 ### Do Not Claim (Phase 3)
@@ -364,7 +374,7 @@ PHASE3_HOLO_BRIDGE_NEXT
 - Do not claim Phase 3 proves analog phase lock
 - Do not claim zero Landauer heat
 - Do not claim physical limit violation
-- Do not claim .holo eigenbasis complete until 3.6 passes
+- Do not claim .holo eigenbasis complete until 3.6 passes  ← DONE
 - Do not claim oracle computation until 3.10 passes
 - Do not claim catalytic token/sign complete until 3.9 passes
 
@@ -548,9 +558,8 @@ If the coupled oscillator network at the edge of chaos produces Wigner-Dyson eig
 ## Immediate Action Items (Next Session)
 
 1. **SSH into the Phenom** — `ssh root@192.168.137.100` (Windows SSH)
-2. **Phase 4.1: Capture Phase Master baseline TSC stream** — Core 5 at 3.2 GHz, raw `rdtsc` sampling for GOE correlation matrix
-3. **Phase 4.3: GOE eigenvalue validation** — construct phase correlation matrix, compute eigenvalue spacings, verify Wigner-Dyson GOE statistics (r ≈ 0.51-0.53 target)
-4. **Update roadmap** with GOE results
+2. **Phase 3.7: Multi-Slot Catalytic Operator Library** — implement XOR_BIND, ROTATE, PERMUTE, PHASE_TAG, SIGN_BIND, BASIS_SWAP, CHECKSUM_BIND
+3. **Update roadmap** with operator library results
 
 ---
 

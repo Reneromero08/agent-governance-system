@@ -1,0 +1,54 @@
+## around_fff4aadd
+0xFFF4AA80: mov     ecx, dword ptr [ebp - 4]
+0xFFF4AA83: cmp     cx, word ptr [eax + 2]
+0xFFF4AA87: jb      0xfff4aa1b
+0xFFF4AA89: pop     edi
+0xFFF4AA8A: pop     ebx
+0xFFF4AA8B: pop     esi
+0xFFF4AA8C: leave   
+0xFFF4AA8D: ret     
+0xFFF4AA8E: mov     edi, edi
+0xFFF4AA90: cmp     ch, byte ptr [edx - 0x55d4000c]
+0xFFF4AA96: hlt     
+0xFFF4AA97: dec     dword ptr [esi - 0x56]
+0xFFF4AA9A: hlt     
+
+## callback_descriptor_setup
+0xFFF4D185: mov     eax, dword ptr [ebp - 0x10]
+0xFFF4D188: push    eax
+0xFFF4D189: mov     dword ptr [esi + 4], 0x30
+0xFFF4D190: call    dword ptr [eax + 0x1e]
+0xFFF4D193: mov     eax, dword ptr [ebp - 0x14]
+0xFFF4D196: inc     eax
+0xFFF4D197: imul    eax, eax, 6
+0xFFF4D19A: mov     word ptr [ebp - 0x34], ax
+0xFFF4D19E: mov     eax, dword ptr [ebp - 8]
+0xFFF4D1A1: push    0
+0xFFF4D1A3: mov     dword ptr [ebp - 0x32], eax
+0xFFF4D1A6: lea     eax, [ebp - 0x38]
+0xFFF4D1A9: push    ebx
+0xFFF4D1AA: push    eax
+0xFFF4D1AB: mov     dword ptr [ebp - 0x38], 0xfff4cf9c
+0xFFF4D1B2: mov     dword ptr [ebp - 0x2a], edi
+0xFFF4D1B5: mov     dword ptr [ebp - 0x2e], edi
+0xFFF4D1B8: call    0xfff4aadd
+0xFFF4D1BD: mov     eax, dword ptr [ebp - 8]
+0xFFF4D1C0: mov     cl, byte ptr [ebp - 0x18]
+0xFFF4D1C3: mov     byte ptr [eax + 8], cl
+0xFFF4D1C6: mov     eax, dword ptr [ebp - 8]
+0xFFF4D1C9: movzx   cx, byte ptr [eax + 0xb]
+0xFFF4D1CE: imul    cx, cx, 0x18
+0xFFF4D1D2: add     cx, 0x28
+0xFFF4D1D6: mov     word ptr [eax + 2], cx
+0xFFF4D1DA: mov     eax, dword ptr [ebp - 8]
+0xFFF4D1DD: movzx   ecx, byte ptr [eax + 0xb]
+0xFFF4D1E1: imul    ecx, ecx, 0x18
+0xFFF4D1E4: add     dword ptr [esi + 4], ecx
+0xFFF4D1E7: movzx   ecx, byte ptr [eax + 0xb]
+0xFFF4D1EB: imul    ecx, ecx, 0x18
+0xFFF4D1EE: push    ebx
+0xFFF4D1EF: lea     eax, [eax + ecx + 0x28]
+0xFFF4D1F3: push    edi
+0xFFF4D1F4: mov     dword ptr [ebp - 8], eax
+0xFFF4D1F7: lea     eax, [ebp - 8]
+

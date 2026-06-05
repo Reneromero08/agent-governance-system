@@ -2,69 +2,99 @@
 
 ## Verdict
 
-`HUMAN_APPROVAL_REQUIRED`
+`SOFTWARE_FIRMWARE_ROUTES_ACTIVE`
 
-The CPU has not produced accepted Kuramoto/Ising/phase behavior yet, and this is not a true wall. Routes A-D advanced the boundary:
+The CPU has not produced accepted Kuramoto/Ising/phase behavior yet, and this is not a true wall. The hard current constraint excludes Tier 3 physical instrumentation as a success path or next action. The live boundary is now software/firmware only:
 
-- Route A recovered the `.dG3_DXE` heap/table consumer and classified the `0xFFF7371A` source path.
-- Route B narrowed the rebuild blocker to one exact missing local replacer.
-- Route C found public donor workflows but no local donor image pair.
-- Route D is ready for non-invasive external measurement, and the offline waveform/marker analyzer is prepared. The physical setup still requires human approval.
+- Route 1 acquired a rebuild-capable public UEFI toolchain, but no parse-clean identical no-op rebuilt image was produced.
+- Route 2 advanced `arg_0C` provenance: helper `0xFFF4CF55` walks a variable-length runtime-produced record list, `0xFFF4D12F` is registered through `.data` slot `0xFFF7F516`, and `0xFFF4CF9C` is passed as a producer callback through descriptor setup at `0xFFF4D1AB`.
+- Route 3 remains gated because no P4-only static source byte and no proven no-op rebuild exist.
+- Route 4 advanced: the official F2j stock image and public F2j NVMe donor image were acquired, parsed, and diffed.
+- Route 5 remains live for renewed software-only/internal observability tests if firmware stalls.
 
 ## Route Table
 
 | Route | Status | Deepest progress | Blocker or next action |
 |---|---|---|---|
-| A: AGESA dispatcher chase | `DISPATCH_SOURCE_FOUND` | Consumer `0xFFF72B3C` walks `.dG3_DXE` heap handles; `0xFFF8D11E -> 0xFFF7371A` is a static function-pointer entry; `arg_0C` is runtime/heap-selected table context, not a proven static P4 row. | Firmware route alive, but not byte-ready. Need caller/dispatcher invocation proof before any P4-only claim. |
-| B: no-op rebuild toolchain | `MISSING_REBUILD_TOOLCHAIN` | Local search found only `UEFIExtract`; no replace/save-image tool. | Add `cpu_hack/tools/uefitool_rebuild/UEFITool.exe` or equivalent and run no-op replacement. |
-| C: public BIOS-mod donor route | `PUBLIC_MOD_DONOR_FOUND` | Public GA-970A-DS3P NVMe-mod donor workflow identified; no local donor-vs-stock image pair exists. | Acquire exact revision-matched donor and stock image for structural diff only. |
-| D: external observability / Pi sidecar | `EXTERNAL_MEASUREMENT_READY` | Existing marker harness can coordinate Core3/Core4/Core5 state with external waveform capture; `phase2_external_align.py` can analyze the first waveform CSV against marker states and shuffled nulls. | Human sets up non-invasive scope/logic analyzer capture and saves raw waveform plus marker CSV. |
+| 1: rebuild toolchain | `TOOLCHAIN_ACQUIRED_NOOP_NOT_PROVEN` | LongSoft `UEFIReplace.exe` and classic `UEFITool.exe` 0.28.0 were fetched into `cpu_hack/tools/uefitool_rebuild/`. Body-only `-asis` output was rejected by parser; full identical section replacement emitted no saved image. | Need force-save identical replacement via GUI/manual UEFITool or another CLI replacer, then parse-clean `cpu_hack/noop_replace/bios_noop_rebuilt.bin`. |
+| 2: AGESA runtime provenance | `ARG0C_RUNTIME_PRODUCED_STRUCTURE` | `0xFFF4CF55` recovered: selects sibling records by walking `arg_0C + 8` and adding `word[record+2]`. `0xFFF4D12F` is registered at `.data` slot `0xFFF7F516`, and `0xFFF4CF9C` is passed through callback descriptor setup at `0xFFF4D1AB` into descriptor interpreter `0xFFF4AADD`. `[ebp-8]` before `0xFFF4D1AB` resolves to `arg_0C + 8`. | Resolve service table provenance and typed handler callbacks behind `0xFFF4AADD`; find whether any upstream static bytes feed the P4 runtime field. |
+| 3: P4-safe candidate | `NOT_BYTE_READY` | Runtime P4 field remains `selected_base + pstate*0x18 + 0x1C`; P0-P3/P4 sibling shape exists at runtime. | No editable static P4 byte or no-op rebuild proof; do not produce candidate. |
+| 4: public BIOS donor workflow | `PUBLIC_MOD_DONOR_DIFFED` | Official F2j stock and public NVMe donor differ only at `0x002C58A0-0x002CA9FF`, where `NvmExpressDxe_4` is inserted into free space. Later volumes are byte-identical. | Use workflow lesson only: free-space insertion plus parse-clean report. This does not create a voltage/P4 candidate. |
+| 5: software-only renewed search | `LIVE_IF_FIRMWARE_STALLS` | Existing software routes did not show accepted lock/GOE/Ising, but internal-only renewed tests are still in scope. | Add runnable tests with deterministic nulls and marker-free internal observability; no physical instrumentation. |
 
 ## Artifacts Produced
 
 - `cpu_hack/AmdProcessorInitPeim_dG3_DXE_dispatch_table_consumer_decompile.txt`
+- `cpu_hack/AmdProcessorInitPeim_helper_fff4cf55_disasm.txt`
+- `cpu_hack/AmdProcessorInitPeim_pointer_search_fff4cf9c.txt`
+- `cpu_hack/AmdProcessorInitPeim_callback_fff4aadd_disasm.txt`
+- `cpu_hack/AmdProcessorInitPeim_fff4aadd_wide_disasm.txt`
+- `cpu_hack/AmdProcessorInitPeim_descriptor_handlers_disasm.txt`
+- `cpu_hack/AmdProcessorInitPeim_descriptor_callsite_xrefs.txt`
+- `cpu_hack/AmdProcessorInitPeim_outer_producer_table_xrefs.txt`
+- `cpu_hack/AmdProcessorInitPeim_service_table_trace.txt`
+- `cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt`
+- `cpu_sing_3/PHASE2_DONOR_DIFF_REPORT.md`
+- `cpu_sing_3/PHASE2_FW_ARG0C_PROVENANCE.md`
 - `cpu_sing_3/PHASE2_MASTER_A_DISPATCH_SOURCE.md`
 - `cpu_sing_3/PHASE2_MASTER_B_REBUILD_TOOLCHAIN.md`
 - `cpu_sing_3/PHASE2_MASTER_C_BIOS_MOD_DONORS.md`
-- `cpu_sing_3/PHASE2_MASTER_D_EXTERNAL_OBSERVABILITY.md`
 - `cpu_sing_3/PHASE2_MASTER_CPU_SING_OR_TRUE_WALL.md`
-- `session_scripts/phase2_external_align.py`
 
 ## Deepest Progress
 
-The strongest new RE result is the `.dG3_DXE` source classification:
+The deepest firmware progress is now the combined constructor/provenance chain:
 
-- `0xFFF8D0EC-0xFFF8D104` is a heap-handle list.
-- `0xFFF72B3C` consumes that list and rebuilds/copies heap state.
-- `0xFFF8D11E -> 0xFFF7371A` is in a nearby static function-pointer array.
-- `0xFFF7371A` still consumes a selected runtime/caller-supplied structure via `arg_0C`.
+```text
+.dG3_DXE function pointer array
+  0xFFF8D11E -> 0xFFF7371A
 
-That makes the current firmware route alive but not byte-ready.
+0xFFF7371A constructor
+  selected_base = arg_0C + 8
+  helper 0xFFF4CF55 can update selected_base
+  selected_base + pstate*0x18 feeds P-state MSR construction
+
+0xFFF4CF55 selector
+  arg_0C[0] = count/upper bound
+  records begin at arg_0C + 8
+  next record = current record + word[current record + 2]
+
+0xFFF4CF9C producer window
+  writes record length at +0x02
+  fills max/current P-state bytes
+  fills per-P-state 0x18-stride entries through service callbacks
+  is passed as a callback through descriptor setup at 0xFFF4D1AB
+  descriptor interpreter 0xFFF4AADD/0xFFF4AA00 dispatches typed entries
+
+0xFFF4D12F outer producer registration
+  static .data slot 0xFFF7F516 -> 0xFFF4D12F
+  slot consumer near 0xFFF4CF94 calls through [0xFFF7F516]
+  descriptor payload at 0xFFF4D1AB receives [ebp-8] = arg_0C + 8
+
+0xFFF4AADD handler fanout
+  typed handlers call helper routines and indexed function tables
+  no static P4 record row or byte-ready edit target is exposed yet
+```
+
+That keeps the firmware route alive but blocks byte-ready review until the produced record source is tied to editable bytes or a safe rebuild workflow is proven.
 
 ## Exact Next Action
 
-`EXTERNAL_MEASUREMENT_READY`
+`DISPATCH_SOURCE_CHASE`
 
-Run the non-invasive external capture:
+Resolve the service table feeding `0xFFF4D12F` and the typed descriptor callbacks behind `0xFFF4AADD`. Do not repeat the `0xFFF4CF9C` or `0xFFF4D12F` raw pointer searches; they already found the callback descriptor hit at `0xFFF4D1AE` and the `.data` registration slot at `0xFFF7F516`.
 
-```sh
-gcc -O2 -pthread phase2_marker_harness.c -o phase2_marker_harness
-./phase2_marker_harness 256 50000 > phase2_marker_log.csv
-```
+Parallel live action:
 
-Capture waveform at the VRM/output rail during the same run, then analyze marker-aligned waveform changes against idle and shuffled nulls.
+`NOOP_REBUILD_FORCE_SAVE`
 
-Offline analysis command after capture:
-
-```sh
-python3 phase2_external_align.py --marker phase2_marker_log.csv --wave scope_waveform.csv --segment-us 50000 --out-csv phase2_external_summary.csv --out-report phase2_external_alignment_report.md
-```
+Use a rebuild path that can force-save an identical replacement and produce parse-clean `cpu_hack/noop_replace/bios_noop_rebuilt.bin`. The donor diff shows this board's firmware can accept a free-space DXE insertion without shifting later volumes, but it does not prove identical PE32-body replacement.
 
 ## Human Approval Needed
 
-Yes: `HUMAN_APPROVAL_REQUIRED` for physical measurement setup only.
+No for the current local RE and donor-diff work.
 
-Reason: the next action requires attaching scope/logic-analyzer probes to the owned board. It does not authorize BIOS flash, voltage writes, board mods, unknown PCI writes, or patch bytes.
+Yes only if a future step requires manual GUI save of an identical UEFI replacement or any physical board action. Physical instrumentation remains out of scope for this goal.
 
 ## Do-Not-Do List
 
@@ -73,6 +103,7 @@ Reason: the next action requires attaching scope/logic-analyzer probes to the ow
 - Do not write blind voltage values.
 - Do not modify P0-P3.
 - Do not repeat the rejected global AGESA branch edit.
-- Do not claim the 2.67 MHz line as phase behavior unless it is marker-modulated and survives nulls.
+- Do not produce a P4-safe candidate until P0-P3 unchanged, P4-only effect, offsets/bytes/checksums, no-op rebuild, and clean parse proof all exist.
 - Do not treat public donor BIOS images as flash candidates.
 - Do not count `UEFIExtract` as a rebuild tool.
+- Do not use external probes, scope capture, logic analyzer capture, Pi GPIO wiring, or motherboard probing as the current success path.

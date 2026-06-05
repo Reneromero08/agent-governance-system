@@ -1,0 +1,65 @@
+NOOP_DIFF_SUMMARY
+
+Verdict: NOOP_REBUILD_NOT_PROVEN
+
+Scope
+- Input image: cpu_hack/bios_dump.bin
+- Target file: AmdProcessorInitPeim
+- Target file GUID: DE3E049C-A218-4891-8658-5FC0FA84C788
+- Target section: PE32 image section, type 10h
+- Target body: cpu_hack/bios_dump.bin.dump/5 8C8CE578-8A3D-4F1C-9935-896185C32DD3/0 AmdProcessorInitPeim/1 PE32 image section/body.bin
+- Required target body SHA-256: BF92A1321B98908E7D74299A6C1E629EC3583599F164DEC6E774BFF040FBDF2A
+
+Tool acquired
+- Source: LongSoft UEFITool release 0.28.0
+- UEFIReplace archive: cpu_hack/tools/uefitool_rebuild/UEFIReplace_0.28.0_win32.zip
+- UEFIReplace binary: cpu_hack/tools/uefitool_rebuild/UEFIReplace.exe
+- UEFITool archive: cpu_hack/tools/uefitool_rebuild/UEFITool_0.28.0_win32.zip
+- UEFITool binary: cpu_hack/tools/uefitool_rebuild/UEFITool.exe
+- Source snippets inspected: cpu_hack/tools/uefitool_rebuild/source_0.28.0/
+
+Attempt log
+1. Body replacement, section type 10h:
+   command shape: UEFIReplace bios_dump.bin DE3E049C-A218-4891-8658-5FC0FA84C788 10 body.bin -o bios_noop_rebuilt.bin
+   result: "No replacements can be applied to input file"
+   output: none
+
+2. Body replacement, alternate section encodings 0x10, 10h, PE32, pe32:
+   result: either "No replacements can be applied to input file" or "Function called with invalid parameter"
+   output: none
+
+3. Body replacement with -asis:
+   command shape: UEFIReplace bios_dump.bin DE3E049C-A218-4891-8658-5FC0FA84C788 10 body.bin -o bios_noop_rebuilt_asis.bin -asis
+   result: file was written, but it is rejected as invalid
+   parser result: UEFIExtract reports invalid data checksum and section with unknown type 00h
+   explanation: -asis expects an object with section header plus body. Passing PE32 body bytes as an as-is section causes the first body bytes to be interpreted as section header bytes.
+
+4. Full PE32 section generated from header.bin + body.bin:
+   generated file: cpu_hack/noop_replace/AmdProcessorInitPeim_PE32_section.bin
+   size: 353124 bytes
+   command shape: UEFIReplace bios_dump.bin DE3E049C-A218-4891-8658-5FC0FA84C788 10 AmdProcessorInitPeim_PE32_section.bin -o bios_noop_rebuilt.bin -asis
+   result: "No replacements can be applied to input file"
+   output: none
+
+5. Swapped/raw GUID trial:
+   raw on-disk bytes at file header offset 0x00340048: 9C043EDE18A2914886585FC0FA84C788
+   swapped CLI GUID trial: 9C043EDE-18A2-9148-8658-5FC0FA84C788
+   result: "No replacements can be applied to input file"
+   output: none
+
+Accepted byte-difference explanation
+- No accepted rebuilt image exists at cpu_hack/noop_replace/bios_noop_rebuilt.bin.
+- Therefore there is no valid rebuilt-vs-stock byte difference table to report.
+- The only images produced were the rejected -asis body attempts. Those are not accepted no-op rebuild outputs because UEFIExtract reports invalid file checksum and an unknown section type.
+- The accepted state is unchanged stock input plus a proven acquired rebuild-capable CLI whose no-op behavior did not emit a saved image for the identical target.
+
+Current blocker
+- UEFIReplace 0.28.0 is acquired, but the identical no-op replacement did not produce a parse-clean rebuilt image.
+- Next exact local step is to test a rebuild-capable tool that can force-save an identical replacement, or use an interactive UEFITool GUI replacement/save operation under human control and then parse the saved image.
+- Acceptable next tool: UEFITool classic GUI used manually to replace the PE32 section body with the identical body.bin and save image, or another CLI replacer with a documented force-output mode for identical content.
+
+Safety
+- No firmware was flashed.
+- No voltage writes were performed.
+- No patch bytes were produced.
+- No P0-P3 or P4 bytes were modified in an accepted image.

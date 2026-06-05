@@ -1,0 +1,33 @@
+## raw_slot_fff7f516 16F5F7FF hits=1
+hit raw 0x00CF08 va 0xFFF4CF94
+
+## raw_slot_fff7f51a 1AF5F7FF hits=1
+hit raw 0x00CEC1 va 0xFFF4CF4D
+
+## raw_slot_fff7f522 22F5F7FF hits=1
+hit raw 0x032ED7 va 0xFFF72F63
+
+## raw_outer_producer_fff4d12f 2FD1F4FF hits=1
+hit raw 0x03F48A va 0xFFF7F516
+
+## instructions mentioning 0xfff7f516
+
+## instructions mentioning 0xfff7f51a
+
+## instructions mentioning 0xfff7f522
+
+## instructions mentioning 0xfff7f526
+
+## instructions mentioning 0xfff7f52a
+
+## PE sections
+.text VA 0xFFF403CC-0xFFF46B48 raw 0x000340-0x006AC0
+.tG1_PEI VA 0xFFF46B4C-0xFFF6957D raw 0x006AC0-0x029500
+.tG2_PEI VA 0xFFF6958C-0xFFF726A0 raw 0x029500-0x032620
+.tG3_DXE VA 0xFFF726AC-0xFFF7D8E9 raw 0x032620-0x03D860
+.rdata VA 0xFFF7D8EC-0xFFF7E8B1 raw 0x03D860-0x03E840
+.data VA 0xFFF7E8CC-0xFFF83500 raw 0x03E840-0x043480
+.dG2_PEI VA 0xFFF8350C-0xFFF8D0A0 raw 0x043480-0x04D020
+.dG1_PEI VA 0xFFF8D0AC-0xFFF8D0D0 raw 0x04D020-0x04D060
+.dG3_DXE VA 0xFFF8D0EC-0xFFF94790 raw 0x04D060-0x054720
+.reloc VA 0xFFF947AC-0xFFF963EC raw 0x054720-0x056360
