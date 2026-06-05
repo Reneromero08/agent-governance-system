@@ -207,7 +207,7 @@ python3 session_scripts/msr_p4_readonly_observer.py --cores 0-5 --samples 100 --
 
 ---
 
-## Phase 3: Catalytic Computing Ladder — IN PROGRESS (3.1-3.7 COMPLETE, 3.8 NEXT)
+## Phase 3: Catalytic Computing Ladder — IN PROGRESS (3.1-3.8 COMPLETE, 3.9 NEXT)
 
 **Objective:** Prove CAT_CAS can perform meaningful reversible/catalytic computation on the Phenom II, not merely restore bytes. The shared L3 cache is a genuine catalytic tape — borrow, compute, restore, verify — and this phase elevates it from tape restoration to a full operator library, semiotic token bridge, and oracle-style path search.
 
@@ -300,19 +300,21 @@ python3 session_scripts/msr_p4_readonly_observer.py --cores 0-5 --samples 100 --
 - [x] Source: `session_scripts/operator_library.c` (standalone, compilable test harness)
 - [x] Operators ready for Phase 3.8 composition into meaningful computation
 
-### 3.8 Meaningful Reversible Computation
+### 3.8 Meaningful Reversible Computation — COMPLETE (2026-06-05)
 
-- [ ] Demonstrate computation with readable result, not just tape restoration
-- [ ] Candidates:
-  - Reversible parity across tape slots
-  - Reversible hash fragment (XOR-chain of slot values)
-  - Reversible finite-state transition (state encoded in slot 0, driven by slot 1)
-  - Reversible symbolic binding/unbinding (bind two symbols, read result, unbind)
-  - Reversible toy SAT/constraint step (one clause, one assignment, verify + restore)
-- [ ] Result must be extracted BEFORE reverse pass
-- [ ] Then reverse restores substrate
-- [ ] Output artifact: `PHASE3_8_MEANINGFUL_COMPUTE.md`
-- [ ] Success: output correct, tape restored byte-for-byte
+- [x] Three distinct reversible computations demonstrated
+- [x] Each produces readable result extracted before reverse pass
+- [x] All reverse passes restore SHA-256 exactly
+
+| Test | Description | Result | Restored |
+|------|-------------|--------|----------|
+| Reversible Parity | XOR parity of 4 odd-valued slots | 0 (even) correct | YES |
+| Reversible Hash Fragment | XOR + rotation mixing of 4 slots | 0x0df8eb8b86613217 non-zero | YES |
+| Reversible FSM Transition | 2-state machine: state ^ trigger | State 0→1 correct | YES |
+
+- [x] Operators from Phase 3.7 (XOR_BIND, ROTATE_LEFT, ROTATE_RIGHT) composed into meaningful logic
+- [x] Source: `session_scripts/meaningful_compute.c`
+- [x] Key lesson: catalytic substrate demands XOR, not assignment — `^=` not `=`
 
 ### 3.9 Catalytic Token / Sign Operation
 
@@ -378,7 +380,8 @@ Macroscopic SHA-256 restoration is achievable. Microscopic zero-entropy is not -
 PHASE3_LOGICAL_CATALYTIC_SUBSTRATE_PROVEN
 PHASE3_HOLO_EIGENBASIS_COMPLETE
 PHASE3_OPERATOR_LIBRARY_COMPLETE
-PHASE3_MEANINGFUL_COMPUTATION_NEXT
+PHASE3_MEANINGFUL_COMPUTATION_COMPLETE
+PHASE3_CATALYTIC_SIGN_NEXT
 ```
 
 ### Do Not Claim (Phase 3)
@@ -571,8 +574,8 @@ If the coupled oscillator network at the edge of chaos produces Wigner-Dyson eig
 ## Immediate Action Items (Next Session)
 
 1. **SSH into the Phenom** — `ssh root@192.168.137.100` (Windows SSH)
-2. **Phase 3.8: Meaningful Reversible Computation** — compose operators from 3.7, produce readable result extracted before reverse, restore tape. Candidates: reversible parity, hash fragment, FSM transition, symbolic binding, toy SAT step.
-3. **Update roadmap** with Phase 3.8 results
+2. **Phase 3.9: Catalytic Token / Sign Operation** — bridge semiotic sign layer to bare-metal tape. Encode sign = symbol_id + phase_tag + context_slot, apply, read, reverse.
+3. **Update roadmap** with Phase 3.9 results
 
 ---
 
