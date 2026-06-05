@@ -22,3 +22,8 @@ Thumbs.db
 dist/
 build/
 node_modules/
+
+# Runtime logs
+server.log
+server.err
+*.log

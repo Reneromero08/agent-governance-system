@@ -14,7 +14,7 @@ VISUALIZER_DIR = os.path.dirname(HERE)
 if VISUALIZER_DIR not in sys.path:
     sys.path.insert(0, VISUALIZER_DIR)
 
-from engine import oracle_1d
+from engine import oracle_1d, oracle_2d
 
 
 def test_1d_all_machines():
@@ -76,6 +76,65 @@ def test_1d_dim_matches_machine():
     print(f"  N = num_states * 2 for all 4 machines  OK")
 
 
+# ---- 2D (Phase 1B) -----------------------------------------------------
+
+def test_2d_loop_L8():
+    """L=8, gamma_halt=0.0 -> chiral edge protected -> C=+1 -> LOOPS.
+    Matches 37_2d_chern_oracle.py run_2d_oracle(L=8) default.
+    """
+    r = oracle_2d.run(L=8, gamma_halt=0.0)
+    assert r["L"] == 8
+    assert r["N"] == 64
+    assert r["halt_pos"] == [4, 4]
+    assert r["halt_site"] == 4 * 8 + 4
+    assert r["bott"]["C"] == 1, f"expected C=1, got {r['bott']['C']}"
+    assert r["verdict"] == "LOOPS"
+    print(f"  L=8  loop case:  C={r['bott']['C']:+d}  verdict=LOOPS  OK")
+
+
+def test_2d_halt_L8():
+    """L=8, gamma_halt=10.0 -> EP sink destroys edge -> C=0 -> HALTS.
+    Matches 37_2d_chern_oracle.py run_2d_oracle(L=8) halt case.
+    """
+    r = oracle_2d.run(L=8, gamma_halt=10.0)
+    assert r["bott"]["C"] == 0, f"expected C=0, got {r['bott']['C']}"
+    assert r["verdict"] == "HALTS"
+    print(f"  L=8  halt case:  C={r['bott']['C']:+d}  verdict=HALTS  OK")
+
+
+def test_2d_sink_strength_sweep():
+    """gamma_halt sweep: increasing gamma_halt drives C from nonzero to 0.
+    At L=8 with default t1=1, t2=0.5, phi=pi/4, the gap is robust.
+    """
+    cs = []
+    for g in (0.0, 0.5, 1.0, 2.0, 5.0, 10.0):
+        r = oracle_2d.run(L=8, gamma_halt=g)
+        cs.append((g, r["bott"]["C"]))
+    # At L=8 the topology is robust; should be C=1 for small g and 0 for large g.
+    assert cs[0][1] == 1, f"g=0 expected C=1, got {cs[0][1]}"
+    assert cs[-1][1] == 0, f"g=10 expected C=0, got {cs[-1][1]}"
+    print(f"  L=8  gamma_halt sweep: 0->1, 10->0  OK  {cs}")
+
+
+def test_2d_halt_site_imag():
+    """At the halt site (center), Im(H_site_site) = -(loss + gamma_halt)."""
+    r = oracle_2d.run(L=8, gamma_halt=10.0)
+    site = r["halt_site"]
+    H_site = r["H"][site][site]
+    expected_im = -(0.05 + 10.0)
+    assert abs(H_site["im"] - expected_im) < 1e-3, \
+        f"H[halt][halt].im = {H_site['im']}, expected {expected_im}"
+    print(f"  L=8  halt site: Im(H)={H_site['im']:.4f}  (expected {expected_im})  OK")
+
+
+def test_2d_dim():
+    """N = L*L."""
+    for L in (4, 6, 8, 10):
+        r = oracle_2d.run(L=L, gamma_halt=0.0, include_projector=False)
+        assert r["N"] == L * L, f"L={L}: N={r['N']}, expected {L*L}"
+    print(f"  N = L*L for L in 4,6,8,10  OK")
+
+
 if __name__ == "__main__":
     print("=" * 60)
     print("  SMOKE TESTS: 1D engine (Phase 1A)")
@@ -84,5 +143,14 @@ if __name__ == "__main__":
     test_1d_halt_sink_strength()
     test_1d_gamma_zero_loop()
     test_1d_dim_matches_machine()
+    print()
+    print("=" * 60)
+    print("  SMOKE TESTS: 2D engine (Phase 1B)")
+    print("=" * 60)
+    test_2d_loop_L8()
+    test_2d_halt_L8()
+    test_2d_sink_strength_sweep()
+    test_2d_halt_site_imag()
+    test_2d_dim()
     print("=" * 60)
     print("  ALL PASSED")

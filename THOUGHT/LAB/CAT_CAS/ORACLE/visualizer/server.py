@@ -44,10 +44,12 @@ async def health():
     }
 
 
-# ---- Phase 1 routes: dim1 wired to engine.oracle_1d ---------------------
+# ---- Phase 1 routes: engine wrappers ------------------------------------
 
 from engine.api_routes_1d import router as dim1_router  # noqa: E402
+from engine.api_routes_2d import router as dim2_router  # noqa: E402
 app.include_router(dim1_router)
+app.include_router(dim2_router)
 
 
 # ---- Static frontend -----------------------------------------------------

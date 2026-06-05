@@ -54,15 +54,26 @@
 - [x] `/api/dim1/run?machine=loop_2cycle` → W=+1, verdict=LOOPS
 - [x] Engine imports lab source via `importlib.util.spec_from_file_location` (read-only)
 
-### 1B: 2D engine (37)
-- [ ] Write `engine/oracle_2d.py`:
-  - [ ] `build_H(L, t1, t2, phi, loss, gamma_halt) -> {H, ...}` (L is a parameter!)
-  - [ ] `find_fermi(H) -> E_fermi` (largest Im gap, midpoint)
-  - [ ] `spectral_projector(H, E_fermi, n_pts, radius) -> P`
-  - [ ] `bott_index(P, L) -> C`
-  - [ ] `run(L, gamma_halt, ...) -> {H, eigvals, fermi, P, C, verdict}`
-  - [ ] Import from `37_2d_chern_oracle.py`
-- [ ] Write `engine/api_routes_2d.py` — `/api/dim2/run?L=...&gamma_halt=...`
+### 1B: 2D engine (37) — DONE (2026-06-04)
+- [x] Write `engine/oracle_2d.py`:
+  - [x] `build_H(L, t1, t2, phi, loss, gamma_halt) -> {H, N, halt_pos, halt_site, ...}` (L is a parameter!)
+  - [x] `find_fermi(H) -> {E_fermi, gap_width, im_min, im_max}` (largest Im gap, midpoint)
+  - [x] `spectral_projector(H, E_fermi_im, n_pts, radius) -> {P, ...}`
+  - [x] `bott_index(P, L) -> {C, verdict}`
+  - [x] `run(L, t1, t2, phi, loss, gamma_halt, n_pts, radius, include_projector) -> {...}`
+  - [x] Import from `37_2d_chern_oracle.py` (build_2d_hamiltonian, spectral_projector, bott_index)
+- [x] Write `engine/api_routes_2d.py` — `/api/dim2/build` and `/api/dim2/run`
+
+**Verify**:
+- [x] `python -m tests.smoke` exits 0 (1D + 2D)
+- [x] L=8, gamma_halt=0   -> C=+1 LOOPS (chiral edge protected)
+- [x] L=8, gamma_halt=10  -> C=0  HALTS (EP sink destroys edge)
+- [x] gamma_halt sweep:   g=0,0.5,1 -> C=+1;  g=2,5,10 -> C=0
+- [x] H[halt][halt].im = -(loss + gamma_halt)
+- [x] N = L*L for L in 4,6,8,10
+- [x] Live HTTP: /api/dim2/run?L=8&gamma_halt=0   returns C=+1, 64 eigvals
+- [x] Live HTTP: /api/dim2/run?L=8&gamma_halt=10  returns C=0
+- [x] L=6 loop case: C=0 (finite-size gap collapse with default phi=pi/4, t2=0.5) — real physics, not a bug
 
 ### 1C: 3D engine (38)
 - [ ] Write `engine/oracle_3d.py`:
