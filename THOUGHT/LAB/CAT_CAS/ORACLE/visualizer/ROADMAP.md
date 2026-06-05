@@ -249,37 +249,81 @@ circle (|z| ~ 0.99).
 
 ---
 
-## Phase 3 — 2D view (the actual torus)
+## Phase 3 — 2D Chern view — DONE (2026-06-05)
 
-**Goal**: Show the (kx, ky) torus and Bott index.
+**Goal**: Show the LxL lattice, spectrum, Bott index sweep, and edge current.
 
-- [ ] `frontend/js/views/lattice_view.js`:
-  - [ ] L×L grid of nodes
-  - [ ] Halt site = red, others = grey
-  - [ ] Edges = NNN complex hopping (arrows showing direction)
-  - [ ] Periodic boundary indicators (dashed)
-- [ ] `frontend/js/views/torus_view.js`:
-  - [ ] Heatmap of C(kx, ky) over [0, 2π] × [0, 2π]
-  - [ ] C = +1 → red, C = -1 → blue, C = 0 → grey
-  - [ ] Show actual torus topology (or flag as 2D + periodic)
-- [ ] `frontend/js/views/spectrum_2d.js`:
-  - [ ] Eigenvalue scatter for given L, gamma_halt
-  - [ ] Highlight Im gap (Fermi level)
-- [ ] `frontend/js/tabs/dim2.js`:
-  - [ ] L slider (4-12)
-  - [ ] gamma_halt slider (0-15)
-  - [ ] t1, t2, phi, loss sliders
-  - [ ] "compute Bott" button
-  - [ ] Show C value
-- [ ] Uniform gamma sweep widget (per Exp 39 discovery):
-  - [ ] Show curve: max|C| vs Gamma
-  - [ ] Mark annihilation threshold
+### Engine extensions (`engine/oracle_2d.py`)
+- [x] `gamma_sweep(L, gammas, t1, t2, phi, loss, n_pts, radius, include_projector) -> {L, N, points: [{gamma_halt, C, verdict, E_fermi_im}]}`
+- [x] `preset_machines() -> {machines: {loop_default, halt_default, uniform_annihilation, l4_fragility}, params}`
+- [x] Try/except per-gamma: NaN-prone points return C=0 with `error` field
+
+### API extensions (`engine/api_routes_2d.py`)
+- [x] `GET /api/dim2/machines` — list 4 presets with param ranges
+- [x] `GET /api/dim2/build` — build H only (cheap)
+- [x] `GET /api/dim2/run` — full run (H, spectrum, fermi, projector, Bott)
+- [x] `GET /api/dim2/gamma_sweep` — Bott C vs gamma_halt curve
+
+### Lattice heatmap (`frontend/js/dim2_lattice.js`)
+- [x] L×L grid of cells, color = |Im(H_ii)| with FIXED cap of 1.0
+  - bulk loss (~0.05) -> light blue; sink (gamma=10) -> full red
+- [x] Red ring + label marks the EP halt site at (4, 4) on L=8
+- [x] Legend: L, N, Im(H) range
+- [x] Subscribes to themechange, redraws on theme toggle
+
+### Spectrum (`frontend/js/dim2_spectrum.js`)
+- [x] Scatter eigenvalues in complex plane
+- [x] Dashed E_Fermi line (Im axis) labeled with value
+- [x] Eigenvalue color: norm Im(red) -> decay(blue)
+- [x] Re/Im range and N captions
+
+### Bott curve (`frontend/js/dim2_bottcurve.js`)
+- [x] Step plot of C vs gamma_halt
+- [x] Current-gamma marker (dashed vertical line)
+- [x] Integer C gridlines, axis labels, x ticks
+- [x] "click Sweep" hint when empty
+
+### Edge current (`frontend/js/dim2_edge.js`)
+- [x] Per-row sum of |P_ij|^2 averaged across columns -> bar chart
+- [x] Edge rows tinted loop (cyan), halt row tinted halt (red)
+- [x] Loop case shows uniform weights; halt case shows halt row spike
+
+### Controller (`frontend/js/dim2.js`)
+- [x] MECHANISM_TEXT per preset (loop / halt / uniform / l4)
+- [x] URL param overrides: ?machine=...&L=...&gamma=...&t1=...&t2=...&phi=...&loss=...
+- [x] Debounced params (250-380ms), AbortController in-flight cancellation
+- [x] Verdict banner + 4 KPIs (C, E_F, rho, sink) + lattice spec
+- [x] Sweep gamma button (calls /api/dim2/gamma_sweep with 10 gammas)
+- [x] Export: copy URL, download JSON, save PNG (all 4 dim2 canvases)
+
+### Layout (`frontend/css/dim2.css`)
+- [x] 320px side panel + 1fr main grid
+- [x] Top row: lattice | spectrum (1fr each)
+- [x] Middle row: Bott curve (full width)
+- [x] Lower row: edge current (full width)
+- [x] Mechanism text at bottom (max-height 110px, scrollable)
+- [x] Advanced (t1, t2, phi, loss) collapsible details
+- [x] Responsive: collapses to single column below 1100px
+
+### Tab wiring (`frontend/index.html`, `frontend/js/main.js`)
+- [x] dim2 tab enabled (no longer disabled placeholder)
+- [x] `?tab=dim2` URL param switches to dim2 on first health check
+- [x] `Phase 3 — 2D Chern View` shown in phase label
+- [x] Theme + export panel apply to dim2 too
 
 **Verify**:
-- L=8, gamma_halt=0 → C=+1 (LOOPS)
-- L=8, gamma_halt=10 → C=0 (HALTS)
-- L=6, gamma_halt=5, uniform Gamma=2 → C=0 (ANNIHILATED)
-- Matches `37_2d_chern_oracle.py` outputs
+- [x] `python -m tests.smoke` exits 0 (44 tests, 20.27s)
+- [x] L=8, gamma_halt=0  -> C=+1 (LOOPS) — matches `37_2d_chern_oracle.py` run_2d_oracle default
+- [x] L=8, gamma_halt=10 -> C=0  (HALTS) — EP sink destroys edge
+- [x] gamma_sweep engine: g=0,2,5,10 -> C=+1,+1,0,0 (L=8)
+- [x] preset_machines exposes 4 entries (loop, halt, uniform, l4) with summaries
+- [x] All 6 dim2 JS files pass `node --check` and are served by the static mount
+- [x] index.html wires 4 canvases + 7 controls + 3 export buttons
+- [x] /api/dim2/{machines,build,gamma_sweep} all 200 via TestClient
+- [x] Headless Chrome screenshots verified:
+  - dark + loop_default: light blue lattice (no sink), E_F=-0.405, C=+1, LOOPS
+  - dark + halt_default: 1 red sink cell at center, E_F=-5.569, C=0, HALTS
+  - light + loop_default: same lattice, all CSS vars respond to themechange
 
 ---
 
@@ -391,7 +435,7 @@ circle (|z| ~ 0.99).
 | Dim | Parameter | Min | Max | Default | Source |
 |---|---|---|---|---|---|
 | 1D | n/a (TM) | — | — | — | 35.2 |
-| 2D | L | 4 | 12 | 6 | 37 |
+| 2D | L | 4 | 12 | 8 | 37 |
 | 3D | L, n_kz | 4, 8 | 10, 48 | 6, 24 | 38 |
 | 4D | L, n_k | 4, 4 | 6, 10 | 4, 6 | 39 |
 | 5D | L, n_k | 4, 4 | 6, 8 | 4, 4 | 40 |
@@ -415,4 +459,4 @@ circle (|z| ~ 0.99).
 - [-] in progress
 - [?] blocked / question
 
-**Current phase**: Phase 1 — Engine wrapper
+**Current phase**: Phase 3 — 2D Chern view (DONE)

@@ -135,6 +135,39 @@ def test_2d_dim():
     print(f"  N = L*L for L in 4,6,8,10  OK")
 
 
+def test_2d_gamma_sweep_engine():
+    """gamma_sweep returns a list of C values, one per gamma."""
+    gammas = [0.0, 2.0, 5.0, 10.0]
+    s = oracle_2d.gamma_sweep(L=8, gammas=gammas, include_projector=False)
+    assert s["L"] == 8
+    assert s["N"] == 64
+    assert len(s["points"]) == 4
+    # g=0 -> C=+1 (LOOPS), g=10 -> C=0 (HALTS)
+    assert s["points"][0]["C"] == 1
+    assert s["points"][0]["verdict"] == "LOOPS"
+    assert s["points"][-1]["C"] == 0
+    assert s["points"][-1]["verdict"] == "HALTS"
+    # E_fermi is recorded for each point
+    for p in s["points"]:
+        assert "E_fermi_im" in p
+    print(f"  L=8  gamma_sweep engine: g=0,2,5,10 -> C={[p['C'] for p in s['points']]}  OK")
+
+
+def test_2d_preset_machines():
+    """preset_machines exposes 4 canonical 2D configurations."""
+    p = oracle_2d.preset_machines()
+    assert "machines" in p and "params" in p
+    for name in ["loop_default", "halt_default", "uniform_annihilation", "l4_fragility"]:
+        assert name in p["machines"], f"missing machine: {name}"
+        m = p["machines"][name]
+        assert "label" in m and "expected" in m and "summary" in m
+        assert m["expected"] in ("LOOPS", "HALTS")
+    # param ranges
+    for k in ("L", "t1", "t2", "phi", "loss", "gamma_halt"):
+        assert k in p["params"]
+    print(f"  preset_machines has 4 entries (loop/halt/uniform/l4)  OK")
+
+
 # ---- 3D (Phase 1C) -----------------------------------------------------
 
 def test_3d_loop_L8():
@@ -627,6 +660,127 @@ def test_polish_endpoints_via_http():
     assert body["N"] == 4
     print(f"  /api/dim1/machines and /api/dim1/build both live  OK")
 
+
+# ---- Phase 3: 2D Chern view ---------------------------------------------
+
+DIM2_FILES = [
+    "dim2.css", "dim2.js", "dim2_lattice.js", "dim2_spectrum.js",
+    "dim2_bottcurve.js", "dim2_edge.js",
+]
+
+
+def test_dim2_view_assets():
+    """All Phase 3 (dim2) JS/CSS files exist, are served, and parse OK."""
+    import urllib.request
+    from pathlib import Path
+    import time
+
+    print("    [a] local files...")
+    t0 = time.time()
+    base = Path(VISUALIZER_DIR) / "frontend"
+    for f in DIM2_FILES:
+        if f.endswith(".css"):
+            p = base / "css" / f
+        else:
+            p = base / "js" / f
+        assert p.exists(), f"missing local file: {p}"
+    print(f"    [a] {len(DIM2_FILES)} files exist locally ({time.time()-t0:.2f}s)")
+
+    print("    [b] TestClient serving...")
+    t0 = time.time()
+    from fastapi.testclient import TestClient
+    import sys, importlib
+    sys.path.insert(0, VISUALIZER_DIR)
+    if "server" in sys.modules:
+        del sys.modules["server"]
+    import server as _server
+    client = TestClient(_server.app)
+    for f in DIM2_FILES:
+        if f.endswith(".css"):
+            url = f"/static/css/{f}"
+        else:
+            url = f"/static/js/{f}"
+        r = client.get(url)
+        assert r.status_code == 200, f"{url} -> {r.status_code}"
+    print(f"    [b] {len(DIM2_FILES)} files served ({time.time()-t0:.2f}s)")
+
+    print("    [c] node --check...")
+    t0 = time.time()
+    import subprocess
+    n = 0
+    for f in DIM2_FILES:
+        if f.endswith(".css"):
+            continue
+        p = base / "js" / f
+        out = subprocess.run(["node", "--check", str(p)], capture_output=True, text=True)
+        assert out.returncode == 0, f"{f} syntax error: {out.stderr}"
+        n += 1
+    print(f"    [c] node --check on {n} JS files ({time.time()-t0:.2f}s)  OK")
+    print(f"  All {len(DIM2_FILES)} dim2 view files OK")
+
+
+def test_dim2_index_html():
+    """index.html wires up the dim2 tab content + 4 canvases + machine selector."""
+    from pathlib import Path
+    p = Path(VISUALIZER_DIR) / "frontend" / "index.html"
+    txt = p.read_text()
+    needed = [
+        'id="tab-dim2"', 'data-tab="dim2"',
+        "dim2-canvas-lattice", "dim2-canvas-spectrum",
+        "dim2-canvas-bott", "dim2-canvas-edge",
+        "dim2-machine", "dim2-L", "dim2-gamma", "dim2-t1", "dim2-t2",
+        "dim2-phi", "dim2-loss",
+        "dim2-run", "dim2-sweep",
+        "dim2-copy-url", "dim2-download-json", "dim2-download-png",
+        "/static/css/dim2.css",
+        "Phase 3",
+    ]
+    for s in needed:
+        assert s in txt, f"index.html missing: {s!r}"
+    # The dim2 tab should NOT be disabled
+    assert '<button class="tab" data-tab="dim2">' in txt, "dim2 tab still disabled"
+    print(f"  index.html wires up dim2 view (4 canvases + 7 controls)  OK")
+
+
+def test_dim2_endpoints_via_http():
+    """Phase 3 endpoints: /api/dim2/machines, /api/dim2/build, /api/dim2/gamma_sweep."""
+    from fastapi.testclient import TestClient
+    import sys, importlib
+    sys.path.insert(0, VISUALIZER_DIR)
+    if "server" in sys.modules:
+        del sys.modules["server"]
+    import server as _server
+    client = TestClient(_server.app)
+
+    # /machines
+    r = client.get("/api/dim2/machines")
+    assert r.status_code == 200
+    body = r.json()
+    assert "machines" in body and "params" in body
+    for name in ["loop_default", "halt_default", "uniform_annihilation", "l4_fragility"]:
+        assert name in body["machines"], f"missing dim2 preset: {name}"
+
+    # /build
+    r = client.get("/api/dim2/build", params={"L": 8, "gamma_halt": 5.0})
+    assert r.status_code == 200
+    body = r.json()
+    assert body["L"] == 8
+    assert body["N"] == 64
+    assert body["halt_pos"] == [4, 4]
+
+    # /gamma_sweep
+    r = client.get("/api/dim2/gamma_sweep", params={
+        "L": 8, "gammas": "0,5,10", "include_projector": "false",
+    })
+    assert r.status_code == 200
+    body = r.json()
+    assert body["L"] == 8
+    assert len(body["points"]) == 3
+    assert body["points"][0]["C"] == 1
+    assert body["points"][-1]["C"] == 0
+    print(f"  /api/dim2/machines, /build, /gamma_sweep all live  OK")
+
+
 # ---- Main entry point ---------------------------------------------------
 
 if __name__ == "__main__":
@@ -641,13 +795,15 @@ if __name__ == "__main__":
     test_1d_dim_matches_machine()
     print()
     print("=" * 60)
-    print("  SMOKE TESTS: 2D engine (Phase 1B)")
+    print("  SMOKE TESTS: 2D engine (Phase 1B + Phase 3 additions)")
     print("=" * 60)
     test_2d_loop_L8()
     test_2d_halt_L8()
     test_2d_sink_strength_sweep()
     test_2d_halt_site_imag()
     test_2d_dim()
+    test_2d_gamma_sweep_engine()
+    test_2d_preset_machines()
     print()
     print("=" * 60)
     print("  SMOKE TESTS: 3D engine (Phase 1C)")
@@ -695,6 +851,13 @@ if __name__ == "__main__":
     test_polish_assets()
     test_polish_index_html()
     test_polish_endpoints_via_http()
+    print()
+    print("=" * 60)
+    print("  SMOKE TESTS: Phase 3 (2D Chern view)")
+    print("=" * 60)
+    test_dim2_view_assets()
+    test_dim2_index_html()
+    test_dim2_endpoints_via_http()
 
     elapsed = time.time() - t_start
     print("=" * 60)

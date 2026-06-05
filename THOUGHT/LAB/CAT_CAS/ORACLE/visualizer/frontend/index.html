@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="/static/css/panels.css">
   <link rel="stylesheet" href="/static/css/viz.css">
   <link rel="stylesheet" href="/static/css/dim1.css">
+  <link rel="stylesheet" href="/static/css/dim2.css">
   <link rel="stylesheet" href="/static/css/polish.css">
 </head>
 <body>
@@ -16,7 +17,7 @@
     <h1>CAT_CAS Oracle Visualizer</h1>
     <div class="status-bar">
       <span id="health-pill" class="pill pill-pending">checking...</span>
-      <span class="phase-label">Phase 2 &mdash; 1D Mechanism</span>
+      <span class="phase-label">Phase 3 &mdash; 2D Chern View</span>
       <button class="theme-toggle" id="theme-toggle" title="Toggle theme (T)">
         <span class="icon" id="theme-icon">&#9788;</span><span id="theme-label">dark</span>
       </button>
@@ -26,7 +27,7 @@
 
   <nav class="tab-bar">
     <button class="tab active" data-tab="dim1">1D &mdash; Halting Oracle</button>
-    <button class="tab" data-tab="dim2" disabled>2D &mdash; Chern Insulator</button>
+    <button class="tab" data-tab="dim2">2D &mdash; Chern Insulator</button>
     <button class="tab" data-tab="dim3" disabled>3D &mdash; Weyl Annihilation</button>
     <button class="tab" data-tab="dim4" disabled>4D &mdash; Axion / Second Chern</button>
     <button class="tab" data-tab="dim5" disabled>5D &mdash; Floquet Time Crystal</button>
@@ -179,10 +180,177 @@
     </section>
 
     <section id="tab-dim2" class="tab-content">
-      <div class="placeholder">
-        <h2>2D &mdash; Non-Hermitian Chern Oracle (37)</h2>
-        <p>Lattice, (k<sub>x</sub>,k<sub>y</sub>) momentum torus, Bott index.</p>
-        <p class="muted">Phase 3 will populate this view.</p>
+      <div class="dim2-layout">
+        <aside class="side-panel dim2-controls">
+          <div class="section">
+            <h3>Preset
+              <span class="info" tabindex="0"
+                    data-tooltip="Pick a canonical 2D lattice setup. Each preset has a known verdict from the lab's source. Custom sliders below let you probe the parameter space.">?</span>
+            </h3>
+            <div class="control-row">
+              <label for="dim2-machine">Topology</label>
+              <select id="dim2-machine"></select>
+            </div>
+            <div class="control-row">
+              <label for="dim2-L">
+                L
+                <span class="info" tabindex="0"
+                      data-tooltip="Lattice linear size. N = L*L. L=4 collapses the chiral edge (finite-size); L=8 is the working default.">?</span>
+              </label>
+              <input type="range" id="dim2-L" min="4" max="12" step="1" value="8">
+              <span class="val" id="dim2-L-val">8</span>
+            </div>
+            <div class="control-row">
+              <label for="dim2-gamma">
+                &gamma;<sub>halt</sub>
+                <span class="info" tabindex="0"
+                      data-tooltip="Localized EP sink strength at the lattice center. Drives the topological phase transition: gamma=0 -> LOOPS, gamma=10 -> HALTS.">?</span>
+              </label>
+              <input type="range" id="dim2-gamma" min="0" max="20" step="0.1" value="0">
+              <span class="val" id="dim2-gamma-val">0.0</span>
+            </div>
+            <details class="advanced">
+              <summary>Advanced (t1, t2, phi, loss)</summary>
+              <div class="control-row">
+                <label for="dim2-t1">t<sub>1</sub></label>
+                <input type="range" id="dim2-t1" min="0" max="3" step="0.05" value="1.0">
+                <span class="val" id="dim2-t1-val">1.00</span>
+              </div>
+              <div class="control-row">
+                <label for="dim2-t2">t<sub>2</sub></label>
+                <input type="range" id="dim2-t2" min="0" max="3" step="0.05" value="0.5">
+                <span class="val" id="dim2-t2-val">0.50</span>
+              </div>
+              <div class="control-row">
+                <label for="dim2-phi">
+                  &phi;
+                  <span class="info" tabindex="0"
+                        data-tooltip="NNN hopping phase (TRS breaking). Default pi/4. Other values change the Chern band topology.">?</span>
+                </label>
+                <input type="range" id="dim2-phi" min="0" max="6.2832" step="0.01" value="0.7854">
+                <span class="val" id="dim2-phi-val">0.785</span>
+              </div>
+              <div class="control-row">
+                <label for="dim2-loss">loss</label>
+                <input type="range" id="dim2-loss" min="0" max="0.5" step="0.005" value="0.05">
+                <span class="val" id="dim2-loss-val">0.050</span>
+              </div>
+            </details>
+            <div class="control-row" style="margin-top: 10px;">
+              <button id="dim2-run" title="Run (R)">Run</button>
+              <button id="dim2-sweep" title="Compute C across a gamma sweep">Sweep &gamma;</button>
+            </div>
+          </div>
+
+          <div class="section">
+            <h3>Verdict</h3>
+            <div id="dim2-verdict-banner" class="verdict-banner unknown">UNSET</div>
+            <div class="kpi-grid">
+              <div class="kpi">
+                <div class="kpi-label">
+                  C
+                  <span class="info" tabindex="0"
+                        data-tooltip="Real-space Bott index of the catalytic contour projector. C != 0 -> LOOPS (chiral edge protected), C = 0 -> HALTS.">?</span>
+                </div>
+                <div class="kpi-value" id="dim2-kpi-c">&mdash;</div>
+              </div>
+              <div class="kpi">
+                <div class="kpi-label">
+                  E<sub>F</sub> (Im)
+                  <span class="info" tabindex="0"
+                        data-tooltip="Imaginary part of the Fermi level. Midpoint of the largest gap in Im(eigvals) of H.">?</span>
+                </div>
+                <div class="kpi-value" id="dim2-kpi-ef">&mdash;</div>
+              </div>
+              <div class="kpi">
+                <div class="kpi-label">
+                  &rho;
+                  <span class="info" tabindex="0"
+                        data-tooltip="Spectral radius max |lambda_i|. |rho| > 1 means some modes grow; |rho| < 1 means all modes decay.">?</span>
+                </div>
+                <div class="kpi-value" id="dim2-kpi-rho">&mdash;</div>
+              </div>
+              <div class="kpi">
+                <div class="kpi-label">
+                  sink
+                  <span class="info" tabindex="0"
+                        data-tooltip="|Im(H_ii)| at the EP sink site (center). Strong sink = edge destroyed.">?</span>
+                </div>
+                <div class="kpi-value" id="dim2-kpi-sink">&mdash;</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <h3>Lattice spec</h3>
+            <div id="dim2-spec" class="machine-spec muted">No data yet.</div>
+          </div>
+
+          <div class="section">
+            <h3>Export / share</h3>
+            <div class="export-row">
+              <button id="dim2-copy-url" title="Copy a URL that reproduces the current state">Copy URL</button>
+              <button id="dim2-download-json" title="Download the full run result as JSON">JSON</button>
+              <button id="dim2-download-png" title="Save the current 2D view as a PNG">PNG</button>
+            </div>
+          </div>
+        </aside>
+
+        <div class="dim2-main">
+          <div class="dim2-viz-row">
+            <div class="viz-panel dim2-viz-lattice">
+              <div class="viz-header">
+                <span class="viz-title">
+                  Lattice Im(H) &amp; sink
+                  <span class="info" tabindex="0"
+                        data-tooltip="L x L lattice. Cell color = Im(H_ii) (blue = loss, red = sink). Red ring marks the EP halt site.">?</span>
+                </span>
+                <span class="viz-sub" id="dim2-lattice-sub">L = &mdash;</span>
+              </div>
+              <canvas id="dim2-canvas-lattice"></canvas>
+            </div>
+            <div class="viz-panel dim2-viz-spectrum">
+              <div class="viz-header">
+                <span class="viz-title">
+                  Eigenvalues
+                  <span class="info" tabindex="0"
+                        data-tooltip="Spectrum of H in the complex plane. Vertical line is E_fermi (Im). The gap around E_fermi separates the non-decaying (occupied) edge modes from the decaying bulk.">?</span>
+                </span>
+                <span class="viz-sub" id="dim2-spec-sub">N = &mdash;</span>
+              </div>
+              <canvas id="dim2-canvas-spectrum"></canvas>
+            </div>
+          </div>
+
+          <div class="viz-panel dim2-viz-bott">
+            <div class="viz-header">
+              <span class="viz-title">
+                Bott index C vs &gamma;<sub>halt</sub>
+                <span class="info" tabindex="0"
+                      data-tooltip="Sweep of the Bott index as the EP sink strength increases. Plateaus at C=+1 (LOOPS) collapse to C=0 (HALTS) as the sink dominates.">?</span>
+              </span>
+              <span class="viz-sub" id="dim2-bott-sub">click Sweep</span>
+            </div>
+            <canvas id="dim2-canvas-bott"></canvas>
+          </div>
+
+          <div class="viz-panel dim2-viz-edge">
+            <div class="viz-header">
+              <span class="viz-title">
+                Edge current &nbsp;|&nbsp; |P<sub>ij</sub>|<sup>2</sup> summed by row
+                <span class="info" tabindex="0"
+                      data-tooltip="Projector P_occ on the L x L lattice. Loop case shows edge localization (high P near the boundary); halt case shows it washed out by the sink.">?</span>
+              </span>
+              <span class="viz-sub" id="dim2-edge-sub">n/a</span>
+            </div>
+            <canvas id="dim2-canvas-edge"></canvas>
+          </div>
+
+          <div class="section dim2-mechanism">
+            <h3>Mechanism</h3>
+            <p id="dim2-mechanism-text" class="muted">Pick a preset and run to see the mechanism.</p>
+          </div>
+        </div>
       </div>
     </section>
 

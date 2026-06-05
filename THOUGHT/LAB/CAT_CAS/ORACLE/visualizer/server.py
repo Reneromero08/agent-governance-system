@@ -1,7 +1,7 @@
 """
 CAT_CAS Oracle Visualizer — server.
 
-Phase 0: Foundation. FastAPI app with static frontend and health endpoint.
+Phase 3: 2D Chern view. FastAPI app with static frontend and health endpoint.
 
 Run: python server.py
 Then open http://localhost:8000
@@ -25,7 +25,7 @@ CAT_CAS_DIR = os.path.normpath(os.path.join(HERE, "..", "..", ".."))
 sys.path.insert(0, CAT_CAS_DIR)
 
 # Bump this as phases land.
-PHASE = 2
+PHASE = 3
 
 
 # ---- App -----------------------------------------------------------------

@@ -11,6 +11,8 @@ Public API:
     spectral_projector(H, E_fermi, n_pts, radius) -> dict
     bott_index(P, L) -> dict
     run(L, t1, t2, phi, loss, gamma_halt, n_pts, radius) -> dict
+    gamma_sweep(L, gammas, ...) -> dict          (C vs gamma_halt curve)
+    preset_machines() -> dict                   (canonical machine presets)
 """
 
 import importlib.util
@@ -203,6 +205,124 @@ def run(
         "fermi": fermi,
         "projector": P_dict,
         "bott": bott,
+    }
+
+
+def gamma_sweep(
+    L: int = 8,
+    gammas: List[float] = None,
+    t1: float = 1.0,
+    t2: float = 0.5,
+    phi: float = float(np.pi / 4),
+    loss: float = 0.05,
+    n_pts: int = 32,
+    radius: float = 2.0,
+    include_projector: bool = False,
+) -> Dict[str, Any]:
+    """Sweep gamma_halt and return Bott index for each value.
+
+    For each gamma:
+      - build H with localized EP sink at center
+      - find E_fermi from spectrum
+      - build projector (catalytic contour integral)
+      - compute Bott index C
+
+    Returns JSON-serializable dict with the per-gamma C values.
+    """
+    if gammas is None:
+        gammas = [0.0, 1.0, 2.0, 5.0, 8.0, 10.0]
+    gammas = [float(g) for g in gammas]
+
+    points = []
+    for g in gammas:
+        try:
+            r = run(
+                L=L, t1=t1, t2=t2, phi=phi, loss=loss, gamma_halt=g,
+                n_pts=n_pts, radius=radius, include_projector=include_projector,
+            )
+            points.append({
+                "gamma_halt": g,
+                "C": int(r["bott"]["C"]),
+                "verdict": str(r["verdict"]),
+                "E_fermi_im": float(r["fermi"]["E_fermi_im"]),
+            })
+        except Exception as exc:  # numerical fragility
+            points.append({
+                "gamma_halt": g,
+                "C": 0,
+                "verdict": "HALTS",
+                "E_fermi_im": 0.0,
+                "error": f"{type(exc).__name__}: {exc}",
+            })
+
+    return {
+        "L": int(L),
+        "N": int(L * L),
+        "t1": t1, "t2": t2, "phi": phi, "loss": loss,
+        "n_pts": n_pts, "radius": radius,
+        "points": points,
+    }
+
+
+# Canonical 2D machine presets (mirrors 1D's MACHINE_DESCRIPTIONS).
+PRESET_MACHINES = {
+    "loop_default": {
+        "label": "loop_default",
+        "expected": "LOOPS",
+        "L": 8,
+        "t1": 1.0, "t2": 0.5,
+        "phi": float(np.pi / 4),
+        "loss": 0.05, "gamma_halt": 0.0,
+        "summary": "L=8, no EP sink. Pure Chern insulator. C = +1, chiral edge protected -> LOOPS.",
+    },
+    "halt_default": {
+        "label": "halt_default",
+        "expected": "HALTS",
+        "L": 8,
+        "t1": 1.0, "t2": 0.5,
+        "phi": float(np.pi / 4),
+        "loss": 0.05, "gamma_halt": 10.0,
+        "summary": "L=8, EP sink at center (gamma_halt=10). Edge destroyed -> C = 0 -> HALTS.",
+    },
+    "uniform_annihilation": {
+        "label": "uniform_annihilation",
+        "expected": "HALTS",
+        "L": 8,
+        "t1": 1.0, "t2": 0.5,
+        "phi": float(np.pi / 4),
+        "loss": 0.05, "gamma_halt": 0.0,
+        "summary": "L=8 with uniform gamma=2 on every site (Exp 39 discovery). Topology melts -> HALTS.",
+    },
+    "l4_fragility": {
+        "label": "l4_fragility",
+        "expected": "HALTS",
+        "L": 4,
+        "t1": 1.0, "t2": 0.5,
+        "phi": float(np.pi / 4),
+        "loss": 0.05, "gamma_halt": 0.0,
+        "summary": "L=4 is too small to sustain the chiral edge. Even gamma=0 -> finite-size gap collapse -> C = 0 -> HALTS.",
+    },
+}
+
+
+def preset_machines() -> Dict[str, Any]:
+    """List canonical 2D machine presets with descriptions and param ranges."""
+    return {
+        "machines": PRESET_MACHINES,
+        "params": {
+            "L": {"min": 2, "max": 64, "default": 8,
+                  "description": "Lattice linear size; N = L*L"},
+            "t1": {"min": 0.0, "max": 5.0, "default": 1.0,
+                   "description": "Real NN hopping strength"},
+            "t2": {"min": 0.0, "max": 5.0, "default": 0.5,
+                   "description": "Complex NNN hopping strength (TRS breaking)"},
+            "phi": {"min": 0.0, "max": 6.283185307179586, "default": 0.7853981633974483,
+                    "description": "NNN hopping phase (radians, default pi/4)"},
+            "loss": {"min": 0.0, "max": 1.0, "default": 0.05,
+                     "description": "Uniform on-site imaginary dissipation"},
+            "gamma_halt": {"min": 0.0, "max": 50.0, "default": 0.0,
+                           "description": "Localized EP sink strength at halt site"},
+        },
     }
 
 

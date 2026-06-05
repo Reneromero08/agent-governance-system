@@ -2,6 +2,7 @@
 
 import { getHealth } from './api.js';
 import { Dim1Controller } from './dim1.js';
+import { Dim2Controller } from './dim2.js';
 import { initTheme } from './theme.js';
 import { registerKeyboard } from './keyboard.js';
 import { note } from './status.js';
@@ -38,16 +39,24 @@ registerKeyboard();
   if (icon) icon.innerHTML = t === 'dark' ? '&#9788;' : '&#9788;';
 }
 
+function switchToTab(id) {
+  const tab = document.querySelector(`.tab[data-tab="${id}"]`);
+  if (!tab || tab.disabled) return;
+  tabs.forEach(t => t.classList.toggle('active', t === tab));
+  contents.forEach(c => c.classList.toggle('active', c.id === 'tab-' + id));
+  if (id === 'dim1' && !dimControllers.dim1) {
+    dimControllers.dim1 = new Dim1Controller();
+    dimControllers.dim1.init();
+  } else if (id === 'dim2' && !dimControllers.dim2) {
+    dimControllers.dim2 = new Dim2Controller();
+    dimControllers.dim2.init();
+  }
+}
+
 tabs.forEach(tab => {
   tab.addEventListener('click', () => {
     if (tab.disabled) return;
-    const id = tab.dataset.tab;
-    tabs.forEach(t => t.classList.toggle('active', t === tab));
-    contents.forEach(c => c.classList.toggle('active', c.id === 'tab-' + id));
-    if (id === 'dim1' && !dimControllers.dim1) {
-      dimControllers.dim1 = new Dim1Controller();
-      dimControllers.dim1.init();
-    }
+    switchToTab(tab.dataset.tab);
   });
 });
 
@@ -62,6 +71,13 @@ async function checkHealth() {
       dimControllers.dim1 = new Dim1Controller();
       dimControllers.dim1.init();
     }
+    if (!dimControllers.dim2) {
+      dimControllers.dim2 = new Dim2Controller();
+      dimControllers.dim2.init();
+    }
+    // Switch to the URL-requested tab (if any) AFTER controllers are ready.
+    const urlTab = new URL(window.location.href).searchParams.get('tab');
+    if (urlTab) switchToTab(urlTab);
   } catch (e) {
     healthPill.textContent = 'OFFLINE';
     healthPill.className = 'pill pill-err';
