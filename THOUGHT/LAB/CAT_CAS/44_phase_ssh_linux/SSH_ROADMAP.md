@@ -335,14 +335,20 @@ PHASE2B_PHASE_ORACLE_BRANCH_UNTESTED
 
 Stop treating the substrate as a binary spin-flip Ising machine. Encode constraints as phase/interference structures, run oracle/interference process, score final answer distribution. The answer is still the measurement.
 
-#### 2B.5A Exp20 Phase-Oracle Port
-- [ ] Extract: phase lasing, FFT/QFT, MUSIC super-resolution, phase oracle filter bank, holographic phase oracle, contained .holo phase cavity
-- [ ] Implement Phenom-compatible phase-oracle harness
-- [ ] Represent candidate states as phase buckets or complex values, not only bits
-- [ ] Encode problem constraints as phase shifts or filters
-- [ ] Decode invariant answer from phase/interference output
-- [ ] Source: `session_scripts/phase2b/phase_oracle_port.c`
-- [ ] Output: `PHASE2B_5A_EXP20_PHASE_ORACLE_PORT.md`
+#### 2B.5A Exp20 Phase-Oracle Port — COMPLETE (v1-v8, 2026-06-05)
+
+- [x] Vertex phase oracle: gradient descent on theta angles, decode via cos
+- [x] Beats random spin null on 6/6 problems (mean energy)
+- [x] Beats random phase descent null on 6/6 problems
+- [x] Beats sign-shuffled null on 6/6 problems (sign structure fidelity)
+- [x] Beats misaligned permutation null on 6/6 problems (label alignment matters)
+- [x] Edge-rewired null competitive on random sparse (v7: rewired -2.06 vs oracle -1.92)
+- [x] Permutation invariance control correctly separated (not destructive)
+- [x] Spectral phase oracle (Jacobi eigenbasis): no consistent gain over vertex (v8)
+- [x] Active edge solver dominates all phase-oracle variants on all problems
+- [x] **Verdict: PHASE2B_5A_V8_SPECTRAL_NO_GAIN, PHASE2B_5A_V7_EDGE_STRUCTURE_PARTIAL**
+- [x] Phase-oracle encoding is valid but lacks strong topology/adjacency fidelity
+- [x] Source: `session_scripts/phase2b/phase_oracle_ising.c` (v1-v8)
 
 #### 2B.5B Exp26 Optical 3-SAT Port
 - [ ] Variables as optical/phase paths, clauses as phase-shifting mirrors, satisfying assignments = constructive interference
