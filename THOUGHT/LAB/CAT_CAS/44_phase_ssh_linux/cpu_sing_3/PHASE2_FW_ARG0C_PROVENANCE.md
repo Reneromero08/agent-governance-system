@@ -16,6 +16,13 @@ Route 2 advanced. `arg_0C` behind `0xFFF7371A` is not a direct static P-state ta
 - `cpu_hack/AmdProcessorInitPeim_descriptor_callsite_xrefs.txt`
 - `cpu_hack/AmdProcessorInitPeim_outer_producer_table_xrefs.txt`
 - `cpu_hack/AmdProcessorInitPeim_service_table_trace.txt`
+- `cpu_hack/AmdProcessorInitPeim_producer_service_provenance.txt`
+- `cpu_hack/AmdProcessorInitPeim_service_descriptor_xrefs.txt`
+- `cpu_hack/AmdProcessorInitPeim_decoded_service_descriptor.txt`
+- `cpu_hack/AmdProcessorInitPeim_service_vtable_entry_trace.txt`
+- `cpu_hack/AmdProcessorInitPeim_record_write_map_fff4cf9c.txt`
+- `cpu_hack/AmdProcessorInitPeim_entry_plus_04_source_trace.txt`
+- `cpu_hack/AmdProcessorInitPeim_msr_source_proof.txt`
 
 ## Evidence
 
@@ -168,6 +175,106 @@ handler 0xFFF4A676: call dword ptr [eax + edi], [ecx + edi + 4]
 
 This moves the remaining source hunt to descriptor-entry and service/function-table provenance.
 
+## Decoded Service Descriptor
+
+`0xFFF7E698` is now decoded as a shared service descriptor, not a P-state data row:
+
+```text
+descriptor: 0xFFF7E698
+count:      3
+entries:    0xFFF7E674
+
+entry 0: mask low 0x0000001F -> result 0xFFF839E0 (.dG2_PEI)
+entry 1: mask low 0x00000100 -> result 0xFFF8D108 (.dG3_DXE)
+entry 2: zero/default        -> result 0x00000000
+```
+
+`0xFFF499B1` interprets this descriptor by walking `0x0C`-byte entries and selecting the first entry where the runtime mask intersects the entry mask. The `0xFFF8D108` result is a service vtable:
+
+```text
+0xFFF8D108 + 0x12 -> 0xFFF7332E
+0xFFF8D108 + 0x16 -> 0xFFF7371A
+0xFFF8D108 + 0x1A -> 0xFFF7339A
+0xFFF8D108 + 0x1E -> 0xFFF73418
+0xFFF8D108 + 0x22 -> 0xFFF7348D
+```
+
+The constructor pointer is therefore reached through a decoded service vtable, but this is still function dispatch metadata rather than editable P0-P4 records.
+
+## Producer Write Map
+
+`0xFFF4CF9C` maps the constructor's P4 clue back to a runtime-filled per-entry field:
+
+```text
+constructor consumes:
+  selected_base + pstate*0x18 + 0x1C
+
+producer layout:
+  entry = selected_base + 0x18 + pstate*0x18
+  constructor +0x1C == producer entry +0x04
+```
+
+Producer evidence:
+
+```text
+0xFFF4CFBE: select service table with descriptor 0xFFF7E698
+0xFFF4CFF5: call [service + 0x1E]
+0xFFF4CFFB: write record +0x0B max P-state byte
+0xFFF4D007: write record +0x0F current/default P-state byte
+0xFFF4D025: call [service + 0x22]
+0xFFF4D05D: write entry +0x04 from [ebp - 0x1C]
+0xFFF4D063: write entry +0x08
+0xFFF4D06F: write entry +0x0C
+```
+
+Corrected argument mapping for `[service+0x22]`:
+
+```text
+push ebx              ; arg_20 = context
+push &local_24        ; arg_1C -> entry +0x0C
+push &local_20        ; arg_18 -> entry +0x08
+push &local_1C        ; arg_14 -> entry +0x04
+push &local_01        ; arg_10 -> valid flag
+push pstate_index     ; arg_0C
+push service          ; arg_08
+call [service +0x22]  ; 0xFFF7348D
+```
+
+Inside `0xFFF7348D`, `arg_14` is written from a local byte populated by `0xFFF44E76`:
+
+```text
+0xFFF734CB: eax = pstate_index - 0x3FFEFF9C
+0xFFF734D2: call 0xFFF44E76
+0xFFF73514: eax = byte [ebp -0x0C]
+0xFFF7351E: *arg_14 = eax
+```
+
+So the live P4 VID-like field is not a static byte in the current PE32 artifact. It is a runtime per-P-state entry field populated through service vtable `+0x22` from the `0xFFF44E76` service/MSR-style read path.
+
+`0xFFF44E76` is confirmed as the `rdmsr` helper:
+
+```text
+0xFFF44E7F: mov ecx, [ebp+8]
+0xFFF44E82: rdmsr
+0xFFF44E87: [out+0] = eax
+0xFFF44E89: [out+4] = edx
+```
+
+The address expression in `0xFFF7348D` resolves directly to the P-state MSR range:
+
+```text
+pstate_index - 0x3FFEFF9C
+  == pstate_index + 0xC0010064
+
+P0 -> MSRC001_0064
+P1 -> MSRC001_0065
+P2 -> MSRC001_0066
+P3 -> MSRC001_0067
+P4 -> MSRC001_0068
+```
+
+Therefore this decoded AGESA path reconstructs the constructor's P4 byte from a runtime read of `MSRC001_0068`. It does not expose a firmware-resident P4 table byte.
+
 ## Classification
 
 | Question | Current answer |
@@ -175,9 +282,9 @@ This moves the remaining source hunt to descriptor-entry and service/function-ta
 | Static direct table? | A `.data` function-pointer registration exists at `0xFFF7F516 -> 0xFFF4D12F`; it is a producer registration, not static P-state records |
 | Copied/compressed table? | Possible for the produced payload, but not proven |
 | Heap-allocated? | Likely for the containing object or producer output; the `0xFFF4D12F` callsite proves `[ebp-8] = arg_0C + 8`, not a local allocation |
-| Service-produced? | Strongly indicated by the `.data` producer registration, the `0xFFF4CF9C` callback descriptor passed to `0xFFF4AADD`, and service calls through tables such as `[eax+0x12]`, `[eax+0x1A]`, `[eax+0x1E]`, `[eax+0x22]` |
+| Service-produced? | Proven for the current path: descriptor `0xFFF7E698` selects vtable `0xFFF8D108`; producer `0xFFF4CF9C` fills the constructor-relevant `entry +0x04` through `[service+0x22]` / `0xFFF7348D` / `0xFFF44E76` |
 | P0-P4 sibling records found? | Runtime record shape found; editable static sibling bytes not found |
-| P4 field identified? | Runtime field is still `selected_base + pstate*0x18 + 0x1C` for the VID-like byte, but no static P4 byte offset is proven |
+| P4 field identified? | Runtime field is `selected_base + pstate*0x18 + 0x1C`, equivalent to producer `entry + 0x04`; for P4 it is reconstructed from runtime `MSRC001_0068`, not static firmware bytes |
 
 ## Deepest Progress
 
@@ -209,11 +316,27 @@ The deepest current provenance is:
   invoke indexed function tables
   no static P4 record row is exposed by this layer
   next target is descriptor-entry source and service table provenance
+
+0xFFF7E698 service descriptor
+  count 3, entries at 0xFFF7E674
+  runtime mask 0x00000100 selects 0xFFF8D108
+  0xFFF8D108 + 0x16 = 0xFFF7371A constructor
+
+0xFFF4CF9C record write map
+  constructor field +0x1C maps to producer entry +0x04
+  entry +0x04 is filled by [service+0x22] output arg_14
+  arg_14 is sourced from 0xFFF44E76 read path, not static P4 bytes
+  no static P4-only byte is exposed
+
+0xFFF44E76 MSR source proof
+  helper executes rdmsr
+  0xFFF7348D argument = 0xC0010064 + pstate_index
+  P4 argument = MSRC001_0068
 ```
 
 ## Next Exact RE Step
 
-Resolve the service table feeding `0xFFF4D12F` and the typed descriptor handlers behind `0xFFF4AADD`, especially the callbacks invoked by handler table indexes in `0xFFF4A175`, `0xFFF4A34A`, `0xFFF4A540`, and `0xFFF4A676`.
+The decoded AGESA table route for this field is now runtime-MSR-derived. Continue by either proving a parse-clean no-op rebuild for any other future firmware edits, or by renewing software-only runtime tests around `MSRC001_0068` observability without blind voltage writes.
 
 Concrete local command:
 
@@ -225,7 +348,9 @@ Do not repeat the raw pointer search for `0xFFF4CF9C` or `0xFFF4D12F`: those hav
 
 ## Actionability
 
-`TABLE_TARGET_FOUND` is not met.
+`P4_FIELD_RUNTIME_MSR_DERIVED` is met.
+
+`TABLE_TARGET_FOUND` is not met for the decoded firmware path.
 
 `BYTE_READY_HUMAN_REVIEW` is not met.
 

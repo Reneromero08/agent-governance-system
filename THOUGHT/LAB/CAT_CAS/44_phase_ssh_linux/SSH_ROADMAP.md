@@ -152,7 +152,7 @@ python3 session_scripts/msr_p4_readonly_observer.py --cores 0-5 --samples 100 --
 
 ---
 
-## Phase 2: The Phase-Locked Oscillator Network — HITTING EVERY WALL, STILL SWINGING (2A software-visible routes exhausted, 2B black-box attractor approach added 2026-06-05)
+## Phase 2: The Phase-Locked Oscillator Network — HITTING EVERY WALL, STILL SWINGING (2A exhausted, 2B passive MESI/spin branch closed, phase-oracle branch untested 2026-06-05)
 
 **Objective:** Demonstrate that multiple cores at different frequencies produce measurable coupling via the shared power grid, and measure the coupling channel characteristics.
 
@@ -259,58 +259,123 @@ Build a useful reversible/catalytic optimization solver.
 - [x] Deterministic seeds for reproducibility
 - [x] Output data: `/tmp/ising_problems.json`
 
-### 2B.2 Passive Hidden-Attractor Harness (Random Flip) — COMPLETE (2026-06-05)
-
+### 2B.2 Passive Hidden-Attractor Harness (Random Flip) — COMPLETE / NEGATIVE (2026-06-05)
 - [x] Implemented contamination-free passive worker with random-flip rule
-- [x] Worker logic: pick two spins, if different flip higher-slot-index, if same flip based on contention counter parity
-- [x] Contamination checklist verified: no J_ij access, no local field, no energy computation, no Metropolis, no hidden solver
-- [x] Tested on 8-spin linear chain (J[i][i+1]=+1, ground energy=-7)
-- [x] Results:
-
-| Condition | Samples | Ground State Hits | Mean Energy |
-|-----------|---------|-------------------|-------------|
-| Shared tape (2 workers) | 200 | 0/200 (0%) | -0.83 |
-| Single worker (null) | 200 | 0/200 (0%) | -3.00 |
-| Independent tapes (null) | 200 | 0/200 (0%) | 3.00 |
-
 - [x] Shared tape did NOT beat single-worker null (-0.83 vs -3.00)
-- [x] Independent tapes mean differs because workers get half iterations (10K vs 20K), producing less-evolved states
-- [x] **Honest negative result:** MESI contention + shared tape interactions don't create measurable energy bias at this passivity level
-- [x] Audit passed: contamination checklist verified, nulls properly constructed, energy scored only after run
+- [x] **Verdict: PHASE2B_2_PASSIVE_RANDOM_NEGATIVE**
 - [x] Source: `session_scripts/phase2b/passive_attractor.c`
 
 **Key finding:** The random-flip passive worker is too weak to couple with the Ising energy landscape. The sweet spot between pure random (too weak) and gradient-aware (cheating) requires workers that react to shared-state patterns without computing J_ij. The Grail 5 wormhole experiment (Exp 32) proved that phase correlations through a shared medium (Q@K^T) compute the same structure as entanglement swapping. The next step: replace random flips with correlation measurements through the shared tape — treating the MESI protocol as the ER bridge and atomic XOR as teleportation.
 
-### 2B.3 Wormhole-Inspired Correlation Attractor [NEXT]
+### 2B.3A Wormhole Protocol Transfer — COMPLETE (2026-06-05)
 
-- [ ] Workers compute pairwise spin correlations (si * sj) through shared tape slots
-- [ ] Accumulate correlations via XOR, no spin flipping in first test — measurement only
-- [ ] Compare correlation patterns against Ising coupling structure
-- [ ] Test whether correlation patterns match J_ij better than nulls
-- [ ] If correlation patterns align, add feedback loop where correlations drive spin flips
-- [ ] Output artifact: `PHASE2B_3_WORMHOLE_CORRELATION.md`
+- [x] Faithfully ported Exp32 ER=EPR engineering onto catalytic tape
+- [x] CREATE: corrected Bell pair via `delta = (A^B)^sig; B ^= delta` — 4/4 invariants
+- [x] OPEN: cross-pair coupling (2 ops), breaks invariants by design (expected)
+- [x] TRANSMIT: XOR-chain route 0→2→4→6
+- [x] CLOSE: inverse ops in reverse order — 4/4 invariants restored
+- [x] VERIFY: SHA-256 restored (9e1009a5...→9e1009a5... match)
+- [x] Protocol is deterministic single-process — no concurrency claim yet
+- [x] Source: `session_scripts/phase2b/wormhole_protocol_transfer.c`
+- [x] **Verdict: PHASE2B_3A_PROTOCOL_TRANSFER_PASS**
 
-### 2B.3 Active Catalytic Ising Solver Track
+### 2B.3B Topology-Encoded Attractor Test — COMPLETE (anti-ferromagnetic acid test, 2026-06-05)
 
-- [ ] Separately document an active solver using reversible/catalytic operators
-- [ ] This may compute local fields and minimize energy
-- [ ] Treat as Phase 3 bridge / application, not hidden Kuramoto evidence
-- [ ] Output artifact: `PHASE2B_3_ACTIVE_CATALYTIC_ISING.md`
-- [ ] Cross-reference future Phase 3.x expansion if needed
+- [x] Three modes tested: P0 (pure passive routing), P1 (topology-only local rule), P2 (sign-aware edge rule)
+- [x] Ferromagnetic chain (J=+1): P0 near random, P1 200/200 ground, P2 200/200 ground
+- [x] **Anti-ferromagnetic acid test (J=-1): P1 0/200 (mean 7.00 — worst possible), P2 200/200**
+- [x] P1 success on ferromagnetic was a FALSE POSITIVE — "flip to align" rule matches ferro ground state by accident
+- [x] P2 works on both problem types but shared = single-worker in all cases (Δ=0)
+- [x] Shared hardware substrate provides NO measurable advantage over single-worker for any mode
+- [x] Contamination checklist verified: no J_ij access, no local field, no energy in workers
+- [x] Source: `session_scripts/phase2b/topology_attractor.c`
 
-### 2B.4 Null Hierarchy
+**Results:**
+| Mode | Ferro (J=+1) Shared | Ferro Single | Anti-Ferro (J=-1) Shared | Anti-Ferro Single |
+|------|---------------------|--------------|--------------------------|--------------------|
+| P0 (pure routing) | 1/200, +0.26 | 2/200, +0.20 | — | — |
+| P1 (ferro-bias) | 200/200, -7.00 | 200/200, -7.00 | 0/200, +7.00 | 0/200, +7.00 |
+| P2 (sign-aware) | 200/200, -7.00 | 200/200, -7.00 | 200/200, -7.00 | 200/200, -7.00 |
 
-Required nulls for passive claim:
+**Verdict:**
+```
+PHASE2B_3B_P1_FERRO_BIAS_FALSIFIED
+PHASE2B_3B_P2_ACTIVE_EDGE_SOLVER_WORKING
+PHASE2B_3B_SHARED_SUBSTRATE_NO_ADVANTAGE
+PHASE2B_3B_PASSIVE_NULLS_FAILED
+PHASE2B_PASSIVE_NULLS_FAILED_CURRENT_MECHANISMS
+```
 
-- [ ] Null 0: random spin configurations
-- [ ] Null 1: single-core same worker
-- [ ] Null 2: two cores with independent tapes
-- [ ] Null 3: shared tape with shuffled problem-to-slot mapping
-- [ ] Null 4: shuffled coupling/layout encoding
-- [ ] Null 5: same schedule but no shared writes
-- [ ] Null 6: same code on non-isolated cores
-- [ ] Null 7: active software baseline clearly labeled as software solver
-- [ ] Output artifact: `PHASE2B_4_NULLS_AND_BASELINES.md`
+### 2B.3C Active Catalytic Ising Comparator
+
+**Objective:** Build a useful active solver using reversible/catalytic operators. Phase 3 bridge/application. Not hidden Kuramoto evidence.
+
+- [ ] Local fields, energy-aware flips, reversible operators, oracle path restoration
+- [ ] Separately document as active solver, not Phase 2B passive claim
+- [ ] Output: `PHASE2B_3C_ACTIVE_CATALYTIC_ISING.md`
+
+### 2B.4 Channel Matrix — COMPLETE / CURRENT PASSIVE MECHANISMS CLOSED (2026-06-05)
+
+- [x] Tested 4 CAT_CAS-derived passive channels: QR subspaces (Exp 13), retrocausal 2-pass (Exp 23), warm-tape fingerprint (Exp 12), DID detuning coupling
+- [x] All failed to produce general shared-substrate advantage across ferro, anti-ferro, and mixed-sign problems
+- [x] Apparent anti-ferro advantages explained by base rule matching problem by accident (confirmed by ferro/mixed failures)
+- [x] **Verdict: PHASE2B_CURRENT_PASSIVE_MECHANISMS_CLOSED** — but this closes only the binary-spin passive MESI branch, NOT Phase 2B globally
+
+**Phase 2B status correction:** The tested mechanisms (random passive, P1 ferro-bias, QR subspace, retrocausal, fingerprint, DID detune) all relied on binary spin flips through shared cache. This branch is closed. But the CAT_CAS ZIP contains stronger phase-oracle machinery (Exp20, Exp26, Exp07, Exp31, Exp33) that was never ported. Phase 2B remains alive through the phase-oracle/interference branch. Do NOT globally close Phase 2B.
+
+**Labels:**
+```
+PHASE2B_PASSIVE_MESI_SPIN_BRANCH_CLOSED
+PHASE2B_PHASE_ORACLE_BRANCH_UNTESTED
+```
+
+### 2B.5 Phase-Oracle / Interference Attractor Port [NEXT]
+
+Stop treating the substrate as a binary spin-flip Ising machine. Encode constraints as phase/interference structures, run oracle/interference process, score final answer distribution. The answer is still the measurement.
+
+#### 2B.5A Exp20 Phase-Oracle Port
+- [ ] Extract: phase lasing, FFT/QFT, MUSIC super-resolution, phase oracle filter bank, holographic phase oracle, contained .holo phase cavity
+- [ ] Implement Phenom-compatible phase-oracle harness
+- [ ] Represent candidate states as phase buckets or complex values, not only bits
+- [ ] Encode problem constraints as phase shifts or filters
+- [ ] Decode invariant answer from phase/interference output
+- [ ] Source: `session_scripts/phase2b/phase_oracle_port.c`
+- [ ] Output: `PHASE2B_5A_EXP20_PHASE_ORACLE_PORT.md`
+
+#### 2B.5B Exp26 Optical 3-SAT Port
+- [ ] Variables as optical/phase paths, clauses as phase-shifting mirrors, satisfying assignments = constructive interference
+- [ ] Build small SAT/QUBO phase-interference test
+- [ ] Compare to random/null/ablated phase mappings
+- [ ] Source: `session_scripts/phase2b/optical_3sat_phase_port.py`
+- [ ] Output: `PHASE2B_5B_OPTICAL_3SAT_PORT.md`
+
+#### 2B.5C Exp07 Bloch / Complex-Plane Ising Port
+- [ ] Bloch-vector state: angle theta, complex z = r * exp(i*theta), phase bucket
+- [ ] Phase-coupled update without binary spin reduction
+- [ ] Source: `session_scripts/phase2b/bloch_complex_ising.py`
+- [ ] Output: `PHASE2B_5C_BLOCH_COMPLEX_ISING_PORT.md`
+
+#### 2B.5D Exp31 Spectral Problem Classifier
+- [ ] Graph/spectral signatures to classify Ising instances before oracle tests
+- [ ] Group by spectral/topological class, canonical forms for phase layouts
+- [ ] Source: `session_scripts/phase2b/spectral_problem_classifier.py`
+- [ ] Output: `PHASE2B_5D_SPECTRAL_PROBLEM_CLASSIFIER.md`
+
+#### 2B.5E Exp33 .holo / MERA Bridge
+- [ ] Connect phase-oracle output to .holo eigenbasis, feed Phase 4A
+- [ ] Output: `PHASE2B_5E_HOLO_MERA_BRIDGE.md`
+
+### Do Not Repeat (Phase 2B)
+
+- Binary spin flip rules pretending to be passive attractors
+- P1 ferro-bias as evidence
+- P2 active edge solver as passive evidence
+- Shared-cache contention alone as the whole Phase 2B
+- Roadmaps that close Phase 2B before phase-oracle mechanisms are ported
+
+### Correct Active Solver Placement
+
+P2 sign-aware edge rule: useful, promoted to Phase 3.13 active catalytic Ising. Not passive Phase 2B evidence.
 
 ### 2B.5 Answer-As-Measurement Gate
 
@@ -386,7 +451,7 @@ Phase 2A tried to watch the CPU sing. Phase 2B tries to use the song without wat
 
 ---
 
-## Phase 3: Catalytic Computing Ladder — COMPLETE (all 12 subphases, independently audited 2026-06-05)
+## Phase 3: Catalytic Computing Ladder — COMPLETE (3.1-3.12), 3.13 added (2026-06-05)
 
 **Objective:** Prove CAT_CAS can perform meaningful reversible/catalytic computation on the Phenom II, not merely restore bytes. The shared L3 cache is a genuine catalytic tape — borrow, compute, restore, verify — and this phase elevates it from tape restoration to a full operator library, semiotic token bridge, and oracle-style path search.
 
@@ -592,6 +657,33 @@ PHASE3_CATALYTIC_SIGN_COMPLETE
 PHASE3_ORACLE_PATH_COMPLETE
 PHASE3_BASELINE_COMPARISON_COMPLETE
 PHASE3_PUBLIC_API_SHIPPED
+```
+
+### 3.13 Active Catalytic Ising Solver (promoted from Phase 2B P2) [NEXT]
+
+- [x] P2 sign-aware edge rule solver works on ferro, anti-ferro, and mixed-sign chains (200/200 all)
+- [x] Classified as active local constraint solver, NOT passive hidden-attractor evidence
+- [x] Shared substrate provides no advantage over single-worker in any mode (Δ=0)
+- [ ] Encode Ising/QUBO problem onto catalytic tape
+- [ ] Run local sign-aware edge-rule solver
+- [ ] Extract result before reverse pass
+- [ ] Reverse/restore catalytic tape via SHA-256
+- [ ] Compare against ordinary active baseline
+- [ ] Package as reusable CAT_CAS optimization primitive
+- [ ] Source: `session_scripts/phase2b/topology_attractor.c` (P2 worker)
+
+### Phase 3 Verdict
+
+```
+PHASE3_LOGICAL_CATALYTIC_SUBSTRATE_PROVEN
+PHASE3_HOLO_EIGENBASIS_COMPLETE
+PHASE3_OPERATOR_LIBRARY_COMPLETE
+PHASE3_MEANINGFUL_COMPUTATION_ACHIEVED
+PHASE3_CATALYTIC_SIGN_COMPLETE
+PHASE3_ORACLE_PATH_COMPLETE
+PHASE3_BASELINE_COMPARISON_COMPLETE
+PHASE3_PUBLIC_API_SHIPPED
+PHASE3_ACTIVE_CATALYTIC_ISING_PROMOTED
 ```
 
 ### 3.A ADDENDUM: Scope the Landauer Claim (Gemini)

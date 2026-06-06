@@ -1,0 +1,1097 @@
+# AmdProcessorInitPeim service descriptor xrefs
+
+Generated from extracted PE32 body only. No patch bytes, no image writes, no hardware access.
+
+## data VA 0xFFF7E300 raw 0x03E274 section .rdata size 0x130
+0xFFF7E300: 00 00 01 00 00 00 BC DC F4 FF 00 00 08 00 00 00 ................ 0x00010000 0xDCBC0000 0x0000FFF4 0x00000008
+0xFFF7E310: 02 00 00 00 02 00 00 00 00 00 00 00 74 DB F7 FF ............t... 0x00000002 0x00000002 0x00000000 0xFFF7DB74
+0xFFF7E320: 04 00 00 00 00 00 00 00 84 DC F7 FF 10 00 00 00 ................ 0x00000004 0x00000000 0xFFF7DC84 0x00000010
+0xFFF7E330: 00 00 00 00 94 DD F7 FF 01 00 00 00 00 00 00 00 ................ 0x00000000 0xFFF7DD94 0x00000001 0x00000000
+0xFFF7E340: AC DE F7 FF 1F 00 00 00 00 00 00 00 B4 DF F7 FF ................ 0xFFF7DEAC 0x0000001F 0x00000000 0xFFF7DFB4
+0xFFF7E350: 00 01 00 00 00 00 00 00 34 E1 F7 FF 00 07 00 00 ........4....... 0x00000100 0x00000000 0xFFF7E134 0x00000700
+0xFFF7E360: 00 00 00 00 6C E2 F7 FF 07 14 E3 F7 FF 00 00 00 ....l........... 0x00000000 0xFFF7E26C 0xF7E31407 0x000000FF
+0xFFF7E370: 10 00 00 00 1F 00 00 00 00 00 00 00 A8 1C 00 00 ................ 0x00000010 0x0000001F 0x00000000 0x00001CA8
+0xFFF7E380: 00 00 00 80 54 E0 F7 FF 04 15 00 00 00 00 07 00 ....T........... 0x80000000 0xFFF7E054 0x00001504 0x00070000
+0xFFF7E390: 00 00 00 00 00 40 01 02 00 00 00 00 80 E8 E1 F7 .....@.......... 0x00000000 0x02014000 0x00000000 0xF7E1E880
+0xFFF7E3A0: FF 01 00 00 02 70 E3 F7 FF 00 00 00 A4 50 F8 FF .....p.......P.. 0x000001FF 0xF7E37002 0x000000FF 0xFFF850A4
+0xFFF7E3B0: 6C 51 F8 FF 34 52 F8 FF 44 4D F8 FF 00 00 00 00 lQ..4R..DM...... 0xFFF8516C 0xFFF85234 0xFFF84D44 0x00000000
+0xFFF7E3C0: 00 F8 20 94 D9 F7 FF 00 00 00 00 00 00 00 00 58 .. ............X 0x9420F800 0x00FFF7D9 0x00000000 0x58000000
+0xFFF7E3D0: DA F7 FF 00 00 00 00 00 00 00 00 00 00 00 00 00 ................ 0x00FFF7DA 0x00000000 0x00000000 0x00000000
+0xFFF7E3E0: 00 00 00 00 00 00 00 00 01 00 00 C0 E3 F7 FF 1C ................ 0x00000000 0x00000000 0xC0000001 0x1CFFF7E3
+0xFFF7E3F0: 36 F8 FF 04 4C F8 FF AC E3 F7 FF 00 00 00 00 00 6...L........... 0x04FFF836 0xACFFF84C 0x00FFF7E3 0x00000000
+0xFFF7E400: 94 D9 F7 FF 00 00 00 00 51 A0 F6 FF 42 A0 F6 FF ........Q...B... 0xFFF7D994 0x00000000 0xFFF6A051 0xFFF6A042
+0xFFF7E410: 07 00 00 00 17 00 00 00 00 00 00 00 44 3B F8 FF ............D;.. 0x00000007 0x00000017 0x00000000 0xFFF83B44
+0xFFF7E420: 00 00 00 00 00 00 00 00 00 00 00 00 02 14 E4 F7 ................ 0x00000000 0x00000000 0x00000000 0xF7E41402
+
+## data VA 0xFFF7E650 raw 0x03E5C4 section .rdata size 0x100
+0xFFF7E650: 00 00 00 00 00 00 00 00 00 00 00 00 03 38 E6 F7 .............8.. 0x00000000 0x00000000 0x00000000 0xF7E63803
+0xFFF7E660: FF 00 00 00 01 00 E0 47 F7 FF EF 43 F7 FF 02 00 .......G...C.... 0x000000FF 0x47E00001 0x43EFFFF7 0x0002FFF7
+0xFFF7E670: 08 F5 F7 FF 1F 00 00 00 00 00 00 00 E0 39 F8 FF .............9.. 0xFFF7F508 0x0000001F 0x00000000 0xFFF839E0
+0xFFF7E680: 00 01 00 00 00 00 00 00 08 D1 F8 FF 00 00 00 00 ................ 0x00000100 0x00000000 0xFFF8D108 0x00000000
+0xFFF7E690: 00 00 00 00 00 00 00 00 03 74 E6 F7 FF 00 00 00 .........t...... 0x00000000 0x00000000 0xF7E67403 0x000000FF
+0xFFF7E6A0: BC DC F4 FF B4 DC F4 FF 44 65 66 52 65 74 28 29 ........DefRet() 0xFFF4DCBC 0xFFF4DCB4 0x52666544 0x29287465
+0xFFF7E6B0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................ 0x00000000 0x00000000 0x00000000 0x00000000
+0xFFF7E6C0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................ 0x00000000 0x00000000 0x00000000 0x00000000
+0xFFF7E6D0: B4 DC F4 FF 44 65 66 52 65 74 28 29 00 00 00 00 ....DefRet().... 0xFFF4DCB4 0x52666544 0x29287465 0x00000000
+0xFFF7E6E0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................ 0x00000000 0x00000000 0x00000000 0x00000000
+0xFFF7E6F0: 00 00 00 00 00 00 00 00 00 00 00 00 B4 DC F4 FF ................ 0x00000000 0x00000000 0x00000000 0xFFF4DCB4
+0xFFF7E700: 44 65 66 52 65 74 28 29 00 00 00 00 00 00 00 00 DefRet()........ 0x52666544 0x29287465 0x00000000 0x00000000
+0xFFF7E710: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................ 0x00000000 0x00000000 0x00000000 0x00000000
+0xFFF7E720: 00 00 00 00 00 00 00 00 BD DC F4 FF BD DC F4 FF ................ 0x00000000 0x00000000 0xFFF4DCBD 0xFFF4DCBD
+0xFFF7E730: BD DC F4 FF BD DC F4 FF BD DC F4 FF BD DC F4 FF ................ 0xFFF4DCBD 0xFFF4DCBD 0xFFF4DCBD 0xFFF4DCBD
+0xFFF7E740: BD DC F4 FF BD DC F4 FF 0A 00 00 00 07 00 02 00 ................ 0xFFF4DCBD 0xFFF4DCBD 0x0000000A 0x00020007
+
+## data VA 0xFFF7F4C0 raw 0x03F434 section .data size 0xA0
+0xFFF7F4C0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................ 0x00000000 0x00000000 0x00000000 0x00000000
+0xFFF7F4D0: 00 00 00 00 D0 3A F8 FF BC 3A F8 FF A8 3A F8 FF .....:...:...:.. 0x00000000 0xFFF83AD0 0xFFF83ABC 0xFFF83AA8
+0xFFF7F4E0: 94 3A F8 FF 80 3A F8 FF 6C 3A F8 FF 58 3A F8 FF .:...:..l:..X:.. 0xFFF83A94 0xFFF83A80 0xFFF83A6C 0xFFF83A58
+0xFFF7F4F0: BC D0 F8 FF 44 3A F8 FF 30 3A F8 FF 1C 3A F8 FF ....D:..0:...:.. 0xFFF8D0BC 0xFFF83A44 0xFFF83A30 0xFFF83A1C
+0xFFF7F500: 08 3A F8 FF 00 00 00 00 44 D4 F8 FF 2C D2 F8 FF .:......D...,... 0xFFF83A08 0x00000000 0xFFF8D444 0xFFF8D22C
+0xFFF7F510: 00 00 00 00 01 00 2F D1 F4 FF 51 CF F4 FF 00 00 ....../...Q..... 0x00000000 0xD12F0001 0xCF51FFF4 0x0000FFF4
+0xFFF7F520: 01 00 54 3B F7 FF 74 3D F7 FF FD 41 F7 FF 01 01 ..T;..t=...A.... 0x3B540001 0x3D74FFF7 0x41FDFFF7 0x0101FFF7
+0xFFF7F530: 01 01 01 00 01 00 5A 31 F7 FF 00 00 01 00 D9 30 ......Z1.......0 0x00010101 0x315A0001 0x0000FFF7 0x30D90001
+0xFFF7F540: F7 FF 00 00 01 00 D9 30 F7 FF D9 30 F7 FF 00 00 .......0...0.... 0x0000FFF7 0x30D90001 0x30D9FFF7 0x0000FFF7
+0xFFF7F550: 01 00 45 E7 F4 FF 40 E7 F4 FF 6C E7 F4 FF B2 E7 ..E...@...l..... 0xE7450001 0xE740FFF4 0xE76CFFF4 0xE7B2FFF4
+
+## data VA 0xFFF8350C raw 0x043480 section .dG2_PEI size 0xC0
+0xFFF8350C: 00 00 BD DC F4 FF BD DC F4 FF B4 DC F4 FF BD DC ................ 0xDCBD0000 0xDCBDFFF4 0xDCB4FFF4 0xDCBDFFF4
+0xFFF8351C: F4 FF BD DC F4 FF BD DC F4 FF B4 DC F4 FF BD DC ................ 0xDCBDFFF4 0xDCBDFFF4 0xDCB4FFF4 0xDCBDFFF4
+0xFFF8352C: F4 FF B4 DC F4 FF B4 DC F4 FF B4 DC F4 FF BD DC ................ 0xDCB4FFF4 0xDCB4FFF4 0xDCB4FFF4 0xDCBDFFF4
+0xFFF8353C: F4 FF BC DC F4 FF BD DC F4 FF BC DC F4 FF BD DC ................ 0xDCBCFFF4 0xDCBDFFF4 0xDCBCFFF4 0xDCBDFFF4
+0xFFF8354C: F4 FF BD DC F4 FF BD DC F4 FF BD DC F4 FF BD DC ................ 0xDCBDFFF4 0xDCBDFFF4 0xDCBDFFF4 0xDCBDFFF4
+0xFFF8355C: F4 FF BD DC F4 FF 10 99 F4 FF 10 99 F4 FF 10 99 ................ 0xDCBDFFF4 0x9910FFF4 0x9910FFF4 0x9910FFF4
+0xFFF8356C: F4 FF 10 99 F4 FF 10 99 F4 FF 10 99 F4 FF 10 99 ................ 0x9910FFF4 0x9910FFF4 0x9910FFF4 0x9910FFF4
+0xFFF8357C: F4 FF BD DC F4 FF B4 DC F4 FF B4 DC F4 FF BC DC ................ 0xDCBDFFF4 0xDCB4FFF4 0xDCB4FFF4 0xDCBCFFF4
+0xFFF8358C: F4 FF BC DC F4 FF 00 00 00 00 00 00 00 00 00 00 ................ 0xDCBCFFF4 0x0000FFF4 0x00000000 0x00000000
+0xFFF8359C: 00 00 00 00 00 00 00 00 00 00 BC DC F4 FF 00 00 ................ 0x00000000 0x00000000 0xDCBC0000 0x0000FFF4
+0xFFF835AC: F7 E2 F4 FF E5 E3 F4 FF C1 E4 F4 FF 84 E2 F4 FF ................ 0xFFF4E2F7 0xFFF4E3E5 0xFFF4E4C1 0xFFF4E284
+0xFFF835BC: 74 E0 F4 FF DF E0 F4 FF 08 E2 F4 FF 96 DD F4 FF t............... 0xFFF4E074 0xFFF4E0DF 0xFFF4E208 0xFFF4DD96
+
+## data VA 0xFFF8D100 raw 0x04D074 section .dG3_DXE size 0x80
+0xFFF8D100: 0A A0 00 00 1E A0 00 00 00 00 9E 32 F7 FF FD 32 ...........2...2 0x0000A00A 0x0000A01E 0x329E0000 0x32FDFFF7
+0xFFF8D110: F7 FF 2D 33 F7 FF F5 35 F7 FF 2E 33 F7 FF 1A 37 ..-3...5...3...7 0x332DFFF7 0x35F5FFF7 0x332EFFF7 0x371AFFF7
+0xFFF8D120: F7 FF 9A 33 F7 FF 18 34 F7 FF 8D 34 F7 FF 00 00 ...3...4...4.... 0x339AFFF7 0x3418FFF7 0x348DFFF7 0x0000FFF7
+0xFFF8D130: 41 4D 44 20 4F 70 74 65 72 6F 6E 28 74 6D 29 20 AMD Opteron(tm)  0x20444D41 0x6574704F 0x286E6F72 0x20296D74
+0xFFF8D140: 50 72 6F 63 65 73 73 6F 72 20 36 32 00 00 00 00 Processor 62.... 0x636F7250 0x6F737365 0x32362072 0x00000000
+0xFFF8D150: 41 4D 44 20 4F 70 74 65 72 6F 6E 28 74 6D 29 20 AMD Opteron(tm)  0x20444D41 0x6574704F 0x286E6F72 0x20296D74
+0xFFF8D160: 50 72 6F 63 65 73 73 6F 72 20 36 33 00 00 00 00 Processor 63.... 0x636F7250 0x6F737365 0x33362072 0x00000000
+0xFFF8D170: 41 4D 44 20 4F 70 74 65 72 6F 6E 28 74 6D 29 20 AMD Opteron(tm)  0x20444D41 0x6574704F 0x286E6F72 0x20296D74
+
+## xref_fff7e698_at_FFF489D6 VA 0xFFF489A6 raw 0x00891A section .tG1_PEI size 0x90
+0xFFF489A6: mov      dword ptr [ebp + 0x5c], 0xc0010019
+0xFFF489AD: call     0xfff4884d
+0xFFF489B2: pop      ecx
+0xFFF489B3: pop      ecx
+0xFFF489B4: add      ebp, 0x74
+0xFFF489B7: leave
+0xFFF489B8: ret
+0xFFF489B9: push     dword ptr [esp + 4]
+0xFFF489BD: call     0xfff4575f
+0xFFF489C2: pop      ecx
+0xFFF489C3: xor      eax, eax
+0xFFF489C5: ret
+0xFFF489C6: push     ebp
+0xFFF489C7: mov      ebp, esp
+0xFFF489C9: push     ecx
+0xFFF489CA: push     dword ptr [ebp + 8]
+0xFFF489CD: and      dword ptr [ebp - 4], 0
+0xFFF489D1: lea      eax, [ebp - 4]
+0xFFF489D4: push     eax
+0xFFF489D5: push     0xfff7e698
+0xFFF489DA: call     0xfff49a34
+0xFFF489DF: mov      eax, dword ptr [ebp - 4]
+0xFFF489E2: add      esp, 0xc
+0xFFF489E5: test     eax, eax
+0xFFF489E7: je       0xfff489f2
+0xFFF489E9: push     dword ptr [ebp + 8]
+0xFFF489EC: push     eax
+0xFFF489ED: call     dword ptr [eax + 0xa]
+0xFFF489F0: pop      ecx
+0xFFF489F1: pop      ecx
+0xFFF489F2: leave
+0xFFF489F3: ret
+0xFFF489F4: push     ebp
+0xFFF489F5: mov      ebp, esp
+0xFFF489F7: sub      esp, 0x2c
+0xFFF489FA: push     ebx
+0xFFF489FB: mov      ebx, dword ptr [ebp + 8]
+0xFFF489FE: push     edi
+0xFFF489FF: lea      eax, [ebp - 0x14]
+0xFFF48A02: push     eax
+0xFFF48A03: lea      eax, [ebp - 0x10]
+0xFFF48A06: push     eax
+0xFFF48A07: lea      eax, [ebp - 0x18]
+0xFFF48A0A: push     eax
+0xFFF48A0B: lea      eax, [ebp - 0xc]
+0xFFF48A0E: push     eax
+0xFFF48A0F: push     ebx
+0xFFF48A10: call     0xfff47af3
+0xFFF48A15: call     0xfff474f6
+0xFFF48A1A: push     ebx
+0xFFF48A1B: mov      dword ptr [ebp - 8], eax
+0xFFF48A1E: call     0xfff489c6
+0xFFF48A23: xor      edi, edi
+0xFFF48A25: xor      eax, eax
+0xFFF48A27: add      esp, 0x18
+0xFFF48A2A: mov      dword ptr [ebp - 0x2c], 0xfff489c6
+
+## xref_fff7e698_at_FFF4B9FC VA 0xFFF4B9CC raw 0x00B940 section .tG1_PEI size 0x90
+0xFFF4B9CC: les      esp, ptr [eax]
+0xFFF4B9CE: test     byte ptr [ebp - 1], bl
+0xFFF4B9D1: jne      0xfff4badb
+0xFFF4B9D7: lea      eax, [ebp - 0x24]
+0xFFF4B9DA: push     esi
+0xFFF4B9DB: push     eax
+0xFFF4B9DC: call     0xfff4998a
+0xFFF4B9E1: mov      eax, dword ptr [ebp - 0x24]
+0xFFF4B9E4: pop      ecx
+0xFFF4B9E5: pop      ecx
+0xFFF4B9E6: and      eax, 0x1f
+0xFFF4B9E9: xor      ecx, ecx
+0xFFF4B9EB: or       eax, ecx
+0xFFF4B9ED: je       0xfff4badb
+0xFFF4B9F3: and      dword ptr [ebp - 8], ecx
+0xFFF4B9F6: push     esi
+0xFFF4B9F7: lea      eax, [ebp - 8]
+0xFFF4B9FA: push     eax
+0xFFF4B9FB: push     0xfff7e698
+0xFFF4BA00: call     0xfff49a34
+0xFFF4BA05: add      esp, 0xc
+0xFFF4BA08: cmp      dword ptr [ebp - 8], 0
+0xFFF4BA0C: je       0xfff4badb
+0xFFF4BA12: push     esi
+0xFFF4BA13: lea      eax, [ebp - 2]
+0xFFF4BA16: push     eax
+0xFFF4BA17: push     0x72
+0xFFF4BA19: push     ebx
+0xFFF4BA1A: mov      byte ptr [ebp - 2], 0x91
+0xFFF4BA1E: call     0xfff4928d
+0xFFF4BA23: push     esi
+0xFFF4BA24: lea      eax, [ebp - 1]
+0xFFF4BA27: push     eax
+0xFFF4BA28: push     0x73
+0xFFF4BA2A: push     ebx
+0xFFF4BA2B: call     0xfff49242
+0xFFF4BA30: add      esp, 0x20
+0xFFF4BA33: cmp      byte ptr [ebp - 1], 0xff
+0xFFF4BA37: je       0xfff4badb
+0xFFF4BA3D: push     edi
+0xFFF4BA3E: push     esi
+0xFFF4BA3F: lea      eax, [ebp - 3]
+0xFFF4BA42: push     eax
+0xFFF4BA43: lea      eax, [ebp - 0xc]
+0xFFF4BA46: push     eax
+0xFFF4BA47: mov      eax, dword ptr [ebp - 8]
+0xFFF4BA4A: push     eax
+0xFFF4BA4B: call     dword ptr [eax + 0x1e]
+0xFFF4BA4E: push     esi
+0xFFF4BA4F: lea      eax, [ebp - 0x14]
+0xFFF4BA52: push     eax
+0xFFF4BA53: movzx    eax, byte ptr [ebp - 3]
+0xFFF4BA57: mov      edi, 0x3ffeff9c
+
+## xref_fff7e698_at_FFF4CFB0 VA 0xFFF4CF80 raw 0x00CEF4 section .tG1_PEI size 0x90
+0xFFF4CF80: je       0xfff4cfa6
+0xFFF4CF82: or       al, 0x6a
+0xFFF4CF84: push     esp
+0xFFF4CF85: call     0xfff49229
+0xFFF4CF8A: push     dword ptr [esp + 0x10]
+0xFFF4CF8E: push     dword ptr [esp + 0x18]
+0xFFF4CF92: call     dword ptr [0xfff7f516]
+0xFFF4CF98: add      esp, 0x10
+0xFFF4CF9B: ret
+0xFFF4CF9C: push     ebp
+0xFFF4CF9D: mov      ebp, esp
+0xFFF4CF9F: sub      esp, 0x40
+0xFFF4CFA2: push     ebx
+0xFFF4CFA3: mov      ebx, dword ptr [ebp + 0xc]
+0xFFF4CFA6: push     esi
+0xFFF4CFA7: push     edi
+0xFFF4CFA8: push     ebx
+0xFFF4CFA9: lea      eax, [ebp - 0xc]
+0xFFF4CFAC: push     eax
+0xFFF4CFAD: xor      edi, edi
+0xFFF4CFAF: push     0xfff7e698
+0xFFF4CFB4: mov      dword ptr [ebp - 0x14], edi
+0xFFF4CFB7: mov      dword ptr [ebp - 0xc], edi
+0xFFF4CFBA: mov      byte ptr [ebp - 1], 0
+0xFFF4CFBE: call     0xfff49a34
+0xFFF4CFC3: lea      eax, [ebp - 0x18]
+0xFFF4CFC6: push     ebx
+0xFFF4CFC7: push     eax
+0xFFF4CFC8: call     0xfff4762c
+0xFFF4CFCD: mov      al, byte ptr [ebp - 0x18]
+0xFFF4CFD0: mov      esi, dword ptr [ebp + 8]
+0xFFF4CFD3: mov      byte ptr [esi + 1], al
+0xFFF4CFD6: push     ebx
+0xFFF4CFD7: lea      eax, [ebp - 0x18]
+0xFFF4CFDA: push     eax
+0xFFF4CFDB: lea      eax, [ebp - 0x28]
+0xFFF4CFDE: push     eax
+0xFFF4CFDF: call     0xfff47c03
+0xFFF4CFE4: push     ebx
+0xFFF4CFE5: lea      eax, [ebp - 2]
+0xFFF4CFE8: push     eax
+0xFFF4CFE9: lea      eax, [ebp - 8]
+0xFFF4CFEC: push     eax
+0xFFF4CFED: mov      eax, dword ptr [ebp - 0xc]
+0xFFF4CFF0: push     eax
+0xFFF4CFF1: mov      byte ptr [esi + 7], 1
+0xFFF4CFF5: call     dword ptr [eax + 0x1e]
+0xFFF4CFF8: mov      al, byte ptr [ebp - 8]
+0xFFF4CFFB: mov      byte ptr [esi + 0xb], al
+0xFFF4CFFE: mov      al, byte ptr [ebp - 2]
+0xFFF4D001: mov      dword ptr [ebp + 8], edi
+0xFFF4D004: add      esp, 0x30
+0xFFF4D007: mov      byte ptr [esi + 0xf], al
+0xFFF4D00A: lea      edi, [esi + 0x18]
+0xFFF4D00D: push     ebx
+
+## xref_fff7e698_at_FFF4D145 VA 0xFFF4D115 raw 0x00D089 section .tG1_PEI size 0x90
+0xFFF4D115: rcl      byte ptr [eax + 0x6a], 1
+0xFFF4D119: call     0xfff44eac
+0xFFF4D11E: mov      eax, dword ptr [ebp - 0x3c]
+0xFFF4D121: add      esp, 0xc
+0xFFF4D124: shr      eax, 0x18
+0xFFF4D127: pop      edi
+0xFFF4D128: mov      byte ptr [esi + 0xe], al
+0xFFF4D12B: pop      esi
+0xFFF4D12C: pop      ebx
+0xFFF4D12D: leave
+0xFFF4D12E: ret
+0xFFF4D12F: push     ebp
+0xFFF4D130: mov      ebp, esp
+0xFFF4D132: sub      esp, 0x38
+0xFFF4D135: and      dword ptr [ebp - 0x10], 0
+0xFFF4D139: push     ebx
+0xFFF4D13A: mov      ebx, dword ptr [ebp + 8]
+0xFFF4D13D: push     esi
+0xFFF4D13E: push     edi
+0xFFF4D13F: push     ebx
+0xFFF4D140: lea      eax, [ebp - 0x10]
+0xFFF4D143: push     eax
+0xFFF4D144: push     0xfff7e698
+0xFFF4D149: call     0xfff49a34
+0xFFF4D14E: mov      esi, dword ptr [ebp + 0xc]
+0xFFF4D151: xor      edi, edi
+0xFFF4D153: lea      eax, [esi + 8]
+0xFFF4D156: inc      edi
+0xFFF4D157: mov      dword ptr [ebp - 0xc], edi
+0xFFF4D15A: mov      dword ptr [ebp - 8], eax
+0xFFF4D15D: call     0xfff474f6
+0xFFF4D162: mov      dword ptr [ebp - 0x20], eax
+0xFFF4D165: lea      eax, [ebp - 0x24]
+0xFFF4D168: push     eax
+0xFFF4D169: lea      eax, [ebp - 0x1c]
+0xFFF4D16C: push     eax
+0xFFF4D16D: push     eax
+0xFFF4D16E: lea      eax, [ebp - 0x18]
+0xFFF4D171: push     eax
+0xFFF4D172: push     ebx
+0xFFF4D173: call     0xfff47af3
+0xFFF4D178: and      dword ptr [ebp - 0x14], 0
+0xFFF4D17C: push     ebx
+0xFFF4D17D: lea      eax, [ebp - 1]
+0xFFF4D180: push     eax
+0xFFF4D181: lea      eax, [ebp - 0x14]
+0xFFF4D184: push     eax
+0xFFF4D185: mov      eax, dword ptr [ebp - 0x10]
+0xFFF4D188: push     eax
+0xFFF4D189: mov      dword ptr [esi + 4], 0x30
+0xFFF4D190: call     dword ptr [eax + 0x1e]
+0xFFF4D193: mov      eax, dword ptr [ebp - 0x14]
+0xFFF4D196: inc      eax
+0xFFF4D197: imul     eax, eax, 6
+0xFFF4D19A: mov      word ptr [ebp - 0x34], ax
+0xFFF4D19E: mov      eax, dword ptr [ebp - 8]
+0xFFF4D1A1: push     0
+
+## xref_fff7e698_at_FFF59FC5 VA 0xFFF59F95 raw 0x019F09 section .tG1_PEI size 0x90
+0xFFF59F95: push     eax
+0xFFF59F96: cmc
+
+## xref_fff7e698_at_FFF70616 VA 0xFFF705E6 raw 0x03055A section .tG2_PEI size 0x90
+0xFFF705E6: push     ebp
+0xFFF705E7: mov      ebp, esp
+0xFFF705E9: sub      esp, 0x18
+0xFFF705EC: push     esi
+0xFFF705ED: mov      esi, dword ptr [ebp + 0x10]
+0xFFF705F0: push     esi
+0xFFF705F1: lea      eax, [ebp - 0x18]
+0xFFF705F4: push     eax
+0xFFF705F5: push     0xc0010015
+0xFFF705FA: call     0xfff44e76
+0xFFF705FF: mov      eax, dword ptr [ebp - 0x18]
+0xFFF70602: add      esp, 0xc
+0xFFF70605: and      eax, 0x1000000
+0xFFF7060A: xor      ecx, ecx
+0xFFF7060C: or       eax, ecx
+0xFFF7060E: push     esi
+0xFFF7060F: je       0xfff70668
+0xFFF70611: lea      eax, [ebp - 8]
+0xFFF70614: push     eax
+0xFFF70615: push     0xfff7e698
+0xFFF7061A: mov      dword ptr [ebp - 8], ecx
+0xFFF7061D: call     0xfff49a34
+0xFFF70622: lea      eax, [ebp - 4]
+0xFFF70625: push     esi
+0xFFF70626: push     eax
+0xFFF70627: call     dword ptr [0xfff7f56a]
+0xFFF7062D: mov      eax, dword ptr [ebp - 4]
+0xFFF70630: push     esi
+0xFFF70631: and      eax, 0xffffc15c
+0xFFF70636: lea      ecx, [ebp - 0xc]
+0xFFF70639: or       eax, 0x415c
+0xFFF7063E: push     ecx
+0xFFF7063F: push     eax
+0xFFF70640: push     3
+0xFFF70642: mov      dword ptr [ebp - 4], eax
+0xFFF70645: call     0xfff49445
+0xFFF7064A: mov      eax, dword ptr [ebp - 0xc]
+0xFFF7064D: shr      eax, 2
+0xFFF70650: push     esi
+0xFFF70651: push     dword ptr [ebp + 0xc]
+0xFFF70654: and      al, 7
+0xFFF70656: mov      byte ptr [ebp - 0x10], al
+0xFFF70659: push     dword ptr [ebp - 0x10]
+0xFFF7065C: mov      eax, dword ptr [ebp - 8]
+0xFFF7065F: push     eax
+0xFFF70660: call     dword ptr [eax + 0x12]
+0xFFF70663: add      esp, 0x34
+0xFFF70666: jmp      0xfff70675
+0xFFF70668: push     dword ptr [ebp + 0xc]
+0xFFF7066B: mov      eax, dword ptr [ebp + 8]
+0xFFF7066E: push     eax
+0xFFF7066F: call     dword ptr [eax + 0x12]
+0xFFF70672: add      esp, 0xc
+0xFFF70675: pop      esi
+
+## xref_fff7e698_at_FFF73EB2 VA 0xFFF73E82 raw 0x033DF6 section .tG3_DXE size 0x90
+0xFFF73E82: ror      byte ptr [ecx], 0x8b
+
+## xref_fff7e698_at_FFF740A4 VA 0xFFF74074 raw 0x033FE8 section .tG3_DXE size 0x90
+0xFFF74074: inc      ebp
+0xFFF74075: clc
+0xFFF74076: mov      eax, dword ptr [ebp + 0x10]
+0xFFF74079: mov      dword ptr [eax], esi
+0xFFF7407B: push     dword ptr [ebp + 0x18]
+0xFFF7407E: lea      eax, [ebp - 0x18]
+0xFFF74081: push     eax
+0xFFF74082: movzx    eax, byte ptr [edi + 8]
+0xFFF74086: push     eax
+0xFFF74087: call     0xfff47997
+0xFFF7408C: add      esp, 0xc
+0xFFF7408F: test     al, al
+0xFFF74091: je       0xfff74195
+0xFFF74097: push     dword ptr [ebp + 0x18]
+0xFFF7409A: lea      eax, [ebp - 0x14]
+0xFFF7409D: push     eax
+0xFFF7409E: movzx    eax, byte ptr [edi + 8]
+0xFFF740A2: push     eax
+0xFFF740A3: push     0xfff7e698
+0xFFF740A8: call     0xfff49a08
+0xFFF740AD: xor      edi, edi
+0xFFF740AF: inc      edi
+0xFFF740B0: add      esp, 0x10
+0xFFF740B3: cmp      dword ptr [ebp - 0x18], edi
+0xFFF740B6: je       0xfff74195
+0xFFF740BC: cmp      byte ptr [0xfff7f530], bl
+0xFFF740C2: je       0xfff74195
+0xFFF740C8: push     dword ptr [ebp + 0x18]
+0xFFF740CB: mov      eax, dword ptr [ebp - 0x14]
+0xFFF740CE: push     dword ptr [ebp + 8]
+0xFFF740D1: push     eax
+0xFFF740D2: call     dword ptr [eax + 2]
+0xFFF740D5: add      esp, 0xc
+0xFFF740D8: test     al, al
+0xFFF740DA: je       0xfff74195
+0xFFF740E0: push     dword ptr [ebp + 0x18]
+0xFFF740E3: add      dword ptr [ebp - 8], 8
+0xFFF740E7: push     dword ptr [ebp + 8]
+0xFFF740EA: mov      byte ptr [esi], 8
+0xFFF740ED: mov      byte ptr [esi + 5], 0x12
+0xFFF740F1: mov      byte ptr [esi + 6], 0x18
+0xFFF740F5: mov      byte ptr [esi + 7], 1
+0xFFF740F9: mov      byte ptr [esi + 1], 0x5f
+0xFFF740FD: mov      byte ptr [esi + 2], 0x50
+
+## xref_fff7e698_at_FFF74E9A VA 0xFFF74E6A raw 0x034DDE section .tG3_DXE size 0x90
+0xFFF74E6A: adc      eax, 0x740cf883
+0xFFF74E6F: or       eax, 0x33f3488d
+0xFFF74E74: rol      byte ptr [eax + 0x3b], 0xc8
+0xFFF74E78: jbe      0xfff74e85
+0xFFF74E7A: mov      al, 2
+0xFFF74E7C: ret
+0xFFF74E7D: mov      al, 0xd
+0xFFF74E7F: ret
+0xFFF74E80: mov      al, 0xc
+0xFFF74E82: ret
+0xFFF74E83: mov      al, 0xb
+0xFFF74E85: ret
+0xFFF74E86: push     ebp
+0xFFF74E87: mov      ebp, esp
+0xFFF74E89: sub      esp, 0x10
+0xFFF74E8C: and      dword ptr [ebp - 4], 0
+0xFFF74E90: push     esi
+0xFFF74E91: mov      esi, dword ptr [ebp + 8]
+0xFFF74E94: push     esi
+0xFFF74E95: lea      eax, [ebp - 4]
+0xFFF74E98: push     eax
+0xFFF74E99: push     0xfff7e698
+0xFFF74E9E: call     0xfff49a34
+0xFFF74EA3: lea      eax, [ebp - 8]
+0xFFF74EA6: push     esi
+0xFFF74EA7: push     eax
+0xFFF74EA8: call     0xfff47b3d
+0xFFF74EAD: mov      eax, dword ptr [ebp - 8]
+0xFFF74EB0: add      eax, 0x18
+0xFFF74EB3: push     esi
+0xFFF74EB4: shl      eax, 0xf
+0xFFF74EB7: lea      ecx, [ebp - 0xc]
+0xFFF74EBA: push     ecx
+0xFFF74EBB: or       eax, 0x415c
+0xFFF74EC0: push     eax
+0xFFF74EC1: push     3
+0xFFF74EC3: call     0xfff49445
+0xFFF74EC8: push     esi
+0xFFF74EC9: lea      eax, [ebp - 0x10]
+0xFFF74ECC: push     eax
+0xFFF74ECD: mov      eax, dword ptr [ebp - 0xc]
+0xFFF74ED0: shr      eax, 2
+0xFFF74ED3: and      al, 7
+0xFFF74ED5: movzx    eax, al
+0xFFF74ED8: push     eax
+0xFFF74ED9: mov      eax, dword ptr [ebp - 4]
+0xFFF74EDC: push     eax
+0xFFF74EDD: call     dword ptr [eax + 0x12]
+0xFFF74EE0: mov      ax, word ptr [ebp - 0x10]
+0xFFF74EE4: add      esp, 0x34
+0xFFF74EE7: pop      esi
+0xFFF74EE8: leave
+0xFFF74EE9: ret
+0xFFF74EEA: push     ebp
+0xFFF74EEB: mov      ebp, esp
+0xFFF74EED: sub      esp, 0x18
+0xFFF74EF0: push     ebx
+0xFFF74EF1: mov      ebx, dword ptr [ebp + 0xc]
+0xFFF74EF4: push     esi
+0xFFF74EF5: push     edi
+0xFFF74EF6: push     ebx
+0xFFF74EF7: lea      eax, [ebp - 0x18]
+
+## xref_fff7e698_at_FFF7505B VA 0xFFF7502B raw 0x034F9F section .tG3_DXE size 0x90
+0xFFF7502B: inc      esi
+0xFFF7502C: adc      eax, 0xc1f4458b
+0xFFF75031: call     0xf067442
+0xFFF75036: mov      dh, 0xc0
+0xFFF75038: push     eax
+0xFFF75039: call     0xfff74e38
+0xFFF7503E: add      esp, 0x28
+0xFFF75041: pop      edi
+0xFFF75042: mov      byte ptr [esi + 0x19], al
+0xFFF75045: pop      esi
+0xFFF75046: pop      ebx
+0xFFF75047: leave
+0xFFF75048: ret
+0xFFF75049: push     ebp
+0xFFF7504A: mov      ebp, esp
+0xFFF7504C: sub      esp, 0xc
+0xFFF7504F: push     dword ptr [ebp + 8]
+0xFFF75052: and      dword ptr [ebp - 4], 0
+0xFFF75056: lea      eax, [ebp - 4]
+0xFFF75059: push     eax
+0xFFF7505A: push     0xfff7e698
+0xFFF7505F: call     0xfff49a34
+0xFFF75064: push     dword ptr [ebp + 8]
+0xFFF75067: call     0xfff59e33
+0xFFF7506C: push     dword ptr [ebp + 8]
+0xFFF7506F: mov      byte ptr [ebp - 8], al
+0xFFF75072: lea      eax, [ebp - 0xc]
+0xFFF75075: push     eax
+0xFFF75076: push     dword ptr [ebp - 8]
+0xFFF75079: mov      eax, dword ptr [ebp - 4]
+0xFFF7507C: push     eax
+0xFFF7507D: call     dword ptr [eax + 0x12]
+0xFFF75080: mov      ax, word ptr [ebp - 0xc]
+0xFFF75084: add      esp, 0x20
+0xFFF75087: leave
+0xFFF75088: ret
+0xFFF75089: push     ebp
+0xFFF7508A: mov      ebp, esp
+0xFFF7508C: push     esi
+0xFFF7508D: push     edi
+0xFFF7508E: push     dword ptr [ebp + 0xc]
+0xFFF75091: mov      edi, dword ptr [ebp + 8]
+0xFFF75094: lea      ecx, [ebp + 8]
+0xFFF75097: push     ecx
+0xFFF75098: mov      eax, 0xc2090
+0xFFF7509D: push     eax
+0xFFF7509E: push     3
+0xFFF750A0: mov      byte ptr [edi], 0
+0xFFF750A3: call     0xfff49445
+0xFFF750A8: mov      esi, 0x80000
+0xFFF750AD: add      esp, 0x10
+0xFFF750B0: test     dword ptr [ebp + 8], esi
+0xFFF750B3: jne      0xfff750d1
+0xFFF750B5: push     dword ptr [ebp + 0xc]
+0xFFF750B8: lea      ecx, [ebp + 8]
+
+## lookup_prep_fff4998a VA 0xFFF4998A raw 0x0098FE section .tG1_PEI size 0x90
+0xFFF4998A: push     ebp
+0xFFF4998B: mov      ebp, esp
+0xFFF4998D: sub      esp, 0x10
+0xFFF49990: push     dword ptr [ebp + 0xc]
+0xFFF49993: lea      eax, [ebp - 0x10]
+0xFFF49996: push     eax
+0xFFF49997: push     1
+0xFFF49999: call     0xfff44eac
+0xFFF4999E: push     dword ptr [ebp + 0xc]
+0xFFF499A1: push     dword ptr [ebp + 8]
+0xFFF499A4: push     dword ptr [ebp - 0x10]
+0xFFF499A7: call     0xfff497d2
+0xFFF499AC: add      esp, 0x18
+0xFFF499AF: leave
+0xFFF499B0: ret
+0xFFF499B1: push     ebp
+0xFFF499B2: mov      ebp, esp
+0xFFF499B4: mov      eax, dword ptr [ebp + 8]
+0xFFF499B7: mov      edx, dword ptr [eax + 1]
+0xFFF499BA: mov      al, byte ptr [eax]
+0xFFF499BC: push     ebx
+0xFFF499BD: push     esi
+0xFFF499BE: xor      bl, bl
+0xFFF499C0: push     edi
+0xFFF499C1: mov      byte ptr [ebp + 0xb], al
+0xFFF499C4: test     al, al
+0xFFF499C6: jbe      0xfff499ec
+0xFFF499C8: mov      eax, dword ptr [ebp + 0xc]
+0xFFF499CB: mov      esi, dword ptr [eax]
+0xFFF499CD: mov      edi, dword ptr [eax + 4]
+0xFFF499D0: movzx    ecx, bl
+0xFFF499D3: imul     ecx, ecx, 0xc
+0xFFF499D6: mov      eax, dword ptr [ecx + edx]
+0xFFF499D9: mov      ecx, dword ptr [ecx + edx + 4]
+0xFFF499DD: and      eax, esi
+0xFFF499DF: and      ecx, edi
+0xFFF499E1: or       eax, ecx
+0xFFF499E3: jne      0xfff499f7
+0xFFF499E5: inc      bl
+0xFFF499E7: cmp      bl, byte ptr [ebp + 0xb]
+0xFFF499EA: jb       0xfff499d0
+0xFFF499EC: mov      eax, dword ptr [ebp + 0x10]
+0xFFF499EF: and      dword ptr [eax], 0
+0xFFF499F2: pop      edi
+0xFFF499F3: pop      esi
+0xFFF499F4: pop      ebx
+0xFFF499F5: pop      ebp
+0xFFF499F6: ret
+0xFFF499F7: mov      ecx, dword ptr [ebp + 0x10]
+0xFFF499FA: movzx    eax, bl
+0xFFF499FD: imul     eax, eax, 0xc
+0xFFF49A00: mov      eax, dword ptr [eax + edx + 8]
+0xFFF49A04: mov      dword ptr [ecx], eax
+0xFFF49A06: jmp      0xfff499f2
+0xFFF49A08: push     ebp
+0xFFF49A09: mov      ebp, esp
+0xFFF49A0B: sub      esp, 0x10
+0xFFF49A0E: push     dword ptr [ebp + 0x14]
+0xFFF49A11: lea      eax, [ebp - 0x10]
+0xFFF49A14: push     eax
+0xFFF49A15: push     dword ptr [ebp + 0xc]
+
+## lookup_core_fff499b1 VA 0xFFF499B1 raw 0x009925 section .tG1_PEI size 0xB0
+0xFFF499B1: push     ebp
+0xFFF499B2: mov      ebp, esp
+0xFFF499B4: mov      eax, dword ptr [ebp + 8]
+0xFFF499B7: mov      edx, dword ptr [eax + 1]
+0xFFF499BA: mov      al, byte ptr [eax]
+0xFFF499BC: push     ebx
+0xFFF499BD: push     esi
+0xFFF499BE: xor      bl, bl
+0xFFF499C0: push     edi
+0xFFF499C1: mov      byte ptr [ebp + 0xb], al
+0xFFF499C4: test     al, al
+0xFFF499C6: jbe      0xfff499ec
+0xFFF499C8: mov      eax, dword ptr [ebp + 0xc]
+0xFFF499CB: mov      esi, dword ptr [eax]
+0xFFF499CD: mov      edi, dword ptr [eax + 4]
+0xFFF499D0: movzx    ecx, bl
+0xFFF499D3: imul     ecx, ecx, 0xc
+0xFFF499D6: mov      eax, dword ptr [ecx + edx]
+0xFFF499D9: mov      ecx, dword ptr [ecx + edx + 4]
+0xFFF499DD: and      eax, esi
+0xFFF499DF: and      ecx, edi
+0xFFF499E1: or       eax, ecx
+0xFFF499E3: jne      0xfff499f7
+0xFFF499E5: inc      bl
+0xFFF499E7: cmp      bl, byte ptr [ebp + 0xb]
+0xFFF499EA: jb       0xfff499d0
+0xFFF499EC: mov      eax, dword ptr [ebp + 0x10]
+0xFFF499EF: and      dword ptr [eax], 0
+0xFFF499F2: pop      edi
+0xFFF499F3: pop      esi
+0xFFF499F4: pop      ebx
+0xFFF499F5: pop      ebp
+0xFFF499F6: ret
+0xFFF499F7: mov      ecx, dword ptr [ebp + 0x10]
+0xFFF499FA: movzx    eax, bl
+0xFFF499FD: imul     eax, eax, 0xc
+0xFFF49A00: mov      eax, dword ptr [eax + edx + 8]
+0xFFF49A04: mov      dword ptr [ecx], eax
+0xFFF49A06: jmp      0xfff499f2
+0xFFF49A08: push     ebp
+0xFFF49A09: mov      ebp, esp
+0xFFF49A0B: sub      esp, 0x10
+0xFFF49A0E: push     dword ptr [ebp + 0x14]
+0xFFF49A11: lea      eax, [ebp - 0x10]
+0xFFF49A14: push     eax
+0xFFF49A15: push     dword ptr [ebp + 0xc]
+0xFFF49A18: call     0xfff4991f
+0xFFF49A1D: push     dword ptr [ebp + 0x14]
+0xFFF49A20: lea      eax, [ebp - 0x10]
+0xFFF49A23: push     dword ptr [ebp + 0x10]
+0xFFF49A26: push     eax
+0xFFF49A27: push     dword ptr [ebp + 8]
+0xFFF49A2A: call     0xfff499b1
+0xFFF49A2F: add      esp, 0x1c
+0xFFF49A32: leave
+0xFFF49A33: ret
+0xFFF49A34: push     ebp
+0xFFF49A35: mov      ebp, esp
+0xFFF49A37: sub      esp, 0x10
+0xFFF49A3A: push     dword ptr [ebp + 0x10]
+0xFFF49A3D: lea      eax, [ebp - 0x10]
+0xFFF49A40: push     eax
+0xFFF49A41: call     0xfff4998a
+0xFFF49A46: push     dword ptr [ebp + 0x10]
+0xFFF49A49: lea      eax, [ebp - 0x10]
+0xFFF49A4C: push     dword ptr [ebp + 0xc]
+0xFFF49A4F: push     eax
+0xFFF49A50: push     dword ptr [ebp + 8]
+0xFFF49A53: call     0xfff499b1
+0xFFF49A58: add      esp, 0x18
+0xFFF49A5B: leave
+0xFFF49A5C: ret
+0xFFF49A5D: push     esi
+
+## lookup_alt_fff49a08 VA 0xFFF49A08 raw 0x00997C section .tG1_PEI size 0x80
+0xFFF49A08: push     ebp
+0xFFF49A09: mov      ebp, esp
+0xFFF49A0B: sub      esp, 0x10
+0xFFF49A0E: push     dword ptr [ebp + 0x14]
+0xFFF49A11: lea      eax, [ebp - 0x10]
+0xFFF49A14: push     eax
+0xFFF49A15: push     dword ptr [ebp + 0xc]
+0xFFF49A18: call     0xfff4991f
+0xFFF49A1D: push     dword ptr [ebp + 0x14]
+0xFFF49A20: lea      eax, [ebp - 0x10]
+0xFFF49A23: push     dword ptr [ebp + 0x10]
+0xFFF49A26: push     eax
+0xFFF49A27: push     dword ptr [ebp + 8]
+0xFFF49A2A: call     0xfff499b1
+0xFFF49A2F: add      esp, 0x1c
+0xFFF49A32: leave
+0xFFF49A33: ret
+0xFFF49A34: push     ebp
+0xFFF49A35: mov      ebp, esp
+0xFFF49A37: sub      esp, 0x10
+0xFFF49A3A: push     dword ptr [ebp + 0x10]
+0xFFF49A3D: lea      eax, [ebp - 0x10]
+0xFFF49A40: push     eax
+0xFFF49A41: call     0xfff4998a
+0xFFF49A46: push     dword ptr [ebp + 0x10]
+0xFFF49A49: lea      eax, [ebp - 0x10]
+0xFFF49A4C: push     dword ptr [ebp + 0xc]
+0xFFF49A4F: push     eax
+0xFFF49A50: push     dword ptr [ebp + 8]
+0xFFF49A53: call     0xfff499b1
+0xFFF49A58: add      esp, 0x18
+0xFFF49A5B: leave
+0xFFF49A5C: ret
+0xFFF49A5D: push     esi
+0xFFF49A5E: push     dword ptr [esp + 0x10]
+0xFFF49A62: mov      esi, dword ptr [esp + 0x10]
+0xFFF49A66: push     esi
+0xFFF49A67: push     dword ptr [esp + 0x10]
+0xFFF49A6B: push     0xfff7e368
+0xFFF49A70: call     0xfff499b1
+0xFFF49A75: add      esp, 0x10
+0xFFF49A78: cmp      dword ptr [esi], 0
+0xFFF49A7B: jne      0xfff49a83
+0xFFF49A7D: mov      dword ptr [esi], 0xfff8350c
+0xFFF49A83: pop      esi
+0xFFF49A84: ret
+0xFFF49A85: push     esi
+
+## lookup_filter_fff478c8 VA 0xFFF478C8 raw 0x00783C section .tG1_PEI size 0x90
+0xFFF478C8: push     ebp
+0xFFF478C9: mov      ebp, esp
+0xFFF478CB: push     ecx
+0xFFF478CC: push     ecx
+0xFFF478CD: mov      eax, dword ptr [ebp + 0xc]
+0xFFF478D0: and      dword ptr [eax], 0
+0xFFF478D3: push     dword ptr [ebp + 8]
+0xFFF478D6: lea      eax, [ebp - 8]
+0xFFF478D9: push     eax
+0xFFF478DA: push     0x1b
+0xFFF478DC: call     0xfff44e76
+0xFFF478E1: mov      eax, dword ptr [ebp - 8]
+0xFFF478E4: and      eax, 0x100
+0xFFF478E9: xor      ecx, ecx
+0xFFF478EB: add      esp, 0xc
+0xFFF478EE: or       eax, ecx
+0xFFF478F0: je       0xfff478f6
+0xFFF478F2: mov      al, 1
+0xFFF478F4: leave
+0xFFF478F5: ret
+0xFFF478F6: xor      al, al
+0xFFF478F8: leave
+0xFFF478F9: ret
+0xFFF478FA: push     ebp
+0xFFF478FB: mov      ebp, esp
+0xFFF478FD: push     ecx
+0xFFF478FE: push     ecx
+0xFFF478FF: mov      eax, dword ptr [0xfff7f5bc]
+0xFFF47904: or       eax, dword ptr [0xfff7f5c0]
+0xFFF4790A: je       0xfff4794b
+0xFFF4790C: mov      eax, dword ptr [0xfff7f5c4]
+0xFFF47911: test     eax, eax
+0xFFF47913: je       0xfff4794b
+0xFFF47915: push     eax
+0xFFF47916: call     0xfff45118
+0xFFF4791B: push     dword ptr [ebp + 8]
+0xFFF4791E: movzx    eax, al
+0xFFF47921: shl      eax, 2
+0xFFF47924: or       eax, 1
+0xFFF47927: cdq
+0xFFF47928: or       eax, dword ptr [0xfff7f5bc]
+0xFFF4792E: or       edx, dword ptr [0xfff7f5c0]
+0xFFF47934: mov      dword ptr [ebp - 8], eax
+0xFFF47937: lea      eax, [ebp - 8]
+0xFFF4793A: push     eax
+0xFFF4793B: push     0xc0010058
+0xFFF47940: mov      dword ptr [ebp - 4], edx
+0xFFF47943: call     0xfff44e91
+0xFFF47948: add      esp, 0x10
+0xFFF4794B: leave
+0xFFF4794C: ret
+0xFFF4794D: push     ebp
+0xFFF4794E: mov      ebp, esp
+0xFFF47950: mov      eax, dword ptr [ebp + 0x18]
+0xFFF47953: and      dword ptr [eax], 0
+0xFFF47956: push     ebx
+
+## signature_table_lookup_fff48670 VA 0xFFF48670 raw 0x0085E4 section .tG1_PEI size 0x120
+0xFFF48670: push     ebp
+0xFFF48671: mov      ebp, esp
+0xFFF48673: sub      esp, 0x2c
+0xFFF48676: push     ebx
+0xFFF48677: push     esi
+0xFFF48678: mov      esi, dword ptr [ebp + 0xc]
+0xFFF4867B: mov      ecx, dword ptr [esi + 0x11]
+0xFFF4867E: push     edi
+0xFFF4867F: mov      edi, 0x50414548
+0xFFF48684: test     ecx, ecx
+0xFFF48686: je       0xfff4868c
+0xFFF48688: cmp      dword ptr [ecx], edi
+0xFFF4868A: je       0xfff486a4
+0xFFF4868C: push     esi
+0xFFF4868D: call     0xfff48251
+0xFFF48692: pop      ecx
+0xFFF48693: mov      ecx, eax
+0xFFF48695: test     ecx, ecx
+0xFFF48697: je       0xfff486ec
+0xFFF48699: cmp      dword ptr [ecx], edi
+0xFFF4869B: jne      0xfff486ec
+0xFFF4869D: cdq
+0xFFF4869E: mov      dword ptr [esi + 0x11], eax
+0xFFF486A1: mov      dword ptr [esi + 0x15], edx
+0xFFF486A4: mov      edx, dword ptr [ecx + 8]
+0xFFF486A7: mov      ebx, dword ptr [ebp + 8]
+0xFFF486AA: lea      eax, [edx + ecx]
+0xFFF486AD: cmp      dword ptr [ecx], edi
+0xFFF486AF: jne      0xfff486b6
+0xFFF486B1: cmp      edx, -1
+0xFFF486B4: jne      0xfff486fe
+0xFFF486B6: cmp      byte ptr [esi + 0x10], 4
+0xFFF486BA: jne      0xfff48738
+0xFFF486BC: mov      eax, dword ptr [ebx]
+0xFFF486BE: push     8
+0xFFF486C0: pop      ecx
+0xFFF486C1: push     dword ptr [ebp + 0xc]
+0xFFF486C4: lea      edi, [ebp - 0x2c]
+0xFFF486C7: rep movsd dword ptr es:[edi], dword ptr [esi]
+0xFFF486C9: push     0xe6
+0xFFF486CE: mov      dword ptr [ebp - 8], eax
+0xFFF486D1: call     0xfff49229
+0xFFF486D6: lea      eax, [ebp - 0x2c]
+0xFFF486D9: push     eax
+0xFFF486DA: push     0
+0xFFF486DC: call     0xfff46a61
+0xFFF486E1: add      esp, 0x10
+0xFFF486E4: test     eax, eax
+0xFFF486E6: je       0xfff4871b
+0xFFF486E8: and      dword ptr [ebx + 8], 0
+0xFFF486EC: push     5
+0xFFF486EE: pop      eax
+0xFFF486EF: pop      edi
+0xFFF486F0: pop      esi
+0xFFF486F1: pop      ebx
+0xFFF486F2: leave
+0xFFF486F3: ret
+0xFFF486F4: mov      eax, dword ptr [eax + 0xa]
+0xFFF486F7: cmp      eax, -1
+0xFFF486FA: je       0xfff486b6
+0xFFF486FC: add      eax, ecx
+0xFFF486FE: mov      edx, dword ptr [eax]
+0xFFF48700: cmp      edx, dword ptr [ebx]
+0xFFF48702: jne      0xfff486f4
+0xFFF48704: movzx    ecx, byte ptr [eax + 9]
+0xFFF48708: lea      edx, [ecx + eax + 0xe]
+0xFFF4870C: mov      dword ptr [ebx + 8], edx
+0xFFF4870F: mov      eax, dword ptr [eax + 4]
+0xFFF48712: sub      eax, ecx
+0xFFF48714: mov      dword ptr [ebx + 4], eax
+0xFFF48717: xor      eax, eax
+0xFFF48719: jmp      0xfff486ef
+0xFFF4871B: push     dword ptr [ebp + 0xc]
+0xFFF4871E: mov      eax, dword ptr [ebp - 0xc]
+0xFFF48721: push     0xe7
+0xFFF48726: mov      dword ptr [ebx + 4], eax
+0xFFF48729: call     0xfff49229
+0xFFF4872E: mov      eax, dword ptr [ebp - 4]
+0xFFF48731: pop      ecx
+0xFFF48732: pop      ecx
+0xFFF48733: mov      dword ptr [ebx + 8], eax
+0xFFF48736: jmp      0xfff48717
+0xFFF48738: xor      eax, eax
+0xFFF4873A: mov      dword ptr [ebx + 8], eax
+0xFFF4873D: mov      dword ptr [ebx + 4], eax
+0xFFF48740: cmp      dword ptr [ecx], edi
+0xFFF48742: jne      0xfff48759
+0xFFF48744: push     esi
+0xFFF48745: push     eax
+0xFFF48746: push     eax
+0xFFF48747: push     eax
+0xFFF48748: push     dword ptr [ebx]
+0xFFF4874A: push     0x8040100
+0xFFF4874F: push     2
+0xFFF48751: call     0xfff4cd0f
+0xFFF48756: add      esp, 0x1c
+0xFFF48759: push     2
+0xFFF4875B: jmp      0xfff486ee
+0xFFF4875D: push     ebx
+0xFFF4875E: push     esi
+0xFFF4875F: mov      esi, dword ptr [esp + 0xc]
+0xFFF48763: mov      ecx, dword ptr [esi]
+0xFFF48765: xor      bl, bl
+0xFFF48767: test     ecx, ecx
+0xFFF48769: je       0xfff4878e
+0xFFF4876B: mov      eax, esi
+0xFFF4876D: push     dword ptr [esp + 0x10]
+0xFFF48771: add      eax, 4
+0xFFF48774: push     eax
+0xFFF48775: push     ecx
+0xFFF48776: call     0xfff44e91
+0xFFF4877B: add      esp, 0xc
+0xFFF4877E: inc      bl
+0xFFF48780: movzx    eax, bl
+0xFFF48783: imul     eax, eax, 0xc
+0xFFF48786: add      eax, esi
+0xFFF48788: mov      ecx, dword ptr [eax]
+0xFFF4878A: test     ecx, ecx
+0xFFF4878C: jne      0xfff4876d
+0xFFF4878E: pop      esi
+0xFFF4878F: pop      ebx
+
+## late_helper_fff482eb VA 0xFFF482EB raw 0x00825F section .tG1_PEI size 0xB0
+0xFFF482EB: push     ebp
+0xFFF482EC: mov      ebp, esp
+0xFFF482EE: mov      edx, dword ptr [ebp + 0xc]
+0xFFF482F1: sub      esp, 0x38
+0xFFF482F4: push     ebx
+0xFFF482F5: mov      ebx, dword ptr [ebp + 8]
+0xFFF482F8: mov      al, byte ptr [ebx + 8]
+0xFFF482FB: cmp      al, 7
+0xFFF482FD: jne      0xfff4830a
+0xFFF482FF: cmp      byte ptr [edx + 0x10], 4
+0xFFF48303: je       0xfff4830a
+0xFFF48305: xor      eax, eax
+0xFFF48307: inc      eax
+0xFFF48308: jmp      0xfff48356
+0xFFF4830A: cmp      byte ptr [edx + 0x10], 4
+0xFFF4830E: push     esi
+0xFFF4830F: push     edi
+0xFFF48310: jne      0xfff48373
+0xFFF48312: push     8
+0xFFF48314: pop      ecx
+0xFFF48315: mov      esi, edx
+0xFFF48317: lea      edi, [ebp - 0x38]
+0xFFF4831A: rep movsd dword ptr es:[edi], dword ptr [esi]
+0xFFF4831C: mov      ecx, dword ptr [ebx + 4]
+0xFFF4831F: mov      dword ptr [ebp - 0x14], ecx
+0xFFF48322: mov      ecx, dword ptr [ebx]
+0xFFF48324: push     edx
+0xFFF48325: cmp      al, 7
+0xFFF48327: push     0xe2
+0xFFF4832C: mov      dword ptr [ebp - 0x18], ecx
+0xFFF4832F: sete     byte ptr [ebp + 0xb]
+0xFFF48333: call     0xfff49229
+0xFFF48338: lea      eax, [ebp - 0x38]
+0xFFF4833B: push     eax
+0xFFF4833C: movzx    eax, byte ptr [ebp + 0xb]
+0xFFF48340: push     eax
+0xFFF48341: call     0xfff46b41
+0xFFF48346: add      esp, 0x10
+0xFFF48349: test     eax, eax
+0xFFF4834B: je       0xfff48359
+0xFFF4834D: and      dword ptr [ebx + 9], 0
+0xFFF48351: push     5
+0xFFF48353: pop      eax
+0xFFF48354: pop      edi
+0xFFF48355: pop      esi
+0xFFF48356: pop      ebx
+0xFFF48357: leave
+0xFFF48358: ret
+0xFFF48359: push     dword ptr [ebp + 0xc]
+0xFFF4835C: push     0xe3
+0xFFF48361: call     0xfff49229
+0xFFF48366: mov      eax, dword ptr [ebp - 0x10]
+0xFFF48369: pop      ecx
+0xFFF4836A: pop      ecx
+0xFFF4836B: mov      dword ptr [ebx + 9], eax
+0xFFF4836E: jmp      0xfff484f5
+0xFFF48373: and      dword ptr [ebx + 9], 0
+0xFFF48377: mov      edi, dword ptr [edx + 0x11]
+0xFFF4837A: mov      esi, 0x50414548
+0xFFF4837F: test     edi, edi
+0xFFF48381: je       0xfff48387
+0xFFF48383: cmp      dword ptr [edi], esi
+0xFFF48385: je       0xfff483a4
+0xFFF48387: push     edx
+0xFFF48388: call     0xfff48251
+0xFFF4838D: mov      edi, eax
+0xFFF4838F: pop      ecx
+0xFFF48390: test     edi, edi
+0xFFF48392: je       0xfff48351
+0xFFF48394: cmp      dword ptr [edi], esi
+0xFFF48396: jne      0xfff48351
+0xFFF48398: mov      ecx, dword ptr [ebp + 0xc]
+
+## rdmsr_or_service_read_fff493fc VA 0xFFF493FC raw 0x009370 section .tG1_PEI size 0x70
+0xFFF493FC: push     ebp
+0xFFF493FD: mov      ebp, esp
+0xFFF493FF: cmp      dword ptr [ebp + 0x10], 0
+0xFFF49403: mov      eax, dword ptr [ebp + 8]
+0xFFF49406: je       0xfff4941c
+0xFFF49408: mov      ecx, dword ptr [ebp + 0xc]
+0xFFF4940B: sub      ecx, eax
+0xFFF4940D: mov      dl, byte ptr [ecx + eax]
+0xFFF49410: dec      dword ptr [ebp + 0x10]
+0xFFF49413: mov      byte ptr [eax], dl
+0xFFF49415: inc      eax
+0xFFF49416: cmp      dword ptr [ebp + 0x10], 0
+0xFFF4941A: jne      0xfff4940d
+0xFFF4941C: pop      ebp
+0xFFF4941D: ret
+0xFFF4941E: push     ebp
+0xFFF4941F: mov      ebp, esp
+0xFFF49421: sub      esp, 0x10
+0xFFF49424: push     dword ptr [ebp + 8]
+0xFFF49427: lea      eax, [ebp - 0x10]
+0xFFF4942A: push     eax
+0xFFF4942B: push     0x80000001
+0xFFF49430: call     0xfff44eac
+0xFFF49435: mov      ecx, dword ptr [ebp - 0xc]
+0xFFF49438: xor      eax, eax
+0xFFF4943A: shr      ecx, 0x1c
+0xFFF4943D: inc      eax
+0xFFF4943E: add      esp, 0xc
+0xFFF49441: shl      eax, cl
+0xFFF49443: leave
+0xFFF49444: ret
+0xFFF49445: push     ebp
+0xFFF49446: mov      ebp, esp
+0xFFF49448: sub      esp, 0x1c
+0xFFF4944B: push     esi
+0xFFF4944C: push     edi
+0xFFF4944D: mov      edi, dword ptr [ebp + 0x14]
+0xFFF49450: lea      eax, [ebp - 4]
+0xFFF49453: push     edi
+0xFFF49454: push     eax
+0xFFF49455: lea      esi, [ebp - 0xc]
+0xFFF49458: call     0xfff49388
+0xFFF4945D: pop      ecx
+0xFFF4945E: pop      ecx
+0xFFF4945F: push     edi
+0xFFF49460: test     al, al
+0xFFF49462: jne      0xfff4954b
+0xFFF49468: mov      ecx, dword ptr [ebp + 0xc]
+
+## trace_or_service_call_fff49229 VA 0xFFF49229 raw 0x00919D section .tG1_PEI size 0x80
+0xFFF49229: push     dword ptr [esp + 8]
+0xFFF4922D: lea      eax, [esp + 8]
+0xFFF49231: push     eax
+0xFFF49232: push     0x80
+0xFFF49237: push     1
+0xFFF49239: call     0xfff4928d
+0xFFF4923E: add      esp, 0x10
+0xFFF49241: ret
+0xFFF49242: push     ebp
+0xFFF49243: mov      ebp, esp
+0xFFF49245: mov      eax, dword ptr [ebp + 8]
+0xFFF49248: dec      eax
+0xFFF49249: je       0xfff4927d
+0xFFF4924B: dec      eax
+0xFFF4924C: je       0xfff4926c
+0xFFF4924E: dec      eax
+0xFFF4924F: je       0xfff4925c
+0xFFF49251: sub      eax, 0x7e
+0xFFF49254: je       0xfff4927d
+0xFFF49256: dec      eax
+0xFFF49257: je       0xfff4926c
+0xFFF49259: dec      eax
+0xFFF4925A: jne      0xfff4928b
+0xFFF4925C: push     dword ptr [ebp + 0xc]
+0xFFF4925F: call     0xfff44e68
+0xFFF49264: pop      ecx
+0xFFF49265: mov      ecx, dword ptr [ebp + 0x10]
+0xFFF49268: mov      dword ptr [ecx], eax
+0xFFF4926A: pop      ebp
+0xFFF4926B: ret
+0xFFF4926C: push     dword ptr [ebp + 0xc]
+0xFFF4926F: call     0xfff44e59
+0xFFF49274: pop      ecx
+0xFFF49275: mov      ecx, dword ptr [ebp + 0x10]
+0xFFF49278: mov      word ptr [ecx], ax
+0xFFF4927B: pop      ebp
+0xFFF4927C: ret
+0xFFF4927D: push     dword ptr [ebp + 0xc]
+0xFFF49280: call     0xfff44e4b
+0xFFF49285: pop      ecx
+0xFFF49286: mov      ecx, dword ptr [ebp + 0x10]
+0xFFF49289: mov      byte ptr [ecx], al
+0xFFF4928B: pop      ebp
+0xFFF4928C: ret
+0xFFF4928D: push     ebp
+0xFFF4928E: mov      ebp, esp
+0xFFF49290: mov      eax, dword ptr [ebp + 8]
+0xFFF49293: dec      eax
+0xFFF49294: je       0xfff492c7
+0xFFF49296: dec      eax
+0xFFF49297: je       0xfff492b6
+0xFFF49299: dec      eax
+0xFFF4929A: je       0xfff492a7
+0xFFF4929C: sub      eax, 0x7e
+0xFFF4929F: je       0xfff492c7
+0xFFF492A1: dec      eax
+0xFFF492A2: je       0xfff492b6
+0xFFF492A4: dec      eax
+0xFFF492A5: jne      0xfff492d8
+
+## Interpretation
+
+- `0xFFF7E698` is a shared descriptor/service argument referenced by ten callsites across `.tG1_PEI`, `.tG2_PEI`, and `.tG3_DXE`; it is not unique to the P-state record producer.
+- The `0xFFF4D12F` path calls `0xFFF49A34`, which delegates through `0xFFF4998A` and `0xFFF499B1`; these helpers search registered service/global structures instead of exposing local P4 bytes.
+- Static `.data` slots around `0xFFF7F500` contain producer/consumer function pointers, while descriptor/global windows around `0xFFF7E300`, `0xFFF7E650`, `0xFFF8350C`, and `0xFFF8D100` are control/service metadata.
+- This advances the firmware route to shared service descriptor provenance. It still does not satisfy TABLE_TARGET_FOUND or BYTE_READY_HUMAN_REVIEW.

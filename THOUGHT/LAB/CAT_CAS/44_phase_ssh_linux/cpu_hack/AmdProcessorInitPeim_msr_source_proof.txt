@@ -1,0 +1,375 @@
+# AmdProcessorInitPeim MSR source proof for entry +0x04
+
+Generated from extracted PE32 body only. No patch bytes, no image writes, no hardware access.
+
+## Arithmetic
+
+`0xFFF7348D` computes the MSR address passed to `0xFFF44E76` as:
+
+```text
+eax = pstate_index - 0x3FFEFF9C
+```
+
+In unsigned 32-bit arithmetic:
+
+```text
+-0x3FFEFF9C mod 2^32 = 0xC0010064
+eax = 0xC0010064 + pstate_index
+P0 -> MSRC001_0064
+P1 -> MSRC001_0065
+P2 -> MSRC001_0066
+P3 -> MSRC001_0067
+P4 -> MSRC001_0068
+```
+
+The constructor's P4 VID-like byte therefore traces to a runtime read of `MSRC001_0068`, not a firmware-resident P4 table byte.
+
+## msr_read_helper_fff44e76 VA 0xFFF44E76 raw 0x004DEA section .text size 0x80
+0xFFF44E76: push     ebp
+0xFFF44E77: mov      ebp, esp
+0xFFF44E79: push     ecx
+0xFFF44E7A: push     esi
+0xFFF44E7B: push     edx
+0xFFF44E7C: mov      esi, dword ptr [ebp + 0x10]
+0xFFF44E7F: mov      ecx, dword ptr [ebp + 8]
+0xFFF44E82: rdmsr
+0xFFF44E84: mov      esi, dword ptr [ebp + 0xc]
+0xFFF44E87: mov      dword ptr [esi], eax
+0xFFF44E89: mov      dword ptr [esi + 4], edx
+0xFFF44E8C: pop      edx
+0xFFF44E8D: pop      esi
+0xFFF44E8E: pop      ecx
+0xFFF44E8F: leave
+0xFFF44E90: ret
+0xFFF44E91: push     ebp
+0xFFF44E92: mov      ebp, esp
+0xFFF44E94: push     ecx
+0xFFF44E95: push     esi
+0xFFF44E96: push     edx
+0xFFF44E97: mov      esi, dword ptr [ebp + 0x10]
+0xFFF44E9A: mov      ecx, dword ptr [ebp + 8]
+0xFFF44E9D: mov      esi, dword ptr [ebp + 0xc]
+0xFFF44EA0: mov      eax, dword ptr [esi]
+0xFFF44EA2: mov      edx, dword ptr [esi + 4]
+0xFFF44EA5: wrmsr
+0xFFF44EA7: pop      edx
+0xFFF44EA8: pop      esi
+0xFFF44EA9: pop      ecx
+0xFFF44EAA: leave
+0xFFF44EAB: ret
+0xFFF44EAC: push     ebp
+0xFFF44EAD: mov      ebp, esp
+0xFFF44EAF: pushal
+0xFFF44EB0: mov      esi, dword ptr [ebp + 0x10]
+0xFFF44EB3: mov      eax, dword ptr [ebp + 8]
+0xFFF44EB6: cpuid
+0xFFF44EB8: mov      esi, dword ptr [ebp + 0xc]
+0xFFF44EBB: mov      dword ptr [esi], eax
+0xFFF44EBD: mov      dword ptr [esi + 4], ebx
+0xFFF44EC0: mov      dword ptr [esi + 8], ecx
+0xFFF44EC3: mov      dword ptr [esi + 0xc], edx
+0xFFF44EC6: popal
+0xFFF44EC7: leave
+0xFFF44EC8: ret
+0xFFF44EC9: rdtsc
+0xFFF44ECB: ret
+0xFFF44ECC: push     eax
+0xFFF44ECD: push     ebx
+0xFFF44ECE: push     ecx
+0xFFF44ECF: push     edx
+0xFFF44ED0: push     edi
+0xFFF44ED1: mov      eax, ecx
+0xFFF44ED3: mov      ecx, 0xc0010015
+0xFFF44ED8: rdmsr
+0xFFF44EDA: mov      ebx, eax
+0xFFF44EDC: bts      eax, 0x11
+0xFFF44EE0: wrmsr
+0xFFF44EE2: xchg     edi, edx
+0xFFF44EE4: mov      eax, esi
+0xFFF44EE6: mov      esi, ebx
+0xFFF44EE8: mov      ecx, 0xc0000100
+0xFFF44EED: wrmsr
+0xFFF44EEF: pop      edi
+0xFFF44EF0: pop      edx
+0xFFF44EF1: pop      ecx
+0xFFF44EF2: pop      ebx
+0xFFF44EF3: pop      eax
+0xFFF44EF4: ret
+0xFFF44EF5: push     eax
+
+### Interesting
+0xFFF44E82: rdmsr
+0xFFF44EA5: wrmsr
+0xFFF44ED8: rdmsr
+0xFFF44EE0: wrmsr
+0xFFF44EED: wrmsr
+
+## msr_write_helper_fff44e91 VA 0xFFF44E91 raw 0x004E05 section .text size 0x80
+0xFFF44E91: push     ebp
+0xFFF44E92: mov      ebp, esp
+0xFFF44E94: push     ecx
+0xFFF44E95: push     esi
+0xFFF44E96: push     edx
+0xFFF44E97: mov      esi, dword ptr [ebp + 0x10]
+0xFFF44E9A: mov      ecx, dword ptr [ebp + 8]
+0xFFF44E9D: mov      esi, dword ptr [ebp + 0xc]
+0xFFF44EA0: mov      eax, dword ptr [esi]
+0xFFF44EA2: mov      edx, dword ptr [esi + 4]
+0xFFF44EA5: wrmsr
+0xFFF44EA7: pop      edx
+0xFFF44EA8: pop      esi
+0xFFF44EA9: pop      ecx
+0xFFF44EAA: leave
+0xFFF44EAB: ret
+0xFFF44EAC: push     ebp
+0xFFF44EAD: mov      ebp, esp
+0xFFF44EAF: pushal
+0xFFF44EB0: mov      esi, dword ptr [ebp + 0x10]
+0xFFF44EB3: mov      eax, dword ptr [ebp + 8]
+0xFFF44EB6: cpuid
+0xFFF44EB8: mov      esi, dword ptr [ebp + 0xc]
+0xFFF44EBB: mov      dword ptr [esi], eax
+0xFFF44EBD: mov      dword ptr [esi + 4], ebx
+0xFFF44EC0: mov      dword ptr [esi + 8], ecx
+0xFFF44EC3: mov      dword ptr [esi + 0xc], edx
+0xFFF44EC6: popal
+0xFFF44EC7: leave
+0xFFF44EC8: ret
+0xFFF44EC9: rdtsc
+0xFFF44ECB: ret
+0xFFF44ECC: push     eax
+0xFFF44ECD: push     ebx
+0xFFF44ECE: push     ecx
+0xFFF44ECF: push     edx
+0xFFF44ED0: push     edi
+0xFFF44ED1: mov      eax, ecx
+0xFFF44ED3: mov      ecx, 0xc0010015
+0xFFF44ED8: rdmsr
+0xFFF44EDA: mov      ebx, eax
+0xFFF44EDC: bts      eax, 0x11
+0xFFF44EE0: wrmsr
+0xFFF44EE2: xchg     edi, edx
+0xFFF44EE4: mov      eax, esi
+0xFFF44EE6: mov      esi, ebx
+0xFFF44EE8: mov      ecx, 0xc0000100
+0xFFF44EED: wrmsr
+0xFFF44EEF: pop      edi
+0xFFF44EF0: pop      edx
+0xFFF44EF1: pop      ecx
+0xFFF44EF2: pop      ebx
+0xFFF44EF3: pop      eax
+0xFFF44EF4: ret
+0xFFF44EF5: push     eax
+0xFFF44EF6: push     ecx
+0xFFF44EF7: push     edx
+0xFFF44EF8: mov      ecx, 0xc0010015
+0xFFF44EFD: mov      eax, esi
+0xFFF44EFF: mov      edx, edi
+0xFFF44F01: wrmsr
+0xFFF44F03: pop      edx
+0xFFF44F04: pop      ecx
+0xFFF44F05: pop      eax
+0xFFF44F06: ret
+0xFFF44F07: push     ebp
+0xFFF44F08: mov      ebp, esp
+0xFFF44F0A: push     ebx
+0xFFF44F0B: push     edi
+0xFFF44F0C: push     esi
+0xFFF44F0D: mov      esi, dword ptr [ebp + 8]
+
+### Interesting
+0xFFF44EA5: wrmsr
+0xFFF44ED8: rdmsr
+0xFFF44EE0: wrmsr
+0xFFF44EED: wrmsr
+0xFFF44F01: wrmsr
+
+## service_plus_0x22_fff7348d_msr_source VA 0xFFF7348D raw 0x033401 section .tG3_DXE size 0x90
+0xFFF7348D: push     ebp
+0xFFF7348E: mov      ebp, esp
+0xFFF73490: sub      esp, 0x10
+0xFFF73493: push     esi
+0xFFF73494: push     edi
+0xFFF73495: push     dword ptr [ebp + 0x20]
+0xFFF73498: lea      eax, [ebp - 4]
+0xFFF7349B: push     eax
+0xFFF7349C: call     dword ptr [0xfff7f56a]
+0xFFF734A2: mov      eax, dword ptr [ebp - 4]
+0xFFF734A5: push     dword ptr [ebp + 0x20]
+0xFFF734A8: and      eax, 0xffffc15c
+0xFFF734AD: lea      ecx, [ebp - 8]
+0xFFF734B0: or       eax, 0x415c
+0xFFF734B5: push     ecx
+0xFFF734B6: push     eax
+0xFFF734B7: push     3
+0xFFF734B9: mov      dword ptr [ebp - 4], eax
+0xFFF734BC: call     0xfff49445
+0xFFF734C1: push     dword ptr [ebp + 0x20]
+0xFFF734C4: mov      esi, dword ptr [ebp + 0xc]
+0xFFF734C7: lea      eax, [ebp - 0x10]
+0xFFF734CA: push     eax
+0xFFF734CB: lea      eax, [esi - 0x3ffeff9c]
+0xFFF734D1: push     eax
+0xFFF734D2: call     0xfff44e76
+0xFFF734D7: mov      edi, dword ptr [ebp - 0xc]
+0xFFF734DA: mov      ecx, dword ptr [ebp + 0x1c]
+0xFFF734DD: mov      eax, edi
+0xFFF734DF: shr      eax, 0x1f
+0xFFF734E2: add      esp, 0x24
+0xFFF734E5: xor      edx, edx
+0xFFF734E7: mov      dword ptr [ecx], esi
+0xFFF734E9: cmp      eax, 1
+0xFFF734EC: jne      0xfff7350f
+0xFFF734EE: test     edx, edx
+0xFFF734F0: jne      0xfff7350f
+0xFFF734F2: mov      edx, dword ptr [ebp + 0x10]
+0xFFF734F5: mov      byte ptr [edx], al
+0xFFF734F7: mov      eax, dword ptr [ebp - 8]
+0xFFF734FA: shr      eax, 2
+0xFFF734FD: and      eax, 7
+0xFFF73500: cmp      esi, eax
+0xFFF73502: jae      0xfff73509
+0xFFF73504: mov      byte ptr [edx], 0
+0xFFF73507: jmp      0xfff73514
+0xFFF73509: sub      esi, eax
+0xFFF7350B: mov      dword ptr [ecx], esi
+0xFFF7350D: jmp      0xfff73514
+0xFFF7350F: mov      eax, dword ptr [ebp + 0x10]
+0xFFF73512: mov      byte ptr [eax], dl
+0xFFF73514: movzx    eax, byte ptr [ebp - 0xc]
+0xFFF73518: mov      ecx, dword ptr [ebp + 0x14]
+
+### Interesting
+0xFFF7349C: call     dword ptr [0xfff7f56a]
+0xFFF734BC: call     0xfff49445
+0xFFF734CB: lea      eax, [esi - 0x3ffeff9c]
+0xFFF734D2: call     0xfff44e76
+
+## constructor_fff7371a_msr_consumer VA 0xFFF7371A raw 0x03368E section .tG3_DXE size 0xF0
+0xFFF7371A: push     ebp
+0xFFF7371B: mov      ebp, esp
+0xFFF7371D: sub      esp, 0x38
+0xFFF73720: push     ebx
+0xFFF73721: mov      ebx, dword ptr [ebp + 0x10]
+0xFFF73724: push     esi
+0xFFF73725: push     edi
+0xFFF73726: lea      eax, [ebp - 0x28]
+0xFFF73729: push     ebx
+0xFFF7372A: push     eax
+0xFFF7372B: call     0xfff49aad
+0xFFF73730: mov      edi, dword ptr [ebp + 0xc]
+0xFFF73733: mov      eax, dword ptr [edi]
+0xFFF73735: and      dword ptr [ebp - 0xc], 0
+0xFFF73739: mov      dword ptr [ebp - 0x20], eax
+0xFFF7373C: lea      eax, [ebp - 0x14]
+0xFFF7373F: push     eax
+0xFFF73740: lea      eax, [ebp - 0x30]
+0xFFF73743: push     eax
+0xFFF73744: lea      eax, [ebp - 0x2c]
+0xFFF73747: push     eax
+0xFFF73748: lea      eax, [ebp - 0x24]
+0xFFF7374B: push     eax
+0xFFF7374C: lea      esi, [edi + 8]
+0xFFF7374F: push     ebx
+0xFFF73750: mov      dword ptr [ebp - 8], esi
+0xFFF73753: call     0xfff47af3
+0xFFF73758: lea      eax, [ebp - 0x14]
+0xFFF7375B: push     eax
+0xFFF7375C: lea      eax, [ebp - 0xc]
+0xFFF7375F: push     eax
+0xFFF73760: push     dword ptr [ebp - 0x2c]
+0xFFF73763: push     dword ptr [ebp - 0x24]
+0xFFF73766: push     ebx
+0xFFF73767: call     0xfff4794d
+0xFFF7376C: and      dword ptr [ebp + 0xc], 0
+0xFFF73770: add      esp, 0x30
+0xFFF73773: cmp      dword ptr [ebp - 0x20], 0
+0xFFF73777: jbe      0xfff737a3
+0xFFF73779: push     ebx
+0xFFF7377A: push     dword ptr [ebp + 0xc]
+0xFFF7377D: lea      eax, [ebp - 8]
+0xFFF73780: push     edi
+0xFFF73781: push     eax
+0xFFF73782: call     0xfff4cf55
+0xFFF73787: mov      ecx, dword ptr [ebp - 8]
+0xFFF7378A: movzx    eax, byte ptr [ecx + 8]
+0xFFF7378E: add      esp, 0x10
+0xFFF73791: cmp      eax, dword ptr [ebp - 0x24]
+0xFFF73794: je       0xfff737a6
+0xFFF73796: inc      dword ptr [ebp + 0xc]
+0xFFF73799: mov      eax, dword ptr [ebp + 0xc]
+0xFFF7379C: cmp      eax, dword ptr [ebp - 0x20]
+0xFFF7379F: jb       0xfff73779
+0xFFF737A1: jmp      0xfff737a6
+0xFFF737A3: mov      ecx, dword ptr [ebp - 8]
+0xFFF737A6: cmp      byte ptr [esi + 4], 0
+0xFFF737AA: mov      al, byte ptr [ecx + 0xf]
+0xFFF737AD: movzx    edi, al
+0xFFF737B0: je       0xfff7397d
+0xFFF737B6: push     ebx
+0xFFF737B7: lea      ecx, [ebp - 0x38]
+0xFFF737BA: lea      eax, [edi - 0x3ffeff9c]
+0xFFF737C0: push     ecx
+0xFFF737C1: push     eax
+0xFFF737C2: call     0xfff44e76
+0xFFF737C7: mov      esi, dword ptr [ebp - 8]
+0xFFF737CA: lea      eax, [ebp - 0x10]
+0xFFF737CD: push     eax
+0xFFF737CE: push     dword ptr [esi + 0x14]
+0xFFF737D1: lea      eax, [ebp - 0x14]
+0xFFF737D4: lea      ecx, [ebp - 0x18]
+0xFFF737D7: call     0xfff73559
+0xFFF737DC: mov      ecx, dword ptr [ebp - 0x18]
+0xFFF737DF: mov      edx, dword ptr [ebp - 0x10]
+0xFFF737E2: and      ecx, 7
+0xFFF737E5: mov      dword ptr [ebp - 0x14], eax
+0xFFF737E8: xor      ebx, ebx
+0xFFF737EA: shld     ebx, ecx, 6
+0xFFF737EE: xor      eax, eax
+0xFFF737F0: or       eax, ebx
+0xFFF737F2: mov      ebx, dword ptr [ebp - 0x34]
+0xFFF737F5: and      edx, 0x3f
+0xFFF737F8: shl      ecx, 6
+0xFFF737FB: or       eax, ebx
+0xFFF737FD: and      edx, 0xfffffe3f
+0xFFF73803: or       edx, ecx
+0xFFF73805: mov      ecx, dword ptr [ebp - 0x38]
+
+### Interesting
+0xFFF7372B: call     0xfff49aad
+0xFFF73753: call     0xfff47af3
+0xFFF73767: call     0xfff4794d
+0xFFF73782: call     0xfff4cf55
+0xFFF737BA: lea      eax, [edi - 0x3ffeff9c]
+0xFFF737C2: call     0xfff44e76
+0xFFF737D7: call     0xfff73559
+
+## Source Chain
+
+```text
+0xFFF7371A constructor
+  reads selected_base + pstate*0x18 + 0x1C
+  for P4 this is selected_base + 0x60 + 0x1C
+
+0xFFF4CF9C producer
+  entry = selected_base + 0x18 + pstate*0x18
+  entry +0x04 feeds constructor +0x1C
+  entry +0x04 = local_1C
+
+0xFFF7348D service +0x22
+  local_1C / arg_14 = byte read from 0xFFF44E76 result
+  0xFFF44E76 argument = 0xC0010064 + pstate
+  P4 argument = 0xC0010068
+```
+
+## Actionability
+
+`P4_FIELD_RUNTIME_MSR_DERIVED` is met.
+
+`TABLE_TARGET_FOUND` is not met for firmware editing: the P4 field is reconstructed from runtime `MSRC001_0068` reads, not static AGESA P4 bytes.
+
+`BYTE_READY_HUMAN_REVIEW` is not met: there is no P4-only firmware byte candidate, no P0-P3 unchanged proof, no no-op rebuild proof, and no checksum proof.
+
+## Next Software/Firmware Action
+
+Firmware table editing for this field is not currently actionable from the decoded path. Continue with either parse-clean no-op rebuild proof for any future firmware edits, or renewed software-only tests that manipulate/observe runtime `MSRC001_0068` behavior without blind voltage writes.

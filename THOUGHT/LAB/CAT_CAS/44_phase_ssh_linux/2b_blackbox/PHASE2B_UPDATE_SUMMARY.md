@@ -34,13 +34,14 @@ Phase 2B pivots: instead of watching the hidden dynamics, use them. Encode probl
 
 ## Current Status
 
-`PHASE2B_PASSIVE_NULLS_FAILED` — Random-flip passive worker tested. Did not beat nulls. Pivot to 2B.3 correlation-based attractor.
+`PHASE2B_PASSIVE_MESI_SPIN_BRANCH_CLOSED` — Binary-spin passive MESI branch exhausted. Phase 2B NOT globally dead — phase-oracle/interference mechanisms from CAT_CAS ZIP (Exp20, Exp26, Exp07, Exp31, Exp33) were never ported to Phenom II.
 
 ## Next Exact Implementation Task
 
-**Phase 2B.3:** Wormhole-Inspired Correlation Attractor.
-1. Workers compute pairwise spin correlations (si * sj) through shared tape slots via atomic XOR
-2. Accumulate correlations — no spin flipping in first test, measurement only
-3. Compare correlation patterns against J_ij coupling structure
-4. Test whether shared-tape correlation patterns match J_ij better than nulls
-5. File: `session_scripts/phase2b/wormhole_correlation.c`
+**Phase 2B.5A:** Port Exp20 phase-oracle machinery to Phenom II.
+1. Extract complex-phase encoding from Exp20 (phase lasing, filter bank, .holo cavity)
+2. Implement `session_scripts/phase2b/phase_oracle_port.c`
+3. Represent candidate states as complex phase values, not binary spins
+4. Encode problem constraints as phase shifts, decode answer from interference pattern
+
+See `PHASE2B_ZIP_MECHANISM_INVENTORY.md` for full untested mechanism inventory.

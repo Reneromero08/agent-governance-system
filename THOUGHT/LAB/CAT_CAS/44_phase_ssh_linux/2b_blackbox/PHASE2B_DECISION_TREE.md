@@ -67,4 +67,10 @@ Before claiming `PHASE2B_PASSIVE_ATTRACTOR_CANDIDATE`, verify:
 
 ## Current Status
 
-`PHASE2B_PASSIVE_NULLS_FAILED` — Random-flip passive worker (2B.2) did not beat single-worker or independent-tapes nulls on 8-spin linear chain. Ground truth unreached. Shared tape mean (-0.83) vs single-worker null (-3.00) — negative result. Pivot to 2B.3 correlation-based attractor.
+`PHASE2B_PASSIVE_MESI_SPIN_BRANCH_CLOSED` — Binary-spin passive MESI branch failed current tests. Phase 2B remains alive through unported CAT_CAS phase-oracle/interference branch.
+
+**2B.2** random-flip: negative. **2B.3A** wormhole protocol transfer: PASS (not Ising claim). **2B.3B** P1 ferro-bias FALSIFIED, P2 active edge solver works (shared=null). **2B.4** channel matrix: all 4 CAT_CAS-derived passive channels failed mixed-sign controls.
+
+**Correction:** Previous `CURRENT_PASSIVE_MECHANISMS_CLOSED` was too broad. Only the MESI binary-spin branch is closed. Phase-oracle/interference mechanisms (Exp20, Exp26, Exp07, Exp31, Exp33) were never ported to the Phenom II. Phase 2B is NOT globally dead.
+
+**Next:** 2B.5A Exp20 phase-oracle port to Phenom II (`session_scripts/phase2b/phase_oracle_port.c`). See `PHASE2B_ZIP_MECHANISM_INVENTORY.md` for full untested mechanism inventory.

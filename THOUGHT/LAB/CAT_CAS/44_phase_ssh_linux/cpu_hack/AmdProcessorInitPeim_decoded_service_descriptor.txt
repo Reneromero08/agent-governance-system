@@ -1,0 +1,222 @@
+# AmdProcessorInitPeim decoded service descriptor
+
+Generated from extracted PE32 body only. No patch bytes, no image writes, no hardware access.
+
+## Descriptor 0xFFF7E698
+count byte [0xFFF7E698] = 3
+entry table dword [0xFFF7E699] = 0xFFF7E674 (.rdata)
+
+| Entry | Mask low | Mask high | Result pointer | Section | Notes |
+|---|---:|---:|---:|---|---|
+| 0 | `0x0000001F` | `0x00000000` | `0xFFF839E0` | `.dG2_PEI` | PEI/data service table candidate |
+| 1 | `0x00000100` | `0x00000000` | `0xFFF8D108` | `.dG3_DXE` | DXE service vtable containing constructor 0xFFF7371A at +0x16 |
+| 2 | `0x00000000` | `0x00000000` | `0x00000000` | `unmapped` | null/default result |
+
+## Lookup Semantics
+
+`0xFFF499B1` interprets descriptors as:
+
+```text
+count = byte[descriptor + 0]
+entry_table = dword[descriptor + 1]
+for i in range(count):
+    if (entry[i].mask_low & runtime_mask_low) | (entry[i].mask_high & runtime_mask_high):
+        *out = entry[i].result_pointer
+        return
+*out = 0
+```
+
+## Service table 0xFFF8D108 (.dG3_DXE)
++0x02: 0xFFF7329E (.tG3_DXE) pointer_hits=1
++0x06: 0xFFF732FD (.tG3_DXE) pointer_hits=1
++0x0A: 0xFFF7332D (.tG3_DXE) pointer_hits=1
++0x0E: 0xFFF735F5 (.tG3_DXE) pointer_hits=1
++0x12: 0xFFF7332E (.tG3_DXE) pointer_hits=1
++0x16: 0xFFF7371A (.tG3_DXE) pointer_hits=1
++0x1A: 0xFFF7339A (.tG3_DXE) pointer_hits=1
++0x1E: 0xFFF73418 (.tG3_DXE) pointer_hits=1
++0x22: 0xFFF7348D (.tG3_DXE) pointer_hits=1
+
+## Service table 0xFFF839E0 (.dG2_PEI)
++0x02: 0xFFF52384 (.tG1_PEI) pointer_hits=69
++0x06: 0xFFF4E8A8 (.tG1_PEI) pointer_hits=1
++0x0A: 0xFFF4E8F3 (.tG1_PEI) pointer_hits=1
++0x0E: 0xFFF4EC3A (.tG1_PEI) pointer_hits=1
++0x12: 0xFFF4E92B (.tG1_PEI) pointer_hits=1
++0x16: 0xFFF4ED7A (.tG1_PEI) pointer_hits=1
++0x1A: 0xFFF4E997 (.tG1_PEI) pointer_hits=1
++0x1E: 0xFFF4EA7C (.tG1_PEI) pointer_hits=1
++0x22: 0xFFF4EAC4 (.tG1_PEI) pointer_hits=1
+
+## Producer Calls Into Selected Service Table
+
+| Callsite | Operation | Meaning |
+|---|---|---|
+| `0xFFF4CFBE` | `0xFFF49A34(0xFFF7E698, &service, ctx)` | Select service table from shared descriptor. |
+| `0xFFF4CFF5` | `call [service + 0x1E]` | Producer callback fills max/current P-state fields. |
+| `0xFFF4D149` | `0xFFF49A34(0xFFF7E698, &service, ctx)` | Outer producer selects the same descriptor. |
+| `0xFFF4D190` | `call [service + 0x1E]` | Outer producer computes descriptor length/count before `0xFFF4AADD`. |
+| `0xFFF8D11E` | service table `0xFFF8D108 + 0x16` | Constructor pointer `0xFFF7371A`; still a function pointer, not P4 data. |
+
+## descriptor_lookup_core_fff499b1 VA 0xFFF499B1 raw 0x009925 section .tG1_PEI size 0x60
+0xFFF499B1: push     ebp
+0xFFF499B2: mov      ebp, esp
+0xFFF499B4: mov      eax, dword ptr [ebp + 8]
+0xFFF499B7: mov      edx, dword ptr [eax + 1]
+0xFFF499BA: mov      al, byte ptr [eax]
+0xFFF499BC: push     ebx
+0xFFF499BD: push     esi
+0xFFF499BE: xor      bl, bl
+0xFFF499C0: push     edi
+0xFFF499C1: mov      byte ptr [ebp + 0xb], al
+0xFFF499C4: test     al, al
+0xFFF499C6: jbe      0xfff499ec
+0xFFF499C8: mov      eax, dword ptr [ebp + 0xc]
+0xFFF499CB: mov      esi, dword ptr [eax]
+0xFFF499CD: mov      edi, dword ptr [eax + 4]
+0xFFF499D0: movzx    ecx, bl
+0xFFF499D3: imul     ecx, ecx, 0xc
+0xFFF499D6: mov      eax, dword ptr [ecx + edx]
+0xFFF499D9: mov      ecx, dword ptr [ecx + edx + 4]
+0xFFF499DD: and      eax, esi
+0xFFF499DF: and      ecx, edi
+0xFFF499E1: or       eax, ecx
+0xFFF499E3: jne      0xfff499f7
+0xFFF499E5: inc      bl
+0xFFF499E7: cmp      bl, byte ptr [ebp + 0xb]
+0xFFF499EA: jb       0xfff499d0
+0xFFF499EC: mov      eax, dword ptr [ebp + 0x10]
+0xFFF499EF: and      dword ptr [eax], 0
+0xFFF499F2: pop      edi
+0xFFF499F3: pop      esi
+0xFFF499F4: pop      ebx
+0xFFF499F5: pop      ebp
+0xFFF499F6: ret
+0xFFF499F7: mov      ecx, dword ptr [ebp + 0x10]
+0xFFF499FA: movzx    eax, bl
+0xFFF499FD: imul     eax, eax, 0xc
+0xFFF49A00: mov      eax, dword ptr [eax + edx + 8]
+0xFFF49A04: mov      dword ptr [ecx], eax
+0xFFF49A06: jmp      0xfff499f2
+0xFFF49A08: push     ebp
+0xFFF49A09: mov      ebp, esp
+0xFFF49A0B: sub      esp, 0x10
+0xFFF49A0E: push     dword ptr [ebp + 0x14]
+
+## producer_callback_fff4cf9c_service_select VA 0xFFF4CF9C raw 0x00CF10 section .tG1_PEI size 0x80
+0xFFF4CF9C: push     ebp
+0xFFF4CF9D: mov      ebp, esp
+0xFFF4CF9F: sub      esp, 0x40
+0xFFF4CFA2: push     ebx
+0xFFF4CFA3: mov      ebx, dword ptr [ebp + 0xc]
+0xFFF4CFA6: push     esi
+0xFFF4CFA7: push     edi
+0xFFF4CFA8: push     ebx
+0xFFF4CFA9: lea      eax, [ebp - 0xc]
+0xFFF4CFAC: push     eax
+0xFFF4CFAD: xor      edi, edi
+0xFFF4CFAF: push     0xfff7e698
+0xFFF4CFB4: mov      dword ptr [ebp - 0x14], edi
+0xFFF4CFB7: mov      dword ptr [ebp - 0xc], edi
+0xFFF4CFBA: mov      byte ptr [ebp - 1], 0
+0xFFF4CFBE: call     0xfff49a34
+0xFFF4CFC3: lea      eax, [ebp - 0x18]
+0xFFF4CFC6: push     ebx
+0xFFF4CFC7: push     eax
+0xFFF4CFC8: call     0xfff4762c
+0xFFF4CFCD: mov      al, byte ptr [ebp - 0x18]
+0xFFF4CFD0: mov      esi, dword ptr [ebp + 8]
+0xFFF4CFD3: mov      byte ptr [esi + 1], al
+0xFFF4CFD6: push     ebx
+0xFFF4CFD7: lea      eax, [ebp - 0x18]
+0xFFF4CFDA: push     eax
+0xFFF4CFDB: lea      eax, [ebp - 0x28]
+0xFFF4CFDE: push     eax
+0xFFF4CFDF: call     0xfff47c03
+0xFFF4CFE4: push     ebx
+0xFFF4CFE5: lea      eax, [ebp - 2]
+0xFFF4CFE8: push     eax
+0xFFF4CFE9: lea      eax, [ebp - 8]
+0xFFF4CFEC: push     eax
+0xFFF4CFED: mov      eax, dword ptr [ebp - 0xc]
+0xFFF4CFF0: push     eax
+0xFFF4CFF1: mov      byte ptr [esi + 7], 1
+0xFFF4CFF5: call     dword ptr [eax + 0x1e]
+0xFFF4CFF8: mov      al, byte ptr [ebp - 8]
+0xFFF4CFFB: mov      byte ptr [esi + 0xb], al
+0xFFF4CFFE: mov      al, byte ptr [ebp - 2]
+0xFFF4D001: mov      dword ptr [ebp + 8], edi
+0xFFF4D004: add      esp, 0x30
+0xFFF4D007: mov      byte ptr [esi + 0xf], al
+0xFFF4D00A: lea      edi, [esi + 0x18]
+0xFFF4D00D: push     ebx
+0xFFF4D00E: lea      eax, [ebp - 0x24]
+0xFFF4D011: push     eax
+0xFFF4D012: lea      eax, [ebp - 0x20]
+0xFFF4D015: push     eax
+0xFFF4D016: lea      eax, [ebp - 0x1c]
+0xFFF4D019: push     eax
+
+## outer_producer_fff4d12f_service_select VA 0xFFF4D12F raw 0x00D0A3 section .tG1_PEI size 0x80
+0xFFF4D12F: push     ebp
+0xFFF4D130: mov      ebp, esp
+0xFFF4D132: sub      esp, 0x38
+0xFFF4D135: and      dword ptr [ebp - 0x10], 0
+0xFFF4D139: push     ebx
+0xFFF4D13A: mov      ebx, dword ptr [ebp + 8]
+0xFFF4D13D: push     esi
+0xFFF4D13E: push     edi
+0xFFF4D13F: push     ebx
+0xFFF4D140: lea      eax, [ebp - 0x10]
+0xFFF4D143: push     eax
+0xFFF4D144: push     0xfff7e698
+0xFFF4D149: call     0xfff49a34
+0xFFF4D14E: mov      esi, dword ptr [ebp + 0xc]
+0xFFF4D151: xor      edi, edi
+0xFFF4D153: lea      eax, [esi + 8]
+0xFFF4D156: inc      edi
+0xFFF4D157: mov      dword ptr [ebp - 0xc], edi
+0xFFF4D15A: mov      dword ptr [ebp - 8], eax
+0xFFF4D15D: call     0xfff474f6
+0xFFF4D162: mov      dword ptr [ebp - 0x20], eax
+0xFFF4D165: lea      eax, [ebp - 0x24]
+0xFFF4D168: push     eax
+0xFFF4D169: lea      eax, [ebp - 0x1c]
+0xFFF4D16C: push     eax
+0xFFF4D16D: push     eax
+0xFFF4D16E: lea      eax, [ebp - 0x18]
+0xFFF4D171: push     eax
+0xFFF4D172: push     ebx
+0xFFF4D173: call     0xfff47af3
+0xFFF4D178: and      dword ptr [ebp - 0x14], 0
+0xFFF4D17C: push     ebx
+0xFFF4D17D: lea      eax, [ebp - 1]
+0xFFF4D180: push     eax
+0xFFF4D181: lea      eax, [ebp - 0x14]
+0xFFF4D184: push     eax
+0xFFF4D185: mov      eax, dword ptr [ebp - 0x10]
+0xFFF4D188: push     eax
+0xFFF4D189: mov      dword ptr [esi + 4], 0x30
+0xFFF4D190: call     dword ptr [eax + 0x1e]
+0xFFF4D193: mov      eax, dword ptr [ebp - 0x14]
+0xFFF4D196: inc      eax
+0xFFF4D197: imul     eax, eax, 6
+0xFFF4D19A: mov      word ptr [ebp - 0x34], ax
+0xFFF4D19E: mov      eax, dword ptr [ebp - 8]
+0xFFF4D1A1: push     0
+0xFFF4D1A3: mov      dword ptr [ebp - 0x32], eax
+0xFFF4D1A6: lea      eax, [ebp - 0x38]
+0xFFF4D1A9: push     ebx
+0xFFF4D1AA: push     eax
+
+## Actionability
+
+`SERVICE_DESCRIPTOR_DECODED` is met.
+
+`TABLE_TARGET_FOUND` is not met for a P4-safe edit: the decoded table is a service/function dispatch table, not static P0-P4 voltage records.
+
+`BYTE_READY_HUMAN_REVIEW` is not met: no P4-only byte, no P0-P3 unchanged proof, no checksum proof, and no parse-clean no-op rebuild proof exist.
+
+## Next Exact RE Step
+
+Trace service table `0xFFF8D108` entries, especially `+0x12`, `+0x16`, `+0x1A`, `+0x1E`, and `+0x22`, to determine whether any entry writes or sources `selected_base + pstate*0x18 + 0x1C` from static data, heap records, or MSR/service reads.

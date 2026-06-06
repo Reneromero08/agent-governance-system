@@ -1,0 +1,244 @@
+# AmdProcessorInitPeim record write map for 0xFFF4CF9C
+
+Generated from extracted PE32 body only. No patch bytes, no image writes, no hardware access.
+
+## Producer window VA 0xFFF4CF9C raw 0x00CF10 section .tG1_PEI
+
+0xFFF4CF9C: push     ebp
+0xFFF4CF9D: mov      ebp, esp
+0xFFF4CF9F: sub      esp, 0x40
+0xFFF4CFA2: push     ebx
+0xFFF4CFA3: mov      ebx, dword ptr [ebp + 0xc]
+0xFFF4CFA6: push     esi
+0xFFF4CFA7: push     edi
+0xFFF4CFA8: push     ebx
+0xFFF4CFA9: lea      eax, [ebp - 0xc]
+0xFFF4CFAC: push     eax
+0xFFF4CFAD: xor      edi, edi
+0xFFF4CFAF: push     0xfff7e698
+0xFFF4CFB4: mov      dword ptr [ebp - 0x14], edi
+0xFFF4CFB7: mov      dword ptr [ebp - 0xc], edi
+0xFFF4CFBA: mov      byte ptr [ebp - 1], 0
+0xFFF4CFBE: call     0xfff49a34
+0xFFF4CFC3: lea      eax, [ebp - 0x18]
+0xFFF4CFC6: push     ebx
+0xFFF4CFC7: push     eax
+0xFFF4CFC8: call     0xfff4762c
+0xFFF4CFCD: mov      al, byte ptr [ebp - 0x18]
+0xFFF4CFD0: mov      esi, dword ptr [ebp + 8]
+0xFFF4CFD3: mov      byte ptr [esi + 1], al
+0xFFF4CFD6: push     ebx
+0xFFF4CFD7: lea      eax, [ebp - 0x18]
+0xFFF4CFDA: push     eax
+0xFFF4CFDB: lea      eax, [ebp - 0x28]
+0xFFF4CFDE: push     eax
+0xFFF4CFDF: call     0xfff47c03
+0xFFF4CFE4: push     ebx
+0xFFF4CFE5: lea      eax, [ebp - 2]
+0xFFF4CFE8: push     eax
+0xFFF4CFE9: lea      eax, [ebp - 8]
+0xFFF4CFEC: push     eax
+0xFFF4CFED: mov      eax, dword ptr [ebp - 0xc]
+0xFFF4CFF0: push     eax
+0xFFF4CFF1: mov      byte ptr [esi + 7], 1
+0xFFF4CFF5: call     dword ptr [eax + 0x1e]
+0xFFF4CFF8: mov      al, byte ptr [ebp - 8]
+0xFFF4CFFB: mov      byte ptr [esi + 0xb], al
+0xFFF4CFFE: mov      al, byte ptr [ebp - 2]
+0xFFF4D001: mov      dword ptr [ebp + 8], edi
+0xFFF4D004: add      esp, 0x30
+0xFFF4D007: mov      byte ptr [esi + 0xf], al
+0xFFF4D00A: lea      edi, [esi + 0x18]
+0xFFF4D00D: push     ebx
+0xFFF4D00E: lea      eax, [ebp - 0x24]
+0xFFF4D011: push     eax
+0xFFF4D012: lea      eax, [ebp - 0x20]
+0xFFF4D015: push     eax
+0xFFF4D016: lea      eax, [ebp - 0x1c]
+0xFFF4D019: push     eax
+0xFFF4D01A: lea      eax, [ebp - 1]
+0xFFF4D01D: push     eax
+0xFFF4D01E: push     dword ptr [ebp + 8]
+0xFFF4D021: mov      eax, dword ptr [ebp - 0xc]
+0xFFF4D024: push     eax
+0xFFF4D025: call     dword ptr [eax + 0x22]
+0xFFF4D028: push     ebx
+0xFFF4D029: push     0x18
+0xFFF4D02B: lea      eax, [edi - 8]
+0xFFF4D02E: push     0
+0xFFF4D030: push     eax
+0xFFF4D031: call     0xfff493e0
+0xFFF4D036: add      esp, 0x2c
+0xFFF4D039: cmp      byte ptr [ebp - 1], 0
+0xFFF4D03D: je       0xfff4d079
+0xFFF4D03F: push     ebx
+0xFFF4D040: lea      eax, [edi - 4]
+0xFFF4D043: push     eax
+0xFFF4D044: push     dword ptr [ebp + 8]
+0xFFF4D047: mov      eax, dword ptr [ebp - 0xc]
+0xFFF4D04A: push     eax
+0xFFF4D04B: call     dword ptr [eax + 0x12]
+0xFFF4D04E: mov      eax, dword ptr [ebp - 0xc]
+0xFFF4D051: push     ebx
+0xFFF4D052: push     edi
+0xFFF4D053: push     dword ptr [ebp + 8]
+0xFFF4D056: push     eax
+0xFFF4D057: call     dword ptr [eax + 0x1a]
+0xFFF4D05A: mov      eax, dword ptr [ebp - 0x1c]
+0xFFF4D05D: mov      dword ptr [edi + 4], eax
+0xFFF4D060: mov      eax, dword ptr [ebp - 0x20]
+0xFFF4D063: mov      dword ptr [edi + 8], eax
+0xFFF4D066: mov      eax, dword ptr [ebp - 0x24]
+0xFFF4D069: add      esp, 0x20
+0xFFF4D06C: inc      dword ptr [ebp - 0x14]
+0xFFF4D06F: mov      dword ptr [edi + 0xc], eax
+0xFFF4D072: mov      dword ptr [edi - 8], 1
+0xFFF4D079: inc      dword ptr [ebp + 8]
+0xFFF4D07C: mov      eax, dword ptr [ebp + 8]
+0xFFF4D07F: add      edi, 0x18
+0xFFF4D082: cmp      eax, dword ptr [ebp - 8]
+0xFFF4D085: jbe      0xfff4d00d
+0xFFF4D087: cmp      dword ptr [ebp - 0x14], 1
+0xFFF4D08B: ja       0xfff4d091
+0xFFF4D08D: mov      byte ptr [esi + 7], 0
+0xFFF4D091: lea      eax, [ebp - 0x2c]
+0xFFF4D094: push     eax
+0xFFF4D095: lea      eax, [ebp - 0x18]
+0xFFF4D098: push     eax
+0xFFF4D099: lea      eax, [ebp - 0x28]
+0xFFF4D09C: push     eax
+0xFFF4D09D: lea      eax, [ebp - 0x30]
+0xFFF4D0A0: push     eax
+0xFFF4D0A1: push     ebx
+0xFFF4D0A2: call     0xfff47af3
+0xFFF4D0A7: lea      eax, [ebp - 0x2c]
+0xFFF4D0AA: push     eax
+0xFFF4D0AB: lea      eax, [ebp - 0x10]
+0xFFF4D0AE: push     eax
+0xFFF4D0AF: xor      edi, edi
+0xFFF4D0B1: push     edi
+0xFFF4D0B2: push     dword ptr [ebp - 0x30]
+0xFFF4D0B5: push     ebx
+0xFFF4D0B6: call     0xfff4794d
+0xFFF4D0BB: mov      eax, dword ptr [ebp - 0x10]
+0xFFF4D0BE: push     ebx
+0xFFF4D0BF: and      eax, 0xffffb0e8
+0xFFF4D0C4: lea      ecx, [ebp - 8]
+0xFFF4D0C7: or       eax, 0x30e8
+0xFFF4D0CC: push     ecx
+0xFFF4D0CD: push     eax
+0xFFF4D0CE: push     3
+0xFFF4D0D0: mov      dword ptr [ebp - 0x10], eax
+0xFFF4D0D3: mov      dword ptr [ebp - 8], edi
+0xFFF4D0D6: call     0xfff49445
+0xFFF4D0DB: mov      eax, dword ptr [ebp - 8]
+0xFFF4D0DE: shr      eax, 0xa
+0xFFF4D0E1: and      al, 1
+0xFFF4D0E3: mov      byte ptr [esi + 0xd], al
+0xFFF4D0E6: mov      eax, dword ptr [ebp - 0x10]
+0xFFF4D0E9: push     ebx
+0xFFF4D0EA: and      eax, 0xfffff064
+0xFFF4D0EF: lea      ecx, [ebp - 8]
+0xFFF4D0F2: or       eax, 0x64
+0xFFF4D0F5: push     ecx
+0xFFF4D0F6: push     eax
+0xFFF4D0F7: push     3
+0xFFF4D0F9: mov      dword ptr [ebp - 8], edi
+0xFFF4D0FC: mov      dword ptr [ebp - 0x10], eax
+0xFFF4D0FF: call     0xfff49445
+0xFFF4D104: mov      eax, dword ptr [ebp - 8]
+0xFFF4D107: shr      eax, 0x1c
+0xFFF4D10A: and      al, 7
+0xFFF4D10C: add      esp, 0x48
+0xFFF4D10F: mov      byte ptr [esi + 0xc], al
+0xFFF4D112: push     ebx
+0xFFF4D113: lea      eax, [ebp - 0x40]
+0xFFF4D116: push     eax
+0xFFF4D117: push     1
+0xFFF4D119: call     0xfff44eac
+0xFFF4D11E: mov      eax, dword ptr [ebp - 0x3c]
+0xFFF4D121: add      esp, 0xc
+0xFFF4D124: shr      eax, 0x18
+0xFFF4D127: pop      edi
+0xFFF4D128: mov      byte ptr [esi + 0xe], al
+0xFFF4D12B: pop      esi
+0xFFF4D12C: pop      ebx
+0xFFF4D12D: leave
+0xFFF4D12E: ret
+0xFFF4D12F: push     ebp
+0xFFF4D130: mov      ebp, esp
+0xFFF4D132: sub      esp, 0x38
+0xFFF4D135: and      dword ptr [ebp - 0x10], 0
+0xFFF4D139: push     ebx
+
+## Relevant writes / sources
+0xFFF4CFBE: call     0xfff49a34
+0xFFF4CFC8: call     0xfff4762c
+0xFFF4CFD3: mov      byte ptr [esi + 1], al
+0xFFF4CFDF: call     0xfff47c03
+0xFFF4CFE5: lea      eax, [ebp - 2]
+0xFFF4CFE9: lea      eax, [ebp - 8]
+0xFFF4CFF1: mov      byte ptr [esi + 7], 1
+0xFFF4CFF5: call     dword ptr [eax + 0x1e]
+0xFFF4CFF8: mov      al, byte ptr [ebp - 8]
+0xFFF4CFFB: mov      byte ptr [esi + 0xb], al
+0xFFF4CFFE: mov      al, byte ptr [ebp - 2]
+0xFFF4D007: mov      byte ptr [esi + 0xf], al
+0xFFF4D00A: lea      edi, [esi + 0x18]
+0xFFF4D00E: lea      eax, [ebp - 0x24]
+0xFFF4D012: lea      eax, [ebp - 0x20]
+0xFFF4D025: call     dword ptr [eax + 0x22]
+0xFFF4D02B: lea      eax, [edi - 8]
+0xFFF4D031: call     0xfff493e0
+0xFFF4D040: lea      eax, [edi - 4]
+0xFFF4D04B: call     dword ptr [eax + 0x12]
+0xFFF4D057: call     dword ptr [eax + 0x1a]
+0xFFF4D05D: mov      dword ptr [edi + 4], eax
+0xFFF4D060: mov      eax, dword ptr [ebp - 0x20]
+0xFFF4D063: mov      dword ptr [edi + 8], eax
+0xFFF4D066: mov      eax, dword ptr [ebp - 0x24]
+0xFFF4D06F: mov      dword ptr [edi + 0xc], eax
+0xFFF4D072: mov      dword ptr [edi - 8], 1
+0xFFF4D082: cmp      eax, dword ptr [ebp - 8]
+0xFFF4D08D: mov      byte ptr [esi + 7], 0
+0xFFF4D0A2: call     0xfff47af3
+0xFFF4D0B6: call     0xfff4794d
+0xFFF4D0C4: lea      ecx, [ebp - 8]
+0xFFF4D0D3: mov      dword ptr [ebp - 8], edi
+0xFFF4D0D6: call     0xfff49445
+0xFFF4D0DB: mov      eax, dword ptr [ebp - 8]
+0xFFF4D0E3: mov      byte ptr [esi + 0xd], al
+0xFFF4D0EF: lea      ecx, [ebp - 8]
+0xFFF4D0F9: mov      dword ptr [ebp - 8], edi
+0xFFF4D0FF: call     0xfff49445
+0xFFF4D104: mov      eax, dword ptr [ebp - 8]
+0xFFF4D10F: mov      byte ptr [esi + 0xc], al
+0xFFF4D119: call     0xfff44eac
+0xFFF4D11E: mov      eax, dword ptr [ebp - 0x3c]
+0xFFF4D128: mov      byte ptr [esi + 0xe], al
+
+## Decoded Write Map
+
+| Destination | Producer evidence | Source classification |
+|---|---|---|
+| `record + 0x01` | `mov byte ptr [esi + 1], al` after `0xFFF4762C` | platform/topology helper output |
+| `record + 0x07` | `mov byte ptr [esi + 7], 1` | literal enable/marker |
+| `record + 0x0B` | `mov byte ptr [esi + 0xb], al` after `call [service + 0x1E]` | service/MSR-derived max P-state byte |
+| `record + 0x0F` | `mov byte ptr [esi + 0xf], al` after `call [service + 0x1E]` | service/MSR-derived current/default P-state byte |
+| `entry base` | `edi = esi + 0x18` | per-P-state entry cursor |
+| `entry + 0x04` | write after helper/service calls in loop | service-derived per-P-state field |
+| `entry + 0x08` | write after helper/service calls in loop | service-derived per-P-state field |
+| `entry + 0x0C` | write after helper/service calls in loop | service-derived per-P-state field |
+| `record + 0x02` length | outer `0xFFF4D12F` writes `0x28 + max_pstate*0x18` | computed runtime length |
+
+## P4 Field Relevance
+
+The constructor consumes `selected_base + pstate*0x18 + 0x1C`. In the producer record shape, that corresponds to the per-P-state entry at `entry + 0x04` when `entry = selected_base + 0x18 + pstate*0x18`. The producer does not expose a static P4 byte at this offset in the PE32 body; it fills entry fields through service/helper calls after selecting the service table from descriptor `0xFFF7E698`.
+
+## Actionability
+
+`RECORD_WRITE_MAP_ADVANCED` is met.
+
+`TABLE_TARGET_FOUND` is not met for a P4-safe firmware edit because the P4 VID-like byte maps to a runtime per-entry field filled by service/helper output, not a static P4 row.
+
+`BYTE_READY_HUMAN_REVIEW` is not met.

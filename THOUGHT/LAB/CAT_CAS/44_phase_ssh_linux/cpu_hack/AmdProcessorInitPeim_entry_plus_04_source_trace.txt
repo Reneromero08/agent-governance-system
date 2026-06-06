@@ -1,0 +1,180 @@
+# AmdProcessorInitPeim entry +0x04 source trace
+
+Generated from extracted PE32 body only. No patch bytes, no image writes, no hardware access.
+
+## Corrected Producer Argument Map
+
+At `0xFFF4D00D-0xFFF4D025`, producer `0xFFF4CF9C` calls service vtable `+0x22` (`0xFFF7348D`) with seven arguments:
+
+```text
+push ebx              ; arg_20 = context
+push &local_24        ; arg_1C -> later copied to entry +0x0C
+push &local_20        ; arg_18 -> later copied to entry +0x08
+push &local_1C        ; arg_14 -> later copied to entry +0x04
+push &local_01        ; arg_10 -> enable/valid flag
+push pstate_index     ; arg_0C
+push service          ; arg_08
+call [service + 0x22] ; 0xFFF7348D
+```
+
+After that call, the producer copies:
+
+```text
+0xFFF4D05D: entry +0x04 = local_1C
+0xFFF4D063: entry +0x08 = local_20
+0xFFF4D06F: entry +0x0C = local_24
+```
+
+Therefore constructor `selected_base + pstate*0x18 + 0x1C` maps to `entry +0x04`, and that maps specifically to service `+0x22` output argument `arg_14`.
+
+## producer_loop_call_and_copy VA 0xFFF4D00D raw 0x00CF81 section .tG1_PEI size 0x70
+0xFFF4D00D: push     ebx
+0xFFF4D00E: lea      eax, [ebp - 0x24]
+0xFFF4D011: push     eax
+0xFFF4D012: lea      eax, [ebp - 0x20]
+0xFFF4D015: push     eax
+0xFFF4D016: lea      eax, [ebp - 0x1c]
+0xFFF4D019: push     eax
+0xFFF4D01A: lea      eax, [ebp - 1]
+0xFFF4D01D: push     eax
+0xFFF4D01E: push     dword ptr [ebp + 8]
+0xFFF4D021: mov      eax, dword ptr [ebp - 0xc]
+0xFFF4D024: push     eax
+0xFFF4D025: call     dword ptr [eax + 0x22]
+0xFFF4D028: push     ebx
+0xFFF4D029: push     0x18
+0xFFF4D02B: lea      eax, [edi - 8]
+0xFFF4D02E: push     0
+0xFFF4D030: push     eax
+0xFFF4D031: call     0xfff493e0
+0xFFF4D036: add      esp, 0x2c
+0xFFF4D039: cmp      byte ptr [ebp - 1], 0
+0xFFF4D03D: je       0xfff4d079
+0xFFF4D03F: push     ebx
+0xFFF4D040: lea      eax, [edi - 4]
+0xFFF4D043: push     eax
+0xFFF4D044: push     dword ptr [ebp + 8]
+0xFFF4D047: mov      eax, dword ptr [ebp - 0xc]
+0xFFF4D04A: push     eax
+0xFFF4D04B: call     dword ptr [eax + 0x12]
+0xFFF4D04E: mov      eax, dword ptr [ebp - 0xc]
+0xFFF4D051: push     ebx
+0xFFF4D052: push     edi
+0xFFF4D053: push     dword ptr [ebp + 8]
+0xFFF4D056: push     eax
+0xFFF4D057: call     dword ptr [eax + 0x1a]
+0xFFF4D05A: mov      eax, dword ptr [ebp - 0x1c]
+0xFFF4D05D: mov      dword ptr [edi + 4], eax
+0xFFF4D060: mov      eax, dword ptr [ebp - 0x20]
+0xFFF4D063: mov      dword ptr [edi + 8], eax
+0xFFF4D066: mov      eax, dword ptr [ebp - 0x24]
+0xFFF4D069: add      esp, 0x20
+0xFFF4D06C: inc      dword ptr [ebp - 0x14]
+0xFFF4D06F: mov      dword ptr [edi + 0xc], eax
+0xFFF4D072: mov      dword ptr [edi - 8], 1
+0xFFF4D079: inc      dword ptr [ebp + 8]
+
+### Interesting
+0xFFF4D016: lea      eax, [ebp - 0x1c]
+0xFFF4D021: mov      eax, dword ptr [ebp - 0xc]
+0xFFF4D025: call     dword ptr [eax + 0x22]
+0xFFF4D031: call     0xfff493e0
+0xFFF4D047: mov      eax, dword ptr [ebp - 0xc]
+0xFFF4D04B: call     dword ptr [eax + 0x12]
+0xFFF4D04E: mov      eax, dword ptr [ebp - 0xc]
+0xFFF4D057: call     dword ptr [eax + 0x1a]
+0xFFF4D05A: mov      eax, dword ptr [ebp - 0x1c]
+0xFFF4D05D: mov      dword ptr [edi + 4], eax
+
+## service_plus_0x22_fff7348d VA 0xFFF7348D raw 0x033401 section .tG3_DXE size 0xA0
+0xFFF7348D: push     ebp
+0xFFF7348E: mov      ebp, esp
+0xFFF73490: sub      esp, 0x10
+0xFFF73493: push     esi
+0xFFF73494: push     edi
+0xFFF73495: push     dword ptr [ebp + 0x20]
+0xFFF73498: lea      eax, [ebp - 4]
+0xFFF7349B: push     eax
+0xFFF7349C: call     dword ptr [0xfff7f56a]
+0xFFF734A2: mov      eax, dword ptr [ebp - 4]
+0xFFF734A5: push     dword ptr [ebp + 0x20]
+0xFFF734A8: and      eax, 0xffffc15c
+0xFFF734AD: lea      ecx, [ebp - 8]
+0xFFF734B0: or       eax, 0x415c
+0xFFF734B5: push     ecx
+0xFFF734B6: push     eax
+0xFFF734B7: push     3
+0xFFF734B9: mov      dword ptr [ebp - 4], eax
+0xFFF734BC: call     0xfff49445
+0xFFF734C1: push     dword ptr [ebp + 0x20]
+0xFFF734C4: mov      esi, dword ptr [ebp + 0xc]
+0xFFF734C7: lea      eax, [ebp - 0x10]
+0xFFF734CA: push     eax
+0xFFF734CB: lea      eax, [esi - 0x3ffeff9c]
+0xFFF734D1: push     eax
+0xFFF734D2: call     0xfff44e76
+0xFFF734D7: mov      edi, dword ptr [ebp - 0xc]
+0xFFF734DA: mov      ecx, dword ptr [ebp + 0x1c]
+0xFFF734DD: mov      eax, edi
+0xFFF734DF: shr      eax, 0x1f
+0xFFF734E2: add      esp, 0x24
+0xFFF734E5: xor      edx, edx
+0xFFF734E7: mov      dword ptr [ecx], esi
+0xFFF734E9: cmp      eax, 1
+0xFFF734EC: jne      0xfff7350f
+0xFFF734EE: test     edx, edx
+0xFFF734F0: jne      0xfff7350f
+0xFFF734F2: mov      edx, dword ptr [ebp + 0x10]
+0xFFF734F5: mov      byte ptr [edx], al
+0xFFF734F7: mov      eax, dword ptr [ebp - 8]
+0xFFF734FA: shr      eax, 2
+0xFFF734FD: and      eax, 7
+0xFFF73500: cmp      esi, eax
+0xFFF73502: jae      0xfff73509
+0xFFF73504: mov      byte ptr [edx], 0
+0xFFF73507: jmp      0xfff73514
+0xFFF73509: sub      esi, eax
+0xFFF7350B: mov      dword ptr [ecx], esi
+0xFFF7350D: jmp      0xfff73514
+0xFFF7350F: mov      eax, dword ptr [ebp + 0x10]
+0xFFF73512: mov      byte ptr [eax], dl
+0xFFF73514: movzx    eax, byte ptr [ebp - 0xc]
+0xFFF73518: mov      ecx, dword ptr [ebp + 0x14]
+0xFFF7351B: shr      edi, 8
+0xFFF7351E: mov      dword ptr [ecx], eax
+0xFFF73520: mov      eax, dword ptr [ebp + 0x18]
+0xFFF73523: and      edi, 3
+0xFFF73526: mov      dword ptr [eax], edi
+0xFFF73528: pop      edi
+0xFFF73529: xor      eax, eax
+0xFFF7352B: pop      esi
+0xFFF7352C: leave
+
+### Interesting
+0xFFF7349C: call     dword ptr [0xfff7f56a]
+0xFFF734BC: call     0xfff49445
+0xFFF734D2: call     0xfff44e76
+0xFFF734D7: mov      edi, dword ptr [ebp - 0xc]
+0xFFF73514: movzx    eax, byte ptr [ebp - 0xc]
+0xFFF73518: mov      ecx, dword ptr [ebp + 0x14]
+
+## Source Classification For Entry +0x04
+
+Inside `0xFFF7348D`, output `arg_14` is written at `0xFFF7351E` from `movzx eax, byte ptr [ebp - 0x0C]`. That local is populated by `0xFFF44E76` reading an address derived from the P-state index:
+
+```text
+0xFFF734CB: eax = pstate_index - 0x3FFEFF9C
+0xFFF734D2: call 0xFFF44E76
+0xFFF73514: eax = byte [ebp - 0x0C]
+0xFFF7351E: *arg_14 = eax
+```
+
+The same helper also reads a PCI/config-derived value through `0xFFF7F56A` and `0xFFF49445`, but the byte copied to producer `entry +0x04` is from the `0xFFF44E76` service/MSR-style read path, not from a static P-state table row.
+
+## Actionability
+
+`ENTRY_PLUS_04_SOURCE_TRACED` is met.
+
+`TABLE_TARGET_FOUND` remains not met: the constructor P4 VID-like byte maps to a runtime output from `0xFFF7348D`, not an editable static P4-only byte.
+
+`BYTE_READY_HUMAN_REVIEW` remains not met: no P4-only static offset, no no-op rebuild proof, and no checksum proof exist.
