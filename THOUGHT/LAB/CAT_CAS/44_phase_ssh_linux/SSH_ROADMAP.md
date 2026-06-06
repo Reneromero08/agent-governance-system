@@ -152,7 +152,7 @@ python3 session_scripts/msr_p4_readonly_observer.py --cores 0-5 --samples 100 --
 
 ---
 
-## Phase 2: The Phase-Locked Oscillator Network — CLOSED FOR SOFTWARE ROUTES
+## Phase 2: The Phase-Locked Oscillator Network — HITTING EVERY WALL, STILL SWINGING (2A software-visible routes exhausted, 2B black-box attractor approach added 2026-06-05)
 
 **Objective:** Demonstrate that multiple cores at different frequencies produce measurable coupling via the shared power grid, and measure the coupling channel characteristics.
 
@@ -204,6 +204,185 @@ python3 session_scripts/msr_p4_readonly_observer.py --cores 0-5 --samples 100 --
 ### 2.A ADDENDUM: Operational Definition of Phase (GPT)
 
 "Phase" must be defined as: **angle of dominant periodic component extracted from timestamp-delta spectrum, relative to the Phase Master workload.** No theoretical phase. Only measured phase. This keeps us honest.
+
+---
+
+## Phase 2B: Black-Box Attractor Computation
+
+**Objective:** Use the Phenom II as a black-box attractor substrate. Instead of watching phase lock happen (Phase 2A), encode small Ising/QUBO/constraint problems into shared tape/cache/core layouts, let the system run, read the final state, and test whether answer distributions beat nulls and baselines. Phase 2B asks: can hidden substrate dynamics produce useful final attractor states without direct phase observation?
+
+### 2B.0 Definitions
+
+#### 2B-Passive: Hidden-Attractor Test
+
+Test whether hardware-mediated interactions create answer bias.
+
+**Allowed:**
+- Shared L3 catalytic tape
+- Cache coherence / MESI contention
+- Timing races
+- Lock-free or atomic shared-state interactions
+- Core affinity / DID frequency settings
+- Phase/complex/tape encodings
+- Final-state scoring after the run
+
+**Forbidden inside the worker:**
+- Explicit energy minimization
+- Explicit local-field Ising update
+- Brute force
+- Simulated annealing
+- Greedy descent
+- Anything that uses J_ij to decide the correct flip direction
+
+**Valid passive claim:** The shared hardware substrate produced answer distributions statistically better than nulls despite workers not knowing the optimization gradient.
+
+#### 2B-Active: Catalytic/Reversible Ising Solver
+
+Build a useful reversible/catalytic optimization solver.
+
+**Allowed:**
+- Local-field updates
+- Reversible operator schedules
+- Energy-aware spin flips
+- Simulated annealing variants
+- Oracle-style path restoration
+
+**Classification:** This is useful and belongs as a Phase 3 bridge/application. It does not prove hidden Kuramoto unless it beats matched active baselines in a way tied to substrate conditions.
+
+### 2B.1 Problem Suite Generation — COMPLETE (2026-06-05)
+
+- [x] Generated 144 deterministic Ising problems: 4 sizes × 4 topologies × 3 strengths × 3 instances
+- [x] Sizes: 4, 8, 12, 16 spins
+- [x] Topologies: linear, grid, random, full
+- [x] Coupling strengths: 1, 2, 3
+- [x] All ground truths known by brute force
+- [x] Deterministic seeds for reproducibility
+- [x] Output data: `/tmp/ising_problems.json`
+
+### 2B.2 Passive Hidden-Attractor Harness (Random Flip) — COMPLETE (2026-06-05)
+
+- [x] Implemented contamination-free passive worker with random-flip rule
+- [x] Worker logic: pick two spins, if different flip higher-slot-index, if same flip based on contention counter parity
+- [x] Contamination checklist verified: no J_ij access, no local field, no energy computation, no Metropolis, no hidden solver
+- [x] Tested on 8-spin linear chain (J[i][i+1]=+1, ground energy=-7)
+- [x] Results:
+
+| Condition | Samples | Ground State Hits | Mean Energy |
+|-----------|---------|-------------------|-------------|
+| Shared tape (2 workers) | 200 | 0/200 (0%) | -0.83 |
+| Single worker (null) | 200 | 0/200 (0%) | -3.00 |
+| Independent tapes (null) | 200 | 0/200 (0%) | 3.00 |
+
+- [x] Shared tape did NOT beat single-worker null (-0.83 vs -3.00)
+- [x] Independent tapes mean differs because workers get half iterations (10K vs 20K), producing less-evolved states
+- [x] **Honest negative result:** MESI contention + shared tape interactions don't create measurable energy bias at this passivity level
+- [x] Audit passed: contamination checklist verified, nulls properly constructed, energy scored only after run
+- [x] Source: `session_scripts/phase2b/passive_attractor.c`
+
+**Key finding:** The random-flip passive worker is too weak to couple with the Ising energy landscape. The sweet spot between pure random (too weak) and gradient-aware (cheating) requires workers that react to shared-state patterns without computing J_ij. The Grail 5 wormhole experiment (Exp 32) proved that phase correlations through a shared medium (Q@K^T) compute the same structure as entanglement swapping. The next step: replace random flips with correlation measurements through the shared tape — treating the MESI protocol as the ER bridge and atomic XOR as teleportation.
+
+### 2B.3 Wormhole-Inspired Correlation Attractor [NEXT]
+
+- [ ] Workers compute pairwise spin correlations (si * sj) through shared tape slots
+- [ ] Accumulate correlations via XOR, no spin flipping in first test — measurement only
+- [ ] Compare correlation patterns against Ising coupling structure
+- [ ] Test whether correlation patterns match J_ij better than nulls
+- [ ] If correlation patterns align, add feedback loop where correlations drive spin flips
+- [ ] Output artifact: `PHASE2B_3_WORMHOLE_CORRELATION.md`
+
+### 2B.3 Active Catalytic Ising Solver Track
+
+- [ ] Separately document an active solver using reversible/catalytic operators
+- [ ] This may compute local fields and minimize energy
+- [ ] Treat as Phase 3 bridge / application, not hidden Kuramoto evidence
+- [ ] Output artifact: `PHASE2B_3_ACTIVE_CATALYTIC_ISING.md`
+- [ ] Cross-reference future Phase 3.x expansion if needed
+
+### 2B.4 Null Hierarchy
+
+Required nulls for passive claim:
+
+- [ ] Null 0: random spin configurations
+- [ ] Null 1: single-core same worker
+- [ ] Null 2: two cores with independent tapes
+- [ ] Null 3: shared tape with shuffled problem-to-slot mapping
+- [ ] Null 4: shuffled coupling/layout encoding
+- [ ] Null 5: same schedule but no shared writes
+- [ ] Null 6: same code on non-isolated cores
+- [ ] Null 7: active software baseline clearly labeled as software solver
+- [ ] Output artifact: `PHASE2B_4_NULLS_AND_BASELINES.md`
+
+### 2B.5 Answer-As-Measurement Gate
+
+- [ ] The final answer distribution is the measurement. Do not require direct phase observation
+- [ ] Compare energy distributions, ground-state hit rate, Hamming distance to ground state, and improvement over random
+- [ ] Require repeated trials across multiple problem instances
+- [ ] Require confidence intervals / effect size / statistical summary
+- [ ] Output artifact: `PHASE2B_5_ANSWER_AS_MEASUREMENT.md`
+
+**Acceptance:** A passive Phase 2B effect exists only if the shared-substrate condition beats matched nulls across multiple problems without using explicit optimization logic inside the worker.
+
+### 2B.6 Coupling Channel Matrix
+
+Test channels separately:
+
+- [ ] Shared L3 tape only
+- [ ] Shared tape + atomic contention
+- [ ] Cache-line ping-pong layout
+- [ ] Same-frequency cores
+- [ ] Detuned DID frequencies
+- [ ] Core 5 as passive phase/reference participant
+- [ ] Independent tape null
+- [ ] Output artifact: `PHASE2B_6_CHANNEL_MATRIX.md`
+
+**Do not use:** oscilloscope, logic analyzer, Pi GPIO wiring, motherboard probing, external waveform capture.
+
+### 2B.7 Catalytic Restoration Gate
+
+If catalytic tape is used:
+
+- [ ] Snapshot tape before run
+- [ ] Run forward/passive attractor phase
+- [ ] Extract answer
+- [ ] Reverse/restore if reversible operators are involved
+- [ ] Verify SHA-256 and metadata restoration
+- [ ] Output artifact: `PHASE2B_7_RESTORATION_GATE.md`
+
+Restoration proves catalytic integrity, not Kuramoto by itself.
+
+### 2B.8 Decision Tree
+
+| Status Label | Meaning |
+|---|---|
+| `PHASE2B_NOT_TESTED` | No tests run yet |
+| `PHASE2B_PASSIVE_ATTRACTOR_CANDIDATE` | Passive shared-substrate beats nulls without gradient-aware worker |
+| `PHASE2B_PASSIVE_BASELINE_BEATEN` | Passive result survives full null hierarchy |
+| `PHASE2B_PASSIVE_NULLS_FAILED` | Passive result does not beat nulls |
+| `PHASE2B_REJECTED_SOFTWARE_EXPLAINS` | Active software baseline explains result |
+| `PHASE2B_ACTIVE_CATALYTIC_SOLVER_WORKING` | Active solver works but is not Kuramoto evidence |
+| `PHASE2B_ACTIVE_NOT_KURAMOTO_EVIDENCE` | Active solver exists but does not imply physical coupling |
+| `PHASE2B_NEGATIVE` | No condition beats nulls |
+
+**Decision rules:**
+- If passive shared-substrate beats nulls without gradient-aware worker logic → `PHASE2B_PASSIVE_ATTRACTOR_CANDIDATE`
+- If passive result survives full null hierarchy → `PHASE2B_PASSIVE_BASELINE_BEATEN`
+- If result only appears when local-field / energy-aware logic is added → `PHASE2B_ACTIVE_CATALYTIC_SOLVER_WORKING`
+- If active software baseline explains result → `PHASE2B_REJECTED_SOFTWARE_EXPLAINS`
+- If no condition beats nulls → `PHASE2B_NEGATIVE`
+
+### 2B.9 Do Not Claim (Phase 2B)
+
+- Do not claim direct Kuramoto observation
+- Do not claim physical phase lock
+- Do not claim Ising machine from a software Ising solver
+- Do not claim Phase 3 catalytic restoration proves Phase 2B
+- Do not claim hidden substrate dynamics unless passive workers beat nulls
+- Do not use Tier 3 hardware instrumentation
+- Do not hide explicit optimization logic inside the passive harness
+
+### 2B.10 Why Phase 2B Matters
+
+Phase 2A tried to watch the CPU sing. Phase 2B tries to use the song without watching it. The answer becomes the measurement. If passive shared-substrate runs produce better answer distributions than matched nulls without explicit gradient-solving code, that is evidence of useful hidden attractor dynamics. If only active energy-aware code works, the result is still valuable but belongs to catalytic/reversible optimization, not physical Kuramoto proof.
 
 ---
 
