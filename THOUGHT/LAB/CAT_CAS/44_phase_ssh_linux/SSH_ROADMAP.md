@@ -335,7 +335,7 @@ PHASE2B_PHASE_ORACLE_BRANCH_UNTESTED
 
 Stop treating the substrate as a binary spin-flip Ising machine. Encode constraints as phase/interference structures, run oracle/interference process, score final answer distribution. The answer is still the measurement.
 
-### 2B.5A Exp20 Phase-Oracle Port — IN PROGRESS (v5-v8, 2026-06-05)
+### 2B.5A Exp20 Phase-Oracle Port — IN PROGRESS (v5-v10, 2026-06-05)
 
 - [x] Vertex phase oracle implemented: gradient descent on theta angles, decode via `cos(theta)`
 - [x] Phase score implemented: `E_phase = -Σ J_ij cos(theta_i - theta_j)`
@@ -347,8 +347,9 @@ Stop treating the substrate as a binary spin-flip Ising machine. Encode constrai
 - [x] Permutation invariance control correctly separated from destructive nulls
 - [x] Edge-rewired null remains competitive on some cases, especially random sparse
 - [x] v7 verdict: edge-structure fidelity is PARTIAL
-- [x] Spectral phase oracle implemented with Jacobi eigenbasis
-- [x] v8 verdict: spectral phase oracle gives no consistent gain over vertex oracle
+- [x] Spectral phase oracle implemented with Jacobi eigenbasis; no stable gain over vertex oracle (v8)
+- [x] MUSIC/super-resolution filter bank implemented; no gain, worse than v7 (v9)
+- [x] Autocorrelation/coherence/cepstrum implemented; edge coherence signal found, no Ising energy gain (v10)
 - [x] Active edge solver dominates current phase-oracle variants on the tested problem suite
 - [x] Phase-oracle encoding is valid but lacks strong topology/adjacency fidelity
 - [x] Source: `session_scripts/phase2b/phase_oracle_ising.c`
@@ -359,12 +360,12 @@ Stop treating the substrate as a binary spin-flip Ising machine. Encode constrai
 - [x] v6: structure-fidelity nulls added: random spin, random phase descent, sign-shuffled, edge-rewired, misaligned permutation, permutation-invariance control
 - [x] v7: null taxonomy fixed; sign fidelity PASS, label alignment PASS, edge fidelity PARTIAL
 - [x] v8: spectral Jacobi eigenbasis implemented; no stable gain over vertex oracle
+- [x] v9: MUSIC/super-resolution filter bank implemented; no gain, worse than v7
+- [x] v10: autocorrelation/coherence/cepstrum implemented; edge coherence signal found (true > random edges on 6/6), no Ising energy gain over v7
 
 #### Remaining 2B.5A work
 
-- [ ] v9: MUSIC / super-resolution phase filter bank — remaining Exp20-specific mechanism
-- [ ] Stronger phase filter-bank: multi-frequency filters, resonance peak extraction, candidate ranking
-- [ ] Decision gate: if v9 does not improve edge fidelity or candidate quality, mark 2B.5A PARTIAL and close the phase-oracle branch
+- [ ] Decision gate: if remaining Exp20 mechanisms do not improve edge fidelity or candidate quality, mark 2B.5A PARTIAL
 
 #### 2B.5B Exp26 Optical 3-SAT Port
 - [ ] Variables as optical/phase paths, clauses as phase-shifting mirrors, satisfying assignments = constructive interference
