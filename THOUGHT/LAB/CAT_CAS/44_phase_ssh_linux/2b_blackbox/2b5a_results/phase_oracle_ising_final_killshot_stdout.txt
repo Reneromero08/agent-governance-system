@@ -1,0 +1,75 @@
+=== PHASE 2B.5A FINAL KILL SHOT: N=24/N=32 STRESS TEST ===
+Energy-ensemble: v7+v11 same seed, pick lower energy.
+
+========================================
+N=24 (100 paths)
+========================================
+
+=== RandSparse N=24 (24 edges) ===
+  v7:        best=   -14 mean=   -1.66
+  v11:       best=   -16 mean=   -3.34
+  ENSEMBLE:  best=   -16 mean=   -4.34
+  Edge-rewired: best=   -16 mean=   -0.18
+  RandSpin:  best=   -10 mean=   -0.58
+  RandPhaseDesc: best=   -14 mean=   -2.44
+  SignShuffled: best=   -10 mean=   -0.12
+  Ensemble vs v7: -2.68  vs v11: -1.00  vs rewired: -4.16  vs randsp: -3.76  vs rpd: -1.90
+
+=== Frustrated N=24 (34 edges) ===
+  v7:        best=   -14 mean=   -3.52
+  v11:       best=   -18 mean=   -5.66
+  ENSEMBLE:  best=   -18 mean=   -6.74
+  Edge-rewired: best=   -18 mean=   -1.86
+  RandSpin:  best=   -12 mean=   -0.18
+  RandPhaseDesc: best=   -16 mean=   -3.56
+  SignShuffled: best=   -16 mean=   +0.00
+  Ensemble vs v7: -3.22  vs v11: -1.08  vs rewired: -4.88  vs randsp: -6.56  vs rpd: -3.18
+
+=== Planted N=24 (276 edges) ===
+  v7:        best=  -230 mean=  -60.32
+  v11:       best=  -276 mean=  -58.36
+  ENSEMBLE:  best=  -276 mean=  -77.92
+  Edge-rewired: best=   -60 mean=   +0.04
+  RandSpin:  best=  -116 mean=   -2.32
+  RandPhaseDesc: best=  -230 mean=  -67.84
+  SignShuffled: best=  -116 mean=   -0.36
+  Ensemble vs v7: -17.60  vs v11: -19.56  vs rewired: -77.96  vs randsp: -75.60  vs rpd: -10.08
+
+========================================
+N=32 (30 paths)
+========================================
+
+=== RandSparse N=32 (32 edges) ===
+  v7:        best=   -14 mean=   -2.60
+  v11:       best=   -14 mean=   -5.13
+  ENSEMBLE:  best=   -14 mean=   -5.73
+  Edge-rewired: best=   -10 mean=   +0.13
+  RandSpin:  best=    -8 mean=   -0.93
+  RandPhaseDesc: best=   -14 mean=   -3.53
+  SignShuffled: best=   -10 mean=   +0.67
+  Ensemble vs v7: -3.13  vs v11: -0.60  vs rewired: -5.87  vs randsp: -4.80  vs rpd: -2.20
+
+=== Frustrated N=32 (48 edges) ===
+  v7:        best=   -14 mean=   -2.60
+  v11:       best=   -20 mean=   -4.27
+  ENSEMBLE:  best=   -20 mean=   -5.93
+  Edge-rewired: best=   -14 mean=   -3.53
+  RandSpin:  best=   -14 mean=   +0.00
+  RandPhaseDesc: best=   -12 mean=   -1.93
+  SignShuffled: best=   -14 mean=   -1.47
+  Ensemble vs v7: -3.33  vs v11: -1.67  vs rewired: -2.40  vs randsp: -5.93  vs rpd: -4.00
+
+=== Planted N=32 (496 edges) ===
+  v7:        best=  -226 mean=  -83.20
+  v11:       best=  -226 mean=  -56.20
+  ENSEMBLE:  best=  -226 mean=  -97.20
+  Edge-rewired: best=   -34 mean=   -2.60
+  RandSpin:  best=   -56 mean=   +3.40
+  RandPhaseDesc: best=  -226 mean=  -96.13
+  SignShuffled: best=  -112 mean=   -3.07
+  Ensemble vs v7: -14.00  vs v11: -41.00  vs rewired: -94.60  vs randsp: -100.60  vs rpd: -1.07
+
+=== VERDICT ===
+Final kill shot: N=32 (30 paths).
+Energy-ensemble vs v7, v11, edge-rewired, rand spin, rand phase descent.
+PHASE2B_5A_FINAL_KILLSHOT_IMPLEMENTED

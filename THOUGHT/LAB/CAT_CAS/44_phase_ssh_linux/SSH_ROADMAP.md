@@ -331,11 +331,15 @@ PHASE2B_PASSIVE_MESI_SPIN_BRANCH_CLOSED
 PHASE2B_PHASE_ORACLE_BRANCH_UNTESTED
 ```
 
-### 2B.5 Phase-Oracle / Interference Attractor Port [NEXT]
+### 2B.5 Phase-Oracle / Interference Attractor Port [DONE: 2B.5A CLOSED]
 
 Stop treating the substrate as a binary spin-flip Ising machine. Encode constraints as phase/interference structures, run oracle/interference process, score final answer distribution. The answer is still the measurement.
 
-### 2B.5A Exp20 Phase-Oracle Port — IN PROGRESS (v5-v10, 2026-06-05)
+### 2B.5A Exp20 Phase-Oracle Port — CLOSED SUCCESSFUL PARTIAL (v5-v15, final 2026-06-06)
+
+**Final status:** PHASE2B_5A_CLOSED_SUCCESSFUL_PARTIAL
+**Final engine:** Energy-ensemble (v7 + v11 from same seed, pick lower decoded Ising energy)
+**Final kill shot:** N=24 (100 paths) + N=32 (30 paths), both passed with shrinking advantage on dense problems
 
 - [x] Vertex phase oracle implemented: gradient descent on theta angles, decode via `cos(theta)`
 - [x] Phase score implemented: `E_phase = -Σ J_ij cos(theta_i - theta_j)`
@@ -350,9 +354,18 @@ Stop treating the substrate as a binary spin-flip Ising machine. Encode constrai
 - [x] Spectral phase oracle implemented with Jacobi eigenbasis; no stable gain over vertex oracle (v8)
 - [x] MUSIC/super-resolution filter bank implemented; no gain, worse than v7 (v9)
 - [x] Autocorrelation/coherence/cepstrum implemented; edge coherence signal found, no Ising energy gain (v10)
+- [x] v11 coherence-guided refinement: edge fidelity improved, partial gain on sparse/frustrated
+- [x] v12 adaptive selector: beats v7 and v11 on all 6 problems
+- [x] v13 ablation: v12 win = energy-only ensembling, coherence adds zero selection value
+- [x] v14 scale test N=8/12/16: ensemble scales, beats edge-rewired with growing margins
+- [x] v15 stability N=16: ensemble stable, loop bounds fixed
+- [x] Final kill shot N=24 (100 paths): ensemble beats all nulls, v11 hits planted ground truth (-276/276)
+- [x] Final kill shot N=32 (30 paths): ensemble beats all nulls, advantage collapses on dense planted (-1.07 vs rpd)
 - [x] Active edge solver dominates current phase-oracle variants on the tested problem suite
-- [x] Phase-oracle encoding is valid but lacks strong topology/adjacency fidelity
+- [x] Phase-oracle encoding is valid but lacks strong topology/adjacency fidelity at scale
 - [x] Source: `session_scripts/phase2b/phase_oracle_ising.c`
+- [x] Final reports: `PHASE2B_5A_FINAL_KILL_SHOT_N24_N32.md`, `PHASE2B_5A_FINAL_STATUS.md`
+- [x] Decision gate: ensemble works, shrinks on dense problems, marked PARTIAL. 2B.5A CLOSED.
 
 #### Version notes
 
@@ -362,10 +375,12 @@ Stop treating the substrate as a binary spin-flip Ising machine. Encode constrai
 - [x] v8: spectral Jacobi eigenbasis implemented; no stable gain over vertex oracle
 - [x] v9: MUSIC/super-resolution filter bank implemented; no gain, worse than v7
 - [x] v10: autocorrelation/coherence/cepstrum implemented; edge coherence signal found (true > random edges on 6/6), no Ising energy gain over v7
-
-#### Remaining 2B.5A work
-
-- [ ] Decision gate: if remaining Exp20 mechanisms do not improve edge fidelity or candidate quality, mark 2B.5A PARTIAL
+- [x] v11: coherence-guided refinement + worst-edge refinement; edge fidelity improved, partial gain
+- [x] v12: adaptive energy+coherence selector; beats v7+v11 individually
+- [x] v13: ablation confirms energy-only ensembling explains v12; coherence is diagnostic, not selection-useful
+- [x] v14: scale test N=8/12/16; ensemble beats edge-rewired, margins grow
+- [x] v15: N=16 stability confirmed, loop bounds fixed
+- [x] Final: N=24/N=32 kill shot; ensemble survives, shrinks on dense; CLOSED SUCCESSFUL PARTIAL
 
 #### 2B.5B Exp26 Optical 3-SAT Port
 - [ ] Variables as optical/phase paths, clauses as phase-shifting mirrors, satisfying assignments = constructive interference

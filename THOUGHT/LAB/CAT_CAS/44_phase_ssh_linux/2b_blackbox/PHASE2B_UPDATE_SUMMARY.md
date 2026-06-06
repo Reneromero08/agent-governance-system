@@ -34,7 +34,11 @@ Phase 2B pivots: instead of watching the hidden dynamics, use them. Encode probl
 
 ## Current Status
 
-`PHASE2B_PASSIVE_MESI_SPIN_BRANCH_CLOSED` — Binary-spin passive MESI branch exhausted. Phase 2B NOT globally dead — phase-oracle/interference mechanisms from CAT_CAS ZIP (Exp20, Exp26, Exp07, Exp31, Exp33) were never ported to Phenom II.
+`PHASE2B_PASSIVE_MESI_SPIN_BRANCH_CLOSED` — Binary-spin passive MESI branch exhausted.
+
+`PHASE2B_5A_CLOSED_SUCCESSFUL_PARTIAL` — Phase-oracle port (Exp20) completed (2026-06-06). Energy-ensemble engine (v7+v11, pick lower energy) beats all nulls at N=24/N=32. Advantage shrinks but survives on dense problems at N=32. Not the primary engine (active edge solver dominates). See `PHASE2B_5A_FINAL_STATUS.md`.
+
+Phase 2B remains alive through remaining untested phase-oracle mechanisms (2B.5B-2B.5E: Optical 3-SAT, Bloch Ising, Spectral Classifier, .holo/MERA Bridge).
 
 ## Next Exact Implementation Task
 

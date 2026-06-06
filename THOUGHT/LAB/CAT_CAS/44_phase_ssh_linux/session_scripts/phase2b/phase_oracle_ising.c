@@ -4,161 +4,101 @@
 #include <string.h>
 #include <math.h>
 
-#define NN 8
-#define C 100
 #define S 30
-
 uint64_t lcg(uint64_t *s){*s=(*s*0x41C64E6D+0x3039);*s=(*s>>13)^*s;*s=(*s<<17)+*s;return *s;}
-void decode(double *t,uint64_t *s){for(int i=0;i<NN;i++)s[i]=(cos(t[i])>=0)?1:0;}
-int64_t ising(uint64_t *s,int64_t (*J)[NN]){int64_t E=0;for(int i=0;i<NN;i++){int si=(s[i]&1)?1:-1;for(int j=i+1;j<NN;j++){int sj=(s[j]&1)?1:-1;E-=J[i][j]*si*sj;}}return E;}
-void brute(int64_t (*J)[NN],int64_t *g){int64_t b=INT64_MAX;for(uint64_t m=0;m<(1ULL<<NN);m++){uint64_t s[NN];for(int i=0;i<NN;i++)s[i]=(m>>i)&1;int64_t E=ising(s,J);if(E<b)b=E;}*g=b;}
-
-void vertex_descend(double *theta,int64_t (*J)[NN],uint64_t *rng){
-    for(int st=0;st<S;st++){int i=lcg(rng)%NN;double g=0;
-        for(int j=0;j<NN;j++)if(J[i][j])g+=J[i][j]*sin(theta[i]-theta[j]);
-        theta[i]-=0.1*g;}
+void decode(double *t,uint64_t *s,int N){for(int i=0;i<N;i++)s[i]=(cos(t[i])>=0)?1:0;}
+int64_t ising_n(uint64_t *s,int64_t *J,int N){int64_t E=0;for(int i=0;i<N;i++){int si=(s[i]&1)?1:-1;for(int j=i+1;j<N;j++){int sj=(s[j]&1)?1:-1;E-=J[i*N+j]*si*sj;}}return E;}
+void v7_descend_n(double *t,int64_t *J,int N,uint64_t *rng){
+    for(int st=0;st<S;st++){int i=lcg(rng)%N;double g=0;for(int j=0;j<N;j++)if(J[i*N+j])g+=J[i*N+j]*sin(t[i]-t[j]);t[i]-=0.1*g;}
+}
+void v11_descend_n(double *t,int64_t *J,int *edg,int ne,int N,uint64_t *rng){
+    for(int st=0;st<S;st++){int i=lcg(rng)%N;double g=0;for(int j=0;j<N;j++)if(J[i*N+j])g+=J[i*N+j]*sin(t[i]-t[j]);
+        double cg=0;for(int e=0;e<ne;e++){int a=edg[e*3],b=edg[e*3+1],sg=edg[e*3+2];if(a==i)cg+=sg*sin(t[i]-t[b]);if(b==i)cg+=sg*sin(t[i]-t[a]);}t[i]-=0.1*(g+0.5*cg/ne);}
+    for(int pass=0;pass<5;pass++){int worst=-1;double wa=1e9;for(int e=0;e<ne;e++){int a=edg[e*3],b=edg[e*3+1],sg=edg[e*3+2];double ag=sg*cos(t[a]-t[b]);if(ag<wa){wa=ag;worst=e;}}if(wa>0.3)break;int a=edg[worst*3],b=edg[worst*3+1],sg=edg[worst*3+2];t[a]+=0.3*(((sg>0)?0:M_PI)-(t[a]-t[b]));}
+}
+void gen_sparse(int64_t *J,int N,int nedges,uint64_t *rs){
+    memset(J,0,N*N*8);for(int e=0;e<nedges;e++){int a=lcg(rs)%N,b=lcg(rs)%N;if(a!=b&&!J[a*N+b]){int v=(lcg(rs)&1)?1:-1;J[a*N+b]=J[b*N+a]=v;}}
+}
+void gen_frust(int64_t *J,int N,uint64_t *rs){
+    memset(J,0,N*N*8);int nodes[3];for(int k=0;k<3;k++)nodes[k]=lcg(rs)%N;
+    J[nodes[0]*N+nodes[1]]=J[nodes[1]*N+nodes[0]]=1;
+    J[nodes[1]*N+nodes[2]]=J[nodes[2]*N+nodes[1]]=1;
+    J[nodes[0]*N+nodes[2]]=J[nodes[2]*N+nodes[0]]=1;
+    for(int i=1;i<N-1;i++)J[i*N+(i+1)]=J[(i+1)*N+i]=1;
+    for(int e=0;e<N/2;e++){int a=lcg(rs)%N,b=lcg(rs)%N;if(a!=b&&!J[a*N+b]){int v=(lcg(rs)&1)?1:-1;J[a*N+b]=J[b*N+a]=v;}}
 }
 
-// Edge coherence: agreement_ij = sign*cos(dtheta), range [-1,1], +1 = satisfied
-double edge_coherence(double *theta,int *edges,int ne){
-    double sum=0;
-    for(int e=0;e<ne;e++){int i=edges[e*3],j=edges[e*3+1],sg=edges[e*3+2];
-        sum+=sg*cos(theta[i]-theta[j]);}
-    return sum/ne;
-}
-
-// Autocorrelation of edge-agreement vector (direct O(E^2))
-double autocorr_peak(double *A,int E){
-    double best=0;int best_k=0;
-    for(int k=1;k<E;k++){
-        double sum=0;int n=0;
-        for(int e=0;e<E-k;e++){sum+=A[e]*A[e+k];n++;}
-        double val=sum/n;
-        if(fabs(val)>fabs(best)){best=val;best_k=k;}
-    }
-    return best;
-}
-
-// Recursive autocorr: apply autocorr to autocorr output, track peak amplification
-double cepstrum_amplify(double *A,int E){
-    double *work=malloc(E*8),*tmp=malloc(E*8);
-    memcpy(work,A,E*8);int len=E;
-    for(int rec=0;rec<3;rec++){
-        for(int k=0;k<len-1;k++){double s=0;int n=0;for(int e=0;e<len-k;e++){s+=work[e]*work[e+k];n++;}tmp[k]=s/n;}
-        len--;memcpy(work,tmp,len*8);
-    }
-    double peak=0;for(int k=0;k<len;k++)if(fabs(work[k])>fabs(peak))peak=work[k];
-    free(work);free(tmp);return peak;
-}
-
-typedef struct{double best,mean,std,med;int hits;}st;
-void stats64(int64_t *E,int n,int64_t g,st *o){o->hits=0;o->best=1e9;double s=0;for(int i=0;i<n;i++){if(E[i]<o->best)o->best=E[i];if(E[i]==g)o->hits++;s+=E[i];}o->mean=s/n;int64_t t[n];memcpy(t,E,n*8);for(int i=0;i<n-1;i++)for(int j=i+1;j<n;j++)if(t[i]>t[j]){int64_t x=t[i];t[i]=t[j];t[j]=x;}o->med=n%2?t[n/2]:(t[n/2-1]+t[n/2])/2.0;double v=0;for(int i=0;i<n;i++)v+=(E[i]-o->mean)*(E[i]-o->mean);o->std=sqrt(v/n);}
-void pst(const char*l,st*o){printf("  %-28s best=%3.0f mean=%+6.2f hits=%3d/%d\n",l,o->best,o->mean,o->hits,C);}
+typedef struct{double best,mean;int hits;}st;
+void s64(int64_t *E,int n,int64_t g,st *o){o->hits=0;o->best=1e9;double s=0;for(int i=0;i<n;i++){if(E[i]<o->best)o->best=E[i];if(E[i]==g)o->hits++;s+=E[i];}o->mean=s/n;}
 
 int main(){
-    printf("=== PHASE 2B.5A v10: AUTOCORRELATION / COHERENCE / CEPSTRUM ===\n\n");
-    printf("Edge phase coherence + autocorrelation of agreement vector + cepstrum amplification.\n");
-    printf("Compare: v10 coherence-ranked vs v7 vertex oracle vs destructive nulls.\n\n");
+    printf("=== PHASE 2B.5A FINAL KILL SHOT: N=24/N=32 STRESS TEST ===\n");
+    printf("Energy-ensemble: v7+v11 same seed, pick lower energy.\n\n");
 
-    const char *nm[]={"Ferro","Anti-ferro","Mixed","RandSparse","FrustCycle","Planted"};
-    int64_t Js[6][NN][NN]={{{0}}};int64_t gs[6];int edges[6][32][3],ne[6];
-    for(int i=0;i<NN-1;i++){Js[0][i][i+1]=Js[0][i+1][i]=1;}
-    for(int i=0;i<NN-1;i++){Js[1][i][i+1]=Js[1][i+1][i]=-1;}
-    for(int i=0;i<NN-1;i++){Js[2][i][i+1]=Js[2][i+1][i]=(i%2)?-1:1;}
     uint64_t rs=0xCADE000000000001ULL;
-    for(int e=0;e<10;e++){int a=lcg(&rs)%NN,b=lcg(&rs)%NN;if(a!=b)Js[3][a][b]=Js[3][b][a]=(lcg(&rs)&1)?1:-1;}
-    Js[4][0][1]=Js[4][1][0]=1;Js[4][1][2]=Js[4][2][1]=1;Js[4][0][2]=Js[4][2][0]=1;for(int i=2;i<NN-1;i++)Js[4][i][i+1]=Js[4][i+1][i]=1;
-    int ss[NN]={1,0,1,0,1,0,1,0};for(int i=0;i<NN;i++)for(int j=i+1;j<NN;j++)Js[5][i][j]=Js[5][j][i]=(ss[i]==ss[j])?1:-1;
-    for(int p=0;p<6;p++){brute(Js[p],&gs[p]);ne[p]=0;for(int i=0;i<NN;i++)for(int j=i+1;j<NN;j++)if(Js[p][i][j]){edges[p][ne[p]][0]=i;edges[p][ne[p]][1]=j;edges[p][ne[p]][2]=Js[p][i][j];ne[p]++;}}
+    int sizes[]={24,32},paths[]={100,30};
+    int n_sizes=2;
+    for(int si=0;si<n_sizes;si++){
+        int N=sizes[si],cp=paths[si];
+        printf("========================================\n");
+        printf("N=%d (%d paths)\n",N,cp);
+        printf("========================================\n\n");
 
-    for(int p=0;p<6;p++){
-        printf("=== %s (%d edges, ground=%ld) ===\n",nm[p],ne[p],(long)gs[p]);
-        int64_t Ev7[C],Ev10[C],Er[C],Erp[C],Eew[C],Esi[C];
-        double coh_v7[C],coh_v10[C],acorr_v10[C],cep_v10[C];
-        double coh_true_edges[C],coh_random_edges[C],coh_rewired[C];
-        uint64_t rng=0x1111000000000001ULL+p*0x1000;
+        for(int pt=0;pt<3;pt++){
+            int64_t J[N*N];const char *nm;
+            if(pt==0){gen_sparse(J,N,N+2,&rs);nm="RandSparse";}
+            else if(pt==1){gen_frust(J,N,&rs);nm="Frustrated";}
+            else{memset(J,0,N*N*8);int sp[N];for(int i=0;i<N;i++)sp[i]=i%2;
+                 for(int i=0;i<N;i++)for(int j=i+1;j<N;j++)J[i*N+j]=J[j*N+i]=(sp[i]==sp[j])?1:-1;nm="Planted";}
 
-        // Pre-build edge-rewired graph for null
-        int64_t Jrw[NN][NN]={{0}};
-        {int ea[32],eb[32];for(int e=0;e<ne[p];e++){ea[e]=edges[p][e][0];eb[e]=edges[p][e][1];}
-        for(int e=0;e<ne[p];e++){int j=lcg(&rng)%ne[p];int t=ea[e];ea[e]=ea[j];ea[j]=t;t=eb[e];eb[e]=eb[j];eb[j]=t;}
-        for(int e=0;e<ne[p];e++){int v=Js[p][edges[p][e][0]][edges[p][e][1]];Jrw[ea[e]][eb[e]]=Jrw[eb[e]][ea[e]]=v;}}
+            int edg[512][3],ne=0;for(int i=0;i<N;i++)for(int j=i+1;j<N;j++)if(J[i*N+j]){edg[ne][0]=i;edg[ne][1]=j;edg[ne][2]=J[i*N+j];ne++;}
+            printf("=== %s N=%d (%d edges) ===\n",nm,N,ne);
 
-        for(int f=0;f<C;f++){
-            double tv[NN];for(int i=0;i<NN;i++)tv[i]=2*M_PI*(lcg(&rng)/(double)UINT64_MAX);
+            int64_t *Ev7=malloc(cp*8),*Ev11=malloc(cp*8),*Eens=malloc(cp*8),*Eew=malloc(cp*8),*Ersp=malloc(cp*8),*Erpd=malloc(cp*8),*Essh=malloc(cp*8);
+            uint64_t rg=0x1111000000000001ULL+pt*0x1000;
 
-            // v7: vertex oracle
-            vertex_descend(tv,Js[p],&rng);
-            uint64_t sp[NN];decode(tv,sp);Ev7[f]=ising(sp,Js[p]);
-            coh_v7[f]=edge_coherence(tv,(int*)edges[p],ne[p]);
+            int64_t Jrw[N*N];memset(Jrw,0,N*N*8);
+            {int ea[512],eb[512];for(int e=0;e<ne;e++){ea[e]=edg[e][0];eb[e]=edg[e][1];}
+            for(int e=0;e<ne;e++){int j=lcg(&rg)%ne;int t=ea[e];ea[e]=ea[j];ea[j]=t;t=eb[e];eb[e]=eb[j];eb[j]=t;}
+            for(int e=0;e<ne;e++){int v=J[edg[e][0]*N+edg[e][1]];Jrw[ea[e]*N+eb[e]]=Jrw[eb[e]*N+ea[e]]=v;}}
+            int64_t Jsh[N*N];memcpy(Jsh,J,N*N*8);
+            for(int e=0;e<ne;e++){int a=edg[e][0],b=edg[e][1];
+                int v=lcg(&rg)&1?1:-1;Jsh[a*N+b]=Jsh[b*N+a]=v;}
 
-            // v10: fresh descent + coherence/autocorr/cepstrum analysis
-            double t10[NN];for(int i=0;i<NN;i++)t10[i]=2*M_PI*(lcg(&rng)/(double)UINT64_MAX);
-            vertex_descend(t10,Js[p],&rng);
-            decode(t10,sp);Ev10[f]=ising(sp,Js[p]);
-            coh_v10[f]=edge_coherence(t10,(int*)edges[p],ne[p]);
+            for(int f=0;f<cp;f++){
+                double t0[N];for(int i=0;i<N;i++)t0[i]=2*M_PI*(lcg(&rg)/(double)UINT64_MAX);
+                uint64_t sp[N];double tv[N],t11[N];memcpy(tv,t0,N*8);memcpy(t11,t0,N*8);
+                v7_descend_n(tv,J,N,&rg);decode(tv,sp,N);Ev7[f]=ising_n(sp,J,N);
+                v11_descend_n(t11,J,(int*)edg,ne,N,&rg);decode(t11,sp,N);Ev11[f]=ising_n(sp,J,N);
+                Eens[f]=(Ev7[f]<Ev11[f])?Ev7[f]:Ev11[f];
+                double trw[N];for(int i=0;i<N;i++)trw[i]=2*M_PI*(lcg(&rg)/(double)UINT64_MAX);
+                v7_descend_n(trw,Jrw,N,&rg);decode(trw,sp,N);Eew[f]=ising_n(sp,J,N);
+                for(int i=0;i<N;i++)sp[i]=lcg(&rg)&1;
+                Ersp[f]=ising_n(sp,J,N);
+                double trpd[N];for(int i=0;i<N;i++)trpd[i]=2*M_PI*(lcg(&rg)/(double)UINT64_MAX);
+                v7_descend_n(trpd,J,N,&rg);decode(trpd,sp,N);Erpd[f]=ising_n(sp,J,N);
+                double tsh[N];for(int i=0;i<N;i++)tsh[i]=2*M_PI*(lcg(&rg)/(double)UINT64_MAX);
+                v7_descend_n(tsh,Jsh,N,&rg);decode(tsh,sp,N);Essh[f]=ising_n(sp,J,N);
+            }
 
-            // Edge agreement vector for autocorrelation
-            double A[64];int aE=ne[p];
-            for(int e=0;e<aE;e++){int i=edges[p][e][0],j=edges[p][e][1],sg=edges[p][e][2];
-                A[e]=sg*cos(t10[i]-t10[j]);}
-            acorr_v10[f]=autocorr_peak(A,aE);
-            cep_v10[f]=cepstrum_amplify(A,aE);
-
-            // True edge coherence vs random edge coherence
-            coh_true_edges[f]=edge_coherence(t10,(int*)edges[p],ne[p]);
-            // Random edges: pick ne[p] random (i,j) pairs
-            double sum_r=0;
-            for(int e=0;e<ne[p];e++){int i=lcg(&rng)%NN,j=lcg(&rng)%NN;if(i!=j)sum_r+=cos(t10[i]-t10[j]);}
-            coh_random_edges[f]=sum_r/ne[p];
-
-            // Rewired edge coherence
-            double sum_w=0;
-            for(int i=0;i<NN;i++)for(int j=i+1;j<NN;j++)if(Jrw[i][j])sum_w+=(Jrw[i][j]>0?1:-1)*cos(t10[i]-t10[j]);
-            coh_rewired[f]=sum_w/ne[p];
-
-            // Nulls
-            for(int i=0;i<NN;i++)sp[i]=lcg(&rng)&1;Er[f]=ising(sp,Js[p]);
-            int64_t Jf[NN][NN]={{0}};for(int i=0;i<NN;i++)for(int j=i+1;j<NN;j++)Jf[i][j]=Jf[j][i]=(lcg(&rng)&1)?1:-1;
-            double trp[NN];for(int i=0;i<NN;i++)trp[i]=2*M_PI*(lcg(&rng)/(double)UINT64_MAX);
-            vertex_descend(trp,Jf,&rng);decode(trp,sp);Erp[f]=ising(sp,Js[p]);
-            double tew[NN];for(int i=0;i<NN;i++)tew[i]=2*M_PI*(lcg(&rng)/(double)UINT64_MAX);
-            vertex_descend(tew,Jrw,&rng);decode(tew,sp);Eew[f]=ising(sp,Js[p]);
-            // Sign-shuffled
-            int64_t Jsi[NN][NN]={{0}};for(int i=0;i<NN;i++)for(int j=i+1;j<NN;j++)if(Js[p][i][j]){int v=Js[p][i][j];Jsi[i][j]=Jsi[j][i]=(lcg(&rng)&1)?v:-v;}
-            double tsi[NN];for(int i=0;i<NN;i++)tsi[i]=2*M_PI*(lcg(&rng)/(double)UINT64_MAX);
-            vertex_descend(tsi,Jsi,&rng);decode(tsi,sp);Esi[f]=ising(sp,Js[p]);
+            st sv7,sv11,sens,sew,srsp,srpd,sssh;s64(Ev7,cp,INT64_MAX,&sv7);s64(Ev11,cp,INT64_MAX,&sv11);
+            s64(Eens,cp,INT64_MAX,&sens);s64(Eew,cp,INT64_MAX,&sew);
+            s64(Ersp,cp,INT64_MAX,&srsp);s64(Erpd,cp,INT64_MAX,&srpd);s64(Essh,cp,INT64_MAX,&sssh);
+            printf("  v7:        best=%6.0f mean=%+8.2f\n",sv7.best,sv7.mean);
+            printf("  v11:       best=%6.0f mean=%+8.2f\n",sv11.best,sv11.mean);
+            printf("  ENSEMBLE:  best=%6.0f mean=%+8.2f\n",sens.best,sens.mean);
+            printf("  Edge-rewired: best=%6.0f mean=%+8.2f\n",sew.best,sew.mean);
+            printf("  RandSpin:  best=%6.0f mean=%+8.2f\n",srsp.best,srsp.mean);
+            printf("  RandPhaseDesc: best=%6.0f mean=%+8.2f\n",srpd.best,srpd.mean);
+            printf("  SignShuffled: best=%6.0f mean=%+8.2f\n",sssh.best,sssh.mean);
+            printf("  Ensemble vs v7: %+.2f  vs v11: %+.2f  vs rewired: %+.2f  vs randsp: %+.2f  vs rpd: %+.2f\n\n",
+                sens.mean-sv7.mean,sens.mean-sv11.mean,sens.mean-sew.mean,sens.mean-srsp.mean,sens.mean-srpd.mean);
+            free(Ev7);free(Ev11);free(Eens);free(Eew);free(Ersp);free(Erpd);free(Essh);
         }
-
-        st sv7,sv10,sr,srp,sew,ssi;
-        stats64(Ev7,C,gs[p],&sv7);stats64(Ev10,C,gs[p],&sv10);
-        stats64(Er,C,gs[p],&sr);stats64(Erp,C,gs[p],&srp);
-        stats64(Eew,C,gs[p],&sew);stats64(Esi,C,gs[p],&ssi);
-
-        pst("v7 Vertex oracle", &sv7);
-        pst("v10 Coherence/cepstrum", &sv10);
-        pst("Random spin [destr]", &sr);
-        pst("RandPh descent [destr]", &srp);
-        pst("Sign-shuffled [destr]", &ssi);
-        pst("Edge-rewired [destr]", &sew);
-
-        // Coherence statistics
-        double mct=0;for(int f=0;f<C;f++)mct+=coh_true_edges[f];mct/=C;
-        double mcr=0;for(int f=0;f<C;f++)mcr+=coh_random_edges[f];mcr/=C;
-        double mcw=0;for(int f=0;f<C;f++)mcw+=coh_rewired[f];mcw/=C;
-        printf("  Coherence: true=%.3f random=%.3f rewired=%.3f true>random=%s\n",mct,mcr,mcw,mct>mcr?"YES":"NO");
-
-        double mac=0;for(int f=0;f<C;f++)mac+=fabs(acorr_v10[f]);mac/=C;
-        double mcp=0;for(int f=0;f<C;f++)mcp+=fabs(cep_v10[f]);mcp/=C;
-        printf("  Autocorr peak: %.3f  Cepstrum peak: %.3f\n",mac,mcp);
-        printf("  v10 vs v7: mean=%+.2f hits=%+d\n",sv10.mean-sv7.mean,sv10.hits-sv7.hits);
-        printf("  v10 vs edge-rewired: mean=%+.2f hits=%+d\n\n",sv10.mean-sew.mean,sv10.hits-sew.hits);
     }
-
     printf("=== VERDICT ===\n");
-    printf("v10 autocorrelation/coherence/cepstrum implemented.\n");
-    printf("Edge coherence vs random edge coherence vs rewired coherence compared.\n");
-    printf("Autocorr peak and cepstrum amplification measured per candidate.\n");
-    printf("PHASE2B_5A_V10_AUTOCORR_IMPLEMENTED\n");
+    printf("Final kill shot: N=%d (%d paths).\n",sizes[n_sizes-1],paths[n_sizes-1]);
+    printf("Energy-ensemble vs v7, v11, edge-rewired, rand spin, rand phase descent.\n");
+    printf("PHASE2B_5A_FINAL_KILLSHOT_IMPLEMENTED\n");
     return 0;
 }
