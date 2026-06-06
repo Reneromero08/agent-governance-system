@@ -335,20 +335,36 @@ PHASE2B_PHASE_ORACLE_BRANCH_UNTESTED
 
 Stop treating the substrate as a binary spin-flip Ising machine. Encode constraints as phase/interference structures, run oracle/interference process, score final answer distribution. The answer is still the measurement.
 
-#### 2B.5A Exp20 Phase-Oracle Port — COMPLETE (v1-v8, 2026-06-05)
+### 2B.5A Exp20 Phase-Oracle Port — IN PROGRESS (v5-v8, 2026-06-05)
 
-- [x] Vertex phase oracle: gradient descent on theta angles, decode via cos
-- [x] Beats random spin null on 6/6 problems (mean energy)
+- [x] Vertex phase oracle implemented: gradient descent on theta angles, decode via `cos(theta)`
+- [x] Phase score implemented: `E_phase = -Σ J_ij cos(theta_i - theta_j)`
+- [x] Final decoded candidates scored with true Ising energy
+- [x] Beats random spin null on 6/6 problems by mean energy
 - [x] Beats random phase descent null on 6/6 problems
-- [x] Beats sign-shuffled null on 6/6 problems (sign structure fidelity)
-- [x] Beats misaligned permutation null on 6/6 problems (label alignment matters)
-- [x] Edge-rewired null competitive on random sparse (v7: rewired -2.06 vs oracle -1.92)
-- [x] Permutation invariance control correctly separated (not destructive)
-- [x] Spectral phase oracle (Jacobi eigenbasis): no consistent gain over vertex (v8)
-- [x] Active edge solver dominates all phase-oracle variants on all problems
-- [x] **Verdict: PHASE2B_5A_V8_SPECTRAL_NO_GAIN, PHASE2B_5A_V7_EDGE_STRUCTURE_PARTIAL**
+- [x] Beats sign-shuffled null on 6/6 problems, showing sign-structure fidelity
+- [x] Beats misaligned permutation null on 6/6 problems, showing label alignment matters
+- [x] Permutation invariance control correctly separated from destructive nulls
+- [x] Edge-rewired null remains competitive on some cases, especially random sparse
+- [x] v7 verdict: edge-structure fidelity is PARTIAL
+- [x] Spectral phase oracle implemented with Jacobi eigenbasis
+- [x] v8 verdict: spectral phase oracle gives no consistent gain over vertex oracle
+- [x] Active edge solver dominates current phase-oracle variants on the tested problem suite
 - [x] Phase-oracle encoding is valid but lacks strong topology/adjacency fidelity
-- [x] Source: `session_scripts/phase2b/phase_oracle_ising.c` (v1-v8)
+- [x] Source: `session_scripts/phase2b/phase_oracle_ising.c`
+
+#### Version notes
+
+- [x] v5: phase oracle implemented and hardened with basic metrics; ground found on initial problem suite; random comparison added
+- [x] v6: structure-fidelity nulls added: random spin, random phase descent, sign-shuffled, edge-rewired, misaligned permutation, permutation-invariance control
+- [x] v7: null taxonomy fixed; sign fidelity PASS, label alignment PASS, edge fidelity PARTIAL
+- [x] v8: spectral Jacobi eigenbasis implemented; no stable gain over vertex oracle
+
+#### Remaining 2B.5A work
+
+- [ ] v9: MUSIC / super-resolution phase filter bank — remaining Exp20-specific mechanism
+- [ ] Stronger phase filter-bank: multi-frequency filters, resonance peak extraction, candidate ranking
+- [ ] Decision gate: if v9 does not improve edge fidelity or candidate quality, mark 2B.5A PARTIAL and close the phase-oracle branch
 
 #### 2B.5B Exp26 Optical 3-SAT Port
 - [ ] Variables as optical/phase paths, clauses as phase-shifting mirrors, satisfying assignments = constructive interference
@@ -676,7 +692,25 @@ PHASE3_PUBLIC_API_SHIPPED
 - [x] Uses Phase 3 API: `catcas_tape_init`, `catcas_slot_read`, `catcas_slot_write`, `catcas_xor_bind`, `catcas_tape_snapshot`, `catcas_tape_verify`
 - [x] **Verdict: PHASE3_ACTIVE_CATALYTIC_ISING_HARDENED**
 - [x] Source: `session_scripts/phase3_catalytic/active_ising_hardened.c`
-- [x] Promoted from Phase 2B.3C — now a proper Phase 3 bridge
+
+### 3.14 Hybrid Phase-Seeded Catalytic Ising — COMPLETE (2026-06-05)
+
+- [x] Pipeline: phase oracle seed → decode → active edge refinement → catcas restore
+- [x] Phase seed only: finds ground on all 6 problems (best -7 to -28) but mean poor (-1.2 to -10)
+- [x] Hybrid = Active = Random+Active on 5/6 problems (deterministic convergence dominates)
+- [x] Random sparse: hybrid 44/100 (-5.88) vs active-only 54/100 (-6.08) — phase seed slightly worse
+- [x] Phase seeding provides NO advantage over random init for active edge solver
+- [x] Catcas restore: 100/100 on all 6 problems
+- [x] **Verdict: PHASE3_14_ACTIVE_SOLVER_DOMINATES_NO_SEED_GAIN**
+- [x] Source: `session_scripts/phase3_catalytic/hybrid_phase_seeded_ising.c`
+
+### 3.15 Active Core Escape Dynamics — PARKED FUTURE WORK
+
+- [ ] Improve active catalytic Ising core on harder sparse/frustrated/cyclic problems where local edge solver gets trapped in local minima
+- [ ] Phase 3.14 showed phase seeding does not improve basins — bottleneck is solver escape dynamics, not seed source
+- [ ] **PARKED** — do not implement until 2B.5A is closed or explicitly paused
+- [ ] Mechanisms: random restarts with basin tracking, tabu memory, simulated annealing, uphill moves, cluster flips, frustration detection, local minima detection, multi-path oracle restore with escape operators
+- [ ] Expected artifacts: `PHASE3_15_ACTIVE_CORE_ESCAPE_DYNAMICS.md`, `session_scripts/phase3_catalytic/active_core_escape_dynamics.c`
 
 ### Phase 3 Verdict
 
@@ -690,6 +724,7 @@ PHASE3_ORACLE_PATH_COMPLETE
 PHASE3_BASELINE_COMPARISON_COMPLETE
 PHASE3_PUBLIC_API_SHIPPED
 PHASE3_ACTIVE_CATALYTIC_ISING_PROMOTED
+PHASE3_14_HYBRID_NO_SEED_GAIN
 ```
 
 ### 3.A ADDENDUM: Scope the Landauer Claim (Gemini)

@@ -65,12 +65,14 @@ Before claiming `PHASE2B_PASSIVE_ATTRACTOR_CANDIDATE`, verify:
 - [ ] Statistical measures reported (CI, effect size, p-value)
 - [ ] Active baseline separately labeled and not confused with passive
 
-## Current Status
+## Current Status — ACTIVE THREAD: 2B.5A v9
 
-`PHASE2B_PASSIVE_MESI_SPIN_BRANCH_CLOSED` — Binary-spin passive MESI branch failed current tests. Phase 2B remains alive through unported CAT_CAS phase-oracle/interference branch.
+`PHASE2B_PASSIVE_MESI_SPIN_BRANCH_CLOSED` — Binary-spin passive MESI branch exhausted. Phase 2B remains alive through phase-oracle branch (2B.5A).
 
-**2B.2** random-flip: negative. **2B.3A** wormhole protocol transfer: PASS (not Ising claim). **2B.3B** P1 ferro-bias FALSIFIED, P2 active edge solver works (shared=null). **2B.4** channel matrix: all 4 CAT_CAS-derived passive channels failed mixed-sign controls.
+**2B.5A v1-v8**: phase oracle beats random/sign-shuffled/misaligned-perm nulls. Edge fidelity partial. Spectral eigenbasis no gain. **Next: v9 MUSIC/super-resolution filter bank.**
 
-**Correction:** Previous `CURRENT_PASSIVE_MECHANISMS_CLOSED` was too broad. Only the MESI binary-spin branch is closed. Phase-oracle/interference mechanisms (Exp20, Exp26, Exp07, Exp31, Exp33) were never ported to the Phenom II. Phase 2B is NOT globally dead.
+**3.14**: Hybrid phase-seeded catalytic Ising — phase seeding no advantage over random init. Active solver dominates. Complete, parked.
 
-**Next:** 2B.5A Exp20 phase-oracle port to Phenom II (`session_scripts/phase2b/phase_oracle_port.c`). See `PHASE2B_ZIP_MECHANISM_INVENTORY.md` for full untested mechanism inventory.
+**3.15**: Active Core Escape Dynamics — PARKED future work. Do not implement until 2B.5A closed.
+
+**Next exact task:** PHASE2B_5A_V9_MUSIC_SUPER_RESOLUTION_FILTER_BANK
