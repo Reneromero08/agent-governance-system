@@ -6,8 +6,8 @@ Scope: owned local firmware route research. No flash command. No hardware-changi
 
 ## Artifacts Produced
 
-- `cpu_hack/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt`
-- `cpu_hack/AmdProcessorInitPeim_fff737a3_xrefs.txt`
+- `cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt`
+- `cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_xrefs.txt`
 
 ## Function Boundary
 
@@ -86,6 +86,6 @@ The containing function, stack frame, field base, and local constructor semantic
 
 Exact next missing artifact:
 
-`cpu_hack/AmdProcessorInitPeim_dG3_DXE_dispatch_table_consumer_decompile.txt`
+`cpu_hack/agesa_trace/AmdProcessorInitPeim_dG3_DXE_dispatch_table_consumer_decompile.txt`
 
 That artifact must show the code path that consumes the `.dG3_DXE` table around `0xFFF8D0EC-0xFFF8D130` and passes the constructor/table context into function `0xFFF7371A`.

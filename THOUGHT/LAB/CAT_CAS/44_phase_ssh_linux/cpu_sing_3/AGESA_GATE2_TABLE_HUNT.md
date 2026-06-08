@@ -7,9 +7,9 @@ Scope: owned local firmware route research. No flash command. No hardware-changi
 ## Inputs Consumed
 
 - Gate 1 constructor pseudocode.
-- `cpu_hack/pstate_targeted_disasm.txt`
-- `cpu_hack/pstate_mask_hits.txt`
-- `cpu_hack/bios_dump.bin.report.txt`
+- `cpu_hack/agesa_trace/pstate_targeted_disasm.txt`
+- `cpu_hack/agesa_trace/pstate_mask_hits.txt`
+- `cpu_hack/bios_parse/bios_dump.bin.report.txt`
 - `cpu_hack/bios_dump.bin`
 - `cpu_hack/bios_dump.bin.dump/.../AmdProcessorInitPeim/1 PE32 image section/body.bin`
 
@@ -89,8 +89,8 @@ Exact next local task:
    - All assignments to `[ebp-8]` before `0xFFF737A3`.
    - The provenance of the base pointer whose fields are read at `+0x0B`, `+0x0F`, `+0x10`, `+0x14`, `+0x1C`, and `+0x20`.
 4. Name the exported artifact inside this lab:
-   - `cpu_hack/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt`
-   - `cpu_hack/AmdProcessorInitPeim_fff737a3_xrefs.txt`
+   - `cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt`
+   - `cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_xrefs.txt`
 
 Gate 2 can reopen only when that artifact proves either:
 

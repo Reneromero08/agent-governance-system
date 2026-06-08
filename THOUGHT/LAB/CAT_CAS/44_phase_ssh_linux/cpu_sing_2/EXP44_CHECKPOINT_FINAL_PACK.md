@@ -84,11 +84,11 @@ Markdown reports, source scripts, roadmap files, and small text evidence are not
 - `THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/cpu_sing_1/*.md`
 - `THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/cpu_sing_2/*.md`
 - `THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/gpt_research/*.md`
-- `THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/cpu_hack/PATCH_ANALYSIS.md`
-- `THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/cpu_hack/bios_dump.bin.report.txt`
-- `THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/cpu_hack/pstate_mask_hits.txt`
-- `THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/cpu_hack/pstate_targeted_disasm.txt`
-- `THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/cpu_hack/check_ics*.ps1`
+- `THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/cpu_hack/agesa_trace/PATCH_ANALYSIS.md`
+- `THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/cpu_hack/bios_parse/bios_dump.bin.report.txt`
+- `THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/cpu_hack/agesa_trace/pstate_mask_hits.txt`
+- `THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/cpu_hack/agesa_trace/pstate_targeted_disasm.txt`
+- `THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/cpu_hack/board_probe/check_ics*.ps1`
 - `THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/session_scripts/*`
 
 ## F. Files Excluded From Git

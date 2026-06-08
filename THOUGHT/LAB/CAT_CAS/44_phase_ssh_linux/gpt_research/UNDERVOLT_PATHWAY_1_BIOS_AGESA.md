@@ -36,7 +36,7 @@ DE 89 7D F4 89 5D F8 E8 15 E0 FD FF 83 C4 0C FF
 45 FC 81 7D FC 68 00 01 C0 0F 86 67 FF FF FF 5F
 ```
 
-Relevant disassembly from [cpu_hack/pstate_targeted_disasm.txt](cpu_hack/pstate_targeted_disasm.txt):
+Relevant disassembly from [cpu_hack/agesa_trace/pstate_targeted_disasm.txt](cpu_hack/agesa_trace/pstate_targeted_disasm.txt):
 
 ```text
 fff66e3a: cmp      eax, edx

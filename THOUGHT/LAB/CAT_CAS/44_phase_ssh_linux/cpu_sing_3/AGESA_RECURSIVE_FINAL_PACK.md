@@ -43,11 +43,11 @@ Gate 4 reached the exact injection boundary: there is no known executable cave l
 
 Required files/tools inside this lab:
 
-1. `cpu_hack/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt`
+1. `cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt`
    - Must include the full function containing `0xFFF737A3`, not only the middle block.
    - Must show assignments feeding `[ebp-8]`, `ecx`, and `esi`.
    - Must show the base structure behind `+0x0B`, `+0x0F`, `+0x10`, `+0x14`, `+0x1C`, and `+0x20`.
-2. `cpu_hack/AmdProcessorInitPeim_fff737a3_xrefs.txt`
+2. `cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_xrefs.txt`
    - Must include all callers and data/control xrefs to the containing function.
 3. `cpu_hack/tools/uefitool_rebuild/UEFITool.exe` or equivalent local replacement/rebuild tool.
    - Must support replace-body or replace-section and save-image.
@@ -61,7 +61,7 @@ Required files/tools inside this lab:
 Next RE command after decompiler artifact exists:
 
 ```powershell
-rg -n "fff737a3|fff73a90|ebp-8|\\+0x0b|\\+0x0f|\\+0x10|\\+0x14|\\+0x1c|\\+0x20|0x18|C0010068" cpu_hack/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt cpu_hack/AmdProcessorInitPeim_fff737a3_xrefs.txt
+rg -n "fff737a3|fff73a90|ebp-8|\\+0x0b|\\+0x0f|\\+0x10|\\+0x14|\\+0x1c|\\+0x20|0x18|C0010068" cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_xrefs.txt
 ```
 
 Next workflow command after replacer tool exists:

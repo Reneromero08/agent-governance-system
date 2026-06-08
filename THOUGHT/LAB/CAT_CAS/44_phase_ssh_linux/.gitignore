@@ -1,9 +1,14 @@
 # Exp44 local generated/binary artifacts
 
+cpu_hack/bios_dump.bin
+cpu_hack/bios_dump.bin.dump/
+cpu_hack/bios_parse/*.csv
+cpu_hack/_tmp_coreboot_*/
+cpu_hack/local_logs/
 cpu_hack/mod_donors/
 cpu_hack/noop_replace/*.bin
 cpu_hack/noop_replace/*.report.txt
-cpu_hack/tools/uefitool_rebuild/
+cpu_hack/tools/
 
 # Keep markdown summaries and text RE evidence tracked.
 !cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt

@@ -81,8 +81,8 @@ If a later no-op replace workflow succeeds, checksum validation must include:
 
 Exact missing artifacts:
 
-1. `cpu_hack/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt`
-2. `cpu_hack/AmdProcessorInitPeim_fff737a3_xrefs.txt`
+1. `cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt`
+2. `cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_xrefs.txt`
 3. `cpu_hack/tools/uefitool_rebuild/UEFITool.exe` or equivalent local replacement/rebuild tool
 4. `cpu_hack/noop_replace/bios_noop_rebuilt.bin`
 5. `cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt`

@@ -22,16 +22,16 @@ The current stop condition is exact:
 | Gate | Artifact | Result |
 |---|---|---|
 | A constructor decompile/xrefs | `cpu_sing_3/AGESA_NEXT_A_CONSTRUCTOR_DECOMPILE.md` | `CONSTRUCTOR_FUNCTION_IDENTIFIED_SOURCE_NOT_FULLY_PROVEN` |
-| A export | `cpu_hack/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt` | Function entry, stack frame, base flow, and field provenance recovered. |
-| A xrefs | `cpu_hack/AmdProcessorInitPeim_fff737a3_xrefs.txt` | No direct call xrefs; `.dG3_DXE` pointer xref at `0xFFF8D11E`. |
+| A export | `cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt` | Function entry, stack frame, base flow, and field provenance recovered. |
+| A xrefs | `cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_xrefs.txt` | No direct call xrefs; `.dG3_DXE` pointer xref at `0xFFF8D11E`. |
 | B table reopen | `cpu_sing_3/AGESA_NEXT_B_TABLE_REOPEN.md` | Runtime/dispatch-selected source indicated; P4 static record not found. |
 | C no-op rebuild | `cpu_sing_3/AGESA_NEXT_C_NOOP_REBUILD.md` | Rebuild blocked; no local replacer/save-image tool. |
 | D actionability | `cpu_sing_3/AGESA_NEXT_D_ACTIONABILITY.md` | `MISSING_ARTIFACT_BLOCKER`. |
 
 ## New Artifacts Produced
 
-- `cpu_hack/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt`
-- `cpu_hack/AmdProcessorInitPeim_fff737a3_xrefs.txt`
+- `cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt`
+- `cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_xrefs.txt`
 - `cpu_sing_3/AGESA_NEXT_A_CONSTRUCTOR_DECOMPILE.md`
 - `cpu_sing_3/AGESA_NEXT_B_TABLE_REOPEN.md`
 - `cpu_sing_3/AGESA_NEXT_C_NOOP_REBUILD.md`
@@ -64,7 +64,7 @@ This makes the next source hunt narrower: recover the `.dG3_DXE` dispatch table 
 
 Missing constructor-source artifact:
 
-`cpu_hack/AmdProcessorInitPeim_dG3_DXE_dispatch_table_consumer_decompile.txt`
+`cpu_hack/agesa_trace/AmdProcessorInitPeim_dG3_DXE_dispatch_table_consumer_decompile.txt`
 
 Missing no-op rebuild tool:
 
@@ -79,7 +79,7 @@ Acceptable rebuild equivalent:
 After the dispatch consumer artifact exists:
 
 ```powershell
-rg -n "FFF8D11E|FFF8D0EC|FFF7371A|arg_0C|selected_base|\\+0x0B|\\+0x0F|\\+0x10|\\+0x14|\\+0x1C|\\+0x20|0x18" cpu_hack/AmdProcessorInitPeim_dG3_DXE_dispatch_table_consumer_decompile.txt
+rg -n "FFF8D11E|FFF8D0EC|FFF7371A|arg_0C|selected_base|\\+0x0B|\\+0x0F|\\+0x10|\\+0x14|\\+0x1C|\\+0x20|0x18" cpu_hack/agesa_trace/AmdProcessorInitPeim_dG3_DXE_dispatch_table_consumer_decompile.txt
 ```
 
 After a rebuild-capable tool exists:

@@ -13,18 +13,22 @@ This index preserves the existing Exp44 phase layout. No files are reorganized i
 | `PHASE4_INTEGRATION_SUMMARY.md` | Exp44 root | Phase 4 summary | Phase 4 integration summary: Track A/B split, verdicts, next task. | Yes | Closeout artifact for Phase 4 dual-track architecture. |
 | `cpu_sing_1/*.md` | `cpu_sing_1/` | Phase 1 / CPU_SING | Runtime VID clamp, route reports, catalytic tape, `.holo`, VRM, detuning, GOE, and final pack. | Yes | Markdown lab reports are primary evidence. |
 | `cpu_sing_2/*.md` | `cpu_sing_2/` | Phase 2 | Kuramoto, active phase, deep control, AGESA P4-safe, GOE, Ising, detuning, markers, and external measurement reports. | Yes | Markdown lab reports are primary Phase 2 evidence. |
+| `2b_blackbox/*.md` | `2b_blackbox/` | Phase 2B black-box attractor | Passive-mechanism closure, decision tree, 2B.5A status, and transition reports. | Yes | Existing named Phase 2B workspace; keep as-is. |
 | `cpu_sing_3/*.md` | `cpu_sing_3/` | Phase 2/3 firmware | AGESA recursive gate, master dispatch, donor diff, arg0C provenance. | Yes | Records AGESA route blockers and exact next artifacts. |
 | `gpt_research/*.md` | `gpt_research/` | Research pathway | Undervolt pathway research and evidence inventory. | Yes | Markdown research reports are small and reproducible. |
-| `cpu_hack/PATCH_ANALYSIS.md` | `cpu_hack/` | Firmware lab | Patch analysis for AGESA/global branch/P4-safe route. | Yes | Primary firmware decision evidence. |
-| `cpu_hack/*.txt` | `cpu_hack/` | Firmware lab text evidence | Decompile, disasm, xref, service table, MSR source proof artifacts. | Yes | Small text evidence for firmware route. |
-| `cpu_hack/check_ics.ps1` | `cpu_hack/` | Firmware/board lab | Local board/clock inspection helpers. | Yes | Source scripts, not generated artifacts. |
+| `cpu_hack/CPU_HACK_INDEX.md` | `cpu_hack/` | Firmware lab index | Folder map for firmware evidence, local tools, generated trees, and no-op rebuild blocker. | Yes | Keeps the organized firmware workspace readable. |
+| `cpu_hack/agesa_trace/PATCH_ANALYSIS.md` | `cpu_hack/agesa_trace/` | Firmware lab | Patch analysis for AGESA/global branch/P4-safe route. | Yes | Primary firmware decision evidence. |
+| `cpu_hack/agesa_trace/*.txt` | `cpu_hack/agesa_trace/` | Firmware lab text evidence | Decompile, disasm, xref, service table, record map, and MSR source proof artifacts. | Yes | Small text evidence for firmware route. |
+| `cpu_hack/bios_parse/bios_dump.bin.report.txt` | `cpu_hack/bios_parse/` | Firmware lab parse report | UEFIExtract parse report for owned BIOS dump. | Yes | Small text parse evidence. |
+| `cpu_hack/board_probe/check_ics*.ps1` | `cpu_hack/board_probe/` | Firmware/board lab | Local board/clock inspection helpers. | Yes | Source scripts, not generated artifacts. |
 | `cpu_hack/bios_dump.bin` | `cpu_hack/` | Firmware lab raw artifact | Raw BIOS dump image. | No | Binary/sensitive; preserved locally. |
-| `cpu_hack/bios_dump.bin.*` | `cpu_hack/` | Firmware lab generated | GUID CSV, report, extracted tree. | No | Generated artifacts. |
+| `cpu_hack/bios_parse/*.csv` | `cpu_hack/bios_parse/` | Firmware lab generated | GUID CSV exports. | No | Generated artifacts. |
+| `cpu_hack/bios_dump.bin.dump/` | `cpu_hack/` | Firmware lab generated | UEFIExtract tree for owned dump. | No | Generated artifact tree. |
 | `cpu_hack/_tmp_coreboot_*/` | `cpu_hack/` | Firmware lab generated | Temporary coreboot/source extraction trees. | No | Generated/heavy local research trees. |
 | `cpu_hack/tools/` | `cpu_hack/` | Firmware lab local tools | Downloaded/local tools. | No | Local tool binaries. |
 | `cpu_hack/mod_donors/` | `cpu_hack/` | Firmware lab local | Downloaded stock/donor BIOS packages. | No | Binary/generated artifacts. |
 | `cpu_hack/noop_replace/*.bin` | `cpu_hack/noop_replace/` | Firmware lab local | Rebuilt/attempted BIOS images. | No | Binary/generated artifacts. |
-| `cpu_hack/catcas_*.log` | `cpu_hack/` | Firmware lab logs | Local probe and extraction logs. | No | Generated logs. |
+| `cpu_hack/local_logs/` | `cpu_hack/local_logs/` | Firmware lab logs | Local probe and extraction logs. | No | Generated logs. |
 
 ## Session Scripts (organized by phase)
 
@@ -44,6 +48,9 @@ This index preserves the existing Exp44 phase layout. No files are reorganized i
 | `core_state.py` | Core frequency state checker | Yes |
 | `msr_deep_probe.py` | Deep MSR probe: HWCR bits, NB P-state, COFVID vs P-state VID | Yes |
 | `msr_p4_readonly_observer.py` | Read-only Linux target observer for P-state MSRs | Yes |
+| `msr_load_affinity_characterizer.py` | Read-only load/affinity characterization for P4, COFVID, PSTATE_STATUS, and local TSC jitter | Yes |
+| `msr_transition_jitter_probe.py` | Read-only COFVID/PSTATE transition counter and timing-jitter summary probe | Yes |
+| `msr_state_window_oracle.py` | Read-only state-conditioned timing oracle with deterministic label-rotation nulls | Yes |
 | `recovery_check.py` | Post-CMOS-clear P-state verification | Yes |
 | `match_cores.py` | Set Cores 3+4 to matching 200MHz | Yes |
 | `smbus_scan.sh` | SMBus/I2C bus scan for VRM controller | Yes |
@@ -65,6 +72,22 @@ This index preserves the existing Exp44 phase layout. No files are reorganized i
 | `phase2_external_align.py` | Offline waveform/marker alignment for external measurement | Yes |
 | `phase2_marker_harness.c` | Marker harness for coupling detection | Yes |
 | `phase2_probe.c` | Phase 2 probe | Yes |
+
+### Phase 2B: Black-Box Attractor / Phase Oracle (`session_scripts/phase2b/`)
+
+| File | Purpose | Keep |
+|------|---------|------|
+| `active_catalytic_ising.c` | Active catalytic Ising comparator / Phase 3 bridge | Yes |
+| `channel_matrix.c` | Passive channel matrix across QR, retrocausal, fingerprint, and detuned harness channels | Yes |
+| `passive_attractor.c` | Passive hidden-attractor random-flip harness | Yes |
+| `phase_oracle_ising.c` | Exp20 vertex/ensemble phase-oracle Ising branch | Yes |
+| `topology_attractor.c` | Topology-encoded attractor tests | Yes |
+| `wormhole_correlation.c` | Wormhole/correlation phase-transfer test | Yes |
+| `wormhole_protocol_transfer.c` | Exp32 protocol transfer to catalytic tape | Yes |
+| `optical_3sat_phase_port.c` | Exp26-style optical 3-SAT phase mapping with random and ablated nulls | Yes |
+| `bloch_complex_ising.c` | Exp07-style Bloch/complex-plane active phase-oracle Ising port with random, sign-shuffled, and edge-rewired nulls | Yes |
+| `spectral_problem_classifier.c` | Exp31-style spectral/topological router for active edge, vertex phase, and Bloch/complex solver families | Yes |
+| `holo_mera_bridge.c` | Exp33-style `.holo`/MERA bridge from active phase-oracle output into reversible catalytic tape slots | Yes |
 
 ### Phase 3: Catalytic Computing Ladder (`session_scripts/phase3_catalytic/`)
 
@@ -97,7 +120,7 @@ This index preserves the existing Exp44 phase layout. No files are reorganized i
 
 ## Phase Layout Verdict
 
-- Keep `cpu_sing_1/`, `cpu_sing_2/`, `cpu_sing_3/`, `gpt_research/`, `cpu_hack/`, and `session_scripts/`.
+- Keep `cpu_sing_1/`, `cpu_sing_2/`, `cpu_sing_3/`, `2b_blackbox/`, `gpt_research/`, `cpu_hack/`, and `session_scripts/`.
 - Session scripts organized by phase: `phase1_msr/`, `phase2_kuramoto/`, `phase3_catalytic/`, `phase4_holo/`.
 - Do not recreate generic `docs/`, `reports/`, `firmware/`, or `archive/` folders.
 - Track markdown reports, source scripts, and small text evidence.

@@ -29,7 +29,7 @@ Gate C is blocked by absent local replacement/save-image tooling. Existing UEFIE
 
 ## Exact Remaining Blockers
 
-1. `cpu_hack/AmdProcessorInitPeim_dG3_DXE_dispatch_table_consumer_decompile.txt`
+1. `cpu_hack/agesa_trace/AmdProcessorInitPeim_dG3_DXE_dispatch_table_consumer_decompile.txt`
    - Needed to prove how the `.dG3_DXE` table reaches `0xFFF7371A` and what source feeds `arg_0C`.
 2. `cpu_hack/tools/uefitool_rebuild/UEFITool.exe`
    - Needed to perform no-op PE32 body replacement and save a rebuilt image.
