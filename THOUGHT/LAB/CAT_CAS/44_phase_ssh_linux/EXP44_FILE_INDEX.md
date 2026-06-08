@@ -135,15 +135,21 @@ This index preserves the existing Exp44 phase layout. No files are reorganized i
 | `operator_goe.c` | Phase 4.4A catalytic operator-matrix eigenvalue spacing and null comparison | Yes |
 | `holo_mini_model.c` | Phase 4.5 tiny graph-class `.holo` mini-model with decode and restore controls | Yes |
 | `catcas_holo_harness.c` | Phase 4.6 CLI-style public `.holo` harness for residual, mini, GOE, and all-test modes | Yes |
-| (pending) `polytope_hypothesis.c` | Phase 5.6 polytope/positive-geometry hypothesis test harness | Not yet |
+| `polytope_hypothesis.c` | Canonical hardened Phase 5.6 polytope/positive-geometry full-carrier hypothesis harness | Yes |
+
+### Phase 5.7: Entropic Boundary Geometry (`phase5_7/`)
+
+| File | Purpose | Keep |
+|------|---------|------|
+| `PHASE5_7_ENTROPIC_BOUNDARY_GEOMETRY.md` | Roadmap for testing load/entropy as computational carrier-boundary deformation after Phase 5.6 | Yes |
 
 ---
 
 ## Phase Layout Verdict
 
 - Keep `cpu_sing_1/`, `cpu_sing_2/`, `cpu_sing_3/`, `2b_blackbox/`, `gpt_research/`, `cpu_hack/`, and `session_scripts/`.
-- Session scripts organized by phase: `phase1_msr/`, `phase2_kuramoto/`, `phase3_catalytic/`, `phase4_holo/`.
+- Session scripts organized by phase: `phase1_msr/`, `phase2_kuramoto/`, `phase3_catalytic/`, `phase4_holo/`, `phase5_6/`, and pending `phase5_7/`.
 - Do not recreate generic `docs/`, `reports/`, `firmware/`, or `archive/` folders.
 - Track markdown reports, source scripts, and small text evidence.
 - Ignore raw BIOS images, extracted BIOS trees, generated logs, CSV exports, compiled binaries, and local tool trees.
-- Phase 3 COMPLETE. Phase 4 Track A complete through public harness packaging. Phase 4 Track B pending Phase 2 physical/firmware breakthrough. Phase 5.6 polytope/positive-geometry hypothesis roadmap added (not yet implemented).
+- Phase 3 COMPLETE. Phase 4 Track A complete. Phase 4 Track B pending Phase 2. Phase 5.6 confirmed as `PHASE5_6_POLYTOPE_GEOMETRY_CONFIRMED`: the canonical harness now generates full T0/T1/T2/T3 carrier rows, rejects same-final-hash wrong-answer controls, predicts held-out rows, passes static projection hierarchy, and passes fine residual-boundary deformation. Phase 5.7 owns load/entropy boundary deformation.

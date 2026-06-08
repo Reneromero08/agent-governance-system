@@ -1,0 +1,17 @@
+=== PHASE 5.6: POLYTOPE / POSITIVE-GEOMETRY HYPOTHESIS ===
+
+Dataset:
+  rows_total: 264
+  catalytic_rows: 24
+  null_rows: 240
+  predictive_features: 72
+
+Null exclusion:
+  same_final_hash_wrong_answer_exclusion: 1.000000
+
+Predictive geometry:
+  holdout_accuracy: 1.000000
+  balanced_accuracy: 1.000000
+  true_positive_rate: 1.000000
+
+=== VERDICT: PHASE5_6_POLYTOPE_GEOMETRY_CONFIRMED ===

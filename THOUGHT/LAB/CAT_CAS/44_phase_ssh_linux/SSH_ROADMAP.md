@@ -1153,9 +1153,10 @@ Phase 4 is where `.holo` stops being only a file/compression idea and becomes a 
 - [ ] Measure whether the PRO core's `rdtsc` jitter spontaneously forms transient phase-locked states
 - [ ] If yes: the silicon's thermal noise IS a computation — random noise solving optimization problems via spontaneous synchronization
 
-### 5.6 Polytope / Positive-Geometry Hypothesis Test — ROADMAP ADDED
+### 5.6 Polytope / Positive-Geometry Hypothesis Test — HARDENED
 
-**Status:** `PHASE5_6_POLYTOPE_HYPOTHESIS_ROADMAP_ADDED`
+**Status:** `PHASE5_6_POLYTOPE_GEOMETRY_CONFIRMED` (2026-06-08)
+**Repair status:** DeepSeek implementation replaced with full-carrier T0/T1/T2/T3 harness.
 
 **Objective:** Test whether the confirmed CAT_CAS relational invariant, residual channel, operator statistics, and .holo mini-model outputs occupy a separable polytope-like region in relational feature space. This asks whether CAT_CAS Track A is better described as step-by-step algorithmic execution or navigation/projection of a higher-dimensional relational geometry whose boundary constraints determine answer-carrying invariants.
 
@@ -1165,23 +1166,87 @@ Phase 4 is where `.holo` stops being only a file/compression idea and becomes a 
 
 **Critical Correction:** Do NOT build the polytope from only the four snapshot scalar strengths (strength_t0..strength_t3). In Phase 3B, catalytic rows have strength=1.000 at all four snapshots, collapsing the catalytic hull into a degenerate point. The correct feature space uses full carrier-coordinate vectors: snapshot strengths, answer/restoration fields, residual tag coordinates, XOR/parity features, Walsh-Hadamard features, graph spectral features, .holo basis and residual slots, operator GOE/statistical features, correlation/MI features, and null-distance metrics.
 
-**Subphases:** See `PHASE5_6_POLYTOPE_HYPOTHESIS_ROADMAP.md` for full test plan.
-
-- [ ] 5.6.0: Feature-Space Definition — `PHASE5_6_FEATURE_SPACE_DEFINED`
-- [ ] 5.6.1: Dataset Builder — `PHASE5_6_DATASET_BUILT`
-- [ ] 5.6.2: Convex Hull / Geometry Builder — `PHASE5_6_GEOMETRY_BUILDER_READY`
-- [ ] 5.6.3: Null Exclusion / Cluster Separation Test — `PHASE5_6_NULL_EXCLUSION_{PASS|PARTIAL|FAILED}`
-- [ ] 5.6.4: Holographic Projection Test — `PHASE5_6_PROJECTION_HIERARCHY_{PASS|PARTIAL|COLLAPSE}`
-- [ ] 5.6.5: Predictive Geometry Test — `PHASE5_6_PREDICTIVE_GEOMETRY_{PASS|PARTIAL|FAILED}`
-- [ ] 5.6.6: Entropy / CPU-Load Geometry Expansion Test — `PHASE5_6_ENTROPY_GEOMETRY_EXPANSION_{PASS|PARTIAL|NOISE_ONLY|LOAD_DESTROYS}`
-- [ ] 5.6.7: Residual Boundary Deformation Test — `PHASE5_6_RESIDUAL_BOUNDARY_DEFORMATION_{PASS|PARTIAL|FAILED}`
-- [ ] 5.6.8: Polytope Decision Gate — `PHASE5_6_POLYTOPE_GEOMETRY_{CONFIRMED|PARTIAL|ANALOGY_WEAK|HYPOTHESIS_REJECTED}`
+**Subphases:** See `phase5_6/PHASE5_6_POLYTOPE_HYPOTHESIS_ROADMAP.md` for full test plan.
 
 **Claim Boundaries:** Phase 5.6 does not test whether CAT_CAS is literally the amplituhedron or cosmological polytope. It tests whether CAT_CAS produces a computational analogue: points = relational carrier states, transitions = reversible operator histories, hull/body = admissible catalytic region, boundary = valid answer-carrying constraints, outside region = null or wrong-answer histories, projection loss = entropy/noise-like observer limitation, residual tags = local boundary deformation coordinates.
 
 **Forbidden claims:** AMPLITUHEDRON_PROVEN, COSMOLOGICAL_POLYTOPE_PROVEN, PHYSICAL_HOLOGRAPHY_PROVEN, QUANTUM_GEOMETRY_PROVEN, physical Kuramoto, quantum coherence, Landauer violation, zero heat, microscopic entropy reduction.
 
-**Artifacts:** `PHASE5_6_POLYTOPE_HYPOTHESIS_ROADMAP.md`, `session_scripts/phase5_6/polytope_hypothesis.c`, `phase5_6/results/polytope_feature_dataset.csv`, `phase5_6/results/polytope_hull_stats.csv`.
+**Repair findings:**
+- DeepSeek's `polytope_full.c` generated Phase 4 null rows before populating the catalytic index, so its claimed 12-null-class dataset was not reliable.
+- A first repair pass exposed label leakage through residual tags derived from `answer_correct`; the canonical harness now derives carrier tags from carrier/seed structure only.
+- Same-final-hash wrong-answer controls must differ at the T2 answer boundary while preserving identical T3 restoration. The confirmed harness now tests that boundary without diagnostic outcome labels.
+
+**Hardened Results Summary:**
+- Rows: 264 total = 24 catalytic + 240 null/control rows.
+- Predictive features: 72 full-carrier columns generated from real CAT_CAS T0/T1/T2/T3 transition state.
+- Diagnostic labels excluded: class label, pass label, answer correctness.
+- Full carrier artifact availability: `PASS`; harness no longer depends on scalar Phase 3B summary rows.
+- Same-final-hash wrong-answer exclusion: `1.000000` against threshold `>=0.95`.
+- Held-out accuracy: `1.000000`; balanced accuracy: `1.000000`; catalytic true-positive rate: `1.000000`.
+- Null exclusion: 10/10 null/control classes excluded at `1.000000`.
+- Static projection hierarchy: `PASS` with 6 separating/informative subspaces.
+- Fine residual-boundary deformation: `PASS` across the perturbation ladder.
+- Entropy/load geometry: deferred to Phase 5.7; not required for static Phase 5.6 confirmation.
+
+**Verdict:** `PHASE5_6_POLYTOPE_GEOMETRY_CONFIRMED`. The hardened result supports a static computational carrier-geometry boundary: full T0/T1/T2/T3 carrier coordinates reject same-final-hash wrong-answer controls and predict held-out catalytic rows without outcome labels. Projection hierarchy and fine residual-boundary deformation gates pass. This is not a physical holography, physical Kuramoto, quantum, or thermodynamic claim. Load/entropy deformation is Phase 5.7, not a remaining Phase 5.6 blocker.
+
+**Artifacts:** `phase5_6/PHASE5_6_POLYTOPE_HYPOTHESIS.md`, `phase5_6/FEATURE_SPACE_SPEC.md`, `phase5_6/results/`, `session_scripts/phase5_6/polytope_hypothesis.c`.
+
+---
+
+### 5.7 Entropic Boundary Geometry Probe — ROADMAP ADDED
+
+**Status:** `PHASE5_7_ENTROPIC_BOUNDARY_ROADMAP_ADDED` (2026-06-08)
+
+**Objective:** Test the current intuition directly: operational noise/chaos/entropy may be the observable boundary projection of a richer relational carrier geometry, not mere degradation. Phase 5.7 asks whether CPU load and accessible-state expansion deform the Phase 5.6 admissible carrier boundary while preserving answer-predictive invariants.
+
+**Starting point:** Phase 5.6 confirmed as `PHASE5_6_POLYTOPE_GEOMETRY_CONFIRMED`. The static/full-carrier boundary rejects same-final-hash wrong-answer controls, predicts held-out rows, passes projection hierarchy, and passes fine residual-boundary deformation. Phase 5.7 now owns load/entropy deformation.
+
+**Core hypothesis:**
+```
+operational entropy / contention / jitter
+  -> observable boundary deformation
+  -> larger or shifted admissible carrier geometry
+  -> invariant remains answer-predictive
+  -> null and wrong-answer histories remain outside
+```
+
+**Required implementation:** `session_scripts/phase5_7/entropic_boundary_probe.c`
+
+**Required outputs:**
+- `phase5_7/PHASE5_7_ENTROPIC_BOUNDARY_GEOMETRY.md`
+- `phase5_7/results/entropic_boundary_summary.csv`
+- `phase5_7/results/load_boundary_raw.csv`
+- `phase5_7/results/null_boundary_exclusion.csv`
+- `phase5_7/results/residual_deformation_under_load.csv`
+- `phase5_7/results/phase5_7_stdout.txt`
+
+**Load modes:**
+- LOW: baseline harness only.
+- MEDIUM: bounded background workers and memory/cache pressure.
+- HIGH: short bounded saturation run; no voltage writes, no P-state writes, no BIOS writes, no MSR writes.
+
+**Required gates:**
+- Same-final-hash wrong-answer exclusion remains `>=0.95` under every safe load mode.
+- Catalytic true-positive rate remains `>=0.80`.
+- Balanced held-out accuracy remains `>=0.80`.
+- Boundary volume/area/proxy changes by `>=10%` under MEDIUM or HIGH load.
+- Null exclusion does not collapse under load.
+- Load effect correlates with carrier/boundary features, not only raw timing jitter.
+
+**Decision labels:**
+- `PHASE5_7_ENTROPIC_BOUNDARY_CONFIRMED`
+- `PHASE5_7_ENTROPIC_BOUNDARY_PARTIAL`
+- `PHASE5_7_NOISE_ONLY`
+- `PHASE5_7_LOAD_DESTROYS_INVARIANT`
+- `PHASE5_7_INCONCLUSIVE_SENSOR_LIMIT`
+
+**Claim boundary:** Phase 5.7 may claim only computational boundary deformation of the CAT_CAS carrier geometry. It must not claim physical holography, AdS/CFT, quantum coherence, physical Kuramoto, Landauer violation, zero heat, or thermodynamic entropy reduction.
+
+**Next action:** Implement Phase 5.7 harness using the Phase 5.6 full-carrier generator as the baseline and add bounded load/background contention modes.
+
+**Artifacts:** `phase5_7/PHASE5_7_ENTROPIC_BOUNDARY_GEOMETRY.md`.
 
 ---
 

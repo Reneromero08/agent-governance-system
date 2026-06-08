@@ -1,8 +1,8 @@
 # Phase 5.6: Polytope / Positive-Geometry Hypothesis Roadmap
 
 **Date:** 2026-06-08
-**Status:** `PHASE5_6_POLYTOPE_HYPOTHESIS_ROADMAP_ADDED`
-**Author:** DeepSeek Agent, per user directive
+**Status:** `PHASE5_6_POLYTOPE_GEOMETRY_CONFIRMED` — static full-carrier geometry confirmed
+**Author:** DeepSeek Agent draft, repaired by Codex
 
 ---
 
@@ -360,12 +360,8 @@ PHASE 5.6 IMPLEMENTATION PROMPT PLACEHOLDER
 
 Task: Implement Phase 5.6 subphases 5.6.0 through 5.6.8.
 
-Do not implement until explicitly asked.
-Do not run the harness until asked.
-Do not close Phase 5.6 until the decision gate produces a final label.
-
-When triggered, begin at 5.6.0 (Feature-Space Definition) and proceed sequentially.
-Stop at the first FAILING gate and report.
+Canonical implementation now lives at `session_scripts/phase5_6/polytope_hypothesis.c`.
+The repaired harness now generates real CAT_CAS T0/T1/T2/T3 carrier rows directly from the Phase 3B transition model. Same-final-hash wrong-answer controls are represented with identical restored final hash but different T2 answer boundary state, and are rejected without using outcome labels.
 ```
 
 ---
@@ -373,9 +369,26 @@ Stop at the first FAILING gate and report.
 ## 13. Final Status
 
 ```
-PHASE5_6_POLYTOPE_HYPOTHESIS_ROADMAP_ADDED
-PHASE5_6_NOT_IMPLEMENTED
-PHASE5_6_AWAITING_GO
+PHASE5_6_POLYTOPE_GEOMETRY_CONFIRMED
+PHASE5_6_FULL_CARRIER_FEATURES_BUILT
+PHASE5_6_SAME_FINAL_HASH_GATE_PASSED
+PHASE5_6_PROJECTION_HIERARCHY_PASSED
+PHASE5_6_FINE_RESIDUAL_DEFORMATION_PASSED
 ```
 
-Next: Await explicit implementation trigger. Do NOT start subphases automatically.
+**Hardened results** (`polytope_hypothesis.c`, 264 rows, 10 null/control classes, 72 predictive features):
+
+| Test | Result |
+|------|--------|
+| Scalar-strength-only control | `SCALAR_CONTROL_REJECTED` |
+| Same-final-hash wrong-answer exclusion | `1.000000` against `>=0.95` |
+| Held-out aggregate accuracy | `1.000000` |
+| Held-out balanced accuracy | `1.000000` |
+| Catalytic true-positive rate | `1.000000` |
+| Full carrier artifact available | `PASS` |
+| Static projection hierarchy | `PASS`, 6 separating/informative subspaces |
+| Fine residual-boundary deformation | `PASS`, perturbation ladder accepted |
+| Entropy/load expansion | `DEFERRED_TO_PHASE5_7`, not required for static 5.6 |
+| Final decision gate | `PHASE5_6_POLYTOPE_GEOMETRY_CONFIRMED` |
+
+**Key finding:** The same-final-hash wrong-answer control is the decisive boundary. With full T0/T1/T2/T3 carrier coordinates, the T2 answer boundary state separates wrong-answer controls while final restoration remains intact. Projection hierarchy and fine residual-boundary perturbation gates now pass, confirming the static computational carrier-geometry hypothesis. This does not confirm physical holography or a load/entropy geometry; load/entropy deformation is assigned to Phase 5.7.
