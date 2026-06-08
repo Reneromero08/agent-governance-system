@@ -2,11 +2,13 @@
 
 ## Verdict
 
-`TOOLCHAIN_ACQUIRED_FORCE_SAVE_BLOCKED`
+`NOOP_REBUILD_PROVEN`
 
-Route B was rechecked against the current Exp44 filesystem. Rebuild-capable LongSoft classic tools are now present, but the required parse-clean identical no-op rebuilt image still does not exist.
+Route B now has a parse-clean identical no-op rebuilt image for the AmdProcessorInitPeim PE32 body.
 
-## Local Tooling Found
+This proves rebuild/save mechanics. It does not make AGESA byte-ready because the current P4 provenance still resolves to runtime `MSRC001_0068`, not an editable static P4-only source.
+
+## Tooling Found And Used
 
 Found inside `cpu_hack/tools/uefitool_rebuild/`:
 
@@ -15,112 +17,89 @@ Found inside `cpu_hack/tools/uefitool_rebuild/`:
 | `UEFIReplace.exe` | `AB05D53FCAC19651818F4EE4505813B10BADEC7A10D141836FFF3BBA8964ED8B` |
 | `UEFITool.exe` | `26F85D22712361595C70EE982B1BB8CFFDCC0CA4CE1FB5049B9F7A0115A7EDED` |
 
-Also present:
+The stock Windows CLI has no force-save option for identical replacements. Source review showed two suppressors:
 
-- `UEFIReplace_0.28.0_win32.zip`
-- `UEFITool_0.28.0_win32.zip`
-- `source_0.28.0/`
+```text
+ffsengine.cpp: identical body returns ERR_NOTHING_TO_PATCH
+UEFIReplace/uefireplace.cpp: reconstructed == buffer returns ERR_NOTHING_TO_PATCH
+```
 
-The earlier `MISSING_REBUILD_TOOLCHAIN` state is obsolete.
+To prove the gate, public LongSoft/UEFITool `old_engine` source was fetched into ignored local tool tree:
 
-## No-Op Replacement Status
+```text
+cpu_hack/tools/UEFITool_repo/
+```
 
-`NOOP_REBUILD_PROVEN` is not met.
+A temporary Qt/qmake build on the Linux target compiled a force-save UEFIReplace variant with only those suppressors removed.
 
-Required output still missing:
+## Accepted No-Op Replacement
+
+Only identical body replacement was performed:
+
+```text
+UEFIReplace bios_dump.bin DE3E049C-A218-4891-8658-5FC0FA84C788 10 body.bin -o bios_noop_rebuilt.bin
+```
+
+Accepted artifact:
 
 ```text
 cpu_hack/noop_replace/bios_noop_rebuilt.bin
 ```
 
-Existing rejected outputs:
+## Verification
 
-| File | SHA-256 | Status |
-|---|---|---|
-| `cpu_hack/noop_replace/bios_noop_rebuilt_asis.bin` | `5D2442DB5B7733D9E6A34EB453E5936F6C270451F48B0CD27BD9B2503BDEC85A` | rejected parser output |
-| `cpu_hack/noop_replace/bios_noop_rebuilt_all__asis.bin` | `5D2442DB5B7733D9E6A34EB453E5936F6C270451F48B0CD27BD9B2503BDEC85A` | rejected parser output |
-| `cpu_hack/noop_replace/AmdProcessorInitPeim_PE32_section.bin` | `3E3DB0BCF0CBC7C5267CA231634FC5B70E655FE7577D6985AF7EC881C2B3513C` | generated full PE32 section attempt |
-
-`cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt` remains the authoritative failed no-op attempt log.
-
-## Source-Level Finding
-
-The local LongSoft source explains why the identical CLI no-op did not save an accepted image.
-
-Evidence:
+Image hashes:
 
 ```text
-UEFIReplace_uefireplace_main.cpp:34
-Usage: UEFIReplace image_file guid section_type contents_file [-o output] [-all] [-asis]
-
-UEFIReplace_uefireplace.cpp:104
-patched = result == ERR_SUCCESS;
-
-UEFIReplace_uefireplace.cpp:121
-return patched ? ERR_SUCCESS : ERR_NOTHING_TO_PATCH;
-
-ffsengine.cpp:4812
-if (body != model->body(index)) { ... }
-
-ffsengine.cpp:4818
-return ERR_NOTHING_TO_PATCH;
+B7C0C725C4B6F50F399A208E5CAD6938BAACDD8FA1BBC795098CA393083FBC91  cpu_hack/bios_dump.bin
+B7C0C725C4B6F50F399A208E5CAD6938BAACDD8FA1BBC795098CA393083FBC91  cpu_hack/noop_replace/bios_noop_rebuilt.bin
 ```
 
-Interpretation:
-
-- `UEFIReplace.exe` has no force-save option.
-- Identical body replacement is treated as `ERR_NOTHING_TO_PATCH`.
-- The CLI only writes a successful output when the object actually changes.
-- Passing `-asis` with body bytes creates rejected images because the body is interpreted as a full section object.
-- Passing a generated full PE32 section still did not produce an accepted no-op image for this target.
-
-## Build Environment Check
-
-Local build tools found:
-
-- `cmake.exe`
-
-Not found in the lab command environment:
-
-- `qmake`
-- `mingw32-make`
-- Qt build environment needed to compile a modified LongSoft `UEFIReplace`
-
-No local process remained after probing `UEFITool.exe`.
-
-## Exact Current Blocker
-
-`NOOP_REBUILD_FORCE_SAVE_BLOCKED`
-
-The missing artifact is exact:
+Binary compare:
 
 ```text
-cpu_hack/noop_replace/bios_noop_rebuilt.bin
+fc /b cpu_hack/bios_dump.bin cpu_hack/noop_replace/bios_noop_rebuilt.bin
+FC: no differences encountered
 ```
 
-The exact acceptable ways to produce it are:
-
-1. Manual GUI force-save with classic `cpu_hack/tools/uefitool_rebuild/UEFITool.exe`, replacing the AmdProcessorInitPeim PE32 body with the identical extracted `body.bin`, then saving the image.
-2. A Qt/qmake build environment capable of compiling a modified `UEFIReplace` that treats an identical matched replacement as a force-save success.
-3. Another public CLI replacer with documented force-output behavior for identical replacements.
-
-## Required Acceptance After Artifact Exists
-
-When `cpu_hack/noop_replace/bios_noop_rebuilt.bin` exists:
-
-1. Parse the rebuilt image with local UEFI extraction tooling.
-2. Verify the target PE32 body hash remains:
+Parser:
 
 ```text
+UEFIExtract cpu_hack/noop_replace/bios_noop_rebuilt.bin report
+exit code 0
+report: cpu_hack/noop_replace/bios_noop_rebuilt.bin.report.txt
+```
+
+Target PE32 body:
+
+```text
+cpu_hack/noop_replace/rebuilt_AmdProcessorInitPeim_PE32_body.bin/body.bin
 BF92A1321B98908E7D74299A6C1E629EC3583599F164DEC6E774BFF040FBDF2A
 ```
 
-3. Create a fresh byte-difference table against stock.
-4. Keep the verdict as `NOOP_REBUILD_PROVEN` only if the image is parse-clean and the target body hash is unchanged.
+## Byte-Difference Table
+
+| Compared files | Difference count | Explanation |
+|---|---:|---|
+| `cpu_hack/bios_dump.bin` vs `cpu_hack/noop_replace/bios_noop_rebuilt.bin` | 0 | Force-saved no-op output is byte-identical to stock. |
+
+There are no changed offsets, no changed FFS checksums, and no changed target PE32 body bytes.
+
+## Current Blocker After Route B
+
+`AGESA_P4_SAFE_ROUTE_NOT_BYTE_READY`
+
+The missing artifact is no longer the no-op rebuild image. The remaining missing proof is:
+
+- editable P4-only source or edit target,
+- P0-P3 unchanged proof,
+- P4-only effect proof,
+- offsets/bytes/checksum proof,
+- clean parse proof after a non-no-op candidate.
 
 ## Safety
 
 - No firmware was flashed.
 - No voltage writes were performed.
-- No patch bytes were produced.
+- No patch bytes were produced for firmware behavior.
 - No P0-P3 or P4 bytes were modified in an accepted image.

@@ -1,6 +1,6 @@
 # AGESA Gate 3 No-Op Replace Workflow
 
-Status: `NOOP_REPLACE_WORKFLOW_BLOCKED_BY_REPLACER_TOOL_MISSING`
+Status: `NOOP_REBUILD_PROVEN`
 
 Scope: owned local firmware route research. No flash command. No hardware-changing command.
 
@@ -20,12 +20,14 @@ Identity proof:
 | BIOS slice SHA-256 | `BF92A1321B98908E7D74299A6C1E629EC3583599F164DEC6E774BFF040FBDF2A` |
 | Match | yes |
 
-Available local tool binaries:
+Available local extraction binaries:
 
 - `cpu_hack/tools/uefitool/UEFIExtract.exe`
 - `cpu_hack/tools/uefitool_A74/UEFIExtract.exe`
 
 Both local binaries are extraction/report tools. Their help output supports report, dump, unpack, and GUID extraction modes. They do not provide replace-body and save-image functionality.
+
+Rebuild/save proof was later produced through a temporary Qt/qmake build of public LongSoft `old_engine` UEFIReplace with identical-body force-save behavior enabled.
 
 ## Required No-Op Workflow
 
@@ -43,20 +45,21 @@ The no-op workflow must prove the editor/rebuilder path before any logic change:
    - target PE32 body hash remains `BF92A1321B98908E7D74299A6C1E629EC3583599F164DEC6E774BFF040FBDF2A`,
    - stock vs rebuilt diff is limited to expected checksum bytes, or ideally no bytes differ for identical replacement.
 
-## Blocker
+## Accepted Output
 
-`MISSING_ARTIFACT_BLOCKER: local UEFI replacement/rebuild tool is absent.`
+`NOOP_REBUILD_PROVEN`
 
-Exact missing tool/artifact:
-
-- `cpu_hack/tools/uefitool_rebuild/UEFITool.exe` or equivalent UEFITool NE/A-series GUI/CLI build that can replace a PE32 image section body and save the firmware image.
-- Alternative acceptable artifact: a documented `UEFIPatch.exe` workflow with a no-op patch descriptor that rewrites identical bytes and emits a parseable rebuilt image.
-
-Required output after the tool exists:
+Accepted files:
 
 - `cpu_hack/noop_replace/bios_noop_rebuilt.bin`
-- `cpu_hack/noop_replace/bios_noop_rebuilt.report.txt`
+- `cpu_hack/noop_replace/bios_noop_rebuilt.bin.report.txt`
 - `cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt`
 
-Gate 3 is not byte-ready until this no-op replace/rebuild path is proven.
+Verification:
 
+- stock and rebuilt image SHA-256 match,
+- `fc /b` reports no differences,
+- UEFIExtract report mode exits 0,
+- rebuilt target PE32 body hash remains `BF92A1321B98908E7D74299A6C1E629EC3583599F164DEC6E774BFF040FBDF2A`.
+
+Gate 3 is proven. This does not create a P4-safe candidate; Gate 5 remains blocked by missing P4-only edit-source proof.

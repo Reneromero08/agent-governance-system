@@ -1,61 +1,68 @@
 # AGESA Next C No-Op Rebuild
 
-Status: `NOOP_REBUILD_BLOCKED_REPLACER_TOOL_MISSING`
+Status: `NOOP_REBUILD_PROVEN`
 
 Scope: owned local firmware route research. No flash command. No hardware-changing command.
 
 ## Tool Search
 
-Searches performed:
+Searches and follow-up actions performed:
 
-- Local lab `cpu_hack/tools` for UEFITool/UEFIPatch/AMI replacement tools.
-- Local repo read-only search for exact rebuild-capable tool names.
-- PATH command lookup for UEFITool, UEFIPatch, Ghidra/IDA/rizin-style tools.
+- Local lab `cpu_hack/tools` searched for UEFITool/UEFIPatch/AMI replacement tools.
+- Existing UEFIExtract tools were treated as extraction-only and not counted as rebuild tools.
+- LongSoft classic 0.28.0 tooling was found under `cpu_hack/tools/uefitool_rebuild/`.
+- Public LongSoft/UEFITool `old_engine` source was fetched into ignored local tool tree `cpu_hack/tools/UEFITool_repo/`.
+- Qt5 qmake/g++ toolchain on the Linux target was used to compile a temporary force-save UEFIReplace variant.
 
-Result:
+## No-Op Replacement Performed
 
-- Rebuild-capable `UEFITool.exe`, `UEFITool_NE`, `UEFIPatch.exe`, `MMTool`, `AMIBCP`, `UEFIReplace`, or AMI replacement/save-image tool: not found.
-- Existing tools found only:
-  - `cpu_hack/tools/uefitool/UEFIExtract.exe`
-  - `cpu_hack/tools/uefitool_A74/UEFIExtract.exe`
-- These are extraction/report tools only and do not count as rebuild tools.
+Only identical-body replacement was performed:
 
-## No-Op Replacement Status
+```text
+UEFIReplace bios_dump.bin DE3E049C-A218-4891-8658-5FC0FA84C788 10 body.bin -o bios_noop_rebuilt.bin
+```
 
-No no-op replacement was performed because no local replacer/save-image tool exists.
+Accepted output:
 
-The verified target PE32 body remains:
+```text
+cpu_hack/noop_replace/bios_noop_rebuilt.bin
+```
 
-| Item | Value |
-|---|---|
-| Body path | `cpu_hack/bios_dump.bin.dump/5 8C8CE578-8A3D-4F1C-9935-896185C32DD3/0 AmdProcessorInitPeim/1 PE32 image section/body.bin` |
-| Body hash | `BF92A1321B98908E7D74299A6C1E629EC3583599F164DEC6E774BFF040FBDF2A` |
-| BIOS raw body start | `0x0034008C` |
-| Body length | `0x56360` |
+The rebuilt image SHA-256 matches stock:
 
-## Required Missing Tool
+```text
+B7C0C725C4B6F50F399A208E5CAD6938BAACDD8FA1BBC795098CA393083FBC91
+```
 
-Exact missing tool/artifact:
+`fc /b` reported no differences between `cpu_hack/bios_dump.bin` and `cpu_hack/noop_replace/bios_noop_rebuilt.bin`.
 
-`cpu_hack/tools/uefitool_rebuild/UEFITool.exe`
+## Parser And Body Verification
 
-Acceptable equivalent:
+UEFIExtract report mode parsed the rebuilt image with exit code 0:
 
-- a local UEFITool NE/A-series GUI or CLI build that supports replacing the PE32 body/section and saving the rebuilt image, or
-- `cpu_hack/tools/uefipatch/UEFIPatch.exe` plus a documented no-op patch descriptor capable of emitting a rebuilt image.
+```text
+cpu_hack/noop_replace/bios_noop_rebuilt.bin.report.txt
+```
 
-## Required Outputs After Tool Exists
+The target PE32 body was extracted from the rebuilt image and hashed:
 
-Only after a real replacer exists:
-
-- `cpu_hack/noop_replace/bios_noop_rebuilt.bin`
-- `cpu_hack/noop_replace/bios_noop_rebuilt.report.txt`
-- `cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt`
-
-`NOOP_DIFF_SUMMARY.txt` must explain every stock-vs-rebuilt byte difference and verify that the target PE32 body hash remains `BF92A1321B98908E7D74299A6C1E629EC3583599F164DEC6E774BFF040FBDF2A`.
+```text
+cpu_hack/noop_replace/rebuilt_AmdProcessorInitPeim_PE32_body.bin/body.bin
+BF92A1321B98908E7D74299A6C1E629EC3583599F164DEC6E774BFF040FBDF2A
+```
 
 ## Gate C Decision
 
-`MISSING_ARTIFACT_BLOCKER`
+`NOOP_REBUILD_PROVEN`
 
-No-op rebuild cannot progress further from current local tools.
+This proves a parse-clean force-saved no-op rebuild path exists for this target PE32 body.
+
+It does not prove a P4-safe edit target. The firmware route is still blocked from byte-ready review until the P4-only source/edit target is proven with P0-P3 unchanged, P4-only effect, offsets/bytes/checksums, and clean parse evidence.
+
+## Safety
+
+- No BIOS flash.
+- No voltage writes.
+- No board modification.
+- No firmware behavior patch bytes.
+- No P0-P3 or P4 bytes modified in the accepted image.

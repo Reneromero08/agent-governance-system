@@ -1,6 +1,6 @@
 # AGESA Gate 5 Patch Candidate
 
-Status: `NO_BYTE_READY_PATCH_CANDIDATE_MISSING_ARTIFACT_BLOCKER`
+Status: `NO_BYTE_READY_PATCH_CANDIDATE_P4_SOURCE_MISSING`
 
 Scope: owned local firmware route research. No flash command. No hardware-changing command.
 
@@ -19,7 +19,7 @@ No byte-ready patch candidate exists from current artifacts.
 | Route | Candidate status | Reason |
 |---|---|---|
 | A: table edit | Not ready | Gate 2 did not find a P4 record or sibling P0-P3 records in current bytes. |
-| B: code injection | Not ready | Gate 3 no-op replacement workflow is blocked by missing rebuild tool; Gate 4 found no large enough executable cave. |
+| B: code injection | Not ready | Gate 3 no-op replacement workflow is now proven, but Gate 4 found no large enough executable cave and no P4-only edit source is proven. |
 | C: reject route | Not proven | Current evidence blocks actionability, but does not prove hard impossibility. The constructor path still implies a runtime per-P-state source. |
 
 ## No Original/New Bytes
@@ -49,7 +49,7 @@ Not satisfiable yet. Current P4 distinction inside the normalizer/helper is loop
 
 No checksum change is proposed because no patch candidate is proposed.
 
-If a later no-op replace workflow succeeds, checksum validation must include:
+For any later non-no-op candidate, checksum validation must include:
 
 - FFS header checksum,
 - FFS data checksum,
@@ -77,15 +77,14 @@ If a later no-op replace workflow succeeds, checksum validation must include:
 
 ## Gate 5 Verdict
 
-`MISSING_ARTIFACT_BLOCKER`
+`NO_BYTE_READY_PATCH_CANDIDATE_P4_SOURCE_MISSING`
 
 Exact missing artifacts:
 
-1. `cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt`
-2. `cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_xrefs.txt`
-3. `cpu_hack/tools/uefitool_rebuild/UEFITool.exe` or equivalent local replacement/rebuild tool
-4. `cpu_hack/noop_replace/bios_noop_rebuilt.bin`
-5. `cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt`
+1. editable P4-only source or edit target,
+2. P0-P3 unchanged proof,
+3. P4-only effect proof,
+4. offsets/bytes/checksum proof,
+5. clean parse proof after a non-no-op candidate.
 
 Route is still alive, but not actionable.
-

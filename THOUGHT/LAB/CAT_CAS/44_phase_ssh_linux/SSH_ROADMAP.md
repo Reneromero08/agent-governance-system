@@ -134,19 +134,20 @@ Current Exp44 evidence shows that the earlier Linux/software phase routes did no
 | Ising route | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | Ising behavior was not observed. | `cpu_sing_2/PHASE2_ISING_MAP.md` |
 | AGESA global branch edit | `AGESA_GLOBAL_PATCH_REJECTED` | Global `JBE -> JAE` at `0x00366E3E` is rejected. It is not P4-safe and the prior attempt caused no boot; backup BIOS recovered after battery removal. | `cpu_hack/agesa_trace/PATCH_ANALYSIS.md`, `gpt_research/UNDERVOLT_PATHWAY_1_BIOS_AGESA.md` |
 | P4-safe AGESA route | `P4_FIELD_RUNTIME_MSR_DERIVED` / `AGESA_P4_SAFE_ROUTE_NOT_BYTE_READY` | Current BIOS/PE32/disassembly artifacts do not prove a P4-only static table record or executable code cave. The master pass found the `.dG3_DXE` heap/table consumer at `0xFFF72B3C`, confirmed `0xFFF8D11E -> 0xFFF7371A`, recovered helper `0xFFF4CF55`, found outer producer `0xFFF4D12F` registered through `.data` slot `0xFFF7F516`, decoded service descriptor `0xFFF7E698 -> 0xFFF8D108`, and mapped constructor field `selected_base + pstate*0x18 + 0x1C` to producer `entry +0x04`. That field is output `arg_14` from `[service+0x22]` / `0xFFF7348D`; `0xFFF44E76` is `rdmsr`, and P4 resolves to runtime `MSRC001_0068`, not a byte-ready static P4 record. | `cpu_sing_2/PHASE2_AGESA_P4_SAFE_FINAL_PACK.md`, `cpu_sing_3/AGESA_NEXT_GATE_FINAL_PACK.md`, `cpu_sing_3/PHASE2_MASTER_A_DISPATCH_SOURCE.md`, `cpu_sing_3/PHASE2_FW_ARG0C_PROVENANCE.md` |
-| Rebuild toolchain | `TOOLCHAIN_ACQUIRED_FORCE_SAVE_BLOCKED` | LongSoft UEFIReplace/UEFITool 0.28.0 is present. Source review shows identical replacements return `ERR_NOTHING_TO_PATCH`, and the lab command environment lacks Qt/qmake to compile a force-save variant. | `cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt`, `cpu_sing_3/PHASE2_MASTER_B_REBUILD_TOOLCHAIN.md`, `cpu_sing_3/PHASE2_MASTER_CPU_SING_OR_TRUE_WALL.md` |
+| Rebuild toolchain | `NOOP_REBUILD_PROVEN` | Public LongSoft `old_engine` source was built as a temporary force-save UEFIReplace variant on the Linux target. Identical AmdProcessorInitPeim PE32 body replacement produced `cpu_hack/noop_replace/bios_noop_rebuilt.bin`; it parses cleanly, is byte-identical to stock, and preserves PE32 body hash `BF92A1321B98908E7D74299A6C1E629EC3583599F164DEC6E774BFF040FBDF2A`. | `cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt`, `cpu_sing_3/PHASE2_MASTER_B_REBUILD_TOOLCHAIN.md`, `cpu_sing_3/PHASE2_MASTER_CPU_SING_OR_TRUE_WALL.md` |
 | Public donor workflow | `PUBLIC_MOD_DONOR_DIFFED` | Official F2j stock and public NVMe donor were acquired, hashed, parsed, and diffed. The donor only inserts `NvmExpressDxe_4` into existing free space at `0x002C58A0-0x002CA9FF`; later volumes remain byte-identical. | `cpu_sing_3/PHASE2_DONOR_DIFF_REPORT.md` |
 | Runtime MSR observer | `RUNTIME_MSR_OBSERVATION_COMPLETE` | Read-only SSH observer captured P4 `MSRC001_0068` and COFVID status across cores. COFVID VID stayed `0x12` for all samples; cores 0/1/2/5 P4 VID was `0x1A`, while cores 3/4 P4 VID was `0x12` with DID `3`. | `cpu_sing_3/PHASE2_RUNTIME_MSR_OBSERVER_REPORT.md`, `session_scripts/phase1_msr/msr_p4_readonly_observer.py` |
 | Runtime load/affinity | `RUNTIME_LOAD_AFFINITY_CHARACTERIZED` | Read-only SSH characterization found all cores at stock P4 VID `0x1A` after reboot, while COFVID VID depends on load state. Baseline can expose `0x1A`; self/neighbor/all-load held `0x12`. | `cpu_sing_3/PHASE2_RUNTIME_LOAD_AFFINITY_REPORT.md`, `session_scripts/phase1_msr/msr_load_affinity_characterizer.py` |
 | Runtime transition/jitter | `RUNTIME_TRANSITION_JITTER_CHARACTERIZED` | Read-only transition probe ran 24 cases with 160 samples each. PSTATE transitions were common (26 total); COFVID VID transitions were rare (3 total) and did not show stable timing-jitter separation from steady samples. | `cpu_sing_3/PHASE2_RUNTIME_TRANSITION_JITTER_REPORT.md`, `session_scripts/phase1_msr/msr_transition_jitter_probe.py` |
 | Runtime state-window oracle | `RUNTIME_STATE_WINDOW_ORACLE_NEGATIVE` | Read-only state-conditioned timing oracle ran 24 cases with 420 samples each. Four cases had 2+ state bins for null comparison; zero met the deterministic null gate. | `cpu_sing_3/PHASE2_RUNTIME_STATE_WINDOW_ORACLE_REPORT.md`, `session_scripts/phase1_msr/msr_state_window_oracle.py` |
+| Cacheline phase coupling | `CACHELINE_PHASE_COUPLING_REJECTED` | Core-pinned Cores 3/4 cacheline oscillator harness tested isolated lines, false-shared line, and atomic same-line pressure. `real_r` stayed near zero and did not separate from cyclic-shift nulls across repeats. | `cpu_sing_2/PHASE2_CACHELINE_PHASE_COUPLING.md`, `session_scripts/phase2_kuramoto/cacheline_phase_coupling.c` |
 | Phase 2B Bloch/complex Ising | `PHASE2B_5C_BLOCH_COMPLEX_ISING_ACTIVE_ORACLE_PASS` | Exp07-style Bloch/complex-plane active phase oracle ran on target and beat random phase, random spin, sign-shuffled, and edge-rewired null means on 5/5 problems. This is active software oracle progress, not passive Kuramoto evidence. | `cpu_sing_2/PHASE2B_5C_BLOCH_COMPLEX_ISING_PORT.md`, `session_scripts/phase2b/bloch_complex_ising.c` |
 | External observability | `ARCHIVED_OPTIONAL_VALIDATION_ONLY` | External capture artifacts remain documented, but Tier 3 physical instrumentation is not a current success path, stop condition, or recommended next action for this software/firmware goal. | `cpu_sing_2/PHASE2_DEEP_3_EXTERNAL_MEASURE.md`, `cpu_sing_3/PHASE2_MASTER_D_EXTERNAL_OBSERVABILITY.md` |
 | Catalytic tape / `.holo` tape | `CATALYTIC_TAPE_WORKING_NON_KURAMOTO` | Catalytic tape and `.holo` restoration work, but this is not Phase 2 Kuramoto success. | `cpu_sing_1/CPU_SING_GOAL_FINAL_PACK.md`, `cpu_sing_1/GOAL_ROUTE_7_HOLO.md` |
 
 **Do not repeat:** no BIOS flash, no global AGESA branch edit, no voltage writes, no P0-P3 undervolt, no Tier 3 physical instrumentation as the current success path, and no claim that catalytic tape restoration proves phase lock.
 
-**Next software/firmware boundary:** Phase 2B classification is complete: active phase-oracle software works, but passive substrate evidence is rejected because active software explains the successful results. The next non-repeated live action is the firmware no-op rebuild artifact: manual UEFITool GUI save, Qt/qmake environment for a modified `UEFIReplace`, or another documented CLI replacer that produces parse-clean `cpu_hack/noop_replace/bios_noop_rebuilt.bin`. Do not produce a P4-safe candidate until no-op rebuild proof, P0-P3 unchanged proof, P4-only offset/byte proof, checksum proof, and clean parse proof all exist.
+**Next software/firmware boundary:** Phase 2B classification is complete: active phase-oracle software works, but passive substrate evidence is rejected because active software explains the successful results. The firmware no-op rebuild artifact is now proven. The next non-repeated live action is P4-only edit-source proof. Do not produce a P4-safe candidate until P0-P3 unchanged proof, P4-only offset/byte proof, checksum proof, and clean parse proof all exist.
 
 Completed read-only runtime command:
 
@@ -196,17 +197,18 @@ python3 session_scripts/phase1_msr/msr_p4_readonly_observer.py --cores 0-5 --sam
 - [x] Master dispatcher pass recovered the `.dG3_DXE` heap/table consumer at `0xFFF72B3C`; it walks heap handles at `0xFFF8D0EC-0xFFF8D104`, not P-state records.
 - [x] Route A verdict: `DISPATCH_SOURCE_FOUND`; entry source is static function-pointer table, but `arg_0C` remains runtime/heap-selected table context, not a proven static P4 row.
 - [x] LongSoft UEFIReplace/UEFITool 0.28.0 acquired into `cpu_hack/tools/uefitool_rebuild/`.
-- [x] No-op rebuild attempt performed; `NOOP_REBUILD_PROVEN` is not met because no parse-clean identical rebuilt image was produced.
+- [x] No-op rebuild performed with a temporary force-save UEFIReplace build; `NOOP_REBUILD_PROVEN` is met by parse-clean byte-identical `cpu_hack/noop_replace/bios_noop_rebuilt.bin`.
 - [x] Helper `0xFFF4CF55` recovered; it walks variable-length records inside `arg_0C`, proving `arg_0C` is a runtime-produced record-list structure.
 - [x] Public GA-970A-DS3P BIOS-mod donor workflow advanced: official F2j stock and public NVMe donor pair acquired, parsed, and diffed.
 - [x] External measurement route archived as optional validation only for this goal; Tier 3 is out of scope.
-- [x] Verdict: `AGESA_GLOBAL_PATCH_REJECTED`, `AGESA_P4_SAFE_ROUTE_NOT_BYTE_READY`, `ARG0C_RUNTIME_PRODUCED_STRUCTURE`, `SERVICE_DESCRIPTOR_DECODED`, `RECORD_WRITE_MAP_ADVANCED`, `ENTRY_PLUS_04_SOURCE_TRACED`, `P4_FIELD_RUNTIME_MSR_DERIVED`, `TOOLCHAIN_ACQUIRED_FORCE_SAVE_BLOCKED`, `PUBLIC_MOD_DONOR_DIFFED`, and `SOFTWARE_FIRMWARE_ROUTES_ACTIVE`.
+- [x] Verdict: `AGESA_GLOBAL_PATCH_REJECTED`, `AGESA_P4_SAFE_ROUTE_NOT_BYTE_READY`, `ARG0C_RUNTIME_PRODUCED_STRUCTURE`, `SERVICE_DESCRIPTOR_DECODED`, `RECORD_WRITE_MAP_ADVANCED`, `ENTRY_PLUS_04_SOURCE_TRACED`, `P4_FIELD_RUNTIME_MSR_DERIVED`, `NOOP_REBUILD_PROVEN`, `PUBLIC_MOD_DONOR_DIFFED`, and `SOFTWARE_FIRMWARE_ROUTES_ACTIVE`.
 - [x] Added read-only runtime observer: `session_scripts/phase1_msr/msr_p4_readonly_observer.py`.
 - [x] Ran read-only observer on target; verdict `RUNTIME_MSR_OBSERVATION_COMPLETE`.
 - [x] Ran read-only load/affinity characterization; verdict `RUNTIME_LOAD_AFFINITY_CHARACTERIZED`.
 - [x] Ran read-only transition/jitter characterization; verdict `RUNTIME_TRANSITION_JITTER_CHARACTERIZED`.
 - [x] Ran read-only state-window oracle; verdict `RUNTIME_STATE_WINDOW_ORACLE_NEGATIVE`.
-- [ ] Continue only after `cpu_hack/noop_replace/bios_noop_rebuilt.bin` is produced by manual GUI force-save, Qt/qmake-built force-save replacer, or another documented force-output CLI.
+- [x] `cpu_hack/noop_replace/bios_noop_rebuilt.bin` produced by Qt/qmake-built force-save replacer and verified parse-clean/byte-identical.
+- [ ] Continue only after P4-only edit-source proof is found; do not repeat no-op rebuild mechanics.
 
 ### 2.A ADDENDUM: Operational Definition of Phase (GPT)
 
@@ -783,6 +785,167 @@ Phase 3 is the proof that CAT_CAS has a working catalytic substrate on consumer 
 
 ---
 
+### 3.B ADDENDUM: Catalytic May Be More Fundamental Than Sine Waves
+
+**Status:** `RELATIONAL_INVARIANT_CONFIRMED`
+
+The current itch is that Kuramoto may not be the deepest layer. The failed software-visible Kuramoto routes do not imply CAT_CAS failed; they may show that literal oscillator phase is only one coordinate system for a more general catalytic/reversible substrate.
+
+Working hypothesis:
+
+```text
+bit = stable attractor / readable excitation
+tape = reversible relational substrate
+phase/sine/eigenbasis = modal representation of structured variation
+entropy = accounting over accessible configurations
+catalytic restore = constraint that forces the working disturbance to erase while a relational invariant survives
+```
+
+This reframes the question from:
+
+```text
+Can the CPU compute with literal sine waves?
+```
+
+to:
+
+```text
+What invariant survives forward disturbance, answer extraction, and reverse restoration?
+```
+
+Interpretation:
+
+- Catalytic tape success is not Kuramoto evidence by itself.
+- Kuramoto/phase remains a physical Track B target only if a usable physical phase channel appears.
+- Track A may be more fundamental for CAT_CAS: compute through reversible relations, modal/eigenbasis structure, and answer-as-measurement.
+- Bits should be treated as the visible digital attractors of a richer relational state, not necessarily as the primitive substrate.
+
+#### 3.B.0 Definition: What Counts as a Surviving Invariant
+
+A surviving invariant is accepted only if it satisfies all five conditions:
+
+1. Present after forward disturbance.
+2. Still detectable after answer extraction.
+3. Tape returns to original hash, metadata, and restoration proof.
+4. Invariant predicts or correlates with the extracted answer.
+5. Invariant is absent or significantly weaker in destructive-write and random reversible-write nulls.
+
+If a feature survives restoration but does not predict the answer, classify it as residual artifact, not CAT_CAS primitive.
+
+Accepted labels:
+
+- `RELATIONAL_INVARIANT_CANDIDATE`
+- `RELATIONAL_INVARIANT_CONFIRMED`
+- `RESIDUAL_ARTIFACT_ONLY`
+- `RESTORE_WITHOUT_INVARIANT`
+- `INVARIANT_NULLS_FAILED`
+
+#### 3.B.1 Four-Snapshot Invariant Probe
+
+**Objective:** Identify what survives CAT_CAS forward disturbance, answer extraction, and reverse restoration.
+
+Snapshots:
+
+1. `T0` = before tape
+2. `T1` = disturbed / working tape
+3. `T2` = answer-extracted tape
+4. `T3` = restored tape
+
+Required transforms:
+
+- raw byte/value delta
+- XOR/parity basis
+- Walsh-Hadamard basis
+- FFT / phase spectrum
+- graph spectrum if graph-encoded
+- correlation matrix
+- mutual information map
+- `.holo` eigenbasis slots
+- checksum/hash metadata
+
+Required nulls:
+
+- destructive write
+- random reversible write
+- random answer extraction
+- shuffled operator schedule
+- same final hash but wrong answer control, if constructible
+
+Metrics:
+
+- restoration hash pass/fail
+- answer correctness
+- invariant strength at `T0` / `T1` / `T2` / `T3`
+- invariant-answer correlation
+- invariant/null effect size
+- stability across seeds
+- stability across problem families
+
+Output:
+
+- [x] `phase3b/PHASE3B_CATALYTIC_SUBSTRATE_PRIMITIVE.md`
+- [x] `session_scripts/phase3b/catalytic_invariant_probe.c`
+- [x] `phase3b/results/invariant_probe_summary.csv`
+
+Target result:
+
+```text
+Rows accepted: 24/24
+Same-final-hash wrong-answer control answer-corr: 0.000
+VERDICT: RELATIONAL_INVARIANT_CONFIRMED
+```
+
+#### 3.B Claim Boundary
+
+This track does not claim:
+
+- physical Kuramoto
+- quantum coherence
+- Landauer violation
+- microscopic entropy reduction
+- zero heat on CMOS
+- physical holography
+
+This track may claim only:
+
+```text
+CAT_CAS computes through reversible relational invariants if a restored tape preserves an answer-predictive structure that beats destructive and random reversible nulls.
+```
+
+#### 3.B.2 Primitive Decision Gate
+
+If one transform family repeatedly identifies the same answer-predictive survivor:
+
+```text
+promote to Phase 4.3 residual-channel design  <-- CURRENT RESULT
+```
+
+If multiple transforms detect the same structure:
+
+```text
+classify as modal invariant
+```
+
+If only raw values explain the answer:
+
+```text
+classify as ordinary reversible computation
+```
+
+If restoration succeeds but no invariant predicts the answer:
+
+```text
+classify as tape integrity without primitive discovery
+```
+
+If nulls match the invariant:
+
+```text
+reject as artifact
+```
+
+---
+
 ## Phase 4: The .holo Eigenbasis on Catalytic Silicon [NEXT]
 
 **Objective:** Map the `.holo` wormhole compression/eigenbasis format onto the Phenom's catalytic tape first (Track A, available now), and onto the physical phase oscillator network later (Track B, pending Phase 2). Phase 3 proved the tape can compute and restore. Phase 4 makes that tape carry `.holo` basis, rotations, residuals, and decodable structure.
@@ -810,7 +973,7 @@ Phase 3 is the proof that CAT_CAS has a working catalytic substrate on consumer 
 
 ---
 
-### TRACK A: Catalytic Tape Substrate (4.0, 4.1A, 4.2A COMPLETE, 4.3 NEXT)
+### TRACK A: Catalytic Tape Substrate (4.0, 4.1A, 4.2A, 4.3, 4.4A, 4.5, 4.6 COMPLETE)
 
 #### 4.1A Shared Eigenbasis on Tape — COMPLETE (2026-06-05)
 
@@ -854,38 +1017,49 @@ Phase 3 is the proof that CAT_CAS has a working catalytic substrate on consumer 
 - [x] Matches .holo format: R_l = U_prev^T @ U_curr, reversible, layer-to-layer
 - [x] Source: `session_scripts/rotation_chain.c`
 
-#### 4.3 Residual Compression Channel
+#### 4.3 Residual Compression Channel — COMPLETE
 
-- [ ] 4.3A `.holo` 2-bit residual tags in tape
-- [ ] 4.3B Frequency/DID residual tags (software-accessible)
+- [x] 4.3A `.holo` 2-bit residual tags in tape
+- [x] 4.3B Software-accessible residual tags from the Phase 3B relational carrier
 - [ ] 4.3C VID residual only if AGESA route becomes byte-ready
-- [ ] Show residual preserves layer individuality while shared basis compresses common structure
-- [ ] Reverse restores residual state
-- [ ] Output artifact: `PHASE4_3_RESIDUAL_CHANNEL.md`
+- [x] Residual preserves layer individuality while shared basis compresses common structure
+- [x] Reverse restores residual state
+- [x] Wrong residual, random residual, and destructive residual controls rejected 24/24
+- [x] Target result: `PHASE4_3_RESIDUAL_CHANNEL_PASS`
+- [x] Output artifact: `phase4_holo/PHASE4_3_RESIDUAL_CHANNEL.md`
 
-#### 4.4A GOE / Eigenvalue Validation From Operator Matrices
+#### 4.4A GOE / Eigenvalue Validation From Operator Matrices — COMPLETE
 
-- [ ] Build correlation/operator matrices from catalytic tape runs
-- [ ] Compute eigenvalue spacing statistics
-- [ ] Compare GOE vs Poisson vs shuffled/null operator baselines
-- [ ] This is software/catalytic validation, not physical silicon GOE
-- [ ] Output artifact: `PHASE4_4A_OPERATOR_GOE.md`
+- [x] Build correlation/operator matrices from catalytic tape runs
+- [x] Compute eigenvalue spacing statistics
+- [x] Compare GOE vs Poisson vs shuffled/null operator baselines
+- [x] Catalytic mean spacing ratio `r=0.5482`
+- [x] Poisson null mean spacing ratio `r=0.3775`
+- [x] Shuffled/operator null mean spacing ratio `r=0.3916`
+- [x] This is software/catalytic validation, not physical silicon GOE
+- [x] Target result: `PHASE4_4A_OPERATOR_GOE_PASS`
+- [x] Output artifact: `phase4_holo/PHASE4_4A_OPERATOR_GOE.md`
 
-#### 4.5 .holo Mini-Model Demo
+#### 4.5 .holo Mini-Model Demo — COMPLETE
 
-- [ ] Encode a tiny matrix, graph, token map, or toy layer
-- [ ] Compress through shared basis + rotations + residual tags
-- [ ] Decode or classify a readable result
-- [ ] Reverse all operators and restore tape
-- [ ] Output artifact: `PHASE4_5_HOLO_MINI_MODEL.md`
+- [x] Encode a tiny graph-class object
+- [x] Compress through shared basis + rotations + residual tags
+- [x] Decode/classify a readable result
+- [x] Reject wrong and random residual controls 24/24
+- [x] Reverse all operators and restore tape 24/24
+- [x] Target result: `PHASE4_5_HOLO_MINI_MODEL_PASS`
+- [x] Output artifact: `phase4_holo/PHASE4_5_HOLO_MINI_MODEL.md`
 
-#### 4.6 Public .holo Harness
+#### 4.6 Public .holo Harness — COMPLETE
 
-- [ ] Package Phase 4 as a reusable CLI/API:
-  - `catcas_holo_encode` / `catcas_holo_basis` / `catcas_holo_rotate`
-  - `catcas_holo_residual` / `catcas_holo_decode` / `catcas_holo_reverse` / `catcas_holo_verify`
-- [ ] Provide reproducible logs, hashes, seeds, and null tests
-- [ ] Output artifact: `PHASE4_6_PUBLIC_HOLO_HARNESS.md`
+- [x] Package Phase 4 as a reusable CLI/API-style C harness:
+  - `test` / `all`
+  - `residual`
+  - `mini`
+  - `goe`
+- [x] Provide reproducible deterministic seeds and null tests
+- [x] Target result: `PHASE4_6_PUBLIC_HOLO_HARNESS_PASS`
+- [x] Output artifact: `phase4_holo/PHASE4_6_PUBLIC_HOLO_HARNESS.md`
 
 ---
 
@@ -919,6 +1093,14 @@ Phase 3 is the proof that CAT_CAS has a working catalytic substrate on consumer 
 ```
 PHASE4_0_BRIDGE_GATE_COMPLETE
 PHASE4A_CATALYTIC_HOLO_READY
+PHASE4_3_RESIDUAL_CHANNEL_COMPLETE
+PHASE4A_CATALYTIC_HOLO_RESIDUAL_READY
+PHASE4_4A_OPERATOR_GOE_COMPLETE
+PHASE4A_OPERATOR_STATISTICS_READY
+PHASE4_5_HOLO_MINI_MODEL_COMPLETE
+PHASE4A_MINI_MODEL_READY
+PHASE4A_PUBLIC_HARNESS_COMPLETE
+PHASE4_TRACK_A_COMPLETE
 PHASE4B_PHYSICAL_HOLO_PENDING_PHASE2
 PHASE4_GOE_SPLIT_OPERATOR_VS_PHYSICAL
 PHASE4_RESIDUAL_CHANNEL_GENERALIZED

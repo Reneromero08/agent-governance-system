@@ -9,8 +9,14 @@ This index preserves the existing Exp44 phase layout. No files are reorganized i
 | `SSH_ROADMAP.md` | Exp44 root | Roadmap | Experiment 44 SSH/bare-metal roadmap and current checkpoint status. | Yes | Correct roadmap for this lab. |
 | `REPORT.md` | Exp44 root | Report | Initial SSH/Linux bring-up report. | Yes | Human-readable experiment evidence. |
 | `EXP44_FILE_INDEX.md` | Exp44 root | Checkpoint | This phase-based file index. | Yes | Reproducibility and commit scope. |
-| `PHASE3_EXPANSION_SUMMARY.md` | Exp44 root | Phase 3 summary | Phase 3 expansion summary: subphases, verdicts, next task. | Yes | Closeout artifact for Phase 3 catalytic ladder. |
-| `PHASE4_INTEGRATION_SUMMARY.md` | Exp44 root | Phase 4 summary | Phase 4 integration summary: Track A/B split, verdicts, next task. | Yes | Closeout artifact for Phase 4 dual-track architecture. |
+| `phase3_catalytic/PHASE3_EXPANSION_SUMMARY.md` | `phase3_catalytic/` | Phase 3 summary | Phase 3 expansion summary: subphases, verdicts, next task. | Yes | Closeout artifact for Phase 3 catalytic ladder. |
+| `phase3b/PHASE3B_CATALYTIC_SUBSTRATE_PRIMITIVE.md` | `phase3b/` | Phase 3B | Four-snapshot invariant probe verdict and null-control summary. | Yes | Records the catalytic substrate primitive decision gate. |
+| `phase3b/results/invariant_probe_summary.csv` | `phase3b/results/` | Phase 3B result | Target-run metric summary for four-snapshot invariant probe. | Yes | Small required result artifact for the primitive gate. |
+| `phase4_holo/PHASE4_INTEGRATION_SUMMARY.md` | `phase4_holo/` | Phase 4 summary | Phase 4 integration summary: Track A/B split, verdicts, next task. | Yes | Closeout artifact for Phase 4 dual-track architecture. |
+| `phase4_holo/PHASE4_3_RESIDUAL_CHANNEL.md` | `phase4_holo/` | Phase 4 Track A | Residual-channel target-run report and controls. | Yes | Records Phase 4.3 completion. |
+| `phase4_holo/PHASE4_4A_OPERATOR_GOE.md` | `phase4_holo/` | Phase 4 Track A | Operator-matrix eigenvalue spacing report and null comparison. | Yes | Records Phase 4.4A completion. |
+| `phase4_holo/PHASE4_5_HOLO_MINI_MODEL.md` | `phase4_holo/` | Phase 4 Track A | `.holo` mini-model target-run report and controls. | Yes | Records Phase 4.5 completion. |
+| `phase4_holo/PHASE4_6_PUBLIC_HOLO_HARNESS.md` | `phase4_holo/` | Phase 4 Track A | Public `.holo` harness packaging report. | Yes | Records Phase 4.6 completion. |
 | `cpu_sing_1/*.md` | `cpu_sing_1/` | Phase 1 / CPU_SING | Runtime VID clamp, route reports, catalytic tape, `.holo`, VRM, detuning, GOE, and final pack. | Yes | Markdown lab reports are primary evidence. |
 | `cpu_sing_2/*.md` | `cpu_sing_2/` | Phase 2 | Kuramoto, active phase, deep control, AGESA P4-safe, GOE, Ising, detuning, markers, and external measurement reports. | Yes | Markdown lab reports are primary Phase 2 evidence. |
 | `2b_blackbox/*.md` | `2b_blackbox/` | Phase 2B black-box attractor | Passive-mechanism closure, decision tree, 2B.5A status, and transition reports. | Yes | Existing named Phase 2B workspace; keep as-is. |
@@ -20,6 +26,8 @@ This index preserves the existing Exp44 phase layout. No files are reorganized i
 | `cpu_hack/agesa_trace/PATCH_ANALYSIS.md` | `cpu_hack/agesa_trace/` | Firmware lab | Patch analysis for AGESA/global branch/P4-safe route. | Yes | Primary firmware decision evidence. |
 | `cpu_hack/agesa_trace/*.txt` | `cpu_hack/agesa_trace/` | Firmware lab text evidence | Decompile, disasm, xref, service table, record map, and MSR source proof artifacts. | Yes | Small text evidence for firmware route. |
 | `cpu_hack/bios_parse/bios_dump.bin.report.txt` | `cpu_hack/bios_parse/` | Firmware lab parse report | UEFIExtract parse report for owned BIOS dump. | Yes | Small text parse evidence. |
+| `cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt` | `cpu_hack/noop_replace/` | Firmware no-op rebuild | Authoritative no-op rebuild proof and byte-difference summary. | Yes | Small text evidence; proves rebuild/save gate without tracking binaries. |
+| `cpu_hack/noop_replace/bios_noop_rebuilt.bin.report.txt` | `cpu_hack/noop_replace/` | Firmware no-op rebuild | UEFIExtract parse report for accepted no-op rebuilt image. | Yes | Small text parse evidence for `NOOP_REBUILD_PROVEN`. |
 | `cpu_hack/board_probe/check_ics*.ps1` | `cpu_hack/board_probe/` | Firmware/board lab | Local board/clock inspection helpers. | Yes | Source scripts, not generated artifacts. |
 | `cpu_hack/bios_dump.bin` | `cpu_hack/` | Firmware lab raw artifact | Raw BIOS dump image. | No | Binary/sensitive; preserved locally. |
 | `cpu_hack/bios_parse/*.csv` | `cpu_hack/bios_parse/` | Firmware lab generated | GUID CSV exports. | No | Generated artifacts. |
@@ -28,6 +36,7 @@ This index preserves the existing Exp44 phase layout. No files are reorganized i
 | `cpu_hack/tools/` | `cpu_hack/` | Firmware lab local tools | Downloaded/local tools. | No | Local tool binaries. |
 | `cpu_hack/mod_donors/` | `cpu_hack/` | Firmware lab local | Downloaded stock/donor BIOS packages. | No | Binary/generated artifacts. |
 | `cpu_hack/noop_replace/*.bin` | `cpu_hack/noop_replace/` | Firmware lab local | Rebuilt/attempted BIOS images. | No | Binary/generated artifacts. |
+| `cpu_hack/noop_replace/*/body.bin` | `cpu_hack/noop_replace/` | Firmware lab generated | Target body extraction from accepted no-op rebuilt image. | No | Generated binary verification artifact; hash is recorded in text reports. |
 | `cpu_hack/local_logs/` | `cpu_hack/local_logs/` | Firmware lab logs | Local probe and extraction logs. | No | Generated logs. |
 
 ## Session Scripts (organized by phase)
@@ -72,6 +81,7 @@ This index preserves the existing Exp44 phase layout. No files are reorganized i
 | `phase2_external_align.py` | Offline waveform/marker alignment for external measurement | Yes |
 | `phase2_marker_harness.c` | Marker harness for coupling detection | Yes |
 | `phase2_probe.c` | Phase 2 probe | Yes |
+| `cacheline_phase_coupling.c` | Core-pinned cacheline phase-coupling harness with isolated, false-shared, atomic same-line, and cyclic-shift null modes | Yes |
 
 ### Phase 2B: Black-Box Attractor / Phase Oracle (`session_scripts/phase2b/`)
 
@@ -108,6 +118,12 @@ This index preserves the existing Exp44 phase layout. No files are reorganized i
 | `holo_tape_goal.c` | .holo tape goal test | Yes |
 | `audit1.py` | Fresh Python catalytic cycle verification | Yes |
 
+### Phase 3B: Catalytic Substrate Primitive (`session_scripts/phase3b/`)
+
+| File | Purpose | Keep |
+|------|---------|------|
+| `catalytic_invariant_probe.c` | Four-snapshot invariant probe with destructive, random reversible, random-answer, shuffled-schedule, and same-final-hash/wrong-answer controls | Yes |
+
 ### Phase 4: .holo Eigenbasis on Catalytic Silicon (`session_scripts/phase4_holo/`)
 
 | File | Purpose | Keep |
@@ -115,6 +131,10 @@ This index preserves the existing Exp44 phase layout. No files are reorganized i
 | `phase4_bridge.c` | Phase 4.0 bridge gate (5/5 gates pass) | Yes |
 | `eigenbasis_tape.c` | Phase 4.1A shared eigenbasis (4 tests, basis read-only) | Yes |
 | `rotation_chain.c` | Phase 4.2A rotation chain (3 layers, forward/reverse) | Yes |
+| `residual_channel.c` | Phase 4.3 residual channel from Phase 3B carrier into 2-bit `.holo` residual tags | Yes |
+| `operator_goe.c` | Phase 4.4A catalytic operator-matrix eigenvalue spacing and null comparison | Yes |
+| `holo_mini_model.c` | Phase 4.5 tiny graph-class `.holo` mini-model with decode and restore controls | Yes |
+| `catcas_holo_harness.c` | Phase 4.6 CLI-style public `.holo` harness for residual, mini, GOE, and all-test modes | Yes |
 
 ---
 
@@ -125,4 +145,4 @@ This index preserves the existing Exp44 phase layout. No files are reorganized i
 - Do not recreate generic `docs/`, `reports/`, `firmware/`, or `archive/` folders.
 - Track markdown reports, source scripts, and small text evidence.
 - Ignore raw BIOS images, extracted BIOS trees, generated logs, CSV exports, compiled binaries, and local tool trees.
-- Phase 3 COMPLETE (12 subphases). Phase 4 Track A in progress (4.0, 4.1A, 4.2A complete; 4.3 next). Phase 4 Track B pending Phase 2.
+- Phase 3 COMPLETE. Phase 4 Track A complete through public harness packaging. Phase 4 Track B pending Phase 2 physical/firmware breakthrough.

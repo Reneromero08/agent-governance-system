@@ -12,3 +12,5 @@ cpu_hack/tools/
 
 # Keep markdown summaries and text RE evidence tracked.
 !cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt
+!cpu_hack/noop_replace/bios_noop_rebuilt.bin.report.txt
+!phase3b/results/invariant_probe_summary.csv

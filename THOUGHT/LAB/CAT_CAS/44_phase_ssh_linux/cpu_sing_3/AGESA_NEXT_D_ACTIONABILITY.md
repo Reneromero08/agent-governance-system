@@ -1,36 +1,38 @@
 # AGESA Next D Actionability
 
-Status: `MISSING_ARTIFACT_BLOCKER`
+Status: `NOOP_REBUILD_PROVEN`
 
 Scope: owned local firmware route research. No flash command. No hardware-changing command.
 
 ## Choice
 
-`MISSING_ARTIFACT_BLOCKER`
+`NOOP_REBUILD_PROVEN`
 
 ## Why Not The Other Choices
 
 | Choice | Status |
 |---|---|
-| `TABLE_TARGET_FOUND` | Not met. P4 record and P0-P3 siblings are not proven. |
-| `NOOP_REBUILD_PROVEN` | Not met. No rebuild-capable local tool exists. |
-| `BOTH_LIVE_GATES_ADVANCED` | True as progress, but not the actionability verdict because exact missing artifacts still block both routes. |
-| `HARD_IMPOSSIBILITY_PROOF` | Not met. Constructor path remains a live route. |
+| `TABLE_TARGET_FOUND` | Not met. P4 record and P0-P3 siblings are runtime-derived from `MSRC001_0068`, not proven as editable static records. |
+| `BOTH_LIVE_GATES_ADVANCED` | True as progress, but the actionability verdict is narrower: the rebuild/no-op gate is now proven while the table/edit-source gate remains blocked. |
+| `MISSING_ARTIFACT_BLOCKER` | Not met for the no-op rebuild gate; `cpu_hack/noop_replace/bios_noop_rebuilt.bin` now exists and parses. |
+| `HARD_IMPOSSIBILITY_PROOF` | Not met. Firmware route remains alive for future edit-source discovery, but not byte-ready. |
 
 ## Current Actionability
 
-The AGESA route is still alive but not actionable.
+The AGESA route is still alive but not byte-ready.
 
-Gate A advanced from "constructor block only" to the full containing function `0xFFF7371A` and a `.dG3_DXE` function-pointer table reference at `0xFFF8D11E`.
+Gate C is now proven: the lab produced a parse-clean identical no-op rebuild and verified the target PE32 body hash stayed `BF92A1321B98908E7D74299A6C1E629EC3583599F164DEC6E774BFF040FBDF2A`.
 
-Gate B advanced the table-source model: the constructor consumes a dispatch/runtime-selected `selected_base` and uses `0x18` records, but no editable static P4 record is proven.
+The remaining blocker is not the rebuild toolchain. It is the absence of a defensible P4-only editable source or patch target. Current provenance maps the constructor P4 field to runtime `MSRC001_0068`.
 
-Gate C is blocked by absent local replacement/save-image tooling. Existing UEFIExtract binaries are extraction-only.
+## Exact Remaining Blocker
 
-## Exact Remaining Blockers
+`AGESA_P4_SAFE_ROUTE_NOT_BYTE_READY`
 
-1. `cpu_hack/agesa_trace/AmdProcessorInitPeim_dG3_DXE_dispatch_table_consumer_decompile.txt`
-   - Needed to prove how the `.dG3_DXE` table reaches `0xFFF7371A` and what source feeds `arg_0C`.
-2. `cpu_hack/tools/uefitool_rebuild/UEFITool.exe`
-   - Needed to perform no-op PE32 body replacement and save a rebuilt image.
+Required missing proof:
 
+- editable P4-only source or edit target,
+- P0-P3 unchanged proof,
+- P4-only effect proof,
+- offsets/bytes/checksum proof,
+- clean parse proof after a non-no-op candidate.

@@ -1,106 +1,112 @@
 # AGESA Next Gate Final Pack
 
-Status: `MISSING_ARTIFACT_BLOCKER`
+Status: `NOOP_REBUILD_PROVEN`
 
 Scope: owned local Phenom II X6 1090T / GA-970A-DS3P firmware route research. No flash command. No hardware-changing command.
 
 ## Verdict
 
-The AGESA firmware route is still alive, but not actionable.
+The AGESA firmware route is still alive, but not byte-ready.
 
-This pass advanced both live blockers:
+This pass advanced the rebuild gate from missing artifact to proven:
 
-- Constructor path: full containing function identified as `0xFFF7371A`; `0xFFF737A3` is an internal block.
-- No-op rebuild: local tool search completed; only extraction tools exist, no replacer/save-image tool found.
+- Public LongSoft `old_engine` source was acquired into ignored local tool tree `cpu_hack/tools/UEFITool_repo/`.
+- A temporary force-save UEFIReplace variant was built with Qt/qmake on the Linux target.
+- Only identical AmdProcessorInitPeim PE32 body replacement was performed.
+- `cpu_hack/noop_replace/bios_noop_rebuilt.bin` was produced, parsed cleanly, and verified byte-identical to stock.
 
-The current stop condition is exact:
+The current stop condition is:
 
-`MISSING_ARTIFACT_BLOCKER`
+`NOOP_REBUILD_PROVEN_BUT_P4_STATIC_SOURCE_MISSING`
 
 ## Gate Table
 
 | Gate | Artifact | Result |
 |---|---|---|
-| A constructor decompile/xrefs | `cpu_sing_3/AGESA_NEXT_A_CONSTRUCTOR_DECOMPILE.md` | `CONSTRUCTOR_FUNCTION_IDENTIFIED_SOURCE_NOT_FULLY_PROVEN` |
+| A constructor decompile/xrefs | `cpu_sing_3/AGESA_NEXT_A_CONSTRUCTOR_DECOMPILE.md` | Constructor path identified. |
 | A export | `cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt` | Function entry, stack frame, base flow, and field provenance recovered. |
-| A xrefs | `cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_xrefs.txt` | No direct call xrefs; `.dG3_DXE` pointer xref at `0xFFF8D11E`. |
-| B table reopen | `cpu_sing_3/AGESA_NEXT_B_TABLE_REOPEN.md` | Runtime/dispatch-selected source indicated; P4 static record not found. |
-| C no-op rebuild | `cpu_sing_3/AGESA_NEXT_C_NOOP_REBUILD.md` | Rebuild blocked; no local replacer/save-image tool. |
-| D actionability | `cpu_sing_3/AGESA_NEXT_D_ACTIONABILITY.md` | `MISSING_ARTIFACT_BLOCKER`. |
+| B table/provenance | `cpu_sing_3/AGESA_NEXT_B_TABLE_REOPEN.md`, `cpu_sing_3/PHASE2_FW_ARG0C_PROVENANCE.md` | P4 field maps to runtime-produced record sourced from `MSRC001_0068`; no static editable P4 row proven. |
+| C no-op rebuild | `cpu_sing_3/AGESA_NEXT_C_NOOP_REBUILD.md`, `cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt` | `NOOP_REBUILD_PROVEN`. |
+| D actionability | `cpu_sing_3/AGESA_NEXT_D_ACTIONABILITY.md` | Route alive, not byte-ready. |
 
 ## New Artifacts Produced
 
-- `cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt`
-- `cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_xrefs.txt`
-- `cpu_sing_3/AGESA_NEXT_A_CONSTRUCTOR_DECOMPILE.md`
-- `cpu_sing_3/AGESA_NEXT_B_TABLE_REOPEN.md`
+- `cpu_hack/noop_replace/bios_noop_rebuilt.bin`
+- `cpu_hack/noop_replace/bios_noop_rebuilt.bin.report.txt`
+- `cpu_hack/noop_replace/rebuilt_AmdProcessorInitPeim_PE32_body.bin/body.bin`
+- `cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt`
 - `cpu_sing_3/AGESA_NEXT_C_NOOP_REBUILD.md`
 - `cpu_sing_3/AGESA_NEXT_D_ACTIONABILITY.md`
 - `cpu_sing_3/AGESA_NEXT_GATE_FINAL_PACK.md`
 
+Generated binary and extraction artifacts remain local-only and ignored; markdown/text reports are commit-safe.
+
 ## Deepest Progress
 
-The constructor base is now understood at local function level:
+The no-op rebuild path is now proven:
 
 ```text
-arg_0C -> edi
-selected_base = edi + 8
-helper 0xFFF4CF55 may update selected_base
-0xFFF737A3 loads ecx = selected_base
-multi-entry path uses selected_base + pstate*0x18
+UEFIReplace bios_dump.bin DE3E049C-A218-4891-8658-5FC0FA84C788 10 body.bin -o bios_noop_rebuilt.bin
 ```
 
-The function pointer to this constructor function is present in `.dG3_DXE`:
+Verification:
 
 ```text
-0xFFF8D11E -> 0xFFF7371A
+stock SHA-256   B7C0C725C4B6F50F399A208E5CAD6938BAACDD8FA1BBC795098CA393083FBC91
+rebuilt SHA-256 B7C0C725C4B6F50F399A208E5CAD6938BAACDD8FA1BBC795098CA393083FBC91
+fc /b           no differences encountered
+UEFIExtract     report exit code 0
+PE32 body SHA   BF92A1321B98908E7D74299A6C1E629EC3583599F164DEC6E774BFF040FBDF2A
 ```
 
-This makes the next source hunt narrower: recover the `.dG3_DXE` dispatch table consumer and the argument source for `arg_0C`.
+The deepest firmware provenance remains:
+
+```text
+0xFFF7371A constructor
+  selected_base = arg_0C + 8
+  selected_base + pstate*0x18 + 0x1C feeds P-state MSR construction
+
+0xFFF4CF9C producer
+  maps constructor field to entry +0x04
+  entry +0x04 is output arg_14 from [service+0x22] / 0xFFF7348D
+
+0xFFF44E76 / [service+0x22]
+  rdmsr path
+  MSR address = 0xC0010064 + pstate
+  P4 source = MSRC001_0068
+```
 
 ## Exact Remaining Blocker
 
-`MISSING_ARTIFACT_BLOCKER`
+`AGESA_P4_SAFE_ROUTE_NOT_BYTE_READY`
 
-Missing constructor-source artifact:
+Missing proof:
 
-`cpu_hack/agesa_trace/AmdProcessorInitPeim_dG3_DXE_dispatch_table_consumer_decompile.txt`
+- editable P4-only source or edit target,
+- P0-P3 unchanged proof,
+- P4-only effect proof,
+- offsets/bytes/checksum proof,
+- clean parse proof after a non-no-op candidate.
 
-Missing no-op rebuild tool:
-
-`cpu_hack/tools/uefitool_rebuild/UEFITool.exe`
-
-Acceptable rebuild equivalent:
-
-`cpu_hack/tools/uefipatch/UEFIPatch.exe` plus a documented no-op descriptor that emits a rebuilt image.
+No candidate exists at this checkpoint.
 
 ## Exact Next Command / Tool / File
 
-After the dispatch consumer artifact exists:
+Do not repeat the no-op rebuild gate. It is proven.
+
+Next firmware-only command should target edit-source discovery, not rebuild mechanics:
 
 ```powershell
-rg -n "FFF8D11E|FFF8D0EC|FFF7371A|arg_0C|selected_base|\\+0x0B|\\+0x0F|\\+0x10|\\+0x14|\\+0x1C|\\+0x20|0x18" cpu_hack/agesa_trace/AmdProcessorInitPeim_dG3_DXE_dispatch_table_consumer_decompile.txt
+rg -n "C0010068|C0010064|FFF44E76|FFF7348D|entry \\+0x04|selected_base \\+ pstate\\*0x18 \\+ 0x1C" cpu_hack/agesa_trace
 ```
 
-After a rebuild-capable tool exists:
-
-```powershell
-New-Item -ItemType Directory -Force cpu_hack/noop_replace
-```
-
-Then perform only no-op replacement of:
-
-`cpu_hack/bios_dump.bin.dump/5 8C8CE578-8A3D-4F1C-9935-896185C32DD3/0 AmdProcessorInitPeim/1 PE32 image section/body.bin`
-
-and save:
-
-`cpu_hack/noop_replace/bios_noop_rebuilt.bin`
+If new disassembly/decompile output is added, the next required file is a focused report proving whether `MSRC001_0068` can be influenced by a static byte source without touching P0-P3.
 
 ## AGESA Route Still Alive?
 
 Yes.
 
-It is alive because the constructor path clearly consumes per-P-state records through a selected base and a 0x18 stride. It is not actionable because the selected base is not yet tied to editable P4/P0-P3 static records, and no no-op replace workflow is proven.
+The route is alive because no-op rebuild/save is now proven and the constructor/provenance chain is decoded. It is not byte-ready because the P4 source currently resolves to runtime MSR state, not an editable static P4-only firmware byte.
 
 ## Do-Not-Do List
 
@@ -112,5 +118,5 @@ It is alive because the constructor path clearly consumes per-P-state records th
 - Do not modify hardware.
 - Do not claim P4-safe status without P0-P3 equivalence proof.
 - Do not count UEFIExtract as a rebuild tool.
+- Do not treat the no-op rebuilt image as a flash candidate.
 - Do not write outputs outside `THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux`.
-

@@ -6,21 +6,21 @@
 
 The CPU has not produced accepted Kuramoto/Ising/phase behavior yet, and this is not a true wall. The hard current constraint excludes Tier 3 physical instrumentation as a success path or next action. The live boundary is now software/firmware only:
 
-- Route 1 acquired a rebuild-capable public UEFI toolchain, but source review shows the CLI suppresses identical replacements as `ERR_NOTHING_TO_PATCH`; no parse-clean identical no-op rebuilt image was produced.
+- Route 1 acquired and built a rebuild-capable public UEFI toolchain variant; a parse-clean identical no-op rebuilt image was produced, parsed, and verified byte-identical to stock.
 - Route 2 advanced `arg_0C` provenance: helper `0xFFF4CF55` walks a variable-length runtime-produced record list, `0xFFF4D12F` is registered through `.data` slot `0xFFF7F516`, `0xFFF4CF9C` is passed as a producer callback through descriptor setup at `0xFFF4D1AB`, service descriptor `0xFFF7E698` selects vtable `0xFFF8D108`, and the constructor-relevant P4 field is reconstructed from runtime `MSRC001_0068`.
-- Route 3 remains gated because no P4-only static source byte and no proven no-op rebuild exist.
+- Route 3 remains gated because no P4-only static source byte or edit target exists, even though no-op rebuild/save is now proven.
 - Route 4 advanced: the official F2j stock image and public F2j NVMe donor image were acquired, parsed, and diffed.
-- Route 5 advanced with read-only runtime load/affinity characterization, transition/jitter characterization, state-window oracle testing, Phase 2B.5B optical 3-SAT, Phase 2B.5C Bloch/complex-plane Ising, Phase 2B.5D spectral classifier, Phase 2B.5E `.holo`/MERA bridge, the Phase 2B answer-as-measurement gate, Phase 2B.6 channel matrix, Phase 2B.7 restoration gate, and Phase 2B.8 decision tree. Runtime MSR/state-window tests did not produce a timing oracle. Active phase-oracle software works, but passive substrate evidence remains rejected; active software explains the successful Phase 2B results.
+- Route 5 advanced with read-only runtime load/affinity characterization, transition/jitter characterization, state-window oracle testing, cacheline phase-coupling rejection, Phase 2B.5B optical 3-SAT, Phase 2B.5C Bloch/complex-plane Ising, Phase 2B.5D spectral classifier, Phase 2B.5E `.holo`/MERA bridge, the Phase 2B answer-as-measurement gate, Phase 2B.6 channel matrix, Phase 2B.7 restoration gate, Phase 2B.8 decision tree, Phase 3B four-snapshot catalytic invariant probing, Phase 4.3 residual-channel compression, Phase 4.4A operator/eigenvalue validation, Phase 4.5 `.holo` mini-model decode/restore, and Phase 4.6 public harness packaging. Runtime MSR/state-window/cacheline tests did not produce a timing oracle or phase lock. Active phase-oracle software works, but passive substrate evidence remains rejected; active software explains the successful Phase 2B results. Phase 3B confirms an answer-predictive reversible relational carrier in a catalytic harness, Phase 4.3 compresses it into `.holo` residual tags, Phase 4.4A produces GOE-like operator-matrix spacing against nulls, Phase 4.5 decodes a readable mini-model while restoring tape, and Phase 4.6 packages Track A. This is useful CAT_CAS evidence but not physical Kuramoto.
 
 ## Route Table
 
 | Route | Status | Deepest progress | Blocker or next action |
 |---|---|---|---|
-| 1: rebuild toolchain | `TOOLCHAIN_ACQUIRED_FORCE_SAVE_BLOCKED` | LongSoft `UEFIReplace.exe` and classic `UEFITool.exe` 0.28.0 are present. Source review shows identical replacements return `ERR_NOTHING_TO_PATCH`; local command environment lacks Qt/qmake to compile a force-save variant. | Need manual GUI force-save, Qt/qmake build environment for a modified CLI, or another documented CLI replacer, then parse-clean `cpu_hack/noop_replace/bios_noop_rebuilt.bin`. |
+| 1: rebuild toolchain | `NOOP_REBUILD_PROVEN` | Public LongSoft `old_engine` source was fetched into ignored tool tree, a temporary Qt/qmake force-save UEFIReplace variant was built on the Linux target, and identical AmdProcessorInitPeim PE32 body replacement produced `cpu_hack/noop_replace/bios_noop_rebuilt.bin`. The rebuilt image parses cleanly, is byte-identical to stock, and preserves target body SHA-256 `BF92A1321B98908E7D74299A6C1E629EC3583599F164DEC6E774BFF040FBDF2A`. | Do not repeat no-op rebuild. Use this proof only if a future P4-only static edit target is found. |
 | 2: AGESA runtime provenance | `P4_FIELD_RUNTIME_MSR_DERIVED` | `0xFFF7E698` decodes to a three-entry descriptor selecting service vtable `0xFFF8D108`; vtable `+0x16` is constructor `0xFFF7371A`. Producer `0xFFF4CF9C` maps constructor `selected_base + pstate*0x18 + 0x1C` to runtime per-entry `entry +0x04`, output `arg_14` from `[service+0x22]` / `0xFFF7348D`. `0xFFF44E76` is `rdmsr`, and the address is `0xC0010064 + pstate`, so P4 is `MSRC001_0068`. | Current decoded firmware path has no static P4 byte. Continue with no-op rebuild proof for future firmware edits or renewed runtime software tests around `MSRC001_0068` observability. |
-| 3: P4-safe candidate | `NOT_BYTE_READY` | Runtime P4 field remains `selected_base + pstate*0x18 + 0x1C`, now proven reconstructed from runtime `MSRC001_0068`; P0-P3/P4 sibling shape exists at runtime. | No editable static P4 byte or no-op rebuild proof; do not produce candidate. |
+| 3: P4-safe candidate | `NOT_BYTE_READY` | Runtime P4 field remains `selected_base + pstate*0x18 + 0x1C`, now proven reconstructed from runtime `MSRC001_0068`; P0-P3/P4 sibling shape exists at runtime. No-op rebuild proof exists. | No editable static P4 byte or P4-only edit target; do not produce candidate. |
 | 4: public BIOS donor workflow | `PUBLIC_MOD_DONOR_DIFFED` | Official F2j stock and public NVMe donor differ only at `0x002C58A0-0x002CA9FF`, where `NvmExpressDxe_4` is inserted into free space. Later volumes are byte-identical. | Use workflow lesson only: free-space insertion plus parse-clean report. This does not create a voltage/P4 candidate. |
-| 5: software-only renewed search | `PHASE2B_REJECTED_SOFTWARE_EXPLAINS_ACTIVE_WORKING` | Runtime state-window oracle was negative. Active phase-oracle branch works, but passive hidden-attractor evidence is not demonstrated; active software explains successful Phase 2B results. | Reassess master route table; firmware no-op rebuild proof remains the concrete live blocker unless a genuinely new passive software mechanism is introduced. |
+| 5: software-only renewed search | `CACHELINE_PHASE_COUPLING_REJECTED` / `PHASE4_TRACK_A_COMPLETE_NON_PHYSICAL` | Runtime state-window oracle was negative. Core-pinned cacheline phase coupling across isolated, false-shared, and atomic same-line modes did not separate from cyclic-shift nulls. Active phase-oracle branch works, but passive hidden-attractor evidence is not demonstrated; active software explains successful Phase 2B results. Phase 3B confirmed an answer-predictive reversible relational carrier across 24/24 target cases and rejected same-final-hash/wrong-answer as a primitive. Phase 4.3 compressed that carrier into `.holo` 2-bit residual tags. Phase 4.4A catalytic operator matrices produced `r=0.5482` against Poisson `r=0.3775` and shuffled `r=0.3916` nulls. Phase 4.5 decoded a tiny graph-class mini-model and restored 24/24. Phase 4.6 packaged the public harness. | Track A is complete and non-physical. This is not physical Kuramoto, physical GOE, or CPU-sings evidence. Firmware P4-only edit-source proof remains the concrete live blocker for byte-ready AGESA work; otherwise perform final no-hardware software/firmware route reassessment. |
 
 ## Artifacts Produced
 
@@ -41,12 +41,15 @@ The CPU has not produced accepted Kuramoto/Ising/phase behavior yet, and this is
 - `cpu_hack/agesa_trace/AmdProcessorInitPeim_entry_plus_04_source_trace.txt`
 - `cpu_hack/agesa_trace/AmdProcessorInitPeim_msr_source_proof.txt`
 - `cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt`
+- `cpu_hack/noop_replace/bios_noop_rebuilt.bin`
+- `cpu_hack/noop_replace/bios_noop_rebuilt.bin.report.txt`
 - `cpu_sing_3/PHASE2_DONOR_DIFF_REPORT.md`
 - `cpu_sing_3/PHASE2_FW_ARG0C_PROVENANCE.md`
 - `cpu_sing_3/PHASE2_RUNTIME_MSR_OBSERVER_REPORT.md`
 - `cpu_sing_3/PHASE2_RUNTIME_LOAD_AFFINITY_REPORT.md`
 - `cpu_sing_3/PHASE2_RUNTIME_TRANSITION_JITTER_REPORT.md`
 - `cpu_sing_3/PHASE2_RUNTIME_STATE_WINDOW_ORACLE_REPORT.md`
+- `cpu_sing_2/PHASE2_CACHELINE_PHASE_COUPLING.md`
 - `cpu_sing_2/PHASE2B_5B_OPTICAL_3SAT_PORT.md`
 - `cpu_sing_2/PHASE2B_5C_BLOCH_COMPLEX_ISING_PORT.md`
 - `cpu_sing_2/PHASE2B_5D_SPECTRAL_PROBLEM_CLASSIFIER.md`
@@ -55,6 +58,17 @@ The CPU has not produced accepted Kuramoto/Ising/phase behavior yet, and this is
 - `cpu_sing_2/PHASE2B_6_CHANNEL_MATRIX.md`
 - `cpu_sing_2/PHASE2B_7_RESTORATION_GATE.md`
 - `cpu_sing_2/PHASE2B_8_DECISION_TREE.md`
+- `phase3b/PHASE3B_CATALYTIC_SUBSTRATE_PRIMITIVE.md`
+- `session_scripts/phase3b/catalytic_invariant_probe.c`
+- `phase3b/results/invariant_probe_summary.csv`
+- `phase4_holo/PHASE4_3_RESIDUAL_CHANNEL.md`
+- `session_scripts/phase4_holo/residual_channel.c`
+- `phase4_holo/PHASE4_4A_OPERATOR_GOE.md`
+- `session_scripts/phase4_holo/operator_goe.c`
+- `phase4_holo/PHASE4_5_HOLO_MINI_MODEL.md`
+- `session_scripts/phase4_holo/holo_mini_model.c`
+- `phase4_holo/PHASE4_6_PUBLIC_HOLO_HARNESS.md`
+- `session_scripts/phase4_holo/catcas_holo_harness.c`
 - `cpu_sing_3/PHASE2_MASTER_A_DISPATCH_SOURCE.md`
 - `cpu_sing_3/PHASE2_MASTER_B_REBUILD_TOOLCHAIN.md`
 - `cpu_sing_3/PHASE2_MASTER_C_BIOS_MOD_DONORS.md`
@@ -63,6 +77,7 @@ The CPU has not produced accepted Kuramoto/Ising/phase behavior yet, and this is
 - `session_scripts/phase1_msr/msr_load_affinity_characterizer.py`
 - `session_scripts/phase1_msr/msr_transition_jitter_probe.py`
 - `session_scripts/phase1_msr/msr_state_window_oracle.py`
+- `session_scripts/phase2_kuramoto/cacheline_phase_coupling.c`
 - `session_scripts/phase2b/optical_3sat_phase_port.c`
 - `session_scripts/phase2b/bloch_complex_ising.c`
 - `session_scripts/phase2b/spectral_problem_classifier.c`
@@ -118,27 +133,23 @@ The deepest firmware progress is now the combined constructor/provenance chain:
   P4 source is MSRC001_0068
 ```
 
-That keeps the firmware route alive but blocks byte-ready review until the produced record source is tied to editable bytes or a safe rebuild workflow is proven.
+That keeps the firmware route alive but blocks byte-ready review until the produced record source is tied to editable bytes. The safe no-op rebuild workflow is now proven.
 
 ## Exact Next Action
 
-`NOOP_REBUILD_FORCE_SAVE_ARTIFACT`
+`P4_ONLY_EDIT_SOURCE_PROOF`
 
-Phase 2B has been classified: active phase-oracle software works, but passive substrate evidence is rejected because active software explains the successful results. The next non-repeated live action is the firmware no-op rebuild artifact. Do not repeat `0xFFF4CF9C`, `0xFFF4D12F`, `0xFFF7E698`, or `0xFFF44E76` traces; those are already decoded.
+Phase 2B has been classified: active phase-oracle software works, but passive substrate evidence is rejected because active software explains the successful results. Phase 3B confirmed a catalytic relational invariant in a controlled four-snapshot harness, Phase 4.3 compressed that carrier into `.holo` residual tags, Phase 4.4A produced GOE-like operator-matrix statistics against nulls, Phase 4.5 decoded a readable `.holo` mini-model while restoring tape, and Phase 4.6 packaged the public harness. The no-op rebuild artifact is now proven. The next firmware action is P4-only edit-source proof, not rebuild mechanics. Do not repeat `0xFFF4CF9C`, `0xFFF4D12F`, `0xFFF7E698`, or `0xFFF44E76` traces; those are already decoded.
 
-Parallel firmware action remains `NOOP_REBUILD_FORCE_SAVE` for any future firmware edit path.
+Parallel firmware action is now `P4_ONLY_EDIT_SOURCE_PROOF`.
 
-Parallel live action:
-
-`NOOP_REBUILD_FORCE_SAVE`
-
-Use a rebuild path that can force-save an identical replacement and produce parse-clean `cpu_hack/noop_replace/bios_noop_rebuilt.bin`. The donor diff shows this board's firmware can accept a free-space DXE insertion without shifting later volumes, but it does not prove identical PE32-body replacement.
+The donor diff shows this board's firmware can accept a free-space DXE insertion without shifting later volumes, and the no-op rebuild proves identical PE32 body rebuild/save mechanics. Neither proves a voltage/P4 candidate.
 
 ## Human Approval Needed
 
-No for the current local RE and donor-diff work.
+No for the current local RE, donor-diff, and no-op rebuild proof work.
 
-Yes for the current rebuild blocker if using manual UEFITool GUI save or installing/providing a Qt/qmake build environment. Physical instrumentation remains out of scope for this goal.
+Yes only before any future firmware candidate construction or any action outside the current no-flash/no-voltage/no-hardware boundary. Physical instrumentation remains out of scope for this goal.
 
 ## Do-Not-Do List
 
