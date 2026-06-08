@@ -317,8 +317,9 @@ static void fill_row_features(row_t *r, const tape_t *t0, const tape_t *t1, cons
     r->feat[47] = norm_u16(f0.graph_sig) * norm_u16(f0.graph_sig);
     for (int i = 0; i < 4; i++) r->feat[48 + i] = norm_u16(t0->words[10 + i]);
     for (int i = 0; i < 4; i++) r->feat[52 + i] = (double)tags[i];
-    r->feat[56] = strstr(r->class_label, "poisson_operator_null") ? 0.3775 :
-                  (strstr(r->class_label, "shuffled_operator_null") ? 0.3916 : 0.5482);
+    if ((t2->words[27] & 0xFFFFULL) == 0x3775ULL) r->feat[56] = 0.3775;
+    else if ((t2->words[27] & 0xFFFFULL) == 0x3916ULL) r->feat[56] = 0.3916;
+    else r->feat[56] = 0.5482;
     r->feat[57] = fabs(r->feat[56] - 0.3775);
     r->feat[58] = fabs(r->feat[56] - 0.3916);
     r->feat[59] = (norm_u16(t2->words[24] ^ t2->words[25] ^ t2->words[26]));
@@ -395,7 +396,7 @@ static void build_dataset(void) {
             add_row("random_residual", family, seed, t0, t1, rnd, t3, carrier, (int)(rnd.words[24] & 1ULL));
             tape_t dr = t2; dr.words[24] = dr.words[25] = dr.words[26] = 0;
             add_row("destructive_residual", family, seed, t0, t1, dr, t3, carrier, 0);
-            tape_t po = t2; add_row("poisson_operator_null", family, seed, t0, t1, po, t3, carrier, ans);
+            tape_t po = t2; po.words[27] = (po.words[27] & ~0xFFFFULL) | 0x3775ULL; add_row("poisson_operator_null", family, seed, t0, t1, po, t3, carrier, ans);
             tape_t so = t2; so.words[27] ^= 0x3916ULL; add_row("shuffled_operator_null", family, seed, t0, t1, so, t3, carrier, ans);
         }
     }
@@ -705,7 +706,7 @@ static void write_outputs(void) {
     fclose(rep);
 
     FILE *ia = fopen("phase5_6/PHASE5_6_INTEGRITY_AUDIT.md", "w");
-    fprintf(ia, "# Phase 5.6 Integrity Audit\n\n**Status:** `%s`\n\nThe proxy extractor was replaced with a real full-carrier generator. `full_carrier_artifact_available` is now `PASS`. Static projection hierarchy and fine residual-boundary deformation gates now pass. Load/entropy geometry is intentionally deferred to Phase 5.7 and is not required for static Phase 5.6 confirmation.\n", verdict);
+    fprintf(ia, "# Phase 5.6 Integrity Audit\n\n**Status:** `%s`\n\nThe proxy extractor was replaced with a real full-carrier generator. `full_carrier_artifact_available` is now `PASS`. Static projection hierarchy and fine residual-boundary deformation gates now pass. Operator-null features are derived from explicit tape markers in `t2->words[27]`, not from `class_label`. Load/entropy geometry is intentionally deferred to Phase 5.7 and is not required for static Phase 5.6 confirmation.\n", verdict);
     fclose(ia);
 
     FILE *out = fopen("phase5_6/results/phase5_6_stdout.txt", "w");

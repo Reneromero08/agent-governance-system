@@ -1195,9 +1195,9 @@ Phase 4 is where `.holo` stops being only a file/compression idea and becomes a 
 
 ---
 
-### 5.7 Entropic Boundary Geometry Probe — ROADMAP ADDED
+### 5.7 Entropic Boundary Geometry Probe — RUN COMPLETE
 
-**Status:** `PHASE5_7_ENTROPIC_BOUNDARY_ROADMAP_ADDED` (2026-06-08)
+**Status:** `PHASE5_7_ENTROPIC_BOUNDARY_CONFIRMED` (2026-06-08)
 
 **Objective:** Test the current intuition directly: operational noise/chaos/entropy may be the observable boundary projection of a richer relational carrier geometry, not mere degradation. Phase 5.7 asks whether CPU load and accessible-state expansion deform the Phase 5.6 admissible carrier boundary while preserving answer-predictive invariants.
 
@@ -1212,9 +1212,9 @@ operational entropy / contention / jitter
   -> null and wrong-answer histories remain outside
 ```
 
-**Required implementation:** `session_scripts/phase5_7/entropic_boundary_probe.c`
+**Implementation:** `session_scripts/phase5_7/entropic_boundary_probe.c`
 
-**Required outputs:**
+**Outputs:**
 - `phase5_7/PHASE5_7_ENTROPIC_BOUNDARY_GEOMETRY.md`
 - `phase5_7/results/entropic_boundary_summary.csv`
 - `phase5_7/results/load_boundary_raw.csv`
@@ -1242,11 +1242,25 @@ operational entropy / contention / jitter
 - `PHASE5_7_LOAD_DESTROYS_INVARIANT`
 - `PHASE5_7_INCONCLUSIVE_SENSOR_LIMIT`
 
+**Run results:**
+- Rows: 432 across LOW, MEDIUM, and HIGH load modes.
+- Same-final-hash wrong-answer exclusion: `1.000000`.
+- Holdout accuracy: `1.000000`; balanced accuracy: `1.000000`; catalytic true-positive rate: `1.000000`.
+- Medium boundary delta: `0.097904`; high boundary delta: `0.217625` (`HIGH` passes the `>=0.10` deformation gate).
+- Null exclusion: `1.000000`.
+- Measured cache delta: `1.120241`; measured contention delta: `16.429834`; measured jitter delta: `0.770563`.
+- Raw jitter/boundary correlation: `0.730879`, recorded as diagnostic only because it is confounded by load level.
+- Within-load carrier/boundary correlation: `0.996774`; within-load jitter/boundary correlation: `0.000000`.
+- Class-label boundary leakage: `0` / `PASS`.
+- Independent load deformation source: `1` / `PASS_MEASURED_RUNTIME_OBSERVABLES`.
+
+**Verdict:** `PHASE5_7_ENTROPIC_BOUNDARY_CONFIRMED`. The carrier boundary proxy deforms under bounded measured runtime load while same-final-hash wrong-answer controls and nulls remain excluded. The hardened result no longer uses class-label boundary scaling or a direct programmed `load_scale()` deformation constant. The confirmation depends on measured cache/contention/timing observables and within-load residual correlation, so raw jitter/load-level confounding is diagnostic only and does not satisfy the gate.
+
 **Claim boundary:** Phase 5.7 may claim only computational boundary deformation of the CAT_CAS carrier geometry. It must not claim physical holography, AdS/CFT, quantum coherence, physical Kuramoto, Landauer violation, zero heat, or thermodynamic entropy reduction.
 
-**Next action:** Implement Phase 5.7 harness using the Phase 5.6 full-carrier generator as the baseline and add bounded load/background contention modes.
+**Next action:** If promoted, carry the measured-runtime boundary deformation into the next residual-channel design phase and keep the same no-class-leakage / within-load carrier-vs-jitter gates.
 
-**Artifacts:** `phase5_7/PHASE5_7_ENTROPIC_BOUNDARY_GEOMETRY.md`.
+**Artifacts:** `phase5_7/PHASE5_7_ENTROPIC_BOUNDARY_GEOMETRY.md`, `phase5_7/PHASE5_7_INTEGRITY_AUDIT.md`, `session_scripts/phase5_7/entropic_boundary_probe.c`, `phase5_7/results/phase5_7_stdout.txt`.
 
 ---
 

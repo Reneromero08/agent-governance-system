@@ -1,0 +1,26 @@
+=== PHASE 5.7: ENTROPIC BOUNDARY GEOMETRY PROBE ===
+
+Dataset:
+  rows_total: 432
+  load_modes: LOW,MEDIUM,HIGH
+
+Gate metrics:
+  same_final_hash_wrong_answer_exclusion: 1.000000
+  holdout_accuracy: 1.000000
+  balanced_accuracy: 1.000000
+  catalytic_true_positive_rate: 1.000000
+  medium_boundary_delta: 0.097904
+  high_boundary_delta: 0.217625
+  null_exclusion: 1.000000
+  measured_cache_delta: 1.120241
+  measured_contention_delta: 16.429834
+  measured_jitter_delta: 0.770563
+  raw_carrier_boundary_correlation: 0.558488
+  raw_jitter_boundary_correlation: 0.730879
+  raw_jitter_confounded: 1
+  within_load_carrier_boundary_correlation: 0.996774
+  within_load_jitter_boundary_correlation: 0.000000
+  class_label_boundary_leakage: 0
+  independent_load_deformation_source: 1
+
+=== VERDICT: PHASE5_7_ENTROPIC_BOUNDARY_CONFIRMED ===

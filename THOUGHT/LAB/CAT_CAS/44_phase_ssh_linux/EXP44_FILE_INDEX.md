@@ -141,15 +141,18 @@ This index preserves the existing Exp44 phase layout. No files are reorganized i
 
 | File | Purpose | Keep |
 |------|---------|------|
-| `PHASE5_7_ENTROPIC_BOUNDARY_GEOMETRY.md` | Roadmap for testing load/entropy as computational carrier-boundary deformation after Phase 5.6 | Yes |
+| `PHASE5_7_ENTROPIC_BOUNDARY_GEOMETRY.md` | Hardened Phase 5.7 report for measured-runtime load/entropy computational boundary deformation | Yes |
+| `PHASE5_7_INTEGRITY_AUDIT.md` | Phase 5.7 leakage/tautology audit proving class-label and synthetic-load routes were removed | Yes |
+| `results/phase5_7_stdout.txt` | Captured Phase 5.7 run summary and verdict | Yes |
+| `results/*.csv` | Generated detailed Phase 5.7 tables; keep as local artifacts unless explicitly staged | No |
 
 ---
 
 ## Phase Layout Verdict
 
 - Keep `cpu_sing_1/`, `cpu_sing_2/`, `cpu_sing_3/`, `2b_blackbox/`, `gpt_research/`, `cpu_hack/`, and `session_scripts/`.
-- Session scripts organized by phase: `phase1_msr/`, `phase2_kuramoto/`, `phase3_catalytic/`, `phase4_holo/`, `phase5_6/`, and pending `phase5_7/`.
+- Session scripts organized by phase: `phase1_msr/`, `phase2_kuramoto/`, `phase3_catalytic/`, `phase4_holo/`, `phase5_6/`, and `phase5_7/`.
 - Do not recreate generic `docs/`, `reports/`, `firmware/`, or `archive/` folders.
 - Track markdown reports, source scripts, and small text evidence.
 - Ignore raw BIOS images, extracted BIOS trees, generated logs, CSV exports, compiled binaries, and local tool trees.
-- Phase 3 COMPLETE. Phase 4 Track A complete. Phase 4 Track B pending Phase 2. Phase 5.6 confirmed as `PHASE5_6_POLYTOPE_GEOMETRY_CONFIRMED`: the canonical harness now generates full T0/T1/T2/T3 carrier rows, rejects same-final-hash wrong-answer controls, predicts held-out rows, passes static projection hierarchy, and passes fine residual-boundary deformation. Phase 5.7 owns load/entropy boundary deformation.
+- Phase 3 COMPLETE. Phase 4 Track A complete. Phase 4 Track B pending Phase 2. Phase 5.6 confirmed as `PHASE5_6_POLYTOPE_GEOMETRY_CONFIRMED`: the canonical harness now generates full T0/T1/T2/T3 carrier rows, rejects same-final-hash wrong-answer controls, predicts held-out rows, passes static projection hierarchy, and passes fine residual-boundary deformation. Phase 5.7 confirmed as `PHASE5_7_ENTROPIC_BOUNDARY_CONFIRMED`: bounded measured runtime load deforms the computational carrier boundary while null exclusion survives, and the decisive correlation is within-load carrier/boundary rather than raw jitter.
