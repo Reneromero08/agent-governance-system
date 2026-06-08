@@ -1153,6 +1153,36 @@ Phase 4 is where `.holo` stops being only a file/compression idea and becomes a 
 - [ ] Measure whether the PRO core's `rdtsc` jitter spontaneously forms transient phase-locked states
 - [ ] If yes: the silicon's thermal noise IS a computation — random noise solving optimization problems via spontaneous synchronization
 
+### 5.6 Polytope / Positive-Geometry Hypothesis Test — ROADMAP ADDED
+
+**Status:** `PHASE5_6_POLYTOPE_HYPOTHESIS_ROADMAP_ADDED`
+
+**Objective:** Test whether the confirmed CAT_CAS relational invariant, residual channel, operator statistics, and .holo mini-model outputs occupy a separable polytope-like region in relational feature space. This asks whether CAT_CAS Track A is better described as step-by-step algorithmic execution or navigation/projection of a higher-dimensional relational geometry whose boundary constraints determine answer-carrying invariants.
+
+**Prerequisites:** Phase 3B (relational invariant), Phase 4.3 (residual channel), Phase 4.4A (operator GOE), Phase 4.5 (mini-model), Phase 4.6 (public harness). All COMPLETE.
+
+**Hypothesis:** CAT_CAS may be producing a positive-geometry-like relational object — not the actual amplituhedron or cosmological polytope, but an analogous computational structure where allowed reversible histories and restoration constraints encode answer-carrying invariants. The algorithm is not primary. The geometry may be primary. The tape may be a boundary projection of a higher-dimensional relational object.
+
+**Critical Correction:** Do NOT build the polytope from only the four snapshot scalar strengths (strength_t0..strength_t3). In Phase 3B, catalytic rows have strength=1.000 at all four snapshots, collapsing the catalytic hull into a degenerate point. The correct feature space uses full carrier-coordinate vectors: snapshot strengths, answer/restoration fields, residual tag coordinates, XOR/parity features, Walsh-Hadamard features, graph spectral features, .holo basis and residual slots, operator GOE/statistical features, correlation/MI features, and null-distance metrics.
+
+**Subphases:** See `PHASE5_6_POLYTOPE_HYPOTHESIS_ROADMAP.md` for full test plan.
+
+- [ ] 5.6.0: Feature-Space Definition — `PHASE5_6_FEATURE_SPACE_DEFINED`
+- [ ] 5.6.1: Dataset Builder — `PHASE5_6_DATASET_BUILT`
+- [ ] 5.6.2: Convex Hull / Geometry Builder — `PHASE5_6_GEOMETRY_BUILDER_READY`
+- [ ] 5.6.3: Null Exclusion / Cluster Separation Test — `PHASE5_6_NULL_EXCLUSION_{PASS|PARTIAL|FAILED}`
+- [ ] 5.6.4: Holographic Projection Test — `PHASE5_6_PROJECTION_HIERARCHY_{PASS|PARTIAL|COLLAPSE}`
+- [ ] 5.6.5: Predictive Geometry Test — `PHASE5_6_PREDICTIVE_GEOMETRY_{PASS|PARTIAL|FAILED}`
+- [ ] 5.6.6: Entropy / CPU-Load Geometry Expansion Test — `PHASE5_6_ENTROPY_GEOMETRY_EXPANSION_{PASS|PARTIAL|NOISE_ONLY|LOAD_DESTROYS}`
+- [ ] 5.6.7: Residual Boundary Deformation Test — `PHASE5_6_RESIDUAL_BOUNDARY_DEFORMATION_{PASS|PARTIAL|FAILED}`
+- [ ] 5.6.8: Polytope Decision Gate — `PHASE5_6_POLYTOPE_GEOMETRY_{CONFIRMED|PARTIAL|ANALOGY_WEAK|HYPOTHESIS_REJECTED}`
+
+**Claim Boundaries:** Phase 5.6 does not test whether CAT_CAS is literally the amplituhedron or cosmological polytope. It tests whether CAT_CAS produces a computational analogue: points = relational carrier states, transitions = reversible operator histories, hull/body = admissible catalytic region, boundary = valid answer-carrying constraints, outside region = null or wrong-answer histories, projection loss = entropy/noise-like observer limitation, residual tags = local boundary deformation coordinates.
+
+**Forbidden claims:** AMPLITUHEDRON_PROVEN, COSMOLOGICAL_POLYTOPE_PROVEN, PHYSICAL_HOLOGRAPHY_PROVEN, QUANTUM_GEOMETRY_PROVEN, physical Kuramoto, quantum coherence, Landauer violation, zero heat, microscopic entropy reduction.
+
+**Artifacts:** `PHASE5_6_POLYTOPE_HYPOTHESIS_ROADMAP.md`, `session_scripts/phase5_6/polytope_hypothesis.c`, `phase5_6/results/polytope_feature_dataset.csv`, `phase5_6/results/polytope_hull_stats.csv`.
+
 ---
 
 ## Phase 6: Integration with CAT_CAS Framework

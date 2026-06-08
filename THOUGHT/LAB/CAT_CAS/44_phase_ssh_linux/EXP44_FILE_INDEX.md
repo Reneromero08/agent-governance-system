@@ -135,6 +135,7 @@ This index preserves the existing Exp44 phase layout. No files are reorganized i
 | `operator_goe.c` | Phase 4.4A catalytic operator-matrix eigenvalue spacing and null comparison | Yes |
 | `holo_mini_model.c` | Phase 4.5 tiny graph-class `.holo` mini-model with decode and restore controls | Yes |
 | `catcas_holo_harness.c` | Phase 4.6 CLI-style public `.holo` harness for residual, mini, GOE, and all-test modes | Yes |
+| (pending) `polytope_hypothesis.c` | Phase 5.6 polytope/positive-geometry hypothesis test harness | Not yet |
 
 ---
 
@@ -145,4 +146,4 @@ This index preserves the existing Exp44 phase layout. No files are reorganized i
 - Do not recreate generic `docs/`, `reports/`, `firmware/`, or `archive/` folders.
 - Track markdown reports, source scripts, and small text evidence.
 - Ignore raw BIOS images, extracted BIOS trees, generated logs, CSV exports, compiled binaries, and local tool trees.
-- Phase 3 COMPLETE. Phase 4 Track A complete through public harness packaging. Phase 4 Track B pending Phase 2 physical/firmware breakthrough.
+- Phase 3 COMPLETE. Phase 4 Track A complete through public harness packaging. Phase 4 Track B pending Phase 2 physical/firmware breakthrough. Phase 5.6 polytope/positive-geometry hypothesis roadmap added (not yet implemented).
