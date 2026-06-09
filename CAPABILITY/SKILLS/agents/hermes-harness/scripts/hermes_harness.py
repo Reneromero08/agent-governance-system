@@ -15,8 +15,16 @@ Session model:
 
 Modes:
     persistent_worker           → named conversation, no delegate_task.
-                                  Continue from prior context directly.
+    persistent_worker_verify    → same, but with strict scope lock for
+                                  follow-ups (verify/harden/audit/fix).
     all other modes             → may use delegate_task for decomposition.
+
+Scope enforcement (persistent_worker_verify mode):
+    --write-root PATH           → only these paths may be modified.
+    --read-root PATH            → default search scope.
+    --deny-write-root PATH      → explicit deny list for writes.
+    --search-policy POLICY      → artifact_only | dependency_only | repo_explicit
+    --branch-policy POLICY      → forbidden | allowed
 
 Without a conversation name each call is stateless (fresh turn).
 """
@@ -28,7 +36,6 @@ import json
 import os
 import sys
 import textwrap
-import time
 import urllib.error
 import urllib.request
 from datetime import datetime, timezone
@@ -40,8 +47,56 @@ DEFAULT_MODEL = "hermes-agent"
 DEFAULT_KEY = "change-me-local-dev"
 VALID_MODES = {
     "auto", "plan", "research", "audit", "code", "debug", "docs", "synthesis",
-    "persistent_worker",
+    "persistent_worker", "persistent_worker_verify",
 }
+VALID_SEARCH_POLICIES = {"artifact_only", "dependency_only", "repo_explicit"}
+VALID_BRANCH_POLICIES = {"forbidden", "allowed"}
+
+SCOPE_LOCK = textwrap.dedent("""
+STRICT SCOPE LOCK:
+
+For this task, "results", "work", "output", "logic", "engineering",
+"integrity", "harden", "double check", "verify", "audit", "clean up",
+and "fix" refer only to the current goal's explicit artifact scope.
+
+WRITE_SCOPE: {write_roots}
+READ_SCOPE: {read_roots}
+DENY_WRITE_ROOTS: {deny_roots}
+SEARCH_POLICY: {search_policy}
+BRANCH_POLICY: {branch_policy}
+
+Do not reinterpret scope words as permission to inspect, audit, improve,
+refactor, or modify the broader repository.
+
+You may read outside the artifact scope only when an in-scope file
+directly imports, calls, references, or depends on that outside file,
+and only enough to understand the in-scope artifact.
+
+You must not modify files outside WRITE_SCOPE.
+You must not create branches unless BRANCH_POLICY is "allowed".
+You must not create future-goal proposals.
+You must not create out-of-scope recommendations unless an in-scope
+task is impossible without that external dependency.
+
+If you encounter an unrelated issue outside scope, ignore it.
+If you encounter an external dependency issue that blocks the in-scope
+task, report only:
+  BLOCKED_EXTERNAL_DEPENDENCY:
+    path: <path>
+    why it blocks: <reason>
+    no changes made
+
+Then continue with any remaining in-scope work.
+
+Before writing, compute the intended changed-file set. If any intended
+file is outside WRITE_SCOPE, remove it from the plan automatically.
+
+After writing, run a changed-file audit. If any changed file is outside
+WRITE_SCOPE, revert it automatically and report:
+  SCOPE_ESCAPE_REVERTED:
+    path: <path>
+    reason: out of write scope
+""").strip()
 
 WORKER_PROMPT = textwrap.dedent("""
 ACT ON THIS TASK DIRECTLY. Do not mention skills or tools you do not have.
@@ -57,6 +112,8 @@ You are the persistent worker for this named conversation.
 Continue from prior context in this conversation.
 Do NOT spawn delegate_task unless explicitly requested.
 Perform the task directly. Answer concisely.
+
+{scope_block}
 
 After completing, include a brief output contract section:
 {output}
@@ -78,6 +135,46 @@ If the task is atomic, answer directly. Do not fabricate delegation where none i
 After completing, include a brief output contract section:
 {output}
 """).strip()
+
+
+# ---------------------------------------------------------------------------
+# Scope helpers
+# ---------------------------------------------------------------------------
+
+def _resolve_roots(workspace: str, roots_arg: Optional[List[str]]) -> List[str]:
+    if not roots_arg:
+        return []
+    ws = Path(workspace).expanduser().resolve()
+    resolved: List[str] = []
+    for r in roots_arg:
+        p = Path(r)
+        if not p.is_absolute():
+            p = ws / p
+        resolved.append(str(p.resolve()))
+    return resolved
+
+
+def build_scope_block(
+    mode: str,
+    write_roots: Optional[List[str]] = None,
+    read_roots: Optional[List[str]] = None,
+    deny_roots: Optional[List[str]] = None,
+    search_policy: str = "artifact_only",
+    branch_policy: str = "forbidden",
+    workspace: str = ".",
+) -> str:
+    if mode not in ("persistent_worker_verify",):
+        return ""
+    wr = _resolve_roots(workspace, write_roots) or ["<all files in artifact scope>"]
+    rr = _resolve_roots(workspace, read_roots) or wr
+    dr = _resolve_roots(workspace, deny_roots) or ["CAPABILITY/", "TOOLS/", ".git/", ".hermes/"]
+    return SCOPE_LOCK.format(
+        write_roots=", ".join(wr),
+        read_roots=", ".join(rr),
+        deny_roots=", ".join(dr),
+        search_policy=search_policy,
+        branch_policy=branch_policy,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -108,6 +205,12 @@ def validate_task(task: Dict[str, Any]) -> List[str]:
         errors.append(f"Invalid mode {mode!r}. Valid modes: {', '.join(sorted(VALID_MODES))}")
     if task.get("conversation_new") and not str(task.get("conversation", "")).strip():
         errors.append("conversation_new requires a conversation name")
+    sp = task.get("search_policy", "")
+    if sp and sp not in VALID_SEARCH_POLICIES:
+        errors.append(f"Invalid search_policy {sp!r}. Valid: {', '.join(sorted(VALID_SEARCH_POLICIES))}")
+    bp = task.get("branch_policy", "")
+    if bp and bp not in VALID_BRANCH_POLICIES:
+        errors.append(f"Invalid branch_policy {bp!r}. Valid: {', '.join(sorted(VALID_BRANCH_POLICIES))}")
     return errors
 
 
@@ -118,6 +221,11 @@ def build_harness_prompt(
     max_workers: int = 3,
     constraints: str = "",
     output: str = "",
+    write_roots: Optional[List[str]] = None,
+    read_roots: Optional[List[str]] = None,
+    deny_roots: Optional[List[str]] = None,
+    search_policy: str = "artifact_only",
+    branch_policy: str = "forbidden",
 ) -> str:
     abs_workspace = str(Path(workspace).expanduser().resolve()) if workspace else "none"
     constraints_block = constraints or 'No extra constraints provided.'
@@ -125,8 +233,13 @@ def build_harness_prompt(
         "Markdown synthesis with delegation summary, findings, changes, "
         "verification, uncertainty, and next move."
     )
+    scope_block = build_scope_block(
+        mode=mode, write_roots=write_roots, read_roots=read_roots,
+        deny_roots=deny_roots, search_policy=search_policy,
+        branch_policy=branch_policy, workspace=workspace,
+    )
 
-    if max_workers <= 0 or mode == "persistent_worker":
+    if max_workers <= 0 or mode.startswith("persistent_worker"):
         template = WORKER_PROMPT
     else:
         template = ORCHESTRATOR_PROMPT
@@ -134,7 +247,7 @@ def build_harness_prompt(
     return template.format(
         task=task, workspace=abs_workspace, mode=mode,
         max_workers=max_workers, constraints=constraints_block,
-        output=output_block,
+        output=output_block, scope_block=scope_block,
     )
 
 
@@ -154,10 +267,7 @@ def call_hermes_responses(
     instructions: str = "",
 ) -> Dict[str, Any]:
     url = base_url.rstrip("/") + "/responses"
-    payload: Dict[str, Any] = {
-        "model": model,
-        "input": prompt,
-    }
+    payload: Dict[str, Any] = {"model": model, "input": prompt}
     if conversation:
         payload["conversation"] = conversation
         payload["store"] = store or True
@@ -172,10 +282,8 @@ def call_hermes_responses(
         headers["X-Hermes-Session-Key"] = session_key
 
     req = urllib.request.Request(
-        url,
-        data=json.dumps(payload).encode("utf-8"),
-        headers=headers,
-        method="POST",
+        url, data=json.dumps(payload).encode("utf-8"),
+        headers=headers, method="POST",
     )
     try:
         with urllib.request.urlopen(req, timeout=timeout) as resp:
@@ -203,7 +311,7 @@ def call_hermes_responses(
 
 
 # ---------------------------------------------------------------------------
-# High-level run (used by both CLI and run.py skill path)
+# High-level run
 # ---------------------------------------------------------------------------
 
 def run_task(
@@ -216,6 +324,11 @@ def run_task(
     conversation: str = "",
     conversation_new: bool = False,
     session_key: str = "",
+    write_roots: Optional[List[str]] = None,
+    read_roots: Optional[List[str]] = None,
+    deny_roots: Optional[List[str]] = None,
+    search_policy: str = "artifact_only",
+    branch_policy: str = "forbidden",
     base_url: Optional[str] = None,
     api_key: Optional[str] = None,
     model: Optional[str] = None,
@@ -236,7 +349,9 @@ def run_task(
     prompt = build_harness_prompt(
         task=task, workspace=workspace, mode=mode,
         max_workers=max_workers, constraints=constraints,
-        output=output_contract,
+        output=output_contract, write_roots=write_roots,
+        read_roots=read_roots, deny_roots=deny_roots,
+        search_policy=search_policy, branch_policy=branch_policy,
     )
 
     api_result = call_hermes_responses(
@@ -268,10 +383,15 @@ def merged_task_from_args(args: argparse.Namespace) -> Dict[str, Any]:
     if getattr(args, "task_file", None):
         task.update(load_task_file(args.task_file))
     for field in ("task", "workspace", "mode", "max_workers", "constraints",
-                  "output_contract", "conversation", "session_key"):
+                  "output_contract", "conversation", "session_key",
+                  "search_policy", "branch_policy"):
         val = getattr(args, field, None)
         if val is not None:
             task[field] = val
+    for list_field in ("write_root", "read_root", "deny_write_root"):
+        val = getattr(args, list_field, None)
+        if val is not None and val:
+            task[list_field] = [v.strip() for v in val.split(",") if v.strip()]
     if getattr(args, "conversation_new", None):
         task["conversation_new"] = True
     if getattr(args, "toolsets", None):
@@ -294,6 +414,10 @@ def cmd_prompt(args: argparse.Namespace) -> int:
         task=t["task"], workspace=t.get("workspace", "."), mode=t.get("mode", "auto"),
         max_workers=int(t.get("max_workers", 3)),
         constraints=t.get("constraints", ""), output=t.get("output_contract", ""),
+        write_roots=t.get("write_root"), read_roots=t.get("read_root"),
+        deny_roots=t.get("deny_write_root"),
+        search_policy=t.get("search_policy", "artifact_only"),
+        branch_policy=t.get("branch_policy", "forbidden"),
     )
     print(prompt)
     return 0
@@ -321,6 +445,10 @@ def cmd_run(args: argparse.Namespace) -> int:
             task=t.get("task", ""), workspace=t.get("workspace", "."),
             mode=t.get("mode", "auto"), max_workers=int(t.get("max_workers", 3)),
             constraints=t.get("constraints", ""), output=t.get("output_contract", ""),
+            write_roots=t.get("write_root"), read_roots=t.get("read_root"),
+            deny_roots=t.get("deny_write_root"),
+            search_policy=t.get("search_policy", "artifact_only"),
+            branch_policy=t.get("branch_policy", "forbidden"),
         )
         conv = t.get("conversation", "")
         if t.get("conversation_new"):
@@ -343,15 +471,17 @@ def cmd_run(args: argparse.Namespace) -> int:
         return 2
 
     result = run_task(
-        task=t["task"],
-        workspace=t.get("workspace", "."),
-        mode=t.get("mode", "auto"),
-        max_workers=int(t.get("max_workers", 3)),
+        task=t["task"], workspace=t.get("workspace", "."),
+        mode=t.get("mode", "auto"), max_workers=int(t.get("max_workers", 3)),
         constraints=t.get("constraints", ""),
         output_contract=t.get("output_contract", ""),
         conversation=t.get("conversation", ""),
         conversation_new=t.get("conversation_new", False),
         session_key=t.get("session_key", ""),
+        write_roots=t.get("write_root"), read_roots=t.get("read_root"),
+        deny_roots=t.get("deny_write_root"),
+        search_policy=t.get("search_policy", "artifact_only"),
+        branch_policy=t.get("branch_policy", "forbidden"),
         base_url=getattr(args, "base_url", None),
         api_key=getattr(args, "api_key", None),
         model=getattr(args, "model", None),
@@ -371,14 +501,19 @@ def cmd_run(args: argparse.Namespace) -> int:
 def add_common_task_args(p: argparse.ArgumentParser) -> None:
     p.add_argument("--task", default=None, help="Task to hand to Hermes Harness.")
     p.add_argument("--task-file", default=None, help="JSON task file.")
-    p.add_argument("--workspace", default=None, help="Workspace path. Default: current directory.")
-    p.add_argument("--mode", default=None, choices=sorted(VALID_MODES), help="Routing mode. Default: auto.")
-    p.add_argument("--max-workers", type=int, default=None, help="Max concurrent subagents. Default: 3.")
+    p.add_argument("--workspace", default=None, help="Workspace path.")
+    p.add_argument("--mode", default=None, choices=sorted(VALID_MODES), help="Routing mode.")
+    p.add_argument("--max-workers", type=int, default=None, help="Max concurrent subagents.")
     p.add_argument("--constraints", default=None, help="Constraints to include in the handoff.")
     p.add_argument("--output-contract", default=None, help="Custom output contract.")
-    p.add_argument("--conversation", default=None, help="Named conversation for persistent multi-turn context.")
-    p.add_argument("--conversation-new", action="store_true", help="Create a new unique conversation name (appends timestamp).")
-    p.add_argument("--session-key", default=None, help="X-Hermes-Session-Key for long-term memory scoping.")
+    p.add_argument("--conversation", default=None, help="Named conversation for persistent context.")
+    p.add_argument("--conversation-new", action="store_true", help="Create new unique conversation name.")
+    p.add_argument("--session-key", default=None, help="X-Hermes-Session-Key for memory scoping.")
+    p.add_argument("--write-root", default=None, help="Comma-separated write scope paths.")
+    p.add_argument("--read-root", default=None, help="Comma-separated read scope paths.")
+    p.add_argument("--deny-write-root", default=None, help="Comma-separated deny-write paths.")
+    p.add_argument("--search-policy", default=None, choices=sorted(VALID_SEARCH_POLICIES), help="Search scope policy.")
+    p.add_argument("--branch-policy", default=None, choices=sorted(VALID_BRANCH_POLICIES), help="Branch creation policy.")
 
 
 def build_parser() -> argparse.ArgumentParser:

@@ -243,3 +243,91 @@ def test_validate_output_fields():
     data = json.loads(result.stdout)
     assert data["ok"] is True
     assert data["task"]["mode"] == "audit"
+
+
+# ---- prompt-level scope locking ----
+
+def test_verify_mode_valid():
+    result = run_cmd("validate", "--task", "Harden the thing", "--mode", "persistent_worker_verify")
+    assert result.returncode == 0
+
+
+def test_verify_mode_injects_scope_lock():
+    result = run_cmd("prompt", "--task", "Harden results", "--mode", "persistent_worker_verify",
+                     "--write-root", "PHASE5_8", "--read-root", "PHASE5_8",
+                     "--search-policy", "artifact_only", "--branch-policy", "forbidden")
+    assert result.returncode == 0
+    out = result.stdout
+    assert "STRICT SCOPE LOCK" in out
+    assert "WRITE_SCOPE" in out
+    assert "READ_SCOPE" in out
+    assert "artifact_only" in out
+    assert "forbidden" in out
+    assert "PHASE5_8" in out
+
+
+def test_verify_mode_no_scope_lock_in_orchestrator():
+    result = run_cmd("prompt", "--task", "Audit repo", "--mode", "audit")
+    assert result.returncode == 0
+    assert "STRICT SCOPE LOCK" not in result.stdout
+
+
+def test_search_policy_validation():
+    result = run_cmd("validate", "--task", "Test", "--mode", "persistent_worker_verify",
+                     "--search-policy", "bad_policy")
+    assert result.returncode != 0
+
+
+def test_branch_policy_validation():
+    result = run_cmd("validate", "--task", "Test", "--mode", "persistent_worker_verify",
+                     "--branch-policy", "bad_policy")
+    assert result.returncode != 0
+
+
+def test_write_root_in_task():
+    result = run_cmd("validate", "--task", "Test", "--mode", "persistent_worker_verify",
+                     "--write-root", "foo,bar/baz")
+    assert result.returncode == 0
+    data = json.loads(result.stdout)
+    assert data["task"]["write_root"] == ["foo", "bar/baz"]
+
+
+def test_dry_run_includes_scope():
+    result = run_cmd("run", "--task", "Harden", "--mode", "persistent_worker_verify",
+                     "--write-root", "PHASE5_8", "--read-root", "PHASE5_8",
+                     "--search-policy", "artifact_only", "--dry-run")
+    assert result.returncode == 0
+    data = json.loads(result.stdout)
+    assert "STRICT SCOPE LOCK" in data["prompt"]
+
+
+def test_scope_lock_forbids_unrelated_issues():
+    result = run_cmd("prompt", "--task", "Harden results", "--mode", "persistent_worker_verify",
+                     "--write-root", "PHASE5_8", "--read-root", "PHASE5_8")
+    assert result.returncode == 0
+    out = result.stdout
+    assert "unrelated issue outside scope, ignore it" in out
+
+
+def test_scope_lock_forbids_future_proposals():
+    result = run_cmd("prompt", "--task", "Harden results", "--mode", "persistent_worker_verify",
+                     "--write-root", "PHASE5_8")
+    assert result.returncode == 0
+    out = result.stdout
+    assert "must not create future-goal proposals" in out
+
+
+def test_scope_lock_forbids_branches():
+    result = run_cmd("prompt", "--task", "Harden results", "--mode", "persistent_worker_verify",
+                     "--write-root", "PHASE5_8", "--branch-policy", "forbidden")
+    assert result.returncode == 0
+    out = result.stdout
+    assert "must not create branches" in out.lower()
+
+
+def test_scope_lock_forbids_external_mutation():
+    result = run_cmd("prompt", "--task", "Harden results", "--mode", "persistent_worker_verify",
+                     "--write-root", "PHASE5_8")
+    assert result.returncode == 0
+    out = result.stdout
+    assert "must not modify files outside" in out.lower()

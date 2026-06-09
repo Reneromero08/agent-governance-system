@@ -50,7 +50,7 @@ Input JSON shape for skill_run:
 ```json
 {
   "task": "string (required)",
-  "mode": "audit|research|code|debug|docs|plan|synthesis|auto|persistent_worker",
+  "mode": "audit|research|code|debug|docs|plan|synthesis|auto|persistent_worker|persistent_worker_verify",
   "workspace": "/absolute/path (optional, defaults to repo root)",
   "max_workers": 3,
   "toolsets": ["terminal", "file"],
@@ -88,6 +88,22 @@ Uses Hermes `/v1/responses` with named `conversation`. Hermes manages conversati
 **Without a conversation name** each call is stateless (fresh turn).
 
 **Limitation:** Hermes stores up to 100 responses per named conversation (LRU eviction). Not infinite archival memory.
+
+### Parent Prompt Construction Contract
+
+The parent agent must convert vague follow-ups into scoped task packets before calling Hermes. Never send bare prompts like "Harden results" — always resolve them against the prior goal's artifact set.
+
+**Scope resolution:**
+| Vague phrase | Resolve to |
+|-------------|-----------|
+| `results`, `work`, `output` | files from the previous goal |
+| `double check`, `verify` | read-only audit of artifact set, then in-scope fixes |
+| `harden`, `fix`, `cleanup` | modify only the artifact set |
+| `integrity`, `engineering` | quality of the artifact set, not the whole repo |
+
+**Use `persistent_worker_verify` for follow-ups.** It injects STRICT SCOPE LOCK into the worker prompt. Always pass `--write-root`, `--read-root`, and `--search-policy artifact_only`.
+
+> Prompt-level scope only. Runtime enforcement (write firewall, postflight diff audit, auto-revert) is not yet implemented.
 
 ### Architecture: Three Layers
 
