@@ -1,0 +1,13 @@
+{
+  "task": "Research current best practices for using Hermes Agent as an orchestration harness and compare them to this repo's existing agent workflow.",
+  "workspace": ".",
+  "mode": "research",
+  "max_workers": 3,
+  "toolsets": [
+    "web",
+    "terminal",
+    "file"
+  ],
+  "constraints": "Use current sources for public claims. Do not edit files. Return citations or source URLs where available.",
+  "output": "Synthesis with recommendations and implementation tasks."
+}

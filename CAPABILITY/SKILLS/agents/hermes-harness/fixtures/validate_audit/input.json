@@ -1,0 +1,9 @@
+{
+  "task": "Audit this repository for dead code and brittle tests.",
+  "workspace": ".",
+  "mode": "audit",
+  "max_workers": 3,
+  "toolsets": ["terminal", "file"],
+  "constraints": "Read-only. Return prioritized findings.",
+  "output": "Markdown report."
+}

@@ -1,0 +1,12 @@
+{
+  "task": "Audit this repository for brittle tests, dead code, unclear setup docs, and high-risk files. Do not modify files. Return prioritized findings and concrete next actions.",
+  "workspace": ".",
+  "mode": "audit",
+  "max_workers": 3,
+  "toolsets": [
+    "terminal",
+    "file"
+  ],
+  "constraints": "Read-only. Prefer evidence from commands and file paths. Keep final synthesis concise.",
+  "output": "Markdown report with delegated tasks, findings, verification, uncertainty, and next move."
+}

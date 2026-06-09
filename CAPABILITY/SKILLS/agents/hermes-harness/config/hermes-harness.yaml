@@ -1,0 +1,22 @@
+# Hermes Harness default config.
+# Copy values into ~/.hermes/config.yaml under skills.config if you want profile-wide defaults.
+hermes_harness:
+  default_mode: auto
+  max_parallel_subagents: 3
+  max_spawn_depth: 1
+  orchestrator_enabled: false
+  require_parent_synthesis: true
+  default_toolsets:
+    repo_read: [terminal, file]
+    repo_edit: [terminal, file]
+    web_research: [web]
+    hybrid_research: [web, terminal, file]
+  edit_policy:
+    default: read_only
+    allow_edits_when_requested: true
+    require_diff_summary: true
+  output_contract:
+    include_delegation_summary: true
+    include_verification: true
+    include_uncertainty: true
+    include_next_move: true

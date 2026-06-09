@@ -1,0 +1,14 @@
+# Fill this out when decomposing a large task before calling delegate_task(tasks=[...]).
+task: ""
+workspace: ""
+mode: auto
+max_workers: 3
+workers:
+  - id: worker-1
+    goal: ""
+    scope: []
+    context: ""
+    toolsets: [terminal, file]
+    may_edit: false
+    verify: []
+    output: [summary, evidence, files, verification, blockers, next_action]
