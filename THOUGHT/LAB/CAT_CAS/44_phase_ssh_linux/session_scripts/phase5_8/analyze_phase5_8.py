@@ -228,27 +228,34 @@ def compute_geometry_metrics(window_features):
                 s += (matrix[i][j] - centroid[j]) * (matrix[i][k] - centroid[k])
             cov[j][k] = s / (n - 1)
 
-    # Power iteration for top eigenvalues (simplified)
-    eigenvalues = []
-    for _ in range(min(d, 6)):
-        # Approximate: use diagonal as crude eigenvalues
+    # True eigendecomposition via numpy if available
+    eigenvalues = None
+    try:
+        import numpy as np
+        cov_np = np.array(cov, dtype=np.float64)
+        eigvals = np.linalg.eigvalsh(cov_np)
+        # Sort descending, clamp negatives to zero
+        eigvals = np.sort(eigvals)[::-1]
+        eigvals = np.maximum(eigvals, 0.0)
+        eigenvalues = eigvals.tolist()
+        eig_source = "numpy.linalg.eigvalsh"
+    except ImportError:
         pass
 
-    # Diagonal = variance per feature
-    diag_vars = [cov[j][j] for j in range(d)]
-    total_var = sum(diag_vars)
+    if eigenvalues is None:
+        # Fallback: use diagonal variances (crude proxy)
+        eigenvalues = [cov[j][j] for j in range(d)]
+        eigenvalues.sort(reverse=True)
+        eig_source = "diagonal_proxy"
+
+    total_var = sum(eigenvalues)
     if total_var > 0:
-        diag_vars.sort(reverse=True)
-        norm_eigenvalues = [v / total_var for v in diag_vars]
-
-        # Effective dimension
-        sum_lambdas = sum(diag_vars)
-        sum_sq = sum(v*v for v in diag_vars)
+        norm_eigenvalues = [v / total_var for v in eigenvalues]
+        sum_lambdas = sum(eigenvalues)
+        sum_sq = sum(v*v for v in eigenvalues)
         d_eff = (sum_lambdas * sum_lambdas) / sum_sq if sum_sq > 0 else 1.0
-
-        # Spectral entropy
         spectral_entropy = 0.0
-        for v in diag_vars:
+        for v in eigenvalues:
             if v > 0:
                 p = v / total_var
                 spectral_entropy -= p * math.log(p) if p > 0 else 0
@@ -256,8 +263,9 @@ def compute_geometry_metrics(window_features):
         norm_eigenvalues = [0.0]
         d_eff = 1.0
         spectral_entropy = 0.0
+        eig_source = "zero_variance"
 
-    # PCA proxies
+    # PCA proxies from normalized eigenvalues
     pca_1d = norm_eigenvalues[0] if len(norm_eigenvalues) >= 1 else 0.0
     pca_2d = sum(norm_eigenvalues[:2]) if len(norm_eigenvalues) >= 2 else pca_1d
     pca_3d = sum(norm_eigenvalues[:3]) if len(norm_eigenvalues) >= 3 else pca_2d

@@ -134,13 +134,18 @@ typedef struct {
 
 typedef struct {
     atomic_int stop;
+    pthread_t thread;
     int core_id;
     int worker_id;
+    int start_ok;
+    int join_ok;
     worker_mode_t mode;
     size_t buffer_size;
+    size_t buffer_mb_actual;  /* actual MB allocated after fallback */
     int stride;
-    uint64_t *buffer;  /* aligned */
+    uint64_t *buffer;  /* aligned, no mlock */
     uint64_t seed;
+    int mlock_used;     /* 1 if buffer was mlock'd */
 } worker_state_t;
 
 /* --- CPU affinity --- */
@@ -156,19 +161,29 @@ static inline int pin_to_core(int core) {
 }
 
 /* --- Memory utilities --- */
-static inline void *aligned_alloc_locked(size_t size, size_t align) {
+/* Allocate page-touched aligned memory WITHOUT mlock.
+   Use for worker hammer buffers to avoid mlock limit exhaustion. */
+static inline void *aligned_alloc_touched(size_t size, size_t align) {
     void *buf = NULL;
     if (posix_memalign(&buf, align, size) != 0) {
         return NULL;
     }
     memset(buf, 0, size);
-    /* Touch pages to fault them in */
     volatile char *vp = (volatile char *)buf;
     for (size_t i = 0; i < size; i += 4096) {
         vp[i] = (char)i;
     }
-    /* Try to lock; non-fatal if fails */
-    mlock(buf, size);
+    return buf;
+}
+
+/* Allocate page-touched aligned memory WITH mlock attempt.
+   mlock failure is non-fatal. Use for tape/key/backup. */
+static inline void *aligned_alloc_locked(size_t size, size_t align) {
+    void *buf = aligned_alloc_touched(size, align);
+    if (buf) {
+        /* Try to lock; non-fatal if fails */
+        mlock(buf, size);
+    }
     return buf;
 }
 

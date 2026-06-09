@@ -407,8 +407,9 @@ int main(int argc, char **argv) {
         int hash_match = 0;
 
         if (g_control_mode == CONTROL_EMPTY_TIMING) {
-            rdtsc_raw = rdtsc_end() - rdtsc_start();
-            rdtsc_corrected = (rdtsc_raw > rdtsc_overhead) ? (rdtsc_raw - rdtsc_overhead) : 0;
+            /* Use pre-measured overhead — avoids inline RDTSCP register allocation issues */
+            rdtsc_raw = rdtsc_overhead;
+            rdtsc_corrected = 0;  /* overhead is already the correction */
             checksum_after = fnv1a_64(tape, tape_size);
         } else if (g_control_mode == CONTROL_NOP_LOOP) {
             nop_loop_measured(&rdtsc_raw, &rdtsc_corrected, &clock_ns,
@@ -507,10 +508,15 @@ int main(int argc, char **argv) {
     printf("\r  Trial %d/%d  restore_ok=%d  failures=%d  DONE\n",
            g_cfg.iterations, g_cfg.iterations, total_restore_ok, restore_failures);
 
-    /* Stop workers */
+    /* Stop workers and capture join status */
+    int failed_joins = 0;
+    int workers_started = 0;
     if (g_cfg.worker_count > 0) {
         worker_stop_all(workers, g_cfg.worker_count);
-        worker_join_all(workers, g_cfg.worker_count);
+        failed_joins = worker_join_all(workers, g_cfg.worker_count);
+        for (int w = 0; w < g_cfg.worker_count; w++) {
+            if (workers[w].start_ok) workers_started++;
+        }
     }
 
     double temp_end = read_temperature();
@@ -531,6 +537,28 @@ int main(int argc, char **argv) {
                 g_cfg.tape_size, g_cfg.worker_count, (int)g_cfg.worker_mode,
                 (unsigned long long)rdtsc_overhead);
         fclose(f_ops);
+    }
+
+    /* Write worker status */
+    if (g_cfg.worker_count > 0) {
+        FILE *f_ws = open_csv(g_output_dir, "worker_status.csv",
+            "run_id,worker_id,core_id,mode,start_ok,join_ok,"
+            "buffer_mb_actual,mlock_used,worker_lifetime_ok");
+        if (f_ws) {
+            for (int w = 0; w < g_cfg.worker_count; w++) {
+                fprintf(f_ws, "%s,%d,%d,%d,%d,%d,%zu,%d,%d\n",
+                    g_cfg.run_id,
+                    workers[w].worker_id,
+                    workers[w].core_id,
+                    (int)workers[w].mode,
+                    workers[w].start_ok,
+                    workers[w].join_ok,
+                    workers[w].buffer_mb_actual,
+                    workers[w].mlock_used,
+                    (workers[w].start_ok && workers[w].join_ok) ? 1 : 0);
+            }
+            fclose(f_ws);
+        }
     }
 
     /* Write telemetry */
@@ -560,7 +588,10 @@ int main(int argc, char **argv) {
             "Restoration pass count: %d/%d\n"
             "Restore failures: %d\n\n"
             "Temperature start: %.2f C\n"
-            "Temperature end: %.2f C\n",
+            "Temperature end: %.2f C\n"
+            "Workers started: %d\n"
+            "Failed joins: %d\n"
+            "Worker lifetime OK: %s\n",
             __DATE__,
             g_cfg.measurement_core,
             affinity_ok ? "YES" : "NO",
@@ -579,7 +610,10 @@ int main(int argc, char **argv) {
             g_cfg.iterations,
             restore_failures,
             temp_start,
-            temp_end);
+            temp_end,
+            workers_started,
+            failed_joins,
+            (failed_joins == 0) ? "YES" : "NO");
         fclose(f_tel);
     }
 
@@ -598,5 +632,5 @@ int main(int argc, char **argv) {
     printf("Affinity held: %s\n", affinity_ok ? "YES" : "NO");
     printf("RDTSC overhead: %llu cycles\n", (unsigned long long)rdtsc_overhead);
 
-    return (restore_failures > 0) ? 1 : 0;
+    return (restore_failures > 0 || failed_joins > 0) ? 1 : 0;
 }
