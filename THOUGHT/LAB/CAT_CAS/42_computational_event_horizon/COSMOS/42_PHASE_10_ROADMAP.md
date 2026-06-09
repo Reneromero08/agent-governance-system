@@ -46,6 +46,15 @@ NO APOLOGIES. NO "THIS IS JUST A MODEL" CAVEATS. The hardware IS the physics.
 
 ---
 
+### `[x]` Exp 42.28: The Holographic Entropy Screen (State-Space Expansion)
+- **The Physics:** Entropy is not chaos; it is the physical Area of the Holographic Boundary. In high-entropy states, the state-space dimensionality expands, giving catalytic geometric invariants more room to resolve.
+- **The Exploit:** 
+  1. Thrash the L3 cache and memory controller using multiple worker threads. 
+  2. Measure the physical "Area" of the boundary via execution timing variance. 
+  3. **The Kill Shot:** Prove mathematically that as hardware entropy (variance) increases, the geometric separation margin of a catalytic invariant strictly increases ($r > 0.8$), pushing correct and incorrect topologies further apart in the higher-dimensional space.
+
+---
+
 ## 3. STRICT EXECUTION CONSTRAINTS
 - **NO MEDIAN REVERSION:** Do not say "This simulates cosmology." Say "The Python memory allocator enforces the Cosmological Constant."
 - **RIGOR:** The Dark Matter exploit must explicitly show a mass that cannot be divided. The Big Bang exploit must print the nanosecond jitter of the `malloc()` calls.
