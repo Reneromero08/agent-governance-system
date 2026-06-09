@@ -1,10 +1,12 @@
+---
+name: arxiv-to-md
+description: Use when downloading, converting, or fetching an arXiv paper as markdown. Handles arxiv IDs and URLs with LaTeX/pandoc or HTML conversion methods.
+version: 1.0.0
+status: Active
+required_canon_version: ">=1.0.0"
+---
+
 # Skill: arxiv-to-md
-
-**Version:** 1.0.0
-
-**Status:** Active
-
-**required_canon_version:** ">=1.0.0"
 
 ## Trigger
 

@@ -6,6 +6,7 @@
 
 - **Skill Added:** Integrated `hermes-harness` skill into `CAPABILITY/SKILLS/agents/hermes-harness`.
 - **Skill Compliance:** Brought `hermes-harness` into ADR-017 compliance by adding `run.py`, `validate.py`, and standard JSON test fixtures. Fixed a bare `except` handler to satisfy code stewardship constraints. Configured API gateway fallback warnings and robust argparse defaults to prevent task-file clobbering.
+- **Fixed:** Added missing YAML frontmatter (`name:` and `description:`) to `arxiv-to-md` SKILL.md so the opencode skill loader can discover it.
 
 ## 2026-06-02
 
