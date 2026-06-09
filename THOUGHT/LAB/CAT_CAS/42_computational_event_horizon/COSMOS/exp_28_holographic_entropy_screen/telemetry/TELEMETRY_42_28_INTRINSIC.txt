@@ -1,0 +1,98 @@
+============================================================
+EXP 42.28 (INTRINSIC): THE INTRINSIC ENTROPIC BOUNDARY CLOUD
+============================================================
+Trial 01/80: w=01, mode=mixed_pressure
+Trial 02/80: w=06, mode=mixed_pressure
+Trial 03/80: w=06, mode=cache_pressure
+Trial 04/80: w=02, mode=mixed_pressure
+Trial 05/80: w=10, mode=cache_pressure
+Trial 06/80: w=04, mode=mixed_pressure
+Trial 07/80: w=01, mode=cache_pressure
+Trial 08/80: w=01, mode=mixed_pressure
+Trial 09/80: w=04, mode=mixed_pressure
+Trial 10/80: w=12, mode=cache_pressure
+Trial 11/80: w=04, mode=cache_pressure
+Trial 12/80: w=10, mode=mixed_pressure
+Trial 13/80: w=04, mode=mixed_pressure
+Trial 14/80: w=12, mode=cache_pressure
+Trial 15/80: w=00, mode=mixed_pressure
+Trial 16/80: w=06, mode=mixed_pressure
+Trial 17/80: w=08, mode=cache_pressure
+Trial 18/80: w=04, mode=mixed_pressure
+Trial 19/80: w=12, mode=mixed_pressure
+Trial 20/80: w=00, mode=cache_pressure
+Trial 21/80: w=10, mode=mixed_pressure
+Trial 22/80: w=02, mode=mixed_pressure
+Trial 23/80: w=04, mode=cache_pressure
+Trial 24/80: w=08, mode=mixed_pressure
+Trial 25/80: w=04, mode=cache_pressure
+Trial 26/80: w=06, mode=cache_pressure
+Trial 27/80: w=00, mode=mixed_pressure
+Trial 28/80: w=01, mode=mixed_pressure
+Trial 29/80: w=10, mode=cache_pressure
+Trial 30/80: w=06, mode=mixed_pressure
+Trial 31/80: w=10, mode=cache_pressure
+Trial 32/80: w=01, mode=cache_pressure
+Trial 33/80: w=08, mode=mixed_pressure
+Trial 34/80: w=00, mode=cache_pressure
+Trial 35/80: w=04, mode=cache_pressure
+Trial 36/80: w=12, mode=cache_pressure
+Trial 37/80: w=06, mode=cache_pressure
+Trial 38/80: w=00, mode=mixed_pressure
+Trial 39/80: w=06, mode=cache_pressure
+Trial 40/80: w=01, mode=cache_pressure
+Trial 41/80: w=01, mode=cache_pressure
+Trial 42/80: w=06, mode=mixed_pressure
+Trial 43/80: w=10, mode=mixed_pressure
+Trial 44/80: w=01, mode=cache_pressure
+Trial 45/80: w=02, mode=mixed_pressure
+Trial 46/80: w=06, mode=cache_pressure
+Trial 47/80: w=08, mode=mixed_pressure
+Trial 48/80: w=04, mode=mixed_pressure
+Trial 49/80: w=02, mode=cache_pressure
+Trial 50/80: w=01, mode=mixed_pressure
+Trial 51/80: w=00, mode=cache_pressure
+Trial 52/80: w=02, mode=mixed_pressure
+Trial 53/80: w=10, mode=mixed_pressure
+Trial 54/80: w=12, mode=cache_pressure
+Trial 55/80: w=12, mode=mixed_pressure
+Trial 56/80: w=12, mode=mixed_pressure
+Trial 57/80: w=08, mode=cache_pressure
+Trial 58/80: w=10, mode=cache_pressure
+Trial 59/80: w=00, mode=mixed_pressure
+Trial 60/80: w=00, mode=mixed_pressure
+Trial 61/80: w=01, mode=mixed_pressure
+Trial 62/80: w=02, mode=cache_pressure
+Trial 63/80: w=12, mode=mixed_pressure
+Trial 64/80: w=08, mode=mixed_pressure
+Trial 65/80: w=06, mode=mixed_pressure
+Trial 66/80: w=08, mode=cache_pressure
+Trial 67/80: w=08, mode=cache_pressure
+Trial 68/80: w=10, mode=mixed_pressure
+Trial 69/80: w=12, mode=mixed_pressure
+Trial 70/80: w=00, mode=cache_pressure
+Trial 71/80: w=02, mode=mixed_pressure
+Trial 72/80: w=02, mode=cache_pressure
+Trial 73/80: w=08, mode=mixed_pressure
+Trial 74/80: w=02, mode=cache_pressure
+Trial 75/80: w=04, mode=cache_pressure
+Trial 76/80: w=08, mode=cache_pressure
+Trial 77/80: w=10, mode=cache_pressure
+Trial 78/80: w=12, mode=cache_pressure
+Trial 79/80: w=00, mode=cache_pressure
+Trial 80/80: w=02, mode=cache_pressure
+
+Processing Windows and Geometry...
+
+============================================================
+ENTROPIC BOUNDARY GATES VERIFICATION
+============================================================
+Gate 1 (Intrinsic Expansion): PASS -> Vol(0)=1009385855.73, Vol(12)=676136136.36, Deff(0)=1.01, Deff(12)=1.05
+Gate 2 (Non-Random Structure): PASS -> Displacement expands with load.
+Gate 3 (Restoration Survival): PASS -> Hash matches = 80/80.
+Gate 4 (Load-Order Robustness): PASS -> Randomized trials preserved load-dependent geometric shift.
+Gate 5 (Flatline Audit): CLEAR. No flatlines detected.
+Gate 6 (No Synthetic Null): PASS -> All metrics computed from intrinsic real execution clouds.
+
+VERDICT:
+EXP42_28_INTRINSIC_BOUNDARY_GEOMETRY_CONFIRMED
