@@ -174,6 +174,23 @@ class AGSMCPServer:
         self.resources_schema = load_schema("resources")
         self._initialized = False
         self.session_id = str(uuid.uuid4())
+        # Auto-generate session intent for admission control if not set via env
+        if not os.environ.get("AGS_INTENT_PATH", "").strip():
+            intent_dir = RUNS_DIR / "intent" / self.session_id
+            intent_dir.mkdir(parents=True, exist_ok=True)
+            intent_path_file = intent_dir / "intent.json"
+            intent_data = {
+                "mode": "artifact-only",
+                "paths": {
+                    "read": [],
+                    "write": [str(RUNS_DIR.relative_to(PROJECT_ROOT).as_posix())],
+                },
+                "allow_repo_write": False,
+            }
+            import json as _json
+            intent_path_file.write_text(_json.dumps(intent_data, indent=2), encoding="utf-8")
+            os.environ["AGS_INTENT_PATH"] = str(intent_path_file)
+            print(f"[INFO] Auto-generated session intent: {intent_path_file}", file=sys.stderr)
         # Semantic adapter is lazy-initialized on first semantic tool call.
         self.semantic_adapter = None
         self.semantic_available = False
@@ -933,13 +950,12 @@ class AGSMCPServer:
             with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f_out:
                 output_path = f_out.name
 
-            # Run the skill
+            # Run the skill (no timeout — skills handle their own time budgets)
             result = subprocess.run(
                 [sys.executable, str(run_script), input_path, output_path],
                 capture_output=True,
                 text=True,
                 cwd=str(PROJECT_ROOT),
-                timeout=60  # 60 second timeout
             )
 
             # Read output

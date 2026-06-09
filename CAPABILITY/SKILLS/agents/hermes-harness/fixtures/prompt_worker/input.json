@@ -1,0 +1,7 @@
+{
+  "task": "Continue phase 5 of the CAT_CAS audit. Check section D against verification reports.",
+  "workspace": "/home/user/ags-repo",
+  "mode": "persistent_worker",
+  "conversation": "ccc:ags:catcas-auditor",
+  "session_key": "agent:ags:catcas-lab"
+}

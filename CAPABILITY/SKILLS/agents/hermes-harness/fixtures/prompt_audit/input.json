@@ -1,5 +1,8 @@
 {
-  "task": "Audit repo",
-  "workspace": ".",
-  "mode": "audit"
+  "task": "Audit this repository for dead code and brittle tests. Return prioritized findings.",
+  "workspace": "/home/user/project",
+  "mode": "audit",
+  "max_workers": 3,
+  "constraints": "Read-only. Return prioritized findings.",
+  "output": "Markdown report with findings, severity, evidence, and next actions."
 }

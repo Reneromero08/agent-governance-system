@@ -61,6 +61,14 @@ def validate(actual_path: str, expected_path: str) -> bool:
                 print(f"FAIL: output missing required substring: {substr!r}", file=sys.stderr)
                 return False
 
+    # Check "forbidden" substrings — must NOT appear.
+    if "forbidden" in expected:
+        text = actual_raw
+        for substr in expected["forbidden"]:
+            if substr in text:
+                print(f"FAIL: output contains forbidden substring: {substr!r}", file=sys.stderr)
+                return False
+
     # Check "non_empty" flag — actual output must not be blank.
     if expected.get("non_empty", False):
         if isinstance(actual, str) and not actual.strip():

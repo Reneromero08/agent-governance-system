@@ -1,4 +1,13 @@
 {
-  "non_empty": true,
-  "contains": ["PARENT ROLE", "MAX CONCURRENT SUBAGENTS", "Subagents know nothing"]
+  "contains": [
+    "Audit this repository for dead code and brittle tests",
+    "MODE: audit",
+    "delegate_task with up to 3 workers",
+    "Markdown report with findings"
+  ],
+  "forbidden": [
+    "Do NOT spawn delegate_task",
+    "persistent worker",
+    "Load the `hermes-harness` skill"
+  ]
 }

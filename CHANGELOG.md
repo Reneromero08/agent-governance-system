@@ -4,8 +4,9 @@
 
 ## 2026-06-09
 
+- **MCP Admission Gate:** `server.py` now auto-generates a session intent file on startup when `AGS_INTENT_PATH` is not set in the environment. Unlocks `skill_run` for agents connecting without externally configured intents. Removed hardcoded 60-second subprocess timeout on skill execution.
 - **Skill Added:** Integrated `hermes-harness` skill into `CAPABILITY/SKILLS/agents/hermes-harness`.
-- **Skill Compliance:** Brought `hermes-harness` into ADR-017 compliance by adding `run.py`, `validate.py`, and standard JSON test fixtures. Fixed a bare `except` handler to satisfy code stewardship constraints. Configured API gateway fallback warnings and robust argparse defaults to prevent task-file clobbering.
+- **Skill Compliance:** Brought `hermes-harness` `run.py` into ADR-017 compliance with dual entry paths (skill_run JSON I/O and CLI delegation). Switched from `/v1/chat/completions` to `/v1/responses` with named `conversation` for persistent multi-turn worker context. Added `persistent_worker` mode that does not use `delegate_task`. Added `X-Hermes-Session-Key` support for long-term memory scoping. Removed all hardcoded timeouts. Removed client-side session file I/O. Extended `validate.py` with `forbidden` substring checks. Added golden prompt fixtures with required/forbidden string contracts. Fixed `--dry-run` to respect `--base-url`/`--model`/`--session-key` and env vars (`HERMES_API_BASE`, `HERMES_MODEL`), and to run validation before printing. Made `run.py` CAPABILITY imports optional for standalone use. Added `validate_task` enforcement: `conversation_new` requires a `conversation` name. Added monkeypatch tests for `X-Hermes-Session-Key` header and `run_task()` raw output. Changed `conversation_new` timestamp to include microseconds to prevent same-second collisions.
 - **Fixed:** Added missing YAML frontmatter (`name:` and `description:`) to `arxiv-to-md` SKILL.md so the opencode skill loader can discover it.
 
 ## 2026-06-02

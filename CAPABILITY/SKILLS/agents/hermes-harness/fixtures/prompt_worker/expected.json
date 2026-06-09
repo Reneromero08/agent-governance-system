@@ -1,0 +1,13 @@
+{
+  "contains": [
+    "Continue phase 5 of the CAT_CAS audit",
+    "MODE: persistent_worker",
+    "persistent worker",
+    "Do NOT spawn delegate_task unless explicitly requested",
+    "Perform the task directly"
+  ],
+  "forbidden": [
+    "delegate_task with up to",
+    "Load the `hermes-harness` skill"
+  ]
+}

@@ -36,6 +36,87 @@ Use this skill when the task is too wide for a single reasoning thread and can b
 
 Do not use this skill for trivial single-step work, questions that need one local answer, or tasks where the user explicitly forbids subagents.
 
+## Entry Modes
+
+This skill has two entry paths:
+
+### 1. Loaded Skill (opencode `skill` tool)
+The parent agent loads the skill instructions, then follows the procedure below using its own delegation tools (`task` in opencode, `delegate_task` in Hermes). The parent IS the harness.
+
+### 2. Governance Pipeline (`skill_run` / CLI)
+Calls `run.py` which routes to the Hermes API server (default: `http://127.0.0.1:8642/v1`). Uses `/v1/responses` with named `conversation` for persistent multi-turn context — Hermes auto-chains to the latest stored response.
+
+Input JSON shape for skill_run:
+```json
+{
+  "task": "string (required)",
+  "mode": "audit|research|code|debug|docs|plan|synthesis|auto|persistent_worker",
+  "workspace": "/absolute/path (optional, defaults to repo root)",
+  "max_workers": 3,
+  "toolsets": ["terminal", "file"],
+  "constraints": "read-only, prefer evidence from commands",
+  "timeout": 900,
+  "conversation": "ags:catcas-auditor",
+  "conversation_new": false,
+  "session_key": "ccc:ags:main"
+}
+```
+
+The Hermes API server must be running (check: `curl http://127.0.0.1:8642/v1/models`).
+Uses `HERMES_API_KEY` or `API_SERVER_KEY` environment variable for authentication.
+
+### Sessions (named conversations)
+
+Uses Hermes `/v1/responses` with named `conversation`. Hermes manages conversation state server-side — no client-side history replay. The caller sends only the new task.
+
+**Fields:**
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `conversation` | string | (none) | Named conversation. Hermes auto-chains to latest stored response. Use deterministic names like `ccc:ags:catcas-auditor`. |
+| `conversation_new` | bool | false | If true, requires `conversation` and creates a new unique conversation name by appending a UTC timestamp. Does not reuse or instruct-away the old conversation. |
+| `session_key` | string | (none) | `X-Hermes-Session-Key` header for long-term memory scoping (e.g., `agent:ags:catcas`). Independent of conversation transcript. |
+
+**Example workflow:**
+```json
+{"task": "We are building a TEP solver. The tape is 256 bytes...", "conversation": "ccc:ags:tep-solver"}
+
+{"task": "Now implement the XOR forward pass.", "conversation": "ccc:ags:tep-solver"}
+
+{"task": "Verify the SHA-256 restoration.", "conversation": "ccc:ags:tep-solver"}
+```
+
+**Without a conversation name** each call is stateless (fresh turn).
+
+**Limitation:** Hermes stores up to 100 responses per named conversation (LRU eviction). Not infinite archival memory.
+
+### Architecture: Three Layers
+
+Use Hermes native mechanisms instead of repo-local JSON memory files:
+
+```text
+Layer 1: Named conversation (/v1/responses + conversation)
+    Purpose: reusable multi-phase worker context
+    Example: conversation="ccc:ags:catcas-auditor"
+
+Layer 2: Session search (Hermes FTS5 session search)
+    Purpose: recover old specific messages when needed
+    Note: search is on-demand, no LLM calls required
+
+Layer 3: MEMORY.md / USER.md
+    Purpose: compact durable facts injected at session start
+    Not for phase transcripts — keep under ~2K chars
+```
+
+### Decision Table
+
+```text
+Need isolated one-off research? → stateless call (no conversation)
+Need phase 5 to remember phases 1-4? → named conversation
+Need recall something from weeks ago? → session search
+Need durable project facts every session? → MEMORY.md / USER.md
+Need cheap mechanical processing? → scripts, not LLM session replay
+```
+
 ## Core Model
 
 The parent agent is the harness. It owns decomposition, context packaging, task assignment, final verification, and synthesis. Subagents are temporary workers with isolated context. They should receive complete task packets and return structured summaries.
