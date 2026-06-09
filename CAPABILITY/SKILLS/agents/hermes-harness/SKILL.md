@@ -4,7 +4,7 @@ description: Use Hermes Agent as an orchestration harness that decomposes tasks,
 version: 0.1.0
 status: Active
 required_canon_version: ">=3.0.0"
-platforms: [macos, linux]
+platforms: [windows, macos, linux]
 metadata:
   hermes:
     tags: [orchestration, delegation, subagents, repo, automation]
@@ -44,7 +44,7 @@ This skill has two entry paths:
 The parent agent loads the skill instructions, then follows the procedure below using its own delegation tools (`task` in opencode, `delegate_task` in Hermes). The parent IS the harness.
 
 ### 2. Governance Pipeline (`skill_run` / CLI)
-Calls `run.py` which routes to the Hermes API server (default: `http://127.0.0.1:8642/v1`). Uses `/v1/responses` with named `conversation` for persistent multi-turn context — Hermes auto-chains to the latest stored response.
+Calls `run.py` which routes to the Hermes API server (default: `http://127.0.0.1:8643/v1`). Uses `/v1/responses` with named `conversation` for persistent multi-turn context — Hermes auto-chains to the latest stored response.
 
 Input JSON shape for skill_run:
 ```json
@@ -62,7 +62,7 @@ Input JSON shape for skill_run:
 }
 ```
 
-The Hermes API server must be running (check: `curl http://127.0.0.1:8642/v1/models`).
+The Hermes API server must be running (check: `curl http://127.0.0.1:8643/v1/models`).
 Uses `HERMES_API_KEY` or `API_SERVER_KEY` environment variable for authentication.
 
 ### Sessions (named conversations)

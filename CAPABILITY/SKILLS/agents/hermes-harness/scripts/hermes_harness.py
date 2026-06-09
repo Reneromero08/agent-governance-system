@@ -4,7 +4,7 @@
 Sends tasks to a local Hermes Agent API server using the /v1/responses endpoint
 with named conversations for persistent multi-turn context.
 
-Default endpoint: http://127.0.0.1:8642/v1
+Default endpoint: http://127.0.0.1:8643/v1
 Default key env: HERMES_API_KEY or API_SERVER_KEY, fallback change-me-local-dev
 
 Session model:
@@ -42,7 +42,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-DEFAULT_BASE = "http://127.0.0.1:8642/v1"
+DEFAULT_BASE = "http://127.0.0.1:8643/v1"
 DEFAULT_MODEL = "hermes-agent"
 DEFAULT_KEY = "change-me-local-dev"
 VALID_MODES = {
