@@ -1264,6 +1264,73 @@ operational entropy / contention / jitter
 
 ---
 
+### 5.8 Bare-Metal Holographic Boundary Probe — RUNNING / IN PROGRESS
+
+**Status:** `PHASE5_8_ACTIVE` (2026-06-09)
+**Spec:** `/Bare Metal CPU/Bare Metal CPU Entropy.md`
+**Directory:** `phase5_8/` (source in `session_scripts/phase5_8/`, results in `phase5_8/results/`)
+
+**Objective:** Move the entropic boundary probe from Python/OS-level timing into bare-metal C/RDTSC timing on the AMD Phenom II platform. Test whether the holographic boundary persists when we move down from Python timing into silicon-facing cycle timing.
+
+**Hypothesis:** When Python and scheduler overhead are removed, the boundary does not disappear. Instead, the boundary becomes visible as cycle-level timing geometry: RDTSC/RDTSCP jitter, cache-line contention geometry, frequency-detuning deformation, voltage-state deformation if accessible, thermal/cycle variance structure, spectral deformation of execution timing, intrinsic boundary-cloud dimensionality changes.
+
+**The bridge:**
+```
+digital cache boundary
+→ C/RDTSC timing boundary
+→ frequency-detuned silicon boundary
+→ voltage-sensitive analog boundary
+```
+
+**Non-negotiable rules:**
+- Do not rewrite the premise as metaphor.
+- Do not reduce the phase to "just benchmarking."
+- Do not replace the holographic-boundary frame with generic performance analysis.
+- Preserve the interpretation; harden the experiment; let the silicon decide.
+- Do not fake a pass. Do not declare the boundary confirmed unless the hard gates pass.
+
+**Implementation:**
+- C harness with RDTSC/RDTSCP serialized timing
+- Reversible catalytic tape (XOR forward/reverse) on aligned, locked memory
+- Tape sizes: 256, 512, 4096, 32768 bytes
+- Worker modes: cache hammer, integer churn, mixed pressure
+- Operating-point sweep: frequency-detuned, VID-labeled
+- Windowed boundary feature extraction (64-1024 sample windows)
+- Intrinsic geometry metrics (no synthetic Gaussian null)
+- Area-law scaling subtest
+- Digital-to-silicon transition subtest
+- 9 verdict gates with explicit pass/deferred/fail labels
+
+**Verdict gates:**
+1. Raw Silicon Timing Validity
+2. Catalytic Restoration Survival
+3. Intrinsic Boundary Geometry
+4. Load Boundary Deformation
+5. Frequency/Detuning Boundary Deformation
+6. Voltage Boundary Deformation (deferred if unavailable)
+7. Digital-to-Silicon Transition
+8. Area-Law Scaling
+9. Scheduler/OS Artifact Audit
+
+**Verdict labels:**
+- `EXP44_PHASE5_8_SILICON_BOUNDARY_CONFIRMED`
+- `EXP44_PHASE5_8_AREA_LAW_CONFIRMED`
+- `EXP44_PHASE5_8_DIGITAL_TO_SILICON_TRANSITION_CONFIRMED`
+- `EXP44_PHASE5_8_PARTIAL_BOUNDARY_DEFORMATION`
+- `EXP44_PHASE5_8_NOISE_ONLY`
+- `EXP44_PHASE5_8_ARTIFACT_DOMINANT`
+- `EXP44_PHASE5_8_BLOCKED_BY_PLATFORM`
+- `EXP44_PHASE5_8_BOUNDARY_REJECTED`
+
+**Next actions after Phase 5.8:**
+- If PASS: Phase 5.9 — Analog Silicon Boundary Entry
+- If PARTIAL: Phase 5.8R — Artifact Removal and Timing Hardening
+- If FAIL: PHASE5_8_FAILURE_ANALYSIS.md (do not delete failed results)
+
+**Related prior work:** EXP 42.28 (load-induced timing variance, contaminated by Gaussian null), EXP 42.29 (intrinsic execution-boundary cloud, hardware load changes intrinsic boundary geometry, catalytic restoration survives).
+
+---
+
 ## Phase 6: Integration with CAT_CAS Framework
 
 **Objective:** Bridge the bare-metal measurements back to the full CAT_CAS experiment library.
@@ -1366,7 +1433,7 @@ operational entropy / contention / jitter
 13. **.holo eigenbasis architecture physically instantiated on consumer silicon** — Shared reference (Phase Master) + rotation chain (PPU layers) + computed output (XOR slot) + reversible restoration (SHA-256). Architecture matches the wormhole compression format: one SVh frame, two rotation layers, zero bits erased. First bare-metal demonstration of the .holo paradigm.
 
 ---
-
+\n
 ## Immediate Action Items (Next Session)
 
 1. **SSH into the Phenom** — `ssh root@192.168.137.100` (Windows SSH)
