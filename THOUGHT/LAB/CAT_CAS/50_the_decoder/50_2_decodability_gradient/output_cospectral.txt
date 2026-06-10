@@ -1,0 +1,20 @@
+==============================================================================
+EXP 50.2 ANCHOR  -  cospectral hard case (Shrikhande vs Rook 4x4)
+==============================================================================
+  both 6-regular on 16 vertices: Rook deg=6  Shrikhande deg=6
+
+  eigenvalues (rounded):
+    Rook       : [6.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, -2.0, -2.0, -2.0, -2.0, -2.0, -2.0, -2.0, -2.0, -2.0]
+    Shrikhande : [6.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, -2.0, -2.0, -2.0, -2.0, -2.0, -2.0, -2.0, -2.0, -2.0]
+  holographic signature distance (spectral)         = 2.34e-15   participation R=13.500 S=13.500
+
+  non-spectral witness (4-clique count): Rook=8  Shrikhande=0  -> NON-ISOMORPHIC=True
+
+==============================================================================
+  cospectral (spectral signature identical)         : True
+  genuinely non-isomorphic (clique witness)         : True
+  => holographic/spectral readout CANNOT distinguish: True
+VERDICT: SPECTRUM_BOUNDED_CONFIRMED
+  Anchors the deep-non-abelian pole: the holographic readout fails the cospectral
+  graph-iso case exactly as it fails non-abelian HSP - it is spectrum-bounded. A
+  reframe that crosses this is the question for Brick 3 / Mythos.

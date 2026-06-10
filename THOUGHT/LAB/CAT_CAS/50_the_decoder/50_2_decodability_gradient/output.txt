@@ -1,0 +1,36 @@
+====================================================================================
+EXP 50.2  -  THE DECODABILITY GRADIENT
+  abelian (Shor-decodable)  ->  dihedral (hard wall)  ->  symmetric (deep non-abelian)
+  order parameter D = (Phi_sig - Phi_null)/(1 - Phi_null) ; 1=decodable, 0=collapsed
+====================================================================================
+
+  group   |G|   |[G,G]|  d_max  abelianness   D_char [95%% CI]        D_fft   shuffle-null
+  Z_16     16       1      1     1.000        1.000 [1.000, 1.000]    1.000    0.116
+  Z_24     24       1      1     1.000        1.000 [1.000, 1.000]    1.000    0.063
+  Z_32     32       1      1     1.000        1.000 [1.000, 1.000]    1.000    0.006
+  Z_48     48       1      1     1.000        1.000 [1.000, 1.000]    1.000    0.041
+  Z_64     64       1      1     1.000        1.000 [1.000, 1.000]    1.000    0.044
+  D_8      16       4      2     0.250        0.172 [0.122, 0.227]    -0.034    0.082
+  D_12     24       6      2     0.167        0.090 [0.054, 0.130]    0.062    0.046
+  D_16     32       8      2     0.125        0.056 [0.032, 0.080]    -0.020    0.009
+  D_24     48      12      2     0.083        0.055 [0.034, 0.078]    0.263    0.013
+  D_32     64      16      2     0.062        0.033 [0.020, 0.048]    0.055    0.016
+  A_4      12       4      3     0.250        0.399 [0.310, 0.480]    0.080    0.101
+  S_4      24      12      3     0.083        0.063 [0.036, 0.095]    0.056    0.059
+  S_5     120      60      4     0.017        0.009 [0.004, 0.014]    0.013    0.003
+
+  shelf mean D_char=1.000   pole mean D_char=0.110   collapse threshold=0.555
+  >> COLLAPSE located at: D_8  (|G|=16, d_max 2, abelianness 0.250)  D_char=0.172
+
+====================================================================================
+GATES
+  [PASS] G1 shelf vs pole discrimination               shelf=1.000 pole=0.110 p=0.0013 Cohen d=8.82
+  [PASS] G2 knobs agree (abelianness & d_max)          collapse at d_max 1->2 under both orderings
+  [PASS] G3 scale-independence (wall != |G| artifact)  |G|=16 Z=1.00 D=0.17 OK | |G|=24 Z=1.00 D=0.09 OK | |G|=32 Z=1.00 D=0.06 OK | |G|=48 Z=1.00 D=0.06 OK | |G|=64 Z=1.00 D=0.03 OK
+  [PASS] G4 robustness (seed)                          seed2 shelf=1.000 pole=0.090
+  [PASS] G5 label-shuffle null floor                   max |shuffle-null D|=0.116 (want <0.3)
+====================================================================================
+VERDICT: BOUNDED_AT_ABELIAN_HSP_WALL
+  (provisional, given weak-model arsenal) decodability collapses at the abelian->non-abelian
+  boundary; whether this is the KNOWN non-abelian-HSP barrier or an uncrossed frontier of the
+  scalar/holographic readout is the question handed to Brick 3 / Mythos.

@@ -1,0 +1,152 @@
+{
+  "scalar_nonabelian": 0.12332258887178657,
+  "reframe_normal": 1.0,
+  "reframe_nonnormal": 0.15677083333333333,
+  "verdict": "WALL_RELOCATED_TO_STRONG_SAMPLING",
+  "rows": [
+    {
+      "name": "Z_16",
+      "label": "normal",
+      "cls": 1,
+      "scalar": 0.9999999999979011,
+      "reframe": 1.0,
+      "outcome": "CROSSED"
+    },
+    {
+      "name": "Z_24",
+      "label": "normal",
+      "cls": 1,
+      "scalar": 0.9999999999979375,
+      "reframe": 1.0,
+      "outcome": "CROSSED"
+    },
+    {
+      "name": "Z_32",
+      "label": "normal",
+      "cls": 1,
+      "scalar": 0.999999999998069,
+      "reframe": 1.0,
+      "outcome": "CROSSED"
+    },
+    {
+      "name": "Z_48",
+      "label": "normal",
+      "cls": 1,
+      "scalar": 0.99999999999799,
+      "reframe": 1.0,
+      "outcome": "CROSSED"
+    },
+    {
+      "name": "Z_64",
+      "label": "normal",
+      "cls": 1,
+      "scalar": 0.999999999998025,
+      "reframe": 1.0,
+      "outcome": "CROSSED"
+    },
+    {
+      "name": "D_8",
+      "label": "normal",
+      "cls": 1,
+      "scalar": 0.3565034064254441,
+      "reframe": 1.0,
+      "outcome": "CROSSED"
+    },
+    {
+      "name": "D_8",
+      "label": "non-normal",
+      "cls": 4,
+      "scalar": 0.1424167844589004,
+      "reframe": 0.25,
+      "outcome": "RESIDUAL WALL"
+    },
+    {
+      "name": "D_12",
+      "label": "normal",
+      "cls": 1,
+      "scalar": 0.14546589797384185,
+      "reframe": 1.0,
+      "outcome": "CROSSED"
+    },
+    {
+      "name": "D_12",
+      "label": "non-normal",
+      "cls": 6,
+      "scalar": 0.08305951951156414,
+      "reframe": 0.16666666666666666,
+      "outcome": "RESIDUAL WALL"
+    },
+    {
+      "name": "D_16",
+      "label": "normal",
+      "cls": 1,
+      "scalar": 0.12535290850868563,
+      "reframe": 1.0,
+      "outcome": "CROSSED"
+    },
+    {
+      "name": "D_16",
+      "label": "non-normal",
+      "cls": 8,
+      "scalar": 0.07369493212078736,
+      "reframe": 0.125,
+      "outcome": "RESIDUAL WALL"
+    },
+    {
+      "name": "D_24",
+      "label": "normal",
+      "cls": 1,
+      "scalar": 0.09367956332224786,
+      "reframe": 1.0,
+      "outcome": "CROSSED"
+    },
+    {
+      "name": "D_24",
+      "label": "non-normal",
+      "cls": 12,
+      "scalar": 0.08097895383056368,
+      "reframe": 0.08333333333333333,
+      "outcome": "RESIDUAL WALL"
+    },
+    {
+      "name": "D_32",
+      "label": "normal",
+      "cls": 1,
+      "scalar": 0.08122803331430627,
+      "reframe": 1.0,
+      "outcome": "CROSSED"
+    },
+    {
+      "name": "D_32",
+      "label": "non-normal",
+      "cls": 16,
+      "scalar": 0.030226661674872316,
+      "reframe": 0.0625,
+      "outcome": "RESIDUAL WALL"
+    },
+    {
+      "name": "A_4",
+      "label": "non-normal",
+      "cls": 3,
+      "scalar": 0.34841968021402964,
+      "reframe": 0.3333333333333333,
+      "outcome": "RESIDUAL WALL"
+    },
+    {
+      "name": "S_4",
+      "label": "non-normal",
+      "cls": 6,
+      "scalar": 0.02189831607382464,
+      "reframe": 0.16666666666666666,
+      "outcome": "RESIDUAL WALL"
+    },
+    {
+      "name": "S_5",
+      "label": "non-normal",
+      "cls": 15,
+      "scalar": 0.020268997904157475,
+      "reframe": 0.06666666666666667,
+      "outcome": "RESIDUAL WALL"
+    }
+  ]
+}

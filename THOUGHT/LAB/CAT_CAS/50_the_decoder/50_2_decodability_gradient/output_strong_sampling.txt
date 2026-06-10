@@ -1,0 +1,40 @@
+==============================================================================================
+EXP 50.2c  -  STRONG FOURIER SAMPLING ON THE DIHEDRAL RESIDUAL WALL
+  is the dihedral slope recoverable by a cheap readout, or is it the lattice barrier?
+==============================================================================================
+
+[FACT 1] single coset state averaged over random k -> I/2 (zero info on slope):
+  N= 16  |coherence| for d in {1,3,7} = [0.0043, 0.0043, 0.002]  (-> 0, independent of d)
+  N= 64  |coherence| for d in {1,3,7} = [0.0043, 0.0038, 0.0027]  (-> 0, independent of d)
+  N=256  |coherence| for d in {1,3,7} = [0.0042, 0.0039, 0.0032]  (-> 0, independent of d)
+
+[FACT 2] info-cheap: minimum coset states T for full-search recovery >=80%% :
+  N     T_min   T_min/N
+  16    8       0.500
+  32    16      0.500
+  64    16      0.250
+  128   32      0.250
+  256   25      0.098
+
+[FACT 3] compute-hard: recovery is a search over the secret space (T = 2N samples).
+  poly(n)-budget search vs full search - poly budget success -> 0 as N grows:
+  N      B=2*log2(N)   poly-success   ~2B/N    full-success
+  256    16            0.200          0.125    1.000
+  512    18            0.067          0.070    1.000
+  1024   20            0.033          0.039    1.000
+  2048   22            0.000          0.021    1.000
+
+==============================================================================================
+GATES
+  [PASS] G1 single coset state = I/2 (zero info)                     max coherence(N=256) < 0.02
+  [PASS] G2 info-cheap (few states determine slope)                  T_min/N shrinks: [0.5, 0.5, 0.25, 0.25, 0.098]
+  [PASS] G3 compute-hard (poly(n) budget fails; need full 2^n search)  poly-budget << full-budget recovery
+==============================================================================================
+VERDICT: STRONG_SAMPLING_CONFIRMS_LATTICE_BARRIER
+  Strong sampling does NOT give a poly(n) readout for the dihedral slope.
+  INFO-CHEAP: O(sqrt N) coset states determine d (a single state is I/2, zero info).
+  COMPUTE-HARD: recovering d is a search over the 2^n secret space; a poly(n)-budget
+  search fails. This is the 1-bit-LWE / dihedral-HSP <-> unique-SVP (lattice) problem
+  (Regev); best known (Kuperberg) is subexponential, still not poly(n). It is the SAME
+  lattice hardness Exp 25 (LWE/SVP) claims to break. We climbed to the last rung
+  ourselves; whether the LATTICE barrier itself is crossable is the Mythos question.

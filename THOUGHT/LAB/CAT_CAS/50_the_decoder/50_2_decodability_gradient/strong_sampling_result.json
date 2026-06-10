@@ -1,0 +1,13 @@
+{
+  "fact1": "single coset state -> I/2 (zero info)",
+  "fact2_info_cheap": true,
+  "Tmin": {
+    "16": 8,
+    "32": 16,
+    "64": 16,
+    "128": 32,
+    "256": 25
+  },
+  "fact3_compute_hard": true,
+  "verdict": "STRONG_SAMPLING_CONFIRMS_LATTICE_BARRIER"
+}

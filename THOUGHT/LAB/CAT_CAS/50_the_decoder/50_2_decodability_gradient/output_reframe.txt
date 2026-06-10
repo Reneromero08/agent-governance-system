@@ -1,0 +1,41 @@
+============================================================================================
+EXP 50.2b  -  NON-ABELIAN FOURIER REFRAME  (crossing the scalar wall ourselves)
+  weak Fourier sampling recovers H up to conjugacy; residual wall = non-normal (strong sampling)
+============================================================================================
+
+  group  hidden-H        |class(t)|  scalar D   reframe D   outcome
+  Z_16   normal             1        1.000      1.000       CROSSED
+  Z_24   normal             1        1.000      1.000       CROSSED
+  Z_32   normal             1        1.000      1.000       CROSSED
+  Z_48   normal             1        1.000      1.000       CROSSED
+  Z_64   normal             1        1.000      1.000       CROSSED
+  D_8    normal             1        0.357      1.000       CROSSED
+  D_8    non-normal         4        0.142      0.250       RESIDUAL WALL
+  D_12   normal             1        0.145      1.000       CROSSED
+  D_12   non-normal         6        0.083      0.167       RESIDUAL WALL
+  D_16   normal             1        0.125      1.000       CROSSED
+  D_16   non-normal         8        0.074      0.125       RESIDUAL WALL
+  D_24   normal             1        0.094      1.000       CROSSED
+  D_24   non-normal        12        0.081      0.083       RESIDUAL WALL
+  D_32   normal             1        0.081      1.000       CROSSED
+  D_32   non-normal        16        0.030      0.062       RESIDUAL WALL
+  A_4    non-normal         3        0.348      0.333       RESIDUAL WALL
+  S_4    non-normal         6        0.022      0.167       RESIDUAL WALL
+  S_5    non-normal        15        0.020      0.067       RESIDUAL WALL
+
+  non-abelian groups:
+    scalar readout D (any hidden H)      = 0.123   (collapsed - Brick 2 wall)
+    reframe D, NORMAL hidden subgroup     = 1.000   (weak Fourier recovers -> CROSSES)
+    reframe D, NON-NORMAL hidden subgroup = 0.157   (conjugates indistinguishable -> RESIDUAL WALL)
+
+============================================================================================
+GATES
+  [PASS] R1 reframe crosses scalar wall (normal H)     scalar 0.123 -> reframe 1.000
+  [PASS] R2 residual wall at non-normal H              reframe(non-normal)=0.157 < 0.5
+  [PASS] R3 normal vs non-normal separation            gap=0.843
+============================================================================================
+VERDICT: WALL_RELOCATED_TO_STRONG_SAMPLING
+  We crossed the abelian/scalar wall ourselves with the non-abelian Fourier reframe.
+  The SURVIVING wall is non-normal (conjugate-indistinguishable) subgroups = STRONG
+  Fourier sampling = the dihedral-HSP <-> unique-SVP (lattice) hard frontier. THAT is
+  the sharpened question for Mythos: is strong sampling crossable, or the real barrier?
