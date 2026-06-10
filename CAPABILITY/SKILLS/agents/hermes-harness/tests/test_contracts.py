@@ -331,3 +331,18 @@ def test_scope_lock_forbids_external_mutation():
     assert result.returncode == 0
     out = result.stdout
     assert "must not modify files outside" in out.lower()
+
+
+# ---- no-auto-commit ----
+
+def test_persistent_worker_forbids_commit():
+    result = run_cmd("prompt", "--task", "Update roadmap", "--mode", "persistent_worker", "--conversation", "ccc:test")
+    assert result.returncode == 0
+    assert "Do NOT commit" in result.stdout
+
+
+def test_verify_mode_forbids_commit():
+    result = run_cmd("prompt", "--task", "Update roadmap", "--mode", "persistent_worker_verify",
+                     "--write-root", "test", "--read-root", "test")
+    assert result.returncode == 0
+    assert "must not commit" in result.stdout.lower()

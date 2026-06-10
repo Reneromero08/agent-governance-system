@@ -4,6 +4,7 @@
     "MODE: persistent_worker",
     "persistent worker",
     "Do NOT spawn delegate_task unless explicitly requested",
+    "Do NOT commit",
     "Perform the task directly"
   ],
   "forbidden": [

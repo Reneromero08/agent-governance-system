@@ -81,6 +81,8 @@ and only enough to understand the in-scope artifact.
 
 You must not modify files outside WRITE_SCOPE.
 You must not create branches unless BRANCH_POLICY is "allowed".
+You must not commit, amend, or modify git history unless the task
+explicitly tells you to commit.
 You must not create future-goal proposals.
 You must not create out-of-scope recommendations unless an in-scope
 task is impossible without that external dependency.
@@ -118,6 +120,8 @@ CONSTRAINTS: {constraints}
 You are the persistent worker for this named conversation.
 Continue from prior context in this conversation.
 Do NOT spawn delegate_task unless explicitly requested.
+Do NOT commit, amend, or modify git history unless the task
+explicitly tells you to commit.
 Perform the task directly. Answer concisely.
 
 {scope_block}
