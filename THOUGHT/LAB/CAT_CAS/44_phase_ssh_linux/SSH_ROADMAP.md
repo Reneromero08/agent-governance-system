@@ -1372,7 +1372,8 @@ digital cache boundary
 **Status:** `PHASE5_9_COMPLETE` (2026-06-10)
 **Verdict:** `EXP44_PHASE5_9_NOISE_ONLY` → RECLASSIFIED 5.9A as `EXP44_PHASE5_9A_SOFTWARE_STRESS_PARTIAL`
 **Phase 5.9B verdict:** `EXP44_PHASE5_9B_INSTABILITY_EDGE_NOT_REACHED`
-**Spec:** Bare Metal CPU Entropy_5.md, Entropy_6.md, Entropy_6 1.md (Shizzle Obsidian vault)
+**Phase 5.9C verdict:** `EXP44_PHASE5_9C_INSTABILITY_EDGE_NOT_REACHED` — READY_FOR_HARDWARE_ANALOG_PHASE
+**Spec:** Bare Metal CPU Entropy_5.md, Entropy_6.md, Entropy_6 1.md, Entropy_7.md (Shizzle Obsidian vault)
 **Directory:** `phase5_9/` (source in `session_scripts/phase5_9/`, results in `phase5_9/results/`)
 
 **Objective:** Test how boundary geometry behaves as the machine approaches the edge between stable computation and failure. Phase 5.8 proved the boundary exists and satisfies area-law scaling. Phase 5.9 asks what the boundary is *made of* by stressing the assumptions of stable digital computation.
@@ -1490,6 +1491,20 @@ CACHE/FREQUENCY DRIFT ARTIFACT MUST BE ISOLATED IN PHASE 5.9.
 - Report: `phase5_9/REPORT_PHASE5_9B.md`
 - Platform conclusion: Phenom II safe frequency range is not a valid monotonic stress axis for boundary geometry
 - Recommended: Accept trilogy (5.8→5.9A→5.9B) as complete platform characterization; proceed to Phase 6.0 synthesis
+
+**Phase 5.9C execution (2026-06-10):**
+- 6-push boundary escalation protocol: effective frequency audit, all-core P-state, combined ladder, long-duration, flicker search, artifact separation
+- 33 runs: 30 combined ladder + 3 long-duration (250K trials each)
+- 2,250,000 total trials; 0 restoration failures, 0 flicker, 0 thermal aborts
+- Frequency: 5/5 P-states verified effective via rdmsr + timing; all-core: 6/6 cores controlled
+- Key finding: boundary thickness correlates with timing CV (r=0.607) — first coherent stress-geometry relationship
+- Artifact-separated: raw≈corrected (r=0.999) — boundary is structural, not dominated by timing artifact
+- Long-duration (3×250K): no drift toward failure, variance bounded
+- Gates: 1 PASS, 2 PASS, 3 PASS, 4 PASS, 5 PARTIAL, 6 PARTIAL, 7 PASS, 8 PASS, 9 INSTABILITY_EDGE_NOT_REACHED
+- Verdict: `EXP44_PHASE5_9C_INSTABILITY_EDGE_NOT_REACHED`
+- Report: `phase5_9/REPORT_PHASE5_9C.md`
+- Trilogy complete: 115 runs, 5.74M trials across all Phase 5.9 sub-phases
+- Next: READY_FOR_HARDWARE_ANALOG_PHASE — software/kernel/safe-frequency envelope exhausted
 
 **Tasks:**
 
