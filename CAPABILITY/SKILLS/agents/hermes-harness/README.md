@@ -2,7 +2,22 @@
 
 Drop-in repo folder that lets Hermes Agent act as a task harness for other agents.
 
-It gives you three operating modes:
+It gives you three operating modes and two transports:
+
+**Transports:**
+| Transport | Endpoint | Key | Dispatches /goal |
+|-----------|----------|-----|-----------------|
+| `responses` (default) | `POST /v1/responses` | `conversation` | No |
+| `session_chat` | `POST /api/sessions/{id}/chat` | `session_id` | No — source confirmed |
+
+Real Hermes `/goal` only dispatches through the CLI (`/goal` slash command in `hermes chat`) and messaging gateway (Telegram, Discord, etc.). The API server's `_handle_session_chat` at gateway/platforms/api_server.py:1560 routes `user_message` directly to `_run_agent()` without command intercept. The CLI path goes through `CLICommandsMixin` and the gateway path through `GatewaySlashCommandsMixin` — both contain `/goal` handlers. The API path does not.
+
+**session_id, conversation, and session_key are different:**
+- `session_id` — Hermes SessionDB session. Required for `/api/sessions/{id}/chat`.
+- `conversation` — `/v1/responses` named conversation chain. Stateless persistence.
+- `session_key` — `X-Hermes-Session-Key` header. Long-term memory scope.
+
+**Modes:**
 
 1. **Inside Hermes**: install `skills/hermes-harness/` as a Hermes skill and invoke `/hermes-harness`. Use `persistent_worker` mode with named conversations for multi-phase continuity, or use `delegate_task` for disposable isolated subagents.
 2. **From another agent or script**: call `skills/hermes-harness/scripts/hermes_harness.py`. It sends a structured task request via `/v1/responses` to a local Hermes API server with named `conversation` support for persistent multi-turn context.
@@ -165,6 +180,17 @@ python scripts/hermes_harness.py run \
   --task "Audit the repo" \
   --mode audit \
   --dry-run
+
+# Session chat transport — turn on existing Hermes session
+python scripts/hermes_harness.py run \
+  --transport session_chat \
+  --session-id "a7876494-2178-4ab4-942f-2f77e9f4344e" \
+  --task "Double check logic, engineering, and integrity. Harden results." \
+  --mode persistent_worker_verify \
+  --write-root "THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/phase5_9" \
+  --read-root "THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/phase5_9" \
+  --search-policy artifact_only \
+  --branch-policy forbidden
 
 # Prompt-only — generate the harness prompt for manual review
 python scripts/hermes_harness.py prompt \

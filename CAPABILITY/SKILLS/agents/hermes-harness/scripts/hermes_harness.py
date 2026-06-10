@@ -10,8 +10,15 @@ Default key env: HERMES_API_KEY or API_SERVER_KEY, fallback change-me-local-dev
 Session model:
     conversation="worker-name"  → Hermes auto-chains to the latest stored
                                   response in that named conversation.
-    store: true                 → persists across gateway restarts (LRU, 100 max).
+    session_id="uuid"           → Real Hermes session. Use /api/sessions/{id}/chat.
+                                  Required for proper session-scoped turns.
     X-Hermes-Session-Key        → stable long-term memory scope per project/worker.
+
+Transports:
+    responses (default)    → POST /v1/responses with conversation. Stateless.
+    session_chat           → POST /api/sessions/{id}/chat. Session-scoped.
+                              Does NOT invoke real Hermes /goal slash command.
+                              /goal only works through CLI/messaging gateway.
 
 Modes:
     persistent_worker           → named conversation, no delegate_task.
@@ -222,6 +229,8 @@ def validate_task(task: Dict[str, Any]) -> List[str]:
     bp = task.get("branch_policy", "")
     if bp and bp not in VALID_BRANCH_POLICIES:
         errors.append(f"Invalid branch_policy {bp!r}. Valid: {', '.join(sorted(VALID_BRANCH_POLICIES))}")
+    if task.get("transport", "responses") == "session_chat" and not str(task.get("session_id", "")).strip():
+        errors.append("session_chat transport requires a session_id")
     return errors
 
 
@@ -321,6 +330,67 @@ def call_hermes_responses(
     }
 
 
+def call_hermes_session_chat(
+    session_id: str,
+    prompt: str,
+    base_url: str = DEFAULT_BASE,
+    api_key: str = DEFAULT_KEY,
+    model: str = DEFAULT_MODEL,
+    timeout: Optional[int] = None,
+) -> Dict[str, Any]:
+    api_base = base_url.rstrip("/")
+    if api_base.endswith("/v1"):
+        api_base = api_base[: -len("/v1")]
+    url = f"{api_base}/api/sessions/{session_id}/chat"
+    payload: Dict[str, Any] = {"input": prompt}
+    headers: Dict[str, str] = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json",
+    }
+    req = urllib.request.Request(
+        url, data=json.dumps(payload).encode("utf-8"),
+        headers=headers, method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            body = resp.read().decode("utf-8")
+    except urllib.error.HTTPError as e:
+        detail = e.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"Hermes Session API HTTP {e.code}: {detail}") from e
+    except urllib.error.URLError as e:
+        raise RuntimeError(f"Could not reach Hermes Session API at {url}: {e}") from e
+
+    content = json.loads(body).get("message", {}).get("content", "")
+    return {
+        "text": content or json.dumps(body, indent=2),
+        "usage": json.loads(body).get("usage", {}),
+        "raw": json.loads(body),
+    }
+
+
+def _find_session_by_title(
+    title_hint: str,
+    base_url: str = DEFAULT_BASE,
+    api_key: str = DEFAULT_KEY,
+    timeout: int = 10,
+) -> Optional[str]:
+    api_base = base_url.rstrip("/")
+    if api_base.endswith("/v1"):
+        api_base = api_base[: -len("/v1")]
+    url = f"{api_base}/api/sessions?limit=100"
+    headers = {"Authorization": f"Bearer {api_key}"}
+    req = urllib.request.Request(url, headers=headers, method="GET")
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            body = resp.read().decode("utf-8")
+    except Exception:
+        return None
+    for s in json.loads(body).get("data", []):
+        if s.get("title") and title_hint.lower() in s["title"].lower():
+            return s["id"]
+    return None
+
+
 # ---------------------------------------------------------------------------
 # High-level run
 # ---------------------------------------------------------------------------
@@ -335,6 +405,8 @@ def run_task(
     conversation: str = "",
     conversation_new: bool = False,
     session_key: str = "",
+    session_id: str = "",
+    transport: str = "responses",
     write_roots: Optional[List[str]] = None,
     read_roots: Optional[List[str]] = None,
     deny_roots: Optional[List[str]] = None,
@@ -349,13 +421,11 @@ def run_task(
     key = api_key or os.environ.get("HERMES_API_KEY") or os.environ.get("API_SERVER_KEY") or DEFAULT_KEY
     mdl = model or os.environ.get("HERMES_MODEL", DEFAULT_MODEL)
 
+    if transport == "session_chat" and not session_id:
+        raise ValueError("session_chat transport requires a session_id.")
+
     if conversation_new and not conversation:
         raise ValueError("conversation_new requires a conversation name.")
-
-    conv = conversation
-    if conv and conversation_new:
-        ts = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S_%f")
-        conv = f"{conversation}_{ts}"
 
     prompt = build_harness_prompt(
         task=task, workspace=workspace, mode=mode,
@@ -364,6 +434,27 @@ def run_task(
         read_roots=read_roots, deny_roots=deny_roots,
         search_policy=search_policy, branch_policy=branch_policy,
     )
+
+    if transport == "session_chat":
+        api_result = call_hermes_session_chat(
+            session_id=session_id, prompt=prompt,
+            base_url=base, api_key=key, model=mdl, timeout=timeout,
+        )
+        result: Dict[str, Any] = {
+            "ok": True, "task": task, "mode": mode,
+            "transport": transport, "session_id": session_id,
+            "result": api_result["text"],
+            "usage": api_result["usage"],
+            "raw": api_result["raw"],
+        }
+        if session_key:
+            result["session_key"] = session_key
+        return result
+
+    conv = conversation
+    if conv and conversation_new:
+        ts = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S_%f")
+        conv = f"{conversation}_{ts}"
 
     api_result = call_hermes_responses(
         prompt=prompt, conversation=conv,
@@ -395,7 +486,7 @@ def merged_task_from_args(args: argparse.Namespace) -> Dict[str, Any]:
         task.update(load_task_file(args.task_file))
     for field in ("task", "workspace", "mode", "max_workers", "constraints",
                   "output_contract", "conversation", "session_key",
-                  "search_policy", "branch_policy"):
+                  "search_policy", "branch_policy", "transport", "session_id"):
         val = getattr(args, field, None)
         if val is not None:
             task[field] = val
@@ -466,13 +557,25 @@ def cmd_run(args: argparse.Namespace) -> int:
             conv = f"{conv}_DRYRUN_TIMESTAMP"
         dry_base = getattr(args, "base_url", None) or os.environ.get("HERMES_API_BASE", DEFAULT_BASE)
         dry_model = getattr(args, "model", None) or os.environ.get("HERMES_MODEL", DEFAULT_MODEL)
-        dry = {
-            "endpoint": f"{dry_base.rstrip('/')}/responses",
-            "model": dry_model,
-            "conversation": conv or None,
-            "session_key": t.get("session_key") or None,
-            "prompt": prompt,
-        }
+        dry_transport = t.get("transport", "responses")
+        api_base = dry_base.rstrip("/")
+        if api_base.endswith("/v1"):
+            api_base = api_base[: -len("/v1")]
+        if dry_transport == "session_chat":
+            dry = {
+                "endpoint": f"{api_base}/api/sessions/{t.get('session_id', 'MISSING')}/chat",
+                "transport": "session_chat",
+                "session_id": t.get("session_id") or None,
+                "prompt": prompt,
+            }
+        else:
+            dry = {
+                "endpoint": f"{dry_base.rstrip('/')}/responses",
+                "model": dry_model,
+                "conversation": conv or None,
+                "session_key": t.get("session_key") or None,
+                "prompt": prompt,
+            }
         print(json.dumps(dry, indent=2))
         return 0
 
@@ -489,6 +592,8 @@ def cmd_run(args: argparse.Namespace) -> int:
         conversation=t.get("conversation", ""),
         conversation_new=t.get("conversation_new", False),
         session_key=t.get("session_key", ""),
+        session_id=t.get("session_id", ""),
+        transport=t.get("transport", "responses"),
         write_roots=t.get("write_root"), read_roots=t.get("read_root"),
         deny_roots=t.get("deny_write_root"),
         search_policy=t.get("search_policy", "artifact_only"),
@@ -529,6 +634,8 @@ def add_common_task_args(p: argparse.ArgumentParser) -> None:
     p.add_argument("--conversation", default=None, help="Named conversation for persistent context.")
     p.add_argument("--conversation-new", action="store_true", help="Create new unique conversation name.")
     p.add_argument("--session-key", default=None, help="X-Hermes-Session-Key for memory scoping.")
+    p.add_argument("--transport", default=None, choices=["responses", "session_chat"], help="Transport: responses (default) or session_chat.")
+    p.add_argument("--session-id", default=None, help="Hermes session ID for session_chat transport.")
     p.add_argument("--write-root", default=None, help="Comma-separated write scope paths.")
     p.add_argument("--read-root", default=None, help="Comma-separated read scope paths.")
     p.add_argument("--deny-write-root", default=None, help="Comma-separated deny-write paths.")

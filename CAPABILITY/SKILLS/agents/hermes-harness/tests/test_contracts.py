@@ -346,3 +346,19 @@ def test_verify_mode_forbids_commit():
                      "--write-root", "test", "--read-root", "test")
     assert result.returncode == 0
     assert "must not commit" in result.stdout.lower()
+
+
+# ---- session_chat transport ----
+
+def test_session_chat_cli_args_accepted():
+    result = run_cmd("validate", "--task", "Test", "--transport", "session_chat",
+                     "--session-id", "a7876494-2178-4ab4-942f-2f77e9f4344e")
+    assert result.returncode == 0
+    data = json.loads(result.stdout)
+    assert data["task"]["transport"] == "session_chat"
+    assert data["task"]["session_id"] == "a7876494-2178-4ab4-942f-2f77e9f4344e"
+
+
+def test_session_chat_requires_session_id():
+    result = run_cmd("run", "--task", "Test", "--transport", "session_chat", "--dry-run")
+    assert result.returncode != 0
