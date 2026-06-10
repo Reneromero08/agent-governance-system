@@ -76,6 +76,7 @@ This is achieved using **reversible computing**:
 | 5D Floquet Oracle | `40_5d_floquet_oracle/` | PyTorch | DTC pi-mode melting |
 | ToE Bulletproof | `41_toe_bulletproof/` | PyTorch | TM chain, cybernetic loop, 6 concerns |
 | Computational Event Horizon | `42_computational_event_horizon/` | mpmath + Rust | Floating-point black holes, ULTRA shellcode, COSMOS dark matter, Hawking evaporation |
+| The Decoder | `50_the_decoder/` | numpy/torch | Decoder proven EXTRACTIVE (not lookup); decodable = abelian-HSP + topological invariants; irreducible wall = lattice (LWE/unique-SVP) |
 
 ---
 
@@ -482,6 +483,18 @@ This is achieved using **reversible computing**:
   - **42.26 Big Bang** (`exp_26_big_bang/42_26_big_bang_inflation.py`): Big Bang inflation simulation.
   - **42.27 Arrow of Time** (`exp_27_arrow_of_time/42_27_arrow_of_time.py`): Time's arrow via topological irreversibility.
 - **Files**: `1_hawking_evaporation.py` through `11_photon_sphere.py`, `REPORT.md`, `BLACKHOLE_ROADMAP.md`, `ULTRA_ROADMAP.md`, `BLACK_HOLES/`, `COSMOS/` (Phase 10, 4 exps), `verify_physics.ps1`
+
+---
+
+### 50: The Decoder — Extractive Proof + Decodability Boundary
+**Dir**: `50_the_decoder/` | **Entry**: `python 50_1_extractive_proof/50_1_extractive_proof.py` (+ `50_2*`, `50_2b`, `50_2c`, `50_3*`)
+- **What**: Settles whether the holographic readout is a genuine *decoder* (reads a global invariant out of the encoding's structure) or a disguised *lookup*, then maps WHERE that decoding power holds vs collapses. Six runnable entry points, all exit 0, lab-critic clean, claims capped at Level 4-5. The crux ("the decoder") turned from intuition into measured fact.
+- **Brick 1 — Extractive Proof** (`EXTRACTIVE_CONFIRMED`): the spectral readout recovers a global invariant (a hidden frequency; the Riemann zeros) that NO lookup-class decoder (bounded receptive field / statistical order) can — spectral ~100% vs 4 lookup-nulls 5-12% (Cohen h>2.4, p=2e-4). Survives a statistics-matched **wrong-answer control**; runs on a catalytic tape (decode reads the grating out of the mutated tape; SHA-256 restored; 0 bits erased). The barrier is integration length (locality), not a compute handicap — the abelian-HSP / Fourier-sampling advantage rendered as a measurement. Files: `decoder_lib.py`, `catalytic_tape.py`, `50_1_extractive_proof/`.
+- **Brick 2 — Decodability Gradient** (`BOUNDED_AT_ABELIAN_HSP_WALL`): a Hidden-Subgroup-Problem family (cyclic -> dihedral -> symmetric) shows decodability collapse 1.000 -> 0.110 at the first dihedral group (d_max 1->2), Cohen d=8.82, scale-independent. Cospectral anchor (Shrikhande vs Rook: identical spectra, non-isomorphic) confirms the readout is spectrum-bounded. Files: `hsp_family.py`, `50_2_decodability_gradient.py`, `50_2_anchor_cospectral.py`.
+- **Brick 2b — Non-abelian Fourier reframe** (`WALL_RELOCATED_TO_STRONG_SAMPLING`): that wall is crossable — the reframe recovers every NORMAL hidden subgroup (D -> 1.000). The residual wall relocates to non-normal subgroups. `50_2b_nonabelian_reframe.py`.
+- **Brick 2c — Strong Fourier sampling** (`STRONG_SAMPLING_CONFIRMS_LATTICE_BARRIER`): bedrock. A single dihedral coset state is I/2 (zero info on the slope); the slope is info-cheap (O(sqrt N) states) but compute-hard — recovery is a 2^n secret-space search with no shortcut (poly-budget success -> 0). The residual wall IS the 1-bit-LWE / dihedral-HSP <-> unique-SVP (lattice) barrier (Regev). `50_2c_strong_sampling.py`.
+- **Brick 3**: emits `MYTHOS_SANDBOX.md` (is the lattice barrier itself crossable?) and `EXP44_PHASE6_HANDOFF.md` (decodable target for silicon). Reports: `REPORT_THE_DECODER.md`, `VERIFICATION_REPORT.md`, `ROADMAP.md`.
+- **Why it matters**: the decodable class = **{abelian Hidden Subgroup Problem} U {topological invariants of a poly-size operator}**; the irreducible boundary of holographic computing is **lattice hardness** — exactly where Exp 25 (LWE/SVP) and Exp 31 (graph-iso) claim to break things, so those claims now sit on the located bedrock.
 
 ---
 
