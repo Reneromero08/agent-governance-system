@@ -42,6 +42,13 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+except ImportError:
+    GuardedWriter = None
+
+PROJECT_ROOT = Path(__file__).resolve().parents[4]
+
 DEFAULT_BASE = "http://127.0.0.1:8643/v1"
 DEFAULT_MODEL = "hermes-agent"
 DEFAULT_KEY = "change-me-local-dev"
@@ -490,9 +497,18 @@ def cmd_run(args: argparse.Namespace) -> int:
 
     if getattr(args, "output", None):
         out = Path(args.output)
-        out.parent.mkdir(parents=True, exist_ok=True)
-        out.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
-        print(f"Wrote result to {out}")
+        data = json.dumps(result, indent=2) + "\n"
+        writer = GuardedWriter() if GuardedWriter else None
+        if writer:
+            try:
+                rel = str(out.resolve().relative_to(PROJECT_ROOT))
+                writer.mkdir_auto(str(Path(rel).parent))
+                writer.write_auto(rel, data)
+                print(f"Wrote result to {out}")
+            except ValueError:
+                print(f"Cannot write outside project root: {out}", file=sys.stderr)
+        else:
+            print(data)
     else:
         print(result.get("result", json.dumps(result, indent=2)))
     return 0

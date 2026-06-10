@@ -14,16 +14,25 @@ Stages:
 Input: JSON config with model path or .holo path
 Output: Compressed .holo file + stats.json
 """
-import json, os, sys, time, math, struct, hashlib
-import numpy as np
-import torch
+import json, os, sys
 from pathlib import Path
-from collections import defaultdict
-from typing import Optional
 
 PROJECT_ROOT = Path(__file__).resolve().parents[4]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
+
+# CI skip - GPU workload, not needed for CI gate
+if os.environ.get("CI") == "true":
+    output = json.dumps({"skipped": True, "reason": "CI mode (skip GPU workload)"}, indent=2)
+    print(output)
+    print("[catalytic-wormhole] SKIP: CI mode")
+    sys.exit(0)
+
+import time, math, struct, hashlib
+import numpy as np
+import torch
+from collections import defaultdict
+from typing import Optional
 
 OUTPUT_DIR = PROJECT_ROOT / "THOUGHT" / "LAB" / "HOLO" / "_models"
 K = 128
@@ -102,15 +111,8 @@ def compute_chain_fidelity(Us, Rs_cavity, wt):
 # ---- Main Pipeline ----
 def main(input_path: Path, output_path: Path, writer=None) -> int:
     payload = json.loads(input_path.read_text())
-    
-    # Check prerequisites — skip gracefully on CI if model not available
     model_dir = payload.get("model_dir")
     if model_dir and not Path(model_dir).exists():
-        if os.environ.get("CI") == "true":
-            skip = {"skipped": True, "reason": f"Model not found at {model_dir}"}
-            output_path.write_text(json.dumps(skip, indent=2))
-            print(f"[catalytic-wormhole] SKIP: model not found (CI={os.environ.get('CI')})")
-            return 0
         raise FileNotFoundError(f"Model directory not found: {model_dir}")
     
     print(f"Catalytic Wormhole Compressor — Integrated Lab Pipeline")
