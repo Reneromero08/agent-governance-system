@@ -2,27 +2,29 @@
 
 ## Verdict
 
-`PUBLIC_MOD_DONOR_FOUND`
+`PUBLIC_MOD_DONOR_DIFFED`
 
-Route C found public GA-970A-DS3P BIOS-mod donor workflows, but no donor image exists locally for byte diffing in the current lab folder.
+Route C found public GA-970A-DS3P BIOS-mod donor workflows and acquired a local diffable stock/donor pair. The donor workflow is useful for rebuild/checksum structure only; it does not create a voltage/P4 candidate.
 
 ## Local Search Result
 
-Local Exp44 search did not find a diffable donor BIOS image for GA-970A-DS3P.
+Local Exp44 now contains a diffable donor BIOS image pair for GA-970A-DS3P rev. 1.0 F2j.
 
 Found local categories:
 
 - Stock/local BIOS dump and UEFIExtract parse tree in `cpu_hack/`
+- Official F2j stock package and image in `cpu_hack/mod_donors/`
+- Public F2j NVMe donor package and image in `cpu_hack/mod_donors/`
+- UEFIExtract parse reports for both stock and donor images
 - Coreboot/AGESA source drops in ignored temporary trees
 - Existing AGESA/P-state reports
 
 Not found locally:
 
-- GA-970A-DS3P NVMe donor image
 - GA-970A-DS3P SLIC donor image
 - GA-970A-DS3P hidden-menu donor image
 - GA-970A-DS3P voltage/P-state donor image
-- Any local donor-vs-stock binary pair suitable for structural diff
+- Any voltage/P-state donor-vs-stock binary pair suitable for P4 edit derivation
 
 ## Public Donor Leads
 
@@ -41,32 +43,37 @@ Public pages consulted:
 
 | Mod class | Found public lead | Local diffable image | Relevance |
 |---|---:|---:|---|
-| NVMe | Yes | No | Good rebuild/checksum donor, not voltage-specific |
+| NVMe | Yes | Yes | Diffed workflow donor; not voltage-specific |
 | SLIC | Query lead only | No | Rebuild donor only |
 | Hidden menu | Query lead only | No | UI/NVRAM donor only |
 | CPU support | Query lead only | No | Potential AGESA donor if exact revision found |
 | AGESA | No exact local donor | No | Still needs exact board/revision pair |
 | Voltage/P-state | No | No | No donor target found |
 
-## Exact Artifacts Needed For A Real Donor Diff
+## Diffed Artifacts
 
-1. Exact board revision and stock BIOS version matching the lab board.
-2. Matching official stock image from Gigabyte for that revision.
-3. Public mod image built from the same stock version.
-4. Mod thread notes stating tool and operation used.
-5. Hashes for stock and donor.
-6. UEFIExtract parse reports for stock and donor.
-7. Structural diff report limited to donor workflow and checksums.
+Full report:
+
+`cpu_sing_3/PHASE2_DONOR_DIFF_REPORT.md`
+
+Local artifacts:
+
+- `cpu_hack/mod_donors/gigabyte_rev1_stock_F2j.zip`
+- `cpu_hack/mod_donors/gigabyte_rev1_stock_F2j_extracted/970ADS3P.F2j`
+- `cpu_hack/mod_donors/gigabyte_rev1_stock_F2j_extracted/970ADS3P.F2j.report.txt`
+- `cpu_hack/mod_donors/winraid_970ADS3PNVME.zip`
+- `cpu_hack/mod_donors/winraid_970ADS3PNVME_extracted/970ADS3PNVME.F2j`
+- `cpu_hack/mod_donors/winraid_970ADS3PNVME_extracted/970ADS3PNVME.F2j.report.txt`
+
+Structural result:
+
+- first changed offset `0x002C58A0`
+- last changed offset `0x002CA9FF`
+- donor inserts `NvmExpressDxe_4` into existing free space
+- later volumes remain byte-identical
 
 ## Route C Outcome
 
-Public donor workflow exists, but no local donor image pair is available.
-
-The next safe action is acquisition/review, not flashing:
-
-- collect the exact donor image and stock-matching image into `cpu_hack/mod_donors/`
-- record hashes and URLs
-- parse both
-- diff structure only
+Public donor workflow is now locally diffed. The next safe firmware action is not donor acquisition. It is still P4-only edit-source proof in the owned `AmdProcessorInitPeim` route.
 
 No donor image is authorized for boot or flash by this report.

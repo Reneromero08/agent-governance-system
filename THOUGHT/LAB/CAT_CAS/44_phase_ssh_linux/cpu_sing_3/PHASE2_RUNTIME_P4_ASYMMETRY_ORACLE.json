@@ -1,0 +1,1114 @@
+{
+  "acceptance": [
+    "No MSR writes are performed.",
+    "Existing per-core MSRC001_0068 asymmetry is used as the label.",
+    "Observed P4-group timing separation must beat cyclic core-label nulls by >=1.25x and >=1000 ns."
+  ],
+  "cases": [
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 0,
+      "load_mode": "baseline",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 147962,
+        "mean": 140183.812,
+        "min": 139077,
+        "pstdev": 1756.77
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=08/did=0/vid=12",
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410",
+        "0x0180000140022408"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 1,
+      "load_mode": "baseline",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000",
+        "0x0000000000000001"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 188680,
+        "mean": 152068.812,
+        "min": 133693,
+        "pstdev": 22162.748
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 2,
+      "load_mode": "baseline",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 137865,
+        "mean": 132072.667,
+        "min": 128065,
+        "pstdev": 2062.651
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 3,
+      "load_mode": "baseline",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 141465,
+        "mean": 132190.854,
+        "min": 128141,
+        "pstdev": 1746.21
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 4,
+      "load_mode": "baseline",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 136004,
+        "mean": 133001.229,
+        "min": 132269,
+        "pstdev": 614.914
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=00/did=0/vid=12",
+        "fid=00/did=1/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140032400",
+        "0x0180000140042440"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 5,
+      "load_mode": "baseline",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000002",
+        "0x0000000000000003"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 561368,
+        "mean": 286921.542,
+        "min": 272544,
+        "pstdev": 56540.036
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=00/did=0/vid=12",
+        "fid=08/did=0/vid=12",
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410",
+        "0x0180000140022408",
+        "0x0180000140032400"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 0,
+      "load_mode": "self_load",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000",
+        "0x0000000000000001",
+        "0x0000000000000002"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 8192265,
+        "mean": 340929.062,
+        "min": 152316,
+        "pstdev": 1145701.344
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=00/did=0/vid=12",
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410",
+        "0x0180000140032400"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 1,
+      "load_mode": "self_load",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000",
+        "0x0000000000000002"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 4228617,
+        "mean": 249700.396,
+        "min": 134076,
+        "pstdev": 583051.015
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 2,
+      "load_mode": "self_load",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 8142022,
+        "mean": 384353.688,
+        "min": 133450,
+        "pstdev": 1268013.239
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=00/did=1/vid=12",
+        "fid=08/did=0/vid=12",
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410",
+        "0x0180000140022408",
+        "0x0180000140042440"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 3,
+      "load_mode": "self_load",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000",
+        "0x0000000000000001",
+        "0x0000000000000003"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 4246984,
+        "mean": 346031.042,
+        "min": 135200,
+        "pstdev": 812764.577
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 4,
+      "load_mode": "self_load",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 4143042,
+        "mean": 303053.688,
+        "min": 135526,
+        "pstdev": 800583.75
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=00/did=1/vid=12",
+        "fid=08/did=0/vid=12",
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410",
+        "0x0180000140022408",
+        "0x0180000140042440"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 5,
+      "load_mode": "self_load",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000",
+        "0x0000000000000001",
+        "0x0000000000000003"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 4367194,
+        "mean": 447991.146,
+        "min": 139187,
+        "pstdev": 982939.614
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=00/did=0/vid=12",
+        "fid=00/did=1/vid=12",
+        "fid=08/did=0/vid=12",
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410",
+        "0x0180000140022408",
+        "0x0180000140032400",
+        "0x0180000140042440"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 0,
+      "load_mode": "neighbors_load",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000",
+        "0x0000000000000001",
+        "0x0000000000000002",
+        "0x0000000000000003"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 475319,
+        "mean": 184975.729,
+        "min": 132228,
+        "pstdev": 64346.661
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 1,
+      "load_mode": "neighbors_load",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 150154,
+        "mean": 133145.542,
+        "min": 127808,
+        "pstdev": 3113.035
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 2,
+      "load_mode": "neighbors_load",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 166107,
+        "mean": 133184.375,
+        "min": 131906,
+        "pstdev": 4892.698
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 3,
+      "load_mode": "neighbors_load",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 145693,
+        "mean": 132246.333,
+        "min": 128321,
+        "pstdev": 2797.587
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 4,
+      "load_mode": "neighbors_load",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 158756,
+        "mean": 133647.917,
+        "min": 131863,
+        "pstdev": 4893.263
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 5,
+      "load_mode": "neighbors_load",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 146307,
+        "mean": 131848.479,
+        "min": 128874,
+        "pstdev": 2280.719
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 0,
+      "load_mode": "other_group_load",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 156146,
+        "mean": 132813.229,
+        "min": 128688,
+        "pstdev": 3948.235
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=08/did=0/vid=12",
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410",
+        "0x0180000140022408"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 1,
+      "load_mode": "other_group_load",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000",
+        "0x0000000000000001"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 199670,
+        "mean": 171167.042,
+        "min": 128615,
+        "pstdev": 18525.061
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=08/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140022408"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 2,
+      "load_mode": "other_group_load",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000001"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 205114,
+        "mean": 177499.417,
+        "min": 170397,
+        "pstdev": 6069.466
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=00/did=1/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140042440"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 3,
+      "load_mode": "other_group_load",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000003"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 598628,
+        "mean": 533527.062,
+        "min": 514524,
+        "pstdev": 14336.166
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 4,
+      "load_mode": "other_group_load",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 154427,
+        "mean": 133296.417,
+        "min": 128159,
+        "pstdev": 4624.618
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=00/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140032400"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 5,
+      "load_mode": "other_group_load",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000002"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 314500,
+        "mean": 267163.083,
+        "min": 257122,
+        "pstdev": 9764.988
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 0,
+      "load_mode": "all_load",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 974109,
+        "mean": 257884.25,
+        "min": 139168,
+        "pstdev": 251947.814
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=00/did=0/vid=12",
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410",
+        "0x0180000140032400"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 1,
+      "load_mode": "all_load",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000",
+        "0x0000000000000002"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 613560,
+        "mean": 210538.188,
+        "min": 139485,
+        "pstdev": 134949.974
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=08/did=0/vid=12",
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410",
+        "0x0180000140022408"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 2,
+      "load_mode": "all_load",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000",
+        "0x0000000000000001"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 1186154,
+        "mean": 258139.208,
+        "min": 139536,
+        "pstdev": 231761.662
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=08/did=0/vid=12",
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410",
+        "0x0180000140022408"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 3,
+      "load_mode": "all_load",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000",
+        "0x0000000000000001"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 2059390,
+        "mean": 261562.5,
+        "min": 139029,
+        "pstdev": 372505.725
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 4,
+      "load_mode": "all_load",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 1680039,
+        "mean": 252718.458,
+        "min": 138224,
+        "pstdev": 339550.489
+      }
+    },
+    {
+      "checksum": "0x00000000",
+      "cofvid_fid_did_vid_unique": [
+        "fid=08/did=0/vid=12",
+        "fid=10/did=0/vid=12"
+      ],
+      "cofvid_raw_unique": [
+        "0x0180000140012410",
+        "0x0180000140022408"
+      ],
+      "cofvid_vid_unique": [
+        18
+      ],
+      "core": 5,
+      "load_mode": "all_load",
+      "p4_msrc001_0068": {
+        "decoded_vcore": 1.225,
+        "did": 1,
+        "fid": 0,
+        "freq_mhz": 800.0,
+        "raw": "0x8000013540003440",
+        "vid": 26
+      },
+      "pstate_status_unique": [
+        "0x0000000000000000",
+        "0x0000000000000001"
+      ],
+      "timing_ns": {
+        "count": 48,
+        "max": 2098573,
+        "mean": 283339,
+        "min": 138201,
+        "pstdev": 435095.508
+      }
+    }
+  ],
+  "cores": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "global_summary": {
+    "case_count": 30,
+    "oracle_candidate_count": 0,
+    "oracle_candidates": [],
+    "p4_groups": [
+      "p4_did=1/vid=26"
+    ]
+  },
+  "mode": "read_only_p4_asymmetry_oracle",
+  "mode_summaries": {
+    "all_load": {
+      "max_null_group_range_ns": null,
+      "null": {
+        "max_null_range_ns": null,
+        "null_ranges_ns": []
+      },
+      "observed_over_max_null": null,
+      "observed_p4_group_range_ns": null,
+      "oracle_candidate": false,
+      "p4_group_means_ns": {
+        "p4_did=1/vid=26": 254030.267
+      }
+    },
+    "baseline": {
+      "max_null_group_range_ns": null,
+      "null": {
+        "max_null_range_ns": null,
+        "null_ranges_ns": []
+      },
+      "observed_over_max_null": null,
+      "observed_p4_group_range_ns": null,
+      "oracle_candidate": false,
+      "p4_group_means_ns": {
+        "p4_did=1/vid=26": 162739.819
+      }
+    },
+    "neighbors_load": {
+      "max_null_group_range_ns": null,
+      "null": {
+        "max_null_range_ns": null,
+        "null_ranges_ns": []
+      },
+      "observed_over_max_null": null,
+      "observed_p4_group_range_ns": null,
+      "oracle_candidate": false,
+      "p4_group_means_ns": {
+        "p4_did=1/vid=26": 141508.062
+      }
+    },
+    "other_group_load": {
+      "max_null_group_range_ns": null,
+      "null": {
+        "max_null_range_ns": null,
+        "null_ranges_ns": []
+      },
+      "observed_over_max_null": null,
+      "observed_p4_group_range_ns": null,
+      "oracle_candidate": false,
+      "p4_group_means_ns": {
+        "p4_did=1/vid=26": 235911.042
+      }
+    },
+    "self_load": {
+      "max_null_group_range_ns": null,
+      "null": {
+        "max_null_range_ns": null,
+        "null_ranges_ns": []
+      },
+      "observed_over_max_null": null,
+      "observed_p4_group_range_ns": null,
+      "oracle_candidate": false,
+      "p4_group_means_ns": {
+        "p4_did=1/vid=26": 345343.17
+      }
+    }
+  },
+  "modes": [
+    "baseline",
+    "self_load",
+    "neighbors_load",
+    "other_group_load",
+    "all_load"
+  ],
+  "samples_per_case": 48,
+  "workload_iters": 384,
+  "writes": false
+}

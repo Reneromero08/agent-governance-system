@@ -1,0 +1,296 @@
+# AmdProcessorInitPeim P4 edit-source probe
+
+body: cpu_hack\bios_dump.bin.dump\5 8C8CE578-8A3D-4F1C-9935-896185C32DD3\0 AmdProcessorInitPeim\1 PE32 image section\body.bin
+sha256: BF92A1321B98908E7D74299A6C1E629EC3583599F164DEC6E774BFF040FBDF2A
+base_va: 0xFFF40000
+
+## P-state MSR immediate hits
+
+0xC0010064: 23 hits -> raw 0x00EA55 / VA 0xFFF4EA55, raw 0x00ED71 / VA 0xFFF4ED71, raw 0x00EF2C / VA 0xFFF4EF2C, raw 0x0194AF / VA 0xFFF594AF, raw 0x019E43 / VA 0xFFF59E43, raw 0x026848 / VA 0xFFF66848, raw 0x026B1A / VA 0xFFF66B1A, raw 0x026D05 / VA 0xFFF66D05, raw 0x026D65 / VA 0xFFF66D65, raw 0x027404 / VA 0xFFF67404, raw 0x0274DF / VA 0xFFF674DF, raw 0x0277E0 / VA 0xFFF677E0, raw 0x02781C / VA 0xFFF6781C, raw 0x02B27C / VA 0xFFF6B27C, raw 0x03049E / VA 0xFFF7049E, raw 0x033441 / VA 0xFFF73441
+0xC0010065: 9 hits -> raw 0x026B08 / VA 0xFFF66B08, raw 0x026B2B / VA 0xFFF66B2B, raw 0x026C16 / VA 0xFFF66C16, raw 0x026CA1 / VA 0xFFF66CA1, raw 0x0274EB / VA 0xFFF674EB, raw 0x027508 / VA 0xFFF67508, raw 0x0277AA / VA 0xFFF677AA, raw 0x0337DF / VA 0xFFF737DF, raw 0x0357B1 / VA 0xFFF757B1
+0xC0010066: 0 hits
+0xC0010067: 0 hits
+0xC0010068: 5 hits -> raw 0x026CE0 / VA 0xFFF66CE0, raw 0x026DF9 / VA 0xFFF66DF9, raw 0x0272A2 / VA 0xFFF672A2, raw 0x027526 / VA 0xFFF67526, raw 0x027884 / VA 0xFFF67884
+
+## Target pointer/immediate hits
+
+constructor 0xFFF7371A: 1 hits -> raw 0x04D092 / VA 0xFFF8D092
+service_plus_0x22 0xFFF7348D: 1 hits -> raw 0x04D09E / VA 0xFFF8D09E
+msr_read_helper 0xFFF44E76: 0 hits
+handler_A_source 0xFFF696B2: 0 hits
+handler_B_source 0xFFF69727: 0 hits
+handler_C_source 0xFFF6979C: 0 hits
+handler_D_source 0xFFF69809: 0 hits
+
+## Handler-source windows from existing provenance trace
+
+### handler_A_source
+
+0xFFF696B2: push     ebp
+0xFFF696B3: mov      ebp, esp
+0xFFF696B8: push     esi
+0xFFF696B9: push     edi
+0xFFF696BA: mov      edi, dword ptr [ebp + 0x10]
+0xFFF696BD: push     edi
+0xFFF696BE: push     0x20
+0xFFF696C3: push     edi
+0xFFF696C4: mov      esi, 0xa013
+0xFFF696C9: push     eax
+0xFFF696CA: mov      dword ptr [ebp - 0x10], esi
+0xFFF696CD: call     0xfff493fc
+0xFFF696D2: push     edi
+0xFFF696D3: push     0xf0
+0xFFF696D8: mov      dword ptr [ebp - 0x18], esi
+0xFFF696DB: call     0xfff49229
+0xFFF696E3: push     edi
+0xFFF696E4: push     eax
+0xFFF696E5: call     0xfff48670
+0xFFF696F1: mov      esi, dword ptr [ebp - 8]
+0xFFF696F4: push     edi
+0xFFF696F5: push     0xf1
+0xFFF696FA: call     0xfff49229
+0xFFF696FF: mov      eax, dword ptr [ebp + 8]
+0xFFF69702: movzx    ecx, byte ptr [eax + 5]
+0xFFF6970C: push     edx
+0xFFF6970D: push     dword ptr [eax]
+0xFFF6970F: call     dword ptr [ecx + esi + 0x1d]
+0xFFF69713: mov      ecx, dword ptr [ebp + 0xc]
+0xFFF69716: mov      edx, dword ptr [ebp - 4]
+0xFFF6971C: mov      dword ptr [ecx], edx
+0xFFF69720: push     7
+0xFFF69727: push     ebp
+0xFFF69728: mov      ebp, esp
+0xFFF6972D: push     edi
+0xFFF6972E: mov      edi, dword ptr [ebp + 0x10]
+0xFFF69731: push     edi
+0xFFF69732: push     0x20
+0xFFF69737: push     edi
+0xFFF69738: push     eax
+0xFFF69739: call     0xfff493fc
+0xFFF6973E: mov      eax, 0xa013
+0xFFF69743: push     edi
+0xFFF69744: push     0xf2
+0xFFF69749: mov      dword ptr [ebp - 0x10], eax
+0xFFF6974C: mov      dword ptr [ebp - 0x18], eax
+0xFFF6974F: call     0xfff49229
+0xFFF69757: push     edi
+0xFFF69758: push     eax
+0xFFF69759: call     0xfff48670
+0xFFF69765: push     esi
+0xFFF69766: mov      esi, dword ptr [ebp - 8]
+0xFFF69769: push     edi
+0xFFF6976A: push     0xf3
+0xFFF696CD: call     0xfff493fc
+0xFFF696DB: call     0xfff49229
+0xFFF696E5: call     0xfff48670
+0xFFF696FA: call     0xfff49229
+0xFFF69702: movzx    ecx, byte ptr [eax + 5]
+0xFFF6970D: push     dword ptr [eax]
+0xFFF6970F: call     dword ptr [ecx + esi + 0x1d]
+0xFFF6971C: mov      dword ptr [ecx], edx
+0xFFF69739: call     0xfff493fc
+0xFFF6974F: call     0xfff49229
+0xFFF69759: call     0xfff48670
+
+### handler_B_source
+
+0xFFF69727: push     ebp
+0xFFF69728: mov      ebp, esp
+0xFFF6972D: push     edi
+0xFFF6972E: mov      edi, dword ptr [ebp + 0x10]
+0xFFF69731: push     edi
+0xFFF69732: push     0x20
+0xFFF69737: push     edi
+0xFFF69738: push     eax
+0xFFF69739: call     0xfff493fc
+0xFFF6973E: mov      eax, 0xa013
+0xFFF69743: push     edi
+0xFFF69744: push     0xf2
+0xFFF69749: mov      dword ptr [ebp - 0x10], eax
+0xFFF6974C: mov      dword ptr [ebp - 0x18], eax
+0xFFF6974F: call     0xfff49229
+0xFFF69757: push     edi
+0xFFF69758: push     eax
+0xFFF69759: call     0xfff48670
+0xFFF69765: push     esi
+0xFFF69766: mov      esi, dword ptr [ebp - 8]
+0xFFF69769: push     edi
+0xFFF6976A: push     0xf3
+0xFFF6976F: call     0xfff49229
+0xFFF69774: mov      eax, dword ptr [ebp + 8]
+0xFFF69777: movzx    ecx, byte ptr [eax + 5]
+0xFFF69781: push     edx
+0xFFF69782: push     dword ptr [eax]
+0xFFF69784: call     dword ptr [ecx + esi + 0x1d]
+0xFFF69788: mov      ecx, dword ptr [ebp + 0xc]
+0xFFF6978B: mov      edx, dword ptr [ebp - 4]
+0xFFF69791: mov      dword ptr [ecx], edx
+0xFFF69796: push     7
+0xFFF6979C: push     ebp
+0xFFF6979D: mov      ebp, esp
+0xFFF697A2: push     edi
+0xFFF697A3: mov      edi, dword ptr [ebp + 0x10]
+0xFFF697A6: push     edi
+0xFFF697A7: push     0x20
+0xFFF697AC: push     edi
+0xFFF697AD: push     eax
+0xFFF697AE: call     0xfff493fc
+0xFFF697B3: mov      eax, 0xa013
+0xFFF697B8: push     edi
+0xFFF697B9: push     0xf4
+0xFFF697BE: mov      dword ptr [ebp - 0x10], eax
+0xFFF697C1: mov      dword ptr [ebp - 0x18], eax
+0xFFF697C4: call     0xfff49229
+0xFFF697CC: push     edi
+0xFFF697CD: push     eax
+0xFFF697CE: call     0xfff48670
+0xFFF697DA: push     esi
+0xFFF697DB: mov      esi, dword ptr [ebp - 8]
+0xFFF697DE: push     edi
+0xFFF697DF: push     0xf5
+0xFFF69739: call     0xfff493fc
+0xFFF6974F: call     0xfff49229
+0xFFF69759: call     0xfff48670
+0xFFF6976F: call     0xfff49229
+0xFFF69777: movzx    ecx, byte ptr [eax + 5]
+0xFFF69782: push     dword ptr [eax]
+0xFFF69784: call     dword ptr [ecx + esi + 0x1d]
+0xFFF69791: mov      dword ptr [ecx], edx
+0xFFF697AE: call     0xfff493fc
+0xFFF697C4: call     0xfff49229
+0xFFF697CE: call     0xfff48670
+
+### handler_C_source
+
+0xFFF6979C: push     ebp
+0xFFF6979D: mov      ebp, esp
+0xFFF697A2: push     edi
+0xFFF697A3: mov      edi, dword ptr [ebp + 0x10]
+0xFFF697A6: push     edi
+0xFFF697A7: push     0x20
+0xFFF697AC: push     edi
+0xFFF697AD: push     eax
+0xFFF697AE: call     0xfff493fc
+0xFFF697B3: mov      eax, 0xa013
+0xFFF697B8: push     edi
+0xFFF697B9: push     0xf4
+0xFFF697BE: mov      dword ptr [ebp - 0x10], eax
+0xFFF697C1: mov      dword ptr [ebp - 0x18], eax
+0xFFF697C4: call     0xfff49229
+0xFFF697CC: push     edi
+0xFFF697CD: push     eax
+0xFFF697CE: call     0xfff48670
+0xFFF697DA: push     esi
+0xFFF697DB: mov      esi, dword ptr [ebp - 8]
+0xFFF697DE: push     edi
+0xFFF697DF: push     0xf5
+0xFFF697E4: call     0xfff49229
+0xFFF697EC: push     eax
+0xFFF697ED: mov      eax, dword ptr [ebp + 8]
+0xFFF697F0: push     dword ptr [eax]
+0xFFF697F2: call     dword ptr [esi + 0x1d]
+0xFFF697F5: mov      ecx, dword ptr [ebp + 0xc]
+0xFFF697F8: mov      edx, dword ptr [ebp - 4]
+0xFFF697FE: mov      dword ptr [ecx], edx
+0xFFF69803: push     7
+0xFFF69809: push     ebp
+0xFFF6980A: mov      ebp, esp
+0xFFF6980F: push     edi
+0xFFF69810: mov      edi, dword ptr [ebp + 0x10]
+0xFFF69813: push     edi
+0xFFF69814: push     0x20
+0xFFF69819: push     edi
+0xFFF6981A: push     eax
+0xFFF6981B: call     0xfff493fc
+0xFFF69820: mov      eax, 0xa013
+0xFFF69825: push     edi
+0xFFF69826: push     0xf6
+0xFFF6982B: mov      dword ptr [ebp - 0x10], eax
+0xFFF6982E: mov      dword ptr [ebp - 0x18], eax
+0xFFF69831: call     0xfff49229
+0xFFF69839: push     edi
+0xFFF6983A: push     eax
+0xFFF6983B: call     0xfff48670
+0xFFF69847: push     esi
+0xFFF69848: mov      esi, dword ptr [ebp - 8]
+0xFFF6984B: push     edi
+0xFFF6984C: push     0xf7
+0xFFF69851: call     0xfff49229
+0xFFF69859: push     eax
+0xFFF697AE: call     0xfff493fc
+0xFFF697C4: call     0xfff49229
+0xFFF697CE: call     0xfff48670
+0xFFF697E4: call     0xfff49229
+0xFFF697F0: push     dword ptr [eax]
+0xFFF697F2: call     dword ptr [esi + 0x1d]
+0xFFF697FE: mov      dword ptr [ecx], edx
+0xFFF6981B: call     0xfff493fc
+0xFFF69831: call     0xfff49229
+0xFFF6983B: call     0xfff48670
+0xFFF69851: call     0xfff49229
+
+### handler_D_source
+
+0xFFF69809: push     ebp
+0xFFF6980A: mov      ebp, esp
+0xFFF6980F: push     edi
+0xFFF69810: mov      edi, dword ptr [ebp + 0x10]
+0xFFF69813: push     edi
+0xFFF69814: push     0x20
+0xFFF69819: push     edi
+0xFFF6981A: push     eax
+0xFFF6981B: call     0xfff493fc
+0xFFF69820: mov      eax, 0xa013
+0xFFF69825: push     edi
+0xFFF69826: push     0xf6
+0xFFF6982B: mov      dword ptr [ebp - 0x10], eax
+0xFFF6982E: mov      dword ptr [ebp - 0x18], eax
+0xFFF69831: call     0xfff49229
+0xFFF69839: push     edi
+0xFFF6983A: push     eax
+0xFFF6983B: call     0xfff48670
+0xFFF69847: push     esi
+0xFFF69848: mov      esi, dword ptr [ebp - 8]
+0xFFF6984B: push     edi
+0xFFF6984C: push     0xf7
+0xFFF69851: call     0xfff49229
+0xFFF69859: push     eax
+0xFFF6985A: mov      eax, dword ptr [ebp + 8]
+0xFFF6985D: push     dword ptr [eax]
+0xFFF6985F: call     dword ptr [esi + 0x1d]
+0xFFF69862: mov      ecx, dword ptr [ebp + 0xc]
+0xFFF69865: mov      edx, dword ptr [ebp - 4]
+0xFFF6986B: mov      dword ptr [ecx], edx
+0xFFF69870: push     7
+0xFFF69876: push     ebp
+0xFFF69877: mov      ebp, esp
+0xFFF6987C: push     ebx
+0xFFF6987D: mov      ebx, dword ptr [ebp + 0x14]
+0xFFF69880: push     esi
+0xFFF69881: push     edi
+0xFFF69885: push     ebx
+0xFFF69886: mov      esi, 0xa010
+0xFFF6988B: push     eax
+0xFFF6988C: mov      byte ptr [ebp - 2], 0
+0xFFF69890: mov      dword ptr [ebp - 0x1c], esi
+0xFFF69893: call     0xfff48670
+0xFFF6989E: mov      edi, dword ptr [ebp + 0xc]
+0xFFF698A1: mov      eax, dword ptr [ebp - 0x14]
+0xFFF698A4: mov      dword ptr [edi], eax
+0xFFF698A6: mov      byte ptr [ebp - 2], 1
+0xFFF698AF: push     ebx
+0xFFF698B0: push     eax
+0xFFF698B1: mov      dword ptr [ebp - 0x2c], 0xa32
+0xFFF698B8: mov      dword ptr [ebp - 0x28], esi
+0xFFF698BB: mov      byte ptr [ebp - 0x24], 4
+0xFFF698BF: call     0xfff482eb
+0xFFF6981B: call     0xfff493fc
+0xFFF69831: call     0xfff49229
+0xFFF6983B: call     0xfff48670
+0xFFF69851: call     0xfff49229
+0xFFF6985D: push     dword ptr [eax]
+0xFFF6985F: call     dword ptr [esi + 0x1d]
+0xFFF6986B: mov      dword ptr [ecx], edx
+0xFFF69893: call     0xfff48670
+0xFFF698BF: call     0xfff482eb
+

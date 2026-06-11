@@ -1,0 +1,2406 @@
+{
+  "acceptance": [
+    "No platform settings are changed.",
+    "Internal state labels are recorded per row.",
+    "Timing carrier claims require state-label movement or APERF/MPERF movement."
+  ],
+  "cases": [
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 0,
+      "load_mode": "baseline",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 0.01918133,
+        "max": 204245.0,
+        "mean": 188086.833,
+        "min": 183284.0,
+        "pstdev": 3607.756
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=00/did=1/vid=12/raw=0x0180000140042440",
+        "fid=08/did=0/vid=12/raw=0x0180000140022408",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=00/did=1/vid=12/raw=0x0180000140042440",
+        "fid=08/did=0/vid=12/raw=0x0180000140022408",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 1,
+      "load_mode": "baseline",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=01/did=0/vid=00/raw=0x0000000000000001",
+        "fid=03/did=0/vid=00/raw=0x0000000000000003",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=01/did=0/vid=00/raw=0x0000000000000001",
+        "fid=03/did=0/vid=00/raw=0x0000000000000003"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 0.501821895,
+        "max": 778114.0,
+        "mean": 219559.972,
+        "min": 185973.0,
+        "pstdev": 110180.001
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 2,
+      "load_mode": "baseline",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 0.007214819,
+        "max": 194169.0,
+        "mean": 185246.542,
+        "min": 183911.0,
+        "pstdev": 1336.52
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 3,
+      "load_mode": "baseline",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 0.004844283,
+        "max": 186110.0,
+        "mean": 183896.028,
+        "min": 178767.0,
+        "pstdev": 890.844
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 4,
+      "load_mode": "baseline",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 0.015299081,
+        "max": 195860.0,
+        "mean": 188236.931,
+        "min": 180029.0,
+        "pstdev": 2879.852
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=00/did=0/vid=12/raw=0x0180000140032400",
+        "fid=08/did=0/vid=12/raw=0x0180000140022408",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=00/did=0/vid=12/raw=0x0180000140032400",
+        "fid=08/did=0/vid=12/raw=0x0180000140022408",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 5,
+      "load_mode": "baseline",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=01/did=0/vid=00/raw=0x0000000000000001",
+        "fid=02/did=0/vid=00/raw=0x0000000000000002",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=01/did=0/vid=00/raw=0x0000000000000001",
+        "fid=02/did=0/vid=00/raw=0x0000000000000002"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 0.264096983,
+        "max": 368782.0,
+        "mean": 209243.0,
+        "min": 181347.0,
+        "pstdev": 55260.445
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=08/did=0/vid=12/raw=0x0180000140022408",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=08/did=0/vid=12/raw=0x0180000140022408",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 0,
+      "load_mode": "self_load",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=01/did=0/vid=00/raw=0x0000000000000001",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=01/did=0/vid=00/raw=0x0000000000000001"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 2.252576701,
+        "max": 4189444.0,
+        "mean": 354889.278,
+        "min": 177267.0,
+        "pstdev": 799415.319
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=00/did=0/vid=12/raw=0x0180000140032400",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=00/did=0/vid=12/raw=0x0180000140032400",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 1,
+      "load_mode": "self_load",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=02/did=0/vid=00/raw=0x0000000000000002",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=02/did=0/vid=00/raw=0x0000000000000002"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 2.129595493,
+        "max": 4204390.0,
+        "mean": 477116.542,
+        "min": 180806.0,
+        "pstdev": 1016065.237
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 2,
+      "load_mode": "self_load",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 2.219370756,
+        "max": 4193431.0,
+        "mean": 296711.917,
+        "min": 182761.0,
+        "pstdev": 658513.751
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 3,
+      "load_mode": "self_load",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 2.256859069,
+        "max": 4191710.0,
+        "mean": 406630.569,
+        "min": 179747.0,
+        "pstdev": 917707.888
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 4,
+      "load_mode": "self_load",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 2.240004281,
+        "max": 4195082.0,
+        "mean": 294090.375,
+        "min": 177747.0,
+        "pstdev": 658763.699
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=00/did=0/vid=12/raw=0x0180000140032400",
+        "fid=00/did=1/vid=12/raw=0x0180000140042440",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=00/did=0/vid=12/raw=0x0180000140032400",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 5,
+      "load_mode": "self_load",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=02/did=0/vid=00/raw=0x0000000000000002",
+        "fid=03/did=0/vid=00/raw=0x0000000000000003",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=02/did=0/vid=00/raw=0x0000000000000002",
+        "fid=03/did=0/vid=00/raw=0x0000000000000003"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 2.416482509,
+        "max": 8338252.0,
+        "mean": 538646.736,
+        "min": 178249.0,
+        "pstdev": 1301630.417
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=00/did=0/vid=12/raw=0x0180000140032400",
+        "fid=08/did=0/vid=12/raw=0x0180000140022408",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=00/did=0/vid=12/raw=0x0180000140032400",
+        "fid=08/did=0/vid=12/raw=0x0180000140022408",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 0,
+      "load_mode": "neighbor_load",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=01/did=0/vid=00/raw=0x0000000000000001",
+        "fid=02/did=0/vid=00/raw=0x0000000000000002",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=01/did=0/vid=00/raw=0x0000000000000001",
+        "fid=02/did=0/vid=00/raw=0x0000000000000002"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 0.251350466,
+        "max": 350356.0,
+        "mean": 203752.014,
+        "min": 175720.0,
+        "pstdev": 51213.164
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 1,
+      "load_mode": "neighbor_load",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 0.023465097,
+        "max": 187589.0,
+        "mean": 177960.792,
+        "min": 171132.0,
+        "pstdev": 4175.867
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 2,
+      "load_mode": "neighbor_load",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 0.024024817,
+        "max": 186833.0,
+        "mean": 178044.903,
+        "min": 171327.0,
+        "pstdev": 4277.496
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 3,
+      "load_mode": "neighbor_load",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 0.02976259,
+        "max": 194477.0,
+        "mean": 180705.625,
+        "min": 173870.0,
+        "pstdev": 5378.267
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 4,
+      "load_mode": "neighbor_load",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 0.02805291,
+        "max": 188166.0,
+        "mean": 180325.236,
+        "min": 170638.0,
+        "pstdev": 5058.648
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 5,
+      "load_mode": "neighbor_load",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 0.029625486,
+        "max": 190587.0,
+        "mean": 181050.444,
+        "min": 172665.0,
+        "pstdev": 5363.707
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 0,
+      "load_mode": "other_load",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 0.025845153,
+        "max": 191699.0,
+        "mean": 181300.611,
+        "min": 171189.0,
+        "pstdev": 4685.742
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=00/did=0/vid=12/raw=0x0180000140032400",
+        "fid=00/did=1/vid=12/raw=0x0180000140042440",
+        "fid=08/did=0/vid=12/raw=0x0180000140022408",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=00/did=0/vid=12/raw=0x0180000140032400",
+        "fid=00/did=1/vid=12/raw=0x0180000140042440",
+        "fid=08/did=0/vid=12/raw=0x0180000140022408",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 1,
+      "load_mode": "other_load",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=01/did=0/vid=00/raw=0x0000000000000001",
+        "fid=02/did=0/vid=00/raw=0x0000000000000002",
+        "fid=03/did=0/vid=00/raw=0x0000000000000003",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=01/did=0/vid=00/raw=0x0000000000000001",
+        "fid=02/did=0/vid=00/raw=0x0000000000000002",
+        "fid=03/did=0/vid=00/raw=0x0000000000000003"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 0.508448249,
+        "max": 764371.0,
+        "mean": 485043.097,
+        "min": 184734.0,
+        "pstdev": 246619.313
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 2,
+      "load_mode": "other_load",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 0.02295774,
+        "max": 192101.0,
+        "mean": 184758.625,
+        "min": 177423.0,
+        "pstdev": 4241.64
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 3,
+      "load_mode": "other_load",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 0.031279131,
+        "max": 192274.0,
+        "mean": 186219.806,
+        "min": 171841.0,
+        "pstdev": 5824.794
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 4,
+      "load_mode": "other_load",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 0.029500523,
+        "max": 192278.0,
+        "mean": 186144.681,
+        "min": 171661.0,
+        "pstdev": 5491.365
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 5,
+      "load_mode": "other_load",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 0.021546536,
+        "max": 190813.0,
+        "mean": 183586.708,
+        "min": 171889.0,
+        "pstdev": 3955.658
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 0,
+      "load_mode": "all_load",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 1.259688419,
+        "max": 2094317.0,
+        "mean": 326747.236,
+        "min": 175912.0,
+        "pstdev": 411599.709
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=08/did=0/vid=12/raw=0x0180000140022408",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=08/did=0/vid=12/raw=0x0180000140022408",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 1,
+      "load_mode": "all_load",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=01/did=0/vid=00/raw=0x0000000000000001",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=01/did=0/vid=00/raw=0x0000000000000001"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 1.302921229,
+        "max": 2163091.0,
+        "mean": 361368.861,
+        "min": 179899.0,
+        "pstdev": 470835.161
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=00/did=0/vid=12/raw=0x0180000140032400",
+        "fid=08/did=0/vid=12/raw=0x0180000140022408",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=08/did=0/vid=12/raw=0x0180000140022408",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 2,
+      "load_mode": "all_load",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=01/did=0/vid=00/raw=0x0000000000000001",
+        "fid=02/did=0/vid=00/raw=0x0000000000000002",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=01/did=0/vid=00/raw=0x0000000000000001"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 1.349211638,
+        "max": 2747857.0,
+        "mean": 327173.444,
+        "min": 181783.0,
+        "pstdev": 441426.219
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=08/did=0/vid=12/raw=0x0180000140022408",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=08/did=0/vid=12/raw=0x0180000140022408",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 3,
+      "load_mode": "all_load",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=01/did=0/vid=00/raw=0x0000000000000001",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=01/did=0/vid=00/raw=0x0000000000000001"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 1.281560998,
+        "max": 2135096.0,
+        "mean": 381870.014,
+        "min": 186527.0,
+        "pstdev": 489389.716
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=00/did=0/vid=12/raw=0x0180000140032400",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=00/did=0/vid=12/raw=0x0180000140032400",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 4,
+      "load_mode": "all_load",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=02/did=0/vid=00/raw=0x0000000000000002",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=02/did=0/vid=00/raw=0x0000000000000002"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 1.288567732,
+        "max": 2799443.0,
+        "mean": 346852.556,
+        "min": 180036.0,
+        "pstdev": 446943.011
+      }
+    },
+    {
+      "aperf_mperf_ratio": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "checksum": "0x00000000",
+      "cofvid_status_unique": [
+        "fid=00/did=0/vid=12/raw=0x0180000140032400",
+        "fid=00/did=1/vid=12/raw=0x0180000140042440",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410",
+        "fid=00/did=0/vid=12/raw=0x0180000140032400",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core": 5,
+      "load_mode": "all_load",
+      "pstate_definitions": [
+        {
+          "decoded_label_v": 1.475,
+          "did": 0,
+          "fid": 20,
+          "freq_mhz": 3600.0,
+          "raw": "0x8000019e40000c14",
+          "vid": 6
+        },
+        {
+          "decoded_label_v": 1.325,
+          "did": 0,
+          "fid": 16,
+          "freq_mhz": 3200.0,
+          "raw": "0x8000019f40002410",
+          "vid": 18
+        },
+        {
+          "decoded_label_v": 1.3,
+          "did": 0,
+          "fid": 8,
+          "freq_mhz": 2400.0,
+          "raw": "0x8000017540002808",
+          "vid": 20
+        },
+        {
+          "decoded_label_v": 1.275,
+          "did": 0,
+          "fid": 0,
+          "freq_mhz": 1600.0,
+          "raw": "0x8000015440002c00",
+          "vid": 22
+        },
+        {
+          "decoded_label_v": 1.225,
+          "did": 1,
+          "fid": 0,
+          "freq_mhz": 800.0,
+          "raw": "0x8000013540003440",
+          "vid": 26
+        }
+      ],
+      "pstate_status_unique": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=02/did=0/vid=00/raw=0x0000000000000002",
+        "fid=03/did=0/vid=00/raw=0x0000000000000003",
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=02/did=0/vid=00/raw=0x0000000000000002"
+      ],
+      "timing_ns": {
+        "count": 72,
+        "cv": 1.568749913,
+        "max": 3053501.0,
+        "mean": 397387.167,
+        "min": 183212.0,
+        "pstdev": 623401.083
+      }
+    }
+  ],
+  "cores": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "global_summary": {
+    "case_count": 30,
+    "cofvid_label_count": 4,
+    "cofvid_labels": [
+      "fid=00/did=0/vid=12/raw=0x0180000140032400",
+      "fid=00/did=1/vid=12/raw=0x0180000140042440",
+      "fid=08/did=0/vid=12/raw=0x0180000140022408",
+      "fid=10/did=0/vid=12/raw=0x0180000140012410"
+    ],
+    "effective_state_moved": true,
+    "pstate_label_count": 4,
+    "pstate_labels": [
+      "fid=00/did=0/vid=00/raw=0x0000000000000000",
+      "fid=01/did=0/vid=00/raw=0x0000000000000001",
+      "fid=02/did=0/vid=00/raw=0x0000000000000002",
+      "fid=03/did=0/vid=00/raw=0x0000000000000003"
+    ]
+  },
+  "mode": "read_only_effective_state_selector_map",
+  "mode_summaries": {
+    "all_load": {
+      "aperf_mperf_mean": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "cofvid_status_labels": [
+        "fid=00/did=0/vid=12/raw=0x0180000140032400",
+        "fid=00/did=1/vid=12/raw=0x0180000140042440",
+        "fid=08/did=0/vid=12/raw=0x0180000140022408",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core_count": 6,
+      "pstate_status_labels": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=01/did=0/vid=00/raw=0x0000000000000001",
+        "fid=02/did=0/vid=00/raw=0x0000000000000002",
+        "fid=03/did=0/vid=00/raw=0x0000000000000003"
+      ],
+      "timing_mean_ns": {
+        "count": 6,
+        "cv": 0.073923713,
+        "max": 397387.167,
+        "mean": 356899.88,
+        "min": 326747.236,
+        "pstdev": 26383.364
+      }
+    },
+    "baseline": {
+      "aperf_mperf_mean": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "cofvid_status_labels": [
+        "fid=00/did=0/vid=12/raw=0x0180000140032400",
+        "fid=00/did=1/vid=12/raw=0x0180000140042440",
+        "fid=08/did=0/vid=12/raw=0x0180000140022408",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core_count": 6,
+      "pstate_status_labels": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=01/did=0/vid=00/raw=0x0000000000000001",
+        "fid=02/did=0/vid=00/raw=0x0000000000000002",
+        "fid=03/did=0/vid=00/raw=0x0000000000000003"
+      ],
+      "timing_mean_ns": {
+        "count": 6,
+        "cv": 0.069653154,
+        "max": 219559.972,
+        "mean": 195711.551,
+        "min": 183896.028,
+        "pstdev": 13631.927
+      }
+    },
+    "neighbor_load": {
+      "aperf_mperf_mean": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "cofvid_status_labels": [
+        "fid=00/did=0/vid=12/raw=0x0180000140032400",
+        "fid=08/did=0/vid=12/raw=0x0180000140022408",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core_count": 6,
+      "pstate_status_labels": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=01/did=0/vid=00/raw=0x0000000000000001",
+        "fid=02/did=0/vid=00/raw=0x0000000000000002"
+      ],
+      "timing_mean_ns": {
+        "count": 6,
+        "cv": 0.049428477,
+        "max": 203752.014,
+        "mean": 183639.836,
+        "min": 177960.792,
+        "pstdev": 9077.037
+      }
+    },
+    "other_load": {
+      "aperf_mperf_mean": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "cofvid_status_labels": [
+        "fid=00/did=0/vid=12/raw=0x0180000140032400",
+        "fid=00/did=1/vid=12/raw=0x0180000140042440",
+        "fid=08/did=0/vid=12/raw=0x0180000140022408",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core_count": 6,
+      "pstate_status_labels": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=01/did=0/vid=00/raw=0x0000000000000001",
+        "fid=02/did=0/vid=00/raw=0x0000000000000002",
+        "fid=03/did=0/vid=00/raw=0x0000000000000003"
+      ],
+      "timing_mean_ns": {
+        "count": 6,
+        "cv": 0.47782723,
+        "max": 485043.097,
+        "mean": 234508.921,
+        "min": 181300.611,
+        "pstdev": 112054.748
+      }
+    },
+    "self_load": {
+      "aperf_mperf_mean": {
+        "count": 0,
+        "cv": null,
+        "max": null,
+        "mean": null,
+        "min": null,
+        "pstdev": null
+      },
+      "cofvid_status_labels": [
+        "fid=00/did=0/vid=12/raw=0x0180000140032400",
+        "fid=00/did=1/vid=12/raw=0x0180000140042440",
+        "fid=08/did=0/vid=12/raw=0x0180000140022408",
+        "fid=10/did=0/vid=12/raw=0x0180000140012410"
+      ],
+      "core_count": 6,
+      "pstate_status_labels": [
+        "fid=00/did=0/vid=00/raw=0x0000000000000000",
+        "fid=01/did=0/vid=00/raw=0x0000000000000001",
+        "fid=02/did=0/vid=00/raw=0x0000000000000002",
+        "fid=03/did=0/vid=00/raw=0x0000000000000003"
+      ],
+      "timing_mean_ns": {
+        "count": 6,
+        "cv": 0.228885465,
+        "max": 538646.736,
+        "mean": 394680.903,
+        "min": 294090.375,
+        "pstdev": 90336.722
+      }
+    }
+  },
+  "modes": [
+    "baseline",
+    "self_load",
+    "neighbor_load",
+    "other_load",
+    "all_load"
+  ],
+  "samples_per_case": 72,
+  "setting_changes": false,
+  "workload_iters": 512
+}
