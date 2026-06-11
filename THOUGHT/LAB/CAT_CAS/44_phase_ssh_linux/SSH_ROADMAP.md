@@ -1216,6 +1216,7 @@ operational entropy / contention / jitter
 
 **Outputs:**
 - `phase5_7/PHASE5_7_ENTROPIC_BOUNDARY_GEOMETRY.md`
+- `phase5_7/PHASE5_7_TO_PHASE6_INVARIANT_BRIDGE.md`
 - `phase5_7/results/entropic_boundary_summary.csv`
 - `phase5_7/results/load_boundary_raw.csv`
 - `phase5_7/results/null_boundary_exclusion.csv`
@@ -1276,9 +1277,11 @@ operational entropy / contention / jitter
 
 **Claim boundary:** Phase 5.7 may claim only computational boundary deformation of the CAT_CAS carrier geometry. It must not claim physical holography, AdS/CFT, quantum coherence, physical Kuramoto, Landauer violation, zero heat, or thermodynamic entropy reduction.
 
-**Next action:** If promoted, carry the measured-runtime boundary deformation into the next residual-channel design phase and keep the same no-class-leakage / within-load carrier-vs-jitter gates.
+**Phase 6 bridge:** `PHASE5_7_READY_AS_PHASE6_INVARIANT_SCORER__WAITING_ON_5_9V_BASIN_LABELS`. Phase 5.7 is now the invariant/null scoring layer for Phase 6: it should consume 5.9V basin labels, Phase 6 public target hashes, and fixed-point `d` labels, then test whether surviving invariants predict `d` beyond same-hash wrong-invariant and shuffled-map controls.
 
-**Artifacts:** `phase5_7/PHASE5_7_ENTROPIC_BOUNDARY_GEOMETRY.md`, `phase5_7/PHASE5_7_INTEGRITY_AUDIT.md`, `session_scripts/phase5_7/entropic_boundary_probe.c`, `phase5_7/results/phase5_7_stdout.txt`.
+**Next action:** Extend the 5.7 table with `basin_id`, `target_public_hash`, `fixed_point_d`, invariant strength, answer correlation, same-hash wrong-invariant score, shuffled-map score, and null effect size once 5.9V produces Phase 6 basin labels.
+
+**Artifacts:** `phase5_7/PHASE5_7_ENTROPIC_BOUNDARY_GEOMETRY.md`, `phase5_7/PHASE5_7_TO_PHASE6_INVARIANT_BRIDGE.md`, `phase5_7/PHASE5_7_INTEGRITY_AUDIT.md`, `session_scripts/phase5_7/entropic_boundary_probe.c`, `phase5_7/results/phase5_7_stdout.txt`.
 
 ---
 
@@ -1384,8 +1387,9 @@ digital cache boundary
 **Conceptual transition:**
 ```
 Phase 5.8: "Does the boundary exist?" → AREA_LAW_CONFIRMED
-Phase 5.9: "What survives as the machine approaches failure?"
-Phase 6.0: Substrate investigation (theory-level synthesis, reserved)
+Phase 5.9: "What survives as the machine approaches failure?" → edge not reached; carrier-basin hint (5.9V)
+Phase 5.10: "Can the substrate PREPARE reproducible boundary basins?" → boundary state preparation (GATES Phase 6); spec: phase5_10/
+Phase 6: "Can a PREPARED basin carry/select the fixed-point invariant?" → fixed-point crossing; RUNS ONLY AFTER 5.10C passes; spec: phase6/SPEC_PHASE6_FIXED_POINT_SUBSTRATE.md
 ```
 
 **Three-world outcome space:**
@@ -1403,7 +1407,7 @@ Phase 6.0: Substrate investigation (theory-level synthesis, reserved)
 | Frequency stress | DID divisor sweep, low/high states, frequency-locked repeated runs, P-state drift audit | Carried forward from Phase 5.8 |
 | Worker/load stress | none, cache hammer, mixed pressure, integer churn, thermal pressure, increasing intensity | Inherits worker_status.csv discipline |
 | Thermal stress | Controlled warm state, cold baseline, temperature-windowed runs, thermal drift logging | New |
-| Voltage stress | VID sweep if available; K10 VID floor noted; external measured Vcore if possible | DEFERRED in 5.8, re-attempted in 5.9 |
+| Voltage stress | P4 VID definition sweep/bracket/selector at the K10 boundary | LIVE in 5.9V: P4 VID writes affect carrier basin; checksum failure edge not reached |
 | Stability stress | Restoration failure rate, checksum mismatch, timing spikes, migration, worker join integrity, hang/crash boundary | New — defines the failure edge |
 
 **Primary observables:**
@@ -1509,6 +1513,11 @@ CACHE/FREQUENCY DRIFT ARTIFACT MUST BE ISOLATED IN PHASE 5.9.
 - Abuse follow-up: 12 runs / 480K trials / 0 restoration failures; r(boundary_thickness, cycle_cv)=0.729327; max/quiet thickness ratio=3.938315
 - Voltage follow-up: K10 P4 VID field writable; P4 ladder/bracket reached 1.1375V; 0 restoration failures; boundary carrier amplified, collapsed, and switched basins under repeated VID+4/VID+5 bursts
 - Basin selector: VID+5 held at decoded 1.1625V; syscall prelude avoided collapse entirely, cache prelude avoided high-carrier entirely
+- Phase 6 bridge: `phase5_9/PHASE5_9V_TO_PHASE6_BASIN_BRIDGE.md`; current verdict `PHASE5_9V_DIRECTIONAL_BASIN_CONTROL__NOT_DETERMINISTIC_ENOUGH_FOR_MODE_C`
+- Phase 6-facing 5.9V reproducibility attempt: `phase5_9/PHASE5_9V_PHASE6_REPRO_ATTEMPT.md`; all-core VID+5 setup failed the MSR-set gate and made the target unreachable, then the hardened `DEF_CORES=3` retry completed 70 rows with 0 restoration failures.
+- Phase 6-facing 5.9V reproducibility result: `phase5_9/results/k10_voltage_probe/p4_vid5_phase6_basin_repro/PHASE5_9V_PHASE6_BASIN_REPRO.md`; verdict `PHASE5_9V_DIRECTIONAL_REPRODUCED_NOT_DETERMINISTIC`. `syscall_prelude` biased high basin 7/10; `public_kb_prelude` was mid 6/10 and did not beat quiet or separate from shuffled enough for Mode C handoff.
+- Public-prelude refinement pushed further: VID+5 coupled public/shuffled syscall/cache/branch matrix (90 rows), VID+5 long-prelude matrix (50 rows), VID+4 compact offset matrix (30 rows), VID+6 compact offset matrix (30 rows), VID+6 public-candidate confirmation (70 rows), VID+5 target-coupled workload matrix (40 rows), and VID+6 target-coupled workload matrix (40 rows) all completed with 0 restoration failures.
+- Pushed 5.9V boundary: `PHASE5_9V_PUBLIC_PRELUDE_NOT_DETERMINISTIC_AFTER_COUPLING_DURATION_VID_SWEEP_AND_TARGET_COUPLING`. The temporary VID+6 public+syscall 4/5 mid candidate did not confirm at 10 repeats; target-coupled VID+6 strengthened a nonpublic/shuffled selector instead of the public selector. Current blocker: `PUBLIC_TARGET_COUPLING_DOES_NOT_SELECT_PUBLIC_BASIN`.
 - Next: Phase 6 should treat timing-CV and voltage-sensitive basin selection/control as the live substrate feature; checksum/flicker failure remains unreached
 
 **Tasks:**
@@ -1520,7 +1529,7 @@ CACHE/FREQUENCY DRIFT ARTIFACT MUST BE ISOLATED IN PHASE 5.9.
 - [x] Stress dimension A — Frequency: nominal only (3 runs); DID/P-state sweep unavailable (msr module not loaded)
 - [x] Stress dimension B — Worker/load: none, cache hammer, mixed pressure across 5 tape sizes (10 runs)
 - [x] Stress dimension C — Thermal: temperature logged per run (start/end); no controlled warm/cold baseline
-- [ ] Stress dimension D — Voltage: VID sweep unavailable (K10 VID floor); no external Vcore
+- [x] Stress dimension D — Voltage: P4 VID definition path re-opened; P4 ladder/bracket reached decoded 1.1375V with 0 restoration failures; VID+5 selector showed directional basin bias
 - [x] Stress dimension E — Stability: restoration failure rate, checksum mismatch, timing spikes, migration, worker join all tracked; 0 failures across 1.05M trials
 - [x] Gate 1: Baseline Reproduction — Phase 5.8 result reproduces under nominal conditions (PASS)
 - [x] Gate 2: Stress Ladder Validity — 21 ordered stress levels run, distance_to_failure computed, telemetry complete (PASS)
@@ -1540,9 +1549,81 @@ CACHE/FREQUENCY DRIFT ARTIFACT MUST BE ISOLATED IN PHASE 5.9.
 
 ---
 
-## Phase 6: Integration with CAT_CAS Framework
+## Phase 6: Catalytic Fixed-Point Substrate Test — FEEDER ACTIVE
 
-**Objective:** Bridge the bare-metal measurements back to the full CAT_CAS experiment library.
+**Objective:** Test whether the physical catalytic boundary can relax into the unique fixed point `d` of a public Exp50.14-style Fourier map faster than forward construction, without smuggling `d` through the prelude/coupling.
+
+**Current status:** `PHASE6_FEEDER_BASELINES_READY__5_9V_DIRECTIONAL_NOT_DETERMINISTIC`
+
+**Spec:** `phase6/SPEC_PHASE6_FIXED_POINT_SUBSTRATE.md`
+**Feeder run:** `phase6/results/fixed_point_feeder/PHASE6_FIXED_POINT_FEEDER_RUN.md`
+**Runner:** `session_scripts/phase6/phase6_fixed_point_feeder.py`
+
+**Phase 6 frame:**
+
+```
+public (k,b) fixed-point map -> catalytic boundary coupling -> preconditioned basin -> invariant/readout
+```
+
+This is not an algorithmic scan claim. The crossing, if it exists, must appear as `precondition -> basin -> invariant`, with restoration intact and no hidden full-N landscape construction.
+
+**Feeder execution (2026-06-11):**
+
+- Built a Phase 6 fixed-point feeder runner under `session_scripts/phase6/`.
+- Generated public Fourier fixed-point dry-run targets for `n=8,10,12,14,16`.
+- Used `M = 2.00 * sqrt(N)`, still constant-factor `M ~ sqrt(N)`, because `1.00 * sqrt(N)` did not reliably produce unique small-n targets under the fixed `M/4` threshold.
+- A/B dry-run baselines produced unique fixed points for all five target sizes.
+- Mode B restoration discipline is represented as hash-restored reversible work and intentionally costs the same eval count as Mode A.
+- Existing 5.9V selector evidence was audited against the Phase 6 feeder gate.
+
+**A/B baseline dry-run rows:**
+
+| n | N | M | Unique accept | A evals | B restore | Best score x=d |
+|---|---:|---:|---:|---:|---:|---:|
+| 8 | 256 | 32 | 1 | 103 | 1 | 1 |
+| 10 | 1024 | 64 | 1 | 171 | 1 | 1 |
+| 12 | 4096 | 128 | 1 | 1686 | 1 | 1 |
+| 14 | 16384 | 256 | 1 | 4587 | 1 | 1 |
+| 16 | 65536 | 512 | 1 | 19131 | 1 | 1 |
+
+**5.9V basin selector audit:**
+
+| Selector | Current Phase 6 read |
+|---|---|
+| `syscall_prelude` | avoids collapse in 4/4 but splits high/mid; directional, not deterministic |
+| `cache_prelude` | avoids high-carrier in 4/4 but splits collapsed/mid; useful negative/control selector |
+| `branch_prelude` | mostly mid-carrier, noncollapse in 4/4 |
+| `quiet`, `reset_p0`, `collapse_prelude` | split basins; not selectors |
+
+**Gate readout:**
+
+| Gate | Status | Meaning |
+|---|---|---|
+| G1 restoration | `PASS_FOR_MODE_B_DRY_RUN` | Baseline reversible loop discipline exists; hardware Mode C still must verify SHA restore per run |
+| G2 A/B baseline | `PASS_SOFTWARE_BASELINES_EXIST` | A and B have the expected forward-work cost shape |
+| G3 basin -> invariant | `NOT_RUN` | no physical public `(k,b)` coupling to basin yet |
+| G4 no-smuggle | `NOT_RUN` | public-prelude vs `d`-oracle-prelude still required |
+| G5 controls | `NOT_RUN` | wrong/shuffled/destroyed/same-hash-wrong-invariant controls still need hardware coupling |
+| G6 scaling | `BASELINE_ONLY` | no Mode C curve yet |
+| G7 audit | `ACTIVE` | no crossing claim allowed from feeder-only evidence |
+
+**Current conclusion:**
+
+5.7-5.9 can feed Phase 6, but 5.9V is the bottleneck. The live blocker is not lower voltage and not checksum failure. The live blocker is converting directional basin bias into a deterministic selector that can be driven by public `(k,b)` features and rejected by shuffled/wrong/oracle controls. The fixed measurement-core-only VID+5 reproducibility matrix reproduced directional basin control, but public-prelude did not separate strongly enough. The later target-coupled VID+5/VID+6 matrices drove prelude and workload shape from a Phase 6-style public payload; public still failed separation, and VID+6 selected shuffled/nonpublic more strongly than public.
+
+**Next exact hardware run:**
+
+Next 5.9V action, if continuing before Phase 6 coupling: stop rerunning public-prelude variants unless the coupling mechanism changes qualitatively. The current public-prelude family has now failed coupling, duration, VID-offset, and direct target-coupled workload pushes. The baseline matrix already ran at VID+5 with measurement-core-only `DEF_CORES=3` and 10 repeats per selector:
+
+- `syscall_prelude`
+- `cache_prelude`
+- `branch_prelude`
+- `quiet`
+- `public_kb_prelude`
+- `shuffled_kb_prelude`
+- `d_oracle_prelude`
+
+Acceptance for advancing to a true Phase 6 Mode C run: a public-prelude selector must reproducibly choose an answer-predictive basin outside shuffled/null confidence intervals, while the `d_oracle_prelude` is treated only as a smuggle detector and never as evidence for crossing.
 
 ### 6.1 Agent Governance Daemon
 - [ ] Write a Python daemon on ASSFACE3000 that manages the Phenom via SSH

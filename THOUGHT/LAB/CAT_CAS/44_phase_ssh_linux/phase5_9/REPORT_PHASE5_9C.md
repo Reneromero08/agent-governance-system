@@ -142,6 +142,40 @@ The one genuinely new finding, boundary thickness coupling to timing CV, reprodu
 
 The voltage path is now live. Raw K10 P-state VID writes succeeded on P4. A reversible P4 VID ladder reached decoded 1.1375V in follow-up with 0 restoration failures, but the carrier response amplified, collapsed, and switched basins. At VID+5 / 1.1625V, repeated bursts ranged from near-flat carrier (`17.310719` thickness) to high-carrier (`22102.494293` thickness). A selector probe then showed pre-run substrate activity biases the basin: syscall prelude avoided collapse entirely, while cache prelude avoided high-carrier. This is a voltage carrier basin-selection edge, not a checksum failure edge.
 
+## 7.A Phase 6 Basin Bridge
+
+Bridge artifact: `phase5_9/PHASE5_9V_TO_PHASE6_BASIN_BRIDGE.md`
+
+Bridge verdict: `PHASE5_9V_DIRECTIONAL_BASIN_CONTROL__NOT_DETERMINISTIC_ENOUGH_FOR_MODE_C`
+
+Phase 5.9V can feed Phase 6, but not yet as a true Mode C run. Its current role is physical basin labeling:
+
+- `syscall_prelude` avoids collapse in 4/4 runs but splits high/mid.
+- `cache_prelude` avoids high-carrier in 4/4 runs and is useful as a negative/control selector.
+- `branch_prelude` mostly selects mid-carrier and avoids collapse.
+- `quiet`, `reset_p0`, and `collapse_prelude` split basins and are not selectors.
+
+The Phase 6-relevant 5.9V action was pushed through VID+5 reproducibility, public/shuffled/oracle controls, duration, VID-offset comparison, and direct target-coupled workload shaping. Promote to Phase 6 Mode C only if a public-prelude selector reproducibly chooses an answer-predictive basin outside shuffled/null/wrong-target confidence intervals. Current evidence rejects that handoff for this coupling family.
+
+Follow-up attempt: `phase5_9/PHASE5_9V_PHASE6_REPRO_ATTEMPT.md` records a failed first reproducibility launch and the successful retry. The all-core P4 VID+5 setup path failed the MSR-set gate for every row and the target then became unreachable over SSH. The runner was hardened to default P4 VID definition writes to the measurement core only (`DEF_CORES=3`) and to pass P4 definition values to `wrmsr` with explicit `0x` prefixes. The fixed 70-row run completed with 0 restoration failures and verdict `PHASE5_9V_DIRECTIONAL_REPRODUCED_NOT_DETERMINISTIC`.
+
+Completed Phase 6-facing 5.9V artifact: `phase5_9/results/k10_voltage_probe/p4_vid5_phase6_basin_repro/PHASE5_9V_PHASE6_BASIN_REPRO.md`
+
+Key result: `syscall_prelude` was the strongest high-basin bias (7/10 high), but public-prelude did not beat quiet or separate from shuffled strongly enough. Directional basin control reproduced; deterministic Phase 6 Mode C handoff did not.
+
+Additional pushes after the 70-row VID+5 matrix:
+
+- Public-prelude refinement at VID+5: 90 rows, 0 restoration failures, verdict `PHASE5_9V_DIRECTIONAL_REPRODUCED_NOT_DETERMINISTIC`. Public+syscall did not beat shuffled+syscall.
+- Long-prelude VID+5 run: 50 rows, 0 restoration failures, verdict `PHASE5_9V_DIRECTIONAL_REPRODUCED_NOT_DETERMINISTIC`. Longer conditioning did not separate public from shuffled.
+- VID+4 compact comparison: 30 rows, 0 restoration failures, verdict `PHASE5_9V_DIRECTIONAL_REPRODUCED_NOT_DETERMINISTIC`.
+- VID+6 compact comparison found a temporary public+syscall candidate (4/5 mid, 0 collapse), but the 70-row confirmation did not hold: public+syscall became collapsed 6/10 and public bare matched shuffled on top-rate.
+- Target-coupled VID+5 matrix: 40 rows, 0 restoration failures, verdict `PHASE5_9V_DIRECTIONAL_REPRODUCED_NOT_DETERMINISTIC`. The public Phase 6 payload shaped prelude/workload directly, but public still did not separate from shuffled/wrong-target controls.
+- Target-coupled VID+6 matrix: 40 rows, 0 restoration failures, verdict `PHASE5_9V_SELECTOR_REPRODUCIBLE_NONPUBLIC`. Shuffled bare reached mid 4/5 (top rate 0.800), while public bare and public+syscall stayed at top rate 0.600.
+
+Pushed boundary verdict: `PHASE5_9V_PUBLIC_PRELUDE_NOT_DETERMINISTIC_AFTER_COUPLING_DURATION_VID_SWEEP_AND_TARGET_COUPLING`.
+
+Current blocker: `PUBLIC_TARGET_COUPLING_DOES_NOT_SELECT_PUBLIC_BASIN`.
+
 ## 8. The Phase 5.9 Trilogy: Complete
 
 | Phase | Runs | Trials | Key Result |

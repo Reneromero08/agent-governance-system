@@ -35,3 +35,31 @@ The hardened harness no longer scales the boundary proxy by class label. Same-fi
 ## Interpretation
 
 Phase 5.7 supports computational boundary deformation under measured bounded runtime load: the carrier boundary proxy deforms while answer-predictive exclusion survives, and within-load residual correlation tracks carrier structure more strongly than jitter. It does not claim physical holography, AdS/CFT, quantum coherence, physical Kuramoto, Landauer violation, zero heat, or thermodynamic entropy reduction.
+
+## Phase 6 Bridge
+
+Phase 5.7 is the invariant/null discipline feeder for Phase 6, not the physical substrate run itself.
+
+Mapping into `phase6/SPEC_PHASE6_FIXED_POINT_SUBSTRATE.md`:
+
+- G1 restoration: supported at the logical/control level by restored tape and same-final-hash wrong-answer exclusion.
+- G3 basin -> invariant: not complete; 5.7 can score invariant strength and answer correlation once 5.9V supplies a basin label.
+- G5 controls: same-final-hash wrong-answer, wrong residual, destructive-write, and reversible-null machinery already exist and should be extended to same-hash wrong-invariant Phase 6 controls.
+- Claim boundary: 5.7 remains computational carrier geometry only. It does not prove a physical Mode C crossing.
+
+Required 5.7 push for Phase 6:
+
+1. Add `basin_id` from the 5.9V carrier selector to each invariant row.
+2. Add `fixed_point_d` and public target hash from the Phase 6 public `(k,b)` map.
+3. Score whether invariant strength predicts `d` beyond shuffled-map and same-hash wrong-invariant nulls.
+4. Emit a Phase 6-ready invariant table with:
+   - restoration hash pass/fail
+   - basin id
+   - invariant family
+   - invariant strength
+   - answer / `d` correlation
+   - null effect size
+
+Current bridge verdict:
+
+`PHASE5_7_READY_AS_PHASE6_INVARIANT_SCORER__WAITING_ON_5_9V_BASIN_LABELS`

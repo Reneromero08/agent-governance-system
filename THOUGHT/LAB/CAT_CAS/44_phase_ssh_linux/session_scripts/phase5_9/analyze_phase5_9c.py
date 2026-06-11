@@ -20,15 +20,20 @@ def main():
 
     cycles = []
     restores = []
+    skipped_rows = 0
     with open(raw_csv, 'r') as f:
         reader = csv.DictReader(f)
         for row in reader:
+            corrected = row.get('rdtsc_cycles_corrected')
+            restore_ok = row.get('restore_ok')
+            if corrected in (None, ''):
+                skipped_rows += 1
+                continue
             try:
-                cycles.append(float(row.get('rdtsc_cycles_corrected', 0)))
-                restores.append(int(row.get('restore_ok', 1)))
-            except (ValueError, KeyError):
-                cycles.append(0.0)
-                restores.append(1)
+                cycles.append(float(corrected))
+                restores.append(int(restore_ok if restore_ok not in (None, '') else 1))
+            except (ValueError, TypeError):
+                skipped_rows += 1
 
     if len(cycles) < 64:
         print(f"SKIP: only {len(cycles)} trials")
@@ -108,13 +113,18 @@ def main():
     raw_means = []
     with open(raw_csv, 'r') as f:
         reader = csv.DictReader(f)
-        for i, row in enumerate(reader):
-            if i % wsize == 0:
+        raw_i = 0
+        for row in reader:
+            raw_value = row.get('rdtsc_cycles_raw')
+            if raw_value in (None, ''):
+                continue
+            if raw_i % wsize == 0:
                 raw_means.append([])
             try:
-                raw_means[-1].append(float(row.get('rdtsc_cycles_raw', 0)))
-            except (ValueError, KeyError):
-                raw_means[-1].append(0.0)
+                raw_means[-1].append(float(raw_value))
+                raw_i += 1
+            except (ValueError, TypeError):
+                continue
 
     raw_thickness = 0.0
     if len(raw_means) >= 2:
@@ -167,7 +177,8 @@ def main():
                          'raw_thickness', 'spike_free_thickness',
                          'stable_thickness', 'high_spike_thickness',
                          'flicker_mismatches', 'flicker_detected',
-                         'p99_p50_ratio', 'cycle_cv', 'spike_rate'])
+                         'p99_p50_ratio', 'cycle_cv', 'spike_rate',
+                         'skipped_malformed_rows'])
         p99 = float(np.percentile(cycles, 99))
         p50 = float(np.percentile(cycles, 50))
         p99p50 = p99 / max(p50, 1e-6)
@@ -179,7 +190,7 @@ def main():
                          total_restore_ok, total_restore_fail, 0.0,
                          raw_thickness, sf_thickness, stable_thickness, hs_thickness,
                          flicker_mismatches, flicker_detected,
-                         p99p50, cv_global, spike_rate])
+                         p99p50, cv_global, spike_rate, skipped_rows])
 
     # ── Per-window CSV ───────────────────────────────────────
     win_csv = os.path.join(indir, 'window_boundary_geometry.csv')
@@ -196,6 +207,8 @@ def main():
     print(f"  Geometry: thickness={thickness:.2f} raw={raw_thickness:.2f} sf={sf_thickness:.2f} stable={stable_thickness:.2f}")
     print(f"  Flicker: mismatches={flicker_mismatches} detected={flicker_detected}")
     print(f"  p99/p50={p99p50:.4f} cv={cv_global:.4f} spike_rate={spike_rate:.6f}")
+    if skipped_rows:
+        print(f"  Skipped malformed rows: {skipped_rows}")
 
 if __name__ == '__main__':
     main()
