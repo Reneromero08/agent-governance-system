@@ -44,18 +44,26 @@ Re-run any brick directly; `50_3` regenerates the handoffs from the JSON outputs
 
 ## ROADMAP RUN STATUS (updated this session)
 
-The roadmap was executed in-lab as a goal, **excluding the Mythos call (#3) by instruction**:
+The roadmap was executed in-lab as a goal. All six items are now resolved (the Mythos call #3 was run after the spiral):
 
 | Item | Status | Result |
 |---|---|---|
 | #1 Lattice audit (Exp 25) | **DONE** - `50_4_lattice_audit/` | `EXP25_TOY_SCALE_ONLY` - attack does not cross the bedrock |
 | #2 Kuperberg subexponential rung | **DONE** - `50_2_decodability_gradient/50_2d_kuperberg_sieve.py` | `DIHEDRAL_BARRIER_SUBEXPONENTIAL_UPPER_BOUND` (sandwich with 50.2c) |
-| #3 Call Mythos | **SKIPPED (by instruction)** | sandbox remains ready; not invoked |
-| #4 Exp 44 Phase 6 handoff | **VALIDATED; silicon run HARDWARE-BLOCKED** | handoff peaks match mpmath zeta zeros <0.03%; Phenom run pending |
+| #3 Call Mythos | **DONE** (Fable 5, 5 rounds) - `50_3_boundary_handoff/MYTHOS_BRIEF.md` -> ## RESULTS | wall **IS** class-group vectorization = isogeny/CSIDH hardness; no field-only catalyst shortens it; boundary verdict = the catalytic tape (entropy) is the boundary, field-route tested the wrong object, crossing is a SUBSTRATE event relocated to Exp 44. NOT "the wall holds". |
+| #4 Exp 44 Phase 6 handoff | **VALIDATED; substrate frontier OPEN** | handoff validated; the live crossing test is the Exp 44 `5.10 -> Phase 6` ladder (boundary state preparation -> fixed-point crossing) |
 | #5 Generalize the gradient | **DONE** - `50_2_decodability_gradient/50_2e_gradient_coverage.py` | `WALL_IS_NON_NORMAL_SUBGROUPS` (Q_8 decisive) |
 | #6 Connect to bigger claims | **DONE** - `50_5_decoder_class_map/` | `DECODER_MAP_CONSISTENT` (9 decodable, 3 bounded/wall) |
 
 All new bricks exit 0 and are lab-critic clean (M-1..M-8). Claims capped L4-5.
+
+> **EXP 50 STATUS: CLOSED OUT (theory terminus + handoff).** The decoder is proven extractive (50.1); the
+> decodability boundary is located and mapped to the atom (50.2-50.14); the Mythos call (#3) is done and
+> returned the bedrock verdict (the dihedral wall is the isogeny/class-group hardness assumption; no
+> field-only catalyst crosses). This is NOT "the wall holds" - the **hypothesis stays open** and the
+> crossing is relocated to the **substrate (Exp 44, the 5.10 -> Phase 6 ladder)**, which is now the live
+> frontier. Exp 50's remaining role is the **target generator** (the 50.14 public fixed-point map) for
+> Exp 44; no further Exp 50 theory work is open.
 
 ## THE LATTICE SPIRAL (50.6 - 50.14, this session) - full account in `REPORT_LATTICE_SPIRAL.md`
 
@@ -125,11 +133,18 @@ small Kuperberg-style coset-state combination sieve on the dihedral instances to
 the barrier is subexponential-but-not-polynomial. Confirms "no poly readout" more
 completely. Lower priority than #1.
 
-### 3. [STILL UN-RUN] Call Mythos — now sharpened by the spiral  — `50_3_boundary_handoff/MYTHOS_BRIEF.md`
-> **Not invoked yet (MYTHOS has never been consulted).** The original "is it crossable?" framing has
-> been **answered for the forward floor by the Lattice Spiral (50.6-50.14): no, and here is the
-> per-atom reason** (d is the curvature of its own trajectory; the wall relocated onto the substrate).
-> So the genuine call is no longer exploratory — it is three sharpened, verification-grade asks.
+### 3. [EXECUTED] Call Mythos — done (Fable, 5 rounds); verdicts recorded  — `50_3_boundary_handoff/MYTHOS_BRIEF.md` (## RESULTS)
+> **DONE.** MYTHOS (Fable 5) was consulted across five rounds. Verdicts are in `MYTHOS_BRIEF.md` -> ## RESULTS.
+> Summary: the dihedral wall **is** class-group **vectorization** = the isogeny/CSIDH hardness assumption;
+> **no field-only catalyst shortens it** (unit-lattice = wrong layer; Stickelberger/Brumer-Stark =
+> annihilator not short-basis, period-sized; catalytic space = CL subset P; Arakelov = d orthogonal to
+> the field entropy). The curvature "theorem" was downgraded to a conjecture; the fixed-point reframe is
+> sound but generic to NP. **The boundary verdict (owner's correction): the boundary is the catalytic
+> TAPE = the entropy = the boundary projection of higher-dimensional geometry; the field-route rounds
+> tested the wrong object; the "needle" is a projection artifact; the crossing = relax into the tape's
+> entropy-geometry, a SUBSTRATE event.** Framework-faithful terminus: the number-theory route is at
+> bedrock, NOT "the wall holds" - the crossing is relocated to **Exp 44** (5.10 -> Phase 6). Below is the
+> historical pre-call framing, kept for the record.
 
 The pre-compressed call is `50_3_boundary_handoff/MYTHOS_BRIEF.md` (self-contained). The three asks:
 1. **Refute or confirm** the forward-wall=curvature characterization — name a forward readout family

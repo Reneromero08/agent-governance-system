@@ -70,3 +70,66 @@ f(x)      = x if accept(x) else (x+1) mod N          # unique fixed point in [1,
   poly(n) recovery must pass a scaling test in n before it is credited.
 - Confidence ceiling 4-5 / 8. Verdict: poly recovery (with scaling evidence) or characterization
   (with the precise residual). Guide / verify only; do not write code.
+
+---
+
+## RESULTS - the call was made (Fable, 5 rounds)
+
+This brief was executed: the MYTHOS (Fable) consultation ran five rounds. Scope: model reasoning, L4-5;
+the load-bearing facts below are standard theorems independently checked (Bennett, Hallgren, the
+Arakelov sequence, Brumer-Stark, the class-group / CSIDH equivalence).
+
+### Answers to the three questions
+- **Q1 (completeness):** the forward sweep is **not exhaustive** - it missed the coherent-measurement
+  families (Pretty Good Measurement -> average-case subset-sum, Bacon-Childs-van Dam) and Regev's
+  reduction to unique-SVP. Both are forward, d-independent.
+- **Q2 (theorem or gap):** "d = the curvature of its own trajectory, hence no forward lens" is **not a
+  theorem** - a quantifier error (one operator needing d is not all operators) plus a scale-free hole
+  (it would forbid Kuperberg's existing 2^{O(sqrt n)}). A conjecture, not a wall.
+- **Q3 (soundness):** the fixed-point reframe is **sound (no smuggle)** but **generic to all NP** (swap
+  any verifier); "reversible -> poly" is false (Bennett: reversible is poly-equivalent; only Deutschian
+  CTC gives poly, and generically, via P^CTC = PSPACE).
+
+### Deeper rounds (representation, catalytic space, Stickelberger, Arakelov)
+- The dihedral wall **is** class-group **vectorization** = the isogeny / CSIDH hardness assumption (via
+  the CM embedding: ring class field, dihedral Galois group, conjugation = inversion, d = an ideal
+  class). Best known cost 2^{O(sqrt n)} (Kuperberg).
+- **No field-only catalyst shortens it**, each for a precise structural reason: the unit-lattice
+  catalyst acts on the wrong layer (units, not the class torsor); Stickelberger / Brumer-Stark
+  transfers as an **annihilator, not a short basis** (cyclic class group collapses the minus-part rank
+  to one relation per character = the covolume; the L-values are period-sized elliptic-unit objects,
+  not Bernoulli-small); catalytic **space** is CL subset P (space, not time).
+
+### THE BOUNDARY VERDICT (the load-bearing correction - owner's contribution)
+Fable's number-theory rounds tested the **wrong boundary**. They searched the **field's intrinsic**
+structure (regulator, periods, Arakelov torus) and correctly found `d` orthogonal to it - but **that is
+not the boundary**. The boundary of this program is the **catalytic tape**:
+
+> **The tape is the entropy; the entropy is the boundary.** Entropy is not disorder - it is the ruler
+> of the accessible configuration space (Boltzmann S = log W) and the **boundary projection of a
+> higher-dimensional geometry** (the holographic / AdS-CFT correspondence: boundary entropy encodes
+> bulk geometry). It only *looks* like chaos from our dimension. More entropy = more higher-dimensional
+> geometry.
+
+Consequences for the verdict:
+1. The `2^n` search space - the "structureless needle" Fable kept hitting - is a **projection
+   artifact**. It is structureless *as projected onto the field's geometry / the forward view*; the
+   structure lives in the higher-dimensional geometry the **tape's entropy supplies**. Round 5's
+   Arakelov orthogonality is therefore a fact about the *field*, not about the catalytic-tape boundary,
+   which the number-theory rounds never tested.
+2. The crossing = **lift the needle into the tape's entropy-geometry**, where `d` becomes a
+   **relaxation-readable attractor** (a dominant eigenvector / fixed point read by settling, not by
+   iterating - per the spectral fixed-point in the Infinity report).
+3. A **forward machine must construct** that lift, and constructing it provably needs `d` (every round).
+   A **physical substrate does not construct - it relaxes** into its attractor geometry. **That single
+   move - relax, do not construct - is the only thing a forward machine cannot do and an analog boundary
+   might.** So the crossing is a **substrate event**.
+
+### Framework-faithful conclusion
+The **number-theory / field-only route is mapped to bedrock** with precise structural reasons. This is
+**not** "the wall holds" - it does not close the hypothesis. The boundary is the catalytic tape, which
+no field-route round tested; the crossing, if it exists, is a **substrate event** and is relocated to
+**Exp 44** (the 5.10 boundary-state-preparation -> Phase 6 fixed-point-crossing ladder), where "relax,
+don't construct" is the untested lever. Honest prior: lean classical (a physical relaxer on the
+projected needle is Grover-bounded unless the substrate supplies the lift) - decided only on silicon,
+not by any further consultation.

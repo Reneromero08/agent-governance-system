@@ -76,7 +76,7 @@ This is achieved using **reversible computing**:
 | 5D Floquet Oracle | `40_5d_floquet_oracle/` | PyTorch | DTC pi-mode melting |
 | ToE Bulletproof | `41_toe_bulletproof/` | PyTorch | TM chain, cybernetic loop, 6 concerns |
 | Computational Event Horizon | `42_computational_event_horizon/` | mpmath + Rust | Floating-point black holes, ULTRA shellcode, COSMOS dark matter, Hawking evaporation |
-| The Decoder | `50_the_decoder/` | numpy/torch | Decoder proven EXTRACTIVE (not lookup); decodable = abelian-HSP + topological invariants; irreducible wall = lattice (LWE/unique-SVP) |
+| The Decoder | `50_the_decoder/` | numpy/torch | **CLOSED OUT.** Decoder proven EXTRACTIVE (not lookup); decodable = abelian-HSP + topological invariants; wall mapped to bedrock = class-group **vectorization** / isogeny (CSIDH) hardness; **Mythos (Fable) call done** (no field-only catalyst crosses); boundary = the catalytic tape (entropy); crossing is a SUBSTRATE event relocated to Exp 44 (5.10 -> Phase 6). Not "the wall holds" - hypothesis stays open at the substrate. |
 
 ---
 

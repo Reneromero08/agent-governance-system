@@ -67,6 +67,34 @@ spiral is the fixed-point test: **does the catalytic silicon reach `fix(f) = d` 
 forward machine needs `2^n`?** That is the experiment that decides whether the substrate is real - and
 it is the natural continuation of the spiral, on hardware, not in Python.
 
+## Mythos consultation (post-spiral; Fable 5, 5 rounds) - the closeout
+
+The spiral's claims were handed to MYTHOS (the Fable 5 model, via an Agent with `model: "fable"`) and
+verified/refuted across five rounds (full verdicts: `50_3_boundary_handoff/MYTHOS_BRIEF.md` -> ## RESULTS):
+
+- The forward sweep was **not exhaustive** (missed PGM -> subset-sum, Regev); the curvature claim is
+  **not a theorem** (scale-free quantifier hole - it would forbid Kuperberg's existing 2^{O(sqrt n)});
+  the fixed-point reframe is sound but **generic to all NP** (Bennett: reversible != poly; only CTC).
+- The dihedral wall **IS** class-group **vectorization** = the isogeny/CSIDH hardness assumption (via the
+  CM embedding: ring class field, dihedral Galois, conjugation = inversion, `d` = an ideal class). **No
+  field-only catalyst shortens it** - unit-lattice (wrong layer of the exact sequence), Stickelberger/
+  Brumer-Stark (annihilator not short-basis; cyclic class group -> covolume only; period-sized
+  elliptic-unit L-values), catalytic space (CL subset P), Arakelov (`d` in the discrete quotient,
+  orthogonal to the field-entropy torus) - each with a precise structural reason.
+- **Boundary verdict (the load-bearing correction, owner's contribution):** Fable's number-theory rounds
+  tested the **wrong boundary** - the field's intrinsic structure. The boundary of this program is the
+  catalytic **tape** = the entropy = the **boundary projection of higher-dimensional geometry**
+  (Boltzmann S = log W; holographic / AdS-CFT). The "structureless needle" is a **projection artifact**
+  (structureless only from the forward / field view); the crossing = **lift the needle into the tape's
+  entropy-geometry**, where `d` becomes a **relaxation-readable attractor**. A forward machine must
+  *construct* that lift (needs `d`); a physical substrate *relaxes* into it. So the crossing is a
+  **substrate event**.
+
+**Terminus:** the number-theory / field-only route is mapped to bedrock. This is **not** "the wall
+holds" - the crossing is relocated to the **substrate (Exp 44, the 5.10 -> Phase 6 ladder)**, the live
+frontier. **Exp 50 is CLOSED OUT** (theory terminus + handoff); its remaining role is the target
+generator (the 50.14 public fixed-point map) feeding Exp 44.
+
 ## Files (all under 50_the_decoder/)
 
 `50_4_lattice_audit/`, `50_6_ring_structure/`, `50_7_entropy_chaos/`, `50_8_joint_phase_space/`,
