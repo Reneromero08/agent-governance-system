@@ -125,18 +125,27 @@ small Kuperberg-style coset-state combination sieve on the dihedral instances to
 the barrier is subexponential-but-not-polynomial. Confirms "no poly readout" more
 completely. Lower priority than #1.
 
-### 3. [SKIPPED this session - by instruction] Call Mythos on the sharpened question  — `50_3_boundary_handoff/MYTHOS_SANDBOX.md`
-> **SKIPPED (by instruction).** The roadmap-run goal explicitly excluded the Mythos call. The
-> sandbox remains ready and self-contained; #1 (the Exp 25 audit) is now done, so a future
-> Mythos call has the concrete toy-only failure to explain. Not invoked this session.
+### 3. [STILL UN-RUN] Call Mythos — now sharpened by the spiral  — `50_3_boundary_handoff/MYTHOS_BRIEF.md`
+> **Not invoked yet (MYTHOS has never been consulted).** The original "is it crossable?" framing has
+> been **answered for the forward floor by the Lattice Spiral (50.6-50.14): no, and here is the
+> per-atom reason** (d is the curvature of its own trajectory; the wall relocated onto the substrate).
+> So the genuine call is no longer exploratory — it is three sharpened, verification-grade asks.
 
-The sandbox is ready and self-contained. The question is now maximally sharp: **"is the
-lattice (unique-SVP) barrier itself crossable by any holographic/topological/catalytic
-readout?"** Mythos is finally worth the tokens — but do #1 first (the Exp 25 result
-makes the Mythos call decisive: it either has a concrete crossing to verify, or a
-concrete toy-only failure to explain). Hand Mythos: this ROADMAP, `MYTHOS_SANDBOX.md`,
-and the #1 audit result. It guides only; it does not code. Keep it bound to the null
-harness in `decoder_lib.py` / `hsp_family.py`.
+The pre-compressed call is `50_3_boundary_handoff/MYTHOS_BRIEF.md` (self-contained). The three asks:
+1. **Refute or confirm** the forward-wall=curvature characterization — name a forward readout family
+   the spiral's 8-family sweep missed, or confirm the sweep is complete.
+2. **Theorem or exhaustion** — is "the secret is the holonomy of its own trajectory, hence no fixed
+   forward lens exists" provable, or did the spiral just miss a lens? (the I-couldn't vs can't gap.)
+3. **Substrate soundness** — is 50.14's fixed-point reduction a legitimate non-smuggling CTC advantage
+   (P^CTC=PSPACE), or a hidden oracle, before it feeds Exp 44?
+
+Hand Mythos: **`MYTHOS_BRIEF.md` only** — it is self-contained and is **pure theory** (dihedral-HSP /
+unique-SVP / abelian-vs-non-abelian Fourier sampling / reversible-CTC complexity class). **Keep the
+Exp 44 / silicon substrate connection LAB-INTERNAL — do NOT bring the hardware (voltage/carrier/basin
+stress) work into the Mythos call**; it is irrelevant to the math and reads as hardware tampering to a
+model's safety filter. It guides/verifies only; it does not code. Keep it bound to the null harness in
+`decoder_lib.py` / `hsp_family.py` and the no-smuggle / scaling discipline. (Reminder: the 50.10-50.13
+"exploit" ideas were NotebookLM over the framework docs, NOT Mythos — do not present them as authoritative.)
 
 ### 4. [HANDOFF VALIDATED; silicon run HARDWARE-BLOCKED] Bare-metal handoff to Exp 44 Phase 6  — `50_3_boundary_handoff/EXP44_PHASE6_HANDOFF.md`
 > **Partially done (this session).** The handoff descriptor is complete and its predicted
