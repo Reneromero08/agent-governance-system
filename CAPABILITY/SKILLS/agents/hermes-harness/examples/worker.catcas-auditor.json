@@ -1,0 +1,15 @@
+{
+  "worker_id": "catcas-auditor",
+  "role": "auditor",
+  "backend": "hermes_responses",
+  "transport": "runs",
+  "conversation": "ccc:ags:catcas-auditor",
+  "session_key": "agent:ags:catcas",
+  "model": "hermes-agent",
+  "workspace": "/repo",
+  "read_roots": ["THOUGHT/LAB/CAT_CAS/phase5_9"],
+  "write_roots": ["THOUGHT/LAB/CAT_CAS/phase5_9"],
+  "deny_write_roots": ["CAPABILITY/", "TOOLS/", ".git/", ".hermes/"],
+  "search_policy": "artifact_only",
+  "branch_policy": "forbidden"
+}

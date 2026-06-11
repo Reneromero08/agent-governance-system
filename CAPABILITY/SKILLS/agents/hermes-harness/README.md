@@ -1,10 +1,24 @@
 # Hermes Harness Skill Folder
 
+> **Current / recommended path:** the **Worker API control plane** — a faithful
+> `/goal` replica over the HTTP API: persistent workers that execute their own
+> code, an independent **deepseek-v4-flash** judge driving done/continue, an
+> optional deterministic `verify_command` gate, and a git write-firewall. See
+> **[WORKER_API.md](WORKER_API.md)**. The sections below document the original
+> loaded-skill (`delegate_task`) and `/v1/responses` paths, which still work but
+> are not the recommended way to run autonomous goal loops.
+
 Drop-in repo folder that lets Hermes Agent act as a task harness for other agents.
 
-It gives you three operating modes and two transports:
+> **The modes and transports in this section are LEGACY.** They predate the
+> Worker API and have no goal-judge loop / execution-with-approval / write-firewall.
+> For autonomous goal loops use the **[Worker API control plane](#worker-api-control-plane-recommended)**
+> (next section). The content here remains accurate for its original uses
+> (one-shot `delegate_task` fan-out, prompt generation, single governed turns).
 
-**Transports:**
+It gives you three (legacy) operating modes and two transports:
+
+**Transports (legacy):**
 | Transport | Endpoint | Key | Dispatches /goal |
 |-----------|----------|-----|-----------------|
 | `responses` (default) | `POST /v1/responses` | `conversation` | No |
@@ -17,13 +31,41 @@ Real Hermes `/goal` only dispatches through the CLI (`/goal` slash command in `h
 - `conversation` — `/v1/responses` named conversation chain. Stateless persistence.
 - `session_key` — `X-Hermes-Session-Key` header. Long-term memory scope.
 
-**Modes:**
+**Modes (legacy — for goal loops use the Worker API instead):**
 
 1. **Inside Hermes**: install `skills/hermes-harness/` as a Hermes skill and invoke `/hermes-harness`. Use `persistent_worker` mode with named conversations for multi-phase continuity, or use `delegate_task` for disposable isolated subagents.
 2. **From another agent or script**: call `skills/hermes-harness/scripts/hermes_harness.py`. It sends a structured task request via `/v1/responses` to a local Hermes API server with named `conversation` support for persistent multi-turn context.
 3. **Persistent workers**: Set `mode: persistent_worker` and a `conversation` name. The worker continues from prior context without spawning `delegate_task`. Use this for phase 1 → 2 → 3 → pause → 5 continuity.
 
 This folder is intentionally conservative: named conversations for persistent workers, flat delegation for disposable subagents, explicit context packets, and final synthesis by the parent agent.
+
+## Worker API control plane (recommended)
+
+The modes above make the *manager* the harness. For persistent delegated
+cognition, invert it: a small **Worker API is the harness**, and any manager
+(OpenCode, a script, a cron) is just a client. See **[WORKER_API.md](WORKER_API.md)**
+for the full architecture.
+
+```text
+Manager Agent -> Worker API -> Persistent Worker Registry
+              -> Harness-managed goal loop -> Hermes /v1/responses (named conversation)
+              -> Artifact manifests / logs / state
+```
+
+- `scripts/worker_control.py` — `WorkerController`: registry, goal loop, judge, manifests, logs, CLI.
+- `scripts/worker_api.py` — stdlib HTTP API over the controller.
+- `scripts/hermes_run_transport.py` — async-run transport (executes code) + the judge.
+- The loop is a faithful **Hermes `/goal` replica** (native `/goal` isn't on the
+  HTTP API): each turn an aux judge model (**deepseek-v4-flash** by default)
+  returns done/continue; stop on done, `max_turns`, or a manager verdict.
+  Optional `verify_command` (deterministic gate), `judgment_mode="manager"`, and
+  a postflight git **write-firewall** (`auto_revert`). See WORKER_API.md.
+
+```bash
+python scripts/worker_api.py --port 8770          # start the API
+python scripts/worker_control.py worker-create --worker-id catcas-auditor ...
+python scripts/worker_control.py task-submit --worker-id catcas-auditor --task "..." --max-turns 6
+```
 
 ## Design principles
 

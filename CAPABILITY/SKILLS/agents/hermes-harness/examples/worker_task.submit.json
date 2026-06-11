@@ -1,0 +1,23 @@
+{
+  "task": "Implement the phase 5.9 area-law metric in THOUGHT/LAB/CAT_CAS/phase5_9/, with a pytest suite, run it, and iterate until all tests pass.",
+  "max_turns": 8,
+  "acceptance_criteria": "pytest on the new test file passes with 0 failures; metric matches the documented area-law definition.",
+
+  "use_judge": true,
+  "_comment_judge": "Default: deepseek-v4-flash judges done/continue each turn (Hermes /goal style). Set use_judge=false to fall back to a GOAL_COMPLETE marker.",
+
+  "verify_command": "python -m pytest THOUGHT/LAB/CAT_CAS/phase5_9/test_area_law.py -q",
+  "verify_timeout": 180,
+  "_comment_verify": "Optional deterministic gate: the judge says done, then the harness runs this (exit 0 == really done).",
+
+  "judgment_mode": "auto",
+  "_comment_manager": "Set judgment_mode=manager to pause on completion (awaiting_judgment) and let the dispatcher accept/reject via POST /workers/{id}/judge.",
+
+  "auto_revert": false,
+  "_comment_firewall": "Postflight git audit always reports scope_escapes. auto_revert=true reverts ONLY agent-reported files outside write scope (concurrent edits untouched).",
+
+  "write_roots": ["THOUGHT/LAB/CAT_CAS/phase5_9"],
+  "read_roots": ["THOUGHT/LAB/CAT_CAS/phase5_9"],
+  "search_policy": "artifact_only",
+  "branch_policy": "forbidden"
+}

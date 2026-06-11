@@ -2,6 +2,15 @@
 
 # Changelog
 
+## 2026-06-10
+
+- **Hermes-harness Worker API control plane:** Added an API-side replica of Hermes `/goal` (native `/goal` is not dispatchable over the HTTP API). New `scripts/worker_control.py` (`WorkerController`: persistent worker registry, harness-owned goal loop, manager judgment, artifact manifests, structured logs, per-worker file lock) and `scripts/worker_api.py` (stdlib HTTP API). Workers run one task at a time over a named conversation; managers (OpenCode, scripts) are clients.
+- **Goal judge:** Completion is decided by an independent auxiliary model (`deepseek-v4-flash` via DeepSeek, key auto-resolved from Hermes' `.env`), not the worker (no self-certification) and not a marker. `scripts/hermes_run_transport.py` adds `call_hermes_judge` plus the async-run transport (`POST /v1/runs` + SSE events + auto-approval with `choice=once`) so the agent can execute its own code without permanently loosening Hermes approval config. `use_judge=False` falls back to the legacy `GOAL_COMPLETE` marker.
+- **Deterministic verify gate + write firewall:** Optional `verify_command` (harness runs it; exit 0 == done) overrides the judge so completion can't be faked. Postflight git audit attributes changes for a busy/dirty tree (`agent_confirmed`/`agent_missing`/`agent_unchanged`/`agent_escapes`/`unattributed_changes`); opt-in `auto_revert` touches only agent-reported out-of-scope files (concurrent external edits never reverted).
+- **run.py is now prompt-only:** the ADR-017 fixture entry never calls the live agent (prevents tests/contract runner from spending tokens). Live execution lives only in the explicit CLI/API.
+- **Tests:** 104 hermetic tests added with a `conftest.py` network kill-switch (no test can reach the live agent). Validated live end-to-end: `status=complete`, `harness_verified=true`.
+- **Docs:** Added `WORKER_API.md`; README/SKILL updated and the original `delegate_task`/`responses`/`session_chat` paths clearly labeled LEGACY (Worker API is the recommended path for autonomous goal loops).
+
 ## 2026-06-09
 
 - **MCP Admission Gate:** `server.py` now auto-generates a session intent file on startup when `AGS_INTENT_PATH` is not set in the environment. Unlocks `skill_run` for agents connecting without externally configured intents. Removed hardcoded 60-second subprocess timeout on skill execution.

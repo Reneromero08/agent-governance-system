@@ -30,6 +30,12 @@ metadata:
 ---
 # Hermes Harness
 
+> **For autonomous goal loops, use the Worker API control plane** (a `/goal`
+> replica over the HTTP API: persistent workers, deepseek-v4-flash judge,
+> verify gate, git firewall) — see **[WORKER_API.md](WORKER_API.md)** and Entry
+> Mode 3 below. The `delegate_task` content below is the original loaded-skill
+> path, still valid but not the recommended way to run goal loops.
+
 ## When to Use
 
 Use this skill when the task is too wide for a single reasoning thread and can be split into independent subtasks, such as repo audits, parallel research, test triage, migration planning, feature decomposition, multi-file code review, documentation passes, benchmark review, or synthesis across several evidence streams.
@@ -38,13 +44,21 @@ Do not use this skill for trivial single-step work, questions that need one loca
 
 ## Entry Modes
 
-This skill has two entry paths:
+There are three entry paths. **Use Mode 3 (Worker API) for autonomous goal
+loops** — it is the current, validated path. Modes 1 and 2 are **LEGACY**: they
+predate the Worker API and have no judge loop, no execution-with-approval, and
+no write-firewall. They still work for their original purposes (one-shot
+delegation / prompt generation) but should not be used to run goal loops.
 
-### 1. Loaded Skill (opencode `skill` tool)
-The parent agent loads the skill instructions, then follows the procedure below using its own delegation tools (`task` in opencode, `delegate_task` in Hermes). The parent IS the harness.
+Decision: autonomous goal loop / "keep working until done" → **Mode 3**.
+Disposable one-shot fan-out inside Hermes → Mode 1. Just generate a prompt or a
+single governed turn → Mode 2.
 
-### 2. Governance Pipeline (`skill_run` / CLI)
-Calls `run.py` which routes to the Hermes API server (default: `http://127.0.0.1:8643/v1`). Uses `/v1/responses` with named `conversation` for persistent multi-turn context — Hermes auto-chains to the latest stored response.
+### 1. Loaded Skill (opencode `skill` tool) — LEGACY
+The parent agent loads the skill instructions, then follows the procedure below using its own delegation tools (`task` in opencode, `delegate_task` in Hermes). The parent IS the harness. No goal-judge loop; the parent decides when to stop.
+
+### 2. Governance Pipeline (`skill_run` / CLI) — LEGACY
+Calls `run.py` which routes to the Hermes API server (default: `http://127.0.0.1:8643/v1`). Uses `/v1/responses` with named `conversation`. NOTE: `run.py` is intentionally **prompt-only** (it never calls the live agent — see run.py); it does not run a goal loop. For live autonomous runs use Mode 3.
 
 Input JSON shape for skill_run:
 ```json
@@ -64,6 +78,36 @@ Input JSON shape for skill_run:
 
 The Hermes API server must be running (check: `curl http://127.0.0.1:8643/v1/models`).
 Uses `HERMES_API_KEY` or `API_SERVER_KEY` environment variable for authentication.
+
+### 3. Worker API Control Plane (`worker_api.py` / `worker_control.py`) — RECOMMENDED
+
+The two paths above make the *manager* the harness. The Worker API inverts this:
+a small control plane becomes the harness, and any manager (OpenCode, a script,
+a cron) is just a client. It owns a persistent worker registry, scoped task
+packets, a harness-managed goal loop, artifact manifests, logs, and worker state.
+
+Native Hermes `/goal` is **not** used: no HTTP path dispatches it. The goal loop
+is owned by the control plane and stops on `GOAL_BLOCKED: true`, `max_turns`, or
+verified completion. Workers default to the **`runs` transport** (`POST /v1/runs`
++ event stream + auto-answered approvals via `choice="once"`), which lets the
+agent execute its own code/tests autonomously without touching your global
+Hermes approval config. Completion works like **Hermes `/goal`** (a Ralph loop): by default, after each
+turn an **auxiliary judge model** returns `{"done": bool, "reason": "..."}`; if
+not done, its reason is fed back as a continuation and the loop keeps going until
+done, blocked, or the turn budget. Native `/goal` is not dispatchable through the
+raw HTTP API, so the harness replicates its loop client-side. Optional layers:
+`verify_command` (a deterministic gate the harness runs) and
+`judgment_mode="manager"` (pause for the dispatcher's verdict). `use_judge=False`
+falls back to a literal `GOAL_COMPLETE` marker.
+
+```text
+Manager -> Worker API -> Worker Registry -> Goal loop -> Hermes /v1/responses
+                      -> Artifact manifests / logs / state
+```
+
+Full architecture, endpoints, identity-field semantics, and usage:
+**[WORKER_API.md](WORKER_API.md)**. This is the recommended path for persistent
+delegated cognition (long-lived specialists), as opposed to disposable subagents.
 
 ### Sessions (named conversations)
 

@@ -59,44 +59,44 @@ def run_skill(input_path: Path, output_path: Path, writer: Optional[GuardedWrite
         print(f"Error: input JSON must be an object, got {type(payload).__name__}")
         return 1
 
-    from hermes_harness import run_task, build_harness_prompt  # noqa: E402
+    from hermes_harness import build_harness_prompt  # noqa: E402
 
     if "output" in payload and "output_contract" not in payload:
         payload["output_contract"] = payload["output"]
 
-    if os.environ.get("CI") == "true":
-        import sys as _sys
-        print(f"[hermes-harness] CI=true detected, skipping API call", file=_sys.stderr)
-        prompt = build_harness_prompt(
-            task=str(payload.get("task", "")),
-            workspace=payload.get("workspace", str(PROJECT_ROOT)),
-            mode=payload.get("mode", "auto"),
-            max_workers=int(payload.get("max_workers", 3)),
-            constraints=payload.get("constraints", ""),
-            output=payload.get("output_contract", ""),
-            write_roots=payload.get("write_root"),
-            read_roots=payload.get("read_root"),
-            deny_roots=payload.get("deny_write_root"),
-            search_policy=payload.get("search_policy", "artifact_only"),
-            branch_policy=payload.get("branch_policy", "forbidden"),
-        )
-        result = {"ok": True, "skipped": True, "reason": "CI mode", "result": prompt, "task": payload, "mode": payload.get("mode", "auto")}
-    else:
-        try:
-            result = run_task(
-                task=str(payload.get("task", "")),
-                workspace=payload.get("workspace", str(PROJECT_ROOT)),
-                mode=payload.get("mode", "auto"),
-                max_workers=int(payload.get("max_workers", 3)),
-                constraints=payload.get("constraints", ""),
-                output_contract=payload.get("output_contract", ""),
-                conversation=str(payload.get("conversation", "")),
-                conversation_new=bool(payload.get("conversation_new", False)),
-                session_key=str(payload.get("session_key", "")),
-                timeout=payload.get("timeout"),
-            )
-        except Exception as exc:
-            result = {"ok": False, "error": str(exc), "task": str(payload.get("task", "")), "mode": payload.get("mode", "auto")}
+    # NEVER call the live Hermes agent from this entry point. run.py is the
+    # fixture / contract-runner entry, and it must NEVER spend real tokens or
+    # let a test reach the agent. It is unconditionally prompt-only and offline.
+    #
+    # Real live execution is an explicit, user-driven action and lives ONLY in:
+    #   - scripts/worker_control.py  (Worker API control plane: task-submit, serve)
+    #   - scripts/worker_api.py      (HTTP API)
+    #   - scripts/hermes_harness.py  (CLI `run`)
+    # None of those are invoked by the test suite or the contract runner.
+    import sys as _sys
+    print("[hermes-harness] run.py is prompt-only; live agent calls are not "
+          "permitted here (use the Worker API / CLI explicitly).", file=_sys.stderr)
+    prompt = build_harness_prompt(
+        task=str(payload.get("task", "")),
+        workspace=payload.get("workspace", str(PROJECT_ROOT)),
+        mode=payload.get("mode", "auto"),
+        max_workers=int(payload.get("max_workers", 3)),
+        constraints=payload.get("constraints", ""),
+        output=payload.get("output_contract", ""),
+        write_roots=payload.get("write_root"),
+        read_roots=payload.get("read_root"),
+        deny_roots=payload.get("deny_write_root"),
+        search_policy=payload.get("search_policy", "artifact_only"),
+        branch_policy=payload.get("branch_policy", "forbidden"),
+    )
+    result = {
+        "ok": True,
+        "skipped": True,
+        "reason": "prompt-only (live agent calls disabled in run.py)",
+        "result": prompt,
+        "task": payload,
+        "mode": payload.get("mode", "auto"),
+    }
 
     output_data = json.dumps(result, indent=2)
 
