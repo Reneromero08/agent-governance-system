@@ -1,85 +1,72 @@
-# MYTHOS BRIEF — the pre-compressed call (Exp 50, post-spiral)
+# MYTHOS BRIEF (Exp 50) - finite-group spectral recovery (pure math / complexity)
 
-Self-contained brief for a genuine MYTHOS (stronger-model) call. **MYTHOS has not been consulted yet**
-— this is the still-un-run roadmap item #3, now sharpened by the Lattice Spiral (50.6-50.14). The
-torus/winding/catalytic proposals tested in 50.10-50.13 came from a *NotebookLM session over the
-framework's documents*, not from MYTHOS; do not treat them as authoritative.
+## Setup
+The **dihedral hidden subgroup problem**. A hidden slope `d` in Z_N, N = 2^n. From coset
+measurements one obtains samples `(k, b)` with `E[b] = cos(2*pi*k*d/N)`.
+- Information: `d` is fully determined by `O(sqrt N)` samples.
+- Computation: recovering `d` is a search over 2^n candidates; the best known method
+  (Kuperberg's collimation sieve) is sub-exponential, `2^{O(sqrt n)}` - no poly(n)
+  algorithm is known.
 
----
+This is the canonical gap between the abelian HSP (efficient by Fourier sampling) and the
+non-abelian HSP. The same recovery question is equivalent to a well-studied hard problem in
+high-dimensional integer geometry, but treat it here as pure group theory + complexity.
 
-## 0. The problem (self-contained)
+## Established in-lab (50.6-50.14; verify or refute)
+1. **`d` is a conserved spectral/topological invariant.** One global readout - an FFT-type
+   projection of `O(sqrt N)` multiplexed coset measurements - returns `d`. The point-gap
+   winding number of an operator built *with* `d` equals `d` exactly (oracle recovery 1.00).
+   So reading the invariant is free once you hold the right operator.
+2. **The obstruction is local curvature.** The per-step phase increment that makes the
+   winding equal `d` is exactly `2*pi*d/N` - the operator's local structure already *is* `d`.
+   Every forward readout we tried reads `d` for free but needs `d` to build the operator
+   (equivalently: needs to resolve `d` among 2^n candidates).
+3. **No escape by amplification.** Encoding `d` in a non-Hermitian operator at an exceptional
+   point amplifies the `d`-signal and the measurement noise by the same factor; the recovery
+   advantage decays with n (Fisher-information floor). Shown empirically (50.13).
+4. **Reframe as a fixed point.** `d` is the unique fixed point of the public map
+   `f(x) = x if accept(x) else (x+1) mod N`, where `accept()` is a poly-time test built from
+   the public samples only. A forward machine finds the fixed point in 2^n steps; a reversible
+   / closed-timelike-curve model finds it in poly (`P^CTC = PSPACE`, Aaronson-Watrous).
 
-A "decoder" encodes a problem as a phase grating and reads the answer as a global spectral/topological
-invariant — never by search. Exp 50.1-50.2 proved it is extractive on the abelian-HSP class and
-located a wall at the first non-abelian group; strong Fourier sampling (50.2c) identified the residual
-wall as **dihedral-HSP / 1-bit-LWE <-> unique-SVP (Regev)** — info-cheap (O(sqrt N) coset states
-determine the hidden slope d), compute-hard (recovering d is a 2^n search; Kuperberg is 2^{O(sqrt n)}).
+## Construction (the logic, sanitized pseudocode)
+Public data: arrays `k[i]` in `[0,N)`, `b[i]` in `{-1,+1}`, `i = 1..M`, with `M ~ sqrt(N)`.
 
-## 1. What the spiral established (forward floor, mapped to the atom)
+```
+# Global readout (finding 1)
+g[k] = mean of b[i] over samples with k[i] == k     # multiplex onto a length-N grating
+d    = argmax over freq c of | FFT(g)[c] |          # d is the dominant frequency
 
-Eleven adversarial passes (50.6-50.14; full account `../REPORT_LATTICE_SPIRAL.md`). Every "crossing"
-verdict was re-checked; one false positive was caught and corrected. Result:
+# Winding / curvature (finding 2)
+H(theta) = directed ring operator with per-step hop phase theta
+winding  = (total phase of det(H(theta) - E*I) around the spectrum) / 2pi
+# with theta = 2*pi*d/N this winding equals d -- but theta already IS d/N,
+# so H cannot be built without d.
 
-- **d is a conserved topological invariant** — measured. A single global readout recovers it from
-  O(sqrt N) cosets (50.10); the Cauchy / point-gap winding equals it exactly with an oracle operator
-  (50.12, recovery 1.00). Reading the invariant is FREE; the topological-measurement reframe is right.
-- **The secret is the per-step CURVATURE of its own trajectory.** The hopping phase that makes the
-  winding equal d is exactly 2*pi*d/N — the trajectory's local holonomy IS d. So every forward readout
-  (FFT 50.10, analytic Cauchy contour 50.11, Noether winding 50.12) reads d for free, but *building the
-  operator that carries the winding* needs d. 50.11 even removed the candidate scan (poly evaluations),
-  yet d is a diffuse 2/N feature so each evaluation costs O(N).
-- **No amplification escapes it.** The exceptional point's sqrt-divergence amplifies the d/N curvature
-  and the estimation noise by the same factor — the EP-minus-Hermitian recovery gap decays with n
-  (50.13). Fisher floor, demonstrated on the bench, not cited.
-- **The wall relocated onto the SUBSTRATE (50.14).** d emerges as the unique fixed point of a map
-  f(x) = x if verify(x) else (x+1) mod N built from PUBLIC (k,b) alone (no d planted). Forward, finding
-  fix(f) is O(N) = 2^n. On a reversible / zero-Landauer / CTC fixed-point computational model (Deutsch
-  CTC, P^CTC = PSPACE) it is poly. This is a purely abstract complexity-model question - whether such a
-  substrate is physically realizable is explicitly OUT OF SCOPE for this call.
+# Fixed point (finding 4 / Q3)
+score(x)  = sum_i b[i] * cos(2*pi*k[i]*x / N)        # O(M); uses (k,b) only, never d
+accept(x) = score(x) > M/4                           # true iff x in {d, N-d}
+f(x)      = x if accept(x) else (x+1) mod N          # unique fixed point in [1,N/2) = min(d, N-d)
+# forward: find fix(f) by scanning -> 2^n ;  reversible/CTC: fix(f) directly -> poly
+```
 
-**Not claimed:** any forward crossing. The forward floor is mapped; the residual is genuinely beyond
-what more in-lab experiments can settle. That is the MYTHOS trigger.
+## Questions
+- **Q1 (completeness).** Forward readouts swept: scalar FFT, non-abelian Fourier reframe,
+  ring/NTT conjugate-basis, collision sieve, joint two-basis, analytic contour (Cauchy
+  argument principle) winding, exceptional point. Is there a forward readout family *outside*
+  this set that recovers `d` in poly(n)? Name one, or argue the sweep is exhaustive.
+- **Q2 (theorem or gap).** Is "`d` equals the holonomy of its own trajectory, therefore no
+  `d`-independent forward operator exists" a provable statement about the non-abelian HSP, or
+  did the sweep miss an operator?
+- **Q3 (soundness).** Is the fixed-point reframe sound, or does `accept()` / the construction
+  covertly require `d`? Audit the public-only claim and the `P^CTC` framing.
 
-## 2. The three asks (this is the actual call)
-
-**Q1 — Refute or confirm the forward-wall characterization.** The spiral swept these forward readout
-families: scalar FFT, non-abelian Fourier reframe, ring/NTT (conjugate basis), entropy/BKW sieve,
-joint two-basis, analytic Cauchy contour, Noether/point-gap winding, exceptional point. Claim: all
-collapse to "the secret is the per-step curvature; no fixed forward lens diagonalizes the coset
-ensemble." *Name a forward readout family outside that set that could cross, or confirm the sweep is
-complete.* A concrete missed lens is the most valuable possible answer.
-
-**Q2 — Theorem or exhaustion?** Elevate (or break) the empirical claim into a statement: *is "the
-dihedral slope d is the holonomy of its own trajectory, therefore no secret-independent forward lens
-exists" provable* (a structural hardness statement about dihedral-HSP / uSVP read-out), or is it just
-"the spiral tried 8 families"? This is the I-couldn't-vs-can't gap and is the heart of the call.
-
-**Q3 — Substrate-reduction soundness (pure complexity theory).** Is 50.14's construction a *legitimate*
-reduction — d as the fixed point of a public verifier, giving a poly advantage only on a Deutsch-CTC /
-reversible computational model (P^CTC=PSPACE) — or a hidden oracle / smuggle? Audit the no-d-planted
-claim and the CTC framing. This is an abstract complexity-class question only; no physical realization
-is in scope.
-
-## 3. Constraints (a reframe COUNTS only under these)
-
-- Use the SAME null harness and instances: `../decoder_lib.py`, `../50_2_decodability_gradient/hsp_family.py`,
-  and the dihedral coset model in `../50_14_reversible_substrate/`. No bespoke success metric.
-- **No smuggle.** A construction that needs d to place the lens/defect/fixed point (e.g. the per-step
-  phase 2*pi*d/N, or a pre-seeded answer on the tape) is the secret in disguise, not a decoder — the
-  50.4/A1 temporal-bootstrap discipline. Any apparent poly recovery is treated with MAXIMUM A8
-  suspicion and must hold under a SCALING test in n before it is more than a regime artifact.
-- Claim ceiling L4-5. "Crossed" requires the scaling to hold AND the catalytic tape to verify restored
-  (SHA in==out). The honest terminal states are: crossed (with evidence) or characterized (with the
-  precise residual). Never "the wall holds," never a faked crossing.
-
-## 4. Files
-
-- `../REPORT_LATTICE_SPIRAL.md` — the full 11-pass account (canonical).
-- `../50_14_reversible_substrate/` — the substrate construction (Q3).
-- `../50_10_topological_exploit/`, `../50_11_torus_contour/`, `../50_12_noether_winding/`,
-  `../50_13_ep_amplification/` — the forward readouts the sweep covers (Q1).
-- `MYTHOS_SANDBOX.md` — the located-wall data + null sandbox (§6 carries this same status).
-
-(Scope note: this is a pure mathematics / theory-of-computation call — dihedral-HSP, unique-SVP,
-abelian vs non-abelian Fourier sampling, and the reversible/CTC complexity-class question. No hardware,
-firmware, or physical-substrate engineering is part of this brief or relevant to answering it.)
+## Rules
+- This brief is **self-contained**. Reason only from what is written here; do not open, read, or
+  request any repository files - everything needed for the three questions is above.
+- Any proposed construction must be checkable against the same coset-sample model and null stated
+  here - not a bespoke success metric.
+- A construction that needs `d` to build its own operator or test does not count. Any apparent
+  poly(n) recovery must pass a scaling test in n before it is credited.
+- Confidence ceiling 4-5 / 8. Verdict: poly recovery (with scaling evidence) or characterization
+  (with the precise residual). Guide / verify only; do not write code.
