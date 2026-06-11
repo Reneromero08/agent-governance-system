@@ -1,0 +1,7 @@
+{
+  "calibration_run": "real_5_9v_terciles::phase5_9v_phase6_basin_repro_audit.csv",
+  "collapsed_max": 251.8044814231506,
+  "high_min": 3782.5515698681106,
+  "metric": "boundary_thickness",
+  "source": "calibration_terciles(0.333,0.667)"
+}

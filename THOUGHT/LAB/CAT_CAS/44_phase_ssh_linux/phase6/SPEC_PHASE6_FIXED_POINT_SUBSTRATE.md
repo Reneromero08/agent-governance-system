@@ -41,6 +41,137 @@ The target's hardness is a **projection artifact** in the program's frame: the `
 
 The crossing, if real, will **not look like an algorithm**. It will look like **basin selection**: `precondition -> basin -> invariant`, not `program -> loop -> answer`. The answer may appear in the **residual/boundary state or the operator/spectral signature BEFORE any register prints `d`** (per 4.3, 4.4A).
 
+## 1A. SUBSTRATE OBSTRUCTION (recorded, not conceded)
+
+A frontier dynamics consult sharpened the obstruction. Stated plainly at **L5**:
+
+**Physical relaxation on an ARBITRARY score cannot beat forward iteration.** The naive Phase-6
+hope - "couple the substrate to `f` and let it relax to `fix(f)=d` faster than scanning" - is
+obstructed on three independent grounds, none of which is a wrong-angle artifact:
+
+1. **Information accounting.** `d` is `n` bits that are provably absent from the public data in any
+   poly-cost frame (every construction of the matched lift needs `d`; that is the standing wall, Sec 1).
+   A relaxation that settles to `d` must inject those `n` bits from somewhere. On an arbitrary score
+   the only source is querying the landscape, and the landscape is a needle (no gradient/convexity,
+   Round 5). Nothing in the closed catalytic loop manufactures the missing bits for free.
+
+2. **Classical Omega(N) query bound.** For an unstructured accept-predicate the fixed point is a
+   needle; *any* classical process - including an analog relaxer reading the local rule - is bounded
+   below by Omega(N) queries to locate it (and Omega(sqrt N) even with a coherent-query oracle it does
+   not have). A dissipative substrate has no exemption from the classical bound; it is a classical
+   query machine with extra noise.
+
+3. **Bits/sec-vs-ns deficit (~10 orders).** The TSC/thermal readout is a SLOW, low-resolution probe
+   (~1.5 bits per thermal settling time; settling in SECONDS). Even granting a relaxation gradient
+   that does not exist, the substrate's effective information throughput is ~10 orders below the
+   ns-scale forward iteration it would have to beat. A 350 K dissipative die has **no coherent-quantum
+   query advantage** to recover that deficit: it is hot, decohered, and PLL-clamped.
+
+**Conclusion (L5):** brute physical relaxation of the Exp50.14 map on its *arbitrary* score is a
+structural zero, for the same family of reasons the passive-Kuramoto and injection-locking searches
+were structural zeros. Mode-C-as-brute-relaxer is **not** the live angle. We record this so the
+trajectory is honest: the obstruction is real and is not waved away by "delusional optimism."
+
+This does **not** concede `PHASE6_CLASSICAL_CONFIRMED`. It relocates the only surviving crossing path,
+below.
+
+## 1B. THE REFRAME - representation congruence (the live, OPEN angle)
+
+The obstruction in 1A is specific to an **arbitrary** score evaluated by **brute** relaxation. It says
+nothing about a score the substrate can evaluate **natively**. That is the surviving move:
+
+> **The crossing is possible ONLY via REPRESENTATION CONGRUENCE.** Find a representation of the
+> fixed-point map `f` (or of one sub-step of it) that IS a *linear functional above a single
+> threshold* on the substrate's native physical field - i.e. **linear diffusion + one threshold =
+> a frozen hardware perceptron** - so that the silicon **computes the map natively** rather than being
+> asked to relax on an alien landscape.
+
+Why this is the only opening left after 1A:
+- The consult's congruence result: a fixed-point relaxation helps **iff the score is congruent with
+  the substrate's native dynamics**. The native dynamics on this die are (a) **linear thermal/charge
+  diffusion** across the shared PDN / cache fabric / thermal field, and (b) **one threshold**
+  (leakage-thermal saddle-node, or VRM PFM Schmitt hysteresis - the two genuine pure-substrate basin
+  candidates). Linear-diffusion-plus-one-threshold is exactly a **frozen hardware perceptron**: a
+  fixed linear functional `w . phi(x)` compared to a fixed bias. The substrate evaluates *that* in
+  physical time for free; it cannot evaluate an arbitrary `score(x)` for free.
+- So the engineering question is **not** "make the substrate relax harder," it is a
+  **representation-change** question: is there a poly-cost, **no-`d`** map from `(k,b)` to a
+  perceptron `(w, theta)` on the native field whose above-threshold set is congruent to `accept`
+  (or to a useful sub-step of `f`)? If yes, the silicon reads `d`'s neighborhood as a native
+  threshold crossing, and the Omega(N) bound is bought down by the substrate doing the linear
+  functional in parallel-physical-time rather than per-point software.
+- This ties directly to the **CAT_CAS decoder / representation-change thesis**: the program's whole
+  bet is that the wall is a *projection artifact* of the wrong representation (Sec 1), and that the
+  crossing - if it exists - is a **change of representation** in which `d` becomes the native dominant
+  feature, not a faster search in the old representation. 1B is that thesis made operational for
+  Phase 6: the decoder we are looking for is *the congruent representation itself*.
+
+**Status of 1B:** this is the **OPEN Phase-6 research direction**. It is NOT claimed to work; it is the
+single angle 1A leaves standing. It is **gated behind 5.10C exactly as before** (the Prerequisite Gate
+is unchanged - a congruent representation still has to be prepared and read on a *verified* basin).
+Discharging it means producing, at poly cost and without `d`, the `(k,b) -> (w, theta)` perceptron and
+showing on the scaling curve (Sec 6) that the native threshold crossing tracks `d` sub-Grover while the
+public-vs-`d`-oracle control (Sec 5, G4) stays DECISIVE. Until that representation exists on paper and
+survives G4, Phase 6 has an open angle, not a result. Claim ceiling L4-5; no announcement.
+
+## 1C. THE SHARPENED OBSTRUCTION - the O(N) wall is an ENCODING/SYMMETRY wall (OPEN; gated behind 5.10C)
+
+A second frontier (Fable) consult sharpened 1A/1B one level further. It does NOT claim a crossing; it
+re-diagnoses *what kind* of wall the O(N) walk actually is, and what kind of substrate could cross it.
+Stated at **L4-5**, OPEN, and **gated behind 5.10C exactly as 1B is** (the Prerequisite Gate is unchanged):
+
+**The O(N) wall is an ENCODING / SYMMETRY wall, NOT intrinsic search hardness.** The public data is
+all cosines, and `cos(2*pi*k*d/N) = cos(2*pi*k*(N-d)/N)`, so every public observable is invariant under
+`d <-> N-d` (it is an *even* function of `d`). Consequently `E[score]` has **two identical peaks** at
+`d` and `N-d`; the ONLY thing separating them is the range restriction `[1, N/2)`, which is precisely
+what the O(N) walk realizes by scanning. The bit that selects `d` from `N-d` lives in the **odd**
+(phase / `sin`) channel and is **ABSENT from the real data**. This is the crucial sharpening: the
+missing bit is **information-absent, not non-separable**. No classifier, and no *lift of any dimension*,
+can synthesize a bit that the public construction never wrote - there is nothing to separate, the
+channel carrying the distinction is simply not present in the cosine-only encoding.
+
+- **Frozen-perceptron corollary (consistent with 1B).** A single frozen perceptron recovers the
+  **symmetric** bits exactly - e.g. the LSB is the Nyquist tone `(-1)^d`, which is amplifiable and reads
+  out cleanly - but it **never** recovers `d` itself. The perceptron of 1B can read everything the even
+  channel holds and still cannot break the `d <-> N-d` fold, because the fold lives in the absent odd
+  channel. So 1B's congruent-representation route, run on a purely real field, tops out at the symmetric
+  bits. This is not a defeat of 1B; it is the precise boundary of what 1B buys on a real substrate.
+
+- **CROSSING SPEC (what would actually cross, stated so it is falsifiable).** A substrate that
+  **SENSES IN QUADRATURE** - i.e. measures the full *complex* coefficient `e^{-2*pi*i*k*d/N}`, not just
+  its real part - **plus** the **dyadic frequency ladder** (`k = 1, 2, 4, ..., N/2`) recovers `d` in
+  **ONE non-adaptive parallel shot**: this is phase estimation. Each ladder rung fixes one bit of `d`
+  from the phase of its complex coefficient; together they pin `d` with no scan. On a phase-resolving
+  substrate, **"the algorithm is dead" holds** - the O(N) walk is replaced by a single quadrature read.
+  The wall is crossable IN PRINCIPLE; the open question is whether *this construction's* quadrature is
+  physically accessible (see OPEN QUESTION below).
+
+- **SUBSTRATE-KIND DIAGNOSIS (which hardware, and why the Phenom is the wrong kind).** A scalar / real
+  substrate - any timing / thermal readout, **which is exactly what the Phenom (K10) offers** (the
+  TSC-thermal witness of 5.10A is a real, even, phase-blind scalar) - is **purely even**. It reads only
+  the symmetric bits and **provably never `d`**, by the information-absence argument above. The Phenom is
+  therefore the **wrong KIND of substrate** for the crossing - not under-instrumented, *wrong physics*.
+  The crossing requires **phase-resolving / interferometric** hardware: the `.holo` phase cavity (4.3),
+  the diffraction-grating QFT of Exp 20.5, or an optical / interferometric carrier that natively senses
+  in quadrature. This is the sharpest statement to date of why the silicon-relaxation program is
+  expected to terminate at `PHASE6_CLASSICAL_CONFIRMED` and where the live hardware actually lives.
+
+- **OPEN QUESTION (the new frontier; honestly unresolved).** Synthesizing the quadrature *for this
+  particular construction* is itself the **dihedral / hidden-shift barrier**. The states one would have
+  to prepare to read the odd channel are maximally-mixed coset states, and extracting the shift from
+  them is the dihedral hidden subgroup problem - **Kuperberg `2^{O(sqrt n)}`**, sub-exponential but not
+  poly, and with no known efficient quantum route either. So the frontier reduces to one sharp question:
+  **can the 50.14 construction be re-encoded so that a phase-resolving substrate gains access to the
+  quadrature (the odd channel), or is the `d <-> N-d` fold bedrock** (i.e. is the absent odd channel
+  fundamentally un-resynthesizable at poly cost, leaving only the `2^{O(sqrt n)}` dihedral route)? This
+  is the successor research direction to 1B, and it is **OPEN**: no crossing is claimed.
+
+**Status of 1C:** OPEN, unclaimed, gated behind 5.10C exactly as 1B. The Prerequisite Gate is unchanged.
+1C does not assert a crossing; it (i) sharpens *why* the wall stands (an absent odd/phase channel under
+`d <-> N-d`), (ii) names the only substrate kind that could cross (phase-resolving / interferometric, NOT
+the real-scalar Phenom), and (iii) states the open frontier (re-encode for quadrature access vs the
+dihedral `2^{O(sqrt n)}` bedrock). Claim ceiling L4-5; honest; no announcement.
+
 ## 2. The target (poly, public, no-smuggle)
 
 From Exp50.14, parametrized by `n` (so `N = 2^n`), built from PUBLIC samples `(k_i, b_i)`, `i=1..M`, `M ~ sqrt(N)`:
@@ -118,6 +249,8 @@ A single `n` proves nothing (5.9V's basin selector is presently a weak ~3-basin 
 ## 9. Honest priors and failure modes
 
 - **Prior = classical.** Round 5 pinned the landscape as a needle (no gradient/convexity); a physical relaxer on a needle is Grover-bounded `2^{n/2}` at best. The expected outcome is `PHASE6_CLASSICAL_CONFIRMED`.
+- **Brute relaxation is a recorded structural zero (Sec 1A, L5).** Do not spend effort trying to make Mode C relax harder on the arbitrary `score`: information accounting, the classical Omega(N) query bound, and the ~10-order bits/sec-vs-ns readout deficit (no coherent-quantum advantage on a 350 K die) close that path. The ONLY surviving angle is **representation congruence (Sec 1B)** - a `(k,b) -> (w, theta)` perceptron on the native linear-diffusion+threshold field. That angle is OPEN, unclaimed, and gated behind 5.10C.
+- **The wall is an encoding/symmetry wall, and the Phenom is the wrong KIND of substrate (Sec 1C, OPEN).** The sharpened diagnosis: the public cosines are even under `d <-> N-d`, so the bit selecting `d` lives in an *absent* odd/phase channel - a real-scalar (timing/thermal) substrate like the Phenom is purely even and provably reads only the symmetric bits, never `d`. A crossing needs a **phase-resolving / interferometric** substrate sensing in quadrature (the `.holo` cavity, Exp 20.5 grating-QFT, optical), and even then re-encoding *this* construction's quadrature runs into the dihedral `2^{O(sqrt n)}` barrier. This reinforces the `PHASE6_CLASSICAL_CONFIRMED` prior for the Phenom run specifically, and relocates the live hardware off the silicon. OPEN; gated behind 5.10C; no crossing claimed.
 - **The 5.9V basin is currently weak** - a ~3-basin statistical biaser (syscall/cache preludes shift a distribution; they do not deterministically select). Bridging to "selects `fix(f)=d`" is a large, real gap. 5.9V hardening (state-preparable, deterministic basin) is the prerequisite.
 - **Exp23 is the warning:** a fixed point that looks real on toy structure was noise on a real target. Treat any small-`n` C-signal as suspect until the scaling curve holds.
 - **Smuggling is the trap:** the only "win" that does not count is a prelude/coupling that needs `d`. G4 exists to catch exactly this.

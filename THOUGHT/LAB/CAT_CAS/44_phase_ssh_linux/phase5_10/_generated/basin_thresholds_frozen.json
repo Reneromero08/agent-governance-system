@@ -1,0 +1,7 @@
+{
+  "calibration_run": "synthetic_calibration_seed7",
+  "collapsed_max": 97.5037148374613,
+  "high_min": 110.02688493392571,
+  "metric": "boundary_thickness",
+  "source": "calibration_terciles(0.333,0.667)"
+}
