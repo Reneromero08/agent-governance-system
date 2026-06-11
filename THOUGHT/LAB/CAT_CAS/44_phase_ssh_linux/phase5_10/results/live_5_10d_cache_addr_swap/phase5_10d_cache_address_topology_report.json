@@ -1,0 +1,61 @@
+{
+  "family_effects": [
+    {
+      "family": 0,
+      "same_minus_controls_median": 37.842413499999964
+    },
+    {
+      "family": 1,
+      "same_minus_controls_median": 47.61450849999994
+    },
+    {
+      "family": 2,
+      "same_minus_controls_median": 44.515063999999995
+    },
+    {
+      "family": 3,
+      "same_minus_controls_median": 38.431669
+    },
+    {
+      "family": 4,
+      "same_minus_controls_median": 41.02976899999999
+    },
+    {
+      "family": 5,
+      "same_minus_controls_median": 39.07438300000001
+    }
+  ],
+  "input": "phase5_10\\results\\live_5_10d_cache_addr_swap\\phase5_10d_cache_address_topology.csv",
+  "mode_summary": {
+    "compute": {
+      "mean": 266.6166135208333,
+      "median": 266.638125,
+      "n": 48
+    },
+    "different_address": {
+      "mean": 290.6941909375,
+      "median": 291.24634449999996,
+      "n": 48
+    },
+    "none": {
+      "mean": 271.6724239166667,
+      "median": 266.58597599999996,
+      "n": 48
+    },
+    "random_address": {
+      "mean": 308.1355925625,
+      "median": 308.2863225,
+      "n": 48
+    },
+    "same_address": {
+      "mean": 321.1548381041667,
+      "median": 321.2311055,
+      "n": 48
+    }
+  },
+  "observed_abs_median_effect": 32.32279249999999,
+  "permutation_p": 0.0004997501249375312,
+  "rows": 240,
+  "sign_agreement": 1.0,
+  "verdict": "PHASE5_10D_TOPOLOGY_PREP_CANDIDATE"
+}

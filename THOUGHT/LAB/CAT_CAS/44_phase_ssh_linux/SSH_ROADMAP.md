@@ -140,6 +140,16 @@ Current Exp44 evidence shows that the earlier Linux/software phase routes did no
 | Runtime load/affinity | `RUNTIME_LOAD_AFFINITY_CHARACTERIZED` | Read-only SSH characterization found all cores at stock P4 VID `0x1A` after reboot, while COFVID VID depends on load state. Baseline can expose `0x1A`; self/neighbor/all-load held `0x12`. | `cpu_sing_3/PHASE2_RUNTIME_LOAD_AFFINITY_REPORT.md`, `session_scripts/phase1_msr/msr_load_affinity_characterizer.py` |
 | Runtime transition/jitter | `RUNTIME_TRANSITION_JITTER_CHARACTERIZED` | Read-only transition probe ran 24 cases with 160 samples each. PSTATE transitions were common (26 total); COFVID VID transitions were rare (3 total) and did not show stable timing-jitter separation from steady samples. | `cpu_sing_3/PHASE2_RUNTIME_TRANSITION_JITTER_REPORT.md`, `session_scripts/phase1_msr/msr_transition_jitter_probe.py` |
 | Runtime state-window oracle | `RUNTIME_STATE_WINDOW_ORACLE_NEGATIVE` | Read-only state-conditioned timing oracle ran 24 cases with 420 samples each. Four cases had 2+ state bins for null comparison; zero met the deterministic null gate. | `cpu_sing_3/PHASE2_RUNTIME_STATE_WINDOW_ORACLE_REPORT.md`, `session_scripts/phase1_msr/msr_state_window_oracle.py` |
+| Runtime effective-state selector | `READ_ONLY_EFFECTIVE_STATE_SELECTOR_FOUND__VID_STILL_FIXED` | Read-only selector map found that ordinary load selectors move FID/DID/PSTATE labels across four states while VID remains fixed at `0x12`. This keeps the VID clamp result intact but exposes a software-visible state-label surface. | `cpu_sing_3/PHASE2_EFFECTIVE_STATE_SELECTOR_MAP_REPORT.md`, `session_scripts/phase1_msr/msr_effective_state_selector_map.py` |
+| Runtime state-label coupling | `STATE_LABEL_MODAL_FEATURE_NOT_CONFIRMED` | A reversible workload with joined state labels produced sparse timing candidates, but dense narrowing and shuffled-answer hard-null sweeps collapsed the elapsed-threshold route. Modal feature validation over eight fresh seed windows found candidates but no feature family survived across three distinct fresh seed starts. | `cpu_sing_3/PHASE2_STATE_LABEL_TIMING_EDGE_HARDENED_REPORT.md`, `cpu_sing_3/PHASE2_STATE_LABEL_MODAL_VALIDATION.md`, `session_scripts/phase1_msr/analyze_state_label_modal_features.py` |
+| Runtime scheduler/topology resonance | `SCHEDULER_TOPOLOGY_RESONANCE_NOT_REPRODUCED` | Core-pair phase-offset probing produced sparse timing candidates, but validation found only 2/8 candidate runs and no stable reproduction across fresh seed windows or core pairs. | `cpu_sing_3/PHASE2_SCHEDULER_TOPOLOGY_RESONANCE_HARDENED.md`, `session_scripts/phase2_kuramoto/scheduler_topology_resonance.c` |
+| Firmware separate P4 source | `FIRMWARE_P4_SEPARATE_SOURCE_FOUND_NOT_ACTIONABLE` | Cross-image scan found CpuDxe/CpuPei/LegacyRegion P-state sibling constants outside AmdProcessorInitPeim, but raw context shows they are MSR address initializers, not P4 value rows. | `cpu_sing_3/PHASE2_FIRMWARE_P4_SEPARATE_SOURCE_SEARCH.md`, `cpu_sing_3/PHASE2_FIRMWARE_P4_SEPARATE_SOURCE_DEEPENED.md` |
+| Firmware P-state value pattern | `FIRMWARE_PSTATE_VALUE_PATTERN_NOT_FOUND_CURRENT_DUMP` | Direct search found zero hits for stock P4 full value, stock P4 low/high fragments, or lower-VID runtime-test fragment across the extracted image tree. | `cpu_sing_3/PHASE2_FIRMWARE_PSTATE_VALUE_PATTERN_SEARCH.md` |
+| Firmware provenance audit | `FIRMWARE_P4_VALUE_SOURCE_NOT_FOUND_CURRENT_ARTIFACTS` | Audit lists each firmware route and the exact missing proof: editable P4-only value source with P0-P3 sibling proof. | `cpu_sing_3/PHASE2_FIRMWARE_SOURCE_PROVENANCE_WALL_AUDIT.md` |
+| CpuDxe value consumer trace | `CPU_DXE_VALUE_CONSUMER_NOT_FOUND_RAW_TRACE` | Raw displacement trace confirms a P0-P4 MSR address initializer but does not expose a P4 value payload or same-module value consumer. | `cpu_sing_3/PHASE2_CPU_DXE_VALUE_CONSUMER_TRACE.md` |
+| CpuPei value consumer trace | `CPU_PEI_VALUE_CONSUMER_NOT_FOUND_RAW_TRACE` | Raw displacement trace confirms a compact P0-P4 MSR address initializer; no P4 value payload or value consumer is exposed. | `cpu_sing_3/PHASE2_CPU_PEI_VALUE_CONSUMER_TRACE.md` |
+| LegacyRegion value consumer trace | `LEGACY_REGION_VALUE_CONSUMER_NOT_FOUND_RAW_TRACE` | Raw displacement trace confirms the third P0-P4 MSR address initializer module; no P4 value payload or value consumer is exposed. | `cpu_sing_3/PHASE2_LEGACY_REGION_VALUE_CONSUMER_TRACE.md` |
+| Family 10h source P-state provenance | `F10_SOURCE_CONFIRMS_RUNTIME_PSTATE_VALUE_PROVENANCE` | Local AGESA F10 source confirms P-state values are gathered from live `PS_REG_BASE + k` MSRs into runtime `PSTATE_LEVELING` buffers, and leveling writes from those buffers. This strengthens runtime provenance but still does not expose a static P4-only value row. | `cpu_sing_3/PHASE2_F10_SOURCE_PSTATE_VALUE_PROVENANCE.md` |
 | Cacheline phase coupling | `CACHELINE_PHASE_COUPLING_REJECTED` | Core-pinned Cores 3/4 cacheline oscillator harness tested isolated lines, false-shared line, and atomic same-line pressure. `real_r` stayed near zero and did not separate from cyclic-shift nulls across repeats. | `cpu_sing_2/PHASE2_CACHELINE_PHASE_COUPLING.md`, `session_scripts/phase2_kuramoto/cacheline_phase_coupling.c` |
 | Phase 2B Bloch/complex Ising | `PHASE2B_5C_BLOCH_COMPLEX_ISING_ACTIVE_ORACLE_PASS` | Exp07-style Bloch/complex-plane active phase oracle ran on target and beat random phase, random spin, sign-shuffled, and edge-rewired null means on 5/5 problems. This is active software oracle progress, not passive Kuramoto evidence. | `cpu_sing_2/PHASE2B_5C_BLOCH_COMPLEX_ISING_PORT.md`, `session_scripts/phase2b/bloch_complex_ising.c` |
 | External observability | `ARCHIVED_OPTIONAL_VALIDATION_ONLY` | External capture artifacts remain documented, but Tier 3 physical instrumentation is not a current success path, stop condition, or recommended next action for this software/firmware goal. | `cpu_sing_2/PHASE2_DEEP_3_EXTERNAL_MEASURE.md`, `cpu_sing_3/PHASE2_MASTER_D_EXTERNAL_OBSERVABILITY.md` |
@@ -147,7 +157,7 @@ Current Exp44 evidence shows that the earlier Linux/software phase routes did no
 
 **Do not repeat:** no BIOS flash, no global AGESA branch edit, no voltage writes, no P0-P3 undervolt, no Tier 3 physical instrumentation as the current success path, and no claim that catalytic tape restoration proves phase lock.
 
-**Next software/firmware boundary:** Phase 2B classification is complete: active phase-oracle software works, but passive substrate evidence is rejected because active software explains the successful results. The firmware no-op rebuild artifact is now proven. The next non-repeated live action is P4-only edit-source proof. Do not produce a P4-safe candidate until P0-P3 unchanged proof, P4-only offset/byte proof, checksum proof, and clean parse proof all exist.
+**Next software/firmware boundary:** Phase 2B classification is complete: active phase-oracle software works, but passive substrate evidence is rejected because active software explains the successful results. The firmware no-op rebuild artifact is now proven. Runtime software classifiers are now weak: state-label and scheduler/topology routes both failed hard validation. Firmware separate-source search found P-state MSR address tables but not P4 value rows, and direct P4 value-pattern search was negative. CpuDxe, CpuPei, and LegacyRegion raw consumer traces found no P4 value consumer. Family 10h source provenance confirms the runtime MSR gather and runtime `PSTATE_LEVELING` buffer path, not a ROM value table. Good pause point. Next resume action is `SOFTWARE_FIRMWARE_WALL_REVIEW_AFTER_F10_SOURCE_PROVENANCE`. Do not produce a P4-safe candidate until P0-P3 unchanged proof, P4-only offset/byte proof, checksum proof, and clean parse proof all exist.
 
 Completed read-only runtime command:
 
@@ -886,6 +896,8 @@ Output:
 - [x] `phase3b/PHASE3B_CATALYTIC_SUBSTRATE_PRIMITIVE.md`
 - [x] `session_scripts/phase3b/catalytic_invariant_probe.c`
 - [x] `phase3b/results/invariant_probe_summary.csv`
+- [x] `session_scripts/phase3b/phase3b_angle_rescue_probe.py`
+- [x] `phase3b/results/angle_rescue/PHASE3B_ANGLE_RESCUE_PROBE.md`
 
 Target result:
 
@@ -894,6 +906,25 @@ Rows accepted: 24/24
 Same-final-hash wrong-answer control answer-corr: 0.000
 VERDICT: RELATIONAL_INVARIANT_CONFIRMED
 ```
+
+Hardening result:
+
+```text
+VERDICT: ENCODED_RELATIONAL_CARRIER_RESCUE
+rows: 768
+restore_rate: 1.000000
+gf2_carrier_holdout_accuracy: 1.000000
+gf2_carrier_same_model_wrong_accuracy: 0.000000
+gf2_carrier_same_model_shuffled_accuracy: 0.562500
+gf2_carrier_effect_vs_null: 0.437500
+```
+
+Interpretation boundary:
+
+- Original Phase 3B `answer_corr` is a formula-oracle metric because it uses the same relation/Walsh/graph family as `expected_answer`.
+- Scalar non-formula residual features did not separate on holdout rows.
+- Full T1/T2 carrier words did separate over GF(2), excluding the answer slot.
+- Current live claim is therefore `ENCODED_RELATIONAL_CARRIER_RESCUE`: the reversible tape can carry answer-predictive relational structure through work slots, but the next proof must make that carrier less hand-authored and more substrate-discovered.
 
 #### 3.B Claim Boundary
 
@@ -917,7 +948,7 @@ CAT_CAS computes through reversible relational invariants if a restored tape pre
 If one transform family repeatedly identifies the same answer-predictive survivor:
 
 ```text
-promote to Phase 4.3 residual-channel design  <-- CURRENT RESULT
+promote to Phase 4.3 residual-channel design  <-- CURRENT RESULT, with encoded-carrier hardening
 ```
 
 If multiple transforms detect the same structure:
@@ -1277,9 +1308,9 @@ operational entropy / contention / jitter
 
 **Claim boundary:** Phase 5.7 may claim only computational boundary deformation of the CAT_CAS carrier geometry. It must not claim physical holography, AdS/CFT, quantum coherence, physical Kuramoto, Landauer violation, zero heat, or thermodynamic entropy reduction.
 
-**Phase 6 bridge:** `PHASE5_7_READY_AS_PHASE6_INVARIANT_SCORER__WAITING_ON_5_9V_BASIN_LABELS`. Phase 5.7 is now the invariant/null scoring layer for Phase 6: it should consume 5.9V basin labels, Phase 6 public target hashes, and fixed-point `d` labels, then test whether surviving invariants predict `d` beyond same-hash wrong-invariant and shuffled-map controls.
+**Phase 6 bridge:** `PHASE5_7_PHASE6_PUBLIC_INVARIANT_REJECTED_BY_5_9V_CONTROLS`. Phase 5.7 consumed the 5.9V target-coupled VID+5/VID+6 basin labels and emitted `phase5_7/results/phase6_invariant_scorer/PHASE5_7_PHASE6_INVARIANT_SCORER_RUN.md` plus `phase5_7/results/phase6_invariant_scorer/phase5_7_phase6_invariant_scores.csv`.
 
-**Next action:** Extend the 5.7 table with `basin_id`, `target_public_hash`, `fixed_point_d`, invariant strength, answer correlation, same-hash wrong-invariant score, shuffled-map score, and null effect size once 5.9V produces Phase 6 basin labels.
+**Result:** 16 invariant rows scored, 4 public selector rows, 0 public candidates beyond shuffled/wrong-target controls, best public null effect size `0.000000`. Classify the current survivor as `RESIDUAL_ARTIFACT_ONLY`, not a Phase 6 crossing candidate.
 
 **Artifacts:** `phase5_7/PHASE5_7_ENTROPIC_BOUNDARY_GEOMETRY.md`, `phase5_7/PHASE5_7_TO_PHASE6_INVARIANT_BRIDGE.md`, `phase5_7/PHASE5_7_INTEGRITY_AUDIT.md`, `session_scripts/phase5_7/entropic_boundary_probe.c`, `phase5_7/results/phase5_7_stdout.txt`.
 
@@ -1391,6 +1422,22 @@ Phase 5.9: "What survives as the machine approaches failure?" → edge not reach
 Phase 5.10: "Can the substrate PREPARE reproducible boundary basins?" → boundary state preparation (GATES Phase 6); spec: phase5_10/
 Phase 6: "Can a PREPARED basin carry/select the fixed-point invariant?" → fixed-point crossing; RUNS ONLY AFTER 5.10C passes; spec: phase6/SPEC_PHASE6_FIXED_POINT_SUBSTRATE.md
 ```
+
+**Phase 5.10 live software probe update:**
+
+Status: `PHASE5_10_LIVE_PROBE_RAIL_INVISIBLE_SOFTWARE__BASIN_SCAN_NOT_COMPLETED`
+
+Artifact: `phase5_10/PHASE5_10_LIVE_SOFTWARE_PROBE.md`
+
+Live SSH runs advanced the boundary without opening Phase 6:
+
+- `phase5_10_strobe_precondition.c` run with `--no-pstate` returned `ELECTRICAL_STROBE_UNFOUNDED`.
+- `phase5_10_driven_lockin.c` short sweep returned `RAIL_INVISIBLE_SOFTWARE`.
+- swapped-topology lock-in also returned `RAIL_INVISIBLE_SOFTWARE`.
+- the basin pilot produced no basin rows before the bounded run was stopped.
+- compute/memory response ratios `0.0376` and `0.0260` show memory/shared-resource response dominating the compute channel.
+
+Phase 5.10D follow-up completed as a capped witness: `VALID_SCALAR_WITNESS_BELOW_ENCODING_WALL`. The cache/address topology channel is reproducible and software-controllable, but it remains a scalar/shared-resource timing channel and does not open Phase 6.
 
 **Three-world outcome space:**
 
@@ -1601,29 +1648,55 @@ This is not an algorithmic scan claim. The crossing, if it exists, must appear a
 |---|---|---|
 | G1 restoration | `PASS_FOR_MODE_B_DRY_RUN` | Baseline reversible loop discipline exists; hardware Mode C still must verify SHA restore per run |
 | G2 A/B baseline | `PASS_SOFTWARE_BASELINES_EXIST` | A and B have the expected forward-work cost shape |
-| G3 basin -> invariant | `NOT_RUN` | no physical public `(k,b)` coupling to basin yet |
-| G4 no-smuggle | `NOT_RUN` | public-prelude vs `d`-oracle-prelude still required |
-| G5 controls | `NOT_RUN` | wrong/shuffled/destroyed/same-hash-wrong-invariant controls still need hardware coupling |
-| G6 scaling | `BASELINE_ONLY` | no Mode C curve yet |
+| G3 basin -> invariant | `ATTEMPTED_REJECTED` | target-coupled VID+5/VID+6 basin labels were consumed by 5.7; public survivor did not beat controls |
+| G4 no-smuggle | `PASS_AS_REJECTION` | public/shuffled/wrong/oracle controls ran; strongest VID+6 selector was shuffled/nonpublic |
+| G5 controls | `PARTIAL_PASS_AS_REJECTION` | wrong/shuffled/oracle controls are physically coupled; same-hash wrong-invariant remains a 5.7/Phase 6 logical control |
+| G6 scaling | `BASELINE_ONLY` | no Mode C curve because public selector failed before scaling |
 | G7 audit | `ACTIVE` | no crossing claim allowed from feeder-only evidence |
 
 **Current conclusion:**
 
 5.7-5.9 can feed Phase 6, but 5.9V is the bottleneck. The live blocker is not lower voltage and not checksum failure. The live blocker is converting directional basin bias into a deterministic selector that can be driven by public `(k,b)` features and rejected by shuffled/wrong/oracle controls. The fixed measurement-core-only VID+5 reproducibility matrix reproduced directional basin control, but public-prelude did not separate strongly enough. The later target-coupled VID+5/VID+6 matrices drove prelude and workload shape from a Phase 6-style public payload; public still failed separation, and VID+6 selected shuffled/nonpublic more strongly than public.
 
-**Next exact hardware run:**
+**Next exact boundary:**
 
-Next 5.9V action, if continuing before Phase 6 coupling: stop rerunning public-prelude variants unless the coupling mechanism changes qualitatively. The current public-prelude family has now failed coupling, duration, VID-offset, and direct target-coupled workload pushes. The baseline matrix already ran at VID+5 with measurement-core-only `DEF_CORES=3` and 10 repeats per selector:
-
-- `syscall_prelude`
-- `cache_prelude`
-- `branch_prelude`
-- `quiet`
-- `public_kb_prelude`
-- `shuffled_kb_prelude`
-- `d_oracle_prelude`
+Do not rerun the same 5.9V public-prelude family. It has now failed baseline reproducibility, coupling, duration, VID-offset, target-coupled workload shaping, and 5.7 invariant scoring. Phase 5.10D added a clean cache/address topology witness, but it remains below the scalar encoding wall and is not a Phase 6 opener.
 
 Acceptance for advancing to a true Phase 6 Mode C run: a public-prelude selector must reproducibly choose an answer-predictive basin outside shuffled/null confidence intervals, while the `d_oracle_prelude` is treated only as a smuggle detector and never as evidence for crossing.
+
+<!-- BEGIN ADDITIVE BLOCK (agent: Claude; corrected by Codex live-probe pass) -->
+## Phase 5.10 RESULTS (live software probe; this session)
+
+Claim ceiling: software-visible timing structure only. Detail report:
+`phase5_10/PHASE5_10_LIVE_SOFTWARE_PROBE.md`.
+
+**Status:** `PHASE5_10_LIVE_PROBE_RAIL_INVISIBLE_SOFTWARE__BASIN_SCAN_NOT_COMPLETED`
+
+**Step 0 free-tone strobe = `ELECTRICAL_STROBE_UNFOUNDED`.** The no-pstate
+precondition run did not validate the passive 2.67 MHz strobe as a dependable
+preparation witness.
+
+**Driven lock-in = `RAIL_INVISIBLE_SOFTWARE`.** The short sweep and
+swapped-topology sweep both saw a live software timing channel, but neither
+met the rail-coupling gates needed for a Phase 6-ready preparation primitive.
+The evidence is mixed/topology-sensitive and dominated by memory/shared-resource
+response rather than a clean compute-only preparation channel.
+
+**Basin pilot = not complete.** The bounded basin pilot produced no basin rows
+before it was stopped for runtime control. It is not evidence for a retained
+basin.
+
+**5.10D cache/address topology witness.** The follow-up cache/address topology
+probe is legitimate and reproducible: same-address layout separates from
+compute/no-aggressor/different/random controls, with median effects
+`36.9428405` and `32.3227925`, permutation p-value `0.0004997501` in both core
+layouts, and family sign agreement `1.0`. Classification:
+`VALID_SCALAR_WITNESS_BELOW_ENCODING_WALL`.
+
+**Roadmap consequence.** Phase 6 remains gated. 5.10D strengthens the software
+observability story, but it is still a scalar/shared-resource timing channel.
+It does not break the encoding wall and does not create a fixed-point crossing.
+<!-- END ADDITIVE BLOCK (agent: Claude; corrected by Codex live-probe pass) -->
 
 ### 6.1 Agent Governance Daemon
 - [ ] Write a Python daemon on ASSFACE3000 that manages the Phenom via SSH
