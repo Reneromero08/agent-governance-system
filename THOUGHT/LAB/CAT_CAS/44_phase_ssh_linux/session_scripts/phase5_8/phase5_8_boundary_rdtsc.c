@@ -226,7 +226,7 @@ static void readonly_measured(
     if (timing_mode == 2) clock_gettime(CLOCK_MONOTONIC_RAW, &ts0);
 
     uint64_t t0 = rdtsc_start();
-    for (size_t i = 0; i < size; i += 8) {
+    for (size_t i = 0; i + sizeof(uint64_t) <= size; i += sizeof(uint64_t)) {
         sum += *(volatile uint64_t *)(tape + i);
     }
     __asm__ volatile("" ::: "memory");
@@ -354,6 +354,9 @@ int main(int argc, char **argv) {
 
     if (!tape || !key || !tape_backup) {
         fprintf(stderr, "FATAL: memory allocation failed\n");
+        if (tape) { munlock(tape, tape_size); free(tape); }
+        if (key) { munlock(key, tape_size); free(key); }
+        if (tape_backup) { munlock(tape_backup, tape_size); free(tape_backup); }
         return 1;
     }
 
@@ -364,6 +367,8 @@ int main(int argc, char **argv) {
 
     /* Start workers */
     worker_state_t workers[MAX_WORKERS];
+    memset(workers, 0, sizeof(workers));
+    int worker_start_failures = 0;
     if (g_cfg.worker_count > MAX_WORKERS)
         g_cfg.worker_count = MAX_WORKERS;
 
@@ -373,6 +378,7 @@ int main(int argc, char **argv) {
             if (worker_start(&workers[w], w, g_cfg.worker_cores[w], wm,
                              WORKER_BUFFER_DEFAULT, WORKER_STRIDE_DEFAULT) != 0) {
                 fprintf(stderr, "Worker %d failed to start\n", w);
+                worker_start_failures++;
             }
         }
         /* Stabilization delay */
@@ -381,7 +387,16 @@ int main(int argc, char **argv) {
 
     /* Generate trial order */
     int *trial_order = (int *)malloc((size_t)g_cfg.iterations * sizeof(int));
-    if (!trial_order) { fprintf(stderr, "FATAL: trial order alloc\n"); return 1; }
+    if (!trial_order) {
+        fprintf(stderr, "FATAL: trial order alloc\n");
+        if (g_cfg.worker_count > 0) {
+            worker_stop_all(workers, g_cfg.worker_count);
+            worker_join_all(workers, g_cfg.worker_count);
+        }
+        munlock(tape, tape_size); munlock(key, tape_size); munlock(tape_backup, tape_size);
+        free(tape); free(key); free(tape_backup);
+        return 1;
+    }
     generate_trial_order(trial_order, g_cfg.iterations, g_randomize_order);
 
     /* Pre-compute initial checksum */
@@ -590,6 +605,7 @@ int main(int argc, char **argv) {
             "Temperature start: %.2f C\n"
             "Temperature end: %.2f C\n"
             "Workers started: %d\n"
+            "Worker start failures: %d\n"
             "Failed joins: %d\n"
             "Worker lifetime OK: %s\n",
             __DATE__,
@@ -612,8 +628,9 @@ int main(int argc, char **argv) {
             temp_start,
             temp_end,
             workers_started,
+            worker_start_failures,
             failed_joins,
-            (failed_joins == 0) ? "YES" : "NO");
+            (worker_start_failures == 0 && failed_joins == 0) ? "YES" : "NO");
         fclose(f_tel);
     }
 
@@ -632,5 +649,5 @@ int main(int argc, char **argv) {
     printf("Affinity held: %s\n", affinity_ok ? "YES" : "NO");
     printf("RDTSC overhead: %llu cycles\n", (unsigned long long)rdtsc_overhead);
 
-    return (restore_failures > 0 || failed_joins > 0) ? 1 : 0;
+    return (restore_failures > 0 || worker_start_failures > 0 || failed_joins > 0) ? 1 : 0;
 }

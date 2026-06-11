@@ -127,7 +127,7 @@ Phase 5.9B establishes that the Phenom II's safe frequency range is not a valid 
 
 ## 11. What We Know Now
 
-1. **Phase 5.8:** Area-law boundary exists. Confirmed on silicon. AREA_LAW_CONFIRMED.
+1. **Phase 5.8:** Boundary exists on silicon. Strict area-law label restored after P0-locked cache artifact closure.
 2. **Phase 5.9A:** Software/tape/worker diversity does not destroy the boundary. SOFTWARE_STRESS_PARTIAL.
 3. **Phase 5.9B:** Frequency sweep (with restored MSR control) does not produce coherent fixed-tape boundary response. Within-group stochastic variance dominates. No instability edge reached. INSTABILITY_EDGE_NOT_REACHED.
 

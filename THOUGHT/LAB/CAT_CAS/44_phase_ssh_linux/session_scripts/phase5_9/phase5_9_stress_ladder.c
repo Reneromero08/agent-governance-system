@@ -202,7 +202,9 @@ static void readonly_measured(
     struct timespec ts0, ts1;
     if (timing_mode == 2) clock_gettime(CLOCK_MONOTONIC_RAW, &ts0);
     uint64_t t0 = rdtsc_start();
-    for (size_t i = 0; i < size; i += 8) sum += *(volatile uint64_t *)(tape + i);
+    for (size_t i = 0; i + sizeof(uint64_t) <= size; i += sizeof(uint64_t)) {
+        sum += *(volatile uint64_t *)(tape + i);
+    }
     __asm__ volatile("" ::: "memory");
     uint64_t t1 = rdtsc_end();
     if (timing_mode == 2) {
@@ -294,7 +296,13 @@ int main(int argc, char **argv) {
     uint8_t *tape = (uint8_t *)aligned_alloc_locked(tape_size, CATALYTIC_ALIGN);
     uint8_t *key = (uint8_t *)aligned_alloc_locked(tape_size, CATALYTIC_ALIGN);
     uint8_t *tape_backup = (uint8_t *)aligned_alloc_locked(tape_size, CATALYTIC_ALIGN);
-    if (!tape || !key || !tape_backup) { fprintf(stderr, "FATAL: mem alloc\n"); return 1; }
+    if (!tape || !key || !tape_backup) {
+        fprintf(stderr, "FATAL: mem alloc\n");
+        if (tape) { munlock(tape, tape_size); free(tape); }
+        if (key) { munlock(key, tape_size); free(key); }
+        if (tape_backup) { munlock(tape_backup, tape_size); free(tape_backup); }
+        return 1;
+    }
 
     uint64_t tape_seed = (uint64_t)time(NULL) ^ (uint64_t)getpid();
     generate_tape_key(tape, key, tape_size, tape_seed);
@@ -302,6 +310,8 @@ int main(int argc, char **argv) {
 
     /* Start workers */
     worker_state_t workers[MAX_WORKERS];
+    memset(workers, 0, sizeof(workers));
+    int worker_start_failures = 0;
     if (g_cfg.worker_count > MAX_WORKERS) g_cfg.worker_count = MAX_WORKERS;
 
     if (g_cfg.worker_mode != WORKER_MODE_NONE && g_cfg.worker_count > 0) {
@@ -309,6 +319,7 @@ int main(int argc, char **argv) {
             if (worker_start(&workers[w], w, g_cfg.worker_cores[w], g_cfg.worker_mode,
                              WORKER_BUFFER_DEFAULT, WORKER_STRIDE_DEFAULT) != 0) {
                 fprintf(stderr, "Worker %d failed to start\n", w);
+                worker_start_failures++;
             }
         }
         usleep(100000);
@@ -316,7 +327,16 @@ int main(int argc, char **argv) {
 
     /* Generate trial order */
     int *trial_order = (int *)malloc((size_t)g_cfg.iterations * sizeof(int));
-    if (!trial_order) { fprintf(stderr, "FATAL: trial order alloc\n"); return 1; }
+    if (!trial_order) {
+        fprintf(stderr, "FATAL: trial order alloc\n");
+        if (g_cfg.worker_count > 0) {
+            worker_stop_all(workers, g_cfg.worker_count);
+            worker_join_all(workers, g_cfg.worker_count);
+        }
+        munlock(tape, tape_size); munlock(key, tape_size); munlock(tape_backup, tape_size);
+        free(tape); free(key); free(tape_backup);
+        return 1;
+    }
     for (int i = 0; i < g_cfg.iterations; i++) trial_order[i] = i;
     if (g_randomize_order) {
         uint64_t seed = 42;
@@ -335,7 +355,16 @@ int main(int argc, char **argv) {
 
     /* Accumulate cycle stats for p50/p99 */
     uint64_t *cycle_array = (uint64_t *)malloc((size_t)g_cfg.iterations * sizeof(uint64_t));
-    if (!cycle_array) { fprintf(stderr, "FATAL: cycle array alloc\n"); return 1; }
+    if (!cycle_array) {
+        fprintf(stderr, "FATAL: cycle array alloc\n");
+        if (g_cfg.worker_count > 0) {
+            worker_stop_all(workers, g_cfg.worker_count);
+            worker_join_all(workers, g_cfg.worker_count);
+        }
+        munlock(tape, tape_size); munlock(key, tape_size); munlock(tape_backup, tape_size);
+        free(tape); free(key); free(tape_backup); free(trial_order);
+        return 1;
+    }
 
     /* Read temperature once for the per-trial CSV column (non-critical, after measurement) */
     double temp_during = temp_start;
@@ -463,8 +492,8 @@ int main(int argc, char **argv) {
         ? (double)(p99 > p50 ? (double)(p99 - p50) / (double)p99 : 0.0) : 0.0;
     double thermal_stress_score = (g_temp_limit > 0 && temp_end > 0)
         ? (temp_end / g_temp_limit) : 0.0;
-    double worker_integrity_score = (workers_started > 0)
-        ? (double)(workers_started - failed_joins) / (double)workers_started : 1.0;
+    double worker_integrity_score = (g_cfg.worker_count > 0)
+        ? (double)(workers_started - failed_joins) / (double)g_cfg.worker_count : 1.0;
 
     /* distance_to_failure: composite score (higher = closer to failure) */
     double distance_to_failure =
@@ -549,6 +578,7 @@ int main(int argc, char **argv) {
             "Temperature start: %.2f C\n"
             "Temperature end: %.2f C\n"
             "Workers started: %d\n"
+            "Worker start failures: %d\n"
             "Failed joins: %d\n"
             "Worker lifetime OK: %s\n\n"
             "Raw cycles mean: %.6f\n"
@@ -570,8 +600,8 @@ int main(int argc, char **argv) {
             g_cfg.freq_label, g_cfg.vid_label,
             total_restore_ok, g_cfg.iterations, restore_failures, migrations,
             temp_start, temp_end,
-            workers_started, failed_joins,
-            (failed_joins == 0) ? "YES" : "NO",
+            workers_started, worker_start_failures, failed_joins,
+            (worker_start_failures == 0 && failed_joins == 0) ? "YES" : "NO",
             mean, std,
             (unsigned long long)p50, (unsigned long long)p99,
             distance_to_failure, restoration_margin,
@@ -589,5 +619,5 @@ int main(int argc, char **argv) {
     printf("Affinity held: %s\n", affinity_ok ? "YES" : "NO");
     printf("distance_to_failure: %.6f\n", distance_to_failure);
 
-    return (restore_failures > 0 || failed_joins > 0) ? 1 : 0;
+    return (restore_failures > 0 || worker_start_failures > 0 || failed_joins > 0) ? 1 : 0;
 }

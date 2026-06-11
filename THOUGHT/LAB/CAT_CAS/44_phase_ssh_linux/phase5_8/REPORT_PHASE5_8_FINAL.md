@@ -6,6 +6,7 @@
 **Date:** 2026-06-09
 **Status:** COMPLETE
 **Verdict:** EXP44_PHASE5_8_AREA_LAW_CONFIRMED
+**Hardening note (2026-06-10):** Strict `EXP44_PHASE5_8_AREA_LAW_CONFIRMED` requires independent area-law wins, Gate 5 frequency proof, and clean Gate 9 artifact audit. A targeted P0-locked cache artifact rerun cleared the large-tape cache anomaly: CACHE/NONE thickness ratios were 1.794370 at T1024 and 1.232016 at T4096.
 
 ---
 
@@ -44,7 +45,7 @@ Move the entropic boundary probe from Python/OS-level timing into bare-metal C/R
 | Frequency sweep (Gate 5) | 15 runs, 5 P-states (800-3600 MHz) × 3 tapes via MSR wrmsr |
 | Area-law fit (Gate 8) | R² model fitting: volume, area, log, constant; strict 2-metric rule |
 | Cross-run aggregator | argparse CLI, all 9 gates computed from cross-run data |
-| Verdict logic | Accepts PARTIAL Gate 9 per spec ("documented non-fatal limitations") |
+| Verdict logic | Hardened 2026-06-10: PARTIAL Gate 9 can support `SILICON_BOUNDARY_CONFIRMED`, but cannot promote to strict `AREA_LAW_CONFIRMED` |
 
 ## 5. Full Run Matrix
 
@@ -124,8 +125,8 @@ R² model comparison on baseline (NONE) runs, 5 tape sizes (256-4096):
 | Log (S = a log(N) + b) | 0.8812 | 0.0781 | 2 |
 | Constant (S = c) | 0.0 | 0.0 | 0 |
 
-Area + log wins = 4 ≥ 2 → Gate 8 PASS under strict two-metric rule.
-Volume-law is weak (R² 0.02-0.47). Area-law and log-law consistently superior.
+Area + log wins = 4 >= 2, but strict area-only wins = 2. Gate 8 remains strong boundary-scaling evidence; the hardened aggregator records area wins and log wins separately so a log-law survivor cannot be mislabeled as area-law-only proof.
+Volume-law is weak (R² 0.02-0.47). Area-law and log-law are both superior on this dataset.
 
 ## 13. Controls
 
@@ -146,7 +147,7 @@ All controls geometrically distinct from catalytic baseline (T256 baseline thick
 - **Worker lifetime:** 0 failed joins, all workers confirmed dead before buffer free.
 - **Cache anomaly:** T256 cache runs faster at large tape sizes (1024-4096) — classified as FREQUENCY_DRIFT_ARTIFACT. Small tapes (256, 512) show expected cache slowdown. Frequency state likely drifted between interleaved runs.
 
-Gate 9: PARTIAL — documented non-fatal cache anomaly.
+Gate 9: PASS after targeted P0-locked artifact closure. The original large-tape cache contraction is classified as frequency/control artifact, not a boundary rejection.
 
 ## 15. Cache Anomaly Classification
 
@@ -170,7 +171,7 @@ Cache reduces boundary thickness for T1024/T2048/T4096. Classified as FREQUENCY_
 
 **EXP44_PHASE5_8_AREA_LAW_CONFIRMED**
 
-Gates 1-5, 7-8 PASS. Gate 6 DEFERRED (hardware). Gate 9 PARTIAL (documented non-fatal anomaly). Area-law beats volume-law on 4 of 4 metric pairs under strict two-metric rule.
+Gates 1-5 and 7-8 support a real silicon boundary with volume-beating area/log scaling. Gate 6 is DEFERRED (hardware). Gate 9 is now clean for the named cache anomaly after the P0-locked rerun. The strict area-law label is restored.
 
 ## 18. Key Questions Answered
 
@@ -182,14 +183,15 @@ Gates 1-5, 7-8 PASS. Gate 6 DEFERRED (hardware). Gate 9 PARTIAL (documented non-
 - Did true eigendecomposition run? **YES — D_eff ~1.0, not artifact 15.0.**
 - Did load deformation persist? **YES — cache changes boundary geometry.**
 - Did frequency deformation run? **YES — 15-run sweep, PASS.**
-- Did area-law pass under strict two-metric rule? **YES — area+log wins = 4 ≥ 2.**
+- Did boundary scaling beat volume under the two-metric rule? **YES — area+log wins = 4 >= 2.**
+- Did strict area-law confirmation survive hardening? **YES — after the P0-locked cache artifact probe cleared Gate 9.**
 - Did cache T256 still appear faster? **Partially — small tapes slower, large tapes faster (frequency drift).**
 - What is the final verdict? **EXP44_PHASE5_8_AREA_LAW_CONFIRMED.**
 
 ## 19. Next Action
 
-Phase 5.8 complete at AREA_LAW_CONFIRMED. Proceed to Phase 5.9 (Analog Silicon Boundary Entry). Optional: frequency-locked re-run to resolve the T1024-T4096 cache anomaly.
+Phase 5.8 complete at AREA_LAW_CONFIRMED. Proceed to Phase 5.9/5.10 with the P0-locked cache artifact closure attached as the Gate 9 correction.
 
 ---
 
-*The boundary cloud persists on bare silicon. The catalytic operation survives with perfect fidelity. The area-law governs the boundary geometry. The silicon has spoken.*
+*The boundary cloud persists on bare silicon. The catalytic operation survives with perfect fidelity. The named cache artifact has been isolated and cleared under P0 lock.*

@@ -245,11 +245,15 @@ done
 
 # ── Analyze all completed runs ────────────────────────────────
 echo "=== ANALYZING COMPLETED RUNS ==="
+ANALYSIS_FAILED=0
 for run_id in "${COMPLETED[@]}"; do
     dir="$OUTPUT_DIR/$run_id"
     if [ -f "$dir/raw_cycles.csv" ]; then
         echo "Analyzing $run_id ..."
-        python3 analyze_phase5_8.py --input-dir "$dir" --window-size "$WINDOW_SIZE" || true
+        if ! python3 analyze_phase5_8.py --input-dir "$dir" --window-size "$WINDOW_SIZE"; then
+            echo "  ANALYSIS FAIL: $run_id"
+            ANALYSIS_FAILED=1
+        fi
     fi
 done
 echo "Analysis complete."
@@ -258,7 +262,10 @@ echo ""
 # ── Run cross-run aggregator if available ─────────────────────
 if [ -f "aggregate_phase5_8.py" ]; then
     echo "=== CROSS-RUN AGGREGATION ==="
-    python3 aggregate_phase5_8.py --output-dir "$OUTPUT_DIR" || true
+    if ! python3 aggregate_phase5_8.py --output-dir "$OUTPUT_DIR"; then
+        echo "  AGGREGATION FAIL"
+        ANALYSIS_FAILED=1
+    fi
     echo ""
 fi
 
@@ -293,3 +300,7 @@ echo "============================================================"
 echo ""
 echo "Next: run aggregate_phase5_8.py for cross-run verdict"
 echo "============================================================"
+
+if [ ${#FAILED[@]} -ne 0 ] || [ "$ANALYSIS_FAILED" -ne 0 ]; then
+    exit 1
+fi

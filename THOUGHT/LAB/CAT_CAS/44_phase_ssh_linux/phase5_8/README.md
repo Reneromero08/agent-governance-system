@@ -1,9 +1,10 @@
 # Phase 5.8 — Bare-Metal Holographic Boundary Probe
 
-**Status:** COMPLETE (2026-06-09) — 34 runs, all gates closed
+**Status:** COMPLETE (2026-06-09), hardened review 2026-06-10
 **Lead:** CAT_CAS Exp44 Implementation Agent + DeepSeek
 **Target:** catcas @ 192.168.137.100 — AMD Phenom II X6 1090T (K10, 45nm SOI)
 **Verdict:** EXP44_PHASE5_8_AREA_LAW_CONFIRMED
+**Hardening note:** Strict `AREA_LAW_CONFIRMED` was restored after a P0-locked cache artifact rerun cleared the large-tape cache anomaly. CACHE/NONE thickness ratios: T1024=1.794370, T4096=1.232016.
 **Spec:** Bare Metal CPU Entropy.md, Entropy_2.md, Entropy_3.md, Entropy_4.md (Shizzle Obsidian vault)
 
 ## Objective
@@ -68,13 +69,13 @@ digital cache boundary
 | Gate 5 | Frequency/Detuning Deformation | DID operating point changes boundary geometry at matched worker_count |
 | Gate 6 | Voltage Boundary Deformation | VID changes geometry (DEFERRED if voltage data unavailable) |
 | Gate 7 | Digital-to-Silicon Transition | Boundary persists in C/RDTSC after Python/OS removal; operating-point geometry measurable |
-| Gate 8 | Area-Law Scaling | Boundary metric scaling beats volume-law on ≥2 independent metrics, survives ≥2 load conditions |
+| Gate 8 | Area-Law Scaling | Boundary metric scaling beats volume-law on >=2 independent metrics; strict area-law wording requires area wins separately from log wins |
 | Gate 9 | Scheduler/OS Artifact Audit | Trial order does not explain result; no migration; flatline regimes marked |
 
 ## Verdict Labels
 
-- `EXP44_PHASE5_8_SILICON_BOUNDARY_CONFIRMED` — Gates 1-5,7,9 pass; Gate 6 pass or properly deferred
-- `EXP44_PHASE5_8_AREA_LAW_CONFIRMED` — All silicon-boundary gates + Gate 8 strong pass on ≥2 metrics
+- `EXP44_PHASE5_8_SILICON_BOUNDARY_CONFIRMED` — Core silicon-boundary gates pass; Gate 6 may be properly deferred; Gate 9 may be PARTIAL only if explicitly non-fatal
+- `EXP44_PHASE5_8_AREA_LAW_CONFIRMED` — All silicon-boundary gates pass, Gate 5 frequency proof exists, Gate 9 is clean, and Gate 8 has independent area-law wins
 - `EXP44_PHASE5_8_DIGITAL_TO_SILICON_TRANSITION_CONFIRMED` — Boundary persists with reduced workers, detuning produces structured deformation
 - `EXP44_PHASE5_8_PARTIAL_BOUNDARY_DEFORMATION` — Geometry changes under load but operating-point or area-law evidence incomplete
 - `EXP44_PHASE5_8_NOISE_ONLY` — Raw variance changes but no coherent intrinsic geometry deformation
@@ -104,8 +105,8 @@ digital cache boundary
 | 5: Frequency Deformation | PASS | 15-run MSR P-state sweep, geometry varies with frequency |
 | 6: Voltage Deformation | DEFERRED_NOT_FAILED | K10 lacks per-core VID |
 | 7: Digital-to-Silicon Transition | PASS | Catalytic survives all 34 conditions |
-| 8: Area-Law Scaling | PASS | Area+log beats volume on 4/4 metrics (2-metric rule) |
-| 9: Artifact Audit | PARTIAL | Cache anomaly at T1024-T4096 (classified: FREQUENCY_DRIFT_ARTIFACT) |
+| 8: Area-Law Scaling | PASS | Area+log beats volume on 4/4 metrics; strict area/log split now recorded |
+| 9: Artifact Audit | PASS | P0-locked T1024/T4096 rerun cleared cache anomaly |
 
 See REPORT_PHASE5_8_FINAL.md for the full 19-section consolidated report.
 
@@ -131,7 +132,7 @@ See REPORT_PHASE5_8_FINAL.md for the full 19-section consolidated report.
 
 - COMPLETE: Verdict `EXP44_PHASE5_8_AREA_LAW_CONFIRMED`
 - Proceed to Phase 5.9 — Analog Silicon Boundary Entry (controlled VID/VRM/firmware voltage sweep)
-- Optional: Frequency-locked re-run to resolve T1024-T4096 cache anomaly (classified as FREQUENCY_DRIFT_ARTIFACT)
+- Gate 9 closure artifact: `phase5_8/results/freq_locked_cache_probe/PHASE5_8_FREQ_LOCKED_CACHE_ARTIFACT_PROBE.md`
 
 ## Related Artifacts
 

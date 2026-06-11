@@ -403,11 +403,18 @@ def main():
         log_wins  = sum([log_beats_vol_thick, log_beats_vol_radius])
         area_or_log_wins = area_wins + log_wins
         
-        # Gate 8: area-law OR log-law must beat volume-law on >= 2 metrics
-        if area_or_log_wins >= 2:
+        # Gate 8 is boundary-sublinear scaling. A strict area-law claim requires
+        # area wins independently; log-law wins are kept as weaker evidence.
+        strict_area_pass = area_wins >= 2
+        sublinear_pass = area_or_log_wins >= 2
+        if strict_area_pass:
             gates['8_Area_Law_Scaling'] = 'PASS'
+        elif sublinear_pass:
+            gates['8_Area_Law_Scaling'] = 'PARTIAL'
+            gates['8_reason'] = 'SUBLINEAR_OR_LOG_SCALING_ONLY'
         elif area_or_log_wins == 1:
             gates['8_Area_Law_Scaling'] = 'PARTIAL'
+            gates['8_reason'] = 'ONE_METRIC_ONLY'
         else:
             gates['8_Area_Law_Scaling'] = 'FAIL'
         
@@ -419,6 +426,8 @@ def main():
         gates['8_r2_log_radius'] = round(r2l_r, 4)
         gates['8_area_wins'] = area_wins
         gates['8_log_wins'] = log_wins
+        gates['8_area_or_log_wins'] = area_or_log_wins
+        gates['8_strict_area_pass'] = 'YES' if strict_area_pass else 'NO'
         gates['8_metrics_tested'] = 2
     else:
         gates['8_Area_Law_Scaling'] = 'PARTIAL'
@@ -432,6 +441,8 @@ def main():
         cache_anomaly != 'FREQUENCY_DRIFT_ARTIFACT'  # only disqualify if frequency drift explains it
     )
     gates['9_Artifact_Audit'] = 'PASS' if artifact_ok else 'PARTIAL'
+    gates['9_controls_distinct'] = 'YES' if (cat_empty_distinct and cat_nop_distinct) else 'NO'
+    gates['9_cache_anomaly'] = cache_anomaly
     
     # === Final verdict ===
     g1 = gates.get('1_Raw_Silicon_Timing', 'FAIL')
@@ -444,17 +455,15 @@ def main():
     g8 = gates.get('8_Area_Law_Scaling', 'FAIL')
     g9 = gates.get('9_Artifact_Audit', 'FAIL')
     
-    # Gate 9 PARTIAL with documented non-fatal limitation (e.g., classified cache
-    # anomaly) is acceptable per spec: "strong PARTIAL with documented non-fatal limitations"
-    core_pass = all(g in ('PASS', 'DEFERRED_NOT_FAILED')
-                    for g in [g1, g2, g3, g4, g7])
-    g9_acceptable = g9 in ('PASS', 'PARTIAL')
-    
-    if core_pass and g8 == 'PASS' and g9_acceptable:
+    core_pass = all(g in ('PASS', 'DEFERRED_NOT_FAILED') for g in [g1, g2, g3, g4, g7])
+    strict_area_pass = gates.get('8_strict_area_pass') == 'YES'
+    freq_proven = g5 == 'PASS'
+    artifact_clean = g9 == 'PASS'
+    artifact_acceptable = g9 in ('PASS', 'PARTIAL')
+
+    if core_pass and strict_area_pass and freq_proven and artifact_clean:
         verdict = 'EXP44_PHASE5_8_AREA_LAW_CONFIRMED'
-    elif core_pass and g9_acceptable:
-        verdict = 'EXP44_PHASE5_8_SILICON_BOUNDARY_CONFIRMED'
-    elif core_pass:
+    elif core_pass and g8 in ('PASS', 'PARTIAL') and artifact_acceptable:
         verdict = 'EXP44_PHASE5_8_SILICON_BOUNDARY_CONFIRMED'
     elif g1 == 'PASS' and g2 == 'PASS' and g3 == 'PASS' and g7 == 'PASS':
         verdict = 'EXP44_PHASE5_8_DIGITAL_TO_SILICON_TRANSITION_CONFIRMED'

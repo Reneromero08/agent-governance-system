@@ -1284,7 +1284,7 @@ operational entropy / contention / jitter
 
 ### 5.8 Bare-Metal Holographic Boundary Probe — COMPLETE
 
-**Status:** `PHASE5_8_COMPLETE` (2026-06-09) — `EXP44_PHASE5_8_AREA_LAW_CONFIRMED`
+**Status:** `PHASE5_8_COMPLETE` (2026-06-09; artifact-closed 2026-06-10) — `EXP44_PHASE5_8_AREA_LAW_CONFIRMED`
 **Spec:** `/Bare Metal CPU/Bare Metal Entropy.md`, `Entropy_2.md`, `Entropy_3.md`, `Entropy_4.md`
 **Directory:** `phase5_8/` (source in `session_scripts/phase5_8/`, results in `phase5_8/results/`)
 
@@ -1324,7 +1324,7 @@ digital cache boundary
 - [x] 15-run frequency sweep: 5 P-states × 3 tape sizes
 - [x] Windowed boundary feature extraction (256-sample windows, 390 windows/run)
 - [x] True eigendecomposition via numpy (D_eff ~1.0, not artifact 15.0)
-- [x] Area-law scaling with R² model fitting (volume, area, log, constant)
+- [x] Boundary scaling with R² model fitting (volume, area, log, constant); strict area/log split hardened 2026-06-10
 - [x] Cross-run aggregator with argparse CLI
 - [x] 9 verdict gates with explicit pass/deferred/fail labels
 - [x] Final report: REPORT_PHASE5_8_FINAL.md
@@ -1337,8 +1337,8 @@ digital cache boundary
 5. Frequency/Detuning Boundary Deformation — PASS (15-run sweep)
 6. Voltage Boundary Deformation — DEFERRED_NOT_FAILED (K10 VID floor)
 7. Digital-to-Silicon Transition — PASS
-8. Area-Law Scaling — PASS (area+log beats volume 4/4, 2-metric rule)
-9. Scheduler/OS Artifact Audit — PARTIAL (cache anomaly: FREQUENCY_DRIFT_ARTIFACT)
+8. Boundary Scaling — PASS (area+log beats volume 4/4; strict area/log split recorded)
+9. Scheduler/OS Artifact Audit — PASS after P0-locked cache artifact closure
 
 **Verdict labels:**
 - `EXP44_PHASE5_8_SILICON_BOUNDARY_CONFIRMED`
@@ -1353,13 +1353,14 @@ digital cache boundary
 **Next actions after Phase 5.8:**
 - COMPLETE: Verdict `EXP44_PHASE5_8_AREA_LAW_CONFIRMED`
 - Proceed to Phase 5.9 — Analog Silicon Boundary Entry
-- Optional: Frequency-locked re-run to resolve T1024-T4096 cache anomaly (classified as FREQUENCY_DRIFT_ARTIFACT)
+- Gate 9 closure: P0-locked interleaved NONE/CACHE rerun resolved T1024-T4096 cache anomaly
 
 **Phase 5.8R execution summary:**
 - 34 runs: 15 matrix + 4 controls + 15 frequency sweep
 - ~1,090,000 catalytic trials, 0 restoration failures, 0 worker join failures
 - Worker lifetime confirmed: joinable pthreads, buffer free only after join
-- Area-law: area+log beats volume on 4/4 metrics (strict 2-metric rule)
+- Boundary scaling: area+log beats volume on 4/4 metrics
+- Artifact closure: P0-locked cache probe, 12 runs / 360K trials, 0 restoration failures; CACHE/NONE thickness T1024=1.794370, T4096=1.232016
 - Frequency sweep: 5 P-states via MSR wrmsr, Gate 5 PASS
 - Report: `phase5_8/REPORT_PHASE5_8_FINAL.md`
 
@@ -1372,11 +1373,11 @@ digital cache boundary
 **Status:** `PHASE5_9_COMPLETE` (2026-06-10)
 **Verdict:** `EXP44_PHASE5_9_NOISE_ONLY` → RECLASSIFIED 5.9A as `EXP44_PHASE5_9A_SOFTWARE_STRESS_PARTIAL`
 **Phase 5.9B verdict:** `EXP44_PHASE5_9B_INSTABILITY_EDGE_NOT_REACHED`
-**Phase 5.9C verdict:** `EXP44_PHASE5_9C_INSTABILITY_EDGE_NOT_REACHED` — READY_FOR_HARDWARE_ANALOG_PHASE
+**Phase 5.9C verdict:** `EXP44_PHASE5_9C_INSTABILITY_EDGE_NOT_REACHED` + `TIMING_CV_CARRIER_CONFIRMED` + `VOLTAGE_CARRIER_BASIN_SWITCHING_CONFIRMED` + `BASIN_SELECTOR_FOUND_SYSCALL_HIGH_BIAS`
 **Spec:** Bare Metal CPU Entropy_5.md, Entropy_6.md, Entropy_6 1.md, Entropy_7.md (Shizzle Obsidian vault)
 **Directory:** `phase5_9/` (source in `session_scripts/phase5_9/`, results in `phase5_9/results/`)
 
-**Objective:** Test how boundary geometry behaves as the machine approaches the edge between stable computation and failure. Phase 5.8 proved the boundary exists and satisfies area-law scaling. Phase 5.9 asks what the boundary is *made of* by stressing the assumptions of stable digital computation.
+**Objective:** Test how boundary geometry behaves as the machine approaches the edge between stable computation and failure. Phase 5.8 proved the boundary exists on silicon and satisfies the hardened area-law claim after artifact closure. Phase 5.9 asks what the boundary is *made of* by stressing the assumptions of stable digital computation.
 
 **Core question:** What survives as the machine approaches failure?
 
@@ -1470,7 +1471,7 @@ CACHE/FREQUENCY DRIFT ARTIFACT MUST BE ISOLATED IN PHASE 5.9.
 **Execution results (2026-06-10):**
 - 21 runs: 5 baseline + 3 freq nominal + 10 worker + 2 tape pressure + 1 combined
 - 1,050,000 catalytic trials, 0 restoration failures, 0 worker join failures
-- Gate 1-6: PASS; Gate 7 (Area-Law): PARTIAL; Gate 8 (Analog Readiness): INCONCLUSIVE
+- Hardened 2026-06-10: Gate 1-3 and 5 PASS; Gate 4 and Gate 6 PARTIAL under stricter aggregator semantics; Gate 7 (Area-Law): PARTIAL; Gate 8 (Analog Readiness): INCONCLUSIVE
 - Regime: GEOMETRY_NOISE_ONLY — thickness vs distance_to_failure R² = 0.004
 - Area-law from Phase 5.8 does not persist under stress (volume R² 0.056 > area 0.031 > log 0.000)
 - Frequency sweep unavailable (msr module not loaded); voltage control unavailable (K10 VID floor)
@@ -1497,14 +1498,18 @@ CACHE/FREQUENCY DRIFT ARTIFACT MUST BE ISOLATED IN PHASE 5.9.
 - 33 runs: 30 combined ladder + 3 long-duration (250K trials each)
 - 2,250,000 total trials; 0 restoration failures, 0 flicker, 0 thermal aborts
 - Frequency: 5/5 P-states verified effective via rdmsr + timing; all-core: 6/6 cores controlled
-- Key finding: boundary thickness correlates with timing CV (r=0.607) — first coherent stress-geometry relationship
+- Key finding: boundary thickness correlates with timing CV (r=0.607), then reproduced in a focused carrier probe (r=0.584572). This is a coherent timing-carrier relationship, not proof of a failure-edge response because failure/flicker was not reached.
 - Artifact-separated: raw≈corrected (r=0.999) — boundary is structural, not dominated by timing artifact
 - Long-duration (3×250K): no drift toward failure, variance bounded
-- Gates: 1 PASS, 2 PASS, 3 PASS, 4 PASS, 5 PARTIAL, 6 PARTIAL, 7 PASS, 8 PASS, 9 INSTABILITY_EDGE_NOT_REACHED
+- Gates after hardening: 1 PASS, 2 PASS, 3 PASS, 4 PASS, 5 PARTIAL, 6 PARTIAL, 7 PARTIAL unless edge reached, 8 PASS/PARTIAL by artifact-separation threshold, 9 INSTABILITY_EDGE_NOT_REACHED
 - Verdict: `EXP44_PHASE5_9C_INSTABILITY_EDGE_NOT_REACHED`
 - Report: `phase5_9/REPORT_PHASE5_9C.md`
-- Trilogy complete: 115 runs, 5.74M trials across all Phase 5.9 sub-phases
-- Next: READY_FOR_HARDWARE_ANALOG_PHASE — software/kernel/safe-frequency envelope exhausted
+- Trilogy plus carrier follow-up: 145+ runs, ~7.44M trials across Phase 5.9 sub-phases
+- Carrier follow-up: 18 runs / 540K trials / 0 restoration failures; r(boundary_thickness, cycle_cv)=0.584572; r(boundary_thickness, spike_rate)=-0.053230
+- Abuse follow-up: 12 runs / 480K trials / 0 restoration failures; r(boundary_thickness, cycle_cv)=0.729327; max/quiet thickness ratio=3.938315
+- Voltage follow-up: K10 P4 VID field writable; P4 ladder/bracket reached 1.1375V; 0 restoration failures; boundary carrier amplified, collapsed, and switched basins under repeated VID+4/VID+5 bursts
+- Basin selector: VID+5 held at decoded 1.1625V; syscall prelude avoided collapse entirely, cache prelude avoided high-carrier entirely
+- Next: Phase 6 should treat timing-CV and voltage-sensitive basin selection/control as the live substrate feature; checksum/flicker failure remains unreached
 
 **Tasks:**
 

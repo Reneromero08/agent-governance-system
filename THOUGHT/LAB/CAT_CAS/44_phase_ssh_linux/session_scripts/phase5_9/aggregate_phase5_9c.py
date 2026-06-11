@@ -96,7 +96,11 @@ def main():
     gates['6_Restoration_Flicker_Search'] = 'PARTIAL' if flicker_total == 0 else 'PASS'
     gates['6_flicker_runs'] = flicker_total
 
-    # Gate 7: Boundary vs Failure Response
+    edge_reached = flicker_total > 0 or any(float(r.get('p99_p50_ratio', 0)) > 5.0 for r in runs.values())
+
+    # Gate 7: Boundary vs failure-adjacent timing response. A timing-CV/spike
+    # correlation is not a direct failure-boundary response unless an edge was
+    # actually approached.
     thicknesses = [float(r.get('boundary_thickness_nn_mean', 0)) for r in runs.values()]
     spike_rates = [float(r.get('spike_rate', 0)) for r in runs.values()]
     cv_vals = [float(r.get('cycle_cv', 0)) for r in runs.values()]
@@ -105,11 +109,19 @@ def main():
     if len(thicknesses) >= 5:
         r_cv = np.corrcoef(cv_vals, thicknesses)[0,1] if len(set(cv_vals)) > 1 else 0
         r_spike = np.corrcoef(spike_rates, thicknesses)[0,1] if len(set(spike_rates)) > 1 else 0
-        gates['7_Boundary_vs_Failure'] = 'PARTIAL' if abs(r_cv) < 0.3 and abs(r_spike) < 0.3 else 'PASS'
+        timing_response = abs(r_cv) >= 0.3 or abs(r_spike) >= 0.3
+        if timing_response and edge_reached:
+            gates['7_Boundary_vs_Timing_Response'] = 'PASS'
+        elif timing_response:
+            gates['7_Boundary_vs_Timing_Response'] = 'PARTIAL'
+            gates['7_reason'] = 'TIMING_RESPONSE_ONLY_EDGE_NOT_REACHED'
+        else:
+            gates['7_Boundary_vs_Timing_Response'] = 'PARTIAL'
+            gates['7_reason'] = 'NO_STRONG_TIMING_OR_SPIKE_CORRELATION'
         gates['7_r_thickness_vs_cv'] = r_cv
         gates['7_r_thickness_vs_spike'] = r_spike
     else:
-        gates['7_Boundary_vs_Failure'] = 'INCONCLUSIVE'
+        gates['7_Boundary_vs_Timing_Response'] = 'INCONCLUSIVE'
 
     # Gate 8: Artifact-Separated Geometry
     has_raw = all('raw_thickness' in r for r in runs.values())
@@ -119,15 +131,20 @@ def main():
         raw_vals = [float(r.get('raw_thickness', 0)) for r in runs.values()]
         sf_vals = [float(r.get('spike_free_thickness', 0)) for r in runs.values()]
         stable_vals = [float(r.get('stable_thickness', 0)) for r in runs.values()]
-        r_raw_sf = np.corrcoef(raw_vals, sf_vals)[0,1] if len(set(raw_vals)) > 1 else 0
-        gates['8_Artifact_Separated_Geometry'] = 'PASS'
+        r_raw_sf = np.corrcoef(raw_vals, sf_vals)[0,1] if len(set(raw_vals)) > 1 and len(set(sf_vals)) > 1 else 0
+        stable_spread = max(stable_vals) - min(stable_vals)
+        if abs(r_raw_sf) >= 0.8 and stable_spread > 0:
+            gates['8_Artifact_Separated_Geometry'] = 'PASS'
+        else:
+            gates['8_Artifact_Separated_Geometry'] = 'PARTIAL'
+            gates['8_reason'] = 'RAW_SPIKE_FREE_STABLE_CHANNELS_PRESENT_BUT_WEAKLY_SEPARATED'
         gates['8_r_raw_vs_sf'] = r_raw_sf
+        gates['8_stable_spread'] = stable_spread
     else:
         gates['8_Artifact_Separated_Geometry'] = 'PARTIAL'
 
     # Gate 9: Final Boundary Classification
     # Determine if edge was approached
-    edge_reached = flicker_total > 0 or any(float(r.get('p99_p50_ratio', 0)) > 5.0 for r in runs.values())
     platform_hard = all_core_ok < 2 and freq_ok < 3
 
     if edge_reached:

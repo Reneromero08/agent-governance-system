@@ -6,6 +6,7 @@
 **Date:** 2026-06-10
 **Status:** COMPLETE
 **Verdict:** EXP44_PHASE5_9C_INSTABILITY_EDGE_NOT_REACHED
+**Carrier update (2026-06-10):** `TIMING_CV_CARRIER_CONFIRMED`; software abuse follow-up advanced `CARRIER_SATURATION_EDGE_ADVANCED`; K10 P4 VID ladder found `VOLTAGE_CARRIER_BASIN_SWITCHING_CONFIRMED`; selector probe found `BASIN_SELECTOR_FOUND_SYSCALL_HIGH_BIAS`.
 
 ---
 
@@ -13,7 +14,7 @@
 
 | Phase | Verdict | Key Finding |
 |-------|---------|-------------|
-| 5.8 | AREA_LAW_CONFIRMED | Boundary exists, area-law governs geometry |
+| 5.8 | AREA_LAW_CONFIRMED | Boundary exists; strict area-law label restored after P0-locked artifact closure |
 | 5.9A | SOFTWARE_STRESS_PARTIAL | Boundary survives software/tape/worker diversity |
 | 5.9B | INSTABILITY_EDGE_NOT_REACHED | Safe P-state sweep: no coherent frequency response, within-group variance dominates |
 
@@ -123,8 +124,8 @@ This does NOT mean the boundary "peaks near failure" — failure was never reach
 | 4: Monotonic Stress Ladder | PASS | 33 ordered stress points executed |
 | 5: Long-Duration Edge Search | PARTIAL | 3 × 250K runs clean; no edge appears |
 | 6: Restoration Flicker Search | PARTIAL | 0 flicker across all runs; restoration perfect |
-| 7: Boundary vs Failure Response | PASS | r=0.607 thickness vs CV; coherent timing-geometry relationship |
-| 8: Artifact-Separated Geometry | PASS | Raw/sf/stable separated; raw≈corrected (r=0.999) |
+| 7: Boundary vs Timing Response | PARTIAL | r=0.607 thickness vs CV; timing response exists, but failure edge was not reached |
+| 8: Artifact-Separated Geometry | PASS/PARTIAL by hardened aggregator | Raw/sf/stable channels present; pass now requires strong raw/spike-free correlation and stable-channel spread |
 | 9: Final Classification | INSTABILITY_EDGE_NOT_REACHED | No failure, no flicker, bounded variance |
 
 ## 7. Verdict
@@ -137,17 +138,19 @@ The result is definitive for this platform: **the Phenom II's safe operating env
 
 This is NOT evidence against the holographic boundary hypothesis. It is evidence that the boundary is more robust than the platform's controllable stress range. The boundary survives everything we can throw at it without approaching failure.
 
-The one genuinely new finding: boundary thickness correlates moderately with timing CV (r=0.607). The boundary geometry responds to timing stability — not dramatically, but measurably. This is the thread to pull in Phase 6.0.
+The one genuinely new finding, boundary thickness coupling to timing CV, reproduced in a focused follow-up probe: r(boundary_thickness, cycle_cv)=0.584572 across 18 controlled P-state/worker-mode runs, while spike-rate correlation was -0.053230. A later software abuse probe pushed this further: r(boundary_thickness, cycle_cv)=0.729327, r(boundary_thickness, spike_rate)=-0.060804, max/quiet thickness ratio=3.938315, with 0 restoration failures.
+
+The voltage path is now live. Raw K10 P-state VID writes succeeded on P4. A reversible P4 VID ladder reached decoded 1.1375V in follow-up with 0 restoration failures, but the carrier response amplified, collapsed, and switched basins. At VID+5 / 1.1625V, repeated bursts ranged from near-flat carrier (`17.310719` thickness) to high-carrier (`22102.494293` thickness). A selector probe then showed pre-run substrate activity biases the basin: syscall prelude avoided collapse entirely, while cache prelude avoided high-carrier. This is a voltage carrier basin-selection edge, not a checksum failure edge.
 
 ## 8. The Phase 5.9 Trilogy: Complete
 
 | Phase | Runs | Trials | Key Result |
 |-------|------|--------|------------|
-| 5.8 | 34 | 1.09M | AREA_LAW_CONFIRMED — boundary exists |
+| 5.8 | 34 + 12 artifact-closure | 1.09M + 360K | AREA_LAW_CONFIRMED — boundary exists; cache artifact cleared |
 | 5.9A | 21 | 1.05M | SOFTWARE_STRESS_PARTIAL — boundary survives diversity |
 | 5.9B | 27 | 1.35M | Frequency restored; no coherent response; within-group variance dominates |
-| 5.9C | 33 | 2.25M | All pushes exhausted; r=0.607 thickness-CV found; edge never reached |
-| **Total** | **115** | **5.74M** | **Boundary real, robust, and beyond this platform's stress envelope** |
+| 5.9C | 33 + 18 carrier + 12 abuse + VID ladder/bracket/basin/selector | 2.25M + 540K + 480K + 684K | Failure edge not reached; timing-CV carrier confirmed; carrier saturation, voltage basin switching, and selector bias confirmed |
+| **Total** | **145+** | **7.44M** | **Boundary real, robust, timing-CV coupled, and voltage-carrier basin controllable** |
 
 ## 9. Next Boundary
 

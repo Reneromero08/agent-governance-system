@@ -96,10 +96,23 @@ def main():
         except (ValueError, KeyError):
             pass
 
+    r2 = 0.0
+    corr = 0.0
     if len(thicknesses) >= 3:
         thick_spread = max(thicknesses) - min(thicknesses)
-        gates['4_Boundary_Geometry_Stress_Response'] = 'PASS' if thick_spread > 0.01 else 'FAIL'
+        if len(distances) >= 3:
+            r2 = fit_r2(distances, thicknesses)
+            corr = float(np.corrcoef(np.array(distances), np.array(thicknesses))[0, 1]) if len(set(distances)) > 1 else 0.0
+        if thick_spread > 0.01 and (r2 >= 0.1 or abs(corr) >= 0.3):
+            gates['4_Boundary_Geometry_Stress_Response'] = 'PASS'
+        elif thick_spread > 0.01:
+            gates['4_Boundary_Geometry_Stress_Response'] = 'PARTIAL'
+            gates['4_reason'] = 'GEOMETRY_SPREAD_WITH_WEAK_STRESS_CORRELATION'
+        else:
+            gates['4_Boundary_Geometry_Stress_Response'] = 'FAIL'
         gates['4_thickness_spread'] = thick_spread
+        gates['4_thickness_vs_failure_r2'] = r2
+        gates['4_thickness_vs_failure_corr'] = corr
     else:
         gates['4_Boundary_Geometry_Stress_Response'] = 'FAIL'
 
@@ -132,8 +145,33 @@ def main():
         gates['5_Instability_Edge_Classification'] = 'FAIL'
         regime = 'INSUFFICIENT_DATA'
 
-    # Gate 6: Artifact Audit
-    gates['6_Artifact_Audit'] = 'PASS'
+    # Gate 6: Artifact Audit. This is not allowed to be a hardcoded PASS:
+    # restoration failures, missing distance fields, or invalid worker telemetry
+    # must downgrade or fail the master verdict.
+    artifact_flags = []
+    if total_failures > 0:
+        artifact_flags.append('RESTORATION_FAILURES')
+    if not distances or all(d == 0 for d in distances):
+        artifact_flags.append('DISTANCE_TO_FAILURE_MISSING_OR_FLAT')
+    if not thicknesses or max(thicknesses) <= 0:
+        artifact_flags.append('GEOMETRY_MISSING_OR_ZERO')
+
+    worker_scores = []
+    for r in runs.values():
+        try:
+            worker_scores.append(float(r.get('worker_integrity_score', 1)))
+        except ValueError:
+            artifact_flags.append('WORKER_INTEGRITY_NON_NUMERIC')
+    if worker_scores and min(worker_scores) < 1.0:
+        artifact_flags.append('WORKER_INTEGRITY_DEGRADED')
+
+    if not artifact_flags:
+        gates['6_Artifact_Audit'] = 'PASS'
+    elif 'RESTORATION_FAILURES' in artifact_flags or 'GEOMETRY_MISSING_OR_ZERO' in artifact_flags:
+        gates['6_Artifact_Audit'] = 'FAIL'
+    else:
+        gates['6_Artifact_Audit'] = 'PARTIAL'
+    gates['6_artifact_flags'] = ';'.join(artifact_flags) if artifact_flags else 'NONE'
 
     # Gate 7: Area-Law Persistence Under Stress
     # Compute separately for stable (baseline only) and full ladder.
@@ -212,8 +250,11 @@ def main():
 
     # ── Final verdict ─────────────────────────────────────────
     fail_count = sum(1 for k, v in gates.items() if v == 'FAIL')
+    partial_count = sum(1 for k, v in gates.items() if v == 'PARTIAL')
 
     if fail_count > 0:
+        final_verdict = 'EXP44_PHASE5_9_PARTIAL'
+    elif partial_count > 0:
         final_verdict = 'EXP44_PHASE5_9_PARTIAL'
     elif regime == 'GEOMETRY_PEAKS_NEAR_FAILURE':
         final_verdict = 'EXP44_PHASE5_9_GEOMETRY_PEAKS_NEAR_FAILURE'

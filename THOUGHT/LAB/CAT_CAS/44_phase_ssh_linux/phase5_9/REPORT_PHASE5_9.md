@@ -17,7 +17,7 @@ Test how boundary geometry behaves as the machine approaches the edge between st
 
 ## 2. Inherited Phase 5.8 Status
 
-- Verdict: EXP44_PHASE5_8_AREA_LAW_CONFIRMED
+- Verdict after artifact closure: EXP44_PHASE5_8_AREA_LAW_CONFIRMED
 - 34 runs, ~1.09M trials, 0 restoration failures, 0 worker join failures
 - Area-law confirmed under strict 2-metric rule
 - Open issue: cache/frequency drift artifact (Gate 9 PARTIAL)
@@ -147,7 +147,7 @@ The actual result is outside the three-world framework: **Geometry varies but no
 - **Trial order:** Randomized per run (seed=42).
 - **Cache anomaly from Phase 5.8:** Not isolated (frequency control unavailable). The FREQUENCY_DRIFT_ARTIFACT remains open.
 
-**Gate 6: PASS** — no artifacts explain the geometry as artifact-dominant. The noise is real measurement noise, not a confound.
+**Gate 6: PARTIAL after hardening** — the original aggregator hardcoded this gate as PASS. The hardened aggregator now checks restoration failures, missing/flat `distance_to_failure`, missing geometry, and worker integrity. With the reported stress axis dominated by tape size and worker mode rather than a clean failure boundary, this gate is evidence-bearing but not clean.
 
 ## 12. Gate Table
 
@@ -156,17 +156,17 @@ The actual result is outside the three-world framework: **Geometry varies but no
 | 1: Baseline Reproduction | PASS | 5/5 baseline runs, all restoration 100% |
 | 2: Stress Ladder Validity | PASS | 21 stress points, distance_to_failure computed |
 | 3: Restoration Survival Curve | PASS | 1.05M trials, 0 failures across all stress levels |
-| 4: Boundary Geometry Stress Response | PASS | Thickness spread 8116.51 (geometry changes exist) |
+| 4: Boundary Geometry Stress Response | PARTIAL | Thickness spread exists, but stress correlation is weak |
 | 5: Instability-Edge Classification | PASS | Classified: GEOMETRY_NOISE_ONLY |
-| 6: Artifact Audit | PASS | No dominant artifact; results from real measurement |
+| 6: Artifact Audit | PARTIAL | Hardened audit no longer hardcodes PASS; distance/stress confound remains |
 | 7: Area-Law Persistence Under Stress | PARTIAL | Volume beats area+log; area-law from 5.8 does not hold under stress |
 | 8: Analog Entry Readiness | INCONCLUSIVE | Noise-only regime does not identify a safe analog operating region |
 
 ## 13. Verdict
 
-**EXP44_PHASE5_9_NOISE_ONLY**
+**EXP44_PHASE5_9A_SOFTWARE_STRESS_PARTIAL**
 
-The boundary stress test executed successfully: 21 runs, 1.05M trials, 0 failures. The boundary geometry exists and varies across conditions, but the variation is not coherently linked to stress intensity. The area-law scaling that characterized Phase 5.8 breaks down under the diverse stress ladder. Raw timing variance between tape sizes and worker modes dominates over stress-gradient-driven boundary deformation.
+The boundary stress test executed successfully: 21 runs, 1.05M trials, 0 failures. The boundary geometry exists and varies across conditions, but the variation is not coherently linked to stress intensity. The area-law scaling that characterized Phase 5.8 does not persist under the diverse stress ladder. Raw timing variance between tape sizes and worker modes dominates over stress-gradient-driven boundary deformation.
 
 This is not a failure — it is a boundary classification. The holographic boundary measured in Phase 5.8 is real but is more sensitive to implementation-specific parameters (tape size, worker mode) than to the abstract stress gradient defined by distance_to_failure. The boundary geometry does not exhibit the coherent stress response that would indicate a deeper silicon-facing physical constraint structure.
 

@@ -273,19 +273,32 @@ echo "Output: $OUTPUT_DIR/"
 echo ""
 
 # ── Auto-analysis ────────────────────────────────────────────
+ANALYSIS_FAILED=0
 if command -v python3 &>/dev/null && [ -f "analyze_phase5_9c.py" ]; then
     echo "=== ANALYZING ==="
     for run_id in "${COMPLETED[@]}"; do
         dir="$OUTPUT_DIR/$run_id"
-        [ -f "$dir/raw_cycles.csv" ] && python3 analyze_phase5_9c.py --input-dir "$dir" || true
+        if [ -f "$dir/raw_cycles.csv" ]; then
+            if ! python3 analyze_phase5_9c.py --input-dir "$dir"; then
+                echo "  ANALYSIS FAIL: $run_id"
+                ANALYSIS_FAILED=1
+            fi
+        fi
     done
     echo ""
 fi
 
 if command -v python3 &>/dev/null && [ -f "aggregate_phase5_9c.py" ]; then
     echo "=== CROSS-RUN AGGREGATION ==="
-    python3 aggregate_phase5_9c.py --output-dir "$OUTPUT_DIR" --audit-dir "$AUDIT_DIR" || true
+    if ! python3 aggregate_phase5_9c.py --output-dir "$OUTPUT_DIR" --audit-dir "$AUDIT_DIR"; then
+        echo "  AGGREGATION FAIL"
+        ANALYSIS_FAILED=1
+    fi
     echo ""
 fi
 
 echo "============================================================"
+
+if [ ${#FAILED[@]} -ne 0 ] || [ "$ANALYSIS_FAILED" -ne 0 ]; then
+    exit 1
+fi

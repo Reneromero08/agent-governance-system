@@ -190,13 +190,19 @@ static inline void *aligned_alloc_locked(size_t size, size_t align) {
 /* --- File write helper --- */
 static inline FILE *open_csv(const char *dir, const char *name, const char *headers) {
     char path[512];
-    snprintf(path, sizeof(path), "%s/%s", dir, name);
+    int n = snprintf(path, sizeof(path), "%s/%s", dir, name);
+    if (n < 0 || (size_t)n >= sizeof(path)) {
+        fprintf(stderr, "FATAL: output path too long: %s/%s\n", dir, name);
+        return NULL;
+    }
     FILE *f = fopen(path, "w");
     if (!f) {
         perror(path);
         return NULL;
     }
-    fprintf(f, "%s\n", headers);
+    if (headers && headers[0] != '\0') {
+        fprintf(f, "%s\n", headers);
+    }
     return f;
 }
 

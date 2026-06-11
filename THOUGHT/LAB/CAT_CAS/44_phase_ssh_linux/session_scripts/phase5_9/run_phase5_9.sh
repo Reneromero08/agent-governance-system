@@ -233,11 +233,15 @@ echo ""
 # ── Analyze completed runs ────────────────────────────────────
 if command -v python3 &>/dev/null; then
     echo "=== ANALYZING ==="
+    ANALYSIS_FAILED=0
     for run_id in "${COMPLETED[@]}"; do
         dir="$OUTPUT_DIR/$run_id"
         if [ -f "$dir/raw_cycles.csv" ] && [ -f "analyze_phase5_9.py" ]; then
             echo "  $run_id ..."
-            python3 analyze_phase5_9.py --input-dir "$dir" || true
+            if ! python3 analyze_phase5_9.py --input-dir "$dir"; then
+                echo "  ANALYSIS FAIL: $run_id"
+                ANALYSIS_FAILED=1
+            fi
         fi
     done
 
@@ -245,10 +249,17 @@ if command -v python3 &>/dev/null; then
     if [ -f "aggregate_phase5_9.py" ]; then
         echo ""
         echo "=== CROSS-RUN AGGREGATION ==="
-        python3 aggregate_phase5_9.py --output-dir "$OUTPUT_DIR" || true
+        if ! python3 aggregate_phase5_9.py --output-dir "$OUTPUT_DIR"; then
+            echo "  AGGREGATION FAIL"
+            ANALYSIS_FAILED=1
+        fi
     fi
 fi
 
 echo ""
 echo "Output: $OUTPUT_DIR/"
 echo "============================================================"
+
+if [ ${#FAILED[@]} -ne 0 ] || [ "${ANALYSIS_FAILED:-0}" -ne 0 ]; then
+    exit 1
+fi
