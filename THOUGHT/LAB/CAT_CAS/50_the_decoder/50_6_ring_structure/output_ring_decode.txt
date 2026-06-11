@@ -1,0 +1,47 @@
+==================================================================================================
+EXP 50.6 (A9)  -  attack the RING structure (Kyber's actual wall), not plain LWE
+  the NTT IS the abelian Galois/CRT transform = the decodable readout. does it collapse it?
+==================================================================================================
+
+[G0] does the abelian NTT diagonalize ring multiplication?  (NTT(a*s) == NTT(a) o NTT(s))
+  n=4   psi=4043   diagonalizes: True
+  n=8   psi=722    diagonalizes: True
+  n=16  psi=1212   diagonalizes: True
+  n=32  psi=563    diagonalizes: True
+
+[M1] error magnitude in the COEFFICIENT basis vs the NTT basis (b=2 small error)
+  if smallness survives the NTT, per-coordinate decode is trivial; if not, it is blocked.
+  n     max|e|_coeff   max|e|_NTT   mean|e|_NTT   (uniform ref ~3072)
+  4     1.9            4101.9       3037.3      
+  8     2.0            5514.0       3018.4      
+  16    2.0            5797.6       3089.3      
+  32    2.0            5900.8       3022.3      
+
+[M2] ring-aware decode: NTT, then per-coordinate 1-D search (O(n*q*m) = POLY).
+  control = SAME decode but with ZERO error (isolates whether error-spread is the blocker).
+  n     m   recover_rate(real e)   recover_rate(zero e)   chance=1/q
+  4     4   0.00                   1.00                   8.1e-05
+  8     4   0.00                   1.00                   8.1e-05
+  16    4   0.00                   1.00                   8.1e-05
+  32    4   0.00                   1.00                   8.1e-05
+
+==================================================================================================
+WHAT THE DATA SAYS
+  [PASS] G0  the abelian NTT diagonalizes ring multiplication (decodable transform EXISTS)
+  [YES] M1  error is small in the coefficient basis but ~uniform in the NTT basis
+  [YES] M2a zero-error control: ring decode COLLAPSES the search to poly (recovers s)
+  [YES] M2b real error: per-coordinate ring decode is BLOCKED (recovery ~chance)
+==================================================================================================
+VERDICT: NAIVE_RING_DECODE_BLOCKED_BY_CONJUGATE_BASIS
+  The abelian ring transform (NTT = CRT/Galois) DOES diagonalize the multiplication, and if
+  the error were small in that basis the decode would collapse the n-dim search to n poly
+  1-D searches (zero-error control recovers s outright). It does NOT collapse with real error
+  because the secret/error are small ONLY in the COEFFICIENT basis; the NTT spreads the error
+  to ~uniform over Z_q, destroying the smallness that recovery needs. The hardness lives in
+  the tension between TWO CONJUGATE BASES: multiplication is diagonal in the NTT basis, but
+  smallness exists only in the coefficient basis - and no single basis has both.
+  This is NOT 'the wall holds.' Naive ring-decode (one basis at a time) is blocked for an
+  IDENTIFIED reason. The refined, on-thesis frontier is exactly the lab's phase-space
+  machinery: is there a JOINT coefficient<->NTT (time-frequency / Wigner-like) holographic
+  readout that exploits multiplicative-diagonality AND additive-smallness at once? That
+  exceeds what this brick can resolve -> handed to Mythos with this exact state.

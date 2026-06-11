@@ -1,0 +1,56 @@
+==================================================================================================
+EXP 50.5  -  DECODER CLASS MAP: do the lab's decoders live on the decodable side?
+  decodable = abelian-HSP + topological-invariants + normal subgroups;  wall = non-normal/lattice
+==================================================================================================
+
+[ANCHORS] measured endpoints of the decodability map (coset signal vs random null)
+  decodable anchor  Z_64 (abelian HSP, Shor/Exp20 class):  D_char = 1.000
+  wall anchor       D_8  (non-normal HSP, lattice class):  D_char = 0.172
+  separation Cohen d = 6.68
+
+[HANDOFF] validating Exp 44 Phase-6.4 predicted peaks vs independently computed Riemann zeros
+  status: PEAKS_VALID
+  peak    zeta_zero   rel_err
+    14.13   14.135     0.0003
+    21.02   21.022     0.0001
+    25.01   25.011     0.0
+    30.42   30.425     0.0002
+    32.94   32.935     0.0001
+    37.59   37.586     0.0001
+    40.92   40.919     0.0
+    43.33   43.327     0.0001
+    48.01   48.005     0.0001
+    49.77   49.774     0.0001
+
+[CLASS MAP] each lab decoder -> decodability class (MEASURED anchors; ANALYSIS per mechanism)
+  exp      name                      class                 evidence
+  20       Catalytic Eigen Shor      abelian_hsp           MEASURED-50.2 abelian shelf D=1.0
+  24       Quantum Catalytic Shor    abelian_hsp           ANALYSIS: same abelian HSP as Exp 20
+  34       Zeta Eigenbasis (Riemann) topological_invariant MEASURED-50.1 zeros recovered, real-vs-scrambled 0.60 (peak-density caveat)
+  35       Topological Halting Oracl topological_invariant ANALYSIS: integer winding of a poly-size H
+  36       Bekenstein-Godel          topological_invariant ANALYSIS: Chern/Z_2 invariant
+  37       2D Chern Oracle           topological_invariant ANALYSIS: Bott index of a poly-size lattice
+  38-40    Weyl/Axion/Floquet Oracle topological_invariant ANALYSIS: topological invariants (partial-density caveats)
+  45.1-4,6 Phase Math sensors        topological_invariant ANALYSIS: topological sensors of poly-size operators
+  46       Phase Bio sensors         topological_invariant ANALYSIS: localization invariants (46.3 weakened)
+  31       Graph Isomorphism (.holo) spectrum_bounded      MEASURED-50.2 cospectral anchor: Shrikhande/Rook defeat it
+  45.5     P vs NP / SAT sensor      non_normal_wall       ANALYSIS+M-4: NxN cannot capture 2^N (the frustrated/non-abelian side)
+  25       Lattice Holography (LWE/S non_normal_wall       MEASURED-50.4 toy-scale-only; does NOT cross unique-SVP
+  -> 9 decodable (abelian-HSP / topological-invariant / normal-subgroup), 3 bounded/wall
+
+==================================================================================================
+GATES
+  [PASS] G1 anchors measured (decodable abelian vs collapsed non-normal)  Z_64 D=1.000 (decodable) vs D_8 D=0.172 (wall), Cohen d=6.68
+  [PASS] G2 Exp 44 handoff predicted peaks validated (or mpmath absent)  handoff peak validation: PEAKS_VALID
+  [PASS] G3 class-map partition consistent; wall set = {25,31,45.5}      partition consistent; bounded/wall set = ['25', '31', '45.5'] (expected ['25', '31', '45.5'])
+  [PASS] G4 no working decoder relies on a non-normal/strong-sampling step  all 9 decodable decoders are abelian-HSP / topological-invariant / normal-subgroup
+==================================================================================================
+VERDICT: DECODER_MAP_CONSISTENT
+  The lab's working decoders all live on the decodable side: period-finding (Exp 20/24)
+  is abelian-HSP; the Riemann/halting/Chern/Phase-Math/Phase-Bio sensors are topological
+  invariants of poly-size operators. The decoders that touch the non-normal / strong-
+  sampling / lattice side are exactly the bounded or negative ones: Exp 31 (cospectral-
+  bounded, 50.2 anchor), Exp 45.5 (NxN cannot capture 2^N), and Exp 25 (toy-scale-only,
+  50.4). None of the working decoders secretly relies on crossing the located wall.
+  (Claim level 4-5: anchors + handoff peaks measured; per-experiment class is analysis
+  from documented mechanism, anchored by Exp 50 results.)

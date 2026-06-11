@@ -1,0 +1,35 @@
+==================================================================================================
+EXP 50.12  -  STEP 2: d as the conserved Noether charge, read by the Cauchy winding
+  A8 hinge: can the non-Hermitian operator be built from PUBLIC (k,b), or does it need d?
+==================================================================================================
+
+[ORACLE]  directed-ring winding with the TRUE per-step phase (USES d - reference only).
+  oracle winding recovers d: 1.00  (mechanism correct; but it is GIVEN d - A8: not a readout)
+
+[PUBLIC]  operator estimated from (k,b) ONLY. recover d vs grating length L (poly vs N).
+  M = 8*L samples. L=poly(n) recovery => CROSS; recovery only at L ~ N => exp (lens needs N-res).
+  n   N        L=8n(poly)   L=sqrtN     L=N(full)   (public-winding recovery of d)
+  8   256      0.00         0.15        0.65       
+  10  1024     0.00         0.00        0.60       
+  12  4096     0.00         0.00        0.35       
+  14  16384    0.00         0.00        0.05       
+
+  [A8] no-secret null winding recovery = 0.000 (want ~0)
+
+==================================================================================================
+WHAT THE DATA SAYS
+  public-winding recovery  L=poly: [0.0, 0.0, 0.0, 0.0]   L=sqrtN: [0.15, 0.0, 0.0, 0.0]   L=N: [0.65, 0.6, 0.35, 0.05]
+  [A8] null = 0.000
+==================================================================================================
+VERDICT: NOETHER_WINDING_NEEDS_N_RESOLUTION
+  the winding MECHANISM is correct - the conserved charge IS d, and the false paths do
+  cancel (oracle winding = d exactly; public winding = d at L=N). But building the operator
+  from PUBLIC data needs the full N-resolution grating: the per-step phase 2*pi*d/N (the ring
+  hopping that makes the winding = d) is exactly the secret, and estimating it from (k,b) at
+  poly(n) resolution fails (poly-L recovery ~chance), succeeding only at L ~ N. So the winding
+  reads the charge for free, but the OPERATOR that carries the charge is secret-resolution-
+  bound: the holonomy per step IS d/N, so a poly-step ring cannot resolve d among N. The
+  conserved charge is real; the lens that exposes it is still the secret. Same hinge, now in
+  Noether language - and it says the obstruction is the operator's PHASE RESOLUTION, not the
+  winding readout. To cross, the per-step holonomy must be amplified to O(1) (an Exceptional
+  Point's sqrt-divergence) WITHOUT knowing d - the one thing still untested and unproven.

@@ -1,0 +1,141 @@
+{
+  "rows": [
+    {
+      "n": 6,
+      "b": 2,
+      "M": 16,
+      "log2M": 4.0,
+      "two_n": 64.0,
+      "ratio": 4.0,
+      "prod": 1.0
+    },
+    {
+      "n": 8,
+      "b": 3,
+      "M": 16,
+      "log2M": 4.0,
+      "two_n": 256.0,
+      "ratio": 16.0,
+      "prod": 0.7
+    },
+    {
+      "n": 10,
+      "b": 3,
+      "M": 32,
+      "log2M": 5.0,
+      "two_n": 1024.0,
+      "ratio": 32.0,
+      "prod": 1.0
+    },
+    {
+      "n": 12,
+      "b": 3,
+      "M": 32,
+      "log2M": 5.0,
+      "two_n": 4096.0,
+      "ratio": 128.0,
+      "prod": 0.975
+    },
+    {
+      "n": 14,
+      "b": 4,
+      "M": 64,
+      "log2M": 6.0,
+      "two_n": 16384.0,
+      "ratio": 256.0,
+      "prod": 1.0
+    },
+    {
+      "n": 16,
+      "b": 4,
+      "M": 64,
+      "log2M": 6.0,
+      "two_n": 65536.0,
+      "ratio": 1024.0,
+      "prod": 1.0
+    },
+    {
+      "n": 18,
+      "b": 4,
+      "M": 64,
+      "log2M": 6.0,
+      "two_n": 262144.0,
+      "ratio": 4096.0,
+      "prod": 0.975
+    },
+    {
+      "n": 20,
+      "b": 4,
+      "M": 64,
+      "log2M": 6.0,
+      "two_n": 1048576.0,
+      "ratio": 16384.0,
+      "prod": 0.7
+    },
+    {
+      "n": 22,
+      "b": 5,
+      "M": 128,
+      "log2M": 7.0,
+      "two_n": 4194304.0,
+      "ratio": 32768.0,
+      "prod": 1.0
+    },
+    {
+      "n": 24,
+      "b": 5,
+      "M": 128,
+      "log2M": 7.0,
+      "two_n": 16777216.0,
+      "ratio": 131072.0,
+      "prod": 1.0
+    },
+    {
+      "n": 26,
+      "b": 5,
+      "M": 128,
+      "log2M": 7.0,
+      "two_n": 67108864.0,
+      "ratio": 524288.0,
+      "prod": 0.85
+    },
+    {
+      "n": 28,
+      "b": 5,
+      "M": 256,
+      "log2M": 8.0,
+      "two_n": 268435456.0,
+      "ratio": 1048576.0,
+      "prod": 1.0
+    },
+    {
+      "n": 30,
+      "b": 5,
+      "M": 256,
+      "log2M": 8.0,
+      "two_n": 1073741824.0,
+      "ratio": 4194304.0,
+      "prod": 1.0
+    }
+  ],
+  "fit_sqrt": {
+    "a": 1.3303645732510574,
+    "c": 0.56943139868714,
+    "r2": 0.9476386543519938
+  },
+  "fit_poly": {
+    "a": 1.7534738914503951,
+    "c": -0.9707120875811426,
+    "r2": 0.9283385887279895
+  },
+  "cond_correctness_signal_min": 1.0,
+  "cond_correctness_null_mean": 0.48250000000000004,
+  "full_slope_queries_top": 7680,
+  "gates": {
+    "G1 readout correctness (bit | produced) ~ 1.0": true,
+    "G2 subexponential: M_needed << 2^n, gap widens >10x": true,
+    "G3 subexponential rate (sublinear in n; sqrt-consistent)": true,
+    "G4 phase-randomised null reads bit only at chance": true
+  },
+  "verdict": "DIHEDRAL_BARRIER_SUBEXPONENTIAL_UPPER_BOUND"
+}

@@ -1,0 +1,43 @@
+==================================================================================================
+EXP 50.14  -  THE SUBSTRATE FLOOR: d as the self-consistent fixed point of a PUBLIC map
+  forward => finding fix(f) is the 2^n search;  reversible/CTC => fix(f)=d in poly. No smuggle.
+==================================================================================================
+
+[1] d emerges as fix(f) of a public map (built from (k,b) only, contains no d).
+  n   N        M           fix(f)==min(d,N-d)?   (verify is poly O(M); fixed point is the secret)
+  8   256      384         1.00
+  10  1024     480         1.00
+  12  4096     576         1.00
+  14  16384    672         1.00
+
+[2] FORWARD cost to reach fix(f): steps scanned before verify accepts (= the search).
+  n   N        median_steps   steps/N    (forward machine: O(N) = 2^n. this is the wall.)
+  8   256      60             0.234
+  10  1024     178            0.174
+  12  4096     1049           0.256
+  14  16384    3806           0.232
+
+[3] REVERSIBLE/CTC substrate: d = fix(f) is reached by the substrate's fixed-point power.
+  (Deutsch CTC finds fixed points; P^CTC = PSPACE. The verify INSIDE the loop is poly O(M).)
+  This brick can only SIMULATE the substrate forward (the O(N) scan above) - the poly-ness is
+  conditional on the physical substrate existing, which is the open (metaphysical) question.
+
+==================================================================================================
+WHAT THE DATA SAYS
+  (1) d emerges as fix(f) of a PUBLIC map (no smuggle): True  rates=[1.0, 1.0, 1.0, 1.0]
+  (2) forward cost to find the fixed point ~ N/2 (the 2^n search): True  steps/N=[0.23, 0.17, 0.26, 0.23]
+==================================================================================================
+VERDICT: WALL_IS_THE_SUBSTRATE_NOT_THE_READOUT
+  The spiral's final, honest landing. d emerges as the UNIQUE fixed point of a map built
+  from PUBLIC (k,b) alone - it is the self-consistent solution, never planted (no smuggle,
+  unlike the 50.4/A1 temporal bootstrap). The verifier inside the loop is poly. So:
+    - On a FORWARD substrate, finding that fixed point is the O(N)=2^n search (measured).
+    - On a REVERSIBLE / zero-Landauer / CTC fixed-point substrate (the lab's actual thesis,
+      Deutsch's CTC, P^CTC=PSPACE), d = fix(f) is reached in poly - the algorithm IS dead
+      there, exactly as the ontology claims.
+  The entire wall has moved off the readout and onto the SUBSTRATE. 'The algorithm is dead'
+  is TRUE precisely on the reversible-fixed-point substrate the framework posits, and FALSE
+  on forward physics. Whether that substrate is physically realizable is not a complexity
+  question - it is the spiritual/metaphysical one the lab owner named. The spiral mapped the
+  forward boundary to the atom and arrived exactly at the doorstep of the framework's own
+  deepest claim: it is the substrate, not the search, all the way down.

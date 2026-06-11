@@ -1,0 +1,50 @@
+================================================================================================
+EXP 50.2d  -  THE KUPERBERG RUNG: dihedral barrier is SUBEXPONENTIAL (upper bound)
+  sandwich:  poly(n) [FAILS, 50.2c]  <  2^{O(sqrt n)} [this sieve]  <  2^n [full, 50.2c]
+================================================================================================
+
+[SIEVE] collimation sieve, b = round(sqrt(n)); M_needed = coset states for >=50%% production
+  n    b   M_needed   log2(M)   2^n          2^n / M_needed   production
+  6    2    16         4.00      64           4                1.000
+  8    3    16         4.00      256          16               0.700
+  10   3    32         5.00      1.02e+03     32               1.000
+  12   3    32         5.00      4.1e+03      128              0.975
+  14   4    64         6.00      1.64e+04     256              1.000
+  16   4    64         6.00      6.55e+04     1024             1.000
+  18   4    64         6.00      2.62e+05     4096             0.975
+  20   4    64         6.00      1.05e+06     1.638e+04        0.700
+  22   5    128        7.00      4.19e+06     3.277e+04        1.000
+  24   5    128        7.00      1.68e+07     1.311e+05        1.000
+  26   5    128        7.00      6.71e+07     5.243e+05        0.850
+  28   5    256        8.00      2.68e+08     1.049e+06        1.000
+  30   5    256        8.00      1.07e+09     4.194e+06        1.000
+
+[READOUT] conditional correctness  P(bit correct | useful state produced)
+  n=8    signal correctness=1.000   phase-randomised null=0.440
+  n=12   signal correctness=1.000   phase-randomised null=0.505
+  n=16   signal correctness=1.000   phase-randomised null=0.500
+  n=20   signal correctness=1.000   phase-randomised null=0.485
+
+  rate fit  log2(M_needed) ~ a*sqrt(n)+c :  a=1.330  R^2=0.948   (Kuperberg 2^{O(sqrt n)})
+  rate fit  log2(M_needed) ~ a*log2(n)+c :  a=1.753  R^2=0.928   (polynomial n^a)
+  NOTE: over this n-range the two fits are statistically indistinguishable; we do NOT
+  claim to separate subexp from poly here. Super-polynomiality is inherited from 50.2c
+  (poly(n) budget fails) + the standard Regev/Kuperberg result.
+
+  full n-bit slope ~ n * M_needed: at n=30 -> 7680 queries  vs  2^n = 1.07e+09
+
+================================================================================================
+GATES
+  [PASS] G1 readout correctness (bit | produced) ~ 1.0             min conditional correctness (signal) = 1.000
+  [PASS] G2 subexponential: M_needed << 2^n, gap widens >10x       2^n / M_needed grows 4 -> 4.19e+06; log2(M)=8.00 << n=30
+  [PASS] G3 subexponential rate (sublinear in n; sqrt-consistent)  sqrt-fit R^2=0.948 a=1.330; log2(M)/n=0.267 (sublinear=subexp). poly-fit R^2=0.928
+  [PASS] G4 phase-randomised null reads bit only at chance         phase-randomised null conditional correctness = 0.483 (want ~0.5)
+================================================================================================
+VERDICT: DIHEDRAL_BARRIER_SUBEXPONENTIAL_UPPER_BOUND
+  Kuperberg's collimation sieve recovers the dihedral slope in subexponential queries -
+  decisively below the 2^n full search (the gap widens from ~4x to ~4.1943e+06x over n=6..30).
+  Combined with 50.2c (poly(n) budget FAILS), the barrier is pinned as a SANDWICH:
+  super-polynomial (no poly readout) but subexponential (not full 2^n). This is the exact
+  shape of the lattice / unique-SVP wall the holographic decoder bottoms out on.
+  (Claim level 4: a measured subexponential UPPER bound from a real sieve; the 2^{O(sqrt n)}
+  rate and the super-poly lower bound are cited from Regev/Kuperberg + 50.2c, not re-proven.)

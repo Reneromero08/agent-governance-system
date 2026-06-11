@@ -1,0 +1,24 @@
+==================================================================================================
+EXP 50.9  -  CATALYTIC ILLUMINATION: see the boundary (eigenmode sieve), do not search it
+  illuminability = participation dimension (effective rank) of the boundary's eigenmode structure
+  LOW rank => answer emerges under illumination (catalytic pathway);  HIGH rank => search-bound
+==================================================================================================
+
+  emergence = autocorrelation peak prominence of the illuminated grating (1.0 = stays dark)
+  grating                     class       FIXED-lens   FRESH-lens   tape_restored
+  Z_32 (abelian)              decodable   2.43         1.60         True
+  Z_64 (abelian)              decodable   3.14         1.90         True
+  Q_8 (normal non-abelian)    decodable   1.39         1.00         True
+  D_16 (non-normal)           wall        2.27         1.94         True
+  D_32 (non-normal)           wall        3.22         1.74         True
+  ring-LWE (lattice)          wall        3.00         1.98         True
+
+==================================================================================================
+WHAT THE DATA SAYS
+  FIXED-lens emergence (fixed secret-independent lens = genuine catalytic illumination, no search):
+    decodable=2.32   wall=2.83   (high = the answer emerges; ~1 = stays dark)
+  FRESH-lens emergence (lens SVD'd per instance = the search is in building the lens, NOT catalytic):
+    decodable=1.50   wall=1.89
+  catalytic tape restored byte-for-byte every illumination: True (the catalyst emerges unchanged)
+==================================================================================================
+VERDICT: ILLUMINATION_INCONCLUSIVE

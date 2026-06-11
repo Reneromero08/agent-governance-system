@@ -1,0 +1,56 @@
+{
+  "g0_diagonalizes": true,
+  "error_spread": [
+    {
+      "n": 4,
+      "coeff": 1.85,
+      "ntt_max": 4101.95,
+      "ntt_mean": 3037.325
+    },
+    {
+      "n": 8,
+      "coeff": 2.0,
+      "ntt_max": 5514.0,
+      "ntt_mean": 3018.43125
+    },
+    {
+      "n": 16,
+      "coeff": 2.0,
+      "ntt_max": 5797.6,
+      "ntt_mean": 3089.340625
+    },
+    {
+      "n": 32,
+      "coeff": 2.0,
+      "ntt_max": 5900.75,
+      "ntt_mean": 3022.3140625
+    }
+  ],
+  "recovery": [
+    {
+      "n": 4,
+      "m": 4,
+      "real": 0.0,
+      "zero": 1.0
+    },
+    {
+      "n": 8,
+      "m": 4,
+      "real": 0.0,
+      "zero": 1.0
+    },
+    {
+      "n": 16,
+      "m": 4,
+      "real": 0.0,
+      "zero": 1.0
+    },
+    {
+      "n": 32,
+      "m": 4,
+      "real": 0.0,
+      "zero": 1.0
+    }
+  ],
+  "verdict": "NAIVE_RING_DECODE_BLOCKED_BY_CONJUGATE_BASIS"
+}

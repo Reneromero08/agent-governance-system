@@ -1,0 +1,52 @@
+{
+  "emerge": [
+    {
+      "n": 8,
+      "N": 256,
+      "rate": 1.0
+    },
+    {
+      "n": 10,
+      "N": 1024,
+      "rate": 1.0
+    },
+    {
+      "n": 12,
+      "N": 4096,
+      "rate": 1.0
+    },
+    {
+      "n": 14,
+      "N": 16384,
+      "rate": 1.0
+    }
+  ],
+  "cost": [
+    {
+      "n": 8,
+      "N": 256,
+      "med_steps": 60.0,
+      "frac": 0.234375
+    },
+    {
+      "n": 10,
+      "N": 1024,
+      "med_steps": 178.0,
+      "frac": 0.173828125
+    },
+    {
+      "n": 12,
+      "N": 4096,
+      "med_steps": 1049.0,
+      "frac": 0.256103515625
+    },
+    {
+      "n": 14,
+      "N": 16384,
+      "med_steps": 3806.0,
+      "frac": 0.2322998046875
+    }
+  ],
+  "sim_note": "simulated forward (exponential); physical CTC substrate would be poly",
+  "verdict": "WALL_IS_THE_SUBSTRATE_NOT_THE_READOUT"
+}

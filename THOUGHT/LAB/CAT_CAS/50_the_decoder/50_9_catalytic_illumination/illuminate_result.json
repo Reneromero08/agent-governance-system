@@ -1,0 +1,53 @@
+{
+  "rows": [
+    {
+      "name": "Z_32 (abelian)",
+      "class": "decodable",
+      "fixed": 2.4329813236603366,
+      "fresh": 1.5950916099388084,
+      "restored": true
+    },
+    {
+      "name": "Z_64 (abelian)",
+      "class": "decodable",
+      "fixed": 3.143395768493482,
+      "fresh": 1.8980414845145934,
+      "restored": true
+    },
+    {
+      "name": "Q_8 (normal non-abelian)",
+      "class": "decodable",
+      "fixed": 1.3895646692486656,
+      "fresh": 1.0,
+      "restored": true
+    },
+    {
+      "name": "D_16 (non-normal)",
+      "class": "wall",
+      "fixed": 2.271030916060793,
+      "fresh": 1.9426876460993054,
+      "restored": true
+    },
+    {
+      "name": "D_32 (non-normal)",
+      "class": "wall",
+      "fixed": 3.2150922431722684,
+      "fresh": 1.740500485864536,
+      "restored": true
+    },
+    {
+      "name": "ring-LWE (lattice)",
+      "class": "wall",
+      "fixed": 2.998242392788887,
+      "fresh": 1.9772302950428224,
+      "restored": true
+    }
+  ],
+  "dec_fixed": 2.3219805871341612,
+  "wall_fixed": 2.8281218506739827,
+  "dec_fresh": 1.4977110314844673,
+  "wall_fresh": 1.8868061423355547,
+  "all_restored": true,
+  "verdict": "ILLUMINATION_INCONCLUSIVE",
+  "note": "both probes (rank, fixed/fresh-lens emergence) are NON-DISCRIMINATING on raw gratings; the illumination that DOES separate decodable from wall is the character/quotient readout (50.2e), and the comb's deeper finding stands: the lattice's illumination lens is secret-dependent (= the search), unlike Shor's fixed QFT lens."
+}

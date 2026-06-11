@@ -1,6 +1,10 @@
 # Exp 50 — The Decoder
 
-**Rollup verdict:** the holographic decoder is **extractive** (proven), its extractive power is **bounded at the abelian-HSP wall** (located), and the boundary is handed off as two scoped questions. Whole-experiment claim ceiling: **Level 5**. Lab-critic clean (M-1..M-8). All bricks exit 0.
+**Rollup verdict:** the holographic decoder is **extractive** (proven); its extractive power decodes the abelian / normal-subgroup class and bottoms out at the **non-normal / strong-sampling = lattice (unique-SVP)** wall (located and characterized as subexponential-but-superpolynomial); and the lab's boldest crossing claim (Exp 25 LWE/SVP) is **audited and does not cross it** (toy-scale-only). Whole-experiment claim ceiling: **Level 5**. Lab-critic clean (M-1..M-8). All entry points exit 0.
+
+> **Roadmap run (this session):** items #1, #2, #5, #6 of `ROADMAP.md` executed in-lab (Mythos #3 deliberately skipped; #4 silicon-run hardware-blocked, handoff validated). Four new bricks added: 50.4 (lattice audit), 50.2d (Kuperberg rung), 50.2e (gradient coverage), 50.5 (decoder class map). See the extensions table below.
+
+> **The Lattice Spiral (50.6 - 50.14), this session:** eleven adversarial passes around the lattice wall (full account in `REPORT_LATTICE_SPIRAL.md`). The wall moved **readout -> curvature -> substrate**: every spectral/contour/winding readout reads `d` for free (the topological reframe is *confirmed* - `d` is a conserved invariant), but `d` is the per-step curvature of its own trajectory, so a forward machine that builds the trajectory needs `d` (the `2^n` search; no amplification beats Fisher - 50.13). The final brick (50.14) relocated the entire wall onto the **substrate**: `d` emerges as the unique fixed point of a *public* map (no smuggle), found in `2^n` forward but poly on a reversible / catalytic / CTC fixed-point substrate (P^CTC=PSPACE). "The algorithm is dead" is true precisely on the reversible substrate the framework posits; its physical realizability is tested by **Exp 44 Phase 6** (silicon goes catalytic). No physical crossing claimed; the forward floor is mapped to the atom.
 
 ## The thesis it settles
 
@@ -16,14 +20,27 @@ Is the holographic readout a *decoder* (reads a global invariant out of the enco
 | **50.2c Strong sampling** | `STRONG_SAMPLING_CONFIRMS_LATTICE_BARRIER` (3/3) | Climbed to strong (within-irrep) sampling and hit bedrock: a single dihedral coset state is I/2 (zero info); the slope is **info-cheap** (O(√N) states) but **compute-hard** — recovery is a 2ⁿ secret-space search, poly(n)-budget success → 0 (0.20→0.00). The residual wall **is** the 1-bit-LWE / unique-SVP lattice problem (Regev). |
 | **50.3 Boundary + Handoffs** | `BOUNDARY_CHARACTERIZED` | Emitted `MYTHOS_SANDBOX.md` (barrier-or-frontier question, bound to the same null) and `EXP44_PHASE6_HANDOFF.md` (decodable target for silicon). |
 
+## Roadmap-run extensions (this session)
+
+| Brick | Result | Key evidence |
+|---|---|---|
+| **50.4 Lattice audit** | `EXP25_TOY_SCALE_ONLY` (4/4) | Ran Exp 25's own holographic LWE attack (faithful + charitable readout) under matched nulls. Recovers a secret only at tiny modulus q=5, n=2 (exact_rate 0.25); **0 recovery at its own default n=128/q=3329**, 0 at noise sigma>=2, and its resonance objective cannot tell a planted instance from a no-secret null (Cohen d=0.16). Does NOT cross the bedrock located in 50.2c. |
+| **50.2d Kuperberg rung** | `DIHEDRAL_BARRIER_SUBEXPONENTIAL_UPPER_BOUND` (4/4) | Collimation sieve recovers the dihedral slope in subexponential queries: 2^n/M_needed widens 4x->4.2e6x over n=6..30; conditional readout correctness 1.000 (null at chance). With 50.2c's poly-budget failure this **sandwiches** the barrier: super-polynomial but subexponential (does NOT claim to separate subexp from poly from the fit; that side is cited from Regev/Kuperberg + 50.2c). |
+| **50.2e Gradient coverage** | `WALL_IS_NON_NORMAL_SUBGROUPS` (5/5) | Q_8 (non-abelian, Hamiltonian, all-normal) is **decodable** (D_char=1.000) while dihedral/AGL(1,5)/A_5/S_n collapse (Cohen d=8.98): the wall is **non-normal** subgroups, not non-abelianness. Scalar FFT recovers abelian only and misses Q_8 (D_fft=0.10) - the reframe is needed (readout hierarchy). Independent projector phi agrees with the loop phi to 2.2e-16. |
+| **50.5 Decoder class map** | `DECODER_MAP_CONSISTENT` (4/4) | Maps the lab's decoders onto the class: 9 decodable (Exp 20/24 abelian-HSP; 34/35/36-40/45/46 topological invariants), 3 bounded/wall (Exp 31 cospectral, 45.5 NxN, 25 lattice). None of the working decoders relies on a non-normal/strong-sampling step. Validated the Exp 44 handoff's predicted peaks against independent mpmath zeta zeros (<0.03% error). |
+
 ## Combined claim ledger (conservative)
 
 | Claim | Level | Why not higher |
 |---|---|---|
 | The holographic readout is extractive, not lookup | **4-5** | survives 4 nulls + wrong-answer control; no domain/ontology claim |
 | Decodability collapses at the abelian→non-abelian boundary | **4-5** | measured (d=8.82), scale-independent, but the wall's *identity* is a question, not proven |
+| The wall is **non-normal** hidden subgroups (not non-abelianness) | **4-5** | measured (50.2e): Q_8 non-abelian but all-normal is decodable; d=8.98 split by H-normality |
+| The barrier is subexponential-but-superpolynomial | **4** | sieve upper bound measured (50.2d); super-poly side cited from Regev/Kuperberg + 50.2c, not separated empirically |
+| Exp 25's holographic LWE attack does **not** cross the wall | **4-5** | audited (50.4): toy-scale-only under matched nulls; 0 recovery at its own default; not a proof about all lattice attacks |
 | The collapse is the known non-abelian-HSP barrier | **NOT CLAIMED** | open question for Mythos |
-| Silicon hosts the decodable side | **NOT CLAIMED** | prediction handed to Exp 44 Phase 6 |
+| The lattice (unique-SVP) barrier itself is crossable | **NOT CLAIMED** | the Mythos question, deliberately not run this session |
+| Silicon hosts the decodable side | **NOT CLAIMED** | prediction handed to Exp 44 Phase 6 (handoff peaks validated; silicon run hardware-blocked) |
 
 ## What this gives the lab
 
@@ -37,5 +54,8 @@ The arsenal these results build on was largely produced by weaker models (DeepSe
 
 - `50_1_extractive_proof/` — `50_1_extractive_proof.py`, `testbed_synth.py`, `testbed_zeta.py`, `wrong_answer_control.py`, `REPORT_EXTRACTIVE_PROOF.md`, `output.txt`
 - `50_2_decodability_gradient/` — `hsp_family.py`, `50_2_decodability_gradient.py`, `50_2_anchor_cospectral.py`, `REPORT_DECODABILITY_GRADIENT.md`, `located_wall.json`, `cospectral_anchor.json`, `output.txt`
+- `50_2_decodability_gradient/` (roadmap run) — `50_2d_kuperberg_sieve.py` + `REPORT_KUPERBERG_RUNG.md` + `kuperberg_result.json`; `50_2e_gradient_coverage.py` + `REPORT_GRADIENT_COVERAGE.md` + `coverage_result.json`
 - `50_3_boundary_handoff/` — `50_3_boundary_handoff.py`, `MYTHOS_SANDBOX.md`, `EXP44_PHASE6_HANDOFF.md`, `REPORT_BOUNDARY_HANDOFF.md`
+- `50_4_lattice_audit/` (roadmap run) — `50_4_lwe_audit.py`, `REPORT_LATTICE_AUDIT.md`, `lattice_audit_result.json`, `output_lattice_audit.txt`
+- `50_5_decoder_class_map/` (roadmap run) — `decoder_class_map.py`, `REPORT_DECODER_CLASS_MAP.md`, `decoder_class_map_result.json`, `output_class_map.txt`
 - shared: `decoder_lib.py`, `catalytic_tape.py`

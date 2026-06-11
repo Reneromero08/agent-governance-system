@@ -1,0 +1,40 @@
+====================================================================================================
+EXP 50.2e  -  GENERALIZING THE GRADIENT: more groups, readout hierarchy, independent phi
+  refinement: decodability tracks H-NORMALITY, not the abelian/non-abelian split
+====================================================================================================
+
+  group     |G|   normal-H  d_max  abelianness   D_char   D_proj   D_fft   shuffle
+  Z_16        16   True         1    1.000         1.000    1.000    1.000    0.046
+  Z_32        32   True         1    1.000         1.000    1.000    1.000    0.086
+  Z_64        64   True         1    1.000         1.000    1.000    1.000    0.013
+  D_8         16   False        2    0.250         0.148    0.148    -0.113    0.031
+  D_16        32   False        2    0.125         0.065    0.065    0.095    0.049
+  D_32        64   False        2    0.062         0.017    0.017    0.051    -0.000
+  Q_8          8   True         2    0.500         1.000    1.000    0.103    0.114
+  AGL(1,5)    20   False        4    0.200         0.112    0.112    -0.074    0.063
+  A_5         12   False        5    0.250         0.363    0.363    0.203    0.190
+  S_4         24   False        3    0.083         0.031    0.031    0.006    0.031
+  S_5        120   False        4    0.017         0.010    0.010    0.037    0.010
+  S_6        720   False       16    0.003         0.001    0.001    0.006    0.001
+
+  normal-H (decodable) mean D_char = 1.000   non-normal-H (collapsed) mean D_char = 0.093
+  Q_8 (NON-ABELIAN, all-normal):  D_char = 1.000 (reframe gets it)   D_fft = 0.103 (scalar misses it)
+  abelian shelf mean D_fft = 1.000 (scalar FFT recovers abelian only)
+
+====================================================================================================
+GATES
+  [PASS] G1 normality split (normal decodable, non-normal collapsed)   decodable=1.000 collapsed=0.093 Cohen d=8.98
+  [PASS] G2 Q_8 decisive: non-abelian + normal-H => decodable          Q_8 non-abelian (d_max=2) yet D_char=1.000 (decodable)
+  [PASS] G3 independent phi cross-check (loop == projector)            max |phi_char_loop - phi_char_projector| over all groups = 2.22e-16
+  [PASS] G4 readout hierarchy (scalar FFT abelian-only; reframe gets Q_8)  abelian D_fft=1.000; Q_8 D_fft=0.103 (scalar misses) vs D_char=1.000 (reframe gets) 
+  [PASS] G5 label-shuffle null floor                                   max |shuffle-null D| = 0.190 (want <0.3)
+====================================================================================================
+VERDICT: WALL_IS_NON_NORMAL_SUBGROUPS
+  The decodability wall is NON-NORMAL hidden subgroups, not non-abelianness: Q_8 (non-
+  abelian, Hamiltonian) is decodable; dihedral / AGL(1,5) / A_5 / S_n (non-normal H)
+  collapse (Cohen d=9.0). The scalar FFT readout is bounded by the weaker ABELIAN wall -
+  it recovers the abelian shelf but misses Q_8; only the character/quotient REFRAME (50.2b)
+  crosses to normal non-abelian subgroups. The order parameter is implementation-robust
+  (two independent phi agree to ~1e-15). This refines 50.2 and aligns it with 50.2b/2c:
+  decodable class = {abelian-HSP} + {normal hidden subgroups}; residual wall = the non-
+  normal / strong-sampling case = lattice hardness. (Claim level 4-5: bounded sample + nulls.)

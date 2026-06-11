@@ -1,0 +1,101 @@
+{
+  "anchor_decodable_Z64": 0.9999999999980512,
+  "anchor_wall_D8": 0.1720092530260686,
+  "cohen_d": 6.681535105273249,
+  "handoff_status": "PEAKS_VALID",
+  "class_map": [
+    {
+      "exp": "20",
+      "name": "Catalytic Eigen Shor",
+      "mechanism": "period of a^x mod N (Z_N)",
+      "klass": "abelian_hsp",
+      "evidence": "MEASURED-50.2 abelian shelf D=1.0"
+    },
+    {
+      "exp": "24",
+      "name": "Quantum Catalytic Shor",
+      "mechanism": "Shor period finding (Z_N)",
+      "klass": "abelian_hsp",
+      "evidence": "ANALYSIS: same abelian HSP as Exp 20"
+    },
+    {
+      "exp": "34",
+      "name": "Zeta Eigenbasis (Riemann)",
+      "mechanism": "zeros = eigenvalues of a Hermitian operator",
+      "klass": "topological_invariant",
+      "evidence": "MEASURED-50.1 zeros recovered, real-vs-scrambled 0.60 (peak-density caveat)"
+    },
+    {
+      "exp": "35",
+      "name": "Topological Halting Oracle",
+      "mechanism": "point-gap winding number W",
+      "klass": "topological_invariant",
+      "evidence": "ANALYSIS: integer winding of a poly-size H"
+    },
+    {
+      "exp": "36",
+      "name": "Bekenstein-Godel",
+      "mechanism": "Z_2 Chern obstruction",
+      "klass": "topological_invariant",
+      "evidence": "ANALYSIS: Chern/Z_2 invariant"
+    },
+    {
+      "exp": "37",
+      "name": "2D Chern Oracle",
+      "mechanism": "Bott index C",
+      "klass": "topological_invariant",
+      "evidence": "ANALYSIS: Bott index of a poly-size lattice"
+    },
+    {
+      "exp": "38-40",
+      "name": "Weyl/Axion/Floquet Oracles",
+      "mechanism": "Chern / second-Chern / pi-mode invariants",
+      "klass": "topological_invariant",
+      "evidence": "ANALYSIS: topological invariants (partial-density caveats)"
+    },
+    {
+      "exp": "45.1-4,6",
+      "name": "Phase Math sensors",
+      "mechanism": "winding/Chern on Collatz, NS, Riemann, YM",
+      "klass": "topological_invariant",
+      "evidence": "ANALYSIS: topological sensors of poly-size operators"
+    },
+    {
+      "exp": "46",
+      "name": "Phase Bio sensors",
+      "mechanism": "IPR / localization / Chern",
+      "klass": "topological_invariant",
+      "evidence": "ANALYSIS: localization invariants (46.3 weakened)"
+    },
+    {
+      "exp": "31",
+      "name": "Graph Isomorphism (.holo)",
+      "mechanism": "spectral signature of adjacency",
+      "klass": "spectrum_bounded",
+      "evidence": "MEASURED-50.2 cospectral anchor: Shrikhande/Rook defeat it"
+    },
+    {
+      "exp": "45.5",
+      "name": "P vs NP / SAT sensor",
+      "mechanism": "N x N local topology vs 2^N frustration",
+      "klass": "non_normal_wall",
+      "evidence": "ANALYSIS+M-4: NxN cannot capture 2^N (the frustrated/non-abelian side)"
+    },
+    {
+      "exp": "25",
+      "name": "Lattice Holography (LWE/SVP)",
+      "mechanism": "phase-resonance torus optimisation",
+      "klass": "non_normal_wall",
+      "evidence": "MEASURED-50.4 toy-scale-only; does NOT cross unique-SVP"
+    }
+  ],
+  "decodable_n": 9,
+  "bounded_n": 3,
+  "gates": {
+    "G1 anchors measured (decodable abelian vs collapsed non-normal)": true,
+    "G2 Exp 44 handoff predicted peaks validated (or mpmath absent)": true,
+    "G3 class-map partition consistent; wall set = {25,31,45.5}": true,
+    "G4 no working decoder relies on a non-normal/strong-sampling step": true
+  },
+  "verdict": "DECODER_MAP_CONSISTENT"
+}

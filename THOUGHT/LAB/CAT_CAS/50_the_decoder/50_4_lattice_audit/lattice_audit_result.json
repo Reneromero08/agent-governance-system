@@ -1,0 +1,516 @@
+{
+  "q": 3329,
+  "chance": 0.00030039050765995795,
+  "sweep_n": [
+    {
+      "n": 2,
+      "sigma": 0.0,
+      "readout": "faithful",
+      "trials": 5,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_std": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": 0.09216513157204513,
+      "chance": 0.00030039050765995795
+    },
+    {
+      "n": 4,
+      "sigma": 0.0,
+      "readout": "faithful",
+      "trials": 5,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_std": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": 0.17553855157494738,
+      "chance": 0.00030039050765995795
+    },
+    {
+      "n": 8,
+      "sigma": 0.0,
+      "readout": "faithful",
+      "trials": 5,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_std": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": 0.1936143739010689,
+      "chance": 0.00030039050765995795
+    },
+    {
+      "n": 16,
+      "sigma": 0.0,
+      "readout": "faithful",
+      "trials": 5,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_std": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": 0.21904224704772995,
+      "chance": 0.00030039050765995795
+    },
+    {
+      "n": 32,
+      "sigma": 0.0,
+      "readout": "faithful",
+      "trials": 5,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_std": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": 0.20946517085587954,
+      "chance": 0.00030039050765995795
+    },
+    {
+      "n": 64,
+      "sigma": 0.0,
+      "readout": "faithful",
+      "trials": 5,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_std": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": 0.07236839917214224,
+      "chance": 0.00030039050765995795
+    },
+    {
+      "n": 128,
+      "sigma": 0.0,
+      "readout": "faithful",
+      "trials": 5,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_std": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": -0.00718116602939,
+      "chance": 0.00030039050765995795
+    },
+    {
+      "n": 2,
+      "sigma": 0.0,
+      "readout": "charitable",
+      "trials": 5,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_std": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": 0.14584227714597073,
+      "chance": 0.00030039050765995795
+    },
+    {
+      "n": 4,
+      "sigma": 0.0,
+      "readout": "charitable",
+      "trials": 5,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_std": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": 0.16961020961315837,
+      "chance": 0.00030039050765995795
+    },
+    {
+      "n": 8,
+      "sigma": 0.0,
+      "readout": "charitable",
+      "trials": 5,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_std": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": 0.19502609737380797,
+      "chance": 0.00030039050765995795
+    },
+    {
+      "n": 16,
+      "sigma": 0.0,
+      "readout": "charitable",
+      "trials": 5,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_std": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": 0.20974633459035127,
+      "chance": 0.00030039050765995795
+    },
+    {
+      "n": 32,
+      "sigma": 0.0,
+      "readout": "charitable",
+      "trials": 5,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_std": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": 0.22545904137680242,
+      "chance": 0.00030039050765995795
+    },
+    {
+      "n": 64,
+      "sigma": 0.0,
+      "readout": "charitable",
+      "trials": 5,
+      "exact_rate": 0.0,
+      "acc_mean": 0.003125,
+      "acc_std": 0.00625,
+      "acc_ci": [
+        0.0,
+        0.009375
+      ],
+      "res_mean": 0.055953377207422064,
+      "chance": 0.00030039050765995795
+    },
+    {
+      "n": 128,
+      "sigma": 0.0,
+      "readout": "charitable",
+      "trials": 5,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_std": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": 0.010643781780523557,
+      "chance": 0.00030039050765995795
+    }
+  ],
+  "sweep_sigma": [
+    {
+      "n": 8,
+      "sigma": 0.0,
+      "readout": "charitable",
+      "trials": 5,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_std": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": 0.2179113828126687,
+      "chance": 0.00030039050765995795
+    },
+    {
+      "n": 8,
+      "sigma": 1.0,
+      "readout": "charitable",
+      "trials": 5,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_std": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": 0.20099692035820382,
+      "chance": 0.00030039050765995795
+    },
+    {
+      "n": 8,
+      "sigma": 2.0,
+      "readout": "charitable",
+      "trials": 5,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_std": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": 0.21694009510442253,
+      "chance": 0.00030039050765995795
+    },
+    {
+      "n": 8,
+      "sigma": 4.0,
+      "readout": "charitable",
+      "trials": 5,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_std": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": 0.17120755151987113,
+      "chance": 0.00030039050765995795
+    },
+    {
+      "n": 8,
+      "sigma": 8.0,
+      "readout": "charitable",
+      "trials": 5,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_std": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": 0.17402235558754242,
+      "chance": 0.00030039050765995795
+    }
+  ],
+  "sweep_tiny_q": [
+    {
+      "readout": "faithful",
+      "q": 5,
+      "n": 2,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": 0.15476481084804375,
+      "chance": 0.2
+    },
+    {
+      "readout": "faithful",
+      "q": 5,
+      "n": 4,
+      "exact_rate": 0.0,
+      "acc_mean": 0.25,
+      "acc_ci": [
+        0.125,
+        0.375
+      ],
+      "res_mean": 0.12591040151178,
+      "chance": 0.2
+    },
+    {
+      "readout": "faithful",
+      "q": 11,
+      "n": 2,
+      "exact_rate": 0.0,
+      "acc_mean": 0.1875,
+      "acc_ci": [
+        0.0625,
+        0.375
+      ],
+      "res_mean": 0.15113924126177808,
+      "chance": 0.09090909090909091
+    },
+    {
+      "readout": "faithful",
+      "q": 11,
+      "n": 4,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0625,
+      "acc_ci": [
+        0.0,
+        0.15625
+      ],
+      "res_mean": 0.11931864254418484,
+      "chance": 0.09090909090909091
+    },
+    {
+      "readout": "faithful",
+      "q": 17,
+      "n": 2,
+      "exact_rate": 0.0,
+      "acc_mean": 0.125,
+      "acc_ci": [
+        0.0,
+        0.3125
+      ],
+      "res_mean": 0.12483720047795782,
+      "chance": 0.058823529411764705
+    },
+    {
+      "readout": "faithful",
+      "q": 17,
+      "n": 4,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": 0.1474722054989967,
+      "chance": 0.058823529411764705
+    },
+    {
+      "readout": "faithful",
+      "q": 37,
+      "n": 2,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": 0.10536740737987602,
+      "chance": 0.02702702702702703
+    },
+    {
+      "readout": "faithful",
+      "q": 37,
+      "n": 4,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": 0.14505175489963895,
+      "chance": 0.02702702702702703
+    },
+    {
+      "readout": "charitable",
+      "q": 5,
+      "n": 2,
+      "exact_rate": 0.25,
+      "acc_mean": 0.5625,
+      "acc_ci": [
+        0.375,
+        0.75
+      ],
+      "res_mean": 0.1662293952939745,
+      "chance": 0.2
+    },
+    {
+      "readout": "charitable",
+      "q": 5,
+      "n": 4,
+      "exact_rate": 0.0,
+      "acc_mean": 0.1875,
+      "acc_ci": [
+        0.0625,
+        0.34375
+      ],
+      "res_mean": 0.13726749623981532,
+      "chance": 0.2
+    },
+    {
+      "readout": "charitable",
+      "q": 11,
+      "n": 2,
+      "exact_rate": 0.125,
+      "acc_mean": 0.125,
+      "acc_ci": [
+        0.0,
+        0.375
+      ],
+      "res_mean": 0.13948049390307615,
+      "chance": 0.09090909090909091
+    },
+    {
+      "readout": "charitable",
+      "q": 11,
+      "n": 4,
+      "exact_rate": 0.0,
+      "acc_mean": 0.09375,
+      "acc_ci": [
+        0.0,
+        0.21875
+      ],
+      "res_mean": 0.13059907105302046,
+      "chance": 0.09090909090909091
+    },
+    {
+      "readout": "charitable",
+      "q": 17,
+      "n": 2,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": 0.10618065543191502,
+      "chance": 0.058823529411764705
+    },
+    {
+      "readout": "charitable",
+      "q": 17,
+      "n": 4,
+      "exact_rate": 0.0,
+      "acc_mean": 0.03125,
+      "acc_ci": [
+        0.0,
+        0.09375
+      ],
+      "res_mean": 0.1364351202195177,
+      "chance": 0.058823529411764705
+    },
+    {
+      "readout": "charitable",
+      "q": 37,
+      "n": 2,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": 0.09817822603885722,
+      "chance": 0.02702702702702703
+    },
+    {
+      "readout": "charitable",
+      "q": 37,
+      "n": 4,
+      "exact_rate": 0.0,
+      "acc_mean": 0.0,
+      "acc_ci": [
+        0.0,
+        0.0
+      ],
+      "res_mean": 0.13943766585484885,
+      "chance": 0.02702702702702703
+    }
+  ],
+  "null": {
+    "planted_acc_mean": 0.0,
+    "null_acc_mean": 0.0,
+    "resonance_cohen_d": 0.15680523801896687,
+    "coord_acc_cohen_d": 0.0
+  },
+  "gates": {
+    "G1 attack works at toy scale (so we are auditing a real attack)": true,
+    "G2 recovery collapses as n -> Kyber-256 (chance at n=128)": true,
+    "G3 recovery collapses under realistic noise (chance at sigma>=2)": true,
+    "G4 no-secret null indistinct in the attack's objective": true
+  },
+  "verdict": "EXP25_TOY_SCALE_ONLY"
+}

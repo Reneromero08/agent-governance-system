@@ -1,0 +1,39 @@
+==================================================================================================
+EXP 50.11  -  CONTINUOUS-TORUS CONTOUR READOUT: analytic shortcut to the winding?
+  binary-search d's peak by CLOSED-FORM arc energy. O(M^2 log N). poly M => poly => CROSS.
+==================================================================================================
+
+[RECOVERY + COST]  recover min(d, N-d) by analytic contour binary search.
+  poly M = 8n samples (poly readout if it works);  sqrt M = 4*ceil(sqrt N).
+  n   N        polyM_recovery   sqrtM_recovery   arc_evals   readout_cost (M^2 log N)
+  8   256      1.00             0.80             14          32768
+  10  1024     0.70             0.80             18          64000
+  12  4096     0.25             0.80             22          110592
+  14  16384    0.15             0.75             26          175616
+  16  65536    0.00             0.90             30          262144
+
+[A8] no-secret null (random b): contour search must NOT lock onto a planted d
+  null recovery = 0.000 (chance ~ 2/N ~ 0; must be ~0)
+
+==================================================================================================
+WHAT THE DATA SAYS
+  poly-M (8n samples) contour recovery: [1.0, 0.7, 0.25, 0.15, 0.0]
+  sqrt-M contour recovery:              [0.8, 0.8, 0.8, 0.75, 0.9]
+  arc evaluations per readout: [14, 18, 22, 26, 30]  (= 2*log2(N), poly)
+  [A8] null recovery = 0.000
+==================================================================================================
+VERDICT: TORUS_CONTOUR_REMOVES_SCAN_NOT_EXPONENT
+  A genuine structural win AND a precise new door. The analytic contour DOES remove the scan:
+  d is localized in only 2*log2(N) = poly arc evaluations (no enumeration of 2^n candidates) -
+  the proposal's 'search becomes resonance' is real. BUT the exponential survives in a new place:
+  recovery needs M ~ sqrt(N) samples (poly-M decays 1.0 -> 0 as n grows; sqrt-M holds ~0.8),
+  and each arc evaluation pairs M samples = O(M^2) = O(N). So poly evaluations x exponential-
+  per-evaluation = exponential. WHY: d's signature in the torus energy is a DIFFUSE peak of
+  relative height ~2/N (peak energy ~M vs half-arc background ~N*M/2), so the binary split's
+  energy difference is ~2/N - resolvable only with M ~ sqrt(N) samples. The contour removes
+  the scan; it cannot localize a diffuse feature cheaply. The spiral lands EXACTLY on step 2:
+  to cross, d must be a SHARP topological defect (a zero/pole an O(log N) Cauchy COUNT locks
+  onto robustly), not a diffuse peak. Step 3 (contour) is proven to need only poly evaluations;
+  the open hinge is now sharp and singular: can step 2 (the exceptional point) sharpen d into
+  a zero/pole on the torus FROM PUBLIC DATA? If yes, the poly-eval contour reads it and the
+  wall falls. If the defect needs d to place it, the lens is the secret again.

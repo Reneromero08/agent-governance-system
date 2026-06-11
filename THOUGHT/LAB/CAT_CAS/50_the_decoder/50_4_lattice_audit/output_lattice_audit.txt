@@ -1,0 +1,76 @@
+================================================================================================
+EXP 50.4  -  LATTICE AUDIT: does Exp 25's holographic LWE attack cross the located barrier?
+  located bedrock (50.2c) = dihedral-HSP / 1-bit-LWE <-> unique-SVP (lattice, Regev)
+  q=3329 (Kyber prime); chance per-coordinate accuracy = 1/q = 3.00e-04
+================================================================================================
+
+[SWEEP A] recovery vs lattice dimension n  (sigma=0, error-free - the attack's BEST case)
+  n toward Kyber-256.  exact_rate = fraction of trials with the WHOLE secret recovered.
+  acc = mean exact-coordinate fraction [95% bootstrap CI];  chance = 3.00e-04
+  readout    n      exact_rate   coord_acc [95% CI]         resonance 
+  faithful   2      0.00         [0.0000, 0.0000]        0.0922    
+  faithful   4      0.00         [0.0000, 0.0000]        0.1755    
+  faithful   8      0.00         [0.0000, 0.0000]        0.1936    
+  faithful   16     0.00         [0.0000, 0.0000]        0.2190    
+  faithful   32     0.00         [0.0000, 0.0000]        0.2095    
+  faithful   64     0.00         [0.0000, 0.0000]        0.0724    
+  faithful   128    0.00         [0.0000, 0.0000]        -0.0072   
+  charitable 2      0.00         [0.0000, 0.0000]        0.1458    
+  charitable 4      0.00         [0.0000, 0.0000]        0.1696    
+  charitable 8      0.00         [0.0000, 0.0000]        0.1950    
+  charitable 16     0.00         [0.0000, 0.0000]        0.2097    
+  charitable 32     0.00         [0.0000, 0.0000]        0.2255    
+  charitable 64     0.00         [0.0000, 0.0094]        0.0560    
+  charitable 128    0.00         [0.0000, 0.0000]        0.0106    
+
+[SWEEP B] recovery vs error magnitude sigma  (charitable readout, n=8 - its best regime)
+  sigma toward the Kyber noise regime.  does any recovery survive realistic error?
+  sigma    exact_rate   coord_acc [95% CI]         resonance 
+  0.0      0.00         [0.0000, 0.0000]        0.2179    
+  1.0      0.00         [0.0000, 0.0000]        0.2010    
+  2.0      0.00         [0.0000, 0.0000]        0.2169    
+  4.0      0.00         [0.0000, 0.0000]        0.1712    
+  8.0      0.00         [0.0000, 0.0000]        0.1740    
+
+[SWEEP C] recovery vs tiny modulus q  (n in {2,4}, sigma=0, 800 epochs - most favorable)
+  small q => small secret entries => the faithful readout's [0,2pi) range can express them.
+  if the attack EVER recovers a secret exactly, it is here.
+  readout    q     n     exact_rate   coord_acc [95% CI]         resonance 
+  faithful   5     2     0.00         [0.0000, 0.0000]        0.1548    
+  faithful   5     4     0.00         [0.1250, 0.3750]        0.1259    
+  faithful   11    2     0.00         [0.0625, 0.3750]        0.1511    
+  faithful   11    4     0.00         [0.0000, 0.1562]        0.1193    
+  faithful   17    2     0.00         [0.0000, 0.3125]        0.1248    
+  faithful   17    4     0.00         [0.0000, 0.0000]        0.1475    
+  faithful   37    2     0.00         [0.0000, 0.0000]        0.1054    
+  faithful   37    4     0.00         [0.0000, 0.0000]        0.1451    
+  charitable 5     2     0.25         [0.3750, 0.7500]        0.1662    
+  charitable 5     4     0.00         [0.0625, 0.3438]        0.1373    
+  charitable 11    2     0.12         [0.0000, 0.3750]        0.1395    
+  charitable 11    4     0.00         [0.0000, 0.2188]        0.1306    
+  charitable 17    2     0.00         [0.0000, 0.0000]        0.1062    
+  charitable 17    4     0.00         [0.0000, 0.0938]        0.1364    
+  charitable 37    2     0.00         [0.0000, 0.0000]        0.0982    
+  charitable 37    4     0.00         [0.0000, 0.0000]        0.1394    
+
+[NULL] no-secret null (B uniform random) vs planted, n=8 sigma=0, charitable, 8 trials each
+  planted: acc=0.0000+/-0.0000  resonance=0.2146+/-0.0369
+  null   : acc=0.0000+/-0.0000  resonance=0.2097+/-0.0188
+  Cohen d planted-vs-null:  coord_acc d=0.00   resonance d=0.16
+  (resonance d ~ 0 => the attack reaches the same 'success' with NO secret present:
+   its objective does not detect the secret - it just aligns two phase fields.)
+
+================================================================================================
+GATES
+  [PASS] G1 attack works at toy scale (so we are auditing a real attack)  best tiny-q exact_rate=0.25 (q in {5,11,17,37}, n in {2,4})
+  [PASS] G2 recovery collapses as n -> Kyber-256 (chance at n=128)   n=128 exact_rate=[0.0, 0.0] acc_CI_lo=[0.0, 0.0] (chance=3.0e-04)
+  [PASS] G3 recovery collapses under realistic noise (chance at sigma>=2)  sigma>=2 exact_rate=[0.0, 0.0, 0.0] acc_CI_lo=[0.0, 0.0, 0.0]
+  [PASS] G4 no-secret null indistinct in the attack's objective      resonance Cohen d planted-vs-null = 0.16 (want |d|<0.8)
+================================================================================================
+VERDICT: EXP25_TOY_SCALE_ONLY
+  Exp 25's holographic LWE attack recovers the secret only at toy scale; it decays to the
+  chance baseline as n grows toward Kyber-256 and as sigma reaches the real LWE regime,
+  and its objective cannot tell a planted instance from a no-secret null. Consistent with
+  the lattice barrier located in 50.2c - Exp 25 does NOT cross the bedrock.
+  (Claim level 4-5: a bounded audit of one solver under matched nulls, not a proof about
+  all lattice attacks. The located barrier is the standard Regev hardness, not proven by us.)

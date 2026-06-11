@@ -1,0 +1,22 @@
+==================================================================================================
+EXP 50.8  -  THE JOINT PHASE-SPACE READOUT: use both conjugate bases at once
+  NTT/dual basis = linear relation; coefficient/primal basis = smallness. Joint = LWE itself.
+==================================================================================================
+
+[JOINT RECOVERY + COST SCALING]  ring-LWE, ternary secret+error, q=12289
+  cost = candidate secrets the joint-guided search scores before recovery.
+  n    recover_rate   median_cost   log_3(cost)   3^n (full ternary space)
+  2    1.00           8             1.89          9
+  3    1.00           20            2.70          27
+  4    1.00           102           4.21          81
+  6    1.00           750           6.03          729
+  8    0.92           1887          6.87          6561
+  12   0.17           73606         10.20         531441
+  16   0.00           n/a           n/a           43046721
+
+==================================================================================================
+WHAT THE DATA SAYS
+  [PARTIAL] joint readout (both bases) recovers where single-basis decodes (50.6/50.7) are at chance
+  cost scaling: log_3(cost) ~ 0.82 * n + c  (slope ~1 => cost ~ 3^n, EXPONENTIAL ternary search)
+==================================================================================================
+VERDICT: JOINT_READOUT_INCONCLUSIVE
