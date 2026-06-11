@@ -1,23 +1,24 @@
 {
-  "task": "Implement the phase 5.9 area-law metric in THOUGHT/LAB/CAT_CAS/phase5_9/, with a pytest suite, run it, and iterate until all tests pass.",
+  "task": "Verify the phase 5.9 area-law metric in THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/phase5_9/ against the reports; note any gaps.",
   "max_turns": 8,
-  "acceptance_criteria": "pytest on the new test file passes with 0 failures; metric matches the documented area-law definition.",
+  "acceptance_criteria": "Every phase 5.9 artifact cross-checked; gaps listed or none found.",
 
-  "use_judge": true,
-  "_comment_judge": "Default: deepseek-v4-flash judges done/continue each turn (Hermes /goal style). Set use_judge=false to fall back to a GOAL_COMPLETE marker.",
+  "completion_mode": "marker",
+  "_comment_completion": "marker (default): worker emits GOAL_COMPLETE/GOAL_BLOCKED. Use completion_mode=judge for an external judge (deepseek-v4-flash); judge-unavailable fails fast, not silent.",
 
-  "verify_command": "python -m pytest THOUGHT/LAB/CAT_CAS/phase5_9/test_area_law.py -q",
+  "execution_required": false,
+  "_comment_lane": "Default runs on the PERSISTENT reasoning lane (/v1/responses named conversation = canonical memory). Set execution_required=true to run code/tests on the /v1/runs execution lane; the result is summarized back into the persistent conversation.",
+
+  "verify_command": "python -m pytest THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/phase5_9/test_area_law.py -q",
   "verify_timeout": 180,
-  "_comment_verify": "Optional deterministic gate: the judge says done, then the harness runs this (exit 0 == really done).",
+  "_comment_verify": "Optional deterministic gate. Use a PATH-resolved 'python'/'pytest' (NOT a full path) so a space in the repo path does not break the shell.",
 
   "judgment_mode": "auto",
-  "_comment_manager": "Set judgment_mode=manager to pause on completion (awaiting_judgment) and let the dispatcher accept/reject via POST /workers/{id}/judge.",
+  "_comment_manager": "Set judgment_mode=manager to pause on completion (awaiting_judgment) for the dispatcher to accept/reject via POST /workers/{id}/judge.",
 
   "auto_revert": false,
-  "_comment_firewall": "Postflight git audit always reports scope_escapes. auto_revert=true reverts ONLY agent-reported files outside write scope (concurrent edits untouched).",
+  "_comment_audit": "Postflight scope audit (observe/revert AFTER the turn, not a pre-write block). auto_revert=true reverts ONLY agent-reported files outside write scope.",
 
-  "write_roots": ["THOUGHT/LAB/CAT_CAS/phase5_9"],
-  "read_roots": ["THOUGHT/LAB/CAT_CAS/phase5_9"],
-  "search_policy": "artifact_only",
-  "branch_policy": "forbidden"
+  "write_roots": ["THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/phase5_9"],
+  "read_roots": ["THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/phase5_9"]
 }

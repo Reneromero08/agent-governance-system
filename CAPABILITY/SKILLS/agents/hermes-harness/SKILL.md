@@ -30,11 +30,14 @@ metadata:
 ---
 # Hermes Harness
 
-> **For autonomous goal loops, use the Worker API control plane** (a `/goal`
-> replica over the HTTP API: persistent workers, deepseek-v4-flash judge,
-> verify gate, git firewall) — see **[WORKER_API.md](WORKER_API.md)** and Entry
-> Mode 3 below. The `delegate_task` content below is the original loaded-skill
-> path, still valid but not the recommended way to run goal loops.
+> **For autonomous goal loops, use the Worker API control plane** — persistent
+> workers keyed by `worker_id` + `conversation` + `session_key`, with the
+> persistent reasoning lane (`/v1/responses` named conversations, server-side
+> memory) as canonical memory, an opt-in `/v1/runs` execution lane (summarized
+> back), `marker`/`judge` completion, and a postflight scope audit. See
+> **[WORKER_API.md](WORKER_API.md)** and Entry Mode 3 below. The `delegate_task`
+> content below is the original loaded-skill path, still valid but not the
+> recommended way to run goal loops.
 
 ## When to Use
 
@@ -47,7 +50,7 @@ Do not use this skill for trivial single-step work, questions that need one loca
 There are three entry paths. **Use Mode 3 (Worker API) for autonomous goal
 loops** — it is the current, validated path. Modes 1 and 2 are **LEGACY**: they
 predate the Worker API and have no judge loop, no execution-with-approval, and
-no write-firewall. They still work for their original purposes (one-shot
+no postflight scope audit. They still work for their original purposes (one-shot
 delegation / prompt generation) but should not be used to run goal loops.
 
 Decision: autonomous goal loop / "keep working until done" → **Mode 3**.
@@ -87,18 +90,23 @@ a cron) is just a client. It owns a persistent worker registry, scoped task
 packets, a harness-managed goal loop, artifact manifests, logs, and worker state.
 
 Native Hermes `/goal` is **not** used: no HTTP path dispatches it. The goal loop
-is owned by the control plane and stops on `GOAL_BLOCKED: true`, `max_turns`, or
-verified completion. Workers default to the **`runs` transport** (`POST /v1/runs`
-+ event stream + auto-answered approvals via `choice="once"`), which lets the
-agent execute its own code/tests autonomously without touching your global
-Hermes approval config. Completion works like **Hermes `/goal`** (a Ralph loop): by default, after each
-turn an **auxiliary judge model** returns `{"done": bool, "reason": "..."}`; if
-not done, its reason is fed back as a continuation and the loop keeps going until
-done, blocked, or the turn budget. Native `/goal` is not dispatchable through the
-raw HTTP API, so the harness replicates its loop client-side. Optional layers:
-`verify_command` (a deterministic gate the harness runs) and
-`judgment_mode="manager"` (pause for the dispatcher's verdict). `use_judge=False`
-falls back to a literal `GOAL_COMPLETE` marker.
+is owned by the control plane.
+
+**Persistent worker identity** = `worker_id` + `conversation` + `session_key`.
+By default a worker runs on the **persistent reasoning lane** -- Hermes
+`/v1/responses` named conversations (`persistent_transport="responses"`),
+server-side memory. Every goal-loop turn reuses the same `conversation` +
+`session_key`; client-side transcript is NOT the canonical memory. The
+**execution lane** (`/v1/runs`, used only when `execution_required=True`) lets
+the agent run approval-gated code/tests, then its result is **summarized back**
+into the persistent conversation -- runs are never the memory layer.
+
+Completion: **`completion_mode="marker"` (default)** -- the worker emits
+`GOAL_COMPLETE: true` / `GOAL_BLOCKED: true`. **`completion_mode="judge"`** uses
+an external judge model (default deepseek-v4-flash); if the judge is unavailable
+the loop **fails fast** (status `error`), it does not silently burn the budget.
+Optional layers: `verify_command` (deterministic gate) and
+`judgment_mode="manager"` (pause for the dispatcher's verdict).
 
 ```text
 Manager -> Worker API -> Worker Registry -> Goal loop -> Hermes /v1/responses
@@ -147,7 +155,7 @@ The parent agent must convert vague follow-ups into scoped task packets before c
 
 **Use `persistent_worker_verify` for follow-ups.** It injects STRICT SCOPE LOCK into the worker prompt. Always pass `--write-root`, `--read-root`, and `--search-policy artifact_only`.
 
-> Prompt-level scope only. Runtime enforcement (write firewall, postflight diff audit, auto-revert) is not yet implemented.
+> Prompt-level scope only. The Worker API adds a postflight scope audit; runtime enforcement (pre-write firewall, search limiter, auto-revert) is not yet implemented.
 
 ### Architecture: Three Layers
 

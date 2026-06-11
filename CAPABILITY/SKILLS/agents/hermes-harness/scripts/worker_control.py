@@ -53,6 +53,7 @@ from hermes_harness import (  # noqa: E402
     DEFAULT_MODEL,
     build_harness_prompt,
     call_hermes_responses,
+    call_hermes_session_chat,
 )
 from hermes_run_transport import call_hermes_run, call_hermes_judge  # noqa: E402
 
@@ -68,6 +69,16 @@ VALID_STATUSES = {"idle", "running", "complete", "blocked", "budget_exhausted", 
 
 # Status values a goal loop run can terminate with.
 TERMINAL_RUN_STATUSES = {"complete", "blocked", "budget_exhausted", "error"}
+
+# Persistent REASONING lane (canonical memory). responses = /v1/responses named
+# conversation (default). session_chat = /api/sessions/{id}/chat (needs session_id).
+VALID_PERSISTENT_TRANSPORTS = {"responses", "session_chat"}
+# Optional EXECUTION lane (NOT the memory layer). none = reasoning only;
+# runs = /v1/runs job lane for approval-gated command/test execution.
+VALID_EXECUTION_TRANSPORTS = {"none", "runs"}
+# Completion modes: marker (worker emits GOAL_COMPLETE/GOAL_BLOCKED, default) or
+# judge (external judge model decides; only when explicitly configured+available).
+VALID_COMPLETION_MODES = {"marker", "judge"}
 
 _MANIFEST_RE = re.compile(
     r"ARTIFACT_MANIFEST\s*[:=]?\s*```(?:json)?\s*(\{.*?\})\s*```",
@@ -145,7 +156,8 @@ def default_judge(
     def _judge(goal: str, response: str) -> Dict[str, Any]:
         v = call_hermes_judge(goal, response, model=mdl, base_url=base,
                               api_key=key, timeout=timeout)
-        return {"done": v["done"], "reason": v["reason"], "blocked": False}
+        return {"done": v["done"], "reason": v["reason"], "blocked": False,
+                "error": v.get("error", "")}
     return _judge
 
 
@@ -212,6 +224,32 @@ def default_run_caller(
             "usage": res.get("usage", {}),
             "approvals": res.get("approvals", 0),
         }
+
+    return _call
+
+
+def default_session_chat_caller(
+    session_id: str,
+    base_url: Optional[str] = None,
+    api_key: Optional[str] = None,
+    timeout: Optional[int] = None,
+) -> Caller:
+    """Persistent caller for the `session_chat` transport (Hermes SessionDB).
+
+    Uses POST /api/sessions/{session_id}/chat. `session_id` is a Hermes SessionDB
+    id -- distinct from a `/v1/responses` `conversation`. Server-side session
+    memory, so no client-side history. Does NOT invoke native /goal.
+    """
+    base = base_url or os.environ.get("HERMES_API_BASE", DEFAULT_BASE)
+    key = api_key or os.environ.get("HERMES_API_KEY") or os.environ.get("API_SERVER_KEY") or DEFAULT_KEY
+
+    def _call(prompt: str, conversation: str = "", session_key: str = "",
+              model: str = DEFAULT_MODEL, history: Optional[List[Dict[str, str]]] = None) -> Dict[str, Any]:
+        res = call_hermes_session_chat(
+            session_id=session_id, prompt=prompt,
+            base_url=base, api_key=key, model=model or DEFAULT_MODEL, timeout=timeout,
+        )
+        return {"text": res.get("text", ""), "response_id": "", "usage": res.get("usage", {})}
 
     return _call
 
@@ -360,17 +398,28 @@ def build_continuation_packet(
     blocked_marker: str = DEFAULT_BLOCKED_MARKER,
     turn: int = 2,
     max_turns: int = DEFAULT_MAX_TURNS,
+    use_judge: bool = False,
 ) -> str:
-    """Compact continuation turn. Scope lock is preserved by the conversation."""
-    return (
+    """Compact continuation turn. Scope lock is preserved by the conversation.
+
+    In judge mode the continuation must NOT ask for markers (the judge decides
+    completion) -- otherwise it contradicts the judge-mode first-turn packet.
+    """
+    head = (
         f"CONTINUE (harness goal loop turn {turn} of {max_turns}).\n"
-        "Same STRICT SCOPE LOCK and GOAL LOOP CONTRACT from this conversation "
-        "still apply. Do not widen scope. Do not commit. Do not create branches.\n"
+        "Same STRICT SCOPE LOCK from this conversation still applies. Do not "
+        "widen scope. Do not commit. Do not create branches.\n"
         "Continue the in-scope work from where you stopped.\n"
-        f"Emit '{done_marker}' when acceptance criteria are met, or "
-        f"'{blocked_marker}' with a reason if blocked.\n"
-        "End with the ARTIFACT_MANIFEST json block.\n"
     )
+    if use_judge:
+        # Judge mode: no markers; a separate judge decides completion.
+        tail = ("You do NOT need to declare completion -- a separate judge decides "
+                "when the goal is met. End with the ARTIFACT_MANIFEST json block.\n")
+    else:
+        tail = (f"Emit '{done_marker}' when acceptance criteria are met, or "
+                f"'{blocked_marker}' with a reason if blocked.\n"
+                "End with the ARTIFACT_MANIFEST json block.\n")
+    return head + tail
 
 
 # ---------------------------------------------------------------------------
@@ -530,17 +579,17 @@ class WorkerController:
         self.manifests_dir = self.state_dir / "manifests"
         for d in (self.workers_dir, self.tasks_dir, self.logs_dir, self.manifests_dir):
             d.mkdir(parents=True, exist_ok=True)
-        # Injectable for tests. If injected, it is used for every worker
-        # regardless of transport. In production, the caller is chosen per
-        # worker by its `transport` field (see _caller_for):
-        #   "runs"      -> async run API + harness-side approval (can execute)
-        #   "responses" -> /v1/responses named conversation (no autonomous exec)
+        # Injectable for tests; if injected it is used for BOTH lanes. In
+        # production the caller is chosen per worker per lane:
+        #   PERSISTENT (canonical memory): /v1/responses named conversation
+        #     (default) or /api/sessions/{id}/chat (session_chat).
+        #   EXECUTION (opt-in, NOT memory): /v1/runs async run API + approval.
         self._injected_caller = caller
-        self._caller = caller or default_run_caller()  # back-comat default
+        self._caller = caller or default_caller()  # default = PERSISTENT (responses)
         self._resp_caller: Optional[Caller] = None
         self._run_caller: Optional[Caller] = None
-        # Goal judge (Hermes /goal-style). Injectable for tests; lazily built
-        # in production so a judge model is only contacted when actually used.
+        # Goal judge. Injectable for tests; lazily built in production. Only
+        # consulted in judge completion_mode (marker is the default).
         self._injected_judge = judge
         self._judge: Optional[Judge] = judge
 
@@ -550,14 +599,24 @@ class WorkerController:
             self._judge = default_judge()
         return self._judge
 
-    def _caller_for(self, worker: Dict[str, Any]) -> Caller:
+    def _persistent_transport(self, worker: Dict[str, Any]) -> str:
+        # Back-compat: a legacy worker may only have `transport`.
+        return worker.get("persistent_transport") or worker.get("transport") or "responses"
+
+    def _persistent_caller_for(self, worker: Dict[str, Any]) -> Caller:
+        """The CANONICAL memory lane caller (server-side conversation)."""
         if self._injected_caller is not None:
             return self._injected_caller
-        transport = worker.get("transport", "runs")
-        if transport == "responses":
-            if self._resp_caller is None:
-                self._resp_caller = default_caller()
-            return self._resp_caller
+        if self._persistent_transport(worker) == "session_chat":
+            return default_session_chat_caller(worker.get("session_id", ""))
+        if self._resp_caller is None:
+            self._resp_caller = default_caller()
+        return self._resp_caller
+
+    def _execution_caller_for(self, worker: Dict[str, Any]) -> Caller:
+        """The opt-in EXECUTION lane caller (/v1/runs). NOT the memory layer."""
+        if self._injected_caller is not None:
+            return self._injected_caller
         if self._run_caller is None:
             self._run_caller = default_run_caller()
         return self._run_caller
@@ -639,27 +698,42 @@ class WorkerController:
         deny_write_roots: Optional[List[str]] = None,
         search_policy: str = "artifact_only",
         branch_policy: str = "forbidden",
-        transport: str = "runs",
+        persistent_transport: str = "responses",
+        execution_transport: str = "runs",
+        session_id: str = "",
+        transport: Optional[str] = None,  # back-compat alias for persistent_transport
     ) -> Dict[str, Any]:
         if not worker_id or not str(worker_id).strip():
             raise ValueError("worker_id is required")
         if backend not in VALID_BACKENDS:
             raise ValueError(f"Invalid backend {backend!r}. Valid: {sorted(VALID_BACKENDS)}")
-        if transport not in ("runs", "responses"):
-            raise ValueError(f"Invalid transport {transport!r}. Valid: runs, responses")
+        if transport is not None:  # legacy callers passed transport=
+            persistent_transport = transport
+        if persistent_transport not in VALID_PERSISTENT_TRANSPORTS:
+            raise ValueError(f"Invalid persistent_transport {persistent_transport!r}. "
+                             f"Valid: {sorted(VALID_PERSISTENT_TRANSPORTS)}")
+        if execution_transport not in VALID_EXECUTION_TRANSPORTS:
+            raise ValueError(f"Invalid execution_transport {execution_transport!r}. "
+                             f"Valid: {sorted(VALID_EXECUTION_TRANSPORTS)}")
         if self.get_worker(worker_id):
             raise ValueError(f"Worker {worker_id!r} already exists")
-        # conversation, session_key, and session_id are three DISTINCT things.
-        # The control plane uses `conversation` for the /v1/responses turn chain
-        # and `session_key` for long-term memory scope. session_id (a Hermes
-        # SessionDB id) is intentionally NOT part of a persistent worker record:
-        # the responses transport does not use it.
+        # worker_id / conversation / session_key / session_id are DISTINCT (see
+        # the truth table in WORKER_API.md). The PERSISTENT REASONING LANE is the
+        # canonical memory: /v1/responses keyed by `conversation` (+ session_key
+        # header), server-side. `session_id` is only for the session_chat
+        # persistent transport and is NOT the conversation. The execution lane
+        # (`/v1/runs`) is opt-in per task and is NOT the memory layer.
+        if persistent_transport == "session_chat" and not session_id:
+            raise ValueError("session_chat persistent_transport requires a session_id")
         worker = {
             "worker_id": worker_id,
             "role": role,
             "backend": backend,
-            "conversation": conversation or f"ccc:ags:{worker_id}",
-            "session_key": session_key or f"agent:ags:{worker_id}",
+            "persistent_transport": persistent_transport,   # canonical memory lane
+            "execution_transport": execution_transport,     # opt-in exec lane (not memory)
+            "conversation": conversation or f"ccc:ags:{worker_id}",  # /v1/responses named conversation
+            "session_key": session_key or f"agent:ags:{worker_id}",  # X-Hermes-Session-Key memory scope
+            "session_id": session_id,                        # ONLY for session_chat; != conversation
             "model": model or DEFAULT_MODEL,
             "workspace": str(workspace or "."),
             "read_roots": _as_list(read_roots),
@@ -667,13 +741,15 @@ class WorkerController:
             "deny_write_roots": _as_list(deny_write_roots) or ["CAPABILITY/", "TOOLS/", ".git/", ".hermes/"],
             "search_policy": search_policy,
             "branch_policy": branch_policy,
-            "transport": transport,
-            # Client-side rolling context for the "runs" transport (the async
-            # run API has no server-side named conversation). Trimmed in
-            # _finalize. Unused by the "responses" transport.
+            # FALLBACK/DEBUG ONLY. The canonical memory is the server-side named
+            # conversation on the persistent lane; this client-side transcript is
+            # only used as a cache for the execution lane and is never the source
+            # of truth for a persistent worker.
             "history": [],
             "status": "idle",
             "last_task_id": None,
+            "last_response_id": None,   # latest /v1/responses id on the persistent lane
+            "last_run_id": None,        # latest /v1/runs id on the execution lane
             "artifact_manifest": str((self.manifests_dir / f"{worker_id}.json")),
             "created_at": _utc_now(),
             "updated_at": _utc_now(),
@@ -770,17 +846,32 @@ class WorkerController:
         verify_timeout: int = 120,
         verify_cwd: str = "",
         judgment_mode: str = "auto",
-        use_judge: bool = True,
+        completion_mode: str = "marker",
+        use_judge: Optional[bool] = None,   # deprecated alias for completion_mode
         judgment_timeout: int = 3600,
         auto_revert: bool = False,
+        execution_required: bool = False,
+        execution_transport: Optional[str] = None,
     ) -> Dict[str, Any]:
         """Submit a task to a persistent worker and run the harness goal loop.
 
-        Completion (default) works exactly like Hermes /goal: after each turn an
-        auxiliary judge model returns done/continue from the agent's response.
-        `use_judge=False` falls back to the legacy marker (`GOAL_COMPLETE`)
-        check. `verify_command` (deterministic gate) and `judgment_mode="manager"`
-        still layer on top when set.
+        LANES:
+        - PERSISTENT REASONING LANE (default): the task turns run on the worker's
+          persistent transport -- /v1/responses keyed by `conversation` (+
+          `session_key`), server-side memory. This is the canonical worker memory.
+        - EXECUTION LANE (`execution_required=True`): the task runs on the
+          execution transport (/v1/runs) so the agent can run approval-gated
+          code/tests; the final result is then SUMMARIZED BACK into the
+          persistent conversation. Runs are never the canonical memory layer.
+
+        COMPLETION:
+        - `completion_mode="marker"` (default): the worker emits
+          `GOAL_COMPLETE: true` / `GOAL_BLOCKED: true`. Cheap, deterministic.
+        - `completion_mode="judge"`: an external judge model decides
+          done/continue (worker emits no markers). If the judge is unavailable
+          the loop fails fast with status `error` -- it does NOT silently
+          fail-open and burn the turn budget.
+        - `use_judge` is a deprecated bool alias (True->judge, False->marker).
 
         Completion authority, in order:
         - `verify_command` (if set): the harness runs it (exit 0 == pass). A
@@ -796,11 +887,22 @@ class WorkerController:
         """
         if judgment_mode not in ("auto", "manager"):
             raise ValueError(f"Invalid judgment_mode {judgment_mode!r}. Valid: auto, manager")
+        # Reconcile completion mode (marker default; use_judge is the legacy alias).
+        if use_judge is not None:
+            completion_mode = "judge" if use_judge else "marker"
+        if completion_mode not in VALID_COMPLETION_MODES:
+            raise ValueError(f"Invalid completion_mode {completion_mode!r}. "
+                             f"Valid: {sorted(VALID_COMPLETION_MODES)}")
+        use_judge = (completion_mode == "judge")
         worker = self.get_worker(worker_id)
         if not worker:
             raise KeyError(f"Unknown worker {worker_id!r}")
         if not str(task).strip():
             raise ValueError("task is required")
+        # Which lane runs the task turns?
+        exec_transport = execution_transport or worker.get("execution_transport", "runs")
+        if execution_required and exec_transport == "none":
+            raise ValueError("execution_required=True but execution_transport is 'none'")
 
         task_id = _new_id("task")
         # Atomically claim the worker. A worker runs one task at a time over a
@@ -850,7 +952,12 @@ class WorkerController:
             "verify_cwd": verify_cwd or worker.get("workspace", ""),
             "judgment_mode": judgment_mode,
             "judgment_timeout": int(judgment_timeout),
+            "completion_mode": completion_mode,
             "use_judge": bool(use_judge),
+            "execution_required": bool(execution_required),
+            "execution_transport": exec_transport,
+            "persistent_transport": self._persistent_transport(worker),
+            "lane": ("execution" if execution_required else "persistent"),
             "scope_auto_revert": bool(auto_revert),
             # Git state at task start, so the postflight audit attributes only
             # files THIS task touched (not pre-existing / concurrent edits).
@@ -891,7 +998,13 @@ class WorkerController:
             judgment_mode=judgment_mode,
             use_judge=bool(use_judge),
             goal=rec["goal"],
+            execution_required=bool(execution_required),
         )
+
+        # Execution lane runs are summarized BACK into the persistent reasoning
+        # lane so the worker's canonical conversation retains what happened.
+        if execution_required and status in ("complete", "blocked", "budget_exhausted"):
+            self.record_execution_result_to_persistent_worker(worker, rec)
 
         if status == "awaiting_judgment":
             self._pause_for_judgment(worker, rec)
@@ -933,7 +1046,8 @@ class WorkerController:
         worker["status"] = "running"
         self.save_worker(worker)
 
-        first = build_continuation_packet(done_marker, blocked_marker, start_turn, cap)
+        first = build_continuation_packet(done_marker, blocked_marker, start_turn, cap,
+                                          use_judge=bool(rec.get("use_judge", False)))
         if nudge:
             first = f"{first}\nADDITIONAL IN-SCOPE GUIDANCE: {nudge}\n"
 
@@ -944,9 +1058,12 @@ class WorkerController:
             verify_timeout=int(rec.get("verify_timeout", 120)),
             verify_cwd=rec.get("verify_cwd", ""),
             judgment_mode=rec.get("judgment_mode", "auto"),
-            use_judge=bool(rec.get("use_judge", True)),
+            use_judge=bool(rec.get("use_judge", False)),
             goal=rec.get("goal", rec.get("task", "")),
+            execution_required=bool(rec.get("execution_required", False)),
         )
+        if rec.get("execution_required") and status in ("complete", "blocked", "budget_exhausted"):
+            self.record_execution_result_to_persistent_worker(worker, rec)
         if status == "awaiting_judgment":
             self._pause_for_judgment(worker, rec)
         else:
@@ -1040,7 +1157,8 @@ class WorkerController:
         worker["status"] = "running"
         self.save_worker(worker)
 
-        first = build_continuation_packet(done_marker, blocked_marker, start_turn, cap)
+        first = build_continuation_packet(done_marker, blocked_marker, start_turn, cap,
+                                          use_judge=bool(rec.get("use_judge", False)))
         first += (
             f"\n\nMANAGER REVIEW: your '{done_marker}' was REJECTED by the manager.\n"
             f"Required changes: {feedback or '(see acceptance criteria)'}\n"
@@ -1053,14 +1171,53 @@ class WorkerController:
             verify_timeout=int(rec.get("verify_timeout", 120)),
             verify_cwd=rec.get("verify_cwd", ""),
             judgment_mode=rec.get("judgment_mode", "manager"),
-            use_judge=bool(rec.get("use_judge", True)),
+            use_judge=bool(rec.get("use_judge", False)),
             goal=rec.get("goal", rec.get("task", "")),
+            execution_required=bool(rec.get("execution_required", False)),
         )
+        if execution_required := bool(rec.get("execution_required", False)):
+            if status in ("complete", "blocked", "budget_exhausted"):
+                self.record_execution_result_to_persistent_worker(worker, rec)
         if status == "awaiting_judgment":
             self._pause_for_judgment(worker, rec)
         else:
             self._finalize(worker, rec, status)
         return rec
+
+    def record_execution_result_to_persistent_worker(
+        self, worker: Dict[str, Any], rec: Dict[str, Any]
+    ) -> None:
+        """Summarize an EXECUTION-lane run back into the PERSISTENT conversation.
+
+        The execution lane (/v1/runs) is not the canonical memory; this writes a
+        compact summary into the worker's persistent /v1/responses conversation
+        (same conversation + session_key) so the worker's canonical memory retains
+        what the execution produced. Updates last_response_id. Best-effort: a
+        failure here is logged but does not fail the task.
+        """
+        summary = (
+            f"[EXECUTION SUMMARY] task_id={rec.get('task_id')} "
+            f"status={rec.get('status')} run_id={rec.get('last_run_id') or worker.get('last_run_id')}\n"
+            f"Goal: {rec.get('goal', rec.get('task', ''))[:500]}\n"
+            f"Result (tail):\n{(rec.get('final_result') or '')[-1500:]}\n"
+            f"This was executed on the /v1/runs execution lane; recorded here for "
+            f"persistent-conversation continuity."
+        )
+        try:
+            caller = self._persistent_caller_for(worker)
+            res = caller(summary, conversation=worker.get("conversation", ""),
+                         session_key=worker.get("session_key", ""),
+                         model=worker.get("model", DEFAULT_MODEL))
+            rid = res.get("response_id") if isinstance(res, dict) else ""
+            if rid:
+                worker["last_response_id"] = rid
+                self.save_worker(worker)
+            rec["execution_summarized_to_conversation"] = True
+            self._log(rec["task_id"], "execution_summary_recorded",
+                      {"conversation": worker.get("conversation"), "response_id": rid})
+        except Exception as exc:  # noqa: BLE001 -- best effort
+            rec["execution_summarized_to_conversation"] = False
+            self._log(rec["task_id"], "execution_summary_failed", {"error": str(exc)})
 
     # -- goal loop ---------------------------------------------------------
 
@@ -1078,26 +1235,35 @@ class WorkerController:
         verify_timeout: int = 120,
         verify_cwd: str = "",
         judgment_mode: str = "auto",
-        use_judge: bool = True,
+        use_judge: bool = False,
         goal: str = "",
+        execution_required: bool = False,
     ) -> str:
         """Harness-owned goal loop. Returns a terminal run status.
 
-        Never calls /goal. The loop control (parse, verify, stop, continue) lives
-        here, in the control plane. When `verify_command` is set, a GOAL_COMPLETE
-        marker triggers an EXTERNAL check the harness runs; only exit 0 ends the
-        loop as complete. A failed check is fed back and the loop continues.
+        Never calls /goal. Lane selection:
+        - default (execution_required=False): PERSISTENT reasoning lane
+          (/v1/responses or session_chat). Continuity is SERVER-SIDE via the
+          named `conversation` (+ session_key); client-side history is NOT used.
+        - execution_required=True: EXECUTION lane (/v1/runs). The run API has no
+          named conversation, so a client-side transcript is threaded as an
+          execution-local cache only (not canonical memory); the result is
+          summarized back into the persistent conversation by the caller.
         """
         conversation = worker.get("conversation", "")
         session_key = worker.get("session_key", "")
         model = worker.get("model", DEFAULT_MODEL)
         done_marker = done_marker or DEFAULT_DONE_MARKER
         blocked_marker = blocked_marker or DEFAULT_BLOCKED_MARKER
-        caller = self._caller_for(worker)
-        # "runs" transport carries context client-side via conversation_history;
-        # "responses" relies on the server-side named conversation instead.
-        uses_history = worker.get("transport", "runs") == "runs"
-        history: Optional[List[Dict[str, str]]] = list(worker.get("history", [])) if uses_history else None
+        if execution_required:
+            caller = self._execution_caller_for(worker)
+            # Execution-local cache only (runs has no server-side conversation).
+            history: Optional[List[Dict[str, str]]] = list(worker.get("history", []))
+        else:
+            caller = self._persistent_caller_for(worker)
+            # Persistent lane: rely on the SERVER-SIDE named conversation; do not
+            # replay client-side transcript (it is not the canonical memory).
+            history = None
 
         status = "running"
         pending_feedback = ""
@@ -1106,7 +1272,8 @@ class WorkerController:
             if turn == start_turn:
                 prompt = first_prompt
             else:
-                prompt = build_continuation_packet(done_marker, blocked_marker, turn, max_turns)
+                prompt = build_continuation_packet(done_marker, blocked_marker, turn, max_turns,
+                                                   use_judge=use_judge)
             if pending_feedback:
                 prompt = f"{prompt}\n\n{pending_feedback}"
                 pending_feedback = ""
@@ -1135,6 +1302,15 @@ class WorkerController:
                 "approvals": (resp.get("approvals", 0) if isinstance(resp, dict) else 0),
             })
             rec["final_result"] = text
+            rid = resp.get("response_id") if isinstance(resp, dict) else ""
+            if rid:
+                if execution_required:
+                    rec["last_run_id"] = rid
+                    worker["last_run_id"] = rid
+                else:
+                    rec["last_response_id"] = rid
+                    worker["last_response_id"] = rid
+                self.save_worker(worker)
             if history is not None:
                 history.append({"role": "user", "content": prompt})
                 history.append({"role": "assistant", "content": text})
@@ -1149,17 +1325,24 @@ class WorkerController:
 
             # Decide done / blocked / continue for this turn.
             if use_judge:
-                # Hermes /goal mechanism: an aux model judges the response.
+                # judge completion_mode: an external model decides done/continue.
                 try:
                     verdict = self._judge_for(worker)(goal or rec.get("task", ""), text)
-                except Exception as exc:  # fail-open like /goal
-                    verdict = {"done": False, "blocked": False,
-                               "reason": f"judge error, continuing (fail-open): {exc}"}
+                except Exception as exc:  # noqa: BLE001
+                    verdict = {"done": False, "blocked": False, "reason": "", "error": str(exc)}
                 rec.setdefault("judge_verdicts", []).append({"turn": turn, **verdict})
                 self._log(rec["task_id"], "judge", {
-                    "turn": turn, "done": verdict.get("done"), "reason": verdict.get("reason"),
+                    "turn": turn, "done": verdict.get("done"),
+                    "reason": verdict.get("reason"), "error": verdict.get("error", ""),
                 })
                 self._save_task(rec)
+                # Judge UNAVAILABLE -> fail fast (explicit), do NOT silently
+                # fail-open and burn the turn budget.
+                if verdict.get("error"):
+                    status = "error"
+                    rec["error"] = f"judge unavailable: {verdict['error']}"
+                    self._log(rec["task_id"], "judge_unavailable", {"turn": turn, "error": verdict["error"]})
+                    break
                 is_complete = bool(verdict.get("done"))
                 is_blocked = bool(verdict.get("blocked"))
                 judge_reason = str(verdict.get("reason", ""))
@@ -1389,8 +1572,12 @@ def main(argv: Optional[List[str]] = None) -> int:
     p_create.add_argument("--deny-write-roots", default="")
     p_create.add_argument("--search-policy", default="artifact_only")
     p_create.add_argument("--branch-policy", default="forbidden")
-    p_create.add_argument("--transport", default="runs", choices=["runs", "responses"],
-                          help="runs (default, can execute code) or responses (named conversation, no exec).")
+    p_create.add_argument("--persistent-transport", default="responses", choices=["responses", "session_chat"],
+                          help="Canonical memory lane: responses (default, /v1/responses named conversation) "
+                               "or session_chat (needs --session-id).")
+    p_create.add_argument("--execution-transport", default="runs", choices=["none", "runs"],
+                          help="Opt-in execution lane (NOT memory): runs (/v1/runs) or none.")
+    p_create.add_argument("--session-id", default="", help="Hermes SessionDB id; ONLY for session_chat (not the conversation).")
 
     sub.add_parser("worker-list", help="List registered workers.")
 
@@ -1418,12 +1605,15 @@ def main(argv: Optional[List[str]] = None) -> int:
     p_task.add_argument("--verify-timeout", type=int, default=120)
     p_task.add_argument("--judgment-mode", default="auto", choices=["auto", "manager"],
                         help="'manager' pauses on completion and returns awaiting_judgment for the dispatcher to judge.")
-    p_task.add_argument("--no-judge", action="store_true",
-                        help="Disable the aux judge loop; fall back to literal GOAL_COMPLETE marker.")
+    p_task.add_argument("--completion-mode", default="marker", choices=["marker", "judge"],
+                        help="marker (default): worker emits GOAL_COMPLETE/GOAL_BLOCKED. judge: external judge decides.")
     p_task.add_argument("--judge-model", default="",
-                        help="Override the goal-judge model (default: deepseek-v4-flash via DeepSeek).")
+                        help="Override the goal-judge model (judge mode; default: deepseek-v4-flash via DeepSeek).")
+    p_task.add_argument("--execution-required", action="store_true",
+                        help="Run this task on the execution lane (/v1/runs) so it can run code/tests; "
+                             "the result is summarized back into the persistent conversation.")
     p_task.add_argument("--auto-revert", action="store_true",
-                        help="Write firewall: auto-revert agent-made changes outside write scope (git workspace only).")
+                        help="Postflight scope audit: auto-revert agent-reported changes outside write scope (git workspace only).")
 
     p_judge = sub.add_parser("judge", help="Manager verdict on a worker awaiting judgment.")
     p_judge.add_argument("--worker-id", required=True)
@@ -1460,7 +1650,9 @@ def main(argv: Optional[List[str]] = None) -> int:
             read_roots=_as_list(args.read_roots), write_roots=_as_list(args.write_roots),
             deny_write_roots=_as_list(args.deny_write_roots),
             search_policy=args.search_policy, branch_policy=args.branch_policy,
-            transport=args.transport,
+            persistent_transport=args.persistent_transport,
+            execution_transport=args.execution_transport,
+            session_id=args.session_id,
         )
         _print(w)
     elif args.command == "worker-list":
@@ -1479,8 +1671,8 @@ def main(argv: Optional[List[str]] = None) -> int:
             write_roots=_as_list(args.write_root) if args.write_root else None,
             read_roots=_as_list(args.read_root) if args.read_root else None,
             verify_command=args.verify_command, verify_timeout=args.verify_timeout,
-            judgment_mode=args.judgment_mode, use_judge=not args.no_judge,
-            auto_revert=args.auto_revert,
+            judgment_mode=args.judgment_mode, completion_mode=args.completion_mode,
+            auto_revert=args.auto_revert, execution_required=args.execution_required,
         )
         _print(rec)
     elif args.command == "judge":

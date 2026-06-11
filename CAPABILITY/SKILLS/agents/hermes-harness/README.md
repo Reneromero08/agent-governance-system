@@ -1,17 +1,20 @@
 # Hermes Harness Skill Folder
 
-> **Current / recommended path:** the **Worker API control plane** — a faithful
-> `/goal` replica over the HTTP API: persistent workers that execute their own
-> code, an independent **deepseek-v4-flash** judge driving done/continue, an
-> optional deterministic `verify_command` gate, and a git write-firewall. See
-> **[WORKER_API.md](WORKER_API.md)**. The sections below document the original
-> loaded-skill (`delegate_task`) and `/v1/responses` paths, which still work but
-> are not the recommended way to run autonomous goal loops.
+> **Current / recommended path:** the **Worker API control plane** — persistent
+> specialist workers a manager routes repeated tasks to. Worker identity is
+> `worker_id` + `conversation` + `session_key`; the **persistent reasoning lane**
+> (Hermes `/v1/responses` named conversations, server-side memory) is the
+> canonical worker memory. `/v1/runs` is an **opt-in execution lane** (run
+> code/tests), summarized back into the persistent conversation — never the
+> memory layer. Completion is `marker` (default) or `judge`. Native Hermes
+> `/goal` is not used. See **[WORKER_API.md](WORKER_API.md)**. The sections below
+> document the original loaded-skill (`delegate_task`) and raw `/v1/responses`
+> paths, which still work but are not the recommended way to run goal loops.
 
 Drop-in repo folder that lets Hermes Agent act as a task harness for other agents.
 
 > **The modes and transports in this section are LEGACY.** They predate the
-> Worker API and have no goal-judge loop / execution-with-approval / write-firewall.
+> Worker API and have no goal-judge loop / execution-with-approval / postflight scope audit.
 > For autonomous goal loops use the **[Worker API control plane](#worker-api-control-plane-recommended)**
 > (next section). The content here remains accurate for its original uses
 > (one-shot `delegate_task` fan-out, prompt generation, single governed turns).
@@ -28,7 +31,7 @@ Real Hermes `/goal` only dispatches through the CLI (`/goal` slash command in `h
 
 **session_id, conversation, and session_key are different:**
 - `session_id` — Hermes SessionDB session. Required for `/api/sessions/{id}/chat`.
-- `conversation` — `/v1/responses` named conversation chain. Stateless persistence.
+- `conversation` — `/v1/responses` named conversation chain. Stateful server-side persistence.
 - `session_key` — `X-Hermes-Session-Key` header. Long-term memory scope.
 
 **Modes (legacy — for goal loops use the Worker API instead):**
@@ -55,11 +58,13 @@ Manager Agent -> Worker API -> Persistent Worker Registry
 - `scripts/worker_control.py` — `WorkerController`: registry, goal loop, judge, manifests, logs, CLI.
 - `scripts/worker_api.py` — stdlib HTTP API over the controller.
 - `scripts/hermes_run_transport.py` — async-run transport (executes code) + the judge.
-- The loop is a faithful **Hermes `/goal` replica** (native `/goal` isn't on the
-  HTTP API): each turn an aux judge model (**deepseek-v4-flash** by default)
-  returns done/continue; stop on done, `max_turns`, or a manager verdict.
-  Optional `verify_command` (deterministic gate), `judgment_mode="manager"`, and
-  a postflight git **write-firewall** (`auto_revert`). See WORKER_API.md.
+- The loop is a **harness-managed goal loop inspired by Hermes `/goal`** (native
+  `/goal` isn't on the HTTP API), with **marker mode by default** and optional
+  **judge mode** (aux model, deepseek-v4-flash). Stop on done, `max_turns`, or a
+  manager verdict. Optional `verify_command` (deterministic gate), `judgment_mode="manager"`, and
+  a postflight git **scope audit** (`auto_revert`; observe/revert after the turn,
+  not a pre-write block). Default `persistent_transport=responses`,
+  `execution_transport=runs`. See WORKER_API.md.
 
 ```bash
 python scripts/worker_api.py --port 8770          # start the API
@@ -80,7 +85,7 @@ python scripts/worker_control.py task-submit --worker-id catcas-auditor --task "
 
 Use `persistent_worker_verify` mode for follow-up tasks (verify, harden, audit, fix, double check, clean up). This mode injects a STRICT SCOPE LOCK into the worker prompt with explicit write/read/search scope boundaries.
 
-> **Prompt-level only.** Runtime enforcement (write firewall, search limiter, postflight diff audit, auto-revert) is not yet implemented. Do not treat this as a hard filesystem sandbox. This mode reduces scope drift but does not replace runtime path validation.
+> **Prompt-level only.** Runtime enforcement (pre-write firewall, search limiter, auto-revert) is not yet implemented; the Worker API adds a postflight scope audit but not a pre-write block. Do not treat this as a hard filesystem sandbox. This mode reduces scope drift but does not replace runtime path validation.
 
 ```bash
 python scripts/hermes_harness.py run \
@@ -273,7 +278,7 @@ skills/hermes-harness/
 
 The harness currently provides prompt-level scope locking only. Hard runtime containment requires:
 
-- **Write firewall:** block any file write outside `--write-root` before it executes.
+- **Pre-write firewall:** block any file write outside `--write-root` before it executes (the current scope control is postflight only).
 - **Search root limiter:** deny grep/glob/search outside `--read-root` unless `--search-policy` allows it.
 - **Branch command deny:** block `git branch`, `git checkout -b`, etc. when `--branch-policy forbidden`.
 - **Postflight diff audit:** run `git diff --name-only` after the task completes.

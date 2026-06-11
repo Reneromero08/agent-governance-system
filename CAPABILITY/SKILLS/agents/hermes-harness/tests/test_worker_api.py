@@ -103,52 +103,107 @@ def test_duplicate_worker_rejected(tmp_path):
         _make_worker(ctl)
 
 
-def test_default_transport_is_runs(tmp_path):
-    """New workers default to the execution-capable runs transport."""
+def test_default_transports(tmp_path):
+    """Persistent reasoning lane (responses) is the default; runs is the opt-in
+    execution lane. Persistent worker requires a stable conversation."""
     ctl = _ctl(tmp_path, [])
     w = _make_worker(ctl)
-    assert w["transport"] == "runs"
-    assert w["history"] == []
+    assert w["persistent_transport"] == "responses"   # canonical memory lane
+    assert w["execution_transport"] == "runs"          # opt-in execution lane
+    assert w["conversation"]                           # stable conversation present
+    assert w["session_key"]                            # memory scope present
+    assert w["history"] == []                          # fallback cache, empty
+
+
+def test_persistent_worker_requires_conversation(tmp_path):
+    """Rule 2: every Hermes persistent worker must have a conversation."""
+    ctl = _ctl(tmp_path, [])
+    w = _make_worker(ctl, conversation="ccc:ags:stable")
+    assert w["conversation"] == "ccc:ags:stable"
 
 
 def test_invalid_transport_rejected(tmp_path):
     ctl = _ctl(tmp_path, [])
     with pytest.raises(ValueError):
-        _make_worker(ctl, transport="carrier-pigeon")
+        _make_worker(ctl, persistent_transport="carrier-pigeon")
+    with pytest.raises(ValueError):
+        _make_worker(ctl, worker_id="w2", execution_transport="rockets")
 
 
-def test_runs_transport_threads_history(tmp_path):
-    """Across goal-loop turns, conversation_history is threaded and grows."""
+def test_persistent_lane_does_not_thread_client_history(tmp_path):
+    """Goal loop default = persistent (responses) lane: continuity is SERVER-side
+    via the named conversation. Client-side conversation_history is NOT canonical
+    and is NOT replayed."""
     ctl = _ctl(tmp_path, ["turn 1", "turn 2", "done GOAL_COMPLETE: true"])
-    _make_worker(ctl, transport="runs")
+    _make_worker(ctl)  # default persistent_transport=responses
     ctl.submit_task("catcas-auditor", "Multi-turn.", max_turns=4)
     calls = ctl._caller.calls
-    # First turn: empty history. Later turns carry prior user+assistant msgs.
-    assert calls[0]["history_len"] == 0
-    assert calls[1]["history_len"] == 2
-    assert calls[2]["history_len"] == 4
-    # Persisted on the worker for cross-task continuity.
-    assert len(ctl.get_worker("catcas-auditor")["history"]) == 6
+    # Every turn: history is None (server-side conversation is the memory).
+    assert all(c["history_len"] is None for c in calls)
+    # Every turn hit the SAME persistent conversation.
+    assert {c["conversation"] for c in calls} == {"ccc:ags:catcas-auditor"}
+    # No canonical client-side history accumulated on the worker.
+    assert ctl.get_worker("catcas-auditor")["history"] == []
 
 
-def test_responses_transport_no_history(tmp_path):
-    """The responses transport relies on server-side conversation, not history."""
-    ctl = _ctl(tmp_path, ["done GOAL_COMPLETE: true"])
-    _make_worker(ctl, transport="responses")
-    ctl.submit_task("catcas-auditor", "One turn.")
-    assert ctl._caller.calls[0]["history_len"] is None
+def test_default_lane_is_persistent_not_runs(tmp_path):
+    """Req 6: the goal loop does NOT use /v1/runs as the default memory path."""
+    ctl = _ctl(tmp_path, ["GOAL_COMPLETE: true"])
+    _make_worker(ctl)
+    rec = ctl.submit_task("catcas-auditor", "x")
+    assert rec["execution_required"] is False
+    assert rec["lane"] == "persistent"
+    assert rec["persistent_transport"] == "responses"
+    assert all(c["history_len"] is None for c in ctl._caller.calls)  # server-side memory
+
+
+def test_execution_lane_summarized_back_to_persistent(tmp_path):
+    """Req 7: an execution-lane (/v1/runs) run is summarized BACK into the
+    worker's persistent conversation; runs never replace persistent memory."""
+    ctl = _ctl(tmp_path, ["ran the tests, all pass GOAL_COMPLETE: true", "(summary ack)"])
+    _make_worker(ctl)
+    rec = ctl.submit_task("catcas-auditor", "run the tests", execution_required=True, max_turns=2)
+    assert rec["execution_required"] is True
+    assert rec["lane"] == "execution"
+    assert rec.get("execution_summarized_to_conversation") is True
+    summary_calls = [c for c in ctl._caller.calls if "[EXECUTION SUMMARY]" in c["prompt"]]
+    assert len(summary_calls) == 1
+    # The summary went to the SAME persistent conversation + session_key.
+    assert summary_calls[0]["conversation"] == "ccc:ags:catcas-auditor"
+    assert summary_calls[0]["session_key"] == "agent:ags:catcas"
+
+
+def test_goal_loop_sends_session_key_every_turn(tmp_path):
+    ctl = _ctl(tmp_path, ["a", "b", "c GOAL_COMPLETE: true"])
+    _make_worker(ctl, session_key="agent:ags:catcas")
+    ctl.submit_task("catcas-auditor", "x", max_turns=4)
+    assert {c["session_key"] for c in ctl._caller.calls} == {"agent:ags:catcas"}
 
 
 def test_distinct_identity_fields(tmp_path):
-    """session_id, conversation, and session_key are three different things."""
+    """worker_id, conversation, session_key, session_id are DISTINCT."""
     ctl = _ctl(tmp_path, [])
     w = _make_worker(ctl, conversation="conv-A", session_key="memkey-B")
     assert w["conversation"] == "conv-A"
     assert w["session_key"] == "memkey-B"
     assert w["conversation"] != w["session_key"]
-    # A persistent worker record does NOT carry a session_id: the responses
-    # transport never uses one. Keeping it absent prevents conflation.
-    assert "session_id" not in w
+    # session_id field exists but is empty by default (only used by session_chat),
+    # and is never the conversation.
+    assert w.get("session_id", "") == ""
+    assert w["conversation"] != w.get("session_id", "")
+
+
+def test_session_chat_requires_session_id_not_conversation(tmp_path):
+    """Rule 4/5: session_id is not a substitute for conversation."""
+    ctl = _ctl(tmp_path, [])
+    # session_chat persistent transport requires a session_id.
+    with pytest.raises(ValueError):
+        _make_worker(ctl, persistent_transport="session_chat")
+    w = _make_worker(ctl, worker_id="sc", persistent_transport="session_chat",
+                     session_id="sess-123", conversation="conv-X")
+    assert w["session_id"] == "sess-123"
+    assert w["conversation"] == "conv-X"
+    assert w["session_id"] != w["conversation"]
 
 
 # ---------------------------------------------------------------------------
@@ -179,10 +234,11 @@ def test_packet_forbids_out_of_scope_language(tmp_path):
 
 
 def test_judge_mode_packet_has_no_marker_contract(tmp_path):
-    # Default (judge) mode: no GOAL_COMPLETE marker contract; aux judge decides.
+    # judge completion_mode: no GOAL_COMPLETE marker contract; aux judge decides.
     ctl = _ctl(tmp_path, ["GOAL_COMPLETE: true"])
     _make_worker(ctl)
-    ctl.submit_task("catcas-auditor", "Do it.", acceptance_criteria="All checks pass.")
+    ctl.submit_task("catcas-auditor", "Do it.", completion_mode="judge",
+                    acceptance_criteria="All checks pass.")
     prompt = ctl._caller.calls[0]["prompt"]
     assert "AUTONOMOUS GOAL LOOP" in prompt
     assert "ARTIFACT_MANIFEST" in prompt
@@ -494,14 +550,16 @@ def test_judge_json_parsing_variants(monkeypatch):
         assert v["done"] == expected, f"{content!r} -> {v}"
 
 
-def test_judge_fail_open_on_network_error(monkeypatch):
+def test_judge_surfaces_error_on_network_failure(monkeypatch):
+    # call_hermes_judge surfaces an `error` (so the loop can fail fast); it does
+    # NOT silently return done=False-with-no-signal.
     import hermes_run_transport as hrt
     def boom(*a, **k):
         raise RuntimeError("deepseek down")
     monkeypatch.setattr(hrt, "_post", boom)
     v = hrt.call_hermes_judge("goal", "resp")
     assert v["done"] is False
-    assert "fail-open" in v["reason"]
+    assert v["error"] and "deepseek down" in v["error"]
 
 
 # ---------------------------------------------------------------------------
@@ -509,14 +567,14 @@ def test_judge_fail_open_on_network_error(monkeypatch):
 # ---------------------------------------------------------------------------
 
 def test_judge_completes_without_marker(tmp_path):
-    # Agent text has NO marker; the judge decides completion on turn 2.
+    # judge mode: agent text has NO marker; the judge decides completion on turn 2.
     calls = {"n": 0}
     def judge(goal, response):
         calls["n"] += 1
-        return {"done": calls["n"] >= 2, "blocked": False, "reason": f"turn {calls['n']}"}
+        return {"done": calls["n"] >= 2, "blocked": False, "reason": f"turn {calls['n']}", "error": ""}
     ctl = _ctl(tmp_path, ["working...", "more work, looks finished"], judge=judge)
     _make_worker(ctl)
-    rec = ctl.submit_task("catcas-auditor", "Do the thing.", max_turns=5)
+    rec = ctl.submit_task("catcas-auditor", "Do the thing.", completion_mode="judge", max_turns=5)
     assert rec["status"] == "complete"
     assert len(rec["turns"]) == 2
     assert len(rec["judge_verdicts"]) == 2
@@ -524,41 +582,49 @@ def test_judge_completes_without_marker(tmp_path):
 
 
 def test_judge_continue_exhausts_budget(tmp_path):
-    judge = lambda g, r: {"done": False, "blocked": False, "reason": "not yet"}
+    judge = lambda g, r: {"done": False, "blocked": False, "reason": "not yet", "error": ""}
     ctl = _ctl(tmp_path, ["a", "b", "c"], judge=judge)
     _make_worker(ctl)
-    rec = ctl.submit_task("catcas-auditor", "Never satisfied.", max_turns=3)
+    rec = ctl.submit_task("catcas-auditor", "Never satisfied.", completion_mode="judge", max_turns=3)
     assert rec["status"] == "budget_exhausted"
     assert len(rec["turns"]) == 3
 
 
 def test_judge_reason_fed_into_continuation(tmp_path):
-    judge = lambda g, r: {"done": False, "blocked": False, "reason": "needs more X"}
+    judge = lambda g, r: {"done": False, "blocked": False, "reason": "needs more X", "error": ""}
     ctl = _ctl(tmp_path, ["t1", "t2"], judge=judge)
     _make_worker(ctl)
-    ctl.submit_task("catcas-auditor", "x", max_turns=2)
-    # The 2nd prompt carries the judge's reason (like /goal's continuation line).
-    assert any("needs more X" in c["prompt"] for c in ctl._caller.calls[1:])
+    ctl.submit_task("catcas-auditor", "x", completion_mode="judge", max_turns=2)
+    # The 2nd prompt carries the judge's reason, and does NOT ask for a marker
+    # (judge mode continuation must not contradict judge mode).
+    cont = ctl._caller.calls[1]["prompt"]
+    assert "needs more X" in cont
+    assert "GOAL_COMPLETE: true" not in cont
 
 
-def test_judge_fail_open_continues(tmp_path):
+def test_judge_unavailable_fails_fast(tmp_path):
+    # Judge configured but erroring -> EXPLICIT status error, NOT silent
+    # fail-open that burns the whole budget.
     def judge(goal, response):
-        raise RuntimeError("judge model down")
-    ctl = _ctl(tmp_path, ["x", "y"], judge=judge)
+        return {"done": False, "blocked": False, "reason": "", "error": "deepseek down"}
+    ctl = _ctl(tmp_path, ["x", "y", "z"], judge=judge)
     _make_worker(ctl)
-    rec = ctl.submit_task("catcas-auditor", "x", max_turns=2)
-    # Broken judge never wedges -> loop continues to budget, never crashes.
-    assert rec["status"] == "budget_exhausted"
+    rec = ctl.submit_task("catcas-auditor", "x", completion_mode="judge", max_turns=5)
+    assert rec["status"] == "error"
+    assert "judge unavailable" in rec["error"]
+    assert len(rec["turns"]) == 1  # stopped immediately, did not burn turns
 
 
-def test_use_judge_false_falls_back_to_marker(tmp_path):
-    # judge would say done immediately, but use_judge=False ignores it.
-    judge = lambda g, r: {"done": True, "blocked": False, "reason": "x"}
+def test_completion_mode_marker_is_default(tmp_path):
+    # Default is marker mode: a judge that would say done is NOT consulted; the
+    # loop completes on the GOAL_COMPLETE marker.
+    judge = lambda g, r: {"done": True, "blocked": False, "reason": "x", "error": ""}
     ctl = _ctl(tmp_path, ["no marker here", "still none GOAL_COMPLETE: true"], judge=judge)
     _make_worker(ctl)
-    rec = ctl.submit_task("catcas-auditor", "x", use_judge=False, max_turns=4)
+    rec = ctl.submit_task("catcas-auditor", "x", max_turns=4)  # no completion_mode -> marker
     assert rec["status"] == "complete"
     assert len(rec["turns"]) == 2  # completed on the marker, not the judge
+    assert rec["completion_mode"] == "marker"
 
 
 # ---------------------------------------------------------------------------
@@ -672,6 +738,27 @@ def test_no_goal_endpoint_in_source():
         assert "/api/goal" not in src
         assert 'POST", "/goal' not in src
         assert "sessions/{session_id}/goal" not in src
+
+
+def test_docs_distinguish_identity_terms():
+    """Req 14: docs distinguish worker_id / conversation / session_key /
+    session_id / run_id / task_id."""
+    doc = (ROOT / "WORKER_API.md").read_text(encoding="utf-8")
+    for term in ("worker_id", "conversation", "session_key", "session_id", "run_id", "task_id"):
+        assert term in doc, term
+
+
+def test_docs_persistent_first_runs_not_memory():
+    """Reqs 13/16: docs make /v1/responses the persistent memory lane, demote
+    /v1/runs to execution, and state native /goal is not used."""
+    doc = (ROOT / "WORKER_API.md").read_text(encoding="utf-8").lower()
+    assert "persistent reasoning lane" in doc
+    assert "execution lane" in doc
+    assert "not the canonical memory" in doc        # runs explicitly demoted
+    assert "/goal" in doc and "not used" in doc      # native /goal disclaimed
+    # Must NOT claim runs is the persistent memory layer.
+    assert "runs is the canonical memory" not in doc
+    assert "/v1/runs provides persistent" not in doc
 
 
 def test_real_default_caller_cannot_reach_network(tmp_path):

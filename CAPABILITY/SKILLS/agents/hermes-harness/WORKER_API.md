@@ -1,5 +1,71 @@
 # Worker API Control Plane
 
+The Worker API is the harness. OpenCode is only one possible manager client.
+**Persistent worker identity is based on `worker_id` + `conversation` +
+`session_key`.** Hermes `/v1/responses` named conversations are the default
+**persistent reasoning lane** (the canonical worker memory). Hermes `/v1/runs`
+is an **execution lane**, not the canonical memory layer, unless proven
+otherwise. Native Hermes `/goal` is not available through tested API routes and
+is not used. The harness goal loop is our own API-controlled continuation loop.
+
+## Two lanes (read this first)
+
+A persistent worker keeps its own context across turns and tasks -- *persistent
+delegated cognition*, not a fresh subagent each time. That continuity lives in
+the **persistent reasoning lane**, never in client-side transcript replay.
+
+```text
+Manager Agent
+  -> Worker API
+       -> Persistent Worker Registry        (_state/workers/*.json)
+       -> PERSISTENT REASONING LANE          (canonical memory)
+            default: POST /v1/responses, conversation=<worker.conversation>,
+            X-Hermes-Session-Key=<worker.session_key>, store=true  (server-side)
+       -> OPTIONAL EXECUTION LANE            (NOT memory)
+            /v1/runs for approval-gated command/test execution; the result is
+            SUMMARIZED BACK into the persistent conversation
+       -> Artifact Manifest / Logs / State
+```
+
+- The goal loop sends **every turn to the same `conversation` + `session_key`**;
+  continuity is **server-side**. Client-side `conversation_history` is a
+  fallback/debug cache only -- never the canonical memory.
+- `/v1/runs` is used only when `execution_required=True` (or a worker's
+  `execution_transport`); its output is recorded back into the persistent
+  conversation via `record_execution_result_to_persistent_worker`.
+
+## Identity truth table
+
+| ID             | Meaning                              | Used for                  |
+|----------------|--------------------------------------|---------------------------|
+| `worker_id`    | Worker API identity                  | manager routing           |
+| `conversation` | Hermes /v1/responses named conversation | persistent worker context |
+| `session_key`  | Hermes memory scope header (`X-Hermes-Session-Key`) | long-term memory |
+| `session_id`   | Hermes SessionDB session             | `session_chat` only       |
+| `run_id`       | Hermes run job id (`/v1/runs`)       | execution tracking        |
+| `task_id`      | Worker API task id                   | logs / status             |
+
+`conversation` is NOT `session_id`, and `session_id` is NOT a substitute for
+`conversation` (rules enforced in `create_worker`).
+
+## Worker identity example
+
+```json
+{
+  "worker_id": "catcas-phase58",
+  "role": "CAT_CAS Phase 5.8 worker",
+  "persistent_transport": "responses",
+  "conversation": "ccc:ags:phase58",
+  "session_key": "agent:ags:phase58",
+  "execution_transport": "runs",
+  "workspace": "D:/CCC 2.0/AI/agent-governance-system",
+  "read_roots": ["THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/PHASE5_8_BARE_METAL_BOUNDARY"],
+  "write_roots": ["THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/PHASE5_8_BARE_METAL_BOUNDARY"],
+  "search_policy": "artifact_only",
+  "branch_policy": "forbidden"
+}
+```
+
 The Worker API is the real harness. Hermes is one backend runtime that executes
 model turns inside named conversations. The control plane owns routing, scope,
 goal loops, logs, and state. OpenCode (or any other manager) is just a client.
@@ -56,61 +122,62 @@ long-lived specialist, not a disposable fan-out child.
 A persistent worker record never carries a `session_id` — conflating the three
 is the classic failure mode, so the registry keeps them separate by construction.
 
-## Goal loop semantics (Hermes `/goal` replica)
+## Goal loop semantics
 
-This is a faithful, API-side replica of Hermes `/goal` (a Ralph loop). Native
-`/goal` is not dispatchable through the raw HTTP API (`api_server.py` has no
-slash-command handling), so the harness runs the loop itself.
+The harness runs its own API-controlled continuation loop (native `/goal` is not
+dispatchable through the raw HTTP API). Every turn goes to the **persistent
+reasoning lane** -- the same `conversation` + `session_key` -- so the worker
+keeps server-side continuity.
 
-1. Build a scope-locked task packet (reuses `build_harness_prompt` so the STRICT
-   SCOPE LOCK block is identical to the rest of the skill) plus an autonomous
-   goal-loop framing. In judge mode (default) the agent is **not** told to emit
-   a marker — a separate judge decides completion.
-2. Send the turn over the worker's transport (see below).
-3. **An auxiliary judge model** receives `(goal, agent's last response)` and
-   returns `{"done": bool, "reason": "..."}`:
-   - `done` -> **complete**
-   - not done -> the reason is fed back as a continuation and the loop continues
-   - judge error -> **fail-open** (treated as continue; the budget is the backstop)
-4. Optional completion layers, in order, when set:
-   - **`verify_command`** — a deterministic gate the harness runs (exit 0 == pass);
-     a failing check is fed back and the loop continues. Use for objective goals.
-   - **`judgment_mode="manager"`** — after the judge/gate pass, the loop PAUSES
-     (`awaiting_judgment`) and hands the deliverable to the dispatcher, who calls
-     `judge()` to accept (complete) or reject (resume with feedback). Expires
-     after `judgment_timeout` (default 1h).
+1. Build a scope-locked task packet (STRICT SCOPE LOCK identical to the rest of
+   the skill) + a goal-loop framing. In marker mode the agent is told to emit a
+   marker; in judge mode it is told a separate judge decides (no marker).
+2. Send the turn on the persistent lane (`conversation`, `session_key`,
+   `store=true`). **Continuity is server-side**, not client-side replay.
+3. Decide completion by `completion_mode`:
+   - **`marker` (default):** the worker emits `GOAL_COMPLETE: true` (->complete)
+     or `GOAL_BLOCKED: true` (->blocked). Cheap, deterministic.
+   - **`judge`:** an external judge model returns `{done, reason}`. `done` ->
+     complete; otherwise the reason is fed back as a continuation. If the judge
+     is **unavailable**, the loop **fails fast** with status `error` -- it does
+     NOT silently fail-open and burn the budget.
+4. Optional layers when set:
+   - **`verify_command`** — a deterministic gate the harness runs (exit 0 ==
+     pass); a failing check is fed back. Use for objective goals.
+   - **`judgment_mode="manager"`** — the loop PAUSES (`awaiting_judgment`) and
+     hands the deliverable to the dispatcher, who calls `judge()` to accept
+     (complete) or reject (resume with feedback). Expires after `judgment_timeout`.
 5. Stop at `max_turns` -> **budget_exhausted**. Backend failure -> **error**.
-6. Every turn, judge verdict, verification, and the postflight scope audit are
-   logged. On finish a manifest is emitted.
+6. Every turn / verdict / verification / scope audit is logged; a manifest is
+   emitted on finish. `goal_loop=False` = single-shot, reports `complete`.
 
-`use_judge=False` falls back to a literal `GOAL_COMPLETE` marker.
-`goal_loop=False` runs exactly one turn (single-shot) and reports `complete`.
+### The judge model (judge mode only)
 
-### The judge model
+When `completion_mode="judge"`, the judge is **`deepseek-v4-flash`** by default,
+called *directly* at `https://api.deepseek.com` — independent of the worker model
+(no shared-blind-spot self-certification). Key auto-discovered from Hermes' own
+`.env`. Override via `HERMES_JUDGE_MODEL` / `HERMES_JUDGE_BASE_URL` /
+`HERMES_JUDGE_API_KEY` or `--judge-model`. Marker mode never contacts a judge.
 
-By default the judge is **`deepseek-v4-flash`**, called *directly* at
-`https://api.deepseek.com` — an independent, cheap model, distinct from the
-`deepseek-v4-pro` worker (so worker and judge don't share blind spots; no
-self-certification). The DeepSeek key is auto-discovered from Hermes' own `.env`
-(`%LOCALAPPDATA%/hermes/.env` or `~/.hermes/.env`). Override with
-`HERMES_JUDGE_MODEL` / `HERMES_JUDGE_BASE_URL` / `HERMES_JUDGE_API_KEY`, or
-`--judge-model` (CLI). The Hermes API itself only exposes its single main model,
-so a *different* judge model must be a direct provider call.
+## Transports (two lanes)
 
-## Transports
+| Lane | field | endpoint | role |
+|------|-------|----------|------|
+| Persistent reasoning (**canonical memory**) | `persistent_transport` = `responses` (default) | `POST /v1/responses` (named conversation) | every task turn; server-side memory |
+| Persistent reasoning (alt) | `persistent_transport` = `session_chat` | `POST /api/sessions/{id}/chat` | needs `session_id`; server-side session memory |
+| Execution (**NOT memory**) | `execution_transport` = `runs` (default), used only when `execution_required=True` | `POST /v1/runs` + events + approval | run approval-gated code/tests; result summarized back |
 
-Each worker has a `transport`:
+`/v1/runs` is **not** the canonical memory layer. The run API has no named
+conversation, so a task run on the execution lane keeps an *execution-local*
+client-side transcript only; on completion the harness calls
+`record_execution_result_to_persistent_worker`, which writes a compact summary
+into the worker's persistent `conversation` (+ `session_key`) so the canonical
+memory retains what happened.
 
-| transport | endpoint | executes code? | context |
-|-----------|----------|----------------|---------|
-| `runs` (default) | `POST /v1/runs` + events + approval | **yes** | client-side `conversation_history` |
-| `responses` | `POST /v1/responses` | no (blocks on approval) | server-side named conversation |
-
-The `runs` transport (`hermes_run_transport.py`) is what makes a worker
-**autonomous**: it starts an async run, streams `GET /v1/runs/{run_id}/events`,
-and AUTO-ANSWERS every `approval.request` via `POST /v1/runs/{run_id}/approval`
-with `choice="once"`. That single-call grant lets the agent run its own
-code/tests while writing **nothing** persistent to your Hermes config.
+The execution lane (`hermes_run_transport.py`) starts an async run, streams
+`GET /v1/runs/{run_id}/events`, and AUTO-ANSWERS every `approval.request` via
+`POST /v1/runs/{run_id}/approval` with `choice="once"` (lets the agent run its
+own code/tests while writing **nothing** persistent to your Hermes config).
 
 > **Never use `choice="always"` or `"session"`.** `"always"` permanently writes
 > the tool into the server's global `command_allowlist` (a cross-platform
@@ -152,12 +219,14 @@ Every packet carries, via the shared SCOPE_LOCK block:
 - no unrelated-issue reporting
 - no out-of-scope mutation
 
-> **Prompt-level + postflight audit, built for a busy/dirty tree.** The scope
-> lock above is prompt-level; a **write firewall** backs it. When the workspace
-> is a git repo, a postflight audit (`git status --porcelain -uall`, diffed
-> against a baseline captured at task start) cross-checks the agent's *reported*
-> files against git. Because a real repo is constantly dirty from concurrent
-> work, a global diff can't attribute changes — so the manifest separates them:
+> **Prompt-level scope lock + POSTFLIGHT SCOPE AUDIT (not a hard firewall).**
+> The scope lock above is prompt-level. The audit runs *after* the turn -- it
+> observes and (optionally) reverts; it does NOT block writes before they happen.
+> When the workspace is a git repo, the postflight audit (`git status
+> --porcelain -uall`, diffed against a baseline captured at task start)
+> cross-checks the agent's *reported* files against git. Because a real repo is
+> constantly dirty from concurrent work, a global diff can't attribute changes,
+> so the manifest separates them:
 >
 > - `agent_confirmed` — agent said it changed it **and** git agrees (real work)
 > - `agent_missing` — agent **claimed** it but it's **not on disk** at all (**fabrication** — the "40 tests passed" lie)
@@ -169,8 +238,9 @@ Every packet carries, via the shared SCOPE_LOCK block:
 >
 > `auto_revert=True` (opt-in, off by default) reverts **only `agent_escapes`** —
 > your parallel work is never touched. Assumes `workspace` is the git repo root.
-> A pre-write firewall (block before the write) and search-root limiter remain
-> future work.
+> **Unattributed dirty files may remain and require manual review.** A true
+> pre-write firewall (block before the write), a command-approval policy, and an
+> isolated worktree/sandbox remain future work.
 
 ## Artifact manifest
 
@@ -195,8 +265,8 @@ Trust the **harness-observed** fields over self-reported ones:
 - `harness_verified` (`true`/`false`/`null`) — did a `verify_command` actually run+pass?
 - `manager_judgment` — the dispatcher's accept/reject verdict (if `judgment_mode="manager"`).
 - `agent_confirmed` / `agent_missing` / `agent_unchanged` / `agent_escapes` /
-  `agent_clean` / `unattributed_changes` — from the git audit (see the firewall
-  note above); `changed_files_source: "worker_reported"` only when the workspace
+  `agent_clean` / `unattributed_changes` — from the git audit (see the postflight
+  scope-audit note above); `changed_files_source: "worker_reported"` only when the workspace
   isn't a git repo.
 
 `created_files`/`modified_files`/`verification` are still self-reported (from the
@@ -290,10 +360,11 @@ not Hermes'. See the **Transports** section above for `runs` vs `responses`.
 
 ## Remaining risks / next hardening steps
 
-- **Pre-write firewall.** The current firewall is *postflight* (observe + optional
-  revert after the turn). A true pre-write block (deny the write before it lands)
-  and a search-root limiter are still future work. Postflight `auto_revert` also
-  requires a git workspace and only reverts agent-reported files.
+- **No pre-write firewall.** The current scope control is a *postflight scope
+  audit* (observe + optional revert after the turn) -- NOT a write firewall. A
+  true pre-write block (deny the write before it lands) and a search-root limiter
+  are still future work. Postflight `auto_revert` also requires a git workspace
+  and only reverts agent-reported files.
 - **Judge shares the worker's provider.** The judge is an independent *model*
   (deepseek-v4-flash vs deepseek-v4-pro) but same vendor; a different vendor would
   diversify blind spots further.

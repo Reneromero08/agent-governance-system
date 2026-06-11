@@ -267,9 +267,12 @@ def call_hermes_judge(
         if isinstance(done, str):
             done = done.strip().lower() in ("true", "yes", "1", "done")
         return {"done": bool(done),
-                "reason": str(verdict.get("reason", "")) or "(no reason)"}
-    except Exception as exc:  # noqa: BLE001 -- fail open
-        return {"done": False, "reason": f"judge unavailable, continuing (fail-open): {exc}"}
+                "reason": str(verdict.get("reason", "")) or "(no reason)",
+                "error": ""}
+    except Exception as exc:  # noqa: BLE001
+        # Surface the error so callers decide policy (the goal loop fails fast in
+        # judge mode rather than silently continuing and burning the budget).
+        return {"done": False, "reason": "", "error": f"judge unavailable: {exc}"}
 
 
 if __name__ == "__main__":

@@ -115,7 +115,9 @@ class WorkerAPI:
             deny_write_roots=body.get("deny_write_roots"),
             search_policy=body.get("search_policy", "artifact_only"),
             branch_policy=body.get("branch_policy", "forbidden"),
-            transport=body.get("transport", "runs"),
+            persistent_transport=body.get("persistent_transport", "responses"),
+            execution_transport=body.get("execution_transport", "runs"),
+            session_id=body.get("session_id", ""),
         )
         return 201, worker
 
@@ -150,10 +152,16 @@ class WorkerAPI:
             verify_timeout=int(body.get("verify_timeout", 120)),
             verify_cwd=body.get("verify_cwd", ""),
             judgment_mode=body.get("judgment_mode", "auto"),
-            use_judge=bool(body.get("use_judge", True)),
+            completion_mode=body.get("completion_mode", "marker"),
+            use_judge=body.get("use_judge"),  # deprecated alias; None unless set
             auto_revert=bool(body.get("auto_revert", False)),
+            execution_required=bool(body.get("execution_required", False)),
+            execution_transport=body.get("execution_transport"),
         )
-        return 200, rec
+        rec_out = dict(rec)
+        rec_out["session_key_present"] = bool(rec.get("session_key"))
+        rec_out["log_path"] = str(self.ctl._log_path(rec["task_id"]))
+        return 200, rec_out
 
     def _h_judge(self, body, worker_id):  # noqa: ANN001
         rec = self.ctl.judge(
