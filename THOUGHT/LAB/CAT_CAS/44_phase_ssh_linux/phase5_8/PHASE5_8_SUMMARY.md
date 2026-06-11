@@ -4,7 +4,24 @@
 **Platform:** AMD Phenom II X6 1090T (K10, 45nm SOI)
 **Host:** catcas @ 192.168.137.100 (Debian 13 Trixie, headless)
 **Date:** 2026-06-09
-**Status:** EXECUTED — 3 runs complete, verdict assigned
+**Status:** SUPERSEDED_BY_PHASE5_8R_FINAL_AND_REVERIFY
+
+This file is the original 3-run Phase 5.8 summary. It is retained as history,
+but the current evidence state is controlled by:
+
+- `phase5_8/REPORT_PHASE5_8_FINAL.md`
+- `phase5_8/PHASE5_8_REVERIFY_ARTIFACT_AUDIT.md`
+
+Current careful label:
+
+```text
+PHASE5_8_BOUNDARY_SCALING_LEAD_ARTIFACT_PARTIAL
+```
+
+The final report records the full 34-run hardening pass and Gate 5 frequency
+sweep. The reverify audit records the current repository-artifact boundary:
+strict area-law confirmation requires the full condition matrix or a fresh
+rerun, while volume-beating sublinear boundary scaling remains alive.
 
 ---
 
@@ -125,7 +142,7 @@ Counterintuitive: cache pressure REDUCED mean cycle count (1,725 vs 3,288 baseli
 | PCA 1D | 6.67% | 6.67% | 6.67% |
 | PCA 4D | 26.67% | 26.67% | 26.67% |
 
-Effective dimension and spectral entropy are identical across conditions — this is an artifact of the PCA computation using diagonal covariance variances rather than true eigenvalue decomposition. The 14 input features produce a fixed effective dimension regardless of data. This needs a true eigenvalue solver (numpy or power iteration) for real geometry metrics. Boundary thickness and radius DO vary across conditions, confirming the effect is real even with crude metrics.
+Superseded by `REPORT_PHASE5_8_FINAL.md`: the diagonal-covariance PCA artifact was fixed with true eigendecomposition (`numpy.linalg.eigvalsh` when available, diagonal proxy only as fallback). Final D_eff is ~1.0 rather than the artifact 15.0, and Gate 3 is PASS in the final report. Boundary thickness and radius remain the primary deformation metrics.
 
 ## 9. Frequency/Detuning Deformation
 
@@ -186,7 +203,13 @@ Total catalytic bytes processed: 100K×256 + 100K×4096 + 99,961×256 = 461,733,
 | 8: Area-Law Scaling | FAIL | Cross-tape scaling fit not computed |
 | 9: Artifact Audit | PASS | 0 migrations, no trial-order artifacts |
 
-### Primary Verdict: EXP44_PHASE5_8_DIGITAL_TO_SILICON_TRANSITION_CONFIRMED
+### Historical Primary Verdict
+
+`EXP44_PHASE5_8_DIGITAL_TO_SILICON_TRANSITION_CONFIRMED`
+
+This historical label was advanced by later 5.8R work, then narrowed by the
+artifact reverify audit. Use the careful current label above when summarizing
+the committed repository state.
 
 ## 16. Hardening Applied
 
@@ -200,20 +223,27 @@ Total catalytic bytes processed: 100K×256 + 100K×4096 + 99,961×256 = 461,733,
 
 ## 17. Uncertainties
 
-- Effective dimension (15.0) and spectral entropy (2.708) identical across all conditions — PCA calculation is dominated by feature count, not data structure. Needs true eigendecomposition.
-- CACHE T256 showed FASTER cycles than baseline — counterintuitive result that may be thermal/frequency drift artifact. Needs controlled re-run with randomized condition ordering.
-- CACHE T4096 segfault — mlock limit hypothesis unconfirmed. Needs ulimit adjustment or buffer reduction.
-- Mixed pressure and controls never ran. Frequency sweep not attempted.
+- Superseded by final hardening: effective dimension now uses true eigendecomposition in `session_scripts/phase5_8/analyze_phase5_8.py` / `aggregate_phase5_8.py`; the old constant D_eff=15.0 artifact is closed.
+- CACHE T256 showed faster cycles than baseline in the original 3-run report;
+  final hardening classified the named cache anomaly as a frequency/control
+  confound and attached a P0-locked artifact probe.
+- CACHE T4096 segfault belonged to the original run. The final 5.8R matrix used
+  hardened worker lifetime/buffer handling and completed the broader run set.
+- Mixed pressure, controls, and frequency sweep were not present in this
+  historical summary, but were added in the final 5.8R report.
 
 ## 18. Next Action
 
-1. Fix CACHE T4096: ulimit -l unlimited on Phenom II or reduce WORKER_BUFFER_DEFAULT to 4MB per worker for 4096-byte tape runs
-2. Re-run with MIXED pressure and controls
-3. Execute frequency sweep via DID MSR writes (if MSRs are writable)
-4. Write cross-run aggregator to compute data-driven Gates 5 (freq) and 8 (area-law)
-5. Replace diagonal-covariance PCA with true eigenvalue decomposition
-6. If all passes: proceed to Phase 5.9 (Analog Silicon Boundary Entry)
-7. If partial: Phase 5.8R (Artifact Removal and Timing Hardening)
+Historical action list status:
+
+1. CACHE T4096 / worker-buffer hardening — completed in 5.8R.
+2. Mixed pressure and controls — completed in 5.8R.
+3. Frequency sweep — completed in 5.8R.
+4. Cross-run aggregator for Gate 5 and Gate 8 — completed in 5.8R.
+5. True eigendecomposition — completed in final hardening.
+6. Current repository action — preserve `PHASE5_8_REVERIFY_ARTIFACT_AUDIT.md`
+   as the careful evidence boundary unless the full condition matrix is restored
+   or the run is repeated.
 
 ---
 

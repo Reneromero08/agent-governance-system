@@ -23,10 +23,10 @@ Phase 5.9V is the physical carrier/basin feeder for Phase 6. The Phase 6 spec ne
 
 | Phase 6 Gate | 5.9V Contribution | Current State |
 |---|---|---|
-| G3 basin -> invariant | supplies physical basin label | directional only |
-| G4 no-smuggle | must compare public-prelude vs d-oracle-prelude | not run |
-| G5 controls | wrong/shuffled/prelude ladder | partial prelude ladder only |
-| G6 scaling | basin stability across n | not run |
+| G3 basin -> invariant | supplies physical basin label to 5.7 scorer | attempted/rejected |
+| G4 no-smuggle | public vs shuffled/wrong/oracle controls | pass as rejection |
+| G5 controls | wrong/shuffled/prelude ladder | complete for current target-coupled feeder |
+| G6 scaling | basin stability across n | not promoted; public selector failed before scaling |
 
 ## Current Selector Read
 
@@ -37,33 +37,18 @@ Phase 5.9V is the physical carrier/basin feeder for Phase 6. The Phase 6 spec ne
 | `branch_prelude` | mostly mid; avoids collapse |
 | `quiet`, `reset_p0`, `collapse_prelude` | split basins; not selectors |
 
-## Required Phase 6 Push
+## Completed Phase 6 Push
 
-Run VID+5 with at least 10 repeats per selector, using measurement-core-only P4 VID definition writes by default:
+The required VID+5/VID+6 public/shuffled/wrong/oracle runs were completed with measurement-core-only P4 VID definition writes. The final target-coupled artifacts are:
 
-- `syscall_prelude`
-- `cache_prelude`
-- `branch_prelude`
-- `quiet`
-- `public_kb_prelude`
-- `shuffled_kb_prelude`
-- `d_oracle_prelude`
+- `phase5_9/results/k10_voltage_probe/p4_vid5_phase6_target_coupled/PHASE5_9V_TARGET_COUPLED.md`
+- `phase5_9/results/k10_voltage_probe/p4_vid6_phase6_target_coupled/PHASE5_9V_TARGET_COUPLED.md`
 
-Required output columns:
+The 5.7 scorer consumed those basin labels here:
 
-- `target_public_hash`
-- `selector`
-- `repeat`
-- `vid_offset`
-- `decoded_voltage`
-- `restoration_failures`
-- `boundary_thickness`
-- `cycle_cv`
-- `p99_p50`
-- `basin_id`
-- `fixed_point_d`
-- `public_prelude_used_d` (`0` required)
-- `oracle_control` (`1` only for d-oracle control)
+- `phase5_7/results/phase6_invariant_scorer/PHASE5_7_PHASE6_INVARIANT_SCORER_RUN.md`
+
+Result: public coupling did not beat shuffled/wrong-target controls.
 
 ## Acceptance For Mode C Handoff
 
@@ -79,12 +64,10 @@ Runner hardening after the failed attempt:
 - P4 VID definition writes no longer target all cores by default.
 - All-core VID+5 is classified as too aggressive for this feeder route unless console/power recovery is available.
 
-Next exact action after power-cycle or SSH return:
+Superseded recovery command from the first failed attempt:
 
-```bash
-scp session_scripts/phase5_9/run_phase5_9v_phase6_basin_repro.sh root@192.168.137.100:/root/exp44_phase5_9/run_phase5_9v_phase6_basin_repro.sh
-ssh root@192.168.137.100 "chmod +x /root/exp44_phase5_9/run_phase5_9v_phase6_basin_repro.sh && cd /root/exp44_phase5_9 && DEF_CORES=3 REPEATS=10 ITERATIONS=30000 ./run_phase5_9v_phase6_basin_repro.sh"
-```
+The power-cycle recovery happened and the hardened measurement-core-only run
+completed. Do not use this old recovery command as the current next action.
 
 ## Completed Reproducibility Matrix
 

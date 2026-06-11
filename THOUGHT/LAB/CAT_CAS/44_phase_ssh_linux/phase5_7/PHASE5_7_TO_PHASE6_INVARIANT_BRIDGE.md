@@ -1,6 +1,6 @@
 # Phase 5.7 to Phase 6 Invariant Bridge
 
-Verdict: `PHASE5_7_READY_AS_PHASE6_INVARIANT_SCORER__WAITING_ON_5_9V_BASIN_LABELS`
+Verdict: `PHASE5_7_PHASE6_PUBLIC_INVARIANT_REJECTED_BY_5_9V_CONTROLS`
 
 ## Purpose
 
@@ -22,13 +22,18 @@ Phase 5.7 becomes the Phase 6 invariant/null scoring layer. It does not select t
 | Phase 6 Gate | 5.7 Contribution | Current State |
 |---|---|---|
 | G1 restoration | restored tape and same-final-hash controls | logical support present |
-| G3 basin -> invariant | invariant scorer once basin labels exist | waiting on 5.9V labels |
-| G5 controls | wrong-answer, wrong-residual, destructive/reversible null machinery | extend to same-hash wrong-invariant |
+| G3 basin -> invariant | invariant scorer consumed 5.9V target-coupled basin labels | attempted/rejected |
+| G5 controls | wrong-answer, wrong-residual, destructive/reversible null machinery plus 5.9V shuffled/wrong-target controls | pass as rejection |
 | G7 audit | leakage and null discipline | active |
 
-## Required Extension
+## Completed Extension
 
-Add a Phase 6 invariant table with one row per run:
+Created:
+
+- `phase5_7/results/phase6_invariant_scorer/PHASE5_7_PHASE6_INVARIANT_SCORER_RUN.md`
+- `phase5_7/results/phase6_invariant_scorer/phase5_7_phase6_invariant_scores.csv`
+
+The Phase 6 invariant table now includes:
 
 - `target_public_hash`
 - `n`
@@ -43,6 +48,10 @@ Add a Phase 6 invariant table with one row per run:
 - `shuffled_map_score`
 - `null_effect_size`
 
-## Stop Condition
+## Stop Condition Result
 
-5.7 is complete as a bridge only when the invariant scorer consumes a real 5.9V/Phase 6 basin label and shows whether the survivor predicts `d` beyond same-hash wrong-invariant and shuffled-map controls.
+5.7 is complete as a bridge: the invariant scorer consumed real 5.9V/Phase 6 basin labels and showed that the current public survivor does not predict `d` beyond shuffled/wrong-target controls.
+
+Final classification:
+
+`RESIDUAL_ARTIFACT_ONLY`

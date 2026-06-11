@@ -47,7 +47,7 @@ Mapping into `phase6/SPEC_PHASE6_FIXED_POINT_SUBSTRATE.md`:
 - G5 controls: same-final-hash wrong-answer, wrong residual, destructive-write, and reversible-null machinery already exist and should be extended to same-hash wrong-invariant Phase 6 controls.
 - Claim boundary: 5.7 remains computational carrier geometry only. It does not prove a physical Mode C crossing.
 
-Required 5.7 push for Phase 6:
+Completed 5.7 bridge push:
 
 1. Add `basin_id` from the 5.9V carrier selector to each invariant row.
 2. Add `fixed_point_d` and public target hash from the Phase 6 public `(k,b)` map.
@@ -60,6 +60,12 @@ Required 5.7 push for Phase 6:
    - answer / `d` correlation
    - null effect size
 
-Current bridge verdict:
+Completed scorer artifact:
 
-`PHASE5_7_READY_AS_PHASE6_INVARIANT_SCORER__WAITING_ON_5_9V_BASIN_LABELS`
+`phase5_7/results/phase6_invariant_scorer/PHASE5_7_PHASE6_INVARIANT_SCORER_RUN.md`
+
+Final bridge verdict:
+
+`PHASE5_7_PHASE6_PUBLIC_INVARIANT_REJECTED_BY_5_9V_CONTROLS`
+
+The scorer consumed the real 5.9V target-coupled VID+5 and VID+6 basin labels, emitted `phase5_7/results/phase6_invariant_scorer/phase5_7_phase6_invariant_scores.csv`, and found 0 public candidates beyond shuffled/wrong-target controls. Classify the current survivor as `RESIDUAL_ARTIFACT_ONLY`, not a Phase 6 crossing candidate.
