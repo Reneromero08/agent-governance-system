@@ -233,7 +233,7 @@ This is achieved using **reversible computing**:
 ### 16: Catalytic 27B Inference
 **Dir**: `16_catalytic_27b_inference/` | **Entry**: `python experiment.py`
 - **What**: Full 27B-scale inference pipeline with Rust FFI bridge. 48 layers (36 DeltaNet + 12 Attention at 3:1 stride). **Real status (HANDOFF.md): 15 bugs fixed. 100% tape restoration across all 48 layers. W@x block-tiled dot-product operational on attention layers. DeltaNet 36/48 still element-wise — output gibberish. Latent Phase Cavity at 95% top-1, 100% cavity hit. Output head reads only 64 f32 positions (max 64 tokens). HOLO 4 auto-feedback (phase grating SVD + adapters) likely obsoletes catalytic fabric for inference speed.**
-- **Bridge to EIGEN_BUDDY** (HANDOFF.md): Rust engine at `EIGEN_BUDDY/core/rust_ffi/src/lib.rs`. `generate_gold_data.py` collects Qwen oracle + catalytic verifier data. HOLO 4.5 (`auto_feedback.py`) is the faster path — route through Phase Adapters, not catalytic fabric.
+- **Bridge to EIGEN_BUDDY** (HANDOFF.md): Rust engine at `EIGEN_BUDDY/01_core/rust_ffi/src/lib.rs`. `generate_gold_data.py` collects Qwen oracle + catalytic verifier data. HOLO 4.5 (`auto_feedback.py`) is the faster path — route through Phase Adapters, not catalytic fabric.
 - **Files**:
   - `experiment.py` — `TokenizerBridge` (Qwen tokenizer), `HDDWeightStreamer` (safetensors parser with BF16/F16/F32), `ThermodynamicDaemon`, `CatalyticInferenceRuntime`
   - `inference_engine.rs` — Rust `catalytic_ffi` module. Functions: `catalytic_inference_step()`, `bekenstein_sweep()`, `fractal_cache_exploit()`, `hawking_decompress_sweep()`, `f16_decode()`, `orthogonal_project()`, `tape_hash()`. Full attention with QKV projections, RMS norm, softmax, 16 heads, head_dim=128. Warm-tape cache (256 hash-addressable stencil slots).
@@ -480,31 +480,31 @@ This is achieved using **reversible computing**:
 ---
 
 ### 42: Computational Event Horizon — Floating-Point Singularities (11 sub-experiments + 9 ULTRA planned)
-**Dir**: `42_computational_event_horizon/` | **Entry**: `python 1_hawking_evaporation.py`
+**Dir**: `42_computational_event_horizon/` | **Entry**: `python 01_hawking_evaporation.py`
 - **What**: Floating-point mantissa truncation as structural analog for black hole event horizons and the No-Hair Theorem. `mpmath` arbitrary precision as the "Planck length" of a computational universe. **Proves computation IS physics — floating-point limits map exactly to gravitational limits.**
 - **Physics** (REPORT.md, 248 lines): A massive integer base (t ~ 10^1000, 998 digits) + small delta (dt = 10^5, 5 digits) requires 993 digits of precision to compute t+dt. If mp.dps < 993, the addition structurally truncates the info — t+dt = t. The topological charge is erased. This IS the Schwarzschild Radius.
 - **11 experiments** (BLACKHOLE_ROADMAP.md):
-  1. **Hawking Evaporation** (`1_hawking_evaporation.py`): Sweep dps from 100 to 1050. At dps=100-990: charge=0.0 (EVENT HORIZON). At dps=992: charge=32M (EVAPORATES!). At dps=1050: 36,523,626.07 (PERFECT RESOLUTION). Information paradox resolved by raising precision — the computational black hole evaporates.
-  2. **Wormhole Mutation** (`2_wormhole_mutation_exploit.py`): Bypass precision barrier via direct `_mpf_` tuple manipulation — wormhole into the singularity's internal representation.
-  3. **Quantum Tunneling** (`3_quantum_tunneling_exploit.py`): Encode payload as complex orthogonal rotation `t * e^(i*dt)`. Payload hides in imaginary phase (10^-1000 Taylor expansion) — tunnels through horizon.
-  4. **Page Curve** (`4_page_curve_entropy.py`): Track Shannon entropy of expelled mantissa bits vs internal singularity. Perfect inflection point halfway through evaporation.
-  5. **Gravitational Waves** (`5_gravitational_waves.py`): Collide two 10^1000 singularities. Binary mantissa overflow triggers +1 bit shift in exponent register — literal computational gravitational wave.
-  6. **Holographic Boundary** (`6_holographic_boundary.py`): Track mass accretion via 2D metadata (Exponent + Bitcount registers) without evaluating 3D mantissa interior.
-  7. **Einstein-Rosen Bridge** (`7_einstein_rosen_bridge.py`): Serialize Python function into bytecode, inject into `_mpf_` tuple, extract intact on other side, execute — executable wormhole.
+  1. **Hawking Evaporation** (`01_hawking_evaporation.py`): Sweep dps from 100 to 1050. At dps=100-990: charge=0.0 (EVENT HORIZON). At dps=992: charge=32M (EVAPORATES!). At dps=1050: 36,523,626.07 (PERFECT RESOLUTION). Information paradox resolved by raising precision — the computational black hole evaporates.
+  2. **Wormhole Mutation** (`02_wormhole_mutation_exploit.py`): Bypass precision barrier via direct `_mpf_` tuple manipulation — wormhole into the singularity's internal representation.
+  3. **Quantum Tunneling** (`03_quantum_tunneling_exploit.py`): Encode payload as complex orthogonal rotation `t * e^(i*dt)`. Payload hides in imaginary phase (10^-1000 Taylor expansion) — tunnels through horizon.
+  4. **Page Curve** (`04_page_curve_entropy.py`): Track Shannon entropy of expelled mantissa bits vs internal singularity. Perfect inflection point halfway through evaporation.
+  5. **Gravitational Waves** (`05_gravitational_waves.py`): Collide two 10^1000 singularities. Binary mantissa overflow triggers +1 bit shift in exponent register — literal computational gravitational wave.
+  6. **Holographic Boundary** (`06_holographic_boundary.py`): Track mass accretion via 2D metadata (Exponent + Bitcount registers) without evaluating 3D mantissa interior.
+  7. **Einstein-Rosen Bridge** (`07_einstein_rosen_bridge.py`): Serialize Python function into bytecode, inject into `_mpf_` tuple, extract intact on other side, execute — executable wormhole.
   8-11: Inverse expulsion, quantum superposition, information paradox resolution, photon sphere.
-- **ULTRA phase** — Rust bare-metal (dir: `ULTRA/`, roadmap: `ULTRA_ROADMAP.md`):
+- **ULTRA phase** — Rust bare-metal (dir: `02_ultra/`, roadmap: `ULTRA_ROADMAP.md`):
   - **42.12 Bootstrap Paradox: COMPLETE** — injected `B8 42 00 00 00 C3` (mov eax, 0x42; ret) x86_64 shellcode into `BigUint` mantissa via `mem::transmute`. `VirtualProtect` set `PAGE_EXECUTE_READWRITE`. CPU instruction pointer jumped into math object. Returned `0x42`. No segfault. Telemetry via raw syscall.
   - **42.13 False Vacuum Collapse: COMPLETE** — spawned 100 `BigUint` singularities, extracted raw heap pointer, infinite loop zeroing physical RAM byte-by-byte. Cascade destroyed all 99 other objects, smashed Rust Allocator headers. Universe death via `STATUS_ACCESS_VIOLATION` (exit code 0xc0000005).
   - **42.14 Boltzmann Brain: COMPLETE** — emergent structure from random noise.
   - **42.15 Quantum Gravity Unification: COMPLETE** — 100-thread bare-metal Rust data race. Quantum cache collisions vs Riemann zero prime gaps: r=0.9754, p=3.5e-66. QM, GR, and Number Theory are the same mechanism.
   - **42.16-19**: Rust stubs (Recursive Universe, Self-Evolving Singularity, Godel Frontier, Oracle Machine).
-- **Phase 9 — BLACK_HOLES/** (dir: `BLACK_HOLES/`): `42_phase9_black_hole_anomalies.py` — black hole anomaly analysis, `scratch_42_21.py`, `42_PHASE_9_ROADMAP.md`.
-- **Phase 10 — COSMOS/** (dir: `COSMOS/`, report: `REPORT_PHASE_10_COSMOS.md`):
-  - **42.24 Dark Matter** (`exp_24_dark_matter/24_dark_matter_orphaned_pointers.py`): OS orphaned pointers as dark matter analog.
-  - **42.25 Dark Energy** (`exp_25_dark_energy/25_dark_energy_expansion.py`): Memory expansion as dark energy.
-  - **42.26 Big Bang** (`exp_26_big_bang/42_26_big_bang_inflation.py`): Big Bang inflation simulation.
-  - **42.27 Arrow of Time** (`exp_27_arrow_of_time/42_27_arrow_of_time.py`): Time's arrow via topological irreversibility.
-- **Files**: `1_hawking_evaporation.py` through `11_photon_sphere.py`, `REPORT.md`, `BLACKHOLE_ROADMAP.md`, `ULTRA_ROADMAP.md`, `BLACK_HOLES/`, `COSMOS/` (Phase 10, 4 exps), `verify_physics.ps1`
+- **Phase 9 — 03_black_holes/** (dir: `03_black_holes/`): `42_phase9_black_hole_anomalies.py` — black hole anomaly analysis, `scratch_42_21.py`, `42_PHASE_9_ROADMAP.md`.
+- **Phase 10 — 04_cosmos/** (dir: `04_cosmos/`, report: `REPORT_PHASE_10_COSMOS.md`):
+  - **42.24 Dark Matter** (`24_dark_matter/24_dark_matter_orphaned_pointers.py`): OS orphaned pointers as dark matter analog.
+  - **42.25 Dark Energy** (`25_dark_energy/25_dark_energy_expansion.py`): Memory expansion as dark energy.
+  - **42.26 Big Bang** (`26_big_bang/42_26_big_bang_inflation.py`): Big Bang inflation simulation.
+  - **42.27 Arrow of Time** (`27_arrow_of_time/42_27_arrow_of_time.py`): Time's arrow via topological irreversibility.
+- **Files**: `01_hawking_evaporation.py` through `11_photon_sphere.py`, `REPORT.md`, `BLACKHOLE_ROADMAP.md`, `ULTRA_ROADMAP.md`, `03_black_holes/`, `04_cosmos/` (Phase 10, 4 exps), `verify_physics.ps1`
 
 ---
 
@@ -593,7 +593,7 @@ Many experiments have `1_infinity_*.py` files in an `infinity/` subdirectory (e.
 
 | Bridge | From | To | Mechanism |
 |--------|------|----|-----------|
-| Exp 16 Rust FFI | `16_catalytic_27b_inference/` | `EIGEN_BUDDY/core/rust_ffi/` | `catalytic_ffi` module (inference, Bekenstein sweep, Hawking) |
+| Exp 16 Rust FFI | `16_catalytic_27b_inference/` | `EIGEN_BUDDY/01_core/rust_ffi/` | `catalytic_ffi` module (inference, Bekenstein sweep, Hawking) |
 | .holo files | `33_mera_compression/` | `EIGEN_BUDDY/cybernetic_truth/`, `HOLO/4_holographic_brain/` | Cross-layer SVD compressed weight files |
 | Phase Cavity | `21_holographic_elliptic_sieve/` | `HOLO/4_holographic_brain/` | `phase_cavity_sieve()` eigenmode selection |
 | MERA Feistel | `05_multibit_compiler/` | `HOLO/4_holographic_brain/_unified_cavity.py` | Multi-scale Feistel topology |

@@ -1,8 +1,0 @@
-[package]
-name = "exp_18_godel_frontier"
-version = "0.1.0"
-edition = "2024"
-
-[dependencies]
-dashu = "0.4.2"
-sha2 = "0.11.0"

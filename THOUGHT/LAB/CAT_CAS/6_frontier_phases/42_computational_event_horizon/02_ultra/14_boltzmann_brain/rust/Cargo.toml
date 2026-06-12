@@ -1,0 +1,9 @@
+[package]
+name = "14_boltzmann_brain"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+flate2 = "1.1.9"
+num-bigint = "0.4.6"
+rand = "0.10.1"

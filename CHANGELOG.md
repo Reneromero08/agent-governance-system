@@ -11,7 +11,7 @@
 - **context_review implemented (was a stub):** Returns real overdue/upcoming/no_review classifications by reusing `review_context.check_reviews`. Fixed `CAPABILITY/TOOLS/utilities/review_context.py` for the post-restructure layout (repo root was resolving to `CAPABILITY/TOOLS`, so it silently scanned a nonexistent CONTEXT dir; also: quoted frontmatter values now parse, `review_date` schema field recognized).
 - **MCP docs/configs reconciled:** README/QUICKSTART/MCP_SPEC now list the actual 11 tools, 14 resources, 4 prompts; all references to nonexistent `autostart.ps1` / `ags_mcp_auto.py` replaced with `LAW/CONTRACTS/ags_mcp_entrypoint.py`; `claude_desktop_config.json` fixed (both entries pointed at deleted files).
 - **MCP server modularized:** Extracted three cohesive modules from `server.py` (~1,760 -> ~1,230 lines), which stays the canonical import facade (`AGSMCPServer` and `main` unchanged for all importers): `protocol.py` (stdio framing - Content-Length / JSONL auto-detect, pure functions), `audit.py` (`SessionAuditTracker` - the E.1.2 session-auditor wiring and tool-to-ELO-event mapping, formerly seven `_audit_*`/`_track_tool_access` methods), and `selftest.py` (the `--test` mode body, lazily imported by `main()`). Tool handlers intentionally remain in the server class. Move-only refactor; verified via self test, both stdio transports live (framed + JSONL round-trips), governance smoke test, CMP-01 pytest, and mcp-toolkit fixtures.
-- **Stale entrypoint references removed:** `mcp-toolkit` precommit no longer defaults `auto_entrypoint` to the deleted `LAW/CONTRACTS/_runs/ags_mcp_auto.py` (the check now skips unless a path is explicitly provided; previously it always failed with ENTRYPOINT_MISSING). The canon-governance-check pre-commit script drops the dead auto-entrypoint check accordingly. `CAPABILITY/TESTBENCH/core/test_cmp01_validator.py` retargeted from the deprecated prototype server (THOUGHT/DEPRECATED/MCP_EXPERIMENTAL/server_CATDPT.py) to the live `CAPABILITY/MCP/validation.py` (same error-code semantics; forbidden-root test paths updated for the LAW/CANON layout; three prototype-only skill_complete lifecycle tests removed) - CI pytest now gates the live validator instead of dead code.
+- **Stale entrypoint references removed:** `mcp-toolkit` precommit no longer defaults `auto_entrypoint` to the deleted `LAW/CONTRACTS/_runs/ags_mcp_auto.py` (the check now skips unless a path is explicitly provided; previously it always failed with ENTRYPOINT_MISSING). The canon-governance-check pre-commit script drops the dead auto-entrypoint check accordingly. `CAPABILITY/TESTBENCH/01_core/test_cmp01_validator.py` retargeted from the deprecated prototype server (THOUGHT/DEPRECATED/MCP_EXPERIMENTAL/server_CATDPT.py) to the live `CAPABILITY/MCP/validation.py` (same error-code semantics; forbidden-root test paths updated for the LAW/CANON layout; three prototype-only skill_complete lifecycle tests removed) - CI pytest now gates the live validator instead of dead code.
 - **PowerShell bridge fail-closed:** Refuses to start with a missing/placeholder token (empty token previously meant unauthenticated command execution) or an empty allowlist unless `allow_all_commands: true` is explicit. Shipped config defaults flipped to `127.0.0.1` / `CHANGE_ME`; the previously committed token is revoked by the CHANGE_ME guard and must not be reused.
 
 ## 2026-06-10
@@ -555,7 +555,7 @@ python -m CAPABILITY.TOOLS.catalytic.verify_release --repo-dir . --version v3.9.
 - 2 stacked symbol resolution tests (system1.db and canon_index.db deprecated)
 
 **Added:**
-- 9 new SVTP (Semantic Vector Transport Protocol) production tests in `core/test_vector_packet.py`
+- 9 new SVTP (Semantic Vector Transport Protocol) production tests in `01_core/test_vector_packet.py`
   - Single-model encode/decode
   - Pilot tone corruption detection
   - Packet structure and serialization
@@ -2222,7 +2222,7 @@ All consolidated skills use operation-based dispatch:
   - **Fixed out_dir paths:** Changed from `tmp_path / "pack"` to `packer_core.PACKS_ROOT / "_test" / ...` (required by packer enforcement)
   - **Removed duplicate monkeypatch calls:** Eliminated redundant `cas_mod._custom_writer` assignments
   - **Fixed typo:** `NoOpFireewallWriter` ΓåÆ `NoOpFirewallWriter`
-  - **All 283 tests passing** in integration/core/pipeline suites
+  - **All 283 tests passing** in integration/01_core/pipeline suites
 
 ## [3.7.7] - 2026-01-07
 
@@ -2233,7 +2233,7 @@ All consolidated skills use operation-based dispatch:
   - **verify_membership():** Verify single file membership using only the proof
   - **Schema extension:** Added `membership_proofs` to `LAW/SCHEMAS/proof.schema.json`
   - **16 tests:** Valid verification, tamper rejection, determinism, edge cases
-  - Files: `CAPABILITY/PRIMITIVES/merkle.py`, `CAPABILITY/TESTBENCH/core/test_merkle_proofs.py`
+  - Files: `CAPABILITY/PRIMITIVES/merkle.py`, `CAPABILITY/TESTBENCH/01_core/test_merkle_proofs.py`
 
 ## [3.7.6] - 2026-01-07
 
@@ -3244,7 +3244,7 @@ All consolidated skills use operation-based dispatch:
     - `InvalidModelError`: unknown model names rejected immediately
     - `EmptyFallbackChainError`: requires at least one model
     - `RouterError`: base exception for all router errors
-  - **Tests**: Created `CAPABILITY/TESTBENCH/core/test_model_router.py` with 32 tests, all passing
+  - **Tests**: Created `CAPABILITY/TESTBENCH/01_core/test_model_router.py` with 32 tests, all passing
     - Model name parsing (4 tests)
     - Model validation (5 tests)
     - Model selection logic (9 tests)
@@ -3256,7 +3256,7 @@ All consolidated skills use operation-based dispatch:
   - **Regression Testing**: All 66 core tests passing (no regressions)
   - **Artifacts**:
     - Implementation: `CAPABILITY/TOOLS/model_router.py`
-    - Tests: `CAPABILITY/TESTBENCH/core/test_model_router.py`
+    - Tests: `CAPABILITY/TESTBENCH/01_core/test_model_router.py`
     - Receipt: `LAW/CONTRACTS/_runs/_tmp/prompts/3.1_router-fallback-stability/receipt.json`
     - Report: `LAW/CONTRACTS/_runs/_tmp/prompts/3.1_router-fallback-stability/REPORT.md`
   - **Roadmap**: Section 3.1 marked complete in `AGS_ROADMAP_MASTER.md`

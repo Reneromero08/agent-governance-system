@@ -93,7 +93,7 @@ frontier-domain phases → the decoder that locates the wall.
 
 | # | Experiment | What |
 |---|------------|------|
-| 42 | computational_event_horizon | Floating-point singularities at the event horizon; black-hole + cosmology + speculative sub-tracks (ULTRA / BLACK_HOLES / COSMOS). |
+| 42 | computational_event_horizon | Floating-point singularities at the event horizon. Sub-tracks: `01_core` (base 1-11), `02_ultra` (speculative 12-19), `03_black_holes` (20-23), `04_cosmos` (24-28). |
 | 43 | phase_consciousness **[STUB]** | Qualia-engine roadmap; no code yet. |
 | 44 | phase_ssh_linux **[FROZEN]** | Physical / SSH-Linux substrate push. Active work — stays at lab root until done. |
 | 45 | phase_math | Millennium-problem oracles: collatz, navier-stokes, erdos, riemann, P-vs-NP, yang-mills. |

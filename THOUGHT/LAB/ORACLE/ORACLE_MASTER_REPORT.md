@@ -43,7 +43,7 @@
 | 20.10.5 | `20_catalytic_eigen_shor/20_10_tiny_compress_phase/5_holo_oracle.py` | 292 | Unified Mandelbrot+Complex+Torus+Catalytic+.holo |
 | 34.7 | `34_zeta_eigenbasis/34_2_holographic_sieves/7_holo_riemann_oracle.py` | 175 | Prime scattering -> Riemann zeros via holo |
 | 34.20 | `34_zeta_eigenbasis/34_5_topological_proof/20_transcendent_winding_oracle.py` | 98 | O(1) asymptotic theta at t=10^100 |
-| 42 | `42_computational_event_horizon/ULTRA/exp_19_oracle_machine/rust/src/main.rs` | (Rust) | INFINITY EDITION — Rust oracle machine |
+| 42 | `42_computational_event_horizon/02_ultra/19_oracle_machine/rust/src/main.rs` | (Rust) | INFINITY EDITION — Rust oracle machine |
 
 ### 1.2 Per-oracle reporting (referenced, not re-read in full)
 
@@ -271,7 +271,7 @@ Goal: factor 22-bit semiprime via unified stack. 23-M power-of-2 phase grating.
 - 100-digit mpmath precision, O(1) execution time
 - Output: exact number of zeta zeros in any 1-billion-step window at the Googol boundary
 
-### 7.5 42 ULTRA exp_19_oracle_machine (Rust)
+### 7.5 42 ULTRA 19_oracle_machine (Rust)
 
 The INFINITY EDITION. Rust port. Per the 35 PAPER abstract, it combines:
 - ER=EPR entanglement bridges
