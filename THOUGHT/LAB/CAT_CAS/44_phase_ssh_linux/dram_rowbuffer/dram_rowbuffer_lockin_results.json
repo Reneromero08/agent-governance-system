@@ -1,0 +1,77 @@
+{
+  "amplitude_ladder": [
+    {
+      "amp": 1,
+      "driven_snr_mean": 33.834163181953606
+    },
+    {
+      "amp": 2,
+      "driven_snr_mean": 28.836328432071642
+    },
+    {
+      "amp": 3,
+      "driven_snr_mean": 38.83154500080729
+    },
+    {
+      "amp": 4,
+      "driven_snr_mean": 40.753671050687174
+    },
+    {
+      "amp": 5,
+      "driven_snr_mean": 40.6728352259105
+    }
+  ],
+  "channel": "dram_rowbuffer_driven_lockin",
+  "claim_cap": "cross-core .holo traversal witness (NOT lattice/crypto)",
+  "gates": {
+    "amp_monotonic": false,
+    "null2_samerow_collapses": true,
+    "phase_recovered": false,
+    "pseudo_declared_match_le_0_35": true,
+    "real_accuracy_ge_0_60": true,
+    "reproducible_min_seed_ge_0_60": true,
+    "wrong_actual_match_ge_0_60": true,
+    "wrong_declared_match_le_0_20": true
+  },
+  "main": {
+    "amp_level": 3,
+    "driven_bank_snr_real_mean": 38.645553356459594,
+    "null1_diffbank_snr_mean": 13.735329048728357,
+    "null2_samerow_snr_mean": 1.5042771247511657,
+    "per_seed_accuracy": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "phase_mae_rad": 1.5133343181262708,
+    "pseudo_declared_match": 0.203125,
+    "real_accuracy_mean": 1.0,
+    "real_accuracy_min_seed": 1.0,
+    "real_accuracy_std": 0.0,
+    "snr_real_over_null2": 25.690448070100288,
+    "wrong_actual_match": 1.0,
+    "wrong_declared_match": 0.0
+  },
+  "physics_ns": {
+    "jitter": 11.0,
+    "refresh_hz": 128000.0,
+    "t_conflict": 80.0,
+    "t_hit": 50.0
+  },
+  "seeds": [
+    11,
+    23,
+    37,
+    51,
+    67,
+    83,
+    97,
+    113
+  ],
+  "verdict": "DRAM_ROWBUFFER_LOCKIN_SIM_PARTIAL"
+}

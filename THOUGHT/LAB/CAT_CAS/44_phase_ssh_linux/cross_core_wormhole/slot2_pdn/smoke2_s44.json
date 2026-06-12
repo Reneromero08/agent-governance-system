@@ -1,0 +1,32 @@
+{
+  "all_rows_restore": true,
+  "gates": {
+    "all_rows_restore": true,
+    "phase_recovered_gt_0_30": true,
+    "pseudo_declared_match_le_0_35": true,
+    "pseudo_reject_floor_ge_0_95": false,
+    "real_accuracy_ge_0_60": false,
+    "real_mode_floor_ge_0_45": false,
+    "real_vs_pseudo_floor_ge_0_95": false,
+    "wrong_actual_match_ge_0_60": false,
+    "wrong_declared_match_le_0_20": false
+  },
+  "input": "THOUGHT\\LAB\\CAT_CAS\\44_phase_ssh_linux\\cross_core_wormhole\\slot2_pdn\\smoke2_s44.csv",
+  "minham": 7,
+  "nbin": 12,
+  "phase_corr_null": 0.25188673066151146,
+  "phase_corr_true": 0.6000677397348645,
+  "phase_delta": 0.34818100907335303,
+  "pseudo_declared_match": 0.0,
+  "pseudo_reject_floor": 0.5,
+  "real_accuracy": 0.0,
+  "real_mode_floor": 0.0,
+  "real_vs_pseudo_floor": 0.4,
+  "rho_threshold": 0.11983576844063192,
+  "rows": 28,
+  "seed": 44,
+  "test_rows": 12,
+  "verdict": "PHASE4B_PDN_PARTIAL",
+  "wrong_actual_match": 0.25,
+  "wrong_declared_match": 0.5
+}

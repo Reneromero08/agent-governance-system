@@ -1,0 +1,18 @@
+==========================================================================
+DRAM ROW-BUFFER DRIVEN LOCK-IN -- realistic-noise sim
+==========================================================================
+real accuracy (mean over 8 seeds) = 1.0000  (min seed 1.0000, std 0.0000)
+pseudo declared-match = 0.2031   wrong actual-match = 1.0000   wrong declared = 0.0000
+phase MAE (rad) = 1.5133343181262708
+driven-bank SNR  real=38.65  NULL1(diff-bank)=13.74  NULL2(same-row)=1.50  real/null2=25.69
+amplitude ladder (driven SNR): amp1=33.83, amp2=28.84, amp3=38.83, amp4=40.75, amp5=40.67
+--------------------------------------------------------------------------
+  gate real_accuracy_ge_0_60                PASS
+  gate reproducible_min_seed_ge_0_60        PASS
+  gate pseudo_declared_match_le_0_35        PASS
+  gate wrong_actual_match_ge_0_60           PASS
+  gate wrong_declared_match_le_0_20         PASS
+  gate null2_samerow_collapses              PASS
+  gate amp_monotonic                        FAIL
+  gate phase_recovered                      FAIL
+VERDICT: DRAM_ROWBUFFER_LOCKIN_SIM_PARTIAL

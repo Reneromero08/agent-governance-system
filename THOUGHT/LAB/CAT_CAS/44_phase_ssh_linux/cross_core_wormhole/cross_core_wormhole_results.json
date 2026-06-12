@@ -1,0 +1,279 @@
+{
+  "claim_level": "cross-core .holo traversal protocol; sim-verified; physical run pending Codex",
+  "decisive_controls": {
+    "A_full_vs_naive_fidelity": [
+      0.9999998807907104,
+      0.49999992762293133
+    ],
+    "B_full_vs_naive_overlap": [
+      0.9999998552458627,
+      0.0
+    ],
+    "C_full_vs_naive_accuracy": [
+      0.79296875,
+      0.25390625
+    ],
+    "C_naive_matches_codex_cross_core_0p275": true
+  },
+  "experiment_A_bridge_opening_coupling": {
+    "detail": {
+      "full": [
+        {
+          "bridge_restore": 0.9999998807907104,
+          "fid": 0.9999998807907104,
+          "phase_err": 0.0,
+          "phase_out": 0.0,
+          "phi": 0.0
+        },
+        {
+          "bridge_restore": 0.9999998807907104,
+          "fid": 0.9999998807907104,
+          "phase_err": 0.0,
+          "phase_out": 0.7853981633974483,
+          "phi": 0.7853981633974483
+        },
+        {
+          "bridge_restore": 0.9999998807907104,
+          "fid": 0.9999998807907104,
+          "phase_err": 0.0,
+          "phase_out": 1.5707963267948966,
+          "phi": 1.5707963267948966
+        },
+        {
+          "bridge_restore": 0.9999998807907104,
+          "fid": 0.9999998807907104,
+          "phase_err": 0.0,
+          "phase_out": 2.356194490192345,
+          "phi": 2.356194490192345
+        },
+        {
+          "bridge_restore": 0.9999998807907104,
+          "fid": 0.9999998807907104,
+          "phase_err": 0.0,
+          "phase_out": 3.141592653589793,
+          "phi": 3.141592653589793
+        },
+        {
+          "bridge_restore": 0.9999998807907104,
+          "fid": 0.9999998807907104,
+          "phase_err": 0.0,
+          "phase_out": -2.356194490192345,
+          "phi": 3.9269908169872414
+        },
+        {
+          "bridge_restore": 0.9999998807907104,
+          "fid": 0.9999998807907104,
+          "phase_err": 0.0,
+          "phase_out": -1.5707963267948968,
+          "phi": 4.71238898038469
+        }
+      ],
+      "naive": [
+        {
+          "fid": 0.4999999403953552,
+          "phase_out": 0.0,
+          "phi": 0.0
+        },
+        {
+          "fid": 0.49999991059303284,
+          "phase_out": 0.0,
+          "phi": 0.7853981633974483
+        },
+        {
+          "fid": 0.4999999403953552,
+          "phase_out": 0.0,
+          "phi": 1.5707963267948966
+        },
+        {
+          "fid": 0.49999991059303284,
+          "phase_out": 0.0,
+          "phi": 2.356194490192345
+        },
+        {
+          "fid": 0.4999999403953552,
+          "phase_out": 0.0,
+          "phi": 3.141592653589793
+        },
+        {
+          "fid": 0.49999991059303284,
+          "phase_out": 0.0,
+          "phi": 3.9269908169872414
+        },
+        {
+          "fid": 0.4999999403953552,
+          "phase_out": 0.0,
+          "phi": 4.71238898038469
+        }
+      ]
+    },
+    "summary": {
+      "full_bridge_restore_min": 0.9999998807907104,
+      "full_msg_fidelity_mean": 0.9999998807907104,
+      "full_phase_mae_rad": 0.0,
+      "naive_msg_fidelity_mean": 0.49999992762293133
+    }
+  },
+  "experiment_B_scramble_unscramble": {
+    "detail": {
+      "full": [
+        {
+          "fid": 0.9999998211860657,
+          "overlap": 0.9999998807907104,
+          "phase_err": 0.0,
+          "phase_out": 0.0,
+          "phi": 0.0
+        },
+        {
+          "fid": 0.9999996423721313,
+          "overlap": 0.9999998211860657,
+          "phase_err": 4.214685800363327e-08,
+          "phase_out": 0.7853982055443064,
+          "phi": 0.7853981633974483
+        },
+        {
+          "fid": 0.9999998211860657,
+          "overlap": 0.9999998807907104,
+          "phase_err": 0.0,
+          "phase_out": 1.5707963267948966,
+          "phi": 1.5707963267948966
+        },
+        {
+          "fid": 0.9999996423721313,
+          "overlap": 0.9999998211860657,
+          "phase_err": 4.214685800363327e-08,
+          "phase_out": 2.356194448045487,
+          "phi": 2.356194490192345
+        },
+        {
+          "fid": 0.9999998211860657,
+          "overlap": 0.9999998807907104,
+          "phase_err": 0.0,
+          "phase_out": 3.141592653589793,
+          "phi": 3.141592653589793
+        },
+        {
+          "fid": 0.9999996423721313,
+          "overlap": 0.9999998211860657,
+          "phase_err": 4.214685844772248e-08,
+          "phase_out": -2.356194448045487,
+          "phi": 3.9269908169872414
+        },
+        {
+          "fid": 0.9999998211860657,
+          "overlap": 0.9999998807907104,
+          "phase_err": 0.0,
+          "phase_out": -1.5707963267948966,
+          "phi": 4.71238898038469
+        }
+      ],
+      "naive": [
+        {
+          "fid": 0.9999998211860657,
+          "overlap": 0.0,
+          "phi": 0.0,
+          "scrambled_purity": 0.4999998211860657
+        },
+        {
+          "fid": 0.7499997615814209,
+          "overlap": 0.0,
+          "phi": 0.7853981633974483,
+          "scrambled_purity": 0.4999997615814209
+        },
+        {
+          "fid": 0.49999991059303284,
+          "overlap": 0.0,
+          "phi": 1.5707963267948966,
+          "scrambled_purity": 0.4999998211860657
+        },
+        {
+          "fid": 0.7499997615814209,
+          "overlap": 0.0,
+          "phi": 2.356194490192345,
+          "scrambled_purity": 0.4999997615814209
+        },
+        {
+          "fid": 0.9999998211860657,
+          "overlap": 0.0,
+          "phi": 3.141592653589793,
+          "scrambled_purity": 0.4999998211860657
+        },
+        {
+          "fid": 0.7499997615814209,
+          "overlap": 0.0,
+          "phi": 3.9269908169872414,
+          "scrambled_purity": 0.4999997615814209
+        },
+        {
+          "fid": 0.49999991059303284,
+          "overlap": 0.0,
+          "phi": 4.71238898038469,
+          "scrambled_purity": 0.4999998211860657
+        }
+      ]
+    },
+    "summary": {
+      "full_decode_overlap_mean": 0.9999998552458627,
+      "full_msg_fidelity_mean": 0.9999997445515224,
+      "full_phase_mae_rad": 1.8062939207855574e-08,
+      "naive_decode_overlap_mean": 0.0,
+      "naive_scrambled_purity_mean": 0.49999979564121794
+    }
+  },
+  "experiment_C_catalytic_residency_matched_nulls": {
+    "full": {
+      "acc_ci95": [
+        0.771875,
+        0.81484375
+      ],
+      "acc_mean": 0.79296875,
+      "acc_std": 0.19342052379061925,
+      "phase_mae_rad": 0.10497263648532935,
+      "phase_recovered": true,
+      "pseudo_declared_match": 0.23984375,
+      "real_accuracy": 0.79296875,
+      "wrong_actual_match": 0.7828125,
+      "wrong_declared_match": 0.084375
+    },
+    "naive": {
+      "acc_ci95": [
+        0.2296875,
+        0.2796875
+      ],
+      "acc_mean": 0.25390625,
+      "acc_std": 0.22225841651316042,
+      "pseudo_declared_match": 0.25390625,
+      "real_accuracy": 0.25390625,
+      "wrong_actual_match": 0.2421875,
+      "wrong_declared_match": 0.246875
+    }
+  },
+  "gates": {
+    "A_bridge_restored": true,
+    "A_opening_coupling_needed": true,
+    "A_phase_preserved": true,
+    "B_phase_preserved": true,
+    "B_unscrambler_needed": true,
+    "C_cross_core_recovery_above_naive": true,
+    "C_phase_relational_recovered": true,
+    "C_pseudo_rejected": true,
+    "C_wrong_reads_actual": true
+  },
+  "params": {
+    "HOT": 24.0,
+    "LINES": 64,
+    "RAMP": 14.0,
+    "SIGMA_cross_core_noise": 26.0,
+    "phis": [
+      0.0,
+      0.7853981633974483,
+      1.5707963267948966,
+      2.356194490192345,
+      3.141592653589793,
+      3.9269908169872414,
+      4.71238898038469
+    ]
+  },
+  "protocol": "cross_core_wormhole",
+  "seed": 20260612,
+  "verdict": "CROSS_CORE_WORMHOLE_SIM_VERIFIED"
+}

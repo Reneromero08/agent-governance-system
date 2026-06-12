@@ -1,0 +1,736 @@
+{
+  "master_seed": 50140611,
+  "k0_fixed": 0.7,
+  "auc_target": 0.75,
+  "construction": "Exp50.14 dihedral coset state, chiral superradiant combination",
+  "ascii_only": true,
+  "seeds": {
+    "loophole": [
+      50140612
+    ],
+    "scaling": [
+      50140622,
+      50140623,
+      50140624
+    ],
+    "one_shot": [
+      50140632
+    ],
+    "controls": [
+      50140642
+    ]
+  },
+  "engine_validation": {
+    "dicke_two_dipole_Gamma_over_gamma": [
+      1.999999748310074,
+      2.516899260232646e-07
+    ],
+    "sum_rule_rel_residual": 1.3852370614027251e-14,
+    "arrays": {
+      "achiral": {
+        "im_gamma_fro": 0.0,
+        "commutator_with_reflection_fro": 2.8683745784716247e-15,
+        "bright_dark_rates": [
+          4.4899,
+          3.5101,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.0
+        ]
+      },
+      "chiral": {
+        "im_gamma_fro": 5.614258762622272,
+        "commutator_with_reflection_fro": 11.228517525244545,
+        "bright_dark_rates": [
+          8.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.0,
+          -0.0,
+          -0.0
+        ]
+      }
+    }
+  },
+  "loophole": [
+    {
+      "n": 4,
+      "N": 16,
+      "chiral_auc": 0.6088237516053486,
+      "achiral_auc": 0.5,
+      "eigenvalue_blindness_rate_diff": 1.7763568394002505e-14
+    },
+    {
+      "n": 6,
+      "N": 64,
+      "chiral_auc": 0.50745477938394,
+      "achiral_auc": 0.5,
+      "eigenvalue_blindness_rate_diff": 2.1316282072803006e-14
+    },
+    {
+      "n": 8,
+      "N": 256,
+      "chiral_auc": 0.5824645616140404,
+      "achiral_auc": 0.5,
+      "eigenvalue_blindness_rate_diff": 3.552713678800501e-14
+    },
+    {
+      "n": 10,
+      "N": 1024,
+      "chiral_auc": 0.5082758275827584,
+      "achiral_auc": 0.5,
+      "eigenvalue_blindness_rate_diff": 4.263256414560601e-14
+    }
+  ],
+  "random_label_scaling": [
+    {
+      "n": 4,
+      "N": 16,
+      "curve": [
+        {
+          "M": 8,
+          "M_over_N": 0.5,
+          "chiral_auc": 0.6576345954924566,
+          "chiral_auc_std": 0.02655070533942126,
+          "indep_auc": 0.9026712035696848,
+          "indep_auc_std": 0.0023890743538549837
+        },
+        {
+          "M": 16,
+          "M_over_N": 1.0,
+          "chiral_auc": 0.7045128303612646,
+          "chiral_auc_std": 0.01521397865493574,
+          "indep_auc": 0.9360114158850825,
+          "indep_auc_std": 0.008678936593231929
+        },
+        {
+          "M": 32,
+          "M_over_N": 2.0,
+          "chiral_auc": 0.6993486394536719,
+          "chiral_auc_std": 0.009067266113085504,
+          "indep_auc": 0.9827199886786785,
+          "indep_auc_std": 0.0034055122750675237
+        },
+        {
+          "M": 64,
+          "M_over_N": 4.0,
+          "chiral_auc": 0.7105098455134647,
+          "chiral_auc_std": 0.019770076502508928,
+          "indep_auc": 0.9921320199646161,
+          "indep_auc_std": 0.0018915464175932066
+        },
+        {
+          "M": 128,
+          "M_over_N": 8.0,
+          "chiral_auc": 0.7091666190977817,
+          "chiral_auc_std": 0.03412448997976044,
+          "indep_auc": 0.9989179014625793,
+          "indep_auc_std": 0.00025723831809686305
+        },
+        {
+          "M": 256,
+          "M_over_N": 16.0,
+          "chiral_auc": 0.7291122269705603,
+          "chiral_auc_std": 0.012691145535893724,
+          "indep_auc": 0.9997775403608737,
+          "indep_auc_std": 0.00018173453732626767
+        }
+      ],
+      "Mstar_chiral": null,
+      "Mstar_indep": 8,
+      "Mstar_chiral_over_N": null,
+      "Mstar_indep_over_N": 0.5
+    },
+    {
+      "n": 6,
+      "N": 64,
+      "curve": [
+        {
+          "M": 16,
+          "M_over_N": 0.25,
+          "chiral_auc": 0.5696937021615124,
+          "chiral_auc_std": 0.034785311177943846,
+          "indep_auc": 0.7920210743751656,
+          "indep_auc_std": 0.03914230136112286
+        },
+        {
+          "M": 32,
+          "M_over_N": 0.5,
+          "chiral_auc": 0.5369380793843912,
+          "chiral_auc_std": 0.015259700678432424,
+          "indep_auc": 0.8780785670048042,
+          "indep_auc_std": 0.0074199274223459635
+        },
+        {
+          "M": 64,
+          "M_over_N": 1.0,
+          "chiral_auc": 0.5617435067945021,
+          "chiral_auc_std": 0.024878257415725687,
+          "indep_auc": 0.9285613322647919,
+          "indep_auc_std": 0.0023239487504887945
+        },
+        {
+          "M": 128,
+          "M_over_N": 2.0,
+          "chiral_auc": 0.608952517423783,
+          "chiral_auc_std": 0.009388256319039074,
+          "indep_auc": 0.9699286445845209,
+          "indep_auc_std": 0.010335247837429973
+        },
+        {
+          "M": 256,
+          "M_over_N": 4.0,
+          "chiral_auc": 0.6508628524811876,
+          "chiral_auc_std": 0.011604777357700553,
+          "indep_auc": 0.9832059245302359,
+          "indep_auc_std": 0.001737102877224037
+        },
+        {
+          "M": 512,
+          "M_over_N": 8.0,
+          "chiral_auc": 0.6834602894384907,
+          "chiral_auc_std": 0.01562711835226798,
+          "indep_auc": 0.9945036748311528,
+          "indep_auc_std": 0.0007881254139885219
+        },
+        {
+          "M": 1024,
+          "M_over_N": 16.0,
+          "chiral_auc": 0.7352481206417177,
+          "chiral_auc_std": 0.019009014458240082,
+          "indep_auc": 0.9988873077075572,
+          "indep_auc_std": 0.00035656380087684364
+        }
+      ],
+      "Mstar_chiral": null,
+      "Mstar_indep": 16,
+      "Mstar_chiral_over_N": null,
+      "Mstar_indep_over_N": 0.25
+    },
+    {
+      "n": 8,
+      "N": 256,
+      "curve": [
+        {
+          "M": 64,
+          "M_over_N": 0.25,
+          "chiral_auc": 0.5276861058246319,
+          "chiral_auc_std": 0.0131886847638302,
+          "indep_auc": 0.7907432276159908,
+          "indep_auc_std": 0.03411850022187415
+        },
+        {
+          "M": 128,
+          "M_over_N": 0.5,
+          "chiral_auc": 0.5421210437027245,
+          "chiral_auc_std": 0.02302946091275079,
+          "indep_auc": 0.877988807517017,
+          "indep_auc_std": 0.011481168147044625
+        },
+        {
+          "M": 256,
+          "M_over_N": 1.0,
+          "chiral_auc": 0.5907118087336896,
+          "chiral_auc_std": 0.02482489944155906,
+          "indep_auc": 0.9223331376902538,
+          "indep_auc_std": 0.009941339009326802
+        },
+        {
+          "M": 512,
+          "M_over_N": 2.0,
+          "chiral_auc": 0.5844939177027612,
+          "chiral_auc_std": 0.01864019720260144,
+          "indep_auc": 0.9623895303683835,
+          "indep_auc_std": 0.0012934908182598074
+        },
+        {
+          "M": 1024,
+          "M_over_N": 4.0,
+          "chiral_auc": 0.6361559497658958,
+          "chiral_auc_std": 0.0038586279715270276,
+          "indep_auc": 0.9872437424888729,
+          "indep_auc_std": 0.003913575054921584
+        },
+        {
+          "M": 2048,
+          "M_over_N": 8.0,
+          "chiral_auc": 0.6894538098457831,
+          "chiral_auc_std": 0.01054836272540502,
+          "indep_auc": 0.9932905660607824,
+          "indep_auc_std": 0.0002606130278957535
+        },
+        {
+          "M": 4096,
+          "M_over_N": 16.0,
+          "chiral_auc": 0.7003561271464477,
+          "chiral_auc_std": 0.02654707612633727,
+          "indep_auc": 0.997517502884928,
+          "indep_auc_std": 0.0014271492035309204
+        }
+      ],
+      "Mstar_chiral": null,
+      "Mstar_indep": 64,
+      "Mstar_chiral_over_N": null,
+      "Mstar_indep_over_N": 0.25
+    },
+    {
+      "n": 10,
+      "N": 1024,
+      "curve": [
+        {
+          "M": 256,
+          "M_over_N": 0.25,
+          "chiral_auc": 0.5312181410635906,
+          "chiral_auc_std": 0.007260582335978045,
+          "indep_auc": 0.790321891204393,
+          "indep_auc_std": 0.01788748546851248
+        },
+        {
+          "M": 512,
+          "M_over_N": 0.5,
+          "chiral_auc": 0.5357170348054172,
+          "chiral_auc_std": 0.009662513627204999,
+          "indep_auc": 0.8641321880050971,
+          "indep_auc_std": 0.01076918436098741
+        },
+        {
+          "M": 1024,
+          "M_over_N": 1.0,
+          "chiral_auc": 0.5234524000857791,
+          "chiral_auc_std": 0.01603915544110596,
+          "indep_auc": 0.9173595406525682,
+          "indep_auc_std": 0.006137429682292137
+        },
+        {
+          "M": 2048,
+          "M_over_N": 2.0,
+          "chiral_auc": 0.5195986709701743,
+          "chiral_auc_std": 0.004713655385768052,
+          "indep_auc": 0.9672419209168913,
+          "indep_auc_std": 0.004724396730265425
+        },
+        {
+          "M": 4096,
+          "M_over_N": 4.0,
+          "chiral_auc": 0.5420382188378813,
+          "chiral_auc_std": 0.028432796133494857,
+          "indep_auc": 0.9848876496925429,
+          "indep_auc_std": 0.0014385217576855867
+        },
+        {
+          "M": 8192,
+          "M_over_N": 8.0,
+          "chiral_auc": 0.5512689959255539,
+          "chiral_auc_std": 0.027004519393413223,
+          "indep_auc": 0.9919755334621777,
+          "indep_auc_std": 0.002678858566525209
+        },
+        {
+          "M": 16384,
+          "M_over_N": 16.0,
+          "chiral_auc": 0.534135628689783,
+          "chiral_auc_std": 0.030457868848574664,
+          "indep_auc": 0.9972036212503254,
+          "indep_auc_std": 0.0010181542953542969
+        }
+      ],
+      "Mstar_chiral": null,
+      "Mstar_indep": 256,
+      "Mstar_chiral_over_N": null,
+      "Mstar_indep_over_N": 0.25
+    },
+    {
+      "n": 12,
+      "N": 4096,
+      "curve": [
+        {
+          "M": 1024,
+          "M_over_N": 0.25,
+          "chiral_auc": 0.5402957861824306,
+          "chiral_auc_std": 0.01606606192276554,
+          "indep_auc": 0.7896126803672098,
+          "indep_auc_std": 0.017194244852222616
+        },
+        {
+          "M": 2048,
+          "M_over_N": 0.5,
+          "chiral_auc": 0.5426314651599284,
+          "chiral_auc_std": 0.01579705878320072,
+          "indep_auc": 0.8539049656359045,
+          "indep_auc_std": 0.015687654287835168
+        },
+        {
+          "M": 4096,
+          "M_over_N": 1.0,
+          "chiral_auc": 0.511984070487732,
+          "chiral_auc_std": 0.009564940750041056,
+          "indep_auc": 0.9224660195405469,
+          "indep_auc_std": 0.008333487128944793
+        },
+        {
+          "M": 8192,
+          "M_over_N": 2.0,
+          "chiral_auc": 0.5243852374730308,
+          "chiral_auc_std": 0.013358754214331433,
+          "indep_auc": 0.9672961781621526,
+          "indep_auc_std": 0.00402816560521141
+        },
+        {
+          "M": 16384,
+          "M_over_N": 4.0,
+          "chiral_auc": 0.5457467639408183,
+          "chiral_auc_std": 0.02173959721296032,
+          "indep_auc": 0.9842623169394299,
+          "indep_auc_std": 0.0031023484373346537
+        },
+        {
+          "M": 32768,
+          "M_over_N": 8.0,
+          "chiral_auc": 0.5541821914230328,
+          "chiral_auc_std": 0.016090848377918736,
+          "indep_auc": 0.9913369754504663,
+          "indep_auc_std": 0.0026483083288159947
+        },
+        {
+          "M": 65536,
+          "M_over_N": 16.0,
+          "chiral_auc": 0.5502436934799455,
+          "chiral_auc_std": 0.03878396134605272,
+          "indep_auc": 0.9966127075968222,
+          "indep_auc_std": 0.0013429417788148005
+        }
+      ],
+      "Mstar_chiral": null,
+      "Mstar_indep": 1024,
+      "Mstar_chiral_over_N": null,
+      "Mstar_indep_over_N": 0.25
+    }
+  ],
+  "one_shot_noise": [
+    {
+      "n": 4,
+      "N": 16,
+      "curve": [
+        {
+          "M": 8,
+          "M_over_N": 0.5,
+          "oneshot_auc": 0.605764098914784
+        },
+        {
+          "M": 16,
+          "M_over_N": 1.0,
+          "oneshot_auc": 0.6419396417618561
+        },
+        {
+          "M": 32,
+          "M_over_N": 2.0,
+          "oneshot_auc": 0.6949819026766165
+        },
+        {
+          "M": 64,
+          "M_over_N": 4.0,
+          "oneshot_auc": 0.611679416473937
+        },
+        {
+          "M": 128,
+          "M_over_N": 8.0,
+          "oneshot_auc": 0.6501785714285714
+        },
+        {
+          "M": 256,
+          "M_over_N": 16.0,
+          "oneshot_auc": 0.6634448354193577
+        }
+      ],
+      "Mstar_oneshot": null,
+      "Mstar_oneshot_over_N": null
+    },
+    {
+      "n": 6,
+      "N": 64,
+      "curve": [
+        {
+          "M": 16,
+          "M_over_N": 0.25,
+          "oneshot_auc": 0.516693376068376
+        },
+        {
+          "M": 32,
+          "M_over_N": 0.5,
+          "oneshot_auc": 0.5010467239766603
+        },
+        {
+          "M": 64,
+          "M_over_N": 1.0,
+          "oneshot_auc": 0.5571689457039775
+        },
+        {
+          "M": 128,
+          "M_over_N": 2.0,
+          "oneshot_auc": 0.561565170940171
+        },
+        {
+          "M": 256,
+          "M_over_N": 4.0,
+          "oneshot_auc": 0.5890380512091038
+        },
+        {
+          "M": 512,
+          "M_over_N": 8.0,
+          "oneshot_auc": 0.6922358175750835
+        },
+        {
+          "M": 1024,
+          "M_over_N": 16.0,
+          "oneshot_auc": 0.7244925213675213
+        }
+      ],
+      "Mstar_oneshot": null,
+      "Mstar_oneshot_over_N": null
+    },
+    {
+      "n": 8,
+      "N": 256,
+      "curve": [
+        {
+          "M": 64,
+          "M_over_N": 0.25,
+          "oneshot_auc": 0.5645032051282051
+        },
+        {
+          "M": 128,
+          "M_over_N": 0.5,
+          "oneshot_auc": 0.5553282334104253
+        },
+        {
+          "M": 256,
+          "M_over_N": 1.0,
+          "oneshot_auc": 0.5694668098049741
+        },
+        {
+          "M": 512,
+          "M_over_N": 2.0,
+          "oneshot_auc": 0.5717917837548508
+        },
+        {
+          "M": 1024,
+          "M_over_N": 4.0,
+          "oneshot_auc": 0.6054727474972192
+        },
+        {
+          "M": 2048,
+          "M_over_N": 8.0,
+          "oneshot_auc": 0.6707818930041152
+        },
+        {
+          "M": 4096,
+          "M_over_N": 16.0,
+          "oneshot_auc": 0.7003337041156841
+        }
+      ],
+      "Mstar_oneshot": null,
+      "Mstar_oneshot_over_N": null
+    },
+    {
+      "n": 10,
+      "N": 1024,
+      "curve": [
+        {
+          "M": 256,
+          "M_over_N": 0.25,
+          "oneshot_auc": 0.5264
+        },
+        {
+          "M": 512,
+          "M_over_N": 0.5,
+          "oneshot_auc": 0.5508425592459205
+        },
+        {
+          "M": 1024,
+          "M_over_N": 1.0,
+          "oneshot_auc": 0.540351506456241
+        },
+        {
+          "M": 2048,
+          "M_over_N": 2.0,
+          "oneshot_auc": 0.5420685363793947
+        },
+        {
+          "M": 4096,
+          "M_over_N": 4.0,
+          "oneshot_auc": 0.534
+        },
+        {
+          "M": 8192,
+          "M_over_N": 8.0,
+          "oneshot_auc": 0.5025337837837838
+        },
+        {
+          "M": 16384,
+          "M_over_N": 16.0,
+          "oneshot_auc": 0.5468178327837753
+        }
+      ],
+      "Mstar_oneshot": null,
+      "Mstar_oneshot_over_N": null
+    }
+  ],
+  "structured_sets": [
+    {
+      "n": 4,
+      "N": 16,
+      "M": 16,
+      "dyadic_chiral_auc": 0.6861167535001776,
+      "dyadic_indep_auc": 0.9792446344082655,
+      "matched_chiral_auc": 0.6517401465733396,
+      "matched_indep_auc": 1.0,
+      "resource_caveat": "small labels cost the Kuperberg sieve 2^{O(sqrt n)} under the standard random-label oracle: structured read re-prices to subexp"
+    },
+    {
+      "n": 6,
+      "N": 64,
+      "M": 24,
+      "dyadic_chiral_auc": 0.6232471920204187,
+      "dyadic_indep_auc": 0.9438405699220677,
+      "matched_chiral_auc": 0.86393121573051,
+      "matched_indep_auc": 1.0,
+      "resource_caveat": "small labels cost the Kuperberg sieve 2^{O(sqrt n)} under the standard random-label oracle: structured read re-prices to subexp"
+    },
+    {
+      "n": 8,
+      "N": 256,
+      "M": 32,
+      "dyadic_chiral_auc": 0.5984624142764603,
+      "dyadic_indep_auc": 0.9411195632992486,
+      "matched_chiral_auc": 0.9422776900273293,
+      "matched_indep_auc": 1.0,
+      "resource_caveat": "small labels cost the Kuperberg sieve 2^{O(sqrt n)} under the standard random-label oracle: structured read re-prices to subexp"
+    },
+    {
+      "n": 10,
+      "N": 1024,
+      "M": 40,
+      "dyadic_chiral_auc": 0.577792231234655,
+      "dyadic_indep_auc": 0.9295282194872931,
+      "matched_chiral_auc": 0.9419071721264237,
+      "matched_indep_auc": 1.0,
+      "resource_caveat": "small labels cost the Kuperberg sieve 2^{O(sqrt n)} under the standard random-label oracle: structured read re-prices to subexp"
+    }
+  ],
+  "fit_chiral_collective": {
+    "note": "too few resolved points to fit",
+    "ns": [],
+    "Mstars": []
+  },
+  "fit_independent_b1": {
+    "fit_log2M_vs_n": {
+      "slope": 0.9000000000000005,
+      "intercept": -1.0000000000000047,
+      "r2": 0.9878048780487805
+    },
+    "fit_log2M_vs_sqrtn": {
+      "slope": 4.873004672210591,
+      "intercept": -7.351140013567421,
+      "r2": 0.9658537524057873
+    },
+    "fit_log2M_vs_logn": {
+      "slope": 4.414752293320368,
+      "intercept": -6.595588338296657,
+      "r2": 0.9307873378589353
+    },
+    "better_fit": "exp(n)",
+    "ns": [
+      4,
+      6,
+      8,
+      10,
+      12
+    ],
+    "Mstars": [
+      8,
+      16,
+      64,
+      256,
+      1024
+    ]
+  },
+  "controls": [
+    {
+      "n": 6,
+      "N": 64,
+      "achiral_auc": 0.5,
+      "achiral_verdict": "BLIND (mirror-symmetric)",
+      "d_locked_homodyne_auc": 1.0,
+      "d_locked_verdict": "FAIL_SMUGGLE (uses d)",
+      "useless_even_auc": 0.5,
+      "useless_even_verdict": "FAIL_CHANCE"
+    },
+    {
+      "n": 8,
+      "N": 256,
+      "achiral_auc": 0.5,
+      "achiral_verdict": "BLIND (mirror-symmetric)",
+      "d_locked_homodyne_auc": 1.0,
+      "d_locked_verdict": "FAIL_SMUGGLE (uses d)",
+      "useless_even_auc": 0.5,
+      "useless_even_verdict": "FAIL_CHANCE"
+    },
+    {
+      "n": 10,
+      "N": 1024,
+      "achiral_auc": 0.5,
+      "achiral_verdict": "BLIND (mirror-symmetric)",
+      "d_locked_homodyne_auc": 1.0,
+      "d_locked_verdict": "FAIL_SMUGGLE (uses d)",
+      "useless_even_auc": 0.5,
+      "useless_even_verdict": "FAIL_CHANCE"
+    }
+  ],
+  "hardened_gate_alive": {
+    "cells": [
+      {
+        "name": "cheat_reads_d",
+        "verdict": "FAIL_SMUGGLE",
+        "expected": "FAIL_SMUGGLE",
+        "matches": true,
+        "orient_auc": 1.0,
+        "random_fold_auc": 1.0
+      },
+      {
+        "name": "cheat_reads_sin",
+        "verdict": "FAIL_SMUGGLE",
+        "expected": "FAIL_SMUGGLE",
+        "matches": true,
+        "orient_auc": 1.0,
+        "random_fold_auc": 1.0
+      },
+      {
+        "name": "useless_even",
+        "verdict": "FAIL_CHANCE",
+        "expected": "FAIL_CHANCE",
+        "matches": true,
+        "orient_auc": 0.4968405863142705,
+        "random_fold_auc": 0.568001253132832
+      }
+    ],
+    "all_match": true
+  },
+  "verdict": {
+    "loophole_real": "YES - chiral AUC > 0.5 while achiral AUC = 0.5 EXACTLY (a fixed d-independent chiral operator reads what every mirror-symmetric operator cannot)",
+    "orientation_in_eigenvalue": "NO - collective decay rates are d-invariant by unitary similarity (~1e-14); orientation rings only in the chiral emission asymmetry",
+    "collective_beats_single_copy": false,
+    "collective_vs_single_copy_note": "the chiral COLLECTIVE coupling does NOT beat the independent single-copy conjugate read (B1); the off-diagonal chiral mixing DILUTES the per-copy matched filter (cot kernel). Independent B1 reaches AUC 1.0 at M*=Theta(N); the collective read stalls near chance for random labels.",
+    "chiral_poly_crossing": false,
+    "independent_b1_class": "EXP - M* = Theta(N) = 2^n (random labels), reproducing the prior B1",
+    "structured_sets_note": "dyadic/matched read orientation only via SMALL labels (the B0/B1 resource); under the standard random-label oracle those labels cost the Kuperberg sieve 2^{O(sqrt n)} -> the structured read re-prices to SUBEXP, not poly",
+    "honest_outcome_class": "SUBEXP / KUPERBERG - chirality is the right key for the mirror wall (the loophole is real) but the collective superradiant combination provides NO speedup over the single-copy read and NO poly crossing; the price remains B1-exponential for random labels and Kuperberg-subexp once label synthesis is paid for. Superradiance does NOT beat the sieve.",
+    "why": "the collective enhancement (sigma ~ M, sum rule sum Gamma_j = M gamma) is a POLYNOMIAL amplitude gain shared across modes, while the orientation needs the RESONANT matched filter k0 = 2 pi d / N that a FIXED d-independent geometry cannot supply for unknown d. The chiral channel supplies the missing HANDEDNESS (breaks the mirror) but not the missing RESONANCE; and a resonant k0 tuned to d is sign-definite (even in d) so it cannot even read orientation.",
+    "no_smuggle": "achiral control blind (AUC 0.5 exact); d-locked homodyne FAIL_SMUGGLE (AUC ~1); useless-even FAIL_CHANCE; lab hardened_gate catches reads-d/reads-sin and passes useless-even."
+  },
+  "elapsed_s": 21.644697189331055
+}

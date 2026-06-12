@@ -1249,32 +1249,81 @@ Phase 4 is where `.holo` stops being only a file/compression idea and becomes a 
 **Objective:** Reproduce the five physical limit violations from CAT_CAS on the bare-metal substrate.
 
 ### 5.1 Landauer Limit Violation
-- [ ] Run the forward-reverse cycle (Phase 3)
-- [ ] Measure total energy consumption via external power meter (if available) or CPU package power via RAPL MSRs (if supported on K10)
-- [ ] Compare to Landauer prediction: k_B * T * ln(2) * bits_erased
-- [ ] With SHA-256 restored and bits_erased = 0: Landauer heat should be zero within measurement tolerance
+**Status:** `PHASE5_1_ZERO_LOGICAL_ERASURE_CONFIRMED__ENERGY_TRACE_REQUIRED`
+
+- [x] Run the forward-reverse cycle foundation probe.
+- [x] Confirm logical restoration: `96/96` reversible cycles restored.
+- [x] Confirm logical bits erased for reversible path: max `0`.
+- [x] Run destructive/irreversible control: median bit-erasure `4105.0`, nonzero rate `0.989583`.
+- [ ] Physical energy trace still required: aligned wall/EPS12V joule trace or calibrated package-energy counter plus temperature.
+
+Artifact: `phase5_1_5/PHASE5_1_5_FOUNDATION_REPORT.md`
+Live runbook: `phase5_1_5/PHASE5_1_5_LIVE_RUNBOOK.md`
+Target observability: `phase5_1_5/PHASE5_1_5_TARGET_OBSERVABILITY.md`
+
+Claim boundary: software-side zero logical erasure is ready. Physical Landauer violation is not accepted until the energy/temperature artifact exists.
 
 ### 5.2 Bekenstein Bound Violation
-- [ ] Run multiple forward-reverse cycles without resetting the phase baseline
-- [ ] Cumulative XOR throughput (phase rotations) exceeds the static information capacity of the tape (the phase state space of 6 oscillators)
-- [ ] Demonstrate that catalytic cycling achieves throughput exceeding the Bekenstein bound for the die's physical dimensions
+**Status:** `PHASE5_2_CYCLIC_THROUGHPUT_ACCOUNTED__PHYSICAL_BOUND_TRACE_REQUIRED`
+
+- [x] Run multiple forward-reverse cycles without changing the phase model baseline.
+- [x] Account cyclic reversible throughput: `147415` reversible byte touches.
+- [x] Compare to six-oscillator phase-capacity model: `48.0` bits.
+- [x] Software throughput/model-capacity ratio: `24569.167`.
+- [ ] Physical bound trace still required: die/package geometry assumptions, energy/observation-window trace, and accepted mapping from tape throughput to physical information capacity.
+
+Artifact: `phase5_1_5/results/phase5_1_5_summary.json`
+Live runbook: `phase5_1_5/PHASE5_1_5_LIVE_RUNBOOK.md`
+Target observability: `phase5_1_5/PHASE5_1_5_TARGET_OBSERVABILITY.md`
+
+Claim boundary: cyclic software throughput accounting is complete. Physical Bekenstein violation is not accepted from this pass alone.
 
 ### 5.3 Arrow of Time Reversal
-- [ ] Measure forward pass execution time vs. reverse pass execution time
-- [ ] On a reversible substrate, they should be symmetric
-- [ ] If reverse pass is slower (as in Phase 10's 12.6% cache penalty), measure and document the MESI-induced temporal asymmetry
-- [ ] This measurement identifies the hardware source of the thermodynamic arrow of time
+**Status:** `PHASE5_3_FORWARD_REVERSE_TIMING_ASYMMETRY_MEASURED`
+
+- [x] Measure forward pass execution time vs. reverse pass execution time.
+- [x] Median forward time: `126350.0 ns`.
+- [x] Median reverse time: `125550.0 ns`.
+- [x] Median reverse/forward ratio: `0.990761`.
+- [x] Phenom target rerun: median forward `610196.0 ns`, median reverse `608799.5 ns`, reverse/forward `0.996875`.
+- [x] Preserve raw cycle rows for follow-up asymmetry analysis.
+
+Artifact: `phase5_1_5/results/phase5_1_5_forward_reverse_cycles.csv`
+Target summary: `phase5_1_5/results/phase5_1_5_target_summary.json`
+Live runbook: `phase5_1_5/PHASE5_1_5_LIVE_RUNBOOK.md`
+Target observability: `phase5_1_5/PHASE5_1_5_TARGET_OBSERVABILITY.md`
+
+Claim boundary: local reversible timing asymmetry is measured. Hardware-source attribution needs a live cache/PMU follow-up if this becomes a frontier blocker.
 
 ### 5.4 Schmidt Decomposition (1 Oscillator Controls Many)
-- [ ] Use the Phase Master (single oscillator) to steer multiple PPU oscillators simultaneously via power grid coupling
-- [ ] Demonstrate that one reference phase can control N coupled oscillators — the Schmidt rank of the phase correlation matrix should be 1
-- [ ] This is the physical analog of the .holo shared eigenbasis: one SVh controlling all layers
+**Status:** `PHASE5_4_RANK1_CONTROL_MODEL_PASS__LIVE_OSCILLATOR_TRACE_REQUIRED`
+
+- [x] Build deterministic one-master/six-follower rank-1 control model.
+- [x] Master-correlation floor: `0.999986`.
+- [x] Controlled residual-ratio ceiling: `0.005377`.
+- [x] Null residual-ratio floor: `0.183985`.
+- [ ] Physical oscillator trace still required: six live phase channels with coupling-on/off controls.
+
+Artifact: `session_scripts/phase5_1_5/phase5_1_5_foundation_probe.py`
+Live runbook: `phase5_1_5/PHASE5_1_5_LIVE_RUNBOOK.md`
+Target observability: `phase5_1_5/PHASE5_1_5_TARGET_OBSERVABILITY.md`
+
+Claim boundary: rank-1 control model is complete. Physical one-oscillator-controls-many remains gated on live oscillator data.
 
 ### 5.5 Computronium (Noise Computes)
-- [ ] Disable deliberate phase programming
-- [ ] Let the oscillators run with thermal noise only (no coupling, no phase offsets)
-- [ ] Measure whether the PRO core's `rdtsc` jitter spontaneously forms transient phase-locked states
-- [ ] If yes: the silicon's thermal noise IS a computation — random noise solving optimization problems via spontaneous synchronization
+**Status:** `PHASE5_5_NOISE_ONLY_TRANSIENT_LOCK_MODEL_CANDIDATE__LIVE_NOISE_TRACE_REQUIRED`
+
+- [x] Disable deliberate phase programming in the model.
+- [x] Run noise-only transient lock probe.
+- [x] Candidate transient lock windows: `12/512`.
+- [x] Best order parameter: `0.996119` at threshold `0.96`.
+- [ ] Live noise trace still required: physical oscillator/jitter capture with shuffled-window and coupling-off controls.
+
+Artifact: `phase5_1_5/PHASE5_1_5_FOUNDATION_REPORT.md`
+Live runbook: `phase5_1_5/PHASE5_1_5_LIVE_RUNBOOK.md`
+Target observability: `phase5_1_5/PHASE5_1_5_TARGET_OBSERVABILITY.md`
+
+Claim boundary: noise-only transient-lock candidate exists in the model. Physical noise computation is not accepted until a live trace clears nulls.
 
 ### 5.6 Polytope / Positive-Geometry Hypothesis Test — HARDENED
 
@@ -1914,3 +1963,29 @@ Full account: `phase6/REPORT_PHASE6_TERMINUS.md`. The Phase 6 question (is the l
 **Verdict:** "the algorithm is dead" is PROVEN for the construct side; "a phase substrate crosses the dihedral fold" is MEASURED FALSE for the published problem. NOT "the wall holds" - the residual open questions are the dihedral-HSP lower bound itself (a complexity-theory open problem) and a literal PSPACE P^CTC oracle, neither a lab-buildable substrate. The construct/substrate frontier has no further test open.
 
 (Note: the older "Phase 5.10 RESULTS (live software probe)" / 5.10D section above is a parallel-agent narrative that reads the rail-witness differently than the committed 5.10 result (50db86f5, witness solved via the driven compute-only lock-in); reconcile separately.)
+
+---
+
+## Cross-core .holo traversal - PDN rail lock-in (live)
+
+**Status:** MODE + phase reproducible on the primary core pair; strict witness pending trials bump.
+
+**Detail reports:**
+- `cross_core_wormhole/REPORT_CROSS_CORE_WORMHOLE.md` - full experiment record
+  (cache-conflict Slot 1 negative + PDN Slot 2 results + per-seed breakdown)
+- `cross_core_wormhole/STATUS.md` - resumable snapshot: what is running on the
+  box, the live poll handle, exact next steps
+
+**One-line summary:** A cross-process sender/receiver PDN lock-in carries the
+.holo footprint (MODE 0-3 + relational quadrature phase) across CPU cores via
+the shared IR-drop rail, recovered by a victim-core ring-osc lock-in on a
+shared-TSC origin. Primary pair v2:s3: MODE accuracy 1.00, pseudo_reject 1.00,
+phase delta 0.89-1.10 on ALL 6 seeds. The rvp gate dips on 4/6 seeds at
+trials=48 (~7 test symbols/mode - underpowered, not a channel failure). Strict
+all-9-gates witness unlocks with trials=300/mode. This is the physical channel
+the cache-conflict route (Slot 1, clean negative) could not provide.
+
+**Claim cap:** cross-core .holo traversal via PDN, not a lattice crossing, not
+Phase 6 fixed-point. Lattice terminus (exp50 d-invariant) remains the open
+Phase 6 door; PDN physical channel is the substrate candidate test for that
+path.

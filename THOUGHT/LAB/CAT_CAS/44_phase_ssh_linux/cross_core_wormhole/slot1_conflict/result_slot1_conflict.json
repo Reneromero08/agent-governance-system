@@ -1,0 +1,70 @@
+{
+  "experiment": "EXP44_SLOT1_CONFLICT_DISPLACEMENT_SHARED_CACHE_READOUT",
+  "date": "2026-06-12",
+  "box": {
+    "host": "192.168.137.100",
+    "cpu": "AMD Phenom II X6 1090T",
+    "os": "Debian 13 (Linux 6.12.86)",
+    "gcc": "14.2.0",
+    "cores_online": "0-5",
+    "k10temp_path": "/sys/class/hwmon/hwmon0/temp1_input",
+    "k10temp_max_during_sweep_C": 54.5,
+    "k10temp_veto_threshold_C": 68.0,
+    "userspace_only": true
+  },
+  "claim_cap": "MODE traversal only; NOT phase/relational recovery (Slot 2); NOT a lattice/crypto/quadrature claim",
+  "verdict": "CLEAN_NEGATIVE",
+  "witness_label": "PHASE4B_CROSS_CORE_CONFLICT_WITNESS",
+  "witness_holds_anywhere": false,
+  "next_slot": "SLOT 2 (PDN rail lock-in)",
+  "build": {
+    "source": "cache_hologram_cross_core_conflict.c",
+    "copied_from": "session_scripts/phase4_holo/cache_hologram_cross_core.c (READ-ONLY; not modified)",
+    "schema": "family,declared_mode,actual_mode,trial,hash_restored,l00..l63 (unchanged; analyzer runs unmodified)",
+    "carrier_slots": "64 eviction sets (W lines per L3 congruence class, 4096-byte within-set stride) replacing the 64 single-line slots",
+    "receiver": "prime+probe: fill eviction set, time own ring re-traversal per set; average N_AVG passes",
+    "sender": "pinned to other core, continuously hammers the current MODE's aggressor eviction sets during probe window",
+    "reversible_payload": "XOR-borrow + byte-hash restore on the message tape; bit-exact (hash_restored==1 on all rows)",
+    "ab_control": "-DCONFLICT=0 falls back to occupancy/warmth read; -DCONFLICT=1 is the conflict-displacement read",
+    "lm_needed": false,
+    "compile_warnings": "none"
+  },
+  "sweep_executed": {
+    "conflict1_runs": 72,
+    "conflict0_control_runs": 24,
+    "N_AVG": [1, 4, 16, 64],
+    "EVSET_W": [48, 64, 96],
+    "seed_windows": [0, 1, 2, 3, 4, 5],
+    "core_pairs_run": ["2:3 (writer:observer)"],
+    "core_pairs_not_run": ["4:5", "3:2 (swapped)"],
+    "core_pairs_not_run_reason": "Failure is at the prime+probe GEOMETRY level (receiver's own primed sets stay in PRIVATE L1/L2, which no other core can evict). This is core-pair-independent: L1/L2 are per-core private on the Phenom II X6, only L3 is shared. Additional core pairs would reproduce the identical flat-chance result; no hypothesis-rescue value. KILL criterion met (rvp floor < 0.95 across all W/N/seeds on the primary pair).",
+    "trials_per_run": 320,
+    "rows_per_run": 3840,
+    "all_runs_bit_exact_restored": true,
+    "seeds_recorded": "SEED_WINDOW k compiled into deterministic tape/buffer constants; recorded in CSV filename and stderr line"
+  },
+  "results_conflict1": {
+    "real_accuracy": {"min": 0.212, "max": 0.328, "center": 0.25, "note": "flat at chance (1/4); no lift with N_AVG or W"},
+    "real_vs_pseudo_accuracy_floor": {"min": 0.444, "max": 0.756, "typical": 0.49, "note": "chance is 0.50; never approaches the 0.95 gate"},
+    "rvp_floor_ge_0_95_count": 0,
+    "highest_rvp_outlier": {"value": 0.756, "cell": "N64_W96_cp2-3_s4", "reproduces": false, "note": "lone seed; other 5 seeds at same (N,W) sit 0.45-0.52 -> rejected by 6/6 requirement"},
+    "wrong_actual_match": {"typical": 0.25, "note": "chance; no discrimination"},
+    "wrong_declared_match": {"typical": 0.25},
+    "witness_6of6_cells": "0 of 12 (N x W) cells"
+  },
+  "control_conflict0": {
+    "target": "~0.25-0.275 (occupancy/warmth reproduction)",
+    "real_accuracy_means_by_N": {"N1": 0.260, "N4": 0.257, "N16": 0.277, "N64": 0.275},
+    "reproduced": true,
+    "note": "control reproduces the ~0.275 warmth-read operating point -> harness + analyzer wiring is correct -> the negative is real, not a broken pipeline"
+  },
+  "root_cause_diagnostic": {
+    "instrument": "diag_displacement.py (targeted-set vs non-targeted-set mean re-access latency, real family)",
+    "per_set_latency_cyc_per_touch": {"N1_W48": 116, "N64_W48": 48, "N1_W96": 65},
+    "expected_L3_memory_regime_cyc": "270-319 (the 5.10D operating point)",
+    "measured_targeted_minus_other_displacement_cyc": {"N1_W48": 3.4, "N64_W48": 1.4, "N1_W96": 2.6, "sign": "inconsistent across modes"},
+    "expected_displacement_cyc_from_5_10D": "37-49 (consistent positive)",
+    "conclusion": "The receiver's prime+probe keeps its own eviction-set lines resident in PRIVATE L1/L2 (latency floor ~48-116 cyc, well below the L3/memory regime). The cross-core sender can only contest the SHARED L3, which the receiver never reaches. Therefore the sender does not displace the receiver's lines and there is no carrier. The 5.10D effect (319 vs 270, p=0.0005) was real but came from a DIFFERENT access pattern (victim fetching fresh-from-memory lines under L3 contention), which the prime-then-immediately-reprobe-own-set design does not reproduce."
+  },
+  "honest_stance": "The hypothesis was not protected. The conflict-displacement angle on this prime+probe geometry is falsified on the owned hardware. Inverted-homogenization did not occur because the homogenization arena (shared L3) and the readout arena (private L2) are disjoint in this design."
+}

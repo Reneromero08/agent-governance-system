@@ -1,0 +1,35 @@
+# CALIBRATION  A=2.0 sigma_w=25.0  -> mode_acc=0.292 rvp=0.519 (target 0.31/0.50)
+
+# STORE-AND-FORWARD regime (low co-access, A un-homogenized): sweep N
+    N  plain_mode  lockin_mode  plain_rvp  lockin_rvp
+    1       0.297        0.283      0.526       0.520
+    2       0.316        0.297      0.530       0.535
+    4       0.341        0.318      0.552       0.558
+    8       0.391        0.337      0.577       0.561
+   16       0.447        0.390      0.563       0.592
+   32       0.525        0.447      0.580       0.655
+   64       0.655        0.531      0.667       0.724
+  128       0.792        0.649      0.795       0.812
+  256       0.921        0.793      0.821       0.889
+  512       0.983        0.907      0.945       0.959
+
+# GATE CROSSINGS (store-and-forward)
+  plain  mode>=0.60 at N=64   lockin mode>=0.60 at N=128
+  plain  rvp >=0.95 at N=None   lockin rvp >=0.95 at N=512
+
+# SUSTAINED CO-ACCESS regime (homogenization removes 70% of A): sweep N
+    N  lockin_mode  lockin_rvp
+    1        0.258       0.500
+    2        0.261       0.503
+    4        0.271       0.505
+    8        0.270       0.502
+   16        0.282       0.506
+   32        0.303       0.524
+   64        0.331       0.552
+  128        0.362       0.590
+  256        0.418       0.636
+  512        0.489       0.677
+  homogenized lockin mode>=0.60: NOT REACHED by N=512 (max 0.489)
+
+# FULLY HOMOGENIZED regime (homog_floor_frac=1.0, signal truly zeroed)
+  N=256 lockin mode=0.254 rvp=0.491  (expect ~chance: averaging cannot revive a zero-mean signal)
