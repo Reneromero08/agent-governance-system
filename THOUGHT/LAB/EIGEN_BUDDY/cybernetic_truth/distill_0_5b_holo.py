@@ -9,7 +9,7 @@ import torch
 from safetensors import safe_open
 from pathlib import Path
 
-MODEL_FILE = r"d:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\CAT_CAS\16_catalytic_27b_inference\gemini_update\qwen_0.5b\model.safetensors"
+MODEL_FILE = r"d:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\CAT_CAS\3_physics_complexity\16_catalytic_27b_inference\gemini_update\qwen_0.5b\model.safetensors"
 OUTPUT_PATH = r"d:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\EIGEN_BUDDY\cybernetic_truth\qwen_0_5b_k128.holo"
 
 RANK_K = 128  # Even smaller rank for 0.5B

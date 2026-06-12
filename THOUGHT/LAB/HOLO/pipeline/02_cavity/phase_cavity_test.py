@@ -19,7 +19,7 @@ from pathlib import Path
 from transformers import AutoModelForCausalLM, AutoTokenizer, AutoConfig
 
 REPO = Path(r'D:\CCC 2.0\AI\agent-governance-system')
-MODEL_DIR = REPO / 'THOUGHT' / 'LAB' / 'CAT_CAS' / '16_catalytic_27b_inference' / 'gemini_update' / 'qwen_0.5b'
+MODEL_DIR = REPO / 'THOUGHT' / 'LAB' / 'CAT_CAS' / '3_physics_complexity' / '16_catalytic_27b_inference' / 'gemini_update' / 'qwen_0.5b'
 MODEL_FILE = str(MODEL_DIR / 'model.safetensors')
 HIDDEN_DIM = 896
 

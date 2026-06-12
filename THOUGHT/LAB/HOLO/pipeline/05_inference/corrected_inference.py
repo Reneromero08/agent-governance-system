@@ -6,9 +6,9 @@ from collections import defaultdict
 sys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding='utf-8',errors='replace')
 
 MD=r'F:\LLM_Models\lmstudio-models\Qwen\Qwen3.6-27B';dev=torch.device('cuda')
-sys.path.insert(0,'THOUGHT/LAB/CAT_CAS/33_mera_compression')
+sys.path.insert(0,'THOUGHT/LAB/CAT_CAS/4_holographic/33_mera_compression')
 import _paths
-spec=importlib.util.spec_from_file_location('p','THOUGHT/LAB/CAT_CAS/33_mera_compression/13_patch_model.py')
+spec=importlib.util.spec_from_file_location('p','THOUGHT/LAB/CAT_CAS/4_holographic/33_mera_compression/13_patch_model.py')
 patcher=importlib.util.module_from_spec(spec);spec.loader.exec_module(patcher)
 
 # Load correction tape

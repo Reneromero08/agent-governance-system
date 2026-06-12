@@ -20,7 +20,7 @@ REPO = Path(__file__).parent.parent.parent.parent.parent
 sys.path.insert(0, str(REPO / "THOUGHT" / "LAB" / "TINY_COMPRESS" / "holographic-image"))
 from holo_core import project
 
-MODEL_PATH = str(REPO / "THOUGHT" / "LAB" / "CAT_CAS" / "16_catalytic_27b_inference" / "gemini_update" / "qwen_0.5b" / "model.safetensors")
+MODEL_PATH = str(REPO / "THOUGHT" / "LAB" / "CAT_CAS" / "3_physics_complexity" / "16_catalytic_27b_inference" / "gemini_update" / "qwen_0.5b" / "model.safetensors")
 HIDDEN_DIM = 896
 
 def load_weight_matrix(mm, tensors, data_offset, name):

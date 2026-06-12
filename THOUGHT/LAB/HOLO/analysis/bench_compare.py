@@ -1,10 +1,10 @@
 """Compare raw vs calibrated wormhole output."""
 import sys, io, torch, time, gc, importlib.util
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
-sys.path.insert(0, 'THOUGHT/LAB/CAT_CAS/33_mera_compression')
+sys.path.insert(0, 'THOUGHT/LAB/CAT_CAS/4_holographic/33_mera_compression')
 import _paths
 
-spec = importlib.util.spec_from_file_location('patcher', 'THOUGHT/LAB/CAT_CAS/33_mera_compression/13_patch_model.py')
+spec = importlib.util.spec_from_file_location('patcher', 'THOUGHT/LAB/CAT_CAS/4_holographic/33_mera_compression/13_patch_model.py')
 patcher = importlib.util.module_from_spec(spec); spec.loader.exec_module(patcher)
 
 from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer

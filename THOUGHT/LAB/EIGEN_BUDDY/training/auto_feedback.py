@@ -15,7 +15,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.models.qwen2.modeling_qwen2 import Qwen2Attention
 
 REPO = Path(__file__).parent.parent.parent.parent.parent
-MODEL_DIR = str(REPO / "THOUGHT" / "LAB" / "CAT_CAS" / "16_catalytic_27b_inference" / "gemini_update" / "qwen_0.5b")
+MODEL_DIR = str(REPO / "THOUGHT" / "LAB" / "CAT_CAS" / "3_physics_complexity" / "16_catalytic_27b_inference" / "gemini_update" / "qwen_0.5b")
 
 class LowRankPhaseAdapter(nn.Module):
     def __init__(self, in_features, out_features, k=64):

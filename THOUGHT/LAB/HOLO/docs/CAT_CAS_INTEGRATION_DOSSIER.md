@@ -3,7 +3,7 @@
 ## What transfers from Subphases 20-21
 
 ### 1. Phase Cavity (The Core Transfer)
-**File**: `THOUGHT/LAB/CAT_CAS/21_holographic_elliptic_sieve/3_recursive_rho.py` (function `phase_cavity_recursive`)
+**File**: `THOUGHT/LAB/CAT_CAS/3_physics_complexity/21_holographic_elliptic_sieve/3_recursive_rho.py` (function `phase_cavity_recursive`)
 
 **What it does**: Takes a signal and its maximum possible period (ring size), sieves out harmonics that aren't physically required to produce the observed periodicity. Only keeps the irreducible fundamental gears.
 
@@ -30,7 +30,7 @@ def phase_cavity_recursive(signal, ring_size):
 **Integration point**: After `.holo` SVD compression of each attention layer's weight matrices, run the Phase Cavity on the compressed eigenbasis. It will identify which eigenmodes are signal and which are dispersion artifacts. Keep only the required ones.
 
 ### 2. Moiré Decomposition (The Theory)
-**File**: `THOUGHT/LAB/CAT_CAS/20_catalytic_eigen_shor/20.10_tiny_compress_phase/9_moire_decompose.py`
+**File**: `THOUGHT/LAB/CAT_CAS/3_physics_complexity/20_catalytic_eigen_shor/20.10_tiny_compress_phase/9_moire_decompose.py`
 
 **What it proved**: Complex periodic signals are Moiré patterns — the superposition of simpler, independent periodic modes. By Chinese Remainder Theorem, a signal on `Z_N` decomposes into independent signals on `Z_p` and `Z_q`.
 

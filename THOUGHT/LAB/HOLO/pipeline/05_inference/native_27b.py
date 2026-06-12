@@ -30,7 +30,7 @@ K_T = 256    # 27B holo rank
 N_S = 24     # student layers
 N_T = 64     # teacher layers
 
-MODEL_DIR = str(REPO / "THOUGHT" / "LAB" / "CAT_CAS" / "16_catalytic_27b_inference" / "gemini_update" / "qwen_0.5b")
+MODEL_DIR = str(REPO / "THOUGHT" / "LAB" / "CAT_CAS" / "3_physics_complexity" / "16_catalytic_27b_inference" / "gemini_update" / "qwen_0.5b")
 HOLO_27B = str(REPO / "THOUGHT" / "LAB" / "EIGEN_BUDDY" / "cybernetic_truth" / "qwen_27b_catalytic_k256.holo")
 
 def s_to_t(s_layer):

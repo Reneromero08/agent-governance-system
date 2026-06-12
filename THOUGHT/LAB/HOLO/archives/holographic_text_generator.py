@@ -13,7 +13,7 @@ import torch.nn as nn
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 REPO = Path(__file__).parent.parent.parent.parent.parent
-MODEL_DIR = str(REPO / "THOUGHT" / "LAB" / "CAT_CAS" / "16_catalytic_27b_inference" / "gemini_update" / "qwen_0.5b")
+MODEL_DIR = str(REPO / "THOUGHT" / "LAB" / "CAT_CAS" / "3_physics_complexity" / "16_catalytic_27b_inference" / "gemini_update" / "qwen_0.5b")
 
 def holographic_compress_tensor(weight_tensor, k=128):
     """

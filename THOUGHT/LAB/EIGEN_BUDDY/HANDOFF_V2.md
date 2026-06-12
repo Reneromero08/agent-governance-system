@@ -222,8 +222,8 @@ python models/unified.py     # Should print 6/7 domains at 100%
 
 ## 8. Theoretical Foundation
 
-- **TEP (Tree Evaluation Problem):** Proved computation at depth 10^100 with 0 bytes clean RAM. All state on catalytic tape. Time = O(4^d), Space = O(1). `THOUGHT/LAB/CAT_CAS/01_tree_evaluation/report.md`
-- **Quantum Simulator:** 15-qubit reversible circuit on dirty tape, 23 gates, 0 bits erased, 0J heat. `THOUGHT/LAB/CAT_CAS/07_quantum_simulator/report.md`
+- **TEP (Tree Evaluation Problem):** Proved computation at depth 10^100 with 0 bytes clean RAM. All state on catalytic tape. Time = O(4^d), Space = O(1). `THOUGHT/LAB/CAT_CAS/1_foundations/01_tree_evaluation/report.md`
+- **Quantum Simulator:** 15-qubit reversible circuit on dirty tape, 23 gates, 0 bits erased, 0J heat. `THOUGHT/LAB/CAT_CAS/2_substrate_expansion/07_quantum_simulator/report.md`
 - **Phase/Magnitude Decoupling:** r = -0.079 for d ≥ 16. Phase and magnitude are orthogonal communication channels. Locked invariant.
 - **α(d) Asymptotic:** α(d) = 1.0 - 2/(3ln(d)). Log-bounded convergence from QEC surface code sweeps.
 

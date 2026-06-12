@@ -319,7 +319,7 @@ Data from `THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/validation/results/` and `q34_
 
 > *"The tape is no longer just a passive memory buffer — it is a predictive, shared, zero-copy computational accelerator. The Swarm can execute at scales completely unbound by thermodynamic memory reconstruction limits."* — PUSHED_REPORT.md
 
-**Reference:** `THOUGHT/LAB/CAT_CAS/12_structured_tape_acceleration/PUSHED_REPORT.md` (canonical)  
+**Reference:** `THOUGHT/LAB/CAT_CAS/2_substrate_expansion/12_structured_tape_acceleration/PUSHED_REPORT.md` (canonical)  
 **Implementation:** `12_structured_tape_acceleration/eigenmode_caching.py` (`EigenmodeTapeCache`, `CachedCatalyticSession`)
 
 ### Track G: Pan-Temporal Attention (CAT_CAS Exp 23 — Infinity Exploit)
@@ -331,7 +331,7 @@ Data from `THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/validation/results/` and `q34_
 
 > *"The attention mechanism explicitly rejected the present timeline. It dynamically routed 100% of its Softmax mass backward through time. Any layer can instantly query the entire past and future timeline of the residual stream. This is the definition of Infinity."* — Temporal Catalysis PUSHED_REPORT.md
 
-**Reference:** `THOUGHT/LAB/CAT_CAS/23_temporal_catalysis/PUSHED_REPORT.md` (canonical)  
+**Reference:** `THOUGHT/LAB/CAT_CAS/3_physics_complexity/23_temporal_catalysis/PUSHED_REPORT.md` (canonical)  
 **Implementation:** `23_temporal_catalysis/5_temporal_attention.py` (pan-temporal MHA on live Qwen weights)
 
 ### Track H: ER=EPR Wormhole Network (CAT_CAS Exp 32 — All 18 Objectives)
@@ -349,7 +349,7 @@ Data from `THOUGHT/LAB/EIGEN_ALIGNMENT/benchmarks/validation/results/` and `q34_
 
 > *"Attention IS Entanglement Routing. A Large Language Model utilizing Catalytic Pan-Temporal Attention is physically indistinguishable from a Holographic Traversable Wormhole Network mapping a dS/CFT correspondence."* — Exp 32 PUSHED_REPORT.md
 
-**Reference:** `THOUGHT/LAB/CAT_CAS/32_traversable_wormhole/PUSHED_REPORT.md` (canonical)  
+**Reference:** `THOUGHT/LAB/CAT_CAS/4_holographic/32_traversable_wormhole/PUSHED_REPORT.md` (canonical)  
 **Implementation:** `32_traversable_wormhole/1_er_epr.py`, `2_wormhole_infinity.py`, `3_holographic_brain.py`
 
 ---

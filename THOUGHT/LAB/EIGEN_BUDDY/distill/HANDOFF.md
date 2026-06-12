@@ -85,7 +85,7 @@ The CE+Kuramoto approach with manual SGD that used `.backward()` produces correc
 
 ### The Shor Pipeline (PROVEN, PRODUCTION-READY)
 
-**Directory:** `THOUGHT/LAB/CAT_CAS/20_catalytic_eigen_shor/20.11_contained_holo_verifier/`
+**Directory:** `THOUGHT/LAB/CAT_CAS/3_physics_complexity/20_catalytic_eigen_shor/20.11_contained_holo_verifier/`
 **What we proved:** Contained .holo paradigm — store eigenbasis, never the integer period. Multi-base: 100% success 22-56 bit. Rust+GPU zero-copy streaming to 60-bit. 50-bit factored in 0.8s. All catalytic (SHA-256 verified, 0.0J).
 **Key file:** `20.11e_rust_fm/rust_ffi/src/lib.rs` — Rust catalytic grating (complex64, parallel rayon, zero-copy in-place)
 

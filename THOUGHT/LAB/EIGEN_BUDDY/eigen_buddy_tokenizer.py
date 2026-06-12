@@ -689,7 +689,7 @@ def main():
     
     # Load Qwen embedding table (needed for STABLE_32 anchors)
     print("\n--- Loading Qwen Embeddings ---")
-    model_dir = Path(__file__).parent.parent / "CAT_CAS" / "16_catalytic_27b_inference" / "gemini_update" / "qwen_0.5b"
+    model_dir = Path(__file__).parent.parent / "CAT_CAS" / "3_physics_complexity" / "16_catalytic_27b_inference" / "gemini_update" / "qwen_0.5b"
 
     embed_path = model_dir / "model.safetensors"
     tokenizer_path = model_dir / "tokenizer.json"

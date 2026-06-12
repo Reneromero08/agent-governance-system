@@ -125,11 +125,11 @@ All notable changes to Agent Governance System will be documented in this file.
 ### Added
 
 - `CAPABILITY/SKILLS/agents/catalytic-wormhole/`: New skill for integrated catalytic wormhole compression pipeline. Implements the full lab stack: Exp 30 (boundary stress signal/noise decomposition), Exp 31 (graph isomorphism spectral distance), Exp 21 (phase cavity sieve eigenmode selection), Exp 10 (KV cache SVD compression), Exp 13 (orthogonal multimodel zero-crosstalk). Produces 55x compression on DeepSeek V4 Flash experts (86 MB -> 1.6 MB) via rank-1 rotation chain with zero fidelity loss. Key insight: noise modes in rotation matrices cancel to zero across the chain (boundary stress principle), leaving a single dominant mode as the invariant rotation signal.
-- `THOUGHT/LAB/CAT_CAS/33_mera_compression/_ds_integrated.py`: Reference implementation of the integrated wormhole pipeline for DeepSeek V4 Flash experts. 5-stage pipeline: catalytic SVD extraction, rotation chain construction, boundary stress decomposition, phase cavity sieve, LoRA compression. Proves chain fidelity is invariant to rank (0.085 at r=1 equals 0.085 at r=124).
-- `THOUGHT/LAB/CAT_CAS/33_mera_compression/_ds_wormhole.py`: Fast expert-0 wormhole compressor using representative anchor approach.
+- `THOUGHT/LAB/CAT_CAS/4_holographic/33_mera_compression/_ds_integrated.py`: Reference implementation of the integrated wormhole pipeline for DeepSeek V4 Flash experts. 5-stage pipeline: catalytic SVD extraction, rotation chain construction, boundary stress decomposition, phase cavity sieve, LoRA compression. Proves chain fidelity is invariant to rank (0.085 at r=1 equals 0.085 at r=124).
+- `THOUGHT/LAB/CAT_CAS/4_holographic/33_mera_compression/_ds_wormhole.py`: Fast expert-0 wormhole compressor using representative anchor approach.
 - `THOUGHT/LAB/EIGEN_BUDDY/cybernetic_truth/distill_deepseek_flash.py`: DeepSeek V4 Flash modular distiller with INT8 dequant, catalytic cache (99.6% hit rate), single-pass multi-module processing, NO_QR optimization for non-expert modules, module-specific QR blacklist. Distills all 6 modules (attention, experts, compressor, indexer, embed_head, aux) totaling ~39 GB.
 - `THOUGHT/LAB/HOLO/holographic_brain/ROADMAP_2.md`: Added EIGEN_ALIGNMENT saturation benchmarks (Section 8) proving cavity sieve K=49 is scientifically optimal (cross-model Df mean = 39.6). DeepSeek expert spectral analysis: Df ~700-760 (near-full-rank), K=128 captures ~8% variance.
-- `THOUGHT/LAB/CAT_CAS/33_mera_compression/7_modular_compress.py`: Added D_f block compression (B3) with re-anchoring on fidelity drop, LoRA rank parameter, anchors/blocks tracking in stats.
+- `THOUGHT/LAB/CAT_CAS/4_holographic/33_mera_compression/7_modular_compress.py`: Added D_f block compression (B3) with re-anchoring on fidelity drop, LoRA rank parameter, anchors/blocks tracking in stats.
 
 ### Changed
 
@@ -142,7 +142,7 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ### Added
 
-- `THOUGHT/LAB/CAT_CAS/10_catalytic_kv_cache/`: Developed a Compressed Catalytic KV Cache experiment combining SVD spatial projection (8x dimension reduction) and temporal pruning (attention sink + local sliding window + heavy hitters). Used a pre-allocated shared VRAM tape with bitwise XOR tape restoration to guarantee strictly flat $O(1)$ activation VRAM footprint during autoregressive generation. Verified that the cache achieves $12.5\times$ compression ratio with $100.0\%$ attention fidelity.
+- `THOUGHT/LAB/CAT_CAS/2_substrate_expansion/10_catalytic_kv_cache/`: Developed a Compressed Catalytic KV Cache experiment combining SVD spatial projection (8x dimension reduction) and temporal pruning (attention sink + local sliding window + heavy hitters). Used a pre-allocated shared VRAM tape with bitwise XOR tape restoration to guarantee strictly flat $O(1)$ activation VRAM footprint during autoregressive generation. Verified that the cache achieves $12.5\times$ compression ratio with $100.0\%$ attention fidelity.
 
 ## [3.12.6] - 2026-05-18
 

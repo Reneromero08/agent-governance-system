@@ -114,12 +114,12 @@ python run.py '{"input_path": "path/to/distilled.holo"}' output.holo
 
 ## References
 
-- `THOUGHT/LAB/CAT_CAS/30_boundary_stress/1_memory_collision.py` — Boundary stress principle
-- `THOUGHT/LAB/CAT_CAS/31_graph_isomorphism/1_permutation_sieve.py` — Spectral distance formula
-- `THOUGHT/LAB/CAT_CAS/21_holographic_elliptic_sieve/` — Phase cavity recursive algorithm
-- `THOUGHT/LAB/CAT_CAS/10_catalytic_kv_cache/` — SVD-based KV cache compression
-- `THOUGHT/LAB/CAT_CAS/13_orthogonal_multimodel/` — QR-orthogonal subspace guarantee
-- `THOUGHT/LAB/CAT_CAS/25_lattice_holography/` — Torus mapping and FFT cavity sieve
-- `THOUGHT/LAB/CAT_CAS/32_traversable_wormhole/` — ER=EPR rotation chain proof
-- `THOUGHT/LAB/CAT_CAS/33_mera_compression/_ds_integrated.py` — Reference implementation
+- `THOUGHT/LAB/CAT_CAS/4_holographic/30_boundary_stress/1_memory_collision.py` — Boundary stress principle
+- `THOUGHT/LAB/CAT_CAS/4_holographic/31_graph_isomorphism/1_permutation_sieve.py` — Spectral distance formula
+- `THOUGHT/LAB/CAT_CAS/3_physics_complexity/21_holographic_elliptic_sieve/` — Phase cavity recursive algorithm
+- `THOUGHT/LAB/CAT_CAS/2_substrate_expansion/10_catalytic_kv_cache/` — SVD-based KV cache compression
+- `THOUGHT/LAB/CAT_CAS/2_substrate_expansion/13_orthogonal_multimodel/` — QR-orthogonal subspace guarantee
+- `THOUGHT/LAB/CAT_CAS/4_holographic/25_lattice_holography/` — Torus mapping and FFT cavity sieve
+- `THOUGHT/LAB/CAT_CAS/4_holographic/32_traversable_wormhole/` — ER=EPR rotation chain proof
+- `THOUGHT/LAB/CAT_CAS/4_holographic/33_mera_compression/_ds_integrated.py` — Reference implementation
 - `THOUGHT/LAB/FORMULA/v4/qec_precision_sweep/v9/code/geometric_sigma.py` — Geometric sigma formula
