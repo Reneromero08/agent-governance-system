@@ -44,6 +44,9 @@ jobs:
       - name: Lint tokens
         run: python CAPABILITY/TOOLS/utilities/lint_tokens.py
 
+      - name: MCP governance smoke test
+        run: python CAPABILITY/MCP/verify_governance.py
+
       - name: Run contract fixtures
         run: python LAW/CONTRACTS/runner.py
 

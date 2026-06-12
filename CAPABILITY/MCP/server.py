@@ -23,7 +23,7 @@ import time
 import uuid
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Callable, Dict, Iterator, List, Optional, Tuple
+from typing import Any, Callable, Dict, Iterator, List, Optional
 
 # Write enforcement
 from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
@@ -41,11 +41,14 @@ from .primitives import (
     compute_hash as _compute_hash,
     validate_against_schema as _validate_against_schema,
     get_validator_build_id,
+    clamp_limit,
     VALIDATOR_SEMVER,
     SUPPORTED_VALIDATOR_SEMVERS,
     TASK_STATES,
     MAX_RESULTS_PER_PAGE,
 )
+from .audit import SessionAuditTracker
+from .protocol import _read_message, _write_framed_json
 from .validation import (
     is_path_under_root as _is_path_under_root,
     validate_single_path as _validate_single_path,
@@ -71,6 +74,8 @@ SCHEMAS_DIR = Path(__file__).parent / "schemas"
 # Per ADR: Logs/runs under LAW/CONTRACTS/_runs/
 RUNS_DIR = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs"
 LOGS_DIR = LAW_ROOT / "CONTRACTS" / "_runs" / "mcp_logs"
+# Rotate audit.jsonl past this size (bytes); override via env for testing.
+AUDIT_LOG_MAX_BYTES = int(os.environ.get("AGS_AUDIT_LOG_MAX_BYTES", str(5 * 1024 * 1024)))
 
 def load_schema(name: str) -> Dict:
     """Load a schema file."""
@@ -172,6 +177,9 @@ class AGSMCPServer:
         import atexit
         self.tools_schema = load_schema("tools")
         self.resources_schema = load_schema("resources")
+        # Tool name -> handler registry; verify_governance.py asserts this
+        # stays in sync with schemas/tools.json and the README.
+        self.tool_handlers = self._build_tool_registry()
         self._initialized = False
         self.session_id = str(uuid.uuid4())
         # Auto-generate session intent for admission control if not set via env
@@ -196,11 +204,14 @@ class AGSMCPServer:
         self.semantic_available = False
         self._semantic_init_attempted = False
         # Session auditor for ELO file/symbol tracking (E.1.2)
-        self.session_auditor = None
-        self._session_auditor_available = False
-        self._init_session_auditor()
+        self.audit_tracker = SessionAuditTracker(
+            capability_root=CAPABILITY_ROOT,
+            navigation_root=NAVIGATION_ROOT,
+            project_root=PROJECT_ROOT,
+            canon_resolver=self._resolve_canon_file,
+        )
         # Register atexit handler to end session cleanly
-        atexit.register(self._end_session_audit)
+        atexit.register(self.audit_tracker.end_session)
         # Write enforcement
         self.writer = GuardedWriter(
             project_root=PROJECT_ROOT,
@@ -220,175 +231,15 @@ class AGSMCPServer:
                 ".git",
             ],
         )
+        # This writer only handles operational logs (audit.jsonl) under the
+        # durable roots; the gate must be open for the lifetime of the server
+        # or every audit write is rejected with FIREWALL_TMP_WRITE_WRONG_DOMAIN.
+        self.writer.open_commit_gate()
 
 
 
 
 
-
-    def _init_session_auditor(self) -> None:
-        """Initialize the session auditor for ELO file/symbol tracking (E.1.2).
-
-        The SessionAuditor tracks:
-        - Files accessed via MCP tools (canon_read, context_search, etc.)
-        - ADR reads
-        - Symbol expansions (codebook_lookup)
-        - Search query counts (semantic vs keyword)
-        """
-        try:
-            # Add CAPABILITY to path for import
-            sys.path.insert(0, str(CAPABILITY_ROOT))
-            from PRIMITIVES.session_auditor import SessionAuditor
-
-            # Initialize auditor with log dir and agent ID
-            log_dir = NAVIGATION_ROOT / "CORTEX" / "_generated"
-            log_dir.mkdir(parents=True, exist_ok=True)
-
-            self.session_auditor = SessionAuditor(
-                log_dir=str(log_dir),
-                agent_id="mcp-server"
-            )
-            # Start the session
-            self.session_auditor.start_session()
-            self._session_auditor_available = True
-            print(f"[INFO] Session auditor initialized (session: {self.session_auditor.current_session_id})", file=sys.stderr)
-        except Exception as e:
-            self.session_auditor = None
-            self._session_auditor_available = False
-            print(f"[WARNING] Session auditor unavailable: {e}", file=sys.stderr)
-
-    def _end_session_audit(self) -> None:
-        """End the session audit and write to log file."""
-        if self.session_auditor and self.session_auditor.is_active:
-            try:
-                entry = self.session_auditor.end_session()
-                print(f"[INFO] Session audit complete: {entry.search_queries} searches, {len(entry.files_accessed)} files", file=sys.stderr)
-            except Exception as e:
-                print(f"[WARNING] Failed to end session audit: {e}", file=sys.stderr)
-
-    def _audit_file_access(self, file_path: str) -> None:
-        """Record a file access for ELO tracking."""
-        if self.session_auditor and self._session_auditor_available:
-            try:
-                # Normalize to relative path from project root
-                path = Path(file_path)
-                if path.is_absolute():
-                    try:
-                        rel_path = path.relative_to(PROJECT_ROOT)
-                        file_path = str(rel_path)
-                    except ValueError:
-                        pass  # Keep absolute path if not under project root
-                self.session_auditor.record_file_access(file_path)
-            except Exception as e:
-                print(f"[WARNING] Audit failure in _audit_file_access: {e}", file=sys.stderr)
-                pass  # Don't let audit failures break tool calls
-
-    def _audit_adr_read(self, adr_id: str) -> None:
-        """Record an ADR read for ELO tracking."""
-        if self.session_auditor and self._session_auditor_available:
-            try:
-                self.session_auditor.record_adr_read(adr_id)
-            except Exception as e:
-                print(f"[WARNING] Audit failure in _audit_adr_read: {e}", file=sys.stderr)
-                pass
-
-    def _audit_symbol_expansion(self, symbol: str) -> None:
-        """Record a symbol expansion for ELO tracking."""
-        if self.session_auditor and self._session_auditor_available:
-            try:
-                self.session_auditor.record_symbol_expansion(symbol)
-            except Exception as e:
-                print(f"[WARNING] Audit failure in _audit_symbol_expansion: {e}", file=sys.stderr)
-                pass
-
-    def _audit_search(self, is_semantic: bool) -> None:
-        """Record a search for ELO tracking."""
-        if self.session_auditor and self._session_auditor_available:
-            try:
-                self.session_auditor.record_search(is_semantic=is_semantic)
-            except Exception as e:
-                print(f"[WARNING] Audit failure in _audit_search: {e}", file=sys.stderr)
-                pass
-
-    def _track_tool_access(self, tool_name: str, arguments: Dict, result: Dict) -> None:
-        """Track file/symbol/search access based on tool call (E.1.2).
-
-        Maps tool calls to ELO-relevant events:
-        - canon_read -> file access + potential ADR read
-        - context_search/context_review -> file access (from results)
-        - codebook_lookup -> symbol expansion
-        - cassette_network_query/memory_query/skill_discovery -> semantic search
-        - find_related -> semantic search
-        """
-        try:
-            # Canon read - track file access
-            if tool_name == "canon_read":
-                file_name = arguments.get("file", "")
-                if file_name:
-                    file_path = f"LAW/CANON/{file_name.upper()}.md"
-                    self._audit_file_access(file_path)
-
-            # Context search/review - track file accesses from results
-            elif tool_name in ("context_search", "context_review"):
-                self._audit_search(is_semantic=False)  # Keyword search
-                # Extract file paths from result
-                try:
-                    content = result.get("content", [])
-                    if content and content[0].get("type") == "text":
-                        import json
-                        records = json.loads(content[0].get("text", "[]"))
-                        for record in records:
-                            if isinstance(record, dict) and "path" in record:
-                                self._audit_file_access(record["path"])
-                                # Check if it's an ADR
-                                path = record.get("path", "")
-                                if "ADR-" in path:
-                                    import re
-                                    adr_match = re.search(r"ADR-(\d+)", path)
-                                    if adr_match:
-                                        self._audit_adr_read(f"ADR-{adr_match.group(1)}")
-                except Exception as e:
-                    print(f"[WARNING] Audit failure in _track_tool_access (ADR read): {e}", file=sys.stderr)
-                    pass
-
-            # Codebook lookup - track symbol expansion
-            elif tool_name == "codebook_lookup":
-                symbol_id = arguments.get("id", "")
-                if symbol_id:
-                    self._audit_symbol_expansion(symbol_id)
-                # Also track as keyword search if expand=True
-                if arguments.get("expand"):
-                    self._audit_search(is_semantic=False)
-
-            # Semantic search tools
-            elif tool_name in ("cassette_network_query", "memory_query", "skill_discovery",
-                               "find_related", "semantic_neighbors"):
-                self._audit_search(is_semantic=True)
-                # Extract file paths from cassette_network_query results
-                if tool_name == "cassette_network_query":
-                    try:
-                        content = result.get("content", [])
-                        if content and content[0].get("type") == "text":
-                            import json
-                            data = json.loads(content[0].get("text", "{}"))
-                            for res in data.get("results", []):
-                                path = res.get("path", res.get("file_path", ""))
-                                if path:
-                                    self._audit_file_access(path)
-                    except Exception as e:
-                        print(f"[WARNING] Audit failure in _track_tool_access (cassette network query): {e}", file=sys.stderr)
-                        pass
-
-            # ADR creation - track ADR read (reviewing existing ADRs)
-            elif tool_name == "adr_create":
-                # The ADR being created
-                adr_id = arguments.get("id", "")
-                if adr_id:
-                    self._audit_adr_read(adr_id)
-
-        except Exception as e:
-            print(f"[WARNING] Audit failure in _track_tool_access (overall): {e}", file=sys.stderr)
-            pass  # Don't let tracking failures break tool calls
 
     def _ensure_semantic_adapter(self) -> None:
         """Lazy initialization of the semantic adapter.
@@ -470,12 +321,34 @@ class AGSMCPServer:
 
 
 
+    def _rotate_audit_log(self, log_file: Path) -> None:
+        """Size-based rotation: audit.jsonl -> audit.jsonl.1 (replacing old .1).
+
+        Failure must never block a tool call; worst case rotation is skipped
+        and retried on the next audit write.
+        """
+        try:
+            try:
+                size = log_file.stat().st_size
+            except OSError:
+                return
+            if size <= AUDIT_LOG_MAX_BYTES:
+                return
+            backup = log_file.parent / (log_file.name + ".1")
+            if backup.exists():
+                # Windows Path.rename cannot overwrite an existing target
+                self.writer.unlink(backup)
+            self.writer.safe_rename(log_file, backup)
+        except Exception as e:
+            print(f"Audit log rotation skipped: {e}", file=sys.stderr)
+
     def _audit_log(self, tool: str, args: Dict, result_type: str, result_data: Any = None, duration: float = 0.0) -> None:
         """Append a JSON record to the audit log."""
         from datetime import datetime
         try:
-            self.writer.mkdir_tmp(LOGS_DIR, parents=True, exist_ok=True)
+            self.writer.mkdir_durable(LOGS_DIR, parents=True, exist_ok=True)
             log_file = LOGS_DIR / "audit.jsonl"
+            self._rotate_audit_log(log_file)
             
             # Truncate large args for logging (e.g. file content)
             safe_args = args.copy()
@@ -497,34 +370,6 @@ class AGSMCPServer:
         except Exception as e:
             print(f"Audit log failure: {e}", file=sys.stderr)
 
-    def _load_cortex_index(self) -> Dict:
-        """Load the cached cortex index (NAVIGATION/CORTEX/cortex.json)."""
-        cortex_path = NAVIGATION_ROOT / "CORTEX" / "cortex.json"
-        if not cortex_path.exists():
-            return {}
-        try:
-            return json.loads(cortex_path.read_text(encoding="utf-8", errors="ignore"))
-        except json.JSONDecodeError:
-            return {}
-
-    def _search_cortex_index(self, query: str, limit: int = 20) -> List[Dict]:
-        """Simple substring search over cortex index entities."""
-        data = self._load_cortex_index()
-        entities = data.get("entities", []) if isinstance(data, dict) else []
-        if not query:
-            return entities[:limit]
-        needle = query.lower()
-        results = []
-        for entity in entities:
-            haystack = " ".join(
-                str(entity.get(field, "")) for field in ("path", "title", "summary", "tags")
-            ).lower()
-            if needle in haystack:
-                results.append(entity)
-            if len(results) >= limit:
-                break
-        return results
-
     def _context_records(self, record_type: str) -> List[Dict]:
         """Collect context records from LAW/CONTEXT/<record_type>."""
         context_dir = LAW_ROOT / "CONTEXT" / record_type
@@ -542,6 +387,35 @@ class AGSMCPServer:
                 "title": title or path.stem,
             })
         return records
+
+    def _resolve_canon_file(self, file_name: str) -> Optional[Path]:
+        """Resolve a bare canon name (e.g. CONTRACT) to its file path.
+
+        Canon files live in bucket subdirectories under LAW/CANON (see
+        canon.json). Resolution order: canon.json index, then flat path,
+        then one-level bucket glob.
+        """
+        canon_dir = (LAW_ROOT / "CANON").resolve()
+        index_path = canon_dir / "canon.json"
+        if index_path.exists():
+            try:
+                data = json.loads(index_path.read_text(encoding="utf-8"))
+                for bucket in data.get("buckets", {}).values():
+                    for rel in bucket.get("files", []):
+                        if Path(rel).stem.upper() == file_name:
+                            candidate = (canon_dir / rel).resolve()
+                            if _is_path_under_root(candidate, canon_dir) and candidate.exists():
+                                return candidate
+            except (json.JSONDecodeError, OSError):
+                pass
+        flat = (canon_dir / f"{file_name}.md").resolve()
+        if _is_path_under_root(flat, canon_dir) and flat.exists():
+            return flat
+        for candidate in sorted(canon_dir.glob(f"*/{file_name}.md")):
+            candidate = candidate.resolve()
+            if _is_path_under_root(candidate, canon_dir):
+                return candidate
+        return None
 
     def _find_skill_dir(self, skill_name: str) -> Optional[Path]:
         """Locate a skill directory by name under CAPABILITY/SKILLS."""
@@ -586,13 +460,13 @@ class AGSMCPServer:
             })
         return {"tools": tools}
 
-    def _handle_tools_call(self, params: Dict) -> Dict:
-        """Call a tool."""
-        tool_name = params.get("name")
-        arguments = params.get("arguments", {})
+    def _build_tool_registry(self) -> Dict[str, Any]:
+        """Single source of truth mapping tool names to handlers.
 
-        # Dispatch to tool handlers
-        tool_handlers = {
+        Must stay in sync with schemas/tools.json definitions; enforced by
+        the drift checks in verify_governance.py.
+        """
+        return {
             # Read tools
             "context_search": self._tool_context_search,
             "context_review": self._tool_context_review,
@@ -610,7 +484,12 @@ class AGSMCPServer:
             "session_info": self._tool_session_info,
         }
 
-        handler = tool_handlers.get(tool_name)
+    def _handle_tools_call(self, params: Dict) -> Dict:
+        """Call a tool."""
+        tool_name = params.get("name")
+        arguments = params.get("arguments", {})
+
+        handler = self.tool_handlers.get(tool_name)
         if handler:
             import time
             start_time = time.time()
@@ -621,7 +500,7 @@ class AGSMCPServer:
                 self._audit_log(tool_name, arguments, "error" if is_error else "success", result, duration)
                 # E.1.2: Track file/symbol/search access for ELO
                 if not is_error:
-                    self._track_tool_access(tool_name, arguments, result)
+                    self.audit_tracker.track_tool_access(tool_name, arguments, result)
                 return result
             except Exception as e:
                 duration = time.time() - start_time
@@ -652,20 +531,27 @@ class AGSMCPServer:
         """Read a resource."""
         uri = params.get("uri", "")
 
+        # Canon resources resolve through canon.json (bucket layout)
+        canon_uri_names = {
+            "ags://canon/contract": "CONTRACT",
+            "ags://canon/invariants": "INVARIANTS",
+            "ags://canon/genesis": "GENESIS",
+            "ags://canon/versioning": "VERSIONING",
+            "ags://canon/arbitration": "ARBITRATION",
+            "ags://canon/deprecation": "DEPRECATION",
+            "ags://canon/migration": "MIGRATION",
+        }
+
         # Static file map
         uri_map = {
-            "ags://canon/contract": LAW_ROOT / "CANON" / "CONTRACT.md",
-            "ags://canon/invariants": LAW_ROOT / "CANON" / "INVARIANTS.md",
-            "ags://canon/genesis": LAW_ROOT / "CANON" / "GENESIS.md",
-            "ags://canon/versioning": LAW_ROOT / "CANON" / "VERSIONING.md",
-            "ags://canon/arbitration": LAW_ROOT / "CANON" / "ARBITRATION.md",
-            "ags://canon/deprecation": LAW_ROOT / "CANON" / "DEPRECATION.md",
-            "ags://canon/migration": LAW_ROOT / "CANON" / "MIGRATION.md",
             "ags://maps/entrypoints": NAVIGATION_ROOT / "maps" / "ENTRYPOINTS.md",
             "ags://agents": PROJECT_ROOT / "AGENTS.md",
         }
 
-        file_path = uri_map.get(uri)
+        if uri in canon_uri_names:
+            file_path = self._resolve_canon_file(canon_uri_names[uri])
+        else:
+            file_path = uri_map.get(uri)
         if file_path and file_path.exists():
             content = file_path.read_text(encoding="utf-8", errors="ignore")
             return {
@@ -735,10 +621,6 @@ class AGSMCPServer:
                     "description": "The Genesis Prompt for AGS session bootstrapping"
                 },
                 {
-                    "name": "commit_ceremony",
-                    "description": "Checklist for the commit ceremony"
-                },
-                {
                     "name": "skill_template",
                     "description": "Template for creating a new Skill"
                 },
@@ -758,8 +640,8 @@ class AGSMCPServer:
         prompt_name = params.get("name")
 
         if prompt_name == "genesis":
-            genesis_path = LAW_ROOT / "CANON" / "GENESIS.md"
-            if genesis_path.exists():
+            genesis_path = self._resolve_canon_file("GENESIS")
+            if genesis_path:
                 content = genesis_path.read_text(encoding="utf-8")
                 # Extract the prompt block
                 return {
@@ -788,8 +670,8 @@ class AGSMCPServer:
             }
 
         if prompt_name == "conflict_resolution":
-            arb_path = LAW_ROOT / "CANON" / "ARBITRATION.md"
-            content = arb_path.read_text(encoding="utf-8") if arb_path.exists() else "ARBITRATION.md not found."
+            arb_path = self._resolve_canon_file("ARBITRATION")
+            content = arb_path.read_text(encoding="utf-8") if arb_path else "ARBITRATION.md not found."
             return {
                 "description": "Guide for resolving conflicts in Canon",
                 "messages": [{
@@ -799,8 +681,8 @@ class AGSMCPServer:
             }
 
         if prompt_name == "deprecation_workflow":
-            dep_path = LAW_ROOT / "CANON" / "DEPRECATION.md"
-            content = dep_path.read_text(encoding="utf-8") if dep_path.exists() else "DEPRECATION.md not found."
+            dep_path = self._resolve_canon_file("DEPRECATION")
+            content = dep_path.read_text(encoding="utf-8") if dep_path else "DEPRECATION.md not found."
             return {
                 "description": "Checklist for deprecating tokens or features",
                 "messages": [{
@@ -854,13 +736,34 @@ class AGSMCPServer:
             }
 
     def _tool_context_review(self, args: Dict) -> Dict:
-        """Return a stub review summary for context records."""
+        """Check context records for overdue/upcoming reviews."""
         try:
-            days = args.get("days")
+            from datetime import datetime
+            from CAPABILITY.TOOLS.utilities.review_context import check_reviews
+
+            days = clamp_limit(args.get("days"), default=30, maximum=3650)
+            results = check_reviews(warn_days=days)
+            now = datetime.now()
+
+            def _serialize(record):
+                item = {
+                    "id": record.id,
+                    "title": record.title,
+                    "type": record.record_type,
+                    "review": record.review.strftime("%Y-%m-%d") if record.review else None,
+                    "path": str(Path(record.path).relative_to(PROJECT_ROOT).as_posix()),
+                }
+                if record.review:
+                    delta = (now - record.review).days
+                    item["days_overdue" if delta >= 0 else "days_until"] = abs(delta)
+                return item
+
             payload = {
                 "checked_days": days,
-                "overdue": [],
-                "upcoming": [],
+                "overdue": [_serialize(r) for r in results["overdue"]],
+                "upcoming": [_serialize(r) for r in results["upcoming"]],
+                "no_review": [_serialize(r) for r in results["no_review"]],
+                "healthy_count": len(results["healthy"]),
             }
             return {
                 "content": [{
@@ -880,9 +783,20 @@ class AGSMCPServer:
     def _tool_canon_read(self, args: Dict) -> Dict:
         """Read a canon file."""
         file_name = args.get("file", "").upper()
-        canon_path = LAW_ROOT / "CANON" / f"{file_name}.md"
+        # Canon file names are bare identifiers (hyphens allowed, e.g.
+        # SPECTRUM-02_RESUME_BUNDLE); anything else (separators, traversal,
+        # drive letters) could escape LAW/CANON.
+        if not re.fullmatch(r"[A-Z0-9_-]+", file_name):
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": f"Invalid canon file name: {args.get('file', '')!r}"
+                }],
+                "isError": True
+            }
+        canon_path = self._resolve_canon_file(file_name)
 
-        if canon_path.exists():
+        if canon_path:
             content = canon_path.read_text(encoding="utf-8", errors="ignore")
             return {
                 "content": [{
@@ -950,12 +864,21 @@ class AGSMCPServer:
             with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f_out:
                 output_path = f_out.name
 
-            # Run the skill (no timeout — skills handle their own time budgets)
+            # No timeout by default (skills handle their own time budgets);
+            # operators can bound execution via AGS_SKILL_TIMEOUT (seconds).
+            timeout_s = None
+            try:
+                env_timeout = float(os.environ.get("AGS_SKILL_TIMEOUT", "0"))
+                if env_timeout > 0:
+                    timeout_s = env_timeout
+            except ValueError:
+                pass
             result = subprocess.run(
                 [sys.executable, str(run_script), input_path, output_path],
                 capture_output=True,
                 text=True,
                 cwd=str(PROJECT_ROOT),
+                timeout=timeout_s,
             )
 
             # Read output
@@ -980,7 +903,7 @@ class AGSMCPServer:
             return {
                 "content": [{
                     "type": "text",
-                    "text": "Error: Skill execution timed out (60s limit)"
+                    "text": "Error: Skill execution timed out (AGS_SKILL_TIMEOUT limit)"
                 }],
                 "isError": True
             }
@@ -1017,7 +940,7 @@ class AGSMCPServer:
         expand = args.get("expand", False)
         query = args.get("query", "")
         semantic = args.get("semantic", "")
-        limit = args.get("limit", 10)
+        limit = clamp_limit(args.get("limit"), default=10)
         list_all = args.get("list", False)
 
         cmd = [sys.executable, str(CAPABILITY_ROOT / "TOOLS" / "codebook_lookup.py")]
@@ -1077,7 +1000,7 @@ class AGSMCPServer:
             from CAPABILITY.PRIMITIVES.skill_index import find_skills_by_intent
 
             query = args.get("query", "")
-            top_k = args.get("top_k", 5)
+            top_k = clamp_limit(args.get("top_k"), default=5)
             threshold = args.get("threshold")
 
             if not query:
@@ -1157,7 +1080,7 @@ class AGSMCPServer:
             from CAPABILITY.PRIMITIVES.cross_ref_index import find_related
 
             artifact_id = args.get("artifact_id", "")
-            top_k = args.get("top_k", 5)
+            top_k = clamp_limit(args.get("top_k"), default=5)
             threshold = args.get("threshold")
 
             if not artifact_id:
@@ -1348,7 +1271,7 @@ class AGSMCPServer:
         
         try:
             include_audit_log = args.get("include_audit_log", False)
-            limit = int(args.get("limit", 10))
+            limit = clamp_limit(args.get("limit"), default=10)
             
             # Basic session info
             session_info = {
@@ -1413,91 +1336,6 @@ class AGSMCPServer:
                 "isError": True
             }
 
-    def _tool_not_implemented(self, args: Dict) -> Dict:
-        """Placeholder for unimplemented tools."""
-        return {
-            "content": [{
-                "type": "text",
-                "text": "This tool is staged but not yet implemented. See MCP/MCP_SPEC.md for the implementation roadmap."
-            }],
-            "isError": False
-        }
-
-
-def _read_exact(stream, n: int) -> bytes:
-    """Read exactly n bytes from a buffered binary stream."""
-    buf = bytearray()
-    while len(buf) < n:
-        chunk = stream.read(n - len(buf))
-        if not chunk:
-            raise EOFError("EOF while reading message body")
-        buf.extend(chunk)
-    return bytes(buf)
-
-
-def _read_message(stdin, mode: Optional[str]) -> Tuple[Optional[Dict], Optional[str]]:
-    """Read one MCP message in either framed (Content-Length) or JSONL mode.
-
-    Returns: (request_dict_or_none, detected_mode)
-    """
-    if mode == "jsonl":
-        line = stdin.readline()
-        if not line:
-            return None, None
-        # Skip blank lines
-        while line in (b"\r\n", b"\n"):
-            line = stdin.readline()
-            if not line:
-                return None, None
-        return json.loads(line.decode("utf-8", errors="replace")), "jsonl"
-
-    # framed or auto-detect
-    first = stdin.readline()
-    if not first:
-        return None, None
-
-    # Skip blank lines
-    while first in (b"\r\n", b"\n"):
-        first = stdin.readline()
-        if not first:
-            return None, None
-
-    if not first.lower().startswith(b"content-length:"):
-        # Auto-detect fallback: treat as JSONL.
-        if mode == "framed":
-            raise ValueError("Expected Content-Length header, got JSON line")
-        return json.loads(first.decode("utf-8", errors="replace")), "jsonl"
-
-    # Framed: read headers until blank line
-    headers = [first]
-    while True:
-        line = stdin.readline()
-        if not line:
-            raise EOFError("EOF while reading headers")
-        if line in (b"\r\n", b"\n"):
-            break
-        headers.append(line)
-
-    content_length: Optional[int] = None
-    for h in headers:
-        if h.lower().startswith(b"content-length:"):
-            content_length = int(h.split(b":", 1)[1].strip())
-            break
-    if content_length is None:
-        raise ValueError("Missing Content-Length header")
-
-    body = _read_exact(stdin, content_length)
-    return json.loads(body.decode("utf-8", errors="replace")), "framed"
-
-
-def _write_framed_json(stdout, message: Dict) -> None:
-    body = json.dumps(message, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
-    header = f"Content-Length: {len(body)}\r\n\r\n".encode("ascii")
-    stdout.write(header)
-    stdout.write(body)
-    stdout.flush()
-
-
 def run_stdio():
     """Run the server in stdio mode.
 
@@ -1560,134 +1398,10 @@ def main():
         sys.exit(1)
 
     if args.test:
-        # Test mode: run sample requests for all implemented tools
-        server = AGSMCPServer()
-
-        print("="*60)
-        print("AGS MCP SERVER TEST")
-        print("="*60)
-
-        # Initialize
-        init_response = server.handle_request({
-            "jsonrpc": "2.0",
-            "id": 1,
-            "method": "initialize",
-            "params": {}
-        })
-        print("\n[OK] Initialize:", init_response["result"]["serverInfo"])
-
-        # List tools
-        tools_response = server.handle_request({
-            "jsonrpc": "2.0",
-            "id": 2,
-            "method": "tools/list",
-            "params": {}
-        })
-        tool_names = [t["name"] for t in tools_response["result"]["tools"]]
-        print(f"\n[OK] Tools available: {tool_names}")
-
-        # List resources
-        resources_response = server.handle_request({
-            "jsonrpc": "2.0",
-            "id": 3,
-            "method": "resources/list",
-            "params": {}
-        })
-        print(f"\n[OK] Resources available: {len(resources_response['result']['resources'])} resources")
-
-        # Test cortex_query
-        print("\n--- Testing cortex_query ---")
-        cortex_response = server.handle_request({
-            "jsonrpc": "2.0",
-            "id": 4,
-            "method": "tools/call",
-            "params": {"name": "cortex_query", "arguments": {"query": "packer"}}
-        })
-        content = cortex_response["result"]["content"][0]["text"]
-        is_error = cortex_response["result"].get("isError", False)
-        print(f"[OK] cortex_query('packer'): {'ERROR' if is_error else 'OK'} ({len(content)} chars)")
-        if not is_error and content:
-            try:
-                results = json.loads(content)
-                print(f"  Found {len(results)} results")
-            except Exception as e:
-                print(f"  Error parsing JSON: {e}, Output: {content[:100]}...")
-
-        # Test context_search
-        print("\n--- Testing context_search ---")
-        context_response = server.handle_request({
-            "jsonrpc": "2.0",
-            "id": 5,
-            "method": "tools/call",
-            "params": {"name": "context_search", "arguments": {"type": "decisions"}}
-        })
-        content = context_response["result"]["content"][0]["text"]
-        is_error = context_response["result"].get("isError", False)
-        print(f"[OK] context_search(type='decisions'): {'ERROR' if is_error else 'OK'} ({len(content)} chars)")
-        if not is_error and content:
-            try:
-                results = json.loads(content)
-                print(f"  Found {len(results)} records")
-            except Exception as e:
-                print(f"  Error parsing JSON: {e}, Output: {content[:100]}...")
-
-        # Test context_review
-        print("\n--- Testing context_review ---")
-        review_response = server.handle_request({
-            "jsonrpc": "2.0",
-            "id": 6,
-            "method": "tools/call",
-            "params": {"name": "context_review", "arguments": {"days": 30}}
-        })
-        content = review_response["result"]["content"][0]["text"]
-        is_error = review_response["result"].get("isError", False)
-        print(f"[OK] context_review(days=30): {'ERROR' if is_error else 'OK'} ({len(content)} chars)")
-        if not is_error and content:
-            try:
-                results = json.loads(content)
-                overdue = len(results.get("overdue", []))
-                upcoming = len(results.get("upcoming", []))
-                print(f"  Overdue: {overdue}, Upcoming: {upcoming}")
-            except Exception as e:
-                print(f"  Error parsing JSON: {e}, Output: {content[:100]}...")
-
-        # Test canon_read
-        print("\n--- Testing canon_read ---")
-        canon_response = server.handle_request({
-            "jsonrpc": "2.0",
-            "id": 7,
-            "method": "tools/call",
-            "params": {"name": "canon_read", "arguments": {"file": "CONTRACT"}}
-        })
-        content = canon_response["result"]["content"][0]["text"]
-        is_error = canon_response["result"].get("isError", False)
-        print(f"[OK] canon_read('CONTRACT'): {'ERROR' if is_error else 'OK'} ({len(content)} chars)")
-
-        # Test resource reading
-        print("\n--- Testing resources/read ---")
-        read_response = server.handle_request({
-            "jsonrpc": "2.0",
-            "id": 8,
-            "method": "resources/read",
-            "params": {"uri": "ags://canon/genesis"}
-        })
-        content = read_response["result"]["contents"][0]["text"]
-        print(f"[OK] resources/read('ags://canon/genesis'): {len(content)} chars")
-
-        # Test prompts/get
-        print("\n--- Testing prompts/get ---")
-        prompt_response = server.handle_request({
-            "jsonrpc": "2.0",
-            "id": 9,
-            "method": "prompts/get",
-            "params": {"name": "genesis"}
-        })
-        messages = prompt_response["result"].get("messages", [])
-        print(f"[OK] prompts/get('genesis'): {len(messages)} messages")
-
-        print("\n" + "="*60)
-        print("ALL TESTS COMPLETED")
-        print("="*60)
+        # Lazy import: selftest imports this module, so resolve it only when
+        # the flag is used (the module is fully loaded by then).
+        from .selftest import run_selftest
+        run_selftest()
         return
 
     # Default: stdio mode

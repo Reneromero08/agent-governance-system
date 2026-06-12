@@ -1,118 +1,90 @@
-<!-- CONTENT_HASH: ace4594b641ccc8c284e72ff1d1066667032311bf074b3eb843cbfbcd61149a3 -->
+<!-- CONTENT_HASH: a59474179532161f11d70450ec5d2894068abcab4e41a6a691141a001c169b5c -->
 
 # MCP Server Quick Start
 
-⚡ **Zero-setup auto-start: Just connect and it works!**
+The AGS MCP server runs over stdio: your MCP client launches it on demand.
+There is no daemon to start or stop.
 
 ---
 
-## Auto-Start (Recommended)
+## Connect a Client
 
-**No manual start needed!** The server auto-starts on first interaction.
+### Claude Desktop
 
-### For Claude Desktop
-
-Use the config in `MCP/claude_desktop_config.json`:
+Add to `%APPDATA%\Claude\claude_desktop_config.json` (Windows) or
+`~/Library/Application Support/Claude/claude_desktop_config.json` (macOS),
+adjusting the repository path for your machine:
 
 ```json
 {
   "mcpServers": {
     "ags": {
       "command": "python",
-      "args": ["D:/CCC 2.0/AI/agent-governance-system/LAW/CONTRACTS/_runs/ags_mcp_auto.py"],
+      "args": ["D:/CCC 2.0/AI/agent-governance-system/LAW/CONTRACTS/ags_mcp_entrypoint.py"],
       "cwd": "D:/CCC 2.0/AI/agent-governance-system"
     }
   }
 }
 ```
 
-**That's it!** Server starts automatically when Claude Desktop connects.
+Restart the client. The AGS tools appear automatically.
+
+A reference config lives at `CAPABILITY/MCP/claude_desktop_config.json`.
 
 ---
 
-## Manual Start (Optional)
+## Manual / Foreground Run
 
-If you prefer to start manually:
+```cmd
+CAPABILITY\MCP\start_simple.cmd
+```
+
+Runs the server over stdio in the current window. Ctrl+C to stop.
+
+For a persistent shared instance (PID file managed), use:
 
 ```powershell
-cd "d:\CCC 2.0\AI\agent-governance-system"
-
-# Start server
-.\CAPABILITY\MCP\autostart.ps1 -Start
-
-# Verify it's running
-.\CAPABILITY\MCP\autostart.ps1 -Status
+python CAPABILITY\MCP\server_wrapper.py
 ```
 
 ---
 
-## Common Commands
+## Verify It Works
 
 ```powershell
-.\CAPABILITY\MCP\autostart.ps1 -Start     # Start server
-.\CAPABILITY\MCP\autostart.ps1 -Stop      # Stop server
-.\CAPABILITY\MCP\autostart.ps1 -Status    # Check status
-.\CAPABILITY\MCP\autostart.ps1 -Restart   # Restart server
+# Built-in self test (initialize, tools, resources, prompts)
+python LAW\CONTRACTS\ags_mcp_entrypoint.py --test
+
+# Governance smoke test (exits non-zero on failure)
+python CAPABILITY\MCP\verify_governance.py
 ```
 
----
+**Check logs:**
 
-## Install Autostart (Optional)
-
-**Option 1: Windows Startup Folder (No Admin)**
-1. Press `Win+R`, type `shell:startup`
-2. Create shortcut to: `CAPABILITY\MCP\start_simple.cmd`
-
-**Option 2: Task Scheduler (Admin Required)**
 ```powershell
-# Run PowerShell as Administrator
-.\CAPABILITY\MCP\autostart.ps1 -Install
+Get-Content LAW\CONTRACTS\_runs\mcp_logs\audit.jsonl -Tail 20
 ```
-Server now starts automatically on boot.
 
 ---
 
 ## Who Can Connect?
 
-Once running, these can all connect simultaneously:
+Any MCP-capable client can spawn its own server instance over stdio:
 
-✅ **Claude Desktop** - via stdio config
-✅ **Governor Agent** - via MCP ledger
-✅ **Ant Workers** - via task queue
-✅ **VSCode Extensions** - via stdio
-✅ **Custom Scripts** - via stdio
+- Claude Desktop
+- VS Code extensions
+- Custom scripts and harnesses (e.g. hermes-harness)
 
-All share:
-- Same Cortex index
-- Same governance rules
-- Same audit trail
+All instances share:
+
+- Same cassette network and cortex index
+- Same governance rules (preflight, admission, critic)
+- Same audit trail (`LAW/CONTRACTS/_runs/mcp_logs/`)
 - Same skill library
-
----
-
-## Troubleshooting
-
-**Server won't start?**
-```powershell
-python MCP\server.py --test
-```
-
-**Check logs:**
-```powershell
-Get-Content LAW\CONTRACTS\_runs\mcp_logs\autostart.log -Tail 20
-```
 
 ---
 
 ## Next Steps
 
-- **Full Setup Guide:** [README.md](README.md)
-- **Connection Status:** Check with `.\CAPABILITY\MCP\autostart.ps1 -Status`
-- **Research Report:** [CATALYTIC-DPT/LAB/RESEARCH/MULTI_AGENT_MCP_COORDINATION.md](../CATALYTIC-DPT/LAB/RESEARCH/MULTI_AGENT_MCP_COORDINATION.md)
-
----
-
-**Status:** ✅ Ready
-**Test Result:** ALL TESTS PASSED
-**Startup Methods:** 4 available
-**Multi-Client:** Enabled
+- **Full setup guide:** [README.md](README.md)
+- **Protocol details:** [MCP_SPEC.md](MCP_SPEC.md)

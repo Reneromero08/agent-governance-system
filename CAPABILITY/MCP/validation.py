@@ -292,72 +292,19 @@ def verify_post_run_outputs(run_id: str) -> Dict:
     for idx, raw_path in enumerate(durable_paths):
         json_pointer = f"/outputs/durable_paths/{idx}"
 
-        # Check for absolute/traversal paths
-        if Path(raw_path).is_absolute():
-            errors.append({
-                "code": "PATH_ESCAPES_REPO_ROOT",
-                "message": f"Absolute paths are not allowed: {raw_path}",
-                "path": json_pointer,
-                "details": {"declared": raw_path, "reason": "absolute_path"}
-            })
-            continue
-
-        if ".." in Path(raw_path).parts:
-            errors.append({
-                "code": "PATH_CONTAINS_TRAVERSAL",
-                "message": f"Path contains forbidden traversal segment '..': {raw_path}",
-                "path": json_pointer,
-                "details": {"declared": raw_path, "segments": list(Path(raw_path).parts)}
-            })
-            continue
-
-        abs_path = (PROJECT_ROOT / raw_path).resolve()
-
-        # Check containment under PROJECT_ROOT
-        if not is_path_under_root(abs_path, PROJECT_ROOT.resolve()):
-            errors.append({
-                "code": "PATH_ESCAPES_REPO_ROOT",
-                "message": f"Path escapes repository root: {raw_path}",
-                "path": json_pointer,
-                "details": {"declared": raw_path, "resolved": str(abs_path)}
-            })
-            continue
-
-        # Check forbidden overlap
-        forbidden_hit = False
-        for forbidden in FORBIDDEN_ROOTS:
-            forbidden_abs = (PROJECT_ROOT / forbidden).resolve()
-            if is_path_under_root(abs_path, forbidden_abs) or is_path_under_root(forbidden_abs, abs_path):
-                errors.append({
-                    "code": "FORBIDDEN_PATH_OVERLAP",
-                    "message": f"Output overlaps forbidden root '{forbidden}': {raw_path}",
-                    "path": json_pointer,
-                    "details": {"declared": raw_path, "forbidden_root": forbidden}
-                })
-                forbidden_hit = True
-                break
-
-        if forbidden_hit:
-            continue
-
-        # Check under DURABLE_ROOTS
-        under_durable = False
-        for root in DURABLE_ROOTS:
-            root_abs = (PROJECT_ROOT / root).resolve()
-            if is_path_under_root(abs_path, root_abs):
-                under_durable = True
-                break
-
-        if not under_durable:
-            errors.append({
-                "code": "OUTPUT_OUTSIDE_DURABLE_ROOT",
-                "message": f"Output not under any durable root: {raw_path}",
-                "path": json_pointer,
-                "details": {"declared": raw_path, "durable_roots": DURABLE_ROOTS}
-            })
+        # Same CMP-01 rules as admission time; first violation wins per entry.
+        path_errors = validate_single_path(
+            raw_path,
+            json_pointer,
+            DURABLE_ROOTS,
+            "OUTPUT_OUTSIDE_DURABLE_ROOT"
+        )
+        if path_errors:
+            errors.extend(path_errors)
             continue
 
         # Check existence
+        abs_path = (PROJECT_ROOT / raw_path).resolve()
         if not abs_path.exists():
             errors.append({
                 "code": "OUTPUT_MISSING",

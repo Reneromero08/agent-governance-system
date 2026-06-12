@@ -59,9 +59,7 @@ cat > "$CHECK_IN" <<'EOF'
 {
   "operation": "precommit",
   "entrypoint": "LAW/CONTRACTS/ags_mcp_entrypoint.py",
-  "auto_entrypoint": "LAW/CONTRACTS/_runs/ags_mcp_auto.py",
   "args": ["--test"],
-  "auto_args": ["--test"],
   "require_running": true,
   "require_autostart": true,
   "dry_run": false

@@ -631,7 +631,10 @@ def _check_autostart(project_root: Path, bridge_config: str, timeout_seconds: in
 def op_precommit(payload: Dict[str, Any], output_path: Path, writer: GuardedWriter) -> int:
     """Pre-commit MCP health checks."""
     entrypoint = payload.get("entrypoint", "LAW/CONTRACTS/ags_mcp_entrypoint.py")
-    auto_entrypoint = payload.get("auto_entrypoint", "LAW/CONTRACTS/_runs/ags_mcp_auto.py")
+    # The legacy auto-start wrapper (ags_mcp_auto.py) no longer exists; the
+    # canonical entrypoint is LAW/CONTRACTS/ags_mcp_entrypoint.py. The auto
+    # check only runs when a path is explicitly provided.
+    auto_entrypoint = payload.get("auto_entrypoint", "")
     args = payload.get("args", ["--test"])
     auto_args = payload.get("auto_args", ["--test"])
     require_running = bool(payload.get("require_running", True))
@@ -664,16 +667,19 @@ def op_precommit(payload: Dict[str, Any], output_path: Path, writer: GuardedWrit
     else:
         checks["entrypoint"] = _result(False, error="ENTRYPOINT_MISSING", path=str(entry_path))
 
-    auto_path = PROJECT_ROOT / Path(auto_entrypoint)
-    if auto_path.exists():
-        result = _run_entrypoint(PROJECT_ROOT, auto_entrypoint, auto_args)
-        checks["auto_entrypoint"] = _result(
-            result.returncode == 0,
-            returncode=result.returncode,
-            output_tail=(result.stdout + result.stderr).strip()[-400:] if result.returncode != 0 else ""
-        )
+    if auto_entrypoint:
+        auto_path = PROJECT_ROOT / Path(auto_entrypoint)
+        if auto_path.exists():
+            result = _run_entrypoint(PROJECT_ROOT, auto_entrypoint, auto_args)
+            checks["auto_entrypoint"] = _result(
+                result.returncode == 0,
+                returncode=result.returncode,
+                output_tail=(result.stdout + result.stderr).strip()[-400:] if result.returncode != 0 else ""
+            )
+        else:
+            checks["auto_entrypoint"] = _result(False, error="ENTRYPOINT_MISSING", path=str(auto_path))
     else:
-        checks["auto_entrypoint"] = _result(False, error="ENTRYPOINT_MISSING", path=str(auto_path))
+        checks["auto_entrypoint"] = _result(True, skipped=True)
 
     if require_running:
         checks["running"] = _check_pid_running(PROJECT_ROOT, bridge_config, bridge_timeout)

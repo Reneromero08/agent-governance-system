@@ -15,6 +15,7 @@ ELO Integration (Phase E.5):
 
 import json
 import sys
+import threading
 from pathlib import Path
 from typing import Dict, List, Any, Optional
 
@@ -25,6 +26,14 @@ CAPABILITY_ROOT = PROJECT_ROOT / "CAPABILITY"
 sys.path.insert(0, str(CORTEX_ROOT))
 sys.path.insert(0, str(CORTEX_ROOT / "network"))
 sys.path.insert(0, str(CAPABILITY_ROOT))
+
+# clamp_limit guards client-supplied result limits. Dual import because this
+# module is loaded both as CAPABILITY.MCP.semantic_adapter (package context)
+# and as a top-level module via the server's fallback path.
+try:
+    from .primitives import clamp_limit
+except ImportError:
+    from MCP.primitives import clamp_limit
 
 # Cassette network is the primary semantic search system
 try:
@@ -91,12 +100,25 @@ class SemanticMCPAdapter:
         self.elo_db = None
         self.elo_engine = None
         self.session_id = session_id  # Passed from AGSMCPServer
+        self._init_lock = threading.Lock()
 
     def initialize(self):
         """Initialize semantic tools."""
         if not NETWORK_AVAILABLE:
             return {"error": "Cassette network not available"}
 
+        with self._init_lock:
+            return self._initialize_locked()
+
+    def _initialize_locked(self):
+        """Initialization body; caller must hold _init_lock."""
+        if self.network_hub is not None:
+            return {
+                "status": "already_initialized",
+                "cassettes_registered": len(self.network_hub.cassettes),
+                "memory_available": MEMORY_AVAILABLE,
+                "elo_available": self.elo_ranker is not None
+            }
         try:
             # Initialize cassette network
             self.network_hub = SemanticNetworkHub()
@@ -167,6 +189,52 @@ class SemanticMCPAdapter:
         """
         self.session_id = session_id
 
+    def _elo_log_search(self, tool: str, query: str, results: List[Dict],
+                        memory_fallback: bool = False) -> None:
+        """Log a search to search_log.jsonl for ELO calculation (Phase E.5).
+
+        Never raises; logging failures must not block tool calls.
+        """
+        if not (self.search_logger and self.session_id):
+            return
+        try:
+            log_results = []
+            for rank, r in enumerate(results, 1):
+                file_path = r.get("file_path") or r.get("path") or ""
+                if not file_path and memory_fallback:
+                    file_path = f"memory:{r.get('hash', '')}"
+                log_results.append({
+                    "hash": r.get("hash", r.get("content_hash", "")),
+                    "file_path": file_path,
+                    "rank": rank,
+                    "similarity": r.get("similarity", r.get("score", 0.0))
+                })
+            self.search_logger.log_search(
+                session_id=self.session_id,
+                tool=tool,
+                query=query,
+                results=log_results
+            )
+        except Exception as log_err:
+            print(f"[WARNING] Search logging failed: {log_err}", file=sys.stderr)
+
+    def _elo_annotate(self, results: List[Dict], normalize: bool = False) -> List[Dict]:
+        """Attach ELO metadata to results without re-ranking (Phase E.5).
+
+        Never raises; returns results unchanged on failure.
+        """
+        if not self.elo_ranker:
+            return results
+        try:
+            if normalize:
+                for r in results:
+                    r["file_path"] = r.get("path", r.get("file_path", ""))
+                    r["similarity"] = r.get("score", 0.0)
+            return self.elo_ranker.annotate_results(results)
+        except Exception as elo_err:
+            print(f"[WARNING] ELO annotation failed: {elo_err}", file=sys.stderr)
+            return results
+
     def cassette_network_query(self, args: Dict) -> Dict:
         """MCP tool: Query the cassette network.
 
@@ -188,7 +256,7 @@ class SemanticMCPAdapter:
 
         try:
             query = args.get("query", "")
-            top_k = int(args.get("limit", 10))
+            top_k = clamp_limit(args.get("limit"), default=10)
             capability = args.get("capability")
             cassette_filter = args.get("cassettes", [])
 
@@ -212,37 +280,9 @@ class SemanticMCPAdapter:
             all_results.sort(key=lambda x: x.get("score", 0), reverse=True)
             final_results = all_results[:top_k]
 
-            # ELO Integration: Log search and annotate results
-            if self.search_logger and self.session_id:
-                try:
-                    # Prepare results for logging (with required fields)
-                    log_results = []
-                    for rank, r in enumerate(final_results, 1):
-                        log_results.append({
-                            "hash": r.get("hash", r.get("content_hash", "")),
-                            "file_path": r.get("path", r.get("file_path", "")),
-                            "rank": rank,
-                            "similarity": r.get("score", 0.0)
-                        })
-                    self.search_logger.log_search(
-                        session_id=self.session_id,
-                        tool="cassette_network_query",
-                        query=query,
-                        results=log_results
-                    )
-                except Exception as log_err:
-                    print(f"[WARNING] Search logging failed: {log_err}", file=sys.stderr)
-
-            # ELO Integration: Annotate results with ELO metadata (no re-ranking)
-            if self.elo_ranker:
-                try:
-                    # Convert to format expected by elo_ranker
-                    for r in final_results:
-                        r["file_path"] = r.get("path", r.get("file_path", ""))
-                        r["similarity"] = r.get("score", 0.0)
-                    final_results = self.elo_ranker.annotate_results(final_results)
-                except Exception as elo_err:
-                    print(f"[WARNING] ELO annotation failed: {elo_err}", file=sys.stderr)
+            # ELO Integration: log search, then annotate (no re-ranking)
+            self._elo_log_search("cassette_network_query", query, final_results)
+            final_results = self._elo_annotate(final_results, normalize=True)
 
             return {
                 "content": [{
@@ -405,37 +445,14 @@ class SemanticMCPAdapter:
                     "isError": True
                 }
 
-            limit = int(args.get("limit", 10))
+            limit = clamp_limit(args.get("limit"), default=10)
             agent_id = args.get("agent_id")
 
             results = memory_query(query, limit, agent_id)
 
-            # ELO Integration: Log search
-            if self.search_logger and self.session_id:
-                try:
-                    log_results = []
-                    for rank, r in enumerate(results, 1):
-                        log_results.append({
-                            "hash": r.get("hash", ""),
-                            "file_path": r.get("file_path", f"memory:{r.get('hash', '')}"),
-                            "rank": rank,
-                            "similarity": r.get("similarity", r.get("score", 0.0))
-                        })
-                    self.search_logger.log_search(
-                        session_id=self.session_id,
-                        tool="memory_query",
-                        query=query,
-                        results=log_results
-                    )
-                except Exception as log_err:
-                    print(f"[WARNING] Search logging failed: {log_err}", file=sys.stderr)
-
-            # ELO Integration: Annotate results with ELO metadata
-            if self.elo_ranker:
-                try:
-                    results = self.elo_ranker.annotate_results(results)
-                except Exception as elo_err:
-                    print(f"[WARNING] ELO annotation failed: {elo_err}", file=sys.stderr)
+            # ELO Integration: log search, then annotate (no re-ranking)
+            self._elo_log_search("memory_query", query, results, memory_fallback=True)
+            results = self._elo_annotate(results)
 
             return {
                 "content": [{
@@ -531,36 +548,14 @@ class SemanticMCPAdapter:
                     "isError": True
                 }
 
-            limit = int(args.get("limit", 10))
+            limit = clamp_limit(args.get("limit"), default=10)
 
             neighbors = semantic_neighbors(memory_hash, limit)
 
-            # ELO Integration: Log search
-            if self.search_logger and self.session_id:
-                try:
-                    log_results = []
-                    for rank, n in enumerate(neighbors, 1):
-                        log_results.append({
-                            "hash": n.get("hash", ""),
-                            "file_path": n.get("file_path", f"memory:{n.get('hash', '')}"),
-                            "rank": rank,
-                            "similarity": n.get("similarity", n.get("score", 0.0))
-                        })
-                    self.search_logger.log_search(
-                        session_id=self.session_id,
-                        tool="semantic_neighbors",
-                        query=f"neighbors:{memory_hash}",
-                        results=log_results
-                    )
-                except Exception as log_err:
-                    print(f"[WARNING] Search logging failed: {log_err}", file=sys.stderr)
-
-            # ELO Integration: Annotate results with ELO metadata
-            if self.elo_ranker:
-                try:
-                    neighbors = self.elo_ranker.annotate_results(neighbors)
-                except Exception as elo_err:
-                    print(f"[WARNING] ELO annotation failed: {elo_err}", file=sys.stderr)
+            # ELO Integration: log search, then annotate (no re-ranking)
+            self._elo_log_search("semantic_neighbors", f"neighbors:{memory_hash}",
+                                 neighbors, memory_fallback=True)
+            neighbors = self._elo_annotate(neighbors)
 
             return {
                 "content": [{
@@ -673,7 +668,7 @@ class SemanticMCPAdapter:
                     "isError": True
                 }
 
-            limit = int(args.get("limit", 10))
+            limit = clamp_limit(args.get("limit"), default=10)
             result = session_resume(agent_id, limit)
 
             return {

@@ -59,10 +59,20 @@ $allowed = @()
 if ($config.allowed_prefixes) {
     $allowed = @($config.allowed_prefixes)
 }
+$allowAll = $false
+if ($config.PSObject.Properties.Name -contains "allow_all_commands") {
+    $allowAll = [bool]$config.allow_all_commands
+}
 
-if ($token -eq "CHANGE_ME") {
-    Write-Log "SECURITY: Token is still CHANGE_ME. Update powershell_bridge_config.json before starting." "ERROR"
-    throw "SECURITY: Bridge token not configured. Update powershell_bridge_config.json"
+# Fail closed: an unset/placeholder token would mean unauthenticated command
+# execution; an empty allowlist would mean any command is accepted.
+if ([string]::IsNullOrWhiteSpace($token) -or $token -eq "CHANGE_ME") {
+    Write-Log "SECURITY: Bridge token not configured. Set a unique token in powershell_bridge_config.json." "ERROR"
+    throw "SECURITY: Bridge token not configured. Set a unique token in powershell_bridge_config.json"
+}
+if ($allowed.Count -eq 0 -and -not $allowAll) {
+    Write-Log "SECURITY: allowed_prefixes is empty. Populate it, or set allow_all_commands=true to opt out (not recommended)." "ERROR"
+    throw "SECURITY: allowed_prefixes is empty. Populate it, or set allow_all_commands=true to opt out (not recommended)"
 }
 
 $listener = New-Object System.Net.HttpListener
@@ -94,10 +104,8 @@ try {
 
             $tokenHeader = $request.Headers["X-Bridge-Token"]
             $tokenQuery = $request.QueryString["token"]
-            if ($token -and $token -ne "CHANGE_ME") {
-                if ($tokenHeader -ne $token -and $tokenQuery -ne $token) {
-                    throw "UNAUTHORIZED"
-                }
+            if ($tokenHeader -ne $token -and $tokenQuery -ne $token) {
+                throw "UNAUTHORIZED"
             }
 
             $reader = New-Object System.IO.StreamReader($request.InputStream, $request.ContentEncoding)
@@ -114,8 +122,8 @@ try {
 
             if ($allowed.Count -gt 0) {
                 $matched = $false
-                foreach ($prefix in $allowed) {
-                    if ($command.StartsWith($prefix)) { $matched = $true; break }
+                foreach ($allowedPrefix in $allowed) {
+                    if ($command.StartsWith($allowedPrefix)) { $matched = $true; break }
                 }
                 if (-not $matched) { throw "COMMAND_NOT_ALLOWED" }
             }

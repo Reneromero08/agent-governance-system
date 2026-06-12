@@ -29,8 +29,9 @@ except ImportError:
     import re
     from dataclasses import dataclass, field
 
-    PROJECT_ROOT = Path(__file__).resolve().parents[1]
-    CONTEXT_DIR = PROJECT_ROOT / "CONTEXT"
+    # utilities -> TOOLS -> CAPABILITY -> repo root
+    PROJECT_ROOT = Path(__file__).resolve().parents[3]
+    CONTEXT_DIR = PROJECT_ROOT / "LAW" / "CONTEXT"
 
     @dataclass
     class ContextRecord:
@@ -54,8 +55,14 @@ except ImportError:
                 metadata[key.lower()] = value.strip()
             elif match := re.match(r'^(\w+):\s+(.+)$', line):
                 key, value = match.groups()
-                if key.lower() in ('status', 'date', 'review', 'confidence', 'impact', 'tags', 'type'):
+                if key.lower() in ('status', 'date', 'review', 'review_date',
+                                   'confidence', 'impact', 'tags', 'type'):
                     metadata[key.lower()] = value.strip()
+        # YAML frontmatter values are typically quoted
+        metadata = {k: v.strip('"\'') for k, v in metadata.items()}
+        # adr.schema.json names the field review_date; normalize to review
+        if 'review_date' in metadata and 'review' not in metadata:
+            metadata['review'] = metadata['review_date']
         return metadata
 
     def parse_record(path: Path):
@@ -115,7 +122,8 @@ except ImportError:
         return records
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+# utilities -> TOOLS -> CAPABILITY -> repo root
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
 
 def check_reviews(warn_days: int = 30) -> Dict[str, List[ContextRecord]]:

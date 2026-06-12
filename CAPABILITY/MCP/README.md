@@ -1,56 +1,21 @@
-<!-- CONTENT_HASH: 4ba71c6531d51c656447e3f993356045edc471b79581d081b2c611f023a2a393 -->
+<!-- CONTENT_HASH: c084fa70fe92bd7c6a309f083be69ecad337e9dffc70bfad5c4c25c26587e514 -->
 
 # MCP Integration README
 
 This directory contains the AGS MCP (Model Context Protocol) server, enabling external AI clients to interact with the Agent Governance System.
 
----
-
-## 🚀 **Quick Start - Automatic On-Demand**
-
-### **Option 1: Auto-Start (Recommended - Zero Setup)**
-
-**No manual start needed!** Just connect from any client and the server auto-starts.
-
-Use `LAW/CONTRACTS/_runs/ags_mcp_auto.py` as your entrypoint - server starts automatically on first interaction.
-
-**For Claude Desktop:** The config in `MCP/claude_desktop_config.json` is already configured for auto-start.
-
-### **Option 2: Manual Start**
-
-```powershell
-# 1. Start the server (runs in background)
-cd "d:\CCC 2.0\AI\agent-governance-system"
-.\CAPABILITY\MCP\autostart.ps1 -Start
-
-# 2. Verify it's running
-.\CAPABILITY\MCP\autostart.ps1 -Status
-```
-
-**Both work!** Multiple agents, extensions, and clients can connect simultaneously.
-
-### **Common Commands**
-
-| Command | What it does |
-|---------|-------------|
-| `.\CAPABILITY\MCP\autostart.ps1 -Start` | Start server in background |
-| `.\CAPABILITY\MCP\autostart.ps1 -Stop` | Stop the server |
-| `.\CAPABILITY\MCP\autostart.ps1 -Status` | Check if running |
-| `.\CAPABILITY\MCP\autostart.ps1 -Restart` | Restart the server |
-| `.\CAPABILITY\MCP\autostart.ps1 -Install` | Install autostart at boot (requires admin) |
-
-### **Alternative: Foreground Mode**
-
-```cmd
-CAPABILITY\MCP\start_simple.cmd
-```
-Runs in current window. Press Ctrl+C to stop.
+The server speaks JSON-RPC 2.0 over stdio. It supports both Content-Length framed messages (VS Code style clients) and newline-delimited JSON (simple clients); the mode is auto-detected from the first request.
 
 ---
 
-## Quick Start (Claude Desktop)
+## Quick Start
 
-**Recommended entrypoint:** `LAW/CONTRACTS/_runs/ags_mcp_auto.py` (auto-starts server, redirects audit logs to `LAW/CONTRACTS/_runs/mcp_logs/`).
+MCP clients launch the server themselves over stdio - there is no daemon to
+manage. Point your client at the canonical entrypoint:
+
+```
+LAW/CONTRACTS/ags_mcp_entrypoint.py
+```
 
 ### Connect Claude Desktop
 
@@ -58,23 +23,10 @@ Runs in current window. Press Ctrl+C to stop.
    - **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
    - **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
 
-2. Add this entry (or copy from `MCP/claude_desktop_config.json`):
+2. Add this entry (or copy from `CAPABILITY/MCP/claude_desktop_config.json`,
+   adjusting the repository path for your machine):
 
-**Windows (Auto-Start - Recommended):**
-
-```json
-{
-  "mcpServers": {
-    "ags": {
-      "command": "python",
-      "args": ["D:/CCC 2.0/AI/agent-governance-system/LAW/CONTRACTS/_runs/ags_mcp_auto.py"],
-      "cwd": "D:/CCC 2.0/AI/agent-governance-system"
-    }
-  }
-}
-```
-
-**Alternative (Manual Start Required):**
+**Windows:**
 
 ```json
 {
@@ -106,51 +58,54 @@ Runs in current window. Press Ctrl+C to stop.
 
 4. You should now see AGS tools available in Claude.
 
+### Foreground / manual run
+
+```cmd
+CAPABILITY\MCP\start_simple.cmd
+```
+
+Runs the server in the current window over stdio. Press Ctrl+C to stop.
+
+`server_wrapper.py` is an optional launcher that starts the server as a
+background process (PID file in `LAW/CONTRACTS/_runs/mcp_logs/server.pid`)
+for setups that want a single shared instance.
+
 ## Test the Server
 
 Run the built-in test:
+
 ```bash
 python LAW/CONTRACTS/ags_mcp_entrypoint.py --test
 ```
 
-Or use the verification skills:
-- `mcp-smoke` (CLI smoke test)
-- `mcp-extension-verify` (extension-agnostic checklist + smoke test)
+Run the governance smoke test (exits non-zero on failure):
+
+```bash
+python CAPABILITY/MCP/verify_governance.py
+```
 
 ## Available Tools
 
 | Tool | Description |
 |------|-------------|
-| `cortex_query` | Search the cortex index for files and entities |
-| `context_search` | Search ADRs, preferences, and other context records |
+| `context_search` | Search ADRs, preferences, and other context records in LAW/CONTEXT |
 | `context_review` | Check for overdue or upcoming ADR reviews |
 | `canon_read` | Read canon files (CONTRACT, INVARIANTS, etc.) |
-| `skill_run` | Execute an AGS skill with JSON input |
-| `pack_validate` | Validate a memory pack for completeness |
-| `critic_run` | Run governance checks via `TOOLS/critic.py` |
-| `adr_create` | Create a new ADR with the standard template |
-| `commit_ceremony` | Execute commit ceremony checks |
-| `codebook_lookup` | Look up codebook entries by ID |
-| `research_cache` | Manage the persistent research cache |
-| `terminal_bridge` | Execute a command via the local PowerShell bridge |
+| `skill_run` | Execute an AGS skill with JSON input (governed: preflight + admission + critic) |
+| `codebook_lookup` | Look up codebook entries by ID, with optional semantic query |
+| `skill_discovery` | Find skills matching a natural-language intent |
+| `find_related` | Find artifacts related to a given artifact ID |
+| `cassette_network_query` | Semantic search across the cassette network (NAVIGATION/CORTEX) |
+| `semantic_stats` | Embedding and cassette network statistics |
+| `memory` | Unified memory operations: save, query, recall, neighbors, stats |
+| `session_info` | Current MCP session metadata and audit log entries |
 
-## Terminal Bridge Setup
+Notes:
 
-The `terminal_bridge` tool sends commands to a local PowerShell HTTP bridge.
-
-1. Update the token in `CAPABILITY/MCP/powershell_bridge_config.json`.
-2. Start the bridge:
-
-```powershell
-.\CAPABILITY\MCP\powershell_bridge.ps1
-```
-
-3. If you keep the config elsewhere, set `MCP_TERMINAL_BRIDGE_CONFIG` to its path.
-
-WSL note: WSL2 cannot reach Windows services bound to 127.0.0.1. Set
-`listen_host` to `0.0.0.0` and `connect_host` to the Windows host IP
-(from WSL: `grep nameserver /etc/resolv.conf`) in
-`CAPABILITY/MCP/powershell_bridge_config.json`.
+- `skill_run` is the only tool that executes code. It is wrapped by the
+  governance gate (preflight, admission control, critic) and fails closed.
+- Skill execution has no timeout by default. Set the `AGS_SKILL_TIMEOUT`
+  environment variable (seconds) to bound it.
 
 ## Available Resources
 
@@ -160,8 +115,13 @@ WSL note: WSL2 cannot reach Windows services bound to 127.0.0.1. Set
 | `ags://canon/invariants` | The INVARIANTS.md (locked decisions) |
 | `ags://canon/genesis` | The Genesis Prompt for session bootstrap |
 | `ags://canon/versioning` | The VERSIONING.md |
+| `ags://canon/arbitration` | The ARBITRATION.md |
+| `ags://canon/deprecation` | The DEPRECATION.md |
+| `ags://canon/migration` | The MIGRATION.md |
 | `ags://context/decisions` | Live list of all ADRs |
 | `ags://context/preferences` | Live list of STYLE records |
+| `ags://context/rejected` | Live list of rejected proposals |
+| `ags://context/open` | Live list of open questions |
 | `ags://cortex/index` | Full cortex index in JSON |
 | `ags://maps/entrypoints` | The ENTRYPOINTS.md |
 | `ags://agents` | The AGENTS.md |
@@ -171,19 +131,40 @@ WSL note: WSL2 cannot reach Windows services bound to 127.0.0.1. Set
 | Name | Description |
 |------|-------------|
 | `genesis` | Bootstrap prompt for AGS session initialization |
-| `commit_ceremony` | Checklist for the commit ceremony |
-| `adr_template` | Template for creating new ADRs |
+| `skill_template` | Template for creating a new Skill |
+| `conflict_resolution` | Guide for resolving conflicts in Canon (Arbitration) |
+| `deprecation_workflow` | Checklist for deprecating tokens or features |
+
+## PowerShell Bridge (standalone)
+
+`powershell_bridge.ps1` is a local HTTP bridge for controlled command
+execution (used by the `powershell-bridge` skill). It is NOT exposed as an
+MCP tool.
+
+Security notes - read before starting it:
+
+1. Set a fresh token in `CAPABILITY/MCP/powershell_bridge_config.json`
+   (never reuse a token that has been committed to git).
+2. Populate `allowed_prefixes` with the commands you intend to allow.
+   The bridge refuses to start with an empty allowlist unless
+   `allow_all_commands` is explicitly set to `true`.
+3. Keep `listen_host` on `127.0.0.1` unless you need WSL2 access.
+
+WSL note: WSL2 cannot reach Windows services bound to 127.0.0.1. Set
+`listen_host` to `0.0.0.0` and `connect_host` to the Windows host IP
+(from WSL: `grep nameserver /etc/resolv.conf`) in
+`CAPABILITY/MCP/powershell_bridge_config.json`.
 
 ## Example Usage (in Claude)
 
 "Read the CONTRACT rules"
-→ Claude uses `canon_read` tool with `{"file": "CONTRACT"}`
+-> Claude uses `canon_read` tool with `{"file": "CONTRACT"}`
 
-"What files mention 'packer'?"
-→ Claude uses `cortex_query` tool with `{"query": "packer"}`
+"What do we know about the packer?"
+-> Claude uses `cassette_network_query` tool with `{"query": "packer"}`
 
 "Are any ADR reviews overdue?"
-→ Claude uses `context_review` tool
+-> Claude uses `context_review` tool
 
 "Run the pack-validate skill on the latest pack"
-→ Claude uses `skill_run` tool with `{"skill": "pack-validate", "input": {...}}`
+-> Claude uses `skill_run` tool with `{"skill": "pack-validate", "input": {...}}`

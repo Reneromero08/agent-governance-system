@@ -28,6 +28,12 @@ try:
 except ImportError:
     GuardedWriter = None
 
+# Canonical repo root resolution (fallback keeps this module standalone-safe)
+try:
+    from CAPABILITY.PRIMITIVES.paths import repo_root as _repo_root
+except ImportError:
+    _repo_root = None
+
 
 # =============================================================================
 # FILE LOCKING (Platform-specific)
@@ -62,6 +68,19 @@ else:
 # Configuration constants
 MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024  # 10MB limit for file reads
 MAX_RESULTS_PER_PAGE = 100
+
+
+def clamp_limit(value: Any, default: int = 10, maximum: int = MAX_RESULTS_PER_PAGE) -> int:
+    """Coerce a client-supplied limit/top_k into [1, maximum].
+
+    Non-numeric or missing input returns the default. Used by MCP tool
+    handlers so clients cannot request unbounded result sets.
+    """
+    try:
+        n = int(value)
+    except (TypeError, ValueError):
+        return default
+    return max(1, min(n, maximum))
 DEFAULT_POLL_INTERVAL = 5
 MAX_POLL_INTERVAL = 60
 BACKOFF_MULTIPLIER = 1.5
@@ -103,7 +122,10 @@ def get_validator_build_id(project_root: Optional[Path] = None) -> str:
         return _VALIDATOR_BUILD_ID_CACHE
 
     if project_root is None:
-        project_root = Path(__file__).resolve().parents[2]
+        if _repo_root is not None:
+            project_root = _repo_root()
+        else:
+            project_root = Path(__file__).resolve().parents[2]
 
     # Try git commit SHA first
     try:
@@ -280,6 +302,7 @@ def atomic_rewrite_jsonl(
         return True
 
     except Exception as e:
+        print(f"atomic_rewrite_jsonl failed for {file_path}: {e}", file=sys.stderr)
         try:
             if 'temp_path' in locals() and Path(temp_path).exists():
                 Path(temp_path).unlink()

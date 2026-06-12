@@ -89,17 +89,39 @@
                     "file": {
                         "type": "string",
                         "enum": [
-                            "CONTRACT",
-                            "INVARIANTS",
-                            "VERSIONING",
-                            "GENESIS",
+                            "AGENT_SEARCH_PROTOCOL",
+                            "AGREEMENT",
                             "ARBITRATION",
+                            "CATALYTIC_COMPUTING",
+                            "CMP-01_CATALYTIC_MUTATION_PROTOCOL",
+                            "CODEBOOK",
+                            "CONTRACT",
+                            "CRISIS",
                             "DEPRECATION",
-                            "MIGRATION",
+                            "DOCUMENT_POLICY",
+                            "FORMULA",
+                            "GENESIS",
+                            "GENESIS_COMPACT",
                             "GLOSSARY",
-                            "CHANGELOG"
+                            "IMPLEMENTATION_REPORTS",
+                            "INDEX",
+                            "INTEGRITY",
+                            "INVARIANTS",
+                            "MIGRATION",
+                            "SECURITY",
+                            "SPECTRUM-02_RESUME_BUNDLE",
+                            "SPECTRUM-03_CHAIN_VERIFICATION",
+                            "SPECTRUM-04_IDENTITY_SIGNING",
+                            "SPECTRUM-05_VERIFICATION_LAW",
+                            "SPECTRUM-06_RESTORE_RUNNER",
+                            "STEWARDSHIP",
+                            "SYSTEM_BUCKETS",
+                            "THE_SEMIOTIC_FOUNDATION_OF_TRUTH",
+                            "TOKEN_RECEIPT_SPEC",
+                            "VERIFICATION_PROTOCOL_CANON",
+                            "VERSIONING"
                         ],
-                        "description": "Name of the canon file to read"
+                        "description": "Name of the canon file to read (stems from LAW/CANON/canon.json)"
                     }
                 },
                 "required": [
