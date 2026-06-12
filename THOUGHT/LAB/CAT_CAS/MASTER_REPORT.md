@@ -1,7 +1,7 @@
 # Catalytic Space Complexity & Reversible Computing: Full Lab Master Report
 
 *Generated from ZIP + README + current master report on 2026-06-03.*  
-*Canonical audit ledger: `REPORTS/VIOLATIONS/ROADMAP_3.md` / uploaded `ROADMAP_3_VERIFIED.md`.*
+*Canonical audit ledger: `docs/REPORTS/VIOLATIONS/ROADMAP_3.md` / uploaded `ROADMAP_3_VERIFIED.md`.*
 
 ## 0. Source Custody
 

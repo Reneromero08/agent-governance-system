@@ -3,8 +3,8 @@
 **Root**: `THOUGHT/LAB/CAT_CAS/`
 
 > **Verification Status (2026-06-02):** This README is an experiment inventory and navigation
-> document. The canonical verification ledger is `REPORTS/VIOLATIONS/ROADMAP_3.md`. The compact
-> truth ledger is `REPORTS/master_report.md`. Some experiments have been partially verified,
+> document. The canonical verification ledger is `docs/REPORTS/VIOLATIONS/ROADMAP_3.md`. The compact
+> truth ledger is `docs/REPORTS/master_report.md`. Some experiments have been partially verified,
 > claim-weakened, or deprecated under audit. See Section 6 of master_report.md for a summary
 > and ROADMAP_3.md for per-item evidence.
 
@@ -569,16 +569,16 @@ This is achieved using **reversible computing**:
 | `docs/CONVENTIONS.md` | Naming and layout rules — single source of truth for how the lab is laid out |
 | `docs/STORAGE.md` | Large-data index: per-experiment, gitignored artifacts (source, size, regeneration) |
 | `_lib/` | Shared primitives defined once and imported (`paths.py`, `catalytic_engine.py`, `tree_eval.py`, `reversible_cpu.py`, `catalytic_tape.py`) |
-| `REPORTS/explainer.md` | Intuitive explanation: dirty tape, Landauer, reversible computing |
+| `docs/REPORTS/explainer.md` | Intuitive explanation: dirty tape, Landauer, reversible computing |
 | `MASTER_REPORT.md` | Root, uppercase. Canonical status/coverage matrix for all experiments + results |
-| `REPORTS/VIOLATIONS/ROADMAP_3_VERIFIED.md` | Canonical per-item audit ledger (roadmaps otherwise live per-experiment, not at root) |
-| `REPORTS/PUSHED_REPORT_FINAL_14.md` | **14 Infinity Exploits** — O(1) factorization, infinite KV context (3076.9x), absolute zero cross-talk, zero-latency generation |
-| `REPORTS/PUSHED_REPORT_INFINITY.md` | **5 Physical Limits Violated** — Bekenstein (Rank-1 holographic dual), Computronium (random noise computes), Schmidt (1 Bell pair steers 16M params), Landauer (Delta S=0), Arrow of Time (O(1) bootstrap) |
-| `REPORTS/VIOLATIONS/archive/5-21-2026_Integrity_Assessment.md` | Integrity audit of exps 4,5,7,16 |
+| `docs/REPORTS/VIOLATIONS/ROADMAP_3_VERIFIED.md` | Canonical per-item audit ledger (roadmaps otherwise live per-experiment, not at root) |
+| `docs/REPORTS/PUSHED_REPORT_FINAL_14.md` | **14 Infinity Exploits** — O(1) factorization, infinite KV context (3076.9x), absolute zero cross-talk, zero-latency generation |
+| `docs/REPORTS/PUSHED_REPORT_INFINITY.md` | **5 Physical Limits Violated** — Bekenstein (Rank-1 holographic dual), Computronium (random noise computes), Schmidt (1 Bell pair steers 16M params), Landauer (Delta S=0), Arrow of Time (O(1) bootstrap) |
+| `docs/REPORTS/VIOLATIONS/archive/5-21-2026_Integrity_Assessment.md` | Integrity audit of exps 4,5,7,16 |
 | `storage/` | Shared / leftover runtime files only — the quantum tapes moved to `07_quantum_simulator/data/` and `user_video.mp4` to `06_catalytic_neural_network/data/`. See [`docs/STORAGE.md`](docs/STORAGE.md) |
 | `workspace/` | Shared working files (config, bmps) |
-| `REPORTS/` | Audit reports, completed roadmap, codebase integrity |
-| `REPORTS/CODEBASE_AUDIT_REPORT_RESOLVED.md` | **254-line verified audit** — 4 critical bugs, 4 high bugs, 46 bare excepts, 3 inflated PUSHED_REPORT claims, 2 spelling errors. Key bugs: Exp 15 Feistel swap (100/100 failures), Exp 16 F16 weight loading, Exp 30 runtime crash, Exp 13 infinity cross-talk NOT zero |
+| `docs/REPORTS/` | Audit reports, completed roadmap, codebase integrity |
+| `docs/REPORTS/CODEBASE_AUDIT_REPORT_RESOLVED.md` | **254-line verified audit** — 4 critical bugs, 4 high bugs, 46 bare excepts, 3 inflated PUSHED_REPORT claims, 2 spelling errors. Key bugs: Exp 15 Feistel swap (100/100 failures), Exp 16 F16 weight loading, Exp 30 runtime crash, Exp 13 infinity cross-talk NOT zero |
 
 ---
 

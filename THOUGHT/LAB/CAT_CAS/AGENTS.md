@@ -11,7 +11,7 @@ The other docs and what they are for:
 - `README.md` - the experiment inventory / navigation map (what exists, exp 01-50).
 - `MANIFESTO.md` - the operating contract: core primitives, failure modes, and the
   mechanical critic (M-1..M-8) that runs on every commit.
-- `master_report.md` / `REPORTS/` - the compact truth ledger (what each result means,
+- `master_report.md` / `docs/REPORTS/` - the compact truth ledger (what each result means,
   what is verified vs partial vs deprecated). Check here for an experiment's real status.
 - `CAT_CAS_OS.md` - the full agent operating system: prime directive, claim hierarchy,
   failure hierarchy, verification standards, the oath. The verification-mode bible.

@@ -14,7 +14,7 @@ REPLACEMENT: See 2_hadamard_multiplex_correct.py in this directory.
 BASE EXPERIMENT: experiment.py (2-model QR subspace sharing) remains VALID
 with cross-talk at machine epsilon (1.98e-16). UNAFFECTED by this deprecation.
 
-Mastermind verification: REPORTS/VIOLATIONS/ROADMAP_3.md B-4
+Mastermind verification: docs/REPORTS/VIOLATIONS/ROADMAP_3.md B-4
 """
 """
 Grail: Orthogonal Multimodel (Experiment 13)

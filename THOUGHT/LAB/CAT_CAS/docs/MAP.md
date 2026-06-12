@@ -4,7 +4,7 @@ The whole lab on one page. Experiments are grouped into seven thematic **tracks*
 (see [CONVENTIONS.md](CONVENTIONS.md) §2). Each keeps its permanent number; the
 track is its folder. Authoritative status lives in
 [MASTER_REPORT.md](../MASTER_REPORT.md) and
-[REPORTS/VIOLATIONS/ROADMAP_3_VERIFIED.md](../REPORTS/VIOLATIONS/ROADMAP_3_VERIFIED.md);
+[REPORTS/VIOLATIONS/ROADMAP_3_VERIFIED.md](REPORTS/VIOLATIONS/ROADMAP_3_VERIFIED.md);
 this page is for navigation. For the full experiment-to-path index see
 [INDEX.md](INDEX.md).
 

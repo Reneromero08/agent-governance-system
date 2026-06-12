@@ -115,7 +115,7 @@ Retired genres: `PUSHED_REPORT.md` (fold into a "Pushed / Infinity" section of
 Use the six canonical states defined in [CAT_CAS_OS.md](../CAT_CAS_OS.md) §11 —
 `DONE`, `DONE-UNVERIFIED`, `COSMETIC`, `OPEN`, `DEFERRED`, `UNKNOWN`. The canonical
 per-experiment audit truth is
-[REPORTS/VIOLATIONS/ROADMAP_3_VERIFIED.md](../REPORTS/VIOLATIONS/ROADMAP_3_VERIFIED.md).
+[REPORTS/VIOLATIONS/ROADMAP_3_VERIFIED.md](REPORTS/VIOLATIONS/ROADMAP_3_VERIFIED.md).
 
 ## 9. Large data (>100 MB)
 

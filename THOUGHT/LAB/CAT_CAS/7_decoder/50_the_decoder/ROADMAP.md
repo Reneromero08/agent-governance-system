@@ -200,7 +200,7 @@ isomorphism (Level 6) that Exp 50 deliberately does NOT pre-claim.
 - The decodable class = abelian-HSP + topological invariants. Map each lab decoder
   (Exp 20 Shor, 34 Riemann, 35 halting, 45 Collatz/etc.) onto the decodable side and
   confirm none secretly relies on a non-normal/strong-sampling step.
-- Update `REPORTS/master_report.md` / `README.md` with Exp 50 once it stabilizes (this
+- Update `docs/REPORTS/master_report.md` / `README.md` with Exp 50 once it stabilizes (this
   is lab documentation, still inside CAT_CAS).
 
 ---
