@@ -17,7 +17,9 @@ path) · **[FROZEN]** active work, do not touch · **[STUB]** roadmap only, no c
 
 Catalytic basics → scaling the substrate to real inference → pushing physical
 limits and factorization → holographic/lattice structure → topological proofs →
-frontier-domain phases → the decoder that locates the wall.
+frontier domain phases (limits: event-horizon; proof-power: math; emergence
+built atom-up: atom -> energy -> chem -> bio -> consciousness as final boss) →
+the wall: decoder theory (49) + physical substrate crossing (50 ssh).
 
 ---
 
@@ -89,21 +91,21 @@ frontier-domain phases → the decoder that locates the wall.
 | 40 | 5d_floquet_oracle | 5D Floquet time-crystal oracle. |
 | 41 | toe_bulletproof | Closing the theoretical gaps in the topological ToE. |
 
-## 6_frontier_phases (42–49) — frontier physics & domain phases
+## 6_frontier_phases (42–48) — frontier physics & domain phases
 
 | # | Experiment | What |
 |---|------------|------|
 | 42 | computational_event_horizon | Floating-point singularities at the event horizon. Sub-tracks: `01_core` (base 1-11), `02_ultra` (speculative 12-19), `03_black_holes` (20-23), `04_cosmos` (24-28). |
-| 43 | phase_consciousness **[STUB]** | Qualia-engine roadmap; no code yet. |
-| 44 | phase_ssh_linux **[FROZEN]** | Physical / SSH-Linux substrate push. Active work — stays at lab root until done. |
-| 45 | phase_math | Millennium-problem oracles: collatz, navier-stokes, erdos, riemann, P-vs-NP, yang-mills. |
-| 46 | phase_bio | Biology oracles: protein folding, folding pathway, prion, genetic code, neural binding, morphogenesis (holds the cell CSV). |
-| 47 | phase_atom | Standard-model oracles: nucleus, electron edge states, pauli, LHC, higgs, quark confinement. |
-| 48 | phase_energy **[STUB]** | Energy-extraction roadmap; no code yet. |
-| 49 | phase_chem **[STUB]** | Topological-chemistry roadmap; no code yet. |
+| 43 | phase_math | Millennium-problem oracles: collatz, navier-stokes, erdos, riemann, P-vs-NP, yang-mills. |
+| 44 | phase_atom | Standard-model oracles: nucleus, electron edge states, pauli, LHC, higgs, quark confinement. **Note:** number 44 is transiently shared with the frozen root `44_phase_ssh_linux` (heading to 50); see CONVENTIONS.md §10. |
+| 45 | phase_energy **[STUB]** | Energy-extraction roadmap; no code yet. |
+| 46 | phase_chem **[STUB]** | Topological-chemistry roadmap; no code yet. |
+| 47 | phase_bio | Biology oracles: protein folding, folding pathway, prion, genetic code, neural binding, morphogenesis (holds the cell CSV). |
+| 48 | phase_consciousness **[STUB]** | Qualia-engine roadmap; no code yet. The final-boss frontier phase. |
 
-## 7_decoder (50)
+## 7_decoder (49–50)
 
 | # | Experiment | What |
 |---|------------|------|
-| 50 | the_decoder | Extractive proof + decodability boundary (14 sub-experiments): locates the irreducible wall at lattice hardness. |
+| 49 | the_decoder | Extractive proof + decodability boundary (14 sub-experiments): locates the irreducible wall at lattice hardness. |
+| 50 | phase_ssh_linux **[FROZEN]** | Physical test of crossing the decoder wall; currently at the lab root as `44_phase_ssh_linux` until unfrozen. Destination: `7_decoder/50_phase_ssh_linux`. |

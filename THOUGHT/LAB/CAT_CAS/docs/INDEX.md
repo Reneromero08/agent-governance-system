@@ -1,6 +1,6 @@
 # CAT_CAS Index
 
-Every experiment to its track path and primary report. See [MAP.md](MAP.md) for one-line purposes and [CONVENTIONS.md](CONVENTIONS.md) for naming.
+Every experiment to its track path and primary report. See [MAP.md](MAP.md) and [CONVENTIONS.md](CONVENTIONS.md).
 
 ## Foundations  (`1_foundations/`)
 
@@ -75,12 +75,12 @@ Every experiment to its track path and primary report. See [MAP.md](MAP.md) for 
 | Experiment | Path | Primary doc |
 |---|---|---|
 | 42_computational_event_horizon | `6_frontier_phases/42_computational_event_horizon/` | [REPORT.md](6_frontier_phases/42_computational_event_horizon/REPORT.md) |
-| 48_phase_consciousness | `6_frontier_phases/48_phase_consciousness/` | [ROADMAP_48_QUALIA_ENGINE.md](6_frontier_phases/48_phase_consciousness/ROADMAP_48_QUALIA_ENGINE.md) |
 | 43_phase_math | `6_frontier_phases/43_phase_math/` | [MASTER_REPORT_PHASE_43.md](6_frontier_phases/43_phase_math/MASTER_REPORT_PHASE_43.md) |
-| 47_phase_bio | `6_frontier_phases/47_phase_bio/` | [MASTER_REPORT_EXP_47.md](6_frontier_phases/47_phase_bio/MASTER_REPORT_EXP_47.md) |
 | 44_phase_atom | `6_frontier_phases/44_phase_atom/` | [AUDIT_REPORT_PHASE_44.md](6_frontier_phases/44_phase_atom/AUDIT_REPORT_PHASE_44.md) |
 | 45_phase_energy | `6_frontier_phases/45_phase_energy/` | [ROADMAP_45_ENERGY_EXTRACTION.md](6_frontier_phases/45_phase_energy/ROADMAP_45_ENERGY_EXTRACTION.md) |
 | 46_phase_chem | `6_frontier_phases/46_phase_chem/` | [ROADMAP_46_TOPOLOGICAL_CHEMISTRY.md](6_frontier_phases/46_phase_chem/ROADMAP_46_TOPOLOGICAL_CHEMISTRY.md) |
+| 47_phase_bio | `6_frontier_phases/47_phase_bio/` | [MASTER_REPORT_EXP_47.md](6_frontier_phases/47_phase_bio/MASTER_REPORT_EXP_47.md) |
+| 48_phase_consciousness | `6_frontier_phases/48_phase_consciousness/` | [ROADMAP_48_QUALIA_ENGINE.md](6_frontier_phases/48_phase_consciousness/ROADMAP_48_QUALIA_ENGINE.md) |
 
 ## Decoder  (`7_decoder/`)
 
@@ -92,4 +92,4 @@ Every experiment to its track path and primary report. See [MAP.md](MAP.md) for 
 
 | Experiment | Path | Note |
 |---|---|---|
-| 44_phase_ssh_linux | `44_phase_ssh_linux/` | Active work; moves into 6_frontier_phases when done |
+| 44_phase_ssh_linux | `44_phase_ssh_linux/` | Active work; -> 7_decoder/50_phase_ssh_linux when done |

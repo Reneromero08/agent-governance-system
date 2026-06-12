@@ -35,8 +35,8 @@ range** so it is never ambiguous:
 | `3_physics_complexity` | 14–24 | Bekenstein, factorization, NP, temporal |
 | `4_holographic` | 25–33 | lattice/crypto, graphs, wormholes, MERA |
 | `5_topological_proofs` | 34–41 | zeta/RH, halting oracles, ToE |
-| `6_frontier_phases` | 42–49 | event-horizon/cosmology, consciousness, ssh, math, bio, atom, energy, chem |
-| `7_decoder` | 50 | the decoder synthesis |
+| `6_frontier_phases` | 42–48 | limits (event-horizon) -> proof-power (math) -> emergence built atom-up (atom, energy, chem, bio) -> final boss (consciousness) |
+| `7_decoder` | 49–50 | the decoder theory (49) + physical substrate crossing (50 ssh, FROZEN at root) |
 
 New experiments append to the highest track or open `8_*` — never renumber 01–50.
 
@@ -126,5 +126,12 @@ out of the lab.
 ## 10. The frozen exception
 
 `44_phase_ssh_linux/` is active work. While frozen it stays at the CAT_CAS root
-and is exempt from every convention above. It moves into `6_frontier_phases/` only
-when the owner declares it done.
+and is exempt from every convention above. Its permanent destination is
+`7_decoder/50_phase_ssh_linux` (the physical test of crossing the decoder wall);
+it will move there when the owner declares it done.
+
+**Transient number collision:** During the freeze, experiment number 44 is used
+by two things simultaneously: `6_frontier_phases/44_phase_atom` (the live
+experiment) and the frozen root `44_phase_ssh_linux` (heading to 50). This is
+intentional and temporary. Once ssh unfreezes and moves to `7_decoder/50_phase_ssh_linux`,
+the collision disappears.
