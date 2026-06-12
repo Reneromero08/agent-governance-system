@@ -41,7 +41,7 @@ import torch
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Rust FFI
-_rust_dir = Path(__file__).parent.parent / "20.11e_rust_fm"
+_rust_dir = Path(__file__).parent.parent / "20_11e_rust_fm"
 if _rust_dir.exists():
     sys.path.insert(0, str(_rust_dir))
 

@@ -18,8 +18,8 @@
 
 | Phase | File | LOC | Mechanism |
 |---|---|---|---|
-| 35.1 | `35_topological_halting_oracle/35.1_hermitian_oracle/35_topological_halting_oracle.py` | 407 | Hermitian H, halt=zero-energy, p_halt_max, resolvent W |
-| 35.2 | `35_topological_halting_oracle/35.2_nonhermitian_oracle/36_nonhermitian_oracle.py` | 349 | Directed H, EP sink, point-gap twist W, kappa(V) |
+| 35.1 | `35_topological_halting_oracle/35_1_hermitian_oracle/35_topological_halting_oracle.py` | 407 | Hermitian H, halt=zero-energy, p_halt_max, resolvent W |
+| 35.2 | `35_topological_halting_oracle/35_2_nonhermitian_oracle/36_nonhermitian_oracle.py` | 349 | Directed H, EP sink, point-gap twist W, kappa(V) |
 | 35 | `35_topological_halting_oracle/PAPER.md` | 709 | Formal 9-experiment paper (read partial) |
 | 25/7 | `25_lattice_holography/7_holographic_oracle_svp.py` | 75 | Qwen 0.5B as "Quantum Oracle", prompt only |
 | 25/8 | `25_lattice_holography/8_eigenbuddy_lwe_oracle.py` | 188 | Qwen 0.5B + EigenBuddy tokenizer decoder |
@@ -39,10 +39,10 @@
 | 46.4 | `46_phase_bio/46_4_topological_genetic_code/46_4_topological_genetic_code_oracle.py` | 151 | 64-codon lattice, SGC vs random |
 | 46.5 | `46_phase_bio/46_5_neural_binding_oracle/46_5_neural_binding_oracle.py` | 136 | Watts-Strogatz connectome, lesion/anesthesia |
 | 46.6 | `46_phase_bio/46_6_morphogenesis_oracle/46_6_morphogenesis_oracle.py` | 149 | Epithelium, separated vs annihilated defects |
-| 20.10 | `20_catalytic_eigen_shor/20.10_tiny_compress_phase/1_holographic_phase_oracle.py` | 673 | Holographic Feistel-braided period detection |
-| 20.10.5 | `20_catalytic_eigen_shor/20.10_tiny_compress_phase/5_holo_oracle.py` | 292 | Unified Mandelbrot+Complex+Torus+Catalytic+.holo |
-| 34.7 | `34_zeta_eigenbasis/02_holographic_sieves/7_holo_riemann_oracle.py` | 175 | Prime scattering -> Riemann zeros via holo |
-| 34.20 | `34_zeta_eigenbasis/05_topological_proof/20_transcendent_winding_oracle.py` | 98 | O(1) asymptotic theta at t=10^100 |
+| 20.10 | `20_catalytic_eigen_shor/20_10_tiny_compress_phase/1_holographic_phase_oracle.py` | 673 | Holographic Feistel-braided period detection |
+| 20.10.5 | `20_catalytic_eigen_shor/20_10_tiny_compress_phase/5_holo_oracle.py` | 292 | Unified Mandelbrot+Complex+Torus+Catalytic+.holo |
+| 34.7 | `34_zeta_eigenbasis/34_2_holographic_sieves/7_holo_riemann_oracle.py` | 175 | Prime scattering -> Riemann zeros via holo |
+| 34.20 | `34_zeta_eigenbasis/34_5_topological_proof/20_transcendent_winding_oracle.py` | 98 | O(1) asymptotic theta at t=10^100 |
 | 42 | `42_computational_event_horizon/ULTRA/exp_19_oracle_machine/rust/src/main.rs` | (Rust) | INFINITY EDITION — Rust oracle machine |
 
 ### 1.2 Per-oracle reporting (referenced, not re-read in full)

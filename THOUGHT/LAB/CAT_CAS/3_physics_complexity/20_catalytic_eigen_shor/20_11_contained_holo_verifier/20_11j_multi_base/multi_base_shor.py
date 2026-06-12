@@ -15,7 +15,7 @@ import numpy as np, torch
 import psutil
 
 DEVICE=torch.device("cuda" if torch.cuda.is_available() else "cpu")
-_rd=Path(__file__).parent.parent/"20.11e_rust_fm"
+_rd=Path(__file__).parent.parent/"20_11e_rust_fm"
 if _rd.exists(): sys.path.insert(0,str(_rd))
 try: import catalytic_grating_ffi as cg; HAS_RUST=True
 except ImportError: HAS_RUST=False

@@ -154,7 +154,7 @@ critic). The essentials:
 - **Reuse the WORKING in-lab code, not the deprecated copy.** `holo_core.py` is
   dead-pathed under `THOUGHT/DEPRECATED/`; the live phase-cavity sieve is in
   `THOUGHT/LAB/HOLO/pipeline/02_cavity/`, and a working `analyze_spectrum` fallback lives
-  in `34_zeta_eigenbasis/02_holographic_sieves/8_riemann_harmonic_sieve.py`. A stale
+  in `34_zeta_eigenbasis/34_2_holographic_sieves/8_riemann_harmonic_sieve.py`. A stale
   import path means "not wired up," not "the method failed."
 - **Experiment layout:** `NN_name/` with entry `NN_name.py` (or sub-bricks
   `NN_M_subname/`), `REPORT_*.md`, optional `VERIFICATION_REPORT.md`, captured `output.txt`.

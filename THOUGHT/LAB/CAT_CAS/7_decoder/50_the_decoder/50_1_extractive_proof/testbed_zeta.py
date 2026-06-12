@@ -7,8 +7,8 @@ sweep frequency w, and the non-trivial Riemann zeros emerge as resonance peaks o
 |S(w)|. The zeros are NOT stored anywhere - they are a GLOBAL property of the whole
 prime stream (the explicit formula), invisible to any bounded window of primes.
 
-Mechanism copied from 34_zeta_eigenbasis/03_infinity_bootstrap/12_billion_prime_stream.py
-and 02_holographic_sieves/8_riemann_harmonic_sieve.py (zeta_zeros used for
+Mechanism copied from 34_zeta_eigenbasis/34_3_infinity_bootstrap/12_billion_prime_stream.py
+and 34_2_holographic_sieves/8_riemann_harmonic_sieve.py (zeta_zeros used for
 cross-validation ONLY - never fed to the decoder).
 """
 import math

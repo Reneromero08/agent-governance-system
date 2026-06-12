@@ -1,5 +1,5 @@
 """
-35.7_topological_classification.py
+35_7_topological_classification.py
 
 Topological classification of the TM halting Hamiltonian under
 non-Hermitian symmetry classes (38-fold way, Kawabata et al. 2019).

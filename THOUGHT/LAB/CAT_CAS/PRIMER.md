@@ -53,7 +53,7 @@ The distilled engine + filter. Gets ~90% of the lock at a fraction of the tokens
   `THOUGHT/LAB/CAT_CAS/README.md` (inventory), `THOUGHT/LAB/CAT_CAS/MASTER_REPORT.md` (real status).
 - Code map: `AGENTS.md` Section 5 (venv, in-lab constraint, M-4 trap, the WORKING holo
   lives in `THOUGHT/LAB/HOLO/pipeline/02_cavity/` and
-  `THOUGHT/LAB/CAT_CAS/34_zeta_eigenbasis/02_holographic_sieves/8_riemann_harmonic_sieve.py`,
+  `THOUGHT/LAB/CAT_CAS/34_zeta_eigenbasis/34_2_holographic_sieves/8_riemann_harmonic_sieve.py`,
   NOT the dead-pathed `THOUGHT/DEPRECATED/TINY_COMPRESS/holographic-image/holo_core.py`).
 - Task reports: load only what you touch (e.g.
   `THOUGHT/LAB/CAT_CAS/34_zeta_eigenbasis/REPORT_RIEMANN.md` for decoder work;

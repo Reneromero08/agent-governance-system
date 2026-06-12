@@ -6,7 +6,7 @@ deprecated holo_core.py has a stale import path - the METHOD is live):
 
   - period_from_1d        : Exp 20 (20.10/6_shor_solver.py:57-66), torch FFT autocorrelation.
   - analyze_spectrum/project : Exp 34.8 working PCA fallback
-                            (34_zeta_eigenbasis/02_holographic_sieves/8_riemann_harmonic_sieve.py:28-41).
+                            (34_zeta_eigenbasis/34_2_holographic_sieves/8_riemann_harmonic_sieve.py:28-41).
   - phase_cavity_sieve    : live HOLO pipeline
                             (THOUGHT/LAB/HOLO/pipeline/02_cavity/fractal_cavity.py:48-55).
 

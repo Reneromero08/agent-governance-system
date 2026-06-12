@@ -1,5 +1,5 @@
 """
-35.4_entanglement_mps_scaling.py
+35_4_entanglement_mps_scaling.py
 
 Entanglement scaling and MPS compression for TM halting on a Hatano-Nelson chain.
 

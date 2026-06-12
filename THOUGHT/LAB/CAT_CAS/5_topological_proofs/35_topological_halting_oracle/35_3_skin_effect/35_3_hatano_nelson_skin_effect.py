@@ -1,5 +1,5 @@
 """
-35.3_hatano_nelson_skin_effect.py
+35_3_hatano_nelson_skin_effect.py
 
 Infinite Tape Halting via Non-Hermitian Skin Effect.
 

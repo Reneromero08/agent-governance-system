@@ -2,7 +2,7 @@
 
 Faithful 1:1 wrapper of 36_nonhermitian_oracle.py.
 No math re-implementation. The source is loaded by file path because
-the directory name "35.2_nonhermitian_oracle" contains a dot and is
+the directory name "35_2_nonhermitian_oracle" contains a dot and is
 not importable as a regular Python module.
 
 Public API:
@@ -28,7 +28,7 @@ CAT_CAS_DIR = os.path.dirname(ORACLE_DIR)
 SOURCE_PATH = os.path.join(
     CAT_CAS_DIR,
     "35_topological_halting_oracle",
-    "35.2_nonhermitian_oracle",
+    "35_2_nonhermitian_oracle",
     "36_nonhermitian_oracle.py",
 )
 

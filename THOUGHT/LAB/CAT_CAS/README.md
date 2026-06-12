@@ -70,7 +70,7 @@ This is achieved using **reversible computing**:
 | Temporal Bootstrap | `17_temporal_bootstrap/` | hashlib | NP-complete 3-SAT in O(M), 1.16e6x |
 | Hawking Decompressor | `18_hawking_decompressor/` | hashlib | BH info recovery, 0J vs 2.66e9J |
 | Computronium | `19_catalytic_computronium/` | **Rust FFI** | Theoretical density, battery modes |
-| Eigen Shor Rust FFI | `20_catalytic_eigen_shor/20.1_base_eigen_shor/rust_ffi/` | PyO3 + Rayon | Parallel modular exponentiation |
+| Eigen Shor Rust FFI | `20_catalytic_eigen_shor/20_1_base_eigen_shor/rust_ffi/` | PyO3 + Rayon | Parallel modular exponentiation |
 | Phase Lasing / FFT QFT | `20_catalytic_eigen_shor/20.5/` | PyTorch FFT | Classical QFT via diffraction grating |
 | MUSIC Super-Resolution | `20_catalytic_eigen_shor/20.6/` | PyTorch | Sub-bin period extraction |
 | Phase Oracle Filter Bank | `20_catalytic_eigen_shor/20.9/` | PyTorch nn | Hermitian attention as phase estimator |
@@ -395,30 +395,30 @@ This is achieved using **reversible computing**:
 **Dir**: `34_zeta_eigenbasis/` | **Entry**: `python zeta_eigenbasis.py`
 - **What**: Riemann zeta zeros as eigenvalues of a Hermitian operator. Progressive escalation from Hilbert-Polya matrix constructions to Googolplex-scale topological proof. Tests Hilbert-Polya via .holo phase cavity and holographic quantum sieve (Exp 34.10).
 - **Files**:
-  - `01_spectral_foundations/0_zeta_eigenbasis.py` — Main: builds prime phase grating, eigendecomposes Hermitian covariance, compares to zeta zero distribution.
-  - `01_spectral_foundations/1_hp_matrix_search.py` — Exp 34.1: 4 matrix constructions from primes.
-  - `01_spectral_foundations/2_berry_keating.py` — Exp 34.2: Discrete Berry-Keating H = xp + px.
-  - `01_spectral_foundations/3_berry_keating_spectral.py` — Exp 34.3: Fourier spectral derivative Berry-Keating.
-  - `01_spectral_foundations/4_connes_scattering.py` — Exp 34.4: Connes adele scattering matrix.
-  - `01_spectral_foundations/5_bbm_pt_symmetric.py` — Exp 34.5: Bender-Brody-Muller PT-symmetric operator.
-  - `01_spectral_foundations/6_bbm_fock_basis.py` — Exp 34.6: BBM in exact odd-Fock basis.
-  - `02_holographic_sieves/7_holo_riemann_oracle.py` — Exp 34.7: Inject prime scattering phases into Qwen 0.5B hologram.
-  - `02_holographic_sieves/8_riemann_harmonic_sieve.py` — Exp 34.8: One-pass topological Moiré decomposition extracting Riemann Zeros.
-  - `02_holographic_sieves/9_infinity_riemann_sieve.py` — Exp 34.9: Infinity Riemann Sieve via O(1) memory dimensional collapse.
-  - `02_holographic_sieves/10_holographic_quantum_sieve.py` — Exp 34.10: 100-qubit continuous phase cavity.
-  - `03_infinity_bootstrap/11_temporal_infinity_proof.py` — Exp 34.11: Prime Hamiltonian Evolution and exact unitary U^dagger uncompute.
-  - `03_infinity_bootstrap/12_billion_prime_stream.py` — Exp 34.12: 10B Prime 1D Vector Collapse on GPU VRAM.
-  - `03_infinity_bootstrap/13_temporal_infinity_stream.py` — Exp 34.13: Temporal Bootstrap borrowing infinite known zeros for O(1) verification.
-  - `03_infinity_bootstrap/14_riemann_zero_telescope.py` — Exp 34.14: First-principles blind scan discovery of Riemann Zeros via Riemann-Siegel.
-  - `03_infinity_bootstrap/15_pushed_infinity_telescope.py` — Exp 34.15: Pushing to 1000 zeros at 50-digit precision with 100% verification.
-  - `04_catalytic_engines/16_catalytic_zero_engine.py` — Exp 34.16: True Catalytic Zero Engine using 1MB tape for sequential zero computation.
-  - `04_catalytic_engines/17_temporal_bootstrap_engine.py` — Exp 34.17: Temporal Bootstrap Engine with true O(1) random access up to 10^13.
-  - `03_infinity_bootstrap/18_googol_zero_telescope.py` — Exp 34.18: Googolplex Zero Telescope. Uses Lambert W asymptotic holography to jump to the 10^100th zero.
-  - `05_topological_proof/19_topological_zeta_winding.py` — Exp 34.19: Topological Zeta Winding. Computes 2D Chern topological charge to prove zeros are locked to the critical line.
-   - `05_topological_proof/20_transcendent_winding_oracle.py` — Exp 34.20: Transcendent Winding Oracle. Pushes the topological winding proof to a Googolplex scale ($10^{100}$) using O(1) asymptotic phase integration.
-   - `05_topological_proof/21_absolute_infinity_collapse.py` — Exp 34.21: Absolute Infinity Collapse. Pushes to 64-bit architectural limit (9 Quintillion exponent). Phase delta=0.0 — Computational Event Horizon.
+  - `34_1_spectral_foundations/0_zeta_eigenbasis.py` — Main: builds prime phase grating, eigendecomposes Hermitian covariance, compares to zeta zero distribution.
+  - `34_1_spectral_foundations/1_hp_matrix_search.py` — Exp 34.1: 4 matrix constructions from primes.
+  - `34_1_spectral_foundations/2_berry_keating.py` — Exp 34.2: Discrete Berry-Keating H = xp + px.
+  - `34_1_spectral_foundations/3_berry_keating_spectral.py` — Exp 34.3: Fourier spectral derivative Berry-Keating.
+  - `34_1_spectral_foundations/4_connes_scattering.py` — Exp 34.4: Connes adele scattering matrix.
+  - `34_1_spectral_foundations/5_bbm_pt_symmetric.py` — Exp 34.5: Bender-Brody-Muller PT-symmetric operator.
+  - `34_1_spectral_foundations/6_bbm_fock_basis.py` — Exp 34.6: BBM in exact odd-Fock basis.
+  - `34_2_holographic_sieves/7_holo_riemann_oracle.py` — Exp 34.7: Inject prime scattering phases into Qwen 0.5B hologram.
+  - `34_2_holographic_sieves/8_riemann_harmonic_sieve.py` — Exp 34.8: One-pass topological Moiré decomposition extracting Riemann Zeros.
+  - `34_2_holographic_sieves/9_infinity_riemann_sieve.py` — Exp 34.9: Infinity Riemann Sieve via O(1) memory dimensional collapse.
+  - `34_2_holographic_sieves/10_holographic_quantum_sieve.py` — Exp 34.10: 100-qubit continuous phase cavity.
+  - `34_3_infinity_bootstrap/11_temporal_infinity_proof.py` — Exp 34.11: Prime Hamiltonian Evolution and exact unitary U^dagger uncompute.
+  - `34_3_infinity_bootstrap/12_billion_prime_stream.py` — Exp 34.12: 10B Prime 1D Vector Collapse on GPU VRAM.
+  - `34_3_infinity_bootstrap/13_temporal_infinity_stream.py` — Exp 34.13: Temporal Bootstrap borrowing infinite known zeros for O(1) verification.
+  - `34_3_infinity_bootstrap/14_riemann_zero_telescope.py` — Exp 34.14: First-principles blind scan discovery of Riemann Zeros via Riemann-Siegel.
+  - `34_3_infinity_bootstrap/15_pushed_infinity_telescope.py` — Exp 34.15: Pushing to 1000 zeros at 50-digit precision with 100% verification.
+  - `34_4_catalytic_engines/16_catalytic_zero_engine.py` — Exp 34.16: True Catalytic Zero Engine using 1MB tape for sequential zero computation.
+  - `34_4_catalytic_engines/17_temporal_bootstrap_engine.py` — Exp 34.17: Temporal Bootstrap Engine with true O(1) random access up to 10^13.
+  - `34_3_infinity_bootstrap/18_googol_zero_telescope.py` — Exp 34.18: Googolplex Zero Telescope. Uses Lambert W asymptotic holography to jump to the 10^100th zero.
+  - `34_5_topological_proof/19_topological_zeta_winding.py` — Exp 34.19: Topological Zeta Winding. Computes 2D Chern topological charge to prove zeros are locked to the critical line.
+   - `34_5_topological_proof/20_transcendent_winding_oracle.py` — Exp 34.20: Transcendent Winding Oracle. Pushes the topological winding proof to a Googolplex scale ($10^{100}$) using O(1) asymptotic phase integration.
+   - `34_5_topological_proof/21_absolute_infinity_collapse.py` — Exp 34.21: Absolute Infinity Collapse. Pushes to 64-bit architectural limit (9 Quintillion exponent). Phase delta=0.0 — Computational Event Horizon.
 - **REPORT.md** (315 lines): Documents full escalation 34.11-34.21. Key results: Temporal Infinity Proof (Prime Hamiltonian Hermitian, 0 bits), 10-Billion Prime Stream (455M primes GPU-sieved, found zeros #9-#10 naturally), Riemann Zero Telescope (blind discovery of 11 zeros, zero #3 perfect 0.00e+00 error, 22.72s), Pushed Infinity (1000 zeros @ 50-digit, 100% verified |Z|<1e-45, GUE gap distribution), Googolplex Zero Shadow (2.806e98 via Lambert W in 0.002s), Topological Winding (critical charge +3 exactly, off-critical 0), Transcendent Winding Oracle (35.78B zeros in 1B-window at Googol), Absolute Infinity Collapse (64-bit limit reached, step absorbed by vacuum).
-  - `05_topological_proof/21_absolute_infinity_collapse.py` — Exp 34.21: Absolute Infinity Collapse. Pushes the phase equation to $n = 10^{9 \times 10^{18}}$, the absolute physical 64-bit exponent memory limit. Phase delta becomes structurally completely frozen (`0.0`).
+  - `34_5_topological_proof/21_absolute_infinity_collapse.py` — Exp 34.21: Absolute Infinity Collapse. Pushes the phase equation to $n = 10^{9 \times 10^{18}}$, the absolute physical 64-bit exponent memory limit. Phase delta becomes structurally completely frozen (`0.0`).
 ### 35: Topological Halting Oracle — The Core Proof (9 sub-experiments)
 **Dir**: `35_topological_halting_oracle/` | **Entry**: Various
 - **What**: Turing's Halting Problem reframed as a topological phase transition in non-Hermitian Hamiltonians. **Point-gap winding number W distinguishes HALTS (W=0, spectral collapse into Exceptional Point via Non-Hermitian Skin Effect) from LOOPS (W != 0, spectral loop encircling the EP).** Godel obstruction = Z_2 Chern tear at lambda=0.

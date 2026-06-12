@@ -60,6 +60,6 @@ copy target\release\catalytic_ffi.dll target\release\catalytic_ffi.pyd
 | `THOUGHT/LAB/CAT_CAS/3_physics_complexity/16_catalytic_27b_inference/_test_cavity_full.py` | Latent Phase Cavity (95% validated) |
 | `THOUGHT/LAB/HOLO/4_holographic_brain/auto_feedback.py` | HOLO 4.5: Phase Adapters + Wave Attention — faster path |
 | `THOUGHT/LAB/EIGEN_BUDDY/eigen_buddy_tokenizer.py` | EigenBuddy with complex SVD compression + --data flag |
-| `THOUGHT/LAB/CAT_CAS/3_physics_complexity/20_catalytic_eigen_shor/20.10_tiny_compress_phase/` | Moire decomposition, Phase Cavity, latent lattice — algorithm source |
+| `THOUGHT/LAB/CAT_CAS/3_physics_complexity/20_catalytic_eigen_shor/20_10_tiny_compress_phase/` | Moire decomposition, Phase Cavity, latent lattice — algorithm source |
 | `THOUGHT/LAB/CAT_CAS/3_physics_complexity/21_holographic_elliptic_sieve/` | Next level: elliptic curve factoring via phase resonance |
 | `THOUGHT/LAB/CAT_CAS/3_physics_complexity/16_catalytic_27b_inference/ROADMAP.md` | Updated roadmap |

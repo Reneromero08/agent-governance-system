@@ -1,5 +1,5 @@
 """
-35.6_quantum_advantage.py
+35_6_quantum_advantage.py
 
 Quantum advantage analysis for topological halting via LCU dilation,
 Loschmidt echo, and QPE resource scaling.

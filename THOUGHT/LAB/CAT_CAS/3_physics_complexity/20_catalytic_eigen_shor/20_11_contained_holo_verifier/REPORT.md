@@ -136,7 +136,7 @@ Rust grating construction is ~0.5s per 100M elements (parallelized).
 
 ---
 
-## 20.11f: Unified Catalytic Moire (`20.11f_unified/unified_moire_shor.py`)
+## 20.11f: Unified Catalytic Moire (`20_11f_unified/unified_moire_shor.py`)
 
 **Goal**: Combine all lab techniques into one pipeline — Moire decomposition,
 phase cavity, complex-native .holo, catalytic tape verification.
@@ -172,7 +172,7 @@ bits  factored?  method                         time
 
 ---
 
-## 20.11g: Streaming Chunked Autocorrelation (`20.11g_streaming/streaming_shor.py`)
+## 20.11g: Streaming Chunked Autocorrelation (`20_11g_streaming/streaming_shor.py`)
 
 **Goal**: Break the GPU VRAM ceiling by streaming grating chunks from Rust
 directly to GPU, accumulating power spectrum via Bartlett's method.

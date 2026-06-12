@@ -13,7 +13,7 @@ is the shared observation surface.
 import sys,time,math,random,numpy as np,torch; torch.cuda.empty_cache()
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
-sys.path.insert(0,str(Path(__file__).resolve().parent.parent / "20.11e_rust_fm"))
+sys.path.insert(0,str(Path(__file__).resolve().parent.parent / "20_11e_rust_fm"))
 import catalytic_grating_ffi as cg
 DEV=torch.device('cuda'); CHUNK=64*1024*1024
 
