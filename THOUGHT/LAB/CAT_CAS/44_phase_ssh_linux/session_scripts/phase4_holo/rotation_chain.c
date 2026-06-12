@@ -90,6 +90,7 @@ int main(){
     rot(SLOT_R2,SLOT_OUTPUT,l3);uint64_t a3=tape_words[SLOT_OUTPUT];
     printf("  L1=0x%016lx L2=0x%016lx L3=0x%016lx distinct: %s\n",a1,a2,a3,(a1!=a2&&a2!=a3)?"YES":"NO");
     rot(SLOT_R2,SLOT_OUTPUT,l3);rot(SLOT_R1,SLOT_R2,l2);rot(SLOT_MASTER,SLOT_R1,l1);
+    sha256_tape(hr);
     printf("  Restored: %s\n\n",hmatch(h0,hr)?"YES":"NO"); all&=hmatch(h0,hr);
 
     // Test 4

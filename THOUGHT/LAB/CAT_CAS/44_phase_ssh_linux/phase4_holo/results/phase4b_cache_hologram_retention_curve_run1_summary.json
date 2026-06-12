@@ -1,0 +1,104 @@
+{
+  "all_delay_pass": true,
+  "all_restore": true,
+  "by_delay": {
+    "0": {
+      "delay_class": 0,
+      "delay_pauses": 0,
+      "gates": {
+        "pseudo_declared_le_0_35": true,
+        "pseudo_reject_floor_ge_0_90": true,
+        "real_accuracy_ge_0_60": true,
+        "real_floor_ge_0_45": true,
+        "real_vs_pseudo_floor_ge_0_90": true,
+        "wrong_actual_ge_0_60": true,
+        "wrong_declared_le_0_20": true
+      },
+      "pass": true,
+      "pseudo_declared_match": 0.253125,
+      "pseudo_reject_floor": 1.0,
+      "real_accuracy": 0.9484375,
+      "real_mode_accuracy_floor": 0.86875,
+      "real_vs_pseudo_accuracy_floor": 0.978125,
+      "rows": 3840,
+      "test_rows": 1920,
+      "wrong_actual_match": 0.95625,
+      "wrong_declared_match": 0.0125
+    },
+    "1": {
+      "delay_class": 1,
+      "delay_pauses": 512,
+      "gates": {
+        "pseudo_declared_le_0_35": true,
+        "pseudo_reject_floor_ge_0_90": true,
+        "real_accuracy_ge_0_60": true,
+        "real_floor_ge_0_45": true,
+        "real_vs_pseudo_floor_ge_0_90": true,
+        "wrong_actual_ge_0_60": true,
+        "wrong_declared_le_0_20": true
+      },
+      "pass": true,
+      "pseudo_declared_match": 0.2671875,
+      "pseudo_reject_floor": 0.975,
+      "real_accuracy": 0.959375,
+      "real_mode_accuracy_floor": 0.90625,
+      "real_vs_pseudo_accuracy_floor": 0.98125,
+      "rows": 3840,
+      "test_rows": 1920,
+      "wrong_actual_match": 0.934375,
+      "wrong_declared_match": 0.0171875
+    },
+    "2": {
+      "delay_class": 2,
+      "delay_pauses": 4096,
+      "gates": {
+        "pseudo_declared_le_0_35": true,
+        "pseudo_reject_floor_ge_0_90": true,
+        "real_accuracy_ge_0_60": true,
+        "real_floor_ge_0_45": true,
+        "real_vs_pseudo_floor_ge_0_90": true,
+        "wrong_actual_ge_0_60": true,
+        "wrong_declared_le_0_20": true
+      },
+      "pass": true,
+      "pseudo_declared_match": 0.1953125,
+      "pseudo_reject_floor": 1.0,
+      "real_accuracy": 0.95625,
+      "real_mode_accuracy_floor": 0.875,
+      "real_vs_pseudo_accuracy_floor": 0.96875,
+      "rows": 3840,
+      "test_rows": 1920,
+      "wrong_actual_match": 0.946875,
+      "wrong_declared_match": 0.0140625
+    },
+    "3": {
+      "delay_class": 3,
+      "delay_pauses": 32768,
+      "gates": {
+        "pseudo_declared_le_0_35": true,
+        "pseudo_reject_floor_ge_0_90": true,
+        "real_accuracy_ge_0_60": true,
+        "real_floor_ge_0_45": true,
+        "real_vs_pseudo_floor_ge_0_90": true,
+        "wrong_actual_ge_0_60": true,
+        "wrong_declared_le_0_20": true
+      },
+      "pass": true,
+      "pseudo_declared_match": 0.2421875,
+      "pseudo_reject_floor": 0.9375,
+      "real_accuracy": 0.9515625,
+      "real_mode_accuracy_floor": 0.875,
+      "real_vs_pseudo_accuracy_floor": 0.94375,
+      "rows": 3840,
+      "test_rows": 1920,
+      "wrong_actual_match": 0.95,
+      "wrong_declared_match": 0.0125
+    }
+  },
+  "hash_restore_total": 15360,
+  "hash_restored": 15360,
+  "input": "phase4_holo\\results\\phase4b_cache_hologram_retention_curve_run1.csv",
+  "max_passing_delay_pauses": 32768,
+  "rows": 15360,
+  "verdict": "PHASE4B_RETENTION_WINDOW_PASS"
+}

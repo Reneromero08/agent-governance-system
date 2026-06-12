@@ -1,0 +1,105 @@
+{
+  "all_restore": true,
+  "by_mode_accuracy": {
+    "basis": 0.96875,
+    "mini": 0.625,
+    "random_reversible": 0.125,
+    "residual": 0.984375,
+    "rotation": 0.9869791666666666
+  },
+  "centroids": {
+    "basis": 165.70547473659005,
+    "mini": 173.41678352029916,
+    "random_reversible": 1475.5651041666667,
+    "residual": 166.49856770833333,
+    "rotation": 172.3071521577381
+  },
+  "confusion": {
+    "basis": {
+      "basis": 372,
+      "mini": 5,
+      "random_reversible": 6,
+      "residual": 0,
+      "rotation": 1
+    },
+    "mini": {
+      "basis": 6,
+      "mini": 240,
+      "random_reversible": 14,
+      "residual": 124,
+      "rotation": 0
+    },
+    "random_reversible": {
+      "basis": 108,
+      "mini": 30,
+      "random_reversible": 48,
+      "residual": 96,
+      "rotation": 102
+    },
+    "residual": {
+      "basis": 2,
+      "mini": 1,
+      "random_reversible": 3,
+      "residual": 378,
+      "rotation": 0
+    },
+    "rotation": {
+      "basis": 0,
+      "mini": 0,
+      "random_reversible": 5,
+      "residual": 0,
+      "rotation": 379
+    }
+  },
+  "feature_means": {
+    "basis": {
+      "basis": 166.7292190493295,
+      "mini": 55.566831931089745,
+      "random_reversible": 1456.6380208333333,
+      "residual": -11.440690104166668,
+      "rotation": 4.4567754836309526
+    },
+    "mini": {
+      "basis": 105.7933429118774,
+      "mini": 173.54527243589743,
+      "random_reversible": 1464.8697916666667,
+      "residual": 150.22256944444445,
+      "rotation": 68.02678571428571
+    },
+    "random_reversible": {
+      "basis": 23.94562679597701,
+      "mini": 10.30807625534188,
+      "random_reversible": 1473.7708333333333,
+      "residual": -15.673046874999999,
+      "rotation": 25.14997209821429
+    },
+    "residual": {
+      "basis": 10.643588362068966,
+      "mini": 68.13918936965813,
+      "random_reversible": 1427.4973958333333,
+      "residual": 166.97977430555554,
+      "rotation": 1.6650855654761898
+    },
+    "rotation": {
+      "basis": 3.1558234554597693,
+      "mini": 54.394556290064095,
+      "random_reversible": 1465.18359375,
+      "residual": -24.04763454861111,
+      "rotation": 171.80312965029762
+    }
+  },
+  "gates": {
+    "all_rows_restore": true,
+    "heldout_accuracy_ge_0_60": true,
+    "real_mode_accuracy_floor_ge_0_50": true
+  },
+  "hash_restore_total": 3840,
+  "hash_restored": 3840,
+  "heldout_accuracy": 0.7380208333333333,
+  "input": "phase4_holo\\results\\phase4b_cache_hologram_mode_classifier.csv",
+  "real_mode_accuracy_floor": 0.625,
+  "rows": 3840,
+  "test_rows": 1920,
+  "train_rows": 1920,
+  "verdict": "PHASE4B_CACHE_HOLOGRAM_WITNESS"
+}

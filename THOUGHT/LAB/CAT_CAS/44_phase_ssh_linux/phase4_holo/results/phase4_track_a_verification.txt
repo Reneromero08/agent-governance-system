@@ -1,0 +1,152 @@
+=== PHASE 4.0: BRIDGE GATE FROM PHASE 3 ===
+
+Gate 1: Tape initialization
+  SHA256: 208f5161bd000f21...
+  Gate 1: PASS
+
+Gate 2: Forward pass modifies tape
+  Modified: YES Output: 0x00329e2948c50612 non-zero: YES
+  Gate 2: PASS
+
+Gate 3: Metadata survives forward
+  All 5 fields: YES
+  Gate 3: PASS
+
+Gate 4: Reverse pass restores tape
+  SHA256 restored: YES
+  Gate 4: PASS
+
+Gate 5: Tape layout for Phase 4
+  Slots 0-3:   Computational (Master,R1,R2,Output)
+  Slots 4-8:   Metadata (header,2 basis IDs,2 angles)
+  Slots 9-15:  Reserved: shared eigenbasis vectors (4.1A)
+  Slots 16-23: Reserved: rotation chain operators (4.2A)
+  Slots 24-27: Reserved: residual tags (4.3)
+  Slots 28-31: Reserved: GOE/validation (4.4A)
+  Gate 5: PASS
+
+=== BRIDGE GATE VERDICT: COMPLETE - Ready for Phase 4.1A ===
+Phase 3.6 dependency: SATISFIED
+Phase 4A can proceed: YES
+=== PHASE 4.1A: SHARED EIGENBASIS ON TAPE ===
+
+Basis: dim=2 V0=0x3f8000003f800000 S0=0x0000006400000064 V1=0xbf8000003f800000 S1=0x0000003200000032 CK=0x8000005600000054
+
+--- Test 1: Single operator ---
+  Modified: YES Basis: YES
+  Restored: YES
+
+--- Test 2: Two operators ---
+  R1=0x59f0456f2d26f5ec R2=0x8b4b32646f281c60 Out=0xd2bb770b420ee98c Basis: YES
+  Restored: YES
+
+--- Test 3: Combined projection ---
+  Out=0x38ea2411af7bcc64 Modified: YES Basis: YES
+  Restored: YES Check: YES
+
+--- Test 4: 10-cycle stress ---
+  Cycles restored: 10/10 Basis: YES
+
+=== VERDICT: ALL TESTS PASS - Shared eigenbasis proven ===
+=== PHASE 4.2A: CATALYTIC ROTATION CHAIN ===
+
+Chain: 3 layers R1=pi/2 R2=pi R3=3pi/2
+
+--- Test 1: Forward chain ---
+  R1=0xda46c862fabec989 R2=0x7fad87448513ed14 Out=0x80463f72ea6554c6
+  Modified: YES Metadata: YES Accum: 0xdbee78e96a27d3b0
+
+--- Test 2: Reverse chain ---
+  Restored: YES Accum: CLEAR
+
+--- Test 3: Cumulative transform ---
+  L1=0xda46c862fabec989 L2=0x7fad87448513ed14 L3=0x80463f72ea6554c6 distinct: YES
+  Restored: YES
+
+--- Test 4: 4-input stress ---
+  4/4
+
+=== VERDICT: ALL TESTS PASS - Rotation chain proven ===
+=== PHASE 4.3: RESIDUAL CHANNEL ===
+families=3 seeds_per_family=8
+
+case F0_S00 restored=1 decoded=1 expected=1 strength=1.000 wrong_reject=1 random_reject=1 destructive_reject=1 ok=1
+case F0_S01 restored=1 decoded=1 expected=1 strength=1.000 wrong_reject=1 random_reject=1 destructive_reject=1 ok=1
+case F0_S02 restored=1 decoded=1 expected=1 strength=1.000 wrong_reject=1 random_reject=1 destructive_reject=1 ok=1
+case F0_S03 restored=1 decoded=0 expected=0 strength=1.000 wrong_reject=1 random_reject=1 destructive_reject=1 ok=1
+case F0_S04 restored=1 decoded=0 expected=0 strength=1.000 wrong_reject=1 random_reject=1 destructive_reject=1 ok=1
+case F0_S05 restored=1 decoded=0 expected=0 strength=1.000 wrong_reject=1 random_reject=1 destructive_reject=1 ok=1
+case F0_S06 restored=1 decoded=1 expected=1 strength=1.000 wrong_reject=1 random_reject=1 destructive_reject=1 ok=1
+case F0_S07 restored=1 decoded=1 expected=1 strength=1.000 wrong_reject=1 random_reject=1 destructive_reject=1 ok=1
+case F1_S00 restored=1 decoded=0 expected=0 strength=1.000 wrong_reject=1 random_reject=1 destructive_reject=1 ok=1
+case F1_S01 restored=1 decoded=0 expected=0 strength=1.000 wrong_reject=1 random_reject=1 destructive_reject=1 ok=1
+case F1_S02 restored=1 decoded=1 expected=1 strength=1.000 wrong_reject=1 random_reject=1 destructive_reject=1 ok=1
+case F1_S03 restored=1 decoded=1 expected=1 strength=1.000 wrong_reject=1 random_reject=1 destructive_reject=1 ok=1
+case F1_S04 restored=1 decoded=0 expected=0 strength=1.000 wrong_reject=1 random_reject=1 destructive_reject=1 ok=1
+case F1_S05 restored=1 decoded=0 expected=0 strength=1.000 wrong_reject=1 random_reject=1 destructive_reject=1 ok=1
+case F1_S06 restored=1 decoded=0 expected=0 strength=1.000 wrong_reject=1 random_reject=1 destructive_reject=1 ok=1
+case F1_S07 restored=1 decoded=0 expected=0 strength=1.000 wrong_reject=1 random_reject=1 destructive_reject=1 ok=1
+case F2_S00 restored=1 decoded=0 expected=0 strength=1.000 wrong_reject=1 random_reject=1 destructive_reject=1 ok=1
+case F2_S01 restored=1 decoded=1 expected=1 strength=1.000 wrong_reject=1 random_reject=1 destructive_reject=1 ok=1
+case F2_S02 restored=1 decoded=1 expected=1 strength=1.000 wrong_reject=1 random_reject=1 destructive_reject=1 ok=1
+case F2_S03 restored=1 decoded=0 expected=0 strength=1.000 wrong_reject=1 random_reject=1 destructive_reject=1 ok=1
+case F2_S04 restored=1 decoded=0 expected=0 strength=1.000 wrong_reject=1 random_reject=1 destructive_reject=1 ok=1
+case F2_S05 restored=1 decoded=0 expected=0 strength=1.000 wrong_reject=1 random_reject=1 destructive_reject=1 ok=1
+case F2_S06 restored=1 decoded=0 expected=0 strength=1.000 wrong_reject=1 random_reject=1 destructive_reject=1 ok=1
+case F2_S07 restored=1 decoded=0 expected=0 strength=1.000 wrong_reject=1 random_reject=1 destructive_reject=1 ok=1
+
+Summary:
+  pass: 24/24
+  wrong residual rejected: 24/24
+  random residual rejected: 24/24
+  destructive residual rejected: 24/24
+=== VERDICT: PHASE4_3_RESIDUAL_CHANNEL_PASS ===
+=== PHASE 4.4A: OPERATOR GOE VALIDATION ===
+
+family                   count mean_r std_r delta_to_goe
+catalytic_operator          96 0.5482 0.1050 0.0123
+poisson_diagonal_null       96 0.3775 0.1375 0.1584
+shuffled_operator_null      96 0.3916 0.1310 0.1443
+
+Gates:
+  catalytic in GOE-like spacing window: YES
+  separated from Poisson/shuffled nulls: YES
+  closer to GOE target than nulls: YES
+=== VERDICT: PHASE4_4A_OPERATOR_GOE_PASS ===
+=== PHASE 4.5: .HOLO MINI MODEL ===
+
+case 00 class=0 decoded=0 restored=1 wrong_reject=1 random_reject=1 ok=1
+case 01 class=1 decoded=1 restored=1 wrong_reject=1 random_reject=1 ok=1
+case 02 class=2 decoded=2 restored=1 wrong_reject=1 random_reject=1 ok=1
+case 03 class=0 decoded=0 restored=1 wrong_reject=1 random_reject=1 ok=1
+case 04 class=1 decoded=1 restored=1 wrong_reject=1 random_reject=1 ok=1
+case 05 class=2 decoded=2 restored=1 wrong_reject=1 random_reject=1 ok=1
+case 06 class=0 decoded=0 restored=1 wrong_reject=1 random_reject=1 ok=1
+case 07 class=1 decoded=1 restored=1 wrong_reject=1 random_reject=1 ok=1
+case 08 class=2 decoded=2 restored=1 wrong_reject=1 random_reject=1 ok=1
+case 09 class=0 decoded=0 restored=1 wrong_reject=1 random_reject=1 ok=1
+case 10 class=1 decoded=1 restored=1 wrong_reject=1 random_reject=1 ok=1
+case 11 class=2 decoded=2 restored=1 wrong_reject=1 random_reject=1 ok=1
+case 12 class=0 decoded=0 restored=1 wrong_reject=1 random_reject=1 ok=1
+case 13 class=1 decoded=1 restored=1 wrong_reject=1 random_reject=1 ok=1
+case 14 class=2 decoded=2 restored=1 wrong_reject=1 random_reject=1 ok=1
+case 15 class=0 decoded=0 restored=1 wrong_reject=1 random_reject=1 ok=1
+case 16 class=1 decoded=1 restored=1 wrong_reject=1 random_reject=1 ok=1
+case 17 class=2 decoded=2 restored=1 wrong_reject=1 random_reject=1 ok=1
+case 18 class=0 decoded=0 restored=1 wrong_reject=1 random_reject=1 ok=1
+case 19 class=1 decoded=1 restored=1 wrong_reject=1 random_reject=1 ok=1
+case 20 class=2 decoded=2 restored=1 wrong_reject=1 random_reject=1 ok=1
+case 21 class=0 decoded=0 restored=1 wrong_reject=1 random_reject=1 ok=1
+case 22 class=1 decoded=1 restored=1 wrong_reject=1 random_reject=1 ok=1
+case 23 class=2 decoded=2 restored=1 wrong_reject=1 random_reject=1 ok=1
+
+Summary:
+  pass: 24/24
+  restored: 24/24
+  wrong residual rejected: 24/24
+  random residual rejected: 24/24
+=== VERDICT: PHASE4_5_HOLO_MINI_MODEL_PASS ===
+residual pass=24/24
+mini_model pass=24/24
+operator_goe catalytic_r=0.5482 poisson_r=0.3775 shuffled_r=0.3916
+harness_test verdict=PHASE4_6_PUBLIC_HOLO_HARNESS_PASS

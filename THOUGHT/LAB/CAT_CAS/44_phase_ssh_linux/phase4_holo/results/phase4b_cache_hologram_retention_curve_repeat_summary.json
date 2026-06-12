@@ -1,0 +1,195 @@
+{
+  "all_rows_restore": true,
+  "core_mode_wrong_gates_all_delay_all_runs": true,
+  "direct_pseudo_reject_gates_all_delay_all_runs": false,
+  "maxima": {
+    "pseudo_declared_match": 0.2765625,
+    "pseudo_reject_floor": 1.0,
+    "real_accuracy": 0.96875,
+    "real_mode_accuracy_floor": 0.91875,
+    "real_vs_pseudo_accuracy_floor": 0.98125,
+    "wrong_actual_match": 0.965625,
+    "wrong_declared_match": 0.0234375
+  },
+  "minima": {
+    "pseudo_declared_match": 0.1953125,
+    "pseudo_reject_floor": 0.70625,
+    "real_accuracy": 0.940625,
+    "real_mode_accuracy_floor": 0.8125,
+    "real_vs_pseudo_accuracy_floor": 0.825,
+    "wrong_actual_match": 0.934375,
+    "wrong_declared_match": 0.0046875
+  },
+  "run_count": 3,
+  "runs": [
+    {
+      "all_restore": true,
+      "delays": [
+        {
+          "delay_class": 0,
+          "delay_pauses": 0,
+          "pass": true,
+          "pseudo_declared_match": 0.265625,
+          "pseudo_reject_floor": 0.93125,
+          "real_accuracy": 0.9453125,
+          "real_mode_accuracy_floor": 0.86875,
+          "real_vs_pseudo_accuracy_floor": 0.959375,
+          "wrong_actual_match": 0.965625,
+          "wrong_declared_match": 0.0078125
+        },
+        {
+          "delay_class": 1,
+          "delay_pauses": 512,
+          "pass": true,
+          "pseudo_declared_match": 0.2640625,
+          "pseudo_reject_floor": 0.9125,
+          "real_accuracy": 0.96875,
+          "real_mode_accuracy_floor": 0.91875,
+          "real_vs_pseudo_accuracy_floor": 0.921875,
+          "wrong_actual_match": 0.9515625,
+          "wrong_declared_match": 0.0171875
+        },
+        {
+          "delay_class": 2,
+          "delay_pauses": 4096,
+          "pass": false,
+          "pseudo_declared_match": 0.259375,
+          "pseudo_reject_floor": 0.8875,
+          "real_accuracy": 0.940625,
+          "real_mode_accuracy_floor": 0.8125,
+          "real_vs_pseudo_accuracy_floor": 0.884375,
+          "wrong_actual_match": 0.9609375,
+          "wrong_declared_match": 0.0046875
+        },
+        {
+          "delay_class": 3,
+          "delay_pauses": 32768,
+          "pass": true,
+          "pseudo_declared_match": 0.2671875,
+          "pseudo_reject_floor": 0.9125,
+          "real_accuracy": 0.94375,
+          "real_mode_accuracy_floor": 0.84375,
+          "real_vs_pseudo_accuracy_floor": 0.9125,
+          "wrong_actual_match": 0.9421875,
+          "wrong_declared_match": 0.0125
+        }
+      ],
+      "rows": 15360,
+      "run": 0,
+      "verdict": "PHASE4B_RETENTION_DECAY_OR_PARTIAL"
+    },
+    {
+      "all_restore": true,
+      "delays": [
+        {
+          "delay_class": 0,
+          "delay_pauses": 0,
+          "pass": true,
+          "pseudo_declared_match": 0.253125,
+          "pseudo_reject_floor": 1.0,
+          "real_accuracy": 0.9484375,
+          "real_mode_accuracy_floor": 0.86875,
+          "real_vs_pseudo_accuracy_floor": 0.978125,
+          "wrong_actual_match": 0.95625,
+          "wrong_declared_match": 0.0125
+        },
+        {
+          "delay_class": 1,
+          "delay_pauses": 512,
+          "pass": true,
+          "pseudo_declared_match": 0.2671875,
+          "pseudo_reject_floor": 0.975,
+          "real_accuracy": 0.959375,
+          "real_mode_accuracy_floor": 0.90625,
+          "real_vs_pseudo_accuracy_floor": 0.98125,
+          "wrong_actual_match": 0.934375,
+          "wrong_declared_match": 0.0171875
+        },
+        {
+          "delay_class": 2,
+          "delay_pauses": 4096,
+          "pass": true,
+          "pseudo_declared_match": 0.1953125,
+          "pseudo_reject_floor": 1.0,
+          "real_accuracy": 0.95625,
+          "real_mode_accuracy_floor": 0.875,
+          "real_vs_pseudo_accuracy_floor": 0.96875,
+          "wrong_actual_match": 0.946875,
+          "wrong_declared_match": 0.0140625
+        },
+        {
+          "delay_class": 3,
+          "delay_pauses": 32768,
+          "pass": true,
+          "pseudo_declared_match": 0.2421875,
+          "pseudo_reject_floor": 0.9375,
+          "real_accuracy": 0.9515625,
+          "real_mode_accuracy_floor": 0.875,
+          "real_vs_pseudo_accuracy_floor": 0.94375,
+          "wrong_actual_match": 0.95,
+          "wrong_declared_match": 0.0125
+        }
+      ],
+      "rows": 15360,
+      "run": 1,
+      "verdict": "PHASE4B_RETENTION_WINDOW_PASS"
+    },
+    {
+      "all_restore": true,
+      "delays": [
+        {
+          "delay_class": 0,
+          "delay_pauses": 0,
+          "pass": true,
+          "pseudo_declared_match": 0.234375,
+          "pseudo_reject_floor": 0.9625,
+          "real_accuracy": 0.95625,
+          "real_mode_accuracy_floor": 0.90625,
+          "real_vs_pseudo_accuracy_floor": 0.928125,
+          "wrong_actual_match": 0.965625,
+          "wrong_declared_match": 0.009375
+        },
+        {
+          "delay_class": 1,
+          "delay_pauses": 512,
+          "pass": true,
+          "pseudo_declared_match": 0.2609375,
+          "pseudo_reject_floor": 0.90625,
+          "real_accuracy": 0.96875,
+          "real_mode_accuracy_floor": 0.9125,
+          "real_vs_pseudo_accuracy_floor": 0.95,
+          "wrong_actual_match": 0.934375,
+          "wrong_declared_match": 0.0234375
+        },
+        {
+          "delay_class": 2,
+          "delay_pauses": 4096,
+          "pass": false,
+          "pseudo_declared_match": 0.26875,
+          "pseudo_reject_floor": 0.70625,
+          "real_accuracy": 0.940625,
+          "real_mode_accuracy_floor": 0.8875,
+          "real_vs_pseudo_accuracy_floor": 0.825,
+          "wrong_actual_match": 0.9609375,
+          "wrong_declared_match": 0.021875
+        },
+        {
+          "delay_class": 3,
+          "delay_pauses": 32768,
+          "pass": false,
+          "pseudo_declared_match": 0.2765625,
+          "pseudo_reject_floor": 0.8875,
+          "real_accuracy": 0.9515625,
+          "real_mode_accuracy_floor": 0.9,
+          "real_vs_pseudo_accuracy_floor": 0.909375,
+          "wrong_actual_match": 0.965625,
+          "wrong_declared_match": 0.015625
+        }
+      ],
+      "rows": 15360,
+      "run": 2,
+      "verdict": "PHASE4B_RETENTION_DECAY_OR_PARTIAL"
+    }
+  ],
+  "verdict": "PHASE4B_RETENTION_MODE_SIGNAL_CONFIRMED_PSEUDO_REJECT_VOLATILE"
+}

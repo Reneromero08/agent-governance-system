@@ -1,0 +1,70 @@
+{
+  "all_restore": true,
+  "gates": {
+    "all_rows_restore": true,
+    "each_real_mode_contrast_gt_random_plus_10_cycles": false,
+    "real_mean_contrast_gt_random": true,
+    "real_positive_frac_ge_0_60": true
+  },
+  "hash_restore_total": 2560,
+  "hash_restored": 2560,
+  "input": "phase4_holo\\results\\phase4b_cache_hologram_afterimage.csv",
+  "modes": {
+    "basis": {
+      "contrast_mean": 184.626521484375,
+      "contrast_positive_frac": 1.0,
+      "contrast_stdev": 19.256946107578,
+      "group_cycles_mean": 95.11551171875,
+      "n": 512,
+      "other_cycles_mean": 279.742087890625,
+      "restored": 512
+    },
+    "mini": {
+      "contrast_mean": 199.386869140625,
+      "contrast_positive_frac": 1.0,
+      "contrast_stdev": 24.470387506199796,
+      "group_cycles_mean": 95.561369140625,
+      "n": 512,
+      "other_cycles_mean": 294.948232421875,
+      "restored": 512
+    },
+    "random_reversible": {
+      "contrast_mean": 183.938009765625,
+      "contrast_positive_frac": 1.0,
+      "contrast_stdev": 23.70264584250989,
+      "group_cycles_mean": 94.96711328125,
+      "n": 512,
+      "other_cycles_mean": 278.905142578125,
+      "restored": 512
+    },
+    "residual": {
+      "contrast_mean": 183.775107421875,
+      "contrast_positive_frac": 1.0,
+      "contrast_stdev": 20.671530082019082,
+      "group_cycles_mean": 95.48583984375,
+      "n": 512,
+      "other_cycles_mean": 279.260947265625,
+      "restored": 512
+    },
+    "rotation": {
+      "contrast_mean": 195.1846015625,
+      "contrast_positive_frac": 1.0,
+      "contrast_stdev": 22.315558822577216,
+      "group_cycles_mean": 95.14111328125,
+      "n": 512,
+      "other_cycles_mean": 290.32571484375,
+      "restored": 512
+    }
+  },
+  "random_reversible_contrast_mean": 183.938009765625,
+  "real_mode_contrast_mean": 190.74327490234376,
+  "real_modes_positive_frac_mean": 1.0,
+  "real_over_random_contrast": {
+    "basis": 0.688511718749993,
+    "mini": 15.448859375000012,
+    "residual": -0.16290234375000523,
+    "rotation": 11.246591796875009
+  },
+  "rows": 2560,
+  "verdict": "PHASE4B_CACHE_AFTERIMAGE_PRESENT_GENERIC"
+}

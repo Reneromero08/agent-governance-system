@@ -1,0 +1,73 @@
+{
+  "all_runs_pass": true,
+  "maxima": {
+    "hash_restore_total": 7680,
+    "hash_restored": 7680,
+    "pseudo_declared_match": 0.2953125,
+    "pseudo_reject_floor": 0.996875,
+    "real_accuracy": 0.97421875,
+    "real_mode_accuracy_floor": 0.9375,
+    "real_vs_pseudo_accuracy_floor": 0.990625,
+    "rows": 7680,
+    "wrong_actual_match": 0.97890625,
+    "wrong_declared_match": 0.0515625
+  },
+  "minima": {
+    "hash_restore_total": 7680,
+    "hash_restored": 7680,
+    "pseudo_declared_match": 0.24296875,
+    "pseudo_reject_floor": 0.965625,
+    "real_accuracy": 0.89921875,
+    "real_mode_accuracy_floor": 0.778125,
+    "real_vs_pseudo_accuracy_floor": 0.9671875,
+    "rows": 7680,
+    "wrong_actual_match": 0.88828125,
+    "wrong_declared_match": 0.009375
+  },
+  "run_count": 3,
+  "runs": [
+    {
+      "hash_restore_total": 7680,
+      "hash_restored": 7680,
+      "pseudo_declared_match": 0.24296875,
+      "pseudo_reject_floor": 0.996875,
+      "real_accuracy": 0.97421875,
+      "real_mode_accuracy_floor": 0.9375,
+      "real_vs_pseudo_accuracy_floor": 0.990625,
+      "rows": 7680,
+      "run": 1,
+      "verdict": "PHASE4B_MATCHED_NULLS_PASS",
+      "wrong_actual_match": 0.97890625,
+      "wrong_declared_match": 0.009375
+    },
+    {
+      "hash_restore_total": 7680,
+      "hash_restored": 7680,
+      "pseudo_declared_match": 0.26484375,
+      "pseudo_reject_floor": 0.965625,
+      "real_accuracy": 0.95625,
+      "real_mode_accuracy_floor": 0.91875,
+      "real_vs_pseudo_accuracy_floor": 0.9671875,
+      "rows": 7680,
+      "run": 2,
+      "verdict": "PHASE4B_MATCHED_NULLS_PASS",
+      "wrong_actual_match": 0.96171875,
+      "wrong_declared_match": 0.021875
+    },
+    {
+      "hash_restore_total": 7680,
+      "hash_restored": 7680,
+      "pseudo_declared_match": 0.2953125,
+      "pseudo_reject_floor": 0.971875,
+      "real_accuracy": 0.89921875,
+      "real_mode_accuracy_floor": 0.778125,
+      "real_vs_pseudo_accuracy_floor": 0.9765625,
+      "rows": 7680,
+      "run": 3,
+      "verdict": "PHASE4B_MATCHED_NULLS_PASS",
+      "wrong_actual_match": 0.88828125,
+      "wrong_declared_match": 0.0515625
+    }
+  ],
+  "verdict": "PHASE4B_MATCHED_NULLS_REPEATABLE_PASS"
+}

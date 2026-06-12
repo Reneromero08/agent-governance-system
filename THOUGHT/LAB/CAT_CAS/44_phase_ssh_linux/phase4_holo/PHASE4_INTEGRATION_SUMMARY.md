@@ -13,13 +13,13 @@ Old structure assumed physical phase-network behavior too strongly. New structur
 
 | # | Name | Track | Status |
 |---|------|-------|--------|
-| 4.0 | Bridge Gate From Phase 3 | Both | Requires 3.6 holo_metadata.c |
-| 4.1A | Shared Eigenbasis on Tape | A | NEXT |
-| 4.2A | Catalytic Rotation Chain | A | - |
-| 4.3 | Residual Compression Channel | A (3 sub-tracks) | - |
-| 4.4A | GOE From Operator Matrices | A (software) | - |
-| 4.5 | .holo Mini-Model Demo | A | - |
-| 4.6 | Public .holo Harness | A | - |
+| 4.0 | Bridge Gate From Phase 3 | Both | COMPLETE |
+| 4.1A | Shared Eigenbasis on Tape | A | COMPLETE |
+| 4.2A | Catalytic Rotation Chain | A | COMPLETE |
+| 4.3 | Residual Compression Channel | A | COMPLETE |
+| 4.4A | GOE From Operator Matrices | A (software) | COMPLETE |
+| 4.5 | .holo Mini-Model Demo | A | COMPLETE |
+| 4.6 | Public .holo Harness | A | COMPLETE |
 | 4.1B | Physical Phase Reference | B | PENDING PHASE 2 |
 | 4.2B | PPU Physical Rotation Chain | B | PENDING PHASE 2 |
 | 4.4B | Physical GOE From Correlation | B | PENDING PHASE 2 |
@@ -35,19 +35,39 @@ Track B subphases require Kuramoto phase lock, GOE eigenvalue detection, or AGES
 ## Verdict
 
 ```
+PHASE4_0_BRIDGE_GATE_COMPLETE
 PHASE4A_CATALYTIC_HOLO_READY
+PHASE4_1A_SHARED_EIGENBASIS_TAPE_COMPLETE
+PHASE4_2A_CATALYTIC_ROTATION_CHAIN_COMPLETE
+PHASE4_3_RESIDUAL_CHANNEL_COMPLETE
+PHASE4_4A_OPERATOR_GOE_COMPLETE
+PHASE4_5_HOLO_MINI_MODEL_COMPLETE
+PHASE4A_PUBLIC_HARNESS_COMPLETE
 PHASE4B_PHYSICAL_HOLO_PENDING_PHASE2
 PHASE4_GOE_SPLIT_OPERATOR_VS_PHYSICAL
 PHASE4_RESIDUAL_CHANNEL_GENERALIZED
-PHASE4_TRACK_A_COMPLETE
-PHASE5_6_POLYTOPE_HYPOTHESIS_ROADMAP_ADDED
+PHASE4_TRACK_A_COMPLETE_VERIFIED
 ```
 
-## Next Exact Implementation Task
+## Verification Evidence
 
-**Phase 4.0 → 4.1A:** Encode SVh-like shared eigenbasis in L3 cache tape slots.
-1. Use `catcas_phase3` API from Phase 3.12
-2. Define basis layout: basis_id, singular_weight, vector_dim, context_tag per slot
-3. Encode basis, verify forward modification, reverse restore
-4. File: `session_scripts/holo_basis.c`
-5. Output: `PHASE4_0_BRIDGE_GATE.md` + `PHASE4_1A_SHARED_EIGENBASIS_TAPE.md`
+Saved target run:
+
+```text
+phase4_holo/results/phase4_track_a_verification.txt
+```
+
+Phase 4 Track A reports:
+
+- `phase4_holo/PHASE4_0_BRIDGE_GATE.md`
+- `phase4_holo/PHASE4_1A_SHARED_EIGENBASIS_TAPE.md`
+- `phase4_holo/PHASE4_2A_CATALYTIC_ROTATION_CHAIN.md`
+- `phase4_holo/PHASE4_3_RESIDUAL_CHANNEL.md`
+- `phase4_holo/PHASE4_4A_OPERATOR_GOE.md`
+- `phase4_holo/PHASE4_5_HOLO_MINI_MODEL.md`
+- `phase4_holo/PHASE4_6_PUBLIC_HOLO_HARNESS.md`
+- `phase4_holo/PHASE4_TRACK_A_FINAL.md`
+
+## Remaining Boundary
+
+Track B remains pending Phase 2 physical observability. That is not an unfinished Track A implementation task.

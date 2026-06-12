@@ -977,7 +977,7 @@ reject as artifact
 
 ---
 
-## Phase 4: The .holo Eigenbasis on Catalytic Silicon [NEXT]
+## Phase 4: The .holo Eigenbasis on Catalytic Silicon [TRACK A COMPLETE]
 
 **Objective:** Map the `.holo` wormhole compression/eigenbasis format onto the Phenom's catalytic tape first (Track A, available now), and onto the physical phase oscillator network later (Track B, pending Phase 2). Phase 3 proved the tape can compute and restore. Phase 4 makes that tape carry `.holo` basis, rotations, residuals, and decodable structure.
 
@@ -990,7 +990,9 @@ reject as artifact
 - [x] Gate 4: Reverse pass restores SHA-256 exactly
 - [x] Gate 5: Full tape layout documented with Phase 4A reservations
 - [x] Phase 3.6 dependency: SATISFIED
-- [x] Source: `session_scripts/phase4_bridge.c`
+- [x] Source: `session_scripts/phase4_holo/phase4_bridge.c`
+- [x] Output artifact: `phase4_holo/PHASE4_0_BRIDGE_GATE.md`
+- [x] Verification log: `phase4_holo/results/phase4_track_a_verification.txt`
 
 **Tape layout (32 slots × 8 bytes = 256 bytes):**
 | Slots | Purpose | Phase |
@@ -1026,7 +1028,9 @@ reject as artifact
 
 - [x] Architecture: operators READ from basis (9-14) but WRITE only to computational slots (0-3)
 - [x] Matches .holo format: one shared SVh matrix referenced by all layers
-- [x] Source: `session_scripts/eigenbasis_tape.c`
+- [x] Target result: `PHASE4_1A_SHARED_EIGENBASIS_TAPE_PASS`
+- [x] Source: `session_scripts/phase4_holo/eigenbasis_tape.c`
+- [x] Output artifact: `phase4_holo/PHASE4_1A_SHARED_EIGENBASIS_TAPE.md`
 
 #### 4.2A Catalytic Rotation Chain — COMPLETE (2026-06-05)
 
@@ -1046,7 +1050,9 @@ reject as artifact
 | Chain metadata survives | Layer count and angles intact |
 
 - [x] Matches .holo format: R_l = U_prev^T @ U_curr, reversible, layer-to-layer
-- [x] Source: `session_scripts/rotation_chain.c`
+- [x] Target result: `PHASE4_2A_CATALYTIC_ROTATION_CHAIN_PASS`
+- [x] Source: `session_scripts/phase4_holo/rotation_chain.c`
+- [x] Output artifact: `phase4_holo/PHASE4_2A_CATALYTIC_ROTATION_CHAIN.md`
 
 #### 4.3 Residual Compression Channel — COMPLETE
 
@@ -1117,6 +1123,56 @@ reject as artifact
 - [ ] If r ≈ 0.51-0.53: quantum-chaotic manifold on consumer silicon — **publishable on its own**
 - [ ] Output artifact if attempted: `PHASE4_4B_PHYSICAL_GOE.md`
 
+#### 4.B Physicality Push — READY
+
+- [x] Reframe physical `.holo` away from sine-wave-only criteria
+- [x] Define physicality as substrate-coordinate readout of `.holo` state/residual/operator class while logical tape restores
+- [x] Preserve scalar/even claim ceiling for Phenom timing/cache/PDN witnesses
+- [x] First original Phase 4B route: cache-residency `.holo` afterimage
+- [x] Result: `PHASE4B_CACHE_AFTERIMAGE_PRESENT_GENERIC`
+- [x] Equalized held-out classifier result: `PHASE4B_CACHE_HOLOGRAM_WITNESS`
+- [x] Matched pseudo-mode and same-hash wrong-schedule controls: `PHASE4B_MATCHED_NULLS_PASS`
+- [x] Same-final-hash wrong-schedule separation: actual schedule match `0.930469`, declared-label match `0.042969`
+- [x] Three fresh matched-null target repeats: `PHASE4B_MATCHED_NULLS_REPEATABLE_PASS`
+- [x] Weakest repeat: real accuracy `0.899219`, pseudo reject floor `0.965625`, wrong actual-match `0.888281`, wrong declared-match `0.051562`
+- [x] Layout permutation holdout: `PHASE4B_LAYOUT_HOLDOUT_PASS`
+- [x] Substrate-coordinate result: canonical real accuracy `0.934570`, fixed physical-address baseline `0.370605`
+- [x] Cross-core observer/prober split attempted: `PHASE4B_CROSS_CORE_PARTIAL_BOUNDARY`
+- [x] Cross-core direct and echo variants restored hash but did not recover matched-null mode structure from observer core
+- [x] Retention curve across passive delays: `PHASE4B_RETENTION_MODE_SIGNAL_CONFIRMED_PSEUDO_REJECT_VOLATILE`
+- [x] Retention weakest core gates: real accuracy `0.940625`, real floor `0.812500`, wrong actual-match `0.934375`, wrong declared-match `0.004688`
+- [x] Artifacts:
+  - `phase4_holo/PHASE4B_CACHE_HOLOGRAM_AFTERIMAGE.md`
+  - `phase4_holo/PHASE4B_CACHE_HOLOGRAM_MODE_CLASSIFIER.md`
+  - `phase4_holo/PHASE4B_CACHE_HOLOGRAM_MATCHED_NULLS.md`
+  - `phase4_holo/PHASE4B_CACHE_HOLOGRAM_LAYOUT_HOLDOUT.md`
+  - `phase4_holo/PHASE4B_CACHE_HOLOGRAM_CROSS_CORE.md`
+  - `phase4_holo/PHASE4B_CACHE_HOLOGRAM_RETENTION_CURVE.md`
+  - `session_scripts/phase4_holo/cache_hologram_afterimage.c`
+  - `session_scripts/phase4_holo/analyze_cache_hologram_afterimage.py`
+  - `session_scripts/phase4_holo/cache_hologram_mode_classifier.c`
+  - `session_scripts/phase4_holo/analyze_cache_hologram_mode_classifier.py`
+  - `session_scripts/phase4_holo/cache_hologram_matched_nulls.c`
+  - `session_scripts/phase4_holo/analyze_cache_hologram_matched_nulls.py`
+  - `session_scripts/phase4_holo/cache_hologram_layout_holdout.c`
+  - `session_scripts/phase4_holo/analyze_cache_hologram_layout_holdout.py`
+  - `session_scripts/phase4_holo/cache_hologram_cross_core.c`
+  - `session_scripts/phase4_holo/cache_hologram_retention_curve.c`
+  - `session_scripts/phase4_holo/analyze_cache_hologram_retention_curve.py`
+  - `phase4_holo/results/phase4b_cache_hologram_afterimage.csv`
+  - `phase4_holo/results/phase4b_cache_hologram_afterimage_summary.json`
+  - `phase4_holo/results/phase4b_cache_hologram_mode_classifier_summary.json`
+  - `phase4_holo/results/phase4b_cache_hologram_matched_nulls_summary.json`
+  - `phase4_holo/results/phase4b_cache_hologram_matched_nulls_repeat_summary.json`
+  - `phase4_holo/results/phase4b_cache_hologram_layout_holdout_summary.json`
+  - `phase4_holo/results/phase4b_cache_hologram_cross_core_summary.json`
+  - `phase4_holo/results/phase4b_cache_hologram_cross_core_echo_summary.json`
+  - `phase4_holo/results/phase4b_cache_hologram_retention_curve_repeat_summary.json`
+- [x] Recommended first routes:
+  - `PHASE4B_RESTORED_TAPE_PHYSICAL_AFTERIMAGE_PROBE`
+  - `PHASE4B_CROSS_CORE_HOLO_LOCKIN_WITNESS`
+- [x] Planning artifact: `phase4_holo/PHASE4B_PHYSICAL_HOLO_PUSH_PLAN.md`
+
 ---
 
 ### Phase 4 Verdict
@@ -1124,6 +1180,8 @@ reject as artifact
 ```
 PHASE4_0_BRIDGE_GATE_COMPLETE
 PHASE4A_CATALYTIC_HOLO_READY
+PHASE4_1A_SHARED_EIGENBASIS_TAPE_COMPLETE
+PHASE4_2A_CATALYTIC_ROTATION_CHAIN_COMPLETE
 PHASE4_3_RESIDUAL_CHANNEL_COMPLETE
 PHASE4A_CATALYTIC_HOLO_RESIDUAL_READY
 PHASE4_4A_OPERATOR_GOE_COMPLETE
@@ -1131,11 +1189,28 @@ PHASE4A_OPERATOR_STATISTICS_READY
 PHASE4_5_HOLO_MINI_MODEL_COMPLETE
 PHASE4A_MINI_MODEL_READY
 PHASE4A_PUBLIC_HARNESS_COMPLETE
-PHASE4_TRACK_A_COMPLETE
+PHASE4_TRACK_A_COMPLETE_VERIFIED
 PHASE4B_PHYSICAL_HOLO_PENDING_PHASE2
+PHASE4B_PHYSICALITY_PUSH_READY
+PHASE4B_CACHE_AFTERIMAGE_PRESENT_GENERIC
+PHASE4B_CACHE_HOLOGRAM_WITNESS
+PHASE4B_MATCHED_NULLS_PASS
+PHASE4B_MATCHED_NULLS_REPEATABLE_PASS
+PHASE4B_LAYOUT_HOLDOUT_PASS
+PHASE4B_SUBSTRATE_COORDINATE_CONFIRMED
+PHASE4B_SAME_HASH_WRONG_SCHEDULE_REJECTED_UNDER_LAYOUT
+PHASE4B_CROSS_CORE_PARTIAL_BOUNDARY
+PHASE4B_SCALAR_PHYSICAL_HOLO_WITNESS_SAME_CORE
+PHASE4B_RETENTION_MODE_SIGNAL_CONFIRMED
+PHASE4B_RETENTION_PSEUDO_REJECT_VOLATILE
+PHASE4B_SAME_HASH_WRONG_SCHEDULE_REJECTED_ACROSS_DELAYS
+PHASE4B_SAME_HASH_WRONG_SCHEDULE_REJECTED
+PHASE4B_SCALAR_PHYSICAL_HOLO_WITNESS
 PHASE4_GOE_SPLIT_OPERATOR_VS_PHYSICAL
 PHASE4_RESIDUAL_CHANNEL_GENERALIZED
 ```
+
+Final Track A report: `phase4_holo/PHASE4_TRACK_A_FINAL.md`
 
 ### Do Not Claim (Phase 4)
 

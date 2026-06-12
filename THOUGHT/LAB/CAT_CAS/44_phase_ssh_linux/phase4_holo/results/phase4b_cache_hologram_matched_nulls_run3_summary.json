@@ -1,0 +1,287 @@
+{
+  "by_mode_rates": {
+    "basis": {
+      "pseudo_declared_match": 0.5125,
+      "real_accuracy": 0.975,
+      "wrong_actual_match": 1.0,
+      "wrong_declared_match": 0.0
+    },
+    "mini": {
+      "pseudo_declared_match": 0.003125,
+      "real_accuracy": 0.85,
+      "wrong_actual_match": 0.946875,
+      "wrong_declared_match": 0.053125
+    },
+    "residual": {
+      "pseudo_declared_match": 0.5,
+      "real_accuracy": 0.778125,
+      "wrong_actual_match": 0.846875,
+      "wrong_declared_match": 0.153125
+    },
+    "rotation": {
+      "pseudo_declared_match": 0.165625,
+      "real_accuracy": 0.99375,
+      "wrong_actual_match": 0.759375,
+      "wrong_declared_match": 0.0
+    }
+  },
+  "centroids": {
+    "basis": [
+      197.83494971264366,
+      19.30792410714286,
+      14.030729166666669,
+      91.82616185897436
+    ],
+    "mini": [
+      119.441720545977,
+      92.43219866071429,
+      178.01671875,
+      205.45006009615386
+    ],
+    "residual": [
+      47.35862068965517,
+      17.305357142857144,
+      196.63916666666665,
+      110.66955128205129
+    ],
+    "rotation": [
+      14.66576867816092,
+      202.12689732142857,
+      18.306354166666665,
+      87.47143429487178
+    ]
+  },
+  "confusion": {
+    "pseudo": {
+      "basis": {
+        "basis": 0,
+        "mini": 0,
+        "residual": 0,
+        "rotation": 0
+      },
+      "mini": {
+        "basis": 0,
+        "mini": 0,
+        "residual": 0,
+        "rotation": 0
+      },
+      "pseudo": {
+        "basis": 681,
+        "mini": 27,
+        "residual": 367,
+        "rotation": 205
+      },
+      "residual": {
+        "basis": 0,
+        "mini": 0,
+        "residual": 0,
+        "rotation": 0
+      },
+      "rotation": {
+        "basis": 0,
+        "mini": 0,
+        "residual": 0,
+        "rotation": 0
+      }
+    },
+    "real": {
+      "basis": {
+        "basis": 312,
+        "mini": 8,
+        "residual": 0,
+        "rotation": 0
+      },
+      "mini": {
+        "basis": 0,
+        "mini": 272,
+        "residual": 48,
+        "rotation": 0
+      },
+      "pseudo": {
+        "basis": 0,
+        "mini": 0,
+        "residual": 0,
+        "rotation": 0
+      },
+      "residual": {
+        "basis": 0,
+        "mini": 71,
+        "residual": 249,
+        "rotation": 0
+      },
+      "rotation": {
+        "basis": 0,
+        "mini": 2,
+        "residual": 0,
+        "rotation": 318
+      }
+    },
+    "wrong": {
+      "basis": {
+        "basis": 303,
+        "mini": 17,
+        "residual": 0,
+        "rotation": 0
+      },
+      "mini": {
+        "basis": 0,
+        "mini": 271,
+        "residual": 49,
+        "rotation": 0
+      },
+      "pseudo": {
+        "basis": 0,
+        "mini": 0,
+        "residual": 0,
+        "rotation": 0
+      },
+      "residual": {
+        "basis": 0,
+        "mini": 77,
+        "residual": 243,
+        "rotation": 0
+      },
+      "rotation": {
+        "basis": 0,
+        "mini": 0,
+        "residual": 0,
+        "rotation": 320
+      }
+    }
+  },
+  "counts": {
+    "pseudo_declared_match": 378,
+    "pseudo_total": 1280,
+    "real_correct": 1151,
+    "real_total": 1280,
+    "wrong_actual_match": 1137,
+    "wrong_declared_match": 66,
+    "wrong_total": 1280
+  },
+  "feature_means": {
+    "pseudo": {
+      "basis": [
+        35.35720186781609,
+        22.800390625,
+        -56.75817708333333,
+        9.130148237179487
+      ],
+      "mini": [
+        22.15247844827586,
+        -26.721540178571427,
+        -72.1009375,
+        -24.31678685897436
+      ],
+      "residual": [
+        47.95376257183908,
+        -2.719614955357143,
+        5.447526041666666,
+        16.085606971153844
+      ],
+      "rotation": [
+        32.494800646551724,
+        13.310686383928573,
+        -40.120859374999995,
+        11.109905849358974
+      ]
+    },
+    "real": {
+      "basis": [
+        199.02942708333333,
+        21.104213169642858,
+        16.331223958333332,
+        92.26455328525641
+      ],
+      "mini": [
+        116.86508620689656,
+        92.90044642857143,
+        177.31083333333333,
+        204.63397435897437
+      ],
+      "residual": [
+        45.19983836206896,
+        17.644252232142858,
+        197.58526041666667,
+        109.5959735576923
+      ],
+      "rotation": [
+        10.70638469827586,
+        201.72647879464287,
+        19.501588541666667,
+        86.92891626602564
+      ]
+    },
+    "wrong": {
+      "basis": [
+        17.827676005747122,
+        204.098828125,
+        -36.230052083333334,
+        69.60138221153846
+      ],
+      "mini": [
+        200.38237248563217,
+        20.582784598214285,
+        6.579348958333332,
+        88.87681290064103
+      ],
+      "residual": [
+        122.62842133620688,
+        88.4593470982143,
+        178.59747395833332,
+        206.1244891826923
+      ],
+      "rotation": [
+        41.46663074712644,
+        12.717745535714286,
+        197.2134375,
+        106.0254407051282
+      ]
+    }
+  },
+  "gates": {
+    "all_rows_restore": true,
+    "pseudo_declared_match_le_0_35": true,
+    "pseudo_reject_floor_ge_0_95": true,
+    "real_accuracy_ge_0_60": true,
+    "real_mode_floor_ge_0_45": true,
+    "real_vs_pseudo_accuracy_floor_ge_0_95": true,
+    "wrong_actual_match_ge_0_60": true,
+    "wrong_declared_match_le_0_20": true
+  },
+  "hash_restore_total": 7680,
+  "hash_restored": 7680,
+  "input": "phase4_holo\\results\\phase4b_cache_hologram_matched_nulls_run3.csv",
+  "pseudo_declared_match": 0.2953125,
+  "pseudo_reject_floor": 0.971875,
+  "real_accuracy": 0.89921875,
+  "real_mode_accuracy_floor": 0.778125,
+  "real_vs_pseudo_accuracy_floor": 0.9765625,
+  "real_vs_pseudo_by_mode": {
+    "basis": {
+      "accuracy": 0.98125,
+      "pseudo_reject": 0.971875,
+      "real_accept": 0.990625
+    },
+    "mini": {
+      "accuracy": 0.9984375,
+      "pseudo_reject": 0.996875,
+      "real_accept": 1.0
+    },
+    "residual": {
+      "accuracy": 0.9765625,
+      "pseudo_reject": 0.98125,
+      "real_accept": 0.971875
+    },
+    "rotation": {
+      "accuracy": 0.9953125,
+      "pseudo_reject": 1.0,
+      "real_accept": 0.990625
+    }
+  },
+  "rows": 7680,
+  "test_rows": 3840,
+  "train_real_rows": 1280,
+  "verdict": "PHASE4B_MATCHED_NULLS_PASS",
+  "wrong_actual_match": 0.88828125,
+  "wrong_declared_match": 0.0515625
+}
