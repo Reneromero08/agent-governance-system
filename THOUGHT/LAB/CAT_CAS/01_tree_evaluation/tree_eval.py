@@ -1,36 +1,8 @@
-class TreeEval:
-    """
-    Implements the Tree Evaluation Problem (TEP) for depth d and register size k.
-    This problem is conjectured to be hard for small space, making it a perfect
-    benchmark for space complexity experiments.
-    """
-
-    def __init__(self, depth: int, k: int):
-        self.depth = depth
-        self.k = k
-
-    def get_leaf_val(self, leaf_index: int) -> int:
-        """Leaf values are determined deterministically from their index."""
-        return (leaf_index * 17 + 43) % self.k
-
-    def combine(self, left_val: int, right_val: int) -> int:
-        """Deterministic combination function for internal nodes."""
-        return (left_val * 7 + right_val * 13 + 31) % self.k
-
-    def evaluate_recursive(self, node_index: int, current_depth: int, tracker=None) -> int:
-        """
-        Standard recursive evaluation.
-        Consumes memory (stack frames) proportional to tree depth.
-        """
-        if tracker:
-            # Record stack depth to simulate memory usage
-            tracker.record_stack(current_depth)
-
-        if current_depth == self.depth:
-            # Leaf node index relative to leaves layer
-            leaf_index = node_index - (2 ** (self.depth - 1))
-            return self.get_leaf_val(leaf_index)
-
-        left_val = self.evaluate_recursive(2 * node_index, current_depth + 1, tracker)
-        right_val = self.evaluate_recursive(2 * node_index + 1, current_depth + 1, tracker)
-        return self.combine(left_val, right_val)
+# Compatibility shim. Canonical implementation: CAT_CAS/_lib/tree_eval.py
+# (kept so existing `from tree_eval import ...` call sites keep resolving.)
+import importlib.util as _u
+from pathlib import Path as _P
+_root = next(p for p in _P(__file__).resolve().parents if p.name == "CAT_CAS")
+_spec = _u.spec_from_file_location(__name__ + "__lib", _root / "_lib" / "tree_eval.py")
+_m = _u.module_from_spec(_spec); _spec.loader.exec_module(_m)
+globals().update({k: v for k, v in vars(_m).items() if not k.startswith("__")})
