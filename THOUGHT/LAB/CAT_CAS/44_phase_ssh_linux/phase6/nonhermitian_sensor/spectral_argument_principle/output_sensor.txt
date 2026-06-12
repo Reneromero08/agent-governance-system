@@ -1,0 +1,36 @@
+============================================================================================
+NON-HERMITIAN SENSOR / Cauchy argument principle on a public contour
+Target: Exp 50.14 public fixed-point map (verbatim). master_seed=44060611
+============================================================================================
+
+[1] DOES THE ARGUMENT-PRINCIPLE WINDING READ o?  (hardened random-fold gate)
+    candidate           n    verdict        orient_auc  rand_fold_auc(null95)  delta
+    winding_PUBLIC      8    FAIL_CHANCE    0.472       0.571 (0.595)        0  [8.6s]
+    winding_PUBLIC      10   FAIL_CHANCE    0.528       0.506 (0.602)        0  [8.6s]
+    winding_PUBLIC      12   FAIL_CHANCE    0.542       0.446 (0.586)        0  [10.2s]
+    winding_PUBLIC      14   FAIL_CHANCE    0.363       0.595 (0.592)        0  [11.8s]
+    winding_SMUGGLE     8    FAIL_SMUGGLE   1.000       1.000 (0.586)        1
+    winding_SMUGGLE     10   FAIL_SMUGGLE   1.000       1.000 (0.569)        1
+
+[2] COST SCALING of a CONVERGED winding (make-or-break: poly(n) vs ~N)
+    n    N        M     zeros[0,N)  W_ref   q_star  q*/N    poly_q  poly_err
+    8    256      384   409         235     1024    4.000   256     78
+    10   1024     480   1597        913     8192    8.000   320     864
+    12   4096     576   6383        3642    32768   8.000   384     3610
+    14   16384    672   25418       14552   131072  8.000   448     14532
+
+[3] DIRECTED OPERATOR T of f: fold-invariant by construction (basins read a, not o)
+    n    N      d      a=min   fixed_points        basin_sizes       == {2a, N-2a}?
+    6    64     13     13      [13, 51]            [26, 38]          True
+    8    256    131    125     [125, 131]          [250, 6]          True
+    10   1024   853    171     [171, 853]          [342, 682]        True
+
+============================================================================================
+WHAT THE DATA SAYS
+  (1) public winding reads o:  False  (all FAIL_CHANCE => no public contour reads o)
+  (2) smuggle contour caught:  True  (placing the contour by d => FAIL_SMUGGLE)
+  (3) q_star/N = [4.0, 8.0, 8.0, 8.0]  (constant ratio => q_star ~ N => exp(n)): True
+  (3b) poly-budget winding error grows with N: True  (poly quadrature cannot converge)
+  zeros_full ~ c*N: [409, 1597, 6383, 25418]
+============================================================================================
+VERDICT: WALL_HOLDS_FOR_PUBLIC_CONTOUR__COST_RELOCATED_TO_THE_INTEGRAL

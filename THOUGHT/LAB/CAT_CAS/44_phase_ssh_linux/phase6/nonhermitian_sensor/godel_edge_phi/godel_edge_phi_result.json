@@ -1,0 +1,254 @@
+{
+  "master_seed": 44060611,
+  "operator": {
+    "a_hop": 0.2,
+    "ell": 0.1,
+    "s_loop": 1.0,
+    "loop_radius_R": 1.0,
+    "E_refs": [
+      "0j",
+      "(0.5+0j)",
+      "(1+0j)",
+      "1j"
+    ],
+    "note": "det(EI-H(phi)) = D_open(E) - R e^{i phi};  R = lambda t_R^{N-1} is a PUBLIC CONSTANT; D_open is fold-even -> phi handle is fold-blind."
+  },
+  "primary": [
+    {
+      "n": 8,
+      "verdict": "FAIL_CHANCE",
+      "auc": 0.45697075709912677,
+      "shuffle_null_95": 0.5571637113421452,
+      "random_fold_auc": 0.5496212121212121,
+      "random_fold_null_95": 0.5661616161616161,
+      "max_fold_delta": 0.0,
+      "smuggle_reason": "none",
+      "seed": 44067899,
+      "n_instances": 400,
+      "elapsed_s": 2.603386878967285
+    },
+    {
+      "n": 10,
+      "verdict": "FAIL_CHANCE",
+      "auc": 0.482438454497278,
+      "shuffle_null_95": 0.540973828106181,
+      "random_fold_auc": 0.46182553666106296,
+      "random_fold_null_95": 0.5421776564992026,
+      "max_fold_delta": 0.0,
+      "smuggle_reason": "none",
+      "seed": 44069721,
+      "n_instances": 350,
+      "elapsed_s": 4.580653667449951
+    },
+    {
+      "n": 12,
+      "verdict": "FAIL_CHANCE",
+      "auc": 0.5035416666666668,
+      "shuffle_null_95": 0.5633750000000001,
+      "random_fold_auc": 0.5089337474120083,
+      "random_fold_null_95": 0.561728649068323,
+      "max_fold_delta": 0.0,
+      "smuggle_reason": "none",
+      "seed": 44071543,
+      "n_instances": 220,
+      "elapsed_s": 9.233519792556763
+    },
+    {
+      "n": 14,
+      "verdict": "FAIL_CHANCE",
+      "auc": 0.4902197802197802,
+      "shuffle_null_95": 0.6274164050235479,
+      "random_fold_auc": 0.551025641025641,
+      "random_fold_null_95": 0.5049002403846153,
+      "max_fold_delta": 0.0,
+      "smuggle_reason": "none",
+      "seed": 44073365,
+      "n_instances": 140,
+      "elapsed_s": 22.137202739715576
+    }
+  ],
+  "smuggle_native": [
+    {
+      "n": 8,
+      "verdict": "FAIL_SMUGGLE",
+      "auc": 0.5422517979987493,
+      "shuffle_null_95": 0.5456061757348343,
+      "random_fold_auc": 0.4813008130081301,
+      "random_fold_null_95": 0.5486679174484053,
+      "max_fold_delta": 0.5251760267231385,
+      "smuggle_reason": "exact_d_invariance_delta>0"
+    },
+    {
+      "n": 10,
+      "verdict": "FAIL_SMUGGLE",
+      "auc": 0.46605537954222165,
+      "shuffle_null_95": 0.5474217941775508,
+      "random_fold_auc": 0.48737122289753865,
+      "random_fold_null_95": 0.5389102406084315,
+      "max_fold_delta": 0.43089885946233153,
+      "smuggle_reason": "exact_d_invariance_delta>0"
+    }
+  ],
+  "controls": [
+    {
+      "name": "reads_d",
+      "n": 8,
+      "expected": "FAIL_SMUGGLE",
+      "verdict": "FAIL_SMUGGLE",
+      "auc": 1.0,
+      "random_fold_auc": 1.0,
+      "max_fold_delta": 1.0,
+      "matches": true
+    },
+    {
+      "name": "reads_sin",
+      "n": 8,
+      "expected": "FAIL_SMUGGLE",
+      "verdict": "FAIL_SMUGGLE",
+      "auc": 1.0,
+      "random_fold_auc": 1.0,
+      "max_fold_delta": 2.0,
+      "matches": true
+    },
+    {
+      "name": "useless_even",
+      "n": 8,
+      "expected": "FAIL_CHANCE",
+      "verdict": "FAIL_CHANCE",
+      "auc": 0.4545056285178237,
+      "random_fold_auc": 0.5330033128074744,
+      "max_fold_delta": 0.0,
+      "matches": true
+    },
+    {
+      "name": "reads_d",
+      "n": 10,
+      "expected": "FAIL_SMUGGLE",
+      "verdict": "FAIL_SMUGGLE",
+      "auc": 1.0,
+      "random_fold_auc": 1.0,
+      "max_fold_delta": 1.0,
+      "matches": true
+    },
+    {
+      "name": "reads_sin",
+      "n": 10,
+      "expected": "FAIL_SMUGGLE",
+      "verdict": "FAIL_SMUGGLE",
+      "auc": 1.0,
+      "random_fold_auc": 1.0,
+      "max_fold_delta": 2.0,
+      "matches": true
+    },
+    {
+      "name": "useless_even",
+      "n": 10,
+      "expected": "FAIL_CHANCE",
+      "verdict": "FAIL_CHANCE",
+      "auc": 0.5354071026768396,
+      "random_fold_auc": 0.5286454581832732,
+      "max_fold_delta": 0.0,
+      "matches": true
+    }
+  ],
+  "pricing": [
+    {
+      "n": 8,
+      "N": 256,
+      "rank1_s_per_inst": 0.000999768575032552,
+      "W_numeric": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "W_closed": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "W_match": true,
+      "dense_s_per_inst": 1.6383006572723389,
+      "speedup_dense_over_rank1": 1638.6798887122418,
+      "dense_W_Eref3": 0,
+      "closed_W_Eref3": 0,
+      "dense_matches_closed": true
+    },
+    {
+      "n": 10,
+      "N": 1024,
+      "rank1_s_per_inst": 0.0036667982737223306,
+      "W_numeric": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "W_closed": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "W_match": true,
+      "dense_s_per_inst": 5.128373384475708,
+      "speedup_dense_over_rank1": 1398.5970870630053,
+      "dense_W_Eref3": 0,
+      "closed_W_Eref3": 0,
+      "dense_matches_closed": true
+    },
+    {
+      "n": 12,
+      "N": 4096,
+      "rank1_s_per_inst": 0.013333559036254883,
+      "W_numeric": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "W_closed": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "W_match": true,
+      "dense_s_per_inst": null,
+      "speedup_dense_over_rank1": null,
+      "dense_W_Eref3": null,
+      "closed_W_Eref3": null,
+      "dense_matches_closed": null
+    },
+    {
+      "n": 14,
+      "N": 16384,
+      "rank1_s_per_inst": 0.0516664187113444,
+      "W_numeric": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "W_closed": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "W_match": true,
+      "dense_s_per_inst": null,
+      "speedup_dense_over_rank1": null,
+      "dense_W_Eref3": null,
+      "closed_W_Eref3": null,
+      "dense_matches_closed": null
+    }
+  ],
+  "rollup": {
+    "primary_all_FAIL_CHANCE": true,
+    "native_smuggle_all_caught": true,
+    "standard_controls_all_ok": true,
+    "outcome_class": "iii_inherits_the_fold__FAIL_CHANCE"
+  }
+}

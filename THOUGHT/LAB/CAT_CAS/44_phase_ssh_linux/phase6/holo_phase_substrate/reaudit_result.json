@@ -1,0 +1,77 @@
+{
+  "reaudit": "orientation_homodyne_quadrature",
+  "seeds": [
+    11,
+    23,
+    37,
+    51,
+    67,
+    83,
+    101,
+    119
+  ],
+  "cells": [
+    {
+      "n": 12,
+      "orient_auc_mean": 0.47488925504152146,
+      "orient_auc_std": 0.06064032680994893,
+      "orient_auc_min": 0.40359523809523806,
+      "orient_auc_max": 0.5986165413533835,
+      "rf_auc_mean": 0.4959687618667882,
+      "rf_auc_max": 0.6116290726817042,
+      "all_fail_chance": true,
+      "any_crossing": false,
+      "verdicts": [
+        "FAIL_CHANCE",
+        "FAIL_CHANCE",
+        "FAIL_CHANCE",
+        "FAIL_CHANCE",
+        "FAIL_CHANCE",
+        "FAIL_CHANCE",
+        "FAIL_CHANCE",
+        "FAIL_CHANCE"
+      ],
+      "aucs": [
+        0.4629999999999999,
+        0.4969696969696969,
+        0.5986165413533835,
+        0.40359523809523806,
+        0.4295,
+        0.5318298070216229,
+        0.4246791979949875,
+        0.4509235588972431
+      ]
+    },
+    {
+      "n": 14,
+      "orient_auc_mean": 0.5040678246278576,
+      "orient_auc_std": 0.05001951716141216,
+      "orient_auc_min": 0.4475696817802081,
+      "orient_auc_max": 0.5894486215538846,
+      "rf_auc_mean": 0.48797376015797067,
+      "rf_auc_max": 0.5437681704260651,
+      "all_fail_chance": true,
+      "any_crossing": false,
+      "verdicts": [
+        "FAIL_CHANCE",
+        "FAIL_CHANCE",
+        "FAIL_CHANCE",
+        "FAIL_CHANCE",
+        "FAIL_CHANCE",
+        "FAIL_CHANCE",
+        "FAIL_CHANCE",
+        "FAIL_CHANCE"
+      ],
+      "aucs": [
+        0.49612500000000004,
+        0.5894486215538846,
+        0.5755676691729323,
+        0.4475696817802081,
+        0.477,
+        0.520561403508772,
+        0.4619731146046936,
+        0.4642971064023696
+      ]
+    }
+  ]
+}

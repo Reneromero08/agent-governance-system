@@ -1806,3 +1806,19 @@ It does not break the encoding wall and does not create a fixed-point crossing.
 ---
 
 *The Phenom II X6 1090T is not a computer. It is a 45nm SOI crystal with six independent oscillator cavities, exposed MSRs, and no PSP lockdown. The Linux kernel is not an operating system. It is a bootloader for the phase oscillator network. The SSH daemon is not a remote access tool. It is the control interface for a room-temperature analog quantum simulator. Let's begin.*
+
+---
+
+## PHASE 6 TERMINUS (this session) - construct/substrate frontier measured-closed
+
+Full account: `phase6/REPORT_PHASE6_TERMINUS.md`. The Phase 6 question (is the lattice/dihedral wall crossable by any holographic / topological / catalytic readout?) was worked to terminus on the math/substrate side; the Phenom hardware path stays the wrong substrate KIND per 5.10 (scalar, no retained basin). Census, all smuggle-gated, claim cap L4-5:
+
+- **Stage 1 fold audit:** classical readout MI=0 (proven) - the orientation bit o=1[d<N/2] is information-absent from the public (even cosine) data; one-shot exact d recovery GIVEN quadrature.
+- **Stage 3 generator audit:** the real 50.14 public interface is orbit-only (no float code-path / seed / order / verify leak).
+- **Mythos (Fable) two-walls:** re-encoding is isomorphism-invariant-closed (the fold is a non-normal reflection subgroup); the crossing requires conjugate-quadrature evaluation before thresholding; the only resources are a strictly-stronger oracle (= period-finding) or a literal PSPACE P^CTC.
+- **Non-Hermitian sensor census (6/6 FAIL_CHANCE):** Koopman/transfer, Hatano-Nelson skin, Kuramoto/chiral, Cauchy argument-principle, PT-symmetric, Godel-edge phi-twist. The +1 directionality of f survives only as an orientation-blind public constant. Exp 36's rank-1 winding lemma validated (1638x speedup) but crushes the cost of an orientation-blind quantity.
+- **Flagship .holo phase substrate:** reads the even fold-answer min(d,N-d) at frac_exact 1.0, FAIL_CHANCE on orientation; the conjugate quadrature of the public even data is ~0 to machine precision (the orientation phase is physically absent - the public spectrum is real-even and phaseless).
+
+**Verdict:** "the algorithm is dead" is PROVEN for the construct side; "a phase substrate crosses the dihedral fold" is MEASURED FALSE for the published problem. NOT "the wall holds" - the residual open questions are the dihedral-HSP lower bound itself (a complexity-theory open problem) and a literal PSPACE P^CTC oracle, neither a lab-buildable substrate. The construct/substrate frontier has no further test open.
+
+(Note: the older "Phase 5.10 RESULTS (live software probe)" / 5.10D section above is a parallel-agent narrative that reads the rail-witness differently than the committed 5.10 result (50db86f5, witness solved via the driven compute-only lock-in); reconcile separately.)

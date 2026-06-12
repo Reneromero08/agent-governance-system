@@ -1,0 +1,173 @@
+{
+  "master_seed": 44060611,
+  "n_list": [
+    8,
+    10
+  ],
+  "quantities": {
+    "n=8": {
+      "Q1_published_bit": {
+        "quantity": "Q1_published_bit",
+        "dtype": "float64",
+        "unique_values": [
+          -1.0,
+          1.0
+        ],
+        "is_pure_binary_sign": true,
+        "paired_moment_gaps": {
+          "mean": {
+            "fold_gap_mean": 0.012240740740740745,
+            "same_d_null_mean": 0.012925925925925926,
+            "ratio_fold_over_null": 0.9469914040114616
+          },
+          "var": {
+            "fold_gap_mean": 0.01252115740740738,
+            "same_d_null_mean": 0.010966111111111045,
+            "ratio_fold_over_null": 1.141804718239699
+          },
+          "m3": {
+            "fold_gap_mean": 0.015955699527777763,
+            "same_d_null_mean": 0.020550131611111116,
+            "ratio_fold_over_null": 0.7764280944629465
+          },
+          "m4": {
+            "fold_gap_mean": 0.01776908087670147,
+            "same_d_null_mean": 0.0179349774492129,
+            "ratio_fold_over_null": 0.990750109779552
+          }
+        },
+        "trials_per_cell": 4000,
+        "odd_dependence": false
+      },
+      "Q2_frequencies_k": {
+        "quantity": "Q2_frequencies_k",
+        "k_identical_for_d_and_Nd_at_same_rng_state": true,
+        "odd_dependence": false
+      },
+      "Q4_score_threshold_accept": {
+        "quantity": "Q4_score_threshold_accept",
+        "max_abs_score_gap_d_vs_Nd_same_data": 5.3717030823463574e-12,
+        "accept_d_neq_accept_Nd_count": 0,
+        "threshold_references_d": false,
+        "odd_dependence": false
+      },
+      "Q5_verify_map_make_verify": {
+        "quantity": "Q5_verify_map_make_verify",
+        "verify_truth_changes_under_relabel_d_to_Nd": 0,
+        "restriction_half_is_in_published_data": false,
+        "odd_dependence": false
+      },
+      "Q6_float_rounding_codepath": {
+        "quantity": "Q6_float_rounding_codepath",
+        "frac_intermediate_cos_float_bits_differ_d_vs_Nd": 0.95111083984375,
+        "published_bit_b_differences_d_vs_Nd_same_rng": 0,
+        "published_float_carries_orientation": false,
+        "SMUGGLE_control_auc_on_intermediate_cos": {
+          "orientation": 0.9469228627123364,
+          "parity_of_d": 1.0,
+          "random_label": 0.5571630019585838,
+          "note": "intermediate cos is NOT published; high AUC here is a smuggle, not a leak"
+        },
+        "odd_dependence": false
+      },
+      "Q7_order_and_seed": {
+        "quantity": "Q7_order_and_seed",
+        "order_preserved_d_vs_Nd": true,
+        "accept_prob_intermediate_bitwise_identical_d_vs_Nd": false,
+        "published_bits_identical_d_vs_Nd_same_rng": true,
+        "seed_derived_from_d": false,
+        "odd_dependence": false
+      },
+      "Q3_sample_count_M": {
+        "quantity": "Q3_sample_count_M",
+        "M": 384,
+        "depends_on_d": false,
+        "odd_dependence": false
+      }
+    },
+    "n=10": {
+      "Q1_published_bit": {
+        "quantity": "Q1_published_bit",
+        "dtype": "float64",
+        "unique_values": [
+          -1.0,
+          1.0
+        ],
+        "is_pure_binary_sign": true,
+        "paired_moment_gaps": {
+          "mean": {
+            "fold_gap_mean": 0.012055555555555562,
+            "same_d_null_mean": 0.014166666666666673,
+            "ratio_fold_over_null": 0.8509803921568628
+          },
+          "var": {
+            "fold_gap_mean": 0.009878287037037066,
+            "same_d_null_mean": 0.011908657407407416,
+            "ratio_fold_over_null": 0.8295046787467897
+          },
+          "m3": {
+            "fold_gap_mean": 0.018531523305555544,
+            "same_d_null_mean": 0.020691522361111086,
+            "ratio_fold_over_null": 0.8956094666279762
+          },
+          "m4": {
+            "fold_gap_mean": 0.01610203788712729,
+            "same_d_null_mean": 0.018033855715678306,
+            "ratio_fold_over_null": 0.8928782696829759
+          }
+        },
+        "trials_per_cell": 4000,
+        "odd_dependence": false
+      },
+      "Q2_frequencies_k": {
+        "quantity": "Q2_frequencies_k",
+        "k_identical_for_d_and_Nd_at_same_rng_state": true,
+        "odd_dependence": false
+      },
+      "Q4_score_threshold_accept": {
+        "quantity": "Q4_score_threshold_accept",
+        "max_abs_score_gap_d_vs_Nd_same_data": 1.4438228390645236e-11,
+        "accept_d_neq_accept_Nd_count": 0,
+        "threshold_references_d": false,
+        "odd_dependence": false
+      },
+      "Q5_verify_map_make_verify": {
+        "quantity": "Q5_verify_map_make_verify",
+        "verify_truth_changes_under_relabel_d_to_Nd": 0,
+        "restriction_half_is_in_published_data": false,
+        "odd_dependence": false
+      },
+      "Q6_float_rounding_codepath": {
+        "quantity": "Q6_float_rounding_codepath",
+        "frac_intermediate_cos_float_bits_differ_d_vs_Nd": 0.9889373779296875,
+        "published_bit_b_differences_d_vs_Nd_same_rng": 0,
+        "published_float_carries_orientation": false,
+        "SMUGGLE_control_auc_on_intermediate_cos": {
+          "orientation": 0.6319498691110425,
+          "parity_of_d": 1.0,
+          "random_label": 0.5131373298138372,
+          "note": "intermediate cos is NOT published; high AUC here is a smuggle, not a leak"
+        },
+        "odd_dependence": false
+      },
+      "Q7_order_and_seed": {
+        "quantity": "Q7_order_and_seed",
+        "order_preserved_d_vs_Nd": true,
+        "accept_prob_intermediate_bitwise_identical_d_vs_Nd": false,
+        "published_bits_identical_d_vs_Nd_same_rng": true,
+        "seed_derived_from_d": false,
+        "odd_dependence": false
+      },
+      "Q3_sample_count_M": {
+        "quantity": "Q3_sample_count_M",
+        "M": 480,
+        "depends_on_d": false,
+        "odd_dependence": false
+      }
+    }
+  },
+  "any_odd_dependence_found": false,
+  "odd_quantities": [],
+  "verdict": "ORBIT_ONLY_PUBLIC_INTERFACE_BEDROCK_APPLIES",
+  "elapsed_s": 2.00164532661438
+}

@@ -114,6 +114,14 @@ showing on the scaling curve (Sec 6) that the native threshold crossing tracks `
 public-vs-`d`-oracle control (Sec 5, G4) stays DECISIVE. Until that representation exists on paper and
 survives G4, Phase 6 has an open angle, not a result. Claim ceiling L4-5; no announcement.
 
+### 1B.1 Equivariance theorem (no scalar lift synthesizes orientation)
+
+The wall has a precise, attackable form. Let the public data be the cosine channel c_k = cos(2*pi*k*d/N) (equivalently the noisy bits b_i with E[b_i] proportional to c_{k_i}). The construction's symmetry is the fold sigma: d -> N-d, under which every c_k is invariant (cosine is even). Let T be any feature map computed from the public data. If T is equivariant under the public symmetry (T commutes with sigma acting on its inputs; for functions of the invariant cosines this means T is itself sigma-invariant), then T(public data) is identical for d and for N-d. Hence I(T(public data); orientation bit) = 0, where the orientation bit b_orient = 1[d < N/2] is exactly the bit distinguishing d from N-d.
+
+Consequence: no scalar lift of any dimension (linear, kernel, deep, or otherwise) recovers d from the cosine channel, because the orientation bit is information-ABSENT from that channel, not merely hard to separate. The only way to raise I above 0 is to inject orientation the cosine channel does not contain: access the odd/quadrature component sin(2*pi*k*d/N), equivalently the full complex coefficient z_k = exp(-2*pi*i*k*d/N).
+
+This converts "lattice hardness" into a sharp object: the crossing requires a transform that supplies genuine quadrature WITHOUT smuggling d. That is the no-smuggle gate operationalized in Stage 3 of the Phase 6 quadrature campaign, and it is verified empirically by the Stage 1 fold audit (phase6/fold_audit/).
+
 ## 1C. THE SHARPENED OBSTRUCTION - the O(N) wall is an ENCODING/SYMMETRY wall (OPEN; gated behind 5.10C)
 
 A second frontier (Fable) consult sharpened 1A/1B one level further. It does NOT claim a crossing; it

@@ -1,0 +1,33 @@
+==========================================================================================
+PART A - GENERATOR AUDIT of the REAL Exp 50.14 construction (construction.py == 50_14)
+master_seed=44060611   n in {8,10}   FOREGROUND   claim ceiling L4-5
+==========================================================================================
+
+##############################  n=8  (N=256, M=384)  ##############################
+  [even (ok) ] Q1_published_bit                    odd_dependence=False  [0.0s]
+  [even (ok) ] Q2_frequencies_k                    odd_dependence=False  [0.0s]
+  [even (ok) ] Q4_score_threshold_accept           odd_dependence=False  [0.0s]
+  [even (ok) ] Q5_verify_map_make_verify           odd_dependence=False  [0.0s]
+  [even (ok) ] Q6_float_rounding_codepath          odd_dependence=False  [1.5s]
+  [even (ok) ] Q7_order_and_seed                   odd_dependence=False  [0.0s]
+  [even (ok) ] Q3_sample_count_M                   odd_dependence=False
+
+##############################  n=10  (N=1024, M=480)  ##############################
+  [even (ok) ] Q1_published_bit                    odd_dependence=False  [0.0s]
+  [even (ok) ] Q2_frequencies_k                    odd_dependence=False  [0.0s]
+  [even (ok) ] Q4_score_threshold_accept           odd_dependence=False  [0.0s]
+  [even (ok) ] Q5_verify_map_make_verify           odd_dependence=False  [0.0s]
+  [even (ok) ] Q6_float_rounding_codepath          odd_dependence=False  [0.4s]
+  [even (ok) ] Q7_order_and_seed                   odd_dependence=False  [0.0s]
+  [even (ok) ] Q3_sample_count_M                   odd_dependence=False
+
+==========================================================================================
+GENERATOR AUDIT VERDICT
+  NO odd/sin-dependence found in ANY published quantity.
+  The real construction's PUBLIC interface {(k,b)} (and the verify map / score /
+  threshold / M / order / seed / float code-path) is a PURE FUNCTION OF THE ORBIT
+  {d, N-d}. The published bit is pure binary {-1,+1} with E[b]=cos as its WHOLE
+  conditional law; cos(2 pi k d/N) is BITWISE-identical to cos(2 pi k (N-d)/N) on
+  the actual sampler float64 code path. The bedrock impossibility P(D|d)=P(D|N-d)
+  applies WITHOUT caveat: I(orientation ; T(D)) = 0 for any transform T at any compute.
+==========================================================================================

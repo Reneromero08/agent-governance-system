@@ -1,0 +1,133 @@
+{
+  "candidate": "C_nonreciprocal_chiral",
+  "n": 14,
+  "master_seed": 44060611,
+  "sweeps": [
+    {
+      "tag": "gate_setting_240",
+      "n_instances": 240,
+      "rows": [
+        {
+          "seed": 44074799,
+          "orient_auc": 0.6044818840579711,
+          "orient_null95": 0.5475499396135266,
+          "random_fold_auc": 0.4954625603864734,
+          "invariance_delta": 0.0,
+          "verdict": "PASS_CROSSING"
+        },
+        {
+          "seed": 44082718,
+          "orient_auc": 0.5558260869565218,
+          "orient_null95": 0.5719130434782609,
+          "random_fold_auc": 0.6064969806763286,
+          "invariance_delta": 0.0,
+          "verdict": "FAIL_CHANCE"
+        },
+        {
+          "seed": 44090637,
+          "orient_auc": 0.4083478260869565,
+          "orient_null95": 0.576504347826087,
+          "random_fold_auc": 0.46525022803283667,
+          "invariance_delta": 0.0,
+          "verdict": "FAIL_CHANCE"
+        },
+        {
+          "seed": 44098556,
+          "orient_auc": 0.4798725845410628,
+          "orient_null95": 0.565851388888889,
+          "random_fold_auc": 0.5426409242930982,
+          "invariance_delta": 0.0,
+          "verdict": "FAIL_CHANCE"
+        },
+        {
+          "seed": 44106475,
+          "orient_auc": 0.5040175120772947,
+          "orient_null95": 0.5895323973429951,
+          "random_fold_auc": 0.5327613256308908,
+          "invariance_delta": 0.0,
+          "verdict": "FAIL_CHANCE"
+        },
+        {
+          "seed": 44114394,
+          "orient_auc": 0.4539208937198067,
+          "orient_null95": 0.5777423007246376,
+          "random_fold_auc": 0.495304347826087,
+          "invariance_delta": 0.0,
+          "verdict": "FAIL_CHANCE"
+        },
+        {
+          "seed": 44122313,
+          "orient_auc": 0.45277777777777783,
+          "orient_null95": 0.5817534722222222,
+          "random_fold_auc": 0.5143776223776224,
+          "invariance_delta": 0.0,
+          "verdict": "FAIL_CHANCE"
+        },
+        {
+          "seed": 44130232,
+          "orient_auc": 0.5865084541062802,
+          "orient_null95": 0.577548731884058,
+          "random_fold_auc": 0.5099477044694436,
+          "invariance_delta": 0.0,
+          "verdict": "FAIL_CHANCE"
+        }
+      ],
+      "mean_orient_auc": 0.505719127415459,
+      "std_orient_auc": 0.06560264658571875,
+      "pass_crossing_count": 1,
+      "n_seeds": 8
+    },
+    {
+      "tag": "large_900",
+      "n_instances": 900,
+      "rows": [
+        {
+          "seed": 44060612,
+          "orient_auc": 0.5282943095654697,
+          "orient_null95": 0.5381994306579281,
+          "random_fold_auc": 0.46935249889429465,
+          "invariance_delta": 0.0,
+          "verdict": "FAIL_CHANCE"
+        },
+        {
+          "seed": 44060625,
+          "orient_auc": 0.48498268184067295,
+          "orient_null95": 0.510142256308758,
+          "random_fold_auc": 0.49828373873317694,
+          "invariance_delta": 0.0,
+          "verdict": "FAIL_CHANCE"
+        },
+        {
+          "seed": 44060638,
+          "orient_auc": 0.4847265094456105,
+          "orient_null95": 0.5458167675021607,
+          "random_fold_auc": 0.5045903243656052,
+          "invariance_delta": 0.0,
+          "verdict": "FAIL_CHANCE"
+        },
+        {
+          "seed": 44060651,
+          "orient_auc": 0.5195577813504488,
+          "orient_null95": 0.5439732070153758,
+          "random_fold_auc": 0.48830782530555605,
+          "invariance_delta": 0.0,
+          "verdict": "FAIL_CHANCE"
+        },
+        {
+          "seed": 44060664,
+          "orient_auc": 0.5090986511061418,
+          "orient_null95": 0.5386604715717076,
+          "random_fold_auc": 0.5003197096015856,
+          "invariance_delta": 0.0,
+          "verdict": "FAIL_CHANCE"
+        }
+      ],
+      "mean_orient_auc": 0.5053319866616688,
+      "std_orient_auc": 0.01779049840056373,
+      "pass_crossing_count": 0,
+      "n_seeds": 5
+    }
+  ],
+  "conclusion": "FINITE_SAMPLE_FALSE_POSITIVE: orientation AUC regresses to 0.5 with std shrinking ~1/sqrt(n); no crossing.",
+  "is_false_positive": true
+}

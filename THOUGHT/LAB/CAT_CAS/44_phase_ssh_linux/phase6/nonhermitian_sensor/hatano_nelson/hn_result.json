@@ -1,0 +1,191 @@
+{
+  "master_seed": 44061114,
+  "gauge_residual_n5": 1.9984014443252818e-15,
+  "sanity": [
+    {
+      "d": 234,
+      "a": 234,
+      "o": 1,
+      "W0": 1,
+      "peak": 790.0,
+      "peak_folded": 234.0,
+      "ipr": 0.038609863767189195,
+      "skin_com": 1012.5103279357955
+    },
+    {
+      "d": 886,
+      "a": 138,
+      "o": 0,
+      "W0": 1,
+      "peak": 138.0,
+      "peak_folded": 138.0,
+      "ipr": 0.03286880696916537,
+      "skin_com": 1021.9542558736226
+    },
+    {
+      "d": 493,
+      "a": 493,
+      "o": 1,
+      "W0": 1,
+      "peak": 493.0,
+      "peak_folded": 493.0,
+      "ipr": 0.03082593788894151,
+      "skin_com": 1019.8379309516231
+    },
+    {
+      "d": 88,
+      "a": 88,
+      "o": 1,
+      "W0": 1,
+      "peak": 88.0,
+      "peak_folded": 88.0,
+      "ipr": 0.036890693485141735,
+      "skin_com": 1022.4074320758124
+    },
+    {
+      "d": 621,
+      "a": 403,
+      "o": 0,
+      "W0": 1,
+      "peak": 621.0,
+      "peak_folded": 403.0,
+      "ipr": 0.0335849352314318,
+      "skin_com": 1020.7423198250794
+    },
+    {
+      "d": 9,
+      "a": 9,
+      "o": 1,
+      "W0": 1,
+      "peak": 1015.0,
+      "peak_folded": 9.0,
+      "ipr": 0.03481886968245673,
+      "skin_com": 1015.4838988269427
+    },
+    {
+      "d": 761,
+      "a": 263,
+      "o": 0,
+      "W0": 1,
+      "peak": 761.0,
+      "peak_folded": 263.0,
+      "ipr": 0.03358283229705326,
+      "skin_com": 1022.4901374634586
+    },
+    {
+      "d": 863,
+      "a": 161,
+      "o": 0,
+      "W0": 1,
+      "peak": 863.0,
+      "peak_folded": 161.0,
+      "ipr": 0.03337618402276407,
+      "skin_com": 1021.1775500458976
+    }
+  ],
+  "magnitude_read": [
+    {
+      "n": 8,
+      "N": 256,
+      "corr": 1.0,
+      "median_err_over_N": 0.0,
+      "frac_exact": 1.0,
+      "n_instances": 60
+    },
+    {
+      "n": 10,
+      "N": 1024,
+      "corr": 1.0,
+      "median_err_over_N": 0.0,
+      "frac_exact": 1.0,
+      "n_instances": 60
+    },
+    {
+      "n": 12,
+      "N": 4096,
+      "corr": 1.0,
+      "median_err_over_N": 0.0,
+      "frac_exact": 1.0,
+      "n_instances": 60
+    }
+  ],
+  "orientation_gate": [
+    {
+      "verdict": "FAIL_CHANCE",
+      "auc": 0.54453125,
+      "shuffle_null_95": 0.5955078125,
+      "shuffle_null_mean": 0.48896484375,
+      "reads_d": false,
+      "max_fold_delta": 0.0,
+      "above_chance": false,
+      "n": 8,
+      "n_instances": 160,
+      "random_fold_auc": 0.5498651960784313,
+      "random_fold_null_95": 0.6253270526960785,
+      "random_fold_null_mean": 0.504162837009804,
+      "random_fold_above_chance": false,
+      "smuggle_flag": false,
+      "smuggle_reason": "none",
+      "wall_s": 45.494707345962524,
+      "seed": 44124466
+    },
+    {
+      "verdict": "FAIL_CHANCE",
+      "auc": 0.43398692810457523,
+      "shuffle_null_95": 0.5869444444444444,
+      "shuffle_null_mean": 0.49876984126984125,
+      "reads_d": false,
+      "max_fold_delta": 0.0,
+      "above_chance": false,
+      "n": 10,
+      "n_instances": 160,
+      "random_fold_auc": 0.5327077497665733,
+      "random_fold_null_95": 0.5790266106442576,
+      "random_fold_null_mean": 0.5047099673202615,
+      "random_fold_above_chance": false,
+      "smuggle_flag": false,
+      "smuggle_reason": "none",
+      "wall_s": 119.33866930007935,
+      "seed": 44140304
+    }
+  ],
+  "cost_scaling": {
+    "rows": [
+      {
+        "n": 8,
+        "N": 256,
+        "t_landscape": 0.001333475112915039,
+        "t_winding": 0.13954504330952963,
+        "t_well": 0.005666494369506836,
+        "t_total": 0.1465450127919515
+      },
+      {
+        "n": 10,
+        "N": 1024,
+        "t_landscape": 0.0060011545817057295,
+        "t_winding": 0.3386825720469157,
+        "t_well": 0.012160778045654297,
+        "t_total": 0.3568445046742757
+      },
+      {
+        "n": 12,
+        "N": 4096,
+        "t_landscape": 0.02873714764912923,
+        "t_winding": 1.1491003036499023,
+        "t_well": 0.03266636530558268,
+        "t_total": 1.2105038166046143
+      },
+      {
+        "n": 14,
+        "N": 16384,
+        "t_landscape": 0.13705873489379883,
+        "t_winding": 4.750363349914551,
+        "t_well": 0.11968334515889485,
+        "t_total": 5.007105429967244
+      }
+    ],
+    "slope_log2time_per_n": 0.8522961669124218,
+    "alpha_in_N": 0.8522961669124218
+  },
+  "elapsed_s": 191.38206481933594
+}
