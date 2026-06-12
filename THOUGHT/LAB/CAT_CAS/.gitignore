@@ -19,6 +19,10 @@ storage/
 **/*.safetensors
 **/*.holo
 **/cell_data/
+**/data/*.bin
+**/data/*.mp4
+**/telemetry/boundary_cloud_raw.csv
+**/rust/mri_*.bin
 
 # OS noise
 Thumbs.db

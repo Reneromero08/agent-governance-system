@@ -22,7 +22,7 @@ sys.path.insert(0, DIR)
 
 from quantum_simulator import CatalyticQuantumSimulator
 
-TAPE_PATH = os.path.abspath(os.path.join(DIR, "..", "storage", "quantum_tape_25q.bin"))
+TAPE_PATH = os.path.abspath(os.path.join(DIR, "data", "quantum_tape_25q.bin"))
 
 N_QUBITS   = 25
 N_STATES    = 1 << N_QUBITS          # 33,554,432

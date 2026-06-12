@@ -2,7 +2,7 @@ import os
 import random
 
 DIR = os.path.dirname(__file__)
-DATA_FILE = os.path.abspath(os.path.join(DIR, "..", "storage", "user_video.mp4"))
+DATA_FILE = os.path.abspath(os.path.join(DIR, "data", "user_video.mp4"))
 
 def generate_video_file():
     print(f"Generating 2MB dirty video file at {DATA_FILE}...")
