@@ -1,0 +1,3 @@
+cmd: python run_test.py --case beta
+out: beta = 0.40
+exit code 0

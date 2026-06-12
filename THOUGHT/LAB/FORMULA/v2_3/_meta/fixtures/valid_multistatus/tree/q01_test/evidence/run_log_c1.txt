@@ -1,0 +1,3 @@
+cmd: python run_test.py --case alpha
+out: alpha = 0.75
+exit code 0

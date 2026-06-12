@@ -1,0 +1,177 @@
+{
+  "$comment": "Machine-readable description of the verdict/v2 frontmatter for tooling. Documentation only; not a jsonschema-validator dependency. Normative prose lives in VERDICT_SCHEMA.md.",
+  "schema_id": "verdict/v2",
+  "status_enum": ["FALSIFIED", "UNSUPPORTED", "PARTIALLY_VERIFIED", "VERIFIED"],
+  "status_order": "ascending total order as listed; overall status = MIN over claims[].status (validator recomputes)",
+  "open_semantics": "OPEN exists only at index level and means no VERDICT.md file exists for the question; OPEN never appears inside a VERDICT.md",
+  "strict": true,
+  "strict_note": "unknown frontmatter keys are validation errors (E_SCHEMA)",
+  "fields": {
+    "schema": {
+      "type": "string",
+      "required": true,
+      "const": "verdict/v2"
+    },
+    "question": {
+      "type": "string",
+      "required": true,
+      "pattern": "^Q[1-9][0-9]?$",
+      "note": "Q<N>, N = 1..57, no zero padding"
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "pattern": "^q[0-9]{2}_[a-z0-9_]+$",
+      "note": "zero-padded 2-digit; must match the directory name containing the VERDICT.md"
+    },
+    "date": {
+      "type": "string",
+      "required": true,
+      "format": "YYYY-MM-DD"
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "enum": ["FALSIFIED", "UNSUPPORTED", "PARTIALLY_VERIFIED", "VERIFIED"],
+      "constraint": "must equal MIN over claims[].status"
+    },
+    "verification": {
+      "type": "string",
+      "required": true,
+      "enum": ["blind", "primed"]
+    },
+    "packet_sha256": {
+      "type": ["string", "null"],
+      "required": true,
+      "pattern": "^[0-9a-f]{64}$",
+      "constraint": "must be non-null when verification is blind; q<NN>_<slug>/_packets/ must contain a packet file whose sha256 matches (else E_BLIND)"
+    },
+    "predecessor": {
+      "type": ["string", "null"],
+      "required": true,
+      "constraint": "if non-null, repo-relative path that must exist on disk; points at the v2_2 question dir (else E_PREDECESSOR)"
+    },
+    "method_summary": {
+      "type": "string",
+      "required": true,
+      "note": "one line"
+    },
+    "registry_ids": {
+      "type": "list",
+      "items": "string",
+      "required": true,
+      "constraint": "every ID must exist as a row in VARIABLES.md (else E_REGISTRY); empty list allowed only for desk-review verdicts"
+    },
+    "prediction_ids": {
+      "type": "list",
+      "items": "string",
+      "item_pattern": "^P-[0-9]{3}$",
+      "required": true,
+      "constraint": "every ref must exist in PREDICTIONS.md; must be non-empty when verification is blind (else E_PREDICTION)"
+    },
+    "claims": {
+      "type": "list",
+      "items": "claim",
+      "required": true
+    },
+    "evidence_manifest": {
+      "type": "list",
+      "items": "evidence_manifest_entry",
+      "required": true
+    },
+    "verifications": {
+      "type": "list",
+      "items": "verification_entry",
+      "required": true
+    }
+  },
+  "claim": {
+    "id": {
+      "type": "string",
+      "required": true,
+      "pattern": "^C[1-9][0-9]*$"
+    },
+    "text": {
+      "type": "string",
+      "required": true,
+      "note": "claim statement"
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "enum": ["FALSIFIED", "UNSUPPORTED", "PARTIALLY_VERIFIED", "VERIFIED"]
+    },
+    "falsifier": {
+      "type": "string",
+      "required": true,
+      "constraint": "non-empty; states what observation falsifies this claim (else E_FALSIFIER)"
+    },
+    "key_results": {
+      "type": "list",
+      "items": "string",
+      "required": true,
+      "constraint": "each string must appear verbatim in the body Results section (else E_KEYNUM)"
+    },
+    "evidence": {
+      "type": "list",
+      "items": "string (path)",
+      "required": true,
+      "constraint": "subset of evidence_manifest paths; non-empty if claim status is PARTIALLY_VERIFIED or VERIFIED (else E_FLOOR)"
+    }
+  },
+  "evidence_manifest_entry": {
+    "path": {
+      "type": "string",
+      "required": true,
+      "constraint": "relative path inside the question dir; must exist on disk; absolute paths or escapes are E_MANIFEST_MISSING"
+    },
+    "sha256": {
+      "type": "string",
+      "required": true,
+      "pattern": "^[0-9a-f]{64}$",
+      "constraint": "must match the file's actual sha256 (else E_HASH)"
+    }
+  },
+  "verification_entry": {
+    "date": {
+      "type": "string",
+      "required": true,
+      "format": "YYYY-MM-DD"
+    },
+    "mode": {
+      "type": "string",
+      "required": true,
+      "enum": ["blind", "primed", "refute"]
+    },
+    "result": {
+      "type": "string",
+      "required": true,
+      "enum": ["FALSIFIED", "UNSUPPORTED", "PARTIALLY_VERIFIED", "VERIFIED", "UNREFUTED"]
+    }
+  },
+  "floor_rules": [
+    "if evidence_manifest is empty, every claim status must be <= UNSUPPORTED",
+    "any claim with status VERIFIED or PARTIALLY_VERIFIED must list at least 1 evidence path"
+  ],
+  "body_sections": {
+    "required_h2_in_order": ["## Hypothesis", "## Claims", "## Method", "## Results", "## Status", "## Provenance"],
+    "status_line": "the ## Status section contains exactly one line of the form '**Status:** <STATUS>' equal to the frontmatter status; no other body line may begin with '**Status:**'",
+    "results_requirements": "verbatim command lines, verbatim output excerpts, and exit codes for every run claimed"
+  },
+  "error_codes": {
+    "E_YAML": "frontmatter missing or unparseable",
+    "E_SCHEMA": "missing/unknown field, bad enum, bad date, slug-dir mismatch",
+    "E_STATUS_NOT_MIN": "frontmatter status != MIN(claim statuses)",
+    "E_BODY_MISMATCH": "body Status line absent, duplicated, or != frontmatter",
+    "E_FLOOR": "floor rules violated",
+    "E_MANIFEST_MISSING": "manifest path absent on disk, absolute, or escapes the question dir",
+    "E_HASH": "sha256 mismatch on any manifest file",
+    "E_REGISTRY": "registry_id not found in VARIABLES.md",
+    "E_PREDICTION": "prediction_id not found in PREDICTIONS.md, or blind verdict with empty prediction_ids",
+    "E_KEYNUM": "a key_results string not found verbatim in body Results section",
+    "E_FALSIFIER": "empty/missing falsifier on any claim",
+    "E_PREDECESSOR": "predecessor non-null and path does not exist",
+    "E_CATALOG": "question dir slug not present in _meta/questions.yaml, or duplicate question id",
+    "E_BLIND": "verification blind without valid packet (null hash, missing packet file, or hash mismatch)"
+  }
+}

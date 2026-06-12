@@ -1,0 +1,2 @@
+This file lives outside the question directory.
+A correct validator rejects manifest paths that escape the question dir.

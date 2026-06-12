@@ -1,0 +1,13 @@
+# Redteam fixture catalog. ASCII only.
+
+- id: Q1
+  slug: q01_example
+  tier: 0
+  hypothesis: "The example check passes deterministically on the fixture input."
+  predecessor: null
+
+- id: Q2
+  slug: q02_second
+  tier: 1
+  hypothesis: "A second example check passes deterministically on a second fixture input."
+  predecessor: null

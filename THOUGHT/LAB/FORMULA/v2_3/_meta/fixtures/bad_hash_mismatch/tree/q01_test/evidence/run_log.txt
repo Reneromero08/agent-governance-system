@@ -1,0 +1,3 @@
+cmd: python run_test.py --case basic
+out: ok 3/3 checks
+exit code 0

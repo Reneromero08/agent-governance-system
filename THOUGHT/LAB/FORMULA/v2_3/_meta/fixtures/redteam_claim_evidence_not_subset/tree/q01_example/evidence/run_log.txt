@@ -1,0 +1,3 @@
+command: python check_example.py --input fixture.txt
+output: OK: example check passed
+exit code 0

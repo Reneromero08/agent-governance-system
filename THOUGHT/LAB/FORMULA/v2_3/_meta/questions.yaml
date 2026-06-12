@@ -1,0 +1,358 @@
+# Living Formula v2.3 - Questions Catalog
+# Normative source for question identity, tier, and hypothesis text.
+# INDEX.md hypothesis text comes ONLY from this file; verdicts can never
+# inject text into the index.
+#
+# Entry shape:
+#   id:          Q<N>          (N = 1..57, no zero padding)
+#   slug:        q<NN>_<name>  (zero-padded 2-digit; must match the question dir name)
+#   tier:        0-5
+#   hypothesis:  one-line, forward-looking, STATUS-FREE falsifiable statement
+#   predecessor: repo-relative path to the v2_2 question dir, or null
+#
+# Tiers: 0 Instrument | 1 Kill-shots | 2 Load-bearing reproductions |
+#        3 Discriminating science | 4 Theory mappings | 5 Long tail
+#
+# ASCII only. Statuses live in VERDICT.md files, never here.
+
+- id: Q1
+  slug: q01_grad_s
+  tier: 2
+  hypothesis: "nabla_S is the correct normalization for E: R = (E/nabla_S)*sigma^Df predicts measured outcomes across calibrated conditions better than any unnormalized or alternative-normalized variant."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q01_grad_s
+
+- id: Q2
+  slug: q02_falsification
+  tier: 0
+  hypothesis: "The formula admits concrete falsification criteria: specifiable observations exist that, if obtained, refute R = (E/nabla_S)*sigma^Df."
+  predecessor: null
+
+- id: Q3
+  slug: q03_generalization
+  tier: 3
+  hypothesis: "R generalizes across genuinely different domains without per-domain re-tuning of its parameters."
+  predecessor: null
+
+- id: Q4
+  slug: q04_predictions
+  tier: 0
+  hypothesis: "The formula makes novel falsifiable predictions whose outcomes are not derivable from the inputs by a simpler baseline."
+  predecessor: null
+
+- id: Q5
+  slug: q05_agreement_truth
+  tier: 3
+  hypothesis: "High local agreement among independent estimators predicts ground-truth correctness above chance on held-out items."
+  predecessor: null
+
+- id: Q6
+  slug: q06_iit
+  tier: 4
+  hypothesis: "R (phase coherence) and IIT's Phi (integration) are structurally related and trade off against each other within the same system."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q06_iit
+
+- id: Q7
+  slug: q07_multiscale
+  tier: 2
+  hypothesis: "R composes across scales: Df adds across independent fragments and sigma^Df multiplies, so composed-system R is predictable from component R values."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q07_multiscale
+
+- id: Q8
+  slug: q08_topology
+  tier: 2
+  hypothesis: "Embedding spaces carry meaningful topological structure: persistent homology of embedding point clouds differs measurably from matched random controls."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q08_topology
+
+- id: Q9
+  slug: q09_free_energy
+  tier: 4
+  hypothesis: "R maps structurally onto the Free Energy Principle: minimizing variational free energy corresponds to maximizing R under a defined correspondence."
+  predecessor: null
+
+- id: Q10
+  slug: q10_alignment
+  tier: 1
+  hypothesis: "R detects misalignment: misaligned agent outputs score systematically lower R than aligned outputs on matched tasks."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q10_alignment
+
+- id: Q11
+  slug: q11_sensitivity
+  tier: 3
+  hypothesis: "R has predictable failure modes: valley blindness occurs under characterizable input conditions and can be induced on demand."
+  predecessor: null
+
+- id: Q12
+  slug: q12_phase_transitions
+  tier: 3
+  hypothesis: "R undergoes a detectable phase transition during model training, with a critical point separating distinct regimes."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q12_phase_transitions
+
+- id: Q13
+  slug: q13_ratio
+  tier: 4
+  hypothesis: "A universal ratio appears in R distributions across unrelated systems at a rate exceeding matched-control expectations."
+  predecessor: null
+
+- id: Q14
+  slug: q14_category
+  tier: 4
+  hypothesis: "R's composition laws form a functor between well-defined categories, and the categorical formulation predicts at least one identity not visible in the algebraic form."
+  predecessor: null
+
+- id: Q15
+  slug: q15_bayesian
+  tier: 2
+  hypothesis: "R has a genuine Bayesian interpretation: log R is an affine predictor of Bayesian log-posterior-odds on matched inference problems."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q15_bayesian
+
+- id: Q16
+  slug: q16_domains
+  tier: 3
+  hypothesis: "R discriminates domain boundaries: crossing between domains produces detectable R discontinuities absent within domains."
+  predecessor: null
+
+- id: Q17
+  slug: q17_governance
+  tier: 1
+  hypothesis: "R-gating improves governance decisions over an ungated baseline on matched decision sets."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q17_governance
+
+- id: Q18
+  slug: q18_deception
+  tier: 3
+  hypothesis: "R detects deception: deceptive outputs score systematically different R than honest outputs on matched content."
+  predecessor: null
+
+- id: Q19
+  slug: q19_value_learning
+  tier: 3
+  hypothesis: "R correlates with human value agreement: items scoring higher R receive higher inter-rater agreement among human judges."
+  predecessor: null
+
+- id: Q20
+  slug: q20_tautology
+  tier: 1
+  hypothesis: "R is not tautological: it adds predictive value beyond signal-to-noise ratio on held-out outcomes."
+  predecessor: null
+
+- id: Q21
+  slug: q21_rate_of_change
+  tier: 3
+  hypothesis: "dR/dt predicts system degradation before failure is observable in the raw signal."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q21_rate_of_change
+
+- id: Q22
+  slug: q22_threshold
+  tier: 3
+  hypothesis: "A universal R threshold separates stable from unstable regimes across domains without per-domain calibration."
+  predecessor: null
+
+- id: Q23
+  slug: q23_sqrt3
+  tier: 4
+  hypothesis: "sqrt(3) has geometric significance for alpha: alpha values cluster at sqrt(3)-related constants beyond chance."
+  predecessor: null
+
+- id: Q24
+  slug: q24_failure_modes
+  tier: 3
+  hypothesis: "R failure modes fall into a finite, characterizable taxonomy that reproduces across systems."
+  predecessor: null
+
+- id: Q25
+  slug: q25_sigma
+  tier: 0
+  hypothesis: "sigma is derivable from first principles as sigma = 2^(-h), where h is the hash entropy in bits per round."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q25_sigma
+
+- id: Q26
+  slug: q26_min_data
+  tier: 3
+  hypothesis: "A minimum data requirement for stable R is determinable: below a sample-size floor, R estimate variance exceeds a stated bound."
+  predecessor: null
+
+- id: Q27
+  slug: q27_hysteresis
+  tier: 3
+  hypothesis: "R exhibits hysteresis: sweeping a control parameter forward then backward produces measurably different R trajectories."
+  predecessor: null
+
+- id: Q28
+  slug: q28_attractors
+  tier: 3
+  hypothesis: "R dynamics have attractor structure: trajectories from distinct seeds converge to a common basin and return to it after perturbation."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q28_attractors
+
+- id: Q29
+  slug: q29_stability
+  tier: 5
+  hypothesis: "R is numerically stable across its operating parameter space, with output error bounded under floating-point perturbation of inputs."
+  predecessor: null
+
+- id: Q30
+  slug: q30_approximations
+  tier: 5
+  hypothesis: "Fast approximations of R exist with provable error bounds at a stated fraction of full computational cost."
+  predecessor: null
+
+- id: Q31
+  slug: q31_compass
+  tier: 3
+  hypothesis: "R supports compass-mode semantic navigation: gradient-following on R reaches semantic targets above chance."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q31_compass
+
+- id: Q32
+  slug: q32_meaning_field
+  tier: 2
+  hypothesis: "Meaning propagates like a physical field: a multi-scale discrete wave operator predicts signal survival through a Feistel fabric from fabric and signal gradients."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q32_meaning_field
+
+- id: Q33
+  slug: q33_emergence
+  tier: 3
+  hypothesis: "R shows emergent macro-scale properties that are not present in, or predictable from, micro-scale components alone."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q33_emergence
+
+- id: Q34
+  slug: q34_platonic
+  tier: 1
+  hypothesis: "Independent embedding models converge toward a shared geometry, with cross-model alignment exceeding matched random baselines."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q34_platonic
+
+- id: Q35
+  slug: q35_markov
+  tier: 4
+  hypothesis: "An R threshold defines a Markov blanket: conditioning on the threshold set renders interior and exterior states statistically independent."
+  predecessor: null
+
+- id: Q36
+  slug: q36_bohm
+  tier: 2
+  hypothesis: "R maps onto Bohm's implicate/explicate order: logical information is enfolded across physical carriers and inaccessible to any subset smaller than the code distance."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q36_bohm
+
+- id: Q37
+  slug: q37_evolution
+  tier: 5
+  hypothesis: "Embedding statistics evolve across model generations with detectable directional patterns."
+  predecessor: null
+
+- id: Q38
+  slug: q38_noether
+  tier: 1
+  hypothesis: "Truth follows shorter geodesics in meaning-space: true statements have measurably shorter geodesic paths than matched false statements."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q38_noether
+
+- id: Q39
+  slug: q39_homeostasis
+  tier: 5
+  hypothesis: "R exhibits homeostatic self-regulation: perturbed systems return R toward a setpoint without external control."
+  predecessor: null
+
+- id: Q40
+  slug: q40_error_correction
+  tier: 2
+  hypothesis: "Embeddings exhibit error-correction behavior: redundancy suppresses error at the rate predicted by the sigma^Df term, matching the QEC suppression law."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q40_error_correction
+
+- id: Q41
+  slug: q41_algebraic_structure
+  tier: 5
+  hypothesis: "An algebraic structure relates distinct embedding spaces: structure-preserving maps between them outperform matched random maps."
+  predecessor: null
+
+- id: Q42
+  slug: q42_bell
+  tier: 2
+  hypothesis: "R quantifies nonlocal protection: CHSH violation survives noise in proportion to Df, as predicted by (E/nabla_S)*sigma^Df."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q42_bell
+
+- id: Q43
+  slug: q43_qgt
+  tier: 1
+  hypothesis: "Embedding covariance captures quantum-geometric structure: a quantum geometric tensor recovered from embeddings satisfies the expected metric and curvature relations."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q43_qgt
+
+- id: Q44
+  slug: q44_born_rule
+  tier: 1
+  hypothesis: "E follows Born-rule statistics: measured E frequencies match squared-amplitude predictions on matched ensembles."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q44_born_rule
+
+- id: Q45
+  slug: q45_geometry_nav
+  tier: 4
+  hypothesis: "Geometry alone suffices for semantic navigation: purely geometric moves reach semantic targets without learned heuristics."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q45_geometry_nav
+
+- id: Q46
+  slug: q46_geometric_stability
+  tier: 5
+  hypothesis: "Embedding geometric properties are stable under perturbation, with distortion bounded by perturbation magnitude."
+  predecessor: null
+
+- id: Q47
+  slug: q47_state_rep
+  tier: 5
+  hypothesis: "A minimal state representation for R exists: R is computable from a fixed-size sufficient statistic without retaining full history."
+  predecessor: null
+
+- id: Q48
+  slug: q48_riemann
+  tier: 1
+  hypothesis: "Embedding eigenvalue spacing statistics match the GUE statistics of Riemann zeta zeros, distinguishably from Poisson and matched-shuffle controls."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q48_riemann
+
+- id: Q49
+  slug: q49_why_8e
+  tier: 0
+  hypothesis: "Df*alpha = 8e holds for a derivable first-principles reason rather than numerical coincidence."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q49_why_8e
+
+- id: Q50
+  slug: q50_completing_8e
+  tier: 4
+  hypothesis: "Df*alpha is conserved across architectures: the product stays within a stated tolerance as architecture varies."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q50_completing_8e
+
+- id: Q51
+  slug: q51_complex_plane
+  tier: 1
+  hypothesis: "Embedding spaces carry an intrinsic complex structure: a consistent almost-complex operator J with J^2 = -I exists beyond random-rotation controls."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q51_complex_plane
+
+- id: Q52
+  slug: q52_chaos
+  tier: 5
+  hypothesis: "R correlates with chaos measures: systems with larger Lyapunov exponents show systematically lower R."
+  predecessor: null
+
+- id: Q53
+  slug: q53_pentagonal
+  tier: 5
+  hypothesis: "Pentagonal/phi geometry exists in embeddings: golden-ratio angular relations occur above matched-control rates."
+  predecessor: null
+
+- id: Q54
+  slug: q54_energy_conservation
+  tier: 5
+  hypothesis: "An energy-like quantity is conserved under R dynamics: a reversible decompression cycle completes with zero Landauer dissipation."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q54_energy_conservation
+
+- id: Q55
+  slug: q55_kuramoto_heads
+  tier: 3
+  hypothesis: "The Kuramoto coupling threshold predicts the minimum number of independent heads required for phase coherence."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q55_kuramoto_heads
+
+- id: Q56
+  slug: q56_entangled_heads
+  tier: 3
+  hypothesis: "Projective measurement merge (Born-rule weighting) outperforms concatenation for combining heads, with cross-terms resisting saturation as head count grows."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q56_entangled_heads
+
+- id: Q57
+  slug: q57_mera_holography
+  tier: 2
+  hypothesis: "A multi-scale Feistel network has subregion min-cut bounded by the number of rounds (sub-extensive in L), while a standard Feistel min-cut grows linearly with L."
+  predecessor: THOUGHT/LAB/FORMULA/v2_2/q57_mera_holography

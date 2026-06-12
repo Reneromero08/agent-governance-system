@@ -1,0 +1,6 @@
+# Fixture catalog (mini v2_3 root).
+- id: Q1
+  slug: q01_test
+  tier: 2
+  hypothesis: "The fixture harness produces a deterministic index for one question."
+  predecessor: null
