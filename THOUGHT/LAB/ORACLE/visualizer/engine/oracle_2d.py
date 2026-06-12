@@ -27,9 +27,10 @@ import torch
 ENGINE_DIR = os.path.dirname(os.path.abspath(__file__))
 VISUALIZER_DIR = os.path.dirname(ENGINE_DIR)
 ORACLE_DIR = os.path.dirname(VISUALIZER_DIR)
-CAT_CAS_DIR = os.path.dirname(ORACLE_DIR)
+CAT_CAS_DIR = os.path.join(os.path.dirname(ORACLE_DIR), "CAT_CAS")  # sibling lab under THOUGHT/LAB
 SOURCE_PATH = os.path.join(
     CAT_CAS_DIR,
+    "5_topological_proofs",
     "37_2d_chern_oracle",
     "37_2d_chern_oracle.py",
 )

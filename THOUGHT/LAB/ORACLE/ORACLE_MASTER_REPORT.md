@@ -315,7 +315,7 @@ The INFINITY EDITION. Rust port. Per the 35 PAPER abstract, it combines:
 | 20.10 (Holographic phase) | EXPERIMENTAL | Tests S<r hypothesis; no claim of cryptographic break |
 | 42 (ULTRA Rust) | PER PAPER ABSTRACT | 84% restoration fidelity; quantum-tape dependent |
 
-**Audit-truth ledger**: `THOUGHT/LAB/CAT_CAS/REPORTS/VIOLATIONS/ROADMAP_3.md` is canonical; this report does not claim external mathematical finality for any high-claim track.
+**Audit-truth ledger**: `THOUGHT/LAB/CAT_CAS/docs/REPORTS/VIOLATIONS/ROADMAP_3.md` is canonical; this report does not claim external mathematical finality for any high-claim track.
 
 ---
 
@@ -361,8 +361,8 @@ ADJACENT (different paradigm, also called "Oracle"):
 
 - `THOUGHT/LAB/CAT_CAS/MASTER_REPORT.md` — full lab coverage matrix
 - `THOUGHT/LAB/CAT_CAS/CAT_CAS_OS.md` — lab charter
-- `THOUGHT/LAB/CAT_CAS/REPORTS/VIOLATIONS/ROADMAP_3.md` — canonical audit ledger
-- `THOUGHT/LAB/CAT_CAS/REPORTS/VIOLATIONS/PHASE_46_ISOMORPHISM_AUDIT.md`
+- `THOUGHT/LAB/CAT_CAS/docs/REPORTS/VIOLATIONS/ROADMAP_3.md` — canonical audit ledger
+- `THOUGHT/LAB/CAT_CAS/docs/REPORTS/VIOLATIONS/PHASE_46_ISOMORPHISM_AUDIT.md`
 - `THOUGHT/LAB/CAT_CAS/35_topological_halting_oracle/PAPER.md` — formal writeup
 - `THOUGHT/LAB/HOLO/docs/CAT_CAS_INTEGRATION_DOSSIER.md` — how Oracle code transfers to HOLO
 

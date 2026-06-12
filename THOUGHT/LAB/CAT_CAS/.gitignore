@@ -8,9 +8,6 @@
 **/target/
 .pytest_cache/
 
-# Shared runtime data store (quantum tapes etc. — regenerated on demand; see docs/STORAGE.md)
-storage/
-
 # Large data blobs (>100 MB) kept in their owning experiment, gitignored,
 # and documented as per-experiment requirements in docs/STORAGE.md:
 #   - model weights (e.g. 16_catalytic_27b_inference/gemini_update/qwen_0.5b/)
