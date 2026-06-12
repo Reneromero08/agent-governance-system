@@ -30,7 +30,7 @@ def holographic_qubit_sieve():
     t0 = time.time()
     
     # We want to scan the topological energy spectrum
-    num_bins = 50_000  # Extremely high resolution
+    num_bins = 49_000  # Extremely high resolution
     freqs_np = np.linspace(10.0, 50.0, num_bins)
     freqs = torch.tensor(freqs_np, dtype=torch.float64, device=device)
     
@@ -42,7 +42,7 @@ def holographic_qubit_sieve():
     # The composite numbers destructively interfere, leaving the prime 
     # resonance wave.
     
-    N_terms = 50_000  # Holographic phase harmonics modeled
+    N_terms = 49_000  # Holographic phase harmonics modeled
     n_tensor = torch.arange(1, N_terms + 1, dtype=torch.float64, device=device).unsqueeze(0)
     w_tensor = freqs.unsqueeze(1)
     

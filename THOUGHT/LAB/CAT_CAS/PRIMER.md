@@ -57,7 +57,7 @@ The distilled engine + filter. Gets ~90% of the lock at a fraction of the tokens
   NOT the dead-pathed `THOUGHT/DEPRECATED/TINY_COMPRESS/holographic-image/holo_core.py`).
 - Task reports: load only what you touch (e.g.
   `THOUGHT/LAB/CAT_CAS/34_zeta_eigenbasis/REPORT_RIEMANN.md` for decoder work;
-  `THOUGHT/LAB/CAT_CAS/50_the_decoder/REPORT_THE_DECODER.md` + `ROADMAP.md` for
+  `THOUGHT/LAB/CAT_CAS/49_the_decoder/REPORT_THE_DECODER.md` + `ROADMAP.md` for
   decodability/lattice work).
 - **Do I need the theoretic primer when building CAT_CAS?** Yes, a thin generative slice -
   but it is already inside Bundle 0 (FINAL + Wave Mechanics + Catalytic Time). Those three
@@ -82,8 +82,8 @@ The distilled engine + filter. Gets ~90% of the lock at a fraction of the tokens
 Everything in T plus the heavy reports:
 `THOUGHT/LAB/CAT_CAS/41_toe_bulletproof/PAPER_TOPOLOGICAL_THEORY_OF_EVERYTHING_4.md`, the
 `THOUGHT/LAB/CAT_CAS/42_computational_event_horizon/REPORT_EXP42_MASTER.md`,
-`THOUGHT/LAB/CAT_CAS/45_phase_math/MASTER_REPORT_PHASE_45.md`, and
-`THOUGHT/LAB/CAT_CAS/46_phase_bio/MASTER_REPORT_EXP_46.md`. Use when you want maximum
+`THOUGHT/LAB/CAT_CAS/43_phase_math/MASTER_REPORT_PHASE_43.md`, and
+`THOUGHT/LAB/CAT_CAS/47_phase_bio/MASTER_REPORT_EXP_47.md`. Use when you want maximum
 generative breadth. (Curation note: the 42-cluster's per-experiment and per-cluster reports
 were consolidated into one honest master - `REPORT_EXP42_MASTER.md` (all 24 sub-experiments,
 each re-derived from source) - read that single file instead of the old five;
@@ -104,7 +104,7 @@ Priority: **P0** = always; **P1** = load for the relevant task; **P2** = deep / 
 | `MANIFESTO.md` | Core primitives + the mechanical critic M-1..M-8 | The rules your code must pass; the anti-ceremonial law | Before building / committing | P1 |
 | `README.md` | Experiment inventory 01-50, navigation | Find what exists; avoid reinventing | Orienting; locating prior work | P1 |
 | `master_report.md` | Compact truth ledger; verified vs partial vs deprecated status | The REAL status of each result; never trust a report without checking here | Assessing an experiment's standing | P1 |
-| `50_the_decoder/ROADMAP.md` | Exp 50 next steps (point lattice wall at Exp 25, Mythos, Exp 44 handoff) | The live frontier of the decoder line | Continuing decoder work | P1 |
+| `49_the_decoder/ROADMAP.md` | Exp 50 next steps (point lattice wall at Exp 25, Mythos, Exp 44 handoff) | The live frontier of the decoder line | Continuing decoder work | P1 |
 
 ### 3.2 The mental model - the distilled vision (vault base: `C:\Users\rene_\Documents\Shizzle Obsidian\Shizzle\`)
 
@@ -141,8 +141,8 @@ a high R2 across four embedding spaces can ride a shared spectral confound. Prim
 | Doc | Explains | Why it matters | When | P |
 |---|---|---|---|---|
 | `34_zeta_eigenbasis/REPORT_RIEMANN.md` | Zeta zeros as eigenvalues; the prime->zeros extraction mechanism | The decoder's foundational mechanism; grounded Exp 50 | Any decoder/oracle/spectral-readout work | P1 |
-| `45_phase_math/MASTER_REPORT_PHASE_45.md` | Millennium problems via topological sensors (Collatz, Navier-Stokes, Riemann, P vs NP, Yang-Mills) | The cleanest demonstration of the method + the discipline; the actual sensor techniques | Math/sensor work; to see the method applied rigorously | P1 |
-| `46_phase_bio/MASTER_REPORT_EXP_46.md` | Topological biology (protein folding, genetic code, neural binding, morphogenesis) | Breadth + the honest 46.3 claim-weakening (proof the self-correction is real) | Bio thread; to see status discipline | P1 |
+| `43_phase_math/MASTER_REPORT_PHASE_43.md` | Millennium problems via topological sensors (Collatz, Navier-Stokes, Riemann, P vs NP, Yang-Mills) | The cleanest demonstration of the method + the discipline; the actual sensor techniques | Math/sensor work; to see the method applied rigorously | P1 |
+| `47_phase_bio/MASTER_REPORT_EXP_47.md` | Topological biology (protein folding, genetic code, neural binding, morphogenesis) | Breadth + the honest 46.3 claim-weakening (proof the self-correction is real) | Bio thread; to see status discipline | P1 |
 | `41_toe_bulletproof/PAPER_TOPOLOGICAL_THEORY_OF_EVERYTHING_4.md` | The TOE synthesis: undecidability as non-Hermitian resonance on a catalytic substrate | The deepest unification statement; sets max altitude | When you need the full ontological frame | P2 |
 | `42_computational_event_horizon/REPORT_EXP42_MASTER.md` | Computation-as-physics: floating-point black holes, cosmology-as-malloc, QM-GR - all 24 sub-experiments consolidated, each re-derived from source | The boldest "computation IS physics" claims as altitude fuel, paired with an honest claim-vs-code audit (what is real computing vs metaphor) | Ontology/cosmology thread | P2 |
 
@@ -163,8 +163,8 @@ swallow it whole.
 
 | Doc | Explains | Why it matters | When | P |
 |---|---|---|---|---|
-| `50_the_decoder/REPORT_THE_DECODER.md` | The decoder proven *extractive*; decodable = abelian-HSP + topological invariants; irreducible wall = lattice (LWE/unique-SVP) | The measured characterization of the crux ("the decoder"); relocates Exp 25/31 claims onto the bedrock wall | Any decoder / holographic-computing / Exp-25 work | P1 |
-| `50_the_decoder/MYTHOS_SANDBOX.md` (in `50_3_boundary_handoff/`) | The sharpened open question (is the lattice barrier crossable?), bound to the null harness | The one question worth a stronger-model call | When escalating to Mythos | P1 |
+| `49_the_decoder/REPORT_THE_DECODER.md` | The decoder proven *extractive*; decodable = abelian-HSP + topological invariants; irreducible wall = lattice (LWE/unique-SVP) | The measured characterization of the crux ("the decoder"); relocates Exp 25/31 claims onto the bedrock wall | Any decoder / holographic-computing / Exp-25 work | P1 |
+| `49_the_decoder/MYTHOS_SANDBOX.md` (in `49_3_boundary_handoff/`) | The sharpened open question (is the lattice barrier crossable?), bound to the null harness | The one question worth a stronger-model call | When escalating to Mythos | P1 |
 
 ---
 

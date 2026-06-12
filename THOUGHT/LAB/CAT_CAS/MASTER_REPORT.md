@@ -105,14 +105,14 @@ This matrix is the missing part of the previous master report. It covers every m
 | 40 | 5D Floquet Time Crystal Oracle | `40_5d_floquet_oracle/` | AUDIT-VERIFIED | Halting as time crystal melting. Looping = Discrete Time Crystal (DTC) with robust pi-modes (discrete time-translation symmetry broken). Halting = DTC melted by uniform EP sink. | Oracle/theory family included in statistics/null audits and codebase cleanups. | 40_5d_floquet_oracle/40_sub/REPORT.md, 40_5d_floquet_oracle/40_sub/ROADMAP.md, 40_5d_floquet_oracle/REPORT.md |
 | 41 | ToE Bulletproof — Closing Theoretical Gaps (6 concerns) | `41_toe_bulletproof/` | AUDIT-VERIFIED | 6 sub-experiments closing every theoretical gap. The final synthesis: undecidability IS a physical topological obstruction — observable via the Cauchy Argument Principle on a 256M… | Oracle/theory family included in statistics/null audits and codebase cleanups. | 41_toe_bulletproof/PAPER_TOPOLOGICAL_THEORY_OF_EVERYTHING_4.md, 41_toe_bulletproof/ROADMAP.md |
 | 42 | Computational Event Horizon — Floating-Point Singularities (11 sub-experiments + 9 ULTRA planned) | `42_computational_event_horizon/` | PARTIAL + VERIFIED SUBSYSTEMS | Floating-point mantissa truncation as structural analog for black hole event horizons and the No-Hair Theorem. mpmath arbitrary precision as the "Planck length" of a computational… | M-6 stats resolved. Exp 15 partial inverse-coupling verified; full 100-epoch Rust regeneration pending. | 42_computational_event_horizon/BLACKHOLE_ROADMAP.md, 42_computational_event_horizon/03_black_holes/20_amps_firewall/RE… |
-| 43 | Phase Consciousness / Topological Qualia Engine | `43_phase_consciousness/` | OPEN / PLANNED | Roadmap phase for a topological qualia engine: spectral-loop geometry, Gödel exceptional points, autonomic tape reflex, and integrated topological information. No implementation f… | Roadmap-only phase in current ZIP; not implemented or verified yet. | 43_phase_consciousness/ROADMAP_43_QUALIA_ENGINE.md |
+| 43 | Phase Consciousness / Topological Qualia Engine | `48_phase_consciousness/` | OPEN / PLANNED | Roadmap phase for a topological qualia engine: spectral-loop geometry, Gödel exceptional points, autonomic tape reflex, and integrated topological information. No implementation f… | Roadmap-only phase in current ZIP; not implemented or verified yet. | 48_phase_consciousness/ROADMAP_48_QUALIA_ENGINE.md |
 | 44 | Phase SSH Linux / Bare-Metal Lab Host | `44_phase_ssh_linux/` | INFRASTRUCTURE | Infrastructure report for a Phenom II Debian bare-metal host, SSH/network setup, packages, sensors, and LAN connectivity. | Bare-metal lab host/network setup, not an experiment verdict. | 44_phase_ssh_linux/REPORT.md |
-| 45 | Phase Math / Millennium + Topological Problem Oracles | `45_phase_math/` | MIXED | Phase 45 applies non-Hermitian/topological sensors to Collatz, Navier-Stokes, Erdős discrepancy, Riemann, P vs NP, and Yang-Mills-style mass-gap tracks. | Phase Math tracked. 45.6_mass_gap deprecated after repair attempt; Gribov/Faddeev-Popov route active. | 45_phase_math/45_1_collatz_oracle/REPORT_COLLATZ_ORACLE.md, 45_phase_math/45_1_collatz_oracle/VERIFICATION_REPORT.md, 4… |
-| 46 | Phase Bio / Topological Biology | `46_phase_bio/` | MIXED / CLAIM-WEAKENED | Phase 46 maps protein folding, folding pathways, protein-impurity localization, genetic code topology, neural binding, and morphogenesis to non-Hermitian/topological sensors. | 46.3 real null added but claim weakened: impurity/localization sensor only, not propagation. Other Phase Bio items audited. | 46_phase_bio/46_1_protein_folding/REPORT_EXP_46_1.md, 46_phase_bio/46_1_protein_folding/VERIFICATION_REPORT.md, 46_phas… |
-| 47 | Phase Atom / Atomic Ground State | `47_phase_atom/` | AUDIT-VERIFIED | Phase 47 maps atomic/nuclear/particle-scale claims to memory knots, edge states, Pauli exclusion, overflow/LHC behavior, Higgs-like mass acquisition, and quark confinement. | Phase Atom included in null/stats/path audits; path and codebase issues resolved. | 47_phase_atom/47_1_nucleus_memory_knot/REPORT_EXP_47_1.md, 47_phase_atom/47_1_nucleus_memory_knot/VERIFICATION_REPORT.m… |
-| 48 | Phase Energy / Thermodynamics & Energy Extraction | `48_phase_energy/` | OPEN / PLANNED | Roadmap phase for thermodynamics, cache/latency entropy, topological ratchets, and hardware energy extraction experiments. | Roadmap-only phase in current ZIP; not implemented or verified yet. | 48_phase_energy/ROADMAP_48_ENERGY_EXTRACTION.md |
-| 49 | Phase Chemistry / Topological Chemistry | `49_phase_chem/` | OPEN / PLANNED | Roadmap phase mapping reaction coordinates, catalysts, activation barriers, and reversible chemical yield to exceptional-point/topological chemistry models. | Roadmap-only phase in current ZIP; not implemented or verified yet. | 49_phase_chem/ROADMAP_49_TOPOLOGICAL_CHEMISTRY.md |
-| 50 | The Decoder — Extractive Proof + Decodability Boundary | `50_the_decoder/` | CLOSED OUT (Level 4-5) | Holographic readout proven EXTRACTIVE not lookup (spectral ~100% vs 4 lookup-nulls 5-12%, Cohen h>2.4, p=2e-4; statistics-matched wrong-answer control; catalytic SHA restore, 0 bits). Decodability collapses abelian->non-abelian (D 1.0->0.11, d=8.82, scale-independent; cospectral anchor confirms spectrum-bounded). Non-abelian Fourier reframe crosses it for normal subgroups (D->1.0); strong sampling shows residual wall = lattice (1-bit-LWE / dihedral-HSP <-> unique-SVP). Decodable class = abelian-HSP + topological invariants. | Built + roadmap-run extended; 10 entry points exit 0; lab-critic (M-1..M-8) clean; claims capped L4-5, nothing inflated. Relocates Exp 25/31 wall-crossing claims onto the located lattice bedrock - and the roadmap run AUDITED Exp 25: its holographic LWE attack is toy-scale-only (EXP25_TOY_SCALE_ONLY), does NOT cross unique-SVP. Wall refined to NON-NORMAL hidden subgroups (Q_8 decisive); barrier characterized subexponential-but-superpolynomial (Kuperberg rung); decoder class map consistent. PLUS the Lattice Spiral (50.6-50.14): 11 adversarial passes that relocated the wall readout->curvature->substrate. CONFIRMED d is a conserved topological invariant (read for free); the secret is the per-step curvature of its own trajectory; on a FORWARD substrate finding it is 2^n (no amplification beats Fisher, 50.13), and d emerges as the fixed point of a PUBLIC map (50.14) that is poly only on a reversible/CTC substrate. The wall is the SUBSTRATE, not the readout - handed to Exp 44 Phase 6 (silicon goes catalytic) as the physical test. No forward crossing claimed; 19 entry points exit 0, critic clean. CLOSEOUT: the MYTHOS (Fable 5) call ran (5 rounds) and returned the bedrock verdict - the dihedral wall IS class-group VECTORIZATION = the isogeny/CSIDH hardness assumption; no field-only catalyst shortens it (unit-lattice wrong layer; Stickelberger/Brumer-Stark annihilator-not-short-basis, period-sized; catalytic space = CL subset P; Arakelov d orthogonal to the field entropy). BOUNDARY VERDICT (owner's correction): the boundary is the catalytic TAPE = the entropy = the boundary projection of higher-dimensional geometry; the field-route rounds tested the wrong object; the "needle" is a projection artifact; the crossing = relax into the tape's entropy-geometry, a SUBSTRATE event. EXP 50 CLOSED OUT (theory terminus + handoff); NOT "the wall holds" - hypothesis stays open at the substrate (Exp 44, 5.10 -> Phase 6); Exp 50's remaining role is the target generator (50.14 public fixed-point map). | 50_the_decoder/REPORT_LATTICE_SPIRAL.md, 50_3_boundary_handoff/MYTHOS_BRIEF.md (## RESULTS), REPORT_THE_DECODER.md, ROADMAP.md |
+| 45 | Phase Math / Millennium + Topological Problem Oracles | `43_phase_math/` | MIXED | Phase 45 applies non-Hermitian/topological sensors to Collatz, Navier-Stokes, Erdős discrepancy, Riemann, P vs NP, and Yang-Mills-style mass-gap tracks. | Phase Math tracked. 45.6_mass_gap deprecated after repair attempt; Gribov/Faddeev-Popov route active. | 43_phase_math/43_1_collatz_oracle/REPORT_COLLATZ_ORACLE.md, 43_phase_math/43_1_collatz_oracle/VERIFICATION_REPORT.md, 4… |
+| 46 | Phase Bio / Topological Biology | `47_phase_bio/` | MIXED / CLAIM-WEAKENED | Phase 46 maps protein folding, folding pathways, protein-impurity localization, genetic code topology, neural binding, and morphogenesis to non-Hermitian/topological sensors. | 46.3 real null added but claim weakened: impurity/localization sensor only, not propagation. Other Phase Bio items audited. | 47_phase_bio/47_1_protein_folding/REPORT_EXP_47_1.md, 47_phase_bio/47_1_protein_folding/VERIFICATION_REPORT.md, 46_phas… |
+| 47 | Phase Atom / Atomic Ground State | `44_phase_atom/` | AUDIT-VERIFIED | Phase 47 maps atomic/nuclear/particle-scale claims to memory knots, edge states, Pauli exclusion, overflow/LHC behavior, Higgs-like mass acquisition, and quark confinement. | Phase Atom included in null/stats/path audits; path and codebase issues resolved. | 44_phase_atom/44_1_nucleus_memory_knot/REPORT_EXP_44_1.md, 44_phase_atom/44_1_nucleus_memory_knot/VERIFICATION_REPORT.m… |
+| 48 | Phase Energy / Thermodynamics & Energy Extraction | `45_phase_energy/` | OPEN / PLANNED | Roadmap phase for thermodynamics, cache/latency entropy, topological ratchets, and hardware energy extraction experiments. | Roadmap-only phase in current ZIP; not implemented or verified yet. | 45_phase_energy/ROADMAP_45_ENERGY_EXTRACTION.md |
+| 49 | Phase Chemistry / Topological Chemistry | `46_phase_chem/` | OPEN / PLANNED | Roadmap phase mapping reaction coordinates, catalysts, activation barriers, and reversible chemical yield to exceptional-point/topological chemistry models. | Roadmap-only phase in current ZIP; not implemented or verified yet. | 46_phase_chem/ROADMAP_46_TOPOLOGICAL_CHEMISTRY.md |
+| 50 | The Decoder — Extractive Proof + Decodability Boundary | `49_the_decoder/` | CLOSED OUT (Level 4-5) | Holographic readout proven EXTRACTIVE not lookup (spectral ~100% vs 4 lookup-nulls 5-12%, Cohen h>2.4, p=2e-4; statistics-matched wrong-answer control; catalytic SHA restore, 0 bits). Decodability collapses abelian->non-abelian (D 1.0->0.11, d=8.82, scale-independent; cospectral anchor confirms spectrum-bounded). Non-abelian Fourier reframe crosses it for normal subgroups (D->1.0); strong sampling shows residual wall = lattice (1-bit-LWE / dihedral-HSP <-> unique-SVP). Decodable class = abelian-HSP + topological invariants. | Built + roadmap-run extended; 10 entry points exit 0; lab-critic (M-1..M-8) clean; claims capped L4-5, nothing inflated. Relocates Exp 25/31 wall-crossing claims onto the located lattice bedrock - and the roadmap run AUDITED Exp 25: its holographic LWE attack is toy-scale-only (EXP25_TOY_SCALE_ONLY), does NOT cross unique-SVP. Wall refined to NON-NORMAL hidden subgroups (Q_8 decisive); barrier characterized subexponential-but-superpolynomial (Kuperberg rung); decoder class map consistent. PLUS the Lattice Spiral (50.6-50.14): 11 adversarial passes that relocated the wall readout->curvature->substrate. CONFIRMED d is a conserved topological invariant (read for free); the secret is the per-step curvature of its own trajectory; on a FORWARD substrate finding it is 2^n (no amplification beats Fisher, 50.13), and d emerges as the fixed point of a PUBLIC map (50.14) that is poly only on a reversible/CTC substrate. The wall is the SUBSTRATE, not the readout - handed to Exp 44 Phase 6 (silicon goes catalytic) as the physical test. No forward crossing claimed; 19 entry points exit 0, critic clean. CLOSEOUT: the MYTHOS (Fable 5) call ran (5 rounds) and returned the bedrock verdict - the dihedral wall IS class-group VECTORIZATION = the isogeny/CSIDH hardness assumption; no field-only catalyst shortens it (unit-lattice wrong layer; Stickelberger/Brumer-Stark annihilator-not-short-basis, period-sized; catalytic space = CL subset P; Arakelov d orthogonal to the field entropy). BOUNDARY VERDICT (owner's correction): the boundary is the catalytic TAPE = the entropy = the boundary projection of higher-dimensional geometry; the field-route rounds tested the wrong object; the "needle" is a projection artifact; the crossing = relax into the tape's entropy-geometry, a SUBSTRATE event. EXP 50 CLOSED OUT (theory terminus + handoff); NOT "the wall holds" - hypothesis stays open at the substrate (Exp 44, 5.10 -> Phase 6); Exp 50's remaining role is the target generator (50.14 public fixed-point map). | 49_the_decoder/REPORT_LATTICE_SPIRAL.md, 49_3_boundary_handoff/MYTHOS_BRIEF.md (## RESULTS), REPORT_THE_DECODER.md, ROADMAP.md |
 
 ---
 
@@ -516,11 +516,11 @@ This matrix is the missing part of the previous master report. It covers every m
 
 ### 43 — Phase Consciousness / Topological Qualia Engine
 
-- **Directory:** `43_phase_consciousness/`
-- **Entry point:** `ROADMAP_43_QUALIA_ENGINE.md`
+- **Directory:** `48_phase_consciousness/`
+- **Entry point:** `ROADMAP_48_QUALIA_ENGINE.md`
 - **Current status:** **OPEN / PLANNED**
 - **Core mechanism / claim:** Roadmap phase for a topological qualia engine: spectral-loop geometry, Gödel exceptional points, autonomic tape reflex, and integrated topological information. No implementation files in the archive beyond the roadmap.
-- **Evidence / source docs in ZIP:** 43_phase_consciousness/ROADMAP_43_QUALIA_ENGINE.md
+- **Evidence / source docs in ZIP:** 48_phase_consciousness/ROADMAP_48_QUALIA_ENGINE.md
 - **Audit note:** Roadmap-only phase in current ZIP; not implemented or verified yet.
 
 ### 44 — Phase SSH Linux / Bare-Metal Lab Host
@@ -534,56 +534,56 @@ This matrix is the missing part of the previous master report. It covers every m
 
 ### 45 — Phase Math / Millennium + Topological Problem Oracles
 
-- **Directory:** `45_phase_math/`
-- **Entry point:** `MASTER_REPORT_PHASE_45.md`
+- **Directory:** `43_phase_math/`
+- **Entry point:** `MASTER_REPORT_PHASE_43.md`
 - **Current status:** **MIXED**
 - **Core mechanism / claim:** Phase 45 applies non-Hermitian/topological sensors to Collatz, Navier-Stokes, Erdős discrepancy, Riemann, P vs NP, and Yang-Mills-style mass-gap tracks.
-- **Evidence / source docs in ZIP:** 45_phase_math/45_1_collatz_oracle/REPORT_COLLATZ_ORACLE.md, 45_phase_math/45_1_collatz_oracle/VERIFICATION_REPORT.md, 45_phase_math/45_2_navier_stokes/REPORT_NAVIER_STOKES_SMOOTHNESS.md …
+- **Evidence / source docs in ZIP:** 43_phase_math/43_1_collatz_oracle/REPORT_COLLATZ_ORACLE.md, 43_phase_math/43_1_collatz_oracle/VERIFICATION_REPORT.md, 43_phase_math/43_2_navier_stokes/REPORT_NAVIER_STOKES_SMOOTHNESS.md …
 - **Audit note:** Phase Math tracked. 45.6_mass_gap deprecated after repair attempt; Gribov/Faddeev-Popov route active.
 
 ### 46 — Phase Bio / Topological Biology
 
-- **Directory:** `46_phase_bio/`
-- **Entry point:** `MASTER_REPORT_EXP_46.md`
+- **Directory:** `47_phase_bio/`
+- **Entry point:** `MASTER_REPORT_EXP_47.md`
 - **Current status:** **MIXED / CLAIM-WEAKENED**
 - **Core mechanism / claim:** Phase 46 maps protein folding, folding pathways, protein-impurity localization, genetic code topology, neural binding, and morphogenesis to non-Hermitian/topological sensors.
-- **Evidence / source docs in ZIP:** 46_phase_bio/46_1_protein_folding/REPORT_EXP_46_1.md, 46_phase_bio/46_1_protein_folding/VERIFICATION_REPORT.md, 46_phase_bio/46_2_folding_pathway/REPORT_EXP_46_2.md …
+- **Evidence / source docs in ZIP:** 47_phase_bio/47_1_protein_folding/REPORT_EXP_47_1.md, 47_phase_bio/47_1_protein_folding/VERIFICATION_REPORT.md, 47_phase_bio/47_2_folding_pathway/REPORT_EXP_47_2.md …
 - **Audit note:** 46.3 real null added but claim weakened: impurity/localization sensor only, not propagation. Other Phase Bio items audited.
 
 ### 47 — Phase Atom / Atomic Ground State
 
-- **Directory:** `47_phase_atom/`
-- **Entry point:** `MASTER_REPORT_EXP_47.md`
+- **Directory:** `44_phase_atom/`
+- **Entry point:** `MASTER_REPORT_EXP_44.md`
 - **Current status:** **AUDIT-VERIFIED**
 - **Core mechanism / claim:** Phase 47 maps atomic/nuclear/particle-scale claims to memory knots, edge states, Pauli exclusion, overflow/LHC behavior, Higgs-like mass acquisition, and quark confinement.
-- **Evidence / source docs in ZIP:** 47_phase_atom/47_1_nucleus_memory_knot/REPORT_EXP_47_1.md, 47_phase_atom/47_1_nucleus_memory_knot/VERIFICATION_REPORT.md, 47_phase_atom/47_2_electron_edge_states/REPORT_EXP_47_2.md …
+- **Evidence / source docs in ZIP:** 44_phase_atom/44_1_nucleus_memory_knot/REPORT_EXP_44_1.md, 44_phase_atom/44_1_nucleus_memory_knot/VERIFICATION_REPORT.md, 44_phase_atom/44_2_electron_edge_states/REPORT_EXP_44_2.md …
 - **Audit note:** Phase Atom included in null/stats/path audits; path and codebase issues resolved.
 
 ### 48 — Phase Energy / Thermodynamics & Energy Extraction
 
-- **Directory:** `48_phase_energy/`
-- **Entry point:** `ROADMAP_48_ENERGY_EXTRACTION.md`
+- **Directory:** `45_phase_energy/`
+- **Entry point:** `ROADMAP_45_ENERGY_EXTRACTION.md`
 - **Current status:** **OPEN / PLANNED**
 - **Core mechanism / claim:** Roadmap phase for thermodynamics, cache/latency entropy, topological ratchets, and hardware energy extraction experiments.
-- **Evidence / source docs in ZIP:** 48_phase_energy/ROADMAP_48_ENERGY_EXTRACTION.md
+- **Evidence / source docs in ZIP:** 45_phase_energy/ROADMAP_45_ENERGY_EXTRACTION.md
 - **Audit note:** Roadmap-only phase in current ZIP; not implemented or verified yet.
 
 ### 49 — Phase Chemistry / Topological Chemistry
 
-- **Directory:** `49_phase_chem/`
-- **Entry point:** `ROADMAP_49_TOPOLOGICAL_CHEMISTRY.md`
+- **Directory:** `46_phase_chem/`
+- **Entry point:** `ROADMAP_46_TOPOLOGICAL_CHEMISTRY.md`
 - **Current status:** **OPEN / PLANNED**
 - **Core mechanism / claim:** Roadmap phase mapping reaction coordinates, catalysts, activation barriers, and reversible chemical yield to exceptional-point/topological chemistry models.
-- **Evidence / source docs in ZIP:** 49_phase_chem/ROADMAP_49_TOPOLOGICAL_CHEMISTRY.md
+- **Evidence / source docs in ZIP:** 46_phase_chem/ROADMAP_46_TOPOLOGICAL_CHEMISTRY.md
 - **Audit note:** Roadmap-only phase in current ZIP; not implemented or verified yet.
 
 ### 50 — The Decoder — Extractive Proof + Decodability Boundary
 
-- **Directory:** `50_the_decoder/`
-- **Entry point:** `python 50_1_extractive_proof/50_1_extractive_proof.py` (+ `50_2*`, `50_2b`, `50_2c`, `50_3`)
+- **Directory:** `49_the_decoder/`
+- **Entry point:** `python 49_1_extractive_proof/49_1_extractive_proof.py` (+ `49_2*`, `49_2b`, `49_2c`, `49_3`)
 - **Current status:** **VERIFIED (Level 4-5)** — 6 entry points exit 0; lab-critic (M-1..M-8) clean; verified by the repo's own pre-commit hooks.
 - **Core mechanism / claim:** Settles the "decoder" question (the long-standing crux). (1) The holographic/spectral readout is genuinely **EXTRACTIVE** — it recovers a global invariant no lookup-class (bounded receptive-field / statistical-order) decoder can (spectral ~100% vs nulls 5-12%, Cohen h>2.4, p=2e-4), survives a statistics-matched wrong-answer control, and runs on a catalytic tape (SHA-256 restored, 0 bits erased). The barrier is integration length (locality) = the abelian-HSP / Fourier-sampling advantage as a measurement. (2) Decodability is **bounded:** a Hidden-Subgroup-Problem family collapses D 1.000 -> 0.110 at the abelian->non-abelian boundary (Cohen d=8.82, scale-independent); a cospectral anchor (Shrikhande vs Rook) confirms the readout is spectrum-bounded. (3) That wall is **crossable:** the non-abelian Fourier reframe recovers all NORMAL hidden subgroups (D -> 1.000). (4) The irreducible **residual wall is lattice:** strong Fourier sampling shows a single dihedral coset state is I/2 (zero info), the hidden slope is info-cheap (O(sqrt N) states) but compute-hard (2^n secret-space search, poly-budget success -> 0) = the 1-bit-LWE / dihedral-HSP <-> unique-SVP barrier (Regev). **Decodable class = {abelian HSP} U {topological invariants of a poly-size operator}.**
-- **Evidence / source docs:** 50_the_decoder/REPORT_THE_DECODER.md, VERIFICATION_REPORT.md, ROADMAP.md, 50_1_extractive_proof/REPORT_EXTRACTIVE_PROOF.md, 50_2_decodability_gradient/REPORT_DECODABILITY_GRADIENT.md
+- **Evidence / source docs:** 49_the_decoder/REPORT_THE_DECODER.md, VERIFICATION_REPORT.md, ROADMAP.md, 49_1_extractive_proof/REPORT_EXTRACTIVE_PROOF.md, 49_2_decodability_gradient/REPORT_DECODABILITY_GRADIENT.md
 - **Audit note:** Built this session (committed `33d2b776`). All claims capped at Level 4-5; the lattice-barrier identity and the "is it crossable?" question are handed to a stronger model via `MYTHOS_SANDBOX.md`, not claimed. Relocates the Exp 25 (LWE/SVP) and Exp 31 (graph-iso) wall-crossing claims onto exactly this located bedrock — those are the claims now needing extraordinary evidence.
 
 ---

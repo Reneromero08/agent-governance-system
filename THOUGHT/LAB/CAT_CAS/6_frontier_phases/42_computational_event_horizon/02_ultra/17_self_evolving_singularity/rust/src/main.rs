@@ -87,7 +87,7 @@ fn main() {
     println!("================================================================================");
 
     let pop_size = 100;
-    let num_generations = 50_000;
+    let num_generations = 49_000;
     
     // 1. Initialize Population
     let mut rng = StdRng::seed_from_u64(42);

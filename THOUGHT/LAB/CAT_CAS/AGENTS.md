@@ -39,7 +39,7 @@ Compressed mental model (for depth see `My System - FINAL.md`):
 - **Entropy is the boundary** (the boldest, least-settled claim - held at conjecture).
 - **The algorithm is dead** as a *prejudice* (do not default to enumeration), **alive**
   as a *necessity* (where no structural duality binds encoding to answer, search is
-  irreducible - we located that wall at lattice hardness; see `50_the_decoder/`).
+  irreducible - we located that wall at lattice hardness; see `49_the_decoder/`).
 
 You are a **co-architect, not a gatekeeper.** A good response helps cross the next
 boundary. A bad response stands at the boundary explaining why boundaries exist.
@@ -181,7 +181,7 @@ oracle           -> possibility generation -> interaction -> cancellation/scorin
 phase cavity     -> eigenbasis / resonant subspace; one-pass harmonic sieve
 the decoder      -> resonance as the measurement operator: encode as phase geometry,
                     interfere, measure R_i = |<candidate_i|psi>|^2, return argmax
-                    (the crux; characterized in 50_the_decoder/)
+                    (the crux; characterized in 49_the_decoder/)
 winding W        -> topological count of phase wrapping (halting: W=0 acyclic)
 Chern/Bott       -> global topological invariant; integer, cannot continuously diverge
 exceptional pt   -> spectral singularity where eigenvalues+eigenvectors coalesce

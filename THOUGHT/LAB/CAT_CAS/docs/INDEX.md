@@ -75,18 +75,18 @@ Every experiment to its track path and primary report. See [MAP.md](MAP.md) for 
 | Experiment | Path | Primary doc |
 |---|---|---|
 | 42_computational_event_horizon | `6_frontier_phases/42_computational_event_horizon/` | [REPORT.md](6_frontier_phases/42_computational_event_horizon/REPORT.md) |
-| 43_phase_consciousness | `6_frontier_phases/43_phase_consciousness/` | [ROADMAP_43_QUALIA_ENGINE.md](6_frontier_phases/43_phase_consciousness/ROADMAP_43_QUALIA_ENGINE.md) |
-| 45_phase_math | `6_frontier_phases/45_phase_math/` | [MASTER_REPORT_PHASE_45.md](6_frontier_phases/45_phase_math/MASTER_REPORT_PHASE_45.md) |
-| 46_phase_bio | `6_frontier_phases/46_phase_bio/` | [MASTER_REPORT_EXP_46.md](6_frontier_phases/46_phase_bio/MASTER_REPORT_EXP_46.md) |
-| 47_phase_atom | `6_frontier_phases/47_phase_atom/` | [AUDIT_REPORT_PHASE_47.md](6_frontier_phases/47_phase_atom/AUDIT_REPORT_PHASE_47.md) |
-| 48_phase_energy | `6_frontier_phases/48_phase_energy/` | [ROADMAP_48_ENERGY_EXTRACTION.md](6_frontier_phases/48_phase_energy/ROADMAP_48_ENERGY_EXTRACTION.md) |
-| 49_phase_chem | `6_frontier_phases/49_phase_chem/` | [ROADMAP_49_TOPOLOGICAL_CHEMISTRY.md](6_frontier_phases/49_phase_chem/ROADMAP_49_TOPOLOGICAL_CHEMISTRY.md) |
+| 48_phase_consciousness | `6_frontier_phases/48_phase_consciousness/` | [ROADMAP_48_QUALIA_ENGINE.md](6_frontier_phases/48_phase_consciousness/ROADMAP_48_QUALIA_ENGINE.md) |
+| 43_phase_math | `6_frontier_phases/43_phase_math/` | [MASTER_REPORT_PHASE_43.md](6_frontier_phases/43_phase_math/MASTER_REPORT_PHASE_43.md) |
+| 47_phase_bio | `6_frontier_phases/47_phase_bio/` | [MASTER_REPORT_EXP_47.md](6_frontier_phases/47_phase_bio/MASTER_REPORT_EXP_47.md) |
+| 44_phase_atom | `6_frontier_phases/44_phase_atom/` | [AUDIT_REPORT_PHASE_44.md](6_frontier_phases/44_phase_atom/AUDIT_REPORT_PHASE_44.md) |
+| 45_phase_energy | `6_frontier_phases/45_phase_energy/` | [ROADMAP_45_ENERGY_EXTRACTION.md](6_frontier_phases/45_phase_energy/ROADMAP_45_ENERGY_EXTRACTION.md) |
+| 46_phase_chem | `6_frontier_phases/46_phase_chem/` | [ROADMAP_46_TOPOLOGICAL_CHEMISTRY.md](6_frontier_phases/46_phase_chem/ROADMAP_46_TOPOLOGICAL_CHEMISTRY.md) |
 
 ## Decoder  (`7_decoder/`)
 
 | Experiment | Path | Primary doc |
 |---|---|---|
-| 50_the_decoder | `7_decoder/50_the_decoder/` | [FABLE_INTERFACE_REPORT.md](7_decoder/50_the_decoder/FABLE_INTERFACE_REPORT.md) |
+| 49_the_decoder | `7_decoder/49_the_decoder/` | [FABLE_INTERFACE_REPORT.md](7_decoder/49_the_decoder/FABLE_INTERFACE_REPORT.md) |
 
 ## Frozen (not in a track)
 

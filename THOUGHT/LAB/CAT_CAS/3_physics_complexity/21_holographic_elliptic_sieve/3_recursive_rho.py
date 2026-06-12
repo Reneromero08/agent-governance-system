@@ -45,7 +45,7 @@ def factorize_recursive(n, max_steps=100_000):
 
 def phase_cavity_recursive(a, p):
     ring = p - 1; rp = ring
-    gears = factorize_recursive(ring, max_steps=50_000)
+    gears = factorize_recursive(ring, max_steps=49_000)
     for k in gears:
         while rp % k == 0 and pow(a, rp // k, p) == 1:
             rp //= k

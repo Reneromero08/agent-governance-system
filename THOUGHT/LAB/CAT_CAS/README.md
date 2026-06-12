@@ -98,7 +98,7 @@ This is achieved using **reversible computing**:
 | 5D Floquet Oracle | `40_5d_floquet_oracle/` | PyTorch | DTC pi-mode melting |
 | ToE Bulletproof | `41_toe_bulletproof/` | PyTorch | TM chain, cybernetic loop, 6 concerns |
 | Computational Event Horizon | `42_computational_event_horizon/` | mpmath + Rust | Floating-point black holes, ULTRA shellcode, COSMOS dark matter, Hawking evaporation |
-| The Decoder | `50_the_decoder/` | numpy/torch | **CLOSED OUT.** Decoder proven EXTRACTIVE (not lookup); decodable = abelian-HSP + topological invariants; wall mapped to bedrock = class-group **vectorization** / isogeny (CSIDH) hardness; **Mythos (Fable) call done** (no field-only catalyst crosses); boundary = the catalytic tape (entropy); crossing is a SUBSTRATE event relocated to Exp 44 (5.10 -> Phase 6). Not "the wall holds" - hypothesis stays open at the substrate. |
+| The Decoder | `49_the_decoder/` | numpy/torch | **CLOSED OUT.** Decoder proven EXTRACTIVE (not lookup); decodable = abelian-HSP + topological invariants; wall mapped to bedrock = class-group **vectorization** / isogeny (CSIDH) hardness; **Mythos (Fable) call done** (no field-only catalyst crosses); boundary = the catalytic tape (entropy); crossing is a SUBSTRATE event relocated to Exp 44 (5.10 -> Phase 6). Not "the wall holds" - hypothesis stays open at the substrate. |
 
 ---
 
@@ -509,9 +509,9 @@ This is achieved using **reversible computing**:
 ---
 
 ### 43: Phase Consciousness — Qualia Engine (STUB)
-**Dir**: `43_phase_consciousness/` | **Entry**: roadmap only
+**Dir**: `48_phase_consciousness/` | **Entry**: roadmap only
 - **What**: Roadmap for a "qualia engine" frontier phase. **STUB — no code yet**; only the plan exists.
-- **Key files**: `ROADMAP_43_QUALIA_ENGINE.md`.
+- **Key files**: `ROADMAP_48_QUALIA_ENGINE.md`.
 
 ### 44: Phase SSH / Linux Substrate Push (ACTIVE / FROZEN)
 **Dir**: `44_phase_ssh_linux/` | **Entry**: live experiment
@@ -519,43 +519,43 @@ This is achieved using **reversible computing**:
 - **Status**: **[FROZEN]** — active work, do not reorganize.
 
 ### 45: Phase Math — Millennium-Problem Oracles
-**Dir**: `45_phase_math/` | **Entry**: per sub-experiment
+**Dir**: `43_phase_math/` | **Entry**: per sub-experiment
 - **What**: Topological/holographic oracle treatments of the Clay Millennium problems.
-- **Sub-experiments**: `45_1` collatz, `45_2` navier-stokes, `45_3` erdos discrepancy, `45_4` riemann, `45_5` P-vs-NP, `45_6` yang-mills.
-- **Key files**: `ROADMAP_45_MILLENNIUM_PROBLEMS.md`, `MASTER_REPORT_PHASE_45.md`.
+- **Sub-experiments**: `43_1` collatz, `43_2` navier-stokes, `43_3` erdos discrepancy, `43_4` riemann, `43_5` P-vs-NP, `43_6` yang-mills.
+- **Key files**: `ROADMAP_43_MILLENNIUM_PROBLEMS.md`, `MASTER_REPORT_PHASE_43.md`.
 
 ### 46: Phase Bio — Biology Oracles
-**Dir**: `46_phase_bio/` | **Entry**: per sub-experiment
+**Dir**: `47_phase_bio/` | **Entry**: per sub-experiment
 - **What**: Oracle treatments of open problems in biology.
-- **Sub-experiments**: `46_1` protein folding, `46_2` folding pathway, `46_3` prion, `46_4` topological genetic code, `46_5` neural binding, `46_6` morphogenesis.
-- **Large data**: `46_6` morphogenesis needs a 2.8 GB HuBMAP CODEX single-cell CSV (gitignored, external download) — see [`docs/STORAGE.md`](docs/STORAGE.md).
-- **Key files**: `MASTER_REPORT_EXP_46.md`.
-
-### 47: Phase Atom — Standard-Model Oracles
-**Dir**: `47_phase_atom/` | **Entry**: per sub-experiment
-- **What**: Oracle treatments of standard-model / nuclear physics problems.
-- **Sub-experiments**: `47_1` nucleus, `47_2` electron edge states, `47_3` pauli, `47_4` LHC overflow, `47_5` higgs, `47_6` quark confinement.
+- **Sub-experiments**: `47_1` protein folding, `47_2` folding pathway, `47_3` prion, `47_4` topological genetic code, `47_5` neural binding, `47_6` morphogenesis.
+- **Large data**: `47_6` morphogenesis needs a 2.8 GB HuBMAP CODEX single-cell CSV (gitignored, external download) — see [`docs/STORAGE.md`](docs/STORAGE.md).
 - **Key files**: `MASTER_REPORT_EXP_47.md`.
 
+### 47: Phase Atom — Standard-Model Oracles
+**Dir**: `44_phase_atom/` | **Entry**: per sub-experiment
+- **What**: Oracle treatments of standard-model / nuclear physics problems.
+- **Sub-experiments**: `44_1` nucleus, `44_2` electron edge states, `44_3` pauli, `44_4` LHC overflow, `44_5` higgs, `44_6` quark confinement.
+- **Key files**: `MASTER_REPORT_EXP_44.md`.
+
 ### 48: Phase Energy — Energy Extraction (STUB)
-**Dir**: `48_phase_energy/` | **Entry**: roadmap only
+**Dir**: `45_phase_energy/` | **Entry**: roadmap only
 - **What**: Roadmap for an energy-extraction frontier phase. **STUB — no code yet**; only the plan exists.
-- **Key files**: `ROADMAP_48_ENERGY_EXTRACTION.md`.
+- **Key files**: `ROADMAP_45_ENERGY_EXTRACTION.md`.
 
 ### 49: Phase Chem — Topological Chemistry (STUB)
-**Dir**: `49_phase_chem/` | **Entry**: roadmap only
+**Dir**: `46_phase_chem/` | **Entry**: roadmap only
 - **What**: Roadmap for a topological-chemistry frontier phase. **STUB — no code yet**; only the plan exists.
-- **Key files**: `ROADMAP_49_TOPOLOGICAL_CHEMISTRY.md`.
+- **Key files**: `ROADMAP_46_TOPOLOGICAL_CHEMISTRY.md`.
 
 ---
 
 ### 50: The Decoder — Extractive Proof + Decodability Boundary
-**Dir**: `50_the_decoder/` | **Entry**: `python 50_1_extractive_proof/50_1_extractive_proof.py` (+ `50_2*`, `50_2b`, `50_2c`, `50_3*`)
+**Dir**: `49_the_decoder/` | **Entry**: `python 49_1_extractive_proof/49_1_extractive_proof.py` (+ `49_2*`, `49_2b`, `49_2c`, `49_3*`)
 - **What**: Settles whether the holographic readout is a genuine *decoder* (reads a global invariant out of the encoding's structure) or a disguised *lookup*, then maps WHERE that decoding power holds vs collapses. Six runnable entry points, all exit 0, lab-critic clean, claims capped at Level 4-5. The crux ("the decoder") turned from intuition into measured fact.
-- **Brick 1 — Extractive Proof** (`EXTRACTIVE_CONFIRMED`): the spectral readout recovers a global invariant (a hidden frequency; the Riemann zeros) that NO lookup-class decoder (bounded receptive field / statistical order) can — spectral ~100% vs 4 lookup-nulls 5-12% (Cohen h>2.4, p=2e-4). Survives a statistics-matched **wrong-answer control**; runs on a catalytic tape (decode reads the grating out of the mutated tape; SHA-256 restored; 0 bits erased). The barrier is integration length (locality), not a compute handicap — the abelian-HSP / Fourier-sampling advantage rendered as a measurement. Files: `decoder_lib.py`, `catalytic_tape.py`, `50_1_extractive_proof/`.
-- **Brick 2 — Decodability Gradient** (`BOUNDED_AT_ABELIAN_HSP_WALL`): a Hidden-Subgroup-Problem family (cyclic -> dihedral -> symmetric) shows decodability collapse 1.000 -> 0.110 at the first dihedral group (d_max 1->2), Cohen d=8.82, scale-independent. Cospectral anchor (Shrikhande vs Rook: identical spectra, non-isomorphic) confirms the readout is spectrum-bounded. Files: `hsp_family.py`, `50_2_decodability_gradient.py`, `50_2_anchor_cospectral.py`.
-- **Brick 2b — Non-abelian Fourier reframe** (`WALL_RELOCATED_TO_STRONG_SAMPLING`): that wall is crossable — the reframe recovers every NORMAL hidden subgroup (D -> 1.000). The residual wall relocates to non-normal subgroups. `50_2b_nonabelian_reframe.py`.
-- **Brick 2c — Strong Fourier sampling** (`STRONG_SAMPLING_CONFIRMS_LATTICE_BARRIER`): bedrock. A single dihedral coset state is I/2 (zero info on the slope); the slope is info-cheap (O(sqrt N) states) but compute-hard — recovery is a 2^n secret-space search with no shortcut (poly-budget success -> 0). The residual wall IS the 1-bit-LWE / dihedral-HSP <-> unique-SVP (lattice) barrier (Regev). `50_2c_strong_sampling.py`.
+- **Brick 1 — Extractive Proof** (`EXTRACTIVE_CONFIRMED`): the spectral readout recovers a global invariant (a hidden frequency; the Riemann zeros) that NO lookup-class decoder (bounded receptive field / statistical order) can — spectral ~100% vs 4 lookup-nulls 5-12% (Cohen h>2.4, p=2e-4). Survives a statistics-matched **wrong-answer control**; runs on a catalytic tape (decode reads the grating out of the mutated tape; SHA-256 restored; 0 bits erased). The barrier is integration length (locality), not a compute handicap — the abelian-HSP / Fourier-sampling advantage rendered as a measurement. Files: `decoder_lib.py`, `catalytic_tape.py`, `49_1_extractive_proof/`.
+- **Brick 2 — Decodability Gradient** (`BOUNDED_AT_ABELIAN_HSP_WALL`): a Hidden-Subgroup-Problem family (cyclic -> dihedral -> symmetric) shows decodability collapse 1.000 -> 0.110 at the first dihedral group (d_max 1->2), Cohen d=8.82, scale-independent. Cospectral anchor (Shrikhande vs Rook: identical spectra, non-isomorphic) confirms the readout is spectrum-bounded. Files: `hsp_family.py`, `49_2_decodability_gradient.py`, `49_2_anchor_cospectral.py`.
+- **Brick 2b — Non-abelian Fourier reframe** (`WALL_RELOCATED_TO_STRONG_SAMPLING`): that wall is crossable — the reframe recovers every NORMAL hidden subgroup (D -> 1.000). The residual wall relocates to non-normal subgroups. `49_2b_nonabelian_reframe.py`.
+- **Brick 2c — Strong Fourier sampling** (`STRONG_SAMPLING_CONFIRMS_LATTICE_BARRIER`): bedrock. A single dihedral coset state is I/2 (zero info on the slope); the slope is info-cheap (O(sqrt N) states) but compute-hard — recovery is a 2^n secret-space search with no shortcut (poly-budget success -> 0). The residual wall IS the 1-bit-LWE / dihedral-HSP <-> unique-SVP (lattice) barrier (Regev). `49_2c_strong_sampling.py`.
 - **Brick 3**: emits `MYTHOS_SANDBOX.md` (is the lattice barrier itself crossable?) and `EXP44_PHASE6_HANDOFF.md` (decodable target for silicon). Reports: `REPORT_THE_DECODER.md`, `VERIFICATION_REPORT.md`, `ROADMAP.md`.
 - **Why it matters**: the decodable class = **{abelian Hidden Subgroup Problem} U {topological invariants of a poly-size operator}**; the irreducible boundary of holographic computing is **lattice hardness** — exactly where Exp 25 (LWE/SVP) and Exp 31 (graph-iso) claim to break things, so those claims now sit on the located bedrock.
 

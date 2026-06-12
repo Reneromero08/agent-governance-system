@@ -66,7 +66,7 @@ def riemann_zero_telescope():
     t0 = time.time()
     
     # Phase 1: Coarse scan
-    num_scan_points = 50_000
+    num_scan_points = 49_000
     t_start, t_end = 10.0, 55.0
     print(f"[*] Phase 1: Coarse Scan [{t_start} -- {t_end}]")
     print(f"    -> Evaluating Z(t) at {num_scan_points:,} points via mpmath.siegelz()...")

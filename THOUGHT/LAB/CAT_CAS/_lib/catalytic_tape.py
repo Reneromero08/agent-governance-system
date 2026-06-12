@@ -4,14 +4,14 @@ Canonical merged catalytic tape for CAT_CAS.
 Provenance — this module reconciles four formerly-divergent copies into one
 canonical source:
 
-  - CAT_CAS/catalytic_tape.py (root) and 45_phase_math/catalytic_tape.py were
+  - CAT_CAS/catalytic_tape.py (root) and 43_phase_math/catalytic_tape.py were
     byte-identical: class `CatalyticTape`, default size_mb=256, seed=42.
-  - 50_the_decoder/catalytic_tape.py was a documented STRICT SUPERSET of the
+  - 49_the_decoder/catalytic_tape.py was a documented STRICT SUPERSET of the
     root tape: same XOR / was_modified mechanism, PLUS a raw bytes/bytearray
     passthrough in `_to_bytes`, `record_operation` returning the written
     (offset, length), and the extra `read_region` / `dirty_baseline` methods.
     Its own default was size_mb=8 (always overridden by explicit callers).
-  - 47_phase_atom/catalytic_tape.py was a DISTINCT class `BennettHistoryTape`
+  - 44_phase_atom/catalytic_tape.py was a DISTINCT class `BennettHistoryTape`
     (RNG init via rng.bytes, big-endian int encoding, history_stack/next_offset,
     default size_mb=10, seed=47).
 
