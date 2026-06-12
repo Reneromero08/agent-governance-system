@@ -76,8 +76,9 @@ A scaled/pushed variant always lives in an **`infinity/` subdirectory** of its
 parent experiment (matching exp 05, 06). Never a bare `NNa_` sibling directory,
 never a loose `1_infinity_*.py` at the experiment root.
 
-- `05_multibit_compiler/infinity/...` — canonical shape (already correct).
-- `04_thermodynamic_cpu/1_infinity_thermo.py` → `04_.../infinity/thermo.py`.
+- `05_multibit_compiler/infinity/1_infinity_compiler.py` — canonical shape (already correct).
+- `04_thermodynamic_cpu/1_infinity_thermo.py` → `04_.../infinity/1_infinity_thermo.py`
+  (the `infinity/` subdir is the rule; the `1_infinity_*` filename matches 05/06).
 
 ## 6. Shared primitives
 
