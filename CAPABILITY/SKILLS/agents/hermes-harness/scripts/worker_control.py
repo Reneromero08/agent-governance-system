@@ -38,6 +38,7 @@ import json
 import os
 import re
 import sys
+import threading
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
@@ -260,6 +261,52 @@ def default_session_chat_caller(
 
 def _utc_now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def _atomic_write_text(path: Path, data: str) -> None:
+    """Write a file atomically (temp + os.replace) so a concurrent reader never
+    sees a half-written JSON. The temp name is per-call (uuid) so concurrent
+    writers in the same process don't collide.
+
+    On Windows `os.replace` raises PermissionError if a reader currently holds
+    the destination open (file locking); readers here open+close quickly, so a
+    short bounded retry resolves the contention.
+    """
+    import time
+    tmp = path.with_name(f"{path.name}.tmp.{uuid.uuid4().hex}")
+    try:
+        tmp.write_text(data, encoding="utf-8")
+        for attempt in range(20):
+            try:
+                os.replace(tmp, path)
+                break
+            except PermissionError:
+                if attempt == 19:
+                    raise
+                time.sleep(0.005)
+    finally:
+        if tmp.exists():
+            try:
+                tmp.unlink()
+            except OSError:
+                pass
+
+
+def _read_json_retry(path: Path, attempts: int = 20) -> Optional[Dict[str, Any]]:
+    """Read+parse a JSON file, tolerating transient contention from a concurrent
+    atomic write (Windows can briefly fail an open during os.replace). Returns
+    None only when the file genuinely does not exist."""
+    import time
+    for i in range(attempts):
+        try:
+            if not path.exists():
+                return None
+            return json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            if i == attempts - 1:
+                raise
+            time.sleep(0.005)
+    return None
 
 
 def _seconds_since(ts: str) -> float:
@@ -579,6 +626,11 @@ class WorkerController:
         self.manifests_dir = self.state_dir / "manifests"
         for d in (self.workers_dir, self.tasks_dir, self.logs_dir, self.manifests_dir):
             d.mkdir(parents=True, exist_ok=True)
+        # Serializes file reads/writes within this process (the HTTP API is
+        # multi-threaded) so a read never overlaps a write. Re-entrant: nested
+        # get_* calls on the same thread are fine. Cross-process safety is the
+        # atomic write + retry above.
+        self._io_lock = threading.RLock()
         # Injectable for tests; if injected it is used for BOTH lanes. In
         # production the caller is chosen per worker per lane:
         #   PERSISTENT (canonical memory): /v1/responses named conversation
@@ -600,8 +652,11 @@ class WorkerController:
         return self._judge
 
     def _persistent_transport(self, worker: Dict[str, Any]) -> str:
-        # Back-compat: a legacy worker may only have `transport`.
-        return worker.get("persistent_transport") or worker.get("transport") or "responses"
+        # Back-compat: a legacy worker may only have `transport`. A legacy value of
+        # "runs" was an EXECUTION transport, not a persistent one -> coerce to
+        # the default persistent lane so migrated workers don't break.
+        pt = worker.get("persistent_transport") or worker.get("transport") or "responses"
+        return pt if pt in VALID_PERSISTENT_TRANSPORTS else "responses"
 
     def _persistent_caller_for(self, worker: Dict[str, Any]) -> Caller:
         """The CANONICAL memory lane caller (server-side conversation)."""
@@ -665,23 +720,26 @@ class WorkerController:
     def list_workers(self) -> List[Dict[str, Any]]:
         out: List[Dict[str, Any]] = []
         for p in sorted(self.workers_dir.glob("*.json")):
+            # Resilient read so a worker being concurrently written is not
+            # silently skipped (the retry recovers from transient contention).
             try:
-                out.append(json.loads(p.read_text(encoding="utf-8")))
+                with self._io_lock:
+                    rec = _read_json_retry(p)
             except (json.JSONDecodeError, OSError):
                 continue
+            if rec is not None:
+                out.append(rec)
         return out
 
     def get_worker(self, worker_id: str) -> Optional[Dict[str, Any]]:
-        p = self._worker_path(worker_id)
-        if not p.exists():
-            return None
-        return json.loads(p.read_text(encoding="utf-8"))
+        with self._io_lock:
+            return _read_json_retry(self._worker_path(worker_id))
 
     def save_worker(self, worker: Dict[str, Any]) -> Dict[str, Any]:
         worker["updated_at"] = _utc_now()
-        self._worker_path(worker["worker_id"]).write_text(
-            json.dumps(worker, indent=2), encoding="utf-8"
-        )
+        with self._io_lock:
+            _atomic_write_text(self._worker_path(worker["worker_id"]),
+                               json.dumps(worker, indent=2))
         return worker
 
     def create_worker(
@@ -768,9 +826,14 @@ class WorkerController:
         return {
             "worker_id": worker_id,
             "status": worker.get("status"),
+            "persistent_transport": self._persistent_transport(worker),
+            "execution_transport": worker.get("execution_transport", "runs"),
             "conversation": worker.get("conversation"),
-            "session_key": worker.get("session_key"),
+            "session_key_present": bool(worker.get("session_key")),
+            "session_id": worker.get("session_id", ""),
             "last_task_id": worker.get("last_task_id"),
+            "last_response_id": worker.get("last_response_id"),
+            "last_run_id": worker.get("last_run_id"),
             "last_task": last_task,
             "artifact_manifest": worker.get("artifact_manifest"),
         }
@@ -806,10 +869,10 @@ class WorkerController:
         return self.tasks_dir / f"{task_id}.json"
 
     def get_task(self, task_id: str, summary: bool = False) -> Optional[Dict[str, Any]]:
-        p = self._task_path(task_id)
-        if not p.exists():
+        with self._io_lock:
+            rec = _read_json_retry(self._task_path(task_id))
+        if rec is None:
             return None
-        rec = json.loads(p.read_text(encoding="utf-8"))
         if summary:
             return {
                 "task_id": rec.get("task_id"),
@@ -821,7 +884,8 @@ class WorkerController:
         return rec
 
     def _save_task(self, rec: Dict[str, Any]) -> None:
-        self._task_path(rec["task_id"]).write_text(json.dumps(rec, indent=2), encoding="utf-8")
+        with self._io_lock:
+            _atomic_write_text(self._task_path(rec["task_id"]), json.dumps(rec, indent=2))
 
     def submit_task(
         self,
@@ -1143,6 +1207,10 @@ class WorkerController:
         self._log(rec["task_id"], "judgment", {"verdict": verdict, "turn": judged_turn})
 
         if verdict == "accept":
+            # An accepted execution-lane task must still summarize its result
+            # back into the persistent conversation (the pause skipped it).
+            if rec.get("execution_required"):
+                self.record_execution_result_to_persistent_worker(worker, rec)
             self._finalize(worker, rec, "complete")
             return rec
 
@@ -1367,14 +1435,24 @@ class WorkerController:
                         "exit_code": vr["exit_code"], "command": verify_command,
                     })
                     if not vr["passed"]:
-                        # Claimed done but the check failed. Reject and feed back.
-                        pending_feedback = (
-                            f"VERIFICATION REJECTED. You emitted '{done_marker}', but the harness "
-                            f"ran the acceptance check and it FAILED (exit {vr['exit_code']}).\n"
-                            f"Command: {verify_command}\nOutput (tail):\n{vr['output']}\n"
-                            f"Do NOT emit '{done_marker}' again until this command exits 0. Fix "
-                            f"the in-scope work and continue."
-                        )
+                        # Looked done but the harness's check failed. Reject + feed
+                        # back. Phrase it correctly for the mode (judge mode has no
+                        # marker, so do not reference one).
+                        if use_judge:
+                            pending_feedback = (
+                                f"VERIFICATION REJECTED. The harness ran the acceptance check "
+                                f"and it FAILED (exit {vr['exit_code']}).\n"
+                                f"Command: {verify_command}\nOutput (tail):\n{vr['output']}\n"
+                                f"Keep working on the in-scope task until this command exits 0."
+                            )
+                        else:
+                            pending_feedback = (
+                                f"VERIFICATION REJECTED. You emitted '{done_marker}', but the harness "
+                                f"ran the acceptance check and it FAILED (exit {vr['exit_code']}).\n"
+                                f"Command: {verify_command}\nOutput (tail):\n{vr['output']}\n"
+                                f"Do NOT emit '{done_marker}' again until this command exits 0. Fix "
+                                f"the in-scope work and continue."
+                            )
                         turn += 1
                         continue
                 # 2. Manager judgment: pause and hand the deliverable back.
@@ -1487,7 +1565,7 @@ class WorkerController:
         rec["artifact_manifest"] = manifest
         self._save_task(rec)
         # Persist worker-level manifest pointer (latest).
-        Path(worker["artifact_manifest"]).write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+        _atomic_write_text(Path(worker["artifact_manifest"]), json.dumps(manifest, indent=2))
         self._log(rec["task_id"], "status", {"status": status})
         self._log(rec["task_id"], "manifest", {"manifest": manifest})
         self._log(rec["task_id"], "final", {"result": rec.get("final_result", "")})

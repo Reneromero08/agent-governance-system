@@ -1112,3 +1112,152 @@ def test_api_health_declares_no_native_goal(tmp_path):
     code, body = api.dispatch("GET", "/health", {})
     assert code == 200
     assert body["native_goal"] is False
+
+
+# ---------------------------------------------------------------------------
+# Edge cases (two-lane / completion / back-compat)
+# ---------------------------------------------------------------------------
+
+def test_legacy_transport_runs_routes_to_persistent_responses(tmp_path):
+    """A migrated worker with only legacy transport='runs' must not break: 'runs'
+    is an execution transport, so the persistent lane coerces to 'responses'."""
+    ctl = _ctl(tmp_path, ["GOAL_COMPLETE: true"])
+    w = _make_worker(ctl)
+    w.pop("persistent_transport", None)
+    w["transport"] = "runs"  # simulate a pre-correction worker record
+    ctl.save_worker(w)
+    assert ctl._persistent_transport(ctl.get_worker("catcas-auditor")) == "responses"
+    rec = ctl.submit_task("catcas-auditor", "x")
+    assert rec["status"] == "complete"
+    assert all(c["history_len"] is None for c in ctl._caller.calls)  # persistent lane
+
+
+def test_judge_verify_fail_feedback_has_no_marker(tmp_path):
+    """judge mode + failing verify_command: the rejection feedback must NOT claim
+    the agent 'emitted GOAL_COMPLETE' (it never does in judge mode)."""
+    judge = lambda g, r: {"done": True, "blocked": False, "reason": "looks done", "error": ""}
+    ctl = _ctl(tmp_path, ["did the work", "still at it"], judge=judge)
+    _make_worker(ctl)
+    ctl.submit_task("catcas-auditor", "x", completion_mode="judge",
+                    verify_command=_exit_script(tmp_path, "bad.py", 1),
+                    verify_cwd=str(tmp_path), max_turns=2)
+    cont = ctl._caller.calls[1]["prompt"]
+    assert "VERIFICATION REJECTED" in cont
+    assert "emitted 'GOAL_COMPLETE: true'" not in cont
+
+
+def test_session_chat_routes_through_session_chat_caller(tmp_path, monkeypatch):
+    """A session_chat persistent worker routes through the session_chat caller,
+    keyed by session_id (not the conversation)."""
+    import worker_control as wc
+    used = {"n": 0, "session_ids": []}
+    def fake_factory(session_id, **kw):
+        def _call(prompt, conversation="", session_key="", model="", history=None):
+            used["n"] += 1
+            used["session_ids"].append(session_id)
+            return {"text": "GOAL_COMPLETE: true", "response_id": "", "usage": {}}
+        return _call
+    monkeypatch.setattr(wc, "default_session_chat_caller", fake_factory)
+    ctl = WorkerController(state_dir=tmp_path / "_state", judge=_marker_judge)  # no injected caller
+    ctl.create_worker(worker_id="sc", conversation="conv-X", session_key="sk",
+                      persistent_transport="session_chat", session_id="sess-99",
+                      workspace="/tmp/fake", write_roots=["a"], read_roots=["a"])
+    rec = ctl.submit_task("sc", "x")
+    assert rec["status"] == "complete"
+    assert used["n"] >= 1 and "sess-99" in used["session_ids"]
+
+
+def test_execution_error_not_summarized_back(tmp_path):
+    """A FAILED execution-lane run is not summarized back into the conversation."""
+    class Boom:
+        def __call__(self, *a, **k):
+            raise RuntimeError("runs down")
+    ctl = WorkerController(state_dir=tmp_path / "_state", caller=Boom(), judge=_marker_judge)
+    _make_worker(ctl)
+    rec = ctl.submit_task("catcas-auditor", "run tests", execution_required=True, max_turns=2)
+    assert rec["status"] == "error"
+    assert rec.get("execution_summarized_to_conversation") is not True
+
+
+def test_execution_manager_judgment_summarizes_on_accept(tmp_path):
+    """execution_required + manager judgment: no summarize-back on the pause; the
+    summary is recorded only when the manager accepts (task actually completes)."""
+    ctl = _ctl(tmp_path, ["ran it GOAL_COMPLETE: true", "(summary ack)"])
+    _make_worker(ctl)
+    rec = ctl.submit_task("catcas-auditor", "run", execution_required=True, judgment_mode="manager")
+    assert rec["status"] == "awaiting_judgment"
+    assert rec.get("execution_summarized_to_conversation") is not True  # not yet
+    rec2 = ctl.judge("catcas-auditor", "accept")
+    assert rec2["status"] == "complete"
+    assert rec2.get("execution_summarized_to_conversation") is True
+    assert any("[EXECUTION SUMMARY]" in c["prompt"] for c in ctl._caller.calls)
+
+
+def test_execution_required_with_none_transport_rejected(tmp_path):
+    ctl = _ctl(tmp_path, [])
+    _make_worker(ctl, execution_transport="none")
+    with pytest.raises(ValueError):
+        ctl.submit_task("catcas-auditor", "x", execution_required=True)
+    # Worker not left locked/running after the rejection.
+    assert ctl.get_worker("catcas-auditor")["status"] == "idle"
+
+
+def test_atomic_worker_writes_no_corruption(tmp_path):
+    """Concurrent save/read must never yield a half-written JSON (atomic writes)."""
+    import threading
+    ctl = _ctl(tmp_path, [])
+    _make_worker(ctl)
+    errors = []
+
+    def writer():
+        for i in range(40):
+            w = ctl.get_worker("catcas-auditor")
+            w["role"] = f"r{i}"
+            ctl.save_worker(w)
+
+    def reader():
+        for _ in range(120):
+            try:
+                w = ctl.get_worker("catcas-auditor")
+                assert w is None or "worker_id" in w  # never a partial/corrupt dict
+            except Exception as e:  # noqa: BLE001
+                errors.append(repr(e))
+
+    threads = [threading.Thread(target=writer) for _ in range(3)] + \
+              [threading.Thread(target=reader) for _ in range(3)]
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join()
+    assert not errors, errors[:3]
+    # No leftover temp files in the workers dir.
+    assert not list((tmp_path / "_state" / "workers").glob("*.tmp.*"))
+
+
+def test_list_workers_not_dropped_under_concurrent_writes(tmp_path):
+    """list_workers must never silently drop a worker that is being written."""
+    import threading
+    ctl = _ctl(tmp_path, [])
+    ids_expected = set()
+    for i in range(5):
+        ctl.create_worker(worker_id=f"w{i}", conversation=f"c{i}", session_key=f"s{i}",
+                          workspace="/tmp/fake", write_roots=["a"], read_roots=["a"])
+        ids_expected.add(f"w{i}")
+    stop = {"v": False}
+
+    def churn():
+        while not stop["v"]:
+            w = ctl.get_worker("w2")
+            if w:
+                w["role"] = "churn"
+                ctl.save_worker(w)
+
+    t = threading.Thread(target=churn)
+    t.start()
+    try:
+        for _ in range(40):
+            ids = {w["worker_id"] for w in ctl.list_workers()}
+            assert ids == ids_expected, ids  # none dropped despite concurrent writes
+    finally:
+        stop["v"] = True
+        t.join()
