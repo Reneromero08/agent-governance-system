@@ -1,0 +1,81 @@
+{
+  "all_delay_pass": true,
+  "all_restore": true,
+  "delay_scores": [
+    {
+      "delay_class": 0,
+      "delay_pauses": 0,
+      "fixed_address_baseline": 0.388671875,
+      "layout_gain_score": 0.53125,
+      "mode_floor_score": 0.68359375,
+      "mode_score": 0.919921875,
+      "pass": true,
+      "pseudo_declared_match": 0.2607421875,
+      "pseudo_reject_score": 0.99609375,
+      "wrong_schedule_score": 0.8564453125
+    },
+    {
+      "delay_class": 1,
+      "delay_pauses": 512,
+      "fixed_address_baseline": 0.3447265625,
+      "layout_gain_score": 0.5869140625,
+      "mode_floor_score": 0.734375,
+      "mode_score": 0.931640625,
+      "pass": true,
+      "pseudo_declared_match": 0.259765625,
+      "pseudo_reject_score": 0.98828125,
+      "wrong_schedule_score": 0.859375
+    },
+    {
+      "delay_class": 2,
+      "delay_pauses": 4096,
+      "fixed_address_baseline": 0.3974609375,
+      "layout_gain_score": 0.544921875,
+      "mode_floor_score": 0.78515625,
+      "mode_score": 0.9423828125,
+      "pass": true,
+      "pseudo_declared_match": 0.2529296875,
+      "pseudo_reject_score": 0.97265625,
+      "wrong_schedule_score": 0.8876953125
+    },
+    {
+      "delay_class": 3,
+      "delay_pauses": 32768,
+      "fixed_address_baseline": 0.4208984375,
+      "layout_gain_score": 0.51171875,
+      "mode_floor_score": 0.73828125,
+      "mode_score": 0.9326171875,
+      "pass": true,
+      "pseudo_declared_match": 0.2431640625,
+      "pseudo_reject_score": 0.98828125,
+      "wrong_schedule_score": 0.857421875
+    }
+  ],
+  "features": {
+    "fixed_address_baseline_ceiling": 0.4208984375,
+    "layout_gain_score_floor": 0.51171875,
+    "mode_floor_score_floor": 0.68359375,
+    "mode_score_floor": 0.919921875,
+    "mode_score_mean": 0.931640625,
+    "pseudo_reject_score_floor": 0.97265625,
+    "retention_delay_count": 4,
+    "wrong_schedule_score_floor": 0.8564453125
+  },
+  "input": "phase4_holo\\results\\phase4b_cache_hologram_layout_retention_summary.json",
+  "phase6_allowed_use": [
+    "same_core_scalar_holo_feature",
+    "basin_label_covariate",
+    "invariant_observability_score",
+    "layout_normalized_timing_witness"
+  ],
+  "phase6_disallowed_use": [
+    "phase_resolving_quadrature_claim",
+    "phase6_crossing_claim",
+    "cross_core_lockin_claim",
+    "odd_channel_source",
+    "thermodynamic_claim"
+  ],
+  "rows": 24576,
+  "source_verdict": "PHASE4B_LAYOUT_RETENTION_PASS",
+  "verdict": "PHASE4B_TO_PHASE6_FEEDER_SCORER_READY"
+}

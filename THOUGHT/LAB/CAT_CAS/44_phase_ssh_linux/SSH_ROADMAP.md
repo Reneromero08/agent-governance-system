@@ -1141,6 +1141,10 @@ reject as artifact
 - [x] Cross-core direct and echo variants restored hash but did not recover matched-null mode structure from observer core
 - [x] Retention curve across passive delays: `PHASE4B_RETENTION_MODE_SIGNAL_CONFIRMED_PSEUDO_REJECT_VOLATILE`
 - [x] Retention weakest core gates: real accuracy `0.940625`, real floor `0.812500`, wrong actual-match `0.934375`, wrong declared-match `0.004688`
+- [x] Combined layout holdout + retention: `PHASE4B_LAYOUT_RETENTION_PASS`
+- [x] Same-core substrate-coordinate retention: all four delay classes pass under held-out layout; fixed-address baseline remains low
+- [x] Phase 4B -> Phase 6 feature handoff: `PHASE4B_TO_PHASE6_FEEDER_SCORER_READY`
+- [x] Exported scorer features: mode floor `0.919922`, wrong schedule floor `0.856445`, pseudo reject floor `0.972656`, layout gain floor `0.511719`
 - [x] Artifacts:
   - `phase4_holo/PHASE4B_CACHE_HOLOGRAM_AFTERIMAGE.md`
   - `phase4_holo/PHASE4B_CACHE_HOLOGRAM_MODE_CLASSIFIER.md`
@@ -1148,6 +1152,8 @@ reject as artifact
   - `phase4_holo/PHASE4B_CACHE_HOLOGRAM_LAYOUT_HOLDOUT.md`
   - `phase4_holo/PHASE4B_CACHE_HOLOGRAM_CROSS_CORE.md`
   - `phase4_holo/PHASE4B_CACHE_HOLOGRAM_RETENTION_CURVE.md`
+  - `phase4_holo/PHASE4B_CACHE_HOLOGRAM_LAYOUT_RETENTION.md`
+  - `phase4_holo/PHASE4B_TO_PHASE6_FEEDER_HANDOFF.md`
   - `session_scripts/phase4_holo/cache_hologram_afterimage.c`
   - `session_scripts/phase4_holo/analyze_cache_hologram_afterimage.py`
   - `session_scripts/phase4_holo/cache_hologram_mode_classifier.c`
@@ -1159,6 +1165,9 @@ reject as artifact
   - `session_scripts/phase4_holo/cache_hologram_cross_core.c`
   - `session_scripts/phase4_holo/cache_hologram_retention_curve.c`
   - `session_scripts/phase4_holo/analyze_cache_hologram_retention_curve.py`
+  - `session_scripts/phase4_holo/cache_hologram_layout_retention.c`
+  - `session_scripts/phase4_holo/analyze_cache_hologram_layout_retention.py`
+  - `session_scripts/phase4_holo/phase4b_to_phase6_feeder_scorer.py`
   - `phase4_holo/results/phase4b_cache_hologram_afterimage.csv`
   - `phase4_holo/results/phase4b_cache_hologram_afterimage_summary.json`
   - `phase4_holo/results/phase4b_cache_hologram_mode_classifier_summary.json`
@@ -1168,6 +1177,8 @@ reject as artifact
   - `phase4_holo/results/phase4b_cache_hologram_cross_core_summary.json`
   - `phase4_holo/results/phase4b_cache_hologram_cross_core_echo_summary.json`
   - `phase4_holo/results/phase4b_cache_hologram_retention_curve_repeat_summary.json`
+  - `phase4_holo/results/phase4b_cache_hologram_layout_retention_summary.json`
+  - `phase4_holo/results/phase4b_to_phase6_feeder_features.json`
 - [x] Recommended first routes:
   - `PHASE4B_RESTORED_TAPE_PHYSICAL_AFTERIMAGE_PROBE`
   - `PHASE4B_CROSS_CORE_HOLO_LOCKIN_WITNESS`
@@ -1204,6 +1215,12 @@ PHASE4B_SCALAR_PHYSICAL_HOLO_WITNESS_SAME_CORE
 PHASE4B_RETENTION_MODE_SIGNAL_CONFIRMED
 PHASE4B_RETENTION_PSEUDO_REJECT_VOLATILE
 PHASE4B_SAME_HASH_WRONG_SCHEDULE_REJECTED_ACROSS_DELAYS
+PHASE4B_LAYOUT_RETENTION_PASS
+PHASE4B_SAME_CORE_SUBSTRATE_COORDINATE_RETENTION
+PHASE4B_SCALAR_PHYSICAL_HOLO_WITNESS_HARDENED
+PHASE4B_TO_PHASE6_FEEDER_SCORER_READY
+PHASE4B_SCALAR_HOLO_FEATURE_EXPORT_READY
+PHASE4B_NOT_PHASE6_CROSSING
 PHASE4B_SAME_HASH_WRONG_SCHEDULE_REJECTED
 PHASE4B_SCALAR_PHYSICAL_HOLO_WITNESS
 PHASE4_GOE_SPLIT_OPERATOR_VS_PHYSICAL
