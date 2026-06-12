@@ -153,7 +153,7 @@ This is achieved using **reversible computing**:
 ### 06: Out-of-Core Catalytic Neural Network (RevNet)
 **Dir**: `06_catalytic_neural_network/` | **Entry**: `python catalytic_inference.py`
 - **What**: XOR-reversible RevNet with 2MB activation state on `user_video.mp4` tape, under 100KB clean RAM limit. Proves catalytic neural inference works on any file-backed substrate.
-- **Files**: `catalytic_inference.py` (Feistel ConvNet with `mmap`-based tape), `classical_inference.py` (control group), `generate_model_and_data.py` (synthetic model/data generator), `report.md`
+- **Files**: `catalytic_inference.py` (Feistel ConvNet with `mmap`-based tape), `classical_inference.py` (control group), `generate_model_and_data.py` (synthetic model/data generator), `REPORT.md`
 - **Mechanism**: Two 1D convolution layers (W1=[3,-1,2], W2=[1,2,-1]) with ReLU+quantize. Layer 1 reads from R half (offset=1MB), writes to L half. Layer 2 reads from L, writes to R. Both are XOR-Feistel: `tape[target] ^= ReLU(Conv1D(source, W))`. Forward: L2(R(L(tape))). Prediction: argmax of first 10 bytes of R. Reverse: execute same layers in opposite order to restore tape. 32KB streaming chunks avoid loading full 2MB into RAM. Group A (classical direct compute) OOM. Group B (catalytic) succeeds, predicts class 2, tape restored. `06_catalytic_neural_network/infinity/` has `1_infinity_nn.py`.
 
 ### 07: Reversible Quantum State Simulation
@@ -166,7 +166,7 @@ This is achieved using **reversible computing**:
   - `catalytic_shor_test.py` — Classical period-finding for Shor's algorithm. XOR-encodes a^x mod N onto tape. Factors N=15, N=21. 0 bits erased.
   - `experiment.py` — 32-gate/6-round quantum scrambler on 1GB tape. Forward + inverse. SHA-256 restored.
   - `1_infinity_quantum.py` — **1 MILLION qubit Bloch vector simulator**. Uses spectral aliasing to push past O(2^N) memory wall: stores [N,3] Bloch vectors instead of 2^N state vector. Mean-field holographic tracking for entanglement. Global Hadamard + Ising coupling. Memory: O(N) instead of O(2^N).
-  - `report.md` — Full results: 15-qubit Hilbert space (32K dimensions, 512KB state vector, 1MB tape). 23 forward + 23 inverse gates. 0.21s each. Probability conserved. All probes exact match. 0 bits, 0J.
+  - `REPORT.md` — Full results: 15-qubit Hilbert space (32K dimensions, 512KB state vector, 1MB tape). 23 forward + 23 inverse gates. 0.21s each. Probability conserved. All probes exact match. 0 bits, 0J.
 
 ### 08: Catalytic GPT (1000 Concurrent Models) — Swarm Multiplexer
 **Dir**: `08_catalytic_gpt/` | **Entry**: `python run_multi_outputs.py` (requires GPU)
@@ -498,7 +498,7 @@ This is achieved using **reversible computing**:
   - **42.14 Boltzmann Brain: COMPLETE** — emergent structure from random noise.
   - **42.15 Quantum Gravity Unification: COMPLETE** — 100-thread bare-metal Rust data race. Quantum cache collisions vs Riemann zero prime gaps: r=0.9754, p=3.5e-66. QM, GR, and Number Theory are the same mechanism.
   - **42.16-19**: Rust stubs (Recursive Universe, Self-Evolving Singularity, Godel Frontier, Oracle Machine).
-- **Phase 9 — BLACK_HOLES/** (dir: `BLACK_HOLES/`): `42_phase9_black_hole_anomalies.py` — black hole anomaly analysis, `scratch_42_21.py`, `42_PHASE_9_RODMAP.md`.
+- **Phase 9 — BLACK_HOLES/** (dir: `BLACK_HOLES/`): `42_phase9_black_hole_anomalies.py` — black hole anomaly analysis, `scratch_42_21.py`, `42_PHASE_9_ROADMAP.md`.
 - **Phase 10 — COSMOS/** (dir: `COSMOS/`, report: `REPORT_PHASE_10_COSMOS.md`):
   - **42.24 Dark Matter** (`exp_24_dark_matter/24_dark_matter_orphaned_pointers.py`): OS orphaned pointers as dark matter analog.
   - **42.25 Dark Energy** (`exp_25_dark_energy/25_dark_energy_expansion.py`): Memory expansion as dark energy.
@@ -575,8 +575,9 @@ This is achieved using **reversible computing**:
 | `docs/REPORTS/PUSHED_REPORT_FINAL_14.md` | **14 Infinity Exploits** — O(1) factorization, infinite KV context (3076.9x), absolute zero cross-talk, zero-latency generation |
 | `docs/REPORTS/PUSHED_REPORT_INFINITY.md` | **5 Physical Limits Violated** — Bekenstein (Rank-1 holographic dual), Computronium (random noise computes), Schmidt (1 Bell pair steers 16M params), Landauer (Delta S=0), Arrow of Time (O(1) bootstrap) |
 | `docs/REPORTS/VIOLATIONS/archive/5-21-2026_Integrity_Assessment.md` | Integrity audit of exps 4,5,7,16 |
-| `storage/` | Shared / leftover runtime files only — the quantum tapes moved to `07_quantum_simulator/data/` and `user_video.mp4` to `06_catalytic_neural_network/data/`. See [`docs/STORAGE.md`](docs/STORAGE.md) |
-| `workspace/` | Shared working files (config, bmps) |
+| `docs/INDEX.md` | Full experiment-to-path index (track, directory, primary report) |
+| `workspace/` | Shared experiment fixtures (exp 02 config/input, exp 03 BMPs). Quantum tapes & video now live in their experiments' `data/` — see [`docs/STORAGE.md`](docs/STORAGE.md) |
+| `../ORACLE/` | The oracle visualizer is now its own sibling lab at `THOUGHT/LAB/ORACLE/` (promoted out of CAT_CAS) |
 | `docs/REPORTS/` | Audit reports, completed roadmap, codebase integrity |
 | `docs/REPORTS/CODEBASE_AUDIT_REPORT_RESOLVED.md` | **254-line verified audit** — 4 critical bugs, 4 high bugs, 46 bare excepts, 3 inflated PUSHED_REPORT claims, 2 spelling errors. Key bugs: Exp 15 Feistel swap (100/100 failures), Exp 16 F16 weight loading, Exp 30 runtime crash, Exp 13 infinity cross-talk NOT zero |
 

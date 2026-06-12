@@ -1,27 +1,27 @@
 # CAT_CAS Index
 
-Every experiment to its track path and primary report. See [MAP.md](MAP.md) for one-line purposes and [CONVENTIONS.md](CONVENTIONS.md) for naming rules. Regenerate with the snippet in the lab docs.
+Every experiment to its track path and primary report. See [MAP.md](MAP.md) for one-line purposes and [CONVENTIONS.md](CONVENTIONS.md) for naming.
 
 ## Foundations  (`1_foundations/`)
 
 | Experiment | Path | Primary doc |
 |---|---|---|
-| 01_tree_evaluation | `1_foundations/01_tree_evaluation/` | [report.md](1_foundations/01_tree_evaluation/report.md) |
-| 02_slack_space | `1_foundations/02_slack_space/` | [report.md](1_foundations/02_slack_space/report.md) |
-| 03_visual_bmp | `1_foundations/03_visual_bmp/` | [report.md](1_foundations/03_visual_bmp/report.md) |
-| 04_thermodynamic_cpu | `1_foundations/04_thermodynamic_cpu/` | [report.md](1_foundations/04_thermodynamic_cpu/report.md) |
-| 05_multibit_compiler | `1_foundations/05_multibit_compiler/` | [report.md](1_foundations/05_multibit_compiler/report.md) |
+| 01_tree_evaluation | `1_foundations/01_tree_evaluation/` | [REPORT.md](1_foundations/01_tree_evaluation/REPORT.md) |
+| 02_slack_space | `1_foundations/02_slack_space/` | [REPORT.md](1_foundations/02_slack_space/REPORT.md) |
+| 03_visual_bmp | `1_foundations/03_visual_bmp/` | [REPORT.md](1_foundations/03_visual_bmp/REPORT.md) |
+| 04_thermodynamic_cpu | `1_foundations/04_thermodynamic_cpu/` | [REPORT.md](1_foundations/04_thermodynamic_cpu/REPORT.md) |
+| 05_multibit_compiler | `1_foundations/05_multibit_compiler/` | [REPORT.md](1_foundations/05_multibit_compiler/REPORT.md) |
 
 ## Substrate Expansion  (`2_substrate_expansion/`)
 
 | Experiment | Path | Primary doc |
 |---|---|---|
-| 06_catalytic_neural_network | `2_substrate_expansion/06_catalytic_neural_network/` | [report.md](2_substrate_expansion/06_catalytic_neural_network/report.md) |
-| 07_quantum_simulator | `2_substrate_expansion/07_quantum_simulator/` | [report.md](2_substrate_expansion/07_quantum_simulator/report.md) |
+| 06_catalytic_neural_network | `2_substrate_expansion/06_catalytic_neural_network/` | [REPORT.md](2_substrate_expansion/06_catalytic_neural_network/REPORT.md) |
+| 07_quantum_simulator | `2_substrate_expansion/07_quantum_simulator/` | [REPORT.md](2_substrate_expansion/07_quantum_simulator/REPORT.md) |
 | 08_catalytic_gpt | `2_substrate_expansion/08_catalytic_gpt/` | [PUSHED_REPORT.md](2_substrate_expansion/08_catalytic_gpt/PUSHED_REPORT.md) |
 | 09_borrowing_os_memory | `2_substrate_expansion/09_borrowing_os_memory/` | _(none)_ |
-| 10_catalytic_kv_cache | `2_substrate_expansion/10_catalytic_kv_cache/` | [report.md](2_substrate_expansion/10_catalytic_kv_cache/report.md) |
-| 11_grail_calorimeter | `2_substrate_expansion/11_grail_calorimeter/` | [report.md](2_substrate_expansion/11_grail_calorimeter/report.md) |
+| 10_catalytic_kv_cache | `2_substrate_expansion/10_catalytic_kv_cache/` | [REPORT.md](2_substrate_expansion/10_catalytic_kv_cache/REPORT.md) |
+| 11_grail_calorimeter | `2_substrate_expansion/11_grail_calorimeter/` | [REPORT.md](2_substrate_expansion/11_grail_calorimeter/REPORT.md) |
 | 12_structured_tape_acceleration | `2_substrate_expansion/12_structured_tape_acceleration/` | [REPORT.md](2_substrate_expansion/12_structured_tape_acceleration/REPORT.md) |
 | 13_orthogonal_multimodel | `2_substrate_expansion/13_orthogonal_multimodel/` | [REPORT.md](2_substrate_expansion/13_orthogonal_multimodel/REPORT.md) |
 
@@ -88,7 +88,7 @@ Every experiment to its track path and primary report. See [MAP.md](MAP.md) for 
 |---|---|---|
 | 50_the_decoder | `7_decoder/50_the_decoder/` | [FABLE_INTERFACE_REPORT.md](7_decoder/50_the_decoder/FABLE_INTERFACE_REPORT.md) |
 
-## Frozen (not yet in a track)
+## Frozen (not in a track)
 
 | Experiment | Path | Note |
 |---|---|---|

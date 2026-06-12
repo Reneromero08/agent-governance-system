@@ -490,7 +490,7 @@ Top-level (2):
 
 BLACK_HOLES (6):
 - THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/BLACK_HOLES/REPORT_BLACK_HOLES_SUMMARY.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/BLACK_HOLES/42_PHASE_9_RODMAP.md
+- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/BLACK_HOLES/42_PHASE_9_ROADMAP.md
 - THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/BLACK_HOLES/exp_20_amps_firewall/REPORT_AMPS_FIREWALL.md
 - THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/BLACK_HOLES/exp_21_bekenstein_hawking/REPORT_BEKENSTEIN_HAWKING.md
 - THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/BLACK_HOLES/exp_22_kerr_ergosphere/REPORT_KERR_ERGOSPHERE.md

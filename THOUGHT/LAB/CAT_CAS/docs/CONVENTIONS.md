@@ -11,16 +11,15 @@ file disagrees with this document, the directory is wrong. Linked from
 ```
 CAT_CAS/
   _lib/                  shared primitives (one copy each; see section 6)
-  docs/                  this folder — navigation + conventions
+  docs/                  navigation + conventions; holds REPORTS/ (audit ledger)
   N_track_name/          thematic tracks (section 2) containing experiments
-  ORACLE/                visualizer tool
-  REPORTS/               governance ledger (canonical audit truth)
-  storage/  workspace/   runtime / fixtures (gitignored where regenerable)
+  workspace/             shared experiment fixtures (exp 02/03)
   AGENTS.md CAT_CAS_OS.md MANIFESTO.md MASTER_REPORT.md PRIMER.md README.md
 ```
 
 The leading-underscore folders (`_lib`) sort above the numbered tracks and signal
-"infrastructure, not an experiment."
+"infrastructure, not an experiment." The visualizer was promoted out to its own
+sibling lab at `THOUGHT/LAB/ORACLE/`.
 
 ## 2. Tracks
 
