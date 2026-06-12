@@ -8,6 +8,26 @@
 > claim-weakened, or deprecated under audit. See Section 6 of master_report.md for a summary
 > and ROADMAP_3.md for per-item evidence.
 
+## Contents
+
+- [Theoretical Foundation](#theoretical-foundation)
+- [Quick-Reference Summary](#quick-reference-summary)
+- [Foundation: Shared Infrastructure](#foundation-shared-infrastructure)
+- [Experiment Inventory](#experiment-inventory)
+- [Root-Level Infrastructure](#root-level-infrastructure)
+- [Infinity Script Pattern](#infinity-script-pattern)
+- [External Bridges](#external-bridges)
+- [Key Cross-Cutting Concepts](#key-cross-cutting-concepts)
+- [Experiment Architecture Pattern](#experiment-architecture-pattern)
+- [External: QEC Surface Code Simulators (NOT in CAT_CAS)](#external-qec-surface-code-simulators-not-in-cat_cas)
+- [What Is NOT Present in CAT_CAS](#what-is-not-present-in-cat_cas)
+- [Compatibility with Holographic Brain + Eigen Buddy](#compatibility-with-holographic-brain--eigen-buddy)
+
+**Navigation docs** (in `docs/`):
+- [`docs/MAP.md`](docs/MAP.md) — track taxonomy and one-line purpose per experiment (visual track map)
+- [`docs/CONVENTIONS.md`](docs/CONVENTIONS.md) — naming and layout rules (single source of truth)
+- [`docs/STORAGE.md`](docs/STORAGE.md) — large-data index (per-experiment, gitignored)
+
 ## Theoretical Foundation
 
 In standard complexity theory, evaluating a binary tree of depth $d$ with register values in $[0, k-1]$ requires keeping intermediate branch values in clean memory. This requires a space complexity of $\Omega(d \log k)$ bits. If clean memory is limited below this threshold, evaluation is mathematically impossible.
@@ -23,6 +43,8 @@ This is achieved using **reversible computing**:
 ---
 
 ## Quick-Reference Summary
+
+`MASTER_REPORT.md` (lab root) is the canonical status and coverage matrix; this table is a navigation convenience, not an authority on verification state. For the visual track map (which experiment lives in which thematic track), see [`docs/MAP.md`](docs/MAP.md).
 
 | Tool / Experiment | Location | Library | Capability |
 |---|---|---|---|
@@ -59,7 +81,7 @@ This is achieved using **reversible computing**:
 | Temporal Catalysis | `23_temporal_catalysis/` | PyTorch | Retrocausal activation borrowing |
 | Quantum Entanglement | `24_quantum_catalytic_entanglement/` | PyTorch | Invisible hand, CHSH=2.8284 |
 | Lattice Holography | `25_lattice_holography/` | PyTorch | LWE/SVP via PCA wave collapse |
-| Optical 3-SAT | `26_optical_3sat/` | PyTorch | Phase-shifting mirror interference |
+| Optical 3-SAT | `26b_optical_3sat/` | PyTorch | Phase-shifting mirror interference |
 | Landauer Thermo | `27_landauer_limit/` | NumPy | Gate-level erasure tracker |
 | Stealth Crypto | `28_stealth_crypto/` | hashlib | Zero-trace encrypt/decrypt |
 | Graph Reachability | `29_graph_reachability/` | hashlib | O(1)-space BFS, 10K nodes |
@@ -299,25 +321,25 @@ This is achieved using **reversible computing**:
 - **Architecture**: `gate1(state, G, t, n)` — catalytic single-qubit via permute+matmul (no kron, O(2^n) not O(2^(2n))). Scales to 18 qubits (262K state vector).
 - **Files**: `1_invisible_hand.py` (tensor, density_matrix, partial_trace, gate1/gate2, invisible_hand_borrow), `2_scaling_tests.py` (GHZ, multi-cycle, multi-qubit — all overlap=1.0), `3_massive_scale.py` (18 qubits, 9 entangled qubits borrowed, 4 cycles), `4_shors_algorithm.py` (N=15), `5_pushed_shor.py` (N=15, N=21), `6_recursive_dpr.py` (D_pr measurement), `7_dpr_scaling.py` (Schmidt decomposition), `REPORT.md`
 
-### 25a: Lattice Holography / LWE
-**Dir**: `25_lattice_holography/` | **Entry**: `python 2_holographic_svp.py`
+### 25: Lattice Holography / LWE
+**Dir**: `25_lattice_holography/` (base; the old `25a_lattice_holography` was an infinity-variant script only, folded into `25_lattice_holography/infinity/`) | **Entry**: `python 2_holographic_svp.py`
 - **What**: Shortest Vector Problem via holographic SVD wave collapse. Breaks LWE-based post-quantum cryptography by treating lattice basis vectors as interference patterns in an optical grating.
 - **Files**: `1_lwe_simulator.py` (generates LWE instances: A matrix, B = A*S + e mod q, secret S, modulus q), `2_holographic_svp.py` (HolographicLatticeSolver — continuous phase optimization: treats secret S as phase angles on the torus, optimizes via gradient descent on predicted B vs real B), `3_test_sieve.py` through `11_native_eigen_shor.py` (increasingly sophisticated attacks: holographic borrowing SVP, complex pseudo-inverse, holo compression, eigenbuddy LWE oracle, recursive qubit oracle, catalytic eigen shor), `lwe_instance.pt`
 - **Key**: Maps lattice basis matrices into 3D optical gratings. PCA wave collapse detects the fundamental resonant frequency = the Shortest Vector. Bypasses LLL reduction entirely. Uses `HolographicLatticeSolver(n, q)` — continuous phase representation of secret S, optimized via `torch.optim.Adam` to minimize phase prediction error (predicted_phase = A_phase @ S_phase vs actual B_phase). Integrated as `_10_catalytic_27b.py` in Eigen Buddy's cybernetic truth module.
 
 ### 25b: Wigner's Friend
-**Dir**: `25_wigners_friend/` | **Entry**: `python 1_reversible_observer.py`
+**Dir**: `25b_wigners_friend/` | **Entry**: `python 1_reversible_observer.py`
 - **What**: Reversible observer superposition experiment (WIP).
 - **Files**: `1_reversible_observer.py` (simulated qubit + observer neural net), `2_deep_observer.py`, `3_fast_simulator.py`
 - **Goal**: Measurement/uncomputation without information leakage.
 
 ### 26a: Hawking Quantum Horizon Simulator
-**Dir**: `26_hawking_quantum/` | **Entry**: `python 1_horizon_simulator.py`
+**Dir**: `26a_hawking_quantum/` | **Entry**: `python 1_horizon_simulator.py`
 - **What**: Black hole event horizon quantum state simulation. Models Hawking radiation pair production and horizon microstate dynamics under unitary evolution.
 - **Files**: `1_horizon_simulator.py`
 
 ### 26b: Optical 3-SAT Solver
-**Dir**: `26_optical_3sat/` | **Entry**: `python 1_3sat_simulator.py`
+**Dir**: `26b_optical_3sat/` | **Entry**: `python 1_3sat_simulator.py`
 - **What**: Solves 3-SAT via constructive/destructive interference. Maps CNF clauses to phase-shifting mirrors (+1 for True, -1 for False). Coherent superposition instantly identifies valid assignments.
 - **Files**: `1_3sat_simulator.py` (spin-based SAT: maps variables to continuous spins, clauses to C_matrix, optimizes via interference energy minimization), `2_optical_coherent_solver.py` (Qwen 0.5B holographic phase oracle: SpinEncoder projects continuous spins into holo-compressed attention space, patches model with CavitatedHoloLinear, drives inference toward satisfying assignments via phase resonance), `3sat_instance.pt`
 - **Key**: Phase-shifting mirrors (+1 True, -1 False) arranged as an interferometer. Constructive interference at the detector = satisfying assignment found in O(1) time independent of variable count. The `2_optical_coherent_solver.py` bridges to Eigen Buddy's holographic attention model for quantum-optical inference.
@@ -486,6 +508,47 @@ This is achieved using **reversible computing**:
 
 ---
 
+### 43: Phase Consciousness — Qualia Engine (STUB)
+**Dir**: `43_phase_consciousness/` | **Entry**: roadmap only
+- **What**: Roadmap for a "qualia engine" frontier phase. **STUB — no code yet**; only the plan exists.
+- **Key files**: `ROADMAP_43_QUALIA_ENGINE.md`.
+
+### 44: Phase SSH / Linux Substrate Push (ACTIVE / FROZEN)
+**Dir**: `44_phase_ssh_linux/` | **Entry**: live experiment
+- **What**: Physical / SSH-Linux substrate push — the attempt to cross the located lattice wall on real silicon (the substrate event handed off from Exp 50 Phase 6). This is the **live experiment**; it stays at the CAT_CAS root and is exempt from the lab's layout conventions until the owner declares it done. Internals are intentionally not detailed here — see the experiment directory and its in-tree reports.
+- **Status**: **[FROZEN]** — active work, do not reorganize.
+
+### 45: Phase Math — Millennium-Problem Oracles
+**Dir**: `45_phase_math/` | **Entry**: per sub-experiment
+- **What**: Topological/holographic oracle treatments of the Clay Millennium problems.
+- **Sub-experiments**: `45_1` collatz, `45_2` navier-stokes, `45_3` erdos discrepancy, `45_4` riemann, `45_5` P-vs-NP, `45_6` yang-mills.
+- **Key files**: `ROADMAP_45_MILLENNIUM_PROBLEMS.md`, `MASTER_REPORT_PHASE_45.md`.
+
+### 46: Phase Bio — Biology Oracles
+**Dir**: `46_phase_bio/` | **Entry**: per sub-experiment
+- **What**: Oracle treatments of open problems in biology.
+- **Sub-experiments**: `46_1` protein folding, `46_2` folding pathway, `46_3` prion, `46_4` topological genetic code, `46_5` neural binding, `46_6` morphogenesis.
+- **Large data**: `46_6` morphogenesis needs a 2.8 GB HuBMAP CODEX single-cell CSV (gitignored, external download) — see [`docs/STORAGE.md`](docs/STORAGE.md).
+- **Key files**: `MASTER_REPORT_EXP_46.md`.
+
+### 47: Phase Atom — Standard-Model Oracles
+**Dir**: `47_phase_atom/` | **Entry**: per sub-experiment
+- **What**: Oracle treatments of standard-model / nuclear physics problems.
+- **Sub-experiments**: `47_1` nucleus, `47_2` electron edge states, `47_3` pauli, `47_4` LHC overflow, `47_5` higgs, `47_6` quark confinement.
+- **Key files**: `MASTER_REPORT_EXP_47.md`.
+
+### 48: Phase Energy — Energy Extraction (STUB)
+**Dir**: `48_phase_energy/` | **Entry**: roadmap only
+- **What**: Roadmap for an energy-extraction frontier phase. **STUB — no code yet**; only the plan exists.
+- **Key files**: `ROADMAP_48_ENERGY_EXTRACTION.md`.
+
+### 49: Phase Chem — Topological Chemistry (STUB)
+**Dir**: `49_phase_chem/` | **Entry**: roadmap only
+- **What**: Roadmap for a topological-chemistry frontier phase. **STUB — no code yet**; only the plan exists.
+- **Key files**: `ROADMAP_49_TOPOLOGICAL_CHEMISTRY.md`.
+
+---
+
 ### 50: The Decoder — Extractive Proof + Decodability Boundary
 **Dir**: `50_the_decoder/` | **Entry**: `python 50_1_extractive_proof/50_1_extractive_proof.py` (+ `50_2*`, `50_2b`, `50_2c`, `50_3*`)
 - **What**: Settles whether the holographic readout is a genuine *decoder* (reads a global invariant out of the encoding's structure) or a disguised *lookup*, then maps WHERE that decoding power holds vs collapses. Six runnable entry points, all exit 0, lab-critic clean, claims capped at Level 4-5. The crux ("the decoder") turned from intuition into measured fact.
@@ -502,14 +565,17 @@ This is achieved using **reversible computing**:
 
 | File | Purpose |
 |------|---------|
-| `run_all_tests.py` | Runs all experiment entry points for CI |
-| `explainer.md` | Intuitive explanation: dirty tape, Landauer, reversible computing |
-| `master_report.md` | Tracking table of all experiments + results |
-| `ROADMAP.md` | Roadmap: scale tracks, holy grails, reality-breaking frontiers |
-| `PUSHED_REPORT_FINAL_14.md` | **14 Infinity Exploits** — O(1) factorization, infinite KV context (3076.9x), absolute zero cross-talk, zero-latency generation |
-| `PUSHED_REPORT_INFINITY.md` | **5 Physical Limits Violated** — Bekenstein (Rank-1 holographic dual), Computronium (random noise computes), Schmidt (1 Bell pair steers 16M params), Landauer (Delta S=0), Arrow of Time (O(1) bootstrap) |
-| `5-21-2026_Integrity_Assesment.md` | Integrity audit of exps 4,5,7,16 |
-| `storage/` | Shared data files (quantum tapes, user_video.mp4, synthetic model) |
+| `docs/MAP.md` | Track taxonomy + one-line purpose per experiment (visual track map) |
+| `docs/CONVENTIONS.md` | Naming and layout rules — single source of truth for how the lab is laid out |
+| `docs/STORAGE.md` | Large-data index: per-experiment, gitignored artifacts (source, size, regeneration) |
+| `_lib/` | Shared primitives defined once and imported (`paths.py`, `catalytic_engine.py`, `tree_eval.py`, `reversible_cpu.py`, `catalytic_tape.py`) |
+| `REPORTS/explainer.md` | Intuitive explanation: dirty tape, Landauer, reversible computing |
+| `MASTER_REPORT.md` | Root, uppercase. Canonical status/coverage matrix for all experiments + results |
+| `REPORTS/VIOLATIONS/ROADMAP_3_VERIFIED.md` | Canonical per-item audit ledger (roadmaps otherwise live per-experiment, not at root) |
+| `REPORTS/PUSHED_REPORT_FINAL_14.md` | **14 Infinity Exploits** — O(1) factorization, infinite KV context (3076.9x), absolute zero cross-talk, zero-latency generation |
+| `REPORTS/PUSHED_REPORT_INFINITY.md` | **5 Physical Limits Violated** — Bekenstein (Rank-1 holographic dual), Computronium (random noise computes), Schmidt (1 Bell pair steers 16M params), Landauer (Delta S=0), Arrow of Time (O(1) bootstrap) |
+| `REPORTS/VIOLATIONS/archive/5-21-2026_Integrity_Assessment.md` | Integrity audit of exps 4,5,7,16 |
+| `storage/` | Shared / leftover runtime files only — the quantum tapes moved to `07_quantum_simulator/data/` and `user_video.mp4` to `06_catalytic_neural_network/data/`. See [`docs/STORAGE.md`](docs/STORAGE.md) |
 | `workspace/` | Shared working files (config, bmps) |
 | `REPORTS/` | Audit reports, completed roadmap, codebase integrity |
 | `REPORTS/CODEBASE_AUDIT_REPORT_RESOLVED.md` | **254-line verified audit** — 4 critical bugs, 4 high bugs, 46 bare excepts, 3 inflated PUSHED_REPORT claims, 2 spelling errors. Key bugs: Exp 15 Feistel swap (100/100 failures), Exp 16 F16 weight loading, Exp 30 runtime crash, Exp 13 infinity cross-talk NOT zero |
@@ -611,7 +677,7 @@ Specifically searched and NOT FOUND anywhere in CAT_CAS (from Map 1, Part 3):
 | **20** Eigen Shor | **Brain + Eigen Buddy** | Core transfer: `phase_cavity_recursive` in all cavity scripts, Moire decomposition |
 | **21** Elliptic Sieve | **Brain** | `phase_cavity_sieve()` used in ALL holo brain cavity scripts |
 | **22** Superconducting | **Brain** | Bit tracker in `_superconducting_cavity.py` |
-| **25a** Lattice Holography | **Brain + Eigen Buddy** | LWE secret recovery in `_10_catalytic_27b.py` |
+| **25** Lattice Holography | **Brain + Eigen Buddy** | LWE secret recovery in `_10_catalytic_27b.py` |
 | **33** MERA Compression | **Brain + Eigen Buddy** | Produces `.holo` files both consume |
 
 ### Needs Minor Work
