@@ -1,0 +1,28 @@
+# === CAT_CAS lab hygiene ===
+# Patterns use **/ so they survive the track-folder reorganization.
+
+# Build artifacts (regenerable: cargo build / python import)
+**/__pycache__/
+*.pyc
+*.pyo
+**/target/
+.pytest_cache/
+
+# Shared runtime data store (quantum tapes etc. — regenerated on demand; see docs/STORAGE.md)
+storage/
+
+# Large data blobs (>100 MB) kept in their owning experiment, gitignored,
+# and documented as per-experiment requirements in docs/STORAGE.md:
+#   - model weights (e.g. 16_catalytic_27b_inference/gemini_update/qwen_0.5b/)
+#   - MERA .holo files (33_mera_compression)
+#   - single-cell CSVs (46_phase_bio/.../cell_data/)
+**/*.safetensors
+**/*.holo
+**/cell_data/
+
+# OS noise
+Thumbs.db
+.DS_Store
+
+# NOTE: workspace/ holds a few tracked fixtures (exp 02/03) and is intentionally
+# NOT ignored here; its regenerable BMP/artifacts are handled per-experiment.
