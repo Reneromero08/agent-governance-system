@@ -2,7 +2,7 @@
 
 **Purpose:** Push past simulation into proof. Every previous experiment produced results that were too precise to be coincidence. This phase unifies them and tests whether computation IS physics. By moving to Rust, we abandon interpreted simulation for raw hardware exploitation. 
 **Status:** PLANNED
-**Location:** `THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/ULTRA/`
+**Location:** `THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/ULTRA/`
 
 ### The Architect's Advice on Integrity
 When bypassing the compiler, mutating private `BigFloat` tuples, and using `unsafe {}` to violate Rust's memory safety, telemetry can easily be corrupted by the very anomalies we are trying to measure. 

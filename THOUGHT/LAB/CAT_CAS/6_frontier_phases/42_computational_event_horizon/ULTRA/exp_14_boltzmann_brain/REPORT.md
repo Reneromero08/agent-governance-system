@@ -1,7 +1,7 @@
 # Exp 42.14: The Boltzmann Brain
 
 **Status:** COMPLETE  
-**Location:** `THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/ULTRA/exp_14_boltzmann_brain/`
+**Location:** `THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/ULTRA/exp_14_boltzmann_brain/`
 
 ## What Was Accomplished
 

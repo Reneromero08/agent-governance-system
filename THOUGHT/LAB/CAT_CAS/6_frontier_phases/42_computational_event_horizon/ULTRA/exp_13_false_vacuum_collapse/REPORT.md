@@ -1,7 +1,7 @@
 # Exp 42.13: False Vacuum Collapse
 
 **Status:** COMPLETE  
-**Location:** `THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/ULTRA/exp_13_false_vacuum_collapse/`
+**Location:** `THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/ULTRA/exp_13_false_vacuum_collapse/`
 
 ## What Was Accomplished
 

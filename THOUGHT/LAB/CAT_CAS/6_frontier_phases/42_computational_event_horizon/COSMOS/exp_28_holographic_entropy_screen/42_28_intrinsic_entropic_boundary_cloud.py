@@ -54,7 +54,7 @@ def spawn_workers(w_count, mode):
     return procs, stop_event
 
 def execute_holographic_probe():
-    output_dir = "THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/COSMOS/exp_28_holographic_entropy_screen"
+    output_dir = "THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/COSMOS/exp_28_holographic_entropy_screen"
     os.makedirs(output_dir, exist_ok=True)
     
     out_lines = []

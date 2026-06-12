@@ -1,7 +1,7 @@
 # Exp 42.12: The Bootstrap Paradox
 
 **Status:** COMPLETE  
-**Location:** `THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/exp_12_bootstrap_paradox/`
+**Location:** `THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/exp_12_bootstrap_paradox/`
 
 ## What Was Accomplished
 

@@ -76,7 +76,7 @@ frontier-domain phases → the decoder that locates the wall.
 | 32 | traversable_wormhole | ER=EPR traversable wormhole (Grail 5). |
 | 33 | mera_compression **[LB]** | Cross-layer MERA SVD compression; produces the `.holo` files HOLO/Eigen Buddy consume. |
 
-## 5_topological_proofs (34–42) — zeta/RH, halting oracles, ToE, black holes
+## 5_topological_proofs (34–41) — zeta/RH, halting oracles, ToE
 
 | # | Experiment | What |
 |---|------------|------|
@@ -88,12 +88,12 @@ frontier-domain phases → the decoder that locates the wall.
 | 39 | 4d_axion_oracle | 4D axion oracle (second Chern number). |
 | 40 | 5d_floquet_oracle | 5D Floquet time-crystal oracle. |
 | 41 | toe_bulletproof | Closing the theoretical gaps in the topological ToE. |
-| 42 | computational_event_horizon | Floating-point singularities; black-hole + cosmology sub-tracks (ULTRA / BLACK_HOLES / COSMOS). |
 
-## 6_frontier_phases (43–49) — domain phases
+## 6_frontier_phases (42–49) — frontier physics & domain phases
 
 | # | Experiment | What |
 |---|------------|------|
+| 42 | computational_event_horizon | Floating-point singularities at the event horizon; black-hole + cosmology + speculative sub-tracks (ULTRA / BLACK_HOLES / COSMOS). |
 | 43 | phase_consciousness **[STUB]** | Qualia-engine roadmap; no code yet. |
 | 44 | phase_ssh_linux **[FROZEN]** | Physical / SSH-Linux substrate push. Active work — stays at lab root until done. |
 | 45 | phase_math | Millennium-problem oracles: collatz, navier-stokes, erdos, riemann, P-vs-NP, yang-mills. |

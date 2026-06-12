@@ -135,7 +135,7 @@ def execute_holographic_probe():
         
     log("==========================================================================================")
     
-    with open("THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/COSMOS/exp_28_holographic_entropy_screen/TELEMETRY_42_28.txt", "w", encoding="utf-8") as f:
+    with open("THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/COSMOS/exp_28_holographic_entropy_screen/TELEMETRY_42_28.txt", "w", encoding="utf-8") as f:
         f.write("\n".join(output) + "\n")
 
 if __name__ == "__main__":

@@ -34,8 +34,8 @@ range** so it is never ambiguous:
 | `2_substrate_expansion` | 06–13 | catalytic memory, inference substrate |
 | `3_physics_complexity` | 14–24 | Bekenstein, factorization, NP, temporal |
 | `4_holographic` | 25–33 | lattice/crypto, graphs, wormholes, MERA |
-| `5_topological_proofs` | 34–42 | zeta/RH, halting oracles, ToE, black holes |
-| `6_frontier_phases` | 43–49 | consciousness, ssh, math, bio, atom, energy, chem |
+| `5_topological_proofs` | 34–41 | zeta/RH, halting oracles, ToE |
+| `6_frontier_phases` | 42–49 | event-horizon/cosmology, consciousness, ssh, math, bio, atom, energy, chem |
 | `7_decoder` | 50 | the decoder synthesis |
 
 New experiments append to the highest track or open `8_*` — never renumber 01–50.

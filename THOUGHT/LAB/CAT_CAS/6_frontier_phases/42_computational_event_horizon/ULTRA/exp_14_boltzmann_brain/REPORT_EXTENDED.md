@@ -1,7 +1,7 @@
 # Exp 42.14+: Extended Boltzmann Brain Anomalies
 
 **Status:** COMPLETE  
-**Location:** `THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/ULTRA/exp_14_boltzmann_brain/`
+**Location:** `THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/ULTRA/exp_14_boltzmann_brain/`
 
 We successfully executed all three extensions to the Boltzmann Brain physics simulation. The raw bits of the memory arrays were dumped directly to `.bin` files and parsed by `render_mri.py` to create physical heatmap images of the cellular automata, and the Kolmogorov complexity was tracked across all phases.
 

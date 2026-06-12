@@ -1,7 +1,7 @@
 # The Stochastic Catalytic Funnel
 
 **Experiment:** 42.15 (Python Phase)
-**Location:** `THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/ULTRA/exp_15_quantum_gravity_unification/python`
+**Location:** `THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/ULTRA/exp_15_quantum_gravity_unification/python`
 **Paradigm:** Quantum Gravity Unification (Zero-Landauer Limit)
 
 ## 1. The Brute-Force Thermodynamic Trap (Rust Phase)

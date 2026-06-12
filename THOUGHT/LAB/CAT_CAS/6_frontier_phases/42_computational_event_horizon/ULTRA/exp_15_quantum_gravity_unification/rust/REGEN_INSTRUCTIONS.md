@@ -3,7 +3,7 @@
 # Created 2026-06-02
 
 # Step 1: Navigate to Rust project
-cd "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\CAT_CAS\5_topological_proofs\42_computational_event_horizon\ULTRA\exp_15_quantum_gravity_unification\rust"
+cd "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\CAT_CAS\6_frontier_phases\42_computational_event_horizon\ULTRA\exp_15_quantum_gravity_unification\rust"
 
 # Step 2: Backup existing CSV (if any)
 Copy-Item telemetry_42_15_unification.csv telemetry_42_15_unification.csv.bak_$(Get-Date -Format yyyyMMdd_HHmmss)

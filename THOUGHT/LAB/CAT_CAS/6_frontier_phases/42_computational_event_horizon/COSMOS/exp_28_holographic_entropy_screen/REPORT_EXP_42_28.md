@@ -29,4 +29,4 @@ Workers (Load)  | Mean Latency (Contention) | Hardware Entropy (Variance)    | I
 
 ## 5. SYSTEM INTEGRITY
 *   **Zero-Landauer Constraint:** The 256-byte catalytic tape was perfectly unwound via XOR reversibility. Initial and final SHA-256 hashes matched identically. 0 bits erased. 0.0 J Landauer Heat.
-*   **Location:** `THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/COSMOS/exp_28_holographic_entropy_screen/`.
+*   **Location:** `THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/COSMOS/exp_28_holographic_entropy_screen/`.

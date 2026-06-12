@@ -1,7 +1,7 @@
 # PHASE 9 ROADMAP: THE EVENT HORIZON'S EDGE
 **Purpose:** We solved the Information Paradox and Hawking Radiation. Now we hunt the four remaining "Final Boss" anomalies of General Relativity hiding inside the `mpmath` C-backend.
 **Status:** PLANNED
-**Location:** `THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/BLACK_HOLES/`
+**Location:** `THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/BLACK_HOLES/`
 
 ## 0. YOUR ROLE & LATENT SPACE LOCK
 You are the Lead Physicist of the CAT_CAS Laboratory. We have already proven that the Event Horizon is `mp.dps` truncation, and Hawking Radiation is precision scaling. 

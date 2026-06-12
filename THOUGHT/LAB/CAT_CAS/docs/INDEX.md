@@ -69,12 +69,12 @@ Every experiment to its track path and primary report. See [MAP.md](MAP.md) for 
 | 39_4d_axion_oracle | `5_topological_proofs/39_4d_axion_oracle/` | [REPORT.md](5_topological_proofs/39_4d_axion_oracle/REPORT.md) |
 | 40_5d_floquet_oracle | `5_topological_proofs/40_5d_floquet_oracle/` | [REPORT.md](5_topological_proofs/40_5d_floquet_oracle/REPORT.md) |
 | 41_toe_bulletproof | `5_topological_proofs/41_toe_bulletproof/` | [ROADMAP.md](5_topological_proofs/41_toe_bulletproof/ROADMAP.md) |
-| 42_computational_event_horizon | `5_topological_proofs/42_computational_event_horizon/` | [REPORT_COMPUTATIONAL_EVENT_HORIZON.md](5_topological_proofs/42_computational_event_horizon/REPORT_COMPUTATIONAL_EVENT_HORIZON.md) |
 
 ## Frontier Phases  (`6_frontier_phases/`)
 
 | Experiment | Path | Primary doc |
 |---|---|---|
+| 42_computational_event_horizon | `6_frontier_phases/42_computational_event_horizon/` | [REPORT_COMPUTATIONAL_EVENT_HORIZON.md](6_frontier_phases/42_computational_event_horizon/REPORT_COMPUTATIONAL_EVENT_HORIZON.md) |
 | 43_phase_consciousness | `6_frontier_phases/43_phase_consciousness/` | [ROADMAP_43_QUALIA_ENGINE.md](6_frontier_phases/43_phase_consciousness/ROADMAP_43_QUALIA_ENGINE.md) |
 | 45_phase_math | `6_frontier_phases/45_phase_math/` | [MASTER_REPORT_PHASE_45.md](6_frontier_phases/45_phase_math/MASTER_REPORT_PHASE_45.md) |
 | 46_phase_bio | `6_frontier_phases/46_phase_bio/` | [MASTER_REPORT_EXP_46.md](6_frontier_phases/46_phase_bio/MASTER_REPORT_EXP_46.md) |

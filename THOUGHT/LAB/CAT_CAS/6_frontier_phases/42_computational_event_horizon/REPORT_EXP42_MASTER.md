@@ -1,7 +1,7 @@
 # EXP 42 MASTER REPORT: The Computational Event Horizon
 
 Lab: CAT_CAS (catalytic + non-Hermitian topological computing)
-Root: THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/
+Root: THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/
 Scope: experiments 42.1 - 42.28 (24 sub-experiments across 3 clusters)
 Status of this document: consolidated honest assessment. Supersedes all per-experiment
 and per-cluster reports listed in Section 6.
@@ -485,40 +485,40 @@ assessment of all of them. Roadmaps are included because their manifesto framing
 the over-claiming (summarized in Sections 2 and 4).
 
 Top-level (2):
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/REPORT_COMPUTATIONAL_EVENT_HORIZON.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/BLACKHOLE_ROADMAP.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/REPORT_COMPUTATIONAL_EVENT_HORIZON.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/BLACKHOLE_ROADMAP.md
 
 BLACK_HOLES (6):
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/BLACK_HOLES/REPORT_BLACK_HOLES_SUMMARY.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/BLACK_HOLES/42_PHASE_9_ROADMAP.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/BLACK_HOLES/exp_20_amps_firewall/REPORT_AMPS_FIREWALL.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/BLACK_HOLES/exp_21_bekenstein_hawking/REPORT_BEKENSTEIN_HAWKING.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/BLACK_HOLES/exp_22_kerr_ergosphere/REPORT_KERR_ERGOSPHERE.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/BLACK_HOLES/exp_23_true_singularity/REPORT_TRUE_SINGULARITY.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/BLACK_HOLES/REPORT_BLACK_HOLES_SUMMARY.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/BLACK_HOLES/42_PHASE_9_ROADMAP.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/BLACK_HOLES/exp_20_amps_firewall/REPORT_AMPS_FIREWALL.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/BLACK_HOLES/exp_21_bekenstein_hawking/REPORT_BEKENSTEIN_HAWKING.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/BLACK_HOLES/exp_22_kerr_ergosphere/REPORT_KERR_ERGOSPHERE.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/BLACK_HOLES/exp_23_true_singularity/REPORT_TRUE_SINGULARITY.md
 
 COSMOS (8):
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/COSMOS/REPORT_PHASE_10_COSMOS.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/COSMOS/42_PHASE_10_ROADMAP.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/COSMOS/exp_24_dark_matter/REPORT_DARK_MATTER.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/COSMOS/exp_25_dark_energy/REPORT_DARK_ENERGY.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/COSMOS/exp_26_big_bang/REPORT_BIG_BANG.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/COSMOS/exp_27_arrow_of_time/REPORT_ARROW_OF_TIME.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/COSMOS/exp_28_holographic_entropy_screen/REPORT_EXP_42_28.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/COSMOS/exp_28_holographic_entropy_screen/REPORT_EXP_42_28_INTRINSIC.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/COSMOS/REPORT_PHASE_10_COSMOS.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/COSMOS/42_PHASE_10_ROADMAP.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/COSMOS/exp_24_dark_matter/REPORT_DARK_MATTER.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/COSMOS/exp_25_dark_energy/REPORT_DARK_ENERGY.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/COSMOS/exp_26_big_bang/REPORT_BIG_BANG.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/COSMOS/exp_27_arrow_of_time/REPORT_ARROW_OF_TIME.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/COSMOS/exp_28_holographic_entropy_screen/REPORT_EXP_42_28.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/COSMOS/exp_28_holographic_entropy_screen/REPORT_EXP_42_28_INTRINSIC.md
 
 ULTRA (12):
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/ULTRA/REPORT.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/ULTRA_ROADMAP.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/ULTRA/exp_12_bootstrap_paradox/REPORT.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/ULTRA/exp_13_false_vacuum_collapse/REPORT.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/ULTRA/exp_14_boltzmann_brain/REPORT.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/ULTRA/exp_14_boltzmann_brain/REPORT_EXTENDED.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/ULTRA/exp_15_quantum_gravity_unification/REPORT_QM_GR_UNIFICATION.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/ULTRA/exp_15_quantum_gravity_unification/python/STOCHASTIC_FUNNEL_REPORT.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/ULTRA/exp_16_recursive_universe/REPORT.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/ULTRA/exp_17_self_evolving_singularity/REPORT.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/ULTRA/exp_18_godel_frontier/REPORT.md
-- THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/ULTRA/exp_19_oracle_machine/REPORT.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/ULTRA/REPORT.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/ULTRA_ROADMAP.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/ULTRA/exp_12_bootstrap_paradox/REPORT.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/ULTRA/exp_13_false_vacuum_collapse/REPORT.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/ULTRA/exp_14_boltzmann_brain/REPORT.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/ULTRA/exp_14_boltzmann_brain/REPORT_EXTENDED.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/ULTRA/exp_15_quantum_gravity_unification/REPORT_QM_GR_UNIFICATION.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/ULTRA/exp_15_quantum_gravity_unification/python/STOCHASTIC_FUNNEL_REPORT.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/ULTRA/exp_16_recursive_universe/REPORT.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/ULTRA/exp_17_self_evolving_singularity/REPORT.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/ULTRA/exp_18_godel_frontier/REPORT.md
+- THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/ULTRA/exp_19_oracle_machine/REPORT.md
 
 Note: ULTRA/exp_15_.../rust/REGEN_INSTRUCTIONS.md is an operational regen note, not a results
 report; left in place. Telemetry .csv/.txt/.bin/.png artifacts are raw data, not reports, retained.

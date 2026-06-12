@@ -2,7 +2,7 @@
 
 **Purpose:** Push arbitrary-precision floating-point architecture to its absolute limits to simulate extreme theoretical physics, quantum gravity, and astrophysics.
 **Status:** ONGOING
-**Location:** `THOUGHT/LAB/CAT_CAS/5_topological_proofs/42_computational_event_horizon/`
+**Location:** `THOUGHT/LAB/CAT_CAS/6_frontier_phases/42_computational_event_horizon/`
 
 ## Phase 1: The Computational Black Hole
 - `[x]` **Exp 42.1: Black Hole Event Horizon**
