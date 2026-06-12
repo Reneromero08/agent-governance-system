@@ -1193,6 +1193,22 @@ def test_execution_manager_judgment_summarizes_on_accept(tmp_path):
     assert any("[EXECUTION SUMMARY]" in c["prompt"] for c in ctl._caller.calls)
 
 
+def test_continue_rejects_busy_worker(tmp_path):
+    """continue_worker must reject a busy (running/awaiting) worker, like submit."""
+    ctl = _ctl(tmp_path, ["GOAL_COMPLETE: true"])
+    _make_worker(ctl)
+    ctl.submit_task("catcas-auditor", "x")  # completes -> idle, sets last_task_id
+    w = ctl.get_worker("catcas-auditor")
+    w["status"] = "running"
+    ctl.save_worker(w)
+    with pytest.raises(ValueError):
+        ctl.continue_worker("catcas-auditor")
+    w["status"] = "awaiting_judgment"
+    ctl.save_worker(w)
+    with pytest.raises(ValueError):
+        ctl.continue_worker("catcas-auditor")
+
+
 def test_execution_required_with_none_transport_rejected(tmp_path):
     ctl = _ctl(tmp_path, [])
     _make_worker(ctl, execution_transport="none")
@@ -1232,6 +1248,32 @@ def test_atomic_worker_writes_no_corruption(tmp_path):
     assert not errors, errors[:3]
     # No leftover temp files in the workers dir.
     assert not list((tmp_path / "_state" / "workers").glob("*.tmp.*"))
+
+
+def test_cli_unknown_worker_clean_error(tmp_path, capsys):
+    """CLI returns a clean JSON error + exit 1 (not a raw traceback) on bad input."""
+    import worker_control as wc
+    rc = wc.main(["--state-dir", str(tmp_path / "_st"), "worker-state", "--worker-id", "nope"])
+    assert rc == 1
+    out = capsys.readouterr().out
+    assert '"error"' in out and "Unknown worker" in out
+    assert "Traceback" not in out
+
+
+def test_cli_judge_nothing_to_judge_clean_error(tmp_path, capsys):
+    import worker_control as wc
+    sd = str(tmp_path / "_st")
+    wc.main(["--state-dir", sd, "worker-create", "--worker-id", "w1",
+             "--conversation", "c", "--session-key", "s"])
+    capsys.readouterr()
+    rc = wc.main(["--state-dir", sd, "judge", "--worker-id", "w1", "--verdict", "accept"])
+    assert rc == 1
+    assert '"error"' in capsys.readouterr().out
+
+
+def test_examples_are_valid_json():
+    for name in ("worker.catcas-auditor.json", "worker_task.submit.json"):
+        json.loads((ROOT / "examples" / name).read_text(encoding="utf-8"))
 
 
 def test_list_workers_not_dropped_under_concurrent_writes(tmp_path):

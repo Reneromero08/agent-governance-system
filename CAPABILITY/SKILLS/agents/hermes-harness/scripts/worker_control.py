@@ -1096,6 +1096,19 @@ class WorkerController:
         rec = self.get_task(last_id)
         if not rec:
             raise ValueError(f"Task {last_id!r} not found")
+        # Atomically claim the worker (reject a concurrent continue/submit so two
+        # loops can't corrupt the shared conversation). awaiting_judgment must be
+        # resolved via judge(), not continue.
+        with self._worker_lock(worker_id):
+            fresh = self.get_worker(worker_id) or worker
+            if fresh.get("status") in ("running", "awaiting_judgment"):
+                raise ValueError(
+                    f"Worker {worker_id!r} is busy (status={fresh.get('status')}); "
+                    f"cannot continue until the current task is resolved."
+                )
+            worker = fresh
+            worker["status"] = "running"
+            self.save_worker(worker)
 
         rec["status"] = "running"
         rec["completed_at"] = None
@@ -1106,9 +1119,7 @@ class WorkerController:
         rec["max_turns"] = cap
         self._save_task(rec)
         self._log(last_id, "continue", {"from_turn": start_turn, "max_turns": cap, "nudge": nudge})
-
-        worker["status"] = "running"
-        self.save_worker(worker)
+        # (worker already claimed + marked running under the lock above)
 
         first = build_continuation_packet(done_marker, blocked_marker, start_turn, cap,
                                           use_judge=bool(rec.get("use_judge", False)))
@@ -1186,18 +1197,26 @@ class WorkerController:
         """
         if verdict not in ("accept", "reject"):
             raise ValueError(f"Invalid verdict {verdict!r}. Valid: accept, reject")
-        worker = self.get_worker(worker_id)
-        if not worker:
-            raise KeyError(f"Unknown worker {worker_id!r}")
-        if self._expire_if_stale(worker):
-            worker = self.get_worker(worker_id)  # reload; will fail the check below
-        last_id = worker.get("last_task_id")
-        rec = self.get_task(last_id) if last_id else None
-        if not rec:
-            raise ValueError(f"Worker {worker_id!r} has no task to judge")
-        if rec.get("status") != "awaiting_judgment":
-            raise ValueError(f"Task {rec.get('task_id')} is not awaiting judgment "
-                             f"(status={rec.get('status')})")
+        # Atomically claim the awaiting worker so two concurrent judge() calls
+        # can't both pass the check and double-finalize.
+        with self._worker_lock(worker_id):
+            worker = self.get_worker(worker_id)
+            if not worker:
+                raise KeyError(f"Unknown worker {worker_id!r}")
+            if self._expire_if_stale(worker):
+                worker = self.get_worker(worker_id)  # reload; fails the check below
+            last_id = worker.get("last_task_id")
+            rec = self.get_task(last_id) if last_id else None
+            if not rec:
+                raise ValueError(f"Worker {worker_id!r} has no task to judge")
+            if rec.get("status") != "awaiting_judgment":
+                raise ValueError(f"Task {rec.get('task_id')} is not awaiting judgment "
+                                 f"(status={rec.get('status')})")
+            # Move out of awaiting so a concurrent judge() fails the check above.
+            worker["status"] = "running"
+            self.save_worker(worker)
+            rec["status"] = "running"
+            self._save_task(rec)
 
         judged_turn = len(rec.get("turns", []))
         rec.setdefault("judgments", []).append({
@@ -1721,49 +1740,57 @@ def main(argv: Optional[List[str]] = None) -> int:
         _judge = default_judge(model=args.judge_model)
     ctl = WorkerController(state_dir=args.state_dir, judge=_judge)
 
-    if args.command == "worker-create":
-        w = ctl.create_worker(
-            worker_id=args.worker_id, role=args.role, conversation=args.conversation,
-            session_key=args.session_key, model=args.model, workspace=args.workspace,
-            read_roots=_as_list(args.read_roots), write_roots=_as_list(args.write_roots),
-            deny_write_roots=_as_list(args.deny_write_roots),
-            search_policy=args.search_policy, branch_policy=args.branch_policy,
-            persistent_transport=args.persistent_transport,
-            execution_transport=args.execution_transport,
-            session_id=args.session_id,
-        )
-        _print(w)
-    elif args.command == "worker-list":
-        _print(ctl.list_workers())
-    elif args.command == "worker-get":
-        _print(ctl.get_worker(args.worker_id) or {"error": "not found"})
-    elif args.command == "worker-state":
-        _print(ctl.get_state(args.worker_id))
-    elif args.command == "task-submit":
-        rec = ctl.submit_task(
-            args.worker_id, args.task, mode=args.mode,
-            goal_loop=not args.no_goal_loop, max_turns=args.max_turns,
-            constraints=args.constraints, output_contract=args.output_contract,
-            acceptance_criteria=args.acceptance_criteria, target=args.target,
-            done_marker=args.done_marker, blocked_marker=args.blocked_marker,
-            write_roots=_as_list(args.write_root) if args.write_root else None,
-            read_roots=_as_list(args.read_root) if args.read_root else None,
-            verify_command=args.verify_command, verify_timeout=args.verify_timeout,
-            judgment_mode=args.judgment_mode, completion_mode=args.completion_mode,
-            auto_revert=args.auto_revert, execution_required=args.execution_required,
-        )
-        _print(rec)
-    elif args.command == "judge":
-        _print(ctl.judge(args.worker_id, args.verdict, feedback=args.feedback, max_turns=args.max_turns))
-    elif args.command == "continue":
-        _print(ctl.continue_worker(args.worker_id, max_turns=args.max_turns, nudge=args.nudge))
-    elif args.command == "task-get":
-        _print(ctl.get_task(args.task_id) or {"error": "not found"})
-    elif args.command == "log":
-        _print(ctl.get_log(args.task_id))
-    elif args.command == "serve":
-        from worker_api import serve  # noqa: E402
-        serve(host=args.host, port=args.port, state_dir=args.state_dir)
+    try:
+        if args.command == "worker-create":
+            w = ctl.create_worker(
+                worker_id=args.worker_id, role=args.role, conversation=args.conversation,
+                session_key=args.session_key, model=args.model, workspace=args.workspace,
+                read_roots=_as_list(args.read_roots), write_roots=_as_list(args.write_roots),
+                deny_write_roots=_as_list(args.deny_write_roots),
+                search_policy=args.search_policy, branch_policy=args.branch_policy,
+                persistent_transport=args.persistent_transport,
+                execution_transport=args.execution_transport,
+                session_id=args.session_id,
+            )
+            _print(w)
+        elif args.command == "worker-list":
+            _print(ctl.list_workers())
+        elif args.command == "worker-get":
+            _print(ctl.get_worker(args.worker_id) or {"error": "not found"})
+        elif args.command == "worker-state":
+            _print(ctl.get_state(args.worker_id))
+        elif args.command == "task-submit":
+            rec = ctl.submit_task(
+                args.worker_id, args.task, mode=args.mode,
+                goal_loop=not args.no_goal_loop, max_turns=args.max_turns,
+                constraints=args.constraints, output_contract=args.output_contract,
+                acceptance_criteria=args.acceptance_criteria, target=args.target,
+                done_marker=args.done_marker, blocked_marker=args.blocked_marker,
+                write_roots=_as_list(args.write_root) if args.write_root else None,
+                read_roots=_as_list(args.read_root) if args.read_root else None,
+                verify_command=args.verify_command, verify_timeout=args.verify_timeout,
+                judgment_mode=args.judgment_mode, completion_mode=args.completion_mode,
+                auto_revert=args.auto_revert, execution_required=args.execution_required,
+            )
+            _print(rec)
+        elif args.command == "judge":
+            _print(ctl.judge(args.worker_id, args.verdict, feedback=args.feedback, max_turns=args.max_turns))
+        elif args.command == "continue":
+            _print(ctl.continue_worker(args.worker_id, max_turns=args.max_turns, nudge=args.nudge))
+        elif args.command == "task-get":
+            _print(ctl.get_task(args.task_id) or {"error": "not found"})
+        elif args.command == "log":
+            _print(ctl.get_log(args.task_id))
+        elif args.command == "serve":
+            from worker_api import serve  # noqa: E402
+            serve(host=args.host, port=args.port, state_dir=args.state_dir)
+    except (KeyError, ValueError) as exc:
+        # Clean error instead of a raw traceback (unknown worker, busy worker,
+        # bad transport/mode, nothing to judge, etc.). KeyError's str() wraps the
+        # message in quotes, so prefer the raw arg.
+        msg = exc.args[0] if exc.args else str(exc)
+        _print({"error": str(msg)})
+        return 1
     return 0
 
 
