@@ -14,9 +14,9 @@ import sys, os, time, math, numpy as np, torch
 from pathlib import Path
 from collections import Counter
 
-REPO = Path(r'D:\CCC 2.0\AI\agent-governance-system')
-CAT_CAS = REPO / 'THOUGHT' / 'LAB' / 'CAT_CAS' / '16_catalytic_27b_inference'
-EIGEN = CAT_CAS.parent.parent / 'EIGEN_BUDDY'
+REPO = next(p for p in Path(__file__).resolve().parents if (p / ".git").exists())
+CAT_CAS = Path(__file__).resolve().parent
+EIGEN = next(p for p in Path(__file__).resolve().parents if p.name == "CAT_CAS").parent / 'EIGEN_BUDDY'
 sys.path.insert(0, str(REPO / 'THOUGHT' / 'LAB' / 'TINY_COMPRESS' / 'holographic-image'))
 from holo_core import analyze_spectrum, project, choose_k
 sys.path.insert(0, str(EIGEN / 'core' / 'rust_ffi' / 'target' / 'release'))

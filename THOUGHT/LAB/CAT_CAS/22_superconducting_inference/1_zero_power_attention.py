@@ -27,7 +27,7 @@ from pathlib import Path
 import torch
 import torch.nn as nn
 
-REPO = Path(__file__).parent.parent.parent.parent.parent.parent
+REPO = next(p for p in Path(__file__).resolve().parents if (p / ".git").exists())
 
 # Physical constants
 KB = 1.380649e-23  # Boltzmann (J/K)

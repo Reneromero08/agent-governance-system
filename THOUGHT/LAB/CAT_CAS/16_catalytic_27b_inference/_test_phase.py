@@ -8,8 +8,8 @@ topology). Phase is the implicate order; amplitude is explicate (Q34).
 import sys, os, time, numpy as np, torch
 from pathlib import Path
 
-CAT_CAS = Path(r'D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\CAT_CAS\16_catalytic_27b_inference')
-EIGEN = CAT_CAS.parent.parent / 'EIGEN_BUDDY'
+CAT_CAS = Path(__file__).resolve().parent
+EIGEN = next(p for p in Path(__file__).resolve().parents if p.name == "CAT_CAS").parent / 'EIGEN_BUDDY'
 sys.path.insert(0, str(EIGEN))
 from eigen_buddy_tokenizer import (
     EigenBuddyTokenizer, train_eigen_buddy, evaluate_platonic_convergence,

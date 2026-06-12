@@ -1,8 +1,9 @@
 """Extract norm weights, embed, and lm_head from safetensors to local .holo."""
 import torch, os, json, struct, numpy as np
+from pathlib import Path
 
 MODEL_DIR = r"E:\Reneshizzle SG\Models\deepseek-ai\DeepSeek-V4-Flash"
-OUT = r"D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\HOLO\_models\ds_aux_weights.holo"
+OUT = str(next(p for p in Path(__file__).resolve().parents if (p / ".git").exists()) / "THOUGHT" / "LAB" / "HOLO" / "_models" / "ds_aux_weights.holo")
 
 with open(os.path.join(MODEL_DIR, "model.safetensors.index.json")) as f:
     idx = json.load(f)

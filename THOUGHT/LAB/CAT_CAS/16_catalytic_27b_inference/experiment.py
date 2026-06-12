@@ -19,7 +19,7 @@ from pathlib import Path
 from typing import Optional
 
 # Rust FFI path
-RUST_DIR = str(Path(__file__).parent.parent.parent / "EIGEN_BUDDY" / "core" / "rust_ffi" / "target" / "release")
+RUST_DIR = str(next(p for p in Path(__file__).resolve().parents if p.name == "CAT_CAS").parent / "EIGEN_BUDDY" / "core" / "rust_ffi" / "target" / "release")
 sys.path.insert(0, RUST_DIR)
 os.chdir(RUST_DIR)
 import catalytic_ffi

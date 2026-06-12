@@ -1,11 +1,11 @@
 """Quick holo_core API check + hidden state normalization test."""
 import numpy as np, torch, sys
 from pathlib import Path
-sys.path.insert(0, str(Path(r'D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TINY_COMPRESS\holographic-image')))
+sys.path.insert(0, str(next(p for p in Path(__file__).resolve().parents if (p / ".git").exists()) / 'THOUGHT' / 'LAB' / 'TINY_COMPRESS' / 'holographic-image'))
 from holo_core import project, analyze_spectrum
 
 data = torch.load(
-    r'D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\CAT_CAS\16_catalytic_27b_inference\gold_training_data\gold_pairs_quick.pt',
+    str(Path(__file__).resolve().parent / 'gold_training_data' / 'gold_pairs_quick.pt'),
     weights_only=True
 )
 sr = data['states_real'].numpy()

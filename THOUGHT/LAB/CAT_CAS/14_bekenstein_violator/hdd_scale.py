@@ -15,7 +15,7 @@ import numpy as np
 from pathlib import Path
 
 # Point to the Rust FFI
-rust_dir = str(Path(__file__).parent.parent.parent / "EIGEN_BUDDY" / "core" / "rust_ffi" / "target" / "release")
+rust_dir = str(next(p for p in Path(__file__).resolve().parents if p.name == "CAT_CAS").parent / "EIGEN_BUDDY" / "core" / "rust_ffi" / "target" / "release")
 sys.path.insert(0, rust_dir)
 os.chdir(rust_dir)
 

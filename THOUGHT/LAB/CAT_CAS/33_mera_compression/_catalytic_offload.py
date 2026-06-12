@@ -9,7 +9,7 @@ import torch, os, time, json
 from pathlib import Path
 from collections import defaultdict
 
-REPO = Path(r"D:\CCC 2.0\AI\agent-governance-system")
+REPO = next(p for p in Path(__file__).resolve().parents if (p / ".git").exists())
 HOLO = REPO / "THOUGHT" / "LAB" / "HOLO" / "_models"
 EXPERT_SHARDS = HOLO / "experts_shards"
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"

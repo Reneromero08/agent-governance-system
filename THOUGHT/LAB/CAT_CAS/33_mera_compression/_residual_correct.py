@@ -8,7 +8,7 @@ from pathlib import Path
 from collections import defaultdict
 
 MODEL_DIR = r"E:\Reneshizzle SG\Models\deepseek-ai\DeepSeek-V4-Flash"
-HOLO_PATH = Path(r"D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\HOLO\_models")
+HOLO_PATH = next(p for p in Path(__file__).resolve().parents if (p / ".git").exists()) / "THOUGHT" / "LAB" / "HOLO" / "_models"
 OUT_PATH = HOLO_PATH / "ds_experts_residual_r4.holo"
 R = 4  # residual rank
 

@@ -4,7 +4,8 @@ import hashlib
 import os
 import sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '47_phase_atom'))
+from pathlib import Path as _Path
+sys.path.insert(0, str(next(p for p in _Path(__file__).resolve().parents if p.name == "CAT_CAS") / "_lib"))
 from catalytic_tape import BennettHistoryTape
 
 def build_connectome(L=302, p_rewire=0.15, scale=1.0, theta=0.0, lesion_nodes=None):

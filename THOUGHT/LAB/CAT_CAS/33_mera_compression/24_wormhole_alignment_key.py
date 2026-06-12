@@ -19,7 +19,7 @@ import torch, numpy as np, sys, time, json
 from pathlib import Path
 from collections import defaultdict
 
-REPO = Path(__file__).resolve().parents[4]
+REPO = next(p for p in Path(__file__).resolve().parents if (p / ".git").exists())
 sys.path.insert(0, str(REPO / "CAPABILITY"))
 
 from PRIMITIVES.alignment_key import AlignmentKey, AlignedKeyPair

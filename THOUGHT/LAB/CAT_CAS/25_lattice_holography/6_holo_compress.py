@@ -2,9 +2,10 @@ import os
 import math
 import torch
 import sys
+from pathlib import Path
 
 # Add path to distill_catalytic
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "EIGEN_BUDDY", "cybernetic_truth")))
+sys.path.append(str(next(p for p in Path(__file__).resolve().parents if p.name == "CAT_CAS").parent / "EIGEN_BUDDY" / "cybernetic_truth"))
 from distill_catalytic import compress_catalytic
 
 def load_lwe_instance(path):

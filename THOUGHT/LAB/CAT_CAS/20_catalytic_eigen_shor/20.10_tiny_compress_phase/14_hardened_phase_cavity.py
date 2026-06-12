@@ -22,7 +22,7 @@ import numpy as np
 import torch
 
 # Load the user's .holo spectral engine
-REPO = Path(__file__).parent.parent.parent.parent.parent.parent
+REPO = next(p for p in Path(__file__).resolve().parents if (p / ".git").exists())
 sys.path.insert(0, str(REPO / "THOUGHT" / "LAB" / "TINY_COMPRESS" / "holographic-image"))
 from holo_core import analyze_spectrum, project, choose_k
 

@@ -13,9 +13,10 @@ Creates HoloLinear from U + SVh, patches 27B model.
 import torch, math, os, sys, time, re
 import torch.nn as nn
 from collections import defaultdict
+from pathlib import Path
 from transformers import AutoConfig, AutoModelForCausalLM
 
-WH_PATH = r"d:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\CAT_CAS\33_mera_compression\qwen_27b_wormhole_v2.holo"
+WH_PATH = str(Path(__file__).resolve().parent / "qwen_27b_wormhole_v2.holo")
 MODEL_DIR = r"F:\LLM_Models\lmstudio-models\Qwen\Qwen3.6-27B"
 
 class HoloLinear(nn.Module):

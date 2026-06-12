@@ -25,7 +25,7 @@ import numpy as np
 from pathlib import Path
 
 # Insert EIGEN_BUDDY/core/rust_ffi to access the compiled native FFI module
-RUST_FFI_DIR = Path(__file__).parent.parent.parent / "EIGEN_BUDDY" / "core" / "rust_ffi"
+RUST_FFI_DIR = next(p for p in Path(__file__).resolve().parents if p.name == "CAT_CAS").parent / "EIGEN_BUDDY" / "core" / "rust_ffi"
 sys.path.insert(0, str(RUST_FFI_DIR))
 
 try:

@@ -46,7 +46,7 @@ if _rust_dir.exists():
     sys.path.insert(0, str(_rust_dir))
 
 # .holo engine for Moire decomposition (SVD-based, not complex Hermitian)
-_holo_path = Path(__file__).parent.parent.parent.parent.parent.parent.parent / "THOUGHT" / "LAB" / "TINY_COMPRESS" / "holographic-image"
+_holo_path = next(p for p in Path(__file__).resolve().parents if (p / ".git").exists()) / "THOUGHT" / "LAB" / "TINY_COMPRESS" / "holographic-image"
 sys.path.insert(0, str(_holo_path))
 try:
     import catalytic_grating_ffi as cg

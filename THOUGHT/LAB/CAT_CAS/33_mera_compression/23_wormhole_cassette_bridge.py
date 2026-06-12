@@ -20,7 +20,7 @@ from pathlib import Path
 from collections import defaultdict
 
 # ---- Project paths ----
-REPO = Path(__file__).resolve().parents[4]
+REPO = next(p for p in Path(__file__).resolve().parents if (p / ".git").exists())
 sys.path.insert(0, str(REPO / "NAVIGATION/CORTEX/network"))
 sys.path.insert(0, str(REPO / "CAPABILITY"))
 

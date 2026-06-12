@@ -8,15 +8,15 @@ import numpy as np
 from pathlib import Path
 from transformers import AutoModelForCausalLM
 
-REPO = Path(r'd:\CCC 2.0\AI\agent-governance-system')
+REPO = next(p for p in Path(__file__).resolve().parents if (p / ".git").exists())
 sys.path.append(str(REPO / "THOUGHT" / "LAB" / "EIGEN_BUDDY" / "cybernetic_truth"))
 sys.path.append(str(REPO / "THOUGHT" / "LAB" / "EIGEN_BUDDY"))
 
 from holographic_cybernetic_engine import patch_model_with_holo
 from eigen_buddy_tokenizer import MultiHeadComplexAttention
 
-MODEL_DIR = r"d:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\CAT_CAS\16_catalytic_27b_inference\gemini_update\qwen_0.5b"
-HOLO_PATH = r"d:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\EIGEN_BUDDY\cybernetic_truth\qwen_0_5b_k128.holo"
+MODEL_DIR = str(next(p for p in Path(__file__).resolve().parents if p.name == "CAT_CAS") / "16_catalytic_27b_inference" / "gemini_update" / "qwen_0.5b")
+HOLO_PATH = str(REPO / "THOUGHT" / "LAB" / "EIGEN_BUDDY" / "cybernetic_truth" / "qwen_0_5b_k128.holo")
 
 class SpinEncoder(nn.Module):
     def __init__(self, n_dim=64, hidden_size=896):

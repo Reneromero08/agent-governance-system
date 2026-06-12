@@ -13,9 +13,9 @@ import math
 import random
 from pathlib import Path
 
-# Insert 01_tree_evaluation to access catalytic engine primitives
-CAT_CAS_DIR = Path(__file__).parent.parent
-sys.path.insert(0, str(CAT_CAS_DIR / "01_tree_evaluation"))
+# Insert _lib to access catalytic engine primitives
+CAT_CAS_DIR = next(p for p in Path(__file__).resolve().parents if p.name == "CAT_CAS")
+sys.path.insert(0, str(CAT_CAS_DIR / "_lib"))
 
 from catalytic_engine import MemoryTracker, CatalyticTape
 

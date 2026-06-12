@@ -7,15 +7,15 @@ import numpy as np
 from pathlib import Path
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-REPO = Path(r'd:\CCC 2.0\AI\agent-governance-system')
+REPO = next(p for p in Path(__file__).resolve().parents if (p / ".git").exists())
 sys.path.append(str(REPO / "THOUGHT" / "LAB" / "EIGEN_BUDDY" / "cybernetic_truth"))
 sys.path.append(str(REPO / "THOUGHT" / "LAB" / "EIGEN_BUDDY"))
 
 from holographic_cybernetic_engine import patch_model_with_holo, get_truth_vector_C, cybernetic_inference
 from eigen_buddy_tokenizer import EigenBuddyTokenizer
 
-MODEL_DIR = r"d:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\CAT_CAS\16_catalytic_27b_inference\gemini_update\qwen_0.5b"
-HOLO_PATH = r"d:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\EIGEN_BUDDY\cybernetic_truth\qwen_0_5b_k128.holo"
+MODEL_DIR = str(next(p for p in Path(__file__).resolve().parents if p.name == "CAT_CAS") / "16_catalytic_27b_inference" / "gemini_update" / "qwen_0.5b")
+HOLO_PATH = str(REPO / "THOUGHT" / "LAB" / "EIGEN_BUDDY" / "cybernetic_truth" / "qwen_0_5b_k128.holo")
 
 def load_lwe_instance(path):
     import importlib.util

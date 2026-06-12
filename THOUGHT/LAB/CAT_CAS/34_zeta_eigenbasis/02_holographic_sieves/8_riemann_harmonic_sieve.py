@@ -17,7 +17,7 @@ import numpy as np
 import torch
 
 # Load the user's .holo spectral engine
-REPO = Path(r"d:\CCC 2.0\AI\agent-governance-system")
+REPO = next(p for p in Path(__file__).resolve().parents if (p / ".git").exists())
 sys.path.insert(0, str(REPO / "THOUGHT" / "LAB" / "TINY_COMPRESS" / "holographic-image"))
 
 try:

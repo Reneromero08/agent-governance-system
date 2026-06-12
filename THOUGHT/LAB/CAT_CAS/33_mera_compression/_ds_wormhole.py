@@ -3,10 +3,12 @@ Extract expert-0 U matrices for wormhole without loading 36 GB.
 Uses pickle streaming to avoid full-file load.
 """
 import torch, pickle, io, os, time
+from pathlib import Path
 
+_REPO = next(p for p in Path(__file__).resolve().parents if (p / ".git").exists())
 INPUT = r"E:\Reneshizzle SG\Models\deepseek-ai\_holo\deepseek_v4_flash_experts_k128.holo"
-OUTPUT_SLIM = r"D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\HOLO\_models\ds_experts_slim.holo"
-OUTPUT_WORMHOLE = r"D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\HOLO\_models\ds_experts_wormhole.holo"
+OUTPUT_SLIM = str(_REPO / "THOUGHT" / "LAB" / "HOLO" / "_models" / "ds_experts_slim.holo")
+OUTPUT_WORMHOLE = str(_REPO / "THOUGHT" / "LAB" / "HOLO" / "_models" / "ds_experts_wormhole.holo")
 
 K = 128
 LORA = 16
@@ -33,7 +35,7 @@ with open(INPUT, 'rb') as f:
         f.close()
 
 # Alternative: copy to local SSD then load
-local_path = r"D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\HOLO\_models\deepseek_v4_flash_experts_k128.holo"
+local_path = str(_REPO / "THOUGHT" / "LAB" / "HOLO" / "_models" / "deepseek_v4_flash_experts_k128.holo")
 if not os.path.exists(local_path):
     import shutil
     print(f"Copying {size_gb:.1f} GB to local SSD...")

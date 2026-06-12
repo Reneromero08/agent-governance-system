@@ -3,8 +3,8 @@ import sys, os, time, numpy as np, torch
 from pathlib import Path
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-CAT_CAS = Path(r'D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\CAT_CAS\16_catalytic_27b_inference')
-EIGEN = CAT_CAS.parent.parent / 'EIGEN_BUDDY'
+CAT_CAS = Path(__file__).resolve().parent
+EIGEN = next(p for p in Path(__file__).resolve().parents if p.name == "CAT_CAS").parent / 'EIGEN_BUDDY'
 MODEL_DIR = CAT_CAS / 'gemini_update' / 'qwen_0.5b'
 
 sys.path.insert(0, str(CAT_CAS))

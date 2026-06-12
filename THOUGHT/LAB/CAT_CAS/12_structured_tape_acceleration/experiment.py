@@ -24,8 +24,8 @@ import hashlib
 import numpy as np
 from pathlib import Path
 
-CAT_CAS_DIR = Path(__file__).parent.parent
-sys.path.insert(0, str(CAT_CAS_DIR / "01_tree_evaluation"))
+CAT_CAS_DIR = next(p for p in Path(__file__).resolve().parents if p.name == "CAT_CAS")
+sys.path.insert(0, str(CAT_CAS_DIR / "_lib"))
 
 from tree_eval import TreeEval
 from catalytic_engine import MemoryTracker, CatalyticTape, OutOfMemoryError

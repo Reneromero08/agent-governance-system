@@ -13,15 +13,15 @@ Workloads:
 import sys
 import os
 import numpy as np
+from pathlib import Path
 
 # ---------------------------------------------------------------------------
 # Shared path bootstrap
 # ---------------------------------------------------------------------------
-_LAB_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-_TEP_DIR  = os.path.join(_LAB_ROOT, "01_tree_evaluation")
-_THERM_DIR = os.path.join(_LAB_ROOT, "04_thermodynamic_cpu")
+_LAB_ROOT = str(next(p for p in Path(__file__).resolve().parents if p.name == "CAT_CAS"))
+_LIB_DIR = os.path.join(_LAB_ROOT, "_lib")
 
-for _p in (_TEP_DIR, _THERM_DIR):
+for _p in (_LIB_DIR,):
     if _p not in sys.path:
         sys.path.insert(0, _p)
 

@@ -2,8 +2,8 @@
 import time, math, glob, torch, torch.nn.functional as F
 from pathlib import Path
 
-REPO = Path(__file__).parent.parent.parent.parent.parent
-MODEL_DIR = str(REPO / "THOUGHT" / "LAB" / "CAT_CAS" / "16_catalytic_27b_inference" / "gemini_update" / "qwen_0.5b")
+REPO = next(p for p in Path(__file__).resolve().parents if (p / ".git").exists())
+MODEL_DIR = str(next(p for p in Path(__file__).resolve().parents if p.name == "CAT_CAS") / "16_catalytic_27b_inference" / "gemini_update" / "qwen_0.5b")
 from safetensors.torch import load_file
 
 def main():

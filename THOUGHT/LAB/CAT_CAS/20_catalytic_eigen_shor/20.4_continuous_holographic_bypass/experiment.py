@@ -16,7 +16,7 @@ import torch.nn as nn
 from pathlib import Path
 
 # Add entire stack to path
-REPO_ROOT = Path(__file__).parent.parent.parent.parent.parent
+REPO_ROOT = next(p for p in Path(__file__).resolve().parents if (p / ".git").exists())
 sys.path.insert(0, str(REPO_ROOT))
 
 # Import Native Eigen Architecture

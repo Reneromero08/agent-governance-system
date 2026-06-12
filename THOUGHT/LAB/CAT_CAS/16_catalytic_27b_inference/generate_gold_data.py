@@ -23,7 +23,7 @@ from pathlib import Path
 from collections import defaultdict
 
 CAT_CAS_DIR = Path(__file__).parent
-EIGEN_DIR = CAT_CAS_DIR.parent.parent / "EIGEN_BUDDY"
+EIGEN_DIR = next(p for p in Path(__file__).resolve().parents if p.name == "CAT_CAS").parent / "EIGEN_BUDDY"
 sys.path.insert(0, str(CAT_CAS_DIR))
 sys.path.insert(0, str(EIGEN_DIR / "core" / "rust_ffi" / "target" / "release"))
 os.chdir(str(EIGEN_DIR / "core" / "rust_ffi" / "target" / "release"))

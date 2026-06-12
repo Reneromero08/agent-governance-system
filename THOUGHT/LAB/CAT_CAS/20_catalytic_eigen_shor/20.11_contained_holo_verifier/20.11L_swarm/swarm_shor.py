@@ -12,7 +12,8 @@ is the shared observation surface.
 """
 import sys,time,math,random,numpy as np,torch; torch.cuda.empty_cache()
 from concurrent.futures import ThreadPoolExecutor, as_completed
-sys.path.insert(0,r'D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\CAT_CAS\20_catalytic_eigen_shor\20.11_contained_holo_verifier\20.11e_rust_fm')
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parent.parent / "20.11e_rust_fm"))
 import catalytic_grating_ffi as cg
 DEV=torch.device('cuda'); CHUNK=64*1024*1024
 

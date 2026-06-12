@@ -8,8 +8,9 @@ import numpy as np
 import hashlib
 import os
 
-import sys as _sys, os as _os
-_sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), '..', '..', '47_phase_atom'))
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(next(p for p in _Path(__file__).resolve().parents if p.name == "CAT_CAS") / "_lib"))
 from catalytic_tape import BennettHistoryTape
 
 KD = {

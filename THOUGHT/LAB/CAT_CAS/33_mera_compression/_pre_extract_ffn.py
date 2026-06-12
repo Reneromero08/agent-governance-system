@@ -3,7 +3,7 @@ Replaces 257 MB shard loads with 50 MB per layer. 5x speedup."""
 import torch, os, time, numpy as np
 from pathlib import Path
 
-REPO = Path(r"D:\CCC 2.0\AI\agent-governance-system")
+REPO = next(p for p in Path(__file__).resolve().parents if (p / ".git").exists())
 HOLO = REPO / "THOUGHT" / "LAB" / "HOLO" / "_models"
 SHARDS = HOLO / "experts_shards"
 OUT = HOLO / "ds_shared_ffn.holo"

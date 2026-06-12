@@ -16,7 +16,7 @@ from collections import defaultdict
 
 # ---- Config ----
 MODEL_DIR = r"E:\Reneshizzle SG\Models\deepseek-ai\DeepSeek-V4-Flash"
-OUTPUT_DIR = Path(r"D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\HOLO\_models")
+OUTPUT_DIR = next(p for p in Path(__file__).resolve().parents if (p / ".git").exists()) / "THOUGHT" / "LAB" / "HOLO" / "_models"
 K = 128
 THRESHOLD_STEPS = [0.5, 0.4, 0.3, 0.2, 0.15, 0.1, 0.05, 0.02, 0.01]
 

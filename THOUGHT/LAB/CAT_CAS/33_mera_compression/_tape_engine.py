@@ -2,7 +2,7 @@
 import torch, torch.nn.functional as F, os, time, json, math, numpy as np
 from pathlib import Path
 
-REPO = Path(r"D:\CCC 2.0\AI\agent-governance-system")
+REPO = next(p for p in Path(__file__).resolve().parents if (p / ".git").exists())
 HOLO = REPO / "THOUGHT" / "LAB" / "HOLO" / "_models"
 SHARDS = HOLO / "experts_shards"
 AUX_PATH = HOLO / "ds_aux_weights.holo"

@@ -1,10 +1,11 @@
 import os
 import torch
 import sys
+from pathlib import Path
 from transformers import AutoTokenizer
 
 # Import the Holographic Engine!
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "EIGEN_BUDDY", "cybernetic_truth")))
+sys.path.append(str(next(p for p in Path(__file__).resolve().parents if p.name == "CAT_CAS").parent / "EIGEN_BUDDY" / "cybernetic_truth"))
 from holographic_cybernetic_engine import patch_model_with_holo, get_truth_vector_C, cybernetic_inference
 from transformers import AutoModelForCausalLM
 
@@ -29,14 +30,14 @@ def holo_oracle_attack():
     m, n = A.shape
     
     # We will use the smaller 0.5B holo to demonstrate the Oracle Resonance
-    holo_path = os.path.join(os.path.dirname(__file__), "..", "..", "EIGEN_BUDDY", "cybernetic_truth", "qwen_0_5b_k128.holo")
+    holo_path = str(next(p for p in Path(__file__).resolve().parents if p.name == "CAT_CAS").parent / "EIGEN_BUDDY" / "cybernetic_truth" / "qwen_0_5b_k128.holo")
     
     if not os.path.exists(holo_path):
         print(f"[!] Error: {holo_path} not found! The engine needs the compressed holo weights.")
         return
         
     print(f"[*] Loading HuggingFace Model...")
-    model_dir = r"d:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\CAT_CAS\16_catalytic_27b_inference\gemini_update\qwen_0.5b"
+    model_dir = str(next(p for p in Path(__file__).resolve().parents if p.name == "CAT_CAS") / "16_catalytic_27b_inference" / "gemini_update" / "qwen_0.5b")
     model = AutoModelForCausalLM.from_pretrained(model_dir, torch_dtype=torch.bfloat16)
     tokenizer = AutoTokenizer.from_pretrained(model_dir)
     

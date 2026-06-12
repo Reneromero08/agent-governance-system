@@ -2,9 +2,10 @@
 import subprocess
 import sys
 import os
+from pathlib import Path
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-VENV_PY = r"D:\CCC 2.0\AI\agent-governance-system\.venv\Scripts\python.exe"
+VENV_PY = str(next(p for p in Path(__file__).resolve().parents if (p / ".git").exists()) / ".venv" / "Scripts" / "python.exe")
 SERVER_PY = os.path.join(HERE, "server.py")
 LOG = os.path.join(HERE, "server.log")
 ERR = os.path.join(HERE, "server.err")

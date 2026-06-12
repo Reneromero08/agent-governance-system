@@ -10,8 +10,8 @@ import sys, os, time, struct, numpy as np, torch
 from pathlib import Path
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-REPO = Path(r'D:\CCC 2.0\AI\agent-governance-system')
-CAT_CAS = REPO / 'THOUGHT' / 'LAB' / 'CAT_CAS' / '16_catalytic_27b_inference'
+REPO = next(p for p in Path(__file__).resolve().parents if (p / ".git").exists())
+CAT_CAS = Path(__file__).resolve().parent
 EIGEN = REPO / 'THOUGHT' / 'LAB' / 'EIGEN_BUDDY'
 MODEL_DIR = CAT_CAS / 'gemini_update' / 'qwen_0.5b'
 

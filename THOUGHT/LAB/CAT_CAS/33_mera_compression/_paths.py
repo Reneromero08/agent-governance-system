@@ -1,7 +1,7 @@
 """Central .holo paths — single source of truth."""
 from pathlib import Path
 
-REPO = Path(r"D:\CCC 2.0\AI\agent-governance-system")
+REPO = next(p for p in Path(__file__).resolve().parents if (p / ".git").exists())
 HOLO_MODELS = REPO / "THOUGHT/LAB/HOLO/_models"
 
 # Catalytic input (from distiller)
@@ -24,7 +24,7 @@ VISUAL_WORMHOLE_LEGACY = HOLO_MODELS / "qwen_27b_visual_wormhole.holo"
 LLM_TUNED = HOLO_MODELS / "qwen_27b_llm_tuned.holo"
 
 # Manifests
-CATALYTIC_MANIFEST = REPO / "THOUGHT/LAB/CAT_CAS/33_mera_compression/catalytic_manifest.json"
+CATALYTIC_MANIFEST = Path(__file__).resolve().parent / "catalytic_manifest.json"
 
 # 0.5B
 WORMHOLE_05B = HOLO_MODELS / "qwen_0_5b_wormhole.holo"

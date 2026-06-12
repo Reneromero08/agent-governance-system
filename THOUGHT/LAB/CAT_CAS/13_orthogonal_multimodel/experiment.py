@@ -23,7 +23,7 @@ import time
 import numpy as np
 from pathlib import Path
 
-CAT_CAS_DIR = Path(__file__).parent.parent
+CAT_CAS_DIR = next(p for p in Path(__file__).resolve().parents if p.name == "CAT_CAS")
 sys.path.insert(0, str(CAT_CAS_DIR))
 
 MB = 1024 * 1024
