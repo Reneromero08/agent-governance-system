@@ -4,6 +4,14 @@
 
 All notable changes to the LLM Packer will be documented in this file.
 
+### 2026-06-13 — 1.5.0
+- Added `cat_cas` scope for `THOUGHT/LAB/CAT_CAS` (Catalytic Substrate Lab)
+- Added `Engine/3-CAT-CAS-PACK.cmd` one-click launcher
+- CAT_CAS SPLIT output organized by 7 research tracks (foundations through decoder)
+- CAT_CAS PRUNED output includes root manifests, docs, and _lib/ infrastructure
+- Added `.rs` and `.toml` to TEXT_EXTENSIONS for Rust/TOML source inclusion
+- Updated `pack.ps1` to support `-Scope cat_cas`
+
 ### 2026-01-03 — 1.3.3
 - Added distinct Internal vs External archives (Internal stays inside the pack; External zips the whole pack under `_packs/_archive/`)
 - Pack rotation deletes the previous unzipped pack only after its External Archive validates

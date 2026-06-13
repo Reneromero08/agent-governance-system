@@ -1,5 +1,5 @@
 param(
-  [ValidateSet("ags", "lab")]
+  [ValidateSet("ags", "lab", "cat_cas")]
   [string]$Scope = "ags",
   [string]$OutDir = "",
   [ValidateSet("full", "delta")]
@@ -7,6 +7,7 @@ param(
   [ValidateSet("full", "lite")]
   [string]$Profile = "full",
   [string]$Stamp = "",
+  [int]$MaxEntryBytes = 0,
   [switch]$Zip,
   [switch]$NoZip,
   [switch]$Combined,
@@ -55,6 +56,8 @@ if ($PSBoundParameters.ContainsKey("SplitLite")) { $splitLiteEnabled = $true }
 if ($OutDir -eq "") {
   if ($Scope -eq "lab") {
     $OutDir = "MEMORY/LLM_PACKER/_packs/lab-pack-$Stamp"
+  } elseif ($Scope -eq "cat_cas") {
+    $OutDir = "MEMORY/LLM_PACKER/_packs/cat-cas-pack-$Stamp"
   } else {
     $OutDir = "MEMORY/LLM_PACKER/_packs/ags-pack-$Stamp"
   }
@@ -71,6 +74,7 @@ $args = @(
 )
 
 $args += @("--stamp", $Stamp)
+if ($MaxEntryBytes -gt 0) { $args += @("--max-entry-bytes", $MaxEntryBytes) }
 if ($zipEnabled) { $args += "--zip" }
 if ($combinedEnabled) { $args += "--combined" }
 if ($splitLiteEnabled) { $args += "--split-lite" }

@@ -58,6 +58,7 @@ ANSI_RESET = "\033[0m"
 TEXT_EXTENSIONS = {
     ".md", ".txt", ".json", ".py", ".js", ".mjs", ".cjs",
     ".css", ".html", ".php", ".ps1", ".cmd", ".bat", ".yml", ".yaml",
+    ".rs", ".toml",
 }
 
 TEXT_BASENAMES = {".gitignore", ".gitattributes", ".editorconfig", ".htaccess", ".gitkeep", "LICENSE"}
@@ -335,9 +336,30 @@ SCOPE_LAB = PackScope(
     source_root_rel="THOUGHT/LAB",
 )
 
+SCOPE_CAT_CAS = PackScope(
+    key="cat_cas",
+    title="CAT_CAS (Catalytic Substrate Lab)",
+    file_prefix="CAT",
+    include_dirs=("THOUGHT/LAB/CAT_CAS",),
+    root_files=(),
+    anchors=(
+        "AGENTS.md",
+        "README.md",
+        "MANIFESTO.md",
+        "MASTER_REPORT.md",
+        "CAT_CAS_OS.md",
+        "PRIMER.md",
+    ),
+    excluded_dir_parts=frozenset({
+        ".git", "BUILD", "_runs", "_generated", "_packs", "__pycache__", "node_modules",
+    }),
+    source_root_rel="THOUGHT/LAB/CAT_CAS",
+)
+
 SCOPES: Dict[str, PackScope] = {
     SCOPE_AGS.key: SCOPE_AGS,
     SCOPE_LAB.key: SCOPE_LAB,
+    SCOPE_CAT_CAS.key: SCOPE_CAT_CAS,
 }
 
 
@@ -551,6 +573,8 @@ def _maybe_delete_previous_pack(*, current_pack_dir: Path, scope: "PackScope") -
         prefixes = ["ags-pack-", "llm-pack-ags-"]
     elif scope.key == "lab":
         prefixes = ["lab-pack-", "llm-pack-lab-"]
+    elif scope.key == "cat_cas":
+        prefixes = ["cat-cas-pack-", "llm-pack-cat_cas-"]
     else:
         prefixes = [f"{scope.key}-pack-", f"llm-pack-{scope.key}-"]
 
@@ -732,6 +756,29 @@ def write_start_here(pack_dir: Path, *, scope: PackScope, writer: Optional[Packe
                 "",
             ]
         )
+    elif scope.key == SCOPE_CAT_CAS.key:
+        text = "\n".join(
+            [
+                "# START HERE (CAT_CAS)",
+                "",
+                "This snapshot contains the CAT_CAS (Catalytic Substrate Lab) research track:",
+                "50 experiments across 7 tracks exploring catalytic computation, reversible logic,",
+                "topological invariants, holographic compression, and phase-boundary phenomena.",
+                "",
+                "## Read order",
+                "1) `repo/AGENTS.md` - Agent phase-lock protocol",
+                "2) `repo/README.md` - Experiment inventory and navigation map",
+                "3) `repo/MANIFESTO.md` - Operating contract and mechanical critic rules",
+                "4) `repo/MASTER_REPORT.md` - Compact truth ledger (480+ item coverage matrix)",
+                "5) `repo/CAT_CAS_OS.md` - Agent Operating System (verification-mode bible)",
+                "6) `repo/PRIMER.md` - Reading order and reference catalog",
+                "",
+                "## Notes",
+                "- Use `FULL/` for single-file output or `SPLIT/` for sectioned reading.",
+                "- Tracks 1-7 cover foundations through decoder/physical substrate.",
+                "",
+            ]
+        )
     else:
         raise ValueError(f"Unsupported scope: {scope.key}")
 
@@ -774,6 +821,29 @@ def write_entrypoints(pack_dir: Path, *, scope: PackScope, writer: Optional[Pack
                 f"Key entrypoints for `{scope.title}`:",
                 "",
                 "- `repo/THOUGHT/LAB/`",
+                "",
+                "Notes:",
+                "- `FULL/` contains single-file bundles.",
+                "- `SPLIT/` contains chunked sections.",
+                "",
+            ]
+        )
+    elif scope.key == SCOPE_CAT_CAS.key:
+        text = "\n".join(
+            [
+                "# Snapshot Entrypoints",
+                "",
+                f"Key entrypoints for `{scope.title}`:",
+                "",
+                "- `repo/AGENTS.md` - Agent protocol",
+                "- `repo/README.md` - Experiment inventory",
+                "- `repo/MANIFESTO.md` - Operating contract",
+                "- `repo/MASTER_REPORT.md` - Truth ledger",
+                "- `repo/CAT_CAS_OS.md` - Agent OS",
+                "- `repo/PRIMER.md` - Reading order",
+                "- `repo/_lib/` - Shared infrastructure primitives",
+                "- `repo/1_foundations/` through `repo/7_decoder/` - Experiment tracks",
+                "- `repo/docs/` - Navigation, conventions, audit ledger",
                 "",
                 "Notes:",
                 "- `FULL/` contains single-file bundles.",

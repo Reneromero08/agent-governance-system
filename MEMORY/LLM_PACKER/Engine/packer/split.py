@@ -9,7 +9,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import List, Optional, Sequence
 
-from .core import PackScope, SCOPE_AGS, SCOPE_LAB, read_text
+from .core import PackScope, SCOPE_AGS, SCOPE_LAB, SCOPE_CAT_CAS, read_text
 from .firewall_writer import PackerWriter
 
 def rel_posix(*parts: str) -> str:
@@ -29,6 +29,8 @@ def write_split_pack(pack_dir: Path, included_repo_paths: Sequence[str], *, scop
         write_split_pack_ags(pack_dir, included_repo_paths, writer=writer)
     elif scope.key == SCOPE_LAB.key:
         write_split_pack_lab(pack_dir, included_repo_paths, scope=scope, writer=writer)
+    elif scope.key == SCOPE_CAT_CAS.key:
+        write_split_pack_cat_cas(pack_dir, included_repo_paths, scope=scope, writer=writer)
     else:
         raise ValueError(f"Unsupported scope for split pack: {scope.key}")
 
@@ -215,3 +217,102 @@ def write_split_pack_lab(pack_dir: Path, included_repo_paths: Sequence[str], *, 
         (split_dir / "LAB-02_SYSTEM.md").write_text(system_content, encoding="utf-8")
     else:
         writer.write_text(split_dir / "LAB-02_SYSTEM.md", system_content, encoding="utf-8")
+
+
+def write_split_pack_cat_cas(pack_dir: Path, included_repo_paths: Sequence[str], *, scope: PackScope, writer: Optional[PackerWriter] = None) -> None:
+    split_dir = pack_dir / "SPLIT"
+    if writer is None:
+        split_dir.mkdir(parents=True, exist_ok=True)
+    else:
+        writer.mkdir(split_dir, kind="durable", parents=True, exist_ok=True)
+
+    def section(paths: Sequence[str]) -> str:
+        out_lines: List[str] = []
+        for rel in paths:
+            src = pack_dir / rel
+            if not src.exists():
+                continue
+            text = read_text(src)
+            fence = choose_fence(text)
+            out_lines.append(f"## `{rel}`")
+            out_lines.append("")
+            out_lines.append(fence)
+            out_lines.append(text.rstrip("\n"))
+            out_lines.append(fence)
+            out_lines.append("")
+        return "\n".join(out_lines).rstrip() + "\n"
+
+    def is_track(path: str, track_dir: str) -> bool:
+        rel = path.replace("\\", "/")
+        if rel.startswith("repo/"):
+            rel = rel[5:]
+        return rel.startswith(f"{track_dir}/") or rel == track_dir
+
+    meta_dir = pack_dir / "meta"
+    meta_paths = sorted([f"meta/{p.name}" for p in meta_dir.iterdir() if p.is_file()]) if meta_dir.exists() else []
+
+    # Track 1: Foundations
+    t1 = sorted(p for p in included_repo_paths if is_track(p, "1_foundations"))
+    # Track 2: Substrate Expansion
+    t2 = sorted(p for p in included_repo_paths if is_track(p, "2_substrate_expansion"))
+    # Track 3: Physics / Complexity
+    t3 = sorted(p for p in included_repo_paths if is_track(p, "3_physics_complexity"))
+    # Track 4: Holographic
+    t4 = sorted(p for p in included_repo_paths if is_track(p, "4_holographic"))
+    # Track 5: Topological Proofs
+    t5 = sorted(p for p in included_repo_paths if is_track(p, "5_topological_proofs"))
+    # Track 6: Frontier Phases
+    t6 = sorted(p for p in included_repo_paths if is_track(p, "6_frontier_phases"))
+    # Track 7: Decoder
+    t7 = sorted(p for p in included_repo_paths if is_track(p, "7_decoder"))
+    # Docs, _lib, workspace, root files
+    infra = sorted(p for p in included_repo_paths if not any(
+        is_track(p, d) for d in ("1_foundations", "2_substrate_expansion",
+            "3_physics_complexity", "4_holographic", "5_topological_proofs",
+            "6_frontier_phases", "7_decoder")
+    ))
+
+    index_content = "\n".join(
+        [
+            "# CAT_CAS Pack Index",
+            "",
+            "This directory contains a generated snapshot of the CAT_CAS lab intended for LLM handoff.",
+            "",
+            "## Read order",
+            "1) `CAT-08_DOCS_AND_INFRA.md` (AGENTS.md, README.md, MANIFESTO.md, MASTER_REPORT.md, CAT_CAS_OS.md, PRIMER.md, _lib/)",
+            "2) `CAT-01_FOUNDATIONS.md` - Track 1: Reversible Computing & Landauer Basics (Exps 01-05)",
+            "3) `CAT-02_SUBSTRATE.md` - Track 2: Catalytic Memory & Inference Substrate (Exps 06-13)",
+            "4) `CAT-03_COMPLEXITY.md` - Track 3: Limits, Factorization, NP, Temporal (Exps 14-24)",
+            "5) `CAT-04_HOLOGRAPHIC.md` - Track 4: Lattice/Crypto, Graphs, Wormholes, MERA (Exps 25-33)",
+            "6) `CAT-05_TOPOLOGICAL.md` - Track 5: Zeta/RH, Halting Oracles, ToE (Exps 34-41)",
+            "7) `CAT-06_FRONTIER.md` - Track 6: Limits to Emergence Chain (Exps 42-48)",
+            "8) `CAT-07_DECODER.md` - Track 7: Decoder Theory + Physical Substrate (Exps 49-50)",
+            "",
+            "## Notes",
+            "- Single-file bundles available in `FULL/`.",
+            "- `meta/` contains PACK_INFO.json, REPO_STATE.json, and FILE_TREE.txt.",
+            "",
+        ]
+    )
+    if writer is None:
+        (split_dir / "CAT-00_INDEX.md").write_text(index_content, encoding="utf-8")
+    else:
+        writer.write_text(split_dir / "CAT-00_INDEX.md", index_content, encoding="utf-8")
+
+    sections = [
+        ("CAT-01_FOUNDATIONS.md", "# Track 1: Foundations (Reversible Computing & Landauer)\n\n", t1),
+        ("CAT-02_SUBSTRATE.md", "# Track 2: Substrate Expansion (Catalytic Memory & Inference)\n\n", t2),
+        ("CAT-03_COMPLEXITY.md", "# Track 3: Physics / Complexity (Limits, Factorization, NP, Temporal)\n\n", t3),
+        ("CAT-04_HOLOGRAPHIC.md", "# Track 4: Holographic (Lattice/Crypto, Graphs, Wormholes, MERA)\n\n", t4),
+        ("CAT-05_TOPOLOGICAL.md", "# Track 5: Topological Proofs (Zeta/RH, Halting Oracles, ToE)\n\n", t5),
+        ("CAT-06_FRONTIER.md", "# Track 6: Frontier Phases (Limits to Emergence Chain)\n\n", t6),
+        ("CAT-07_DECODER.md", "# Track 7: Decoder (Decoder Theory + Physical Substrate)\n\n", t7),
+        ("CAT-08_DOCS_AND_INFRA.md", "# Docs, Infrastructure & Meta\n\n", infra + meta_paths),
+    ]
+
+    for filename, header, paths in sections:
+        content = header + section(paths)
+        if writer is None:
+            (split_dir / filename).write_text(content, encoding="utf-8")
+        else:
+            writer.write_text(split_dir / filename, content, encoding="utf-8")

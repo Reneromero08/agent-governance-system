@@ -43,6 +43,7 @@ from .core import (
     PackScope,
     SCOPE_AGS,
     SCOPE_LAB,
+    SCOPE_CAT_CAS,
     hash_file,
     read_text,
     _canonical_json_bytes,
@@ -121,6 +122,26 @@ def _is_pruned_allowed_path(rel_path: str, *, scope: PackScope) -> bool:
         # LAB scope: include minimal navigation context
         # INCLUDE: AGS_ROADMAP_MASTER.md at root
         if rel_path == "AGS_ROADMAP_MASTER.md":
+            return True
+
+        return False
+
+    elif scope.key == SCOPE_CAT_CAS.key:
+        # CAT_CAS scope: include docs, manifests, and shared infrastructure
+        # INCLUDE: Root-level markdown (AGENTS.md, README.md, MANIFESTO.md, etc.)
+        if "/" not in rel_path and rel_path.endswith(".md"):
+            return True
+
+        # INCLUDE: docs/** (navigation, conventions, audit ledger)
+        if parts[0] == "docs":
+            return True
+
+        # INCLUDE: _lib/** (shared infrastructure primitives)
+        if parts[0] == "_lib":
+            return True
+
+        # INCLUDE: conftest.py
+        if rel_path == "conftest.py":
             return True
 
         return False
@@ -263,6 +284,8 @@ def write_pruned_pack(
             _write_pruned_index_ags(staging_dir, project_root, manifest["entries"], writer=writer)
         elif scope.key == SCOPE_LAB.key:
             _write_pruned_index_lab(staging_dir, project_root, manifest["entries"], writer=writer)
+        elif scope.key == SCOPE_CAT_CAS.key:
+            _write_pruned_index_cat_cas(staging_dir, project_root, manifest["entries"], writer=writer)
 
         # Atomic rename: staging -> PRUNED with backup-on-fallback
         # Policy: Backup existing PRUNED/, swap in staging, cleanup backup on success
@@ -504,3 +527,79 @@ def _write_pruned_index_lab(
             (pruned_dir / "LAB-01_NAVIGATION.md").write_text(nav_content, encoding="utf-8")
         else:
             writer.write_text(pruned_dir / "LAB-01_NAVIGATION.md", nav_content, encoding="utf-8")
+
+
+def _write_pruned_index_cat_cas(
+    pruned_dir: Path,
+    project_root: Path,
+    entries: List[Dict[str, Any]],
+    writer: Optional[PackerWriter] = None,
+) -> None:
+    """Write CAT_CAS PRUNED index files (docs, manifests, _lib infrastructure)."""
+
+    def section(title: str, paths: Sequence[str]) -> str:
+        lines = [f"# {title}", ""]
+        for rel in paths:
+            src = project_root / rel
+            if not src.exists():
+                continue
+            text = read_text(src)
+            lines.append(f"## `{rel}` ({src.stat().st_size:,} bytes)")
+            lines.append("")
+            lines.append("```")
+            lines.append(text.rstrip("\n"))
+            lines.append("```")
+            lines.append("")
+        return "\n".join(lines).rstrip() + "\n"
+
+    # Group by category
+    root_md = [e["path"] for e in entries if "/" not in e["path"] and e["path"].endswith(".md")]
+    docs_paths = [e["path"] for e in entries if e["path"].startswith("docs/")]
+    lib_paths = [e["path"] for e in entries if e["path"].startswith("_lib/")]
+    conftest = [e["path"] for e in entries if e["path"] == "conftest.py"]
+
+    index_content = "\n".join(
+        [
+            "# CAT_CAS Pack Index (PRUNED)",
+            "",
+            "This directory contains a minimal planning context for CAT_CAS navigation.",
+            "",
+            "## Contents",
+            "",
+            "- `CAT-01_MANIFESTS.md` - Root manifests (AGENTS.md, README.md, MANIFESTO.md, etc.)",
+            "- `CAT-02_DOCS.md` - Navigation, conventions, audit ledger",
+            "- `CAT-03_INFRA.md` - Shared infrastructure primitives (_lib/)",
+            "",
+            "## Notes",
+            "- PRUNED is minimal and does not include full experiment source code.",
+            "- Use FULL/ or SPLIT/ for complete CAT_CAS access.",
+            "- Track experiments (01-50) are excluded from PRUNED by design.",
+            "",
+        ]
+    )
+    if writer is None:
+        (pruned_dir / "CAT-00_INDEX.md").write_text(index_content, encoding="utf-8")
+    else:
+        writer.write_text(pruned_dir / "CAT-00_INDEX.md", index_content, encoding="utf-8")
+
+    if root_md:
+        content = section("Root Manifests", sorted(root_md))
+        if writer is None:
+            (pruned_dir / "CAT-01_MANIFESTS.md").write_text(content, encoding="utf-8")
+        else:
+            writer.write_text(pruned_dir / "CAT-01_MANIFESTS.md", content, encoding="utf-8")
+
+    if docs_paths:
+        content = section("Docs (Navigation, Conventions, Audit Ledger)", sorted(docs_paths))
+        if writer is None:
+            (pruned_dir / "CAT-02_DOCS.md").write_text(content, encoding="utf-8")
+        else:
+            writer.write_text(pruned_dir / "CAT-02_DOCS.md", content, encoding="utf-8")
+
+    infra_all = sorted(lib_paths + conftest)
+    if infra_all:
+        content = section("Shared Infrastructure (_lib/, conftest.py)", infra_all)
+        if writer is None:
+            (pruned_dir / "CAT-03_INFRA.md").write_text(content, encoding="utf-8")
+        else:
+            writer.write_text(pruned_dir / "CAT-03_INFRA.md", content, encoding="utf-8")

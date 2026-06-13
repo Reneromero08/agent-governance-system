@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Any, Dict, Optional, Sequence
 
 import json
-from .core import PackScope, SCOPE_AGS, SCOPE_LAB, read_text, PROJECT_ROOT
+from .core import PackScope, SCOPE_AGS, SCOPE_LAB, SCOPE_CAT_CAS, read_text, PROJECT_ROOT
 from .proofs import get_lite_proof_summary
 from .firewall_writer import PackerWriter
 
@@ -91,6 +91,30 @@ def write_split_pack_lite(pack_dir: Path, *, scope: PackScope, project_root: Pat
                     "1) `repo/THOUGHT/LAB/`",
                     "2) `meta/PACK_INFO.json`",
                     "3) `meta/FILE_TREE.txt` and `meta/FILE_INDEX.json`",
+                    "",
+                ]
+            ),
+        )
+
+    elif scope.key == SCOPE_CAT_CAS.key:
+        write(
+            lite_dir / "CAT-00_INDEX.md",
+            "\n".join(
+                [
+                    "# CAT_CAS Pack Index (LITE)",
+                    "",
+                    "This directory contains a compressed, discussion-first map of the pack.",
+                    "",
+                    "## Read order",
+                    "1) `repo/AGENTS.md` - Agent phase-lock protocol",
+                    "2) `repo/README.md` - Experiment inventory",
+                    "3) `repo/MANIFESTO.md` - Operating contract",
+                    "4) `repo/MASTER_REPORT.md` - Truth ledger",
+                    "5) `repo/CAT_CAS_OS.md` - Agent OS",
+                    "6) `repo/PRIMER.md` - Reading order",
+                    "7) `repo/_lib/` - Shared infrastructure",
+                    "8) `meta/PACK_INFO.json`",
+                    "9) `meta/FILE_TREE.txt` and `meta/FILE_INDEX.json`",
                     "",
                 ]
             ),
