@@ -1,0 +1,84 @@
+{
+  "n_instances": 300,
+  "n_shuffles": 25,
+  "n_values": [
+    8,
+    10,
+    12
+  ],
+  "rows": [
+    {
+      "auc": 0.42851217402051667,
+      "expected": "FAIL_CHANCE",
+      "matches_expected": true,
+      "max_fold_delta": 0.0,
+      "n": 8,
+      "name": "transient_public",
+      "random_fold_auc": 0.5188891360771227,
+      "random_fold_null_95": 0.5750684958595971,
+      "seconds": 2.69720458984375,
+      "shuffle_null_95": 0.5741091583240638,
+      "smuggle_reason": "none",
+      "verdict": "FAIL_CHANCE"
+    },
+    {
+      "auc": 0.4334455667789001,
+      "expected": "FAIL_CHANCE",
+      "matches_expected": true,
+      "max_fold_delta": 0.0,
+      "n": 10,
+      "name": "transient_public",
+      "random_fold_auc": 0.5047914967247559,
+      "random_fold_null_95": 0.5605848473612656,
+      "seconds": 2.9858784675598145,
+      "shuffle_null_95": 0.556094276094276,
+      "smuggle_reason": "none",
+      "verdict": "FAIL_CHANCE"
+    },
+    {
+      "auc": 0.5114490174267706,
+      "expected": "FAIL_CHANCE",
+      "matches_expected": true,
+      "max_fold_delta": 0.0,
+      "n": 12,
+      "name": "transient_public",
+      "random_fold_auc": 0.4400444938820912,
+      "random_fold_null_95": 0.5624471635150167,
+      "seconds": 4.939432859420776,
+      "shuffle_null_95": 0.5859495241626498,
+      "smuggle_reason": "none",
+      "verdict": "FAIL_CHANCE"
+    },
+    {
+      "auc": 1.0,
+      "expected": "FAIL_SMUGGLE",
+      "matches_expected": true,
+      "max_fold_delta": 1.0,
+      "n": 8,
+      "name": "transient_smuggle_control",
+      "random_fold_auc": 1.0,
+      "random_fold_null_95": 0.5406981834432815,
+      "seconds": 2.6932311058044434,
+      "shuffle_null_95": 0.5372006774090107,
+      "smuggle_reason": "exact_d_invariance_delta>0",
+      "verdict": "FAIL_SMUGGLE"
+    },
+    {
+      "auc": 1.0,
+      "expected": "FAIL_SMUGGLE",
+      "matches_expected": true,
+      "max_fold_delta": 1.0,
+      "n": 10,
+      "name": "transient_smuggle_control",
+      "random_fold_auc": 1.0,
+      "random_fold_null_95": 0.5472696349118068,
+      "seconds": 3.0761101245880127,
+      "shuffle_null_95": 0.5679297753807558,
+      "smuggle_reason": "exact_d_invariance_delta>0",
+      "verdict": "FAIL_SMUGGLE"
+    }
+  ],
+  "seed": 5060613,
+  "status": "TRANSIENT_FOLD_ODD_PROBE",
+  "verdict": "TRANSIENT_PUBLIC_FAIL_CHANCE__NO_FOLD_ODD_FUNCTIONAL_FOUND"
+}
