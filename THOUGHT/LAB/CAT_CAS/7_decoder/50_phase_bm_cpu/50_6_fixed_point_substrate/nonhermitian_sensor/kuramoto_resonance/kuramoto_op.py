@@ -25,6 +25,9 @@ THESIS UNDER TEST (Phase 6 frontier brief):
     - O_quadrature_smuggle: reads the genuine sin(2 pi k d / N) from hidden d. A SMUGGLE;
       MUST lift AUC and MUST be caught (delta>0). Proves the harness can SEE orientation
       when it is present (sensitivity control).
+    - Null/baseline discipline is supplied by no_smuggle_gate.py: honest operators are
+      checked against chance/null orientation recovery, while the smuggle control is the
+      positive baseline that must fail the public-data seal.
 
 Contract (no_smuggle_gate.py): O(instance) -> 1D float vector. instance keys: k, b, N,
   d (HIDDEN; only the smuggle control may read it), n. Honest candidates read only

@@ -2,6 +2,10 @@
 """aggregate_phase5_9.py — Cross-run Phase 5.9 master verdict aggregator.
 
 Computes gates, classifies instability-edge regime, produces master verdict CSV.
+Statistics emitted: run counts, restoration failure counts, R² fits,
+correlations, model-win counts, and effect-size style spreads. This aggregator
+does not compute p_value/CI; it gates on deterministic cross-run statistics
+already present in the run CSVs.
 """
 
 import csv, json, os, sys, argparse

@@ -1,3 +1,10 @@
+"""Deterministic post-recovery P-state register verification.
+
+Statistics note: this emits exact MSR readback fields from one recovery
+snapshot. It is a deterministic identity/readback check with no empirical
+variance; p_value/CI/std/effect size are not claimed for this probe.
+"""
+
 import struct, os, subprocess
 
 print("=== POST-RECOVERY P-STATE VERIFICATION ===")

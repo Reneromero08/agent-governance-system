@@ -1,3 +1,10 @@
+"""Deterministic VID/NB state inventory.
+
+Statistics note: this is a one-snapshot register inventory and derived voltage
+decode. It reports exact fields, not repeated-trial inference; p_value/CI/std/
+effect size are not applicable here.
+"""
+
 import struct, os, time
 
 print("=== ATTACK 1: P-STATE LIMIT ===")

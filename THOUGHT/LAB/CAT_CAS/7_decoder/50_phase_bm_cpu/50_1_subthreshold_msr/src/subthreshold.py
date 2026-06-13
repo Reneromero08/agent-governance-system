@@ -1,3 +1,10 @@
+"""Single-shot subthreshold P-state write/readback probe.
+
+Statistics note: this script tests one deterministic MSR write/readback path and
+core responsiveness. It reports decoded register values from one attempt; no
+empirical variance is claimed, so p_value/CI/std/effect size are not applicable.
+"""
+
 import struct, os, time, subprocess
 
 subthreshold = 0x8000013A40002C00

@@ -1,3 +1,11 @@
+"""Deterministic MSR readback probe.
+
+Statistics note: this is a single hardware register readback/bit-decode pass,
+not a population experiment. The reported voltages are decoded fields from one
+snapshot; no empirical variance is claimed, so p_value/CI/std/effect size are
+not applicable here.
+"""
+
 import struct, os
 
 print("=== PATH A: DECODE AND PROBE HWCR BITS ===")

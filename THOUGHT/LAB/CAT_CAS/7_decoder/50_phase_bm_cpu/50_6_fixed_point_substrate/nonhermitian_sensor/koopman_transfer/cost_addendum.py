@@ -5,6 +5,8 @@ The make-or-break: is preparing H and reading its dominant spectral feature poly
 or 2^n? The main run's automatic slope was overhead-dominated at small N. Here we
 push to larger n, average many trials, and report per-step ratios (a ratio ~4 per
 delta_n=2 means cost ~ N = 2^n). Also a robust point-gap winding-contour timing.
+Statistics emitted: medians across trials, asymptotic log2-time slopes, and
+per-step effect-size ratios. No p_value/CI is claimed by this cost addendum.
 """
 import os, sys, time, json
 import numpy as np

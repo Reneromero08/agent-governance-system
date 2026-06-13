@@ -1,3 +1,10 @@
+"""Single-shot P4 definition transition probe.
+
+Statistics note: this reports exact MSR readback fields for one transition
+attempt and deterministic pass/fail state. It is not a sampled experiment;
+p_value/CI/std/effect size are not claimed by this script.
+"""
+
 import struct, os, time, subprocess
 
 # Sub-threshold P4: FID=0x00 DID=3 VID=0x3A (~200MHz @ ~0.825V)

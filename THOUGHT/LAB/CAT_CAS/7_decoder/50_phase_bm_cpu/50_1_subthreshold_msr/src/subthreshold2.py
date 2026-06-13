@@ -1,3 +1,10 @@
+"""Single-shot COFVID control register probe.
+
+Statistics note: this is a deterministic register write/readback and sensor
+snapshot. It does not claim sampled inference; p_value/CI/std/effect size are
+not applicable unless wrapped by a repeated-trial harness.
+"""
+
 import struct, os, time, subprocess
 
 # Sub-threshold: FID=0x00, DID=0x02 (div by 4), VID=0x3A (~0.825V)

@@ -4,6 +4,9 @@ run_all.py - driver for the IN-BLACK-HOLE EIGEN_BUDDY campaign (Exp 50.14).
 Runs STEP A (EIGEN_BUDDY = QFT rings the period) and STEP B (does any fixed in-black-hole
 operator ring the orientation, and at what cost), writes black_hole_eigen_result.json, and
 prints the cost-scaling curve. Foreground, bounded, all seeds recorded. ASCII only.
+Statistics emitted: exact seeds, fractions, AUC, fidelity, IPR, fit R²/slope,
+sample-cost ratios, and no-smuggle sensitivity controls. The gate reports
+deterministic cross-seed summaries; no p_value/CI is claimed here.
 """
 import os
 import sys

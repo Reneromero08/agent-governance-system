@@ -8,6 +8,8 @@ If targeted ~ other, the eviction sets are NOT colliding in shared L3 and there
 is no carrier -- a measurement/geometry issue, not a clean physics negative.
 
 Also report the raw per-set value distribution to see absolute latency scale.
+Statistics emitted: median, mean, min/max, per-mode n, and targeted-minus-other
+effect size. This diagnostic is descriptive and does not compute p_value/CI.
 
 Usage: diag_displacement.py <csv>
 """

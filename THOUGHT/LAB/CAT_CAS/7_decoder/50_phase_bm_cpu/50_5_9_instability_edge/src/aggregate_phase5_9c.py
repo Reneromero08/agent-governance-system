@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""aggregate_phase5_9c.py — Phase 5.9C 9-gate master verdict aggregator."""
+"""aggregate_phase5_9c.py — Phase 5.9C 9-gate master verdict aggregator.
+
+Statistics emitted: run counts, correlation coefficients, spread/effect-size
+fields, gate counts, and deterministic edge/flicker tallies. This aggregator
+does not compute p_value/CI; it summarizes the cross-run statistics already
+written by the harness.
+"""
 
 import csv, json, os, sys, argparse
 import numpy as np
