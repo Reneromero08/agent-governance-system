@@ -1,5 +1,5 @@
 {
-  "task": "Verify the phase 5.9 area-law metric in THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/phase5_9/ against the reports; note any gaps.",
+  "task": "Verify the phase 5.9 area-law metric in THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/phase5_9/ against the reports; note any gaps.",
   "max_turns": 8,
   "acceptance_criteria": "Every phase 5.9 artifact cross-checked; gaps listed or none found.",
 
@@ -9,7 +9,7 @@
   "execution_required": false,
   "_comment_lane": "Default runs on the PERSISTENT reasoning lane (/v1/responses named conversation = canonical memory). Set execution_required=true to run code/tests on the /v1/runs execution lane; the result is summarized back into the persistent conversation.",
 
-  "verify_command": "python -m pytest THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/phase5_9/test_area_law.py -q",
+  "verify_command": "python -m pytest THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/phase5_9/test_area_law.py -q",
   "verify_timeout": 180,
   "_comment_verify": "Optional deterministic gate. Use a PATH-resolved 'python'/'pytest' (NOT a full path) so a space in the repo path does not break the shell.",
 
@@ -19,6 +19,6 @@
   "auto_revert": false,
   "_comment_audit": "Postflight scope audit (observe/revert AFTER the turn, not a pre-write block). auto_revert=true reverts ONLY agent-reported files outside write scope.",
 
-  "write_roots": ["THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/phase5_9"],
-  "read_roots": ["THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/phase5_9"]
+  "write_roots": ["THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/phase5_9"],
+  "read_roots": ["THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/phase5_9"]
 }

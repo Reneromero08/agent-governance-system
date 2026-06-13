@@ -92,8 +92,8 @@ python scripts/hermes_harness.py run \
   --task "Double check logic, engineering, and integrity. Harden results." \
   --mode persistent_worker_verify \
   --conversation "ccc:ags:phase58" \
-  --write-root "THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/PHASE5_8_BARE_METAL_BOUNDARY" \
-  --read-root "THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/PHASE5_8_BARE_METAL_BOUNDARY" \
+  --write-root "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/PHASE5_8_BARE_METAL_BOUNDARY" \
+  --read-root "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/PHASE5_8_BARE_METAL_BOUNDARY" \
   --search-policy artifact_only \
   --branch-policy forbidden
 ```
@@ -120,8 +120,8 @@ Good:
 ```
 TASK: Double check logic, engineering, and integrity for the previous deliverable only.
 
-WRITE_SCOPE: THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/PHASE5_8_BARE_METAL_BOUNDARY
-READ_SCOPE: THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/PHASE5_8_BARE_METAL_BOUNDARY
+WRITE_SCOPE: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/PHASE5_8_BARE_METAL_BOUNDARY
+READ_SCOPE: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/PHASE5_8_BARE_METAL_BOUNDARY
 SEARCH_POLICY: artifact_only
 BRANCH_POLICY: forbidden
 
@@ -187,10 +187,10 @@ At the end of every goal, produce an artifact manifest so follow-ups can determi
 {
   "goal_id": "phase58",
   "conversation": "ccc:ags:phase58",
-  "created_files": ["THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/PHASE5_8_BARE_METAL_BOUNDARY/..."],
-  "modified_files": ["THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/SSH_ROADMAP.md"],
-  "write_scope": ["THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/PHASE5_8_BARE_METAL_BOUNDARY"],
-  "read_scope": ["THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/PHASE5_8_BARE_METAL_BOUNDARY"],
+  "created_files": ["THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/PHASE5_8_BARE_METAL_BOUNDARY/..."],
+  "modified_files": ["THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/ROADMAP.md"],
+  "write_scope": ["THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/PHASE5_8_BARE_METAL_BOUNDARY"],
+  "read_scope": ["THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/PHASE5_8_BARE_METAL_BOUNDARY"],
   "forbidden_roots": ["CAPABILITY", "TOOLS", ".git", ".hermes"]
 }
 ```
@@ -234,8 +234,8 @@ python scripts/hermes_harness.py run \
   --session-id "a7876494-2178-4ab4-942f-2f77e9f4344e" \
   --task "Double check logic, engineering, and integrity. Harden results." \
   --mode persistent_worker_verify \
-  --write-root "THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/phase5_9" \
-  --read-root "THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/phase5_9" \
+  --write-root "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/phase5_9" \
+  --read-root "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/phase5_9" \
   --search-policy artifact_only \
   --branch-policy forbidden
 

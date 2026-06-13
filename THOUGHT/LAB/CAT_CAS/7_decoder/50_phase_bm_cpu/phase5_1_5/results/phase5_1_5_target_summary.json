@@ -1,0 +1,94 @@
+{
+  "verdict": "PHASE5_1_5_SOFTWARE_FOUNDATION_COMPLETE__PHYSICAL_INSTRUMENTATION_REQUIRED",
+  "seed": 206031441,
+  "trials": 96,
+  "tape_size": 4096,
+  "restored": 96,
+  "restore_rate": 1.0,
+  "logical_bits_erased_reversible_max": 0,
+  "logical_bits_erased_irreversible_control_floor": 0,
+  "logical_bits_erased_irreversible_control_median": 4105.0,
+  "logical_bits_erased_irreversible_control_nonzero_rate": 0.9895833333333334,
+  "forward_ns_median": 610196.0,
+  "reverse_ns_median": 608799.5,
+  "arrow_ratio_median": 0.9968746653465286,
+  "arrow_ratio_mean": 0.9984322371087159,
+  "arrow_ratio_stdev": 0.05057814831849648,
+  "total_reversible_byte_touches": 147415,
+  "phase_capacity_bits_model": 48.0,
+  "cyclic_throughput_over_model_capacity": 24569.166666666668,
+  "rank1_control": {
+    "oscillators": 6,
+    "master_corr_floor": 0.9999855353918256,
+    "null_abs_corr_ceiling": 0.9829240612149878,
+    "residual_ratio_ceiling": 0.0053771563744956456,
+    "null_residual_ratio_floor": 0.1839847940016433,
+    "rank1_control_pass": true,
+    "master_corrs": [
+      0.9999991012731176,
+      0.9999971488255045,
+      0.9999941565388627,
+      0.9999915505945469,
+      0.999987274235831,
+      0.9999855353918256
+    ],
+    "null_abs_corrs": [
+      0.9548414638375818,
+      0.7042948222779084,
+      0.3052439675188626,
+      0.9829240612149878,
+      0.8425353607596798,
+      0.9187379023086357
+    ],
+    "null_residual_ratios": [
+      0.2971153035338083,
+      0.7096999754440484,
+      0.9514078440224242,
+      0.1839847940016433,
+      0.538222617660481,
+      0.3946467434500724
+    ]
+  },
+  "noise_only": {
+    "windows": 512,
+    "steps_per_window": 128,
+    "lock_threshold": 0.96,
+    "spontaneous_lock_windows": 12,
+    "spontaneous_lock_rate": 0.0234375,
+    "best_order_parameter": 0.9961193776860293,
+    "median_best_order_parameter": 0.7845944617514945,
+    "noise_only_transient_candidate": true
+  },
+  "instrumentation": {
+    "host_os": "posix",
+    "available_power_artifacts": [
+      "/sys/class/hwmon",
+      "/dev/cpu/0/msr"
+    ],
+    "rapl_energy_uj_present": false,
+    "msr_device_present": true,
+    "external_meter_artifact_present": false,
+    "needed_for_physical_5_1": [
+      "wall or EPS12V joule trace aligned to trial timestamps",
+      "or package-energy counter with documented K10 support and calibration",
+      "ambient or die temperature trace for k_B*T*ln(2)"
+    ],
+    "needed_for_physical_5_2": [
+      "die/package geometry assumptions",
+      "energy and observation-window trace",
+      "accepted mapping from tape throughput to physical information capacity"
+    ],
+    "needed_for_physical_5_4_5_5": [
+      "live oscillator phase traces from at least six channels",
+      "controlled coupling-on/off runs",
+      "noise-only locked-state detector with shuffled-window null"
+    ]
+  },
+  "phase_labels": {
+    "5.1": "PHASE5_1_ZERO_LOGICAL_ERASURE_CONFIRMED__ENERGY_TRACE_REQUIRED",
+    "5.2": "PHASE5_2_CYCLIC_THROUGHPUT_ACCOUNTED__PHYSICAL_BOUND_TRACE_REQUIRED",
+    "5.3": "PHASE5_3_FORWARD_REVERSE_TIMING_ASYMMETRY_MEASURED",
+    "5.4": "PHASE5_4_RANK1_CONTROL_MODEL_PASS__LIVE_OSCILLATOR_TRACE_REQUIRED",
+    "5.5": "PHASE5_5_NOISE_ONLY_TRANSIENT_LOCK_MODEL_CANDIDATE__LIVE_NOISE_TRACE_REQUIRED"
+  }
+}

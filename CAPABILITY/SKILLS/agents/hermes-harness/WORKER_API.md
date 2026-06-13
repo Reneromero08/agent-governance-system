@@ -59,8 +59,8 @@ Manager Agent
   "session_key": "agent:ags:phase58",
   "execution_transport": "runs",
   "workspace": "D:/CCC 2.0/AI/agent-governance-system",
-  "read_roots": ["THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/PHASE5_8_BARE_METAL_BOUNDARY"],
-  "write_roots": ["THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/PHASE5_8_BARE_METAL_BOUNDARY"],
+  "read_roots": ["THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/PHASE5_8_BARE_METAL_BOUNDARY"],
+  "write_roots": ["THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/PHASE5_8_BARE_METAL_BOUNDARY"],
   "search_policy": "artifact_only",
   "branch_policy": "forbidden"
 }

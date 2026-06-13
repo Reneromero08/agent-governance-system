@@ -9,7 +9,7 @@ this page is for navigation. For the full experiment-to-path index see
 [INDEX.md](INDEX.md).
 
 Legend: **[LB]** load-bearing (external code in EIGEN_BUDDY/HOLO depends on its
-path) · **[FROZEN]** active work, do not touch · **[STUB]** roadmap only, no code yet.
+path) · **[STUB]** roadmap only, no code yet.
 
 ---
 
@@ -19,7 +19,7 @@ Catalytic basics → scaling the substrate to real inference → pushing physica
 limits and factorization → holographic/lattice structure → topological proofs →
 frontier domain phases (limits: event-horizon; proof-power: math; emergence
 built atom-up: atom -> energy -> chem -> bio -> consciousness as final boss) →
-the wall: decoder theory (49) + physical substrate crossing (50 ssh).
+the wall: decoder theory (49) + physical substrate crossing (50 bm_cpu).
 
 ---
 
@@ -97,7 +97,7 @@ the wall: decoder theory (49) + physical substrate crossing (50 ssh).
 |---|------------|------|
 | 42 | computational_event_horizon | Floating-point singularities at the event horizon. Sub-tracks: `01_core` (base 1-11), `02_ultra` (speculative 12-19), `03_black_holes` (20-23), `04_cosmos` (24-28). |
 | 43 | phase_math | Millennium-problem oracles: collatz, navier-stokes, erdos, riemann, P-vs-NP, yang-mills. |
-| 44 | phase_atom | Standard-model oracles: nucleus, electron edge states, pauli, LHC, higgs, quark confinement. **Note:** number 44 is transiently shared with the frozen root `44_phase_ssh_linux` (heading to 50); see CONVENTIONS.md §10. |
+| 44 | phase_atom | Standard-model oracles: nucleus, electron edge states, pauli, LHC, higgs, quark confinement. |
 | 45 | phase_energy **[STUB]** | Energy-extraction roadmap; no code yet. |
 | 46 | phase_chem **[STUB]** | Topological-chemistry roadmap; no code yet. |
 | 47 | phase_bio | Biology oracles: protein folding, folding pathway, prion, genetic code, neural binding, morphogenesis (holds the cell CSV). |
@@ -108,4 +108,4 @@ the wall: decoder theory (49) + physical substrate crossing (50 ssh).
 | # | Experiment | What |
 |---|------------|------|
 | 49 | the_decoder | Extractive proof + decodability boundary (14 sub-experiments): locates the irreducible wall at lattice hardness. |
-| 50 | phase_ssh_linux **[FROZEN]** | Physical test of crossing the decoder wall; currently at the lab root as `44_phase_ssh_linux` until unfrozen. Destination: `7_decoder/50_phase_ssh_linux`. |
+| 50 | phase_bm_cpu | Physical test of crossing the decoder wall (bare-metal CPU substrate). Lives at `7_decoder/50_phase_bm_cpu`. |

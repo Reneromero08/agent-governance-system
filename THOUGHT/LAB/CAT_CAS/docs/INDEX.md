@@ -87,9 +87,4 @@ Every experiment to its track path and primary report. See [MAP.md](MAP.md) and 
 | Experiment | Path | Primary doc |
 |---|---|---|
 | 49_the_decoder | `7_decoder/49_the_decoder/` | [FABLE_INTERFACE_REPORT.md](7_decoder/49_the_decoder/FABLE_INTERFACE_REPORT.md) |
-
-## Frozen (not in a track)
-
-| Experiment | Path | Note |
-|---|---|---|
-| 44_phase_ssh_linux | `44_phase_ssh_linux/` | Active work; -> 7_decoder/50_phase_ssh_linux when done |
+| 50_phase_bm_cpu | `7_decoder/50_phase_bm_cpu/` | [REPORT.md](7_decoder/50_phase_bm_cpu/REPORT.md) |

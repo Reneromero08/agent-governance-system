@@ -36,7 +36,7 @@ range** so it is never ambiguous:
 | `4_holographic` | 25–33 | lattice/crypto, graphs, wormholes, MERA |
 | `5_topological_proofs` | 34–41 | zeta/RH, halting oracles, ToE |
 | `6_frontier_phases` | 42–48 | limits (event-horizon) -> proof-power (math) -> emergence built atom-up (atom, energy, chem, bio) -> final boss (consciousness) |
-| `7_decoder` | 49–50 | the decoder theory (49) + physical substrate crossing (50 ssh, FROZEN at root) |
+| `7_decoder` | 49–50 | the decoder theory (49) + physical substrate crossing (50 bm_cpu) |
 
 New experiments append to the highest track or open `8_*` — never renumber 01–50.
 
@@ -45,7 +45,7 @@ New experiments append to the highest track or open `8_*` — never renumber 01�
 - `NN_snake_case_name` — two-digit zero-padded number + lowercase snake-case name.
 - The **global number (01–50) is permanent and load-bearing** (the README,
   MASTER_REPORT, and the audit ledger reference experiments by number, e.g.
-  "Exp 16", "Exp 44 Phase 6"). Moving an experiment into a track changes its
+  "Exp 16", "Exp 50 Phase 6"). Moving an experiment into a track changes its
   *path*, never its number.
 - **Collision suffix:** when one number forks into sibling *experiments*, append a
   letter to the number: `NNx_name`. Resolved live collisions:
@@ -123,15 +123,9 @@ requirement in that experiment's `REPORT.md` and in [STORAGE.md](STORAGE.md)
 (source, size, regeneration command, why untracked). Never committed, never moved
 out of the lab.
 
-## 10. The frozen exception
+## 10. Placement note (formerly the frozen exception)
 
-`44_phase_ssh_linux/` is active work. While frozen it stays at the CAT_CAS root
-and is exempt from every convention above. Its permanent destination is
-`7_decoder/50_phase_ssh_linux` (the physical test of crossing the decoder wall);
-it will move there when the owner declares it done.
-
-**Transient number collision:** During the freeze, experiment number 44 is used
-by two things simultaneously: `6_frontier_phases/44_phase_atom` (the live
-experiment) and the frozen root `44_phase_ssh_linux` (heading to 50). This is
-intentional and temporary. Once ssh unfreezes and moves to `7_decoder/50_phase_ssh_linux`,
-the collision disappears.
+`50_phase_bm_cpu` has been placed at `7_decoder/50_phase_bm_cpu` (the physical
+test of crossing the decoder wall on bare-metal CPU substrate). It is no longer
+frozen at the CAT_CAS root. Experiment number 44 belongs solely to
+`6_frontier_phases/44_phase_atom`; the transient number collision is resolved.

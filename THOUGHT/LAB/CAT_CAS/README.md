@@ -98,7 +98,7 @@ This is achieved using **reversible computing**:
 | 5D Floquet Oracle | `40_5d_floquet_oracle/` | PyTorch | DTC pi-mode melting |
 | ToE Bulletproof | `41_toe_bulletproof/` | PyTorch | TM chain, cybernetic loop, 6 concerns |
 | Computational Event Horizon | `42_computational_event_horizon/` | mpmath + Rust | Floating-point black holes, ULTRA shellcode, COSMOS dark matter, Hawking evaporation |
-| The Decoder | `49_the_decoder/` | numpy/torch | **CLOSED OUT.** Decoder proven EXTRACTIVE (not lookup); decodable = abelian-HSP + topological invariants; wall mapped to bedrock = class-group **vectorization** / isogeny (CSIDH) hardness; **Mythos (Fable) call done** (no field-only catalyst crosses); boundary = the catalytic tape (entropy); crossing is a SUBSTRATE event relocated to Exp 44 (5.10 -> Phase 6). Not "the wall holds" - hypothesis stays open at the substrate. |
+| The Decoder | `49_the_decoder/` | numpy/torch | **CLOSED OUT.** Decoder proven EXTRACTIVE (not lookup); decodable = abelian-HSP + topological invariants; wall mapped to bedrock = class-group **vectorization** / isogeny (CSIDH) hardness; **Mythos (Fable) call done** (no field-only catalyst crosses); boundary = the catalytic tape (entropy); crossing is a SUBSTRATE event relocated to Exp 50 (5.10 -> Phase 6). Not "the wall holds" - hypothesis stays open at the substrate. |
 
 ---
 
@@ -519,7 +519,6 @@ This is achieved using **reversible computing**:
 - **What**: Oracle treatments of standard-model / nuclear physics problems.
 - **Sub-experiments**: `44_1` nucleus, `44_2` electron edge states, `44_3` pauli, `44_4` LHC overflow, `44_5` higgs, `44_6` quark confinement.
 - **Key files**: `MASTER_REPORT_EXP_44.md`.
-- **Note**: Experiment 44 is transiently shared with the frozen root `44_phase_ssh_linux` (heading to Exp 50). See Exp 50 and [`docs/CONVENTIONS.md`](docs/CONVENTIONS.md) §10.
 
 ### 45: Phase Energy — Energy Extraction (STUB)
 **Dir**: `45_phase_energy/` | **Entry**: roadmap only
@@ -555,11 +554,9 @@ This is achieved using **reversible computing**:
 - **Brick 3**: emits `MYTHOS_SANDBOX.md` (is the lattice barrier itself crossable?) and `EXP44_PHASE6_HANDOFF.md` (decodable target for silicon). Reports: `REPORT_THE_DECODER.md`, `VERIFICATION_REPORT.md`, `ROADMAP.md`.
 - **Why it matters**: the decodable class = **{abelian Hidden Subgroup Problem} U {topological invariants of a poly-size operator}**; the irreducible boundary of holographic computing is **lattice hardness** — exactly where Exp 25 (LWE/SVP) and Exp 31 (graph-iso) claim to break things, so those claims now sit on the located bedrock.
 
-### 50: Phase SSH / Linux Substrate Push (ACTIVE / FROZEN)
-**Dir**: `44_phase_ssh_linux/` (root, frozen) -> `7_decoder/50_phase_ssh_linux` (destination) | **Entry**: live experiment
-- **What**: Physical / SSH-Linux substrate push — the attempt to cross the located lattice wall on real silicon (the substrate event handed off from Exp 49 / the decoder). This is the **live experiment**; it stays at the CAT_CAS root as `44_phase_ssh_linux` and is exempt from the lab's layout conventions until the owner declares it done, at which point it moves to `7_decoder/50_phase_ssh_linux`. Internals are intentionally not detailed here — see the experiment directory and its in-tree reports.
-- **Status**: **[FROZEN]** — active work, do not reorganize.
-- **Number collision note**: while frozen, the number 44 is transiently used by both this experiment (root) and Exp 44 Phase Atom (in `6_frontier_phases/`). This is documented in [`docs/CONVENTIONS.md`](docs/CONVENTIONS.md) §10.
+### 50: Phase BM CPU — Bare-Metal CPU Substrate Push
+**Dir**: `7_decoder/50_phase_bm_cpu/` | **Entry**: live experiment
+- **What**: Physical bare-metal CPU substrate push — the attempt to cross the located lattice wall on real silicon (the substrate event handed off from Exp 49 / the decoder). See the experiment directory and its in-tree reports for details.
 
 ---
 

@@ -1,0 +1,32 @@
+{
+  "all_rows_restore": true,
+  "gates": {
+    "all_rows_restore": true,
+    "phase_recovered_gt_0_30": true,
+    "pseudo_declared_match_le_0_35": false,
+    "pseudo_reject_floor_ge_0_95": true,
+    "real_accuracy_ge_0_60": true,
+    "real_mode_floor_ge_0_45": true,
+    "real_vs_pseudo_floor_ge_0_95": false,
+    "wrong_actual_match_ge_0_60": true,
+    "wrong_declared_match_le_0_20": true
+  },
+  "input": "THOUGHT/LAB/CAT_CAS/50_phase_bm_cpu/cross_core_wormhole/slot2_pdn/matrix_v2s3_seed3.csv",
+  "minham": 7,
+  "nbin": 12,
+  "phase_corr_null": 0.05720738065453913,
+  "phase_corr_true": 0.9998580616905606,
+  "phase_delta": 0.9426506810360215,
+  "pseudo_declared_match": 0.375,
+  "pseudo_reject_floor": 1.0,
+  "real_accuracy": 1.0,
+  "real_mode_floor": 1.0,
+  "real_vs_pseudo_floor": 0.6666666666666666,
+  "rho_threshold": 0.8864662294557158,
+  "rows": 148,
+  "seed": 3,
+  "test_rows": 72,
+  "verdict": "PHASE4B_PDN_PARTIAL",
+  "wrong_actual_match": 1.0,
+  "wrong_declared_match": 0.0
+}

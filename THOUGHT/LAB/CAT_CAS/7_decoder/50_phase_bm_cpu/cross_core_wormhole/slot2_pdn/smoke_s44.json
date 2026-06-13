@@ -1,0 +1,32 @@
+{
+  "all_rows_restore": true,
+  "gates": {
+    "all_rows_restore": true,
+    "phase_recovered_gt_0_30": false,
+    "pseudo_declared_match_le_0_35": false,
+    "pseudo_reject_floor_ge_0_95": false,
+    "real_accuracy_ge_0_60": false,
+    "real_mode_floor_ge_0_45": false,
+    "real_vs_pseudo_floor_ge_0_95": false,
+    "wrong_actual_match_ge_0_60": false,
+    "wrong_declared_match_le_0_20": false
+  },
+  "input": "THOUGHT\\LAB\\CAT_CAS\\50_phase_bm_cpu\\cross_core_wormhole\\slot2_pdn\\smoke_s44.csv",
+  "minham": 7,
+  "nbin": 12,
+  "phase_corr_null": 0.1808323949627443,
+  "phase_corr_true": 0.41461687210535936,
+  "phase_delta": 0.23378447714261505,
+  "pseudo_declared_match": 0.75,
+  "pseudo_reject_floor": 0.0,
+  "real_accuracy": 0.5,
+  "real_mode_floor": 0.0,
+  "real_vs_pseudo_floor": 0.5,
+  "rho_threshold": 0.10393914405868589,
+  "rows": 28,
+  "seed": 44,
+  "test_rows": 12,
+  "verdict": "PHASE4B_PDN_PARTIAL",
+  "wrong_actual_match": 0.0,
+  "wrong_declared_match": 0.5
+}

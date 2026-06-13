@@ -1,0 +1,88 @@
+====================================================================================================
+STAGE 1 FOLD AUDIT  -  Exp 50 Phase 6  -  is the orientation bit absent from the scalar channel?
+  Construction: Exp 50.14 public fixed-point map (verbatim). N = 2^n. master_seed=44060611
+====================================================================================================
+
+[a] SCALAR / COSINE CHANNEL - orientation-bit AUC for a battery of classifiers
+    PREDICTION: all ~0.5 (the bit is information-absent from the even channel).
+    n      classifier             held-out AUC
+    8      logistic_regression    0.5131  (+/- 0.0543)
+    8      rbf_svm                0.5401  (+/- 0.0261)
+    8      gradient_boosted_trees 0.4641  (+/- 0.0594)
+    8      mlp                    0.5263  (+/- 0.0368)
+    10     logistic_regression    0.4859  (+/- 0.0449)
+    10     rbf_svm                0.4617  (+/- 0.0214)
+    10     gradient_boosted_trees 0.4945  (+/- 0.0664)
+    10     mlp                    0.4696  (+/- 0.0392)
+    12     logistic_regression    0.5183  (+/- 0.0280)
+    12     rbf_svm                0.5000  (+/- 0.0262)
+    12     gradient_boosted_trees 0.4747  (+/- 0.0357)
+    12     mlp                    0.5059  (+/- 0.0273)
+    14     logistic_regression    0.5165  (+/- 0.0356)
+    14     rbf_svm                0.5366  (+/- 0.0580)
+    14     gradient_boosted_trees 0.5031  (+/- 0.0333)
+    14     mlp                    0.5253  (+/- 0.0476)
+
+[b] EQUIVARIANT-LIFT CONTROL - nonlinear lifts of the PUBLIC cosines (RFF/poly/tanh)
+    PREDICTION: AUC stays at chance (no scalar lift manufactures the bit).
+    n      classifier-on-lift     held-out AUC
+    8      logreg_on_lift         0.4897  (+/- 0.0310)
+    8      gbt_on_lift            0.5247  (+/- 0.0439)
+    10     logreg_on_lift         0.4462  (+/- 0.0589)
+    10     gbt_on_lift            0.4667  (+/- 0.0352)
+    12     logreg_on_lift         0.5556  (+/- 0.0364)
+    12     gbt_on_lift            0.5363  (+/- 0.0581)
+    14     logreg_on_lift         0.4750  (+/- 0.0556)
+    14     gbt_on_lift            0.4842  (+/- 0.0260)
+
+[a2] TWO-SAMPLE TEST - is the d-conditioned public data distinguishable from N-d-conditioned?
+    PREDICTION: not distinguishable (energy-distance permutation p large).
+    n=8   energy_distance=0.0745  perm_p=0.0560  -> INDISTINGUISHABLE
+    n=10  energy_distance=0.0709  perm_p=0.1089  -> INDISTINGUISHABLE
+    n=12  energy_distance=0.0597  perm_p=0.5467  -> INDISTINGUISHABLE
+    n=14  energy_distance=0.0620  perm_p=0.4508  -> INDISTINGUISHABLE
+
+[c] QUADRATURE / COMPLEX CHANNEL - provide z_k = exp(-2 pi i k d / N) (the odd channel)
+    PREDICTION: orientation bit present; AUC ~ 1.0; trivial readout suffices.
+    n      readout                    AUC       
+    8      logreg_on_quadrature       0.9999
+    8      trivial_sin_sign_readout   1.0000
+    10     logreg_on_quadrature       0.9993
+    10     trivial_sin_sign_readout   1.0000
+    12     logreg_on_quadrature       0.9981
+    12     trivial_sin_sign_readout   1.0000
+    14     logreg_on_quadrature       0.9977
+    14     trivial_sin_sign_readout   1.0000
+
+[c2] ONE-SHOT d RECOVERY via dyadic-ladder phase estimation (k=N/2,...,1; NO search/iteration)
+    PREDICTION: exact recovery of d in a single non-adaptive parallel shot.
+    n=8   exact-recovery rate=1.0000   e.g. d=163->163, d=239->239, d=85->85
+    n=10  exact-recovery rate=1.0000   e.g. d=341->341, d=257->257, d=529->529
+    n=12  exact-recovery rate=1.0000   e.g. d=3865->3865, d=1759->1759, d=829->829
+    n=14  exact-recovery rate=1.0000   e.g. d=7082->7082, d=13128->13128, d=12225->12225
+
+[d] NO-SMUGGLE GATE - self-test on a known cheater, a known sin-cheater, and a useless even O
+    O_cheat_reads_d (must FAIL_SMUGGLE)        verdict=FAIL_SMUGGLE   auc=1.000 reads_d=True fold_delta=1.00e+00
+    O_cheat_reads_sin (must FAIL_SMUGGLE)      verdict=FAIL_SMUGGLE   auc=1.000 reads_d=True fold_delta=2.00e+00
+    O_useless_even (must FAIL_CHANCE)          verdict=FAIL_CHANCE    auc=0.491 reads_d=False fold_delta=0.00e+00
+
+====================================================================================================
+VERDICT
+====================================================================================================
+  scalar classifiers at chance (max|AUC-0.5|<0.06) : True  (range 0.462..0.540)
+  equivariant lifts at chance                      : True  (range 0.446..0.556)
+  two-sample INDISTINGUISHABLE (min perm_p>0.01)    : True  (min p=0.056)
+  quadrature trivial readout AUC ~ 1.0             : True  (min 1.000)
+  one-shot d recovery exact                        : True  (min rate 1.000)
+  no-smuggle gate self-test correct                : True
+----------------------------------------------------------------------------------------------------
+VERDICT: FOLD_AUDIT_CONFIRMED
+  The orientation bit b_orient = 1[d < N/2] is INFORMATION-ABSENT from the scalar/cosine
+  channel (measured AUC ~0.5 across 16 classifier results and all equivariant lifts; the
+  d- and N-d-conditioned public distributions are two-sample INDISTINGUISHABLE), and PRESENT
+  in the quadrature channel (trivial sin readout AUC ~1.0; one-shot exact d recovery from the
+  dyadic ladder, no search). The no-smuggle gate correctly flags the d-reader and sin-reader
+  as SMUGGLE and the even transform as CHANCE. The encoding wall is a MEASURED fact.
+
+  elapsed: 221.3 s
+====================================================================================================

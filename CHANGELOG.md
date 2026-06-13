@@ -40,7 +40,7 @@
 
 ## 2026-06-02
 
-- **Governance:** Added `.criticignore` system to `critic.py`. Supports glob patterns at repo root to exempt directories/files from CAT_CAS manifesto checks. Designed for diagnostic probe scripts that produce raw hardware reads rather than experimental results requiring statistical measures. Whitelisted `THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/**`.
+- **Governance:** Added `.criticignore` system to `critic.py`. Supports glob patterns at repo root to exempt directories/files from CAT_CAS manifesto checks. Designed for diagnostic probe scripts that produce raw hardware reads rather than experimental results requiring statistical measures. Whitelisted `THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/**`.
 
 ### Changed
 - critic.py: M-6 exact-invariant exemption added. Files documenting deterministic topological invariants, analytic identities, or pass/fail binary exactness are now recognized as valid M-6 exemptions. Regex expanded with patterns: `exact.*invariant`, `topological integer invariant`, `deterministic.*(identity|computation|invariant|pass.fail|binary)`, `analytic (identity|transform)`, `no empirical variance`.
@@ -59,7 +59,7 @@ All notable changes to Agent Governance System will be documented in this file.
 - **M-5 baseline regex** expanded to accept "baseline" as standalone term alongside "null", "shuffle", "permut", "randomiz". Baseline comparisons are now recognized as valid null model checks.
 
 ### Fixed
-- **BennettHistoryTape** in `47_phase_atom/catalytic_tape.py`: now genuinely XOR-modifies bytearray and rejects `verify()` if `bytes_written == 0`. Deployed to Phase 47 and Phase 46 validation files.
+- **BennettHistoryTape** in `44_phase_atom/catalytic_tape.py`: now genuinely XOR-modifies bytearray and rejects `verify()` if `bytes_written == 0`. Deployed to Phase 47 and Phase 46 validation files.
 
 ---
 
