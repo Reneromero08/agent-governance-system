@@ -15,15 +15,15 @@ firmware boundary and the exact missing artifact.
 
 | Route | Artifact | Result | Missing proof |
 |---|---|---|---|
-| AGESA global branch edit | `cpu_hack/agesa_trace/PATCH_ANALYSIS.md` | Rejected. Global behavior, not P4-safe, prior boot failure. | None; do not repeat. |
-| Constructor path | `cpu_sing_3/PHASE2_FW_ARG0C_PROVENANCE.md` | `0xFFF7371A` consumes `selected_base + pstate*0x18`; P4 field maps through producer/service helpers. | Static editable P4 value source. |
-| Runtime-MSR provenance | `cpu_hack/agesa_trace/AmdProcessorInitPeim_msr_source_proof.txt` | P4 field resolves to runtime `MSRC001_0068` read path. | Firmware-resident P4 value row. |
-| Helper-layer probe | `cpu_sing_3/PHASE2_P4_EDIT_SOURCE_PROOF.md` | Current helper layer closed; no editable P4-only source exposed. | Separate P4-affecting source outside decoded chain. |
-| No-op rebuild | `cpu_sing_3/PHASE2_MASTER_B_REBUILD_TOOLCHAIN.md` | Identical rebuild/save path proven parse-clean and byte-identical. | Non-no-op P4-only edit target. |
-| Donor workflow | `cpu_sing_3/PHASE2_DONOR_DIFF_REPORT.md` | Public donor shows free-space insertion workflow only. | P4-safe value edit lesson. |
-| Separate P4 source scan | `cpu_sing_3/PHASE2_FIRMWARE_P4_SEPARATE_SOURCE_DEEPENED.md` | CpuDxe/CpuPei/LegacyRegion sibling constants found, but they are MSR address initializers. | P4 value payload, not address table. |
-| P4 value-pattern search | `cpu_sing_3/PHASE2_FIRMWARE_PSTATE_VALUE_PATTERN_SEARCH.md` | Stock P4 full value and key fragments have zero hits in extracted image tree. | Any static P4 value bytes tied to P0-P4 siblings. |
-| Family 10h source provenance | `cpu_sing_3/PHASE2_F10_SOURCE_PSTATE_VALUE_PROVENANCE.md` | Local AGESA F10 source confirms P-state values are gathered from live `PS_REG_BASE + k` MSRs into runtime `PSTATE_LEVELING` buffers, and leveling writes from those buffers. | Static editable P4 value source or exact source-to-image path. |
+| AGESA global branch edit | `50_2_firmware/cpu_hack/agesa_trace/PATCH_ANALYSIS.md` | Rejected. Global behavior, not P4-safe, prior boot failure. | None; do not repeat. |
+| Constructor path | `50_2_firmware/PHASE2_FW_ARG0C_PROVENANCE.md` | `0xFFF7371A` consumes `selected_base + pstate*0x18`; P4 field maps through producer/service helpers. | Static editable P4 value source. |
+| Runtime-MSR provenance | `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_msr_source_proof.txt` | P4 field resolves to runtime `MSRC001_0068` read path. | Firmware-resident P4 value row. |
+| Helper-layer probe | `50_2_firmware/PHASE2_P4_EDIT_SOURCE_PROOF.md` | Current helper layer closed; no editable P4-only source exposed. | Separate P4-affecting source outside decoded chain. |
+| No-op rebuild | `50_2_firmware/PHASE2_MASTER_B_REBUILD_TOOLCHAIN.md` | Identical rebuild/save path proven parse-clean and byte-identical. | Non-no-op P4-only edit target. |
+| Donor workflow | `50_2_firmware/PHASE2_DONOR_DIFF_REPORT.md` | Public donor shows free-space insertion workflow only. | P4-safe value edit lesson. |
+| Separate P4 source scan | `50_2_firmware/PHASE2_FIRMWARE_P4_SEPARATE_SOURCE_DEEPENED.md` | CpuDxe/CpuPei/LegacyRegion sibling constants found, but they are MSR address initializers. | P4 value payload, not address table. |
+| P4 value-pattern search | `50_2_firmware/PHASE2_FIRMWARE_PSTATE_VALUE_PATTERN_SEARCH.md` | Stock P4 full value and key fragments have zero hits in extracted image tree. | Any static P4 value bytes tied to P0-P4 siblings. |
+| Family 10h source provenance | `50_2_firmware/PHASE2_F10_SOURCE_PSTATE_VALUE_PROVENANCE.md` | Local AGESA F10 source confirms P-state values are gathered from live `PS_REG_BASE + k` MSRs into runtime `PSTATE_LEVELING` buffers, and leveling writes from those buffers. | Static editable P4 value source or exact source-to-image path. |
 
 ## Current Firmware Boundary
 

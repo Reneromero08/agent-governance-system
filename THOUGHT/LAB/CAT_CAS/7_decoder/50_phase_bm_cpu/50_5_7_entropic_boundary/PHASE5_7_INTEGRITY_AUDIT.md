@@ -4,7 +4,7 @@
 
 ## Hardened Findings
 
-- Removed class-label boundary scaling from `session_scripts/phase5_7/entropic_boundary_probe.c`.
+- Removed class-label boundary scaling from `50_5_7_entropic_boundary/src/entropic_boundary_probe.c`.
 - Removed the direct `load_scale()` boundary deformation constant.
 - Runtime load deformation is derived from measured bounded memory/timing/worker observables.
 - Runtime observables are averaged at the load-condition level before row generation, so per-row timing noise cannot masquerade as carrier geometry.

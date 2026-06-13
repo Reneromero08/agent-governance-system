@@ -12,13 +12,13 @@ Track B remains pending Phase 2 physical observability. That is a dependency bou
 
 | Phase | Artifact | Result |
 |---|---|---|
-| 4.0 bridge gate | `phase4_holo/PHASE4_0_BRIDGE_GATE.md` | `PHASE4_0_BRIDGE_GATE_COMPLETE` |
-| 4.1A shared eigenbasis | `phase4_holo/PHASE4_1A_SHARED_EIGENBASIS_TAPE.md` | `PHASE4_1A_SHARED_EIGENBASIS_TAPE_PASS` |
-| 4.2A rotation chain | `phase4_holo/PHASE4_2A_CATALYTIC_ROTATION_CHAIN.md` | `PHASE4_2A_CATALYTIC_ROTATION_CHAIN_PASS` |
-| 4.3 residual channel | `phase4_holo/PHASE4_3_RESIDUAL_CHANNEL.md` | `PHASE4_3_RESIDUAL_CHANNEL_PASS` |
-| 4.4A operator GOE | `phase4_holo/PHASE4_4A_OPERATOR_GOE.md` | `PHASE4_4A_OPERATOR_GOE_PASS` |
-| 4.5 mini-model | `phase4_holo/PHASE4_5_HOLO_MINI_MODEL.md` | `PHASE4_5_HOLO_MINI_MODEL_PASS` |
-| 4.6 public harness | `phase4_holo/PHASE4_6_PUBLIC_HOLO_HARNESS.md` | `PHASE4_6_PUBLIC_HOLO_HARNESS_PASS` |
+| 4.0 bridge gate | `50_4_holo_eigenbasis/PHASE4_0_BRIDGE_GATE.md` | `PHASE4_0_BRIDGE_GATE_COMPLETE` |
+| 4.1A shared eigenbasis | `50_4_holo_eigenbasis/PHASE4_1A_SHARED_EIGENBASIS_TAPE.md` | `PHASE4_1A_SHARED_EIGENBASIS_TAPE_PASS` |
+| 4.2A rotation chain | `50_4_holo_eigenbasis/PHASE4_2A_CATALYTIC_ROTATION_CHAIN.md` | `PHASE4_2A_CATALYTIC_ROTATION_CHAIN_PASS` |
+| 4.3 residual channel | `50_4_holo_eigenbasis/PHASE4_3_RESIDUAL_CHANNEL.md` | `PHASE4_3_RESIDUAL_CHANNEL_PASS` |
+| 4.4A operator GOE | `50_4_holo_eigenbasis/PHASE4_4A_OPERATOR_GOE.md` | `PHASE4_4A_OPERATOR_GOE_PASS` |
+| 4.5 mini-model | `50_4_holo_eigenbasis/PHASE4_5_HOLO_MINI_MODEL.md` | `PHASE4_5_HOLO_MINI_MODEL_PASS` |
+| 4.6 public harness | `50_4_holo_eigenbasis/PHASE4_6_PUBLIC_HOLO_HARNESS.md` | `PHASE4_6_PUBLIC_HOLO_HARNESS_PASS` |
 
 ## Verification
 
@@ -44,7 +44,7 @@ gcc -O2 catcas_holo_harness.c -lm -o catcas_holo_harness
 Saved evidence:
 
 ```text
-phase4_holo/results/phase4_track_a_verification.txt
+50_4_holo_eigenbasis/results/phase4_track_a_verification.txt
 ```
 
 Key log verdicts:

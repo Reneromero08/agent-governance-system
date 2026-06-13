@@ -44,7 +44,7 @@ target copy. This is the evidentiary run for Phase 5.1-5.5.
 - package-energy counter: absent
 
 Compact target summary:
-`phase5_1_5/results/phase5_1_5_target_summary.json`
+`50_5_1_limit_violations/results/phase5_1_5_target_summary.json`
 
 The Phenom target exposed `/sys/class/hwmon` and `/dev/cpu/0/msr`, but did not
 expose a package-energy artifact:
@@ -57,14 +57,14 @@ It verified that the harness generated internally consistent reports before the
 target run, but it is not used as proof for Exp50.
 
 Host smoke artifact:
-`phase5_1_5/results/phase5_1_5_summary.json`
+`50_5_1_limit_violations/results/phase5_1_5_summary.json`
 
 ## Artifacts
 
-- `phase5_1_5/results/phase5_1_5_forward_reverse_cycles.csv`
-- `phase5_1_5/results/phase5_1_5_target_summary.json` primary evidence
-- `phase5_1_5/results/phase5_1_5_summary.json` host smoke test only
-- `session_scripts/phase5_1_5/phase5_1_5_foundation_probe.py`
+- `50_5_1_limit_violations/results/phase5_1_5_forward_reverse_cycles.csv`
+- `50_5_1_limit_violations/results/phase5_1_5_target_summary.json` primary evidence
+- `50_5_1_limit_violations/results/phase5_1_5_summary.json` host smoke test only
+- `50_5_1_limit_violations/src/phase5_1_5_foundation_probe.py`
 
 ## Claim Boundary
 

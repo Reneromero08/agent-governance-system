@@ -57,18 +57,18 @@ Implement `XOR_BIND` as the first operator:
 2. Forward: `tape[slot] ^= hash(symbol_id)` with LCG-derived hash
 3. Reverse: same function called again (XOR self-inverse)
 4. Test with 4 seeds, 256-byte tape, SHA-256 verify
-5. File: `session_scripts/operator_library.c`
+5. File: `50_3_catalytic_ladder/src/operator_library.c`
 
 ## Files/Scripts to Create
 
 | File | Phase | Purpose |
 |------|-------|---------|
-| `session_scripts/operator_library.c` | 3.7 | Reversible operator implementations |
-| `session_scripts/meaningful_compute.c` | 3.8 | Parity, hash fragment, FSM, SAT step |
-| `session_scripts/catalytic_sign.c` | 3.9 | Sign encode/apply/reverse |
-| `session_scripts/oracle_paths.c` | 3.10 | Multi-path search + tape restore |
-| `session_scripts/baseline_compare.c` | 3.11 | Reversible vs destructive metrics |
-| `session_scripts/catcas_phase3.c` | 3.12 | CLI harness + API |
+| `50_3_catalytic_ladder/src/operator_library.c` | 3.7 | Reversible operator implementations |
+| `50_3_catalytic_ladder/src/meaningful_compute.c` | 3.8 | Parity, hash fragment, FSM, SAT step |
+| `50_3_catalytic_ladder/src/catalytic_sign.c` | 3.9 | Sign encode/apply/reverse |
+| `50_3_catalytic_ladder/src/oracle_paths.c` | 3.10 | Multi-path search + tape restore |
+| `50_3_catalytic_ladder/src/baseline_compare.c` | 3.11 | Reversible vs destructive metrics |
+| `50_3_catalytic_ladder/src/catcas_phase3.c` | 3.12 | CLI harness + API |
 | `PHASE3_7_OPERATOR_LIBRARY.md` | 3.7 | Operator documentation |
 | `PHASE3_8_MEANINGFUL_COMPUTE.md` | 3.8 | Computation results |
 | `PHASE3_9_CATALYTIC_SIGN.md` | 3.9 | Sign operation results |

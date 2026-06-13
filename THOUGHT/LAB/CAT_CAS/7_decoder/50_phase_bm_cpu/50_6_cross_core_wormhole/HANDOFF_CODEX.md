@@ -2,17 +2,17 @@
 
 You (Codex) own the live Phase 4B cross-core harness. This is the assembled
 fix for the cross-core boundary, sim-verified in
-`cross_core_wormhole/cross_core_wormhole_sim.py`
+`50_6_cross_core_wormhole/cross_core_wormhole_sim.py`
 (`CROSS_CORE_WORMHOLE_SIM_VERIFIED`). The physical run is yours.
 
 ## TL;DR - what to add
 
-Your `session_scripts/phase4_holo/cache_hologram_cross_core.c` is
+Your `50_4_holo_eigenbasis/src/cache_hologram_cross_core.c` is
 write-then-RAW-READ: bridge present, but missing the OPENING COUPLING and the
 OBSERVER UNSCRAMBLE. Add both. They are implemented for you in:
 
 ```text
-cross_core_wormhole/cache_hologram_cross_core_wormhole.c
+50_6_cross_core_wormhole/cache_hologram_cross_core_wormhole.c
 ```
 
 It is a drop-in: same constants (LINES 64, LINE_STRIDE 4096, MODES 4, FAMILIES
@@ -80,7 +80,7 @@ extended analyzer can fit the ramp to recover `theta` (see "Phase readout").
 ## Build and run (on the Phenom)
 
 ```bash
-cd session_scripts/phase4_holo   # or wherever you stage it
+cd 50_4_holo_eigenbasis/src   # or wherever you stage it
 gcc -O2 cache_hologram_cross_core_wormhole.c -lpthread -lm -o cc_wormhole
 ./cc_wormhole > phase4b_cache_hologram_cross_core_wormhole.csv
 python3 analyze_cache_hologram_matched_nulls.py \

@@ -12,9 +12,9 @@ ENCODED_RELATIONAL_CARRIER_RESCUE
 
 Documentation state:
 
-- `phase3b/PHASE3B_CATALYTIC_SUBSTRATE_PRIMITIVE.md` now records the original four-snapshot invariant result and the angle-rescue hardening.
-- `phase3b/results/angle_rescue/PHASE3B_ANGLE_RESCUE_PROBE.md` records the hardening report.
-- `session_scripts/phase3b/phase3b_angle_rescue_probe.py` is the reproducer.
+- `50_3b_substrate_primitive/PHASE3B_CATALYTIC_SUBSTRATE_PRIMITIVE.md` now records the original four-snapshot invariant result and the angle-rescue hardening.
+- `50_3b_substrate_primitive/results/angle_rescue/PHASE3B_ANGLE_RESCUE_PROBE.md` records the hardening report.
+- `50_3b_substrate_primitive/src/phase3b_angle_rescue_probe.py` is the reproducer.
 
 Boundary:
 
@@ -32,9 +32,9 @@ PHASE5_7_PHASE6_PUBLIC_INVARIANT_REJECTED_BY_5_9V_CONTROLS
 
 Documentation state:
 
-- `phase5_7/PHASE5_7_ENTROPIC_BOUNDARY_GEOMETRY.md` records the completed bridge scorer.
-- `phase5_7/PHASE5_7_TO_PHASE6_INVARIANT_BRIDGE.md` records the final scorer classification.
-- `phase5_7/results/phase6_invariant_scorer/PHASE5_7_PHASE6_INVARIANT_SCORER_RUN.md` is the result artifact.
+- `50_5_7_entropic_boundary/PHASE5_7_ENTROPIC_BOUNDARY_GEOMETRY.md` records the completed bridge scorer.
+- `50_5_7_entropic_boundary/PHASE5_7_TO_PHASE6_INVARIANT_BRIDGE.md` records the final scorer classification.
+- `50_5_7_entropic_boundary/results/phase6_invariant_scorer/PHASE5_7_PHASE6_INVARIANT_SCORER_RUN.md` is the result artifact.
 
 Boundary:
 
@@ -52,9 +52,9 @@ PHASE5_8_BOUNDARY_SCALING_LEAD_ARTIFACT_PARTIAL
 
 Documentation state:
 
-- `phase5_8/REPORT_PHASE5_8_FINAL.md` records the full 5.8R hardening pass.
-- `phase5_8/PHASE5_8_REVERIFY_ARTIFACT_AUDIT.md` records the current repository-artifact boundary.
-- `phase5_8/PHASE5_8_SUMMARY.md` is now marked as historical/superseded.
+- `50_5_8_boundary_scaling/REPORT_PHASE5_8_FINAL.md` records the full 5.8R hardening pass.
+- `50_5_8_boundary_scaling/PHASE5_8_REVERIFY_ARTIFACT_AUDIT.md` records the current repository-artifact boundary.
+- `50_5_8_boundary_scaling/PHASE5_8_SUMMARY.md` is now marked as historical/superseded.
 
 Boundary:
 
@@ -76,9 +76,9 @@ PUBLIC_TARGET_COUPLING_DOES_NOT_SELECT_PUBLIC_BASIN
 
 Documentation state:
 
-- `phase5_9/PHASE5_9_IMPLEMENTATION_HARDENING.md` records the hardened stress-boundary interpretation.
-- `phase5_9/PHASE5_9V_EFFECTIVE_VOLTAGE_REVERIFY.md` records the requested-setting versus effective-state boundary.
-- `phase5_9/PHASE5_9V_TO_PHASE6_BASIN_BRIDGE.md` records the target-coupled public selector rejection.
+- `50_5_9_instability_edge/PHASE5_9_IMPLEMENTATION_HARDENING.md` records the hardened stress-boundary interpretation.
+- `50_5_9_instability_edge/PHASE5_9V_EFFECTIVE_VOLTAGE_REVERIFY.md` records the requested-setting versus effective-state boundary.
+- `50_5_9_instability_edge/PHASE5_9V_TO_PHASE6_BASIN_BRIDGE.md` records the target-coupled public selector rejection.
 
 Boundary:
 

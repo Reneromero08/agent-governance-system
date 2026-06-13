@@ -11,7 +11,7 @@ This is active phase-oracle-to-catalytic-tape integration. It is not passive Kur
 ## Command
 
 ```powershell
-Get-Content -Raw session_scripts\phase2b\holo_mera_bridge.c | ssh -o BatchMode=yes -o ConnectTimeout=5 root@192.168.137.100 "cat > /tmp/holo_mera_bridge.c && gcc -O2 /tmp/holo_mera_bridge.c -lm -o /tmp/holo_mera_bridge && timeout 40 /tmp/holo_mera_bridge"
+Get-Content -Raw 50_2b_blackbox\src\holo_mera_bridge.c | ssh -o BatchMode=yes -o ConnectTimeout=5 root@192.168.137.100 "cat > /tmp/holo_mera_bridge.c && gcc -O2 /tmp/holo_mera_bridge.c -lm -o /tmp/holo_mera_bridge && timeout 40 /tmp/holo_mera_bridge"
 ```
 
 ## Safety

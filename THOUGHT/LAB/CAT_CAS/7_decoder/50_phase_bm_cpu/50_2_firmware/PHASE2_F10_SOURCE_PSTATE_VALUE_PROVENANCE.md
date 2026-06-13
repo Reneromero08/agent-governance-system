@@ -16,10 +16,10 @@ No static P4-only value row or editable image byte source was found.
 
 | Source | Purpose |
 |---|---|
-| `cpu_hack/_tmp_coreboot_chromium_f10/src/vendorcode/amd/agesa/f10/Proc/CPU/Feature/cpuPstateGather.c` | Builds the runtime P-state buffer from current hardware state. |
-| `cpu_hack/_tmp_coreboot_chromium_f10/src/vendorcode/amd/agesa/f10/Proc/CPU/Feature/cpuPstateLeveling.c` | Normalizes gathered P-state data and starts cross-core register modification. |
-| `cpu_hack/_tmp_coreboot_chromium_f10/src/vendorcode/amd/agesa/f10/Proc/CPU/Family/0x10/cpuF10Utilities.c` | Family 10h MSR read/write service implementations. |
-| `cpu_hack/_tmp_coreboot_chromium_f10/src/vendorcode/amd/agesa/f10/Include/OptionFamily10h*.h` | Confirms Family 10h service tables install `F10GetPstateRegisterInfo`, `F10GetPstateMaxState`, and `F10PstateLevelingCoreMsrModify` where the feature is enabled. |
+| `50_2_firmware/cpu_hack/_tmp_coreboot_chromium_f10/src/vendorcode/amd/agesa/f10/Proc/CPU/Feature/cpuPstateGather.c` | Builds the runtime P-state buffer from current hardware state. |
+| `50_2_firmware/cpu_hack/_tmp_coreboot_chromium_f10/src/vendorcode/amd/agesa/f10/Proc/CPU/Feature/cpuPstateLeveling.c` | Normalizes gathered P-state data and starts cross-core register modification. |
+| `50_2_firmware/cpu_hack/_tmp_coreboot_chromium_f10/src/vendorcode/amd/agesa/f10/Proc/CPU/Family/0x10/cpuF10Utilities.c` | Family 10h MSR read/write service implementations. |
+| `50_2_firmware/cpu_hack/_tmp_coreboot_chromium_f10/src/vendorcode/amd/agesa/f10/Include/OptionFamily10h*.h` | Confirms Family 10h service tables install `F10GetPstateRegisterInfo`, `F10GetPstateMaxState`, and `F10PstateLevelingCoreMsrModify` where the feature is enabled. |
 
 ## Provenance Chain
 
@@ -96,10 +96,10 @@ editable P4-only value source with P0-P3 sibling proof
 
 This report agrees with and strengthens:
 
-- `cpu_sing_3/PHASE2_FW_ARG0C_PROVENANCE.md`
-- `cpu_hack/agesa_trace/AmdProcessorInitPeim_msr_source_proof.txt`
-- `cpu_sing_3/PHASE2_FIRMWARE_PSTATE_VALUE_PATTERN_SEARCH.md`
-- `cpu_sing_3/PHASE2_FIRMWARE_SOURCE_PROVENANCE_WALL_AUDIT.md`
+- `50_2_firmware/PHASE2_FW_ARG0C_PROVENANCE.md`
+- `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_msr_source_proof.txt`
+- `50_2_firmware/PHASE2_FIRMWARE_PSTATE_VALUE_PATTERN_SEARCH.md`
+- `50_2_firmware/PHASE2_FIRMWARE_SOURCE_PROVENANCE_WALL_AUDIT.md`
 
 It also explains why CpuDxe/CpuPei/LegacyRegion P0-P4 sibling constants looked
 promising but did not expose value payloads: the source model expects P-state

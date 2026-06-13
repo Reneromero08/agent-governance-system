@@ -11,7 +11,7 @@
 ## PREREQUISITE GATE (binding)
 
 **PHASE 6 DOES NOT RUN UNTIL PHASE 5.10C PASSES.** Phase 6 couples a *prepared* boundary basin to the
-fixed-point map; it may not use an unverified basin. Handoff: `../phase5_10/PHASE5_10_TO_PHASE6_HANDOFF.md`.
+fixed-point map; it may not use an unverified basin. Handoff: `../50_5_10_encoding_wall/PHASE5_10_TO_PHASE6_HANDOFF.md`.
 
 Phase 6 may begin only when ALL of:
 - **5.10A** instrumentation lock complete (PASS, or PARTIAL documented and carried forward)
@@ -120,7 +120,7 @@ The wall has a precise, attackable form. Let the public data be the cosine chann
 
 Consequence: no scalar lift of any dimension (linear, kernel, deep, or otherwise) recovers d from the cosine channel, because the orientation bit is information-ABSENT from that channel, not merely hard to separate. The only way to raise I above 0 is to inject orientation the cosine channel does not contain: access the odd/quadrature component sin(2*pi*k*d/N), equivalently the full complex coefficient z_k = exp(-2*pi*i*k*d/N).
 
-This converts "lattice hardness" into a sharp object: the crossing requires a transform that supplies genuine quadrature WITHOUT smuggling d. That is the no-smuggle gate operationalized in Stage 3 of the Phase 6 quadrature campaign, and it is verified empirically by the Stage 1 fold audit (phase6/fold_audit/).
+This converts "lattice hardness" into a sharp object: the crossing requires a transform that supplies genuine quadrature WITHOUT smuggling d. That is the no-smuggle gate operationalized in Stage 3 of the Phase 6 quadrature campaign, and it is verified empirically by the Stage 1 fold audit (50_6_fixed_point_substrate/fold_audit/).
 
 ## 1C. THE SHARPENED OBSTRUCTION - the O(N) wall is an ENCODING/SYMMETRY wall (OPEN; gated behind 5.10C)
 
@@ -265,7 +265,7 @@ A single `n` proves nothing (5.9V's basin selector is presently a weak ~3-basin 
 
 ## 10. Feeder dependencies
 
-1. **Phase 5.10 (boundary state preparation)** is the HARD PREREQUISITE (see the Prerequisite Gate above and `../phase5_10/`): 5.10A instrumentation lock, 5.10B basin scan (frozen thresholds), 5.10C reproducible basin selection. It delivers the *prepared, instrumented, controlled* basin Mode C requires. Without 5.10C, Mode C has no controllable carrier and the result is uninterpretable. Highest-priority predecessor.
+1. **Phase 5.10 (boundary state preparation)** is the HARD PREREQUISITE (see the Prerequisite Gate above and `../50_5_10_encoding_wall/`): 5.10A instrumentation lock, 5.10B basin scan (frozen thresholds), 5.10C reproducible basin selection. It delivers the *prepared, instrumented, controlled* basin Mode C requires. Without 5.10C, Mode C has no controllable carrier and the result is uninterpretable. Highest-priority predecessor.
 2. **5.8** supplies the **physical boundary object** (area-law catalytic tape with restoration). Phase 6 needs a real boundary, not a metaphor; 5.8 provides it.
 3. **3B** is the logical root: an **invariant surviving a closed transformation** while the tape restores. Phase 6 = 3B aimed at a public fixed-point map where forward computation hits the wall.
 4. **4.3** residual / `.holo`: read the **boundary residual**, not only the register - `d` may appear there first.

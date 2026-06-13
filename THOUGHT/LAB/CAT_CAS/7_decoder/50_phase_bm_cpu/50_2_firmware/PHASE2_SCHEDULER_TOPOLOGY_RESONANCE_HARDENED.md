@@ -9,11 +9,11 @@ they did not reproduce across fresh seed windows or core pairs.
 
 ## Artifacts
 
-- Harness: `session_scripts/phase2_kuramoto/scheduler_topology_resonance.c`
-- Analyzer: `session_scripts/phase2_kuramoto/analyze_scheduler_topology_resonance.py`
-- Initial report: `cpu_sing_3/PHASE2_SCHEDULER_TOPOLOGY_RESONANCE.md`
-- Row CSVs: `cpu_sing_3/PHASE2_SCHEDULER_TOPOLOGY_RESONANCE_*.csv`
-- Analysis CSVs: `cpu_sing_3/PHASE2_SCHEDULER_TOPOLOGY_RESONANCE_*_analysis.csv`
+- Harness: `50_2_phase_locked_network/src/scheduler_topology_resonance.c`
+- Analyzer: `50_2_phase_locked_network/src/analyze_scheduler_topology_resonance.py`
+- Initial report: `50_2_firmware/PHASE2_SCHEDULER_TOPOLOGY_RESONANCE.md`
+- Row CSVs: `50_2_firmware/PHASE2_SCHEDULER_TOPOLOGY_RESONANCE_*.csv`
+- Analysis CSVs: `50_2_firmware/PHASE2_SCHEDULER_TOPOLOGY_RESONANCE_*_analysis.csv`
 
 ## Validation Summary
 

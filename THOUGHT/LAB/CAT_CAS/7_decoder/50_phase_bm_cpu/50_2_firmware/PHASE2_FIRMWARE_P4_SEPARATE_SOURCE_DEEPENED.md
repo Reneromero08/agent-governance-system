@@ -12,8 +12,8 @@ This advances the firmware route but does not make it byte-ready.
 
 ## Inputs
 
-- Scan report: `cpu_sing_3/PHASE2_FIRMWARE_P4_SEPARATE_SOURCE_SEARCH.md`
-- Scanner: `session_scripts/phase2_firmware/find_p4_sources_across_bios.py`
+- Scan report: `50_2_firmware/PHASE2_FIRMWARE_P4_SEPARATE_SOURCE_SEARCH.md`
+- Scanner: `50_2_firmware/src/find_p4_sources_across_bios.py`
 
 ## Deepened Findings
 
@@ -22,7 +22,7 @@ This advances the firmware route but does not make it byte-ready.
 PE32 body:
 
 ```text
-cpu_hack/bios_dump.bin.dump/3 8C8CE578-8A3D-4F1C-9935-896185C32DD3/15 CpuDxe/1 Compressed section/0 PE32 image section/body.bin
+50_2_firmware/cpu_hack/bios_dump.bin.dump/3 8C8CE578-8A3D-4F1C-9935-896185C32DD3/15 CpuDxe/1 Compressed section/0 PE32 image section/body.bin
 ```
 
 Hits:
@@ -53,7 +53,7 @@ offsets `+0x90` through `+0xA0`.
 PE32 body:
 
 ```text
-cpu_hack/bios_dump.bin.dump/5 8C8CE578-8A3D-4F1C-9935-896185C32DD3/4 CpuPei/1 PE32 image section/body.bin
+50_2_firmware/cpu_hack/bios_dump.bin.dump/5 8C8CE578-8A3D-4F1C-9935-896185C32DD3/4 CpuPei/1 PE32 image section/body.bin
 ```
 
 Hits:
@@ -83,7 +83,7 @@ Interpretation: same five-address initializer shape, 32-bit form.
 PE32 body:
 
 ```text
-cpu_hack/bios_dump.bin.dump/3 8C8CE578-8A3D-4F1C-9935-896185C32DD3/52 LegacyRegion/1 Compressed section/0 PE32 image section/body.bin
+50_2_firmware/cpu_hack/bios_dump.bin.dump/3 8C8CE578-8A3D-4F1C-9935-896185C32DD3/52 LegacyRegion/1 Compressed section/0 PE32 image section/body.bin
 ```
 
 Hits:

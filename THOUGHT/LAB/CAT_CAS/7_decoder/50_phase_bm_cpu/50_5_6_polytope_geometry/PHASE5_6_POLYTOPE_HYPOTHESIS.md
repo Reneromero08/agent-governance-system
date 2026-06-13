@@ -1,7 +1,7 @@
 # Phase 5.6: Polytope / Positive-Geometry Hypothesis
 
 **Date:** 2026-06-08
-**Harness:** `session_scripts/phase5_6/polytope_hypothesis.c`
+**Harness:** `50_5_6_polytope_geometry/src/polytope_hypothesis.c`
 **Verdict:** `PHASE5_6_POLYTOPE_GEOMETRY_CONFIRMED`
 
 ## Result

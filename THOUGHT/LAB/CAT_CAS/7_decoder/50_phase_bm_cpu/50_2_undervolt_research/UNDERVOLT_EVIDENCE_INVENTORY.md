@@ -6,7 +6,7 @@
 - Board: Gigabyte GA-970A-DS3P, AMD 970 northbridge + SB950 southbridge.
 - BIOS: American Megatrends Inc. FD, release date 02/26/2016, BIOS revision 4.6 from local `dmidecode`.
 - OS: Debian 13, kernel `6.12.86+deb13-amd64`, host `catcas`, SSH target `root@192.168.137.100`.
-- Local board evidence: [REPORT.md](REPORT.md), [ROADMAP.md](ROADMAP.md), [cpu_hack/catcas_vrm_probe.log](cpu_hack/catcas_vrm_probe.log).
+- Local board evidence: [REPORT.md](REPORT.md), [ROADMAP.md](ROADMAP.md), [50_2_firmware/cpu_hack/catcas_vrm_probe.log](50_2_firmware/cpu_hack/catcas_vrm_probe.log).
 
 ## External References Used
 
@@ -18,7 +18,7 @@
 
 ## BIOS Artifacts
 
-- Local dump: [cpu_hack/bios_dump.bin](cpu_hack/bios_dump.bin)
+- Local dump: [50_2_firmware/cpu_hack/bios_dump.bin](50_2_firmware/cpu_hack/bios_dump.bin)
 - Size: 4,194,304 bytes.
 - SHA-256: `B7C0C725C4B6F50F399A208E5CAD6938BAACDD8FA1BBC795098CA393083FBC91`.
 - Flash chip from local flashrom log: Macronix `MX25L3205(A)`, 4096 KB, SPI, mapped at `0x00000000ffc00000`.
@@ -30,7 +30,7 @@
 
 ## MSRs Decoded
 
-From [ROADMAP.md](ROADMAP.md) and [cpu_hack/catcas_vrm_probe.log](cpu_hack/catcas_vrm_probe.log):
+From [ROADMAP.md](ROADMAP.md) and [50_2_firmware/cpu_hack/catcas_vrm_probe.log](50_2_firmware/cpu_hack/catcas_vrm_probe.log):
 
 | MSR | Meaning | Observed value / decode |
 |---|---|---|
@@ -125,4 +125,4 @@ Raw local FFS header byte at `0x00340059` is `0x8E`. The checksum arithmetic for
 - Physical board revision printed on PCB.
 - High-resolution photo of the CPU VRM area and readable PWM controller marking.
 - Confirmation whether `/tmp/bios_patched.bin` still exists on `catcas`; no local patched image was found in this lab directory.
-- A second BIOS backup read, compared byte-for-byte with [cpu_hack/bios_dump.bin](cpu_hack/bios_dump.bin).
+- A second BIOS backup read, compared byte-for-byte with [50_2_firmware/cpu_hack/bios_dump.bin](50_2_firmware/cpu_hack/bios_dump.bin).

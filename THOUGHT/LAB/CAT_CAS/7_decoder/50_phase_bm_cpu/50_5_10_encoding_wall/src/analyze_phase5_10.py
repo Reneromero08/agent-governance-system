@@ -50,8 +50,11 @@ import numpy as np
 # Output location (M-7): derived from __file__, never a hardcoded lab path.
 # ----------------------------------------------------------------------------
 THIS_DIR = Path(__file__).resolve().parent
-OUTPUT_DIR = THIS_DIR / "_generated"
-DEFAULT_FROZEN_THRESHOLDS = THIS_DIR / "basin_thresholds_frozen.json"
+# src/ is one level deeper than the phase dir root post-merge; _generated lives at the
+# phase dir root (50_5_10_encoding_wall/_generated/), so anchor outputs on THIS_DIR.parent.
+PHASE_DIR = THIS_DIR.parent
+OUTPUT_DIR = PHASE_DIR / "_generated"
+DEFAULT_FROZEN_THRESHOLDS = PHASE_DIR / "basin_thresholds_frozen.json"
 
 BASIN_CLASSES = ("collapsed", "mid", "high")
 
@@ -969,9 +972,9 @@ def _find_real_csv() -> Optional[Path]:
     No hardcoded lab path: we walk up to the 50_phase_bm_cpu root from
     __file__ and join the known relative results path.
     """
-    base = THIS_DIR.parent  # .../50_phase_bm_cpu
+    base = THIS_DIR.parent.parent  # .../50_phase_bm_cpu (src/ is one level deeper post-merge)
     candidate = (
-        base / "phase5_9" / "results" / "k10_voltage_probe"
+        base / "50_5_9_instability_edge" / "results" / "k10_voltage_probe"
         / "p4_vid5_phase6_basin_repro"
         / "phase5_9v_phase6_basin_repro_audit.csv"
     )

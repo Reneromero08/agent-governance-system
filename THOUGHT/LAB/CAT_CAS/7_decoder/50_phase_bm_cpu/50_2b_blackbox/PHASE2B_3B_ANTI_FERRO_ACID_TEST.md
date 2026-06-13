@@ -2,7 +2,7 @@
 
 **Date:** 2026-06-05
 **Binary:** `/tmp/topology_attractor`
-**Source:** `session_scripts/phase2b/topology_attractor.c`
+**Source:** `50_2b_blackbox/src/topology_attractor.c`
 
 ## Command
 

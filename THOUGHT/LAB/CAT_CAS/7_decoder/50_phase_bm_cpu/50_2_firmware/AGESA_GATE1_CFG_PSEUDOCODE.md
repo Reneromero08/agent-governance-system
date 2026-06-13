@@ -6,11 +6,11 @@ Scope: owned local Phenom II X6 1090T / GA-970A-DS3P firmware route research. No
 
 ## Evidence
 
-- BIOS dump: `cpu_hack/bios_dump.bin`
+- BIOS dump: `50_2_firmware/cpu_hack/bios_dump.bin`
 - BIOS SHA-256: `B7C0C725C4B6F50F399A208E5CAD6938BAACDD8FA1BBC795098CA393083FBC91`
 - Target module: `AmdProcessorInitPeim`
 - File GUID: `DE3E049C-A218-4891-8658-5FC0FA84C788`
-- Corrected PE32 body: `cpu_hack/bios_dump.bin.dump/5 8C8CE578-8A3D-4F1C-9935-896185C32DD3/0 AmdProcessorInitPeim/1 PE32 image section/body.bin`
+- Corrected PE32 body: `50_2_firmware/cpu_hack/bios_dump.bin.dump/5 8C8CE578-8A3D-4F1C-9935-896185C32DD3/0 AmdProcessorInitPeim/1 PE32 image section/body.bin`
 - PE32 body SHA-256: `BF92A1321B98908E7D74299A6C1E629EC3583599F164DEC6E774BFF040FBDF2A`
 - PE32 body matches BIOS slice at raw `0x0034008C`.
 - Image base mapping used by current disassembly: raw `0x0034008C` -> VA `0xFFF4008C`.

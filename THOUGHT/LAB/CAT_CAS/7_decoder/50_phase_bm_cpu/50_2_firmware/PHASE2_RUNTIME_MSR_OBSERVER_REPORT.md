@@ -13,7 +13,7 @@ The decoded firmware path says the constructor P4 field is reconstructed from ru
 Local command streamed the observer to the target without installing it:
 
 ```powershell
-Get-Content -Raw session_scripts\msr_p4_readonly_observer.py | ssh -o BatchMode=yes -o ConnectTimeout=5 root@192.168.137.100 "python3 - --cores 0-5 --samples 100 --delay 0.02 --json"
+Get-Content -Raw 50_1_subthreshold_msr\src\msr_p4_readonly_observer.py | ssh -o BatchMode=yes -o ConnectTimeout=5 root@192.168.137.100 "python3 - --cores 0-5 --samples 100 --delay 0.02 --json"
 ```
 
 ## Safety

@@ -11,7 +11,7 @@ value consumer.
 ## Input
 
 ```text
-cpu_hack/bios_dump.bin.dump/3 8C8CE578-8A3D-4F1C-9935-896185C32DD3/52 LegacyRegion/1 Compressed section/0 PE32 image section/body.bin
+50_2_firmware/cpu_hack/bios_dump.bin.dump/3 8C8CE578-8A3D-4F1C-9935-896185C32DD3/52 LegacyRegion/1 Compressed section/0 PE32 image section/body.bin
 ```
 
 ## Address Initializer

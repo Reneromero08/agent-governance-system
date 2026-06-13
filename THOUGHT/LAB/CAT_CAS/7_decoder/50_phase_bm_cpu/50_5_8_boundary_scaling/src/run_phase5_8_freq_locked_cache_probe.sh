@@ -11,7 +11,7 @@ ITERATIONS="${ITERATIONS:-30000}"
 WINDOW_SIZE="${WINDOW_SIZE:-256}"
 PSTATE="${PSTATE:-0}"
 FREQ_LABEL="${FREQ_LABEL:-P0_LOCKED}"
-OUTPUT_DIR="${OUTPUT_DIR:-../../phase5_8/results/freq_locked_cache_probe}"
+OUTPUT_DIR="${OUTPUT_DIR:-../results/freq_locked_cache_probe}"
 BIN="./phase5_8_boundary_rdtsc"
 MSR_PERF_CTL="0xC0010062"
 

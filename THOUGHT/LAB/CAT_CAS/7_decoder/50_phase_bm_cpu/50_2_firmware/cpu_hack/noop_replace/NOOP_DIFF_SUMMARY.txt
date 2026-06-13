@@ -3,16 +3,16 @@ NOOP_DIFF_SUMMARY
 Verdict: NOOP_REBUILD_PROVEN
 
 Scope
-- Input image: cpu_hack/bios_dump.bin
-- Accepted rebuilt image: cpu_hack/noop_replace/bios_noop_rebuilt.bin
+- Input image: 50_2_firmware/cpu_hack/bios_dump.bin
+- Accepted rebuilt image: 50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin
 - Target file: AmdProcessorInitPeim
 - Target file GUID: DE3E049C-A218-4891-8658-5FC0FA84C788
 - Target section: PE32 image section, type 10h
-- Target body: cpu_hack/bios_dump.bin.dump/5 8C8CE578-8A3D-4F1C-9935-896185C32DD3/0 AmdProcessorInitPeim/1 PE32 image section/body.bin
+- Target body: 50_2_firmware/cpu_hack/bios_dump.bin.dump/5 8C8CE578-8A3D-4F1C-9935-896185C32DD3/0 AmdProcessorInitPeim/1 PE32 image section/body.bin
 - Required target body SHA-256: BF92A1321B98908E7D74299A6C1E629EC3583599F164DEC6E774BFF040FBDF2A
 
 Accepted toolchain
-- Public source: LongSoft/UEFITool old_engine branch, fetched into ignored local tool tree cpu_hack/tools/UEFITool_repo/
+- Public source: LongSoft/UEFITool old_engine branch, fetched into ignored local tool tree 50_2_firmware/cpu_hack/tools/UEFITool_repo/
 - Build host: SSH target root@192.168.137.100
 - Build dependency: Debian Qt5 qmake/g++ toolchain.
 
@@ -39,21 +39,21 @@ bios_noop_rebuilt.bin size: 4194304
 Image hash comparison
 
 ```text
-B7C0C725C4B6F50F399A208E5CAD6938BAACDD8FA1BBC795098CA393083FBC91  cpu_hack/bios_dump.bin
-B7C0C725C4B6F50F399A208E5CAD6938BAACDD8FA1BBC795098CA393083FBC91  cpu_hack/noop_replace/bios_noop_rebuilt.bin
+B7C0C725C4B6F50F399A208E5CAD6938BAACDD8FA1BBC795098CA393083FBC91  50_2_firmware/cpu_hack/bios_dump.bin
+B7C0C725C4B6F50F399A208E5CAD6938BAACDD8FA1BBC795098CA393083FBC91  50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin
 ```
 
 Byte-difference explanation
-- `fc /b cpu_hack/bios_dump.bin cpu_hack/noop_replace/bios_noop_rebuilt.bin` reported no differences.
+- `fc /b 50_2_firmware/cpu_hack/bios_dump.bin 50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin` reported no differences.
 - Therefore every byte difference count is zero.
 - The rebuilt image is byte-identical to the owned stock BIOS dump.
 - There are no changed offsets, no changed checksums, no changed FFS headers, and no changed PE32 bytes in the accepted no-op artifact.
 
 Parser verification
-- Parser: cpu_hack/tools/uefitool/UEFIExtract.exe
-- Command shape: UEFIExtract cpu_hack/noop_replace/bios_noop_rebuilt.bin report
+- Parser: 50_2_firmware/cpu_hack/tools/uefitool/UEFIExtract.exe
+- Command shape: UEFIExtract 50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin report
 - Exit code: 0
-- Report: cpu_hack/noop_replace/bios_noop_rebuilt.bin.report.txt
+- Report: 50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin.report.txt
 
 Relevant parser lines
 
@@ -66,13 +66,13 @@ Target body hash verification
 - Target extraction command shape:
 
 ```text
-UEFIExtract cpu_hack/noop_replace/bios_noop_rebuilt.bin DE3E049C-A218-4891-8658-5FC0FA84C788 -o cpu_hack/noop_replace/rebuilt_AmdProcessorInitPeim_PE32_body.bin -m body -t 10
+UEFIExtract 50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin DE3E049C-A218-4891-8658-5FC0FA84C788 -o 50_2_firmware/cpu_hack/noop_replace/rebuilt_AmdProcessorInitPeim_PE32_body.bin -m body -t 10
 ```
 
 - Extracted rebuilt body:
 
 ```text
-cpu_hack/noop_replace/rebuilt_AmdProcessorInitPeim_PE32_body.bin/body.bin
+50_2_firmware/cpu_hack/noop_replace/rebuilt_AmdProcessorInitPeim_PE32_body.bin/body.bin
 ```
 
 - Rebuilt extracted body SHA-256:

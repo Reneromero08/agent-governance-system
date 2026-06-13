@@ -17,7 +17,7 @@ This run adds matched pseudo schedules and wrong-schedule controls while preserv
 ## Harness
 
 ```text
-session_scripts/phase4_holo/cache_hologram_matched_nulls.c
+50_4_holo_eigenbasis/src/cache_hologram_matched_nulls.c
 ```
 
 Rows:
@@ -39,7 +39,7 @@ All rows:
 ## Analyzer
 
 ```text
-session_scripts/phase4_holo/analyze_cache_hologram_matched_nulls.py
+50_4_holo_eigenbasis/src/analyze_cache_hologram_matched_nulls.py
 ```
 
 The analyzer uses held-out odd trials and training even trials.
@@ -73,13 +73,13 @@ PHASE4B_CACHE_HOLOGRAM_MATCHED_NULLS restored=7680/7680
 Tracked summary:
 
 ```text
-phase4_holo/results/phase4b_cache_hologram_matched_nulls_summary.json
+50_4_holo_eigenbasis/results/phase4b_cache_hologram_matched_nulls_summary.json
 ```
 
 Ignored raw CSV:
 
 ```text
-phase4_holo/results/phase4b_cache_hologram_matched_nulls.csv
+50_4_holo_eigenbasis/results/phase4b_cache_hologram_matched_nulls.csv
 ```
 
 ## Interpretation
@@ -104,7 +104,7 @@ Three fresh target runs were executed with the same harness and analyzer.
 Tracked aggregate:
 
 ```text
-phase4_holo/results/phase4b_cache_hologram_matched_nulls_repeat_summary.json
+50_4_holo_eigenbasis/results/phase4b_cache_hologram_matched_nulls_repeat_summary.json
 ```
 
 Verdict:

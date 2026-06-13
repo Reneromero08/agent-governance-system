@@ -125,35 +125,35 @@ Current Exp50 evidence shows that the earlier Linux/software phase routes did no
 | Route | Status label | Current finding | Evidence |
 |---|---|---|---|
 | Phase 0 foundation | `DONE` | Debian 13, SSH, toolchain, core isolation, MSR decoding, and k10temp monitoring are complete. | `REPORT.md`, this roadmap |
-| Phase 1 runtime VID floor | `RUNTIME_VID_CLAMPED` | Runtime P4 lower-VID MSR write reads back, but COFVID_STS stays at CpuVid `0x1A`; lower-VID runtime route is clamped. | `cpu_sing_1/RUNTIME_VID_DECIDER_PACK.md` |
-| Passive TSC route | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | Passive TSC readout is dominated by a fixed ~2.67 MHz VRM/infrastructure artifact. | `cpu_sing_2/PHASE2_BASELINE.md`, `cpu_sing_2/PHASE2_KURAMOTO_FINAL_PACK.md` |
-| Active phase route | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | Active phase probes found no lock and no null separation. | `cpu_sing_2/PHASE2_ACTIVE_PHASE.md`, `cpu_sing_2/PHASE2_KURAMOTO_METRIC.md` |
-| Coupling channels | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | Software-visible coupling channels are exhausted without reliable phase-lock evidence. | `cpu_sing_2/PHASE2_COUPLING_CHANNELS.md` |
-| Detuning route | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | DID/frequency detuning was not reproducible as a coupling/lock route. | `cpu_sing_2/PHASE2_DETUNING.md` |
-| GOE route | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | GOE spacing behavior was not observed. | `cpu_sing_2/PHASE2_GOE.md` |
-| Ising route | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | Ising behavior was not observed. | `cpu_sing_2/PHASE2_ISING_MAP.md` |
-| AGESA global branch edit | `AGESA_GLOBAL_PATCH_REJECTED` | Global `JBE -> JAE` at `0x00366E3E` is rejected. It is not P4-safe and the prior attempt caused no boot; backup BIOS recovered after battery removal. | `cpu_hack/agesa_trace/PATCH_ANALYSIS.md`, `gpt_research/UNDERVOLT_PATHWAY_1_BIOS_AGESA.md` |
-| P4-safe AGESA route | `P4_FIELD_RUNTIME_MSR_DERIVED` / `AGESA_P4_SAFE_ROUTE_NOT_BYTE_READY` | Current BIOS/PE32/disassembly artifacts do not prove a P4-only static table record or executable code cave. The master pass found the `.dG3_DXE` heap/table consumer at `0xFFF72B3C`, confirmed `0xFFF8D11E -> 0xFFF7371A`, recovered helper `0xFFF4CF55`, found outer producer `0xFFF4D12F` registered through `.data` slot `0xFFF7F516`, decoded service descriptor `0xFFF7E698 -> 0xFFF8D108`, and mapped constructor field `selected_base + pstate*0x18 + 0x1C` to producer `entry +0x04`. That field is output `arg_14` from `[service+0x22]` / `0xFFF7348D`; `0xFFF44E76` is `rdmsr`, and P4 resolves to runtime `MSRC001_0068`, not a byte-ready static P4 record. | `cpu_sing_2/PHASE2_AGESA_P4_SAFE_FINAL_PACK.md`, `cpu_sing_3/AGESA_NEXT_GATE_FINAL_PACK.md`, `cpu_sing_3/PHASE2_MASTER_A_DISPATCH_SOURCE.md`, `cpu_sing_3/PHASE2_FW_ARG0C_PROVENANCE.md` |
-| Rebuild toolchain | `NOOP_REBUILD_PROVEN` | Public LongSoft `old_engine` source was built as a temporary force-save UEFIReplace variant on the Linux target. Identical AmdProcessorInitPeim PE32 body replacement produced `cpu_hack/noop_replace/bios_noop_rebuilt.bin`; it parses cleanly, is byte-identical to stock, and preserves PE32 body hash `BF92A1321B98908E7D74299A6C1E629EC3583599F164DEC6E774BFF040FBDF2A`. | `cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt`, `cpu_sing_3/PHASE2_MASTER_B_REBUILD_TOOLCHAIN.md`, `cpu_sing_3/PHASE2_MASTER_CPU_SING_OR_TRUE_WALL.md` |
-| Public donor workflow | `PUBLIC_MOD_DONOR_DIFFED` | Official F2j stock and public NVMe donor were acquired, hashed, parsed, and diffed. The donor only inserts `NvmExpressDxe_4` into existing free space at `0x002C58A0-0x002CA9FF`; later volumes remain byte-identical. | `cpu_sing_3/PHASE2_DONOR_DIFF_REPORT.md` |
-| Runtime MSR observer | `RUNTIME_MSR_OBSERVATION_COMPLETE` | Read-only SSH observer captured P4 `MSRC001_0068` and COFVID status across cores. COFVID VID stayed `0x12` for all samples; cores 0/1/2/5 P4 VID was `0x1A`, while cores 3/4 P4 VID was `0x12` with DID `3`. | `cpu_sing_3/PHASE2_RUNTIME_MSR_OBSERVER_REPORT.md`, `session_scripts/phase1_msr/msr_p4_readonly_observer.py` |
-| Runtime load/affinity | `RUNTIME_LOAD_AFFINITY_CHARACTERIZED` | Read-only SSH characterization found all cores at stock P4 VID `0x1A` after reboot, while COFVID VID depends on load state. Baseline can expose `0x1A`; self/neighbor/all-load held `0x12`. | `cpu_sing_3/PHASE2_RUNTIME_LOAD_AFFINITY_REPORT.md`, `session_scripts/phase1_msr/msr_load_affinity_characterizer.py` |
-| Runtime transition/jitter | `RUNTIME_TRANSITION_JITTER_CHARACTERIZED` | Read-only transition probe ran 24 cases with 160 samples each. PSTATE transitions were common (26 total); COFVID VID transitions were rare (3 total) and did not show stable timing-jitter separation from steady samples. | `cpu_sing_3/PHASE2_RUNTIME_TRANSITION_JITTER_REPORT.md`, `session_scripts/phase1_msr/msr_transition_jitter_probe.py` |
-| Runtime state-window oracle | `RUNTIME_STATE_WINDOW_ORACLE_NEGATIVE` | Read-only state-conditioned timing oracle ran 24 cases with 420 samples each. Four cases had 2+ state bins for null comparison; zero met the deterministic null gate. | `cpu_sing_3/PHASE2_RUNTIME_STATE_WINDOW_ORACLE_REPORT.md`, `session_scripts/phase1_msr/msr_state_window_oracle.py` |
-| Runtime effective-state selector | `READ_ONLY_EFFECTIVE_STATE_SELECTOR_FOUND__VID_STILL_FIXED` | Read-only selector map found that ordinary load selectors move FID/DID/PSTATE labels across four states while VID remains fixed at `0x12`. This keeps the VID clamp result intact but exposes a software-visible state-label surface. | `cpu_sing_3/PHASE2_EFFECTIVE_STATE_SELECTOR_MAP_REPORT.md`, `session_scripts/phase1_msr/msr_effective_state_selector_map.py` |
-| Runtime state-label coupling | `STATE_LABEL_MODAL_FEATURE_NOT_CONFIRMED` | A reversible workload with joined state labels produced sparse timing candidates, but dense narrowing and shuffled-answer hard-null sweeps collapsed the elapsed-threshold route. Modal feature validation over eight fresh seed windows found candidates but no feature family survived across three distinct fresh seed starts. | `cpu_sing_3/PHASE2_STATE_LABEL_TIMING_EDGE_HARDENED_REPORT.md`, `cpu_sing_3/PHASE2_STATE_LABEL_MODAL_VALIDATION.md`, `session_scripts/phase1_msr/analyze_state_label_modal_features.py` |
-| Runtime scheduler/topology resonance | `SCHEDULER_TOPOLOGY_RESONANCE_NOT_REPRODUCED` | Core-pair phase-offset probing produced sparse timing candidates, but validation found only 2/8 candidate runs and no stable reproduction across fresh seed windows or core pairs. | `cpu_sing_3/PHASE2_SCHEDULER_TOPOLOGY_RESONANCE_HARDENED.md`, `session_scripts/phase2_kuramoto/scheduler_topology_resonance.c` |
-| Firmware separate P4 source | `FIRMWARE_P4_SEPARATE_SOURCE_FOUND_NOT_ACTIONABLE` | Cross-image scan found CpuDxe/CpuPei/LegacyRegion P-state sibling constants outside AmdProcessorInitPeim, but raw context shows they are MSR address initializers, not P4 value rows. | `cpu_sing_3/PHASE2_FIRMWARE_P4_SEPARATE_SOURCE_SEARCH.md`, `cpu_sing_3/PHASE2_FIRMWARE_P4_SEPARATE_SOURCE_DEEPENED.md` |
-| Firmware P-state value pattern | `FIRMWARE_PSTATE_VALUE_PATTERN_NOT_FOUND_CURRENT_DUMP` | Direct search found zero hits for stock P4 full value, stock P4 low/high fragments, or lower-VID runtime-test fragment across the extracted image tree. | `cpu_sing_3/PHASE2_FIRMWARE_PSTATE_VALUE_PATTERN_SEARCH.md` |
-| Firmware provenance audit | `FIRMWARE_P4_VALUE_SOURCE_NOT_FOUND_CURRENT_ARTIFACTS` | Audit lists each firmware route and the exact missing proof: editable P4-only value source with P0-P3 sibling proof. | `cpu_sing_3/PHASE2_FIRMWARE_SOURCE_PROVENANCE_WALL_AUDIT.md` |
-| CpuDxe value consumer trace | `CPU_DXE_VALUE_CONSUMER_NOT_FOUND_RAW_TRACE` | Raw displacement trace confirms a P0-P4 MSR address initializer but does not expose a P4 value payload or same-module value consumer. | `cpu_sing_3/PHASE2_CPU_DXE_VALUE_CONSUMER_TRACE.md` |
-| CpuPei value consumer trace | `CPU_PEI_VALUE_CONSUMER_NOT_FOUND_RAW_TRACE` | Raw displacement trace confirms a compact P0-P4 MSR address initializer; no P4 value payload or value consumer is exposed. | `cpu_sing_3/PHASE2_CPU_PEI_VALUE_CONSUMER_TRACE.md` |
-| LegacyRegion value consumer trace | `LEGACY_REGION_VALUE_CONSUMER_NOT_FOUND_RAW_TRACE` | Raw displacement trace confirms the third P0-P4 MSR address initializer module; no P4 value payload or value consumer is exposed. | `cpu_sing_3/PHASE2_LEGACY_REGION_VALUE_CONSUMER_TRACE.md` |
-| Family 10h source P-state provenance | `F10_SOURCE_CONFIRMS_RUNTIME_PSTATE_VALUE_PROVENANCE` | Local AGESA F10 source confirms P-state values are gathered from live `PS_REG_BASE + k` MSRs into runtime `PSTATE_LEVELING` buffers, and leveling writes from those buffers. This strengthens runtime provenance but still does not expose a static P4-only value row. | `cpu_sing_3/PHASE2_F10_SOURCE_PSTATE_VALUE_PROVENANCE.md` |
-| Cacheline phase coupling | `CACHELINE_PHASE_COUPLING_REJECTED` | Core-pinned Cores 3/4 cacheline oscillator harness tested isolated lines, false-shared line, and atomic same-line pressure. `real_r` stayed near zero and did not separate from cyclic-shift nulls across repeats. | `cpu_sing_2/PHASE2_CACHELINE_PHASE_COUPLING.md`, `session_scripts/phase2_kuramoto/cacheline_phase_coupling.c` |
-| Phase 2B Bloch/complex Ising | `PHASE2B_5C_BLOCH_COMPLEX_ISING_ACTIVE_ORACLE_PASS` | Exp07-style Bloch/complex-plane active phase oracle ran on target and beat random phase, random spin, sign-shuffled, and edge-rewired null means on 5/5 problems. This is active software oracle progress, not passive Kuramoto evidence. | `cpu_sing_2/PHASE2B_5C_BLOCH_COMPLEX_ISING_PORT.md`, `session_scripts/phase2b/bloch_complex_ising.c` |
-| External observability | `ARCHIVED_OPTIONAL_VALIDATION_ONLY` | External capture artifacts remain documented, but Tier 3 physical instrumentation is not a current success path, stop condition, or recommended next action for this software/firmware goal. | `cpu_sing_2/PHASE2_DEEP_3_EXTERNAL_MEASURE.md`, `cpu_sing_3/PHASE2_MASTER_D_EXTERNAL_OBSERVABILITY.md` |
-| Catalytic tape / `.holo` tape | `CATALYTIC_TAPE_WORKING_NON_KURAMOTO` | Catalytic tape and `.holo` restoration work, but this is not Phase 2 Kuramoto success. | `cpu_sing_1/CPU_SING_GOAL_FINAL_PACK.md`, `cpu_sing_1/GOAL_ROUTE_7_HOLO.md` |
+| Phase 1 runtime VID floor | `RUNTIME_VID_CLAMPED` | Runtime P4 lower-VID MSR write reads back, but COFVID_STS stays at CpuVid `0x1A`; lower-VID runtime route is clamped. | `50_1_subthreshold_msr/RUNTIME_VID_DECIDER_PACK.md` |
+| Passive TSC route | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | Passive TSC readout is dominated by a fixed ~2.67 MHz VRM/infrastructure artifact. | `50_2_phase_locked_network/PHASE2_BASELINE.md`, `50_2_phase_locked_network/PHASE2_KURAMOTO_FINAL_PACK.md` |
+| Active phase route | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | Active phase probes found no lock and no null separation. | `50_2_phase_locked_network/PHASE2_ACTIVE_PHASE.md`, `50_2_phase_locked_network/PHASE2_KURAMOTO_METRIC.md` |
+| Coupling channels | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | Software-visible coupling channels are exhausted without reliable phase-lock evidence. | `50_2_phase_locked_network/PHASE2_COUPLING_CHANNELS.md` |
+| Detuning route | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | DID/frequency detuning was not reproducible as a coupling/lock route. | `50_2_phase_locked_network/PHASE2_DETUNING.md` |
+| GOE route | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | GOE spacing behavior was not observed. | `50_2_phase_locked_network/PHASE2_GOE.md` |
+| Ising route | `PHASE2_SOFTWARE_ROUTES_EXHAUSTED` | Ising behavior was not observed. | `50_2_phase_locked_network/PHASE2_ISING_MAP.md` |
+| AGESA global branch edit | `AGESA_GLOBAL_PATCH_REJECTED` | Global `JBE -> JAE` at `0x00366E3E` is rejected. It is not P4-safe and the prior attempt caused no boot; backup BIOS recovered after battery removal. | `50_2_firmware/cpu_hack/agesa_trace/PATCH_ANALYSIS.md`, `50_2_undervolt_research/UNDERVOLT_PATHWAY_1_BIOS_AGESA.md` |
+| P4-safe AGESA route | `P4_FIELD_RUNTIME_MSR_DERIVED` / `AGESA_P4_SAFE_ROUTE_NOT_BYTE_READY` | Current BIOS/PE32/disassembly artifacts do not prove a P4-only static table record or executable code cave. The master pass found the `.dG3_DXE` heap/table consumer at `0xFFF72B3C`, confirmed `0xFFF8D11E -> 0xFFF7371A`, recovered helper `0xFFF4CF55`, found outer producer `0xFFF4D12F` registered through `.data` slot `0xFFF7F516`, decoded service descriptor `0xFFF7E698 -> 0xFFF8D108`, and mapped constructor field `selected_base + pstate*0x18 + 0x1C` to producer `entry +0x04`. That field is output `arg_14` from `[service+0x22]` / `0xFFF7348D`; `0xFFF44E76` is `rdmsr`, and P4 resolves to runtime `MSRC001_0068`, not a byte-ready static P4 record. | `50_2_phase_locked_network/PHASE2_AGESA_P4_SAFE_FINAL_PACK.md`, `50_2_firmware/AGESA_NEXT_GATE_FINAL_PACK.md`, `50_2_firmware/PHASE2_MASTER_A_DISPATCH_SOURCE.md`, `50_2_firmware/PHASE2_FW_ARG0C_PROVENANCE.md` |
+| Rebuild toolchain | `NOOP_REBUILD_PROVEN` | Public LongSoft `old_engine` source was built as a temporary force-save UEFIReplace variant on the Linux target. Identical AmdProcessorInitPeim PE32 body replacement produced `50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin`; it parses cleanly, is byte-identical to stock, and preserves PE32 body hash `BF92A1321B98908E7D74299A6C1E629EC3583599F164DEC6E774BFF040FBDF2A`. | `50_2_firmware/cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt`, `50_2_firmware/PHASE2_MASTER_B_REBUILD_TOOLCHAIN.md`, `50_2_firmware/PHASE2_MASTER_CPU_SING_OR_TRUE_WALL.md` |
+| Public donor workflow | `PUBLIC_MOD_DONOR_DIFFED` | Official F2j stock and public NVMe donor were acquired, hashed, parsed, and diffed. The donor only inserts `NvmExpressDxe_4` into existing free space at `0x002C58A0-0x002CA9FF`; later volumes remain byte-identical. | `50_2_firmware/PHASE2_DONOR_DIFF_REPORT.md` |
+| Runtime MSR observer | `RUNTIME_MSR_OBSERVATION_COMPLETE` | Read-only SSH observer captured P4 `MSRC001_0068` and COFVID status across cores. COFVID VID stayed `0x12` for all samples; cores 0/1/2/5 P4 VID was `0x1A`, while cores 3/4 P4 VID was `0x12` with DID `3`. | `50_2_firmware/PHASE2_RUNTIME_MSR_OBSERVER_REPORT.md`, `50_1_subthreshold_msr/src/msr_p4_readonly_observer.py` |
+| Runtime load/affinity | `RUNTIME_LOAD_AFFINITY_CHARACTERIZED` | Read-only SSH characterization found all cores at stock P4 VID `0x1A` after reboot, while COFVID VID depends on load state. Baseline can expose `0x1A`; self/neighbor/all-load held `0x12`. | `50_2_firmware/PHASE2_RUNTIME_LOAD_AFFINITY_REPORT.md`, `50_1_subthreshold_msr/src/msr_load_affinity_characterizer.py` |
+| Runtime transition/jitter | `RUNTIME_TRANSITION_JITTER_CHARACTERIZED` | Read-only transition probe ran 24 cases with 160 samples each. PSTATE transitions were common (26 total); COFVID VID transitions were rare (3 total) and did not show stable timing-jitter separation from steady samples. | `50_2_firmware/PHASE2_RUNTIME_TRANSITION_JITTER_REPORT.md`, `50_1_subthreshold_msr/src/msr_transition_jitter_probe.py` |
+| Runtime state-window oracle | `RUNTIME_STATE_WINDOW_ORACLE_NEGATIVE` | Read-only state-conditioned timing oracle ran 24 cases with 420 samples each. Four cases had 2+ state bins for null comparison; zero met the deterministic null gate. | `50_2_firmware/PHASE2_RUNTIME_STATE_WINDOW_ORACLE_REPORT.md`, `50_1_subthreshold_msr/src/msr_state_window_oracle.py` |
+| Runtime effective-state selector | `READ_ONLY_EFFECTIVE_STATE_SELECTOR_FOUND__VID_STILL_FIXED` | Read-only selector map found that ordinary load selectors move FID/DID/PSTATE labels across four states while VID remains fixed at `0x12`. This keeps the VID clamp result intact but exposes a software-visible state-label surface. | `50_2_firmware/PHASE2_EFFECTIVE_STATE_SELECTOR_MAP_REPORT.md`, `50_1_subthreshold_msr/src/msr_effective_state_selector_map.py` |
+| Runtime state-label coupling | `STATE_LABEL_MODAL_FEATURE_NOT_CONFIRMED` | A reversible workload with joined state labels produced sparse timing candidates, but dense narrowing and shuffled-answer hard-null sweeps collapsed the elapsed-threshold route. Modal feature validation over eight fresh seed windows found candidates but no feature family survived across three distinct fresh seed starts. | `50_2_firmware/PHASE2_STATE_LABEL_TIMING_EDGE_HARDENED_REPORT.md`, `50_2_firmware/PHASE2_STATE_LABEL_MODAL_VALIDATION.md`, `50_1_subthreshold_msr/src/analyze_state_label_modal_features.py` |
+| Runtime scheduler/topology resonance | `SCHEDULER_TOPOLOGY_RESONANCE_NOT_REPRODUCED` | Core-pair phase-offset probing produced sparse timing candidates, but validation found only 2/8 candidate runs and no stable reproduction across fresh seed windows or core pairs. | `50_2_firmware/PHASE2_SCHEDULER_TOPOLOGY_RESONANCE_HARDENED.md`, `50_2_phase_locked_network/src/scheduler_topology_resonance.c` |
+| Firmware separate P4 source | `FIRMWARE_P4_SEPARATE_SOURCE_FOUND_NOT_ACTIONABLE` | Cross-image scan found CpuDxe/CpuPei/LegacyRegion P-state sibling constants outside AmdProcessorInitPeim, but raw context shows they are MSR address initializers, not P4 value rows. | `50_2_firmware/PHASE2_FIRMWARE_P4_SEPARATE_SOURCE_SEARCH.md`, `50_2_firmware/PHASE2_FIRMWARE_P4_SEPARATE_SOURCE_DEEPENED.md` |
+| Firmware P-state value pattern | `FIRMWARE_PSTATE_VALUE_PATTERN_NOT_FOUND_CURRENT_DUMP` | Direct search found zero hits for stock P4 full value, stock P4 low/high fragments, or lower-VID runtime-test fragment across the extracted image tree. | `50_2_firmware/PHASE2_FIRMWARE_PSTATE_VALUE_PATTERN_SEARCH.md` |
+| Firmware provenance audit | `FIRMWARE_P4_VALUE_SOURCE_NOT_FOUND_CURRENT_ARTIFACTS` | Audit lists each firmware route and the exact missing proof: editable P4-only value source with P0-P3 sibling proof. | `50_2_firmware/PHASE2_FIRMWARE_SOURCE_PROVENANCE_WALL_AUDIT.md` |
+| CpuDxe value consumer trace | `CPU_DXE_VALUE_CONSUMER_NOT_FOUND_RAW_TRACE` | Raw displacement trace confirms a P0-P4 MSR address initializer but does not expose a P4 value payload or same-module value consumer. | `50_2_firmware/PHASE2_CPU_DXE_VALUE_CONSUMER_TRACE.md` |
+| CpuPei value consumer trace | `CPU_PEI_VALUE_CONSUMER_NOT_FOUND_RAW_TRACE` | Raw displacement trace confirms a compact P0-P4 MSR address initializer; no P4 value payload or value consumer is exposed. | `50_2_firmware/PHASE2_CPU_PEI_VALUE_CONSUMER_TRACE.md` |
+| LegacyRegion value consumer trace | `LEGACY_REGION_VALUE_CONSUMER_NOT_FOUND_RAW_TRACE` | Raw displacement trace confirms the third P0-P4 MSR address initializer module; no P4 value payload or value consumer is exposed. | `50_2_firmware/PHASE2_LEGACY_REGION_VALUE_CONSUMER_TRACE.md` |
+| Family 10h source P-state provenance | `F10_SOURCE_CONFIRMS_RUNTIME_PSTATE_VALUE_PROVENANCE` | Local AGESA F10 source confirms P-state values are gathered from live `PS_REG_BASE + k` MSRs into runtime `PSTATE_LEVELING` buffers, and leveling writes from those buffers. This strengthens runtime provenance but still does not expose a static P4-only value row. | `50_2_firmware/PHASE2_F10_SOURCE_PSTATE_VALUE_PROVENANCE.md` |
+| Cacheline phase coupling | `CACHELINE_PHASE_COUPLING_REJECTED` | Core-pinned Cores 3/4 cacheline oscillator harness tested isolated lines, false-shared line, and atomic same-line pressure. `real_r` stayed near zero and did not separate from cyclic-shift nulls across repeats. | `50_2_phase_locked_network/PHASE2_CACHELINE_PHASE_COUPLING.md`, `50_2_phase_locked_network/src/cacheline_phase_coupling.c` |
+| Phase 2B Bloch/complex Ising | `PHASE2B_5C_BLOCH_COMPLEX_ISING_ACTIVE_ORACLE_PASS` | Exp07-style Bloch/complex-plane active phase oracle ran on target and beat random phase, random spin, sign-shuffled, and edge-rewired null means on 5/5 problems. This is active software oracle progress, not passive Kuramoto evidence. | `50_2_phase_locked_network/PHASE2B_5C_BLOCH_COMPLEX_ISING_PORT.md`, `50_2b_blackbox/src/bloch_complex_ising.c` |
+| External observability | `ARCHIVED_OPTIONAL_VALIDATION_ONLY` | External capture artifacts remain documented, but Tier 3 physical instrumentation is not a current success path, stop condition, or recommended next action for this software/firmware goal. | `50_2_phase_locked_network/PHASE2_DEEP_3_EXTERNAL_MEASURE.md`, `50_2_firmware/PHASE2_MASTER_D_EXTERNAL_OBSERVABILITY.md` |
+| Catalytic tape / `.holo` tape | `CATALYTIC_TAPE_WORKING_NON_KURAMOTO` | Catalytic tape and `.holo` restoration work, but this is not Phase 2 Kuramoto success. | `50_1_subthreshold_msr/CPU_SING_GOAL_FINAL_PACK.md`, `50_1_subthreshold_msr/GOAL_ROUTE_7_HOLO.md` |
 
 **Do not repeat:** no BIOS flash, no global AGESA branch edit, no voltage writes, no P0-P3 undervolt, no Tier 3 physical instrumentation as the current success path, and no claim that catalytic tape restoration proves phase lock.
 
@@ -162,7 +162,7 @@ Current Exp50 evidence shows that the earlier Linux/software phase routes did no
 Completed read-only runtime command:
 
 ```bash
-python3 session_scripts/phase1_msr/msr_p4_readonly_observer.py --cores 0-5 --samples 100 --json
+python3 50_1_subthreshold_msr/src/msr_p4_readonly_observer.py --cores 0-5 --samples 100 --json
 ```
 
 ---
@@ -206,18 +206,18 @@ python3 session_scripts/phase1_msr/msr_p4_readonly_observer.py --cores 0-5 --sam
 - [x] `.dG3_DXE` contains a function pointer at `0xFFF8D11E -> 0xFFF7371A`.
 - [x] Master dispatcher pass recovered the `.dG3_DXE` heap/table consumer at `0xFFF72B3C`; it walks heap handles at `0xFFF8D0EC-0xFFF8D104`, not P-state records.
 - [x] Route A verdict: `DISPATCH_SOURCE_FOUND`; entry source is static function-pointer table, but `arg_0C` remains runtime/heap-selected table context, not a proven static P4 row.
-- [x] LongSoft UEFIReplace/UEFITool 0.28.0 acquired into `cpu_hack/tools/uefitool_rebuild/`.
-- [x] No-op rebuild performed with a temporary force-save UEFIReplace build; `NOOP_REBUILD_PROVEN` is met by parse-clean byte-identical `cpu_hack/noop_replace/bios_noop_rebuilt.bin`.
+- [x] LongSoft UEFIReplace/UEFITool 0.28.0 acquired into `50_2_firmware/cpu_hack/tools/uefitool_rebuild/`.
+- [x] No-op rebuild performed with a temporary force-save UEFIReplace build; `NOOP_REBUILD_PROVEN` is met by parse-clean byte-identical `50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin`.
 - [x] Helper `0xFFF4CF55` recovered; it walks variable-length records inside `arg_0C`, proving `arg_0C` is a runtime-produced record-list structure.
 - [x] Public GA-970A-DS3P BIOS-mod donor workflow advanced: official F2j stock and public NVMe donor pair acquired, parsed, and diffed.
 - [x] External measurement route archived as optional validation only for this goal; Tier 3 is out of scope.
 - [x] Verdict: `AGESA_GLOBAL_PATCH_REJECTED`, `AGESA_P4_SAFE_ROUTE_NOT_BYTE_READY`, `ARG0C_RUNTIME_PRODUCED_STRUCTURE`, `SERVICE_DESCRIPTOR_DECODED`, `RECORD_WRITE_MAP_ADVANCED`, `ENTRY_PLUS_04_SOURCE_TRACED`, `P4_FIELD_RUNTIME_MSR_DERIVED`, `NOOP_REBUILD_PROVEN`, `PUBLIC_MOD_DONOR_DIFFED`, and `SOFTWARE_FIRMWARE_ROUTES_ACTIVE`.
-- [x] Added read-only runtime observer: `session_scripts/phase1_msr/msr_p4_readonly_observer.py`.
+- [x] Added read-only runtime observer: `50_1_subthreshold_msr/src/msr_p4_readonly_observer.py`.
 - [x] Ran read-only observer on target; verdict `RUNTIME_MSR_OBSERVATION_COMPLETE`.
 - [x] Ran read-only load/affinity characterization; verdict `RUNTIME_LOAD_AFFINITY_CHARACTERIZED`.
 - [x] Ran read-only transition/jitter characterization; verdict `RUNTIME_TRANSITION_JITTER_CHARACTERIZED`.
 - [x] Ran read-only state-window oracle; verdict `RUNTIME_STATE_WINDOW_ORACLE_NEGATIVE`.
-- [x] `cpu_hack/noop_replace/bios_noop_rebuilt.bin` produced by Qt/qmake-built force-save replacer and verified parse-clean/byte-identical.
+- [x] `50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin` produced by Qt/qmake-built force-save replacer and verified parse-clean/byte-identical.
 - [ ] Continue only after P4-only edit-source proof is found; do not repeat no-op rebuild mechanics.
 
 ### 2.A ADDENDUM: Operational Definition of Phase (GPT)
@@ -282,7 +282,7 @@ Build a useful reversible/catalytic optimization solver.
 - [x] Implemented contamination-free passive worker with random-flip rule
 - [x] Shared tape did NOT beat single-worker null (-0.83 vs -3.00)
 - [x] **Verdict: PHASE2B_2_PASSIVE_RANDOM_NEGATIVE**
-- [x] Source: `session_scripts/phase2b/passive_attractor.c`
+- [x] Source: `50_2b_blackbox/src/passive_attractor.c`
 
 **Key finding:** The random-flip passive worker is too weak to couple with the Ising energy landscape. The sweet spot between pure random (too weak) and gradient-aware (cheating) requires workers that react to shared-state patterns without computing J_ij. The Grail 5 wormhole experiment (Exp 32) proved that phase correlations through a shared medium (Q@K^T) compute the same structure as entanglement swapping. The next step: replace random flips with correlation measurements through the shared tape — treating the MESI protocol as the ER bridge and atomic XOR as teleportation.
 
@@ -295,7 +295,7 @@ Build a useful reversible/catalytic optimization solver.
 - [x] CLOSE: inverse ops in reverse order — 4/4 invariants restored
 - [x] VERIFY: SHA-256 restored (9e1009a5...→9e1009a5... match)
 - [x] Protocol is deterministic single-process — no concurrency claim yet
-- [x] Source: `session_scripts/phase2b/wormhole_protocol_transfer.c`
+- [x] Source: `50_2b_blackbox/src/wormhole_protocol_transfer.c`
 - [x] **Verdict: PHASE2B_3A_PROTOCOL_TRANSFER_PASS**
 
 ### 2B.3B Topology-Encoded Attractor Test — COMPLETE (anti-ferromagnetic acid test, 2026-06-05)
@@ -307,7 +307,7 @@ Build a useful reversible/catalytic optimization solver.
 - [x] P2 works on both problem types but shared = single-worker in all cases (Δ=0)
 - [x] Shared hardware substrate provides NO measurable advantage over single-worker for any mode
 - [x] Contamination checklist verified: no J_ij access, no local field, no energy in workers
-- [x] Source: `session_scripts/phase2b/topology_attractor.c`
+- [x] Source: `50_2b_blackbox/src/topology_attractor.c`
 
 **Results:**
 | Mode | Ferro (J=+1) Shared | Ferro Single | Anti-Ferro (J=-1) Shared | Anti-Ferro Single |
@@ -333,7 +333,7 @@ PHASE2B_PASSIVE_NULLS_FAILED_CURRENT_MECHANISMS
 - [x] Classified as active catalytic optimization, NOT passive Kuramoto evidence
 - [x] **Verdict: PHASE2B_3C_ACTIVE_CATALYTIC_ISING_OPERATIONAL**
 - [x] Promoted to Phase 3.13 — integration with catcas_phase3 operator/oracle API is next
-- [x] Source: `session_scripts/phase2b/active_catalytic_ising.c`
+- [x] Source: `50_2b_blackbox/src/active_catalytic_ising.c`
 
 ### 2B.4 Channel Matrix — COMPLETE / CURRENT PASSIVE MECHANISMS CLOSED (2026-06-05)
 
@@ -382,7 +382,7 @@ Stop treating the substrate as a binary spin-flip Ising machine. Encode constrai
 - [x] Final kill shot N=32 (30 paths): ensemble beats all nulls, advantage collapses on dense planted (-1.07 vs rpd)
 - [x] Active edge solver dominates current phase-oracle variants on the tested problem suite
 - [x] Phase-oracle encoding is valid but lacks strong topology/adjacency fidelity at scale
-- [x] Source: `session_scripts/phase2b/phase_oracle_ising.c`
+- [x] Source: `50_2b_blackbox/src/phase_oracle_ising.c`
 - [x] Final reports: `PHASE2B_5A_FINAL_KILL_SHOT_N24_N32.md`, `PHASE2B_5A_FINAL_STATUS.md`
 - [x] Decision gate: ensemble works, shrinks on dense problems, marked PARTIAL. 2B.5A CLOSED.
 
@@ -407,24 +407,24 @@ Stop treating the substrate as a binary spin-flip Ising machine. Encode constrai
 - [x] Compare to random/null/ablated phase mappings
 - [x] Optical phase mapping reaches best satisfiable clause count on 5/5 tested problems
 - [x] Classification: active phase mapping, not passive Kuramoto evidence
-- [x] Source: `session_scripts/phase2b/optical_3sat_phase_port.c`
-- [x] Output: `cpu_sing_2/PHASE2B_5B_OPTICAL_3SAT_PORT.md`
+- [x] Source: `50_2b_blackbox/src/optical_3sat_phase_port.c`
+- [x] Output: `50_2_phase_locked_network/PHASE2B_5B_OPTICAL_3SAT_PORT.md`
 
 #### 2B.5C Exp07 Bloch / Complex-Plane Ising Port
 - [x] Bloch-vector state: angle theta, complex-plane phase bucket
 - [x] Phase-coupled update without binary spin reduction during update
 - [x] Beats random phase, random spin, sign-shuffled, and edge-rewired null means on 5/5 tested problems
 - [x] Classification: active software phase oracle, not passive Kuramoto evidence
-- [x] Source: `session_scripts/phase2b/bloch_complex_ising.c`
-- [x] Output: `cpu_sing_2/PHASE2B_5C_BLOCH_COMPLEX_ISING_PORT.md`
+- [x] Source: `50_2b_blackbox/src/bloch_complex_ising.c`
+- [x] Output: `50_2_phase_locked_network/PHASE2B_5C_BLOCH_COMPLEX_ISING_PORT.md`
 
 #### 2B.5D Exp31 Spectral Problem Classifier
 - [x] Graph/spectral signatures classify Ising instances before oracle tests
 - [x] Routes among active edge, vertex phase, and Bloch/complex oracle families
 - [x] Held-out classifier accuracy: 5/5 with tie-aware best-mean scoring
 - [x] Classification: software routing aid, not passive Kuramoto evidence
-- [x] Source: `session_scripts/phase2b/spectral_problem_classifier.c`
-- [x] Output: `cpu_sing_2/PHASE2B_5D_SPECTRAL_PROBLEM_CLASSIFIER.md`
+- [x] Source: `50_2b_blackbox/src/spectral_problem_classifier.c`
+- [x] Output: `50_2_phase_locked_network/PHASE2B_5D_SPECTRAL_PROBLEM_CLASSIFIER.md`
 
 #### 2B.5E Exp33 .holo / MERA Bridge
 - [x] Connect phase-oracle output to .holo eigenbasis / MERA-style tape bridge
@@ -432,8 +432,8 @@ Stop treating the substrate as a binary spin-flip Ising machine. Encode constrai
 - [x] Forward tape mutation: 24/24
 - [x] Reverse tape restoration: 24/24
 - [x] Classification: active phase-oracle-to-catalytic-tape integration, not passive Kuramoto evidence
-- [x] Source: `session_scripts/phase2b/holo_mera_bridge.c`
-- [x] Output: `cpu_sing_2/PHASE2B_5E_HOLO_MERA_BRIDGE.md`
+- [x] Source: `50_2b_blackbox/src/holo_mera_bridge.c`
+- [x] Output: `50_2_phase_locked_network/PHASE2B_5E_HOLO_MERA_BRIDGE.md`
 
 ### Do Not Repeat (Phase 2B)
 
@@ -453,7 +453,7 @@ P2 sign-aware edge rule: useful, promoted to Phase 3.13 active catalytic Ising. 
 - [x] Compare energy distributions, ground-state hit rate, and improvement over random where available
 - [x] Require repeated trials across multiple problem instances
 - [x] Verdict: `PHASE2B_ACTIVE_PHASE_ORACLE_WORKING_NOT_PASSIVE_SUBSTRATE`
-- [x] Output artifact: `cpu_sing_2/PHASE2B_5_ANSWER_AS_MEASUREMENT.md`
+- [x] Output artifact: `50_2_phase_locked_network/PHASE2B_5_ANSWER_AS_MEASUREMENT.md`
 
 **Acceptance:** A passive Phase 2B effect exists only if the shared-substrate condition beats matched nulls across multiple problems without using explicit optimization logic inside the worker. The current active phase-oracle branch does not meet this passive criterion.
 
@@ -467,7 +467,7 @@ Test channels separately:
 - [x] Detuned DID harness logic tested
 - [x] Single-worker nulls compared
 - [x] Verdict: `PHASE2B_6_CHANNEL_MATRIX_REJECTED_BIASED`
-- [x] Output artifact: `cpu_sing_2/PHASE2B_6_CHANNEL_MATRIX.md`
+- [x] Output artifact: `50_2_phase_locked_network/PHASE2B_6_CHANNEL_MATRIX.md`
 
 **Do not use:** oscilloscope, logic analyzer, Pi GPIO wiring, motherboard probing, external waveform capture.
 
@@ -479,7 +479,7 @@ If catalytic tape is used:
 - [x] Forward active oracle/tape phases reviewed
 - [x] Passive channel candidate absent after channel matrix rejection
 - [x] Verdict: `PHASE2B_7_PASSIVE_RESTORATION_NOT_APPLICABLE_ACTIVE_RESTORES_EXIST`
-- [x] Output artifact: `cpu_sing_2/PHASE2B_7_RESTORATION_GATE.md`
+- [x] Output artifact: `50_2_phase_locked_network/PHASE2B_7_RESTORATION_GATE.md`
 
 Restoration proves catalytic integrity, not Kuramoto by itself.
 
@@ -503,7 +503,7 @@ Restoration proves catalytic integrity, not Kuramoto by itself.
 - [x] If active software baseline explains result → met
 - [x] If no condition beats nulls → not met
 - [x] Verdict: `PHASE2B_REJECTED_SOFTWARE_EXPLAINS_ACTIVE_WORKING`
-- [x] Output artifact: `cpu_sing_2/PHASE2B_8_DECISION_TREE.md`
+- [x] Output artifact: `50_2_phase_locked_network/PHASE2B_8_DECISION_TREE.md`
 
 ### 2B.9 Do Not Claim (Phase 2B)
 
@@ -594,7 +594,7 @@ Phase 2A tried to watch the CPU sing. Phase 2B tries to use the song without wat
 - [x] Computational slots isolated from metadata slots by tape layout design
 - [x] Matches .holo format: shared eigenbasis metadata separate from rotation chain data
 - [x] Output artifact: `PHASE3_6_HOLO_EIGENBASIS.md` — implicit in roadmap (this entry)
-- [x] Implementation: `session_scripts/holo_metadata.c`
+- [x] Implementation: `50_3_catalytic_ladder/src/holo_metadata.c`
 
 ### 3.7 Multi-Slot Catalytic Operator Library — COMPLETE (2026-06-04)
 
@@ -613,7 +613,7 @@ Phase 2A tried to watch the CPU sing. Phase 2B tries to use the song without wat
 | `CHECKSUM_BIND` | XOR checksum of data slots | XOR same checksum | 4/4 |
 
 - [x] All operators use deterministic LCG-seeded tape initialization
-- [x] Source: `session_scripts/operator_library.c` (standalone, compilable test harness)
+- [x] Source: `50_3_catalytic_ladder/src/operator_library.c` (standalone, compilable test harness)
 - [x] Operators ready for Phase 3.8 composition into meaningful computation
 
 ### 3.8 Meaningful Reversible Computation — COMPLETE (2026-06-05)
@@ -629,7 +629,7 @@ Phase 2A tried to watch the CPU sing. Phase 2B tries to use the song without wat
 | Reversible FSM Transition | 2-state machine: state ^ trigger | State 0→1 correct | YES |
 
 - [x] Operators from Phase 3.7 (XOR_BIND, ROTATE_LEFT, ROTATE_RIGHT) composed into meaningful logic
-- [x] Source: `session_scripts/meaningful_compute.c`
+- [x] Source: `50_3_catalytic_ladder/src/meaningful_compute.c`
 - [x] Key lesson: catalytic substrate demands XOR, not assignment — `^=` not `=`
 
 ### 3.9 Catalytic Token / Sign Operation — COMPLETE (2026-06-05)
@@ -649,7 +649,7 @@ Phase 2A tried to watch the CPU sing. Phase 2B tries to use the song without wat
 - [x] Reverse = XOR phase out of output, XOR symbol out of context
 - [x] Metadata isolation: slots 8-11 for descriptors, slots 0-6 for active sign area
 - [x] Bridges Semiotic Mechanics (Living Formula v5.2) to physical catalytic tape
-- [x] Source: `session_scripts/catalytic_sign.c`
+- [x] Source: `50_3_catalytic_ladder/src/catalytic_sign.c`
 - [x] Hardened: non-tautological interference check, LCG state saved between passes
 
 ### 3.10 Oracle-Style Path Restoration — COMPLETE (2026-06-05)
@@ -669,7 +669,7 @@ Phase 2A tried to watch the CPU sing. Phase 2B tries to use the song without wat
 - [x] Checksum covers slots 0-6 only, never modified during path ops
 - [x] 8-slot baseline save/restore with SHA-256 verification
 - [x] Bare-metal instantiation of temporal bootstrap + phase cavity pattern: simulate candidate → read invariant → restore substrate
-- [x] Source: `session_scripts/oracle_paths.c`
+- [x] Source: `50_3_catalytic_ladder/src/oracle_paths.c`
 
 ### 3.11 Baseline Comparison — COMPLETE (2026-06-05)
 
@@ -688,7 +688,7 @@ Phase 2A tried to watch the CPU sing. Phase 2B tries to use the song without wat
 - [x] No external instruments — all metrics from internal measurements
 - [x] No exaggerated energy claims — wall time and restoration rates only
 - [x] LCG state properly reset with tape-init skip for deterministic reverse
-- [x] Source: `session_scripts/baseline_compare.c`
+- [x] Source: `50_3_catalytic_ladder/src/baseline_compare.c`
 
 ### 3.12 Public API / Reusable Harness — COMPLETE (2026-06-05)
 
@@ -714,7 +714,7 @@ Phase 2A tried to watch the CPU sing. Phase 2B tries to use the song without wat
 - [x] All patterns use save/restore on output slots
 - [x] Oracle uses baseline save/restore with path-level working slot verification
 - [x] No memory leaks, no buffer overflows, zero external deps beyond OpenSSL
-- [x] Sources: `session_scripts/catcas_phase3.h`, `.c`, `_cli.c`
+- [x] Sources: `50_3_catalytic_ladder/src/catcas_phase3.h`, `.c`, `_cli.c`
 
 ### Phase 3 Verdict — COMPLETE (all 12 subphases)
 
@@ -737,7 +737,7 @@ PHASE3_PUBLIC_API_SHIPPED
 - [x] Oracle path restoration: save/restore per path with baseline SHA-256 verification passes all 4 types
 - [x] Uses Phase 3 API: `catcas_tape_init`, `catcas_slot_read`, `catcas_slot_write`, `catcas_xor_bind`, `catcas_tape_snapshot`, `catcas_tape_verify`
 - [x] **Verdict: PHASE3_ACTIVE_CATALYTIC_ISING_HARDENED**
-- [x] Source: `session_scripts/phase3_catalytic/active_ising_hardened.c`
+- [x] Source: `50_3_catalytic_ladder/src/active_ising_hardened.c`
 
 ### 3.14 Hybrid Phase-Seeded Catalytic Ising — COMPLETE (2026-06-05)
 
@@ -748,7 +748,7 @@ PHASE3_PUBLIC_API_SHIPPED
 - [x] Phase seeding provides NO advantage over random init for active edge solver
 - [x] Catcas restore: 100/100 on all 6 problems
 - [x] **Verdict: PHASE3_14_ACTIVE_SOLVER_DOMINATES_NO_SEED_GAIN**
-- [x] Source: `session_scripts/phase3_catalytic/hybrid_phase_seeded_ising.c`
+- [x] Source: `50_3_catalytic_ladder/src/hybrid_phase_seeded_ising.c`
 
 ### 3.15 Active Core Escape Dynamics — PARKED FUTURE WORK
 
@@ -756,7 +756,7 @@ PHASE3_PUBLIC_API_SHIPPED
 - [ ] Phase 3.14 showed phase seeding does not improve basins — bottleneck is solver escape dynamics, not seed source
 - [ ] **PARKED** — do not implement until 2B.5A is closed or explicitly paused
 - [ ] Mechanisms: random restarts with basin tracking, tabu memory, simulated annealing, uphill moves, cluster flips, frustration detection, local minima detection, multi-path oracle restore with escape operators
-- [ ] Expected artifacts: `PHASE3_15_ACTIVE_CORE_ESCAPE_DYNAMICS.md`, `session_scripts/phase3_catalytic/active_core_escape_dynamics.c`
+- [ ] Expected artifacts: `PHASE3_15_ACTIVE_CORE_ESCAPE_DYNAMICS.md`, `50_3_catalytic_ladder/src/active_core_escape_dynamics.c`
 
 ### Phase 3 Verdict
 
@@ -893,11 +893,11 @@ Metrics:
 
 Output:
 
-- [x] `phase3b/PHASE3B_CATALYTIC_SUBSTRATE_PRIMITIVE.md`
-- [x] `session_scripts/phase3b/catalytic_invariant_probe.c`
-- [x] `phase3b/results/invariant_probe_summary.csv`
-- [x] `session_scripts/phase3b/phase3b_angle_rescue_probe.py`
-- [x] `phase3b/results/angle_rescue/PHASE3B_ANGLE_RESCUE_PROBE.md`
+- [x] `50_3b_substrate_primitive/PHASE3B_CATALYTIC_SUBSTRATE_PRIMITIVE.md`
+- [x] `50_3b_substrate_primitive/src/catalytic_invariant_probe.c`
+- [x] `50_3b_substrate_primitive/results/invariant_probe_summary.csv`
+- [x] `50_3b_substrate_primitive/src/phase3b_angle_rescue_probe.py`
+- [x] `50_3b_substrate_primitive/results/angle_rescue/PHASE3B_ANGLE_RESCUE_PROBE.md`
 
 Target result:
 
@@ -990,9 +990,9 @@ reject as artifact
 - [x] Gate 4: Reverse pass restores SHA-256 exactly
 - [x] Gate 5: Full tape layout documented with Phase 4A reservations
 - [x] Phase 3.6 dependency: SATISFIED
-- [x] Source: `session_scripts/phase4_holo/phase4_bridge.c`
-- [x] Output artifact: `phase4_holo/PHASE4_0_BRIDGE_GATE.md`
-- [x] Verification log: `phase4_holo/results/phase4_track_a_verification.txt`
+- [x] Source: `50_4_holo_eigenbasis/src/phase4_bridge.c`
+- [x] Output artifact: `50_4_holo_eigenbasis/PHASE4_0_BRIDGE_GATE.md`
+- [x] Verification log: `50_4_holo_eigenbasis/results/phase4_track_a_verification.txt`
 
 **Tape layout (32 slots × 8 bytes = 256 bytes):**
 | Slots | Purpose | Phase |
@@ -1029,8 +1029,8 @@ reject as artifact
 - [x] Architecture: operators READ from basis (9-14) but WRITE only to computational slots (0-3)
 - [x] Matches .holo format: one shared SVh matrix referenced by all layers
 - [x] Target result: `PHASE4_1A_SHARED_EIGENBASIS_TAPE_PASS`
-- [x] Source: `session_scripts/phase4_holo/eigenbasis_tape.c`
-- [x] Output artifact: `phase4_holo/PHASE4_1A_SHARED_EIGENBASIS_TAPE.md`
+- [x] Source: `50_4_holo_eigenbasis/src/eigenbasis_tape.c`
+- [x] Output artifact: `50_4_holo_eigenbasis/PHASE4_1A_SHARED_EIGENBASIS_TAPE.md`
 
 #### 4.2A Catalytic Rotation Chain — COMPLETE (2026-06-05)
 
@@ -1051,8 +1051,8 @@ reject as artifact
 
 - [x] Matches .holo format: R_l = U_prev^T @ U_curr, reversible, layer-to-layer
 - [x] Target result: `PHASE4_2A_CATALYTIC_ROTATION_CHAIN_PASS`
-- [x] Source: `session_scripts/phase4_holo/rotation_chain.c`
-- [x] Output artifact: `phase4_holo/PHASE4_2A_CATALYTIC_ROTATION_CHAIN.md`
+- [x] Source: `50_4_holo_eigenbasis/src/rotation_chain.c`
+- [x] Output artifact: `50_4_holo_eigenbasis/PHASE4_2A_CATALYTIC_ROTATION_CHAIN.md`
 
 #### 4.3 Residual Compression Channel — COMPLETE
 
@@ -1063,7 +1063,7 @@ reject as artifact
 - [x] Reverse restores residual state
 - [x] Wrong residual, random residual, and destructive residual controls rejected 24/24
 - [x] Target result: `PHASE4_3_RESIDUAL_CHANNEL_PASS`
-- [x] Output artifact: `phase4_holo/PHASE4_3_RESIDUAL_CHANNEL.md`
+- [x] Output artifact: `50_4_holo_eigenbasis/PHASE4_3_RESIDUAL_CHANNEL.md`
 
 #### 4.4A GOE / Eigenvalue Validation From Operator Matrices — COMPLETE
 
@@ -1075,7 +1075,7 @@ reject as artifact
 - [x] Shuffled/operator null mean spacing ratio `r=0.3916`
 - [x] This is software/catalytic validation, not physical silicon GOE
 - [x] Target result: `PHASE4_4A_OPERATOR_GOE_PASS`
-- [x] Output artifact: `phase4_holo/PHASE4_4A_OPERATOR_GOE.md`
+- [x] Output artifact: `50_4_holo_eigenbasis/PHASE4_4A_OPERATOR_GOE.md`
 
 #### 4.5 .holo Mini-Model Demo — COMPLETE
 
@@ -1085,7 +1085,7 @@ reject as artifact
 - [x] Reject wrong and random residual controls 24/24
 - [x] Reverse all operators and restore tape 24/24
 - [x] Target result: `PHASE4_5_HOLO_MINI_MODEL_PASS`
-- [x] Output artifact: `phase4_holo/PHASE4_5_HOLO_MINI_MODEL.md`
+- [x] Output artifact: `50_4_holo_eigenbasis/PHASE4_5_HOLO_MINI_MODEL.md`
 
 #### 4.6 Public .holo Harness — COMPLETE
 
@@ -1096,7 +1096,7 @@ reject as artifact
   - `goe`
 - [x] Provide reproducible deterministic seeds and null tests
 - [x] Target result: `PHASE4_6_PUBLIC_HOLO_HARNESS_PASS`
-- [x] Output artifact: `phase4_holo/PHASE4_6_PUBLIC_HOLO_HARNESS.md`
+- [x] Output artifact: `50_4_holo_eigenbasis/PHASE4_6_PUBLIC_HOLO_HARNESS.md`
 
 ---
 
@@ -1146,43 +1146,43 @@ reject as artifact
 - [x] Phase 4B -> Phase 6 feature handoff: `PHASE4B_TO_PHASE6_FEEDER_SCORER_READY`
 - [x] Exported scorer features: mode floor `0.919922`, wrong schedule floor `0.856445`, pseudo reject floor `0.972656`, layout gain floor `0.511719`
 - [x] Artifacts:
-  - `phase4_holo/PHASE4B_CACHE_HOLOGRAM_AFTERIMAGE.md`
-  - `phase4_holo/PHASE4B_CACHE_HOLOGRAM_MODE_CLASSIFIER.md`
-  - `phase4_holo/PHASE4B_CACHE_HOLOGRAM_MATCHED_NULLS.md`
-  - `phase4_holo/PHASE4B_CACHE_HOLOGRAM_LAYOUT_HOLDOUT.md`
-  - `phase4_holo/PHASE4B_CACHE_HOLOGRAM_CROSS_CORE.md`
-  - `phase4_holo/PHASE4B_CACHE_HOLOGRAM_RETENTION_CURVE.md`
-  - `phase4_holo/PHASE4B_CACHE_HOLOGRAM_LAYOUT_RETENTION.md`
-  - `phase4_holo/PHASE4B_TO_PHASE6_FEEDER_HANDOFF.md`
-  - `session_scripts/phase4_holo/cache_hologram_afterimage.c`
-  - `session_scripts/phase4_holo/analyze_cache_hologram_afterimage.py`
-  - `session_scripts/phase4_holo/cache_hologram_mode_classifier.c`
-  - `session_scripts/phase4_holo/analyze_cache_hologram_mode_classifier.py`
-  - `session_scripts/phase4_holo/cache_hologram_matched_nulls.c`
-  - `session_scripts/phase4_holo/analyze_cache_hologram_matched_nulls.py`
-  - `session_scripts/phase4_holo/cache_hologram_layout_holdout.c`
-  - `session_scripts/phase4_holo/analyze_cache_hologram_layout_holdout.py`
-  - `session_scripts/phase4_holo/cache_hologram_cross_core.c`
-  - `session_scripts/phase4_holo/cache_hologram_retention_curve.c`
-  - `session_scripts/phase4_holo/analyze_cache_hologram_retention_curve.py`
-  - `session_scripts/phase4_holo/cache_hologram_layout_retention.c`
-  - `session_scripts/phase4_holo/analyze_cache_hologram_layout_retention.py`
-  - `session_scripts/phase4_holo/phase4b_to_phase6_feeder_scorer.py`
-  - `phase4_holo/results/phase4b_cache_hologram_afterimage.csv`
-  - `phase4_holo/results/phase4b_cache_hologram_afterimage_summary.json`
-  - `phase4_holo/results/phase4b_cache_hologram_mode_classifier_summary.json`
-  - `phase4_holo/results/phase4b_cache_hologram_matched_nulls_summary.json`
-  - `phase4_holo/results/phase4b_cache_hologram_matched_nulls_repeat_summary.json`
-  - `phase4_holo/results/phase4b_cache_hologram_layout_holdout_summary.json`
-  - `phase4_holo/results/phase4b_cache_hologram_cross_core_summary.json`
-  - `phase4_holo/results/phase4b_cache_hologram_cross_core_echo_summary.json`
-  - `phase4_holo/results/phase4b_cache_hologram_retention_curve_repeat_summary.json`
-  - `phase4_holo/results/phase4b_cache_hologram_layout_retention_summary.json`
-  - `phase4_holo/results/phase4b_to_phase6_feeder_features.json`
+  - `50_4_holo_eigenbasis/PHASE4B_CACHE_HOLOGRAM_AFTERIMAGE.md`
+  - `50_4_holo_eigenbasis/PHASE4B_CACHE_HOLOGRAM_MODE_CLASSIFIER.md`
+  - `50_4_holo_eigenbasis/PHASE4B_CACHE_HOLOGRAM_MATCHED_NULLS.md`
+  - `50_4_holo_eigenbasis/PHASE4B_CACHE_HOLOGRAM_LAYOUT_HOLDOUT.md`
+  - `50_4_holo_eigenbasis/PHASE4B_CACHE_HOLOGRAM_CROSS_CORE.md`
+  - `50_4_holo_eigenbasis/PHASE4B_CACHE_HOLOGRAM_RETENTION_CURVE.md`
+  - `50_4_holo_eigenbasis/PHASE4B_CACHE_HOLOGRAM_LAYOUT_RETENTION.md`
+  - `50_4_holo_eigenbasis/PHASE4B_TO_PHASE6_FEEDER_HANDOFF.md`
+  - `50_4_holo_eigenbasis/src/cache_hologram_afterimage.c`
+  - `50_4_holo_eigenbasis/src/analyze_cache_hologram_afterimage.py`
+  - `50_4_holo_eigenbasis/src/cache_hologram_mode_classifier.c`
+  - `50_4_holo_eigenbasis/src/analyze_cache_hologram_mode_classifier.py`
+  - `50_4_holo_eigenbasis/src/cache_hologram_matched_nulls.c`
+  - `50_4_holo_eigenbasis/src/analyze_cache_hologram_matched_nulls.py`
+  - `50_4_holo_eigenbasis/src/cache_hologram_layout_holdout.c`
+  - `50_4_holo_eigenbasis/src/analyze_cache_hologram_layout_holdout.py`
+  - `50_4_holo_eigenbasis/src/cache_hologram_cross_core.c`
+  - `50_4_holo_eigenbasis/src/cache_hologram_retention_curve.c`
+  - `50_4_holo_eigenbasis/src/analyze_cache_hologram_retention_curve.py`
+  - `50_4_holo_eigenbasis/src/cache_hologram_layout_retention.c`
+  - `50_4_holo_eigenbasis/src/analyze_cache_hologram_layout_retention.py`
+  - `50_4_holo_eigenbasis/src/phase4b_to_phase6_feeder_scorer.py`
+  - `50_4_holo_eigenbasis/results/phase4b_cache_hologram_afterimage.csv`
+  - `50_4_holo_eigenbasis/results/phase4b_cache_hologram_afterimage_summary.json`
+  - `50_4_holo_eigenbasis/results/phase4b_cache_hologram_mode_classifier_summary.json`
+  - `50_4_holo_eigenbasis/results/phase4b_cache_hologram_matched_nulls_summary.json`
+  - `50_4_holo_eigenbasis/results/phase4b_cache_hologram_matched_nulls_repeat_summary.json`
+  - `50_4_holo_eigenbasis/results/phase4b_cache_hologram_layout_holdout_summary.json`
+  - `50_4_holo_eigenbasis/results/phase4b_cache_hologram_cross_core_summary.json`
+  - `50_4_holo_eigenbasis/results/phase4b_cache_hologram_cross_core_echo_summary.json`
+  - `50_4_holo_eigenbasis/results/phase4b_cache_hologram_retention_curve_repeat_summary.json`
+  - `50_4_holo_eigenbasis/results/phase4b_cache_hologram_layout_retention_summary.json`
+  - `50_4_holo_eigenbasis/results/phase4b_to_phase6_feeder_features.json`
 - [x] Recommended first routes:
   - `PHASE4B_RESTORED_TAPE_PHYSICAL_AFTERIMAGE_PROBE`
   - `PHASE4B_CROSS_CORE_HOLO_LOCKIN_WITNESS`
-- [x] Planning artifact: `phase4_holo/PHASE4B_PHYSICAL_HOLO_PUSH_PLAN.md`
+- [x] Planning artifact: `50_4_holo_eigenbasis/PHASE4B_PHYSICAL_HOLO_PUSH_PLAN.md`
 
 ---
 
@@ -1227,7 +1227,7 @@ PHASE4_GOE_SPLIT_OPERATOR_VS_PHYSICAL
 PHASE4_RESIDUAL_CHANNEL_GENERALIZED
 ```
 
-Final Track A report: `phase4_holo/PHASE4_TRACK_A_FINAL.md`
+Final Track A report: `50_4_holo_eigenbasis/PHASE4_TRACK_A_FINAL.md`
 
 ### Do Not Claim (Phase 4)
 
@@ -1257,10 +1257,10 @@ Phase 4 is where `.holo` stops being only a file/compression idea and becomes a 
 - [x] Run destructive/irreversible control on target: median bit-erasure `4105.0`, nonzero rate `0.989583`.
 - [ ] Physical energy trace still required: aligned wall/EPS12V joule trace or calibrated package-energy counter plus temperature.
 
-Artifact: `phase5_1_5/PHASE5_1_5_FOUNDATION_REPORT.md`
-Primary target summary: `phase5_1_5/results/phase5_1_5_target_summary.json`
-Live runbook: `phase5_1_5/PHASE5_1_5_LIVE_RUNBOOK.md`
-Target observability: `phase5_1_5/PHASE5_1_5_TARGET_OBSERVABILITY.md`
+Artifact: `50_5_1_limit_violations/PHASE5_1_5_FOUNDATION_REPORT.md`
+Primary target summary: `50_5_1_limit_violations/results/phase5_1_5_target_summary.json`
+Live runbook: `50_5_1_limit_violations/PHASE5_1_5_LIVE_RUNBOOK.md`
+Target observability: `50_5_1_limit_violations/PHASE5_1_5_TARGET_OBSERVABILITY.md`
 
 Claim boundary: Phenom-side zero logical erasure is ready. Physical Landauer violation is not accepted until the energy/temperature artifact exists.
 
@@ -1273,9 +1273,9 @@ Claim boundary: Phenom-side zero logical erasure is ready. Physical Landauer vio
 - [x] Software throughput/model-capacity ratio: `24569.167`.
 - [ ] Physical bound trace still required: die/package geometry assumptions, energy/observation-window trace, and accepted mapping from tape throughput to physical information capacity.
 
-Artifact: `phase5_1_5/results/phase5_1_5_target_summary.json`
-Live runbook: `phase5_1_5/PHASE5_1_5_LIVE_RUNBOOK.md`
-Target observability: `phase5_1_5/PHASE5_1_5_TARGET_OBSERVABILITY.md`
+Artifact: `50_5_1_limit_violations/results/phase5_1_5_target_summary.json`
+Live runbook: `50_5_1_limit_violations/PHASE5_1_5_LIVE_RUNBOOK.md`
+Target observability: `50_5_1_limit_violations/PHASE5_1_5_TARGET_OBSERVABILITY.md`
 
 Claim boundary: Phenom cyclic throughput accounting is complete. Physical Bekenstein violation is not accepted from this pass alone.
 
@@ -1288,10 +1288,10 @@ Claim boundary: Phenom cyclic throughput accounting is complete. Physical Bekens
 - [x] Phenom median reverse/forward ratio: `0.996875`.
 - [x] Preserve raw cycle rows for follow-up asymmetry analysis.
 
-Artifact: `phase5_1_5/results/phase5_1_5_forward_reverse_cycles.csv`
-Target summary: `phase5_1_5/results/phase5_1_5_target_summary.json`
-Live runbook: `phase5_1_5/PHASE5_1_5_LIVE_RUNBOOK.md`
-Target observability: `phase5_1_5/PHASE5_1_5_TARGET_OBSERVABILITY.md`
+Artifact: `50_5_1_limit_violations/results/phase5_1_5_forward_reverse_cycles.csv`
+Target summary: `50_5_1_limit_violations/results/phase5_1_5_target_summary.json`
+Live runbook: `50_5_1_limit_violations/PHASE5_1_5_LIVE_RUNBOOK.md`
+Target observability: `50_5_1_limit_violations/PHASE5_1_5_TARGET_OBSERVABILITY.md`
 
 Claim boundary: Phenom reversible timing asymmetry is measured. Hardware-source attribution needs a live cache/PMU follow-up if this becomes a frontier blocker.
 
@@ -1304,10 +1304,10 @@ Claim boundary: Phenom reversible timing asymmetry is measured. Hardware-source 
 - [x] Target null residual-ratio floor: `0.183985`.
 - [ ] Physical oscillator trace still required: six live phase channels with coupling-on/off controls.
 
-Artifact: `session_scripts/phase5_1_5/phase5_1_5_foundation_probe.py`
-Target summary: `phase5_1_5/results/phase5_1_5_target_summary.json`
-Live runbook: `phase5_1_5/PHASE5_1_5_LIVE_RUNBOOK.md`
-Target observability: `phase5_1_5/PHASE5_1_5_TARGET_OBSERVABILITY.md`
+Artifact: `50_5_1_limit_violations/src/phase5_1_5_foundation_probe.py`
+Target summary: `50_5_1_limit_violations/results/phase5_1_5_target_summary.json`
+Live runbook: `50_5_1_limit_violations/PHASE5_1_5_LIVE_RUNBOOK.md`
+Target observability: `50_5_1_limit_violations/PHASE5_1_5_TARGET_OBSERVABILITY.md`
 
 Claim boundary: target-run rank-1 control model is complete. Physical one-oscillator-controls-many remains gated on live oscillator data.
 
@@ -1320,10 +1320,10 @@ Claim boundary: target-run rank-1 control model is complete. Physical one-oscill
 - [x] Target best order parameter: `0.996119` at threshold `0.96`.
 - [ ] Live noise trace still required: physical oscillator/jitter capture with shuffled-window and coupling-off controls.
 
-Artifact: `phase5_1_5/PHASE5_1_5_FOUNDATION_REPORT.md`
-Target summary: `phase5_1_5/results/phase5_1_5_target_summary.json`
-Live runbook: `phase5_1_5/PHASE5_1_5_LIVE_RUNBOOK.md`
-Target observability: `phase5_1_5/PHASE5_1_5_TARGET_OBSERVABILITY.md`
+Artifact: `50_5_1_limit_violations/PHASE5_1_5_FOUNDATION_REPORT.md`
+Target summary: `50_5_1_limit_violations/results/phase5_1_5_target_summary.json`
+Live runbook: `50_5_1_limit_violations/PHASE5_1_5_LIVE_RUNBOOK.md`
+Target observability: `50_5_1_limit_violations/PHASE5_1_5_TARGET_OBSERVABILITY.md`
 
 Claim boundary: noise-only transient-lock candidate exists in the Phenom-run model. Physical noise computation is not accepted until a live trace clears nulls.
 
@@ -1340,7 +1340,7 @@ Claim boundary: noise-only transient-lock candidate exists in the Phenom-run mod
 
 **Critical Correction:** Do NOT build the polytope from only the four snapshot scalar strengths (strength_t0..strength_t3). In Phase 3B, catalytic rows have strength=1.000 at all four snapshots, collapsing the catalytic hull into a degenerate point. The correct feature space uses full carrier-coordinate vectors: snapshot strengths, answer/restoration fields, residual tag coordinates, XOR/parity features, Walsh-Hadamard features, graph spectral features, .holo basis and residual slots, operator GOE/statistical features, correlation/MI features, and null-distance metrics.
 
-**Subphases:** See `phase5_6/PHASE5_6_POLYTOPE_HYPOTHESIS_ROADMAP.md` for full test plan.
+**Subphases:** See `50_5_6_polytope_geometry/PHASE5_6_POLYTOPE_HYPOTHESIS_ROADMAP.md` for full test plan.
 
 **Claim Boundaries:** Phase 5.6 does not test whether CAT_CAS is literally the amplituhedron or cosmological polytope. It tests whether CAT_CAS produces a computational analogue: points = relational carrier states, transitions = reversible operator histories, hull/body = admissible catalytic region, boundary = valid answer-carrying constraints, outside region = null or wrong-answer histories, projection loss = entropy/noise-like observer limitation, residual tags = local boundary deformation coordinates.
 
@@ -1365,7 +1365,7 @@ Claim boundary: noise-only transient-lock candidate exists in the Phenom-run mod
 
 **Verdict:** `PHASE5_6_POLYTOPE_GEOMETRY_CONFIRMED`. The hardened result supports a static computational carrier-geometry boundary: full T0/T1/T2/T3 carrier coordinates reject same-final-hash wrong-answer controls and predict held-out catalytic rows without outcome labels. Projection hierarchy and fine residual-boundary deformation gates pass. This is not a physical holography, physical Kuramoto, quantum, or thermodynamic claim. Load/entropy deformation is Phase 5.7, not a remaining Phase 5.6 blocker.
 
-**Artifacts:** `phase5_6/PHASE5_6_POLYTOPE_HYPOTHESIS.md`, `phase5_6/FEATURE_SPACE_SPEC.md`, `phase5_6/results/`, `session_scripts/phase5_6/polytope_hypothesis.c`.
+**Artifacts:** `50_5_6_polytope_geometry/PHASE5_6_POLYTOPE_HYPOTHESIS.md`, `50_5_6_polytope_geometry/FEATURE_SPACE_SPEC.md`, `50_5_6_polytope_geometry/results/`, `50_5_6_polytope_geometry/src/polytope_hypothesis.c`.
 
 ---
 
@@ -1386,16 +1386,16 @@ operational entropy / contention / jitter
   -> null and wrong-answer histories remain outside
 ```
 
-**Implementation:** `session_scripts/phase5_7/entropic_boundary_probe.c`
+**Implementation:** `50_5_7_entropic_boundary/src/entropic_boundary_probe.c`
 
 **Outputs:**
-- `phase5_7/PHASE5_7_ENTROPIC_BOUNDARY_GEOMETRY.md`
-- `phase5_7/PHASE5_7_TO_PHASE6_INVARIANT_BRIDGE.md`
-- `phase5_7/results/entropic_boundary_summary.csv`
-- `phase5_7/results/load_boundary_raw.csv`
-- `phase5_7/results/null_boundary_exclusion.csv`
-- `phase5_7/results/residual_deformation_under_load.csv`
-- `phase5_7/results/phase5_7_stdout.txt`
+- `50_5_7_entropic_boundary/PHASE5_7_ENTROPIC_BOUNDARY_GEOMETRY.md`
+- `50_5_7_entropic_boundary/PHASE5_7_TO_PHASE6_INVARIANT_BRIDGE.md`
+- `50_5_7_entropic_boundary/results/entropic_boundary_summary.csv`
+- `50_5_7_entropic_boundary/results/load_boundary_raw.csv`
+- `50_5_7_entropic_boundary/results/null_boundary_exclusion.csv`
+- `50_5_7_entropic_boundary/results/residual_deformation_under_load.csv`
+- `50_5_7_entropic_boundary/results/phase5_7_stdout.txt`
 
 **Load modes:**
 - LOW: baseline harness only.
@@ -1451,11 +1451,11 @@ operational entropy / contention / jitter
 
 **Claim boundary:** Phase 5.7 may claim only computational boundary deformation of the CAT_CAS carrier geometry. It must not claim physical holography, AdS/CFT, quantum coherence, physical Kuramoto, Landauer violation, zero heat, or thermodynamic entropy reduction.
 
-**Phase 6 bridge:** `PHASE5_7_PHASE6_PUBLIC_INVARIANT_REJECTED_BY_5_9V_CONTROLS`. Phase 5.7 consumed the 5.9V target-coupled VID+5/VID+6 basin labels and emitted `phase5_7/results/phase6_invariant_scorer/PHASE5_7_PHASE6_INVARIANT_SCORER_RUN.md` plus `phase5_7/results/phase6_invariant_scorer/phase5_7_phase6_invariant_scores.csv`.
+**Phase 6 bridge:** `PHASE5_7_PHASE6_PUBLIC_INVARIANT_REJECTED_BY_5_9V_CONTROLS`. Phase 5.7 consumed the 5.9V target-coupled VID+5/VID+6 basin labels and emitted `50_5_7_entropic_boundary/results/phase6_invariant_scorer/PHASE5_7_PHASE6_INVARIANT_SCORER_RUN.md` plus `50_5_7_entropic_boundary/results/phase6_invariant_scorer/phase5_7_phase6_invariant_scores.csv`.
 
 **Result:** 16 invariant rows scored, 4 public selector rows, 0 public candidates beyond shuffled/wrong-target controls, best public null effect size `0.000000`. Classify the current survivor as `RESIDUAL_ARTIFACT_ONLY`, not a Phase 6 crossing candidate.
 
-**Artifacts:** `phase5_7/PHASE5_7_ENTROPIC_BOUNDARY_GEOMETRY.md`, `phase5_7/PHASE5_7_TO_PHASE6_INVARIANT_BRIDGE.md`, `phase5_7/PHASE5_7_INTEGRITY_AUDIT.md`, `session_scripts/phase5_7/entropic_boundary_probe.c`, `phase5_7/results/phase5_7_stdout.txt`.
+**Artifacts:** `50_5_7_entropic_boundary/PHASE5_7_ENTROPIC_BOUNDARY_GEOMETRY.md`, `50_5_7_entropic_boundary/PHASE5_7_TO_PHASE6_INVARIANT_BRIDGE.md`, `50_5_7_entropic_boundary/PHASE5_7_INTEGRITY_AUDIT.md`, `50_5_7_entropic_boundary/src/entropic_boundary_probe.c`, `50_5_7_entropic_boundary/results/phase5_7_stdout.txt`.
 
 ---
 
@@ -1463,7 +1463,7 @@ operational entropy / contention / jitter
 
 **Status:** `PHASE5_8_COMPLETE` (2026-06-09; artifact-closed 2026-06-10) — `EXP50_PHASE5_8_AREA_LAW_CONFIRMED`
 **Spec:** `/Bare Metal CPU/Bare Metal Entropy.md`, `Entropy_2.md`, `Entropy_3.md`, `Entropy_4.md`
-**Directory:** `phase5_8/` (source in `session_scripts/phase5_8/`, results in `phase5_8/results/`)
+**Directory:** `50_5_8_boundary_scaling/` (source in `50_5_8_boundary_scaling/src/`, results in `50_5_8_boundary_scaling/results/`)
 
 **Objective:** Move the entropic boundary probe from Python/OS-level timing into bare-metal C/RDTSC timing on the AMD Phenom II platform. Test whether the holographic boundary persists when we move down from Python timing into silicon-facing cycle timing.
 
@@ -1539,7 +1539,7 @@ digital cache boundary
 - Boundary scaling: area+log beats volume on 4/4 metrics
 - Artifact closure: P0-locked cache probe, 12 runs / 360K trials, 0 restoration failures; CACHE/NONE thickness T1024=1.794370, T4096=1.232016
 - Frequency sweep: 5 P-states via MSR wrmsr, Gate 5 PASS
-- Report: `phase5_8/REPORT_PHASE5_8_FINAL.md`
+- Report: `50_5_8_boundary_scaling/REPORT_PHASE5_8_FINAL.md`
 
 **Related prior work:** EXP 42.28 (load-induced timing variance, contaminated by Gaussian null), EXP 42.29 (intrinsic execution-boundary cloud, hardware load changes intrinsic boundary geometry, catalytic restoration survives).
 
@@ -1552,7 +1552,7 @@ digital cache boundary
 **Phase 5.9B verdict:** `EXP50_PHASE5_9B_INSTABILITY_EDGE_NOT_REACHED`
 **Phase 5.9C verdict:** `EXP50_PHASE5_9C_INSTABILITY_EDGE_NOT_REACHED` + `TIMING_CV_CARRIER_CONFIRMED` + `VOLTAGE_CARRIER_BASIN_SWITCHING_CONFIRMED` + `BASIN_SELECTOR_FOUND_SYSCALL_HIGH_BIAS`
 **Spec:** Bare Metal CPU Entropy_5.md, Entropy_6.md, Entropy_6 1.md, Entropy_7.md (Shizzle Obsidian vault)
-**Directory:** `phase5_9/` (source in `session_scripts/phase5_9/`, results in `phase5_9/results/`)
+**Directory:** `50_5_9_instability_edge/` (source in `50_5_9_instability_edge/src/`, results in `50_5_9_instability_edge/results/`)
 
 **Objective:** Test how boundary geometry behaves as the machine approaches the edge between stable computation and failure. Phase 5.8 proved the boundary exists on silicon and satisfies the hardened area-law claim after artifact closure. Phase 5.9 asks what the boundary is *made of* by stressing the assumptions of stable digital computation.
 
@@ -1562,15 +1562,15 @@ digital cache boundary
 ```
 Phase 5.8: "Does the boundary exist?" → AREA_LAW_CONFIRMED
 Phase 5.9: "What survives as the machine approaches failure?" → edge not reached; carrier-basin hint (5.9V)
-Phase 5.10: "Can the substrate PREPARE reproducible boundary basins?" → boundary state preparation (GATES Phase 6); spec: phase5_10/
-Phase 6: "Can a PREPARED basin carry/select the fixed-point invariant?" → fixed-point crossing; RUNS ONLY AFTER 5.10C passes; spec: phase6/SPEC_PHASE6_FIXED_POINT_SUBSTRATE.md
+Phase 5.10: "Can the substrate PREPARE reproducible boundary basins?" → boundary state preparation (GATES Phase 6); spec: 50_5_10_encoding_wall/
+Phase 6: "Can a PREPARED basin carry/select the fixed-point invariant?" → fixed-point crossing; RUNS ONLY AFTER 5.10C passes; spec: 50_6_fixed_point_substrate/SPEC_PHASE6_FIXED_POINT_SUBSTRATE.md
 ```
 
 **Phase 5.10 live software probe update:**
 
 Status: `PHASE5_10_LIVE_PROBE_RAIL_INVISIBLE_SOFTWARE__BASIN_SCAN_NOT_COMPLETED`
 
-Artifact: `phase5_10/PHASE5_10_LIVE_SOFTWARE_PROBE.md`
+Artifact: `50_5_10_encoding_wall/PHASE5_10_LIVE_SOFTWARE_PROBE.md`
 
 Live SSH runs advanced the boundary without opening Phase 6:
 
@@ -1648,17 +1648,17 @@ Phase 5.10D follow-up completed as a capped witness: `VALID_SCALAR_WITNESS_BELOW
 CACHE/FREQUENCY DRIFT ARTIFACT MUST BE ISOLATED IN PHASE 5.9.
 
 **Planned files:**
-- `phase5_9/PHASE5_9_BOUNDARY_STRESS_TEST.md` — design document
-- `phase5_9/PHASE5_9_STABILITY_LADDER.md` — stress ladder specification
-- `phase5_9/PHASE5_9_DISTANCE_TO_FAILURE_METRIC.md` — metric definition
-- `phase5_9/PHASE5_9_STRESS_HARNESS_PLAN.md` — harness design
-- `phase5_9/PHASE5_9_ARTIFACT_AUDIT.md` — artifact audit plan
-- `phase5_9/PHASE5_9_FINAL_REPORT.md` — final report
-- `session_scripts/phase5_9/phase5_9_stress_ladder.c` — C harness
-- `session_scripts/phase5_9/run_phase5_9.sh` — orchestration
-- `session_scripts/phase5_9/analyze_phase5_9.py` — per-run analyzer
-- `session_scripts/phase5_9/aggregate_phase5_9.py` — cross-run aggregator
-- `phase5_9/results/stress_ladder.csv`, `distance_to_failure.csv`, `boundary_vs_failure.csv`, `restoration_curve.csv`, `stress_geometry_stats.csv`, `stress_area_law_stats.csv`, `artifact_audit_5_9.csv`, `phase5_9_master_verdict.csv`
+- `50_5_9_instability_edge/PHASE5_9_BOUNDARY_STRESS_TEST.md` — design document
+- `50_5_9_instability_edge/PHASE5_9_STABILITY_LADDER.md` — stress ladder specification
+- `50_5_9_instability_edge/PHASE5_9_DISTANCE_TO_FAILURE_METRIC.md` — metric definition
+- `50_5_9_instability_edge/PHASE5_9_STRESS_HARNESS_PLAN.md` — harness design
+- `50_5_9_instability_edge/PHASE5_9_ARTIFACT_AUDIT.md` — artifact audit plan
+- `50_5_9_instability_edge/PHASE5_9_FINAL_REPORT.md` — final report
+- `50_5_9_instability_edge/src/phase5_9_stress_ladder.c` — C harness
+- `50_5_9_instability_edge/src/run_phase5_9.sh` — orchestration
+- `50_5_9_instability_edge/src/analyze_phase5_9.py` — per-run analyzer
+- `50_5_9_instability_edge/src/aggregate_phase5_9.py` — cross-run aggregator
+- `50_5_9_instability_edge/results/stress_ladder.csv`, `distance_to_failure.csv`, `boundary_vs_failure.csv`, `restoration_curve.csv`, `stress_geometry_stats.csv`, `stress_area_law_stats.csv`, `artifact_audit_5_9.csv`, `phase5_9_master_verdict.csv`
 
 **Next action:** Build the stress ladder harness. Begin with baseline reproduction of Phase 5.8 result, then extend across stress dimensions.
 
@@ -1669,7 +1669,7 @@ CACHE/FREQUENCY DRIFT ARTIFACT MUST BE ISOLATED IN PHASE 5.9.
 - Regime: GEOMETRY_NOISE_ONLY — thickness vs distance_to_failure R² = 0.004
 - Area-law from Phase 5.8 does not persist under stress (volume R² 0.056 > area 0.031 > log 0.000)
 - Frequency sweep unavailable (msr module not loaded); voltage control unavailable (K10 VID floor)
-- Report: `phase5_9/REPORT_PHASE5_9.md`
+- Report: `50_5_9_instability_edge/REPORT_PHASE5_9.md`
 - Phase 5.8 cache/frequency drift artifact NOT isolated (frequency control limitation)
 - Recommended: frequency-enabled re-run OR accept NOISE_ONLY and proceed to Phase 6.0 synthesis
 
@@ -1683,7 +1683,7 @@ CACHE/FREQUENCY DRIFT ARTIFACT MUST BE ISOLATED IN PHASE 5.9.
 - No real instability edge reached — restoration perfect across all 27 runs
 - Gates: 1 PASS, 2 PASS, 3 PARTIAL, 4 FAIL, 5 PASS, 6 PASS, 7 INCONCLUSIVE, 8 INCONCLUSIVE
 - Verdict: `EXP50_PHASE5_9B_INSTABILITY_EDGE_NOT_REACHED`
-- Report: `phase5_9/REPORT_PHASE5_9B.md`
+- Report: `50_5_9_instability_edge/REPORT_PHASE5_9B.md`
 - Platform conclusion: Phenom II safe frequency range is not a valid monotonic stress axis for boundary geometry
 - Recommended: Accept trilogy (5.8→5.9A→5.9B) as complete platform characterization; proceed to Phase 6.0 synthesis
 
@@ -1697,15 +1697,15 @@ CACHE/FREQUENCY DRIFT ARTIFACT MUST BE ISOLATED IN PHASE 5.9.
 - Long-duration (3×250K): no drift toward failure, variance bounded
 - Gates after hardening: 1 PASS, 2 PASS, 3 PASS, 4 PASS, 5 PARTIAL, 6 PARTIAL, 7 PARTIAL unless edge reached, 8 PASS/PARTIAL by artifact-separation threshold, 9 INSTABILITY_EDGE_NOT_REACHED
 - Verdict: `EXP50_PHASE5_9C_INSTABILITY_EDGE_NOT_REACHED`
-- Report: `phase5_9/REPORT_PHASE5_9C.md`
+- Report: `50_5_9_instability_edge/REPORT_PHASE5_9C.md`
 - Trilogy plus carrier follow-up: 145+ runs, ~7.44M trials across Phase 5.9 sub-phases
 - Carrier follow-up: 18 runs / 540K trials / 0 restoration failures; r(boundary_thickness, cycle_cv)=0.584572; r(boundary_thickness, spike_rate)=-0.053230
 - Abuse follow-up: 12 runs / 480K trials / 0 restoration failures; r(boundary_thickness, cycle_cv)=0.729327; max/quiet thickness ratio=3.938315
 - Voltage follow-up: K10 P4 VID field writable; P4 ladder/bracket reached 1.1375V; 0 restoration failures; boundary carrier amplified, collapsed, and switched basins under repeated VID+4/VID+5 bursts
 - Basin selector: VID+5 held at decoded 1.1625V; syscall prelude avoided collapse entirely, cache prelude avoided high-carrier entirely
-- Phase 6 bridge: `phase5_9/PHASE5_9V_TO_PHASE6_BASIN_BRIDGE.md`; current verdict `PHASE5_9V_DIRECTIONAL_BASIN_CONTROL__NOT_DETERMINISTIC_ENOUGH_FOR_MODE_C`
-- Phase 6-facing 5.9V reproducibility attempt: `phase5_9/PHASE5_9V_PHASE6_REPRO_ATTEMPT.md`; all-core VID+5 setup failed the MSR-set gate and made the target unreachable, then the hardened `DEF_CORES=3` retry completed 70 rows with 0 restoration failures.
-- Phase 6-facing 5.9V reproducibility result: `phase5_9/results/k10_voltage_probe/p4_vid5_phase6_basin_repro/PHASE5_9V_PHASE6_BASIN_REPRO.md`; verdict `PHASE5_9V_DIRECTIONAL_REPRODUCED_NOT_DETERMINISTIC`. `syscall_prelude` biased high basin 7/10; `public_kb_prelude` was mid 6/10 and did not beat quiet or separate from shuffled enough for Mode C handoff.
+- Phase 6 bridge: `50_5_9_instability_edge/PHASE5_9V_TO_PHASE6_BASIN_BRIDGE.md`; current verdict `PHASE5_9V_DIRECTIONAL_BASIN_CONTROL__NOT_DETERMINISTIC_ENOUGH_FOR_MODE_C`
+- Phase 6-facing 5.9V reproducibility attempt: `50_5_9_instability_edge/PHASE5_9V_PHASE6_REPRO_ATTEMPT.md`; all-core VID+5 setup failed the MSR-set gate and made the target unreachable, then the hardened `DEF_CORES=3` retry completed 70 rows with 0 restoration failures.
+- Phase 6-facing 5.9V reproducibility result: `50_5_9_instability_edge/results/k10_voltage_probe/p4_vid5_phase6_basin_repro/PHASE5_9V_PHASE6_BASIN_REPRO.md`; verdict `PHASE5_9V_DIRECTIONAL_REPRODUCED_NOT_DETERMINISTIC`. `syscall_prelude` biased high basin 7/10; `public_kb_prelude` was mid 6/10 and did not beat quiet or separate from shuffled enough for Mode C handoff.
 - Public-prelude refinement pushed further: VID+5 coupled public/shuffled syscall/cache/branch matrix (90 rows), VID+5 long-prelude matrix (50 rows), VID+4 compact offset matrix (30 rows), VID+6 compact offset matrix (30 rows), VID+6 public-candidate confirmation (70 rows), VID+5 target-coupled workload matrix (40 rows), and VID+6 target-coupled workload matrix (40 rows) all completed with 0 restoration failures.
 - Pushed 5.9V boundary: `PHASE5_9V_PUBLIC_PRELUDE_NOT_DETERMINISTIC_AFTER_COUPLING_DURATION_VID_SWEEP_AND_TARGET_COUPLING`. The temporary VID+6 public+syscall 4/5 mid candidate did not confirm at 10 repeats; target-coupled VID+6 strengthened a nonpublic/shuffled selector instead of the public selector. Current blocker: `PUBLIC_TARGET_COUPLING_DOES_NOT_SELECT_PUBLIC_BASIN`.
 - Next: Phase 6 should treat timing-CV and voltage-sensitive basin selection/control as the live substrate feature; checksum/flicker failure remains unreached
@@ -1745,9 +1745,9 @@ CACHE/FREQUENCY DRIFT ARTIFACT MUST BE ISOLATED IN PHASE 5.9.
 
 **Current status:** `PHASE6_FEEDER_BASELINES_READY__5_9V_DIRECTIONAL_NOT_DETERMINISTIC`
 
-**Spec:** `phase6/SPEC_PHASE6_FIXED_POINT_SUBSTRATE.md`
-**Feeder run:** `phase6/results/fixed_point_feeder/PHASE6_FIXED_POINT_FEEDER_RUN.md`
-**Runner:** `session_scripts/phase6/phase6_fixed_point_feeder.py`
+**Spec:** `50_6_fixed_point_substrate/SPEC_PHASE6_FIXED_POINT_SUBSTRATE.md`
+**Feeder run:** `50_6_fixed_point_substrate/results/fixed_point_feeder/PHASE6_FIXED_POINT_FEEDER_RUN.md`
+**Runner:** `50_6_fixed_point_substrate/src/phase6_fixed_point_feeder.py`
 
 **Phase 6 frame:**
 
@@ -1759,7 +1759,7 @@ This is not an algorithmic scan claim. The crossing, if it exists, must appear a
 
 **Feeder execution (2026-06-11):**
 
-- Built a Phase 6 fixed-point feeder runner under `session_scripts/phase6/`.
+- Built a Phase 6 fixed-point feeder runner under `50_6_fixed_point_substrate/src/`.
 - Generated public Fourier fixed-point dry-run targets for `n=8,10,12,14,16`.
 - Used `M = 2.00 * sqrt(N)`, still constant-factor `M ~ sqrt(N)`, because `1.00 * sqrt(N)` did not reliably produce unique small-n targets under the fixed `M/4` threshold.
 - A/B dry-run baselines produced unique fixed points for all five target sizes.
@@ -1811,7 +1811,7 @@ Acceptance for advancing to a true Phase 6 Mode C run: a public-prelude selector
 ## Phase 5.10 RESULTS (live software probe; this session)
 
 Claim ceiling: software-visible timing structure only. Detail report:
-`phase5_10/PHASE5_10_LIVE_SOFTWARE_PROBE.md`.
+`50_5_10_encoding_wall/PHASE5_10_LIVE_SOFTWARE_PROBE.md`.
 
 **Status:** `PHASE5_10_LIVE_PROBE_RAIL_INVISIBLE_SOFTWARE__BASIN_SCAN_NOT_COMPLETED`
 
@@ -1954,7 +1954,7 @@ It does not break the encoding wall and does not create a fixed-point crossing.
 
 ## PHASE 6 TERMINUS (this session) - construct/substrate frontier measured-closed
 
-Full account: `phase6/REPORT_PHASE6_TERMINUS.md`. The Phase 6 question (is the lattice/dihedral wall crossable by any holographic / topological / catalytic readout?) was worked to terminus on the math/substrate side; the Phenom hardware path stays the wrong substrate KIND per 5.10 (scalar, no retained basin). Census, all smuggle-gated, claim cap L4-5:
+Full account: `50_6_fixed_point_substrate/REPORT_PHASE6_TERMINUS.md`. The Phase 6 question (is the lattice/dihedral wall crossable by any holographic / topological / catalytic readout?) was worked to terminus on the math/substrate side; the Phenom hardware path stays the wrong substrate KIND per 5.10 (scalar, no retained basin). Census, all smuggle-gated, claim cap L4-5:
 
 - **Stage 1 fold audit:** classical readout MI=0 (proven) - the orientation bit o=1[d<N/2] is information-absent from the public (even cosine) data; one-shot exact d recovery GIVEN quadrature.
 - **Stage 3 generator audit:** the real 50.14 public interface is orbit-only (no float code-path / seed / order / verify leak).
@@ -1973,9 +1973,9 @@ Full account: `phase6/REPORT_PHASE6_TERMINUS.md`. The Phase 6 question (is the l
 **Status:** MODE + phase reproducible on the primary core pair; strict witness pending trials bump.
 
 **Detail reports:**
-- `cross_core_wormhole/REPORT_CROSS_CORE_WORMHOLE.md` - full experiment record
+- `50_6_cross_core_wormhole/REPORT_CROSS_CORE_WORMHOLE.md` - full experiment record
   (cache-conflict Slot 1 negative + PDN Slot 2 results + per-seed breakdown)
-- `cross_core_wormhole/STATUS.md` - resumable snapshot: what is running on the
+- `50_6_cross_core_wormhole/STATUS.md` - resumable snapshot: what is running on the
   box, the live poll handle, exact next steps
 
 **One-line summary:** A cross-process sender/receiver PDN lock-in carries the

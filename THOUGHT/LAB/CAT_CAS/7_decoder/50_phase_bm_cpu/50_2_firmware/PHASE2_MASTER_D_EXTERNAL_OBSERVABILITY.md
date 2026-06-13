@@ -8,11 +8,11 @@ Route D is the best next non-destructive path. The software-only routes are exha
 
 ## Existing Inputs
 
-- `cpu_sing_2/PHASE2_DEEP_3_EXTERNAL_MEASURE.md`
-- `cpu_sing_2/PHASE2_DEEP_4_MARKERS.md`
-- `session_scripts/phase2_marker_harness.c`
-- `session_scripts/phase2_probe.c`
-- `session_scripts/phase2_external_align.py`
+- `50_2_phase_locked_network/PHASE2_DEEP_3_EXTERNAL_MEASURE.md`
+- `50_2_phase_locked_network/PHASE2_DEEP_4_MARKERS.md`
+- `50_2_phase_locked_network/src/phase2_marker_harness.c`
+- `50_2_phase_locked_network/src/phase2_probe.c`
+- `50_2_phase_locked_network/src/phase2_external_align.py`
 
 ## Measurement Objective
 
@@ -119,4 +119,4 @@ This is not a firmware or voltage approval. It is limited to non-invasive measur
 
 Exact next human action:
 
-Set up the scope/logic analyzer and run the marker capture above, then place the raw waveform and marker CSV in the lab and run `session_scripts/phase2_external_align.py`.
+Set up the scope/logic analyzer and run the marker capture above, then place the raw waveform and marker CSV in the lab and run `50_2_phase_locked_network/src/phase2_external_align.py`.

@@ -18,10 +18,10 @@ requires either the original matrix artifacts or a fresh rerun.
 Tracked Phase 5.8 files currently include:
 
 - reports and summaries
-- `phase5_8/results/freq_locked_cache_probe/condition_order.csv`
-- `phase5_8/results/freq_locked_cache_probe/freq_locked_cache_probe_summary.csv`
-- `phase5_8/results/freq_locked_cache_probe/msr_lock_audit.csv`
-- `phase5_8/results/freq_locked_cache_probe/PHASE5_8_FREQ_LOCKED_CACHE_ARTIFACT_PROBE.md`
+- `50_5_8_boundary_scaling/results/freq_locked_cache_probe/condition_order.csv`
+- `50_5_8_boundary_scaling/results/freq_locked_cache_probe/freq_locked_cache_probe_summary.csv`
+- `50_5_8_boundary_scaling/results/freq_locked_cache_probe/msr_lock_audit.csv`
+- `50_5_8_boundary_scaling/results/freq_locked_cache_probe/PHASE5_8_FREQ_LOCKED_CACHE_ARTIFACT_PROBE.md`
 
 Missing from tracked artifacts:
 

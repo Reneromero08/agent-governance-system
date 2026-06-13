@@ -17,7 +17,7 @@ If the physical line map changes between train and test, does the .holo mode rem
 ## Harness
 
 ```text
-session_scripts/phase4_holo/cache_hologram_layout_holdout.c
+50_4_holo_eigenbasis/src/cache_hologram_layout_holdout.c
 ```
 
 The harness runs two layouts:
@@ -38,7 +38,7 @@ All rows restore the logical tape hash and emit only post-restore timing vectors
 ## Analyzer
 
 ```text
-session_scripts/phase4_holo/analyze_cache_hologram_layout_holdout.py
+50_4_holo_eigenbasis/src/analyze_cache_hologram_layout_holdout.py
 ```
 
 The analyzer:
@@ -59,13 +59,13 @@ PHASE4B_CACHE_HOLOGRAM_LAYOUT_HOLDOUT restored=12288/12288
 Tracked summary:
 
 ```text
-phase4_holo/results/phase4b_cache_hologram_layout_holdout_summary.json
+50_4_holo_eigenbasis/results/phase4b_cache_hologram_layout_holdout_summary.json
 ```
 
 Ignored raw CSV:
 
 ```text
-phase4_holo/results/phase4b_cache_hologram_layout_holdout.csv
+50_4_holo_eigenbasis/results/phase4b_cache_hologram_layout_holdout.csv
 ```
 
 Measured result:

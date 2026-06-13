@@ -59,7 +59,7 @@ For any later non-no-op candidate, checksum validation must include:
 
 ## Validation Plan For Future Candidate
 
-1. Prove target bytes and expected bytes against `cpu_hack/bios_dump.bin`.
+1. Prove target bytes and expected bytes against `50_2_firmware/cpu_hack/bios_dump.bin`.
 2. Rebuild using the Gate 3 no-op-proven workflow.
 3. Parse rebuilt image with UEFIExtract inside the lab folder.
 4. Diff stock vs rebuilt and explain every byte change.

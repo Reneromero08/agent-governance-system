@@ -6,8 +6,8 @@ JSON sidecars. Foreground only, n in {8, 10}, every computation < 60 s.
 
 Real construction audited: THOUGHT/LAB/CAT_CAS/49_the_decoder/49_14_reversible_substrate/49_14_substrate.py
 (functions coset_samples, make_verify, f_map, forward_find_fixedpoint), via the
-verbatim reimplementation phase6/fold_audit/construction.py. Instruments reused
-verbatim: phase6/fold_audit/no_smuggle_gate.py, stage3/candidates.py.
+verbatim reimplementation 50_6_fixed_point_substrate/fold_audit/construction.py. Instruments reused
+verbatim: 50_6_fixed_point_substrate/fold_audit/no_smuggle_gate.py, stage3/candidates.py.
 
 ## Bedrock prior (given)
 
@@ -177,7 +177,7 @@ on the substrate, as established by prior work.
 
 ## Files
 
-Scripts (all under phase6/fold_audit/stage3/):
+Scripts (all under 50_6_fixed_point_substrate/fold_audit/stage3/):
 - generator_audit.py -- Part A, the per-quantity generator audit
 - hardened_gate.py -- Part B, the random-private-fold test + hardened gate (importable)
 - battery_confirm.py -- Part C, bounded battery through the hardened gate

@@ -21,7 +21,7 @@ It does not close software/firmware Phase 2 overall.
 
 ```powershell
 modprobe msr
-Get-Content -Raw session_scripts\phase1_msr\msr_p4_asymmetry_oracle.py |
+Get-Content -Raw 50_1_subthreshold_msr\src\msr_p4_asymmetry_oracle.py |
   <target-shell> `
   "python3 - --cores 0-5 --samples 48 --workload-iters 384 --modes baseline,self_load,neighbors_load,other_group_load,all_load" |
   Out-File -Encoding ascii cpu_sing_3\PHASE2_RUNTIME_P4_ASYMMETRY_ORACLE.json

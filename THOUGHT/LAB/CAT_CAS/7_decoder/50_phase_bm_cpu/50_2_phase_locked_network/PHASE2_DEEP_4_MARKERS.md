@@ -6,7 +6,7 @@ PHASE_MARKER_HARNESS_READY
 
 ## Source
 
-`session_scripts/phase2_marker_harness.c`
+`50_2_phase_locked_network/src/phase2_marker_harness.c`
 
 ## Function
 

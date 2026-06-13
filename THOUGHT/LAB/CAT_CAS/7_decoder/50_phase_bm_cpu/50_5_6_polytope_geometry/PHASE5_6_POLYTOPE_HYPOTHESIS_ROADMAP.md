@@ -148,7 +148,7 @@ point_i = [
 
 ### 5.6.0 Feature-Space Definition
 **Goal:** Define schemas, column sources, and explicit dimensionality.
-**Output:** `phase5_6/FEATURE_SPACE_SPEC.md`
+**Output:** `50_5_6_polytope_geometry/FEATURE_SPACE_SPEC.md`
 **Labels:** `PHASE5_6_FEATURE_SPACE_DEFINED`, `PHASE5_6_SCALAR_STRENGTH_HULL_REJECTED`
 **Gate:** Schema written, scalar-only hull explicitly flagged as degenerate.
 
@@ -156,20 +156,20 @@ point_i = [
 **Goal:** Build unified CSV from Phase 3B + Phase 4 artifacts.
 **Input:** P3B probe CSV, P4.3 residual results, P4.4A GOE results, P4.5 mini-model results, P4.6 harness output.
 **Classes:** catalytic, destructive_write, random_reversible_write, random_answer, shuffled_schedule, same_final_hash_wrong_answer, wrong_residual, random_residual, destructive_residual, shuffled_operator_null, poisson_operator_null.
-**Output:** `phase5_6/results/polytope_feature_dataset.csv`, `phase5_6/results/polytope_feature_schema.csv`
+**Output:** `50_5_6_polytope_geometry/results/polytope_feature_dataset.csv`, `50_5_6_polytope_geometry/results/polytope_feature_schema.csv`
 **Labels:** `PHASE5_6_DATASET_BUILT`
 **Gate:** All rows have class/seeds/family ids, all features normalized or marked raw, missing values explicit.
 
 ### 5.6.2 Convex Hull / Geometry Builder
 **Goal:** Build catalytic geometric bodies from full carrier-coordinate space.
-**Implementation:** `session_scripts/phase5_6/polytope_hypothesis.c`
+**Implementation:** `50_5_6_polytope_geometry/src/polytope_hypothesis.c`
 **Methods:**
 1. Exact hull in selected 2D/3D/4D projections
 2. PCA projection hulls
 3. Random projection hulls
 4. Minimum-volume enclosing simplex if full hull unstable
 5. k-NN distance-to-catalytic-region as non-hull backup
-**Output:** `phase5_6/results/polytope_hull_stats.csv`
+**Output:** `50_5_6_polytope_geometry/results/polytope_hull_stats.csv`
 **Labels:** `PHASE5_6_GEOMETRY_BUILDER_READY`
 **Gate:** At least one geometry method produces a separable catalytic region.
 
@@ -360,7 +360,7 @@ PHASE 5.6 IMPLEMENTATION PROMPT PLACEHOLDER
 
 Task: Implement Phase 5.6 subphases 5.6.0 through 5.6.8.
 
-Canonical implementation now lives at `session_scripts/phase5_6/polytope_hypothesis.c`.
+Canonical implementation now lives at `50_5_6_polytope_geometry/src/polytope_hypothesis.c`.
 The repaired harness now generates real CAT_CAS T0/T1/T2/T3 carrier rows directly from the Phase 3B transition model. Same-final-hash wrong-answer controls are represented with identical restored final hash but different T2 answer boundary state, and are rejected without using outcome labels.
 ```
 

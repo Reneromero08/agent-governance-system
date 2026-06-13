@@ -9,39 +9,39 @@ This index preserves the existing Exp50 phase layout. No files are reorganized i
 | `ROADMAP.md` | Exp50 root | Roadmap | experiment 50 SSH/bare-metal roadmap and current checkpoint status. | Yes | Correct roadmap for this lab. |
 | `REPORT.md` | Exp50 root | Report | Initial SSH/Linux bring-up report. | Yes | Human-readable experiment evidence. |
 | `EXP50_FILE_INDEX.md` | Exp50 root | Checkpoint | This phase-based file index. | Yes | Reproducibility and commit scope. |
-| `phase3_catalytic/PHASE3_EXPANSION_SUMMARY.md` | `phase3_catalytic/` | Phase 3 summary | Phase 3 expansion summary: subphases, verdicts, next task. | Yes | Closeout artifact for Phase 3 catalytic ladder. |
-| `phase3b/PHASE3B_CATALYTIC_SUBSTRATE_PRIMITIVE.md` | `phase3b/` | Phase 3B | Four-snapshot invariant probe verdict and null-control summary. | Yes | Records the catalytic substrate primitive decision gate. |
-| `phase3b/results/invariant_probe_summary.csv` | `phase3b/results/` | Phase 3B result | Target-run metric summary for four-snapshot invariant probe. | Yes | Small required result artifact for the primitive gate. |
-| `phase4_holo/PHASE4_INTEGRATION_SUMMARY.md` | `phase4_holo/` | Phase 4 summary | Phase 4 integration summary: Track A/B split, verdicts, next task. | Yes | Closeout artifact for Phase 4 dual-track architecture. |
-| `phase4_holo/PHASE4_3_RESIDUAL_CHANNEL.md` | `phase4_holo/` | Phase 4 Track A | Residual-channel target-run report and controls. | Yes | Records Phase 4.3 completion. |
-| `phase4_holo/PHASE4_4A_OPERATOR_GOE.md` | `phase4_holo/` | Phase 4 Track A | Operator-matrix eigenvalue spacing report and null comparison. | Yes | Records Phase 4.4A completion. |
-| `phase4_holo/PHASE4_5_HOLO_MINI_MODEL.md` | `phase4_holo/` | Phase 4 Track A | `.holo` mini-model target-run report and controls. | Yes | Records Phase 4.5 completion. |
-| `phase4_holo/PHASE4_6_PUBLIC_HOLO_HARNESS.md` | `phase4_holo/` | Phase 4 Track A | Public `.holo` harness packaging report. | Yes | Records Phase 4.6 completion. |
-| `cpu_sing_1/*.md` | `cpu_sing_1/` | Phase 1 / CPU_SING | Runtime VID clamp, route reports, catalytic tape, `.holo`, VRM, detuning, GOE, and final pack. | Yes | Markdown lab reports are primary evidence. |
-| `cpu_sing_2/*.md` | `cpu_sing_2/` | Phase 2 | Kuramoto, active phase, deep control, AGESA P4-safe, GOE, Ising, detuning, markers, and external measurement reports. | Yes | Markdown lab reports are primary Phase 2 evidence. |
-| `2b_blackbox/*.md` | `2b_blackbox/` | Phase 2B black-box attractor | Passive-mechanism closure, decision tree, 2B.5A status, and transition reports. | Yes | Existing named Phase 2B workspace; keep as-is. |
-| `cpu_sing_3/*.md` | `cpu_sing_3/` | Phase 2/3 firmware | AGESA recursive gate, master dispatch, donor diff, arg0C provenance. | Yes | Records AGESA route blockers and exact next artifacts. |
-| `gpt_research/*.md` | `gpt_research/` | Research pathway | Undervolt pathway research and evidence inventory. | Yes | Markdown research reports are small and reproducible. |
-| `cpu_hack/CPU_HACK_INDEX.md` | `cpu_hack/` | Firmware lab index | Folder map for firmware evidence, local tools, generated trees, and no-op rebuild blocker. | Yes | Keeps the organized firmware workspace readable. |
-| `cpu_hack/agesa_trace/PATCH_ANALYSIS.md` | `cpu_hack/agesa_trace/` | Firmware lab | Patch analysis for AGESA/global branch/P4-safe route. | Yes | Primary firmware decision evidence. |
-| `cpu_hack/agesa_trace/*.txt` | `cpu_hack/agesa_trace/` | Firmware lab text evidence | Decompile, disasm, xref, service table, record map, and MSR source proof artifacts. | Yes | Small text evidence for firmware route. |
-| `cpu_hack/bios_parse/bios_dump.bin.report.txt` | `cpu_hack/bios_parse/` | Firmware lab parse report | UEFIExtract parse report for owned BIOS dump. | Yes | Small text parse evidence. |
-| `cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt` | `cpu_hack/noop_replace/` | Firmware no-op rebuild | Authoritative no-op rebuild proof and byte-difference summary. | Yes | Small text evidence; proves rebuild/save gate without tracking binaries. |
-| `cpu_hack/noop_replace/bios_noop_rebuilt.bin.report.txt` | `cpu_hack/noop_replace/` | Firmware no-op rebuild | UEFIExtract parse report for accepted no-op rebuilt image. | Yes | Small text parse evidence for `NOOP_REBUILD_PROVEN`. |
-| `cpu_hack/board_probe/check_ics*.ps1` | `cpu_hack/board_probe/` | Firmware/board lab | Local board/clock inspection helpers. | Yes | Source scripts, not generated artifacts. |
-| `cpu_hack/bios_dump.bin` | `cpu_hack/` | Firmware lab raw artifact | Raw BIOS dump image. | No | Binary/sensitive; preserved locally. |
-| `cpu_hack/bios_parse/*.csv` | `cpu_hack/bios_parse/` | Firmware lab generated | GUID CSV exports. | No | Generated artifacts. |
-| `cpu_hack/bios_dump.bin.dump/` | `cpu_hack/` | Firmware lab generated | UEFIExtract tree for owned dump. | No | Generated artifact tree. |
-| `cpu_hack/_tmp_coreboot_*/` | `cpu_hack/` | Firmware lab generated | Temporary coreboot/source extraction trees. | No | Generated/heavy local research trees. |
-| `cpu_hack/tools/` | `cpu_hack/` | Firmware lab local tools | Downloaded/local tools. | No | Local tool binaries. |
-| `cpu_hack/mod_donors/` | `cpu_hack/` | Firmware lab local | Downloaded stock/donor BIOS packages. | No | Binary/generated artifacts. |
-| `cpu_hack/noop_replace/*.bin` | `cpu_hack/noop_replace/` | Firmware lab local | Rebuilt/attempted BIOS images. | No | Binary/generated artifacts. |
-| `cpu_hack/noop_replace/*/body.bin` | `cpu_hack/noop_replace/` | Firmware lab generated | Target body extraction from accepted no-op rebuilt image. | No | Generated binary verification artifact; hash is recorded in text reports. |
-| `cpu_hack/local_logs/` | `cpu_hack/local_logs/` | Firmware lab logs | Local probe and extraction logs. | No | Generated logs. |
+| `50_3_catalytic_ladder/PHASE3_EXPANSION_SUMMARY.md` | `50_3_catalytic_ladder/` | Phase 3 summary | Phase 3 expansion summary: subphases, verdicts, next task. | Yes | Closeout artifact for Phase 3 catalytic ladder. |
+| `50_3b_substrate_primitive/PHASE3B_CATALYTIC_SUBSTRATE_PRIMITIVE.md` | `50_3b_substrate_primitive/` | Phase 3B | Four-snapshot invariant probe verdict and null-control summary. | Yes | Records the catalytic substrate primitive decision gate. |
+| `50_3b_substrate_primitive/results/invariant_probe_summary.csv` | `50_3b_substrate_primitive/results/` | Phase 3B result | Target-run metric summary for four-snapshot invariant probe. | Yes | Small required result artifact for the primitive gate. |
+| `50_4_holo_eigenbasis/PHASE4_INTEGRATION_SUMMARY.md` | `50_4_holo_eigenbasis/` | Phase 4 summary | Phase 4 integration summary: Track A/B split, verdicts, next task. | Yes | Closeout artifact for Phase 4 dual-track architecture. |
+| `50_4_holo_eigenbasis/PHASE4_3_RESIDUAL_CHANNEL.md` | `50_4_holo_eigenbasis/` | Phase 4 Track A | Residual-channel target-run report and controls. | Yes | Records Phase 4.3 completion. |
+| `50_4_holo_eigenbasis/PHASE4_4A_OPERATOR_GOE.md` | `50_4_holo_eigenbasis/` | Phase 4 Track A | Operator-matrix eigenvalue spacing report and null comparison. | Yes | Records Phase 4.4A completion. |
+| `50_4_holo_eigenbasis/PHASE4_5_HOLO_MINI_MODEL.md` | `50_4_holo_eigenbasis/` | Phase 4 Track A | `.holo` mini-model target-run report and controls. | Yes | Records Phase 4.5 completion. |
+| `50_4_holo_eigenbasis/PHASE4_6_PUBLIC_HOLO_HARNESS.md` | `50_4_holo_eigenbasis/` | Phase 4 Track A | Public `.holo` harness packaging report. | Yes | Records Phase 4.6 completion. |
+| `50_1_subthreshold_msr/*.md` | `50_1_subthreshold_msr/` | Phase 1 / CPU_SING | Runtime VID clamp, route reports, catalytic tape, `.holo`, VRM, detuning, GOE, and final pack. | Yes | Markdown lab reports are primary evidence. |
+| `50_2_phase_locked_network/*.md` | `50_2_phase_locked_network/` | Phase 2 | Kuramoto, active phase, deep control, AGESA P4-safe, GOE, Ising, detuning, markers, and external measurement reports. | Yes | Markdown lab reports are primary Phase 2 evidence. |
+| `50_2b_blackbox/*.md` | `50_2b_blackbox/` | Phase 2B black-box attractor | Passive-mechanism closure, decision tree, 2B.5A status, and transition reports. | Yes | Existing named Phase 2B workspace; keep as-is. |
+| `50_2_firmware/*.md` | `50_2_firmware/` | Phase 2/3 firmware | AGESA recursive gate, master dispatch, donor diff, arg0C provenance. | Yes | Records AGESA route blockers and exact next artifacts. |
+| `50_2_undervolt_research/*.md` | `50_2_undervolt_research/` | Research pathway | Undervolt pathway research and evidence inventory. | Yes | Markdown research reports are small and reproducible. |
+| `50_2_firmware/cpu_hack/CPU_HACK_INDEX.md` | `50_2_firmware/cpu_hack/` | Firmware lab index | Folder map for firmware evidence, local tools, generated trees, and no-op rebuild blocker. | Yes | Keeps the organized firmware workspace readable. |
+| `50_2_firmware/cpu_hack/agesa_trace/PATCH_ANALYSIS.md` | `50_2_firmware/cpu_hack/agesa_trace/` | Firmware lab | Patch analysis for AGESA/global branch/P4-safe route. | Yes | Primary firmware decision evidence. |
+| `50_2_firmware/cpu_hack/agesa_trace/*.txt` | `50_2_firmware/cpu_hack/agesa_trace/` | Firmware lab text evidence | Decompile, disasm, xref, service table, record map, and MSR source proof artifacts. | Yes | Small text evidence for firmware route. |
+| `50_2_firmware/cpu_hack/bios_parse/bios_dump.bin.report.txt` | `50_2_firmware/cpu_hack/bios_parse/` | Firmware lab parse report | UEFIExtract parse report for owned BIOS dump. | Yes | Small text parse evidence. |
+| `50_2_firmware/cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt` | `50_2_firmware/cpu_hack/noop_replace/` | Firmware no-op rebuild | Authoritative no-op rebuild proof and byte-difference summary. | Yes | Small text evidence; proves rebuild/save gate without tracking binaries. |
+| `50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin.report.txt` | `50_2_firmware/cpu_hack/noop_replace/` | Firmware no-op rebuild | UEFIExtract parse report for accepted no-op rebuilt image. | Yes | Small text parse evidence for `NOOP_REBUILD_PROVEN`. |
+| `50_2_firmware/cpu_hack/board_probe/check_ics*.ps1` | `50_2_firmware/cpu_hack/board_probe/` | Firmware/board lab | Local board/clock inspection helpers. | Yes | Source scripts, not generated artifacts. |
+| `50_2_firmware/cpu_hack/bios_dump.bin` | `50_2_firmware/cpu_hack/` | Firmware lab raw artifact | Raw BIOS dump image. | No | Binary/sensitive; preserved locally. |
+| `50_2_firmware/cpu_hack/bios_parse/*.csv` | `50_2_firmware/cpu_hack/bios_parse/` | Firmware lab generated | GUID CSV exports. | No | Generated artifacts. |
+| `50_2_firmware/cpu_hack/bios_dump.bin.dump/` | `50_2_firmware/cpu_hack/` | Firmware lab generated | UEFIExtract tree for owned dump. | No | Generated artifact tree. |
+| `50_2_firmware/cpu_hack/_tmp_coreboot_*/` | `50_2_firmware/cpu_hack/` | Firmware lab generated | Temporary coreboot/source extraction trees. | No | Generated/heavy local research trees. |
+| `50_2_firmware/cpu_hack/tools/` | `50_2_firmware/cpu_hack/` | Firmware lab local tools | Downloaded/local tools. | No | Local tool binaries. |
+| `50_2_firmware/cpu_hack/mod_donors/` | `50_2_firmware/cpu_hack/` | Firmware lab local | Downloaded stock/donor BIOS packages. | No | Binary/generated artifacts. |
+| `50_2_firmware/cpu_hack/noop_replace/*.bin` | `50_2_firmware/cpu_hack/noop_replace/` | Firmware lab local | Rebuilt/attempted BIOS images. | No | Binary/generated artifacts. |
+| `50_2_firmware/cpu_hack/noop_replace/*/body.bin` | `50_2_firmware/cpu_hack/noop_replace/` | Firmware lab generated | Target body extraction from accepted no-op rebuilt image. | No | Generated binary verification artifact; hash is recorded in text reports. |
+| `50_2_firmware/cpu_hack/local_logs/` | `50_2_firmware/cpu_hack/local_logs/` | Firmware lab logs | Local probe and extraction logs. | No | Generated logs. |
 
 ## Session Scripts (organized by phase)
 
-### Phase 1: MSR / Voltage / Frequency (`session_scripts/phase1_msr/`)
+### Phase 1: MSR / Voltage / Frequency (`50_1_subthreshold_msr/src/`)
 
 | File | Purpose | Keep |
 |------|---------|------|
@@ -65,7 +65,7 @@ This index preserves the existing Exp50 phase layout. No files are reorganized i
 | `smbus_scan.sh` | SMBus/I2C bus scan for VRM controller | Yes |
 | `nb_probe.sh` | Northbridge PCI config space probe | Yes |
 
-### Phase 2: Kuramoto / Coupling / Oscillators (`session_scripts/phase2_kuramoto/`)
+### Phase 2: Kuramoto / Coupling / Oscillators (`50_2_phase_locked_network/src/`)
 
 | File | Purpose | Keep |
 |------|---------|------|
@@ -83,7 +83,7 @@ This index preserves the existing Exp50 phase layout. No files are reorganized i
 | `phase2_probe.c` | Phase 2 probe | Yes |
 | `cacheline_phase_coupling.c` | Core-pinned cacheline phase-coupling harness with isolated, false-shared, atomic same-line, and cyclic-shift null modes | Yes |
 
-### Phase 2B: Black-Box Attractor / Phase Oracle (`session_scripts/phase2b/`)
+### Phase 2B: Black-Box Attractor / Phase Oracle (`50_2b_blackbox/src/`)
 
 | File | Purpose | Keep |
 |------|---------|------|
@@ -99,7 +99,7 @@ This index preserves the existing Exp50 phase layout. No files are reorganized i
 | `spectral_problem_classifier.c` | Exp31-style spectral/topological router for active edge, vertex phase, and Bloch/complex solver families | Yes |
 | `holo_mera_bridge.c` | Exp33-style `.holo`/MERA bridge from active phase-oracle output into reversible catalytic tape slots | Yes |
 
-### Phase 3: Catalytic Computing Ladder (`session_scripts/phase3_catalytic/`)
+### Phase 3: Catalytic Computing Ladder (`50_3_catalytic_ladder/src/`)
 
 | File | Purpose | Keep |
 |------|---------|------|
@@ -118,13 +118,13 @@ This index preserves the existing Exp50 phase layout. No files are reorganized i
 | `holo_tape_goal.c` | .holo tape goal test | Yes |
 | `audit1.py` | Fresh Python catalytic cycle verification | Yes |
 
-### Phase 3B: Catalytic Substrate Primitive (`session_scripts/phase3b/`)
+### Phase 3B: Catalytic Substrate Primitive (`50_3b_substrate_primitive/src/`)
 
 | File | Purpose | Keep |
 |------|---------|------|
 | `catalytic_invariant_probe.c` | Four-snapshot invariant probe with destructive, random reversible, random-answer, shuffled-schedule, and same-final-hash/wrong-answer controls | Yes |
 
-### Phase 4: .holo Eigenbasis on Catalytic Silicon (`session_scripts/phase4_holo/`)
+### Phase 4: .holo Eigenbasis on Catalytic Silicon (`50_4_holo_eigenbasis/src/`)
 
 | File | Purpose | Keep |
 |------|---------|------|
@@ -137,7 +137,7 @@ This index preserves the existing Exp50 phase layout. No files are reorganized i
 | `catcas_holo_harness.c` | Phase 4.6 CLI-style public `.holo` harness for residual, mini, GOE, and all-test modes | Yes |
 | `polytope_hypothesis.c` | Canonical hardened Phase 5.6 polytope/positive-geometry full-carrier hypothesis harness | Yes |
 
-### Phase 5.7: Entropic Boundary Geometry (`phase5_7/`)
+### Phase 5.7: Entropic Boundary Geometry (`50_5_7_entropic_boundary/`)
 
 | File | Purpose | Keep |
 |------|---------|------|
@@ -150,8 +150,8 @@ This index preserves the existing Exp50 phase layout. No files are reorganized i
 
 ## Phase Layout Verdict
 
-- Keep `cpu_sing_1/`, `cpu_sing_2/`, `cpu_sing_3/`, `2b_blackbox/`, `gpt_research/`, `cpu_hack/`, and `session_scripts/`.
-- Session scripts organized by phase: `phase1_msr/`, `phase2_kuramoto/`, `phase3_catalytic/`, `phase4_holo/`, `phase5_6/`, and `phase5_7/`.
+- Keep the per-phase dirs `50_1_subthreshold_msr/`, `50_2_phase_locked_network/`, `50_2_firmware/`, `50_2b_blackbox/`, `50_2_undervolt_research/`, and `50_2_firmware/cpu_hack/` (Scheme 2 merge: no standalone session_scripts dir remains).
+- Session scripts are folded into each phase dir's `src/` subdir, e.g. `50_1_subthreshold_msr/src/`, `50_2_phase_locked_network/src/`, `50_3_catalytic_ladder/src/`, `50_4_holo_eigenbasis/src/`, `50_5_6_polytope_geometry/src/`, and `50_5_7_entropic_boundary/src/`.
 - Do not recreate generic `docs/`, `reports/`, `firmware/`, or `archive/` folders.
 - Track markdown reports, source scripts, and small text evidence.
 - Ignore raw BIOS images, extracted BIOS trees, generated logs, CSV exports, compiled binaries, and local tool trees.

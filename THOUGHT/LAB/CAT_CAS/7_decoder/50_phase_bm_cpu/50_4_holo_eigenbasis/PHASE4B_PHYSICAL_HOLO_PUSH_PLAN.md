@@ -199,12 +199,12 @@ Route 3 tests the cleanest catalytic physicality claim: logical restoration with
 ## Exact Next Artifact Set
 
 ```text
-session_scripts/phase4_holo/physical_afterimage_probe.c
-phase4_holo/PHASE4B_RESTORED_TAPE_PHYSICAL_AFTERIMAGE.md
-phase4_holo/results/phase4b_afterimage_summary.csv
+50_4_holo_eigenbasis/src/physical_afterimage_probe.c
+50_4_holo_eigenbasis/PHASE4B_RESTORED_TAPE_PHYSICAL_AFTERIMAGE.md
+50_4_holo_eigenbasis/results/phase4b_afterimage_summary.csv
 
-session_scripts/phase4_holo/holo_lockin_witness.c
-phase4_holo/PHASE4B_CROSS_CORE_HOLO_LOCKIN_WITNESS.md
-phase4_holo/results/phase4b_holo_lockin_summary.csv
+50_4_holo_eigenbasis/src/holo_lockin_witness.c
+50_4_holo_eigenbasis/PHASE4B_CROSS_CORE_HOLO_LOCKIN_WITNESS.md
+50_4_holo_eigenbasis/results/phase4b_holo_lockin_summary.csv
 ```
 

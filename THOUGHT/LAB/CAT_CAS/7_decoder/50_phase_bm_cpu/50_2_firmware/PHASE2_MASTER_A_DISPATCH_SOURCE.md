@@ -8,7 +8,7 @@ Route A advanced beyond the previous missing-artifact state. The `.dG3_DXE` cons
 
 ## New Artifact
 
-- `cpu_hack/agesa_trace/AmdProcessorInitPeim_dG3_DXE_dispatch_table_consumer_decompile.txt`
+- `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_dG3_DXE_dispatch_table_consumer_decompile.txt`
 
 ## Evidence
 

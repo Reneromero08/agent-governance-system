@@ -21,7 +21,7 @@ The targeted P0-locked rerun cleared the named cache artifact:
 | 1024 | 1.794370 |
 | 4096 | 1.232016 |
 
-Artifact report: `phase5_8/results/freq_locked_cache_probe/PHASE5_8_FREQ_LOCKED_CACHE_ARTIFACT_PROBE.md`.
+Artifact report: `50_5_8_boundary_scaling/results/freq_locked_cache_probe/PHASE5_8_FREQ_LOCKED_CACHE_ARTIFACT_PROBE.md`.
 
 ## Implementation Fixes
 

@@ -11,7 +11,7 @@ The result changes the runtime interpretation: COFVID VID is not invariant under
 ## Command
 
 ```powershell
-Get-Content -Raw session_scripts\phase1_msr\msr_load_affinity_characterizer.py | ssh -o BatchMode=yes -o ConnectTimeout=5 root@192.168.137.100 "python3 - --cores 0-5 --modes baseline,self_load,neighbor_load,all_load --samples 12 --delay 0.01 --jitter-iters 96"
+Get-Content -Raw 50_1_subthreshold_msr\src\msr_load_affinity_characterizer.py | ssh -o BatchMode=yes -o ConnectTimeout=5 root@192.168.137.100 "python3 - --cores 0-5 --modes baseline,self_load,neighbor_load,all_load --samples 12 --delay 0.01 --jitter-iters 96"
 ```
 
 The target required `modprobe msr` after reboot before `/dev/cpu/0/msr` existed.

@@ -31,9 +31,9 @@ NB PCI: a01a0800 03001315 0067641a 0207df19 80000000
 
 Scripts used:
 
-- `session_scripts/phase2_probe.c`
-- `session_scripts/phase2_analyze_fast.py`
-- Existing oscillator and TSC scripts in `session_scripts/`.
+- `50_2_phase_locked_network/src/phase2_probe.c`
+- `50_2_phase_locked_network/src/phase2_analyze_fast.py`
+- Existing oscillator and TSC scripts in `50_2_phase_locked_network/src/`.
 
 No firmware flash, physical modification, unknown PCI write, or voltage sweep was performed.
 

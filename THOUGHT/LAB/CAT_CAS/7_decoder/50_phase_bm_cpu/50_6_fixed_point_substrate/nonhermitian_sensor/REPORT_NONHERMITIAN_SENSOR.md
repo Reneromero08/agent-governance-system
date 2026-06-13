@@ -49,7 +49,7 @@ Consistent with [[the exp50 P^CTC result]]: the only resource that collapses the
 
 ## Artifacts
 
-Per-approach code + result JSON under phase6/nonhermitian_sensor/{koopman_transfer, hatano_nelson, kuramoto_resonance, spectral_argument_principle, pt_symmetry}/. Seeds recorded in each result. Built by Fable (design + implementation), adversarially priced + smuggle-audited.
+Per-approach code + result JSON under 50_6_fixed_point_substrate/nonhermitian_sensor/{koopman_transfer, hatano_nelson, kuramoto_resonance, spectral_argument_principle, pt_symmetry}/. Seeds recorded in each result. Built by Fable (design + implementation), adversarially priced + smuggle-audited.
 
 ## Addendum: 6th sensor - Godel-edge phi-twist (Exp 36 machinery)
 

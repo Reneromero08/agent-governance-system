@@ -9,7 +9,7 @@ The read-only state-window timing oracle ran over SSH and did not produce a soft
 ## Command
 
 ```powershell
-Get-Content -Raw session_scripts\phase1_msr\msr_state_window_oracle.py | ssh -o BatchMode=yes -o ConnectTimeout=5 root@192.168.137.100 "python3 - --cores 0-5 --modes baseline,self_load,neighbor_load,all_load --samples 420 --delay 0 --workload-iters 384 --min-count 20"
+Get-Content -Raw 50_1_subthreshold_msr\src\msr_state_window_oracle.py | ssh -o BatchMode=yes -o ConnectTimeout=5 root@192.168.137.100 "python3 - --cores 0-5 --modes baseline,self_load,neighbor_load,all_load --samples 420 --delay 0 --workload-iters 384 --min-count 20"
 ```
 
 ## Safety
@@ -75,7 +75,7 @@ This is not `CPU_SINGS`, not `BYTE_READY_HUMAN_REVIEW`, and not `SOFTWARE_FIRMWA
 The next live blocker is firmware-side: prove a parse-clean identical no-op rebuild image. Do not create a P4 candidate. Do not flash. The required artifact remains:
 
 ```text
-cpu_hack/noop_replace/bios_noop_rebuilt.bin
+50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin
 ```
 
 with a clean parse report and a target PE32 body hash still equal to:

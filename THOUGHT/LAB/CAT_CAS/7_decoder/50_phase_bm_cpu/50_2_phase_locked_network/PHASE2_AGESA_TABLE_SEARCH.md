@@ -8,7 +8,7 @@ TABLE_TARGET_NOT_FOUND_FROM_CURRENT_ARTIFACTS
 
 Read-only binary search was run against:
 
-- `cpu_hack/bios_dump.bin`
+- `50_2_firmware/cpu_hack/bios_dump.bin`
 - SHA-256: `B7C0C725C4B6F50F399A208E5CAD6938BAACDD8FA1BBC795098CA393083FBC91`
 - Length: `4,194,304` bytes
 - Target PEIM corrected MZ start: `0x0034008C`

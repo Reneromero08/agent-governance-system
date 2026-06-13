@@ -15,7 +15,7 @@ This handoff does not claim a Phase 6 crossing. It only exports a stable scalar 
 Primary source:
 
 ```text
-phase4_holo/PHASE4B_CACHE_HOLOGRAM_LAYOUT_RETENTION.md
+50_4_holo_eigenbasis/PHASE4B_CACHE_HOLOGRAM_LAYOUT_RETENTION.md
 ```
 
 Source verdict:
@@ -27,27 +27,27 @@ PHASE4B_LAYOUT_RETENTION_PASS
 Source summary:
 
 ```text
-phase4_holo/results/phase4b_cache_hologram_layout_retention_summary.json
+50_4_holo_eigenbasis/results/phase4b_cache_hologram_layout_retention_summary.json
 ```
 
 ## Scorer
 
 ```text
-session_scripts/phase4_holo/phase4b_to_phase6_feeder_scorer.py
+50_4_holo_eigenbasis/src/phase4b_to_phase6_feeder_scorer.py
 ```
 
 Run:
 
 ```bash
-python session_scripts/phase4_holo/phase4b_to_phase6_feeder_scorer.py \
-  phase4_holo/results/phase4b_cache_hologram_layout_retention_summary.json \
-  phase4_holo/results/phase4b_to_phase6_feeder_features.json
+python 50_4_holo_eigenbasis/src/phase4b_to_phase6_feeder_scorer.py \
+  50_4_holo_eigenbasis/results/phase4b_cache_hologram_layout_retention_summary.json \
+  50_4_holo_eigenbasis/results/phase4b_to_phase6_feeder_features.json
 ```
 
 Output:
 
 ```text
-phase4_holo/results/phase4b_to_phase6_feeder_features.json
+50_4_holo_eigenbasis/results/phase4b_to_phase6_feeder_features.json
 ```
 
 ## Exported Features

@@ -9,8 +9,8 @@
 This file is the original 3-run Phase 5.8 summary. It is retained as history,
 but the current evidence state is controlled by:
 
-- `phase5_8/REPORT_PHASE5_8_FINAL.md`
-- `phase5_8/PHASE5_8_REVERIFY_ARTIFACT_AUDIT.md`
+- `50_5_8_boundary_scaling/REPORT_PHASE5_8_FINAL.md`
+- `50_5_8_boundary_scaling/PHASE5_8_REVERIFY_ARTIFACT_AUDIT.md`
 
 Current careful label:
 
@@ -223,7 +223,7 @@ the committed repository state.
 
 ## 17. Uncertainties
 
-- Superseded by final hardening: effective dimension now uses true eigendecomposition in `session_scripts/phase5_8/analyze_phase5_8.py` / `aggregate_phase5_8.py`; the old constant D_eff=15.0 artifact is closed.
+- Superseded by final hardening: effective dimension now uses true eigendecomposition in `50_5_8_boundary_scaling/src/analyze_phase5_8.py` / `aggregate_phase5_8.py`; the old constant D_eff=15.0 artifact is closed.
 - CACHE T256 showed faster cycles than baseline in the original 3-run report;
   final hardening classified the named cache anomaly as a frequency/control
   confound and attached a P0-locked artifact probe.

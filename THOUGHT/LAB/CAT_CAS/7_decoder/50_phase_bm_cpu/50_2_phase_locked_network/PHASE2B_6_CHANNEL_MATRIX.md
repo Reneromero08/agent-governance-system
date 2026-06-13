@@ -11,7 +11,7 @@ This is not `CPU_SINGS`, not `BYTE_READY_HUMAN_REVIEW`, and not `SOFTWARE_FIRMWA
 ## Command
 
 ```powershell
-Get-Content -Raw session_scripts\phase2b\channel_matrix.c | ssh -o BatchMode=yes -o ConnectTimeout=5 root@192.168.137.100 "cat > /tmp/channel_matrix.c && gcc -O2 /tmp/channel_matrix.c -lm -o /tmp/channel_matrix && timeout 80 /tmp/channel_matrix"
+Get-Content -Raw 50_2b_blackbox\src\channel_matrix.c | ssh -o BatchMode=yes -o ConnectTimeout=5 root@192.168.137.100 "cat > /tmp/channel_matrix.c && gcc -O2 /tmp/channel_matrix.c -lm -o /tmp/channel_matrix && timeout 80 /tmp/channel_matrix"
 ```
 
 ## Safety

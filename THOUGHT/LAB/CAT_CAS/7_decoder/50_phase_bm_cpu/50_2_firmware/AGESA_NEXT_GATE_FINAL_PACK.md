@@ -10,10 +10,10 @@ The AGESA firmware route is still alive, but not byte-ready.
 
 This pass advanced the rebuild gate from missing artifact to proven:
 
-- Public LongSoft `old_engine` source was acquired into ignored local tool tree `cpu_hack/tools/UEFITool_repo/`.
+- Public LongSoft `old_engine` source was acquired into ignored local tool tree `50_2_firmware/cpu_hack/tools/UEFITool_repo/`.
 - A temporary force-save UEFIReplace variant was built with Qt/qmake on the Linux target.
 - Only identical AmdProcessorInitPeim PE32 body replacement was performed.
-- `cpu_hack/noop_replace/bios_noop_rebuilt.bin` was produced, parsed cleanly, and verified byte-identical to stock.
+- `50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin` was produced, parsed cleanly, and verified byte-identical to stock.
 
 The current stop condition is:
 
@@ -23,21 +23,21 @@ The current stop condition is:
 
 | Gate | Artifact | Result |
 |---|---|---|
-| A constructor decompile/xrefs | `cpu_sing_3/AGESA_NEXT_A_CONSTRUCTOR_DECOMPILE.md` | Constructor path identified. |
-| A export | `cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt` | Function entry, stack frame, base flow, and field provenance recovered. |
-| B table/provenance | `cpu_sing_3/AGESA_NEXT_B_TABLE_REOPEN.md`, `cpu_sing_3/PHASE2_FW_ARG0C_PROVENANCE.md` | P4 field maps to runtime-produced record sourced from `MSRC001_0068`; no static editable P4 row proven. |
-| C no-op rebuild | `cpu_sing_3/AGESA_NEXT_C_NOOP_REBUILD.md`, `cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt` | `NOOP_REBUILD_PROVEN`. |
-| D actionability | `cpu_sing_3/AGESA_NEXT_D_ACTIONABILITY.md` | Route alive, not byte-ready. |
+| A constructor decompile/xrefs | `50_2_firmware/AGESA_NEXT_A_CONSTRUCTOR_DECOMPILE.md` | Constructor path identified. |
+| A export | `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt` | Function entry, stack frame, base flow, and field provenance recovered. |
+| B table/provenance | `50_2_firmware/AGESA_NEXT_B_TABLE_REOPEN.md`, `50_2_firmware/PHASE2_FW_ARG0C_PROVENANCE.md` | P4 field maps to runtime-produced record sourced from `MSRC001_0068`; no static editable P4 row proven. |
+| C no-op rebuild | `50_2_firmware/AGESA_NEXT_C_NOOP_REBUILD.md`, `50_2_firmware/cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt` | `NOOP_REBUILD_PROVEN`. |
+| D actionability | `50_2_firmware/AGESA_NEXT_D_ACTIONABILITY.md` | Route alive, not byte-ready. |
 
 ## New Artifacts Produced
 
-- `cpu_hack/noop_replace/bios_noop_rebuilt.bin`
-- `cpu_hack/noop_replace/bios_noop_rebuilt.bin.report.txt`
-- `cpu_hack/noop_replace/rebuilt_AmdProcessorInitPeim_PE32_body.bin/body.bin`
-- `cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt`
-- `cpu_sing_3/AGESA_NEXT_C_NOOP_REBUILD.md`
-- `cpu_sing_3/AGESA_NEXT_D_ACTIONABILITY.md`
-- `cpu_sing_3/AGESA_NEXT_GATE_FINAL_PACK.md`
+- `50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin`
+- `50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin.report.txt`
+- `50_2_firmware/cpu_hack/noop_replace/rebuilt_AmdProcessorInitPeim_PE32_body.bin/body.bin`
+- `50_2_firmware/cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt`
+- `50_2_firmware/AGESA_NEXT_C_NOOP_REBUILD.md`
+- `50_2_firmware/AGESA_NEXT_D_ACTIONABILITY.md`
+- `50_2_firmware/AGESA_NEXT_GATE_FINAL_PACK.md`
 
 Generated binary and extraction artifacts remain local-only and ignored; markdown/text reports are commit-safe.
 
@@ -97,7 +97,7 @@ Do not repeat the no-op rebuild gate. It is proven.
 Next firmware-only command should target edit-source discovery, not rebuild mechanics:
 
 ```powershell
-rg -n "C0010068|C0010064|FFF44E76|FFF7348D|entry \\+0x04|selected_base \\+ pstate\\*0x18 \\+ 0x1C" cpu_hack/agesa_trace
+rg -n "C0010068|C0010064|FFF44E76|FFF7348D|entry \\+0x04|selected_base \\+ pstate\\*0x18 \\+ 0x1C" 50_2_firmware/cpu_hack/agesa_trace
 ```
 
 If new disassembly/decompile output is added, the next required file is a focused report proving whether `MSRC001_0068` can be influenced by a static byte source without touching P0-P3.

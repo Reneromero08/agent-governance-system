@@ -10,7 +10,7 @@ Risk tags: `BRICK_RISK`, `PROGRAMMER_REQUIRED`
 
 ## Evidence
 
-- BIOS dump exists locally at [cpu_hack/bios_dump.bin](cpu_hack/bios_dump.bin), 4,194,304 bytes.
+- BIOS dump exists locally at [50_2_firmware/cpu_hack/bios_dump.bin](50_2_firmware/cpu_hack/bios_dump.bin), 4,194,304 bytes.
 - SHA-256: `B7C0C725C4B6F50F399A208E5CAD6938BAACDD8FA1BBC795098CA393083FBC91`.
 - BIOS version from local DMI: `FD`, release date `02/26/2016`.
 - Gigabyte support page lists rev. 2.x BIOS `FD`, dated `Mar 2, 2016`, and warns that inadequate BIOS flashing may cause malfunction.
@@ -36,7 +36,7 @@ DE 89 7D F4 89 5D F8 E8 15 E0 FD FF 83 C4 0C FF
 45 FC 81 7D FC 68 00 01 C0 0F 86 67 FF FF FF 5F
 ```
 
-Relevant disassembly from [cpu_hack/agesa_trace/pstate_targeted_disasm.txt](cpu_hack/agesa_trace/pstate_targeted_disasm.txt):
+Relevant disassembly from [50_2_firmware/cpu_hack/agesa_trace/pstate_targeted_disasm.txt](50_2_firmware/cpu_hack/agesa_trace/pstate_targeted_disasm.txt):
 
 ```text
 fff66e3a: cmp      eax, edx

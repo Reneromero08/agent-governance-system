@@ -20,7 +20,7 @@ The question is whether the same-core `.holo` physical witness survives both:
 ## Harness
 
 ```text
-session_scripts/phase4_holo/cache_hologram_layout_retention.c
+50_4_holo_eigenbasis/src/cache_hologram_layout_retention.c
 ```
 
 The harness uses:
@@ -43,7 +43,7 @@ Delay classes:
 ## Analyzer
 
 ```text
-session_scripts/phase4_holo/analyze_cache_hologram_layout_retention.py
+50_4_holo_eigenbasis/src/analyze_cache_hologram_layout_retention.py
 ```
 
 The analyzer:
@@ -65,13 +65,13 @@ PHASE4B_CACHE_HOLOGRAM_LAYOUT_RETENTION restored=24576/24576
 Tracked summary:
 
 ```text
-phase4_holo/results/phase4b_cache_hologram_layout_retention_summary.json
+50_4_holo_eigenbasis/results/phase4b_cache_hologram_layout_retention_summary.json
 ```
 
 Ignored raw CSV:
 
 ```text
-phase4_holo/results/phase4b_cache_hologram_layout_retention.csv
+50_4_holo_eigenbasis/results/phase4b_cache_hologram_layout_retention.csv
 ```
 
 Result table:

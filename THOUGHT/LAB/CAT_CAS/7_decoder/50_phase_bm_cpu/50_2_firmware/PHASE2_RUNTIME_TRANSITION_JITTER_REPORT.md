@@ -9,7 +9,7 @@ The read-only transition/jitter experiment ran over SSH on the Phenom II target.
 ## Command
 
 ```powershell
-Get-Content -Raw session_scripts\phase1_msr\msr_transition_jitter_probe.py | ssh -o BatchMode=yes -o ConnectTimeout=5 root@192.168.137.100 "python3 - --cores 0-5 --modes baseline,self_load,neighbor_load,all_load --samples 160 --delay 0.001 --transition-sample-limit 8 --summary-only"
+Get-Content -Raw 50_1_subthreshold_msr\src\msr_transition_jitter_probe.py | ssh -o BatchMode=yes -o ConnectTimeout=5 root@192.168.137.100 "python3 - --cores 0-5 --modes baseline,self_load,neighbor_load,all_load --samples 160 --delay 0.001 --transition-sample-limit 8 --summary-only"
 ```
 
 ## Safety

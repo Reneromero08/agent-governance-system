@@ -26,7 +26,7 @@ Target stdout summary:
 Verification log:
 
 ```text
-phase4_holo/results/phase4_track_a_verification.txt
+50_4_holo_eigenbasis/results/phase4_track_a_verification.txt
 ```
 
 ## Hardening Note
@@ -57,9 +57,9 @@ The cumulative-transform restoration check now recomputes the tape hash after re
 
 | Artifact | Purpose |
 |---|---|
-| `session_scripts/phase4_holo/rotation_chain.c` | Phase 4.2A rotation-chain harness. |
-| `phase4_holo/results/phase4_track_a_verification.txt` | Saved target run covering Phase 4.0-4.6. |
-| `phase4_holo/PHASE4_2A_CATALYTIC_ROTATION_CHAIN.md` | This report. |
+| `50_4_holo_eigenbasis/src/rotation_chain.c` | Phase 4.2A rotation-chain harness. |
+| `50_4_holo_eigenbasis/results/phase4_track_a_verification.txt` | Saved target run covering Phase 4.0-4.6. |
+| `50_4_holo_eigenbasis/PHASE4_2A_CATALYTIC_ROTATION_CHAIN.md` | This report. |
 
 ## Decision
 

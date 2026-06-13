@@ -1,7 +1,7 @@
 AmdProcessorInitPeim xrefs for constructor path 0xFFF737A3
 
 Source artifact:
-- cpu_hack/bios_dump.bin.dump/5 8C8CE578-8A3D-4F1C-9935-896185C32DD3/0 AmdProcessorInitPeim/1 PE32 image section/body.bin
+- 50_2_firmware/cpu_hack/bios_dump.bin.dump/5 8C8CE578-8A3D-4F1C-9935-896185C32DD3/0 AmdProcessorInitPeim/1 PE32 image section/body.bin
 - Image base: 0xFFF4008C
 
 Function and block:

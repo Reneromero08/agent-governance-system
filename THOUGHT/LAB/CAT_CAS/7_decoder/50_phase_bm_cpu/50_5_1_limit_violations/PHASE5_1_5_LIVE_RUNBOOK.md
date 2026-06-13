@@ -77,7 +77,7 @@ Already run on the Phenom target. Current primary artifact:
 Reusable harness command from the lab folder:
 
 ```bash
-python session_scripts/phase5_1_5/phase5_1_5_foundation_probe.py
+python 50_5_1_limit_violations/src/phase5_1_5_foundation_probe.py
 ```
 
 Live strengthening artifact:

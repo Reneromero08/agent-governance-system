@@ -8,7 +8,7 @@ Scope: owned local firmware route research. No flash command. No hardware-changi
 
 The target PE32 body is already extracted inside the lab:
 
-`cpu_hack/bios_dump.bin.dump/5 8C8CE578-8A3D-4F1C-9935-896185C32DD3/0 AmdProcessorInitPeim/1 PE32 image section/body.bin`
+`50_2_firmware/cpu_hack/bios_dump.bin.dump/5 8C8CE578-8A3D-4F1C-9935-896185C32DD3/0 AmdProcessorInitPeim/1 PE32 image section/body.bin`
 
 Identity proof:
 
@@ -22,8 +22,8 @@ Identity proof:
 
 Available local extraction binaries:
 
-- `cpu_hack/tools/uefitool/UEFIExtract.exe`
-- `cpu_hack/tools/uefitool_A74/UEFIExtract.exe`
+- `50_2_firmware/cpu_hack/tools/uefitool/UEFIExtract.exe`
+- `50_2_firmware/cpu_hack/tools/uefitool_A74/UEFIExtract.exe`
 
 Both local binaries are extraction/report tools. Their help output supports report, dump, unpack, and GUID extraction modes. They do not provide replace-body and save-image functionality.
 
@@ -33,7 +33,7 @@ Rebuild/save proof was later produced through a temporary Qt/qmake build of publ
 
 The no-op workflow must prove the editor/rebuilder path before any logic change:
 
-1. Load `cpu_hack/bios_dump.bin`.
+1. Load `50_2_firmware/cpu_hack/bios_dump.bin`.
 2. Locate file GUID `DE3E049C-A218-4891-8658-5FC0FA84C788`.
 3. Locate the PE32 image section at raw `0x00340088`, body start `0x0034008C`.
 4. Replace the PE32 image section body with the identical `body.bin`.
@@ -51,9 +51,9 @@ The no-op workflow must prove the editor/rebuilder path before any logic change:
 
 Accepted files:
 
-- `cpu_hack/noop_replace/bios_noop_rebuilt.bin`
-- `cpu_hack/noop_replace/bios_noop_rebuilt.bin.report.txt`
-- `cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt`
+- `50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin`
+- `50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin.report.txt`
+- `50_2_firmware/cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt`
 
 Verification:
 

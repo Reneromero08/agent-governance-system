@@ -144,7 +144,7 @@ The voltage path is now live. Raw K10 P-state VID writes succeeded on P4. A reve
 
 ## 7.A Phase 6 Basin Bridge
 
-Bridge artifact: `phase5_9/PHASE5_9V_TO_PHASE6_BASIN_BRIDGE.md`
+Bridge artifact: `50_5_9_instability_edge/PHASE5_9V_TO_PHASE6_BASIN_BRIDGE.md`
 
 Bridge verdict: `PHASE5_9V_DIRECTIONAL_BASIN_CONTROL__NOT_DETERMINISTIC_ENOUGH_FOR_MODE_C`
 
@@ -157,9 +157,9 @@ Phase 5.9V can feed Phase 6, but not yet as a true Mode C run. Its current role 
 
 The Phase 6-relevant 5.9V action was pushed through VID+5 reproducibility, public/shuffled/oracle controls, duration, VID-offset comparison, and direct target-coupled workload shaping. Promote to Phase 6 Mode C only if a public-prelude selector reproducibly chooses an answer-predictive basin outside shuffled/null/wrong-target confidence intervals. Current evidence rejects that handoff for this coupling family.
 
-Follow-up attempt: `phase5_9/PHASE5_9V_PHASE6_REPRO_ATTEMPT.md` records a failed first reproducibility launch and the successful retry. The all-core P4 VID+5 setup path failed the MSR-set gate for every row and the target then became unreachable over SSH. The runner was hardened to default P4 VID definition writes to the measurement core only (`DEF_CORES=3`) and to pass P4 definition values to `wrmsr` with explicit `0x` prefixes. The fixed 70-row run completed with 0 restoration failures and verdict `PHASE5_9V_DIRECTIONAL_REPRODUCED_NOT_DETERMINISTIC`.
+Follow-up attempt: `50_5_9_instability_edge/PHASE5_9V_PHASE6_REPRO_ATTEMPT.md` records a failed first reproducibility launch and the successful retry. The all-core P4 VID+5 setup path failed the MSR-set gate for every row and the target then became unreachable over SSH. The runner was hardened to default P4 VID definition writes to the measurement core only (`DEF_CORES=3`) and to pass P4 definition values to `wrmsr` with explicit `0x` prefixes. The fixed 70-row run completed with 0 restoration failures and verdict `PHASE5_9V_DIRECTIONAL_REPRODUCED_NOT_DETERMINISTIC`.
 
-Completed Phase 6-facing 5.9V artifact: `phase5_9/results/k10_voltage_probe/p4_vid5_phase6_basin_repro/PHASE5_9V_PHASE6_BASIN_REPRO.md`
+Completed Phase 6-facing 5.9V artifact: `50_5_9_instability_edge/results/k10_voltage_probe/p4_vid5_phase6_basin_repro/PHASE5_9V_PHASE6_BASIN_REPRO.md`
 
 Key result: `syscall_prelude` was the strongest high-basin bias (7/10 high), but public-prelude did not beat quiet or separate from shuffled strongly enough. Directional basin control reproduced; deterministic Phase 6 Mode C handoff did not.
 

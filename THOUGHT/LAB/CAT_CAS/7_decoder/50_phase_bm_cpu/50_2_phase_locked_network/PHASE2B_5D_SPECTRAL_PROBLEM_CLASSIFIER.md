@@ -11,7 +11,7 @@ This is a software routing aid for phase-oracle selection. It is not passive Kur
 ## Command
 
 ```powershell
-Get-Content -Raw session_scripts\phase2b\spectral_problem_classifier.c | ssh -o BatchMode=yes -o ConnectTimeout=5 root@192.168.137.100 "cat > /tmp/spectral_problem_classifier.c && gcc -O2 /tmp/spectral_problem_classifier.c -lm -o /tmp/spectral_problem_classifier && timeout 40 /tmp/spectral_problem_classifier"
+Get-Content -Raw 50_2b_blackbox\src\spectral_problem_classifier.c | ssh -o BatchMode=yes -o ConnectTimeout=5 root@192.168.137.100 "cat > /tmp/spectral_problem_classifier.c && gcc -O2 /tmp/spectral_problem_classifier.c -lm -o /tmp/spectral_problem_classifier && timeout 40 /tmp/spectral_problem_classifier"
 ```
 
 ## Safety

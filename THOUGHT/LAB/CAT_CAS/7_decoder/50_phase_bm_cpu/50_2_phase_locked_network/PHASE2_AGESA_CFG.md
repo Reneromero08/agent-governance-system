@@ -33,7 +33,7 @@ The normalizer is inside `.tG1_PEI`.
 
 ## Control Flow
 
-Relevant instructions from `cpu_hack/agesa_trace/pstate_targeted_disasm.txt`:
+Relevant instructions from `50_2_firmware/cpu_hack/agesa_trace/pstate_targeted_disasm.txt`:
 
 ```text
 fff66de6: push     ebp

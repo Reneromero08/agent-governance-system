@@ -56,5 +56,5 @@ This does not end the overall master goal:
 Reassess the master route table after Phase 2B classification. If no genuinely new software/passive mechanism is available, the next non-repeated live action is the firmware no-op rebuild artifact:
 
 ```text
-cpu_hack/noop_replace/bios_noop_rebuilt.bin
+50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin
 ```

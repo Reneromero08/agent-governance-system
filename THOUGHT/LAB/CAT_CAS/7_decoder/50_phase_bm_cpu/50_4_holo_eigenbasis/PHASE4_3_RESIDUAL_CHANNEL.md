@@ -35,7 +35,7 @@ Summary:
 
 | Artifact | Purpose |
 |---|---|
-| `session_scripts/phase4_holo/residual_channel.c` | Phase 4.3 residual-channel harness. |
+| `50_4_holo_eigenbasis/src/residual_channel.c` | Phase 4.3 residual-channel harness. |
 | `PHASE4_3_RESIDUAL_CHANNEL.md` | This report. |
 
 ## What Was Tested

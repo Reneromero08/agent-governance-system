@@ -320,7 +320,7 @@ def best_bit(rows: list[dict[str, int]], keys: list[str], label_key: str) -> tup
 
 
 def main() -> int:
-    out_dir = Path("phase3b/results/angle_rescue")
+    out_dir = Path("50_3b_substrate_primitive/results/angle_rescue")
     out_dir.mkdir(parents=True, exist_ok=True)
 
     rows: list[dict[str, int]] = []

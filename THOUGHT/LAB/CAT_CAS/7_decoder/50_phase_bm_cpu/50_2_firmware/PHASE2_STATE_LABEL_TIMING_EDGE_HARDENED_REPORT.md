@@ -11,12 +11,12 @@ timing edge is not reproducible enough to count as CPU-sings evidence.
 
 ## Artifact Chain
 
-- Selector map: `cpu_sing_3/PHASE2_EFFECTIVE_STATE_SELECTOR_MAP_REPORT.md`
-- First coupling probe: `cpu_sing_3/PHASE2_STATE_LABEL_PHASE_COUPLING_REPORT.md`
-- Compact sweep: `cpu_sing_3/PHASE2_STATE_LABEL_TIMING_EDGE_STABILITY_SWEEP.md`
-- Dense 4096-round sweep: `cpu_sing_3/PHASE2_STATE_LABEL_TIMING_EDGE_NARROWING_SWEEP.md`
-- Shuffled-answer hard-null sweep: `cpu_sing_3/PHASE2_STATE_LABEL_HARDNULL_SWEEP.md`
-- Higher-row focus sweep: `cpu_sing_3/PHASE2_STATE_LABEL_HARDNULL_FOCUS_SWEEP.md`
+- Selector map: `50_2_firmware/PHASE2_EFFECTIVE_STATE_SELECTOR_MAP_REPORT.md`
+- First coupling probe: `50_2_firmware/PHASE2_STATE_LABEL_PHASE_COUPLING_REPORT.md`
+- Compact sweep: `50_2_firmware/PHASE2_STATE_LABEL_TIMING_EDGE_STABILITY_SWEEP.md`
+- Dense 4096-round sweep: `50_2_firmware/PHASE2_STATE_LABEL_TIMING_EDGE_NARROWING_SWEEP.md`
+- Shuffled-answer hard-null sweep: `50_2_firmware/PHASE2_STATE_LABEL_HARDNULL_SWEEP.md`
+- Higher-row focus sweep: `50_2_firmware/PHASE2_STATE_LABEL_HARDNULL_FOCUS_SWEEP.md`
 
 ## Result Summary
 
@@ -61,7 +61,7 @@ Follow-up modal feature validation:
 STATE_LABEL_MODAL_FEATURE_NOT_CONFIRMED
 ```
 
-`cpu_sing_3/PHASE2_STATE_LABEL_MODAL_VALIDATION.md` tested eight fresh seed
+`50_2_firmware/PHASE2_STATE_LABEL_MODAL_VALIDATION.md` tested eight fresh seed
 windows. It found candidate feature rows, including `elapsed_quantile` and
 `elapsed_state_quantile`, but no modal feature family survived the shuffled
 answer criterion across three distinct fresh seed starts. The state-label

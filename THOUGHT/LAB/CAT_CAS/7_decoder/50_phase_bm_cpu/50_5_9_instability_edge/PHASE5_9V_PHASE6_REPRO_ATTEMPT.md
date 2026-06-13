@@ -52,14 +52,14 @@ The local runner was corrected after the failure:
 
 Updated runner:
 
-`session_scripts/phase5_9/run_phase5_9v_phase6_basin_repro.sh`
+`50_5_9_instability_edge/src/run_phase5_9v_phase6_basin_repro.sh`
 
 ## Next Exact Action
 
 After the Phenom is power-cycled or SSH returns, copy the hardened runner and retry with measurement-core-only VID control:
 
 ```bash
-scp session_scripts/phase5_9/run_phase5_9v_phase6_basin_repro.sh root@192.168.137.100:/root/exp44_phase5_9/run_phase5_9v_phase6_basin_repro.sh
+scp 50_5_9_instability_edge/src/run_phase5_9v_phase6_basin_repro.sh root@192.168.137.100:/root/exp44_phase5_9/run_phase5_9v_phase6_basin_repro.sh
 ssh root@192.168.137.100 "chmod +x /root/exp44_phase5_9/run_phase5_9v_phase6_basin_repro.sh && cd /root/exp44_phase5_9 && DEF_CORES=3 REPEATS=10 ITERATIONS=30000 ./run_phase5_9v_phase6_basin_repro.sh"
 ```
 
@@ -97,4 +97,4 @@ Completed result:
 
 Final artifact:
 
-`phase5_9/results/k10_voltage_probe/p4_vid5_phase6_basin_repro/PHASE5_9V_PHASE6_BASIN_REPRO.md`
+`50_5_9_instability_edge/results/k10_voltage_probe/p4_vid5_phase6_basin_repro/PHASE5_9V_PHASE6_BASIN_REPRO.md`

@@ -12,10 +12,10 @@ track, but they do restrict what the early layers are allowed to claim.
 
 | Item | Source | Finding | Hardened interpretation |
 |---|---|---|---|
-| L0 immediate restore | `session_scripts/phase3_catalytic/catcas_phase3.c` | `catcas_compute_parity`, `catcas_compute_hash_fragment`, and `catcas_compute_fsm_transition` place the computed value and immediately restore the original value before hash verification. | API/logical-restore demonstration only; not independent catalytic proof. |
-| L1 snapshot restore | `session_scripts/phase2b/active_catalytic_ising.c` | Mode C snapshots spins with `memcpy(restore_buf, tape, N*8)` and restores with `memcpy(tape, restore_buf, N*8)`. | Active solver plus memory restore; not borrowed-tape evidence by itself. |
+| L0 immediate restore | `50_3_catalytic_ladder/src/catcas_phase3.c` | `catcas_compute_parity`, `catcas_compute_hash_fragment`, and `catcas_compute_fsm_transition` place the computed value and immediately restore the original value before hash verification. | API/logical-restore demonstration only; not independent catalytic proof. |
+| L1 snapshot restore | `50_2b_blackbox/src/active_catalytic_ising.c` | Mode C snapshots spins with `memcpy(restore_buf, tape, N*8)` and restores with `memcpy(tape, restore_buf, N*8)`. | Active solver plus memory restore; not borrowed-tape evidence by itself. |
 | L2/L3 perfect fidelity | Phase 5.8 / 5.9 reports and harness design | Large-trial "0 failures" claims validate reversible mask self-inversion and memory stability under load. They do not prove computation by themselves. | Memory-stability / restoration-survival evidence, not standalone catalytic-boundary primitive proof. |
-| 3B formula coupling | `session_scripts/phase3b/catalytic_invariant_probe.c` | Original `answer_corr` uses the same relation/Walsh/graph family as `expected_answer`. | Rescued by `phase3b_angle_rescue_probe.py` only as encoded relational carrier evidence. |
+| 3B formula coupling | `50_3b_substrate_primitive/src/catalytic_invariant_probe.c` | Original `answer_corr` uses the same relation/Walsh/graph family as `expected_answer`. | Rescued by `phase3b_angle_rescue_probe.py` only as encoded relational carrier evidence. |
 
 ## Hardening Boundary
 

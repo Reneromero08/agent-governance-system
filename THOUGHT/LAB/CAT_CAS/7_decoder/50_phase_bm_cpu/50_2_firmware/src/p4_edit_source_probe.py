@@ -33,7 +33,7 @@ def va_to_raw(va: int) -> int:
 
 def find_body(root: Path) -> Path:
     expected = "BF92A1321B98908E7D74299A6C1E629EC3583599F164DEC6E774BFF040FBDF2A"
-    for path in root.glob("cpu_hack/**/body.bin"):
+    for path in root.glob("50_2_firmware/cpu_hack/**/body.bin"):
         h = hashlib.sha256(path.read_bytes()).hexdigest().upper()
         if h == expected:
             return path
@@ -88,10 +88,10 @@ def interesting_lines(section: str) -> list[str]:
 
 
 def write_report(root: Path, body: Path, data: bytes, trace: str) -> tuple[Path, Path]:
-    trace_dir = root / "cpu_hack" / "agesa_trace"
+    trace_dir = root / "50_2_firmware" / "cpu_hack" / "agesa_trace"
     trace_dir.mkdir(parents=True, exist_ok=True)
     low_report = trace_dir / "AmdProcessorInitPeim_p4_edit_source_probe.txt"
-    phase_report = root / "cpu_sing_3" / "PHASE2_P4_EDIT_SOURCE_PROOF.md"
+    phase_report = root / "50_2_firmware" / "PHASE2_P4_EDIT_SOURCE_PROOF.md"
 
     body_hash = hashlib.sha256(data).hexdigest().upper()
     pstate_hits = {value: imm_hits(data, value) for value in PSTATE_MSRS}
@@ -141,7 +141,7 @@ def write_report(root: Path, body: Path, data: bytes, trace: str) -> tuple[Path,
         f.write("## Inputs\n\n")
         f.write(f"- PE32 body: `{body.as_posix()}`\n")
         f.write(f"- PE32 SHA-256: `{body_hash}`\n")
-        f.write("- Existing provenance trace: `cpu_hack/agesa_trace/AmdProcessorInitPeim_producer_service_provenance.txt`\n")
+        f.write("- Existing provenance trace: `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_producer_service_provenance.txt`\n")
         f.write(f"- Low-level probe artifact: `{low_report.as_posix()}`\n\n")
         f.write("## Findings\n\n")
         f.write("| Probe | Result |\n")
@@ -174,7 +174,7 @@ def main() -> int:
     root = Path(args.root)
     body = find_body(root)
     data = body.read_bytes()
-    trace_path = root / "cpu_hack" / "agesa_trace" / "AmdProcessorInitPeim_producer_service_provenance.txt"
+    trace_path = root / "50_2_firmware" / "cpu_hack" / "agesa_trace" / "AmdProcessorInitPeim_producer_service_provenance.txt"
     trace = trace_path.read_text(encoding="utf-8", errors="replace")
     low, phase = write_report(root, body, data, trace)
     print(low)

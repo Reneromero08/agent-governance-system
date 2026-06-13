@@ -167,11 +167,11 @@ Codex's run.
 ## Files
 
 ```text
-cross_core_wormhole/cross_core_wormhole_sim.py            Stage 1 simulator
-cross_core_wormhole/cross_core_wormhole_results.json      Stage 1 numbers + gates
-cross_core_wormhole/cache_hologram_cross_core_wormhole.c  Stage 2 physical harness
-cross_core_wormhole/HANDOFF_CODEX.md                      Stage 2 handoff spec
-cross_core_wormhole/REPORT_CROSS_CORE_WORMHOLE.md         this report
+50_6_cross_core_wormhole/cross_core_wormhole_sim.py            Stage 1 simulator
+50_6_cross_core_wormhole/cross_core_wormhole_results.json      Stage 1 numbers + gates
+50_6_cross_core_wormhole/cache_hologram_cross_core_wormhole.c  Stage 2 physical harness
+50_6_cross_core_wormhole/HANDOFF_CODEX.md                      Stage 2 handoff spec
+50_6_cross_core_wormhole/REPORT_CROSS_CORE_WORMHOLE.md         this report
 ```
 
 ---

@@ -114,29 +114,29 @@ See REPORT_PHASE5_8_FINAL.md for the full 19-section consolidated report.
 
 | File | Location | Purpose | Status |
 |------|----------|---------|--------|
-| `phase5_8_common.h` | `session_scripts/phase5_8/` | Shared definitions, RDTSC primitives | FINAL |
-| `phase5_8_workers.h` | `session_scripts/phase5_8/` | Worker thread interface | FINAL |
-| `phase5_8_workers.c` | `session_scripts/phase5_8/` | Worker implementations (hardened) | FINAL |
-| `phase5_8_boundary_rdtsc.c` | `session_scripts/phase5_8/` | Main C harness | FINAL |
-| `analyze_phase5_8.py` | `session_scripts/phase5_8/` | Python analyzer (hardened) | FINAL |
-| `Makefile` | `session_scripts/phase5_8/` | Build system | FINAL |
-| `run_phase5_8.sh` | `session_scripts/phase5_8/` | Orchestration (hardened) | FINAL |
-| `README.md` | `phase5_8/` | This file | FINAL |
-| `REPORT_PHASE5_8_FINAL.md` | `phase5_8/` | Consolidated final report (19 sections, all gates) | FINAL |
-| `PHASE5_8_DESIGN.md` | `phase5_8/` | Design document | FINAL |
-| `PHASE5_8_SUMMARY.md` | `phase5_8/` | Full experimental report | FINAL |
-| `PHASE5_8_TELEMETRY.md` | `phase5_8/` | Run telemetry data | FINAL |
-| Runtime CSVs | `phase5_8/results/` | Generated on Phenom II | REMOTE |
+| `phase5_8_common.h` | `50_5_8_boundary_scaling/src/` | Shared definitions, RDTSC primitives | FINAL |
+| `phase5_8_workers.h` | `50_5_8_boundary_scaling/src/` | Worker thread interface | FINAL |
+| `phase5_8_workers.c` | `50_5_8_boundary_scaling/src/` | Worker implementations (hardened) | FINAL |
+| `phase5_8_boundary_rdtsc.c` | `50_5_8_boundary_scaling/src/` | Main C harness | FINAL |
+| `analyze_phase5_8.py` | `50_5_8_boundary_scaling/src/` | Python analyzer (hardened) | FINAL |
+| `Makefile` | `50_5_8_boundary_scaling/src/` | Build system | FINAL |
+| `run_phase5_8.sh` | `50_5_8_boundary_scaling/src/` | Orchestration (hardened) | FINAL |
+| `README.md` | `50_5_8_boundary_scaling/` | This file | FINAL |
+| `REPORT_PHASE5_8_FINAL.md` | `50_5_8_boundary_scaling/` | Consolidated final report (19 sections, all gates) | FINAL |
+| `PHASE5_8_DESIGN.md` | `50_5_8_boundary_scaling/` | Design document | FINAL |
+| `PHASE5_8_SUMMARY.md` | `50_5_8_boundary_scaling/` | Full experimental report | FINAL |
+| `PHASE5_8_TELEMETRY.md` | `50_5_8_boundary_scaling/` | Run telemetry data | FINAL |
+| Runtime CSVs | `50_5_8_boundary_scaling/results/` | Generated on Phenom II | REMOTE |
 
 ## Next Actions After Phase 5.8
 
 - COMPLETE: Verdict `EXP50_PHASE5_8_AREA_LAW_CONFIRMED`
 - Proceed to Phase 5.9 — Analog Silicon Boundary Entry (controlled VID/VRM/firmware voltage sweep)
-- Gate 9 closure artifact: `phase5_8/results/freq_locked_cache_probe/PHASE5_8_FREQ_LOCKED_CACHE_ARTIFACT_PROBE.md`
+- Gate 9 closure artifact: `50_5_8_boundary_scaling/results/freq_locked_cache_probe/PHASE5_8_FREQ_LOCKED_CACHE_ARTIFACT_PROBE.md`
 
 ## Related Artifacts
 
 - Roadmap: `../ROADMAP.md` (Phase 5.8 section at lines 1267-1332)
-- Phase 5.7: `../phase5_7/` (entropic boundary at OS/Python level)
-- Phase 5.6: `../phase5_6/` (polytope geometry confirmed)
+- Phase 5.7: `../50_5_7_entropic_boundary/` (entropic boundary at OS/Python level)
+- Phase 5.6: `../50_5_6_polytope_geometry/` (polytope geometry confirmed)
 - Spec source: `/mnt/c/Users/rene_/Documents/Shizzle Obsidian/Shizzle/AGI/AGS/WIP/Todo/Bare Metal CPU/Bare Metal CPU Entropy.md`

@@ -24,7 +24,7 @@ The focused carrier probe ran 18 controlled P-state/worker-mode points at fixed 
 - r(boundary_thickness, spike_rate): -0.053230
 - r(boundary_thickness, p99_p50): 0.554754
 
-Artifact report: `phase5_9/results/timing_cv_carrier_probe/PHASE5_9_TIMING_CV_CARRIER_PROBE.md`.
+Artifact report: `50_5_9_instability_edge/results/timing_cv_carrier_probe/PHASE5_9_TIMING_CV_CARRIER_PROBE.md`.
 
 Creative boundary push:
 
@@ -37,7 +37,7 @@ The boundary abuse probe ran 12 adversarial software-substrate conditions with 4
 - r(boundary_thickness, p99_p50): 0.602214
 - max/quiet thickness ratio: 3.938315
 
-Artifact report: `phase5_9/results/boundary_abuse_probe/PHASE5_9_BOUNDARY_ABUSE_PROBE.md`.
+Artifact report: `50_5_9_instability_edge/results/boundary_abuse_probe/PHASE5_9_BOUNDARY_ABUSE_PROBE.md`.
 
 ## Implementation Fixes
 

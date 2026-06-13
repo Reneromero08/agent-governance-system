@@ -1,16 +1,16 @@
 # Exp50 local generated/binary artifacts
 
-cpu_hack/bios_dump.bin
-cpu_hack/bios_dump.bin.dump/
-cpu_hack/bios_parse/*.csv
-cpu_hack/_tmp_coreboot_*/
-cpu_hack/local_logs/
-cpu_hack/mod_donors/
-cpu_hack/noop_replace/*.bin
-cpu_hack/noop_replace/*.report.txt
-cpu_hack/tools/
+50_2_firmware/cpu_hack/bios_dump.bin
+50_2_firmware/cpu_hack/bios_dump.bin.dump/
+50_2_firmware/cpu_hack/bios_parse/*.csv
+50_2_firmware/cpu_hack/_tmp_coreboot_*/
+50_2_firmware/cpu_hack/local_logs/
+50_2_firmware/cpu_hack/mod_donors/
+50_2_firmware/cpu_hack/noop_replace/*.bin
+50_2_firmware/cpu_hack/noop_replace/*.report.txt
+50_2_firmware/cpu_hack/tools/
 
 # Keep markdown summaries and text RE evidence tracked.
-!cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt
-!cpu_hack/noop_replace/bios_noop_rebuilt.bin.report.txt
-!phase3b/results/invariant_probe_summary.csv
+!50_2_firmware/cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt
+!50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin.report.txt
+!50_3b_substrate_primitive/results/invariant_probe_summary.csv

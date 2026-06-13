@@ -10,7 +10,7 @@ This proves rebuild/save mechanics. It does not make AGESA byte-ready because th
 
 ## Tooling Found And Used
 
-Found inside `cpu_hack/tools/uefitool_rebuild/`:
+Found inside `50_2_firmware/cpu_hack/tools/uefitool_rebuild/`:
 
 | Tool | SHA-256 |
 |---|---|
@@ -27,7 +27,7 @@ UEFIReplace/uefireplace.cpp: reconstructed == buffer returns ERR_NOTHING_TO_PATC
 To prove the gate, public LongSoft/UEFITool `old_engine` source was fetched into ignored local tool tree:
 
 ```text
-cpu_hack/tools/UEFITool_repo/
+50_2_firmware/cpu_hack/tools/UEFITool_repo/
 ```
 
 A temporary Qt/qmake build on the Linux target compiled a force-save UEFIReplace variant with only those suppressors removed.
@@ -43,7 +43,7 @@ UEFIReplace bios_dump.bin DE3E049C-A218-4891-8658-5FC0FA84C788 10 body.bin -o bi
 Accepted artifact:
 
 ```text
-cpu_hack/noop_replace/bios_noop_rebuilt.bin
+50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin
 ```
 
 ## Verification
@@ -51,29 +51,29 @@ cpu_hack/noop_replace/bios_noop_rebuilt.bin
 Image hashes:
 
 ```text
-B7C0C725C4B6F50F399A208E5CAD6938BAACDD8FA1BBC795098CA393083FBC91  cpu_hack/bios_dump.bin
-B7C0C725C4B6F50F399A208E5CAD6938BAACDD8FA1BBC795098CA393083FBC91  cpu_hack/noop_replace/bios_noop_rebuilt.bin
+B7C0C725C4B6F50F399A208E5CAD6938BAACDD8FA1BBC795098CA393083FBC91  50_2_firmware/cpu_hack/bios_dump.bin
+B7C0C725C4B6F50F399A208E5CAD6938BAACDD8FA1BBC795098CA393083FBC91  50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin
 ```
 
 Binary compare:
 
 ```text
-fc /b cpu_hack/bios_dump.bin cpu_hack/noop_replace/bios_noop_rebuilt.bin
+fc /b 50_2_firmware/cpu_hack/bios_dump.bin 50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin
 FC: no differences encountered
 ```
 
 Parser:
 
 ```text
-UEFIExtract cpu_hack/noop_replace/bios_noop_rebuilt.bin report
+UEFIExtract 50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin report
 exit code 0
-report: cpu_hack/noop_replace/bios_noop_rebuilt.bin.report.txt
+report: 50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin.report.txt
 ```
 
 Target PE32 body:
 
 ```text
-cpu_hack/noop_replace/rebuilt_AmdProcessorInitPeim_PE32_body.bin/body.bin
+50_2_firmware/cpu_hack/noop_replace/rebuilt_AmdProcessorInitPeim_PE32_body.bin/body.bin
 BF92A1321B98908E7D74299A6C1E629EC3583599F164DEC6E774BFF040FBDF2A
 ```
 
@@ -81,7 +81,7 @@ BF92A1321B98908E7D74299A6C1E629EC3583599F164DEC6E774BFF040FBDF2A
 
 | Compared files | Difference count | Explanation |
 |---|---:|---|
-| `cpu_hack/bios_dump.bin` vs `cpu_hack/noop_replace/bios_noop_rebuilt.bin` | 0 | Force-saved no-op output is byte-identical to stock. |
+| `50_2_firmware/cpu_hack/bios_dump.bin` vs `50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin` | 0 | Force-saved no-op output is byte-identical to stock. |
 
 There are no changed offsets, no changed FFS checksums, and no changed target PE32 body bytes.
 

@@ -14,7 +14,7 @@ Scope: owned local firmware route research. No flash command. No hardware-changi
 |---|---|
 | `TABLE_TARGET_FOUND` | Not met. P4 record and P0-P3 siblings are runtime-derived from `MSRC001_0068`, not proven as editable static records. |
 | `BOTH_LIVE_GATES_ADVANCED` | True as progress, but the actionability verdict is narrower: the rebuild/no-op gate is now proven while the table/edit-source gate remains blocked. |
-| `MISSING_ARTIFACT_BLOCKER` | Not met for the no-op rebuild gate; `cpu_hack/noop_replace/bios_noop_rebuilt.bin` now exists and parses. |
+| `MISSING_ARTIFACT_BLOCKER` | Not met for the no-op rebuild gate; `50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin` now exists and parses. |
 | `HARD_IMPOSSIBILITY_PROOF` | Not met. Firmware route remains alive for future edit-source discovery, but not byte-ready. |
 
 ## Current Actionability

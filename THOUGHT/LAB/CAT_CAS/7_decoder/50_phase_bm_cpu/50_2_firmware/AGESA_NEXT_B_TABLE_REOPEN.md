@@ -6,11 +6,11 @@ Scope: owned local firmware route research. No flash command. No hardware-changi
 
 ## Inputs
 
-- `cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt`
-- `cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_xrefs.txt`
-- `cpu_hack/agesa_trace/pstate_targeted_disasm.txt`
-- `cpu_hack/bios_dump.bin`
-- `cpu_hack/bios_dump.bin.dump/.../AmdProcessorInitPeim/1 PE32 image section/body.bin`
+- `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt`
+- `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_xrefs.txt`
+- `50_2_firmware/cpu_hack/agesa_trace/pstate_targeted_disasm.txt`
+- `50_2_firmware/cpu_hack/bios_dump.bin`
+- `50_2_firmware/cpu_hack/bios_dump.bin.dump/.../AmdProcessorInitPeim/1 PE32 image section/body.bin`
 
 ## Reopened Source Model
 
@@ -62,7 +62,7 @@ The next table/source hunt must chase the `.dG3_DXE` dispatch table consumer, no
 
 Exact missing artifact:
 
-`cpu_hack/agesa_trace/AmdProcessorInitPeim_dG3_DXE_dispatch_table_consumer_decompile.txt`
+`50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_dG3_DXE_dispatch_table_consumer_decompile.txt`
 
 Required contents:
 

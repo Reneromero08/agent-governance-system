@@ -17,7 +17,7 @@ If one core runs the .holo schedule and another core probes the restored tape, d
 ## Harness
 
 ```text
-session_scripts/phase4_holo/cache_hologram_cross_core.c
+50_4_holo_eigenbasis/src/cache_hologram_cross_core.c
 ```
 
 Protocol:
@@ -38,13 +38,13 @@ The first cross-core run used only the reversible schedule. The second run added
 Tracked summary:
 
 ```text
-phase4_holo/results/phase4b_cache_hologram_cross_core_summary.json
+50_4_holo_eigenbasis/results/phase4b_cache_hologram_cross_core_summary.json
 ```
 
 Raw CSV is ignored:
 
 ```text
-phase4_holo/results/phase4b_cache_hologram_cross_core.csv
+50_4_holo_eigenbasis/results/phase4b_cache_hologram_cross_core.csv
 ```
 
 Result:
@@ -72,13 +72,13 @@ PHASE4B_MATCHED_NULLS_PARTIAL
 Tracked summary:
 
 ```text
-phase4_holo/results/phase4b_cache_hologram_cross_core_echo_summary.json
+50_4_holo_eigenbasis/results/phase4b_cache_hologram_cross_core_echo_summary.json
 ```
 
 Raw CSV is ignored:
 
 ```text
-phase4_holo/results/phase4b_cache_hologram_cross_core_echo.csv
+50_4_holo_eigenbasis/results/phase4b_cache_hologram_cross_core_echo.csv
 ```
 
 Result:

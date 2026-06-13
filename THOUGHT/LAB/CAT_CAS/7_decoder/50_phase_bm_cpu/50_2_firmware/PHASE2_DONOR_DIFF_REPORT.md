@@ -4,7 +4,7 @@
 
 `PUBLIC_MOD_DONOR_DIFFED`
 
-Route 4 advanced. An exact GA-970A-DS3P rev. 1.0 F2j stock BIOS package and a public F2j NVMe donor image were acquired inside `cpu_hack/mod_donors/`, hashed, parsed, and diffed for workflow study only.
+Route 4 advanced. An exact GA-970A-DS3P rev. 1.0 F2j stock BIOS package and a public F2j NVMe donor image were acquired inside `50_2_firmware/cpu_hack/mod_donors/`, hashed, parsed, and diffed for workflow study only.
 
 No donor image is a flash candidate.
 
@@ -12,8 +12,8 @@ No donor image is a flash candidate.
 
 | Artifact | Source | Local path |
 |---|---|---|
-| Official stock F2j package | `https://download.gigabyte.com/FileList/BIOS/mb_bios_ga-970a-ds3p_f2j.zip?v=a7771fc10dad45586d4c1f6e67316f68` | `cpu_hack/mod_donors/gigabyte_rev1_stock_F2j.zip` |
-| Public NVMe donor package | `https://winraid.level1techs.com/uploads/short-url/hrKqsZfCFqq7lq1zus0TomVE58v.zip` | `cpu_hack/mod_donors/winraid_970ADS3PNVME.zip` |
+| Official stock F2j package | `https://download.gigabyte.com/FileList/BIOS/mb_bios_ga-970a-ds3p_f2j.zip?v=a7771fc10dad45586d4c1f6e67316f68` | `50_2_firmware/cpu_hack/mod_donors/gigabyte_rev1_stock_F2j.zip` |
+| Public NVMe donor package | `https://winraid.level1techs.com/uploads/short-url/hrKqsZfCFqq7lq1zus0TomVE58v.zip` | `50_2_firmware/cpu_hack/mod_donors/winraid_970ADS3PNVME.zip` |
 | Donor thread | `https://winraid.level1techs.com/t/offer-gigabyte-ga-970a-ds3p-rev-1-0-nvme-mod/33089` | URL evidence only |
 
 ## Hashes
@@ -29,8 +29,8 @@ No donor image is a flash candidate.
 
 | Image | UEFIExtract report |
 |---|---|
-| Stock F2j | `cpu_hack/mod_donors/gigabyte_rev1_stock_F2j_extracted/970ADS3P.F2j.report.txt` |
-| NVMe donor F2j | `cpu_hack/mod_donors/winraid_970ADS3PNVME_extracted/970ADS3PNVME.F2j.report.txt` |
+| Stock F2j | `50_2_firmware/cpu_hack/mod_donors/gigabyte_rev1_stock_F2j_extracted/970ADS3P.F2j.report.txt` |
+| NVMe donor F2j | `50_2_firmware/cpu_hack/mod_donors/winraid_970ADS3PNVME_extracted/970ADS3PNVME.F2j.report.txt` |
 
 Both reports were produced by local `UEFIExtract`.
 

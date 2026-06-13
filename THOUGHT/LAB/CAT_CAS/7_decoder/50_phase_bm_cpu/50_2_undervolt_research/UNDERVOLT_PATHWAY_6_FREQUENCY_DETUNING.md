@@ -27,9 +27,9 @@ Local roadmap evidence:
 
 Local scripts:
 
-- [session_scripts/kuramoto_test.py](session_scripts/kuramoto_test.py) writes P4 definitions per core, cycles P0 to P4, and sweeps DID.
-- [session_scripts/freq_sweep.py](session_scripts/freq_sweep.py) exercises frequency control.
-- [session_scripts/oscillator.c](session_scripts/oscillator.c) and [session_scripts/tsc_sampler.c](session_scripts/tsc_sampler.c) support oscillator/readout experiments.
+- [50_2_phase_locked_network/src/kuramoto_test.py](50_2_phase_locked_network/src/kuramoto_test.py) writes P4 definitions per core, cycles P0 to P4, and sweeps DID.
+- [50_1_subthreshold_msr/src/freq_sweep.py](50_1_subthreshold_msr/src/freq_sweep.py) exercises frequency control.
+- [50_2_phase_locked_network/src/oscillator.c](50_2_phase_locked_network/src/oscillator.c) and [50_2_phase_locked_network/src/tsc_sampler.c](50_2_phase_locked_network/src/tsc_sampler.c) support oscillator/readout experiments.
 
 ## Exact Path
 

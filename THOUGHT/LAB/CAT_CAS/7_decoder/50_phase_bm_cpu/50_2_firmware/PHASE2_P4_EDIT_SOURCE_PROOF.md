@@ -8,10 +8,10 @@ This pass chased the next unresolved service/function-table layer behind the alr
 
 ## Inputs
 
-- PE32 body: `cpu_hack/bios_dump.bin.dump/5 8C8CE578-8A3D-4F1C-9935-896185C32DD3/0 AmdProcessorInitPeim/1 PE32 image section/body.bin`
+- PE32 body: `50_2_firmware/cpu_hack/bios_dump.bin.dump/5 8C8CE578-8A3D-4F1C-9935-896185C32DD3/0 AmdProcessorInitPeim/1 PE32 image section/body.bin`
 - PE32 SHA-256: `BF92A1321B98908E7D74299A6C1E629EC3583599F164DEC6E774BFF040FBDF2A`
-- Existing provenance trace: `cpu_hack/agesa_trace/AmdProcessorInitPeim_producer_service_provenance.txt`
-- Low-level probe artifact: `cpu_hack/agesa_trace/AmdProcessorInitPeim_p4_edit_source_probe.txt`
+- Existing provenance trace: `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_producer_service_provenance.txt`
+- Low-level probe artifact: `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_p4_edit_source_probe.txt`
 
 ## Findings
 

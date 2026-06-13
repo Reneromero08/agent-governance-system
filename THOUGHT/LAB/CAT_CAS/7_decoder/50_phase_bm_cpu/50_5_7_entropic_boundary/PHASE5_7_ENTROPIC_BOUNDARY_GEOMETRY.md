@@ -2,7 +2,7 @@
 
 **Date:** 2026-06-08
 **Status:** `PHASE5_7_ENTROPIC_BOUNDARY_CONFIRMED`
-**Harness:** `session_scripts/phase5_7/entropic_boundary_probe.c`
+**Harness:** `50_5_7_entropic_boundary/src/entropic_boundary_probe.c`
 
 ## Result
 
@@ -40,7 +40,7 @@ Phase 5.7 supports computational boundary deformation under measured bounded run
 
 Phase 5.7 is the invariant/null discipline feeder for Phase 6, not the physical substrate run itself.
 
-Mapping into `phase6/SPEC_PHASE6_FIXED_POINT_SUBSTRATE.md`:
+Mapping into `50_6_fixed_point_substrate/SPEC_PHASE6_FIXED_POINT_SUBSTRATE.md`:
 
 - G1 restoration: supported at the logical/control level by restored tape and same-final-hash wrong-answer exclusion.
 - G3 basin -> invariant: not complete; 5.7 can score invariant strength and answer correlation once 5.9V supplies a basin label.
@@ -62,10 +62,10 @@ Completed 5.7 bridge push:
 
 Completed scorer artifact:
 
-`phase5_7/results/phase6_invariant_scorer/PHASE5_7_PHASE6_INVARIANT_SCORER_RUN.md`
+`50_5_7_entropic_boundary/results/phase6_invariant_scorer/PHASE5_7_PHASE6_INVARIANT_SCORER_RUN.md`
 
 Final bridge verdict:
 
 `PHASE5_7_PHASE6_PUBLIC_INVARIANT_REJECTED_BY_5_9V_CONTROLS`
 
-The scorer consumed the real 5.9V target-coupled VID+5 and VID+6 basin labels, emitted `phase5_7/results/phase6_invariant_scorer/phase5_7_phase6_invariant_scores.csv`, and found 0 public candidates beyond shuffled/wrong-target controls. Classify the current survivor as `RESIDUAL_ARTIFACT_ONLY`, not a Phase 6 crossing candidate.
+The scorer consumed the real 5.9V target-coupled VID+5 and VID+6 basin labels, emitted `50_5_7_entropic_boundary/results/phase6_invariant_scorer/phase5_7_phase6_invariant_scores.csv`, and found 0 public candidates beyond shuffled/wrong-target controls. Classify the current survivor as `RESIDUAL_ARTIFACT_ONLY`, not a Phase 6 crossing candidate.

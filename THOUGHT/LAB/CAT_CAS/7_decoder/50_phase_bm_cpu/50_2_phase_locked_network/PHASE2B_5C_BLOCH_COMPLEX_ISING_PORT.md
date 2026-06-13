@@ -11,7 +11,7 @@ This is active software phase-oracle evidence. It is not passive Kuramoto eviden
 ## Command
 
 ```powershell
-Get-Content -Raw session_scripts\phase2b\bloch_complex_ising.c | ssh -o BatchMode=yes -o ConnectTimeout=5 root@192.168.137.100 "cat > /tmp/bloch_complex_ising.c && gcc -O2 /tmp/bloch_complex_ising.c -lm -o /tmp/bloch_complex_ising && timeout 40 /tmp/bloch_complex_ising"
+Get-Content -Raw 50_2b_blackbox\src\bloch_complex_ising.c | ssh -o BatchMode=yes -o ConnectTimeout=5 root@192.168.137.100 "cat > /tmp/bloch_complex_ising.c && gcc -O2 /tmp/bloch_complex_ising.c -lm -o /tmp/bloch_complex_ising && timeout 40 /tmp/bloch_complex_ising"
 ```
 
 ## Safety
@@ -28,7 +28,7 @@ Get-Content -Raw session_scripts\phase2b\bloch_complex_ising.c | ssh -o BatchMod
 Source:
 
 ```text
-session_scripts/phase2b/bloch_complex_ising.c
+50_2b_blackbox/src/bloch_complex_ising.c
 ```
 
 Parameters:

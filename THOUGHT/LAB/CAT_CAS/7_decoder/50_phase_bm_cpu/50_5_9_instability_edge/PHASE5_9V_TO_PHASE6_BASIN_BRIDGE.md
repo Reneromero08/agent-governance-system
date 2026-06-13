@@ -41,12 +41,12 @@ Phase 5.9V is the physical carrier/basin feeder for Phase 6. The Phase 6 spec ne
 
 The required VID+5/VID+6 public/shuffled/wrong/oracle runs were completed with measurement-core-only P4 VID definition writes. The final target-coupled artifacts are:
 
-- `phase5_9/results/k10_voltage_probe/p4_vid5_phase6_target_coupled/PHASE5_9V_TARGET_COUPLED.md`
-- `phase5_9/results/k10_voltage_probe/p4_vid6_phase6_target_coupled/PHASE5_9V_TARGET_COUPLED.md`
+- `50_5_9_instability_edge/results/k10_voltage_probe/p4_vid5_phase6_target_coupled/PHASE5_9V_TARGET_COUPLED.md`
+- `50_5_9_instability_edge/results/k10_voltage_probe/p4_vid6_phase6_target_coupled/PHASE5_9V_TARGET_COUPLED.md`
 
 The 5.7 scorer consumed those basin labels here:
 
-- `phase5_7/results/phase6_invariant_scorer/PHASE5_7_PHASE6_INVARIANT_SCORER_RUN.md`
+- `50_5_7_entropic_boundary/results/phase6_invariant_scorer/PHASE5_7_PHASE6_INVARIANT_SCORER_RUN.md`
 
 Result: public coupling did not beat shuffled/wrong-target controls.
 
@@ -56,7 +56,7 @@ Promote to Phase 6 Mode C only if a public-prelude selector reproducibly chooses
 
 ## Attempt Log
 
-`phase5_9/PHASE5_9V_PHASE6_REPRO_ATTEMPT.md` records the first Phase 6-facing reproducibility attempt. The target was reachable, `rdmsr`/`wrmsr` were present, and the matrix was launched with 10 repeats per selector, but the first runner attempted all-core P4 VID+5 setup. Every row failed the MSR-set gate and the target then stopped responding to SSH.
+`50_5_9_instability_edge/PHASE5_9V_PHASE6_REPRO_ATTEMPT.md` records the first Phase 6-facing reproducibility attempt. The target was reachable, `rdmsr`/`wrmsr` were present, and the matrix was launched with 10 repeats per selector, but the first runner attempted all-core P4 VID+5 setup. Every row failed the MSR-set gate and the target then stopped responding to SSH.
 
 Runner hardening after the failed attempt:
 
@@ -71,7 +71,7 @@ completed. Do not use this old recovery command as the current next action.
 
 ## Completed Reproducibility Matrix
 
-Artifact: `phase5_9/results/k10_voltage_probe/p4_vid5_phase6_basin_repro/PHASE5_9V_PHASE6_BASIN_REPRO.md`
+Artifact: `50_5_9_instability_edge/results/k10_voltage_probe/p4_vid5_phase6_basin_repro/PHASE5_9V_PHASE6_BASIN_REPRO.md`
 
 The hardened measurement-core-only run completed:
 
@@ -109,7 +109,7 @@ After the baseline 70-row matrix, follow-up pushes tested whether the weak publi
 
 ### Public-Prelude Refinement
 
-Artifact: `phase5_9/results/k10_voltage_probe/p4_vid5_phase6_public_refine/PHASE5_9V_PUBLIC_REFINE.md`
+Artifact: `50_5_9_instability_edge/results/k10_voltage_probe/p4_vid5_phase6_public_refine/PHASE5_9V_PUBLIC_REFINE.md`
 
 - VID offset: `+5`
 - Rows analyzed: `90`
@@ -121,7 +121,7 @@ Artifact: `phase5_9/results/k10_voltage_probe/p4_vid5_phase6_public_refine/PHASE
 
 ### Long Prelude
 
-Artifact: `phase5_9/results/k10_voltage_probe/p4_vid5_phase6_long_prelude/PHASE5_9V_LONG_PRELUDE.md`
+Artifact: `50_5_9_instability_edge/results/k10_voltage_probe/p4_vid5_phase6_long_prelude/PHASE5_9V_LONG_PRELUDE.md`
 
 - VID offset: `+5`
 - Prelude duration: `3.0s`
@@ -136,9 +136,9 @@ Artifact: `phase5_9/results/k10_voltage_probe/p4_vid5_phase6_long_prelude/PHASE5
 
 Artifacts:
 
-- `phase5_9/results/k10_voltage_probe/p4_vid4_phase6_offset_compare/PHASE5_9V_OFFSET_COMPARE.md`
-- `phase5_9/results/k10_voltage_probe/p4_vid6_phase6_offset_compare/PHASE5_9V_OFFSET_COMPARE.md`
-- `phase5_9/results/k10_voltage_probe/p4_vid6_phase6_public_candidate/PHASE5_9V_VID6_PUBLIC_CANDIDATE.md`
+- `50_5_9_instability_edge/results/k10_voltage_probe/p4_vid4_phase6_offset_compare/PHASE5_9V_OFFSET_COMPARE.md`
+- `50_5_9_instability_edge/results/k10_voltage_probe/p4_vid6_phase6_offset_compare/PHASE5_9V_OFFSET_COMPARE.md`
+- `50_5_9_instability_edge/results/k10_voltage_probe/p4_vid6_phase6_public_candidate/PHASE5_9V_VID6_PUBLIC_CANDIDATE.md`
 
 VID+4:
 
@@ -176,8 +176,8 @@ Current pushed boundary:
 
 Artifacts:
 
-- `phase5_9/results/k10_voltage_probe/p4_vid5_phase6_target_coupled/PHASE5_9V_TARGET_COUPLED.md`
-- `phase5_9/results/k10_voltage_probe/p4_vid6_phase6_target_coupled/PHASE5_9V_TARGET_COUPLED.md`
+- `50_5_9_instability_edge/results/k10_voltage_probe/p4_vid5_phase6_target_coupled/PHASE5_9V_TARGET_COUPLED.md`
+- `50_5_9_instability_edge/results/k10_voltage_probe/p4_vid6_phase6_target_coupled/PHASE5_9V_TARGET_COUPLED.md`
 
 This push fixed the earlier coupling weakness: the `public_kb_*`, `shuffled_kb_*`, `wrong_kb_*`, and `d_oracle_*` selectors now derive a Phase 6-style public target payload and use it to shape both prelude dynamics and the measured workload. The run also added wrong-target controls.
 

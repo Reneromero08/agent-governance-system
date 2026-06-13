@@ -38,7 +38,7 @@ Gates:
 
 | Artifact | Purpose |
 |---|---|
-| `session_scripts/phase4_holo/operator_goe.c` | Deterministic operator-matrix eigenvalue spacing harness. |
+| `50_4_holo_eigenbasis/src/operator_goe.c` | Deterministic operator-matrix eigenvalue spacing harness. |
 | `PHASE4_4A_OPERATOR_GOE.md` | This report. |
 
 ## What Was Tested

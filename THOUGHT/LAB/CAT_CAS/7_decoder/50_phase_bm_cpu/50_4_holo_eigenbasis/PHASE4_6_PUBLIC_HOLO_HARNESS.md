@@ -33,7 +33,7 @@ harness_test verdict=PHASE4_6_PUBLIC_HOLO_HARNESS_PASS
 
 | Artifact | Purpose |
 |---|---|
-| `session_scripts/phase4_holo/catcas_holo_harness.c` | Reusable Phase 4 Track A CLI-style harness. |
+| `50_4_holo_eigenbasis/src/catcas_holo_harness.c` | Reusable Phase 4 Track A CLI-style harness. |
 | `PHASE4_6_PUBLIC_HOLO_HARNESS.md` | This report. |
 
 ## CLI Modes

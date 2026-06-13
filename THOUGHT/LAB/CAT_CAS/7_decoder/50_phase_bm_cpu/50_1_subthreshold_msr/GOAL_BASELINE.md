@@ -67,5 +67,5 @@ a01a0800
 
 ## Scripts Present
 
-`session_scripts/` contains the active phase, oscillator, Kuramoto, P-state, VID, and catalytic tape harnesses. `cpu_hack/` contains BIOS dump/report/disassembly material.
+The per-phase `src/` dirs (e.g. `50_1_subthreshold_msr/src/`, `50_2_phase_locked_network/src/`) contain the active phase, oscillator, Kuramoto, P-state, VID, and catalytic tape harnesses. `50_2_firmware/cpu_hack/` contains BIOS dump/report/disassembly material.
 

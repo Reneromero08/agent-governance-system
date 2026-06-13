@@ -206,12 +206,12 @@ def write_report(path: Path, rows: list[dict[str, str]], verdicts: dict[str, str
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", default=".")
-    parser.add_argument("--out-dir", default="phase5_7/results/phase6_invariant_scorer")
+    parser.add_argument("--out-dir", default="50_5_7_entropic_boundary/results/phase6_invariant_scorer")
     args = parser.parse_args()
     root = Path(args.root)
     reports = [
-        root / "phase5_9/results/k10_voltage_probe/p4_vid5_phase6_target_coupled/PHASE5_9V_TARGET_COUPLED.md",
-        root / "phase5_9/results/k10_voltage_probe/p4_vid6_phase6_target_coupled/PHASE5_9V_TARGET_COUPLED.md",
+        root / "50_5_9_instability_edge/results/k10_voltage_probe/p4_vid5_phase6_target_coupled/PHASE5_9V_TARGET_COUPLED.md",
+        root / "50_5_9_instability_edge/results/k10_voltage_probe/p4_vid6_phase6_target_coupled/PHASE5_9V_TARGET_COUPLED.md",
     ]
     missing = [str(p) for p in reports if not p.exists()]
     if missing:

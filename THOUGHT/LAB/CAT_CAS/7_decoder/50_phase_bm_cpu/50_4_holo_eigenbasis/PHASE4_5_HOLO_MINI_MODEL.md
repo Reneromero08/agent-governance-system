@@ -34,7 +34,7 @@ Summary:
 
 | Artifact | Purpose |
 |---|---|
-| `session_scripts/phase4_holo/holo_mini_model.c` | Tiny graph-class `.holo` mini-model harness. |
+| `50_4_holo_eigenbasis/src/holo_mini_model.c` | Tiny graph-class `.holo` mini-model harness. |
 | `PHASE4_5_HOLO_MINI_MODEL.md` | This report. |
 
 ## What Was Tested

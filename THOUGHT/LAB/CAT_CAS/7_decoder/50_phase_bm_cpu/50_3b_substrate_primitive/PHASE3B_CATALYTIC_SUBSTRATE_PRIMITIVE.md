@@ -28,7 +28,7 @@ Target stdout:
 families=3 seeds_per_family=8
 
 Rows accepted: 24/24
-CSV: phase3b/results/invariant_probe_summary.csv
+CSV: 50_3b_substrate_primitive/results/invariant_probe_summary.csv
 Same-final-hash wrong-answer control answer-corr: 0.000
 === VERDICT: RELATIONAL_INVARIANT_CONFIRMED ===
 ```
@@ -37,10 +37,10 @@ Same-final-hash wrong-answer control answer-corr: 0.000
 
 | Artifact | Purpose |
 |---|---|
-| `session_scripts/phase3b/catalytic_invariant_probe.c` | Four-snapshot invariant probe with destructive, random reversible, random-answer, shuffled-schedule, and same-final-hash/wrong-answer controls. |
-| `phase3b/results/invariant_probe_summary.csv` | Target-run metrics for 3 problem families x 8 seeds plus null summaries. |
-| `session_scripts/phase3b/phase3b_angle_rescue_probe.py` | Post-audit rescue verifier that excludes the extracted answer slot and tests non-formula features plus full carrier words on holdout rows. |
-| `phase3b/results/angle_rescue/PHASE3B_ANGLE_RESCUE_PROBE.md` | Hardening report for the carrier-vs-residual angle. |
+| `50_3b_substrate_primitive/src/catalytic_invariant_probe.c` | Four-snapshot invariant probe with destructive, random reversible, random-answer, shuffled-schedule, and same-final-hash/wrong-answer controls. |
+| `50_3b_substrate_primitive/results/invariant_probe_summary.csv` | Target-run metrics for 3 problem families x 8 seeds plus null summaries. |
+| `50_3b_substrate_primitive/src/phase3b_angle_rescue_probe.py` | Post-audit rescue verifier that excludes the extracted answer slot and tests non-formula features plus full carrier words on holdout rows. |
+| `50_3b_substrate_primitive/results/angle_rescue/PHASE3B_ANGLE_RESCUE_PROBE.md` | Hardening report for the carrier-vs-residual angle. |
 | `PHASE3B_CATALYTIC_SUBSTRATE_PRIMITIVE.md` | This report. |
 
 ## Gate Results
@@ -69,7 +69,7 @@ non-formula residual feature independently predicts the answer.
 Follow-up command:
 
 ```bash
-python session_scripts/phase3b/phase3b_angle_rescue_probe.py
+python 50_3b_substrate_primitive/src/phase3b_angle_rescue_probe.py
 ```
 
 Hardening result:

@@ -14,12 +14,12 @@ This is a no-hardware, no-voltage, no-BIOS route.
 
 ## Artifact
 
-- `session_scripts/phase2_kuramoto/cacheline_phase_coupling.c`
+- `50_2_phase_locked_network/src/cacheline_phase_coupling.c`
 
 ## Command
 
 ```powershell
-Get-Content -Raw session_scripts\phase2_kuramoto\cacheline_phase_coupling.c |
+Get-Content -Raw 50_2_phase_locked_network\src\cacheline_phase_coupling.c |
   ssh -o BatchMode=yes -o ConnectTimeout=8 root@192.168.137.100 "cat > /tmp/cacheline_phase_coupling.c && gcc -O2 -pthread /tmp/cacheline_phase_coupling.c -lm -o /tmp/cacheline_phase_coupling && /tmp/cacheline_phase_coupling 8 220"
 ```
 

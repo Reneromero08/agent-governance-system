@@ -15,6 +15,7 @@ directory so they stay correct across the track reorganization.
 | 47_phase_bio | `47_6_morphogenesis_oracle/cell_data/23_09_CODEX_HuBMAP_alldata_Dryad_merged.csv` | 2.8 GB | HuBMAP CODEX single-cell dataset for the morphogenesis oracle | external download (Dryad); see exp 47_6 REPORT | 2.8 GB, external dataset |
 | 42_computational_event_horizon | `04_cosmos/28_holographic_entropy_screen/telemetry/boundary_cloud_raw.csv` | 133 MB | Raw boundary-cloud telemetry from exp 28 | re-run exp_28 | regenerable telemetry |
 | 42_computational_event_horizon | `02_ultra/14_boltzmann_brain/rust/mri_*.bin` | 39 MB x4 | Rust simulation state dumps (recursive/emergence/collision/discard) | re-run exp_14 rust build | regenerable |
+| 50_phase_bm_cpu | `50_5_10_encoding_wall/_generated/*frozen*.json` | <10 KB | Frozen basin-threshold baseline for the phase 5.10 classifier | `python 50_5_10_encoding_wall/src/analyze_phase5_10.py` (seeded) | **TRACKED** (small JSON, deliberate reproducible baseline; do not gitignore) |
 
 ## Rules
 

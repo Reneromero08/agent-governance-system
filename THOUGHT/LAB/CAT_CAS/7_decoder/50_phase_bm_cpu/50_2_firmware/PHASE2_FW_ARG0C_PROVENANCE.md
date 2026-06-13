@@ -8,21 +8,21 @@ Route 2 advanced. `arg_0C` behind `0xFFF7371A` is not a direct static P-state ta
 
 ## New Artifact
 
-- `cpu_hack/agesa_trace/AmdProcessorInitPeim_helper_fff4cf55_disasm.txt`
-- `cpu_hack/agesa_trace/AmdProcessorInitPeim_pointer_search_fff4cf9c.txt`
-- `cpu_hack/agesa_trace/AmdProcessorInitPeim_callback_fff4aadd_disasm.txt`
-- `cpu_hack/agesa_trace/AmdProcessorInitPeim_fff4aadd_wide_disasm.txt`
-- `cpu_hack/agesa_trace/AmdProcessorInitPeim_descriptor_handlers_disasm.txt`
-- `cpu_hack/agesa_trace/AmdProcessorInitPeim_descriptor_callsite_xrefs.txt`
-- `cpu_hack/agesa_trace/AmdProcessorInitPeim_outer_producer_table_xrefs.txt`
-- `cpu_hack/agesa_trace/AmdProcessorInitPeim_service_table_trace.txt`
-- `cpu_hack/agesa_trace/AmdProcessorInitPeim_producer_service_provenance.txt`
-- `cpu_hack/agesa_trace/AmdProcessorInitPeim_service_descriptor_xrefs.txt`
-- `cpu_hack/agesa_trace/AmdProcessorInitPeim_decoded_service_descriptor.txt`
-- `cpu_hack/agesa_trace/AmdProcessorInitPeim_service_vtable_entry_trace.txt`
-- `cpu_hack/agesa_trace/AmdProcessorInitPeim_record_write_map_fff4cf9c.txt`
-- `cpu_hack/agesa_trace/AmdProcessorInitPeim_entry_plus_04_source_trace.txt`
-- `cpu_hack/agesa_trace/AmdProcessorInitPeim_msr_source_proof.txt`
+- `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_helper_fff4cf55_disasm.txt`
+- `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_pointer_search_fff4cf9c.txt`
+- `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_callback_fff4aadd_disasm.txt`
+- `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_fff4aadd_wide_disasm.txt`
+- `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_descriptor_handlers_disasm.txt`
+- `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_descriptor_callsite_xrefs.txt`
+- `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_outer_producer_table_xrefs.txt`
+- `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_service_table_trace.txt`
+- `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_producer_service_provenance.txt`
+- `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_service_descriptor_xrefs.txt`
+- `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_decoded_service_descriptor.txt`
+- `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_service_vtable_entry_trace.txt`
+- `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_record_write_map_fff4cf9c.txt`
+- `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_entry_plus_04_source_trace.txt`
+- `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_msr_source_proof.txt`
 
 ## Evidence
 

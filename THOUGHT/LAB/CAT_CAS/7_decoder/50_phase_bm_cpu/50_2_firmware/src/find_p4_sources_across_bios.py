@@ -39,10 +39,10 @@ def module_name(path: Path) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", default=".")
-    parser.add_argument("--out", default="cpu_sing_3/PHASE2_FIRMWARE_P4_SEPARATE_SOURCE_SEARCH.md")
+    parser.add_argument("--out", default="50_2_firmware/PHASE2_FIRMWARE_P4_SEPARATE_SOURCE_SEARCH.md")
     args = parser.parse_args()
     root = Path(args.root)
-    dump_root = root / "cpu_hack" / "bios_dump.bin.dump"
+    dump_root = root / "50_2_firmware" / "cpu_hack" / "bios_dump.bin.dump"
     rows = []
     for path in dump_root.rglob("*"):
         if not path.is_file():
@@ -68,7 +68,7 @@ def main() -> int:
             })
 
     text_hits = []
-    for path in (root / "cpu_hack").rglob("*.txt"):
+    for path in (root / "50_2_firmware" / "cpu_hack").rglob("*.txt"):
         text = path.read_text(encoding="utf-8", errors="replace")
         count = sum(text.count(f"0x{value:08X}") + text.count(f"{value:08X}") for value in PSTATE_VALUES)
         if count:

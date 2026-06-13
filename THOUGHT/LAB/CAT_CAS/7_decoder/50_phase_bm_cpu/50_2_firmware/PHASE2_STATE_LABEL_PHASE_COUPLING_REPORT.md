@@ -12,12 +12,12 @@ This keeps the software route alive, but it is not `CPU_SINGS`.
 
 ## Artifacts
 
-- Runner: `session_scripts/phase1_msr/msr_state_label_phase_coupling_probe.py`
-- Initial run: `cpu_sing_3/PHASE2_STATE_LABEL_PHASE_COUPLING_PROBE.json`
-- Seed 5000 run: `cpu_sing_3/PHASE2_STATE_LABEL_PHASE_COUPLING_PROBE_SEED5000.json`
-- Long-row run: `cpu_sing_3/PHASE2_STATE_LABEL_PHASE_COUPLING_PROBE_LONG.json`
-- Hardened seed 1000 run: `cpu_sing_3/PHASE2_STATE_LABEL_PHASE_COUPLING_PROBE_BALANCED_SEED1000.json`
-- Hardened seed 5000 run: `cpu_sing_3/PHASE2_STATE_LABEL_PHASE_COUPLING_PROBE_BALANCED_SEED5000.json`
+- Runner: `50_1_subthreshold_msr/src/msr_state_label_phase_coupling_probe.py`
+- Initial run: `50_2_firmware/PHASE2_STATE_LABEL_PHASE_COUPLING_PROBE.json`
+- Seed 5000 run: `50_2_firmware/PHASE2_STATE_LABEL_PHASE_COUPLING_PROBE_SEED5000.json`
+- Long-row run: `50_2_firmware/PHASE2_STATE_LABEL_PHASE_COUPLING_PROBE_LONG.json`
+- Hardened seed 1000 run: `50_2_firmware/PHASE2_STATE_LABEL_PHASE_COUPLING_PROBE_BALANCED_SEED1000.json`
+- Hardened seed 5000 run: `50_2_firmware/PHASE2_STATE_LABEL_PHASE_COUPLING_PROBE_BALANCED_SEED5000.json`
 
 ## Hardened Results
 
@@ -68,7 +68,7 @@ Follow-up compact sweep:
 STATE_LABEL_TIMING_EDGE_NOT_STABLE_YET
 ```
 
-`cpu_sing_3/PHASE2_STATE_LABEL_TIMING_EDGE_STABILITY_SWEEP.md` ran six compact
+`50_2_firmware/PHASE2_STATE_LABEL_TIMING_EDGE_STABILITY_SWEEP.md` ran six compact
 seed/duration cases. Two of six were candidates and all had zero restore
 failures, but the acceptance threshold was three candidate runs. The timing edge
 therefore remains live but unstable.

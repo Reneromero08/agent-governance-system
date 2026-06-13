@@ -26,7 +26,7 @@ Target stdout summary:
 Verification log:
 
 ```text
-phase4_holo/results/phase4_track_a_verification.txt
+50_4_holo_eigenbasis/results/phase4_track_a_verification.txt
 ```
 
 ## What Was Tested
@@ -52,9 +52,9 @@ phase4_holo/results/phase4_track_a_verification.txt
 
 | Artifact | Purpose |
 |---|---|
-| `session_scripts/phase4_holo/eigenbasis_tape.c` | Phase 4.1A shared-eigenbasis harness. |
-| `phase4_holo/results/phase4_track_a_verification.txt` | Saved target run covering Phase 4.0-4.6. |
-| `phase4_holo/PHASE4_1A_SHARED_EIGENBASIS_TAPE.md` | This report. |
+| `50_4_holo_eigenbasis/src/eigenbasis_tape.c` | Phase 4.1A shared-eigenbasis harness. |
+| `50_4_holo_eigenbasis/results/phase4_track_a_verification.txt` | Saved target run covering Phase 4.0-4.6. |
+| `50_4_holo_eigenbasis/PHASE4_1A_SHARED_EIGENBASIS_TAPE.md` | This report. |
 
 ## Decision
 

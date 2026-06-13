@@ -54,19 +54,19 @@ PHASE4_TRACK_A_COMPLETE_VERIFIED
 Saved target run:
 
 ```text
-phase4_holo/results/phase4_track_a_verification.txt
+50_4_holo_eigenbasis/results/phase4_track_a_verification.txt
 ```
 
 Phase 4 Track A reports:
 
-- `phase4_holo/PHASE4_0_BRIDGE_GATE.md`
-- `phase4_holo/PHASE4_1A_SHARED_EIGENBASIS_TAPE.md`
-- `phase4_holo/PHASE4_2A_CATALYTIC_ROTATION_CHAIN.md`
-- `phase4_holo/PHASE4_3_RESIDUAL_CHANNEL.md`
-- `phase4_holo/PHASE4_4A_OPERATOR_GOE.md`
-- `phase4_holo/PHASE4_5_HOLO_MINI_MODEL.md`
-- `phase4_holo/PHASE4_6_PUBLIC_HOLO_HARNESS.md`
-- `phase4_holo/PHASE4_TRACK_A_FINAL.md`
+- `50_4_holo_eigenbasis/PHASE4_0_BRIDGE_GATE.md`
+- `50_4_holo_eigenbasis/PHASE4_1A_SHARED_EIGENBASIS_TAPE.md`
+- `50_4_holo_eigenbasis/PHASE4_2A_CATALYTIC_ROTATION_CHAIN.md`
+- `50_4_holo_eigenbasis/PHASE4_3_RESIDUAL_CHANNEL.md`
+- `50_4_holo_eigenbasis/PHASE4_4A_OPERATOR_GOE.md`
+- `50_4_holo_eigenbasis/PHASE4_5_HOLO_MINI_MODEL.md`
+- `50_4_holo_eigenbasis/PHASE4_6_PUBLIC_HOLO_HARNESS.md`
+- `50_4_holo_eigenbasis/PHASE4_TRACK_A_FINAL.md`
 
 ## Remaining Boundary
 

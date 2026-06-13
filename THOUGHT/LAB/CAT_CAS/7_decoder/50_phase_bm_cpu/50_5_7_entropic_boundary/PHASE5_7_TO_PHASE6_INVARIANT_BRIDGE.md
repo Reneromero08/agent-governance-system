@@ -30,8 +30,8 @@ Phase 5.7 becomes the Phase 6 invariant/null scoring layer. It does not select t
 
 Created:
 
-- `phase5_7/results/phase6_invariant_scorer/PHASE5_7_PHASE6_INVARIANT_SCORER_RUN.md`
-- `phase5_7/results/phase6_invariant_scorer/phase5_7_phase6_invariant_scores.csv`
+- `50_5_7_entropic_boundary/results/phase6_invariant_scorer/PHASE5_7_PHASE6_INVARIANT_SCORER_RUN.md`
+- `50_5_7_entropic_boundary/results/phase6_invariant_scorer/phase5_7_phase6_invariant_scores.csv`
 
 The Phase 6 invariant table now includes:
 

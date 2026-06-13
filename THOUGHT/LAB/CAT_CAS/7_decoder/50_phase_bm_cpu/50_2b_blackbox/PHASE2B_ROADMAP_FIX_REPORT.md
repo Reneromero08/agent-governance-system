@@ -43,7 +43,7 @@ The CAT_CAS ZIP contains stronger mechanisms never ported to the Phenom II:
 
 **Phase 2B.5A:** Port Exp20 phase-oracle machinery to Phenom II.
 1. Extract complex-phase encoding from Exp20 (phase lasing, filter bank, .holo cavity)
-2. Implement `session_scripts/phase2b/phase_oracle_port.c`
+2. Implement `50_2b_blackbox/src/phase_oracle_port.c`
 3. Represent candidate states as complex phase values, not binary spins
 4. Encode problem constraints as phase shifts
 5. Decode answer from interference pattern

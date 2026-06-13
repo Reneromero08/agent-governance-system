@@ -13,8 +13,8 @@ timing/CV behavior, not decoded P4 VID.
 
 ## Artifact
 
-- JSON: `cpu_sing_3/PHASE2_EFFECTIVE_STATE_SELECTOR_MAP.json`
-- Runner: `session_scripts/phase1_msr/msr_effective_state_selector_map.py`
+- JSON: `50_2_firmware/PHASE2_EFFECTIVE_STATE_SELECTOR_MAP.json`
+- Runner: `50_1_subthreshold_msr/src/msr_effective_state_selector_map.py`
 
 ## Run Summary
 

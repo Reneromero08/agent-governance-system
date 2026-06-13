@@ -33,7 +33,9 @@ from pathlib import Path
 from typing import Dict, List, Optional, Sequence
 
 THIS_DIR = Path(__file__).resolve().parent
-OUTPUT_DIR = THIS_DIR / "_generated"
+# src/ is one level deeper than the phase dir root post-merge; _generated lives at the
+# phase dir root (50_5_10_encoding_wall/_generated/), so anchor outputs on THIS_DIR.parent.
+OUTPUT_DIR = THIS_DIR.parent / "_generated"
 
 # Verdict labels (verbatim from the spec).
 V_CONFIRMED = "EXP50_PHASE5_10_BOUNDARY_STATE_PREPARATION_CONFIRMED"

@@ -8,12 +8,12 @@ ACTIVE_PHASE_NOT_PRIMARY_SUCCESS
 
 The lab already has passive oscillator and active cache-line harnesses:
 
-- `session_scripts/oscillator.c`
-- `session_scripts/tsc_sampler.c`
-- `session_scripts/kuramoto_test.py`
-- `session_scripts/catalytic_phase.c`
-- `session_scripts/phase_oscillator.c`
-- `session_scripts/lock_oscillator.c`
+- `50_2_phase_locked_network/src/oscillator.c`
+- `50_2_phase_locked_network/src/tsc_sampler.c`
+- `50_2_phase_locked_network/src/kuramoto_test.py`
+- `50_3_catalytic_ladder/src/catalytic_phase.c`
+- `50_2_phase_locked_network/src/phase_oscillator.c`
+- `50_2_phase_locked_network/src/lock_oscillator.c`
 
 Existing roadmap evidence says the passive route found a stable 2.67 MHz VRM artifact and non-reproducible 5.34 MHz component. The final success in this run came from the stronger physical tape route, so no additional phase protocol was needed to satisfy the goal.
 

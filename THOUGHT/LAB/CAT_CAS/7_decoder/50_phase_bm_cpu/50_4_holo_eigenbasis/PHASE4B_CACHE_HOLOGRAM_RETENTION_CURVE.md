@@ -11,7 +11,7 @@ Test whether the Phase 4B cache `.holo` readout is only an immediate probe artif
 ## Harness
 
 ```text
-session_scripts/phase4_holo/cache_hologram_retention_curve.c
+50_4_holo_eigenbasis/src/cache_hologram_retention_curve.c
 ```
 
 The harness keeps the matched-null structure:
@@ -33,7 +33,7 @@ It adds four passive delay classes before probing:
 ## Analyzer
 
 ```text
-session_scripts/phase4_holo/analyze_cache_hologram_retention_curve.py
+50_4_holo_eigenbasis/src/analyze_cache_hologram_retention_curve.py
 ```
 
 Each delay class is scored independently with an even/odd trial split.
@@ -41,10 +41,10 @@ Each delay class is scored independently with an even/odd trial split.
 Tracked summaries:
 
 ```text
-phase4_holo/results/phase4b_cache_hologram_retention_curve_summary.json
-phase4_holo/results/phase4b_cache_hologram_retention_curve_run1_summary.json
-phase4_holo/results/phase4b_cache_hologram_retention_curve_run2_summary.json
-phase4_holo/results/phase4b_cache_hologram_retention_curve_repeat_summary.json
+50_4_holo_eigenbasis/results/phase4b_cache_hologram_retention_curve_summary.json
+50_4_holo_eigenbasis/results/phase4b_cache_hologram_retention_curve_run1_summary.json
+50_4_holo_eigenbasis/results/phase4b_cache_hologram_retention_curve_run2_summary.json
+50_4_holo_eigenbasis/results/phase4b_cache_hologram_retention_curve_repeat_summary.json
 ```
 
 Raw CSVs are ignored by the repo `*.csv` rule.

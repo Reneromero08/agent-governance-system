@@ -43,11 +43,11 @@ Gate 4 reached the exact injection boundary: there is no known executable cave l
 
 Required proof inside this lab:
 
-1. `cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt`
+1. `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt`
    - Must include the full function containing `0xFFF737A3`, not only the middle block.
    - Must show assignments feeding `[ebp-8]`, `ecx`, and `esi`.
    - Must show the base structure behind `+0x0B`, `+0x0F`, `+0x10`, `+0x14`, `+0x1C`, and `+0x20`.
-2. `cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_xrefs.txt`
+2. `50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_xrefs.txt`
    - Must include all callers and data/control xrefs to the containing function.
 3. Editable P4-only source or edit target.
 4. P0-P3 unchanged proof and P4-only effect proof.
@@ -58,7 +58,7 @@ Required proof inside this lab:
 Next RE command after decompiler artifact exists:
 
 ```powershell
-rg -n "fff737a3|fff73a90|ebp-8|\\+0x0b|\\+0x0f|\\+0x10|\\+0x14|\\+0x1c|\\+0x20|0x18|C0010068" cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_xrefs.txt
+rg -n "fff737a3|fff73a90|ebp-8|\\+0x0b|\\+0x0f|\\+0x10|\\+0x14|\\+0x1c|\\+0x20|0x18|C0010068" 50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_containing_function_decompile.txt 50_2_firmware/cpu_hack/agesa_trace/AmdProcessorInitPeim_fff737a3_xrefs.txt
 ```
 
 No-op rebuild workflow is proven; do not repeat it unless validating a future non-no-op candidate. All outputs must remain inside `THOUGHT/LAB/CAT_CAS/50_phase_bm_cpu`.

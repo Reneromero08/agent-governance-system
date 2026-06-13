@@ -25,7 +25,7 @@ Modes:
 ## Harness
 
 ```text
-session_scripts/phase4_holo/cache_hologram_mode_classifier.c
+50_4_holo_eigenbasis/src/cache_hologram_mode_classifier.c
 ```
 
 The harness equalizes the main confound from the first afterimage probe:
@@ -41,7 +41,7 @@ The physical readout is a 64-line timing vector plus target/other contrast.
 ## Analyzer
 
 ```text
-session_scripts/phase4_holo/analyze_cache_hologram_mode_classifier.py
+50_4_holo_eigenbasis/src/analyze_cache_hologram_mode_classifier.py
 ```
 
 The analyzer:
@@ -73,14 +73,14 @@ Artifacts:
 
 | Artifact | Purpose |
 |---|---|
-| `phase4_holo/results/phase4b_cache_hologram_mode_classifier_summary.json` | Held-out classifier summary and gates. |
-| `session_scripts/phase4_holo/cache_hologram_mode_classifier.c` | Equalized timing-vector harness. |
-| `session_scripts/phase4_holo/analyze_cache_hologram_mode_classifier.py` | Train/test analyzer. |
+| `50_4_holo_eigenbasis/results/phase4b_cache_hologram_mode_classifier_summary.json` | Held-out classifier summary and gates. |
+| `50_4_holo_eigenbasis/src/cache_hologram_mode_classifier.c` | Equalized timing-vector harness. |
+| `50_4_holo_eigenbasis/src/analyze_cache_hologram_mode_classifier.py` | Train/test analyzer. |
 
 Raw CSV:
 
 ```text
-phase4_holo/results/phase4b_cache_hologram_mode_classifier.csv
+50_4_holo_eigenbasis/results/phase4b_cache_hologram_mode_classifier.csv
 ```
 
 The CSV is ignored by the repo-wide `*.csv` rule; the summary JSON carries the tracked result.

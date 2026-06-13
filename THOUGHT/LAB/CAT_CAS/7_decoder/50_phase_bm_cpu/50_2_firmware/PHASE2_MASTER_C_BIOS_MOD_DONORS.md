@@ -12,9 +12,9 @@ Local Exp50 now contains a diffable donor BIOS image pair for GA-970A-DS3P rev. 
 
 Found local categories:
 
-- Stock/local BIOS dump and UEFIExtract parse tree in `cpu_hack/`
-- Official F2j stock package and image in `cpu_hack/mod_donors/`
-- Public F2j NVMe donor package and image in `cpu_hack/mod_donors/`
+- Stock/local BIOS dump and UEFIExtract parse tree in `50_2_firmware/cpu_hack/`
+- Official F2j stock package and image in `50_2_firmware/cpu_hack/mod_donors/`
+- Public F2j NVMe donor package and image in `50_2_firmware/cpu_hack/mod_donors/`
 - UEFIExtract parse reports for both stock and donor images
 - Coreboot/AGESA source drops in ignored temporary trees
 - Existing AGESA/P-state reports
@@ -54,16 +54,16 @@ Public pages consulted:
 
 Full report:
 
-`cpu_sing_3/PHASE2_DONOR_DIFF_REPORT.md`
+`50_2_firmware/PHASE2_DONOR_DIFF_REPORT.md`
 
 Local artifacts:
 
-- `cpu_hack/mod_donors/gigabyte_rev1_stock_F2j.zip`
-- `cpu_hack/mod_donors/gigabyte_rev1_stock_F2j_extracted/970ADS3P.F2j`
-- `cpu_hack/mod_donors/gigabyte_rev1_stock_F2j_extracted/970ADS3P.F2j.report.txt`
-- `cpu_hack/mod_donors/winraid_970ADS3PNVME.zip`
-- `cpu_hack/mod_donors/winraid_970ADS3PNVME_extracted/970ADS3PNVME.F2j`
-- `cpu_hack/mod_donors/winraid_970ADS3PNVME_extracted/970ADS3PNVME.F2j.report.txt`
+- `50_2_firmware/cpu_hack/mod_donors/gigabyte_rev1_stock_F2j.zip`
+- `50_2_firmware/cpu_hack/mod_donors/gigabyte_rev1_stock_F2j_extracted/970ADS3P.F2j`
+- `50_2_firmware/cpu_hack/mod_donors/gigabyte_rev1_stock_F2j_extracted/970ADS3P.F2j.report.txt`
+- `50_2_firmware/cpu_hack/mod_donors/winraid_970ADS3PNVME.zip`
+- `50_2_firmware/cpu_hack/mod_donors/winraid_970ADS3PNVME_extracted/970ADS3PNVME.F2j`
+- `50_2_firmware/cpu_hack/mod_donors/winraid_970ADS3PNVME_extracted/970ADS3PNVME.F2j.report.txt`
 
 Structural result:
 

@@ -11,7 +11,7 @@ This is active phase mapping evidence. It is not passive Kuramoto evidence and n
 ## Command
 
 ```powershell
-Get-Content -Raw session_scripts\phase2b\optical_3sat_phase_port.c | ssh -o BatchMode=yes -o ConnectTimeout=5 root@192.168.137.100 "cat > /tmp/optical_3sat_phase_port.c && gcc -O2 /tmp/optical_3sat_phase_port.c -lm -o /tmp/optical_3sat_phase_port && timeout 40 /tmp/optical_3sat_phase_port"
+Get-Content -Raw 50_2b_blackbox\src\optical_3sat_phase_port.c | ssh -o BatchMode=yes -o ConnectTimeout=5 root@192.168.137.100 "cat > /tmp/optical_3sat_phase_port.c && gcc -O2 /tmp/optical_3sat_phase_port.c -lm -o /tmp/optical_3sat_phase_port && timeout 40 /tmp/optical_3sat_phase_port"
 ```
 
 ## Safety

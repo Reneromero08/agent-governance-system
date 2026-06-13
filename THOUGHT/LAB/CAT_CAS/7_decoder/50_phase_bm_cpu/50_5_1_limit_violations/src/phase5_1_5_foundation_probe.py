@@ -21,9 +21,10 @@ import time
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "phase5_1_5" / "results"
-REPORT = ROOT / "phase5_1_5" / "PHASE5_1_5_FOUNDATION_REPORT.md"
+# src/ is one level deeper post-merge; the phase dir root (50_5_1_limit_violations) is parents[1].
+PHASE_DIR = Path(__file__).resolve().parents[1]
+OUT = PHASE_DIR / "results"
+REPORT = PHASE_DIR / "PHASE5_1_5_FOUNDATION_REPORT.md"
 
 SEED = 0xC47CA51
 TAPE_SIZE = 4096
@@ -332,9 +333,9 @@ The current host did not expose a usable package-energy artifact in this run:
 
 ## Artifacts
 
-- `phase5_1_5/results/phase5_1_5_forward_reverse_cycles.csv`
-- `phase5_1_5/results/phase5_1_5_summary.json`
-- `session_scripts/phase5_1_5/phase5_1_5_foundation_probe.py`
+- `50_5_1_limit_violations/results/phase5_1_5_forward_reverse_cycles.csv`
+- `50_5_1_limit_violations/results/phase5_1_5_summary.json`
+- `50_5_1_limit_violations/src/phase5_1_5_foundation_probe.py`
 
 ## Claim Boundary
 

@@ -8,12 +8,12 @@ HOLO_TAPE_RESTORED_SUCCESS
 
 Local source:
 
-`session_scripts/holo_tape_goal.c`
+`50_3_catalytic_ladder/src/holo_tape_goal.c`
 
 Target run:
 
 ```sh
-scp session_scripts/holo_tape_goal.c root@192.168.137.100:/tmp/holo_tape_goal.c
+scp 50_3_catalytic_ladder/src/holo_tape_goal.c root@192.168.137.100:/tmp/holo_tape_goal.c
 ssh root@192.168.137.100 'cd /tmp; gcc -O2 -pthread holo_tape_goal.c -lcrypto -o holo_tape_goal; ./holo_tape_goal; sensors; rdmsr checks'
 ```
 

@@ -11,7 +11,7 @@ This folder is the Exp50 firmware and board-inspection workspace. It keeps autho
 | `noop_replace/bios_noop_rebuilt.bin.report.txt` | Accepted no-op rebuild parse report | Yes | Small text proof for parse-clean rebuilt image. |
 | `bios_dump.bin` | Owned raw BIOS dump | No | Binary/sensitive local evidence; not committed. |
 | `bios_dump.bin.dump/` | UEFIExtract parse tree | No | Generated extraction tree; not committed. |
-| `mod_donors/` | Public stock/mod donor packages and extracted reports | No | Local donor workflow material; summarized in `cpu_sing_3/PHASE2_DONOR_DIFF_REPORT.md`. |
+| `mod_donors/` | Public stock/mod donor packages and extracted reports | No | Local donor workflow material; summarized in `50_2_firmware/PHASE2_DONOR_DIFF_REPORT.md`. |
 | `tools/` | Local UEFI/coreboot/rebuild tools | No | Tool binaries and downloaded source trees are local-only. |
 | `_tmp_coreboot_*/` | Temporary source/extraction trees | No | Generated/heavy research trees. |
 | `local_logs/` | Probe and extraction logs | No | Local run logs; not committed. |

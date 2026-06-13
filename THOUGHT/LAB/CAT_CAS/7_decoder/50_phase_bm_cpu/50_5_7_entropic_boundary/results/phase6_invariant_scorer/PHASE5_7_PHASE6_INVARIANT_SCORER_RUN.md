@@ -4,7 +4,7 @@ Verdict: `PHASE5_7_PHASE6_PUBLIC_INVARIANT_REJECTED_BY_5_9V_CONTROLS`
 
 Objective: consume real 5.9V target-coupled basin labels and test whether public-target survivors beat shuffled and wrong-target controls.
 
-- Table: `phase5_7/results/phase6_invariant_scorer/phase5_7_phase6_invariant_scores.csv`
+- Table: `50_5_7_entropic_boundary/results/phase6_invariant_scorer/phase5_7_phase6_invariant_scores.csv`
 - Rows scored: `16`
 - Public selector rows: `4`
 - Public candidates beyond null controls: `0`

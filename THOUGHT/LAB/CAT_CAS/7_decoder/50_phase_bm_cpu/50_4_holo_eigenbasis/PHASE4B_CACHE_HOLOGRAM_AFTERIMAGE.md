@@ -31,7 +31,7 @@ The experiment asks whether `.holo` can be a substrate-coordinate pattern, not o
 ## Harness
 
 ```text
-session_scripts/phase4_holo/cache_hologram_afterimage.c
+50_4_holo_eigenbasis/src/cache_hologram_afterimage.c
 ```
 
 The harness:
@@ -70,9 +70,9 @@ Artifacts:
 
 | Artifact | Purpose |
 |---|---|
-| `phase4_holo/results/phase4b_cache_hologram_afterimage.csv` | Raw 2560-row target run. |
-| `phase4_holo/results/phase4b_cache_hologram_afterimage_summary.json` | Analyzer summary and verdict. |
-| `session_scripts/phase4_holo/analyze_cache_hologram_afterimage.py` | Phase 4B cache-afterimage analyzer. |
+| `50_4_holo_eigenbasis/results/phase4b_cache_hologram_afterimage.csv` | Raw 2560-row target run. |
+| `50_4_holo_eigenbasis/results/phase4b_cache_hologram_afterimage_summary.json` | Analyzer summary and verdict. |
+| `50_4_holo_eigenbasis/src/analyze_cache_hologram_afterimage.py` | Phase 4B cache-afterimage analyzer. |
 
 Measured summary:
 
