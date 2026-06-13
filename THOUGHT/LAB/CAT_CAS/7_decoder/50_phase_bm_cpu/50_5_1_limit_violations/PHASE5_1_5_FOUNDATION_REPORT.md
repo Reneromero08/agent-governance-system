@@ -20,6 +20,30 @@ write voltage, touch firmware, flash BIOS, or modify hardware state.
 | 5.4 Schmidt/rank-1 gate | `PHASE5_4_RANK1_CONTROL_MODEL_PASS__LIVE_OSCILLATOR_TRACE_REQUIRED` | master-correlation floor = 0.999986; residual-ratio ceiling = 0.005377; null residual-ratio floor = 0.183985. |
 | 5.5 Noise-only gate | `PHASE5_5_NOISE_ONLY_TRANSIENT_LOCK_MODEL_CANDIDATE__LIVE_NOISE_TRACE_REQUIRED` | spontaneous lock windows = 12/512; best order = 0.996119; threshold = 0.96. |
 
+## Proxy Hardening Push
+
+A follow-up Phenom target run pushed the remaining software-observable angle
+for 5.3-5.5:
+
+- `PHASE5_3_PINNED_TIMING_HARDENED_PROXY`
+- `PHASE5_4_REFERENCE_TO_MULTICHANNEL_PROXY_MEASURED`
+- `PHASE5_5_NOISE_JITTER_SHUFFLE_NULL_MEASURED`
+- `RESTORATION_INTACT`
+- `RANK1_PROXY_PARTIAL`
+- `NOISE_TEMPORAL_STRUCTURE_NOT_SEPARATED_FROM_SHUFFLE`
+
+Summary:
+
+- 5.3 pinned all-core median reverse/forward ratio: `0.997884`
+- 5.4 reference-to-channel abs correlation floor: `0.720324`
+- 5.4 rank-1 explained energy: `0.556533`
+- 5.5 real noise-order median: `0.389339`
+- 5.5 shuffled noise-order median: `0.389339`
+- 5.5 median delta: `0.000000`
+
+Proxy hardening artifact:
+`50_5_1_limit_violations/PHASE5_1_5_PROXY_HARDENING.md`
+
 ## Physical Artifacts Still Needed
 
 5.1 needs an aligned joule trace or calibrated package-energy counter plus
@@ -64,14 +88,18 @@ Host smoke artifact:
 - `50_5_1_limit_violations/results/phase5_1_5_forward_reverse_cycles.csv`
 - `50_5_1_limit_violations/results/phase5_1_5_target_summary.json` primary evidence
 - `50_5_1_limit_violations/results/phase5_1_5_summary.json` host smoke test only
+- `50_5_1_limit_violations/results/proxy_hardening/phase5_1_5_proxy_hardening_summary.json`
 - `50_5_1_limit_violations/src/phase5_1_5_foundation_probe.py`
+- `50_5_1_limit_violations/src/phase5_1_5_proxy_hardening.py`
 
 ## Claim Boundary
 
 Accepted now: reversible logical zero-erasure accounting, cyclic throughput
 accounting, forward/reverse timing asymmetry measurement, rank-1 control model,
-and noise-only transient-lock candidate model.
+noise-only transient-lock candidate model, and proxy hardening inside current
+software observability.
 
 Not accepted from this pass alone: physical Landauer violation, physical
 Bekenstein violation, physical oscillator control, physical noise computation,
-or thermodynamic claim.
+or thermodynamic claim. The proxy hardening specifically caps 5.5: current
+software-visible noise ordering does not separate from the shuffled-window null.

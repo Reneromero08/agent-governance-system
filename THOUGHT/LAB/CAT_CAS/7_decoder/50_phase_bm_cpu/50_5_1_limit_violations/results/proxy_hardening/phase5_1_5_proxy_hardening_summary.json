@@ -1,0 +1,172 @@
+{
+  "verdict": "PHASE5_3_PINNED_TIMING_HARDENED_PROXY__PHASE5_4_REFERENCE_TO_MULTICHANNEL_PROXY_MEASURED__PHASE5_5_NOISE_JITTER_SHUFFLE_NULL_MEASURED__RESTORATION_INTACT__RANK1_PROXY_PARTIAL__NOISE_TEMPORAL_STRUCTURE_NOT_SEPARATED_FROM_SHUFFLE",
+  "seed": 5263706,
+  "host": "catcas",
+  "k10temp_path": "/sys/class/hwmon/hwmon0/temp1_input",
+  "pinned_timing": {
+    "core_summary": {
+      "0": {
+        "affinity_ok": true,
+        "restore_rate": 1.0,
+        "forward_ns_median": 1037274.5,
+        "reverse_ns_median": 1044253.5,
+        "ratio_median": 1.0062641421694125,
+        "ratio_mad": 0.003949713929159326,
+        "temp_c_before": 44.5,
+        "temp_c_after": 44.375,
+        "freq_khz_before": 1607458,
+        "freq_khz_after": 1607459
+      },
+      "1": {
+        "affinity_ok": true,
+        "restore_rate": 1.0,
+        "forward_ns_median": 1051008.0,
+        "reverse_ns_median": 1029649.5,
+        "ratio_median": 0.9948315925696298,
+        "ratio_mad": 0.008609068320843405,
+        "temp_c_before": 44.375,
+        "temp_c_after": 44.5,
+        "freq_khz_before": 1607459,
+        "freq_khz_after": 1607456
+      },
+      "2": {
+        "affinity_ok": true,
+        "restore_rate": 1.0,
+        "forward_ns_median": 1048369.5,
+        "reverse_ns_median": 1045559.0,
+        "ratio_median": 0.9969100945555408,
+        "ratio_mad": 0.0014652316415777467,
+        "temp_c_before": 44.5,
+        "temp_c_after": 44.375,
+        "freq_khz_before": 1600000,
+        "freq_khz_after": 1600000
+      },
+      "3": {
+        "affinity_ok": true,
+        "restore_rate": 1.0,
+        "forward_ns_median": 1050715.5,
+        "reverse_ns_median": 1031662.5,
+        "ratio_median": 0.9915908225097911,
+        "ratio_mad": 0.016735169154542262,
+        "temp_c_before": 44.375,
+        "temp_c_after": 44.5,
+        "freq_khz_before": 1600000,
+        "freq_khz_after": 1600000
+      },
+      "4": {
+        "affinity_ok": true,
+        "restore_rate": 1.0,
+        "forward_ns_median": 1008193.5,
+        "reverse_ns_median": 1006481.0,
+        "ratio_median": 0.9982024715592686,
+        "ratio_mad": 0.003047186646344513,
+        "temp_c_before": 44.5,
+        "temp_c_after": 45.0,
+        "freq_khz_before": 1600000,
+        "freq_khz_after": 1600000
+      },
+      "5": {
+        "affinity_ok": true,
+        "restore_rate": 1.0,
+        "forward_ns_median": 1003495.0,
+        "reverse_ns_median": 1002951.5,
+        "ratio_median": 0.9994290922101017,
+        "ratio_mad": 0.0009480231526960425,
+        "temp_c_before": 45.0,
+        "temp_c_after": 44.5,
+        "freq_khz_before": 1600000,
+        "freq_khz_after": 1600000
+      }
+    },
+    "all_restore_rate": 1.0,
+    "ratio_median_all": 0.9978844531456335,
+    "ratio_spread_max_minus_min": 4.786310177146177,
+    "gate": "PHASE5_3_PINNED_TIMING_HARDENED_PROXY"
+  },
+  "reference_channel_matrix": {
+    "reference_levels": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0,
+      32.0
+    ],
+    "channels": {
+      "0": [
+        1269224.5,
+        1441228.0,
+        1955737.0,
+        10046867.0,
+        9801075.5,
+        10055759.0
+      ],
+      "1": [
+        1263214.0,
+        1439634.5,
+        1959321.5,
+        10097051.0,
+        9783521.5,
+        10042747.0
+      ],
+      "2": [
+        1303708.0,
+        1441817.0,
+        2008483.0,
+        13830296.5,
+        13843295.0,
+        14067652.5
+      ],
+      "3": [
+        1259221.5,
+        1398462.0,
+        2015676.5,
+        14120677.5,
+        17991450.0,
+        14095602.0
+      ],
+      "4": [
+        1235295.5,
+        1412301.0,
+        1979741.0,
+        9890896.5,
+        9910463.5,
+        9906681.5
+      ],
+      "5": [
+        1257050.0,
+        1434867.5,
+        2006171.0,
+        10483237.0,
+        10018274.0,
+        10025078.5
+      ]
+    },
+    "reference_correlations": {
+      "0": 0.7599503765457355,
+      "1": 0.7575073969212637,
+      "2": 0.7643094388156357,
+      "3": 0.7203241372975553,
+      "4": 0.7580438516788108,
+      "5": 0.7395566287813693
+    },
+    "abs_corr_floor": 0.7203241372975553,
+    "sign_agreement": 1.0,
+    "rank1_explained_energy": 0.5565331273590808,
+    "gate": "PHASE5_4_REFERENCE_TO_MULTICHANNEL_PROXY_MEASURED"
+  },
+  "noise_jitter_null": {
+    "real_order_median": 0.38933873486376946,
+    "shuffled_order_median": 0.38933873486376946,
+    "median_delta": 0.0,
+    "real_p95": 0.5195033003374033,
+    "shuffled_p95": 0.5195033003374033,
+    "gate": "PHASE5_5_NOISE_JITTER_SHUFFLE_NULL_MEASURED"
+  },
+  "claim_boundary": [
+    "Proxy hardening only.",
+    "No physical Landauer or Bekenstein claim.",
+    "No physical oscillator-control claim.",
+    "No physical noise-computation claim."
+  ]
+}

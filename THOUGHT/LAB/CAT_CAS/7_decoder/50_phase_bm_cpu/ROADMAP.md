@@ -1280,52 +1280,60 @@ Target observability: `50_5_1_limit_violations/PHASE5_1_5_TARGET_OBSERVABILITY.m
 Claim boundary: Phenom cyclic throughput accounting is complete. Physical Bekenstein violation is not accepted from this pass alone.
 
 ### 5.3 Arrow of Time Reversal
-**Status:** `PHASE5_3_FORWARD_REVERSE_TIMING_ASYMMETRY_MEASURED`
+**Status:** `PHASE5_3_FORWARD_REVERSE_TIMING_ASYMMETRY_MEASURED__PHASE5_3_PINNED_TIMING_HARDENED_PROXY`
 
 - [x] Measure forward pass execution time vs. reverse pass execution time on the Phenom target.
 - [x] Phenom median forward time: `610196.0 ns`.
 - [x] Phenom median reverse time: `608799.5 ns`.
 - [x] Phenom median reverse/forward ratio: `0.996875`.
+- [x] Proxy hardening: pinned six-core timing sweep restored `1.000000`, all-core median reverse/forward `0.997884`.
 - [x] Preserve raw cycle rows for follow-up asymmetry analysis.
 
 Artifact: `50_5_1_limit_violations/results/phase5_1_5_forward_reverse_cycles.csv`
 Target summary: `50_5_1_limit_violations/results/phase5_1_5_target_summary.json`
+Proxy hardening: `50_5_1_limit_violations/PHASE5_1_5_PROXY_HARDENING.md`
 Live runbook: `50_5_1_limit_violations/PHASE5_1_5_LIVE_RUNBOOK.md`
 Target observability: `50_5_1_limit_violations/PHASE5_1_5_TARGET_OBSERVABILITY.md`
 
 Claim boundary: Phenom reversible timing asymmetry is measured. Hardware-source attribution needs a live cache/PMU follow-up if this becomes a frontier blocker.
 
 ### 5.4 Schmidt Decomposition (1 Oscillator Controls Many)
-**Status:** `PHASE5_4_RANK1_CONTROL_MODEL_PASS__LIVE_OSCILLATOR_TRACE_REQUIRED`
+**Status:** `PHASE5_4_RANK1_CONTROL_MODEL_PASS__PHASE5_4_REFERENCE_TO_MULTICHANNEL_PROXY_MEASURED__RANK1_PROXY_PARTIAL__LIVE_OSCILLATOR_TRACE_REQUIRED`
 
 - [x] Run deterministic one-master/six-follower rank-1 control model on the Phenom target.
 - [x] Target master-correlation floor: `0.999986`.
 - [x] Target controlled residual-ratio ceiling: `0.005377`.
 - [x] Target null residual-ratio floor: `0.183985`.
+- [x] Proxy hardening: one reference coordinate measured against six timing readout channels.
+- [x] Proxy hardening: abs correlation floor `0.720324`, sign agreement `1.000000`, rank-1 explained energy `0.556533`.
 - [ ] Physical oscillator trace still required: six live phase channels with coupling-on/off controls.
 
 Artifact: `50_5_1_limit_violations/src/phase5_1_5_foundation_probe.py`
 Target summary: `50_5_1_limit_violations/results/phase5_1_5_target_summary.json`
+Proxy hardening: `50_5_1_limit_violations/results/proxy_hardening/phase5_1_5_proxy_hardening_summary.json`
 Live runbook: `50_5_1_limit_violations/PHASE5_1_5_LIVE_RUNBOOK.md`
 Target observability: `50_5_1_limit_violations/PHASE5_1_5_TARGET_OBSERVABILITY.md`
 
-Claim boundary: target-run rank-1 control model is complete. Physical one-oscillator-controls-many remains gated on live oscillator data.
+Claim boundary: target-run rank-1 control model is complete and a multichannel timing proxy was measured, but the proxy is partial. Physical one-oscillator-controls-many remains gated on live oscillator data.
 
 ### 5.5 Computronium (Noise Computes)
-**Status:** `PHASE5_5_NOISE_ONLY_TRANSIENT_LOCK_MODEL_CANDIDATE__LIVE_NOISE_TRACE_REQUIRED`
+**Status:** `PHASE5_5_NOISE_ONLY_TRANSIENT_LOCK_MODEL_CANDIDATE__PHASE5_5_NOISE_JITTER_SHUFFLE_NULL_MEASURED__NOISE_TEMPORAL_STRUCTURE_NOT_SEPARATED_FROM_SHUFFLE__LIVE_NOISE_TRACE_REQUIRED`
 
 - [x] Disable deliberate phase programming in the target-run model.
 - [x] Run noise-only transient lock probe on the Phenom target.
 - [x] Target candidate transient lock windows: `12/512`.
 - [x] Target best order parameter: `0.996119` at threshold `0.96`.
+- [x] Proxy hardening: noise-only jitter windows measured against shuffled-window null.
+- [x] Proxy hardening: real median `0.389339`, shuffled median `0.389339`, delta `0.000000`.
 - [ ] Live noise trace still required: physical oscillator/jitter capture with shuffled-window and coupling-off controls.
 
 Artifact: `50_5_1_limit_violations/PHASE5_1_5_FOUNDATION_REPORT.md`
 Target summary: `50_5_1_limit_violations/results/phase5_1_5_target_summary.json`
+Proxy hardening: `50_5_1_limit_violations/PHASE5_1_5_PROXY_HARDENING.md`
 Live runbook: `50_5_1_limit_violations/PHASE5_1_5_LIVE_RUNBOOK.md`
 Target observability: `50_5_1_limit_violations/PHASE5_1_5_TARGET_OBSERVABILITY.md`
 
-Claim boundary: noise-only transient-lock candidate exists in the Phenom-run model. Physical noise computation is not accepted until a live trace clears nulls.
+Claim boundary: noise-only transient-lock candidate exists in the Phenom-run model, but the software-visible jitter proxy does not separate from the shuffled-window null. Physical noise computation is not accepted until a live trace clears nulls.
 
 ### 5.6 Polytope / Positive-Geometry Hypothesis Test — HARDENED
 
