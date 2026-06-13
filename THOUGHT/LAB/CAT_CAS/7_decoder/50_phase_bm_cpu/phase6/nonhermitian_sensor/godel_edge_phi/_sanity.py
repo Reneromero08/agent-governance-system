@@ -1,6 +1,8 @@
 import sys, os, numpy as np
-HERE=os.path.dirname(os.path.abspath('.'))
-FOLD=r"D:/CCC 2.0/AI/agent-governance-system/THOUGHT/LAB/CAT_CAS/50_phase_bm_cpu/phase6/fold_audit"
+HERE=os.path.dirname(os.path.abspath(__file__))
+# fold_audit lives two levels up from this file (phase6/fold_audit); anchor on
+# __file__ so it survives both cwd changes and the dir rename (M-7 safe).
+FOLD=os.path.abspath(os.path.join(HERE, "..", "..", "fold_audit"))
 sys.path.insert(0,FOLD); sys.path.insert(0,os.getcwd())
 import construction as C
 import no_smuggle_gate as G

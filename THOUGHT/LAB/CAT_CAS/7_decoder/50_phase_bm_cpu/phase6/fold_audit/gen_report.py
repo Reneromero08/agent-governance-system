@@ -90,9 +90,9 @@ into a MEASURED fact.
 The construction is the lab's **Exp 50.14 public fixed-point map**, lifted **verbatim**
 (no new modeling choices) from:
 
-- `THOUGHT/LAB/CAT_CAS/49_the_decoder/49_14_reversible_substrate/49_14_substrate.py`
+- `THOUGHT/LAB/CAT_CAS/7_decoder/49_the_decoder/49_14_reversible_substrate/49_14_substrate.py`
   - functions `coset_samples` (lines 51-55) and `make_verify` (lines 58-69)
-- `THOUGHT/LAB/CAT_CAS/50_phase_bm_cpu/phase6/SPEC_PHASE6_FIXED_POINT_SUBSTRATE.md`
+- `THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/phase6/SPEC_PHASE6_FIXED_POINT_SUBSTRATE.md`
   - Sec 2 gives the exact `score`/`accept`/`f`; Sec 1B.1 + 1C state the fold claim this
     audit tests (Sec 1B.1 explicitly names "the Stage 1 fold audit (phase6/fold_audit/)").
 

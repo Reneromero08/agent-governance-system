@@ -1,6 +1,6 @@
 """
 construction.py - the REAL Exp 50.14 public fixed-point map, lifted verbatim from
-THOUGHT/LAB/CAT_CAS/49_the_decoder/49_14_reversible_substrate/49_14_substrate.py
+THOUGHT/LAB/CAT_CAS/7_decoder/49_the_decoder/49_14_reversible_substrate/49_14_substrate.py
 (functions coset_samples / make_verify) and the SPEC_PHASE6 Section 2 definition.
 
 This module is the single source of truth for the construction used by the Stage 1
