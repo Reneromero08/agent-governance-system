@@ -412,7 +412,7 @@ static double corr_abs(const double *a, const double *b, int n) {
 }
 
 static void write_outputs(void) {
-    system("mkdir -p phase5_7/results");
+    system("mkdir -p 50_5_7_entropic_boundary/results");
     double low_sum = 0, load_sum[LOAD_MODES] = {0,0,0};
     double cache_sum[LOAD_MODES] = {0,0,0}, contention_sum[LOAD_MODES] = {0,0,0}, jitter_sum[LOAD_MODES] = {0,0,0};
     int low_n = 0, load_n[LOAD_MODES] = {0,0,0};
@@ -513,7 +513,7 @@ static void write_outputs(void) {
                           ((sfhw_exclusion >= 0.95 && tpr >= 0.80 && bal >= 0.80 && deformation_pass && null_exclusion >= 0.95 && carrier_not_jitter) ? "PHASE5_7_ENTROPIC_BOUNDARY_PARTIAL" :
                            "PHASE5_7_NOISE_ONLY");
 
-    FILE *raw = fopen("phase5_7/results/load_boundary_raw.csv", "w");
+    FILE *raw = fopen("50_5_7_entropic_boundary/results/load_boundary_raw.csv", "w");
     fprintf(raw, "row_id,class_label,family,seed,load_mode,workers,cache_pressure_proxy,jitter_proxy,contention_score,carrier_entropy,boundary_proxy,strength_t1,strength_t2,strength_t3,answer_boundary_mismatch,restored,answer_correct,predicted_inside\n");
     for (int i = 0; i < row_count; i++) {
         fprintf(raw, "%s,%s,%d,%d,%s,%d,%.9f,%.9f,%.9f,%.9f,%.9f,%.6f,%.6f,%.6f,%.0f,%d,%d,%d\n",
@@ -525,7 +525,7 @@ static void write_outputs(void) {
     }
     fclose(raw);
 
-    FILE *sum = fopen("phase5_7/results/entropic_boundary_summary.csv", "w");
+    FILE *sum = fopen("50_5_7_entropic_boundary/results/entropic_boundary_summary.csv", "w");
     fprintf(sum, "metric,value,threshold,status\n");
     fprintf(sum, "same_final_hash_wrong_answer_exclusion,%.6f,>=0.95,%s\n", sfhw_exclusion, sfhw_exclusion >= 0.95 ? "PASS" : "FAIL");
     fprintf(sum, "holdout_accuracy,%.6f,>=0.80,%s\n", acc, acc >= 0.80 ? "PASS" : "FAIL");
@@ -547,7 +547,7 @@ static void write_outputs(void) {
     fprintf(sum, "verdict,%s,decision,%s\n", verdict, gates_pass ? "PASS" : "PARTIAL_OR_FAIL");
     fclose(sum);
 
-    FILE *nul = fopen("phase5_7/results/null_boundary_exclusion.csv", "w");
+    FILE *nul = fopen("50_5_7_entropic_boundary/results/null_boundary_exclusion.csv", "w");
     fprintf(nul, "class_label,total,outside,exclusion_rate\n");
     const char *classes[] = {"same_final_hash_wrong_answer","destructive_write","random_reversible_write","shuffled_schedule","wrong_residual"};
     for (int c = 0; c < 5; c++) {
@@ -560,7 +560,7 @@ static void write_outputs(void) {
     }
     fclose(nul);
 
-    FILE *res = fopen("phase5_7/results/residual_deformation_under_load.csv", "w");
+    FILE *res = fopen("50_5_7_entropic_boundary/results/residual_deformation_under_load.csv", "w");
     fprintf(res, "load_mode,cases,wrong_residual_rejected,rejection_rate,catalytic_preserved,preserve_rate\n");
     for (int load = 0; load < LOAD_MODES; load++) {
         int wrong_cases = 0, wrong_rej = 0, cat_cases = 0, cat_keep = 0;
@@ -575,15 +575,15 @@ static void write_outputs(void) {
     }
     fclose(res);
 
-    FILE *rep = fopen("phase5_7/PHASE5_7_ENTROPIC_BOUNDARY_GEOMETRY.md", "w");
-    fprintf(rep, "# Phase 5.7: Entropic Boundary Geometry Probe\n\n**Date:** 2026-06-08\n**Status:** `%s`\n**Harness:** `session_scripts/phase5_7/entropic_boundary_probe.c`\n\n## Result\n\n- Rows: `%d`\n- Same-final-hash wrong-answer exclusion: `%.6f`\n- Holdout accuracy: `%.6f`\n- Balanced accuracy: `%.6f`\n- Catalytic true-positive rate: `%.6f`\n- Medium boundary delta: `%.6f`\n- High boundary delta: `%.6f`\n- Null exclusion: `%.6f`\n- Measured cache delta: `%.6f`\n- Measured contention delta: `%.6f`\n- Measured jitter delta: `%.6f`\n- Raw carrier/boundary correlation: `%.6f`\n- Raw jitter/boundary correlation: `%.6f`\n- Within-load carrier/boundary correlation: `%.6f`\n- Within-load jitter/boundary correlation: `%.6f`\n- Class-label boundary leakage: `%s`\n- Independent load deformation source: `%s`\n\n## Verdict\n\n`%s`\n\n## Integrity Finding\n\nThe hardened harness no longer scales the boundary proxy by class label. Same-final-hash wrong-answer controls, wrong residual controls, and destructive/reversible nulls remain excluded by carrier/restoration/answer-boundary constraints. The load deformation term is now derived from measured runtime observables collected during bounded memory/timing/worker contention probes, not from a direct programmed load-scale constant.\n\n## Interpretation\n\nPhase 5.7 supports computational boundary deformation under measured bounded runtime load: the carrier boundary proxy deforms while answer-predictive exclusion survives, and within-load residual correlation tracks carrier structure more strongly than jitter. It does not claim physical holography, AdS/CFT, quantum coherence, physical Kuramoto, Landauer violation, zero heat, or thermodynamic entropy reduction.\n", verdict, row_count, sfhw_exclusion, acc, bal, tpr, med_delta, high_delta, null_exclusion, cache_delta, contention_delta, jitter_delta, raw_carrier_corr, raw_jitter_corr, carrier_corr, jitter_corr, boundary_uses_class_label ? "FAIL" : "PASS", independent_deformation_pass ? "PASS_MEASURED_RUNTIME_OBSERVABLES" : "FAIL_NO_MEASURED_LOAD_SEPARATION", verdict);
+    FILE *rep = fopen("50_5_7_entropic_boundary/PHASE5_7_ENTROPIC_BOUNDARY_GEOMETRY.md", "w");
+    fprintf(rep, "# Phase 5.7: Entropic Boundary Geometry Probe\n\n**Date:** 2026-06-08\n**Status:** `%s`\n**Harness:** `50_5_7_entropic_boundary/src/entropic_boundary_probe.c`\n\n## Result\n\n- Rows: `%d`\n- Same-final-hash wrong-answer exclusion: `%.6f`\n- Holdout accuracy: `%.6f`\n- Balanced accuracy: `%.6f`\n- Catalytic true-positive rate: `%.6f`\n- Medium boundary delta: `%.6f`\n- High boundary delta: `%.6f`\n- Null exclusion: `%.6f`\n- Measured cache delta: `%.6f`\n- Measured contention delta: `%.6f`\n- Measured jitter delta: `%.6f`\n- Raw carrier/boundary correlation: `%.6f`\n- Raw jitter/boundary correlation: `%.6f`\n- Within-load carrier/boundary correlation: `%.6f`\n- Within-load jitter/boundary correlation: `%.6f`\n- Class-label boundary leakage: `%s`\n- Independent load deformation source: `%s`\n\n## Verdict\n\n`%s`\n\n## Integrity Finding\n\nThe hardened harness no longer scales the boundary proxy by class label. Same-final-hash wrong-answer controls, wrong residual controls, and destructive/reversible nulls remain excluded by carrier/restoration/answer-boundary constraints. The load deformation term is now derived from measured runtime observables collected during bounded memory/timing/worker contention probes, not from a direct programmed load-scale constant.\n\n## Interpretation\n\nPhase 5.7 supports computational boundary deformation under measured bounded runtime load: the carrier boundary proxy deforms while answer-predictive exclusion survives, and within-load residual correlation tracks carrier structure more strongly than jitter. It does not claim physical holography, AdS/CFT, quantum coherence, physical Kuramoto, Landauer violation, zero heat, or thermodynamic entropy reduction.\n", verdict, row_count, sfhw_exclusion, acc, bal, tpr, med_delta, high_delta, null_exclusion, cache_delta, contention_delta, jitter_delta, raw_carrier_corr, raw_jitter_corr, carrier_corr, jitter_corr, boundary_uses_class_label ? "FAIL" : "PASS", independent_deformation_pass ? "PASS_MEASURED_RUNTIME_OBSERVABLES" : "FAIL_NO_MEASURED_LOAD_SEPARATION", verdict);
     fclose(rep);
 
-    FILE *audit = fopen("phase5_7/PHASE5_7_INTEGRITY_AUDIT.md", "w");
-    fprintf(audit, "# Phase 5.7 Integrity Audit\n\n**Status:** `%s`\n\n## Hardened Findings\n\n- Removed class-label boundary scaling from `session_scripts/phase5_7/entropic_boundary_probe.c`.\n- Removed the direct `load_scale()` boundary deformation constant.\n- Runtime load deformation is derived from measured bounded memory/timing/worker observables.\n- Runtime observables are averaged at the load-condition level before row generation, so per-row timing noise cannot masquerade as carrier geometry.\n- Boundary thresholds are calibrated from training catalytic rows by load mode, then evaluated on holdout rows and null controls.\n- Same-final-hash wrong-answer, wrong residual, destructive write, random reversible write, and shuffled schedule controls remain excluded.\n- Raw jitter/boundary correlation is confounded by load level and is diagnostic only.\n- Within-load carrier/boundary correlation beats within-load jitter/boundary correlation.\n\n## Measured Runtime Gates\n\n- Measured cache delta: `%.6f`\n- Measured contention delta: `%.6f`\n- Measured jitter delta: `%.6f`\n- Independent load deformation source: `%s`\n\n## Integrity Verdict\n\n`%s`\n\nThe result justifies `PHASE5_7_ENTROPIC_BOUNDARY_CONFIRMED` only if the independent measured-runtime source gate passes with null exclusion and carrier correlation gates intact.\n", verdict, cache_delta, contention_delta, jitter_delta, independent_deformation_pass ? "PASS_MEASURED_RUNTIME_OBSERVABLES" : "FAIL_NO_MEASURED_LOAD_SEPARATION", verdict);
+    FILE *audit = fopen("50_5_7_entropic_boundary/PHASE5_7_INTEGRITY_AUDIT.md", "w");
+    fprintf(audit, "# Phase 5.7 Integrity Audit\n\n**Status:** `%s`\n\n## Hardened Findings\n\n- Removed class-label boundary scaling from `50_5_7_entropic_boundary/src/entropic_boundary_probe.c`.\n- Removed the direct `load_scale()` boundary deformation constant.\n- Runtime load deformation is derived from measured bounded memory/timing/worker observables.\n- Runtime observables are averaged at the load-condition level before row generation, so per-row timing noise cannot masquerade as carrier geometry.\n- Boundary thresholds are calibrated from training catalytic rows by load mode, then evaluated on holdout rows and null controls.\n- Same-final-hash wrong-answer, wrong residual, destructive write, random reversible write, and shuffled schedule controls remain excluded.\n- Raw jitter/boundary correlation is confounded by load level and is diagnostic only.\n- Within-load carrier/boundary correlation beats within-load jitter/boundary correlation.\n\n## Measured Runtime Gates\n\n- Measured cache delta: `%.6f`\n- Measured contention delta: `%.6f`\n- Measured jitter delta: `%.6f`\n- Independent load deformation source: `%s`\n\n## Integrity Verdict\n\n`%s`\n\nThe result justifies `PHASE5_7_ENTROPIC_BOUNDARY_CONFIRMED` only if the independent measured-runtime source gate passes with null exclusion and carrier correlation gates intact.\n", verdict, cache_delta, contention_delta, jitter_delta, independent_deformation_pass ? "PASS_MEASURED_RUNTIME_OBSERVABLES" : "FAIL_NO_MEASURED_LOAD_SEPARATION", verdict);
     fclose(audit);
 
-    FILE *out = fopen("phase5_7/results/phase5_7_stdout.txt", "w");
+    FILE *out = fopen("50_5_7_entropic_boundary/results/phase5_7_stdout.txt", "w");
     fprintf(out, "=== PHASE 5.7: ENTROPIC BOUNDARY GEOMETRY PROBE ===\n\nDataset:\n  rows_total: %d\n  load_modes: LOW,MEDIUM,HIGH\n\nGate metrics:\n  same_final_hash_wrong_answer_exclusion: %.6f\n  holdout_accuracy: %.6f\n  balanced_accuracy: %.6f\n  catalytic_true_positive_rate: %.6f\n  medium_boundary_delta: %.6f\n  high_boundary_delta: %.6f\n  null_exclusion: %.6f\n  measured_cache_delta: %.6f\n  measured_contention_delta: %.6f\n  measured_jitter_delta: %.6f\n  raw_carrier_boundary_correlation: %.6f\n  raw_jitter_boundary_correlation: %.6f\n  raw_jitter_confounded: %d\n  within_load_carrier_boundary_correlation: %.6f\n  within_load_jitter_boundary_correlation: %.6f\n  class_label_boundary_leakage: %d\n  independent_load_deformation_source: %d\n\n=== VERDICT: %s ===\n", row_count, sfhw_exclusion, acc, bal, tpr, med_delta, high_delta, null_exclusion, cache_delta, contention_delta, jitter_delta, raw_carrier_corr, raw_jitter_corr, raw_jitter_confounded, carrier_corr, jitter_corr, boundary_uses_class_label, independent_deformation_pass, verdict);
     fclose(out);
 

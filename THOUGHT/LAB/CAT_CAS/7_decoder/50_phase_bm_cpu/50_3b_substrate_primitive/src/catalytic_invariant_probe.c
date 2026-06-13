@@ -349,21 +349,21 @@ static void emit_summary(FILE *csv, const summary_t *s) {
 }
 
 int main(void) {
-    system("mkdir -p phase3b/results");
-    FILE *csv = fopen("phase3b/results/invariant_probe_summary.csv", "w");
+    system("mkdir -p 50_3b_substrate_primitive/results");
+    FILE *csv = fopen("50_3b_substrate_primitive/results/invariant_probe_summary.csv", "w");
     if (!csv) {
-        perror("phase3b/results/invariant_probe_summary.csv");
+        perror("50_3b_substrate_primitive/results/invariant_probe_summary.csv");
         return 2;
     }
 
     fprintf(csv, "kind,case,rows,restored,answer_correct,strength_t0,strength_t1,strength_t2,strength_t3,answer_corr,null_effect\n");
 
-    summary_t cat = {"catalytic", 0};
-    summary_t destructive = {"destructive_write", 0};
-    summary_t random_rev = {"random_reversible_write", 0};
-    summary_t random_ans = {"random_answer", 0};
-    summary_t shuffled = {"shuffled_schedule", 0};
-    summary_t same_hash_wrong = {"same_final_hash_wrong_answer", 0};
+    summary_t cat = {0}; cat.name = "catalytic";
+    summary_t destructive = {0}; destructive.name = "destructive_write";
+    summary_t random_rev = {0}; random_rev.name = "random_reversible_write";
+    summary_t random_ans = {0}; random_ans.name = "random_answer";
+    summary_t shuffled = {0}; shuffled.name = "shuffled_schedule";
+    summary_t same_hash_wrong = {0}; same_hash_wrong.name = "same_final_hash_wrong_answer";
 
     int confirmed_rows = 0;
     int total_rows = 0;
@@ -377,12 +377,10 @@ int main(void) {
             uint64_t undo[4];
             init_tape(&t0, family, seed);
             uint64_t h0 = tape_hash(&t0);
-            features_t f0 = features(&t0);
             int expected = expected_answer(&t0);
 
             t1 = t0;
             catalytic_forward(&t1, undo);
-            features_t f1 = features(&t1);
 
             t2 = t1;
             int answer = catalytic_extract_answer(&t2);
@@ -391,7 +389,6 @@ int main(void) {
             t3 = t2;
             catalytic_reverse(&t3, undo, answer);
             uint64_t h3 = tape_hash(&t3);
-            features_t f3 = features(&t3);
 
             double st0 = source_strength(&t0, &t0);
             double st1 = carrier_strength(&t0, &t1, 0);
@@ -414,7 +411,6 @@ int main(void) {
             random_reversible_write(&nr, masks, (uint64_t)family * 1000ULL + (uint64_t)seed);
             features_t fr1 = features(&nr);
             reverse_random_reversible_write(&nr, masks);
-            features_t fr3 = features(&nr);
             double rr_st1 = carrier_strength(&t0, &nr, 0);
             double rr_st3 = source_strength(&t0, &nr);
             double rr_restored = tape_hash(&nr) == h0 ? 1.0 : 0.0;
@@ -479,7 +475,7 @@ int main(void) {
     }
 
     printf("Rows accepted: %d/%d\n", confirmed_rows, total_rows);
-    printf("CSV: phase3b/results/invariant_probe_summary.csv\n");
+    printf("CSV: 50_3b_substrate_primitive/results/invariant_probe_summary.csv\n");
     printf("Same-final-hash wrong-answer control answer-corr: %.3f\n",
            same_hash_wrong.avg_corr / (double)same_hash_wrong.rows);
     printf("=== VERDICT: %s ===\n", verdict);

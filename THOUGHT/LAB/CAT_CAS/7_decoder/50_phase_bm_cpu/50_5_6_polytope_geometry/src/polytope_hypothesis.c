@@ -497,16 +497,16 @@ static void refresh_residual_derived(double feat[MAX_FEATS]) {
 }
 
 static void write_outputs(void) {
-    system("mkdir -p phase5_6/results");
+    system("mkdir -p 50_5_6_polytope_geometry/results");
     double f[MAX_ROWS][MAX_FEATS]; minmax_norm(f);
     double center[MAX_FEATS], radius; centroid_radius(f, 0, MAX_FEATS, center, &radius);
 
-    FILE *schema = fopen("phase5_6/results/polytope_feature_schema.csv", "w");
+    FILE *schema = fopen("50_5_6_polytope_geometry/results/polytope_feature_schema.csv", "w");
     fprintf(schema, "col_index,col_name,available,feature_role,reason\n");
     for (int i = 0; i < MAX_FEATS; i++) fprintf(schema, "%d,%s,1,predictive_carrier,generated from real CAT_CAS T0/T1/T2/T3 carrier transition\n", i, feature_names[i]);
     fclose(schema);
 
-    FILE *ds = fopen("phase5_6/results/polytope_feature_dataset.csv", "w");
+    FILE *ds = fopen("50_5_6_polytope_geometry/results/polytope_feature_dataset.csv", "w");
     fprintf(ds, "row_id,class_label,family,seed,source_phase,load_mode,null_type,target_label,is_training,is_holdout,strength_t0,strength_t1,strength_t2,strength_t3,answer_corr,answer_correct,restored,final_hash_match,pass_label");
     for (int c = 0; c < MAX_FEATS; c++) fprintf(ds, ",%s", feature_names[c]);
     fprintf(ds, "\n");
@@ -522,7 +522,7 @@ static void write_outputs(void) {
     fclose(ds);
 
     const char *nulls[] = {"destructive_write","random_reversible_write","random_answer","shuffled_schedule","same_final_hash_wrong_answer","wrong_residual","random_residual","destructive_residual","poisson_operator_null","shuffled_operator_null"};
-    FILE *nf = fopen("phase5_6/results/null_exclusion_stats.csv", "w");
+    FILE *nf = fopen("50_5_6_polytope_geometry/results/null_exclusion_stats.csv", "w");
     fprintf(nf, "null_class,training_rows,outside_count,exclusion_rate,mean_distance_to_catalytic\n");
     for (int g = 0; g < 10; g++) {
         int total = 0, out = 0; double sum = 0;
@@ -535,7 +535,7 @@ static void write_outputs(void) {
     fclose(nf);
 
     int total = 0, correct = 0, pos = 0, neg = 0, tp = 0, tn = 0, fp = 0, fn = 0;
-    FILE *hold = fopen("phase5_6/results/holdout_predictions.csv", "w");
+    FILE *hold = fopen("50_5_6_polytope_geometry/results/holdout_predictions.csv", "w");
     fprintf(hold, "row_id,class_label,actual_catalytic,predicted_catalytic,distance_to_catalytic,radius\n");
     for (int i = 0; i < row_count; i++) if (rows[i].is_holdout) {
         double d = dist_center(f, i, 0, MAX_FEATS, center);
@@ -551,13 +551,13 @@ static void write_outputs(void) {
     double acc = total ? (double)correct / total : 0.0;
     double bal = (tpr + tnr) * 0.5;
 
-    FILE *pred = fopen("phase5_6/results/predictive_geometry_stats.csv", "w");
+    FILE *pred = fopen("50_5_6_polytope_geometry/results/predictive_geometry_stats.csv", "w");
     fprintf(pred, "accuracy,balanced_accuracy,true_positive_rate,true_negative_rate,false_positive_rate,false_negative_rate,boundary_ambiguous_count,status\n");
     fprintf(pred, "%.6f,%.6f,%.6f,%.6f,%.6f,%.6f,0,%s\n", acc, bal, tpr, tnr, neg ? (double)fp / neg : 0.0, pos ? (double)fn / pos : 0.0,
             (acc >= 0.80 && bal >= 0.80 && tpr >= 0.80 && (neg ? (double)fp / neg : 0.0) <= 0.05) ? "PHASE5_6_PREDICTIVE_GEOMETRY_PASS" : "PHASE5_6_PREDICTIVE_GEOMETRY_FAILED");
     fclose(pred);
 
-    FILE *hull = fopen("phase5_6/results/polytope_hull_stats.csv", "w");
+    FILE *hull = fopen("50_5_6_polytope_geometry/results/polytope_hull_stats.csv", "w");
     fprintf(hull, "feature_set,projection_type,dimension,hull_area,hull_perimeter,pseudo_volume,face_count_proxy,catalytic_inside,null_inside,null_exclusion_rate,mean_null_distance,mean_catalytic_distance,status\n");
     int null_inside = 0, null_total = 0; double nd = 0, cd = 0; int cn = 0;
     for (int i = 0; i < row_count; i++) if (rows[i].is_training) {
@@ -568,7 +568,7 @@ static void write_outputs(void) {
     fprintf(hull, "predictive_full,CENTROID_BALL,%d,0.000000,0.000000,%.6f,1,%d,%d,%.6f,%.6f,%.6f,DISTANCE_BODY\n", MAX_FEATS, radius, cn, null_inside, null_total ? 1.0 - (double)null_inside / null_total : 0.0, null_total ? nd / null_total : 0.0, cn ? cd / cn : 0.0);
     fclose(hull);
 
-    FILE *proj = fopen("phase5_6/results/projection_hierarchy_stats.csv", "w");
+    FILE *proj = fopen("50_5_6_polytope_geometry/results/projection_hierarchy_stats.csv", "w");
     fprintf(proj, "feature_set,projection,dimension,separation_score,null_leakage,projection_loss,status\n");
     fprintf(proj, "predictive_full,CENTROID_BALL,%d,%.6f,%.6f,0.000000,%s\n", MAX_FEATS, null_total ? 1.0 - (double)null_inside / null_total : 0.0, null_total ? (double)null_inside / null_total : 0.0, null_inside == 0 ? "SEPARATES" : "LEAKS");
     struct { const char *name; int start; int count; } psets[] = {
@@ -618,12 +618,12 @@ static void write_outputs(void) {
     int projection_pass = (null_inside == 0 && separating_subspaces >= 5);
     fclose(proj);
 
-    FILE *load = fopen("phase5_6/results/entropy_load_geometry_stats.csv", "w");
+    FILE *load = fopen("50_5_6_polytope_geometry/results/entropy_load_geometry_stats.csv", "w");
     fprintf(load, "load_mode,background_worker_count,cache_pressure_proxy,timing_jitter_proxy,hull_area,pseudo_volume,null_exclusion_rate,predictive_accuracy,status\n");
     fprintf(load, "LOW,0,0,0,0,%.6f,%.6f,%.6f,PHASE5_6_LOAD_BASELINE_ONLY\n", radius, null_total ? 1.0 - (double)null_inside / null_total : 0.0, acc);
     fclose(load);
 
-    FILE *res = fopen("phase5_6/results/residual_boundary_deformation_stats.csv", "w");
+    FILE *res = fopen("50_5_6_polytope_geometry/results/residual_boundary_deformation_stats.csv", "w");
     fprintf(res, "perturbation_type,cases,residual_magnitude_mean,rejected_count,rejection_rate,decode_correct_rate,restored_rate,status\n");
     const char *modes[] = {"none","flip_tag0","flip_tag1","flip_tag2","flip_tag3","two_adjacent","two_separated","swap_01","swap_12","swap_23","rotate_left","rotate_right","zero_one","zero_all","wrong_answer_slot","random_tags","destructive_tags"};
     int mode_count = (int)(sizeof(modes) / sizeof(modes[0]));
@@ -685,7 +685,7 @@ static void write_outputs(void) {
     const char *verdict = (sfhw >= 0.95 && acc >= 0.80 && bal >= 0.80 && tpr >= 0.80 && projection_pass && residual_pass) ? "PHASE5_6_POLYTOPE_GEOMETRY_CONFIRMED" :
                           ((sfhw >= 0.95 && acc >= 0.80 && bal >= 0.80 && tpr >= 0.80) ? "PHASE5_6_POLYTOPE_GEOMETRY_PARTIAL" : "PHASE5_6_INCONCLUSIVE_NEEDS_MORE_FEATURES");
 
-    FILE *audit = fopen("phase5_6/results/verdict_gate_audit.csv", "w");
+    FILE *audit = fopen("50_5_6_polytope_geometry/results/verdict_gate_audit.csv", "w");
     fprintf(audit, "gate_name,status,value,threshold\n");
     fprintf(audit, "full_carrier_artifact_available,PASS,1,required\n");
     fprintf(audit, "same_final_hash_wrong_answer_excluded,%s,%.6f,>=0.95\n", sfhw >= 0.95 ? "PASS" : "FAIL", sfhw);
@@ -697,19 +697,19 @@ static void write_outputs(void) {
     fprintf(audit, "load_geometry_scope,DEFERRED_TO_PHASE5_7,baseline_only,not_required_for_static_5_6_confirmation\n");
     fclose(audit);
 
-    FILE *spec = fopen("phase5_6/FEATURE_SPACE_SPEC.md", "w");
+    FILE *spec = fopen("50_5_6_polytope_geometry/FEATURE_SPACE_SPEC.md", "w");
     fprintf(spec, "# Phase 5.6 Feature Space Spec\n\nStatus: `PHASE5_6_FULL_CARRIER_FEATURES_BUILT`\n\nThe canonical harness generates real CAT_CAS T0/T1/T2/T3 carrier rows from the Phase 3B transition model instead of relying on scalar summary CSVs. Predictive features include snapshot signatures, carrier slots, T2 answer boundary slots, residual tags, .holo slots, and operator-statistic proxies. Outcome labels (`answer_correct`, `pass_label`, `class_label`) remain diagnostic and are excluded from the predictive distance body.\n");
     fclose(spec);
 
-    FILE *rep = fopen("phase5_6/PHASE5_6_POLYTOPE_HYPOTHESIS.md", "w");
-    fprintf(rep, "# Phase 5.6: Polytope / Positive-Geometry Hypothesis\n\n**Date:** 2026-06-08\n**Harness:** `session_scripts/phase5_6/polytope_hypothesis.c`\n**Verdict:** `%s`\n\n## Result\n\n- Full carrier rows generated: `%d`\n- Predictive features: `%d`\n- Same-final-hash wrong-answer exclusion: `%.6f`\n- Held-out accuracy: `%.6f`\n- Balanced accuracy: `%.6f`\n- Catalytic true-positive rate: `%.6f`\n- Static projection hierarchy: `%s` with `%d` separating/informative subspaces\n- Fine residual-boundary deformation: `%s`\n- Load/entropy geometry: `DEFERRED_TO_PHASE5_7`, not required for static Phase 5.6 confirmation\n\n## Interpretation\n\nThe hardened harness now uses real T0/T1/T2/T3 carrier state. Same-final-hash wrong-answer controls are represented by identical restored final hash but different T2 answer boundary state. Projection hierarchy and fine residual-boundary perturbation gates now pass inside the static carrier geometry scope. This fixes the earlier proxy-data weakness. The result is still not a physical holography claim; it is evidence about a computational carrier geometry only.\n\n%s\n", verdict, row_count, MAX_FEATS, sfhw, acc, bal, tpr, projection_pass ? "PASS" : "FAIL", separating_subspaces, residual_pass ? "PASS" : "FAIL", verdict);
+    FILE *rep = fopen("50_5_6_polytope_geometry/PHASE5_6_POLYTOPE_HYPOTHESIS.md", "w");
+    fprintf(rep, "# Phase 5.6: Polytope / Positive-Geometry Hypothesis\n\n**Date:** 2026-06-08\n**Harness:** `50_5_6_polytope_geometry/src/polytope_hypothesis.c`\n**Verdict:** `%s`\n\n## Result\n\n- Full carrier rows generated: `%d`\n- Predictive features: `%d`\n- Same-final-hash wrong-answer exclusion: `%.6f`\n- Held-out accuracy: `%.6f`\n- Balanced accuracy: `%.6f`\n- Catalytic true-positive rate: `%.6f`\n- Static projection hierarchy: `%s` with `%d` separating/informative subspaces\n- Fine residual-boundary deformation: `%s`\n- Load/entropy geometry: `DEFERRED_TO_PHASE5_7`, not required for static Phase 5.6 confirmation\n\n## Interpretation\n\nThe hardened harness now uses real T0/T1/T2/T3 carrier state. Same-final-hash wrong-answer controls are represented by identical restored final hash but different T2 answer boundary state. Projection hierarchy and fine residual-boundary perturbation gates now pass inside the static carrier geometry scope. This fixes the earlier proxy-data weakness. The result is still not a physical holography claim; it is evidence about a computational carrier geometry only.\n\n%s\n", verdict, row_count, MAX_FEATS, sfhw, acc, bal, tpr, projection_pass ? "PASS" : "FAIL", separating_subspaces, residual_pass ? "PASS" : "FAIL", verdict);
     fclose(rep);
 
-    FILE *ia = fopen("phase5_6/PHASE5_6_INTEGRITY_AUDIT.md", "w");
+    FILE *ia = fopen("50_5_6_polytope_geometry/PHASE5_6_INTEGRITY_AUDIT.md", "w");
     fprintf(ia, "# Phase 5.6 Integrity Audit\n\n**Status:** `%s`\n\nThe proxy extractor was replaced with a real full-carrier generator. `full_carrier_artifact_available` is now `PASS`. Static projection hierarchy and fine residual-boundary deformation gates now pass. Operator-null features are derived from explicit tape markers in `t2->words[27]`, not from `class_label`. Load/entropy geometry is intentionally deferred to Phase 5.7 and is not required for static Phase 5.6 confirmation.\n", verdict);
     fclose(ia);
 
-    FILE *out = fopen("phase5_6/results/phase5_6_stdout.txt", "w");
+    FILE *out = fopen("50_5_6_polytope_geometry/results/phase5_6_stdout.txt", "w");
     fprintf(out, "=== PHASE 5.6: POLYTOPE / POSITIVE-GEOMETRY HYPOTHESIS ===\n\nDataset:\n  rows_total: %d\n  catalytic_rows: 24\n  null_rows: %d\n  predictive_features: %d\n\nNull exclusion:\n  same_final_hash_wrong_answer_exclusion: %.6f\n\nPredictive geometry:\n  holdout_accuracy: %.6f\n  balanced_accuracy: %.6f\n  true_positive_rate: %.6f\n\n=== VERDICT: %s ===\n", row_count, row_count - 24, MAX_FEATS, sfhw, acc, bal, tpr, verdict);
     fclose(out);
 
