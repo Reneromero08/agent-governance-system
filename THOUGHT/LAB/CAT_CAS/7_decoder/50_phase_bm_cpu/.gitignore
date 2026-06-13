@@ -14,3 +14,6 @@
 !50_2_firmware/cpu_hack/noop_replace/NOOP_DIFF_SUMMARY.txt
 !50_2_firmware/cpu_hack/noop_replace/bios_noop_rebuilt.bin.report.txt
 !50_3b_substrate_primitive/results/invariant_probe_summary.csv
+
+# Native Rust probe build outputs.
+50_6_fixed_point_substrate/chiral_phase_kickback/rust_baremetal/results/*.pdb
