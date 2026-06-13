@@ -13,6 +13,10 @@
 #   - model weights (e.g. 16_catalytic_27b_inference/gemini_update/qwen_0.5b/)
 #   - MERA .holo files (33_mera_compression)
 #   - single-cell CSVs (46_phase_bio/.../cell_data/)
+# The qwen_0.5b download is an external artifact: ignore the WHOLE dir (weights
+# plus its config.json/tokenizer companions), not just the .safetensors, so it
+# stays silent as it did before the track reorg. **/ keeps it depth-independent.
+**/qwen_0.5b/
 **/*.safetensors
 **/*.holo
 **/cell_data/
