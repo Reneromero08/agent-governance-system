@@ -1,0 +1,32 @@
+{
+  "all_rows_restore": true,
+  "gates": {
+    "all_rows_restore": true,
+    "phase_recovered_gt_0_30": true,
+    "pseudo_declared_match_le_0_35": true,
+    "pseudo_reject_floor_ge_0_95": true,
+    "real_accuracy_ge_0_60": true,
+    "real_mode_floor_ge_0_45": true,
+    "real_vs_pseudo_floor_ge_0_95": true,
+    "wrong_actual_match_ge_0_60": true,
+    "wrong_declared_match_le_0_20": true
+  },
+  "input": "/root/slot2_pdn/matrix/matrix_v4s5_seed3.csv",
+  "minham": 7,
+  "nbin": 12,
+  "phase_corr_null": 0.021099270003005356,
+  "phase_corr_true": 0.9988781962025938,
+  "phase_delta": 0.9777789261995884,
+  "pseudo_declared_match": 0.22,
+  "pseudo_reject_floor": 1.0,
+  "real_accuracy": 0.9866666666666667,
+  "real_mode_floor": 0.95,
+  "real_vs_pseudo_floor": 0.9577464788732394,
+  "rho_threshold": 0.7192205719813334,
+  "rows": 904,
+  "seed": 3,
+  "test_rows": 450,
+  "verdict": "PHASE4B_CROSS_CORE_PDN_LOCKIN_WITNESS",
+  "wrong_actual_match": 0.9866666666666667,
+  "wrong_declared_match": 0.0
+}

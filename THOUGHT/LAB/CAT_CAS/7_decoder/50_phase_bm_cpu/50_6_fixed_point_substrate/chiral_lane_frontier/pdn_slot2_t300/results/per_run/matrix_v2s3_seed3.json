@@ -1,0 +1,32 @@
+{
+  "all_rows_restore": true,
+  "gates": {
+    "all_rows_restore": true,
+    "phase_recovered_gt_0_30": true,
+    "pseudo_declared_match_le_0_35": true,
+    "pseudo_reject_floor_ge_0_95": true,
+    "real_accuracy_ge_0_60": true,
+    "real_mode_floor_ge_0_45": true,
+    "real_vs_pseudo_floor_ge_0_95": false,
+    "wrong_actual_match_ge_0_60": true,
+    "wrong_declared_match_le_0_20": true
+  },
+  "input": "/root/slot2_pdn/matrix/matrix_v2s3_seed3.csv",
+  "minham": 7,
+  "nbin": 12,
+  "phase_corr_null": 0.020223113443179893,
+  "phase_corr_true": 0.9998626741376007,
+  "phase_delta": 0.9796395606944208,
+  "pseudo_declared_match": 0.22,
+  "pseudo_reject_floor": 1.0,
+  "real_accuracy": 1.0,
+  "real_mode_floor": 1.0,
+  "real_vs_pseudo_floor": 0.9402985074626866,
+  "rho_threshold": 0.8852068592603056,
+  "rows": 904,
+  "seed": 3,
+  "test_rows": 450,
+  "verdict": "PHASE4B_PDN_PARTIAL",
+  "wrong_actual_match": 1.0,
+  "wrong_declared_match": 0.0
+}

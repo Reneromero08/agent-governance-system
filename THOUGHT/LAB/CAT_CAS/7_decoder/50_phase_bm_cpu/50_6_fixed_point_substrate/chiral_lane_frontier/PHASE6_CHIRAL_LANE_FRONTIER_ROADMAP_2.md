@@ -87,6 +87,41 @@ PDN_CARRIER_LIVE
 
 Hidden chiral controls recover the bound orientation lane at high confidence.
 
+Latest Phenom T300 evidence:
+
+```text
+PDN_CARRIER_LIVE_ON_PHENOM_ROUTE_4_5
+PHASE4B_CROSS_CORE_PDN_LOCKIN_WITNESS
+TOPOLOGY_ROUTE_SENSITIVITY_CONFIRMED
+CONTROLS_NULL
+```
+
+Evidence:
+
+```text
+pdn_slot2_t300/PHASE6_SLOT2_PDN_T300_REPORT.md
+pdn_slot2_t300/results/result_slot2_pdn_t300.json
+pdn_slot2_t300/results/aggregate_t300.json
+```
+
+Summary:
+
+```text
+route 4:5: 6/6 seeds pass, real_acc=0.953-1.000, rvp=0.954-0.985, phase_delta=0.978-1.033
+route 2:3: 2/6 seeds pass, real_acc=1.000-1.000, rvp=0.910-0.962, phase_delta=0.980-1.032
+silent control: witness gates fail, control_ok=True
+scramble control: witness gates fail, control_ok=True
+```
+
+Claim boundary:
+
+```text
+This is L1 detector/transport evidence.
+It is not public lane generation.
+It is not a wall crossing.
+The sender owns the drive phase.
+```
+
 ```text
 PUBLIC_CHIRAL_PREP_NO_CROSSING
 ```
@@ -1656,6 +1691,14 @@ Track B: I/Q receiver base layer
 ```
 
 Do not run major public crossing tests until detector threshold is known.
+
+Current Phenom route seed evidence:
+
+```text
+Track I starts from the T300 PDN result:
+route 4:5 is the current best adjudication carrier.
+route 2:3 is route-sensitive/partial, not a global detector failure.
+```
 
 ## Sprint 1: Primary public lane attempt
 

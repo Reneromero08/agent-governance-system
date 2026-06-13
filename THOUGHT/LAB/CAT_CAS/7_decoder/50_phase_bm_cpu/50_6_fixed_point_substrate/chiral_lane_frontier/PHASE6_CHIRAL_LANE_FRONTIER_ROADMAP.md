@@ -17,6 +17,7 @@ These are now treated as hard starting points:
 
 - `FOLD_MAGNITUDE_RECOVERED`: public phase/QFT-style readout recovers `a = min(d, N-d)` at `1.000` in the current harnesses.
 - `PDN_CARRIER_LIVE`: hidden chiral controls recover the bound orientation lane at `AUC=1.000`.
+- `PDN_CARRIER_LIVE_ON_PHENOM_ROUTE_4_5`: the Phenom T300 Slot2 PDN run produced `PHASE4B_CROSS_CORE_PDN_LOCKIN_WITNESS`; route `4:5` passed `6/6` seeds with null controls, while route `2:3` was route-sensitive/partial. Evidence lives in `pdn_slot2_t300/PHASE6_SLOT2_PDN_T300_REPORT.md` and `pdn_slot2_t300/results/`.
 - `PUBLIC_CHIRAL_PREP_NO_CROSSING`: public chiral phase-kickback stayed below null.
 - `ONE_BIT_SEARCH_NO_CROSSING`: trying both candidate signs did not make the true sign win over the false sign.
 - `MICROSTEP_RAMP_NO_CROSSING`: fractional public microsteps did not create a resolvable chiral lane.
@@ -53,6 +54,7 @@ Accepted frontier labels:
 - [ ] Track A: build dual-lane even cancellation harness.
 - [ ] Track A: measure sender phase jitter and reject trials outside tolerance.
 - [ ] Track A: map local CPU topology before choosing sender/receiver cores.
+- [ ] Track I: seed topology selection from T300 evidence; prefer Phenom route `4:5` for adjudication until superseded.
 - [ ] Track A: run hidden differential control and require `AUC >= 0.95`.
 - [ ] Track A: run public true-vs-false differential test at n=8 and n=10.
 - [ ] Track A: run swapped-core and shuffled-schedule nulls.
