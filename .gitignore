@@ -174,6 +174,7 @@ THOUGHT/LAB/NEO3000/data/
 THOUGHT/LAB/FERAL_RESIDENT/backups_to_delete/
 CAPABILITY/TESTBENCH/cassette_network/success_metrics_results.json
 NAVIGATION/CORTEX/_generated/session_audit.jsonl
+NAVIGATION/CORTEX/_generated/search_log.jsonl
 THOUGHT/LAB/FORMULA/questions/critical_q51_1940/try3/results/dataset/questions-words.txt
 
 # EEG validation data (large files, downloaded from OpenNeuro/PhysioNet)
