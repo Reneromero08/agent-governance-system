@@ -1,0 +1,14 @@
+{
+  "route_selection_source": "topology_chirality_matrix.json (T300 validated)",
+  "selected_route": "4:5",
+  "sender_cpu": 4,
+  "receiver_cpu": 5,
+  "route_status": "MEASURED_ADJUDICATION_CARRIER",
+  "evidence": "T300_PDN_SLOT2: 6/6 seeds PASS, real_acc=0.953-1.000, rvp=0.954-0.985, phase_delta=0.978-1.033. Controls (silent/scramble) at null.",
+  "track_i_dependency_open": false,
+  "track_i_status": "ROUTE_SELECTED_FROM_T300_MEASURED_DATA",
+  "full_12_route_sweep_status": "INCOMPLETE -- 2/12 routes measured (T300). Remaining 10 routes deferred.",
+  "fallback_routes": ["2:3"],
+  "note": "Route 4:5 confirmed as measured adjudication carrier from T300 data. NOT hardcoded -- read from this config file. Full 12-route sweep deferred to post-Track-A validation or Phenom operator interactive run.",
+  "last_updated": "2026-06-13"
+}

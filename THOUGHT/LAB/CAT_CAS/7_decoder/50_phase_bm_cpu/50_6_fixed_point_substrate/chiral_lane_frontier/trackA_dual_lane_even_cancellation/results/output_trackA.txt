@@ -1,0 +1,25 @@
+================================================================================
+TRACK A -- DUAL-LANE EVEN CANCELLATION
+Route: 4:5  Status: PROVISIONAL_ROUTE_4_5_PRIOR  Track I open: True
+master_seed=44060611  alpha=0.05  noise_sigma=0.005
+================================================================================
+
+--- n=8 (N=256, M=384) ---
+  public               cand_auc=0.511/null=0.552  mean=-0.0006(+/-0.0056)  signal=False
+  same_candidate       cand_auc=0.506/null=0.552  mean=0.0000(+/-0.0003)  signal=False
+  hidden_positive      cand_auc=0.524/null=0.544  mean=0.0013(+/-0.0277)  signal=False
+
+--- n=10 (N=1024, M=480) ---
+  public               cand_auc=0.512/null=0.550  mean=0.0433(+/-0.8397)  signal=False
+  same_candidate       cand_auc=0.507/null=0.555  mean=-0.0000(+/-0.0002)  signal=False
+  hidden_positive      cand_auc=0.503/null=0.556  mean=0.1740(+/-4.0294)  signal=False
+
+================================================================================
+TRACK A VERDICT
+  Public has signal: False
+  Same-candidate null: True
+  Hidden positive live: False
+  Orientation AUC ~0.5: True
+  Controls ok: False
+  VERDICT: PUBLIC_ROUTE_NO_MEASURABLE_PDN_DIFFERENTIAL
+================================================================================

@@ -1,0 +1,22 @@
+================================================================================
+TRACK F -- CATALYTIC LOSCHMIDT ECHO REFERENCE MODEL
+master_seed=44060611
+================================================================================
+
+--- n=8 (N=256, M=384) ---
+  public             c0_echo=1344.3075 c1_echo=1344.7675 diff=-0.4600 auc=0.463/null95=0.537 
+  same_candidate     c0_echo=1344.3075 c1_echo=1344.3075 diff=0.0000 auc=0.444/null95=0.530 
+  dummy              c0_echo=1345.0225 c1_echo=1345.0225 diff=0.0000 auc=0.471/null95=0.545 
+
+--- n=10 (N=1024, M=480) ---
+  public             c0_echo=124614.4675 c1_echo=125435.4100 diff=-820.9425 auc=0.551/null95=0.544 ABOVE
+  same_candidate     c0_echo=124614.4675 c1_echo=124614.4675 diff=0.0000 auc=0.445/null95=0.536 
+  dummy              c0_echo=124732.0875 c1_echo=124732.0875 diff=0.0000 auc=0.476/null95=0.542 
+
+================================================================================
+TRACK F VERDICT
+  public echo separates candidates; same-candidate/dummy at chance
+  public above null: True
+  same-candidate above null: False
+  dummy above null: False   VERDICT: TRACK_F_REFERENCE_CANDIDATE_VALUE_ECHO_FOUND
+================================================================================

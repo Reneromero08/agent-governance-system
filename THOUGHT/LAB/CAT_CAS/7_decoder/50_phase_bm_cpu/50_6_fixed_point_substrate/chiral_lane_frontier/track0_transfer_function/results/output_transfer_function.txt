@@ -1,0 +1,33 @@
+==========================================================================================
+TRACK 0 -- ODD-LANE TRANSFER FUNCTION CALIBRATION
+master_seed=44060611   epsilon ladder=[1.0, 0.5, 0.25, 0.125, 0.0625, 0.03125, 0.0]
+==========================================================================================
+
+--- n=8 (N=256, M=384) ---
+  eps=1.0000  chA_auc=0.555/null=0.546  chB_auc=0.999/null=0.542  snr=0.8937  ABOVE_NULL
+  eps=0.5000  chA_auc=0.473/null=0.545  chB_auc=0.998/null=0.553  snr=0.8753  ABOVE_NULL
+  eps=0.2500  chA_auc=0.493/null=0.549  chB_auc=0.999/null=0.544  snr=0.8859  ABOVE_NULL
+  eps=0.1250  chA_auc=0.553/null=0.551  chB_auc=0.999/null=0.555  snr=0.8927  ABOVE_NULL
+  eps=0.0625  chA_auc=0.504/null=0.540  chB_auc=0.998/null=0.553  snr=0.8677  ABOVE_NULL
+  eps=0.0312  chA_auc=0.497/null=0.539  chB_auc=0.998/null=0.540  snr=0.8679  ABOVE_NULL
+  eps=0.0000  chA_auc=0.489/null=0.538  chB_auc=0.500/null=0.500  snr=0.0000  at_chance
+
+--- n=10 (N=1024, M=480) ---
+  eps=1.0000  chA_auc=0.545/null=0.537  chB_auc=0.916/null=0.544  snr=0.6971  ABOVE_NULL
+  eps=0.5000  chA_auc=0.508/null=0.549  chB_auc=0.910/null=0.545  snr=0.6811  ABOVE_NULL
+  eps=0.2500  chA_auc=0.469/null=0.552  chB_auc=0.932/null=0.546  snr=0.7173  ABOVE_NULL
+  eps=0.1250  chA_auc=0.488/null=0.551  chB_auc=0.924/null=0.554  snr=0.7054  ABOVE_NULL
+  eps=0.0625  chA_auc=0.506/null=0.548  chB_auc=0.916/null=0.542  snr=0.6856  ABOVE_NULL
+  eps=0.0312  chA_auc=0.455/null=0.548  chB_auc=0.933/null=0.539  snr=0.7206  ABOVE_NULL
+  eps=0.0000  chA_auc=0.511/null=0.554  chB_auc=0.500/null=0.500  snr=0.0000  at_chance
+
+==========================================================================================
+TRACK 0 VERDICT
+  Channel A (cosine only) at chance: False
+  Channel B (injected sin) above null at some epsilon: True
+  Minimum detectable epsilon: 0.03125
+  Epsilon ladder monotonic: False
+  VERDICT: ODD_LANE_DETECTOR_ARTIFACT -- epsilon ladder not monotonic
+
+  elapsed: 2.41 s
+==========================================================================================

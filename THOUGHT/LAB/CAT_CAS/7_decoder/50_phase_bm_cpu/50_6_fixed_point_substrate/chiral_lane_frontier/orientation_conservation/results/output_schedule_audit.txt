@@ -1,0 +1,53 @@
+==========================================================================================
+TRACK Z -- ORIENTATION CONSERVATION AUDIT for Track A (dual-lane PDN)
+master_seed=44060611   n in {8,10,12,14}   claim ceiling L4
+==========================================================================================
+
+--- n=8 (N=256, M=384) ---
+  candidate_0: d= 233 ->   23   N-d=  23 ->   23   invariant=True
+  k sequence: invariant=True  (len 384)
+  b sequence: invariant=True
+  M:         invariant=True  (M=384)
+  full schedule SHA-256: d=54f196dd8f06bcf4  N-d=54f196dd8f06bcf4  invariant=True
+  candidate blinding: True (blinded)
+  hidden label check: True (clean)
+  orientation label in schedule: False
+
+--- n=10 (N=1024, M=480) ---
+  candidate_0: d= 841 ->  183   N-d= 183 ->  183   invariant=True
+  k sequence: invariant=True  (len 480)
+  b sequence: invariant=True
+  M:         invariant=True  (M=480)
+  full schedule SHA-256: d=d60c5787a21a1334  N-d=d60c5787a21a1334  invariant=True
+  candidate blinding: True (blinded)
+  hidden label check: True (clean)
+  orientation label in schedule: False
+
+--- n=12 (N=4096, M=576) ---
+  candidate_0: d=4001 ->   95   N-d=  95 ->   95   invariant=True
+  k sequence: invariant=True  (len 576)
+  b sequence: invariant=True
+  M:         invariant=True  (M=576)
+  full schedule SHA-256: d=cefea044f507e0af  N-d=cefea044f507e0af  invariant=True
+  candidate blinding: True (blinded)
+  hidden label check: True (clean)
+  orientation label in schedule: False
+
+--- n=14 (N=16384, M=672) ---
+  candidate_0: d=7523 -> 7523   N-d=8861 -> 7523   invariant=True
+  k sequence: invariant=True  (len 672)
+  b sequence: invariant=True
+  M:         invariant=True  (M=672)
+  full schedule SHA-256: d=fdd4efa66add4084  N-d=fdd4efa66add4084  invariant=True
+  candidate blinding: True (blinded)
+  hidden label check: True (clean)
+  orientation label in schedule: False
+
+==========================================================================================
+TRACK Z VERDICT
+  SCHEDULE_INVARIANCE_PASS -- all gates clean
+  The public schedule for Track A is invariant under d <-> N-d.
+  Candidate labels are blinded. No hidden d or orientation bit in schedule.
+
+  elapsed: 0.00 s
+==========================================================================================

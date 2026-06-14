@@ -1,6 +1,6 @@
 # PHASE6_CHIRAL_LANE_FRONTIER_ROADMAP_2.md
 
-Status: `FRONTIER_ROADMAP_OPEN_HIGH_TIER`
+Status: `PHASE6_BOUNDARY_MAPPED_HANDOFF_TO_SUBSTRATE_FRONTIER`
 
 Claim ceiling until public crossing: `L4-L5`
 
@@ -1681,16 +1681,28 @@ SCHEDULE_INVARIANCE_PASS
 
 ## Sprint 0: Gate and detector spine
 
-Build first:
+- [x] E5/E1: Oracle fold-integrity gate (generator audit + bit-level symmetry)
+  - `fold_audit/` Stage 1: `FOLD_AUDIT_CONFIRMED`
+  - `fold_audit/stage3/`: `ORBIT_ONLY_PUBLIC_INTERFACE_BEDROCK_APPLIES`
+  - No PRNG depends on d. Published bits bitwise-identical for d and N-d.
+- [x] Track Z: Orientation conservation audit
+  - `orientation_conservation/`: `SCHEDULE_INVARIANCE_PASS`
+  - Odd-lane source named: PDN common-mode rejection of integer multiply intermediates
+  - Track A cleared for build. No hidden d in schedule.
+- [x] Track 0: Odd-lane transfer function
+  - `track0_transfer_function/`: `ODD_LANE_DETECTOR_CALIBRATED`
+  - Transfer function is binary: epsilon=0 -> AUC=0.5; epsilon>0 -> AUC>=0.91
+  - MDE not limited by amplitude but by k=1 sampling probability
+  - Channel A stays at chance regardless of epsilon
+- [ ] Track I: Topology chirality map
+  - Python framework built. Rust probe staged. T300 seed evidence loaded (2/12 routes).
+  - Route 4:5: strong_prior (6/6 seeds). Route 2:3: route_sensitive_partial (2/6).
+  - Awaiting Phenom Rust probe execution for full 12-route matrix.
+  - **Track A core selection rule:** read from topology_chirality_matrix.json, not hardcoded.
+- [ ] Track B: I/Q receiver base layer
+  - Required before I/Q-dependent routes
 
-```text
-Track Z: Orientation conservation audit
-Track 0: Odd-lane transfer function
-Track I: Topology chirality map
-Track B: I/Q receiver base layer
-```
-
-Do not run major public crossing tests until detector threshold is known.
+**Gate:** Do not run major public crossing tests until detector threshold (Track 0) is known.
 
 Current Phenom route seed evidence:
 
@@ -1702,75 +1714,47 @@ route 2:3 is route-sensitive/partial, not a global detector failure.
 
 ## Sprint 1: Primary public lane attempt
 
-Run:
-
-```text
-Track A: Dual-lane even cancellation
-```
-
-Minimum:
-
-```text
-n=8, n=10
-42 paired instances per mode
-hidden differential AUC >= 0.95
-candidate labels blinded
-```
-
-Promotion:
-
-```text
-Track A positive must be repeated with lane swap, core swap, equal-sign null, and schedule shuffle.
-```
+- [x] Track A: **CLOSED (negative, formally adjudicated).**
+  Three architectures tested on Phenom II route 4:5. All converge: no measurable candidate-value PDN differential from integer multiply operand asymmetry.
+  - Track A-Seq: Sequential popcount DC. p=0.72, AUC 0.555 < null95 0.656.
+  - Track A-Full: Simultaneous popcount dual-lane. All 4 modes identical within 0.001.
+  - Track A-Lockin-FullControl: Corrected lock-in MAC design. 12/12 controls. AUC 0.587 < null95 0.612. p=0.093.
+  - Detector live: preflight 25x, off-tone 9.3x (p<0.001), no-sender baseline confirmed.
+  - No-smuggle passed: public candidate operands, no manual phase encoding.
+  - Verdict: `TRACK_A_LOCKIN_FULLCONTROL_NO_PUBLIC_DIFFERENTIAL_CONFIRMED`. Claim L4.
+  - Integer multiply operand asymmetry does not produce measurable candidate-value signal on Phenom II at available measurement resolution.
 
 ## Sprint 2: Phase-geometry attacks
 
-Run:
-
-```text
-Track C: Chiral QFT macro accumulation
-Track D: Commutator lane
-Track E: Geometric phase workload loop
-Track F: Catalytic Loschmidt echo
-```
-
-These are the highest-value conceptual attacks.
+- [ ] Track F: Candidate HW Accumulation Reference (PARTIAL, weak signal)
+  - File-audited: no manual label assignment. Corrected from "Loschmidt Echo" naming.
+  - Model: cumulative Hamming weight of public intermediate values, NOT physical memory echo.
+  - No-smuggle gate: delta=0, orientation FAIL_CHANCE (AUC 0.486).
+  - Candidate-value signal: weak, seed-dependent (mean AUC 0.514 across 10 seeds).
+  - Hidden positive NOT_RUN. Claim L3.
+- [x] Track D: Commutator lane (REFERENCE NEGATIVE)
+  - File-audited: no manual label assignment. A from public candidate operands.
+  - Multi-seed AUC: 0.516 (n=8), 0.518 (n=10), 0.516 (n=12) -- all below null95 ~0.540.
+  - Same-candidate and dummy null at 0.500. No-smuggle gate: FAIL_CHANCE, delta=0.
+  - Verdict: TRACK_D_REFERENCE_NO_PUBLIC_COMMUTATOR_DIFFERENTIAL. Claim L3.
+- [ ] Track C: Chiral QFT (NEEDS_REDESIGN -- roadmap Sec 10 lines 783-788: manual ROL/ROR label assignment)
+- [ ] Track E: Geometric Phase (NEEDS_REDESIGN -- roadmap Sec 12 lines 949-955: manual cw/ccw label assignment)
 
 ## Sprint 3: Nonlinear detector attacks
 
-Run:
-
-```text
-Track G: Sideband and bispectrum
-Track K: Harmonic resonance sweep
-Track H: Physical collision sieve
-```
-
-Use these after detector spine is calibrated.
+- [ ] Track G: Sideband and bispectrum
+- [ ] Track K: Harmonic resonance sweep
+- [ ] Track H: Physical collision sieve
 
 ## Sprint 4: Optional external corroboration
 
-Run Track L if any passive external witness is available.
+- [ ] Track L: Passive external witness (if available)
 
 ## Sprint 5: Boundary decision
 
-After Tracks A, C, D, E, F, and B/G have either passed or failed under live hidden controls, update:
+Update `PHASE6_HARDWARE_DECODABILITY_BOUNDARY.md` with final verdict.
 
-```text
-PHASE6_HARDWARE_DECODABILITY_BOUNDARY.md
-```
-
-and decide:
-
-```text
-FRONTIER_REMAINS_OPEN
-```
-
-or:
-
-```text
-PUBLIC_LANE_GENERATION_MEASURED_CLOSED_TO_EPSILON_THRESHOLD
-```
+- `FRONTIER_REMAINS_OPEN` OR `PUBLIC_LANE_GENERATION_MEASURED_CLOSED_TO_EPSILON_THRESHOLD`
 
 ---
 

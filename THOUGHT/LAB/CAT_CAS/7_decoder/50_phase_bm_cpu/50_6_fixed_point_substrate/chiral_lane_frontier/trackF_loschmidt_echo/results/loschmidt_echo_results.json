@@ -1,0 +1,79 @@
+{
+  "experiment": "phase6_trackF_loschmidt_echo",
+  "master_seed": 44060611,
+  "n_values": [
+    8,
+    10
+  ],
+  "n_instances": 400,
+  "cells": [
+    {
+      "n": 8,
+      "mode": "public",
+      "N_inst": 400,
+      "c0_echo_mean": 1344.3075,
+      "c1_echo_mean": 1344.7675,
+      "diff": -0.46,
+      "candidate_auc": 0.4626,
+      "null95": 0.5369,
+      "above_null": false
+    },
+    {
+      "n": 8,
+      "mode": "same_candidate",
+      "N_inst": 400,
+      "c0_echo_mean": 1344.3075,
+      "c1_echo_mean": 1344.3075,
+      "diff": 0.0,
+      "candidate_auc": 0.4437,
+      "null95": 0.5296,
+      "above_null": false
+    },
+    {
+      "n": 8,
+      "mode": "dummy",
+      "N_inst": 400,
+      "c0_echo_mean": 1345.0225,
+      "c1_echo_mean": 1345.0225,
+      "diff": 0.0,
+      "candidate_auc": 0.4711,
+      "null95": 0.5448,
+      "above_null": false
+    },
+    {
+      "n": 10,
+      "mode": "public",
+      "N_inst": 400,
+      "c0_echo_mean": 124614.4675,
+      "c1_echo_mean": 125435.41,
+      "diff": -820.9425,
+      "candidate_auc": 0.5514,
+      "null95": 0.5441,
+      "above_null": true
+    },
+    {
+      "n": 10,
+      "mode": "same_candidate",
+      "N_inst": 400,
+      "c0_echo_mean": 124614.4675,
+      "c1_echo_mean": 124614.4675,
+      "diff": 0.0,
+      "candidate_auc": 0.4447,
+      "null95": 0.5358,
+      "above_null": false
+    },
+    {
+      "n": 10,
+      "mode": "dummy",
+      "N_inst": 400,
+      "c0_echo_mean": 124732.0875,
+      "c1_echo_mean": 124732.0875,
+      "diff": 0.0,
+      "candidate_auc": 0.4756,
+      "null95": 0.5417,
+      "above_null": false
+    }
+  ],
+  "verdict": "TRACK_F_REFERENCE_CANDIDATE_VALUE_ECHO_FOUND",
+  "elapsed_s": 11.03
+}

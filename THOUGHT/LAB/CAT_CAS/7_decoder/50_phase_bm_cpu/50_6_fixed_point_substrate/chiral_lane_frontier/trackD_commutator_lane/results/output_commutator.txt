@@ -1,0 +1,25 @@
+================================================================================
+TRACK D -- COMMUTATOR LANE REFERENCE MODEL
+master_seed=44060611
+================================================================================
+
+--- n=8 (N=256, M=384) ---
+  public: aucs=0.5155+/-0.0156 [0.5012,0.5435] null95=0.5406 above=False
+  same_cand: auc=0.5000
+  dummy: auc=0.5000
+
+--- n=10 (N=1024, M=480) ---
+  public: aucs=0.5184+/-0.0178 [0.5003,0.5602] null95=0.5413 above=False
+  same_cand: auc=0.5000
+  dummy: auc=0.5000
+
+--- n=12 (N=4096, M=576) ---
+  public: aucs=0.5163+/-0.0095 [0.5054,0.5301] null95=0.5392 above=False
+  same_cand: auc=0.5000
+  dummy: auc=0.5000
+
+================================================================================
+TRACK D VERDICT
+  commutator AUC at chance across all seeds -- no candidate-value signal
+  TRACK_D_REFERENCE_NO_PUBLIC_COMMUTATOR_DIFFERENTIAL
+================================================================================

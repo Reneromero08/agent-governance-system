@@ -1,0 +1,14 @@
+{
+  "experiment":"phase6_trackA_full_dual_lane",
+  "n":8,"trials":42,"route":"4:5",
+  "modes":["public","same_candidate","no_sender","hidden_positive"],
+  "cells":[
+    {"mode":"public","mean":180.038854811},
+    {"mode":"same_candidate","mean":180.037767952},
+    {"mode":"no_sender","mean":180.039121588},
+    {"mode":"hidden_positive","mean":180.038385882}
+  ],
+  "public_same_diff":0.001086859,
+  "orientation_auc":0.5000,
+  "verdict":"TRACK_A_FULL_NO_DIFFERENTIAL"
+}

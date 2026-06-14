@@ -1,0 +1,35 @@
+================================================================================
+TRACK B -- I/Q RECEIVER BASE LAYER
+master_seed=44060611   epsilon in [1.0, 0.5, 0.25, 0.125, 0.0625, 0.03125, 0.0]
+noise_sigma=0.1  route=4:5 (provisional prior)
+================================================================================
+
+--- n=8 (N=256) ---
+  eps=1.0000  scalar=0.517  Q_mean=+0.9994(+/-0.0495)  Q_orient_auc=0.500  Q_SIGNAL
+  eps=0.5000  scalar=0.512  Q_mean=+0.4997(+/-0.0429)  Q_orient_auc=0.533  Q_SIGNAL
+  eps=0.2500  scalar=0.561  Q_mean=+0.2509(+/-0.0379)  Q_orient_auc=0.553  Q_SIGNAL
+  eps=0.1250  scalar=0.534  Q_mean=+0.1251(+/-0.0386)  Q_orient_auc=0.509  Q_SIGNAL
+  eps=0.0625  scalar=0.506  Q_mean=+0.0614(+/-0.0362)  Q_orient_auc=0.571  Q_SIGNAL
+  eps=0.0312  scalar=0.509  Q_mean=+0.0343(+/-0.0355)  Q_orient_auc=0.524  Q_SIGNAL
+  eps=0.0000  scalar=0.594  Q_mean=-0.0026(+/-0.0337)  Q_orient_auc=0.513  
+
+--- n=10 (N=1024) ---
+  eps=1.0000  scalar=0.519  Q_mean=+0.9991(+/-0.0438)  Q_orient_auc=0.546  Q_SIGNAL
+  eps=0.5000  scalar=0.514  Q_mean=+0.4991(+/-0.0345)  Q_orient_auc=0.560  Q_SIGNAL
+  eps=0.2500  scalar=0.515  Q_mean=+0.2462(+/-0.0320)  Q_orient_auc=0.526  Q_SIGNAL
+  eps=0.1250  scalar=0.521  Q_mean=+0.1251(+/-0.0321)  Q_orient_auc=0.505  Q_SIGNAL
+  eps=0.0625  scalar=0.504  Q_mean=+0.0648(+/-0.0313)  Q_orient_auc=0.516  Q_SIGNAL
+  eps=0.0312  scalar=0.603  Q_mean=+0.0319(+/-0.0319)  Q_orient_auc=0.545  Q_SIGNAL
+  eps=0.0000  scalar=0.503  Q_mean=-0.0015(+/-0.0324)  Q_orient_auc=0.516  
+
+================================================================================
+TRACK B VERDICT
+  Q at epsilon=0 null: True
+  Q signal at epsilon>0: True
+  Q_diff proportional to epsilon: True
+  Q orientation AUC all ~0.5: True (no orientation leak)
+  VERDICT: IQ_RECEIVER_CALIBRATED
+  I/Q receiver live: Q channel detects candidate-value signal proportional to epsilon.
+  Q does NOT encode orientation (Q_diff always positive, AUC ~0.5).
+  This is the expected candidate-value coupling, not orientation coupling.
+================================================================================
