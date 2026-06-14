@@ -21,7 +21,7 @@ from pathlib import Path
 import numpy as np
 
 HERE = Path(__file__).resolve().parent
-FOLD_AUDIT = HERE.parent.parent / "fold_audit"
+FOLD_AUDIT = HERE.parent.parent / "cross_cutting" / "fold_audit"
 sys.path.insert(0, str(FOLD_AUDIT))
 import construction as C
 import no_smuggle_gate as G
@@ -227,3 +227,4 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
+

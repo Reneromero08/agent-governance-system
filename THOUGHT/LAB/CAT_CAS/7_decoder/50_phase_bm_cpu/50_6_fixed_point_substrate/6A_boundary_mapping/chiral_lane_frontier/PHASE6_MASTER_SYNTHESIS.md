@@ -1,7 +1,7 @@
 # Phase 6 Master Synthesis Report
 
 **Phase:** Phase 6 -- Chiral Lane Frontier (Exp 50, bare-metal CPU substrate push).
-**Status:** BOUNDARY MAPPED. HANDOFF TO SUBSTRATE FRONTIER.
+**Status:** `PHASE6A_BOUNDARY_MAPPED__PHASE6B_NONCOLLAPSE_FRONTIER_ACTIVE`
 **Date:** 2026-06-14.
 **Claim ceiling:** L4 (invariant survives calibrated nulls on Phenom II hardware).
 
@@ -179,3 +179,56 @@ Tracks C/E: DEFERRED pending substrate charter.
 ## 10. Files
 
 This report: `PHASE6_MASTER_SYNTHESIS.md`. All referenced track reports, results, and code live under `chiral_lane_frontier/` subdirectories. All commits referenced above.
+
+---
+
+## 11. Postscript: Phase 6B Non-Collapse Reinterpretation
+
+This postscript was added after Phase 6B pivoted the campaign from forward
+detector/lane search to non-collapse substrate architecture. It preserves
+this file as the canonical Phase 6A synthesis while acknowledging the
+paradigm shift.
+
+### What Remains Valid
+
+- Phase 6A mapped the public/no-smuggle boundary. The wall was measured.
+- Candidate-value coupling is not orientation coupling. This distinction holds.
+- Track A negative results (3 architectures, 12/12 controls, L4) remain valid hardware findings.
+- Track D (commutator reference negative) and Track F (weak seed-dependent hint) remain valid reference results.
+- Tracks C/E were correctly rejected for manual label/phase encoding in their roadmap designs.
+- The no-smuggle gate (`no_smuggle_gate.py`) remains a valid and reusable instrument.
+
+### What Changed After This Report
+
+- "Handoff to substrate frontier" was refined into Phase 6B -- the non-collapse
+  continuation of the same campaign, not a separate experiment.
+- L2 (catalytic tape lifecycle) and L3 (contraction map convergence) were downgraded
+  from frontier gates to **substrate hygiene / mechanical warmup**.
+- L4 public verify recovery was rejected: `f(x) = x if verify(x) else (x+1)` is
+  forward scan, `verify(x)` is fold-even, and the charter's restricted-domain `d`
+  collapses the target to public candidate value.
+- The `recover-d` framing was identified as **median-basin collapse**: asking for a
+  scalar output from a higher-dimensional object. THE ALGORITHM IS DEAD.
+- The active frontier became non-collapse OrbitState evolution -- preserving the
+  fold pair as an unresolved process-object rather than scoring candidates.
+
+### Current Phase 6B Interpretation
+
+- Phase 6 is still the wall-breaking campaign. It did not stop at Phase 6A.
+- Phase 6A measured the wall. Phase 6B continues after recognizing that the old
+  verifier/detector/candidate framing is itself part of the wall.
+- OrbitState replaces scalar candidate framing. `.holo` is the process-object
+  container, not an answer file. CollapseBoundary is delayed. Invariant extraction
+  replaces winner selection.
+
+### Current Head
+
+- **L4B_ORBITSTATE_EVOLUTION_PRIMITIVE_PASS** (commit `aeeeee00`, claim L1).
+- OrbitState evolves as one unresolved process-object. Branches are not separated.
+- 512 steps of coupled evolution. `fold_symmetry = HOLDS` (invariant_imag = 0.0).
+- `.holo` generated with forbidden fields absent. No fold-odd residue claim.
+- No recovery claim. No orientation claim. No candidate scoring.
+
+Phase 6A did not break the wall. It mapped the wall. Phase 6B continues the
+same campaign by changing the primitive from candidate recovery to non-collapse
+OrbitState evolution.

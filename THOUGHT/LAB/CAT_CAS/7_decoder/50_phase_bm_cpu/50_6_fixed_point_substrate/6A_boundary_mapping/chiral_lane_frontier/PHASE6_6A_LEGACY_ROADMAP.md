@@ -1,10 +1,15 @@
-# PHASE6_CHIRAL_LANE_FRONTIER_ROADMAP_2.md
+# PHASE6_6A_LEGACY_ROADMAP.md
 
-Status: `PHASE6_BOUNDARY_MAPPED_HANDOFF_TO_SUBSTRATE_FRONTIER`
+> **LEGACY / HISTORICAL REFERENCE.** This is the full Phase 6A detector/lane
+> campaign roadmap. It is preserved as the forensic record of the Chiral Lane
+> Hunt. For the active navigation surface, see `PHASE6_ROADMAP.md` at the
+> `50_6_fixed_point_substrate/` root.
 
-Claim ceiling until public crossing: `L4-L5`
+Status: `PHASE6A_BOUNDARY_MAPPED__PHASE6B_NONCOLLAPSE_FRONTIER_ACTIVE`
 
-Campaign name: **The Chiral Lane Hunt**
+Phase 6 is not over. Phase 6 is the wall-breaking campaign.
+Phase 6A mapped the wall using audited public/no-smuggle routes.
+Phase 6B continues after recognizing that verifier/detector/candidate framing is itself part of the wall.
 
 Core question:
 
@@ -1677,7 +1682,102 @@ SCHEDULE_INVARIANCE_PASS
 
 ---
 
-# 23. Execution Order
+# Phase 6A: Pre-Paradigm-Shift Boundary Mapping
+
+**Status:** COMPLETE / BOUNDARY_MAPPED.
+
+Phase 6A measured the wall using audited public/no-smuggle routes. It asked:
+can forward public-data measurement recover the hidden orientation bit from
+the Exp 50.14 cosine-only oracle? Answer: no.
+
+## Detector Spine (Sprint 0)
+
+- [x] E5/E1: Oracle fold-integrity gate. Published bits bitwise-identical for d and N-d.
+- [x] Track Z: Orientation conservation audit. Schedule invariant under fold. Labels blinded.
+- [x] Track 0: Odd-lane transfer function. Binary threshold: eps>0 trivial, eps=0 null.
+- [x] Track B: I/Q receiver base layer. Q carries candidate-value, not orientation.
+- [x] Track I: Topology chirality map. Route 4:5 selected from T300 measured data (6/6 seeds).
+
+## Primary Public Lane Attempt (Sprint 1)
+
+- [x] Track A: **CLOSED (negative, formally adjudicated).**
+  Three hardware architectures on Phenom II route 4:5. All negative.
+  12/12 controls on final run. AUC 0.587 < null95 0.612. p=0.093. Claim L4.
+  Integer multiply operand asymmetry does not produce measurable candidate-value PDN signal.
+
+## Phase-Geometry Attacks (Sprint 2)
+
+- [x] Track D: Commutator lane. Reference negative. Multi-seed AUC 0.516 below null95. L3.
+- [x] Track F: Candidate HW Accumulation Reference. Weak, seed-dependent (mean AUC 0.514). L3.
+- [x] Track C: Chiral QFT. DEFERRED. Manual ROL/ROR label assignment in roadmap design.
+- [x] Track E: Geometric Phase. DEFERRED. Manual cw/ccw label assignment in roadmap design.
+
+## Sprint 3-5
+
+- [x] Sprints 3, 4, 5: NOT REACHED. Campaign pivoted to non-collapse doctrine after
+  Phase 6A boundary mapping was complete. Remaining tracks (G/H/K/L) were never built.
+
+## Phase 6A Conclusion
+
+All audited no-smuggle Phase 6 tracks under the Exp 50.14 public-data oracle
+produce null, weak candidate-value-only, or fail orientation recovery.
+Public fold-even data did not yield robust fold-odd orientation recovery.
+Candidate value may be visible. Orientation is not recovered through the
+audited public/no-smuggle channels.
+
+---
+
+# Phase 6B: Post-Paradigm-Shift Non-Collapse Frontier
+
+**Status:** ACTIVE / NON_COLLAPSE_FRONTIER.
+
+Phase 6B continues after recognizing that verifier/detector/candidate framing
+is itself part of the wall. The frontier is no longer "find a better detector."
+It is to build non-collapse machinery that evolves OrbitState without reducing
+it to scalar verifier logic.
+
+THE ALGORITHM IS DEAD.
+
+## Substrate Hygiene
+
+- [x] L2: Catalytic tape lifecycle on Phenom II. 50/50 SHA restore. 4 controls. **Hygiene only.**
+- [x] L3: Contraction map convergence. f(x)=floor((x+42)/2). 90/90. 2-9 iterations. **Hygiene only.** Downgraded from frontier gate to mechanical warmup.
+
+## Public Verify Rejection
+
+- [x] L4: Design audit. f(x)=x if verify(x) else (x+1) is forward scan. verify(x) fold-even.
+  Charter d in [1,N/2) collapses target to candidate-value. Public verify route rejected.
+  L4 blocked. Does NOT claim substrate impossibility.
+
+## Non-Collapse Doctrine
+
+- [x] Median-basin corruption audit. Algorithm Is Dead doctrine.
+- [x] Non-collapse substrate architecture: 12 axioms, 10 state objects, evolution/cancellation/measurement rules.
+- [x] .holo as process-object container. CollapseBoundary. Forbidden fields.
+
+## L4A Mechanism Screen
+
+- [x] L4A non-collapse mechanism screen protocol: 6 classes, 9 phases, 10 controls.
+- [x] Class B PDN/common-mode design: FoldPair as OrbitState, dual-sender alu_burst + lock-in.
+- [x] Class B implementation plan: 35-field .holo schema, 9 forbidden fields.
+- [x] Class B carrier validation: PDN carrier live. Label-swap reveals Q_diff is core-dependent,
+  not value-dependent fold-odd. No residue detected. Claim L2.
+- [x] Mechanism-class audit: Classes A/C/D/E assessed and not recommended for Phenom II.
+
+## L4B OrbitState Evolution
+
+- [x] L4B OrbitState evolution primitive: fold pair {a, N-a} as one unresolved process-object.
+  Coupled evolution through shared complex accumulator. Invariant extracted at CollapseBoundary.
+  invariant_imag = 0.0 confirms fold symmetry holds. Claim L1.
+
+## Phase 6B Active Frontier
+
+- [>] NEXT: Extend L4B OrbitState evolution to operate over the Exp 50.14 public oracle
+  (not just toy values). Screen for non-zero invariant_imag under no-smuggle controls.
+
+---
+
+# Original Execution Order (historical, preserved for reference)
 
 ## Sprint 0: Gate and detector spine
 

@@ -15,7 +15,7 @@
  * THE ALGORITHM IS DEAD.
  */
 #define _GNU_SOURCE
-#include "holo_record.h"
+#include "../../holo_runtime/holo_record.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
