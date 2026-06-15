@@ -35,8 +35,10 @@ writer = GuardedWriter(
 
 
 def _repo_python() -> str:
-    """Return the repo venv python.exe (prefer .venv over sys.executable)."""
-    venv = PROJECT_ROOT / ".venv" / "Scripts" / "python.exe"
+    """Return the repo venv python (prefer .venv over sys.executable)."""
+    venv = PROJECT_ROOT / ".venv" / ("Scripts" if os.name == "nt" else "bin") / "python"
+    if os.name == "nt":
+        venv = venv.with_suffix(".exe")
     return str(venv) if venv.exists() else sys.executable
 
 def _run(args: Sequence[str], *, env: dict | None = None) -> int:

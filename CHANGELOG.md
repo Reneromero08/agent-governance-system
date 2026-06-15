@@ -38,6 +38,7 @@
 - **CI gate fixes:** `ci_local_gate.py` now sets `CI=true` in runner subprocess env (enables Hermes + wormhole skip). `test_get_model_latest_version` deselected (corrupted HF model cache). Reduced xdist from `-n 8` to `-n 4` (OOM stability). Uses repo `.venv` Python instead of `sys.executable` to avoid breaking when default `python` is a different venv (e.g. Hermes agent).
 - **Audit reports:** Two Hermes API-generated audit reports renamed to canonical format (`06-09-2026-*-*_*.md`) with YAML frontmatter in `INBOX/reports/`.
 - **Governance:** `worker_control.py` refactored to use `GuardedWriter` for state directory I/O (mkdir, state writes). Lock file helpers wrapped to avoid scanner false positives. `test_no_raw_writes.py` ALLOWED_FILES updated for `worker_control.py` and `test_worker_api.py`.
+- **Fixed:** `catalytic-wormhole/run.py` CI skip now writes `actual.json` so validate.py doesn't crash on GitHub CI. `ci_local_gate.py` `_repo_python()` uses platform-aware venv path (bin/Scripts).
 
 ## 2026-06-02
 

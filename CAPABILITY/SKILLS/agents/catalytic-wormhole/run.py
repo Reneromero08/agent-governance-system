@@ -23,9 +23,16 @@ if str(PROJECT_ROOT) not in sys.path:
 
 # CI skip - GPU workload, not needed for CI gate
 if os.environ.get("CI") == "true":
-    output = json.dumps({"skipped": True, "reason": "CI mode (skip GPU workload)"}, indent=2)
-    print(output)
+    output = {"skipped": True, "reason": "CI mode (skip GPU workload)"}
+    print(json.dumps(output, indent=2))
     print("[catalytic-wormhole] SKIP: CI mode")
+    # Write output so validate.py can read it
+    if len(sys.argv) > 2:
+        out_p = Path(sys.argv[2])
+    else:
+        out_p = PROJECT_ROOT / "actual.json"
+    out_p.parent.mkdir(parents=True, exist_ok=True)
+    out_p.write_text(json.dumps(output, indent=2), encoding="utf-8")
     sys.exit(0)
 
 import time, math, struct, hashlib
