@@ -1,0 +1,509 @@
+{
+  "experiment": "EXP44_SLOT2_PDN_DRIVEN_LOCKIN_CROSS_CORE_HOLO_TRAVERSAL",
+  "date": "2026-06-12",
+  "box": {
+    "host": "192.168.137.100",
+    "cpu": "AMD Phenom II X6 1090T (K10, 45nm)",
+    "os": "Debian 13 (Linux 6.12.86)",
+    "gcc": "14.2.0",
+    "isolcpus": "2,3,4,5",
+    "tsc": "constant_tsc + nonstop_tsc, measured 3214.823 MHz",
+    "k10temp_path": "/sys/class/hwmon/hwmon0/temp1_input",
+    "k10temp_veto_threshold_C": 68.0,
+    "userspace_only": true
+  },
+  "channel": "shared package power-delivery network (PDN) / IR-drop, register/L1-only alu_burst drive -> victim ring-osc timing lock-in",
+  "claim_cap": "cross-core .holo traversal readout (MODE + relational phase) above matched nulls on real silicon. NOT a wall crossing, NOT d-recovery (sender owns the drive phase), NOT a lattice/crypto/quadrature claim.",
+  "preflight": {
+    "gate": "single-bin cross-process compute-only SNR_eff >= ~3",
+    "snr_eff_v2s3_200hz": 25.3,
+    "snr_eff_v4s5_200hz": 212.6,
+    "snr_eff_v2s3_80hz": 16.4,
+    "snr_eff_v2s3_1200hz": 37.6,
+    "verdict": "PASS (16-213, far above the ~3 cliff; consistent with the 5.10 isolation SNR 50-86)"
+  },
+  "method": {
+    "architecture": "two userspace PROCESSES (sender, receiver), forked by an orchestrator, pinned to isolated cores; shared absolute-TSC origin t0 = rdtsc+100ms via handshake file; per-slot phase reference + deadline-bounded capture keep every slot aligned.",
+    "drive": "register/L1-only alu_burst (5.10 power virus, lifted verbatim) gated as a 50%-duty square wave at the bin tone; per-bin +/-1 sign carried as a pi drive-phase flip; global theta as a shared drive-phase offset.",
+    "readout": "victim software ring-osc timing lock-in at f_b + off-bin floor (5.10 lock-in math, verbatim).",
+    "codebook": "4 codewords / 12 bins, distinct flip-weights {4,5,6,7}, min pairwise Hamming 7 (verified permutation-inequivalent fix).",
+    "tones": "12 log-spaced non-harmonic tones in [20,1500] Hz, time-multiplexed one bin per slot (sequential single-tone drive; no intermod).",
+    "decode": "de-rotate zhat=(z*exp(-i*g))/||z|| (g=carrier phase), L2-normalize (kills 1/f amp drift), nearest-codeword for MODE, differential theta for the relational tag; rho energy-concentration matched null.",
+    "reversible": "XOR-borrow + byte-hash restore, bit-exact (hash_restored==1 all rows).",
+    "safety": "userspace only; cpufreq P-state pin (1600 MHz, boost off) restored on clean exit AND on SIGTERM/SIGINT (signal safety net); k10temp veto before every drive slot; -lm last at link."
+  },
+  "sweep": {
+    "trials_per_family": 48,
+    "slot_s": 0.5,
+    "read_hz": 4000,
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "core_pairs": [
+      "2:3",
+      "4:5"
+    ],
+    "symbols_per_run": 148
+  },
+  "success_criteria": "6/6 seeds: all_rows_restore AND real_accuracy>=0.60 AND real_vs_pseudo floor>=0.95 AND pseudo_reject>=0.95 AND wrong_actual_match>=0.60 AND wrong_declared_match<=0.20 AND (phase_corr_true - phase_corr_null) > 0.30",
+  "aggregate": {
+    "by_pair": {
+      "2:3": {
+        "all_pass": false,
+        "n_pass": 2,
+        "n_seeds": 6,
+        "phase_delta_range": [
+          0.9796395606944208,
+          1.0321784223370092
+        ],
+        "real_acc_range": [
+          1.0,
+          1.0
+        ],
+        "rvp_range": [
+          0.9102564102564102,
+          0.9620253164556962
+        ],
+        "seeds_fail": [
+          1,
+          3,
+          4,
+          5
+        ],
+        "seeds_pass": [
+          0,
+          2
+        ]
+      },
+      "4:5": {
+        "all_pass": true,
+        "n_pass": 6,
+        "n_seeds": 6,
+        "phase_delta_range": [
+          0.9777789261995884,
+          1.033323438517159
+        ],
+        "real_acc_range": [
+          0.9533333333333334,
+          1.0
+        ],
+        "rvp_range": [
+          0.9540229885057471,
+          0.9848484848484849
+        ],
+        "seeds_fail": [],
+        "seeds_pass": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    "controls": {
+      "scramble": {
+        "all_rows_restore": true,
+        "control_ok": true,
+        "phase_delta": -0.06323080322916028,
+        "pseudo_reject_floor": 0.0,
+        "real_accuracy": 0.25333333333333335,
+        "real_vs_pseudo_floor": 0.4125,
+        "witness_gates_pass": false,
+        "wrong_actual_match": 0.25333333333333335
+      },
+      "silent": {
+        "all_rows_restore": true,
+        "control_ok": true,
+        "phase_delta": -0.06815882355257609,
+        "pseudo_reject_floor": 0.025,
+        "real_accuracy": 0.19333333333333333,
+        "real_vs_pseudo_floor": 0.4634146341463415,
+        "witness_gates_pass": false,
+        "wrong_actual_match": 0.21333333333333335
+      }
+    },
+    "overall": {
+      "controls_all_null": true,
+      "controls_present": true,
+      "pairs_6of6": [
+        "4:5"
+      ],
+      "pairs_run": 2,
+      "verdict": "PHASE4B_CROSS_CORE_PDN_LOCKIN_WITNESS",
+      "witness_holds_reproducibly": true
+    },
+    "runs": [
+      {
+        "all_rows_restore": true,
+        "gates": {
+          "all_rows_restore": true,
+          "phase_recovered_gt_0_30": true,
+          "pseudo_declared_match_le_0_35": true,
+          "pseudo_reject_floor_ge_0_95": true,
+          "real_accuracy_ge_0_60": true,
+          "real_mode_floor_ge_0_45": true,
+          "real_vs_pseudo_floor_ge_0_95": true,
+          "wrong_actual_match_ge_0_60": true,
+          "wrong_declared_match_le_0_20": true
+        },
+        "pair": "2:3",
+        "pass": true,
+        "phase_corr_null": -0.030652463617224044,
+        "phase_corr_true": 0.9998466095319143,
+        "phase_delta": 1.0304990731491384,
+        "pseudo_declared_match": 0.23333333333333334,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 1.0,
+        "real_mode_floor": 1.0,
+        "real_vs_pseudo_floor": 0.9620253164556962,
+        "seed": 0,
+        "sender": 3,
+        "verdict": "PHASE4B_CROSS_CORE_PDN_LOCKIN_WITNESS",
+        "victim": 2,
+        "wrong_actual_match": 1.0,
+        "wrong_declared_match": 0.0
+      },
+      {
+        "all_rows_restore": true,
+        "gates": {
+          "all_rows_restore": true,
+          "phase_recovered_gt_0_30": true,
+          "pseudo_declared_match_le_0_35": true,
+          "pseudo_reject_floor_ge_0_95": true,
+          "real_accuracy_ge_0_60": true,
+          "real_mode_floor_ge_0_45": true,
+          "real_vs_pseudo_floor_ge_0_95": false,
+          "wrong_actual_match_ge_0_60": true,
+          "wrong_declared_match_le_0_20": true
+        },
+        "pair": "2:3",
+        "pass": false,
+        "phase_corr_null": -0.03270649773398316,
+        "phase_corr_true": 0.9994719246030259,
+        "phase_delta": 1.0321784223370092,
+        "pseudo_declared_match": 0.22,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 1.0,
+        "real_mode_floor": 1.0,
+        "real_vs_pseudo_floor": 0.9102564102564102,
+        "seed": 1,
+        "sender": 3,
+        "verdict": "PHASE4B_PDN_PARTIAL",
+        "victim": 2,
+        "wrong_actual_match": 1.0,
+        "wrong_declared_match": 0.0
+      },
+      {
+        "all_rows_restore": true,
+        "gates": {
+          "all_rows_restore": true,
+          "phase_recovered_gt_0_30": true,
+          "pseudo_declared_match_le_0_35": true,
+          "pseudo_reject_floor_ge_0_95": true,
+          "real_accuracy_ge_0_60": true,
+          "real_mode_floor_ge_0_45": true,
+          "real_vs_pseudo_floor_ge_0_95": true,
+          "wrong_actual_match_ge_0_60": true,
+          "wrong_declared_match_le_0_20": true
+        },
+        "pair": "2:3",
+        "pass": true,
+        "phase_corr_null": 0.00610962429918729,
+        "phase_corr_true": 0.9993838633901407,
+        "phase_delta": 0.9932742390909535,
+        "pseudo_declared_match": 0.21333333333333335,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 1.0,
+        "real_mode_floor": 1.0,
+        "real_vs_pseudo_floor": 0.9565217391304348,
+        "seed": 2,
+        "sender": 3,
+        "verdict": "PHASE4B_CROSS_CORE_PDN_LOCKIN_WITNESS",
+        "victim": 2,
+        "wrong_actual_match": 1.0,
+        "wrong_declared_match": 0.0
+      },
+      {
+        "all_rows_restore": true,
+        "gates": {
+          "all_rows_restore": true,
+          "phase_recovered_gt_0_30": true,
+          "pseudo_declared_match_le_0_35": true,
+          "pseudo_reject_floor_ge_0_95": true,
+          "real_accuracy_ge_0_60": true,
+          "real_mode_floor_ge_0_45": true,
+          "real_vs_pseudo_floor_ge_0_95": false,
+          "wrong_actual_match_ge_0_60": true,
+          "wrong_declared_match_le_0_20": true
+        },
+        "pair": "2:3",
+        "pass": false,
+        "phase_corr_null": 0.020223113443179893,
+        "phase_corr_true": 0.9998626741376007,
+        "phase_delta": 0.9796395606944208,
+        "pseudo_declared_match": 0.22,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 1.0,
+        "real_mode_floor": 1.0,
+        "real_vs_pseudo_floor": 0.9402985074626866,
+        "seed": 3,
+        "sender": 3,
+        "verdict": "PHASE4B_PDN_PARTIAL",
+        "victim": 2,
+        "wrong_actual_match": 1.0,
+        "wrong_declared_match": 0.0
+      },
+      {
+        "all_rows_restore": true,
+        "gates": {
+          "all_rows_restore": true,
+          "phase_recovered_gt_0_30": true,
+          "pseudo_declared_match_le_0_35": true,
+          "pseudo_reject_floor_ge_0_95": true,
+          "real_accuracy_ge_0_60": true,
+          "real_mode_floor_ge_0_45": true,
+          "real_vs_pseudo_floor_ge_0_95": false,
+          "wrong_actual_match_ge_0_60": true,
+          "wrong_declared_match_le_0_20": true
+        },
+        "pair": "2:3",
+        "pass": false,
+        "phase_corr_null": -0.007559629869433344,
+        "phase_corr_true": 0.9998282135144614,
+        "phase_delta": 1.0073878433838948,
+        "pseudo_declared_match": 0.22666666666666666,
+        "pseudo_reject_floor": 0.9767441860465116,
+        "real_accuracy": 1.0,
+        "real_mode_floor": 1.0,
+        "real_vs_pseudo_floor": 0.9444444444444444,
+        "seed": 4,
+        "sender": 3,
+        "verdict": "PHASE4B_PDN_PARTIAL",
+        "victim": 2,
+        "wrong_actual_match": 1.0,
+        "wrong_declared_match": 0.0
+      },
+      {
+        "all_rows_restore": true,
+        "gates": {
+          "all_rows_restore": true,
+          "phase_recovered_gt_0_30": true,
+          "pseudo_declared_match_le_0_35": true,
+          "pseudo_reject_floor_ge_0_95": true,
+          "real_accuracy_ge_0_60": true,
+          "real_mode_floor_ge_0_45": true,
+          "real_vs_pseudo_floor_ge_0_95": false,
+          "wrong_actual_match_ge_0_60": true,
+          "wrong_declared_match_le_0_20": true
+        },
+        "pair": "2:3",
+        "pass": false,
+        "phase_corr_null": -0.014513093085930821,
+        "phase_corr_true": 0.9998110557603247,
+        "phase_delta": 1.0143241488462555,
+        "pseudo_declared_match": 0.18,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 1.0,
+        "real_mode_floor": 1.0,
+        "real_vs_pseudo_floor": 0.9315068493150684,
+        "seed": 5,
+        "sender": 3,
+        "verdict": "PHASE4B_PDN_PARTIAL",
+        "victim": 2,
+        "wrong_actual_match": 1.0,
+        "wrong_declared_match": 0.0
+      },
+      {
+        "all_rows_restore": true,
+        "gates": {
+          "all_rows_restore": true,
+          "phase_recovered_gt_0_30": true,
+          "pseudo_declared_match_le_0_35": true,
+          "pseudo_reject_floor_ge_0_95": true,
+          "real_accuracy_ge_0_60": true,
+          "real_mode_floor_ge_0_45": true,
+          "real_vs_pseudo_floor_ge_0_95": true,
+          "wrong_actual_match_ge_0_60": true,
+          "wrong_declared_match_le_0_20": true
+        },
+        "pair": "4:5",
+        "pass": true,
+        "phase_corr_null": -0.030191578521412063,
+        "phase_corr_true": 0.9998780262449869,
+        "phase_delta": 1.0300696047663989,
+        "pseudo_declared_match": 0.24666666666666667,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 1.0,
+        "real_mode_floor": 1.0,
+        "real_vs_pseudo_floor": 0.972972972972973,
+        "seed": 0,
+        "sender": 5,
+        "verdict": "PHASE4B_CROSS_CORE_PDN_LOCKIN_WITNESS",
+        "victim": 4,
+        "wrong_actual_match": 1.0,
+        "wrong_declared_match": 0.0
+      },
+      {
+        "all_rows_restore": true,
+        "gates": {
+          "all_rows_restore": true,
+          "phase_recovered_gt_0_30": true,
+          "pseudo_declared_match_le_0_35": true,
+          "pseudo_reject_floor_ge_0_95": true,
+          "real_accuracy_ge_0_60": true,
+          "real_mode_floor_ge_0_45": true,
+          "real_vs_pseudo_floor_ge_0_95": true,
+          "wrong_actual_match_ge_0_60": true,
+          "wrong_declared_match_le_0_20": true
+        },
+        "pair": "4:5",
+        "pass": true,
+        "phase_corr_null": -0.03345257045972795,
+        "phase_corr_true": 0.999870868057431,
+        "phase_delta": 1.033323438517159,
+        "pseudo_declared_match": 0.20666666666666667,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 1.0,
+        "real_mode_floor": 1.0,
+        "real_vs_pseudo_floor": 0.9848484848484849,
+        "seed": 1,
+        "sender": 5,
+        "verdict": "PHASE4B_CROSS_CORE_PDN_LOCKIN_WITNESS",
+        "victim": 4,
+        "wrong_actual_match": 1.0,
+        "wrong_declared_match": 0.0
+      },
+      {
+        "all_rows_restore": true,
+        "gates": {
+          "all_rows_restore": true,
+          "phase_recovered_gt_0_30": true,
+          "pseudo_declared_match_le_0_35": true,
+          "pseudo_reject_floor_ge_0_95": true,
+          "real_accuracy_ge_0_60": true,
+          "real_mode_floor_ge_0_45": true,
+          "real_vs_pseudo_floor_ge_0_95": true,
+          "wrong_actual_match_ge_0_60": true,
+          "wrong_declared_match_le_0_20": true
+        },
+        "pair": "4:5",
+        "pass": true,
+        "phase_corr_null": 0.0019833132165906404,
+        "phase_corr_true": 0.9998472152371971,
+        "phase_delta": 0.9978639020206065,
+        "pseudo_declared_match": 0.22666666666666666,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 1.0,
+        "real_mode_floor": 1.0,
+        "real_vs_pseudo_floor": 0.9540229885057471,
+        "seed": 2,
+        "sender": 5,
+        "verdict": "PHASE4B_CROSS_CORE_PDN_LOCKIN_WITNESS",
+        "victim": 4,
+        "wrong_actual_match": 1.0,
+        "wrong_declared_match": 0.0
+      },
+      {
+        "all_rows_restore": true,
+        "gates": {
+          "all_rows_restore": true,
+          "phase_recovered_gt_0_30": true,
+          "pseudo_declared_match_le_0_35": true,
+          "pseudo_reject_floor_ge_0_95": true,
+          "real_accuracy_ge_0_60": true,
+          "real_mode_floor_ge_0_45": true,
+          "real_vs_pseudo_floor_ge_0_95": true,
+          "wrong_actual_match_ge_0_60": true,
+          "wrong_declared_match_le_0_20": true
+        },
+        "pair": "4:5",
+        "pass": true,
+        "phase_corr_null": 0.021099270003005356,
+        "phase_corr_true": 0.9988781962025938,
+        "phase_delta": 0.9777789261995884,
+        "pseudo_declared_match": 0.22,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 0.9866666666666667,
+        "real_mode_floor": 0.95,
+        "real_vs_pseudo_floor": 0.9577464788732394,
+        "seed": 3,
+        "sender": 5,
+        "verdict": "PHASE4B_CROSS_CORE_PDN_LOCKIN_WITNESS",
+        "victim": 4,
+        "wrong_actual_match": 0.9866666666666667,
+        "wrong_declared_match": 0.0
+      },
+      {
+        "all_rows_restore": true,
+        "gates": {
+          "all_rows_restore": true,
+          "phase_recovered_gt_0_30": true,
+          "pseudo_declared_match_le_0_35": true,
+          "pseudo_reject_floor_ge_0_95": true,
+          "real_accuracy_ge_0_60": true,
+          "real_mode_floor_ge_0_45": true,
+          "real_vs_pseudo_floor_ge_0_95": true,
+          "wrong_actual_match_ge_0_60": true,
+          "wrong_declared_match_le_0_20": true
+        },
+        "pair": "4:5",
+        "pass": true,
+        "phase_corr_null": -0.008470022971893774,
+        "phase_corr_true": 0.9997837493408103,
+        "phase_delta": 1.008253772312704,
+        "pseudo_declared_match": 0.21333333333333335,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 1.0,
+        "real_mode_floor": 1.0,
+        "real_vs_pseudo_floor": 0.961038961038961,
+        "seed": 4,
+        "sender": 5,
+        "verdict": "PHASE4B_CROSS_CORE_PDN_LOCKIN_WITNESS",
+        "victim": 4,
+        "wrong_actual_match": 0.9933333333333333,
+        "wrong_declared_match": 0.0
+      },
+      {
+        "all_rows_restore": true,
+        "gates": {
+          "all_rows_restore": true,
+          "phase_recovered_gt_0_30": true,
+          "pseudo_declared_match_le_0_35": true,
+          "pseudo_reject_floor_ge_0_95": true,
+          "real_accuracy_ge_0_60": true,
+          "real_mode_floor_ge_0_45": true,
+          "real_vs_pseudo_floor_ge_0_95": true,
+          "wrong_actual_match_ge_0_60": true,
+          "wrong_declared_match_le_0_20": true
+        },
+        "pair": "4:5",
+        "pass": true,
+        "phase_corr_null": -0.015408176719779787,
+        "phase_corr_true": 0.996249937594773,
+        "phase_delta": 1.0116581143145527,
+        "pseudo_declared_match": 0.26,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 0.9533333333333334,
+        "real_mode_floor": 0.8857142857142857,
+        "real_vs_pseudo_floor": 0.9583333333333334,
+        "seed": 5,
+        "sender": 5,
+        "verdict": "PHASE4B_CROSS_CORE_PDN_LOCKIN_WITNESS",
+        "victim": 4,
+        "wrong_actual_match": 0.9333333333333333,
+        "wrong_declared_match": 0.013333333333333334
+      }
+    ]
+  },
+  "verdict": "PHASE4B_CROSS_CORE_PDN_LOCKIN_WITNESS",
+  "witness_label": "PHASE4B_CROSS_CORE_PDN_LOCKIN_WITNESS",
+  "witness_holds_reproducibly": true,
+  "next_slot": null
+}

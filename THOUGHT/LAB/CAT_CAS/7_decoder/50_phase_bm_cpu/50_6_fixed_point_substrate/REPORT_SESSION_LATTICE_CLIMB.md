@@ -177,7 +177,7 @@ class-group VECTORIZATION = the isogeny / CSIDH hardness assumption (Kuperberg 2
 - 49_the_decoder/ROADMAP.md + REPORT_LATTICE_SPIRAL.md + MYTHOS_BRIEF.md - the 50.6-50.14
   spiral (readout -> curvature -> substrate), the P^CTC reduction, the class-group/isogeny
   identification.
-- SPEC_PHASE6_FIXED_POINT_SUBSTRATE.md - sec 1A (brute relaxation on an arbitrary score is
+- SPEC.md - sec 1A (brute relaxation on an arbitrary score is
   a structural zero: information accounting, Omega(N) classical query bound, the bits/sec
   deficit) and sec 1B (representation congruence - the "relax don't construct" open angle).
 - 36_bekenstein_godel/REPORT.md - the Godel-edge point-gap winding, the rank-1 determinant

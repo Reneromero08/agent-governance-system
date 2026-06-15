@@ -16,4 +16,7 @@
 !50_3b_substrate_primitive/results/invariant_probe_summary.csv
 
 # Native Rust probe build outputs.
-50_6_fixed_point_substrate/chiral_phase_kickback/rust_baremetal/results/*.pdb
+50_6_fixed_point_substrate/08_chiral_phase_kickback/rust_baremetal/results/*.pdb
+
+# Generated .holo artifacts (not fixtures).
+**/*.holo

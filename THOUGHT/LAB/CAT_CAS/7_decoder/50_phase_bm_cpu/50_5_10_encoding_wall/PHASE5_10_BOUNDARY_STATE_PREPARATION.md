@@ -29,7 +29,7 @@ Failure modes differ, which is the whole reason for the split:
 - If **5.10 is skipped**, Phase 6 is **uninterpretable** - a null result could be either failure, and a
   positive result could be a basin artifact.
 
-**HARD RULE: Phase 6 MUST NOT RUN until 5.10C passes.** (Re-gated in `50_6_fixed_point_substrate/SPEC_PHASE6_FIXED_POINT_SUBSTRATE.md`.)
+**HARD RULE: Phase 6 MUST NOT RUN until 5.10C passes.** (Re-gated in `50_6_fixed_point_substrate/SPEC.md`.)
 
 ## 1. CAT_CAS frame (use these terms directly)
 

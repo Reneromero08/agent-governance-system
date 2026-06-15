@@ -40,7 +40,7 @@ Phase 5.7 supports computational boundary deformation under measured bounded run
 
 Phase 5.7 is the invariant/null discipline feeder for Phase 6, not the physical substrate run itself.
 
-Mapping into `50_6_fixed_point_substrate/SPEC_PHASE6_FIXED_POINT_SUBSTRATE.md`:
+Mapping into `50_6_fixed_point_substrate/SPEC.md`:
 
 - G1 restoration: supported at the logical/control level by restored tape and same-final-hash wrong-answer exclusion.
 - G3 basin -> invariant: not complete; 5.7 can score invariant strength and answer correlation once 5.9V supplies a basin label.

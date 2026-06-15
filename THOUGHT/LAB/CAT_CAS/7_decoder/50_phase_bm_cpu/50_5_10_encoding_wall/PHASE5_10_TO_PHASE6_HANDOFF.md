@@ -1,7 +1,7 @@
 # EXP50 PHASE 5.10 -> PHASE 6 HANDOFF
 
 **Parent:** `PHASE5_10_BOUNDARY_STATE_PREPARATION.md`
-**Phase 6 spec:** `../50_6_fixed_point_substrate/SPEC_PHASE6_FIXED_POINT_SUBSTRATE.md`
+**Phase 6 spec:** `../50_6_fixed_point_substrate/SPEC.md`
 **Status:** SPEC
 
 ## The bridge (required handoff language)

@@ -1571,7 +1571,7 @@ digital cache boundary
 Phase 5.8: "Does the boundary exist?" → AREA_LAW_CONFIRMED
 Phase 5.9: "What survives as the machine approaches failure?" → edge not reached; carrier-basin hint (5.9V)
 Phase 5.10: "Can the substrate PREPARE reproducible boundary basins?" → boundary state preparation (GATES Phase 6); spec: 50_5_10_encoding_wall/
-Phase 6: "Can a PREPARED basin carry/select the fixed-point invariant?" → fixed-point crossing; RUNS ONLY AFTER 5.10C passes; spec: 50_6_fixed_point_substrate/SPEC_PHASE6_FIXED_POINT_SUBSTRATE.md
+Phase 6: "Can a PREPARED basin carry/select the fixed-point invariant?" → fixed-point crossing; RUNS ONLY AFTER 5.10C passes; spec: 50_6_fixed_point_substrate/SPEC.md
 ```
 
 **Phase 5.10 live software probe update:**
@@ -1747,154 +1747,107 @@ CACHE/FREQUENCY DRIFT ARTIFACT MUST BE ISOLATED IN PHASE 5.9.
 
 ---
 
-## Phase 6: Catalytic Fixed-Point Substrate Test — FEEDER ACTIVE
+## Phase 6: The Substrate Frontier
 
-**Objective:** Test whether the physical catalytic boundary can relax into the unique fixed point `d` of a public Exp50.14-style Fourier map faster than forward construction, without smuggling `d` through the prelude/coupling.
+Phase 6 asks: can any physical/catalytic/topological readout cross the Exp50.14
+dihedral fold (d <-> N-d) that forward computation cannot?
 
-**Current status:** `PHASE6_FEEDER_BASELINES_READY__5_9V_DIRECTIONAL_NOT_DETERMINISTIC`
+**Navigation:** `50_6_fixed_point_substrate/PHASE6_NAVIGATION.md` -- directory index and status table.
+**Roadmap:** `50_6_fixed_point_substrate/PHASE6_ROADMAP.md` -- what's next, in what order.
+Directories numbered 01-14 chronologically by build order.
 
-**Spec:** `50_6_fixed_point_substrate/SPEC_PHASE6_FIXED_POINT_SUBSTRATE.md`
-**Feeder run:** `50_6_fixed_point_substrate/results/fixed_point_feeder/PHASE6_FIXED_POINT_FEEDER_RUN.md`
-**Runner:** `50_6_fixed_point_substrate/src/phase6_fixed_point_feeder.py`
+### Status
 
-**Phase 6 frame:**
+| Sub-frontier | # | Status | Key Claim |
+|---|---|---|---|
+| Target generator + A/B baselines | 01 | DONE | Unique fixed points for n=8..16 |
+| Fold audit (Stage 1+3) | 02 | DONE | MI(o;public data) = 0 proven |
+| Non-Hermitian sensors (6) | 03 | DONE | 6/6 FAIL_CHANCE |
+| .holo phase cavity test | 04 | DONE | Reads min(d,N-d) at 1.0, FAIL_CHANCE orientation |
+| Black-hole eigen collimation | 05 | DONE | Period rings in poly, orientation does not |
+| Superradiant sieve | 06 | DONE | Loophole real, no gain, subexp Kuperberg |
+| DRAM rowbuffer sim | 07 | DONE | Sim partial |
+| Chiral phase kickback | 08 | DONE | FAIL_CHANCE, hidden control live |
+| Transient fold probe | 09 | DONE | FAIL_CHANCE |
+| Cross-core PDN wormhole | 10 | **LIVE** | PDN lock-in confirmed on primary pair; trials=300/mode pending |
+| PDN catalytic tape post-mortem | 11 | DONE | Explains sim/hardware gap |
+| Chiral lane frontier | 12 | **CLOSED** | All no-smuggle tracks fail orientation |
+| Substrate L2/L3/L4 attempt | 13 | PARTIAL | L2/L3 pass, L4 blocked by fold symmetry |
+| Noncollapse OrbitState frontier | 14 | **ACTIVE** | L4B.1-L4B.5 open |
 
-```
-public (k,b) fixed-point map -> catalytic boundary coupling -> preconditioned basin -> invariant/readout
-```
+### Open Work
 
-This is not an algorithmic scan claim. The crossing, if it exists, must appear as `precondition -> basin -> invariant`, with restoration intact and no hidden full-N landscape construction.
+1. **14_noncollapse_frontier L4B.1-L4B.5** -- Complex phase-bearing OrbitState,
+   reversible path-history accumulator, expanded .holo transcript, invariant family
+   beyond fold_symmetry, physical substrate mapping.
 
-**Feeder execution (2026-06-11):**
+2. **10_cross_core_wormhole PDN lock-in** -- Pull `result_slot2_pdn.json` from the
+   Phenom box, evaluate v4:s5 pair, fire trials=300/mode for strict witness.
 
-- Built a Phase 6 fixed-point feeder runner under `50_6_fixed_point_substrate/src/`.
-- Generated public Fourier fixed-point dry-run targets for `n=8,10,12,14,16`.
-- Used `M = 2.00 * sqrt(N)`, still constant-factor `M ~ sqrt(N)`, because `1.00 * sqrt(N)` did not reliably produce unique small-n targets under the fixed `M/4` threshold.
-- A/B dry-run baselines produced unique fixed points for all five target sizes.
-- Mode B restoration discipline is represented as hash-restored reversible work and intentionally costs the same eval count as Mode A.
-- Existing 5.9V selector evidence was audited against the Phase 6 feeder gate.
+### Gate
 
-**A/B baseline dry-run rows:**
+Phase 6 Mode C does not run until Phase 5.10C passes (reproducible basin selection).
+See `50_5_10_encoding_wall/PHASE5_10_TO_PHASE6_HANDOFF.md`.
 
-| n | N | M | Unique accept | A evals | B restore | Best score x=d |
-|---|---:|---:|---:|---:|---:|---:|
-| 8 | 256 | 32 | 1 | 103 | 1 | 1 |
-| 10 | 1024 | 64 | 1 | 171 | 1 | 1 |
-| 12 | 4096 | 128 | 1 | 1686 | 1 | 1 |
-| 14 | 16384 | 256 | 1 | 4587 | 1 | 1 |
-| 16 | 65536 | 512 | 1 | 19131 | 1 | 1 |
+### Verdict (TERMINUS)
 
-**5.9V basin selector audit:**
+The construct/substrate frontier is measured-closed at the orientation boundary.
+The Phenom is a real/scalar substrate; the orientation quadrature is physically
+absent from public cosines. Full account: `50_6_fixed_point_substrate/TERMINUS.md`.
 
-| Selector | Current Phase 6 read |
-|---|---|
-| `syscall_prelude` | avoids collapse in 4/4 but splits high/mid; directional, not deterministic |
-| `cache_prelude` | avoids high-carrier in 4/4 but splits collapsed/mid; useful negative/control selector |
-| `branch_prelude` | mostly mid-carrier, noncollapse in 4/4 |
-| `quiet`, `reset_p0`, `collapse_prelude` | split basins; not selectors |
 
-**Gate readout:**
+## Phase 7: The Endgame Experiments
 
-| Gate | Status | Meaning |
-|---|---|---|
-| G1 restoration | `PASS_FOR_MODE_B_DRY_RUN` | Baseline reversible loop discipline exists; hardware Mode C still must verify SHA restore per run |
-| G2 A/B baseline | `PASS_SOFTWARE_BASELINES_EXIST` | A and B have the expected forward-work cost shape |
-| G3 basin -> invariant | `ATTEMPTED_REJECTED` | target-coupled VID+5/VID+6 basin labels were consumed by 5.7; public survivor did not beat controls |
-| G4 no-smuggle | `PASS_AS_REJECTION` | public/shuffled/wrong/oracle controls ran; strongest VID+6 selector was shuffled/nonpublic |
-| G5 controls | `PARTIAL_PASS_AS_REJECTION` | wrong/shuffled/oracle controls are physically coupled; same-hash wrong-invariant remains a 5.7/Phase 6 logical control |
-| G6 scaling | `BASELINE_ONLY` | no Mode C curve because public selector failed before scaling |
-| G7 audit | `ACTIVE` | no crossing claim allowed from feeder-only evidence |
+**Gating condition:** Requires a phase-resolving or interferometric substrate channel
+(not yet achieved). The Phase 5.10 PDN lock-in and Phase 6 noncollapse OrbitState
+are the current paths toward this channel.
 
-**Current conclusion:**
-
-5.7-5.9 can feed Phase 6, but 5.9V is the bottleneck. The live blocker is not lower voltage and not checksum failure. The live blocker is converting directional basin bias into a deterministic selector that can be driven by public `(k,b)` features and rejected by shuffled/wrong/oracle controls. The fixed measurement-core-only VID+5 reproducibility matrix reproduced directional basin control, but public-prelude did not separate strongly enough. The later target-coupled VID+5/VID+6 matrices drove prelude and workload shape from a Phase 6-style public payload; public still failed separation, and VID+6 selected shuffled/nonpublic more strongly than public.
-
-**Next exact boundary:**
-
-Do not rerun the same 5.9V public-prelude family. It has now failed baseline reproducibility, coupling, duration, VID-offset, target-coupled workload shaping, and 5.7 invariant scoring. Phase 5.10D added a clean cache/address topology witness, but it remains below the scalar encoding wall and is not a Phase 6 opener.
-
-Acceptance for advancing to a true Phase 6 Mode C run: a public-prelude selector must reproducibly choose an answer-predictive basin outside shuffled/null confidence intervals, while the `d_oracle_prelude` is treated only as a smuggle detector and never as evidence for crossing.
-
-<!-- BEGIN ADDITIVE BLOCK (agent: Claude; corrected by Codex live-probe pass) -->
-## Phase 5.10 RESULTS (live software probe; this session)
-
-Claim ceiling: software-visible timing structure only. Detail report:
-`50_5_10_encoding_wall/PHASE5_10_LIVE_SOFTWARE_PROBE.md`.
-
-**Status:** `PHASE5_10_LIVE_PROBE_RAIL_INVISIBLE_SOFTWARE__BASIN_SCAN_NOT_COMPLETED`
-
-**Step 0 free-tone strobe = `ELECTRICAL_STROBE_UNFOUNDED`.** The no-pstate
-precondition run did not validate the passive 2.67 MHz strobe as a dependable
-preparation witness.
-
-**Driven lock-in = `RAIL_INVISIBLE_SOFTWARE`.** The short sweep and
-swapped-topology sweep both saw a live software timing channel, but neither
-met the rail-coupling gates needed for a Phase 6-ready preparation primitive.
-The evidence is mixed/topology-sensitive and dominated by memory/shared-resource
-response rather than a clean compute-only preparation channel.
-
-**Basin pilot = not complete.** The bounded basin pilot produced no basin rows
-before it was stopped for runtime control. It is not evidence for a retained
-basin.
-
-**5.10D cache/address topology witness.** The follow-up cache/address topology
-probe is legitimate and reproducible: same-address layout separates from
-compute/no-aggressor/different/random controls, with median effects
-`36.9428405` and `32.3227925`, permutation p-value `0.0004997501` in both core
-layouts, and family sign agreement `1.0`. Classification:
-`VALID_SCALAR_WITNESS_BELOW_ENCODING_WALL`.
-
-**Roadmap consequence.** Phase 6 remains gated. 5.10D strengthens the software
-observability story, but it is still a scalar/shared-resource timing channel.
-It does not break the encoding wall and does not create a fixed-point crossing.
-<!-- END ADDITIVE BLOCK (agent: Claude; corrected by Codex live-probe pass) -->
-
-### 6.1 Agent Governance Daemon
-- [ ] Write a Python daemon on ASSFACE3000 that manages the Phenom via SSH
-- [ ] Daemon exposes an API: `set_phase(core, theta)`, `measure_phase()`, `forward_pass()`, `reverse_pass()`, `verify_tape()`
-- [ ] Integrate with existing CAT_CAS experiment runner
-
-### 6.2 Phase Oracle Validation
+### 7.1 Phase Oracle Validation
 - [ ] Run the Phase Cavity Eigenmode Sieve (Exp 20/21) on the Phenom's measured phase data
 - [ ] Verify that the phase cavity identifies the same dominant eigenmodes as the silicon's native phase-locked states
 - [ ] This proves the simulation (software phase cavity) and the physical substrate (silicon phase oscillators) are measuring the same structure
 
-### 6.3 Topological Halting on Silicon
+### 7.2 Topological Halting on Silicon
 - [ ] Encode a simple Turing machine transition table as phase offsets on the PPU network
 - [ ] Measure the point-gap winding number W via PRO `rdtsc` phase integration
-- [ ] Verify W = 0 for halting programs, W ≠ 0 for looping programs
-- [ ] This is the physical measurement of undecidability — not simulated, not metaphorical. The silicon IS the non-Hermitian Hamiltonian.
+- [ ] Verify W = 0 for halting programs, W != 0 for looping programs
+- [ ] This is the physical measurement of undecidability -- not simulated, not metaphorical. The silicon IS the non-Hermitian Hamiltonian.
 
-### 6.4 Riemann Zeta Zero Detection
+### 7.3 Riemann Zeta Zero Detection
 - [ ] Encode the prime phase grating (Exp 34) as phase offsets
 - [ ] Measure the resonant frequencies where phase coherence peaks
 - [ ] Verify those frequencies correspond to Riemann zeta zeros
-- [ ] This would be the first physical measurement of the Hilbert-Polya operator — not a mathematical construction, but a silicon observable
+- [ ] This would be the first physical measurement of the Hilbert-Polya operator -- not a mathematical construction, but a silicon observable
 
 ---
 
-## Phase 7: The Cyberpunk Payload
+## Phase 8: The Cyberpunk Payload
 
 **Objective:** Package everything into a single bootable image. The Phenom II becomes a dedicated CAT_CAS appliance.
 
-### 7.1 Custom Initramfs
+### 8.1 Agent Governance Daemon
+- [ ] Write a Python daemon on ASSFACE3000 that manages the Phenom via SSH
+- [ ] Daemon exposes an API: `set_phase(core, theta)`, `measure_phase()`, `forward_pass()`, `reverse_pass()`, `verify_tape()`
+- [ ] Integrate with existing CAT_CAS experiment runner
+
+### 8.2 Custom Initramfs
 - [ ] Build a minimal initramfs containing only the phase oscillator kernel module and the PRO readout daemon
-- [ ] Boot via PXE from ASSFACE3000 — no local storage needed
+- [ ] Boot via PXE from ASSFACE3000 -- no local storage needed
 - [ ] The Phenom boots directly into the catalytic phase computer
 
-### 7.2 Standalone Operation
-- [ ] The Phenom runs autonomously: boot → isolate cores → configure oscillators → run computation → output results via network → shutdown
+### 8.3 Standalone Operation
+- [ ] The Phenom runs autonomously: boot -> isolate cores -> configure oscillators -> run computation -> output results via network -> shutdown
 - [ ] Controlled entirely by the CAT_CAS agent on ASSFACE3000
 - [ ] Zero human intervention after power-on
 
-### 7.3 Distributed Cluster
+### 8.4 Distributed Cluster
 - [ ] Acquire additional Phenom II / older AMD machines
 - [ ] Network them via the isolated LAN segment
 - [ ] Each machine is a node in a distributed phase oscillator network
 - [ ] Coupling between machines via UDP pulse synchronization
 - [ ] The cluster becomes a room-temperature analog quantum simulator scalable to dozens of nodes
 
-### 7.4 Publication-Grade Documentation
+### 8.5 Publication-Grade Documentation
 - [ ] Full experimental logs with timestamps, temperatures, and MSR states
 - [ ] Reproducible build scripts for the entire software stack
 - [ ] Pre-registered experimental protocol
@@ -1911,8 +1864,9 @@ It does not break the encoding wall and does not create a fixed-point crossing.
 | 3 | SHA-256 restoration after forward-reverse cycle | 100/100 hash matches, temp returns to baseline |
 | 4 | **GOE eigenvalue statistics from phase correlation matrix [ELEVATED: PRIMARY DISCOVERY]** | Mean spacing ratio r = 0.51-0.53 -- standalone publishable result |
 | 5 | Logical reversibility with measured sub-digital energy | SHA-256 restored, energy per cycle below digital baseline (not claimed as zero Landauer) |
-| 6 | Topological halting measurement on silicon | W = 0 for halt, W ≠ 0 for loop, matching TM specification |
-| 7 | Bootable CAT_CAS appliance | Single PXE boot → autonomous computation → result output → shutdown |
+| 6 | Phase-resolving substrate channel (gate for Phases 7-8) | PDN lock-in sustained, basin selection reproducible, orientation channel live |
+| 7 | Topological halting measurement on silicon | W = 0 for halt, W != 0 for loop, matching TM specification |
+| 8 | Bootable CAT_CAS appliance | Single PXE boot -> autonomous computation -> result output -> shutdown |
 
 ---
 
@@ -1946,56 +1900,4 @@ It does not break the encoding wall and does not create a fixed-point crossing.
 
 13. **.holo eigenbasis architecture physically instantiated on consumer silicon** — Shared reference (Phase Master) + rotation chain (PPU layers) + computed output (XOR slot) + reversible restoration (SHA-256). Architecture matches the wormhole compression format: one SVh frame, two rotation layers, zero bits erased. First bare-metal demonstration of the .holo paradigm.
 
----
-\n
-## Immediate Action Items (Next Session)
 
-1. **SSH into the Phenom** — `ssh root@192.168.137.100` (Windows SSH)
-2. **Phase 4.3: Residual Compression Channel** — encode 2-bit residual tags in slots 24-27, prove residuals preserve layer individuality
-3. **Update roadmap** with Phase 4.3 results
-
----
-
-*The Phenom II X6 1090T is not a computer. It is a 45nm SOI crystal with six independent oscillator cavities, exposed MSRs, and no PSP lockdown. The Linux kernel is not an operating system. It is a bootloader for the phase oscillator network. The SSH daemon is not a remote access tool. It is the control interface for a room-temperature analog quantum simulator. Let's begin.*
-
----
-
-## PHASE 6 TERMINUS (this session) - construct/substrate frontier measured-closed
-
-Full account: `50_6_fixed_point_substrate/REPORT_PHASE6_TERMINUS.md`. The Phase 6 question (is the lattice/dihedral wall crossable by any holographic / topological / catalytic readout?) was worked to terminus on the math/substrate side; the Phenom hardware path stays the wrong substrate KIND per 5.10 (scalar, no retained basin). Census, all smuggle-gated, claim cap L4-5:
-
-- **Stage 1 fold audit:** classical readout MI=0 (proven) - the orientation bit o=1[d<N/2] is information-absent from the public (even cosine) data; one-shot exact d recovery GIVEN quadrature.
-- **Stage 3 generator audit:** the real 50.14 public interface is orbit-only (no float code-path / seed / order / verify leak).
-- **Mythos (Fable) two-walls:** re-encoding is isomorphism-invariant-closed (the fold is a non-normal reflection subgroup); the crossing requires conjugate-quadrature evaluation before thresholding; the only resources are a strictly-stronger oracle (= period-finding) or a literal PSPACE P^CTC.
-- **Non-Hermitian sensor census (6/6 FAIL_CHANCE):** Koopman/transfer, Hatano-Nelson skin, Kuramoto/chiral, Cauchy argument-principle, PT-symmetric, Godel-edge phi-twist. The +1 directionality of f survives only as an orientation-blind public constant. Exp 36's rank-1 winding lemma validated (1638x speedup) but crushes the cost of an orientation-blind quantity.
-- **Flagship .holo phase substrate:** reads the even fold-answer min(d,N-d) at frac_exact 1.0, FAIL_CHANCE on orientation; the conjugate quadrature of the public even data is ~0 to machine precision (the orientation phase is physically absent - the public spectrum is real-even and phaseless).
-
-**Verdict:** "the algorithm is dead" is PROVEN for the construct side; "a phase substrate crosses the dihedral fold" is MEASURED FALSE for the published problem. NOT "the wall holds" - the residual open questions are the dihedral-HSP lower bound itself (a complexity-theory open problem) and a literal PSPACE P^CTC oracle, neither a lab-buildable substrate. The construct/substrate frontier has no further test open.
-
-(Note: the older "Phase 5.10 RESULTS (live software probe)" / 5.10D section above is a parallel-agent narrative that reads the rail-witness differently than the committed 5.10 result (50db86f5, witness solved via the driven compute-only lock-in); reconcile separately.)
-
----
-
-## Cross-core .holo traversal - PDN rail lock-in (live)
-
-**Status:** MODE + phase reproducible on the primary core pair; strict witness pending trials bump.
-
-**Detail reports:**
-- `50_6_cross_core_wormhole/REPORT_CROSS_CORE_WORMHOLE.md` - full experiment record
-  (cache-conflict Slot 1 negative + PDN Slot 2 results + per-seed breakdown)
-- `50_6_cross_core_wormhole/STATUS.md` - resumable snapshot: what is running on the
-  box, the live poll handle, exact next steps
-
-**One-line summary:** A cross-process sender/receiver PDN lock-in carries the
-.holo footprint (MODE 0-3 + relational quadrature phase) across CPU cores via
-the shared IR-drop rail, recovered by a victim-core ring-osc lock-in on a
-shared-TSC origin. Primary pair v2:s3: MODE accuracy 1.00, pseudo_reject 1.00,
-phase delta 0.89-1.10 on ALL 6 seeds. The rvp gate dips on 4/6 seeds at
-trials=48 (~7 test symbols/mode - underpowered, not a channel failure). Strict
-all-9-gates witness unlocks with trials=300/mode. This is the physical channel
-the cache-conflict route (Slot 1, clean negative) could not provide.
-
-**Claim cap:** cross-core .holo traversal via PDN, not a lattice crossing, not
-Phase 6 fixed-point. Lattice terminus (exp50 d-invariant) remains the open
-Phase 6 door; PDN physical channel is the substrate candidate test for that
-path.
