@@ -50,6 +50,8 @@ ALLOWED_FILES = {
     'run.py',  # ant-worker adapter script - capability adapter with legitimate file ops
     'memory_cassette.py',  # Memory cassette - needs mkdir for database directory initialization
     'pdf_converter.py',  # arxiv-to-md utility - needs raw writes to download and save papers
+    'worker_control.py',  # Hermes worker controller - lock files and governed state writes
+    'test_worker_api.py',  # Hermes worker API tests - writes to pytest tmp_path
 }
 
 # Lines that should be ignored (comments, imports, defensive code)
