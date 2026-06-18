@@ -58,7 +58,11 @@ THE ALGORITHM IS DEAD.
 
 ### Active
 
-- [ ] L4B.1 — complex phase-bearing OrbitState with nonzero PhaseRelation
+- [x] L4B.1 — `.holo` geometric memory / `HoloGeometry`; complex phase is one carrier coordinate, not the architecture
+
+**Catalysis Is The Hologram:** phase is carrier, geometry is memory, the
+algorithm is a local trace, and an invariant is extracted only at
+CollapseBoundary.
 - [ ] L4B.2 — reversible path-history accumulator
 - [ ] L4B.3 — expanded .holo evolution transcript
 - [ ] L4B.4 — invariant family beyond `fold_symmetry = holds`

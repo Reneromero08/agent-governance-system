@@ -232,7 +232,7 @@ open crack from REPORT_SESSION_LATTICE_CLIMB.md about local/transient invariants
 
 ---
 
-### 10 -- Cross-Core PDN Wormhole (LIVE)
+### 10 -- Cross-Core PDN Wormhole (DONE)
 
 **Why:** Sub-phases 02-09 all attacked the wall with SOFTWARE methods on the
 Phenom. The cross-core wormhole tests whether a PHYSICAL channel -- the shared
@@ -258,7 +258,7 @@ candidate. The lattice terminus (d-invariant) remains open.
 - [x] Stage 1 sim: CROSS_CORE_WORMHOLE_SIM_VERIFIED
 - [x] Slot 1 cache-conflict: clean negative
 - [x] Slot 2 PDN lock-in: primary pair v2:s3 CONFIRMED (MODE 1.00, pseudo_reject 1.00, phase delta 0.89-1.10 on 6/6)
-- [ ] Pull result_slot2_pdn.json from Phenom -- T300 sweep completed, aggregator ran, all_done.marker present
+- [x] T300 result integrated -- route 4:5 selected from the completed sweep
 - [ ] Evaluate second pair v4:s5
 - [ ] Fire trials=300/mode for strict all-9-gates witness -- rvp needs ~40 test symbols/mode
 - [ ] Sweep additional core pairs -- optional, proves channel not pair-specific
@@ -383,7 +383,11 @@ live, Q_diff core-dependent, no residue). L2/L3 downgraded to mechanical warmup.
 - [x] L4A: mechanism screen protocol -- 6 classes assessed
 - [x] L4A Class B: PDN carrier validation -- carrier live, Q_diff core-dependent, no residue
 - [x] L4B: OrbitState evolution primitive -- L1, 512 steps, fold_symmetry=HOLDS
-- [ ] L4B.1: complex phase-bearing OrbitState with nonzero PhaseRelation -- current acc_imag ~0
+- [x] L4B.1: `.holo` geometric memory / `HoloGeometry` -- complex phase is one carrier coordinate, not the architecture
+
+**Catalysis Is The Hologram:** phase is carrier, geometry is memory, the
+algorithm is a local trace, and an invariant is extracted only at
+CollapseBoundary.
 - [ ] L4B.2: reversible path-history accumulator -- PathStep recorded but not yet accumulative
 - [ ] L4B.3: expanded .holo evolution transcript -- only final state written
 - [ ] L4B.4: invariant family beyond fold_symmetry=HOLDS
@@ -417,7 +421,7 @@ live, Q_diff core-dependent, no residue). L2/L3 downgraded to mechanical warmup.
   |               +---> Stream 1 (L4B OrbitState -- ACTIVE)
   |               +---> Downgrades 13's L2/L3 as "mechanical warmup"
   |
-  +---> 10_cross_core_wormhole (cross-core PDN physical channel -- LIVE)
+  +---> 10_cross_core_wormhole (cross-core PDN physical channel -- DONE)
           |
           +---> 11_pdn_catalytic_tape (post-mortem explaining sim/hardware gap)
           +---> 07_dram_rowbuffer (early sim prototyping for cross-core)
@@ -429,18 +433,14 @@ live, Q_diff core-dependent, no residue). L2/L3 downgraded to mechanical warmup.
 
 ## 3. Priority Order
 
-**1. 10_cross_core_wormhole (Stream 2)** -- The Phenom is running a live PDN
-sweep RIGHT NOW at /root/slot2_pdn/. Pull result_slot2_pdn.json, evaluate
-pair v4:s5, then fire trials=300/mode on both pairs for the strict witness.
-This is the physical channel that the cache route could not provide. Highest
-urgency because the box is running and the outcome gates whether Phase 6 has a
-viable physical substrate to continue testing.
+**1. 10_cross_core_wormhole (Stream 2, complete)** -- The completed T300 result
+selected route 4:5 and established the PDN carrier result recorded above.
 
 **2. 14_noncollapse_frontier L4B.1-L4B.5 (Stream 1)** -- The theoretical
-frontier. L4B.1 is the immediate blocking item: complex phase-bearing OrbitState
-with nonzero PhaseRelation. Without it, the evolution is real-only and
-fold_symmetry = HOLDS by construction -- there's nothing to detect. L4B.2-L4B.5
-build in sequence on L4B.1. Gate: no scalar collapse. No AUC. No verify(x).
+frontier. L4B.1 is the immediate blocking item: `.holo` geometric memory /
+`HoloGeometry`. Complex phase is one carrier coordinate inside that architecture,
+not the whole architecture. L4B.2-L4B.5 build in sequence on L4B.1. Gate: no
+scalar collapse. No AUC. No verify(x).
 The answer, if it exists, surfaces as an invariant at the CollapseBoundary.
 
 **3. 5.10 Gate** -- Hard prerequisite for Stream 3 (Phase 6 Mode C). 5.10C

@@ -11,7 +11,6 @@
 #define ORBIT_STATE_H
 
 #include <stdint.h>
-#include <time.h>
 
 #define ORBIT_DOCTRINE "NON_COLLAPSE_V1"
 #define ORBIT_MAX_STEPS 1024
@@ -51,32 +50,6 @@ typedef struct {
     double delta_imag;
 } PathStep;
 
-/* CollapseBoundary: explicit measurement point */
-typedef struct {
-    double invariant_real;    /* accumulated cosine / steps */
-    double invariant_imag;    /* accumulated sine / steps (fold-odd check) */
-    int fold_symmetry_holds;  /* 1 if imag ~ 0 */
-    char timestamp[32];
-} CollapseBoundary;
-
-/* Full .holo record for L4B */
-typedef struct {
-    char holo_id[ORBIT_UUID_LEN];
-    char doctrine[32];
-    uint64_t run_id;
-    int N;
-    /* orbit state at creation */
-    int branch_plus;
-    int branch_minus;
-    int total_steps;
-    /* evolution result */
-    double acc_real_final;
-    double acc_imag_final;
-    /* invariant extraction */
-    CollapseBoundary boundary;
-    int claim_level;
-} HoloL4B;
-
 /* FORBIDDEN fields (not defined in any struct):
  *   recovered_d, winner, true_branch, false_branch,
  *   candidate_score, verify_pass, orientation_label, AUC */
@@ -84,10 +57,5 @@ typedef struct {
 /* API */
 void orbit_init(OrbitState *o, int N, int a, int Na);
 void orbit_evolve(OrbitState *o, const EvolParams *p, PathStep *history, int *nsteps);
-void orbit_collapse(const OrbitState *o, CollapseBoundary *cb);
-void holo_l4b_init(HoloL4B *h, uint64_t run_id, int N, int a, int Na);
-void holo_l4b_finalize(HoloL4B *h, const OrbitState *o, const CollapseBoundary *cb);
-int  holo_l4b_validate(const HoloL4B *h);
-int  holo_l4b_write(const HoloL4B *h, const char *path);
 
 #endif

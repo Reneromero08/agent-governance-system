@@ -10,6 +10,7 @@
  * THE ALGORITHM IS DEAD.
  */
 #include "orbit_state.h"
+#include "../holo_runtime/holo_geometry.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -44,35 +45,50 @@ int main(int argc, char **argv) {
     printf("P2 EVOLVE: %d steps completed\n", nsteps);
     printf("  acc_real=%.6f acc_imag=%.6f\n", orbit.acc_real, orbit.acc_imag);
 
-    /* Phase 3: Invariant extraction at CollapseBoundary */
-    CollapseBoundary cb;
-    orbit_collapse(&orbit, &cb);
-    printf("P3 COLLAPSE: invariant_real=%.9f invariant_imag=%.9f fold_symmetry=%s\n",
-           cb.invariant_real, cb.invariant_imag,
-           cb.fold_symmetry_holds ? "HOLDS" : "BROKEN");
-    printf("  timestamp=%s\n", cb.timestamp);
+    /* Phase 3: Build geometric memory without crossing the boundary. */
+    HoloObject holo;
+    holo_object_init(&holo, seed, N, a, Na);
+    holo_record_evolution(&holo, seed, orbit.steps, orbit.acc_real, orbit.acc_imag);
+    if (nsteps > 0) {
+        holo_set_carrier_phase(&holo, history[nsteps - 1].theta_plus,
+                              history[nsteps - 1].theta_minus);
+    }
+    if (holo_extract_invariant(&holo) != -1) {
+        fprintf(stderr, "FAIL: invariant extraction was allowed before CollapseBoundary\n");
+        return 1;
+    }
+    printf("P3 GEOMETRY: basis_rank=%d unresolved=true carrier_phase=[%.6f, %.6f]\n",
+           holo.geometry.basis_rank, holo.carrier.phase[0], holo.carrier.phase[1]);
 
-    /* Phase 4: Write .holo record */
-    HoloL4B holo;
-    holo_l4b_init(&holo, seed, N, a, Na);
-    holo_l4b_finalize(&holo, &orbit, &cb);
+    /* Phase 4: Cross the boundary, extract the predeclared invariant, and write. */
+    if (holo_cross_boundary(&holo, orbit.steps) != 0) {
+        fprintf(stderr, "FAIL: CollapseBoundary extraction failed\n");
+        return 1;
+    }
+    printf("P4 COLLAPSE: fold_even=%.9f fold_odd_residual=%.9f fold_symmetry=%s\n",
+           holo.invariant.fold_even, holo.invariant.fold_odd_residual,
+           holo.invariant.fold_symmetry_holds ? "HOLDS" : "BROKEN");
 
-    if (!holo_l4b_validate(&holo)) {
+    if (!holo_validate(&holo)) {
         fprintf(stderr, "FAIL: .holo validation failed (collapse contamination detected)\n");
         return 1;
     }
 
     const char *path = "results/l4b_orbitstate_dry_run.holo";
-    if (holo_l4b_write(&holo, path) != 0) {
+    if (holo_write_json(&holo, path) != 0) {
         fprintf(stderr, "FAIL: could not write .holo file\n");
         return 1;
     }
-
-    printf("P4 HOLO: %s written, validation PASS\n", path);
+    HoloObject loaded;
+    if (holo_read_json(&loaded, path) != 0) {
+        fprintf(stderr, "FAIL: could not read .holo file\n");
+        return 1;
+    }
+    printf("P5 HOLO: %s written and read, geometry validation PASS\n", path);
 
     /* Verdict */
     printf("\n=== VERDICT ===\n");
-    printf("L4B_ORBITSTATE_EVOLUTION_PRIMITIVE_PASS\n");
+    printf("L4B1_HOLO_GEOMETRIC_MEMORY_PASS\n");
     printf("  OrbitState declared as unresolved fold pair.\n");
     printf("  Coupled evolution completed without branch collapse.\n");
     printf("  Invariant extracted at CollapseBoundary only.\n");
