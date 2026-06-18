@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
     if (a <= 0 || a >= N/2) { a = N/4; }
     int Na = N - a;
 
-    printf("L4B.2 REVERSIBLE PATH-HISTORY PRIMITIVE\n");
+    printf("L4B.4 NON-COLLAPSE INVARIANT FAMILY\n");
     printf("N=%d a=%d Na=%d steps=%d\n\n", N, a, Na, steps);
 
     /* Phase 1: Declare OrbitState */
@@ -87,9 +87,9 @@ int main(int argc, char **argv) {
         holo_object_destroy(&holo);
         return 1;
     }
-    printf("P4 COLLAPSE: fold_even=%.9f fold_odd_residual=%.9f fold_symmetry=%s\n",
-           holo.invariant.fold_even, holo.invariant.fold_odd_residual,
-           holo.invariant.fold_symmetry_holds ? "HOLDS" : "BROKEN");
+    printf("P4 COLLAPSE: invariant_family=%s records=%zu family_digest=%016llx\n",
+           holo.invariant_family.family_id, holo.invariant_family.count,
+           (unsigned long long)holo.invariant_family.family_digest);
 
     if (!holo_validate(&holo)) {
         fprintf(stderr, "FAIL: .holo validation failed (collapse contamination detected)\n");
@@ -104,28 +104,22 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    /* Destroy original history, reload it from the artifact, and prove restoration. */
-    holo_path_history_destroy(holo.evolution.path_history);
-    free(holo.evolution.path_history);
-    holo.evolution.path_history = NULL;
-    HoloPathHistory *reloaded = NULL;
-    if (holo_path_history_read_file(path, &reloaded) != HOLO_PATH_OK ||
-        holo_replace_path_history(&holo, reloaded) != 0) {
-        fprintf(stderr, "FAIL: serialized path history reload failed\n");
-        if (reloaded && holo.evolution.path_history != reloaded) {
-            holo_path_history_destroy(reloaded);
-            free(reloaded);
-        }
+    /* Reload the whole object; the reader recomputes rather than trusting records. */
+    HoloObject reloaded;
+    if (holo_read_json(&reloaded, path) != 0) {
+        fprintf(stderr, "FAIL: serialized invariant family reload failed\n");
         holo_object_destroy(&holo);
         return 1;
     }
+    holo_object_destroy(&holo);
+    holo = reloaded;
     if (holo_verify_software_restoration(&holo, &initial, &terminal, &restored, 1) != 0 ||
         holo_write_json(&holo, path) != 0) {
         fprintf(stderr, "FAIL: serialized path restoration failed\n");
         holo_object_destroy(&holo);
         return 1;
     }
-    printf("P5 HOLO: %s path reloaded, reversed, and rewritten\n", path);
+    printf("P5 HOLO: %s family reloaded, recomputed, and rewritten\n", path);
     printf("\nPATH REVERSIBILITY TEST\n");
     printf("PATH_REVERSIBILITY_PASS\n");
     printf("initial_state={N:%d,lower:%d,mirror:%d,acc_real:%.17g,acc_imag:%.17g,steps:%d}\n",
@@ -145,13 +139,18 @@ int main(int argc, char **argv) {
     printf("reloaded_history_count=%zu\n", holo.evolution.path_history->count);
     printf("equality=bitwise_numeric_orbit_state\n");
     printf("serialized_roundtrip=true\n");
+    printf("invariant_family_digest=%016llx\n",
+           (unsigned long long)holo.invariant_family.family_digest);
+    printf("serialization_invariance=%s\n",
+           holo.invariant_family.records[HOLO_INV_SERIALIZATION].passed ? "PASS" : "FAIL");
+    printf("software_path_holonomy=DEFERRED_NOT_WELL_DEFINED\n");
 
     /* Verdict */
     printf("\n=== VERDICT ===\n");
-    printf("L4B2_REVERSIBLE_SERIALIZED_PATH_HISTORY_PASS\n");
+    printf("L4B4_NONCOLLAPSE_INVARIANT_FAMILY_PASS\n");
     printf("  OrbitState declared as unresolved fold pair.\n");
     printf("  Coupled evolution completed without branch collapse.\n");
-    printf("  Invariant extracted at CollapseBoundary only.\n");
+    printf("  Predeclared invariant family extracted at CollapseBoundary only.\n");
     printf("  .holo record written, forbidden fields absent.\n");
     printf("  Serialized path reloaded and initial OrbitState restored bitwise.\n");
     printf("  Claim level: L1.\n");

@@ -388,9 +388,9 @@ live, Q_diff core-dependent, no residue). L2/L3 downgraded to mechanical warmup.
 **Catalysis Is The Hologram:** phase is carrier, geometry is memory, the
 algorithm is a local trace, and an invariant is extracted only at
 CollapseBoundary.
-- [x] L4B.2: reversible, appendable, serialized path-history accumulator -- bitwise software restoration after artifact reload
-- [ ] L4B.3: expanded .holo evolution transcript -- only final state written
-- [ ] L4B.4: invariant family beyond fold_symmetry=HOLDS
+- [x] L4B.2: COMPLETE -- reversible, appendable, serialized path-history accumulator with bitwise software restoration after artifact reload
+- [x] L4B.3: COMPLETE / ABSORBED BY L4B.2 -- machine-relevant path geometry replaces a prose evolution transcript
+- [x] L4B.4: COMPLETE -- orbit, basis, composition, restoration, exchange, serialization, and path-order invariants; software path holonomy deferred as not well-defined
 - [ ] L4B.5: physical substrate mapping -- after primitive matures
 
 ---

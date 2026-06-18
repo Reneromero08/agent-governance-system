@@ -81,11 +81,7 @@ int holo_object_init(HoloObject *h, uint64_t run_id, int N, int lower, int mirro
     copy_text(h->projection.allowed_boundary, sizeof(h->projection.allowed_boundary), "CollapseBoundary_only");
     copy_text(h->projection.output_family, sizeof(h->projection.output_family), "fold_orbit_invariant");
 
-    copy_text(h->invariant.invariant_family, sizeof(h->invariant.invariant_family), "fold_closure");
-    copy_text(h->invariant.extraction_operator, sizeof(h->invariant.extraction_operator), "normalized_coupled_trace");
-    h->invariant.predeclared = 1;
-    copy_text(h->invariant.extraction_boundary, sizeof(h->invariant.extraction_boundary), "CollapseBoundary");
-    h->invariant.claim_level = 1;
+    if (holo_invariant_family_init(&h->invariant_family) != 0) return -3;
 
     copy_text(h->restoration.substrate_type, sizeof(h->restoration.substrate_type), "software_state");
     copy_text(h->restoration.pre_state_reference, sizeof(h->restoration.pre_state_reference), "orbit_geometry:init");
@@ -211,13 +207,11 @@ void holo_set_materialization_mode(HoloObject *h, HoloMaterializationMode mode) 
 
 int holo_extract_invariant(HoloObject *h) {
     if (!h->collapse_boundary.crossed) return -1;
-    if (!h->invariant.predeclared || h->evolution.step_count <= 0) return -2;
-    h->invariant.fold_even = h->carrier.coordinates[0] / (double)h->evolution.step_count;
-    h->invariant.fold_odd_residual = h->carrier.coordinates[1] / (double)h->evolution.step_count;
-    h->invariant.fold_symmetry_holds = fabs(h->invariant.fold_odd_residual) < 1e-6;
-    h->invariant.extracted = 1;
+    if (!h->invariant_family.predeclared || h->evolution.step_count <= 0) return -2;
+    if (holo_invariant_family_evaluate(h) != 0) return -3;
     h->collapse_boundary.invariant_extracted = 1;
-    copy_text(h->evolution.closure_status, sizeof(h->evolution.closure_status), "catalytic_closure_observed");
+    copy_text(h->evolution.closure_status, sizeof(h->evolution.closure_status),
+              "software_path_closure_verified");
     return 0;
 }
 
@@ -250,11 +244,11 @@ int holo_validate(const HoloObject *h) {
     if (holo_geometry_render(&h->geometry, rendered) != 0) return 0;
     if (fabs(rendered[0] - h->geometry.coordinates[1]) > 1e-9 ||
         fabs(rendered[1] - h->geometry.coordinates[0]) > 1e-9) return 0;
-    if (!h->invariant.predeclared) return 0;
-    if (h->invariant.extracted && !h->collapse_boundary.crossed) return 0;
+    if (!holo_invariant_family_validate(&h->invariant_family)) return 0;
+    if (h->invariant_family.extracted && !h->collapse_boundary.crossed) return 0;
     if (h->projection.materialization_mode < HOLO_NATIVE ||
         h->projection.materialization_mode > HOLO_MATERIALIZED_FALLBACK) return 0;
-    if (h->claim_level > 2 || h->invariant.claim_level > 2) return 0;
+    if (h->claim_level > 2 || h->invariant_family.claim_level > 2) return 0;
     if (!h->evolution.path_history ||
         holo_path_history_validate(h->evolution.path_history) != HOLO_PATH_OK) return 0;
     if (h->evolution.path_history_count != h->evolution.path_history->count ||
@@ -316,7 +310,9 @@ int holo_write_json(HoloObject *h, const char *path) {
         fclose(f); return -5;
     }
     fprintf(f, "  \"projection\": {\"projection_type\": \"%s\", \"operator\": \"%s\", \"materialization_mode\": \"%s\", \"allowed_boundary\": \"%s\", \"output_family\": \"%s\"},\n", h->projection.projection_type, h->projection.operator_id, holo_materialization_mode_name(h->projection.materialization_mode), h->projection.allowed_boundary, h->projection.output_family);
-    fprintf(f, "  \"invariant\": {\"invariant_family\": \"%s\", \"extraction_operator\": \"%s\", \"predeclared\": %s, \"extraction_boundary\": \"%s\", \"extracted\": %s, \"fold_even\": %.9f, \"fold_odd_residual\": %.9f, \"fold_symmetry_holds\": %s, \"claim_level\": %d},\n", h->invariant.invariant_family, h->invariant.extraction_operator, h->invariant.predeclared ? "true" : "false", h->invariant.extraction_boundary, h->invariant.extracted ? "true" : "false", h->invariant.fold_even, h->invariant.fold_odd_residual, h->invariant.fold_symmetry_holds ? "true" : "false", h->invariant.claim_level);
+    if (holo_invariant_family_write_json(f, &h->invariant_family) != 0) {
+        fclose(f); return -6;
+    }
     fprintf(f, "  \"restoration\": {\"substrate_type\": \"%s\", \"pre_state_reference\": \"%s\", \"post_state_reference\": \"%s\", \"restored_state_reference\": \"%s\", \"restored\": %s, \"restoration_metric\": %.9f, \"closure_law\": \"%s\", \"evidence_level\": \"%s\", \"verification_scope\": \"%s\", \"failure_reason\": \"%s\"},\n", h->restoration.substrate_type, h->restoration.pre_state_reference, h->restoration.post_state_reference, h->restoration.restored_state_reference, h->restoration.restored ? "true" : "false", h->restoration.restoration_metric, h->restoration.closure_law, h->restoration.evidence_level, h->restoration.verification_scope, h->restoration.failure_reason);
     fprintf(f, "  \"collapse_boundary\": {\"boundary_id\": \"%s\", \"boundary_type\": \"%s\", \"step\": %d, \"timestamp\": \"%s\", \"crossed\": %s, \"projection_invoked\": %s, \"invariant_extracted\": %s, \"post_boundary_operations\": \"%s\"},\n", h->collapse_boundary.boundary_id, h->collapse_boundary.boundary_type, h->collapse_boundary.step, h->collapse_boundary.timestamp, h->collapse_boundary.crossed ? "true" : "false", h->collapse_boundary.projection_invoked ? "true" : "false", h->collapse_boundary.invariant_extracted ? "true" : "false", h->collapse_boundary.post_boundary_operations);
     fprintf(f, "  \"forbidden_fields_scan\": {\"status\": \"PASS\", \"schema_clean\": true, \"serialized_output_clean\": true},\n");
@@ -350,9 +346,26 @@ int holo_read_json(HoloObject *h, const char *path) {
     int N;
     double lower, mirror;
     HoloPathHistory *loaded_path = NULL;
+    HoloInvariantFamily serialized_family;
     const char *run_field;
     const char *n_field;
     const char *fold_field;
+    const char *geometry_field;
+    const char *carrier_field;
+    const char *evolution_field;
+    const char *boundary_field;
+    const char *basis_field;
+    const char *coordinates_field;
+    const char *neutral_field;
+    const char *carrier_coordinates_field;
+    const char *phase_field;
+    double basis[4];
+    double coordinates[2];
+    double neutral[2];
+    double carrier_coordinates[2];
+    double phase[2];
+    int family_rc;
+    unsigned long long operator_seed;
     if (!f) return -1;
     if (fseek(f, 0, SEEK_END) != 0 || (size = ftell(f)) < 0 || fseek(f, 0, SEEK_SET) != 0) { fclose(f); return -2; }
     json = (char *)malloc((size_t)size + 1U);
@@ -369,6 +382,8 @@ int holo_read_json(HoloObject *h, const char *path) {
         sscanf(fold_field, "\"fold_pair\": {\"lower\": %lf, \"mirror\": %lf", &lower, &mirror) != 2) {
         free(json); return -5;
     }
+    family_rc = holo_invariant_family_read_json(json, &serialized_family);
+    if (family_rc != 0) { free(json); return -100 + family_rc; }
     if (holo_object_init(h, (uint64_t)run_id, N, (int)lower, (int)mirror) != 0) {
         free(json); return -10;
     }
@@ -383,16 +398,84 @@ int holo_read_json(HoloObject *h, const char *path) {
     else if (strcmp(mode, "hybrid") == 0) h->projection.materialization_mode = HOLO_HYBRID;
     else if (strcmp(mode, "materialized_fallback") == 0) h->projection.materialization_mode = HOLO_MATERIALIZED_FALLBACK;
     else { holo_object_destroy(h); free(json); return -7; }
-    if (!strstr(json, "\"holo_geometry\"") || !strstr(json, "\"carrier\"") ||
-        !strstr(json, "\"evolution\"") || !strstr(json, "\"projection\"") ||
-        !strstr(json, "\"invariant\"") || !strstr(json, "\"restoration\"") ||
+    geometry_field = strstr(json, "\"holo_geometry\"");
+    carrier_field = strstr(json, "\"carrier\"");
+    evolution_field = strstr(json, "\"evolution\"");
+    boundary_field = strstr(json, "\"collapse_boundary\"");
+    if (!geometry_field || !carrier_field || !evolution_field || !boundary_field ||
+        !strstr(json, "\"projection\"") ||
+        !strstr(json, "\"invariant_family\"") || !strstr(json, "\"restoration\"") ||
         !strstr(json, "\"collapse_boundary\"") || !strstr(json, "\"path_history\"")) {
         holo_object_destroy(h); free(json); return -8;
     }
+    if (!read_text_value(evolution_field, "operator", h->evolution.operator_id,
+                         sizeof(h->evolution.operator_id)) ||
+        !strstr(evolution_field, "\"operator_seed\"") ||
+        sscanf(strstr(evolution_field, "\"operator_seed\""),
+               "\"operator_seed\": %llu", &operator_seed) != 1 ||
+        !read_text_value(boundary_field, "boundary_id", h->collapse_boundary.boundary_id,
+                         sizeof(h->collapse_boundary.boundary_id)) ||
+        !read_text_value(boundary_field, "timestamp", h->collapse_boundary.timestamp,
+                         sizeof(h->collapse_boundary.timestamp))) {
+        holo_object_destroy(h); free(json); return -15;
+    }
+    h->evolution.operator_seed = (uint64_t)operator_seed;
+    basis_field = strstr(geometry_field, "\"relation_basis\"");
+    coordinates_field = strstr(geometry_field, "\"coordinates\"");
+    neutral_field = strstr(geometry_field, "\"neutral_reference\"");
+    carrier_coordinates_field = strstr(carrier_field, "\"coordinates\"");
+    phase_field = strstr(carrier_field, "\"phase_relation\"");
+    if (!basis_field || !coordinates_field || !neutral_field ||
+        !carrier_coordinates_field || !phase_field ||
+        sscanf(basis_field,
+               "\"relation_basis\": [[%lf, %lf], [%lf, %lf]]",
+               &basis[0], &basis[1], &basis[2], &basis[3]) != 4 ||
+        sscanf(coordinates_field,
+               "\"coordinates\": [%lf, %lf]", &coordinates[0], &coordinates[1]) != 2 ||
+        sscanf(neutral_field,
+               "\"neutral_reference\": [%lf, %lf]", &neutral[0], &neutral[1]) != 2 ||
+        sscanf(carrier_coordinates_field,
+               "\"coordinates\": [%lf, %lf]", &carrier_coordinates[0], &carrier_coordinates[1]) != 2 ||
+        sscanf(phase_field,
+               "\"phase_relation\": [%lf, %lf]", &phase[0], &phase[1]) != 2) {
+        holo_object_destroy(h); free(json); return -12;
+    }
+    memcpy(h->geometry.relation_basis, basis, sizeof(basis));
+    memcpy(h->geometry.coordinates, coordinates, sizeof(coordinates));
+    memcpy(h->geometry.neutral_reference, neutral, sizeof(neutral));
+    memcpy(h->carrier.coordinates, carrier_coordinates, sizeof(carrier_coordinates));
+    memcpy(h->carrier.phase, phase, sizeof(phase));
     if (holo_path_history_read_json(json, &loaded_path) != HOLO_PATH_OK ||
         holo_replace_path_history(h, loaded_path) != 0) {
         if (loaded_path) { holo_path_history_destroy(loaded_path); free(loaded_path); }
         holo_object_destroy(h); free(json); return -11;
+    }
+    h->restoration.restored = loaded_path->restoration_verified;
+    h->restoration.restoration_metric = 0.0;
+    copy_text(h->restoration.closure_law, sizeof(h->restoration.closure_law),
+              "inverse_path_reconstructs_initial_orbit_state");
+    copy_text(h->restoration.evidence_level, sizeof(h->restoration.evidence_level),
+              "software_path_roundtrip");
+    copy_text(h->restoration.verification_scope, sizeof(h->restoration.verification_scope),
+              "dedicated_verification_copy");
+    h->collapse_boundary.crossed = 1;
+    h->collapse_boundary.projection_invoked = 1;
+    h->collapse_boundary.invariant_extracted = 1;
+    h->collapse_boundary.step = (int)loaded_path->count;
+    copy_text(h->evolution.continuation_status,
+              sizeof(h->evolution.continuation_status), "sealed_at_boundary");
+    copy_text(h->evolution.closure_status,
+              sizeof(h->evolution.closure_status), "software_path_closure_verified");
+    if (holo_invariant_family_evaluate(h) != 0 ||
+        !holo_invariant_family_equal(&serialized_family, &h->invariant_family, 1) ||
+        holo_invariant_family_mark_serialization(&h->invariant_family,
+                                                 serialized_family.family_digest,
+                                                 h->invariant_family.family_digest) != 0) {
+        holo_object_destroy(h); free(json); return -13;
+    }
+    if (serialized_family.records[HOLO_INV_SERIALIZATION].result == HOLO_INV_RESULT_PASS &&
+        !holo_invariant_family_equal(&serialized_family, &h->invariant_family, 0)) {
+        holo_object_destroy(h); free(json); return -14;
     }
     h->audit.serialized_output_clean = !file_contains_forbidden_output(path);
     free(json);

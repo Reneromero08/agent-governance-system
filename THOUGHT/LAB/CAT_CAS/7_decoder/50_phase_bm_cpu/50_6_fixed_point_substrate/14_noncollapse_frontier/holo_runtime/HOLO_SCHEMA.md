@@ -2,7 +2,7 @@
 
 ## Status and claim ceiling
 
-This document defines the L4B.1 executable geometric-memory architecture.
+This document defines the L4B executable geometric-memory architecture.
 It is an L1/L2 software primitive and an architectural hypothesis, not a
 physics claim or evidence of physical restoration.
 
@@ -23,8 +23,8 @@ is the memory of catalytic closure.
 3. `HoloEvolution` identifies the reusable operator, step count, continuation
    state, and appendable `PathStep` reference.
 4. `HoloProjection` declares the boundary operator and materialization mode.
-5. `HoloInvariant` predeclares the family and rejects extraction until the
-   `CollapseBoundary` has been crossed.
+5. `HoloInvariantFamily` predeclares typed invariant records and rejects final
+   extraction until the `CollapseBoundary` has been crossed.
 6. `CatalyticRestoration` records restoration references, closure law, and
    evidence level without claiming a physical restoration measurement.
 7. `HoloCollapseBoundary` records the explicit projection event and the only
@@ -79,7 +79,7 @@ recovery. The public invariant remains the fold orbit `{d, N-d}`.
 
 ## JSON witness
 
-Schema family `CAT_CAS_HOLO_GEOMETRY`, version `1.0.0`, emits:
+Schema family `CAT_CAS_HOLO_GEOMETRY`, version `1.2.0`, emits:
 
 ```text
 schema identity and CATALYSIS_IS_THE_HOLOGRAM hypothesis
@@ -88,22 +88,16 @@ holo_geometry (basis, coordinates, neutral reference, status)
 carrier (coordinates and phase relation)
 evolution (operator, steps, path history, closure)
 projection (operator, materialization mode, allowed boundary)
-invariant (predeclaration, extraction state, result, claim level)
+invariant_family (typed records, operators, results, tolerances, evidence)
 restoration (references, restored status, evidence level)
 collapse_boundary
 forbidden_fields_scan
 ```
 
-The reader requires each structural section and reconstructs the native orbit
-geometry from the serialized fold pair. The writer rejects invalid structure
-and scans the serialized field names before accepting the witness.
-
-## Current limits
-
-The software runtime demonstrates executable relational geometry, delayed
-projection, and schema round-tripping. `architectural_metadata_only` is the
-restoration evidence ceiling. No physical catalytic closure, physical memory,
-orientation channel, or invariant beyond fold closure is experimentally proven.
+The reader requires each structural section, restores geometry and path data,
+and recomputes the invariant family. Serialized pass flags are not trusted.
+The writer rejects invalid structure and scans serialized field names before
+accepting the witness.
 
 ## L4B.2 reversible path history
 
@@ -131,3 +125,42 @@ Successful execution sets `restored=true`,
 `evidence_level=software_path_roundtrip`, and
 `closure_law=inverse_path_reconstructs_initial_orbit_state`. This proves only a
 software path round trip. It is not evidence of physical or hardware restoration.
+
+## L4B.4 non-collapse invariant family
+
+`noncollapse_geometry_v1` predeclares, in deterministic order, orbit
+conservation, fold-relation basis involution, forward/reverse composition,
+software restoration closure, branch-exchange covariance, serialization
+invariance, path-order sensitivity, and software path holonomy. Each record has
+an invariant identity, operator identity, declaration phase, typed result,
+explicit tolerance, evidence level, and L1 claim level. Registration, operator
+changes, tolerance changes, and result changes are rejected after extraction or
+sealing.
+
+Structural validation may occur before the boundary. Public family extraction
+and sealing occur only at `CollapseBoundary`. The family references one path
+digest and does not duplicate history. After serialization, the reader reloads
+the geometry and path, recomputes executable records, compares them with the
+serialized family, and rejects mismatches or family-digest tampering.
+
+The exchange covariance record applies `(lower, mirror) -> (mirror, lower)` and
+requires orbit sum/product preservation plus indexed coordinate exchange. It
+does not assign truth or preference to either coordinate. Corruption coverage:
+
+```text
+fold coordinate mutation       orbit reconstruction / conservation
+relation basis mutation        relation-basis invariant
+neutral reference mutation     relation-basis invariant
+path step swap                 path order / continuity
+operator parameter mutation    step digest
+evolution operator mutation   composition invariant
+terminal digest mutation       path continuity
+serialized result mutation     family digest / reload recomputation
+post-boundary invariant add    lifecycle guard
+```
+
+`software_path_holonomy` is `DEFERRED_NOT_WELL_DEFINED`: path steps currently
+store operator parameters and exact accumulator state bits, but not a declared
+group-valued carrier transform. No phase product, wrapping convention, or
+winding result is fabricated. All results remain L1/L2 software architecture;
+they do not prove orientation recovery, physical closure, or physical holonomy.

@@ -4,9 +4,10 @@
 
 #include <stdint.h>
 #include <stddef.h>
+#include "holo_invariant_family.h"
 
 #define HOLO_SCHEMA_FAMILY "CAT_CAS_HOLO_GEOMETRY"
-#define HOLO_SCHEMA_VERSION "1.1.0"
+#define HOLO_SCHEMA_VERSION "1.2.0"
 #define HOLO_HYPOTHESIS "CATALYSIS_IS_THE_HOLOGRAM"
 #define HOLO_DOCTRINE "NON_COLLAPSE_V1"
 #define HOLO_TEXT_LEN 96
@@ -66,18 +67,6 @@ typedef struct {
 } HoloProjection;
 
 typedef struct {
-    char invariant_family[HOLO_TEXT_LEN];
-    char extraction_operator[HOLO_TEXT_LEN];
-    int predeclared;
-    char extraction_boundary[HOLO_TEXT_LEN];
-    int extracted;
-    double fold_even;
-    double fold_odd_residual;
-    int fold_symmetry_holds;
-    int claim_level;
-} HoloInvariant;
-
-typedef struct {
     char substrate_type[HOLO_TEXT_LEN];
     char pre_state_reference[HOLO_TEXT_LEN];
     char post_state_reference[HOLO_TEXT_LEN];
@@ -106,7 +95,7 @@ typedef struct {
     int serialized_output_clean;
 } ForbiddenFieldAudit;
 
-typedef struct {
+typedef struct HoloObject {
     char schema_family[HOLO_TEXT_LEN];
     char schema_version[HOLO_TEXT_LEN];
     char hypothesis[HOLO_TEXT_LEN];
@@ -118,7 +107,7 @@ typedef struct {
     HoloCarrier carrier;
     HoloEvolution evolution;
     HoloProjection projection;
-    HoloInvariant invariant;
+    HoloInvariantFamily invariant_family;
     CatalyticRestoration restoration;
     HoloCollapseBoundary collapse_boundary;
     ForbiddenFieldAudit audit;
