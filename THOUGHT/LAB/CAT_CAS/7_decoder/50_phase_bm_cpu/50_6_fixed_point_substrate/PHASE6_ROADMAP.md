@@ -394,6 +394,8 @@ CollapseBoundary.
 - [x] L4B.5A: COMPLETE -- PDN mapping contract: 1 supported channel mapping, 3 partial interpretations, 4 unsupported physical mappings
 - [x] L4B.5A-R: HUMAN REVIEW BOUND TO CONTRACT DIGEST `0d06f3c8b44f8c55`
 - [ ] L4B.5B: BLOCKED / `NOT_AUTHORIZED_EVIDENCE_MISSING` -- physical implementation requires the predeclared restoration experiment and controls
+- [x] L4B.5B0: EXPERIMENT DESIGN COMPLETE / `READY_FOR_HUMAN_REVIEW` -- observability and operator-identification protocol only; not executed
+- [ ] L4B.5B1: NOT AUTHORIZED UNTIL HUMAN DESIGN REVIEW
 
 ---
 

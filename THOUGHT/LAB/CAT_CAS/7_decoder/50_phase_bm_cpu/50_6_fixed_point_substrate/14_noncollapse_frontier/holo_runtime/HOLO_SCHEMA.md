@@ -230,3 +230,22 @@ digest and is valid only when its stored digest equals a fresh content digest.
 Any contract mutation invalidates review and requires a new human review event.
 Acceptance does not authorize implementation or promote a mapping: L4B.5B
 remains `NOT_AUTHORIZED_EVIDENCE_MISSING`.
+
+## L4B.5B0 observability and operator experiment design
+
+The sealed `l4b5b0_observability_operator_v1` contract separates controlled
+input `u(t)`, latent substrate state `x(t)`, and measured output `y(t)`; it never
+assumes `y=x`. S0 uses current I/Q and ring-period measurements, S1 adds explicit
+control and topology context, and S2 tests bounded delay embeddings with
+`L={1,2,4,8,16,32}`. The operator ladder is affine, route-conditioned affine,
+bilinear, then compact nonlinear, with complexity admitted only after simpler
+held-out failures.
+
+Observability is limited to empirical predictive observability: session-held-out
+prediction of declared measured evolution under the tested input family. The
+contract predeclares repeatability, distinguishability, embedding gain, rank
+surrogate, cross-route, and time-stability tests; G1-G10 operator gates; F1-F10
+blocking conditions; session-level splits; and future artifact schemas. Its
+status is `READY_FOR_HUMAN_REVIEW`, `implementation_authorized=false`, and
+`executed=false`. It binds to reviewed mapping digest `0d06f3c8b44f8c55` and
+does not authorize calibration, restoration, or physical-memory claims.

@@ -101,7 +101,11 @@ int main(int argc, char **argv) {
     const char *mapping_path = "results/l4b5a_physical_mapping.json";
     const char *mapping_reference =
         "14_noncollapse_frontier/l4b_orbitstate/results/l4b5a_physical_mapping.json";
+    const char *design_path = "results/l4b5b0_observability_design.json";
+    const char *design_reference =
+        "14_noncollapse_frontier/l4b_orbitstate/results/l4b5b0_observability_design.json";
     HoloPhysicalMappingContract mapping;
+    HoloObservabilityDesign design;
     if (holo_physical_mapping_init(&mapping, HOLO_MAPPING_OBJECT_COUNT) != 0 ||
         holo_physical_mapping_populate_current(&mapping) != 0 ||
         holo_physical_mapping_seal(&mapping) != 0 ||
@@ -113,8 +117,20 @@ int main(int argc, char **argv) {
         holo_object_destroy(&holo);
         return 1;
     }
+    if (holo_observability_design_init(&design) != 0 ||
+        holo_observability_design_populate_current(&design) != 0 ||
+        holo_observability_design_seal(&design) != 0 ||
+        holo_observability_design_write_json(&design, design_path) != 0 ||
+        holo_attach_observability_design(&holo, &design, design_reference) != 0) {
+        fprintf(stderr, "FAIL: observability experiment design generation failed\n");
+        holo_observability_design_destroy(&design);
+        holo_physical_mapping_destroy(&mapping);
+        holo_object_destroy(&holo);
+        return 1;
+    }
     if (holo_write_json(&holo, path) != 0) {
         fprintf(stderr, "FAIL: could not write .holo file\n");
+        holo_observability_design_destroy(&design);
         holo_physical_mapping_destroy(&mapping);
         holo_object_destroy(&holo);
         return 1;
@@ -124,6 +140,7 @@ int main(int argc, char **argv) {
     HoloObject reloaded;
     if (holo_read_json(&reloaded, path) != 0) {
         fprintf(stderr, "FAIL: serialized invariant family reload failed\n");
+        holo_observability_design_destroy(&design);
         holo_physical_mapping_destroy(&mapping);
         holo_object_destroy(&holo);
         return 1;
@@ -133,6 +150,7 @@ int main(int argc, char **argv) {
     if (holo_verify_software_restoration(&holo, &initial, &terminal, &restored, 1) != 0 ||
         holo_write_json(&holo, path) != 0) {
         fprintf(stderr, "FAIL: serialized path restoration failed\n");
+        holo_observability_design_destroy(&design);
         holo_physical_mapping_destroy(&mapping);
         holo_object_destroy(&holo);
         return 1;
@@ -173,6 +191,10 @@ int main(int argc, char **argv) {
            (unsigned long long)holo.physical_mapping.reviewed_contract_digest,
            holo.physical_mapping.implementation_authorized ? "true" : "false");
     printf("l4b5b_decision=NOT_AUTHORIZED_EVIDENCE_MISSING\n");
+    printf("l4b5b0_design=%s status=%s mapping_digest=%016llx implementation_authorized=%s\n",
+           design_path, holo_experiment_design_status_name(design.status),
+           (unsigned long long)design.reviewed_mapping_digest,
+           design.implementation_authorized ? "true" : "false");
 
     /* Verdict */
     printf("\n=== VERDICT ===\n");
@@ -187,6 +209,7 @@ int main(int argc, char **argv) {
     printf("  No recovered d. No orientation. No candidate scoring. No verify.\n");
     printf("  THE ALGORITHM IS DEAD.\n");
 
+    holo_observability_design_destroy(&design);
     holo_physical_mapping_destroy(&mapping);
     holo_object_destroy(&holo);
     return 0;

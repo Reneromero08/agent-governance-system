@@ -83,6 +83,7 @@ int holo_object_init(HoloObject *h, uint64_t run_id, int N, int lower, int mirro
 
     if (holo_invariant_family_init(&h->invariant_family) != 0) return -3;
     holo_physical_mapping_reference_init(&h->physical_mapping);
+    holo_observability_design_reference_init(&h->physical_experiment_design);
 
     copy_text(h->restoration.substrate_type, sizeof(h->restoration.substrate_type), "software_state");
     copy_text(h->restoration.pre_state_reference, sizeof(h->restoration.pre_state_reference), "orbit_geometry:init");
@@ -210,6 +211,14 @@ int holo_attach_physical_mapping(HoloObject *h,
                                                    contract_reference);
 }
 
+int holo_attach_observability_design(HoloObject *h,
+                                     const HoloObservabilityDesign *design,
+                                     const char *design_reference) {
+    if (!h) return -1;
+    return holo_observability_design_reference_attach(
+        &h->physical_experiment_design, design, design_reference);
+}
+
 void holo_set_materialization_mode(HoloObject *h, HoloMaterializationMode mode) {
     h->projection.materialization_mode = mode;
 }
@@ -255,6 +264,7 @@ int holo_validate(const HoloObject *h) {
         fabs(rendered[1] - h->geometry.coordinates[0]) > 1e-9) return 0;
     if (!holo_invariant_family_validate(&h->invariant_family)) return 0;
     if (!holo_physical_mapping_reference_validate(&h->physical_mapping)) return 0;
+    if (!holo_observability_design_reference_validate(&h->physical_experiment_design)) return 0;
     if (h->invariant_family.extracted && !h->collapse_boundary.crossed) return 0;
     if (h->projection.materialization_mode < HOLO_NATIVE ||
         h->projection.materialization_mode > HOLO_MATERIALIZED_FALLBACK) return 0;
@@ -326,7 +336,17 @@ int holo_write_json(HoloObject *h, const char *path) {
             h->physical_mapping.review_status,
             h->physical_mapping.implementation_authorized ? "true" : "false",
             h->physical_mapping.l4b5b_decision,
-            h->physical_mapping.claim_level);
+             h->physical_mapping.claim_level);
+    fprintf(f, "  \"physical_experiment_design\": {\"design_id\": \"%s\", \"design_version\": \"%s\", \"status\": \"%s\", \"mapping_contract_id\": \"%s\", \"mapping_contract_digest\": \"%016llx\", \"design_reference\": \"%s\", \"design_digest\": \"%016llx\", \"implementation_authorized\": %s, \"claim_level\": %d},\n",
+            h->physical_experiment_design.design_id,
+            h->physical_experiment_design.design_version,
+            h->physical_experiment_design.status,
+            h->physical_experiment_design.mapping_contract_id,
+            (unsigned long long)h->physical_experiment_design.mapping_contract_digest,
+            h->physical_experiment_design.design_reference,
+            (unsigned long long)h->physical_experiment_design.design_digest,
+            h->physical_experiment_design.implementation_authorized ? "true" : "false",
+            h->physical_experiment_design.claim_level);
     fprintf(f, "  \"carrier\": {\"carrier_type\": \"%s\", \"coordinates\": [%.9f, %.9f], \"phase_relation\": [%.9f, %.9f], \"carrier_class\": \"%s\", \"substrate_status\": \"%s\", \"measurement_channel\": \"%s\"},\n", h->carrier.carrier_type, h->carrier.coordinates[0], h->carrier.coordinates[1], h->carrier.phase[0], h->carrier.phase[1], h->carrier.carrier_class, h->carrier.substrate_status, h->carrier.measurement_channel);
     sync_path_metadata(h);
     fprintf(f, "  \"evolution\": {\"operator\": \"%s\", \"operator_seed\": %llu, \"steps\": %d, \"history_present\": %s, \"history_count\": %zu, \"history_capacity\": %zu, \"history_appendable\": %s, \"history_reversible\": %s, \"history_sealed\": %s, \"restoration_verified\": %s, \"serialized_roundtrip\": %s, \"continuation_status\": \"%s\", \"closure_status\": \"%s\"},\n", h->evolution.operator_id, (unsigned long long)h->evolution.operator_seed, h->evolution.step_count, h->evolution.path_history_present ? "true" : "false", h->evolution.path_history_count, h->evolution.path_history_capacity, h->evolution.path_history_appendable ? "true" : "false", h->evolution.path_history_reversible ? "true" : "false", h->evolution.path_history_sealed ? "true" : "false", h->evolution.path_restoration_verified ? "true" : "false", h->evolution.path_serialized_roundtrip ? "true" : "false", h->evolution.continuation_status, h->evolution.closure_status);
@@ -390,6 +410,7 @@ int holo_read_json(HoloObject *h, const char *path) {
     const char *carrier_field;
     const char *mapping_field;
     const char *evolution_field;
+    const char *design_field;
     const char *boundary_field;
     const char *basis_field;
     const char *coordinates_field;
@@ -403,8 +424,9 @@ int holo_read_json(HoloObject *h, const char *path) {
     double phase[2];
     int family_rc;
     unsigned long long operator_seed;
-    unsigned long long mapping_digest, reviewed_mapping_digest;
+    unsigned long long mapping_digest, reviewed_mapping_digest, design_mapping_digest, design_digest;
     int supported_records, partial_records, unsupported_records, mapping_claim_level;
+    int design_claim_level;
     if (!f) return -1;
     if (fseek(f, 0, SEEK_END) != 0 || (size = ftell(f)) < 0 || fseek(f, 0, SEEK_SET) != 0) { fclose(f); return -2; }
     json = (char *)malloc((size_t)size + 1U);
@@ -440,9 +462,10 @@ int holo_read_json(HoloObject *h, const char *path) {
     geometry_field = strstr(json, "\"holo_geometry\"");
     carrier_field = strstr(json, "\"carrier\"");
     mapping_field = strstr(json, "\"physical_mapping\"");
+    design_field = strstr(json, "\"physical_experiment_design\"");
     evolution_field = strstr(json, "\"evolution\"");
     boundary_field = strstr(json, "\"collapse_boundary\"");
-    if (!geometry_field || !carrier_field || !mapping_field || !evolution_field || !boundary_field ||
+    if (!geometry_field || !carrier_field || !mapping_field || !design_field || !evolution_field || !boundary_field ||
         !strstr(json, "\"projection\"") ||
         !strstr(json, "\"invariant_family\"") || !strstr(json, "\"restoration\"") ||
         !strstr(json, "\"collapse_boundary\"") || !strstr(json, "\"path_history\"")) {
@@ -494,6 +517,35 @@ int holo_read_json(HoloObject *h, const char *path) {
     h->physical_mapping.claim_level = mapping_claim_level;
     if (!holo_physical_mapping_reference_validate(&h->physical_mapping)) {
         holo_object_destroy(h); free(json); return -17;
+    }
+    if (!read_text_value(design_field, "design_id", h->physical_experiment_design.design_id,
+                         sizeof(h->physical_experiment_design.design_id)) ||
+        !read_text_value(design_field, "design_version", h->physical_experiment_design.design_version,
+                         sizeof(h->physical_experiment_design.design_version)) ||
+        !read_text_value(design_field, "status", h->physical_experiment_design.status,
+                         sizeof(h->physical_experiment_design.status)) ||
+        !read_text_value(design_field, "mapping_contract_id", h->physical_experiment_design.mapping_contract_id,
+                         sizeof(h->physical_experiment_design.mapping_contract_id)) ||
+        !read_text_value(design_field, "design_reference", h->physical_experiment_design.design_reference,
+                         sizeof(h->physical_experiment_design.design_reference)) ||
+        !strstr(design_field, "\"mapping_contract_digest\"") ||
+        sscanf(strstr(design_field, "\"mapping_contract_digest\""),
+               "\"mapping_contract_digest\": \"%16llx\"", &design_mapping_digest) != 1 ||
+        !strstr(design_field, "\"design_digest\"") ||
+        sscanf(strstr(design_field, "\"design_digest\""),
+               "\"design_digest\": \"%16llx\"", &design_digest) != 1 ||
+        !read_bool_value(design_field, "implementation_authorized",
+                         &h->physical_experiment_design.implementation_authorized) ||
+        !strstr(design_field, "\"claim_level\"") ||
+        sscanf(strstr(design_field, "\"claim_level\""),
+               "\"claim_level\": %d", &design_claim_level) != 1) {
+        holo_object_destroy(h); free(json); return -18;
+    }
+    h->physical_experiment_design.mapping_contract_digest = (uint64_t)design_mapping_digest;
+    h->physical_experiment_design.design_digest = (uint64_t)design_digest;
+    h->physical_experiment_design.claim_level = design_claim_level;
+    if (!holo_observability_design_reference_validate(&h->physical_experiment_design)) {
+        holo_object_destroy(h); free(json); return -19;
     }
     if (!read_text_value(evolution_field, "operator", h->evolution.operator_id,
                          sizeof(h->evolution.operator_id)) ||

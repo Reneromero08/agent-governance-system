@@ -93,6 +93,7 @@ int main(void) {
 
     assert(output_contains(path, "\"holo_geometry\""));
     assert(output_contains(path, "\"physical_mapping\""));
+    assert(output_contains(path, "\"physical_experiment_design\""));
     assert(output_contains(path, "\"status\": \"not_attached\""));
     assert(output_contains(path, "\"relation_basis\""));
     assert(output_contains(path, "\"coordinates\""));
