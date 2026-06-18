@@ -105,6 +105,7 @@ int main(int argc, char **argv) {
     if (holo_physical_mapping_init(&mapping, HOLO_MAPPING_OBJECT_COUNT) != 0 ||
         holo_physical_mapping_populate_current(&mapping) != 0 ||
         holo_physical_mapping_seal(&mapping) != 0 ||
+        holo_physical_mapping_apply_human_review(&mapping, HOLO_L4B5A_REVIEWED_DIGEST) != 0 ||
         holo_physical_mapping_write_json(&mapping, mapping_path) != 0 ||
         holo_attach_physical_mapping(&holo, &mapping, mapping_reference) != 0) {
         fprintf(stderr, "FAIL: physical mapping contract generation failed\n");
@@ -166,6 +167,11 @@ int main(int argc, char **argv) {
            holo.physical_mapping.supported_records,
            holo.physical_mapping.partial_records,
            holo.physical_mapping.unsupported_records);
+    printf("physical_mapping_review=valid:%s reviewer_role:%s digest:%016llx implementation_authorized:%s\n",
+           holo.physical_mapping.review_valid ? "true" : "false",
+           holo.physical_mapping.reviewer_role,
+           (unsigned long long)holo.physical_mapping.reviewed_contract_digest,
+           holo.physical_mapping.implementation_authorized ? "true" : "false");
     printf("l4b5b_decision=NOT_AUTHORIZED_EVIDENCE_MISSING\n");
 
     /* Verdict */

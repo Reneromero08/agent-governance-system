@@ -13,6 +13,29 @@ static HoloPhysicalMappingContract make_current(void) {
     return contract;
 }
 
+static HoloPhysicalMappingContract make_reviewed(void) {
+    HoloPhysicalMappingContract contract = make_current();
+    assert(holo_physical_mapping_seal(&contract) == 0);
+    assert(contract.contract_digest == HOLO_L4B5A_REVIEWED_DIGEST);
+    assert(holo_physical_mapping_apply_human_review(
+        &contract, HOLO_L4B5A_REVIEWED_DIGEST) == 0);
+    assert(holo_physical_mapping_review_valid(&contract));
+    return contract;
+}
+
+static void mapping_counts(const HoloPhysicalMappingContract *contract,
+                           int *supported, int *partial, int *unsupported) {
+    size_t i;
+    *supported = 0;
+    *partial = 0;
+    *unsupported = 0;
+    for (i = 0; i < contract->count; ++i) {
+        if (contract->records[i].mapping_status == HOLO_MAP_SUPPORTED) ++*supported;
+        else if (contract->records[i].mapping_status == HOLO_MAP_PARTIALLY_SUPPORTED) ++*partial;
+        else if (contract->records[i].mapping_status == HOLO_MAP_UNSUPPORTED) ++*unsupported;
+    }
+}
+
 static char *read_file(const char *path, size_t *size_out) {
     FILE *file = fopen(path, "rb");
     long size;
@@ -141,15 +164,88 @@ static void test_expected_classification(void) {
     holo_physical_mapping_destroy(&contract);
 }
 
+static void test_review_binding(void) {
+    HoloPhysicalMappingContract before = make_current();
+    HoloPhysicalMappingContract reviewed;
+    HoloPhysicalMappingContract missing_digest;
+    HoloPhysicalMappingContract missing_role;
+    HoloPhysicalMappingContract wrong_digest;
+    int supported_before, partial_before, unsupported_before;
+    int supported_after, partial_after, unsupported_after;
+
+    mapping_counts(&before, &supported_before, &partial_before, &unsupported_before);
+    reviewed = make_reviewed();
+    assert(reviewed.review.reviewed);
+    assert(reviewed.review.human_review);
+    assert(strcmp(reviewed.review.reviewer_role, "human_project_owner") == 0);
+    assert(reviewed.review.reviewed_contract_digest == HOLO_L4B5A_REVIEWED_DIGEST);
+    assert(reviewed.review.status == HOLO_REVIEW_ACCEPTED_AT_STATED_CLAIM_CEILING);
+    assert(!reviewed.implementation_authorized);
+    assert(strcmp(reviewed.l4b5b_decision, "NOT_AUTHORIZED_EVIDENCE_MISSING") == 0);
+    puts("VALID_HUMAN_REVIEW_ACCEPTED_PASS");
+
+    missing_digest = reviewed;
+    missing_digest.review.reviewed_contract_digest = 0;
+    assert(!holo_physical_mapping_review_valid(&missing_digest));
+    assert(!holo_physical_mapping_validate(&missing_digest));
+    puts("MISSING_REVIEW_DIGEST_REJECTED_PASS");
+
+    missing_role = reviewed;
+    missing_role.review.reviewer_role[0] = '\0';
+    assert(!holo_physical_mapping_review_valid(&missing_role));
+    assert(!holo_physical_mapping_validate(&missing_role));
+    puts("MISSING_REVIEWER_ROLE_REJECTED_PASS");
+
+    wrong_digest = make_current();
+    assert(holo_physical_mapping_seal(&wrong_digest) == 0);
+    assert(holo_physical_mapping_apply_human_review(
+        &wrong_digest, UINT64_C(0x0d06f3c8b44f8c54)) != 0);
+    assert(!wrong_digest.review.reviewed);
+    puts("WRONG_REVIEW_DIGEST_REJECTED_PASS");
+
+    reviewed.records[HOLO_MAPPING_GEOMETRY].allowed_claim[0] = 'X';
+    assert(holo_physical_mapping_recompute_digest(&reviewed) !=
+           reviewed.review.reviewed_contract_digest);
+    assert(!holo_physical_mapping_review_valid(&reviewed));
+    assert(!reviewed.implementation_authorized);
+    puts("CONTRACT_MUTATION_INVALIDATES_REVIEW_PASS");
+    holo_physical_mapping_destroy(&reviewed);
+
+    reviewed = make_reviewed();
+    reviewed.implementation_authorized = 1;
+    assert(!holo_physical_mapping_review_valid(&reviewed));
+    assert(!holo_physical_mapping_validate(&reviewed));
+    puts("AUTHORIZATION_INFLATION_REJECTED_PASS");
+    holo_physical_mapping_destroy(&reviewed);
+
+    reviewed = make_reviewed();
+    mapping_counts(&reviewed, &supported_after, &partial_after, &unsupported_after);
+    assert(supported_before == 1 && partial_before == 3 && unsupported_before == 4);
+    assert(supported_after == supported_before && partial_after == partial_before &&
+           unsupported_after == unsupported_before);
+    assert(memcmp(before.records, reviewed.records,
+                  before.count * sizeof(*before.records)) == 0);
+    assert(memcmp(before.portability, reviewed.portability,
+                  sizeof(before.portability)) == 0);
+    assert(before.claim_level == reviewed.claim_level);
+    puts("MAPPING_CLASSIFICATIONS_STABLE_AFTER_REVIEW_PASS");
+    holo_physical_mapping_destroy(&reviewed);
+    holo_physical_mapping_destroy(&wrong_digest);
+    holo_physical_mapping_destroy(&before);
+}
+
 static void test_roundtrip_and_tampering(void) {
     const char *path = "holo_physical_mapping_test.json";
-    HoloPhysicalMappingContract contract = make_current();
+    HoloPhysicalMappingContract contract = make_reviewed();
     HoloPhysicalMappingContract loaded;
-    assert(holo_physical_mapping_seal(&contract) == 0);
     assert(holo_physical_mapping_write_json(&contract, path) == 0);
     assert(holo_physical_mapping_read_json(&loaded, path) == 0);
     assert(holo_physical_mapping_equal(&contract, &loaded));
+    assert(loaded.contract_digest == HOLO_L4B5A_REVIEWED_DIGEST);
+    assert(loaded.review.reviewed_contract_digest == HOLO_L4B5A_REVIEWED_DIGEST);
+    assert(holo_physical_mapping_review_valid(&loaded));
     puts("PHYSICAL_MAPPING_SERIALIZATION_ROUNDTRIP_PASS");
+    puts("REVIEW_BINDING_SURVIVES_RELOAD_PASS");
     holo_physical_mapping_destroy(&loaded);
 
     replace_once(path, "\"mapping_status\":\"UNSUPPORTED\"",
@@ -180,6 +276,36 @@ static void test_roundtrip_and_tampering(void) {
     assert(holo_physical_mapping_read_json(&loaded, path) != 0);
     puts("SERIALIZED_SEAL_TAMPERING_REJECTED_PASS");
 
+    assert(holo_physical_mapping_write_json(&contract, path) == 0);
+    replace_once(path, "\"reviewed_contract_digest\":\"0d06f3c8b44f8c55\"",
+                       "\"reviewed_contract_digest\":\"0d06f3c8b44f8c54\"");
+    assert(holo_physical_mapping_read_json(&loaded, path) != 0);
+    puts("SERIALIZED_REVIEW_DIGEST_TAMPERING_REJECTED_PASS");
+
+    assert(holo_physical_mapping_write_json(&contract, path) == 0);
+    replace_once(path, "\"reviewer_role\":\"human_project_owner\"",
+                       "\"reviewer_role\":\"automated_reviewer\"");
+    assert(holo_physical_mapping_read_json(&loaded, path) != 0);
+    puts("SERIALIZED_REVIEW_ROLE_TAMPERING_REJECTED_PASS");
+
+    assert(holo_physical_mapping_write_json(&contract, path) == 0);
+    replace_once(path, "\"review_status\":\"ACCEPTED_AT_STATED_CLAIM_CEILING\"",
+                       "\"review_status\":\"INVALIDATED\"");
+    assert(holo_physical_mapping_read_json(&loaded, path) != 0);
+    puts("SERIALIZED_REVIEW_STATUS_TAMPERING_REJECTED_PASS");
+
+    assert(holo_physical_mapping_write_json(&contract, path) == 0);
+    replace_once(path, "\"implementation_authorized\":false",
+                       "\"implementation_authorized\":true");
+    assert(holo_physical_mapping_read_json(&loaded, path) != 0);
+    puts("SERIALIZED_AUTHORIZATION_TAMPERING_REJECTED_PASS");
+
+    assert(holo_physical_mapping_write_json(&contract, path) == 0);
+    replace_once(path, "\"decision\":\"NOT_AUTHORIZED_EVIDENCE_MISSING\"",
+                       "\"decision\":\"AUTHORIZED_FOR_IMPLEMENTATION\"");
+    assert(holo_physical_mapping_read_json(&loaded, path) != 0);
+    puts("SERIALIZED_GATE_DECISION_TAMPERING_REJECTED_PASS");
+
     assert(file_has_key(path, "\"physical_state_definition\""));
     assert(file_has_key(path, "\"restoration_evidence_gate\""));
     assert(!file_has_key(path, "\"winner\""));
@@ -195,9 +321,8 @@ static void test_roundtrip_and_tampering(void) {
 }
 
 static void print_contract_evidence(void) {
-    HoloPhysicalMappingContract contract = make_current();
+    HoloPhysicalMappingContract contract = make_reviewed();
     size_t i;
-    assert(holo_physical_mapping_seal(&contract) == 0);
     for (i = 0; i < contract.count; ++i) {
         HoloPhysicalMappingRecord *r = &contract.records[i];
         printf("MAPPING %s | %s | %s | %s | observable=%s\n",
@@ -217,6 +342,13 @@ static void print_contract_evidence(void) {
     printf("RESTORATION_GATE %s\n", contract.restoration_evidence_gate);
     printf("REQUIRED_CONTROLS %s\n", contract.required_controls);
     printf("contract_digest=%016llx\n", (unsigned long long)contract.contract_digest);
+    printf("reviewed_contract_digest=%016llx\n",
+           (unsigned long long)contract.review.reviewed_contract_digest);
+    printf("review_status=%s review_valid=%s reviewer_role=%s implementation_authorized=%s\n",
+           holo_review_status_name(contract.review.status),
+           holo_physical_mapping_review_valid(&contract) ? "true" : "false",
+           contract.review.reviewer_role,
+           contract.implementation_authorized ? "true" : "false");
     puts("L4B5B_DECISION=NOT_AUTHORIZED_EVIDENCE_MISSING");
     holo_physical_mapping_destroy(&contract);
 }
@@ -224,6 +356,7 @@ static void print_contract_evidence(void) {
 int main(void) {
     test_validation_rules();
     test_expected_classification();
+    test_review_binding();
     test_roundtrip_and_tampering();
     print_contract_evidence();
     puts("HOLO_PHYSICAL_MAPPING_TEST_PASS");

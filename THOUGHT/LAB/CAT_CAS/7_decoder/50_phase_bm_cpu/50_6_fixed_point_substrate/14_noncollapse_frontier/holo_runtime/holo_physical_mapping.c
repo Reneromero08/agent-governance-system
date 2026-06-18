@@ -8,6 +8,9 @@
 
 static const uint64_t FNV_OFFSET = UINT64_C(14695981039346656037);
 static const uint64_t FNV_PRIME = UINT64_C(1099511628211);
+static const char *L4B5B_BLOCKED = "NOT_AUTHORIZED_EVIDENCE_MISSING";
+static const char *HUMAN_PROJECT_OWNER = "human_project_owner";
+static const char *REVIEW_SCOPE = "evidence classifications;support statuses;observability classifications;mapping claim ceilings;L4B.5B gate decision";
 
 static void text_copy(char *dst, size_t size, const char *src) {
     size_t length;
@@ -63,6 +66,11 @@ const char *holo_mapping_kind_name(HoloMappingKind value) {
     return value >= HOLO_MAPPING_GEOMETRY && value <= HOLO_MAPPING_INVARIANT_FAMILY ? names[value] : "INVALID";
 }
 
+const char *holo_review_status_name(HoloReviewStatus value) {
+    static const char *names[] = {"UNREVIEWED", "ACCEPTED_AT_STATED_CLAIM_CEILING", "INVALIDATED"};
+    return value >= HOLO_REVIEW_UNREVIEWED && value <= HOLO_REVIEW_INVALIDATED ? names[value] : "INVALID";
+}
+
 static const char *claim_scope_name(HoloClaimScope value) {
     static const char *names[] = {"SOFTWARE_ONLY", "PHYSICAL_CHANNEL", "CANDIDATE_MAPPING", "PHYSICAL_RESTORATION"};
     return value >= HOLO_CLAIM_SOFTWARE_ONLY && value <= HOLO_CLAIM_PHYSICAL_RESTORATION ? names[value] : "INVALID";
@@ -77,6 +85,7 @@ int holo_physical_mapping_init(HoloPhysicalMappingContract *contract, size_t cap
     text_copy(contract->contract_id, sizeof(contract->contract_id), "l4b5a_pdn_mapping_v1");
     text_copy(contract->contract_version, sizeof(contract->contract_version), "1.0.0");
     text_copy(contract->status, sizeof(contract->status), "evidence_gap_audited");
+    text_copy(contract->l4b5b_decision, sizeof(contract->l4b5b_decision), L4B5B_BLOCKED);
     contract->claim_level = 1;
     return 0;
 }
@@ -163,7 +172,8 @@ static uint64_t mapping_digest(const HoloPhysicalMappingContract *contract) {
     d = fnv_text(d, contract->unmeasured_components); d = fnv_text(d, contract->nuisance_variables);
     d = fnv_text(d, contract->restoration_required_components);
     d = fnv_text(d, contract->restoration_evidence_gate); d = fnv_text(d, contract->required_controls);
-    d = fnv_u64(d, (uint64_t)contract->claim_level); d = fnv_u64(d, (uint64_t)contract->reviewed);
+    /* Preserve the frozen L4B.5A content digest; review metadata is an external envelope. */
+    d = fnv_u64(d, (uint64_t)contract->claim_level); d = fnv_u64(d, 0);
     for (i = 0; i < contract->count; ++i) {
         const HoloPhysicalMappingRecord *r = &contract->records[i];
         d = fnv_u64(d, (uint64_t)r->kind); d = fnv_text(d, r->software_object);
@@ -184,6 +194,47 @@ static uint64_t mapping_digest(const HoloPhysicalMappingContract *contract) {
     return d;
 }
 
+uint64_t holo_physical_mapping_recompute_digest(const HoloPhysicalMappingContract *contract) {
+    return contract ? mapping_digest(contract) : 0;
+}
+
+int holo_physical_mapping_review_valid(const HoloPhysicalMappingContract *contract) {
+    const HoloContractReview *review;
+    if (!contract) return 0;
+    review = &contract->review;
+    if (!review->reviewed) {
+        return review->status == HOLO_REVIEW_UNREVIEWED && !review->human_review &&
+               !text_present(review->reviewer_role) && review->reviewed_contract_digest == 0 &&
+               !text_present(review->review_scope) && !contract->implementation_authorized;
+    }
+    return review->status == HOLO_REVIEW_ACCEPTED_AT_STATED_CLAIM_CEILING &&
+           review->human_review && strcmp(review->reviewer_role, HUMAN_PROJECT_OWNER) == 0 &&
+           strcmp(review->review_scope, REVIEW_SCOPE) == 0 &&
+           review->reviewed_contract_digest == contract->contract_digest &&
+           review->reviewed_contract_digest == mapping_digest(contract) &&
+           !contract->implementation_authorized &&
+           strcmp(contract->l4b5b_decision, L4B5B_BLOCKED) == 0;
+}
+
+int holo_physical_mapping_apply_human_review(HoloPhysicalMappingContract *contract,
+                                             uint64_t reviewed_contract_digest) {
+    HoloContractReview review;
+    if (!contract || !contract->sealed || reviewed_contract_digest != HOLO_L4B5A_REVIEWED_DIGEST ||
+        contract->contract_digest != reviewed_contract_digest ||
+        mapping_digest(contract) != reviewed_contract_digest ||
+        strcmp(contract->l4b5b_decision, L4B5B_BLOCKED) != 0 ||
+        contract->implementation_authorized) return -1;
+    memset(&review, 0, sizeof(review));
+    review.status = HOLO_REVIEW_ACCEPTED_AT_STATED_CLAIM_CEILING;
+    text_copy(review.reviewer_role, sizeof(review.reviewer_role), HUMAN_PROJECT_OWNER);
+    review.reviewed_contract_digest = reviewed_contract_digest;
+    text_copy(review.review_scope, sizeof(review.review_scope), REVIEW_SCOPE);
+    review.reviewed = 1;
+    review.human_review = 1;
+    contract->review = review;
+    return holo_physical_mapping_review_valid(contract) ? 0 : -2;
+}
+
 int holo_physical_mapping_validate(const HoloPhysicalMappingContract *contract) {
     size_t i;
     if (!contract || !contract->records || contract->count != HOLO_MAPPING_OBJECT_COUNT ||
@@ -193,6 +244,7 @@ int holo_physical_mapping_validate(const HoloPhysicalMappingContract *contract) 
         !text_present(contract->measured_components) || !text_present(contract->unmeasured_components) ||
         !text_present(contract->nuisance_variables) || !text_present(contract->restoration_required_components) ||
         !text_present(contract->restoration_evidence_gate) || !text_present(contract->required_controls) ||
+        strcmp(contract->l4b5b_decision, L4B5B_BLOCKED) != 0 || contract->implementation_authorized ||
         contract->claim_level < 1 || contract->claim_level > 2) return 0;
     for (i = 0; i < contract->count; ++i) {
         if ((size_t)contract->records[i].kind != i || !holo_physical_mapping_record_validate(&contract->records[i])) return 0;
@@ -203,6 +255,7 @@ int holo_physical_mapping_validate(const HoloPhysicalMappingContract *contract) 
             !text_present(contract->portability[i].promotion_requirement)) return 0;
     }
     if (contract->sealed && contract->contract_digest != mapping_digest(contract)) return 0;
+    if (!holo_physical_mapping_review_valid(contract)) return 0;
     return 1;
 }
 
@@ -327,8 +380,9 @@ int holo_physical_mapping_equal(const HoloPhysicalMappingContract *a,
                                 const HoloPhysicalMappingContract *b) {
     if (!a || !b || a->count != b->count || a->capacity != b->capacity ||
         a->portability_count != b->portability_count || a->sealed != b->sealed ||
-        a->reviewed != b->reviewed || a->claim_level != b->claim_level ||
+        a->claim_level != b->claim_level || a->implementation_authorized != b->implementation_authorized ||
         a->contract_digest != b->contract_digest ||
+        memcmp(&a->review, &b->review, sizeof(a->review)) != 0 ||
         memcmp(a->records, b->records, a->count * sizeof(*a->records)) != 0 ||
         memcmp(a->portability, b->portability, sizeof(a->portability)) != 0) return 0;
     return strcmp(a->contract_id, b->contract_id) == 0 && strcmp(a->contract_version, b->contract_version) == 0 &&
@@ -336,7 +390,9 @@ int holo_physical_mapping_equal(const HoloPhysicalMappingContract *a,
         strcmp(a->measured_components, b->measured_components) == 0 && strcmp(a->unmeasured_components, b->unmeasured_components) == 0 &&
         strcmp(a->nuisance_variables, b->nuisance_variables) == 0 &&
         strcmp(a->restoration_required_components, b->restoration_required_components) == 0 &&
-        strcmp(a->restoration_evidence_gate, b->restoration_evidence_gate) == 0 && strcmp(a->required_controls, b->required_controls) == 0;
+        strcmp(a->restoration_evidence_gate, b->restoration_evidence_gate) == 0 &&
+        strcmp(a->required_controls, b->required_controls) == 0 &&
+        strcmp(a->l4b5b_decision, b->l4b5b_decision) == 0;
 }
 
 static void write_record(FILE *f, const HoloPhysicalMappingRecord *r, int comma) {
@@ -353,12 +409,20 @@ int holo_physical_mapping_write_json(const HoloPhysicalMappingContract *c, const
     FILE *f; size_t i;
     if (!c || !path || !c->sealed || !holo_physical_mapping_validate(c)) return -1;
     f = fopen(path, "w"); if (!f) return -2;
-    fprintf(f, "{\n  \"contract_id\": \"%s\",\n  \"contract_version\": \"%s\",\n  \"status\": \"%s\",\n  \"sealed\": true, \"reviewed\": %s, \"claim_level\": %d,\n  \"contract_digest\": \"%016" PRIx64 "\",\n",
-        c->contract_id, c->contract_version, c->status, c->reviewed ? "true" : "false", c->claim_level, c->contract_digest);
+    fprintf(f, "{\n  \"contract_id\": \"%s\",\n  \"contract_version\": \"%s\",\n  \"status\": \"%s\",\n  \"sealed\": true, \"claim_level\": %d,\n  \"contract_digest\": \"%016" PRIx64 "\",\n",
+        c->contract_id, c->contract_version, c->status, c->claim_level, c->contract_digest);
+    fprintf(f, "  \"review\": {\"reviewed\":%s,\"human_review\":%s,\"reviewer_role\":\"%s\",\"reviewed_contract_digest\":\"%016" PRIx64 "\",\"review_status\":\"%s\",\"review_scope\":\"%s\",\"review_valid\":%s,\"implementation_authorized\":%s},\n",
+        c->review.reviewed ? "true" : "false", c->review.human_review ? "true" : "false",
+        c->review.reviewer_role, c->review.reviewed_contract_digest,
+        holo_review_status_name(c->review.status), c->review.review_scope,
+        holo_physical_mapping_review_valid(c) ? "true" : "false",
+        c->implementation_authorized ? "true" : "false");
     fprintf(f, "  \"physical_state_definition\": {\"state_vector\":\"%s\",\"measured\":\"%s\",\"unmeasured\":\"%s\",\"nuisance\":\"%s\",\"required_for_restoration\":\"%s\"},\n",
         c->physical_state_vector, c->measured_components, c->unmeasured_components, c->nuisance_variables, c->restoration_required_components);
-    fprintf(f, "  \"restoration_evidence_gate\": {\"protocol\":\"%s\",\"controls\":\"%s\",\"l4b5b_decision\":\"NOT_AUTHORIZED_EVIDENCE_MISSING\"},\n",
+    fprintf(f, "  \"restoration_evidence_gate\": {\"protocol\":\"%s\",\"controls\":\"%s\"},\n",
         c->restoration_evidence_gate, c->required_controls);
+    fprintf(f, "  \"l4b5b_gate\": {\"decision\":\"%s\",\"implementation_authorized\":%s},\n",
+        c->l4b5b_decision, c->implementation_authorized ? "true" : "false");
     fprintf(f, "  \"mapping_records\": [\n");
     for (i = 0; i < c->count; ++i) write_record(f, &c->records[i], i + 1U < c->count);
     fprintf(f, "  ],\n  \"invariant_portability\": [\n");
@@ -402,19 +466,32 @@ static HoloMappingStatus parse_status(const char *s) { int i; for(i=1;i<=HOLO_MA
 static HoloObservability parse_observability(const char *s) { int i; for(i=1;i<=HOLO_OBSERVABILITY_UNDEFINED;i++) if(!strcmp(s,holo_observability_name((HoloObservability)i))) return (HoloObservability)i; return HOLO_OBSERVABILITY_INVALID; }
 static HoloClaimScope parse_scope(const char *s) { int i; for(i=0;i<=HOLO_CLAIM_PHYSICAL_RESTORATION;i++) if(!strcmp(s,claim_scope_name((HoloClaimScope)i))) return (HoloClaimScope)i; return (HoloClaimScope)-1; }
 static HoloInvariantPortabilityClass parse_portability(const char *s) { int i; for(i=0;i<=HOLO_PORTABILITY_NO_CURRENT_PHYSICAL_MAPPING;i++) if(!strcmp(s,holo_portability_name((HoloInvariantPortabilityClass)i))) return (HoloInvariantPortabilityClass)i; return (HoloInvariantPortabilityClass)-1; }
+static HoloReviewStatus parse_review_status(const char *s) { int i; for(i=0;i<=HOLO_REVIEW_INVALIDATED;i++) if(!strcmp(s,holo_review_status_name((HoloReviewStatus)i))) return (HoloReviewStatus)i; return (HoloReviewStatus)-1; }
 
 int holo_physical_mapping_read_json(HoloPhysicalMappingContract *c, const char *path) {
     char *json = read_all(path); char text[HOLO_MAPPING_TEXT_LEN]; uint64_t expected; size_t i;
-    int serialized_sealed;
-    const char *portability_cursor;
+    int serialized_sealed, serialized_review_valid, gate_implementation_authorized;
+    const char *portability_cursor, *gate_cursor;
     if (!json || holo_physical_mapping_init(c, HOLO_MAPPING_OBJECT_COUNT) != 0) { free(json); return -1; }
     if (!parse_text(json,"contract_id",c->contract_id,sizeof(c->contract_id)) || !parse_text(json,"contract_version",c->contract_version,sizeof(c->contract_version)) ||
-        !parse_text(json,"status",c->status,sizeof(c->status)) || !parse_bool(json,"sealed",&serialized_sealed) || !serialized_sealed || !parse_bool(json,"reviewed",&c->reviewed) ||
+        !parse_text(json,"status",c->status,sizeof(c->status)) || !parse_bool(json,"sealed",&serialized_sealed) || !serialized_sealed ||
         !parse_int(json,"claim_level",&c->claim_level) || !parse_hex(json,"contract_digest",&expected) ||
+        !parse_bool(json,"reviewed",&c->review.reviewed) || !parse_bool(json,"human_review",&c->review.human_review) ||
+        !parse_text(json,"reviewer_role",c->review.reviewer_role,sizeof(c->review.reviewer_role)) ||
+        !parse_hex(json,"reviewed_contract_digest",&c->review.reviewed_contract_digest) ||
+        !parse_text(json,"review_status",text,sizeof(text)) ||
+        !parse_text(json,"review_scope",c->review.review_scope,sizeof(c->review.review_scope)) ||
+        !parse_bool(json,"review_valid",&serialized_review_valid) ||
+        !parse_bool(json,"implementation_authorized",&c->implementation_authorized) ||
         !parse_text(json,"state_vector",c->physical_state_vector,sizeof(c->physical_state_vector)) || !parse_text(json,"measured",c->measured_components,sizeof(c->measured_components)) ||
         !parse_text(json,"unmeasured",c->unmeasured_components,sizeof(c->unmeasured_components)) || !parse_text(json,"nuisance",c->nuisance_variables,sizeof(c->nuisance_variables)) ||
         !parse_text(json,"required_for_restoration",c->restoration_required_components,sizeof(c->restoration_required_components)) ||
         !parse_text(json,"protocol",c->restoration_evidence_gate,sizeof(c->restoration_evidence_gate)) || !parse_text(json,"controls",c->required_controls,sizeof(c->required_controls))) goto fail;
+    c->review.status=parse_review_status(text);
+    gate_cursor=strstr(json,"\"l4b5b_gate\"");
+    if(!gate_cursor || !parse_text(gate_cursor,"decision",c->l4b5b_decision,sizeof(c->l4b5b_decision)) ||
+       !parse_bool(gate_cursor,"implementation_authorized",&gate_implementation_authorized) ||
+       gate_implementation_authorized != c->implementation_authorized) goto fail;
     c->sealed = 0;
     for (i=0;i<HOLO_MAPPING_OBJECT_COUNT;i++) {
         char needle[48]; const char *p; HoloPhysicalMappingRecord r; memset(&r,0,sizeof(r));
@@ -449,7 +526,8 @@ int holo_physical_mapping_read_json(HoloPhysicalMappingContract *c, const char *
         portability_cursor=p+strlen("\"invariant_kind\"");
     }
     c->sealed=1; c->contract_digest=expected;
-    if(!holo_physical_mapping_validate(c) || c->contract_digest!=mapping_digest(c)) goto fail;
+    if(!holo_physical_mapping_validate(c) || c->contract_digest!=mapping_digest(c) ||
+       serialized_review_valid != holo_physical_mapping_review_valid(c)) goto fail;
     free(json); return 0;
 fail:
     free(json); holo_physical_mapping_destroy(c); return -2;
@@ -462,6 +540,8 @@ void holo_physical_mapping_reference_init(HoloPhysicalMappingReference *r) {
     text_copy(r->contract_version,sizeof(r->contract_version),"1.0.0");
     text_copy(r->status,sizeof(r->status),"not_attached");
     text_copy(r->contract_reference,sizeof(r->contract_reference),"none");
+    text_copy(r->review_status,sizeof(r->review_status),"UNREVIEWED");
+    text_copy(r->l4b5b_decision,sizeof(r->l4b5b_decision),L4B5B_BLOCKED);
     r->claim_level=1;
 }
 
@@ -469,7 +549,10 @@ int holo_physical_mapping_reference_attach(HoloPhysicalMappingReference *r, cons
     size_t i; int supported=0,partial=0,unsupported=0;
     if(!r||!c||!reference||!c->sealed||!holo_physical_mapping_validate(c)) return -1;
     holo_physical_mapping_reference_init(r); text_copy(r->contract_id,sizeof(r->contract_id),c->contract_id); text_copy(r->contract_version,sizeof(r->contract_version),c->contract_version);
-    text_copy(r->status,sizeof(r->status),c->status); text_copy(r->contract_reference,sizeof(r->contract_reference),reference); r->contract_digest=c->contract_digest; r->reviewed=c->reviewed; r->claim_level=c->claim_level;
+    text_copy(r->status,sizeof(r->status),c->status); text_copy(r->contract_reference,sizeof(r->contract_reference),reference); r->contract_digest=c->contract_digest; r->claim_level=c->claim_level;
+    text_copy(r->reviewer_role,sizeof(r->reviewer_role),c->review.reviewer_role); r->reviewed_contract_digest=c->review.reviewed_contract_digest;
+    text_copy(r->review_status,sizeof(r->review_status),holo_review_status_name(c->review.status)); text_copy(r->l4b5b_decision,sizeof(r->l4b5b_decision),c->l4b5b_decision);
+    r->reviewed=c->review.reviewed; r->review_valid=holo_physical_mapping_review_valid(c); r->implementation_authorized=c->implementation_authorized;
     for(i=0;i<c->count;i++){if(c->records[i].mapping_status==HOLO_MAP_SUPPORTED)supported++;else if(c->records[i].mapping_status==HOLO_MAP_PARTIALLY_SUPPORTED)partial++;else if(c->records[i].mapping_status==HOLO_MAP_UNSUPPORTED)unsupported++;}
     r->supported_records=supported;r->partial_records=partial;r->unsupported_records=unsupported; return holo_physical_mapping_reference_validate(r)?0:-2;
 }
@@ -477,12 +560,18 @@ int holo_physical_mapping_reference_attach(HoloPhysicalMappingReference *r, cons
 int holo_physical_mapping_reference_validate(const HoloPhysicalMappingReference *r) {
     if (!r || strcmp(r->contract_id,"l4b5a_pdn_mapping_v1") != 0 ||
         strcmp(r->contract_version,"1.0.0") != 0 || !text_present(r->contract_reference) ||
-        r->reviewed || r->claim_level != 1) return 0;
+        strcmp(r->l4b5b_decision,L4B5B_BLOCKED) != 0 || r->implementation_authorized ||
+        r->claim_level != 1) return 0;
     if (strcmp(r->status,"not_attached") == 0) {
         return r->contract_digest == 0 && r->supported_records == 0 &&
-               r->partial_records == 0 && r->unsupported_records == 0;
+               r->partial_records == 0 && r->unsupported_records == 0 && !r->reviewed &&
+               !r->review_valid && r->reviewed_contract_digest == 0 &&
+               strcmp(r->review_status,"UNREVIEWED") == 0 && !text_present(r->reviewer_role);
     }
     return strcmp(r->status,"evidence_gap_audited") == 0 && r->contract_digest != 0 &&
-           r->supported_records == 1 && r->partial_records == 3 &&
-           r->unsupported_records == 4;
+            r->supported_records == 1 && r->partial_records == 3 &&
+            r->unsupported_records == 4 && r->reviewed && r->review_valid &&
+            strcmp(r->reviewer_role,HUMAN_PROJECT_OWNER) == 0 &&
+            r->reviewed_contract_digest == r->contract_digest &&
+            strcmp(r->review_status,"ACCEPTED_AT_STATED_CLAIM_CEILING") == 0;
 }

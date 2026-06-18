@@ -392,7 +392,8 @@ CollapseBoundary.
 - [x] L4B.3: COMPLETE / ABSORBED BY L4B.2 -- machine-relevant path geometry replaces a prose evolution transcript
 - [x] L4B.4: COMPLETE -- orbit, basis, composition, restoration, exchange, serialization, and path-order invariants; software path holonomy deferred as not well-defined
 - [x] L4B.5A: COMPLETE -- PDN mapping contract: 1 supported channel mapping, 3 partial interpretations, 4 unsupported physical mappings
-- [ ] L4B.5B: GATED -- physical implementation requires the predeclared restoration experiment and controls; current evidence is missing
+- [x] L4B.5A-R: HUMAN REVIEW BOUND TO CONTRACT DIGEST `0d06f3c8b44f8c55`
+- [ ] L4B.5B: BLOCKED / `NOT_AUTHORIZED_EVIDENCE_MISSING` -- physical implementation requires the predeclared restoration experiment and controls
 
 ---
 

@@ -313,13 +313,19 @@ int holo_write_json(HoloObject *h, const char *path) {
     fprintf(f, "    \"relation_basis\": [[%.1f, %.1f], [%.1f, %.1f]],\n", h->geometry.relation_basis[0], h->geometry.relation_basis[1], h->geometry.relation_basis[2], h->geometry.relation_basis[3]);
     fprintf(f, "    \"coordinates\": [%.9f, %.9f], \"neutral_reference\": [%.9f, %.9f],\n", h->geometry.coordinates[0], h->geometry.coordinates[1], h->geometry.neutral_reference[0], h->geometry.neutral_reference[1]);
     fprintf(f, "    \"geometry_status\": \"%s\", \"child_reference\": \"%s\"\n  },\n", h->geometry.geometry_status, h->geometry.child_reference);
-    fprintf(f, "  \"physical_mapping\": {\"contract_id\": \"%s\", \"contract_version\": \"%s\", \"status\": \"%s\", \"contract_reference\": \"%s\", \"contract_digest\": \"%016llx\", \"supported_records\": %d, \"partial_records\": %d, \"unsupported_records\": %d, \"reviewed\": %s, \"claim_level\": %d},\n",
+    fprintf(f, "  \"physical_mapping\": {\"contract_id\": \"%s\", \"contract_version\": \"%s\", \"status\": \"%s\", \"contract_reference\": \"%s\", \"contract_digest\": \"%016llx\", \"supported_records\": %d, \"partial_records\": %d, \"unsupported_records\": %d, \"reviewed\": %s, \"review_valid\": %s, \"reviewer_role\": \"%s\", \"reviewed_contract_digest\": \"%016llx\", \"review_status\": \"%s\", \"implementation_authorized\": %s, \"l4b5b_decision\": \"%s\", \"claim_level\": %d},\n",
             h->physical_mapping.contract_id, h->physical_mapping.contract_version,
             h->physical_mapping.status, h->physical_mapping.contract_reference,
             (unsigned long long)h->physical_mapping.contract_digest,
             h->physical_mapping.supported_records, h->physical_mapping.partial_records,
             h->physical_mapping.unsupported_records,
             h->physical_mapping.reviewed ? "true" : "false",
+            h->physical_mapping.review_valid ? "true" : "false",
+            h->physical_mapping.reviewer_role,
+            (unsigned long long)h->physical_mapping.reviewed_contract_digest,
+            h->physical_mapping.review_status,
+            h->physical_mapping.implementation_authorized ? "true" : "false",
+            h->physical_mapping.l4b5b_decision,
             h->physical_mapping.claim_level);
     fprintf(f, "  \"carrier\": {\"carrier_type\": \"%s\", \"coordinates\": [%.9f, %.9f], \"phase_relation\": [%.9f, %.9f], \"carrier_class\": \"%s\", \"substrate_status\": \"%s\", \"measurement_channel\": \"%s\"},\n", h->carrier.carrier_type, h->carrier.coordinates[0], h->carrier.coordinates[1], h->carrier.phase[0], h->carrier.phase[1], h->carrier.carrier_class, h->carrier.substrate_status, h->carrier.measurement_channel);
     sync_path_metadata(h);
@@ -355,6 +361,18 @@ static int read_text_value(const char *json, const char *key, char *out, size_t 
     return 1;
 }
 
+static int read_bool_value(const char *json, const char *key, int *out) {
+    char needle[128];
+    const char *p;
+    snprintf(needle, sizeof(needle), "\"%s\": ", key);
+    p = strstr(json, needle);
+    if (!p) return 0;
+    p += strlen(needle);
+    if (strncmp(p, "true", 4) == 0) { *out = 1; return 1; }
+    if (strncmp(p, "false", 5) == 0) { *out = 0; return 1; }
+    return 0;
+}
+
 int holo_read_json(HoloObject *h, const char *path) {
     FILE *f = fopen(path, "rb");
     long size;
@@ -385,7 +403,7 @@ int holo_read_json(HoloObject *h, const char *path) {
     double phase[2];
     int family_rc;
     unsigned long long operator_seed;
-    unsigned long long mapping_digest;
+    unsigned long long mapping_digest, reviewed_mapping_digest;
     int supported_records, partial_records, unsupported_records, mapping_claim_level;
     if (!f) return -1;
     if (fseek(f, 0, SEEK_END) != 0 || (size = ftell(f)) < 0 || fseek(f, 0, SEEK_SET) != 0) { fclose(f); return -2; }
@@ -437,10 +455,23 @@ int holo_read_json(HoloObject *h, const char *path) {
         !read_text_value(mapping_field, "status", h->physical_mapping.status,
                          sizeof(h->physical_mapping.status)) ||
         !read_text_value(mapping_field, "contract_reference", h->physical_mapping.contract_reference,
-                         sizeof(h->physical_mapping.contract_reference)) ||
+                          sizeof(h->physical_mapping.contract_reference)) ||
+        !read_text_value(mapping_field, "reviewer_role", h->physical_mapping.reviewer_role,
+                         sizeof(h->physical_mapping.reviewer_role)) ||
+        !read_text_value(mapping_field, "review_status", h->physical_mapping.review_status,
+                         sizeof(h->physical_mapping.review_status)) ||
+        !read_text_value(mapping_field, "l4b5b_decision", h->physical_mapping.l4b5b_decision,
+                         sizeof(h->physical_mapping.l4b5b_decision)) ||
         !strstr(mapping_field, "\"contract_digest\"") ||
         sscanf(strstr(mapping_field, "\"contract_digest\""),
                "\"contract_digest\": \"%16llx\"", &mapping_digest) != 1 ||
+        !strstr(mapping_field, "\"reviewed_contract_digest\"") ||
+        sscanf(strstr(mapping_field, "\"reviewed_contract_digest\""),
+               "\"reviewed_contract_digest\": \"%16llx\"", &reviewed_mapping_digest) != 1 ||
+        !read_bool_value(mapping_field, "reviewed", &h->physical_mapping.reviewed) ||
+        !read_bool_value(mapping_field, "review_valid", &h->physical_mapping.review_valid) ||
+        !read_bool_value(mapping_field, "implementation_authorized",
+                         &h->physical_mapping.implementation_authorized) ||
         !strstr(mapping_field, "\"supported_records\"") ||
         sscanf(strstr(mapping_field, "\"supported_records\""),
                "\"supported_records\": %d", &supported_records) != 1 ||
@@ -456,10 +487,10 @@ int holo_read_json(HoloObject *h, const char *path) {
         holo_object_destroy(h); free(json); return -16;
     }
     h->physical_mapping.contract_digest = (uint64_t)mapping_digest;
+    h->physical_mapping.reviewed_contract_digest = (uint64_t)reviewed_mapping_digest;
     h->physical_mapping.supported_records = supported_records;
     h->physical_mapping.partial_records = partial_records;
     h->physical_mapping.unsupported_records = unsupported_records;
-    h->physical_mapping.reviewed = 0;
     h->physical_mapping.claim_level = mapping_claim_level;
     if (!holo_physical_mapping_reference_validate(&h->physical_mapping)) {
         holo_object_destroy(h); free(json); return -17;

@@ -220,3 +220,13 @@ are no-disturbance, disturbance without restoration, wrong inverse, reordered
 inverse, carrier off, randomized phase, session/core-pair repeats, and a
 thermal/time-matched sham. Until that gate passes, the decision is
 `NOT_AUTHORIZED_EVIDENCE_MISSING`.
+
+### L4B.5A-R digest-bound human review
+
+The human project owner accepted the evidence classifications, support and
+observability statuses, claim ceilings, and blocked L4B.5B gate for contract
+digest `0d06f3c8b44f8c55`. Review metadata is outside the frozen scientific-content
+digest and is valid only when its stored digest equals a fresh content digest.
+Any contract mutation invalidates review and requires a new human review event.
+Acceptance does not authorize implementation or promote a mapping: L4B.5B
+remains `NOT_AUTHORIZED_EVIDENCE_MISSING`.

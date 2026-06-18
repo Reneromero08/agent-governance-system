@@ -7,6 +7,7 @@
 #define HOLO_MAPPING_TEXT_LEN 320
 #define HOLO_MAPPING_OBJECT_COUNT 8U
 #define HOLO_MAPPING_INVARIANT_COUNT 8U
+#define HOLO_L4B5A_REVIEWED_DIGEST UINT64_C(0x0d06f3c8b44f8c55)
 
 typedef enum {
     HOLO_EVIDENCE_INVALID = 0,
@@ -60,6 +61,21 @@ typedef enum {
     HOLO_CLAIM_PHYSICAL_RESTORATION
 } HoloClaimScope;
 
+typedef enum {
+    HOLO_REVIEW_UNREVIEWED = 0,
+    HOLO_REVIEW_ACCEPTED_AT_STATED_CLAIM_CEILING,
+    HOLO_REVIEW_INVALIDATED
+} HoloReviewStatus;
+
+typedef struct {
+    HoloReviewStatus status;
+    char reviewer_role[HOLO_MAPPING_TEXT_LEN];
+    uint64_t reviewed_contract_digest;
+    char review_scope[HOLO_MAPPING_TEXT_LEN];
+    int reviewed;
+    int human_review;
+} HoloContractReview;
+
 typedef struct {
     HoloMappingKind kind;
     char software_object[HOLO_MAPPING_TEXT_LEN];
@@ -103,8 +119,10 @@ typedef struct {
     char restoration_required_components[HOLO_MAPPING_TEXT_LEN];
     char restoration_evidence_gate[HOLO_MAPPING_TEXT_LEN];
     char required_controls[HOLO_MAPPING_TEXT_LEN];
+    HoloContractReview review;
+    char l4b5b_decision[HOLO_MAPPING_TEXT_LEN];
+    int implementation_authorized;
     int sealed;
-    int reviewed;
     int claim_level;
     uint64_t contract_digest;
 } HoloPhysicalMappingContract;
@@ -118,7 +136,13 @@ typedef struct {
     int supported_records;
     int partial_records;
     int unsupported_records;
+    char reviewer_role[HOLO_MAPPING_TEXT_LEN];
+    uint64_t reviewed_contract_digest;
+    char review_status[64];
+    char l4b5b_decision[HOLO_MAPPING_TEXT_LEN];
     int reviewed;
+    int review_valid;
+    int implementation_authorized;
     int claim_level;
 } HoloPhysicalMappingReference;
 
@@ -127,6 +151,7 @@ const char *holo_mapping_status_name(HoloMappingStatus value);
 const char *holo_observability_name(HoloObservability value);
 const char *holo_portability_name(HoloInvariantPortabilityClass value);
 const char *holo_mapping_kind_name(HoloMappingKind value);
+const char *holo_review_status_name(HoloReviewStatus value);
 int holo_physical_mapping_init(HoloPhysicalMappingContract *contract, size_t capacity);
 void holo_physical_mapping_destroy(HoloPhysicalMappingContract *contract);
 int holo_physical_mapping_register(HoloPhysicalMappingContract *contract,
@@ -136,6 +161,10 @@ int holo_physical_mapping_add_portability(HoloPhysicalMappingContract *contract,
 int holo_physical_mapping_record_validate(const HoloPhysicalMappingRecord *record);
 int holo_physical_mapping_validate(const HoloPhysicalMappingContract *contract);
 int holo_physical_mapping_seal(HoloPhysicalMappingContract *contract);
+uint64_t holo_physical_mapping_recompute_digest(const HoloPhysicalMappingContract *contract);
+int holo_physical_mapping_apply_human_review(HoloPhysicalMappingContract *contract,
+                                             uint64_t reviewed_contract_digest);
+int holo_physical_mapping_review_valid(const HoloPhysicalMappingContract *contract);
 int holo_physical_mapping_populate_current(HoloPhysicalMappingContract *contract);
 int holo_physical_mapping_equal(const HoloPhysicalMappingContract *left,
                                 const HoloPhysicalMappingContract *right);
