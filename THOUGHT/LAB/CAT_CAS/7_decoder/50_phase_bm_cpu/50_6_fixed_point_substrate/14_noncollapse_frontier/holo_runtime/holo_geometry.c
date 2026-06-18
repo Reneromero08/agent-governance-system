@@ -1,4 +1,5 @@
 #include "holo_geometry.h"
+#include "../l4b_orbitstate/holo_path_history.h"
 
 #include <math.h>
 #include <stdio.h>
@@ -29,7 +30,22 @@ const char *holo_materialization_mode_name(HoloMaterializationMode mode) {
     }
 }
 
-void holo_object_init(HoloObject *h, uint64_t run_id, int N, int lower, int mirror) {
+static void sync_path_metadata(HoloObject *h) {
+    HoloPathHistory *path = h->evolution.path_history;
+    h->evolution.path_history_present = path != NULL;
+    h->evolution.path_history_count = path ? path->count : 0;
+    h->evolution.path_history_capacity = path ? path->capacity : 0;
+    h->evolution.path_history_appendable = path ? path->appendable : 0;
+    h->evolution.path_history_reversible = path ? path->reversible : 0;
+    h->evolution.path_history_sealed = path ? path->sealed : 0;
+    h->evolution.path_restoration_verified = path ? path->restoration_verified : 0;
+    h->evolution.path_serialized_roundtrip = path ? path->serialized_roundtrip : 0;
+}
+
+int holo_object_init(HoloObject *h, uint64_t run_id, int N, int lower, int mirror) {
+    OrbitState initial;
+    HoloPathHistory *path;
+    if (!h || N <= 1 || lower < 0 || mirror < 0 || lower + mirror != N) return -1;
     memset(h, 0, sizeof(*h));
     copy_text(h->schema_family, sizeof(h->schema_family), HOLO_SCHEMA_FAMILY);
     copy_text(h->schema_version, sizeof(h->schema_version), HOLO_SCHEMA_VERSION);
@@ -56,8 +72,6 @@ void holo_object_init(HoloObject *h, uint64_t run_id, int N, int lower, int mirr
     copy_text(h->carrier.measurement_channel, sizeof(h->carrier.measurement_channel), "coupled_orbit_accumulator");
 
     copy_text(h->evolution.operator_id, sizeof(h->evolution.operator_id), "orbit_coupled_phase_walk_v1");
-    copy_text(h->evolution.path_history_reference, sizeof(h->evolution.path_history_reference), "PathStep:in_memory");
-    h->evolution.path_history_appendable = 1;
     copy_text(h->evolution.continuation_status, sizeof(h->evolution.continuation_status), "continuable");
     copy_text(h->evolution.closure_status, sizeof(h->evolution.closure_status), "not_evaluated");
 
@@ -76,15 +90,38 @@ void holo_object_init(HoloObject *h, uint64_t run_id, int N, int lower, int mirr
     copy_text(h->restoration.substrate_type, sizeof(h->restoration.substrate_type), "software_state");
     copy_text(h->restoration.pre_state_reference, sizeof(h->restoration.pre_state_reference), "orbit_geometry:init");
     copy_text(h->restoration.post_state_reference, sizeof(h->restoration.post_state_reference), "pending");
+    copy_text(h->restoration.restored_state_reference, sizeof(h->restoration.restored_state_reference), "pending");
     copy_text(h->restoration.closure_law, sizeof(h->restoration.closure_law), "fold_exchange_preserves_orbit");
     copy_text(h->restoration.evidence_level, sizeof(h->restoration.evidence_level), "architectural_metadata_only");
+    copy_text(h->restoration.verification_scope, sizeof(h->restoration.verification_scope), "not_run");
+    copy_text(h->restoration.failure_reason, sizeof(h->restoration.failure_reason), "none");
 
     make_id(h->collapse_boundary.boundary_id, run_id ^ 0x434f4c4c41505345ULL);
     copy_text(h->collapse_boundary.boundary_type, sizeof(h->collapse_boundary.boundary_type), "explicit_projection_event");
     copy_text(h->collapse_boundary.post_boundary_operations,
-              sizeof(h->collapse_boundary.post_boundary_operations), "serialize_invariant_only");
+              sizeof(h->collapse_boundary.post_boundary_operations),
+              "serialize_invariant_and_sealed_path");
     h->audit.schema_clean = 1;
     h->claim_level = 1;
+    orbit_init(&initial, N, lower, mirror);
+    path = (HoloPathHistory *)malloc(sizeof(*path));
+    if (!path || holo_path_history_init(path, 16U, &initial) != HOLO_PATH_OK) {
+        free(path);
+        memset(h, 0, sizeof(*h));
+        return -2;
+    }
+    h->evolution.path_history = path;
+    sync_path_metadata(h);
+    return 0;
+}
+
+void holo_object_destroy(HoloObject *h) {
+    if (!h) return;
+    if (h->evolution.path_history) {
+        holo_path_history_destroy(h->evolution.path_history);
+        free(h->evolution.path_history);
+    }
+    memset(h, 0, sizeof(*h));
 }
 
 int holo_geometry_render(const HoloGeometry *geometry, double rendered[2]) {
@@ -112,7 +149,60 @@ void holo_record_evolution(HoloObject *h, uint64_t seed, int steps,
     h->evolution.step_count = steps;
     h->carrier.coordinates[0] = fold_even_sum;
     h->carrier.coordinates[1] = fold_odd_sum;
+    sync_path_metadata(h);
     copy_text(h->evolution.closure_status, sizeof(h->evolution.closure_status), "closure_pending_boundary");
+}
+
+int holo_replace_path_history(HoloObject *h, HoloPathHistory *replacement) {
+    if (!h || !replacement || holo_path_history_validate(replacement) != HOLO_PATH_OK) return -1;
+    if (h->evolution.path_history == replacement) {
+        sync_path_metadata(h);
+        return 0;
+    }
+    if (h->evolution.path_history) {
+        holo_path_history_destroy(h->evolution.path_history);
+        free(h->evolution.path_history);
+    }
+    h->evolution.path_history = replacement;
+    h->evolution.step_count = (int)replacement->count;
+    sync_path_metadata(h);
+    return 0;
+}
+
+int holo_verify_software_restoration(HoloObject *h, const OrbitState *initial,
+                                     const OrbitState *terminal,
+                                     OrbitState *restored, int serialized_roundtrip) {
+    HoloPathHistory *path;
+    int rc;
+    if (!h || !initial || !terminal || !restored) return -1;
+    path = h->evolution.path_history;
+    if (!path) return -2;
+    rc = holo_path_reverse(path, terminal, restored);
+    if (rc != HOLO_PATH_OK || !holo_orbit_state_equal_bitwise(initial, restored)) {
+        h->restoration.restored = 0;
+        copy_text(h->restoration.failure_reason, sizeof(h->restoration.failure_reason),
+                  "software_path_roundtrip_failed");
+        sync_path_metadata(h);
+        return -3;
+    }
+    path->serialized_roundtrip = serialized_roundtrip ? 1 : 0;
+    h->restoration.restored = 1;
+    h->restoration.restoration_metric = 0.0;
+    snprintf(h->restoration.pre_state_reference, sizeof(h->restoration.pre_state_reference),
+             "fnv1a64:%016llx", (unsigned long long)path->initial_state_digest);
+    snprintf(h->restoration.post_state_reference, sizeof(h->restoration.post_state_reference),
+             "fnv1a64:%016llx", (unsigned long long)path->terminal_state_digest);
+    snprintf(h->restoration.restored_state_reference, sizeof(h->restoration.restored_state_reference),
+             "fnv1a64:%016llx", (unsigned long long)path->restored_state_digest);
+    copy_text(h->restoration.closure_law, sizeof(h->restoration.closure_law),
+              "inverse_path_reconstructs_initial_orbit_state");
+    copy_text(h->restoration.evidence_level, sizeof(h->restoration.evidence_level),
+              "software_path_roundtrip");
+    copy_text(h->restoration.verification_scope, sizeof(h->restoration.verification_scope),
+              "dedicated_verification_copy");
+    copy_text(h->restoration.failure_reason, sizeof(h->restoration.failure_reason), "none");
+    sync_path_metadata(h);
+    return 0;
 }
 
 void holo_set_materialization_mode(HoloObject *h, HoloMaterializationMode mode) {
@@ -135,6 +225,11 @@ int holo_cross_boundary(HoloObject *h, int step) {
     time_t now;
     struct tm *stamp;
     if (h->collapse_boundary.crossed) return -1;
+    if (!h->evolution.path_history ||
+        holo_path_history_seal(h->evolution.path_history) != HOLO_PATH_OK) return -2;
+    sync_path_metadata(h);
+    copy_text(h->evolution.continuation_status,
+              sizeof(h->evolution.continuation_status), "sealed_at_boundary");
     h->collapse_boundary.crossed = 1;
     h->collapse_boundary.projection_invoked = 1;
     h->collapse_boundary.step = step;
@@ -160,6 +255,11 @@ int holo_validate(const HoloObject *h) {
     if (h->projection.materialization_mode < HOLO_NATIVE ||
         h->projection.materialization_mode > HOLO_MATERIALIZED_FALLBACK) return 0;
     if (h->claim_level > 2 || h->invariant.claim_level > 2) return 0;
+    if (!h->evolution.path_history ||
+        holo_path_history_validate(h->evolution.path_history) != HOLO_PATH_OK) return 0;
+    if (h->evolution.path_history_count != h->evolution.path_history->count ||
+        h->evolution.path_history_capacity != h->evolution.path_history->capacity ||
+        h->evolution.step_count != (int)h->evolution.path_history->count) return 0;
     return h->audit.schema_clean;
 }
 
@@ -210,10 +310,14 @@ int holo_write_json(HoloObject *h, const char *path) {
     fprintf(f, "    \"coordinates\": [%.9f, %.9f], \"neutral_reference\": [%.9f, %.9f],\n", h->geometry.coordinates[0], h->geometry.coordinates[1], h->geometry.neutral_reference[0], h->geometry.neutral_reference[1]);
     fprintf(f, "    \"geometry_status\": \"%s\", \"child_reference\": \"%s\"\n  },\n", h->geometry.geometry_status, h->geometry.child_reference);
     fprintf(f, "  \"carrier\": {\"carrier_type\": \"%s\", \"coordinates\": [%.9f, %.9f], \"phase_relation\": [%.9f, %.9f], \"carrier_class\": \"%s\", \"substrate_status\": \"%s\", \"measurement_channel\": \"%s\"},\n", h->carrier.carrier_type, h->carrier.coordinates[0], h->carrier.coordinates[1], h->carrier.phase[0], h->carrier.phase[1], h->carrier.carrier_class, h->carrier.substrate_status, h->carrier.measurement_channel);
-    fprintf(f, "  \"evolution\": {\"operator\": \"%s\", \"operator_seed\": %llu, \"steps\": %d, \"path_history_reference\": \"%s\", \"path_history_appendable\": %s, \"continuation_status\": \"%s\", \"closure_status\": \"%s\"},\n", h->evolution.operator_id, (unsigned long long)h->evolution.operator_seed, h->evolution.step_count, h->evolution.path_history_reference, h->evolution.path_history_appendable ? "true" : "false", h->evolution.continuation_status, h->evolution.closure_status);
+    sync_path_metadata(h);
+    fprintf(f, "  \"evolution\": {\"operator\": \"%s\", \"operator_seed\": %llu, \"steps\": %d, \"history_present\": %s, \"history_count\": %zu, \"history_capacity\": %zu, \"history_appendable\": %s, \"history_reversible\": %s, \"history_sealed\": %s, \"restoration_verified\": %s, \"serialized_roundtrip\": %s, \"continuation_status\": \"%s\", \"closure_status\": \"%s\"},\n", h->evolution.operator_id, (unsigned long long)h->evolution.operator_seed, h->evolution.step_count, h->evolution.path_history_present ? "true" : "false", h->evolution.path_history_count, h->evolution.path_history_capacity, h->evolution.path_history_appendable ? "true" : "false", h->evolution.path_history_reversible ? "true" : "false", h->evolution.path_history_sealed ? "true" : "false", h->evolution.path_restoration_verified ? "true" : "false", h->evolution.path_serialized_roundtrip ? "true" : "false", h->evolution.continuation_status, h->evolution.closure_status);
+    if (holo_path_history_write_json(f, h->evolution.path_history) != HOLO_PATH_OK) {
+        fclose(f); return -5;
+    }
     fprintf(f, "  \"projection\": {\"projection_type\": \"%s\", \"operator\": \"%s\", \"materialization_mode\": \"%s\", \"allowed_boundary\": \"%s\", \"output_family\": \"%s\"},\n", h->projection.projection_type, h->projection.operator_id, holo_materialization_mode_name(h->projection.materialization_mode), h->projection.allowed_boundary, h->projection.output_family);
     fprintf(f, "  \"invariant\": {\"invariant_family\": \"%s\", \"extraction_operator\": \"%s\", \"predeclared\": %s, \"extraction_boundary\": \"%s\", \"extracted\": %s, \"fold_even\": %.9f, \"fold_odd_residual\": %.9f, \"fold_symmetry_holds\": %s, \"claim_level\": %d},\n", h->invariant.invariant_family, h->invariant.extraction_operator, h->invariant.predeclared ? "true" : "false", h->invariant.extraction_boundary, h->invariant.extracted ? "true" : "false", h->invariant.fold_even, h->invariant.fold_odd_residual, h->invariant.fold_symmetry_holds ? "true" : "false", h->invariant.claim_level);
-    fprintf(f, "  \"restoration\": {\"substrate_type\": \"%s\", \"pre_state_reference\": \"%s\", \"post_state_reference\": \"%s\", \"restored\": %s, \"restoration_metric\": %.9f, \"closure_law\": \"%s\", \"evidence_level\": \"%s\"},\n", h->restoration.substrate_type, h->restoration.pre_state_reference, h->restoration.post_state_reference, h->restoration.restored ? "true" : "false", h->restoration.restoration_metric, h->restoration.closure_law, h->restoration.evidence_level);
+    fprintf(f, "  \"restoration\": {\"substrate_type\": \"%s\", \"pre_state_reference\": \"%s\", \"post_state_reference\": \"%s\", \"restored_state_reference\": \"%s\", \"restored\": %s, \"restoration_metric\": %.9f, \"closure_law\": \"%s\", \"evidence_level\": \"%s\", \"verification_scope\": \"%s\", \"failure_reason\": \"%s\"},\n", h->restoration.substrate_type, h->restoration.pre_state_reference, h->restoration.post_state_reference, h->restoration.restored_state_reference, h->restoration.restored ? "true" : "false", h->restoration.restoration_metric, h->restoration.closure_law, h->restoration.evidence_level, h->restoration.verification_scope, h->restoration.failure_reason);
     fprintf(f, "  \"collapse_boundary\": {\"boundary_id\": \"%s\", \"boundary_type\": \"%s\", \"step\": %d, \"timestamp\": \"%s\", \"crossed\": %s, \"projection_invoked\": %s, \"invariant_extracted\": %s, \"post_boundary_operations\": \"%s\"},\n", h->collapse_boundary.boundary_id, h->collapse_boundary.boundary_type, h->collapse_boundary.step, h->collapse_boundary.timestamp, h->collapse_boundary.crossed ? "true" : "false", h->collapse_boundary.projection_invoked ? "true" : "false", h->collapse_boundary.invariant_extracted ? "true" : "false", h->collapse_boundary.post_boundary_operations);
     fprintf(f, "  \"forbidden_fields_scan\": {\"status\": \"PASS\", \"schema_clean\": true, \"serialized_output_clean\": true},\n");
     fprintf(f, "  \"claim_level\": %d\n}\n", h->claim_level);
@@ -245,6 +349,7 @@ int holo_read_json(HoloObject *h, const char *path) {
     unsigned long long run_id;
     int N;
     double lower, mirror;
+    HoloPathHistory *loaded_path = NULL;
     const char *run_field;
     const char *n_field;
     const char *fold_field;
@@ -264,21 +369,36 @@ int holo_read_json(HoloObject *h, const char *path) {
         sscanf(fold_field, "\"fold_pair\": {\"lower\": %lf, \"mirror\": %lf", &lower, &mirror) != 2) {
         free(json); return -5;
     }
-    holo_object_init(h, (uint64_t)run_id, N, (int)lower, (int)mirror);
+    if (holo_object_init(h, (uint64_t)run_id, N, (int)lower, (int)mirror) != 0) {
+        free(json); return -10;
+    }
     if (!read_text_value(json, "schema_family", h->schema_family, sizeof(h->schema_family)) ||
         !read_text_value(json, "schema_version", h->schema_version, sizeof(h->schema_version)) ||
         !read_text_value(json, "hypothesis", h->hypothesis, sizeof(h->hypothesis)) ||
         !read_text_value(json, "doctrine", h->doctrine, sizeof(h->doctrine)) ||
-        !read_text_value(json, "materialization_mode", mode, sizeof(mode))) { free(json); return -6; }
+        !read_text_value(json, "materialization_mode", mode, sizeof(mode))) {
+        holo_object_destroy(h); free(json); return -6;
+    }
     if (strcmp(mode, "native_holo") == 0) h->projection.materialization_mode = HOLO_NATIVE;
     else if (strcmp(mode, "hybrid") == 0) h->projection.materialization_mode = HOLO_HYBRID;
     else if (strcmp(mode, "materialized_fallback") == 0) h->projection.materialization_mode = HOLO_MATERIALIZED_FALLBACK;
-    else { free(json); return -7; }
+    else { holo_object_destroy(h); free(json); return -7; }
     if (!strstr(json, "\"holo_geometry\"") || !strstr(json, "\"carrier\"") ||
         !strstr(json, "\"evolution\"") || !strstr(json, "\"projection\"") ||
         !strstr(json, "\"invariant\"") || !strstr(json, "\"restoration\"") ||
-        !strstr(json, "\"collapse_boundary\"")) { free(json); return -8; }
+        !strstr(json, "\"collapse_boundary\"") || !strstr(json, "\"path_history\"")) {
+        holo_object_destroy(h); free(json); return -8;
+    }
+    if (holo_path_history_read_json(json, &loaded_path) != HOLO_PATH_OK ||
+        holo_replace_path_history(h, loaded_path) != 0) {
+        if (loaded_path) { holo_path_history_destroy(loaded_path); free(loaded_path); }
+        holo_object_destroy(h); free(json); return -11;
+    }
     h->audit.serialized_output_clean = !file_contains_forbidden_output(path);
     free(json);
-    return holo_validate(h) && h->audit.serialized_output_clean ? 0 : -9;
+    if (!holo_validate(h) || !h->audit.serialized_output_clean) {
+        holo_object_destroy(h);
+        return -9;
+    }
+    return 0;
 }

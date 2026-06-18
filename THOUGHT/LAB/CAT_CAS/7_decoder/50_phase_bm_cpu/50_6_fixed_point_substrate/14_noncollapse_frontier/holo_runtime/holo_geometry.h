@@ -3,9 +3,10 @@
 #define HOLO_GEOMETRY_H
 
 #include <stdint.h>
+#include <stddef.h>
 
 #define HOLO_SCHEMA_FAMILY "CAT_CAS_HOLO_GEOMETRY"
-#define HOLO_SCHEMA_VERSION "1.0.0"
+#define HOLO_SCHEMA_VERSION "1.1.0"
 #define HOLO_HYPOTHESIS "CATALYSIS_IS_THE_HOLOGRAM"
 #define HOLO_DOCTRINE "NON_COLLAPSE_V1"
 #define HOLO_TEXT_LEN 96
@@ -16,6 +17,9 @@ typedef enum {
     HOLO_HYBRID = 1,
     HOLO_MATERIALIZED_FALLBACK = 2
 } HoloMaterializationMode;
+
+typedef struct HoloPathHistory HoloPathHistory;
+typedef struct OrbitState OrbitState;
 
 typedef struct {
     char geometry_type[HOLO_TEXT_LEN];
@@ -40,8 +44,15 @@ typedef struct {
     char operator_id[HOLO_TEXT_LEN];
     uint64_t operator_seed;
     int step_count;
-    char path_history_reference[HOLO_TEXT_LEN];
+    HoloPathHistory *path_history;
+    int path_history_present;
+    size_t path_history_count;
+    size_t path_history_capacity;
     int path_history_appendable;
+    int path_history_reversible;
+    int path_history_sealed;
+    int path_restoration_verified;
+    int path_serialized_roundtrip;
     char continuation_status[HOLO_TEXT_LEN];
     char closure_status[HOLO_TEXT_LEN];
 } HoloEvolution;
@@ -70,10 +81,13 @@ typedef struct {
     char substrate_type[HOLO_TEXT_LEN];
     char pre_state_reference[HOLO_TEXT_LEN];
     char post_state_reference[HOLO_TEXT_LEN];
+    char restored_state_reference[HOLO_TEXT_LEN];
     int restored;
     double restoration_metric;
     char closure_law[HOLO_TEXT_LEN];
     char evidence_level[HOLO_TEXT_LEN];
+    char verification_scope[HOLO_TEXT_LEN];
+    char failure_reason[HOLO_TEXT_LEN];
 } CatalyticRestoration;
 
 typedef struct {
@@ -112,11 +126,16 @@ typedef struct {
 } HoloObject;
 
 const char *holo_materialization_mode_name(HoloMaterializationMode mode);
-void holo_object_init(HoloObject *h, uint64_t run_id, int N, int lower, int mirror);
+int holo_object_init(HoloObject *h, uint64_t run_id, int N, int lower, int mirror);
+void holo_object_destroy(HoloObject *h);
 int holo_geometry_render(const HoloGeometry *geometry, double rendered[2]);
 void holo_set_carrier_phase(HoloObject *h, double phase_lower, double phase_mirror);
 void holo_record_evolution(HoloObject *h, uint64_t seed, int steps,
                            double fold_even_sum, double fold_odd_sum);
+int holo_replace_path_history(HoloObject *h, HoloPathHistory *replacement);
+int holo_verify_software_restoration(HoloObject *h, const OrbitState *initial,
+                                     const OrbitState *terminal,
+                                     OrbitState *restored, int serialized_roundtrip);
 void holo_set_materialization_mode(HoloObject *h, HoloMaterializationMode mode);
 int holo_extract_invariant(HoloObject *h);
 int holo_cross_boundary(HoloObject *h, int step);

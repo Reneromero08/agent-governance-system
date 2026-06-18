@@ -104,3 +104,30 @@ The software runtime demonstrates executable relational geometry, delayed
 projection, and schema round-tripping. `architectural_metadata_only` is the
 restoration evidence ceiling. No physical catalytic closure, physical memory,
 orientation channel, or invariant beyond fold closure is experimentally proven.
+
+## L4B.2 reversible path history
+
+`HoloEvolution` owns one heap-allocated `HoloPathHistory`. `holo_object_init()`
+allocates it, `holo_replace_path_history()` transfers replacement ownership,
+and `holo_object_destroy()` releases it. Standalone histories expose explicit
+initialize, reset, append, seal, validate, reverse, serialize, deserialize, and
+destroy operations. Capacity grows geometrically with checked bounds; failed
+appends leave both history and `OrbitState` unchanged.
+
+Each `HoloPathStep` is a compositional transform containing its index, operator
+identity and parameter, exact pre/post accumulator bit patterns, continuity
+digests, and a step digest. Digests use deterministic FNV-1a for structural
+integrity only; they are not cryptographic. Adjacent post/pre digests must match,
+indices are monotonic, and sealed histories reject mutation.
+
+Reversibility means that a terminal software `OrbitState` plus the serialized
+history reconstructs the initial numeric state bitwise. Reverse traversal uses
+the recorded pre-state bit patterns rather than floating-point subtraction.
+The witness is accepted only after the original in-memory history is destroyed,
+the path is deserialized from `.holo`, and a dedicated verification copy is
+restored. The evolved terminal object remains available for boundary projection.
+
+Successful execution sets `restored=true`,
+`evidence_level=software_path_roundtrip`, and
+`closure_law=inverse_path_reconstructs_initial_orbit_state`. This proves only a
+software path round trip. It is not evidence of physical or hardware restoration.

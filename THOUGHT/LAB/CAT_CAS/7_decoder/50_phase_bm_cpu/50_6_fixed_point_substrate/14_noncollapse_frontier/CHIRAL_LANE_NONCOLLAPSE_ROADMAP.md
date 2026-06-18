@@ -63,7 +63,7 @@ THE ALGORITHM IS DEAD.
 **Catalysis Is The Hologram:** phase is carrier, geometry is memory, the
 algorithm is a local trace, and an invariant is extracted only at
 CollapseBoundary.
-- [ ] L4B.2 — reversible path-history accumulator
+- [x] L4B.2 — reversible, appendable, serialized path-history accumulator with bitwise software restoration
 - [ ] L4B.3 — expanded .holo evolution transcript
 - [ ] L4B.4 — invariant family beyond `fold_symmetry = holds`
 - [ ] L4B.5 — physical substrate mapping after primitive matures

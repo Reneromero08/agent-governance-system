@@ -21,7 +21,7 @@
  * branch_plus = a = min(d, N-d). branch_minus = N-a.
  * These are MAGNITUDE orderings from public data only.
  * NOT truth labels. NOT candidate_0/candidate_1 for scoring. */
-typedef struct {
+typedef struct OrbitState {
     int N;
     int branch_plus;
     int branch_minus;

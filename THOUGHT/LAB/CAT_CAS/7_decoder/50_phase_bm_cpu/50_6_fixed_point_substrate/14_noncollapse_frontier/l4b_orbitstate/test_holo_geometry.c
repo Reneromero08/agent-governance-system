@@ -1,37 +1,47 @@
 #include "orbit_state.h"
+#include "holo_path_history.h"
 #include "../holo_runtime/holo_geometry.h"
 
 #include <assert.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 static int output_contains(const char *path, const char *needle) {
     FILE *f = fopen(path, "rb");
     long size;
-    char buffer[8192];
+    char *buffer;
+    int found;
     if (!f) return 0;
-    size = (long)fread(buffer, 1, sizeof(buffer) - 1U, f);
+    if (fseek(f, 0, SEEK_END) != 0 || (size = ftell(f)) < 0 ||
+        fseek(f, 0, SEEK_SET) != 0) { fclose(f); return 0; }
+    buffer = (char *)malloc((size_t)size + 1U);
+    if (!buffer) { fclose(f); return 0; }
+    if (fread(buffer, 1, (size_t)size, f) != (size_t)size) {
+        free(buffer); fclose(f); return 0;
+    }
     fclose(f);
     buffer[size] = '\0';
-    return strstr(buffer, needle) != NULL;
+    found = strstr(buffer, needle) != NULL;
+    free(buffer);
+    return found;
 }
 
 int main(void) {
     const char *path = "holo_geometry_test.holo";
     OrbitState orbit;
     EvolParams params = { .max_steps = 64, .seed = 42 };
-    PathStep history[ORBIT_MAX_STEPS];
     int steps = 0;
     HoloObject object;
     HoloObject loaded;
     double rendered[2];
 
     orbit_init(&orbit, 256, 23, 233);
-    orbit_evolve(&orbit, &params, history, &steps);
-    holo_object_init(&object, 42, 256, 23, 233);
+    assert(holo_object_init(&object, 42, 256, 23, 233) == 0);
+    assert(holo_path_evolve(object.evolution.path_history, &orbit, &params) == HOLO_PATH_OK);
+    steps = orbit.steps;
     holo_record_evolution(&object, params.seed, steps, orbit.acc_real, orbit.acc_imag);
-    holo_set_carrier_phase(&object, history[steps - 1].theta_plus,
-                           history[steps - 1].theta_minus);
+    holo_set_carrier_phase(&object, 1.0, -1.0);
 
     assert(object.geometry.basis_rank == 2);
     assert(object.geometry.coordinates[0] == 23.0);
@@ -62,6 +72,7 @@ int main(void) {
     assert(holo_read_json(&loaded, path) == 0);
     assert(loaded.projection.materialization_mode == HOLO_MATERIALIZED_FALLBACK);
     assert(output_contains(path, "\"materialization_mode\": \"materialized_fallback\""));
+    holo_object_destroy(&loaded);
 
     holo_set_materialization_mode(&object, HOLO_NATIVE);
     assert(holo_write_json(&object, path) == 0);
@@ -81,6 +92,8 @@ int main(void) {
     assert(!output_contains(path, "\"winner\""));
     assert(!output_contains(path, "\"verify_pass\""));
 
+    holo_object_destroy(&loaded);
+    holo_object_destroy(&object);
     remove(path);
     puts("HOLO_GEOMETRY_TEST_PASS");
     return 0;
