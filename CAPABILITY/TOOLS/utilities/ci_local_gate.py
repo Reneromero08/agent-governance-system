@@ -123,7 +123,7 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     writer.open_commit_gate()
     tmp_root = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "pytest"
-    writer.mkdir_durable(str(tmp_root.relative_to(PROJECT_ROOT)), parents=True, exist_ok=True)
+    writer.mkdir_tmp(str(tmp_root.relative_to(PROJECT_ROOT)), parents=True, exist_ok=True)
     test_env = {
         "TMPDIR": str(tmp_root),
         "TMP": str(tmp_root),

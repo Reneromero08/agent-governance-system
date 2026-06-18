@@ -2,6 +2,14 @@
 
 # Changelog
 
+## 2026-06-18
+
+- **Risk-complete push verification:** Reworked the mandatory push gate so every push still runs critic, contract fixtures, and deterministic core pytest, while real embedding integration tests run only when embedding-sensitive paths changed. Added `--exhaustive` for deliberate whole-TESTBENCH verification.
+- **Canonical test planning:** Added `CAPABILITY/TOOLS/utilities/push_test_plan.py` as the shared source of truth for local and GitHub CI test selection, including deterministic plan hashes, changed-path reporting, conditional embedding coverage, xdist support, and slow-test duration reporting.
+- **Push receipt reliability:** Replaced the pre-push one-time token behavior with a JSON receipt bound to the exact `HEAD` and test plan. Receipts now survive failed network pushes and are invalidated automatically by any new commit.
+- **CI performance and drift control:** Updated GitHub Actions to use the canonical planner, full checkout history for accurate diffs, pip caching, concurrency cancellation, and aligned local/remote suite selection.
+- **Verification coverage:** Added focused tests for cross-platform path normalization, core-only selection, embedding-sensitive selection, exhaustive mode, and deterministic plan hashing. Updated ADR-034 and STYLE-005 to document the risk-complete push model.
+
 ## 2026-06-12
 
 - **MCP server refactor (CAPABILITY/MCP):** Removed dead code (`_load_cortex_index`, `_search_cortex_index`, `_tool_not_implemented`, orphaned `commit_ceremony` prompt entry). Fixed canon access broken by the LAW/CANON bucket reorg: new `_resolve_canon_file()` resolves bare names through `canon.json`, restoring `canon_read`, all `ags://canon/*` resources, and the genesis/arbitration/deprecation prompts. Closed a `canon_read` path traversal (name regex + containment check). Revived the audit log, dead since January: `_audit_log` called `mkdir_tmp` on a durable root, so every write was rejected by the firewall; now `mkdir_durable` with the commit gate opened at init. `--test` mode no longer calls the nonexistent `cortex_query` tool. `AGS_SKILL_TIMEOUT` env var (seconds) optionally bounds `skill_run` (default remains unlimited). `validation.py`: `verify_post_run_outputs` reuses `validate_single_path` (same error codes, dedup of 60 copied lines). `semantic_adapter.py`: ELO search-log/annotate deduplicated into `_elo_log_search`/`_elo_annotate`; lazy init is now thread-safe and idempotent. `primitives.py`: canonical `repo_root()` resolution; `atomic_rewrite_jsonl` failures now log to stderr.
