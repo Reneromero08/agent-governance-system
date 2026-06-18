@@ -249,3 +249,16 @@ blocking conditions; session-level splits; and future artifact schemas. Its
 status is `READY_FOR_HUMAN_REVIEW`, `implementation_authorized=false`, and
 `executed=false`. It binds to reviewed mapping digest `0d06f3c8b44f8c55` and
 does not authorize calibration, restoration, or physical-memory claims.
+
+Review corrections make the two state tests operational before acquisition.
+Repeatability uses training-idle-covariance-whitened Euclidean `[I,Q,ring]`
+trajectory distance, fixed absolute-TSC window alignment without dynamic
+warping, complete held-out session/route/schedule replicates, median within-input
+and fifth-percentile between-input distances, and a 10,000-resample session-block
+bootstrap acceptance rule. Distinguishability uses four balanced prepared-state
+classes, fixed L2 multinomial logistic regression, session-level splits, balanced
+accuracy, chance `0.25`, and a pre-acquisition power margin `delta_power` fixed
+from `alpha=0.05`, power `0.80`, and approved held-out class counts. Delay gain
+is not an authorization gate: sufficient S1 remains the minimal state when S2
+does not improve it by 10%; F6 blocks only if S1 and every tested S2 history fail
+empirical predictive sufficiency.

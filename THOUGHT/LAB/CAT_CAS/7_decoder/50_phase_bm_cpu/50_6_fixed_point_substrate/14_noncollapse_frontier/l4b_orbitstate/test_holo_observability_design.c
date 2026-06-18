@@ -60,6 +60,27 @@ static void test_validation(void) {
     holo_observability_design_destroy(&d);holo_observability_design_destroy(&empty);
 }
 
+static void test_review_corrections(void) {
+    HoloObservabilityDesign d=make_design();
+    const HoloObservabilityTest *repeat=&d.observability_tests[0];
+    const HoloObservabilityTest *distinguish=&d.observability_tests[1];
+    const HoloObservabilityTest *delay=&d.observability_tests[2];
+    const HoloFalsificationCondition *f6=&d.falsifications[5];
+    assert(strstr(repeat->metric,"whitened Euclidean") && strstr(repeat->metric,"absolute-TSC") && strstr(repeat->metric,"no dynamic warping"));
+    assert(strstr(repeat->threshold,"complete held-out session-route-schedule") && strstr(repeat->threshold,"within=median") && strstr(repeat->threshold,"between=q05"));
+    assert(strstr(repeat->decision,"10000-resample session-block-bootstrap") && strstr(repeat->decision,"upper95(within)<lower95(between)"));
+    puts("REPEATABILITY_GATE_OPERATIONAL_PASS");
+    assert(strstr(distinguish->metric,"classes=idle,low_load,high_load,post_impulse_history") && strstr(distinguish->metric,"balance=1:1:1:1") && strstr(distinguish->metric,"L2 multinomial logistic") && strstr(distinguish->metric,"balanced_accuracy"));
+    assert(strstr(distinguish->threshold,"session-level split") && strstr(distinguish->threshold,"chance=0.25") && strstr(distinguish->threshold,"delta_power") && strstr(distinguish->threshold,"alpha=0.05,power=0.80"));
+    assert(strstr(distinguish->decision,"10000-resample session-block bootstrap") && !strstr(distinguish->threshold,"0.60"));
+    puts("STATE_DISTINGUISHABILITY_GATE_OPERATIONAL_PASS");
+    assert(strstr(delay->threshold,"not an authorization gate") && strstr(delay->decision,"if S1 passes sufficiency retain S1"));
+    assert(strstr(f6->threshold,"S1 fails") && strstr(f6->threshold,"every S2 L fails predictive sufficiency"));
+    assert(strstr(f6->next_action,"if S1 passes select S1 when S2 gain<10 percent") && strstr(f6->next_action,"select smallest sufficient S2 L"));
+    puts("F6_CONDITIONAL_SUFFICIENCY_PASS");
+    holo_observability_design_destroy(&d);
+}
+
 static void expect_tamper_rejected(HoloObservabilityDesign *d,const char *path,const char *from,const char *to,const char *label){HoloObservabilityDesign loaded;assert(holo_observability_design_write_json(d,path)==0);replace_once(path,from,to);assert(holo_observability_design_read_json(&loaded,path)!=0);puts(label);}
 
 static void test_roundtrip_tampering(void) {
@@ -93,4 +114,4 @@ static void print_design(void) {
     puts("L4B5B0_GATE_DECISION=READY_FOR_HUMAN_REVIEW");holo_observability_design_destroy(&d);
 }
 
-int main(void){test_validation();test_roundtrip_tampering();print_design();puts("HOLO_OBSERVABILITY_DESIGN_TEST_PASS");return 0;}
+int main(void){test_validation();test_review_corrections();test_roundtrip_tampering();print_design();puts("HOLO_OBSERVABILITY_DESIGN_TEST_PASS");return 0;}
