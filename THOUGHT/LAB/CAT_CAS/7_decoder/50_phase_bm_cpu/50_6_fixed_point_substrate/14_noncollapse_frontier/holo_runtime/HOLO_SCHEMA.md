@@ -79,12 +79,13 @@ recovery. The public invariant remains the fold orbit `{d, N-d}`.
 
 ## JSON witness
 
-Schema family `CAT_CAS_HOLO_GEOMETRY`, version `1.2.0`, emits:
+Schema family `CAT_CAS_HOLO_GEOMETRY`, version `1.3.0`, emits:
 
 ```text
 schema identity and CATALYSIS_IS_THE_HOLOGRAM hypothesis
 unresolved fold_pair
 holo_geometry (basis, coordinates, neutral reference, status)
+physical_mapping (sealed contract reference, digest, support counts, review state)
 carrier (coordinates and phase relation)
 evolution (operator, steps, path history, closure)
 projection (operator, materialization mode, allowed boundary)
@@ -164,3 +165,58 @@ store operator parameters and exact accumulator state bits, but not a declared
 group-valued carrier transform. No phase product, wrapping convention, or
 winding result is fabricated. All results remain L1/L2 software architecture;
 they do not prove orientation recovery, physical closure, or physical holonomy.
+
+## L4B.5A physical mapping contract
+
+`l4b5a_pdn_mapping_v1` is a machine-readable evidence boundary, not a physical
+`.holo` implementation. Records use `MEASURED`, `RECOMPUTED_FROM_MEASURED`,
+`SIMULATED`, `SOFTWARE_ONLY`, `INFERRED`, `PROPOSED`, or `ABSENT` evidence;
+`SUPPORTED`, `PARTIALLY_SUPPORTED`, `UNSUPPORTED`, or `NOT_APPLICABLE` status;
+and `OBSERVABLE`, `PARTIALLY_OBSERVABLE`,
+`UNOBSERVABLE_WITH_CURRENT_INSTRUMENTS`, or `UNDEFINED` observability.
+
+The audited mappings are:
+
+```text
+SOFTWARE OBJECT          PHYSICAL CORRESPONDENT                         EVIDENCE                    STATUS
+HoloGeometry             candidate PDN response manifold               PROPOSED                    UNSUPPORTED
+HoloCarrier              sender/PDN/ring-osc lock-in channel            MEASURED                    SUPPORTED
+RelationBasis            identified PDN transfer operator              PROPOSED                    UNSUPPORTED
+HoloEvolution            schedule plus deadline-aligned captures       MEASURED                    PARTIALLY_SUPPORTED
+HoloPathHistory          ordered reversible physical states            ABSENT                      UNSUPPORTED
+CatalyticRestoration     return of declared observable physical state   ABSENT                      UNSUPPORTED
+HoloCollapseBoundary     capture window and lock-in I/Q projection      MEASURED                    PARTIALLY_SUPPORTED
+HoloInvariantFamily      calibrated physical invariant candidates       RECOMPUTED_FROM_MEASURED     PARTIALLY_SUPPORTED
+```
+
+The carrier result is supported only at channel level. The T300 route `4:5`
+carried sender-owned mode and phase through a shared PDN rail into measured I/Q
+lock-in output. This is not evidence that the channel stores `HoloGeometry`.
+The T300 `hash_restored` field proves software XOR/byte-hash bookkeeping, while
+P-state restoration is protocol cleanup; neither is physical catalytic
+restoration. Compact JSON scores are tracked, but raw matrix CSV captures were
+not imported, limiting independent trajectory reconstruction.
+
+Invariant portability is: `serialization_invariance=SOFTWARE_ONLY`;
+`relation_basis`, `exchange_covariance`, and `path_order` are
+`PHYSICALLY_TESTABLE_AFTER_CALIBRATION`; orbit conservation, path composition,
+restoration closure, and software path holonomy have
+`NO_CURRENT_PHYSICAL_MAPPING`. No L4B.4 invariant is presently promoted as a
+measured physical invariant.
+
+The proposed state is `X_phys(t)={lock-in I,Q; ring-oscillator period; sender
+schedule; core identities; TSC origin; temperature proxy; voltage/frequency
+state; capture window}`. Current instruments observe only I/Q, ring-oscillator
+samples, schedule, cores, TSC origin, and capture window. Rail waveforms,
+internal PDN modes, the full thermal field, and complete microarchitectural
+state remain unobserved. Restoration is therefore unobservable with current
+preserved evidence; a scalar baseline return cannot establish full-state return.
+
+L4B.5B requires a predeclared P0-P8 experiment: declare state and observable,
+measure baseline, apply a controlled path, measure terminal state, apply a
+declared inverse/closure, measure restored state, compare with uncertainty, run
+controls, and repeat across seeds, sessions, and core pairs. Required controls
+are no-disturbance, disturbance without restoration, wrong inverse, reordered
+inverse, carrier off, randomized phase, session/core-pair repeats, and a
+thermal/time-matched sham. Until that gate passes, the decision is
+`NOT_AUTHORIZED_EVIDENCE_MISSING`.

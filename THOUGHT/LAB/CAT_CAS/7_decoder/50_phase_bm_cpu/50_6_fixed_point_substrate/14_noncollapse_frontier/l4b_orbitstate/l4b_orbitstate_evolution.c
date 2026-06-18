@@ -98,8 +98,23 @@ int main(int argc, char **argv) {
     }
 
     const char *path = "results/l4b_orbitstate_dry_run.holo";
+    const char *mapping_path = "results/l4b5a_physical_mapping.json";
+    const char *mapping_reference =
+        "14_noncollapse_frontier/l4b_orbitstate/results/l4b5a_physical_mapping.json";
+    HoloPhysicalMappingContract mapping;
+    if (holo_physical_mapping_init(&mapping, HOLO_MAPPING_OBJECT_COUNT) != 0 ||
+        holo_physical_mapping_populate_current(&mapping) != 0 ||
+        holo_physical_mapping_seal(&mapping) != 0 ||
+        holo_physical_mapping_write_json(&mapping, mapping_path) != 0 ||
+        holo_attach_physical_mapping(&holo, &mapping, mapping_reference) != 0) {
+        fprintf(stderr, "FAIL: physical mapping contract generation failed\n");
+        holo_physical_mapping_destroy(&mapping);
+        holo_object_destroy(&holo);
+        return 1;
+    }
     if (holo_write_json(&holo, path) != 0) {
         fprintf(stderr, "FAIL: could not write .holo file\n");
+        holo_physical_mapping_destroy(&mapping);
         holo_object_destroy(&holo);
         return 1;
     }
@@ -108,6 +123,7 @@ int main(int argc, char **argv) {
     HoloObject reloaded;
     if (holo_read_json(&reloaded, path) != 0) {
         fprintf(stderr, "FAIL: serialized invariant family reload failed\n");
+        holo_physical_mapping_destroy(&mapping);
         holo_object_destroy(&holo);
         return 1;
     }
@@ -116,6 +132,7 @@ int main(int argc, char **argv) {
     if (holo_verify_software_restoration(&holo, &initial, &terminal, &restored, 1) != 0 ||
         holo_write_json(&holo, path) != 0) {
         fprintf(stderr, "FAIL: serialized path restoration failed\n");
+        holo_physical_mapping_destroy(&mapping);
         holo_object_destroy(&holo);
         return 1;
     }
@@ -144,10 +161,17 @@ int main(int argc, char **argv) {
     printf("serialization_invariance=%s\n",
            holo.invariant_family.records[HOLO_INV_SERIALIZATION].passed ? "PASS" : "FAIL");
     printf("software_path_holonomy=DEFERRED_NOT_WELL_DEFINED\n");
+    printf("physical_mapping_contract=%s\n", mapping_path);
+    printf("physical_mapping_counts=supported:%d partial:%d unsupported:%d\n",
+           holo.physical_mapping.supported_records,
+           holo.physical_mapping.partial_records,
+           holo.physical_mapping.unsupported_records);
+    printf("l4b5b_decision=NOT_AUTHORIZED_EVIDENCE_MISSING\n");
 
     /* Verdict */
     printf("\n=== VERDICT ===\n");
     printf("L4B4_NONCOLLAPSE_INVARIANT_FAMILY_PASS\n");
+    printf("L4B5A_PHYSICAL_MAPPING_CONTRACT_PASS\n");
     printf("  OrbitState declared as unresolved fold pair.\n");
     printf("  Coupled evolution completed without branch collapse.\n");
     printf("  Predeclared invariant family extracted at CollapseBoundary only.\n");
@@ -157,6 +181,7 @@ int main(int argc, char **argv) {
     printf("  No recovered d. No orientation. No candidate scoring. No verify.\n");
     printf("  THE ALGORITHM IS DEAD.\n");
 
+    holo_physical_mapping_destroy(&mapping);
     holo_object_destroy(&holo);
     return 0;
 }

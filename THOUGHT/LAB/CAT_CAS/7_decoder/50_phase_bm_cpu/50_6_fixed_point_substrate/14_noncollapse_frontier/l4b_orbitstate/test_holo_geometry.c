@@ -92,6 +92,8 @@ int main(void) {
     assert(loaded.projection.materialization_mode == HOLO_NATIVE);
 
     assert(output_contains(path, "\"holo_geometry\""));
+    assert(output_contains(path, "\"physical_mapping\""));
+    assert(output_contains(path, "\"status\": \"not_attached\""));
     assert(output_contains(path, "\"relation_basis\""));
     assert(output_contains(path, "\"coordinates\""));
     assert(output_contains(path, "\"carrier\""));

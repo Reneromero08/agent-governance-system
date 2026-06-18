@@ -5,9 +5,10 @@
 #include <stdint.h>
 #include <stddef.h>
 #include "holo_invariant_family.h"
+#include "holo_physical_mapping.h"
 
 #define HOLO_SCHEMA_FAMILY "CAT_CAS_HOLO_GEOMETRY"
-#define HOLO_SCHEMA_VERSION "1.2.0"
+#define HOLO_SCHEMA_VERSION "1.3.0"
 #define HOLO_HYPOTHESIS "CATALYSIS_IS_THE_HOLOGRAM"
 #define HOLO_DOCTRINE "NON_COLLAPSE_V1"
 #define HOLO_TEXT_LEN 96
@@ -108,6 +109,7 @@ typedef struct HoloObject {
     HoloEvolution evolution;
     HoloProjection projection;
     HoloInvariantFamily invariant_family;
+    HoloPhysicalMappingReference physical_mapping;
     CatalyticRestoration restoration;
     HoloCollapseBoundary collapse_boundary;
     ForbiddenFieldAudit audit;
@@ -125,6 +127,9 @@ int holo_replace_path_history(HoloObject *h, HoloPathHistory *replacement);
 int holo_verify_software_restoration(HoloObject *h, const OrbitState *initial,
                                      const OrbitState *terminal,
                                      OrbitState *restored, int serialized_roundtrip);
+int holo_attach_physical_mapping(HoloObject *h,
+                                 const HoloPhysicalMappingContract *contract,
+                                 const char *contract_reference);
 void holo_set_materialization_mode(HoloObject *h, HoloMaterializationMode mode);
 int holo_extract_invariant(HoloObject *h);
 int holo_cross_boundary(HoloObject *h, int step);

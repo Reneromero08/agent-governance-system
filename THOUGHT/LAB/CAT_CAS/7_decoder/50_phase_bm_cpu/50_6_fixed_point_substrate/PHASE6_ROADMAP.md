@@ -391,7 +391,8 @@ CollapseBoundary.
 - [x] L4B.2: COMPLETE -- reversible, appendable, serialized path-history accumulator with bitwise software restoration after artifact reload
 - [x] L4B.3: COMPLETE / ABSORBED BY L4B.2 -- machine-relevant path geometry replaces a prose evolution transcript
 - [x] L4B.4: COMPLETE -- orbit, basis, composition, restoration, exchange, serialization, and path-order invariants; software path holonomy deferred as not well-defined
-- [ ] L4B.5: physical substrate mapping -- after primitive matures
+- [x] L4B.5A: COMPLETE -- PDN mapping contract: 1 supported channel mapping, 3 partial interpretations, 4 unsupported physical mappings
+- [ ] L4B.5B: GATED -- physical implementation requires the predeclared restoration experiment and controls; current evidence is missing
 
 ---
 
