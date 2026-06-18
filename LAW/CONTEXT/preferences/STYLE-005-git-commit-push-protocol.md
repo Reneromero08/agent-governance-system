@@ -1,141 +1,85 @@
-<!-- CONTENT_HASH: 36f7bc41112be4dbc3ab970fb2c16e72b463ef5c9dae5850c0d5c943642bf0be -->
+<!-- CONTENT_HASH: 242ba51ef7ef56d3d0799898f9a1de784f8c6a525d3abdac364a78581fe6d7da -->
 
 # STYLE-005: Git Commit and Push Protocol
 
 **Authority:** CONTEXT/preferences  
-**Version:** 1.0.0  
-**Status:** Active
-**Category:** Governance
-**Scope:** Repository
+**Version:** 1.1.0  
+**Status:** Active  
+**Category:** Governance  
+**Scope:** Repository  
 **Enforcement:** Strict
 
 ## Purpose
 
-Prevent uncontrolled staging, committing, and pushing that spams CI and breaks governance.
-
----
+Prevent uncontrolled staging, committing, and pushing while keeping the mandatory push boundary proportionate to the code being published.
 
 ## Hard Rules
 
-### 1. Staging Rules
+### 1. Staging
 
-**NEVER use `git add .`**
+Never use `git add .` or `git add -A`. Stage explicit paths and preserve architectural commit chunks.
 
-Agents MUST:
-- Stage files explicitly by path
-- Group related changes into logical commits
-- Verify what's staged before committing: `git status`
+### 2. Branches
 
-```bash
-# ✅ CORRECT
-git add CANON/SYSTEM_BUCKETS.md
-git add AGS_ROADMAP_MASTER.md
+Work on feature branches. Do not push directly to `main`; integrate through reviewed branch history or an explicitly authorized local cherry-pick/merge workflow.
 
-# ❌ FORBIDDEN
-git add .
-git add -A
-```
+### 3. Commit verification
 
-### 2. Branch Rules
-
-**NO direct pushes to `main`**
-
-All work MUST:
-- Happen on feature branches
-- Go through pull requests
-- Pass CI checks before merge
+Before a commit, run the fast governance boundary:
 
 ```bash
-# ✅ CORRECT workflow
-git checkout -b feature/bucket-taxonomy
-# ... make changes ...
-git push origin feature/bucket-taxonomy
-# ... create PR on GitHub ...
-
-# ❌ FORBIDDEN
-git push origin main
+python CAPABILITY/TOOLS/governance/critic.py
 ```
 
-### 3. Required Local Checks
+The pre-commit hook also runs canon governance, INBOX policy, and critic checks.
 
-Before ANY commit, agents MUST run:
+### 4. Push verification
+
+Before every push, run:
 
 ```bash
-# 1. Critic (governance checks)
-python TOOLS/ags.py preflight --allow-dirty-tracked
-
-# 2. Contracts (fixtures)
-python CONTRACTS/runner.py
-
-# 3. Tests (if applicable)
-python -m pytest TESTBENCH/ -v
+python CAPABILITY/TOOLS/utilities/ci_local_gate.py --full
 ```
 
-**If any check fails, DO NOT COMMIT.**
+`--full` means the complete mandatory push plan for the actual change set:
 
-### 4. One Approval = One Commit
+- critic and all contract fixtures always run;
+- deterministic core pytest always runs;
+- real embedding integration tests run when embedding, semantic-index, canon-index, ADR-index, model-registry, dependency, or embedding-test paths changed;
+- other expensive infrastructure suites are reserved for explicit exhaustive verification.
 
-From `AGENTS.md` Section 10:
-
-- One user approval authorizes ONE commit only
-- Completing additional work requires NEW approval
-- Chaining commits under single approval is FORBIDDEN
-
-### 5. No Push Without Green Checks
-
-Pushes are blocked unless:
-- `CONTRACTS/_runs/ALLOW_PUSH.token` exists (human-created)
-- Local contracts pass
-- Pre-push hook validates token
-
----
-
-## Commit Ceremony
-
-1. **Make changes** (code, docs, etc.)
-2. **Run checks** (critic, contracts, tests)
-3. **Stage explicitly** (by file path)
-4. **Request approval** from user
-5. **Commit once** with descriptive message
-6. **DO NOT PUSH** - wait for explicit push approval
-
----
-
-## Push Protocol
-
-### Human-Only Push Approval
-
-To allow a push, the human must create:
+For releases, nightly verification, test-infrastructure changes, or deliberate whole-repository validation, run:
 
 ```bash
-# Create one-time push token
-echo "feature/bucket-taxonomy" > CONTRACTS/_runs/ALLOW_PUSH.token
+python CAPABILITY/TOOLS/utilities/ci_local_gate.py --exhaustive
 ```
 
-The pre-push hook will:
-1. Check token exists
-2. Run minimal contracts validation
-3. Allow push
-4. **Delete token** (one-time use)
+`--exhaustive` implies `--full` and runs the entire TESTBENCH without normal push exclusions.
 
-If token missing, push is **BLOCKED**.
+### 5. Verification receipts
 
----
+A successful full gate writes `LAW/CONTRACTS/_runs/ALLOW_PUSH.token` as a JSON verification receipt tied to the exact `HEAD` and test-plan hash.
+
+The receipt is not deleted by `pre-push`. Git hooks run before network transmission and cannot know whether the remote accepted the push. Retaining the receipt allows a network retry without rerunning unchanged verification. Any new commit changes `HEAD` and invalidates the receipt automatically.
+
+### 6. Approval boundary
+
+One approval authorizes one commit. Commit and push remain separate actions unless the human explicitly grants composite approval.
+
+## Canonical flow
+
+1. Make the complete architectural change.
+2. Run relevant focused tests while developing.
+3. Run critic before commit.
+4. Stage explicit paths and obtain commit approval.
+5. Commit once.
+6. Run `ci_local_gate.py --full` before push.
+7. Obtain push approval.
+8. Push the verified `HEAD`.
 
 ## Enforcement
 
-- **Pre-push hook**: Installed via `python TOOLS/setup_git_hooks.py`
-- **CI triggers**: Only on PRs to `main`, not direct pushes
-- **Contracts fixture**: Validates workflow trigger policy
-- **GitHub branch protection**: Requires PR + status checks (human-configured)
-
----
-
-## Violations
-
-Agents that violate this protocol:
-- Spam user's email with CI failures
-- Break governance
-- Violate commit ceremony (AGENTS.md Section 10)
-
-**This is a critical governance failure.**
+- `.githooks/pre-commit` enforces the fast commit boundary.
+- `.githooks/pre-push` requires a valid HEAD-bound receipt.
+- `.github/workflows/contracts.yml` uses the same canonical pytest planner as the local full gate.
+- `CAPABILITY/TOOLS/utilities/push_test_plan.py` is the single source of truth for core, conditional embedding, and exhaustive pytest selection.
