@@ -1,0 +1,158 @@
+{
+  "campaign_id": "phase6b5_t48_d32b1bed_20260619",
+  "claim_ceiling": "RECONSTRUCTABLE_CHANNEL_CARRIER_ONLY",
+  "comparator_routes": [
+    "v2s3"
+  ],
+  "contract_id": "phase6b5_pdn_carrier_witness_v1",
+  "forbidden_claims": [
+    "physical HoloGeometry",
+    "physical restoration",
+    "target coupling",
+    "orientation recovery",
+    "Small Wall crossing"
+  ],
+  "frozen_configuration": {
+    "binary_sha256": "75024a02982e853336558468e550e824e6ad17a01e1ddcfad85610e138a81f59",
+    "compiler_flags": "-O2 -pthread -Wall -Wextra -Werror -march=amdfam10 <slot2_pdn_lockin.c> <carrier_witness_raw.c> -o slot2 -lm",
+    "cooldown": {
+      "minimum_seconds": 30,
+      "resume_at_or_below_c": 43.0
+    },
+    "f_hi": 1500.0,
+    "f_lo": 20.0,
+    "gap_s": 0.12,
+    "nbin": 12,
+    "pstate_target_khz": 1600000,
+    "read_hz": 4000,
+    "routes": [
+      "v4s5",
+      "v2s3"
+    ],
+    "slot_s": 0.5,
+    "storage_path": "/root/catcas_evidence/phase6b5_t48_d32b1bed_20260619",
+    "temperature_veto_c": 68.0,
+    "thermal_sensor": "k10temp",
+    "thermal_source": "/sys/class/hwmon/hwmon0/temp1_input",
+    "tones_hz": [
+      20.175627520550627,
+      29.230023517875622,
+      44.30041574135145,
+      64.77774549643189,
+      95.46178568369419,
+      144.12817666932995,
+      208.329696613956,
+      313.46078833958734,
+      464.3653457375265,
+      676.1251019385853,
+      1025.616619383898,
+      1490.222598676734
+    ],
+    "trials_per_family": 48,
+    "tsc_hz": 3214826000.0
+  },
+  "primary_route": "v4s5",
+  "required_conditions": [
+    "matrix",
+    "silent",
+    "scramble"
+  ],
+  "required_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "runs": [
+    {
+      "condition": "matrix",
+      "route": "v4s5",
+      "run_id": "v4s5_matrix_seed0",
+      "seed": 0
+    },
+    {
+      "condition": "matrix",
+      "route": "v4s5",
+      "run_id": "v4s5_matrix_seed1",
+      "seed": 1
+    },
+    {
+      "condition": "matrix",
+      "route": "v4s5",
+      "run_id": "v4s5_matrix_seed2",
+      "seed": 2
+    },
+    {
+      "condition": "matrix",
+      "route": "v4s5",
+      "run_id": "v4s5_matrix_seed3",
+      "seed": 3
+    },
+    {
+      "condition": "matrix",
+      "route": "v4s5",
+      "run_id": "v4s5_matrix_seed4",
+      "seed": 4
+    },
+    {
+      "condition": "matrix",
+      "route": "v4s5",
+      "run_id": "v4s5_matrix_seed5",
+      "seed": 5
+    },
+    {
+      "condition": "silent",
+      "route": "v4s5",
+      "run_id": "v4s5_silent_seed900",
+      "seed": 900
+    },
+    {
+      "condition": "scramble",
+      "route": "v4s5",
+      "run_id": "v4s5_scramble_seed901",
+      "seed": 901
+    },
+    {
+      "condition": "matrix",
+      "route": "v2s3",
+      "run_id": "v2s3_matrix_seed0",
+      "seed": 0
+    },
+    {
+      "condition": "matrix",
+      "route": "v2s3",
+      "run_id": "v2s3_matrix_seed1",
+      "seed": 1
+    },
+    {
+      "condition": "matrix",
+      "route": "v2s3",
+      "run_id": "v2s3_matrix_seed2",
+      "seed": 2
+    },
+    {
+      "condition": "matrix",
+      "route": "v2s3",
+      "run_id": "v2s3_matrix_seed3",
+      "seed": 3
+    },
+    {
+      "condition": "matrix",
+      "route": "v2s3",
+      "run_id": "v2s3_matrix_seed4",
+      "seed": 4
+    },
+    {
+      "condition": "matrix",
+      "route": "v2s3",
+      "run_id": "v2s3_matrix_seed5",
+      "seed": 5
+    }
+  ],
+  "schema_id": "CAT_CAS_PDN_CARRIER_CAMPAIGN_V1",
+  "schema_version": "1.0.0",
+  "source_commit": "d32b1bed0deae1b907a07eeed018b924244e9ea2",
+  "status": "FROZEN"
+}

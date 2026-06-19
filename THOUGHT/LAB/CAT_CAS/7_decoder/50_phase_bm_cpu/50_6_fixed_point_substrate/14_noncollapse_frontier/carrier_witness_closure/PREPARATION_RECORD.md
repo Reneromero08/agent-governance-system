@@ -2,7 +2,7 @@
 
 **Branch:** `phase6b/carrier-witness-closure`  
 **Base:** `9de22d1e3c076537973abbab2a9e50b21ee8f791`  
-**Status:** `REPOSITORY_PREPARATION_COMPLETE__SSH_EXECUTION_PENDING`
+**Status:** `FULL_T48_CAMPAIGN_STRUCTURALLY_VALID__SCIENTIFIC_PARTIAL`
 
 ---
 
@@ -44,31 +44,35 @@ Therefore the current repository evidence cannot reconstruct each I/Q value from
 
 ---
 
-## Physical work still required
+## Target integration result
 
-The SSH agent must:
+The existing Slot 2 stack now writes immutable raw timing samples, exact used
+schedules, runtime `t0`, telemetry, legacy-compatible summaries, and verified
+run manifests. The target compiler accepted the actual Slot 2 binary with
+`-march=amdfam10 -Wall -Wextra -Werror`.
 
-1. audit `/root/slot2_pdn` without altering historical files;
-2. restore a valid thermal sensor or stop;
-3. integrate the raw writer into the existing Slot 2 receiver;
-4. serialize the exact sender/receiver schedule and telemetry;
-5. prove one smoke bundle reconstructs itself;
-6. freeze source, binary, configuration, routes, seeds, and controls;
-7. acquire the route `4:5` campaign and route `2:3` comparator;
-8. regenerate summaries and analysis from raw bytes;
-9. issue an honest route-scoped closure report.
+The host audit found no surviving historical raw timing arrays. The required
+`k10temp` source is readable at `/sys/class/hwmon/hwmon0/temp1_input`; the `msr`
+driver also exposes the required COFVID source. A pre-acquisition attempt stopped
+before capture on the P-state verification gate and preserved its failed logs.
+
+## Physical result
+
+The smoke and all 14 frozen T48 runs reconstruct from raw bytes. Route `4:5`
+passes only 1/6 seeds under the frozen scientific gates; route `2:3` passes
+2/6. The next carrier task is a separately frozen, higher-powered T300 campaign
+if the project owner authorizes its substantially longer acquisition time.
 
 ---
 
 ## Claim boundary
 
-Repository preparation does not establish new physical evidence.
-
-Current claim remains:
+The reconstructable T48 campaign establishes complete raw provenance but not
+route-scoped scientific closure. Current claim remains:
 
 ```text
-selected PDN carrier supported at compact channel-summary level
-strict reconstructable carrier witness pending
+selected PDN carrier supported by historical compact T300 summaries
+new T48 raw carrier campaign structurally valid and scientifically PARTIAL
 ```
 
 The next gate after a valid closure is the external L4B.5B0 human design review. Observability acquisition remains unauthorized.

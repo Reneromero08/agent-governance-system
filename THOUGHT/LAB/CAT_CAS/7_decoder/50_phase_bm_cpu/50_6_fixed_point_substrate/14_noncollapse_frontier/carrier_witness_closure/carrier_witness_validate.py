@@ -82,10 +82,23 @@ METRIC_KEYS = (
     "phase_corr_null",
     "phase_delta",
 )
+SCIENTIFIC_GATE_KEYS = (
+    "all_rows_restore",
+    "real_accuracy_ge_0_60",
+    "real_vs_pseudo_floor_ge_0_95",
+    "pseudo_reject_floor_ge_0_95",
+    "wrong_actual_match_ge_0_60",
+    "wrong_declared_match_le_0_20",
+    "phase_recovered_gt_0_30",
+)
 
 
 class ValidationError(RuntimeError):
     pass
+
+
+def contract_scientific_pass(gates: dict[str, Any]) -> bool:
+    return all(gates.get(key) is True for key in SCIENTIFIC_GATE_KEYS)
 
 
 def sha256_file(path: Path) -> str:
@@ -532,8 +545,9 @@ def reconstruct_run(run_dir: Path, analyzer: Path, temp_root: Path) -> dict[str,
         "max_abs_reconstruction_error": max_abs_error,
         "max_rel_reconstruction_error": max_rel_error,
         "scientific_gates": reconstructed_analysis.get("gates", {}),
-        "scientific_pass": bool(reconstructed_analysis.get("gates"))
-        and all(reconstructed_analysis.get("gates", {}).values()),
+        "scientific_pass": contract_scientific_pass(
+            reconstructed_analysis.get("gates", {})
+        ),
         "verdict": reconstructed_analysis.get("verdict"),
     }
 

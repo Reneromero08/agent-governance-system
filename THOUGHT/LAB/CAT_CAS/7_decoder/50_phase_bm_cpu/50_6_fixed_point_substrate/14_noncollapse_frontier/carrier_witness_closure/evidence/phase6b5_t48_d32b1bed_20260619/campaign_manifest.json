@@ -1,0 +1,95 @@
+{
+  "campaign_id": "phase6b5_t48_d32b1bed_20260619",
+  "files": {
+    "aggregate/aggregate.json": {
+      "sha256": "5f5dadd5532c30d093434565f479a1274d0f88eadee74230769d1e5eea4510e2",
+      "size": 13277
+    },
+    "aggregate/closure_report.json": {
+      "sha256": "51c44f451273496bc9915a3ebdbf64199ff205beffbf040b98eb705d1ceae2b2",
+      "size": 13885
+    },
+    "campaign.json": {
+      "sha256": "9902bd1f0b64f23a3e02422208afda143a4bca43de6fe19c53474ee9dcc91e5a",
+      "size": 3510
+    },
+    "source_manifest.json": {
+      "sha256": "e8169bb46312e50bc64135fee4c3ad448857e5d7409373fb1d8a46d156f238f9",
+      "size": 1672
+    }
+  },
+  "run_manifests": {
+    "v2s3_matrix_seed0": {
+      "path": "runs/v2s3_matrix_seed0/run_manifest.json",
+      "sha256": "ff74cc2cc6e06f7b8dc1d0b51a2a439ca5e1e7495e61707feffb396498eff434",
+      "size": 1226
+    },
+    "v2s3_matrix_seed1": {
+      "path": "runs/v2s3_matrix_seed1/run_manifest.json",
+      "sha256": "d2f0d0f2f02cd7d47b437f81489a228fe92cc3ded63477ddd7ca6498a0df89b0",
+      "size": 1225
+    },
+    "v2s3_matrix_seed2": {
+      "path": "runs/v2s3_matrix_seed2/run_manifest.json",
+      "sha256": "1b263a096c5e665ef79772bfc6cab5175be251c2a744140085c1ceed4e558367",
+      "size": 1226
+    },
+    "v2s3_matrix_seed3": {
+      "path": "runs/v2s3_matrix_seed3/run_manifest.json",
+      "sha256": "dd3834721cdd55fec11fba65ca457f7ff0d14b5573c07e9d213e56dfc8a74cc8",
+      "size": 1226
+    },
+    "v2s3_matrix_seed4": {
+      "path": "runs/v2s3_matrix_seed4/run_manifest.json",
+      "sha256": "f38e13714cf933c4c752121eb3b146de55541f0d3a71021bb81f4039af41f8c9",
+      "size": 1226
+    },
+    "v2s3_matrix_seed5": {
+      "path": "runs/v2s3_matrix_seed5/run_manifest.json",
+      "sha256": "248bf02028417b37b87d105ba81f869f7ed1b1ac1d336a3187ed68f48505355b",
+      "size": 1226
+    },
+    "v4s5_matrix_seed0": {
+      "path": "runs/v4s5_matrix_seed0/run_manifest.json",
+      "sha256": "28914f45814fb0461b048f66e96a9f9c8b1cde5ee70c230f9fdf06317a0a928b",
+      "size": 1225
+    },
+    "v4s5_matrix_seed1": {
+      "path": "runs/v4s5_matrix_seed1/run_manifest.json",
+      "sha256": "60b0e18350e23f5fbeb4f116376b07d22030ea2400f6a68452c47392d1415419",
+      "size": 1226
+    },
+    "v4s5_matrix_seed2": {
+      "path": "runs/v4s5_matrix_seed2/run_manifest.json",
+      "sha256": "0ffcfb912d6bc1ceb5cdf7596c7261296f5212932118d90ef48b403253a4ce15",
+      "size": 1225
+    },
+    "v4s5_matrix_seed3": {
+      "path": "runs/v4s5_matrix_seed3/run_manifest.json",
+      "sha256": "ef8ce35c99496897752febe8e15ec6a91428b6acdaf71e3b7eca5d5c77bd5de9",
+      "size": 1225
+    },
+    "v4s5_matrix_seed4": {
+      "path": "runs/v4s5_matrix_seed4/run_manifest.json",
+      "sha256": "897f39c439a56023ab15b4d5d6bf756604d087c091965373e1ae1fe18d6c721d",
+      "size": 1226
+    },
+    "v4s5_matrix_seed5": {
+      "path": "runs/v4s5_matrix_seed5/run_manifest.json",
+      "sha256": "9024e3b6df500fbd901a0b8db76a9c4fe97ed4c1d3733b1f60965821861ab46b",
+      "size": 1226
+    },
+    "v4s5_scramble_seed901": {
+      "path": "runs/v4s5_scramble_seed901/run_manifest.json",
+      "sha256": "865166aa939e37ea4fd1a899588cd117433d51af733ec3c39b5d16e8b94429fc",
+      "size": 1230
+    },
+    "v4s5_silent_seed900": {
+      "path": "runs/v4s5_silent_seed900/run_manifest.json",
+      "sha256": "0e02f87899a7d4dbeb01645040c81ab8cd6fae66d7aaeb1b21263b3875f03f79",
+      "size": 1228
+    }
+  },
+  "schema_id": "CAT_CAS_PDN_CARRIER_CAMPAIGN_MANIFEST_V1",
+  "source_commit": "d32b1bed0deae1b907a07eeed018b924244e9ea2"
+}

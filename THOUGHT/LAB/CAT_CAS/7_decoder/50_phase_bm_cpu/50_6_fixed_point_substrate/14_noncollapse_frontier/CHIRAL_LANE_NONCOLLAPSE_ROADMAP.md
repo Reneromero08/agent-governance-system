@@ -1,6 +1,6 @@
 # Phase 6B Non-Collapse Frontier Roadmap
 
-**Status:** `COHERENCE_REPAIR_VERIFIED__CARRIER_WITNESS_PENDING`
+**Status:** `CARRIER_WITNESS_STRUCTURALLY_COMPLETE__SCIENTIFIC_PARTIAL`
 **Binding directive:** `COURSE_CORRECTION.md`
 **Immediate gate:** close the carrier witness
 **Next physical gate:** close the carrier witness
@@ -60,7 +60,8 @@ Canonical doctrine: `doctrine/`.
 - [x] target compilation passed with GCC 14.2.0 and `-march=amdfam10`
 - [ ] physical acquisition requires an explicit authorized run plan
 
-Class B capture is additionally deferred because no `k10temp` or other `hwmon` temperature input was available for the required thermal-safety check.
+Class B capture remains deferred pending an authorized run plan. The target now
+exposes readable `k10temp` at `/sys/class/hwmon/hwmon0/temp1_input`.
 
 ---
 
@@ -154,15 +155,19 @@ The following stages are separate. None may be compressed into another.
 
 ### Phase 6B.5 — Close the PDN carrier witness
 
-- [ ] freeze tested routes or explicitly narrow route scope
-- [ ] preserve raw I/Q windows
-- [ ] preserve raw ring-period samples
-- [ ] preserve TSC origin/window alignment
-- [ ] preserve schedule/workload/core/topology metadata
-- [ ] preserve temperature/frequency proxies
-- [ ] hash raw artifacts
-- [ ] regenerate summaries from raw acquisition
-- [ ] freeze the exact channel-level claim
+- [x] freeze tested routes or explicitly narrow route scope
+- [x] preserve raw I/Q windows
+- [x] preserve raw ring-period samples
+- [x] preserve TSC origin/window alignment
+- [x] preserve schedule/workload/core/topology metadata
+- [x] preserve temperature/frequency proxies
+- [x] hash raw artifacts
+- [x] regenerate summaries from raw acquisition
+- [x] freeze the exact channel-level result: T48 is structurally valid but scientific `PARTIAL`
+
+Frozen T48 result: all 14 runs reconstruct; silent and scramble controls are
+null; route `4:5` passes 1/6 seeds and route `2:3` passes 2/6. Carrier closure
+is not achieved.
 
 Exit claim: the tested shared PDN route reproducibly transports declared sender-owned mode and phase.
 

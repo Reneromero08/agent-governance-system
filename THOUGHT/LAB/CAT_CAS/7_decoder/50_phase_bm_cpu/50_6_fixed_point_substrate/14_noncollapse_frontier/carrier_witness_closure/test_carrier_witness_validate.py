@@ -74,6 +74,14 @@ class CarrierWitnessValidatorTests(unittest.TestCase):
     def test_required_window_schema_includes_restoration_flag(self) -> None:
         self.assertIn("hash_restored", validator.REQUIRED_WINDOW_COLUMNS)
 
+    def test_only_frozen_scientific_gates_control_closure(self) -> None:
+        gates = {key: True for key in validator.SCIENTIFIC_GATE_KEYS}
+        gates["real_mode_floor_ge_0_45"] = False
+        gates["pseudo_declared_match_le_0_35"] = False
+        self.assertTrue(validator.contract_scientific_pass(gates))
+        gates["real_vs_pseudo_floor_ge_0_95"] = False
+        self.assertFalse(validator.contract_scientific_pass(gates))
+
 
 if __name__ == "__main__":
     unittest.main()

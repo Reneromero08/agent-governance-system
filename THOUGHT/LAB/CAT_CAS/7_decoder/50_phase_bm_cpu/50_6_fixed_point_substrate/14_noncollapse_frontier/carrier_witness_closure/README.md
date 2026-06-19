@@ -2,7 +2,7 @@
 
 **Branch:** `phase6b/carrier-witness-closure`  
 **Predecessor:** Phase 6B coherence repair, squash commit `9de22d1e3c076537973abbab2a9e50b21ee8f791`  
-**Status:** `CONTRACT_AND_TOOLING_PREPARED__PHYSICAL_EXECUTION_PENDING`  
+**Status:** `STRUCTURALLY_COMPLETE__SCIENTIFIC_PARTIAL`
 **Claim ceiling:** reconstructable channel-level carrier evidence only
 
 ---
@@ -64,6 +64,9 @@ The existing result remains valid channel evidence. This stage upgrades provenan
 | `RAW_ARTIFACT_SCHEMA.md` | Portable raw bundle and binary record format |
 | `carrier_witness_validate.py` | Hash, structure, raw lock-in reconstruction, and closure validator |
 | `audit_existing_t300.py` | Non-destructive audit of old host/repository artifacts |
+| `carrier_witness_finalize.py` | Immutable run finalization and manifest verification |
+| `t300_existing_evidence_audit.json` | Generated inventory of surviving target evidence |
+| `EXECUTION_REPORT.md` | Target build, historical audit, and thermal stop record |
 | `SSH_AGENT_HANDOFF.md` | Exact physical-machine execution handoff |
 
 The original acquisition/scoring stack remains under:

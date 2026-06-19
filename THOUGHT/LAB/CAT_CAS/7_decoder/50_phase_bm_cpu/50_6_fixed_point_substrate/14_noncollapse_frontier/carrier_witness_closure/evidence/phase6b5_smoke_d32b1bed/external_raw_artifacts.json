@@ -1,0 +1,16 @@
+{
+  "artifacts": [
+    {
+      "absolute_path": "/root/catcas_evidence/phase6b5_smoke_d32b1bed/runs/v4s5_matrix_seed777/raw_samples.bin",
+      "run_id": "v4s5_matrix_seed777",
+      "sample_count": 291564,
+      "sha256": "bf3fa5ffdddf5c7bc5fe1dcd92c7d6175156c8561df8df08d6c10a4271c4fe74",
+      "size": 4665024,
+      "window_count": 192
+    }
+  ],
+  "campaign_id": "phase6b5_smoke_d32b1bed",
+  "host": "catcas",
+  "host_identity": "root@192.168.137.100",
+  "schema_id": "CAT_CAS_PDN_EXTERNAL_RAW_INDEX_V1"
+}

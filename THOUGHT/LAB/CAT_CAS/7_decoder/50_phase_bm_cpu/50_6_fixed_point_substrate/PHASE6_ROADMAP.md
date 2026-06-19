@@ -1,7 +1,7 @@
 # Phase 6 Roadmap
 
 **Role:** master chronological task ledger.
-**Current head:** `PHASE6B_COHERENCE_REPAIR_VERIFIED__CARRIER_WITNESS_PENDING`
+**Current head:** `PHASE6B_CARRIER_WITNESS_STRUCTURALLY_COMPLETE__SCIENTIFIC_PARTIAL`
 **Binding directive:** `14_noncollapse_frontier/COURSE_CORRECTION.md`
 **Immediate gate:** carrier-witness closure, then L4B.5B0 external human review.
 **Observability acquisition:** not authorized.
@@ -150,7 +150,8 @@ Status remains `READY_FOR_HUMAN_REVIEW`, `implementation_authorized=false`, `exe
 - [x] compile on the target toolchain (`gcc 14.2.0`, `-march=amdfam10`)
 - [ ] execute/import physical artifact only under an authorized acquisition plan
 
-Hardware capture remains deferred because the target exposed no `k10temp` or other `hwmon` temperature input.
+Class B capture remains deferred pending an authorized run plan. The target now
+exposes readable `k10temp` at `/sys/class/hwmon/hwmon0/temp1_input`.
 
 ### `.holo` semantic integrity
 
