@@ -951,16 +951,17 @@ def aggregate_decision(
 
 
 def gate_layer_reconciliation(campaign_root: Path) -> dict[str, Any]:
-    path = (
-        campaign_root.parent.parent
-        / "replication_discrepancy"
-        / "results"
-        / "official_gate_decomposition.json"
-    )
+    del campaign_root
+    source = Path("replication_discrepancy/results/official_gate_decomposition.json")
+    path = Path(__file__).resolve().parent.parent / source
+    available = path.is_file()
     return {
         "schema_id": "CAT_CAS_PHASE6B5C_GATE_LAYER_BINDING_V1",
-        "source": str(path),
-        "available_in_campaign_bundle": path.is_file(),
+        "source": source.as_posix(),
+        "available_in_campaign_bundle": False,
+        "available_in_analysis_source": available,
+        "source_size": path.stat().st_size if available else None,
+        "source_sha256": sha256_file(path) if available else None,
         "official_strict_closure_unchanged": "PARTIAL",
         "role_separation": [
             "protocol_integrity",

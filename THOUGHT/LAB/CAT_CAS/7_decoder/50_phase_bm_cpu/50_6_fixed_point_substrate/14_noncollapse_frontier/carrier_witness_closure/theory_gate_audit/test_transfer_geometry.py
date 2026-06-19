@@ -173,6 +173,17 @@ def build_campaign(root: Path) -> Path:
 
 
 class TransferGeometryTests(unittest.TestCase):
+    def test_gate_layer_binding_is_source_relative_and_hashed(self) -> None:
+        binding = analysis.gate_layer_reconciliation(Path("/external/campaign"))
+        self.assertEqual(
+            binding["source"],
+            "replication_discrepancy/results/official_gate_decomposition.json",
+        )
+        self.assertFalse(binding["available_in_campaign_bundle"])
+        self.assertTrue(binding["available_in_analysis_source"])
+        self.assertEqual(len(binding["source_sha256"]), 64)
+        self.assertGreater(binding["source_size"], 0)
+
     def test_full_synthetic_analysis(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
