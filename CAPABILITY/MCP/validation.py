@@ -114,8 +114,21 @@ def validate_single_path(
         return errors
 
     # 3. Resolve the normalized relative path and check containment
-    normalized_path = normalize_relpath(raw_path)
-    abs_path = resolve_under_root(normalized_path, root=PROJECT_ROOT)
+    try:
+        normalized_path = normalize_relpath(raw_path)
+        abs_path = resolve_under_root(normalized_path, root=PROJECT_ROOT)
+    except ValueError:
+        errors.append({
+            "code": "PATH_ESCAPES_REPO_ROOT",
+            "message": f"Path escapes repository root: {raw_path}",
+            "path": json_pointer,
+            "details": {
+                "declared": raw_path,
+                "repo_root": str(PROJECT_ROOT),
+                "reason": "resolved_outside_root",
+            }
+        })
+        return errors
     if not is_path_under_root(abs_path, PROJECT_ROOT.resolve()):
         errors.append({
             "code": "PATH_ESCAPES_REPO_ROOT",
