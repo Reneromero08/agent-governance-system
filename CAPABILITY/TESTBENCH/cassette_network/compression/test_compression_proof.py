@@ -15,6 +15,8 @@ This is the scientific proof that the Cassette Network works.
 import json
 import math
 import pytest
+
+pytestmark = pytest.mark.requires_cassettes
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, Tuple

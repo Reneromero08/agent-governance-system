@@ -6,6 +6,8 @@ Measures query latency and throughput to validate performance claims.
 """
 import json
 import pytest
+
+pytestmark = pytest.mark.requires_cassettes
 import statistics
 import sys
 import time

@@ -1,8 +1,12 @@
 #!/bin/sh
-# Pre-push hook: require a HEAD-bound verification receipt.
+# Pre-push hook: require a verification receipt for the commit actually pushed.
 set -e
 
-if python3 --version >/dev/null 2>&1; then
+if [ -x ".venv/Scripts/python.exe" ]; then
+    PYTHON_CMD=".venv/Scripts/python.exe"
+elif [ -x ".venv/bin/python" ]; then
+    PYTHON_CMD=".venv/bin/python"
+elif python3 --version >/dev/null 2>&1; then
     PYTHON_CMD="python3"
 elif python --version >/dev/null 2>&1; then
     PYTHON_CMD="python"
@@ -11,14 +15,16 @@ else
     exit 1
 fi
 
+ZERO_SHA="0000000000000000000000000000000000000000"
 TOKEN_FILE="LAW/CONTRACTS/_runs/ALLOW_PUSH.token"
 REFS_FILE="LAW/CONTRACTS/_runs/_tmp/pre-push-refs.$$"
+GUARD="CAPABILITY/TOOLS/utilities/pre_push_guard.py"
 mkdir -p "$(dirname "$REFS_FILE")"
 cat > "$REFS_FILE"
 trap 'rm -f "$REFS_FILE"' EXIT HUP INT TERM
 
 while read local_ref local_sha remote_ref remote_sha; do
-    if echo "$remote_ref" | grep -qE '^refs/tags/v[0-9]'; then
+    if [ "$local_sha" != "$ZERO_SHA" ] && echo "$remote_ref" | grep -qE '^refs/tags/v[0-9]'; then
         TAG_NAME=$(echo "$remote_ref" | sed 's|refs/tags/||')
         SEAL_DIR="NAVIGATION/PROOFS/RELEASES/$TAG_NAME"
         echo "[PRE-PUSH] Release tag detected: $TAG_NAME"
@@ -33,44 +39,36 @@ while read local_ref local_sha remote_ref remote_sha; do
     fi
 done < "$REFS_FILE"
 
+# No-op pushes and deletion-only pushes introduce no new commit content.
+if [ ! -s "$REFS_FILE" ]; then
+    echo "[PRE-PUSH] No ref updates; verification receipt not required."
+    exit 0
+fi
+if awk -v zero="$ZERO_SHA" 'NF && $2 != zero { found=1 } END { exit found ? 1 : 0 }' "$REFS_FILE"; then
+    echo "[PRE-PUSH] Deletion-only push; verification receipt not required."
+    exit 0
+fi
+
 if [ ! -f "$TOKEN_FILE" ]; then
     echo ""
-    echo "PUSH BLOCKED: no HEAD-bound verification receipt"
+    echo "PUSH BLOCKED: no verification receipt"
     echo "Run: python CAPABILITY/TOOLS/utilities/ci_local_gate.py --full"
     echo "For release/nightly depth: add --exhaustive"
     exit 1
 fi
 
-HEAD=$(git rev-parse HEAD 2>/dev/null || true)
-TOK_HEAD=$($PYTHON_CMD - "$TOKEN_FILE" <<'PY'
-import json, sys
-try:
-    payload = json.load(open(sys.argv[1], encoding="utf-8"))
-except Exception:
-    print("")
-else:
-    print(payload.get("head", "") if payload.get("type") == "CI_OK" else "")
-PY
-)
+set +e
+"$PYTHON_CMD" "$GUARD" --refs-file "$REFS_FILE" --token-file "$TOKEN_FILE"
+GUARD_RC=$?
+set -e
 
-if [ -z "$TOK_HEAD" ]; then
+if [ "$GUARD_RC" -eq 2 ]; then
     echo "[PRE-PUSH] Legacy/manual token detected; running the canonical full gate."
     "$PYTHON_CMD" CAPABILITY/TOOLS/utilities/ci_local_gate.py --full
-    TOK_HEAD=$($PYTHON_CMD - "$TOKEN_FILE" <<'PY'
-import json, sys
-payload = json.load(open(sys.argv[1], encoding="utf-8"))
-print(payload.get("head", ""))
-PY
-)
-fi
-
-if [ -z "$HEAD" ] || [ "$TOK_HEAD" != "$HEAD" ]; then
-    echo ""
-    echo "PUSH BLOCKED: verification receipt does not match current HEAD"
-    echo "  receipt: $TOK_HEAD"
-    echo "  current: $HEAD"
+    "$PYTHON_CMD" "$GUARD" --refs-file "$REFS_FILE" --token-file "$TOKEN_FILE"
+elif [ "$GUARD_RC" -ne 0 ]; then
     echo "Re-run: python CAPABILITY/TOOLS/utilities/ci_local_gate.py --full"
-    exit 1
+    exit "$GUARD_RC"
 fi
 
 if ! git diff --cached --quiet; then
@@ -78,6 +76,6 @@ if ! git diff --cached --quiet; then
     exit 1
 fi
 
-echo "[PRE-PUSH] Push approved for HEAD $HEAD"
+echo "[PRE-PUSH] Push approved."
 echo "[PRE-PUSH] Receipt retained. A new commit invalidates it automatically."
 exit 0
