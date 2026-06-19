@@ -26,13 +26,20 @@ open-ended campaign analysis: STOPPED
 - `run_phase6b5c.sh`: non-overwriting host runner for the retained T48 campaign.
 - `PHASE6B5C_RESULT_REPORT.md`: retained-raw execution and interpretation.
 - `analyze_carrier_consolidation.py`: bounded Phase 6B.5D consolidation over the committed 5C packet.
+- `run_carrier_consolidation.py`: deterministic wrapper inheriting the bound Phase 6B.5C provenance timestamp.
 - `test_carrier_consolidation.py`: consolidation and manifest-tamper regression tests.
 - `PHASE6B5D_CONSOLIDATION_REPORT.md`: final old-gate, cross-session, residual, and seed-4 adjudication.
+- `PHASE6B5D_DETERMINISTIC_MANIFEST.json`: stable output hashes, workflow binding, and decision record.
 - `PHASE6B5E_TONE_ORDER_CONTROL_CONTRACT.md`: preregistered but unauthorized next physical control.
-- `results/phase6b5d_carrier_claim_consolidation/`: exact workflow-generated consolidation packet.
 - `reconcile_gate_layers.py`: separates contract, analyzer, and mechanism-layer readouts.
 - `test_reconcile_gate_layers.py`: regression coverage for gate namespaces and finite-sample geometry.
 - `verify_authority_stack.py`: prevents roadmap drift back into blind T48/T300 repetition or past the Gate R boundary.
+
+The detailed Phase 6B.5D JSON packet is not duplicated as a timestamp-variant repository snapshot. It is reproduced byte-for-byte from the committed Phase 6B.5C inputs by `run_carrier_consolidation.py` and the read-only workflow. The stable deterministic manifest is:
+
+```text
+d11bf9d41c1b9a9195d79d5ba1ab8b591f9c364b3f57435fded958d5a0861f31
+```
 
 ## Phase 6B.5D result
 
