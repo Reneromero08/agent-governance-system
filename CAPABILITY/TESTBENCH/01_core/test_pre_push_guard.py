@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 from CAPABILITY.TOOLS.utilities.pre_push_guard import (
@@ -12,6 +13,19 @@ from CAPABILITY.TOOLS.utilities.pre_push_guard import (
 
 def ref(local_ref: str, local_sha: str, remote_ref: str = "refs/heads/main") -> PushRef:
     return PushRef(local_ref, local_sha, remote_ref, ZERO_SHA)
+
+
+def valid_receipt(head: str = "f" * 40) -> dict:
+    return {
+        "type": "CI_OK",
+        "head": head,
+        "base_ref": "origin/main",
+        "mode": "full",
+        "plan_hash": "a" * 64,
+        "risk_groups": [],
+        "suites": ["core"],
+        "timestamp": "2026-06-19T00:00:00+00:00",
+    }
 
 
 def test_parse_push_refs_accepts_git_pre_push_format():
@@ -76,13 +90,25 @@ def test_annotated_tag_uses_resolved_commit():
     assert decision.allowed
 
 
-def test_load_receipt_head_rejects_legacy_and_accepts_json(tmp_path: Path):
+def test_load_receipt_head_rejects_legacy_and_accepts_complete_json(tmp_path: Path):
     token = tmp_path / "ALLOW_PUSH.token"
     token.write_text("CI_OK\n", encoding="utf-8")
     assert load_receipt_head(token) is None
 
-    token.write_text(
-        '{"type":"CI_OK","head":"ffffffffffffffffffffffffffffffffffffffff"}\n',
-        encoding="utf-8",
-    )
+    token.write_text(json.dumps(valid_receipt()) + "\n", encoding="utf-8")
     assert load_receipt_head(token) == "f" * 40
+
+
+def test_load_receipt_head_rejects_incomplete_or_malformed_schema(tmp_path: Path):
+    token = tmp_path / "ALLOW_PUSH.token"
+    cases = [
+        {"type": "CI_OK", "head": "f" * 40},
+        {**valid_receipt(), "head": "not-a-sha"},
+        {**valid_receipt(), "plan_hash": "short"},
+        {**valid_receipt(), "mode": "fast"},
+        {**valid_receipt(), "suites": []},
+        {**valid_receipt(), "risk_groups": "embeddings"},
+    ]
+    for payload in cases:
+        token.write_text(json.dumps(payload), encoding="utf-8")
+        assert load_receipt_head(token) is None
