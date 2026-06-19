@@ -18,6 +18,7 @@ FILES = {
     "master": SUBSTRATE / "PHASE6_ROADMAP.md",
     "navigation": SUBSTRATE / "PHASE6_NAVIGATION.md",
     "consolidation": AUDIT / "PHASE6B5D_CONSOLIDATION_REPORT.md",
+    "deterministic": AUDIT / "PHASE6B5D_DETERMINISTIC_MANIFEST.json",
     "tone_order": AUDIT / "PHASE6B5E_TONE_ORDER_CONTROL_CONTRACT.md",
 }
 
@@ -59,7 +60,15 @@ REQUIRED = {
         "Scalar calibration cannot rescue the old gates",
         "SCALAR_GAIN_OUTLIER_WITH_RELATIONAL_INVARIANTS_PRESERVED",
         "Further open-ended analysis of this campaign is not authorized",
+        "d11bf9d41c1b9a9195d79d5ba1ab8b591f9c364b3f57435fded958d5a0861f31",
         "Gate R",
+    ),
+    "deterministic": (
+        "CAT_CAS_PHASE6B5D_DETERMINISTIC_BINDING_V1",
+        "d11bf9d41c1b9a9195d79d5ba1ab8b591f9c364b3f57435fded958d5a0861f31",
+        "sha256:defb733ba811e435068514fabb0e024f1a2492d3151b30491518e68197dd2e92",
+        "FROZEN_PENDING_GATE_R",
+        "timestamp_variant_repository_snapshot_retained\": false",
     ),
     "tone_order": (
         "PREREGISTERED_NOT_AUTHORIZED",
