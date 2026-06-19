@@ -17,7 +17,9 @@ elif [[ $# -gt 0 ]]; then
 fi
 
 mkdir -p "$OUT" "$L4B/results" "$CLASS_B/results"
+exec 3>&1 4>&2
 exec > >(tee "$OUT/verification.log") 2>&1
+TEE_PID=$!
 
 printf 'PHASE6B_REPAIR_VERIFICATION\n'
 printf 'utc=%s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
@@ -90,11 +92,6 @@ for artifact in \
   fi
 done
 
-printf '\nARTIFACT_SHA256\n'
-find "$OUT" "$L4B/results" "$CLASS_B/results" \
-  -maxdepth 1 -type f \( -name '*.json' -o -name '*.holo' -o -name '*.csv' -o -name '*.log' \) \
-  -print0 | sort -z | xargs -0 -r sha256sum | tee "$OUT/artifact_sha256.txt"
-
 printf '\nFINAL_STATUS\n'
 printf 'release_tests=PASS\n'
 printf 'asan_lsan_ubsan=PASS\n'
@@ -105,3 +102,12 @@ printf 'observability_implementation_authorized=false\n'
 printf 'physical_restoration_authorized=false\n'
 printf 'claim_ceiling=L1_L2_SOFTWARE_ARCHITECTURE_AND_OPTIONAL_CHANNEL_CALIBRATION_ONLY\n'
 printf 'next_gate=CLOSE_CARRIER_WITNESS_AND_COMPLETE_L4B5B0_EXTERNAL_HUMAN_REVIEW\n'
+
+printf '\nARTIFACT_SHA256\n'
+exec 1>&3 2>&4
+wait "$TEE_PID"
+find "$OUT" "$L4B/results" "$CLASS_B/results" \
+  -maxdepth 1 -type f \( -name '*.json' -o -name '*.holo' -o -name '*.csv' -o -name '*.log' \) \
+  -print0 | sort -z | xargs -0 -r sha256sum | tee "$OUT/artifact_sha256.txt"
+sha256sum -c "$OUT/artifact_sha256.txt"
+printf 'artifact_manifest=PASS\n'
