@@ -17,6 +17,7 @@ import subprocess
 import sys
 import time
 from dataclasses import asdict, dataclass
+from fnmatch import fnmatchcase
 from functools import lru_cache
 from pathlib import Path
 from typing import Iterable, Sequence
@@ -47,6 +48,7 @@ GLOBAL_TRIGGER_EXACT = {
     "CAPABILITY/TOOLS/utilities/ci_local_gate.py",
     "CAPABILITY/TOOLS/utilities/push_test_plan.py",
 }
+GLOBAL_TRIGGER_GLOBS = ("requirements*.txt",)
 
 
 class PlanError(RuntimeError):
@@ -66,6 +68,7 @@ class RiskGroup:
     tests: tuple[str, ...]
     trigger_prefixes: tuple[str, ...] = ()
     trigger_exact: tuple[str, ...] = ()
+    trigger_globs: tuple[str, ...] = ()
 
 
 RISK_GROUPS = (
@@ -109,11 +112,9 @@ RISK_GROUPS = (
     RiskGroup(
         "skill-discovery",
         SKILL_DISCOVERY_TESTS,
-        trigger_prefixes=(
-            "CAPABILITY/SKILLS/",
-            "NAVIGATION/CORTEX/semantic/",
-        ),
+        trigger_prefixes=("NAVIGATION/CORTEX/semantic/",),
         trigger_exact=("CAPABILITY/PRIMITIVES/skill_index.py",),
+        trigger_globs=("CAPABILITY/SKILLS/**/SKILL.md",),
     ),
     RiskGroup(
         "cassette-network",
@@ -144,11 +145,24 @@ RISK_GROUPS = (
 )
 
 
-def _unique(values: Iterable[str]) -> tuple[str, ...]:
-    return tuple(dict.fromkeys(values))
+def _owned_test_paths(groups: Iterable[RiskGroup]) -> tuple[str, ...]:
+    owners: dict[str, str] = {}
+    ordered: list[str] = []
+    for group in groups:
+        if not group.tests:
+            raise PlanError(f"risk group has no tests: {group.name}")
+        for path in group.tests:
+            previous = owners.get(path)
+            if previous is not None:
+                raise PlanError(
+                    f"conditional test path {path} has multiple owners: {previous}, {group.name}"
+                )
+            owners[path] = group.name
+            ordered.append(path)
+    return tuple(ordered)
 
 
-CORE_IGNORES = _unique(path for group in RISK_GROUPS for path in group.tests)
+CORE_IGNORES = _owned_test_paths(RISK_GROUPS)
 
 
 def normalize_paths(paths: Iterable[str]) -> list[str]:
@@ -161,7 +175,7 @@ def _path_is_within(path: str, root: str) -> bool:
 
 
 def _is_global_trigger(path: str) -> bool:
-    return path in GLOBAL_TRIGGER_EXACT or path.startswith("requirements")
+    return path in GLOBAL_TRIGGER_EXACT or any(fnmatchcase(path, pattern) for pattern in GLOBAL_TRIGGER_GLOBS)
 
 
 def matched_paths(group: RiskGroup, paths: Iterable[str]) -> tuple[str, ...]:
@@ -171,6 +185,9 @@ def matched_paths(group: RiskGroup, paths: Iterable[str]) -> tuple[str, ...]:
             matches.append(path)
             continue
         if path in group.trigger_exact or any(path.startswith(prefix) for prefix in group.trigger_prefixes):
+            matches.append(path)
+            continue
+        if any(fnmatchcase(path, pattern) for pattern in group.trigger_globs):
             matches.append(path)
             continue
         if any(_path_is_within(path, test_path) for test_path in group.tests):
@@ -310,7 +327,7 @@ def pytest_command(
 ) -> list[str]:
     interpreter = python_executable or repo_python()
     if xdist_available is None:
-        xdist_available = _interpreter_has_xdist(interpreter)
+        xdist_available = workers > 0 and _interpreter_has_xdist(interpreter)
     command = [
         interpreter,
         "-m",
