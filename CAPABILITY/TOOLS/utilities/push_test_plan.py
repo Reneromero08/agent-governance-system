@@ -72,6 +72,28 @@ def requires_embeddings(paths: Iterable[str]) -> bool:
     return False
 
 
+def repo_python() -> str:
+    """Return the repository virtualenv interpreter when it exists."""
+    if os.name == "nt":
+        candidate = PROJECT_ROOT / ".venv" / "Scripts" / "python.exe"
+    else:
+        candidate = PROJECT_ROOT / ".venv" / "bin" / "python"
+    return str(candidate) if candidate.exists() else sys.executable
+
+
+def _interpreter_has_xdist(python_executable: str) -> bool:
+    if Path(python_executable).resolve() == Path(sys.executable).resolve():
+        return importlib.util.find_spec("xdist") is not None
+    result = subprocess.run(
+        [python_executable, "-c", "import xdist"],
+        cwd=str(PROJECT_ROOT),
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    )
+    return result.returncode == 0
+
+
 def _git_lines(args: Sequence[str]) -> list[str]:
     result = subprocess.run(
         args,
@@ -123,9 +145,15 @@ def build_plan(paths: Iterable[str], *, exhaustive: bool = False) -> list[TestSu
     return suites
 
 
-def pytest_command(suite: TestSuite, *, workers: int = 0) -> list[str]:
+def pytest_command(
+    suite: TestSuite,
+    *,
+    workers: int = 0,
+    python_executable: str | None = None,
+) -> list[str]:
+    interpreter = python_executable or repo_python()
     command = [
-        sys.executable,
+        interpreter,
         "-m",
         "pytest",
         *suite.paths,
@@ -134,7 +162,7 @@ def pytest_command(suite: TestSuite, *, workers: int = 0) -> list[str]:
         "--durations=25",
         *suite.extra_args,
     ]
-    if workers > 0 and importlib.util.find_spec("xdist") is not None:
+    if workers > 0 and _interpreter_has_xdist(interpreter):
         command.extend(["-n", str(workers), "--dist=loadfile"])
     return command
 
