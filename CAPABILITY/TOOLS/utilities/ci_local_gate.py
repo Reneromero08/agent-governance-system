@@ -2,9 +2,9 @@
 """Local commit and push verification gate.
 
 Default mode runs the lightweight critic used for frequent commits.
-``--full`` runs the mandatory risk-complete push gate and mints a HEAD-bound
-verification receipt. ``--exhaustive`` runs every TESTBENCH test and implies
-``--full``.
+``--full`` runs the mandatory risk-complete push gate and mints a receipt bound
+to both the tested commit and its resolved remote base. ``--exhaustive`` runs
+every TESTBENCH test and implies ``--full``.
 """
 from __future__ import annotations
 
@@ -47,6 +47,28 @@ def _git_stdout(args: Sequence[str], *, required: bool = False) -> str:
             raise RuntimeError(f"git command failed: {' '.join(args)}: {detail}")
         return ""
     return (result.stdout or "").strip()
+
+
+def _resolve_base_sha(base_ref: str | None) -> str | None:
+    if base_ref is None:
+        return None
+    return _git_stdout(
+        ["git", "rev-parse", "--verify", f"{base_ref}^{{commit}}"],
+        required=True,
+    )
+
+
+def _ensure_head_unchanged(expected_head: str) -> bool:
+    try:
+        current_head = _git_stdout(["git", "rev-parse", "HEAD"], required=True)
+    except RuntimeError as exc:
+        sys.stderr.write(f"[ci-local-gate] FAIL: {exc}\n")
+        return False
+    if current_head == expected_head:
+        return True
+    sys.stderr.write("\n[ci-local-gate] FAIL: HEAD changed during verification.\n")
+    sys.stderr.write(f"  started: {expected_head}\n  current: {current_head}\n")
+    return False
 
 
 def _clean_status_path(path: str) -> str:
@@ -122,11 +144,12 @@ def _restore_generated_indexes() -> None:
     )
 
 
-def _write_receipt(*, head: str, base_ref: str | None, payload: dict) -> None:
+def _write_receipt(*, head: str, base_ref: str | None, base_sha: str | None, payload: dict) -> None:
     receipt = {
         "type": "CI_OK",
         "head": head,
         "base_ref": base_ref,
+        "base_sha": base_sha,
         "mode": payload["mode"],
         "plan_hash": payload["plan_hash"],
         "risk_groups": [item["name"] for item in payload["risk_groups"]],
@@ -180,69 +203,68 @@ def main(argv: Sequence[str] | None = None) -> int:
         print("[ci-local-gate] Run with --full before push.")
         return 0
 
-    payload: dict | None = None
-    base_ref: str | None = None
-    rc = 1
+    try:
+        paths, base_ref = changed_paths(args.base_ref)
+        base_sha = _resolve_base_sha(base_ref)
+        payload = plan_payload(
+            paths,
+            base_ref=base_ref,
+            exhaustive=args.exhaustive,
+            workers=max(args.workers, 0),
+        )
+    except (PlanError, RuntimeError) as exc:
+        sys.stderr.write(f"[ci-local-gate] FAIL: test planning failed: {exc}\n")
+        return 2
+
+    groups = ",".join(item["name"] for item in payload["risk_groups"]) or "none"
+    print(
+        f"[ci-local-gate] TEST PLAN mode={payload['mode']} base={base_ref or 'none'} "
+        f"base_sha={(base_sha or 'none')[:12]} changed={len(paths)} groups={groups} "
+        f"suites={','.join(s['name'] for s in payload['suites'])} "
+        f"hash={payload['plan_hash'][:12]}",
+        flush=True,
+    )
+    for item in payload["risk_groups"]:
+        print(
+            f"[ci-local-gate] RISK {item['name']} <- {','.join(item['matched_paths'])}",
+            flush=True,
+        )
+
     try:
         rc = _run_stage(
             "contracts",
             [repo_python(), "-u", "LAW/CONTRACTS/runner.py"],
             env={"CI": "true"},
         )
-        if rc != 0:
-            return rc
-
-        try:
-            paths, base_ref = changed_paths(args.base_ref)
-            payload = plan_payload(
-                paths,
-                base_ref=base_ref,
-                exhaustive=args.exhaustive,
-                workers=max(args.workers, 0),
-            )
-        except PlanError as exc:
-            sys.stderr.write(f"[ci-local-gate] FAIL: test planning failed: {exc}\n")
-            return 2
-
-        groups = ",".join(item["name"] for item in payload["risk_groups"]) or "none"
-        print(
-            f"[ci-local-gate] TEST PLAN mode={payload['mode']} base={base_ref or 'none'} "
-            f"changed={len(paths)} groups={groups} "
-            f"suites={','.join(s['name'] for s in payload['suites'])} "
-            f"hash={payload['plan_hash'][:12]}",
-            flush=True,
-        )
-        for item in payload["risk_groups"]:
-            print(
-                f"[ci-local-gate] RISK {item['name']} <- {','.join(item['matched_paths'])}",
-                flush=True,
-            )
-
-        previous_env = os.environ.copy()
-        os.environ.update(test_env)
-        try:
-            rc = run_plan(payload)
-        finally:
-            os.environ.clear()
-            os.environ.update(previous_env)
-        if rc != 0:
-            return rc
+        if rc == 0:
+            previous_env = os.environ.copy()
+            os.environ.update(test_env)
+            try:
+                rc = run_plan(payload)
+            finally:
+                os.environ.clear()
+                os.environ.update(previous_env)
     finally:
         # Preflight cleanliness guarantees these files had no user edits, so
         # restoring test-generated index churn is safe even on failed checks.
         _restore_generated_indexes()
 
-    if not _ensure_clean_tree("after checks"):
+    head_stable = _ensure_head_unchanged(head)
+    tree_clean = _ensure_clean_tree("after checks")
+    if not head_stable or not tree_clean:
         return 1
-
-    if payload is None:
-        sys.stderr.write("[ci-local-gate] FAIL: no test plan was produced\n")
-        return 1
+    if rc != 0:
+        return rc
 
     if not args.no_token:
-        _write_receipt(head=head, base_ref=base_ref, payload=payload)
+        _write_receipt(
+            head=head,
+            base_ref=base_ref,
+            base_sha=base_sha,
+            payload=payload,
+        )
         print(f"[ci-local-gate] RECEIPT {TOKEN_FILE.relative_to(PROJECT_ROOT)}")
-        print("[ci-local-gate] Receipt remains valid for this HEAD, including network retry.")
+        print("[ci-local-gate] Receipt remains valid for this commit and tested base, including network retry.")
 
     print(f"[ci-local-gate] FULL OK elapsed={time.perf_counter() - total_start:.2f}s")
     return 0
