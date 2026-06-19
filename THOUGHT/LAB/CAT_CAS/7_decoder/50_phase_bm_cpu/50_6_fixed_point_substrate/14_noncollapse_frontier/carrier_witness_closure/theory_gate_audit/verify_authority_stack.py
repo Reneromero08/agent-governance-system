@@ -9,6 +9,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve()
 SUBSTRATE = HERE.parents[3]
 FRONTIER = SUBSTRATE / "14_noncollapse_frontier"
+AUDIT = FRONTIER / "carrier_witness_closure" / "theory_gate_audit"
 
 FILES = {
     "base": FRONTIER / "COURSE_CORRECTION.md",
@@ -16,6 +17,8 @@ FILES = {
     "frontier": FRONTIER / "CHIRAL_LANE_NONCOLLAPSE_ROADMAP.md",
     "master": SUBSTRATE / "PHASE6_ROADMAP.md",
     "navigation": SUBSTRATE / "PHASE6_NAVIGATION.md",
+    "consolidation": AUDIT / "PHASE6B5D_CONSOLIDATION_REPORT.md",
+    "tone_order": AUDIT / "PHASE6B5E_TONE_ORDER_CONTROL_CONTRACT.md",
 }
 
 REQUIRED = {
@@ -51,6 +54,19 @@ REQUIRED = {
         "Gate R",
         "Blind repetition or trial-count escalation is not an allowed substitute",
     ),
+    "consolidation": (
+        "COMPLETE__CLAIM_FROZEN_PENDING_GATE_R",
+        "Scalar calibration cannot rescue the old gates",
+        "SCALAR_GAIN_OUTLIER_WITH_RELATIONAL_INVARIANTS_PRESERVED",
+        "Further open-ended analysis of this campaign is not authorized",
+        "Gate R",
+    ),
+    "tone_order": (
+        "PREREGISTERED_NOT_AUTHORIZED",
+        "separate spectral tone identity from within-symbol path position",
+        "TONE_IDENTITY_EQUIVARIANCE_SUPPORTED",
+        "No hidden label, result-dependent permutation, or post-hoc order selection",
+    ),
 }
 
 FORBIDDEN_CURRENT_ORDER = {
@@ -63,6 +79,10 @@ FORBIDDEN_CURRENT_ORDER = {
         "**Immediate gate:** Phase 6B.5C transfer-aware analysis",
     ),
     "navigation": ("2. **Carrier witness closure**",),
+    "consolidation": (
+        "increase trials until the old conjunction passes",
+        "open-ended analysis remains authorized",
+    ),
 }
 
 
@@ -84,7 +104,7 @@ def verify() -> list[str]:
     for name, needles in FORBIDDEN_CURRENT_ORDER.items():
         for needle in needles:
             if needle in texts.get(name, ""):
-                errors.append(f"{name} retains stale immediate order: {needle}")
+                errors.append(f"{name} retains stale or forbidden order: {needle}")
 
     return errors
 
