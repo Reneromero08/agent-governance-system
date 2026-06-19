@@ -23,7 +23,13 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
-from CAPABILITY.TOOLS.utilities.push_test_plan import changed_paths, plan_payload, run_plan
+from CAPABILITY.TOOLS.utilities.push_test_plan import (
+    PlanError,
+    changed_paths,
+    plan_payload,
+    repo_python,
+    run_plan,
+)
 
 TOKEN_FILE = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs" / "ALLOW_PUSH.token"
 writer = GuardedWriter(
@@ -33,36 +39,51 @@ writer = GuardedWriter(
 )
 
 
-def _repo_python() -> str:
-    venv = PROJECT_ROOT / ".venv" / ("Scripts" if os.name == "nt" else "bin") / "python"
-    if os.name == "nt":
-        venv = venv.with_suffix(".exe")
-    return str(venv) if venv.exists() else sys.executable
-
-
-def _git_stdout(args: Sequence[str]) -> str:
+def _git_stdout(args: Sequence[str], *, required: bool = False) -> str:
     result = subprocess.run(args, cwd=str(PROJECT_ROOT), capture_output=True, text=True, check=False)
-    return (result.stdout or "").strip() if result.returncode == 0 else ""
+    if result.returncode != 0:
+        if required:
+            detail = (result.stderr or result.stdout or "unknown git error").strip()
+            raise RuntimeError(f"git command failed: {' '.join(args)}: {detail}")
+        return ""
+    return (result.stdout or "").strip()
 
 
-def _filter_thought_paths(text: str) -> str:
-    return "\n".join(
-        line
-        for line in text.splitlines()
-        if line.strip() and not line.strip().replace("\\", "/").startswith("THOUGHT/")
-    )
+def _status_entry_path(line: str) -> str:
+    path = line[3:] if len(line) >= 4 else line
+    if " -> " in path:
+        path = path.rsplit(" -> ", 1)[-1]
+    return path.strip().strip('"').replace("\\", "/")
 
 
-def _ensure_clean_tree() -> bool:
-    staged = _filter_thought_paths(_git_stdout(["git", "diff", "--cached", "--name-only"]))
-    unstaged = _filter_thought_paths(_git_stdout(["git", "diff", "--name-only"]))
-    if not staged and not unstaged:
+def _non_exempt_status_lines(text: str) -> list[str]:
+    entries: list[str] = []
+    for line in text.splitlines():
+        if not line.strip():
+            continue
+        if _status_entry_path(line).startswith("THOUGHT/"):
+            continue
+        entries.append(line)
+    return entries
+
+
+def _ensure_clean_tree(phase: str) -> bool:
+    try:
+        status = _git_stdout(
+            ["git", "status", "--porcelain=v1", "--untracked-files=all"],
+            required=True,
+        )
+    except RuntimeError as exc:
+        sys.stderr.write(f"[ci-local-gate] FAIL: {exc}\n")
+        return False
+
+    entries = _non_exempt_status_lines(status)
+    if not entries:
         return True
-    sys.stderr.write("\n[ci-local-gate] FAIL: working tree is not clean after checks.\n")
-    if staged:
-        sys.stderr.write(f"\nStaged changes (lab-exempt paths excluded):\n{staged}\n")
-    if unstaged:
-        sys.stderr.write(f"\nUnstaged changes (lab-exempt paths excluded):\n{unstaged}\n")
+
+    sys.stderr.write(f"\n[ci-local-gate] FAIL: working tree is not clean {phase}.\n")
+    sys.stderr.write("Lab-exempt THOUGHT/ paths are excluded. Remaining entries:\n")
+    sys.stderr.write("\n".join(entries) + "\n")
     return False
 
 
@@ -82,7 +103,8 @@ def _restore_generated_indexes() -> None:
     subprocess.run(
         [
             "git",
-            "checkout",
+            "restore",
+            "--source=HEAD",
             "--",
             "NAVIGATION/CORTEX/meta/FILE_INDEX.json",
             "NAVIGATION/CORTEX/meta/SECTION_INDEX.json",
@@ -101,6 +123,7 @@ def _write_receipt(*, head: str, base_ref: str | None, payload: dict) -> None:
         "base_ref": base_ref,
         "mode": payload["mode"],
         "plan_hash": payload["plan_hash"],
+        "risk_groups": [item["name"] for item in payload["risk_groups"]],
         "suites": [suite["name"] for suite in payload["suites"]],
         "timestamp": datetime.now(timezone.utc).isoformat(timespec="seconds"),
     }
@@ -116,10 +139,20 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="ci_local_gate.py")
     parser.add_argument("--full", action="store_true", help="Run mandatory risk-complete push verification")
     parser.add_argument("--exhaustive", action="store_true", help="Run every TESTBENCH test; implies --full")
-    parser.add_argument("--base-ref", help="Compare BASE...HEAD when selecting conditional suites")
+    parser.add_argument("--base-ref", help="Compare BASE against HEAD when selecting conditional suites")
     parser.add_argument("--workers", type=int, default=4, help="pytest-xdist workers when available")
     parser.add_argument("--no-token", action="store_true", help="Run verification without writing a local receipt")
     args = parser.parse_args(argv)
+
+    try:
+        head = _git_stdout(["git", "rev-parse", "HEAD"], required=True)
+    except RuntimeError as exc:
+        sys.stderr.write(f"[ci-local-gate] FAIL: {exc}\n")
+        return 1
+
+    is_full = args.full or args.exhaustive
+    if is_full and not _ensure_clean_tree("before checks"):
+        return 1
 
     writer.open_commit_gate()
     tmp_root = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "pytest"
@@ -131,56 +164,73 @@ def main(argv: Sequence[str] | None = None) -> int:
         "CUDA_VISIBLE_DEVICES": "",
     }
 
-    head = _git_stdout(["git", "rev-parse", "HEAD"])
-    if not head:
-        sys.stderr.write("[ci-local-gate] FAIL: not a git repository or git is unavailable\n")
-        return 1
-
     total_start = time.perf_counter()
-    rc = _run_stage("critic", [_repo_python(), "CAPABILITY/TOOLS/governance/critic.py"])
+    rc = _run_stage("critic", [repo_python(), "CAPABILITY/TOOLS/governance/critic.py"])
     if rc != 0:
         return rc
 
-    if not (args.full or args.exhaustive):
+    if not is_full:
         print(f"[ci-local-gate] FAST OK elapsed={time.perf_counter() - total_start:.2f}s (no push receipt)")
         print("[ci-local-gate] Run with --full before push.")
         return 0
 
-    rc = _run_stage(
-        "contracts",
-        [_repo_python(), "-u", "LAW/CONTRACTS/runner.py"],
-        env={"CI": "true"},
-    )
-    if rc != 0:
-        return rc
-
-    paths, base_ref = changed_paths(args.base_ref)
-    payload = plan_payload(
-        paths,
-        base_ref=base_ref,
-        exhaustive=args.exhaustive,
-        workers=max(args.workers, 0),
-    )
-    print(
-        f"[ci-local-gate] TEST PLAN mode={payload['mode']} base={base_ref or 'none'} "
-        f"changed={len(paths)} embeddings={payload['embedding_required']} "
-        f"suites={','.join(s['name'] for s in payload['suites'])} "
-        f"hash={payload['plan_hash'][:12]}",
-        flush=True,
-    )
-
-    previous_env = os.environ.copy()
-    os.environ.update(test_env)
+    payload: dict | None = None
+    base_ref: str | None = None
+    rc = 1
     try:
-        rc = run_plan(payload)
-    finally:
-        os.environ.clear()
-        os.environ.update(previous_env)
-    if rc != 0:
-        return rc
+        rc = _run_stage(
+            "contracts",
+            [repo_python(), "-u", "LAW/CONTRACTS/runner.py"],
+            env={"CI": "true"},
+        )
+        if rc != 0:
+            return rc
 
-    _restore_generated_indexes()
-    if not _ensure_clean_tree():
+        try:
+            paths, base_ref = changed_paths(args.base_ref)
+            payload = plan_payload(
+                paths,
+                base_ref=base_ref,
+                exhaustive=args.exhaustive,
+                workers=max(args.workers, 0),
+            )
+        except PlanError as exc:
+            sys.stderr.write(f"[ci-local-gate] FAIL: test planning failed: {exc}\n")
+            return 2
+
+        groups = ",".join(item["name"] for item in payload["risk_groups"]) or "none"
+        print(
+            f"[ci-local-gate] TEST PLAN mode={payload['mode']} base={base_ref or 'none'} "
+            f"changed={len(paths)} groups={groups} "
+            f"suites={','.join(s['name'] for s in payload['suites'])} "
+            f"hash={payload['plan_hash'][:12]}",
+            flush=True,
+        )
+        for item in payload["risk_groups"]:
+            print(
+                f"[ci-local-gate] RISK {item['name']} <- {','.join(item['matched_paths'])}",
+                flush=True,
+            )
+
+        previous_env = os.environ.copy()
+        os.environ.update(test_env)
+        try:
+            rc = run_plan(payload)
+        finally:
+            os.environ.clear()
+            os.environ.update(previous_env)
+        if rc != 0:
+            return rc
+    finally:
+        # Preflight cleanliness guarantees these files had no user edits, so
+        # restoring test-generated index churn is safe even on failed checks.
+        _restore_generated_indexes()
+
+    if not _ensure_clean_tree("after checks"):
+        return 1
+
+    if payload is None:
+        sys.stderr.write("[ci-local-gate] FAIL: no test plan was produced\n")
         return 1
 
     if not args.no_token:
