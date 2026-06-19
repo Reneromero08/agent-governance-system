@@ -3,6 +3,7 @@
 #include <inttypes.h>
 #include <openssl/sha.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 static int present(const char *text) {
@@ -114,28 +115,34 @@ int holo_observability_design_validate_references(
 
 static int file_sha256_hex(const char *path, char output[HOLO_REVIEW_SHA256_LEN]) {
     FILE *file;
-    SHA256_CTX context;
+    long size;
+    unsigned char *bytes;
     unsigned char digest[SHA256_DIGEST_LENGTH];
-    unsigned char buffer[8192];
-    size_t count;
     size_t i;
 
     if (!path || !output) return 0;
     file = fopen(path, "rb");
     if (!file) return 0;
-    if (SHA256_Init(&context) != 1) {
+    if (fseek(file, 0, SEEK_END) != 0 || (size = ftell(file)) < 0 ||
+        fseek(file, 0, SEEK_SET) != 0) {
         fclose(file);
         return 0;
     }
-    while ((count = fread(buffer, 1, sizeof(buffer), file)) > 0) {
-        if (SHA256_Update(&context, buffer, count) != 1) {
-            fclose(file);
-            return 0;
-        }
-    }
-    if (ferror(file) || fclose(file) != 0 || SHA256_Final(digest, &context) != 1) {
+    bytes = (unsigned char *)malloc(size > 0 ? (size_t)size : 1U);
+    if (!bytes) {
+        fclose(file);
         return 0;
     }
+    if (size > 0 && fread(bytes, 1, (size_t)size, file) != (size_t)size) {
+        free(bytes);
+        fclose(file);
+        return 0;
+    }
+    if (fclose(file) != 0 || SHA256(bytes, (size_t)size, digest) == NULL) {
+        free(bytes);
+        return 0;
+    }
+    free(bytes);
     for (i = 0; i < SHA256_DIGEST_LENGTH; ++i) {
         snprintf(output + i * 2U, 3U, "%02x", digest[i]);
     }
