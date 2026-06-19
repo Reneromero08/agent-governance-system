@@ -10,6 +10,7 @@ Provides shared fixtures for:
 - Semantic search validation
 """
 import json
+import sqlite3
 import pytest
 import sys
 from pathlib import Path
@@ -29,6 +30,53 @@ sys.path.insert(0, str(CORTEX_SEMANTIC))
 # Fixture directory
 FIXTURES_DIR = Path(__file__).parent
 
+
+
+
+def _configured_cassette_document_count() -> int:
+    """Return the number of indexed source chunks available to corpus tests."""
+    config_path = CORTEX_NETWORK / "cassettes.json"
+    if not config_path.exists():
+        return 0
+    try:
+        config = json.loads(config_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError, TypeError):
+        return 0
+
+    total = 0
+    for cassette in config.get("cassettes", []):
+        if not isinstance(cassette, dict) or not cassette.get("enabled", True):
+            continue
+        raw_path = cassette.get("db_path")
+        if not isinstance(raw_path, str) or not raw_path:
+            continue
+        db_path = Path(raw_path)
+        if not db_path.is_absolute():
+            db_path = REPO_ROOT / db_path
+        if not db_path.exists():
+            continue
+        try:
+            with sqlite3.connect(str(db_path)) as conn:
+                has_chunks = conn.execute(
+                    "SELECT 1 FROM sqlite_master WHERE type='table' AND name='chunks'"
+                ).fetchone()
+                if has_chunks:
+                    total += int(conn.execute("SELECT COUNT(*) FROM chunks").fetchone()[0])
+        except (sqlite3.Error, OSError, TypeError, ValueError):
+            continue
+    return total
+
+
+def pytest_collection_modifyitems(config, items):
+    """Skip only corpus-dependent tests when derived cassette data is absent."""
+    if _configured_cassette_document_count() > 0:
+        return
+    skip = pytest.mark.skip(
+        reason="requires populated derived cassette corpus; no indexed chunks available"
+    )
+    for item in items:
+        if "requires_cassettes" in item.keywords:
+            item.add_marker(skip)
 
 # =============================================================================
 # CASSETTE NETWORK FIXTURES

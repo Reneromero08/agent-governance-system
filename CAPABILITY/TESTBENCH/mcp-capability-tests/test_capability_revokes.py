@@ -93,7 +93,7 @@ def test_historical_pipeline_verifies_after_revocation(tmp_path: Path) -> None:
 
     pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
     runs_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs"
-    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / f"phase65_registry_{unique_suffix}"
+    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
 
     try:
         # Clean up pipeline directory first
@@ -153,7 +153,7 @@ def test_post_revocation_pipeline_verify_fails_closed(tmp_path: Path) -> None:
 
     pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
     runs_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs"
-    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / f"phase65_registry_{unique_suffix}"
+    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
 
     try:
         # Clean up pipeline directory first
