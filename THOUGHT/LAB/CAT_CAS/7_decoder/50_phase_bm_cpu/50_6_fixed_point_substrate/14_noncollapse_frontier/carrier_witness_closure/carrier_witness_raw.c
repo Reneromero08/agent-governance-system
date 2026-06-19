@@ -11,8 +11,7 @@
 #define CW_PATH_LEN 1024
 
 static int open_exclusive_file(const char *path, const char *mode, FILE **out) {
-    int flags = O_WRONLY | O_CREAT | O_EXCL;
-    if (strchr(mode, 'b') == NULL) flags |= O_CLOEXEC;
+    int flags = O_WRONLY | O_CREAT | O_EXCL | O_CLOEXEC;
     int fd = open(path, flags, 0644);
     if (fd < 0) return -1;
     FILE *file = fdopen(fd, mode);
@@ -60,6 +59,8 @@ static int valid_window(const CarrierWitnessWindow *window,
         !valid_text(window->actual_mode, sizeof(window->actual_mode)) ||
         !valid_text(window->control, sizeof(window->control))) return 0;
     if (window->bin_index < 0 || window->symbol_index < 0 ||
+        (window->hash_restored != 0 && window->hash_restored != 1) ||
+        (window->drive_sign != -1 && window->drive_sign != 0 && window->drive_sign != 1) ||
         window->slot_start_tsc >= window->capture_deadline_tsc ||
         !isfinite(window->tone_hz) || window->tone_hz <= 0.0 ||
         !isfinite(window->phase_fraction) || window->phase_fraction < 0.0 ||
@@ -104,8 +105,17 @@ int carrier_witness_raw_open(CarrierWitnessRawWriter *writer,
                 "drive_sign,phase_fraction,control,slot_start_tsc,capture_deadline_tsc,"
                 "first_sample_tsc,last_sample_tsc,temp_before_c,temp_after_c,"
                 "cur_khz_before,cur_khz_after,cofvid_pstate_before,cofvid_pstate_after,"
-                "computed_I,computed_Q,computed_magnitude,computed_floor\n") < 0) {
+                "computed_I,computed_Q,computed_magnitude,computed_floor\n") < 0 ||
+        fflush(writer->windows_file) != 0) {
+        int saved = errno;
+        fclose(writer->raw_file);
+        fclose(writer->windows_file);
+        writer->raw_file = NULL;
+        writer->windows_file = NULL;
+        unlink(raw_path);
+        unlink(windows_path);
         writer->failed = 1;
+        errno = saved;
         return -1;
     }
     return 0;
