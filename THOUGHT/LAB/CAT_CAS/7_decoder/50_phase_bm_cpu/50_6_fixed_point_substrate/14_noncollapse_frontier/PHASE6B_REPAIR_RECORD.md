@@ -2,7 +2,7 @@
 
 **Branch:** `repair/phase6b-coherence`
 **Original base:** `48bf42e159c81c798aee2f61b2e6e2e9eb1f295a`
-**Synchronized main / merge base:** `5579d8be06df1f7fc1203cc9b6a7481fa515324a`
+**Synchronized main / merge base:** `eadad2f4916320c456937230ce70bd210820e39e`
 **Course-correction merge:** `8f9d35493ff3bb8cbc54da140b10bd41b28eedb2`
 **SSH-verified source head:** `fbacd9ee0092dd2118d5f050592f8f0089852135`
 **Date:** 2026-06-18
