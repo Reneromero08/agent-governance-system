@@ -1,0 +1,49 @@
+{
+  "schema_id": "CAT_CAS_PDN_CARRIER_CAMPAIGN_V1",
+  "schema_version": "1.0.0",
+  "contract_id": "phase6b5_pdn_carrier_witness_v1",
+  "campaign_id": "REPLACE_BEFORE_ACQUISITION",
+  "status": "DRAFT_TEMPLATE",
+  "source_commit": "REPLACE_WITH_40_HEX_COMMIT",
+  "primary_route": "v4s5",
+  "comparator_routes": [
+    "v2s3"
+  ],
+  "required_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "required_conditions": [
+    "matrix",
+    "silent",
+    "scramble"
+  ],
+  "claim_ceiling": "RECONSTRUCTABLE_CHANNEL_CARRIER_ONLY",
+  "runs": [
+    {"run_id": "v4s5_matrix_seed0", "route": "v4s5", "condition": "matrix", "seed": 0},
+    {"run_id": "v4s5_matrix_seed1", "route": "v4s5", "condition": "matrix", "seed": 1},
+    {"run_id": "v4s5_matrix_seed2", "route": "v4s5", "condition": "matrix", "seed": 2},
+    {"run_id": "v4s5_matrix_seed3", "route": "v4s5", "condition": "matrix", "seed": 3},
+    {"run_id": "v4s5_matrix_seed4", "route": "v4s5", "condition": "matrix", "seed": 4},
+    {"run_id": "v4s5_matrix_seed5", "route": "v4s5", "condition": "matrix", "seed": 5},
+    {"run_id": "v4s5_silent_seed900", "route": "v4s5", "condition": "silent", "seed": 900},
+    {"run_id": "v4s5_scramble_seed901", "route": "v4s5", "condition": "scramble", "seed": 901},
+    {"run_id": "v2s3_matrix_seed0", "route": "v2s3", "condition": "matrix", "seed": 0},
+    {"run_id": "v2s3_matrix_seed1", "route": "v2s3", "condition": "matrix", "seed": 1},
+    {"run_id": "v2s3_matrix_seed2", "route": "v2s3", "condition": "matrix", "seed": 2},
+    {"run_id": "v2s3_matrix_seed3", "route": "v2s3", "condition": "matrix", "seed": 3},
+    {"run_id": "v2s3_matrix_seed4", "route": "v2s3", "condition": "matrix", "seed": 4},
+    {"run_id": "v2s3_matrix_seed5", "route": "v2s3", "condition": "matrix", "seed": 5}
+  ],
+  "forbidden_claims": [
+    "physical HoloGeometry",
+    "physical restoration",
+    "target coupling",
+    "orientation recovery",
+    "Small Wall crossing"
+  ]
+}
