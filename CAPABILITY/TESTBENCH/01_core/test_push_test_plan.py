@@ -133,6 +133,16 @@ def test_invalid_explicit_base_fails_closed(monkeypatch):
         push_test_plan.resolve_base_ref("not-a-ref")
 
 
+def test_zero_ci_base_means_initial_history_not_current_origin(monkeypatch):
+    monkeypatch.setenv("AGS_PUSH_BASE", "0" * 40)
+    monkeypatch.setattr(
+        push_test_plan,
+        "_git_ref_exists",
+        lambda candidate: candidate == "origin/main",
+    )
+    assert push_test_plan.resolve_base_ref() is None
+
+
 def test_repo_python_prefers_repository_virtualenv(tmp_path: Path, monkeypatch):
     monkeypatch.setattr(push_test_plan, "PROJECT_ROOT", tmp_path)
     if push_test_plan.os.name == "nt":
