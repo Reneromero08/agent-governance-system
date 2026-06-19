@@ -106,52 +106,121 @@ jobs:
         run: python -m pip install sentence-transformers
 
       - name: Run core push suite
-        run: >-
-          python CAPABILITY/TOOLS/utilities/run_planned_suite.py
-          --plan "${{ steps.push_plan.outputs.plan_path }}"
-          --suite core
+        id: suite_core
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python CAPABILITY/TOOLS/utilities/run_planned_suite.py \
+            --plan "${{ steps.push_plan.outputs.plan_path }}" \
+            --suite core 2>&1 | tee "$RUNNER_TEMP/push-suite-core.log"
 
       - name: Run write-firewall push suite
-        if: steps.push_plan.outputs.write_firewall == 'true'
-        run: >-
-          python CAPABILITY/TOOLS/utilities/run_planned_suite.py
-          --plan "${{ steps.push_plan.outputs.plan_path }}"
-          --suite write-firewall
+        id: suite_write_firewall
+        if: always() && steps.push_plan.outputs.write_firewall == 'true'
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python CAPABILITY/TOOLS/utilities/run_planned_suite.py \
+            --plan "${{ steps.push_plan.outputs.plan_path }}" \
+            --suite write-firewall 2>&1 | tee "$RUNNER_TEMP/push-suite-write-firewall.log"
 
       - name: Run symbol-resolution push suite
-        if: steps.push_plan.outputs.symbol_resolution == 'true'
-        run: >-
-          python CAPABILITY/TOOLS/utilities/run_planned_suite.py
-          --plan "${{ steps.push_plan.outputs.plan_path }}"
-          --suite symbol-resolution
+        id: suite_symbol_resolution
+        if: always() && steps.push_plan.outputs.symbol_resolution == 'true'
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python CAPABILITY/TOOLS/utilities/run_planned_suite.py \
+            --plan "${{ steps.push_plan.outputs.plan_path }}" \
+            --suite symbol-resolution 2>&1 | tee "$RUNNER_TEMP/push-suite-symbol-resolution.log"
 
       - name: Run MCP capability push suite
-        if: steps.push_plan.outputs.mcp_capability == 'true'
-        run: >-
-          python CAPABILITY/TOOLS/utilities/run_planned_suite.py
-          --plan "${{ steps.push_plan.outputs.plan_path }}"
-          --suite mcp-capability
+        id: suite_mcp_capability
+        if: always() && steps.push_plan.outputs.mcp_capability == 'true'
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python CAPABILITY/TOOLS/utilities/run_planned_suite.py \
+            --plan "${{ steps.push_plan.outputs.plan_path }}" \
+            --suite mcp-capability 2>&1 | tee "$RUNNER_TEMP/push-suite-mcp-capability.log"
 
       - name: Run skill-discovery push suite
-        if: steps.push_plan.outputs.skill_discovery == 'true'
-        run: >-
-          python CAPABILITY/TOOLS/utilities/run_planned_suite.py
-          --plan "${{ steps.push_plan.outputs.plan_path }}"
-          --suite skill-discovery
+        id: suite_skill_discovery
+        if: always() && steps.push_plan.outputs.skill_discovery == 'true'
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python CAPABILITY/TOOLS/utilities/run_planned_suite.py \
+            --plan "${{ steps.push_plan.outputs.plan_path }}" \
+            --suite skill-discovery 2>&1 | tee "$RUNNER_TEMP/push-suite-skill-discovery.log"
 
       - name: Run cassette-network push suite
-        if: steps.push_plan.outputs.cassette_network == 'true'
-        run: >-
-          python CAPABILITY/TOOLS/utilities/run_planned_suite.py
-          --plan "${{ steps.push_plan.outputs.plan_path }}"
-          --suite cassette-network
+        id: suite_cassette_network
+        if: always() && steps.push_plan.outputs.cassette_network == 'true'
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python CAPABILITY/TOOLS/utilities/run_planned_suite.py \
+            --plan "${{ steps.push_plan.outputs.plan_path }}" \
+            --suite cassette-network 2>&1 | tee "$RUNNER_TEMP/push-suite-cassette-network.log"
 
       - name: Run embedding push suite
-        if: steps.push_plan.outputs.embeddings == 'true'
-        run: >-
-          python CAPABILITY/TOOLS/utilities/run_planned_suite.py
-          --plan "${{ steps.push_plan.outputs.plan_path }}"
-          --suite embeddings
+        id: suite_embeddings
+        if: always() && steps.push_plan.outputs.embeddings == 'true'
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python CAPABILITY/TOOLS/utilities/run_planned_suite.py \
+            --plan "${{ steps.push_plan.outputs.plan_path }}" \
+            --suite embeddings 2>&1 | tee "$RUNNER_TEMP/push-suite-embeddings.log"
+
+      - name: Upload push-suite logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: push-suite-logs-${{ github.run_id }}
+          path: ${{ runner.temp }}/push-suite-*.log
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Enforce selected suite results
+        if: always()
+        env:
+          CORE_OUTCOME: ${{ steps.suite_core.outcome }}
+          WRITE_FIREWALL_SELECTED: ${{ steps.push_plan.outputs.write_firewall }}
+          WRITE_FIREWALL_OUTCOME: ${{ steps.suite_write_firewall.outcome }}
+          SYMBOL_RESOLUTION_SELECTED: ${{ steps.push_plan.outputs.symbol_resolution }}
+          SYMBOL_RESOLUTION_OUTCOME: ${{ steps.suite_symbol_resolution.outcome }}
+          MCP_CAPABILITY_SELECTED: ${{ steps.push_plan.outputs.mcp_capability }}
+          MCP_CAPABILITY_OUTCOME: ${{ steps.suite_mcp_capability.outcome }}
+          SKILL_DISCOVERY_SELECTED: ${{ steps.push_plan.outputs.skill_discovery }}
+          SKILL_DISCOVERY_OUTCOME: ${{ steps.suite_skill_discovery.outcome }}
+          CASSETTE_NETWORK_SELECTED: ${{ steps.push_plan.outputs.cassette_network }}
+          CASSETTE_NETWORK_OUTCOME: ${{ steps.suite_cassette_network.outcome }}
+          EMBEDDINGS_SELECTED: ${{ steps.push_plan.outputs.embeddings }}
+          EMBEDDINGS_OUTCOME: ${{ steps.suite_embeddings.outcome }}
+        run: |
+          python - <<'PY'
+          import os
+
+          checks = [("core", True, os.environ["CORE_OUTCOME"])]
+          for prefix, name in (
+              ("WRITE_FIREWALL", "write-firewall"),
+              ("SYMBOL_RESOLUTION", "symbol-resolution"),
+              ("MCP_CAPABILITY", "mcp-capability"),
+              ("SKILL_DISCOVERY", "skill-discovery"),
+              ("CASSETTE_NETWORK", "cassette-network"),
+              ("EMBEDDINGS", "embeddings"),
+          ):
+              selected = os.environ[f"{prefix}_SELECTED"] == "true"
+              outcome = os.environ[f"{prefix}_OUTCOME"]
+              checks.append((name, selected, outcome))
+
+          failures = [name for name, selected, outcome in checks if selected and outcome != "success"]
+          if failures:
+              raise SystemExit("selected push suites failed: " + ", ".join(failures))
+          print("All selected push suites passed")
+          PY
 
       - name: CI strict verification (SPECTRUM-05)
         env:
