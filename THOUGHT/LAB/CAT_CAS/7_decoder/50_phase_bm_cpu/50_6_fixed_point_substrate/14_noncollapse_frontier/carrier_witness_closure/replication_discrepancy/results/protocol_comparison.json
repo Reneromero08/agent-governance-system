@@ -1,0 +1,201 @@
+{
+  "comparisons": [
+    {
+      "classification": "POTENTIALLY_MATERIAL",
+      "current": "d32b1bed0deae1b907a07eeed018b924244e9ea2",
+      "field": "source_revisions",
+      "historical": "historical host files uncommitted/hash-bound only"
+    },
+    {
+      "classification": "UNKNOWN",
+      "current": "75024a02982e853336558468e550e824e6ad17a01e1ddcfad85610e138a81f59",
+      "field": "acquisition_binary_revisions",
+      "historical": "historical binary hash absent"
+    },
+    {
+      "classification": "NONE",
+      "current": "aa1ca5b0ce911ce931b036d023981eb1589d316e0adf88b66eb494ada1c5a50c",
+      "field": "analyzer_revisions",
+      "historical": "aa1ca5b0ce911ce931b036d023981eb1589d316e0adf88b66eb494ada1c5a50c"
+    },
+    {
+      "classification": "NONE",
+      "current": "xorshift search seed 7",
+      "field": "codebook_generation",
+      "historical": "xorshift search seed 7"
+    },
+    {
+      "classification": "NONE",
+      "current": "serialized schedule",
+      "field": "resolved_codewords",
+      "historical": "retained CSV headers"
+    },
+    {
+      "classification": "NONE",
+      "current": "same implementation",
+      "field": "tone_generation",
+      "historical": "log grid plus deterministic nudge"
+    },
+    {
+      "classification": "NUMERICALLY_IRRELEVANT",
+      "current": [
+        20.175627520550627,
+        29.230023517875622,
+        44.30041574135145,
+        64.77774549643189,
+        95.46178568369419,
+        144.12817666932995,
+        208.329696613956,
+        313.46078833958734,
+        464.3653457375265,
+        676.1251019385853,
+        1025.616619383898,
+        1490.222598676734
+      ],
+      "field": "resolved_tone_frequencies",
+      "historical": "retained CSV rounded to 4 decimals"
+    },
+    {
+      "classification": "POTENTIALLY_MATERIAL",
+      "current": "serialized and regenerates exactly",
+      "field": "seed_schedules",
+      "historical": "not serialized; labels retained in reduced CSV"
+    },
+    {
+      "classification": "NONE",
+      "current": "serialized schedule",
+      "field": "symbol_ordering",
+      "historical": "reduced CSV retained"
+    },
+    {
+      "classification": "NONE",
+      "current": "trial parity odd test",
+      "field": "train_test_partition",
+      "historical": "trial parity odd test"
+    },
+    {
+      "classification": "MATERIAL",
+      "current": 48,
+      "field": "trial_counts",
+      "historical": 300
+    },
+    {
+      "classification": "NONE",
+      "current": "same",
+      "field": "preamble_handling",
+      "historical": "4 mode preamble included in train"
+    },
+    {
+      "classification": "UNKNOWN",
+      "current": "serialized",
+      "field": "pseudo_permutations",
+      "historical": "labels/IQ retained, exact permutation absent"
+    },
+    {
+      "classification": "NONE",
+      "current": "same",
+      "field": "wrong_family_generation",
+      "historical": "declared differs; drive actual"
+    },
+    {
+      "classification": "NONE",
+      "current": 8,
+      "field": "phase_levels",
+      "historical": 8
+    },
+    {
+      "classification": "NONE",
+      "current": 0.5,
+      "field": "slot_s",
+      "historical": 0.5
+    },
+    {
+      "classification": "UNKNOWN",
+      "current": 0.12,
+      "field": "gap_s",
+      "historical": "not reported"
+    },
+    {
+      "classification": "NONE",
+      "current": 4000,
+      "field": "read_hz",
+      "historical": 4000
+    },
+    {
+      "classification": "NUMERICALLY_IRRELEVANT",
+      "current": 3214826000.0,
+      "field": "TSC_rate",
+      "historical": 3214823000.0
+    },
+    {
+      "classification": "NONE",
+      "current": 1600000,
+      "field": "P_state_target",
+      "historical": 1600000
+    },
+    {
+      "classification": "NONE",
+      "current": 68.0,
+      "field": "thermal_veto",
+      "historical": 68.0
+    },
+    {
+      "classification": "NONE",
+      "current": [
+        "2:3",
+        "4:5"
+      ],
+      "field": "routes",
+      "historical": [
+        "2:3",
+        "4:5"
+      ]
+    },
+    {
+      "classification": "NONE",
+      "current": [
+        "silent",
+        "scramble"
+      ],
+      "field": "controls",
+      "historical": [
+        "silent",
+        "scramble"
+      ]
+    },
+    {
+      "classification": "NONE",
+      "current": "same seven scientific gates",
+      "field": "success_thresholds",
+      "historical": "6/6 seeds: all_rows_restore AND real_accuracy>=0.60 AND real_vs_pseudo floor>=0.95 AND pseudo_reject>=0.95 AND wrong_actual_match>=0.60 AND wrong_declared_match<=0.20 AND (phase_corr_true - phase_corr_null) > 0.30"
+    },
+    {
+      "classification": "NONE",
+      "current": "same; diagnostics excluded",
+      "field": "aggregate_logic",
+      "historical": "6/6 primary route plus second route and null controls"
+    },
+    {
+      "classification": "MATERIAL",
+      "current": "complete <Qd> timing samples",
+      "field": "raw_capture",
+      "historical": "absent"
+    },
+    {
+      "classification": "DOCUMENTATION_ONLY",
+      "current": "symbol hash plus delayed host P-state readback",
+      "field": "restoration_verification",
+      "historical": "symbol hash flag"
+    }
+  ],
+  "exact_equivalence_provable": false,
+  "limit": "Historical raw timing samples and binary hash are absent.",
+  "metadata": {
+    "analysis_tool_sha256": "edbd70277ad962bec19334d26a78ed997798eccc78a2352785c7ecc305feb4e5",
+    "analyzer_sha256": "aa1ca5b0ce911ce931b036d023981eb1589d316e0adf88b66eb494ada1c5a50c",
+    "campaign_manifest_sha256": "cbcd2a19d6dd3bc478244f77888aa87eb043003a7685caa17ff13fe4d47e6487",
+    "generated_utc": "2026-06-19T20:00:00Z",
+    "source_campaign_id": "phase6b5_t48_d32b1bed_20260619",
+    "source_commit": "d32b1bed0deae1b907a07eeed018b924244e9ea2"
+  }
+}

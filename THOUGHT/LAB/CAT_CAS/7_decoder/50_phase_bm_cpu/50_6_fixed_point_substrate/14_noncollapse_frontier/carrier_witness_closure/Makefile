@@ -24,7 +24,9 @@ test: test_carrier_witness_raw test_slot2_witness
 	./test_slot2_witness
 	$(PYTHON) test_carrier_witness_validate.py
 	$(PYTHON) test_carrier_witness_finalize.py
-	$(PYTHON) -m py_compile audit_existing_t300.py carrier_witness_validate.py carrier_witness_manifest.py carrier_witness_finalize.py
+	$(PYTHON) replication_discrepancy/test_replication_discrepancy.py
+	$(PYTHON) -m py_compile audit_existing_t300.py carrier_witness_validate.py carrier_witness_manifest.py carrier_witness_finalize.py \
+		replication_discrepancy/analyze_replication_discrepancy.py replication_discrepancy/test_replication_discrepancy.py
 
 clean:
 	rm -f test_carrier_witness_raw test_slot2_witness slot2
