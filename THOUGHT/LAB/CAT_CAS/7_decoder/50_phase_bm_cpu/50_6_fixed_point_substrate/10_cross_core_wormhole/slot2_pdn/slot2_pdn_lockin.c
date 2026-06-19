@@ -232,6 +232,18 @@ static int restore_pstate(pinstate_t *ps) {
         write_long_file(pmin, ps->min_orig[c]);
         write_long_file(pmax, ps->max_orig[c]);
         write_long_file(pmin, ps->min_orig[c]);
+    }
+    if (ps->boost_present) {
+        write_long_file("/sys/devices/system/cpu/cpufreq/boost", ps->boost_orig);
+    }
+    /* acpi-cpufreq policy files update asynchronously after a bound change. */
+    struct timespec settle = {0, 200 * 1000 * 1000};
+    nanosleep(&settle, NULL);
+    for (int c = 0; c < NCPU_MAX; c++) {
+        if (!ps->have_orig[c]) continue;
+        char pmin[128], pmax[128];
+        snprintf(pmin, sizeof(pmin), "/sys/devices/system/cpu/cpu%d/cpufreq/scaling_min_freq", c);
+        snprintf(pmax, sizeof(pmax), "/sys/devices/system/cpu/cpu%d/cpufreq/scaling_max_freq", c);
         long rmn = -1, rmx = -1;
         read_long_file(pmin, &rmn); read_long_file(pmax, &rmx);
         if (rmn != ps->min_orig[c] || rmx != ps->max_orig[c]) verified = 0;
@@ -239,7 +251,6 @@ static int restore_pstate(pinstate_t *ps) {
                 c, ps->min_orig[c], rmn, ps->max_orig[c], rmx);
     }
     if (ps->boost_present) {
-        write_long_file("/sys/devices/system/cpu/cpufreq/boost", ps->boost_orig);
         long rb = -1; read_long_file("/sys/devices/system/cpu/cpufreq/boost", &rb);
         if (rb != ps->boost_orig) verified = 0;
         fprintf(stderr, "P-state restore: boost->%d (rb=%ld)\n", ps->boost_orig, rb);
