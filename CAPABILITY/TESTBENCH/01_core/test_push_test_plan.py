@@ -33,9 +33,10 @@ def test_unrelated_change_runs_core_only():
     assert suite_names(["README.md"]) == ["core"]
 
 
-def test_every_core_ignore_is_owned_by_a_conditional_group():
-    owned = tuple(dict.fromkeys(path for group in RISK_GROUPS for path in group.tests))
-    assert CORE_IGNORES == owned
+def test_every_core_ignore_has_exactly_one_conditional_owner():
+    owned = [path for group in RISK_GROUPS for path in group.tests]
+    assert len(owned) == len(set(owned))
+    assert CORE_IGNORES == tuple(owned)
     assert all(group.tests for group in RISK_GROUPS)
 
 
@@ -56,6 +57,15 @@ def test_global_test_infrastructure_change_selects_every_risk_group():
 )
 def test_each_ignored_suite_has_an_owning_path_trigger(path, expected_group):
     assert expected_group in suite_names([path])
+
+
+def test_skill_discovery_tracks_skill_metadata_not_every_skill_implementation():
+    assert "skill-discovery" in suite_names(
+        ["CAPABILITY/SKILLS/utilities/arxiv-to-md/SKILL.md"]
+    )
+    assert "skill-discovery" not in suite_names(
+        ["CAPABILITY/SKILLS/utilities/arxiv-to-md/run.py"]
+    )
 
 
 def test_semantic_change_runs_all_semantic_dependents():
@@ -163,4 +173,18 @@ def test_pytest_command_uses_selected_interpreter(monkeypatch):
         python_executable="/repo/.venv/python",
     )
     assert command[0] == "/repo/.venv/python"
+    assert "-n" not in command
+
+
+def test_pytest_command_does_not_probe_xdist_when_workers_are_disabled(monkeypatch):
+    monkeypatch.setattr(
+        push_test_plan,
+        "_interpreter_has_xdist",
+        lambda _: (_ for _ in ()).throw(AssertionError("xdist probe should not run")),
+    )
+    command = pytest_command(
+        Suite("focused", ("test_one.py",)),
+        workers=0,
+        python_executable="python",
+    )
     assert "-n" not in command
