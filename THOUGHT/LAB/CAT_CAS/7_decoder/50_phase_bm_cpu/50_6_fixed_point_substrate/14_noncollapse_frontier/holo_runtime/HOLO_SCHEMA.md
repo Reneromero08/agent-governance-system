@@ -1,8 +1,8 @@
 # L4B `.holo` Executable Geometric-Memory Schema
 
-**Schema family:** `CAT_CAS_HOLO_GEOMETRY`  
-**Serialized version:** `1.4.0`  
-**Integrity profile:** `HOLO_RUNTIME_INTEGRITY_V1`  
+**Schema family:** `CAT_CAS_HOLO_GEOMETRY`
+**Serialized version:** `1.4.0`
+**Integrity profile:** `HOLO_RUNTIME_INTEGRITY_V1`
 **Claim ceiling:** L1/L2 software architecture
 
 ---

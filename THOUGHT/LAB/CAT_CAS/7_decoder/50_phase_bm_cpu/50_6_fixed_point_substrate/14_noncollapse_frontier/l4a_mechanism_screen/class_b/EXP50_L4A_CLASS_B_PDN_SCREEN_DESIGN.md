@@ -1,7 +1,7 @@
 # Exp 50 L4A Class B PDN Crossed-Assignment Screen
 
-**Date:** 2026-06-18  
-**Status:** `DESIGN_REPAIRED__NOT_RERUN`  
+**Date:** 2026-06-18
+**Status:** `DESIGN_REPAIRED__NOT_RERUN`
 **Claim ceiling:** carrier/observability calibration only; no fold-odd residue or restoration claim.
 
 ---

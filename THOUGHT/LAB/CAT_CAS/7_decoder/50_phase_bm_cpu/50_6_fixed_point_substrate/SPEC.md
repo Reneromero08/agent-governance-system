@@ -1,7 +1,7 @@
 # Phase 6 Specification Authority Map
 
-**Original document:** Exp50 Phase 6 catalytic fixed-point substrate test  
-**Current status:** `HISTORICAL_PRE_PIVOT_SPEC__SUPERSEDED`  
+**Original document:** Exp50 Phase 6 catalytic fixed-point substrate test
+**Current status:** `HISTORICAL_PRE_PIVOT_SPEC__SUPERSEDED`
 **Active phase:** Phase 6B non-collapse frontier
 
 ---

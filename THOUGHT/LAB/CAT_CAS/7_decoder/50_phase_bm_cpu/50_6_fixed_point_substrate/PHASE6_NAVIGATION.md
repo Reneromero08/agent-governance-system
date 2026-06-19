@@ -1,8 +1,8 @@
 # Phase 6 Navigation
 
-**Role:** canonical entry point for the Phase 6 directory.  
-**Current state:** `PHASE6B_COHERENCE_REPAIR__COURSE_CORRECTION_ALIGNED`  
-**Active directive:** `14_noncollapse_frontier/COURSE_CORRECTION.md`  
+**Role:** canonical entry point for the Phase 6 directory.
+**Current state:** `PHASE6B_COHERENCE_REPAIR__COURSE_CORRECTION_ALIGNED`
+**Active directive:** `14_noncollapse_frontier/COURSE_CORRECTION.md`
 **Active roadmap:** `PHASE6_ROADMAP.md`
 
 ---

@@ -1,7 +1,7 @@
 # Exp 50 Substrate Frontier Status
 
-**Date:** 2026-06-18  
-**Status:** HISTORICAL_WARMUP_CORRECTED__L4_PUBLIC_VERIFY_REJECTED  
+**Date:** 2026-06-18
+**Status:** HISTORICAL_WARMUP_CORRECTED__L4_PUBLIC_VERIFY_REJECTED
 **Authority:** This file records the pre-noncollapse substrate warmup. The active frontier is `../14_noncollapse_frontier/`.
 
 ---

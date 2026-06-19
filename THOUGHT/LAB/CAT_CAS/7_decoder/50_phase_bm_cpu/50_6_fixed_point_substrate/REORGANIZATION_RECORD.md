@@ -1,7 +1,7 @@
 # Phase 6 Reorganization Record
 
-**Original date:** 2026-06-14  
-**Status:** `HISTORICAL_LAYOUT_RECORD__SUPERSEDED_STATUS_FIELDS`  
+**Original date:** 2026-06-14
+**Status:** `HISTORICAL_LAYOUT_RECORD__SUPERSEDED_STATUS_FIELDS`
 **Current navigation:** `PHASE6_NAVIGATION.md`
 
 This file records the structural reorganization that consolidated Phase 6 under `50_6_fixed_point_substrate/`. Its layout history remains valid; its old task statuses and “pending commit” language are not current authority.

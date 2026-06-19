@@ -1,7 +1,7 @@
 # Exp 50 Substrate Frontier Charter — Historical Record
 
-**Original date:** 2026-06-14  
-**Current status:** `SUPERSEDED__DO_NOT_IMPLEMENT`  
+**Original date:** 2026-06-14
+**Current status:** `SUPERSEDED__DO_NOT_IMPLEMENT`
 **Superseded by:** `EXP50_L4_GATE_DESIGN_AUDIT.md`, `EXP50_SUBSTRATE_MECHANISM_DEFINITION.md`, and Phase 6B non-collapse doctrine.
 
 ---

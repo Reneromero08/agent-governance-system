@@ -1,7 +1,7 @@
 # Exp 50 L4A Class B Historical Carrier Report
 
-**Original status:** `L4A_CLASS_B_WB_CARRIER_PASS`  
-**Corrected status:** `INVALIDATED_AS_WB_SCREEN__RETAINED_AS_SMOKE_PROVENANCE`  
+**Original status:** `L4A_CLASS_B_WB_CARRIER_PASS`
+**Corrected status:** `INVALIDATED_AS_WB_SCREEN__RETAINED_AS_SMOKE_PROVENANCE`
 **Date corrected:** 2026-06-18
 
 ---

@@ -1,6 +1,6 @@
 # Exp 50 L4A Class B Implementation Plan
 
-**Date:** 2026-06-18  
+**Date:** 2026-06-18
 **Status:** `SOURCE_REPAIR_IN_PROGRESS__HARDWARE_RUN_DEFERRED`
 
 ---

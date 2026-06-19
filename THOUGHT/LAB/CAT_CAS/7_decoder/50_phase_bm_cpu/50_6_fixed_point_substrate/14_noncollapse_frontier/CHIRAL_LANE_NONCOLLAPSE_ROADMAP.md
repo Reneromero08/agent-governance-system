@@ -1,9 +1,9 @@
 # Phase 6B Non-Collapse Frontier Roadmap
 
 **Status:** `COHERENCE_REPAIR_VERIFIED__CARRIER_WITNESS_PENDING`
-**Binding directive:** `COURSE_CORRECTION.md`  
+**Binding directive:** `COURSE_CORRECTION.md`
 **Immediate gate:** close the carrier witness
-**Next physical gate:** close the carrier witness  
+**Next physical gate:** close the carrier witness
 **Observability implementation authorization:** false
 
 **THE ALGORITHM IS DEAD.** The unresolved relation is the object; scalar traversal is local and subordinate.

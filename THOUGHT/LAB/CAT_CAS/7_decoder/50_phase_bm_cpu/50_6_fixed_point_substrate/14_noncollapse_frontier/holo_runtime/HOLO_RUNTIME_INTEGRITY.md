@@ -1,8 +1,8 @@
 # `.holo` Runtime Semantic Integrity Profile
 
-**Profile:** `HOLO_RUNTIME_INTEGRITY_V1`  
-**Schema family:** `CAT_CAS_HOLO_GEOMETRY`  
-**Serialized schema:** `1.4.0`  
+**Profile:** `HOLO_RUNTIME_INTEGRITY_V1`
+**Schema family:** `CAT_CAS_HOLO_GEOMETRY`
+**Serialized schema:** `1.4.0`
 **Claim ceiling:** L1/L2 software architecture
 
 ---

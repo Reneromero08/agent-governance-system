@@ -1,8 +1,8 @@
 # Phase 6 Roadmap
 
-**Role:** master chronological task ledger.  
+**Role:** master chronological task ledger.
 **Current head:** `PHASE6B_COHERENCE_REPAIR_VERIFIED__CARRIER_WITNESS_PENDING`
-**Binding directive:** `14_noncollapse_frontier/COURSE_CORRECTION.md`  
+**Binding directive:** `14_noncollapse_frontier/COURSE_CORRECTION.md`
 **Immediate gate:** carrier-witness closure, then L4B.5B0 external human review.
 **Observability acquisition:** not authorized.
 

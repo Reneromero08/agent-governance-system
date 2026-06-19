@@ -1,7 +1,7 @@
 # Exp 50 L4A Non-Collapse Mechanism Screen Protocol
 
-**Date:** 2026-06-18  
-**Status:** `PROTOCOL_CORRECTED__REFERENCE_ONLY`  
+**Date:** 2026-06-18
+**Status:** `PROTOCOL_CORRECTED__REFERENCE_ONLY`
 **Role:** generic carrier/mechanism screening layer before L4B physical mapping.
 
 ---
