@@ -1,43 +1,70 @@
-# Exp 50 L4A Class B W_B Carrier Report
+# Exp 50 L4A Class B Historical Carrier Report
 
-**Status:** L4A_CLASS_B_WB_CARRIER_PASS. Claim L2.
-**Commit:** Pending.
-
----
-
-## Executive Verdict
-
-W_B workload and lock-in measurement layer run on Phenom II. Dual-sender alu_burst
-at 200 Hz detected by receiver lock-in. 3 modes: normal, label-swap, carrier-off.
-.holo records written with PhaseRelation data. Label-swap reveals Q_diff sign does
-NOT flip -- indicates core asymmetry, not fold-odd residue. Carrier-off null.
+**Original status:** `L4A_CLASS_B_WB_CARRIER_PASS`  
+**Corrected status:** `INVALIDATED_AS_WB_SCREEN__RETAINED_AS_SMOKE_PROVENANCE`  
+**Date corrected:** 2026-06-18
 
 ---
 
-## Run Matrix
+## Correction
 
-| Mode | branch_plus (core 4) | branch_minus (core 5) | I+ | I- | Q+ | Q- | q_diff |
-|---|---|---|---|---|---|---|---|
-| normal | a=125 | Na=131 | -0.059 | 0.137 | -0.482 | -0.858 | +0.376 |
-| label_swap | Na=131 | a=125 | 0.021 | 0.105 | -0.136 | -0.355 | +0.219 |
-| carrier_off | 0 | 0 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+The original report interpreted three captures (`normal`, `label_swap`, and `carrier_off`) as evidence that Q-difference was core-dependent rather than value-dependent.
 
----
+A source audit showed that the committed runtime did not perform the claimed W_B experiment:
 
-## Key Finding
+- `a` and `N-a` were printed but did not alter the sender workload;
+- the two sender windows were executed sequentially;
+- carrier-off was written as literal zeros rather than physically captured;
+- the label-swap control was marked passed without comparing signs;
+- same-orbit, dummy-orbit, replay, wrong-restore, and session controls were absent.
 
-Q_diff sign does not flip under label-swap (+0.376 vs +0.219, both positive).
-This indicates the Q difference is CORE-DEPENDENT (PDN coupling asymmetry between
-cores 4 and 5), not VALUE-DEPENDENT. A genuine fold-odd residue would flip sign
-when branch values are swapped between cores.
+Therefore the original measurements cannot adjudicate a value-dependent Class B coordinate. They are retained only as evidence that the scaffold could invoke per-core PDN captures and serialize output.
 
 ---
 
-## Interpretation
+## What remains valid
 
-- Carrier excitation works: lock-in detects PDN activity.
-- Measurement path is live: .holo records capture PhaseRelation data.
-- Core asymmetry dominates: Q_diff driven by core identity, not branch values.
-- No fold-odd residue detected at this validation level.
-- This does NOT close all substrate routes. It only says Class B PDN/common-mode
-  shows core asymmetry rather than value-driven fold-odd residue.
+Independent T300 evidence remains the positive control for a live PDN lock-in channel on selected routes. That evidence is not invalidated by this source audit because it came from a separate experiment, run matrix, and artifact set.
+
+The correct evidence split is:
+
+```text
+T300: sender-owned mode/phase transport through PDN channel
+old Class B scaffold: per-core smoke capture only
+repaired Class B: crossed value/core calibration, not yet run
+```
+
+---
+
+## What is not established
+
+The original report does not establish:
+
+```text
+core bias dominance under value-dependent W_B
+fold-odd residue absence
+fold-odd residue presence
+operand-dependent PDN response
+physical HoloGeometry
+physical path memory
+physical restoration
+```
+
+---
+
+## Replacement experiment
+
+The replacement is specified by:
+
+- `EXP50_L4A_CLASS_B_PDN_SCREEN_DESIGN.md`
+- `EXP50_L4A_CLASS_B_IMPLEMENTATION_PLAN.md`
+- `class_b_pdn_screen.c`
+
+It uses crossed assignments and decomposes measured complex response into:
+
+```text
+R_value = value-dependent coordinate
+R_core  = fixed core/route coordinate
+```
+
+The replacement source has not yet been executed on the Phenom. Its eventual artifact must be adjudicated by the reviewed observability pipeline rather than by hardcoded pass flags.
