@@ -43,8 +43,8 @@ static void test_reference_graph(void) {
     assert(!holo_observability_design_validate_references(&missing_artifact));
     puts("UNDEFINED_CALIBRATION_ARTIFACT_REJECTED_PASS");
 
-    snprintf(duplicate_gate.gates[1].gate_id,
-             sizeof(duplicate_gate.gates[1].gate_id),
+    snprintf(duplicate_gate.gates[2].gate_id,
+             sizeof(duplicate_gate.gates[2].gate_id),
              "%s", duplicate_gate.gates[0].gate_id);
     assert(holo_observability_design_validate(&duplicate_gate));
     assert(!holo_observability_design_validate_references(&duplicate_gate));
