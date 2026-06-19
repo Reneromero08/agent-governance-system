@@ -1,0 +1,93 @@
+#!/usr/bin/env python3
+"""Verify that the Phase 6 authority stack preserves the current execution order."""
+
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+HERE = Path(__file__).resolve()
+SUBSTRATE = HERE.parents[3]
+FRONTIER = SUBSTRATE / "14_noncollapse_frontier"
+
+FILES = {
+    "base": FRONTIER / "COURSE_CORRECTION.md",
+    "addendum": FRONTIER / "COURSE_CORRECTION_ADDENDUM_2026-06-19.md",
+    "frontier": FRONTIER / "CHIRAL_LANE_NONCOLLAPSE_ROADMAP.md",
+    "master": SUBSTRATE / "PHASE6_ROADMAP.md",
+    "navigation": SUBSTRATE / "PHASE6_NAVIGATION.md",
+}
+
+REQUIRED = {
+    "base": (
+        "**Status:** ACTIVE DIRECTIVE",
+        "**Primary doctrine:** `THE ALGORITHM IS DEAD`",
+        "**Primary object:** unresolved relational geometry / `OrbitState`",
+    ),
+    "addendum": (
+        "ACTIVE_BINDING_ADDENDUM",
+        "Phase 6B.5C — Transfer-Aware Carrier Geometry Analysis",
+        "No new physical acquisition is authorized",
+        "increase trials until the old conjunction passes",
+    ),
+    "frontier": (
+        "COURSE_CORRECTION_ADDENDUM_2026-06-19.md",
+        "Immediate gate:** Phase 6B.5C",
+        "No new physical acquisition",
+        "repeats T48 or escalates to T300 before Phase 6B.5C",
+    ),
+    "master": (
+        "COURSE_CORRECTION_ADDENDUM_2026-06-19.md",
+        "Immediate gate:** Phase 6B.5C",
+        "No new physical acquisition",
+        "repeats T48 or increases to T300 before Phase 6B.5C",
+    ),
+    "navigation": (
+        "COURSE_CORRECTION_ADDENDUM_2026-06-19.md",
+        "transfer-aware carrier geometry analysis",
+        "No SSH acquisition is the immediate task",
+        "Blind repetition or trial-count escalation is not an allowed substitute",
+    ),
+}
+
+FORBIDDEN_CURRENT_ORDER = {
+    "frontier": "**Immediate gate:** close the carrier witness",
+    "master": "**Immediate gate:** carrier-witness closure",
+    "navigation": "2. **Carrier witness closure**",
+}
+
+
+def verify() -> list[str]:
+    errors: list[str] = []
+    texts: dict[str, str] = {}
+    for name, path in FILES.items():
+        if not path.is_file():
+            errors.append(f"missing authority file: {path}")
+            continue
+        texts[name] = path.read_text(encoding="utf-8")
+
+    for name, needles in REQUIRED.items():
+        text = texts.get(name, "")
+        for needle in needles:
+            if needle not in text:
+                errors.append(f"{name} missing required authority marker: {needle}")
+
+    for name, needle in FORBIDDEN_CURRENT_ORDER.items():
+        if needle in texts.get(name, ""):
+            errors.append(f"{name} retains stale immediate order: {needle}")
+
+    return errors
+
+
+def main() -> int:
+    errors = verify()
+    for error in errors:
+        print(f"ERROR: {error}", file=sys.stderr)
+    if errors:
+        return 1
+    print("PHASE6_AUTHORITY_STACK_ALIGNED")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
