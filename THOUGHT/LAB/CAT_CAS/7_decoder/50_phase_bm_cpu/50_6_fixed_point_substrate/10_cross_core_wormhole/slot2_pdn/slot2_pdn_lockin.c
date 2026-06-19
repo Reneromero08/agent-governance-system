@@ -84,6 +84,8 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
+#include "../../14_noncollapse_frontier/carrier_witness_closure/carrier_witness_raw.h"
+
 /* ======================= timing primitives (VERBATIM 5.10) ================= */
 static inline uint64_t rdtscp_now(void) {
     unsigned hi, lo, aux;
@@ -157,14 +159,6 @@ static int msr_read(int core, uint32_t reg, uint64_t *val) {
     close(fd);
     return rc;
 }
-static int msr_open(int core) {
-    char path[64];
-    snprintf(path, sizeof(path), "/dev/cpu/%d/msr", core);
-    return open(path, O_RDONLY);
-}
-static inline int msr_pread(int fd, uint32_t reg, uint64_t *val) {
-    return (pread(fd, val, 8, reg) == 8) ? 0 : -1;
-}
 static int cofvid_pstate(int core) {
     uint64_t v = 0;
     if (msr_read(core, MSR_COFVID_STATUS, &v) != 0) return -1;
@@ -198,12 +192,16 @@ static int pin_pstate(pinstate_t *ps, long pin_khz) {
     memset(ps, 0, sizeof(*ps));
     ps->pin_khz = pin_khz;
     long b;
+    int verified = 1;
     if (read_long_file("/sys/devices/system/cpu/cpufreq/boost", &b) == 0) {
         ps->boost_present = 1; ps->boost_orig = (int)b;
         if (write_long_file("/sys/devices/system/cpu/cpufreq/boost", 0) != 0)
             fprintf(stderr, "WARN: could not disable cpufreq boost\n");
+        long boost_readback = -1;
+        if (read_long_file("/sys/devices/system/cpu/cpufreq/boost", &boost_readback) != 0 || boost_readback != 0)
+            verified = 0;
     } else { ps->boost_present = 0; fprintf(stderr, "NOTE: no cpufreq/boost knob\n"); }
-    int any = 0;
+    int any = 0, policies = 0;
     for (int c = 0; c < NCPU_MAX; c++) {
         char pmin[128], pmax[128];
         snprintf(pmin, sizeof(pmin), "/sys/devices/system/cpu/cpu%d/cpufreq/scaling_min_freq", c);
@@ -211,16 +209,21 @@ static int pin_pstate(pinstate_t *ps, long pin_khz) {
         long omn, omx;
         if (read_long_file(pmin, &omn) == 0 && read_long_file(pmax, &omx) == 0) {
             ps->min_orig[c] = omn; ps->max_orig[c] = omx; ps->have_orig[c] = 1;
-            write_long_file(pmin, pin_khz < omx ? pin_khz : omx);
-            write_long_file(pmax, pin_khz);
-            write_long_file(pmin, pin_khz);
+            policies++;
+            if (write_long_file(pmin, pin_khz < omx ? pin_khz : omx) != 0 ||
+                write_long_file(pmax, pin_khz) != 0 ||
+                write_long_file(pmin, pin_khz) != 0) verified = 0;
+            long rmin=-1, rmax=-1;
+            if (read_long_file(pmin,&rmin)!=0 || read_long_file(pmax,&rmax)!=0 ||
+                rmin!=pin_khz || rmax!=pin_khz) verified = 0;
             any = 1;
         } else ps->have_orig[c] = 0;
     }
-    ps->pinned_ok = any;
-    return any ? 0 : -1;
+    ps->pinned_ok = any && verified && policies == NCPU_MAX;
+    return ps->pinned_ok ? 0 : -1;
 }
-static void restore_pstate(pinstate_t *ps) {
+static int restore_pstate(pinstate_t *ps) {
+    int verified = 1;
     for (int c = 0; c < NCPU_MAX; c++) {
         if (!ps->have_orig[c]) continue;
         char pmin[128], pmax[128];
@@ -231,14 +234,17 @@ static void restore_pstate(pinstate_t *ps) {
         write_long_file(pmin, ps->min_orig[c]);
         long rmn = -1, rmx = -1;
         read_long_file(pmin, &rmn); read_long_file(pmax, &rmx);
+        if (rmn != ps->min_orig[c] || rmx != ps->max_orig[c]) verified = 0;
         fprintf(stderr, "P-state restore: cpu%d min->%ld(rb=%ld) max->%ld(rb=%ld)\n",
                 c, ps->min_orig[c], rmn, ps->max_orig[c], rmx);
     }
     if (ps->boost_present) {
         write_long_file("/sys/devices/system/cpu/cpufreq/boost", ps->boost_orig);
         long rb = -1; read_long_file("/sys/devices/system/cpu/cpufreq/boost", &rb);
+        if (rb != ps->boost_orig) verified = 0;
         fprintf(stderr, "P-state restore: boost->%d (rb=%ld)\n", ps->boost_orig, rb);
     }
+    return verified ? 0 : -1;
 }
 static long read_cur_khz(int core) {
     char p[128];
@@ -546,12 +552,16 @@ typedef struct {
                             a per-symbol key the receiver does NOT share (decoy schedule).
                             Receiver decodes against the canonical book; must collapse to
                             chance. Proves the win is the agreed drive, not an artifact. */
+    int    witness_enabled;
+    char   witness_dir[400];
+    char   run_id[128];
+    char   campaign_id[128];
+    char   condition[16];
 } config_t;
 
 /* deterministic per-run RNG for schedule + theta (seeded; recorded) */
 static uint64_t g_rng;
 static uint64_t xs(void){ uint64_t x=g_rng; x^=x<<13; x^=x>>7; x^=x<<17; g_rng=x; return x; }
-static double urand(void){ return (double)(xs() >> 11) / (double)(1ULL<<53); }
 static int irand(int n){ return (int)(xs() % (uint64_t)n); }
 
 #define PHASE_LEVELS 8
@@ -618,65 +628,108 @@ int main(int argc, char **argv);
 
 #include "slot2_pdn_run.h"
 
-int main(int argc, char **argv) {
-    config_t cfg; memset(&cfg, 0, sizeof(cfg));
-    cfg.role = 0;          /* orchestrate (fork sender+receiver) */
-    cfg.mode_matrix = 0;   /* preflight by default */
-    cfg.victim = 2;
-    cfg.sender = 3;
-    cfg.nbin = 12;
-    cfg.f_lo = 20.0; cfg.f_hi = 1500.0;
-    cfg.slot_s = 0.8;
-    cfg.read_hz = 4000;
-    cfg.tsc_hz = 3214823000.0;  /* measured true TSC on this box (kernel-refined
+static void config_defaults(config_t *cfg) {
+    memset(cfg, 0, sizeof(*cfg));
+    cfg->role = 0;          /* orchestrate (fork sender+receiver) */
+    cfg->mode_matrix = 0;   /* preflight by default */
+    cfg->victim = 2;
+    cfg->sender = 3;
+    cfg->nbin = 12;
+    cfg->f_lo = 20.0; cfg->f_hi = 1500.0;
+    cfg->slot_s = 0.8;
+    cfg->read_hz = 4000;
+    cfg->tsc_hz = 3214823000.0;  /* measured true TSC on this box (kernel-refined
                                    3214.823 MHz); used for the intra-slot bin tone.
                                    Per-slot phase reference makes the decode robust to
                                    any residual error, but the accurate rate keeps the
                                    intra-slot carrier tight. Override with --tsc-hz. */
-    cfg.pin_khz = 1600000;
-    cfg.do_pin = 1;
-    cfg.temp_veto = 68.0;
-    cfg.seed = 44;
-    cfg.gap_s = 0.12;   /* >= a couple thread-spawn + warmup times of headroom */
-    cfg.trials = 64;
-    cfg.namp_sender = 1;
-    cfg.n_sender_cores = 0;
-    cfg.bin_hz = 200.0;
-    strcpy(cfg.out_csv, "");
-    strcpy(cfg.handshake, "");
+    cfg->pin_khz = 1600000;
+    cfg->do_pin = 1;
+    cfg->temp_veto = 68.0;
+    cfg->seed = 44;
+    cfg->gap_s = 0.12;
+    cfg->trials = 64;
+    cfg->namp_sender = 1;
+    cfg->n_sender_cores = 0;
+    cfg->bin_hz = 200.0;
+    snprintf(cfg->condition, sizeof(cfg->condition), "%s", "matrix");
+}
+
+static int copy_arg(char *dst, size_t size, const char *value) {
+    if (!value || strlen(value) >= size) return -1;
+    memcpy(dst, value, strlen(value) + 1);
+    return 0;
+}
+
+static int valid_id(const char *value) {
+    if (!value || !value[0]) return 0;
+    for (const unsigned char *p=(const unsigned char *)value; *p; ++p)
+        if (!( (*p>='a'&&*p<='z') || (*p>='A'&&*p<='Z') ||
+               (*p>='0'&&*p<='9') || *p=='_' || *p=='-' || *p=='.' )) return 0;
+    return 1;
+}
+
+static int parse_args(config_t *cfg, int argc, char **argv) {
 
     for (int i=1;i<argc;i++) {
         if (!strcmp(argv[i],"--role") && i+1<argc) {
             const char *r=argv[++i];
-            if (!strcmp(r,"sender")) cfg.role=1;
-            else if (!strcmp(r,"receiver")) cfg.role=2;
-            else cfg.role=0;
+            if (!strcmp(r,"sender")) cfg->role=1;
+            else if (!strcmp(r,"receiver")) cfg->role=2;
+            else if (!strcmp(r,"orchestrate")) cfg->role=0;
+            else return -1;
         }
         else if (!strcmp(argv[i],"--mode") && i+1<argc) {
             const char *m=argv[++i];
-            cfg.mode_matrix = (!strcmp(m,"matrix")) ? 1 : 0;
+            if (!strcmp(m,"matrix")) cfg->mode_matrix=1;
+            else if (!strcmp(m,"preflight")) cfg->mode_matrix=0;
+            else return -1;
         }
-        else if (!strcmp(argv[i],"--victim") && i+1<argc) cfg.victim=atoi(argv[++i]);
-        else if (!strcmp(argv[i],"--sender") && i+1<argc) cfg.sender=atoi(argv[++i]);
-        else if (!strcmp(argv[i],"--nbin") && i+1<argc) cfg.nbin=atoi(argv[++i]);
-        else if (!strcmp(argv[i],"--f-lo") && i+1<argc) cfg.f_lo=atof(argv[++i]);
-        else if (!strcmp(argv[i],"--f-hi") && i+1<argc) cfg.f_hi=atof(argv[++i]);
-        else if (!strcmp(argv[i],"--slot-s") && i+1<argc) cfg.slot_s=atof(argv[++i]);
-        else if (!strcmp(argv[i],"--gap-s") && i+1<argc) cfg.gap_s=atof(argv[++i]);
-        else if (!strcmp(argv[i],"--read-hz") && i+1<argc) cfg.read_hz=atoi(argv[++i]);
-        else if (!strcmp(argv[i],"--tsc-hz") && i+1<argc) cfg.tsc_hz=atof(argv[++i]);
-        else if (!strcmp(argv[i],"--pin-khz") && i+1<argc) cfg.pin_khz=atol(argv[++i]);
-        else if (!strcmp(argv[i],"--no-pin")) cfg.do_pin=0;
-        else if (!strcmp(argv[i],"--temp-veto") && i+1<argc) cfg.temp_veto=atof(argv[++i]);
-        else if (!strcmp(argv[i],"--seed") && i+1<argc) cfg.seed=atoi(argv[++i]);
-        else if (!strcmp(argv[i],"--trials") && i+1<argc) cfg.trials=atoi(argv[++i]);
-        else if (!strcmp(argv[i],"--bin-hz") && i+1<argc) cfg.bin_hz=atof(argv[++i]);
-        else if (!strcmp(argv[i],"--namp") && i+1<argc) cfg.namp_sender=atoi(argv[++i]);
-        else if (!strcmp(argv[i],"--out-csv") && i+1<argc) strncpy(cfg.out_csv, argv[++i], sizeof(cfg.out_csv)-1);
-        else if (!strcmp(argv[i],"--handshake") && i+1<argc) strncpy(cfg.handshake, argv[++i], sizeof(cfg.handshake)-1);
-        else if (!strcmp(argv[i],"--silent")) cfg.ctrl_silent=1;          /* neg control */
-        else if (!strcmp(argv[i],"--scramble-drive")) cfg.ctrl_scramble=1; /* neg control */
-        else fprintf(stderr, "WARN: unknown arg '%s'\n", argv[i]);
+        else if (!strcmp(argv[i],"--victim") && i+1<argc) cfg->victim=atoi(argv[++i]);
+        else if (!strcmp(argv[i],"--sender") && i+1<argc) cfg->sender=atoi(argv[++i]);
+        else if (!strcmp(argv[i],"--nbin") && i+1<argc) cfg->nbin=atoi(argv[++i]);
+        else if (!strcmp(argv[i],"--f-lo") && i+1<argc) cfg->f_lo=atof(argv[++i]);
+        else if (!strcmp(argv[i],"--f-hi") && i+1<argc) cfg->f_hi=atof(argv[++i]);
+        else if (!strcmp(argv[i],"--slot-s") && i+1<argc) cfg->slot_s=atof(argv[++i]);
+        else if (!strcmp(argv[i],"--gap-s") && i+1<argc) cfg->gap_s=atof(argv[++i]);
+        else if (!strcmp(argv[i],"--read-hz") && i+1<argc) cfg->read_hz=atoi(argv[++i]);
+        else if (!strcmp(argv[i],"--tsc-hz") && i+1<argc) cfg->tsc_hz=atof(argv[++i]);
+        else if (!strcmp(argv[i],"--pin-khz") && i+1<argc) cfg->pin_khz=atol(argv[++i]);
+        else if (!strcmp(argv[i],"--no-pin")) cfg->do_pin=0;
+        else if (!strcmp(argv[i],"--temp-veto") && i+1<argc) cfg->temp_veto=atof(argv[++i]);
+        else if (!strcmp(argv[i],"--seed") && i+1<argc) cfg->seed=atoi(argv[++i]);
+        else if (!strcmp(argv[i],"--trials") && i+1<argc) cfg->trials=atoi(argv[++i]);
+        else if (!strcmp(argv[i],"--bin-hz") && i+1<argc) cfg->bin_hz=atof(argv[++i]);
+        else if (!strcmp(argv[i],"--namp") && i+1<argc) cfg->namp_sender=atoi(argv[++i]);
+        else if (!strcmp(argv[i],"--out-csv") && i+1<argc) { if(copy_arg(cfg->out_csv,sizeof(cfg->out_csv),argv[++i])) return -1; }
+        else if (!strcmp(argv[i],"--handshake") && i+1<argc) { if(copy_arg(cfg->handshake,sizeof(cfg->handshake),argv[++i])) return -1; }
+        else if (!strcmp(argv[i],"--witness-dir") && i+1<argc) { cfg->witness_enabled=1; if(copy_arg(cfg->witness_dir,sizeof(cfg->witness_dir),argv[++i])) return -1; }
+        else if (!strcmp(argv[i],"--run-id") && i+1<argc) { if(copy_arg(cfg->run_id,sizeof(cfg->run_id),argv[++i])) return -1; }
+        else if (!strcmp(argv[i],"--campaign-id") && i+1<argc) { if(copy_arg(cfg->campaign_id,sizeof(cfg->campaign_id),argv[++i])) return -1; }
+        else if (!strcmp(argv[i],"--condition") && i+1<argc) {
+            const char *c=argv[++i];
+            if(strcmp(c,"matrix") && strcmp(c,"silent") && strcmp(c,"scramble")) return -1;
+            if(copy_arg(cfg->condition,sizeof(cfg->condition),c)) return -1;
+            cfg->ctrl_silent=!strcmp(c,"silent"); cfg->ctrl_scramble=!strcmp(c,"scramble");
+        }
+        else if (!strcmp(argv[i],"--silent")) { cfg->ctrl_silent=1; copy_arg(cfg->condition,sizeof(cfg->condition),"silent"); }
+        else if (!strcmp(argv[i],"--scramble-drive")) { cfg->ctrl_scramble=1; copy_arg(cfg->condition,sizeof(cfg->condition),"scramble"); }
+        else return -1;
+    }
+
+    if (cfg->witness_enabled && (!cfg->mode_matrix || cfg->role != 0 ||
+        !valid_id(cfg->run_id) || !valid_id(cfg->campaign_id))) return -1;
+    if (cfg->ctrl_silent && cfg->ctrl_scramble) return -1;
+    if (cfg->nbin < 1 || cfg->nbin > NBIN_MAX || cfg->trials < 1 || cfg->read_hz < 1 || cfg->slot_s <= 0.0) return -1;
+    return 0;
+}
+
+int main(int argc, char **argv) {
+    config_t cfg;
+    config_defaults(&cfg);
+    if (parse_args(&cfg, argc, argv) != 0) {
+        fprintf(stderr, "FATAL: invalid command line\n");
+        return 2;
     }
 
     if (locate_k10temp() != 0) {
