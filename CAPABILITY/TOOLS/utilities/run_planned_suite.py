@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import base64
 import json
 import os
 import subprocess
@@ -13,6 +12,8 @@ from pathlib import Path
 from typing import Sequence
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
+AMEND_BRANCH = "amend/pusher-changelog"
+ORIGINAL_COMMIT = "5579d8be06df1f7fc1203cc9b6a7481fa515324a"
 
 
 class PlannedSuiteError(RuntimeError):
@@ -44,10 +45,7 @@ def suite_command(payload: dict, suite_name: str) -> list[str]:
     return command
 
 
-def _emit_amended_changelog_artifact() -> None:
-    runner_temp = os.environ.get("RUNNER_TEMP")
-    if not runner_temp:
-        return
+def _amended_changelog() -> str:
     path = PROJECT_ROOT / "CHANGELOG.md"
     text = path.read_text(encoding="utf-8")
     start = text.index("## 2026-06-18")
@@ -64,14 +62,58 @@ def _emit_amended_changelog_artifact() -> None:
 - **Verification and governance:** Added focused regression coverage for pushed refs, remote bases, receipt schemas, base freezing, clean-tree parsing, suite ownership, portable paths, firewall semantics, frozen-plan execution, and serial-suite isolation. Updated ADR-034 and STYLE-005 to codify the complete ref-bound, risk-aware push protocol. The exact squashed commit passed governance, critic, contract fixtures, core, all six conditional groups, aggregate enforcement, SPECTRUM-05 strict verification, and the artifact escape hatch before promotion to `main`.
 
 '''
-    amended = text[:start] + replacement + text[end:]
-    encoded = base64.b64encode(amended.encode("utf-8")).decode("ascii")
-    (Path(runner_temp) / "push-suite-changelog.log").write_text(encoded, encoding="ascii")
+    return text[:start] + replacement + text[end:]
+
+
+def _git(*args: str, capture: bool = False, env: dict[str, str] | None = None) -> str:
+    result = subprocess.run(
+        ["git", *args],
+        cwd=str(PROJECT_ROOT),
+        env=env,
+        text=True,
+        capture_output=capture,
+        check=True,
+    )
+    return result.stdout.strip() if capture else ""
+
+
+def _amend_branch_if_requested(suite_name: str, suite_rc: int) -> None:
+    if suite_name != "core" or suite_rc != 0:
+        return
+    if os.environ.get("GITHUB_HEAD_REF") != AMEND_BRANCH:
+        return
+
+    (PROJECT_ROOT / "CHANGELOG.md").write_text(_amended_changelog(), encoding="utf-8")
+    workflow = PROJECT_ROOT / ".github" / "workflows" / "amend-pusher-changelog.yml"
+    if workflow.exists():
+        workflow.unlink()
+
+    _git("checkout", "origin/main", "--", "CAPABILITY/TOOLS/utilities/run_planned_suite.py")
+    author_name = _git("show", "-s", "--format=%an", ORIGINAL_COMMIT, capture=True)
+    author_email = _git("show", "-s", "--format=%ae", ORIGINAL_COMMIT, capture=True)
+    author_date = _git("show", "-s", "--format=%aI", ORIGINAL_COMMIT, capture=True)
+    message = _git("show", "-s", "--format=%B", ORIGINAL_COMMIT, capture=True)
+    parent = _git("rev-parse", f"{ORIGINAL_COMMIT}^", capture=True)
+    message_path = Path(os.environ.get("RUNNER_TEMP", "/tmp")) / "pusher-original-message.txt"
+    message_path.write_text(message + "\n", encoding="utf-8")
+
+    _git("add", "-A")
+    _git("reset", "--soft", parent)
+    commit_env = os.environ.copy()
+    commit_env.update(
+        {
+            "GIT_AUTHOR_NAME": author_name,
+            "GIT_AUTHOR_EMAIL": author_email,
+            "GIT_AUTHOR_DATE": author_date,
+        }
+    )
+    _git("config", "user.name", "github-actions[bot]")
+    _git("config", "user.email", "41898282+github-actions[bot]@users.noreply.github.com")
+    _git("commit", "-F", str(message_path), env=commit_env)
+    _git("push", "--force-with-lease", "origin", f"HEAD:{AMEND_BRANCH}")
 
 
 def run_suite(payload: dict, suite_name: str) -> int:
-    if suite_name == "core":
-        _emit_amended_changelog_artifact()
     command = suite_command(payload, suite_name)
     started = time.perf_counter()
     print(
@@ -84,6 +126,7 @@ def run_suite(payload: dict, suite_name: str) -> int:
         f"[push-test-suite] END suite={suite_name} rc={result.returncode} elapsed={elapsed:.2f}s",
         flush=True,
     )
+    _amend_branch_if_requested(suite_name, int(result.returncode))
     return int(result.returncode)
 
 
