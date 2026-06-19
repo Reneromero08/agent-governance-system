@@ -26,6 +26,31 @@ static int input_exists(const HoloObservabilityDesign *design, const char *id) {
     return 0;
 }
 
+static int artifact_exists(const HoloObservabilityDesign *design, const char *id) {
+    size_t i;
+    for (i = 0; i < design->artifact_count; ++i) {
+        if (strcmp(design->artifacts[i].artifact_id, id) == 0) return 1;
+    }
+    return 0;
+}
+
+static int artifact_list_resolves(const HoloObservabilityDesign *design,
+                                  const char *list) {
+    char buffer[HOLO_DESIGN_TEXT_LEN];
+    char *save = NULL;
+    char *token;
+    if (!present(list) || strlen(list) >= sizeof(buffer)) return 0;
+    snprintf(buffer, sizeof(buffer), "%s", list);
+    token = strtok_r(buffer, ";", &save);
+    if (!token) return 0;
+    while (token) {
+        while (*token == ' ' || *token == '\t') ++token;
+        if (!present(token) || !artifact_exists(design, token)) return 0;
+        token = strtok_r(NULL, ";", &save);
+    }
+    return 1;
+}
+
 static int builtin_control_exists(const char *id) {
     static const char *controls[] = {
         "shuffled_input",
@@ -70,11 +95,6 @@ int holo_observability_design_validate_references(
         if (!state_exists(design, design->operators[i].state_model_id)) return 0;
     }
 
-    for (i = 0; i < design->calibration_count; ++i) {
-        if (!input_exists(design, design->calibration[i].input_id) ||
-            !present(design->calibration[i].artifact_output)) return 0;
-    }
-
     for (i = 0; i < design->gate_count; ++i) {
         int index = 0;
         char suffix = '\0';
@@ -107,6 +127,14 @@ int holo_observability_design_validate_references(
         for (j = 0; j < i; ++j) {
             if (strcmp(design->artifacts[i].schema_id,
                        design->artifacts[j].schema_id) == 0) return 0;
+        }
+    }
+
+    for (i = 0; i < design->calibration_count; ++i) {
+        if (!input_exists(design, design->calibration[i].input_id) ||
+            !artifact_list_resolves(design,
+                                    design->calibration[i].artifact_output)) {
+            return 0;
         }
     }
 
