@@ -2,7 +2,7 @@
   "analysis_id": "phase6b5d_carrier_claim_consolidation_v1",
   "claim_ceiling": "BOUNDED_CARRIER_CLAIM_CONSOLIDATION_ONLY",
   "gate_r_ready": true,
-  "generated_utc": "2026-06-19T20:57:51+00:00",
+  "generated_utc": "2026-06-19T21:00:20+00:00",
   "hard_stop": "Do not continue open-ended analysis of this campaign after the bounded consolidation report. Proceed to external Gate R review and preregistration of the tone-order control.",
   "next_physical_control": {
     "name": "REVERSED_RANDOMIZED_TONE_ORDER",
