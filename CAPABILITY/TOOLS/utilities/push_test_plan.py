@@ -78,6 +78,7 @@ RISK_GROUPS = (
         "write-firewall",
         WRITE_FIREWALL_TESTS,
         trigger_exact=(
+            "CAPABILITY/PRIMITIVES/paths.py",
             "CAPABILITY/PRIMITIVES/repo_digest.py",
             "CAPABILITY/PRIMITIVES/write_firewall.py",
             "CAPABILITY/TOOLS/utilities/guarded_writer.py",
@@ -105,6 +106,7 @@ RISK_GROUPS = (
             "NAVIGATION/CORTEX/network/",
         ),
         trigger_exact=(
+            "CAPABILITY/PRIMITIVES/paths.py",
             "CAPABILITY/PRIMITIVES/registry_validators.py",
             "CAPABILITY/TOOLS/ags.py",
             "LAW/CONTRACTS/ags_mcp_entrypoint.py",
