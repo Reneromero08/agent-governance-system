@@ -12,7 +12,7 @@ test_carrier_witness_raw: test_carrier_witness_raw.c carrier_witness_raw.c carri
 test: test_carrier_witness_raw
 	./test_carrier_witness_raw
 	$(PYTHON) test_carrier_witness_validate.py
-	$(PYTHON) -m py_compile audit_existing_t300.py carrier_witness_validate.py
+	$(PYTHON) -m py_compile audit_existing_t300.py carrier_witness_validate.py carrier_witness_manifest.py
 
 clean:
 	rm -f test_carrier_witness_raw
