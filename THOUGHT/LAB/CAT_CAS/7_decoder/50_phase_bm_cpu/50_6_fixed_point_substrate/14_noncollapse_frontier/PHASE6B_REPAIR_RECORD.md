@@ -3,7 +3,7 @@
 **Branch:** `repair/phase6b-coherence`  
 **Base:** `48bf42e159c81c798aee2f61b2e6e2e9eb1f295a`  
 **Date:** 2026-06-18  
-**Merge policy:** squash merge after deferred verification
+**Merge policy:** squash merge after deferred SSH verification
 
 ---
 
@@ -60,11 +60,31 @@ No new physical result is claimed by this branch.
 - Marked `holo_record.*` as legacy L4A scaffold rather than an alternate canonical schema.
 - Narrowed invariant wording to exactly what the executable checks prove.
 
+### Canonical gate dependency
+
+The full Contracts run exposed a host-dependent CMP-01 defect outside the Phase 6 subtree: Linux `pathlib.Path` did not recognize Windows-drive and UNC absolute syntax. `CAPABILITY/MCP/validation.py` now evaluates both POSIX and Windows path grammars for absolute and traversal checks.
+
+This is the only non-Phase-6 source change in the final diff. It was required for the canonical push plan and is covered by the existing live CMP-01 validator test.
+
 ---
 
-## Deferred verification
+## Repository CI
 
-No hardware or repository build result is claimed from the GitHub file-editing environment.
+Clean final-diff GitHub Actions results:
+
+```text
+Governance [DEPRECATED]  PASS
+Contracts                PASS
+canonical push plan      PASS
+```
+
+A temporary diagnostic workflow was used only to expose a truncated pytest failure tail and was deleted before the clean run. It is absent from the final diff.
+
+---
+
+## Deferred SSH verification
+
+The GitHub file-editing environment did not execute the target C/hardware paths. Those remain deliberately deferred.
 
 The verification entry point is:
 
@@ -78,7 +98,7 @@ The default mode performs the corrected software warmup, release tests, sanitize
 
 ## Merge contract
 
-The branch is based directly on `main` and contains only Phase 6 source, contracts, tests, and navigation changes.
+The branch is based directly on `main`. The final diff contains the Phase 6 repair plus the one CMP-01 cross-platform gate dependency described above.
 
 Preferred integration is a squash merge. This compresses connector-generated file commits into one architectural history entry while retaining the review discussion in the pull request.
 
@@ -88,7 +108,7 @@ Suggested squash commit:
 fix(phase6): repair Phase 6B evidence, .holo integrity, and review governance
 ```
 
-Do not merge until the verification packet records:
+Do not merge until the SSH verification packet records:
 
 - branch head SHA;
 - clean diff check;
