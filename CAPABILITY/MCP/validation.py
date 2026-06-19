@@ -12,7 +12,7 @@ Provides:
 """
 
 import json
-from pathlib import Path
+from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Dict, List, Optional
 
 from .primitives import compute_hash, get_validator_build_id, VALIDATOR_SEMVER, SUPPORTED_VALIDATOR_SEMVERS
@@ -74,6 +74,19 @@ def is_path_under_root(path: Path, root: Path) -> bool:
             return False
 
 
+def is_absolute_any_platform(raw_path: str) -> bool:
+    """Reject POSIX, Windows-drive, and UNC absolute syntax on every host OS."""
+    return PurePosixPath(raw_path).is_absolute() or PureWindowsPath(raw_path).is_absolute()
+
+
+def has_traversal_any_platform(raw_path: str) -> bool:
+    """Recognize '..' segments using both slash conventions."""
+    return (
+        ".." in PurePosixPath(raw_path).parts
+        or ".." in PureWindowsPath(raw_path).parts
+    )
+
+
 def validate_single_path(
     raw_path: str,
     json_pointer: str,
@@ -86,8 +99,8 @@ def validate_single_path(
     """
     errors = []
 
-    # 1. Reject absolute paths
-    if Path(raw_path).is_absolute():
+    # 1. Reject absolute paths independent of the validator host platform.
+    if is_absolute_any_platform(raw_path):
         errors.append({
             "code": "PATH_ESCAPES_REPO_ROOT",
             "message": f"Absolute paths are not allowed: {raw_path}",
@@ -96,9 +109,9 @@ def validate_single_path(
         })
         return errors
 
-    # 2. Reject traversal segments
+    # 2. Reject traversal segments under either path separator convention.
     path_parts = Path(raw_path).parts
-    if ".." in path_parts:
+    if has_traversal_any_platform(raw_path):
         errors.append({
             "code": "PATH_CONTAINS_TRAVERSAL",
             "message": f"Path contains forbidden traversal segment '..': {raw_path}",
@@ -162,7 +175,7 @@ def check_containment_overlap(
     abs_paths = []
 
     for orig_idx, raw_path in enumerate(paths):
-        if not Path(raw_path).is_absolute() and ".." not in Path(raw_path).parts:
+        if not is_absolute_any_platform(raw_path) and not has_traversal_any_platform(raw_path):
             abs_paths.append((orig_idx, raw_path, (PROJECT_ROOT / raw_path).resolve()))
 
     for i, (idx_a, raw_a, abs_a) in enumerate(abs_paths):
@@ -370,7 +383,7 @@ def generate_output_hashes(run_id: str) -> Dict:
         json_pointer = f"/outputs/durable_paths/{idx}"
 
         # Skip invalid paths
-        if Path(raw_path).is_absolute() or ".." in Path(raw_path).parts:
+        if is_absolute_any_platform(raw_path) or has_traversal_any_platform(raw_path):
             continue
 
         abs_path = (PROJECT_ROOT / raw_path).resolve()
