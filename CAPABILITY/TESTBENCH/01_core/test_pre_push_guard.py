@@ -20,9 +20,11 @@ def test_parse_push_refs_accepts_git_pre_push_format():
         "refs/heads/main bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\n"
     )
     assert parsed == (
-        ref(
+        PushRef(
             "refs/heads/main",
             "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "refs/heads/main",
+            "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
         ),
     )
 
