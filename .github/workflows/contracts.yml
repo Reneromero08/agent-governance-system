@@ -102,8 +102,7 @@ jobs:
           )
           PY
 
-      - name: Install semantic test dependencies
-        if: steps.push_plan.outputs.semantic == 'true'
+      - name: Install resident semantic dependency
         run: python -m pip install sentence-transformers
 
       - name: Run core push suite
