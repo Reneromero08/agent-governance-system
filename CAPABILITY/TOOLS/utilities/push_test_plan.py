@@ -248,7 +248,9 @@ def resolve_base_ref(explicit: str | None = None) -> str | None:
         return explicit
 
     environment_base = os.environ.get("AGS_PUSH_BASE")
-    if environment_base and set(environment_base) != {"0"}:
+    if environment_base:
+        if set(environment_base) == {"0"}:
+            return None
         if not _git_ref_exists(environment_base):
             raise PlanError(f"AGS_PUSH_BASE does not resolve: {environment_base}")
         return environment_base
