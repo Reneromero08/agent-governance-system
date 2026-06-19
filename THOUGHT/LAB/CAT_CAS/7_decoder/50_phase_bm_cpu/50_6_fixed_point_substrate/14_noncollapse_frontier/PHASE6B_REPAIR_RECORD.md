@@ -2,10 +2,11 @@
 
 **Branch:** `repair/phase6b-coherence`  
 **Original base:** `48bf42e159c81c798aee2f61b2e6e2e9eb1f295a`  
-**Synchronized main:** `11b9c4fb6f061833d01aab089d922c467242c322`  
+**Synchronized main / merge base:** `5579d8be06df1f7fc1203cc9b6a7481fa515324a`
 **Course-correction merge:** `8f9d35493ff3bb8cbc54da140b10bd41b28eedb2`  
+**SSH-verified source head:** `fbacd9ee0092dd2118d5f050592f8f0089852135`
 **Date:** 2026-06-18  
-**Merge policy:** squash merge after deferred SSH verification
+**Merge policy:** squash merge after review of the completed SSH verification packet
 
 ---
 
@@ -102,9 +103,20 @@ A temporary diagnostic workflow was used only to expose one truncated pytest fai
 
 ---
 
-## Deferred SSH verification
+## SSH verification result
 
-The GitHub file-editing environment did not execute the target C/hardware paths. Those remain deliberately deferred.
+The source-only payload from `fbacd9ee0092dd2118d5f050592f8f0089852135` was compiled and executed on the target Phenom II X6 1090T host with GCC 14.2.0 and OpenSSL 3.5.6. The default software matrix passed:
+
+- corrected L3 warmup: `90/90` catalytic loops and `10/10` for forward scan, identity, wrong restore, no-fixed-point negative, and replay; every convergent corrected-map run ended at `42`;
+- Class B static build: passed with `-march=amdfam10 -Wall -Wextra -Werror`;
+- L4B release suite and witness: passed;
+- combined ASan/LSan/UBSan suite: passed with exit status zero;
+- UBSan-only suite: passed with exit status zero;
+- strict semantic, lifecycle-tamper, reference-closure, and external-review tests: passed;
+- serialized forbidden-field scan: passed;
+- retained-artifact manifest: every entry verified by `sha256sum -c`.
+
+The Class B hardware capture was not executed. `k10temp` and all `/sys/class/hwmon` temperature inputs were unavailable, so the predeclared thermal-safety gate could not be established.
 
 The verification entry point is:
 
@@ -113,6 +125,16 @@ The verification entry point is:
 ```
 
 The default mode performs the corrected software warmup, release tests, sanitizer tests, semantic/tamper tests, artifact regeneration, forbidden-field scans, and SHA-256 recording. The Class B hardware capture is an explicit optional calibration capture; it does not close the full carrier witness.
+
+Retained evidence SHA-256 values from the verified source head:
+
+```text
+fp_results.csv                    9be34c6a7a28dc4988024b5ac42a8ebf0a9bd7fbf798fc410248c1887ee1b9de
+verification.log                 a4b31a4e3dfffa155b218919d3d76e26aa9a5a4749d193ef46226d938b6ce508
+l4b_orbitstate_dry_run.holo      2890ee260023f24d63a31eb85ba481d709352f2e5152e68e27be1ba196202db9
+l4b5a_physical_mapping.json      04660630d8fc6caa314a1645c4217feeb8e3aedb995d01ff911028d1ab374c0c
+l4b5b0_observability_design.json e42881e243e6168f5fc5518482172f7fb6a7437c5ad109898fd97a6193ca2414
+```
 
 The carrier-witness closure required by `COURSE_CORRECTION.md` remains a separate physical evidence gate with raw/reconstructable acquisition requirements.
 

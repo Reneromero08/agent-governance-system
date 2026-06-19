@@ -1,8 +1,8 @@
 # Phase 6B Non-Collapse Frontier Roadmap
 
-**Status:** `COHERENCE_REPAIR_SOURCE_COMPLETE__PHYSICAL_LADDER_PENDING`  
+**Status:** `COHERENCE_REPAIR_VERIFIED__CARRIER_WITNESS_PENDING`
 **Binding directive:** `COURSE_CORRECTION.md`  
-**Immediate gate:** SSH source verification  
+**Immediate gate:** close the carrier witness
 **Next physical gate:** close the carrier witness  
 **Observability implementation authorization:** false
 
@@ -46,7 +46,7 @@ Canonical doctrine: `doctrine/`.
 - [x] L2 tape lifecycle retained as hygiene only
 - [x] old L3 result invalidated because the map had two integer fixed points
 - [x] unique fixed-point source repaired
-- [ ] corrected L3 source rerun deferred to SSH verification
+- [x] corrected L3 source rerun on target; every convergent corrected-map run ended at `42`
 - [x] L4 verifier route rejected as forward enumeration over a fold-even predicate
 
 ### L4A Class B
@@ -57,8 +57,10 @@ Canonical doctrine: `doctrine/`.
 - [x] orbit value affects the executed integer workload
 - [x] real carrier-off captures required
 - [x] complex `R_value` and `R_core` coordinates defined
-- [ ] target compilation pending
+- [x] target compilation passed with GCC 14.2.0 and `-march=amdfam10`
 - [ ] physical acquisition requires an explicit authorized run plan
+
+Class B capture is additionally deferred because no `k10temp` or other `hwmon` temperature input was available for the required thermal-safety check.
 
 ---
 
@@ -111,7 +113,7 @@ Scopes are frozen in `holo_runtime/HOLO_RUNTIME_INTEGRITY.md`.
 - [x] strict path/restoration/boundary reader
 - [x] serialized lifecycle tamper tests
 - [x] canonical/legacy schema split
-- [ ] release build and sanitizer packet pending
+- [x] release, ASan/LSan/UBSan, UBSan-only, and final release packet passed at `fbacd9ee0092dd2118d5f050592f8f0089852135`
 
 ---
 
@@ -141,7 +143,7 @@ No mapping is promoted by this repair.
 - [x] unique future artifact registry
 - [x] external full-SHA-256 review envelope
 - [x] review remains non-authorizing
-- [ ] C regression/sanitizer suite pending
+- [x] C regression/sanitizer suite passed
 - [ ] human design review pending
 
 ---

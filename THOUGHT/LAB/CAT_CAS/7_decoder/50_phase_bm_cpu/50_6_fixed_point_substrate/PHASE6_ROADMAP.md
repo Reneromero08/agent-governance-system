@@ -1,9 +1,9 @@
 # Phase 6 Roadmap
 
 **Role:** master chronological task ledger.  
-**Current head:** `PHASE6B_COHERENCE_REPAIR__COURSE_CORRECTION_ALIGNED`  
+**Current head:** `PHASE6B_COHERENCE_REPAIR_VERIFIED__CARRIER_WITNESS_PENDING`
 **Binding directive:** `14_noncollapse_frontier/COURSE_CORRECTION.md`  
-**Immediate gate:** SSH repair verification, then carrier-witness closure and L4B.5B0 human review.  
+**Immediate gate:** carrier-witness closure, then L4B.5B0 external human review.
 **Observability acquisition:** not authorized.
 
 ---
@@ -147,8 +147,10 @@ Status remains `READY_FOR_HUMAN_REVIEW`, `implementation_authorized=false`, `exe
 - [x] decompose complex response into `R_value` and `R_core`
 - [x] remove hardcoded pass controls
 - [x] invalidate the old residue interpretation
-- [ ] compile on the target toolchain
+- [x] compile on the target toolchain (`gcc 14.2.0`, `-march=amdfam10`)
 - [ ] execute/import physical artifact only under an authorized acquisition plan
+
+Hardware capture remains deferred because the target exposed no `k10temp` or other `hwmon` temperature input.
 
 ### `.holo` semantic integrity
 
@@ -158,7 +160,7 @@ Status remains `READY_FOR_HUMAN_REVIEW`, `implementation_authorized=false`, `exe
 - [x] add semantic forgery/tamper tests
 - [x] mark old L4A record schema as legacy
 - [x] reconcile schema version and semantic scope
-- [ ] run full C test/sanitizer matrix
+- [x] run full release, ASan/LSan/UBSan, and UBSan-only C matrix at `fbacd9ee0092dd2118d5f050592f8f0089852135`
 
 ### Review governance
 
@@ -167,7 +169,7 @@ Status remains `READY_FOR_HUMAN_REVIEW`, `implementation_authorized=false`, `exe
 - [x] move human review outside scientific design digest
 - [x] bind review to full SHA-256 artifact bytes
 - [x] keep review non-authorizing
-- [ ] execute final C regression suite
+- [x] execute final C regression suite
 - [ ] human accepts or rejects L4B.5B0 design
 
 ### Canonical repository gate
