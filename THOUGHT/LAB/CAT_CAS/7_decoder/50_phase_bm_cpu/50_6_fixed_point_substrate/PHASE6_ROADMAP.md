@@ -224,13 +224,20 @@ A successful software packet does not close the physical carrier witness.
 
 Before the carrier is used as a predecessor for physical state claims:
 
-- [ ] inspect and freeze completed route results
-- [ ] preserve raw I/Q windows and ring-period samples
-- [ ] preserve absolute TSC origin and window alignment
-- [ ] preserve sender schedule, workload identity, core identities, route topology, temperature, and frequency proxies
-- [ ] hash every raw artifact
-- [ ] make summaries regenerable from raw acquisition
+- [x] inspect and freeze completed route results
+- [x] preserve raw I/Q windows and ring-period samples
+- [x] preserve absolute TSC origin and window alignment
+- [x] preserve sender schedule, workload identity, core identities, route topology, temperature, and frequency proxies
+- [x] hash every raw artifact
+- [x] make summaries regenerable from raw acquisition
 - [ ] close strict per-route witness or explicitly narrow route scope
+
+Frozen T48 state: strict carrier witness `PARTIAL`; route `4:5` closure
+`FAILED` at T48 (1/6 seeds); raw provenance `COMPLETE`; silent/scramble
+controls `VALID`. Phase 6B.5A adjudicates the historical 6/6 versus current
+1/6 discrepancy as `HISTORICAL_RESULT_NOT_REPRODUCED`. The historical analyzer,
+codebook, and first 48 schedule labels match, but historical raw timing samples
+and binary binding are absent. No carrier closure is claimed.
 
 Allowed claim: reproducible transport of declared sender-owned mode/phase through the tested PDN channel.
 
