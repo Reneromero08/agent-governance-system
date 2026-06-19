@@ -16,7 +16,7 @@ elif [[ $# -gt 0 ]]; then
   exit 2
 fi
 
-mkdir -p "$OUT"
+mkdir -p "$OUT" "$L4B/results" "$CLASS_B/results"
 exec > >(tee "$OUT/verification.log") 2>&1
 
 printf 'PHASE6B_REPAIR_VERIFICATION\n'
@@ -69,7 +69,6 @@ if [[ $RUN_CLASS_B -eq 1 ]]; then
     echo '--run-class-b requires root for the controlled target run' >&2
     exit 3
   fi
-  mkdir -p "$CLASS_B/results"
   "$OUT/class_b_pdn_screen" \
     --N 256 \
     --a 125 \
@@ -94,7 +93,7 @@ done
 printf '\nARTIFACT_SHA256\n'
 find "$OUT" "$L4B/results" "$CLASS_B/results" \
   -maxdepth 1 -type f \( -name '*.json' -o -name '*.holo' -o -name '*.csv' -o -name '*.log' \) \
-  -print0 2>/dev/null | sort -z | xargs -0 -r sha256sum | tee "$OUT/artifact_sha256.txt"
+  -print0 | sort -z | xargs -0 -r sha256sum | tee "$OUT/artifact_sha256.txt"
 
 printf '\nFINAL_STATUS\n'
 printf 'release_tests=PASS\n'
