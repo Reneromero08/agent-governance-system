@@ -6,6 +6,8 @@
 **Physical acquisition authorized:** no  
 **Restoration authorized:** no
 
+Binding marker: Project-owner ratification: pending
+
 ## Reviewed bundle
 
 - sealed `l4b5b0_observability_operator_v1` design;
