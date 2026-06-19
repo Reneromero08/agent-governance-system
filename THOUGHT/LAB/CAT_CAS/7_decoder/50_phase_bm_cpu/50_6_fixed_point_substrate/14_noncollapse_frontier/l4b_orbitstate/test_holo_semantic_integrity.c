@@ -161,7 +161,12 @@ static void test_strict_reader(void) {
 
     replace_once(path, "\"crossed\": true", "\"crossed\": null");
     assert(holo_read_json_strict(&loaded, path) != 0);
-    puts("SERIALIZED_LIFECYCLE_TAMPERING_REJECTED_PASS");
+    puts("SERIALIZED_BOUNDARY_TAMPERING_REJECTED_PASS");
+
+    assert(holo_write_json(&object, path) == 0);
+    replace_once(path, "\"restored\": true", "\"restored\": null");
+    assert(holo_read_json_strict(&loaded, path) != 0);
+    puts("SERIALIZED_RESTORATION_TAMPERING_REJECTED_PASS");
 
     remove(path);
     holo_object_destroy(&object);
