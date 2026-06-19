@@ -1,9 +1,9 @@
 import CAPABILITY.TOOLS.utilities.ci_local_gate as ci_local_gate
 
 
-def test_status_entry_path_handles_renames_and_windows_separators():
-    assert ci_local_gate._status_entry_path("R  old.py -> new.py") == "new.py"
-    assert ci_local_gate._status_entry_path(r"?? folder\file.py") == "folder/file.py"
+def test_status_entry_paths_handles_renames_and_windows_separators():
+    assert ci_local_gate._status_entry_paths("R  old.py -> new.py") == ("old.py", "new.py")
+    assert ci_local_gate._status_entry_paths(r"?? folder\file.py") == ("folder/file.py",)
 
 
 def test_non_exempt_status_lines_include_untracked_and_ignore_thought():
@@ -18,6 +18,16 @@ def test_non_exempt_status_lines_include_untracked_and_ignore_thought():
         " M CAPABILITY/TOOLS/utilities/push_test_plan.py",
         "?? scratch.txt",
     ]
+
+
+def test_rename_is_not_exempt_when_only_destination_is_in_thought():
+    status = "R  CAPABILITY/old.py -> THOUGHT/LAB/old.py"
+    assert ci_local_gate._non_exempt_status_lines(status) == [status]
+
+
+def test_rename_is_exempt_when_both_paths_are_in_thought():
+    status = "R  THOUGHT/LAB/old.py -> THOUGHT/LAB/new.py"
+    assert ci_local_gate._non_exempt_status_lines(status) == []
 
 
 def test_ensure_clean_tree_fails_before_expensive_checks(monkeypatch, capsys):
