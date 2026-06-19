@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""Validate a pre-push ref set against a HEAD-bound verification receipt.
-
-Git's pre-push hook provides the refs that will actually be updated on stdin.
-This module keeps the policy testable and ensures a receipt authorizes the
-commit being introduced, not merely whichever branch happens to be checked out.
-"""
+"""Validate actual pre-push refs against a tested commit-and-base receipt."""
 from __future__ import annotations
 
 import argparse
@@ -13,6 +8,7 @@ import re
 import subprocess
 import sys
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 from typing import Callable, Sequence
 
@@ -40,6 +36,10 @@ class GuardDecision:
     reason: str
 
 
+def _valid_sha(value: str) -> bool:
+    return HEX40.fullmatch(value) is not None
+
+
 def parse_push_refs(text: str) -> tuple[PushRef, ...]:
     refs: list[PushRef] = []
     for line_number, raw_line in enumerate(text.splitlines(), start=1):
@@ -49,7 +49,10 @@ def parse_push_refs(text: str) -> tuple[PushRef, ...]:
         fields = line.split()
         if len(fields) != 4:
             raise ValueError(f"invalid pre-push ref line {line_number}: expected 4 fields")
-        refs.append(PushRef(*fields))
+        ref = PushRef(*fields)
+        if not _valid_sha(ref.local_sha) or not _valid_sha(ref.remote_sha):
+            raise ValueError(f"invalid pre-push ref line {line_number}: malformed SHA")
+        refs.append(ref)
     return tuple(refs)
 
 
@@ -76,6 +79,27 @@ def resolve_pushed_commit(ref: PushRef) -> str | None:
     return ref.local_sha
 
 
+def is_ancestor(ancestor_sha: str, descendant_sha: str) -> bool:
+    result = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", ancestor_sha, descendant_sha],
+        cwd=str(PROJECT_ROOT),
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    )
+    return result.returncode == 0
+
+
+def _valid_timestamp(value: object) -> bool:
+    if not isinstance(value, str) or not value:
+        return False
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return False
+    return parsed.tzinfo is not None
+
+
 def load_receipt(path: Path) -> dict | None:
     try:
         payload = json.loads(path.read_text(encoding="utf-8"))
@@ -85,13 +109,18 @@ def load_receipt(path: Path) -> dict | None:
         return None
 
     head = payload.get("head")
+    base_ref = payload.get("base_ref")
+    base_sha = payload.get("base_sha")
     plan_hash = payload.get("plan_hash")
     mode = payload.get("mode")
     suites = payload.get("suites")
-    timestamp = payload.get("timestamp")
     risk_groups = payload.get("risk_groups", [])
 
     if not isinstance(head, str) or HEX40.fullmatch(head) is None:
+        return None
+    if base_ref is not None and not isinstance(base_ref, str):
+        return None
+    if base_sha is not None and (not isinstance(base_sha, str) or HEX40.fullmatch(base_sha) is None):
         return None
     if not isinstance(plan_hash, str) or HEX64.fullmatch(plan_hash) is None:
         return None
@@ -99,10 +128,25 @@ def load_receipt(path: Path) -> dict | None:
         return None
     if not isinstance(suites, list) or not suites or not all(isinstance(item, str) and item for item in suites):
         return None
-    if not isinstance(timestamp, str) or not timestamp:
+    if len(suites) != len(set(suites)):
         return None
     if not isinstance(risk_groups, list) or not all(isinstance(item, str) and item for item in risk_groups):
         return None
+    if len(risk_groups) != len(set(risk_groups)):
+        return None
+    if not _valid_timestamp(payload.get("timestamp")):
+        return None
+
+    suite_set = set(suites)
+    risk_set = set(risk_groups)
+    if mode == "full":
+        if "core" not in suite_set or "exhaustive" in suite_set:
+            return None
+        if not risk_set.issubset(suite_set - {"core"}):
+            return None
+    elif suites != ["exhaustive"] or risk_groups:
+        return None
+
     return payload
 
 
@@ -113,17 +157,19 @@ def load_receipt_head(path: Path) -> str | None:
 
 def validate_push(
     refs: Sequence[PushRef],
-    receipt_head: str | None,
+    receipt: dict | None,
     *,
     resolver: Callable[[PushRef], str | None] = resolve_pushed_commit,
+    ancestor_checker: Callable[[str, str], bool] = is_ancestor,
 ) -> GuardDecision:
     if not introduces_commits(refs):
         return GuardDecision(True, "no commits are being introduced")
 
-    if not receipt_head:
+    if receipt is None:
         return GuardDecision(False, "verification receipt is missing or invalid")
 
     commits: set[str] = set()
+    remote_bases: set[str] = set()
     for ref in refs:
         if ref.is_deletion:
             continue
@@ -131,6 +177,8 @@ def validate_push(
         if not commit:
             return GuardDecision(False, f"cannot resolve pushed commit for {ref.local_ref}")
         commits.add(commit)
+        if ref.remote_sha != ZERO_SHA:
+            remote_bases.add(ref.remote_sha)
 
     if len(commits) != 1:
         ordered = ", ".join(sorted(commits))
@@ -138,14 +186,38 @@ def validate_push(
             False,
             f"push contains multiple distinct commit tips ({ordered}); push them separately",
         )
-
-    pushed_head = next(iter(commits))
-    if pushed_head != receipt_head:
+    if len(remote_bases) > 1:
+        ordered = ", ".join(sorted(remote_bases))
         return GuardDecision(
             False,
-            f"receipt authorizes {receipt_head}, but the pushed commit is {pushed_head}",
+            f"push updates refs with multiple remote bases ({ordered}); push them separately",
         )
-    return GuardDecision(True, f"receipt authorizes pushed commit {pushed_head}")
+
+    pushed_head = next(iter(commits))
+    if pushed_head != receipt["head"]:
+        return GuardDecision(
+            False,
+            f"receipt authorizes {receipt['head']}, but the pushed commit is {pushed_head}",
+        )
+
+    tested_base = receipt.get("base_sha")
+    if remote_bases:
+        actual_base = next(iter(remote_bases))
+        if tested_base != actual_base:
+            return GuardDecision(
+                False,
+                f"receipt tested base {tested_base or 'none'}, but remote is at {actual_base}",
+            )
+    elif tested_base is not None and not ancestor_checker(tested_base, pushed_head):
+        return GuardDecision(
+            False,
+            f"tested base {tested_base} is not an ancestor of new ref tip {pushed_head}",
+        )
+
+    return GuardDecision(
+        True,
+        f"receipt authorizes pushed commit {pushed_head} from tested base {tested_base or 'initial-history'}",
+    )
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -160,14 +232,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"[PRE-PUSH] ERROR: {exc}", file=sys.stderr)
         return 1
 
-    receipt_head = load_receipt_head(args.token_file)
-    decision = validate_push(refs, receipt_head)
+    receipt = load_receipt(args.token_file)
+    decision = validate_push(refs, receipt)
     stream = sys.stdout if decision.allowed else sys.stderr
     print(f"[PRE-PUSH] {decision.reason}", file=stream)
 
     if decision.allowed:
         return 0
-    return 2 if receipt_head is None else 1
+    return 2 if receipt is None else 1
 
 
 if __name__ == "__main__":
