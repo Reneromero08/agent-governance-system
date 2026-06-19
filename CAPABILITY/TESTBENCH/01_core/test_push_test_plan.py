@@ -3,7 +3,7 @@ from pathlib import Path
 import CAPABILITY.TOOLS.utilities.push_test_plan as push_test_plan
 from CAPABILITY.TOOLS.utilities.push_test_plan import (
     EMBEDDING_TESTS,
-    TestSuite,
+    TestSuite as Suite,
     build_plan,
     normalize_paths,
     plan_payload,
@@ -73,7 +73,7 @@ def test_repo_python_prefers_repository_virtualenv(tmp_path: Path, monkeypatch):
 def test_pytest_command_uses_selected_interpreter(monkeypatch):
     monkeypatch.setattr(push_test_plan, "_interpreter_has_xdist", lambda _: False)
     command = pytest_command(
-        TestSuite("core", ("CAPABILITY/TESTBENCH",)),
+        Suite("core", ("CAPABILITY/TESTBENCH",)),
         workers=4,
         python_executable="/repo/.venv/python",
     )
