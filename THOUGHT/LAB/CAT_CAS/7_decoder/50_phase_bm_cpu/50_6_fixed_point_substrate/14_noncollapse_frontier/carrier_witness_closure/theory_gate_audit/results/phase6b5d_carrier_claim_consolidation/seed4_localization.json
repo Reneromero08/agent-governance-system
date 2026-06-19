@@ -6,7 +6,7 @@
   "claim_ceiling": "BOUNDED_CARRIER_CLAIM_CONSOLIDATION_ONLY",
   "classification": "SCALAR_GAIN_OUTLIER_WITH_RELATIONAL_INVARIANTS_PRESERVED",
   "conclusion": "Seed 4 does not exhibit relational carrier collapse. Its excess is in absolute scalar-model fit quality; global phase removal explains little of that residual, and time localization is reported explicitly rather than assumed.",
-  "generated_utc": "2026-06-19T20:55:35+00:00",
+  "generated_utc": "2026-06-19T20:57:51+00:00",
   "heldout_residual_excess_ratio": 2.4381972406935017,
   "heldout_residual_median": 0.7767380350749081,
   "median_phase_removable_residual": 0.0019485268981646042,
