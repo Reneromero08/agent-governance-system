@@ -9,27 +9,27 @@
     "old_gate_scalar_calibration_can_change_result": false,
     "seed4_localization": "SCALAR_GAIN_OUTLIER_WITH_RELATIONAL_INVARIANTS_PRESERVED"
   },
-  "generated_utc": "2026-06-19T20:52:43+00:00",
+  "generated_utc": "2026-06-19T20:55:35+00:00",
   "official_closure_status_unchanged": "PARTIAL",
   "outputs": {
     "carrier_claim_freeze.json": {
-      "sha256": "be900b68cacbead4a6e989e9e5ebb719dca1f559ce6454e81e3bfae0e1ba8ab2",
+      "sha256": "836d395950541f3a315ac7f2e0e6153099420ce182b9c893efdc301517c458ac",
       "size": 2211
     },
     "cross_session_generalization.json": {
-      "sha256": "4fe98b03040895896ccd132f518304e3272bbcd43d142e1f6d1d5d43ba62c6cd",
+      "sha256": "2ef8260e6b1f8d35ddd0b55e8a27b462b14c73017b79e59375ddc3b942b00cae",
       "size": 11154
     },
     "old_gate_chart_invariance.json": {
-      "sha256": "6128225c2e876bdd143e28f8a38453cffa6dc01c1e97cd8934b773c83cdd9866",
+      "sha256": "25f65435fbb13b2831d1f042d056d8765383c9a6c82984010cd932c1423524bb",
       "size": 6589
     },
     "residual_structure.json": {
-      "sha256": "6d2cc2e76b25f5e5aab76f38f66194128030d06c8875dd126727dcf6c076487f",
+      "sha256": "20fba017bde9b5662915bb3e6722a1c2def5678d6029cb0bf9593dfad3a87d29",
       "size": 38556
     },
     "seed4_localization.json": {
-      "sha256": "75f035470b149633955b93d6a5fcc6535df56ea923845c0f8390838644edc76d",
+      "sha256": "4cb1fdb36c6c8f1b7bd8283232513e0223d3f00bbabdc510ef8f3bb4148e78aa",
       "size": 2556
     }
   },

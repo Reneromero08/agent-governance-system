@@ -20,7 +20,7 @@
   },
   "claim_ceiling": "BOUNDED_CARRIER_CLAIM_CONSOLIDATION_ONLY",
   "conclusion": "The C0 receiver chart cannot rescue the old normalized gates. Their failure is not caused by per-run complex scalar gain; it lies in residual structure, sparse threshold geometry, or the semantics of the old gate.",
-  "generated_utc": "2026-06-19T20:52:43+00:00",
+  "generated_utc": "2026-06-19T20:55:35+00:00",
   "historical_gate_source_bound": true,
   "historical_partial_status_unchanged": true,
   "official_closure_status_unchanged": "PARTIAL",
