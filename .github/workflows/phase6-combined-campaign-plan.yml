@@ -5,7 +5,8 @@ on:
     paths:
       - ".github/workflows/phase6-combined-campaign-plan.yml"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/**"
-      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/gate_r/PROJECT_OWNER_RATIFICATION.json"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/gate_r/COMBINED_CAMPAIGN_BINDING.json"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/gate_r/verify_combined_plan_binding.py"
   workflow_dispatch:
 
 permissions:
@@ -14,16 +15,15 @@ permissions:
 jobs:
   plan:
     runs-on: ubuntu-24.04
-    env:
-      SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Test authorized package
+      - name: Test package
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign
         run: |
           python verify_campaign_authorization.py
@@ -31,44 +31,11 @@ jobs:
           python test_session_schedule.py
           python test_session_determinism.py
           python test_orchestrator.py
-          python -m py_compile campaign_orders.py campaign_plan.py generate_campaign_plan.py compile_session_schedule.py catcas_preflight.py run_combined_campaign.py verify_campaign_authorization.py test_campaign_plan.py test_session_schedule.py test_session_determinism.py test_orchestrator.py
-      - name: Generate deterministic plan twice
+      - name: Verify canonical binding
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier
-        run: |
-          test "${SOURCE_SHA}" = "$(git rev-parse HEAD)"
-          rm -rf "$RUNNER_TEMP/combined_plan" "$RUNNER_TEMP/combined_plan_repeat"
-          RATIFICATION=gate_r/PROJECT_OWNER_RATIFICATION.json
-          python combined_observability_campaign/generate_campaign_plan.py run \
-            --source-commit "${SOURCE_SHA}" --ratification "$RATIFICATION" \
-            --output "$RUNNER_TEMP/combined_plan"
-          python combined_observability_campaign/generate_campaign_plan.py run \
-            --source-commit "${SOURCE_SHA}" --ratification "$RATIFICATION" \
-            --output "$RUNNER_TEMP/combined_plan_repeat"
-          diff -ru "$RUNNER_TEMP/combined_plan" "$RUNNER_TEMP/combined_plan_repeat"
-          python combined_observability_campaign/generate_campaign_plan.py verify "$RUNNER_TEMP/combined_plan"
-          sha256sum "$RUNNER_TEMP/combined_plan"/*.json
-      - name: Compile all session schedules
-        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier
-        run: |
-          rm -rf "$RUNNER_TEMP/sessions" "$RUNNER_TEMP/session_repeat"
-          mkdir -p "$RUNNER_TEMP/sessions"
-          for route in v4s5 v2s3; do
-            for seed in 0 1 2 3 4 5; do
-              sid="${route}_seed${seed}"
-              python combined_observability_campaign/compile_session_schedule.py \
-                "$RUNNER_TEMP/combined_plan/campaign_plan.json" "$sid" \
-                --output "$RUNNER_TEMP/sessions/$sid"
-            done
-          done
-          python combined_observability_campaign/compile_session_schedule.py \
-            "$RUNNER_TEMP/combined_plan/campaign_plan.json" v4s5_seed4 \
-            --output "$RUNNER_TEMP/session_repeat"
-          diff -ru "$RUNNER_TEMP/sessions/v4s5_seed4" "$RUNNER_TEMP/session_repeat"
-          find "$RUNNER_TEMP/sessions" -name session_manifest.json -print0 | sort -z | xargs -0 sha256sum
-      - name: Upload plan
-        uses: actions/upload-artifact@v4
+        run: python gate_r/verify_combined_plan_binding.py --repo-root "$GITHUB_WORKSPACE" --output "$RUNNER_TEMP/combined_plan"
+      - uses: actions/upload-artifact@v4
         with:
           name: phase6-combined-campaign-plan-${{ github.run_id }}
           path: ${{ runner.temp }}/combined_plan
           if-no-files-found: error
-          retention-days: 14
