@@ -1,0 +1,335 @@
+{
+  "analysis_id": "phase6b5d_carrier_claim_consolidation_v1",
+  "buckets": {
+    "cross_route_cross_seed": {
+      "all_record_positive_fraction_ge_0_95": true,
+      "median_actual_mode_margin": {
+        "count": 60,
+        "max": 1.1781015703359725,
+        "mean": 0.9950350592625689,
+        "median": 1.0684758731488853,
+        "min": 0.5310165154746418,
+        "q05": 0.5410137575057626,
+        "q95": 1.1531443843443425
+      },
+      "median_actual_residual": {
+        "count": 60,
+        "max": 0.8218872626838436,
+        "mean": 0.41738756818748546,
+        "median": 0.38656674563392696,
+        "min": 0.3132008689308724,
+        "q05": 0.31561424802533034,
+        "q95": 0.8054343878471691
+      },
+      "positive_margin_fraction": {
+        "count": 60,
+        "max": 1.0,
+        "mean": 0.998263888888889,
+        "median": 1.0,
+        "min": 0.9791666666666666,
+        "q05": 0.9791666666666666,
+        "q95": 1.0
+      },
+      "records": 60
+    },
+    "cross_route_same_seed": {
+      "all_record_positive_fraction_ge_0_95": true,
+      "median_actual_mode_margin": {
+        "count": 12,
+        "max": 1.1660892283555069,
+        "mean": 0.9977598489226954,
+        "median": 1.085435862008489,
+        "min": 0.5099748958137502,
+        "q05": 0.5247541771151185,
+        "q95": 1.1546416303545928
+      },
+      "median_actual_residual": {
+        "count": 12,
+        "max": 0.8053770784460292,
+        "mean": 0.41467064401674575,
+        "median": 0.3739981670278517,
+        "min": 0.31426343191567674,
+        "q05": 0.3170807758379951,
+        "q95": 0.7084916957470198
+      },
+      "positive_margin_fraction": {
+        "count": 12,
+        "max": 1.0,
+        "mean": 0.9982638888888888,
+        "median": 1.0,
+        "min": 0.9791666666666666,
+        "q05": 0.990625,
+        "q95": 1.0
+      },
+      "records": 12
+    },
+    "same_route_cross_seed": {
+      "all_record_positive_fraction_ge_0_95": true,
+      "median_actual_mode_margin": {
+        "count": 60,
+        "max": 1.1831674356007547,
+        "mean": 0.9899491502472145,
+        "median": 1.0489969547457918,
+        "min": 0.5404836576063397,
+        "q05": 0.5439264402345501,
+        "q95": 1.1686767611513211
+      },
+      "median_actual_residual": {
+        "count": 60,
+        "max": 0.8263230998055637,
+        "mean": 0.42086813719360566,
+        "median": 0.38731454784409536,
+        "min": 0.31364067862174183,
+        "q05": 0.3154161093473806,
+        "q95": 0.8133019457443105
+      },
+      "positive_margin_fraction": {
+        "count": 60,
+        "max": 1.0,
+        "mean": 0.998263888888889,
+        "median": 1.0,
+        "min": 0.9791666666666666,
+        "q05": 0.9791666666666666,
+        "q95": 1.0
+      },
+      "records": 60
+    }
+  },
+  "chart_alpha_by_route": {
+    "v2s3": {
+      "magnitude": {
+        "count": 6,
+        "max": 0.050636562690490695,
+        "mean": 0.04879598324176987,
+        "median": 0.04872013535493909,
+        "min": 0.04713413722143974,
+        "q05": 0.047317299408125686,
+        "q95": 0.050401957733024784
+      },
+      "phase": {
+        "count": 6,
+        "max": -1.2812014741169766,
+        "mean": -1.2993658751748385,
+        "median": -1.3027151468633016,
+        "min": -1.318900623732647,
+        "q05": -1.3161421479228288,
+        "q95": -1.2816001403325903
+      },
+      "runs": [
+        {
+          "alpha_imag": -0.04812975279403379,
+          "alpha_magnitude": 0.049698142860627056,
+          "alpha_phase": -1.318900623732647,
+          "alpha_real": 0.012386779233541416,
+          "chart_id": "C0_scalar",
+          "family": "scalar",
+          "is_scalar_identity": true,
+          "max_diagonal_deviation": 0.0,
+          "max_off_diagonal_absolute": 0.0,
+          "nonzero": true,
+          "route": "v2s3",
+          "run_id": "v2s3_matrix_seed0",
+          "seed": 0
+        },
+        {
+          "alpha_imag": -0.04613237271768068,
+          "alpha_magnitude": 0.04786678596818353,
+          "alpha_phase": -1.3007773339416007,
+          "alpha_real": 0.012768452778660514,
+          "chart_id": "C0_scalar",
+          "family": "scalar",
+          "is_scalar_identity": true,
+          "max_diagonal_deviation": 0.0,
+          "max_off_diagonal_absolute": 0.0,
+          "nonzero": true,
+          "route": "v2s3",
+          "run_id": "v2s3_matrix_seed1",
+          "seed": 1
+        },
+        {
+          "alpha_imag": -0.045171455233745814,
+          "alpha_magnitude": 0.04713413722143974,
+          "alpha_phase": -1.2812014741169766,
+          "alpha_real": 0.013459811427921603,
+          "chart_id": "C0_scalar",
+          "family": "scalar",
+          "is_scalar_identity": true,
+          "max_diagonal_deviation": 6.938893903907228e-18,
+          "max_off_diagonal_absolute": 0.0,
+          "nonzero": true,
+          "route": "v2s3",
+          "run_id": "v2s3_matrix_seed2",
+          "seed": 2
+        },
+        {
+          "alpha_imag": -0.048896320108681904,
+          "alpha_magnitude": 0.050636562690490695,
+          "alpha_phase": -1.3078667204933738,
+          "alpha_real": 0.013160978722621822,
+          "chart_id": "C0_scalar",
+          "family": "scalar",
+          "is_scalar_identity": true,
+          "max_diagonal_deviation": 7.152448122690996e-18,
+          "max_off_diagonal_absolute": 0.0,
+          "nonzero": true,
+          "route": "v2s3",
+          "run_id": "v2s3_matrix_seed3",
+          "seed": 3
+        },
+        {
+          "alpha_imag": -0.046594875680418646,
+          "alpha_magnitude": 0.04859637523644952,
+          "alpha_phase": -1.2827961389794313,
+          "alpha_real": 0.01380308829386144,
+          "chart_id": "C0_scalar",
+          "family": "scalar",
+          "is_scalar_identity": true,
+          "max_diagonal_deviation": 0.0,
+          "max_off_diagonal_absolute": 0.0,
+          "nonzero": true,
+          "route": "v2s3",
+          "run_id": "v2s3_matrix_seed4",
+          "seed": 4
+        },
+        {
+          "alpha_imag": -0.0471242197107725,
+          "alpha_magnitude": 0.04884389547342866,
+          "alpha_phase": -1.3046529597850023,
+          "alpha_real": 0.012846557580537512,
+          "chart_id": "C0_scalar",
+          "family": "scalar",
+          "is_scalar_identity": true,
+          "max_diagonal_deviation": 1.734723475976807e-18,
+          "max_off_diagonal_absolute": 0.0,
+          "nonzero": true,
+          "route": "v2s3",
+          "run_id": "v2s3_matrix_seed5",
+          "seed": 5
+        }
+      ]
+    },
+    "v4s5": {
+      "magnitude": {
+        "count": 6,
+        "max": 0.051028815516229786,
+        "mean": 0.04593459126453577,
+        "median": 0.049600131131889214,
+        "min": 0.02585115031517488,
+        "q05": 0.031666545513856864,
+        "q95": 0.05087525873270452
+      },
+      "phase": {
+        "count": 6,
+        "max": -1.2212540094060564,
+        "mean": -1.299682029127464,
+        "median": -1.3137889738934065,
+        "min": -1.3259331420911975,
+        "q05": -1.3243946040231105,
+        "q95": -1.241827528470009
+      },
+      "runs": [
+        {
+          "alpha_imag": -0.04784590112963402,
+          "alpha_magnitude": 0.04931700259399225,
+          "alpha_phase": -1.3259331420911975,
+          "alpha_real": 0.011955604959562877,
+          "chart_id": "C0_scalar",
+          "family": "scalar",
+          "is_scalar_identity": true,
+          "max_diagonal_deviation": 0.0,
+          "max_off_diagonal_absolute": 0.0,
+          "nonzero": true,
+          "route": "v4s5",
+          "run_id": "v4s5_matrix_seed0",
+          "seed": 0
+        },
+        {
+          "alpha_imag": -0.04930067667750108,
+          "alpha_magnitude": 0.051028815516229786,
+          "alpha_phase": -1.309802701294059,
+          "alpha_real": 0.013167508956895191,
+          "chart_id": "C0_scalar",
+          "family": "scalar",
+          "is_scalar_identity": true,
+          "max_diagonal_deviation": 7.152448122690996e-18,
+          "max_off_diagonal_absolute": 0.0,
+          "nonzero": true,
+          "route": "v4s5",
+          "run_id": "v4s5_matrix_seed1",
+          "seed": 1
+        },
+        {
+          "alpha_imag": -0.04831992964314143,
+          "alpha_magnitude": 0.04988325966978617,
+          "alpha_phase": -1.3197789898188497,
+          "alpha_real": 0.012390479997368047,
+          "chart_id": "C0_scalar",
+          "family": "scalar",
+          "is_scalar_identity": true,
+          "max_diagonal_deviation": 0.0,
+          "max_off_diagonal_absolute": 0.0,
+          "nonzero": true,
+          "route": "v4s5",
+          "run_id": "v4s5_matrix_seed2",
+          "seed": 2
+        },
+        {
+          "alpha_imag": -0.048624932359114005,
+          "alpha_magnitude": 0.050414588382128735,
+          "alpha_phase": -1.303548085661867,
+          "alpha_real": 0.013313402075016629,
+          "chart_id": "C0_scalar",
+          "family": "scalar",
+          "is_scalar_identity": true,
+          "max_diagonal_deviation": 6.938893903907228e-18,
+          "max_off_diagonal_absolute": 0.0,
+          "nonzero": true,
+          "route": "v4s5",
+          "run_id": "v4s5_matrix_seed3",
+          "seed": 3
+        },
+        {
+          "alpha_imag": -0.02428791969547284,
+          "alpha_magnitude": 0.02585115031517488,
+          "alpha_phase": -1.2212540094060564,
+          "alpha_real": 0.008853187532410503,
+          "chart_id": "C0_scalar",
+          "family": "scalar",
+          "is_scalar_identity": true,
+          "max_diagonal_deviation": 0.0,
+          "max_off_diagonal_absolute": 0.0,
+          "nonzero": true,
+          "route": "v4s5",
+          "run_id": "v4s5_matrix_seed4",
+          "seed": 4
+        },
+        {
+          "alpha_imag": -0.047549009943392485,
+          "alpha_magnitude": 0.049112731109902816,
+          "alpha_phase": -1.3177752464927541,
+          "alpha_real": 0.012294389390155919,
+          "chart_id": "C0_scalar",
+          "family": "scalar",
+          "is_scalar_identity": true,
+          "max_diagonal_deviation": 7.152448122690996e-18,
+          "max_off_diagonal_absolute": 0.0,
+          "nonzero": true,
+          "route": "v4s5",
+          "run_id": "v4s5_matrix_seed5",
+          "seed": 5
+        }
+      ]
+    }
+  },
+  "claim_ceiling": "BOUNDED_CARRIER_CLAIM_CONSOLIDATION_ONLY",
+  "generated_utc": "2026-06-19T20:52:43+00:00",
+  "interpretation": "Held-out relational ordering generalizes across seeds and routes even when a chart fitted in another session is used. Session-specific alpha changes absolute residual scale more than mode ordering. This is not complete session-independent operator identification.",
+  "official_closure_status_unchanged": "PARTIAL",
+  "phase6b5c_campaign_id": "phase6b5_t48_d32b1bed_20260619",
+  "phase6b5c_campaign_manifest_sha256": "cbcd2a19d6dd3bc478244f77888aa87eb043003a7685caa17ff13fe4d47e6487",
+  "phase6b5c_manifest_sha256": "93ccb5fb5d9cbc96c25c52797ea0dd0693810997a369e714cfe57109af35ff2b",
+  "relational_generalization_supported": true,
+  "schema_id": "CAT_CAS_PHASE6B5D_CROSS_SESSION_GENERALIZATION_V1",
+  "schema_version": "1.0.0",
+  "source_result_directory": "phase6b5c_t48_d32b1bed_20260619"
+}

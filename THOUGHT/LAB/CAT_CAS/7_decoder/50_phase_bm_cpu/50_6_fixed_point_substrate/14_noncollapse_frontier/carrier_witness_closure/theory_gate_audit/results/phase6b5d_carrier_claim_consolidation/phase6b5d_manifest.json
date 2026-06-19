@@ -1,0 +1,42 @@
+{
+  "analysis_id": "phase6b5d_carrier_claim_consolidation_v1",
+  "claim_ceiling": "BOUNDED_CARRIER_CLAIM_CONSOLIDATION_ONLY",
+  "decision": {
+    "carrier_claim_status": "FROZEN_PENDING_GATE_R",
+    "cross_session_relational_generalization": true,
+    "dominant_compact_residual_factor": "seed",
+    "gate_r_ready": true,
+    "old_gate_scalar_calibration_can_change_result": false,
+    "seed4_localization": "SCALAR_GAIN_OUTLIER_WITH_RELATIONAL_INVARIANTS_PRESERVED"
+  },
+  "generated_utc": "2026-06-19T20:52:43+00:00",
+  "official_closure_status_unchanged": "PARTIAL",
+  "outputs": {
+    "carrier_claim_freeze.json": {
+      "sha256": "be900b68cacbead4a6e989e9e5ebb719dca1f559ce6454e81e3bfae0e1ba8ab2",
+      "size": 2211
+    },
+    "cross_session_generalization.json": {
+      "sha256": "4fe98b03040895896ccd132f518304e3272bbcd43d142e1f6d1d5d43ba62c6cd",
+      "size": 11154
+    },
+    "old_gate_chart_invariance.json": {
+      "sha256": "6128225c2e876bdd143e28f8a38453cffa6dc01c1e97cd8934b773c83cdd9866",
+      "size": 6589
+    },
+    "residual_structure.json": {
+      "sha256": "6d2cc2e76b25f5e5aab76f38f66194128030d06c8875dd126727dcf6c076487f",
+      "size": 38556
+    },
+    "seed4_localization.json": {
+      "sha256": "75f035470b149633955b93d6a5fcc6535df56ea923845c0f8390838644edc76d",
+      "size": 2556
+    }
+  },
+  "phase6b5c_campaign_id": "phase6b5_t48_d32b1bed_20260619",
+  "phase6b5c_campaign_manifest_sha256": "cbcd2a19d6dd3bc478244f77888aa87eb043003a7685caa17ff13fe4d47e6487",
+  "phase6b5c_manifest_sha256": "93ccb5fb5d9cbc96c25c52797ea0dd0693810997a369e714cfe57109af35ff2b",
+  "schema_id": "CAT_CAS_PHASE6B5D_CONSOLIDATION_MANIFEST_V1",
+  "schema_version": "1.0.0",
+  "source_result_directory": "phase6b5c_t48_d32b1bed_20260619"
+}
