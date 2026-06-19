@@ -1,0 +1,29 @@
+name: Pusher Source Export
+
+on:
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: pusher-source-export-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pusher-repair-sources-${{ github.run_id }}
+          retention-days: 1
+          path: |
+            CAPABILITY/MCP/validation.py
+            CAPABILITY/PRIMITIVES/write_firewall.py
+            CAPABILITY/PRIMITIVES/repo_digest.py
+            CAPABILITY/TESTBENCH/mcp-capability-tests/test_capability_pins.py
+            CAPABILITY/TESTBENCH/mcp-capability-tests/test_capability_revokes.py
+            CAPABILITY/TESTBENCH/cassette_network/conftest.py
+            CAPABILITY/TESTBENCH/cassette_network/compression/test_compression_proof.py
+            CAPABILITY/TESTBENCH/cassette_network/compression/test_speed_benchmarks.py
+            CAPABILITY/TESTBENCH/cassette_network/ground_truth/test_retrieval_accuracy.py
