@@ -1,7 +1,7 @@
 # Phase 6 Navigation
 
 **Role:** canonical entry point for the Phase 6 directory.  
-**Current state:** `PHASE6B_THEORY_GATE_AUDIT_COMPLETE__TRANSFER_ANALYSIS_NEXT`  
+**Current state:** `PHASE6B5C_TRANSFER_EQUIVARIANCE_SUPPORTED__GATE_R_NEXT`
 **Active directive:** `14_noncollapse_frontier/COURSE_CORRECTION.md` plus `14_noncollapse_frontier/COURSE_CORRECTION_ADDENDUM_2026-06-19.md`  
 **Active roadmap:** `PHASE6_ROADMAP.md`
 
@@ -63,7 +63,7 @@ The current addendum blocks blind T48/T300 repetition until the retained raw fie
 | 11 | `pdn_catalytic_tape` | Simulation/hardware-gap analysis | Complete |
 | 12 | `chiral_lane_frontier` | Phase 6A public lane boundary | Closed |
 | 13 | `substrate_frontier` | Tape/fixed-point warmup and L4 rejection | Historical/corrected |
-| 14 | `noncollapse_frontier` | Active Phase 6B architecture and physical ladder | Active; Phase 6B.5C next |
+| 14 | `noncollapse_frontier` | Active Phase 6B architecture and physical ladder | Phase 6B.5C complete; Gate R next |
 
 ---
 
@@ -99,8 +99,8 @@ The current addendum blocks blind T48/T300 repetition until the retained raw fie
 | L4B.5B0 observability/operator design | Sealed design; external review pending; implementation unauthorized |
 | Carrier raw provenance | Complete for frozen T48 campaign |
 | Carrier theory-to-gate audit | Complete |
-| Phase 6B.5C transfer-aware raw analysis | Immediate gate; not yet executed |
-| Carrier claim/scope freeze | Pending Phase 6B.5C |
+| Phase 6B.5C transfer-aware raw analysis | Complete: `TRANSFER_EQUIVARIANCE_SUPPORTED` |
+| Carrier claim/scope freeze | Complete at derived scalar-chart claim ceiling |
 | L4B.5B0 human review | Required after carrier scope is frozen or narrowed |
 | Observability acquisition/operator identification | Not authorized |
 | Physical restoration | Not authorized |
@@ -116,8 +116,8 @@ The active authority is the base course correction plus its 2026-06-19 addendum.
 1. **Repair verification** — complete.
 2. **Raw carrier witness** — complete structurally; official strict conjunction remains `PARTIAL`.
 3. **Theory-to-gate audit** — complete; separated carrier transport from ideal sender-chart fidelity and exposed seven-gate/nine-gate namespace drift.
-4. **Phase 6B.5C transfer-aware raw analysis** — estimate route/session charts from calibration-only rows; test held-out equivariance, execution over declaration, phase action, permutation covariance, route conjugacy, ordered path, and seed 4.
-5. **Carrier scope freeze** — freeze or explicitly narrow the exact channel-level claim and select the next physical control from the unresolved mechanism.
+4. **Phase 6B.5C transfer-aware raw analysis** — complete; all relations survive a minimal C0 scalar chart, controls remain null, and seed 4 is a chart failure.
+5. **Carrier scope freeze** — complete at the derived transfer-aware claim ceiling; reversed/randomized tone order is the proposed next physical control.
 6. **L4B.5B0 human review** — external SHA-256-bound, non-authorizing review of the observability/operator contract.
 7. **Physical observability/operator identification** — determine a minimal measured state and held-out predictive operator or formally reject the instrumentation boundary.
 8. **Physical closure/restoration ladder** — claim only the exact achieved tier, from bytes through observable equivalence and possible holonomy.
@@ -162,7 +162,9 @@ T300 lacks: retained raw timing evidence and exact binary binding.
 T48 proves: raw acquisition provenance and raw-to-I/Q reconstruction are complete;
            phase transport is strong; execution-over-declaration is strong;
            silent and scramble controls are valid nulls.
-T48 does not prove: stable ideal sender-basis fidelity, identified route/session transfer,
+T48 transfer analysis supports: held-out mode/phase/permutation relations after a
+           calibration-only minimal scalar complex receiver chart.
+T48 does not prove: a complete identified route/session operator,
                     physical HoloGeometry, restoration, orientation, or crossing.
 
 .holo proves: software relational geometry, serialized path memory, boundary-gated invariant extraction.
@@ -173,12 +175,6 @@ T48 does not prove: stable ideal sender-basis fidelity, identified route/session
 
 ## Next execution boundary
 
-No SSH acquisition is the immediate task.
-
-The next implementation must execute the frozen raw-only contract:
-
-```text
-14_noncollapse_frontier/carrier_witness_closure/theory_gate_audit/NEXT_ANALYSIS_CONTRACT.md
-```
-
-Only its result may authorize or design the next physical control. PR #9 remains draft until this analysis and the project-owner integration decision are complete.
+No physical acquisition is authorized. The next gate is the external, SHA-bound,
+non-authorizing L4B.5B0 human review plus the project-owner decision on the
+proposed reversed/randomized tone-order control. PR #9 remains draft.

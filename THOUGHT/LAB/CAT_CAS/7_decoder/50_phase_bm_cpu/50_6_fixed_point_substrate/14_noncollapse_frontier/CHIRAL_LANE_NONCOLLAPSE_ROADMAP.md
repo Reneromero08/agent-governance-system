@@ -1,9 +1,9 @@
 # Phase 6B Non-Collapse Frontier Roadmap
 
-**Status:** `THEORY_GATE_AUDIT_COMPLETE__TRANSFER_ANALYSIS_NEXT`  
+**Status:** `TRANSFER_EQUIVARIANCE_SUPPORTED__GATE_R_NEXT`
 **Binding directive:** `COURSE_CORRECTION.md` plus `COURSE_CORRECTION_ADDENDUM_2026-06-19.md`  
-**Immediate gate:** Phase 6B.5C transfer-aware analysis of retained raw evidence  
-**Next physical gate:** selected only after Phase 6B.5C identifies the unresolved mechanism  
+**Immediate gate:** Gate R external review and project-owner integration decision
+**Next physical control:** reversed/randomized tone order, proposed but unauthorized
 **Observability implementation authorization:** false
 
 **THE ALGORITHM IS DEAD.** The unresolved relation is the object; scalar traversal is local and subordinate.
@@ -200,7 +200,7 @@ analyzer nine-gate          0/6           2/6
 
 ### Phase 6B.5C — Transfer-aware carrier geometry analysis
 
-**Immediate gate. No new physical acquisition.**
+**Complete. No new physical acquisition was performed.**
 
 Binding contract:
 
@@ -208,15 +208,18 @@ Binding contract:
 carrier_witness_closure/theory_gate_audit/NEXT_ANALYSIS_CONTRACT.md
 ```
 
-- [ ] estimate route/session receiver charts from preamble and even-real calibration rows only
-- [ ] evaluate odd real and wrong rows held out
-- [ ] test actual-execution fit against declared decoy metadata
-- [ ] test phase equivariance and loop closure
-- [ ] test exact pseudo-permutation covariance
-- [ ] test route conjugacy/correspondence
-- [ ] analyze ordered-window path and fixed-order confounding
-- [ ] adjudicate route `4:5`, seed `4`
-- [ ] bind outputs to campaign/raw/source hashes and deterministic null seeds
+- [x] estimate receiver charts from preamble and even-real calibration rows only
+- [x] evaluate odd real and wrong rows held out
+- [x] test actual-execution fit against declared decoy metadata
+- [x] test phase equivariance and loop closure
+- [x] test exact pseudo-permutation covariance
+- [x] test route conjugacy/correspondence diagnostics
+- [x] analyze ordered-window path and fixed-order confounding
+- [x] classify route `4:5`, seed `4` as `CHART_FAILURE`
+- [x] bind outputs to campaign/raw/source hashes and deterministic null seeds
+
+Result: `TRANSFER_EQUIVARIANCE_SUPPORTED`; C0 scalar is selected for all runs,
+controls remain null, and strict closure remains `PARTIAL`.
 
 The analysis preserves the complex field and ordered path. It may not replace the object with a scalar candidate winner.
 
@@ -224,9 +227,9 @@ The analysis preserves the complex field and ordered path. It may not replace th
 
 After Phase 6B.5C:
 
-- [ ] freeze or explicitly narrow the exact carrier claim
-- [ ] select the next physical control from the unresolved mechanism
-- [ ] prohibit blind T48/T300 repetition
+- [x] freeze the exact derived scalar-chart carrier claim
+- [x] select reversed/randomized tone order as the proposed next control
+- [x] prohibit blind T48/T300 repetition
 
 Allowed next physical controls:
 
@@ -243,8 +246,8 @@ carrier-claim narrowing
 
 Prerequisites:
 
-- [ ] carrier scope frozen or explicitly narrowed
-- [ ] Phase 6B.5C/5D outputs bound to exact evidence
+- [x] carrier scope frozen at the derived transfer-aware ceiling
+- [x] Phase 6B.5C/5D outputs bound to exact evidence
 
 Review remains non-authorizing.
 

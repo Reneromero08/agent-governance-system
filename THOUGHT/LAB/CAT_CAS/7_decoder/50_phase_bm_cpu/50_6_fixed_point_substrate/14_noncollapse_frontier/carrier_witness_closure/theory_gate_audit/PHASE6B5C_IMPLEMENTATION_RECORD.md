@@ -1,6 +1,6 @@
 # Phase 6B.5C Implementation Record
 
-**Status:** `IMPLEMENTED_AND_SYNTHETICALLY_EXECUTED__CATCAS_RAW_RUN_PENDING`  
+**Status:** `CATCAS_RAW_EXECUTION_COMPLETE__TRANSFER_EQUIVARIANCE_SUPPORTED`
 **Official strict carrier closure:** unchanged at `PARTIAL`  
 **New physical acquisition:** none
 
@@ -54,7 +54,7 @@ analyze_transfer_geometry.py
 test_transfer_geometry.py
 ```
 
-## Actual retained-raw execution boundary
+## Actual retained-raw execution
 
 The immutable campaign files are stored only on:
 
@@ -62,9 +62,15 @@ The immutable campaign files are stored only on:
 root@catcas:/root/catcas_evidence/phase6b5_t48_d32b1bed_20260619
 ```
 
-The Git repository contains compact manifests and hashes but intentionally does not contain the approximately 604 MB of raw binaries, `windows.csv`, schedules, and summaries required for execution. No self-hosted GitHub runner targeting `catcas` is present, and the current assistant toolset exposes GitHub but not SSH.
+The real T48 campaign was executed through SSH using a source-only payload. All
+14 run manifests and raw SHA-256 values verified. The result is
+`TRANSFER_EQUIVARIANCE_SUPPORTED`; all runs selected C0 scalar, controls remained
+null, and route `4:5`, seed `4` was classified `CHART_FAILURE`. Official strict
+closure remains `PARTIAL`.
 
-Therefore no claim is made that the real T48 transfer-aware result has been computed in this session.
+A portability defect in the gate-layer source binding was fixed and regression
+tested before the final full rerun. The final analysis-manifest SHA-256 is
+`93ccb5fb5d9cbc96c25c52797ea0dd0693810997a369e714cfe57109af35ff2b`.
 
 ## Exact host execution
 

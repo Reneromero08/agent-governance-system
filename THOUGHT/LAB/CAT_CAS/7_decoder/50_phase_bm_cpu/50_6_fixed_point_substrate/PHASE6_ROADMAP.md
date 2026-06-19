@@ -1,10 +1,10 @@
 # Phase 6 Roadmap
 
 **Role:** master chronological task ledger.  
-**Current head:** `PHASE6B_THEORY_GATE_AUDIT_COMPLETE__TRANSFER_ANALYSIS_NEXT`  
+**Current head:** `PHASE6B5C_TRANSFER_EQUIVARIANCE_SUPPORTED__GATE_R_NEXT`
 **Binding directive:** `14_noncollapse_frontier/COURSE_CORRECTION.md` plus `14_noncollapse_frontier/COURSE_CORRECTION_ADDENDUM_2026-06-19.md`  
-**Immediate gate:** Phase 6B.5C transfer-aware analysis of retained raw carrier evidence.  
-**Next physical gate:** selected only after Phase 6B.5C identifies the unresolved mechanism.  
+**Immediate gate:** Gate R external review and project-owner integration decision.
+**Next physical control:** reversed/randomized tone order, proposed but not authorized.
 **Observability acquisition:** not authorized.
 
 ---
@@ -249,7 +249,7 @@ analyzer nine-gate          0/6           2/6
 
 ### Phase 6B.5C — Transfer-aware carrier geometry analysis
 
-**Immediate gate. No new physical acquisition.**
+**Complete. No new physical acquisition was performed.**
 
 Binding contract:
 
@@ -259,15 +259,19 @@ Binding contract:
 
 Required work:
 
-- [ ] fit route/session receiver charts from preamble and even-real calibration rows only
-- [ ] test odd-real held-out equivariance without winner-first collapse
-- [ ] test wrong rows by actual-execution versus declared-decoy relational fit
-- [ ] test phase action, circular residuals, and loop closure
-- [ ] test exact pseudo-permutation covariance against canonical and unrelated models
-- [ ] test cross-route correspondence/conjugacy
-- [ ] analyze ordered tone-window path and fixed-order confounding
-- [ ] classify route `4:5`, seed `4` as carrier failure, chart failure, transfer-regime shift, mixed, or unresolved
-- [ ] bind every output to campaign/raw/source hashes and deterministic null seeds
+- [x] fit route/session receiver charts from preamble and even-real calibration rows only
+- [x] test odd-real held-out equivariance without winner-first collapse
+- [x] test wrong rows by actual-execution versus declared-decoy relational fit
+- [x] test phase action, circular residuals, and loop closure
+- [x] test exact pseudo-permutation covariance against canonical and unrelated models
+- [x] test cross-route correspondence/conjugacy
+- [x] analyze ordered tone-window path and fixed-order confounding
+- [x] classify route `4:5`, seed `4` as `CHART_FAILURE`
+- [x] bind every output to campaign/raw/source hashes and deterministic null seeds
+
+Result: `TRANSFER_EQUIVARIANCE_SUPPORTED`. All runs select C0 scalar; this is a
+minimal complex receiver chart, not a complete physical operator. The official
+strict carrier verdict remains `PARTIAL`.
 
 Allowed primary outcomes:
 
@@ -284,9 +288,9 @@ INCONCLUSIVE
 
 Only after Phase 6B.5C:
 
-- [ ] freeze or explicitly narrow the exact channel-level claim
-- [ ] choose the next physical control from the unresolved mechanism
-- [ ] prohibit blind trial-count escalation
+- [x] freeze the exact derived scalar-chart transfer claim
+- [x] select reversed/randomized tone order as the proposed next physical control
+- [x] prohibit blind trial-count escalation
 
 Allowed next physical actions:
 
@@ -303,8 +307,8 @@ carrier-claim narrowing
 
 Prerequisites:
 
-- [ ] carrier scope frozen or explicitly narrowed
-- [ ] Phase 6B.5C/5D outputs bound to exact source and evidence
+- [x] carrier scope frozen at the derived transfer-aware claim ceiling
+- [x] Phase 6B.5C/5D outputs bound to exact source and evidence
 
 Review scope:
 
@@ -379,7 +383,7 @@ One positive does not authorize Big Wall generalization.
 | Phase transport | Strongly supported in current campaign |
 | Executed-mode transport | Strongly supported except route `4:5`, seed `4` |
 | Ideal sender-basis fidelity | Not reproducible at T48 |
-| Physical route/session transfer chart | Not identified; Phase 6B.5C next |
+| Physical route/session transfer chart | Minimal C0 scalar relation supported; complete operator not identified |
 | Strict carrier witness | `PARTIAL` |
 | Software `.holo` geometric memory | Supported at L1/L2 |
 | History-backed software restoration | Supported |

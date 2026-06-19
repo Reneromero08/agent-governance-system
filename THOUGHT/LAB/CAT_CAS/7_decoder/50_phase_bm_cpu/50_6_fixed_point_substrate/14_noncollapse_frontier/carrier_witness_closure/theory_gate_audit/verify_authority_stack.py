@@ -32,28 +32,37 @@ REQUIRED = {
     ),
     "frontier": (
         "COURSE_CORRECTION_ADDENDUM_2026-06-19.md",
-        "Immediate gate:** Phase 6B.5C",
-        "No new physical acquisition",
-        "repeats T48 or escalates to T300 before Phase 6B.5C",
+        "TRANSFER_EQUIVARIANCE_SUPPORTED__GATE_R_NEXT",
+        "Immediate gate:** Gate R",
+        "proposed but unauthorized",
+        "strict closure remains `PARTIAL`",
     ),
     "master": (
         "COURSE_CORRECTION_ADDENDUM_2026-06-19.md",
-        "Immediate gate:** Phase 6B.5C",
-        "No new physical acquisition",
-        "repeats T48 or increases to T300 before Phase 6B.5C",
+        "PHASE6B5C_TRANSFER_EQUIVARIANCE_SUPPORTED__GATE_R_NEXT",
+        "Immediate gate:** Gate R",
+        "proposed but not authorized",
+        "strict carrier verdict remains `PARTIAL`",
     ),
     "navigation": (
         "COURSE_CORRECTION_ADDENDUM_2026-06-19.md",
-        "transfer-aware carrier geometry analysis",
-        "No SSH acquisition is the immediate task",
+        "PHASE6B5C_TRANSFER_EQUIVARIANCE_SUPPORTED__GATE_R_NEXT",
+        "No physical acquisition is authorized",
+        "Gate R",
         "Blind repetition or trial-count escalation is not an allowed substitute",
     ),
 }
 
 FORBIDDEN_CURRENT_ORDER = {
-    "frontier": "**Immediate gate:** close the carrier witness",
-    "master": "**Immediate gate:** carrier-witness closure",
-    "navigation": "2. **Carrier witness closure**",
+    "frontier": (
+        "**Immediate gate:** close the carrier witness",
+        "**Immediate gate:** Phase 6B.5C transfer-aware analysis",
+    ),
+    "master": (
+        "**Immediate gate:** carrier-witness closure",
+        "**Immediate gate:** Phase 6B.5C transfer-aware analysis",
+    ),
+    "navigation": ("2. **Carrier witness closure**",),
 }
 
 
@@ -72,9 +81,10 @@ def verify() -> list[str]:
             if needle not in text:
                 errors.append(f"{name} missing required authority marker: {needle}")
 
-    for name, needle in FORBIDDEN_CURRENT_ORDER.items():
-        if needle in texts.get(name, ""):
-            errors.append(f"{name} retains stale immediate order: {needle}")
+    for name, needles in FORBIDDEN_CURRENT_ORDER.items():
+        for needle in needles:
+            if needle in texts.get(name, ""):
+                errors.append(f"{name} retains stale immediate order: {needle}")
 
     return errors
 
