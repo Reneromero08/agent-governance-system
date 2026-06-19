@@ -6,18 +6,21 @@
 **New physical acquisition:** none  
 **Open-ended analysis authorized:** no
 
-## Bindings
+## Deterministic bindings
 
 ```text
 Phase 6B.5C campaign = phase6b5_t48_d32b1bed_20260619
 Phase 6B.5C campaign manifest = cbcd2a19d6dd3bc478244f77888aa87eb043003a7685caa17ff13fe4d47e6487
 Phase 6B.5C analysis manifest = 93ccb5fb5d9cbc96c25c52797ea0dd0693810997a369e714cfe57109af35ff2b
-Phase 6B.5D analysis manifest = 07aa4bbe683ebfd43dff15bdad68d87f6d417109ce9909448c97b8d0516a18cb
-Workflow run = 27847845516
-Workflow artifact digest = 57d5411928a50210ac297997d4b4f4bad4ec9294cab1022686bbeab3b13e20ad
+Phase 6B.5D deterministic manifest = d11bf9d41c1b9a9195d79d5ba1ab8b591f9c364b3f57435fded958d5a0861f31
+Workflow run = 27848260395
+Workflow artifact ID = 7758297990
+Workflow artifact digest = defb733ba811e435068514fabb0e024f1a2492d3151b30491518e68197dd2e92
 ```
 
-The Phase 6B.5D workflow executed its regression suite, generated the bounded packet, verified every generated SHA-256, uploaded the packet, and committed the exact JSON outputs to the PR branch.
+The workflow generated the packet twice from identical committed inputs and required a recursive byte-for-byte diff to pass. Tests, output-manifest verification, and the double-generation comparison all passed.
+
+The stable binding is committed in `PHASE6B5D_DETERMINISTIC_MANIFEST.json`. Detailed JSON outputs remain reproducible through `run_carrier_consolidation.py` and the read-only workflow. The earlier wall-clock timestamp variant is not retained as evidence.
 
 ---
 
@@ -29,7 +32,7 @@ All twelve Phase 6B.5C selected charts are nonzero scalar identity maps:
 T(z) = alpha z
 ```
 
-The old analyzer first computes:
+The historical analyzer first computes:
 
 ```text
 zhat(z) = z exp(-i arg(sum z)) / ||z||
@@ -41,7 +44,7 @@ For any nonzero complex scalar `alpha`:
 zhat(z / alpha) = zhat(z)
 ```
 
-Therefore the following are exactly unchanged by applying the selected C0 calibration:
+Therefore scalar charting leaves these quantities exactly unchanged:
 
 ```text
 fvec
@@ -58,7 +61,7 @@ wrong-declared match
 differential phase delta
 ```
 
-The old strict conjunction cannot be repaired by scalar route/session calibration. Its failures live in:
+The old strict conjunction cannot be repaired by route/session scalar calibration. Its failures instead occupy:
 
 ```text
 residual structure
@@ -66,15 +69,13 @@ sparse 0.95 threshold geometry
 gate semantics
 ```
 
-—not in an unremoved scalar gain or phase.
-
-This narrows the earlier theory audit: the old scorer assumed ideal codeword concentration, but the minimal chart discovered by Phase 6B.5C was already quotiented out by its feature normalization. The successful transfer-aware result comes from testing relational fit and covariance rather than demanding a zero-error sparse concentration floor.
+The successful transfer-aware result and frozen partial gate test different properties.
 
 ---
 
 ## 2. Cross-session and cross-route generalization
 
-The Phase 6B.5C cross-chart packet contains 132 source-chart → target-session tests:
+The Phase 6B.5C packet contains 132 source-chart to target-session tests:
 
 | Transfer class | Records | Positive-margin fraction | Median residual | Median mode margin |
 |---|---:|---:|---:|---:|
@@ -82,37 +83,25 @@ The Phase 6B.5C cross-chart packet contains 132 source-chart → target-session 
 | Different route, same seed | 12 | median `1.000`, minimum `0.9792` | `0.3740` | `1.0854` |
 | Different route, different seed | 60 | median `1.000`, minimum `0.9792` | `0.3866` | `1.0685` |
 
-Every transfer record remains above the predeclared `0.95` positive-margin criterion.
-
-Conclusion:
+Every transfer record remains above the frozen `0.95` positive-margin criterion.
 
 ```text
 relational mode ordering generalizes across sessions and routes
 ```
 
-Absolute residual scale remains session-sensitive, especially when seed 4 is the target. This does not identify a universal physical operator; it shows that the transported relational ordering is substantially more stable than the per-session scalar coordinate.
+This does not identify a universal physical operator. Absolute residual scale remains session-sensitive even while relational ordering generalizes.
 
 ### Fitted scalar coordinates
 
-Route `2:3`:
-
 ```text
-|alpha| = 0.04713–0.05064
-arg(alpha) = -1.3189 to -1.2812 rad
-```
+route 2:3 |alpha| = 0.04713–0.05064
+route 2:3 arg(alpha) = -1.3189 to -1.2812 rad
 
-Normal route `4:5` sessions:
+normal route 4:5 |alpha| = 0.04911–0.05103
+normal route 4:5 arg(alpha) = -1.3259 to -1.3035 rad
 
-```text
-|alpha| = 0.04911–0.05103
-arg(alpha) = -1.3259 to -1.3035 rad
-```
-
-Route `4:5`, seed `4`:
-
-```text
-|alpha| = 0.025851
-arg(alpha) = -1.221254 rad
+route 4:5 seed 4 |alpha| = 0.025851
+route 4:5 seed 4 arg(alpha) = -1.221254 rad
 ```
 
 ---
@@ -121,8 +110,6 @@ arg(alpha) = -1.221254 rad
 
 The compact packet contains 576 held-out real/wrong residual records.
 
-Overall:
-
 ```text
 median normalized residual = 0.37417
 median phase-aligned residual = 0.36976
@@ -130,9 +117,7 @@ median phase-removable component = 0.000932
 95th-percentile phase-removable component = 0.01571
 ```
 
-Global phase mismatch therefore explains almost none of the residual.
-
-### Variance attribution over compact observables
+Global phase mismatch explains almost none of the residual.
 
 | Factor | eta-squared |
 |---|---:|
@@ -145,20 +130,16 @@ Global phase mismatch therefore explains almost none of the residual.
 
 The dominant compact-packet factor is **seed/session**. Route, mode, family, and elapsed trial block are minor by comparison.
 
-Median residual by seed, pooling routes:
-
 ```text
-seed 0 = 0.3335
-seed 1 = 0.3458
-seed 2 = 0.3578
-seed 3 = 0.3674
-seed 4 = 0.6080
-seed 5 = 0.3632
+seed 0 median residual = 0.3335
+seed 1 median residual = 0.3458
+seed 2 median residual = 0.3578
+seed 3 median residual = 0.3674
+seed 4 median residual = 0.6080
+seed 5 median residual = 0.3632
 ```
 
-Mode medians remain close (`0.3631–0.3870`), as do phase-index medians (`0.3551–0.3972`). Real and wrong families are almost identical (`0.37395` versus `0.37640`).
-
-The result is not evidence that all complex residual vectors are unstructured noise. The compact packet retains residual magnitudes and relational alternatives, not the full complex residual vectors needed for bin-level residual Gram or cross-spectral decomposition. That raw-field extension is not authorized because the bounded consolidation already localizes the dominant issue sufficiently for the next control.
+The result does not prove that full complex residual vectors are unstructured noise. A bin-level residual Gram or cross-spectrum would require another raw-field pass, which is not authorized because this bounded consolidation already localizes the dominant issue sufficiently for the next control.
 
 ---
 
@@ -169,8 +150,6 @@ Route `4:5`, seed `4` is refined from generic `CHART_FAILURE` to:
 ```text
 SCALAR_GAIN_OUTLIER_WITH_RELATIONAL_INVARIANTS_PRESERVED
 ```
-
-Evidence:
 
 ```text
 |alpha| = 0.025851
@@ -186,10 +165,10 @@ residual-vs-symbol-index rank = 0.0104
 real positive margin = 0.9583
 wrong actual-over-declared = 1.000
 phase MAE = 0.09135 rad
-pseudo covariance = preserved in Phase 6B.5C
+pseudo covariance = preserved
 ```
 
-Seed 4 is not a monotonic late-run drift and is not repaired by global phase alignment. Its scalar carrier coordinate is approximately half the normal route amplitude and phase-shifted, while mode ordering, execution-over-declaration, phase relation, and pseudo permutation covariance survive.
+Seed 4 is neither monotonic late-run drift nor a missed global-phase alignment. Its scalar carrier coordinate is approximately half normal route amplitude and phase-shifted, while mode ordering, execution-over-declaration, phase relation, and permutation covariance survive.
 
 The correct interpretation is a session-level carrier-coordinate excursion, not relational carrier collapse.
 
@@ -230,18 +209,17 @@ orientation recovery
 Small Wall crossing
 ```
 
-The official historical strict conjunction remains `PARTIAL` because it is a separate, frozen gate.
+The official historical strict conjunction remains `PARTIAL` because it is a separate frozen gate.
 
 ---
 
 ## 6. Hard stop and next boundary
 
-The bounded consolidation is complete. Further open-ended analysis of this campaign is not authorized.
-
-Immediate boundary:
+Further open-ended analysis of this campaign is not authorized.
 
 ```text
-Gate R — external L4B.5B0 human review and project-owner integration decision
+Immediate boundary = Gate R external L4B.5B0 human review
+Project-owner integration decision = required
 ```
 
 Proposed next physical control:
