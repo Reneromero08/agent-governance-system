@@ -1,8 +1,14 @@
+from pathlib import Path
+
+import CAPABILITY.TOOLS.utilities.push_test_plan as push_test_plan
 from CAPABILITY.TOOLS.utilities.push_test_plan import (
     EMBEDDING_TESTS,
+    TestSuite,
     build_plan,
     normalize_paths,
     plan_payload,
+    pytest_command,
+    repo_python,
     requires_embeddings,
 )
 
@@ -50,3 +56,26 @@ def test_plan_hash_is_stable_and_changes_with_scope():
     )
     assert first["plan_hash"] == second["plan_hash"]
     assert first["plan_hash"] != embedding["plan_hash"]
+
+
+def test_repo_python_prefers_repository_virtualenv(tmp_path: Path, monkeypatch):
+    monkeypatch.setattr(push_test_plan, "PROJECT_ROOT", tmp_path)
+    if push_test_plan.os.name == "nt":
+        interpreter = tmp_path / ".venv" / "Scripts" / "python.exe"
+    else:
+        interpreter = tmp_path / ".venv" / "bin" / "python"
+    interpreter.parent.mkdir(parents=True)
+    interpreter.touch()
+
+    assert repo_python() == str(interpreter)
+
+
+def test_pytest_command_uses_selected_interpreter(monkeypatch):
+    monkeypatch.setattr(push_test_plan, "_interpreter_has_xdist", lambda _: False)
+    command = pytest_command(
+        TestSuite("core", ("CAPABILITY/TESTBENCH",)),
+        workers=4,
+        python_executable="/repo/.venv/python",
+    )
+    assert command[0] == "/repo/.venv/python"
+    assert "-n" not in command
