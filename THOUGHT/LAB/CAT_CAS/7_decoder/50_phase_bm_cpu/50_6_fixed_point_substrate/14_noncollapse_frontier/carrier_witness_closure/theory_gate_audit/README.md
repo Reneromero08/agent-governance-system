@@ -9,10 +9,11 @@ official strict closure: PARTIAL
 theory-to-gate audit: COMPLETE
 transfer-aware implementation: COMPLETE
 retained-raw execution: COMPLETE
-primary outcome: TRANSFER_EQUIVARIANCE_SUPPORTED
-synthetic end-to-end tests: PASS
-new physical acquisition: PAUSED
-official strict closure: PARTIAL
+primary Phase 6B.5C outcome: TRANSFER_EQUIVARIANCE_SUPPORTED
+bounded Phase 6B.5D consolidation: COMPLETE
+carrier claim: FROZEN_PENDING_GATE_R
+next physical control: PREREGISTERED_NOT_AUTHORIZED
+open-ended campaign analysis: STOPPED
 ```
 
 ## Contents
@@ -24,11 +25,30 @@ official strict closure: PARTIAL
 - `test_transfer_geometry.py`: synthetic two-route end-to-end and tamper tests.
 - `run_phase6b5c.sh`: non-overwriting host runner for the retained T48 campaign.
 - `PHASE6B5C_RESULT_REPORT.md`: retained-raw execution and interpretation.
+- `analyze_carrier_consolidation.py`: bounded Phase 6B.5D consolidation over the committed 5C packet.
+- `test_carrier_consolidation.py`: consolidation and manifest-tamper regression tests.
+- `PHASE6B5D_CONSOLIDATION_REPORT.md`: final old-gate, cross-session, residual, and seed-4 adjudication.
+- `PHASE6B5E_TONE_ORDER_CONTROL_CONTRACT.md`: preregistered but unauthorized next physical control.
+- `results/phase6b5d_carrier_claim_consolidation/`: exact workflow-generated consolidation packet.
 - `reconcile_gate_layers.py`: separates contract, analyzer, and mechanism-layer readouts.
 - `test_reconcile_gate_layers.py`: regression coverage for gate namespaces and finite-sample geometry.
-- `verify_authority_stack.py`: prevents roadmap drift back into blind T48/T300 repetition.
+- `verify_authority_stack.py`: prevents roadmap drift back into blind T48/T300 repetition or past the Gate R boundary.
 
-## Execute on `catcas`
+## Phase 6B.5D result
+
+```text
+scalar calibration can change old normalized gates: NO
+cross-session relational generalization: SUPPORTED
+residual dominant compact factor: SEED/SESSION
+seed 4: SCALAR_GAIN_OUTLIER_WITH_RELATIONAL_INVARIANTS_PRESERVED
+carrier claim: FROZEN_PENDING_GATE_R
+```
+
+All selected Phase 6B.5C charts are scalar complex gains. Because the old analyzer already removes global complex phase and L2 amplitude, applying those charts cannot change any historical normalized gate. The successful 5C result and failed old strict conjunction therefore test different properties.
+
+The bounded consolidation is the hard stop for this campaign. The next gate is external Gate R review and project-owner integration. No physical acquisition is authorized.
+
+## Reproduce Phase 6B.5C on `catcas`
 
 From this directory:
 
@@ -39,16 +59,4 @@ chmod +x run_phase6b5c.sh
   "$PWD/results/phase6b5c_t48_d32b1bed_20260619"
 ```
 
-The runner:
-
-1. refuses to overwrite an existing result directory;
-2. verifies every run manifest;
-3. recomputes the SHA-256 of all raw binaries by default;
-4. fits charts only from preamble and even-real calibration rows;
-5. keeps odd real, wrong, pseudo, silent, and scramble outcomes out of chart selection;
-6. writes the frozen ten-file result packet;
-7. verifies every generated output against `analysis_manifest.json`.
-
-The generated result is a derived scalar-chart transfer analysis. It does not
-change the frozen campaign, historical T300 artifacts, or official `PARTIAL`
-state, and it does not identify a complete physical operator.
+The generated result is a derived scalar-chart transfer analysis. It does not change the frozen campaign, historical T300 artifacts, or official `PARTIAL` state, and it does not identify a complete physical operator.
