@@ -49,11 +49,16 @@ def _git_stdout(args: Sequence[str], *, required: bool = False) -> str:
     return (result.stdout or "").strip()
 
 
-def _status_entry_path(line: str) -> str:
-    path = line[3:] if len(line) >= 4 else line
-    if " -> " in path:
-        path = path.rsplit(" -> ", 1)[-1]
+def _clean_status_path(path: str) -> str:
     return path.strip().strip('"').replace("\\", "/")
+
+
+def _status_entry_paths(line: str) -> tuple[str, ...]:
+    body = line[3:] if len(line) >= 4 else line
+    if " -> " in body:
+        source, destination = body.rsplit(" -> ", 1)
+        return (_clean_status_path(source), _clean_status_path(destination))
+    return (_clean_status_path(body),)
 
 
 def _non_exempt_status_lines(text: str) -> list[str]:
@@ -61,7 +66,8 @@ def _non_exempt_status_lines(text: str) -> list[str]:
     for line in text.splitlines():
         if not line.strip():
             continue
-        if _status_entry_path(line).startswith("THOUGHT/"):
+        paths = _status_entry_paths(line)
+        if paths and all(path.startswith("THOUGHT/") for path in paths):
             continue
         entries.append(line)
     return entries
