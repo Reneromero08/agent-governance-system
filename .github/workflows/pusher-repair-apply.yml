@@ -1,0 +1,72 @@
+name: Apply Pusher Repairs
+
+on:
+  push:
+    branches: [work/push-risk-groups]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pusher-repair-apply
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/push-risk-groups
+          fetch-depth: 0
+
+      - name: Apply byte-exact repair patch
+        run: |
+          git apply --check LAW/CONTRACTS/_runs/_tmp/pusher-repairs.patch
+          git apply LAW/CONTRACTS/_runs/_tmp/pusher-repairs.patch
+
+      - name: Serialize fixed-path MCP capability fixtures
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path("CAPABILITY/TOOLS/utilities/push_test_plan.py")
+          text = path.read_text(encoding="utf-8")
+          replacements = {
+              "    extra_args: tuple[str, ...] = ()\n\n\n@dataclass(frozen=True)\nclass RiskGroup:":
+                  "    extra_args: tuple[str, ...] = ()\n    xdist: bool = True\n\n\n@dataclass(frozen=True)\nclass RiskGroup:",
+              "    trigger_globs: tuple[str, ...] = ()\n\n\nRISK_GROUPS = (":
+                  "    trigger_globs: tuple[str, ...] = ()\n    xdist: bool = True\n\n\nRISK_GROUPS = (",
+              "            \"TOOLS/catalytic.py\",\n        ),\n    ),\n    RiskGroup(\n        \"skill-discovery\",":
+                  "            \"TOOLS/catalytic.py\",\n        ),\n        xdist=False,\n    ),\n    RiskGroup(\n        \"skill-discovery\",",
+              "    suites.extend(TestSuite(group.name, group.tests) for group, _ in selected_risk_groups(paths))":
+                  "    suites.extend(\n        TestSuite(group.name, group.tests, xdist=group.xdist)\n        for group, _ in selected_risk_groups(paths)\n    )",
+              "    if workers > 0 and xdist_available:\n        command.extend([\"-n\", str(workers), \"--dist=loadfile\"])":
+                  "    if workers > 0 and xdist_available and suite.xdist:\n        command.extend([\"-n\", str(workers), \"--dist=loadfile\"])",
+          }
+          for old, new in replacements.items():
+              if old not in text:
+                  raise SystemExit(f"planner patch anchor missing: {old[:80]!r}")
+              text = text.replace(old, new, 1)
+          path.write_text(text, encoding="utf-8")
+          PY
+
+      - name: Remove transport-only files
+        run: |
+          git rm LAW/CONTRACTS/_runs/_tmp/pusher-repairs.patch
+          git rm .github/workflows/pusher-repair-apply.yml
+          git rm .github/workflows/pusher-source-export.yml
+
+      - name: Commit repaired branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            CAPABILITY/MCP/validation.py \
+            CAPABILITY/PRIMITIVES/repo_digest.py \
+            CAPABILITY/PRIMITIVES/write_firewall.py \
+            CAPABILITY/TOOLS/utilities/push_test_plan.py \
+            CAPABILITY/TESTBENCH/cassette_network \
+            CAPABILITY/TESTBENCH/mcp-capability-tests
+          git commit -m "fix: repair restored conditional suites"
+          git push origin HEAD:work/push-risk-groups
