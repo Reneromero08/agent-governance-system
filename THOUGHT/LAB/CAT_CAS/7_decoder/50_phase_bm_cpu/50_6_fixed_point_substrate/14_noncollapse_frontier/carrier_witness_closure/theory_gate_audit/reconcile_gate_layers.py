@@ -6,6 +6,9 @@ modify raw evidence, replace the frozen seven-gate contract, or promote a new
 physical claim. Its purpose is to separate protocol integrity, mode transport,
 phase transport, schedule specificity, canonical-basis fidelity, and metadata
 leakage checks that were previously collapsed into one pass bit.
+
+Silent carrier-off and scramble unshared-schedule runs are the retained null
+baselines. They remain controls and are never used to fit a positive model.
 """
 
 from __future__ import annotations
@@ -234,6 +237,7 @@ def build_audit(
         "source_commit": closure_report.get("source_commit"),
         "claim_ceiling": "DERIVED_THEORY_TO_GATE_AUDIT_ONLY",
         "official_closure_status_unchanged": closure_report.get("status"),
+        "null_baselines": ["silent_carrier_off", "scramble_unshared_schedule"],
         "gate_namespace": {
             "contract_gate_count": len(contract_keys),
             "contract_gate_keys": contract_keys,
