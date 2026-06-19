@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import subprocess
 import sys
 from dataclasses import dataclass
@@ -17,6 +18,8 @@ from typing import Callable, Sequence
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 ZERO_SHA = "0" * 40
+HEX40 = re.compile(r"[0-9a-f]{40}")
+HEX64 = re.compile(r"[0-9a-f]{64}")
 
 
 @dataclass(frozen=True)
@@ -73,15 +76,39 @@ def resolve_pushed_commit(ref: PushRef) -> str | None:
     return ref.local_sha
 
 
-def load_receipt_head(path: Path) -> str | None:
+def load_receipt(path: Path) -> dict | None:
     try:
         payload = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, ValueError, TypeError):
         return None
-    if payload.get("type") != "CI_OK":
+    if not isinstance(payload, dict) or payload.get("type") != "CI_OK":
         return None
+
     head = payload.get("head")
-    return head if isinstance(head, str) and len(head) == 40 else None
+    plan_hash = payload.get("plan_hash")
+    mode = payload.get("mode")
+    suites = payload.get("suites")
+    timestamp = payload.get("timestamp")
+    risk_groups = payload.get("risk_groups", [])
+
+    if not isinstance(head, str) or HEX40.fullmatch(head) is None:
+        return None
+    if not isinstance(plan_hash, str) or HEX64.fullmatch(plan_hash) is None:
+        return None
+    if mode not in {"full", "exhaustive"}:
+        return None
+    if not isinstance(suites, list) or not suites or not all(isinstance(item, str) and item for item in suites):
+        return None
+    if not isinstance(timestamp, str) or not timestamp:
+        return None
+    if not isinstance(risk_groups, list) or not all(isinstance(item, str) and item for item in risk_groups):
+        return None
+    return payload
+
+
+def load_receipt_head(path: Path) -> str | None:
+    receipt = load_receipt(path)
+    return receipt["head"] if receipt else None
 
 
 def validate_push(
