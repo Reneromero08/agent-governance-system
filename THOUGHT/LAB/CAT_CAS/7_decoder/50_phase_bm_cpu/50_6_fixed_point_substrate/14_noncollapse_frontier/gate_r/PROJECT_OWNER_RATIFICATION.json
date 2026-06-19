@@ -1,0 +1,22 @@
+{
+  "schema_id": "CAT_CAS_PHASE6_PROJECT_OWNER_RATIFICATION_V1",
+  "owner": "Raul Romero",
+  "owner_handle": "Reneromero08",
+  "decision": "RATIFY_AND_AUTHORIZE_COMBINED_TONE_ORDER_OBSERVABILITY_CAMPAIGN",
+  "gate_r_verdict": "TECHNICAL_ACCEPT_WITH_REQUIRED_REPAIRS_APPLIED",
+  "technical_review_complete": true,
+  "project_owner_ratified": true,
+  "campaign_implementation_authorized": true,
+  "combined_physical_acquisition_authorized_after_preflight": true,
+  "restoration_authorized": false,
+  "target_coupling_authorized": false,
+  "orientation_recovery_authorized": false,
+  "small_wall_authorized": false,
+  "required_pre_acquisition_conditions": [
+    "deterministic_plan_double_generation_pass",
+    "synthetic_schema_tamper_authority_tests_pass",
+    "catcas_machine_preflight_pass",
+    "plan_hash_and_source_commit_recorded",
+    "immutable_raw_writer_enabled"
+  ]
+}
