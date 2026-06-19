@@ -83,6 +83,7 @@ family
 declared_mode
 actual_mode
 trial
+hash_restored
 theta_idx
 tone_hz
 drive_sign
@@ -112,6 +113,7 @@ Rules:
 - `family` is one of `preamble`, `real`, `pseudo`, `wrong`, `control`.
 - `control` is one of `matrix`, `silent`, `scramble`.
 - `declared_mode` and `actual_mode` use the canonical names `basis`, `rotation`, `residual`, `mini`.
+- `hash_restored` records the existing symbol-level reversible-tape check and must be consistent across every bin window belonging to the same symbol.
 - `drive_sign` is `+1`, `-1`, or `0` for silent.
 - `phase_fraction` is in `[0,1)`.
 - thermal values are finite real Celsius values from the approved sensor.
@@ -218,6 +220,7 @@ Required fields:
       "declared_mode": "basis",
       "actual_mode": "basis",
       "trial": -1,
+      "hash_restored": 1,
       "theta_idx": 0,
       "bin_permutation": []
     }
