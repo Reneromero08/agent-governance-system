@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   consolidate:
@@ -18,6 +18,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -51,3 +54,22 @@ jobs:
           path: ${{ runner.temp }}/phase6b5d
           if-no-files-found: error
           retention-days: 7
+
+      - name: Persist Phase 6B.5D packet on PR branch
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        env:
+          HEAD_BRANCH: ${{ github.head_ref }}
+        run: |
+          TARGET="THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/carrier_witness_closure/theory_gate_audit/results/phase6b5d_carrier_claim_consolidation"
+          rm -rf "$TARGET"
+          mkdir -p "$TARGET"
+          cp "$RUNNER_TEMP/phase6b5d"/*.json "$TARGET/"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$TARGET"
+          if git diff --cached --quiet; then
+            echo "Phase 6B.5D packet already current"
+          else
+            git commit -m "analysis(phase6): persist bounded carrier consolidation"
+            git push origin "HEAD:${HEAD_BRANCH}"
+          fi
