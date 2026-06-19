@@ -1,9 +1,10 @@
 # Phase 6 Roadmap
 
 **Role:** master chronological task ledger.  
-**Current head:** `PHASE6B_COHERENCE_REPAIR`  
-**Next gate:** branch verification, then L4B.5B0 human design review.  
-**Hardware acquisition:** not authorized.
+**Current head:** `PHASE6B_COHERENCE_REPAIR__COURSE_CORRECTION_ALIGNED`  
+**Binding directive:** `14_noncollapse_frontier/COURSE_CORRECTION.md`  
+**Immediate gate:** SSH repair verification, then carrier-witness closure and L4B.5B0 human review.  
+**Observability acquisition:** not authorized.
 
 ---
 
@@ -19,6 +20,20 @@ carry phase/path/substrate coordinates
 extract only declared invariants at an explicit boundary
 never replace the object with candidate ranking
 ```
+
+The physical ladder is equally binding:
+
+```text
+carrier
+≠ observable relational state
+≠ identified operator
+≠ restoration
+≠ target coupling
+≠ fold-odd invariant
+≠ Small Wall crossing
+```
+
+Each arrow is a separate experiment and evidence gate.
 
 ---
 
@@ -39,13 +54,13 @@ The old scalar substrate charter and original `SPEC.md` are historical only.
 
 ---
 
-## 2. Phase 6B completed architecture
+## 2. Phase 6B completed software architecture
 
 ### L4B.0 — Paradigm correction
 
 - [x] Median-basin corruption audit
 - [x] Non-collapse object definitions
-- [x] Explicit CollapseBoundary doctrine
+- [x] Explicit `CollapseBoundary`
 - [x] Scalar verifier/candidate/AUC tripwires
 
 ### L4B.1 — Executable geometric memory
@@ -60,7 +75,7 @@ Claim: software architecture only.
 
 ### L4B.2 — Owned path memory
 
-- [x] Dynamic appendable path history
+- [x] dynamic appendable path history
 - [x] exact pre/post numeric state bits
 - [x] continuity and structural digests
 - [x] sealing and mutation rejection
@@ -71,35 +86,35 @@ Precise scope: recorded-state restoration, not independent inverse-operator or p
 
 ### L4B.3 — Transcript milestone
 
-- [x] Absorbed by L4B.2
+- [x] absorbed by L4B.2
 
-A separate prose transcript would duplicate and weaken the executable path object.
+The executable path is the transcript.
 
 ### L4B.4 — Non-collapse invariant family
 
-- [x] Orbit conservation
-- [x] Relation-basis involution
-- [x] History-backed composition/closure
-- [x] Static fold-exchange invariance
-- [x] Serialization invariance
-- [x] Ordered-journal continuity
-- [x] Holonomy explicitly deferred
+- [x] orbit conservation
+- [x] relation-basis involution
+- [x] history-backed composition/closure
+- [x] static fold-exchange relation
+- [x] serialization invariance
+- [x] ordered-journal continuity
+- [x] holonomy explicitly deferred
 
-Precise semantics are frozen in `holo_runtime/HOLO_RUNTIME_INTEGRITY.md`.
+Precise semantics are frozen in `14_noncollapse_frontier/holo_runtime/HOLO_RUNTIME_INTEGRITY.md`.
 
 ### L4B.5A — Physical mapping contract
 
-- [x] Evidence/status/observability taxonomy
-- [x] Conservative mapping records
-- [x] Per-invariant physical portability
-- [x] Restoration evidence gate
-- [x] Digest-bound human review at stated claim ceiling
+- [x] evidence/status/observability taxonomy
+- [x] conservative mapping records
+- [x] per-invariant physical portability
+- [x] restoration evidence gate
+- [x] digest-bound human review at stated claim ceiling
 
 Current physical support: channel-level PDN carrier only.
 
 ### L4B.5B0 — Observability/operator design
 
-- [x] Input/state/output separation
+- [x] input/state/output separation
 - [x] S0/S1/S2 measured-state ladder
 - [x] affine → route-conditioned → bilinear → compact nonlinear operator ladder
 - [x] session-level splits
@@ -114,52 +129,59 @@ Status remains `READY_FOR_HUMAN_REVIEW`, `implementation_authorized=false`, `exe
 
 ---
 
-## 3. Coherence repair — current branch
+## 3. Coherence repair — source complete
 
 ### Evidence correction
 
-- [x] Replace the ambiguous integer contraction with a unique fixed point
-- [x] Invalidate the old L3 pass pending rerun
-- [x] Archive the rejected scalar charter/spec
-- [x] Refresh lab-state authority
-- [x] Separate T300 carrier evidence from Class B value-response evidence
+- [x] replace the ambiguous integer contraction with a unique fixed point
+- [x] invalidate the old L3 pass pending rerun
+- [x] archive the rejected scalar charter/spec
+- [x] refresh lab-state authority
+- [x] separate T300 carrier evidence from Class B value-response evidence
 
 ### Class B repair
 
-- [x] Replace non-identifiable simultaneous wording with crossed assignment
-- [x] Require orbit value to affect executed workload
-- [x] Measure real carrier-off captures
-- [x] Decompose complex response into `R_value` and `R_core`
-- [x] Remove hardcoded pass controls
-- [x] Invalidate the old residue interpretation
-- [ ] Compile on the target toolchain
-- [ ] Execute/import artifact only if still scientifically useful
+- [x] replace non-identifiable simultaneous wording with crossed assignment
+- [x] require orbit value to affect executed workload
+- [x] measure real carrier-off captures
+- [x] decompose complex response into `R_value` and `R_core`
+- [x] remove hardcoded pass controls
+- [x] invalidate the old residue interpretation
+- [ ] compile on the target toolchain
+- [ ] execute/import physical artifact only under an authorized acquisition plan
 
 ### `.holo` semantic integrity
 
-- [x] Add operator-semantic path validation
-- [x] Add atomic boundary wrapper
-- [x] Add strict lifecycle reader
-- [x] Add semantic forgery/tamper tests
-- [x] Mark old L4A record schema as legacy
-- [x] Reconcile schema version and semantic scope
-- [ ] Run full test/sanitizer matrix
+- [x] add operator-semantic path validation
+- [x] add atomic boundary wrapper
+- [x] add strict path/restoration/boundary reader
+- [x] add semantic forgery/tamper tests
+- [x] mark old L4A record schema as legacy
+- [x] reconcile schema version and semantic scope
+- [ ] run full C test/sanitizer matrix
 
 ### Review governance
 
-- [x] Close named input/state/gate/falsification/artifact references
-- [x] Register schedule-transform controls explicitly
-- [x] Move human review outside scientific design digest
-- [x] Bind review to full SHA-256 artifact bytes
-- [x] Keep review non-authorizing
-- [ ] Execute final regression suite
-- [ ] Human accepts or rejects L4B.5B0 design
+- [x] close named input/state/gate/falsification/artifact references
+- [x] register schedule-transform controls explicitly
+- [x] move human review outside scientific design digest
+- [x] bind review to full SHA-256 artifact bytes
+- [x] keep review non-authorizing
+- [ ] execute final C regression suite
+- [ ] human accepts or rejects L4B.5B0 design
+
+### Canonical repository gate
+
+- [x] fix CMP-01 host-dependent Windows/UNC absolute-path handling
+- [x] Governance workflow pass
+- [x] Contracts workflow pass
+- [x] canonical push test plan pass
 
 ---
 
-## 4. Required final verification batch
+## 4. Required SSH repair-verification batch
 
-Run on the SSH-accessible engineering environment after source review:
+Run `14_noncollapse_frontier/verify_phase6b_repair.sh` on the engineering environment.
 
 ```text
 A. static/compiler
@@ -174,9 +196,9 @@ B. sanitizers
 
 C. semantic adversarial suite
    - self-consistent invalid operator parameter
-   - lifecycle false/true mutation
+   - serialized path/restoration/boundary mutation
    - failed boundary rollback
-   - undefined control reference
+   - undefined control/artifact reference
    - duplicate/missing G1-G10 and F1-F10
    - design artifact mutation after review binding
 
@@ -189,56 +211,90 @@ D. artifacts
 
 No old artifact may be silently relabeled as evidence for repaired source.
 
+A successful software packet does not close the physical carrier witness.
+
 ---
 
-## 5. Next scientific gates
+## 5. Revised physical execution ladder
 
-### Gate R — L4B.5B0 human review
+### Phase 6B.5 — Carrier-witness closure
+
+Before the carrier is used as a predecessor for physical state claims:
+
+- [ ] inspect and freeze completed route results
+- [ ] preserve raw I/Q windows and ring-period samples
+- [ ] preserve absolute TSC origin and window alignment
+- [ ] preserve sender schedule, workload identity, core identities, route topology, temperature, and frequency proxies
+- [ ] hash every raw artifact
+- [ ] make summaries regenerable from raw acquisition
+- [ ] close strict per-route witness or explicitly narrow route scope
+
+Allowed claim: reproducible transport of declared sender-owned mode/phase through the tested PDN channel.
+
+Forbidden claim: physical `HoloGeometry`, relational memory, restoration, orientation, or crossing.
+
+### Gate R — L4B.5B0 external human review
 
 Review scope:
 
-- state-space definitions;
-- input/control completeness;
-- operator ladder;
-- thresholds and data splits;
-- falsification conditions;
-- claim ceiling;
-- explicit non-authorization of restoration.
+- state-space definitions
+- input/control completeness
+- operator ladder
+- thresholds and data splits
+- falsification conditions
+- claim ceiling
+- explicit non-authorization of restoration
 
-Output is a separate `l4b5b0_observability_review_v1` envelope.
+Output: separate `l4b5b0_observability_review_v1` envelope bound to the frozen design bytes.
 
-### Gate B1 — calibration acquisition authorization
+### Phase 6B.6 — Physical observability/operator identification
 
-Only after Gate R and a clean verification packet:
+Only after carrier scope is frozen and Gate R is accepted:
 
-- freeze target routes/sessions/schedules;
-- freeze acquisition counts from power analysis;
-- authorize raw calibration capture;
-- do not authorize restoration.
+- [ ] freeze acquisition cadence, TSC alignment, routes, sessions, schedules, and splits
+- [ ] collect idle covariance from training sessions only
+- [ ] collect balanced prepared states and persistent-excitation/impulse/phase-shifted trajectories
+- [ ] evaluate `S0=[I,Q,ring]`, contextual `S1`, then delay-embedded `S2(L)` only as needed
+- [ ] fit persistence/mean, affine, route-conditioned affine, bilinear, then compact nonlinear models in order
+- [ ] require held-out session/route predictive sufficiency
+- [ ] formally reject the instrumentation boundary if no measured state is sufficient
 
-### Gate B2 — operator identification
+Claim ceiling: empirical predictive observability of the tested measured equivalence class.
+
+### Phase 6B.7 — Physical closure/restoration ladder
+
+Blocked until a stable measured state and operator exist.
+
+```text
+R0 byte/hash restoration
+R1 measured-output restoration
+R2 accepted observable-state equivalence restoration
+R3 multi-instrument carrier restoration
+R4 restoration up to a predeclared holonomy/invariant
+```
+
+Every result names its exact tier. At least R2 is required before physical relational-memory claims; R4 is required before physical holonomic-memory claims.
+
+### Phase 6C — Target-to-carrier coupling
+
+Blocked until a physical restoration tier is established.
+
+The unresolved public relation must load the carrier without candidate-label phase, sign, route, direction, workload, or core smuggling.
+
+### Small Wall adjudication
+
+Blocked until target coupling exists.
 
 Requires:
 
-- repeatable measured-state classes;
-- held-out prediction beyond baselines;
-- stable route/session scope;
-- no leakage or time-index shortcut;
-- simplest sufficient model selected.
+- predeclared fold-odd invariant
+- boundary-only extraction
+- restoration/closure at the claimed tier
+- no-smuggle controls
+- repeated seeds, sessions, routes, reboots
+- raw reconstructable evidence
 
-### Gate B3 — physical path/restoration design
-
-Blocked until B2. A restoration experiment must declare:
-
-```text
-measured baseline state
-controlled forward path
-terminal state
-physically implemented closure/inverse
-restored state
-uncertainty comparison
-wrong/reordered/sham controls
-```
+One positive does not authorize Big Wall generalization.
 
 ---
 
@@ -247,15 +303,17 @@ wrong/reordered/sham controls
 | Claim | Current status |
 |---|---|
 | Public fold boundary | Supported |
-| Selected PDN carrier live | Supported at channel level |
+| Selected PDN carrier live | Supported at channel level; strict witness closure still required |
 | Software `.holo` geometric memory | Supported at L1/L2 |
 | History-backed software restoration | Supported |
 | Inverse operator dynamics | Not established |
+| Observable physical relational state | Not established |
 | Physical relation basis | Not established |
 | Physical path history | Not established |
 | Physical restoration | Not established |
-| Orientation recovery | Not established |
-| Wall crossing | Not established |
+| Target-to-carrier coupling | Not established |
+| Fold-odd invariant | Not established |
+| Small Wall crossing | Not established |
 
 ---
 
@@ -265,8 +323,9 @@ Stop and repair before continuing if work:
 
 - returns to `verify(x)` or candidate ranking;
 - promotes a scalar projection over the complex state without justification;
-- uses an artifact generated by different source without provenance;
 - treats T300 as physical memory;
 - treats history replay as physical inverse dynamics;
-- mutates scientific content during its own review;
-- executes acquisition before authorization.
+- uses an artifact generated by different source without provenance;
+- changes scientific content during its own review;
+- executes acquisition before authorization;
+- skips carrier closure, operator identification, restoration, or target-coupling gates.
