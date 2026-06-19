@@ -32,7 +32,7 @@ test: test_carrier_witness_raw test_slot2_witness
 	$(PYTHON) -m py_compile audit_existing_t300.py carrier_witness_validate.py carrier_witness_manifest.py carrier_witness_finalize.py \
 		replication_discrepancy/analyze_replication_discrepancy.py replication_discrepancy/test_replication_discrepancy.py \
 		theory_gate_audit/complex_geometry.py theory_gate_audit/analyze_transfer_geometry.py \
-		theory_gate_audit/analyze_carrier_consolidation.py \
+		theory_gate_audit/analyze_carrier_consolidation.py theory_gate_audit/run_carrier_consolidation.py \
 		theory_gate_audit/reconcile_gate_layers.py theory_gate_audit/test_reconcile_gate_layers.py \
 		theory_gate_audit/test_transfer_geometry.py theory_gate_audit/test_carrier_consolidation.py \
 		theory_gate_audit/verify_authority_stack.py
