@@ -1,0 +1,38 @@
+{
+  "schema_id": "CAT_CAS_PHASE6_COMBINED_CAMPAIGN_BINDING_V1",
+  "owner_decision": "RATIFY_AND_AUTHORIZE_COMBINED_TONE_ORDER_OBSERVABILITY_CAMPAIGN",
+  "ratification_sha256": "f0e053b8cfbe9c266d634d498ef0aaf37e0aa4d74927e54e08d5f5cdc2d98cc0",
+  "plan_source_commit": "f5b6079a5748bb6138ab19d1c22d79c74734dddf",
+  "campaign_plan": {
+    "size": 5884573,
+    "sha256": "eb5a46d0a37d66910649467cf0d4e3cf947dee11fab94a36e9bdfed388455e53"
+  },
+  "campaign_manifest_sha256": "9588fef3653b4cc904768656951d61a845cae059b40e59e1b65529c7480e0c20",
+  "workflow": {
+    "run_id": 27852485669,
+    "artifact_id": 7759677732,
+    "artifact_digest": "sha256:3bea5dc2bdb0ed694e0e2eb173837fa84a4a4e9a32f7c74bd08db0c24a0cb35b",
+    "authority_tests": "PASS",
+    "planner_tests": "PASS",
+    "session_compiler_tests": "PASS",
+    "orchestrator_tests": "PASS",
+    "double_generation_byte_diff": "PASS",
+    "all_twelve_sessions_compiled": "PASS"
+  },
+  "summary": {
+    "sessions": 12,
+    "tone_symbols": 3456,
+    "persistence_events": 768,
+    "trajectory_steps": 3072
+  },
+  "authorization": {
+    "campaign_implementation_authorized": true,
+    "physical_acquisition_authorized_after_preflight": true,
+    "physical_acquisition_executed": false,
+    "restoration_authorized": false,
+    "target_coupling_authorized": false,
+    "orientation_recovery_authorized": false,
+    "small_wall_authorized": false
+  },
+  "next_boundary": "LOCAL_EXECUTOR_IMPLEMENTATION_AND_CATCAS_PREFLIGHT"
+}
