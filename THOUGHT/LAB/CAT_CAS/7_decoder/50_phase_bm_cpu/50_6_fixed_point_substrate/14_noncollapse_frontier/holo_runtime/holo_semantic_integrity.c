@@ -254,6 +254,14 @@ static int parse_bool_bounded(const char *begin, const char *end,
     return 1;
 }
 
+static int parse_int_bounded(const char *begin, const char *end,
+                             const char *key, int *value) {
+    const char *found = find_key_bounded(begin, end, key);
+    const char *colon;
+    if (!found || !(colon = strchr(found, ':')) || colon >= end) return 0;
+    return sscanf(colon + 1, "%d", value) == 1;
+}
+
 static int parse_text_bounded(const char *begin, const char *end,
                               const char *key, char *output, size_t size) {
     const char *found = find_key_bounded(begin, end, key);
@@ -277,24 +285,59 @@ int holo_read_json_strict(HoloObject *object, const char *path) {
     char *json;
     const char *evolution_begin;
     const char *evolution_end;
+    const char *restoration_begin;
+    const char *restoration_end;
     const char *boundary_begin;
     const char *boundary_end;
     char continuation[HOLO_TEXT_LEN];
     char closure[HOLO_TEXT_LEN];
+    char restoration_closure[HOLO_TEXT_LEN];
+    char evidence_level[HOLO_TEXT_LEN];
+    char verification_scope[HOLO_TEXT_LEN];
+    int history_present;
+    int history_appendable;
+    int history_reversible;
+    int history_sealed;
+    int restoration_verified;
+    int serialized_roundtrip;
+    int restored;
     int crossed;
     int projection_invoked;
     int invariant_extracted;
+    int boundary_step;
     int rc;
 
     if (!object || !path) return -1;
     json = read_all(path);
     if (!json ||
         !find_section(json, "evolution", &evolution_begin, &evolution_end) ||
+        !find_section(json, "restoration", &restoration_begin, &restoration_end) ||
         !find_section(json, "collapse_boundary", &boundary_begin, &boundary_end) ||
+        !parse_bool_bounded(evolution_begin, evolution_end, "history_present",
+                            &history_present) ||
+        !parse_bool_bounded(evolution_begin, evolution_end, "history_appendable",
+                            &history_appendable) ||
+        !parse_bool_bounded(evolution_begin, evolution_end, "history_reversible",
+                            &history_reversible) ||
+        !parse_bool_bounded(evolution_begin, evolution_end, "history_sealed",
+                            &history_sealed) ||
+        !parse_bool_bounded(evolution_begin, evolution_end, "restoration_verified",
+                            &restoration_verified) ||
+        !parse_bool_bounded(evolution_begin, evolution_end, "serialized_roundtrip",
+                            &serialized_roundtrip) ||
         !parse_text_bounded(evolution_begin, evolution_end, "continuation_status",
                             continuation, sizeof(continuation)) ||
         !parse_text_bounded(evolution_begin, evolution_end, "closure_status",
                             closure, sizeof(closure)) ||
+        !parse_bool_bounded(restoration_begin, restoration_end, "restored",
+                            &restored) ||
+        !parse_text_bounded(restoration_begin, restoration_end, "closure_law",
+                            restoration_closure, sizeof(restoration_closure)) ||
+        !parse_text_bounded(restoration_begin, restoration_end, "evidence_level",
+                            evidence_level, sizeof(evidence_level)) ||
+        !parse_text_bounded(restoration_begin, restoration_end, "verification_scope",
+                            verification_scope, sizeof(verification_scope)) ||
+        !parse_int_bounded(boundary_begin, boundary_end, "step", &boundary_step) ||
         !parse_bool_bounded(boundary_begin, boundary_end, "crossed", &crossed) ||
         !parse_bool_bounded(boundary_begin, boundary_end, "projection_invoked",
                             &projection_invoked) ||
@@ -310,11 +353,22 @@ int holo_read_json_strict(HoloObject *object, const char *path) {
         return rc;
     }
 
-    if (object->collapse_boundary.crossed != crossed ||
-        object->collapse_boundary.projection_invoked != projection_invoked ||
-        object->collapse_boundary.invariant_extracted != invariant_extracted ||
+    if (object->evolution.path_history_present != history_present ||
+        object->evolution.path_history_appendable != history_appendable ||
+        object->evolution.path_history_reversible != history_reversible ||
+        object->evolution.path_history_sealed != history_sealed ||
+        object->evolution.path_restoration_verified != restoration_verified ||
+        object->evolution.path_serialized_roundtrip != serialized_roundtrip ||
         strcmp(object->evolution.continuation_status, continuation) != 0 ||
         strcmp(object->evolution.closure_status, closure) != 0 ||
+        object->restoration.restored != restored ||
+        strcmp(object->restoration.closure_law, restoration_closure) != 0 ||
+        strcmp(object->restoration.evidence_level, evidence_level) != 0 ||
+        strcmp(object->restoration.verification_scope, verification_scope) != 0 ||
+        object->collapse_boundary.step != boundary_step ||
+        object->collapse_boundary.crossed != crossed ||
+        object->collapse_boundary.projection_invoked != projection_invoked ||
+        object->collapse_boundary.invariant_extracted != invariant_extracted ||
         !holo_object_validate_semantic(object)) {
         holo_object_destroy(object);
         free(json);
