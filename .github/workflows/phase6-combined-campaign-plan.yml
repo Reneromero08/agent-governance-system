@@ -1,0 +1,48 @@
+name: Phase 6 Combined Campaign Plan
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/phase6-combined-campaign-plan.yml"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/**"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/gate_r/PROJECT_OWNER_RATIFICATION.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Test planner
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign
+        run: |
+          python test_campaign_plan.py
+          python -m py_compile campaign_orders.py campaign_plan.py generate_campaign_plan.py test_campaign_plan.py
+      - name: Generate deterministic plan twice
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier
+        run: |
+          rm -rf "$RUNNER_TEMP/combined_plan" "$RUNNER_TEMP/combined_plan_repeat"
+          RATIFICATION=gate_r/PROJECT_OWNER_RATIFICATION.json
+          python combined_observability_campaign/generate_campaign_plan.py run \
+            --source-commit "${GITHUB_SHA}" --ratification "$RATIFICATION" \
+            --output "$RUNNER_TEMP/combined_plan"
+          python combined_observability_campaign/generate_campaign_plan.py run \
+            --source-commit "${GITHUB_SHA}" --ratification "$RATIFICATION" \
+            --output "$RUNNER_TEMP/combined_plan_repeat"
+          diff -ru "$RUNNER_TEMP/combined_plan" "$RUNNER_TEMP/combined_plan_repeat"
+          python combined_observability_campaign/generate_campaign_plan.py verify "$RUNNER_TEMP/combined_plan"
+          find "$RUNNER_TEMP/combined_plan" -maxdepth 1 -type f -printf '%f %s bytes\n' | sort
+          sha256sum "$RUNNER_TEMP/combined_plan"/*.json
+      - name: Upload plan
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase6-combined-campaign-plan-${{ github.run_id }}
+          path: ${{ runner.temp }}/combined_plan
+          if-no-files-found: error
+          retention-days: 14
