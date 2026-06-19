@@ -382,15 +382,9 @@ def write_receipt(path: Path, receipt: Dict[str, Any], firewall: Optional[WriteF
         tmp_path.write_bytes(receipt_bytes)
         tmp_path.replace(path)
     else:
-        # Phase 2.4.1B: Firewall-enforced writes
-        # Determine write kind based on path
-        norm_path = str(path).replace("\\", "/")
-
-        # Check if this is a tmp write
-        if "/_tmp/" in norm_path or norm_path.endswith("_tmp"):
-            write_kind = "tmp"
-        else:
-            write_kind = "durable"
+        # Phase 2.4.1B: classify against the firewall's normalized
+        # repository-relative policy, never against absolute ancestor names.
+        write_kind = firewall.classify_path(path)
 
         # Ensure parent directory exists (use firewall for mkdir)
         parent_path = path.parent

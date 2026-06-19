@@ -1,30 +1,24 @@
 """
 Shared repo-root and path utilities for AGS.
 
-Provides a single source of truth for REPO_ROOT resolution so callers
-no longer need ``Path(__file__).resolve().parents[N]`` with varying N.
-
-Usage::
-    from CAPABILITY.PRIMITIVES.paths import repo_root, normalize_relpath
-    PROJECT_ROOT = repo_root()
+Provides a single source of truth for repo-root resolution and host-independent
+interpretation of repository-relative path strings. A Windows path must remain
+absolute when validated on Linux, and backslashes in a relative path must remain
+separators rather than becoming literal filename characters.
 """
+from __future__ import annotations
 
+import re
 from pathlib import Path
 from typing import Union
 
-# -- Repo root detection (cached) ------------------------------------------
-
 _ANCHOR_FILE = "AGENTS.md"
-_cached_root = None  # type: Path | None
+_WINDOWS_DRIVE = re.compile(r"^[A-Za-z]:")
+_cached_root: Path | None = None
 
 
 def repo_root() -> Path:
-    """Return the repository root directory.
-
-    Walks up from *this* file until a directory containing ``AGENTS.md``
-    is found.  The result is cached after the first call.
-    Raises ``FileNotFoundError`` if the anchor cannot be located.
-    """
+    """Return the repository root directory, cached after first discovery."""
     global _cached_root
     if _cached_root is not None:
         return _cached_root
@@ -44,33 +38,56 @@ def repo_root() -> Path:
     )
 
 
-# -- Path normalisation (delegates to cas_store) ----------------------------
+def portable_path_text(path: Union[str, Path]) -> str:
+    """Return *path* with repository separators normalized to ``/``."""
+    return str(path).replace("\\", "/")
 
-def normalize_relpath(path: Union[str, "Path"]) -> str:
-    """Normalise a repo-relative path.
 
-    Delegates to ``cas_store.normalize_relpath`` which enforces:
-    forward slashes, no leading ``./``, no ``..``, no trailing ``/``.
+def is_portable_absolute(path: Union[str, Path]) -> bool:
+    """Recognize POSIX, drive-qualified Windows, and UNC absolute paths.
+
+    ``Path.is_absolute()`` follows the current host OS and therefore treats
+    ``C:\\tmp`` as relative on Linux. Governance validation must interpret the
+    declared syntax, not the machine running the check.
     """
-    from CAPABILITY.PRIMITIVES.cas_store import normalize_relpath as _nr
-    return _nr(str(path))
+    text = portable_path_text(path)
+    return text.startswith("/") or text.startswith("//") or bool(_WINDOWS_DRIVE.match(text))
 
 
-# -- Safe resolution under repo root ---------------------------------------
+def portable_parts(path: Union[str, Path]) -> tuple[str, ...]:
+    """Return separator-normalized path components without collapsing ``..``."""
+    return tuple(part for part in portable_path_text(path).split("/") if part not in ("", "."))
 
-def resolve_under_root(relpath: Union[str, "Path"]) -> Path:
-    """Resolve *relpath* under the repo root and verify containment.
 
-    Returns the resolved ``Path``.  Raises ``ValueError`` if the
-    resolved path escapes the repository tree.
+def normalize_relpath(path: Union[str, Path]) -> str:
+    """Normalize and validate a repository-relative path.
+
+    Enforces forward slashes, no absolute syntax, no traversal, no leading
+    ``./``, and no trailing slash. Empty paths normalize to ``""``.
     """
-    root = repo_root()
+    text = portable_path_text(path)
+    if is_portable_absolute(text):
+        raise ValueError(f"Absolute path not allowed: {text}")
+
+    parts: list[str] = []
+    for part in portable_parts(text):
+        if part == "..":
+            raise ValueError(f"Path traversal ('..') not allowed: {text}")
+        parts.append(part)
+    return "/".join(parts)
+
+
+def resolve_under_root(
+    relpath: Union[str, Path],
+    *,
+    root: Path | None = None,
+) -> Path:
+    """Resolve *relpath* under *root* and verify component-safe containment."""
+    project_root = (root or repo_root()).resolve()
     normed = normalize_relpath(relpath)
-    resolved = (root / normed).resolve()
+    resolved = (project_root / Path(*normed.split("/"))).resolve()
     try:
-        resolved.relative_to(root.resolve())
-    except ValueError:
-        raise ValueError(
-            "Path escapes repo root: %s -> %s" % (relpath, resolved)
-        )
+        resolved.relative_to(project_root)
+    except ValueError as exc:
+        raise ValueError(f"Path escapes repo root: {relpath} -> {resolved}") from exc
     return resolved
