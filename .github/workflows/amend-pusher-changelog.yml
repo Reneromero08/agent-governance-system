@@ -1,8 +1,9 @@
 name: Amend Pusher Changelog
 
 on:
-  push:
-    branches: [amend/pusher-changelog]
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
 
 permissions:
   contents: write
@@ -13,6 +14,7 @@ concurrency:
 
 jobs:
   amend:
+    if: github.head_ref == 'amend/pusher-changelog'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
