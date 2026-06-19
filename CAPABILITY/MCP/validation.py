@@ -16,7 +16,13 @@ from pathlib import Path
 from typing import Dict, List, Optional
 
 from .primitives import compute_hash, get_validator_build_id, VALIDATOR_SEMVER, SUPPORTED_VALIDATOR_SEMVERS
-from CAPABILITY.PRIMITIVES.paths import repo_root as _repo_root
+from CAPABILITY.PRIMITIVES.paths import (
+    is_portable_absolute,
+    normalize_relpath,
+    portable_parts,
+    repo_root as _repo_root,
+    resolve_under_root,
+)
 
 
 # =============================================================================
@@ -86,8 +92,8 @@ def validate_single_path(
     """
     errors = []
 
-    # 1. Reject absolute paths
-    if Path(raw_path).is_absolute():
+    # 1. Reject absolute syntax from either Windows or POSIX, regardless of host OS
+    if is_portable_absolute(raw_path):
         errors.append({
             "code": "PATH_ESCAPES_REPO_ROOT",
             "message": f"Absolute paths are not allowed: {raw_path}",
@@ -96,8 +102,8 @@ def validate_single_path(
         })
         return errors
 
-    # 2. Reject traversal segments
-    path_parts = Path(raw_path).parts
+    # 2. Reject traversal segments using portable separator semantics
+    path_parts = portable_parts(raw_path)
     if ".." in path_parts:
         errors.append({
             "code": "PATH_CONTAINS_TRAVERSAL",
@@ -107,8 +113,9 @@ def validate_single_path(
         })
         return errors
 
-    # 3. Resolve and check containment under PROJECT_ROOT
-    abs_path = (PROJECT_ROOT / raw_path).resolve()
+    # 3. Resolve the normalized relative path and check containment
+    normalized_path = normalize_relpath(raw_path)
+    abs_path = resolve_under_root(normalized_path, root=PROJECT_ROOT)
     if not is_path_under_root(abs_path, PROJECT_ROOT.resolve()):
         errors.append({
             "code": "PATH_ESCAPES_REPO_ROOT",
@@ -162,8 +169,13 @@ def check_containment_overlap(
     abs_paths = []
 
     for orig_idx, raw_path in enumerate(paths):
-        if not Path(raw_path).is_absolute() and ".." not in Path(raw_path).parts:
-            abs_paths.append((orig_idx, raw_path, (PROJECT_ROOT / raw_path).resolve()))
+        if is_portable_absolute(raw_path) or ".." in portable_parts(raw_path):
+            continue
+        try:
+            abs_path = resolve_under_root(raw_path, root=PROJECT_ROOT)
+        except ValueError:
+            continue
+        abs_paths.append((orig_idx, raw_path, abs_path))
 
     for i, (idx_a, raw_a, abs_a) in enumerate(abs_paths):
         for j, (idx_b, raw_b, abs_b) in enumerate(abs_paths):
@@ -303,8 +315,8 @@ def verify_post_run_outputs(run_id: str) -> Dict:
             errors.extend(path_errors)
             continue
 
-        # Check existence
-        abs_path = (PROJECT_ROOT / raw_path).resolve()
+        # Check existence using the same portable path semantics as admission
+        abs_path = resolve_under_root(raw_path, root=PROJECT_ROOT)
         if not abs_path.exists():
             errors.append({
                 "code": "OUTPUT_MISSING",
@@ -369,11 +381,13 @@ def generate_output_hashes(run_id: str) -> Dict:
     for idx, raw_path in enumerate(durable_paths):
         json_pointer = f"/outputs/durable_paths/{idx}"
 
-        # Skip invalid paths
-        if Path(raw_path).is_absolute() or ".." in Path(raw_path).parts:
+        # Skip invalid paths using portable Windows/POSIX semantics
+        if is_portable_absolute(raw_path) or ".." in portable_parts(raw_path):
             continue
-
-        abs_path = (PROJECT_ROOT / raw_path).resolve()
+        try:
+            abs_path = resolve_under_root(raw_path, root=PROJECT_ROOT)
+        except ValueError:
+            continue
 
         # Skip if path escapes repo root
         if not is_path_under_root(abs_path, PROJECT_ROOT.resolve()):

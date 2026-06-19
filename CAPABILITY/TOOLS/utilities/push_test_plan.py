@@ -60,6 +60,7 @@ class TestSuite:
     name: str
     paths: tuple[str, ...]
     extra_args: tuple[str, ...] = ()
+    xdist: bool = True
 
 
 @dataclass(frozen=True)
@@ -69,6 +70,7 @@ class RiskGroup:
     trigger_prefixes: tuple[str, ...] = ()
     trigger_exact: tuple[str, ...] = ()
     trigger_globs: tuple[str, ...] = ()
+    xdist: bool = True
 
 
 RISK_GROUPS = (
@@ -108,6 +110,7 @@ RISK_GROUPS = (
             "LAW/CONTRACTS/ags_mcp_entrypoint.py",
             "TOOLS/catalytic.py",
         ),
+        xdist=False,
     ),
     RiskGroup(
         "skill-discovery",
@@ -314,7 +317,10 @@ def build_plan(paths: Iterable[str], *, exhaustive: bool = False) -> list[TestSu
 
     core_args = tuple(f"--ignore={path}" for path in CORE_IGNORES)
     suites = [TestSuite("core", (TESTBENCH,), core_args)]
-    suites.extend(TestSuite(group.name, group.tests) for group, _ in selected_risk_groups(paths))
+    suites.extend(
+        TestSuite(group.name, group.tests, xdist=group.xdist)
+        for group, _ in selected_risk_groups(paths)
+    )
     return suites
 
 
@@ -338,7 +344,7 @@ def pytest_command(
         "--durations=25",
         *suite.extra_args,
     ]
-    if workers > 0 and xdist_available:
+    if workers > 0 and xdist_available and suite.xdist:
         command.extend(["-n", str(workers), "--dist=loadfile"])
     return command
 

@@ -16,6 +16,13 @@ import json
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+from CAPABILITY.PRIMITIVES.paths import (
+    is_portable_absolute,
+    normalize_relpath,
+    portable_parts,
+    resolve_under_root,
+)
+
 
 class WriteFirewall:
     """Runtime write firewall enforcing catalytic domain separation."""
@@ -50,16 +57,8 @@ class WriteFirewall:
         self._tool_version_hash = self._compute_tool_hash()
 
     def _normalize_path(self, path: str) -> str:
-        """
-        Normalize path to forward slashes, no trailing slash.
-
-        Args:
-            path: Path string to normalize
-
-        Returns:
-            Normalized path string
-        """
-        return str(Path(path)).replace("\\", "/").rstrip("/")
+        """Normalize a repository-relative policy path portably."""
+        return normalize_relpath(path).rstrip("/")
 
     def _compute_tool_hash(self) -> str:
         """
@@ -117,41 +116,59 @@ class WriteFirewall:
         }
 
     def _resolve_and_validate_path(self, path: str | Path) -> Tuple[bool, Optional[str], Optional[str]]:
-        """
-        Resolve path and perform basic validation.
+        """Resolve a path using host-independent Windows/POSIX syntax."""
+        raw_path = str(path)
 
-        Args:
-            path: Path to validate (relative or absolute)
-
-        Returns:
-            Tuple of (valid, normalized_relative_path, error_code)
-            - valid: True if path passes basic validation
-            - normalized_relative_path: Path relative to project_root (forward slashes)
-            - error_code: Error code if validation fails, None otherwise
-        """
-        path_obj = Path(path)
-
-        # Resolve path to absolute
-        if path_obj.is_absolute():
+        # Native absolute paths are allowed only when they resolve inside the
+        # project root. Foreign absolute syntax (for example C:\ on Linux) is
+        # always an escape rather than a relative filename.
+        native_path = Path(raw_path)
+        if native_path.is_absolute():
             try:
-                resolved = path_obj.resolve()
+                resolved = native_path.resolve()
                 relative_path = resolved.relative_to(self.project_root)
-                normalized = self._normalize_path(str(relative_path))
             except ValueError:
                 return False, None, "FIREWALL_PATH_ESCAPE"
+            normalized = relative_path.as_posix()
         else:
+            if is_portable_absolute(raw_path):
+                return False, None, "FIREWALL_PATH_ESCAPE"
+            if ".." in portable_parts(raw_path):
+                return False, None, "FIREWALL_PATH_TRAVERSAL"
             try:
-                resolved = (self.project_root / path).resolve()
-                relative_path = resolved.relative_to(self.project_root)
-                normalized = self._normalize_path(str(relative_path))
+                normalized = normalize_relpath(raw_path)
+                resolved = resolve_under_root(normalized, root=self.project_root)
+                normalized = resolved.relative_to(self.project_root).as_posix()
             except ValueError:
                 return False, None, "FIREWALL_PATH_ESCAPE"
-
-        # Check for path traversal in original path
-        if ".." in Path(path).parts:
-            return False, None, "FIREWALL_PATH_TRAVERSAL"
 
         return True, normalized, None
+
+    def _target_path(self, path: str | Path) -> Path:
+        valid, normalized, error_code = self._resolve_and_validate_path(path)
+        if not valid or normalized is None:
+            raise ValueError(error_code or "FIREWALL_PATH_ESCAPE")
+        return self.project_root / Path(*normalized.split("/"))
+
+    def classify_path(self, path: str | Path) -> str:
+        """Return ``tmp`` or ``durable`` for an allowed path, else raise."""
+        valid, normalized, error_code = self._resolve_and_validate_path(path)
+        if not valid or normalized is None:
+            raise FirewallViolation(self._build_violation_receipt(
+                operation="classify",
+                path=str(path),
+                error_code=error_code or "FIREWALL_PATH_ESCAPE",
+                message=f"Path validation failed: {error_code}",
+            ))
+        domain, domain_error = self._check_path_domain(normalized)
+        if domain not in {"tmp", "durable"}:
+            raise FirewallViolation(self._build_violation_receipt(
+                operation="classify",
+                path=str(path),
+                error_code=domain_error or "FIREWALL_PATH_EXCLUDED",
+                message="Path is not in an allowed write domain",
+            ))
+        return domain
 
     def _check_path_domain(self, normalized_path: str) -> Tuple[Optional[str], Optional[str]]:
         """
@@ -336,10 +353,8 @@ class WriteFirewall:
         if not valid:
             raise FirewallViolation(violation)
 
-        # Perform the write
-        path_obj = Path(path) if not Path(path).is_absolute() else Path(path)
-        if not path_obj.is_absolute():
-            path_obj = self.project_root / path_obj
+        # Perform the write using the same normalized target that was validated.
+        path_obj = self._target_path(path)
 
         if isinstance(data, str):
             path_obj.write_text(data, encoding="utf-8")
@@ -369,11 +384,8 @@ class WriteFirewall:
         if not valid:
             raise FirewallViolation(violation)
 
-        # Perform the mkdir
-        path_obj = Path(path) if not Path(path).is_absolute() else Path(path)
-        if not path_obj.is_absolute():
-            path_obj = self.project_root / path_obj
-
+        # Perform the mkdir using the same normalized target that was validated.
+        path_obj = self._target_path(path)
         path_obj.mkdir(parents=parents, exist_ok=exist_ok)
 
     def safe_rename(
@@ -414,15 +426,9 @@ class WriteFirewall:
             violation["path"] = f"{src} -> {dst}"
             raise FirewallViolation(violation)
 
-        # Perform the rename
-        src_obj = Path(src) if not Path(src).is_absolute() else Path(src)
-        dst_obj = Path(dst) if not Path(dst).is_absolute() else Path(dst)
-
-        if not src_obj.is_absolute():
-            src_obj = self.project_root / src_obj
-        if not dst_obj.is_absolute():
-            dst_obj = self.project_root / dst_obj
-
+        # Perform the rename using the same normalized targets that were validated.
+        src_obj = self._target_path(src)
+        dst_obj = self._target_path(dst)
         src_obj.rename(dst_obj)
 
     def safe_unlink(
@@ -462,13 +468,17 @@ class WriteFirewall:
                 message="Path not in allowed domain or is excluded"
             )
             raise FirewallViolation(violation)
+        if domain == "durable" and not self._commit_gate_open:
+            raise FirewallViolation(self._build_violation_receipt(
+                operation="unlink",
+                path=str(path),
+                kind="durable",
+                error_code="FIREWALL_DURABLE_WRITE_BEFORE_COMMIT",
+                message="Durable unlink attempted before commit gate opened",
+            ))
 
-        # Perform the unlink
-        path_obj = Path(path) if not Path(path).is_absolute() else Path(path)
-        if not path_obj.is_absolute():
-            path_obj = self.project_root / path_obj
-
-        path_obj.unlink()
+        # Perform the unlink using the same normalized target that was validated.
+        self._target_path(path).unlink()
 
 
 class FirewallViolation(Exception):

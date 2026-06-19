@@ -44,8 +44,8 @@ def test_capability_pinned_routes_and_verifies(tmp_path: Path) -> None:
     env["CATALYTIC_PINS_PATH"] = str(pins_path)
 
     # The v1 capability is pinned to a concrete ant-worker command that expects these files.
-    # Use unique registry root to avoid parallel test conflicts
-    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / f"phase65_registry_{unique_suffix}"
+    # The canonical capability adapter owns this fixed registry root.
+    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
     task_path = reg_root / "task.json"
     in_path = reg_root / "in.txt"
     out_path = reg_root / "out.txt"
@@ -136,7 +136,7 @@ def test_verify_rejects_unpinned_even_if_pipeline_artifact_exists(tmp_path: Path
     env = dict(os.environ)
     env["CATALYTIC_PINS_PATH"] = str(pins_path)
 
-    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / f"phase65_registry_{unique_suffix}"
+    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
     task_path = reg_root / "task.json"
     in_path = reg_root / "in.txt"
     out_path = reg_root / "out.txt"

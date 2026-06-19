@@ -12,6 +12,8 @@ These tests are RIGOROUS - they test actual correctness, not just that the syste
 """
 import json
 import pytest
+
+pytestmark = pytest.mark.requires_cassettes
 import sys
 from pathlib import Path
 from typing import Any, Dict, List
