@@ -28,10 +28,12 @@ from CAPABILITY.TOOLS.utilities.push_test_plan import (
     changed_paths,
     plan_payload,
     repo_python,
+    resolve_base_ref,
     run_plan,
 )
 
 TOKEN_FILE = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs" / "ALLOW_PUSH.token"
+ZERO_SHA = "0" * 40
 writer = GuardedWriter(
     project_root=PROJECT_ROOT,
     tmp_roots=["LAW/CONTRACTS/_runs/_tmp"],
@@ -56,6 +58,13 @@ def _resolve_base_sha(base_ref: str | None) -> str | None:
         ["git", "rev-parse", "--verify", f"{base_ref}^{{commit}}"],
         required=True,
     )
+
+
+def _freeze_base(explicit_base: str | None) -> tuple[str | None, str | None, str]:
+    """Resolve one immutable base for both changed-path planning and receipts."""
+    base_ref = resolve_base_ref(explicit_base)
+    base_sha = _resolve_base_sha(base_ref)
+    return base_ref, base_sha, base_sha or ZERO_SHA
 
 
 def _ensure_head_unchanged(expected_head: str) -> bool:
@@ -204,11 +213,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0
 
     try:
-        paths, base_ref = changed_paths(args.base_ref)
-        base_sha = _resolve_base_sha(base_ref)
+        base_ref, base_sha, frozen_base = _freeze_base(args.base_ref)
+        paths, _ = changed_paths(frozen_base)
         payload = plan_payload(
             paths,
-            base_ref=base_ref,
+            base_ref=base_sha,
             exhaustive=args.exhaustive,
             workers=max(args.workers, 0),
         )
