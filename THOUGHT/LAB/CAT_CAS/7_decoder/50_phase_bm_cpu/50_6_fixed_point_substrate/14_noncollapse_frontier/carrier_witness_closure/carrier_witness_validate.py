@@ -16,14 +16,12 @@ import csv
 import hashlib
 import json
 import math
-import shutil
 import struct
 import subprocess
 import sys
 import tempfile
-from collections import defaultdict
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 
 SCHEMA_ID = "CAT_CAS_PDN_CARRIER_CLOSURE_REPORT_V1"
 RAW_RECORD = struct.Struct("<Qd")
@@ -212,9 +210,19 @@ def compare_summary(
     errors: list[str] = []
     if len(retained) != len(reconstructed):
         return [f"summary row count mismatch {len(retained)} != {len(reconstructed)}"]
-    text_fields = ("family", "declared_mode", "actual_mode", "trial", "hash_restored", "theta_idx")
-    numeric_fields = [field for b in range(nbin) for field in (f"b{b:02d}_I", f"b{b:02d}_Q")]
-    numeric_fields += [f"fl{b:02d}" for b in range(nbin)]
+    text_fields = (
+        "family",
+        "declared_mode",
+        "actual_mode",
+        "trial",
+        "hash_restored",
+        "theta_idx",
+    )
+    numeric_fields = [
+        field for bin_index in range(nbin)
+        for field in (f"b{bin_index:02d}_I", f"b{bin_index:02d}_Q")
+    ]
+    numeric_fields += [f"fl{bin_index:02d}" for bin_index in range(nbin)]
     for index, (left, right) in enumerate(zip(retained, reconstructed, strict=True)):
         for field in text_fields:
             if left.get(field) != right.get(field):
@@ -242,15 +250,29 @@ def write_reconstructed_summary(
 ) -> None:
     tones = schedule.get("tones_hz", [])
     codebook = schedule.get("codebook", {})
-    fieldnames = ["family", "declared_mode", "actual_mode", "trial", "hash_restored", "theta_idx"]
-    fieldnames += [field for b in range(nbin) for field in (f"b{b:02d}_I", f"b{b:02d}_Q")]
-    fieldnames += [f"fl{b:02d}" for b in range(nbin)]
+    fieldnames = [
+        "family",
+        "declared_mode",
+        "actual_mode",
+        "trial",
+        "hash_restored",
+        "theta_idx",
+    ]
+    fieldnames += [
+        field for bin_index in range(nbin)
+        for field in (f"b{bin_index:02d}_I", f"b{bin_index:02d}_Q")
+    ]
+    fieldnames += [f"fl{bin_index:02d}" for bin_index in range(nbin)]
     with path.open("w", newline="") as handle:
         handle.write(
             "# SLOT2 MATRIX reconstructed=true "
             f"nbin={nbin} seed={schedule.get('seed')}\n"
         )
-        handle.write("# tones_hz=" + ",".join(f"{float(value):.4f}" for value in tones) + "\n")
+        handle.write(
+            "# tones_hz="
+            + ",".join(f"{float(value):.4f}" for value in tones)
+            + "\n"
+        )
         for index, name in enumerate(("basis", "rotation", "residual", "mini")):
             values = codebook.get(name, [])
             handle.write(
@@ -264,9 +286,15 @@ def write_reconstructed_summary(
 
 
 def reconstruct_run(run_dir: Path, analyzer: Path, temp_root: Path) -> dict[str, Any]:
-    required_missing = sorted(name for name in REQUIRED_RUN_FILES if not (run_dir / name).is_file())
+    required_missing = sorted(
+        name for name in REQUIRED_RUN_FILES if not (run_dir / name).is_file()
+    )
     if required_missing:
-        return {"run_id": run_dir.name, "valid": False, "errors": [f"missing {required_missing}"]}
+        return {
+            "run_id": run_dir.name,
+            "valid": False,
+            "errors": [f"missing {required_missing}"],
+        }
 
     errors: list[str] = []
     run = load_json(run_dir / "run.json")
@@ -304,45 +332,80 @@ def reconstruct_run(run_dir: Path, analyzer: Path, temp_root: Path) -> dict[str,
                 start_tsc = int(row["slot_start_tsc"])
                 deadline_tsc = int(row["capture_deadline_tsc"])
             except ValueError as exc:
-                errors.append(f"window {expected_index} has invalid numeric metadata: {exc}")
+                errors.append(
+                    f"window {expected_index} has invalid numeric metadata: {exc}"
+                )
                 continue
             if window_index != expected_index:
-                errors.append(f"window index discontinuity at {expected_index}: {window_index}")
+                errors.append(
+                    f"window index discontinuity at {expected_index}: {window_index}"
+                )
             if offset != expected_records:
-                errors.append(f"raw offset discontinuity at window {window_index}: {offset} != {expected_records}")
+                errors.append(
+                    f"raw offset discontinuity at window {window_index}: "
+                    f"{offset} != {expected_records}"
+                )
             if count < 4:
                 errors.append(f"window {window_index} has only {count} samples")
                 continue
             if not 0 <= bin_index < nbin:
-                errors.append(f"window {window_index} bin index {bin_index} outside nbin={nbin}")
+                errors.append(
+                    f"window {window_index} bin index {bin_index} outside nbin={nbin}"
+                )
                 continue
             timestamps, periods = read_raw_window(raw_handle, offset, count)
             expected_records += count
             if any(not math.isfinite(value) for value in periods):
-                errors.append(f"window {window_index} contains non-finite ring periods")
-            if any(right <= left for left, right in zip(timestamps, timestamps[1:])):
-                errors.append(f"window {window_index} TSC samples are not strictly increasing")
+                errors.append(
+                    f"window {window_index} contains non-finite ring periods"
+                )
+            if any(
+                right <= left
+                for left, right in zip(timestamps, timestamps[1:])
+            ):
+                errors.append(
+                    f"window {window_index} TSC samples are not strictly increasing"
+                )
             if timestamps[0] < start_tsc:
                 errors.append(f"window {window_index} first TSC precedes slot start")
             nominal_interval = tsc_hz / read_hz if read_hz else 0.0
             if timestamps[-1] > deadline_tsc + 2.0 * nominal_interval:
                 errors.append(f"window {window_index} exceeds deadline tolerance")
-            if int(row["first_sample_tsc"]) != timestamps[0] or int(row["last_sample_tsc"]) != timestamps[-1]:
-                errors.append(f"window {window_index} first/last TSC metadata mismatch")
-            temperatures = (float(row["temp_before_c"]), float(row["temp_after_c"]))
-            if any(not math.isfinite(value) or value < -100.0 for value in temperatures):
-                errors.append(f"window {window_index} has invalid thermal telemetry")
+            if (
+                int(row["first_sample_tsc"]) != timestamps[0]
+                or int(row["last_sample_tsc"]) != timestamps[-1]
+            ):
+                errors.append(
+                    f"window {window_index} first/last TSC metadata mismatch"
+                )
+            temperatures = (
+                float(row["temp_before_c"]),
+                float(row["temp_after_c"]),
+            )
+            if any(
+                not math.isfinite(value) or value < -100.0
+                for value in temperatures
+            ):
+                errors.append(
+                    f"window {window_index} has invalid thermal telemetry"
+                )
             if any(value >= veto for value in temperatures):
                 errors.append(f"window {window_index} reached temperature veto")
 
-            result_i, result_q, result_magnitude = lockin(periods=periods, timestamps=timestamps,
-                                                          frequency_hz=tone_hz,
-                                                          origin_tsc=start_tsc,
-                                                          tsc_hz=tsc_hz)
-            _, _, result_floor = lockin(periods=periods, timestamps=timestamps,
-                                        frequency_hz=1.37 * tone_hz + 0.071,
-                                        origin_tsc=start_tsc,
-                                        tsc_hz=tsc_hz)
+            result_i, result_q, result_magnitude = lockin(
+                timestamps,
+                periods,
+                tone_hz,
+                start_tsc,
+                tsc_hz,
+            )
+            _, _, result_floor = lockin(
+                timestamps,
+                periods,
+                1.37 * tone_hz + 0.071,
+                start_tsc,
+                tsc_hz,
+            )
             expected_values = {
                 "computed_I": result_i,
                 "computed_Q": result_q,
@@ -364,7 +427,9 @@ def reconstruct_run(run_dir: Path, analyzer: Path, temp_root: Path) -> dict[str,
             symbol = reconstructed_by_symbol.setdefault(
                 symbol_index,
                 {
-                    "family": "real" if row["family"] == "preamble" else row["family"],
+                    "family": (
+                        "real" if row["family"] == "preamble" else row["family"]
+                    ),
                     "declared_mode": row["declared_mode"],
                     "actual_mode": row["actual_mode"],
                     "trial": row["trial"],
@@ -373,7 +438,11 @@ def reconstruct_run(run_dir: Path, analyzer: Path, temp_root: Path) -> dict[str,
                     "bins": {},
                 },
             )
-            symbol["bins"][bin_index] = (result_i, result_q, result_floor)
+            symbol["bins"][bin_index] = (
+                result_i,
+                result_q,
+                result_floor,
+            )
 
     if raw_path.stat().st_size != expected_records * RAW_RECORD.size:
         errors.append(
@@ -407,15 +476,27 @@ def reconstruct_run(run_dir: Path, analyzer: Path, temp_root: Path) -> dict[str,
 
     reconstructed_path = temp_root / f"{run_id}_summary.csv"
     analysis_path = temp_root / f"{run_id}_analysis.json"
-    write_reconstructed_summary(reconstructed_path, schedule, reconstructed_rows, nbin)
+    write_reconstructed_summary(
+        reconstructed_path,
+        schedule,
+        reconstructed_rows,
+        nbin,
+    )
     process = subprocess.run(
-        [sys.executable, str(analyzer), str(reconstructed_path), str(analysis_path)],
+        [
+            sys.executable,
+            str(analyzer),
+            str(reconstructed_path),
+            str(analysis_path),
+        ],
         text=True,
         capture_output=True,
         check=False,
     )
     if process.returncode not in (0, 1):
-        errors.append(f"analyzer failed rc={process.returncode}: {process.stderr.strip()}")
+        errors.append(
+            f"analyzer failed rc={process.returncode}: {process.stderr.strip()}"
+        )
         reconstructed_analysis: dict[str, Any] = {}
     else:
         reconstructed_analysis = load_json(analysis_path)
@@ -427,7 +508,9 @@ def reconstruct_run(run_dir: Path, analyzer: Path, temp_root: Path) -> dict[str,
                 errors.append(f"analysis metric {key} missing/invalid: {exc}")
                 continue
             if not close(actual, expected):
-                errors.append(f"analysis metric {key} mismatch {actual} != {expected}")
+                errors.append(
+                    f"analysis metric {key} mismatch {actual} != {expected}"
+                )
         if retained_analysis.get("gates") != reconstructed_analysis.get("gates"):
             errors.append("analysis gate map mismatch")
         if retained_analysis.get("verdict") != reconstructed_analysis.get("verdict"):
@@ -461,36 +544,61 @@ def validate_campaign(campaign_dir: Path, analyzer: Path) -> dict[str, Any]:
     if not isinstance(expected_runs, list):
         raise ValidationError("campaign runs must be a list")
     expected_ids = {
-        str(item["run_id"]): item for item in expected_runs if isinstance(item, dict) and "run_id" in item
+        str(item["run_id"]): item
+        for item in expected_runs
+        if isinstance(item, dict) and "run_id" in item
     }
-    run_dirs = {path.name: path for path in (campaign_dir / "runs").iterdir() if path.is_dir()}
+    runs_root = campaign_dir / "runs"
+    if not runs_root.is_dir():
+        raise ValidationError("campaign has no runs directory")
+    run_dirs = {path.name: path for path in runs_root.iterdir() if path.is_dir()}
     missing = sorted(set(expected_ids) - set(run_dirs))
     unexpected = sorted(set(run_dirs) - set(expected_ids))
 
     with tempfile.TemporaryDirectory(prefix="carrier-witness-") as temp:
         temp_root = Path(temp)
-        results = [reconstruct_run(run_dirs[run_id], analyzer, temp_root) for run_id in sorted(run_dirs)]
+        results = [
+            reconstruct_run(run_dirs[run_id], analyzer, temp_root)
+            for run_id in sorted(run_dirs)
+        ]
 
-    structural_valid = not missing and not unexpected and all(result["valid"] for result in results)
+    structural_valid = (
+        not missing
+        and not unexpected
+        and all(result["valid"] for result in results)
+    )
     primary_route = str(campaign.get("primary_route", "v4s5"))
     required_seeds = {int(seed) for seed in campaign.get("required_seeds", [])}
     primary_matrix = [
-        result for result in results
-        if result.get("route") == primary_route and result.get("condition") == "matrix"
+        result
+        for result in results
+        if result.get("route") == primary_route
+        and result.get("condition") == "matrix"
     ]
-    primary_seed_map = {int(result["seed"]): result for result in primary_matrix if result.get("seed") is not None}
+    primary_seed_map = {
+        int(result["seed"]): result
+        for result in primary_matrix
+        if result.get("seed") is not None
+    }
     primary_complete = set(primary_seed_map) == required_seeds
     primary_scientific_pass = primary_complete and all(
-        primary_seed_map[seed]["valid"] and primary_seed_map[seed]["scientific_pass"]
+        primary_seed_map[seed]["valid"]
+        and primary_seed_map[seed]["scientific_pass"]
         for seed in required_seeds
     )
     controls = [
-        result for result in results
-        if result.get("route") == primary_route and result.get("condition") in {"silent", "scramble"}
+        result
+        for result in results
+        if result.get("route") == primary_route
+        and result.get("condition") in {"silent", "scramble"}
     ]
-    control_conditions = {result.get("condition") for result in controls if result["valid"]}
+    control_conditions = {
+        result.get("condition") for result in controls if result["valid"]
+    }
     controls_complete = {"silent", "scramble"} <= control_conditions
-    controls_null = controls_complete and all(not result["scientific_pass"] for result in controls)
+    controls_null = controls_complete and all(
+        not result["scientific_pass"] for result in controls
+    )
 
     if structural_valid and primary_scientific_pass and controls_null:
         status = "CLOSED_ROUTE_4_5"
@@ -540,18 +648,26 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     if not args.campaign_dir.is_dir():
-        print(f"campaign directory does not exist: {args.campaign_dir}", file=sys.stderr)
+        print(
+            f"campaign directory does not exist: {args.campaign_dir}",
+            file=sys.stderr,
+        )
         return 2
     if not args.analyzer.is_file():
         print(f"analyzer does not exist: {args.analyzer}", file=sys.stderr)
         return 2
     try:
-        report = validate_campaign(args.campaign_dir.resolve(), args.analyzer.resolve())
+        report = validate_campaign(
+            args.campaign_dir.resolve(),
+            args.analyzer.resolve(),
+        )
     except (ValidationError, OSError, ValueError) as exc:
         print(f"INVALID: {exc}", file=sys.stderr)
         return 2
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+    args.output.write_text(
+        json.dumps(report, indent=2, sort_keys=True) + "\n"
+    )
     print(report["status"])
     print(f"structural_valid={report['structural_valid']}")
     print(f"primary_complete={report['primary_complete']}")
@@ -559,12 +675,17 @@ def main() -> int:
     print(f"controls_null={report['controls_null']}")
     for run in report["runs"]:
         print(
-            f"{run['run_id']}: valid={run['valid']} scientific_pass={run['scientific_pass']} "
+            f"{run['run_id']}: valid={run['valid']} "
+            f"scientific_pass={run['scientific_pass']} "
             f"windows={run['windows']} raw_records={run['raw_records']}"
         )
         for error in run["errors"]:
             print(f"  ERROR: {error}")
-    return 0 if report["status"] in {"CLOSED_ROUTE_4_5", "CLOSED_MULTI_ROUTE"} else 1
+    return (
+        0
+        if report["status"] in {"CLOSED_ROUTE_4_5", "CLOSED_MULTI_ROUTE"}
+        else 1
+    )
 
 
 if __name__ == "__main__":
