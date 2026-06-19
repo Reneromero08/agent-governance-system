@@ -79,13 +79,15 @@ static void replace_once(const char *path, const char *from, const char *to) {
 static void make_open_object(HoloObject *object, OrbitState *initial,
                              OrbitState *terminal) {
     EvolParams params = { .max_steps = 16, .seed = 42 };
+    OrbitState restored;
     orbit_init(initial, 256, 23, 233);
     *terminal = *initial;
     assert(holo_object_init(object, 42, 256, 23, 233) == 0);
     assert(holo_path_evolve(object->evolution.path_history, terminal, &params) == HOLO_PATH_OK);
     holo_record_evolution(object, params.seed, terminal->steps,
                           terminal->acc_real, terminal->acc_imag);
-    assert(holo_verify_software_restoration(object, initial, terminal, initial, 0) == 0);
+    assert(holo_verify_software_restoration(object, initial, terminal, &restored, 0) == 0);
+    assert(holo_orbit_state_equal_bitwise(initial, &restored));
 }
 
 static void test_semantic_forgery_detection(void) {
@@ -157,7 +159,7 @@ static void test_strict_reader(void) {
     holo_object_destroy(&loaded);
     puts("STRICT_READER_VALID_ARTIFACT_PASS");
 
-    replace_once(path, "\"crossed\": true", "\"crossed\":false");
+    replace_once(path, "\"crossed\": true", "\"crossed\": null");
     assert(holo_read_json_strict(&loaded, path) != 0);
     puts("SERIALIZED_LIFECYCLE_TAMPERING_REJECTED_PASS");
 
