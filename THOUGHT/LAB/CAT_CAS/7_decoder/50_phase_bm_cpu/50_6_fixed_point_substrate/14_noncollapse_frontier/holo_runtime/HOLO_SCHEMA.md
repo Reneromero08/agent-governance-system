@@ -1,264 +1,226 @@
-# L4B `.holo` Geometric Memory Schema
+# L4B `.holo` Executable Geometric-Memory Schema
 
-## Status and claim ceiling
+**Schema family:** `CAT_CAS_HOLO_GEOMETRY`  
+**Serialized version:** `1.4.0`  
+**Integrity profile:** `HOLO_RUNTIME_INTEGRITY_V1`  
+**Claim ceiling:** L1/L2 software architecture
 
-This document defines the L4B executable geometric-memory architecture.
-It is an L1/L2 software primitive and an architectural hypothesis, not a
-physics claim or evidence of physical restoration.
+---
 
-**CATALYSIS IS THE HOLOGRAM.** The hologram is the catalytic relation itself.
-Phase is a carrier coordinate, geometry is memory, an algorithm is a local
-traversal, an observable is a boundary projection, and the surviving invariant
-is the memory of catalytic closure.
+## Core statement
 
-## Executable object
+**CATALYSIS IS THE HOLOGRAM.**
 
-`HoloObject` separates seven roles:
+The hologram is the catalytic relation itself:
 
-1. `HoloGeometry` stores the unresolved fold-orbit coordinates, the relation
-   basis that exchanges them, and a neutral reference. This is the memory.
-2. `HoloCarrier` stores software/physical status, channel coordinates, and
-   phase metadata. Phase transports or addresses the relation; it does not
-   define `.holo`.
-3. `HoloEvolution` identifies the reusable operator, step count, continuation
-   state, and appendable `PathStep` reference.
-4. `HoloProjection` declares the boundary operator and materialization mode.
-5. `HoloInvariantFamily` predeclares typed invariant records and rejects final
-   extraction until the `CollapseBoundary` has been crossed.
-6. `CatalyticRestoration` records restoration references, closure law, and
-   evidence level without claiming a physical restoration measurement.
-7. `HoloCollapseBoundary` records the explicit projection event and the only
-   point where invariant extraction is permitted.
+```text
+phase is a carrier coordinate
+geometry is memory
+an algorithm is a local traversal
+an observable is a boundary projection
+a surviving invariant is memory of closure
+```
+
+`.holo` is not a scalar answer file and not a candidate transcript. It stores an unresolved relational object capable of producing declared boundary projections.
+
+---
+
+## Canonical executable object
+
+`HoloObject` separates these roles:
+
+| Role | Object | Meaning |
+|---|---|---|
+| Relational memory | `HoloGeometry` | Fold-orbit coordinates, neutral reference, and relation basis |
+| Carrier | `HoloCarrier` | Complex phase/channel coordinates and substrate status |
+| Evolution | `HoloEvolution` | Operator identity, continuation state, and owned path history |
+| Boundary projection | `HoloProjection` | Explicit projection operator and materialization mode |
+| Invariant memory | `HoloInvariantFamily` | Predeclared typed relations evaluated only at the boundary |
+| Physical evidence boundary | `HoloPhysicalMappingReference` | Digest-bound mapping contract and support classifications |
+| Future experiment contract | `HoloObservabilityDesignReference` | Sealed L4B.5B0 design reference; no implementation authorization |
+| Restoration record | `CatalyticRestoration` | Scope and evidence for software restoration only |
+| Projection event | `HoloCollapseBoundary` | The single declared materialization event |
 
 The runtime flow is:
 
 ```text
 relational geometry
--> carrier-mediated evolution
--> catalytic closure
--> explicit projection
--> invariant extraction at CollapseBoundary
+→ carrier-mediated evolution
+→ preserved ordered path
+→ catalytic closure declaration
+→ explicit boundary projection
+→ invariant-family extraction
 ```
 
-`holo_geometry_render()` executes the native relation as
-`neutral + basis * (coordinates - neutral)`. For the L4B fold-exchange basis,
-this renders `[lower, mirror]` as `[mirror, lower]` while retaining both as one
-unresolved orbit object.
+---
 
-## Lineage
+## Native geometry
 
-### TINY_COMPRESS
-
-The image `.holo` primitive stored coordinates, basis, mean/neutral reference,
-and render depth. Rendering reconstructed the object through the stored basis.
-L4B preserves that structure as orbit coordinates, relation basis, neutral
-reference, and a declared projection. It stores geometry capable of producing
-a boundary trace, not only the trace.
-
-### HOLO operator geometry
-
-The model `.holo` path evaluates `y = x @ SVh.T @ U.T`: coordinates traverse
-factorized operator geometry without first constructing the dense matrix. L4B
-preserves the same distinction through `HoloMaterializationMode`:
-
-- `native_holo`: traverse stored coordinates and relation basis directly.
-- `hybrid`: combine native relations with an explicitly materialized stage.
-- `materialized_fallback`: construct or consume dense state as a declared
-  projection fallback. It is never reported as native geometry.
-
-The current fold-orbit runtime is `native_holo`. It does not yet implement a
-dense fallback operator; the enum and serialized declaration establish the
-boundary for later operators.
-
-### CAT_CAS non-collapse doctrine
-
-`OrbitState`, `FoldPair`, `PathStep`, carrier relations, delayed measurement,
-and conservative claim levels remain intact. The `.holo` witness adds geometric
-memory around that evolution. It does not select a branch or claim orientation
-recovery. The public invariant remains the fold orbit `{d, N-d}`.
-
-## JSON witness
-
-Schema family `CAT_CAS_HOLO_GEOMETRY`, version `1.3.0`, emits:
+`holo_geometry_render()` applies:
 
 ```text
-schema identity and CATALYSIS_IS_THE_HOLOGRAM hypothesis
-unresolved fold_pair
-holo_geometry (basis, coordinates, neutral reference, status)
-physical_mapping (sealed contract reference, digest, support counts, review state)
-carrier (coordinates and phase relation)
-evolution (operator, steps, path history, closure)
-projection (operator, materialization mode, allowed boundary)
-invariant_family (typed records, operators, results, tolerances, evidence)
-restoration (references, restored status, evidence level)
-collapse_boundary
-forbidden_fields_scan
+neutral + basis × (coordinates - neutral)
 ```
 
-The reader requires each structural section, restores geometry and path data,
-and recomputes the invariant family. Serialized pass flags are not trusted.
-The writer rejects invalid structure and scans serialized field names before
-accepting the witness.
+For the fold-exchange basis, `[lower,mirror]` renders as `[mirror,lower]` while both remain coordinates of one unresolved orbit.
 
-## L4B.2 reversible path history
-
-`HoloEvolution` owns one heap-allocated `HoloPathHistory`. `holo_object_init()`
-allocates it, `holo_replace_path_history()` transfers replacement ownership,
-and `holo_object_destroy()` releases it. Standalone histories expose explicit
-initialize, reset, append, seal, validate, reverse, serialize, deserialize, and
-destroy operations. Capacity grows geometrically with checked bounds; failed
-appends leave both history and `OrbitState` unchanged.
-
-Each `HoloPathStep` is a compositional transform containing its index, operator
-identity and parameter, exact pre/post accumulator bit patterns, continuity
-digests, and a step digest. Digests use deterministic FNV-1a for structural
-integrity only; they are not cryptographic. Adjacent post/pre digests must match,
-indices are monotonic, and sealed histories reject mutation.
-
-Reversibility means that a terminal software `OrbitState` plus the serialized
-history reconstructs the initial numeric state bitwise. Reverse traversal uses
-the recorded pre-state bit patterns rather than floating-point subtraction.
-The witness is accepted only after the original in-memory history is destroyed,
-the path is deserialized from `.holo`, and a dedicated verification copy is
-restored. The evolved terminal object remains available for boundary projection.
-
-Successful execution sets `restored=true`,
-`evidence_level=software_path_roundtrip`, and
-`closure_law=inverse_path_reconstructs_initial_orbit_state`. This proves only a
-software path round trip. It is not evidence of physical or hardware restoration.
-
-## L4B.4 non-collapse invariant family
-
-`noncollapse_geometry_v1` predeclares, in deterministic order, orbit
-conservation, fold-relation basis involution, forward/reverse composition,
-software restoration closure, branch-exchange covariance, serialization
-invariance, path-order sensitivity, and software path holonomy. Each record has
-an invariant identity, operator identity, declaration phase, typed result,
-explicit tolerance, evidence level, and L1 claim level. Registration, operator
-changes, tolerance changes, and result changes are rejected after extraction or
-sealing.
-
-Structural validation may occur before the boundary. Public family extraction
-and sealing occur only at `CollapseBoundary`. The family references one path
-digest and does not duplicate history. After serialization, the reader reloads
-the geometry and path, recomputes executable records, compares them with the
-serialized family, and rejects mismatches or family-digest tampering.
-
-The exchange covariance record applies `(lower, mirror) -> (mirror, lower)` and
-requires orbit sum/product preservation plus indexed coordinate exchange. It
-does not assign truth or preference to either coordinate. Corruption coverage:
+Materialization modes are explicit:
 
 ```text
-fold coordinate mutation       orbit reconstruction / conservation
-relation basis mutation        relation-basis invariant
-neutral reference mutation     relation-basis invariant
-path step swap                 path order / continuity
-operator parameter mutation    step digest
-evolution operator mutation   composition invariant
-terminal digest mutation       path continuity
-serialized result mutation     family digest / reload recomputation
-post-boundary invariant add    lifecycle guard
+native_holo
+hybrid
+materialized_fallback
 ```
 
-`software_path_holonomy` is `DEFERRED_NOT_WELL_DEFINED`: path steps currently
-store operator parameters and exact accumulator state bits, but not a declared
-group-valued carrier transform. No phase product, wrapping convention, or
-winding result is fabricated. All results remain L1/L2 software architecture;
-they do not prove orientation recovery, physical closure, or physical holonomy.
+The current fold runtime is `native_holo`.
 
-## L4B.5A physical mapping contract
+---
 
-`l4b5a_pdn_mapping_v1` is a machine-readable evidence boundary, not a physical
-`.holo` implementation. Records use `MEASURED`, `RECOMPUTED_FROM_MEASURED`,
-`SIMULATED`, `SOFTWARE_ONLY`, `INFERRED`, `PROPOSED`, or `ABSENT` evidence;
-`SUPPORTED`, `PARTIALLY_SUPPORTED`, `UNSUPPORTED`, or `NOT_APPLICABLE` status;
-and `OBSERVABLE`, `PARTIALLY_OBSERVABLE`,
-`UNOBSERVABLE_WITH_CURRENT_INSTRUMENTS`, or `UNDEFINED` observability.
+## Path memory
 
-The audited mappings are:
+`HoloEvolution` owns an appendable `HoloPathHistory`. Each step stores:
+
+- monotonic index;
+- declared operator and parameter;
+- exact pre/post accumulator bit patterns;
+- pre/post OrbitState digests;
+- structural step digest.
+
+The path can reconstruct the initial numeric state from a terminal state and serialized history. This is **history-backed exact restoration**, not a claim that an independently specified inverse operator was physically executed.
+
+Accepted restoration metadata:
 
 ```text
-SOFTWARE OBJECT          PHYSICAL CORRESPONDENT                         EVIDENCE                    STATUS
-HoloGeometry             candidate PDN response manifold               PROPOSED                    UNSUPPORTED
-HoloCarrier              sender/PDN/ring-osc lock-in channel            MEASURED                    SUPPORTED
-RelationBasis            identified PDN transfer operator              PROPOSED                    UNSUPPORTED
-HoloEvolution            schedule plus deadline-aligned captures       MEASURED                    PARTIALLY_SUPPORTED
-HoloPathHistory          ordered reversible physical states            ABSENT                      UNSUPPORTED
-CatalyticRestoration     return of declared observable physical state   ABSENT                      UNSUPPORTED
-HoloCollapseBoundary     capture window and lock-in I/Q projection      MEASURED                    PARTIALLY_SUPPORTED
-HoloInvariantFamily      calibrated physical invariant candidates       RECOMPUTED_FROM_MEASURED     PARTIALLY_SUPPORTED
+restored = true
+evidence_level = software_path_roundtrip
+verification_scope = dedicated_verification_copy
+closure_law = inverse_path_reconstructs_initial_orbit_state
 ```
 
-The carrier result is supported only at channel level. The T300 route `4:5`
-carried sender-owned mode and phase through a shared PDN rail into measured I/Q
-lock-in output. This is not evidence that the channel stores `HoloGeometry`.
-The T300 `hash_restored` field proves software XOR/byte-hash bookkeeping, while
-P-state restoration is protocol cleanup; neither is physical catalytic
-restoration. Compact JSON scores are tracked, but raw matrix CSV captures were
-not imported, limiting independent trajectory reconstruction.
+The closure-law string is historical vocabulary. Its precise semantic scope is recorded in `HOLO_RUNTIME_INTEGRITY.md`.
 
-Invariant portability is: `serialization_invariance=SOFTWARE_ONLY`;
-`relation_basis`, `exchange_covariance`, and `path_order` are
-`PHYSICALLY_TESTABLE_AFTER_CALIBRATION`; orbit conservation, path composition,
-restoration closure, and software path holonomy have
-`NO_CURRENT_PHYSICAL_MAPPING`. No L4B.4 invariant is presently promoted as a
-measured physical invariant.
+---
 
-The proposed state is `X_phys(t)={lock-in I,Q; ring-oscillator period; sender
-schedule; core identities; TSC origin; temperature proxy; voltage/frequency
-state; capture window}`. Current instruments observe only I/Q, ring-oscillator
-samples, schedule, cores, TSC origin, and capture window. Rail waveforms,
-internal PDN modes, the full thermal field, and complete microarchitectural
-state remain unobserved. Restoration is therefore unobservable with current
-preserved evidence; a scalar baseline return cannot establish full-state return.
+## Semantic integrity
 
-L4B.5B requires a predeclared P0-P8 experiment: declare state and observable,
-measure baseline, apply a controlled path, measure terminal state, apply a
-declared inverse/closure, measure restored state, compare with uncertainty, run
-controls, and repeat across seeds, sessions, and core pairs. Required controls
-are no-disturbance, disturbance without restoration, wrong inverse, reordered
-inverse, carrier off, randomized phase, session/core-pair repeats, and a
-thermal/time-matched sham. Until that gate passes, the decision is
-`NOT_AUTHORIZED_EVIDENCE_MISSING`.
+New code must use:
 
-### L4B.5A-R digest-bound human review
+```text
+holo_path_history_validate_semantic()
+holo_object_validate_semantic()
+holo_cross_boundary_atomic()
+holo_read_json_strict()
+```
 
-The human project owner accepted the evidence classifications, support and
-observability statuses, claim ceilings, and blocked L4B.5B gate for contract
-digest `0d06f3c8b44f8c55`. Review metadata is outside the frozen scientific-content
-digest and is valid only when its stored digest equals a fresh content digest.
-Any contract mutation invalidates review and requires a new human review event.
-Acceptance does not authorize implementation or promote a mapping: L4B.5B
-remains `NOT_AUTHORIZED_EVIDENCE_MISSING`.
+These add operator-consistency checks, transactional boundary behavior, and serialized lifecycle comparison around the original structural parser.
 
-## L4B.5B0 observability and operator experiment design
+Structural FNV digests are deterministic integrity identifiers, not cryptographic signatures.
 
-The sealed `l4b5b0_observability_operator_v1` contract separates controlled
-input `u(t)`, latent substrate state `x(t)`, and measured output `y(t)`; it never
-assumes `y=x`. S0 uses current I/Q and ring-period measurements, S1 adds explicit
-control and topology context, and S2 tests bounded delay embeddings with
-`L={1,2,4,8,16,32}`. The operator ladder is affine, route-conditioned affine,
-bilinear, then compact nonlinear, with complexity admitted only after simpler
-held-out failures.
+---
 
-Observability is limited to empirical predictive observability: session-held-out
-prediction of declared measured evolution under the tested input family. The
-contract predeclares repeatability, distinguishability, embedding gain, rank
-surrogate, cross-route, and time-stability tests; G1-G10 operator gates; F1-F10
-blocking conditions; session-level splits; and future artifact schemas. Its
-status is `READY_FOR_HUMAN_REVIEW`, `implementation_authorized=false`, and
-`executed=false`. It binds to reviewed mapping digest `0d06f3c8b44f8c55` and
-does not authorize calibration, restoration, or physical-memory claims.
+## Invariant family
 
-Review corrections make the two state tests operational before acquisition.
-Repeatability uses training-idle-covariance-whitened Euclidean `[I,Q,ring]`
-trajectory distance, fixed absolute-TSC window alignment without dynamic
-warping, complete held-out session/route/schedule replicates, median within-input
-and fifth-percentile between-input distances, and a 10,000-resample session-block
-bootstrap acceptance rule. Distinguishability uses four balanced prepared-state
-classes, fixed L2 multinomial logistic regression, session-level splits, balanced
-accuracy, chance `0.25`, and a pre-acquisition power margin `delta_power` fixed
-from `alpha=0.05`, power `0.80`, and approved held-out class counts. Delay gain
-is not an authorization gate: sufficient S1 remains the minimal state when S2
-does not improve it by 10%; F6 blocks only if S1 and every tested S2 history fail
-empirical predictive sufficiency.
+`noncollapse_geometry_v1` contains eight historical invariant IDs:
+
+```text
+orbit_conservation
+relation_basis
+path_composition
+restoration_closure
+exchange_covariance
+serialization_invariance
+path_order
+software_path_holonomy
+```
+
+Their current scopes are:
+
+- orbit conservation: sum/product and unresolved coordinate relation;
+- relation basis: declared fold-exchange basis and neutral reference;
+- path composition: recorded path plus history-backed reverse reconstructs initial numeric state;
+- restoration closure: software verification-copy digest returns to initial digest;
+- exchange covariance: static coordinate exchange preserves declared orbit relations;
+- serialization invariance: reload and recomputation preserve the software family;
+- path order: authenticated ordered-journal continuity;
+- software holonomy: `DEFERRED_NOT_WELL_DEFINED`.
+
+No invariant currently proves physical geometry, physical inverse dynamics, orientation, or physical holonomy.
+
+---
+
+## Physical mapping
+
+`l4b5a_pdn_mapping_v1` is a machine-readable evidence boundary.
+
+Current classifications remain:
+
+| Software object | Physical correspondent | Evidence/status |
+|---|---|---|
+| `HoloGeometry` | candidate PDN response manifold | proposed / unsupported |
+| `HoloCarrier` | sender→PDN→ring-osc lock-in channel | measured / supported at channel level |
+| relation basis | identified PDN transfer operator | proposed / unsupported |
+| `HoloEvolution` | schedule plus deadline-aligned capture | measured / partially supported |
+| physical path history | ordered reversible physical states | absent / unsupported |
+| physical restoration | return of declared observable physical state | absent / unsupported |
+| boundary | capture window plus I/Q projection | measured / partially supported |
+| physical invariant candidates | recomputed channel statistics | partially supported |
+
+T300 supports sender-owned mode/phase transport through a selected PDN route. It does not establish physical geometric memory.
+
+The L4B.5A human review remains bound to the conservative mapping content digest. This repair does not promote any mapping.
+
+---
+
+## L4B.5B0 observability design
+
+The sealed design separates:
+
+```text
+controlled input u(t)
+latent state x(t)
+measured output y(t)
+```
+
+It tests minimal, contextual, and delay-embedded measured-state candidates and admits operator complexity only after simpler held-out failures.
+
+Before human review, `holo_observability_design_validate_references()` must close all input, state, gate, falsification, and artifact references.
+
+Human review is stored outside the scientific design by `HoloObservabilityReviewEnvelope`, binding the serialized design artifact with full SHA-256. Review does not authorize calibration acquisition.
+
+---
+
+## Canonical versus legacy
+
+`holo_record.h/.c` is the first L4A carrier scaffold and is not canonical. See `LEGACY_L4A_RECORD.md`.
+
+The canonical implementation is the `HoloObject` stack described here.
+
+---
+
+## Forbidden claims and fields
+
+A `.holo` architecture or artifact must not promote:
+
+```text
+winner
+candidate_score
+hidden_d
+recovered_d
+orientation_label
+verify_pass
+AUC as primary truth
+physical restoration from byte-hash return
+physical geometry from channel detection
+```
+
+---
+
+## Current gate
+
+```text
+L4B.5B0 = design/review preparation
+implementation_authorized = false
+executed = false
+L4B.5B1 = blocked until explicit post-review authorization
+physical restoration = blocked until operator identification
+```
