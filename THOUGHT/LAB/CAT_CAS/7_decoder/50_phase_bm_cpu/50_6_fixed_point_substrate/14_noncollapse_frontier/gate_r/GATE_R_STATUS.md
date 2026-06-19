@@ -3,12 +3,14 @@
 **Technical audit:** `COMPLETE`  
 **Verdict:** `TECHNICAL_ACCEPT_WITH_REQUIRED_REPAIRS_APPLIED`  
 **Repair addendum:** binding  
-**Project-owner ratification:** `NEXT`  
-**Implementation authorized:** no  
-**Physical acquisition authorized:** no  
+**Project-owner ratification:** `COMPLETE`  
+**Owner decision:** `RATIFY_AND_AUTHORIZE_COMBINED_TONE_ORDER_OBSERVABILITY_CAMPAIGN`  
+**Campaign implementation authorized:** yes  
+**Physical acquisition authorized:** after executor verification and catcas preflight  
+**Physical acquisition executed:** no  
 **Restoration authorized:** no
 
-## Deterministic evidence
+## Technical-review evidence
 
 ```text
 reviewed source head = e6bebb738d62a8d1f3890b669c02ea6faf42d7f3
@@ -18,33 +20,35 @@ workflow run = 27850016678
 artifact digest = db2d34e3b47c754bf1f9a813f1f73871d00e837660b1945c9f65d05661c16fcb
 ```
 
-The sealed C design, reference graph, review tests, two independent packet generations, recursive byte diff, and output-manifest verification all passed.
-
-## Binding repairs
-
-- measured response, executed control, nuisance context, and session gauge are separate objects;
-- S1 is preamble-gauge-normalized measured response, not input/context concatenation;
-- operators predict a measured response equivalence class, not hidden substrate state;
-- sender-off readout must classify driven-only versus post-drive persistent response;
-- FWD/REV/RND1/RND2/order-label-sham controls precede path-memory interpretation;
-- session lookup is a null baseline, and seed 4 remains a required stress case;
-- diagnostic classification remains subordinate to held-out trajectory prediction.
-
-## Technical claim ceiling
-
-Gate R accepts only a design capable of testing predictive observability of a measured response equivalence class and classifying that response as driven-only or post-drive persistent.
-
-It does not establish complete physical observability, physical HoloGeometry, inverse dynamics, restoration, target coupling, orientation recovery, or a Small Wall crossing.
-
-## Owner decision required
-
-Choose one explicit record:
+## Authorized campaign binding
 
 ```text
-RATIFY_TECHNICAL_REVIEW_NO_ACQUISITION
-RATIFY_AND_AUTHORIZE_TONE_ORDER_CONTROL_ONLY
-RATIFY_AND_AUTHORIZE_COMBINED_TONE_ORDER_OBSERVABILITY_CAMPAIGN
-REJECT_AND_REVISE
+plan source commit = f5b6079a5748bb6138ab19d1c22d79c74734dddf
+campaign plan SHA-256 = eb5a46d0a37d66910649467cf0d4e3cf947dee11fab94a36e9bdfed388455e53
+campaign manifest SHA-256 = 9588fef3653b4cc904768656951d61a845cae059b40e59e1b65529c7480e0c20
+workflow run = 27852485669
+artifact digest = 3bea5dc2bdb0ed694e0e2eb173837fa84a4a4e9a32f7c74bd08db0c24a0cb35b
 ```
 
-No option is implied by technical acceptance. Ratification and execution authorization are separate acts.
+The authorized package contains 12 sessions, 3,456 tone/control symbols, 768 sender-off persistence events, and 3,072 trajectory steps. It passed authority, planner, compiler, session-determinism, orchestrator, double-generation, and all-session-compilation checks.
+
+## Binding repairs retained
+
+- measured response, executed control, nuisance context, and session gauge remain separate;
+- session gauge is preamble-only and frozen;
+- sender-off windows require no active sender drive;
+- FWD/REV/RND1/RND2/order-label-sham precede path-memory interpretation;
+- seed 4 remains a mandatory stress session;
+- diagnostic classification remains subordinate to held-out trajectory prediction.
+
+## Current boundary
+
+```text
+combined plan: FROZEN
+local schedule-driven executor: NEXT
+catcas read-only preflight: AFTER EXECUTOR TESTS
+physical acquisition: AFTER PREFLIGHT PASS
+restoration and target coupling: BLOCKED
+```
+
+The technical-review manifest correctly remains non-authorizing. Owner authority is recorded separately in `PROJECT_OWNER_RATIFICATION.json` and `COMBINED_CAMPAIGN_BINDING.json`.
