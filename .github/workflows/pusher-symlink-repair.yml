@@ -1,0 +1,62 @@
+name: Apply Pusher Symlink Repair
+
+on:
+  push:
+    branches: [work/push-risk-groups]
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work/push-risk-groups
+          fetch-depth: 0
+
+      - name: Apply repair and complete dependency map
+        run: |
+          git apply --check LAW/CONTRACTS/_runs/_tmp/pusher-symlink-repair.patch
+          git apply LAW/CONTRACTS/_runs/_tmp/pusher-symlink-repair.patch
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path("CAPABILITY/TOOLS/utilities/push_test_plan.py")
+          text = path.read_text(encoding="utf-8")
+          old = '''            "CAPABILITY/PRIMITIVES/repo_digest.py",
+            "CAPABILITY/PRIMITIVES/write_firewall.py",
+            "CAPABILITY/TOOLS/utilities/guarded_writer.py",
+'''
+          new = '''            "CAPABILITY/PRIMITIVES/paths.py",
+            "CAPABILITY/PRIMITIVES/repo_digest.py",
+            "CAPABILITY/PRIMITIVES/write_firewall.py",
+            "CAPABILITY/TOOLS/utilities/guarded_writer.py",
+'''
+          if old not in text:
+              raise SystemExit("write-firewall trigger anchor missing")
+          text = text.replace(old, new, 1)
+
+          old = '''            "CAPABILITY/PRIMITIVES/registry_validators.py",
+            "CAPABILITY/TOOLS/ags.py",
+'''
+          new = '''            "CAPABILITY/PRIMITIVES/paths.py",
+            "CAPABILITY/PRIMITIVES/registry_validators.py",
+            "CAPABILITY/TOOLS/ags.py",
+'''
+          if old not in text:
+              raise SystemExit("mcp trigger anchor missing")
+          text = text.replace(old, new, 1)
+          path.write_text(text, encoding="utf-8")
+          PY
+
+      - name: Remove transport files and commit
+        run: |
+          git rm LAW/CONTRACTS/_runs/_tmp/pusher-symlink-repair.patch
+          git rm .github/workflows/pusher-symlink-repair.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add CAPABILITY/MCP/validation.py CAPABILITY/TOOLS/utilities/push_test_plan.py
+          git commit -m "fix: report symlink escapes without crashing"
+          git push origin HEAD:work/push-risk-groups
