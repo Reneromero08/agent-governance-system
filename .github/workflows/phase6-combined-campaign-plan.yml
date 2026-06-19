@@ -14,6 +14,8 @@ permissions:
 jobs:
   plan:
     runs-on: ubuntu-24.04
+    env:
+      SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -27,13 +29,14 @@ jobs:
       - name: Generate deterministic plan twice
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier
         run: |
+          test "${SOURCE_SHA}" = "$(git rev-parse HEAD)"
           rm -rf "$RUNNER_TEMP/combined_plan" "$RUNNER_TEMP/combined_plan_repeat"
           RATIFICATION=gate_r/PROJECT_OWNER_RATIFICATION.json
           python combined_observability_campaign/generate_campaign_plan.py run \
-            --source-commit "${GITHUB_SHA}" --ratification "$RATIFICATION" \
+            --source-commit "${SOURCE_SHA}" --ratification "$RATIFICATION" \
             --output "$RUNNER_TEMP/combined_plan"
           python combined_observability_campaign/generate_campaign_plan.py run \
-            --source-commit "${GITHUB_SHA}" --ratification "$RATIFICATION" \
+            --source-commit "${SOURCE_SHA}" --ratification "$RATIFICATION" \
             --output "$RUNNER_TEMP/combined_plan_repeat"
           diff -ru "$RUNNER_TEMP/combined_plan" "$RUNNER_TEMP/combined_plan_repeat"
           python combined_observability_campaign/generate_campaign_plan.py verify "$RUNNER_TEMP/combined_plan"
