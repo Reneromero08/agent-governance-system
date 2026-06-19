@@ -8,10 +8,12 @@ import os
 from pathlib import Path
 import shutil
 import subprocess
-import sys
 from typing import Any
 
 from generate_campaign_plan import verify
+
+PACKAGE_REL = "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign"
+RATIFICATION_REL = "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/gate_r/PROJECT_OWNER_RATIFICATION.json"
 
 
 def command(*args: str, cwd: Path | None = None) -> tuple[int, str]:
@@ -46,8 +48,11 @@ def cpu_flags() -> set[str]:
 def inspect(plan_dir: Path, repo_root: Path, output_root: Path, min_free_gb: float) -> dict[str, Any]:
     manifest = json.loads((plan_dir / "campaign_manifest.json").read_text())
     plan = json.loads((plan_dir / "campaign_plan.json").read_text())
+    source_commit = manifest.get("source_commit")
     rc_head, head = command("git", "rev-parse", "HEAD", cwd=repo_root)
     rc_status, status = command("git", "status", "--short", cwd=repo_root)
+    rc_ancestor, _ = command("git", "merge-base", "--is-ancestor", str(source_commit), "HEAD", cwd=repo_root)
+    rc_diff, _ = command("git", "diff", "--quiet", str(source_commit), "HEAD", "--", PACKAGE_REL, RATIFICATION_REL, cwd=repo_root)
     flags = cpu_flags()
     cpus = os.cpu_count() or 0
     msr = {str(core): os.access(f"/dev/cpu/{core}/msr", os.R_OK) for core in range(min(cpus, 6))}
@@ -68,7 +73,9 @@ def inspect(plan_dir: Path, repo_root: Path, output_root: Path, min_free_gb: flo
         "free_space_sufficient": usage.free >= int(min_free_gb * 1024**3),
         "repo_head_resolved": rc_head == 0,
         "repo_clean": rc_status == 0 and status == "",
-        "repo_head_matches_plan": rc_head == 0 and head == manifest.get("source_commit") == plan.get("source_commit"),
+        "plan_source_is_ancestor": rc_ancestor == 0,
+        "authorized_package_unchanged_since_plan": rc_diff == 0,
+        "plan_sources_agree": source_commit == plan.get("source_commit"),
         "plan_manifest_valid": not plan_errors,
         "output_path_unused": not output_root.exists(),
         "restoration_not_authorized": plan.get("restoration_authorized") is False and manifest.get("restoration_authorized") is False,
@@ -78,6 +85,7 @@ def inspect(plan_dir: Path, repo_root: Path, output_root: Path, min_free_gb: flo
         "host": os.uname().nodename,
         "repo_root": str(repo_root),
         "repo_head": head if rc_head == 0 else None,
+        "plan_source_commit": source_commit,
         "plan_dir": str(plan_dir),
         "plan_sha256": manifest.get("campaign_plan", {}).get("sha256"),
         "output_root": str(output_root),
