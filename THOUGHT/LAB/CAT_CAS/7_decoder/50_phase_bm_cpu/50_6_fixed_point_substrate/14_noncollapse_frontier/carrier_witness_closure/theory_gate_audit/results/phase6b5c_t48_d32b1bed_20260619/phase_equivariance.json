@@ -1,0 +1,6107 @@
+{
+  "analysis_id": "phase6b5c_transfer_aware_geometry_v1",
+  "analysis_source_sha256": "6892be9beed370b8f99b18e1eee5b4f3e66c265fb996aa5d9545575907b00515",
+  "calibration_partition": "preamble + even-real; internal fit trial%4==0, validation trial%4==2",
+  "campaign_id": "phase6b5_t48_d32b1bed_20260619",
+  "campaign_manifest_sha256": "cbcd2a19d6dd3bc478244f77888aa87eb043003a7685caa17ff13fe4d47e6487",
+  "campaign_source_commit": "d32b1bed0deae1b907a07eeed018b924244e9ea2",
+  "claim_ceiling": "DERIVED_TRANSFER_AWARE_ANALYSIS_ONLY",
+  "complex_geometry_source_sha256": "13ea91fc9b000062fd840ce0b07b3909cb570eaf6e1b214dcc115d2cf5a9b6a3",
+  "controls": {
+    "v4s5_scramble_seed901": {
+      "canonical_relation_under_reference_charts": [
+        {
+          "actual_residual": {
+            "count": 72,
+            "max": 1.6883304487123714,
+            "mean": 1.3148635175179502,
+            "median": 1.3258127265583406,
+            "min": 0.8387920185144181,
+            "q05": 1.0210596067477538,
+            "q95": 1.5649585577544096
+          },
+          "chart_id": "C0_scalar",
+          "positive_actual_mode_margin_fraction": 0.2916666666666667
+        },
+        {
+          "actual_residual": {
+            "count": 72,
+            "max": 1.7153226453552803,
+            "mean": 1.336206726769875,
+            "median": 1.3473167348497217,
+            "min": 0.8523716234073531,
+            "q05": 1.0370715120314626,
+            "q95": 1.5912155535180936
+          },
+          "chart_id": "C0_scalar",
+          "positive_actual_mode_margin_fraction": 0.2916666666666667
+        },
+        {
+          "actual_residual": {
+            "count": 72,
+            "max": 1.697222042578045,
+            "mean": 1.3218682971114444,
+            "median": 1.3329434785613925,
+            "min": 0.8431667783748329,
+            "q05": 1.0262486023397244,
+            "q95": 1.5736190111562272
+          },
+          "chart_id": "C0_scalar",
+          "positive_actual_mode_margin_fraction": 0.2916666666666667
+        },
+        {
+          "actual_residual": {
+            "count": 72,
+            "max": 1.7051054704422222,
+            "mean": 1.3284730055025313,
+            "median": 1.3398383249358057,
+            "min": 0.8478221177902278,
+            "q05": 1.0311372534775571,
+            "q95": 1.5817208405454495
+          },
+          "chart_id": "C0_scalar",
+          "positive_actual_mode_margin_fraction": 0.2916666666666667
+        },
+        {
+          "actual_residual": {
+            "count": 72,
+            "max": 1.3236458306515082,
+            "mean": 1.0805395469323114,
+            "median": 1.0889440429997475,
+            "min": 0.7911780665981731,
+            "q05": 0.8952855776952326,
+            "q95": 1.238801844277424
+          },
+          "chart_id": "C0_scalar",
+          "positive_actual_mode_margin_fraction": 0.3055555555555556
+        },
+        {
+          "actual_residual": {
+            "count": 72,
+            "max": 1.68471661232004,
+            "mean": 1.3123236585915763,
+            "median": 1.3231472133207003,
+            "min": 0.8375520964944816,
+            "q05": 1.0190815754323432,
+            "q95": 1.5618218845382055
+          },
+          "chart_id": "C0_scalar",
+          "positive_actual_mode_margin_fraction": 0.2916666666666667
+        }
+      ],
+      "chart_fit_on_control": false,
+      "condition": "scramble",
+      "observed_vector_norm": {
+        "count": 72,
+        "max": 0.2136147305435194,
+        "mean": 0.18284673485028566,
+        "median": 0.18170475656681254,
+        "min": 0.1746878931909857,
+        "q05": 0.1755150676727032,
+        "q95": 0.19442407278915463
+      },
+      "rows": 72,
+      "run_id": "v4s5_scramble_seed901",
+      "window_magnitude_to_floor": {
+        "count": 1776,
+        "max": 1745.5122472534445,
+        "mean": 48.65855836411982,
+        "median": 31.829273390726936,
+        "min": 0.68374081509263,
+        "q05": 1.9529324726274067,
+        "q95": 137.25323936111042
+      }
+    },
+    "v4s5_silent_seed900": {
+      "canonical_relation_under_reference_charts": [
+        {
+          "actual_residual": {
+            "count": 72,
+            "max": 159.61521971478737,
+            "mean": 50.58102840909388,
+            "median": 50.7543502247088,
+            "min": 2.9047527722920385,
+            "q05": 3.6679945055243404,
+            "q95": 117.90965727960395
+          },
+          "chart_id": "C0_scalar",
+          "positive_actual_mode_margin_fraction": 0.25
+        },
+        {
+          "actual_residual": {
+            "count": 72,
+            "max": 165.15820618966615,
+            "mean": 52.333790607422024,
+            "median": 52.52047592639116,
+            "min": 2.9974332552632355,
+            "q05": 3.789743908992955,
+            "q95": 122.00335946721265
+          },
+          "chart_id": "C0_scalar",
+          "positive_actual_mode_margin_fraction": 0.25
+        },
+        {
+          "actual_residual": {
+            "count": 72,
+            "max": 161.4489849764044,
+            "mean": 51.160800620774296,
+            "median": 51.33846984015521,
+            "min": 2.935192686389356,
+            "q05": 3.7081820026975145,
+            "q95": 119.2639212643702
+          },
+          "chart_id": "C0_scalar",
+          "positive_actual_mode_margin_fraction": 0.25
+        },
+        {
+          "actual_residual": {
+            "count": 72,
+            "max": 163.17193568777967,
+            "mean": 51.70453487752539,
+            "median": 51.88537193832751,
+            "min": 2.961637212816003,
+            "q05": 3.7453058956454153,
+            "q95": 120.5358410762213
+          },
+          "chart_id": "C0_scalar",
+          "positive_actual_mode_margin_fraction": 0.25
+        },
+        {
+          "actual_residual": {
+            "count": 72,
+            "max": 83.70383421134132,
+            "mean": 26.559592798727312,
+            "median": 26.51128450680853,
+            "min": 1.6398507187251512,
+            "q05": 2.057869030277456,
+            "q95": 61.83136285255432
+          },
+          "chart_id": "C0_scalar",
+          "positive_actual_mode_margin_fraction": 0.2638888888888889
+        },
+        {
+          "actual_residual": {
+            "count": 72,
+            "max": 158.95599080479826,
+            "mean": 50.37160275119676,
+            "median": 50.54242018961556,
+            "min": 2.8916130710053163,
+            "q05": 3.652875952559149,
+            "q95": 117.42230441213042
+          },
+          "chart_id": "C0_scalar",
+          "positive_actual_mode_margin_fraction": 0.25
+        }
+      ],
+      "chart_fit_on_control": false,
+      "condition": "silent",
+      "observed_vector_norm": {
+        "count": 72,
+        "max": 0.058481136746574104,
+        "mean": 0.01243902628719984,
+        "median": 0.0033538972778928413,
+        "min": 0.0010704660068746761,
+        "q05": 0.001449893516376616,
+        "q95": 0.04650216645131791
+      },
+      "rows": 72,
+      "run_id": "v4s5_silent_seed900",
+      "window_magnitude_to_floor": {
+        "count": 1776,
+        "max": 71.99944424127263,
+        "mean": 1.4947178900452487,
+        "median": 1.0275536219474295,
+        "min": 0.022468787455037754,
+        "q05": 0.25350381152421375,
+        "q95": 3.8327928287528423
+      }
+    }
+  },
+  "final_evaluation_partition": "odd trials only",
+  "generated_utc": "2026-06-19T20:13:06+00:00",
+  "null_seed": 65005,
+  "official_closure_status_unchanged": "PARTIAL",
+  "runs": {
+    "v2s3_matrix_seed0": {
+      "mean_absolute_circular_error": 0.042956985145807335,
+      "null_seed": 65005,
+      "pairwise_mean_absolute_error": 0.052841778384695705,
+      "phase_error_resultant": 0.9986691591829066,
+      "records": [
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.299677676804538,
+          "symbol_index": 7,
+          "theta_idx": 5,
+          "trial": 1,
+          "wrapped_error": 0.05651681338780712
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.7719120113507526,
+          "symbol_index": 13,
+          "theta_idx": 7,
+          "trial": 3,
+          "wrapped_error": 0.013486152046695565
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.405579131084408,
+          "symbol_index": 19,
+          "theta_idx": 3,
+          "trial": 5,
+          "wrapped_error": 0.04938464089206329
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.7608448409185637,
+          "symbol_index": 25,
+          "theta_idx": 7,
+          "trial": 7,
+          "wrapped_error": 0.02455332247888453
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": -0.057627695615493434,
+          "symbol_index": 31,
+          "theta_idx": 0,
+          "trial": 9,
+          "wrapped_error": -0.0576276956154933
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.762179065031885,
+          "symbol_index": 37,
+          "theta_idx": 7,
+          "trial": 11,
+          "wrapped_error": 0.023219098365562907
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.326656825924875,
+          "symbol_index": 43,
+          "theta_idx": 3,
+          "trial": 13,
+          "wrapped_error": -0.029537664267469843
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": -0.0812675282249135,
+          "symbol_index": 49,
+          "theta_idx": 0,
+          "trial": 15,
+          "wrapped_error": -0.08126752822491357
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.8945151319443247,
+          "symbol_index": 55,
+          "theta_idx": 1,
+          "trial": 17,
+          "wrapped_error": 0.10911696854687669
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": 3.0479535456879616,
+          "symbol_index": 61,
+          "theta_idx": 4,
+          "trial": 19,
+          "wrapped_error": -0.0936391079018315
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.8058639414299699,
+          "symbol_index": 67,
+          "theta_idx": 7,
+          "trial": 21,
+          "wrapped_error": -0.020465778032521698
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.417474320229136,
+          "symbol_index": 73,
+          "theta_idx": 5,
+          "trial": 23,
+          "wrapped_error": -0.06127983003679116
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7585089891432791,
+          "symbol_index": 79,
+          "theta_idx": 1,
+          "trial": 25,
+          "wrapped_error": -0.026889174254169035
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.2996269745062135,
+          "symbol_index": 85,
+          "theta_idx": 5,
+          "trial": 27,
+          "wrapped_error": 0.05656751568613139
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.7300643444238176,
+          "symbol_index": 91,
+          "theta_idx": 7,
+          "trial": 29,
+          "wrapped_error": 0.05533381897363032
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.7935865505932338,
+          "symbol_index": 97,
+          "theta_idx": 7,
+          "trial": 31,
+          "wrapped_error": -0.008188387195785296
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.3668637710549536,
+          "symbol_index": 103,
+          "theta_idx": 3,
+          "trial": 33,
+          "wrapped_error": 0.010669280862608765
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.5030094395908122,
+          "symbol_index": 109,
+          "theta_idx": 6,
+          "trial": 35,
+          "wrapped_error": 0.06778688720408432
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7597162149658356,
+          "symbol_index": 115,
+          "theta_idx": 1,
+          "trial": 37,
+          "wrapped_error": -0.025681948431612867
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.40835220560627,
+          "symbol_index": 121,
+          "theta_idx": 5,
+          "trial": 39,
+          "wrapped_error": -0.05215771541392478
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.3725251044666615,
+          "symbol_index": 127,
+          "theta_idx": 5,
+          "trial": 41,
+          "wrapped_error": -0.0163306142743167
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7812381688545164,
+          "symbol_index": 133,
+          "theta_idx": 1,
+          "trial": 43,
+          "wrapped_error": -0.004159994542932033
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.7959510126685736,
+          "symbol_index": 139,
+          "theta_idx": 7,
+          "trial": 45,
+          "wrapped_error": -0.010552849271125098
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.7810968024110234,
+          "symbol_index": 145,
+          "theta_idx": 7,
+          "trial": 47,
+          "wrapped_error": 0.0043013609864246405
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 4.71238898038469,
+          "family": "wrong",
+          "phase_estimate": -1.582964727928751,
+          "symbol_index": 9,
+          "theta_idx": 6,
+          "trial": 1,
+          "wrapped_error": -0.01216840113385409
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.1317773260297593,
+          "symbol_index": 15,
+          "theta_idx": 0,
+          "trial": 3,
+          "wrapped_error": -0.13177732602975922
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.3682132328684626,
+          "symbol_index": 21,
+          "theta_idx": 3,
+          "trial": 5,
+          "wrapped_error": 0.0120187426761178
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.7584620165774637,
+          "symbol_index": 27,
+          "theta_idx": 7,
+          "trial": 7,
+          "wrapped_error": 0.026936146819984685
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": 3.1126606850821377,
+          "symbol_index": 33,
+          "theta_idx": 4,
+          "trial": 9,
+          "wrapped_error": -0.028931968507655448
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.295645952531774,
+          "symbol_index": 39,
+          "theta_idx": 3,
+          "trial": 11,
+          "wrapped_error": -0.060548537660571
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": -3.0991350675872953,
+          "symbol_index": 45,
+          "theta_idx": 4,
+          "trial": 13,
+          "wrapped_error": 0.04245758600249783
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.566841989762107,
+          "symbol_index": 51,
+          "theta_idx": 2,
+          "trial": 15,
+          "wrapped_error": -0.003954337032789468
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": 0.08084879414044506,
+          "symbol_index": 57,
+          "theta_idx": 0,
+          "trial": 17,
+          "wrapped_error": 0.08084879414044499
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.7943318881358812,
+          "symbol_index": 63,
+          "theta_idx": 1,
+          "trial": 19,
+          "wrapped_error": 0.00893372473843268
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.388185424843238,
+          "symbol_index": 69,
+          "theta_idx": 3,
+          "trial": 21,
+          "wrapped_error": 0.03199093465089309
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.8159510678500814,
+          "symbol_index": 75,
+          "theta_idx": 7,
+          "trial": 23,
+          "wrapped_error": -0.030552904452632923
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.01900701667832795,
+          "symbol_index": 81,
+          "theta_idx": 0,
+          "trial": 25,
+          "wrapped_error": -0.019007016678327826
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.7341039810242643,
+          "symbol_index": 87,
+          "theta_idx": 7,
+          "trial": 27,
+          "wrapped_error": 0.05129418237318362
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.8224613382051138,
+          "symbol_index": 93,
+          "theta_idx": 1,
+          "trial": 29,
+          "wrapped_error": 0.03706317480766552
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.3030710454389967,
+          "symbol_index": 99,
+          "theta_idx": 5,
+          "trial": 31,
+          "wrapped_error": 0.05312344475334818
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.8496541039196412,
+          "symbol_index": 105,
+          "theta_idx": 1,
+          "trial": 33,
+          "wrapped_error": 0.06425594052219274
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.6642749089118926,
+          "symbol_index": 111,
+          "theta_idx": 7,
+          "trial": 35,
+          "wrapped_error": 0.12112325448555605
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.7378015318328369,
+          "symbol_index": 117,
+          "theta_idx": 7,
+          "trial": 37,
+          "wrapped_error": 0.04759663156461169
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": 0.035728633381152446,
+          "symbol_index": 123,
+          "theta_idx": 0,
+          "trial": 39,
+          "wrapped_error": 0.03572863338115262
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.02398911462685023,
+          "symbol_index": 129,
+          "theta_idx": 0,
+          "trial": 41,
+          "wrapped_error": -0.02398911462685005
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": -3.091164981135201,
+          "symbol_index": 135,
+          "theta_idx": 4,
+          "trial": 43,
+          "wrapped_error": 0.050427672454592454
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 4.71238898038469,
+          "family": "wrong",
+          "phase_estimate": -1.5076007817874912,
+          "symbol_index": 141,
+          "theta_idx": 6,
+          "trial": 45,
+          "wrapped_error": 0.06319554500740487
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.8506952890020247,
+          "symbol_index": 147,
+          "theta_idx": 1,
+          "trial": 47,
+          "wrapped_error": 0.06529712560457668
+        }
+      ],
+      "rows": 48,
+      "shuffled_null_mean_absolute_error": 1.351214536779464
+    },
+    "v2s3_matrix_seed1": {
+      "mean_absolute_circular_error": 0.04408437474410629,
+      "null_seed": 65106,
+      "pairwise_mean_absolute_error": 0.05433188197248495,
+      "phase_error_resultant": 0.9984793551247945,
+      "records": [
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.3964699722198355,
+          "symbol_index": 7,
+          "theta_idx": 5,
+          "trial": 1,
+          "wrapped_error": -0.040275482027491094
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": -3.0998879469989595,
+          "symbol_index": 13,
+          "theta_idx": 4,
+          "trial": 3,
+          "wrapped_error": 0.04170470659083314
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.8491971554848606,
+          "symbol_index": 19,
+          "theta_idx": 7,
+          "trial": 5,
+          "wrapped_error": -0.06379899208741246
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": 0.07756960954460194,
+          "symbol_index": 25,
+          "theta_idx": 0,
+          "trial": 7,
+          "wrapped_error": 0.0775696095446019
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": -3.1332398566896282,
+          "symbol_index": 31,
+          "theta_idx": 4,
+          "trial": 9,
+          "wrapped_error": 0.008352796900164883
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.434234834794944,
+          "symbol_index": 37,
+          "theta_idx": 5,
+          "trial": 11,
+          "wrapped_error": -0.07804034460259857
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.4135200701577038,
+          "symbol_index": 43,
+          "theta_idx": 5,
+          "trial": 13,
+          "wrapped_error": -0.05732557996535892
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": 3.119378285869968,
+          "symbol_index": 49,
+          "theta_idx": 4,
+          "trial": 15,
+          "wrapped_error": -0.022214367719825212
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.6044233185805068,
+          "symbol_index": 55,
+          "theta_idx": 6,
+          "trial": 17,
+          "wrapped_error": -0.033626991785610016
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": -0.14346327617028728,
+          "symbol_index": 61,
+          "theta_idx": 0,
+          "trial": 19,
+          "wrapped_error": -0.1434632761702872
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.414345681434883,
+          "symbol_index": 67,
+          "theta_idx": 3,
+          "trial": 21,
+          "wrapped_error": 0.058151191242538314
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.5439688308416954,
+          "symbol_index": 73,
+          "theta_idx": 2,
+          "trial": 23,
+          "wrapped_error": -0.026827495953201108
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.3126509711220304,
+          "symbol_index": 79,
+          "theta_idx": 3,
+          "trial": 25,
+          "wrapped_error": -0.043543519070314396
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.4712416443903034,
+          "symbol_index": 85,
+          "theta_idx": 2,
+          "trial": 27,
+          "wrapped_error": -0.0995546824045932
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.2952803353212747,
+          "symbol_index": 91,
+          "theta_idx": 5,
+          "trial": 29,
+          "wrapped_error": 0.0609141548710701
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.5942415984383163,
+          "symbol_index": 97,
+          "theta_idx": 6,
+          "trial": 31,
+          "wrapped_error": -0.023445271643419474
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.5038920608370896,
+          "symbol_index": 103,
+          "theta_idx": 2,
+          "trial": 33,
+          "wrapped_error": -0.06690426595780696
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": -0.011248021481200646,
+          "symbol_index": 109,
+          "theta_idx": 0,
+          "trial": 35,
+          "wrapped_error": -0.01124802148120052
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": -3.092978271945006,
+          "symbol_index": 115,
+          "theta_idx": 4,
+          "trial": 37,
+          "wrapped_error": 0.048614381644787485
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.3777771513314074,
+          "symbol_index": 121,
+          "theta_idx": 3,
+          "trial": 39,
+          "wrapped_error": 0.021582661139062598
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.9096064107792022,
+          "symbol_index": 127,
+          "theta_idx": 1,
+          "trial": 41,
+          "wrapped_error": 0.12420824738175407
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.60937461561803,
+          "symbol_index": 133,
+          "theta_idx": 2,
+          "trial": 43,
+          "wrapped_error": 0.03857828882313363
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.3066243344308073,
+          "symbol_index": 139,
+          "theta_idx": 5,
+          "trial": 45,
+          "wrapped_error": 0.049570155761538004
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.5915702105203655,
+          "symbol_index": 145,
+          "theta_idx": 6,
+          "trial": 47,
+          "wrapped_error": -0.020773883725468956
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": 3.1414876765068698,
+          "symbol_index": 9,
+          "theta_idx": 4,
+          "trial": 1,
+          "wrapped_error": -0.00010497708292334096
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.4081259125789107,
+          "symbol_index": 15,
+          "theta_idx": 3,
+          "trial": 3,
+          "wrapped_error": 0.051931422386565895
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.8144122947465663,
+          "symbol_index": 21,
+          "theta_idx": 1,
+          "trial": 5,
+          "wrapped_error": 0.0290141313491179
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": 0.14154030479502122,
+          "symbol_index": 27,
+          "theta_idx": 0,
+          "trial": 7,
+          "wrapped_error": 0.14154030479502122
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.8583190721204446,
+          "symbol_index": 33,
+          "theta_idx": 1,
+          "trial": 9,
+          "wrapped_error": 0.07292090872299628
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.404294661893524,
+          "symbol_index": 39,
+          "theta_idx": 3,
+          "trial": 11,
+          "wrapped_error": 0.048100171701179306
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.342796018468191,
+          "symbol_index": 45,
+          "theta_idx": 5,
+          "trial": 13,
+          "wrapped_error": 0.013398471724153538
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.007214954540590507,
+          "symbol_index": 51,
+          "theta_idx": 0,
+          "trial": 15,
+          "wrapped_error": -0.007214954540590401
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.3441296241055247,
+          "symbol_index": 57,
+          "theta_idx": 3,
+          "trial": 17,
+          "wrapped_error": -0.012064866086820114
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5902013463939837,
+          "symbol_index": 63,
+          "theta_idx": 2,
+          "trial": 19,
+          "wrapped_error": 0.019405019599087137
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.754024031623025,
+          "symbol_index": 69,
+          "theta_idx": 1,
+          "trial": 21,
+          "wrapped_error": -0.031374131774423386
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.579226177462447,
+          "symbol_index": 75,
+          "theta_idx": 2,
+          "trial": 23,
+          "wrapped_error": 0.008429850667550198
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.4912206467162263,
+          "symbol_index": 81,
+          "theta_idx": 2,
+          "trial": 25,
+          "wrapped_error": -0.07957568007867
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5789916315503219,
+          "symbol_index": 87,
+          "theta_idx": 2,
+          "trial": 27,
+          "wrapped_error": 0.00819530475542507
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.8096559845743416,
+          "symbol_index": 93,
+          "theta_idx": 7,
+          "trial": 29,
+          "wrapped_error": -0.024257821176893124
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.754091472030932,
+          "symbol_index": 99,
+          "theta_idx": 1,
+          "trial": 31,
+          "wrapped_error": -0.031306691366516315
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 4.71238898038469,
+          "family": "wrong",
+          "phase_estimate": -1.6023138437872781,
+          "symbol_index": 105,
+          "theta_idx": 6,
+          "trial": 33,
+          "wrapped_error": -0.03151751699238137
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.370170095250908,
+          "symbol_index": 111,
+          "theta_idx": 5,
+          "trial": 35,
+          "wrapped_error": -0.013975605058563545
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.7075498808852809,
+          "symbol_index": 117,
+          "theta_idx": 7,
+          "trial": 37,
+          "wrapped_error": 0.0778482825121678
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": 0.010834567819670468,
+          "symbol_index": 123,
+          "theta_idx": 0,
+          "trial": 39,
+          "wrapped_error": 0.010834567819670404
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": -3.112430356467548,
+          "symbol_index": 129,
+          "theta_idx": 4,
+          "trial": 41,
+          "wrapped_error": 0.029162297122244496
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.6123747350930078,
+          "symbol_index": 135,
+          "theta_idx": 2,
+          "trial": 43,
+          "wrapped_error": 0.041578408298111214
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 4.71238898038469,
+          "family": "wrong",
+          "phase_estimate": -1.5179926820128427,
+          "symbol_index": 141,
+          "theta_idx": 6,
+          "trial": 45,
+          "wrapped_error": 0.05280364478205435
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.8046047522273521,
+          "symbol_index": 147,
+          "theta_idx": 7,
+          "trial": 47,
+          "wrapped_error": -0.01920658882990356
+        }
+      ],
+      "rows": 48,
+      "shuffled_null_mean_absolute_error": 1.6127820871354759
+    },
+    "v2s3_matrix_seed2": {
+      "mean_absolute_circular_error": 0.06370809045082847,
+      "null_seed": 65207,
+      "pairwise_mean_absolute_error": 0.07428507849419189,
+      "phase_error_resultant": 0.9977100599785268,
+      "records": [
+        {
+          "actual_mode": "mini",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.6719618975623626,
+          "symbol_index": 7,
+          "theta_idx": 7,
+          "trial": 1,
+          "wrapped_error": 0.11343626583508559
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7557559253015794,
+          "symbol_index": 13,
+          "theta_idx": 1,
+          "trial": 3,
+          "wrapped_error": -0.029642238095868745
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.4725789627286057,
+          "symbol_index": 19,
+          "theta_idx": 5,
+          "trial": 5,
+          "wrapped_error": -0.11638447253626083
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.47837207251467,
+          "symbol_index": 25,
+          "theta_idx": 2,
+          "trial": 7,
+          "wrapped_error": -0.09242425428022649
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.6060274736343554,
+          "symbol_index": 31,
+          "theta_idx": 2,
+          "trial": 9,
+          "wrapped_error": 0.03523114683945883
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7437129201154118,
+          "symbol_index": 37,
+          "theta_idx": 1,
+          "trial": 11,
+          "wrapped_error": -0.04168524328203649
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.621991422632009,
+          "symbol_index": 43,
+          "theta_idx": 2,
+          "trial": 13,
+          "wrapped_error": 0.05119509583711235
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.316438476808752,
+          "symbol_index": 49,
+          "theta_idx": 3,
+          "trial": 15,
+          "wrapped_error": -0.039756013383593025
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.6218147932980818,
+          "symbol_index": 55,
+          "theta_idx": 6,
+          "trial": 17,
+          "wrapped_error": -0.05101846650318542
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": 3.076353070778757,
+          "symbol_index": 61,
+          "theta_idx": 4,
+          "trial": 19,
+          "wrapped_error": -0.06523958281103592
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.301597125074616,
+          "symbol_index": 67,
+          "theta_idx": 5,
+          "trial": 21,
+          "wrapped_error": 0.05459736511772917
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.6190496867878081,
+          "symbol_index": 73,
+          "theta_idx": 6,
+          "trial": 23,
+          "wrapped_error": -0.048253359992911804
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": 3.083465599020252,
+          "symbol_index": 79,
+          "theta_idx": 4,
+          "trial": 25,
+          "wrapped_error": -0.05812705456954115
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.614686828271661,
+          "symbol_index": 85,
+          "theta_idx": 1,
+          "trial": 27,
+          "wrapped_error": -0.1707113351257874
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.165381713181664,
+          "symbol_index": 91,
+          "theta_idx": 3,
+          "trial": 29,
+          "wrapped_error": -0.1908127770106809
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.706757278258738,
+          "symbol_index": 97,
+          "theta_idx": 1,
+          "trial": 31,
+          "wrapped_error": -0.07864088513871037
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": -0.14357805444692326,
+          "symbol_index": 103,
+          "theta_idx": 0,
+          "trial": 33,
+          "wrapped_error": -0.14357805444692318
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.6344813647911907,
+          "symbol_index": 109,
+          "theta_idx": 6,
+          "trial": 35,
+          "wrapped_error": -0.06368503799629366
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.2592057550687783,
+          "symbol_index": 115,
+          "theta_idx": 3,
+          "trial": 37,
+          "wrapped_error": -0.09698873512356654
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.623822564028439,
+          "symbol_index": 121,
+          "theta_idx": 2,
+          "trial": 39,
+          "wrapped_error": 0.05302623723354216
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.9133714463694586,
+          "symbol_index": 127,
+          "theta_idx": 7,
+          "trial": 41,
+          "wrapped_error": -0.12797328297201016
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.541336521970705,
+          "symbol_index": 133,
+          "theta_idx": 2,
+          "trial": 43,
+          "wrapped_error": -0.029459804824191416
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.621893223143766,
+          "symbol_index": 139,
+          "theta_idx": 6,
+          "trial": 45,
+          "wrapped_error": -0.05109689634886916
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.6352089338869478,
+          "symbol_index": 145,
+          "theta_idx": 6,
+          "trial": 47,
+          "wrapped_error": -0.06441260709205121
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.384182702262632,
+          "symbol_index": 9,
+          "theta_idx": 2,
+          "trial": 1,
+          "wrapped_error": -0.1866136245322645
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": 3.0539353789935704,
+          "symbol_index": 15,
+          "theta_idx": 4,
+          "trial": 3,
+          "wrapped_error": -0.08765727459622275
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.008955450869386825,
+          "symbol_index": 21,
+          "theta_idx": 0,
+          "trial": 5,
+          "wrapped_error": -0.008955450869386983
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5547267156066005,
+          "symbol_index": 27,
+          "theta_idx": 2,
+          "trial": 7,
+          "wrapped_error": -0.016069611188296307
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.7801703724516711,
+          "symbol_index": 33,
+          "theta_idx": 7,
+          "trial": 9,
+          "wrapped_error": 0.005227790945776967
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.426910210873072,
+          "symbol_index": 39,
+          "theta_idx": 5,
+          "trial": 11,
+          "wrapped_error": -0.0707157206807274
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.2897909234391856,
+          "symbol_index": 45,
+          "theta_idx": 3,
+          "trial": 13,
+          "wrapped_error": -0.06640356675315928
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5712948172477472,
+          "symbol_index": 51,
+          "theta_idx": 2,
+          "trial": 15,
+          "wrapped_error": 0.000498490452850664
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": 3.055148609278406,
+          "symbol_index": 57,
+          "theta_idx": 4,
+          "trial": 17,
+          "wrapped_error": -0.08644404431138719
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.3092392463177815,
+          "symbol_index": 63,
+          "theta_idx": 3,
+          "trial": 19,
+          "wrapped_error": -0.04695524387456329
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.05632120496390927,
+          "symbol_index": 69,
+          "theta_idx": 0,
+          "trial": 21,
+          "wrapped_error": -0.056321204963909466
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.725296556892495,
+          "symbol_index": 75,
+          "theta_idx": 7,
+          "trial": 23,
+          "wrapped_error": 0.06010160650495333
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5193363310236851,
+          "symbol_index": 81,
+          "theta_idx": 2,
+          "trial": 25,
+          "wrapped_error": -0.05145999577121163
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.015827290371598173,
+          "symbol_index": 87,
+          "theta_idx": 0,
+          "trial": 27,
+          "wrapped_error": -0.015827290371598135
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": 0.0028021983741654904,
+          "symbol_index": 93,
+          "theta_idx": 0,
+          "trial": 29,
+          "wrapped_error": 0.00280219837416551
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": -3.120106934823702,
+          "symbol_index": 99,
+          "theta_idx": 4,
+          "trial": 31,
+          "wrapped_error": 0.02148571876609129
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.3209946795587406,
+          "symbol_index": 105,
+          "theta_idx": 3,
+          "trial": 33,
+          "wrapped_error": -0.03519981063360422
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": -3.1090573205082217,
+          "symbol_index": 111,
+          "theta_idx": 4,
+          "trial": 35,
+          "wrapped_error": 0.032535333081571416
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.306115370452153,
+          "symbol_index": 117,
+          "theta_idx": 3,
+          "trial": 37,
+          "wrapped_error": -0.050079119740191747
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.3198235260578475,
+          "symbol_index": 123,
+          "theta_idx": 5,
+          "trial": 39,
+          "wrapped_error": 0.03637096413449736
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": 0.02712436165006028,
+          "symbol_index": 129,
+          "theta_idx": 0,
+          "trial": 41,
+          "wrapped_error": 0.02712436165006027
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": 2.9639316886970497,
+          "symbol_index": 135,
+          "theta_idx": 4,
+          "trial": 43,
+          "wrapped_error": -0.1776609648927434
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.319607063244228,
+          "symbol_index": 141,
+          "theta_idx": 5,
+          "trial": 45,
+          "wrapped_error": 0.036587426948116786
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5592810115891518,
+          "symbol_index": 147,
+          "theta_idx": 2,
+          "trial": 47,
+          "wrapped_error": -0.01151531520574478
+        }
+      ],
+      "rows": 48,
+      "shuffled_null_mean_absolute_error": 1.795269817213045
+    },
+    "v2s3_matrix_seed3": {
+      "mean_absolute_circular_error": 0.06743300210135779,
+      "null_seed": 65308,
+      "pairwise_mean_absolute_error": 0.08666260427293435,
+      "phase_error_resultant": 0.9965769669269952,
+      "records": [
+        {
+          "actual_mode": "mini",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.8001548538627303,
+          "symbol_index": 7,
+          "theta_idx": 7,
+          "trial": 1,
+          "wrapped_error": -0.014756690465281608
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.5670912778159483,
+          "symbol_index": 13,
+          "theta_idx": 2,
+          "trial": 3,
+          "wrapped_error": -0.003705048978948078
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7937561448825872,
+          "symbol_index": 19,
+          "theta_idx": 1,
+          "trial": 5,
+          "wrapped_error": 0.008357981485138666
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.234187999652875,
+          "symbol_index": 25,
+          "theta_idx": 5,
+          "trial": 7,
+          "wrapped_error": 0.12200649053946933
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.6238204125348303,
+          "symbol_index": 31,
+          "theta_idx": 6,
+          "trial": 9,
+          "wrapped_error": -0.053024085739934
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.4645767554966427,
+          "symbol_index": 37,
+          "theta_idx": 3,
+          "trial": 11,
+          "wrapped_error": 0.10838226530429784
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": 3.024805638253192,
+          "symbol_index": 43,
+          "theta_idx": 4,
+          "trial": 13,
+          "wrapped_error": -0.1167870153366013
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.7571645064409993,
+          "symbol_index": 49,
+          "theta_idx": 7,
+          "trial": 15,
+          "wrapped_error": 0.028233656956448527
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7409204575933052,
+          "symbol_index": 55,
+          "theta_idx": 1,
+          "trial": 17,
+          "wrapped_error": -0.04447770580414323
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": -0.2074331121190648,
+          "symbol_index": 61,
+          "theta_idx": 0,
+          "trial": 19,
+          "wrapped_error": -0.20743311211906468
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7270639568841909,
+          "symbol_index": 67,
+          "theta_idx": 1,
+          "trial": 21,
+          "wrapped_error": -0.05833420651325749
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7912430387010069,
+          "symbol_index": 73,
+          "theta_idx": 1,
+          "trial": 23,
+          "wrapped_error": 0.005844875303558705
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.5733529799438082,
+          "symbol_index": 79,
+          "theta_idx": 6,
+          "trial": 25,
+          "wrapped_error": -0.002556653148911181
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.584618579359882,
+          "symbol_index": 85,
+          "theta_idx": 6,
+          "trial": 27,
+          "wrapped_error": -0.013822252564985149
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7269201721674949,
+          "symbol_index": 91,
+          "theta_idx": 1,
+          "trial": 29,
+          "wrapped_error": -0.05847799122995312
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": -0.027452550039826443,
+          "symbol_index": 97,
+          "theta_idx": 0,
+          "trial": 31,
+          "wrapped_error": -0.027452550039826384
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.5821369617791575,
+          "symbol_index": 103,
+          "theta_idx": 1,
+          "trial": 33,
+          "wrapped_error": -0.20326120161829087
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": 0.04526836036393897,
+          "symbol_index": 109,
+          "theta_idx": 0,
+          "trial": 35,
+          "wrapped_error": 0.045268360363938775
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.519329535245403,
+          "symbol_index": 115,
+          "theta_idx": 6,
+          "trial": 37,
+          "wrapped_error": 0.05146679154949396
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": 2.984959039061432,
+          "symbol_index": 121,
+          "theta_idx": 4,
+          "trial": 39,
+          "wrapped_error": -0.15663361452836133
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.3232987858567276,
+          "symbol_index": 127,
+          "theta_idx": 3,
+          "trial": 41,
+          "wrapped_error": -0.03289570433561728
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7343670432260645,
+          "symbol_index": 133,
+          "theta_idx": 1,
+          "trial": 43,
+          "wrapped_error": -0.051031120171384003
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": -3.04869676528709,
+          "symbol_index": 139,
+          "theta_idx": 4,
+          "trial": 45,
+          "wrapped_error": 0.0928958883027029
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.6465767620882511,
+          "symbol_index": 145,
+          "theta_idx": 7,
+          "trial": 47,
+          "wrapped_error": 0.1388214013091975
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.016021313000491654,
+          "symbol_index": 9,
+          "theta_idx": 0,
+          "trial": 1,
+          "wrapped_error": -0.016021313000491588
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.9066668823730963,
+          "symbol_index": 15,
+          "theta_idx": 7,
+          "trial": 3,
+          "wrapped_error": -0.12126871897564762
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5392714389574524,
+          "symbol_index": 21,
+          "theta_idx": 2,
+          "trial": 5,
+          "wrapped_error": -0.031524887837444115
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.401579633671516,
+          "symbol_index": 27,
+          "theta_idx": 5,
+          "trial": 7,
+          "wrapped_error": -0.04538514347917122
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5532593747843437,
+          "symbol_index": 33,
+          "theta_idx": 2,
+          "trial": 9,
+          "wrapped_error": -0.01753695201055283
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.30682392985008,
+          "symbol_index": 39,
+          "theta_idx": 5,
+          "trial": 11,
+          "wrapped_error": 0.049370560342264724
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.6488977883331948,
+          "symbol_index": 45,
+          "theta_idx": 2,
+          "trial": 13,
+          "wrapped_error": 0.07810146153829844
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.06466028659633918,
+          "symbol_index": 51,
+          "theta_idx": 0,
+          "trial": 15,
+          "wrapped_error": -0.06466028659633904
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.9304368627390947,
+          "symbol_index": 57,
+          "theta_idx": 7,
+          "trial": 17,
+          "wrapped_error": -0.14503869934164637
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": 0.08969218163358912,
+          "symbol_index": 63,
+          "theta_idx": 0,
+          "trial": 19,
+          "wrapped_error": 0.08969218163358894
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5619182812389156,
+          "symbol_index": 69,
+          "theta_idx": 2,
+          "trial": 21,
+          "wrapped_error": -0.008878045555980929
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5026392976324283,
+          "symbol_index": 75,
+          "theta_idx": 2,
+          "trial": 23,
+          "wrapped_error": -0.06815702916246824
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.05702094343956363,
+          "symbol_index": 81,
+          "theta_idx": 0,
+          "trial": 25,
+          "wrapped_error": -0.05702094343956343
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.330699603359155,
+          "symbol_index": 87,
+          "theta_idx": 5,
+          "trial": 27,
+          "wrapped_error": 0.025494886833190122
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 4.71238898038469,
+          "family": "wrong",
+          "phase_estimate": -1.6283307851475322,
+          "symbol_index": 93,
+          "theta_idx": 6,
+          "trial": 29,
+          "wrapped_error": -0.057534458352635376
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.0002955968146756247,
+          "symbol_index": 99,
+          "theta_idx": 0,
+          "trial": 31,
+          "wrapped_error": -0.00029559681467583587
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": 3.08744424141546,
+          "symbol_index": 105,
+          "theta_idx": 4,
+          "trial": 33,
+          "wrapped_error": -0.05414841217433297
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 4.71238898038469,
+          "family": "wrong",
+          "phase_estimate": -1.4786991666512395,
+          "symbol_index": 111,
+          "theta_idx": 6,
+          "trial": 35,
+          "wrapped_error": 0.09209716014365732
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.32019003042043,
+          "symbol_index": 117,
+          "theta_idx": 3,
+          "trial": 37,
+          "wrapped_error": -0.03600445977191491
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.5375922116642324,
+          "symbol_index": 123,
+          "theta_idx": 5,
+          "trial": 39,
+          "wrapped_error": -0.18139772147188715
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": 3.0799964907639645,
+          "symbol_index": 129,
+          "theta_idx": 4,
+          "trial": 41,
+          "wrapped_error": -0.06159616282582858
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.4372639516003827,
+          "symbol_index": 135,
+          "theta_idx": 2,
+          "trial": 43,
+          "wrapped_error": -0.13353237519451389
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.387280295145836,
+          "symbol_index": 141,
+          "theta_idx": 5,
+          "trial": 45,
+          "wrapped_error": -0.031085804953491447
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": -3.01657847788301,
+          "symbol_index": 147,
+          "theta_idx": 4,
+          "trial": 47,
+          "wrapped_error": 0.12501417570678264
+        }
+      ],
+      "rows": 48,
+      "shuffled_null_mean_absolute_error": 1.248233923334303
+    },
+    "v2s3_matrix_seed4": {
+      "mean_absolute_circular_error": 0.08597658181834426,
+      "null_seed": 65409,
+      "pairwise_mean_absolute_error": 0.10352716313146355,
+      "phase_error_resultant": 0.9961216281166541,
+      "records": [
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": 0.05816171490471872,
+          "symbol_index": 7,
+          "theta_idx": 0,
+          "trial": 1,
+          "wrapped_error": 0.058161714904718664
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.5168595222451176,
+          "symbol_index": 13,
+          "theta_idx": 2,
+          "trial": 3,
+          "wrapped_error": -0.053936804549779005
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7896202351758872,
+          "symbol_index": 19,
+          "theta_idx": 1,
+          "trial": 5,
+          "wrapped_error": 0.004222071778438696
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": 0.003959260713984902,
+          "symbol_index": 25,
+          "theta_idx": 0,
+          "trial": 7,
+          "wrapped_error": 0.003959260713985113
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7312540213985472,
+          "symbol_index": 31,
+          "theta_idx": 1,
+          "trial": 9,
+          "wrapped_error": -0.05414414199890105
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.7437143214870373,
+          "symbol_index": 37,
+          "theta_idx": 7,
+          "trial": 11,
+          "wrapped_error": 0.041683841910410635
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": -0.225710934344904,
+          "symbol_index": 43,
+          "theta_idx": 0,
+          "trial": 13,
+          "wrapped_error": -0.22571093434490397
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.4842034512131796,
+          "symbol_index": 49,
+          "theta_idx": 5,
+          "trial": 15,
+          "wrapped_error": -0.1280089610208348
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.4523499678767893,
+          "symbol_index": 55,
+          "theta_idx": 2,
+          "trial": 17,
+          "wrapped_error": -0.11844635891810729
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": 0.13333270225346106,
+          "symbol_index": 61,
+          "theta_idx": 0,
+          "trial": 19,
+          "wrapped_error": 0.13333270225346094
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.5621150276194251,
+          "symbol_index": 67,
+          "theta_idx": 6,
+          "trial": 21,
+          "wrapped_error": 0.008681299175471224
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7578332875056286,
+          "symbol_index": 73,
+          "theta_idx": 1,
+          "trial": 23,
+          "wrapped_error": -0.02756487589181944
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.688850484581486,
+          "symbol_index": 79,
+          "theta_idx": 6,
+          "trial": 25,
+          "wrapped_error": -0.1180541577865899
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.5080191018116142,
+          "symbol_index": 85,
+          "theta_idx": 5,
+          "trial": 27,
+          "wrapped_error": -0.1518246116192694
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.4798610925754312,
+          "symbol_index": 91,
+          "theta_idx": 2,
+          "trial": 29,
+          "wrapped_error": -0.09093523421946514
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.4506091387691027,
+          "symbol_index": 97,
+          "theta_idx": 2,
+          "trial": 31,
+          "wrapped_error": -0.12018718802579365
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.5916748312212246,
+          "symbol_index": 103,
+          "theta_idx": 1,
+          "trial": 33,
+          "wrapped_error": -0.19372333217622373
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.9252057008860471,
+          "symbol_index": 109,
+          "theta_idx": 1,
+          "trial": 35,
+          "wrapped_error": 0.13980753748859875
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.619220940327333,
+          "symbol_index": 115,
+          "theta_idx": 6,
+          "trial": 37,
+          "wrapped_error": -0.04842461353243621
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.7905579689997473,
+          "symbol_index": 121,
+          "theta_idx": 6,
+          "trial": 39,
+          "wrapped_error": -0.21976164220485117
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.4436483678528393,
+          "symbol_index": 127,
+          "theta_idx": 2,
+          "trial": 41,
+          "wrapped_error": -0.12714795894205722
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.805205449978491,
+          "symbol_index": 133,
+          "theta_idx": 6,
+          "trial": 43,
+          "wrapped_error": -0.2344091231835943
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.4856596088394576,
+          "symbol_index": 139,
+          "theta_idx": 2,
+          "trial": 45,
+          "wrapped_error": -0.08513671795543898
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.421509124201984,
+          "symbol_index": 145,
+          "theta_idx": 5,
+          "trial": 47,
+          "wrapped_error": -0.06531463400963933
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 4.71238898038469,
+          "family": "wrong",
+          "phase_estimate": -1.716446805229542,
+          "symbol_index": 9,
+          "theta_idx": 6,
+          "trial": 1,
+          "wrapped_error": -0.14565047843464551
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.7493283095393352,
+          "symbol_index": 15,
+          "theta_idx": 1,
+          "trial": 3,
+          "wrapped_error": -0.03606985385811301
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.7000024385199536,
+          "symbol_index": 21,
+          "theta_idx": 1,
+          "trial": 5,
+          "wrapped_error": -0.08539572487749458
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.8082632674389403,
+          "symbol_index": 27,
+          "theta_idx": 1,
+          "trial": 7,
+          "wrapped_error": 0.022865104041492224
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.6824144645584024,
+          "symbol_index": 33,
+          "theta_idx": 1,
+          "trial": 9,
+          "wrapped_error": -0.10298369883904579
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.1385622126848325,
+          "symbol_index": 39,
+          "theta_idx": 0,
+          "trial": 11,
+          "wrapped_error": -0.1385622126848327
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 4.71238898038469,
+          "family": "wrong",
+          "phase_estimate": -1.7157309875643103,
+          "symbol_index": 45,
+          "theta_idx": 6,
+          "trial": 13,
+          "wrapped_error": -0.14493466076941353
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.9041363864449159,
+          "symbol_index": 51,
+          "theta_idx": 7,
+          "trial": 15,
+          "wrapped_error": -0.11873822304746717
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.844541787087102,
+          "symbol_index": 57,
+          "theta_idx": 7,
+          "trial": 17,
+          "wrapped_error": -0.059143623689653424
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.7316065181670769,
+          "symbol_index": 63,
+          "theta_idx": 1,
+          "trial": 19,
+          "wrapped_error": -0.05379164523037128
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 4.71238898038469,
+          "family": "wrong",
+          "phase_estimate": -1.5480116894802285,
+          "symbol_index": 69,
+          "theta_idx": 6,
+          "trial": 21,
+          "wrapped_error": 0.022784637314668288
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.7337370878859405,
+          "symbol_index": 75,
+          "theta_idx": 1,
+          "trial": 23,
+          "wrapped_error": -0.05166107551150789
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 4.71238898038469,
+          "family": "wrong",
+          "phase_estimate": -1.5516348367237573,
+          "symbol_index": 81,
+          "theta_idx": 6,
+          "trial": 25,
+          "wrapped_error": 0.019161490071139653
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.8956677933475699,
+          "symbol_index": 87,
+          "theta_idx": 7,
+          "trial": 27,
+          "wrapped_error": -0.11026962995012113
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.6544204053987485,
+          "symbol_index": 93,
+          "theta_idx": 1,
+          "trial": 29,
+          "wrapped_error": -0.13097775799869993
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.415903474694218,
+          "symbol_index": 99,
+          "theta_idx": 3,
+          "trial": 31,
+          "wrapped_error": 0.05970898450187301
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.4000197532461462,
+          "symbol_index": 105,
+          "theta_idx": 3,
+          "trial": 33,
+          "wrapped_error": 0.04382526305380141
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 4.71238898038469,
+          "family": "wrong",
+          "phase_estimate": -1.4618119329499368,
+          "symbol_index": 111,
+          "theta_idx": 6,
+          "trial": 35,
+          "wrapped_error": 0.10898439384495973
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.7576222968986144,
+          "symbol_index": 117,
+          "theta_idx": 1,
+          "trial": 37,
+          "wrapped_error": -0.02777586649883368
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.398549420986374,
+          "symbol_index": 123,
+          "theta_idx": 3,
+          "trial": 39,
+          "wrapped_error": 0.04235493079402897
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.05556158525640391,
+          "symbol_index": 129,
+          "theta_idx": 0,
+          "trial": 41,
+          "wrapped_error": -0.055561585256403756
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.410760407653753,
+          "symbol_index": 135,
+          "theta_idx": 5,
+          "trial": 43,
+          "wrapped_error": -0.054565917461408375
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.3714943824982284,
+          "symbol_index": 141,
+          "theta_idx": 3,
+          "trial": 45,
+          "wrapped_error": 0.015299892305883578
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.8086277220373254,
+          "symbol_index": 147,
+          "theta_idx": 7,
+          "trial": 47,
+          "wrapped_error": -0.02322955863987719
+        }
+      ],
+      "rows": 48,
+      "shuffled_null_mean_absolute_error": 1.4052478207658836
+    },
+    "v2s3_matrix_seed5": {
+      "mean_absolute_circular_error": 0.04607080367048888,
+      "null_seed": 65510,
+      "pairwise_mean_absolute_error": 0.06280386386909194,
+      "phase_error_resultant": 0.9984741210132208,
+      "records": [
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": -0.01643879543282946,
+          "symbol_index": 7,
+          "theta_idx": 0,
+          "trial": 1,
+          "wrapped_error": -0.016438795432829334
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7841859396515342,
+          "symbol_index": 13,
+          "theta_idx": 1,
+          "trial": 3,
+          "wrapped_error": -0.0012122237459140095
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.394173686617586,
+          "symbol_index": 19,
+          "theta_idx": 5,
+          "trial": 5,
+          "wrapped_error": -0.0379791964252405
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.7133371374119337,
+          "symbol_index": 25,
+          "theta_idx": 7,
+          "trial": 7,
+          "wrapped_error": 0.07206102598551478
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.3659873383347674,
+          "symbol_index": 31,
+          "theta_idx": 5,
+          "trial": 9,
+          "wrapped_error": -0.009792848142422983
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.402293812117261,
+          "symbol_index": 37,
+          "theta_idx": 5,
+          "trial": 11,
+          "wrapped_error": -0.04609932192491595
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.5539364720542406,
+          "symbol_index": 43,
+          "theta_idx": 6,
+          "trial": 13,
+          "wrapped_error": 0.01685985474065621
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.839275402749679,
+          "symbol_index": 49,
+          "theta_idx": 1,
+          "trial": 15,
+          "wrapped_error": 0.05387723935223088
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.396754936972514,
+          "symbol_index": 55,
+          "theta_idx": 5,
+          "trial": 17,
+          "wrapped_error": -0.04056044678016946
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": -3.0294191227355416,
+          "symbol_index": 61,
+          "theta_idx": 4,
+          "trial": 19,
+          "wrapped_error": 0.11217353085425152
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.5358435831976223,
+          "symbol_index": 67,
+          "theta_idx": 2,
+          "trial": 21,
+          "wrapped_error": -0.03495274359727407
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.6368081546259736,
+          "symbol_index": 73,
+          "theta_idx": 6,
+          "trial": 23,
+          "wrapped_error": -0.06601182783107706
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": -3.1088212190396085,
+          "symbol_index": 79,
+          "theta_idx": 4,
+          "trial": 25,
+          "wrapped_error": 0.03277143455018461
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.4833875144983397,
+          "symbol_index": 85,
+          "theta_idx": 2,
+          "trial": 27,
+          "wrapped_error": -0.08740881229655706
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": -0.10008562914898843,
+          "symbol_index": 91,
+          "theta_idx": 0,
+          "trial": 29,
+          "wrapped_error": -0.10008562914898844
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.4429496965127284,
+          "symbol_index": 97,
+          "theta_idx": 3,
+          "trial": 31,
+          "wrapped_error": 0.08675520632038358
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": -0.039562691447205686,
+          "symbol_index": 103,
+          "theta_idx": 0,
+          "trial": 33,
+          "wrapped_error": -0.03956269144720581
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.7953238291580502,
+          "symbol_index": 109,
+          "theta_idx": 7,
+          "trial": 35,
+          "wrapped_error": -0.009925665760602165
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.3692833372467117,
+          "symbol_index": 115,
+          "theta_idx": 3,
+          "trial": 37,
+          "wrapped_error": 0.013088847054366859
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": -0.05496967764398382,
+          "symbol_index": 121,
+          "theta_idx": 0,
+          "trial": 39,
+          "wrapped_error": -0.05496967764398386
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.617163941584047,
+          "symbol_index": 127,
+          "theta_idx": 6,
+          "trial": 41,
+          "wrapped_error": -0.0463676147891503
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.3663424192952482,
+          "symbol_index": 133,
+          "theta_idx": 5,
+          "trial": 43,
+          "wrapped_error": -0.010147929102902964
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": -0.07255575962293766,
+          "symbol_index": 139,
+          "theta_idx": 0,
+          "trial": 45,
+          "wrapped_error": -0.07255575962293781
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": -3.128097026339587,
+          "symbol_index": 145,
+          "theta_idx": 4,
+          "trial": 47,
+          "wrapped_error": 0.013495627250206255
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": 3.1259276195430803,
+          "symbol_index": 9,
+          "theta_idx": 4,
+          "trial": 1,
+          "wrapped_error": -0.015665034046712822
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.470224094833937,
+          "symbol_index": 15,
+          "theta_idx": 2,
+          "trial": 3,
+          "wrapped_error": -0.10057223196095944
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.343767165809661,
+          "symbol_index": 21,
+          "theta_idx": 3,
+          "trial": 5,
+          "wrapped_error": -0.012427324382684013
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 4.71238898038469,
+          "family": "wrong",
+          "phase_estimate": -1.4574259374249583,
+          "symbol_index": 27,
+          "theta_idx": 6,
+          "trial": 7,
+          "wrapped_error": 0.1133703893699387
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": 3.0986018770695427,
+          "symbol_index": 33,
+          "theta_idx": 4,
+          "trial": 9,
+          "wrapped_error": -0.04299077652025041
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.0031930513867978144,
+          "symbol_index": 39,
+          "theta_idx": 0,
+          "trial": 11,
+          "wrapped_error": -0.0031930513867979293
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.7508193943315467,
+          "symbol_index": 45,
+          "theta_idx": 7,
+          "trial": 13,
+          "wrapped_error": 0.034578769065901405
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.412441154047631,
+          "symbol_index": 51,
+          "theta_idx": 5,
+          "trial": 15,
+          "wrapped_error": -0.056246663855286094
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": 3.0938210594857205,
+          "symbol_index": 57,
+          "theta_idx": 4,
+          "trial": 17,
+          "wrapped_error": -0.04777159410407261
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.544237704928017,
+          "symbol_index": 63,
+          "theta_idx": 2,
+          "trial": 19,
+          "wrapped_error": -0.026558621866879406
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": -3.1053615012094604,
+          "symbol_index": 69,
+          "theta_idx": 4,
+          "trial": 21,
+          "wrapped_error": 0.03623115238033314
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": 3.080327909432013,
+          "symbol_index": 75,
+          "theta_idx": 4,
+          "trial": 23,
+          "wrapped_error": -0.06126474415778027
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": -3.1119544150216667,
+          "symbol_index": 81,
+          "theta_idx": 4,
+          "trial": 25,
+          "wrapped_error": 0.029638238568126418
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5527743138512664,
+          "symbol_index": 87,
+          "theta_idx": 2,
+          "trial": 27,
+          "wrapped_error": -0.018022012943630372
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.7267805283763826,
+          "symbol_index": 93,
+          "theta_idx": 7,
+          "trial": 29,
+          "wrapped_error": 0.05861763502106587
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.8753162181161839,
+          "symbol_index": 99,
+          "theta_idx": 7,
+          "trial": 31,
+          "wrapped_error": -0.08991805471873526
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": -3.1140702058970455,
+          "symbol_index": 105,
+          "theta_idx": 4,
+          "trial": 33,
+          "wrapped_error": 0.02752244769274803
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": 3.1376628851125554,
+          "symbol_index": 111,
+          "theta_idx": 4,
+          "trial": 35,
+          "wrapped_error": -0.003929768477237694
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.7528183641541538,
+          "symbol_index": 117,
+          "theta_idx": 1,
+          "trial": 37,
+          "wrapped_error": -0.03257979924329435
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.304436449380424,
+          "symbol_index": 123,
+          "theta_idx": 3,
+          "trial": 39,
+          "wrapped_error": -0.051758040811920925
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": -3.0738401670733912,
+          "symbol_index": 129,
+          "theta_idx": 4,
+          "trial": 41,
+          "wrapped_error": 0.06775248651640187
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.3434812477972944,
+          "symbol_index": 135,
+          "theta_idx": 3,
+          "trial": 43,
+          "wrapped_error": -0.01271324239505045
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.406495570045866,
+          "symbol_index": 141,
+          "theta_idx": 3,
+          "trial": 45,
+          "wrapped_error": 0.05030107985352128
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.6427766963532773,
+          "symbol_index": 147,
+          "theta_idx": 1,
+          "trial": 47,
+          "wrapped_error": -0.142621467044171
+        }
+      ],
+      "rows": 48,
+      "shuffled_null_mean_absolute_error": 1.4672345248308643
+    },
+    "v4s5_matrix_seed0": {
+      "mean_absolute_circular_error": 0.017214505281222675,
+      "null_seed": 65005,
+      "pairwise_mean_absolute_error": 0.026911078796306075,
+      "phase_error_resultant": 0.9997226430581218,
+      "records": [
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.365265245198414,
+          "symbol_index": 7,
+          "theta_idx": 5,
+          "trial": 1,
+          "wrapped_error": -0.009070755006069575
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.7822813342520004,
+          "symbol_index": 13,
+          "theta_idx": 7,
+          "trial": 3,
+          "wrapped_error": 0.0031168291454477526
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.3083677056637155,
+          "symbol_index": 19,
+          "theta_idx": 3,
+          "trial": 5,
+          "wrapped_error": -0.04782678452862932
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.7946906186713453,
+          "symbol_index": 25,
+          "theta_idx": 7,
+          "trial": 7,
+          "wrapped_error": -0.009292455273897104
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": -0.008745665074837946,
+          "symbol_index": 31,
+          "theta_idx": 0,
+          "trial": 9,
+          "wrapped_error": -0.008745665074838094
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.7573937584348318,
+          "symbol_index": 37,
+          "theta_idx": 7,
+          "trial": 11,
+          "wrapped_error": 0.02800440496261647
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.3490562779314277,
+          "symbol_index": 43,
+          "theta_idx": 3,
+          "trial": 13,
+          "wrapped_error": -0.007138212260917154
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": 0.002084415809941599,
+          "symbol_index": 49,
+          "theta_idx": 0,
+          "trial": 15,
+          "wrapped_error": 0.0020844158099415644
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.8009491463137971,
+          "symbol_index": 55,
+          "theta_idx": 1,
+          "trial": 17,
+          "wrapped_error": 0.015550982916348932
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": -3.1328691754286515,
+          "symbol_index": 61,
+          "theta_idx": 4,
+          "trial": 19,
+          "wrapped_error": 0.008723478161141607
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.7982655634568101,
+          "symbol_index": 67,
+          "theta_idx": 7,
+          "trial": 21,
+          "wrapped_error": -0.0128674000593616
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.358872823942397,
+          "symbol_index": 73,
+          "theta_idx": 5,
+          "trial": 23,
+          "wrapped_error": -0.0026783337500519977
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7881675344833459,
+          "symbol_index": 79,
+          "theta_idx": 1,
+          "trial": 25,
+          "wrapped_error": 0.0027693710858978093
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.3468250760845297,
+          "symbol_index": 85,
+          "theta_idx": 5,
+          "trial": 27,
+          "wrapped_error": 0.00936941410781511
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.769234045734743,
+          "symbol_index": 91,
+          "theta_idx": 7,
+          "trial": 29,
+          "wrapped_error": 0.016164117662705202
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.7930864105210002,
+          "symbol_index": 97,
+          "theta_idx": 7,
+          "trial": 31,
+          "wrapped_error": -0.007688247123551761
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.3660692324893033,
+          "symbol_index": 103,
+          "theta_idx": 3,
+          "trial": 33,
+          "wrapped_error": 0.009874742296958505
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.5547280345322778,
+          "symbol_index": 109,
+          "theta_idx": 6,
+          "trial": 35,
+          "wrapped_error": 0.0160682922626183
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7950203500761315,
+          "symbol_index": 115,
+          "theta_idx": 1,
+          "trial": 37,
+          "wrapped_error": 0.00962218667868342
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.3454031989183703,
+          "symbol_index": 121,
+          "theta_idx": 5,
+          "trial": 39,
+          "wrapped_error": 0.010791291273974934
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.36235849270346,
+          "symbol_index": 127,
+          "theta_idx": 5,
+          "trial": 41,
+          "wrapped_error": -0.00616400251111493
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7525545814894813,
+          "symbol_index": 133,
+          "theta_idx": 1,
+          "trial": 43,
+          "wrapped_error": -0.03284358190796688
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.7811596243093337,
+          "symbol_index": 139,
+          "theta_idx": 7,
+          "trial": 45,
+          "wrapped_error": 0.004238539088114557
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.769129586111596,
+          "symbol_index": 145,
+          "theta_idx": 7,
+          "trial": 47,
+          "wrapped_error": 0.01626857728585218
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 4.71238898038469,
+          "family": "wrong",
+          "phase_estimate": -1.584372454978183,
+          "symbol_index": 9,
+          "theta_idx": 6,
+          "trial": 1,
+          "wrapped_error": -0.013576128183286684
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.024048963253699394,
+          "symbol_index": 15,
+          "theta_idx": 0,
+          "trial": 3,
+          "wrapped_error": -0.02404896325369954
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.372885167127977,
+          "symbol_index": 21,
+          "theta_idx": 3,
+          "trial": 5,
+          "wrapped_error": 0.016690676935632087
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.7660796054703034,
+          "symbol_index": 27,
+          "theta_idx": 7,
+          "trial": 7,
+          "wrapped_error": 0.019318557927144653
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": 3.122851162504411,
+          "symbol_index": 33,
+          "theta_idx": 4,
+          "trial": 9,
+          "wrapped_error": -0.018741491085382034
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.336237019054813,
+          "symbol_index": 39,
+          "theta_idx": 3,
+          "trial": 11,
+          "wrapped_error": -0.01995747113753188
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": 3.1316177770068756,
+          "symbol_index": 45,
+          "theta_idx": 4,
+          "trial": 13,
+          "wrapped_error": -0.009974876582917513
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.6320612047853569,
+          "symbol_index": 51,
+          "theta_idx": 2,
+          "trial": 15,
+          "wrapped_error": 0.06126487799046032
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.0012207350231672686,
+          "symbol_index": 57,
+          "theta_idx": 0,
+          "trial": 17,
+          "wrapped_error": -0.0012207350231672187
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.7821763999400081,
+          "symbol_index": 63,
+          "theta_idx": 1,
+          "trial": 19,
+          "wrapped_error": -0.0032217634574402965
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.361370670368924,
+          "symbol_index": 69,
+          "theta_idx": 3,
+          "trial": 21,
+          "wrapped_error": 0.005176180176579059
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.7607843057571829,
+          "symbol_index": 75,
+          "theta_idx": 7,
+          "trial": 23,
+          "wrapped_error": 0.024613857640265024
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.00522812191805713,
+          "symbol_index": 81,
+          "theta_idx": 0,
+          "trial": 25,
+          "wrapped_error": -0.005228121918057216
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.8397258988627191,
+          "symbol_index": 87,
+          "theta_idx": 7,
+          "trial": 27,
+          "wrapped_error": -0.0543277354652707
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.7874430628824902,
+          "symbol_index": 93,
+          "theta_idx": 1,
+          "trial": 29,
+          "wrapped_error": 0.002044899485041718
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.3444689442405444,
+          "symbol_index": 99,
+          "theta_idx": 5,
+          "trial": 31,
+          "wrapped_error": 0.01172554595180042
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.7793540339665747,
+          "symbol_index": 105,
+          "theta_idx": 1,
+          "trial": 33,
+          "wrapped_error": -0.006044129430873735
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.7388642088746804,
+          "symbol_index": 111,
+          "theta_idx": 7,
+          "trial": 35,
+          "wrapped_error": 0.04653395452276765
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.7915790588833612,
+          "symbol_index": 117,
+          "theta_idx": 7,
+          "trial": 37,
+          "wrapped_error": -0.0061808954859126075
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.03560862777926476,
+          "symbol_index": 123,
+          "theta_idx": 0,
+          "trial": 39,
+          "wrapped_error": -0.03560862777926488
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.0711982979629403,
+          "symbol_index": 129,
+          "theta_idx": 0,
+          "trial": 41,
+          "wrapped_error": -0.07119829796294042
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": -3.112708086397067,
+          "symbol_index": 135,
+          "theta_idx": 4,
+          "trial": 43,
+          "wrapped_error": 0.02888456719272625
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 4.71238898038469,
+          "family": "wrong",
+          "phase_estimate": -1.5618083196854815,
+          "symbol_index": 141,
+          "theta_idx": 6,
+          "trial": 45,
+          "wrapped_error": 0.00898800710941483
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.7506343518308511,
+          "symbol_index": 147,
+          "theta_idx": 1,
+          "trial": 47,
+          "wrapped_error": -0.034763811566596914
+        }
+      ],
+      "rows": 48,
+      "shuffled_null_mean_absolute_error": 1.3463550760896306
+    },
+    "v4s5_matrix_seed1": {
+      "mean_absolute_circular_error": 0.023726296036086503,
+      "null_seed": 65106,
+      "pairwise_mean_absolute_error": 0.032896159120162576,
+      "phase_error_resultant": 0.9994727051519386,
+      "records": [
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.307679922090056,
+          "symbol_index": 7,
+          "theta_idx": 5,
+          "trial": 1,
+          "wrapped_error": 0.04851456810228871
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": -3.091605079797302,
+          "symbol_index": 13,
+          "theta_idx": 4,
+          "trial": 3,
+          "wrapped_error": 0.049987573792490636
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.7940280223514246,
+          "symbol_index": 19,
+          "theta_idx": 7,
+          "trial": 5,
+          "wrapped_error": -0.008629858953976388
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": -0.02647087555323424,
+          "symbol_index": 25,
+          "theta_idx": 0,
+          "trial": 7,
+          "wrapped_error": -0.02647087555323413
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": -3.065547314600582,
+          "symbol_index": 31,
+          "theta_idx": 4,
+          "trial": 9,
+          "wrapped_error": 0.07604533898921062
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.332703636174169,
+          "symbol_index": 37,
+          "theta_idx": 5,
+          "trial": 11,
+          "wrapped_error": 0.023490854018175966
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.306438961040869,
+          "symbol_index": 43,
+          "theta_idx": 5,
+          "trial": 13,
+          "wrapped_error": 0.04975552915147574
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": -3.1234204636354392,
+          "symbol_index": 49,
+          "theta_idx": 4,
+          "trial": 15,
+          "wrapped_error": 0.018172189954354323
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.5767971468859765,
+          "symbol_index": 55,
+          "theta_idx": 6,
+          "trial": 17,
+          "wrapped_error": -0.006000820091079717
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": -0.005500225474987553,
+          "symbol_index": 61,
+          "theta_idx": 0,
+          "trial": 19,
+          "wrapped_error": -0.00550022547498763
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.3716102998704316,
+          "symbol_index": 67,
+          "theta_idx": 3,
+          "trial": 21,
+          "wrapped_error": 0.015415809678086756
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.584143970193369,
+          "symbol_index": 73,
+          "theta_idx": 2,
+          "trial": 23,
+          "wrapped_error": 0.01334764339847272
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.3530168402618687,
+          "symbol_index": 79,
+          "theta_idx": 3,
+          "trial": 25,
+          "wrapped_error": -0.0031776499304760897
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.5868848519512446,
+          "symbol_index": 85,
+          "theta_idx": 2,
+          "trial": 27,
+          "wrapped_error": 0.016088525156348066
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.351627764421031,
+          "symbol_index": 91,
+          "theta_idx": 5,
+          "trial": 29,
+          "wrapped_error": 0.004566725771313784
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.5651044427129763,
+          "symbol_index": 97,
+          "theta_idx": 6,
+          "trial": 31,
+          "wrapped_error": 0.005691884081920229
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.6237165645716423,
+          "symbol_index": 103,
+          "theta_idx": 2,
+          "trial": 33,
+          "wrapped_error": 0.052920237776745704
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": -0.011188737166725206,
+          "symbol_index": 109,
+          "theta_idx": 0,
+          "trial": 35,
+          "wrapped_error": -0.011188737166725193
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": 3.1227783243709313,
+          "symbol_index": 115,
+          "theta_idx": 4,
+          "trial": 37,
+          "wrapped_error": -0.018814329218861836
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.3547576046759513,
+          "symbol_index": 121,
+          "theta_idx": 3,
+          "trial": 39,
+          "wrapped_error": -0.001436885516393538
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7852813681053832,
+          "symbol_index": 127,
+          "theta_idx": 1,
+          "trial": 41,
+          "wrapped_error": -0.00011679529206531925
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.5584754230602544,
+          "symbol_index": 133,
+          "theta_idx": 2,
+          "trial": 43,
+          "wrapped_error": -0.012320903734642119
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.3852930360013835,
+          "symbol_index": 139,
+          "theta_idx": 5,
+          "trial": 45,
+          "wrapped_error": -0.029098545809038256
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.5825852999871366,
+          "symbol_index": 145,
+          "theta_idx": 6,
+          "trial": 47,
+          "wrapped_error": -0.011788973192239816
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": -3.1378531512206127,
+          "symbol_index": 9,
+          "theta_idx": 4,
+          "trial": 1,
+          "wrapped_error": 0.003739502369180414
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.3341873807611195,
+          "symbol_index": 15,
+          "theta_idx": 3,
+          "trial": 3,
+          "wrapped_error": -0.022007109431225302
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.7459368207203103,
+          "symbol_index": 21,
+          "theta_idx": 1,
+          "trial": 5,
+          "wrapped_error": -0.03946134267713797
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": 0.04684652209458048,
+          "symbol_index": 27,
+          "theta_idx": 0,
+          "trial": 7,
+          "wrapped_error": 0.0468465220945804
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.8086302203475755,
+          "symbol_index": 33,
+          "theta_idx": 1,
+          "trial": 9,
+          "wrapped_error": 0.023232056950127422
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.358867612676598,
+          "symbol_index": 39,
+          "theta_idx": 3,
+          "trial": 11,
+          "wrapped_error": 0.00267312248425311
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.298040400522341,
+          "symbol_index": 45,
+          "theta_idx": 5,
+          "trial": 13,
+          "wrapped_error": 0.058154089670003906
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.028744888789152254,
+          "symbol_index": 51,
+          "theta_idx": 0,
+          "trial": 15,
+          "wrapped_error": -0.028744888789152157
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.4352342644835265,
+          "symbol_index": 57,
+          "theta_idx": 3,
+          "trial": 17,
+          "wrapped_error": 0.0790397742911817
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5959449515433626,
+          "symbol_index": 63,
+          "theta_idx": 2,
+          "trial": 19,
+          "wrapped_error": 0.02514862474846602
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.7774894273810421,
+          "symbol_index": 69,
+          "theta_idx": 1,
+          "trial": 21,
+          "wrapped_error": -0.00790873601640607
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.588501771917006,
+          "symbol_index": 75,
+          "theta_idx": 2,
+          "trial": 23,
+          "wrapped_error": 0.017705445122109253
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5653903623358696,
+          "symbol_index": 81,
+          "theta_idx": 2,
+          "trial": 25,
+          "wrapped_error": -0.005405964459026968
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5855387648124777,
+          "symbol_index": 87,
+          "theta_idx": 2,
+          "trial": 27,
+          "wrapped_error": 0.01474243801758135
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.7891539961976037,
+          "symbol_index": 93,
+          "theta_idx": 7,
+          "trial": 29,
+          "wrapped_error": -0.0037558328001559005
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.7945593769315878,
+          "symbol_index": 99,
+          "theta_idx": 1,
+          "trial": 31,
+          "wrapped_error": 0.009161213534139456
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 4.71238898038469,
+          "family": "wrong",
+          "phase_estimate": -1.5836385083939744,
+          "symbol_index": 105,
+          "theta_idx": 6,
+          "trial": 33,
+          "wrapped_error": -0.012842181599078017
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.364838050382804,
+          "symbol_index": 111,
+          "theta_idx": 5,
+          "trial": 35,
+          "wrapped_error": -0.008643560190458643
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.820885318870019,
+          "symbol_index": 117,
+          "theta_idx": 7,
+          "trial": 37,
+          "wrapped_error": -0.03548715547257064
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.002475065388630703,
+          "symbol_index": 123,
+          "theta_idx": 0,
+          "trial": 39,
+          "wrapped_error": -0.002475065388630515
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": 3.055985111339301,
+          "symbol_index": 129,
+          "theta_idx": 4,
+          "trial": 41,
+          "wrapped_error": -0.08560754225049205
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.4951760678996018,
+          "symbol_index": 135,
+          "theta_idx": 2,
+          "trial": 43,
+          "wrapped_error": -0.07562025889529478
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 4.71238898038469,
+          "family": "wrong",
+          "phase_estimate": -1.5826194051785112,
+          "symbol_index": 141,
+          "theta_idx": 6,
+          "trial": 45,
+          "wrapped_error": -0.011823078383614849
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.7753029391047661,
+          "symbol_index": 147,
+          "theta_idx": 7,
+          "trial": 47,
+          "wrapped_error": 0.010095224292681948
+        }
+      ],
+      "rows": 48,
+      "shuffled_null_mean_absolute_error": 1.6023143745777466
+    },
+    "v4s5_matrix_seed2": {
+      "mean_absolute_circular_error": 0.01993641569369009,
+      "null_seed": 65207,
+      "pairwise_mean_absolute_error": 0.025907467289256695,
+      "phase_error_resultant": 0.9996331334972163,
+      "records": [
+        {
+          "actual_mode": "mini",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.8458831262104126,
+          "symbol_index": 7,
+          "theta_idx": 7,
+          "trial": 1,
+          "wrapped_error": -0.06048496281296423
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7536975815937639,
+          "symbol_index": 13,
+          "theta_idx": 1,
+          "trial": 3,
+          "wrapped_error": -0.03170058180368418
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.332192717554098,
+          "symbol_index": 19,
+          "theta_idx": 5,
+          "trial": 5,
+          "wrapped_error": 0.024001772638246877
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.568650661115842,
+          "symbol_index": 25,
+          "theta_idx": 2,
+          "trial": 7,
+          "wrapped_error": -0.002145665679054609
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.6072180818227086,
+          "symbol_index": 31,
+          "theta_idx": 2,
+          "trial": 9,
+          "wrapped_error": 0.036421755027812086
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.8252811175375793,
+          "symbol_index": 37,
+          "theta_idx": 1,
+          "trial": 11,
+          "wrapped_error": 0.03988295414013088
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.5732128555122429,
+          "symbol_index": 43,
+          "theta_idx": 2,
+          "trial": 13,
+          "wrapped_error": 0.0024165287173465444
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.296436570247687,
+          "symbol_index": 49,
+          "theta_idx": 3,
+          "trial": 15,
+          "wrapped_error": -0.05975791994465762
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.5794485869941195,
+          "symbol_index": 55,
+          "theta_idx": 6,
+          "trial": 17,
+          "wrapped_error": -0.008652260199222717
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": -3.1280078956478685,
+          "symbol_index": 61,
+          "theta_idx": 4,
+          "trial": 19,
+          "wrapped_error": 0.013584757941924153
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.347371895903531,
+          "symbol_index": 67,
+          "theta_idx": 5,
+          "trial": 21,
+          "wrapped_error": 0.008822594288814045
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.497829136306994,
+          "symbol_index": 73,
+          "theta_idx": 6,
+          "trial": 23,
+          "wrapped_error": 0.07296719048790301
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": 3.1376490078198347,
+          "symbol_index": 79,
+          "theta_idx": 4,
+          "trial": 25,
+          "wrapped_error": -0.003943645769958426
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.8096858673608114,
+          "symbol_index": 85,
+          "theta_idx": 1,
+          "trial": 27,
+          "wrapped_error": 0.024287703963363327
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.3661248783294937,
+          "symbol_index": 91,
+          "theta_idx": 3,
+          "trial": 29,
+          "wrapped_error": 0.00993038813714886
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7764321483082737,
+          "symbol_index": 97,
+          "theta_idx": 1,
+          "trial": 31,
+          "wrapped_error": -0.008966015089174384
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": 0.027429457047998502,
+          "symbol_index": 103,
+          "theta_idx": 0,
+          "trial": 33,
+          "wrapped_error": 0.027429457047998707
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.5752285630800522,
+          "symbol_index": 109,
+          "theta_idx": 6,
+          "trial": 35,
+          "wrapped_error": -0.004432236285155433
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.349822777970851,
+          "symbol_index": 115,
+          "theta_idx": 3,
+          "trial": 37,
+          "wrapped_error": -0.006371712221493908
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.569324031491608,
+          "symbol_index": 121,
+          "theta_idx": 2,
+          "trial": 39,
+          "wrapped_error": -0.0014722953032886288
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.7967035286740121,
+          "symbol_index": 127,
+          "theta_idx": 7,
+          "trial": 41,
+          "wrapped_error": -0.011305365276563784
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.5957627053180674,
+          "symbol_index": 133,
+          "theta_idx": 2,
+          "trial": 43,
+          "wrapped_error": 0.024966378523171073
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.5614039758130875,
+          "symbol_index": 139,
+          "theta_idx": 6,
+          "trial": 45,
+          "wrapped_error": 0.009392350981809017
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.5277278792829523,
+          "symbol_index": 145,
+          "theta_idx": 6,
+          "trial": 47,
+          "wrapped_error": 0.04306844751194383
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5580460847734696,
+          "symbol_index": 9,
+          "theta_idx": 2,
+          "trial": 1,
+          "wrapped_error": -0.012750242021426939
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": -3.117872875144061,
+          "symbol_index": 15,
+          "theta_idx": 4,
+          "trial": 3,
+          "wrapped_error": 0.023719778445732587
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.003660800574763886,
+          "symbol_index": 21,
+          "theta_idx": 0,
+          "trial": 5,
+          "wrapped_error": -0.0036608005747638117
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5956230360169497,
+          "symbol_index": 27,
+          "theta_idx": 2,
+          "trial": 7,
+          "wrapped_error": 0.0248267092220531
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.7825735055478459,
+          "symbol_index": 33,
+          "theta_idx": 7,
+          "trial": 9,
+          "wrapped_error": 0.0028246578496027297
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.3555593996586985,
+          "symbol_index": 39,
+          "theta_idx": 5,
+          "trial": 11,
+          "wrapped_error": 0.0006350905336462986
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.36279590388292,
+          "symbol_index": 45,
+          "theta_idx": 3,
+          "trial": 13,
+          "wrapped_error": 0.0066014136905749865
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5554695905330564,
+          "symbol_index": 51,
+          "theta_idx": 2,
+          "trial": 15,
+          "wrapped_error": -0.01532673626183989
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": 3.133498655796905,
+          "symbol_index": 57,
+          "theta_idx": 4,
+          "trial": 17,
+          "wrapped_error": -0.008093997792887997
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.412400277509373,
+          "symbol_index": 63,
+          "theta_idx": 3,
+          "trial": 19,
+          "wrapped_error": 0.0562057873170283
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.01246490247826575,
+          "symbol_index": 69,
+          "theta_idx": 0,
+          "trial": 21,
+          "wrapped_error": -0.012464902478265927
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.7765180624251138,
+          "symbol_index": 75,
+          "theta_idx": 7,
+          "trial": 23,
+          "wrapped_error": 0.008880100972334048
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5846974726709246,
+          "symbol_index": 81,
+          "theta_idx": 2,
+          "trial": 25,
+          "wrapped_error": 0.013901145876028309
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.010819145042314047,
+          "symbol_index": 87,
+          "theta_idx": 0,
+          "trial": 27,
+          "wrapped_error": -0.010819145042313849
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": 0.00759570732753889,
+          "symbol_index": 93,
+          "theta_idx": 0,
+          "trial": 29,
+          "wrapped_error": 0.007595707327539003
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": 3.0899004152501073,
+          "symbol_index": 99,
+          "theta_idx": 4,
+          "trial": 31,
+          "wrapped_error": -0.051692238339685836
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.3699182904996343,
+          "symbol_index": 105,
+          "theta_idx": 3,
+          "trial": 33,
+          "wrapped_error": 0.01372380030728948
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": -3.1300236801965062,
+          "symbol_index": 111,
+          "theta_idx": 4,
+          "trial": 35,
+          "wrapped_error": 0.011568973393286441
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.361008817412011,
+          "symbol_index": 117,
+          "theta_idx": 3,
+          "trial": 37,
+          "wrapped_error": 0.004814327219666126
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.357463791123832,
+          "symbol_index": 123,
+          "theta_idx": 5,
+          "trial": 39,
+          "wrapped_error": -0.0012693009314865833
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": 0.025553247122388646,
+          "symbol_index": 129,
+          "theta_idx": 0,
+          "trial": 41,
+          "wrapped_error": 0.02555324712238871
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": 3.123584224086599,
+          "symbol_index": 135,
+          "theta_idx": 4,
+          "trial": 43,
+          "wrapped_error": -0.018008429503193923
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.420756068541149,
+          "symbol_index": 141,
+          "theta_idx": 5,
+          "trial": 45,
+          "wrapped_error": -0.06456157834880472
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.591841229727351,
+          "symbol_index": 147,
+          "theta_idx": 2,
+          "trial": 47,
+          "wrapped_error": 0.021044902932454423
+        }
+      ],
+      "rows": 48,
+      "shuffled_null_mean_absolute_error": 1.7914043276160978
+    },
+    "v4s5_matrix_seed3": {
+      "mean_absolute_circular_error": 0.02232319042697714,
+      "null_seed": 65308,
+      "pairwise_mean_absolute_error": 0.029985568916145608,
+      "phase_error_resultant": 0.9995722427850052,
+      "records": [
+        {
+          "actual_mode": "mini",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.7716896727303222,
+          "symbol_index": 7,
+          "theta_idx": 7,
+          "trial": 1,
+          "wrapped_error": 0.013708490667125872
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.5485510505514601,
+          "symbol_index": 13,
+          "theta_idx": 2,
+          "trial": 3,
+          "wrapped_error": -0.022245276243436418
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7959979932653923,
+          "symbol_index": 19,
+          "theta_idx": 1,
+          "trial": 5,
+          "wrapped_error": 0.010599829867944166
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.384194454689653,
+          "symbol_index": 25,
+          "theta_idx": 5,
+          "trial": 7,
+          "wrapped_error": -0.027999964497308127
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.5862077325285906,
+          "symbol_index": 31,
+          "theta_idx": 6,
+          "trial": 9,
+          "wrapped_error": -0.015411405733694039
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.3742914986342596,
+          "symbol_index": 37,
+          "theta_idx": 3,
+          "trial": 11,
+          "wrapped_error": 0.018097008441914753
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": 3.130795624850884,
+          "symbol_index": 43,
+          "theta_idx": 4,
+          "trial": 13,
+          "wrapped_error": -0.010797028738909198
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.8073258506408297,
+          "symbol_index": 49,
+          "theta_idx": 7,
+          "trial": 15,
+          "wrapped_error": -0.021927687243381122
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7793653767916053,
+          "symbol_index": 55,
+          "theta_idx": 1,
+          "trial": 17,
+          "wrapped_error": -0.006032786605842944
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": -0.020011730353848716,
+          "symbol_index": 61,
+          "theta_idx": 0,
+          "trial": 19,
+          "wrapped_error": -0.020011730353848733
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7603384464353603,
+          "symbol_index": 67,
+          "theta_idx": 1,
+          "trial": 21,
+          "wrapped_error": -0.025059716962088086
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7737614570143179,
+          "symbol_index": 73,
+          "theta_idx": 1,
+          "trial": 23,
+          "wrapped_error": -0.011636706383130413
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.5156523986451595,
+          "symbol_index": 79,
+          "theta_idx": 6,
+          "trial": 25,
+          "wrapped_error": 0.05514392814973679
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.5891769272268585,
+          "symbol_index": 85,
+          "theta_idx": 6,
+          "trial": 27,
+          "wrapped_error": -0.018380600431962435
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7958855396949559,
+          "symbol_index": 91,
+          "theta_idx": 1,
+          "trial": 29,
+          "wrapped_error": 0.010487376297507733
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": -0.0027440582159119907,
+          "symbol_index": 97,
+          "theta_idx": 0,
+          "trial": 31,
+          "wrapped_error": -0.0027440582159119487
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7823735185683705,
+          "symbol_index": 103,
+          "theta_idx": 1,
+          "trial": 33,
+          "wrapped_error": -0.003024644829078049
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": -0.020357407573744067,
+          "symbol_index": 109,
+          "theta_idx": 0,
+          "trial": 35,
+          "wrapped_error": -0.02035740757374427
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.6288560598652264,
+          "symbol_index": 115,
+          "theta_idx": 6,
+          "trial": 37,
+          "wrapped_error": -0.058059733070329855
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": -3.1356553728688406,
+          "symbol_index": 121,
+          "theta_idx": 4,
+          "trial": 39,
+          "wrapped_error": 0.005937280720952565
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.352366700736793,
+          "symbol_index": 127,
+          "theta_idx": 3,
+          "trial": 41,
+          "wrapped_error": -0.0038277894555518444
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.755702563877473,
+          "symbol_index": 133,
+          "theta_idx": 1,
+          "trial": 43,
+          "wrapped_error": -0.029695599519975246
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": -3.0962000617031236,
+          "symbol_index": 139,
+          "theta_idx": 4,
+          "trial": 45,
+          "wrapped_error": 0.04539259188666911
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.8174151088742271,
+          "symbol_index": 145,
+          "theta_idx": 7,
+          "trial": 47,
+          "wrapped_error": -0.032016945476779135
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": 0.08329655001137493,
+          "symbol_index": 9,
+          "theta_idx": 0,
+          "trial": 1,
+          "wrapped_error": 0.08329655001137493
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.8253953379678003,
+          "symbol_index": 15,
+          "theta_idx": 7,
+          "trial": 3,
+          "wrapped_error": -0.039997174570352456
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5915584425544638,
+          "symbol_index": 21,
+          "theta_idx": 2,
+          "trial": 5,
+          "wrapped_error": 0.020762115759567212
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.38156702081649,
+          "symbol_index": 27,
+          "theta_idx": 5,
+          "trial": 7,
+          "wrapped_error": -0.025372530624144574
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5837868303855673,
+          "symbol_index": 33,
+          "theta_idx": 2,
+          "trial": 9,
+          "wrapped_error": 0.012990503590670777
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.3813825732656935,
+          "symbol_index": 39,
+          "theta_idx": 5,
+          "trial": 11,
+          "wrapped_error": -0.025188083073349077
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5634748873744115,
+          "symbol_index": 45,
+          "theta_idx": 2,
+          "trial": 13,
+          "wrapped_error": -0.007321439420485021
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": 0.016096582437531485,
+          "symbol_index": 51,
+          "theta_idx": 0,
+          "trial": 15,
+          "wrapped_error": 0.016096582437531648
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.7143775896328511,
+          "symbol_index": 57,
+          "theta_idx": 7,
+          "trial": 17,
+          "wrapped_error": 0.07102057376459747
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": 0.012817205706201724,
+          "symbol_index": 63,
+          "theta_idx": 0,
+          "trial": 19,
+          "wrapped_error": 0.012817205706201928
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5700255531273843,
+          "symbol_index": 69,
+          "theta_idx": 2,
+          "trial": 21,
+          "wrapped_error": -0.0007707736675124366
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.6018001014297467,
+          "symbol_index": 75,
+          "theta_idx": 2,
+          "trial": 23,
+          "wrapped_error": 0.031003774634850156
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.07484835375362237,
+          "symbol_index": 81,
+          "theta_idx": 0,
+          "trial": 25,
+          "wrapped_error": -0.0748483537536222
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.380562903927178,
+          "symbol_index": 87,
+          "theta_idx": 5,
+          "trial": 27,
+          "wrapped_error": -0.024368413734833005
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 4.71238898038469,
+          "family": "wrong",
+          "phase_estimate": -1.6191649875288592,
+          "symbol_index": 93,
+          "theta_idx": 6,
+          "trial": 29,
+          "wrapped_error": -0.04836866073396262
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": -0.01189991166335273,
+          "symbol_index": 99,
+          "theta_idx": 0,
+          "trial": 31,
+          "wrapped_error": -0.011899911663352913
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": 3.1413988313847936,
+          "symbol_index": 105,
+          "theta_idx": 4,
+          "trial": 33,
+          "wrapped_error": -0.00019382220499952751
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 4.71238898038469,
+          "family": "wrong",
+          "phase_estimate": -1.5667854935886412,
+          "symbol_index": 111,
+          "theta_idx": 6,
+          "trial": 35,
+          "wrapped_error": 0.004010833206255171
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.3381960891564373,
+          "symbol_index": 117,
+          "theta_idx": 3,
+          "trial": 37,
+          "wrapped_error": -0.017998401035907552
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.3523761551649223,
+          "symbol_index": 123,
+          "theta_idx": 5,
+          "trial": 39,
+          "wrapped_error": 0.0038183350274225702
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": -3.1214271547651404,
+          "symbol_index": 129,
+          "theta_idx": 4,
+          "trial": 41,
+          "wrapped_error": 0.020165498824653127
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5599909635811593,
+          "symbol_index": 135,
+          "theta_idx": 2,
+          "trial": 43,
+          "wrapped_error": -0.010805363213737262
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.369061662696288,
+          "symbol_index": 141,
+          "theta_idx": 5,
+          "trial": 45,
+          "wrapped_error": -0.012867172503943536
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": 3.1346571736250404,
+          "symbol_index": 147,
+          "theta_idx": 4,
+          "trial": 47,
+          "wrapped_error": -0.006935479964752744
+        }
+      ],
+      "rows": 48,
+      "shuffled_null_mean_absolute_error": 1.242498048211915
+    },
+    "v4s5_matrix_seed4": {
+      "mean_absolute_circular_error": 0.09134924943891003,
+      "null_seed": 65409,
+      "pairwise_mean_absolute_error": 0.1649381295151338,
+      "phase_error_resultant": 0.9934363578624646,
+      "records": [
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": 0.12052081515093409,
+          "symbol_index": 7,
+          "theta_idx": 0,
+          "trial": 1,
+          "wrapped_error": 0.12052081515093427
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.78244038670891,
+          "symbol_index": 13,
+          "theta_idx": 2,
+          "trial": 3,
+          "wrapped_error": 0.21164405991401347
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7907783181028638,
+          "symbol_index": 19,
+          "theta_idx": 1,
+          "trial": 5,
+          "wrapped_error": 0.005380154705415308
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": 0.13357382018140182,
+          "symbol_index": 25,
+          "theta_idx": 0,
+          "trial": 7,
+          "wrapped_error": 0.13357382018140163
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.9330733972660942,
+          "symbol_index": 31,
+          "theta_idx": 1,
+          "trial": 9,
+          "wrapped_error": 0.14767523386864578
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.9238872476888433,
+          "symbol_index": 37,
+          "theta_idx": 7,
+          "trial": 11,
+          "wrapped_error": -0.13848908429139506
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": 0.00011108860599927853,
+          "symbol_index": 43,
+          "theta_idx": 0,
+          "trial": 13,
+          "wrapped_error": 0.00011108860599939874
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.2091524216821607,
+          "symbol_index": 49,
+          "theta_idx": 5,
+          "trial": 15,
+          "wrapped_error": 0.1470420685101841
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.627046081862354,
+          "symbol_index": 55,
+          "theta_idx": 2,
+          "trial": 17,
+          "wrapped_error": 0.05624975506745766
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": -0.1228151835763345,
+          "symbol_index": 61,
+          "theta_idx": 0,
+          "trial": 19,
+          "wrapped_error": -0.1228151835763347
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.5695805752792107,
+          "symbol_index": 67,
+          "theta_idx": 6,
+          "trial": 21,
+          "wrapped_error": 0.001215751515685426
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.9916142047262717,
+          "symbol_index": 73,
+          "theta_idx": 1,
+          "trial": 23,
+          "wrapped_error": 0.20621604132882343
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.686237809464711,
+          "symbol_index": 79,
+          "theta_idx": 6,
+          "trial": 25,
+          "wrapped_error": -0.11544148266981402
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.1969292583681184,
+          "symbol_index": 85,
+          "theta_idx": 5,
+          "trial": 27,
+          "wrapped_error": 0.15926523182422692
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.5668154228386668,
+          "symbol_index": 91,
+          "theta_idx": 2,
+          "trial": 29,
+          "wrapped_error": -0.003980903956229742
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.5538914646571067,
+          "symbol_index": 97,
+          "theta_idx": 2,
+          "trial": 31,
+          "wrapped_error": -0.016904862137789856
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.9999197289315018,
+          "symbol_index": 103,
+          "theta_idx": 1,
+          "trial": 33,
+          "wrapped_error": 0.21452156553405377
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.8527576293959979,
+          "symbol_index": 109,
+          "theta_idx": 1,
+          "trial": 35,
+          "wrapped_error": 0.0673594659985497
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.6260151773373752,
+          "symbol_index": 115,
+          "theta_idx": 6,
+          "trial": 37,
+          "wrapped_error": -0.0552188505424791
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.551147504588677,
+          "symbol_index": 121,
+          "theta_idx": 6,
+          "trial": 39,
+          "wrapped_error": 0.019648822206219663
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.4108271323135233,
+          "symbol_index": 127,
+          "theta_idx": 2,
+          "trial": 41,
+          "wrapped_error": -0.15996919448137348
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.5033071678590029,
+          "symbol_index": 133,
+          "theta_idx": 6,
+          "trial": 43,
+          "wrapped_error": 0.06748915893589391
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.4131609748981635,
+          "symbol_index": 139,
+          "theta_idx": 2,
+          "trial": 45,
+          "wrapped_error": -0.15763535189673306
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.3768032597525797,
+          "symbol_index": 145,
+          "theta_idx": 5,
+          "trial": 47,
+          "wrapped_error": -0.020608769560235274
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 4.71238898038469,
+          "family": "wrong",
+          "phase_estimate": -1.7239290630962518,
+          "symbol_index": 9,
+          "theta_idx": 6,
+          "trial": 1,
+          "wrapped_error": -0.15313273630135527
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.6582035190221259,
+          "symbol_index": 15,
+          "theta_idx": 1,
+          "trial": 3,
+          "wrapped_error": -0.12719464437532224
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.7895666627115967,
+          "symbol_index": 21,
+          "theta_idx": 1,
+          "trial": 5,
+          "wrapped_error": 0.0041684993141482
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.7956010957071488,
+          "symbol_index": 27,
+          "theta_idx": 1,
+          "trial": 7,
+          "wrapped_error": 0.010202932309700596
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.7747645057358381,
+          "symbol_index": 33,
+          "theta_idx": 1,
+          "trial": 9,
+          "wrapped_error": -0.010633657661609952
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": 0.2742344124710452,
+          "symbol_index": 39,
+          "theta_idx": 0,
+          "trial": 11,
+          "wrapped_error": 0.2742344124710452
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 4.71238898038469,
+          "family": "wrong",
+          "phase_estimate": -1.5554017108149327,
+          "symbol_index": 45,
+          "theta_idx": 6,
+          "trial": 13,
+          "wrapped_error": 0.01539461597996361
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.8986724087425193,
+          "symbol_index": 51,
+          "theta_idx": 7,
+          "trial": 15,
+          "wrapped_error": -0.11327424534507102
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.9174565111604538,
+          "symbol_index": 57,
+          "theta_idx": 7,
+          "trial": 17,
+          "wrapped_error": -0.13205834776300573
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.6880060350762661,
+          "symbol_index": 63,
+          "theta_idx": 1,
+          "trial": 19,
+          "wrapped_error": -0.09739212832118227
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 4.71238898038469,
+          "family": "wrong",
+          "phase_estimate": -1.5504828576269072,
+          "symbol_index": 69,
+          "theta_idx": 6,
+          "trial": 21,
+          "wrapped_error": 0.020313469167989595
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.7742388930318232,
+          "symbol_index": 75,
+          "theta_idx": 1,
+          "trial": 23,
+          "wrapped_error": -0.01115927036562514
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 4.71238898038469,
+          "family": "wrong",
+          "phase_estimate": -1.6126305339432598,
+          "symbol_index": 81,
+          "theta_idx": 6,
+          "trial": 25,
+          "wrapped_error": -0.041834207148363056
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.5581471139594821,
+          "symbol_index": 87,
+          "theta_idx": 7,
+          "trial": 27,
+          "wrapped_error": 0.22725104943796648
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.9213024629539668,
+          "symbol_index": 93,
+          "theta_idx": 1,
+          "trial": 29,
+          "wrapped_error": 0.13590429955651828
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.3419832475535927,
+          "symbol_index": 99,
+          "theta_idx": 3,
+          "trial": 31,
+          "wrapped_error": -0.014211242638752175
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.2945801913695227,
+          "symbol_index": 105,
+          "theta_idx": 3,
+          "trial": 33,
+          "wrapped_error": -0.0616142988228221
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 4.71238898038469,
+          "family": "wrong",
+          "phase_estimate": -1.5496094186608234,
+          "symbol_index": 111,
+          "theta_idx": 6,
+          "trial": 35,
+          "wrapped_error": 0.02118690813407298
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.7297437238239978,
+          "symbol_index": 117,
+          "theta_idx": 1,
+          "trial": 37,
+          "wrapped_error": -0.05565443957345062
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.2890258128224796,
+          "symbol_index": 123,
+          "theta_idx": 3,
+          "trial": 39,
+          "wrapped_error": -0.0671686773698652
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": 0.11261638522419491,
+          "symbol_index": 129,
+          "theta_idx": 0,
+          "trial": 41,
+          "wrapped_error": 0.11261638522419481
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.224102733827094,
+          "symbol_index": 135,
+          "theta_idx": 5,
+          "trial": 43,
+          "wrapped_error": 0.1320917563652504
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.405206803529845,
+          "symbol_index": 141,
+          "theta_idx": 3,
+          "trial": 45,
+          "wrapped_error": 0.049012313337500224
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.9334808830204648,
+          "symbol_index": 147,
+          "theta_idx": 7,
+          "trial": 47,
+          "wrapped_error": -0.14808271962301678
+        }
+      ],
+      "rows": 48,
+      "shuffled_null_mean_absolute_error": 1.4391995082030842
+    },
+    "v4s5_matrix_seed5": {
+      "mean_absolute_circular_error": 0.021301535780889724,
+      "null_seed": 65510,
+      "pairwise_mean_absolute_error": 0.030681155646236535,
+      "phase_error_resultant": 0.9995074165762672,
+      "records": [
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": 0.007799029248354175,
+          "symbol_index": 7,
+          "theta_idx": 0,
+          "trial": 1,
+          "wrapped_error": 0.0077990292483542945
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7913345454261103,
+          "symbol_index": 13,
+          "theta_idx": 1,
+          "trial": 3,
+          "wrapped_error": 0.0059363820286622015
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.351559576952039,
+          "symbol_index": 19,
+          "theta_idx": 5,
+          "trial": 5,
+          "wrapped_error": 0.004634913240305849
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.7730915629393018,
+          "symbol_index": 25,
+          "theta_idx": 7,
+          "trial": 7,
+          "wrapped_error": 0.012306600458146022
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.357914480514138,
+          "symbol_index": 31,
+          "theta_idx": 5,
+          "trial": 9,
+          "wrapped_error": -0.0017199903217930412
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.3063040215732165,
+          "symbol_index": 37,
+          "theta_idx": 5,
+          "trial": 11,
+          "wrapped_error": 0.049890468619128825
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.4844733531265926,
+          "symbol_index": 43,
+          "theta_idx": 6,
+          "trial": 13,
+          "wrapped_error": 0.08632297366830421
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.7853981633974483,
+          "family": "real",
+          "phase_estimate": 0.7839117244106945,
+          "symbol_index": 49,
+          "theta_idx": 1,
+          "trial": 15,
+          "wrapped_error": -0.0014864389867539352
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.355131283930758,
+          "symbol_index": 55,
+          "theta_idx": 5,
+          "trial": 17,
+          "wrapped_error": 0.0010632062615867355
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": -3.130023454772155,
+          "symbol_index": 61,
+          "theta_idx": 4,
+          "trial": 19,
+          "wrapped_error": 0.011569198817637627
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.5807542231514893,
+          "symbol_index": 67,
+          "theta_idx": 2,
+          "trial": 21,
+          "wrapped_error": 0.0099578963565925
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.5689618325788135,
+          "symbol_index": 73,
+          "theta_idx": 6,
+          "trial": 23,
+          "wrapped_error": 0.0018344942160828381
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": 3.0836574119215814,
+          "symbol_index": 79,
+          "theta_idx": 4,
+          "trial": 25,
+          "wrapped_error": -0.057935241668211734
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 1.5707963267948966,
+          "family": "real",
+          "phase_estimate": 1.5740244146756721,
+          "symbol_index": 85,
+          "theta_idx": 2,
+          "trial": 27,
+          "wrapped_error": 0.003228087880775554
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": -0.021337201135425827,
+          "symbol_index": 91,
+          "theta_idx": 0,
+          "trial": 29,
+          "wrapped_error": -0.02133720113542603
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.3372967252756514,
+          "symbol_index": 97,
+          "theta_idx": 3,
+          "trial": 31,
+          "wrapped_error": -0.018897764916693482
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": 0.01770572770881313,
+          "symbol_index": 103,
+          "theta_idx": 0,
+          "trial": 33,
+          "wrapped_error": 0.017705727708813068
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 5.497787143782138,
+          "family": "real",
+          "phase_estimate": -0.8200646813087402,
+          "symbol_index": 109,
+          "theta_idx": 7,
+          "trial": 35,
+          "wrapped_error": -0.03466651791129216
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 2.356194490192345,
+          "family": "real",
+          "phase_estimate": 2.4401964149690833,
+          "symbol_index": 115,
+          "theta_idx": 3,
+          "trial": 37,
+          "wrapped_error": 0.08400192477673851
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": -0.0005542117441403411,
+          "symbol_index": 121,
+          "theta_idx": 0,
+          "trial": 39,
+          "wrapped_error": -0.000554211744140165
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 4.71238898038469,
+          "family": "real",
+          "phase_estimate": -1.5279879900998523,
+          "symbol_index": 127,
+          "theta_idx": 6,
+          "trial": 41,
+          "wrapped_error": 0.04280833669504425
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.9269908169872414,
+          "family": "real",
+          "phase_estimate": -2.334336411201455,
+          "symbol_index": 133,
+          "theta_idx": 5,
+          "trial": 43,
+          "wrapped_error": 0.021858078990890206
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.0,
+          "family": "real",
+          "phase_estimate": 0.05423457535256913,
+          "symbol_index": 139,
+          "theta_idx": 0,
+          "trial": 45,
+          "wrapped_error": 0.05423457535256926
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 3.141592653589793,
+          "family": "real",
+          "phase_estimate": -3.1370218563097243,
+          "symbol_index": 145,
+          "theta_idx": 4,
+          "trial": 47,
+          "wrapped_error": 0.004570797280068817
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": -3.117896587962357,
+          "symbol_index": 9,
+          "theta_idx": 4,
+          "trial": 1,
+          "wrapped_error": 0.02369606562743609
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.57037102850588,
+          "symbol_index": 15,
+          "theta_idx": 2,
+          "trial": 3,
+          "wrapped_error": -0.0004252982890164958
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.367918525292916,
+          "symbol_index": 21,
+          "theta_idx": 3,
+          "trial": 5,
+          "wrapped_error": 0.011724035100570962
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 4.71238898038469,
+          "family": "wrong",
+          "phase_estimate": -1.589896802345635,
+          "symbol_index": 27,
+          "theta_idx": 6,
+          "trial": 7,
+          "wrapped_error": -0.01910047555073824
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": -3.0522012338237,
+          "symbol_index": 33,
+          "theta_idx": 4,
+          "trial": 9,
+          "wrapped_error": 0.089391419766093
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 0.0,
+          "family": "wrong",
+          "phase_estimate": 0.0021069118296591464,
+          "symbol_index": 39,
+          "theta_idx": 0,
+          "trial": 11,
+          "wrapped_error": 0.002106911829659275
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.8030457451681865,
+          "symbol_index": 45,
+          "theta_idx": 7,
+          "trial": 13,
+          "wrapped_error": -0.01764758177073844
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.9269908169872414,
+          "family": "wrong",
+          "phase_estimate": -2.3616614040740056,
+          "symbol_index": 51,
+          "theta_idx": 5,
+          "trial": 15,
+          "wrapped_error": -0.005466913881660318
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": -3.1203162952120804,
+          "symbol_index": 57,
+          "theta_idx": 4,
+          "trial": 17,
+          "wrapped_error": 0.02127635837771269
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5740357014355228,
+          "symbol_index": 63,
+          "theta_idx": 2,
+          "trial": 19,
+          "wrapped_error": 0.0032393746406262913
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": -3.112475615268371,
+          "symbol_index": 69,
+          "theta_idx": 4,
+          "trial": 21,
+          "wrapped_error": 0.029117038321421873
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": 3.1308787609367617,
+          "symbol_index": 75,
+          "theta_idx": 4,
+          "trial": 23,
+          "wrapped_error": -0.010713892653031465
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": -3.140284393532998,
+          "symbol_index": 81,
+          "theta_idx": 4,
+          "trial": 25,
+          "wrapped_error": 0.0013082600567955183
+        },
+        {
+          "actual_mode": "basis",
+          "declared_phase": 1.5707963267948966,
+          "family": "wrong",
+          "phase_estimate": 1.5790448235626902,
+          "symbol_index": 87,
+          "theta_idx": 2,
+          "trial": 27,
+          "wrapped_error": 0.0082484967677936
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.8676903475321156,
+          "symbol_index": 93,
+          "theta_idx": 7,
+          "trial": 29,
+          "wrapped_error": -0.08229218413466732
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 5.497787143782138,
+          "family": "wrong",
+          "phase_estimate": -0.7897441368209452,
+          "symbol_index": 99,
+          "theta_idx": 7,
+          "trial": 31,
+          "wrapped_error": -0.004345973423497185
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": -3.1381748433944376,
+          "symbol_index": 105,
+          "theta_idx": 4,
+          "trial": 33,
+          "wrapped_error": 0.003417810195355031
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": 3.1195600704925797,
+          "symbol_index": 111,
+          "theta_idx": 4,
+          "trial": 35,
+          "wrapped_error": -0.022032583097213454
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.7558241946762061,
+          "symbol_index": 117,
+          "theta_idx": 1,
+          "trial": 37,
+          "wrapped_error": -0.02957396872124196
+        },
+        {
+          "actual_mode": "mini",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.3685379874321413,
+          "symbol_index": 123,
+          "theta_idx": 3,
+          "trial": 39,
+          "wrapped_error": 0.012343497239796442
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 3.141592653589793,
+          "family": "wrong",
+          "phase_estimate": -3.0946173657494094,
+          "symbol_index": 129,
+          "theta_idx": 4,
+          "trial": 41,
+          "wrapped_error": 0.04697528784038418
+        },
+        {
+          "actual_mode": "residual",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.3590457360744495,
+          "symbol_index": 135,
+          "theta_idx": 3,
+          "trial": 43,
+          "wrapped_error": 0.002851245882104614
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 2.356194490192345,
+          "family": "wrong",
+          "phase_estimate": 2.3686687034036824,
+          "symbol_index": 141,
+          "theta_idx": 3,
+          "trial": 45,
+          "wrapped_error": 0.01247421321133757
+        },
+        {
+          "actual_mode": "rotation",
+          "declared_phase": 0.7853981633974483,
+          "family": "wrong",
+          "phase_estimate": 0.7917829362172519,
+          "symbol_index": 147,
+          "theta_idx": 1,
+          "trial": 47,
+          "wrapped_error": 0.00638477281980343
+        }
+      ],
+      "rows": 48,
+      "shuffled_null_mean_absolute_error": 1.4801960483767462
+    }
+  },
+  "schema_version": "1.0.0"
+}

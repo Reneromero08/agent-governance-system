@@ -1,0 +1,30 @@
+{
+  "analysis_id": "phase6b5c_transfer_aware_geometry_v1",
+  "analysis_source_sha256": "6892be9beed370b8f99b18e1eee5b4f3e66c265fb996aa5d9545575907b00515",
+  "available_in_analysis_source": true,
+  "available_in_campaign_bundle": false,
+  "calibration_partition": "preamble + even-real; internal fit trial%4==0, validation trial%4==2",
+  "campaign_id": "phase6b5_t48_d32b1bed_20260619",
+  "campaign_manifest_sha256": "cbcd2a19d6dd3bc478244f77888aa87eb043003a7685caa17ff13fe4d47e6487",
+  "campaign_source_commit": "d32b1bed0deae1b907a07eeed018b924244e9ea2",
+  "claim_ceiling": "DERIVED_TRANSFER_AWARE_ANALYSIS_ONLY",
+  "complex_geometry_source_sha256": "13ea91fc9b000062fd840ce0b07b3909cb570eaf6e1b214dcc115d2cf5a9b6a3",
+  "final_evaluation_partition": "odd trials only",
+  "generated_utc": "2026-06-19T20:13:06+00:00",
+  "null_seed": 65005,
+  "official_closure_status_unchanged": "PARTIAL",
+  "official_strict_closure_unchanged": "PARTIAL",
+  "role_separation": [
+    "protocol_integrity",
+    "mode_transport",
+    "phase_transport",
+    "shared_schedule_specificity",
+    "canonical_basis_fidelity",
+    "metadata_leakage_sanity"
+  ],
+  "schema_id": "CAT_CAS_PHASE6B5C_GATE_LAYER_BINDING_V1",
+  "schema_version": "1.0.0",
+  "source": "replication_discrepancy/results/official_gate_decomposition.json",
+  "source_sha256": "f5a8dd42beecbeea5170b0289be709af437f14759c6b672b1ed150420337923b",
+  "source_size": 58312
+}
