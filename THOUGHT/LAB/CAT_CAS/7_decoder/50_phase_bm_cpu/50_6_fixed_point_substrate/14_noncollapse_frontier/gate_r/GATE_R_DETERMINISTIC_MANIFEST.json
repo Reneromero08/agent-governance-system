@@ -1,0 +1,41 @@
+{
+  "schema_id": "CAT_CAS_PHASE6_GATE_R_BINDING_V1",
+  "reviewed_source_head": "e6bebb738d62a8d1f3890b669c02ea6faf42d7f3",
+  "phase6b5c_manifest_sha256": "93ccb5fb5d9cbc96c25c52797ea0dd0693810997a369e714cfe57109af35ff2b",
+  "phase6b5d_manifest_sha256": "d11bf9d41c1b9a9195d79d5ba1ab8b591f9c364b3f57435fded958d5a0861f31",
+  "gate_r_manifest_sha256": "0a4d5a479c289658985fcf97e5a1ad04fa786205ec2ac90940e151d3907c654f",
+  "workflow_run_id": 27850016678,
+  "artifact_id": 7758902376,
+  "artifact_digest": "sha256:db2d34e3b47c754bf1f9a813f1f73871d00e837660b1945c9f65d05661c16fcb",
+  "sealed_design": {
+    "id": "l4b5b0_observability_operator_v1",
+    "version": "1.0.0",
+    "digest": "2abf5fd375e4e705",
+    "size": 28094,
+    "sha256": "e42881e243e6168f5fc5518482172f7fb6a7437c5ad109898fd97a6193ca2414"
+  },
+  "outputs": {
+    "gate_r_effective_bundle.json": "25da42d08de187619f5e649b9c41c2a0fd3c24ced2002af07cec400130efa1b8",
+    "gate_r_technical_review.json": "c9d6cc8c3bad06f693789c75eac107e7591b87a059825943c2f8d865c863fe06",
+    "gate_r_manifest.json": "0a4d5a479c289658985fcf97e5a1ad04fa786205ec2ac90940e151d3907c654f"
+  },
+  "verification": {
+    "sealed_design_tests": "PASS",
+    "review_tests": "PASS",
+    "double_generation_byte_diff": "PASS",
+    "manifest_check": "PASS"
+  },
+  "decision": {
+    "technical_review_complete": true,
+    "verdict": "TECHNICAL_ACCEPT_WITH_REQUIRED_REPAIRS_APPLIED",
+    "repairs_binding": true,
+    "human_review": false,
+    "project_owner_ratification_required": true,
+    "project_owner_ratified": false,
+    "implementation_authorized": false,
+    "physical_acquisition_authorized": false,
+    "physical_restoration_authorized": false,
+    "required_next_record": "PROJECT_OWNER_RATIFICATION"
+  },
+  "claim_ceiling": "PREDICTIVE_OBSERVABILITY_OF_MEASURED_RESPONSE_EQUIVALENCE_CLASS"
+}
