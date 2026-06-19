@@ -26,4 +26,4 @@ def test_core_suite_keeps_xdist_parallelism():
         xdist_available=True,
     )
     assert core.xdist is True
-    assert command[-4:] == ["-n", "4", "--dist=loadfile"]
+    assert command[-3:] == ["-n", "4", "--dist=loadfile"]
