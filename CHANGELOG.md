@@ -12,6 +12,7 @@
 - **Portable path and firewall repairs:** Centralized host-independent Windows/POSIX path handling and fixed CMP-01 validation, symlink-escape reporting, traversal detection, normalized write targets, durable receipt classification, and durable unlink enforcement.
 - **Restored coverage:** Re-enabled previously orphaned MCP, write-firewall, symbol-resolution, skill-discovery, cassette-network, and embedding suites. Fixed MCP shared-fixture races through serial execution and made corpus-dependent cassette tests explicitly skip when derived corpus data is absent.
 - **Governance and regression coverage:** Added focused tests for pushed refs, remote bases, receipt schemas, base freezing, clean-tree parsing, suite ownership, portable paths, firewall behavior, frozen-plan execution, and suite isolation. Updated ADR-034 and STYLE-005. The exact squashed pusher commit passed governance, critic, contract fixtures, core, all six conditional groups, aggregate enforcement, SPECTRUM-05 strict verification, and the artifact escape hatch before promotion.
+- **Forced-rewrite CI resilience:** Fixed `push_test_plan.py` to validate actual commit object existence (not mere revision syntax) when resolving the push base. Added `AGS_PUSH_FORCED` detection in CI via `contracts.yml`, so orphaned force-push base SHAs trigger a conservative all-risk-group plan with explicit fallback metadata rather than crashing CI. Ordinary missing bases remain fail-closed with a precise diagnostic.
 
 ## 2026-06-12
 

@@ -214,12 +214,13 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     try:
         base_ref, base_sha, frozen_base = _freeze_base(args.base_ref)
-        paths, _ = changed_paths(frozen_base)
+        paths, _, forced_fallback = changed_paths(frozen_base)
         payload = plan_payload(
             paths,
             base_ref=base_sha,
             exhaustive=args.exhaustive,
             workers=max(args.workers, 0),
+            forced_fallback=forced_fallback,
         )
     except (PlanError, RuntimeError) as exc:
         sys.stderr.write(f"[ci-local-gate] FAIL: test planning failed: {exc}\n")

@@ -200,7 +200,13 @@ def matched_paths(group: RiskGroup, paths: Iterable[str]) -> tuple[str, ...]:
     return tuple(matches)
 
 
-def selected_risk_groups(paths: Iterable[str]) -> tuple[tuple[RiskGroup, tuple[str, ...]], ...]:
+def selected_risk_groups(
+    paths: Iterable[str],
+    *,
+    force_all: bool = False,
+) -> tuple[tuple[RiskGroup, tuple[str, ...]], ...]:
+    if force_all:
+        return tuple((group, group.tests) for group in RISK_GROUPS)
     normalized = normalize_paths(paths)
     selected: list[tuple[RiskGroup, tuple[str, ...]]] = []
     for group in RISK_GROUPS:
@@ -261,12 +267,23 @@ def _git_ref_exists(candidate: str) -> bool:
     return bool(_git_lines(["git", "rev-parse", "--verify", candidate]))
 
 
-def resolve_base_ref(explicit: str | None = None) -> str | None:
+def _git_commit_exists(candidate: str) -> bool:
+    result = _git_result(["git", "cat-file", "-e", f"{candidate}^{{commit}}"])
+    return result.returncode == 0
+
+
+def resolve_base_ref(
+    explicit: str | None = None,
+    *,
+    force_all: bool = False,
+) -> str | None:
     if explicit:
         if set(explicit) == {"0"}:
             return None
         if not _git_ref_exists(explicit):
             raise PlanError(f"explicit base ref does not resolve: {explicit}")
+        if not _git_commit_exists(explicit):
+            raise PlanError(f"explicit base ref does not name an available commit: {explicit}")
         return explicit
 
     environment_base = os.environ.get("AGS_PUSH_BASE")
@@ -275,10 +292,18 @@ def resolve_base_ref(explicit: str | None = None) -> str | None:
             return None
         if not _git_ref_exists(environment_base):
             raise PlanError(f"AGS_PUSH_BASE does not resolve: {environment_base}")
+        if not _git_commit_exists(environment_base):
+            forced = os.environ.get("AGS_PUSH_FORCED", "false").lower() == "true"
+            if force_all or forced:
+                return None
+            raise PlanError(
+                f"AGS_PUSH_BASE does not name an available commit: {environment_base} "
+                f"(set AGS_PUSH_FORCED=true for forced-push fallback)"
+            )
         return environment_base
 
     for candidate in ("@{upstream}", "origin/main", "HEAD^"):
-        if _git_ref_exists(candidate):
+        if _git_ref_exists(candidate) and _git_commit_exists(candidate):
             return candidate
     return None
 
@@ -290,30 +315,56 @@ def _git_diff_lines(range_spec: str) -> list[str] | None:
     return [line.strip() for line in result.stdout.splitlines() if line.strip()]
 
 
-def changed_paths(base_ref: str | None = None, explicit_paths: Iterable[str] = ()) -> tuple[list[str], str | None]:
+def changed_paths(
+    base_ref: str | None = None,
+    explicit_paths: Iterable[str] = (),
+    *,
+    force_all: bool = False,
+) -> tuple[list[str], str | None, dict | None]:
     explicit = normalize_paths(explicit_paths)
     if explicit:
-        return explicit, base_ref
+        return explicit, base_ref, None
 
-    resolved = resolve_base_ref(base_ref)
-    committed: list[str]
-    if resolved:
+    resolved = resolve_base_ref(base_ref, force_all=force_all)
+
+    forced_fallback: dict | None = None
+    if resolved is None:
+        env_base = os.environ.get("AGS_PUSH_BASE")
+        forced = os.environ.get("AGS_PUSH_FORCED", "false").lower() == "true"
+        if env_base and not set(env_base) == {"0"} and (force_all or forced):
+            forced_fallback = {
+                "base_ref": env_base,
+                "base_status": "missing-forced-push",
+                "forced_push_fallback": True,
+            }
+            print(
+                f"[push-test-plan] Forced-push fallback: base {env_base} is unavailable; "
+                f"selecting all risk groups.",
+                file=sys.stderr,
+            )
+            committed: list[str] = []
+        else:
+            committed = _git_lines(["git", "ls-tree", "-r", "--name-only", "HEAD"], required=True)
+    elif resolved:
         merge_base_diff = _git_diff_lines(f"{resolved}...HEAD")
         direct_diff = _git_diff_lines(f"{resolved}..HEAD")
         if merge_base_diff is None and direct_diff is None:
             raise PlanError(f"cannot diff resolved base {resolved} against HEAD")
         committed = [*(merge_base_diff or []), *(direct_diff or [])]
     else:
-        # Initial/untracked history: treat every tracked path as changed rather
-        # than silently under-selecting conditional suites.
         committed = _git_lines(["git", "ls-tree", "-r", "--name-only", "HEAD"], required=True)
 
     local = _git_lines(["git", "diff", "--name-only"], required=True)
     staged = _git_lines(["git", "diff", "--cached", "--name-only"], required=True)
-    return normalize_paths([*committed, *local, *staged]), resolved
+    return normalize_paths([*committed, *local, *staged]), resolved, forced_fallback
 
 
-def build_plan(paths: Iterable[str], *, exhaustive: bool = False) -> list[TestSuite]:
+def build_plan(
+    paths: Iterable[str],
+    *,
+    exhaustive: bool = False,
+    force_all: bool = False,
+) -> list[TestSuite]:
     if exhaustive:
         return [TestSuite("exhaustive", (TESTBENCH,))]
 
@@ -321,7 +372,7 @@ def build_plan(paths: Iterable[str], *, exhaustive: bool = False) -> list[TestSu
     suites = [TestSuite("core", (TESTBENCH,), core_args)]
     suites.extend(
         TestSuite(group.name, group.tests, xdist=group.xdist)
-        for group, _ in selected_risk_groups(paths)
+        for group, _ in selected_risk_groups(paths, force_all=force_all)
     )
     return suites
 
@@ -351,10 +402,20 @@ def pytest_command(
     return command
 
 
-def plan_payload(paths: Iterable[str], *, base_ref: str | None, exhaustive: bool, workers: int) -> dict:
+def plan_payload(
+    paths: Iterable[str],
+    *,
+    base_ref: str | None,
+    exhaustive: bool,
+    workers: int,
+    force_all: bool = False,
+    forced_fallback: dict | None = None,
+) -> dict:
+    if forced_fallback:
+        force_all = True
     normalized = normalize_paths(paths)
-    suites = build_plan(normalized, exhaustive=exhaustive)
-    selected = selected_risk_groups(normalized) if not exhaustive else ()
+    suites = build_plan(normalized, exhaustive=exhaustive, force_all=force_all)
+    selected = selected_risk_groups(normalized, force_all=force_all) if not exhaustive else ()
     interpreter = repo_python()
     xdist_available = workers > 0 and _interpreter_has_xdist(interpreter)
     effective_workers = workers if xdist_available else 0
@@ -371,8 +432,10 @@ def plan_payload(paths: Iterable[str], *, base_ref: str | None, exhaustive: bool
         "suites": semantic_suites,
         "workers": effective_workers,
     }
+    if forced_fallback:
+        hash_material["forced_push_fallback"] = True
     encoded = json.dumps(hash_material, sort_keys=True, separators=(",", ":")).encode("utf-8")
-    payload = {
+    payload: dict = {
         **hash_material,
         "embedding_required": any(item["name"] == "embeddings" for item in risk_groups),
         "python": interpreter,
@@ -391,6 +454,8 @@ def plan_payload(paths: Iterable[str], *, base_ref: str | None, exhaustive: bool
         ],
         "plan_hash": hashlib.sha256(encoded).hexdigest(),
     }
+    if forced_fallback:
+        payload.update(forced_fallback)
     return payload
 
 
@@ -416,11 +481,28 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--workers", type=int, default=0, help="pytest-xdist workers when xdist is installed")
     parser.add_argument("--run", action="store_true", help="Execute the computed plan")
     parser.add_argument("--json", action="store_true", help="Print the plan as JSON")
+    parser.add_argument(
+        "--force-all-risk-groups",
+        action="store_true",
+        help="Select every risk group regardless of changed paths",
+    )
     args = parser.parse_args(argv)
 
+    force_all = bool(args.force_all_risk_groups)
     try:
-        paths, base = changed_paths(args.base_ref, args.changed_file)
-        payload = plan_payload(paths, base_ref=base, exhaustive=args.exhaustive, workers=max(args.workers, 0))
+        paths, base, forced_fallback = changed_paths(
+            args.base_ref,
+            args.changed_file,
+            force_all=force_all,
+        )
+        payload = plan_payload(
+            paths,
+            base_ref=base,
+            exhaustive=args.exhaustive,
+            workers=max(args.workers, 0),
+            force_all=force_all,
+            forced_fallback=forced_fallback,
+        )
     except PlanError as exc:
         print(f"[push-test-plan] ERROR: {exc}", file=sys.stderr)
         return 2

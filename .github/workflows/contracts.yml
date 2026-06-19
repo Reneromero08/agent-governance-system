@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       AGS_PUSH_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+      AGS_PUSH_FORCED: ${{ github.event_name == 'push' && github.event.forced && 'true' || 'false' }}
       TMPDIR: ${{ github.workspace }}/LAW/CONTRACTS/_runs/_tmp/pytest
       TEMP: ${{ github.workspace }}/LAW/CONTRACTS/_runs/_tmp/pytest
       TMP: ${{ github.workspace }}/LAW/CONTRACTS/_runs/_tmp/pytest
