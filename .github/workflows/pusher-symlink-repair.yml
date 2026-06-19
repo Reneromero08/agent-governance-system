@@ -7,6 +7,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: pusher-symlink-repair
+  cancel-in-progress: false
+
 jobs:
   apply:
     runs-on: ubuntu-latest
