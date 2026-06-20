@@ -1,0 +1,49 @@
+{
+  "files": {
+    "../REPLICATION_DISCREPANCY_REPORT.md": {
+      "sha256": "634bf4871fb537c0eace592744e215fc95c07f895761e3c984fe65266717c3f3",
+      "size": 5794
+    },
+    "adjudication_report.json": {
+      "sha256": "ef445c05a0ccefde9f87c1d274a9efb226c8645881b65d500280859e714bf309",
+      "size": 3899
+    },
+    "diagnostic_counterfactuals.json": {
+      "sha256": "4dd7d9475ef3b62e5ff2bfb2e0ff09876935b8b4836cd8d111ab146d81fa8a7d",
+      "size": 1020913
+    },
+    "historical_current_comparison.json": {
+      "sha256": "6d84b743090c600a0456838e33113b8c21c85d1c46fcdda3021b32999321a4d1",
+      "size": 4179
+    },
+    "official_gate_decomposition.json": {
+      "sha256": "f5a8dd42beecbeea5170b0289be709af437f14759c6b672b1ed150420337923b",
+      "size": 58312
+    },
+    "protocol_comparison.json": {
+      "sha256": "8e7c382e26b55ccf63ba24f0ff1d5bf5acfbdd63501937d11e7ba5590048e793",
+      "size": 5760
+    },
+    "raw_nonstationarity.json": {
+      "sha256": "59e0a8e5e6c4371d10aada5d0da92055e196c64a494f22005e5f983c6defa1ae",
+      "size": 227692
+    },
+    "schedule_balance.json": {
+      "sha256": "a9e04ec1258e692eee51201bcf2b3f209e53a15ac02a33d1765bebfb28dd7daa",
+      "size": 35261
+    },
+    "seed4_case_report.json": {
+      "sha256": "132b277c553c10a223cfc9dcd19348b43b105f6e92c0cc16562950b6e7cf1c3f",
+      "size": 28035
+    }
+  },
+  "metadata": {
+    "analysis_tool_sha256": "edbd70277ad962bec19334d26a78ed997798eccc78a2352785c7ecc305feb4e5",
+    "analyzer_sha256": "aa1ca5b0ce911ce931b036d023981eb1589d316e0adf88b66eb494ada1c5a50c",
+    "campaign_manifest_sha256": "cbcd2a19d6dd3bc478244f77888aa87eb043003a7685caa17ff13fe4d47e6487",
+    "generated_utc": "2026-06-19T20:00:00Z",
+    "source_campaign_id": "phase6b5_t48_d32b1bed_20260619",
+    "source_commit": "d32b1bed0deae1b907a07eeed018b924244e9ea2"
+  },
+  "schema_id": "CAT_CAS_REPLICATION_DISCREPANCY_OUTPUT_MANIFEST_V1"
+}

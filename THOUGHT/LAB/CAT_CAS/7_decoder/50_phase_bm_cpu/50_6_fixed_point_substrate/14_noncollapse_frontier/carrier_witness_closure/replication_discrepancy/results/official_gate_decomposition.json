@@ -1,0 +1,2136 @@
+{
+  "metadata": {
+    "analysis_tool_sha256": "edbd70277ad962bec19334d26a78ed997798eccc78a2352785c7ecc305feb4e5",
+    "analyzer_sha256": "aa1ca5b0ce911ce931b036d023981eb1589d316e0adf88b66eb494ada1c5a50c",
+    "campaign_manifest_sha256": "cbcd2a19d6dd3bc478244f77888aa87eb043003a7685caa17ff13fe4d47e6487",
+    "generated_utc": "2026-06-19T20:00:00Z",
+    "source_campaign_id": "phase6b5_t48_d32b1bed_20260619",
+    "source_commit": "d32b1bed0deae1b907a07eeed018b924244e9ea2"
+  },
+  "runs": {
+    "v2s3_matrix_seed0": {
+      "floor_mode": "residual",
+      "gates_without_phase": {
+        "all_rows_restore": true,
+        "pseudo_reject_floor_ge_0_95": true,
+        "real_accuracy_ge_0_60": true,
+        "real_vs_pseudo_floor_ge_0_95": false,
+        "wrong_actual_match_ge_0_60": true,
+        "wrong_declared_match_le_0_20": true
+      },
+      "grouping": "predicted",
+      "metrics": {
+        "pseudo_declared_match": 0.125,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 0.9583333333333334,
+        "real_mode_floor": 0.8571428571428571,
+        "real_vs_pseudo_floor": 0.9230769230769231,
+        "wrong_actual_match": 0.9583333333333334,
+        "wrong_declared_match": 0.0
+      },
+      "official_pass": false,
+      "passes_nonphase_gates": false,
+      "pseudo_groups": {
+        "basis": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 13,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.6305833524471804,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 8,
+          "row_flips_to_0_95": 0,
+          "rows": 8
+        },
+        "mini": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 13,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.5903836027749962,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 7,
+          "row_flips_to_0_95": 0,
+          "rows": 7
+        },
+        "residual": {
+          "combined_accuracy": 0.9230769230769231,
+          "combined_denominator": 13,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.5407418735600997,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 6,
+          "row_flips_to_0_95": 1,
+          "rows": 6
+        },
+        "rotation": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 9,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.2924017738212866,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 3,
+          "row_flips_to_0_95": 0,
+          "rows": 3
+        }
+      },
+      "pseudo_rho": {
+        "max": 0.70280851421244,
+        "mean": 0.23904205223969677,
+        "median": 0.2028935248062162,
+        "min": 0.017418578753456402,
+        "n": 24,
+        "q05": 0.024050411961655218,
+        "q95": 0.4826168781060022,
+        "std": 0.16870540109671092
+      },
+      "pseudo_test_rows_per_actual_mode": {
+        "basis": 2,
+        "mini": 10,
+        "residual": 6,
+        "rotation": 6
+      },
+      "pseudo_test_rows_per_declared_mode": {
+        "basis": 7,
+        "mini": 6,
+        "residual": 5,
+        "rotation": 6
+      },
+      "pseudo_test_rows_per_predicted_mode": {
+        "basis": 8,
+        "mini": 7,
+        "residual": 6,
+        "rotation": 3
+      },
+      "real_modes": {
+        "basis": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.4781762498950183,
+            1.0
+          ],
+          "correct": 5,
+          "false_rejects": 0,
+          "rows": 5
+        },
+        "mini": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.5407418735600997,
+            1.0
+          ],
+          "correct": 6,
+          "false_rejects": 0,
+          "rows": 6
+        },
+        "residual": {
+          "accuracy": 0.8571428571428571,
+          "accuracy_exact_95ci": [
+            0.4212768029568049,
+            0.9963897031380995
+          ],
+          "correct": 6,
+          "false_rejects": 1,
+          "rows": 7
+        },
+        "rotation": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.5407418735600997,
+            1.0
+          ],
+          "correct": 6,
+          "false_rejects": 0,
+          "rows": 6
+        }
+      },
+      "real_rho": {
+        "max": 0.9144892920354504,
+        "mean": 0.8670714474845936,
+        "median": 0.8753264456649148,
+        "min": 0.7067737013245158,
+        "n": 24,
+        "q05": 0.8259098177762556,
+        "q95": 0.9041629255006797,
+        "std": 0.041165673402960706
+      },
+      "real_test_rows_per_declared_mode": {
+        "basis": 5,
+        "mini": 6,
+        "residual": 7,
+        "rotation": 6
+      },
+      "rejection_floor_mode": "basis",
+      "retained_official_metrics": {
+        "phase_corr_null": -0.08795310624259542,
+        "phase_corr_true": 0.9981501361647298,
+        "phase_delta": 1.0861032424073251,
+        "pseudo_declared_match": 0.125,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 0.9583333333333334,
+        "real_mode_floor": 0.8571428571428571,
+        "real_vs_pseudo_floor": 0.9230769230769231,
+        "wrong_actual_match": 0.9583333333333334,
+        "wrong_declared_match": 0.0
+      },
+      "threshold": 0.7986501357300003
+    },
+    "v2s3_matrix_seed1": {
+      "floor_mode": "basis",
+      "gates_without_phase": {
+        "all_rows_restore": true,
+        "pseudo_reject_floor_ge_0_95": true,
+        "real_accuracy_ge_0_60": true,
+        "real_vs_pseudo_floor_ge_0_95": true,
+        "wrong_actual_match_ge_0_60": true,
+        "wrong_declared_match_le_0_20": true
+      },
+      "grouping": "predicted",
+      "metrics": {
+        "pseudo_declared_match": 0.25,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 1.0,
+        "real_mode_floor": 1.0,
+        "real_vs_pseudo_floor": 1.0,
+        "wrong_actual_match": 1.0,
+        "wrong_declared_match": 0.0
+      },
+      "official_pass": true,
+      "passes_nonphase_gates": true,
+      "pseudo_groups": {
+        "basis": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 11,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.3976353643835252,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 4,
+          "row_flips_to_0_95": 0,
+          "rows": 4
+        },
+        "mini": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 10,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.5407418735600997,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 6,
+          "row_flips_to_0_95": 0,
+          "rows": 6
+        },
+        "residual": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 16,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.6915028921812392,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 10,
+          "row_flips_to_0_95": 0,
+          "rows": 10
+        },
+        "rotation": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 11,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.3976353643835252,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 4,
+          "row_flips_to_0_95": 0,
+          "rows": 4
+        }
+      },
+      "pseudo_rho": {
+        "max": 0.48106792608284,
+        "mean": 0.18374230220285892,
+        "median": 0.15489448115956445,
+        "min": 0.025932033072180855,
+        "n": 24,
+        "q05": 0.028537029212736188,
+        "q95": 0.4113967290264184,
+        "std": 0.13792211837643137
+      },
+      "pseudo_test_rows_per_actual_mode": {
+        "basis": 9,
+        "mini": 4,
+        "residual": 2,
+        "rotation": 9
+      },
+      "pseudo_test_rows_per_declared_mode": {
+        "basis": 5,
+        "mini": 8,
+        "residual": 3,
+        "rotation": 8
+      },
+      "pseudo_test_rows_per_predicted_mode": {
+        "basis": 4,
+        "mini": 6,
+        "residual": 10,
+        "rotation": 4
+      },
+      "real_modes": {
+        "basis": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.5903836027749962,
+            1.0
+          ],
+          "correct": 7,
+          "false_rejects": 0,
+          "rows": 7
+        },
+        "mini": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.3976353643835252,
+            1.0
+          ],
+          "correct": 4,
+          "false_rejects": 0,
+          "rows": 4
+        },
+        "residual": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.5407418735600997,
+            1.0
+          ],
+          "correct": 6,
+          "false_rejects": 0,
+          "rows": 6
+        },
+        "rotation": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.5903836027749962,
+            1.0
+          ],
+          "correct": 7,
+          "false_rejects": 0,
+          "rows": 7
+        }
+      },
+      "real_rho": {
+        "max": 0.9157111925328211,
+        "mean": 0.8467685572675526,
+        "median": 0.8582167422967542,
+        "min": 0.7008499822315069,
+        "n": 24,
+        "q05": 0.7630792113356112,
+        "q95": 0.9057062984807898,
+        "std": 0.054170249086166224
+      },
+      "real_test_rows_per_declared_mode": {
+        "basis": 7,
+        "mini": 4,
+        "residual": 6,
+        "rotation": 7
+      },
+      "rejection_floor_mode": "basis",
+      "retained_official_metrics": {
+        "phase_corr_null": -0.09292234484253438,
+        "phase_corr_true": 0.9975863497905992,
+        "phase_delta": 1.0905086946331337,
+        "pseudo_declared_match": 0.25,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 1.0,
+        "real_mode_floor": 1.0,
+        "real_vs_pseudo_floor": 1.0,
+        "wrong_actual_match": 1.0,
+        "wrong_declared_match": 0.0
+      },
+      "threshold": 0.6613220503738213
+    },
+    "v2s3_matrix_seed2": {
+      "floor_mode": "residual",
+      "gates_without_phase": {
+        "all_rows_restore": true,
+        "pseudo_reject_floor_ge_0_95": true,
+        "real_accuracy_ge_0_60": true,
+        "real_vs_pseudo_floor_ge_0_95": false,
+        "wrong_actual_match_ge_0_60": true,
+        "wrong_declared_match_le_0_20": true
+      },
+      "grouping": "predicted",
+      "metrics": {
+        "pseudo_declared_match": 0.25,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 0.875,
+        "real_mode_floor": 0.7777777777777778,
+        "real_vs_pseudo_floor": 0.9230769230769231,
+        "wrong_actual_match": 0.9583333333333334,
+        "wrong_declared_match": 0.0
+      },
+      "official_pass": false,
+      "passes_nonphase_gates": false,
+      "pseudo_groups": {
+        "basis": {
+          "combined_accuracy": 0.9333333333333333,
+          "combined_denominator": 15,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.6637328831200568,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 9,
+          "row_flips_to_0_95": 1,
+          "rows": 9
+        },
+        "mini": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 7,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.2924017738212866,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 3,
+          "row_flips_to_0_95": 0,
+          "rows": 3
+        },
+        "residual": {
+          "combined_accuracy": 0.9230769230769231,
+          "combined_denominator": 13,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.3976353643835252,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 4,
+          "row_flips_to_0_95": 1,
+          "rows": 4
+        },
+        "rotation": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 13,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.6305833524471804,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 8,
+          "row_flips_to_0_95": 0,
+          "rows": 8
+        }
+      },
+      "pseudo_rho": {
+        "max": 0.4323181857901675,
+        "mean": 0.17399119429243012,
+        "median": 0.15136139230540357,
+        "min": 0.01780200620871399,
+        "n": 24,
+        "q05": 0.030589239895255974,
+        "q95": 0.40527332217670126,
+        "std": 0.12087679492188694
+      },
+      "pseudo_test_rows_per_actual_mode": {
+        "basis": 9,
+        "mini": 5,
+        "residual": 6,
+        "rotation": 4
+      },
+      "pseudo_test_rows_per_declared_mode": {
+        "basis": 5,
+        "mini": 3,
+        "residual": 7,
+        "rotation": 9
+      },
+      "pseudo_test_rows_per_predicted_mode": {
+        "basis": 9,
+        "mini": 3,
+        "residual": 4,
+        "rotation": 8
+      },
+      "real_modes": {
+        "basis": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.5407418735600997,
+            1.0
+          ],
+          "correct": 6,
+          "false_rejects": 1,
+          "rows": 6
+        },
+        "mini": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.3976353643835252,
+            1.0
+          ],
+          "correct": 4,
+          "false_rejects": 0,
+          "rows": 4
+        },
+        "residual": {
+          "accuracy": 0.7777777777777778,
+          "accuracy_exact_95ci": [
+            0.39990642628368744,
+            0.9718550265221018
+          ],
+          "correct": 7,
+          "false_rejects": 1,
+          "rows": 9
+        },
+        "rotation": {
+          "accuracy": 0.8,
+          "accuracy_exact_95ci": [
+            0.28358206388191054,
+            0.9949492366205319
+          ],
+          "correct": 4,
+          "false_rejects": 0,
+          "rows": 5
+        }
+      },
+      "real_rho": {
+        "max": 0.9322470613514179,
+        "mean": 0.8315556971567393,
+        "median": 0.8484059577405172,
+        "min": 0.679936929517582,
+        "n": 24,
+        "q05": 0.7320869191137132,
+        "q95": 0.9092155466495407,
+        "std": 0.06285981572775076
+      },
+      "real_test_rows_per_declared_mode": {
+        "basis": 6,
+        "mini": 4,
+        "residual": 9,
+        "rotation": 5
+      },
+      "rejection_floor_mode": "basis",
+      "retained_official_metrics": {
+        "phase_corr_null": -0.1035029606872508,
+        "phase_corr_true": 0.9929954343496409,
+        "phase_delta": 1.0964983950368916,
+        "pseudo_declared_match": 0.25,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 0.875,
+        "real_mode_floor": 0.7777777777777778,
+        "real_vs_pseudo_floor": 0.9230769230769231,
+        "wrong_actual_match": 0.9583333333333334,
+        "wrong_declared_match": 0.0
+      },
+      "threshold": 0.7376910980038506
+    },
+    "v2s3_matrix_seed3": {
+      "floor_mode": "basis",
+      "gates_without_phase": {
+        "all_rows_restore": true,
+        "pseudo_reject_floor_ge_0_95": true,
+        "real_accuracy_ge_0_60": true,
+        "real_vs_pseudo_floor_ge_0_95": true,
+        "wrong_actual_match_ge_0_60": true,
+        "wrong_declared_match_le_0_20": true
+      },
+      "grouping": "predicted",
+      "metrics": {
+        "pseudo_declared_match": 0.2916666666666667,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 0.9166666666666666,
+        "real_mode_floor": 0.75,
+        "real_vs_pseudo_floor": 1.0,
+        "wrong_actual_match": 0.9583333333333334,
+        "wrong_declared_match": 0.0
+      },
+      "official_pass": true,
+      "passes_nonphase_gates": true,
+      "pseudo_groups": {
+        "basis": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 15,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.5903836027749962,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 7,
+          "row_flips_to_0_95": 0,
+          "rows": 7
+        },
+        "mini": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 6,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.15811388300841894,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 2,
+          "row_flips_to_0_95": 0,
+          "rows": 2
+        },
+        "residual": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 18,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.6915028921812392,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 10,
+          "row_flips_to_0_95": 0,
+          "rows": 10
+        },
+        "rotation": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 9,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.4781762498950183,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 5,
+          "row_flips_to_0_95": 0,
+          "rows": 5
+        }
+      },
+      "pseudo_rho": {
+        "max": 0.5778048995397685,
+        "mean": 0.19409020259199436,
+        "median": 0.17532271233758556,
+        "min": 0.04258326032766947,
+        "n": 24,
+        "q05": 0.05526639930920753,
+        "q95": 0.42214237605227384,
+        "std": 0.1369420913909559
+      },
+      "pseudo_test_rows_per_actual_mode": {
+        "basis": 5,
+        "mini": 4,
+        "residual": 5,
+        "rotation": 10
+      },
+      "pseudo_test_rows_per_declared_mode": {
+        "basis": 4,
+        "mini": 4,
+        "residual": 4,
+        "rotation": 12
+      },
+      "pseudo_test_rows_per_predicted_mode": {
+        "basis": 7,
+        "mini": 2,
+        "residual": 10,
+        "rotation": 5
+      },
+      "real_modes": {
+        "basis": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.6305833524471804,
+            1.0
+          ],
+          "correct": 8,
+          "false_rejects": 0,
+          "rows": 8
+        },
+        "mini": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.3976353643835252,
+            1.0
+          ],
+          "correct": 4,
+          "false_rejects": 0,
+          "rows": 4
+        },
+        "residual": {
+          "accuracy": 0.75,
+          "accuracy_exact_95ci": [
+            0.34914420558717596,
+            0.9681459737500557
+          ],
+          "correct": 6,
+          "false_rejects": 0,
+          "rows": 8
+        },
+        "rotation": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.3976353643835252,
+            1.0
+          ],
+          "correct": 4,
+          "false_rejects": 0,
+          "rows": 4
+        }
+      },
+      "real_rho": {
+        "max": 0.8916717124345952,
+        "mean": 0.8389543221643988,
+        "median": 0.8462843471285181,
+        "min": 0.7583596794337361,
+        "n": 24,
+        "q05": 0.7757793878237518,
+        "q95": 0.8787565831828884,
+        "std": 0.03440151672302655
+      },
+      "real_test_rows_per_declared_mode": {
+        "basis": 8,
+        "mini": 4,
+        "residual": 8,
+        "rotation": 4
+      },
+      "rejection_floor_mode": "basis",
+      "retained_official_metrics": {
+        "phase_corr_null": 0.052899743899982456,
+        "phase_corr_true": 0.9926419354381103,
+        "phase_delta": 0.9397421915381279,
+        "pseudo_declared_match": 0.2916666666666667,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 0.9166666666666666,
+        "real_mode_floor": 0.75,
+        "real_vs_pseudo_floor": 1.0,
+        "wrong_actual_match": 0.9583333333333334,
+        "wrong_declared_match": 0.0
+      },
+      "threshold": 0.6859712898657409
+    },
+    "v2s3_matrix_seed4": {
+      "floor_mode": "mini",
+      "gates_without_phase": {
+        "all_rows_restore": true,
+        "pseudo_reject_floor_ge_0_95": true,
+        "real_accuracy_ge_0_60": true,
+        "real_vs_pseudo_floor_ge_0_95": false,
+        "wrong_actual_match_ge_0_60": true,
+        "wrong_declared_match_le_0_20": true
+      },
+      "grouping": "predicted",
+      "metrics": {
+        "pseudo_declared_match": 0.25,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 0.9583333333333334,
+        "real_mode_floor": 0.8,
+        "real_vs_pseudo_floor": 0.875,
+        "wrong_actual_match": 0.9583333333333334,
+        "wrong_declared_match": 0.0
+      },
+      "official_pass": false,
+      "passes_nonphase_gates": false,
+      "pseudo_groups": {
+        "basis": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 16,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.6915028921812392,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 10,
+          "row_flips_to_0_95": 0,
+          "rows": 10
+        },
+        "mini": {
+          "combined_accuracy": 0.875,
+          "combined_denominator": 8,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.3976353643835252,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 4,
+          "row_flips_to_0_95": 1,
+          "rows": 4
+        },
+        "residual": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 11,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.5407418735600997,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 6,
+          "row_flips_to_0_95": 0,
+          "rows": 6
+        },
+        "rotation": {
+          "combined_accuracy": 0.9230769230769231,
+          "combined_denominator": 13,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.3976353643835252,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 4,
+          "row_flips_to_0_95": 1,
+          "rows": 4
+        }
+      },
+      "pseudo_rho": {
+        "max": 0.5209424949140933,
+        "mean": 0.15379487153932095,
+        "median": 0.12117035843298532,
+        "min": 0.01389793781242844,
+        "n": 24,
+        "q05": 0.025371006264941598,
+        "q95": 0.3425271681036339,
+        "std": 0.11773813299778808
+      },
+      "pseudo_test_rows_per_actual_mode": {
+        "basis": 4,
+        "mini": 9,
+        "residual": 6,
+        "rotation": 5
+      },
+      "pseudo_test_rows_per_declared_mode": {
+        "basis": 9,
+        "mini": 5,
+        "residual": 4,
+        "rotation": 6
+      },
+      "pseudo_test_rows_per_predicted_mode": {
+        "basis": 10,
+        "mini": 4,
+        "residual": 6,
+        "rotation": 4
+      },
+      "real_modes": {
+        "basis": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.5407418735600997,
+            1.0
+          ],
+          "correct": 6,
+          "false_rejects": 0,
+          "rows": 6
+        },
+        "mini": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.3976353643835252,
+            1.0
+          ],
+          "correct": 4,
+          "false_rejects": 1,
+          "rows": 4
+        },
+        "residual": {
+          "accuracy": 0.8,
+          "accuracy_exact_95ci": [
+            0.28358206388191054,
+            0.9949492366205319
+          ],
+          "correct": 4,
+          "false_rejects": 0,
+          "rows": 5
+        },
+        "rotation": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.6637328831200568,
+            1.0
+          ],
+          "correct": 9,
+          "false_rejects": 1,
+          "rows": 9
+        }
+      },
+      "real_rho": {
+        "max": 0.8766638796145036,
+        "mean": 0.790671959894517,
+        "median": 0.7962156290593936,
+        "min": 0.6835062591983185,
+        "n": 24,
+        "q05": 0.6954147470316512,
+        "q95": 0.8543435408527602,
+        "std": 0.053806445449768286
+      },
+      "real_test_rows_per_declared_mode": {
+        "basis": 6,
+        "mini": 4,
+        "residual": 5,
+        "rotation": 9
+      },
+      "rejection_floor_mode": "basis",
+      "retained_official_metrics": {
+        "phase_corr_null": -0.03248909669166964,
+        "phase_corr_true": 0.9905664248792587,
+        "phase_delta": 1.0230555215709283,
+        "pseudo_declared_match": 0.25,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 0.9583333333333334,
+        "real_mode_floor": 0.8,
+        "real_vs_pseudo_floor": 0.875,
+        "wrong_actual_match": 0.9583333333333334,
+        "wrong_declared_match": 0.0
+      },
+      "threshold": 0.7131905313529872
+    },
+    "v2s3_matrix_seed5": {
+      "floor_mode": "rotation",
+      "gates_without_phase": {
+        "all_rows_restore": true,
+        "pseudo_reject_floor_ge_0_95": true,
+        "real_accuracy_ge_0_60": true,
+        "real_vs_pseudo_floor_ge_0_95": false,
+        "wrong_actual_match_ge_0_60": true,
+        "wrong_declared_match_le_0_20": true
+      },
+      "grouping": "predicted",
+      "metrics": {
+        "pseudo_declared_match": 0.2916666666666667,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 1.0,
+        "real_mode_floor": 1.0,
+        "real_vs_pseudo_floor": 0.8888888888888888,
+        "wrong_actual_match": 0.9166666666666666,
+        "wrong_declared_match": 0.041666666666666664
+      },
+      "official_pass": false,
+      "passes_nonphase_gates": false,
+      "pseudo_groups": {
+        "basis": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 9,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.3976353643835252,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 4,
+          "row_flips_to_0_95": 0,
+          "rows": 4
+        },
+        "mini": {
+          "combined_accuracy": 0.9444444444444444,
+          "combined_denominator": 18,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.6637328831200568,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 9,
+          "row_flips_to_0_95": 1,
+          "rows": 9
+        },
+        "residual": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 12,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.6637328831200568,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 9,
+          "row_flips_to_0_95": 0,
+          "rows": 9
+        },
+        "rotation": {
+          "combined_accuracy": 0.8888888888888888,
+          "combined_denominator": 9,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.15811388300841894,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 2,
+          "row_flips_to_0_95": 1,
+          "rows": 2
+        }
+      },
+      "pseudo_rho": {
+        "max": 0.34370322892955024,
+        "mean": 0.16209438588038494,
+        "median": 0.16007133252845163,
+        "min": 0.039916842327966766,
+        "n": 24,
+        "q05": 0.04855372984842875,
+        "q95": 0.3272991287440067,
+        "std": 0.09256152973801063
+      },
+      "pseudo_test_rows_per_actual_mode": {
+        "basis": 3,
+        "mini": 5,
+        "residual": 8,
+        "rotation": 8
+      },
+      "pseudo_test_rows_per_declared_mode": {
+        "basis": 5,
+        "mini": 5,
+        "residual": 6,
+        "rotation": 8
+      },
+      "pseudo_test_rows_per_predicted_mode": {
+        "basis": 4,
+        "mini": 9,
+        "residual": 9,
+        "rotation": 2
+      },
+      "real_modes": {
+        "basis": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.4781762498950183,
+            1.0
+          ],
+          "correct": 5,
+          "false_rejects": 0,
+          "rows": 5
+        },
+        "mini": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.6637328831200568,
+            1.0
+          ],
+          "correct": 9,
+          "false_rejects": 1,
+          "rows": 9
+        },
+        "residual": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.2924017738212866,
+            1.0
+          ],
+          "correct": 3,
+          "false_rejects": 0,
+          "rows": 3
+        },
+        "rotation": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.5903836027749962,
+            1.0
+          ],
+          "correct": 7,
+          "false_rejects": 1,
+          "rows": 7
+        }
+      },
+      "real_rho": {
+        "max": 0.8942885126858625,
+        "mean": 0.839253236461538,
+        "median": 0.853420650879188,
+        "min": 0.6867065436004549,
+        "n": 24,
+        "q05": 0.7475985233959732,
+        "q95": 0.8924695192493645,
+        "std": 0.05029220866038527
+      },
+      "real_test_rows_per_declared_mode": {
+        "basis": 5,
+        "mini": 9,
+        "residual": 3,
+        "rotation": 7
+      },
+      "rejection_floor_mode": "basis",
+      "retained_official_metrics": {
+        "phase_corr_null": 0.09469224292866543,
+        "phase_corr_true": 0.99673401896267,
+        "phase_delta": 0.9020417760340046,
+        "pseudo_declared_match": 0.2916666666666667,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 1.0,
+        "real_mode_floor": 1.0,
+        "real_vs_pseudo_floor": 0.8888888888888888,
+        "wrong_actual_match": 0.9166666666666666,
+        "wrong_declared_match": 0.041666666666666664
+      },
+      "threshold": 0.7576715179424591
+    },
+    "v4s5_matrix_seed0": {
+      "floor_mode": "mini",
+      "gates_without_phase": {
+        "all_rows_restore": true,
+        "pseudo_reject_floor_ge_0_95": true,
+        "real_accuracy_ge_0_60": true,
+        "real_vs_pseudo_floor_ge_0_95": false,
+        "wrong_actual_match_ge_0_60": true,
+        "wrong_declared_match_le_0_20": true
+      },
+      "grouping": "predicted",
+      "metrics": {
+        "pseudo_declared_match": 0.125,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 1.0,
+        "real_mode_floor": 1.0,
+        "real_vs_pseudo_floor": 0.7,
+        "wrong_actual_match": 1.0,
+        "wrong_declared_match": 0.0
+      },
+      "official_pass": false,
+      "passes_nonphase_gates": false,
+      "pseudo_groups": {
+        "basis": {
+          "combined_accuracy": 0.9230769230769231,
+          "combined_denominator": 13,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.6305833524471804,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 8,
+          "row_flips_to_0_95": 1,
+          "rows": 8
+        },
+        "mini": {
+          "combined_accuracy": 0.7,
+          "combined_denominator": 10,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.3976353643835252,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 4,
+          "row_flips_to_0_95": 3,
+          "rows": 4
+        },
+        "residual": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 13,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.5407418735600997,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 6,
+          "row_flips_to_0_95": 0,
+          "rows": 6
+        },
+        "rotation": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 12,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.5407418735600997,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 6,
+          "row_flips_to_0_95": 0,
+          "rows": 6
+        }
+      },
+      "pseudo_rho": {
+        "max": 0.737374026077404,
+        "mean": 0.23731007162717088,
+        "median": 0.21444848303233965,
+        "min": 0.02548698154090459,
+        "n": 24,
+        "q05": 0.04132558154705889,
+        "q95": 0.45813293170365693,
+        "std": 0.16519554272247816
+      },
+      "pseudo_test_rows_per_actual_mode": {
+        "basis": 2,
+        "mini": 10,
+        "residual": 6,
+        "rotation": 6
+      },
+      "pseudo_test_rows_per_declared_mode": {
+        "basis": 7,
+        "mini": 6,
+        "residual": 5,
+        "rotation": 6
+      },
+      "pseudo_test_rows_per_predicted_mode": {
+        "basis": 8,
+        "mini": 4,
+        "residual": 6,
+        "rotation": 6
+      },
+      "real_modes": {
+        "basis": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.4781762498950183,
+            1.0
+          ],
+          "correct": 5,
+          "false_rejects": 1,
+          "rows": 5
+        },
+        "mini": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.5407418735600997,
+            1.0
+          ],
+          "correct": 6,
+          "false_rejects": 3,
+          "rows": 6
+        },
+        "residual": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.5903836027749962,
+            1.0
+          ],
+          "correct": 7,
+          "false_rejects": 0,
+          "rows": 7
+        },
+        "rotation": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.5407418735600997,
+            1.0
+          ],
+          "correct": 6,
+          "false_rejects": 0,
+          "rows": 6
+        }
+      },
+      "real_rho": {
+        "max": 0.9130647387216481,
+        "mean": 0.894237171529816,
+        "median": 0.9026738450920028,
+        "min": 0.8450904343956162,
+        "n": 24,
+        "q05": 0.8549028162908587,
+        "q95": 0.910133205534215,
+        "std": 0.020180208647431957
+      },
+      "real_test_rows_per_declared_mode": {
+        "basis": 5,
+        "mini": 6,
+        "residual": 7,
+        "rotation": 6
+      },
+      "rejection_floor_mode": "basis",
+      "retained_official_metrics": {
+        "phase_corr_null": -0.09099696120093789,
+        "phase_corr_true": 0.9992830111920499,
+        "phase_delta": 1.0902799723929877,
+        "pseudo_declared_match": 0.125,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 1.0,
+        "real_mode_floor": 1.0,
+        "real_vs_pseudo_floor": 0.7,
+        "wrong_actual_match": 1.0,
+        "wrong_declared_match": 0.0
+      },
+      "threshold": 0.8648453953015555
+    },
+    "v4s5_matrix_seed1": {
+      "floor_mode": "rotation",
+      "gates_without_phase": {
+        "all_rows_restore": true,
+        "pseudo_reject_floor_ge_0_95": true,
+        "real_accuracy_ge_0_60": true,
+        "real_vs_pseudo_floor_ge_0_95": false,
+        "wrong_actual_match_ge_0_60": true,
+        "wrong_declared_match_le_0_20": true
+      },
+      "grouping": "predicted",
+      "metrics": {
+        "pseudo_declared_match": 0.16666666666666666,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 1.0,
+        "real_mode_floor": 1.0,
+        "real_vs_pseudo_floor": 0.8181818181818182,
+        "wrong_actual_match": 1.0,
+        "wrong_declared_match": 0.0
+      },
+      "official_pass": false,
+      "passes_nonphase_gates": false,
+      "pseudo_groups": {
+        "basis": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 11,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.3976353643835252,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 4,
+          "row_flips_to_0_95": 0,
+          "rows": 4
+        },
+        "mini": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 11,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.5903836027749962,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 7,
+          "row_flips_to_0_95": 0,
+          "rows": 7
+        },
+        "residual": {
+          "combined_accuracy": 0.9333333333333333,
+          "combined_denominator": 15,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.6637328831200568,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 9,
+          "row_flips_to_0_95": 1,
+          "rows": 9
+        },
+        "rotation": {
+          "combined_accuracy": 0.8181818181818182,
+          "combined_denominator": 11,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.3976353643835252,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 4,
+          "row_flips_to_0_95": 2,
+          "rows": 4
+        }
+      },
+      "pseudo_rho": {
+        "max": 0.4572553710874561,
+        "mean": 0.17948738469593029,
+        "median": 0.15130565035947807,
+        "min": 0.031133628668123324,
+        "n": 24,
+        "q05": 0.03371171400912999,
+        "q95": 0.408939833581079,
+        "std": 0.1269383335144927
+      },
+      "pseudo_test_rows_per_actual_mode": {
+        "basis": 9,
+        "mini": 4,
+        "residual": 2,
+        "rotation": 9
+      },
+      "pseudo_test_rows_per_declared_mode": {
+        "basis": 5,
+        "mini": 8,
+        "residual": 3,
+        "rotation": 8
+      },
+      "pseudo_test_rows_per_predicted_mode": {
+        "basis": 4,
+        "mini": 7,
+        "residual": 9,
+        "rotation": 4
+      },
+      "real_modes": {
+        "basis": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.5903836027749962,
+            1.0
+          ],
+          "correct": 7,
+          "false_rejects": 0,
+          "rows": 7
+        },
+        "mini": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.3976353643835252,
+            1.0
+          ],
+          "correct": 4,
+          "false_rejects": 0,
+          "rows": 4
+        },
+        "residual": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.5407418735600997,
+            1.0
+          ],
+          "correct": 6,
+          "false_rejects": 1,
+          "rows": 6
+        },
+        "rotation": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.5903836027749962,
+            1.0
+          ],
+          "correct": 7,
+          "false_rejects": 2,
+          "rows": 7
+        }
+      },
+      "real_rho": {
+        "max": 0.9129649509630413,
+        "mean": 0.8752067788770561,
+        "median": 0.8998355700892213,
+        "min": 0.6748900370982973,
+        "n": 24,
+        "q05": 0.7765951643166588,
+        "q95": 0.9117383683826946,
+        "std": 0.055884375526428526
+      },
+      "real_test_rows_per_declared_mode": {
+        "basis": 7,
+        "mini": 4,
+        "residual": 6,
+        "rotation": 7
+      },
+      "rejection_floor_mode": "basis",
+      "retained_official_metrics": {
+        "phase_corr_null": -0.10500053421950846,
+        "phase_corr_true": 0.9989431080791267,
+        "phase_delta": 1.103943642298635,
+        "pseudo_declared_match": 0.16666666666666666,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 1.0,
+        "real_mode_floor": 1.0,
+        "real_vs_pseudo_floor": 0.8181818181818182,
+        "wrong_actual_match": 1.0,
+        "wrong_declared_match": 0.0
+      },
+      "threshold": 0.8291958341669491
+    },
+    "v4s5_matrix_seed2": {
+      "floor_mode": "mini",
+      "gates_without_phase": {
+        "all_rows_restore": true,
+        "pseudo_reject_floor_ge_0_95": true,
+        "real_accuracy_ge_0_60": true,
+        "real_vs_pseudo_floor_ge_0_95": false,
+        "wrong_actual_match_ge_0_60": true,
+        "wrong_declared_match_le_0_20": true
+      },
+      "grouping": "predicted",
+      "metrics": {
+        "pseudo_declared_match": 0.20833333333333334,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 1.0,
+        "real_mode_floor": 1.0,
+        "real_vs_pseudo_floor": 0.875,
+        "wrong_actual_match": 1.0,
+        "wrong_declared_match": 0.0
+      },
+      "official_pass": false,
+      "passes_nonphase_gates": false,
+      "pseudo_groups": {
+        "basis": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 12,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.5407418735600997,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 6,
+          "row_flips_to_0_95": 0,
+          "rows": 6
+        },
+        "mini": {
+          "combined_accuracy": 0.875,
+          "combined_denominator": 8,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.3976353643835252,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 4,
+          "row_flips_to_0_95": 1,
+          "rows": 4
+        },
+        "residual": {
+          "combined_accuracy": 0.9333333333333333,
+          "combined_denominator": 15,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.5407418735600997,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 6,
+          "row_flips_to_0_95": 1,
+          "rows": 6
+        },
+        "rotation": {
+          "combined_accuracy": 0.9230769230769231,
+          "combined_denominator": 13,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.6305833524471804,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 8,
+          "row_flips_to_0_95": 1,
+          "rows": 8
+        }
+      },
+      "pseudo_rho": {
+        "max": 0.5303578007615907,
+        "mean": 0.16713393930019424,
+        "median": 0.12041746761308857,
+        "min": 0.01965311824017384,
+        "n": 24,
+        "q05": 0.022353067328353276,
+        "q95": 0.43255395367492516,
+        "std": 0.13323207498341874
+      },
+      "pseudo_test_rows_per_actual_mode": {
+        "basis": 9,
+        "mini": 5,
+        "residual": 6,
+        "rotation": 4
+      },
+      "pseudo_test_rows_per_declared_mode": {
+        "basis": 5,
+        "mini": 3,
+        "residual": 7,
+        "rotation": 9
+      },
+      "pseudo_test_rows_per_predicted_mode": {
+        "basis": 6,
+        "mini": 4,
+        "residual": 6,
+        "rotation": 8
+      },
+      "real_modes": {
+        "basis": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.5407418735600997,
+            1.0
+          ],
+          "correct": 6,
+          "false_rejects": 0,
+          "rows": 6
+        },
+        "mini": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.3976353643835252,
+            1.0
+          ],
+          "correct": 4,
+          "false_rejects": 1,
+          "rows": 4
+        },
+        "residual": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.6637328831200568,
+            1.0
+          ],
+          "correct": 9,
+          "false_rejects": 1,
+          "rows": 9
+        },
+        "rotation": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.4781762498950183,
+            1.0
+          ],
+          "correct": 5,
+          "false_rejects": 1,
+          "rows": 5
+        }
+      },
+      "real_rho": {
+        "max": 0.9097189855017812,
+        "mean": 0.8867313215696117,
+        "median": 0.8991803548059896,
+        "min": 0.7997513189581013,
+        "n": 24,
+        "q05": 0.83418616844901,
+        "q95": 0.9093820864966403,
+        "std": 0.029086748474121606
+      },
+      "real_test_rows_per_declared_mode": {
+        "basis": 6,
+        "mini": 4,
+        "residual": 9,
+        "rotation": 5
+      },
+      "rejection_floor_mode": "basis",
+      "retained_official_metrics": {
+        "phase_corr_null": -0.11280200813128541,
+        "phase_corr_true": 0.9993170467202691,
+        "phase_delta": 1.1121190548515545,
+        "pseudo_declared_match": 0.20833333333333334,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 1.0,
+        "real_mode_floor": 1.0,
+        "real_vs_pseudo_floor": 0.875,
+        "wrong_actual_match": 1.0,
+        "wrong_declared_match": 0.0
+      },
+      "threshold": 0.8439804550389672
+    },
+    "v4s5_matrix_seed3": {
+      "floor_mode": "basis",
+      "gates_without_phase": {
+        "all_rows_restore": true,
+        "pseudo_reject_floor_ge_0_95": true,
+        "real_accuracy_ge_0_60": true,
+        "real_vs_pseudo_floor_ge_0_95": true,
+        "wrong_actual_match_ge_0_60": true,
+        "wrong_declared_match_le_0_20": true
+      },
+      "grouping": "predicted",
+      "metrics": {
+        "pseudo_declared_match": 0.4166666666666667,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 1.0,
+        "real_mode_floor": 1.0,
+        "real_vs_pseudo_floor": 1.0,
+        "wrong_actual_match": 1.0,
+        "wrong_declared_match": 0.0
+      },
+      "official_pass": true,
+      "passes_nonphase_gates": true,
+      "pseudo_groups": {
+        "basis": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 15,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.5903836027749962,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 7,
+          "row_flips_to_0_95": 0,
+          "rows": 7
+        },
+        "mini": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 9,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.4781762498950183,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 5,
+          "row_flips_to_0_95": 0,
+          "rows": 5
+        },
+        "residual": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 14,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.5407418735600997,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 6,
+          "row_flips_to_0_95": 0,
+          "rows": 6
+        },
+        "rotation": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 10,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.5407418735600997,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 6,
+          "row_flips_to_0_95": 0,
+          "rows": 6
+        }
+      },
+      "pseudo_rho": {
+        "max": 0.6031438016692935,
+        "mean": 0.20420982897472828,
+        "median": 0.18028940713122266,
+        "min": 0.07513349911366092,
+        "n": 24,
+        "q05": 0.08660695467340294,
+        "q95": 0.3811447960414704,
+        "std": 0.1213226493098904
+      },
+      "pseudo_test_rows_per_actual_mode": {
+        "basis": 5,
+        "mini": 4,
+        "residual": 5,
+        "rotation": 10
+      },
+      "pseudo_test_rows_per_declared_mode": {
+        "basis": 4,
+        "mini": 4,
+        "residual": 4,
+        "rotation": 12
+      },
+      "pseudo_test_rows_per_predicted_mode": {
+        "basis": 7,
+        "mini": 5,
+        "residual": 6,
+        "rotation": 6
+      },
+      "real_modes": {
+        "basis": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.6305833524471804,
+            1.0
+          ],
+          "correct": 8,
+          "false_rejects": 0,
+          "rows": 8
+        },
+        "mini": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.3976353643835252,
+            1.0
+          ],
+          "correct": 4,
+          "false_rejects": 0,
+          "rows": 4
+        },
+        "residual": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.6305833524471804,
+            1.0
+          ],
+          "correct": 8,
+          "false_rejects": 0,
+          "rows": 8
+        },
+        "rotation": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.3976353643835252,
+            1.0
+          ],
+          "correct": 4,
+          "false_rejects": 0,
+          "rows": 4
+        }
+      },
+      "real_rho": {
+        "max": 0.9106771264871818,
+        "mean": 0.8888362232194821,
+        "median": 0.8976731394723142,
+        "min": 0.8334736134552345,
+        "n": 24,
+        "q05": 0.8458036047379969,
+        "q95": 0.9072810371075962,
+        "std": 0.020767899013543454
+      },
+      "real_test_rows_per_declared_mode": {
+        "basis": 8,
+        "mini": 4,
+        "residual": 8,
+        "rotation": 4
+      },
+      "rejection_floor_mode": "basis",
+      "retained_official_metrics": {
+        "phase_corr_null": 0.06093220960602842,
+        "phase_corr_true": 0.9991313520716028,
+        "phase_delta": 0.9381991424655743,
+        "pseudo_declared_match": 0.4166666666666667,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 1.0,
+        "real_mode_floor": 1.0,
+        "real_vs_pseudo_floor": 1.0,
+        "wrong_actual_match": 1.0,
+        "wrong_declared_match": 0.0
+      },
+      "threshold": 0.8168783219777693
+    },
+    "v4s5_matrix_seed4": {
+      "floor_mode": "basis",
+      "gates_without_phase": {
+        "all_rows_restore": true,
+        "pseudo_reject_floor_ge_0_95": false,
+        "real_accuracy_ge_0_60": false,
+        "real_vs_pseudo_floor_ge_0_95": false,
+        "wrong_actual_match_ge_0_60": true,
+        "wrong_declared_match_le_0_20": true
+      },
+      "grouping": "predicted",
+      "metrics": {
+        "pseudo_declared_match": 0.2916666666666667,
+        "pseudo_reject_floor": 0.5,
+        "real_accuracy": 0.375,
+        "real_mode_floor": 0.1111111111111111,
+        "real_vs_pseudo_floor": 0.8,
+        "wrong_actual_match": 0.75,
+        "wrong_declared_match": 0.0
+      },
+      "official_pass": false,
+      "passes_nonphase_gates": false,
+      "pseudo_groups": {
+        "basis": {
+          "combined_accuracy": 0.8,
+          "combined_denominator": 10,
+          "false_accepts": 2,
+          "reject_exact_95ci": [
+            0.06758598648854292,
+            0.9324140135114571
+          ],
+          "reject_rate": 0.5,
+          "rejected": 2,
+          "row_flips_to_0_95": 2,
+          "rows": 4
+        },
+        "mini": {
+          "combined_accuracy": 0.9333333333333333,
+          "combined_denominator": 15,
+          "false_accepts": 1,
+          "reject_exact_95ci": [
+            0.5872200830116174,
+            0.9977010277861857
+          ],
+          "reject_rate": 0.9090909090909091,
+          "rejected": 10,
+          "row_flips_to_0_95": 1,
+          "rows": 11
+        },
+        "residual": {
+          "combined_accuracy": 0.8571428571428571,
+          "combined_denominator": 7,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.15811388300841894,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 2,
+          "row_flips_to_0_95": 1,
+          "rows": 2
+        },
+        "rotation": {
+          "combined_accuracy": 0.875,
+          "combined_denominator": 16,
+          "false_accepts": 2,
+          "reject_exact_95ci": [
+            0.29042086373734277,
+            0.9633074338239145
+          ],
+          "reject_rate": 0.7142857142857143,
+          "rejected": 5,
+          "row_flips_to_0_95": 2,
+          "rows": 7
+        }
+      },
+      "pseudo_rho": {
+        "max": 0.6083719716479016,
+        "mean": 0.18252394219714022,
+        "median": 0.14758325389078678,
+        "min": 0.056527125390885946,
+        "n": 24,
+        "q05": 0.07306694391424998,
+        "q95": 0.3644318871876498,
+        "std": 0.12169667665961086
+      },
+      "pseudo_test_rows_per_actual_mode": {
+        "basis": 4,
+        "mini": 9,
+        "residual": 6,
+        "rotation": 5
+      },
+      "pseudo_test_rows_per_declared_mode": {
+        "basis": 9,
+        "mini": 5,
+        "residual": 4,
+        "rotation": 6
+      },
+      "pseudo_test_rows_per_predicted_mode": {
+        "basis": 4,
+        "mini": 11,
+        "residual": 2,
+        "rotation": 7
+      },
+      "real_modes": {
+        "basis": {
+          "accuracy": 0.6666666666666666,
+          "accuracy_exact_95ci": [
+            0.22277809550351196,
+            0.9567281317072582
+          ],
+          "correct": 4,
+          "false_rejects": 0,
+          "rows": 6
+        },
+        "mini": {
+          "accuracy": 0.5,
+          "accuracy_exact_95ci": [
+            0.06758598648854292,
+            0.9324140135114571
+          ],
+          "correct": 2,
+          "false_rejects": 0,
+          "rows": 4
+        },
+        "residual": {
+          "accuracy": 0.4,
+          "accuracy_exact_95ci": [
+            0.05274495052631695,
+            0.853367200365327
+          ],
+          "correct": 2,
+          "false_rejects": 1,
+          "rows": 5
+        },
+        "rotation": {
+          "accuracy": 0.1111111111111111,
+          "accuracy_exact_95ci": [
+            0.0028091367465991612,
+            0.48249651491733714
+          ],
+          "correct": 1,
+          "false_rejects": 0,
+          "rows": 9
+        }
+      },
+      "real_rho": {
+        "max": 0.7211424189395084,
+        "mean": 0.4107679352197164,
+        "median": 0.3971396189490103,
+        "min": 0.21598783526090498,
+        "n": 24,
+        "q05": 0.2781398598176331,
+        "q95": 0.686758055296168,
+        "std": 0.11762412868219192
+      },
+      "real_test_rows_per_declared_mode": {
+        "basis": 6,
+        "mini": 4,
+        "residual": 5,
+        "rotation": 9
+      },
+      "rejection_floor_mode": "basis",
+      "retained_official_metrics": {
+        "phase_corr_null": -0.07684401636346562,
+        "phase_corr_true": 0.8352032478196775,
+        "phase_delta": 0.9120472641831431,
+        "pseudo_declared_match": 0.2916666666666667,
+        "pseudo_reject_floor": 0.5,
+        "real_accuracy": 0.375,
+        "real_mode_floor": 0.1111111111111111,
+        "real_vs_pseudo_floor": 0.8,
+        "wrong_actual_match": 0.75,
+        "wrong_declared_match": 0.0
+      },
+      "threshold": 0.2322393800558405
+    },
+    "v4s5_matrix_seed5": {
+      "floor_mode": "mini",
+      "gates_without_phase": {
+        "all_rows_restore": true,
+        "pseudo_reject_floor_ge_0_95": true,
+        "real_accuracy_ge_0_60": true,
+        "real_vs_pseudo_floor_ge_0_95": false,
+        "wrong_actual_match_ge_0_60": true,
+        "wrong_declared_match_le_0_20": true
+      },
+      "grouping": "predicted",
+      "metrics": {
+        "pseudo_declared_match": 0.2916666666666667,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 1.0,
+        "real_mode_floor": 1.0,
+        "real_vs_pseudo_floor": 0.8666666666666667,
+        "wrong_actual_match": 1.0,
+        "wrong_declared_match": 0.0
+      },
+      "official_pass": false,
+      "passes_nonphase_gates": false,
+      "pseudo_groups": {
+        "basis": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 11,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.5407418735600997,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 6,
+          "row_flips_to_0_95": 0,
+          "rows": 6
+        },
+        "mini": {
+          "combined_accuracy": 0.8666666666666667,
+          "combined_denominator": 15,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.5407418735600997,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 6,
+          "row_flips_to_0_95": 2,
+          "rows": 6
+        },
+        "residual": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 12,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.6637328831200568,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 9,
+          "row_flips_to_0_95": 0,
+          "rows": 9
+        },
+        "rotation": {
+          "combined_accuracy": 1.0,
+          "combined_denominator": 10,
+          "false_accepts": 0,
+          "reject_exact_95ci": [
+            0.2924017738212866,
+            1.0
+          ],
+          "reject_rate": 1.0,
+          "rejected": 3,
+          "row_flips_to_0_95": 0,
+          "rows": 3
+        }
+      },
+      "pseudo_rho": {
+        "max": 0.43096321519478725,
+        "mean": 0.17501675538158432,
+        "median": 0.15921682899088874,
+        "min": 0.027737283304657093,
+        "n": 24,
+        "q05": 0.032445802381530144,
+        "q95": 0.39903338819952744,
+        "std": 0.1090958986567524
+      },
+      "pseudo_test_rows_per_actual_mode": {
+        "basis": 3,
+        "mini": 5,
+        "residual": 8,
+        "rotation": 8
+      },
+      "pseudo_test_rows_per_declared_mode": {
+        "basis": 5,
+        "mini": 5,
+        "residual": 6,
+        "rotation": 8
+      },
+      "pseudo_test_rows_per_predicted_mode": {
+        "basis": 6,
+        "mini": 6,
+        "residual": 9,
+        "rotation": 3
+      },
+      "real_modes": {
+        "basis": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.4781762498950183,
+            1.0
+          ],
+          "correct": 5,
+          "false_rejects": 0,
+          "rows": 5
+        },
+        "mini": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.6637328831200568,
+            1.0
+          ],
+          "correct": 9,
+          "false_rejects": 2,
+          "rows": 9
+        },
+        "residual": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.2924017738212866,
+            1.0
+          ],
+          "correct": 3,
+          "false_rejects": 0,
+          "rows": 3
+        },
+        "rotation": {
+          "accuracy": 1.0,
+          "accuracy_exact_95ci": [
+            0.5903836027749962,
+            1.0
+          ],
+          "correct": 7,
+          "false_rejects": 0,
+          "rows": 7
+        }
+      },
+      "real_rho": {
+        "max": 0.9065568911329019,
+        "mean": 0.8796440748791636,
+        "median": 0.8979606720967637,
+        "min": 0.7224038651880573,
+        "n": 24,
+        "q05": 0.7828047442163516,
+        "q95": 0.9056074334854897,
+        "std": 0.04453073507386319
+      },
+      "real_test_rows_per_declared_mode": {
+        "basis": 5,
+        "mini": 9,
+        "residual": 3,
+        "rotation": 7
+      },
+      "rejection_floor_mode": "basis",
+      "retained_official_metrics": {
+        "phase_corr_null": 0.10539845463241046,
+        "phase_corr_true": 0.9986014000649595,
+        "phase_delta": 0.893202945432549,
+        "pseudo_declared_match": 0.2916666666666667,
+        "pseudo_reject_floor": 1.0,
+        "real_accuracy": 1.0,
+        "real_mode_floor": 1.0,
+        "real_vs_pseudo_floor": 0.8666666666666667,
+        "wrong_actual_match": 1.0,
+        "wrong_declared_match": 0.0
+      },
+      "threshold": 0.7931828743124074
+    }
+  }
+}

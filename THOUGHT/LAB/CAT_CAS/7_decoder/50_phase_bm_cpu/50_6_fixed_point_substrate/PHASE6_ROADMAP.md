@@ -1,9 +1,10 @@
 # Phase 6 Roadmap
 
-**Role:** master chronological task ledger.
-**Current head:** `PHASE6B_COHERENCE_REPAIR_VERIFIED__CARRIER_WITNESS_PENDING`
-**Binding directive:** `14_noncollapse_frontier/COURSE_CORRECTION.md`
-**Immediate gate:** carrier-witness closure, then L4B.5B0 external human review.
+**Role:** master chronological task ledger.  
+**Current head:** `PHASE6B5C_TRANSFER_EQUIVARIANCE_SUPPORTED__GATE_R_NEXT`
+**Binding directive:** `14_noncollapse_frontier/COURSE_CORRECTION.md` plus `14_noncollapse_frontier/COURSE_CORRECTION_ADDENDUM_2026-06-19.md`  
+**Immediate gate:** Gate R external review and project-owner integration decision.
+**Next physical control:** reversed/randomized tone order, proposed but not authorized.
 **Observability acquisition:** not authorized.
 
 ---
@@ -35,6 +36,8 @@ carrier
 
 Each arrow is a separate experiment and evidence gate.
 
+The 2026-06-19 course-correction addendum preserves this doctrine while inserting a required transfer-aware raw analysis before any new carrier acquisition.
+
 ---
 
 ## 1. Completed historical sequence
@@ -44,7 +47,7 @@ Each arrow is a separate experiment and evidence gate.
 | Target/baseline generation | Complete |
 | Fold/no-smuggle audit | Complete; public orientation absent |
 | Non-Hermitian, phase, eigen, superradiant, DRAM, kickback, transient probes | Boundary mapped; no public orientation recovery |
-| Cross-core PDN T300 | Selected route carries sender-owned mode and relational phase |
+| Cross-core PDN T300 | Selected route carries sender-owned mode and relational phase; raw timing provenance absent |
 | Phase 6A chiral lane frontier | Closed at public orientation boundary |
 | Original substrate L2 | Tape restoration hygiene reported |
 | Original substrate L3 | Former pass invalidated; source corrected for unique fixed point |
@@ -150,7 +153,7 @@ Status remains `READY_FOR_HUMAN_REVIEW`, `implementation_authorized=false`, `exe
 - [x] compile on the target toolchain (`gcc 14.2.0`, `-march=amdfam10`)
 - [ ] execute/import physical artifact only under an authorized acquisition plan
 
-Hardware capture remains deferred because the target exposed no `k10temp` or other `hwmon` temperature input.
+Class B capture remains deferred pending an authorized run plan. The target exposes readable `k10temp` at `/sys/class/hwmon/hwmon0/temp1_input`.
 
 ### `.holo` semantic integrity
 
@@ -160,7 +163,7 @@ Hardware capture remains deferred because the target exposed no `k10temp` or oth
 - [x] add semantic forgery/tamper tests
 - [x] mark old L4A record schema as legacy
 - [x] reconcile schema version and semantic scope
-- [x] run full release, ASan/LSan/UBSan, and UBSan-only C matrix at `fbacd9ee0092dd2118d5f050592f8f0089852135`
+- [x] run full release, ASan/LSan/UBSan, and UBSan-only C matrix
 
 ### Review governance
 
@@ -181,61 +184,131 @@ Hardware capture remains deferred because the target exposed no `k10temp` or oth
 
 ---
 
-## 4. Required SSH repair-verification batch
+## 4. Repair verification — complete
 
-Run `14_noncollapse_frontier/verify_phase6b_repair.sh` on the engineering environment.
+The engineering verification packet established:
 
 ```text
-A. static/compiler
-   - corrected fixed_point_convergence.c
-   - repaired class_b_pdn_screen.c
-   - complete l4b_orbitstate Makefile all/test
-
-B. sanitizers
-   - ASan
-   - LSan
-   - UBSan
-
-C. semantic adversarial suite
-   - self-consistent invalid operator parameter
-   - serialized path/restoration/boundary mutation
-   - failed boundary rollback
-   - undefined control/artifact reference
-   - duplicate/missing G1-G10 and F1-F10
-   - design artifact mutation after review binding
-
-D. artifacts
-   - regenerate .holo witness
-   - regenerate physical mapping contract
-   - regenerate observability design
-   - record SHA-256 and exact source commit
+corrected warmup build/run
+Class B crossed source build
+complete L4B release tests
+ASan/LSan/UBSan and UBSan-only clean
+semantic/tamper suite pass
+regenerated .holo, mapping, and observability artifacts
+exact source/artifact provenance
 ```
 
-No old artifact may be silently relabeled as evidence for repaired source.
-
-A successful software packet does not close the physical carrier witness.
+No software packet is promoted as physical carrier closure, physical restoration, or Small Wall evidence.
 
 ---
 
 ## 5. Revised physical execution ladder
 
-### Phase 6B.5 — Carrier-witness closure
+### Phase 6B.5A — Raw carrier witness
 
-Before the carrier is used as a predecessor for physical state claims:
+Completed for the frozen T48 campaign:
 
-- [ ] inspect and freeze completed route results
-- [ ] preserve raw I/Q windows and ring-period samples
-- [ ] preserve absolute TSC origin and window alignment
-- [ ] preserve sender schedule, workload identity, core identities, route topology, temperature, and frequency proxies
-- [ ] hash every raw artifact
-- [ ] make summaries regenerable from raw acquisition
-- [ ] close strict per-route witness or explicitly narrow route scope
+- [x] inspect and freeze route results
+- [x] preserve raw I/Q windows and ring-period samples
+- [x] preserve absolute TSC origin and window alignment
+- [x] preserve sender schedule, workload identity, core identities, route topology, temperature, and frequency proxies
+- [x] hash every raw artifact
+- [x] regenerate summaries and analyses from raw acquisition
+- [x] validate silent carrier-off and scramble unshared-schedule controls
 
-Allowed claim: reproducible transport of declared sender-owned mode/phase through the tested PDN channel.
+Official frozen status:
 
-Forbidden claim: physical `HoloGeometry`, relational memory, restoration, orientation, or crossing.
+```text
+structural validity: 14/14
+raw provenance: COMPLETE
+raw reconstruction: COMPLETE
+strict seven-gate closure: PARTIAL
+route 4:5: 1/6
+route 2:3: 2/6
+```
+
+### Phase 6B.5B — Theory-to-gate audit
+
+- [x] separate seven-gate contract and nine-gate analyzer namespaces
+- [x] separate protocol integrity, mode transport, phase transport, schedule specificity, canonical-basis fidelity, and metadata-leakage checks
+- [x] identify the direct ideal-codeword comparison as an unproven receiver-chart assumption
+- [x] identify the T48 `>=0.95` floor as a zero-error gate for observed bucket sizes
+- [x] preserve route `4:5`, seed `4` as a genuine unresolved anomaly
+- [x] retain the official `PARTIAL` verdict without rewriting historical evidence
+
+Derived, non-promotional readout:
+
+```text
+                        route 4:5    route 2:3
+phase transport             6/6           6/6
+core carrier transport      5/6           6/6
+canonical basis fidelity    1/6           2/6
+contract seven-gate         1/6           2/6
+analyzer nine-gate          0/6           2/6
+```
+
+### Phase 6B.5C — Transfer-aware carrier geometry analysis
+
+**Complete. No new physical acquisition was performed.**
+
+Binding contract:
+
+```text
+14_noncollapse_frontier/carrier_witness_closure/theory_gate_audit/NEXT_ANALYSIS_CONTRACT.md
+```
+
+Required work:
+
+- [x] fit route/session receiver charts from preamble and even-real calibration rows only
+- [x] test odd-real held-out equivariance without winner-first collapse
+- [x] test wrong rows by actual-execution versus declared-decoy relational fit
+- [x] test phase action, circular residuals, and loop closure
+- [x] test exact pseudo-permutation covariance against canonical and unrelated models
+- [x] test cross-route correspondence/conjugacy
+- [x] analyze ordered tone-window path and fixed-order confounding
+- [x] classify route `4:5`, seed `4` as `CHART_FAILURE`
+- [x] bind every output to campaign/raw/source hashes and deterministic null seeds
+
+Result: `TRANSFER_EQUIVARIANCE_SUPPORTED`. All runs select C0 scalar; this is a
+minimal complex receiver chart, not a complete physical operator. The official
+strict carrier verdict remains `PARTIAL`.
+
+Allowed primary outcomes:
+
+```text
+TRANSFER_EQUIVARIANCE_SUPPORTED
+PHASE_ONLY_TRANSPORT_SUPPORTED
+CANONICAL_BASIS_ONLY_SUPPORTED
+ROUTE_SESSION_CHART_UNSTABLE
+NO_RELATIONAL_TRANSPORT_BEYOND_CONTROLS
+INCONCLUSIVE
+```
+
+### Phase 6B.5D — Carrier scope freeze and next-control selection
+
+Only after Phase 6B.5C:
+
+- [x] freeze the exact derived scalar-chart transfer claim
+- [x] select reversed/randomized tone order as the proposed next physical control
+- [x] prohibit blind trial-count escalation
+
+Allowed next physical actions:
+
+```text
+independent same-protocol session control
+reversed/randomized tone-order control
+explicit route-transfer calibration
+versioned higher-N campaign
+route-scope narrowing
+carrier-claim narrowing
+```
 
 ### Gate R — L4B.5B0 external human review
+
+Prerequisites:
+
+- [x] carrier scope frozen at the derived transfer-aware claim ceiling
+- [x] Phase 6B.5C/5D outputs bound to exact source and evidence
 
 Review scope:
 
@@ -247,11 +320,11 @@ Review scope:
 - claim ceiling
 - explicit non-authorization of restoration
 
-Output: separate `l4b5b0_observability_review_v1` envelope bound to the frozen design bytes.
+Output: separate `l4b5b0_observability_review_v1` envelope bound to frozen design bytes.
 
 ### Phase 6B.6 — Physical observability/operator identification
 
-Only after carrier scope is frozen and Gate R is accepted:
+Only after carrier scope is frozen, Gate R is accepted, and explicit acquisition authorization is recorded:
 
 - [ ] freeze acquisition cadence, TSC alignment, routes, sessions, schedules, and splits
 - [ ] collect idle covariance from training sessions only
@@ -305,7 +378,13 @@ One positive does not authorize Big Wall generalization.
 | Claim | Current status |
 |---|---|
 | Public fold boundary | Supported |
-| Selected PDN carrier live | Supported at channel level; strict witness closure still required |
+| Selected PDN carrier live | Supported at channel level |
+| Raw carrier provenance | Complete for frozen T48 campaign |
+| Phase transport | Strongly supported in current campaign |
+| Executed-mode transport | Strongly supported except route `4:5`, seed `4` |
+| Ideal sender-basis fidelity | Not reproducible at T48 |
+| Physical route/session transfer chart | Minimal C0 scalar relation supported; complete operator not identified |
+| Strict carrier witness | `PARTIAL` |
 | Software `.holo` geometric memory | Supported at L1/L2 |
 | History-backed software restoration | Supported |
 | Inverse operator dynamics | Not established |
@@ -330,4 +409,6 @@ Stop and repair before continuing if work:
 - uses an artifact generated by different source without provenance;
 - changes scientific content during its own review;
 - executes acquisition before authorization;
-- skips carrier closure, operator identification, restoration, or target-coupling gates.
+- repeats T48 or increases to T300 before Phase 6B.5C identifies the unresolved mechanism;
+- treats canonical sender-basis fidelity as identical to carrier transport;
+- skips carrier scope freeze, human review, operator identification, restoration, or target-coupling gates.

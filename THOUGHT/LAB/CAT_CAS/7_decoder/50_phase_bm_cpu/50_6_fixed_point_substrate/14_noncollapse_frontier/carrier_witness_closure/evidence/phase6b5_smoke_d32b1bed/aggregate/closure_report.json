@@ -1,0 +1,55 @@
+{
+  "campaign_id": "phase6b5_smoke_d32b1bed",
+  "claim_ceiling": "RECONSTRUCTABLE_CHANNEL_CARRIER_ONLY",
+  "contract_id": "phase6b5_pdn_carrier_witness_v1",
+  "controls_complete": false,
+  "controls_null": false,
+  "forbidden_claims": [
+    "physical HoloGeometry",
+    "observable relational state sufficiency",
+    "identified operator",
+    "physical restoration",
+    "target coupling",
+    "orientation recovery",
+    "Small Wall crossing"
+  ],
+  "missing_runs": [],
+  "primary_complete": true,
+  "primary_route": "v4s5",
+  "primary_scientific_pass": false,
+  "runs": [
+    {
+      "condition": "matrix",
+      "errors": [],
+      "max_abs_reconstruction_error": 1.1518563880486e-15,
+      "max_rel_reconstruction_error": 5.1000782556901936e-11,
+      "raw_records": 291564,
+      "route": "v4s5",
+      "run_id": "v4s5_matrix_seed777",
+      "scientific_gates": {
+        "all_rows_restore": true,
+        "phase_recovered_gt_0_30": true,
+        "pseudo_declared_match_le_0_35": true,
+        "pseudo_reject_floor_ge_0_95": false,
+        "real_accuracy_ge_0_60": false,
+        "real_mode_floor_ge_0_45": false,
+        "real_vs_pseudo_floor_ge_0_95": false,
+        "wrong_actual_match_ge_0_60": false,
+        "wrong_declared_match_le_0_20": true
+      },
+      "scientific_pass": false,
+      "seed": 777,
+      "sender": 5,
+      "source_commit": "d32b1bed0deae1b907a07eeed018b924244e9ea2",
+      "valid": true,
+      "verdict": "PHASE4B_PDN_PARTIAL",
+      "victim": 4,
+      "windows": 192
+    }
+  ],
+  "schema_id": "CAT_CAS_PDN_CARRIER_CLOSURE_REPORT_V1",
+  "source_commit": "d32b1bed0deae1b907a07eeed018b924244e9ea2",
+  "status": "PARTIAL",
+  "structural_valid": true,
+  "unexpected_runs": []
+}

@@ -1,0 +1,59 @@
+{
+  "schema_id": "CAT_CAS_PHASE6B5D_DETERMINISTIC_BINDING_V1",
+  "analysis_id": "phase6b5d_carrier_claim_consolidation_v1",
+  "generated_utc_inherited_from_phase6b5c": "2026-06-19T20:13:06+00:00",
+  "phase6b5c_campaign_id": "phase6b5_t48_d32b1bed_20260619",
+  "phase6b5c_campaign_manifest_sha256": "cbcd2a19d6dd3bc478244f77888aa87eb043003a7685caa17ff13fe4d47e6487",
+  "phase6b5c_analysis_manifest_sha256": "93ccb5fb5d9cbc96c25c52797ea0dd0693810997a369e714cfe57109af35ff2b",
+  "phase6b5d_manifest_sha256": "d11bf9d41c1b9a9195d79d5ba1ab8b591f9c364b3f57435fded958d5a0861f31",
+  "workflow": {
+    "run_id": 27848260395,
+    "artifact_id": 7758297990,
+    "artifact_digest": "sha256:defb733ba811e435068514fabb0e024f1a2492d3151b30491518e68197dd2e92",
+    "double_generation_byte_diff": "PASS",
+    "tests": "PASS",
+    "manifest_verification": "PASS"
+  },
+  "decision": {
+    "old_gate_scalar_calibration_can_change_result": false,
+    "cross_session_relational_generalization": true,
+    "dominant_compact_residual_factor": "seed",
+    "seed4_localization": "SCALAR_GAIN_OUTLIER_WITH_RELATIONAL_INVARIANTS_PRESERVED",
+    "carrier_claim_status": "FROZEN_PENDING_GATE_R",
+    "gate_r_ready": true,
+    "official_strict_closure": "PARTIAL"
+  },
+  "outputs": {
+    "carrier_claim_freeze.json": {
+      "size": 2211,
+      "sha256": "51009a6bcb83b9209d5f0a0af690ea721ceece1550f3c0e6661ab2ea6068455c"
+    },
+    "cross_session_generalization.json": {
+      "size": 11154,
+      "sha256": "275b0709e18ea6cb97c5320439ca7906a5a075c9ab88143e4061dd7285a15c88"
+    },
+    "old_gate_chart_invariance.json": {
+      "size": 6589,
+      "sha256": "0e87db3a2b277152fccb87d3ad9dca1f2ad494d18af409ab2308281ac0ab9085"
+    },
+    "phase6b5d_manifest.json": {
+      "size": 1749,
+      "sha256": "d11bf9d41c1b9a9195d79d5ba1ab8b591f9c364b3f57435fded958d5a0861f31"
+    },
+    "residual_structure.json": {
+      "size": 38556,
+      "sha256": "92719e1484c5c56cdff7bcbf5d751991594d0a960c4cd5ae790601452d6bce95"
+    },
+    "seed4_localization.json": {
+      "size": 2556,
+      "sha256": "a7d311eadbbbe7a40d43802c1bbee0411ecde8226ac36884bb3414ae637ece8d"
+    }
+  },
+  "storage_policy": {
+    "detailed_packet": "workflow artifact plus deterministic regeneration from committed Phase 6B.5C inputs",
+    "timestamp_variant_repository_snapshot_retained": false,
+    "generator": "run_carrier_consolidation.py",
+    "workflow": ".github/workflows/phase6b5d-consolidation.yml"
+  },
+  "claim_ceiling": "BOUNDED_CARRIER_CLAIM_CONSOLIDATION_ONLY"
+}

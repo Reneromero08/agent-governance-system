@@ -1,0 +1,30 @@
+{
+  "campaign_id": "phase6b5_smoke_d32b1bed",
+  "files": {
+    "aggregate/aggregate.json": {
+      "sha256": "2aebbfca62c7175800c70779a982f8e50da17c0cc00a4322c92605ada1ddb26b",
+      "size": 1107
+    },
+    "aggregate/closure_report.json": {
+      "sha256": "e168c58d42a125bb00b285a46e9b0bf2f6f37713332a3d4d2f879e370c4398c9",
+      "size": 1711
+    },
+    "campaign.json": {
+      "sha256": "f19cddd7eca12f3f060b27eeca774719a7e2c8cfb4c942933381a52d33adf3bf",
+      "size": 596
+    },
+    "source_manifest.json": {
+      "sha256": "9fd12771de11ed7c4077d47e2181a72fe5019912c25796f88ec950cc330fbd10",
+      "size": 1551
+    }
+  },
+  "run_manifests": {
+    "v4s5_matrix_seed777": {
+      "path": "runs/v4s5_matrix_seed777/run_manifest.json",
+      "sha256": "9f1172fffa1ee451c15286bc773b56eb5699364ffbd142b3911b06a9327b3db8",
+      "size": 1223
+    }
+  },
+  "schema_id": "CAT_CAS_PDN_CARRIER_CAMPAIGN_MANIFEST_V1",
+  "source_commit": "d32b1bed0deae1b907a07eeed018b924244e9ea2"
+}

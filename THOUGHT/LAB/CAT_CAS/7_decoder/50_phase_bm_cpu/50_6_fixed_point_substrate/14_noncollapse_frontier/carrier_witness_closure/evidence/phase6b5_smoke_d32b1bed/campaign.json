@@ -1,0 +1,25 @@
+{
+  "campaign_id": "phase6b5_smoke_d32b1bed",
+  "claim_ceiling": "RECONSTRUCTABLE_CHANNEL_CARRIER_ONLY",
+  "comparator_routes": [],
+  "contract_id": "phase6b5_pdn_carrier_witness_v1",
+  "primary_route": "v4s5",
+  "required_conditions": [
+    "matrix"
+  ],
+  "required_seeds": [
+    777
+  ],
+  "runs": [
+    {
+      "condition": "matrix",
+      "route": "v4s5",
+      "run_id": "v4s5_matrix_seed777",
+      "seed": 777
+    }
+  ],
+  "schema_id": "CAT_CAS_PDN_CARRIER_CAMPAIGN_V1",
+  "schema_version": "1.0.0",
+  "source_commit": "d32b1bed0deae1b907a07eeed018b924244e9ea2",
+  "status": "COMPLETE"
+}

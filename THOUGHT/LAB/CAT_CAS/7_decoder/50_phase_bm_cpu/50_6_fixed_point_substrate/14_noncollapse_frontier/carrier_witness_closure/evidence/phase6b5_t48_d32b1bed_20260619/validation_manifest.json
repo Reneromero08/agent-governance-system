@@ -1,0 +1,16 @@
+{
+  "acquisition_source_commit": "d32b1bed0deae1b907a07eeed018b924244e9ea2",
+  "campaign_manifest_sha256": "cbcd2a19d6dd3bc478244f77888aa87eb043003a7685caa17ff13fe4d47e6487",
+  "closure_report_sha256": "51c44f451273496bc9915a3ebdbf64199ff205beffbf040b98eb705d1ceae2b2",
+  "frozen_scientific_gate_keys": [
+    "all_rows_restore",
+    "real_accuracy_ge_0_60",
+    "real_vs_pseudo_floor_ge_0_95",
+    "pseudo_reject_floor_ge_0_95",
+    "wrong_actual_match_ge_0_60",
+    "wrong_declared_match_le_0_20",
+    "phase_recovered_gt_0_30"
+  ],
+  "schema_id": "CAT_CAS_PDN_CARRIER_VALIDATION_MANIFEST_V1",
+  "validator_sha256": "66d9b4363e3908b182d6b14f933814f97e2e92f9e415f007b77a6d8649108975"
+}

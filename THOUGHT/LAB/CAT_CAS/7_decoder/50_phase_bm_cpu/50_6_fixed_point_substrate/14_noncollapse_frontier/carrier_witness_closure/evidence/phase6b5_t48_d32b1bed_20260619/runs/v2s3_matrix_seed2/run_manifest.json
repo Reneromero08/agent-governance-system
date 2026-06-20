@@ -1,0 +1,39 @@
+{
+  "files": {
+    "analysis.json": {
+      "sha256": "ab4213cb9891e6f4e43f70f2fd4330c77b13c47beb3290f87584d4e155028784",
+      "size": 1020
+    },
+    "raw_samples.bin": {
+      "sha256": "a393d18ede440bfbe5cae49948e408c0167719075db7abd63f2d19f3f19fbc65",
+      "size": 43150368
+    },
+    "run.json": {
+      "sha256": "b7fcff63b8980daf5312ba9365069e7c670223e6d96f863fa588eec605fa046b",
+      "size": 3510
+    },
+    "schedule.json": {
+      "sha256": "76d0981a05d4cda4d926f273a67fddb34fd254311a6450f3f0e9960113b86285",
+      "size": 53352
+    },
+    "stderr.log": {
+      "sha256": "8d3283fd1ea421caf9d0986b521509696b31fed34cd8df0bd3a28784fd461904",
+      "size": 1563
+    },
+    "stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "summary.csv": {
+      "sha256": "63c75a42939d39fd70c492971fa3458cde535cf9c10c9e87b4d2ad1922720b5a",
+      "size": 61579
+    },
+    "windows.csv": {
+      "sha256": "49a4b708134d62f1f05fe745fb28ec54c185bcc5b71caa93bc1b208988af8266",
+      "size": 457862
+    }
+  },
+  "run_id": "v2s3_matrix_seed2",
+  "schema_id": "CAT_CAS_PDN_CARRIER_RUN_MANIFEST_V1",
+  "source_commit": "d32b1bed0deae1b907a07eeed018b924244e9ea2"
+}

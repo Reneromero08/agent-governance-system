@@ -1,0 +1,41 @@
+name: Phase 6 Combined Campaign Plan
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/phase6-combined-campaign-plan.yml"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/**"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/gate_r/COMBINED_CAMPAIGN_BINDING.json"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/gate_r/verify_combined_plan_binding.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Test package
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign
+        run: |
+          python verify_campaign_authorization.py
+          python test_campaign_plan.py
+          python test_session_schedule.py
+          python test_session_determinism.py
+          python test_orchestrator.py
+      - name: Verify canonical binding
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier
+        run: python gate_r/verify_combined_plan_binding.py --repo-root "$GITHUB_WORKSPACE" --output "$RUNNER_TEMP/combined_plan"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: phase6-combined-campaign-plan-${{ github.run_id }}
+          path: ${{ runner.temp }}/combined_plan
+          if-no-files-found: error

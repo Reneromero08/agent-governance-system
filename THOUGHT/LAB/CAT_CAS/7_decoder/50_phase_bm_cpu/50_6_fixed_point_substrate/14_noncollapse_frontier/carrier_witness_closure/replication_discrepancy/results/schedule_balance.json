@@ -1,0 +1,1376 @@
+{
+  "current": {
+    "v2s3_matrix_seed0": {
+      "family_counts": {
+        "preamble": 4,
+        "pseudo": 48,
+        "real": 48,
+        "wrong": 48
+      },
+      "pseudo_permutations_unique": 48,
+      "regenerated_codebook_exact": true,
+      "regenerated_schedule_exact": true,
+      "test_declared_mode_counts": {
+        "basis": 18,
+        "mini": 18,
+        "residual": 17,
+        "rotation": 19
+      },
+      "test_family_mode_counts": {
+        "pseudo:basis": 7,
+        "pseudo:mini": 6,
+        "pseudo:residual": 5,
+        "pseudo:rotation": 6,
+        "real:basis": 5,
+        "real:mini": 6,
+        "real:residual": 7,
+        "real:rotation": 6,
+        "wrong:basis": 6,
+        "wrong:mini": 6,
+        "wrong:residual": 5,
+        "wrong:rotation": 7
+      },
+      "theta_counts": {
+        "0": 19,
+        "1": 17,
+        "2": 16,
+        "3": 18,
+        "4": 16,
+        "5": 16,
+        "6": 13,
+        "7": 29
+      },
+      "train_declared_mode_counts": {
+        "basis": 20,
+        "mini": 15,
+        "residual": 15,
+        "rotation": 22
+      },
+      "train_family_mode_counts": {
+        "pseudo:basis": 6,
+        "pseudo:mini": 4,
+        "pseudo:residual": 4,
+        "pseudo:rotation": 10,
+        "real:basis": 7,
+        "real:mini": 8,
+        "real:residual": 5,
+        "real:rotation": 4,
+        "wrong:basis": 7,
+        "wrong:mini": 3,
+        "wrong:residual": 6,
+        "wrong:rotation": 8
+      },
+      "wrong_declared_actual_counts": {
+        "basis->mini": 4,
+        "basis->residual": 3,
+        "basis->rotation": 6,
+        "mini->basis": 4,
+        "mini->residual": 4,
+        "mini->rotation": 1,
+        "residual->basis": 6,
+        "residual->mini": 4,
+        "residual->rotation": 1,
+        "rotation->basis": 4,
+        "rotation->mini": 4,
+        "rotation->residual": 7
+      }
+    },
+    "v2s3_matrix_seed1": {
+      "family_counts": {
+        "preamble": 4,
+        "pseudo": 48,
+        "real": 48,
+        "wrong": 48
+      },
+      "pseudo_permutations_unique": 48,
+      "regenerated_codebook_exact": true,
+      "regenerated_schedule_exact": true,
+      "test_declared_mode_counts": {
+        "basis": 19,
+        "mini": 22,
+        "residual": 12,
+        "rotation": 19
+      },
+      "test_family_mode_counts": {
+        "pseudo:basis": 5,
+        "pseudo:mini": 8,
+        "pseudo:residual": 3,
+        "pseudo:rotation": 8,
+        "real:basis": 7,
+        "real:mini": 4,
+        "real:residual": 6,
+        "real:rotation": 7,
+        "wrong:basis": 7,
+        "wrong:mini": 10,
+        "wrong:residual": 3,
+        "wrong:rotation": 4
+      },
+      "theta_counts": {
+        "0": 16,
+        "1": 22,
+        "2": 19,
+        "3": 16,
+        "4": 21,
+        "5": 19,
+        "6": 15,
+        "7": 16
+      },
+      "train_declared_mode_counts": {
+        "basis": 23,
+        "mini": 21,
+        "residual": 14,
+        "rotation": 14
+      },
+      "train_family_mode_counts": {
+        "pseudo:basis": 5,
+        "pseudo:mini": 9,
+        "pseudo:residual": 7,
+        "pseudo:rotation": 3,
+        "real:basis": 9,
+        "real:mini": 5,
+        "real:residual": 3,
+        "real:rotation": 7,
+        "wrong:basis": 9,
+        "wrong:mini": 7,
+        "wrong:residual": 4,
+        "wrong:rotation": 4
+      },
+      "wrong_declared_actual_counts": {
+        "basis->mini": 7,
+        "basis->residual": 4,
+        "basis->rotation": 5,
+        "mini->basis": 3,
+        "mini->residual": 7,
+        "mini->rotation": 7,
+        "residual->basis": 4,
+        "residual->mini": 2,
+        "residual->rotation": 1,
+        "rotation->basis": 2,
+        "rotation->mini": 3,
+        "rotation->residual": 3
+      }
+    },
+    "v2s3_matrix_seed2": {
+      "family_counts": {
+        "preamble": 4,
+        "pseudo": 48,
+        "real": 48,
+        "wrong": 48
+      },
+      "pseudo_permutations_unique": 48,
+      "regenerated_codebook_exact": true,
+      "regenerated_schedule_exact": true,
+      "test_declared_mode_counts": {
+        "basis": 19,
+        "mini": 8,
+        "residual": 22,
+        "rotation": 23
+      },
+      "test_family_mode_counts": {
+        "pseudo:basis": 5,
+        "pseudo:mini": 3,
+        "pseudo:residual": 7,
+        "pseudo:rotation": 9,
+        "real:basis": 6,
+        "real:mini": 4,
+        "real:residual": 9,
+        "real:rotation": 5,
+        "wrong:basis": 8,
+        "wrong:mini": 1,
+        "wrong:residual": 6,
+        "wrong:rotation": 9
+      },
+      "theta_counts": {
+        "0": 23,
+        "1": 12,
+        "2": 21,
+        "3": 19,
+        "4": 16,
+        "5": 18,
+        "6": 21,
+        "7": 14
+      },
+      "train_declared_mode_counts": {
+        "basis": 18,
+        "mini": 17,
+        "residual": 13,
+        "rotation": 24
+      },
+      "train_family_mode_counts": {
+        "pseudo:basis": 6,
+        "pseudo:mini": 7,
+        "pseudo:residual": 4,
+        "pseudo:rotation": 7,
+        "real:basis": 7,
+        "real:mini": 5,
+        "real:residual": 5,
+        "real:rotation": 7,
+        "wrong:basis": 5,
+        "wrong:mini": 5,
+        "wrong:residual": 4,
+        "wrong:rotation": 10
+      },
+      "wrong_declared_actual_counts": {
+        "basis->mini": 4,
+        "basis->residual": 3,
+        "basis->rotation": 6,
+        "mini->basis": 2,
+        "mini->residual": 1,
+        "mini->rotation": 3,
+        "residual->basis": 1,
+        "residual->mini": 6,
+        "residual->rotation": 3,
+        "rotation->basis": 5,
+        "rotation->mini": 11,
+        "rotation->residual": 3
+      }
+    },
+    "v2s3_matrix_seed3": {
+      "family_counts": {
+        "preamble": 4,
+        "pseudo": 48,
+        "real": 48,
+        "wrong": 48
+      },
+      "pseudo_permutations_unique": 48,
+      "regenerated_codebook_exact": true,
+      "regenerated_schedule_exact": true,
+      "test_declared_mode_counts": {
+        "basis": 17,
+        "mini": 15,
+        "residual": 21,
+        "rotation": 19
+      },
+      "test_family_mode_counts": {
+        "pseudo:basis": 4,
+        "pseudo:mini": 4,
+        "pseudo:residual": 4,
+        "pseudo:rotation": 12,
+        "real:basis": 8,
+        "real:mini": 4,
+        "real:residual": 8,
+        "real:rotation": 4,
+        "wrong:basis": 5,
+        "wrong:mini": 7,
+        "wrong:residual": 9,
+        "wrong:rotation": 3
+      },
+      "theta_counts": {
+        "0": 20,
+        "1": 20,
+        "2": 23,
+        "3": 13,
+        "4": 18,
+        "5": 19,
+        "6": 17,
+        "7": 14
+      },
+      "train_declared_mode_counts": {
+        "basis": 16,
+        "mini": 22,
+        "residual": 16,
+        "rotation": 18
+      },
+      "train_family_mode_counts": {
+        "pseudo:basis": 6,
+        "pseudo:mini": 7,
+        "pseudo:residual": 6,
+        "pseudo:rotation": 5,
+        "real:basis": 5,
+        "real:mini": 8,
+        "real:residual": 5,
+        "real:rotation": 6,
+        "wrong:basis": 5,
+        "wrong:mini": 7,
+        "wrong:residual": 5,
+        "wrong:rotation": 7
+      },
+      "wrong_declared_actual_counts": {
+        "basis->mini": 2,
+        "basis->residual": 2,
+        "basis->rotation": 6,
+        "mini->basis": 4,
+        "mini->residual": 4,
+        "mini->rotation": 6,
+        "residual->basis": 7,
+        "residual->mini": 3,
+        "residual->rotation": 4,
+        "rotation->basis": 3,
+        "rotation->mini": 5,
+        "rotation->residual": 2
+      }
+    },
+    "v2s3_matrix_seed4": {
+      "family_counts": {
+        "preamble": 4,
+        "pseudo": 48,
+        "real": 48,
+        "wrong": 48
+      },
+      "pseudo_permutations_unique": 48,
+      "regenerated_codebook_exact": true,
+      "regenerated_schedule_exact": true,
+      "test_declared_mode_counts": {
+        "basis": 22,
+        "mini": 13,
+        "residual": 15,
+        "rotation": 22
+      },
+      "test_family_mode_counts": {
+        "pseudo:basis": 9,
+        "pseudo:mini": 5,
+        "pseudo:residual": 4,
+        "pseudo:rotation": 6,
+        "real:basis": 6,
+        "real:mini": 4,
+        "real:residual": 5,
+        "real:rotation": 9,
+        "wrong:basis": 7,
+        "wrong:mini": 4,
+        "wrong:residual": 6,
+        "wrong:rotation": 7
+      },
+      "theta_counts": {
+        "0": 21,
+        "1": 22,
+        "2": 20,
+        "3": 14,
+        "4": 10,
+        "5": 17,
+        "6": 21,
+        "7": 19
+      },
+      "train_declared_mode_counts": {
+        "basis": 14,
+        "mini": 20,
+        "residual": 21,
+        "rotation": 17
+      },
+      "train_family_mode_counts": {
+        "pseudo:basis": 6,
+        "pseudo:mini": 6,
+        "pseudo:residual": 7,
+        "pseudo:rotation": 5,
+        "real:basis": 4,
+        "real:mini": 5,
+        "real:residual": 9,
+        "real:rotation": 6,
+        "wrong:basis": 4,
+        "wrong:mini": 9,
+        "wrong:residual": 5,
+        "wrong:rotation": 6
+      },
+      "wrong_declared_actual_counts": {
+        "basis->mini": 7,
+        "basis->residual": 3,
+        "basis->rotation": 1,
+        "mini->basis": 5,
+        "mini->residual": 5,
+        "mini->rotation": 3,
+        "residual->basis": 1,
+        "residual->mini": 5,
+        "residual->rotation": 5,
+        "rotation->mini": 9,
+        "rotation->residual": 4
+      }
+    },
+    "v2s3_matrix_seed5": {
+      "family_counts": {
+        "preamble": 4,
+        "pseudo": 48,
+        "real": 48,
+        "wrong": 48
+      },
+      "pseudo_permutations_unique": 48,
+      "regenerated_codebook_exact": true,
+      "regenerated_schedule_exact": true,
+      "test_declared_mode_counts": {
+        "basis": 18,
+        "mini": 20,
+        "residual": 13,
+        "rotation": 21
+      },
+      "test_family_mode_counts": {
+        "pseudo:basis": 5,
+        "pseudo:mini": 5,
+        "pseudo:residual": 6,
+        "pseudo:rotation": 8,
+        "real:basis": 5,
+        "real:mini": 9,
+        "real:residual": 3,
+        "real:rotation": 7,
+        "wrong:basis": 8,
+        "wrong:mini": 6,
+        "wrong:residual": 4,
+        "wrong:rotation": 6
+      },
+      "theta_counts": {
+        "0": 18,
+        "1": 20,
+        "2": 17,
+        "3": 15,
+        "4": 22,
+        "5": 18,
+        "6": 14,
+        "7": 20
+      },
+      "train_declared_mode_counts": {
+        "basis": 21,
+        "mini": 16,
+        "residual": 19,
+        "rotation": 16
+      },
+      "train_family_mode_counts": {
+        "pseudo:basis": 7,
+        "pseudo:mini": 5,
+        "pseudo:residual": 10,
+        "pseudo:rotation": 2,
+        "real:basis": 7,
+        "real:mini": 7,
+        "real:residual": 4,
+        "real:rotation": 6,
+        "wrong:basis": 7,
+        "wrong:mini": 4,
+        "wrong:residual": 5,
+        "wrong:rotation": 8
+      },
+      "wrong_declared_actual_counts": {
+        "basis->mini": 6,
+        "basis->residual": 5,
+        "basis->rotation": 4,
+        "mini->basis": 2,
+        "mini->residual": 3,
+        "mini->rotation": 5,
+        "residual->basis": 3,
+        "residual->mini": 3,
+        "residual->rotation": 3,
+        "rotation->basis": 2,
+        "rotation->mini": 2,
+        "rotation->residual": 10
+      }
+    },
+    "v4s5_matrix_seed0": {
+      "family_counts": {
+        "preamble": 4,
+        "pseudo": 48,
+        "real": 48,
+        "wrong": 48
+      },
+      "pseudo_permutations_unique": 48,
+      "regenerated_codebook_exact": true,
+      "regenerated_schedule_exact": true,
+      "test_declared_mode_counts": {
+        "basis": 18,
+        "mini": 18,
+        "residual": 17,
+        "rotation": 19
+      },
+      "test_family_mode_counts": {
+        "pseudo:basis": 7,
+        "pseudo:mini": 6,
+        "pseudo:residual": 5,
+        "pseudo:rotation": 6,
+        "real:basis": 5,
+        "real:mini": 6,
+        "real:residual": 7,
+        "real:rotation": 6,
+        "wrong:basis": 6,
+        "wrong:mini": 6,
+        "wrong:residual": 5,
+        "wrong:rotation": 7
+      },
+      "theta_counts": {
+        "0": 19,
+        "1": 17,
+        "2": 16,
+        "3": 18,
+        "4": 16,
+        "5": 16,
+        "6": 13,
+        "7": 29
+      },
+      "train_declared_mode_counts": {
+        "basis": 20,
+        "mini": 15,
+        "residual": 15,
+        "rotation": 22
+      },
+      "train_family_mode_counts": {
+        "pseudo:basis": 6,
+        "pseudo:mini": 4,
+        "pseudo:residual": 4,
+        "pseudo:rotation": 10,
+        "real:basis": 7,
+        "real:mini": 8,
+        "real:residual": 5,
+        "real:rotation": 4,
+        "wrong:basis": 7,
+        "wrong:mini": 3,
+        "wrong:residual": 6,
+        "wrong:rotation": 8
+      },
+      "wrong_declared_actual_counts": {
+        "basis->mini": 4,
+        "basis->residual": 3,
+        "basis->rotation": 6,
+        "mini->basis": 4,
+        "mini->residual": 4,
+        "mini->rotation": 1,
+        "residual->basis": 6,
+        "residual->mini": 4,
+        "residual->rotation": 1,
+        "rotation->basis": 4,
+        "rotation->mini": 4,
+        "rotation->residual": 7
+      }
+    },
+    "v4s5_matrix_seed1": {
+      "family_counts": {
+        "preamble": 4,
+        "pseudo": 48,
+        "real": 48,
+        "wrong": 48
+      },
+      "pseudo_permutations_unique": 48,
+      "regenerated_codebook_exact": true,
+      "regenerated_schedule_exact": true,
+      "test_declared_mode_counts": {
+        "basis": 19,
+        "mini": 22,
+        "residual": 12,
+        "rotation": 19
+      },
+      "test_family_mode_counts": {
+        "pseudo:basis": 5,
+        "pseudo:mini": 8,
+        "pseudo:residual": 3,
+        "pseudo:rotation": 8,
+        "real:basis": 7,
+        "real:mini": 4,
+        "real:residual": 6,
+        "real:rotation": 7,
+        "wrong:basis": 7,
+        "wrong:mini": 10,
+        "wrong:residual": 3,
+        "wrong:rotation": 4
+      },
+      "theta_counts": {
+        "0": 16,
+        "1": 22,
+        "2": 19,
+        "3": 16,
+        "4": 21,
+        "5": 19,
+        "6": 15,
+        "7": 16
+      },
+      "train_declared_mode_counts": {
+        "basis": 23,
+        "mini": 21,
+        "residual": 14,
+        "rotation": 14
+      },
+      "train_family_mode_counts": {
+        "pseudo:basis": 5,
+        "pseudo:mini": 9,
+        "pseudo:residual": 7,
+        "pseudo:rotation": 3,
+        "real:basis": 9,
+        "real:mini": 5,
+        "real:residual": 3,
+        "real:rotation": 7,
+        "wrong:basis": 9,
+        "wrong:mini": 7,
+        "wrong:residual": 4,
+        "wrong:rotation": 4
+      },
+      "wrong_declared_actual_counts": {
+        "basis->mini": 7,
+        "basis->residual": 4,
+        "basis->rotation": 5,
+        "mini->basis": 3,
+        "mini->residual": 7,
+        "mini->rotation": 7,
+        "residual->basis": 4,
+        "residual->mini": 2,
+        "residual->rotation": 1,
+        "rotation->basis": 2,
+        "rotation->mini": 3,
+        "rotation->residual": 3
+      }
+    },
+    "v4s5_matrix_seed2": {
+      "family_counts": {
+        "preamble": 4,
+        "pseudo": 48,
+        "real": 48,
+        "wrong": 48
+      },
+      "pseudo_permutations_unique": 48,
+      "regenerated_codebook_exact": true,
+      "regenerated_schedule_exact": true,
+      "test_declared_mode_counts": {
+        "basis": 19,
+        "mini": 8,
+        "residual": 22,
+        "rotation": 23
+      },
+      "test_family_mode_counts": {
+        "pseudo:basis": 5,
+        "pseudo:mini": 3,
+        "pseudo:residual": 7,
+        "pseudo:rotation": 9,
+        "real:basis": 6,
+        "real:mini": 4,
+        "real:residual": 9,
+        "real:rotation": 5,
+        "wrong:basis": 8,
+        "wrong:mini": 1,
+        "wrong:residual": 6,
+        "wrong:rotation": 9
+      },
+      "theta_counts": {
+        "0": 23,
+        "1": 12,
+        "2": 21,
+        "3": 19,
+        "4": 16,
+        "5": 18,
+        "6": 21,
+        "7": 14
+      },
+      "train_declared_mode_counts": {
+        "basis": 18,
+        "mini": 17,
+        "residual": 13,
+        "rotation": 24
+      },
+      "train_family_mode_counts": {
+        "pseudo:basis": 6,
+        "pseudo:mini": 7,
+        "pseudo:residual": 4,
+        "pseudo:rotation": 7,
+        "real:basis": 7,
+        "real:mini": 5,
+        "real:residual": 5,
+        "real:rotation": 7,
+        "wrong:basis": 5,
+        "wrong:mini": 5,
+        "wrong:residual": 4,
+        "wrong:rotation": 10
+      },
+      "wrong_declared_actual_counts": {
+        "basis->mini": 4,
+        "basis->residual": 3,
+        "basis->rotation": 6,
+        "mini->basis": 2,
+        "mini->residual": 1,
+        "mini->rotation": 3,
+        "residual->basis": 1,
+        "residual->mini": 6,
+        "residual->rotation": 3,
+        "rotation->basis": 5,
+        "rotation->mini": 11,
+        "rotation->residual": 3
+      }
+    },
+    "v4s5_matrix_seed3": {
+      "family_counts": {
+        "preamble": 4,
+        "pseudo": 48,
+        "real": 48,
+        "wrong": 48
+      },
+      "pseudo_permutations_unique": 48,
+      "regenerated_codebook_exact": true,
+      "regenerated_schedule_exact": true,
+      "test_declared_mode_counts": {
+        "basis": 17,
+        "mini": 15,
+        "residual": 21,
+        "rotation": 19
+      },
+      "test_family_mode_counts": {
+        "pseudo:basis": 4,
+        "pseudo:mini": 4,
+        "pseudo:residual": 4,
+        "pseudo:rotation": 12,
+        "real:basis": 8,
+        "real:mini": 4,
+        "real:residual": 8,
+        "real:rotation": 4,
+        "wrong:basis": 5,
+        "wrong:mini": 7,
+        "wrong:residual": 9,
+        "wrong:rotation": 3
+      },
+      "theta_counts": {
+        "0": 20,
+        "1": 20,
+        "2": 23,
+        "3": 13,
+        "4": 18,
+        "5": 19,
+        "6": 17,
+        "7": 14
+      },
+      "train_declared_mode_counts": {
+        "basis": 16,
+        "mini": 22,
+        "residual": 16,
+        "rotation": 18
+      },
+      "train_family_mode_counts": {
+        "pseudo:basis": 6,
+        "pseudo:mini": 7,
+        "pseudo:residual": 6,
+        "pseudo:rotation": 5,
+        "real:basis": 5,
+        "real:mini": 8,
+        "real:residual": 5,
+        "real:rotation": 6,
+        "wrong:basis": 5,
+        "wrong:mini": 7,
+        "wrong:residual": 5,
+        "wrong:rotation": 7
+      },
+      "wrong_declared_actual_counts": {
+        "basis->mini": 2,
+        "basis->residual": 2,
+        "basis->rotation": 6,
+        "mini->basis": 4,
+        "mini->residual": 4,
+        "mini->rotation": 6,
+        "residual->basis": 7,
+        "residual->mini": 3,
+        "residual->rotation": 4,
+        "rotation->basis": 3,
+        "rotation->mini": 5,
+        "rotation->residual": 2
+      }
+    },
+    "v4s5_matrix_seed4": {
+      "family_counts": {
+        "preamble": 4,
+        "pseudo": 48,
+        "real": 48,
+        "wrong": 48
+      },
+      "pseudo_permutations_unique": 48,
+      "regenerated_codebook_exact": true,
+      "regenerated_schedule_exact": true,
+      "test_declared_mode_counts": {
+        "basis": 22,
+        "mini": 13,
+        "residual": 15,
+        "rotation": 22
+      },
+      "test_family_mode_counts": {
+        "pseudo:basis": 9,
+        "pseudo:mini": 5,
+        "pseudo:residual": 4,
+        "pseudo:rotation": 6,
+        "real:basis": 6,
+        "real:mini": 4,
+        "real:residual": 5,
+        "real:rotation": 9,
+        "wrong:basis": 7,
+        "wrong:mini": 4,
+        "wrong:residual": 6,
+        "wrong:rotation": 7
+      },
+      "theta_counts": {
+        "0": 21,
+        "1": 22,
+        "2": 20,
+        "3": 14,
+        "4": 10,
+        "5": 17,
+        "6": 21,
+        "7": 19
+      },
+      "train_declared_mode_counts": {
+        "basis": 14,
+        "mini": 20,
+        "residual": 21,
+        "rotation": 17
+      },
+      "train_family_mode_counts": {
+        "pseudo:basis": 6,
+        "pseudo:mini": 6,
+        "pseudo:residual": 7,
+        "pseudo:rotation": 5,
+        "real:basis": 4,
+        "real:mini": 5,
+        "real:residual": 9,
+        "real:rotation": 6,
+        "wrong:basis": 4,
+        "wrong:mini": 9,
+        "wrong:residual": 5,
+        "wrong:rotation": 6
+      },
+      "wrong_declared_actual_counts": {
+        "basis->mini": 7,
+        "basis->residual": 3,
+        "basis->rotation": 1,
+        "mini->basis": 5,
+        "mini->residual": 5,
+        "mini->rotation": 3,
+        "residual->basis": 1,
+        "residual->mini": 5,
+        "residual->rotation": 5,
+        "rotation->mini": 9,
+        "rotation->residual": 4
+      }
+    },
+    "v4s5_matrix_seed5": {
+      "family_counts": {
+        "preamble": 4,
+        "pseudo": 48,
+        "real": 48,
+        "wrong": 48
+      },
+      "pseudo_permutations_unique": 48,
+      "regenerated_codebook_exact": true,
+      "regenerated_schedule_exact": true,
+      "test_declared_mode_counts": {
+        "basis": 18,
+        "mini": 20,
+        "residual": 13,
+        "rotation": 21
+      },
+      "test_family_mode_counts": {
+        "pseudo:basis": 5,
+        "pseudo:mini": 5,
+        "pseudo:residual": 6,
+        "pseudo:rotation": 8,
+        "real:basis": 5,
+        "real:mini": 9,
+        "real:residual": 3,
+        "real:rotation": 7,
+        "wrong:basis": 8,
+        "wrong:mini": 6,
+        "wrong:residual": 4,
+        "wrong:rotation": 6
+      },
+      "theta_counts": {
+        "0": 18,
+        "1": 20,
+        "2": 17,
+        "3": 15,
+        "4": 22,
+        "5": 18,
+        "6": 14,
+        "7": 20
+      },
+      "train_declared_mode_counts": {
+        "basis": 21,
+        "mini": 16,
+        "residual": 19,
+        "rotation": 16
+      },
+      "train_family_mode_counts": {
+        "pseudo:basis": 7,
+        "pseudo:mini": 5,
+        "pseudo:residual": 10,
+        "pseudo:rotation": 2,
+        "real:basis": 7,
+        "real:mini": 7,
+        "real:residual": 4,
+        "real:rotation": 6,
+        "wrong:basis": 7,
+        "wrong:mini": 4,
+        "wrong:residual": 5,
+        "wrong:rotation": 8
+      },
+      "wrong_declared_actual_counts": {
+        "basis->mini": 6,
+        "basis->residual": 5,
+        "basis->rotation": 4,
+        "mini->basis": 2,
+        "mini->residual": 3,
+        "mini->rotation": 5,
+        "residual->basis": 3,
+        "residual->mini": 3,
+        "residual->rotation": 3,
+        "rotation->basis": 2,
+        "rotation->mini": 2,
+        "rotation->residual": 10
+      }
+    }
+  },
+  "historical_csv_headers": {
+    "matrix_v2s3_seed0": {
+      "codebook_exact": true,
+      "family_counts": {
+        "pseudo": 300,
+        "real": 304,
+        "wrong": 300
+      },
+      "first_48_trials_label_schedule_exact": true,
+      "test_family_mode_counts": {
+        "pseudo:basis": 47,
+        "pseudo:mini": 40,
+        "pseudo:residual": 28,
+        "pseudo:rotation": 35,
+        "real:basis": 41,
+        "real:mini": 34,
+        "real:residual": 40,
+        "real:rotation": 35,
+        "wrong:basis": 40,
+        "wrong:mini": 43,
+        "wrong:residual": 23,
+        "wrong:rotation": 44
+      },
+      "tone_count": 12,
+      "train_family_mode_counts": {
+        "pseudo:basis": 30,
+        "pseudo:mini": 33,
+        "pseudo:residual": 34,
+        "pseudo:rotation": 53,
+        "real:basis": 41,
+        "real:mini": 44,
+        "real:residual": 36,
+        "real:rotation": 29,
+        "wrong:basis": 38,
+        "wrong:mini": 36,
+        "wrong:residual": 46,
+        "wrong:rotation": 30
+      }
+    },
+    "matrix_v2s3_seed1": {
+      "codebook_exact": true,
+      "family_counts": {
+        "pseudo": 300,
+        "real": 304,
+        "wrong": 300
+      },
+      "first_48_trials_label_schedule_exact": true,
+      "test_family_mode_counts": {
+        "pseudo:basis": 35,
+        "pseudo:mini": 41,
+        "pseudo:residual": 32,
+        "pseudo:rotation": 42,
+        "real:basis": 35,
+        "real:mini": 38,
+        "real:residual": 41,
+        "real:rotation": 36,
+        "wrong:basis": 39,
+        "wrong:mini": 34,
+        "wrong:residual": 36,
+        "wrong:rotation": 41
+      },
+      "tone_count": 12,
+      "train_family_mode_counts": {
+        "pseudo:basis": 48,
+        "pseudo:mini": 29,
+        "pseudo:residual": 31,
+        "pseudo:rotation": 42,
+        "real:basis": 45,
+        "real:mini": 37,
+        "real:residual": 32,
+        "real:rotation": 36,
+        "wrong:basis": 47,
+        "wrong:mini": 41,
+        "wrong:residual": 30,
+        "wrong:rotation": 32
+      }
+    },
+    "matrix_v2s3_seed2": {
+      "codebook_exact": true,
+      "family_counts": {
+        "pseudo": 300,
+        "real": 304,
+        "wrong": 300
+      },
+      "first_48_trials_label_schedule_exact": true,
+      "test_family_mode_counts": {
+        "pseudo:basis": 45,
+        "pseudo:mini": 34,
+        "pseudo:residual": 34,
+        "pseudo:rotation": 37,
+        "real:basis": 41,
+        "real:mini": 32,
+        "real:residual": 43,
+        "real:rotation": 34,
+        "wrong:basis": 40,
+        "wrong:mini": 34,
+        "wrong:residual": 41,
+        "wrong:rotation": 35
+      },
+      "tone_count": 12,
+      "train_family_mode_counts": {
+        "pseudo:basis": 36,
+        "pseudo:mini": 40,
+        "pseudo:residual": 40,
+        "pseudo:rotation": 34,
+        "real:basis": 36,
+        "real:mini": 36,
+        "real:residual": 41,
+        "real:rotation": 37,
+        "wrong:basis": 43,
+        "wrong:mini": 33,
+        "wrong:residual": 29,
+        "wrong:rotation": 45
+      }
+    },
+    "matrix_v2s3_seed3": {
+      "codebook_exact": true,
+      "family_counts": {
+        "pseudo": 300,
+        "real": 304,
+        "wrong": 300
+      },
+      "first_48_trials_label_schedule_exact": true,
+      "test_family_mode_counts": {
+        "pseudo:basis": 39,
+        "pseudo:mini": 25,
+        "pseudo:residual": 34,
+        "pseudo:rotation": 52,
+        "real:basis": 37,
+        "real:mini": 48,
+        "real:residual": 40,
+        "real:rotation": 25,
+        "wrong:basis": 32,
+        "wrong:mini": 39,
+        "wrong:residual": 49,
+        "wrong:rotation": 30
+      },
+      "tone_count": 12,
+      "train_family_mode_counts": {
+        "pseudo:basis": 39,
+        "pseudo:mini": 39,
+        "pseudo:residual": 34,
+        "pseudo:rotation": 38,
+        "real:basis": 39,
+        "real:mini": 40,
+        "real:residual": 26,
+        "real:rotation": 45,
+        "wrong:basis": 42,
+        "wrong:mini": 40,
+        "wrong:residual": 35,
+        "wrong:rotation": 33
+      }
+    },
+    "matrix_v2s3_seed4": {
+      "codebook_exact": true,
+      "family_counts": {
+        "pseudo": 300,
+        "real": 304,
+        "wrong": 300
+      },
+      "first_48_trials_label_schedule_exact": true,
+      "test_family_mode_counts": {
+        "pseudo:basis": 39,
+        "pseudo:mini": 41,
+        "pseudo:residual": 37,
+        "pseudo:rotation": 33,
+        "real:basis": 35,
+        "real:mini": 38,
+        "real:residual": 36,
+        "real:rotation": 41,
+        "wrong:basis": 40,
+        "wrong:mini": 36,
+        "wrong:residual": 39,
+        "wrong:rotation": 35
+      },
+      "tone_count": 12,
+      "train_family_mode_counts": {
+        "pseudo:basis": 31,
+        "pseudo:mini": 46,
+        "pseudo:residual": 36,
+        "pseudo:rotation": 37,
+        "real:basis": 30,
+        "real:mini": 37,
+        "real:residual": 42,
+        "real:rotation": 41,
+        "wrong:basis": 36,
+        "wrong:mini": 48,
+        "wrong:residual": 39,
+        "wrong:rotation": 27
+      }
+    },
+    "matrix_v2s3_seed5": {
+      "codebook_exact": true,
+      "family_counts": {
+        "pseudo": 300,
+        "real": 304,
+        "wrong": 300
+      },
+      "first_48_trials_label_schedule_exact": true,
+      "test_family_mode_counts": {
+        "pseudo:basis": 37,
+        "pseudo:mini": 38,
+        "pseudo:residual": 31,
+        "pseudo:rotation": 44,
+        "real:basis": 35,
+        "real:mini": 40,
+        "real:residual": 35,
+        "real:rotation": 40,
+        "wrong:basis": 38,
+        "wrong:mini": 39,
+        "wrong:residual": 37,
+        "wrong:rotation": 36
+      },
+      "tone_count": 12,
+      "train_family_mode_counts": {
+        "pseudo:basis": 38,
+        "pseudo:mini": 33,
+        "pseudo:residual": 48,
+        "pseudo:rotation": 31,
+        "real:basis": 39,
+        "real:mini": 39,
+        "real:residual": 33,
+        "real:rotation": 39,
+        "wrong:basis": 32,
+        "wrong:mini": 32,
+        "wrong:residual": 41,
+        "wrong:rotation": 45
+      }
+    },
+    "matrix_v4s5_seed0": {
+      "codebook_exact": true,
+      "family_counts": {
+        "pseudo": 300,
+        "real": 304,
+        "wrong": 300
+      },
+      "first_48_trials_label_schedule_exact": true,
+      "test_family_mode_counts": {
+        "pseudo:basis": 47,
+        "pseudo:mini": 40,
+        "pseudo:residual": 28,
+        "pseudo:rotation": 35,
+        "real:basis": 41,
+        "real:mini": 34,
+        "real:residual": 40,
+        "real:rotation": 35,
+        "wrong:basis": 40,
+        "wrong:mini": 43,
+        "wrong:residual": 23,
+        "wrong:rotation": 44
+      },
+      "tone_count": 12,
+      "train_family_mode_counts": {
+        "pseudo:basis": 30,
+        "pseudo:mini": 33,
+        "pseudo:residual": 34,
+        "pseudo:rotation": 53,
+        "real:basis": 41,
+        "real:mini": 44,
+        "real:residual": 36,
+        "real:rotation": 29,
+        "wrong:basis": 38,
+        "wrong:mini": 36,
+        "wrong:residual": 46,
+        "wrong:rotation": 30
+      }
+    },
+    "matrix_v4s5_seed1": {
+      "codebook_exact": true,
+      "family_counts": {
+        "pseudo": 300,
+        "real": 304,
+        "wrong": 300
+      },
+      "first_48_trials_label_schedule_exact": true,
+      "test_family_mode_counts": {
+        "pseudo:basis": 35,
+        "pseudo:mini": 41,
+        "pseudo:residual": 32,
+        "pseudo:rotation": 42,
+        "real:basis": 35,
+        "real:mini": 38,
+        "real:residual": 41,
+        "real:rotation": 36,
+        "wrong:basis": 39,
+        "wrong:mini": 34,
+        "wrong:residual": 36,
+        "wrong:rotation": 41
+      },
+      "tone_count": 12,
+      "train_family_mode_counts": {
+        "pseudo:basis": 48,
+        "pseudo:mini": 29,
+        "pseudo:residual": 31,
+        "pseudo:rotation": 42,
+        "real:basis": 45,
+        "real:mini": 37,
+        "real:residual": 32,
+        "real:rotation": 36,
+        "wrong:basis": 47,
+        "wrong:mini": 41,
+        "wrong:residual": 30,
+        "wrong:rotation": 32
+      }
+    },
+    "matrix_v4s5_seed2": {
+      "codebook_exact": true,
+      "family_counts": {
+        "pseudo": 300,
+        "real": 304,
+        "wrong": 300
+      },
+      "first_48_trials_label_schedule_exact": true,
+      "test_family_mode_counts": {
+        "pseudo:basis": 45,
+        "pseudo:mini": 34,
+        "pseudo:residual": 34,
+        "pseudo:rotation": 37,
+        "real:basis": 41,
+        "real:mini": 32,
+        "real:residual": 43,
+        "real:rotation": 34,
+        "wrong:basis": 40,
+        "wrong:mini": 34,
+        "wrong:residual": 41,
+        "wrong:rotation": 35
+      },
+      "tone_count": 12,
+      "train_family_mode_counts": {
+        "pseudo:basis": 36,
+        "pseudo:mini": 40,
+        "pseudo:residual": 40,
+        "pseudo:rotation": 34,
+        "real:basis": 36,
+        "real:mini": 36,
+        "real:residual": 41,
+        "real:rotation": 37,
+        "wrong:basis": 43,
+        "wrong:mini": 33,
+        "wrong:residual": 29,
+        "wrong:rotation": 45
+      }
+    },
+    "matrix_v4s5_seed3": {
+      "codebook_exact": true,
+      "family_counts": {
+        "pseudo": 300,
+        "real": 304,
+        "wrong": 300
+      },
+      "first_48_trials_label_schedule_exact": true,
+      "test_family_mode_counts": {
+        "pseudo:basis": 39,
+        "pseudo:mini": 25,
+        "pseudo:residual": 34,
+        "pseudo:rotation": 52,
+        "real:basis": 37,
+        "real:mini": 48,
+        "real:residual": 40,
+        "real:rotation": 25,
+        "wrong:basis": 32,
+        "wrong:mini": 39,
+        "wrong:residual": 49,
+        "wrong:rotation": 30
+      },
+      "tone_count": 12,
+      "train_family_mode_counts": {
+        "pseudo:basis": 39,
+        "pseudo:mini": 39,
+        "pseudo:residual": 34,
+        "pseudo:rotation": 38,
+        "real:basis": 39,
+        "real:mini": 40,
+        "real:residual": 26,
+        "real:rotation": 45,
+        "wrong:basis": 42,
+        "wrong:mini": 40,
+        "wrong:residual": 35,
+        "wrong:rotation": 33
+      }
+    },
+    "matrix_v4s5_seed4": {
+      "codebook_exact": true,
+      "family_counts": {
+        "pseudo": 300,
+        "real": 304,
+        "wrong": 300
+      },
+      "first_48_trials_label_schedule_exact": true,
+      "test_family_mode_counts": {
+        "pseudo:basis": 39,
+        "pseudo:mini": 41,
+        "pseudo:residual": 37,
+        "pseudo:rotation": 33,
+        "real:basis": 35,
+        "real:mini": 38,
+        "real:residual": 36,
+        "real:rotation": 41,
+        "wrong:basis": 40,
+        "wrong:mini": 36,
+        "wrong:residual": 39,
+        "wrong:rotation": 35
+      },
+      "tone_count": 12,
+      "train_family_mode_counts": {
+        "pseudo:basis": 31,
+        "pseudo:mini": 46,
+        "pseudo:residual": 36,
+        "pseudo:rotation": 37,
+        "real:basis": 30,
+        "real:mini": 37,
+        "real:residual": 42,
+        "real:rotation": 41,
+        "wrong:basis": 36,
+        "wrong:mini": 48,
+        "wrong:residual": 39,
+        "wrong:rotation": 27
+      }
+    },
+    "matrix_v4s5_seed5": {
+      "codebook_exact": true,
+      "family_counts": {
+        "pseudo": 300,
+        "real": 304,
+        "wrong": 300
+      },
+      "first_48_trials_label_schedule_exact": true,
+      "test_family_mode_counts": {
+        "pseudo:basis": 37,
+        "pseudo:mini": 38,
+        "pseudo:residual": 31,
+        "pseudo:rotation": 44,
+        "real:basis": 35,
+        "real:mini": 40,
+        "real:residual": 35,
+        "real:rotation": 40,
+        "wrong:basis": 38,
+        "wrong:mini": 39,
+        "wrong:residual": 37,
+        "wrong:rotation": 36
+      },
+      "tone_count": 12,
+      "train_family_mode_counts": {
+        "pseudo:basis": 38,
+        "pseudo:mini": 33,
+        "pseudo:residual": 48,
+        "pseudo:rotation": 31,
+        "real:basis": 39,
+        "real:mini": 39,
+        "real:residual": 33,
+        "real:rotation": 39,
+        "wrong:basis": 32,
+        "wrong:mini": 32,
+        "wrong:residual": 41,
+        "wrong:rotation": 45
+      }
+    }
+  },
+  "metadata": {
+    "analysis_tool_sha256": "edbd70277ad962bec19334d26a78ed997798eccc78a2352785c7ecc305feb4e5",
+    "analyzer_sha256": "aa1ca5b0ce911ce931b036d023981eb1589d316e0adf88b66eb494ada1c5a50c",
+    "campaign_manifest_sha256": "cbcd2a19d6dd3bc478244f77888aa87eb043003a7685caa17ff13fe4d47e6487",
+    "generated_utc": "2026-06-19T20:00:00Z",
+    "source_campaign_id": "phase6b5_t48_d32b1bed_20260619",
+    "source_commit": "d32b1bed0deae1b907a07eeed018b924244e9ea2"
+  },
+  "test_denominator_definitions": {
+    "phase_pairs": "consecutive real rows including preamble; count = real rows - 1",
+    "pseudo_rejection_per_mode": "odd pseudo rows grouped by predicted mode",
+    "real_accuracy_per_mode": "odd-trial real rows grouped by declared mode",
+    "real_vs_pseudo_per_mode": "odd real declared mode plus odd pseudo predicted mode",
+    "wrong_actual_match": "all odd wrong rows",
+    "wrong_declared_match": "all odd wrong rows"
+  }
+}

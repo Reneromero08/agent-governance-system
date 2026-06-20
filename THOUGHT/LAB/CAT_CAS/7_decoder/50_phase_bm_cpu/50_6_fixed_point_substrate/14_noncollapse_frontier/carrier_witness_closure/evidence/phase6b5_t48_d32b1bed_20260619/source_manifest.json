@@ -1,0 +1,21 @@
+{
+  "binary_sha256": "75024a02982e853336558468e550e824e6ad17a01e1ddcfad85610e138a81f59",
+  "compiler": {
+    "flags": "-O2 -pthread -Wall -Wextra -Werror -march=amdfam10 <slot2_pdn_lockin.c> <carrier_witness_raw.c> -o slot2 -lm",
+    "identity": "gcc (Debian 14.2.0-19) 14.2.0"
+  },
+  "runner": "campaign_runner.py",
+  "runner_sha256": "b046171c80023b500d3baa67373a16df64b679859b4c34c578fa09ed98ecaf7c",
+  "schema_id": "CAT_CAS_PDN_CARRIER_SOURCE_MANIFEST_V1",
+  "source_commit": "d32b1bed0deae1b907a07eeed018b924244e9ea2",
+  "source_files": {
+    "10_cross_core_wormhole/slot2_pdn/slot2_pdn_analyze.py": "aa1ca5b0ce911ce931b036d023981eb1589d316e0adf88b66eb494ada1c5a50c",
+    "10_cross_core_wormhole/slot2_pdn/slot2_pdn_lockin.c": "7e3efd365e4f5f5a553abf6ac14c45aee742d7dfd39c048ee3e3356813a4f842",
+    "10_cross_core_wormhole/slot2_pdn/slot2_pdn_run.h": "27e3432b92b62ace6435e13f9b8e24f0eb3c579f6f71fd9d20794b91b04b86d7",
+    "14_noncollapse_frontier/carrier_witness_closure/carrier_witness_finalize.py": "23177a2937077b34a3cdab3085b0763a4f6606a65b98d09cf0cfd2cafbbcb82a",
+    "14_noncollapse_frontier/carrier_witness_closure/carrier_witness_manifest.py": "1e333c4d43212462af67c56c3b230a69d329be1b7affb1f7855172f4fcbdf502",
+    "14_noncollapse_frontier/carrier_witness_closure/carrier_witness_raw.c": "a1b82f87ad096d5cad2519ad6eed7ad80b53e19f73979c6e0da1c736c0563703",
+    "14_noncollapse_frontier/carrier_witness_closure/carrier_witness_raw.h": "54796462f8d304cbedeccfaa315dd082280d4b02b9a03be18eae72f7af1682e3",
+    "14_noncollapse_frontier/carrier_witness_closure/carrier_witness_validate.py": "b65f246195c253959ad2a0ab35677156f115821031646a37fcf06dd180d8a357"
+  }
+}

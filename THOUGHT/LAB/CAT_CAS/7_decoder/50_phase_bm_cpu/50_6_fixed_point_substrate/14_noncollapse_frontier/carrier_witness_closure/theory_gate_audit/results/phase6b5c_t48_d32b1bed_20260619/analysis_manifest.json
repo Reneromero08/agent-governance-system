@@ -1,0 +1,572 @@
+{
+  "analysis_id": "phase6b5c_transfer_aware_geometry_v1",
+  "analysis_source_sha256": "6892be9beed370b8f99b18e1eee5b4f3e66c265fb996aa5d9545575907b00515",
+  "calibration_partition": "preamble + even-real; internal fit trial%4==0, validation trial%4==2",
+  "campaign_id": "phase6b5_t48_d32b1bed_20260619",
+  "campaign_manifest_sha256": "cbcd2a19d6dd3bc478244f77888aa87eb043003a7685caa17ff13fe4d47e6487",
+  "campaign_source_commit": "d32b1bed0deae1b907a07eeed018b924244e9ea2",
+  "claim_ceiling": "DERIVED_TRANSFER_AWARE_ANALYSIS_ONLY",
+  "complex_geometry_source_sha256": "13ea91fc9b000062fd840ce0b07b3909cb570eaf6e1b214dcc115d2cf5a9b6a3",
+  "decision": {
+    "calibration_stable_fraction": 0.9166666666666666,
+    "claim_ceiling": "DERIVED_TRANSFER_AWARE_ANALYSIS_ONLY",
+    "controls_remain_null": true,
+    "matrix_observed_norm_reference": 0.1839364607688848,
+    "matrix_runs": 12,
+    "official_strict_closure_unchanged": "PARTIAL",
+    "phase_supported_fraction": 1.0,
+    "primary_outcome": "TRANSFER_EQUIVARIANCE_SUPPORTED",
+    "pseudo_covariance_supported_fraction": 1.0,
+    "route_geometry_available": true,
+    "scramble_canonical_relation_null": true,
+    "silent_energy_null": true,
+    "transfer_supported_fraction": 1.0
+  },
+  "final_evaluation_partition": "odd trials only",
+  "generated_utc": "2026-06-19T20:13:06+00:00",
+  "inputs": {
+    "campaign.json": {
+      "sha256": "9902bd1f0b64f23a3e02422208afda143a4bca43de6fe19c53474ee9dcc91e5a",
+      "size": 3510
+    },
+    "campaign_manifest.json": {
+      "sha256": "cbcd2a19d6dd3bc478244f77888aa87eb043003a7685caa17ff13fe4d47e6487",
+      "size": 3528
+    },
+    "run_bindings": [
+      {
+        "files": {
+          "analysis.json": {
+            "hash_recomputed": true,
+            "sha256": "1c8704bcd094e476a187bbd8e6f558c9b6e7008dbc652b4458480af7d12f47a7",
+            "size": 1035
+          },
+          "raw_samples.bin": {
+            "hash_recomputed": true,
+            "sha256": "09c16199f6b59ea206c02cbf406f9fbec91c844701e0d7cfa6260bbdd9a5914a",
+            "size": 43153216
+          },
+          "run.json": {
+            "hash_recomputed": true,
+            "sha256": "05dab3c6f34dc4d62f53de0013c4440d2eadcd9418b9d7f77057b116e773c756",
+            "size": 3508
+          },
+          "schedule.json": {
+            "hash_recomputed": true,
+            "sha256": "98ca425d079b44fd0959e417cccb031c1546e4395e11837aab05085e45257de6",
+            "size": 53629
+          },
+          "summary.csv": {
+            "hash_recomputed": true,
+            "sha256": "8aaa8059790f296ce7de09680c55b66d7a96307521bfebff71b0fa5d37d612d6",
+            "size": 61334
+          },
+          "windows.csv": {
+            "hash_recomputed": true,
+            "sha256": "cf589208e5ec26825797278486e370fa5da7e1970dec8830d69942e1cac50363",
+            "size": 458670
+          }
+        },
+        "run_id": "v2s3_matrix_seed0"
+      },
+      {
+        "files": {
+          "analysis.json": {
+            "hash_recomputed": true,
+            "sha256": "586f638909c67c95cdcfdbeba70f1058f6948c1f6a54b2d537b96bfbaebe6fec",
+            "size": 991
+          },
+          "raw_samples.bin": {
+            "hash_recomputed": true,
+            "sha256": "27e1d8c7867bbb4ba0794ea76643429c8b6017bfa21298f357b158089e34a359",
+            "size": 43149792
+          },
+          "run.json": {
+            "hash_recomputed": true,
+            "sha256": "1585ed5d80f613ea96b0e9557e5b926fee3ad52820467c7d07bb6c3703d926f2",
+            "size": 3512
+          },
+          "schedule.json": {
+            "hash_recomputed": true,
+            "sha256": "73e77130bcd0271e89ba8b5df298caafd263cfe1a840e3f0800d7db753dd66ec",
+            "size": 53441
+          },
+          "summary.csv": {
+            "hash_recomputed": true,
+            "sha256": "4146bdb43e9f3bd386d784f8661458e5649cda271de75645e0b81a2193398131",
+            "size": 61523
+          },
+          "windows.csv": {
+            "hash_recomputed": true,
+            "sha256": "107193905766b763ef7eb8f4ec948784c454521d5e8d072f514a838dc8580956",
+            "size": 457926
+          }
+        },
+        "run_id": "v2s3_matrix_seed1"
+      },
+      {
+        "files": {
+          "analysis.json": {
+            "hash_recomputed": true,
+            "sha256": "ab4213cb9891e6f4e43f70f2fd4330c77b13c47beb3290f87584d4e155028784",
+            "size": 1020
+          },
+          "raw_samples.bin": {
+            "hash_recomputed": true,
+            "sha256": "a393d18ede440bfbe5cae49948e408c0167719075db7abd63f2d19f3f19fbc65",
+            "size": 43150368
+          },
+          "run.json": {
+            "hash_recomputed": true,
+            "sha256": "b7fcff63b8980daf5312ba9365069e7c670223e6d96f863fa588eec605fa046b",
+            "size": 3510
+          },
+          "schedule.json": {
+            "hash_recomputed": true,
+            "sha256": "76d0981a05d4cda4d926f273a67fddb34fd254311a6450f3f0e9960113b86285",
+            "size": 53352
+          },
+          "summary.csv": {
+            "hash_recomputed": true,
+            "sha256": "63c75a42939d39fd70c492971fa3458cde535cf9c10c9e87b4d2ad1922720b5a",
+            "size": 61579
+          },
+          "windows.csv": {
+            "hash_recomputed": true,
+            "sha256": "49a4b708134d62f1f05fe745fb28ec54c185bcc5b71caa93bc1b208988af8266",
+            "size": 457862
+          }
+        },
+        "run_id": "v2s3_matrix_seed2"
+      },
+      {
+        "files": {
+          "analysis.json": {
+            "hash_recomputed": true,
+            "sha256": "a97dcfd2017cd18de7d300e7b59a2d12036ca64dec0210cacfbdafc1cac7bbf2",
+            "size": 1036
+          },
+          "raw_samples.bin": {
+            "hash_recomputed": true,
+            "sha256": "e961122824cccf148dab85057a5b80cecb1e4d2197723edad2b7327434f99542",
+            "size": 43151440
+          },
+          "run.json": {
+            "hash_recomputed": true,
+            "sha256": "3a684367a43a958c1ebea8063673a01df7d57ed77fb7fb2d263702dc020d868f",
+            "size": 3510
+          },
+          "schedule.json": {
+            "hash_recomputed": true,
+            "sha256": "3c98e975bedab7387fb89fa60c1b545316e265115469f6c6c0f8d98e2ea7c80e",
+            "size": 53367
+          },
+          "summary.csv": {
+            "hash_recomputed": true,
+            "sha256": "0bfe30bd607b9e3f35c356abf1a032ffa19ea5534eb61f3a5919e64c918e4793",
+            "size": 61149
+          },
+          "windows.csv": {
+            "hash_recomputed": true,
+            "sha256": "13f81cba9ac65622ba8743a780220a196fb877888dc0f6eda51737ace5849cbe",
+            "size": 459643
+          }
+        },
+        "run_id": "v2s3_matrix_seed3"
+      },
+      {
+        "files": {
+          "analysis.json": {
+            "hash_recomputed": true,
+            "sha256": "87bb1c187b73f11cf90ddea65a4614ae06fd2ea074c09f35d1ffa06ad30b4af7",
+            "size": 1006
+          },
+          "raw_samples.bin": {
+            "hash_recomputed": true,
+            "sha256": "a42f50f8fa41a63ccbe87bc6701c7d0acc3acee482688ceeab5d9a87060ec074",
+            "size": 43150272
+          },
+          "run.json": {
+            "hash_recomputed": true,
+            "sha256": "dfec1b3a250ee27f9b431bc98642b5dcc13396cb634b1a078bed77cfc76915fd",
+            "size": 3509
+          },
+          "schedule.json": {
+            "hash_recomputed": true,
+            "sha256": "33ad2767673e2f94480ee87f03aeea86c886482dfc4c2bd4fce316ac01cb6ce6",
+            "size": 53682
+          },
+          "summary.csv": {
+            "hash_recomputed": true,
+            "sha256": "6c485c37b6b7531e858412bd33df2cc323f3064c4432da7520d8279e09bbd268",
+            "size": 60979
+          },
+          "windows.csv": {
+            "hash_recomputed": true,
+            "sha256": "e11cd41c5640b7d9cb846addca31a87a5747c2e327e0b66cb7a4d36771a48d83",
+            "size": 459709
+          }
+        },
+        "run_id": "v2s3_matrix_seed4"
+      },
+      {
+        "files": {
+          "analysis.json": {
+            "hash_recomputed": true,
+            "sha256": "f8300ded071804b8813f3708133fc74fa2273eee45791eb2e0a9ccc1b519df21",
+            "size": 1031
+          },
+          "raw_samples.bin": {
+            "hash_recomputed": true,
+            "sha256": "b5eb3403f2ab78473e5ca52309c80136761b6dd0cc45d11a0eecf86c28ce5fcc",
+            "size": 43150944
+          },
+          "run.json": {
+            "hash_recomputed": true,
+            "sha256": "7b6e6854058c114abb0a8224f5ca93ce48dd400985cfee974cfc4784432c8ee0",
+            "size": 3509
+          },
+          "schedule.json": {
+            "hash_recomputed": true,
+            "sha256": "693ab8f1c67e318ac177fdd5169ab26f888b3b9b3ec91c8e95eca4dcceeb154d",
+            "size": 53442
+          },
+          "summary.csv": {
+            "hash_recomputed": true,
+            "sha256": "fb2d1ba18fdf949311f664217ea966e8c544129698aae755d939d02e338d9da7",
+            "size": 61423
+          },
+          "windows.csv": {
+            "hash_recomputed": true,
+            "sha256": "134697213b96dab1a35fc9f7dc7789faa7ff4af3b8623d9c5a167e1451f01af0",
+            "size": 459126
+          }
+        },
+        "run_id": "v2s3_matrix_seed5"
+      },
+      {
+        "files": {
+          "analysis.json": {
+            "hash_recomputed": true,
+            "sha256": "34596eeffe6dfce2260ad957f8ee1175914041b32b94f72185a082ef565b6427",
+            "size": 975
+          },
+          "raw_samples.bin": {
+            "hash_recomputed": true,
+            "sha256": "f0f1e9274a562131f70f36be41d55f14b8da4a11705cdb9bc37979707b3110e0",
+            "size": 43152000
+          },
+          "run.json": {
+            "hash_recomputed": true,
+            "sha256": "dcf2598a6f5f5f4ee6f7b87884bd21cfce5edb76e86ae8389e4fc0955fbd5c71",
+            "size": 3510
+          },
+          "schedule.json": {
+            "hash_recomputed": true,
+            "sha256": "1dadbbf5e3b54a53c36a2663bf232d935fe1e31f136029aa32439d69e96dd9f1",
+            "size": 53629
+          },
+          "summary.csv": {
+            "hash_recomputed": true,
+            "sha256": "7d9052f9c6300dd5850aad8ef4700a210ce98a75184c72bf6468da3140ef858b",
+            "size": 61919
+          },
+          "windows.csv": {
+            "hash_recomputed": true,
+            "sha256": "094a135c479b3e6994ad7b61ed0f7dcf4a09f3c21ae7f39fd139eaf04d714ece",
+            "size": 458608
+          }
+        },
+        "run_id": "v4s5_matrix_seed0"
+      },
+      {
+        "files": {
+          "analysis.json": {
+            "hash_recomputed": true,
+            "sha256": "eafbbee5230bcdacfe23e93048710481769ff0372b12d8a82e7287522f651208",
+            "size": 1003
+          },
+          "raw_samples.bin": {
+            "hash_recomputed": true,
+            "sha256": "21cd2061fb4d88d79f68b096a7ce98cbf5fc11dfeac19d98dbb62a018d234192",
+            "size": 43151040
+          },
+          "run.json": {
+            "hash_recomputed": true,
+            "sha256": "96a2a65706e6de81f2f94385d04171f410667551900730d58ba42f14b7f3085f",
+            "size": 3508
+          },
+          "schedule.json": {
+            "hash_recomputed": true,
+            "sha256": "7160b06f169a96b5dbe1456ccb2b0cf9bf700fce0ce58d094eda2da26f837cc9",
+            "size": 53441
+          },
+          "summary.csv": {
+            "hash_recomputed": true,
+            "sha256": "8d1ce965f544d694c024f52c5c6bf3b039c3183c1209774cf2d407eedc077526",
+            "size": 61904
+          },
+          "windows.csv": {
+            "hash_recomputed": true,
+            "sha256": "72c1a4d1c05eb7247fee1af9220cefac0a3fe1abf9951142d9107c13f8141a42",
+            "size": 459758
+          }
+        },
+        "run_id": "v4s5_matrix_seed1"
+      },
+      {
+        "files": {
+          "analysis.json": {
+            "hash_recomputed": true,
+            "sha256": "c684d82ae607fc71559307b2f7b205d99a84cfbb71e6c366d37b77c57d4dbea8",
+            "size": 990
+          },
+          "raw_samples.bin": {
+            "hash_recomputed": true,
+            "sha256": "ce765598a24f58748527d6bc92ba7fd1e5be76a79c4fb000915ddc20df65c16d",
+            "size": 43151152
+          },
+          "run.json": {
+            "hash_recomputed": true,
+            "sha256": "fafbf120603b913ffaaa0d9b402b63931b813ce81a1d49f8d4318b1b6a876e1b",
+            "size": 3508
+          },
+          "schedule.json": {
+            "hash_recomputed": true,
+            "sha256": "07a96bc51cf6092f327cf7ff0f107e833d84922e85732039fb6d11073c534a92",
+            "size": 53352
+          },
+          "summary.csv": {
+            "hash_recomputed": true,
+            "sha256": "d25f5a5b43cfc046ea42abfb440b7522969adedcfa71dabf4d1a543f25123906",
+            "size": 62009
+          },
+          "windows.csv": {
+            "hash_recomputed": true,
+            "sha256": "fbcc7c02c5c9edf1ec232db4a21388c17dba1afc5a28609d2061ace8c97d373d",
+            "size": 459285
+          }
+        },
+        "run_id": "v4s5_matrix_seed2"
+      },
+      {
+        "files": {
+          "analysis.json": {
+            "hash_recomputed": true,
+            "sha256": "e8f22e3e2f133d40a341b9394e8b7b2e28abd3a2d27f44ac70bb46c23718a264",
+            "size": 987
+          },
+          "raw_samples.bin": {
+            "hash_recomputed": true,
+            "sha256": "3a7c6ea562dc69a5fbaa539d54ff6204646522c22c10ccef2c694d983680be87",
+            "size": 43151776
+          },
+          "run.json": {
+            "hash_recomputed": true,
+            "sha256": "a1f09af18574eb09f70bf8205358cc32d3f9e1fa2963377c60bafe8fabc058e3",
+            "size": 3509
+          },
+          "schedule.json": {
+            "hash_recomputed": true,
+            "sha256": "30ae12ad2975b95dfe91f8a7ccc1f5791cb4953f41e2ddd866ea344d0f2f6a35",
+            "size": 53367
+          },
+          "summary.csv": {
+            "hash_recomputed": true,
+            "sha256": "278a4b6a5ee854f9a50da864aab41ea65965b3e0690aa87485d8f98f96975fce",
+            "size": 61863
+          },
+          "windows.csv": {
+            "hash_recomputed": true,
+            "sha256": "dd6c469da2d655d1238c8e897890e8125187169c5a232653379fbed5f03a01a8",
+            "size": 460943
+          }
+        },
+        "run_id": "v4s5_matrix_seed3"
+      },
+      {
+        "files": {
+          "analysis.json": {
+            "hash_recomputed": true,
+            "sha256": "ec59a44ec245cd0b7008df250233cae0d071c9db9e5804b06c33d7529c1a2484",
+            "size": 1010
+          },
+          "raw_samples.bin": {
+            "hash_recomputed": true,
+            "sha256": "cdcaa3187b5b9496c0a55d319c7ed42a4c9e5782d6b7eab149bb83ccf48f8ced",
+            "size": 43153200
+          },
+          "run.json": {
+            "hash_recomputed": true,
+            "sha256": "08450badfc3fa0c7caa9d9643ad53dee5461264d4cd26be3e447afba07b40289",
+            "size": 3510
+          },
+          "schedule.json": {
+            "hash_recomputed": true,
+            "sha256": "a4d4129a048a95743d5fd43321a77e461e75c85bac41652718228f2857116b78",
+            "size": 53682
+          },
+          "summary.csv": {
+            "hash_recomputed": true,
+            "sha256": "aaa5494c4fa19a506570249293d9555103b41dc54a2831a67388695474714fa6",
+            "size": 62094
+          },
+          "windows.csv": {
+            "hash_recomputed": true,
+            "sha256": "7aaea551be2746f5d03218717d25bc2f63119730879f152b73a213d4ea68db90",
+            "size": 460626
+          }
+        },
+        "run_id": "v4s5_matrix_seed4"
+      },
+      {
+        "files": {
+          "analysis.json": {
+            "hash_recomputed": true,
+            "sha256": "9a13b379360346057877726831bb1e508a032339d3ffc0f9504feb7358a85011",
+            "size": 1001
+          },
+          "raw_samples.bin": {
+            "hash_recomputed": true,
+            "sha256": "4a0b8e2dbcb7233570825cc2efcdeb959a6406a2eb04833f5dc4bd7c73329b1c",
+            "size": 43152176
+          },
+          "run.json": {
+            "hash_recomputed": true,
+            "sha256": "2b194749af977c41284d2047523b2793529590de3ff20e0fac3b54c7801a914c",
+            "size": 3510
+          },
+          "schedule.json": {
+            "hash_recomputed": true,
+            "sha256": "fba5b1e447213a674e7bfa906fe4bd9f82a320ce25dde1be1649ce10cdfbe1d5",
+            "size": 53442
+          },
+          "summary.csv": {
+            "hash_recomputed": true,
+            "sha256": "2410fd71ca9b47ccd1fa73fcaea0de105e68af61ff1feaf41f09c90fad7a85e4",
+            "size": 62083
+          },
+          "windows.csv": {
+            "hash_recomputed": true,
+            "sha256": "0d1fe3c184d390e824a338dfcef555c0b241fc8d80c75dc2cebaef57d4a3c1ee",
+            "size": 460130
+          }
+        },
+        "run_id": "v4s5_matrix_seed5"
+      },
+      {
+        "files": {
+          "analysis.json": {
+            "hash_recomputed": true,
+            "sha256": "b237becd13e95ee4a894027187de177354094b1c78a43ff58ffbc2412e59139a",
+            "size": 1055
+          },
+          "raw_samples.bin": {
+            "hash_recomputed": true,
+            "sha256": "c9798be93337f2e5cb6afd79e234ca4ed187908628460a7fe17a19dc7bd86809",
+            "size": 43151744
+          },
+          "run.json": {
+            "hash_recomputed": true,
+            "sha256": "988ab3f9465f3c4f959fc78815b6e831c49858666105e7f6af32029b00342b5c",
+            "size": 3516
+          },
+          "schedule.json": {
+            "hash_recomputed": true,
+            "sha256": "0d4d71319da13475c96239fa6d924c3126212327f7c14e03b104d05360527d5c",
+            "size": 53845
+          },
+          "summary.csv": {
+            "hash_recomputed": true,
+            "sha256": "f77cbfcb54703625613620cd7d476a4143a8cbf40e88a65ba2748bd576ec3386",
+            "size": 61827
+          },
+          "windows.csv": {
+            "hash_recomputed": true,
+            "sha256": "81fe7706f915be77146fbe37a96fe0a888cf6215ffe0052243c6be0578e280a3",
+            "size": 459400
+          }
+        },
+        "run_id": "v4s5_scramble_seed901"
+      },
+      {
+        "files": {
+          "analysis.json": {
+            "hash_recomputed": true,
+            "sha256": "d193a37243367f7c9f8bd4d117fa74a034fce6a6bc780e48c2b984372f86b29e",
+            "size": 1051
+          },
+          "raw_samples.bin": {
+            "hash_recomputed": true,
+            "sha256": "4a2c629ec889292bcdd4b8392cdc4be5306375db590a7a4532bbeb0c294c4322",
+            "size": 43152080
+          },
+          "run.json": {
+            "hash_recomputed": true,
+            "sha256": "14f1c9289498bcf7622c6d9ef742ed1f6dee5b13755eb4be48fcff227d6ff890",
+            "size": 3514
+          },
+          "schedule.json": {
+            "hash_recomputed": true,
+            "sha256": "530e32d6aee527ae00f054aacc1a62a86ab586bea5a24dca6ecb47ac5f6151a7",
+            "size": 52674
+          },
+          "summary.csv": {
+            "hash_recomputed": true,
+            "sha256": "c35cff04118858750387a9faf21803a2b1c88e67a52d476e042453da7e2dfcda",
+            "size": 69035
+          },
+          "windows.csv": {
+            "hash_recomputed": true,
+            "sha256": "716089e3a8d9509454e5578935c451c49757fca2cf52a47e54f016cb80e3e2fa",
+            "size": 464854
+          }
+        },
+        "run_id": "v4s5_silent_seed900"
+      }
+    ]
+  },
+  "manifest_excludes_itself": true,
+  "null_seed": 65005,
+  "official_closure_status_unchanged": "PARTIAL",
+  "outputs": {
+    "chart_calibration.json": {
+      "sha256": "b9f5c30ebdc044ec52a2993984932f3a99768dfa76d7ede7a207912419aa6fcf",
+      "size": 615319
+    },
+    "execution_relation.json": {
+      "sha256": "f256ef4140bb32c78fd11dab320769d93980da67ee951b9a63adb89b041b7894",
+      "size": 348234
+    },
+    "gate_layer_reconciliation.json": {
+      "sha256": "967298c8149dd2d5d586640e109e5c174d47dd5ce35f25d789b16798d6c466d6",
+      "size": 1415
+    },
+    "heldout_equivariance.json": {
+      "sha256": "6f62f60775cda3c33fe70e04a6992545887fa8b3469e46cc2f324cd06a049b03",
+      "size": 357378
+    },
+    "ordered_path_analysis.json": {
+      "sha256": "10530f32839cea34362975a1a552676e1960bc4573fc95527c08f3c23795033a",
+      "size": 729220
+    },
+    "phase_equivariance.json": {
+      "sha256": "7f81160c54c69519637472aac820476c2ef9624870200ee39cd0dbb16aeb4c80",
+      "size": 187712
+    },
+    "pseudo_permutation_covariance.json": {
+      "sha256": "1680a82bb5177c2605fbef9c16798aad33f433eaa3533901b7638a0361aabbc5",
+      "size": 146496
+    },
+    "route_conjugacy.json": {
+      "sha256": "a3c8d38a4825cc2f26fabdad5051324de4b0c4448dc223c7844319fb4799b29e",
+      "size": 140626
+    },
+    "seed4_transfer_report.json": {
+      "sha256": "b6e9f5bd0ee9af184e3c2c8fd10a480ca131e4136f4c7b9e8c3c8fe07f75fc8d",
+      "size": 50388
+    }
+  },
+  "schema_id": "CAT_CAS_PHASE6B5C_ANALYSIS_MANIFEST_V1",
+  "schema_version": "1.0.0"
+}

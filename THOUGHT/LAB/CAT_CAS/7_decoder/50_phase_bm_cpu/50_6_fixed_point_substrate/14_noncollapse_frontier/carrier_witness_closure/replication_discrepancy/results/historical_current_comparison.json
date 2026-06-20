@@ -1,0 +1,153 @@
+{
+  "current_raw_evidence_exists": true,
+  "current_route_pass_counts": {
+    "2:3": 2,
+    "4:5": 1
+  },
+  "exact_equivalence_can_be_proven": false,
+  "historical_raw_evidence_exists": false,
+  "historical_route_pass_counts": {
+    "2:3": 2,
+    "4:5": 6
+  },
+  "metadata": {
+    "analysis_tool_sha256": "edbd70277ad962bec19334d26a78ed997798eccc78a2352785c7ecc305feb4e5",
+    "analyzer_sha256": "aa1ca5b0ce911ce931b036d023981eb1589d316e0adf88b66eb494ada1c5a50c",
+    "campaign_manifest_sha256": "cbcd2a19d6dd3bc478244f77888aa87eb043003a7685caa17ff13fe4d47e6487",
+    "generated_utc": "2026-06-19T20:00:00Z",
+    "source_campaign_id": "phase6b5_t48_d32b1bed_20260619",
+    "source_commit": "d32b1bed0deae1b907a07eeed018b924244e9ea2"
+  },
+  "metrics": {
+    "phase_corr_null": {
+      "current_mean": -0.032382364776013396,
+      "current_range": [
+        -0.11280200813128541,
+        0.10539845463241046
+      ],
+      "historical_mean": -0.010294892668118482,
+      "historical_range": [
+        -0.03345257045972795,
+        0.021099270003005356
+      ],
+      "mean_shift_current_minus_historical": -0.022087472107894912
+    },
+    "phase_corr_true": {
+      "current_mean": 0.9832627887943913,
+      "current_range": [
+        0.8352032478196775,
+        0.9993170467202691
+      ],
+      "historical_mean": 0.9993926944679382,
+      "historical_range": [
+        0.996249937594773,
+        0.9998780262449869
+      ],
+      "mean_shift_current_minus_historical": -0.016129905673546885
+    },
+    "phase_delta": {
+      "current_mean": 1.0156451535704043,
+      "current_range": [
+        0.893202945432549,
+        1.1121190548515545
+      ],
+      "historical_mean": 1.0096875871360569,
+      "historical_range": [
+        0.9777789261995884,
+        1.033323438517159
+      ],
+      "mean_shift_current_minus_historical": 0.005957566434347417
+    },
+    "pseudo_declared_match": {
+      "current_mean": 0.24652777777777776,
+      "current_range": [
+        0.125,
+        0.4166666666666667
+      ],
+      "historical_mean": 0.22222222222222224,
+      "historical_range": [
+        0.18,
+        0.26
+      ],
+      "mean_shift_current_minus_historical": 0.024305555555555525
+    },
+    "pseudo_reject_floor": {
+      "current_mean": 0.9583333333333334,
+      "current_range": [
+        0.5,
+        1.0
+      ],
+      "historical_mean": 0.998062015503876,
+      "historical_range": [
+        0.9767441860465116,
+        1.0
+      ],
+      "mean_shift_current_minus_historical": -0.039728682170542595
+    },
+    "real_accuracy": {
+      "current_mean": 0.9236111111111112,
+      "current_range": [
+        0.375,
+        1.0
+      ],
+      "historical_mean": 0.995,
+      "historical_range": [
+        0.9533333333333334,
+        1.0
+      ],
+      "mean_shift_current_minus_historical": -0.07138888888888884
+    },
+    "real_mode_floor": {
+      "current_mean": 0.8580026455026455,
+      "current_range": [
+        0.1111111111111111,
+        1.0
+      ],
+      "historical_mean": 0.9863095238095237,
+      "historical_range": [
+        0.8857142857142857,
+        1.0
+      ],
+      "mean_shift_current_minus_historical": -0.12830687830687826
+    },
+    "real_vs_pseudo_floor": {
+      "current_mean": 0.8891576016576018,
+      "current_range": [
+        0.7,
+        1.0
+      ],
+      "historical_mean": 0.95283470721979,
+      "historical_range": [
+        0.9102564102564102,
+        0.9848484848484849
+      ],
+      "mean_shift_current_minus_historical": -0.0636771055621882
+    },
+    "wrong_actual_match": {
+      "current_mean": 0.9583333333333334,
+      "current_range": [
+        0.75,
+        1.0
+      ],
+      "historical_mean": 0.9927777777777779,
+      "historical_range": [
+        0.9333333333333333,
+        1.0
+      ],
+      "mean_shift_current_minus_historical": -0.0344444444444445
+    },
+    "wrong_declared_match": {
+      "current_mean": 0.003472222222222222,
+      "current_range": [
+        0.0,
+        0.041666666666666664
+      ],
+      "historical_mean": 0.0011111111111111111,
+      "historical_range": [
+        0.0,
+        0.013333333333333334
+      ],
+      "mean_shift_current_minus_historical": 0.0023611111111111107
+    }
+  }
+}

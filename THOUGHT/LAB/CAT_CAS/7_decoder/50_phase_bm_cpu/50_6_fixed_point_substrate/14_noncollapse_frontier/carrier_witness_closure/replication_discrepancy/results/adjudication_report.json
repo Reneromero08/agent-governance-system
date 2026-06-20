@@ -1,0 +1,93 @@
+{
+  "basis": [
+    "Frozen current route 4:5 passes 1/6 versus historical 6/6.",
+    "Analyzer SHA-256 and resolved codebooks are identical.",
+    "Trial count differs materially (48 versus 300), but historical raw samples and binary hash are absent, so a unique causal layer cannot be proven.",
+    "Seed 4 has a large real-classification failure, not a marginal rho-threshold miss."
+  ],
+  "claim_ceiling": "Replication adjudication of a strong physical carrier signal; no physical geometry, restoration, coupling, orientation, or wall claim.",
+  "diagnostic_nonphase_pass_counts_route_4_5": {
+    "centroid_even_real_only": 1,
+    "centroid_leave_one_seed_out": 1,
+    "centroid_route_pooled": 1,
+    "partition_leave_one_trial_block_out": 2,
+    "partition_mod4_holdout_0": 2,
+    "partition_mod4_holdout_1": 3,
+    "partition_mod4_holdout_2": 3,
+    "partition_mod4_holdout_3": 3,
+    "partition_reversed": 2,
+    "pseudo_group_actual": 1,
+    "pseudo_group_declared": 1,
+    "pseudo_group_pooled": 2,
+    "pseudo_group_predicted": 1,
+    "threshold_fixed_adjacent_seed": 1,
+    "threshold_leave_one_seed_out": 0,
+    "threshold_per_mode": 0,
+    "threshold_pooled_route": 0
+  },
+  "material_protocol_differences": [
+    {
+      "classification": "MATERIAL",
+      "current": 48,
+      "field": "trial_counts",
+      "historical": 300
+    },
+    {
+      "classification": "MATERIAL",
+      "current": "complete <Qd> timing samples",
+      "field": "raw_capture",
+      "historical": "absent"
+    }
+  ],
+  "metadata": {
+    "analysis_tool_sha256": "edbd70277ad962bec19334d26a78ed997798eccc78a2352785c7ecc305feb4e5",
+    "analyzer_sha256": "aa1ca5b0ce911ce931b036d023981eb1589d316e0adf88b66eb494ada1c5a50c",
+    "campaign_manifest_sha256": "cbcd2a19d6dd3bc478244f77888aa87eb043003a7685caa17ff13fe4d47e6487",
+    "generated_utc": "2026-06-19T20:00:00Z",
+    "source_campaign_id": "phase6b5_t48_d32b1bed_20260619",
+    "source_commit": "d32b1bed0deae1b907a07eeed018b924244e9ea2"
+  },
+  "official_verdicts_unchanged": true,
+  "preregistration": {
+    "confirm_hypothesis": "A second T48 route-4:5 result near 1/6 with similar metric distributions supports reproducible current-protocol failure/session-stable discrepancy.",
+    "controls": [
+      "silent",
+      "scramble"
+    ],
+    "estimated_raw_storage": "approximately 605 MB",
+    "estimated_runtime": "approximately 3.6 hours using the prior frozen matrix",
+    "frozen_analyzer_sha256": "aa1ca5b0ce911ce931b036d023981eb1589d316e0adf88b66eb494ada1c5a50c",
+    "frozen_thresholds": "unchanged official seven-gate battery; train-real 5th-percentile rho per run",
+    "higher_n_status": "NOT_YET_JUSTIFIED_BEFORE_SAME_N_REPLICATION",
+    "justification": "Independent same-N replication separates session drift from a trial-count explanation without changing the gate.",
+    "reject_hypothesis": "A second T48 route-4:5 result near historical closure with stable controls supports session/route nonstationarity and triggers a third preregistered adjudication run.",
+    "routes": [
+      "4:5",
+      "2:3"
+    ],
+    "scientific_question": "Is the 1/6 route-4:5 result reproducible under the identical frozen T48 acquisition and official analyzer?",
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "stop_conditions": [
+      "temperature >= 68 C",
+      "affinity failure",
+      "P-state failure",
+      "TSC failure",
+      "disk/raw-writer/process failure"
+    ],
+    "trials_per_family": 48
+  },
+  "primary_classification": "HISTORICAL_RESULT_NOT_REPRODUCED",
+  "recommendation": "REPEAT_T48_SAME_PROTOCOL",
+  "secondary_findings": [
+    "Sparse per-mode test denominators make rho floors threshold/grouping sensitive.",
+    "Current raw timing, P-state, temperature, and control provenance are complete.",
+    "No single retained telemetry association establishes physical nonstationarity causally."
+  ]
+}
