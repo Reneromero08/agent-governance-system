@@ -1,120 +1,73 @@
 #!/usr/bin/env python3
-"""Read-only preflight for the authorized combined campaign on catcas."""
+"""Read-only acquisition preflight for the authorized combined campaign."""
 from __future__ import annotations
-
-import argparse
-import json
-import os
+import argparse, hashlib, json, os, shutil, subprocess
 from pathlib import Path
-import shutil
-import subprocess
 from typing import Any
-
 from generate_campaign_plan import verify
-
-PACKAGE_REL = "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign"
-RATIFICATION_REL = "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/gate_r/PROJECT_OWNER_RATIFICATION.json"
-
-
-def command(*args: str, cwd: Path | None = None) -> tuple[int, str]:
-    proc = subprocess.run(args, cwd=cwd, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=False)
-    return proc.returncode, proc.stdout.strip()
-
-
-def first_k10temp() -> str | None:
-    for name in sorted(Path("/sys/class/hwmon").glob("hwmon*/name")):
-        try:
-            if name.read_text().strip() == "k10temp":
-                candidate = name.parent / "temp1_input"
-                if candidate.is_file():
-                    return str(candidate)
-        except OSError:
-            pass
-    return None
-
-
-def cpu_flags() -> set[str]:
-    flags: set[str] = set()
-    try:
-        for line in Path("/proc/cpuinfo").read_text().splitlines():
-            if line.startswith("flags"):
-                flags.update(line.split(":", 1)[1].split())
-                break
-    except OSError:
-        pass
-    return flags
-
-
-def inspect(plan_dir: Path, repo_root: Path, output_root: Path, min_free_gb: float) -> dict[str, Any]:
-    manifest = json.loads((plan_dir / "campaign_manifest.json").read_text())
-    plan = json.loads((plan_dir / "campaign_plan.json").read_text())
-    source_commit = manifest.get("source_commit")
-    rc_head, head = command("git", "rev-parse", "HEAD", cwd=repo_root)
-    rc_status, status = command("git", "status", "--short", cwd=repo_root)
-    rc_ancestor, _ = command("git", "merge-base", "--is-ancestor", str(source_commit), "HEAD", cwd=repo_root)
-    rc_diff, _ = command("git", "diff", "--quiet", str(source_commit), "HEAD", "--", PACKAGE_REL, RATIFICATION_REL, cwd=repo_root)
-    flags = cpu_flags()
-    cpus = os.cpu_count() or 0
-    msr = {str(core): os.access(f"/dev/cpu/{core}/msr", os.R_OK) for core in range(min(cpus, 6))}
-    cpufreq = {
-        str(core): all(Path(f"/sys/devices/system/cpu/cpu{core}/cpufreq/{name}").is_file() for name in ("scaling_min_freq", "scaling_max_freq"))
-        for core in range(min(cpus, 6))
-    }
-    usage = shutil.disk_usage(output_root.parent if output_root.parent.exists() else repo_root)
-    plan_errors = verify(plan_dir)
-    checks = {
-        "running_as_root": os.geteuid() == 0,
-        "cpu_count_at_least_6": cpus >= 6,
-        "constant_tsc": "constant_tsc" in flags,
-        "nonstop_tsc": "nonstop_tsc" in flags,
-        "k10temp_available": first_k10temp() is not None,
-        "msr_readable_cores_0_5": len(msr) == 6 and all(msr.values()),
-        "cpufreq_controls_cores_0_5": len(cpufreq) == 6 and all(cpufreq.values()),
-        "free_space_sufficient": usage.free >= int(min_free_gb * 1024**3),
-        "repo_head_resolved": rc_head == 0,
-        "repo_clean": rc_status == 0 and status == "",
-        "plan_source_is_ancestor": rc_ancestor == 0,
-        "authorized_package_unchanged_since_plan": rc_diff == 0,
-        "plan_sources_agree": source_commit == plan.get("source_commit"),
-        "plan_manifest_valid": not plan_errors,
-        "output_path_unused": not output_root.exists(),
-        "restoration_not_authorized": plan.get("restoration_authorized") is False and manifest.get("restoration_authorized") is False,
-    }
-    return {
-        "schema_id": "CAT_CAS_PHASE6_COMBINED_PREFLIGHT_V1",
-        "host": os.uname().nodename,
-        "repo_root": str(repo_root),
-        "repo_head": head if rc_head == 0 else None,
-        "plan_source_commit": source_commit,
-        "plan_dir": str(plan_dir),
-        "plan_sha256": manifest.get("campaign_plan", {}).get("sha256"),
-        "output_root": str(output_root),
-        "cpu_count": cpus,
-        "k10temp_path": first_k10temp(),
-        "msr_readable": msr,
-        "cpufreq_controls": cpufreq,
-        "free_bytes": usage.free,
-        "minimum_free_gb": min_free_gb,
-        "plan_validation_errors": plan_errors,
-        "checks": checks,
-        "acquisition_ready": all(checks.values()),
-    }
-
-
-def main() -> int:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--plan-dir", type=Path, required=True)
-    parser.add_argument("--repo-root", type=Path, required=True)
-    parser.add_argument("--output-root", type=Path, required=True)
-    parser.add_argument("--report", type=Path, required=True)
-    parser.add_argument("--min-free-gb", type=float, default=20.0)
-    args = parser.parse_args()
-    report = inspect(args.plan_dir.resolve(), args.repo_root.resolve(), args.output_root.resolve(), args.min_free_gb)
-    args.report.parent.mkdir(parents=True, exist_ok=True)
-    args.report.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    print(json.dumps(report, indent=2, sort_keys=True))
-    return 0 if report["acquisition_ready"] else 2
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())
+ROUTES={"v4s5":(4,5),"v2s3":(2,3)}
+def sha(path:Path)->str:
+ h=hashlib.sha256()
+ with path.open("rb") as f:
+  for chunk in iter(lambda:f.read(1024*1024),b""):h.update(chunk)
+ return h.hexdigest()
+def command(*args:str,cwd:Path|None=None)->tuple[int,str]:
+ p=subprocess.run(args,cwd=cwd,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,check=False);return p.returncode,p.stdout.strip()
+def first_k10temp()->str|None:
+ for name in sorted(Path("/sys/class/hwmon").glob("hwmon*/name")):
+  try:
+   if name.read_text().strip()=="k10temp" and (name.parent/"temp1_input").is_file():return str(name.parent/"temp1_input")
+  except OSError:pass
+ return None
+def cpu_flags()->set[str]:
+ try:
+  for line in Path("/proc/cpuinfo").read_text().splitlines():
+   if line.startswith("flags"):return set(line.split(":",1)[1].split())
+ except OSError:pass
+ return set()
+def session_bundles_valid(root:Path)->bool:
+ dirs=sorted(p for p in root.iterdir() if p.is_dir()) if root.is_dir() else []
+ if len(dirs)!=12:return False
+ for directory in dirs:
+  try:
+   m=json.loads((directory/"session_manifest.json").read_text())
+   for name,b in m["files"].items():
+    p=directory/name
+    if not p.is_file() or p.stat().st_size!=b["size"] or sha(p)!=b["sha256"]:return False
+  except (OSError,KeyError,ValueError,json.JSONDecodeError):return False
+ return True
+def inspect(plan_dir:Path,repo_root:Path,output_root:Path,min_free_gb:float)->dict[str,Any]:
+ manifest=json.loads((plan_dir/"campaign_manifest.json").read_text());plan=json.loads((plan_dir/"campaign_plan.json").read_text());source=manifest.get("source_commit")
+ bundle_path=repo_root/"source_bundle.json";bundle=json.loads(bundle_path.read_text()) if bundle_path.is_file() else None
+ runner=repo_root/"combined_pdn_runner";binding_path=repo_root/"COMBINED_CAMPAIGN_BINDING.json";schedules=repo_root/"compiled_sessions"
+ binding=json.loads(binding_path.read_text()) if binding_path.is_file() else {}
+ if bundle:
+  head=bundle.get("executor_commit");source_ok=bundle.get("plan_source_verified") is True;clean=True;package_ok=bundle.get("frozen_inputs_verified") is True
+ else:
+  rc_head,head=command("git","rev-parse","HEAD",cwd=repo_root);rc_status,status=command("git","status","--short",cwd=repo_root);rc_ancestor,_=command("git","merge-base","--is-ancestor",str(source),"HEAD",cwd=repo_root)
+  source_ok=rc_ancestor==0;clean=rc_status==0 and status=="";package_ok=rc_head==0
+ flags=cpu_flags();cpus=os.cpu_count() or 0
+ msr={str(c):os.access(f"/dev/cpu/{c}/msr",os.R_OK) for c in range(min(cpus,6))}
+ cpufreq={str(c):all(os.access(f"/sys/devices/system/cpu/cpu{c}/cpufreq/{n}",os.R_OK|os.W_OK) for n in ("scaling_min_freq","scaling_max_freq")) for c in range(min(cpus,6))}
+ usage=shutil.disk_usage(output_root.parent if output_root.parent.exists() else repo_root);plan_errors=verify(plan_dir)
+ plan_hash=sha(plan_dir/"campaign_plan.json");manifest_hash=sha(plan_dir/"campaign_manifest.json")
+ route_ok=all(v!=s and v<cpus and s<cpus for v,s in ROUTES.values()) and {x.get("route") for x in plan.get("sessions",[])}==set(ROUTES)
+ checks={
+  "running_as_root":os.geteuid()==0,"cpu_count_at_least_6":cpus>=6,"route_cores_online_and_distinct":route_ok,
+  "constant_tsc":"constant_tsc" in flags,"nonstop_tsc":"nonstop_tsc" in flags,"k10temp_available":first_k10temp() is not None,
+  "msr_readable_cores_0_5":len(msr)==6 and all(msr.values()),"cpufreq_controls_readable_writable_cores_0_5":len(cpufreq)==6 and all(cpufreq.values()),
+  "free_space_sufficient":usage.free>=int(min_free_gb*1024**3),"working_tree_or_source_bundle_acceptable":clean,
+  "plan_source_verified":source_ok,"authorized_package_unchanged_since_plan":package_ok,"plan_sources_agree":source==plan.get("source_commit"),
+  "plan_manifest_valid":not plan_errors,"canonical_plan_binding_valid":plan_hash==binding.get("campaign_plan",{}).get("sha256") and manifest_hash==binding.get("campaign_manifest_sha256"),
+  "executor_exists_and_executable":runner.is_file() and os.access(runner,os.X_OK),
+  "executor_commit_recorded":isinstance(head,str) and len(head)==40 and (not bundle or head==bundle.get("executor_commit")),
+  "executor_binary_hash_valid":bool(bundle) and runner.is_file() and sha(runner)==bundle.get("executor_sha256"),
+  "required_tests_pass":bool(bundle) and bundle.get("strict_tests_pass") is True and bundle.get("sanitizers_pass") is True,
+  "all_twelve_schedules_compiled":session_bundles_valid(schedules) and bool(bundle) and bundle.get("validation_sessions_passed")==12,
+  "output_path_unused":not output_root.exists(),"restoration_not_authorized":plan.get("restoration_authorized") is False and manifest.get("restoration_authorized") is False,
+ }
+ return {"schema_id":"CAT_CAS_PHASE6_COMBINED_PREFLIGHT_V2","host":os.uname().nodename,"repo_root":str(repo_root),"source_bundle_mode":bool(bundle),"executor_commit":head,"plan_source_commit":source,"plan_dir":str(plan_dir),"plan_sha256":plan_hash,"campaign_manifest_sha256":manifest_hash,"output_root":str(output_root),"cpu_count":cpus,"k10temp_path":first_k10temp(),"msr_readable":msr,"cpufreq_controls":cpufreq,"free_bytes":usage.free,"minimum_free_gb":min_free_gb,"plan_validation_errors":plan_errors,"checks":checks,"acquisition_ready":all(checks.values())}
+def main()->int:
+ p=argparse.ArgumentParser();p.add_argument("--plan-dir",type=Path,required=True);p.add_argument("--repo-root",type=Path,required=True);p.add_argument("--output-root",type=Path,required=True);p.add_argument("--report",type=Path,required=True);p.add_argument("--min-free-gb",type=float,default=20.0);a=p.parse_args()
+ report=inspect(a.plan_dir.resolve(),a.repo_root.resolve(),a.output_root.resolve(),a.min_free_gb);a.report.parent.mkdir(parents=True,exist_ok=True);a.report.write_text(json.dumps(report,indent=2,sort_keys=True)+"\n");print(json.dumps(report,indent=2,sort_keys=True));return 0 if report["acquisition_ready"] else 2
+if __name__=="__main__":raise SystemExit(main())

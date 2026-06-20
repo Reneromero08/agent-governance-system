@@ -38,9 +38,12 @@ def runner_command(runner: Path, session_dir: Path, output_dir: Path, route: str
         "--off-window-s", str(args.off_window_s),
         "--read-hz", str(args.read_hz),
         "--temp-veto-c", str(args.temp_veto_c),
+        "--executor-commit", str(getattr(args, "executor_commit", "0" * 40)),
     ]
-    if args.runner_validate_only:
+    if getattr(args, "runner_validate_only", False):
         command.append("--validate-only")
+    else:
+        command.append("--hardware")
     return command
 
 
@@ -71,13 +74,14 @@ def execute(args: argparse.Namespace) -> int:
     plan = load_json(plan_dir / "campaign_plan.json")
     manifest = load_json(plan_dir / "campaign_manifest.json")
     sessions = selected_sessions(plan, args.session)
-    preflight_path = evidence_root.with_name(evidence_root.name + ".preflight.json")
-    preflight = inspect_preflight(plan_dir, repo_root, evidence_root, args.min_free_gb)
-    preflight_path.parent.mkdir(parents=True, exist_ok=True)
-    preflight_path.write_text(json.dumps(preflight, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    if not preflight["acquisition_ready"]:
-        print(json.dumps(preflight, indent=2, sort_keys=True), file=sys.stderr)
-        return 2
+    if not args.runner_validate_only:
+        preflight_path = evidence_root.with_name(evidence_root.name + ".preflight.json")
+        preflight = inspect_preflight(plan_dir, repo_root, evidence_root, args.min_free_gb)
+        preflight_path.parent.mkdir(parents=True, exist_ok=True)
+        preflight_path.write_text(json.dumps(preflight, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        if not preflight["acquisition_ready"]:
+            print(json.dumps(preflight, indent=2, sort_keys=True), file=sys.stderr)
+            return 2
 
     evidence_root.mkdir(parents=True, exist_ok=False)
     (evidence_root / "sessions").mkdir()
@@ -142,6 +146,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--temp-veto-c", type=float, default=68.0)
     parser.add_argument("--min-free-gb", type=float, default=20.0)
     parser.add_argument("--runner-validate-only", action="store_true")
+    parser.add_argument("--executor-commit", default="0" * 40)
     parser.add_argument("--dry-run", action="store_true")
     return parser.parse_args()
 

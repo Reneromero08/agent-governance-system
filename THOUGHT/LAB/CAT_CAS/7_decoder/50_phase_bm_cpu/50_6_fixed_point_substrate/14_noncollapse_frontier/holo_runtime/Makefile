@@ -1,5 +1,6 @@
 CC ?= gcc
-CFLAGS ?= -std=c11 -O2 -Wall -Wextra -Werror
+CFLAGS ?= -std=c11 -O2 -pthread -Wall -Wextra -Werror
+LDLIBS ?= -lm
 
 RUNNER := combined_pdn_runner
 
@@ -7,8 +8,8 @@ RUNNER := combined_pdn_runner
 
 all: $(RUNNER)
 
-$(RUNNER): combined_pdn_runner.c
-	$(CC) $(CFLAGS) $< -o $@
+$(RUNNER): combined_pdn_runner.c combined_pdn_hardware.c combined_pdn_hardware.h
+	$(CC) $(CFLAGS) combined_pdn_runner.c combined_pdn_hardware.c -o $@ $(LDLIBS)
 
 test: $(RUNNER)
 	python3 test_combined_pdn_runner.py

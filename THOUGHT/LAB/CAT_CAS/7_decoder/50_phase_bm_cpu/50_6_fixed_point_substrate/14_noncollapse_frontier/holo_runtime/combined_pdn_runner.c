@@ -1,4 +1,6 @@
 #define _GNU_SOURCE
+#include "combined_pdn_hardware.h"
+
 #include <ctype.h>
 #include <errno.h>
 #include <stdarg.h>
@@ -9,285 +11,116 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-#define PATH_MAX_LOCAL 4096
 #define SHA_LEN 64
 
-typedef struct {
-    const char *session_dir;
-    const char *output_dir;
-    int victim;
-    int sender;
-    long pin_khz;
-    double slot_s;
-    double off_window_s;
-    long read_hz;
-    double temp_veto_c;
-    int validate_only;
-} Args;
-
-typedef struct {
-    char session_id[128];
-    long window_count;
-    long driven_windows;
-    long sender_off_windows;
-} SessionInfo;
-
-static void fail(const char *fmt, ...) {
-    va_list ap;
-    va_start(ap, fmt);
-    fputs("ERROR: ", stderr);
-    vfprintf(stderr, fmt, ap);
-    fputc('\n', stderr);
-    va_end(ap);
-    exit(2);
+static void die(const char *fmt, ...) {
+    va_list ap; va_start(ap, fmt); fputs("ERROR: ", stderr); vfprintf(stderr, fmt, ap);
+    fputc('\n', stderr); va_end(ap); exit(2);
 }
-
-static int join(char *out, size_t out_size, const char *root, const char *leaf) {
-    if (!root || !leaf || leaf[0] == '/' || strstr(leaf, "..") || strchr(leaf, '\'')) return -1;
-    int n = snprintf(out, out_size, "%s/%s", root, leaf);
-    return n < 0 || (size_t)n >= out_size ? -1 : 0;
+static int path_join(char *out,size_t n,const char *a,const char *b){
+    if(!a||!b||b[0]=='/'||strstr(b,"..")) return -1;
+    int k=snprintf(out,n,"%s/%s",a,b); return k<0||(size_t)k>=n?-1:0;
 }
-
-static int exists(const char *path) {
-    struct stat st;
-    return stat(path, &st) == 0;
+static long file_size(const char *p){struct stat s;return stat(p,&s)||!S_ISREG(s.st_mode)?-1:(long)s.st_size;}
+static int exists(const char *p){struct stat s;return stat(p,&s)==0;}
+static char *slurp(const char *p){
+    FILE*f=fopen(p,"rb"); if(!f)die("open %s: %s",p,strerror(errno));
+    if(fseek(f,0,SEEK_END)) die("seek %s",p);
+    long z=ftell(f);
+    if(z<0||fseek(f,0,SEEK_SET)) die("seek %s",p);
+    char*b=calloc((size_t)z+1,1); if(!b)die("oom"); if(z&&fread(b,1,(size_t)z,f)!=(size_t)z)die("read %s",p); fclose(f); return b;
 }
-
-static long fsize(const char *path) {
-    struct stat st;
-    if (stat(path, &st) != 0 || !S_ISREG(st.st_mode)) return -1;
-    return (long)st.st_size;
+static const char *key(const char*j,const char*k){char n[160];snprintf(n,sizeof(n),"\"%s\"",k);return strstr(j,n);}
+static const char *value(const char*j,const char*k){const char*p=key(j,k);if(!p||(p=strchr(p,':'))==NULL)return NULL;do{p++;}while(isspace((unsigned char)*p));return p;}
+static int jstr(const char*j,const char*k,char*out,size_t n){const char*p=value(j,k);if(!p||*p!='\"')return-1;const char*q=strchr(++p,'\"');size_t z=q?(size_t)(q-p):n;if(!q||!z||z>=n)return-1;memcpy(out,p,z);out[z]=0;return 0;}
+static int jlong(const char*j,const char*k,long*out){const char*p=value(j,k);if(!p)return-1;char*e;long v=strtol(p,&e,10);if(e==p)return-1;*out=v;return 0;}
+static int jbool(const char*j,const char*k,int*out){const char*p=value(j,k);if(!p)return-1;if(!strncmp(p,"true",4)){*out=1;return 0;}if(!strncmp(p,"false",5)){*out=0;return 0;}return-1;}
+static int jnullable_long(const char*j,const char*k,long*out,int*present){const char*p=value(j,k);if(!p)return-1;if(!strncmp(p,"null",4)){*present=0;*out=0;return 0;}*present=1;return jlong(j,k,out);}
+static int shell_safe(const char*p){if(!p||!*p||strstr(p,".."))return 0;for(;*p;p++)if((unsigned char)*p<32||strchr("';&|`$<>",*p))return 0;return 1;}
+static void sha256(const char*p,char out[65]){
+    if(!shell_safe(p)) die("unsafe path: %s",p);
+    char cmd[CP_PATH_MAX+32];
+    if(snprintf(cmd,sizeof(cmd),"sha256sum '%s'",p)>=(int)sizeof(cmd)) die("path too long");
+    FILE*f=popen(cmd,"r");char line[128];if(!f||!fgets(line,sizeof(line),f))die("sha256 failed");int rc=pclose(f);if(rc==-1||!WIFEXITED(rc)||WEXITSTATUS(rc))die("sha256 failed");
+    for(int i=0;i<SHA_LEN;i++){if(!isxdigit((unsigned char)line[i]))die("invalid sha256 output");out[i]=(char)tolower((unsigned char)line[i]);}out[64]=0;
 }
-
-static char *slurp(const char *path) {
-    FILE *f = fopen(path, "rb");
-    if (!f) fail("open %s: %s", path, strerror(errno));
-    if (fseek(f, 0, SEEK_END) != 0) fail("seek %s", path);
-    long n = ftell(f);
-    if (n < 0 || fseek(f, 0, SEEK_SET) != 0) fail("seek %s", path);
-    char *buf = calloc((size_t)n + 1, 1);
-    if (!buf) fail("oom");
-    if (n && fread(buf, 1, (size_t)n, f) != (size_t)n) fail("read %s", path);
-    fclose(f);
-    return buf;
+static void verify_file(const char*m,const char*root,const char*name){
+    const char*e=key(m,name);long want;char wh[65],p[CP_PATH_MAX],got[65];if(!e)die("manifest missing %s",name);
+    if(jlong(e,"size",&want)||jstr(e,"sha256",wh,sizeof(wh))||strlen(wh)!=64)die("invalid manifest entry %s",name);
+    if(path_join(p,sizeof(p),root,name)||file_size(p)!=want) die("size mismatch for %s",name);
+    sha256(p,got);
+    if(strcmp(wh,got)) die("sha256 mismatch for %s",name);
 }
-
-static const char *key_at(const char *json, const char *key) {
-    char needle[160];
-    snprintf(needle, sizeof(needle), "\"%s\"", key);
-    return strstr(json, needle);
-}
-
-static int json_string(const char *json, const char *key, char *out, size_t out_size) {
-    const char *p = key_at(json, key);
-    if (!p || !(p = strchr(p, ':'))) return -1;
-    for (++p; *p && isspace((unsigned char)*p); ++p) {}
-    if (*p != '"') return -1;
-    const char *q = strchr(++p, '"');
-    if (!q) return -1;
-    size_t n = (size_t)(q - p);
-    if (!n || n >= out_size) return -1;
-    memcpy(out, p, n);
-    out[n] = 0;
-    return 0;
-}
-
-static int json_long(const char *json, const char *key, long *out) {
-    const char *p = key_at(json, key);
-    if (!p || !(p = strchr(p, ':'))) return -1;
-    for (++p; *p && isspace((unsigned char)*p); ++p) {}
-    char *end = NULL;
-    long v = strtol(p, &end, 10);
-    if (end == p) return -1;
-    *out = v;
-    return 0;
-}
-
-static int json_bool(const char *json, const char *key, int *out) {
-    const char *p = key_at(json, key);
-    if (!p || !(p = strchr(p, ':'))) return -1;
-    for (++p; *p && isspace((unsigned char)*p); ++p) {}
-    if (strncmp(p, "true", 4) == 0) { *out = 1; return 0; }
-    if (strncmp(p, "false", 5) == 0) { *out = 0; return 0; }
-    return -1;
-}
-
-static int safe_shell_path(const char *path) {
-    for (const char *p = path; p && *p; ++p) {
-        if ((unsigned char)*p < 32 || strchr("';&|`$<>", *p)) return 0;
+static RunnerArgs parse_args(int ac,char**av){
+    RunnerArgs a={0};a.victim=a.sender=-1;a.pin_khz=1600000;a.slot_s=a.off_window_s=.5;a.read_hz=4000;a.temp_veto_c=68;a.backend=BACKEND_REAL;
+    for(int i=1;i<ac;i++){const char*k=av[i],*v=i+1<ac?av[i+1]:NULL;
+        if(!strcmp(k,"--validate-only"))a.mode=MODE_VALIDATE;
+        else if(!strcmp(k,"--hardware"))a.mode=MODE_HARDWARE;
+        else if(!strcmp(k,"--mock-hardware")){a.mode=MODE_HARDWARE;a.backend=BACKEND_MOCK;}
+        else if(!strcmp(k,"--executor-commit")&&v){a.executor_commit=v;i++;}
+        else if(!strcmp(k,"--session-dir")&&v){a.session_dir=v;i++;}else if(!strcmp(k,"--output-dir")&&v){a.output_dir=v;i++;}
+        else if(!strcmp(k,"--victim")&&v){a.victim=atoi(v);i++;}else if(!strcmp(k,"--sender")&&v){a.sender=atoi(v);i++;}
+        else if(!strcmp(k,"--pin-khz")&&v){a.pin_khz=atol(v);i++;}else if(!strcmp(k,"--slot-s")&&v){a.slot_s=atof(v);i++;}
+        else if(!strcmp(k,"--off-window-s")&&v){a.off_window_s=atof(v);i++;}else if(!strcmp(k,"--read-hz")&&v){a.read_hz=atol(v);i++;}
+        else if(!strcmp(k,"--temp-veto-c")&&v){a.temp_veto_c=atof(v);i++;}else die("unknown or incomplete option: %s",k);
     }
-    return path && *path;
-}
-
-static void sha256_hex(const char *path, char out[SHA_LEN + 1]) {
-    if (!safe_shell_path(path)) fail("unsafe path for sha256: %s", path);
-    char cmd[PATH_MAX_LOCAL + 64];
-    snprintf(cmd, sizeof(cmd), "sha256sum '%s'", path);
-    FILE *p = popen(cmd, "r");
-    if (!p) fail("sha256sum failed");
-    char line[128];
-    if (!fgets(line, sizeof(line), p)) fail("sha256sum no output");
-    int status = pclose(p);
-    if (status == -1 || !WIFEXITED(status) || WEXITSTATUS(status) != 0) fail("sha256sum failed for %s", path);
-    for (int i = 0; i < SHA_LEN; ++i) {
-        if (!isxdigit((unsigned char)line[i])) fail("bad sha256 output");
-        out[i] = (char)tolower((unsigned char)line[i]);
-    }
-    out[SHA_LEN] = 0;
-}
-
-static void verify_manifest_file(const char *manifest, const char *root, const char *name) {
-    const char *entry = key_at(manifest, name);
-    if (!entry) fail("session_manifest missing %s", name);
-    long want_size = -1;
-    char want_sha[SHA_LEN + 1];
-    char path[PATH_MAX_LOCAL], got_sha[SHA_LEN + 1];
-    if (json_long(entry, "size", &want_size) != 0) fail("manifest missing size for %s", name);
-    if (json_string(entry, "sha256", want_sha, sizeof(want_sha)) != 0) fail("manifest missing sha256 for %s", name);
-    if (strlen(want_sha) != SHA_LEN) fail("manifest sha256 length invalid for %s", name);
-    if (join(path, sizeof(path), root, name) != 0) fail("unsafe manifest path %s", name);
-    long got_size = fsize(path);
-    if (got_size != want_size) fail("size mismatch for %s", name);
-    sha256_hex(path, got_sha);
-    if (strcmp(want_sha, got_sha) != 0) fail("sha256 mismatch for %s", name);
-}
-
-static void verify_session_manifest(const char *dir) {
-    char path[PATH_MAX_LOCAL], schema[128];
-    if (join(path, sizeof(path), dir, "session_manifest.json") != 0) fail("bad session path");
-    char *manifest = slurp(path);
-    if (json_string(manifest, "schema_id", schema, sizeof(schema)) != 0 ||
-        strcmp(schema, "CAT_CAS_PHASE6_COMBINED_SESSION_MANIFEST_V1") != 0) fail("unexpected session manifest schema");
-    verify_manifest_file(manifest, dir, "session.json");
-    verify_manifest_file(manifest, dir, "windows.jsonl");
-    free(manifest);
-}
-
-static SessionInfo verify_session(const char *dir) {
-    char path[PATH_MAX_LOCAL], schema[128];
-    if (join(path, sizeof(path), dir, "session.json") != 0) fail("bad session path");
-    char *session = slurp(path);
-    SessionInfo info;
-    memset(&info, 0, sizeof(info));
-    if (json_string(session, "schema_id", schema, sizeof(schema)) != 0 ||
-        strcmp(schema, "CAT_CAS_PHASE6_COMBINED_SESSION_SCHEDULE_V1") != 0) fail("unexpected session schema");
-    if (json_string(session, "session_id", info.session_id, sizeof(info.session_id)) != 0) fail("missing session_id");
-    if (json_long(session, "window_count", &info.window_count) != 0 || info.window_count <= 0) fail("bad window_count");
-    int restoration = 1;
-    if (json_bool(session, "restoration_authorized", &restoration) != 0 || restoration) fail("restoration_authorized must be false");
-    free(session);
-
-    if (join(path, sizeof(path), dir, "windows.jsonl") != 0) fail("bad windows path");
-    FILE *f = fopen(path, "r");
-    if (!f) fail("open windows.jsonl: %s", strerror(errno));
-    char *line = NULL;
-    size_t cap = 0;
-    long expected = 0;
-    while (getline(&line, &cap, f) != -1) {
-        long index = -1;
-        char sid[128], mode[64];
-        int drive = -1, off = -1;
-        if (json_long(line, "window_index", &index) != 0 || index != expected) fail("window_index not contiguous");
-        if (json_string(line, "session_id", sid, sizeof(sid)) != 0 || strcmp(sid, info.session_id) != 0) fail("window session_id mismatch");
-        if (json_string(line, "measurement_mode", mode, sizeof(mode)) != 0) fail("missing measurement_mode");
-        if (json_bool(line, "drive_on", &drive) != 0 || json_bool(line, "sender_off_required", &off) != 0) fail("bad window booleans");
-        if (off && drive) fail("sender-off window has drive_on=true");
-        if (strcmp(mode, "raw_ring_sender_off") == 0) {
-            if (!off || drive) fail("raw_ring_sender_off semantics violated");
-            info.sender_off_windows++;
-        } else if (strcmp(mode, "lockin_and_raw_ring") == 0) {
-            info.driven_windows++;
-        } else fail("unsupported measurement_mode %s", mode);
-        expected++;
-    }
-    free(line);
-    fclose(f);
-    if (expected != info.window_count) fail("window_count mismatch");
-    return info;
-}
-
-static Args parse_args(int argc, char **argv) {
-    Args a;
-    memset(&a, 0, sizeof(a));
-    a.victim = a.sender = -1;
-    a.pin_khz = 1600000;
-    a.slot_s = 0.5;
-    a.off_window_s = 0.5;
-    a.read_hz = 4000;
-    a.temp_veto_c = 68.0;
-    for (int i = 1; i < argc; ++i) {
-        const char *k = argv[i], *v = (i + 1 < argc) ? argv[i + 1] : NULL;
-        if (strcmp(k, "--validate-only") == 0) a.validate_only = 1;
-        else if (strcmp(k, "--session-dir") == 0 && v) { a.session_dir = v; ++i; }
-        else if (strcmp(k, "--output-dir") == 0 && v) { a.output_dir = v; ++i; }
-        else if (strcmp(k, "--victim") == 0 && v) { a.victim = atoi(v); ++i; }
-        else if (strcmp(k, "--sender") == 0 && v) { a.sender = atoi(v); ++i; }
-        else if (strcmp(k, "--pin-khz") == 0 && v) { a.pin_khz = atol(v); ++i; }
-        else if (strcmp(k, "--slot-s") == 0 && v) { a.slot_s = atof(v); ++i; }
-        else if (strcmp(k, "--off-window-s") == 0 && v) { a.off_window_s = atof(v); ++i; }
-        else if (strcmp(k, "--read-hz") == 0 && v) { a.read_hz = atol(v); ++i; }
-        else if (strcmp(k, "--temp-veto-c") == 0 && v) { a.temp_veto_c = atof(v); ++i; }
-        else fail("unknown or incomplete option: %s", k);
-    }
-    if (!a.session_dir || !a.output_dir || a.victim < 0 || a.sender < 0) fail("missing required arguments");
-    if (a.victim == a.sender) fail("victim and sender cores must differ");
+    if(!a.mode||!a.session_dir||!a.output_dir||a.victim<0||a.sender<0||a.victim==a.sender)die("invalid required arguments");
+    if(a.mode==MODE_HARDWARE&&(!a.executor_commit||strlen(a.executor_commit)!=40))die("hardware mode requires --executor-commit");
+    if(!shell_safe(a.session_dir)||!shell_safe(a.output_dir))die("unsafe path");
     return a;
 }
-
-static void write_file(const char *path, const char *text) {
-    FILE *f = fopen(path, "w");
-    if (!f) fail("write %s: %s", path, strerror(errno));
-    fputs(text, f);
-    fclose(f);
+static void copy_exclusive(const char*s,const char*d){FILE*i=fopen(s,"rb"),*o=fopen(d,"wbx");if(!i||!o)die("copy failed");char b[65536];size_t n;while((n=fread(b,1,sizeof(b),i)))if(fwrite(b,1,n,o)!=n)die("copy failed");fclose(i);fclose(o);}
+static Schedule load_schedule(const RunnerArgs*a){
+    char p[CP_PATH_MAX],schema[128],manifest_sid[128];
+    Schedule s={0};
+    path_join(p,sizeof(p),a->session_dir,"session_manifest.json");char*m=slurp(p);
+    sha256(p,s.session_manifest_sha256);
+    if(jstr(m,"schema_id",schema,sizeof(schema))||strcmp(schema,"CAT_CAS_PHASE6_COMBINED_SESSION_MANIFEST_V1"))die("unexpected session manifest schema");
+    if(jstr(m,"session_id",manifest_sid,sizeof(manifest_sid))) die("manifest missing session_id");
+    verify_file(m,a->session_dir,"session.json");
+    verify_file(m,a->session_dir,"windows.jsonl");
+    free(m);
+    path_join(p,sizeof(p),a->session_dir,"session.json");char*h=slurp(p);
+    if(jstr(h,"schema_id",schema,sizeof(schema))||strcmp(schema,"CAT_CAS_PHASE6_COMBINED_SESSION_SCHEDULE_V1"))die("unexpected session schema");
+    if(jstr(h,"session_id",s.session_id,sizeof(s.session_id))||strcmp(s.session_id,manifest_sid))die("session ID mismatch");
+    if(jstr(h,"route",s.route,sizeof(s.route))||jstr(h,"campaign_source_commit",s.campaign_source_commit,sizeof(s.campaign_source_commit))||jstr(h,"campaign_plan_sha256",s.campaign_plan_sha256,sizeof(s.campaign_plan_sha256)))die("missing session binding");
+    long count;int restoration=1;if(jlong(h,"window_count",&count)||count<=0||jbool(h,"restoration_authorized",&restoration)||restoration)die("invalid session header");free(h);
+    s.count=(size_t)count;s.windows=calloc(s.count,sizeof(*s.windows));if(!s.windows)die("oom");
+    path_join(p,sizeof(p),a->session_dir,"windows.jsonl");FILE*f=fopen(p,"r");if(!f)die("open windows");char*line=NULL;size_t cap=0,n=0;
+    while(getline(&line,&cap,f)!=-1){if(n>=s.count)die("extra schedule rows");Window*w=&s.windows[n];long x;int present;
+        if(jlong(line,"window_index",&x)||x!=(long)n) die("window indices not contiguous or duplicate");
+        w->window_index=x;
+        if(jstr(line,"session_id",w->session_id,sizeof(w->session_id))||strcmp(w->session_id,s.session_id))die("window session ID mismatch");
+        if(jstr(line,"stage",w->stage,sizeof(w->stage))||jstr(line,"block_id",w->block_id,sizeof(w->block_id))||jstr(line,"family",w->family,sizeof(w->family))||
+           jstr(line,"measurement_mode",w->measurement_mode,sizeof(w->measurement_mode))||jstr(line,"executed_tone_order",w->executed_tone_order,sizeof(w->executed_tone_order))||
+           jstr(line,"declared_tone_order",w->declared_tone_order,sizeof(w->declared_tone_order)))die("short schedule row");
+        if(jstr(line,"actual_mode",w->actual_mode,sizeof(w->actual_mode))) strcpy(w->actual_mode,"null");
+        if(jstr(line,"declared_mode",w->declared_mode,sizeof(w->declared_mode))) strcpy(w->declared_mode,"null");
+        if(jbool(line,"drive_on",&w->drive_on)||jbool(line,"sender_off_required",&w->sender_off_required))die("invalid window booleans");
+        if(jnullable_long(line,"physical_tone_index",&x,&present)) die("missing physical tone");
+        w->physical_tone_index=present?(int)x:-1;
+        if(jnullable_long(line,"codeword_source_index",&x,&present)) die("missing codeword source");
+        w->codeword_source_index=present?(int)x:-1;
+        if(jnullable_long(line,"theta_idx",&x,&present)) die("missing theta_idx");
+        w->theta_idx=present?(int)x:-1;
+        if(jlong(line,"amplitude_level",&x))w->amplitude_level=w->drive_on?3:0;else w->amplitude_level=(int)x;
+        if(w->sender_off_required&&w->drive_on)die("sender_off_required + drive_on rejection");
+        if(!strcmp(w->measurement_mode,"raw_ring_sender_off")){if(!w->sender_off_required||w->drive_on)die("raw_ring_sender_off requires sender off");}
+        else if(!strcmp(w->measurement_mode,"lockin_and_raw_ring")){if(w->drive_on&&(w->physical_tone_index<0||w->codeword_source_index<0))die("driven lock-in missing physical tone or codeword source");}
+        else die("unsupported measurement mode");
+        n++;
+    }free(line);fclose(f);if(n!=s.count)die("short schedule row count");
+    if((!strcmp(s.route,"v4s5")&&(a->victim!=4||a->sender!=5))||(!strcmp(s.route,"v2s3")&&(a->victim!=2||a->sender!=3))) die("invalid route/core pair");
+    return s;
 }
-
-static void copy_file(const char *src, const char *dst) {
-    FILE *in = fopen(src, "rb"), *out = fopen(dst, "wbx");
-    if (!in || !out) fail("copy failed");
-    char buf[65536];
-    size_t n;
-    while ((n = fread(buf, 1, sizeof(buf), in)) > 0) if (fwrite(buf, 1, n, out) != n) fail("copy write failed");
-    fclose(in); fclose(out);
+static void validation_outputs(const RunnerArgs*a,const Schedule*s){
+    if(exists(a->output_dir)||mkdir(a->output_dir,0755)) die("refusing existing output directory");
+    char x[CP_PATH_MAX],y[CP_PATH_MAX];
+    const char*in[]={"session.json","windows.jsonl"};for(int i=0;i<2;i++){path_join(x,sizeof(x),a->session_dir,in[i]);path_join(y,sizeof(y),a->output_dir,in[i]);copy_exclusive(x,y);}
+    const char*empty[]={"raw_samples.bin","telemetry.csv","stderr.log"};for(int i=0;i<3;i++){path_join(y,sizeof(y),a->output_dir,empty[i]);FILE*f=fopen(y,"wbx");if(!f)die("create output");fclose(f);}
+    path_join(y,sizeof(y),a->output_dir,"stdout.log");FILE*f=fopen(y,"wx");fprintf(f,"VALIDATION_ONLY_HARDWARE_NOT_EXECUTED\n");fclose(f);
+    path_join(y,sizeof(y),a->output_dir,"window_results.csv");f=fopen(y,"wx");fprintf(f,"window_index,session_id,validation_status,hardware_executed\n");for(size_t i=0;i<s->count;i++)fprintf(f,"%zu,%s,VALIDATED,0\n",i,s->session_id);fclose(f);
+    path_join(y,sizeof(y),a->output_dir,"run.json");f=fopen(y,"wx");fprintf(f,"{\n  \"schema_id\": \"CAT_CAS_PHASE6_COMBINED_RUN_V1\",\n  \"session_id\": \"%s\",\n  \"status\": \"VALIDATION_ONLY_HARDWARE_NOT_EXECUTED\",\n  \"hardware_executed\": false,\n  \"automatic_retry\": false,\n  \"restoration_authorized\": false,\n  \"windows_seen\": %zu\n}\n",s->session_id,s->count);fclose(f);
+    if(write_run_manifest(a->output_dir,s->session_id,"VALIDATION_ONLY_HARDWARE_NOT_EXECUTED"))die("manifest creation failed");
 }
-
-static void emit_outputs(const Args *a, const SessionInfo *info) {
-    if (exists(a->output_dir)) fail("refusing existing output directory");
-    if (mkdir(a->output_dir, 0755) != 0) fail("mkdir output: %s", strerror(errno));
-    char src[PATH_MAX_LOCAL], dst[PATH_MAX_LOCAL];
-    join(src, sizeof(src), a->session_dir, "session.json"); join(dst, sizeof(dst), a->output_dir, "session.json"); copy_file(src, dst);
-    join(src, sizeof(src), a->session_dir, "windows.jsonl"); join(dst, sizeof(dst), a->output_dir, "windows.jsonl"); copy_file(src, dst);
-    join(dst, sizeof(dst), a->output_dir, "raw_samples.bin"); FILE *raw = fopen(dst, "wbx"); if (!raw) fail("raw create failed"); fclose(raw);
-    join(dst, sizeof(dst), a->output_dir, "stdout.log"); write_file(dst, "combined_pdn_runner validation-only scaffold\n");
-    join(dst, sizeof(dst), a->output_dir, "stderr.log"); write_file(dst, "");
-    join(dst, sizeof(dst), a->output_dir, "window_results.csv");
-    FILE *csv = fopen(dst, "wx"); if (!csv) fail("window_results create failed");
-    fprintf(csv, "session_id,window_count,driven_windows,sender_off_windows,validate_only,hardware_executed\n");
-    fprintf(csv, "%s,%ld,%ld,%ld,1,0\n", info->session_id, info->window_count, info->driven_windows, info->sender_off_windows); fclose(csv);
-    join(dst, sizeof(dst), a->output_dir, "telemetry.csv");
-    FILE *tel = fopen(dst, "wx"); if (!tel) fail("telemetry create failed");
-    fprintf(tel, "victim_core,sender_core,pin_khz,slot_s,off_window_s,read_hz,temp_veto_c\n%d,%d,%ld,%.17g,%.17g,%ld,%.17g\n", a->victim, a->sender, a->pin_khz, a->slot_s, a->off_window_s, a->read_hz, a->temp_veto_c); fclose(tel);
-    join(dst, sizeof(dst), a->output_dir, "run.json");
-    FILE *run = fopen(dst, "wx"); if (!run) fail("run create failed");
-    fprintf(run, "{\n  \"schema_id\": \"CAT_CAS_PHASE6_COMBINED_RUN_V1\",\n  \"session_id\": \"%s\",\n  \"status\": \"VALIDATION_ONLY_HARDWARE_NOT_EXECUTED\",\n  \"hardware_executed\": false,\n  \"restoration_authorized\": false,\n  \"automatic_retry\": false,\n  \"victim_core\": %d,\n  \"sender_core\": %d,\n  \"windows_seen\": %ld,\n  \"sender_off_windows\": %ld\n}\n", info->session_id, a->victim, a->sender, info->window_count, info->sender_off_windows); fclose(run);
-    const char *names[] = {"run.json", "session.json", "windows.jsonl", "window_results.csv", "raw_samples.bin", "telemetry.csv", "stdout.log", "stderr.log"};
-    join(dst, sizeof(dst), a->output_dir, "run_manifest.json");
-    FILE *mf = fopen(dst, "wx"); if (!mf) fail("manifest create failed");
-    fprintf(mf, "{\n  \"schema_id\": \"CAT_CAS_PHASE6_COMBINED_RUN_MANIFEST_V1\",\n  \"session_id\": \"%s\",\n  \"status\": \"VALIDATION_ONLY_HARDWARE_NOT_EXECUTED\",\n  \"files\": {\n", info->session_id);
-    for (size_t i = 0; i < sizeof(names)/sizeof(names[0]); ++i) {
-        char fp[PATH_MAX_LOCAL], sha[SHA_LEN + 1];
-        join(fp, sizeof(fp), a->output_dir, names[i]); sha256_hex(fp, sha);
-        fprintf(mf, "    \"%s\": {\"size\": %ld, \"sha256\": \"%s\"}%s\n", names[i], fsize(fp), sha, i + 1 == sizeof(names)/sizeof(names[0]) ? "" : ",");
-    }
-    fprintf(mf, "  }\n}\n"); fclose(mf);
-}
-
-int main(int argc, char **argv) {
-    Args args = parse_args(argc, argv);
-    if (!exists(args.session_dir)) fail("session directory does not exist");
-    verify_session_manifest(args.session_dir);
-    SessionInfo info = verify_session(args.session_dir);
-    if (!args.validate_only) fail("hardware execution path is not implemented in this scaffold; complete the CAT_CAS local hardware backend");
-    emit_outputs(&args, &info);
-    printf("{\"status\":\"VALIDATION_ONLY_HARDWARE_NOT_EXECUTED\",\"session_id\":\"%s\",\"windows\":%ld,\"sender_off_windows\":%ld}\n", info.session_id, info.window_count, info.sender_off_windows);
-    return 0;
-}
+int main(int ac,char**av){RunnerArgs a=parse_args(ac,av);if(!exists(a.session_dir)||exists(a.output_dir))die(exists(a.output_dir)?"refusing existing output directory":"session directory does not exist");Schedule s=load_schedule(&a);int rc=0;if(a.mode==MODE_VALIDATE){validation_outputs(&a,&s);printf("{\"status\":\"VALIDATION_ONLY_HARDWARE_NOT_EXECUTED\",\"session_id\":\"%s\",\"windows\":%zu}\n",s.session_id,s.count);}else rc=run_hardware(&a,&s);free(s.windows);return rc;}

@@ -128,6 +128,7 @@ def validate(header: dict[str, Any], windows: list[dict[str, Any]]) -> list[str]
 def write_session(plan_path: Path, session_id: str, output: Path) -> dict[str, Any]:
     plan = json.loads(plan_path.read_text())
     header, windows = compile_session(plan, session_id)
+    header["campaign_plan_sha256"] = sha256_file(plan_path)
     errors = validate(header, windows)
     if errors: raise ValueError("; ".join(errors))
     output.mkdir(parents=True, exist_ok=False)
