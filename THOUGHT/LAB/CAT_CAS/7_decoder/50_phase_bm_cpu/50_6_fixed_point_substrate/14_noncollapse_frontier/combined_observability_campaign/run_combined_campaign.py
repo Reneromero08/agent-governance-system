@@ -27,7 +27,7 @@ def load_json(path: Path) -> dict[str, Any]:
 
 def runner_command(runner: Path, session_dir: Path, output_dir: Path, route: str, args: argparse.Namespace) -> list[str]:
     victim, sender = ROUTE_CORES[route]
-    return [
+    command = [
         str(runner),
         "--session-dir", str(session_dir),
         "--output-dir", str(output_dir),
@@ -39,6 +39,9 @@ def runner_command(runner: Path, session_dir: Path, output_dir: Path, route: str
         "--read-hz", str(args.read_hz),
         "--temp-veto-c", str(args.temp_veto_c),
     ]
+    if args.runner_validate_only:
+        command.append("--validate-only")
+    return command
 
 
 def selected_sessions(plan: dict[str, Any], requested: list[str] | None) -> list[dict[str, Any]]:
@@ -87,6 +90,7 @@ def execute(args: argparse.Namespace) -> int:
         "plan_sha256": manifest["campaign_plan"]["sha256"],
         "plan_source_commit": manifest["source_commit"],
         "runner": str(runner),
+        "runner_validate_only": bool(args.runner_validate_only),
         "sessions_requested": [session["session_id"] for session in sessions],
         "sessions_completed": [],
         "status": "RUNNING",
@@ -137,6 +141,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--read-hz", type=int, default=4000)
     parser.add_argument("--temp-veto-c", type=float, default=68.0)
     parser.add_argument("--min-free-gb", type=float, default=20.0)
+    parser.add_argument("--runner-validate-only", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     return parser.parse_args()
 
