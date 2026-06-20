@@ -168,7 +168,26 @@ def build_campaign(root: Path) -> Path:
         "source_commit":"d"*40, "primary_route":"v4s5", "comparator_routes":["v2s3"],
         "runs":[{"run_id": item[0]} for item in runs],
     })
-    dump(campaign_root / "campaign_manifest.json", {"schema_id":"SYNTHETIC_CAMPAIGN_MANIFEST"})
+    run_manifests: dict[str, dict[str, object]] = {}
+    for run_id, *_ in runs:
+        manifest_path = campaign_root / "runs" / run_id / "run_manifest.json"
+        run_manifests[run_id] = {
+            "path": f"runs/{run_id}/run_manifest.json",
+            "size": manifest_path.stat().st_size,
+            "sha256": sha(manifest_path),
+        }
+    dump(campaign_root / "campaign_manifest.json", {
+        "schema_id": "CAT_CAS_PDN_CARRIER_CAMPAIGN_MANIFEST_V1",
+        "campaign_id": "synthetic",
+        "source_commit": "d" * 40,
+        "files": {
+            "campaign.json": {
+                "size": (campaign_root / "campaign.json").stat().st_size,
+                "sha256": sha(campaign_root / "campaign.json"),
+            },
+        },
+        "run_manifests": run_manifests,
+    })
     return campaign_root
 
 
@@ -224,6 +243,85 @@ class TransferGeometryTests(unittest.TestCase):
             verification = analysis.verify_outputs(output)
             self.assertFalse(verification["valid"])
             self.assertTrue(any("phase_equivariance.json" in error for error in verification["errors"]))
+
+    def test_campaign_manifest_passes_verification(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            campaign = build_campaign(root)
+            manifest = analysis.verify_campaign_manifest(campaign)
+            self.assertEqual(
+                manifest["schema_id"],
+                "CAT_CAS_PDN_CARRIER_CAMPAIGN_MANIFEST_V1",
+            )
+
+    def test_tampered_run_manifest_fails_campaign_verification(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            campaign = build_campaign(root)
+            run_manifest = campaign / "runs" / "v4s5_matrix_seed0" / "run_manifest.json"
+            run_manifest.write_text(run_manifest.read_text() + " ", encoding="utf-8")
+            with self.assertRaises(ValueError) as ctx:
+                analysis.verify_campaign_manifest(campaign)
+            self.assertIn("sha256 mismatch", str(ctx.exception))
+
+    def test_tampered_campaign_json_fails_verification(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            campaign = build_campaign(root)
+            campaign_json = campaign / "campaign.json"
+            data = json.loads(campaign_json.read_text())
+            data["campaign_id"] = "tampered"
+            campaign_json.write_text(
+                json.dumps(data, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
+            with self.assertRaises(ValueError) as ctx:
+                analysis.verify_campaign_manifest(campaign)
+            self.assertIn("campaign ID mismatch", str(ctx.exception))
+
+    def test_unbound_run_dir_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            campaign = build_campaign(root)
+            extra = campaign / "runs" / "v9s9_matrix_seed77"
+            extra.mkdir()
+            with self.assertRaises(ValueError) as ctx:
+                analysis.build_outputs(campaign, root / "output", False, 65005)
+            self.assertIn("unbound run directories", str(ctx.exception))
+
+    def test_manifest_id_mismatch_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            campaign = build_campaign(root)
+            manifest_path = campaign / "campaign_manifest.json"
+            data = json.loads(manifest_path.read_text())
+            data["campaign_id"] = "wrong_campaign_id"
+            manifest_path.write_text(
+                json.dumps(data, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
+            with self.assertRaises(ValueError) as ctx:
+                analysis.verify_campaign_manifest(campaign)
+            self.assertIn("campaign ID mismatch", str(ctx.exception))
+
+    def test_malformed_manifest_path_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            campaign = build_campaign(root)
+            manifest_path = campaign / "campaign_manifest.json"
+            data = json.loads(manifest_path.read_text())
+            data["run_manifests"]["evil"] = {
+                "path": "../../etc/passwd",
+                "size": 0,
+                "sha256": "0" * 64,
+            }
+            manifest_path.write_text(
+                json.dumps(data, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
+            with self.assertRaises(ValueError) as ctx:
+                analysis.verify_campaign_manifest(campaign)
+            self.assertIn("path traversal", str(ctx.exception))
 
 
 if __name__ == "__main__":

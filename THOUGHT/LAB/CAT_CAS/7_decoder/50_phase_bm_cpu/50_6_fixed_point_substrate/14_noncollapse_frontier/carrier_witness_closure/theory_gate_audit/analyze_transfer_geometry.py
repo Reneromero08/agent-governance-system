@@ -300,10 +300,14 @@ def discover_runs(
             expected_ids.append(str(item.get("run_id")))
     runs_root = campaign_root / "runs"
     run_dirs = sorted(path for path in runs_root.iterdir() if path.is_dir())
+    discovered_ids = {path.name for path in run_dirs}
     if expected_ids:
-        missing = sorted(set(expected_ids) - {path.name for path in run_dirs})
+        missing = sorted(set(expected_ids) - discovered_ids)
         if missing:
             raise ValueError(f"campaign missing expected run directories: {missing}")
+        extra = sorted(discovered_ids - set(expected_ids))
+        if extra:
+            raise ValueError(f"unbound run directories not in campaign.json: {extra}")
     runs: list[RunData] = []
     bindings: list[dict[str, Any]] = []
     for run_dir in run_dirs:
@@ -950,6 +954,112 @@ def aggregate_decision(
     }
 
 
+CAMPAIGN_MANIFEST_SCHEMA_ID = "CAT_CAS_PDN_CARRIER_CAMPAIGN_MANIFEST_V1"
+
+
+def _validate_relative_path(relative: str) -> None:
+    if not relative or "\\" in relative or ":" in relative.split("/")[0]:
+        raise ValueError(f"unsafe or non-portable manifest path: {relative!r}")
+    normalized = Path(relative)
+    if normalized.is_absolute():
+        raise ValueError(f"absolute path in manifest: {relative!r}")
+    parts = normalized.parts
+    if ".." in parts:
+        raise ValueError(f"path traversal in manifest: {relative!r}")
+    if any(not part or part == "." for part in parts):
+        raise ValueError(f"invalid path component in manifest: {relative!r}")
+
+
+def verify_campaign_manifest(
+    campaign_root: Path,
+) -> dict[str, Any]:
+    manifest_path = campaign_root / "campaign_manifest.json"
+    if not manifest_path.is_file():
+        raise FileNotFoundError(f"campaign manifest missing: {manifest_path}")
+    manifest = json_load(manifest_path)
+    if manifest.get("schema_id") != CAMPAIGN_MANIFEST_SCHEMA_ID:
+        raise ValueError(
+            f"unexpected campaign manifest schema: {manifest.get('schema_id')!r}"
+        )
+    campaign = json_load(campaign_root / "campaign.json")
+    manifest_campaign_id = str(manifest.get("campaign_id", ""))
+    campaign_campaign_id = str(campaign.get("campaign_id", ""))
+    if manifest_campaign_id != campaign_campaign_id:
+        raise ValueError(
+            "campaign ID mismatch: manifest "
+            f"{manifest_campaign_id!r} != campaign.json {campaign_campaign_id!r}"
+        )
+    manifest_commit = str(manifest.get("source_commit", ""))
+    campaign_commit = str(campaign.get("source_commit", ""))
+    if manifest_commit and campaign_commit and manifest_commit != campaign_commit:
+        raise ValueError(
+            "source commit mismatch: manifest "
+            f"{manifest_commit!r} != campaign.json {campaign_commit!r}"
+        )
+    errors: list[str] = []
+    for relative, expected in manifest.get("files", {}).items():
+        _validate_relative_path(str(relative))
+        candidate = campaign_root / relative
+        if not candidate.is_file():
+            errors.append(f"missing manifest file: {relative}")
+            continue
+        actual_size = candidate.stat().st_size
+        expected_size = int(expected.get("size", -1))
+        if actual_size != expected_size:
+            errors.append(
+                f"size mismatch {relative}: {actual_size} != {expected_size}"
+            )
+        actual_sha = sha256_file(candidate)
+        expected_sha = str(expected.get("sha256", ""))
+        if actual_sha != expected_sha:
+            errors.append(f"sha256 mismatch {relative}")
+    verified_run_ids: set[str] = set()
+    for run_id, entry in manifest.get("run_manifests", {}).items():
+        run_id_str = str(run_id)
+        if run_id_str in verified_run_ids:
+            errors.append(f"duplicate run_id in manifest: {run_id_str}")
+            continue
+        verified_run_ids.add(run_id_str)
+        relative = str(entry.get("path", ""))
+        _validate_relative_path(relative)
+        candidate = campaign_root / relative
+        if not candidate.is_file():
+            errors.append(f"missing run manifest: {relative}")
+            continue
+        actual_size = candidate.stat().st_size
+        expected_size = int(entry.get("size", -1))
+        if actual_size != expected_size:
+            errors.append(
+                f"run manifest size mismatch {run_id_str}: {actual_size} != {expected_size}"
+            )
+        actual_sha = sha256_file(candidate)
+        expected_sha = str(entry.get("sha256", ""))
+        if actual_sha != expected_sha:
+            errors.append(f"run manifest sha256 mismatch {run_id_str}")
+        run_dir = candidate.parent
+        if not run_dir.is_dir():
+            errors.append(f"run manifest parent not a directory: {run_id_str}")
+    expected_run_ids: set[str] = set()
+    for item in campaign.get("runs", []):
+        if isinstance(item, str):
+            expected_run_ids.add(item)
+        elif isinstance(item, dict):
+            expected_run_ids.add(str(item.get("run_id", "")))
+    missing_from_manifest = expected_run_ids - verified_run_ids
+    if missing_from_manifest:
+        errors.append(
+            f"campaign runs missing from manifest: {sorted(missing_from_manifest)}"
+        )
+    extra_in_manifest = verified_run_ids - expected_run_ids
+    if extra_in_manifest:
+        errors.append(
+            f"manifest runs not in campaign.json: {sorted(extra_in_manifest)}"
+        )
+    if errors:
+        raise ValueError("; ".join(errors))
+    return manifest
+
+
 def gate_layer_reconciliation(campaign_root: Path) -> dict[str, Any]:
     del campaign_root
     source = Path("replication_discrepancy/results/official_gate_decomposition.json")
@@ -980,6 +1090,7 @@ def build_outputs(
     verify_raw_hash: bool,
     null_seed: int,
 ) -> dict[str, Any]:
+    verify_campaign_manifest(campaign_root)
     campaign = json_load(campaign_root / "campaign.json")
     runs, input_bindings = discover_runs(campaign_root, verify_raw_hash)
     matrix_runs = [run for run in runs if run.condition == "matrix"]

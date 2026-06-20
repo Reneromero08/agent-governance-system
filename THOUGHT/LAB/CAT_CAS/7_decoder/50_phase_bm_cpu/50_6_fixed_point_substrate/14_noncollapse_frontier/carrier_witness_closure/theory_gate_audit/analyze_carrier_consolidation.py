@@ -499,6 +499,58 @@ def claim_freeze(old_gate: dict[str, Any], cross: dict[str, Any], residuals: dic
     }
 
 
+EXPECTED_PHASE6B5C_MANIFEST_SCHEMA = "CAT_CAS_PHASE6B5C_ANALYSIS_MANIFEST_V1"
+
+PHASE6B5C_INPUT_FILES = (
+    "chart_calibration.json",
+    "heldout_equivariance.json",
+    "execution_relation.json",
+    "route_conjugacy.json",
+    "seed4_transfer_report.json",
+)
+
+
+def verify_analysis_manifest(result_dir: Path) -> dict[str, Any]:
+    manifest_path = result_dir / "analysis_manifest.json"
+    if not manifest_path.is_file():
+        raise FileNotFoundError(
+            f"analysis_manifest.json not found in {result_dir}"
+        )
+    manifest = load_json(manifest_path)
+    schema_id = str(manifest.get("schema_id", ""))
+    if schema_id != EXPECTED_PHASE6B5C_MANIFEST_SCHEMA:
+        raise ValueError(
+            f"unexpected manifest schema_id: {schema_id!r}, "
+            f"expected {EXPECTED_PHASE6B5C_MANIFEST_SCHEMA!r}"
+        )
+    outputs = manifest.get("outputs")
+    if not isinstance(outputs, dict) or not outputs:
+        raise ValueError("analysis_manifest.json missing 'outputs' object")
+    missing_entries = sorted(set(PHASE6B5C_INPUT_FILES) - set(outputs))
+    if missing_entries:
+        raise ValueError(
+            f"manifest missing required output entries: {missing_entries}"
+        )
+    for name in PHASE6B5C_INPUT_FILES:
+        expected = outputs[name]
+        path = result_dir / name
+        if not path.is_file():
+            raise FileNotFoundError(
+                f"manifest output file missing: {name}"
+            )
+        actual_size = path.stat().st_size
+        expected_size = int(expected.get("size", -1))
+        if actual_size != expected_size:
+            raise ValueError(
+                f"size mismatch on {name}: {actual_size} != {expected_size}"
+            )
+        actual_sha = sha256_file(path)
+        expected_sha = str(expected.get("sha256", ""))
+        if actual_sha != expected_sha:
+            raise ValueError(f"sha256 mismatch on {name}")
+    return manifest
+
+
 def common_binding(result_dir: Path) -> dict[str, Any]:
     manifest_path = result_dir / "analysis_manifest.json"
     manifest = load_json(manifest_path)
@@ -516,6 +568,7 @@ def common_binding(result_dir: Path) -> dict[str, Any]:
 
 
 def build(result_dir: Path, output_dir: Path) -> dict[str, Any]:
+    verify_analysis_manifest(result_dir)
     chart = load_json(result_dir / "chart_calibration.json")
     heldout = load_json(result_dir / "heldout_equivariance.json")
     execution = load_json(result_dir / "execution_relation.json")
