@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Read-only acquisition preflight for the authorized combined campaign."""
 from __future__ import annotations
-import argparse, hashlib, json, os, shutil, subprocess
+import argparse, hashlib, json, os, shutil
 from pathlib import Path
 from typing import Any
 from generate_campaign_plan import verify
@@ -11,8 +11,6 @@ def sha(path:Path)->str:
  with path.open("rb") as f:
   for chunk in iter(lambda:f.read(1024*1024),b""):h.update(chunk)
  return h.hexdigest()
-def command(*args:str,cwd:Path|None=None)->tuple[int,str]:
- p=subprocess.run(args,cwd=cwd,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,check=False);return p.returncode,p.stdout.strip()
 def first_k10temp()->str|None:
  for name in sorted(Path("/sys/class/hwmon").glob("hwmon*/name")):
   try:
@@ -38,14 +36,12 @@ def session_bundles_valid(root:Path)->bool:
  return True
 def inspect(plan_dir:Path,repo_root:Path,output_root:Path,min_free_gb:float)->dict[str,Any]:
  manifest=json.loads((plan_dir/"campaign_manifest.json").read_text());plan=json.loads((plan_dir/"campaign_plan.json").read_text());source=manifest.get("source_commit")
- bundle_path=repo_root/"source_bundle.json";bundle=json.loads(bundle_path.read_text()) if bundle_path.is_file() else None
+ bundle_path=repo_root/"source_bundle.json"
+ if not bundle_path.is_file():raise ValueError("preflight requires hash-bound source_bundle.json")
+ bundle=json.loads(bundle_path.read_text())
  runner=repo_root/"combined_pdn_runner";binding_path=repo_root/"COMBINED_CAMPAIGN_BINDING.json";schedules=repo_root/"compiled_sessions"
  binding=json.loads(binding_path.read_text()) if binding_path.is_file() else {}
- if bundle:
-  head=bundle.get("executor_commit");source_ok=bundle.get("plan_source_verified") is True;clean=True;package_ok=bundle.get("frozen_inputs_verified") is True
- else:
-  rc_head,head=command("git","rev-parse","HEAD",cwd=repo_root);rc_status,status=command("git","status","--short",cwd=repo_root);rc_ancestor,_=command("git","merge-base","--is-ancestor",str(source),"HEAD",cwd=repo_root)
-  source_ok=rc_ancestor==0;clean=rc_status==0 and status=="";package_ok=rc_head==0
+ head=bundle.get("executor_commit");source_ok=bundle.get("plan_source_verified") is True;clean=True;package_ok=bundle.get("frozen_inputs_verified") is True
  flags=cpu_flags();cpus=os.cpu_count() or 0
  msr={str(c):os.access(f"/dev/cpu/{c}/msr",os.R_OK) for c in range(min(cpus,6))}
  cpufreq={str(c):all(os.access(f"/sys/devices/system/cpu/cpu{c}/cpufreq/{n}",os.R_OK|os.W_OK) for n in ("scaling_min_freq","scaling_max_freq")) for c in range(min(cpus,6))}
@@ -60,10 +56,10 @@ def inspect(plan_dir:Path,repo_root:Path,output_root:Path,min_free_gb:float)->di
   "plan_source_verified":source_ok,"authorized_package_unchanged_since_plan":package_ok,"plan_sources_agree":source==plan.get("source_commit"),
   "plan_manifest_valid":not plan_errors,"canonical_plan_binding_valid":plan_hash==binding.get("campaign_plan",{}).get("sha256") and manifest_hash==binding.get("campaign_manifest_sha256"),
   "executor_exists_and_executable":runner.is_file() and os.access(runner,os.X_OK),
-  "executor_commit_recorded":isinstance(head,str) and len(head)==40 and (not bundle or head==bundle.get("executor_commit")),
-  "executor_binary_hash_valid":bool(bundle) and runner.is_file() and sha(runner)==bundle.get("executor_sha256"),
-  "required_tests_pass":bool(bundle) and bundle.get("strict_tests_pass") is True and bundle.get("sanitizers_pass") is True,
-  "all_twelve_schedules_compiled":session_bundles_valid(schedules) and bool(bundle) and bundle.get("validation_sessions_passed")==12,
+  "executor_commit_recorded":isinstance(head,str) and len(head)==40,
+  "executor_binary_hash_valid":runner.is_file() and sha(runner)==bundle.get("executor_sha256"),
+  "required_tests_pass":bundle.get("strict_tests_pass") is True and bundle.get("sanitizers_pass") is True,
+  "all_twelve_schedules_compiled":session_bundles_valid(schedules) and bundle.get("validation_sessions_passed")==12,
   "output_path_unused":not output_root.exists(),"restoration_not_authorized":plan.get("restoration_authorized") is False and manifest.get("restoration_authorized") is False,
  }
  return {"schema_id":"CAT_CAS_PHASE6_COMBINED_PREFLIGHT_V2","host":os.uname().nodename,"repo_root":str(repo_root),"source_bundle_mode":bool(bundle),"executor_commit":head,"plan_source_commit":source,"plan_dir":str(plan_dir),"plan_sha256":plan_hash,"campaign_manifest_sha256":manifest_hash,"output_root":str(output_root),"cpu_count":cpus,"k10temp_path":first_k10temp(),"msr_readable":msr,"cpufreq_controls":cpufreq,"free_bytes":usage.free,"minimum_free_gb":min_free_gb,"plan_validation_errors":plan_errors,"checks":checks,"acquisition_ready":all(checks.values())}

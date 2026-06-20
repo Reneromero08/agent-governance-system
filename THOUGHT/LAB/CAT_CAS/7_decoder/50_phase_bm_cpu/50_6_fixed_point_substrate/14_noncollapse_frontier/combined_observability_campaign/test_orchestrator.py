@@ -11,7 +11,7 @@ from run_combined_campaign import runner_command, selected_sessions
 
 class OrchestratorTests(unittest.TestCase):
     def test_route_core_mapping_and_command(self) -> None:
-        args = argparse.Namespace(pin_khz=1600000, slot_s=0.5, off_window_s=0.5, read_hz=4000, temp_veto_c=68.0)
+        args = argparse.Namespace(pin_khz=1600000, slot_s=0.5, off_window_s=0.5, read_hz=4000, temp_veto_c=68.0, executor_commit="a" * 40)
         command = runner_command(Path("/runner"), Path("/session"), Path("/output"), "v4s5", args)
         self.assertIn("--victim", command)
         self.assertEqual(command[command.index("--victim") + 1], "4")
@@ -19,6 +19,14 @@ class OrchestratorTests(unittest.TestCase):
         command = runner_command(Path("/runner"), Path("/session"), Path("/output"), "v2s3", args)
         self.assertEqual(command[command.index("--victim") + 1], "2")
         self.assertEqual(command[command.index("--sender") + 1], "3")
+
+    def test_hardware_requires_explicit_executor_commit(self) -> None:
+        args = argparse.Namespace(pin_khz=1600000, slot_s=0.5, off_window_s=0.5, read_hz=4000, temp_veto_c=68.0)
+        with self.assertRaisesRegex(ValueError, "executor-commit"):
+            runner_command(Path("/runner"), Path("/session"), Path("/output"), "v4s5", args)
+        args.runner_validate_only = True
+        command = runner_command(Path("/runner"), Path("/session"), Path("/output"), "v4s5", args)
+        self.assertNotIn("--executor-commit", command)
 
     def test_session_selection_preserves_request_order(self) -> None:
         plan = make_plan("a" * 40, "b" * 64)

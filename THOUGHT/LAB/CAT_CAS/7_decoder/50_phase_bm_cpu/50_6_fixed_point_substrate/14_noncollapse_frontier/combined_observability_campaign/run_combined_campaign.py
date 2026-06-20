@@ -38,11 +38,13 @@ def runner_command(runner: Path, session_dir: Path, output_dir: Path, route: str
         "--off-window-s", str(args.off_window_s),
         "--read-hz", str(args.read_hz),
         "--temp-veto-c", str(args.temp_veto_c),
-        "--executor-commit", str(getattr(args, "executor_commit", "0" * 40)),
     ]
     if getattr(args, "runner_validate_only", False):
         command.append("--validate-only")
     else:
+        if not getattr(args, "executor_commit", None):
+            raise ValueError("hardware mode requires --executor-commit")
+        command.extend(("--executor-commit", args.executor_commit))
         command.append("--hardware")
     return command
 
@@ -146,7 +148,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--temp-veto-c", type=float, default=68.0)
     parser.add_argument("--min-free-gb", type=float, default=20.0)
     parser.add_argument("--runner-validate-only", action="store_true")
-    parser.add_argument("--executor-commit", default="0" * 40)
+    parser.add_argument("--executor-commit")
     parser.add_argument("--dry-run", action="store_true")
     return parser.parse_args()
 

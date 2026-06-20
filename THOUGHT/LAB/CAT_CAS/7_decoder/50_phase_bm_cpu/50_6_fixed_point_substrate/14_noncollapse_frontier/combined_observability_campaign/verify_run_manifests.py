@@ -10,10 +10,15 @@ def sha(path:Path)->str:
 def verify(root:Path)->list[str]:
  errors=[]
  for manifest_path in sorted(root.glob("*/run_manifest.json")):
-  run=manifest_path.parent; manifest=json.loads(manifest_path.read_text())
+  run=manifest_path.parent
+  try:manifest=json.loads(manifest_path.read_text())
+  except (OSError,json.JSONDecodeError):errors.append(f"{run.name}: invalid run_manifest.json");continue
   if "run_manifest.json" in manifest.get("files",{}):errors.append(f"{run.name}: manifest includes itself")
+  run_root=run.resolve()
   for name,binding in manifest.get("files",{}).items():
-   path=run/name
+   path=(run/name).resolve()
+   try:path.relative_to(run_root)
+   except ValueError:errors.append(f"{run.name}: invalid path {name}");continue
    if not path.is_file():errors.append(f"{run.name}: missing {name}");continue
    if path.stat().st_size!=binding.get("size"):errors.append(f"{run.name}: size {name}")
    if sha(path)!=binding.get("sha256"):errors.append(f"{run.name}: sha256 {name}")
