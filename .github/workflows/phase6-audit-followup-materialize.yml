@@ -4,6 +4,13 @@ on:
   push:
     branches:
       - phase6/audit-preservation-sidecar-fix
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
 
 permissions:
   contents: write
