@@ -42,9 +42,16 @@ def main() -> int:
     source = binding["plan_source_commit"]
     if git(repo, "merge-base", "--is-ancestor", source, "HEAD") != 0:
         raise SystemExit("frozen source is not an ancestor of HEAD")
-    package_rel = PACKAGE.relative_to(repo)
-    ratification_rel = RATIFICATION.relative_to(repo)
-    if git(repo, "diff", "--quiet", source, "HEAD", "--", str(package_rel), str(ratification_rel)) != 0:
+    frozen_inputs = [
+        PACKAGE / "campaign_orders.py",
+        PACKAGE / "campaign_plan.py",
+        PACKAGE / "generate_campaign_plan.py",
+        PACKAGE / "CAMPAIGN_CONTRACT.md",
+        PACKAGE / "ANALYSIS_CONTRACT.md",
+        RATIFICATION,
+    ]
+    frozen_rel = [str(path.relative_to(repo)) for path in frozen_inputs]
+    if git(repo, "diff", "--quiet", source, "HEAD", "--", *frozen_rel) != 0:
         raise SystemExit("authorized package changed after frozen source")
     if output.exists():
         raise SystemExit(f"output exists: {output}")
