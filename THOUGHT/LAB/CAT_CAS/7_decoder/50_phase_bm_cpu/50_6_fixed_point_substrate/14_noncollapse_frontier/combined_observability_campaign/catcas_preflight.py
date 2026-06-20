@@ -181,7 +181,8 @@ def authorization_valid(path: Path | None, *, bundle_path: Path,
 
 
 def inspect(plan_dir: Path, bundle_root: Path, output_root: Path,
-            min_free_gb: float, authorization_path: Path | None = None) -> dict[str, Any]:
+            min_free_gb: float, authorization_path: Path | None = None,
+            target_facts_path: Path | None = None) -> dict[str, Any]:
     manifest = json.loads((plan_dir / "campaign_manifest.json").read_text(encoding="utf-8"))
     plan = json.loads((plan_dir / "campaign_plan.json").read_text(encoding="utf-8"))
     bundle_path = bundle_root / "source_bundle.json"
@@ -194,16 +195,26 @@ def inspect(plan_dir: Path, bundle_root: Path, output_root: Path,
     schedules = bundle_root / "compiled_sessions"
     binding = json.loads(binding_path.read_text(encoding="utf-8")) if binding_path.is_file() else {}
 
-    flags = cpu_flags()
-    cpus = os.cpu_count() or 0
-    msr = {str(core): os.access(f"/dev/cpu/{core}/msr", os.R_OK)
-           for core in range(min(cpus, 6))}
-    cpufreq = {
+    target_facts: dict[str, Any] = {}
+    if target_facts_path is not None:
+        target_facts_path = target_facts_path.resolve()
+        try:
+            target_facts_path.relative_to(bundle_root.resolve())
+        except ValueError as exc:
+            raise ValueError("target facts must be inside the sealed bundle") from exc
+        target_facts = json.loads(target_facts_path.read_text(encoding="utf-8"))
+        if target_facts.get("schema_id") != "CAT_CAS_PHASE6_TARGET_HOST_FACTS_V1":
+            raise ValueError("unexpected target host facts schema")
+    flags = set(target_facts.get("cpu_flags", [])) if target_facts else cpu_flags()
+    cpus = int(target_facts.get("cpu_count", 0)) if target_facts else (os.cpu_count() or 0)
+    msr = target_facts.get("msr_readable", {}) if target_facts else {
+        str(core): os.access(f"/dev/cpu/{core}/msr", os.R_OK)
+        for core in range(min(cpus, 6))}
+    cpufreq = target_facts.get("cpufreq_controls", {}) if target_facts else {
         str(core): all(os.access(
             f"/sys/devices/system/cpu/cpu{core}/cpufreq/{name}", os.R_OK | os.W_OK)
             for name in ("scaling_min_freq", "scaling_max_freq"))
-        for core in range(min(cpus, 6))
-    }
+        for core in range(min(cpus, 6))}
     usage = shutil.disk_usage(output_root.parent if output_root.parent.exists() else bundle_root)
     plan_errors = verify(plan_dir)
     plan_hash = sha256_file(plan_dir / "campaign_plan.json")
@@ -237,22 +248,24 @@ def inspect(plan_dir: Path, bundle_root: Path, output_root: Path,
         "restoration_not_authorized": plan.get("restoration_authorized") is False and manifest.get("restoration_authorized") is False and bundle.get("restoration_authorized") is False,
     }
     host_checks = {
-        "running_as_root": os.geteuid() == 0,
+        "running_as_root": target_facts.get("running_as_root") is True if target_facts else os.geteuid() == 0,
         "cpu_count_at_least_6": cpus >= 6,
         "route_cores_online_and_distinct": route_ok,
         "constant_tsc": "constant_tsc" in flags,
         "nonstop_tsc": "nonstop_tsc" in flags,
-        "k10temp_available": first_k10temp() is not None,
+        "k10temp_available": target_facts.get("k10temp_available") is True if target_facts else first_k10temp() is not None,
         "msr_readable_cores_0_5": len(msr) == 6 and all(msr.values()),
         "cpufreq_controls_readable_writable_cores_0_5": len(cpufreq) == 6 and all(cpufreq.values()),
-        "free_space_sufficient": usage.free >= int(min_free_gb * 1024**3),
+        "free_space_sufficient": int(target_facts.get("free_bytes", 0)) >= int(min_free_gb * 1024**3) if target_facts else usage.free >= int(min_free_gb * 1024**3),
+        "sender_cleanup_verified": target_facts.get("sender_cleanup_verified") is True if target_facts else True,
+        "host_control_state_restored": target_facts.get("host_control_state_restored") is True if target_facts else True,
     }
     engineering_ready = all(engineering_checks.values()) and all(host_checks.values())
     acquisition_ready = engineering_ready and authorization_ok
 
     return {
         "schema_id": "CAT_CAS_PHASE6_COMBINED_PREFLIGHT_V3",
-        "host": os.uname().nodename,
+        "host": target_facts.get("host", os.uname().nodename if hasattr(os, "uname") else "local"),
         "bundle_root": str(bundle_root),
         "source_bundle_sha256": sha256_file(bundle_path),
         "executor_commit": executor_commit,
@@ -262,7 +275,7 @@ def inspect(plan_dir: Path, bundle_root: Path, output_root: Path,
         "campaign_manifest_sha256": manifest_hash,
         "output_root": str(output_root),
         "cpu_count": cpus,
-        "k10temp_path": first_k10temp(),
+        "k10temp_path": target_facts.get("k10temp_path") if target_facts else first_k10temp(),
         "msr_readable": msr,
         "cpufreq_controls": cpufreq,
         "free_bytes": usage.free,
@@ -293,11 +306,14 @@ def main() -> int:
     parser.add_argument("--min-free-gb", type=float, default=20.0)
     parser.add_argument("--engineering-only", action="store_true",
                         help="return success for engineering readiness even without acquisition authorization")
+    parser.add_argument("--target-facts", type=Path,
+                        help="sealed CAT_CAS host facts for local engineering-only preflight")
     args = parser.parse_args()
     try:
         report = inspect(
             args.plan_dir.resolve(), args.bundle_root.resolve(), args.output_root.resolve(),
-            args.min_free_gb, args.authorization.resolve() if args.authorization else None)
+            args.min_free_gb, args.authorization.resolve() if args.authorization else None,
+            args.target_facts.resolve() if args.target_facts else None)
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 2

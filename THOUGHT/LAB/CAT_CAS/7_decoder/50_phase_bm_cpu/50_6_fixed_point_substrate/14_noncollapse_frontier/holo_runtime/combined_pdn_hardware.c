@@ -822,7 +822,7 @@ int run_hardware(const RunnerArgs *args, const Schedule *schedule) {
             goto cleanup;
         }
     }
-    hardware = 1;
+    hardware = !mock;
 
     for (size_t index = 0; index < schedule->count; index++) {
         const Window *window = &schedule->windows[index];

@@ -236,6 +236,7 @@ class Tests(unittest.TestCase):
             self.assertEqual(result.returncode, 5)
             run = json.loads((output / "run.json").read_text())
             self.assertEqual(run["failure_reason"], "SENDER_EPOCH_ALIGNMENT_FAILURE")
+            self.assertFalse(run["hardware_executed"])
 
     def test_failure_cleanup_matrix(self):
         for failure in ("thermal", "cpufreq", "sender_create", "sender_stop",

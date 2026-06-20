@@ -29,12 +29,21 @@ SOURCE_PATHS = (
     RUNTIME_REL / "test_combined_pdn_runner.py",
     RUNTIME_REL / "Makefile",
     RUNTIME_REL / "README.md",
+    RUNTIME_REL / "make_engineering_smoke_schedule.py",
     CAMPAIGN_REL / "compile_session_schedule.py",
+    CAMPAIGN_REL / "campaign_orders.py",
+    CAMPAIGN_REL / "campaign_plan.py",
     CAMPAIGN_REL / "generate_campaign_plan.py",
     CAMPAIGN_REL / "verify_run_manifests.py",
     CAMPAIGN_REL / "run_combined_campaign.py",
     CAMPAIGN_REL / "catcas_preflight.py",
     CAMPAIGN_REL / "make_executor_source_bundle.py",
+    CAMPAIGN_REL / "test_executor_source_bundle.py",
+    CAMPAIGN_REL / "test_campaign_plan.py",
+    CAMPAIGN_REL / "test_orchestrator.py",
+    CAMPAIGN_REL / "test_run_manifests.py",
+    CAMPAIGN_REL / "test_session_determinism.py",
+    CAMPAIGN_REL / "test_session_schedule.py",
     GATE_REL / "verify_combined_plan_binding.py",
 )
 
@@ -64,7 +73,14 @@ def run(args: list[str], *, cwd: Path | None = None,
 
 
 def git(repo: Path, *args: str) -> str:
-    return run(["git", *args], cwd=repo).stdout.strip()
+    completed = subprocess.run(
+        ["git", *args], cwd=repo, text=True,
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False)
+    if completed.returncode != 0:
+        raise RuntimeError(
+            f"git command failed ({completed.returncode}): git {' '.join(args)}\n"
+            f"{completed.stderr}")
+    return completed.stdout.strip()
 
 
 def import_module(path: Path, name: str):
@@ -78,12 +94,20 @@ def import_module(path: Path, name: str):
 
 def copy_committed_source(repo: Path, commit: str, destination: Path) -> None:
     for relative in SOURCE_PATHS:
-        result = run(["git", "show", f"{commit}:{relative.as_posix()}"], cwd=repo)
+        result = subprocess.run(
+            ["git", "show", f"{commit}:{relative.as_posix()}"], cwd=repo,
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False)
+        if result.returncode != 0:
+            raise RuntimeError(
+                f"cannot read committed source {relative}: "
+                f"{result.stderr.decode(errors='replace')}")
         target = destination / "sources" / relative
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(result.stdout, encoding="utf-8")
+        target.write_bytes(result.stdout)
         working = repo / relative
-        if not working.is_file() or working.read_bytes() != target.read_bytes():
+        committed_hash = git(repo, "rev-parse", f"{commit}:{relative.as_posix()}")
+        working_hash = git(repo, "hash-object", relative.as_posix()) if working.is_file() else ""
+        if working_hash != committed_hash:
             raise RuntimeError(f"working tree differs from committed source: {relative}")
 
 
@@ -117,6 +141,182 @@ def add_file_bindings(root: Path) -> dict[str, dict[str, Any]]:
             "sha256": sha256_file(path),
         }
     return bindings
+
+
+def verify_file_bindings(root: Path, files: dict[str, Any]) -> None:
+    if not isinstance(files, dict) or not files:
+        raise RuntimeError("bundle has no file bindings")
+    expected = set(files)
+    for relative, binding in sorted(files.items()):
+        path = (root / relative).resolve()
+        try:
+            path.relative_to(root.resolve())
+        except ValueError as exc:
+            raise RuntimeError(f"bundle path escapes root: {relative}") from exc
+        if not path.is_file():
+            raise RuntimeError(f"missing bound file: {relative}")
+        if path.stat().st_size != binding.get("size"):
+            raise RuntimeError(f"size mismatch: {relative}")
+        if sha256_file(path) != binding.get("sha256"):
+            raise RuntimeError(f"sha256 mismatch: {relative}")
+    actual = {
+        path.relative_to(root).as_posix()
+        for path in root.rglob("*") if path.is_file()
+    } - {"source_bundle.json", "source_bundle.sha256"}
+    if "target_evidence_manifest.json" not in expected:
+        actual.discard("target_evidence_manifest.json")
+    if actual != expected:
+        raise RuntimeError(
+            f"bound file set mismatch: missing={sorted(expected-actual)} "
+            f"unexpected={sorted(actual-expected)}")
+
+
+def verify_bundle(root: Path, expected_commit: str | None = None) -> dict[str, Any]:
+    bundle_path = root / "source_bundle.json"
+    checksum_path = root / "source_bundle.sha256"
+    bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
+    expected_checksum = checksum_path.read_text(encoding="utf-8").split()[0]
+    if sha256_file(bundle_path) != expected_checksum:
+        raise RuntimeError("source_bundle.sha256 mismatch")
+    if expected_commit is not None and bundle.get("executor_commit") != expected_commit:
+        raise RuntimeError("executor commit mismatch")
+    if bundle.get("acquisition_authorized") is not False:
+        raise RuntimeError("bundle must not authorize acquisition")
+    if bundle.get("restoration_authorized") is not False:
+        raise RuntimeError("bundle must not authorize restoration")
+    verify_file_bindings(root, bundle.get("files"))
+    return bundle
+
+
+def build_source_transfer(repo: Path, commit: str, plan_dir: Path,
+                          binding_path: Path, output: Path) -> dict[str, Any]:
+    if not COMMIT_RE.fullmatch(commit) or set(commit) == {"0"}:
+        raise ValueError("commit must be nonzero lowercase 40-character hex")
+    if git(repo, "rev-parse", "HEAD") != commit:
+        raise RuntimeError("HEAD does not equal requested commit")
+    if git(repo, "status", "--porcelain"):
+        raise RuntimeError("working tree must be clean")
+    git(repo, "cat-file", "-e", f"{commit}^{{commit}}")
+    if output.exists():
+        raise FileExistsError(f"refusing existing output: {output}")
+    output.mkdir(parents=True)
+    copy_committed_source(repo, commit, output)
+    plan_target = output / "plan"
+    plan_target.mkdir()
+    for name in ("campaign_plan.json", "campaign_manifest.json"):
+        shutil.copy2(plan_dir / name, plan_target / name)
+    shutil.copy2(binding_path, output / "COMBINED_CAMPAIGN_BINDING.json")
+
+    campaign = output / "sources" / CAMPAIGN_REL
+    previous_bytecode = sys.dont_write_bytecode
+    sys.dont_write_bytecode = True
+    try:
+        plan_module = import_module(campaign / "generate_campaign_plan.py", "transfer_plan")
+        compiler_module = import_module(campaign / "compile_session_schedule.py", "transfer_compile")
+    finally:
+        sys.dont_write_bytecode = previous_bytecode
+    plan_errors = plan_module.verify(plan_target)
+    if plan_errors:
+        raise RuntimeError(f"plan validation failed: {plan_errors}")
+    plan = json.loads((plan_target / "campaign_plan.json").read_text(encoding="utf-8"))
+    compiled = output / "compiled_sessions"
+    compiled.mkdir()
+    for session in plan.get("sessions", []):
+        directory = compiled / session["session_id"]
+        compiler_module.write_session(plan_target / "campaign_plan.json", session["session_id"], directory)
+        validate_session_bundle(directory)
+    if len(list(compiled.iterdir())) != 12:
+        raise RuntimeError("expected exactly 12 compiled sessions")
+    if list(output.rglob("__pycache__")) or list(output.rglob("*.pyc")):
+        raise RuntimeError("generated Python bytecode is forbidden in source transfer")
+
+    bundle = {
+        "schema_id": "CAT_CAS_PHASE6_EXECUTOR_SOURCE_TRANSFER_V1",
+        "artifact_class": "ENGINEERING_BUNDLE_NOT_ACQUISITION_AUTHORIZATION",
+        "executor_commit": commit,
+        "campaign_plan_sha256": sha256_file(plan_target / "campaign_plan.json"),
+        "campaign_manifest_sha256": sha256_file(plan_target / "campaign_manifest.json"),
+        "validation_sessions_expected": 12,
+        "files": add_file_bindings(output),
+        "acquisition_authorized": False,
+        "restoration_authorized": False,
+    }
+    bundle_path = output / "source_bundle.json"
+    bundle_path.write_text(json.dumps(bundle, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    (output / "source_bundle.sha256").write_text(
+        sha256_file(bundle_path) + "  source_bundle.json\n", encoding="utf-8")
+    verify_bundle(output, commit)
+    return bundle
+
+
+def write_target_manifest(root: Path, commit: str) -> dict[str, Any]:
+    if not COMMIT_RE.fullmatch(commit) or set(commit) == {"0"}:
+        raise ValueError("commit must be nonzero lowercase 40-character hex")
+    path = root / "target_evidence_manifest.json"
+    if path.exists():
+        raise FileExistsError(f"refusing existing output: {path}")
+    manifest = {
+        "schema_id": "CAT_CAS_PHASE6_TARGET_EVIDENCE_V1",
+        "executor_commit": commit,
+        "files": add_file_bindings(root),
+    }
+    path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    return manifest
+
+
+def seal_target_evidence(source_root: Path, target_root: Path,
+                         output: Path, commit: str) -> dict[str, Any]:
+    source = verify_bundle(source_root, commit)
+    manifest = json.loads((target_root / "target_evidence_manifest.json").read_text(encoding="utf-8"))
+    if manifest.get("schema_id") != "CAT_CAS_PHASE6_TARGET_EVIDENCE_V1":
+        raise RuntimeError("unexpected target evidence schema")
+    if manifest.get("executor_commit") != commit:
+        raise RuntimeError("target evidence commit mismatch")
+    verify_file_bindings(target_root, manifest.get("files"))
+    if output.exists():
+        raise FileExistsError(f"refusing existing output: {output}")
+    shutil.copytree(source_root, output)
+    (output / "source_bundle.json").rename(output / "source_transfer_bundle.json")
+    (output / "source_bundle.sha256").rename(output / "source_transfer_bundle.sha256")
+    for path in sorted(target_root.rglob("*")):
+        if not path.is_file() or path.name == "target_evidence_manifest.json":
+            continue
+        relative = path.relative_to(target_root)
+        destination = output / relative
+        if destination.exists():
+            raise RuntimeError(f"target evidence collides with source bundle: {relative}")
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(path, destination)
+    shutil.copy2(target_root / "target_evidence_manifest.json", output / "target_evidence_manifest.json")
+    validation = json.loads((output / "evidence" / "validation_report.json").read_text(encoding="utf-8"))
+    if validation.get("sessions_expected") != 12 or validation.get("sessions_passed") != 12 or validation.get("all_pass") is not True or len(validation.get("records", [])) != 12:
+        raise RuntimeError("target evidence does not prove 12/12 validation")
+    runner = output / "combined_pdn_runner"
+    bundle = {
+        "schema_id": "CAT_CAS_PHASE6_EXECUTOR_SOURCE_BUNDLE_V1",
+        "artifact_class": "ENGINEERING_BUNDLE_NOT_ACQUISITION_AUTHORIZATION",
+        "executor_commit": commit,
+        "executor_sha256": sha256_file(runner),
+        "campaign_plan_sha256": source["campaign_plan_sha256"],
+        "campaign_manifest_sha256": source["campaign_manifest_sha256"],
+        "source_transfer_bundle_sha256": sha256_file(source_root / "source_bundle.json"),
+        "validation_sessions_expected": 12,
+        "evidence": {
+            "strict_test_log": "evidence/strict_tests.log",
+            "sanitizer_test_log": "evidence/sanitizer_tests.log",
+            "python_test_log": "evidence/python_tests.log",
+            "validation_report": "evidence/validation_report.json",
+        },
+        "files": add_file_bindings(output),
+        "acquisition_authorized": False,
+        "restoration_authorized": False,
+    }
+    bundle_path = output / "source_bundle.json"
+    bundle_path.write_text(json.dumps(bundle, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    (output / "source_bundle.sha256").write_text(
+        sha256_file(bundle_path) + "  source_bundle.json\n", encoding="utf-8")
+    verify_bundle(output, commit)
+    return bundle
 
 
 def build_bundle(repo: Path, commit: str, plan_dir: Path,
@@ -284,16 +484,35 @@ def build_bundle(repo: Path, commit: str, plan_dir: Path,
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--repo-root", type=Path, required=True)
+    parser.add_argument("--repo-root", type=Path)
     parser.add_argument("--commit", required=True)
-    parser.add_argument("--plan-dir", type=Path, required=True)
-    parser.add_argument("--binding", type=Path, required=True)
-    parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--plan-dir", type=Path)
+    parser.add_argument("--binding", type=Path)
+    parser.add_argument("--output", type=Path)
+    parser.add_argument("--source-only", action="store_true")
+    parser.add_argument("--verify-bundle", type=Path)
+    parser.add_argument("--write-target-manifest", type=Path)
+    parser.add_argument("--seal-target-evidence", type=Path)
+    parser.add_argument("--source-bundle", type=Path)
     args = parser.parse_args()
     try:
-        bundle = build_bundle(
-            args.repo_root.resolve(), args.commit, args.plan_dir.resolve(),
-            args.binding.resolve(), args.output.resolve())
+        if args.verify_bundle:
+            bundle = verify_bundle(args.verify_bundle.resolve(), args.commit)
+        elif args.write_target_manifest:
+            bundle = write_target_manifest(args.write_target_manifest.resolve(), args.commit)
+        elif args.seal_target_evidence:
+            if not args.source_bundle or not args.output:
+                raise ValueError("sealing requires --source-bundle and --output")
+            bundle = seal_target_evidence(
+                args.source_bundle.resolve(), args.seal_target_evidence.resolve(),
+                args.output.resolve(), args.commit)
+        else:
+            if not all((args.repo_root, args.plan_dir, args.binding, args.output)):
+                raise ValueError("bundle generation requires repo, plan, binding, and output")
+            builder = build_source_transfer if args.source_only else build_bundle
+            bundle = builder(
+                args.repo_root.resolve(), args.commit, args.plan_dir.resolve(),
+                args.binding.resolve(), args.output.resolve())
     except (OSError, ValueError, RuntimeError, json.JSONDecodeError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 2
