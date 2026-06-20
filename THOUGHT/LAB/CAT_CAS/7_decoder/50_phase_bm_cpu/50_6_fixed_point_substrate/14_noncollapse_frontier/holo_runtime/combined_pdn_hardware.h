@@ -12,6 +12,8 @@ typedef struct {
     const char *session_dir;
     const char *output_dir;
     const char *executor_commit;
+    const char *authorization_artifact;
+    int engineering_smoke;
     int victim;
     int sender;
     long pin_khz;
@@ -45,6 +47,7 @@ typedef struct {
 typedef struct {
     char session_id[128];
     char route[16];
+    char partition[96];
     char campaign_source_commit[65];
     char campaign_plan_sha256[65];
     char session_manifest_sha256[65];

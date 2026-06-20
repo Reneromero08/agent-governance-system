@@ -3,6 +3,8 @@
 
 #include <ctype.h>
 #include <errno.h>
+#include <limits.h>
+#include <math.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -131,21 +133,59 @@ static int valid_commit(const char *commit) {
     return nonzero;
 }
 
+static int valid_sha256(const char *digest) {
+    if (!digest || strlen(digest) != 64) return 0;
+    for (size_t i = 0; i < 64; i++) {
+        char c = digest[i];
+        if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f'))) return 0;
+    }
+    return 1;
+}
+
+static int path_is_within(const char *root, const char *path) {
+    if (!root || !path) return 0;
+    size_t n = strlen(root);
+    while (n > 1 && root[n - 1] == '/') n--;
+    return !strncmp(root, path, n) && (path[n] == 0 || path[n] == '/');
+}
+
 static void sha256(const char *path, char out[65]) {
     if (!shell_safe(path)) die("unsafe path: %s", path);
-    char command[CP_PATH_MAX + 32];
-    if (snprintf(command, sizeof(command), "sha256sum '%s'", path) >= (int)sizeof(command)) {
-        die("path too long");
+    int pipefd[2];
+    if (pipe(pipefd)) die("sha256 pipe failed");
+    pid_t child = fork();
+    if (child < 0) die("sha256 fork failed");
+    if (child == 0) {
+        close(pipefd[0]);
+        if (dup2(pipefd[1], STDOUT_FILENO) < 0) _exit(126);
+        close(pipefd[1]);
+        execlp("sha256sum", "sha256sum", "--", path, (char *)NULL);
+        _exit(127);
     }
-    FILE *f = popen(command, "r");
+    close(pipefd[1]);
     char line[128];
-    if (!f || !fgets(line, sizeof(line), f)) die("sha256 failed");
-    int rc = pclose(f);
-    if (rc == -1 || !WIFEXITED(rc) || WEXITSTATUS(rc)) die("sha256 failed");
-    for (int i = 0; i < SHA_LEN; i++) {
-        if (!isxdigit((unsigned char)line[i])) die("invalid sha256 output");
-        out[i] = (char)tolower((unsigned char)line[i]);
+    size_t used = 0;
+    ssize_t n;
+    while (used + 1 < sizeof(line) &&
+           (n = read(pipefd[0], line + used, sizeof(line) - used - 1)) > 0) {
+        used += (size_t)n;
     }
+    int read_error = n < 0;
+    close(pipefd[0]);
+    int status = 0;
+    if (waitpid(child, &status, 0) < 0 || read_error ||
+        !WIFEXITED(status) || WEXITSTATUS(status) || used < 65) {
+        die("sha256 failed");
+    }
+    line[used] = 0;
+    for (int i = 0; i < SHA_LEN; i++) {
+        if (!((line[i] >= '0' && line[i] <= '9') ||
+              (line[i] >= 'a' && line[i] <= 'f'))) {
+            die("invalid sha256 output");
+        }
+        out[i] = line[i];
+    }
+    if (line[64] != ' ' && line[64] != '\t') die("invalid sha256 output");
     out[64] = 0;
 }
 
@@ -182,11 +222,17 @@ static RunnerArgs parse_args(int argc, char **argv) {
         const char *arg = i + 1 < argc ? argv[i + 1] : NULL;
         if (!strcmp(key_name, "--validate-only")) args.mode = MODE_VALIDATE;
         else if (!strcmp(key_name, "--hardware")) args.mode = MODE_HARDWARE;
-        else if (!strcmp(key_name, "--mock-hardware")) {
+        else if (!strcmp(key_name, "--engineering-smoke")) {
+            args.mode = MODE_HARDWARE;
+            args.engineering_smoke = 1;
+        } else if (!strcmp(key_name, "--mock-hardware")) {
             args.mode = MODE_HARDWARE;
             args.backend = BACKEND_MOCK;
         } else if (!strcmp(key_name, "--executor-commit") && arg) {
             args.executor_commit = arg;
+            i++;
+        } else if (!strcmp(key_name, "--authorization-artifact") && arg) {
+            args.authorization_artifact = arg;
             i++;
         } else if (!strcmp(key_name, "--session-dir") && arg) {
             args.session_dir = arg;
@@ -227,7 +273,23 @@ static RunnerArgs parse_args(int argc, char **argv) {
     if (args.mode == MODE_HARDWARE && !valid_commit(args.executor_commit)) {
         die("hardware mode requires a nonzero lowercase 40-character hex --executor-commit");
     }
-    if (!shell_safe(args.session_dir) || !shell_safe(args.output_dir)) die("unsafe path");
+    if (args.mode == MODE_HARDWARE && args.backend == BACKEND_REAL &&
+        !args.engineering_smoke && !args.authorization_artifact) {
+        die("scientific hardware mode requires --authorization-artifact");
+    }
+    if (args.engineering_smoke && args.authorization_artifact) {
+        die("engineering smoke must not carry acquisition authorization");
+    }
+    if (args.pin_khz <= 0 || args.read_hz <= 0 ||
+        !isfinite(args.slot_s) || args.slot_s <= 0 ||
+        !isfinite(args.off_window_s) || args.off_window_s <= 0 ||
+        !isfinite(args.temp_veto_c)) {
+        die("invalid numeric arguments");
+    }
+    if (!shell_safe(args.session_dir) || !shell_safe(args.output_dir) ||
+        (args.authorization_artifact && !shell_safe(args.authorization_artifact))) {
+        die("unsafe path");
+    }
     return args;
 }
 
@@ -240,6 +302,7 @@ static void copy_exclusive(const char *source, const char *destination) {
     while ((n = fread(buf, 1, sizeof(buf), in))) {
         if (fwrite(buf, 1, n, out) != n) die("copy failed");
     }
+    if (ferror(in)) die("copy failed");
     if (fclose(in) || fclose(out)) die("copy failed");
 }
 
@@ -247,7 +310,9 @@ static Schedule load_schedule(const RunnerArgs *args) {
     char path[CP_PATH_MAX], schema[128], manifest_session[128];
     Schedule schedule = {0};
 
-    path_join(path, sizeof(path), args->session_dir, "session_manifest.json");
+    if (path_join(path, sizeof(path), args->session_dir, "session_manifest.json")) {
+        die("path too long");
+    }
     char *manifest = slurp(path);
     sha256(path, schedule.session_manifest_sha256);
     if (jstr(manifest, "schema_id", schema, sizeof(schema)) ||
@@ -261,7 +326,9 @@ static Schedule load_schedule(const RunnerArgs *args) {
     verify_file(manifest, args->session_dir, "windows.jsonl");
     free(manifest);
 
-    path_join(path, sizeof(path), args->session_dir, "session.json");
+    if (path_join(path, sizeof(path), args->session_dir, "session.json")) {
+        die("path too long");
+    }
     char *header = slurp(path);
     if (jstr(header, "schema_id", schema, sizeof(schema)) ||
         strcmp(schema, "CAT_CAS_PHASE6_COMBINED_SESSION_SCHEDULE_V1")) {
@@ -272,6 +339,7 @@ static Schedule load_schedule(const RunnerArgs *args) {
         die("session ID mismatch");
     }
     if (jstr(header, "route", schedule.route, sizeof(schedule.route)) ||
+        jstr(header, "partition", schedule.partition, sizeof(schedule.partition)) ||
         jstr(header, "campaign_source_commit", schedule.campaign_source_commit,
              sizeof(schedule.campaign_source_commit)) ||
         jstr(header, "campaign_plan_sha256", schedule.campaign_plan_sha256,
@@ -290,7 +358,9 @@ static Schedule load_schedule(const RunnerArgs *args) {
     schedule.windows = calloc(schedule.count, sizeof(*schedule.windows));
     if (!schedule.windows) die("oom");
 
-    path_join(path, sizeof(path), args->session_dir, "windows.jsonl");
+    if (path_join(path, sizeof(path), args->session_dir, "windows.jsonl")) {
+        die("path too long");
+    }
     FILE *f = fopen(path, "r");
     if (!f) die("open windows");
     char *line = NULL;
@@ -366,11 +436,91 @@ static Schedule load_schedule(const RunnerArgs *args) {
     fclose(f);
     if (n != schedule.count) die("short schedule row count");
 
-    if ((!strcmp(schedule.route, "v4s5") && (args->victim != 4 || args->sender != 5)) ||
-        (!strcmp(schedule.route, "v2s3") && (args->victim != 2 || args->sender != 3))) {
-        die("invalid route/core pair");
+    if (!strcmp(schedule.route, "v4s5")) {
+        if (args->victim != 4 || args->sender != 5) die("invalid route/core pair");
+    } else if (!strcmp(schedule.route, "v2s3")) {
+        if (args->victim != 2 || args->sender != 3) die("invalid route/core pair");
+    } else {
+        die("unsupported route");
     }
     return schedule;
+}
+
+static void verify_engineering_smoke(const Schedule *schedule) {
+    if (strcmp(schedule->session_id, "ENGINEERING_SMOKE_TEST") ||
+        strcmp(schedule->partition, "ENGINEERING_SMOKE_TEST_NOT_SCIENTIFIC_ACQUISITION") ||
+        strcmp(schedule->route, "v4s5") || schedule->count != 3 ||
+        strcmp(schedule->campaign_source_commit, "0000000000000000000000000000000000000000") ||
+        strcmp(schedule->campaign_plan_sha256,
+               "0000000000000000000000000000000000000000000000000000000000000000")) {
+        die("engineering smoke schedule mismatch");
+    }
+    for (size_t i = 0; i < schedule->count; i++) {
+        const Window *window = &schedule->windows[i];
+        if (window->window_index != (long)i ||
+            strcmp(window->block_id, "ENGINEERING_SMOKE_TEST") ||
+            strcmp(window->family, "engineering_smoke") ||
+            strcmp(window->executed_tone_order, "ENGINEERING") ||
+            strcmp(window->declared_tone_order, "ENGINEERING")) {
+            die("engineering smoke window mismatch");
+        }
+    }
+    const Window *first = &schedule->windows[0];
+    const Window *second = &schedule->windows[1];
+    const Window *off = &schedule->windows[2];
+    if (strcmp(first->stage, "ENGINEERING_SMOKE_DRIVEN") ||
+        strcmp(first->actual_mode, "basis") || strcmp(first->declared_mode, "basis") ||
+        strcmp(first->measurement_mode, "lockin_and_raw_ring") ||
+        !first->drive_on || first->sender_off_required || first->amplitude_level != 1 ||
+        first->physical_tone_index != 0 || first->codeword_source_index != 0 ||
+        first->theta_idx != 0 ||
+        strcmp(second->stage, "ENGINEERING_SMOKE_DRIVEN") ||
+        strcmp(second->actual_mode, "rotation") ||
+        strcmp(second->declared_mode, "rotation") ||
+        strcmp(second->measurement_mode, "lockin_and_raw_ring") ||
+        !second->drive_on || second->sender_off_required || second->amplitude_level != 1 ||
+        second->physical_tone_index != 1 || second->codeword_source_index != 1 ||
+        second->theta_idx != 1 ||
+        strcmp(off->stage, "ENGINEERING_SMOKE_SENDER_OFF") ||
+        strcmp(off->actual_mode, "null") || strcmp(off->declared_mode, "null") ||
+        strcmp(off->measurement_mode, "raw_ring_sender_off") ||
+        off->drive_on || !off->sender_off_required || off->amplitude_level != 0 ||
+        off->physical_tone_index != -1 || off->codeword_source_index != -1 ||
+        off->theta_idx != -1) {
+        die("engineering smoke window mismatch");
+    }
+}
+
+static void verify_authorization(const RunnerArgs *args, const Schedule *schedule) {
+    char schema[96], executor_commit[41], plan_sha[65], source_bundle_sha[65];
+    char output_root[CP_PATH_MAX], authorized_by[256];
+    int acquisition = 0, restoration = 1;
+    char *authorization = slurp(args->authorization_artifact);
+    int invalid =
+        jstr(authorization, "schema_id", schema, sizeof(schema)) ||
+        strcmp(schema, "CAT_CAS_PHASE6_ACQUISITION_AUTHORIZATION_V1") ||
+        jbool(authorization, "acquisition_authorized", &acquisition) || !acquisition ||
+        jbool(authorization, "restoration_authorized", &restoration) || restoration ||
+        jstr(authorization, "executor_commit", executor_commit, sizeof(executor_commit)) ||
+        strcmp(executor_commit, args->executor_commit) ||
+        jstr(authorization, "campaign_plan_sha256", plan_sha, sizeof(plan_sha)) ||
+        strcmp(plan_sha, schedule->campaign_plan_sha256) ||
+        jstr(authorization, "source_bundle_sha256", source_bundle_sha,
+             sizeof(source_bundle_sha)) || !valid_sha256(source_bundle_sha) ||
+        jstr(authorization, "authorized_output_root", output_root, sizeof(output_root)) ||
+        !shell_safe(output_root) || !path_is_within(output_root, args->output_dir) ||
+        jstr(authorization, "authorized_by", authorized_by, sizeof(authorized_by));
+    free(authorization);
+    if (invalid) die("invalid acquisition authorization artifact");
+}
+
+static void verify_execution_gate(const RunnerArgs *args, const Schedule *schedule) {
+    if (args->mode != MODE_HARDWARE) return;
+    if (args->engineering_smoke) {
+        verify_engineering_smoke(schedule);
+    } else if (args->backend == BACKEND_REAL) {
+        verify_authorization(args, schedule);
+    }
 }
 
 static void validation_outputs(const RunnerArgs *args, const Schedule *schedule) {
@@ -380,25 +530,29 @@ static void validation_outputs(const RunnerArgs *args, const Schedule *schedule)
     char source[CP_PATH_MAX], destination[CP_PATH_MAX];
     const char *inputs[] = {"session.json", "windows.jsonl"};
     for (int i = 0; i < 2; i++) {
-        path_join(source, sizeof(source), args->session_dir, inputs[i]);
-        path_join(destination, sizeof(destination), args->output_dir, inputs[i]);
+        if (path_join(source, sizeof(source), args->session_dir, inputs[i]) ||
+            path_join(destination, sizeof(destination), args->output_dir, inputs[i])) {
+            die("path too long");
+        }
         copy_exclusive(source, destination);
     }
     const char *empty[] = {"raw_samples.bin", "telemetry.csv", "stderr.log"};
     for (int i = 0; i < 3; i++) {
-        path_join(destination, sizeof(destination), args->output_dir, empty[i]);
+        if (path_join(destination, sizeof(destination), args->output_dir, empty[i])) {
+            die("path too long");
+        }
         FILE *f = fopen(destination, "wbx");
         if (!f) die("create output");
         fclose(f);
     }
 
-    path_join(destination, sizeof(destination), args->output_dir, "stdout.log");
+    if (path_join(destination, sizeof(destination), args->output_dir, "stdout.log")) die("path too long");
     FILE *f = fopen(destination, "wx");
     if (!f) die("create stdout.log");
     fprintf(f, "VALIDATION_ONLY_HARDWARE_NOT_EXECUTED\n");
     fclose(f);
 
-    path_join(destination, sizeof(destination), args->output_dir, "window_results.csv");
+    if (path_join(destination, sizeof(destination), args->output_dir, "window_results.csv")) die("path too long");
     f = fopen(destination, "wx");
     if (!f) die("create window_results.csv");
     fprintf(f, "window_index,session_id,validation_status,hardware_executed\n");
@@ -407,7 +561,7 @@ static void validation_outputs(const RunnerArgs *args, const Schedule *schedule)
     }
     fclose(f);
 
-    path_join(destination, sizeof(destination), args->output_dir, "run.json");
+    if (path_join(destination, sizeof(destination), args->output_dir, "run.json")) die("path too long");
     f = fopen(destination, "wx");
     if (!f) die("create run.json");
     fprintf(f,
@@ -415,9 +569,12 @@ static void validation_outputs(const RunnerArgs *args, const Schedule *schedule)
             "  \"schema_id\": \"CAT_CAS_PHASE6_COMBINED_RUN_V1\",\n"
             "  \"session_id\": \"%s\",\n"
             "  \"status\": \"VALIDATION_ONLY_HARDWARE_NOT_EXECUTED\",\n"
+            "  \"execution_class\": \"VALIDATION_ONLY\",\n"
             "  \"hardware_executed\": false,\n"
             "  \"automatic_retry\": false,\n"
             "  \"restoration_authorized\": false,\n"
+            "  \"scientific_acquisition_authorized\": false,\n"
+            "  \"physical_carrier_restoration_claimed\": false,\n"
             "  \"windows_seen\": %zu\n"
             "}\n",
             schedule->session_id, schedule->count);
@@ -436,6 +593,7 @@ int main(int argc, char **argv) {
                                     : "session directory does not exist");
     }
     Schedule schedule = load_schedule(&args);
+    verify_execution_gate(&args, &schedule);
     int rc = 0;
     if (args.mode == MODE_VALIDATE) {
         validation_outputs(&args, &schedule);

@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -79,6 +80,18 @@ def write_session(root: Path, mutate=None, count: int = 3,
         },
     }
     dump(directory / "session_manifest.json", manifest)
+    return directory
+
+
+def write_engineering_smoke(root: Path) -> Path:
+    directory = root / "engineering_smoke"
+    result = subprocess.run(
+        [sys.executable, str(HERE / "make_engineering_smoke_schedule.py"), str(directory)],
+        text=True,
+        capture_output=True,
+    )
+    if result.returncode != 0:
+        raise RuntimeError(result.stderr or result.stdout)
     return directory
 
 
@@ -159,6 +172,10 @@ class Tests(unittest.TestCase):
         self.assert_reject(lambda header, rows: rows[0].update(measurement_mode="bad"),
                            "unsupported measurement")
 
+    def test_unsupported_route(self):
+        self.assert_reject(lambda header, rows: header.update(route="bad_route"),
+                           "unsupported route")
+
     def test_sender_off_drive(self):
         self.assert_reject(lambda header, rows: rows[2].update(drive_on=True),
                            "sender_off_required + drive_on")
@@ -197,6 +214,111 @@ class Tests(unittest.TestCase):
             result = self.exec_runner(directory, Path(temp) / "out",
                                       "--validate-only", fail="thermal")
             self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_invalid_numeric_arguments_are_rejected(self):
+        for option, value in (("--read-hz", "0"), ("--slot-s", "nan"),
+                              ("--off-window-s", "0"), ("--pin-khz", "-1")):
+            with self.subTest(option=option), tempfile.TemporaryDirectory() as temp:
+                directory = write_session(Path(temp))
+                result = self.exec_runner(
+                    directory, Path(temp) / "out", "--mock-hardware", option, value
+                )
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("invalid numeric arguments", result.stderr)
+
+    def test_capture_capacity_is_bounded(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = write_session(Path(temp))
+            output = Path(temp) / "out"
+            result = self.exec_runner(
+                directory, output, "--mock-hardware", "--read-hz", "1000000000"
+            )
+            self.assertEqual(result.returncode, 5)
+            run = json.loads((output / "run.json").read_text())
+            self.assertEqual(run["failure_reason"], "CAPTURE_CAPACITY_INVALID")
+
+    def test_real_hardware_requires_authorization_artifact(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = write_session(Path(temp))
+            result = self.exec_runner(directory, Path(temp) / "out", "--hardware")
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("requires --authorization-artifact", result.stderr)
+
+    def test_invalid_authorization_artifact_fails_before_hardware(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            directory = write_session(root)
+            authorization = root / "authorization.json"
+            authorization.write_text("{}\n", encoding="utf-8")
+            result = self.exec_runner(
+                directory,
+                root / "out",
+                "--hardware",
+                "--authorization-artifact",
+                str(authorization),
+            )
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("invalid acquisition authorization", result.stderr)
+            self.assertFalse((root / "out").exists())
+
+    def test_valid_authorization_is_bound_and_recorded_before_real_execution(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            directory = write_session(root)
+            authorized_root = root / "authorized"
+            authorized_root.mkdir()
+            output = authorized_root / "run"
+            authorization = root / "authorization.json"
+            dump(authorization, {
+                "schema_id": "CAT_CAS_PHASE6_ACQUISITION_AUTHORIZATION_V1",
+                "acquisition_authorized": True,
+                "restoration_authorized": False,
+                "executor_commit": VALID_COMMIT,
+                "campaign_plan_sha256": "e" * 64,
+                "source_bundle_sha256": "b" * 64,
+                "authorized_output_root": str(authorized_root),
+                "authorized_by": "PROJECT_OWNER_TEST",
+            })
+            result = self.exec_runner(
+                directory,
+                output,
+                "--hardware",
+                "--authorization-artifact",
+                str(authorization),
+                fail="thermal",
+            )
+            self.assertEqual(result.returncode, 3, result.stderr)
+            run = json.loads((output / "run.json").read_text(encoding="utf-8"))
+            self.assertEqual(run["execution_class"], "AUTHORIZED_SCIENTIFIC_ACQUISITION")
+            self.assertTrue(run["scientific_acquisition_authorized"])
+            self.assertEqual(run["authorization_artifact_sha256"], sha(authorization))
+            self.assertFalse(run["hardware_executed"])
+
+    def test_engineering_smoke_gate_rejects_scientific_schedule(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = write_session(Path(temp))
+            result = self.exec_runner(
+                directory, Path(temp) / "out", "--engineering-smoke", "--mock-hardware"
+            )
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("engineering smoke schedule mismatch", result.stderr)
+
+    def test_exact_engineering_smoke_is_the_only_unauthorized_hardware_shape(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            directory = write_engineering_smoke(root)
+            output = root / "out"
+            result = self.exec_runner(
+                directory, output, "--engineering-smoke", "--mock-hardware"
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            run = json.loads((output / "run.json").read_text(encoding="utf-8"))
+            self.assertEqual(
+                run["execution_class"],
+                "ENGINEERING_SMOKE_NOT_SCIENTIFIC_ACQUISITION",
+            )
+            self.assertFalse(run["scientific_acquisition_authorized"])
+            self.assertIsNone(run["authorization_artifact_sha256"])
 
     def test_hardware_commit_validation(self):
         for commit in ("0" * 40, "A" * 40, "g" * 40, "abc"):

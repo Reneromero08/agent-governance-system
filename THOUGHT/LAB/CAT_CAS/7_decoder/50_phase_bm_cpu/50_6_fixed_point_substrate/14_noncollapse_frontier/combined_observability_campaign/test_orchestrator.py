@@ -17,6 +17,7 @@ def args_with(commit: str | None = "a" * 40, validate: bool = False):
         read_hz=4000,
         temp_veto_c=68.0,
         executor_commit=commit,
+        authorization=Path("/authorization.json") if not validate else None,
         runner_validate_only=validate,
     )
 
@@ -29,6 +30,7 @@ class OrchestratorTests(unittest.TestCase):
         )
         self.assertEqual(command[command.index("--victim") + 1], "4")
         self.assertEqual(command[command.index("--sender") + 1], "5")
+        self.assertIn("--authorization-artifact", command)
         command = runner_command(
             Path("/runner"), Path("/session"), Path("/output"), "v2s3", args
         )

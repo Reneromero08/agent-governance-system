@@ -13,10 +13,12 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from catcas_preflight import inspect as inspect_preflight
-from compile_session_schedule import write_session
-from generate_campaign_plan import verify as verify_plan
-from verify_run_manifests import verify as verify_run_manifests
+sys.dont_write_bytecode = True
+
+from catcas_preflight import inspect as inspect_preflight  # noqa: E402
+from compile_session_schedule import write_session  # noqa: E402
+from generate_campaign_plan import verify as verify_plan  # noqa: E402
+from verify_run_manifests import verify as verify_run_manifests  # noqa: E402
 
 ROUTE_CORES = {"v4s5": (4, 5), "v2s3": (2, 3)}
 COMMIT_RE = re.compile(r"[0-9a-f]{40}")
@@ -65,8 +67,14 @@ def runner_command(runner: Path, session_dir: Path, output_dir: Path,
                 "hardware mode requires --executor-commit as nonzero lowercase "
                 "40-character hex"
             )
-        command.extend(("--executor-commit", commit))
-        command.append("--hardware")
+        authorization = getattr(args, "authorization", None)
+        if authorization is None:
+            raise ValueError("hardware mode requires --authorization")
+        command.extend((
+            "--executor-commit", commit,
+            "--authorization-artifact", str(Path(authorization).resolve()),
+            "--hardware",
+        ))
     return command
 
 
@@ -92,6 +100,18 @@ def verify_executor_binding(bundle_root: Path, runner: Path,
         raise ValueError("runner binary does not match source bundle")
     return bundle
 
+
+
+
+def persist_failure(execution: dict[str, Any], execution_path: Path,
+                    session_id: str, message: str, **details: Any) -> None:
+    execution["status"] = "FAILED"
+    execution["failed_session"] = session_id
+    execution["failure_message"] = message
+    execution.update(details)
+    execution_path.write_text(
+        json.dumps(execution, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
 
 def execute(args: argparse.Namespace) -> int:
     plan_dir = args.plan_dir.resolve()
@@ -193,14 +213,29 @@ def execute(args: argparse.Namespace) -> int:
                 json.dumps(execution, indent=2, sort_keys=True) + "\n", encoding="utf-8")
             return 5
 
-        run_record = load_json(run_dir / "run.json")
+        try:
+            run_record = load_json(run_dir / "run.json")
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            persist_failure(
+                execution, execution_path, session_id,
+                f"invalid run.json: {exc}", provenance_error=True,
+            )
+            return 5
         if not args.runner_validate_only:
             if run_record.get("executor_git_commit") != args.executor_commit:
-                raise ValueError(
-                    f"{session_id}: run executor commit does not match authorization")
+                persist_failure(
+                    execution, execution_path, session_id,
+                    "run executor commit does not match authorization",
+                    provenance_error=True,
+                )
+                return 5
             if run_record.get("physical_carrier_restoration_claimed") is not False:
-                raise ValueError(
-                    f"{session_id}: executor promoted host cleanup to carrier restoration")
+                persist_failure(
+                    execution, execution_path, session_id,
+                    "executor promoted host cleanup to carrier restoration",
+                    provenance_error=True,
+                )
+                return 5
         execution["sessions_completed"].append(session_id)
         execution_path.write_text(
             json.dumps(execution, indent=2, sort_keys=True) + "\n", encoding="utf-8")

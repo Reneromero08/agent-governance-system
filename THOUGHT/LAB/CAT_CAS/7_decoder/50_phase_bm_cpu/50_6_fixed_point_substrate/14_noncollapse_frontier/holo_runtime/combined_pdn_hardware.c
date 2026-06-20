@@ -4,6 +4,7 @@
 #include <dirent.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <limits.h>
 #include <math.h>
 #include <pthread.h>
 #include <sched.h>
@@ -15,6 +16,7 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <sys/utsname.h>
+#include <sys/wait.h>
 #include <time.h>
 #include <unistd.h>
 
@@ -24,6 +26,7 @@
 #define MSR_COFVID 0xC0010071
 #define START_GUARD_SECONDS 0.050
 #define MAX_EPOCH_SKEW_SECONDS 0.005
+#define MAX_CAPTURE_SAMPLES 10000000
 
 static volatile sig_atomic_t interrupted;
 
@@ -200,11 +203,23 @@ static int restore(PinState *state) {
                  "/sys/devices/system/cpu/cpu%d/cpufreq/scaling_min_freq", core);
         snprintf(max_path, sizeof(max_path),
                  "/sys/devices/system/cpu/cpu%d/cpufreq/scaling_max_freq", core);
-        if (write_long(min_path, state->min[core]) ||
-            write_long(max_path, state->max[core]) ||
-            write_long(min_path, state->min[core])) {
+        long current_min, current_max;
+        if (read_long(min_path, &current_min) || read_long(max_path, &current_max)) {
             ok = 0;
+            continue;
         }
+        int failed;
+        if (state->min[core] > current_max) {
+            failed = write_long(max_path, state->max[core]) ||
+                     write_long(min_path, state->min[core]);
+        } else if (state->max[core] < current_min) {
+            failed = write_long(min_path, state->min[core]) ||
+                     write_long(max_path, state->max[core]);
+        } else {
+            failed = write_long(min_path, state->min[core]) ||
+                     write_long(max_path, state->max[core]);
+        }
+        if (failed) ok = 0;
     }
     if (state->boost_have &&
         write_long("/sys/devices/system/cpu/cpufreq/boost", state->boost)) {
@@ -360,13 +375,12 @@ static int sender_stop(Sender *sender) {
         return 0;
     }
     atomic_store_explicit(&sender->stop, 1, memory_order_release);
-    struct timespec timeout;
-    clock_gettime(CLOCK_REALTIME, &timeout);
-    timeout.tv_sec += 2;
     void *result = NULL;
-    int rc = pthread_timedjoin_np(sender->thread, &result, &timeout);
+    int rc = pthread_join(sender->thread, &result);
+    if (rc) return -1;
     sender->alive = 0;
-    return rc || result ? -1 : 0;
+    memset(&sender->thread, 0, sizeof(sender->thread));
+    return result ? -1 : 0;
 }
 
 static int capture_at_origin(int core, long hz, double seconds, double tsc_hz,
@@ -497,11 +511,32 @@ static int raw_record(FILE *f, uint64_t timestamp, double sample) {
     return fwrite(bytes, 1, 16, f) == 16 ? 0 : -1;
 }
 
-static void json_escape(FILE *f, const char *value) {
-    for (; *value; value++) {
-        if (*value == '"' || *value == '\\') fputc('\\', f);
-        fputc(*value, f);
+static int json_escape(FILE *f, const char *value) {
+    for (const unsigned char *p = (const unsigned char *)value; *p; p++) {
+        switch (*p) {
+        case '"': if (fputs("\\\"", f) < 0) return -1; break;
+        case '\\': if (fputs("\\\\", f) < 0) return -1; break;
+        case '\b': if (fputs("\\b", f) < 0) return -1; break;
+        case '\f': if (fputs("\\f", f) < 0) return -1; break;
+        case '\n': if (fputs("\\n", f) < 0) return -1; break;
+        case '\r': if (fputs("\\r", f) < 0) return -1; break;
+        case '\t': if (fputs("\\t", f) < 0) return -1; break;
+        default:
+            if (*p < 0x20) {
+                if (fprintf(f, "\\u%04x", (unsigned)*p) < 0) return -1;
+            } else if (fputc(*p, f) == EOF) {
+                return -1;
+            }
+        }
     }
+    return 0;
+}
+
+static int json_string(FILE *f, const char *value) {
+    if (fputc('"', f) == EOF || json_escape(f, value) || fputc('"', f) == EOF) {
+        return -1;
+    }
+    return 0;
 }
 
 static int close_sync(FILE **file) {
@@ -515,19 +550,45 @@ static int close_sync(FILE **file) {
 }
 
 static int hash_file(const char *path, char out[65]) {
-    char command[CP_PATH_MAX + 32], line[128];
-    if (snprintf(command, sizeof(command), "sha256sum '%s'", path) >=
-        (int)sizeof(command)) {
+    int pipefd[2];
+    if (pipe(pipefd)) return -1;
+    pid_t child = fork();
+    if (child < 0) {
+        close(pipefd[0]);
+        close(pipefd[1]);
         return -1;
     }
-    FILE *f = popen(command, "r");
-    if (!f || !fgets(line, sizeof(line), f)) {
-        if (f) pclose(f);
+    if (child == 0) {
+        close(pipefd[0]);
+        if (dup2(pipefd[1], STDOUT_FILENO) < 0) _exit(126);
+        close(pipefd[1]);
+        execlp("sha256sum", "sha256sum", "--", path, (char *)NULL);
+        _exit(127);
+    }
+    close(pipefd[1]);
+    char line[128];
+    size_t used = 0;
+    ssize_t n;
+    while (used + 1 < sizeof(line) &&
+           (n = read(pipefd[0], line + used, sizeof(line) - used - 1)) > 0) {
+        used += (size_t)n;
+    }
+    int read_error = n < 0;
+    close(pipefd[0]);
+    int status = 0;
+    if (waitpid(child, &status, 0) < 0 || read_error ||
+        !WIFEXITED(status) || WEXITSTATUS(status) != 0 || used < 65) {
         return -1;
     }
-    int rc = pclose(f);
-    if (rc) return -1;
-    memcpy(out, line, 64);
+    line[used] = 0;
+    for (int i = 0; i < 64; i++) {
+        if (!((line[i] >= '0' && line[i] <= '9') ||
+              (line[i] >= 'a' && line[i] <= 'f'))) {
+            return -1;
+        }
+        out[i] = line[i];
+    }
+    if (line[64] != ' ' && line[64] != '\t') return -1;
     out[64] = 0;
     return 0;
 }
@@ -566,7 +627,10 @@ int write_run_manifest(const char *dir, const char *session_id, const char *stat
             "{\n"
             "  \"schema_id\": \"CAT_CAS_PHASE6_COMBINED_RUN_MANIFEST_V1\",\n"
             "  \"session_id\": \"");
-    json_escape(f, session_id);
+    if (json_escape(f, session_id)) {
+        fclose(f);
+        return -1;
+    }
     fprintf(f, "\",\n  \"status\": \"%s\",\n  \"files\": {\n", status);
 
     for (int i = 0; i < 8; i++) {
@@ -604,6 +668,7 @@ static int copy_file(const char *source, const char *destination) {
             break;
         }
     }
+    if (ferror(in)) rc = -1;
     if (fclose(in)) rc = -1;
     if (close_sync(&out)) rc = -1;
     return rc;
@@ -622,34 +687,48 @@ static int write_run_json(const RunnerArgs *args, const Schedule *schedule,
                           const PinState *pin, int restored, int hardware,
                           int rc, const char *reason, double tsc_hz,
                           time_t start, time_t end) {
-    char path[CP_PATH_MAX], model[256];
+    char path[CP_PATH_MAX], model[256], authorization_digest[65] = {0};
+    const char *execution_class = args->engineering_smoke
+        ? "ENGINEERING_SMOKE_NOT_SCIENTIFIC_ACQUISITION"
+        : (args->backend == BACKEND_MOCK
+            ? "MOCK_HARDWARE_TEST"
+            : "AUTHORIZED_SCIENTIFIC_ACQUISITION");
     struct utsname system;
-    uname(&system);
+    if (uname(&system)) memset(&system, 0, sizeof(system));
     cpu_model(model, sizeof(model));
+    if (args->authorization_artifact &&
+        hash_file(args->authorization_artifact, authorization_digest)) {
+        return -1;
+    }
     if (joinp(path, sizeof(path), args->output_dir, "run.json")) return -1;
     FILE *f = fopen(path, "wx");
     if (!f) return -1;
 
-    fprintf(f,
-            "{\n"
-            "  \"schema_id\": \"CAT_CAS_PHASE6_COMBINED_RUN_V1\",\n"
-            "  \"session_id\": \"%s\",\n"
-            "  \"campaign_source_commit\": \"%s\",\n"
-            "  \"campaign_plan_sha256\": \"%s\",\n"
-            "  \"session_manifest_sha256\": \"%s\",\n"
-            "  \"executor_git_commit\": \"%s\",\n"
-            "  \"host_identity\": \"",
-            schedule->session_id, schedule->campaign_source_commit,
-            schedule->campaign_plan_sha256, schedule->session_manifest_sha256,
-            args->executor_commit);
-    json_escape(f, system.nodename);
-    fprintf(f, "\",\n  \"kernel_identity\": \"");
-    json_escape(f, system.release);
-    fprintf(f, "\",\n  \"cpu_model\": \"");
-    json_escape(f, model);
-    fprintf(f,
-            "\",\n"
-            "  \"route\": \"%s\",\n"
+#define JSON_FIELD(name, value, comma) do { \
+    if (fprintf(f, "  \"%s\": ", name) < 0 || json_string(f, value) || \
+        fputs(comma ? ",\n" : "\n", f) < 0) goto fail; \
+} while (0)
+
+    if (fputs("{\n", f) < 0) goto fail;
+    JSON_FIELD("schema_id", "CAT_CAS_PHASE6_COMBINED_RUN_V1", 1);
+    JSON_FIELD("session_id", schedule->session_id, 1);
+    JSON_FIELD("campaign_source_commit", schedule->campaign_source_commit, 1);
+    JSON_FIELD("campaign_plan_sha256", schedule->campaign_plan_sha256, 1);
+    JSON_FIELD("session_manifest_sha256", schedule->session_manifest_sha256, 1);
+    JSON_FIELD("executor_git_commit", args->executor_commit, 1);
+    JSON_FIELD("host_identity", system.nodename, 1);
+    JSON_FIELD("kernel_identity", system.release, 1);
+    JSON_FIELD("cpu_model", model, 1);
+    JSON_FIELD("route", schedule->route, 1);
+    JSON_FIELD("execution_class", execution_class, 1);
+    if (fputs("  \"authorization_artifact_sha256\": ", f) < 0) goto fail;
+    if (args->authorization_artifact) {
+        if (json_string(f, authorization_digest)) goto fail;
+    } else if (fputs("null", f) < 0) {
+        goto fail;
+    }
+    if (fputs(",\n", f) < 0) goto fail;
+    if (fprintf(f,
             "  \"victim_core\": %d,\n"
             "  \"sender_core\": %d,\n"
             "  \"frequency_policy\": %ld,\n"
@@ -659,44 +738,56 @@ static int write_run_json(const RunnerArgs *args, const Schedule *schedule,
             "  \"sender_off_duration_s\": %.17g,\n"
             "  \"temperature_veto_c\": %.17g,\n"
             "  \"start_timestamp\": %lld,\n"
-            "  \"end_timestamp\": %lld,\n"
-            "  \"exit_status\": \"%s\",\n"
-            "  \"failure_reason\": \"%s\",\n"
+            "  \"end_timestamp\": %lld,\n",
+            args->victim, args->sender, args->pin_khz, tsc_hz,
+            args->read_hz, args->slot_s, args->off_window_s, args->temp_veto_c,
+            (long long)start, (long long)end) < 0) goto fail;
+    JSON_FIELD("exit_status", rc ? "FAILED" : "COMPLETE", 1);
+    JSON_FIELD("failure_reason", reason, 1);
+    if (fprintf(f,
             "  \"host_control_state_restored\": %s,\n"
             "  \"physical_carrier_restoration_claimed\": false,\n"
             "  \"automatic_retry\": false,\n"
             "  \"restoration_authorized\": false,\n"
+            "  \"scientific_acquisition_authorized\": %s,\n"
             "  \"hardware_executed\": %s,\n"
             "  \"original_cpufreq_state\": {\"min_khz\": [",
-            schedule->route, args->victim, args->sender, args->pin_khz, tsc_hz,
-            args->read_hz, args->slot_s, args->off_window_s, args->temp_veto_c,
-            (long long)start, (long long)end, rc ? "FAILED" : "COMPLETE",
-            reason, restored ? "true" : "false", hardware ? "true" : "false");
+            restored ? "true" : "false",
+            (args->authorization_artifact && !args->engineering_smoke &&
+             args->backend == BACKEND_REAL) ? "true" : "false",
+            hardware ? "true" : "false") < 0) goto fail;
 
     for (int core = 0; core < NCPU; core++) {
-        fprintf(f, "%ld%s", pin->min[core], core + 1 < NCPU ? ", " : "");
+        if (fprintf(f, "%ld%s", pin->min[core], core + 1 < NCPU ? ", " : "") < 0) goto fail;
     }
-    fprintf(f, "], \"max_khz\": [");
+    if (fputs("], \"max_khz\": [", f) < 0) goto fail;
     for (int core = 0; core < NCPU; core++) {
-        fprintf(f, "%ld%s", pin->max[core], core + 1 < NCPU ? ", " : "");
+        if (fprintf(f, "%ld%s", pin->max[core], core + 1 < NCPU ? ", " : "") < 0) goto fail;
     }
-    fprintf(f,
+    if (fprintf(f,
             "], \"boost\": %ld},\n"
             "  \"applied_cpufreq_state\": {\"min_khz\": %ld, "
             "\"max_khz\": %ld, \"boost\": 0},\n"
             "  \"restored_cpufreq_state\": {\"verified\": %s, "
             "\"min_khz\": [",
             pin->boost, args->pin_khz, args->pin_khz,
-            restored ? "true" : "false");
+            restored ? "true" : "false") < 0) goto fail;
     for (int core = 0; core < NCPU; core++) {
-        fprintf(f, "%ld%s", pin->min[core], core + 1 < NCPU ? ", " : "");
+        if (fprintf(f, "%ld%s", pin->min[core], core + 1 < NCPU ? ", " : "") < 0) goto fail;
     }
-    fprintf(f, "], \"max_khz\": [");
+    if (fputs("], \"max_khz\": [", f) < 0) goto fail;
     for (int core = 0; core < NCPU; core++) {
-        fprintf(f, "%ld%s", pin->max[core], core + 1 < NCPU ? ", " : "");
+        if (fprintf(f, "%ld%s", pin->max[core], core + 1 < NCPU ? ", " : "") < 0) goto fail;
     }
-    fprintf(f, "], \"boost\": %ld}\n}\n", pin->boost);
+    if (fprintf(f, "], \"boost\": %ld}\n}\n", pin->boost) < 0) goto fail;
+#undef JSON_FIELD
     return close_sync(&f);
+
+fail:
+#undef JSON_FIELD
+    fclose(f);
+    unlink(path);
+    return -1;
 }
 
 int run_hardware(const RunnerArgs *args, const Schedule *schedule) {
@@ -715,9 +806,17 @@ int run_hardware(const RunnerArgs *args, const Schedule *schedule) {
         return 2;
     }
 
-    joinp(path, sizeof(path), args->output_dir, "stdout.log");
+    if (joinp(path, sizeof(path), args->output_dir, "stdout.log")) {
+        reason = "PATH_JOIN_FAILURE";
+        rc = 5;
+        goto done;
+    }
     out = fopen(path, "wx");
-    joinp(path, sizeof(path), args->output_dir, "stderr.log");
+    if (joinp(path, sizeof(path), args->output_dir, "stderr.log")) {
+        reason = "PATH_JOIN_FAILURE";
+        rc = 5;
+        goto done;
+    }
     err = fopen(path, "wx");
     if (!out || !err) {
         reason = "LOG_CREATE_FAILURE";
@@ -727,26 +826,46 @@ int run_hardware(const RunnerArgs *args, const Schedule *schedule) {
     fprintf(out, "ENGINEERING_HARDWARE_EXECUTION backend=%s\n",
             mock ? "mock" : "real");
 
-    joinp(path, sizeof(path), args->session_dir, "session.json");
-    joinp(destination, sizeof(destination), args->output_dir, "session.json");
+    if (joinp(path, sizeof(path), args->session_dir, "session.json") ||
+        joinp(destination, sizeof(destination), args->output_dir, "session.json")) {
+        reason = "PATH_JOIN_FAILURE";
+        rc = 5;
+        goto done;
+    }
     if (copy_file(path, destination)) {
         reason = "INPUT_COPY_FAILURE";
         rc = 5;
         goto done;
     }
-    joinp(path, sizeof(path), args->session_dir, "windows.jsonl");
-    joinp(destination, sizeof(destination), args->output_dir, "windows.jsonl");
+    if (joinp(path, sizeof(path), args->session_dir, "windows.jsonl") ||
+        joinp(destination, sizeof(destination), args->output_dir, "windows.jsonl")) {
+        reason = "PATH_JOIN_FAILURE";
+        rc = 5;
+        goto done;
+    }
     if (copy_file(path, destination)) {
         reason = "INPUT_COPY_FAILURE";
         rc = 5;
         goto done;
     }
 
-    joinp(path, sizeof(path), args->output_dir, "raw_samples.bin");
+    if (joinp(path, sizeof(path), args->output_dir, "raw_samples.bin")) {
+        reason = "PATH_JOIN_FAILURE";
+        rc = 5;
+        goto done;
+    }
     raw = fopen(path, "wbx");
-    joinp(path, sizeof(path), args->output_dir, "window_results.csv");
+    if (joinp(path, sizeof(path), args->output_dir, "window_results.csv")) {
+        reason = "PATH_JOIN_FAILURE";
+        rc = 5;
+        goto done;
+    }
     csv = fopen(path, "wx");
-    joinp(path, sizeof(path), args->output_dir, "telemetry.csv");
+    if (joinp(path, sizeof(path), args->output_dir, "telemetry.csv")) {
+        reason = "PATH_JOIN_FAILURE";
+        rc = 5;
+        goto done;
+    }
     telemetry = fopen(path, "wx");
     if (!raw || !csv || !telemetry) {
         reason = "OUTPUT_CREATE_FAILURE";
@@ -828,8 +947,22 @@ int run_hardware(const RunnerArgs *args, const Schedule *schedule) {
         const Window *window = &schedule->windows[index];
         double seconds = window->sender_off_required ?
                          args->off_window_s : args->slot_s;
-        int cap = (int)(seconds * args->read_hz) + 32;
+        double expected_samples = seconds * (double)args->read_hz;
+        if (args->read_hz <= 0 || seconds <= 0 || !isfinite(expected_samples) ||
+            expected_samples > (double)(MAX_CAPTURE_SAMPLES - 32) ||
+            expected_samples > (double)(INT_MAX - 32)) {
+            reason = "CAPTURE_CAPACITY_INVALID";
+            rc = 5;
+            goto cleanup;
+        }
+        int cap = (int)expected_samples + 32;
         if (mock && cap > 8) cap = 8;
+        if ((size_t)cap > SIZE_MAX / sizeof(uint64_t) ||
+            (size_t)cap > SIZE_MAX / sizeof(double)) {
+            reason = "CAPTURE_CAPACITY_INVALID";
+            rc = 5;
+            goto cleanup;
+        }
         uint64_t *timestamps = malloc(sizeof(*timestamps) * (size_t)cap);
         double *observations = malloc(sizeof(*observations) * (size_t)cap);
         if (!timestamps || !observations) {
@@ -959,6 +1092,14 @@ int run_hardware(const RunnerArgs *args, const Schedule *schedule) {
             }
             sender.alive = 0;
             stopped = 1;
+        }
+
+        if (interrupted) {
+            free(timestamps);
+            free(observations);
+            reason = "SIGNAL_ABORT";
+            rc = 130;
+            goto cleanup;
         }
 
         if (injected("capture") || count < 4) {
@@ -1120,21 +1261,27 @@ done:
         rc = 5;
     }
 
+    if (out) {
+        fprintf(out, "exit_status=%s host_control_state_restored=%d\n",
+                rc ? "FAILED" : "COMPLETE", restored);
+        if (close_sync(&out) && rc == 0) {
+            reason = "STDOUT_SYNC_FAILURE";
+            rc = 5;
+        }
+    }
+    if (err) {
+        if (rc) fprintf(err, "failure_reason=%s\n", reason);
+        if (close_sync(&err) && rc == 0) {
+            reason = "STDERR_SYNC_FAILURE";
+            rc = 5;
+        }
+    }
+
     time_t end = time(NULL);
     if (write_run_json(args, schedule, &pin, restored, hardware, rc, reason,
                        tsc_hz, start, end) && rc == 0) {
         reason = "RUN_JSON_WRITE_FAILURE";
         rc = 5;
-    }
-
-    if (out) {
-        fprintf(out, "exit_status=%s host_control_state_restored=%d\n",
-                rc ? "FAILED" : "COMPLETE", restored);
-        if (close_sync(&out) && rc == 0) rc = 5;
-    }
-    if (err) {
-        if (rc) fprintf(err, "failure_reason=%s\n", reason);
-        if (close_sync(&err) && rc == 0) rc = 5;
     }
 
     if (write_run_manifest(args->output_dir, schedule->session_id,
