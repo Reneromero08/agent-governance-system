@@ -1,21 +1,33 @@
 #!/usr/bin/env python3
-"""Orchestrate the frozen campaign through a schedule-driven local runner."""
+"""Orchestrate the frozen campaign through the commit-bound local runner."""
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
-from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
+from pathlib import Path
 from typing import Any
 
 from catcas_preflight import inspect as inspect_preflight
 from compile_session_schedule import write_session
 from generate_campaign_plan import verify as verify_plan
+from verify_run_manifests import verify as verify_run_manifests
 
 ROUTE_CORES = {"v4s5": (4, 5), "v2s3": (2, 3)}
+COMMIT_RE = re.compile(r"[0-9a-f]{40}")
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -25,7 +37,12 @@ def load_json(path: Path) -> dict[str, Any]:
     return value
 
 
-def runner_command(runner: Path, session_dir: Path, output_dir: Path, route: str, args: argparse.Namespace) -> list[str]:
+def valid_commit(value: Any) -> bool:
+    return isinstance(value, str) and bool(COMMIT_RE.fullmatch(value)) and set(value) != {"0"}
+
+
+def runner_command(runner: Path, session_dir: Path, output_dir: Path,
+                   route: str, args: argparse.Namespace) -> list[str]:
     victim, sender = ROUTE_CORES[route]
     command = [
         str(runner),
@@ -42,9 +59,13 @@ def runner_command(runner: Path, session_dir: Path, output_dir: Path, route: str
     if getattr(args, "runner_validate_only", False):
         command.append("--validate-only")
     else:
-        if not getattr(args, "executor_commit", None):
-            raise ValueError("hardware mode requires --executor-commit")
-        command.extend(("--executor-commit", args.executor_commit))
+        commit = getattr(args, "executor_commit", None)
+        if not valid_commit(commit):
+            raise ValueError(
+                "hardware mode requires --executor-commit as nonzero lowercase "
+                "40-character hex"
+            )
+        command.extend(("--executor-commit", commit))
         command.append("--hardware")
     return command
 
@@ -60,13 +81,26 @@ def selected_sessions(plan: dict[str, Any], requested: list[str] | None) -> list
     return [lookup[name] for name in requested]
 
 
+def verify_executor_binding(bundle_root: Path, runner: Path,
+                            executor_commit: str) -> dict[str, Any]:
+    bundle = load_json(bundle_root / "source_bundle.json")
+    if bundle.get("schema_id") != "CAT_CAS_PHASE6_EXECUTOR_SOURCE_BUNDLE_V1":
+        raise ValueError("unexpected source bundle schema")
+    if bundle.get("executor_commit") != executor_commit:
+        raise ValueError("orchestrator executor commit does not match source bundle")
+    if sha256_file(runner) != bundle.get("executor_sha256"):
+        raise ValueError("runner binary does not match source bundle")
+    return bundle
+
+
 def execute(args: argparse.Namespace) -> int:
     plan_dir = args.plan_dir.resolve()
-    repo_root = args.repo_root.resolve()
+    bundle_root = args.bundle_root.resolve()
     runner = args.runner.resolve()
     evidence_root = args.evidence_root.resolve()
     if evidence_root.exists():
         raise FileExistsError(f"refusing existing evidence root: {evidence_root}")
+
     errors = verify_plan(plan_dir)
     if errors:
         raise ValueError(f"invalid plan: {errors}")
@@ -76,11 +110,20 @@ def execute(args: argparse.Namespace) -> int:
     plan = load_json(plan_dir / "campaign_plan.json")
     manifest = load_json(plan_dir / "campaign_manifest.json")
     sessions = selected_sessions(plan, args.session)
+
     if not args.runner_validate_only:
+        if args.authorization is None:
+            raise ValueError("hardware acquisition requires an explicit --authorization artifact")
+        if not valid_commit(args.executor_commit):
+            raise ValueError("invalid --executor-commit")
+        verify_executor_binding(bundle_root, runner, args.executor_commit)
         preflight_path = evidence_root.with_name(evidence_root.name + ".preflight.json")
-        preflight = inspect_preflight(plan_dir, repo_root, evidence_root, args.min_free_gb)
+        preflight = inspect_preflight(
+            plan_dir, bundle_root, evidence_root, args.min_free_gb,
+            args.authorization.resolve())
         preflight_path.parent.mkdir(parents=True, exist_ok=True)
-        preflight_path.write_text(json.dumps(preflight, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        preflight_path.write_text(
+            json.dumps(preflight, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         if not preflight["acquisition_ready"]:
             print(json.dumps(preflight, indent=2, sort_keys=True), file=sys.stderr)
             return 2
@@ -90,21 +133,31 @@ def execute(args: argparse.Namespace) -> int:
     (evidence_root / "runs").mkdir()
     shutil.copy2(plan_dir / "campaign_plan.json", evidence_root / "campaign_plan.json")
     shutil.copy2(plan_dir / "campaign_manifest.json", evidence_root / "campaign_manifest.json")
+    if not args.runner_validate_only:
+        shutil.copy2(args.authorization.resolve(),
+                     evidence_root / "ACQUISITION_AUTHORIZATION.json")
+        shutil.copy2(bundle_root / "source_bundle.json", evidence_root / "source_bundle.json")
 
     execution = {
-        "schema_id": "CAT_CAS_PHASE6_COMBINED_EXECUTION_V1",
+        "schema_id": "CAT_CAS_PHASE6_COMBINED_EXECUTION_V2",
         "plan_sha256": manifest["campaign_plan"]["sha256"],
         "plan_source_commit": manifest["source_commit"],
         "runner": str(runner),
+        "runner_sha256": sha256_file(runner),
         "runner_validate_only": bool(args.runner_validate_only),
+        "executor_commit": None if args.runner_validate_only else args.executor_commit,
+        "source_bundle_sha256": None if args.runner_validate_only else sha256_file(bundle_root / "source_bundle.json"),
+        "authorization_sha256": None if args.runner_validate_only else sha256_file(args.authorization.resolve()),
         "sessions_requested": [session["session_id"] for session in sessions],
         "sessions_completed": [],
         "status": "RUNNING",
         "automatic_retry": False,
         "restoration_authorized": False,
+        "scientific_acquisition_authorized": False if args.runner_validate_only else True,
     }
     execution_path = evidence_root / "execution.json"
-    execution_path.write_text(json.dumps(execution, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    execution_path.write_text(json.dumps(execution, indent=2, sort_keys=True) + "\n",
+                              encoding="utf-8")
 
     for session in sessions:
         session_id = session["session_id"]
@@ -115,31 +168,57 @@ def execute(args: argparse.Namespace) -> int:
         if args.dry_run:
             print(" ".join(command))
             continue
-        proc = subprocess.run(command, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False)
+
+        proc = subprocess.run(command, text=True, stdout=subprocess.PIPE,
+                              stderr=subprocess.PIPE, check=False)
         if not run_dir.exists():
             run_dir.mkdir(parents=True, exist_ok=True)
         (run_dir / "orchestrator_stdout.log").write_text(proc.stdout, encoding="utf-8")
         (run_dir / "orchestrator_stderr.log").write_text(proc.stderr, encoding="utf-8")
-        if proc.returncode != 0 or not (run_dir / "run_manifest.json").is_file():
+        manifest_path = run_dir / "run_manifest.json"
+        if proc.returncode != 0 or not manifest_path.is_file():
             execution["status"] = "FAILED"
             execution["failed_session"] = session_id
             execution["runner_exit_code"] = proc.returncode
-            execution_path.write_text(json.dumps(execution, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+            execution_path.write_text(
+                json.dumps(execution, indent=2, sort_keys=True) + "\n", encoding="utf-8")
             return proc.returncode or 5
+
+        manifest_errors = verify_run_manifests(evidence_root / "runs")
+        if manifest_errors:
+            execution["status"] = "FAILED"
+            execution["failed_session"] = session_id
+            execution["manifest_errors"] = manifest_errors
+            execution_path.write_text(
+                json.dumps(execution, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+            return 5
+
+        run_record = load_json(run_dir / "run.json")
+        if not args.runner_validate_only:
+            if run_record.get("executor_git_commit") != args.executor_commit:
+                raise ValueError(
+                    f"{session_id}: run executor commit does not match authorization")
+            if run_record.get("physical_carrier_restoration_claimed") is not False:
+                raise ValueError(
+                    f"{session_id}: executor promoted host cleanup to carrier restoration")
         execution["sessions_completed"].append(session_id)
-        execution_path.write_text(json.dumps(execution, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        execution_path.write_text(
+            json.dumps(execution, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
     execution["status"] = "DRY_RUN_COMPLETE" if args.dry_run else "COMPLETE"
-    execution_path.write_text(json.dumps(execution, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    execution_path.write_text(json.dumps(execution, indent=2, sort_keys=True) + "\n",
+                              encoding="utf-8")
     return 0
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--plan-dir", type=Path, required=True)
-    parser.add_argument("--repo-root", type=Path, required=True)
+    parser.add_argument("--bundle-root", "--repo-root", dest="bundle_root",
+                        type=Path, required=True)
     parser.add_argument("--runner", type=Path, required=True)
     parser.add_argument("--evidence-root", type=Path, required=True)
+    parser.add_argument("--authorization", type=Path)
     parser.add_argument("--session", action="append")
     parser.add_argument("--pin-khz", type=int, default=1600000)
     parser.add_argument("--slot-s", type=float, default=0.5)
@@ -156,7 +235,8 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     try:
         return execute(parse_args())
-    except (OSError, ValueError, json.JSONDecodeError) as exc:
+    except (OSError, ValueError, FileNotFoundError, FileExistsError,
+            json.JSONDecodeError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 2
 
