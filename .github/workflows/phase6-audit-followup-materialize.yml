@@ -1,4 +1,4 @@
-name: Phase 6 Audit Follow-up Candidate
+name: Phase 6 Audit Follow-up Diagnostic
 
 on:
   pull_request:
@@ -9,17 +9,12 @@ permissions:
   contents: read
 
 jobs:
-  candidate:
+  diagnose:
     runs-on: ubuntu-24.04
-    env:
-      PYTHONDONTWRITEBYTECODE: "1"
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
-        with:
-          python-version: "3.11"
       - name: Reconstruct payload
         shell: bash
         run: |
@@ -32,33 +27,25 @@ jobs:
           echo 'fdb0444c5c1ea62f5372c04193c56f0215f2fdc8581e7bfc742285c6cf27a2f8  '"$RUNNER_TEMP/payload.b64" | sha256sum -c -
           base64 -d "$RUNNER_TEMP/payload.b64" > "$RUNNER_TEMP/payload.tgz"
           echo '5bfd3d6ba43e1bb5b9191b924cbf94f7b8615b11e82a9a6653ce86411da78113  '"$RUNNER_TEMP/payload.tgz" | sha256sum -c -
-      - name: Extract and stage
+      - name: Diagnose extraction and staging
+        continue-on-error: true
         shell: bash
         run: |
-          set -euo pipefail
-          git config user.name "CAT_CAS Audit Follow-up"
-          git config user.email "reneromero08+catcas-audit@users.noreply.github.com"
+          exec > >(tee "$RUNNER_TEMP/diagnostic.log") 2>&1
+          set -x
+          git status --short
           git checkout --detach de999f234ee9556b4c44467e90fb297b0589ec19
+          tar -tzf "$RUNNER_TEMP/payload.tgz"
           tar -xzf "$RUNNER_TEMP/payload.tgz"
+          git status --short
           git add -A THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime/README.md
+          git status --short
           git diff --cached --check
           git diff --cached --name-status
-      - name: Run tests
-        shell: bash
-        run: |
-          set -euo pipefail
-          cd THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign
-          python -m unittest discover -v -p 'test_*.py'
-      - name: Create candidate commit
-        shell: bash
-        run: |
-          set -euo pipefail
-          git commit -m 'fix(phase6): preserve audit and correct checksum sidecar'
-          git rev-parse HEAD > "$RUNNER_TEMP/final_sha.txt"
-          test "$(git rev-parse HEAD^)" = 'de999f234ee9556b4c44467e90fb297b0589ec19'
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
         with:
-          name: phase6-audit-followup-${{ github.run_id }}
-          path: ${{ runner.temp }}/final_sha.txt
+          name: phase6-audit-followup-diagnostic-${{ github.run_id }}
+          path: ${{ runner.temp }}/diagnostic.log
           if-no-files-found: error
           retention-days: 1
