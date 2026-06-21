@@ -58,6 +58,39 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def write_sha256_sidecar(path: Path, sidecar: Path) -> None:
+    sidecar.write_text(f"{sha256_file(path)}  {path.name}\n", encoding="utf-8")
+
+
+def verify_sha256_sidecar(sidecar: Path, expected_path: Path) -> None:
+    tokens = sidecar.read_text(encoding="utf-8").strip().split(maxsplit=1)
+    if len(tokens) != 2:
+        raise RuntimeError(f"invalid checksum sidecar: {sidecar.name}")
+    digest, recorded_name = tokens
+    recorded_name = recorded_name.lstrip("*")
+    if recorded_name != expected_path.name:
+        raise RuntimeError(
+            f"checksum sidecar filename mismatch: {sidecar.name} names {recorded_name}, "
+            f"expected {expected_path.name}"
+        )
+    if digest != sha256_file(expected_path):
+        raise RuntimeError(f"checksum sidecar digest mismatch: {sidecar.name}")
+
+
+def rename_bundle_with_sidecar(
+    root: Path, old_name: str, new_name: str
+) -> tuple[Path, Path]:
+    old_path = root / old_name
+    old_sidecar = root / f"{Path(old_name).stem}.sha256"
+    new_path = root / new_name
+    new_sidecar = root / f"{Path(new_name).stem}.sha256"
+    old_path.rename(new_path)
+    old_sidecar.rename(new_sidecar)
+    write_sha256_sidecar(new_path, new_sidecar)
+    verify_sha256_sidecar(new_sidecar, new_path)
+    return new_path, new_sidecar
+
+
 def load_object(path: Path, description: str) -> dict[str, Any]:
     value = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(value, dict):
@@ -227,9 +260,7 @@ def verify_bundle(root: Path, expected_commit: str | None = None) -> dict[str, A
     bundle_path = root / "source_bundle.json"
     checksum_path = root / "source_bundle.sha256"
     bundle = load_object(bundle_path, "source bundle")
-    checksum_tokens = checksum_path.read_text(encoding="utf-8").split()
-    if not checksum_tokens or sha256_file(bundle_path) != checksum_tokens[0]:
-        raise RuntimeError("source_bundle.sha256 mismatch")
+    verify_sha256_sidecar(checksum_path, bundle_path)
     if expected_commit is not None and bundle.get("executor_commit") != expected_commit:
         raise RuntimeError("executor commit mismatch")
     if bundle.get("acquisition_authorized") is not False:
@@ -303,9 +334,7 @@ def build_source_transfer(
     }
     bundle_path = output / "source_bundle.json"
     bundle_path.write_text(json.dumps(bundle, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    (output / "source_bundle.sha256").write_text(
-        sha256_file(bundle_path) + "  source_bundle.json\n", encoding="utf-8"
-    )
+    write_sha256_sidecar(bundle_path, output / "source_bundle.sha256")
     verify_bundle(output, commit)
     return bundle
 
@@ -440,8 +469,9 @@ def seal_target_evidence(
     if output.exists():
         raise FileExistsError(f"refusing existing output: {output}")
     shutil.copytree(source_root, output)
-    (output / "source_bundle.json").rename(output / "source_transfer_bundle.json")
-    (output / "source_bundle.sha256").rename(output / "source_transfer_bundle.sha256")
+    rename_bundle_with_sidecar(
+        output, "source_bundle.json", "source_transfer_bundle.json"
+    )
     for path in sorted(target_root.rglob("*")):
         if not path.is_file() or path.name == "target_evidence_manifest.json":
             continue
@@ -478,9 +508,7 @@ def seal_target_evidence(
     }
     bundle_path = output / "source_bundle.json"
     bundle_path.write_text(json.dumps(bundle, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    (output / "source_bundle.sha256").write_text(
-        sha256_file(bundle_path) + "  source_bundle.json\n", encoding="utf-8"
-    )
+    write_sha256_sidecar(bundle_path, output / "source_bundle.sha256")
     verify_bundle(output, commit)
     return bundle
 
