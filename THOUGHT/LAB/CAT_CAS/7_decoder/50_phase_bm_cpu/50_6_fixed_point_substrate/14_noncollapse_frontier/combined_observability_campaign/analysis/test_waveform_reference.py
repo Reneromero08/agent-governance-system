@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import math
 import unittest
 
 import numpy as np
@@ -93,9 +94,9 @@ class WaveformReferenceTests(unittest.TestCase):
     def test_sign_offset_is_four_phase_indices(self) -> None:
         for mode in range(4):
             for source in range(12):
-                actual = phase_index(mode, source, 0)
+                positive = phase_index(mode, source, 0)
                 expected = 4 if CODEBOOK[mode, source] < 0 else 0
-                self.assertEqual(actual, expected)
+                self.assertEqual(positive, expected)
 
 
 if __name__ == "__main__":

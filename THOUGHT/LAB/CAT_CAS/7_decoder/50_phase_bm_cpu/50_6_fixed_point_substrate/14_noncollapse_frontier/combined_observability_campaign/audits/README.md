@@ -4,13 +4,19 @@ This directory preserves forward-only audit results for the completed Phase 6 co
 
 The historical executor, plan, authorization, bundles, and evidence remain immutable.
 
-## Current audit sequence
+## Audit sequence
 
-1. Static executor source audit.
-2. Twelve-session metadata and manifest audit.
-3. Raw-session waveform recovery, beginning with training session `v2s3_seed0`.
-4. Full campaign recovery analysis with training-frozen coordinates.
-5. Original frozen adjudication and implementation-recovery adjudication kept in separate ledgers.
+1. `PHASE6_EXECUTOR_CODE_AUDIT_81ea84f3.md`
+   Static audit of the exact executor source.
+
+2. `PHASE6_METADATA_AUDIT_81ea84f3.md`
+   Audit of all twelve session schedules, 99,456 result rows, telemetry, manifests, and raw-size closure without the large binary payloads.
+
+3. `PHASE6_RAW_RECOVERY_V2S3_SEED0.md`
+   First raw-session audit and implementation-recovery result on a training session.
+
+4. `PHASE6_RAW_RECOVERY_V2S3_SEED0.json`
+   Machine-readable result for the first raw session.
 
 ## Current state
 
@@ -35,8 +41,4 @@ The sibling `analysis/` directory contains:
 - `audit_raw_session.py`
 - `test_waveform_reference.py`
 
-These tools model the waveform that actually executed. They do not mutate or rewrite the historical evidence object.
-
-## Future executor
-
-`../EXECUTOR_V2_REMEDIATION.md` defines the forward-only correction and qualification contract for any future acquisition.
+These tools model the waveform that actually executed. They do not mutate or reinterpret the historical evidence object.

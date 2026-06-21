@@ -2,19 +2,43 @@
 
 **Status:** `FORWARD_ONLY`  
 **Historical executor:** `81ea84f341b29c41b93667d0e0fb98e0975bcbcf`  
-**Historical evidence:** immutable and not to be rewritten
+**Historical evidence:** immutable and not to be rewritten  
+**Purpose:** define the minimum code and qualification work for any future acquisition
+
+---
 
 # 1. Non-Destructive Rule
 
 Do not edit, amend, replace, or reinterpret the historical acquisition object.
 
-The completed campaign remains bound to its original executor, plan, bundle, authorization, and returned evidence. A V2 executor is a new experiment object with a new commit, bundle, target qualification, authorization, and evidence chain.
+The completed campaign remains bound to:
+
+```text
+executor commit:
+81ea84f341b29c41b93667d0e0fb98e0975bcbcf
+
+final bundle:
+5c6588a51ce6b806e1b7b269bafd1981256795653415e012592ad3b6313fdaca
+
+campaign plan:
+eb5a46d0a37d66910649467cf0d4e3cf947dee11fab94a36e9bdfed388455e53
+
+strict runner:
+0fc846a52d34b2395e254cc5a2db0bb715d1cd1ede77f8a5f6a2e940dab63037
+
+authorization:
+e39fb0c6ebfb106c33a0b90b8d52d193a32833103388ebc4c6bd0cad451a0d73
+```
+
+A V2 executor is a new experiment object with a new commit, bundle, target qualification, authorization, and evidence chain.
+
+---
 
 # 2. Confirmed V1 Defects
 
 ## 2.1 Waveform period
 
-V1 uses half-period units and repeats an eight-state amplitude pattern:
+V1 uses:
 
 ```c
 half_ticks = 0.5 * tsc_hz / tone_hz;
@@ -30,7 +54,7 @@ The complete envelope period is:
 
 Therefore the physical envelope fundamental is `tone_hz / 4`.
 
-The V1 lock-in demodulates at `tone_hz`, an ideal rectangular-envelope null for amplitude levels 1, 2, and 3.
+The V1 lock-in demodulates at `tone_hz`, an ideal null for amplitude levels 1, 2, and 3.
 
 ## 2.2 Scramble control
 
@@ -40,19 +64,32 @@ The planner emits:
 "shared_schedule": false
 ```
 
-but the C executor does not parse or use the field. Scramble rows do not alter physical execution.
+but the C executor does not parse or use the field.
+
+Scramble rows therefore do not alter physical execution.
 
 ## 2.3 Drive primitive
 
-V1 replaced the prior Slot2 power-virus primitive with a single floating-point and single integer dependency chain. The new drive was not independently qualified for carrier SNR before acquisition.
+V1 replaced the prior Slot2 power-virus primitive with a single floating-point and single integer dependency chain.
+
+The new drive was never independently qualified for carrier SNR before acquisition.
 
 ## 2.4 Authorization scope
 
-The authorization artifact does not bind every runtime parameter or enforce the exact twelve-session set in both execution gates.
+The authorization artifact does not bind every runtime parameter or the exact twelve-session set in the C and Python execution gates.
 
-## 2.5 Conformance tests
+## 2.5 Scientific conformance tests
 
-The existing engineering tests verify lifecycle and custody. They do not verify the requested spectral fundamental, theta phase increment, code-sign phase flip, amplitude response, physical scramble divergence, or carrier SNR.
+The existing engineering tests verify lifecycle and custody. They do not verify:
+
+- requested spectral fundamental;
+- theta phase increment;
+- code-sign phase flip;
+- amplitude response;
+- physical scramble divergence;
+- carrier SNR.
+
+---
 
 # 3. Correct V2 Waveform
 
@@ -72,22 +109,29 @@ This gives:
 
 ```text
 complete cycle = 8 × step_ticks = 1 / tone_hz
-one phase index = π / 4
+one phase index = 2π / 8 = π / 4
 four phase indices = π
 ```
 
 Required semantics:
 
 ```text
-theta_idx 0..7 maps to 0, π/4, π/2, ..., 7π/4
-code sign +1 adds 0
-code sign -1 adds 4 phase indices = π
-amplitude level 1 gives 2/8 duty
-amplitude level 2 gives 4/8 duty
-amplitude level 3 gives 6/8 duty
+theta_idx:
+0..7 maps to 0, π/4, π/2, ..., 7π/4
+
+code sign:
++1 adds 0
+-1 adds 4 phase indices = π
+
+amplitude_level:
+1 gives 2/8 duty
+2 gives 4/8 duty
+3 gives 6/8 duty
 ```
 
-The sender, raw evidence, and lock-in must use the same phase origin.
+The phase origin used by the sender, raw evidence, and lock-in must be identical.
+
+---
 
 # 4. Drive Primitive Requirement
 
@@ -100,7 +144,7 @@ Reuse the previously qualified register/L1-only drive exactly:
 - eight floating-point dependency chains;
 - four integer chains;
 - no shared-memory traffic inside the drive;
-- identical compiler and optimization assumptions.
+- identical compiler flags and optimization assumptions.
 
 ## Route B: qualify a new primitive
 
@@ -108,23 +152,25 @@ A new drive must pass a separate calibration campaign before scientific acquisit
 
 Minimum calibration:
 
-- sender-on and sender-off windows;
-- both routes;
+- real sender-on and sender-off windows;
+- at least two routes;
 - all twelve tones;
 - amplitude levels 1, 2, and 3;
 - requested-frequency spectral line;
-- sign and theta phase recovery;
-- predeclared driven/null separation;
+- phase recovery;
+- minimum predeclared SNR or driven/null separation;
 - thermal and frequency stability;
 - repeated sessions and reboot.
 
 Do not import Slot2 sensitivity into a different primitive.
 
+---
+
 # 5. Physical Scramble Contract
 
-Scramble must alter sender control while leaving the receiver-side reference unchanged.
+Scramble must alter the sender's physical control while leaving the receiver-side declared reference unchanged.
 
-The schedule should carry explicit fields such as:
+The schedule should contain explicit fields such as:
 
 ```json
 {
@@ -143,15 +189,17 @@ The executor must:
 1. parse both sender and receiver fields;
 2. drive only the sender fields;
 3. record both in raw evidence;
-4. prevent ordinary decoding from reading sender-private fields;
+4. prevent analysis code from reading sender-private fields during ordinary decoding;
 5. bind the scramble mapping before acquisition;
-6. prove that real and scramble produce different physical gate digests.
+6. prove in tests that real and scramble produce different physical gate digests.
 
 The current `codeword_source_index` field is insufficient for both roles.
 
+---
+
 # 6. Authorization V2
 
-The V2 authorization must bind:
+The V2 authorization artifact must bind:
 
 ```json
 {
@@ -160,7 +208,10 @@ The V2 authorization must bind:
   "source_bundle_sha256": "<64 hex>",
   "campaign_plan_sha256": "<64 hex>",
   "session_ids": ["all exact session IDs"],
-  "route_cores": {"v4s5": [4, 5], "v2s3": [2, 3]},
+  "route_cores": {
+    "v4s5": [4, 5],
+    "v2s3": [2, 3]
+  },
   "pin_khz": 1600000,
   "slot_s": 0.5,
   "off_window_s": 0.5,
@@ -171,67 +222,129 @@ The V2 authorization must bind:
 }
 ```
 
-Both the orchestrator and C runner must reject any mismatch. Subset execution requires a separate authorization artifact.
+Both the orchestrator and C runner must reject any mismatch.
+
+Subset execution requires a separate authorization artifact.
+
+---
 
 # 7. Run Manifest V2
 
-The run manifest must bind the complete run directory after orchestration, including the two orchestrator logs.
+The run manifest must bind the complete run directory after orchestration.
+
+Required files include:
+
+- `run.json`;
+- `session.json`;
+- `windows.jsonl`;
+- `window_results.csv`;
+- `raw_samples.bin`;
+- `telemetry.csv`;
+- `stdout.log`;
+- `stderr.log`;
+- `orchestrator_stdout.log`;
+- `orchestrator_stderr.log`.
 
 Verification must compare:
 
 ```text
-actual run-directory file set
+actual directory file set
 ==
 manifest file set
 ```
 
+not only verify listed files.
+
 The outer acquisition inventory remains required.
+
+---
 
 # 8. Frequency Settling Gate
 
 The first window of all twelve V1 sessions crossed a reported cpufreq settling transition.
 
-V2 must:
+V2 must not begin scientific capture immediately after writing frequency controls.
+
+Add an explicit settling gate:
 
 1. write min, max, and boost;
 2. verify policy readback;
-3. poll `scaling_cur_freq` or a frozen APERF/MPERF criterion;
-4. require the requested state for a predeclared consecutive interval;
-5. record settling evidence;
-6. begin the first scientific origin only after the gate passes.
+3. poll `scaling_cur_freq` on relevant cores;
+4. require the requested value for a predeclared consecutive duration or sample count;
+5. record the settling evidence;
+6. only then establish the first scientific origin.
 
-No gauge row may double as a settling probe.
+If `scaling_cur_freq` cannot be trusted as an exact hardware-frequency indicator, define and bind an alternative APERF/MPERF criterion.
 
-# 9. Mandatory Conformance Tests
+No gauge row may double as the frequency-settling probe.
 
-## Pure waveform
+---
+
+# 9. Scientific Conformance Tests
+
+The following tests are mandatory before target acquisition.
+
+## 9.1 Pure waveform tests
 
 For every amplitude level:
 
-- dominant ideal component at requested `f`;
+- dominant ideal Fourier component at requested `f`;
+- near-zero error against the reference waveform;
 - one theta step changes phase by `π/4`;
 - four phase steps change phase by `π`;
-- duty is exactly 2/8, 4/8, or 6/8.
+- gate duty matches 2/8, 4/8, or 6/8.
 
-## Synthetic lock-in
+## 9.2 Synthetic lock-in tests
 
-Require requested-frequency recovery, exact theta recovery, exact sign recovery, amplitude ordering, and off-bin rejection.
+Generate timestamps and a synthetic carrier from the reference gate.
 
-## Scramble
+Require:
 
-Require sender and receiver gate digests to agree when shared and differ when unshared. The receiver-visible schedule must not reconstruct the sender gate.
+- requested-frequency lock-in recovery;
+- exact theta recovery;
+- exact sign recovery;
+- amplitude ordering;
+- off-bin rejection.
 
-## C to Python equivalence
+## 9.3 Scramble tests
 
-Compare C and `analysis/waveform_reference.py` for tones, codebook, phase indices, gate states, and lock-in I/Q.
+Require:
 
-## Real hardware calibration
+- `shared_schedule=true` makes sender and receiver gate digests identical;
+- `shared_schedule=false` makes them different;
+- the receiver-visible schedule cannot reconstruct the sender gate;
+- scramble still preserves matched workload statistics.
 
-Engineering smoke must include requested-frequency response, sign and theta phase, sender-off null, and no first-window frequency transition.
+## 9.4 C to Python equivalence
+
+For frozen fixtures, compare C and `analysis/waveform_reference.py` on:
+
+- tones;
+- codebook;
+- phase indices;
+- gate state at every timestamp;
+- lock-in I and Q.
+
+Bit equality is preferred. Explicit numerical tolerance must otherwise be frozen.
+
+## 9.5 Real hardware calibration
+
+Engineering smoke must include a scientific waveform check, not only lifecycle.
+
+Require:
+
+- requested `f` response above a predeclared null boundary;
+- correct sign and theta phase;
+- sender-off null;
+- no first-window frequency transition.
+
+---
 
 # 10. V1 Evidence Analysis Rules
 
-Analyze V1 under the waveform that actually executed.
+The V1 evidence is not rerun data.
+
+Analyze it under the waveform that actually executed.
 
 Required coordinates:
 
@@ -252,30 +365,39 @@ IMPLEMENTATION_RECOVERY_ANALYSIS
 
 Do not silently replace the frozen coordinate.
 
-Use training sessions to freeze the corrected representation, then apply it unchanged to validation, stress, and final test sessions.
+The implementation-recovery lane may use training sessions to freeze the corrected state representation, then apply that representation unchanged to validation, stress, and final test sessions.
 
-Reclassify scramble rows as:
+Scramble rows are reclassified as:
 
 ```text
 DRIVEN_ROWS_WITH_INVALID_SCRAMBLE_LABEL
 ```
 
-Window zero of each session must be excluded from stationary gauge estimation or modeled as a separate settling transition.
+They may not enter the scramble-null pass condition.
+
+Window zero of each session must be excluded from ordinary stationary gauge estimation or modeled as a separate settling transition.
+
+---
 
 # 11. Rerun Gate
 
 Do not authorize a rerun merely because V1 has defects.
 
-A rerun becomes justified only if:
+A rerun becomes justified only after one of these outcomes:
 
 ```text
-V1 raw evidence cannot support the transport question
-V1 corrected coordinates fail cross-session or cross-route transfer
+V1 raw evidence cannot support the declared transport question
+V1 corrected coordinate fails cross-session and cross-route transfer
 missing scramble null blocks the only remaining claim
 V2 asks a materially new question after V1 adjudication
 ```
 
-The first raw training session already supports strong driven/null separation at `f/4`, exact gate phase coherence, complete actual-mode recovery, and high theta recovery.
+The first raw training session already supports:
+
+- strong driven/null separation at `f/4`;
+- exact gate phase coherence;
+- complete actual-mode recovery in Stage B;
+- high theta recovery.
 
 Therefore:
 
@@ -284,9 +406,11 @@ IMMEDIATE_RERUN_NOT_AUTHORIZED
 FULL_V1_RAW_AUDIT_FIRST
 ```
 
+---
+
 # 12. Agent Work Package
 
-Implement one architectural change set:
+The local agent should implement one architectural change set:
 
 ```text
 Phase 6 V2 executor and conformance qualification
@@ -295,7 +419,7 @@ Phase 6 V2 executor and conformance qualification
 Minimum deliverables:
 
 - corrected C waveform;
-- restored or independently qualified drive primitive;
+- restored or newly qualified drive primitive;
 - physical scramble fields and execution;
 - authorization V2;
 - total run-manifest closure;
@@ -306,4 +430,6 @@ Minimum deliverables:
 - new source-transfer bundle;
 - new audit packet.
 
-Do not split this into micro-commits. The historical V1 acquisition remains unchanged and auditable.
+Do not split this into micro-commits.
+
+The historical V1 acquisition remains unchanged and auditable.

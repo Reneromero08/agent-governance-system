@@ -1,0 +1,614 @@
+{
+  "amplitude_counts": {
+    "0": 22272,
+    "1": 8844,
+    "2": 9132,
+    "3": 59208
+  },
+  "bindings": {
+    "authorization_sha256": [
+      "e39fb0c6ebfb106c33a0b90b8d52d193a32833103388ebc4c6bd0cad451a0d73"
+    ],
+    "campaign_plan_sha256": [
+      "eb5a46d0a37d66910649467cf0d4e3cf947dee11fab94a36e9bdfed388455e53"
+    ],
+    "campaign_source_commit": [
+      "f5b6079a5748bb6138ab19d1c22d79c74734dddf"
+    ],
+    "executor_commit": [
+      "81ea84f341b29c41b93667d0e0fb98e0975bcbcf"
+    ]
+  },
+  "executor_commit": "81ea84f341b29c41b93667d0e0fb98e0975bcbcf",
+  "expected_raw_bytes": 3182592000,
+  "expected_raw_gib": 2.964019775390625,
+  "family_counts": {
+    "gauge_preamble": 1152,
+    "impulse": 7680,
+    "order_sham": 6912,
+    "pseudo": 6912,
+    "real": 6912,
+    "scramble": 6912,
+    "silent": 6912,
+    "step": 12288,
+    "trajectory": 36864,
+    "wrong": 6912
+  },
+  "frequency_transition_rows": [
+    {
+      "actual_mode": "basis",
+      "family": "gauge_preamble",
+      "frequency_after_khz": 1600000,
+      "frequency_before_khz": 800000,
+      "physical_tone_index": 0,
+      "session_id": "v2s3_seed0",
+      "stage": "A_GAUGE",
+      "theta_idx": 0,
+      "window_index": 0
+    },
+    {
+      "actual_mode": "basis",
+      "family": "gauge_preamble",
+      "frequency_after_khz": 1600000,
+      "frequency_before_khz": 800000,
+      "physical_tone_index": 0,
+      "session_id": "v2s3_seed1",
+      "stage": "A_GAUGE",
+      "theta_idx": 0,
+      "window_index": 0
+    },
+    {
+      "actual_mode": "basis",
+      "family": "gauge_preamble",
+      "frequency_after_khz": 1600000,
+      "frequency_before_khz": 800000,
+      "physical_tone_index": 0,
+      "session_id": "v2s3_seed2",
+      "stage": "A_GAUGE",
+      "theta_idx": 0,
+      "window_index": 0
+    },
+    {
+      "actual_mode": "basis",
+      "family": "gauge_preamble",
+      "frequency_after_khz": 1600000,
+      "frequency_before_khz": 800000,
+      "physical_tone_index": 0,
+      "session_id": "v2s3_seed3",
+      "stage": "A_GAUGE",
+      "theta_idx": 0,
+      "window_index": 0
+    },
+    {
+      "actual_mode": "basis",
+      "family": "gauge_preamble",
+      "frequency_after_khz": 1600000,
+      "frequency_before_khz": 3200000,
+      "physical_tone_index": 0,
+      "session_id": "v2s3_seed4",
+      "stage": "A_GAUGE",
+      "theta_idx": 0,
+      "window_index": 0
+    },
+    {
+      "actual_mode": "basis",
+      "family": "gauge_preamble",
+      "frequency_after_khz": 1600000,
+      "frequency_before_khz": 3200000,
+      "physical_tone_index": 0,
+      "session_id": "v2s3_seed5",
+      "stage": "A_GAUGE",
+      "theta_idx": 0,
+      "window_index": 0
+    },
+    {
+      "actual_mode": "basis",
+      "family": "gauge_preamble",
+      "frequency_after_khz": 1600000,
+      "frequency_before_khz": 3200000,
+      "physical_tone_index": 0,
+      "session_id": "v4s5_seed0",
+      "stage": "A_GAUGE",
+      "theta_idx": 0,
+      "window_index": 0
+    },
+    {
+      "actual_mode": "basis",
+      "family": "gauge_preamble",
+      "frequency_after_khz": 1600000,
+      "frequency_before_khz": 3200000,
+      "physical_tone_index": 0,
+      "session_id": "v4s5_seed1",
+      "stage": "A_GAUGE",
+      "theta_idx": 0,
+      "window_index": 0
+    },
+    {
+      "actual_mode": "basis",
+      "family": "gauge_preamble",
+      "frequency_after_khz": 1600000,
+      "frequency_before_khz": 3200000,
+      "physical_tone_index": 0,
+      "session_id": "v4s5_seed2",
+      "stage": "A_GAUGE",
+      "theta_idx": 0,
+      "window_index": 0
+    },
+    {
+      "actual_mode": "basis",
+      "family": "gauge_preamble",
+      "frequency_after_khz": 1600000,
+      "frequency_before_khz": 3200000,
+      "physical_tone_index": 0,
+      "session_id": "v4s5_seed3",
+      "stage": "A_GAUGE",
+      "theta_idx": 0,
+      "window_index": 0
+    },
+    {
+      "actual_mode": "basis",
+      "family": "gauge_preamble",
+      "frequency_after_khz": 1600000,
+      "frequency_before_khz": 3200000,
+      "physical_tone_index": 0,
+      "session_id": "v4s5_seed4",
+      "stage": "A_GAUGE",
+      "theta_idx": 0,
+      "window_index": 0
+    },
+    {
+      "actual_mode": "basis",
+      "family": "gauge_preamble",
+      "frequency_after_khz": 1600000,
+      "frequency_before_khz": 3200000,
+      "physical_tone_index": 0,
+      "session_id": "v4s5_seed5",
+      "stage": "A_GAUGE",
+      "theta_idx": 0,
+      "window_index": 0
+    }
+  ],
+  "issues": [],
+  "nonfinite_numeric_values": 0,
+  "null_iq_rows": 6144,
+  "raw_hashes": {
+    "v2s3_seed0": {
+      "sha256": "6d7b6d61ca2b653e48cba63eec5830adcb7915755a997c99462af9c208d7f3b7",
+      "size": 265216000
+    },
+    "v2s3_seed1": {
+      "sha256": "6cd56279f3c4eef2bf572d04dd9f7002c64ae41819a952f9b85cc07aea16581e",
+      "size": 265216000
+    },
+    "v2s3_seed2": {
+      "sha256": "693c4a51eed736118f2970fb712943e5ebfde7daf4b6efc166af7e3e0bee61a2",
+      "size": 265216000
+    },
+    "v2s3_seed3": {
+      "sha256": "624bbf6d0b58769ee1a6769b04a8832c7f2e221c7a38785abd0f7662e755e879",
+      "size": 265216000
+    },
+    "v2s3_seed4": {
+      "sha256": "14817f963dbe05b67a37f026b14ae73159e7c9005c5ed3c3c76bdf739943b9d0",
+      "size": 265216000
+    },
+    "v2s3_seed5": {
+      "sha256": "6522e31954b80b026252b5e85a578007beccb301e84e1a6f9af6b48e10568085",
+      "size": 265216000
+    },
+    "v4s5_seed0": {
+      "sha256": "5a6d018535bf883cac036e0b19e65c6ea31db0b6fdcb6a439d979d9da66ae6f5",
+      "size": 265216000
+    },
+    "v4s5_seed1": {
+      "sha256": "654473a77f57c0c3a86e2a14ff28f5ace7c7dd5da4ec0510f2f65e476620fd52",
+      "size": 265216000
+    },
+    "v4s5_seed2": {
+      "sha256": "0d92e6e19585e38a69f85241b908f96b8c05283d7f98cdf9f142c1aae30398ac",
+      "size": 265216000
+    },
+    "v4s5_seed3": {
+      "sha256": "abf608c54ef9ed8116e2f5f79780280929f4ed157a949aa189b4e0f1e5285fb4",
+      "size": 265216000
+    },
+    "v4s5_seed4": {
+      "sha256": "b2fbdc0b5f603b7049a6fe4e7c102bf8cb17d1888758b5fe6d80dad8c37fc39b",
+      "size": 265216000
+    },
+    "v4s5_seed5": {
+      "sha256": "a567f369789af1e25884cd634f349ee8604672fa102b9c4d6bbf54df47e9d20f",
+      "size": 265216000
+    }
+  },
+  "runs_archive": {
+    "path": "/mnt/data/Runs_no_bin.zip",
+    "sha256": "119b4224324058d46b08a475dfd11825ff0db81b3c7459a0e81d334707f27bf8",
+    "size": 18775994
+  },
+  "sample_count": 198912000,
+  "schema_id": "CAT_CAS_PHASE6_METADATA_AUDIT_V1",
+  "session_count": 12,
+  "sessions": [
+    {
+      "driven_windows": 6432,
+      "duration_s": 4571,
+      "end_timestamp": 1782041756,
+      "expected_raw_size": 265216000,
+      "issues": [],
+      "lifecycle_errors": 0,
+      "non_driven_windows": 1856,
+      "partition": "train",
+      "raw_manifest_sha256": "6d7b6d61ca2b653e48cba63eec5830adcb7915755a997c99462af9c208d7f3b7",
+      "raw_manifest_size": 265216000,
+      "route": "v2s3",
+      "sample_count_per_window_max": 2000,
+      "sample_count_per_window_min": 2000,
+      "samples": 16576000,
+      "sender_off_required_windows": 1280,
+      "session_id": "v2s3_seed0",
+      "start_timestamp": 1782037185,
+      "temperature_max_c": 52.125,
+      "temperature_min_c": 46.5,
+      "tsc_calibration_hz": 3214813197.825549,
+      "window_statuses": {
+        "OK": 8288
+      },
+      "windows": 8288
+    },
+    {
+      "driven_windows": 6432,
+      "duration_s": 4570,
+      "end_timestamp": 1782046337,
+      "expected_raw_size": 265216000,
+      "issues": [],
+      "lifecycle_errors": 0,
+      "non_driven_windows": 1856,
+      "partition": "train",
+      "raw_manifest_sha256": "6cd56279f3c4eef2bf572d04dd9f7002c64ae41819a952f9b85cc07aea16581e",
+      "raw_manifest_size": 265216000,
+      "route": "v2s3",
+      "sample_count_per_window_max": 2000,
+      "sample_count_per_window_min": 2000,
+      "samples": 16576000,
+      "sender_off_required_windows": 1280,
+      "session_id": "v2s3_seed1",
+      "start_timestamp": 1782041767,
+      "temperature_max_c": 52.0,
+      "temperature_min_c": 50.0,
+      "tsc_calibration_hz": 3214812206.5183806,
+      "window_statuses": {
+        "OK": 8288
+      },
+      "windows": 8288
+    },
+    {
+      "driven_windows": 6432,
+      "duration_s": 4571,
+      "end_timestamp": 1782050921,
+      "expected_raw_size": 265216000,
+      "issues": [],
+      "lifecycle_errors": 0,
+      "non_driven_windows": 1856,
+      "partition": "train",
+      "raw_manifest_sha256": "693c4a51eed736118f2970fb712943e5ebfde7daf4b6efc166af7e3e0bee61a2",
+      "raw_manifest_size": 265216000,
+      "route": "v2s3",
+      "sample_count_per_window_max": 2000,
+      "sample_count_per_window_min": 2000,
+      "samples": 16576000,
+      "sender_off_required_windows": 1280,
+      "session_id": "v2s3_seed2",
+      "start_timestamp": 1782046350,
+      "temperature_max_c": 52.0,
+      "temperature_min_c": 49.0,
+      "tsc_calibration_hz": 3214813086.9831896,
+      "window_statuses": {
+        "OK": 8288
+      },
+      "windows": 8288
+    },
+    {
+      "driven_windows": 6432,
+      "duration_s": 4571,
+      "end_timestamp": 1782055506,
+      "expected_raw_size": 265216000,
+      "issues": [],
+      "lifecycle_errors": 0,
+      "non_driven_windows": 1856,
+      "partition": "validation",
+      "raw_manifest_sha256": "624bbf6d0b58769ee1a6769b04a8832c7f2e221c7a38785abd0f7662e755e879",
+      "raw_manifest_size": 265216000,
+      "route": "v2s3",
+      "sample_count_per_window_max": 2000,
+      "sample_count_per_window_min": 2000,
+      "samples": 16576000,
+      "sender_off_required_windows": 1280,
+      "session_id": "v2s3_seed3",
+      "start_timestamp": 1782050935,
+      "temperature_max_c": 50.0,
+      "temperature_min_c": 48.0,
+      "tsc_calibration_hz": 3214813792.224108,
+      "window_statuses": {
+        "OK": 8288
+      },
+      "windows": 8288
+    },
+    {
+      "driven_windows": 6432,
+      "duration_s": 4571,
+      "end_timestamp": 1782060092,
+      "expected_raw_size": 265216000,
+      "issues": [],
+      "lifecycle_errors": 0,
+      "non_driven_windows": 1856,
+      "partition": "stress",
+      "raw_manifest_sha256": "14817f963dbe05b67a37f026b14ae73159e7c9005c5ed3c3c76bdf739943b9d0",
+      "raw_manifest_size": 265216000,
+      "route": "v2s3",
+      "sample_count_per_window_max": 2000,
+      "sample_count_per_window_min": 2000,
+      "samples": 16576000,
+      "sender_off_required_windows": 1280,
+      "session_id": "v2s3_seed4",
+      "start_timestamp": 1782055521,
+      "temperature_max_c": 49.5,
+      "temperature_min_c": 46.0,
+      "tsc_calibration_hz": 3214812610.7173104,
+      "window_statuses": {
+        "OK": 8288
+      },
+      "windows": 8288
+    },
+    {
+      "driven_windows": 6432,
+      "duration_s": 4570,
+      "end_timestamp": 1782064678,
+      "expected_raw_size": 265216000,
+      "issues": [],
+      "lifecycle_errors": 0,
+      "non_driven_windows": 1856,
+      "partition": "test",
+      "raw_manifest_sha256": "6522e31954b80b026252b5e85a578007beccb301e84e1a6f9af6b48e10568085",
+      "raw_manifest_size": 265216000,
+      "route": "v2s3",
+      "sample_count_per_window_max": 2000,
+      "sample_count_per_window_min": 2000,
+      "samples": 16576000,
+      "sender_off_required_windows": 1280,
+      "session_id": "v2s3_seed5",
+      "start_timestamp": 1782060108,
+      "temperature_max_c": 48.5,
+      "temperature_min_c": 46.0,
+      "tsc_calibration_hz": 3214811723.378062,
+      "window_statuses": {
+        "OK": 8288
+      },
+      "windows": 8288
+    },
+    {
+      "driven_windows": 6432,
+      "duration_s": 4571,
+      "end_timestamp": 1782014294,
+      "expected_raw_size": 265216000,
+      "issues": [],
+      "lifecycle_errors": 0,
+      "non_driven_windows": 1856,
+      "partition": "train",
+      "raw_manifest_sha256": "5a6d018535bf883cac036e0b19e65c6ea31db0b6fdcb6a439d979d9da66ae6f5",
+      "raw_manifest_size": 265216000,
+      "route": "v4s5",
+      "sample_count_per_window_max": 2000,
+      "sample_count_per_window_min": 2000,
+      "samples": 16576000,
+      "sender_off_required_windows": 1280,
+      "session_id": "v4s5_seed0",
+      "start_timestamp": 1782009723,
+      "temperature_max_c": 47.0,
+      "temperature_min_c": 41.0,
+      "tsc_calibration_hz": 3214808765.3481946,
+      "window_statuses": {
+        "OK": 8288
+      },
+      "windows": 8288
+    },
+    {
+      "driven_windows": 6432,
+      "duration_s": 4570,
+      "end_timestamp": 1782018867,
+      "expected_raw_size": 265216000,
+      "issues": [],
+      "lifecycle_errors": 0,
+      "non_driven_windows": 1856,
+      "partition": "train",
+      "raw_manifest_sha256": "654473a77f57c0c3a86e2a14ff28f5ace7c7dd5da4ec0510f2f65e476620fd52",
+      "raw_manifest_size": 265216000,
+      "route": "v4s5",
+      "sample_count_per_window_max": 2000,
+      "sample_count_per_window_min": 2000,
+      "samples": 16576000,
+      "sender_off_required_windows": 1280,
+      "session_id": "v4s5_seed1",
+      "start_timestamp": 1782014297,
+      "temperature_max_c": 47.0,
+      "temperature_min_c": 41.0,
+      "tsc_calibration_hz": 3214578253.2148423,
+      "window_statuses": {
+        "OK": 8288
+      },
+      "windows": 8288
+    },
+    {
+      "driven_windows": 6432,
+      "duration_s": 4571,
+      "end_timestamp": 1782023443,
+      "expected_raw_size": 265216000,
+      "issues": [],
+      "lifecycle_errors": 0,
+      "non_driven_windows": 1856,
+      "partition": "train",
+      "raw_manifest_sha256": "0d92e6e19585e38a69f85241b908f96b8c05283d7f98cdf9f142c1aae30398ac",
+      "raw_manifest_size": 265216000,
+      "route": "v4s5",
+      "sample_count_per_window_max": 2000,
+      "sample_count_per_window_min": 2000,
+      "samples": 16576000,
+      "sender_off_required_windows": 1280,
+      "session_id": "v4s5_seed2",
+      "start_timestamp": 1782018872,
+      "temperature_max_c": 47.0,
+      "temperature_min_c": 41.0,
+      "tsc_calibration_hz": 3214813773.3851233,
+      "window_statuses": {
+        "OK": 8288
+      },
+      "windows": 8288
+    },
+    {
+      "driven_windows": 6432,
+      "duration_s": 4571,
+      "end_timestamp": 1782028019,
+      "expected_raw_size": 265216000,
+      "issues": [],
+      "lifecycle_errors": 0,
+      "non_driven_windows": 1856,
+      "partition": "validation",
+      "raw_manifest_sha256": "abf608c54ef9ed8116e2f5f79780280929f4ed157a949aa189b4e0f1e5285fb4",
+      "raw_manifest_size": 265216000,
+      "route": "v4s5",
+      "sample_count_per_window_max": 2000,
+      "sample_count_per_window_min": 2000,
+      "samples": 16576000,
+      "sender_off_required_windows": 1280,
+      "session_id": "v4s5_seed3",
+      "start_timestamp": 1782023448,
+      "temperature_max_c": 47.625,
+      "temperature_min_c": 41.0,
+      "tsc_calibration_hz": 3214812757.71281,
+      "window_statuses": {
+        "OK": 8288
+      },
+      "windows": 8288
+    },
+    {
+      "driven_windows": 6432,
+      "duration_s": 4570,
+      "end_timestamp": 1782032596,
+      "expected_raw_size": 265216000,
+      "issues": [],
+      "lifecycle_errors": 0,
+      "non_driven_windows": 1856,
+      "partition": "stress",
+      "raw_manifest_sha256": "b2fbdc0b5f603b7049a6fe4e7c102bf8cb17d1888758b5fe6d80dad8c37fc39b",
+      "raw_manifest_size": 265216000,
+      "route": "v4s5",
+      "sample_count_per_window_max": 2000,
+      "sample_count_per_window_min": 2000,
+      "samples": 16576000,
+      "sender_off_required_windows": 1280,
+      "session_id": "v4s5_seed4",
+      "start_timestamp": 1782028026,
+      "temperature_max_c": 48.0,
+      "temperature_min_c": 41.0,
+      "tsc_calibration_hz": 3214813506.614614,
+      "window_statuses": {
+        "OK": 8288
+      },
+      "windows": 8288
+    },
+    {
+      "driven_windows": 6432,
+      "duration_s": 4570,
+      "end_timestamp": 1782037175,
+      "expected_raw_size": 265216000,
+      "issues": [],
+      "lifecycle_errors": 0,
+      "non_driven_windows": 1856,
+      "partition": "test",
+      "raw_manifest_sha256": "a567f369789af1e25884cd634f349ee8604672fa102b9c4d6bbf54df47e9d20f",
+      "raw_manifest_size": 265216000,
+      "route": "v4s5",
+      "sample_count_per_window_max": 2000,
+      "sample_count_per_window_min": 2000,
+      "samples": 16576000,
+      "sender_off_required_windows": 1280,
+      "session_id": "v4s5_seed5",
+      "start_timestamp": 1782032605,
+      "temperature_max_c": 48.0,
+      "temperature_min_c": 41.0,
+      "tsc_calibration_hz": 3214812432.603322,
+      "window_statuses": {
+        "OK": 8288
+      },
+      "windows": 8288
+    }
+  ],
+  "sessions_archive": {
+    "path": "/mnt/data/Sessions.zip",
+    "sha256": "0e2c4fe3493f6dc9a9f3c46f083a8253625fa115f220e12c512fc84292c4a863",
+    "size": 1411303
+  },
+  "shared_schedule_counts": {
+    "False": 6912,
+    "True": 35712
+  },
+  "stage_counts": {
+    "A_GAUGE": 1152,
+    "B_TONE_ORDER": 41472,
+    "C_PERSISTENCE_OFF": 6144,
+    "C_PERSISTENCE_PREPARE": 13824,
+    "D_TRAJECTORY": 36864
+  },
+  "timing_ms": {
+    "capture_span": {
+      "max": 499.8812699558927,
+      "mean": 499.81745621500903,
+      "median": 499.82029443307425,
+      "min": 499.75962924323017,
+      "p95": 499.83434980801974,
+      "p99": 499.8404434656797
+    },
+    "first_drive_delay": {
+      "max": 43.369253718237594,
+      "mean": 5.38386240040146,
+      "median": 1.6151428998602513,
+      "min": 8.523045761580469e-05,
+      "p95": 24.782461376283138,
+      "p99": 37.173637936825074
+    },
+    "last_sample_minus_deadline": {
+      "max": 0.13140048083842754,
+      "mean": 0.0675957662252053,
+      "median": 0.07042727915352112,
+      "min": 0.009772043958981064,
+      "p95": 0.08448735055179354,
+      "p99": 0.09059377178908606
+    },
+    "receiver_epoch_skew": {
+      "max": 0.01299982458096526,
+      "mean": 6.675304002285973e-05,
+      "median": 6.626063614627595e-05,
+      "min": 4.603688127295768e-05,
+      "p95": 8.429728896335595e-05,
+      "p99": 8.678576981836277e-05
+    },
+    "sender_epoch_skew": {
+      "max": 0.008613254753228564,
+      "mean": 6.813332272939654e-05,
+      "median": 6.781605014032e-05,
+      "min": 4.603688127295768e-05,
+      "p95": 8.5547769672422e-05,
+      "p99": 8.802998191824099e-05
+    }
+  },
+  "verdict": {
+    "archive_safety": true,
+    "metadata_integrity": true,
+    "raw_content_verified": false,
+    "raw_size_reconciliation": true,
+    "scientific_waveform_validated": false,
+    "scramble_control_valid": false,
+    "session_set_complete": true
+  },
+  "window_count": 99456
+}

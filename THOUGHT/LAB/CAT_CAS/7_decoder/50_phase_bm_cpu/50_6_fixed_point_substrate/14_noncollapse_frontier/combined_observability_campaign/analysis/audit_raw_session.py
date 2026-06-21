@@ -197,6 +197,9 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
     nonmonotonic_windows = 0
     frequency_transition_rows: list[dict[str, Any]] = []
 
+    exact_gate_coefficients = np.full(len(results), np.nan + 1j * np.nan)
+    observed_f_over_4 = np.full(len(results), np.nan + 1j * np.nan)
+
     for index, row in enumerate(results):
         start = int(offsets[index])
         stop = int(offsets[index + 1])
@@ -249,6 +252,7 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
             )
             target[harmonic.label].append(abs(value))
 
+        observed_f_over_4[index] = coefficients["f_over_4"]
         stored_i = row["computed_I"]
         stored_q = row["computed_Q"]
         if stored_i != "null" and stored_q != "null":
@@ -284,6 +288,7 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
             tsc_hz=tsc_hz,
             frequency_hz=frequency / 4.0,
         )
+        exact_gate_coefficients[index] = gate_coefficient
         phase_residuals.append(
             float(
                 np.angle(
