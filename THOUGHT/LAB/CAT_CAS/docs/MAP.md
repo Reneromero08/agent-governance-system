@@ -1,6 +1,6 @@
 # CAT_CAS Map
 
-The whole lab on one page. Experiments are grouped into seven thematic **tracks**
+The whole lab on one page. Experiments are grouped into eight thematic **tracks**
 (see [CONVENTIONS.md](CONVENTIONS.md) §2). Each keeps its permanent number; the
 track is its folder. Authoritative status lives in
 [MASTER_REPORT.md](../MASTER_REPORT.md) and
@@ -19,7 +19,9 @@ Catalytic basics → scaling the substrate to real inference → pushing physica
 limits and factorization → holographic/lattice structure → topological proofs →
 frontier domain phases (limits: event-horizon; proof-power: math; emergence
 built atom-up: atom -> energy -> chem -> bio -> consciousness as final boss) →
-the wall: decoder theory (49) + physical substrate crossing (50 bm_cpu).
+the wall: decoder theory (49) + physical substrate crossing (50 bm_cpu) →
+external frontiers: independent adjudication, prize-bearing Walls, and
+cross-domain transfer (51+).
 
 ---
 
@@ -103,9 +105,25 @@ the wall: decoder theory (49) + physical substrate crossing (50 bm_cpu).
 | 47 | phase_bio | Biology oracles: protein folding, folding pathway, prion, genetic code, neural binding, morphogenesis (holds the cell CSV). |
 | 48 | phase_consciousness **[STUB]** | Qualia-engine roadmap; no code yet. The final-boss frontier phase. |
 
-## 7_decoder (49–50)
+## 7_decoder (49–50) — wall localization & physical substrate crossing
 
 | # | Experiment | What |
 |---|------------|------|
 | 49 | the_decoder | Extractive proof + decodability boundary (14 sub-experiments): locates the irreducible wall at lattice hardness. |
 | 50 | phase_bm_cpu | Physical test of crossing the decoder wall (bare-metal CPU substrate). Lives at `7_decoder/50_phase_bm_cpu`. |
+
+## 8_external_frontiers (51+) — independent adjudication & transfer
+
+| # | Experiment | What |
+|---|------------|------|
+| 51 | poseidon_cryptanalysis **[STUB]** | Exact finite-field challenge engine for CICO, Zero-test, Density, partial collisions, and reduced-round attack research. |
+| 52 | proximity_prize **[STUB]** | Reed–Solomon correlated-agreement and list-boundary laboratory, finite atlas, and theorem extraction. |
+| 53 | vesuvius_challenge **[STUB]** | Non-collapse laminar geometry, surface continuation, mesh integrity, fiber fields, and ink provenance. |
+| 54 | arc_prize **[STUB]** | `TaskHolo` and `WorldOrbit` for sparse transformation induction and interactive adaptation. |
+| 55 | hutter_prize **[STUB]** | Exact relational compression, reversible corpus transforms, and byte-perfect restoration. |
+| 56 | aimo_prize **[STUB]** | `ProofOrbit` mathematical agent architecture with countermodels, tools, verification, and proof repair. |
+| 57 | erdos_bounties **[STUB]** | Governed theorem-bounty selector, exact finite laboratories, boundary atlases, and proof extraction. |
+| 58 | ecdsa_fail **[STUB]** | Reversible elliptic-curve circuit equivalence, global uncomputation, and full resource-vector optimization. |
+| 59 | neutral_atom_qday **[STUB]** | Independent logical-to-physical quantum resource audit, architecture sensitivity, qday evidence, and migration mapping. |
+
+Track 8 is outward-facing but does not replace Exp 50. External frontiers and the physical Small Wall run in parallel and meet through explicit transfer records only.

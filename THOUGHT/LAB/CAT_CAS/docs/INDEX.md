@@ -88,3 +88,20 @@ Every experiment to its track path and primary report. See [MAP.md](MAP.md) and 
 |---|---|---|
 | 49_the_decoder | `7_decoder/49_the_decoder/` | [FABLE_INTERFACE_REPORT.md](7_decoder/49_the_decoder/FABLE_INTERFACE_REPORT.md) |
 | 50_phase_bm_cpu | `7_decoder/50_phase_bm_cpu/` | [REPORT.md](7_decoder/50_phase_bm_cpu/REPORT.md) |
+
+## External Frontiers  (`8_external_frontiers/`)
+
+| Experiment | Path | Primary doc |
+|---|---|---|
+| 51_poseidon_cryptanalysis | `8_external_frontiers/51_poseidon_cryptanalysis/` | [ROADMAP.md](../8_external_frontiers/51_poseidon_cryptanalysis/ROADMAP.md) |
+| 52_proximity_prize | `8_external_frontiers/52_proximity_prize/` | [ROADMAP.md](../8_external_frontiers/52_proximity_prize/ROADMAP.md) |
+| 53_vesuvius_challenge | `8_external_frontiers/53_vesuvius_challenge/` | [ROADMAP.md](../8_external_frontiers/53_vesuvius_challenge/ROADMAP.md) |
+| 54_arc_prize | `8_external_frontiers/54_arc_prize/` | [ROADMAP.md](../8_external_frontiers/54_arc_prize/ROADMAP.md) |
+| 55_hutter_prize | `8_external_frontiers/55_hutter_prize/` | [ROADMAP.md](../8_external_frontiers/55_hutter_prize/ROADMAP.md) |
+| 56_aimo_prize | `8_external_frontiers/56_aimo_prize/` | [ROADMAP.md](../8_external_frontiers/56_aimo_prize/ROADMAP.md) |
+| 57_erdos_bounties | `8_external_frontiers/57_erdos_bounties/` | [ROADMAP.md](../8_external_frontiers/57_erdos_bounties/ROADMAP.md) |
+| 58_ecdsa_fail | `8_external_frontiers/58_ecdsa_fail/` | [ROADMAP.md](../8_external_frontiers/58_ecdsa_fail/ROADMAP.md) |
+| 59_neutral_atom_qday | `8_external_frontiers/59_neutral_atom_qday/` | [ROADMAP.md](../8_external_frontiers/59_neutral_atom_qday/ROADMAP.md) |
+
+Track entrypoint: [README.md](../8_external_frontiers/README.md)  
+Master roadmap: [ROADMAP.md](../8_external_frontiers/ROADMAP.md)
