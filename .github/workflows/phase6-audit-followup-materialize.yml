@@ -1,16 +1,15 @@
-name: Phase 6 Audit Follow-up Materialization
+name: Phase 6 Audit Follow-up Candidate
 
 on:
   pull_request:
-    branches:
-      - main
+    branches: [main]
     types: [opened, synchronize, reopened]
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  materialize:
+  candidate:
     runs-on: ubuntu-24.04
     env:
       PYTHONDONTWRITEBYTECODE: "1"
@@ -33,7 +32,7 @@ jobs:
           echo 'fdb0444c5c1ea62f5372c04193c56f0215f2fdc8581e7bfc742285c6cf27a2f8  '"$RUNNER_TEMP/payload.b64" | sha256sum -c -
           base64 -d "$RUNNER_TEMP/payload.b64" > "$RUNNER_TEMP/payload.tgz"
           echo '5bfd3d6ba43e1bb5b9191b924cbf94f7b8615b11e82a9a6653ce86411da78113  '"$RUNNER_TEMP/payload.tgz" | sha256sum -c -
-      - name: Test and commit payload
+      - name: Extract and stage
         shell: bash
         run: |
           set -euo pipefail
@@ -41,18 +40,22 @@ jobs:
           git config user.email "reneromero08+catcas-audit@users.noreply.github.com"
           git checkout --detach de999f234ee9556b4c44467e90fb297b0589ec19
           tar -xzf "$RUNNER_TEMP/payload.tgz"
-          git add THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime/README.md
+          git add -A THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime/README.md
           git diff --cached --check
-          campaign='THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign'
-          (cd "$campaign" && python -m unittest discover -v -p 'test_*.py')
-          git commit -m 'fix(phase6): preserve audit and correct checksum sidecar'
-          git rev-parse HEAD > "$RUNNER_TEMP/final_sha.txt"
-          test "$(git rev-parse HEAD^)" = 'de999f234ee9556b4c44467e90fb297b0589ec19'
-      - name: Publish branch
+          git diff --cached --name-status
+      - name: Run tests
         shell: bash
         run: |
           set -euo pipefail
-          git push --force origin "$(cat "$RUNNER_TEMP/final_sha.txt"):refs/heads/phase6/audit-preservation-sidecar-fix"
+          cd THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign
+          python -m unittest discover -v -p 'test_*.py'
+      - name: Create candidate commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git commit -m 'fix(phase6): preserve audit and correct checksum sidecar'
+          git rev-parse HEAD > "$RUNNER_TEMP/final_sha.txt"
+          test "$(git rev-parse HEAD^)" = 'de999f234ee9556b4c44467e90fb297b0589ec19'
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: phase6-audit-followup-${{ github.run_id }}
