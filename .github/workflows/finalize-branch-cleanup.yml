@@ -1,0 +1,33 @@
+name: Finalize branch cleanup
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Delete merged maintenance branches
+        shell: bash
+        run: |
+          set -euo pipefail
+          git push origin --delete \
+            chore/remove-phase6-cleanup-workflow \
+            chore/finalize-branch-cleanup
+      - name: Remove this workflow from main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/finalize-branch-cleanup.yml
+          git commit -m "chore: remove final branch cleanup workflow"
+          git push origin HEAD:main
