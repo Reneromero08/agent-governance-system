@@ -86,3 +86,10 @@ gcc -std=c11 -O2 -pthread -Wall -Wextra -Werror \
   -o combined_pdn_runner -lm
 python3 test_combined_pdn_runner.py
 ```
+
+## Evidence replay caveats
+
+- Archive formats such as ZIP may not preserve Linux executable mode bits. Restore the runner's executable mode before replaying target tests, but never alter its bytes; verify the recorded SHA-256 after extraction.
+- `engineering_preflight.json` is generated after the final engineering bundle is sealed. Replay preflight against an untouched clone of the sealed bundle and write the new report outside that clone, or remove the prior post-sealing report before rerunning.
+- Every generated bundle-local `.sha256` sidecar must name the file as it exists in the same directory and must pass `sha256sum -c` from that directory. Renaming a manifest therefore requires rewriting its sidecar, not merely renaming the sidecar file.
+- These replay rules preserve engineering evidence. They do not authorize scientific acquisition or physical restoration claims.
