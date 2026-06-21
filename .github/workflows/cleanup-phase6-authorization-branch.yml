@@ -3,6 +3,9 @@ name: Cleanup Phase 6 authorization branches
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
+    types: [opened]
 
 permissions:
   contents: write
@@ -31,6 +34,7 @@ jobs:
           completed = [
               "phase6/authorize-frozen-acquisition",
               "chore/cleanup-phase6-authorization-branch",
+              "chore/trigger-phase6-authorization-cleanup",
           ]
 
           def request(method, path, body=None):
