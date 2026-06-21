@@ -1,0 +1,17 @@
+{
+  "schema_id": "CAT_CAS_PHASE6_ACQUISITION_AUTHORIZATION_V1",
+  "acquisition_authorized": true,
+  "restoration_authorized": false,
+  "executor_commit": "81ea84f341b29c41b93667d0e0fb98e0975bcbcf",
+  "campaign_plan_sha256": "eb5a46d0a37d66910649467cf0d4e3cf947dee11fab94a36e9bdfed388455e53",
+  "source_bundle_sha256": "5c6588a51ce6b806e1b7b269bafd1981256795653415e012592ad3b6313fdaca",
+  "authorized_output_root": "/root/catcas_phase6_acquisition_81ea84f3_v1",
+  "authorized_by": "Raul Romero (@Reneromero08), project owner",
+  "project_owner_ratification_schema": "CAT_CAS_PHASE6_PROJECT_OWNER_RATIFICATION_V1",
+  "project_owner_decision": "RATIFY_AND_AUTHORIZE_COMBINED_TONE_ORDER_OBSERVABILITY_CAMPAIGN",
+  "target_coupling_authorized": false,
+  "orientation_recovery_authorized": false,
+  "small_wall_authorized": false,
+  "physical_carrier_restoration_authorized": false,
+  "authorization_scope": "FROZEN_12_SESSION_COMBINED_OBSERVABILITY_ACQUISITION_ONLY"
+}
