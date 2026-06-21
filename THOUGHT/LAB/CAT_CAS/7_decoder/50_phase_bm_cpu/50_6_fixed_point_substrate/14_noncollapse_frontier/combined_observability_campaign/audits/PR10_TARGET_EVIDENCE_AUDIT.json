@@ -1,0 +1,25 @@
+{
+  "schema_id": "CAT_CAS_PR10_INDEPENDENT_AUDIT_V1",
+  "qualified_head": "81ea84f341b29c41b93667d0e0fb98e0975bcbcf",
+  "audit_packet_sha256": "7fc96e3979bf0a5757fed20b48e30a9d34b5975af9fce8d984eb9ae8e0e260ba",
+  "verdict": "AUDIT_PASS_WITH_ONE_NONBLOCKING_PACKAGING_DEFECT",
+  "final_disposition": "ENGINEERING_READY__ACQUISITION_UNAUTHORIZED",
+  "engineering_ready": true,
+  "acquisition_authorized": false,
+  "acquisition_ready": false,
+  "scientific_acquisition_started": false,
+  "physical_carrier_restoration_claimed": false,
+  "validation_sessions_expected": 12,
+  "validation_sessions_passed": 12,
+  "python_tests_passed": 35,
+  "strict_tests_passed": 29,
+  "sanitizer_tests_passed": 29,
+  "finding": {
+    "severity": "nonblocking",
+    "type": "checksum_sidecar_filename_mismatch",
+    "file": "source_transfer_bundle.sha256",
+    "expected_target": "source_transfer_bundle.json",
+    "recorded_target": "source_bundle.json",
+    "digest_value_correct": true
+  }
+}
