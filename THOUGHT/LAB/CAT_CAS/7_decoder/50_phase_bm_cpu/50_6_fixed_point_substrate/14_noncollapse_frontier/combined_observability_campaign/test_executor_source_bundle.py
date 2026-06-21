@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import json
+import shutil
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -9,8 +11,11 @@ from pathlib import Path
 from make_executor_source_bundle import (
     SOURCE_PATHS,
     add_file_bindings,
+    rename_bundle_with_sidecar,
     sha256_file,
     verify_bundle,
+    verify_sha256_sidecar,
+    write_sha256_sidecar,
     verify_file_bindings,
     validate_target_validation_evidence,
     write_target_manifest,
@@ -121,6 +126,50 @@ class ExecutorSourceBundleTests(unittest.TestCase):
             report_path.write_text(json.dumps(report, sort_keys=True) + "\n", encoding="utf-8")
             with self.assertRaisesRegex(RuntimeError, "does not match raw"):
                 validate_target_validation_evidence(root)
+
+
+    def test_renamed_bundle_sidecar_names_the_renamed_manifest(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest = root / "source_bundle.json"
+            sidecar = root / "source_bundle.sha256"
+            manifest.write_text("{}\n", encoding="utf-8")
+            write_sha256_sidecar(manifest, sidecar)
+
+            renamed, renamed_sidecar = rename_bundle_with_sidecar(
+                root, "source_bundle.json", "source_transfer_bundle.json"
+            )
+
+            self.assertEqual(renamed.name, "source_transfer_bundle.json")
+            self.assertEqual(
+                renamed_sidecar.read_text(encoding="utf-8"),
+                f"{sha256_file(renamed)}  source_transfer_bundle.json\n",
+            )
+            verify_sha256_sidecar(renamed_sidecar, renamed)
+
+            sha256sum = shutil.which("sha256sum")
+            if sha256sum is not None:
+                completed = subprocess.run(
+                    [sha256sum, "-c", renamed_sidecar.name],
+                    cwd=root,
+                    text=True,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.STDOUT,
+                    check=False,
+                )
+                self.assertEqual(completed.returncode, 0, completed.stdout)
+
+    def test_sidecar_rejects_wrong_recorded_filename(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest = root / "source_transfer_bundle.json"
+            sidecar = root / "source_transfer_bundle.sha256"
+            manifest.write_text("{}\n", encoding="utf-8")
+            sidecar.write_text(
+                f"{sha256_file(manifest)}  source_bundle.json\n", encoding="utf-8"
+            )
+            with self.assertRaisesRegex(RuntimeError, "filename mismatch"):
+                verify_sha256_sidecar(sidecar, manifest)
 
     def test_target_manifest_and_transfer_bundle_are_non_authorizing(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
