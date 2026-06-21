@@ -23,7 +23,7 @@ sibling lab at `THOUGHT/LAB/ORACLE/`.
 
 ## 2. Tracks
 
-Experiments live inside one of seven thematic tracks, named `N_snake_case`
+Experiments live inside one of eight thematic tracks, named `N_snake_case`
 (single digit, narrative order). Track membership follows the lab's own taxonomy
 in [MASTER_REPORT.md](../MASTER_REPORT.md) and is a **contiguous experiment-number
 range** so it is never ambiguous:
@@ -37,8 +37,11 @@ range** so it is never ambiguous:
 | `5_topological_proofs` | 34–41 | zeta/RH, halting oracles, ToE |
 | `6_frontier_phases` | 42–48 | limits (event-horizon) -> proof-power (math) -> emergence built atom-up (atom, energy, chem, bio) -> final boss (consciousness) |
 | `7_decoder` | 49–50 | the decoder theory (49) + physical substrate crossing (50 bm_cpu) |
+| `8_external_frontiers` | 51+ | externally adjudicated cryptanalysis, theorem frontiers, reconstruction, reasoning, compression, and cross-domain transfer |
 
-New experiments append to the highest track or open `8_*` — never renumber 01–50.
+New experiments append contiguously inside `8_external_frontiers` while that track
+remains the active frontier. Open `9_*` only when a genuinely new thematic track is
+needed — never renumber 01–50 or reuse 51+ identities.
 
 ## 3. Experiment directories
 
@@ -46,7 +49,7 @@ New experiments append to the highest track or open `8_*` — never renumber 01�
 - The **global number (01–50) is permanent and load-bearing** (the README,
   MASTER_REPORT, and the audit ledger reference experiments by number, e.g.
   "Exp 16", "Exp 50 Phase 6"). Moving an experiment into a track changes its
-  *path*, never its number.
+  *path*, never its number. The same permanence applies to new experiments 51+.
 - **Collision suffix:** when one number forks into sibling *experiments*, append a
   letter to the number: `NNx_name`. Resolved live collisions:
   - `25_lattice_holography` — base experiment (keeps the bare number).
@@ -94,6 +97,9 @@ Core code is defined **once** in `_lib/` and imported, never copy-pasted:
 - Import via `from _lib... import` (a root `conftest.py` puts `_lib/` on `sys.path`).
 - **Never** count `../` hops to reach another experiment or the repo root — use
   `_lib/paths.py`. Hardcoded absolute paths are an M-7 critic violation.
+- Track-specific shared code may live under that track's own `shared/` directory
+  only when it is not a lab-wide primitive. Promote it to `_lib/` only after
+  demonstrated cross-track reuse.
 
 ## 7. Report / doc filenames
 
@@ -109,12 +115,19 @@ Retired genres: `PUSHED_REPORT.md` (fold into a "Pushed / Infinity" section of
 `REPORT.md`), lowercase `report.md` (rename to `REPORT.md`), per-experiment
 `MASTER_REPORT_EXP_NN.md` (becomes that experiment's `REPORT.md`).
 
+Preparation-only frontier directories may use `ROADMAP.md` as their primary doc
+until execution begins. Create `REPORT.md` when evidence exists; do not create an
+empty report merely to satisfy layout symmetry.
+
 ## 8. Status vocabulary
 
 Use the six canonical states defined in [CAT_CAS_OS.md](../CAT_CAS_OS.md) §11 —
 `DONE`, `DONE-UNVERIFIED`, `COSMETIC`, `OPEN`, `DEFERRED`, `UNKNOWN`. The canonical
 per-experiment audit truth is
 [REPORTS/VIOLATIONS/ROADMAP_3_VERIFIED.md](REPORTS/VIOLATIONS/ROADMAP_3_VERIFIED.md).
+
+Workflow states inside a track may refine execution progress, but they do not
+replace the canonical experiment status.
 
 ## 9. Large data (>100 MB)
 
@@ -129,3 +142,7 @@ out of the lab.
 test of crossing the decoder wall on bare-metal CPU substrate). It is no longer
 frozen at the CAT_CAS root. Experiment number 44 belongs solely to
 `6_frontier_phases/44_phase_atom`; the transient number collision is resolved.
+
+Track 8 begins at experiment 51 and is outward-facing by role. It does not replace
+or subordinate Exp 50; external frontiers and the physical Small Wall run in
+parallel and meet only through explicit transfer records.
