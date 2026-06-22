@@ -1,0 +1,35 @@
+{
+  "schema_id": "CAT_CAS_PR21_FINAL_TREE_EVIDENCE_INVENTORY_V1",
+  "source_commit_sha": "77cdb4169b8be2e7e9261d9808d4cbea67ead6a7",
+  "generated_timestamp": "2026-06-22T01:50:00.7399452-07:00",
+  "artifacts": {
+    "binding_artifact_sha256": "2d0c2cc0d7a68f140fb1f1643fe2f1899ed1ba194dd7c96841057d2c8dcab677",
+    "calibration_plan_sha256": "e995cdff1ee6e0efe9f95ca8d5867b38668188fefbb8a10318342d5496e39a9a",
+    "source_bundle_sha256": "05ec78cb42ca1f1c74919226a8a74893e485329c15cfd9af6a0e689d196dc077"
+  },
+  "logs": {
+    "local_tests.log": {
+      "sha256": "a6c65a13fda85199ed2a72cd5bffadfd68dc7a8748f825db2e1a2f8cec0fd8f7",
+      "size": 1792
+    },
+    "ssh_strict_sanitizer.log": {
+      "sha256": "7c41aa92a11958406732ffcbe166aecc2bc7c14a8503b9f41f68a0f679fa9ce2",
+      "size": 12106
+    },
+    "full_repository_gate.log": {
+      "sha256": "a598ab2ecf44d9ed24bd2994d47c4877821ed32f68873c26e74c02dba969edee",
+      "size": 18434
+    }
+  },
+  "results": {
+    "hermetic_local": "27_PASSED",
+    "external_binding": "PASS",
+    "strict": "38_PASSED",
+    "equivalence": "2_PASSED",
+    "sanitizer_executor": "35_PASSED",
+    "sanitizer_equivalence": "2_PASSED",
+    "full_repository_gate": "FULL_OK",
+    "compiler_warnings": "NONE",
+    "sanitizer_findings": "NONE"
+  }
+}

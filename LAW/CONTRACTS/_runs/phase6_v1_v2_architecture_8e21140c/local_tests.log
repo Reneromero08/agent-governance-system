@@ -1,1 +1,22 @@
-............                                                             [100%]
+EVIDENCE_SCHEMA=CAT_CAS_PR21_FINAL_TREE_TEST_LOG_V1
+COMMIT_SHA=77cdb4169b8be2e7e9261d9808d4cbea67ead6a7
+LANE=HERMETIC_LOCAL_27_TEST_AND_EXTERNAL_BINDING_INTEGRATION
+START_TIMESTAMP=2026-06-22T01:44:40.1060724-07:00
+END_TIMESTAMP=2026-06-22T01:44:41.8255310-07:00
+COMMAND=& 'D:\CCC 2.0\AI\agent-governance-system\.venv\Scripts\python.exe' -m pytest 'THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\combined_observability_campaign\analysis\test_frozen_artifact_binding.py' 'THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\combined_observability_campaign\analysis\test_waveform_reference.py' 'THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\combined_observability_campaign\v2' 'THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\holo_runtime_v2\test_slot2_primitive_identity.py' -q
+EXIT_CODE=0
+WARNINGS=NONE
+SKIPS=NONE
+RESULT=27_PASSED
+--- OUTPUT ---
+...........................                   [100%]
+--- EXTERNAL BINDING INTEGRATION ---
+START_TIMESTAMP=2026-06-22T01:44:43.1247335-07:00
+END_TIMESTAMP=2026-06-22T01:44:43.3475421-07:00
+EVIDENCE_ROOT_IDENTIFIER=phase6_v1_full_raw_adjudication_7c44af0f
+COMMAND=.\.venv\Scripts\python.exe THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\combined_observability_campaign\analysis\audit_frozen_artifact_binding.py --evidence-root LAW\CONTRACTS\_runs\phase6_v1_full_raw_adjudication_7c44af0f --output LAW\CONTRACTS\_runs\pr21_log_binding\audit.json
+EXIT_CODE=0
+WARNINGS=NONE
+SKIPS=NONE
+RESULT=PASS
+{"artifact_id": "audit.json", "sha256": "2d0c2cc0d7a68f140fb1f1643fe2f1899ed1ba194dd7c96841057d2c8dcab677"}
