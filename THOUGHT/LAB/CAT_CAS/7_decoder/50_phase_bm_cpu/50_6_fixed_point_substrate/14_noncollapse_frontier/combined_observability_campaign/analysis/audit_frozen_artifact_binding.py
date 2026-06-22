@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Replay the immutable V1 frozen-model contract without training or selection."""
+"""Bind the frozen V1 artifacts to recorded outputs without replay claims."""
 
 from __future__ import annotations
 
@@ -11,6 +11,7 @@ from pathlib import Path
 import numpy as np
 
 MODEL_SHA256 = "f1b8047ba0d80d027edcec9a841c8a4320dfe6796bbad7271fd43dc6a86dee5e"
+ADJUDICATION_SHA256 = "1cd1f288410e6e616c5b39ab6c2dc7b371dd135b03c4e8f4d6b5798aa900917e"
 CACHE_SHA256 = {
     "v2s3_seed5.npz": "d7cf0f9fb07fabb9fce50d45594067331021775dd88851cdaf0d4dc80fe9e628",
     "v4s5_seed5.npz": "225614b19b4323069086668e26face5947fe135332adfb3da96b1a577f8fb93c",
@@ -60,7 +61,7 @@ def recorded_seed5(adjudication: dict, session: str) -> dict[str, float]:
     }
 
 
-def replay(model_path: Path, evidence_root: Path) -> dict:
+def audit_binding(model_path: Path, evidence_root: Path) -> dict:
     digest = sha256(model_path)
     if digest != MODEL_SHA256:
         raise ValueError(f"frozen model digest mismatch: {digest}")
@@ -99,12 +100,15 @@ def replay(model_path: Path, evidence_root: Path) -> dict:
         }
 
     adjudication_path = evidence_root / "full_adjudication.json"
+    adjudication_digest = sha256(adjudication_path)
+    if adjudication_digest != ADJUDICATION_SHA256:
+        raise ValueError("recorded adjudication digest mismatch")
     adjudication = json.loads(adjudication_path.read_text(encoding="utf-8"))
-    replayed = {
+    recorded = {
         session: recorded_seed5(adjudication, session) for session in EXPECTED_SEED5
     }
-    if replayed != EXPECTED_SEED5:
-        raise ValueError("recorded seed-5 outputs do not match frozen replay contract")
+    if recorded != EXPECTED_SEED5:
+        raise ValueError("recorded seed-5 outputs do not match binding contract")
     ledger = adjudication["IMPLEMENTATION_RECOVERY_ANALYSIS"]
     verdict = {
         "stage_b": ledger["stage_b_verdict"],
@@ -120,15 +124,25 @@ def replay(model_path: Path, evidence_root: Path) -> dict:
         raise ValueError("final verdict mismatch")
 
     return {
-        "schema_id": "INDEPENDENT_FROZEN_MODEL_REPLAY_AUDIT_V1",
-        "audit_name": "INDEPENDENT_FROZEN_MODEL_REPLAY_AUDIT",
+        "schema_id": "FROZEN_ARTIFACT_AND_RECORDED_OUTPUT_BINDING_AUDIT_V1",
+        "audit_name": "FROZEN_ARTIFACT_AND_RECORDED_OUTPUT_BINDING_AUDIT",
         "frozen_model": {"path": str(model_path), "sha256": digest},
+        "recorded_adjudication": {
+            "path": str(adjudication_path),
+            "sha256": adjudication_digest,
+        },
         "model_selection_performed": False,
-        "code_changes_during_replay": False,
+        "independent_metric_recomputation_performed": False,
         "seed5_retry_performed": False,
         "seed5_cache_bindings": cache_bindings,
-        "recorded_seed5_outputs_confirmed": replayed,
-        "final_verdict_confirmed": verdict,
+        "recorded_seed5_output_bindings": recorded,
+        "recorded_final_verdict_binding": verdict,
+        "recomputation_blockers": [
+            "seed-5 caches do not serialize Stage B ground-truth labels",
+            "seed-5 caches do not serialize transition controls or targets",
+            "frozen model does not serialize Stage C transition coefficients and baselines",
+            "frozen model does not serialize mechanical verdict thresholds",
+        ],
         "permanent_v1_statement": PERMANENT_STATEMENTS,
     }
 
@@ -139,7 +153,7 @@ def main() -> int:
     parser.add_argument("--evidence-root", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
-    manifest = replay(args.model, args.evidence_root)
+    manifest = audit_binding(args.model, args.evidence_root)
     payload = canonical_bytes(manifest)
     args.output.parent.mkdir(parents=True, exist_ok=False)
     args.output.write_bytes(payload)

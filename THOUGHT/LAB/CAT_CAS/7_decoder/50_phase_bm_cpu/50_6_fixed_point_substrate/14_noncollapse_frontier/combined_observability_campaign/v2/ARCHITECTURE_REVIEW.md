@@ -1,7 +1,7 @@
 # Phase 6 V2 Architectural Review
 
-This change is forward-only. It adds `holo_runtime_v2`, replay-only V1 audit
-code, and V2 calibration contracts.
+This change is forward-only. It adds `holo_runtime_v2`, a V1 frozen-artifact
+and recorded-output binding audit, and V2 calibration contracts.
 
 Review invariants:
 
