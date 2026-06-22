@@ -33,11 +33,19 @@ PRISTINE_FINAL_TEST_HYGIENE_NOT_PROVEN
 V2_RERUN_NOT_AUTHORIZED
 ```
 
+Historical seed-5 facts preserved by the binding artifact:
+
+```text
+historical_pristine_seed5_hygiene_proven=false
+historical_seed5_reexecution_occurred=true
+binding_audit_seed5_retry_performed=false
+```
+
 Immutable binding manifest:
 
 ```text
 LAW/CONTRACTS/_runs/frozen_artifact_and_recorded_output_binding_audit_f1b8047b/FROZEN_ARTIFACT_AND_RECORDED_OUTPUT_BINDING_AUDIT.json
-SHA-256: d9d4e44f0bfeee83f8030815e0477dc3c4ed789b10c63ec45d2b9c7fe50908ae
+SHA-256: 2d0c2cc0d7a68f140fb1f1643fe2f1899ed1ba194dd7c96841057d2c8dcab677
 ```
 
 No model development, model selection, seed-5 retry, hardware execution, or V2

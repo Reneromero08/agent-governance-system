@@ -30,17 +30,29 @@ derived 588 windows:
 = 2,352 windows/campaign
 ```
 
-The plan binds the ordered windows, runtime parameters, scramble fields, and
+The plan binds the ordered windows, runtime parameters, logically separated
+sender fields, and
 predeclared spectral thresholds. Exact session manifests are members of the
 source-bundle manifest. The analyzer can issue a campaign pass only after both
 reboot partitions and both routes satisfy the frozen rules.
 
+The committed four-session source bundle closes the campaign design, but it is
+not directly executable one session at a time. The C hardware gate requires a
+distinct singleton subset bundle and authorization whose complete session sets
+both equal the current session. This prevents partial execution under the full
+campaign bundle.
+
+The current sender/receiver field projection is deterministic logical field
+separation only. The full schedule serializes both mappings, so the sender gate
+is neither hidden nor unreconstructible. This is not a valid blinded scramble
+null and cannot support a scramble-null scientific claim.
+
 ```text
 CALIBRATION_PLAN_V2.json SHA-256:
-2809e7341e54ac7c94b74501d9a1c773d791b75ca953cddde76ac7bb39eb2797
+e995cdff1ee6e0efe9f95ca8d5867b38668188fefbb8a10318342d5496e39a9a
 
 SOURCE_BUNDLE_MANIFEST_V2.json SHA-256:
-70b92cf8b155537519af80b6f0ace677ba8ebee0612996b2f615747f168e0596
+05ec78cb42ca1f1c74919226a8a74893e485329c15cfd9af6a0e689d196dc077
 ```
 
 V2 run objects use execution class

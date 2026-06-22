@@ -5,8 +5,9 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import re
 import sys
-from pathlib import Path
+from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import BinaryIO, TextIO
 
 import numpy as np
@@ -111,7 +112,7 @@ def calibration_windows(session_id: str) -> list[dict]:
                         "session_id": session_id,
                         "stage": "V2_SPECTRAL_CALIBRATION_SENDER_ON",
                         "block_id": f"tone_{tone:02d}",
-                        "family": "scramble" if unshared else "calibration",
+                        "family": "logical_sender_field_separation" if unshared else "calibration",
                         "actual_mode": "basis",
                         "declared_mode": "basis",
                         "executed_tone_order": "ASC",
@@ -259,12 +260,40 @@ def validate_authorization(value: dict, expected_plan_sha256: str,
             raise ValueError(f"{key} must remain false")
     if value["automatic_retry"] is not False:
         raise ValueError("automatic_retry must remain false")
+    for key, expected in RUNTIME_PARAMETERS.items():
+        if value[key] != expected or type(value[key]) is not type(expected):
+            raise ValueError(f"authorized runtime mismatch: {key}")
+    if not re.fullmatch(r"[0-9a-f]{40}", value["executor_commit"]) or \
+            value["executor_commit"] == "0" * 40:
+        raise ValueError("invalid executor commit format")
+    if not re.fullmatch(r"[0-9a-f]{64}", value["executor_sha256"]):
+        raise ValueError("invalid executor SHA-256 format")
     if value["campaign_plan_sha256"] != expected_plan_sha256:
         raise ValueError("campaign plan digest mismatch")
     source_bundle_digest = hashlib.sha256(canonical_bytes(source_bundle)).hexdigest()
     if value["source_bundle_sha256"] != source_bundle_digest:
         raise ValueError("source bundle digest mismatch")
+    if set(source_bundle) != {"schema_id", "sessions"} or \
+            source_bundle["schema_id"] != "CAT_CAS_PHASE6_V2_SOURCE_BUNDLE_MANIFEST_V1":
+        raise ValueError("invalid source-bundle schema")
+    sessions = source_bundle["sessions"]
+    if not isinstance(sessions, dict) or not sessions:
+        raise ValueError("source bundle requires sessions")
+    for session_id, manifest_digest in sessions.items():
+        if not isinstance(session_id, str) or not session_id or \
+                not isinstance(manifest_digest, str) or \
+                not re.fullmatch(r"[0-9a-f]{64}", manifest_digest):
+            raise ValueError("invalid source-bundle session-manifest binding")
     if value["route_cores"] != ROUTE_CORES:
         raise ValueError("route/core binding mismatch")
     if value["session_ids"] != list(source_bundle["sessions"]):
         raise ValueError("exact source-bundle session IDs required")
+    if not isinstance(value["authorized_by"], str) or not value["authorized_by"].strip():
+        raise ValueError("authorized_by must be nonempty")
+    output_root = value["authorized_output_root"]
+    if not isinstance(output_root, str) or not output_root.strip() or ".." in \
+            PurePosixPath(output_root).parts + PureWindowsPath(output_root).parts or not (
+                PurePosixPath(output_root).is_absolute() or
+                PureWindowsPath(output_root).is_absolute()
+            ):
+        raise ValueError("authorized_output_root must be an absolute safe path")

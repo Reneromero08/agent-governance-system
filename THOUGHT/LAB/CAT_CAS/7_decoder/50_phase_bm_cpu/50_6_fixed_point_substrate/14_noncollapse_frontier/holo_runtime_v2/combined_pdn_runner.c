@@ -79,37 +79,6 @@ static int key_count(const char *json, const char *name) {
     return count;
 }
 
-static int exact_string_array_member(const char *json, const char *name,
-                                     const char *target) {
-    const char *p = value(json, name);
-    if (!p || *p++ != '[') return -1;
-    int matches = 0;
-    char seen[64][128];
-    int seen_count = 0;
-    while (1) {
-        while (isspace((unsigned char)*p)) p++;
-        if (*p == ']') return matches == 1 ? 1 : 0;
-        if (*p++ != '"' || seen_count >= 64) return -1;
-        const char *end = strchr(p, '"');
-        if (!end || (size_t)(end - p) >= sizeof(seen[0])) return -1;
-        size_t n = (size_t)(end - p);
-        memcpy(seen[seen_count], p, n);
-        seen[seen_count][n] = 0;
-        for (int i = 0; i < seen_count; i++) {
-            if (!strcmp(seen[i], seen[seen_count])) return -1;
-        }
-        if (!strcmp(seen[seen_count], target)) matches++;
-        seen_count++;
-        p = end + 1;
-        while (isspace((unsigned char)*p)) p++;
-        if (*p == ',') {
-            p++;
-            continue;
-        }
-        if (*p != ']') return -1;
-    }
-}
-
 static int object_bounds(const char *json, const char *name,
                          const char **start, const char **end) {
     const char *p = value(json, name);
@@ -174,6 +143,34 @@ static int object_long_pair(const char *json, const char *object_name,
     *second = strtol(p, &tail, 10);
     if (tail == p) return -1;
     p = tail;
+    while (isspace((unsigned char)*p)) p++;
+    return *p == ']' ? 0 : -1;
+}
+
+static int object_member_count(const char *json, const char *object_name) {
+    const char *start, *end;
+    if (object_bounds(json, object_name, &start, &end)) return -1;
+    int count = 0, in_string = 0, nested = 0;
+    for (const char *p = start + 1; p < end; p++) {
+        if (*p == '"' && p[-1] != '\\') in_string = !in_string;
+        if (in_string) continue;
+        if (*p == '{' || *p == '[') nested++;
+        else if (*p == '}' || *p == ']') nested--;
+        else if (*p == ':' && nested == 0) count++;
+    }
+    return count;
+}
+
+static int exact_singleton_string_array(const char *json, const char *name,
+                                        const char *target) {
+    const char *p = value(json, name);
+    if (!p || *p++ != '[') return -1;
+    while (isspace((unsigned char)*p)) p++;
+    if (*p++ != '"') return -1;
+    const char *end = strchr(p, '"');
+    if (!end || (size_t)(end - p) != strlen(target) ||
+        strncmp(p, target, (size_t)(end - p))) return -1;
+    p = end + 1;
     while (isspace((unsigned char)*p)) p++;
     return *p == ']' ? 0 : -1;
 }
@@ -678,24 +675,26 @@ static void verify_authorization(const RunnerArgs *args, const Schedule *schedul
     for (size_t i = 0; i < sizeof(required_fields) / sizeof(required_fields[0]); i++) {
         if (key_count(authorization, required_fields[i]) != 1) unique = 0;
     }
-    long authorized_victim = -1, authorized_sender = -1;
-    int session_member = exact_string_array_member(
+    long v4_victim = -1, v4_sender = -1, v2_victim = -1, v2_sender = -1;
+    int singleton_session = exact_singleton_string_array(
         authorization, "session_ids", schedule->session_id);
-    int route_pair = object_long_pair(
-        authorization, "route_cores", schedule->route,
-        &authorized_victim, &authorized_sender);
+    int route_pairs =
+        object_member_count(authorization, "route_cores") != 2 ||
+        object_long_pair(authorization, "route_cores", "v4s5", &v4_victim, &v4_sender) ||
+        object_long_pair(authorization, "route_cores", "v2s3", &v2_victim, &v2_sender) ||
+        v4_victim != 4 || v4_sender != 5 || v2_victim != 2 || v2_sender != 3;
     int source_bundle_valid =
         key_count(source_bundle, "schema_id") == 1 &&
         key_count(source_bundle, "sessions") == 1 &&
         !jstr(source_bundle, "schema_id", bundle_schema, sizeof(bundle_schema)) &&
         !strcmp(bundle_schema, "CAT_CAS_PHASE6_V2_SOURCE_BUNDLE_MANIFEST_V1") &&
+        object_member_count(source_bundle, "sessions") == 1 &&
         !object_string(source_bundle, "sessions", schedule->session_id,
                        bundled_session_manifest_sha,
                        sizeof(bundled_session_manifest_sha)) &&
         !strcmp(bundled_session_manifest_sha, schedule->session_manifest_sha256);
     int invalid =
-        !unique || session_member != 1 || route_pair ||
-        authorized_victim != args->victim || authorized_sender != args->sender ||
+        !unique || singleton_session || route_pairs ||
         !source_bundle_valid ||
         jstr(authorization, "schema_id", schema, sizeof(schema)) ||
         strcmp(schema, "CAT_CAS_PHASE6_V2_SPECTRAL_CALIBRATION_AUTHORIZATION_V1") ||

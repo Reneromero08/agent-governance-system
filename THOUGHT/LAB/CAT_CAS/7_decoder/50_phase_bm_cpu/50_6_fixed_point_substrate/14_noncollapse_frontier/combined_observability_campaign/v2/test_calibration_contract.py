@@ -135,6 +135,30 @@ class CalibrationContractTests(unittest.TestCase):
         auth["acquisition_authorized"] = True
         with self.assertRaisesRegex(ValueError, "must remain false"):
             validate_authorization(auth, "a" * 64, bundle)
+        bundle = build_source_bundle_manifest({"a": "1" * 64})
+        for key, good in RUNTIME_PARAMETERS.items():
+            bad = (not good) if isinstance(good, bool) else good + 1
+            with self.subTest(key=key):
+                auth = authorization("a" * 64, bundle)
+                auth[key] = bad
+                with self.assertRaisesRegex(ValueError, "runtime mismatch|must remain false"):
+                    validate_authorization(auth, "a" * 64, bundle)
+        cases = {
+            "executor_commit": "A" * 40,
+            "executor_sha256": "g" * 64,
+            "authorized_by": "  ",
+            "authorized_output_root": "relative/output",
+        }
+        for key, bad in cases.items():
+            with self.subTest(key=key):
+                auth = authorization("a" * 64, bundle)
+                auth[key] = bad
+                with self.assertRaises(ValueError):
+                    validate_authorization(auth, "a" * 64, bundle)
+        bundle = build_source_bundle_manifest({"a": "not-a-digest"})
+        auth = authorization("a" * 64, bundle)
+        with self.assertRaisesRegex(ValueError, "session-manifest binding"):
+            validate_authorization(auth, "a" * 64, bundle)
 
 
 class ImmutableWriterTests(unittest.TestCase):

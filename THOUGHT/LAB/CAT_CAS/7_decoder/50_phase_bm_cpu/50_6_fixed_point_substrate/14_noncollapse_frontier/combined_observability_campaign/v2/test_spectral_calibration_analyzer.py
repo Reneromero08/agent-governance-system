@@ -90,7 +90,13 @@ def build_fixture(root: Path):
         "authorization_artifact_sha256": authorization["artifact_sha256"],
         "execution_class": "AUTHORIZED_V2_SPECTRAL_CALIBRATION_NOT_ACQUISITION",
         "hardware_executed": True, **FALSE_AUTHORIZATIONS,
+        "calibration_authorized": True, "exit_status": "COMPLETE",
+        "failure_reason": "", "host_control_state_restored": True,
+        "session_manifest_sha256": "a" * 64,
+        "victim_core": 4, "sender_core": 5,
         "tsc_calibration_hz": 1_000_000.0, "frequency_policy": 1600000,
+        "read_rate_hz": 4000, "slot_duration_s": .5,
+        "sender_off_duration_s": .5, "temperature_veto_c": 68.0,
     }
     (run_dir / "run.json").write_bytes(canonical_bytes(run))
     for name in RUN_FILES - {
@@ -101,16 +107,67 @@ def build_fixture(root: Path):
         name: {"size": (run_dir / name).stat().st_size, "sha256": sha(run_dir / name)}
         for name in RUN_FILES
     }
-    (run_dir / "run_manifest.json").write_bytes(canonical_bytes({"files": files}))
+    (run_dir / "run_manifest.json").write_bytes(canonical_bytes({
+        "schema_id": "CAT_CAS_PHASE6_COMBINED_RUN_MANIFEST_V2",
+        "session_id": session_id,
+        "status": "COMPLETE",
+        "files": files,
+    }))
     return run_dir, plan, authorization, source_bundle
 
 
 class SpectralAnalyzerTests(unittest.TestCase):
+    def assert_run_tamper_rejected(self, key: str, value: object, pattern: str) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            run_dir, plan, authorization, bundle = build_fixture(Path(temp))
+            run_path = run_dir / "run.json"
+            run = json.loads(run_path.read_text())
+            run[key] = value
+            run_path.write_bytes(canonical_bytes(run))
+            manifest_path = run_dir / "run_manifest.json"
+            manifest = json.loads(manifest_path.read_text())
+            manifest["files"]["run.json"] = {
+                "size": run_path.stat().st_size,
+                "sha256": sha(run_path),
+            }
+            manifest_path.write_bytes(canonical_bytes(manifest))
+            with self.assertRaisesRegex(ValueError, pattern):
+                analyze_run(run_dir, plan, authorization, bundle)
+
     def test_incomplete_schedule_is_rejected_before_adjudication(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             args = build_fixture(Path(temp))
             with self.assertRaisesRegex(ValueError, "complete tone/amplitude"):
                 analyze_run(*args)
+        run_cases = (
+            ("calibration_authorized", False, "calibration-authorized"),
+            ("exit_status", "FAILED", "completion binding"),
+            ("failure_reason", "ERROR", "completion binding"),
+            ("host_control_state_restored", False, "not restored"),
+            ("session_manifest_sha256", "f" * 64, "session-manifest"),
+            ("victim_core", 5, "route/core"),
+            ("sender_core", 4, "route/core"),
+            ("frequency_policy", 1, "frequency_policy"),
+            ("read_rate_hz", 1, "read_rate_hz"),
+            ("slot_duration_s", 1.0, "slot_duration_s"),
+            ("sender_off_duration_s", 1.0, "sender_off_duration_s"),
+            ("temperature_veto_c", 1.0, "temperature_veto_c"),
+        )
+        for key, value, pattern in run_cases:
+            with self.subTest(key=key):
+                self.assert_run_tamper_rejected(key, value, pattern)
+        manifest_cases = (
+            ("schema_id", "BAD"), ("session_id", "other"), ("status", "FAILED")
+        )
+        for key, value in manifest_cases:
+            with self.subTest(key=key), tempfile.TemporaryDirectory() as temp:
+                args = build_fixture(Path(temp))
+                path = args[0] / "run_manifest.json"
+                manifest = json.loads(path.read_text())
+                manifest[key] = value
+                path.write_bytes(canonical_bytes(manifest))
+                with self.assertRaisesRegex(ValueError, "run-manifest"):
+                    analyze_run(*args)
 
     def test_manifest_tamper_fails_closed(self) -> None:
         with tempfile.TemporaryDirectory() as temp:

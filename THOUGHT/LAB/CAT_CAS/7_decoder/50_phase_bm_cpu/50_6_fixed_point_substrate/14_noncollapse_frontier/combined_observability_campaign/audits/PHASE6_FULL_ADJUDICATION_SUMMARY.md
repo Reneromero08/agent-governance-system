@@ -19,7 +19,8 @@ V2_RERUN_NOT_AUTHORIZED
 The implementation-recovery representation was frozen from seeds 0-2; seed 3
 was used for model/history selection, seed 4 for mandatory stress evidence, and
 seed 5 for the final recorded test. The seed-5 hygiene limitation is permanent.
-No further V1 model development or seed-5 retry is authorized.
+Historical seed-5 reexecution occurred, so pristine seed-5 hygiene is not
+proven. No further V1 model development or seed-5 retry is authorized.
 
 The separate artifact-and-recorded-output binding audit verifies identities and
 bindings only. It does not independently recompute the metrics in this object.

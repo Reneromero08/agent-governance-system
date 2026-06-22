@@ -99,7 +99,7 @@ def construct_complete_grid(schedule: list[dict]) -> dict[tuple[int, int, int, i
 
 def analyze_run(run_dir: Path, plan: dict, authorization: dict,
                 source_bundle: dict) -> dict:
-    verify_run_manifest(run_dir)
+    manifest = verify_run_manifest(run_dir)
     run = load_json(run_dir / "run.json")
     session = load_json(run_dir / "session.json")
     schedule = read_rows(run_dir / "windows.jsonl")
@@ -113,6 +113,9 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
     if session_id not in plan_sessions:
         raise ValueError("session absent from exact calibration plan")
     planned = plan_sessions[session_id]
+    if manifest.get("schema_id") != "CAT_CAS_PHASE6_COMBINED_RUN_MANIFEST_V2" or \
+            manifest.get("session_id") != session_id or manifest.get("status") != "COMPLETE":
+        raise ValueError("run-manifest schema/session/COMPLETE binding mismatch")
     if schedule != planned["windows"] or len(results) != len(schedule):
         raise ValueError("ordered window set differs from plan")
     if run.get("session_id") != session_id or run.get("route") != planned["route"]:
@@ -123,6 +126,27 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
         raise ValueError("executor commit binding mismatch")
     if run.get("authorization_artifact_sha256") != authorization_digest:
         raise ValueError("authorization digest binding mismatch")
+    if run.get("calibration_authorized") is not True:
+        raise ValueError("run is not calibration-authorized")
+    if run.get("exit_status") != "COMPLETE" or run.get("failure_reason") != "":
+        raise ValueError("run completion binding mismatch")
+    if run.get("host_control_state_restored") is not True:
+        raise ValueError("host control state was not restored")
+    if run.get("session_manifest_sha256") != source_bundle["sessions"].get(session_id):
+        raise ValueError("session-manifest/source-bundle binding mismatch")
+    route_cores = authorization["route_cores"][planned["route"]]
+    if [run.get("victim_core"), run.get("sender_core")] != route_cores:
+        raise ValueError("run route/core authorization mismatch")
+    runtime_bindings = {
+        "frequency_policy": "pin_khz",
+        "read_rate_hz": "read_hz",
+        "slot_duration_s": "slot_s",
+        "sender_off_duration_s": "off_window_s",
+        "temperature_veto_c": "temperature_veto_c",
+    }
+    for run_key, authorization_key in runtime_bindings.items():
+        if run.get(run_key) != authorization[authorization_key]:
+            raise ValueError(f"run runtime authorization mismatch: {run_key}")
     if run.get("execution_class") != "AUTHORIZED_V2_SPECTRAL_CALIBRATION_NOT_ACQUISITION":
         raise ValueError("evidence is not V2 calibration")
     if run.get("hardware_executed") is not True:
@@ -185,9 +209,9 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
         sender_digest = hashlib.sha256(gate.astype(np.uint8).tobytes()).hexdigest()
         receiver_digest = hashlib.sha256(receiver_gate.astype(np.uint8).tobytes()).hexdigest()
         if bool(declared["shared_schedule"]) != (sender_digest == receiver_digest):
-            raise ValueError("scramble physical gate digest contract violated")
+            raise ValueError("logical sender-field gate digest contract violated")
         if gate.mean() != receiver_gate.mean():
-            raise ValueError("scramble workload duty differs")
+            raise ValueError("logical sender-field workload duty differs")
         measurements.append({
             "tone": tone,
             "amplitude": int(declared["amplitude_level"]),

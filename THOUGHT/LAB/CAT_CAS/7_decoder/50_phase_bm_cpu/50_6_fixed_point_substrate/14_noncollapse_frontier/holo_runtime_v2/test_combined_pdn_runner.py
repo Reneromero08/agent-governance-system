@@ -381,12 +381,14 @@ class Tests(unittest.TestCase):
                 self.assertIn("invalid V2 calibration authorization", result.stderr)
 
     def test_wrong_route_core_pair_is_rejected(self):
-        with tempfile.TemporaryDirectory() as temp:
-            result = self.authorization_result(
-                Path(temp),
-                auth_mutate=lambda value: value["route_cores"].update(v4s5=[5, 4]),
-            )
-            self.assertIn("invalid V2 calibration authorization", result.stderr)
+        for route, pair in (("v4s5", [5, 4]), ("v2s3", [3, 2])):
+            with self.subTest(route=route), tempfile.TemporaryDirectory() as temp:
+                result = self.authorization_result(
+                    Path(temp),
+                    auth_mutate=lambda value, r=route, p=pair:
+                        value["route_cores"].update({r: p}),
+                )
+                self.assertIn("invalid V2 calibration authorization", result.stderr)
 
     def test_unrelated_or_wrong_session_manifest_is_rejected(self):
         cases = (("other_session", None), (None, "f" * 64))
@@ -398,6 +400,27 @@ class Tests(unittest.TestCase):
                     bundle_manifest_sha=manifest_sha,
                 )
                 self.assertIn("invalid V2 calibration authorization", result.stderr)
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            session = write_session(root)
+            bundle = write_source_bundle(session)
+            value = json.loads(bundle.read_text())
+            value["sessions"]["v2s3_other"] = "d" * 64
+            dump(bundle, value)
+            authorized_root = root / "authorized"
+            authorized_root.mkdir()
+            authorization = write_authorization(
+                root, session, bundle, authorized_root,
+                mutate=lambda auth: auth.update(
+                    session_ids=["v4s5_seed4", "v2s3_other"]
+                ),
+            )
+            result = self.exec_runner(
+                session, authorized_root / "run", "--hardware",
+                "--authorization-artifact", str(authorization),
+                source_bundle=bundle,
+            )
+            self.assertIn("invalid V2 calibration authorization", result.stderr)
 
     def test_wrong_source_bundle_digest_is_rejected(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -461,7 +484,7 @@ class Tests(unittest.TestCase):
                 self.assertNotEqual(result.returncode, 0)
                 self.assertIn("nonzero lowercase", result.stderr)
 
-    def test_physical_scramble_requires_divergent_bound_gates(self):
+    def test_logical_sender_field_separation_requires_divergent_bound_gates(self):
         def mutate(header, rows):
             rows[0].update(shared_schedule=False,
                            sender_codeword_source_index=7,
