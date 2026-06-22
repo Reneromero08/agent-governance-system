@@ -1,0 +1,78 @@
+cc -std=c11 -O2 -pthread -Wall -Wextra -Werror combined_pdn_runner.c combined_pdn_hardware.c -o combined_pdn_runner -lm
+test_capture_capacity_is_bounded (__main__.Tests.test_capture_capacity_is_bounded) ... ok
+test_driven_requires_codeword (__main__.Tests.test_driven_requires_codeword) ... ok
+test_driven_requires_tone (__main__.Tests.test_driven_requires_tone) ... ok
+test_engineering_smoke_gate_rejects_scientific_schedule (__main__.Tests.test_engineering_smoke_gate_rejects_scientific_schedule) ... ok
+test_exact_engineering_smoke_is_the_only_unauthorized_hardware_shape (__main__.Tests.test_exact_engineering_smoke_is_the_only_unauthorized_hardware_shape) ... ok
+test_extra_rows (__main__.Tests.test_extra_rows) ... ok
+test_failure_cleanup_matrix (__main__.Tests.test_failure_cleanup_matrix) ... ok
+test_hardware_commit_validation (__main__.Tests.test_hardware_commit_validation) ... ok
+test_invalid_authorization_artifact_fails_before_hardware (__main__.Tests.test_invalid_authorization_artifact_fails_before_hardware) ... ok
+test_invalid_numeric_arguments_are_rejected (__main__.Tests.test_invalid_numeric_arguments_are_rejected) ... ok
+test_late_sender_epoch_is_fatal (__main__.Tests.test_late_sender_epoch_is_fatal) ... ok
+test_manifest_schema (__main__.Tests.test_manifest_schema) ... ok
+test_manifest_sha (__main__.Tests.test_manifest_sha) ... ok
+test_manifest_size (__main__.Tests.test_manifest_size) ... ok
+test_mock_sender_lifecycle_sender_off_and_shared_epoch (__main__.Tests.test_mock_sender_lifecycle_sender_off_and_shared_epoch) ... ok
+test_noncontiguous_duplicate (__main__.Tests.test_noncontiguous_duplicate) ... ok
+test_output_collision (__main__.Tests.test_output_collision) ... ok
+test_physical_scramble_requires_divergent_bound_gates (__main__.Tests.test_physical_scramble_requires_divergent_bound_gates) ... ok
+test_raw_ring_requires_off (__main__.Tests.test_raw_ring_requires_off) ... ok
+test_real_hardware_requires_authorization_artifact (__main__.Tests.test_real_hardware_requires_authorization_artifact) ... ok
+test_restoration_failure_fatal (__main__.Tests.test_restoration_failure_fatal) ... ok
+test_sender_off_drive (__main__.Tests.test_sender_off_drive) ... ok
+test_session_id_mismatch (__main__.Tests.test_session_id_mismatch) ... ok
+test_short_count (__main__.Tests.test_short_count) ... ok
+test_unsafe_path (__main__.Tests.test_unsafe_path) ... ok
+test_unsupported_mode (__main__.Tests.test_unsupported_mode) ... ok
+test_unsupported_route (__main__.Tests.test_unsupported_route) ... ok
+test_valid_authorization_is_bound_and_recorded_before_real_execution (__main__.Tests.test_valid_authorization_is_bound_and_recorded_before_real_execution) ... ok
+test_validate_contract_files_and_hashes (__main__.Tests.test_validate_contract_files_and_hashes) ... ok
+test_validation_never_hardware (__main__.Tests.test_validation_never_hardware) ... ok
+
+----------------------------------------------------------------------
+Ran 30 tests in 1.224s
+
+OK
+test_c_matches_python_for_all_waveform_parameters (__main__.EquivalenceTests.test_c_matches_python_for_all_waveform_parameters) ... ok
+test_phase_and_duty_contract (__main__.EquivalenceTests.test_phase_and_duty_contract) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 1.521s
+
+OK
+test_capture_capacity_is_bounded (__main__.Tests.test_capture_capacity_is_bounded) ... ok
+test_driven_requires_codeword (__main__.Tests.test_driven_requires_codeword) ... ok
+test_driven_requires_tone (__main__.Tests.test_driven_requires_tone) ... ok
+test_engineering_smoke_gate_rejects_scientific_schedule (__main__.Tests.test_engineering_smoke_gate_rejects_scientific_schedule) ... ok
+test_exact_engineering_smoke_is_the_only_unauthorized_hardware_shape (__main__.Tests.test_exact_engineering_smoke_is_the_only_unauthorized_hardware_shape) ... ok
+test_extra_rows (__main__.Tests.test_extra_rows) ... ok
+test_failure_cleanup_matrix (__main__.Tests.test_failure_cleanup_matrix) ... ok
+test_hardware_commit_validation (__main__.Tests.test_hardware_commit_validation) ... ok
+test_invalid_authorization_artifact_fails_before_hardware (__main__.Tests.test_invalid_authorization_artifact_fails_before_hardware) ... ok
+test_invalid_numeric_arguments_are_rejected (__main__.Tests.test_invalid_numeric_arguments_are_rejected) ... ok
+test_late_sender_epoch_is_fatal (__main__.Tests.test_late_sender_epoch_is_fatal) ... ok
+test_manifest_schema (__main__.Tests.test_manifest_schema) ... ok
+test_manifest_sha (__main__.Tests.test_manifest_sha) ... ok
+test_manifest_size (__main__.Tests.test_manifest_size) ... ok
+test_mock_sender_lifecycle_sender_off_and_shared_epoch (__main__.Tests.test_mock_sender_lifecycle_sender_off_and_shared_epoch) ... ok
+test_noncontiguous_duplicate (__main__.Tests.test_noncontiguous_duplicate) ... ok
+test_output_collision (__main__.Tests.test_output_collision) ... ok
+test_physical_scramble_requires_divergent_bound_gates (__main__.Tests.test_physical_scramble_requires_divergent_bound_gates) ... ok
+test_raw_ring_requires_off (__main__.Tests.test_raw_ring_requires_off) ... ok
+test_real_hardware_requires_authorization_artifact (__main__.Tests.test_real_hardware_requires_authorization_artifact) ... ok
+test_restoration_failure_fatal (__main__.Tests.test_restoration_failure_fatal) ... ok
+test_sender_off_drive (__main__.Tests.test_sender_off_drive) ... ok
+test_session_id_mismatch (__main__.Tests.test_session_id_mismatch) ... ok
+test_short_count (__main__.Tests.test_short_count) ... ok
+test_unsafe_path (__main__.Tests.test_unsafe_path) ... ok
+test_unsupported_mode (__main__.Tests.test_unsupported_mode) ... ok
+test_unsupported_route (__main__.Tests.test_unsupported_route) ... ok
+test_valid_authorization_is_bound_and_recorded_before_real_execution (__main__.Tests.test_valid_authorization_is_bound_and_recorded_before_real_execution) ... ok
+test_validate_contract_files_and_hashes (__main__.Tests.test_validate_contract_files_and_hashes) ... ok
+test_validation_never_hardware (__main__.Tests.test_validation_never_hardware) ... ok
+
+----------------------------------------------------------------------
+Ran 30 tests in 3.013s
+
+OK
