@@ -12,7 +12,7 @@ typedef struct {
     const char *session_dir;
     const char *output_dir;
     const char *executor_commit;
-    const char *source_bundle_sha256;
+    const char *source_bundle_manifest;
     const char *authorization_artifact;
     int engineering_smoke;
     int victim;

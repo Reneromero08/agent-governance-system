@@ -67,6 +67,117 @@ static const char *value(const char *json, const char *name) {
     return p;
 }
 
+static int key_count(const char *json, const char *name) {
+    char needle[160];
+    snprintf(needle, sizeof(needle), "\"%s\"", name);
+    int count = 0;
+    const char *cursor = json;
+    while ((cursor = strstr(cursor, needle)) != NULL) {
+        count++;
+        cursor += strlen(needle);
+    }
+    return count;
+}
+
+static int exact_string_array_member(const char *json, const char *name,
+                                     const char *target) {
+    const char *p = value(json, name);
+    if (!p || *p++ != '[') return -1;
+    int matches = 0;
+    char seen[64][128];
+    int seen_count = 0;
+    while (1) {
+        while (isspace((unsigned char)*p)) p++;
+        if (*p == ']') return matches == 1 ? 1 : 0;
+        if (*p++ != '"' || seen_count >= 64) return -1;
+        const char *end = strchr(p, '"');
+        if (!end || (size_t)(end - p) >= sizeof(seen[0])) return -1;
+        size_t n = (size_t)(end - p);
+        memcpy(seen[seen_count], p, n);
+        seen[seen_count][n] = 0;
+        for (int i = 0; i < seen_count; i++) {
+            if (!strcmp(seen[i], seen[seen_count])) return -1;
+        }
+        if (!strcmp(seen[seen_count], target)) matches++;
+        seen_count++;
+        p = end + 1;
+        while (isspace((unsigned char)*p)) p++;
+        if (*p == ',') {
+            p++;
+            continue;
+        }
+        if (*p != ']') return -1;
+    }
+}
+
+static int object_bounds(const char *json, const char *name,
+                         const char **start, const char **end) {
+    const char *p = value(json, name);
+    if (!p || *p != '{') return -1;
+    int depth = 0, in_string = 0;
+    for (const char *cursor = p; *cursor; cursor++) {
+        if (*cursor == '"' && (cursor == p || cursor[-1] != '\\')) in_string = !in_string;
+        if (in_string) continue;
+        if (*cursor == '{') depth++;
+        if (*cursor == '}' && --depth == 0) {
+            *start = p;
+            *end = cursor;
+            return 0;
+        }
+    }
+    return -1;
+}
+
+static const char *object_value(const char *start, const char *end, const char *name) {
+    char needle[160];
+    snprintf(needle, sizeof(needle), "\"%s\"", name);
+    const char *p = start;
+    int count = 0;
+    const char *found = NULL;
+    while ((p = strstr(p, needle)) != NULL && p < end) {
+        count++;
+        found = p + strlen(needle);
+        p = found;
+    }
+    if (count != 1 || !found || found >= end) return NULL;
+    while (found < end && isspace((unsigned char)*found)) found++;
+    if (found >= end || *found++ != ':') return NULL;
+    while (found < end && isspace((unsigned char)*found)) found++;
+    return found < end ? found : NULL;
+}
+
+static int object_string(const char *json, const char *object_name,
+                         const char *member, char *out, size_t size) {
+    const char *start, *end;
+    if (object_bounds(json, object_name, &start, &end)) return -1;
+    const char *p = object_value(start, end, member);
+    if (!p || *p++ != '"') return -1;
+    const char *q = strchr(p, '"');
+    if (!q || q > end || (size_t)(q - p) >= size) return -1;
+    memcpy(out, p, (size_t)(q - p));
+    out[q - p] = 0;
+    return 0;
+}
+
+static int object_long_pair(const char *json, const char *object_name,
+                            const char *member, long *first, long *second) {
+    const char *start, *end;
+    if (object_bounds(json, object_name, &start, &end)) return -1;
+    const char *p = object_value(start, end, member);
+    if (!p || *p++ != '[') return -1;
+    char *tail = NULL;
+    *first = strtol(p, &tail, 10);
+    if (tail == p) return -1;
+    p = tail;
+    while (isspace((unsigned char)*p)) p++;
+    if (*p++ != ',') return -1;
+    *second = strtol(p, &tail, 10);
+    if (tail == p) return -1;
+    p = tail;
+    while (isspace((unsigned char)*p)) p++;
+    return *p == ']' ? 0 : -1;
+}
+
 static int jstr(const char *json, const char *name, char *out, size_t n) {
     const char *p = value(json, name);
     if (!p || *p != '"') return -1;
@@ -241,8 +352,8 @@ static RunnerArgs parse_args(int argc, char **argv) {
         } else if (!strcmp(key_name, "--executor-commit") && arg) {
             args.executor_commit = arg;
             i++;
-        } else if (!strcmp(key_name, "--source-bundle-sha256") && arg) {
-            args.source_bundle_sha256 = arg;
+        } else if (!strcmp(key_name, "--source-bundle-manifest") && arg) {
+            args.source_bundle_manifest = arg;
             i++;
         } else if (!strcmp(key_name, "--authorization-artifact") && arg) {
             args.authorization_artifact = arg;
@@ -286,9 +397,8 @@ static RunnerArgs parse_args(int argc, char **argv) {
     if (args.mode == MODE_HARDWARE && !valid_commit(args.executor_commit)) {
         die("hardware mode requires a nonzero lowercase 40-character hex --executor-commit");
     }
-    if (args.mode == MODE_HARDWARE &&
-        !valid_sha256(args.source_bundle_sha256)) {
-        die("hardware mode requires --source-bundle-sha256");
+    if (args.mode == MODE_HARDWARE && !args.source_bundle_manifest) {
+        die("hardware mode requires --source-bundle-manifest");
     }
     if (args.mode == MODE_HARDWARE && args.backend == BACKEND_REAL &&
         !args.authorization_artifact) {
@@ -301,7 +411,8 @@ static RunnerArgs parse_args(int argc, char **argv) {
         die("invalid numeric arguments");
     }
     if (!shell_safe(args.session_dir) || !shell_safe(args.output_dir) ||
-        (args.authorization_artifact && !shell_safe(args.authorization_artifact))) {
+        (args.authorization_artifact && !shell_safe(args.authorization_artifact)) ||
+        (args.source_bundle_manifest && !shell_safe(args.source_bundle_manifest))) {
         die("unsafe path");
     }
     return args;
@@ -543,16 +654,49 @@ static void verify_engineering_smoke(const Schedule *schedule) {
 static void verify_authorization(const RunnerArgs *args, const Schedule *schedule) {
     char schema[96], executor_commit[41], executor_sha[65], actual_executor_sha[65];
     char executor_path[64];
-    char plan_sha[65], source_bundle_sha[65];
+    char plan_sha[65], source_bundle_sha[65], actual_source_bundle_sha[65];
+    char bundle_schema[96], bundled_session_manifest_sha[65];
     char output_root[CP_PATH_MAX], authorized_by[256];
     int calibration = 0, acquisition = 1, restoration = 1;
     int target_coupling = 1, small_wall = 1, automatic_retry = 1;
     long pin_khz = 0, read_hz = 0;
     double slot_s = 0, off_window_s = 0, temp_veto_c = 0;
     char *authorization = slurp(args->authorization_artifact);
+    char *source_bundle = slurp(args->source_bundle_manifest);
     snprintf(executor_path, sizeof(executor_path), "/proc/%ld/exe", (long)getpid());
     sha256(executor_path, actual_executor_sha);
+    sha256(args->source_bundle_manifest, actual_source_bundle_sha);
+    const char *required_fields[] = {
+        "schema_id", "calibration_authorized", "acquisition_authorized",
+        "restoration_authorized", "target_coupling_authorized",
+        "small_wall_authorized", "automatic_retry", "executor_commit",
+        "executor_sha256", "source_bundle_sha256", "campaign_plan_sha256",
+        "session_ids", "route_cores", "pin_khz", "slot_s", "off_window_s",
+        "read_hz", "temperature_veto_c", "authorized_output_root", "authorized_by"
+    };
+    int unique = 1;
+    for (size_t i = 0; i < sizeof(required_fields) / sizeof(required_fields[0]); i++) {
+        if (key_count(authorization, required_fields[i]) != 1) unique = 0;
+    }
+    long authorized_victim = -1, authorized_sender = -1;
+    int session_member = exact_string_array_member(
+        authorization, "session_ids", schedule->session_id);
+    int route_pair = object_long_pair(
+        authorization, "route_cores", schedule->route,
+        &authorized_victim, &authorized_sender);
+    int source_bundle_valid =
+        key_count(source_bundle, "schema_id") == 1 &&
+        key_count(source_bundle, "sessions") == 1 &&
+        !jstr(source_bundle, "schema_id", bundle_schema, sizeof(bundle_schema)) &&
+        !strcmp(bundle_schema, "CAT_CAS_PHASE6_V2_SOURCE_BUNDLE_MANIFEST_V1") &&
+        !object_string(source_bundle, "sessions", schedule->session_id,
+                       bundled_session_manifest_sha,
+                       sizeof(bundled_session_manifest_sha)) &&
+        !strcmp(bundled_session_manifest_sha, schedule->session_manifest_sha256);
     int invalid =
+        !unique || session_member != 1 || route_pair ||
+        authorized_victim != args->victim || authorized_sender != args->sender ||
+        !source_bundle_valid ||
         jstr(authorization, "schema_id", schema, sizeof(schema)) ||
         strcmp(schema, "CAT_CAS_PHASE6_V2_SPECTRAL_CALIBRATION_AUTHORIZATION_V1") ||
         jbool(authorization, "calibration_authorized", &calibration) || !calibration ||
@@ -570,7 +714,7 @@ static void verify_authorization(const RunnerArgs *args, const Schedule *schedul
         strcmp(plan_sha, schedule->campaign_plan_sha256) ||
         jstr(authorization, "source_bundle_sha256", source_bundle_sha,
              sizeof(source_bundle_sha)) || !valid_sha256(source_bundle_sha) ||
-        strcmp(source_bundle_sha, args->source_bundle_sha256) ||
+        strcmp(source_bundle_sha, actual_source_bundle_sha) ||
         jlong(authorization, "pin_khz", &pin_khz) || pin_khz != args->pin_khz ||
         jlong(authorization, "read_hz", &read_hz) || read_hz != args->read_hz ||
         jdouble(authorization, "slot_s", &slot_s) || slot_s != args->slot_s ||
@@ -578,12 +722,11 @@ static void verify_authorization(const RunnerArgs *args, const Schedule *schedul
             off_window_s != args->off_window_s ||
         jdouble(authorization, "temperature_veto_c", &temp_veto_c) ||
             temp_veto_c != args->temp_veto_c ||
-        (!value(authorization, "session_ids") ||
-         !strstr(value(authorization, "session_ids"), schedule->session_id)) ||
         jstr(authorization, "authorized_output_root", output_root, sizeof(output_root)) ||
         !shell_safe(output_root) || !path_is_within(output_root, args->output_dir) ||
         jstr(authorization, "authorized_by", authorized_by, sizeof(authorized_by));
     free(authorization);
+    free(source_bundle);
     if (invalid) die("invalid V2 calibration authorization artifact");
 }
 

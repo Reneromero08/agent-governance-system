@@ -1,42 +1,50 @@
 #!/usr/bin/env python3
-"""Bind the frozen V1 artifacts to recorded outputs without replay claims."""
+"""Bind externally supplied frozen V1 artifacts to recorded outputs."""
 
 from __future__ import annotations
 
 import argparse
 import hashlib
 import json
+import os
+from dataclasses import dataclass
 from pathlib import Path
 
 import numpy as np
 
-MODEL_SHA256 = "f1b8047ba0d80d027edcec9a841c8a4320dfe6796bbad7271fd43dc6a86dee5e"
-ADJUDICATION_SHA256 = "1cd1f288410e6e616c5b39ab6c2dc7b371dd135b03c4e8f4d6b5798aa900917e"
-CACHE_SHA256 = {
-    "v2s3_seed5.npz": "d7cf0f9fb07fabb9fce50d45594067331021775dd88851cdaf0d4dc80fe9e628",
-    "v4s5_seed5.npz": "225614b19b4323069086668e26face5947fe135332adfb3da96b1a577f8fb93c",
-}
-EXPECTED_SEED5 = {
-    "v2s3_seed5": {
-        "stage_b_joint_accuracy": 0.04131944444444444,
-        "stage_b_mode_accuracy": 0.259375,
-        "stage_b_theta_accuracy": 0.15833333333333333,
-        "stage_c_zero_input_gain": 0.0028150917247609097,
-        "operator_nrmse": 0.9600993584436434,
-    },
-    "v4s5_seed5": {
-        "stage_b_joint_accuracy": 0.07152777777777777,
-        "stage_b_mode_accuracy": 0.2611111111111111,
-        "stage_b_theta_accuracy": 0.2375,
-        "stage_c_zero_input_gain": 0.00018943988888986407,
-        "operator_nrmse": 0.5161325831243231,
-    },
-}
-PERMANENT_STATEMENTS = [
+EVIDENCE_ID = "phase6_v1_full_raw_adjudication_7c44af0f"
+MODEL_REL = "frozen_model_before_final_test.json"
+ADJUDICATION_REL = "full_adjudication.json"
+CACHE_RELS = (
+    "feature_cache/v2s3_seed5.npz",
+    "feature_cache/v4s5_seed5.npz",
+)
+PERMANENT_STATEMENTS = (
     "RETROSPECTIVE_FULL_DATASET_NEGATIVE_ADJUDICATION",
     "PRISTINE_FINAL_TEST_HYGIENE_NOT_PROVEN",
     "V2_RERUN_NOT_AUTHORIZED",
-]
+)
+
+
+@dataclass(frozen=True)
+class BindingContract:
+    model_sha256: str
+    adjudication_sha256: str
+    cache_sha256: dict[str, str]
+    cache_shapes: dict[str, tuple[int, ...]]
+    cache_nonfinite_counts: dict[str, int]
+
+
+KNOWN_CONTRACT = BindingContract(
+    model_sha256="f1b8047ba0d80d027edcec9a841c8a4320dfe6796bbad7271fd43dc6a86dee5e",
+    adjudication_sha256="1cd1f288410e6e616c5b39ab6c2dc7b371dd135b03c4e8f4d6b5798aa900917e",
+    cache_sha256={
+        CACHE_RELS[0]: "d7cf0f9fb07fabb9fce50d45594067331021775dd88851cdaf0d4dc80fe9e628",
+        CACHE_RELS[1]: "225614b19b4323069086668e26face5947fe135332adfb3da96b1a577f8fb93c",
+    },
+    cache_shapes={"recovery": (8288, 6, 2), "original": (8288, 2), "gate": (8288, 2)},
+    cache_nonfinite_counts={"recovery": 6144, "original": 1024, "gate": 3712},
+)
 
 
 def sha256(path: Path) -> str:
@@ -45,6 +53,19 @@ def sha256(path: Path) -> str:
 
 def canonical_bytes(value: object) -> bytes:
     return (json.dumps(value, sort_keys=True, separators=(",", ":")) + "\n").encode()
+
+
+def required(root: Path, relative: str) -> Path:
+    path = root / relative
+    if not path.is_file():
+        raise FileNotFoundError(f"required external evidence artifact absent: {EVIDENCE_ID}/{relative}")
+    return path
+
+
+def verify_digest(path: Path, expected: str, label: str) -> None:
+    actual = sha256(path)
+    if actual != expected:
+        raise ValueError(f"{label} digest mismatch: expected {expected}, got {actual}")
 
 
 def recorded_seed5(adjudication: dict, session: str) -> dict[str, float]:
@@ -61,13 +82,24 @@ def recorded_seed5(adjudication: dict, session: str) -> dict[str, float]:
     }
 
 
-def audit_binding(model_path: Path, evidence_root: Path) -> dict:
-    digest = sha256(model_path)
-    if digest != MODEL_SHA256:
-        raise ValueError(f"frozen model digest mismatch: {digest}")
+def audit_binding(evidence_root: Path, contract: BindingContract = KNOWN_CONTRACT) -> dict:
+    model_path = required(evidence_root, MODEL_REL)
+    adjudication_path = required(evidence_root, ADJUDICATION_REL)
+    cache_paths = {relative: required(evidence_root, relative) for relative in CACHE_RELS}
 
-    # Deserialization occurs only after the byte digest has passed.
+    # Every byte digest is checked before any JSON or NPZ deserialization.
+    verify_digest(model_path, contract.model_sha256, "frozen model")
+    verify_digest(adjudication_path, contract.adjudication_sha256, "recorded adjudication")
+    for relative, path in cache_paths.items():
+        verify_digest(path, contract.cache_sha256[relative], relative)
+
     model = json.loads(model_path.read_text(encoding="utf-8"))
+    required_model_keys = {
+        "seed5_used_for_selection", "selection_sessions", "selected_operator",
+        "selected_operator_coefficients", "stage_b_centroids", "stage_b_labels",
+    }
+    if not required_model_keys <= model.keys():
+        raise ValueError("frozen model schema missing required keys")
     if model["seed5_used_for_selection"] or model["selection_sessions"] != [
         "v2s3_seed3", "v4s5_seed3"
     ]:
@@ -80,56 +112,51 @@ def audit_binding(model_path: Path, evidence_root: Path) -> dict:
         raise ValueError("frozen model contains non-finite values")
 
     cache_bindings = {}
-    for name, expected in CACHE_SHA256.items():
-        path = evidence_root / "feature_cache" / name
-        actual = sha256(path)
-        if actual != expected:
-            raise ValueError(f"seed-5 cache digest mismatch: {name}")
+    for relative, path in cache_paths.items():
         with np.load(path, allow_pickle=False) as cache:
-            shapes = {key: list(cache[key].shape) for key in cache.files}
-            nonfinite_counts = {
-                key: int(np.size(cache[key]) - np.isfinite(cache[key]).sum())
+            if set(cache.files) != {"recovery", "original", "gate", "raw_sha256"}:
+                raise ValueError(f"cache schema mismatch: {relative}")
+            shapes = {key: tuple(cache[key].shape) for key in ("recovery", "original", "gate")}
+            if shapes != contract.cache_shapes:
+                raise ValueError(f"cache shape mismatch: {relative}")
+            counts = {
+                key: int(cache[key].size - np.isfinite(cache[key]).sum())
                 for key in ("recovery", "original", "gate")
             }
-            if shapes["recovery"] != [8288, 6, 2] or shapes["original"] != [8288, 2]:
-                raise ValueError(f"seed-5 cache shape mismatch: {name}")
-        cache_bindings[name] = {
-            "sha256": actual,
-            "shapes": shapes,
-            "derived_nonfinite_counts": nonfinite_counts,
+            if counts != contract.cache_nonfinite_counts:
+                raise ValueError(f"cache non-finite pattern mismatch: {relative}")
+            raw_digest = str(cache["raw_sha256"].item())
+            if len(raw_digest) != 64:
+                raise ValueError(f"cache raw digest malformed: {relative}")
+        cache_bindings[f"{EVIDENCE_ID}/{relative}"] = {
+            "sha256": contract.cache_sha256[relative],
+            "shapes": {key: list(value) for key, value in shapes.items()},
+            "derived_nonfinite_counts": counts,
+            "raw_sha256": raw_digest,
         }
 
-    adjudication_path = evidence_root / "full_adjudication.json"
-    adjudication_digest = sha256(adjudication_path)
-    if adjudication_digest != ADJUDICATION_SHA256:
-        raise ValueError("recorded adjudication digest mismatch")
     adjudication = json.loads(adjudication_path.read_text(encoding="utf-8"))
+    if adjudication.get("schema_id") != "CAT_CAS_PHASE6_V1_FULL_RAW_ADJUDICATION_V1":
+        raise ValueError("recorded adjudication schema mismatch")
     recorded = {
-        session: recorded_seed5(adjudication, session) for session in EXPECTED_SEED5
+        session: recorded_seed5(adjudication, session)
+        for session in ("v2s3_seed5", "v4s5_seed5")
     }
-    if recorded != EXPECTED_SEED5:
-        raise ValueError("recorded seed-5 outputs do not match binding contract")
     ledger = adjudication["IMPLEMENTATION_RECOVERY_ANALYSIS"]
     verdict = {
         "stage_b": ledger["stage_b_verdict"],
         "stage_c": ledger["stage_c_verdict"],
         "predictive_operator": ledger["predictive_operator_verdict"],
     }
-    expected_verdict = {
-        "stage_b": "NO_ORDER_RESOLUTION",
-        "stage_c": "DRIVEN_RELATIONAL_TRANSPORT_ONLY",
-        "predictive_operator": "NO_STABLE_PREDICTIVE_OPERATOR",
-    }
-    if verdict != expected_verdict:
-        raise ValueError("final verdict mismatch")
-
     return {
-        "schema_id": "FROZEN_ARTIFACT_AND_RECORDED_OUTPUT_BINDING_AUDIT_V1",
+        "schema_id": "FROZEN_ARTIFACT_AND_RECORDED_OUTPUT_BINDING_AUDIT_V2",
         "audit_name": "FROZEN_ARTIFACT_AND_RECORDED_OUTPUT_BINDING_AUDIT",
-        "frozen_model": {"path": str(model_path), "sha256": digest},
+        "input_class": "EXTERNALLY_SUPPLIED_EVIDENCE_ARTIFACTS",
+        "evidence_root_identifier": EVIDENCE_ID,
+        "frozen_model": {"artifact_id": f"{EVIDENCE_ID}/{MODEL_REL}", "sha256": contract.model_sha256},
         "recorded_adjudication": {
-            "path": str(adjudication_path),
-            "sha256": adjudication_digest,
+            "artifact_id": f"{EVIDENCE_ID}/{ADJUDICATION_REL}",
+            "sha256": contract.adjudication_sha256,
         },
         "model_selection_performed": False,
         "independent_metric_recomputation_performed": False,
@@ -143,25 +170,43 @@ def audit_binding(model_path: Path, evidence_root: Path) -> dict:
             "frozen model does not serialize Stage C transition coefficients and baselines",
             "frozen model does not serialize mechanical verdict thresholds",
         ],
-        "permanent_v1_statement": PERMANENT_STATEMENTS,
+        "permanent_v1_statement": list(PERMANENT_STATEMENTS),
     }
+
+
+def write_exclusive(path: Path, value: dict) -> str:
+    payload = canonical_bytes(value)
+    digest = hashlib.sha256(payload).hexdigest()
+    sidecar = path.with_suffix(path.suffix + ".sha256")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if path.exists() or sidecar.exists():
+        raise FileExistsError("binding artifact or checksum already exists")
+    try:
+        with path.open("xb") as output:
+            output.write(payload)
+            output.flush()
+            os.fsync(output.fileno())
+        try:
+            with sidecar.open("x", encoding="ascii", newline="\n") as output:
+                output.write(f"{digest}  {path.name}\n")
+                output.flush()
+                os.fsync(output.fileno())
+        except Exception:
+            path.unlink(missing_ok=True)
+            raise
+    except Exception:
+        raise
+    return digest
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model", required=True, type=Path)
     parser.add_argument("--evidence-root", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
-    manifest = audit_binding(args.model, args.evidence_root)
-    payload = canonical_bytes(manifest)
-    args.output.parent.mkdir(parents=True, exist_ok=False)
-    args.output.write_bytes(payload)
-    digest = hashlib.sha256(payload).hexdigest()
-    args.output.with_suffix(args.output.suffix + ".sha256").write_text(
-        f"{digest}  {args.output.name}\n", encoding="ascii"
-    )
-    print(json.dumps({"manifest": str(args.output), "sha256": digest}, sort_keys=True))
+    manifest = audit_binding(args.evidence_root)
+    digest = write_exclusive(args.output, manifest)
+    print(json.dumps({"artifact_id": args.output.name, "sha256": digest}, sort_keys=True))
     return 0
 
 

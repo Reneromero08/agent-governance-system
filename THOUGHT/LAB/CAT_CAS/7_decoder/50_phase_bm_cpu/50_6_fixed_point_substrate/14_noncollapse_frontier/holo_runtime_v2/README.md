@@ -7,9 +7,11 @@ V2 implements:
 
 - an eight-state waveform whose full period is the requested fundamental;
 - `pi/4` theta steps and a four-step code-sign offset;
-- eight floating-point and four integer drive dependency chains;
+- the verbatim historical Slot2/Exp 5.10 drive primitive, guarded by a
+  source-identity regression test;
 - distinct receiver and sender codeword/theta fields for physical scramble;
-- exact runtime and executor-binary binding to a V2 calibration authorization;
+- exact runtime, executor binary, campaign plan, source bundle, session
+  manifest, session ID, and route/core binding to a V2 authorization;
 - a frequency-settling gate before the first capture origin;
 - total run-directory manifest closure;
 - strict C-to-Python waveform equivalence fixtures.

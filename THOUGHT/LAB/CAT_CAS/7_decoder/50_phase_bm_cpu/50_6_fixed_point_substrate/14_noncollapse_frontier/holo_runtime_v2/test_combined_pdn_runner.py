@@ -14,7 +14,6 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 RUNNER = HERE / "combined_pdn_runner"
 VALID_COMMIT = "a" * 40
-SOURCE_BUNDLE_SHA256 = "b" * 64
 
 
 def sha(path: Path) -> str:
@@ -100,16 +99,64 @@ def write_engineering_smoke(root: Path) -> Path:
     return directory
 
 
+def write_source_bundle(session: Path, path: Path | None = None,
+                        session_id: str | None = None,
+                        manifest_sha256: str | None = None) -> Path:
+    path = path or session.parent / "source_bundle_manifest.json"
+    header = json.loads((session / "session.json").read_text())
+    dump(path, {
+        "schema_id": "CAT_CAS_PHASE6_V2_SOURCE_BUNDLE_MANIFEST_V1",
+        "sessions": {
+            session_id or header["session_id"]:
+                manifest_sha256 or sha(session / "session_manifest.json")
+        },
+    })
+    return path
+
+
+def write_authorization(root: Path, session: Path, bundle: Path,
+                        authorized_root: Path, mutate=None) -> Path:
+    value = {
+        "schema_id": "CAT_CAS_PHASE6_V2_SPECTRAL_CALIBRATION_AUTHORIZATION_V1",
+        "calibration_authorized": True,
+        "acquisition_authorized": False,
+        "restoration_authorized": False,
+        "target_coupling_authorized": False,
+        "small_wall_authorized": False,
+        "automatic_retry": False,
+        "executor_commit": VALID_COMMIT,
+        "executor_sha256": sha(RUNNER),
+        "campaign_plan_sha256": "e" * 64,
+        "source_bundle_sha256": sha(bundle),
+        "session_ids": [json.loads((session / "session.json").read_text())["session_id"]],
+        "route_cores": {"v4s5": [4, 5], "v2s3": [2, 3]},
+        "pin_khz": 1600000,
+        "read_hz": 4000,
+        "slot_s": 0.5,
+        "off_window_s": 0.5,
+        "temperature_veto_c": 68.0,
+        "authorized_output_root": str(authorized_root),
+        "authorized_by": "PROJECT_OWNER_TEST",
+    }
+    if mutate:
+        mutate(value)
+    path = root / "authorization.json"
+    dump(path, value)
+    return path
+
+
 class Tests(unittest.TestCase):
     def exec_runner(self, session: Path, output: Path, *args: str,
-                    fail: str | None = None, commit: str = VALID_COMMIT):
+                    fail: str | None = None, commit: str = VALID_COMMIT,
+                    source_bundle: Path | None = None):
         env = os.environ.copy()
         if fail:
             env["COMBINED_PDN_MOCK_FAIL"] = fail
+        source_bundle = source_bundle or write_source_bundle(session)
         return subprocess.run(
             [str(RUNNER), "--session-dir", str(session), "--output-dir", str(output),
              "--victim", "4", "--sender", "5", "--executor-commit", commit,
-             "--source-bundle-sha256", SOURCE_BUNDLE_SHA256, *args],
+             "--source-bundle-manifest", str(source_bundle), *args],
             text=True, capture_output=True, env=env,
         )
 
@@ -122,6 +169,31 @@ class Tests(unittest.TestCase):
             result = self.exec_runner(directory, Path(temp) / "out", "--validate-only")
             self.assertNotEqual(result.returncode, 0)
             self.assertIn(text, result.stderr)
+
+    def authorization_result(self, root: Path, *, auth_mutate=None,
+                             bundle_session_id: str | None = None,
+                             bundle_manifest_sha: str | None = None,
+                             raw_authorization_mutate=None):
+        session = write_session(root)
+        bundle = write_source_bundle(
+            session,
+            session_id=bundle_session_id,
+            manifest_sha256=bundle_manifest_sha,
+        )
+        authorized_root = root / "authorized"
+        authorized_root.mkdir()
+        authorization = write_authorization(
+            root, session, bundle, authorized_root, mutate=auth_mutate
+        )
+        if raw_authorization_mutate:
+            authorization.write_text(
+                raw_authorization_mutate(authorization.read_text()), encoding="utf-8"
+            )
+        return self.exec_runner(
+            session, authorized_root / "run", "--hardware",
+            "--authorization-artifact", str(authorization),
+            fail="thermal", source_bundle=bundle,
+        )
 
     def test_validate_contract_files_and_hashes(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -275,34 +347,15 @@ class Tests(unittest.TestCase):
             authorized_root = root / "authorized"
             authorized_root.mkdir()
             output = authorized_root / "run"
-            authorization = root / "authorization.json"
-            dump(authorization, {
-                "schema_id": "CAT_CAS_PHASE6_V2_SPECTRAL_CALIBRATION_AUTHORIZATION_V1",
-                "calibration_authorized": True,
-                "acquisition_authorized": False,
-                "restoration_authorized": False,
-                "target_coupling_authorized": False,
-                "small_wall_authorized": False,
-                "automatic_retry": False,
-                "executor_commit": VALID_COMMIT,
-                "executor_sha256": sha(RUNNER),
-                "campaign_plan_sha256": "e" * 64,
-                "source_bundle_sha256": SOURCE_BUNDLE_SHA256,
-                "session_ids": ["v4s5_seed4"],
-                "pin_khz": 1600000,
-                "read_hz": 4000,
-                "slot_s": 0.5,
-                "off_window_s": 0.5,
-                "temperature_veto_c": 68.0,
-                "authorized_output_root": str(authorized_root),
-                "authorized_by": "PROJECT_OWNER_TEST",
-            })
+            bundle = write_source_bundle(directory)
+            authorization = write_authorization(root, directory, bundle, authorized_root)
             result = self.exec_runner(
                 directory,
                 output,
                 "--hardware",
                 "--authorization-artifact",
                 str(authorization),
+                source_bundle=bundle,
                 fail="thermal",
             )
             self.assertEqual(result.returncode, 3, result.stderr)
@@ -315,6 +368,63 @@ class Tests(unittest.TestCase):
             self.assertFalse(run["scientific_acquisition_authorized"])
             self.assertEqual(run["authorization_artifact_sha256"], sha(authorization))
             self.assertFalse(run["hardware_executed"])
+
+    def test_session_id_prefix_suffix_and_elsewhere_do_not_authorize(self):
+        mutations = (
+            lambda value: value.update(session_ids=["v4s5_seed"]),
+            lambda value: value.update(session_ids=["v4s5_seed40"]),
+            lambda value: value.update(session_ids=["other"], authorized_by="v4s5_seed4"),
+        )
+        for mutation in mutations:
+            with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as temp:
+                result = self.authorization_result(Path(temp), auth_mutate=mutation)
+                self.assertIn("invalid V2 calibration authorization", result.stderr)
+
+    def test_wrong_route_core_pair_is_rejected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            result = self.authorization_result(
+                Path(temp),
+                auth_mutate=lambda value: value["route_cores"].update(v4s5=[5, 4]),
+            )
+            self.assertIn("invalid V2 calibration authorization", result.stderr)
+
+    def test_unrelated_or_wrong_session_manifest_is_rejected(self):
+        cases = (("other_session", None), (None, "f" * 64))
+        for session_id, manifest_sha in cases:
+            with self.subTest(session_id=session_id, manifest_sha=manifest_sha), \
+                    tempfile.TemporaryDirectory() as temp:
+                result = self.authorization_result(
+                    Path(temp), bundle_session_id=session_id,
+                    bundle_manifest_sha=manifest_sha,
+                )
+                self.assertIn("invalid V2 calibration authorization", result.stderr)
+
+    def test_wrong_source_bundle_digest_is_rejected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            result = self.authorization_result(
+                Path(temp),
+                auth_mutate=lambda value: value.update(source_bundle_sha256="f" * 64),
+            )
+            self.assertIn("invalid V2 calibration authorization", result.stderr)
+
+    def test_duplicate_or_malformed_authorization_fields_are_rejected(self):
+        mutations = (
+            lambda text: text.replace(
+                '"schema_id":', '"schema_id": "DUPLICATE", "schema_id":', 1
+            ),
+            lambda text: text.replace(
+                '"session_ids": [', '"session_ids": "v4s5_seed4", "unused": [', 1
+            ),
+            lambda text: text.replace(
+                '"v4s5_seed4"', '"v4s5_seed4", "v4s5_seed4"', 1
+            ),
+        )
+        for mutation in mutations:
+            with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as temp:
+                result = self.authorization_result(
+                    Path(temp), raw_authorization_mutate=mutation
+                )
+                self.assertIn("invalid V2 calibration authorization", result.stderr)
 
     def test_engineering_smoke_gate_rejects_scientific_schedule(self):
         with tempfile.TemporaryDirectory() as temp:

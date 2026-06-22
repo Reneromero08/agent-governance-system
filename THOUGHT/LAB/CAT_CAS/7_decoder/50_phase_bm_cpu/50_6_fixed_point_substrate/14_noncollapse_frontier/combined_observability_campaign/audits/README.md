@@ -1,44 +1,31 @@
 # Phase 6 Post-Acquisition Audits
 
-This directory preserves forward-only audit results for the completed Phase 6 combined-observability acquisition.
+This directory preserves forward-only audit results for the completed Phase 6
+combined-observability acquisition. Historical executor, plan, authorization,
+bundles, and evidence remain immutable.
 
-The historical executor, plan, authorization, bundles, and evidence remain immutable.
-
-## Audit sequence
-
-1. `PHASE6_EXECUTOR_CODE_AUDIT_81ea84f3.md`
-   Static audit of the exact executor source.
-
-2. `PHASE6_METADATA_AUDIT_81ea84f3.md`
-   Audit of all twelve session schedules, 99,456 result rows, telemetry, manifests, and raw-size closure without the large binary payloads.
-
-3. `PHASE6_RAW_RECOVERY_V2S3_SEED0.md`
-   First raw-session audit and implementation-recovery result on a training session.
-
-4. `PHASE6_RAW_RECOVERY_V2S3_SEED0.json`
-   Machine-readable result for the first raw session.
-
-## Current state
+## Canonical current state
 
 ```text
+PHASE6_ACQUISITION_COMPLETE
 PROVENANCE_VALID
-METADATA_INTEGRITY_PASS
-FIRST_RAW_SESSION_PASS
-REQUESTED_F_COORDINATE_REJECTED
-F_OVER_4_CARRIER_SUPPORTED
-EXACT_GATE_PHASE_SUPPORTED
-SCRAMBLE_NULL_INVALID
-IMMEDIATE_RERUN_NOT_REQUIRED
-ALL_SESSION_RAW_AUDIT_REQUIRED
-SCIENTIFIC_VERDICT_PENDING
+RAW_IDENTITY_AND_STRUCTURE_AUDITED
+RETROSPECTIVE_FULL_DATASET_NEGATIVE_ADJUDICATION
+PRISTINE_FINAL_TEST_HYGIENE_NOT_PROVEN
+NO_STABLE_PREDICTIVE_OPERATOR
+V2_RERUN_NOT_AUTHORIZED
+V2_CALIBRATION_NOT_EXECUTED
+SMALL_WALL_NOT_CROSSED
 ```
 
-## Analysis code
+`PHASE6_FULL_ADJUDICATION_SUMMARY.md` records the permanent scientific verdict
+from the digest-bound historical `full_adjudication.json`. That is the recorded
+full adjudication.
 
-The sibling `analysis/` directory contains:
+`FROZEN_ARTIFACT_AND_RECORDED_OUTPUT_BINDING_AUDIT.md` documents a separate
+independent audit of immutable artifact identities, serialized structure, and
+recorded-output bindings. It does not independently recompute Stage B metrics,
+Stage C gains, operator NRMSE values, or the scientific verdict.
 
-- `waveform_reference.py`
-- `audit_raw_session.py`
-- `test_waveform_reference.py`
-
-These tools model the waveform that actually executed. They do not mutate or reinterpret the historical evidence object.
+The sibling `analysis/` tools model the waveform that actually executed. They
+do not mutate or reinterpret historical evidence.

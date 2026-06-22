@@ -37,7 +37,7 @@ Immutable binding manifest:
 
 ```text
 LAW/CONTRACTS/_runs/frozen_artifact_and_recorded_output_binding_audit_f1b8047b/FROZEN_ARTIFACT_AND_RECORDED_OUTPUT_BINDING_AUDIT.json
-SHA-256: da96a3baa59206438d0055ab998722fba2b135bd936f8b79a4ae2765ae8431a1
+SHA-256: d9d4e44f0bfeee83f8030815e0477dc3c4ed789b10c63ec45d2b9c7fe50908ae
 ```
 
 No model development, model selection, seed-5 retry, hardware execution, or V2
