@@ -14,6 +14,7 @@ from analyze_spectral_calibration_v2 import (
     RUN_FILES,
     analyze_campaign,
     analyze_run,
+    construct_complete_grid,
 )
 from calibration_contract import (
     FALSE_AUTHORIZATIONS,
@@ -21,6 +22,9 @@ from calibration_contract import (
     build_plan,
     canonical_bytes,
 )
+
+HERE = Path(__file__).resolve().parent
+CONTRACTS = HERE / "contracts"
 
 
 def sha(path: Path) -> str:
@@ -102,13 +106,11 @@ def build_fixture(root: Path):
 
 
 class SpectralAnalyzerTests(unittest.TestCase):
-    def test_structural_measurement_without_thresholds_is_not_adjudicable(self) -> None:
+    def test_incomplete_schedule_is_rejected_before_adjudication(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             args = build_fixture(Path(temp))
-            result = analyze_run(*args)
-        self.assertEqual(result["verdict"], "CALIBRATION_NOT_ADJUDICABLE_WITHOUT_FROZEN_THRESHOLDS")
-        self.assertEqual(result["record_count"], 4)
-        self.assertFalse(result["acquisition_authorized"])
+            with self.assertRaisesRegex(ValueError, "complete tone/amplitude"):
+                analyze_run(*args)
 
     def test_manifest_tamper_fails_closed(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
@@ -134,6 +136,16 @@ class SpectralAnalyzerTests(unittest.TestCase):
     def test_campaign_requires_exact_reboot_and_route_session_set(self) -> None:
         with self.assertRaisesRegex(ValueError, "complete exact calibration session set"):
             analyze_campaign([], build_plan())
+
+    def test_exact_generated_schedule_constructs_complete_sender_grid(self) -> None:
+        plan = json.loads((CONTRACTS / "CALIBRATION_PLAN_V2.json").read_text())
+        for session in plan["sessions"]:
+            schedule_path = CONTRACTS / "sessions" / session["session_id"] / "windows.jsonl"
+            schedule = [json.loads(line) for line in schedule_path.read_text().splitlines()]
+            self.assertEqual(schedule, session["windows"])
+            self.assertEqual(len(schedule), 588)
+            grid = construct_complete_grid(schedule)
+            self.assertEqual(len(grid), 576)
 
     def test_campaign_applies_repetition_and_cross_route_rule(self) -> None:
         plan = build_plan()

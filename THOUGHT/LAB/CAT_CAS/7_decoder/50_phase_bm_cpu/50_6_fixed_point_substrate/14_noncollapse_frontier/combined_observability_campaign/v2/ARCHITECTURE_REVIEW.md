@@ -37,10 +37,10 @@ reboot partitions and both routes satisfy the frozen rules.
 
 ```text
 CALIBRATION_PLAN_V2.json SHA-256:
-55c2789eea219039de056765443665b8d598820eacd768d0481edb83e67078cf
+2809e7341e54ac7c94b74501d9a1c773d791b75ca953cddde76ac7bb39eb2797
 
 SOURCE_BUNDLE_MANIFEST_V2.json SHA-256:
-9de28e19cb58b755274d82a8ecd9e0bc2f868dfcdd52638093a3bdf8e654ef18
+70b92cf8b155537519af80b6f0ace677ba8ebee0612996b2f615747f168e0596
 ```
 
 V2 run objects use execution class

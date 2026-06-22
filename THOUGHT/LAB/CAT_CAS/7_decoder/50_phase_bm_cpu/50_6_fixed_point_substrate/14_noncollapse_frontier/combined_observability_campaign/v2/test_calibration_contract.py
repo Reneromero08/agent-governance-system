@@ -7,6 +7,8 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
+import numpy as np
+
 import calibration_contract
 from calibration_contract import (
     FALSE_AUTHORIZATIONS,
@@ -19,6 +21,7 @@ from calibration_contract import (
     validate_authorization,
     write_immutable,
 )
+from waveform_reference import intended_v2_gate, phase_index, tone_hz
 
 
 def authorization(plan_digest: str, bundle: dict) -> dict:
@@ -63,6 +66,52 @@ class CalibrationContractTests(unittest.TestCase):
             self.assertEqual({row["amplitude_level"] for row in rows if row["drive_on"]}, {1, 2, 3})
             self.assertEqual({row["receiver_theta_idx"] for row in rows if row["drive_on"]}, set(range(8)))
             self.assertEqual({row["expected_code_sign"] for row in rows if row["drive_on"]}, {-1, 1})
+            driven = [row for row in rows if row["drive_on"]]
+            conditions = {
+                (row["physical_tone_index"], row["amplitude_level"],
+                 row["sender_theta_idx"], row["expected_code_sign"])
+                for row in driven
+            }
+            self.assertEqual(len(conditions), 12 * 3 * 8 * 2)
+            self.assertEqual(len(conditions), len(driven))
+            for row in driven:
+                self.assertIn(
+                    row["sender_codeword_source_index"],
+                    calibration_contract._sources_for_sign(row["expected_code_sign"]),
+                )
+                if row["shared_schedule"]:
+                    self.assertEqual(row["sender_codeword_source_index"],
+                                     row["receiver_codeword_source_index"])
+                    self.assertEqual(row["sender_theta_idx"], row["receiver_theta_idx"])
+                else:
+                    self.assertEqual(row["receiver_theta_idx"],
+                                     (row["sender_theta_idx"] + 1) % 8)
+                timestamps = np.arange(8, dtype=np.uint64)
+                tsc_hz = 8.0 * tone_hz(row["physical_tone_index"])
+                sender_gate = intended_v2_gate(
+                    timestamps,
+                    origin_tsc=0,
+                    tsc_hz=tsc_hz,
+                    tone_index=row["physical_tone_index"],
+                    phase_index_value=phase_index(
+                        0, row["sender_codeword_source_index"], row["sender_theta_idx"]
+                    ),
+                    amplitude_level=row["amplitude_level"],
+                )
+                receiver_gate = intended_v2_gate(
+                    timestamps,
+                    origin_tsc=0,
+                    tsc_hz=tsc_hz,
+                    tone_index=row["physical_tone_index"],
+                    phase_index_value=phase_index(
+                        0, row["receiver_codeword_source_index"], row["receiver_theta_idx"]
+                    ),
+                    amplitude_level=row["amplitude_level"],
+                )
+                sender_digest = hashlib.sha256(sender_gate.tobytes()).hexdigest()
+                receiver_digest = hashlib.sha256(receiver_gate.tobytes()).hexdigest()
+                self.assertEqual(sender_gate.mean(), receiver_gate.mean())
+                self.assertEqual(sender_digest == receiver_digest, row["shared_schedule"])
 
     def test_compiled_sessions_bind_exact_ordered_plan(self) -> None:
         plan = build_plan()

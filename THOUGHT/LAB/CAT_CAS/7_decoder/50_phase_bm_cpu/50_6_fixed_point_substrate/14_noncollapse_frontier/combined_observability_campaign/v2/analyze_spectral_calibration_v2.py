@@ -72,6 +72,31 @@ def angle_error(actual: float, expected: float) -> float:
     return abs(float(np.angle(np.exp(1j * (actual - expected)))))
 
 
+def construct_complete_grid(schedule: list[dict]) -> dict[tuple[int, int, int, int], dict]:
+    """Index the exact sender conditions and reject missing or duplicate rows."""
+    expected = {
+        (tone, amplitude, theta, sign)
+        for tone in range(12) for amplitude in (1, 2, 3)
+        for theta in range(8) for sign in (1, -1)
+    }
+    grid: dict[tuple[int, int, int, int], dict] = {}
+    for row in schedule:
+        if not row["drive_on"]:
+            continue
+        condition = (
+            int(row["physical_tone_index"]),
+            int(row["amplitude_level"]),
+            int(row["sender_theta_idx"]),
+            int(row["expected_code_sign"]),
+        )
+        if condition in grid:
+            raise ValueError(f"duplicate sender calibration condition: {condition}")
+        grid[condition] = row
+    if set(grid) != expected:
+        raise ValueError("complete tone/amplitude/sender-theta/sign grid required")
+    return grid
+
+
 def analyze_run(run_dir: Path, plan: dict, authorization: dict,
                 source_bundle: dict) -> dict:
     verify_run_manifest(run_dir)
@@ -185,6 +210,7 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
             "receiver_gate_sha256": receiver_digest,
         })
 
+    construct_complete_grid(schedule)
     thresholds = plan.get("analysis_thresholds")
     phase_progression_pass = True
     sign_pi_pass = True

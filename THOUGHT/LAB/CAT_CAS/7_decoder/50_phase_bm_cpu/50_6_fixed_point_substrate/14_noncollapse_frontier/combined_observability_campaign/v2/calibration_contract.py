@@ -99,7 +99,8 @@ def calibration_windows(session_id: str) -> list[dict]:
                     receiver_source = sources[(tone + theta) % len(sources)]
                     unshared = (tone + amplitude + theta + (sign < 0)) % 2 == 1
                     sender_source = sources[(tone + theta + (1 if unshared else 0)) % len(sources)]
-                    sender_theta = (theta + (1 if unshared else 0)) % 8
+                    sender_theta = theta
+                    receiver_theta = (theta + (1 if unshared else 0)) % 8
                     index = len(windows)
                     scramble_digest = (
                         hashlib.sha256(f"{session_id}:{index}:scramble".encode()).hexdigest()
@@ -121,7 +122,7 @@ def calibration_windows(session_id: str) -> list[dict]:
                         "physical_tone_index": tone,
                         "receiver_codeword_source_index": receiver_source,
                         "sender_codeword_source_index": sender_source,
-                        "receiver_theta_idx": theta,
+                        "receiver_theta_idx": receiver_theta,
                         "sender_theta_idx": sender_theta,
                         "shared_schedule": not unshared,
                         "scramble_key_digest": scramble_digest,
