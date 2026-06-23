@@ -32,25 +32,53 @@ def replace_once(path: Path, old: str, new: str, label: str) -> None:
 
 
 def patch_docs() -> None:
-    anchor = "command evidence closure: f531ac8016c9c95141ed1c0ec180bcd01370d346\n"
-    replacement = anchor + f"review ledger correction: {REVIEW_LEDGER_COMMIT}\n"
+    inline_anchor = "command evidence closure: f531ac8016c9c95141ed1c0ec180bcd01370d346\n"
+    inline_replacement = (
+        inline_anchor + f"review ledger correction: {REVIEW_LEDGER_COMMIT}\n"
+    )
     for path, label in (
         (ROADMAP, "roadmap review ledger"),
         (NAVIGATION, "navigation review ledger"),
         (CHIRAL, "chiral review ledger"),
-        (ARCH_REVIEW, "architecture review ledger"),
     ):
-        replace_once(path, anchor, replacement, label)
+        replace_once(path, inline_anchor, inline_replacement, label)
+
+    architecture_anchor = (
+        "command evidence closure:\n"
+        "f531ac8016c9c95141ed1c0ec180bcd01370d346\n"
+    )
+    architecture_replacement = (
+        architecture_anchor +
+        "\nreview ledger correction:\n" + REVIEW_LEDGER_COMMIT + "\n"
+    )
+    replace_once(
+        ARCH_REVIEW,
+        architecture_anchor,
+        architecture_replacement,
+        "architecture review ledger",
+    )
 
     metadata_anchor = "**Command evidence closure:** `f531ac8016c9c95141ed1c0ec180bcd01370d346`\n"
-    metadata_replacement = metadata_anchor + f"**Review ledger correction:** `{REVIEW_LEDGER_COMMIT}`\n"
-    replace_once(WORK_PACKAGE, metadata_anchor, metadata_replacement,
-                 "work package metadata review ledger")
+    metadata_replacement = (
+        metadata_anchor + f"**Review ledger correction:** `{REVIEW_LEDGER_COMMIT}`\n"
+    )
+    replace_once(
+        WORK_PACKAGE,
+        metadata_anchor,
+        metadata_replacement,
+        "work package metadata review ledger",
+    )
 
     record_anchor = "command evidence closure: f531ac8016c9c95141ed1c0ec180bcd01370d346\n"
-    record_replacement = record_anchor + f"review ledger correction: {REVIEW_LEDGER_COMMIT}\n"
-    replace_once(WORK_PACKAGE, record_anchor, record_replacement,
-                 "work package record review ledger")
+    record_replacement = (
+        record_anchor + f"review ledger correction: {REVIEW_LEDGER_COMMIT}\n"
+    )
+    replace_once(
+        WORK_PACKAGE,
+        record_anchor,
+        record_replacement,
+        "work package record review ledger",
+    )
 
 
 def patch_bindings() -> None:
@@ -62,7 +90,10 @@ def patch_bindings() -> None:
 
 
 def regenerate_inventory() -> None:
-    files = sorted(path for path in EVIDENCE.rglob("*") if path.is_file() and path != INVENTORY)
+    files = sorted(
+        path for path in EVIDENCE.rglob("*")
+        if path.is_file() and path != INVENTORY
+    )
     rels = [path.relative_to(ROOT).as_posix() for path in files]
     verification = ["Evidence inventory verification"]
     verification.extend(f"OK: {rel}" for rel in rels)
@@ -78,7 +109,10 @@ def regenerate_inventory() -> None:
     ])
     VERIFICATION.write_text("\n".join(verification), encoding="utf-8")
 
-    files = sorted(path for path in EVIDENCE.rglob("*") if path.is_file() and path != INVENTORY)
+    files = sorted(
+        path for path in EVIDENCE.rglob("*")
+        if path.is_file() and path != INVENTORY
+    )
     rows = []
     for path in files:
         digest = hashlib.sha256(path.read_bytes()).hexdigest()
@@ -118,7 +152,10 @@ def main() -> int:
     if changed != allowed:
         raise RuntimeError(f"unexpected changed paths: {sorted(changed ^ allowed)}")
     subprocess.run(["git", "diff", "--check"], cwd=ROOT, check=True)
-    print(json.dumps({"changed_paths": sorted(changed), "review_ledger": REVIEW_LEDGER_COMMIT}, indent=2))
+    print(json.dumps({
+        "changed_paths": sorted(changed),
+        "review_ledger": REVIEW_LEDGER_COMMIT,
+    }, indent=2))
     return 0
 
 
