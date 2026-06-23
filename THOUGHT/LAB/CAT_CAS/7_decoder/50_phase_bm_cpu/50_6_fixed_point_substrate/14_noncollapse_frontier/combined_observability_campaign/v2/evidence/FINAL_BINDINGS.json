@@ -54,5 +54,6 @@
     "b7563e5f": "retained source provenance",
     "93f28c5d": "superseded",
     "339c9fb8": "incomplete evidence provenance"
-  }
+  },
+  "raw_evidence_closure_commit": "c81b543ffb74644a35aa97605ca47fa9ec89c76c"
 }

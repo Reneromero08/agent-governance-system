@@ -1,1 +1,6 @@
-UC_RC=0
+command: cc -std=c11 -O1 -g -pthread -Wall -Wextra -Werror -fsanitize=undefined -fno-omit-frame-pointer combined_pdn_runner.c combined_pdn_hardware.c -o combined_pdn_runner -lm
+working_directory: /root/catcas_v2_build_7c44af0f/holo_runtime_v2
+tested_sha: 70d5aa893db7d93baa86a56d5b1ed128730c2ef3
+stdout: (none)
+stderr: (none)
+exit_code: 0

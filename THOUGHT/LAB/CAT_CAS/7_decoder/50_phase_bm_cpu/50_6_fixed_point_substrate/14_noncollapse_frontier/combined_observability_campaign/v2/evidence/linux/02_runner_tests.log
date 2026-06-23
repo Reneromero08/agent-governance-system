@@ -1,6 +1,45 @@
 command: python3 -m unittest -v test_combined_pdn_runner.py
-working_dir: /root/catcas_v2_build_7c44af0f/holo_runtime_v2
+working_directory: /root/catcas_v2_build_7c44af0f/holo_runtime_v2
 tested_sha: 70d5aa893db7d93baa86a56d5b1ed128730c2ef3
 exit_code: 0
-ran: 36 tests in 1.420s
-result: OK
+result: OK (Ran 36 tests in 1.840s)
+---
+test_capture_capacity_is_bounded ... ok
+test_capture_quality_contract_rejection_matrix ... ok
+test_driven_requires_codeword ... ok
+test_driven_requires_tone ... ok
+test_duplicate_or_malformed_authorization_fields_are_rejected ... ok
+test_engineering_smoke_gate_rejects_scientific_schedule ... ok
+test_exact_engineering_smoke_is_the_only_unauthorized_hardware_shape ... ok
+test_extra_rows ... ok
+test_failure_cleanup_matrix ... ok
+test_hardware_commit_validation ... ok
+test_invalid_authorization_artifact_fails_before_hardware ... ok
+test_invalid_numeric_arguments_are_rejected ... ok
+test_late_sender_epoch_is_fatal ... ok
+test_logical_sender_field_separation_requires_divergent_bound_gates ... ok
+test_manifest_schema ... ok
+test_manifest_sha ... ok
+test_manifest_size ... ok
+test_mock_sender_lifecycle_sender_off_and_shared_epoch ... ok
+test_noncontiguous_duplicate ... ok
+test_output_collision ... ok
+test_raw_ring_requires_off ... ok
+test_real_hardware_requires_authorization_artifact ... ok
+test_restoration_failure_fatal ... ok
+test_sender_off_drive ... ok
+test_session_id_mismatch ... ok
+test_session_id_prefix_suffix_and_elsewhere_do_not_authorize ... ok
+test_short_count ... ok
+test_unrelated_or_wrong_session_manifest_is_rejected ... ok
+test_unsafe_path ... ok
+test_unsupported_mode ... ok
+test_unsupported_route ... ok
+test_valid_authorization_is_bound_and_recorded_before_real_execution ... ok
+test_validate_contract_files_and_hashes ... ok
+test_validation_never_hardware ... ok
+test_wrong_route_core_pair_is_rejected ... ok
+test_wrong_source_bundle_digest_is_rejected ... ok
+
+Ran 36 tests in 1.840s
+OK
