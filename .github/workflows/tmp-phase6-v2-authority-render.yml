@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   render:
@@ -22,10 +22,20 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
+      - name: Decide whether rendering is needed
+        id: guard
+        run: |
+          if git log -1 --pretty=%s | grep -Fxq 'phase6: render final authority files'; then
+            echo 'render=false' >> "$GITHUB_OUTPUT"
+          else
+            echo 'render=true' >> "$GITHUB_OUTPUT"
+          fi
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        if: steps.guard.outputs.render == 'true'
         with:
           python-version: "3.11"
       - name: Render final authority state
+        if: steps.guard.outputs.render == 'true'
         run: |
           set +e
           python tools/phase6_v2/render_final_authority_clean.py > "$RUNNER_TEMP/render.log" 2>&1
@@ -33,11 +43,13 @@ jobs:
           cat "$RUNNER_TEMP/render.log"
           exit "$rc"
       - name: Verify patch scope
+        if: steps.guard.outputs.render == 'true'
         run: |
           git diff --check
           git diff --name-only | sort
           test "$(git diff --name-only | wc -l)" -eq 8
       - name: Package rendered authority files
+        if: steps.guard.outputs.render == 'true'
         run: |
           tar -czf "$RUNNER_TEMP/phase6-v2-authority-render.tgz" \
             THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/PHASE6_ROADMAP.md \
@@ -48,8 +60,24 @@ jobs:
             THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/v2/evidence/FINAL_BINDINGS.json \
             THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/v2/evidence/EVIDENCE_INVENTORY.sha256 \
             THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/v2/evidence/EVIDENCE_INVENTORY_VERIFICATION.txt
+      - name: Commit rendered files to isolated branch
+        if: steps.guard.outputs.render == 'true'
+        run: |
+          git config user.name 'phase6-authority-render'
+          git config user.email 'actions@users.noreply.github.com'
+          git add \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/PHASE6_ROADMAP.md \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/PHASE6_NAVIGATION.md \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/CHIRAL_LANE_NONCOLLAPSE_ROADMAP.md \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/V2_FINAL_QUALIFICATION_WORK_PACKAGE.md \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/v2/ARCHITECTURE_REVIEW.md \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/v2/evidence/FINAL_BINDINGS.json \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/v2/evidence/EVIDENCE_INVENTORY.sha256 \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/v2/evidence/EVIDENCE_INVENTORY_VERIFICATION.txt
+          git commit -m 'phase6: render final authority files'
+          git push origin HEAD:tmp/phase6-v2-authority-render
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
+        if: always() && steps.guard.outputs.render == 'true'
         with:
           name: phase6-v2-authority-render-${{ github.run_id }}
           path: |
