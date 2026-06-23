@@ -3,33 +3,13 @@ platform win32 -- Python 3.11.6, pytest-9.0.2, pluggy-1.6.0
 rootdir: D:\CCC 2.0\AI\agent-governance-system
 configfile: pytest.ini
 plugins: anyio-4.12.1, xdist-3.8.0
-collected 70 items
+collected 24 items
 
-THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\combined_observability_campaign\analysis\test_frozen_artifact_binding.py . [  1%]
-......                                                                   [ 10%]
-THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\combined_observability_campaign\analysis\test_waveform_reference.py . [ 11%]
-........                                                                 [ 22%]
-THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\combined_observability_campaign\test_campaign_plan.py . [ 24%]
-...                                                                      [ 28%]
-THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\combined_observability_campaign\test_catcas_preflight.py . [ 30%]
-......                                                                   [ 38%]
-THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\combined_observability_campaign\test_executor_source_bundle.py . [ 40%]
-........                                                                 [ 51%]
-THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\combined_observability_campaign\test_orchestrator.py . [ 52%]
-...                                                                      [ 57%]
-THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\combined_observability_campaign\test_run_manifests.py . [ 58%]
-...                                                                      [ 62%]
-THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\combined_observability_campaign\test_session_determinism.py . [ 64%]
-                                                                         [ 64%]
-THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\combined_observability_campaign\test_session_schedule.py . [ 65%]
-.                                                                        [ 67%]
-THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\combined_observability_campaign\test_target_engineering_evidence.py . [ 68%]
-.....                                                                    [ 75%]
-THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\combined_observability_campaign\v2\test_calibration_contract.py . [ 77%]
-.....                                                                    [ 84%]
-THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\combined_observability_campaign\v2\test_receiver_schedule.py . [ 85%]
-.                                                                        [ 87%]
-THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\combined_observability_campaign\v2\test_spectral_calibration_analyzer.py . [ 88%]
+THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\combined_observability_campaign\v2\test_spectral_calibration_analyzer.py . [  4%]
+........                                                                 [ 37%]
+THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\combined_observability_campaign\v2\test_calibration_contract.py . [ 41%]
+.....                                                                    [ 62%]
+THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\combined_observability_campaign\analysis\test_waveform_reference.py . [ 66%]
 ........                                                                 [100%]
 
-============================= 70 passed in 35.22s =============================
+============================= 24 passed in 33.35s =============================
