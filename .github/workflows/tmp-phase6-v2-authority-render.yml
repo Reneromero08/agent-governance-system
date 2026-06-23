@@ -8,6 +8,7 @@ on:
     paths:
       - ".github/workflows/tmp-phase6-v2-authority-render.yml"
       - "tools/phase6_v2/render_final_authority.py"
+      - "tools/phase6_v2/render_final_authority_clean.py"
   workflow_dispatch:
 
 permissions:
@@ -27,7 +28,7 @@ jobs:
       - name: Render final authority state
         run: |
           set +e
-          python tools/phase6_v2/render_final_authority.py > "$RUNNER_TEMP/render.log" 2>&1
+          python tools/phase6_v2/render_final_authority_clean.py > "$RUNNER_TEMP/render.log" 2>&1
           rc=$?
           cat "$RUNNER_TEMP/render.log"
           exit "$rc"
