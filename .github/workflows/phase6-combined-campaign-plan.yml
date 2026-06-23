@@ -42,16 +42,21 @@ jobs:
             test_executor_source_bundle.py \
             test_catcas_preflight.py \
             test_target_engineering_evidence.py
-      - name: Test V2 calibration contracts and analyzer
-        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign
+      - name: Test waveform and frozen-artifact analysis
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/analysis
         run: |
-          python -m py_compile analysis/*.py v2/*.py
+          python -m py_compile *.py
           python -m unittest -v \
-            analysis.test_frozen_artifact_binding \
-            analysis.test_waveform_reference \
-            v2.test_calibration_contract \
-            v2.test_receiver_schedule \
-            v2.test_spectral_calibration_analyzer
+            test_frozen_artifact_binding.py \
+            test_waveform_reference.py
+      - name: Test V2 calibration contracts and analyzer
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/v2
+        run: |
+          python -m py_compile *.py
+          python -m unittest -v \
+            test_calibration_contract.py \
+            test_receiver_schedule.py \
+            test_spectral_calibration_analyzer.py
       - name: Build and test historical strict C executor
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime
         run: |
