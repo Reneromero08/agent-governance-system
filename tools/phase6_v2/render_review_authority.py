@@ -32,16 +32,23 @@ def replace_once(path: Path, old: str, new: str, label: str) -> None:
 
 
 def patch_docs() -> None:
-    inline_anchor = "command evidence closure: f531ac8016c9c95141ed1c0ec180bcd01370d346\n"
-    inline_replacement = (
-        inline_anchor + f"review ledger correction: {REVIEW_LEDGER_COMMIT}\n"
+    closure_anchor = "command evidence closure: f531ac8016c9c95141ed1c0ec180bcd01370d346\n"
+    closure_replacement = (
+        closure_anchor + f"review ledger correction: {REVIEW_LEDGER_COMMIT}\n"
     )
-    for path, label in (
-        (ROADMAP, "roadmap review ledger"),
-        (NAVIGATION, "navigation review ledger"),
-        (CHIRAL, "chiral review ledger"),
-    ):
-        replace_once(path, inline_anchor, inline_replacement, label)
+    replace_once(ROADMAP, closure_anchor, closure_replacement, "roadmap review ledger")
+    replace_once(CHIRAL, closure_anchor, closure_replacement, "chiral review ledger")
+
+    navigation_anchor = "command evidence: f531ac8016c9c95141ed1c0ec180bcd01370d346\n"
+    navigation_replacement = (
+        navigation_anchor + f"review ledger correction: {REVIEW_LEDGER_COMMIT}\n"
+    )
+    replace_once(
+        NAVIGATION,
+        navigation_anchor,
+        navigation_replacement,
+        "navigation review ledger",
+    )
 
     architecture_anchor = (
         "command evidence closure:\n"
