@@ -1,75 +1,71 @@
-EVIDENCE_SCHEMA=CAT_CAS_PR21_FINAL_TREE_FULL_GATE_LOG_V1
-COMMIT_SHA=77cdb4169b8be2e7e9261d9808d4cbea67ead6a7
-LANE=FULL_REPOSITORY_PUSH_GATE
-START_TIMESTAMP=2026-06-22T01:46:54.4008528-07:00
-END_TIMESTAMP=2026-06-22T01:48:35.8619709-07:00
-COMMAND=D:\CCC 2.0\AI\agent-governance-system\.venv\Scripts\python.exe CAPABILITY\TOOLS\utilities\ci_local_gate.py --full
-EXIT_CODE=0
-WARNINGS=8 SWIG DEPRECATION WARNINGS
-SKIPS=DECLARED IN VERBATIM OUTPUT
-RESULT=FULL_OK
---- OUTPUT ---
+timestamp_start=2026-06-22T18:54:20.1665615-07:00
+tested_source_commit=adc278401e85eed4770971cc19c2bd73a81ed08c
+lane=full repository push gate
+warnings=none declared before execution
+declared_skips=none
+
+COMMAND: .\.venv\Scripts\python.exe CAPABILITY\TOOLS\utilities\ci_local_gate.py --full
 [ci-local-gate] START critic
 [critic] Running governance checks...
 [critic] All checks passed
-[ci-local-gate] END critic rc=0 elapsed=4.62s
-[ci-local-gate] TEST PLAN mode=full base=origin/main base_sha=7c44af0ff50f changed=51 groups=none suites=core hash=fcea6fef1ce1
+[ci-local-gate] END critic rc=0 elapsed=1.26s
+[ci-local-gate] TEST PLAN mode=full base=@{upstream} base_sha=36ffd62400ac changed=26 groups=none suites=core hash=34522d6aba4a
 [ci-local-gate] START contracts
 [contracts/runner] CI environment detected - skipping cassette check
-Running contract fixture in D:\CCC 2.0\AI\pr21-evidence-gate\LAW\CONTRACTS\fixtures\governance\canon-sync.
+Running contract fixture in D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\fixtures\governance\canon-sync.
 Validation passed
 
 [contracts/runner] OK (0.06s)
-Running contract fixture in D:\CCC 2.0\AI\pr21-evidence-gate\LAW\CONTRACTS\fixtures\governance\canon-validators.
+Running contract fixture in D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\fixtures\governance\canon-validators.
 Validation passed
 
 [contracts/runner] OK (0.06s)
-Running contract fixture in D:\CCC 2.0\AI\pr21-evidence-gate\LAW\CONTRACTS\fixtures\governance\commit-ceremony.
-Validation passed
-
-[contracts/runner] OK (0.07s)
-Running contract fixture in D:\CCC 2.0\AI\pr21-evidence-gate\LAW\CONTRACTS\fixtures\governance\context-edit-authority.
+Running contract fixture in D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\fixtures\governance\commit-ceremony.
 Validation passed
 
 [contracts/runner] OK (0.06s)
-Running contract fixture in D:\CCC 2.0\AI\pr21-evidence-gate\LAW\CONTRACTS\fixtures\governance\deletion-authorization.
-Validation passed
-
-[contracts/runner] OK (0.07s)
-Running contract fixture in D:\CCC 2.0\AI\pr21-evidence-gate\LAW\CONTRACTS\fixtures\governance\log-output-roots.
-Validation passed
-
-[contracts/runner] OK (0.07s)
-Running contract fixture in D:\CCC 2.0\AI\pr21-evidence-gate\LAW\CONTRACTS\fixtures\governance\no-raw-paths.
-Validation passed
-
-[contracts/runner] OK (0.07s)
-Running contract fixture in D:\CCC 2.0\AI\pr21-evidence-gate\LAW\CONTRACTS\fixtures\governance\output-root-enforcement.
+Running contract fixture in D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\fixtures\governance\context-edit-authority.
 Validation passed
 
 [contracts/runner] OK (0.06s)
-Running contract fixture in D:\CCC 2.0\AI\pr21-evidence-gate\LAW\CONTRACTS\fixtures\governance\policy-proof-receipts.
-Validation passed
-
-[contracts/runner] OK (0.07s)
-Running contract fixture in D:\CCC 2.0\AI\pr21-evidence-gate\LAW\CONTRACTS\fixtures\governance\preflight.
-Validation passed
-
-[contracts/runner] OK (0.07s)
-Running contract fixture in D:\CCC 2.0\AI\pr21-evidence-gate\LAW\CONTRACTS\fixtures\governance\privacy-boundary.
+Running contract fixture in D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\fixtures\governance\deletion-authorization.
 Validation passed
 
 [contracts/runner] OK (0.06s)
-Running contract fixture in D:\CCC 2.0\AI\pr21-evidence-gate\LAW\CONTRACTS\fixtures\governance\token-grammar.
+Running contract fixture in D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\fixtures\governance\log-output-roots.
 Validation passed
 
-[contracts/runner] OK (0.07s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\agents\ant-worker\fixtures\basic.
+[contracts/runner] OK (0.06s)
+Running contract fixture in D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\fixtures\governance\no-raw-paths.
+Validation passed
+
+[contracts/runner] OK (0.06s)
+Running contract fixture in D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\fixtures\governance\output-root-enforcement.
+Validation passed
+
+[contracts/runner] OK (0.06s)
+Running contract fixture in D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\fixtures\governance\policy-proof-receipts.
+Validation passed
+
+[contracts/runner] OK (0.06s)
+Running contract fixture in D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\fixtures\governance\preflight.
+Validation passed
+
+[contracts/runner] OK (0.06s)
+Running contract fixture in D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\fixtures\governance\privacy-boundary.
+Validation passed
+
+[contracts/runner] OK (0.06s)
+Running contract fixture in D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\fixtures\governance\token-grammar.
+Validation passed
+
+[contracts/runner] OK (0.06s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\agents\ant-worker\fixtures\basic.
 [ant-worker] Task executed successfully
 Validation passed
 
-[contracts/runner] OK (exec=0.23s, validate=0.06s, total=0.29s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\agents\catalytic-wormhole\fixtures\basic.
+[contracts/runner] OK (exec=0.22s, validate=0.07s, total=0.28s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\agents\catalytic-wormhole\fixtures\basic.
 {
   "skipped": true,
   "reason": "CI mode (skip GPU workload)"
@@ -77,166 +73,166 @@ Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\agen
 [catalytic-wormhole] SKIP: CI mode
 Validation PASSED (skipped � CI without model)
 
-[contracts/runner] OK (exec=0.07s, validate=0.07s, total=0.13s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\agents\hermes-harness\fixtures\prompt_audit.
-[hermes-harness] run.py is prompt-only; live agent calls are not permitted here (use the Worker API / CLI explicitly).
-PASS
-
-[contracts/runner] OK (exec=0.12s, validate=0.07s, total=0.19s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\agents\hermes-harness\fixtures\prompt_worker.
-[hermes-harness] run.py is prompt-only; live agent calls are not permitted here (use the Worker API / CLI explicitly).
-PASS
-
-[contracts/runner] OK (exec=0.14s, validate=0.08s, total=0.22s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\agents\hermes-harness\fixtures\validate_audit.
+[contracts/runner] OK (exec=0.07s, validate=0.07s, total=0.14s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\agents\hermes-harness\fixtures\prompt_audit.
 [hermes-harness] run.py is prompt-only; live agent calls are not permitted here (use the Worker API / CLI explicitly).
 PASS
 
 [contracts/runner] OK (exec=0.13s, validate=0.07s, total=0.20s)
-Skipping D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\agents\workspace-isolation\fixtures\basic: no expected.json
-Skipping D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\agents\workspace-isolation\fixtures\gemini_antipattern: no expected.json
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\governance\admission-control\fixtures\artifact_only_allow.
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\agents\hermes-harness\fixtures\prompt_worker.
+[hermes-harness] run.py is prompt-only; live agent calls are not permitted here (use the Worker API / CLI explicitly).
+PASS
+
+[contracts/runner] OK (exec=0.11s, validate=0.06s, total=0.17s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\agents\hermes-harness\fixtures\validate_audit.
+[hermes-harness] run.py is prompt-only; live agent calls are not permitted here (use the Worker API / CLI explicitly).
+PASS
+
+[contracts/runner] OK (exec=0.12s, validate=0.07s, total=0.18s)
+Skipping D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\agents\workspace-isolation\fixtures\basic: no expected.json
+Skipping D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\agents\workspace-isolation\fixtures\gemini_antipattern: no expected.json
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\admission-control\fixtures\artifact_only_allow.
 Validation passed
 
-[contracts/runner] OK (exec=4.70s, validate=0.08s, total=4.78s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\governance\admission-control\fixtures\artifact_only_outside_block.
+[contracts/runner] OK (exec=4.72s, validate=0.07s, total=4.79s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\admission-control\fixtures\artifact_only_outside_block.
 Validation passed
 
-[contracts/runner] OK (exec=0.76s, validate=0.07s, total=0.83s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\governance\admission-control\fixtures\read_only_write_block.
+[contracts/runner] OK (exec=0.82s, validate=0.07s, total=0.89s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\admission-control\fixtures\read_only_write_block.
 Validation passed
 
-[contracts/runner] OK (exec=0.75s, validate=0.07s, total=0.82s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\governance\admission-control\fixtures\repo_write_flag_required.
+[contracts/runner] OK (exec=0.75s, validate=0.07s, total=0.81s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\admission-control\fixtures\repo_write_flag_required.
 Validation passed
 
-[contracts/runner] OK (exec=0.86s, validate=0.06s, total=0.92s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\governance\adr-create\fixtures\basic.
-Validation passed
-
-[contracts/runner] OK (exec=0.24s, validate=0.07s, total=0.30s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\governance\canon-governance-check\fixtures\basic.
-
-[contracts/runner] OK (exec=0.24s, validate=0.08s, total=0.32s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\governance\canon-migration\fixtures\basic.
-Migration skill completed
-Validation passed
-
-[contracts/runner] OK (exec=0.23s, validate=0.07s, total=0.30s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\governance\ci-trigger-policy\fixtures\basic.
-Validation passed
-
-[contracts/runner] OK (exec=0.27s, validate=0.07s, total=0.34s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\governance\commit-ceremony\fixtures\basic.
-Validation passed
-
-[contracts/runner] OK (exec=0.24s, validate=0.07s, total=0.31s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\governance\critic-run\fixtures\basic.
-Validation passed
-
-[contracts/runner] OK (exec=1.45s, validate=0.08s, total=1.53s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\governance\intent-guard\fixtures\artifact-only.
-{"verdict":"ALLOW","reasons":[],"normalized_paths":{"read":["LAW/CONTRACTS/_runs/_pipelines/intent-pipeline/PIPELINE.json","LAW/CONTRACTS/_runs/_pipelines/intent-pipeline/steps/step1/JOBSPEC.json"],"write":["LAW/CONTRACTS/_runs","LAW/CONTRACTS/_runs/_pipelines/intent-pipeline"]},"policy_version":"1"}
-Validation passed
-
-[contracts/runner] OK (exec=0.33s, validate=0.07s, total=0.40s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\governance\intent-guard\fixtures\repo-write-allow.
-{"verdict":"ALLOW","reasons":[],"normalized_paths":{"read":["LAW/CONTRACTS/_runs/_pipelines/intent-pipeline/PIPELINE.json","LAW/CONTRACTS/_runs/_pipelines/intent-pipeline/steps/step1/JOBSPEC.json"],"write":["LAW/CONTRACTS/_runs","LAW/CONTRACTS/_runs/_pipelines/intent-pipeline"]},"policy_version":"1"}
-Validation passed
-
-[contracts/runner] OK (exec=0.34s, validate=0.07s, total=0.40s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\governance\intent-guard\fixtures\repo-write-block.
-{"verdict":"BLOCK","reasons":["REPO_WRITE_FLAG_REQUIRED"],"normalized_paths":{"read":["LAW/CONTRACTS/_runs/_pipelines/intent-pipeline/PIPELINE.json","LAW/CONTRACTS/_runs/_pipelines/intent-pipeline/steps/step1/JOBSPEC.json"],"write":["LAW/CONTRACTS/_runs","LAW/CONTRACTS/_runs/_pipelines/intent-pipeline"]},"policy_version":"1"}
-Validation passed
-
-[contracts/runner] OK (exec=0.33s, validate=0.06s, total=0.39s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\governance\invariant-freeze\fixtures\basic.
-All 15 invariants present
-Validation passed
-
-[contracts/runner] OK (exec=0.24s, validate=0.07s, total=0.31s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\governance\master-override\fixtures\basic.
-Validation passed
-
-[contracts/runner] OK (exec=0.23s, validate=0.07s, total=0.30s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\governance\master-override\fixtures\unauthorized-read.
-Validation passed
-
-[contracts/runner] OK (exec=0.23s, validate=0.06s, total=0.30s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\governance\repo-contract-alignment\fixtures\basic.
-repo-contract-alignment completed
-Validation passed
-
-[contracts/runner] OK (exec=0.24s, validate=0.07s, total=0.30s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\governance\research-cache\fixtures\basic.
-Validation passed
-
-[contracts/runner] OK (exec=0.24s, validate=0.07s, total=0.31s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\inbox\inbox-report-writer\fixtures\basic.
-Validation passed
-
-[contracts/runner] OK (exec=0.72s, validate=0.07s, total=0.79s)
-Skipping D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\inbox\inbox-report-writer\fixtures\write_report: no expected.json
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\utilities\coderabbit-comments\fixtures\basic.
-Validation passed
-
-[contracts/runner] OK (exec=0.11s, validate=0.07s, total=0.18s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\utilities\doc-merge-batch-skill\fixtures\basic.
-Validation passed
-
-[contracts/runner] OK (exec=0.50s, validate=0.08s, total=0.58s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\utilities\doc-update\fixtures\basic.
-Validation passed
-
-[contracts/runner] OK (exec=0.27s, validate=0.07s, total=0.35s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\utilities\example-echo\fixtures\basic.
-Validation passed
-
-[contracts/runner] OK (exec=0.24s, validate=0.07s, total=0.31s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\utilities\file-analyzer\fixtures\basic.
-[skill] File analyzer skill executed successfully
-Validation passed
-
-[contracts/runner] OK (exec=0.24s, validate=0.07s, total=0.31s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\utilities\pack-validate\fixtures\basic.
-Pack validation completed
-Validation passed
-
-[contracts/runner] OK (exec=0.30s, validate=0.07s, total=0.37s)
-Skipping D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\utilities\pdf-to-markdown\fixtures\basic: no expected.json
-Skipping D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\utilities\pdf-to-markdown\fixtures\multi-page: no expected.json
-Skipping D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\utilities\pdf-to-markdown\fixtures\tables: no expected.json
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\utilities\powershell-bridge\fixtures\basic.
-Validation passed
-
-[contracts/runner] OK (exec=0.24s, validate=0.07s, total=0.31s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\utilities\prompt-runner\fixtures.
-Validation passed
-
-[contracts/runner] OK (exec=0.27s, validate=0.08s, total=0.34s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\utilities\skill-creator\fixtures\basic.
-[skill] Skill creator skill executed successfully
-Validation passed
-
-[contracts/runner] OK (exec=0.23s, validate=0.07s, total=0.30s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\utilities\terminal-bridge\fixtures\ags_status.
-Validation passed
-
-[contracts/runner] OK (exec=1.24s, validate=0.08s, total=1.32s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\utilities\terminal-bridge\fixtures\basic.
-Validation passed
-
-[contracts/runner] OK (exec=2.25s, validate=0.08s, total=2.34s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\utilities\terminal-bridge\fixtures\setup_info.
-Validation passed
-
-[contracts/runner] OK (exec=0.23s, validate=0.07s, total=0.31s)
-Running skill fixture in D:\CCC 2.0\AI\pr21-evidence-gate\CAPABILITY\SKILLS\utilities\test-primitives\fixtures\basic.
+[contracts/runner] OK (exec=0.75s, validate=0.07s, total=0.81s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\adr-create\fixtures\basic.
 Validation passed
 
 [contracts/runner] OK (exec=0.23s, validate=0.06s, total=0.29s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\canon-governance-check\fixtures\basic.
+
+[contracts/runner] OK (exec=0.22s, validate=0.07s, total=0.29s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\canon-migration\fixtures\basic.
+Migration skill completed
+Validation passed
+
+[contracts/runner] OK (exec=0.23s, validate=0.06s, total=0.29s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\ci-trigger-policy\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=0.28s, validate=0.06s, total=0.34s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\commit-ceremony\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=0.22s, validate=0.06s, total=0.28s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\critic-run\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=1.47s, validate=0.06s, total=1.54s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\intent-guard\fixtures\artifact-only.
+{"verdict":"ALLOW","reasons":[],"normalized_paths":{"read":["LAW/CONTRACTS/_runs/_pipelines/intent-pipeline/PIPELINE.json","LAW/CONTRACTS/_runs/_pipelines/intent-pipeline/steps/step1/JOBSPEC.json"],"write":["LAW/CONTRACTS/_runs","LAW/CONTRACTS/_runs/_pipelines/intent-pipeline"]},"policy_version":"1"}
+Validation passed
+
+[contracts/runner] OK (exec=0.32s, validate=0.07s, total=0.39s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\intent-guard\fixtures\repo-write-allow.
+{"verdict":"ALLOW","reasons":[],"normalized_paths":{"read":["LAW/CONTRACTS/_runs/_pipelines/intent-pipeline/PIPELINE.json","LAW/CONTRACTS/_runs/_pipelines/intent-pipeline/steps/step1/JOBSPEC.json"],"write":["LAW/CONTRACTS/_runs","LAW/CONTRACTS/_runs/_pipelines/intent-pipeline"]},"policy_version":"1"}
+Validation passed
+
+[contracts/runner] OK (exec=0.32s, validate=0.06s, total=0.39s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\intent-guard\fixtures\repo-write-block.
+{"verdict":"BLOCK","reasons":["REPO_WRITE_FLAG_REQUIRED"],"normalized_paths":{"read":["LAW/CONTRACTS/_runs/_pipelines/intent-pipeline/PIPELINE.json","LAW/CONTRACTS/_runs/_pipelines/intent-pipeline/steps/step1/JOBSPEC.json"],"write":["LAW/CONTRACTS/_runs","LAW/CONTRACTS/_runs/_pipelines/intent-pipeline"]},"policy_version":"1"}
+Validation passed
+
+[contracts/runner] OK (exec=0.31s, validate=0.07s, total=0.38s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\invariant-freeze\fixtures\basic.
+All 15 invariants present
+Validation passed
+
+[contracts/runner] OK (exec=0.24s, validate=0.07s, total=0.32s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\master-override\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=0.27s, validate=0.06s, total=0.33s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\master-override\fixtures\unauthorized-read.
+Validation passed
+
+[contracts/runner] OK (exec=0.23s, validate=0.06s, total=0.29s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\repo-contract-alignment\fixtures\basic.
+repo-contract-alignment completed
+Validation passed
+
+[contracts/runner] OK (exec=0.22s, validate=0.06s, total=0.28s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\research-cache\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=0.22s, validate=0.06s, total=0.29s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\inbox\inbox-report-writer\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=0.74s, validate=0.06s, total=0.80s)
+Skipping D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\inbox\inbox-report-writer\fixtures\write_report: no expected.json
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\coderabbit-comments\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=0.10s, validate=0.06s, total=0.16s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\doc-merge-batch-skill\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=0.45s, validate=0.06s, total=0.52s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\doc-update\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=0.22s, validate=0.06s, total=0.28s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\example-echo\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=0.22s, validate=0.06s, total=0.28s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\file-analyzer\fixtures\basic.
+[skill] File analyzer skill executed successfully
+Validation passed
+
+[contracts/runner] OK (exec=0.22s, validate=0.06s, total=0.29s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\pack-validate\fixtures\basic.
+Pack validation completed
+Validation passed
+
+[contracts/runner] OK (exec=0.24s, validate=0.06s, total=0.30s)
+Skipping D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\pdf-to-markdown\fixtures\basic: no expected.json
+Skipping D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\pdf-to-markdown\fixtures\multi-page: no expected.json
+Skipping D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\pdf-to-markdown\fixtures\tables: no expected.json
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\powershell-bridge\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=0.22s, validate=0.07s, total=0.29s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\prompt-runner\fixtures.
+Validation passed
+
+[contracts/runner] OK (exec=0.26s, validate=0.07s, total=0.33s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\skill-creator\fixtures\basic.
+[skill] Skill creator skill executed successfully
+Validation passed
+
+[contracts/runner] OK (exec=0.22s, validate=0.05s, total=0.27s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\terminal-bridge\fixtures\ags_status.
+Validation passed
+
+[contracts/runner] OK (exec=1.24s, validate=0.07s, total=1.30s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\terminal-bridge\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=2.23s, validate=0.07s, total=2.30s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\terminal-bridge\fixtures\setup_info.
+Validation passed
+
+[contracts/runner] OK (exec=0.21s, validate=0.07s, total=0.29s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\test-primitives\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=0.22s, validate=0.06s, total=0.28s)
 All fixtures passed
-[ci-local-gate] END contracts rc=0 elapsed=23.22s
+[ci-local-gate] END contracts rc=0 elapsed=22.49s
 [push-test-plan] Running core suite
 bringing up nodes...
 bringing up nodes...
@@ -248,15 +244,15 @@ bringing up nodes...
 ........................................................................ [ 27%]
 ........................................................................ [ 33%]
 ........................................................................ [ 38%]
-.........ssssss......................................................... [ 44%]
+........ssssss.......................................................... [ 44%]
 ........................................................................ [ 49%]
 ........................................................................ [ 55%]
-........................................................................ [ 60%]
-...ssssssssssss....ssss................................................. [ 66%]
+.............................................................sssssssssss [ 60%]
+s....ssss............................................................... [ 66%]
 ........................................................................ [ 71%]
 ........................................................................ [ 77%]
 ........................................................................ [ 82%]
-s....................................................................... [ 88%]
+........s............................................................... [ 88%]
 ........................................................................ [ 93%]
 ........................................................................ [ 99%]
 .............                                                            [100%]
@@ -275,33 +271,35 @@ s....................................................................... [ 88%]
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 ============================ slowest 25 durations =============================
-15.16s setup    CAPABILITY/TESTBENCH/test_geometric_reasoner.py::TestGeometricReasoner::test_initialize_produces_state
-14.61s call     CAPABILITY/TESTBENCH/integration/test_semiotic_compression.py::TestSchemaValidation::test_decode_produces_valid_jobspec
-12.46s call     CAPABILITY/TESTBENCH/integration/test_scl_cli.py::TestDecodeCommand::test_decode_simple_macro
-6.97s call     CAPABILITY/TESTBENCH/integration/test_semiotic_compression.py::TestAdditionalCoverage::test_all_known_contract_rules_decode
-5.01s call     CAPABILITY/TESTBENCH/core/test_vector_packet.py::TestSVTPCrossModel::test_cross_model_communication
-4.14s call     CAPABILITY/TESTBENCH/subsystem-tests/agent-resident/test_resident_identity.py::TestAgentRegistry::test_agent_auto_register_on_save
-3.26s call     CAPABILITY/TESTBENCH/subsystem-tests/router-tests/test_model_binding_routing.py::test_ags_plan_over_output_fails_closed
-2.82s call     CAPABILITY/TESTBENCH/integration/test_semiotic_compression.py::TestTokenBenchmark::test_benchmark_representative_programs
-2.76s call     CAPABILITY/TESTBENCH/integration/test_semiotic_compression.py::TestAdditionalCoverage::test_context_modifier_preserved
-2.72s call     CAPABILITY/TESTBENCH/integration/test_catlab_restoration.py::test_catlab_restoration_pass
-2.44s setup    CAPABILITY/TESTBENCH/core/test_vector_packet.py::TestSVTPPacketStructure::test_packet_properties
-2.43s setup    CAPABILITY/TESTBENCH/test_geometric_reasoner.py::TestIntegration::test_full_reasoning_chain
-2.21s setup    CAPABILITY/TESTBENCH/core/test_vector_packet.py::TestSVTPPilotTone::test_corrupted_pilot_detected
-2.13s setup    CAPABILITY/TESTBENCH/core/test_vector_packet.py::TestSVTPSingleModel::test_basic_encode_decode
-2.12s setup    CAPABILITY/TESTBENCH/core/test_vector_packet.py::TestSVTPPilotTone::test_corrupted_payload_pilot_still_valid
-2.11s setup    CAPABILITY/TESTBENCH/test_geometric_reasoner.py::TestIntegration::test_embedding_reduction
-2.10s setup    CAPABILITY/TESTBENCH/core/test_vector_packet.py::TestSVTPSingleModel::test_sequence_number_preservation
-2.07s setup    CAPABILITY/TESTBENCH/core/test_vector_packet.py::TestSVTPPilotTone::test_clean_packet_valid
-2.07s setup    CAPABILITY/TESTBENCH/test_geometric_reasoner.py::TestQ45SemanticOperations::test_navigate_produces_path
-2.06s setup    CAPABILITY/TESTBENCH/core/test_vector_packet.py::TestSVTPSingleModel::test_multiple_messages
-2.03s call     CAPABILITY/TESTBENCH/integration/test_tokenizer_atlas.py::TestSingleTokenEnforcement::test_live_verification
-2.00s call     CAPABILITY/TESTBENCH/subsystem-tests/agent-resident/test_resident_identity.py::TestSessionContinuity::test_session_resume_loads_recent
-1.99s setup    CAPABILITY/TESTBENCH/core/test_vector_packet.py::TestSVTPPacketStructure::test_packet_to_bytes
-1.97s call     CAPABILITY/TESTBENCH/integration/test_catlab_restoration.py::test_catlab_detects_single_byte_change
-1.91s setup    CAPABILITY/TESTBENCH/test_geometric_reasoner.py::TestGeometricReasoner::test_initialize_is_deterministic
-[push-test-plan] core finished rc=0 elapsed=72.46s
-[push-test-plan] All suites passed in 72.46s
+16.23s setup    CAPABILITY/TESTBENCH/test_geometric_reasoner.py::TestGeometricReasoner::test_initialize_produces_state
+6.96s call     CAPABILITY/TESTBENCH/integration/test_semiotic_compression.py::TestAdditionalCoverage::test_all_known_contract_rules_decode
+6.62s call     CAPABILITY/TESTBENCH/core/test_vector_packet.py::TestSVTPCrossModel::test_cross_model_communication
+5.97s call     CAPABILITY/TESTBENCH/subsystem-tests/agent-resident/test_resident_identity.py::TestAgentRegistry::test_agent_auto_register_on_save
+4.60s call     CAPABILITY/TESTBENCH/subsystem-tests/router-tests/test_model_binding_routing.py::test_ags_plan_over_output_fails_closed
+4.26s setup    CAPABILITY/TESTBENCH/core/test_vector_packet.py::TestSVTPSingleModel::test_basic_encode_decode
+3.92s call     CAPABILITY/TESTBENCH/integration/test_catlab_restoration.py::test_catlab_restoration_pass
+2.84s call     CAPABILITY/TESTBENCH/integration/test_semiotic_compression.py::TestTokenBenchmark::test_benchmark_representative_programs
+2.75s call     CAPABILITY/TESTBENCH/integration/test_semiotic_compression.py::TestAdditionalCoverage::test_context_modifier_preserved
+2.32s call     CAPABILITY/TESTBENCH/integration/test_semiotic_compression.py::TestSchemaValidation::test_decode_produces_valid_jobspec
+2.20s call     CAPABILITY/TESTBENCH/integration/test_catlab_restoration.py::test_catlab_detects_missing_file
+2.17s call     CAPABILITY/TESTBENCH/integration/test_catlab_restoration.py::test_catlab_detects_single_byte_change
+2.08s call     CAPABILITY/TESTBENCH/integration/test_catlab_restoration.py::test_catlab_detects_extra_file
+2.06s call     CAPABILITY/TESTBENCH/integration/test_packer_proofs.py::test_packer_proofs_integration
+2.03s setup    CAPABILITY/TESTBENCH/core/test_vector_packet.py::TestSVTPPacketStructure::test_packet_to_bytes
+1.93s setup    CAPABILITY/TESTBENCH/core/test_vector_packet.py::TestSVTPPilotTone::test_corrupted_payload_pilot_still_valid
+1.79s setup    CAPABILITY/TESTBENCH/core/test_vector_packet.py::TestSVTPPacketStructure::test_packet_properties
+1.78s call     CAPABILITY/TESTBENCH/skills/test_commit_manager.py::TestSummarizeOperationValidation::test_summarize_all_valid_types
+1.78s call     CAPABILITY/TESTBENCH/subsystem-tests/agent-resident/test_resident_identity.py::TestSessionContinuity::test_session_resume_loads_recent
+1.70s call     CAPABILITY/TESTBENCH/subsystem-tests/agent-resident/test_resident_identity.py::TestCrossSessionMemory::test_memory_access_count_increments
+1.69s setup    CAPABILITY/TESTBENCH/core/test_vector_packet.py::TestSVTPPilotTone::test_corrupted_pilot_detected
+1.67s setup    CAPABILITY/TESTBENCH/test_geometric_reasoner.py::TestIntegration::test_embedding_reduction
+1.67s call     CAPABILITY/TESTBENCH/subsystem-tests/agent-resident/test_resident_identity.py::TestSessionHistoryQuery::test_what_did_i_think_last_time
+1.67s setup    CAPABILITY/TESTBENCH/test_geometric_reasoner.py::TestGeometricReasoner::test_initialize_is_deterministic
+1.66s setup    CAPABILITY/TESTBENCH/core/test_vector_packet.py::TestSVTPSingleModel::test_sequence_number_preservation
+[push-test-plan] core finished rc=0 elapsed=82.67s
+[push-test-plan] All suites passed in 82.67s
 [ci-local-gate] RECEIPT LAW\CONTRACTS\_runs\ALLOW_PUSH.token
 [ci-local-gate] Receipt remains valid for this commit and tested base, including network retry.
-[ci-local-gate] FULL OK elapsed=100.88s
+[ci-local-gate] FULL OK elapsed=106.80s
+EXIT_CODE: 0
+timestamp_end=2026-06-22T18:56:07.7915215-07:00

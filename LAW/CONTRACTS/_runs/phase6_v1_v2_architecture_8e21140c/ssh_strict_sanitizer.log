@@ -1,19 +1,17 @@
-EVIDENCE_SCHEMA=CAT_CAS_PR21_FINAL_TREE_SSH_TEST_LOG_V1
-COMMIT_SHA=77cdb4169b8be2e7e9261d9808d4cbea67ead6a7
-HOST_IDENTIFIER=catcas/root@192.168.137.100
-START_TIMESTAMP=2026-06-22T01:45:41.1533637-07:00
-WARNINGS=NONE
-SKIPS=NONE
---- STRICT COMPILE ---
-COMMAND=ssh root@192.168.137.100 "cd /tmp/catcas_pr21_final/14_noncollapse_frontier/holo_runtime_v2 && cc -std=c11 -O2 -pthread -Wall -Wextra -Werror combined_pdn_runner.c combined_pdn_hardware.c -o combined_pdn_runner -lm"
-EXIT_CODE=0
-COMPILER_WARNINGS=NONE
---- STRICT 38-TEST LANE ---
-START_TIMESTAMP=2026-06-22T01:45:43.2912453-07:00
-END_TIMESTAMP=2026-06-22T01:45:47.4128679-07:00
-COMMAND=ssh root@192.168.137.100 "cd /tmp/catcas_pr21_final/14_noncollapse_frontier/holo_runtime_v2 && python3 -m unittest -v test_combined_pdn_runner.py test_waveform_equivalence.py test_slot2_primitive_identity.py"
-EXIT_CODE=0
-RESULT=38_PASSED
+timestamp_start=2026-06-22T18:52:29.7280590-07:00
+tested_source_commit=adc278401e85eed4770971cc19c2bd73a81ed08c
+lane=SSH strict C + equivalence + ASan/UBSan
+ssh_target=root@192.168.137.100
+warnings=none
+declared_skips=none
+
+COMMAND: git archive adc278401e85eed4770971cc19c2bd73a81ed08c [V2 C subset] -o D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\phase6_v1_v2_architecture_8e21140c\pr21_final_c_subset.tar
+EXIT_CODE: 0
+COMMAND: scp D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\phase6_v1_v2_architecture_8e21140c\pr21_final_c_subset.tar root@192.168.137.100:/tmp/catcas_pr21_final.tar
+EXIT_CODE: 0
+COMMAND: ssh root@192.168.137.100 'rm -rf /tmp/catcas_pr21_final /tmp/10_cross_core_wormhole /tmp/catcas_pr21_sanbin; mkdir -p /tmp/catcas_pr21_final; tar -xf /tmp/catcas_pr21_final.tar -C /tmp/catcas_pr21_final; cp -R /tmp/catcas_pr21_final/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/10_cross_core_wormhole /tmp/10_cross_core_wormhole'
+EXIT_CODE: 0
+COMMAND: ssh root@192.168.137.100 'cd /tmp/catcas_pr21_final/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2; cc -std=c11 -O2 -pthread -Wall -Wextra -Werror combined_pdn_runner.c combined_pdn_hardware.c -o combined_pdn_runner -lm; python3 -m unittest -v test_combined_pdn_runner.py test_waveform_equivalence.py test_slot2_primitive_identity.py'
 test_capture_capacity_is_bounded (test_combined_pdn_runner.Tests.test_capture_capacity_is_bounded) ... ok
 test_driven_requires_codeword (test_combined_pdn_runner.Tests.test_driven_requires_codeword) ... ok
 test_driven_requires_tone (test_combined_pdn_runner.Tests.test_driven_requires_tone) ... ok
@@ -52,35 +50,22 @@ test_wrong_source_bundle_digest_is_rejected (test_combined_pdn_runner.Tests.test
 test_c_matches_python_for_all_waveform_parameters (test_waveform_equivalence.EquivalenceTests.test_c_matches_python_for_all_waveform_parameters) ... ok
 test_phase_and_duty_contract (test_waveform_equivalence.EquivalenceTests.test_phase_and_duty_contract) ... ok
 test_v2_primitive_is_verbatim_historical_slot2 (test_slot2_primitive_identity.Slot2PrimitiveIdentityTests.test_v2_primitive_is_verbatim_historical_slot2) ... ok
-System.Management.Automation.RemoteException
+
 ----------------------------------------------------------------------
-Ran 38 tests in 3.568s
-System.Management.Automation.RemoteException
+Ran 38 tests in 3.145s
+
 OK
---- EQUIVALENCE 2-TEST LANE ---
-START_TIMESTAMP=2026-06-22T01:45:47.4130469-07:00
-END_TIMESTAMP=2026-06-22T01:45:49.6707695-07:00
-COMMAND=ssh root@192.168.137.100 "cd /tmp/catcas_pr21_final/14_noncollapse_frontier/holo_runtime_v2 && python3 -m unittest -v test_waveform_equivalence.py"
-EXIT_CODE=0
-RESULT=2_PASSED
+EXIT_CODE: 0
+COMMAND: ssh root@192.168.137.100 'cd /tmp/catcas_pr21_final/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2; python3 -m unittest -v test_waveform_equivalence.py'
 test_c_matches_python_for_all_waveform_parameters (test_waveform_equivalence.EquivalenceTests.test_c_matches_python_for_all_waveform_parameters) ... ok
 test_phase_and_duty_contract (test_waveform_equivalence.EquivalenceTests.test_phase_and_duty_contract) ... ok
-System.Management.Automation.RemoteException
+
 ----------------------------------------------------------------------
-Ran 2 tests in 1.743s
-System.Management.Automation.RemoteException
+Ran 2 tests in 1.673s
+
 OK
---- SANITIZER COMPILE ---
-COMMAND=ssh root@192.168.137.100 "cd /tmp/catcas_pr21_final/14_noncollapse_frontier/holo_runtime_v2 && cc -std=c11 -O1 -g -pthread -Wall -Wextra -Werror -fsanitize=address,undefined -fno-omit-frame-pointer combined_pdn_runner.c combined_pdn_hardware.c -o combined_pdn_runner -lm"
-EXIT_CODE=0
-COMPILER_WARNINGS=NONE
---- ASAN_UBSAN 35-TEST EXECUTOR LANE ---
-START_TIMESTAMP=2026-06-22T01:45:53.1780746-07:00
-END_TIMESTAMP=2026-06-22T01:45:56.9685207-07:00
-COMMAND=ssh root@192.168.137.100 "cd /tmp/catcas_pr21_final/14_noncollapse_frontier/holo_runtime_v2 && ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 python3 -m unittest -v test_combined_pdn_runner.py"
-EXIT_CODE=0
-SANITIZER_FINDINGS=NONE
-RESULT=35_PASSED
+EXIT_CODE: 0
+COMMAND: ssh root@192.168.137.100 'cd /tmp/catcas_pr21_final/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2; cc -std=c11 -O1 -g -pthread -Wall -Wextra -Werror -fsanitize=address,undefined -fno-omit-frame-pointer combined_pdn_runner.c combined_pdn_hardware.c -o combined_pdn_runner -lm; ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 python3 -m unittest -v test_combined_pdn_runner.py'
 test_capture_capacity_is_bounded (test_combined_pdn_runner.Tests.test_capture_capacity_is_bounded) ... ok
 test_driven_requires_codeword (test_combined_pdn_runner.Tests.test_driven_requires_codeword) ... ok
 test_driven_requires_tone (test_combined_pdn_runner.Tests.test_driven_requires_tone) ... ok
@@ -116,22 +101,19 @@ test_validate_contract_files_and_hashes (test_combined_pdn_runner.Tests.test_val
 test_validation_never_hardware (test_combined_pdn_runner.Tests.test_validation_never_hardware) ... ok
 test_wrong_route_core_pair_is_rejected (test_combined_pdn_runner.Tests.test_wrong_route_core_pair_is_rejected) ... ok
 test_wrong_source_bundle_digest_is_rejected (test_combined_pdn_runner.Tests.test_wrong_source_bundle_digest_is_rejected) ... ok
-System.Management.Automation.RemoteException
+
 ----------------------------------------------------------------------
-Ran 35 tests in 3.547s
-System.Management.Automation.RemoteException
+Ran 35 tests in 3.823s
+
 OK
---- ASAN_UBSAN EQUIVALENCE 2-TEST LANE ---
-START_TIMESTAMP=2026-06-22T01:45:56.9686891-07:00
-END_TIMESTAMP=2026-06-22T01:46:04.1188664-07:00
-COMMAND=ssh root@192.168.137.100 "cd /tmp/catcas_pr21_final/14_noncollapse_frontier/holo_runtime_v2 && PATH=/tmp/catcas_pr21_sanbin:$PATH ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 python3 -m unittest -v test_waveform_equivalence.py"
-EXIT_CODE=0
-SANITIZER_FINDINGS=NONE
-RESULT=2_PASSED
+EXIT_CODE: 0
+COMMAND: ssh root@192.168.137.100 '<sanitized equivalence wrapper and test>'
 test_c_matches_python_for_all_waveform_parameters (test_waveform_equivalence.EquivalenceTests.test_c_matches_python_for_all_waveform_parameters) ... ok
 test_phase_and_duty_contract (test_waveform_equivalence.EquivalenceTests.test_phase_and_duty_contract) ... ok
-System.Management.Automation.RemoteException
+
 ----------------------------------------------------------------------
-Ran 2 tests in 6.628s
-System.Management.Automation.RemoteException
+Ran 2 tests in 6.411s
+
 OK
+EXIT_CODE: 0
+timestamp_end=2026-06-22T18:52:52.5785449-07:00
