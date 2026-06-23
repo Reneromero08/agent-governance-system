@@ -1,10 +1,11 @@
 # Phase 6 Roadmap
 
 **Role:** master chronological task ledger.  
-**Current head:** `PHASE6B5C_TRANSFER_EQUIVARIANCE_SUPPORTED__GATE_R_NEXT`
-**Binding directive:** `14_noncollapse_frontier/COURSE_CORRECTION.md` plus `14_noncollapse_frontier/COURSE_CORRECTION_ADDENDUM_2026-06-19.md`  
-**Immediate gate:** Gate R external review and project-owner integration decision.
-**Next physical control:** reversed/randomized tone order, proposed but not authorized.
+**Current head:** `PHASE6B5D_V2_CALIBRATION_ARCHITECTURE_DRAFT__GATE_R_STILL_NEXT`  
+**Binding directive:** `14_noncollapse_frontier/COURSE_CORRECTION.md`, `14_noncollapse_frontier/COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `14_noncollapse_frontier/PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`  
+**Immediate engineering gate:** close V2 qualification Q1 through Q4 and complete independent PR review.  
+**Immediate scientific gate:** Gate R external review and project-owner integration decision remains next.  
+**Next physical control:** reversed/randomized tone order, proposed but not authorized.  
 **Observability acquisition:** not authorized.
 
 ---
@@ -38,6 +39,8 @@ Each arrow is a separate experiment and evidence gate.
 
 The 2026-06-19 course-correction addendum preserves this doctrine while inserting a required transfer-aware raw analysis before any new carrier acquisition.
 
+The 2026-06-22 V2 engineering addendum gives corrected executor and spectral-calibration work a forward-only qualification lane below Gate R. It does not enter Phase 6B.6 or authorize execution.
+
 ---
 
 ## 1. Completed historical sequence
@@ -52,6 +55,7 @@ The 2026-06-19 course-correction addendum preserves this doctrine while insertin
 | Original substrate L2 | Tape restoration hygiene reported |
 | Original substrate L3 | Former pass invalidated; source corrected for unique fixed point |
 | Original substrate L4 | Rejected: forward scan + fold-even verifier + target collapse |
+| V1 combined-observability campaign | Permanently adjudicated negative; no stable predictive operator |
 
 The old scalar substrate charter and original `SPEC.md` are historical only.
 
@@ -269,9 +273,7 @@ Required work:
 - [x] classify route `4:5`, seed `4` as `CHART_FAILURE`
 - [x] bind every output to campaign/raw/source hashes and deterministic null seeds
 
-Result: `TRANSFER_EQUIVARIANCE_SUPPORTED`. All runs select C0 scalar; this is a
-minimal complex receiver chart, not a complete physical operator. The official
-strict carrier verdict remains `PARTIAL`.
+Result: `TRANSFER_EQUIVARIANCE_SUPPORTED`. All runs select C0 scalar; this is a minimal complex receiver chart, not a complete physical operator. The official strict carrier verdict remains `PARTIAL`.
 
 Allowed primary outcomes:
 
@@ -303,12 +305,39 @@ route-scope narrowing
 carrier-claim narrowing
 ```
 
+### Phase 6B.5D-Q — V2 executor and calibration qualification lane
+
+This is a forward-only engineering lane beneath Gate R. It does not enter Phase 6B.6.
+
+- [x] preserve the permanent V1 negative adjudication
+- [x] correct the eight-state waveform fundamental and amplitude duties
+- [x] protect historical Slot2 primitive identity
+- [x] generate exact four-session V2 calibration contracts
+- [x] bind source bundle, session manifests, authorization fields, run custody, raw samples, CSV, and telemetry
+- [x] add focused Windows contract, analyzer, and waveform tests
+- [x] add GitHub workflow coverage for `holo_runtime_v2`, V2 Python tests, equivalence, ASan, and UBSan
+- [ ] close strict source and contract defects listed in the V2 engineering addendum Q1
+- [ ] pass the updated V2 GitHub CI lane at the exact final head
+- [ ] pass strict compile, equivalence, sanitizers, and full no-write gate on the Linux target at the exact final head
+- [ ] regenerate generated contracts and the evidence inventory from the final source head
+- [ ] synchronize PR description and all authority documents with final hashes and logs
+- [ ] complete independent merge review
+
+The current V2 plan uses ascending tone order and qualifies the physical interface. It is not the selected reversed/randomized tone-order scientific control.
+
+Binding addendum:
+
+```text
+14_noncollapse_frontier/PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md
+```
+
 ### Gate R — L4B.5B0 external human review
 
 Prerequisites:
 
 - [x] carrier scope frozen at the derived transfer-aware claim ceiling
 - [x] Phase 6B.5C/5D outputs bound to exact source and evidence
+- [ ] V2 qualification lane either closes cleanly or is explicitly narrowed out of the Gate R integration decision
 
 Review scope:
 
@@ -385,6 +414,10 @@ One positive does not authorize Big Wall generalization.
 | Ideal sender-basis fidelity | Not reproducible at T48 |
 | Physical route/session transfer chart | Minimal C0 scalar relation supported; complete operator not identified |
 | Strict carrier witness | `PARTIAL` |
+| V1 combined-observability campaign | Permanent negative adjudication; no stable predictive operator |
+| V2 executor/calibration architecture | Draft engineering qualification object; not executed or authorized |
+| V2 exact final-head qualification | Pending GitHub and Linux closure |
+| Reversed/randomized tone-order control | Selected but not designed, reviewed, or authorized |
 | Software `.holo` geometric memory | Supported at L1/L2 |
 | History-backed software restoration | Supported |
 | Inverse operator dynamics | Not established |
@@ -411,4 +444,7 @@ Stop and repair before continuing if work:
 - executes acquisition before authorization;
 - repeats T48 or increases to T300 before Phase 6B.5C identifies the unresolved mechanism;
 - treats canonical sender-basis fidelity as identical to carrier transport;
+- treats V2 engineering qualification as Gate R acceptance or Phase 6B.6 entry;
+- treats ascending-order calibration as the reversed/randomized tone-order control;
+- qualifies a later V2 source head with logs from an earlier commit;
 - skips carrier scope freeze, human review, operator identification, restoration, or target-coupling gates.
