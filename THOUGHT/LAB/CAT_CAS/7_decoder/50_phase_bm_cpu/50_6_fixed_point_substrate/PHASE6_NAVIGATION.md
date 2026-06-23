@@ -1,8 +1,8 @@
 # Phase 6 Navigation
 
 **Role:** canonical entry point for the Phase 6 directory.  
-**Current state:** `PHASE6B5C_TRANSFER_EQUIVARIANCE_SUPPORTED__GATE_R_NEXT`
-**Active directive:** `14_noncollapse_frontier/COURSE_CORRECTION.md` plus `14_noncollapse_frontier/COURSE_CORRECTION_ADDENDUM_2026-06-19.md`  
+**Current state:** `PHASE6B5D_V2_CALIBRATION_ARCHITECTURE_DRAFT__GATE_R_STILL_NEXT`  
+**Active directives:** `14_noncollapse_frontier/COURSE_CORRECTION.md`, `14_noncollapse_frontier/COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `14_noncollapse_frontier/PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`  
 **Active roadmap:** `PHASE6_ROADMAP.md`
 
 ---
@@ -40,9 +40,22 @@ live carrier
 → repeated Small Wall adjudication
 ```
 
-No later transition may be inferred from an earlier one. A live channel is not physical memory; an observable state is not restoration; restoration is not target coupling; target coupling is not a crossing.
+The V2 engineering lane now sits below Gate R:
 
-The current addendum blocks blind T48/T300 repetition until the retained raw field has been tested under a route/session-aware receiver chart and ordered-path analysis.
+```text
+permanent V1 negative adjudication
+→ corrected V2 executor and calibration architecture
+→ source and contract closure
+→ GitHub V2 CI closure
+→ exact final-head Linux qualification
+→ evidence and authority synchronization
+→ independent PR review
+→ Gate R project-owner decision
+```
+
+No later transition may be inferred from an earlier one. A live channel is not physical memory; an observable state is not restoration; restoration is not target coupling; target coupling is not a crossing. V2 engineering qualification is not Gate R acceptance and does not enter Phase 6B.6.
+
+The current V2 plan uses ascending tone order. It qualifies the interface and does not execute the selected reversed/randomized tone-order control.
 
 ---
 
@@ -63,7 +76,7 @@ The current addendum blocks blind T48/T300 repetition until the retained raw fie
 | 11 | `pdn_catalytic_tape` | Simulation/hardware-gap analysis | Complete |
 | 12 | `chiral_lane_frontier` | Phase 6A public lane boundary | Closed |
 | 13 | `substrate_frontier` | Tape/fixed-point warmup and L4 rejection | Historical/corrected |
-| 14 | `noncollapse_frontier` | Active Phase 6B architecture and physical ladder | Phase 6B.5C complete; Gate R next |
+| 14 | `noncollapse_frontier` | Active Phase 6B architecture and physical ladder | Phase 6B.5D frozen; V2 qualification draft; Gate R still next |
 
 ---
 
@@ -83,6 +96,14 @@ The current addendum blocks blind T48/T300 repetition until the retained raw fie
 - Its report is invalidated as a residue screen.
 - The replacement is a crossed-assignment complex PDN calibration, source-repaired but not acquired under a separate authorized plan.
 
+### Combined observability V1
+
+- The historical acquisition is immutable.
+- Its retrospective full-dataset adjudication is permanently negative.
+- No stable predictive operator was identified.
+- Pristine final-test hygiene is not proven.
+- V1 is closed and may not be retrained, retried, or silently reinterpreted.
+
 ---
 
 ## Active Phase 6B stack
@@ -101,7 +122,10 @@ The current addendum blocks blind T48/T300 repetition until the retained raw fie
 | Carrier theory-to-gate audit | Complete |
 | Phase 6B.5C transfer-aware raw analysis | Complete: `TRANSFER_EQUIVARIANCE_SUPPORTED` |
 | Carrier claim/scope freeze | Complete at derived scalar-chart claim ceiling |
-| L4B.5B0 human review | Required after carrier scope is frozen or narrowed |
+| V1 combined-observability acquisition | Permanent negative adjudication; closed |
+| V2 executor/calibration architecture | Draft engineering qualification object; no hardware or authorization |
+| V2 final-head source/CI/Linux qualification | Pending |
+| L4B.5B0 human review | Required after carrier scope and V2 integration boundary are frozen |
 | Observability acquisition/operator identification | Not authorized |
 | Physical restoration | Not authorized |
 | Target-to-carrier coupling | Blocked on physical restoration tier |
@@ -111,20 +135,23 @@ The current addendum blocks blind T48/T300 repetition until the retained raw fie
 
 ## Binding execution order
 
-The active authority is the base course correction plus its 2026-06-19 addendum. The current gate sequence is:
+The active authority is the base course correction plus the 2026-06-19 and 2026-06-22 addenda. The current gate sequence is:
 
 1. **Repair verification** — complete.
 2. **Raw carrier witness** — complete structurally; official strict conjunction remains `PARTIAL`.
 3. **Theory-to-gate audit** — complete; separated carrier transport from ideal sender-chart fidelity and exposed seven-gate/nine-gate namespace drift.
 4. **Phase 6B.5C transfer-aware raw analysis** — complete; all relations survive a minimal C0 scalar chart, controls remain null, and seed 4 is a chart failure.
 5. **Carrier scope freeze** — complete at the derived transfer-aware claim ceiling; reversed/randomized tone order is the proposed next physical control.
-6. **L4B.5B0 human review** — external SHA-256-bound, non-authorizing review of the observability/operator contract.
-7. **Physical observability/operator identification** — determine a minimal measured state and held-out predictive operator or formally reject the instrumentation boundary.
-8. **Physical closure/restoration ladder** — claim only the exact achieved tier, from bytes through observable equivalence and possible holonomy.
-9. **Target-to-carrier coupling** — load the unresolved public relation without candidate-label phase/core/sign smuggling.
-10. **Small Wall adjudication** — predeclared fold-odd invariant, boundary-only extraction, restoration/no-smuggle controls, repeated sessions/routes.
+6. **V1 combined-observability adjudication** — complete and permanently negative.
+7. **V2 engineering qualification** — close strict source contracts, V2 GitHub CI, exact final-head Linux verification, evidence binding, and authority synchronization.
+8. **Independent PR review** — confirm the V2 lane is internally qualified without promoting it scientifically.
+9. **L4B.5B0 human review** — external SHA-256-bound, non-authorizing review of the observability/operator contract and project-owner integration decision.
+10. **Physical observability/operator identification** — determine a minimal measured state and held-out predictive operator or formally reject the instrumentation boundary.
+11. **Physical closure/restoration ladder** — claim only the exact achieved tier, from bytes through observable equivalence and possible holonomy.
+12. **Target-to-carrier coupling** — load the unresolved public relation without candidate-label phase/core/sign smuggling.
+13. **Small Wall adjudication** — predeclared fold-odd invariant, boundary-only extraction, restoration/no-smuggle controls, repeated sessions/routes.
 
-Blind repetition or trial-count escalation is not an allowed substitute for Phase 6B.5C.
+Blind repetition or trial-count escalation is not an allowed substitute for transfer-aware analysis. V2 ascending-order calibration is not the reversed/randomized tone-order control.
 
 ---
 
@@ -142,8 +169,12 @@ Read in order:
 8. `14_noncollapse_frontier/COURSE_CORRECTION_ADDENDUM_2026-06-19.md`
 9. `14_noncollapse_frontier/carrier_witness_closure/theory_gate_audit/THEORY_TO_GATE_AUDIT.md`
 10. `14_noncollapse_frontier/carrier_witness_closure/theory_gate_audit/NEXT_ANALYSIS_CONTRACT.md`
-11. `14_noncollapse_frontier/CHIRAL_LANE_NONCOLLAPSE_ROADMAP.md`
-12. `PHASE6_ROADMAP.md`
+11. `14_noncollapse_frontier/PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
+12. `14_noncollapse_frontier/combined_observability_campaign/audits/PHASE6_FULL_ADJUDICATION_SUMMARY.md`
+13. `14_noncollapse_frontier/combined_observability_campaign/EXECUTOR_V2_REMEDIATION.md`
+14. `14_noncollapse_frontier/combined_observability_campaign/v2/ARCHITECTURE_REVIEW.md`
+15. `14_noncollapse_frontier/CHIRAL_LANE_NONCOLLAPSE_ROADMAP.md`
+16. `PHASE6_ROADMAP.md`
 
 Historical but non-authoritative:
 
@@ -167,6 +198,15 @@ T48 transfer analysis supports: held-out mode/phase/permutation relations after 
 T48 does not prove: a complete identified route/session operator,
                     physical HoloGeometry, restoration, orientation, or crossing.
 
+V1 combined observability proves: the historical campaign can be permanently
+           adjudicated under its frozen evidence and corrected execution coordinate.
+V1 does not prove: a stable predictive operator or pristine final-test hygiene.
+
+V2 currently proves: a corrected forward-only software architecture, exact generated
+           calibration contracts, and focused local tests.
+V2 does not yet prove: exact final-head Linux qualification, hardware calibration,
+           Gate R acceptance, an observable physical state, restoration, or crossing.
+
 .holo proves: software relational geometry, serialized path memory, boundary-gated invariant extraction.
 .holo does not prove: physical geometry, physical inverse evolution, physical restoration, orientation.
 ```
@@ -175,6 +215,8 @@ T48 does not prove: a complete identified route/session operator,
 
 ## Next execution boundary
 
-No physical acquisition is authorized. The next gate is the external, SHA-bound,
-non-authorizing L4B.5B0 human review plus the project-owner decision on the
-proposed reversed/randomized tone-order control. PR #9 remains draft.
+No physical acquisition is authorized.
+
+The immediate engineering boundary is V2 qualification Q1 through Q4 followed by independent PR review. The next scientific gate remains the external, SHA-bound, non-authorizing L4B.5B0 human review and project-owner integration decision.
+
+PR #21 remains draft and unmerged until the exact final head passes the required source, GitHub CI, Linux, evidence, and authority gates.
