@@ -210,10 +210,6 @@ static int token_end(char c) {
     return c == 0 || c == ',' || c == '}' || c == ']' || isspace((unsigned char)c);
 }
 
-static int is_json_terminator_char(int ch) {
-    return ch == 0 || ch == ',' || ch == '}' || ch == ']' || isspace(ch);
-}
-
 static int jstr(const char *json, const char *name, char *out, size_t n) {
     const char *p = value(json, name);
     if (!p || *p != '"') return -1;
@@ -334,13 +330,6 @@ static int valid_sha256(const char *digest) {
         if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f'))) return 0;
     }
     return 1;
-}
-
-static int path_is_within(const char *root, const char *path) {
-    if (!root || !path) return 0;
-    size_t n = strlen(root);
-    while (n > 1 && root[n - 1] == '/') n--;
-    return !strncmp(root, path, n) && (path[n] == 0 || path[n] == '/');
 }
 
 static void sha256(const char *path, char out[65]) {
@@ -628,6 +617,33 @@ static Schedule load_schedule(const RunnerArgs *args) {
                  sizeof(window->scramble_key_digest)) ||
             !valid_sha256(window->scramble_key_digest)) {
             die("invalid scramble key digest");
+        }
+        if (jnullable_long(line, "sender_off_control_for_tone_index", &x, &present)) {
+            window->sender_off_control_for_tone_index = -1;
+        } else {
+            window->sender_off_control_for_tone_index = present ? (int)x : -1;
+        }
+        if (jnullable_long(line, "sender_off_control_theta_idx", &x, &present)) {
+            window->sender_off_control_theta_idx = -1;
+        } else {
+            window->sender_off_control_theta_idx = present ? (int)x : -1;
+        }
+        if (window->sender_off_required) {
+            if (window->sender_off_control_for_tone_index < 0 ||
+                window->sender_off_control_for_tone_index > 11 ||
+                window->sender_off_control_theta_idx < 0 ||
+                window->sender_off_control_theta_idx > 7) {
+                die("sender-off control tone invalid");
+            }
+            if (window->physical_tone_index != -1 ||
+                window->drive_on) {
+                die("sender-off row must not drive");
+            }
+        } else {
+            if (window->sender_off_control_for_tone_index != -1 ||
+                window->sender_off_control_theta_idx != -1) {
+                die("sender-on row must not carry control tone");
+            }
         }
         if (jlong(line, "amplitude_level", &x)) {
             window->amplitude_level = window->drive_on ? 3 : 0;

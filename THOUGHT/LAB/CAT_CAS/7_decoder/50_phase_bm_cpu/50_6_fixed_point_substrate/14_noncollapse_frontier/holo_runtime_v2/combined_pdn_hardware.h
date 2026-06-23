@@ -47,6 +47,8 @@ typedef struct {
     int sender_theta_idx;
     int shared_schedule;
     char scramble_key_digest[65];
+    int sender_off_control_for_tone_index;
+    int sender_off_control_theta_idx;
 } Window;
 
 typedef struct {

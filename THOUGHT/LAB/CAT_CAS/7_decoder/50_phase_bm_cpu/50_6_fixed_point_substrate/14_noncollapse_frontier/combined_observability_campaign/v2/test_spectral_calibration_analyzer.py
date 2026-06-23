@@ -64,6 +64,7 @@ def csv_echo(row: dict) -> dict:
         "drive_on", "sender_off_required", "measurement_mode",
         "amplitude_level", "receiver_theta_idx", "sender_theta_idx",
         "shared_schedule", "scramble_key_digest",
+        "sender_off_control_for_tone_index", "sender_off_control_theta_idx",
     ):
         value = row[key]
         if value is None:
@@ -244,7 +245,16 @@ def build_full_campaign_fixture(root: Path, *, mutate=None) -> tuple[Path, Path,
         (run_dir / "telemetry.csv").write_text(
             "window_index,temp_before_c,temp_after_c,"
             "victim_frequency_before_khz,victim_frequency_after_khz,"
-            "sender_frequency_before_khz,sender_frequency_after_khz\n",
+            "sender_frequency_before_khz,sender_frequency_after_khz,"
+            "aperf_before,aperf_after,mperf_before,mperf_after,"
+            "cofvid_before,cofvid_after\n" +
+            "".join(
+                f"{i},{row['temp_before_c']},{row['temp_after_c']},"
+                f"{row['victim_frequency_before_khz']},{row['victim_frequency_after_khz']},"
+                f"{row['sender_frequency_before_khz']},{row['sender_frequency_after_khz']},"
+                "0,0,0,0,0,0\n"
+                for i, row in enumerate(rows)
+            ),
             encoding="utf-8",
         )
         for name in ("stdout.log", "stderr.log", "orchestrator_stdout.log",
@@ -361,6 +371,7 @@ def build_fixture(root: Path):
             "drive_on", "sender_off_required", "measurement_mode",
             "amplitude_level", "receiver_theta_idx", "sender_theta_idx",
             "shared_schedule", "scramble_key_digest",
+            "sender_off_control_for_tone_index", "sender_off_control_theta_idx",
         }:
             if value is None:
                 result_row[key] = -1
@@ -387,8 +398,18 @@ def build_fixture(root: Path):
         "sender_off_duration_s": .5, "temperature_veto_c": 68.0,
     }
     (run_dir / "run.json").write_bytes(canonical_bytes(run))
+    (run_dir / "telemetry.csv").write_text(
+        "window_index,temp_before_c,temp_after_c,"
+        "victim_frequency_before_khz,victim_frequency_after_khz,"
+        "sender_frequency_before_khz,sender_frequency_after_khz,"
+        "aperf_before,aperf_after,mperf_before,mperf_after,"
+        "cofvid_before,cofvid_after\n"
+        "0,40.000000,41.000000,1600000,1600000,1600000,1600000,0,0,0,0,0,0\n",
+        encoding="utf-8",
+    )
     for name in RUN_FILES - {
-        "run.json", "session.json", "windows.jsonl", "window_results.csv", "raw_samples.bin"
+        "run.json", "session.json", "windows.jsonl", "window_results.csv",
+        "raw_samples.bin", "telemetry.csv"
     }:
         (run_dir / name).write_bytes(b"")
     files = {

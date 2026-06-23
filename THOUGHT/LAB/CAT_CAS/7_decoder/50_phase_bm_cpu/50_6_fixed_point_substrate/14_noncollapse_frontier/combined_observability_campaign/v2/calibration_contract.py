@@ -42,6 +42,13 @@ THRESHOLDS = {
     "minimum_repeated_session_complex_correlation": 0.8,
     "cross_route_pass_required": True,
     "final_verdict_rule": "ALL_GROUPS_AND_BOTH_REBOOT_PARTITIONS_AND_BOTH_ROUTES_PASS",
+    "capture_quality": {
+        "minimum_capture_coverage_fraction": 0.90,
+        "minimum_empirical_sample_rate_fraction": 0.90,
+        "maximum_empirical_sample_rate_fraction": 1.05,
+        "minimum_empirical_nyquist_margin": 1.50,
+        "maximum_sample_gap_multiple": 4.0,
+    },
 }
 HEX40 = re.compile(r"[0-9a-f]{40}")
 HEX64 = re.compile(r"[0-9a-f]{64}")
@@ -138,6 +145,8 @@ def calibration_windows(session_id: str) -> list[dict]:
                         "scramble_key_digest": scramble_digest,
                         "amplitude_level": amplitude,
                         "expected_code_sign": sign,
+                        "sender_off_control_for_tone_index": None,
+                        "sender_off_control_theta_idx": None,
                     })
             index = len(windows)
             windows.append({

@@ -102,6 +102,36 @@ ECHO_FIELDS = (
     "drive_on", "sender_off_required", "measurement_mode", "amplitude_level",
     "receiver_theta_idx", "sender_theta_idx", "shared_schedule",
     "scramble_key_digest",
+    "sender_off_control_for_tone_index", "sender_off_control_theta_idx",
+)
+WINDOW_RESULTS_COLUMNS = (
+    "window_index", "session_id", "stage", "block_id", "family",
+    "actual_mode", "declared_mode", "executed_tone_order",
+    "declared_tone_order", "physical_tone_index",
+    "receiver_codeword_source_index", "sender_codeword_source_index",
+    "drive_on", "sender_off_required", "measurement_mode",
+    "amplitude_level", "receiver_theta_idx", "sender_theta_idx",
+    "shared_schedule", "scramble_key_digest",
+    "sender_off_control_for_tone_index", "sender_off_control_theta_idx",
+    "slot_start_tsc", "capture_deadline_tsc", "sender_ready_tsc",
+    "sender_epoch_tsc", "first_drive_tsc", "receiver_epoch_tsc",
+    "first_sample_tsc", "last_sample_tsc", "sample_count",
+    "temp_before_c", "temp_after_c",
+    "victim_frequency_before_khz", "victim_frequency_after_khz",
+    "sender_frequency_before_khz", "sender_frequency_after_khz",
+    "aperf_before", "aperf_after", "mperf_before", "mperf_after",
+    "cofvid_before", "cofvid_after",
+    "computed_I", "computed_Q", "magnitude", "floor",
+    "raw_mean", "raw_min", "raw_max",
+    "sender_started", "sender_stopped", "sender_alive_at_capture",
+    "window_status",
+)
+TELEMETRY_COLUMNS = (
+    "window_index", "temp_before_c", "temp_after_c",
+    "victim_frequency_before_khz", "victim_frequency_after_khz",
+    "sender_frequency_before_khz", "sender_frequency_after_khz",
+    "aperf_before", "aperf_after", "mperf_before", "mperf_after",
+    "cofvid_before", "cofvid_after",
 )
 NUMERIC_TOLERANCE = 1e-9
 MAX_EPOCH_SKEW_SECONDS = 0.005
@@ -387,6 +417,15 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
             "shared_schedule": bool(declared["shared_schedule"]),
             "sender_gate_sha256": sender_digest,
             "receiver_gate_sha256": receiver_digest,
+            "capture_coverage": capture_coverage,
+            "empirical_sample_rate": empirical_rate,
+            "sample_rate_fraction": rate_fraction,
+            "max_sample_gap_multiple": gap_multiple,
+            "empirical_nyquist_margin": (
+                empirical_rate / (2.0 * max(
+                    tone_hz(tone), control_frequency_hz(tone_hz(tone))
+                )) if empirical_rate > 0 else 0.0
+            ),
         })
 
     construct_complete_grid(schedule)
@@ -491,11 +530,11 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
             "authorization_sha256": authorization_digest,
             "source_bundle_sha256": source_bundle_sha256 or
                 hashlib.sha256(canonical_bytes(source_bundle)).hexdigest(),
+            "session_manifest_sha256": run.get("session_manifest_sha256"),
             "run_manifest_sha256": sha256(run_dir / "run_manifest.json"),
-            "session_manifest_sha256": sha256(run_dir.parent / "source" / "session_manifest.json")
-                if (run_dir.parent / "source" / "session_manifest.json").exists()
-                else run.get("session_manifest_sha256"),
             "run_json_sha256": sha256(run_dir / "run.json"),
+            "session_json_sha256": sha256(run_dir / "session.json"),
+            "windows_jsonl_sha256": sha256(run_dir / "windows.jsonl"),
             "raw_samples_sha256": sha256(run_dir / "raw_samples.bin"),
             "window_results_sha256": sha256(run_dir / "window_results.csv"),
             "telemetry_sha256": sha256(run_dir / "telemetry.csv"),
@@ -504,6 +543,7 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
             "campaign_source_commit": authorization["campaign_source_commit"],
             "session_id": session_id,
             "route": planned["route"],
+            "capture_quality_thresholds": thresholds.get("capture_quality") if thresholds else None,
         },
     }
 

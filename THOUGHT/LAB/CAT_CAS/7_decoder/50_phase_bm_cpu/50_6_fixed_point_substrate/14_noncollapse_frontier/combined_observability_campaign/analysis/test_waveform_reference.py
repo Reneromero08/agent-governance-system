@@ -165,6 +165,26 @@ class WaveformReferenceTests(unittest.TestCase):
         diff = abs(np.angle(np.exp(1j * (np.angle(dft_neg) - np.angle(dft_pos)))))
         self.assertAlmostEqual(diff, math.pi, delta=0.01)
 
+    def test_exact_discrete_eight_state_dft_magnitudes(self) -> None:
+        vectors = {
+            1: np.array([1, 0, 0, 0, 0, 0, 0, 0], dtype=float),
+            2: np.array([1, 1, 0, 0, 0, 0, 0, 0], dtype=float),
+            3: np.array([1, 1, 1, 0, 0, 0, 0, 0], dtype=float),
+        }
+        expected = {
+            1: 1.000000000000000,
+            2: 1.847759065022574,
+            3: 2.414213562373095,
+        }
+        magnitudes = {}
+        for level in (1, 2, 3):
+            dft = np.fft.fft(vectors[level])
+            mag = abs(dft[1])
+            magnitudes[level] = mag
+            self.assertAlmostEqual(mag, expected[level], delta=1e-12)
+        self.assertLess(magnitudes[1], magnitudes[2])
+        self.assertLess(magnitudes[2], magnitudes[3])
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -3,7 +3,6 @@
 
 #include <dirent.h>
 #include <errno.h>
-#include <dirent.h>
 #include <fcntl.h>
 #include <limits.h>
 #include <math.h>
@@ -957,6 +956,7 @@ int run_hardware(const RunnerArgs *args, const Schedule *schedule) {
             "sender_codeword_source_index,drive_on,sender_off_required,"
             "measurement_mode,amplitude_level,receiver_theta_idx,"
             "sender_theta_idx,shared_schedule,scramble_key_digest,"
+            "sender_off_control_for_tone_index,sender_off_control_theta_idx,"
             "slot_start_tsc,capture_deadline_tsc,sender_ready_tsc,"
             "sender_epoch_tsc,first_drive_tsc,receiver_epoch_tsc,"
             "first_sample_tsc,last_sample_tsc,sample_count,temp_before_c,"
@@ -1326,6 +1326,7 @@ int run_hardware(const RunnerArgs *args, const Schedule *schedule) {
 
         fprintf(csv,
                 "%ld,%s,%s,%s,%s,%s,%s,%s,%s,%d,%d,%d,%d,%d,%s,%d,%d,%d,%d,%s,"
+                "%d,%d,"
                 "%llu,%llu,%llu,%llu,%llu,%llu,%llu,%llu,%d,%.6f,%.6f,"
                 "%ld,%ld,%ld,%ld,%llu,%llu,%llu,%llu,%d,%d,",
                 window->window_index, window->session_id, window->stage,
@@ -1338,6 +1339,8 @@ int run_hardware(const RunnerArgs *args, const Schedule *schedule) {
                 window->amplitude_level, window->receiver_theta_idx,
                 window->sender_theta_idx, window->shared_schedule,
                 window->scramble_key_digest,
+                window->sender_off_control_for_tone_index,
+                window->sender_off_control_theta_idx,
                 (unsigned long long)origin, (unsigned long long)deadline,
                 (unsigned long long)sender_ready_tsc,
                 (unsigned long long)sender_epoch_tsc,
