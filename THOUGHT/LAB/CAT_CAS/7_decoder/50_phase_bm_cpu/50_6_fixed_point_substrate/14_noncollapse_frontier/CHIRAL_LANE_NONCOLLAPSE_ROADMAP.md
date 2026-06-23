@@ -1,9 +1,10 @@
 # Phase 6B Non-Collapse Frontier Roadmap
 
-**Status:** `TRANSFER_EQUIVARIANCE_SUPPORTED__GATE_R_NEXT`
-**Binding directive:** `COURSE_CORRECTION.md` plus `COURSE_CORRECTION_ADDENDUM_2026-06-19.md`  
-**Immediate gate:** Gate R external review and project-owner integration decision
-**Next physical control:** reversed/randomized tone order, proposed but unauthorized
+**Status:** `V2_CALIBRATION_ARCHITECTURE_DRAFT__GATE_R_STILL_NEXT`  
+**Binding directives:** `COURSE_CORRECTION.md`, `COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`  
+**Immediate engineering gate:** V2 qualification Q1 through Q4 and independent PR review  
+**Immediate scientific gate:** Gate R external review and project-owner integration decision  
+**Next physical control:** reversed/randomized tone order, proposed but unauthorized  
 **Observability implementation authorization:** false
 
 **THE ALGORITHM IS DEAD.** The unresolved relation is the object; scalar traversal is local and subordinate.
@@ -39,6 +40,8 @@ Canonical doctrine: `doctrine/`.
 
 The 2026-06-19 addendum does not alter this doctrine. It corrects the execution order so carrier-chart identification precedes further acquisition.
 
+The 2026-06-22 addendum registers the V2 executor and calibration architecture as a forward-only engineering qualification lane below Gate R. It does not enter Phase 6B.6.
+
 ---
 
 ## Corrected precursor state
@@ -63,6 +66,18 @@ The 2026-06-19 addendum does not alter this doctrine. It corrects the execution 
 - [ ] physical acquisition requires an explicit authorized run plan
 
 Class B capture remains deferred pending an authorized run plan. The target exposes readable `k10temp` at `/sys/class/hwmon/hwmon0/temp1_input`.
+
+### Combined observability V1
+
+- [x] historical acquisition preserved immutably
+- [x] corrected execution coordinate audited
+- [x] retrospective full-dataset adjudication completed
+- [x] permanent result recorded as negative
+- [x] no stable predictive operator identified
+- [x] pristine final-test hygiene recorded as not proven
+- [x] further V1 model development and final-test retry prohibited
+
+V1 is closed. Its negative result does not close the Small Wall, and it may not be rewritten as a pending experiment.
 
 ---
 
@@ -218,8 +233,7 @@ carrier_witness_closure/theory_gate_audit/NEXT_ANALYSIS_CONTRACT.md
 - [x] classify route `4:5`, seed `4` as `CHART_FAILURE`
 - [x] bind outputs to campaign/raw/source hashes and deterministic null seeds
 
-Result: `TRANSFER_EQUIVARIANCE_SUPPORTED`; C0 scalar is selected for all runs,
-controls remain null, and strict closure remains `PARTIAL`.
+Result: `TRANSFER_EQUIVARIANCE_SUPPORTED`; C0 scalar is selected for all runs, controls remain null, and strict closure remains `PARTIAL`.
 
 The analysis preserves the complex field and ordered path. It may not replace the object with a scalar candidate winner.
 
@@ -242,12 +256,37 @@ route-scope narrowing
 carrier-claim narrowing
 ```
 
+### Phase 6B.5D-Q — V2 engineering qualification
+
+The V2 lane qualifies a corrected physical interface without promoting it into observability acquisition.
+
+- [x] corrected requested-frequency eight-state waveform
+- [x] 1/8, 2/8, and 3/8 amplitude duties
+- [x] historical Slot2 drive-source identity regression
+- [x] exact four-session ascending-order calibration plan
+- [x] sender-on and eight sender-off controls per tone
+- [x] singleton execution authorization architecture
+- [x] raw, CSV, telemetry, run-manifest, and source-bundle custody
+- [x] focused local contract, analyzer, and waveform tests
+- [x] GitHub workflow updated to exercise V2 Python, strict C, equivalence, ASan, and UBSan lanes
+- [ ] strict command-line and authorization parser closure
+- [ ] mechanical runtime/plan threshold binding
+- [ ] exact capture-quality and schema closure
+- [ ] immutable run-root directory and symlink rejection
+- [ ] exact final-head GitHub CI pass
+- [ ] exact final-head target-toolchain and sanitizer pass
+- [ ] regenerated contracts and final evidence inventory
+- [ ] independent merge review
+
+The current V2 schedule is ascending-order engineering calibration. It is not the reversed/randomized tone-order scientific control.
+
 ### Gate R — L4B.5B0 external human review
 
 Prerequisites:
 
 - [x] carrier scope frozen at the derived transfer-aware ceiling
 - [x] Phase 6B.5C/5D outputs bound to exact evidence
+- [ ] V2 engineering lane closed cleanly or explicitly excluded from the integration decision
 
 Review remains non-authorizing.
 
@@ -255,7 +294,7 @@ Review remains non-authorizing.
 
 Prerequisites:
 
-- [ ] carrier scope frozen or narrowed
+- [x] carrier scope frozen or narrowed
 - [ ] L4B.5B0 external human review accepted
 - [ ] explicit acquisition authorization recorded
 
@@ -328,6 +367,9 @@ Reject work that:
 - executes acquisition before authorization;
 - repeats T48 or escalates to T300 before Phase 6B.5C;
 - treats ideal sender-basis fidelity as identical to carrier transport;
+- treats V2 engineering qualification as Gate R acceptance or Phase 6B.6 entry;
+- treats ascending calibration as the reversed/randomized tone-order control;
+- qualifies a later source head with evidence from an earlier commit;
 - skips carrier scope freeze, human review, observability, operator, restoration, or target-coupling gates.
 
 Valid moves preserve relational geometry, phase-native carrier state, ordered path memory, explicit projection, and evidence-bounded claims.
