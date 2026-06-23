@@ -2,6 +2,13 @@
 
 # Changelog
 
+## 2026-06-23 (continued)
+
+- Phase 6 V2: close same-byte analyzer custody. Read-once byte hashing,
+  O_BINARY flag for Windows binary file I/O, immutable input mutation
+  detection. Temporary custody installer scripts removed; CI workflow
+  tests committed source directly.
+
 ## 2026-06-23
 
 - Phase 6 V2: close source and authorization boundaries. Remove temporary

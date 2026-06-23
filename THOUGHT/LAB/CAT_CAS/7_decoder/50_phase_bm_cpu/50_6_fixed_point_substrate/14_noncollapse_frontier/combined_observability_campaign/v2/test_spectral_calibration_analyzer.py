@@ -3,6 +3,7 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
+import os
 import sys
 import tempfile
 import unittest
@@ -19,6 +20,7 @@ from analyze_spectral_calibration_v2 import (
     analyze_run,
     construct_complete_grid,
     main as analyzer_main,
+    validate_plan_schema,
 )
 from calibration_contract import (
     FALSE_AUTHORIZATIONS,
@@ -41,6 +43,17 @@ def sha(path: Path) -> str:
 def write_json(path: Path, value: object) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_bytes(canonical_bytes(value))
+
+
+def cpufreq_states() -> dict:
+    values = [1600000] * 6
+    return {
+        "original_cpufreq_state": {"min_khz": values, "max_khz": values, "boost": 0},
+        "applied_cpufreq_state": {"min_khz": 1600000, "max_khz": 1600000, "boost": 0},
+        "restored_cpufreq_state": {
+            "verified": True, "min_khz": values, "max_khz": values, "boost": 0,
+        },
+    }
 
 
 def update_run_manifest(run_dir: Path) -> None:
@@ -276,16 +289,24 @@ def build_full_campaign_fixture(root: Path, *, mutate=None) -> tuple[Path, Path,
             "campaign_plan_sha256": sha(plan_path),
             "session_manifest_sha256": manifest_sha,
             "executor_git_commit": "b" * 40,
+            "host_identity": "test-host", "kernel_identity": "test-kernel",
+            "cpu_model": "test-cpu",
             "authorization_artifact_sha256": sha(authorization_path),
             "execution_class": "AUTHORIZED_V2_SPECTRAL_CALIBRATION_NOT_ACQUISITION",
-            "hardware_executed": True, **FALSE_AUTHORIZATIONS,
-            "calibration_authorized": True, "exit_status": "COMPLETE",
-            "failure_reason": "", "host_control_state_restored": True,
             "victim_core": ROUTE_CORES[session["route"]][0],
             "sender_core": ROUTE_CORES[session["route"]][1],
             "tsc_calibration_hz": tsc_hz, "frequency_policy": 1600000,
             "read_rate_hz": 8000, "slot_duration_s": .5,
             "sender_off_duration_s": .5, "temperature_veto_c": 68.0,
+            "start_timestamp": 1, "end_timestamp": 2,
+            "exit_status": "COMPLETE", "failure_reason": "",
+            "host_control_state_restored": True,
+            "physical_carrier_restoration_claimed": False,
+            "automatic_retry": False, "restoration_authorized": False,
+            "calibration_authorized": True, "acquisition_authorized": False,
+            "scientific_acquisition_authorized": False,
+            "target_coupling_authorized": False, "small_wall_authorized": False,
+            "hardware_executed": True, **cpufreq_states(),
         })
         update_run_manifest(run_dir)
         evidence["sessions"][session_id] = {
@@ -317,15 +338,20 @@ def build_fixture(root: Path):
         "expected_code_sign": 0, "sender_off_control_for_tone_index": 0,
         "sender_off_control_theta_idx": 0,
     }
-    plan = {
-        "schema_id": "TEST_PLAN",
-        "campaign_source_commit": SOURCE_COMMIT,
-        "analysis_thresholds": build_plan(SOURCE_COMMIT)["analysis_thresholds"],
-        "sessions": [{
-            "session_id": session_id, "route": "v4s5",
-            "window_count": 1, "windows": [window],
-        }],
+    plan = build_plan(SOURCE_COMMIT)
+    planned_session = {
+        "session_id": session_id, "route": "v4s5", "route_cores": [4, 5],
+        "partition": "PRE_REBOOT_REPETITION",
+        "frequency_settling_required": True,
+        "window_count": 1, "windows": [window],
     }
+    plan["sessions"] = [planned_session]
+    plan["session_ids"] = [session_id]
+    plan["session_count"] = 1
+    plan["windows_per_session"] = 1
+    plan["windows_per_route"] = {"v4s5": 1, "v2s3": 0}
+    plan["total_window_count"] = 1
+    plan["count_derivation"] = "TEST_SINGLE_WINDOW"
     plan_digest = hashlib.sha256(canonical_bytes(plan)).hexdigest()
     source_bundle = {
         "schema_id": "CAT_CAS_PHASE6_V2_SOURCE_BUNDLE_MANIFEST_V1",
@@ -346,9 +372,12 @@ def build_fixture(root: Path):
     authorization_bytes = canonical_bytes(authorization)
     authorization["artifact_sha256"] = hashlib.sha256(authorization_bytes).hexdigest()
     session = {
-        "session_id": session_id,
-        "route": "v4s5",
+        "schema_id": "CAT_CAS_PHASE6_COMBINED_SESSION_SCHEDULE_V2",
         "campaign_source_commit": SOURCE_COMMIT,
+        "campaign_plan_sha256": plan_digest,
+        "session_id": session_id, "route": "v4s5",
+        "partition": "PRE_REBOOT_REPETITION", "window_count": 1,
+        "frequency_settling_required": True, "restoration_authorized": False,
     }
     (run_dir / "session.json").write_bytes(canonical_bytes(session))
     (run_dir / "windows.jsonl").write_bytes(canonical_bytes(window))
@@ -399,19 +428,27 @@ def build_fixture(root: Path):
         writer = csv.DictWriter(target, fieldnames=list(WINDOW_RESULTS_COLUMNS))
         writer.writeheader(); writer.writerow(result_row)
     run = {
+        "schema_id": "CAT_CAS_PHASE6_COMBINED_RUN_V2",
         "session_id": session_id, "route": "v4s5", "campaign_plan_sha256": plan_digest,
-        "campaign_source_commit": SOURCE_COMMIT,
+        "campaign_source_commit": SOURCE_COMMIT, "session_manifest_sha256": "a" * 64,
         "executor_git_commit": "b" * 40,
+        "host_identity": "test-host", "kernel_identity": "test-kernel",
+        "cpu_model": "test-cpu",
         "authorization_artifact_sha256": authorization["artifact_sha256"],
         "execution_class": "AUTHORIZED_V2_SPECTRAL_CALIBRATION_NOT_ACQUISITION",
-        "hardware_executed": True, **FALSE_AUTHORIZATIONS,
-        "calibration_authorized": True, "exit_status": "COMPLETE",
-        "failure_reason": "", "host_control_state_restored": True,
-        "session_manifest_sha256": "a" * 64,
         "victim_core": 4, "sender_core": 5,
         "tsc_calibration_hz": 1_000_000.0, "frequency_policy": 1600000,
         "read_rate_hz": 8000, "slot_duration_s": .5,
         "sender_off_duration_s": .5, "temperature_veto_c": 68.0,
+        "start_timestamp": 1, "end_timestamp": 2,
+        "exit_status": "COMPLETE", "failure_reason": "",
+        "host_control_state_restored": True,
+        "physical_carrier_restoration_claimed": False,
+        "automatic_retry": False, "restoration_authorized": False,
+        "calibration_authorized": True, "acquisition_authorized": False,
+        "scientific_acquisition_authorized": False,
+        "target_coupling_authorized": False, "small_wall_authorized": False,
+        "hardware_executed": True, **cpufreq_states(),
     }
     (run_dir / "run.json").write_bytes(canonical_bytes(run))
     (run_dir / "telemetry.csv").write_text(
@@ -517,6 +554,64 @@ class SpectralAnalyzerTests(unittest.TestCase):
             (run_dir / "run_manifest.json").write_bytes(canonical_bytes(manifest))
             with self.assertRaisesRegex(ValueError, "non-finite"):
                 analyze_run(run_dir, plan, authorization, bundle)
+
+    def test_same_byte_custody_does_not_reopen_inputs_for_parsing(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            args = build_fixture(Path(temp))
+            with mock.patch.object(Path, "read_bytes", side_effect=AssertionError("path reopened")), \
+                    mock.patch.object(Path, "read_text", side_effect=AssertionError("path reopened")), \
+                    mock.patch.object(Path, "open", side_effect=AssertionError("path reopened")), \
+                    mock.patch.object(np, "fromfile", side_effect=AssertionError("raw path reopened")):
+                with self.assertRaisesRegex(ValueError, "complete tone/amplitude"):
+                    analyze_run(*args)
+
+    def test_run_manifest_binding_requires_exact_fields(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            run_dir, plan, authorization, bundle = build_fixture(Path(temp))
+            manifest_path = run_dir / "run_manifest.json"
+            manifest = json.loads(manifest_path.read_text())
+            manifest["files"]["run.json"]["unexpected"] = True
+            manifest_path.write_bytes(canonical_bytes(manifest))
+            with self.assertRaisesRegex(ValueError, "binding run.json fields mismatch"):
+                analyze_run(run_dir, plan, authorization, bundle)
+
+    def test_run_directory_symlink_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            run_dir, plan, authorization, bundle = build_fixture(root)
+            linked = root / "linked-run"
+            try:
+                os.symlink(run_dir, linked, target_is_directory=True)
+            except (OSError, NotImplementedError):
+                self.skipTest("symlink creation unavailable")
+            with self.assertRaisesRegex(ValueError, "symlink traversal"):
+                analyze_run(linked, plan, authorization, bundle)
+
+    def test_raw_trailing_record_is_rejected_from_captured_bytes(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            run_dir, plan, authorization, bundle = build_fixture(Path(temp))
+            path = run_dir / "raw_samples.bin"
+            with path.open("ab") as target:
+                target.write(np.array([(999999, 1.0)], dtype=RAW_DTYPE).tobytes())
+            manifest_path = run_dir / "run_manifest.json"
+            manifest = json.loads(manifest_path.read_text())
+            manifest["files"]["raw_samples.bin"] = {
+                "size": path.stat().st_size, "sha256": sha(path),
+            }
+            manifest_path.write_bytes(canonical_bytes(manifest))
+            with self.assertRaisesRegex(ValueError, "raw binary size"):
+                analyze_run(run_dir, plan, authorization, bundle)
+
+    def test_plan_and_nested_window_schemas_are_exact(self) -> None:
+        plan = build_plan(SOURCE_COMMIT)
+        extra = json.loads(json.dumps(plan))
+        extra["unexpected"] = True
+        with self.assertRaisesRegex(ValueError, "plan fields mismatch"):
+            validate_plan_schema(extra, require_full_campaign=True)
+        nested = json.loads(json.dumps(plan))
+        nested["sessions"][0]["windows"][0]["unexpected"] = True
+        with self.assertRaisesRegex(ValueError, "plan window fields mismatch"):
+            validate_plan_schema(nested, require_full_campaign=True)
 
     def test_campaign_requires_exact_reboot_and_route_session_set(self) -> None:
         with self.assertRaisesRegex(ValueError, "complete exact calibration session set"):
