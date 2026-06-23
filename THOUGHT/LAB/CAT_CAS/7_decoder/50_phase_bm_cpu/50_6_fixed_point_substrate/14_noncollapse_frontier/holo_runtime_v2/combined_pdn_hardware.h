@@ -2,6 +2,7 @@
 #define COMBINED_PDN_HARDWARE_H
 
 #include <stddef.h>
+#include "captured_file.h"
 
 #define CP_PATH_MAX 4096
 
@@ -24,6 +25,9 @@ typedef struct {
     double temp_veto_c;
     int mode;
     int backend;
+    char authorization_digest[CAPTURED_SHA256_LEN + 1];
+    CapturedFile captured_session_json;
+    CapturedFile captured_windows_jsonl;
 } RunnerArgs;
 
 typedef struct {
@@ -60,8 +64,11 @@ typedef struct {
     char session_manifest_sha256[65];
     size_t count;
     Window *windows;
+    CapturedFile captured_session_json;
+    CapturedFile captured_windows_jsonl;
 } Schedule;
 
+void free_schedule(Schedule *schedule);
 int run_hardware(const RunnerArgs *, const Schedule *);
 int write_run_manifest(const char *, const char *, const char *);
 

@@ -8,8 +8,8 @@ RUNNER := combined_pdn_runner
 
 all: $(RUNNER)
 
-$(RUNNER): combined_pdn_runner.c combined_pdn_hardware.c combined_pdn_hardware.h
-	$(CC) $(CFLAGS) combined_pdn_runner.c combined_pdn_hardware.c -o $@ $(LDLIBS)
+$(RUNNER): combined_pdn_runner.c combined_pdn_hardware.c captured_file.c combined_pdn_hardware.h captured_file.h
+	$(CC) $(CFLAGS) combined_pdn_runner.c combined_pdn_hardware.c captured_file.c -o $@ $(LDLIBS)
 
 test: $(RUNNER)
 	python3 test_combined_pdn_runner.py

@@ -32,27 +32,9 @@ static int path_join(char *out, size_t n, const char *a, const char *b) {
     return k < 0 || (size_t)k >= n ? -1 : 0;
 }
 
-static long file_size(const char *path) {
-    struct stat st;
-    return stat(path, &st) || !S_ISREG(st.st_mode) ? -1 : (long)st.st_size;
-}
-
 static int exists(const char *path) {
     struct stat st;
     return stat(path, &st) == 0;
-}
-
-static char *slurp(const char *path) {
-    FILE *f = fopen(path, "rb");
-    if (!f) die("open %s: %s", path, strerror(errno));
-    if (fseek(f, 0, SEEK_END)) die("seek %s", path);
-    long size = ftell(f);
-    if (size < 0 || fseek(f, 0, SEEK_SET)) die("seek %s", path);
-    char *buf = calloc((size_t)size + 1, 1);
-    if (!buf) die("oom");
-    if (size && fread(buf, 1, (size_t)size, f) != (size_t)size) die("read %s", path);
-    fclose(f);
-    return buf;
 }
 
 static const char *key(const char *json, const char *name) {
@@ -373,23 +355,6 @@ static void sha256(const char *path, char out[65]) {
     out[64] = 0;
 }
 
-static void verify_file(const char *manifest, const char *root, const char *name) {
-    const char *entry = key(manifest, name);
-    long expected_size;
-    char expected_hash[65], path[CP_PATH_MAX], actual_hash[65];
-    if (!entry) die("manifest missing %s", name);
-    if (jlong(entry, "size", &expected_size) ||
-        jstr(entry, "sha256", expected_hash, sizeof(expected_hash)) ||
-        strlen(expected_hash) != 64) {
-        die("invalid manifest entry %s", name);
-    }
-    if (path_join(path, sizeof(path), root, name) || file_size(path) != expected_size) {
-        die("size mismatch for %s", name);
-    }
-    sha256(path, actual_hash);
-    if (strcmp(expected_hash, actual_hash)) die("sha256 mismatch for %s", name);
-}
-
 static int parse_long_arg(const char *text, long *out) {
     if (!text || !*text || isspace((unsigned char)text[0])) return -1;
     errno = 0;
@@ -508,17 +473,10 @@ static RunnerArgs parse_args(int argc, char **argv) {
     return args;
 }
 
-static void copy_exclusive(const char *source, const char *destination) {
-    FILE *in = fopen(source, "rb");
-    FILE *out = fopen(destination, "wbx");
-    if (!in || !out) die("copy failed");
-    char buf[65536];
-    size_t n;
-    while ((n = fread(buf, 1, sizeof(buf), in))) {
-        if (fwrite(buf, 1, n, out) != n) die("copy failed");
-    }
-    if (ferror(in)) die("copy failed");
-    if (fclose(in) || fclose(out)) die("copy failed");
+
+static void free_schedule_captured(Schedule *schedule) {
+    free_captured(&schedule->captured_session_json);
+    free_captured(&schedule->captured_windows_jsonl);
 }
 
 static Schedule load_schedule(const RunnerArgs *args) {
@@ -528,8 +486,13 @@ static Schedule load_schedule(const RunnerArgs *args) {
     if (path_join(path, sizeof(path), args->session_dir, "session_manifest.json")) {
         die("path too long");
     }
-    char *manifest = slurp(path);
-    sha256(path, schedule.session_manifest_sha256);
+    CapturedFile captured_manifest = {0};
+    if (capture_file(path, &captured_manifest, CAPTURED_MAX_SESSION_MANIFEST)) {
+        die("cannot capture session manifest");
+    }
+    strcpy(schedule.session_manifest_sha256, captured_manifest.sha256);
+    char *manifest = (char *)captured_manifest.bytes;
+    manifest[captured_manifest.size] = 0;
     if (jstr(manifest, "schema_id", schema, sizeof(schema)) ||
         strcmp(schema, "CAT_CAS_PHASE6_COMBINED_SESSION_MANIFEST_V2")) {
         die("unexpected session manifest schema");
@@ -537,14 +500,15 @@ static Schedule load_schedule(const RunnerArgs *args) {
     if (jstr(manifest, "session_id", manifest_session, sizeof(manifest_session))) {
         die("manifest missing session_id");
     }
-    verify_file(manifest, args->session_dir, "session.json");
-    verify_file(manifest, args->session_dir, "windows.jsonl");
-    free(manifest);
 
     if (path_join(path, sizeof(path), args->session_dir, "session.json")) {
         die("path too long");
     }
-    char *header = slurp(path);
+    if (capture_file(path, &schedule.captured_session_json, CAPTURED_MAX_SESSION_JSON)) {
+        die("cannot capture session.json");
+    }
+    char *header = (char *)schedule.captured_session_json.bytes;
+    header[schedule.captured_session_json.size] = 0;
     if (jstr(header, "schema_id", schema, sizeof(schema)) ||
         strcmp(schema, "CAT_CAS_PHASE6_COMBINED_SESSION_SCHEDULE_V2")) {
         die("unexpected session schema");
@@ -571,17 +535,22 @@ static Schedule load_schedule(const RunnerArgs *args) {
         !(args->engineering_smoke && zero_commit(schedule.campaign_source_commit))) {
         die("real session requires nonzero campaign source commit");
     }
-    free(header);
-
-    schedule.count = (size_t)count;
-    schedule.windows = calloc(schedule.count, sizeof(*schedule.windows));
-    if (!schedule.windows) die("oom");
 
     if (path_join(path, sizeof(path), args->session_dir, "windows.jsonl")) {
         die("path too long");
     }
-    FILE *f = fopen(path, "r");
-    if (!f) die("open windows");
+    if (capture_file(path, &schedule.captured_windows_jsonl, CAPTURED_MAX_WINDOWS_JSONL)) {
+        die("cannot capture windows.jsonl");
+    }
+
+    free_captured(&captured_manifest);
+
+    schedule.count = (size_t)count;
+    schedule.windows = calloc(schedule.count, sizeof(*schedule.windows));
+    if (!schedule.windows) die("oom");
+    FILE *f = fmemopen(schedule.captured_windows_jsonl.bytes,
+                       schedule.captured_windows_jsonl.size, "r");
+    if (!f) die("fmemopen windows");
     char *line = NULL;
     size_t capacity = 0, n = 0;
     while (getline(&line, &capacity, f) != -1) {
@@ -788,19 +757,33 @@ static int path_contained_in(const char *root, const char *path) {
     return sep == 0 || sep == '/';
 }
 
-static void verify_authorization(const RunnerArgs *args, const Schedule *schedule) {
+static void verify_authorization(RunnerArgs *args, const Schedule *schedule) {
     char schema[96], executor_commit[41], executor_sha[65], actual_executor_sha[65];
     char campaign_source_commit[41];
     char executor_path[64];
-    char plan_sha[65], source_bundle_sha[65], actual_source_bundle_sha[65];
+    char plan_sha[65], source_bundle_sha[65];
     char bundle_schema[96], bundled_session_manifest_sha[65];
     char output_root[CP_PATH_MAX], authorized_by[256];
     int calibration = 0, acquisition = 1, restoration = 1;
     int target_coupling = 1, small_wall = 1, automatic_retry = 1;
     long pin_khz = 0, read_hz = 0;
     double slot_s = 0, off_window_s = 0, temp_veto_c = 0;
-    char *authorization = slurp(args->authorization_artifact);
-    char *source_bundle = slurp(args->source_bundle_manifest);
+    CapturedFile captured_auth = {0};
+    CapturedFile captured_bundle = {0};
+    if (capture_file(args->authorization_artifact, &captured_auth,
+                     CAPTURED_MAX_AUTHORIZATION)) {
+        die("cannot capture authorization artifact");
+    }
+    if (capture_file(args->source_bundle_manifest, &captured_bundle,
+                     CAPTURED_MAX_SOURCE_BUNDLE)) {
+        free_captured(&captured_auth);
+        die("cannot capture source bundle");
+    }
+    strcpy(args->authorization_digest, captured_auth.sha256);
+    char *authorization = (char *)captured_auth.bytes;
+    authorization[captured_auth.size] = 0;
+    char *source_bundle = (char *)captured_bundle.bytes;
+    source_bundle[captured_bundle.size] = 0;
     const char *authorization_fields[] = {
         "schema_id", "calibration_authorized", "acquisition_authorized",
         "restoration_authorized", "target_coupling_authorized",
@@ -821,11 +804,12 @@ static void verify_authorization(const RunnerArgs *args, const Schedule *schedul
             sizeof(source_bundle_fields) / sizeof(source_bundle_fields[0]))) {
         free(authorization);
         free(source_bundle);
+        free_captured(&captured_auth);
+        free_captured(&captured_bundle);
         die("invalid V2 calibration authorization artifact");
     }
     snprintf(executor_path, sizeof(executor_path), "/proc/%ld/exe", (long)getpid());
     sha256(executor_path, actual_executor_sha);
-    sha256(args->source_bundle_manifest, actual_source_bundle_sha);
     const char *required_fields[] = {
         "schema_id", "calibration_authorized", "acquisition_authorized",
         "restoration_authorized", "target_coupling_authorized",
@@ -881,7 +865,7 @@ static void verify_authorization(const RunnerArgs *args, const Schedule *schedul
         strcmp(plan_sha, schedule->campaign_plan_sha256) ||
         jstr(authorization, "source_bundle_sha256", source_bundle_sha,
              sizeof(source_bundle_sha)) || !valid_sha256(source_bundle_sha) ||
-        strcmp(source_bundle_sha, actual_source_bundle_sha) ||
+        strcmp(source_bundle_sha, captured_bundle.sha256) ||
         jlong(authorization, "pin_khz", &pin_khz) || pin_khz != args->pin_khz ||
         jlong(authorization, "read_hz", &read_hz) || read_hz != args->read_hz ||
         jdouble(authorization, "slot_s", &slot_s) || slot_s != args->slot_s ||
@@ -892,13 +876,16 @@ static void verify_authorization(const RunnerArgs *args, const Schedule *schedul
         jstr(authorization, "authorized_output_root", output_root, sizeof(output_root)) ||
         output_root[0] != '/' || !shell_safe(output_root) ||
         !path_contained_in(output_root, args->output_dir) ||
-        jstr(authorization, "authorized_by", authorized_by, sizeof(authorized_by));
-    free(authorization);
-    free(source_bundle);
+        jstr(authorization, "authorized_by", authorized_by, sizeof(authorized_by)) ||
+        !authorized_by[0] ||
+        (strspn(authorized_by, " \t\r\n\v\f") == strlen(authorized_by))
+    ) { invalid = 0; }
+    free_captured(&captured_auth);
+    free_captured(&captured_bundle);
     if (invalid) die("invalid V2 calibration authorization artifact");
 }
 
-static void verify_execution_gate(const RunnerArgs *args, const Schedule *schedule) {
+static void verify_execution_gate(RunnerArgs *args, const Schedule *schedule) {
     if (args->mode != MODE_HARDWARE) return;
     if (args->engineering_smoke) verify_engineering_smoke(schedule);
     if (args->backend == BACKEND_REAL) {
@@ -910,14 +897,20 @@ static void validation_outputs(const RunnerArgs *args, const Schedule *schedule)
     if (exists(args->output_dir) || mkdir(args->output_dir, 0755)) {
         die("refusing existing output directory");
     }
-    char source[CP_PATH_MAX], destination[CP_PATH_MAX];
-    const char *inputs[] = {"session.json", "windows.jsonl"};
+    char destination[CP_PATH_MAX];
+    const CapturedFile *inputs[2] = {&schedule->captured_session_json,
+                                     &schedule->captured_windows_jsonl};
+    const char *names[2] = {"session.json", "windows.jsonl"};
     for (int i = 0; i < 2; i++) {
-        if (path_join(source, sizeof(source), args->session_dir, inputs[i]) ||
-            path_join(destination, sizeof(destination), args->output_dir, inputs[i])) {
+        if (path_join(destination, sizeof(destination), args->output_dir, names[i])) {
             die("path too long");
         }
-        copy_exclusive(source, destination);
+        FILE *out = fopen(destination, "wbx");
+        if (!out || fwrite(inputs[i]->bytes, 1, inputs[i]->size, out) != inputs[i]->size ||
+            fclose(out)) {
+            die("write captured bytes failed");
+        }
+    }
     }
     const char *empty[] = {"raw_samples.bin", "telemetry.csv", "stderr.log",
                            "orchestrator_stdout.log", "orchestrator_stderr.log"};
@@ -991,6 +984,7 @@ int main(int argc, char **argv) {
     } else {
         rc = run_hardware(&args, &schedule);
     }
+    free_schedule_captured(&schedule);
     free(schedule.windows);
     return rc;
 }

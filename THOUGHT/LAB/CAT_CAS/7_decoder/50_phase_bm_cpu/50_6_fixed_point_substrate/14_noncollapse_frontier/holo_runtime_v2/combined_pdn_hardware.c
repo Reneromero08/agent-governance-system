@@ -752,9 +752,8 @@ static int write_run_json(const RunnerArgs *args, const Schedule *schedule,
     struct utsname system;
     if (uname(&system)) memset(&system, 0, sizeof(system));
     cpu_model(model, sizeof(model));
-    if (args->authorization_artifact &&
-        hash_file(args->authorization_artifact, authorization_digest)) {
-        return -1;
+    if (args->authorization_artifact && args->authorization_digest[0]) {
+        strcpy(authorization_digest, args->authorization_digest);
     }
     if (joinp(path, sizeof(path), args->output_dir, "run.json")) return -1;
     FILE *f = fopen(path, "wx");
@@ -900,27 +899,37 @@ int run_hardware(const RunnerArgs *args, const Schedule *schedule) {
             mock ? "mock" : "real");
     fprintf(orchestrator_out, "V2_RUNNER_DIRECT_EXECUTION\n");
 
-    if (joinp(path, sizeof(path), args->session_dir, "session.json") ||
-        joinp(destination, sizeof(destination), args->output_dir, "session.json")) {
+    if (joinp(destination, sizeof(destination), args->output_dir, "session.json")) {
         reason = "PATH_JOIN_FAILURE";
         rc = 5;
         goto done;
     }
-    if (copy_file(path, destination)) {
-        reason = "INPUT_COPY_FAILURE";
-        rc = 5;
-        goto done;
+    {
+        FILE *out = fopen(destination, "wbx");
+        if (!out || fwrite(args->captured_session_json.bytes, 1,
+                           args->captured_session_json.size, out) !=
+                         args->captured_session_json.size ||
+            fclose(out)) {
+            reason = "INPUT_COPY_FAILURE";
+            rc = 5;
+            goto done;
+        }
     }
-    if (joinp(path, sizeof(path), args->session_dir, "windows.jsonl") ||
-        joinp(destination, sizeof(destination), args->output_dir, "windows.jsonl")) {
+    if (joinp(destination, sizeof(destination), args->output_dir, "windows.jsonl")) {
         reason = "PATH_JOIN_FAILURE";
         rc = 5;
         goto done;
     }
-    if (copy_file(path, destination)) {
-        reason = "INPUT_COPY_FAILURE";
-        rc = 5;
-        goto done;
+    {
+        FILE *out = fopen(destination, "wbx");
+        if (!out || fwrite(args->captured_windows_jsonl.bytes, 1,
+                           args->captured_windows_jsonl.size, out) !=
+                         args->captured_windows_jsonl.size ||
+            fclose(out)) {
+            reason = "INPUT_COPY_FAILURE";
+            rc = 5;
+            goto done;
+        }
     }
 
     if (joinp(path, sizeof(path), args->output_dir, "raw_samples.bin")) {
