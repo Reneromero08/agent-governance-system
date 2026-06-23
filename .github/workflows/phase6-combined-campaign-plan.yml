@@ -77,9 +77,14 @@ jobs:
       - name: Compile V2 strict C executor
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2
         run: |
+          set +e
           gcc -std=c11 -O2 -pthread -Wall -Wextra -Werror \
             combined_pdn_runner.c combined_pdn_hardware.c \
-            -o combined_pdn_runner -lm
+            -o combined_pdn_runner -lm \
+            > "$RUNNER_TEMP/v2_strict_compile.log" 2>&1
+          rc=$?
+          cat "$RUNNER_TEMP/v2_strict_compile.log"
+          exit "$rc"
       - name: Test V2 runner contracts
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2
         run: python -m unittest -v test_combined_pdn_runner.py
@@ -106,7 +111,10 @@ jobs:
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier
         run: python gate_r/verify_combined_plan_binding.py --repo-root "$GITHUB_WORKSPACE" --output "$RUNNER_TEMP/combined_plan"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
         with:
-          name: phase6-combined-campaign-plan-${{ github.run_id }}
-          path: ${{ runner.temp }}/combined_plan
-          if-no-files-found: error
+          name: phase6-v2-diagnostics-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/v2_strict_compile.log
+            ${{ runner.temp }}/combined_plan
+          if-no-files-found: warn
