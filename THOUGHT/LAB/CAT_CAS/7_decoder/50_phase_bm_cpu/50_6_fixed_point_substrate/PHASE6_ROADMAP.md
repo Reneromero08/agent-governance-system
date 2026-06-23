@@ -1,11 +1,11 @@
 # Phase 6 Roadmap
 
-**Role:** master chronological task ledger.  
-**Current head:** `PHASE6B5D_V2_CALIBRATION_ARCHITECTURE_DRAFT__GATE_R_STILL_NEXT`  
-**Binding directive:** `14_noncollapse_frontier/COURSE_CORRECTION.md`, `14_noncollapse_frontier/COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `14_noncollapse_frontier/PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`  
-**Immediate engineering gate:** close V2 qualification Q1 through Q4 and complete independent PR review.  
-**Immediate scientific gate:** Gate R external review and project-owner integration decision remains next.  
-**Next physical control:** reversed/randomized tone order, proposed but not authorized.  
+**Role:** master chronological task ledger.
+**Current head:** `PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_NEXT`
+**Binding directive:** `14_noncollapse_frontier/COURSE_CORRECTION.md`, `14_noncollapse_frontier/COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `14_noncollapse_frontier/PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
+**Immediate engineering gate:** complete independent PR review; V2 qualification Q1 through Q4 are closed.
+**Immediate scientific gate:** Gate R external review and project-owner integration decision remains next.
+**Next physical control:** reversed/randomized tone order, proposed but not authorized.
 **Observability acquisition:** not authorized.
 
 ---
@@ -316,14 +316,32 @@ This is a forward-only engineering lane beneath Gate R. It does not enter Phase 
 - [x] bind source bundle, session manifests, authorization fields, run custody, raw samples, CSV, and telemetry
 - [x] add focused Windows contract, analyzer, and waveform tests
 - [x] add GitHub workflow coverage for `holo_runtime_v2`, V2 Python tests, equivalence, ASan, and UBSan
-- [ ] close strict source and contract defects listed in the V2 engineering addendum Q1
-- [ ] pass the updated V2 GitHub CI lane at the exact final head
-- [ ] pass strict compile, equivalence, sanitizers, and full no-write gate on the Linux target at the exact final head
-- [ ] regenerate generated contracts and the evidence inventory from the final source head
-- [ ] synchronize PR description and all authority documents with final hashes and logs
+- [x] close strict source and contract defects listed in the V2 engineering addendum Q1
+- [x] pass the updated V2 GitHub CI lane at the exact final head
+- [x] pass strict compile, equivalence, sanitizers, and full no-write gate on the Linux target at the exact final head
+- [x] regenerate generated contracts and the evidence inventory from the final source head
+- [x] synchronize PR description and all authority documents with final hashes and logs
 - [ ] complete independent merge review
 
 The current V2 plan uses ascending tone order and qualifies the physical interface. It is not the selected reversed/randomized tone-order scientific control.
+
+Final V2 engineering qualification binding:
+
+```text
+source commit: 329e5a0c1a56595fbfb17cc16c41fcb33faff5a2
+generated contract commit: 70d5aa893db7d93baa86a56d5b1ed128730c2ef3
+raw evidence closure: c81b543ffb74644a35aa97605ca47fa9ec89c76c
+command evidence closure: f531ac8016c9c95141ed1c0ec180bcd01370d346
+plan SHA-256: f6d7cd314a0b614d80f520f92df13b0bd52f222e4b2fd7b53c09229bc49df48d
+source-bundle SHA-256: 5764f7d391e16624e1a5861f9b7056ad4bbfe8227b2a2731da965626f200ee2b
+unique functional test cases: 78
+total unittest executions: 194
+Windows tested SHA: 70d5aa893db7d93baa86a56d5b1ed128730c2ef3
+Linux tested SHA: 70d5aa893db7d93baa86a56d5b1ed128730c2ef3
+independent PR review: pending
+Gate R: pending
+Phase 6B.6: not entered
+```
 
 Binding addendum:
 

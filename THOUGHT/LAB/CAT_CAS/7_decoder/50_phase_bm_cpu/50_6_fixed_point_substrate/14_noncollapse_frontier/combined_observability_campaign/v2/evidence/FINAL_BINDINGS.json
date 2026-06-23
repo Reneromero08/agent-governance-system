@@ -53,7 +53,18 @@
   "provenance": {
     "b7563e5f": "retained source provenance",
     "93f28c5d": "superseded",
-    "339c9fb8": "incomplete evidence provenance"
+    "339c9fb8": "incomplete evidence provenance",
+    "f524e023": "incomplete evidence-correction provenance",
+    "c81b543f": "raw evidence persistence and count correction",
+    "f531ac80": "command evidence closure"
   },
-  "raw_evidence_closure_commit": "c81b543ffb74644a35aa97605ca47fa9ec89c76c"
+  "raw_evidence_closure_commit": "c81b543ffb74644a35aa97605ca47fa9ec89c76c",
+  "prior_incomplete_evidence_correction_commit": "f524e0230ed46b56b93dffe6b37f446d6602df0c",
+  "command_evidence_closure_commit": "f531ac8016c9c95141ed1c0ec180bcd01370d346",
+  "authority_status": {
+    "state": "PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_NEXT",
+    "independent_pr_review": "pending",
+    "gate_r": "pending",
+    "phase6b6": "not_entered"
+  }
 }
