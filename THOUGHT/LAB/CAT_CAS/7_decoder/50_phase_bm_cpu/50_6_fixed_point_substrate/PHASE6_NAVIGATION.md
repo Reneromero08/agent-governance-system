@@ -1,8 +1,8 @@
 # Phase 6 Navigation
 
-**Role:** canonical entry point for the Phase 6 directory.  
-**Current state:** `PHASE6B5D_V2_CALIBRATION_ARCHITECTURE_DRAFT__GATE_R_STILL_NEXT`  
-**Active directives:** `14_noncollapse_frontier/COURSE_CORRECTION.md`, `14_noncollapse_frontier/COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `14_noncollapse_frontier/PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`  
+**Role:** canonical entry point for the Phase 6 directory.
+**Current state:** `PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_NEXT`
+**Active directives:** `14_noncollapse_frontier/COURSE_CORRECTION.md`, `14_noncollapse_frontier/COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `14_noncollapse_frontier/PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
 **Active roadmap:** `PHASE6_ROADMAP.md`
 
 ---
@@ -59,6 +59,25 @@ The current V2 plan uses ascending tone order. It qualifies the interface and do
 
 ---
 
+## Current V2 authority binding
+
+```text
+status: PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_NEXT
+source: 329e5a0c1a56595fbfb17cc16c41fcb33faff5a2
+generated contracts: 70d5aa893db7d93baa86a56d5b1ed128730c2ef3
+raw evidence: c81b543ffb74644a35aa97605ca47fa9ec89c76c
+command evidence: f531ac8016c9c95141ed1c0ec180bcd01370d346
+plan SHA-256: f6d7cd314a0b614d80f520f92df13b0bd52f222e4b2fd7b53c09229bc49df48d
+source-bundle SHA-256: 5764f7d391e16624e1a5861f9b7056ad4bbfe8227b2a2731da965626f200ee2b
+independent PR review: pending
+Gate R: pending
+Phase 6B.6: not entered
+hardware_ran: false
+authorization_artifact_created: false
+```
+
+---
+
 ## Status at a glance
 
 | # | Directory | Role | Current status |
@@ -76,7 +95,7 @@ The current V2 plan uses ascending tone order. It qualifies the interface and do
 | 11 | `pdn_catalytic_tape` | Simulation/hardware-gap analysis | Complete |
 | 12 | `chiral_lane_frontier` | Phase 6A public lane boundary | Closed |
 | 13 | `substrate_frontier` | Tape/fixed-point warmup and L4 rejection | Historical/corrected |
-| 14 | `noncollapse_frontier` | Active Phase 6B architecture and physical ladder | Phase 6B.5D frozen; V2 qualification draft; Gate R still next |
+| 14 | `noncollapse_frontier` | Active Phase 6B architecture and physical ladder | Phase 6B.5D frozen; V2 engineering qualification complete; independent PR review next; Gate R still next |
 
 ---
 

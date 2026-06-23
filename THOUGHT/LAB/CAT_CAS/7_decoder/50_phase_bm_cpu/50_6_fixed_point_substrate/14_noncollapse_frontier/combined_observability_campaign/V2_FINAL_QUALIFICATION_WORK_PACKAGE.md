@@ -1,14 +1,41 @@
 # Phase 6 V2 Final Qualification Work Package
 
-**Status:** `CONNECTOR_AUDIT_COMPLETE__LOCAL_MATERIALIZATION_AND_LINUX_REQUIRED`  
-**Branch:** `codex/phase6-v1-adjudication-v2`  
-**Audited source-only repair proof:** GitHub Actions run `28015182641`, run number `15`  
-**PR:** `#21`, draft and unmerged  
-**Hardware calibration authorized:** false  
-**Scientific acquisition authorized:** false  
-**Restoration authorized:** false  
-**Target coupling authorized:** false  
+**Status:** `PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_NEXT`
+**Branch:** `codex/phase6-v1-adjudication-v2`
+**Audited source-only repair proof:** GitHub Actions run `28015182641`, run number `15`
+**PR:** `#21`, draft and unmerged
+**Final source commit:** `329e5a0c1a56595fbfb17cc16c41fcb33faff5a2`
+**Final generated-contract commit:** `70d5aa893db7d93baa86a56d5b1ed128730c2ef3`
+**Raw evidence closure:** `c81b543ffb74644a35aa97605ca47fa9ec89c76c`
+**Command evidence closure:** `f531ac8016c9c95141ed1c0ec180bcd01370d346`
+**Plan SHA-256:** `f6d7cd314a0b614d80f520f92df13b0bd52f222e4b2fd7b53c09229bc49df48d`
+**Source-bundle SHA-256:** `5764f7d391e16624e1a5861f9b7056ad4bbfe8227b2a2731da965626f200ee2b`
+**Hardware calibration authorized:** false
+**Scientific acquisition authorized:** false
+**Restoration authorized:** false
+**Target coupling authorized:** false
 **Small Wall execution authorized:** false
+
+---
+
+## Completion record
+
+This work package is retained as the execution and audit history for a completed engineering qualification.
+
+```text
+status: PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_NEXT
+source commit: 329e5a0c1a56595fbfb17cc16c41fcb33faff5a2
+generated-contract commit: 70d5aa893db7d93baa86a56d5b1ed128730c2ef3
+raw evidence closure: c81b543ffb74644a35aa97605ca47fa9ec89c76c
+command evidence closure: f531ac8016c9c95141ed1c0ec180bcd01370d346
+unique functional test cases: 78
+total unittest executions: 194
+independent PR review: pending
+Gate R: pending
+Phase 6B.6: not entered
+```
+
+No hardware calibration or scientific acquisition ran. All scientific authorization fields remain false.
 
 ---
 

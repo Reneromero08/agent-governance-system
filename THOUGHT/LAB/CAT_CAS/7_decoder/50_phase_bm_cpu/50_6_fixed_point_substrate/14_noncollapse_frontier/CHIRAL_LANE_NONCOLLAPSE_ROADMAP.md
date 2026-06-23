@@ -1,10 +1,10 @@
 # Phase 6B Non-Collapse Frontier Roadmap
 
-**Status:** `V2_CALIBRATION_ARCHITECTURE_DRAFT__GATE_R_STILL_NEXT`  
-**Binding directives:** `COURSE_CORRECTION.md`, `COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`  
-**Immediate engineering gate:** V2 qualification Q1 through Q4 and independent PR review  
-**Immediate scientific gate:** Gate R external review and project-owner integration decision  
-**Next physical control:** reversed/randomized tone order, proposed but unauthorized  
+**Status:** `PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_NEXT`
+**Binding directives:** `COURSE_CORRECTION.md`, `COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
+**Immediate engineering gate:** independent PR review; V2 qualification Q1 through Q4 are complete
+**Immediate scientific gate:** Gate R external review and project-owner integration decision
+**Next physical control:** reversed/randomized tone order, proposed but unauthorized
 **Observability implementation authorization:** false
 
 **THE ALGORITHM IS DEAD.** The unresolved relation is the object; scalar traversal is local and subordinate.
@@ -269,16 +269,32 @@ The V2 lane qualifies a corrected physical interface without promoting it into o
 - [x] raw, CSV, telemetry, run-manifest, and source-bundle custody
 - [x] focused local contract, analyzer, and waveform tests
 - [x] GitHub workflow updated to exercise V2 Python, strict C, equivalence, ASan, and UBSan lanes
-- [ ] strict command-line and authorization parser closure
-- [ ] mechanical runtime/plan threshold binding
-- [ ] exact capture-quality and schema closure
-- [ ] immutable run-root directory and symlink rejection
-- [ ] exact final-head GitHub CI pass
-- [ ] exact final-head target-toolchain and sanitizer pass
-- [ ] regenerated contracts and final evidence inventory
+- [x] strict command-line and authorization parser closure
+- [x] mechanical runtime/plan threshold binding
+- [x] exact capture-quality and schema closure
+- [x] immutable run-root directory and symlink rejection
+- [x] exact final-head GitHub CI pass
+- [x] exact final-head target-toolchain and sanitizer pass
+- [x] regenerated contracts and final evidence inventory
 - [ ] independent merge review
 
 The current V2 schedule is ascending-order engineering calibration. It is not the reversed/randomized tone-order scientific control.
+
+Final engineering qualification binding:
+
+```text
+source commit: 329e5a0c1a56595fbfb17cc16c41fcb33faff5a2
+generated contract commit: 70d5aa893db7d93baa86a56d5b1ed128730c2ef3
+raw evidence closure: c81b543ffb74644a35aa97605ca47fa9ec89c76c
+command evidence closure: f531ac8016c9c95141ed1c0ec180bcd01370d346
+plan SHA-256: f6d7cd314a0b614d80f520f92df13b0bd52f222e4b2fd7b53c09229bc49df48d
+source-bundle SHA-256: 5764f7d391e16624e1a5861f9b7056ad4bbfe8227b2a2731da965626f200ee2b
+unique functional test cases: 78
+total unittest executions: 194
+independent PR review: pending
+Gate R: pending
+Phase 6B.6: not entered
+```
 
 ### Gate R — L4B.5B0 external human review
 
@@ -286,7 +302,7 @@ Prerequisites:
 
 - [x] carrier scope frozen at the derived transfer-aware ceiling
 - [x] Phase 6B.5C/5D outputs bound to exact evidence
-- [ ] V2 engineering lane closed cleanly or explicitly excluded from the integration decision
+- [x] V2 engineering lane closed cleanly for independent integration review
 
 Review remains non-authorizing.
 
