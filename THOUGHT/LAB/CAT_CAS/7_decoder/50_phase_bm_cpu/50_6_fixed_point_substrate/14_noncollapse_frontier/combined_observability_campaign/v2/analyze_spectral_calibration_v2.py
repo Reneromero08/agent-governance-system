@@ -65,7 +65,36 @@ def read_rows(path: Path) -> list[dict[str, Any]]:
 
 def read_csv(path: Path) -> list[dict[str, str]]:
     with path.open(newline="", encoding="utf-8") as source:
-        return list(csv.DictReader(source))
+        reader = csv.DictReader(source)
+        actual = tuple(reader.fieldnames) if reader.fieldnames else ()
+        return list(reader)
+
+
+def read_csv_strict(path: Path, required_columns: tuple[str, ...]) -> list[dict[str, str]]:
+    with path.open(newline="", encoding="utf-8") as source:
+        reader = csv.DictReader(source)
+        actual = tuple(reader.fieldnames) if reader.fieldnames else ()
+        if actual != required_columns:
+            raise ValueError(
+                f"CSV column mismatch in {path.name}: "
+                f"expected {required_columns}, got {actual}"
+            )
+        return list(reader)
+
+
+def read_telemetry(path: Path) -> list[dict[str, str]]:
+    with path.open(newline="", encoding="utf-8") as source:
+        reader = csv.DictReader(source)
+        actual = tuple(reader.fieldnames) if reader.fieldnames else ()
+        if actual != TELEMETRY_COLUMNS:
+            raise ValueError(
+                f"telemetry column mismatch: expected {TELEMETRY_COLUMNS}, got {actual}"
+            )
+        rows = list(reader)
+    for i, row in enumerate(rows):
+        if int(row["window_index"]) != i:
+            raise ValueError(f"telemetry window_index not contiguous: row {i}")
+    return rows
 
 
 def as_int(value: str, field: str) -> int:
@@ -216,7 +245,8 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
     run = load_json(run_dir / "run.json")
     session = load_json(run_dir / "session.json")
     schedule = read_rows(run_dir / "windows.jsonl")
-    results = read_csv(run_dir / "window_results.csv")
+    results = read_csv_strict(run_dir / "window_results.csv", WINDOW_RESULTS_COLUMNS)
+    telemetry_rows = read_telemetry(run_dir / "telemetry.csv")
     plan_digest = hashlib.sha256(canonical_bytes(plan)).hexdigest()
     authorization = dict(authorization)
     authorization_digest = authorization_sha256 or authorization.pop("artifact_sha256", None)
@@ -276,6 +306,20 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
     for key, expected in FALSE_AUTHORIZATIONS.items():
         if run.get(key) is not expected:
             raise ValueError(f"calibration evidence cannot set {key}")
+
+    if len(telemetry_rows) != len(results):
+        raise ValueError("telemetry row count must match window count")
+    telemetry_fields = (
+        "temp_before_c", "temp_after_c",
+        "victim_frequency_before_khz", "victim_frequency_after_khz",
+        "sender_frequency_before_khz", "sender_frequency_after_khz",
+        "aperf_before", "aperf_after", "mperf_before", "mperf_after",
+        "cofvid_before", "cofvid_after",
+    )
+    for i, (trow, wrow) in enumerate(zip(telemetry_rows, results)):
+        for field in telemetry_fields:
+            if trow.get(field) != wrow.get(field):
+                raise ValueError(f"telemetry mismatch at window {i}, field {field}")
 
     raw_path = run_dir / "raw_samples.bin"
     counts = np.asarray([int(row["sample_count"]) for row in results], dtype=np.int64)

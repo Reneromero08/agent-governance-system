@@ -115,6 +115,10 @@ static const char *object_value(const char *start, const char *end, const char *
     return found < end ? found : NULL;
 }
 
+static int token_end(char c) {
+    return c == 0 || c == ',' || c == '}' || c == ']' || isspace((unsigned char)c);
+}
+
 static int object_string(const char *json, const char *object_name,
                          const char *member, char *out, size_t size) {
     const char *start, *end;
@@ -204,10 +208,6 @@ static int exact_singleton_string_array(const char *json, const char *name,
     p = end + 1;
     while (isspace((unsigned char)*p)) p++;
     return *p == ']' ? 0 : -1;
-}
-
-static int token_end(char c) {
-    return c == 0 || c == ',' || c == '}' || c == ']' || isspace((unsigned char)c);
 }
 
 static int jstr(const char *json, const char *name, char *out, size_t n) {

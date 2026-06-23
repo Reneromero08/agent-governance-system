@@ -1257,8 +1257,8 @@ int run_hardware(const RunnerArgs *args, const Schedule *schedule) {
                 goto cleanup;
             }
             double max_nyquist = frequency;
-            double off_nyq = control_frequency_hz(frequency);
-            if (off_nyq > max_nyquist) max_nyquist = off_nyquist;
+            double off_nyquist = control_frequency_hz(frequency);
+            if (off_nyquist > max_nyquist) max_nyquist = off_nyquist;
             double nyquist_margin = max_nyquist > 0 ?
                 empirical_rate / (2.0 * max_nyquist) : 0;
             if (!isfinite(nyquist_margin) ||

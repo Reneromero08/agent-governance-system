@@ -14,6 +14,7 @@ import numpy as np
 from analyze_spectral_calibration_v2 import (
     RAW_DTYPE,
     RUN_FILES,
+    WINDOW_RESULTS_COLUMNS,
     analyze_campaign,
     analyze_run,
     construct_complete_grid,
@@ -196,6 +197,10 @@ def build_full_campaign_fixture(root: Path, *, mutate=None) -> tuple[Path, Path,
                     "computed_Q": response.imag,
                     "magnitude": abs(response),
                     "floor": abs(off_bin),
+                    "raw_mean": 50.0, "raw_min": 0.0, "raw_max": 100.0,
+                    "aperf_before": 0, "aperf_after": 0,
+                    "mperf_before": 0, "mperf_after": 0,
+                    "cofvid_before": 0, "cofvid_after": 0,
                     "sender_started": 1,
                     "sender_stopped": 1,
                     "sender_alive_at_capture": 1,
@@ -229,6 +234,10 @@ def build_full_campaign_fixture(root: Path, *, mutate=None) -> tuple[Path, Path,
                     "computed_Q": "null",
                     "magnitude": "null",
                     "floor": "null",
+                    "raw_mean": "null", "raw_min": "null", "raw_max": "null",
+                    "aperf_before": 0, "aperf_after": 0,
+                    "mperf_before": 0, "mperf_after": 0,
+                    "cofvid_before": 0, "cofvid_after": 0,
                     "sender_started": 0,
                     "sender_stopped": 1,
                     "sender_alive_at_capture": 0,
@@ -239,7 +248,7 @@ def build_full_campaign_fixture(root: Path, *, mutate=None) -> tuple[Path, Path,
         raw = np.array(raw_records, dtype=RAW_DTYPE)
         raw.tofile(run_dir / "raw_samples.bin")
         with (run_dir / "window_results.csv").open("w", newline="", encoding="utf-8") as target:
-            writer = csv.DictWriter(target, fieldnames=list(rows[0]))
+            writer = csv.DictWriter(target, fieldnames=list(WINDOW_RESULTS_COLUMNS))
             writer.writeheader()
             writer.writerows(rows)
         (run_dir / "telemetry.csv").write_text(
@@ -361,6 +370,10 @@ def build_fixture(root: Path):
         "sender_started": 0, "sender_stopped": 1,
         "sender_alive_at_capture": 0, "computed_I": "null",
         "computed_Q": "null", "magnitude": "null", "floor": "null",
+        "raw_mean": "null", "raw_min": "null", "raw_max": "null",
+        "aperf_before": 0, "aperf_after": 0,
+        "mperf_before": 0, "mperf_after": 0,
+        "cofvid_before": 0, "cofvid_after": 0,
         "window_status": "OK",
     }
     for key, value in window.items():
@@ -380,7 +393,7 @@ def build_fixture(root: Path):
             else:
                 result_row[key] = value
     with (run_dir / "window_results.csv").open("w", newline="", encoding="utf-8") as target:
-        writer = csv.DictWriter(target, fieldnames=list(result_row))
+        writer = csv.DictWriter(target, fieldnames=list(WINDOW_RESULTS_COLUMNS))
         writer.writeheader(); writer.writerow(result_row)
     run = {
         "session_id": session_id, "route": "v4s5", "campaign_plan_sha256": plan_digest,
@@ -404,7 +417,10 @@ def build_fixture(root: Path):
         "sender_frequency_before_khz,sender_frequency_after_khz,"
         "aperf_before,aperf_after,mperf_before,mperf_after,"
         "cofvid_before,cofvid_after\n"
-        "0,40.000000,41.000000,1600000,1600000,1600000,1600000,0,0,0,0,0,0\n",
+        f"0,{result_row['temp_before_c']},{result_row['temp_after_c']},"
+        f"{result_row['victim_frequency_before_khz']},{result_row['victim_frequency_after_khz']},"
+        f"{result_row['sender_frequency_before_khz']},{result_row['sender_frequency_after_khz']},"
+        "0,0,0,0,0,0\n",
         encoding="utf-8",
     )
     for name in RUN_FILES - {
