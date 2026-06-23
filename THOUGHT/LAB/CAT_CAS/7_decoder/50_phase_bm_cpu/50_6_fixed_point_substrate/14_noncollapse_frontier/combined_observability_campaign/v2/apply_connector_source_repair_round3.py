@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import base64
+import subprocess
+import sys
 import zlib
 from pathlib import Path
 
@@ -91,6 +93,11 @@ def main() -> int:
 ''',
     )
 
+    round4 = HERE / "apply_connector_source_repair_round4.py"
+    if round4.exists():
+        completed = subprocess.run([sys.executable, str(round4)], check=False)
+        if completed.returncode:
+            return completed.returncode
     print("ROUND3_APPLIED" if changed else "ROUND3_ALREADY_PRESENT")
     return 0
 
