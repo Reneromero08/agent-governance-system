@@ -37,3 +37,21 @@ jobs:
         run: |
           gcc -std=c11 -O1 -g -pthread -Wall -Wextra -Werror -fsanitize=address,undefined -fno-omit-frame-pointer combined_pdn_runner.c combined_pdn_hardware.c -o combined_pdn_runner -lm
           ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 python -m unittest -v test_combined_pdn_runner.py test_waveform_equivalence.py
+      - name: Freeze exact V2 source snapshot
+        if: always()
+        run: |
+          git show -s --format=%H HEAD > "$RUNNER_TEMP/head_sha.txt"
+          git show -s --format=%T HEAD > "$RUNNER_TEMP/tree_sha.txt"
+          tar -czf "$RUNNER_TEMP/v2_source_snapshot.tgz" \
+            .github/workflows/phase6-v2-strict-qualification.yml \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/v2 \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: phase6-v2-source-snapshot-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/head_sha.txt
+            ${{ runner.temp }}/tree_sha.txt
+            ${{ runner.temp }}/v2_source_snapshot.tgz
+          if-no-files-found: error
