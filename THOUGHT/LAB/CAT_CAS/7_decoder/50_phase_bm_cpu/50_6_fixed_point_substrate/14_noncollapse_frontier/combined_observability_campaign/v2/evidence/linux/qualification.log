@@ -1,0 +1,40 @@
+Phase 6 V2 Linux Qualification — Phenom II (catcas)
+========================================================
+Date: 2026-06-23
+Tested SHA: 70d5aa893db7d93baa86a56d5b1ed128730c2ef3
+Source commit: 329e5a0c1a56595fbfb17cc16c41fcb33faff5a2
+Plan SHA-256: f6d7cd314a0b614d80f520f92df13b0bd52f222e4b2fd7b53c09229bc49df48d
+Bundle SHA-256: 5764f7d391e16624e1a5861f9b7056ad4bbfe8227b2a2731da965626f200ee2b
+
+Host: catcas (Phenom II X6)
+OS: Debian GNU/Linux 13 (trixie)
+Kernel: 6.12.86+deb13-amd64
+gcc: 14.2.0 (Debian 14.2.0-19)
+Python: 3.13.5
+NumPy: 2.2.4
+
+RESULTS
+-------
+Strict C compile (-std=c11 -O2 -pthread -Wall -Wextra -Werror): PASSED (0 errors, 0 warnings)
+Runner tests: 36/36 passed
+Waveform equivalence (C/Python): 2/2 passed
+Slot2 primitive identity: 1/1 passed
+Capture-quality rejection matrix: PASSED
+
+Sanitizers:
+  ASan runner: 36/36 passed, 0 findings
+  UBSan runner: 36/36 passed, 0 findings
+  ASan waveform equivalence: 2/2 passed, 0 findings
+
+Python V2:
+  Calibration contracts: 7/7 passed
+  Receiver schedule: 2/2 passed
+  Spectral analyzer: 13/13 passed
+  Waveform reference: 9/9 passed (incl. exact discrete 8-state DFT)
+  Frozen artifact binding: 7/7 passed
+
+TOTAL: 126 tests, 126 passed, 0 errors, 0 sanitizer findings
+
+hardware_ran=false
+authorization_artifact_created=false
+all scientific authorization fields remain false
