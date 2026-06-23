@@ -35,6 +35,9 @@ Raw logs: evidence/linux/00-14, evidence/windows/00-03
 Machine-derived counts: evidence/TEST_COUNTS.json
 Bindings: evidence/FINAL_BINDINGS.json
 Commands: evidence/COMMANDS.jsonl
+Command ledger entries: 16 (13 Linux, 3 Windows)
+Per-command timestamps: not recorded in the raw command logs; COMMANDS.jsonl uses null timestamps and preserves environment timestamps only.
+Windows command provenance: prior committed ledger c81b543f plus the binding work package; result output is preserved in the committed Windows logs.
 Inventory: evidence/EVIDENCE_INVENTORY.sha256
 
 hardware_ran: false

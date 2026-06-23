@@ -66,5 +66,13 @@
     "independent_pr_review": "pending",
     "gate_r": "pending",
     "phase6b6": "not_entered"
+  },
+  "command_ledger": {
+    "entry_count": 16,
+    "linux_entry_count": 13,
+    "windows_entry_count": 3,
+    "per_command_timestamps_recorded": false,
+    "timestamp_policy": "timestamp is null when the raw command log did not record command start time; environment_timestamp preserves only the captured environment timestamp",
+    "windows_command_provenance": "prior committed ledger c81b543f plus the binding work package; result output is preserved in committed Windows logs"
   }
 }
