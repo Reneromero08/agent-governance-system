@@ -33,6 +33,7 @@ def authorization(plan_digest: str, bundle: dict) -> dict:
         "campaign_plan_sha256": plan_digest,
         "executor_commit": "b" * 40,
         "executor_sha256": "c" * 64,
+        "campaign_source_commit": "b" * 40,
         "source_bundle_sha256": hashlib.sha256(canonical_bytes(bundle)).hexdigest(),
         "session_ids": list(bundle["sessions"]),
         "route_cores": ROUTE_CORES,
@@ -50,18 +51,19 @@ class CalibrationContractTests(unittest.TestCase):
     def test_plan_is_exact_complete_and_non_authorizing(self) -> None:
         plan = build_plan()
         self.assertEqual(plan["session_count"], 4)
-        self.assertEqual(plan["windows_per_session"], 588)
-        self.assertEqual(plan["windows_per_route"], {"v4s5": 1176, "v2s3": 1176})
-        self.assertEqual(plan["total_window_count"], 2352)
+        self.assertEqual(plan["windows_per_session"], 672)
+        self.assertEqual(plan["windows_per_route"], {"v4s5": 1344, "v2s3": 1344})
+        self.assertEqual(plan["total_window_count"], 2688)
+        self.assertEqual(plan["campaign_source_commit"], "b" * 40)
         self.assertFalse(plan["calibration_authorized"])
         for key, value in FALSE_AUTHORIZATIONS.items():
             self.assertIs(plan[key], value)
         for session in plan["sessions"]:
             rows = session["windows"]
-            self.assertEqual(len(rows), 588)
-            self.assertEqual([row["window_index"] for row in rows], list(range(588)))
+            self.assertEqual(len(rows), 672)
+            self.assertEqual([row["window_index"] for row in rows], list(range(672)))
             self.assertEqual(sum(row["drive_on"] for row in rows), 576)
-            self.assertEqual(sum(row["sender_off_required"] for row in rows), 12)
+            self.assertEqual(sum(row["sender_off_required"] for row in rows), 96)
             self.assertEqual({row["physical_tone_index"] for row in rows if row["drive_on"]}, set(range(12)))
             self.assertEqual({row["amplitude_level"] for row in rows if row["drive_on"]}, {1, 2, 3})
             self.assertEqual({row["receiver_theta_idx"] for row in rows if row["drive_on"]}, set(range(8)))
@@ -74,6 +76,17 @@ class CalibrationContractTests(unittest.TestCase):
             }
             self.assertEqual(len(conditions), 12 * 3 * 8 * 2)
             self.assertEqual(len(conditions), len(driven))
+            for tone in range(12):
+                controls = [
+                    row for row in rows
+                    if row["sender_off_required"] and
+                    row["sender_off_control_for_tone_index"] == tone
+                ]
+                self.assertEqual(len(controls), 8)
+                self.assertEqual(
+                    {row["sender_off_control_theta_idx"] for row in controls},
+                    set(range(8)),
+                )
             for row in driven:
                 self.assertIn(
                     row["sender_codeword_source_index"],
@@ -146,6 +159,7 @@ class CalibrationContractTests(unittest.TestCase):
         cases = {
             "executor_commit": "A" * 40,
             "executor_sha256": "g" * 64,
+            "campaign_source_commit": "0" * 40,
             "authorized_by": "  ",
             "authorized_output_root": "relative/output",
         }

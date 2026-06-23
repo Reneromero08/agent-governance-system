@@ -251,6 +251,10 @@ static int valid_commit(const char *commit) {
     return nonzero;
 }
 
+static int zero_commit(const char *commit) {
+    return commit && strlen(commit) == 40 && strspn(commit, "0") == 40;
+}
+
 static int valid_sha256(const char *digest) {
     if (!digest || strlen(digest) != 64) return 0;
     for (size_t i = 0; i < 64; i++) {
@@ -474,6 +478,10 @@ static Schedule load_schedule(const RunnerArgs *args) {
         jbool(header, "restoration_authorized", &restoration) || restoration) {
         die("invalid session header");
     }
+    if (!valid_commit(schedule.campaign_source_commit) &&
+        !(args->engineering_smoke && zero_commit(schedule.campaign_source_commit))) {
+        die("real session requires nonzero campaign source commit");
+    }
     free(header);
 
     schedule.count = (size_t)count;
@@ -650,6 +658,7 @@ static void verify_engineering_smoke(const Schedule *schedule) {
 
 static void verify_authorization(const RunnerArgs *args, const Schedule *schedule) {
     char schema[96], executor_commit[41], executor_sha[65], actual_executor_sha[65];
+    char campaign_source_commit[41];
     char executor_path[64];
     char plan_sha[65], source_bundle_sha[65], actual_source_bundle_sha[65];
     char bundle_schema[96], bundled_session_manifest_sha[65];
@@ -667,9 +676,10 @@ static void verify_authorization(const RunnerArgs *args, const Schedule *schedul
         "schema_id", "calibration_authorized", "acquisition_authorized",
         "restoration_authorized", "target_coupling_authorized",
         "small_wall_authorized", "automatic_retry", "executor_commit",
-        "executor_sha256", "source_bundle_sha256", "campaign_plan_sha256",
-        "session_ids", "route_cores", "pin_khz", "slot_s", "off_window_s",
-        "read_hz", "temperature_veto_c", "authorized_output_root", "authorized_by"
+        "executor_sha256", "campaign_source_commit", "source_bundle_sha256",
+        "campaign_plan_sha256", "session_ids", "route_cores", "pin_khz",
+        "slot_s", "off_window_s", "read_hz", "temperature_veto_c",
+        "authorized_output_root", "authorized_by"
     };
     int unique = 1;
     for (size_t i = 0; i < sizeof(required_fields) / sizeof(required_fields[0]); i++) {
@@ -709,6 +719,10 @@ static void verify_authorization(const RunnerArgs *args, const Schedule *schedul
         strcmp(executor_commit, args->executor_commit) ||
         jstr(authorization, "executor_sha256", executor_sha, sizeof(executor_sha)) ||
         strcmp(executor_sha, actual_executor_sha) ||
+        jstr(authorization, "campaign_source_commit", campaign_source_commit,
+             sizeof(campaign_source_commit)) ||
+        !valid_commit(campaign_source_commit) ||
+        strcmp(campaign_source_commit, schedule->campaign_source_commit) ||
         jstr(authorization, "campaign_plan_sha256", plan_sha, sizeof(plan_sha)) ||
         strcmp(plan_sha, schedule->campaign_plan_sha256) ||
         jstr(authorization, "source_bundle_sha256", source_bundle_sha,

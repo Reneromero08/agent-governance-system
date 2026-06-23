@@ -950,14 +950,17 @@ int run_hardware(const RunnerArgs *args, const Schedule *schedule) {
             "slot_start_tsc,capture_deadline_tsc,sender_ready_tsc,"
             "sender_epoch_tsc,first_drive_tsc,receiver_epoch_tsc,"
             "first_sample_tsc,last_sample_tsc,sample_count,temp_before_c,"
-            "temp_after_c,frequency_before_khz,frequency_after_khz,"
+            "temp_after_c,victim_frequency_before_khz,victim_frequency_after_khz,"
+            "sender_frequency_before_khz,sender_frequency_after_khz,"
             "aperf_before,aperf_after,mperf_before,mperf_after,cofvid_before,"
             "cofvid_after,computed_I,computed_Q,magnitude,floor,raw_mean,"
             "raw_min,raw_max,sender_started,sender_stopped,"
             "sender_alive_at_capture,window_status\n");
     fprintf(telemetry,
-            "window_index,temp_before_c,temp_after_c,frequency_before_khz,"
-            "frequency_after_khz,aperf_before,aperf_after,mperf_before,"
+            "window_index,temp_before_c,temp_after_c,"
+            "victim_frequency_before_khz,victim_frequency_after_khz,"
+            "sender_frequency_before_khz,sender_frequency_after_khz,"
+            "aperf_before,aperf_after,mperf_before,"
             "mperf_after,cofvid_before,cofvid_after\n");
 
     if (injected("thermal")) {
@@ -1048,7 +1051,8 @@ int run_hardware(const RunnerArgs *args, const Schedule *schedule) {
         }
 
         double temp_before = mock ? 42 : temperature();
-        long freq_before = mock ? args->pin_khz : cur_khz(args->victim);
+        long victim_freq_before = mock ? args->pin_khz : cur_khz(args->victim);
+        long sender_freq_before = mock ? args->pin_khz : cur_khz(args->sender);
         uint64_t aperf_before = 0, mperf_before = 0, aperf_after = 0, mperf_after = 0;
         uint64_t cofvid_before = 0, cofvid_after = 0;
         if (!mock &&
@@ -1242,7 +1246,8 @@ int run_hardware(const RunnerArgs *args, const Schedule *schedule) {
         mean /= count;
 
         double temp_after = mock ? 42 : temperature();
-        long freq_after = mock ? args->pin_khz : cur_khz(args->victim);
+        long victim_freq_after = mock ? args->pin_khz : cur_khz(args->victim);
+        long sender_freq_after = mock ? args->pin_khz : cur_khz(args->sender);
         if (!mock &&
             (msr_read(args->victim, MSR_APERF, &aperf_after) ||
              msr_read(args->victim, MSR_MPERF, &mperf_after) ||
@@ -1257,7 +1262,7 @@ int run_hardware(const RunnerArgs *args, const Schedule *schedule) {
         fprintf(csv,
                 "%ld,%s,%s,%s,%s,%s,%s,%s,%s,%d,%d,%d,%d,%d,%s,%d,%d,%d,%d,%s,"
                 "%llu,%llu,%llu,%llu,%llu,%llu,%llu,%llu,%d,%.6f,%.6f,"
-                "%ld,%ld,%llu,%llu,%llu,%llu,%d,%d,",
+                "%ld,%ld,%ld,%ld,%llu,%llu,%llu,%llu,%d,%d,",
                 window->window_index, window->session_id, window->stage,
                 window->block_id, window->family, window->actual_mode,
                 window->declared_mode, window->executed_tone_order,
@@ -1275,7 +1280,8 @@ int run_hardware(const RunnerArgs *args, const Schedule *schedule) {
                 (unsigned long long)receiver_epoch_tsc,
                 (unsigned long long)timestamps[0],
                 (unsigned long long)timestamps[count - 1], count,
-                temp_before, temp_after, freq_before, freq_after,
+                temp_before, temp_after, victim_freq_before, victim_freq_after,
+                sender_freq_before, sender_freq_after,
                 (unsigned long long)aperf_before,
                 (unsigned long long)aperf_after,
                 (unsigned long long)mperf_before,
@@ -1291,9 +1297,10 @@ int run_hardware(const RunnerArgs *args, const Schedule *schedule) {
                 mean, minimum, maximum, started, stopped, alive_at_capture);
 
         fprintf(telemetry,
-                "%ld,%.6f,%.6f,%ld,%ld,%llu,%llu,%llu,%llu,%d,%d\n",
+                "%ld,%.6f,%.6f,%ld,%ld,%ld,%ld,%llu,%llu,%llu,%llu,%d,%d\n",
                 window->window_index, temp_before, temp_after,
-                freq_before, freq_after,
+                victim_freq_before, victim_freq_after,
+                sender_freq_before, sender_freq_after,
                 (unsigned long long)aperf_before,
                 (unsigned long long)aperf_after,
                 (unsigned long long)mperf_before,

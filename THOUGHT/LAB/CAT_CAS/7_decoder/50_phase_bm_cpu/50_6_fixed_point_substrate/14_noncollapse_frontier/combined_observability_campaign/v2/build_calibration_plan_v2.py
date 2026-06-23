@@ -18,9 +18,10 @@ def main() -> int:
     parser.add_argument("output", type=Path)
     parser.add_argument("--sessions-output", required=True, type=Path)
     parser.add_argument("--source-bundle-output", required=True, type=Path)
+    parser.add_argument("--source-commit", required=True)
     args = parser.parse_args()
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    plan = build_plan()
+    plan = build_plan(args.source_commit)
     digest = write_immutable(args.output, plan)
     bindings = compile_sessions(plan, args.sessions_output)
     bundle_digest = write_immutable(

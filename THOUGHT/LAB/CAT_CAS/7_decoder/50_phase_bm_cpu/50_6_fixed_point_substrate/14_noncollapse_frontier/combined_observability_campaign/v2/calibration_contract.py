@@ -43,6 +43,9 @@ THRESHOLDS = {
     "cross_route_pass_required": True,
     "final_verdict_rule": "ALL_GROUPS_AND_BOTH_REBOOT_PARTITIONS_AND_BOTH_ROUTES_PASS",
 }
+HEX40 = re.compile(r"[0-9a-f]{40}")
+HEX64 = re.compile(r"[0-9a-f]{64}")
+DEFAULT_TEST_SOURCE_COMMIT = "b" * 40
 
 
 def canonical_bytes(value: object) -> bytes:
@@ -90,11 +93,17 @@ def _sources_for_sign(sign: int) -> list[int]:
     return [index for index, value in enumerate(CODEBOOK[0]) if int(value) == sign]
 
 
+def _validate_source_commit(source_commit: str) -> None:
+    if not isinstance(source_commit, str) or not HEX40.fullmatch(source_commit) or \
+            source_commit == "0" * 40:
+        raise ValueError("source commit must be nonzero lowercase 40-hex")
+
+
 def calibration_windows(session_id: str) -> list[dict]:
     windows: list[dict] = []
     for tone in range(12):
-        for amplitude in (1, 2, 3):
-            for theta in range(8):
+        for theta in range(8):
+            for amplitude in (1, 2, 3):
                 for sign in (1, -1):
                     sources = _sources_for_sign(sign)
                     receiver_source = sources[(tone + theta) % len(sources)]
@@ -130,35 +139,37 @@ def calibration_windows(session_id: str) -> list[dict]:
                         "amplitude_level": amplitude,
                         "expected_code_sign": sign,
                     })
-        index = len(windows)
-        windows.append({
-            "window_index": index,
-            "session_id": session_id,
-            "stage": "V2_SPECTRAL_CALIBRATION_SENDER_OFF",
-            "block_id": f"tone_{tone:02d}",
-            "family": "silent",
-            "actual_mode": "null",
-            "declared_mode": "null",
-            "executed_tone_order": "ASC",
-            "declared_tone_order": "ASC",
-            "measurement_mode": "raw_ring_sender_off",
-            "drive_on": False,
-            "sender_off_required": True,
-            "physical_tone_index": None,
-            "receiver_codeword_source_index": None,
-            "sender_codeword_source_index": None,
-            "receiver_theta_idx": None,
-            "sender_theta_idx": None,
-            "shared_schedule": True,
-            "scramble_key_digest": "0" * 64,
-            "amplitude_level": 0,
-            "expected_code_sign": 0,
-            "sender_off_control_for_tone_index": tone,
-        })
+            index = len(windows)
+            windows.append({
+                "window_index": index,
+                "session_id": session_id,
+                "stage": "V2_SPECTRAL_CALIBRATION_SENDER_OFF",
+                "block_id": f"tone_{tone:02d}",
+                "family": "silent",
+                "actual_mode": "null",
+                "declared_mode": "null",
+                "executed_tone_order": "ASC",
+                "declared_tone_order": "ASC",
+                "measurement_mode": "raw_ring_sender_off",
+                "drive_on": False,
+                "sender_off_required": True,
+                "physical_tone_index": None,
+                "receiver_codeword_source_index": None,
+                "sender_codeword_source_index": None,
+                "receiver_theta_idx": None,
+                "sender_theta_idx": None,
+                "shared_schedule": True,
+                "scramble_key_digest": "0" * 64,
+                "amplitude_level": 0,
+                "expected_code_sign": 0,
+                "sender_off_control_for_tone_index": tone,
+                "sender_off_control_theta_idx": theta,
+            })
     return windows
 
 
-def build_plan() -> dict:
+def build_plan(source_commit: str = DEFAULT_TEST_SOURCE_COMMIT) -> dict:
+    _validate_source_commit(source_commit)
     sessions = []
     for route in ("v4s5", "v2s3"):
         for partition in ("PRE_REBOOT_REPETITION", "POST_REBOOT_REPETITION"):
@@ -174,7 +185,7 @@ def build_plan() -> dict:
                 "windows": windows,
             })
     per_session = {session["window_count"] for session in sessions}
-    if per_session != {588}:
+    if per_session != {672}:
         raise AssertionError(f"unexpected mechanically derived session counts: {per_session}")
     per_route = {
         route: sum(session["window_count"] for session in sessions if session["route"] == route)
@@ -183,13 +194,17 @@ def build_plan() -> dict:
     return {
         "schema_id": "CAT_CAS_PHASE6_V2_SPECTRAL_CALIBRATION_PLAN_V2",
         "execution_class": "ENGINEERING_QUALIFICATION_NOT_SCIENTIFIC_ACQUISITION",
+        "campaign_source_commit": source_commit,
         "sessions": sessions,
         "session_ids": [session["session_id"] for session in sessions],
         "session_count": len(sessions),
-        "windows_per_session": 588,
+        "windows_per_session": 672,
         "windows_per_route": per_route,
         "total_window_count": sum(per_route.values()),
-        "count_derivation": "12 tones * 3 amplitudes * 8 theta * 2 signs + 12 sender-off controls",
+        "count_derivation": (
+            "12 tones * (8 theta blocks * (3 amplitudes * 2 signs + "
+            "1 sender-off control))"
+        ),
         "runtime_parameters": RUNTIME_PARAMETERS,
         "analysis_thresholds": THRESHOLDS,
         "calibration_authorized": False,
@@ -198,13 +213,15 @@ def build_plan() -> dict:
 
 
 def compile_sessions(plan: dict, output_root: Path) -> dict[str, str]:
+    source_commit = plan.get("campaign_source_commit")
+    _validate_source_commit(source_commit)
     plan_digest = hashlib.sha256(canonical_bytes(plan)).hexdigest()
     bindings: dict[str, str] = {}
     for session in plan["sessions"]:
         directory = output_root / session["session_id"]
         header = {
             "schema_id": "CAT_CAS_PHASE6_COMBINED_SESSION_SCHEDULE_V2",
-            "campaign_source_commit": "0000000000000000000000000000000000000000",
+            "campaign_source_commit": source_commit,
             "campaign_plan_sha256": plan_digest,
             "session_id": session["session_id"],
             "route": session["route"],
@@ -241,13 +258,15 @@ def build_source_bundle_manifest(bindings: dict[str, str]) -> dict:
 
 
 def validate_authorization(value: dict, expected_plan_sha256: str,
-                           source_bundle: dict) -> None:
+                           source_bundle: dict,
+                           source_bundle_sha256: str | None = None) -> None:
     required = {
         "schema_id", "calibration_authorized", *FALSE_AUTHORIZATIONS,
         "automatic_retry", "campaign_plan_sha256", "executor_commit",
-        "executor_sha256", "source_bundle_sha256", "session_ids", "route_cores",
-        "pin_khz", "slot_s", "off_window_s", "read_hz", "temperature_veto_c",
-        "authorized_output_root", "authorized_by",
+        "executor_sha256", "campaign_source_commit", "source_bundle_sha256",
+        "session_ids", "route_cores", "pin_khz", "slot_s", "off_window_s",
+        "read_hz", "temperature_veto_c", "authorized_output_root",
+        "authorized_by",
     }
     if set(value) != required:
         raise ValueError("authorization fields must exactly match schema")
@@ -263,14 +282,17 @@ def validate_authorization(value: dict, expected_plan_sha256: str,
     for key, expected in RUNTIME_PARAMETERS.items():
         if value[key] != expected or type(value[key]) is not type(expected):
             raise ValueError(f"authorized runtime mismatch: {key}")
-    if not re.fullmatch(r"[0-9a-f]{40}", value["executor_commit"]) or \
+    if not HEX40.fullmatch(value["executor_commit"]) or \
             value["executor_commit"] == "0" * 40:
         raise ValueError("invalid executor commit format")
-    if not re.fullmatch(r"[0-9a-f]{64}", value["executor_sha256"]):
+    if not HEX64.fullmatch(value["executor_sha256"]):
         raise ValueError("invalid executor SHA-256 format")
+    _validate_source_commit(value["campaign_source_commit"])
     if value["campaign_plan_sha256"] != expected_plan_sha256:
         raise ValueError("campaign plan digest mismatch")
-    source_bundle_digest = hashlib.sha256(canonical_bytes(source_bundle)).hexdigest()
+    source_bundle_digest = source_bundle_sha256 or hashlib.sha256(
+        canonical_bytes(source_bundle)
+    ).hexdigest()
     if value["source_bundle_sha256"] != source_bundle_digest:
         raise ValueError("source bundle digest mismatch")
     if set(source_bundle) != {"schema_id", "sessions"} or \
@@ -282,7 +304,7 @@ def validate_authorization(value: dict, expected_plan_sha256: str,
     for session_id, manifest_digest in sessions.items():
         if not isinstance(session_id, str) or not session_id or \
                 not isinstance(manifest_digest, str) or \
-                not re.fullmatch(r"[0-9a-f]{64}", manifest_digest):
+                not HEX64.fullmatch(manifest_digest):
             raise ValueError("invalid source-bundle session-manifest binding")
     if value["route_cores"] != ROUTE_CORES:
         raise ValueError("route/core binding mismatch")

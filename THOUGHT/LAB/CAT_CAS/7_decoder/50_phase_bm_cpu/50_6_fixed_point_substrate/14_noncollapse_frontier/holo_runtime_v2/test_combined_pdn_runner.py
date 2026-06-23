@@ -126,6 +126,7 @@ def write_authorization(root: Path, session: Path, bundle: Path,
         "automatic_retry": False,
         "executor_commit": VALID_COMMIT,
         "executor_sha256": sha(RUNNER),
+        "campaign_source_commit": "f5b6079a5748bb6138ab19d1c22d79c74734dddf",
         "campaign_plan_sha256": "e" * 64,
         "source_bundle_sha256": sha(bundle),
         "session_ids": [json.loads((session / "session.json").read_text())["session_id"]],
@@ -514,6 +515,11 @@ class Tests(unittest.TestCase):
             self.assertEqual(rows[2]["sender_alive_at_capture"], "0")
             self.assertEqual(rows[2]["first_drive_tsc"], "0")
             self.assertEqual(rows[2]["computed_I"], "null")
+            for row in rows:
+                self.assertEqual(row["victim_frequency_before_khz"], "1600000")
+                self.assertEqual(row["victim_frequency_after_khz"], "1600000")
+                self.assertEqual(row["sender_frequency_before_khz"], "1600000")
+                self.assertEqual(row["sender_frequency_after_khz"], "1600000")
 
     def test_late_sender_epoch_is_fatal(self):
         with tempfile.TemporaryDirectory() as temp:

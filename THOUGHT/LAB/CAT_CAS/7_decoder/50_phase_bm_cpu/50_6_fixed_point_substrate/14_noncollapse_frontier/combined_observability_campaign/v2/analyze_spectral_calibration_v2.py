@@ -68,6 +68,45 @@ def read_csv(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(source))
 
 
+def as_int(value: str, field: str) -> int:
+    try:
+        return int(value)
+    except (TypeError, ValueError) as exc:
+        raise ValueError(f"invalid integer field: {field}") from exc
+
+
+def as_float(value: str, field: str) -> float:
+    try:
+        result = float(value)
+    except (TypeError, ValueError) as exc:
+        raise ValueError(f"invalid float field: {field}") from exc
+    if not math.isfinite(result):
+        raise ValueError(f"non-finite float field: {field}")
+    return result
+
+
+def csv_value_matches(declared: Any, actual: str, field: str) -> bool:
+    if declared is None:
+        return actual in {"", "null", "-1"}
+    if isinstance(declared, bool):
+        return actual in {"1" if declared else "0", "true" if declared else "false"}
+    if isinstance(declared, int):
+        return as_int(actual, field) == declared
+    return actual == str(declared)
+
+
+ECHO_FIELDS = (
+    "stage", "block_id", "family", "actual_mode", "declared_mode",
+    "executed_tone_order", "declared_tone_order", "physical_tone_index",
+    "receiver_codeword_source_index", "sender_codeword_source_index",
+    "drive_on", "sender_off_required", "measurement_mode", "amplitude_level",
+    "receiver_theta_idx", "sender_theta_idx", "shared_schedule",
+    "scramble_key_digest",
+)
+NUMERIC_TOLERANCE = 1e-9
+MAX_EPOCH_SKEW_SECONDS = 0.005
+
+
 def angle_error(actual: float, expected: float) -> float:
     return abs(float(np.angle(np.exp(1j * (actual - expected)))))
 
@@ -97,8 +136,38 @@ def construct_complete_grid(schedule: list[dict]) -> dict[tuple[int, int, int, i
     return grid
 
 
+def load_evidence_map(path: Path, plan: dict) -> list[tuple[Path, Path, Path]]:
+    evidence = load_json(path)
+    if set(evidence) != {"schema_id", "sessions"} or \
+            evidence["schema_id"] != "CAT_CAS_PHASE6_V2_CALIBRATION_EVIDENCE_MAP_V1":
+        raise ValueError("invalid evidence-map schema")
+    sessions = evidence["sessions"]
+    if not isinstance(sessions, dict):
+        raise ValueError("evidence-map sessions must be an object")
+    expected = set(plan["session_ids"])
+    if set(sessions) != expected:
+        raise ValueError("evidence-map session set must exactly match plan")
+    seen_paths: dict[Path, str] = {}
+    ordered = []
+    for session_id in plan["session_ids"]:
+        entry = sessions[session_id]
+        if set(entry) != {"run_dir", "authorization", "source_bundle"}:
+            raise ValueError("evidence-map entry fields mismatch")
+        paths = tuple((path.parent / entry[key]).resolve()
+                      for key in ("run_dir", "authorization", "source_bundle"))
+        for item in paths:
+            if item in seen_paths:
+                raise ValueError("evidence-map path reused across sessions")
+            seen_paths[item] = session_id
+        ordered.append(paths)
+    return ordered
+
+
 def analyze_run(run_dir: Path, plan: dict, authorization: dict,
-                source_bundle: dict) -> dict:
+                source_bundle: dict,
+                *,
+                authorization_sha256: str | None = None,
+                source_bundle_sha256: str | None = None) -> dict:
     manifest = verify_run_manifest(run_dir)
     run = load_json(run_dir / "run.json")
     session = load_json(run_dir / "session.json")
@@ -106,13 +175,19 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
     results = read_csv(run_dir / "window_results.csv")
     plan_digest = hashlib.sha256(canonical_bytes(plan)).hexdigest()
     authorization = dict(authorization)
-    authorization_digest = authorization.pop("artifact_sha256", None)
-    validate_authorization(authorization, plan_digest, source_bundle)
+    authorization_digest = authorization_sha256 or authorization.pop("artifact_sha256", None)
+    validate_authorization(authorization, plan_digest, source_bundle, source_bundle_sha256)
     session_id = session.get("session_id")
     plan_sessions = {item["session_id"]: item for item in plan["sessions"]}
     if session_id not in plan_sessions:
         raise ValueError("session absent from exact calibration plan")
     planned = plan_sessions[session_id]
+    if authorization["session_ids"] != [session_id]:
+        raise ValueError("authorization must bind exactly this one session")
+    if set(source_bundle["sessions"]) != {session_id}:
+        raise ValueError("source bundle must bind exactly this one session")
+    if planned.get("window_count") != len(schedule):
+        raise ValueError("planned window count mismatch")
     if manifest.get("schema_id") != "CAT_CAS_PHASE6_COMBINED_RUN_MANIFEST_V2" or \
             manifest.get("session_id") != session_id or manifest.get("status") != "COMPLETE":
         raise ValueError("run-manifest schema/session/COMPLETE binding mismatch")
@@ -124,6 +199,9 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
         raise ValueError("run campaign-plan binding mismatch")
     if run.get("executor_git_commit") != authorization["executor_commit"]:
         raise ValueError("executor commit binding mismatch")
+    if run.get("campaign_source_commit") != authorization["campaign_source_commit"] or \
+            session.get("campaign_source_commit") != authorization["campaign_source_commit"]:
+        raise ValueError("campaign source commit binding mismatch")
     if run.get("authorization_artifact_sha256") != authorization_digest:
         raise ValueError("authorization digest binding mismatch")
     if run.get("calibration_authorized") is not True:
@@ -162,16 +240,21 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
     offsets = np.concatenate(([0], np.cumsum(counts)))
     if raw_path.stat().st_size != int(offsets[-1]) * RAW_DTYPE.itemsize:
         raise ValueError("raw binary size/record count mismatch")
-    raw = np.memmap(raw_path, dtype=RAW_DTYPE, mode="r")
+    raw = np.fromfile(raw_path, dtype=RAW_DTYPE)
     if len(raw) != int(offsets[-1]):
         raise ValueError("raw trailing or missing records")
 
     tsc_hz = float(run["tsc_calibration_hz"])
     measurements = []
-    off_by_tone: dict[int, list[float]] = {tone: [] for tone in range(12)}
+    off_by_tone: dict[int, list[tuple[int, float]]] = {tone: [] for tone in range(12)}
     for index, (declared, result) in enumerate(zip(schedule, results)):
         if int(result["window_index"]) != index or result["session_id"] != session_id:
             raise ValueError("CSV slicing/order mismatch")
+        if result.get("window_status") != "OK":
+            raise ValueError("window execution status is not OK")
+        for field in ECHO_FIELDS:
+            if field not in result or not csv_value_matches(declared[field], result[field], field):
+                raise ValueError(f"window echo mismatch: {field}")
         start, stop = int(offsets[index]), int(offsets[index + 1])
         timestamps = np.asarray(raw["timestamp_tsc"][start:stop])
         samples = np.asarray(raw["ring_period"][start:stop])
@@ -180,14 +263,35 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
         if int(result["first_sample_tsc"]) != int(timestamps[0]) or \
                 int(result["last_sample_tsc"]) != int(timestamps[-1]):
             raise ValueError("CSV raw slice boundary mismatch")
+        slot_start = as_int(result["slot_start_tsc"], "slot_start_tsc")
+        capture_deadline = as_int(result["capture_deadline_tsc"], "capture_deadline_tsc")
+        if int(timestamps[0]) < slot_start or int(timestamps[-1]) > capture_deadline:
+            raise ValueError("raw sample timestamp outside declared capture interval")
         if declared["sender_off_required"]:
+            if as_int(result["sender_started"], "sender_started") != 0 or \
+                    as_int(result["sender_alive_at_capture"], "sender_alive_at_capture") != 0 or \
+                    as_int(result["first_drive_tsc"], "first_drive_tsc") != 0:
+                raise ValueError("sender-off lifecycle mismatch")
             tone = int(declared["sender_off_control_for_tone_index"])
             response = lockin(timestamps, samples, origin_tsc=int(result["slot_start_tsc"]),
                               tsc_hz=tsc_hz, frequency_hz=tone_hz(tone))
-            off_by_tone[tone].append(abs(response))
+            off_by_tone[tone].append((int(declared["sender_off_control_theta_idx"]),
+                                      abs(response)))
             continue
+        sender_ready = as_int(result["sender_ready_tsc"], "sender_ready_tsc")
+        sender_epoch = as_int(result["sender_epoch_tsc"], "sender_epoch_tsc")
+        first_drive = as_int(result["first_drive_tsc"], "first_drive_tsc")
+        if as_int(result["sender_started"], "sender_started") != 1 or \
+                as_int(result["sender_stopped"], "sender_stopped") != 1 or \
+                as_int(result["sender_alive_at_capture"], "sender_alive_at_capture") != 1:
+            raise ValueError("driven sender lifecycle mismatch")
+        skew_limit = int(MAX_EPOCH_SKEW_SECONDS * tsc_hz)
+        if sender_ready >= slot_start or sender_epoch < slot_start or \
+                sender_epoch > slot_start + skew_limit or \
+                first_drive < slot_start or first_drive > capture_deadline:
+            raise ValueError("driven sender timing mismatch")
         tone = int(declared["physical_tone_index"])
-        origin = int(result["slot_start_tsc"])
+        origin = slot_start
         sender_phase = phase_index(0, int(declared["sender_codeword_source_index"]),
                                    int(declared["sender_theta_idx"]))
         receiver_phase = phase_index(0, int(declared["receiver_codeword_source_index"]),
@@ -206,12 +310,23 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
                            frequency_hz=tone_hz(tone))
         off_bin = lockin(timestamps, samples, origin_tsc=origin, tsc_hz=tsc_hz,
                          frequency_hz=tone_hz(tone) * 1.37 + .071)
+        computed = {
+            "computed_I": response.real,
+            "computed_Q": response.imag,
+            "magnitude": abs(response),
+            "floor": abs(off_bin),
+        }
+        for field, expected in computed.items():
+            actual = result[field]
+            if actual in {"", "null"} or \
+                    not math.isclose(as_float(actual, field), expected,
+                                     rel_tol=NUMERIC_TOLERANCE,
+                                     abs_tol=NUMERIC_TOLERANCE):
+                raise ValueError(f"executor spectral value mismatch: {field}")
         sender_digest = hashlib.sha256(gate.astype(np.uint8).tobytes()).hexdigest()
         receiver_digest = hashlib.sha256(receiver_gate.astype(np.uint8).tobytes()).hexdigest()
         if bool(declared["shared_schedule"]) != (sender_digest == receiver_digest):
             raise ValueError("logical sender-field gate digest contract violated")
-        if gate.mean() != receiver_gate.mean():
-            raise ValueError("logical sender-field workload duty differs")
         measurements.append({
             "tone": tone,
             "amplitude": int(declared["amplitude_level"]),
@@ -226,8 +341,14 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
             "phase_error_radians": angle_error(np.angle(response), np.angle(reference)),
             "temperature_max_c": max(float(result["temp_before_c"]), float(result["temp_after_c"])),
             "frequency_deviation_fraction": max(
-                abs(int(result["frequency_before_khz"]) - int(run["frequency_policy"])),
-                abs(int(result["frequency_after_khz"]) - int(run["frequency_policy"])),
+                abs(as_int(result["victim_frequency_before_khz"],
+                           "victim_frequency_before_khz") - int(run["frequency_policy"])),
+                abs(as_int(result["victim_frequency_after_khz"],
+                           "victim_frequency_after_khz") - int(run["frequency_policy"])),
+                abs(as_int(result["sender_frequency_before_khz"],
+                           "sender_frequency_before_khz") - int(run["frequency_policy"])),
+                abs(as_int(result["sender_frequency_after_khz"],
+                           "sender_frequency_after_khz") - int(run["frequency_policy"])),
             ) / int(run["frequency_policy"]),
             "shared_schedule": bool(declared["shared_schedule"]),
             "sender_gate_sha256": sender_digest,
@@ -270,12 +391,30 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
                     ]
     if not thresholds:
         verdict = "CALIBRATION_NOT_ADJUDICABLE_WITHOUT_FROZEN_THRESHOLDS"
+        sender_off_controls = {}
     else:
+        sender_off_controls = {}
+        for tone, values in off_by_tone.items():
+            theta_indices = [theta for theta, _ in values]
+            magnitudes = np.asarray([magnitude for _, magnitude in values], dtype=float)
+            if len(values) != 8 or set(theta_indices) != set(range(8)):
+                raise ValueError("exactly eight sender-off controls per tone required")
+            if not np.isfinite(magnitudes).all():
+                raise ValueError("non-finite sender-off control distribution")
+            sample_std = float(np.std(magnitudes, ddof=1))
+            if not math.isfinite(sample_std) or sample_std <= 0.0:
+                raise ValueError("zero-variance sender-off control distribution")
+            mean = float(np.mean(magnitudes))
+            boundary = mean + thresholds["minimum_sender_on_off_separation_sigma"] * sample_std
+            sender_off_controls[str(tone)] = {
+                "count": 8,
+                "mean": mean,
+                "sample_std": sample_std,
+                "boundary": boundary,
+            }
         row_pass = []
         for item in measurements:
-            off = np.asarray(off_by_tone[item["tone"]], dtype=float)
-            boundary = float(off.mean() + thresholds["minimum_sender_on_off_separation_sigma"] *
-                             (off.std() if len(off) > 1 else max(off.mean(), 1e-300)))
+            boundary = sender_off_controls[str(item["tone"])]["boundary"]
             row_pass.append(
                 item["requested_magnitude"] > boundary and
                 item["phase_error_radians"] <= thresholds["maximum_phase_error_radians"] and
@@ -303,6 +442,7 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
         "record_count": int(offsets[-1]),
         "window_count": len(schedule),
         "measurement_count": len(measurements),
+        "sender_off_controls": sender_off_controls,
         "measurements": measurements,
         "theta_phase_progression_pass": phase_progression_pass,
         "sign_pi_relation_pass": sign_pi_pass,
@@ -367,18 +507,23 @@ def analyze_campaign(session_results: list[dict], plan: dict) -> dict:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("run_dirs", nargs="+", type=Path)
     parser.add_argument("--plan", required=True, type=Path)
-    parser.add_argument("--authorization", required=True, type=Path)
-    parser.add_argument("--source-bundle", required=True, type=Path)
+    parser.add_argument("--evidence-map", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
-    authorization = load_json(args.authorization)
-    authorization["artifact_sha256"] = sha256(args.authorization)
     plan = load_json(args.plan)
-    bundle = load_json(args.source_bundle)
-    sessions = [analyze_run(run_dir, plan, authorization, bundle)
-                for run_dir in args.run_dirs]
+    session_inputs = load_evidence_map(args.evidence_map.resolve(), plan)
+    sessions = []
+    for run_dir, authorization_path, source_bundle_path in session_inputs:
+        authorization = load_json(authorization_path)
+        bundle = load_json(source_bundle_path)
+        sessions.append(
+            analyze_run(
+                run_dir, plan, authorization, bundle,
+                authorization_sha256=sha256(authorization_path),
+                source_bundle_sha256=sha256(source_bundle_path),
+            )
+        )
     result = analyze_campaign(sessions, plan)
     write_immutable(args.output, result)
     print(result["verdict"])
