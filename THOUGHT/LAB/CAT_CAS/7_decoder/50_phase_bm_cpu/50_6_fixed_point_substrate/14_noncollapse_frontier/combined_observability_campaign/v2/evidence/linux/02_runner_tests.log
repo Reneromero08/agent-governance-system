@@ -1,0 +1,6 @@
+command: python3 -m unittest -v test_combined_pdn_runner.py
+working_dir: /root/catcas_v2_build_7c44af0f/holo_runtime_v2
+tested_sha: 70d5aa893db7d93baa86a56d5b1ed128730c2ef3
+exit_code: 0
+ran: 36 tests in 1.420s
+result: OK

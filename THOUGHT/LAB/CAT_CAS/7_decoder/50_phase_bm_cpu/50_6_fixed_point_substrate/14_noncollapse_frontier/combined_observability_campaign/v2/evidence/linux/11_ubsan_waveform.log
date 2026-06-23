@@ -1,0 +1,8 @@
+test_c_matches_python_for_all_waveform_parameters (test_waveform_equivalence.EquivalenceTests.test_c_matches_python_for_all_waveform_parameters) ... ok
+test_phase_and_duty_contract (test_waveform_equivalence.EquivalenceTests.test_phase_and_duty_contract) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 1.553s
+
+OK
+UW_RC=0

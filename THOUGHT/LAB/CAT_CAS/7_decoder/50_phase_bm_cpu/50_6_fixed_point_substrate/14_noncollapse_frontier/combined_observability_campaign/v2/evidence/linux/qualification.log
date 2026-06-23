@@ -2,26 +2,20 @@ Phase 6 V2 Linux Qualification Evidence
 ==========================================
 Tested SHA: 70d5aa893db7d93baa86a56d5b1ed128730c2ef3
 Source commit: 329e5a0c1a56595fbfb17cc16c41fcb33faff5a2
-Plan SHA-256: f6d7cd314a0b614d80f520f92df13b0bd52f222e4b2fd7b53c09229bc49df48d
-Bundle SHA-256: 5764f7d391e16624e1a5861f9b7056ad4bbfe8227b2a2731da965626f200ee2b
-
-Host: catcas (Phenom II X6)
-OS: Debian GNU/Linux 13 (trixie), kernel 6.12.86
-cc: 14.2.0, Python: 3.13.5, NumPy: 2.2.4
+Plan: f6d7cd314a0b614d80f520f92df13b0bd52f222e4b2fd7b53c09229bc49df48d
+Bundle: 5764f7d391e16624e1a5861f9b7056ad4bbfe8227b2a2731da965626f200ee2b
+Host: catcas (Phenom II X6), Debian 13, gcc 14.2.0, Python 3.13.5, NumPy 2.2.4
 
 Strict C compile: PASSED (0 errors, 0 warnings)
 
-Unique functional test cases: 93
+Unique functional test cases: 78
   Runner: 36
   Waveform equivalence: 2
   Slot2 identity: 1
-  Calibration contracts: 23
-  Receiver schedule: 2
-  Spectral analyzer: 13
-  Waveform reference + frozen binding: 16
+  Python V2 combined: 23
+  Python analysis combined: 16
 
-Subset recheck executions: 1
-  Capture-quality matrix (subset, already in runner)
+Subset recheck: 1 (capture-quality, already in runner)
 
 ASan test reexecutions: 38
   ASan runner: 36
@@ -31,26 +25,18 @@ UBSan test reexecutions: 38
   UBSan runner: 36
   UBSan waveform: 2
 
-Total unittest executions: 209
+Windows focused executions: 39
+
+Total unittest executions: 194
 All exit codes: zero
 Sanitizer findings: 0
 
-Windows focused tests: 39 executions (from clean worktree at 70d5aa89)
-Full repository gate: PASSED
-
 Raw logs: evidence/linux/00-14, evidence/windows/00-03
-Machine-derived counts: TEST_COUNTS.json
-Bindings: FINAL_BINDINGS.json
+Machine-derived counts: evidence/TEST_COUNTS.json
+Bindings: evidence/FINAL_BINDINGS.json
+Commands: evidence/COMMANDS.jsonl
+Inventory: evidence/EVIDENCE_INVENTORY.sha256
 
 hardware_ran: false
 authorization_artifact_created: false
-calibration_authorized: false
-acquisition_authorized: false
-restoration_authorized: false
-target_coupling_authorized: false
-small_wall_authorized: false
-
-Provenance:
-  b7563e5f: retained source provenance
-  93f28c5d: superseded
-  339c9fb8: incomplete evidence provenance
+all scientific authorization fields: false

@@ -1,0 +1,23 @@
+79c87ccf1caa24f12d4b20d6618b6e7fc33c46d6
+---
+---
+79c87ccf phase6: correct same-byte repair preimage guard
+7016afd5 phase6: chain same-byte custody repair
+9dd0bcfa phase6: stage same-byte analyzer custody repair
+9cfbb996 phase6: validate shared threshold identity path
+44d1a92a phase6: align threshold identity test with shared header
+df8946ae phase6: chain direct capture-quality repair
+b9d82e25 phase6: stage direct C capture-quality qualification
+cca2bd99 phase6: add strict V2 authorization qualification lane
+a4e14214 phase6: stage strict C authorization parser repair
+c09cfdca phase6: reduce DeepSeek handoff to final local closure
+6b496762 phase6: validate second V2 fixture repair
+4a754ec2 phase6: align V2 authorization fixture read rate
+e0977e3f phase6: preserve V2 runner test diagnostics
+633f1720 phase6: extend staged repair through capture-quality closure
+75434ad5 phase6: validate staged V2 source repair in CI
+6d0f6221 phase6: stage deterministic V2 source repair
+5bc5ac3b phase6: export exact V2 repair inputs from CI
+cab0b06d phase6: freeze remaining local qualification package
+2718b77c phase6: preserve V2 strict compiler diagnostics
+039e2fb9 phase6: separate V2 Linux qualification gates

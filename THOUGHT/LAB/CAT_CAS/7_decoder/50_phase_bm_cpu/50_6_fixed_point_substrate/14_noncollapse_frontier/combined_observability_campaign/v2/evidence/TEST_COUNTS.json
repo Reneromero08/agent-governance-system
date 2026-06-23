@@ -1,19 +1,17 @@
 {
-  "unique_functional_test_cases": 93,
+  "unique_functional_test_cases": 78,
   "subset_recheck_executions": 1,
   "asan_test_executions": 38,
   "ubsan_test_executions": 38,
-  "total_unittest_executions": 209,
-  "all_exit_codes_zero": true,
   "windows_focused_executions": 39,
+  "total_unittest_executions": 194,
+  "all_exit_codes_zero": true,
   "functional_primary_breakdown": {
-    "runner": 36,
-    "waveform_equivalence": 2,
-    "slot2_identity": 1,
-    "calibration_contracts": 23,
-    "receiver_schedule": 2,
-    "spectral_analyzer": 13,
-    "analysis": 16
+    "runner_command": 36,
+    "waveform_equivalence_command": 2,
+    "slot2_identity_command": 1,
+    "python_v2_combined_command": 23,
+    "python_analysis_combined_command": 16
   },
   "sanitizer_breakdown": {
     "asan_runner": 36,
