@@ -25,7 +25,12 @@ jobs:
         with:
           python-version: "3.11"
       - name: Render final authority state
-        run: python tools/phase6_v2/render_final_authority.py
+        run: |
+          set +e
+          python tools/phase6_v2/render_final_authority.py > "$RUNNER_TEMP/render.log" 2>&1
+          rc=$?
+          cat "$RUNNER_TEMP/render.log"
+          exit "$rc"
       - name: Verify patch scope
         run: |
           git diff --check
@@ -43,9 +48,11 @@ jobs:
             THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/v2/evidence/EVIDENCE_INVENTORY.sha256 \
             THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/v2/evidence/EVIDENCE_INVENTORY_VERIFICATION.txt
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
         with:
           name: phase6-v2-authority-render-${{ github.run_id }}
           path: |
+            ${{ runner.temp }}/render.log
             ${{ runner.temp }}/phase6-v2-authority-render.tgz
             ${{ runner.temp }}/phase6_v2_authority_manifest.json
-          if-no-files-found: error
+          if-no-files-found: warn
