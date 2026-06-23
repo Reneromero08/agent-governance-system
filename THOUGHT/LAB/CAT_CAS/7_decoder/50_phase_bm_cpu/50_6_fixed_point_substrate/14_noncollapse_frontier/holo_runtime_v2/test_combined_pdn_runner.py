@@ -48,6 +48,8 @@ def base_window(index: int, off: bool = False) -> dict:
         "shared_schedule": True,
         "scramble_key_digest": "0" * 64,
         "amplitude_level": 0 if off else 3,
+        "sender_off_control_for_tone_index": 0 if off else None,
+        "sender_off_control_theta_idx": 0 if off else None,
     }
 
 
@@ -132,7 +134,7 @@ def write_authorization(root: Path, session: Path, bundle: Path,
         "session_ids": [json.loads((session / "session.json").read_text())["session_id"]],
         "route_cores": {"v4s5": [4, 5], "v2s3": [2, 3]},
         "pin_khz": 1600000,
-        "read_hz": 4000,
+        "read_hz": 8000,
         "slot_s": 0.5,
         "off_window_s": 0.5,
         "temperature_veto_c": 68.0,
@@ -258,11 +260,16 @@ class Tests(unittest.TestCase):
 
     def test_sender_off_drive(self):
         self.assert_reject(lambda header, rows: rows[2].update(drive_on=True),
-                           "sender_off_required + drive_on")
+                           "sender-off row must not drive")
 
     def test_raw_ring_requires_off(self):
-        self.assert_reject(lambda header, rows: rows[2].update(sender_off_required=False),
-                           "raw_ring_sender_off requires")
+        def mutate(header, rows):
+            rows[2].update(
+                sender_off_required=False,
+                sender_off_control_for_tone_index=None,
+                sender_off_control_theta_idx=None,
+            )
+        self.assert_reject(mutate, "raw_ring_sender_off requires")
 
     def test_driven_requires_tone(self):
         self.assert_reject(lambda header, rows: rows[0].update(physical_tone_index=None),
@@ -296,9 +303,20 @@ class Tests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
 
     def test_invalid_numeric_arguments_are_rejected(self):
-        for option, value in (("--read-hz", "0"), ("--slot-s", "nan"),
-                              ("--off-window-s", "0"), ("--pin-khz", "-1")):
-            with self.subTest(option=option), tempfile.TemporaryDirectory() as temp:
+        cases = (
+            ("--read-hz", "0"),
+            ("--slot-s", "nan"),
+            ("--off-window-s", "0"),
+            ("--pin-khz", "-1"),
+            ("--victim", "4junk"),
+            ("--sender", "5.0"),
+            ("--read-hz", "8000Hz"),
+            ("--slot-s", "0.5s"),
+            ("--temp-veto-c", "inf"),
+            ("--pin-khz", "999999999999999999999999999999"),
+        )
+        for option, value in cases:
+            with self.subTest(option=option, value=value), tempfile.TemporaryDirectory() as temp:
                 directory = write_session(Path(temp))
                 result = self.exec_runner(
                     directory, Path(temp) / "out", "--mock-hardware", option, value
@@ -316,6 +334,18 @@ class Tests(unittest.TestCase):
             self.assertEqual(result.returncode, 5)
             run = json.loads((output / "run.json").read_text())
             self.assertEqual(run["failure_reason"], "CAPTURE_CAPACITY_INVALID")
+
+    def test_capture_quality_contract_rejection_matrix(self):
+        with tempfile.TemporaryDirectory() as temp:
+            binary = Path(temp) / "capture_quality_fixture"
+            result = subprocess.run(
+                ["cc", "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror",
+                 str(HERE / "capture_quality_fixture.c"), "-o", str(binary), "-lm"],
+                text=True, capture_output=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            result = subprocess.run([str(binary)], text=True, capture_output=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
 
     def test_real_hardware_requires_authorization_artifact(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -442,6 +472,10 @@ class Tests(unittest.TestCase):
             lambda text: text.replace(
                 '"v4s5_seed4"', '"v4s5_seed4", "v4s5_seed4"', 1
             ),
+            lambda text: text.replace(
+                '"authorized_by":', '"unexpected": 1, "authorized_by":', 1
+            ),
+            lambda text: text + " trailing-content",
         )
         for mutation in mutations:
             with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as temp:

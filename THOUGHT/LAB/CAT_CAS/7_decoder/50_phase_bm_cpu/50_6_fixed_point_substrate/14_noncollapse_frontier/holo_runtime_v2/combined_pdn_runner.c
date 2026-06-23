@@ -1,5 +1,6 @@
 #define _GNU_SOURCE
 #include "combined_pdn_hardware.h"
+#include "strict_json_validation.h"
 
 #include <ctype.h>
 #include <errno.h>
@@ -389,6 +390,33 @@ static void verify_file(const char *manifest, const char *root, const char *name
     if (strcmp(expected_hash, actual_hash)) die("sha256 mismatch for %s", name);
 }
 
+static int parse_long_arg(const char *text, long *out) {
+    if (!text || !*text || isspace((unsigned char)text[0])) return -1;
+    errno = 0;
+    char *end = NULL;
+    long value = strtol(text, &end, 10);
+    if (errno == ERANGE || end == text || *end != 0) return -1;
+    *out = value;
+    return 0;
+}
+
+static int parse_int_arg(const char *text, int *out) {
+    long value = 0;
+    if (parse_long_arg(text, &value) || value < INT_MIN || value > INT_MAX) return -1;
+    *out = (int)value;
+    return 0;
+}
+
+static int parse_double_arg(const char *text, double *out) {
+    if (!text || !*text || isspace((unsigned char)text[0])) return -1;
+    errno = 0;
+    char *end = NULL;
+    double value = strtod(text, &end);
+    if (errno == ERANGE || end == text || *end != 0 || !isfinite(value)) return -1;
+    *out = value;
+    return 0;
+}
+
 static RunnerArgs parse_args(int argc, char **argv) {
     RunnerArgs args = {0};
     args.victim = -1;
@@ -427,25 +455,25 @@ static RunnerArgs parse_args(int argc, char **argv) {
             args.output_dir = arg;
             i++;
         } else if (!strcmp(key_name, "--victim") && arg) {
-            args.victim = atoi(arg);
+            if (parse_int_arg(arg, &args.victim)) die("invalid numeric arguments");
             i++;
         } else if (!strcmp(key_name, "--sender") && arg) {
-            args.sender = atoi(arg);
+            if (parse_int_arg(arg, &args.sender)) die("invalid numeric arguments");
             i++;
         } else if (!strcmp(key_name, "--pin-khz") && arg) {
-            args.pin_khz = atol(arg);
+            if (parse_long_arg(arg, &args.pin_khz)) die("invalid numeric arguments");
             i++;
         } else if (!strcmp(key_name, "--slot-s") && arg) {
-            args.slot_s = atof(arg);
+            if (parse_double_arg(arg, &args.slot_s)) die("invalid numeric arguments");
             i++;
         } else if (!strcmp(key_name, "--off-window-s") && arg) {
-            args.off_window_s = atof(arg);
+            if (parse_double_arg(arg, &args.off_window_s)) die("invalid numeric arguments");
             i++;
         } else if (!strcmp(key_name, "--read-hz") && arg) {
-            args.read_hz = atol(arg);
+            if (parse_long_arg(arg, &args.read_hz)) die("invalid numeric arguments");
             i++;
         } else if (!strcmp(key_name, "--temp-veto-c") && arg) {
-            args.temp_veto_c = atof(arg);
+            if (parse_double_arg(arg, &args.temp_veto_c)) die("invalid numeric arguments");
             i++;
         } else {
             die("unknown or incomplete option: %s", key_name);
@@ -773,6 +801,28 @@ static void verify_authorization(const RunnerArgs *args, const Schedule *schedul
     double slot_s = 0, off_window_s = 0, temp_veto_c = 0;
     char *authorization = slurp(args->authorization_artifact);
     char *source_bundle = slurp(args->source_bundle_manifest);
+    const char *authorization_fields[] = {
+        "schema_id", "calibration_authorized", "acquisition_authorized",
+        "restoration_authorized", "target_coupling_authorized",
+        "small_wall_authorized", "automatic_retry", "executor_commit",
+        "executor_sha256", "campaign_source_commit", "source_bundle_sha256",
+        "campaign_plan_sha256", "session_ids", "route_cores", "pin_khz",
+        "slot_s", "off_window_s", "read_hz", "temperature_veto_c",
+        "authorized_output_root", "authorized_by"
+    };
+    const char *source_bundle_fields[] = {"schema_id", "sessions"};
+    if (strict_json_document(authorization) ||
+        strict_json_exact_top_object(
+            authorization, authorization_fields,
+            sizeof(authorization_fields) / sizeof(authorization_fields[0])) ||
+        strict_json_document(source_bundle) ||
+        strict_json_exact_top_object(
+            source_bundle, source_bundle_fields,
+            sizeof(source_bundle_fields) / sizeof(source_bundle_fields[0]))) {
+        free(authorization);
+        free(source_bundle);
+        die("invalid V2 calibration authorization artifact");
+    }
     snprintf(executor_path, sizeof(executor_path), "/proc/%ld/exe", (long)getpid());
     sha256(executor_path, actual_executor_sha);
     sha256(args->source_bundle_manifest, actual_source_bundle_sha);

@@ -48,6 +48,8 @@ def make_schedule(output: Path) -> None:
             "shared_schedule": True,
             "scramble_key_digest": "0" * 64,
             "amplitude_level": 1,
+            "sender_off_control_for_tone_index": None,
+            "sender_off_control_theta_idx": None,
         })
     rows.append({
         **common,
@@ -66,6 +68,8 @@ def make_schedule(output: Path) -> None:
         "shared_schedule": True,
         "scramble_key_digest": "0" * 64,
         "amplitude_level": 0,
+        "sender_off_control_for_tone_index": 0,
+        "sender_off_control_theta_idx": 0,
     })
     header = {
         "schema_id": "CAT_CAS_PHASE6_COMBINED_SESSION_SCHEDULE_V2",

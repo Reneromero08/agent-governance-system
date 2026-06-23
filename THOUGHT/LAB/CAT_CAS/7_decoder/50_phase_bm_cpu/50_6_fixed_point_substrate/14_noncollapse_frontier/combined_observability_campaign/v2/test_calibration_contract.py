@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import tempfile
 import unittest
 from pathlib import Path
@@ -125,6 +126,23 @@ class CalibrationContractTests(unittest.TestCase):
                 receiver_digest = hashlib.sha256(receiver_gate.tobytes()).hexdigest()
                 self.assertEqual(sender_gate.mean(), receiver_gate.mean())
                 self.assertEqual(sender_digest == receiver_digest, row["shared_schedule"])
+
+    def test_c_capture_quality_constants_match_frozen_plan(self) -> None:
+        plan = build_plan()
+        quality = plan["analysis_thresholds"]["capture_quality"]
+        source = (Path(__file__).resolve().parents[2] / "holo_runtime_v2" /
+                  "capture_quality_contract.h").read_text(encoding="utf-8")
+        names = {
+            "CAPTURE_COVERAGE_FRACTION_MIN": "minimum_capture_coverage_fraction",
+            "EMPIRICAL_SAMPLE_RATE_FRACTION_MIN": "minimum_empirical_sample_rate_fraction",
+            "EMPIRICAL_SAMPLE_RATE_FRACTION_MAX": "maximum_empirical_sample_rate_fraction",
+            "EMPIRICAL_NYQUIST_MARGIN_MIN": "minimum_empirical_nyquist_margin",
+            "SAMPLE_GAP_MULTIPLE_MAX": "maximum_sample_gap_multiple",
+        }
+        for c_name, plan_name in names.items():
+            match = re.search(rf"^#define {c_name} ([0-9.]+)$", source, re.MULTILINE)
+            self.assertIsNotNone(match, c_name)
+            self.assertEqual(float(match.group(1)), quality[plan_name])
 
     def test_compiled_sessions_bind_exact_ordered_plan(self) -> None:
         plan = build_plan()

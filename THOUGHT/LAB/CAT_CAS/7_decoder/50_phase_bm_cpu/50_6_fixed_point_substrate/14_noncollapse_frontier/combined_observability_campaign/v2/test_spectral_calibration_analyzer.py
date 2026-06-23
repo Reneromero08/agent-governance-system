@@ -318,7 +318,10 @@ def build_fixture(root: Path):
         "sender_off_control_theta_idx": 0,
     }
     plan = {
-        "schema_id": "TEST_PLAN", "sessions": [{
+        "schema_id": "TEST_PLAN",
+        "campaign_source_commit": SOURCE_COMMIT,
+        "analysis_thresholds": build_plan(SOURCE_COMMIT)["analysis_thresholds"],
+        "sessions": [{
             "session_id": session_id, "route": "v4s5",
             "window_count": 1, "windows": [window],
         }],

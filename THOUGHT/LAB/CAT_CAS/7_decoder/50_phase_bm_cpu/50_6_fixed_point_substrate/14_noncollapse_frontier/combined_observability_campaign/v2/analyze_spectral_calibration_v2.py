@@ -49,7 +49,10 @@ def verify_run_manifest(run_dir: Path) -> dict:
     files = manifest.get("files")
     if not isinstance(files, dict) or set(files) != RUN_FILES:
         raise ValueError("run manifest file set mismatch")
-    actual = {path.name for path in run_dir.iterdir() if path.is_file()}
+    entries = list(run_dir.iterdir())
+    if any(path.is_symlink() or not path.is_file() for path in entries):
+        raise ValueError("run directory must contain regular files only")
+    actual = {path.name for path in entries}
     if actual != RUN_FILES | {"run_manifest.json"}:
         raise ValueError("run directory file set mismatch")
     for name, binding in files.items():
@@ -251,6 +254,21 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
     authorization = dict(authorization)
     authorization_digest = authorization_sha256 or authorization.pop("artifact_sha256", None)
     validate_authorization(authorization, plan_digest, source_bundle, source_bundle_sha256)
+    if plan.get("campaign_source_commit") != authorization["campaign_source_commit"]:
+        raise ValueError("plan/authorization campaign source commit mismatch")
+    thresholds = plan.get("analysis_thresholds")
+    if not isinstance(thresholds, dict) or not isinstance(thresholds.get("capture_quality"), dict):
+        raise ValueError("frozen capture-quality thresholds required")
+    capture_quality = thresholds["capture_quality"]
+    required_capture_quality = {
+        "minimum_capture_coverage_fraction",
+        "minimum_empirical_sample_rate_fraction",
+        "maximum_empirical_sample_rate_fraction",
+        "minimum_empirical_nyquist_margin",
+        "maximum_sample_gap_multiple",
+    }
+    if set(capture_quality) != required_capture_quality:
+        raise ValueError("capture-quality threshold fields mismatch")
     session_id = session.get("session_id")
     plan_sessions = {item["session_id"]: item for item in plan["sessions"]}
     if session_id not in plan_sessions:
@@ -360,21 +378,34 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
         if capture_window <= 0:
             raise ValueError("invalid capture window")
         capture_coverage = capture_span / capture_window
-        if capture_coverage < 0.90:
+        if capture_coverage < capture_quality["minimum_capture_coverage_fraction"]:
             raise ValueError("insufficient capture coverage")
         empirical_rate = (int(len(timestamps)) - 1) * tsc_hz / capture_span if capture_span > 0 else 0
         read_hz_auth = run.get("read_rate_hz")
         if not isinstance(read_hz_auth, (int, float)) or read_hz_auth <= 0:
             raise ValueError("invalid authorized read_hz")
         rate_fraction = empirical_rate / read_hz_auth
-        if rate_fraction < 0.90 or rate_fraction > 1.05:
+        if rate_fraction < capture_quality["minimum_empirical_sample_rate_fraction"] or \
+                rate_fraction > capture_quality["maximum_empirical_sample_rate_fraction"]:
             raise ValueError("empirical sample rate out of bounds")
         gaps = np.diff(timestamps)
         max_gap = float(np.max(gaps))
         nominal_spacing = tsc_hz / read_hz_auth
         gap_multiple = max_gap / nominal_spacing if nominal_spacing > 0 else 0
-        if gap_multiple > 4.0:
+        if gap_multiple > capture_quality["maximum_sample_gap_multiple"]:
             raise ValueError("pathological timestamp gap")
+        analysis_tone = (
+            int(declared["sender_off_control_for_tone_index"])
+            if declared["sender_off_required"]
+            else int(declared["physical_tone_index"])
+        )
+        max_analysis_frequency = max(
+            tone_hz(analysis_tone),
+            control_frequency_hz(tone_hz(analysis_tone)),
+        )
+        nyquist_margin = empirical_rate / (2.0 * max_analysis_frequency)
+        if nyquist_margin < capture_quality["minimum_empirical_nyquist_margin"]:
+            raise ValueError("empirical Nyquist margin insufficient")
         if declared["sender_off_required"]:
             if as_int(result["sender_started"], "sender_started") != 0 or \
                     as_int(result["sender_alive_at_capture"], "sender_alive_at_capture") != 0 or \
@@ -465,11 +496,8 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
             "empirical_sample_rate": empirical_rate,
             "sample_rate_fraction": rate_fraction,
             "max_sample_gap_multiple": gap_multiple,
-            "empirical_nyquist_margin": (
-                empirical_rate / (2.0 * max(
-                    tone_hz(tone), control_frequency_hz(tone_hz(tone))
-                )) if empirical_rate > 0 else 0.0
-            ),
+            "empirical_nyquist_margin": nyquist_margin,
+            "capture_quality_pass": True,
         })
 
     construct_complete_grid(schedule)
@@ -537,7 +565,8 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
                 item["phase_error_radians"] <= thresholds["maximum_phase_error_radians"] and
                 item["off_bin_ratio"] <= thresholds["maximum_off_bin_to_requested_ratio"] and
                 item["temperature_max_c"] <= thresholds["maximum_temperature_c"] and
-                item["frequency_deviation_fraction"] <= thresholds["maximum_frequency_deviation_fraction"]
+                item["frequency_deviation_fraction"] <= thresholds["maximum_frequency_deviation_fraction"] and
+                item["capture_quality_pass"]
             )
         amplitude_pass = True
         groups: dict[tuple[int, int, int], dict[int, list[float]]] = {}

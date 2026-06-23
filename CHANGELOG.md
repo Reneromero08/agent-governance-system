@@ -2,6 +2,22 @@
 
 # Changelog
 
+## 2026-06-23
+
+- Phase 6 V2: close source and authorization boundaries. Remove temporary
+  connector repair scripts; CI workflows test committed source directly.
+- Strict C compilation fixes (token_end declaration order, off_nyquist
+  variable name, duplicate includes, unused functions removed).
+- Sender-off control tone fields bound in C Window struct, CSV output,
+  analyzer echo fields, and capture-quality Nyquist selection.
+- Capture-quality thresholds frozen in shared contract header; C rejection
+  matrix fixture for coverage/rate/nyquist/gap.
+- Strict CLI numeric parsing replacing atoi/atol/atof with full-consumption
+  strtol/strtod validators.
+- Strict JSON validation header for C authorization boundary.
+- CSV and telemetry column set enforcement in Python analyzer.
+- Exact discrete eight-state DFT magnitude test (1.0, 1.847759..., 2.414213...).
+
 ## 2026-06-18
 
 - **Ref-bound push authorization:** Reworked `.githooks/pre-push` and added `pre_push_guard.py` so verification receipts authorize the actual refs and commit tips Git is pushing, including annotated tags. Existing remote refs must still match the tested base, new refs require that base to be an ancestor, multi-tip or multi-base pushes fail closed, and no-op or deletion-only pushes bypass unnecessary verification.

@@ -27,11 +27,7 @@
 #define START_GUARD_SECONDS 0.050
 #define MAX_EPOCH_SKEW_SECONDS 0.005
 #define MAX_CAPTURE_SAMPLES 10000000
-#define CAPTURE_COVERAGE_FRACTION_MIN 0.90
-#define EMPIRICAL_SAMPLE_RATE_FRACTION_MIN 0.90
-#define EMPIRICAL_SAMPLE_RATE_FRACTION_MAX 1.05
-#define EMPIRICAL_NYQUIST_MARGIN_MIN 1.50
-#define SAMPLE_GAP_MULTIPLE_MAX 4.0
+#include "capture_quality_contract.h"
 
 static volatile sig_atomic_t interrupted;
 
@@ -444,6 +440,8 @@ static int capture_at_origin(int core, long hz, double seconds, double tsc_hz,
     }
     return count;
 }
+
+static double control_frequency_hz(double requested_hz);
 
 static void lockin(const uint64_t *timestamps, const double *samples, int count,
                    double frequency, uint64_t origin, double tsc_hz,
@@ -1233,55 +1231,29 @@ int run_hardware(const RunnerArgs *args, const Schedule *schedule) {
         }
 
         if (!mock) {
-            double capture_coverage = (double)(timestamps[count - 1] - timestamps[0]) /
-                                      (double)(deadline - origin);
-            if (!isfinite(capture_coverage) ||
-                capture_coverage < CAPTURE_COVERAGE_FRACTION_MIN) {
-                free(timestamps);
-                free(observations);
-                reason = "CAPTURE_COVERAGE_INSUFFICIENT";
-                rc = 5;
-                goto cleanup;
+            double analysis_frequency = frequency;
+            if (window->sender_off_required &&
+                window->sender_off_control_for_tone_index >= 0) {
+                analysis_frequency = tone(window->sender_off_control_for_tone_index);
             }
-            double sample_span = (double)(timestamps[count - 1] - timestamps[0]);
-            double empirical_rate = sample_span > 0 ?
-                (double)(count - 1) * tsc_hz / sample_span : 0;
-            double rate_fraction = empirical_rate / (double)args->read_hz;
-            if (!isfinite(rate_fraction) ||
-                rate_fraction < EMPIRICAL_SAMPLE_RATE_FRACTION_MIN ||
-                rate_fraction > EMPIRICAL_SAMPLE_RATE_FRACTION_MAX) {
-                free(timestamps);
-                free(observations);
-                reason = "EMPIRICAL_SAMPLE_RATE_OUT_OF_BOUNDS";
-                rc = 5;
-                goto cleanup;
+            double maximum_analysis_frequency = analysis_frequency;
+            double control_frequency = control_frequency_hz(analysis_frequency);
+            if (control_frequency > maximum_analysis_frequency) {
+                maximum_analysis_frequency = control_frequency;
             }
-            double max_nyquist = frequency;
-            double off_nyquist = control_frequency_hz(frequency);
-            if (off_nyquist > max_nyquist) max_nyquist = off_nyquist;
-            double nyquist_margin = max_nyquist > 0 ?
-                empirical_rate / (2.0 * max_nyquist) : 0;
-            if (!isfinite(nyquist_margin) ||
-                nyquist_margin < EMPIRICAL_NYQUIST_MARGIN_MIN) {
-                free(timestamps);
-                free(observations);
-                reason = "EMPIRICAL_NYQUIST_MARGIN_INSUFFICIENT";
-                rc = 5;
-                goto cleanup;
-            }
-            double max_gap_ticks = 0;
+            double maximum_gap_ticks = 0;
             for (int g = 1; g < count; g++) {
                 double gap = (double)(timestamps[g] - timestamps[g - 1]);
-                if (gap > max_gap_ticks) max_gap_ticks = gap;
+                if (gap > maximum_gap_ticks) maximum_gap_ticks = gap;
             }
-            double nominal_spacing = tsc_hz / (double)args->read_hz;
-            double gap_multiple = nominal_spacing > 0 ?
-                max_gap_ticks / nominal_spacing : 0;
-            if (!isfinite(gap_multiple) ||
-                gap_multiple > SAMPLE_GAP_MULTIPLE_MAX) {
+            const char *quality_failure = catcas_capture_quality_failure(
+                timestamps[0], timestamps[count - 1], (size_t)count,
+                origin, deadline, tsc_hz, args->read_hz,
+                maximum_analysis_frequency, maximum_gap_ticks);
+            if (quality_failure) {
                 free(timestamps);
                 free(observations);
-                reason = "PATHOLOGICAL_TIMESTAMP_GAP";
+                reason = quality_failure;
                 rc = 5;
                 goto cleanup;
             }
