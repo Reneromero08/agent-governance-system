@@ -43,7 +43,7 @@ class EquivalenceTests(unittest.TestCase):
     def test_phase_and_duty_contract(self) -> None:
         origin, tsc_hz, count = 0, 8_000_000.0, 800_000
         timestamps = np.arange(count, dtype=np.uint64)
-        for level, duty in ((1, .25), (2, .5), (3, .75)):
+        for level, duty in ((1, .125), (2, .25), (3, .375)):
             gate = intended_v2_gate(
                 timestamps, origin_tsc=origin, tsc_hz=tsc_hz,
                 tone_index=11, phase_index_value=0, amplitude_level=level,

@@ -27,7 +27,7 @@ RUNTIME_PARAMETERS = {
     "pin_khz": 1600000,
     "slot_s": 0.5,
     "off_window_s": 0.5,
-    "read_hz": 4000,
+    "read_hz": 8000,
     "temperature_veto_c": 68.0,
     "automatic_retry": False,
 }

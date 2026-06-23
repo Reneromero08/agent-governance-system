@@ -15,7 +15,7 @@ static int gate(uint64_t timestamp, uint64_t origin, double tsc_hz,
     double offset = (double)(timestamp - origin) - phase_index * step_ticks;
     long state = (long)floor(offset / step_ticks);
     int cycle_state = (int)((state % 8 + 8) % 8);
-    return cycle_state < amplitude_level * 2;
+    return cycle_state < amplitude_level;
 }
 
 int main(int argc, char **argv) {

@@ -23,7 +23,7 @@ from calibration_contract import (
 ANALYSIS = Path(__file__).resolve().parent.parent / "analysis"
 import sys
 sys.path.insert(0, str(ANALYSIS))
-from waveform_reference import intended_v2_gate, lockin, phase_index, tone_hz  # noqa: E402
+from waveform_reference import control_frequency_hz, intended_v2_gate, lockin, phase_index, tone_hz  # noqa: E402
 
 RAW_DTYPE = np.dtype([("timestamp_tsc", "<u8"), ("ring_period", "<f8")])
 RUN_FILES = {
@@ -167,7 +167,21 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
                 source_bundle: dict,
                 *,
                 authorization_sha256: str | None = None,
-                source_bundle_sha256: str | None = None) -> dict:
+                source_bundle_sha256: str | None = None,
+                plan_sha256: str | None = None,
+                evidence_map_sha256: str | None = None,
+                run_manifest_sha256: str | None = None,
+                session_manifest_sha256: str | None = None,
+                run_json_sha256: str | None = None,
+                raw_samples_sha256: str | None = None,
+                window_results_sha256: str | None = None,
+                telemetry_sha256: str | None = None,
+                executor_commit: str | None = None,
+                executor_sha256: str | None = None,
+                campaign_source_commit: str | None = None,
+                session_id_from_call: str | None = None,
+                route: str | None = None,
+                ) -> dict:
     manifest = verify_run_manifest(run_dir)
     run = load_json(run_dir / "run.json")
     session = load_json(run_dir / "session.json")
@@ -267,6 +281,26 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
         capture_deadline = as_int(result["capture_deadline_tsc"], "capture_deadline_tsc")
         if int(timestamps[0]) < slot_start or int(timestamps[-1]) > capture_deadline:
             raise ValueError("raw sample timestamp outside declared capture interval")
+        capture_span = int(timestamps[-1]) - int(timestamps[0])
+        capture_window = capture_deadline - slot_start
+        if capture_window <= 0:
+            raise ValueError("invalid capture window")
+        capture_coverage = capture_span / capture_window
+        if capture_coverage < 0.90:
+            raise ValueError("insufficient capture coverage")
+        empirical_rate = (int(len(timestamps)) - 1) * tsc_hz / capture_span if capture_span > 0 else 0
+        read_hz_auth = run.get("read_rate_hz")
+        if not isinstance(read_hz_auth, (int, float)) or read_hz_auth <= 0:
+            raise ValueError("invalid authorized read_hz")
+        rate_fraction = empirical_rate / read_hz_auth
+        if rate_fraction < 0.90 or rate_fraction > 1.05:
+            raise ValueError("empirical sample rate out of bounds")
+        gaps = np.diff(timestamps)
+        max_gap = float(np.max(gaps))
+        nominal_spacing = tsc_hz / read_hz_auth
+        gap_multiple = max_gap / nominal_spacing if nominal_spacing > 0 else 0
+        if gap_multiple > 4.0:
+            raise ValueError("pathological timestamp gap")
         if declared["sender_off_required"]:
             if as_int(result["sender_started"], "sender_started") != 0 or \
                     as_int(result["sender_alive_at_capture"], "sender_alive_at_capture") != 0 or \
@@ -309,7 +343,7 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
         reference = lockin(timestamps, gate, origin_tsc=origin, tsc_hz=tsc_hz,
                            frequency_hz=tone_hz(tone))
         off_bin = lockin(timestamps, samples, origin_tsc=origin, tsc_hz=tsc_hz,
-                         frequency_hz=tone_hz(tone) * 1.37 + .071)
+                         frequency_hz=control_frequency_hz(tone_hz(tone)))
         computed = {
             "computed_I": response.real,
             "computed_Q": response.imag,
@@ -451,10 +485,31 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
         "restoration_authorized": False,
         "target_coupling_authorized": False,
         "small_wall_authorized": False,
+        "input_bindings": {
+            "plan_sha256": plan_digest,
+            "evidence_map_sha256": evidence_map_sha256,
+            "authorization_sha256": authorization_digest,
+            "source_bundle_sha256": source_bundle_sha256 or
+                hashlib.sha256(canonical_bytes(source_bundle)).hexdigest(),
+            "run_manifest_sha256": sha256(run_dir / "run_manifest.json"),
+            "session_manifest_sha256": sha256(run_dir.parent / "source" / "session_manifest.json")
+                if (run_dir.parent / "source" / "session_manifest.json").exists()
+                else run.get("session_manifest_sha256"),
+            "run_json_sha256": sha256(run_dir / "run.json"),
+            "raw_samples_sha256": sha256(run_dir / "raw_samples.bin"),
+            "window_results_sha256": sha256(run_dir / "window_results.csv"),
+            "telemetry_sha256": sha256(run_dir / "telemetry.csv"),
+            "executor_commit": authorization["executor_commit"],
+            "executor_sha256": authorization["executor_sha256"],
+            "campaign_source_commit": authorization["campaign_source_commit"],
+            "session_id": session_id,
+            "route": planned["route"],
+        },
     }
 
 
-def analyze_campaign(session_results: list[dict], plan: dict) -> dict:
+def analyze_campaign(session_results: list[dict], plan: dict,
+                     evidence_map_sha256: str | None = None) -> dict:
     """Apply the frozen repetition and cross-route campaign verdict."""
     thresholds = plan.get("analysis_thresholds")
     if not thresholds:
@@ -501,6 +556,13 @@ def analyze_campaign(session_results: list[dict], plan: dict) -> dict:
         ),
         "final_verdict_rule": thresholds.get("final_verdict_rule") if thresholds else None,
         "verdict": verdict,
+        "input_bindings": {
+            "plan_sha256": hashlib.sha256(canonical_bytes(plan)).hexdigest(),
+            "evidence_map_sha256": evidence_map_sha256,
+            "ordered_session_input_bindings": [
+                result.get("input_bindings") for result in session_results
+            ],
+        },
         **FALSE_AUTHORIZATIONS,
     }
 
@@ -512,7 +574,11 @@ def main() -> int:
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
     plan = load_json(args.plan)
-    session_inputs = load_evidence_map(args.evidence_map.resolve(), plan)
+    evidence_map_path = args.evidence_map.resolve()
+    evidence_map_bytes = evidence_map_path.read_bytes()
+    evidence_map_sha256 = hashlib.sha256(evidence_map_bytes).hexdigest()
+    plan_sha256 = hashlib.sha256(canonical_bytes(plan)).hexdigest()
+    session_inputs = load_evidence_map(evidence_map_path, plan)
     sessions = []
     for run_dir, authorization_path, source_bundle_path in session_inputs:
         authorization = load_json(authorization_path)
@@ -522,9 +588,12 @@ def main() -> int:
                 run_dir, plan, authorization, bundle,
                 authorization_sha256=sha256(authorization_path),
                 source_bundle_sha256=sha256(source_bundle_path),
+                evidence_map_sha256=evidence_map_sha256,
+                plan_sha256=plan_sha256,
             )
         )
-    result = analyze_campaign(sessions, plan)
+    result = analyze_campaign(sessions, plan, evidence_map_sha256=evidence_map_sha256)
+    result["input_bindings"]["evidence_map_sha256"] = evidence_map_sha256
     write_immutable(args.output, result)
     print(result["verdict"])
     return 0 if result["verdict"] == "CALIBRATION_PASS" else 2

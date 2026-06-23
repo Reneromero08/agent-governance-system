@@ -121,10 +121,40 @@ static int object_string(const char *json, const char *object_name,
     if (object_bounds(json, object_name, &start, &end)) return -1;
     const char *p = object_value(start, end, member);
     if (!p || *p++ != '"') return -1;
-    const char *q = strchr(p, '"');
-    if (!q || q > end || (size_t)(q - p) >= size) return -1;
-    memcpy(out, p, (size_t)(q - p));
-    out[q - p] = 0;
+    size_t i = 0;
+    while (p < end && *p != '"' && i < size - 1) {
+        if (*p == '\\') {
+            p++;
+            if (p >= end || !*p) return -1;
+            switch (*p) {
+                case '"': out[i++] = '"'; break;
+                case '\\': out[i++] = '\\'; break;
+                case '/': out[i++] = '/'; break;
+                case 'b': out[i++] = '\b'; break;
+                case 'f': out[i++] = '\f'; break;
+                case 'n': out[i++] = '\n'; break;
+                case 'r': out[i++] = '\r'; break;
+                case 't': out[i++] = '\t'; break;
+                case 'u':
+                    for (int j = 0; j < 4; j++) {
+                        p++;
+                        if (p >= end || !*p || !isxdigit((unsigned char)*p)) return -1;
+                    }
+                    out[i++] = '?';
+                    break;
+                default: return -1;
+            }
+        } else if ((unsigned char)*p < 0x20) {
+            return -1;
+        } else {
+            out[i++] = *p;
+        }
+        p++;
+    }
+    if (p >= end || *p != '"') return -1;
+    p++;
+    if (p >= end || !token_end(*p)) return -1;
+    out[i] = 0;
     return 0;
 }
 
@@ -136,12 +166,13 @@ static int object_long_pair(const char *json, const char *object_name,
     if (!p || *p++ != '[') return -1;
     char *tail = NULL;
     *first = strtol(p, &tail, 10);
-    if (tail == p) return -1;
+    if (tail == p || !token_end(*tail)) return -1;
     p = tail;
     while (isspace((unsigned char)*p)) p++;
     if (*p++ != ',') return -1;
+    while (isspace((unsigned char)*p)) p++;
     *second = strtol(p, &tail, 10);
-    if (tail == p) return -1;
+    if (tail == p || !token_end(*tail)) return -1;
     p = tail;
     while (isspace((unsigned char)*p)) p++;
     return *p == ']' ? 0 : -1;
@@ -175,14 +206,52 @@ static int exact_singleton_string_array(const char *json, const char *name,
     return *p == ']' ? 0 : -1;
 }
 
+static int token_end(char c) {
+    return c == 0 || c == ',' || c == '}' || c == ']' || isspace((unsigned char)c);
+}
+
+static int is_json_terminator_char(int ch) {
+    return ch == 0 || ch == ',' || ch == '}' || ch == ']' || isspace(ch);
+}
+
 static int jstr(const char *json, const char *name, char *out, size_t n) {
     const char *p = value(json, name);
     if (!p || *p != '"') return -1;
-    const char *q = strchr(++p, '"');
-    size_t size = q ? (size_t)(q - p) : n;
-    if (!q || !size || size >= n) return -1;
-    memcpy(out, p, size);
-    out[size] = 0;
+    p++;
+    size_t i = 0;
+    while (*p && *p != '"' && i < n - 1) {
+        if (*p == '\\') {
+            p++;
+            if (!*p) return -1;
+            switch (*p) {
+                case '"': out[i++] = '"'; break;
+                case '\\': out[i++] = '\\'; break;
+                case '/': out[i++] = '/'; break;
+                case 'b': out[i++] = '\b'; break;
+                case 'f': out[i++] = '\f'; break;
+                case 'n': out[i++] = '\n'; break;
+                case 'r': out[i++] = '\r'; break;
+                case 't': out[i++] = '\t'; break;
+                case 'u':
+                    for (int j = 0; j < 4; j++) {
+                        p++;
+                        if (!*p || !isxdigit((unsigned char)*p)) return -1;
+                    }
+                    out[i++] = '?';
+                    break;
+                default: return -1;
+            }
+        } else if ((unsigned char)*p < 0x20) {
+            return -1;
+        } else {
+            out[i++] = *p;
+        }
+        p++;
+    }
+    if (*p != '"') return -1;
+    p++;
+    if (!token_end(*p)) return -1;
+    out[i] = 0;
     return 0;
 }
 
@@ -191,7 +260,7 @@ static int jlong(const char *json, const char *name, long *out) {
     if (!p) return -1;
     char *end = NULL;
     long v = strtol(p, &end, 10);
-    if (end == p) return -1;
+    if (end == p || !token_end(*end)) return -1;
     *out = v;
     return 0;
 }
@@ -199,9 +268,12 @@ static int jlong(const char *json, const char *name, long *out) {
 static int jdouble(const char *json, const char *name, double *out) {
     const char *p = value(json, name);
     if (!p) return -1;
+    if (!strncmp(p, "NaN", 3) || !strncmp(p, "Infinity", 8) ||
+        !strncmp(p, "infinity", 8) || !strncmp(p, "-Infinity", 9) ||
+        !strncmp(p, "-infinity", 9)) return -1;
     char *end = NULL;
     double v = strtod(p, &end);
-    if (end == p || !isfinite(v)) return -1;
+    if (end == p || !isfinite(v) || !token_end(*end)) return -1;
     *out = v;
     return 0;
 }
@@ -209,11 +281,11 @@ static int jdouble(const char *json, const char *name, double *out) {
 static int jbool(const char *json, const char *name, int *out) {
     const char *p = value(json, name);
     if (!p) return -1;
-    if (!strncmp(p, "true", 4)) {
+    if (!strncmp(p, "true", 4) && token_end(p[4])) {
         *out = 1;
         return 0;
     }
-    if (!strncmp(p, "false", 5)) {
+    if (!strncmp(p, "false", 5) && token_end(p[5])) {
         *out = 0;
         return 0;
     }
@@ -223,7 +295,7 @@ static int jbool(const char *json, const char *name, int *out) {
 static int jnullable_long(const char *json, const char *name, long *out, int *present) {
     const char *p = value(json, name);
     if (!p) return -1;
-    if (!strncmp(p, "null", 4)) {
+    if (!strncmp(p, "null", 4) && token_end(p[4])) {
         *present = 0;
         *out = 0;
         return 0;
@@ -335,7 +407,7 @@ static RunnerArgs parse_args(int argc, char **argv) {
     args.pin_khz = 1600000;
     args.slot_s = 0.5;
     args.off_window_s = 0.5;
-    args.read_hz = 4000;
+    args.read_hz = 8000;
     args.temp_veto_c = 68;
     args.backend = BACKEND_REAL;
 
@@ -656,6 +728,22 @@ static void verify_engineering_smoke(const Schedule *schedule) {
     }
 }
 
+static int path_contained_in(const char *root, const char *path) {
+    char root_real[CP_PATH_MAX];
+    char path_parent_real[CP_PATH_MAX];
+    char path_copy[CP_PATH_MAX];
+    if (!realpath(root, root_real)) return 0;
+    snprintf(path_copy, sizeof(path_copy), "%s", path);
+    char *last_slash = strrchr(path_copy, '/');
+    if (!last_slash || last_slash == path_copy) return 0;
+    *last_slash = 0;
+    if (!realpath(path_copy, path_parent_real)) return 0;
+    size_t root_len = strlen(root_real);
+    if (strncmp(root_real, path_parent_real, root_len)) return 0;
+    char sep = path_parent_real[root_len];
+    return sep == 0 || sep == '/';
+}
+
 static void verify_authorization(const RunnerArgs *args, const Schedule *schedule) {
     char schema[96], executor_commit[41], executor_sha[65], actual_executor_sha[65];
     char campaign_source_commit[41];
@@ -736,7 +824,8 @@ static void verify_authorization(const RunnerArgs *args, const Schedule *schedul
         jdouble(authorization, "temperature_veto_c", &temp_veto_c) ||
             temp_veto_c != args->temp_veto_c ||
         jstr(authorization, "authorized_output_root", output_root, sizeof(output_root)) ||
-        !shell_safe(output_root) || !path_is_within(output_root, args->output_dir) ||
+        output_root[0] != '/' || !shell_safe(output_root) ||
+        !path_contained_in(output_root, args->output_dir) ||
         jstr(authorization, "authorized_by", authorized_by, sizeof(authorized_by));
     free(authorization);
     free(source_bundle);

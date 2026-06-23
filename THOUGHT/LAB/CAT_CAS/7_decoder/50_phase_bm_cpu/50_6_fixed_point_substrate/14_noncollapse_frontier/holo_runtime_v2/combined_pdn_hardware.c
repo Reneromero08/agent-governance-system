@@ -28,6 +28,11 @@
 #define START_GUARD_SECONDS 0.050
 #define MAX_EPOCH_SKEW_SECONDS 0.005
 #define MAX_CAPTURE_SAMPLES 10000000
+#define CAPTURE_COVERAGE_FRACTION_MIN 0.90
+#define EMPIRICAL_SAMPLE_RATE_FRACTION_MIN 0.90
+#define EMPIRICAL_SAMPLE_RATE_FRACTION_MAX 1.05
+#define EMPIRICAL_NYQUIST_MARGIN_MIN 1.50
+#define SAMPLE_GAP_MULTIPLE_MAX 4.0
 
 static volatile sig_atomic_t interrupted;
 
@@ -347,7 +352,7 @@ static void *sender_loop(void *opaque) {
                         sender->phase_index * sender->step_ticks;
         long state = (long)floor(offset / sender->step_ticks);
         int cycle_state = (int)((state % 8 + 8) % 8);
-        if (cycle_state < sender->level * 2) {
+        if (cycle_state < sender->level) {
             unsigned long long expected = 0;
             atomic_compare_exchange_strong_explicit(
                 &sender->first_drive_tsc, &expected, now,
@@ -449,14 +454,15 @@ static void lockin(const uint64_t *timestamps, const double *samples, int count,
     mean /= count;
 
     double i_acc = 0, q_acc = 0, f_i = 0, f_q = 0, weight = 0;
+    double off_freq = control_frequency_hz(frequency);
     for (int i = 0; i < count; i++) {
         double window = .5 * (1 - cos(2 * M_PI * i / (count - 1)));
         double sample = (samples[i] - mean) * window;
         double seconds = (timestamps[i] - origin) / tsc_hz;
         i_acc += sample * cos(2 * M_PI * frequency * seconds);
         q_acc += sample * sin(2 * M_PI * frequency * seconds);
-        f_i += sample * cos(2 * M_PI * (frequency * 1.37 + .071) * seconds);
-        f_q += sample * sin(2 * M_PI * (frequency * 1.37 + .071) * seconds);
+        f_i += sample * cos(2 * M_PI * off_freq * seconds);
+        f_q += sample * sin(2 * M_PI * off_freq * seconds);
         weight += window;
     }
     *i_out = 2 * i_acc / weight;
@@ -469,6 +475,10 @@ static double tone(int index) {
     double low = log(20), high = log(1500), x = index / 11.0;
     return exp(low + (high - low) * x) *
            (1 + .013 * sin(2.399963 * (index + 1)));
+}
+
+static double control_frequency_hz(double requested_hz) {
+    return requested_hz * 1.37 + .071;
 }
 
 static int mode_index(const char *mode) {
@@ -1220,6 +1230,61 @@ int run_hardware(const RunnerArgs *args, const Schedule *schedule) {
             reason = "CAPTURE_DEADLINE_OVERFLOW";
             rc = 5;
             goto cleanup;
+        }
+
+        if (!mock) {
+            double capture_coverage = (double)(timestamps[count - 1] - timestamps[0]) /
+                                      (double)(deadline - origin);
+            if (!isfinite(capture_coverage) ||
+                capture_coverage < CAPTURE_COVERAGE_FRACTION_MIN) {
+                free(timestamps);
+                free(observations);
+                reason = "CAPTURE_COVERAGE_INSUFFICIENT";
+                rc = 5;
+                goto cleanup;
+            }
+            double sample_span = (double)(timestamps[count - 1] - timestamps[0]);
+            double empirical_rate = sample_span > 0 ?
+                (double)(count - 1) * tsc_hz / sample_span : 0;
+            double rate_fraction = empirical_rate / (double)args->read_hz;
+            if (!isfinite(rate_fraction) ||
+                rate_fraction < EMPIRICAL_SAMPLE_RATE_FRACTION_MIN ||
+                rate_fraction > EMPIRICAL_SAMPLE_RATE_FRACTION_MAX) {
+                free(timestamps);
+                free(observations);
+                reason = "EMPIRICAL_SAMPLE_RATE_OUT_OF_BOUNDS";
+                rc = 5;
+                goto cleanup;
+            }
+            double max_nyquist = frequency;
+            double off_nyq = control_frequency_hz(frequency);
+            if (off_nyq > max_nyquist) max_nyquist = off_nyquist;
+            double nyquist_margin = max_nyquist > 0 ?
+                empirical_rate / (2.0 * max_nyquist) : 0;
+            if (!isfinite(nyquist_margin) ||
+                nyquist_margin < EMPIRICAL_NYQUIST_MARGIN_MIN) {
+                free(timestamps);
+                free(observations);
+                reason = "EMPIRICAL_NYQUIST_MARGIN_INSUFFICIENT";
+                rc = 5;
+                goto cleanup;
+            }
+            double max_gap_ticks = 0;
+            for (int g = 1; g < count; g++) {
+                double gap = (double)(timestamps[g] - timestamps[g - 1]);
+                if (gap > max_gap_ticks) max_gap_ticks = gap;
+            }
+            double nominal_spacing = tsc_hz / (double)args->read_hz;
+            double gap_multiple = nominal_spacing > 0 ?
+                max_gap_ticks / nominal_spacing : 0;
+            if (!isfinite(gap_multiple) ||
+                gap_multiple > SAMPLE_GAP_MULTIPLE_MAX) {
+                free(timestamps);
+                free(observations);
+                reason = "PATHOLOGICAL_TIMESTAMP_GAP";
+                rc = 5;
+                goto cleanup;
+            }
         }
 
         double i_value = NAN, q_value = NAN, magnitude = NAN, floor = NAN;

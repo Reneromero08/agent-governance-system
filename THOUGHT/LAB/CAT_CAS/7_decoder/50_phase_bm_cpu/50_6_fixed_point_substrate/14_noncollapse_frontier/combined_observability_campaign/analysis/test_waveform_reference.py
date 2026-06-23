@@ -98,6 +98,73 @@ class WaveformReferenceTests(unittest.TestCase):
                 expected = 4 if CODEBOOK[mode, source] < 0 else 0
                 self.assertEqual(positive, expected)
 
+    def test_dft_amplitude_monotonicity_exact_one_cycle(self) -> None:
+        tsc_hz = 8_000_000.0
+        tone_index = 11
+        frequency = tone_hz(tone_index)
+        period_ticks = int(tsc_hz / frequency)
+        step_ticks = tsc_hz / (8.0 * frequency)
+        timestamps = np.arange(period_ticks, dtype=np.uint64)
+        magnitudes = []
+        for level in (1, 2, 3):
+            gate = intended_v2_gate(
+                timestamps, origin_tsc=0, tsc_hz=tsc_hz,
+                tone_index=tone_index, phase_index_value=0,
+                amplitude_level=level,
+            )
+            dft = np.sum(gate * np.exp(
+                -2j * np.pi * frequency * timestamps / tsc_hz
+            )) / len(timestamps)
+            magnitudes.append(abs(dft))
+        self.assertLess(magnitudes[0], magnitudes[1])
+        self.assertLess(magnitudes[1], magnitudes[2])
+
+    def test_theta_increment_produces_pi_over_4_phase_shift(self) -> None:
+        tsc_hz = 8_000_000.0
+        tone_index = 5
+        frequency = tone_hz(tone_index)
+        period_ticks = int(tsc_hz / frequency)
+        timestamps = np.arange(period_ticks, dtype=np.uint64)
+        phases = []
+        for theta in range(8):
+            gate = intended_v2_gate(
+                timestamps, origin_tsc=0, tsc_hz=tsc_hz,
+                tone_index=tone_index, phase_index_value=theta,
+                amplitude_level=3,
+            )
+            dft = np.sum(gate * np.exp(
+                -2j * np.pi * frequency * timestamps / tsc_hz
+            )) / len(timestamps)
+            phases.append(np.angle(dft))
+        for i in range(7):
+            diff = abs(np.angle(np.exp(1j * (phases[i + 1] - phases[i]))))
+            self.assertAlmostEqual(diff, math.pi / 4.0, delta=0.01)
+
+    def test_sign_minus_one_produces_pi_phase_shift(self) -> None:
+        tsc_hz = 8_000_000.0
+        tone_index = 5
+        frequency = tone_hz(tone_index)
+        period_ticks = int(tsc_hz / frequency)
+        timestamps = np.arange(period_ticks, dtype=np.uint64)
+        gate_pos = intended_v2_gate(
+            timestamps, origin_tsc=0, tsc_hz=tsc_hz,
+            tone_index=tone_index, phase_index_value=0,
+            amplitude_level=3,
+        )
+        gate_neg = intended_v2_gate(
+            timestamps, origin_tsc=0, tsc_hz=tsc_hz,
+            tone_index=tone_index, phase_index_value=4,
+            amplitude_level=3,
+        )
+        dft_pos = np.sum(gate_pos * np.exp(
+            -2j * np.pi * frequency * timestamps / tsc_hz
+        )) / len(timestamps)
+        dft_neg = np.sum(gate_neg * np.exp(
+            -2j * np.pi * frequency * timestamps / tsc_hz
+        )) / len(timestamps)
+        diff = abs(np.angle(np.exp(1j * (np.angle(dft_neg) - np.angle(dft_pos)))))
+        self.assertAlmostEqual(diff, math.pi, delta=0.01)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

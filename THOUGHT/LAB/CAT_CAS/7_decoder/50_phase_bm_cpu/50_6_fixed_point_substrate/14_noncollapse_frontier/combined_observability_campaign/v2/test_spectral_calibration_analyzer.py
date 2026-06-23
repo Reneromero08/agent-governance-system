@@ -26,7 +26,7 @@ from calibration_contract import (
     build_source_bundle_manifest,
     canonical_bytes,
 )
-from waveform_reference import intended_v2_gate, lockin, phase_index, tone_hz
+from waveform_reference import control_frequency_hz, intended_v2_gate, lockin, phase_index, tone_hz
 
 HERE = Path(__file__).resolve().parent
 CONTRACTS = HERE / "contracts"
@@ -89,7 +89,7 @@ def authorization_for(plan: dict, session_id: str, bundle: dict,
         "session_ids": [session_id],
         "route_cores": ROUTE_CORES,
         "pin_khz": 1600000, "slot_s": .5, "off_window_s": .5,
-        "read_hz": 4000, "temperature_veto_c": 68.0,
+        "read_hz": 8000, "temperature_veto_c": 68.0,
         "authorized_output_root": "/tmp/calibration", "authorized_by": "TEST",
     }
 
@@ -151,14 +151,17 @@ def build_full_campaign_fixture(root: Path, *, mutate=None) -> tuple[Path, Path,
         tsc_hz = 1_000_000.0
         for index, declared in enumerate(session["windows"]):
             origin = 1_000_000 + index * 1_000_000
-            timestamps = origin + np.arange(1, 129, dtype=np.uint64) * 3000
+            spacing = int(tsc_hz / 8000)
+            timestamps = origin + np.arange(1, 4097, dtype=np.uint64) * spacing
+            span = int(timestamps[-1]) - int(timestamps[0])
+            deadline_offset = int(span * 1.10) + 1
             if declared["drive_on"]:
                 tone = int(declared["physical_tone_index"])
                 sender_phase = phase_index(
                     0, int(declared["sender_codeword_source_index"]),
                     int(declared["sender_theta_idx"]),
                 )
-                samples = 100.0 * (int(declared["amplitude_level"]) ** 2) * intended_v2_gate(
+                samples = 100.0 * intended_v2_gate(
                     timestamps, origin_tsc=origin, tsc_hz=tsc_hz,
                     tone_index=tone, phase_index_value=sender_phase,
                     amplitude_level=int(declared["amplitude_level"]),
@@ -169,13 +172,13 @@ def build_full_campaign_fixture(root: Path, *, mutate=None) -> tuple[Path, Path,
                 )
                 off_bin = lockin(
                     timestamps, samples, origin_tsc=origin, tsc_hz=tsc_hz,
-                    frequency_hz=tone_hz(tone) * 1.37 + .071,
+                    frequency_hz=control_frequency_hz(tone_hz(tone)),
                 )
                 row = {
                     "window_index": index, "session_id": session_id,
                     **csv_echo(declared),
                     "slot_start_tsc": origin,
-                    "capture_deadline_tsc": origin + 500000,
+                    "capture_deadline_tsc": origin + deadline_offset,
                     "sender_ready_tsc": origin - 1,
                     "sender_epoch_tsc": origin + 1,
                     "first_drive_tsc": origin + 1,
@@ -208,7 +211,7 @@ def build_full_campaign_fixture(root: Path, *, mutate=None) -> tuple[Path, Path,
                     "window_index": index, "session_id": session_id,
                     **csv_echo(declared),
                     "slot_start_tsc": origin,
-                    "capture_deadline_tsc": origin + 500000,
+                    "capture_deadline_tsc": origin + deadline_offset,
                     "sender_ready_tsc": 0,
                     "sender_epoch_tsc": 0,
                     "first_drive_tsc": 0,
@@ -262,7 +265,7 @@ def build_full_campaign_fixture(root: Path, *, mutate=None) -> tuple[Path, Path,
             "victim_core": ROUTE_CORES[session["route"]][0],
             "sender_core": ROUTE_CORES[session["route"]][1],
             "tsc_calibration_hz": tsc_hz, "frequency_policy": 1600000,
-            "read_rate_hz": 4000, "slot_duration_s": .5,
+            "read_rate_hz": 8000, "slot_duration_s": .5,
             "sender_off_duration_s": .5, "temperature_veto_c": 68.0,
         })
         update_run_manifest(run_dir)
@@ -315,7 +318,7 @@ def build_fixture(root: Path):
         "source_bundle_sha256": hashlib.sha256(canonical_bytes(source_bundle)).hexdigest(),
         "session_ids": [session_id], "route_cores": ROUTE_CORES,
         "pin_khz": 1600000, "slot_s": .5, "off_window_s": .5,
-        "read_hz": 4000, "temperature_veto_c": 68.0,
+        "read_hz": 8000, "temperature_veto_c": 68.0,
         "authorized_output_root": "/tmp/calibration", "authorized_by": "TEST",
     }
     authorization_bytes = canonical_bytes(authorization)
@@ -327,12 +330,17 @@ def build_fixture(root: Path):
     }
     (run_dir / "session.json").write_bytes(canonical_bytes(session))
     (run_dir / "windows.jsonl").write_bytes(canonical_bytes(window))
-    raw = np.array([(100, 1.0), (200, 2.0), (300, 1.5), (400, 2.5)], dtype=RAW_DTYPE)
+    spacing = 125
+    raw = np.array([(100 + i * spacing, 1.0 + 0.1 * i) for i in range(64)], dtype=RAW_DTYPE)
     raw.tofile(run_dir / "raw_samples.bin")
+    span = int(raw["timestamp_tsc"][-1]) - int(raw["timestamp_tsc"][0])
+    deadline = max(int(raw["timestamp_tsc"][-1]) + 1, int(span * 1.09) + 1)
     result_row = {
-        "window_index": 0, "session_id": session_id, "sample_count": 4,
-        "first_sample_tsc": 100, "last_sample_tsc": 400, "slot_start_tsc": 0,
-        "capture_deadline_tsc": 500,
+        "window_index": 0, "session_id": session_id, "sample_count": 64,
+        "first_sample_tsc": int(raw["timestamp_tsc"][0]),
+        "last_sample_tsc": int(raw["timestamp_tsc"][-1]),
+        "slot_start_tsc": 0,
+        "capture_deadline_tsc": deadline,
         "sender_ready_tsc": 0, "sender_epoch_tsc": 0, "first_drive_tsc": 0,
         "receiver_epoch_tsc": 50,
         "temp_before_c": 40, "temp_after_c": 41,
@@ -375,7 +383,7 @@ def build_fixture(root: Path):
         "session_manifest_sha256": "a" * 64,
         "victim_core": 4, "sender_core": 5,
         "tsc_calibration_hz": 1_000_000.0, "frequency_policy": 1600000,
-        "read_rate_hz": 4000, "slot_duration_s": .5,
+        "read_rate_hz": 8000, "slot_duration_s": .5,
         "sender_off_duration_s": .5, "temperature_veto_c": 68.0,
     }
     (run_dir / "run.json").write_bytes(canonical_bytes(run))

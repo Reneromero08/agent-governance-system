@@ -102,7 +102,7 @@ double step_ticks = tsc_hz / (8.0 * tone_hz);
 double phase_ticks = phase_index * step_ticks;
 long state = floor((now - origin - phase_ticks) / step_ticks);
 int cycle_state = ((state % 8) + 8) % 8;
-int on = cycle_state < amplitude_level * 2;
+int on = cycle_state < amplitude_level;
 ```
 
 This gives:
@@ -124,9 +124,9 @@ code sign:
 -1 adds 4 phase indices = π
 
 amplitude_level:
-1 gives 2/8 duty
-2 gives 4/8 duty
-3 gives 6/8 duty
+1 gives 1/8 duty
+2 gives 2/8 duty
+3 gives 3/8 duty
 ```
 
 The phase origin used by the sender, raw evidence, and lock-in must be identical.
@@ -215,7 +215,7 @@ The V2 authorization artifact must bind:
   "pin_khz": 1600000,
   "slot_s": 0.5,
   "off_window_s": 0.5,
-  "read_hz": 4000,
+   "read_hz": 8000,
   "temperature_veto_c": 68.0,
   "automatic_retry": false,
   "restoration_authorized": false
@@ -292,7 +292,7 @@ For every amplitude level:
 - near-zero error against the reference waveform;
 - one theta step changes phase by `π/4`;
 - four phase steps change phase by `π`;
-- gate duty matches 2/8, 4/8, or 6/8.
+- gate duty matches 1/8, 2/8, or 3/8.
 
 ## 9.2 Synthetic lock-in tests
 
