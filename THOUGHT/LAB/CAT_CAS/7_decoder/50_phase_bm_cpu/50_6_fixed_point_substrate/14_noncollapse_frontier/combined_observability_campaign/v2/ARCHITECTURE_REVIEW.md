@@ -21,13 +21,13 @@ session IDs, route cores, runtime parameters, output root, and authorizer.
 
 The executable plan contains four exact sessions: pre- and post-reboot
 repetitions for each of `v4s5` and `v2s3`. Each session has a mechanically
-derived 588 windows:
+derived 672 windows:
 
 ```text
-12 tones * 3 amplitudes * 8 theta states * 2 signs + 12 sender-off controls
-= 588 windows/session
-= 1,176 windows/route
-= 2,352 windows/campaign
+12 tones * (8 theta blocks * (3 amplitudes * 2 signs + 1 sender-off control))
+= 672 windows/session
+= 1,344 windows/route
+= 2,688 windows/campaign
 ```
 
 The plan binds the ordered windows, runtime parameters, logically separated
@@ -49,10 +49,10 @@ null and cannot support a scramble-null scientific claim.
 
 ```text
 CALIBRATION_PLAN_V2.json SHA-256:
-e995cdff1ee6e0efe9f95ca8d5867b38668188fefbb8a10318342d5496e39a9a
+b4b9d1bd50eb1f246f109a1508f7ac68f42c0ba7e4462fe53442e678c4009c3c
 
 SOURCE_BUNDLE_MANIFEST_V2.json SHA-256:
-05ec78cb42ca1f1c74919226a8a74893e485329c15cfd9af6a0e689d196dc077
+c165c753b70f8e5aff49bff31ad4c3c5db5c0f2d8715594171324b187df1342a
 ```
 
 V2 run objects use execution class

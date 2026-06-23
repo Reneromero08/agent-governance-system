@@ -13,6 +13,8 @@ V2 implements:
   sender-field separation;
 - exact runtime, executor binary, campaign plan, source bundle, session
   manifest, session ID, and route/core binding to a V2 authorization;
+- explicit nonzero campaign source commit binding for real session contracts;
+- per-window victim and sender core frequency telemetry;
 - a frequency-settling gate before the first capture origin;
 - total run-directory manifest closure;
 - strict C-to-Python waveform equivalence fixtures.
