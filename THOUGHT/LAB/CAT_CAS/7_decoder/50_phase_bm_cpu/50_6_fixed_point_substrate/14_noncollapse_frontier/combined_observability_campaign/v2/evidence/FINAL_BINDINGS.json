@@ -56,7 +56,8 @@
     "339c9fb8": "incomplete evidence provenance",
     "f524e023": "incomplete evidence-correction provenance",
     "c81b543f": "raw evidence persistence and count correction",
-    "f531ac80": "command evidence closure"
+    "f531ac80": "command evidence closure",
+    "3ed3b53c": "review ledger provenance correction"
   },
   "raw_evidence_closure_commit": "c81b543ffb74644a35aa97605ca47fa9ec89c76c",
   "prior_incomplete_evidence_correction_commit": "f524e0230ed46b56b93dffe6b37f446d6602df0c",
@@ -74,5 +75,6 @@
     "per_command_timestamps_recorded": false,
     "timestamp_policy": "timestamp is null when the raw command log did not record command start time; environment_timestamp preserves only the captured environment timestamp",
     "windows_command_provenance": "prior committed ledger c81b543f plus the binding work package; result output is preserved in committed Windows logs"
-  }
+  },
+  "review_ledger_correction_commit": "3ed3b53cd44a244674422343d605187781c6e76e"
 }
