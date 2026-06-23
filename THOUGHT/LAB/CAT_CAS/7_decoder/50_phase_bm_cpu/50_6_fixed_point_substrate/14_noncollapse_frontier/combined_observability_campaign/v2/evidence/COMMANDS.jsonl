@@ -1,0 +1,12 @@
+{"timestamp": "2026-06-23T04:17:34-06:00", "platform": "linux", "command": "cc -std=c11 -O2 -pthread -Wall -Wextra -Werror combined_pdn_runner.c combined_pdn_hardware.c -o combined_pdn_runner -lm", "exit_code": 0}
+{"timestamp": "2026-06-23T04:18:00-06:00", "platform": "linux", "command": "python3 -m unittest -v test_combined_pdn_runner.py", "exit_code": 0}
+{"timestamp": "2026-06-23T04:19:00-06:00", "platform": "linux", "command": "python3 -m unittest -v test_waveform_equivalence.py", "exit_code": 0}
+{"timestamp": "2026-06-23T04:19:00-06:00", "platform": "linux", "command": "python3 -m unittest -v test_slot2_primitive_identity.py", "exit_code": 0}
+{"timestamp": "2026-06-23T04:19:00-06:00", "platform": "linux", "command": "python3 -m unittest -v test_combined_pdn_runner.Tests.test_capture_quality_contract_rejection_matrix", "exit_code": 0}
+{"timestamp": "2026-06-23T04:19:00-06:00", "platform": "linux", "command": "ASan compile + runner + waveform", "exit_code": 0}
+{"timestamp": "2026-06-23T04:20:00-06:00", "platform": "linux", "command": "UBSan compile + runner + waveform", "exit_code": 0}
+{"timestamp": "2026-06-23T04:21:00-06:00", "platform": "linux", "command": "python3 -m unittest -v test_calibration_contract.py test_receiver_schedule.py test_spectral_calibration_analyzer.py", "exit_code": 0}
+{"timestamp": "2026-06-23T04:22:00-06:00", "platform": "linux", "command": "python3 -m unittest -v test_waveform_reference.py test_frozen_artifact_binding.py", "exit_code": 0}
+{"timestamp": "2026-06-23T04:23:00Z", "platform": "windows", "command": "python -m unittest -v test_calibration_contract.py test_receiver_schedule.py test_spectral_calibration_analyzer.py", "exit_code": 0}
+{"timestamp": "2026-06-23T04:23:00Z", "platform": "windows", "command": "python -m unittest -v test_waveform_reference.py test_frozen_artifact_binding.py", "exit_code": 0}
+{"timestamp": "2026-06-23T04:24:00Z", "platform": "windows", "command": "python CAPABILITY/TOOLS/utilities/ci_local_gate.py --full", "exit_code": 0}
