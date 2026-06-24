@@ -83,6 +83,9 @@ jobs:
       - name: Verify exact source scope
         if: steps.guard.outputs.render == 'true'
         run: |
+          rm -f \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_runner \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/waveform_fixture
           git diff --check
           { git diff --name-only; git ls-files --others --exclude-standard; } | sort -u > "$RUNNER_TEMP/changed.txt"
           cat "$RUNNER_TEMP/changed.txt"
