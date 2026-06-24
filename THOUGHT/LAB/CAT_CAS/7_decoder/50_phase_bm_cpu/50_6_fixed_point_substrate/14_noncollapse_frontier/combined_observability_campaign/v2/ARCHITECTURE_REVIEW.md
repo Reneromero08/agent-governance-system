@@ -133,3 +133,12 @@ small_wall_authorized=false
 ## Next legitimate action
 
 Independent review of PR #21 is next. Gate R remains a separate project-owner decision. No physical acquisition, restoration experiment, target-coupling experiment, or Small Wall execution is authorized by this qualification.
+
+
+[Phase 6 V2 Custody Qualification — Complete Commit Chain]
+source: 21201106a2b4cbd811d396181e733e08c38beb5d
+generated: a8ff3aa96f7bc3bff005088e63e837da44e8ce41
+evidence: d0086ad0897cce6027b511c3409ff4ba3d422860
+plan: 7b21fa00ae986128f812d7720994d8e168844aa71cf3435b2edfea10497c738a
+bundle: 11547477f1a41e9b0661bb9f5d3532ab75aba20e0c785d9d14861bea2c57d487
+status: PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_NEXT
