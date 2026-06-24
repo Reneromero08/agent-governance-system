@@ -1,0 +1,140 @@
+name: TEMP Phase 6 V2 Contract Regeneration
+
+on:
+  push:
+    branches:
+      - tmp/phase6-v2-contract-regeneration
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: 21201106a2b4cbd811d396181e733e08c38beb5d
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.11"
+      - name: Install analysis dependency
+        run: python -m pip install --disable-pip-version-check "numpy>=1.26,<3"
+      - name: Regenerate twice and prove determinism
+        env:
+          SOURCE_COMMIT: 21201106a2b4cbd811d396181e733e08c38beb5d
+        run: |
+          set -euo pipefail
+          V2="THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/v2"
+          GEN1="$RUNNER_TEMP/gen1"
+          GEN2="$RUNNER_TEMP/gen2"
+          mkdir -p "$GEN1" "$GEN2"
+          python "$V2/build_calibration_plan_v2.py" \
+            "$GEN1/CALIBRATION_PLAN_V2.json" \
+            --sessions-output "$GEN1/sessions" \
+            --source-bundle-output "$GEN1/SOURCE_BUNDLE_MANIFEST_V2.json" \
+            --source-commit "$SOURCE_COMMIT" | tee "$RUNNER_TEMP/generation-1.json"
+          python "$V2/build_calibration_plan_v2.py" \
+            "$GEN2/CALIBRATION_PLAN_V2.json" \
+            --sessions-output "$GEN2/sessions" \
+            --source-bundle-output "$GEN2/SOURCE_BUNDLE_MANIFEST_V2.json" \
+            --source-commit "$SOURCE_COMMIT" | tee "$RUNNER_TEMP/generation-2.json"
+          diff -ru "$GEN1" "$GEN2"
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          root = Path(os.environ["RUNNER_TEMP"]) / "gen1"
+          plan = json.loads((root / "CALIBRATION_PLAN_V2.json").read_text())
+          assert plan["campaign_source_commit"] == os.environ["SOURCE_COMMIT"]
+          assert plan["total_window_count"] == 2688
+          assert plan["read_hz"] == 8000
+          sessions = sorted((root / "sessions").iterdir())
+          assert len(sessions) == 4
+          route_counts = {}
+          for session in sessions:
+              header = json.loads((session / "session.json").read_text())
+              assert header["campaign_source_commit"] == os.environ["SOURCE_COMMIT"]
+              assert header["window_count"] == 672
+              assert sum(1 for _ in (session / "windows.jsonl").open()) == 672
+              manifest = json.loads((session / "session_manifest.json").read_text())
+              assert manifest["schema_id"] == "CAT_CAS_PHASE6_COMBINED_SESSION_MANIFEST_V2"
+              route_counts[header["route"]] = route_counts.get(header["route"], 0) + header["window_count"]
+          assert route_counts == {"v2s3": 1344, "v4s5": 1344}
+          result1 = json.loads((Path(os.environ["RUNNER_TEMP"]) / "generation-1.json").read_text())
+          result2 = json.loads((Path(os.environ["RUNNER_TEMP"]) / "generation-2.json").read_text())
+          assert result1 == result2
+          (Path(os.environ["RUNNER_TEMP"]) / "contract-digests.json").write_text(
+              json.dumps(result1, indent=2, sort_keys=True) + "\n"
+          )
+          PY
+      - name: Overlay generated contracts and verify exact scope
+        run: |
+          set -euo pipefail
+          V2="THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/v2"
+          rsync -a --delete "$RUNNER_TEMP/gen1/" "$V2/contracts/"
+          git diff --check
+          git diff --name-only | sort > "$RUNNER_TEMP/changed-contracts.txt"
+          cat "$RUNNER_TEMP/changed-contracts.txt"
+          test "$(wc -l < "$RUNNER_TEMP/changed-contracts.txt")" -eq 12
+          test "$(grep -c '/combined_observability_campaign/v2/contracts/' "$RUNNER_TEMP/changed-contracts.txt")" -eq 12
+          ! grep -E 'windows\.jsonl$' "$RUNNER_TEMP/changed-contracts.txt"
+      - name: Test regenerated contracts and binding
+        run: |
+          set -euo pipefail
+          V2="THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/v2"
+          cd "$V2"
+          python -m py_compile *.py
+          python -m unittest -v test_calibration_contract.py test_receiver_schedule.py test_spectral_calibration_analyzer.py
+          cd ..
+          python analysis/test_frozen_artifact_binding.py
+          cd ..
+          python gate_r/verify_combined_plan_binding.py --repo-root "$GITHUB_WORKSPACE" --output "$RUNNER_TEMP/combined_plan"
+      - name: Create generated-contract Git blobs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request
+          from pathlib import Path
+          changed = Path(os.environ["RUNNER_TEMP"]) / "changed-contracts.txt"
+          paths = [line.strip() for line in changed.read_text().splitlines() if line.strip()]
+          if len(paths) != 12:
+              raise SystemExit(f"expected 12 contract paths, found {len(paths)}")
+          url = f"https://api.github.com/repos/{os.environ['GITHUB_REPOSITORY']}/git/blobs"
+          entries = []
+          for path in paths:
+              payload = json.dumps({
+                  "content": Path(path).read_text(encoding="utf-8"),
+                  "encoding": "utf-8",
+              }).encode()
+              request = urllib.request.Request(
+                  url,
+                  data=payload,
+                  method="POST",
+                  headers={
+                      "Authorization": f"Bearer {os.environ['GH_TOKEN']}",
+                      "Accept": "application/vnd.github+json",
+                      "X-GitHub-Api-Version": "2022-11-28",
+                      "Content-Type": "application/json",
+                  },
+              )
+              with urllib.request.urlopen(request) as response:
+                  sha = json.load(response)["sha"]
+              entries.append({"path": path, "mode": "100644", "type": "blob", "sha": sha})
+          output = Path(os.environ["RUNNER_TEMP"]) / "contract_blobs.json"
+          output.write_text(json.dumps(entries, indent=2) + "\n", encoding="utf-8")
+          print(output.read_text())
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: phase6-v2-contract-blobs-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/contract_blobs.json
+            ${{ runner.temp }}/contract-digests.json
+            ${{ runner.temp }}/changed-contracts.txt
+            ${{ runner.temp }}/generation-1.json
+            ${{ runner.temp }}/generation-2.json
+            ${{ runner.temp }}/combined_plan
+          if-no-files-found: error
