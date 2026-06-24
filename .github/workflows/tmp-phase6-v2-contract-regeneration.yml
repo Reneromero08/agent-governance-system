@@ -53,7 +53,7 @@ jobs:
           plan = json.loads((root / "CALIBRATION_PLAN_V2.json").read_text())
           assert plan["campaign_source_commit"] == os.environ["SOURCE_COMMIT"]
           assert plan["total_window_count"] == 2688
-          assert plan["read_hz"] == 8000
+          assert plan["runtime_parameters"]["read_hz"] == 8000
           sessions = sorted((root / "sessions").iterdir())
           assert len(sessions) == 4
           route_counts = {}
