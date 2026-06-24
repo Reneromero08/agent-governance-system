@@ -4,9 +4,12 @@ Plan: 7b21fa00ae986128f812d7720994d8e168844aa71cf3435b2edfea10497c738a, Bundle: 
 Host: catcas (Phenom II X6), Debian 13, gcc 14.2.0
 
 Strict compile: PASSED (0 errors, 0 warnings)
-Linux unique: 86 (runner 40 + waveform 2 + slot2 1 + captured_file 4 + V2 23 + analysis 16)
+Linux unique functional: 86 (runner 40 + waveform 2 + slot2 1 + captured_file 4 + V2 23 + analysis 16)
 ASan: 42 tests, 0 findings
 UBSan: 42 tests, 0 findings
 Windows: 39 tests
 Total: 209
-hardware_ran=false, authorization_artifact_created=false
+
+GitHub runs: v2_strict(28068218010,28068617003) combined(28068218035,28068616976) contracts(28068616972) governance(28068617007)
+
+hardware_ran=false, authorization_artifact_created=false, all scientific auth false

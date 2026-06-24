@@ -2,8 +2,11 @@
   "tested_head": "a8ff3aa96f7bc3bff005088e63e837da44e8ce41",
   "source_commit": "21201106a2b4cbd811d396181e733e08c38beb5d",
   "generated_contract_commit": "a8ff3aa96f7bc3bff005088e63e837da44e8ce41",
+  "incomplete_evidence_summary_commit": "4b5817a8741889caf5fadfa49df79fecb2f858a9",
   "plan_sha256": "7b21fa00ae986128f812d7720994d8e168844aa71cf3435b2edfea10497c738a",
   "source_bundle_sha256": "11547477f1a41e9b0661bb9f5d3532ab75aba20e0c785d9d14861bea2c57d487",
+  "windows_tested_sha": "a8ff3aa96f7bc3bff005088e63e837da44e8ce41",
+  "linux_tested_sha": "a8ff3aa96f7bc3bff005088e63e837da44e8ce41",
   "hardware_ran": false,
   "authorization_artifact_created": false,
   "calibration_authorized": false,
@@ -17,6 +20,10 @@
     "combined_source": 28068218035,
     "combined_generated": 28068616976,
     "contracts": 28068616972,
-    "governance": 28068617007
+    "governance": 28068617007,
+    "evidence_v2_strict": 28071668703,
+    "evidence_combined": 28071668712,
+    "evidence_contracts": 28071668717,
+    "evidence_governance": 28071668713
   }
 }

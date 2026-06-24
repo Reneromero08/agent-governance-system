@@ -1,0 +1,5 @@
+
+[ci-local-gate] FAIL: working tree is not clean before checks.
+Lab-exempt THOUGHT/ paths are excluded. Remaining entries:
+M .gitignore
+GATE_RC=1

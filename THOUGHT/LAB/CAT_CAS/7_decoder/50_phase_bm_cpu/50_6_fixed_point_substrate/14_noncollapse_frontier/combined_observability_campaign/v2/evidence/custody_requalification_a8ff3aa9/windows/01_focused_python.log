@@ -1,0 +1,25 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.6, pytest-9.0.2, pluggy-1.6.0
+rootdir: D:\CCC 2.0\AI\agent-governance-system
+configfile: pytest.ini
+plugins: anyio-4.12.1, xdist-3.8.0
+collected 23 items
+
+test_calibration_contract.py .......                                     [ 30%]
+test_receiver_schedule.py ..                                             [ 39%]
+test_spectral_calibration_analyzer.py ..............                     [100%]
+
+============================= 23 passed in 36.95s =============================
+V2_RC=0
+============================= test session starts =============================
+platform win32 -- Python 3.11.6, pytest-9.0.2, pluggy-1.6.0
+rootdir: D:\CCC 2.0\AI\agent-governance-system
+configfile: pytest.ini
+plugins: anyio-4.12.1, xdist-3.8.0
+collected 16 items
+
+test_waveform_reference.py .........                                     [ 56%]
+test_frozen_artifact_binding.py .......                                  [100%]
+
+============================= 16 passed in 0.34s ==============================
+ANALYSIS_RC=0
