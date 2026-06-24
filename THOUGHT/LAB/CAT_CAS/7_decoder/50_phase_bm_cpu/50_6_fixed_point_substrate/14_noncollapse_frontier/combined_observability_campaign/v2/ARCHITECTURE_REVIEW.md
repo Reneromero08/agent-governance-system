@@ -19,13 +19,13 @@ generated contracts:
 a8ff3aa96f7bc3bff005088e63e837da44e8ce41
 
 raw evidence closure:
-c81b543ffb74644a35aa97605ca47fa9ec89c76c
+4b5817a8741889caf5fadfa49df79fecb2f858a9 (incomplete summary), 69691b8061ea9eef6bf1b0dff44d0f1f2de1b863 (incomplete raw), 05c68281bcafda53381b2f70e4de13c25d1f5c9b (corrected), d0086ad0897cce6027b511c3409ff4ba3d422860 (metadata)
 
 command evidence closure:
-f531ac8016c9c95141ed1c0ec180bcd01370d346
+d0086ad0897cce6027b511c3409ff4ba3d422860
 
 review ledger correction:
-3ed3b53cd44a244674422343d605187781c6e76e
+14469abb48567dda7c6eeb5c4bf16a8b282be85c
 
 plan SHA-256:
 7b21fa00ae986128f812d7720994d8e168844aa71cf3435b2edfea10497c738a
@@ -67,8 +67,8 @@ Machine-derived execution counts:
 ```text
 unique functional test cases: 86
 capture-quality subset recheck: 1
-ASan reexecutions: 38
-UBSan reexecutions: 38
+ASan reexecutions: 42
+UBSan reexecutions: 42
 Windows focused executions: 39
 total unittest executions: 209
 all exit codes zero: true
@@ -77,10 +77,10 @@ all exit codes zero: true
 The evidence inventory is committed at:
 
 ```text
-combined_observability_campaign/v2/evidence/EVIDENCE_INVENTORY.sha256
+combined_observability_campaign/v2/evidence/custody_requalification_a8ff3aa9/EVIDENCE_INVENTORY.sha256
 ```
 
-Its independent verification record reports `PASSED` for 26 entries.
+Its independent verification record reports `PASSED` for 20 entries.
 
 ## Preserved scientific boundary
 

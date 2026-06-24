@@ -285,9 +285,9 @@ Final engineering qualification binding:
 ```text
 source commit: 21201106a2b4cbd811d396181e733e08c38beb5d
 generated contract commit: a8ff3aa96f7bc3bff005088e63e837da44e8ce41
-raw evidence closure: c81b543ffb74644a35aa97605ca47fa9ec89c76c
-command evidence closure: f531ac8016c9c95141ed1c0ec180bcd01370d346
-review ledger correction: 3ed3b53cd44a244674422343d605187781c6e76e
+raw evidence closure: 4b5817a8741889caf5fadfa49df79fecb2f858a9 (incomplete summary), 69691b8061ea9eef6bf1b0dff44d0f1f2de1b863 (incomplete raw), 05c68281bcafda53381b2f70e4de13c25d1f5c9b (corrected), d0086ad0897cce6027b511c3409ff4ba3d422860 (metadata)
+command evidence closure: d0086ad0897cce6027b511c3409ff4ba3d422860
+review ledger correction: 14469abb48567dda7c6eeb5c4bf16a8b282be85c
 plan SHA-256: 7b21fa00ae986128f812d7720994d8e168844aa71cf3435b2edfea10497c738a
 source-bundle SHA-256: 11547477f1a41e9b0661bb9f5d3532ab75aba20e0c785d9d14861bea2c57d487
 unique functional test cases: 86
