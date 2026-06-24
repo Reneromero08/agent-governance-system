@@ -213,6 +213,10 @@ class Tests(unittest.TestCase):
             self.assertNotIn("run_manifest.json", manifest["files"])
             self.assertTrue(all(sha(output / name) == binding["sha256"]
                                 for name, binding in manifest["files"].items()))
+            self.assertEqual((output / "session.json").read_bytes(),
+                             (directory / "session.json").read_bytes())
+            self.assertEqual((output / "windows.jsonl").read_bytes(),
+                             (directory / "windows.jsonl").read_bytes())
 
     def test_output_collision(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -226,21 +230,25 @@ class Tests(unittest.TestCase):
         self.assert_reject(None, "unexpected session manifest schema", "BAD")
 
     def test_manifest_size(self):
-        with tempfile.TemporaryDirectory() as temp:
-            directory = write_session(Path(temp))
-            (directory / "windows.jsonl").write_text(
-                (directory / "windows.jsonl").read_text() + " ")
-            self.assertIn("size mismatch", self.exec_runner(
-                directory, Path(temp) / "out", "--validate-only").stderr)
+        for name in ("session.json", "windows.jsonl"):
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as temp:
+                directory = write_session(Path(temp))
+                path = directory / name
+                path.write_bytes(path.read_bytes() + b" ")
+                result = self.exec_runner(directory, Path(temp) / "out", "--validate-only")
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("size binding mismatch", result.stderr)
 
     def test_manifest_sha(self):
-        with tempfile.TemporaryDirectory() as temp:
-            directory = write_session(Path(temp))
-            manifest = json.loads((directory / "session_manifest.json").read_text())
-            manifest["files"]["windows.jsonl"]["sha256"] = "0" * 64
-            dump(directory / "session_manifest.json", manifest)
-            self.assertIn("sha256 mismatch", self.exec_runner(
-                directory, Path(temp) / "out", "--validate-only").stderr)
+        for name in ("session.json", "windows.jsonl"):
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as temp:
+                directory = write_session(Path(temp))
+                manifest = json.loads((directory / "session_manifest.json").read_text())
+                manifest["files"][name]["sha256"] = "0" * 64
+                dump(directory / "session_manifest.json", manifest)
+                result = self.exec_runner(directory, Path(temp) / "out", "--validate-only")
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("sha256 binding mismatch", result.stderr)
 
     def test_noncontiguous_duplicate(self):
         self.assert_reject(lambda header, rows: rows[1].update(window_index=0),
@@ -591,6 +599,72 @@ class Tests(unittest.TestCase):
             run = json.loads((output / "run.json").read_text())
             self.assertEqual(run["failure_reason"], "RESTORATION_FAILURE")
             self.assertFalse(run["host_control_state_restored"])
+
+
+    def test_blank_authorized_by_is_rejected(self):
+        for value in ("", " ", "\t", "\n\t "):
+            with self.subTest(value=repr(value)), tempfile.TemporaryDirectory() as temp:
+                result = self.authorization_result(
+                    Path(temp), auth_mutate=lambda authorization, v=value:
+                        authorization.update(authorized_by=v)
+                )
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("invalid V2 calibration authorization", result.stderr)
+
+    @unittest.skipIf(os.name == "nt", "symlink custody is a Linux requirement")
+    def test_symlinked_immutable_inputs_are_rejected(self):
+        for name in ("session_manifest.json", "session.json", "windows.jsonl"):
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp)
+                session = write_session(root)
+                path = session / name
+                real = session / f"{name}.real"
+                path.replace(real)
+                path.symlink_to(real.name)
+                result = self.exec_runner(session, root / "out", "--validate-only")
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("cannot capture", result.stderr)
+
+        for kind in ("authorization", "source_bundle"):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp)
+                session = write_session(root)
+                bundle = write_source_bundle(session)
+                authorized_root = root / "authorized"
+                authorized_root.mkdir()
+                authorization = write_authorization(root, session, bundle, authorized_root)
+                path = authorization if kind == "authorization" else bundle
+                real = path.with_name(path.name + ".real")
+                path.replace(real)
+                path.symlink_to(real.name)
+                result = self.exec_runner(
+                    session, authorized_root / "run", "--hardware",
+                    "--authorization-artifact", str(authorization),
+                    source_bundle=bundle, fail="thermal",
+                )
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("cannot capture", result.stderr)
+
+    def test_mock_output_uses_captured_schedule_bytes(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            session = write_session(root)
+            output = root / "out"
+            result = self.exec_runner(session, output, "--mock-hardware")
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual((output / "session.json").read_bytes(),
+                             (session / "session.json").read_bytes())
+            self.assertEqual((output / "windows.jsonl").read_bytes(),
+                             (session / "windows.jsonl").read_bytes())
+
+    def test_no_bound_input_path_reopen_helpers_remain(self):
+        runner_source = (HERE / "combined_pdn_runner.c").read_text(encoding="utf-8")
+        hardware_source = (HERE / "combined_pdn_hardware.c").read_text(encoding="utf-8")
+        self.assertNotIn("hash_file(args->authorization_artifact", hardware_source)
+        self.assertNotIn("copy_file(", hardware_source)
+        self.assertIn("write_captured_exclusive", runner_source)
+        self.assertIn("write_captured_exclusive", hardware_source)
+
 
 
 if __name__ == "__main__":

@@ -179,6 +179,61 @@ static int object_member_count(const char *json, const char *object_name) {
     return count;
 }
 
+static int direct_object_member_count(const char *start, const char *end) {
+    int count = 0, in_string = 0, nested = 0;
+    for (const char *p = start + 1; p < end; p++) {
+        if (*p == '"' && p[-1] != '\\') in_string = !in_string;
+        if (in_string) continue;
+        if (*p == '{' || *p == '[') nested++;
+        else if (*p == '}' || *p == ']') nested--;
+        else if (*p == ':' && nested == 0) count++;
+    }
+    return count;
+}
+
+static int bounded_long(const char *start, const char *end,
+                        const char *name, long *out) {
+    const char *p = object_value(start, end, name);
+    if (!p) return -1;
+    errno = 0;
+    char *tail = NULL;
+    long value = strtol(p, &tail, 10);
+    if (errno == ERANGE || tail == p || tail > end || !token_end(*tail)) return -1;
+    *out = value;
+    return 0;
+}
+
+static int bounded_sha256(const char *start, const char *end,
+                          const char *name, char out[65]) {
+    const char *p = object_value(start, end, name);
+    if (!p || *p++ != '"') return -1;
+    for (size_t i = 0; i < 64; i++) {
+        if (p + i >= end || !((p[i] >= '0' && p[i] <= '9') ||
+                              (p[i] >= 'a' && p[i] <= 'f'))) return -1;
+        out[i] = p[i];
+    }
+    p += 64;
+    if (p >= end || *p++ != '"') return -1;
+    while (p < end && isspace((unsigned char)*p)) p++;
+    if (p > end || !token_end(*p)) return -1;
+    out[64] = 0;
+    return 0;
+}
+
+static int manifest_file_binding(const char *manifest, const char *name,
+                                 long *size, char sha256[65]) {
+    const char *files_start, *files_end, *entry_start, *entry_end;
+    if (object_member_count(manifest, "files") != 2 ||
+        object_bounds(manifest, "files", &files_start, &files_end) ||
+        object_bounds(files_start, name, &entry_start, &entry_end) ||
+        entry_end > files_end || direct_object_member_count(entry_start, entry_end) != 2 ||
+        bounded_long(entry_start, entry_end, "size", size) || *size < 0 ||
+        bounded_sha256(entry_start, entry_end, "sha256", sha256)) {
+        return -1;
+    }
+    return 0;
+}
+
 static int exact_singleton_string_array(const char *json, const char *name,
                                         const char *target) {
     const char *p = value(json, name);
@@ -544,26 +599,23 @@ static Schedule load_schedule(const RunnerArgs *args) {
     }
 
     {
-        char expected_hash[65];
-        long expected_size;
-        if (jlong(manifest, "session.json", &expected_size)) {
-            /* check manifest files sub-object for session.json */
-            const char *sf = key(manifest, "session.json");
-            if (!sf || jlong(sf, "size", &expected_size) ||
-                (size_t)expected_size != schedule.captured_session_json.size)
-                die("manifest session.json size binding mismatch");
-            if (jstr(sf, "sha256", expected_hash, sizeof(expected_hash)) ||
-                strcmp(expected_hash, schedule.captured_session_json.sha256))
-                die("manifest session.json sha256 binding mismatch");
-            if (jlong(sf, "size", &expected_size)) {
-                const char *ws = key(manifest, "windows.jsonl");
-                if (!ws || jlong(ws, "size", &expected_size) ||
-                    (size_t)expected_size != schedule.captured_windows_jsonl.size)
-                    die("manifest windows.jsonl size binding mismatch");
-                if (jstr(ws, "sha256", expected_hash, sizeof(expected_hash)) ||
-                    strcmp(expected_hash, schedule.captured_windows_jsonl.sha256))
-                    die("manifest windows.jsonl sha256 binding mismatch");
-            }
+        char expected_session_hash[65], expected_windows_hash[65];
+        long expected_session_size = -1, expected_windows_size = -1;
+        if (manifest_file_binding(manifest, "session.json", &expected_session_size,
+                                  expected_session_hash) ||
+            (size_t)expected_session_size != schedule.captured_session_json.size) {
+            die("manifest session.json size binding mismatch");
+        }
+        if (strcmp(expected_session_hash, schedule.captured_session_json.sha256)) {
+            die("manifest session.json sha256 binding mismatch");
+        }
+        if (manifest_file_binding(manifest, "windows.jsonl", &expected_windows_size,
+                                  expected_windows_hash) ||
+            (size_t)expected_windows_size != schedule.captured_windows_jsonl.size) {
+            die("manifest windows.jsonl size binding mismatch");
+        }
+        if (strcmp(expected_windows_hash, schedule.captured_windows_jsonl.sha256)) {
+            die("manifest windows.jsonl sha256 binding mismatch");
         }
     }
 
@@ -926,9 +978,7 @@ static void validation_outputs(const RunnerArgs *args, const Schedule *schedule)
         if (path_join(destination, sizeof(destination), args->output_dir, names[i])) {
             die("path too long");
         }
-        FILE *out = fopen(destination, "wbx");
-        if (!out || fwrite(inputs[i]->bytes, 1, inputs[i]->size, out) != inputs[i]->size ||
-            fclose(out)) {
+        if (write_captured_exclusive(destination, inputs[i])) {
             die("write captured bytes failed");
         }
     }
