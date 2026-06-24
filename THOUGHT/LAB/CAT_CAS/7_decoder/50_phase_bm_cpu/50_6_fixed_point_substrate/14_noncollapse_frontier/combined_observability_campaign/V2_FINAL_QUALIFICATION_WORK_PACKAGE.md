@@ -2,7 +2,7 @@
 
 **Status:** `PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_COMPLETE__GATE_R_NEXT`
 **Branch:** `codex/phase6-v1-adjudication-v2`
-**Audited source-only repair proof:** GitHub Actions run `28015182641`, run number `15`
+**Audited source-only repair proof:** GitHub Actions run `28068218010`, run number `18`
 **PR:** `#21`, draft and unmerged
 **Final source commit:** `21201106a2b4cbd811d396181e733e08c38beb5d`
 **Final generated-contract commit:** `a8ff3aa96f7bc3bff005088e63e837da44e8ce41`

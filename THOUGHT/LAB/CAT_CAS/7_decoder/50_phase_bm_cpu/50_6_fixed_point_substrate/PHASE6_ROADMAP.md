@@ -321,7 +321,7 @@ This is a forward-only engineering lane beneath Gate R. It does not enter Phase 
 - [x] pass strict compile, equivalence, sanitizers, and full no-write gate on the Linux target at the exact final head
 - [x] regenerate generated contracts and the evidence inventory from the final source head
 - [x] synchronize PR description and all authority documents with final hashes and logs
-- [ ] complete independent merge review
+- [x] complete independent merge review
 
 The current V2 plan uses ascending tone order and qualifies the physical interface. It is not the selected reversed/randomized tone-order scientific control.
 
