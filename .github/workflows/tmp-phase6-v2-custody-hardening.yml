@@ -89,7 +89,7 @@ jobs:
           ! grep -E '/contracts/|/evidence/' "$RUNNER_TEMP/changed.txt"
           tar -czf "$RUNNER_TEMP/custody-source.tgz" -T "$RUNNER_TEMP/changed.txt"
       - name: Commit isolated source render
-        if: steps.guard.outputs.render == 'true' && github.event_name == 'push'
+        if: steps.guard.outputs.render == 'true'
         run: |
           git config user.name 'phase6-custody-hardening'
           git config user.email 'actions@users.noreply.github.com'
