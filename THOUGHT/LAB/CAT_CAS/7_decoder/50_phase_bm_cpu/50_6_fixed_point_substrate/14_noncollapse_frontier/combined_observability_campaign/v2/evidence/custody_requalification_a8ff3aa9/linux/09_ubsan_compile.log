@@ -1,2 +1,8 @@
-=== UBSAN COMPILE ===
-RC=0
+timestamp_start: 2026-06-23T21:25:54-06:00
+working_directory: /root/catcas_v2_build_7c44af0f/holo_runtime_v2
+tested_sha: a8ff3aa96f7bc3bff005088e63e837da44e8ce41
+command: cc -std=c11 -O1 -g -pthread -Wall -Wextra -Werror -fsanitize=undefined -fno-omit-frame-pointer combined_pdn_runner.c combined_pdn_hardware.c captured_file.c -o combined_pdn_runner -lm
+stdout: (none)
+stderr: (none)
+timestamp_end: 2026-06-23T21:25:57-06:00
+exit_code: 0
