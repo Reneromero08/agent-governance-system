@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - tmp/phase6-v2-contract-regeneration
+  pull_request:
+    paths:
+      - ".github/workflows/tmp-phase6-v2-contract-regeneration.yml"
+      - "tools/phase6_v2/contract_regeneration_trigger.txt"
   workflow_dispatch:
 
 permissions:
