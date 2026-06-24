@@ -28,7 +28,7 @@ jobs:
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2
         run: |
           gcc -std=c11 -O2 -pthread -Wall -Wextra -Werror combined_pdn_runner.c combined_pdn_hardware.c captured_file.c -o combined_pdn_runner -lm
-          python -m unittest -v test_combined_pdn_runner.py test_waveform_equivalence.py test_slot2_primitive_identity.py
+          python -m unittest -v test_combined_pdn_runner.py test_waveform_equivalence.py test_slot2_primitive_identity.py test_captured_file.py
       - name: Test V2 contracts and analyzer
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/v2
         run: python -m unittest -v test_calibration_contract.py test_receiver_schedule.py test_spectral_calibration_analyzer.py
@@ -36,6 +36,6 @@ jobs:
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2
         run: |
           gcc -std=c11 -O1 -g -pthread -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer combined_pdn_runner.c combined_pdn_hardware.c captured_file.c -o combined_pdn_runner -lm
-          ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 python -m unittest -v test_combined_pdn_runner.py
+          ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 python -m unittest -v test_combined_pdn_runner.py test_waveform_equivalence.py
           gcc -std=c11 -O1 -g -pthread -Wall -Wextra -Werror -fsanitize=undefined -fno-omit-frame-pointer combined_pdn_runner.c combined_pdn_hardware.c captured_file.c -o combined_pdn_runner -lm
-          UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 python -m unittest -v test_combined_pdn_runner.py
+          UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 python -m unittest -v test_combined_pdn_runner.py test_waveform_equivalence.py

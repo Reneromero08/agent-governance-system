@@ -709,29 +709,6 @@ int write_run_manifest(const char *dir, const char *session_id, const char *stat
     return close_sync(&f);
 }
 
-static int copy_file(const char *source, const char *destination) {
-    FILE *in = fopen(source, "rb");
-    FILE *out = fopen(destination, "wbx");
-    if (!in || !out) {
-        if (in) fclose(in);
-        if (out) fclose(out);
-        return -1;
-    }
-    char buffer[65536];
-    size_t n;
-    int rc = 0;
-    while ((n = fread(buffer, 1, sizeof(buffer), in))) {
-        if (fwrite(buffer, 1, n, out) != n) {
-            rc = -1;
-            break;
-        }
-    }
-    if (ferror(in)) rc = -1;
-    if (fclose(in)) rc = -1;
-    if (close_sync(&out)) rc = -1;
-    return rc;
-}
-
 static const char *inject(void) {
     return getenv("COMBINED_PDN_MOCK_FAIL");
 }
@@ -904,32 +881,20 @@ int run_hardware(const RunnerArgs *args, const Schedule *schedule) {
         rc = 5;
         goto done;
     }
-    {
-        FILE *fout = fopen(destination, "wbx");
-        if (!fout || fwrite(schedule->captured_session_json.bytes, 1,
-                           schedule->captured_session_json.size, fout) !=
-                         schedule->captured_session_json.size ||
-            fclose(fout)) {
-            reason = "INPUT_COPY_FAILURE";
-            rc = 5;
-            goto done;
-        }
+    if (write_captured_exclusive(destination, &schedule->captured_session_json)) {
+        reason = "INPUT_COPY_FAILURE";
+        rc = 5;
+        goto done;
     }
     if (joinp(destination, sizeof(destination), args->output_dir, "windows.jsonl")) {
         reason = "PATH_JOIN_FAILURE";
         rc = 5;
         goto done;
     }
-    {
-        FILE *fout = fopen(destination, "wbx");
-        if (!fout || fwrite(schedule->captured_windows_jsonl.bytes, 1,
-                           schedule->captured_windows_jsonl.size, fout) !=
-                         schedule->captured_windows_jsonl.size ||
-            fclose(fout)) {
-            reason = "INPUT_COPY_FAILURE";
-            rc = 5;
-            goto done;
-        }
+    if (write_captured_exclusive(destination, &schedule->captured_windows_jsonl)) {
+        reason = "INPUT_COPY_FAILURE";
+        rc = 5;
+        goto done;
     }
 
     if (joinp(path, sizeof(path), args->output_dir, "raw_samples.bin")) {

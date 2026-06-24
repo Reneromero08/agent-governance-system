@@ -12,4 +12,4 @@ $(RUNNER): combined_pdn_runner.c combined_pdn_hardware.c captured_file.c combine
 	$(CC) $(CFLAGS) combined_pdn_runner.c combined_pdn_hardware.c captured_file.c -o $@ $(LDLIBS)
 
 test: $(RUNNER)
-	python3 test_combined_pdn_runner.py
+	python3 -m unittest -v test_combined_pdn_runner.py test_waveform_equivalence.py test_slot2_primitive_identity.py test_captured_file.py
