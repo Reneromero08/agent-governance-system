@@ -1,0 +1,1 @@
+Trigger the deterministic V2 contract regeneration workflow. This file is temporary and never enters PR #21.
