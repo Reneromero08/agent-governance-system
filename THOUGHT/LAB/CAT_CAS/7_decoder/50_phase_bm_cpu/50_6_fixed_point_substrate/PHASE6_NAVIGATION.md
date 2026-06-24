@@ -63,13 +63,13 @@ The current V2 plan uses ascending tone order. It qualifies the interface and do
 
 ```text
 status: PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_NEXT
-source: 329e5a0c1a56595fbfb17cc16c41fcb33faff5a2
-generated contracts: 70d5aa893db7d93baa86a56d5b1ed128730c2ef3
+source: 21201106a2b4cbd811d396181e733e08c38beb5d
+generated contracts: a8ff3aa96f7bc3bff005088e63e837da44e8ce41
 raw evidence: c81b543ffb74644a35aa97605ca47fa9ec89c76c
 command evidence: f531ac8016c9c95141ed1c0ec180bcd01370d346
 review ledger correction: 3ed3b53cd44a244674422343d605187781c6e76e
-plan SHA-256: f6d7cd314a0b614d80f520f92df13b0bd52f222e4b2fd7b53c09229bc49df48d
-source-bundle SHA-256: 5764f7d391e16624e1a5861f9b7056ad4bbfe8227b2a2731da965626f200ee2b
+plan SHA-256: 7b21fa00ae986128f812d7720994d8e168844aa71cf3435b2edfea10497c738a
+source-bundle SHA-256: 11547477f1a41e9b0661bb9f5d3532ab75aba20e0c785d9d14861bea2c57d487
 independent PR review: pending
 Gate R: pending
 Phase 6B.6: not entered
@@ -240,12 +240,3 @@ No physical acquisition is authorized.
 The immediate engineering boundary is V2 qualification Q1 through Q4 followed by independent PR review. The next scientific gate remains the external, SHA-bound, non-authorizing L4B.5B0 human review and project-owner integration decision.
 
 PR #21 remains draft and unmerged until the exact final head passes the required source, GitHub CI, Linux, evidence, and authority gates.
-
-
-[Phase 6 V2 Custody Qualification — Complete Commit Chain]
-source: 21201106a2b4cbd811d396181e733e08c38beb5d
-generated: a8ff3aa96f7bc3bff005088e63e837da44e8ce41
-evidence: d0086ad0897cce6027b511c3409ff4ba3d422860
-plan: 7b21fa00ae986128f812d7720994d8e168844aa71cf3435b2edfea10497c738a
-bundle: 11547477f1a41e9b0661bb9f5d3532ab75aba20e0c785d9d14861bea2c57d487
-status: PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_NEXT
