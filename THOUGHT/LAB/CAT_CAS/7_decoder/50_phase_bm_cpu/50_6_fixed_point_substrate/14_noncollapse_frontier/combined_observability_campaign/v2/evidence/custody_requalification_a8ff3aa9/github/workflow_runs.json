@@ -1,0 +1,35 @@
+{
+  "tested_head": "a8ff3aa96f7bc3bff005088e63e837da44e8ce41",
+  "runs": [
+    {
+      "name": "Phase 6 V2 Strict Qualification (source)",
+      "run_id": 28068218010,
+      "conclusion": "PASS"
+    },
+    {
+      "name": "Phase 6 V2 Strict Qualification (generated)",
+      "run_id": 28068617003,
+      "conclusion": "PASS"
+    },
+    {
+      "name": "Phase 6 Combined Campaign Plan (source)",
+      "run_id": 28068218035,
+      "conclusion": "PASS"
+    },
+    {
+      "name": "Phase 6 Combined Campaign Plan (generated)",
+      "run_id": 28068616976,
+      "conclusion": "PASS"
+    },
+    {
+      "name": "Contracts",
+      "run_id": 28068616972,
+      "conclusion": "PASS"
+    },
+    {
+      "name": "Governance",
+      "run_id": 28068617007,
+      "conclusion": "PASS"
+    }
+  ]
+}
