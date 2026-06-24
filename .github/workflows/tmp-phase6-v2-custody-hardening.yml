@@ -24,7 +24,7 @@ jobs:
       - name: Guard repeated render
         id: guard
         run: |
-          if git log -1 --pretty=%s | grep -Fxq 'phase6: render custody hardening source'; then
+          if git log -1 --pretty=%s | grep -Fxq 'phase6: render custody runtime files'; then
             echo 'render=false' >> "$GITHUB_OUTPUT"
           else
             echo 'render=true' >> "$GITHUB_OUTPUT"
@@ -50,7 +50,7 @@ jobs:
               raise SystemExit("renderer literal-anchor patch mismatch")
           path.write_text(text.replace(old, new, 1))
           PY
-          python "$RUNNER_TEMP/render.py" | tee "$RUNNER_TEMP/render.log"
+          python "$RUNNER_TEMP/render.py"
       - name: Strict runtime and custody tests
         if: steps.guard.outputs.render == 'true'
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2
@@ -76,7 +76,7 @@ jobs:
         run: |
           gcc -std=c11 -O1 -g -pthread -Wall -Wextra -Werror -fsanitize=undefined -fno-omit-frame-pointer combined_pdn_runner.c combined_pdn_hardware.c captured_file.c -o combined_pdn_runner -lm
           UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 python -m unittest -v test_combined_pdn_runner.py test_waveform_equivalence.py
-      - name: Verify and package exact source scope
+      - name: Verify exact source scope
         if: steps.guard.outputs.render == 'true'
         run: |
           rm -f \
@@ -84,28 +84,22 @@ jobs:
             THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/waveform_fixture
           git diff --check
           { git diff --name-only; git ls-files --others --exclude-standard; } | sort -u > "$RUNNER_TEMP/changed.txt"
-          cat "$RUNNER_TEMP/changed.txt"
           test "$(wc -l < "$RUNNER_TEMP/changed.txt")" -eq 10
           ! grep -E '/contracts/|/evidence/' "$RUNNER_TEMP/changed.txt"
-          tar -czf "$RUNNER_TEMP/custody-source.tgz" -T "$RUNNER_TEMP/changed.txt"
-      - name: Commit isolated source render
+      - name: Commit isolated runtime files
         if: steps.guard.outputs.render == 'true'
         run: |
           git config user.name 'phase6-custody-hardening'
           git config user.email 'actions@users.noreply.github.com'
-          git add -u
           git add \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/Makefile \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/captured_file.c \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/captured_file.h \
             THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/captured_file_fixture.c \
-            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/test_captured_file.py
-          test "$(git diff --cached --name-only | wc -l)" -eq 10
-          git commit -m 'phase6: render custody hardening source'
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_runner.c \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/test_captured_file.py \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/test_combined_pdn_runner.py
+          test "$(git diff --cached --name-only | wc -l)" -eq 8
+          git commit -m 'phase6: render custody runtime files'
           git push origin HEAD:tmp/phase6-v2-custody-hardening
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always() && steps.guard.outputs.render == 'true'
-        with:
-          name: phase6-v2-custody-hardening-${{ github.run_id }}
-          path: |
-            ${{ runner.temp }}/render.log
-            ${{ runner.temp }}/changed.txt
-            ${{ runner.temp }}/custody-source.tgz
-          if-no-files-found: warn
