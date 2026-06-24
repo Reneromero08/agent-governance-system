@@ -905,11 +905,11 @@ int run_hardware(const RunnerArgs *args, const Schedule *schedule) {
         goto done;
     }
     {
-        FILE *out = fopen(destination, "wbx");
-        if (!out || fwrite(args->captured_session_json.bytes, 1,
-                           args->captured_session_json.size, out) !=
-                         args->captured_session_json.size ||
-            fclose(out)) {
+        FILE *fout = fopen(destination, "wbx");
+        if (!fout || fwrite(schedule->captured_session_json.bytes, 1,
+                           schedule->captured_session_json.size, fout) !=
+                         schedule->captured_session_json.size ||
+            fclose(fout)) {
             reason = "INPUT_COPY_FAILURE";
             rc = 5;
             goto done;
@@ -921,11 +921,11 @@ int run_hardware(const RunnerArgs *args, const Schedule *schedule) {
         goto done;
     }
     {
-        FILE *out = fopen(destination, "wbx");
-        if (!out || fwrite(args->captured_windows_jsonl.bytes, 1,
-                           args->captured_windows_jsonl.size, out) !=
-                         args->captured_windows_jsonl.size ||
-            fclose(out)) {
+        FILE *fout = fopen(destination, "wbx");
+        if (!fout || fwrite(schedule->captured_windows_jsonl.bytes, 1,
+                           schedule->captured_windows_jsonl.size, fout) !=
+                         schedule->captured_windows_jsonl.size ||
+            fclose(fout)) {
             reason = "INPUT_COPY_FAILURE";
             rc = 5;
             goto done;

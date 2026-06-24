@@ -4,6 +4,13 @@
 
 ## 2026-06-23 (continued)
 
+- Phase 6 V2: complete executor same-byte custody. CapturedFile module with
+  embedded SHA-256, open-once read-hash-parse pattern, manifest binding
+  restoration, authorized_by blankness gate, ownership de-duplication,
+  captured writer, compile surfaces updated with captured_file.c.
+
+## 2026-06-23 (continued)
+
 - Phase 6 V2: close same-byte analyzer custody. Read-once byte hashing,
   O_BINARY flag for Windows binary file I/O, immutable input mutation
   detection. Temporary custody installer scripts removed; CI workflow

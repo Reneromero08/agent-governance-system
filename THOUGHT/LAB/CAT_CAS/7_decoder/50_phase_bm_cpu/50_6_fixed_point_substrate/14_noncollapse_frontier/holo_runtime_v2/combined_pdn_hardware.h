@@ -26,8 +26,6 @@ typedef struct {
     int mode;
     int backend;
     char authorization_digest[CAPTURED_SHA256_LEN + 1];
-    CapturedFile captured_session_json;
-    CapturedFile captured_windows_jsonl;
 } RunnerArgs;
 
 typedef struct {

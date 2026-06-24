@@ -543,6 +543,30 @@ static Schedule load_schedule(const RunnerArgs *args) {
         die("cannot capture windows.jsonl");
     }
 
+    {
+        char expected_hash[65];
+        long expected_size;
+        if (jlong(manifest, "session.json", &expected_size)) {
+            /* check manifest files sub-object for session.json */
+            const char *sf = key(manifest, "session.json");
+            if (!sf || jlong(sf, "size", &expected_size) ||
+                (size_t)expected_size != schedule.captured_session_json.size)
+                die("manifest session.json size binding mismatch");
+            if (jstr(sf, "sha256", expected_hash, sizeof(expected_hash)) ||
+                strcmp(expected_hash, schedule.captured_session_json.sha256))
+                die("manifest session.json sha256 binding mismatch");
+            if (jlong(sf, "size", &expected_size)) {
+                const char *ws = key(manifest, "windows.jsonl");
+                if (!ws || jlong(ws, "size", &expected_size) ||
+                    (size_t)expected_size != schedule.captured_windows_jsonl.size)
+                    die("manifest windows.jsonl size binding mismatch");
+                if (jstr(ws, "sha256", expected_hash, sizeof(expected_hash)) ||
+                    strcmp(expected_hash, schedule.captured_windows_jsonl.sha256))
+                    die("manifest windows.jsonl sha256 binding mismatch");
+            }
+        }
+    }
+
     free_captured(&captured_manifest);
 
     schedule.count = (size_t)count;
@@ -802,8 +826,6 @@ static void verify_authorization(RunnerArgs *args, const Schedule *schedule) {
         strict_json_exact_top_object(
             source_bundle, source_bundle_fields,
             sizeof(source_bundle_fields) / sizeof(source_bundle_fields[0]))) {
-        free(authorization);
-        free(source_bundle);
         free_captured(&captured_auth);
         free_captured(&captured_bundle);
         die("invalid V2 calibration authorization artifact");
@@ -878,8 +900,7 @@ static void verify_authorization(RunnerArgs *args, const Schedule *schedule) {
         !path_contained_in(output_root, args->output_dir) ||
         jstr(authorization, "authorized_by", authorized_by, sizeof(authorized_by)) ||
         !authorized_by[0] ||
-        (strspn(authorized_by, " \t\r\n\v\f") == strlen(authorized_by))
-    ) { invalid = 0; }
+        (strspn(authorized_by, " \t\r\n\v\f") == strlen(authorized_by));
     free_captured(&captured_auth);
     free_captured(&captured_bundle);
     if (invalid) die("invalid V2 calibration authorization artifact");
@@ -910,7 +931,6 @@ static void validation_outputs(const RunnerArgs *args, const Schedule *schedule)
             fclose(out)) {
             die("write captured bytes failed");
         }
-    }
     }
     const char *empty[] = {"raw_samples.bin", "telemetry.csv", "stderr.log",
                            "orchestrator_stdout.log", "orchestrator_stderr.log"};
