@@ -39,8 +39,19 @@ jobs:
       - name: Render source hardening
         if: steps.guard.outputs.render == 'true'
         run: |
+          cp tools/phase6_v2/render_custody_hardening.py "$RUNNER_TEMP/render.py"
+          python - <<'PY'
+          from pathlib import Path
+          path = Path("${{ runner.temp }}/render.py")
+          text = path.read_text()
+          old = "    helper_anchor = '''static int object_member_count"
+          new = "    helper_anchor = r'''static int object_member_count"
+          if text.count(old) != 1:
+              raise SystemExit("renderer literal-anchor patch mismatch")
+          path.write_text(text.replace(old, new, 1))
+          PY
           set +e
-          python tools/phase6_v2/render_custody_hardening.py > "$RUNNER_TEMP/render.log" 2>&1
+          python "$RUNNER_TEMP/render.py" > "$RUNNER_TEMP/render.log" 2>&1
           rc=$?
           cat "$RUNNER_TEMP/render.log"
           exit "$rc"
