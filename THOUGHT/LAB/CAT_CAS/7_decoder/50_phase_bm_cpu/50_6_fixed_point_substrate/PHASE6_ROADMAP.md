@@ -1,7 +1,7 @@
 # Phase 6 Roadmap
 
 **Role:** master chronological task ledger.
-**Current head:** `PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_NEXT`
+**Current head:** `PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_COMPLETE__GATE_R_NEXT`
 **Binding directive:** `14_noncollapse_frontier/COURSE_CORRECTION.md`, `14_noncollapse_frontier/COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `14_noncollapse_frontier/PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
 **Immediate engineering gate:** complete independent PR review; V2 qualification Q1 through Q4 are closed.
 **Immediate scientific gate:** Gate R external review and project-owner integration decision remains next.
@@ -339,7 +339,10 @@ unique functional test cases: 86
 total unittest executions: 209
 Windows tested SHA: a8ff3aa96f7bc3bff005088e63e837da44e8ce41
 Linux tested SHA: a8ff3aa96f7bc3bff005088e63e837da44e8ce41
-independent PR review: pending
+independent PR review: complete
+independent review record: 4559668654
+independent reviewed head: 38bd6cb3423c512137a1e5cbcfae18420bcce996
+independent review result: NO_BLOCKING_FINDINGS
 Gate R: pending
 Phase 6B.6: not entered
 ```

@@ -1,6 +1,6 @@
 # Phase 6B Non-Collapse Frontier Roadmap
 
-**Status:** `PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_NEXT`
+**Status:** `PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_COMPLETE__GATE_R_NEXT`
 **Binding directives:** `COURSE_CORRECTION.md`, `COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
 **Immediate engineering gate:** independent PR review; V2 qualification Q1 through Q4 are complete
 **Immediate scientific gate:** Gate R external review and project-owner integration decision
@@ -292,7 +292,10 @@ plan SHA-256: 7b21fa00ae986128f812d7720994d8e168844aa71cf3435b2edfea10497c738a
 source-bundle SHA-256: 11547477f1a41e9b0661bb9f5d3532ab75aba20e0c785d9d14861bea2c57d487
 unique functional test cases: 86
 total unittest executions: 209
-independent PR review: pending
+independent PR review: complete
+independent review record: 4559668654
+independent reviewed head: 38bd6cb3423c512137a1e5cbcfae18420bcce996
+independent review result: NO_BLOCKING_FINDINGS
 Gate R: pending
 Phase 6B.6: not entered
 ```

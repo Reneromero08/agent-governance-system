@@ -1,7 +1,7 @@
 # Phase 6 Navigation
 
 **Role:** canonical entry point for the Phase 6 directory.
-**Current state:** `PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_NEXT`
+**Current state:** `PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_COMPLETE__GATE_R_NEXT`
 **Active directives:** `14_noncollapse_frontier/COURSE_CORRECTION.md`, `14_noncollapse_frontier/COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `14_noncollapse_frontier/PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
 **Active roadmap:** `PHASE6_ROADMAP.md`
 
@@ -62,7 +62,7 @@ The current V2 plan uses ascending tone order. It qualifies the interface and do
 ## Current V2 authority binding
 
 ```text
-status: PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_NEXT
+status: PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_COMPLETE__GATE_R_NEXT
 source: 21201106a2b4cbd811d396181e733e08c38beb5d
 generated contracts: a8ff3aa96f7bc3bff005088e63e837da44e8ce41
 raw evidence: 4b5817a8741889caf5fadfa49df79fecb2f858a9 (incomplete summary), 69691b8061ea9eef6bf1b0dff44d0f1f2de1b863 (incomplete raw), 05c68281bcafda53381b2f70e4de13c25d1f5c9b (corrected), d0086ad0897cce6027b511c3409ff4ba3d422860 (metadata)
@@ -70,7 +70,10 @@ command evidence: d0086ad0897cce6027b511c3409ff4ba3d422860
 review ledger correction: 14469abb48567dda7c6eeb5c4bf16a8b282be85c
 plan SHA-256: 7b21fa00ae986128f812d7720994d8e168844aa71cf3435b2edfea10497c738a
 source-bundle SHA-256: 11547477f1a41e9b0661bb9f5d3532ab75aba20e0c785d9d14861bea2c57d487
-independent PR review: pending
+independent PR review: complete
+independent review record: 4559668654
+independent reviewed head: 38bd6cb3423c512137a1e5cbcfae18420bcce996
+independent review result: NO_BLOCKING_FINDINGS
 Gate R: pending
 Phase 6B.6: not entered
 hardware_ran: false
