@@ -713,21 +713,6 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
     for name, supplied in supplied_bindings.items():
         if supplied is not None and supplied != actual_bindings[name]:
             raise ValueError(f"provided input digest mismatch: {name}")
-    if session_manifest_sha256 is not None and \
-            session_manifest_sha256 != run.get("session_manifest_sha256"):
-        raise ValueError("provided session manifest digest mismatch")
-    if executor_commit is not None and executor_commit != authorization["executor_commit"]:
-        raise ValueError("provided executor commit mismatch")
-    if executor_sha256 is not None and executor_sha256 != authorization["executor_sha256"]:
-        raise ValueError("provided executor digest mismatch")
-    if campaign_source_commit is not None and \
-            campaign_source_commit != authorization["campaign_source_commit"]:
-        raise ValueError("provided campaign source commit mismatch")
-    if session_id_from_call is not None and session_id_from_call != session_id:
-        raise ValueError("provided session ID mismatch")
-    if route is not None and route != planned["route"]:
-        raise ValueError("provided route mismatch")
-
     if session_manifest_parsed is not None and session_manifest_sha256 is not None:
         sm = session_manifest_parsed
         if sm.get("session_id") != session_id:
@@ -741,7 +726,7 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
                 raise ValueError(f"manifest {fname} entry must be an object")
             if set(fb) != {"size", "sha256"}:
                 raise ValueError(f"manifest {fname} entry fields mismatch")
-            if not isinstance(fb["size"], (int, float)) or int(fb["size"]) < 0:
+            if not isinstance(fb["size"], int) or isinstance(fb["size"], bool) or fb["size"] < 0:
                 raise ValueError(f"manifest {fname} size invalid")
             if not isinstance(fb["sha256"], str) or len(fb["sha256"]) != 64 or \
                not all(c in "0123456789abcdef" for c in fb["sha256"]):
@@ -749,14 +734,28 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
             real_bytes = captured.get(fname)
             if real_bytes is None:
                 raise ValueError(f"cannot verify manifest binding: {fname} not captured")
-            if int(fb["size"]) != len(real_bytes):
-                raise ValueError(f"manifest {fname} size mismatch: expected {int(fb['size'])} got {len(real_bytes)}")
+            if fb["size"] != len(real_bytes):
+                raise ValueError(f"manifest {fname} size mismatch: expected {fb['size']} got {len(real_bytes)}")
             if sha256_bytes(real_bytes) != fb["sha256"]:
                 raise ValueError(f"manifest {fname} SHA-256 binding mismatch")
         if session_manifest_sha256 != run.get("session_manifest_sha256"):
             raise ValueError("session manifest digest does not match run.json")
         if session_manifest_sha256 != source_bundle.get("sessions", {}).get(session_id):
             raise ValueError("session manifest digest does not match source bundle")
+    if session_manifest_sha256 is not None and session_manifest_parsed is None and \
+            session_manifest_sha256 != run.get("session_manifest_sha256"):
+        raise ValueError("provided session manifest digest mismatch")
+    if executor_commit is not None and executor_commit != authorization["executor_commit"]:
+        raise ValueError("provided executor commit mismatch")
+    if executor_sha256 is not None and executor_sha256 != authorization["executor_sha256"]:
+        raise ValueError("provided executor digest mismatch")
+    if campaign_source_commit is not None and \
+            campaign_source_commit != authorization["campaign_source_commit"]:
+        raise ValueError("provided campaign source commit mismatch")
+    if session_id_from_call is not None and session_id_from_call != session_id:
+        raise ValueError("provided session ID mismatch")
+    if route is not None and route != planned["route"]:
+        raise ValueError("provided route mismatch")
 
     tsc_hz = float(run["tsc_calibration_hz"])
     measurements = []

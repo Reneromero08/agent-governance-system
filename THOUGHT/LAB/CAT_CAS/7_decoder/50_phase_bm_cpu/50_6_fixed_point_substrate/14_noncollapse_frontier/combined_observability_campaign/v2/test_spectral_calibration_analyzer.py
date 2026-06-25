@@ -835,6 +835,56 @@ class SpectralAnalyzerTests(unittest.TestCase):
             ]):
                 self.assertEqual(analyzer_main(), 0)
 
+    def test_manifest_mutations_are_rejected(self) -> None:
+        cases = [
+            ("wrong session_id", "session_id", "bad_session", "session_id binding"),
+            ("session.json wrong size", None, None, "size mismatch"),
+            ("session.json wrong digest", None, None, "SHA-256"),
+            ("windows.jsonl wrong size", None, None, "size mismatch"),
+            ("windows.jsonl wrong digest", None, None, "SHA-256"),
+            ("size = True", None, None, "size invalid"),
+            ("size = 1.5", None, None, "size invalid"),
+            ("forged run/bundle agreement", None, None, "SHA-256"),
+        ]
+        for label, top_key, top_val, pattern in cases:
+            with self.subTest(label=label), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                plan_path, evidence_path, plan = build_full_campaign_fixture(root)
+                session_id = list(plan["session_ids"])[0]
+                run_dir = Path(json.loads(
+                    evidence_path.read_text())["sessions"][session_id]["run_dir"])
+                manifest_path = run_dir.parent / "source" / "session_manifest.json"
+                manifest = json.loads(manifest_path.read_text())
+                if top_key is not None:
+                    manifest[top_key] = top_val
+                elif label == "session.json wrong size":
+                    manifest["files"]["session.json"]["size"] = 99999
+                elif label == "session.json wrong digest":
+                    manifest["files"]["session.json"]["sha256"] = "a" * 64
+                elif label == "windows.jsonl wrong size":
+                    manifest["files"]["windows.jsonl"]["size"] = 1
+                elif label == "windows.jsonl wrong digest":
+                    manifest["files"]["windows.jsonl"]["sha256"] = "f" * 64
+                elif label == "size = True":
+                    manifest["files"]["session.json"]["size"] = True
+                elif label == "size = 1.5":
+                    manifest["files"]["session.json"]["size"] = 1.5
+                elif label == "forged run/bundle agreement":
+                    d = "0" * 64
+                    manifest["files"]["session.json"]["sha256"] = d
+                    manifest["files"]["windows.jsonl"]["sha256"] = d
+                write_json(manifest_path, manifest)
+                update_run_manifest(run_dir)
+                output = root / "analysis.json"
+                with mock.patch.object(sys, "argv", [
+                    "analyze_spectral_calibration_v2.py",
+                    "--plan", str(plan_path),
+                    "--evidence-map", str(evidence_path),
+                    "--output", str(output),
+                ]):
+                    with self.assertRaisesRegex(ValueError, pattern):
+                        analyzer_main()
+
 
 if __name__ == "__main__":
     unittest.main()
