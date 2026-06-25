@@ -526,7 +526,7 @@ def load_evidence_map_bytes(payload: bytes, path: Path,
                             plan: dict) -> list[tuple[Path, ...]]:
     evidence = parse_json_bytes(payload, "evidence map")
     if set(evidence) != {"schema_id", "sessions"} or \
-            evidence["schema_id"] != "CAT_CAS_PHASE6_V2_CALIBRATION_EVIDENCE_MAP_V1":
+            evidence["schema_id"] != "CAT_CAS_PHASE6_V2_CALIBRATION_EVIDENCE_MAP_V2":
         raise ValueError("invalid evidence-map schema")
     sessions = evidence["sessions"]
     if not isinstance(sessions, dict):
@@ -539,16 +539,14 @@ def load_evidence_map_bytes(payload: bytes, path: Path,
     base = path.parent
     for session_id in plan["session_ids"]:
         entry = sessions[session_id]
-        expected_entry_keys = {"run_dir", "authorization", "source_bundle"}
-        is_v2 = evidence["schema_id"] == "CAT_CAS_PHASE6_V2_CALIBRATION_EVIDENCE_MAP_V2"
-        if is_v2:
-            expected_entry_keys.add("session_manifest")
+        expected_entry_keys = {"run_dir", "authorization", "source_bundle", "session_manifest"}
         if not isinstance(entry, dict) or set(entry) != expected_entry_keys or any(not isinstance(entry[key], str) or not entry[key] for key in entry):
             raise ValueError("evidence-map entry fields mismatch")
         paths = (
             _canonical_directory_path(base / entry["run_dir"]),
             _canonical_regular_path(base / entry["authorization"]),
             _canonical_regular_path(base / entry["source_bundle"]),
+            _canonical_regular_path(base / entry["session_manifest"]),
         )
         for item in paths:
             if item in seen_paths:
@@ -1087,7 +1085,7 @@ def main() -> int:
     evidence_map_sha256 = sha256_bytes(evidence_map_bytes)
     session_inputs = load_evidence_map_bytes(evidence_map_bytes, evidence_map_path, plan)
     sessions = []
-    for run_dir, authorization_path, source_bundle_path in session_inputs:
+    for run_dir, authorization_path, source_bundle_path, session_manifest_path in session_inputs:
         authorization_bytes = read_regular_bytes(authorization_path)
         source_bundle_bytes = read_regular_bytes(source_bundle_path)
         authorization = parse_json_bytes(authorization_bytes, str(authorization_path))

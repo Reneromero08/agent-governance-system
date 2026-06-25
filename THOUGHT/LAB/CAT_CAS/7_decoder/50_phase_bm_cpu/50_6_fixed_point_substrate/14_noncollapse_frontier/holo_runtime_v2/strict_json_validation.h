@@ -194,26 +194,7 @@ static int strict_json_exact_top_object(const char *json,
     return 0;
 }
 
-static int sj_object_member_count(const char *json) {
-    if (!json) return -1;
-    StrictJsonCursor state = {json, 0};
-    sj_skip_ws(&state);
-    if (*state.cursor++ != '{') return -1;
-    sj_skip_ws(&state);
-    if (*state.cursor == '}') { state.cursor++; return 0; }
-    int count = 0;
-    for (;;) {
-        if (sj_string(&state, NULL, 0)) return -1;
-        count++;
-        sj_skip_ws(&state);
-        if (*state.cursor++ != ':') return -1;
-        if (sj_value(&state)) return -1;
-        sj_skip_ws(&state);
-        if (*state.cursor == '}') { state.cursor++; break; }
-        if (*state.cursor++ != ',') return -1;
-    }
-    return count;
-}
+
 
 static int sj_count_key(const char *json, const char *name) {
     if (!json || !name) return 0;
@@ -227,7 +208,6 @@ static int sj_count_key(const char *json, const char *name) {
         if (sj_string(&state, key, sizeof(key))) return 0;
         sj_skip_ws(&state);
         if (*state.cursor++ != ':') return 0;
-        const char *val_start = state.cursor;
         if (sj_value(&state)) return 0;
         if (!strcmp(key, name)) count++;
         sj_skip_ws(&state);

@@ -2,6 +2,13 @@
 
 # Changelog
 
+## 2026-06-23 (continued 3): post-review integrity
+
+- Phase 6 V2: complete post-review integrity repair. Evidence-map V2 with
+  session_manifest binding, structural JSON lookups via StrictJsonCursor,
+  streaming SHA-256 hash API, persist-credentials hardening, verdict
+  policy enforcement, strict compilation fixes.
+
 ## 2026-06-23 (continued 2): same-byte custody
 
 - Phase 6 V2: complete executor same-byte custody. CapturedFile module with

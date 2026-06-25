@@ -114,7 +114,7 @@ def build_full_campaign_fixture(root: Path, *, mutate=None) -> tuple[Path, Path,
     plan_path = root / "plan.json"
     write_json(plan_path, plan)
     evidence = {
-        "schema_id": "CAT_CAS_PHASE6_V2_CALIBRATION_EVIDENCE_MAP_V1",
+        "schema_id": "CAT_CAS_PHASE6_V2_CALIBRATION_EVIDENCE_MAP_V2",
         "sessions": {},
     }
     for session in plan["sessions"]:
@@ -313,6 +313,7 @@ def build_full_campaign_fixture(root: Path, *, mutate=None) -> tuple[Path, Path,
             "run_dir": str(run_dir),
             "authorization": str(authorization_path),
             "source_bundle": str(bundle_path),
+            "session_manifest": str(source_dir / "session_manifest.json"),
         }
     if mutate:
         mutate(evidence)
