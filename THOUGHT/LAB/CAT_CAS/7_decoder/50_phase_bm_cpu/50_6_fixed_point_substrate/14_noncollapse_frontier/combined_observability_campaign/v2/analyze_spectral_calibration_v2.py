@@ -980,7 +980,7 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
             "authorization_sha256": authorization_digest,
             "source_bundle_sha256": source_bundle_sha256 or
                 hashlib.sha256(canonical_bytes(source_bundle)).hexdigest(),
-            "session_manifest_sha256": run.get("session_manifest_sha256"),
+            "session_manifest_sha256": session_manifest_sha256 or run.get("session_manifest_sha256"),
             "run_manifest_sha256": sha256_bytes(manifest_bytes),
             "run_json_sha256": sha256_bytes(captured["run.json"]),
             "session_json_sha256": sha256_bytes(captured["session.json"]),
@@ -1092,6 +1092,18 @@ def main() -> int:
         bundle = parse_json_bytes(source_bundle_bytes, str(source_bundle_path))
         manifest_bytes = read_regular_bytes(session_manifest_path)
         manifest_digest = sha256_bytes(manifest_bytes)
+        manifest_parsed = parse_json_bytes(manifest_bytes, "session_manifest")
+        if manifest_parsed.get("schema_id") != "CAT_CAS_PHASE6_COMBINED_SESSION_MANIFEST_V2":
+            raise ValueError("invalid session manifest schema")
+        if set(manifest_parsed) != {"schema_id", "session_id", "files"}:
+            raise ValueError("session manifest top-level fields mismatch")
+        mf = manifest_parsed.get("files")
+        if not isinstance(mf, dict) or set(mf) != {"session.json", "windows.jsonl"}:
+            raise ValueError("session manifest file entries mismatch")
+        for fname in ("session.json", "windows.jsonl"):
+            fb = mf.get(fname)
+            if not isinstance(fb, dict) or set(fb) != {"size", "sha256"} or not isinstance(fb["sha256"], str):
+                raise ValueError(f"manifest {fname} entry fields mismatch")
         sessions.append(
             analyze_run(
                 run_dir, plan, authorization, bundle,

@@ -3,7 +3,7 @@
 **Role:** master chronological task ledger.
 **Current head:** `PHASE6_V2_POST_REVIEW_REPAIR_IN_PROGRESS__REQUALIFICATION_BLOCKED`
 **Binding directive:** `14_noncollapse_frontier/COURSE_CORRECTION.md`, `14_noncollapse_frontier/COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `14_noncollapse_frontier/PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
-**Immediate engineering gate:** engineering qualification and independent review complete; Gate R project-owner integration decision next.
+**Immediate engineering gate:** engineering prior qualification is historical provenance only; Gate R project-owner integration decision next.
 **Immediate scientific gate:** Gate R external review and project-owner integration decision remains next.
 **Next physical control:** reversed/randomized tone order, proposed but not authorized.
 **Observability acquisition:** not authorized.
