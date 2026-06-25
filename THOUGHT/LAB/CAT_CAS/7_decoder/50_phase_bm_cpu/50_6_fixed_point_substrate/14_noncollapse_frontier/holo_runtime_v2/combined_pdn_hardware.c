@@ -588,46 +588,10 @@ static int close_sync(FILE **file) {
 }
 
 static int hash_file(const char *path, char out[65]) {
-    int pipefd[2];
-    if (pipe(pipefd)) return -1;
-    pid_t child = fork();
-    if (child < 0) {
-        close(pipefd[0]);
-        close(pipefd[1]);
-        return -1;
-    }
-    if (child == 0) {
-        close(pipefd[0]);
-        if (dup2(pipefd[1], STDOUT_FILENO) < 0) _exit(126);
-        close(pipefd[1]);
-        execlp("sha256sum", "sha256sum", "--", path, (char *)NULL);
-        _exit(127);
-    }
-    close(pipefd[1]);
-    char line[128];
-    size_t used = 0;
-    ssize_t n;
-    while (used + 1 < sizeof(line) &&
-           (n = read(pipefd[0], line + used, sizeof(line) - used - 1)) > 0) {
-        used += (size_t)n;
-    }
-    int read_error = n < 0;
-    close(pipefd[0]);
-    int status = 0;
-    if (waitpid(child, &status, 0) < 0 || read_error ||
-        !WIFEXITED(status) || WEXITSTATUS(status) != 0 || used < 65) {
-        return -1;
-    }
-    line[used] = 0;
-    for (int i = 0; i < 64; i++) {
-        if (!((line[i] >= '0' && line[i] <= '9') ||
-              (line[i] >= 'a' && line[i] <= 'f'))) {
-            return -1;
-        }
-        out[i] = line[i];
-    }
-    if (line[64] != ' ' && line[64] != '\t') return -1;
-    out[64] = 0;
+    CapturedFile cf = {0};
+    if (capture_file(path, &cf, CAPTURED_MAX_WINDOWS_JSONL)) return -1;
+    memcpy(out, cf.sha256, CAPTURED_SHA256_LEN + 1);
+    free_captured(&cf);
     return 0;
 }
 

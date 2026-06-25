@@ -2,7 +2,7 @@
 
 # Changelog
 
-## 2026-06-23 (continued)
+## 2026-06-23 (continued 2): same-byte custody
 
 - Phase 6 V2: complete executor same-byte custody. CapturedFile module with
   embedded SHA-256, open-once read-hash-parse pattern, manifest binding

@@ -523,7 +523,7 @@ def construct_complete_grid(schedule: list[dict]) -> dict[tuple[int, int, int, i
 
 
 def load_evidence_map_bytes(payload: bytes, path: Path,
-                            plan: dict) -> list[tuple[Path, Path, Path]]:
+                            plan: dict) -> list[tuple[Path, ...]]:
     evidence = parse_json_bytes(payload, "evidence map")
     if set(evidence) != {"schema_id", "sessions"} or \
             evidence["schema_id"] != "CAT_CAS_PHASE6_V2_CALIBRATION_EVIDENCE_MAP_V1":
@@ -539,9 +539,11 @@ def load_evidence_map_bytes(payload: bytes, path: Path,
     base = path.parent
     for session_id in plan["session_ids"]:
         entry = sessions[session_id]
-        if not isinstance(entry, dict) or set(entry) != {
-            "run_dir", "authorization", "source_bundle"
-        } or any(not isinstance(entry[key], str) or not entry[key] for key in entry):
+        expected_entry_keys = {"run_dir", "authorization", "source_bundle"}
+        is_v2 = evidence["schema_id"] == "CAT_CAS_PHASE6_V2_CALIBRATION_EVIDENCE_MAP_V2"
+        if is_v2:
+            expected_entry_keys.add("session_manifest")
+        if not isinstance(entry, dict) or set(entry) != expected_entry_keys or any(not isinstance(entry[key], str) or not entry[key] for key in entry):
             raise ValueError("evidence-map entry fields mismatch")
         paths = (
             _canonical_directory_path(base / entry["run_dir"]),
@@ -556,7 +558,7 @@ def load_evidence_map_bytes(payload: bytes, path: Path,
     return ordered
 
 
-def load_evidence_map(path: Path, plan: dict) -> list[tuple[Path, Path, Path]]:
+def load_evidence_map(path: Path, plan: dict) -> list[tuple[Path, ...]]:
     return load_evidence_map_bytes(read_regular_bytes(path), path, plan)
 
 
@@ -1006,6 +1008,13 @@ def analyze_campaign(session_results: list[dict], plan: dict,
         verdict = "CALIBRATION_NOT_ADJUDICABLE_WITHOUT_FROZEN_THRESHOLDS"
         repetition = {}
     else:
+        supported_rule = "ALL_GROUPS_AND_BOTH_REBOOT_PARTITIONS_AND_BOTH_ROUTES_PASS"
+        if thresholds.get("amplitude_monotonicity_required") is not True:
+            raise ValueError("amplitude_monotonicity_required must be true")
+        if thresholds.get("cross_route_pass_required") is not True:
+            raise ValueError("cross_route_pass_required must be true")
+        if thresholds.get("final_verdict_rule") != supported_rule:
+            raise ValueError(f"final_verdict_rule must be {supported_rule}")
         expected_ids = set(plan["session_ids"])
         actual_ids = [result["session_id"] for result in session_results]
         if len(actual_ids) != len(set(actual_ids)) or set(actual_ids) != expected_ids:

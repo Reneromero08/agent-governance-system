@@ -38,28 +38,16 @@ static int exists(const char *path) {
 }
 
 static const char *key(const char *json, const char *name) {
-    char needle[160];
-    snprintf(needle, sizeof(needle), "\"%s\"", name);
-    return strstr(json, needle);
+    return sj_object_value(json, name);
 }
 
 static const char *value(const char *json, const char *name) {
     const char *p = key(json, name);
-    if (!p || !(p = strchr(p, ':'))) return NULL;
-    do p++; while (isspace((unsigned char)*p));
     return p;
 }
 
 static int key_count(const char *json, const char *name) {
-    char needle[160];
-    snprintf(needle, sizeof(needle), "\"%s\"", name);
-    int count = 0;
-    const char *cursor = json;
-    while ((cursor = strstr(cursor, needle)) != NULL) {
-        count++;
-        cursor += strlen(needle);
-    }
-    return count;
+    return sj_count_key(json, name);
 }
 
 static int object_bounds(const char *json, const char *name,
@@ -371,43 +359,12 @@ static int valid_sha256(const char *digest) {
 }
 
 static void sha256(const char *path, char out[65]) {
-    if (!shell_safe(path)) die("unsafe path: %s", path);
-    int pipefd[2];
-    if (pipe(pipefd)) die("sha256 pipe failed");
-    pid_t child = fork();
-    if (child < 0) die("sha256 fork failed");
-    if (child == 0) {
-        close(pipefd[0]);
-        if (dup2(pipefd[1], STDOUT_FILENO) < 0) _exit(126);
-        close(pipefd[1]);
-        execlp("sha256sum", "sha256sum", "--", path, (char *)NULL);
-        _exit(127);
+    CapturedFile cf = {0};
+    if (capture_file(path, &cf, CAPTURED_MAX_WINDOWS_JSONL)) {
+        die("sha256 file capture failed: %s", path);
     }
-    close(pipefd[1]);
-    char line[128];
-    size_t used = 0;
-    ssize_t n;
-    while (used + 1 < sizeof(line) &&
-           (n = read(pipefd[0], line + used, sizeof(line) - used - 1)) > 0) {
-        used += (size_t)n;
-    }
-    int read_error = n < 0;
-    close(pipefd[0]);
-    int status = 0;
-    if (waitpid(child, &status, 0) < 0 || read_error ||
-        !WIFEXITED(status) || WEXITSTATUS(status) || used < 65) {
-        die("sha256 failed");
-    }
-    line[used] = 0;
-    for (int i = 0; i < SHA_LEN; i++) {
-        if (!((line[i] >= '0' && line[i] <= '9') ||
-              (line[i] >= 'a' && line[i] <= 'f'))) {
-            die("invalid sha256 output");
-        }
-        out[i] = line[i];
-    }
-    if (line[64] != ' ' && line[64] != '\t') die("invalid sha256 output");
-    out[64] = 0;
+    memcpy(out, cf.sha256, CAPTURED_SHA256_LEN + 1);
+    free_captured(&cf);
 }
 
 static int parse_long_arg(const char *text, long *out) {
