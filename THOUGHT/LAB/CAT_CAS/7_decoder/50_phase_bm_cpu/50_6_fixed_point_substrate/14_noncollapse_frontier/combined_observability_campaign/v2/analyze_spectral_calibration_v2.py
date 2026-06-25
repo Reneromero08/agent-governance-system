@@ -569,6 +569,7 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
                 evidence_map_sha256: str | None = None,
                 run_manifest_sha256: str | None = None,
                 session_manifest_sha256: str | None = None,
+                session_manifest_parsed: dict | None = None,
                 run_json_sha256: str | None = None,
                 raw_samples_sha256: str | None = None,
                 window_results_sha256: str | None = None,
@@ -726,6 +727,36 @@ def analyze_run(run_dir: Path, plan: dict, authorization: dict,
         raise ValueError("provided session ID mismatch")
     if route is not None and route != planned["route"]:
         raise ValueError("provided route mismatch")
+
+    if session_manifest_parsed is not None and session_manifest_sha256 is not None:
+        sm = session_manifest_parsed
+        if sm.get("session_id") != session_id:
+            raise ValueError("session manifest session_id binding mismatch")
+        sm_files = sm.get("files")
+        if not isinstance(sm_files, dict):
+            raise ValueError("session manifest files must be an object")
+        for fname in ("session.json", "windows.jsonl"):
+            fb = sm_files.get(fname)
+            if not isinstance(fb, dict):
+                raise ValueError(f"manifest {fname} entry must be an object")
+            if set(fb) != {"size", "sha256"}:
+                raise ValueError(f"manifest {fname} entry fields mismatch")
+            if not isinstance(fb["size"], (int, float)) or int(fb["size"]) < 0:
+                raise ValueError(f"manifest {fname} size invalid")
+            if not isinstance(fb["sha256"], str) or len(fb["sha256"]) != 64 or \
+               not all(c in "0123456789abcdef" for c in fb["sha256"]):
+                raise ValueError(f"manifest {fname} sha256 invalid")
+            real_bytes = captured.get(fname)
+            if real_bytes is None:
+                raise ValueError(f"cannot verify manifest binding: {fname} not captured")
+            if int(fb["size"]) != len(real_bytes):
+                raise ValueError(f"manifest {fname} size mismatch: expected {int(fb['size'])} got {len(real_bytes)}")
+            if sha256_bytes(real_bytes) != fb["sha256"]:
+                raise ValueError(f"manifest {fname} SHA-256 binding mismatch")
+        if session_manifest_sha256 != run.get("session_manifest_sha256"):
+            raise ValueError("session manifest digest does not match run.json")
+        if session_manifest_sha256 != source_bundle.get("sessions", {}).get(session_id):
+            raise ValueError("session manifest digest does not match source bundle")
 
     tsc_hz = float(run["tsc_calibration_hz"])
     measurements = []
@@ -1112,6 +1143,7 @@ def main() -> int:
                 evidence_map_sha256=evidence_map_sha256,
                 plan_sha256=plan_sha256,
                 session_manifest_sha256=manifest_digest,
+                session_manifest_parsed=manifest_parsed,
             )
         )
     result = analyze_campaign(sessions, plan, evidence_map_sha256=evidence_map_sha256)

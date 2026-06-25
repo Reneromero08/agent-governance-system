@@ -824,5 +824,17 @@ class SpectralAnalyzerTests(unittest.TestCase):
         run_to_fail_verdict(below_boundary)
 
 
+
+    def test_valid_session_manifest_binding_passes(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            plan_path, evidence_path, plan = build_full_campaign_fixture(root)
+            output = root / "analysis.json"
+            with mock.patch.object(sys, "argv", [
+                "analyze_spectral_calibration_v2.py", "--plan", str(plan_path), "--evidence-map", str(evidence_path), "--output", str(output),
+            ]):
+                self.assertEqual(analyzer_main(), 0)
+
+
 if __name__ == "__main__":
     unittest.main()
