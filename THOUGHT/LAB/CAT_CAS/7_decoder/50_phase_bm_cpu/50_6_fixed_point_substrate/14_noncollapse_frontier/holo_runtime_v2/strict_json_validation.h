@@ -244,4 +244,32 @@ static const char *sj_object_value(const char *json, const char *name) {
     return result;
 }
 
+static const char *sj_object_value_bounded(const char *start, const char *end,
+                                           const char *name) {
+    if (!start || !end || !name || start >= end) return NULL;
+    StrictJsonCursor state = {start, 0};
+    sj_skip_ws(&state);
+    if (*state.cursor++ != '{') return NULL;
+    sj_skip_ws(&state);
+    int found = 0;
+    const char *result = NULL;
+    while (state.cursor < end && *state.cursor != '}') {
+        char key[160];
+        if (sj_string(&state, key, sizeof(key))) return NULL;
+        sj_skip_ws(&state);
+        if (*state.cursor++ != ':') return NULL;
+        const char *val_start = state.cursor;
+        if (sj_value(&state)) return NULL;
+        if (!strcmp(key, name)) {
+            if (found) return NULL;
+            found = 1;
+            result = val_start;
+        }
+        sj_skip_ws(&state);
+        if (*state.cursor == '}') { state.cursor++; break; }
+        if (*state.cursor++ != ',') return 0;
+    }
+    return result;
+}
+
 #endif

@@ -1,6 +1,6 @@
 # Phase 6 V2 Final Qualification Work Package
 
-**Status:** `PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_COMPLETE__GATE_R_NEXT`
+**Status:** `PHASE6_V2_POST_REVIEW_REPAIR_COMPLETE__REQUALIFICATION_PENDING`
 **Branch:** `codex/phase6-v1-adjudication-v2`
 **Audited source-only repair proof:** GitHub Actions run `28068218010`, run number `18`
 **PR:** `#21`, draft and unmerged
@@ -24,7 +24,7 @@
 This work package is retained as the execution and audit history for a completed engineering qualification.
 
 ```text
-status: PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_COMPLETE__GATE_R_NEXT
+status: PHASE6_V2_POST_REVIEW_REPAIR_COMPLETE__REQUALIFICATION_PENDING
 source commit: 21201106a2b4cbd811d396181e733e08c38beb5d
 generated-contract commit: a8ff3aa96f7bc3bff005088e63e837da44e8ce41
 raw evidence closure: 4b5817a8741889caf5fadfa49df79fecb2f858a9 (incomplete summary), 69691b8061ea9eef6bf1b0dff44d0f1f2de1b863 (incomplete raw), 05c68281bcafda53381b2f70e4de13c25d1f5c9b (corrected), d0086ad0897cce6027b511c3409ff4ba3d422860 (metadata)

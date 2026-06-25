@@ -1,6 +1,6 @@
 # Phase 6B Non-Collapse Frontier Roadmap
 
-**Status:** `PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_COMPLETE__GATE_R_NEXT`
+**Status:** `PHASE6_V2_POST_REVIEW_REPAIR_COMPLETE__REQUALIFICATION_PENDING`
 **Binding directives:** `COURSE_CORRECTION.md`, `COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
 **Immediate engineering gate:** independent review complete; engineering qualification closed; Gate R project-owner integration decision next
 **Immediate scientific gate:** Gate R external review and project-owner integration decision

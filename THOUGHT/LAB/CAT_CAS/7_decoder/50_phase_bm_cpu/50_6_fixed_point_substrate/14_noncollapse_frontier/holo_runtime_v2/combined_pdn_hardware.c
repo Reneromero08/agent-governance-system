@@ -588,11 +588,7 @@ static int close_sync(FILE **file) {
 }
 
 static int hash_file(const char *path, char out[65]) {
-    CapturedFile cf = {0};
-    if (capture_file(path, &cf, CAPTURED_MAX_WINDOWS_JSONL)) return -1;
-    memcpy(out, cf.sha256, CAPTURED_SHA256_LEN + 1);
-    free_captured(&cf);
-    return 0;
+    return hash_file_streaming(path, out);
 }
 
 static void cpu_model(char *out, size_t size) {

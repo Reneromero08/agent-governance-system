@@ -1,7 +1,7 @@
 # Phase 6 Roadmap
 
 **Role:** master chronological task ledger.
-**Current head:** `PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_COMPLETE__GATE_R_NEXT`
+**Current head:** `PHASE6_V2_POST_REVIEW_REPAIR_COMPLETE__REQUALIFICATION_PENDING`
 **Binding directive:** `14_noncollapse_frontier/COURSE_CORRECTION.md`, `14_noncollapse_frontier/COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `14_noncollapse_frontier/PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
 **Immediate engineering gate:** engineering qualification and independent review complete; Gate R project-owner integration decision next.
 **Immediate scientific gate:** Gate R external review and project-owner integration decision remains next.

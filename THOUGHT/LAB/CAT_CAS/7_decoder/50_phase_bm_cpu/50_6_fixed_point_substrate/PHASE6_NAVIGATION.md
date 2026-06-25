@@ -1,7 +1,7 @@
 # Phase 6 Navigation
 
 **Role:** canonical entry point for the Phase 6 directory.
-**Current state:** `PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_COMPLETE__GATE_R_NEXT`
+**Current state:** `PHASE6_V2_POST_REVIEW_REPAIR_COMPLETE__REQUALIFICATION_PENDING`
 **Active directives:** `14_noncollapse_frontier/COURSE_CORRECTION.md`, `14_noncollapse_frontier/COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `14_noncollapse_frontier/PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
 **Active roadmap:** `PHASE6_ROADMAP.md`
 
@@ -62,7 +62,7 @@ The current V2 plan uses ascending tone order. It qualifies the interface and do
 ## Current V2 authority binding
 
 ```text
-status: PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_COMPLETE__GATE_R_NEXT
+status: PHASE6_V2_POST_REVIEW_REPAIR_COMPLETE__REQUALIFICATION_PENDING
 source: 21201106a2b4cbd811d396181e733e08c38beb5d
 generated contracts: a8ff3aa96f7bc3bff005088e63e837da44e8ce41
 raw evidence: 4b5817a8741889caf5fadfa49df79fecb2f858a9 (incomplete summary), 69691b8061ea9eef6bf1b0dff44d0f1f2de1b863 (incomplete raw), 05c68281bcafda53381b2f70e4de13c25d1f5c9b (corrected), d0086ad0897cce6027b511c3409ff4ba3d422860 (metadata)

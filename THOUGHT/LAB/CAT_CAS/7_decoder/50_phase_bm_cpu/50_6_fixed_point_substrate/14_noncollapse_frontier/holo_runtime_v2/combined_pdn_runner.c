@@ -69,21 +69,7 @@ static int object_bounds(const char *json, const char *name,
 }
 
 static const char *object_value(const char *start, const char *end, const char *name) {
-    char needle[160];
-    snprintf(needle, sizeof(needle), "\"%s\"", name);
-    const char *p = start;
-    int count = 0;
-    const char *found = NULL;
-    while ((p = strstr(p, needle)) != NULL && p < end) {
-        count++;
-        found = p + strlen(needle);
-        p = found;
-    }
-    if (count != 1 || !found || found >= end) return NULL;
-    while (found < end && isspace((unsigned char)*found)) found++;
-    if (found >= end || *found++ != ':') return NULL;
-    while (found < end && isspace((unsigned char)*found)) found++;
-    return found < end ? found : NULL;
+    return sj_object_value_bounded(start, end, name);
 }
 
 static int token_end(char c) {
@@ -359,12 +345,9 @@ static int valid_sha256(const char *digest) {
 }
 
 static void sha256(const char *path, char out[65]) {
-    CapturedFile cf = {0};
-    if (capture_file(path, &cf, CAPTURED_MAX_WINDOWS_JSONL)) {
-        die("sha256 file capture failed: %s", path);
+    if (hash_file_streaming(path, out)) {
+        die("sha256 file hash failed: %s", path);
     }
-    memcpy(out, cf.sha256, CAPTURED_SHA256_LEN + 1);
-    free_captured(&cf);
 }
 
 static int parse_long_arg(const char *text, long *out) {
