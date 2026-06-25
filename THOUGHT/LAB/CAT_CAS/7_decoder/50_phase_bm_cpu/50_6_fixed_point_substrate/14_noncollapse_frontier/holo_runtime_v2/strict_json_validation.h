@@ -230,6 +230,7 @@ static const char *sj_object_value(const char *json, const char *name) {
         if (sj_string(&state, key, sizeof(key))) return NULL;
         sj_skip_ws(&state);
         if (*state.cursor++ != ':') return NULL;
+        sj_skip_ws(&state);
         const char *val_start = state.cursor;
         if (sj_value(&state)) return NULL;
         if (!strcmp(key, name)) {
@@ -258,6 +259,7 @@ static const char *sj_object_value_bounded(const char *start, const char *end,
         if (sj_string(&state, key, sizeof(key))) return NULL;
         sj_skip_ws(&state);
         if (*state.cursor++ != ':') return NULL;
+        sj_skip_ws(&state);
         const char *val_start = state.cursor;
         if (sj_value(&state)) return NULL;
         if (!strcmp(key, name)) {
