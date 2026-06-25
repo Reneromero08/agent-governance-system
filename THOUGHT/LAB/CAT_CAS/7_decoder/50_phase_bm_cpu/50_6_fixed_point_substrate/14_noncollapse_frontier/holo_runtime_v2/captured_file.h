@@ -20,6 +20,8 @@ typedef struct {
 int capture_file(const char *path, CapturedFile *out, size_t max_size);
 int hash_captured(const unsigned char *bytes, size_t size,
                   char out_digest[CAPTURED_SHA256_LEN + 1]);
+int hash_file_streaming(const char *path,
+                        char out_digest[CAPTURED_SHA256_LEN + 1]);
 int write_captured_exclusive(const char *path, const CapturedFile *captured);
 void free_captured(CapturedFile *captured);
 
