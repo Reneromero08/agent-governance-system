@@ -244,8 +244,8 @@ int hash_file_streaming(const char *path, char out_digest[CAPTURED_SHA256_LEN + 
 #endif
     int fd = open(path, flags);
     if (fd < 0) return -1;
-    struct stat st;
-    if (fstat(fd, &st) || !S_ISREG(st.st_mode)) { close(fd); return -1; }
+    struct stat st_before;
+    if (fstat(fd, &st_before) || !S_ISREG(st_before.st_mode)) { close(fd); return -1; }
     uint32_t state[8] = {
         0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
         0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19,
@@ -255,8 +255,12 @@ int hash_file_streaming(const char *path, char out_digest[CAPTURED_SHA256_LEN + 
     unsigned char last[64];
     size_t last_used = 0;
     ssize_t n;
-    while ((n = read(fd, buf, sizeof(buf))) > 0) {
-        total += (size_t)n;
+    while (1) {
+        n = read(fd, buf, sizeof(buf));
+        if (n < 0) { if (errno == EINTR) continue; close(fd); return -1; }
+        if (n == 0) break;
+        if (total > UINT64_MAX - (uint64_t)n) { close(fd); return -1; }
+        total += (uint64_t)n;
         size_t offset = 0;
         if (last_used) {
             size_t fill = 64 - last_used;
@@ -264,30 +268,28 @@ int hash_file_streaming(const char *path, char out_digest[CAPTURED_SHA256_LEN + 
             memcpy(last + last_used, buf, take);
             last_used += take;
             offset = take;
-            if (last_used == 64) {
-                sha256_transform(state, last);
-                last_used = 0;
-            }
+            if (last_used == 64) { sha256_transform(state, last); last_used = 0; }
         }
         while (offset + 64 <= (size_t)n) {
             sha256_transform(state, buf + offset);
             offset += 64;
         }
         size_t remain = (size_t)n - offset;
-        if (remain) {
-            memcpy(last, buf + offset, remain);
-            last_used = remain;
-        }
+        if (remain) { memcpy(last, buf + offset, remain); last_used = remain; }
     }
-    if (n < 0) { close(fd); return -1; }
-    close(fd);
+    struct stat st_after;
+    if (fstat(fd, &st_after)) { close(fd); return -1; }
+    int close_rc = close(fd);
+    if (close_rc != 0) return -1;
+    if (st_before.st_dev != st_after.st_dev ||
+        st_before.st_ino != st_after.st_ino ||
+        st_before.st_size != st_after.st_size ||
+        !S_ISREG(st_after.st_mode) ||
+        (uint64_t)st_after.st_size != total) return -1;
     uint64_t bit_len = total * 8;
     last[last_used] = 0x80;
     memset(last + last_used + 1, 0, 64 - last_used - 1);
-    if (last_used >= 56) {
-        sha256_transform(state, last);
-        memset(last, 0, 56);
-    }
+    if (last_used >= 56) { sha256_transform(state, last); memset(last, 0, 56); }
     for (int i = 0; i < 8; i++)
         last[56 + i] = (unsigned char)(bit_len >> (56 - 8 * i));
     sha256_transform(state, last);

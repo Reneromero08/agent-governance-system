@@ -52,20 +52,13 @@ static int key_count(const char *json, const char *name) {
 
 static int object_bounds(const char *json, const char *name,
                          const char **start, const char **end) {
-    const char *p = value(json, name);
+    const char *p = sj_object_value(json, name);
     if (!p || *p != '{') return -1;
-    int depth = 0, in_string = 0;
-    for (const char *cursor = p; *cursor; cursor++) {
-        if (*cursor == '"' && (cursor == p || cursor[-1] != '\\')) in_string = !in_string;
-        if (in_string) continue;
-        if (*cursor == '{') depth++;
-        if (*cursor == '}' && --depth == 0) {
-            *start = p;
-            *end = cursor;
-            return 0;
-        }
-    }
-    return -1;
+    StrictJsonCursor cursor = {p, 0};
+    if (sj_value(&cursor)) return -1;
+    *start = p;
+    *end = cursor.cursor;
+    return 0;
 }
 
 static const char *object_value(const char *start, const char *end, const char *name) {
@@ -140,15 +133,23 @@ static int object_long_pair(const char *json, const char *object_name,
 }
 
 static int object_member_count(const char *json, const char *object_name) {
-    const char *start, *end;
-    if (object_bounds(json, object_name, &start, &end)) return -1;
-    int count = 0, in_string = 0, nested = 0;
-    for (const char *p = start + 1; p < end; p++) {
-        if (*p == '"' && p[-1] != '\\') in_string = !in_string;
-        if (in_string) continue;
-        if (*p == '{' || *p == '[') nested++;
-        else if (*p == '}' || *p == ']') nested--;
-        else if (*p == ':' && nested == 0) count++;
+    const char *p = sj_object_value(json, object_name);
+    if (!p || *p != '{') return -1;
+    StrictJsonCursor cursor = {p, 0};
+    sj_skip_ws(&cursor);
+    if (*cursor.cursor++ != '{') return -1;
+    sj_skip_ws(&cursor);
+    if (*cursor.cursor == '}') { cursor.cursor++; return 0; }
+    int count = 0;
+    for (;;) {
+        if (sj_string(&cursor, NULL, 0)) return -1;
+        count++;
+        sj_skip_ws(&cursor);
+        if (*cursor.cursor++ != ':') return -1;
+        if (sj_value(&cursor)) return -1;
+        sj_skip_ws(&cursor);
+        if (*cursor.cursor == '}') { cursor.cursor++; break; }
+        if (*cursor.cursor++ != ',') return -1;
     }
     return count;
 }
