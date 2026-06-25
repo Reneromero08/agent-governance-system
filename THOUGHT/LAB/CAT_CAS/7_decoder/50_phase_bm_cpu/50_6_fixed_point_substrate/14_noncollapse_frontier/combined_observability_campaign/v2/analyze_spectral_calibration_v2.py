@@ -1090,6 +1090,8 @@ def main() -> int:
         source_bundle_bytes = read_regular_bytes(source_bundle_path)
         authorization = parse_json_bytes(authorization_bytes, str(authorization_path))
         bundle = parse_json_bytes(source_bundle_bytes, str(source_bundle_path))
+        manifest_bytes = read_regular_bytes(session_manifest_path)
+        manifest_digest = sha256_bytes(manifest_bytes)
         sessions.append(
             analyze_run(
                 run_dir, plan, authorization, bundle,
@@ -1097,6 +1099,7 @@ def main() -> int:
                 source_bundle_sha256=sha256_bytes(source_bundle_bytes),
                 evidence_map_sha256=evidence_map_sha256,
                 plan_sha256=plan_sha256,
+                session_manifest_sha256=manifest_digest,
             )
         )
     result = analyze_campaign(sessions, plan, evidence_map_sha256=evidence_map_sha256)

@@ -642,8 +642,11 @@ int write_run_manifest(const char *dir, const char *session_id, const char *stat
 
     fprintf(f,
             "{\n"
-            "  \"schema_id\": \"CAT_CAS_PHASE6_COMBINED_RUN_MANIFEST_V2\",\n"
-            "  \"session_id\": \"");
+            "  \"schema_id\": \"%s\",\n"
+            "  \"session_id\": \"",
+            strcmp(status, "COMPLETE") == 0 || strcmp(status, "FAILED") == 0
+                ? "CAT_CAS_PHASE6_COMBINED_RUN_MANIFEST_V2"
+                : "CAT_CAS_PHASE6_V2_VALIDATION_ONLY_MANIFEST_V1");
     if (json_escape(f, session_id)) {
         fclose(f);
         return -1;

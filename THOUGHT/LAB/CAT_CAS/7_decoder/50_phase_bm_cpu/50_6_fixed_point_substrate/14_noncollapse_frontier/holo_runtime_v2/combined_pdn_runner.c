@@ -953,7 +953,7 @@ static void validation_outputs(const RunnerArgs *args, const Schedule *schedule)
     if (!f) die("create run.json");
     fprintf(f,
             "{\n"
-            "  \"schema_id\": \"CAT_CAS_PHASE6_COMBINED_RUN_V2\",\n"
+            "  \"schema_id\": \"CAT_CAS_PHASE6_V2_VALIDATION_ONLY_RUN_V1\",\n"
             "  \"session_id\": \"%s\",\n"
             "  \"status\": \"VALIDATION_ONLY_HARDWARE_NOT_EXECUTED\",\n"
             "  \"execution_class\": \"VALIDATION_ONLY\",\n"
