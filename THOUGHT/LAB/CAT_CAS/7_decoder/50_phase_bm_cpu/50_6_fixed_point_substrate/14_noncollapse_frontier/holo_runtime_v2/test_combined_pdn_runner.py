@@ -26,6 +26,30 @@ def dump(path: Path, value: object) -> None:
     path.write_text(json.dumps(value, sort_keys=True, indent=2) + "\n", encoding="utf-8")
 
 
+def rewrite_manifest_binding(session: Path, name: str, binding: dict) -> None:
+    manifest = json.loads((session / "session_manifest.json").read_text())
+    manifest["files"][name] = binding
+    dump(session / "session_manifest.json", manifest)
+
+
+def canonical_manifest_text(session: Path) -> str:
+    return (
+        "{\n"
+        '  "schema_id": "CAT_CAS_PHASE6_COMBINED_SESSION_MANIFEST_V2",\n'
+        '  "session_id": "v4s5_seed4",\n'
+        '  "files": {\n'
+        '    "session.json": {"size": %d, "sha256": "%s"},\n'
+        '    "windows.jsonl": {"size": %d, "sha256": "%s"}\n'
+        "  }\n"
+        "}\n"
+    ) % (
+        (session / "session.json").stat().st_size,
+        sha(session / "session.json"),
+        (session / "windows.jsonl").stat().st_size,
+        sha(session / "windows.jsonl"),
+    )
+
+
 def base_window(index: int, off: bool = False) -> dict:
     return {
         "window_index": index,
@@ -249,6 +273,63 @@ class Tests(unittest.TestCase):
                 result = self.exec_runner(directory, Path(temp) / "out", "--validate-only")
                 self.assertNotEqual(result.returncode, 0)
                 self.assertIn("sha256 binding mismatch", result.stderr)
+
+    def test_manifest_file_binding_rejects_ordinary_extra_field(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = write_session(Path(temp))
+            rewrite_manifest_binding(directory, "session.json", {
+                "size": (directory / "session.json").stat().st_size,
+                "extra": "undeclared",
+                "sha256": sha(directory / "session.json"),
+            })
+            result = self.exec_runner(directory, Path(temp) / "out", "--validate-only")
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("size binding mismatch", result.stderr)
+
+    def test_manifest_file_binding_rejects_extra_field_ending_in_backslash(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = write_session(Path(temp))
+            rewrite_manifest_binding(directory, "session.json", {
+                "size": (directory / "session.json").stat().st_size,
+                "extra": "x\\",
+                "sha256": sha(directory / "session.json"),
+            })
+            text = (directory / "session_manifest.json").read_text(encoding="utf-8")
+            self.assertIn('"extra": "x\\\\",', text)
+            result = self.exec_runner(directory, Path(temp) / "out", "--validate-only")
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("size binding mismatch", result.stderr)
+
+    def test_manifest_file_binding_rejects_duplicate_size(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = write_session(Path(temp))
+            text = canonical_manifest_text(directory).replace(
+                '"size": ', '"size": 0, "size": ', 1
+            )
+            (directory / "session_manifest.json").write_text(text, encoding="utf-8")
+            result = self.exec_runner(directory, Path(temp) / "out", "--validate-only")
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("size binding mismatch", result.stderr)
+
+    def test_manifest_file_binding_rejects_duplicate_sha256(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = write_session(Path(temp))
+            text = canonical_manifest_text(directory).replace(
+                '"sha256": ', '"sha256": "%s", "sha256": ' % ("0" * 64), 1
+            )
+            (directory / "session_manifest.json").write_text(text, encoding="utf-8")
+            result = self.exec_runner(directory, Path(temp) / "out", "--validate-only")
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("size binding mismatch", result.stderr)
+
+    def test_manifest_file_binding_accepts_canonical_size_sha256_object(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = write_session(Path(temp))
+            (directory / "session_manifest.json").write_text(
+                canonical_manifest_text(directory), encoding="utf-8"
+            )
+            result = self.exec_runner(directory, Path(temp) / "out", "--validate-only")
+            self.assertEqual(result.returncode, 0, result.stderr)
 
     def test_noncontiguous_duplicate(self):
         self.assert_reject(lambda header, rows: rows[1].update(window_index=0),

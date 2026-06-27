@@ -154,18 +154,6 @@ static int object_member_count(const char *json, const char *object_name) {
     return count;
 }
 
-static int direct_object_member_count(const char *start, const char *end) {
-    int count = 0, in_string = 0, nested = 0;
-    for (const char *p = start + 1; p < end; p++) {
-        if (*p == '"' && p[-1] != '\\') in_string = !in_string;
-        if (in_string) continue;
-        if (*p == '{' || *p == '[') nested++;
-        else if (*p == '}' || *p == ']') nested--;
-        else if (*p == ':' && nested == 0) count++;
-    }
-    return count;
-}
-
 static int bounded_long(const char *start, const char *end,
                         const char *name, long *out) {
     const char *p = object_value(start, end, name);
@@ -195,13 +183,50 @@ static int bounded_sha256(const char *start, const char *end,
     return 0;
 }
 
+static int exact_manifest_file_binding_object(const char *start, const char *end) {
+    StrictJsonCursor cursor = {start, 0};
+    int seen_size = 0, seen_sha256 = 0, members = 0;
+    sj_skip_ws(&cursor);
+    if (cursor.cursor >= end || *cursor.cursor++ != '{') return -1;
+    sj_skip_ws(&cursor);
+    if (cursor.cursor >= end || *cursor.cursor == '}') return -1;
+    for (;;) {
+        char member[32];
+        if (cursor.cursor >= end || sj_string(&cursor, member, sizeof(member))) {
+            return -1;
+        }
+        if (!strcmp(member, "size")) {
+            if (seen_size) return -1;
+            seen_size = 1;
+        } else if (!strcmp(member, "sha256")) {
+            if (seen_sha256) return -1;
+            seen_sha256 = 1;
+        } else {
+            return -1;
+        }
+        members++;
+        sj_skip_ws(&cursor);
+        if (cursor.cursor >= end || *cursor.cursor++ != ':') return -1;
+        if (sj_value(&cursor)) return -1;
+        if (cursor.cursor > end) return -1;
+        sj_skip_ws(&cursor);
+        if (cursor.cursor >= end) return -1;
+        if (*cursor.cursor == '}') {
+            cursor.cursor++;
+            break;
+        }
+        if (*cursor.cursor++ != ',') return -1;
+    }
+    return cursor.cursor == end && members == 2 && seen_size && seen_sha256 ? 0 : -1;
+}
+
 static int manifest_file_binding(const char *manifest, const char *name,
                                  long *size, char sha256[65]) {
     const char *files_start, *files_end, *entry_start, *entry_end;
     if (object_member_count(manifest, "files") != 2 ||
         object_bounds(manifest, "files", &files_start, &files_end) ||
         object_bounds(files_start, name, &entry_start, &entry_end) ||
-        entry_end > files_end || direct_object_member_count(entry_start, entry_end) != 2 ||
+        entry_end > files_end || exact_manifest_file_binding_object(entry_start, entry_end) ||
         bounded_long(entry_start, entry_end, "size", size) || *size < 0 ||
         bounded_sha256(entry_start, entry_end, "sha256", sha256)) {
         return -1;
