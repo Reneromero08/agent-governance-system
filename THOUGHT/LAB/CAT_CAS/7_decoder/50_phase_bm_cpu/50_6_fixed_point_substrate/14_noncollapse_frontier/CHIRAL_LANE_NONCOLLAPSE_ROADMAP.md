@@ -2,7 +2,7 @@
 
 **Status:** `PHASE6_V2_POST_REVIEW_REPAIR_IN_PROGRESS__REQUALIFICATION_BLOCKED`
 **Binding directives:** `COURSE_CORRECTION.md`, `COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
-**Immediate engineering gate:** independent review complete; engineering qualification closed; Gate R project-owner integration decision next
+**Immediate engineering gate:** V2 source repair complete and exact-source hosted qualification green; fresh independent review and generated-chain requalification next
 **Immediate scientific gate:** Gate R external review and project-owner integration decision
 **Next physical control:** reversed/randomized tone order, proposed but unauthorized
 **Observability implementation authorization:** false
@@ -273,31 +273,31 @@ The V2 lane qualifies a corrected physical interface without promoting it into o
 - [x] mechanical runtime/plan threshold binding
 - [x] exact capture-quality and schema closure
 - [x] immutable run-root directory and symlink rejection
-- [x] exact final-head GitHub CI pass
-- [x] exact final-head target-toolchain and sanitizer pass
-- [x] regenerated contracts and final evidence inventory
-- [ ] independent merge review
+- [x] exact-source hosted GitHub CI pass at repaired source head `a7ad075256c48d486655361aed06a8a69fe2c228`
+- [x] exact-source hosted strict compile, equivalence, sanitizer, and binding pass
+- [ ] fresh independent review of repaired source head
+- [ ] regenerated contracts and final evidence inventory from reviewed repaired source
 
 The current V2 schedule is ascending-order engineering calibration. It is not the reversed/randomized tone-order scientific control.
 
-Final engineering qualification binding:
+Current source-repair qualification binding:
 
 ```text
-source commit: 21201106a2b4cbd811d396181e733e08c38beb5d
-generated contract commit: a8ff3aa96f7bc3bff005088e63e837da44e8ce41
-raw evidence closure: 4b5817a8741889caf5fadfa49df79fecb2f858a9 (incomplete summary), 69691b8061ea9eef6bf1b0dff44d0f1f2de1b863 (incomplete raw), 05c68281bcafda53381b2f70e4de13c25d1f5c9b (corrected), d0086ad0897cce6027b511c3409ff4ba3d422860 (metadata)
-command evidence closure: d0086ad0897cce6027b511c3409ff4ba3d422860
-review ledger correction: 14469abb48567dda7c6eeb5c4bf16a8b282be85c
-plan SHA-256: 7b21fa00ae986128f812d7720994d8e168844aa71cf3435b2edfea10497c738a
-source-bundle SHA-256: 11547477f1a41e9b0661bb9f5d3532ab75aba20e0c785d9d14861bea2c57d487
-unique functional test cases: 86
-total unittest executions: 209
-independent PR review: complete
-independent review record: 4559668654
-independent reviewed head: 38bd6cb3423c512137a1e5cbcfae18420bcce996
-independent review result: NO_BLOCKING_FINDINGS
-Gate R: blocked (requalification not complete)
+source repair commit: a7ad075256c48d486655361aed06a8a69fe2c228
+source repair: complete
+exact-source hosted qualification: green
+Governance run: 28282788948 success
+Contracts run: 28282788943 success
+Phase 6 V2 Strict Qualification run: 28282788952 success
+Phase 6 Combined Campaign Plan run: 28282788955 success
+fresh independent review: pending
+generated contracts from repaired source: pending
+generated evidence inventory from repaired source: pending
+Gate R: blocked (fresh review, generated-contract regeneration, generated-head requalification, evidence binding, and project-owner decision pending)
 Phase 6B.6: not entered
+hardware_ran: false
+calibration_authorized: false
+scientific_acquisition_authorized: false
 ```
 
 ### Gate R — L4B.5B0 external human review

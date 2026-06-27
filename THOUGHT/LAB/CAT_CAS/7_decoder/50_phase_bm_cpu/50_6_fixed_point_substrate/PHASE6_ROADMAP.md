@@ -317,34 +317,32 @@ This is a forward-only engineering lane beneath Gate R. It does not enter Phase 
 - [x] add focused Windows contract, analyzer, and waveform tests
 - [x] add GitHub workflow coverage for `holo_runtime_v2`, V2 Python tests, equivalence, ASan, and UBSan
 - [x] close strict source and contract defects listed in the V2 engineering addendum Q1
-- [x] pass the updated V2 GitHub CI lane at the exact final head
-- [x] pass strict compile, equivalence, sanitizers, and full no-write gate on the Linux target at the exact final head
-- [x] regenerate generated contracts and the evidence inventory from the final source head
-- [x] synchronize PR description and all authority documents with final hashes and logs
-- [x] complete independent merge review
+- [x] pass exact-source-head hosted qualification at repaired source head `a7ad075256c48d486655361aed06a8a69fe2c228`
+- [x] pass strict compile, equivalence, sanitizers, and full no-write gate on hosted Linux at repaired source head `a7ad075256c48d486655361aed06a8a69fe2c228`
+- [ ] fresh independent review of repaired source head
+- [ ] regenerate generated contracts and evidence inventory from the final reviewed source head
+- [ ] synchronize generated-head authority after regeneration and requalification
 
 The current V2 plan uses ascending tone order and qualifies the physical interface. It is not the selected reversed/randomized tone-order scientific control.
 
-Final V2 engineering qualification binding:
+Current V2 source-repair qualification binding:
 
 ```text
-source commit: 21201106a2b4cbd811d396181e733e08c38beb5d
-generated contract commit: a8ff3aa96f7bc3bff005088e63e837da44e8ce41
-raw evidence closure: 4b5817a8741889caf5fadfa49df79fecb2f858a9 (incomplete summary), 69691b8061ea9eef6bf1b0dff44d0f1f2de1b863 (incomplete raw), 05c68281bcafda53381b2f70e4de13c25d1f5c9b (corrected), d0086ad0897cce6027b511c3409ff4ba3d422860 (metadata)
-command evidence closure: d0086ad0897cce6027b511c3409ff4ba3d422860
-review ledger correction: 14469abb48567dda7c6eeb5c4bf16a8b282be85c
-plan SHA-256: 7b21fa00ae986128f812d7720994d8e168844aa71cf3435b2edfea10497c738a
-source-bundle SHA-256: 11547477f1a41e9b0661bb9f5d3532ab75aba20e0c785d9d14861bea2c57d487
-unique functional test cases: 86
-total unittest executions: 209
-Windows tested SHA: a8ff3aa96f7bc3bff005088e63e837da44e8ce41
-Linux tested SHA: a8ff3aa96f7bc3bff005088e63e837da44e8ce41
-independent PR review: complete
-independent review record: 4559668654
-independent reviewed head: 38bd6cb3423c512137a1e5cbcfae18420bcce996
-independent review result: NO_BLOCKING_FINDINGS
-Gate R: blocked (requalification not complete)
+source repair commit: a7ad075256c48d486655361aed06a8a69fe2c228
+source repair: complete
+exact-source hosted qualification: green
+Governance run: 28282788948 success
+Contracts run: 28282788943 success
+Phase 6 V2 Strict Qualification run: 28282788952 success
+Phase 6 Combined Campaign Plan run: 28282788955 success
+fresh independent review: pending
+generated contracts from repaired source: pending
+generated evidence inventory from repaired source: pending
+Gate R: blocked (fresh review, generated-contract regeneration, generated-head requalification, evidence binding, and project-owner decision pending)
 Phase 6B.6: not entered
+hardware_ran: false
+calibration_authorized: false
+scientific_acquisition_authorized: false
 ```
 
 Binding addendum:
@@ -437,8 +435,8 @@ One positive does not authorize Big Wall generalization.
 | Physical route/session transfer chart | Minimal C0 scalar relation supported; complete operator not identified |
 | Strict carrier witness | `PARTIAL` |
 | V1 combined-observability campaign | Permanent negative adjudication; no stable predictive operator |
-| V2 executor/calibration architecture | Draft engineering qualification object; not executed or authorized |
-| V2 exact final-head qualification | Pending GitHub and Linux closure |
+| V2 executor/calibration architecture | Source repair complete and exact-source hosted qualification green; not executed or authorized |
+| V2 generated-contract and evidence chain | Pending fresh independent review, regeneration, generated-head requalification, and authority binding |
 | Reversed/randomized tone-order control | Selected but not designed, reviewed, or authorized |
 | Software `.holo` geometric memory | Supported at L1/L2 |
 | History-backed software restoration | Supported |

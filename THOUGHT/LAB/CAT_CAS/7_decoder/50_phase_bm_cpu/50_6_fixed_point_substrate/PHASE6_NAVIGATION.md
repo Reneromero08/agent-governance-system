@@ -45,10 +45,10 @@ The V2 engineering lane now sits below Gate R:
 ```text
 permanent V1 negative adjudication
 → corrected V2 executor and calibration architecture
-→ source and contract closure
-→ GitHub V2 CI closure
-→ exact final-head Linux qualification
-→ evidence and authority synchronization
+→ source repair and exact-source hosted qualification
+→ fresh independent source review
+→ generated-contract and evidence regeneration
+→ generated-head requalification and authority synchronization
 → independent PR review
 → Gate R project-owner decision
 ```
@@ -62,19 +62,17 @@ The current V2 plan uses ascending tone order. It qualifies the interface and do
 ## Current V2 authority binding
 
 ```text
-status: PHASE6_V2_POST_REVIEW_REPAIR_IN_PROGRESS__REQUALIFICATION_BLOCKED
-source: 21201106a2b4cbd811d396181e733e08c38beb5d
-generated contracts: a8ff3aa96f7bc3bff005088e63e837da44e8ce41
-raw evidence: 4b5817a8741889caf5fadfa49df79fecb2f858a9 (incomplete summary), 69691b8061ea9eef6bf1b0dff44d0f1f2de1b863 (incomplete raw), 05c68281bcafda53381b2f70e4de13c25d1f5c9b (corrected), d0086ad0897cce6027b511c3409ff4ba3d422860 (metadata)
-command evidence: d0086ad0897cce6027b511c3409ff4ba3d422860
-review ledger correction: 14469abb48567dda7c6eeb5c4bf16a8b282be85c
-plan SHA-256: 7b21fa00ae986128f812d7720994d8e168844aa71cf3435b2edfea10497c738a
-source-bundle SHA-256: 11547477f1a41e9b0661bb9f5d3532ab75aba20e0c785d9d14861bea2c57d487
-independent PR review: complete
-independent review record: 4559668654
-independent reviewed head: 38bd6cb3423c512137a1e5cbcfae18420bcce996
-independent review result: NO_BLOCKING_FINDINGS
-Gate R: blocked (requalification not complete)
+status: PHASE6_V2_SOURCE_REPAIR_COMPLETE__EXACT_SOURCE_HOSTED_GREEN__DOWNSTREAM_REVIEW_AND_REGENERATION_BLOCKED
+source repair head: a7ad075256c48d486655361aed06a8a69fe2c228
+exact-source hosted qualification: green
+Governance run: 28282788948 success
+Contracts run: 28282788943 success
+Phase 6 V2 Strict Qualification run: 28282788952 success
+Phase 6 Combined Campaign Plan run: 28282788955 success
+fresh independent source review: pending
+generated contracts from repaired source: pending
+generated evidence inventory from repaired source: pending
+Gate R: blocked (fresh review, generated-contract regeneration, generated-head requalification, evidence binding, and project-owner decision pending)
 Phase 6B.6: not entered
 hardware_ran: false
 authorization_artifact_created: false
@@ -99,7 +97,7 @@ authorization_artifact_created: false
 | 11 | `pdn_catalytic_tape` | Simulation/hardware-gap analysis | Complete |
 | 12 | `chiral_lane_frontier` | Phase 6A public lane boundary | Closed |
 | 13 | `substrate_frontier` | Tape/fixed-point warmup and L4 rejection | Historical/corrected |
-| 14 | `noncollapse_frontier` | Active Phase 6B architecture and physical ladder | Phase 6B.5D frozen; V2 engineering qualification complete; independent PR review next; Gate R still next |
+| 14 | `noncollapse_frontier` | Active Phase 6B architecture and physical ladder | Phase 6B.5D frozen; V2 source repair complete; fresh independent review and generated-chain requalification next; Gate R blocked |
 
 ---
 
@@ -225,10 +223,11 @@ V1 combined observability proves: the historical campaign can be permanently
            adjudicated under its frozen evidence and corrected execution coordinate.
 V1 does not prove: a stable predictive operator or pristine final-test hygiene.
 
-V2 currently proves: a corrected forward-only software architecture, exact generated
-           calibration contracts, and focused local tests.
-V2 does not yet prove: exact final-head Linux qualification, hardware calibration,
-           Gate R acceptance, an observable physical state, restoration, or crossing.
+V2 currently proves: a corrected forward-only software architecture and exact-source
+           hosted qualification at `a7ad075256c48d486655361aed06a8a69fe2c228`.
+V2 does not yet prove: fresh independent review, regenerated contracts or evidence
+           from the repaired source, hardware calibration, Gate R acceptance, an
+           observable physical state, restoration, or crossing.
 
 .holo proves: software relational geometry, serialized path memory, boundary-gated invariant extraction.
 .holo does not prove: physical geometry, physical inverse evolution, physical restoration, orientation.
@@ -240,6 +239,6 @@ V2 does not yet prove: exact final-head Linux qualification, hardware calibratio
 
 No physical acquisition is authorized.
 
-The immediate engineering boundary is V2 qualification Q1 through Q4 followed by independent PR review. The next scientific gate remains the external, SHA-bound, non-authorizing L4B.5B0 human review and project-owner integration decision.
+The immediate engineering boundary is fresh independent review of the repaired source head, contract and evidence regeneration from that reviewed head, generated-head requalification, and authority binding. The next scientific gate remains the external, SHA-bound, non-authorizing L4B.5B0 human review and project-owner integration decision.
 
-PR #21 remains draft and unmerged until the exact final head passes the required source, GitHub CI, Linux, evidence, and authority gates.
+PR #21 remains draft and unmerged until the reviewed source, generated contracts, evidence, and authority chain are complete.
