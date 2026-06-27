@@ -1,0 +1,1 @@
+bash: line 1: sha256sum /root/catcas_phase6_v2_500f7dfc/sealed/phase6_v2_500f7dfc.tar /root/catcas_phase6_v2_500f7dfc/sealed/phase6_v2_500f7dfc.files.sha256 /root/catcas_phase6_v2_500f7dfc/verify_manifest.py: No such file or directory

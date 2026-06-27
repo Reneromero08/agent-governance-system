@@ -1,7 +1,7 @@
 # Phase 6 Navigation
 
 **Role:** canonical entry point for the Phase 6 directory.
-**Current state:** `PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__GATE_R_BLOCKED`
+**Current state:** `PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__CUSTODY_CORRECTED__GATE_R_BLOCKED`
 **Active directives:** `14_noncollapse_frontier/COURSE_CORRECTION.md`, `14_noncollapse_frontier/COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `14_noncollapse_frontier/PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
 **Active roadmap:** `PHASE6_ROADMAP.md`
 
@@ -62,7 +62,7 @@ The current V2 plan uses ascending tone order. It qualifies the interface and do
 ## Current V2 authority binding
 
 ```text
-status: PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__GATE_R_BLOCKED
+status: PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__CUSTODY_CORRECTED__GATE_R_BLOCKED
 source repair head: ba48125d15009a044bb869b5716c412b1a8baa1b
 source review: 4584742973 complete
 generated-contract head: 500f7dfcd198e6e70dc3f999248aa61224d530cd
@@ -75,6 +75,8 @@ Phase 6 V2 Strict Qualification run: 28284598853 success
 Phase 6 Combined Campaign Plan run: 28284598854 success
 Phenom target qualification: sealed exact-commit snapshot; strict C, runtime, ASan, UBSan, and V2 Python contracts/analyzer passed
 evidence package: 14_noncollapse_frontier/combined_observability_campaign/v2/evidence/exact_head_500f7dfc
+sealed-snapshot evidence custody: corrected
+fresh independent evidence review: pending
 Gate R: blocked (project-owner decision pending)
 Phase 6B.6: not entered
 hardware_ran: false
@@ -100,7 +102,7 @@ authorization_artifact_created: false
 | 11 | `pdn_catalytic_tape` | Simulation/hardware-gap analysis | Complete |
 | 12 | `chiral_lane_frontier` | Phase 6A public lane boundary | Closed |
 | 13 | `substrate_frontier` | Tape/fixed-point warmup and L4 rejection | Historical/corrected |
-| 14 | `noncollapse_frontier` | Active Phase 6B architecture and physical ladder | Phase 6B.5D frozen; V2 exact generated head qualified and evidence-bound; Gate R blocked |
+| 14 | `noncollapse_frontier` | Active Phase 6B architecture and physical ladder | Phase 6B.5D frozen; V2 exact generated head qualified, custody-corrected, and evidence-bound; Gate R blocked |
 
 ---
 

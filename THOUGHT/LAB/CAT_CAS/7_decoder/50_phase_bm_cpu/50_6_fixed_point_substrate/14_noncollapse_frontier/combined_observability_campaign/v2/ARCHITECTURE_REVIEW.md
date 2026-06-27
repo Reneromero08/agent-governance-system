@@ -1,10 +1,11 @@
 # Phase 6 V2 Architectural Review
 
-**Status:** `PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__GATE_R_BLOCKED`
+**Status:** `PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__CUSTODY_CORRECTED__GATE_R_BLOCKED`
 **Authority:** `../../PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
 **Execution packet:** `../V2_FINAL_QUALIFICATION_WORK_PACKAGE.md`
 **Independent source review:** complete, `4584742973`
 **Independent generated-head review:** complete, `4584795315`
+**Independent evidence review:** `4585030778`, corrective custody commit required
 **Independent reviewed generated head:** `500f7dfcd198e6e70dc3f999248aa61224d530cd`
 **Independent review result:** `NO_BLOCKING_FINDINGS`
 **Gate R:** pending
@@ -84,6 +85,16 @@ combined_observability_campaign/v2/evidence/exact_head_500f7dfc/EVIDENCE_INVENTO
 
 Its verification record reports `OK` for every committed evidence file covered by the inventory.
 
+## Sealed-Snapshot Custody Correction
+
+Commit `3c1fa7dc5e2d6a380d7ff310c1160dfc642f6a32` is preserved as incomplete evidence provenance. The corrective custody package recovers the exact Phenom target verifier at `target/verify_manifest.py` with SHA-256 `43a5fe14b581a889b33f4ddefd49de1c78efd2973088f1696020aa861783a199`, records matching target and local digests, and reruns only the manifest verifier. No strict compile, functional, ASan, UBSan, or V2 Python test suite was repeated.
+
+The original Windows status logs remain unmodified and truthfully show an untracked evidence package. The archive identity is unaffected because the archive was generated from explicit immutable commit `500f7dfcd198e6e70dc3f999248aa61224d530cd`.
+
+The missing snapshot bridge is reproduced in `cc/`: `git archive` reproduces archive SHA-256 `974ee0d030b74d2515ed897e82e278d9385f96c91a0a7b5974cb95bf24d1efcf`, Python `tarfile` extraction preserves UTF-8 path names, and the deterministic CRLF recursive manifest reproduces SHA-256 `a59b53235854b6173ebb5f7c2b7eac32d0a5f1bdfe8265d67d94eb0d078730c8` over 8350 files. The original transfer command and timestamp remain `not_recorded`; current target-side SHA queries bind the already transferred archive, manifest, and verifier bytes.
+
+`COMMANDS.jsonl` is the canonical complete command ledger. `COMMAND_LEDGER.jsonl`, `target/target_COMMAND_LEDGER.jsonl`, and `cc/custody_COMMANDS.jsonl` are component ledgers only.
+
 ## Preserved scientific boundary
 
 ```text
@@ -134,4 +145,4 @@ small_wall_authorized=false
 
 ## Next legitimate action
 
-The project-owner Gate R decision is next. No physical acquisition, restoration experiment, target-coupling experiment, or Small Wall execution is authorized by this qualification.
+Fresh independent evidence review of the corrective custody commit is next. The project-owner Gate R decision remains blocked. No physical acquisition, restoration experiment, target-coupling experiment, or Small Wall execution is authorized by this qualification.

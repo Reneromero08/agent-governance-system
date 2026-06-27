@@ -1,6 +1,6 @@
 # Phase 6 V2 Final Qualification Work Package
 
-**Status:** `PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__GATE_R_BLOCKED`
+**Status:** `PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__CUSTODY_CORRECTED__GATE_R_BLOCKED`
 **Branch:** `codex/phase6-v1-adjudication-v2`
 **Audited source-only repair proof:** GitHub Actions run `28068218010`, run number `18`
 **PR:** `#21`, draft and unmerged
@@ -14,6 +14,8 @@
 **Plan SHA-256:** `3c1b8d3da4d24e97a4395747dc8f587f60d21ef6d789bd27da8cd95908b7ebb3`
 **Source-bundle SHA-256:** `bec71b2369587e68a88e9e2b5cb47837a07d5cdef6f13990417e0c0928e85f2f`
 **Exact-head evidence:** `v2/evidence/exact_head_500f7dfc`
+**Independent evidence review:** `4585030778`
+**Sealed-snapshot evidence custody:** corrected
 **Hardware calibration authorized:** false
 **Scientific acquisition authorized:** false
 **Restoration authorized:** false
@@ -27,7 +29,7 @@
 This work package is retained as the execution and audit history for a completed engineering qualification.
 
 ```text
-status: PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__GATE_R_BLOCKED
+status: PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__CUSTODY_CORRECTED__GATE_R_BLOCKED
 source commit: ba48125d15009a044bb869b5716c412b1a8baa1b
 generated-contract commit: 500f7dfcd198e6e70dc3f999248aa61224d530cd
 raw evidence closure: 4b5817a8741889caf5fadfa49df79fecb2f858a9 (incomplete summary), 69691b8061ea9eef6bf1b0dff44d0f1f2de1b863 (incomplete raw), 05c68281bcafda53381b2f70e4de13c25d1f5c9b (corrected), d0086ad0897cce6027b511c3409ff4ba3d422860 (metadata)
@@ -40,6 +42,8 @@ independent reviewed head: 500f7dfcd198e6e70dc3f999248aa61224d530cd
 independent review result: NO_BLOCKING_FINDINGS
 hosted runs: Governance 28284598855, Contracts 28284598856, Phase 6 V2 Strict Qualification 28284598853, Phase 6 Combined Campaign Plan 28284598854
 target qualification: sealed git-archive snapshot, target Git checkout not applicable
+sealed-snapshot evidence custody: corrected
+fresh independent evidence review: pending
 Gate R: blocked (project-owner decision pending)
 Phase 6B.6: not entered
 ```

@@ -1,7 +1,7 @@
 # Phase 6 Roadmap
 
 **Role:** master chronological task ledger.
-**Current head:** `PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__GATE_R_BLOCKED`
+**Current head:** `PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__CUSTODY_CORRECTED__GATE_R_BLOCKED`
 **Binding directive:** `14_noncollapse_frontier/COURSE_CORRECTION.md`, `14_noncollapse_frontier/COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `14_noncollapse_frontier/PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
 **Immediate engineering gate:** close source review/repair, regenerate generated contracts, requalify the exact generated head, bind evidence, then present the project-owner Gate R decision.
 **Immediate scientific gate:** Gate R remains blocked until source review/repair closure, generated-contract regeneration, generated-head requalification, evidence binding, and project-owner decision complete in sequence.
@@ -324,6 +324,7 @@ This is a forward-only engineering lane beneath Gate R. It does not enter Phase 
 - [x] close independent generated-head review `4584795315`
 - [x] requalify exact generated head `500f7dfcd198e6e70dc3f999248aa61224d530cd` through hosted workflows and sealed-snapshot Phenom target software qualification
 - [x] bind exact-head evidence package `14_noncollapse_frontier/combined_observability_campaign/v2/evidence/exact_head_500f7dfc`
+- [x] close sealed-snapshot evidence custody gaps from independent evidence review `4585030778`
 
 The current V2 plan uses ascending tone order and qualifies the physical interface. It is not the selected reversed/randomized tone-order scientific control.
 
@@ -343,6 +344,8 @@ Phase 6 Combined Campaign Plan run: 28284598854 success
 Phenom target identity: sealed git-archive snapshot, target Git checkout not applicable
 target software qualification: strict C, functional runtime, ASan, UBSan, and V2 Python contracts/analyzer passed
 evidence package: 14_noncollapse_frontier/combined_observability_campaign/v2/evidence/exact_head_500f7dfc
+sealed-snapshot evidence custody: corrected
+fresh independent evidence review: pending
 Gate R: blocked (project-owner decision pending)
 Phase 6B.6: not entered
 hardware_ran: false

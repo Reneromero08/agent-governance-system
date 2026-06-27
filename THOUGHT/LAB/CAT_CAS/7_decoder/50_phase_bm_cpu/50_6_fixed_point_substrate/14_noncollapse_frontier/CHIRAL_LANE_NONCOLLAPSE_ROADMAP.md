@@ -1,8 +1,8 @@
 # Phase 6B Non-Collapse Frontier Roadmap
 
-**Status:** `PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__GATE_R_BLOCKED`
+**Status:** `PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__CUSTODY_CORRECTED__GATE_R_BLOCKED`
 **Binding directives:** `COURSE_CORRECTION.md`, `COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
-**Immediate engineering gate:** V2 exact generated head qualified and evidence-bound; project-owner Gate R decision next
+**Immediate engineering gate:** V2 exact generated head qualified and sealed-snapshot custody corrected; fresh independent evidence review pending
 **Immediate scientific gate:** Gate R external review and project-owner integration decision
 **Next physical control:** reversed/randomized tone order, proposed but unauthorized
 **Observability implementation authorization:** false
@@ -280,6 +280,7 @@ The V2 lane qualifies a corrected physical interface without promoting it into o
 - [x] independent generated-head review `4584795315`
 - [x] exact generated-head hosted and sealed-snapshot target software qualification
 - [x] final evidence inventory for exact generated head
+- [x] sealed-snapshot evidence custody corrected after review `4585030778`
 
 The current V2 schedule is ascending-order engineering calibration. It is not the reversed/randomized tone-order scientific control.
 
@@ -299,6 +300,8 @@ Phase 6 V2 Strict Qualification run: 28284598853 success
 Phase 6 Combined Campaign Plan run: 28284598854 success
 target qualification: sealed exact-commit snapshot; strict C, runtime, ASan, UBSan, and V2 Python contracts/analyzer passed
 evidence package: combined_observability_campaign/v2/evidence/exact_head_500f7dfc
+sealed-snapshot evidence custody: corrected
+fresh independent evidence review: pending
 Gate R: blocked (project-owner decision pending)
 Phase 6B.6: not entered
 hardware_ran: false
