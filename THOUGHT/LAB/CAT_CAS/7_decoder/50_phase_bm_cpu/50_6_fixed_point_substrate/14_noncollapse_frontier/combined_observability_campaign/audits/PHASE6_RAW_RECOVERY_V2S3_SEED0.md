@@ -6,6 +6,8 @@
 **Raw SHA-256:** `6d7b6d61ca2b653e48cba63eec5830adcb7915755a997c99462af9c208d7f3b7`  
 **Status:** `RAW_RECOVERY_SUPPORTED__FULL_CAMPAIGN_PENDING`
 
+---
+
 # Executive Verdict
 
 The first raw session is authentic, structurally complete, and scientifically useful.
@@ -24,7 +26,7 @@ IMMEDIATE RERUN: NOT REQUIRED
 FULL 12-SESSION RAW AUDIT: REQUIRED
 ```
 
-The static code audit predicted that the sender's eight-state envelope repeats every four requested tone periods. The raw data confirm that prediction directly.
+The static code audit predicted that the acquisition sender's eight-state envelope repeats every four requested tone periods. The raw data confirm that prediction directly.
 
 At the true envelope fundamental `f/4`, driven windows exceed the non-driven median by approximately:
 
@@ -38,7 +40,7 @@ At the originally stored `f` coordinate:
 driven median / non-driven median = 0.732×
 ```
 
-The requested frequency does not carry the intended primary response.
+The requested frequency therefore does not carry the intended primary response.
 
 The exact executed gate, reconstructed from each window's tone, code sign, theta, amplitude, origin TSC, and TSC calibration, matches the observed complex phase at `f/4` with:
 
@@ -47,9 +49,13 @@ circular concentration R = 0.982395
 median centered phase residual = 0.081277 rad
 ```
 
-This is a strong deterministic carrier under the waveform that actually ran.
+This is not a weak salvage signal. It is a strong deterministic carrier under the waveform that actually ran.
+
+---
 
 # 1. Raw Identity and Structure
+
+The uploaded binary matches the original run manifest exactly.
 
 ```text
 size:
@@ -77,9 +83,20 @@ Every raw window satisfies:
 - all records are consumed exactly;
 - no trailing bytes remain.
 
+The raw implementation uses little-endian records:
+
+```text
+uint64 timestamp_tsc
+double ring_period
+```
+
+with 16 bytes per record.
+
+---
+
 # 2. Stored Lock-In Reproduction
 
-The original C lock-in was independently reproduced from raw timestamps and samples.
+The original C lock-in was independently reproduced from the raw timestamps and samples.
 
 ```text
 maximum I error:
@@ -89,7 +106,11 @@ maximum Q error:
 8.327e-16
 ```
 
-The stored `computed_I` and `computed_Q` columns faithfully represent the implemented C calculation. The mismatch is in the waveform contract, not evidence corruption.
+This proves that the stored `computed_I` and `computed_Q` columns faithfully represent the implemented C calculation.
+
+It does not make `f` the correct scientific coordinate. It proves the mismatch is in the waveform contract, not in evidence corruption or CSV generation.
+
+---
 
 # 3. Harmonic Response
 
@@ -115,17 +136,35 @@ f       ideal null and empirically absent
 2f      ideal null and empirically absent
 ```
 
+---
+
 # 4. Exact Gate Match
 
 The exact executed binary gate was reconstructed independently for every driven window.
 
+The weighted regression coefficient from gate state to ring period is stable across amplitude levels:
+
 ```text
-median weighted regression beta = 0.223468
-median matched-gate correlation = 0.477692
-circular phase concentration R = 0.982395
+median beta = 0.223386023
 ```
 
-The phase relation remains strong across all twelve physical tones. The response is not produced by one isolated bin.
+The weighted matched-gate correlation is:
+
+```text
+median correlation = 0.477691846
+```
+
+The complex phase relation between observed `f/4` response and exact gate reference is highly concentrated:
+
+```text
+R = 0.982395250
+mean residual = 0.072049479 rad
+median absolute centered residual = 0.081276697 rad
+```
+
+The phase relation remains strong across all twelve physical tones. The response is therefore not produced by one isolated bin or one low-frequency artifact.
+
+---
 
 # 5. Stage B Control Recovery
 
@@ -150,7 +189,7 @@ This is an implementation-recovery diagnostic, not final frozen campaign adjudic
 | scramble | 48 | 1.000 | 0.917 | 0.917 |
 | silent | 48 | 0.271 | 0.250 | 0.083 |
 
-Across 240 driven Stage B symbols:
+Across the 240 driven Stage B symbols:
 
 ```text
 mode accuracy = 1.000
@@ -168,13 +207,15 @@ The physical carrier follows actual execution rather than wrong declaration meta
 
 The `scramble` rows recover like ordinary driven rows because no physical scramble occurred. This confirms the code-audit finding.
 
+---
+
 # 6. Frequency-Settling Row
 
-Only the first window reports a current-frequency transition:
+Only the first window of this session reports:
 
 ```text
-frequency before = 800,000 kHz
-frequency after = 1,600,000 kHz
+frequency_before_khz = 800000
+frequency_after_khz = 1600000
 ```
 
 All later windows report 1.6 GHz before and after.
@@ -184,10 +225,47 @@ Required treatment:
 ```text
 exclude window 0 from gauge estimation
 or
-model it as a cpufreq-settling transition
+model it explicitly as a cpufreq-settling transition
 ```
 
-# 7. Rerun Decision
+It may not enter the stationary session gauge silently.
+
+---
+
+# 7. What This Changes
+
+The dataset should no longer be treated as:
+
+```text
+requested-tone lock-in campaign
+```
+
+It should be treated as:
+
+```text
+deterministic eight-state envelope campaign
+with a strong carrier at f/4
+and exact reconstructable gate history
+```
+
+That correction preserves the higher-dimensional process object:
+
+```text
+tone
+× gate phase
+× code sign
+× theta
+× amplitude
+× route
+× order
+× raw ring trajectory
+```
+
+The data are not reduced to a replacement scalar score.
+
+---
+
+# 8. Rerun Decision
 
 A rerun is not justified yet.
 
@@ -195,16 +273,28 @@ The current raw session demonstrates:
 
 - strong driven/non-driven separation;
 - exact gate phase coherence;
-- complete actual-mode recovery;
+- complete actual-mode recovery in Stage B;
 - high theta recovery;
 - valid raw custody;
 - a deterministic correction coordinate.
 
-Run the same audit on all twelve sessions before deciding whether V2 hardware acquisition is necessary.
+The next action is to run the same raw audit on all twelve sessions.
 
-A corrected executor is still required before any future acquisition because `f` must be the actual fundamental, scramble must alter physical execution, the drive primitive must be restored or requalified, runtime parameters must be authorization-bound, and waveform conformance must be tested before hardware acquisition.
+A corrected executor is still required before any future acquisition because:
 
-# 8. Claim Ceiling
+- `f` must be the actual fundamental;
+- phase index steps must represent `pi/4`;
+- the code sign must represent `pi`;
+- scramble must alter physical execution;
+- the proven drive primitive must be restored or independently requalified;
+- runtime parameters must be authorization-bound;
+- waveform conformance must be tested before hardware acquisition.
+
+This is a future-executor requirement, not a reason to discard the current evidence.
+
+---
+
+# 9. Current Claim Ceiling
 
 Allowed:
 
@@ -221,7 +311,9 @@ Not yet allowed:
 - orientation was recovered;
 - the Small Wall was crossed.
 
-# 9. Canonical State
+---
+
+# 10. Canonical State
 
 ```text
 PHASE6_ACQUISITION_COMPLETE

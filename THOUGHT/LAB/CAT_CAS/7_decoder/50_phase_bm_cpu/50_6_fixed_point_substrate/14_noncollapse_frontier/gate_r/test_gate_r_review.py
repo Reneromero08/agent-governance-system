@@ -60,7 +60,8 @@ class GateRReviewTests(unittest.TestCase):
             )
             review_md.write_text(
                 "TECHNICAL_ACCEPT_WITH_REQUIRED_REPAIRS_APPLIED\n"
-                "Project-owner ratification: pending\n"
+                "Project-owner ratification: complete\n"
+                "APPROVED_FOR_INTEGRATION\n"
                 "Physical acquisition authorization: FALSE\n",
                 encoding="utf-8",
             )

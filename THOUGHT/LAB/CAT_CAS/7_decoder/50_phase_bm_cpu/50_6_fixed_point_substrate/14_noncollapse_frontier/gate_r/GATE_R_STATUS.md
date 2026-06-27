@@ -1,13 +1,16 @@
 # Gate R Status
 
-**Technical audit:** `COMPLETE`  
-**Verdict:** `TECHNICAL_ACCEPT_WITH_REQUIRED_REPAIRS_APPLIED`  
-**Repair addendum:** binding  
-**Project-owner ratification:** `COMPLETE`  
-**Owner decision:** `RATIFY_AND_AUTHORIZE_COMBINED_TONE_ORDER_OBSERVABILITY_CAMPAIGN`  
-**Campaign implementation authorized:** yes  
-**Physical acquisition authorized:** after executor verification and catcas preflight  
-**Physical acquisition executed:** no  
+**Technical audit:** `COMPLETE`
+**Verdict:** `GATE_R_REVIEW_PASSED`
+**Repair addendum:** binding
+**Project-owner ratification:** `COMPLETE`
+**Owner decision:** `APPROVED_FOR_INTEGRATION`
+**Gate R review:** `4585403632`
+**Gate R integration:** approved
+**Separate external-human review pending:** false
+**Campaign implementation authorized:** no
+**Physical acquisition authorized:** no
+**Physical acquisition executed:** no
 **Restoration authorized:** no
 
 ## Technical-review evidence
@@ -20,7 +23,7 @@ workflow run = 27850016678
 artifact digest = db2d34e3b47c754bf1f9a813f1f73871d00e837660b1945c9f65d05661c16fcb
 ```
 
-## Authorized campaign binding
+## Historical campaign package binding
 
 ```text
 plan source commit = f5b6079a5748bb6138ab19d1c22d79c74734dddf
@@ -30,7 +33,7 @@ workflow run = 27852485669
 artifact digest = 3bea5dc2bdb0ed694e0e2eb173837fa84a4a4e9a32f7c74bd08db0c24a0cb35b
 ```
 
-The authorized package contains 12 sessions, 3,456 tone/control symbols, 768 sender-off persistence events, and 3,072 trajectory steps. It passed authority, planner, compiler, session-determinism, orchestrator, double-generation, and all-session-compilation checks.
+The package contains 12 sessions, 3,456 tone/control symbols, 768 sender-off persistence events, and 3,072 trajectory steps. It remains historical planning context only in this integration approval and is not authorized for execution.
 
 ## Binding repairs retained
 
@@ -44,11 +47,12 @@ The authorized package contains 12 sessions, 3,456 tone/control symbols, 768 sen
 ## Current boundary
 
 ```text
-combined plan: FROZEN
-local schedule-driven executor: NEXT
-catcas read-only preflight: AFTER EXECUTOR TESTS
-physical acquisition: AFTER PREFLIGHT PASS
+Gate R integration: APPROVED
+Phase 6B.6: NOT_ENTERED
+hardware execution: FALSE
+calibration authorization: FALSE
+scientific acquisition authorization: FALSE
 restoration and target coupling: BLOCKED
 ```
 
-The technical-review manifest correctly remains non-authorizing. Owner authority is recorded separately in `PROJECT_OWNER_RATIFICATION.json` and `COMBINED_CAMPAIGN_BINDING.json`.
+The technical-review manifest correctly remains non-authorizing. Owner integration approval is recorded separately in `PROJECT_OWNER_RATIFICATION.json` and `GATE_R_INTEGRATION_APPROVAL.json`.

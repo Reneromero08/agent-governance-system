@@ -1,0 +1,45 @@
+Phase 6 V2 Linux Qualification Evidence
+==========================================
+Tested SHA: 70d5aa893db7d93baa86a56d5b1ed128730c2ef3
+Source commit: 329e5a0c1a56595fbfb17cc16c41fcb33faff5a2
+Plan: f6d7cd314a0b614d80f520f92df13b0bd52f222e4b2fd7b53c09229bc49df48d
+Bundle: 5764f7d391e16624e1a5861f9b7056ad4bbfe8227b2a2731da965626f200ee2b
+Host: catcas (Phenom II X6), Debian 13, gcc 14.2.0, Python 3.13.5, NumPy 2.2.4
+
+Strict C compile: PASSED (0 errors, 0 warnings)
+
+Unique functional test cases: 78
+  Runner: 36
+  Waveform equivalence: 2
+  Slot2 identity: 1
+  Python V2 combined: 23
+  Python analysis combined: 16
+
+Subset recheck: 1 (capture-quality, already in runner)
+
+ASan test reexecutions: 38
+  ASan runner: 36
+  ASan waveform: 2
+
+UBSan test reexecutions: 38
+  UBSan runner: 36
+  UBSan waveform: 2
+
+Windows focused executions: 39
+
+Total unittest executions: 194
+All exit codes: zero
+Sanitizer findings: 0
+
+Raw logs: evidence/linux/00-14, evidence/windows/00-03
+Machine-derived counts: evidence/TEST_COUNTS.json
+Bindings: evidence/FINAL_BINDINGS.json
+Commands: evidence/COMMANDS.jsonl
+Command ledger entries: 16 (13 Linux, 3 Windows)
+Per-command timestamps: not recorded in the raw command logs; COMMANDS.jsonl uses null timestamps and preserves environment timestamps only.
+Windows command provenance: prior committed ledger c81b543f plus the binding work package; result output is preserved in the committed Windows logs.
+Inventory: evidence/EVIDENCE_INVENTORY.sha256
+
+hardware_ran: false
+authorization_artifact_created: false
+all scientific authorization fields: false

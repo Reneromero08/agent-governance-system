@@ -1,0 +1,22 @@
+test_acquisition_gate_repeats_every_four_requested_periods (test_waveform_reference.WaveformReferenceTests.test_acquisition_gate_repeats_every_four_requested_periods) ... ok
+test_acquisition_requested_frequency_is_ideal_null (test_waveform_reference.WaveformReferenceTests.test_acquisition_requested_frequency_is_ideal_null) ... ok
+test_codebook_shape_and_distance (test_waveform_reference.WaveformReferenceTests.test_codebook_shape_and_distance) ... ok
+test_dft_amplitude_monotonicity_exact_one_cycle (test_waveform_reference.WaveformReferenceTests.test_dft_amplitude_monotonicity_exact_one_cycle) ... ok
+test_exact_discrete_eight_state_dft_magnitudes (test_waveform_reference.WaveformReferenceTests.test_exact_discrete_eight_state_dft_magnitudes) ... ok
+test_sign_minus_one_produces_pi_phase_shift (test_waveform_reference.WaveformReferenceTests.test_sign_minus_one_produces_pi_phase_shift) ... ok
+test_sign_offset_is_four_phase_indices (test_waveform_reference.WaveformReferenceTests.test_sign_offset_is_four_phase_indices) ... ok
+test_theta_increment_produces_pi_over_4_phase_shift (test_waveform_reference.WaveformReferenceTests.test_theta_increment_produces_pi_over_4_phase_shift) ... ok
+test_v2_gate_repeats_every_requested_period (test_waveform_reference.WaveformReferenceTests.test_v2_gate_repeats_every_requested_period) ... ok
+test_adjudication_digest_rejection_precedes_deserialization (test_frozen_artifact_binding.HermeticBindingAuditTests.test_adjudication_digest_rejection_precedes_deserialization) ... ok
+test_cache_digest_rejection_precedes_deserialization (test_frozen_artifact_binding.HermeticBindingAuditTests.test_cache_digest_rejection_precedes_deserialization) ... ok
+test_complete_synthetic_binding (test_frozen_artifact_binding.HermeticBindingAuditTests.test_complete_synthetic_binding) ... ok
+test_missing_external_evidence_fails_clearly (test_frozen_artifact_binding.HermeticBindingAuditTests.test_missing_external_evidence_fails_clearly) ... ok
+test_model_digest_rejection_precedes_deserialization (test_frozen_artifact_binding.HermeticBindingAuditTests.test_model_digest_rejection_precedes_deserialization) ... ok
+test_model_schema_and_shape_validation (test_frozen_artifact_binding.HermeticBindingAuditTests.test_model_schema_and_shape_validation) ... ok
+test_nonfinite_model_rejected (test_frozen_artifact_binding.HermeticBindingAuditTests.test_nonfinite_model_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.125s
+
+OK
+PA_RC=0

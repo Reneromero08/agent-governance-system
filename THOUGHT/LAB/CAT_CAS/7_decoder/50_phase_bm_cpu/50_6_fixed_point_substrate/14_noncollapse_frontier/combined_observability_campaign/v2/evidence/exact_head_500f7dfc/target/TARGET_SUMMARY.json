@@ -1,0 +1,22 @@
+{
+  "archive_sha256": "974ee0d030b74d2515ed897e82e278d9385f96c91a0a7b5974cb95bf24d1efcf",
+  "authorization_artifact_created": false,
+  "calibration_authorized": false,
+  "committed_snapshot_files_changed": "none",
+  "committed_snapshot_files_missing": "none",
+  "git_tree_sha": "8ea51d319b3758ca36ac5bab35d44a4179151d1f",
+  "hardware_ran": false,
+  "post_test_manifest_verification": "pass",
+  "pre_test_manifest_verification": "pass",
+  "recursive_file_count": 8350,
+  "recursive_manifest_sha256": "a59b53235854b6173ebb5f7c2b7eac32d0a5f1bdfe8265d67d94eb0d078730c8",
+  "restoration_authorized": false,
+  "schema_id": "CAT_CAS_PHASE6_V2_TARGET_SEALED_SNAPSHOT_QUALIFICATION_V1",
+  "scientific_acquisition_authorized": false,
+  "small_wall_authorized": false,
+  "source_commit": "500f7dfcd198e6e70dc3f999248aa61224d530cd",
+  "source_transport": "sealed git-archive snapshot",
+  "target_coupling_authorized": false,
+  "target_git_checkout": "not_applicable",
+  "unexpected_persistent_files": "none"
+}

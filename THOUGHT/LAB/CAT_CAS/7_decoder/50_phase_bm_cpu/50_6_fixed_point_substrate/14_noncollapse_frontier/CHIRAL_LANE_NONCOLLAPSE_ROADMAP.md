@@ -1,8 +1,9 @@
 # Phase 6B Non-Collapse Frontier Roadmap
 
-**Status:** `TRANSFER_EQUIVARIANCE_SUPPORTED__GATE_R_NEXT`
-**Binding directive:** `COURSE_CORRECTION.md` plus `COURSE_CORRECTION_ADDENDUM_2026-06-19.md`  
-**Immediate gate:** Gate R external review and project-owner integration decision
+**Status:** `PHASE6_V2_EXACT_HEAD_GATE_R_INTEGRATION_APPROVED__PHASE6B6_NOT_ENTERED`
+**Binding directives:** `COURSE_CORRECTION.md`, `COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
+**Immediate engineering gate:** V2 exact generated head qualified, sealed-snapshot custody corrected, final evidence review complete, Gate R review complete, and project-owner integration approval recorded
+**Immediate scientific gate:** Phase 6B.6 remains a separate future phase requiring separate explicit authority
 **Next physical control:** reversed/randomized tone order, proposed but unauthorized
 **Observability implementation authorization:** false
 
@@ -39,6 +40,8 @@ Canonical doctrine: `doctrine/`.
 
 The 2026-06-19 addendum does not alter this doctrine. It corrects the execution order so carrier-chart identification precedes further acquisition.
 
+The 2026-06-22 addendum registers the V2 executor and calibration architecture as a forward-only engineering qualification lane below Gate R. It does not enter Phase 6B.6.
+
 ---
 
 ## Corrected precursor state
@@ -63,6 +66,18 @@ The 2026-06-19 addendum does not alter this doctrine. It corrects the execution 
 - [ ] physical acquisition requires an explicit authorized run plan
 
 Class B capture remains deferred pending an authorized run plan. The target exposes readable `k10temp` at `/sys/class/hwmon/hwmon0/temp1_input`.
+
+### Combined observability V1
+
+- [x] historical acquisition preserved immutably
+- [x] corrected execution coordinate audited
+- [x] retrospective full-dataset adjudication completed
+- [x] permanent result recorded as negative
+- [x] no stable predictive operator identified
+- [x] pristine final-test hygiene recorded as not proven
+- [x] further V1 model development and final-test retry prohibited
+
+V1 is closed. Its negative result does not close the Small Wall, and it may not be rewritten as a pending experiment.
 
 ---
 
@@ -146,7 +161,7 @@ No mapping is promoted by this repair.
 - [x] external full-SHA-256 review envelope
 - [x] review remains non-authorizing
 - [x] C regression/sanitizer suite passed
-- [ ] human design review pending
+- [x] Gate R design/integration review complete
 
 ---
 
@@ -218,8 +233,7 @@ carrier_witness_closure/theory_gate_audit/NEXT_ANALYSIS_CONTRACT.md
 - [x] classify route `4:5`, seed `4` as `CHART_FAILURE`
 - [x] bind outputs to campaign/raw/source hashes and deterministic null seeds
 
-Result: `TRANSFER_EQUIVARIANCE_SUPPORTED`; C0 scalar is selected for all runs,
-controls remain null, and strict closure remains `PARTIAL`.
+Result: `TRANSFER_EQUIVARIANCE_SUPPORTED`; C0 scalar is selected for all runs, controls remain null, and strict closure remains `PARTIAL`.
 
 The analysis preserves the complex field and ordered path. It may not replace the object with a scalar candidate winner.
 
@@ -242,21 +256,87 @@ route-scope narrowing
 carrier-claim narrowing
 ```
 
-### Gate R — L4B.5B0 external human review
+### Phase 6B.5D-Q — V2 engineering qualification
+
+The V2 lane qualifies a corrected physical interface without promoting it into observability acquisition.
+
+- [x] corrected requested-frequency eight-state waveform
+- [x] 1/8, 2/8, and 3/8 amplitude duties
+- [x] historical Slot2 drive-source identity regression
+- [x] exact four-session ascending-order calibration plan
+- [x] sender-on and eight sender-off controls per tone
+- [x] singleton execution authorization architecture
+- [x] raw, CSV, telemetry, run-manifest, and source-bundle custody
+- [x] focused local contract, analyzer, and waveform tests
+- [x] GitHub workflow updated to exercise V2 Python, strict C, equivalence, ASan, and UBSan lanes
+- [x] strict command-line and authorization parser closure
+- [x] mechanical runtime/plan threshold binding
+- [x] exact capture-quality and schema closure
+- [x] immutable run-root directory and symlink rejection
+- [x] exact-source hosted GitHub CI pass at repaired source head `ba48125d15009a044bb869b5716c412b1a8baa1b`
+- [x] exact-source hosted strict compile, equivalence, sanitizer, and binding pass
+- [x] independent source review `4584742973`
+- [x] regenerated contracts from reviewed repaired source
+- [x] independent generated-head review `4584795315`
+- [x] exact generated-head hosted and sealed-snapshot target software qualification
+- [x] final evidence inventory for exact generated head
+- [x] sealed-snapshot evidence custody corrected after review `4585030778`
+- [x] final evidence review `4585386261`
+- [x] Gate R review `4585403632`
+- [x] project-owner Gate R integration approval, 2026-06-27, `APPROVED_FOR_INTEGRATION`
+
+The current V2 schedule is ascending-order engineering calibration. It is not the reversed/randomized tone-order scientific control.
+
+Current exact-head qualification binding:
+
+```text
+source repair commit: ba48125d15009a044bb869b5716c412b1a8baa1b
+source repair: complete
+source review: 4584742973 complete
+generated-contract commit: 500f7dfcd198e6e70dc3f999248aa61224d530cd
+generated review: 4584795315 complete
+plan SHA-256: 3c1b8d3da4d24e97a4395747dc8f587f60d21ef6d789bd27da8cd95908b7ebb3
+source-bundle SHA-256: bec71b2369587e68a88e9e2b5cb47837a07d5cdef6f13990417e0c0928e85f2f
+Governance run: 28284598855 success
+Contracts run: 28284598856 success
+Phase 6 V2 Strict Qualification run: 28284598853 success
+Phase 6 Combined Campaign Plan run: 28284598854 success
+target qualification: sealed exact-commit snapshot; strict C, runtime, ASan, UBSan, and V2 Python contracts/analyzer passed
+evidence package: combined_observability_campaign/v2/evidence/exact_head_500f7dfc
+sealed-snapshot evidence custody: corrected
+evidence review: 4585386261 complete
+Gate R review: 4585403632 complete
+Gate R integration: approved
+Gate R reviewer: assistant review chain
+project-owner approval: complete
+separate external-human review pending: false
+Phase 6B.6: not entered
+phase6b6_entered: false
+hardware_ran: false
+authorization_artifact_created: false
+calibration_authorized: false
+scientific_acquisition_authorized: false
+restoration_authorized: false
+target_coupling_authorized: false
+small_wall_authorized: false
+```
+
+### Gate R — L4B.5B0 integration review
 
 Prerequisites:
 
 - [x] carrier scope frozen at the derived transfer-aware ceiling
 - [x] Phase 6B.5C/5D outputs bound to exact evidence
+- [x] V2 engineering lane closed cleanly for independent integration review
 
-Review remains non-authorizing.
+Review `4585403632` passed. Project-owner Gate R integration approval is recorded as `APPROVED_FOR_INTEGRATION` on 2026-06-27. The approval integrates the reviewed engineering lane only; it does not authorize calibration, acquisition, restoration, target coupling, Small Wall work, or Phase 6B.6 entry.
 
 ### Phase 6B.6 — Observable state and operator identification
 
 Prerequisites:
 
-- [ ] carrier scope frozen or narrowed
-- [ ] L4B.5B0 external human review accepted
+- [x] carrier scope frozen or narrowed
+- [x] L4B.5B0 Gate R integration review accepted
 - [ ] explicit acquisition authorization recorded
 
 Execution:
@@ -328,6 +408,9 @@ Reject work that:
 - executes acquisition before authorization;
 - repeats T48 or escalates to T300 before Phase 6B.5C;
 - treats ideal sender-basis fidelity as identical to carrier transport;
-- skips carrier scope freeze, human review, observability, operator, restoration, or target-coupling gates.
+- treats Gate R integration approval as Phase 6B.6 entry or physical execution authorization;
+- treats ascending calibration as the reversed/randomized tone-order control;
+- qualifies a later source head with evidence from an earlier commit;
+- skips carrier scope freeze, Gate R integration approval, observability, operator, restoration, or target-coupling gates.
 
 Valid moves preserve relational geometry, phase-native carrier state, ordered path memory, explicit projection, and evidence-bounded claims.

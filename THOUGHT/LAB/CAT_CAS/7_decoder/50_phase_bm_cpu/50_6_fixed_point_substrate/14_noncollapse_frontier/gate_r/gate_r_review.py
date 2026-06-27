@@ -135,7 +135,8 @@ def generate(
     ))
     require_text(review_md_path, (
         "TECHNICAL_ACCEPT_WITH_REQUIRED_REPAIRS_APPLIED",
-        "Project-owner ratification: pending",
+        "Project-owner ratification: complete",
+        "APPROVED_FOR_INTEGRATION",
         "Physical acquisition authorization: FALSE",
     ))
     require_text(findings_path, (

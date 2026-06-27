@@ -6,8 +6,11 @@ on:
       - ".github/workflows/phase6-combined-campaign-plan.yml"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/**"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime/**"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/**"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/10_cross_core_wormhole/slot2_pdn/**"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/gate_r/COMBINED_CAMPAIGN_BINDING.json"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/gate_r/verify_combined_plan_binding.py"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md"
   workflow_dispatch:
 
 permissions:
@@ -17,14 +20,30 @@ jobs:
   plan:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
-        with:
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
-          fetch-depth: 0
+      - name: Checkout Phase 6 frontier with history
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHECKOUT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)"
+          echo "::add-mask::$auth"
+          git init .
+          git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY"
+          git sparse-checkout init --cone
+          git sparse-checkout set \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/10_cross_core_wormhole/slot2_pdn
+          git -c http.https://github.com/.extraheader="AUTHORIZATION: basic $auth" \
+            fetch --no-tags --prune origin '+refs/heads/*:refs/remotes/origin/*'
+          git checkout --detach "$CHECKOUT_SHA"
+          test "$(git rev-parse HEAD)" = "$CHECKOUT_SHA"
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: "3.11"
-      - name: Test campaign and evidence package
+      - name: Install Phase 6 analysis dependency
+        run: python -m pip install --disable-pip-version-check "numpy>=1.26,<3"
+      - name: Test historical campaign and evidence package
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign
         run: |
           python -m py_compile *.py
@@ -38,28 +57,66 @@ jobs:
             test_executor_source_bundle.py \
             test_catcas_preflight.py \
             test_target_engineering_evidence.py
-      - name: Build and test strict C executor
+      - name: Test waveform and frozen-artifact analysis
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/analysis
+        run: |
+          python -m py_compile *.py
+          python -m unittest -v test_frozen_artifact_binding.py test_waveform_reference.py test_audit_raw_session.py
+      - name: Test V2 calibration contracts and analyzer
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/v2
+        run: |
+          python -m py_compile *.py
+          python -m unittest -v test_calibration_contract.py test_receiver_schedule.py test_spectral_calibration_analyzer.py
+      - name: Build and test historical strict C executor
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime
         run: |
-          gcc -std=c11 -O2 -pthread -Wall -Wextra -Werror \
-            combined_pdn_runner.c combined_pdn_hardware.c \
-            -o combined_pdn_runner -lm
+          gcc -std=c11 -O2 -pthread -Wall -Wextra -Werror combined_pdn_runner.c combined_pdn_hardware.c -o combined_pdn_runner -lm
           python test_combined_pdn_runner.py
-      - name: Build and test ASan and UBSan executor
+      - name: Build and test historical ASan and UBSan executor
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime
         run: |
-          gcc -std=c11 -O1 -g -pthread -Wall -Wextra -Werror \
-            -fsanitize=address,undefined \
-            combined_pdn_runner.c combined_pdn_hardware.c \
-            -o combined_pdn_runner -lm
-          ASAN_OPTIONS=detect_leaks=1 \
-          UBSAN_OPTIONS=halt_on_error=1 \
-            python test_combined_pdn_runner.py
+          gcc -std=c11 -O1 -g -pthread -Wall -Wextra -Werror -fsanitize=address,undefined -fno-omit-frame-pointer combined_pdn_runner.c combined_pdn_hardware.c -o combined_pdn_runner -lm
+          ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 python test_combined_pdn_runner.py
+      - name: Compile V2 strict C executor
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2
+        run: |
+          set +e
+          gcc -std=c11 -O2 -pthread -Wall -Wextra -Werror combined_pdn_runner.c combined_pdn_hardware.c captured_file.c -o combined_pdn_runner -lm > "$RUNNER_TEMP/v2_strict_compile.log" 2>&1
+          rc=$?
+          cat "$RUNNER_TEMP/v2_strict_compile.log"
+          exit "$rc"
+      - name: Test V2 runner contracts
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2
+        run: |
+          set +e
+          python -m unittest -v test_combined_pdn_runner.py test_captured_file.py > "$RUNNER_TEMP/v2_runner_tests.log" 2>&1
+          rc=$?
+          cat "$RUNNER_TEMP/v2_runner_tests.log"
+          exit "$rc"
+      - name: Test V2 C and Python waveform equivalence
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2
+        run: python -m unittest -v test_waveform_equivalence.py
+      - name: Test V2 Slot2 primitive identity
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2
+        run: python -m unittest -v test_slot2_primitive_identity.py
+      - name: Build and test V2 ASan and UBSan executor
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2
+        run: |
+          gcc -std=c11 -O1 -g -pthread -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer combined_pdn_runner.c combined_pdn_hardware.c captured_file.c -o combined_pdn_runner -lm
+          ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 python -m unittest -v test_combined_pdn_runner.py
+          ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 python -m unittest -v test_waveform_equivalence.py
+          gcc -std=c11 -O1 -g -pthread -Wall -Wextra -Werror -fsanitize=undefined -fno-omit-frame-pointer combined_pdn_runner.c combined_pdn_hardware.c captured_file.c -o combined_pdn_runner -lm
+          UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 python -m unittest -v test_combined_pdn_runner.py
+          UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 python -m unittest -v test_waveform_equivalence.py
       - name: Verify canonical binding
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier
         run: python gate_r/verify_combined_plan_binding.py --repo-root "$GITHUB_WORKSPACE" --output "$RUNNER_TEMP/combined_plan"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
         with:
-          name: phase6-combined-campaign-plan-${{ github.run_id }}
-          path: ${{ runner.temp }}/combined_plan
-          if-no-files-found: error
+          name: phase6-v2-diagnostics-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/v2_strict_compile.log
+            ${{ runner.temp }}/v2_runner_tests.log
+            ${{ runner.temp }}/combined_plan
+          if-no-files-found: warn

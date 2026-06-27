@@ -1,0 +1,13 @@
+timestamp: 2026-06-23T04:17:34-06:00
+hostname: catcas
+os: Debian GNU/Linux 13 (trixie)
+kernel: Linux 6.12.86+deb13-amd64
+cpu: AMD Phenom(tm) II X6 1090T Processor, 6 cores
+cc: cc (Debian 14.2.0-19) 14.2.0
+python: Python 3.13.5
+numpy: 2.2.4
+tested_sha: 70d5aa893db7d93baa86a56d5b1ed128730c2ef3
+source_commit: 329e5a0c1a56595fbfb17cc16c41fcb33faff5a2
+plan_sha256: f6d7cd314a0b614d80f520f92df13b0bd52f222e4b2fd7b53c09229bc49df48d
+bundle_sha256: 5764f7d391e16624e1a5861f9b7056ad4bbfe8227b2a2731da965626f200ee2b
+worktree: clean

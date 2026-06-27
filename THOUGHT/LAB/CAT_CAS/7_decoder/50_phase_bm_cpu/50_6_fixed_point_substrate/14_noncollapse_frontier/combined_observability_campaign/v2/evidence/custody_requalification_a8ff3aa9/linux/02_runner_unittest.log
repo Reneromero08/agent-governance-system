@@ -1,0 +1,54 @@
+=== RUNNER ===
+test_blank_authorized_by_is_rejected (test_combined_pdn_runner.Tests.test_blank_authorized_by_is_rejected) ... ok
+test_capture_capacity_is_bounded (test_combined_pdn_runner.Tests.test_capture_capacity_is_bounded) ... ok
+test_capture_quality_contract_rejection_matrix (test_combined_pdn_runner.Tests.test_capture_quality_contract_rejection_matrix) ... ok
+test_driven_requires_codeword (test_combined_pdn_runner.Tests.test_driven_requires_codeword) ... ok
+test_driven_requires_tone (test_combined_pdn_runner.Tests.test_driven_requires_tone) ... ok
+test_duplicate_or_malformed_authorization_fields_are_rejected (test_combined_pdn_runner.Tests.test_duplicate_or_malformed_authorization_fields_are_rejected) ... ok
+test_engineering_smoke_gate_rejects_scientific_schedule (test_combined_pdn_runner.Tests.test_engineering_smoke_gate_rejects_scientific_schedule) ... ok
+test_exact_engineering_smoke_is_the_only_unauthorized_hardware_shape (test_combined_pdn_runner.Tests.test_exact_engineering_smoke_is_the_only_unauthorized_hardware_shape) ... ok
+test_extra_rows (test_combined_pdn_runner.Tests.test_extra_rows) ... ok
+test_failure_cleanup_matrix (test_combined_pdn_runner.Tests.test_failure_cleanup_matrix) ... ok
+test_hardware_commit_validation (test_combined_pdn_runner.Tests.test_hardware_commit_validation) ... ok
+test_invalid_authorization_artifact_fails_before_hardware (test_combined_pdn_runner.Tests.test_invalid_authorization_artifact_fails_before_hardware) ... ok
+test_invalid_numeric_arguments_are_rejected (test_combined_pdn_runner.Tests.test_invalid_numeric_arguments_are_rejected) ... ok
+test_late_sender_epoch_is_fatal (test_combined_pdn_runner.Tests.test_late_sender_epoch_is_fatal) ... ok
+test_logical_sender_field_separation_requires_divergent_bound_gates (test_combined_pdn_runner.Tests.test_logical_sender_field_separation_requires_divergent_bound_gates) ... ok
+test_manifest_schema (test_combined_pdn_runner.Tests.test_manifest_schema) ... ok
+test_manifest_sha (test_combined_pdn_runner.Tests.test_manifest_sha) ... ok
+test_manifest_size (test_combined_pdn_runner.Tests.test_manifest_size) ... ok
+test_mock_output_uses_captured_schedule_bytes (test_combined_pdn_runner.Tests.test_mock_output_uses_captured_schedule_bytes) ... ok
+test_mock_sender_lifecycle_sender_off_and_shared_epoch (test_combined_pdn_runner.Tests.test_mock_sender_lifecycle_sender_off_and_shared_epoch) ... ok
+test_no_bound_input_path_reopen_helpers_remain (test_combined_pdn_runner.Tests.test_no_bound_input_path_reopen_helpers_remain) ... ok
+test_noncontiguous_duplicate (test_combined_pdn_runner.Tests.test_noncontiguous_duplicate) ... ok
+test_output_collision (test_combined_pdn_runner.Tests.test_output_collision) ... ok
+test_raw_ring_requires_off (test_combined_pdn_runner.Tests.test_raw_ring_requires_off) ... ok
+test_real_hardware_requires_authorization_artifact (test_combined_pdn_runner.Tests.test_real_hardware_requires_authorization_artifact) ... ok
+test_restoration_failure_fatal (test_combined_pdn_runner.Tests.test_restoration_failure_fatal) ... ok
+test_sender_off_drive (test_combined_pdn_runner.Tests.test_sender_off_drive) ... ok
+test_session_id_mismatch (test_combined_pdn_runner.Tests.test_session_id_mismatch) ... ok
+test_session_id_prefix_suffix_and_elsewhere_do_not_authorize (test_combined_pdn_runner.Tests.test_session_id_prefix_suffix_and_elsewhere_do_not_authorize) ... ok
+test_short_count (test_combined_pdn_runner.Tests.test_short_count) ... ok
+test_symlinked_immutable_inputs_are_rejected (test_combined_pdn_runner.Tests.test_symlinked_immutable_inputs_are_rejected) ... ok
+test_unrelated_or_wrong_session_manifest_is_rejected (test_combined_pdn_runner.Tests.test_unrelated_or_wrong_session_manifest_is_rejected) ... ok
+test_unsafe_path (test_combined_pdn_runner.Tests.test_unsafe_path) ... ok
+test_unsupported_mode (test_combined_pdn_runner.Tests.test_unsupported_mode) ... ok
+test_unsupported_route (test_combined_pdn_runner.Tests.test_unsupported_route) ... ok
+test_valid_authorization_is_bound_and_recorded_before_real_execution (test_combined_pdn_runner.Tests.test_valid_authorization_is_bound_and_recorded_before_real_execution) ... ok
+test_validate_contract_files_and_hashes (test_combined_pdn_runner.Tests.test_validate_contract_files_and_hashes) ... ok
+test_validation_never_hardware (test_combined_pdn_runner.Tests.test_validation_never_hardware) ... ok
+test_wrong_route_core_pair_is_rejected (test_combined_pdn_runner.Tests.test_wrong_route_core_pair_is_rejected) ... ok
+test_wrong_source_bundle_digest_is_rejected (test_combined_pdn_runner.Tests.test_wrong_source_bundle_digest_is_rejected) ... ok
+test_c_matches_python_for_all_waveform_parameters (test_waveform_equivalence.EquivalenceTests.test_c_matches_python_for_all_waveform_parameters) ... ok
+test_phase_and_duty_contract (test_waveform_equivalence.EquivalenceTests.test_phase_and_duty_contract) ... ok
+test_v2_primitive_is_verbatim_historical_slot2 (test_slot2_primitive_identity.Slot2PrimitiveIdentityTests.test_v2_primitive_is_verbatim_historical_slot2) ... ok
+test_capture_survives_original_path_replacement (test_captured_file.CapturedFileTests.test_capture_survives_original_path_replacement) ... ok
+test_exclusive_writer_preserves_bytes_and_rejects_collision (test_captured_file.CapturedFileTests.test_exclusive_writer_preserves_bytes_and_rejects_collision) ... ok
+test_sha256_known_vectors (test_captured_file.CapturedFileTests.test_sha256_known_vectors) ... ok
+test_symlink_capture_is_rejected (test_captured_file.CapturedFileTests.test_symlink_capture_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 47 tests in 3.103s
+
+OK
+RC=0

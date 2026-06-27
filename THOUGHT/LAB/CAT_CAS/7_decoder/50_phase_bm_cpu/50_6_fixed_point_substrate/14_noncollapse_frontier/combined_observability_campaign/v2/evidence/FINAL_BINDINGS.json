@@ -1,0 +1,80 @@
+{
+  "source_commit": "329e5a0c1a56595fbfb17cc16c41fcb33faff5a2",
+  "generated_contract_commit": "70d5aa893db7d93baa86a56d5b1ed128730c2ef3",
+  "prior_incomplete_evidence_commit": "339c9fb85aff2578c51d5f8e9cee7e99e768d136",
+  "plan_sha256": "f6d7cd314a0b614d80f520f92df13b0bd52f222e4b2fd7b53c09229bc49df48d",
+  "source_bundle_sha256": "5764f7d391e16624e1a5861f9b7056ad4bbfe8227b2a2731da965626f200ee2b",
+  "linux_tested_sha": "70d5aa893db7d93baa86a56d5b1ed128730c2ef3",
+  "windows_tested_sha": "70d5aa893db7d93baa86a56d5b1ed128730c2ef3",
+  "linux_toolchain": {
+    "host": "catcas",
+    "os": "Debian GNU/Linux 13 (trixie)",
+    "kernel": "6.12.86+deb13-amd64",
+    "cpu": "AMD Phenom II X6 1090T",
+    "cc": "cc (Debian 14.2.0-19) 14.2.0",
+    "python": "3.13.5",
+    "numpy": "2.2.4"
+  },
+  "windows_toolchain": {
+    "python": "3.11.6",
+    "os": "Windows 11"
+  },
+  "github_runs": {
+    "phase6_v2_strict_qualification": {
+      "run_id": 28016467117,
+      "run_number": 18,
+      "conclusion": "success"
+    },
+    "phase6_combined_campaign_plan": {
+      "run_id": 28016467747,
+      "run_number": 111,
+      "conclusion": "success"
+    },
+    "contracts": {
+      "run_id": 28016466417,
+      "run_number": 413,
+      "conclusion": "success"
+    },
+    "governance": {
+      "run_id": 28016467111,
+      "run_number": 250,
+      "conclusion": "success"
+    }
+  },
+  "authorization_fields": {
+    "calibration_authorized": false,
+    "acquisition_authorized": false,
+    "restoration_authorized": false,
+    "target_coupling_authorized": false,
+    "small_wall_authorized": false
+  },
+  "hardware_ran": false,
+  "authorization_artifact_created": false,
+  "provenance": {
+    "b7563e5f": "retained source provenance",
+    "93f28c5d": "superseded",
+    "339c9fb8": "incomplete evidence provenance",
+    "f524e023": "incomplete evidence-correction provenance",
+    "c81b543f": "raw evidence persistence and count correction",
+    "f531ac80": "command evidence closure",
+    "3ed3b53c": "review ledger provenance correction"
+  },
+  "raw_evidence_closure_commit": "c81b543ffb74644a35aa97605ca47fa9ec89c76c",
+  "prior_incomplete_evidence_correction_commit": "f524e0230ed46b56b93dffe6b37f446d6602df0c",
+  "command_evidence_closure_commit": "f531ac8016c9c95141ed1c0ec180bcd01370d346",
+  "authority_status": {
+    "state": "PHASE6_V2_ENGINEERING_QUALIFICATION_COMPLETE__INDEPENDENT_PR_REVIEW_NEXT",
+    "independent_pr_review": "pending",
+    "gate_r": "pending",
+    "phase6b6": "not_entered"
+  },
+  "command_ledger": {
+    "entry_count": 16,
+    "linux_entry_count": 13,
+    "windows_entry_count": 3,
+    "per_command_timestamps_recorded": false,
+    "timestamp_policy": "timestamp is null when the raw command log did not record command start time; environment_timestamp preserves only the captured environment timestamp",
+    "windows_command_provenance": "prior committed ledger c81b543f plus the binding work package; result output is preserved in committed Windows logs"
+  },
+  "review_ledger_correction_commit": "3ed3b53cd44a244674422343d605187781c6e76e"
+}

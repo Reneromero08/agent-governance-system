@@ -1,0 +1,47 @@
+{
+  "schema_id": "l4b5b0_observability_review_v1",
+  "decision_schema_id": "CAT_CAS_PHASE6_GATE_R_INTEGRATION_APPROVAL_V1",
+  "reviewed_source": "ba48125d15009a044bb869b5716c412b1a8baa1b",
+  "generated_head": "500f7dfcd198e6e70dc3f999248aa61224d530cd",
+  "corrective_evidence_head": "9291d61ab3eb8d27e2bff347f1ec90a046726228",
+  "source_review": 4584742973,
+  "generated_review": 4584795315,
+  "evidence_review": 4585386261,
+  "gate_r_review": 4585403632,
+  "project_owner_approval_date": "2026-06-27",
+  "decision": "APPROVED_FOR_INTEGRATION",
+  "gate_r_reviewer": "assistant_review_chain",
+  "project_owner_approval": "complete",
+  "separate_external_human_review_pending": false,
+  "review_scope": [
+    "state-space definitions",
+    "input and control completeness",
+    "operator ladder",
+    "thresholds and data splits",
+    "falsification conditions",
+    "claim ceiling",
+    "explicit non-authorization of restoration and subsequent physical claims"
+  ],
+  "conclusion": {
+    "gate_r_review": "passed",
+    "v2_engineering_lane": "approved_for_integration",
+    "additional_external_human_review_required": false,
+    "phase6b6": "separate_future_phase_not_entered"
+  },
+  "claim_ceiling": {
+    "physical_restoration": "not_established",
+    "target_coupling": "not_established",
+    "fold_odd_invariant_recovery": "not_established",
+    "small_wall_crossing": "not_established"
+  },
+  "authorization_flags": {
+    "hardware_ran": false,
+    "authorization_artifact_created": false,
+    "calibration_authorized": false,
+    "scientific_acquisition_authorized": false,
+    "restoration_authorized": false,
+    "target_coupling_authorized": false,
+    "small_wall_authorized": false,
+    "phase6b6_entered": false
+  }
+}

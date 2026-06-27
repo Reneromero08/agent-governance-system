@@ -1,0 +1,169 @@
+{
+  "exact_gate": {
+    "phase_residual": {
+      "concentration_R": 0.9823952498963321,
+      "mean_residual_rad": 0.07204947902616216,
+      "median_abs_centered_residual_rad": 0.08127669736910678
+    },
+    "weighted_beta_median": 0.22338602297372656,
+    "weighted_correlation_median": 0.47769184589887326
+  },
+  "executor_commit": "81ea84f341b29c41b93667d0e0fb98e0975bcbcf",
+  "frequency_settling": {
+    "affected_windows": 1,
+    "after_khz": 1600000,
+    "before_khz": 800000,
+    "treatment": "exclude from session gauge or model as frequency-settling transition",
+    "window_index": 0
+  },
+  "harmonic_response": {
+    "f_over_2": {
+      "driven_mean": 0.06895619106408099,
+      "driven_median": 0.07280893605023706,
+      "median_driven_to_off": 10.69296627206321,
+      "off_mean": 0.014466059047391297,
+      "off_median": 0.006809049444068672,
+      "ratio": 0.5
+    },
+    "f_over_4": {
+      "driven_mean": 0.11078643797159811,
+      "driven_median": 0.10704085572370567,
+      "median_driven_to_off": 14.240348768023855,
+      "off_mean": 0.01517770400462713,
+      "off_median": 0.007516729924765727,
+      "ratio": 0.25
+    },
+    "five_f_over_4": {
+      "driven_mean": 0.026492413947534328,
+      "driven_median": 0.021778022529196805,
+      "median_driven_to_off": 3.43871514055345,
+      "off_mean": 0.01366026187712313,
+      "off_median": 0.006333185983440228,
+      "ratio": 1.25
+    },
+    "requested_f": {
+      "driven_mean": 0.01368217955350232,
+      "driven_median": 0.004907745879679907,
+      "median_driven_to_off": 0.7315970552050203,
+      "off_mean": 0.01407662285871173,
+      "off_median": 0.006708263578650651,
+      "ratio": 1.0
+    },
+    "three_f_over_2": {
+      "driven_mean": 0.026565100579177735,
+      "driven_median": 0.0243439744646147,
+      "median_driven_to_off": 3.564931685960687,
+      "off_mean": 0.013693095269857094,
+      "off_median": 0.006828735193015184,
+      "ratio": 1.5
+    },
+    "three_f_over_4": {
+      "driven_mean": 0.03963801282505996,
+      "driven_median": 0.03566170725922903,
+      "median_driven_to_off": 5.326737643290053,
+      "off_mean": 0.014392137004547254,
+      "off_median": 0.0066948495772362875,
+      "ratio": 0.75
+    },
+    "two_f": {
+      "driven_mean": 0.013008063071395253,
+      "driven_median": 0.004847927218524642,
+      "median_driven_to_off": 0.7505903877266862,
+      "off_mean": 0.01341328328331938,
+      "off_median": 0.006458818681661464,
+      "ratio": 2.0
+    }
+  },
+  "integrity": {
+    "all_samples_finite": true,
+    "first_timestamp_matches_csv": true,
+    "last_timestamp_matches_csv": true,
+    "stored_lockin_max_i_error": 8.881784197001252e-16,
+    "stored_lockin_max_q_error": 8.326672684688674e-16,
+    "strictly_increasing_timestamps": true
+  },
+  "manifest_binding": {
+    "sha256": "6d7b6d61ca2b653e48cba63eec5830adcb7915755a997c99462af9c208d7f3b7",
+    "size": 265216000
+  },
+  "partition": "train",
+  "raw_sha256": "6d7b6d61ca2b653e48cba63eec5830adcb7915755a997c99462af9c208d7f3b7",
+  "raw_size": 265216000,
+  "records": 16576000,
+  "records_per_window": 2000,
+  "schema_id": "CAT_CAS_PHASE6_RAW_RECOVERY_AUDIT_V1",
+  "session_id": "v2s3_seed0",
+  "stage_b_symbol_recovery": {
+    "driven_overall": {
+      "joint_accuracy": 0.9375,
+      "mode_accuracy": 1.0,
+      "symbols": 240,
+      "theta_accuracy": 0.9375
+    },
+    "families": {
+      "order_sham": {
+        "joint_accuracy": 0.9166666666666666,
+        "median_margin": 0.02916822690308215,
+        "median_normalized_error": 0.04361340867907758,
+        "mode_accuracy": 1.0,
+        "symbols": 48,
+        "theta_accuracy": 0.9166666666666666
+      },
+      "pseudo": {
+        "joint_accuracy": 0.9583333333333334,
+        "median_margin": 0.029881795248600563,
+        "median_normalized_error": 0.04215483847365611,
+        "mode_accuracy": 1.0,
+        "symbols": 48,
+        "theta_accuracy": 0.9583333333333334
+      },
+      "real": {
+        "joint_accuracy": 0.9375,
+        "median_margin": 0.026760393588888362,
+        "median_normalized_error": 0.047648019503807704,
+        "mode_accuracy": 1.0,
+        "symbols": 48,
+        "theta_accuracy": 0.9375
+      },
+      "scramble": {
+        "joint_accuracy": 0.9166666666666666,
+        "median_margin": 0.02986804515691442,
+        "median_normalized_error": 0.048248513516867375,
+        "mode_accuracy": 1.0,
+        "symbols": 48,
+        "theta_accuracy": 0.9166666666666666
+      },
+      "silent": {
+        "joint_accuracy": 0.08333333333333333,
+        "median_margin": 0.15523731444968725,
+        "median_normalized_error": 23.151140252676655,
+        "mode_accuracy": 0.2708333333333333,
+        "symbols": 48,
+        "theta_accuracy": 0.25
+      },
+      "wrong": {
+        "joint_accuracy": 0.9583333333333334,
+        "median_margin": 0.029265320944303886,
+        "median_normalized_error": 0.044828242188788586,
+        "mode_accuracy": 1.0,
+        "symbols": 48,
+        "theta_accuracy": 0.9583333333333334
+      }
+    },
+    "method": "gauge transfer estimated from A_GAUGE excluding window 0, candidate comparison at f/4 against exact executed gate",
+    "wrong_declared_mode_selected_rate": 0.0
+  },
+  "verdict": {
+    "actual_f_over_4_carrier_supported": true,
+    "all_session_raw_audit_required": true,
+    "exact_executed_gate_phase_supported": true,
+    "raw_identity_pass": true,
+    "raw_structure_pass": true,
+    "requested_frequency_is_valid_primary_coordinate": false,
+    "rerun_required_now": false,
+    "scientific_adjudication_complete": false,
+    "scramble_null_valid": false,
+    "stored_requested_frequency_lockin_reproduced": true
+  },
+  "windows": 8288
+}

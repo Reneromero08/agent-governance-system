@@ -1,12 +1,14 @@
 # L4B.5B0 Gate R Technical Review
 
-**Verdict:** `TECHNICAL_ACCEPT_WITH_REQUIRED_REPAIRS_APPLIED`  
-**Project-owner ratification:** pending  
-**Implementation authorized:** no  
-**Physical acquisition authorized:** no  
+**Verdict:** `TECHNICAL_ACCEPT_WITH_REQUIRED_REPAIRS_APPLIED`
+**Project-owner ratification:** complete
+**Gate R review:** `4585403632`
+**Gate R integration decision:** `APPROVED_FOR_INTEGRATION`
+**Implementation authorized:** no
+**Physical acquisition authorized:** no
 **Restoration authorized:** no
 
-Binding marker: Project-owner ratification: pending
+Binding marker: Project-owner ratification: complete
 
 ## Reviewed bundle
 
@@ -40,25 +42,23 @@ The reviewed bundle is technically capable of testing whether a measured respons
 
 It does not establish complete physical observability, physical HoloGeometry, inverse dynamics, restoration, target coupling, orientation recovery, or a Small Wall crossing.
 
-## Required owner decision
+## Completed owner decision
 
-Choose separately:
+The project-owner decision recorded on 2026-06-27 is:
 
 ```text
-RATIFY_TECHNICAL_REVIEW_NO_ACQUISITION
-RATIFY_AND_AUTHORIZE_TONE_ORDER_CONTROL_ONLY
-RATIFY_AND_AUTHORIZE_COMBINED_TONE_ORDER_OBSERVABILITY_CAMPAIGN
-REJECT_AND_REVISE
+APPROVED_FOR_INTEGRATION
 ```
 
-No choice is implied by this review.
+This integrates the reviewed engineering lane only. It does not authorize hardware execution, calibration, scientific acquisition, restoration, target coupling, Small Wall work, or Phase 6B.6 entry.
 
 ## Current boundary
 
 ```text
 Gate R technical audit: COMPLETE
 Required repairs: BINDING IN ADDENDUM
-Project-owner ratification: NEXT
+Project-owner ratification: COMPLETE
+Gate R integration: APPROVED_FOR_INTEGRATION
 Implementation authorization: FALSE
 Physical acquisition authorization: FALSE
 ```

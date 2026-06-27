@@ -24,6 +24,19 @@ def tone_hz(index: int) -> float:
     )
 
 
+def control_frequency_hz(requested_hz: float) -> float:
+    """Canonical off-bin control frequency shared by C and Python."""
+    return requested_hz * 1.37 + 0.071
+
+
+def tone_hz_safe(index: object) -> float | None:
+    """Return tone_hz(index) if index is a valid integer, else None."""
+    try:
+        return tone_hz(int(index))
+    except (TypeError, ValueError):
+        return None
+
+
 def make_codebook() -> np.ndarray:
     """Reproduce the exact C codebook in combined_pdn_hardware.c."""
     state = (0x243F6A8885A308D3 ^ 7) & MASK64
@@ -131,7 +144,7 @@ def intended_v2_gate(
         - phase_index_value * step_ticks
     )
     state = np.mod(np.floor(offset / step_ticks).astype(np.int64), 8)
-    return (state < amplitude_level * 2).astype(np.float64)
+    return (state < amplitude_level).astype(np.float64)
 
 
 def lockin(

@@ -1,0 +1,16 @@
+timestamp_start=2026-06-22T18:49:15.0924693-07:00
+tested_source_commit=adc278401e85eed4770971cc19c2bd73a81ed08c
+lane=clean-checkout Python lane + external V1 binding integration
+warnings=none
+declared_skips=none
+
+COMMAND: git archive adc278401e85eed4770971cc19c2bd73a81ed08c | tar -x -C D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\phase6_v1_v2_architecture_8e21140c\clean_checkout_adc27840
+EXIT_CODE: 0
+COMMAND: D:\CCC 2.0\AI\agent-governance-system\.venv\Scripts\python.exe -m pytest D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\phase6_v1_v2_architecture_8e21140c\clean_checkout_adc27840\THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\combined_observability_campaign\analysis\test_frozen_artifact_binding.py D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\phase6_v1_v2_architecture_8e21140c\clean_checkout_adc27840\THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\combined_observability_campaign\analysis\test_waveform_reference.py D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\phase6_v1_v2_architecture_8e21140c\clean_checkout_adc27840\THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\combined_observability_campaign\v2 D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\phase6_v1_v2_architecture_8e21140c\clean_checkout_adc27840\THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\holo_runtime_v2\test_slot2_primitive_identity.py
+..............................          [100%]
+30 passed, 33 subtests passed in 9.76s
+EXIT_CODE: 0
+COMMAND: D:\CCC 2.0\AI\agent-governance-system\.venv\Scripts\python.exe D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\phase6_v1_v2_architecture_8e21140c\clean_checkout_adc27840\THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\combined_observability_campaign\analysis\audit_frozen_artifact_binding.py --evidence-root D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\phase6_v1_full_raw_adjudication_7c44af0f --output D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\phase6_v1_v2_architecture_8e21140c\binding_audit_latest.json
+{"artifact_id": "binding_audit_latest.json", "sha256": "2d0c2cc0d7a68f140fb1f1643fe2f1899ed1ba194dd7c96841057d2c8dcab677"}
+EXIT_CODE: 0
+timestamp_end=2026-06-22T18:49:33.5194606-07:00

@@ -1,0 +1,23 @@
+{
+  "qualification_all_exit_codes_zero": true,
+  "historical_failed_attempts_preserved_in_git": true,
+  "asan_findings": 0,
+  "ubsan_findings": 0,
+  "strict_compile_warnings": 0,
+  "unique_functional_linux": 86,
+  "windows_focused": 39,
+  "asan_test_executions": 42,
+  "ubsan_test_executions": 42,
+  "total_unittest_executions": 209,
+  "breakdown": {
+    "linux_runner": 40,
+    "linux_waveform": 2,
+    "linux_slot2": 1,
+    "linux_captured_file": 4,
+    "linux_python_v2": 23,
+    "linux_python_analysis": 16,
+    "asan_runner_waveform": 42,
+    "ubsan_runner_waveform": 42,
+    "windows_focused": 39
+  }
+}

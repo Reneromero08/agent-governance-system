@@ -1,0 +1,38 @@
+{
+  "artifacts": {
+    "binding_artifact_sha256": "2d0c2cc0d7a68f140fb1f1643fe2f1899ed1ba194dd7c96841057d2c8dcab677",
+    "calibration_plan_sha256": "b4b9d1bd50eb1f246f109a1508f7ac68f42c0ba7e4462fe53442e678c4009c3c",
+    "source_bundle_sha256": "c165c753b70f8e5aff49bff31ad4c3c5db5c0f2d8715594171324b187df1342a"
+  },
+  "generated_timestamp": "2026-06-22T18:57:32.938417-07:00",
+  "logs": {
+    "full_repository_gate.log": {
+      "sha256": "e93c7126b4be491db8d163cc198a5248f0bb0295bdaf3f3db5ad128d6eddbe86",
+      "size": 18667
+    },
+    "local_tests.log": {
+      "sha256": "51e7b18663bc4a5fc22bf58d707902065773ab85ada9b3df21d4d23c93128141",
+      "size": 2466
+    },
+    "ssh_strict_sanitizer.log": {
+      "sha256": "f2c7993ce92c966a42bd272d4e8e7cd4ce7412272910abe3bd6d75f7b62f6600",
+      "size": 11617
+    }
+  },
+  "results": {
+    "authorization_artifact_created": false,
+    "clean_checkout_python": "30_PASSED_33_SUBTESTS_PASSED",
+    "compiler_warnings": "NONE",
+    "equivalence": "2_PASSED",
+    "external_binding": "PASS",
+    "full_repository_gate": "FULL_OK",
+    "hardware_ran": false,
+    "sanitizer_equivalence": "2_PASSED",
+    "sanitizer_executor": "35_PASSED",
+    "sanitizer_findings": "NONE",
+    "strict": "38_PASSED"
+  },
+  "schema_id": "CAT_CAS_PR21_FINAL_TREE_EVIDENCE_INVENTORY_V1",
+  "source_commit_sha": "adc278401e85eed4770971cc19c2bd73a81ed08c",
+  "source_repair_commit_sha": "01b21a0cbabbc8b5f03135833749d2f647973c7a"
+}
