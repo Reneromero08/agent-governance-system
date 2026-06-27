@@ -1,7 +1,7 @@
 # Phase 6 Navigation
 
 **Role:** canonical entry point for the Phase 6 directory.
-**Current state:** `PHASE6_V2_POST_REVIEW_REPAIR_IN_PROGRESS__REQUALIFICATION_BLOCKED`
+**Current state:** `PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__GATE_R_BLOCKED`
 **Active directives:** `14_noncollapse_frontier/COURSE_CORRECTION.md`, `14_noncollapse_frontier/COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `14_noncollapse_frontier/PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
 **Active roadmap:** `PHASE6_ROADMAP.md`
 
@@ -62,17 +62,20 @@ The current V2 plan uses ascending tone order. It qualifies the interface and do
 ## Current V2 authority binding
 
 ```text
-status: PHASE6_V2_SOURCE_REPAIR_COMPLETE__EXACT_SOURCE_HOSTED_GREEN__DOWNSTREAM_REVIEW_AND_REGENERATION_BLOCKED
-source repair head: a7ad075256c48d486655361aed06a8a69fe2c228
-exact-source hosted qualification: green
-Governance run: 28282788948 success
-Contracts run: 28282788943 success
-Phase 6 V2 Strict Qualification run: 28282788952 success
-Phase 6 Combined Campaign Plan run: 28282788955 success
-fresh independent source review: pending
-generated contracts from repaired source: pending
-generated evidence inventory from repaired source: pending
-Gate R: blocked (fresh review, generated-contract regeneration, generated-head requalification, evidence binding, and project-owner decision pending)
+status: PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__GATE_R_BLOCKED
+source repair head: ba48125d15009a044bb869b5716c412b1a8baa1b
+source review: 4584742973 complete
+generated-contract head: 500f7dfcd198e6e70dc3f999248aa61224d530cd
+generated review: 4584795315 complete
+plan SHA-256: 3c1b8d3da4d24e97a4395747dc8f587f60d21ef6d789bd27da8cd95908b7ebb3
+source-bundle SHA-256: bec71b2369587e68a88e9e2b5cb47837a07d5cdef6f13990417e0c0928e85f2f
+Governance run: 28284598855 success
+Contracts run: 28284598856 success
+Phase 6 V2 Strict Qualification run: 28284598853 success
+Phase 6 Combined Campaign Plan run: 28284598854 success
+Phenom target qualification: sealed exact-commit snapshot; strict C, runtime, ASan, UBSan, and V2 Python contracts/analyzer passed
+evidence package: 14_noncollapse_frontier/combined_observability_campaign/v2/evidence/exact_head_500f7dfc
+Gate R: blocked (project-owner decision pending)
 Phase 6B.6: not entered
 hardware_ran: false
 authorization_artifact_created: false
@@ -97,7 +100,7 @@ authorization_artifact_created: false
 | 11 | `pdn_catalytic_tape` | Simulation/hardware-gap analysis | Complete |
 | 12 | `chiral_lane_frontier` | Phase 6A public lane boundary | Closed |
 | 13 | `substrate_frontier` | Tape/fixed-point warmup and L4 rejection | Historical/corrected |
-| 14 | `noncollapse_frontier` | Active Phase 6B architecture and physical ladder | Phase 6B.5D frozen; V2 source repair complete; fresh independent review and generated-chain requalification next; Gate R blocked |
+| 14 | `noncollapse_frontier` | Active Phase 6B architecture and physical ladder | Phase 6B.5D frozen; V2 exact generated head qualified and evidence-bound; Gate R blocked |
 
 ---
 
@@ -145,7 +148,7 @@ authorization_artifact_created: false
 | Carrier claim/scope freeze | Complete at derived scalar-chart claim ceiling |
 | V1 combined-observability acquisition | Permanent negative adjudication; closed |
 | V2 executor/calibration architecture | Draft engineering qualification object; no hardware or authorization |
-| V2 final-head source/CI/Linux qualification | Pending |
+| V2 final-head source/CI/Linux qualification | Complete for exact generated head `500f7dfcd198e6e70dc3f999248aa61224d530cd`; Gate R still blocked |
 | L4B.5B0 human review | Required after carrier scope and V2 integration boundary are frozen |
 | Observability acquisition/operator identification | Not authorized |
 | Physical restoration | Not authorized |
@@ -223,11 +226,12 @@ V1 combined observability proves: the historical campaign can be permanently
            adjudicated under its frozen evidence and corrected execution coordinate.
 V1 does not prove: a stable predictive operator or pristine final-test hygiene.
 
-V2 currently proves: a corrected forward-only software architecture and exact-source
-           hosted qualification at `a7ad075256c48d486655361aed06a8a69fe2c228`.
-V2 does not yet prove: fresh independent review, regenerated contracts or evidence
-           from the repaired source, hardware calibration, Gate R acceptance, an
-           observable physical state, restoration, or crossing.
+V2 currently proves: a corrected forward-only software architecture, reviewed source
+           head `ba48125d15009a044bb869b5716c412b1a8baa1b`, reviewed generated head
+           `500f7dfcd198e6e70dc3f999248aa61224d530cd`, hosted workflow success, and
+           sealed-snapshot Phenom target software qualification.
+V2 does not prove: hardware calibration, Gate R acceptance, an observable physical
+           state, restoration, target coupling, or crossing.
 
 .holo proves: software relational geometry, serialized path memory, boundary-gated invariant extraction.
 .holo does not prove: physical geometry, physical inverse evolution, physical restoration, orientation.
@@ -239,6 +243,6 @@ V2 does not yet prove: fresh independent review, regenerated contracts or eviden
 
 No physical acquisition is authorized.
 
-The immediate engineering boundary is fresh independent review of the repaired source head, contract and evidence regeneration from that reviewed head, generated-head requalification, and authority binding. The next scientific gate remains the external, SHA-bound, non-authorizing L4B.5B0 human review and project-owner integration decision.
+The immediate engineering boundary is closed for the exact generated head and remains below Gate R. The next scientific gate remains the external, SHA-bound, non-authorizing L4B.5B0 human review and project-owner integration decision.
 
-PR #21 remains draft and unmerged until the reviewed source, generated contracts, evidence, and authority chain are complete.
+PR #21 remains draft and unmerged until the project-owner Gate R decision is made.

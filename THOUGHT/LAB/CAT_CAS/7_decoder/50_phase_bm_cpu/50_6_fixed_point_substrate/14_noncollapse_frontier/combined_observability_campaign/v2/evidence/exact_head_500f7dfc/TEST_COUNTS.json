@@ -1,0 +1,20 @@
+{
+  "derivation": "mechanically parsed from committed target unittest stderr logs using the 'Ran N tests' line",
+  "target_asan_runtime": {
+    "log": "target/logs/07_asan_tests.stderr.log",
+    "tests": 47
+  },
+  "target_functional_runtime": {
+    "log": "target/logs/05_functional_tests.stderr.log",
+    "tests": 54
+  },
+  "target_ubsan_runtime": {
+    "log": "target/logs/09_ubsan_tests.stderr.log",
+    "tests": 47
+  },
+  "target_v2_python_contracts_analyzer": {
+    "log": "target/logs/10_python_v2_tests.stderr.log",
+    "tests": 25
+  },
+  "total_target_unittest_executions": 173
+}

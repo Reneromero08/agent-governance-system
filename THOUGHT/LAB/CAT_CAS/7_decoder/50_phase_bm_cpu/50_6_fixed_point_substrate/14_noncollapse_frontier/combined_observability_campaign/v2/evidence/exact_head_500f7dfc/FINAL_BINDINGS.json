@@ -1,0 +1,93 @@
+{
+  "authorization_flags": {
+    "authorization_artifact_created": false,
+    "calibration_authorized": false,
+    "gate_r_entered": false,
+    "hardware_ran": false,
+    "phase6b6_entered": false,
+    "restoration_authorized": false,
+    "scientific_acquisition_authorized": false,
+    "small_wall_authorized": false,
+    "target_coupling_authorized": false
+  },
+  "current_blocker": "Project-owner Gate R decision remains pending; no hardware or scientific authorization is granted by this evidence package.",
+  "generated_contracts": {
+    "plan_sha256": "3c1b8d3da4d24e97a4395747dc8f587f60d21ef6d789bd27da8cd95908b7ebb3",
+    "regenerated_in_this_step": false,
+    "source_bundle_sha256": "bec71b2369587e68a88e9e2b5cb47837a07d5cdef6f13990417e0c0928e85f2f"
+  },
+  "generated_review": {
+    "generated_commit": "500f7dfcd198e6e70dc3f999248aa61224d530cd",
+    "review_id": 4584795315,
+    "status": "complete_no_blocking_findings"
+  },
+  "hosted_workflows": {
+    "contracts": {
+      "conclusion": "success",
+      "head_sha": "500f7dfcd198e6e70dc3f999248aa61224d530cd",
+      "name": "Contracts",
+      "run_id": 28284598856
+    },
+    "governance": {
+      "conclusion": "success",
+      "head_sha": "500f7dfcd198e6e70dc3f999248aa61224d530cd",
+      "name": "Governance [DEPRECATED]",
+      "run_id": 28284598855
+    },
+    "phase6_combined_campaign_plan": {
+      "conclusion": "success",
+      "head_sha": "500f7dfcd198e6e70dc3f999248aa61224d530cd",
+      "name": "Phase 6 Combined Campaign Plan",
+      "run_id": 28284598854
+    },
+    "phase6_v2_strict_qualification": {
+      "conclusion": "success",
+      "head_sha": "500f7dfcd198e6e70dc3f999248aa61224d530cd",
+      "name": "Phase 6 V2 Strict Qualification",
+      "run_id": 28284598853
+    }
+  },
+  "phenom_target_identity": {
+    "committed_snapshot_files_changed": "none",
+    "committed_snapshot_files_missing": "none",
+    "hostname": "catcas",
+    "post_test_manifest_verification": "pass",
+    "pre_test_manifest_verification": "pass",
+    "source_transport": "sealed git-archive snapshot",
+    "ssh_target": "root@192.168.137.100",
+    "target_git_checkout": "not_applicable",
+    "unexpected_persistent_files": "none"
+  },
+  "schema_id": "CAT_CAS_PHASE6_V2_EXACT_HEAD_QUALIFICATION_BINDING_V1",
+  "sealed_snapshot": {
+    "archive_filename": "phase6_v2_500f7dfc.tar",
+    "archive_payload_committed": false,
+    "archive_payload_location": "transferred separately to /root/catcas_phase6_v2_500f7dfc/sealed on target; local commit retains sha256 sidecar, recursive manifest, and identity record",
+    "archive_sha256": "974ee0d030b74d2515ed897e82e278d9385f96c91a0a7b5974cb95bf24d1efcf",
+    "git_archive_commit": "500f7dfcd198e6e70dc3f999248aa61224d530cd",
+    "git_tree_sha": "8ea51d319b3758ca36ac5bab35d44a4179151d1f",
+    "recursive_file_count": 8350,
+    "recursive_manifest_filename": "phase6_v2_500f7dfc.files.sha256",
+    "recursive_manifest_sha256": "a59b53235854b6173ebb5f7c2b7eac32d0a5f1bdfe8265d67d94eb0d078730c8",
+    "source_transport": "sealed git-archive snapshot"
+  },
+  "source_review": {
+    "review_id": 4584742973,
+    "source_commit": "ba48125d15009a044bb869b5716c412b1a8baa1b",
+    "status": "complete_no_blocking_findings"
+  },
+  "target_qualification": {
+    "asan": "pass",
+    "functional_runtime_tests": "pass",
+    "strict_c_compile_wall_wextra_werror": "pass",
+    "test_counts": "TEST_COUNTS.json",
+    "ubsan": "pass",
+    "v2_python_contracts_analyzer": "pass_existing_target_numpy"
+  },
+  "windows_repository_identity": {
+    "branch": "codex/phase6-v1-adjudication-v2",
+    "generated_commit": "500f7dfcd198e6e70dc3f999248aa61224d530cd",
+    "git_tree_sha": "8ea51d319b3758ca36ac5bab35d44a4179151d1f",
+    "identity_method": "Windows Git rev-parse for commit and tree; clean initial status captured before evidence package creation in snapshot/03_git_status_short.*"
+  }
+}

@@ -1,7 +1,7 @@
 # Phase 6 Roadmap
 
 **Role:** master chronological task ledger.
-**Current head:** `PHASE6_V2_POST_REVIEW_REPAIR_IN_PROGRESS__REQUALIFICATION_BLOCKED`
+**Current head:** `PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__GATE_R_BLOCKED`
 **Binding directive:** `14_noncollapse_frontier/COURSE_CORRECTION.md`, `14_noncollapse_frontier/COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `14_noncollapse_frontier/PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
 **Immediate engineering gate:** close source review/repair, regenerate generated contracts, requalify the exact generated head, bind evidence, then present the project-owner Gate R decision.
 **Immediate scientific gate:** Gate R remains blocked until source review/repair closure, generated-contract regeneration, generated-head requalification, evidence binding, and project-owner decision complete in sequence.
@@ -317,28 +317,33 @@ This is a forward-only engineering lane beneath Gate R. It does not enter Phase 
 - [x] add focused Windows contract, analyzer, and waveform tests
 - [x] add GitHub workflow coverage for `holo_runtime_v2`, V2 Python tests, equivalence, ASan, and UBSan
 - [x] close strict source and contract defects listed in the V2 engineering addendum Q1
-- [x] pass exact-source-head hosted qualification at repaired source head `a7ad075256c48d486655361aed06a8a69fe2c228`
-- [x] pass strict compile, equivalence, sanitizers, and full no-write gate on hosted Linux at repaired source head `a7ad075256c48d486655361aed06a8a69fe2c228`
-- [ ] fresh independent review of repaired source head
-- [ ] regenerate generated contracts and evidence inventory from the final reviewed source head
-- [ ] synchronize generated-head authority after regeneration and requalification
+- [x] pass exact-source-head hosted qualification at repaired source head `ba48125d15009a044bb869b5716c412b1a8baa1b`
+- [x] pass strict compile, equivalence, sanitizers, and full no-write gate on hosted Linux at repaired source head `ba48125d15009a044bb869b5716c412b1a8baa1b`
+- [x] close independent source review `4584742973`
+- [x] regenerate generated contracts from the reviewed source head
+- [x] close independent generated-head review `4584795315`
+- [x] requalify exact generated head `500f7dfcd198e6e70dc3f999248aa61224d530cd` through hosted workflows and sealed-snapshot Phenom target software qualification
+- [x] bind exact-head evidence package `14_noncollapse_frontier/combined_observability_campaign/v2/evidence/exact_head_500f7dfc`
 
 The current V2 plan uses ascending tone order and qualifies the physical interface. It is not the selected reversed/randomized tone-order scientific control.
 
-Current V2 source-repair qualification binding:
+Current V2 exact-head qualification binding:
 
 ```text
-source repair commit: a7ad075256c48d486655361aed06a8a69fe2c228
-source repair: complete
-exact-source hosted qualification: green
-Governance run: 28282788948 success
-Contracts run: 28282788943 success
-Phase 6 V2 Strict Qualification run: 28282788952 success
-Phase 6 Combined Campaign Plan run: 28282788955 success
-fresh independent review: pending
-generated contracts from repaired source: pending
-generated evidence inventory from repaired source: pending
-Gate R: blocked (fresh review, generated-contract regeneration, generated-head requalification, evidence binding, and project-owner decision pending)
+source repair commit: ba48125d15009a044bb869b5716c412b1a8baa1b
+source review: 4584742973 complete
+generated-contract commit: 500f7dfcd198e6e70dc3f999248aa61224d530cd
+generated review: 4584795315 complete
+plan SHA-256: 3c1b8d3da4d24e97a4395747dc8f587f60d21ef6d789bd27da8cd95908b7ebb3
+source-bundle SHA-256: bec71b2369587e68a88e9e2b5cb47837a07d5cdef6f13990417e0c0928e85f2f
+Governance run: 28284598855 success
+Contracts run: 28284598856 success
+Phase 6 V2 Strict Qualification run: 28284598853 success
+Phase 6 Combined Campaign Plan run: 28284598854 success
+Phenom target identity: sealed git-archive snapshot, target Git checkout not applicable
+target software qualification: strict C, functional runtime, ASan, UBSan, and V2 Python contracts/analyzer passed
+evidence package: 14_noncollapse_frontier/combined_observability_campaign/v2/evidence/exact_head_500f7dfc
+Gate R: blocked (project-owner decision pending)
 Phase 6B.6: not entered
 hardware_ran: false
 calibration_authorized: false
@@ -435,8 +440,8 @@ One positive does not authorize Big Wall generalization.
 | Physical route/session transfer chart | Minimal C0 scalar relation supported; complete operator not identified |
 | Strict carrier witness | `PARTIAL` |
 | V1 combined-observability campaign | Permanent negative adjudication; no stable predictive operator |
-| V2 executor/calibration architecture | Source repair complete and exact-source hosted qualification green; not executed or authorized |
-| V2 generated-contract and evidence chain | Pending fresh independent review, regeneration, generated-head requalification, and authority binding |
+| V2 executor/calibration architecture | Exact generated head qualified as software engineering object; not hardware-executed or scientifically authorized |
+| V2 generated-contract and evidence chain | Reviewed, regenerated, hosted-qualified, sealed-target-qualified, and evidence-bound at `500f7dfcd198e6e70dc3f999248aa61224d530cd`; Gate R still blocked |
 | Reversed/randomized tone-order control | Selected but not designed, reviewed, or authorized |
 | Software `.holo` geometric memory | Supported at L1/L2 |
 | History-backed software restoration | Supported |

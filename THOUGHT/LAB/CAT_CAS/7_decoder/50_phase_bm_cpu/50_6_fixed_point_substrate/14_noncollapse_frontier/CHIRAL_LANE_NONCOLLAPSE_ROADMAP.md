@@ -1,8 +1,8 @@
 # Phase 6B Non-Collapse Frontier Roadmap
 
-**Status:** `PHASE6_V2_POST_REVIEW_REPAIR_IN_PROGRESS__REQUALIFICATION_BLOCKED`
+**Status:** `PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__GATE_R_BLOCKED`
 **Binding directives:** `COURSE_CORRECTION.md`, `COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
-**Immediate engineering gate:** V2 source repair complete and exact-source hosted qualification green; fresh independent review and generated-chain requalification next
+**Immediate engineering gate:** V2 exact generated head qualified and evidence-bound; project-owner Gate R decision next
 **Immediate scientific gate:** Gate R external review and project-owner integration decision
 **Next physical control:** reversed/randomized tone order, proposed but unauthorized
 **Observability implementation authorization:** false
@@ -273,27 +273,33 @@ The V2 lane qualifies a corrected physical interface without promoting it into o
 - [x] mechanical runtime/plan threshold binding
 - [x] exact capture-quality and schema closure
 - [x] immutable run-root directory and symlink rejection
-- [x] exact-source hosted GitHub CI pass at repaired source head `a7ad075256c48d486655361aed06a8a69fe2c228`
+- [x] exact-source hosted GitHub CI pass at repaired source head `ba48125d15009a044bb869b5716c412b1a8baa1b`
 - [x] exact-source hosted strict compile, equivalence, sanitizer, and binding pass
-- [ ] fresh independent review of repaired source head
-- [ ] regenerated contracts and final evidence inventory from reviewed repaired source
+- [x] independent source review `4584742973`
+- [x] regenerated contracts from reviewed repaired source
+- [x] independent generated-head review `4584795315`
+- [x] exact generated-head hosted and sealed-snapshot target software qualification
+- [x] final evidence inventory for exact generated head
 
 The current V2 schedule is ascending-order engineering calibration. It is not the reversed/randomized tone-order scientific control.
 
-Current source-repair qualification binding:
+Current exact-head qualification binding:
 
 ```text
-source repair commit: a7ad075256c48d486655361aed06a8a69fe2c228
+source repair commit: ba48125d15009a044bb869b5716c412b1a8baa1b
 source repair: complete
-exact-source hosted qualification: green
-Governance run: 28282788948 success
-Contracts run: 28282788943 success
-Phase 6 V2 Strict Qualification run: 28282788952 success
-Phase 6 Combined Campaign Plan run: 28282788955 success
-fresh independent review: pending
-generated contracts from repaired source: pending
-generated evidence inventory from repaired source: pending
-Gate R: blocked (fresh review, generated-contract regeneration, generated-head requalification, evidence binding, and project-owner decision pending)
+source review: 4584742973 complete
+generated-contract commit: 500f7dfcd198e6e70dc3f999248aa61224d530cd
+generated review: 4584795315 complete
+plan SHA-256: 3c1b8d3da4d24e97a4395747dc8f587f60d21ef6d789bd27da8cd95908b7ebb3
+source-bundle SHA-256: bec71b2369587e68a88e9e2b5cb47837a07d5cdef6f13990417e0c0928e85f2f
+Governance run: 28284598855 success
+Contracts run: 28284598856 success
+Phase 6 V2 Strict Qualification run: 28284598853 success
+Phase 6 Combined Campaign Plan run: 28284598854 success
+target qualification: sealed exact-commit snapshot; strict C, runtime, ASan, UBSan, and V2 Python contracts/analyzer passed
+evidence package: combined_observability_campaign/v2/evidence/exact_head_500f7dfc
+Gate R: blocked (project-owner decision pending)
 Phase 6B.6: not entered
 hardware_ran: false
 calibration_authorized: false

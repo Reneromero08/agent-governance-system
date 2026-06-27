@@ -1,11 +1,11 @@
 # Phase 6 V2 Architectural Review
 
-**Status:** `PHASE6_V2_POST_REVIEW_REPAIR_IN_PROGRESS__REQUALIFICATION_BLOCKED`
+**Status:** `PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__GATE_R_BLOCKED`
 **Authority:** `../../PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
 **Execution packet:** `../V2_FINAL_QUALIFICATION_WORK_PACKAGE.md`
-**Independent PR review:** complete
-**Independent review record:** `4559668654`
-**Independent reviewed head:** `38bd6cb3423c512137a1e5cbcfae18420bcce996`
+**Independent source review:** complete, `4584742973`
+**Independent generated-head review:** complete, `4584795315`
+**Independent reviewed generated head:** `500f7dfcd198e6e70dc3f999248aa61224d530cd`
 **Independent review result:** `NO_BLOCKING_FINDINGS`
 **Gate R:** pending
 **Phase 6B.6:** not entered
@@ -16,10 +16,10 @@
 
 ```text
 source repair:
-21201106a2b4cbd811d396181e733e08c38beb5d
+ba48125d15009a044bb869b5716c412b1a8baa1b
 
 generated contracts:
-a8ff3aa96f7bc3bff005088e63e837da44e8ce41
+500f7dfcd198e6e70dc3f999248aa61224d530cd
 
 raw evidence closure:
 4b5817a8741889caf5fadfa49df79fecb2f858a9 (incomplete summary), 69691b8061ea9eef6bf1b0dff44d0f1f2de1b863 (incomplete raw), 05c68281bcafda53381b2f70e4de13c25d1f5c9b (corrected), d0086ad0897cce6027b511c3409ff4ba3d422860 (metadata)
@@ -31,10 +31,10 @@ review ledger correction:
 14469abb48567dda7c6eeb5c4bf16a8b282be85c
 
 plan SHA-256:
-7b21fa00ae986128f812d7720994d8e168844aa71cf3435b2edfea10497c738a
+3c1b8d3da4d24e97a4395747dc8f587f60d21ef6d789bd27da8cd95908b7ebb3
 
 source-bundle SHA-256:
-11547477f1a41e9b0661bb9f5d3532ab75aba20e0c785d9d14861bea2c57d487
+bec71b2369587e68a88e9e2b5cb47837a07d5cdef6f13990417e0c0928e85f2f
 ```
 
 Historical provenance is retained:
@@ -63,27 +63,26 @@ The committed source and generated contracts passed:
 - ASan and UBSan target lanes;
 - deterministic contract regeneration;
 - the canonical full no-write repository gate;
-- exact-head Windows and Phenom II Linux qualification.
+- exact-head Windows and Phenom II Linux qualification through a sealed Git archive snapshot.
 
 Machine-derived execution counts:
 
 ```text
-unique functional test cases: 86
-capture-quality subset recheck: 1
-ASan reexecutions: 42
-UBSan reexecutions: 42
-Windows focused executions: 39
-total unittest executions: 209
+target functional runtime executions: 54
+target ASan runtime executions: 47
+target UBSan runtime executions: 47
+target V2 Python contracts/analyzer executions: 25
+total target unittest executions: 173
 all exit codes zero: true
 ```
 
 The evidence inventory is committed at:
 
 ```text
-combined_observability_campaign/v2/evidence/custody_requalification_a8ff3aa9/EVIDENCE_INVENTORY.sha256
+combined_observability_campaign/v2/evidence/exact_head_500f7dfc/EVIDENCE_INVENTORY.sha256
 ```
 
-Its independent verification record reports `PASSED` for 20 entries.
+Its verification record reports `OK` for every committed evidence file covered by the inventory.
 
 ## Preserved scientific boundary
 
@@ -135,4 +134,4 @@ small_wall_authorized=false
 
 ## Next legitimate action
 
-Independent review of PR #21 is next. Gate R remains a separate project-owner decision. No physical acquisition, restoration experiment, target-coupling experiment, or Small Wall execution is authorized by this qualification.
+The project-owner Gate R decision is next. No physical acquisition, restoration experiment, target-coupling experiment, or Small Wall execution is authorized by this qualification.
