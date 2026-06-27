@@ -39,6 +39,30 @@ def main() -> int:
     repo = args.repo_root.resolve()
     output = args.output.resolve()
     binding = json.loads(BINDING.read_text())
+    if binding.get("active_authority") is False:
+        auth = binding.get("authorization", {})
+        for field in (
+            "campaign_implementation_authorized",
+            "physical_acquisition_authorized_after_preflight",
+            "physical_acquisition_executed",
+            "hardware_ran",
+            "authorization_artifact_created",
+            "calibration_authorized",
+            "scientific_acquisition_authorized",
+            "restoration_authorized",
+            "target_coupling_authorized",
+            "orientation_recovery_authorized",
+            "small_wall_authorized",
+            "phase6b6_entered",
+        ):
+            if auth.get(field) is not False:
+                raise SystemExit(f"inactive campaign binding authorizes {field}")
+        if binding.get("owner_decision") != "APPROVED_FOR_INTEGRATION":
+            raise SystemExit("inactive campaign binding owner decision mismatch")
+        if binding.get("next_boundary") != "PHASE6B6_REQUIRES_SEPARATE_FUTURE_AUTHORITY":
+            raise SystemExit("inactive campaign binding boundary mismatch")
+        print("COMBINED_CAMPAIGN_BINDING_INACTIVE_NO_AUTHORITY")
+        return 0
     source = binding["plan_source_commit"]
     if git(repo, "merge-base", "--is-ancestor", source, "HEAD") != 0:
         raise SystemExit("frozen source is not an ancestor of HEAD")

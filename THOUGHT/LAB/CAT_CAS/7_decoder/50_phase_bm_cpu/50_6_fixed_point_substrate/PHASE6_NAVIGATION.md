@@ -1,7 +1,7 @@
 # Phase 6 Navigation
 
 **Role:** canonical entry point for the Phase 6 directory.
-**Current state:** `PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__CUSTODY_CORRECTED__GATE_R_BLOCKED`
+**Current state:** `PHASE6_V2_EXACT_HEAD_GATE_R_INTEGRATION_APPROVED__PHASE6B6_NOT_ENTERED`
 **Active directives:** `14_noncollapse_frontier/COURSE_CORRECTION.md`, `14_noncollapse_frontier/COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `14_noncollapse_frontier/PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
 **Active roadmap:** `PHASE6_ROADMAP.md`
 
@@ -31,7 +31,7 @@ live carrier
 → theory-to-gate audit
 → transfer-aware carrier geometry analysis
 → frozen or explicitly narrowed carrier scope
-→ external human review
+→ Gate R integration review and project-owner approval
 → observable physical state
 → identified predictive operator
 → physical closure/restoration tier
@@ -46,14 +46,15 @@ The V2 engineering lane now sits below Gate R:
 permanent V1 negative adjudication
 → corrected V2 executor and calibration architecture
 → source repair and exact-source hosted qualification
-→ fresh independent source review
+→ source review
 → generated-contract and evidence regeneration
 → generated-head requalification and authority synchronization
-→ independent PR review
-→ Gate R project-owner decision
+→ final evidence review
+→ Gate R review
+→ project-owner Gate R integration approval
 ```
 
-No later transition may be inferred from an earlier one. A live channel is not physical memory; an observable state is not restoration; restoration is not target coupling; target coupling is not a crossing. V2 engineering qualification is not Gate R acceptance and does not enter Phase 6B.6.
+No later transition may be inferred from an earlier one. A live channel is not physical memory; an observable state is not restoration; restoration is not target coupling; target coupling is not a crossing. Gate R integration approval does not enter Phase 6B.6.
 
 The current V2 plan uses ascending tone order. It qualifies the interface and does not execute the selected reversed/randomized tone-order control.
 
@@ -62,7 +63,7 @@ The current V2 plan uses ascending tone order. It qualifies the interface and do
 ## Current V2 authority binding
 
 ```text
-status: PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__CUSTODY_CORRECTED__GATE_R_BLOCKED
+status: PHASE6_V2_EXACT_HEAD_GATE_R_INTEGRATION_APPROVED__PHASE6B6_NOT_ENTERED
 source repair head: ba48125d15009a044bb869b5716c412b1a8baa1b
 source review: 4584742973 complete
 generated-contract head: 500f7dfcd198e6e70dc3f999248aa61224d530cd
@@ -76,11 +77,21 @@ Phase 6 Combined Campaign Plan run: 28284598854 success
 Phenom target qualification: sealed exact-commit snapshot; strict C, runtime, ASan, UBSan, and V2 Python contracts/analyzer passed
 evidence package: 14_noncollapse_frontier/combined_observability_campaign/v2/evidence/exact_head_500f7dfc
 sealed-snapshot evidence custody: corrected
-fresh independent evidence review: pending
-Gate R: blocked (project-owner decision pending)
+evidence review: 4585386261 complete
+Gate R review: 4585403632 complete
+Gate R integration: approved
+Gate R reviewer: assistant review chain
+project-owner approval: complete
+separate external-human review pending: false
 Phase 6B.6: not entered
+phase6b6_entered: false
 hardware_ran: false
 authorization_artifact_created: false
+calibration_authorized: false
+scientific_acquisition_authorized: false
+restoration_authorized: false
+target_coupling_authorized: false
+small_wall_authorized: false
 ```
 
 ---
@@ -102,7 +113,7 @@ authorization_artifact_created: false
 | 11 | `pdn_catalytic_tape` | Simulation/hardware-gap analysis | Complete |
 | 12 | `chiral_lane_frontier` | Phase 6A public lane boundary | Closed |
 | 13 | `substrate_frontier` | Tape/fixed-point warmup and L4 rejection | Historical/corrected |
-| 14 | `noncollapse_frontier` | Active Phase 6B architecture and physical ladder | Phase 6B.5D frozen; V2 exact generated head qualified, custody-corrected, and evidence-bound; Gate R blocked |
+| 14 | `noncollapse_frontier` | Active Phase 6B architecture and physical ladder | Phase 6B.5D frozen; V2 exact generated head qualified, custody-corrected, evidence-bound, and Gate R integration-approved |
 
 ---
 
@@ -143,15 +154,15 @@ authorization_artifact_created: false
 | L4B.2 owned serialized path memory | Complete as history-backed exact restoration |
 | L4B.4 invariant family | Complete with narrowed semantic scope |
 | L4B.5A physical mapping | Conservative contract; channel support only |
-| L4B.5B0 observability/operator design | Sealed design; external review pending; implementation unauthorized |
+| L4B.5B0 observability/operator design | Sealed design; Gate R integration review complete; implementation unauthorized |
 | Carrier raw provenance | Complete for frozen T48 campaign |
 | Carrier theory-to-gate audit | Complete |
 | Phase 6B.5C transfer-aware raw analysis | Complete: `TRANSFER_EQUIVARIANCE_SUPPORTED` |
 | Carrier claim/scope freeze | Complete at derived scalar-chart claim ceiling |
 | V1 combined-observability acquisition | Permanent negative adjudication; closed |
 | V2 executor/calibration architecture | Draft engineering qualification object; no hardware or authorization |
-| V2 final-head source/CI/Linux qualification | Complete for exact generated head `500f7dfcd198e6e70dc3f999248aa61224d530cd`; Gate R still blocked |
-| L4B.5B0 human review | Required after carrier scope and V2 integration boundary are frozen |
+| V2 final-head source/CI/Linux qualification | Complete for exact generated head `500f7dfcd198e6e70dc3f999248aa61224d530cd`; Gate R integration approved |
+| L4B.5B0 Gate R review | Complete; project-owner integration approval recorded |
 | Observability acquisition/operator identification | Not authorized |
 | Physical restoration | Not authorized |
 | Target-to-carrier coupling | Blocked on physical restoration tier |
@@ -171,7 +182,7 @@ The active authority is the base course correction plus the 2026-06-19 and 2026-
 6. **V1 combined-observability adjudication** — complete and permanently negative.
 7. **V2 engineering qualification** — close strict source contracts, V2 GitHub CI, exact final-head Linux verification, evidence binding, and authority synchronization.
 8. **Independent PR review** — confirm the V2 lane is internally qualified without promoting it scientifically.
-9. **L4B.5B0 human review** — external SHA-256-bound, non-authorizing review of the observability/operator contract and project-owner integration decision.
+9. **L4B.5B0 Gate R review** — SHA-256-bound, non-authorizing review of the observability/operator contract and project-owner integration decision. Complete.
 10. **Physical observability/operator identification** — determine a minimal measured state and held-out predictive operator or formally reject the instrumentation boundary.
 11. **Physical closure/restoration ladder** — claim only the exact achieved tier, from bytes through observable equivalence and possible holonomy.
 12. **Target-to-carrier coupling** — load the unresolved public relation without candidate-label phase/core/sign smuggling.
@@ -232,7 +243,7 @@ V2 currently proves: a corrected forward-only software architecture, reviewed so
            head `ba48125d15009a044bb869b5716c412b1a8baa1b`, reviewed generated head
            `500f7dfcd198e6e70dc3f999248aa61224d530cd`, hosted workflow success, and
            sealed-snapshot Phenom target software qualification.
-V2 does not prove: hardware calibration, Gate R acceptance, an observable physical
+V2 does not prove: hardware calibration, an observable physical
            state, restoration, target coupling, or crossing.
 
 .holo proves: software relational geometry, serialized path memory, boundary-gated invariant extraction.
@@ -245,6 +256,6 @@ V2 does not prove: hardware calibration, Gate R acceptance, an observable physic
 
 No physical acquisition is authorized.
 
-The immediate engineering boundary is closed for the exact generated head and remains below Gate R. The next scientific gate remains the external, SHA-bound, non-authorizing L4B.5B0 human review and project-owner integration decision.
+The immediate engineering boundary is closed for the exact generated head and Gate R integration is approved. The next legitimate phase boundary is separate Phase 6B.6 authority; no physical acquisition is authorized by this approval.
 
-PR #21 remains draft and unmerged until the project-owner Gate R decision is made.
+PR #21 may be marked ready and merged after required checks pass and branch protection allows it.

@@ -36,12 +36,14 @@ def main() -> int:
             errors.append("Gate R review binding changed")
 
         owner = json.loads(paths["owner"].read_text())
-        if owner.get("decision") != "RATIFY_AND_AUTHORIZE_COMBINED_TONE_ORDER_OBSERVABILITY_CAMPAIGN":
+        if owner.get("decision") != "APPROVED_FOR_INTEGRATION":
             errors.append("owner decision mismatch")
-        for field in ("project_owner_ratified", "campaign_implementation_authorized", "combined_physical_acquisition_authorized_after_preflight"):
+        for field in ("project_owner_ratified", "gate_r_integration_approved"):
             if owner.get(field) is not True:
-                errors.append(f"owner authority missing {field}")
-        for field in ("restoration_authorized", "target_coupling_authorized", "orientation_recovery_authorized", "small_wall_authorized"):
+                errors.append(f"owner approval missing {field}")
+        if owner.get("separate_external_human_review_pending") is not False:
+            errors.append("separate external-human review must not remain pending")
+        for field in ("campaign_implementation_authorized", "combined_physical_acquisition_authorized_after_preflight", "hardware_ran", "authorization_artifact_created", "calibration_authorized", "scientific_acquisition_authorized", "restoration_authorized", "target_coupling_authorized", "orientation_recovery_authorized", "small_wall_authorized", "phase6b6_entered"):
             if owner.get(field) is not False:
                 errors.append(f"forbidden authority enabled: {field}")
 
@@ -49,16 +51,41 @@ def main() -> int:
         if campaign.get("campaign_plan", {}).get("sha256") != "eb5a46d0a37d66910649467cf0d4e3cf947dee11fab94a36e9bdfed388455e53":
             errors.append("combined campaign plan binding changed")
         auth = campaign.get("authorization", {})
-        if auth.get("physical_acquisition_executed") is not False or auth.get("restoration_authorized") is not False:
+        for field in ("campaign_implementation_authorized", "physical_acquisition_authorized_after_preflight", "physical_acquisition_executed", "hardware_ran", "authorization_artifact_created", "calibration_authorized", "scientific_acquisition_authorized", "restoration_authorized", "target_coupling_authorized", "small_wall_authorized", "phase6b6_entered"):
+            if auth.get(field) is not False:
+                errors.append(f"campaign status exceeds authority: {field}")
+
+        integration = HERE / "GATE_R_INTEGRATION_APPROVAL.json"
+        if not integration.is_file():
+            errors.append("missing Gate R integration approval envelope")
+        else:
+            envelope = json.loads(integration.read_text())
+            if envelope.get("schema_id") != "l4b5b0_observability_review_v1":
+                errors.append("integration envelope schema mismatch")
+            if envelope.get("decision") != "APPROVED_FOR_INTEGRATION":
+                errors.append("integration envelope decision mismatch")
+            if envelope.get("gate_r_review") != 4585403632:
+                errors.append("Gate R review id mismatch")
+            flags = envelope.get("authorization_flags", {})
+            for field in ("hardware_ran", "authorization_artifact_created", "calibration_authorized", "scientific_acquisition_authorized", "restoration_authorized", "target_coupling_authorized", "small_wall_authorized", "phase6b6_entered"):
+                if flags.get(field) is not False:
+                    errors.append(f"integration envelope authorizes {field}")
+            if envelope.get("separate_external_human_review_pending") is not False:
+                errors.append("integration envelope leaves external review pending")
+
+        if auth.get("restoration_authorized") is not False:
             errors.append("campaign status exceeds authority")
 
         status = paths["status"].read_text(encoding="utf-8")
         for marker in (
             "Project-owner ratification:** `COMPLETE`",
-            "Campaign implementation authorized:** yes",
-            "Physical acquisition authorized:** after executor verification and catcas preflight",
+            "Owner decision:** `APPROVED_FOR_INTEGRATION`",
+            "Gate R integration:** approved",
+            "Separate external-human review pending:** false",
+            "Campaign implementation authorized:** no",
+            "Physical acquisition authorized:** no",
             "Physical acquisition executed:** no",
-            "local schedule-driven executor: NEXT",
+            "Phase 6B.6: NOT_ENTERED",
         ):
             if marker not in status:
                 errors.append(f"Gate R status missing marker: {marker}")

@@ -20,12 +20,14 @@ def main() -> int:
     if not errors:
         owner = json.loads(RATIFICATION.read_text())
         review = json.loads(GATE_R.read_text())
-        if owner.get("decision") != "RATIFY_AND_AUTHORIZE_COMBINED_TONE_ORDER_OBSERVABILITY_CAMPAIGN":
+        if owner.get("decision") != "APPROVED_FOR_INTEGRATION":
             errors.append("wrong owner decision")
-        for field in ("project_owner_ratified", "campaign_implementation_authorized", "combined_physical_acquisition_authorized_after_preflight"):
+        for field in ("project_owner_ratified", "gate_r_integration_approved"):
             if owner.get(field) is not True:
-                errors.append(f"owner authority missing {field}")
-        for field in ("restoration_authorized", "target_coupling_authorized", "orientation_recovery_authorized", "small_wall_authorized"):
+                errors.append(f"owner approval missing {field}")
+        if owner.get("separate_external_human_review_pending") is not False:
+            errors.append("separate external-human review must not remain pending")
+        for field in ("campaign_implementation_authorized", "combined_physical_acquisition_authorized_after_preflight", "hardware_ran", "authorization_artifact_created", "calibration_authorized", "scientific_acquisition_authorized", "restoration_authorized", "target_coupling_authorized", "orientation_recovery_authorized", "small_wall_authorized", "phase6b6_entered"):
             if owner.get(field) is not False:
                 errors.append(f"forbidden owner authority enabled: {field}")
         decision = review.get("decision", {})
@@ -37,7 +39,6 @@ def main() -> int:
             errors.append("technical review improperly grants owner authority")
         text = CONTRACT.read_text(encoding="utf-8")
         for marker in (
-            "AUTHORIZED_FOR_IMPLEMENTATION_AND_POST_PREFLIGHT_ACQUISITION",
             "PERSISTENT_STATE_CANDIDATE",
             "DRIVEN_RELATIONAL_TRANSPORT_ONLY",
             "No result authorizes restoration",
@@ -48,7 +49,7 @@ def main() -> int:
         print(f"ERROR: {error}", file=sys.stderr)
     if errors:
         return 1
-    print("COMBINED_CAMPAIGN_AUTHORIZATION_ALIGNED")
+    print("COMBINED_CAMPAIGN_INTEGRATION_ONLY_NO_AUTHORITY")
     return 0
 
 

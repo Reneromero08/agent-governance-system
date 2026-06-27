@@ -1,6 +1,6 @@
 # Phase 6 V2 Final Qualification Work Package
 
-**Status:** `PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__CUSTODY_CORRECTED__GATE_R_BLOCKED`
+**Status:** `PHASE6_V2_EXACT_HEAD_GATE_R_INTEGRATION_APPROVED__PHASE6B6_NOT_ENTERED`
 **Branch:** `codex/phase6-v1-adjudication-v2`
 **Audited source-only repair proof:** GitHub Actions run `28068218010`, run number `18`
 **PR:** `#21`, draft and unmerged
@@ -15,6 +15,10 @@
 **Source-bundle SHA-256:** `bec71b2369587e68a88e9e2b5cb47837a07d5cdef6f13990417e0c0928e85f2f`
 **Exact-head evidence:** `v2/evidence/exact_head_500f7dfc`
 **Independent evidence review:** `4585030778`
+**Final evidence review:** `4585386261`
+**Gate R review:** `4585403632`
+**Project-owner Gate R approval:** 2026-06-27, `APPROVED_FOR_INTEGRATION`
+**Separate external-human review pending:** false
 **Sealed-snapshot evidence custody:** corrected
 **Hardware calibration authorized:** false
 **Scientific acquisition authorized:** false
@@ -29,7 +33,7 @@
 This work package is retained as the execution and audit history for a completed engineering qualification.
 
 ```text
-status: PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__CUSTODY_CORRECTED__GATE_R_BLOCKED
+status: PHASE6_V2_EXACT_HEAD_GATE_R_INTEGRATION_APPROVED__PHASE6B6_NOT_ENTERED
 source commit: ba48125d15009a044bb869b5716c412b1a8baa1b
 generated-contract commit: 500f7dfcd198e6e70dc3f999248aa61224d530cd
 raw evidence closure: 4b5817a8741889caf5fadfa49df79fecb2f858a9 (incomplete summary), 69691b8061ea9eef6bf1b0dff44d0f1f2de1b863 (incomplete raw), 05c68281bcafda53381b2f70e4de13c25d1f5c9b (corrected), d0086ad0897cce6027b511c3409ff4ba3d422860 (metadata)
@@ -43,9 +47,21 @@ independent review result: NO_BLOCKING_FINDINGS
 hosted runs: Governance 28284598855, Contracts 28284598856, Phase 6 V2 Strict Qualification 28284598853, Phase 6 Combined Campaign Plan 28284598854
 target qualification: sealed git-archive snapshot, target Git checkout not applicable
 sealed-snapshot evidence custody: corrected
-fresh independent evidence review: pending
-Gate R: blocked (project-owner decision pending)
+evidence review: 4585386261 complete
+Gate R review: 4585403632 complete
+Gate R integration: approved
+Gate R reviewer: assistant review chain
+project-owner approval: complete
+separate external-human review pending: false
 Phase 6B.6: not entered
+phase6b6_entered: false
+hardware_ran: false
+authorization_artifact_created: false
+calibration_authorized: false
+scientific_acquisition_authorized: false
+restoration_authorized: false
+target_coupling_authorized: false
+small_wall_authorized: false
 ```
 
 No hardware calibration or scientific acquisition ran. All scientific authorization fields remain false.
@@ -113,7 +129,7 @@ V2:
 ENGINEERING_QUALIFICATION_ONLY
 
 Gate R:
-PENDING
+APPROVED_FOR_INTEGRATION
 
 Phase 6B.6:
 NOT ENTERED
@@ -132,6 +148,8 @@ NOT ESTABLISHED
 ```
 
 The current V2 plan uses ascending tone order. It is not the proposed reversed/randomized tone-order scientific control.
+
+Gate R approval integrates the reviewed V2 engineering lane only. It does not authorize hardware calibration, scientific acquisition, restoration, target coupling, Small Wall execution, or Phase 6B.6 entry.
 
 Forbidden in this task:
 
@@ -469,10 +487,11 @@ Record explicitly:
 hardware_ran=false
 authorization_artifact_created=false
 calibration_authorized=false
-acquisition_authorized=false
+scientific_acquisition_authorized=false
 restoration_authorized=false
 target_coupling_authorized=false
 small_wall_authorized=false
+phase6b6_entered=false
 ```
 
 Commit as one evidence-and-authority unit:

@@ -1,10 +1,10 @@
 # Phase 6 Roadmap
 
 **Role:** master chronological task ledger.
-**Current head:** `PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__CUSTODY_CORRECTED__GATE_R_BLOCKED`
+**Current head:** `PHASE6_V2_EXACT_HEAD_GATE_R_INTEGRATION_APPROVED__PHASE6B6_NOT_ENTERED`
 **Binding directive:** `14_noncollapse_frontier/COURSE_CORRECTION.md`, `14_noncollapse_frontier/COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `14_noncollapse_frontier/PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
-**Immediate engineering gate:** close source review/repair, regenerate generated contracts, requalify the exact generated head, bind evidence, then present the project-owner Gate R decision.
-**Immediate scientific gate:** Gate R remains blocked until source review/repair closure, generated-contract regeneration, generated-head requalification, evidence binding, and project-owner decision complete in sequence.
+**Immediate engineering gate:** V2 exact-head engineering qualification, source review, generated-head review, final evidence review, Gate R review, and project-owner Gate R integration approval are complete.
+**Immediate scientific gate:** Phase 6B.6 remains a separate future phase requiring separate explicit authority; Gate R integration approval does not authorize physical execution.
 **Next physical control:** reversed/randomized tone order, proposed but not authorized.
 **Observability acquisition:** not authorized.
 
@@ -325,6 +325,9 @@ This is a forward-only engineering lane beneath Gate R. It does not enter Phase 
 - [x] requalify exact generated head `500f7dfcd198e6e70dc3f999248aa61224d530cd` through hosted workflows and sealed-snapshot Phenom target software qualification
 - [x] bind exact-head evidence package `14_noncollapse_frontier/combined_observability_campaign/v2/evidence/exact_head_500f7dfc`
 - [x] close sealed-snapshot evidence custody gaps from independent evidence review `4585030778`
+- [x] close final evidence review `4585386261`
+- [x] close Gate R review `4585403632`
+- [x] record project-owner Gate R integration approval, 2026-06-27, `APPROVED_FOR_INTEGRATION`
 
 The current V2 plan uses ascending tone order and qualifies the physical interface. It is not the selected reversed/randomized tone-order scientific control.
 
@@ -345,12 +348,21 @@ Phenom target identity: sealed git-archive snapshot, target Git checkout not app
 target software qualification: strict C, functional runtime, ASan, UBSan, and V2 Python contracts/analyzer passed
 evidence package: 14_noncollapse_frontier/combined_observability_campaign/v2/evidence/exact_head_500f7dfc
 sealed-snapshot evidence custody: corrected
-fresh independent evidence review: pending
-Gate R: blocked (project-owner decision pending)
+evidence review: 4585386261 complete
+Gate R review: 4585403632 complete
+Gate R integration: approved
+Gate R reviewer: assistant review chain
+project-owner approval: complete
+separate external-human review pending: false
 Phase 6B.6: not entered
+phase6b6_entered: false
 hardware_ran: false
+authorization_artifact_created: false
 calibration_authorized: false
 scientific_acquisition_authorized: false
+restoration_authorized: false
+target_coupling_authorized: false
+small_wall_authorized: false
 ```
 
 Binding addendum:
@@ -359,13 +371,15 @@ Binding addendum:
 14_noncollapse_frontier/PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md
 ```
 
-### Gate R — L4B.5B0 external human review
+### Gate R — L4B.5B0 integration review
 
 Prerequisites:
 
 - [x] carrier scope frozen at the derived transfer-aware claim ceiling
 - [x] Phase 6B.5C/5D outputs bound to exact source and evidence
-- [ ] V2 qualification lane either closes cleanly or is explicitly narrowed out of the Gate R integration decision
+- [x] V2 qualification lane closed cleanly for the Gate R integration decision
+- [x] source review `4584742973`, generated-head review `4584795315`, final evidence review `4585386261`, and Gate R review `4585403632` complete
+- [x] project-owner integration approval recorded on 2026-06-27
 
 Review scope:
 
@@ -377,7 +391,7 @@ Review scope:
 - claim ceiling
 - explicit non-authorization of restoration
 
-Output: separate `l4b5b0_observability_review_v1` envelope bound to frozen design bytes.
+Output: `14_noncollapse_frontier/gate_r/GATE_R_INTEGRATION_APPROVAL.json`, using the existing `l4b5b0_observability_review_v1` envelope convention, records `APPROVED_FOR_INTEGRATION`. Separate external-human review is not pending. Gate R approval integrates the reviewed engineering lane only and does not authorize calibration, acquisition, restoration, target coupling, Small Wall work, or Phase 6B.6 entry.
 
 ### Phase 6B.6 — Physical observability/operator identification
 
@@ -444,7 +458,7 @@ One positive does not authorize Big Wall generalization.
 | Strict carrier witness | `PARTIAL` |
 | V1 combined-observability campaign | Permanent negative adjudication; no stable predictive operator |
 | V2 executor/calibration architecture | Exact generated head qualified as software engineering object; not hardware-executed or scientifically authorized |
-| V2 generated-contract and evidence chain | Reviewed, regenerated, hosted-qualified, sealed-target-qualified, and evidence-bound at `500f7dfcd198e6e70dc3f999248aa61224d530cd`; Gate R still blocked |
+| V2 generated-contract and evidence chain | Reviewed, regenerated, hosted-qualified, sealed-target-qualified, evidence-bound at `500f7dfcd198e6e70dc3f999248aa61224d530cd`, and Gate R integration-approved |
 | Reversed/randomized tone-order control | Selected but not designed, reviewed, or authorized |
 | Software `.holo` geometric memory | Supported at L1/L2 |
 | History-backed software restoration | Supported |
@@ -472,7 +486,7 @@ Stop and repair before continuing if work:
 - executes acquisition before authorization;
 - repeats T48 or increases to T300 before Phase 6B.5C identifies the unresolved mechanism;
 - treats canonical sender-basis fidelity as identical to carrier transport;
-- treats V2 engineering qualification as Gate R acceptance or Phase 6B.6 entry;
+- treats Gate R integration approval as Phase 6B.6 entry or physical execution authorization;
 - treats ascending-order calibration as the reversed/randomized tone-order control;
 - qualifies a later V2 source head with logs from an earlier commit;
-- skips carrier scope freeze, human review, operator identification, restoration, or target-coupling gates.
+- skips carrier scope freeze, Gate R integration approval, operator identification, restoration, or target-coupling gates.

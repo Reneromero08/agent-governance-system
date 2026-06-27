@@ -1,14 +1,17 @@
 # Phase 6 V2 Architectural Review
 
-**Status:** `PHASE6_V2_EXACT_GENERATED_HEAD_QUALIFIED__CUSTODY_CORRECTED__GATE_R_BLOCKED`
+**Status:** `PHASE6_V2_EXACT_HEAD_GATE_R_INTEGRATION_APPROVED__PHASE6B6_NOT_ENTERED`
 **Authority:** `../../PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
 **Execution packet:** `../V2_FINAL_QUALIFICATION_WORK_PACKAGE.md`
 **Independent source review:** complete, `4584742973`
 **Independent generated-head review:** complete, `4584795315`
-**Independent evidence review:** `4585030778`, corrective custody commit required
+**Independent evidence review:** complete, `4585386261`
 **Independent reviewed generated head:** `500f7dfcd198e6e70dc3f999248aa61224d530cd`
 **Independent review result:** `NO_BLOCKING_FINDINGS`
-**Gate R:** pending
+**Gate R review:** complete, `4585403632`
+**Gate R integration:** approved, `APPROVED_FOR_INTEGRATION`
+**Project-owner approval:** complete, 2026-06-27
+**Separate external-human review pending:** false
 **Phase 6B.6:** not entered
 **Hardware calibration executed:** false
 **Scientific acquisition authorized:** false
@@ -111,10 +114,11 @@ V2:
 ENGINEERING_QUALIFICATION_COMPLETE
 
 Gate R:
-PENDING
+APPROVED_FOR_INTEGRATION
 
 Phase 6B.6:
 NOT ENTERED
+phase6b6_entered=false
 
 physical restoration:
 NOT ESTABLISHED
@@ -131,18 +135,21 @@ NOT ESTABLISHED
 
 The V2 schedule is ascending-order engineering calibration. It is not the proposed reversed/randomized tone-order scientific control.
 
+Gate R approval integrates the reviewed engineering lane only. It does not authorize hardware calibration, scientific acquisition, restoration, target coupling, Small Wall execution, or Phase 6B.6 entry.
+
 ## Authorization boundary
 
 ```text
 hardware_ran=false
 authorization_artifact_created=false
 calibration_authorized=false
-acquisition_authorized=false
+scientific_acquisition_authorized=false
 restoration_authorized=false
 target_coupling_authorized=false
 small_wall_authorized=false
+phase6b6_entered=false
 ```
 
 ## Next legitimate action
 
-Fresh independent evidence review of the corrective custody commit is next. The project-owner Gate R decision remains blocked. No physical acquisition, restoration experiment, target-coupling experiment, or Small Wall execution is authorized by this qualification.
+Gate R review `4585403632` and project-owner integration approval are complete. The next legitimate boundary is separate Phase 6B.6 authority; no physical acquisition, restoration experiment, target-coupling experiment, or Small Wall execution is authorized by this qualification.
