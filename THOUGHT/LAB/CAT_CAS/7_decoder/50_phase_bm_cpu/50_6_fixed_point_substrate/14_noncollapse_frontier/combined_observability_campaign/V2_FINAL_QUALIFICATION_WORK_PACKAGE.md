@@ -1,9 +1,11 @@
 # Phase 6 V2 Final Qualification Work Package
 
 **Status:** `PHASE6_V2_EXACT_HEAD_GATE_R_INTEGRATION_APPROVED__PHASE6B6_NOT_ENTERED`
-**Branch:** `codex/phase6-v1-adjudication-v2`
+**Source branch:** `codex/phase6-v1-adjudication-v2`
 **Audited source-only repair proof:** GitHub Actions run `28068218010`, run number `18`
-**PR:** `#21`, draft and unmerged
+**PR:** `#21`, merged
+**Final authority commit:** `33e134eb324152b5c03420d123c94dbb12076cbd`
+**Merge commit / integrated main head:** `38a34d1e613b387d23db678fe2213b2201f08d62`
 **Final source commit:** `ba48125d15009a044bb869b5716c412b1a8baa1b`
 **Final generated-contract commit:** `500f7dfcd198e6e70dc3f999248aa61224d530cd`
 **Source review:** `4584742973`
@@ -500,7 +502,7 @@ Commit as one evidence-and-authority unit:
 git commit -m "phase6: bind final V2 qualification evidence"
 ```
 
-Keep PR #21 draft and stop for independent review.
+Historical instruction superseded by Gate R integration approval: PR #21 is merged at integrated main head `38a34d1e613b387d23db678fe2213b2201f08d62`.
 
 ---
 
