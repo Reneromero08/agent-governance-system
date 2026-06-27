@@ -24,16 +24,21 @@ Real execution requires a separate
 is always engineering calibration evidence, never scientific acquisition
 evidence. These fields remain false:
 
-Each hardware invocation also requires a singleton source bundle and a
-singleton authorization containing exactly the current session. A full
-campaign bundle cannot authorize subset execution.
-
 ```text
 acquisition_authorized=false
 restoration_authorized=false
 target_coupling_authorized=false
 small_wall_authorized=false
 ```
+
+Each hardware invocation also requires a singleton source bundle and a
+singleton authorization containing exactly the current session. A full
+campaign bundle cannot authorize subset execution.
+
+Validation-only execution emits
+`CAT_CAS_PHASE6_V2_VALIDATION_ONLY_RUN_V1` with
+`execution_class=VALIDATION_ONLY` and `hardware_executed=false`. It is contract
+validation output, not a physical run directory or calibration evidence.
 
 No hardware calibration or acquisition is authorized by this source tree.
 The sender mapping is serialized in the full schedule and is reconstructible.
