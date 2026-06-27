@@ -1,6 +1,7 @@
 #define _GNU_SOURCE
 #include "captured_file.h"
 
+#include <ctype.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <stdint.h>
@@ -233,19 +234,29 @@ void free_captured(CapturedFile *captured) {
     memset(captured, 0, sizeof(*captured));
 }
 
+static int is_proc_executable_path(const char *path) {
+    static const char prefix[] = "/proc/";
+    if (strncmp(path, prefix, sizeof(prefix) - 1u) != 0) return 0;
+    const unsigned char *cursor =
+        (const unsigned char *)path + sizeof(prefix) - 1u;
+    if (!isdigit(*cursor)) return 0;
+    while (isdigit(*cursor)) cursor++;
+    return strcmp((const char *)cursor, "/exe") == 0;
+}
+
 int hash_file_streaming(const char *path, char out_digest[CAPTURED_SHA256_LEN + 1]) {
     if (!path || !out_digest) return -1;
     int flags = O_RDONLY | O_CLOEXEC;
-#ifdef O_NOFOLLOW
-    flags |= O_NOFOLLOW;
-#endif
-#ifdef O_BINARY
+    if (!is_proc_executable_path(path)) flags |= O_NOFOLLOW;
     flags |= O_BINARY;
-#endif
     int fd = open(path, flags);
     if (fd < 0) return -1;
     struct stat st_before;
-    if (fstat(fd, &st_before) || !S_ISREG(st_before.st_mode)) { close(fd); return -1; }
+    if (fstat(fd, &st_before) || !S_ISREG(st_before.st_mode) ||
+        st_before.st_size < 0) {
+        close(fd);
+        return -1;
+    }
     uint32_t state[8] = {
         0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
         0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19,
@@ -254,12 +265,18 @@ int hash_file_streaming(const char *path, char out_digest[CAPTURED_SHA256_LEN + 
     unsigned char buf[65536];
     unsigned char last[64];
     size_t last_used = 0;
-    ssize_t n;
-    while (1) {
-        n = read(fd, buf, sizeof(buf));
-        if (n < 0) { if (errno == EINTR) continue; close(fd); return -1; }
+    for (;;) {
+        ssize_t n = read(fd, buf, sizeof(buf));
+        if (n < 0) {
+            if (errno == EINTR) continue;
+            close(fd);
+            return -1;
+        }
         if (n == 0) break;
-        if (total > UINT64_MAX - (uint64_t)n) { close(fd); return -1; }
+        if (total > UINT64_MAX - (uint64_t)n) {
+            close(fd);
+            return -1;
+        }
         total += (uint64_t)n;
         size_t offset = 0;
         if (last_used) {
@@ -268,33 +285,49 @@ int hash_file_streaming(const char *path, char out_digest[CAPTURED_SHA256_LEN + 
             memcpy(last + last_used, buf, take);
             last_used += take;
             offset = take;
-            if (last_used == 64) { sha256_transform(state, last); last_used = 0; }
+            if (last_used == 64) {
+                sha256_transform(state, last);
+                last_used = 0;
+            }
         }
         while (offset + 64 <= (size_t)n) {
             sha256_transform(state, buf + offset);
             offset += 64;
         }
         size_t remain = (size_t)n - offset;
-        if (remain) { memcpy(last, buf + offset, remain); last_used = remain; }
+        if (remain) {
+            memcpy(last, buf + offset, remain);
+            last_used = remain;
+        }
     }
     struct stat st_after;
-    if (fstat(fd, &st_after)) { close(fd); return -1; }
+    if (fstat(fd, &st_after)) {
+        close(fd);
+        return -1;
+    }
     int close_rc = close(fd);
     if (close_rc != 0) return -1;
     if (st_before.st_dev != st_after.st_dev ||
         st_before.st_ino != st_after.st_ino ||
         st_before.st_size != st_after.st_size ||
-        !S_ISREG(st_after.st_mode) ||
-        (uint64_t)st_after.st_size != total) return -1;
-    uint64_t bit_len = total * 8;
+        !S_ISREG(st_after.st_mode) || st_after.st_size < 0 ||
+        (uint64_t)st_after.st_size != total || total > UINT64_MAX / 8u) {
+        return -1;
+    }
+    uint64_t bit_len = total * 8u;
     last[last_used] = 0x80;
     memset(last + last_used + 1, 0, 64 - last_used - 1);
-    if (last_used >= 56) { sha256_transform(state, last); memset(last, 0, 56); }
-    for (int i = 0; i < 8; i++)
+    if (last_used >= 56) {
+        sha256_transform(state, last);
+        memset(last, 0, 56);
+    }
+    for (int i = 0; i < 8; i++) {
         last[56 + i] = (unsigned char)(bit_len >> (56 - 8 * i));
+    }
     sha256_transform(state, last);
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < 8; i++) {
         snprintf(out_digest + i * 8, 9, "%08x", state[i]);
+    }
     out_digest[CAPTURED_SHA256_LEN] = 0;
     return 0;
 }

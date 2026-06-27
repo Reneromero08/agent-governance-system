@@ -43,6 +43,15 @@ class CapturedFileTests(unittest.TestCase):
                 self.assertEqual(result.returncode, 0, result.stderr.decode())
                 self.assertEqual(result.stdout.decode().strip(), hashlib.sha256(value.encode()).hexdigest())
 
+    @unittest.skipIf(os.name == "nt", "procfs executable identity is Linux-only")
+    def test_proc_executable_stream_hash_matches_running_binary(self) -> None:
+        result = self.run_fixture("hash-self")
+        self.assertEqual(result.returncode, 0, result.stderr.decode())
+        self.assertEqual(
+            result.stdout.decode().strip(),
+            hashlib.sha256(self.binary.read_bytes()).hexdigest(),
+        )
+
     def test_capture_survives_original_path_replacement(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
@@ -67,6 +76,17 @@ class CapturedFileTests(unittest.TestCase):
             target.write_bytes(b"bound")
             link.symlink_to(target.name)
             result = self.run_fixture("capture", str(link))
+            self.assertNotEqual(result.returncode, 0)
+
+    @unittest.skipIf(os.name == "nt", "O_NOFOLLOW is a Linux custody requirement")
+    def test_ordinary_symlink_stream_hash_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            target = root / "target"
+            link = root / "link"
+            target.write_bytes(b"bound")
+            link.symlink_to(target.name)
+            result = self.run_fixture("hash-file", str(link))
             self.assertNotEqual(result.returncode, 0)
 
     def test_exclusive_writer_preserves_bytes_and_rejects_collision(self) -> None:
