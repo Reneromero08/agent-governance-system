@@ -2,6 +2,13 @@
 
 # Changelog
 
+## 2026-06-27: Phase 6 V2 validation-only raw-audit boundary
+
+- Phase 6 V2: reject validation-only run artifacts before raw-session
+  physical evidence audit. Added regression coverage and included it in
+  both Phase 6 V2 strict qualification and combined campaign plan workflows.
+  No hardware execution or scientific acquisition authorization is added.
+
 ## 2026-06-23 (continued 3): post-review integrity
 
 - Phase 6 V2: complete post-review integrity repair. Evidence-map V2 with

@@ -61,7 +61,7 @@ jobs:
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/analysis
         run: |
           python -m py_compile *.py
-          python -m unittest -v test_frozen_artifact_binding.py test_waveform_reference.py
+          python -m unittest -v test_frozen_artifact_binding.py test_waveform_reference.py test_audit_raw_session.py
       - name: Test V2 calibration contracts and analyzer
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/combined_observability_campaign/v2
         run: |
