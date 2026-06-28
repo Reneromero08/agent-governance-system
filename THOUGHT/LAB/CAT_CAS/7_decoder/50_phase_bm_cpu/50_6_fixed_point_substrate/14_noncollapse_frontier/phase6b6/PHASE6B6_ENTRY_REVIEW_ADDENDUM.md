@@ -1,14 +1,17 @@
 # Phase 6B.6 Entry Review Addendum
 
-**Status:** `BINDING_ENTRY_REVIEW_REPAIRS_APPLIED`
+**Status:** `BINDING_ENTRY_REVIEW_REPAIRS_APPLIED__SOFTWARE_ENTRY_APPROVED`
 **Base design:** `PHASE6B6_ENTRY_PACKAGE.md`
 **Base design commit:** `b4a154853a53db45c173e9c708563e0961244112`
-**Phase 6B.6 entered:** false
-**Implementation authorized:** false
+**Architecture review:** `4588082595`
+**Software entry approval:** `APPROVE_PHASE6B6_SOFTWARE_ENTRY_ONLY`
+**Software entry authority:** `PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json`
+**Phase 6B.6 entered:** true
+**Implementation authorized:** true
 **Hardware execution authorized:** false
 **Scientific acquisition authorized:** false
 
-This addendum is binding wherever it is more specific than the base entry package. It closes the precision defects found during architecture review without changing the scientific object, campaign size, data split, claim ceiling, or authority boundary.
+This addendum is binding wherever it is more specific than the base entry package. It closes the precision defects found during architecture review without changing the scientific object, campaign size, data split, claim ceiling, or hardware authority boundary.
 
 ---
 
@@ -26,16 +29,7 @@ The qualified V2 hardware primitive and capture-quality logic may be reused by e
 
 ## 2. Nominal sample accounting
 
-The base package fields:
-
-```text
-samples_per_slot = 4000
-raw sample count = 41472000
-```
-
-are nominal design targets, not exact acceptance requirements.
-
-The binding interpretation is:
+The binding design targets are:
 
 ```text
 nominal_samples_per_slot = read_hz * slot_s = 4000
@@ -50,13 +44,7 @@ All manifests and reports must use `nominal_` prefixes for the design targets an
 
 ## 3. Exact preamble allocation
 
-The ambiguous base phrase:
-
-```text
-24 carrier-off or time-matched sham slots
-```
-
-is replaced by the following exact allocation:
+The binding preamble allocation is:
 
 ```text
 48 sender-off idle slots
@@ -145,14 +133,15 @@ This rule is deterministic and must be implemented directly. Runtime randomizati
 
 ## 6. Effective entry object
 
-The effective reviewed object is:
+The effective reviewed and approved object is:
 
 ```text
 PHASE6B6_ENTRY_PACKAGE.md
 + PHASE6B6_ENTRY_REVIEW_ADDENDUM.md
++ PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json
 ```
 
-The architecture review conclusion is:
+The architecture and authority conclusion is:
 
 ```text
 scientific architecture = TECHNICALLY_ACCEPTABLE_WITH_BINDING_REPAIRS_APPLIED
@@ -160,16 +149,12 @@ campaign geometry = frozen
 state and operator ladders = frozen
 analysis gates = frozen
 claim ceiling = frozen
-Phase 6B.6 entry = pending project-owner decision
-software implementation = not authorized
+Phase 6B.6 entry = approved
+software implementation = authorized
+software-only qualification = authorized
+sealed-snapshot non-hardware target qualification = authorized
 hardware execution = not authorized
 scientific acquisition = not authorized
 ```
 
-The next valid decision remains one of:
-
-```text
-APPROVE_PHASE6B6_SOFTWARE_ENTRY_ONLY
-REJECT_AND_REVISE_PHASE6B6_ENTRY_DESIGN
-HOLD_PHASE6B6
-```
+The next boundary is independent software implementation and evidence review before any acquisition authority may be proposed.
