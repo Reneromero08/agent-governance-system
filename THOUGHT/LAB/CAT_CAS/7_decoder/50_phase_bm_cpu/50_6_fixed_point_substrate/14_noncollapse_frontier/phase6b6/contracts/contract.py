@@ -63,6 +63,8 @@ EXECUTED_CONTROL_FIELDS = (
     "executed_order_family",
     "executed_order_position",
     "codeword_bin_permutation",
+    "codeword_source_index",
+    "codeword_sign",
 )
 DECLARATION_FIELDS = (
     "declared_mode",
@@ -178,6 +180,15 @@ def canonical_json(value: Any) -> str:
 
 def digest(value: Any) -> str:
     return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+
+
+try:
+    from .v2_interface import QUALIFIED_V2_SOURCE, TONE_CODEWORD_TABLE
+except ImportError:  # pragma: no cover
+    from v2_interface import QUALIFIED_V2_SOURCE, TONE_CODEWORD_TABLE  # type: ignore
+
+CONTRACT["qualified_v2_source"] = QUALIFIED_V2_SOURCE
+CONTRACT["imported_tone_codeword_table"] = TONE_CODEWORD_TABLE
 
 
 def contract_manifest() -> dict[str, Any]:

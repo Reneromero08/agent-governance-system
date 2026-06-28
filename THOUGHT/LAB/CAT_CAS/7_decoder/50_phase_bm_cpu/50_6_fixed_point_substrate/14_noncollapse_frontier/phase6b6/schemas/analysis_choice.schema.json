@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "CAT_CAS_PHASE6B6_ANALYSIS_CHOICE_MANIFEST_V1",
+  "type": "object",
+  "required": ["schema_id", "contract_sha256", "schedule_sha256", "state_level", "operator_class", "regularization", "thresholds", "bootstrap_seeds", "analysis_choice_sha256"],
+  "properties": {
+    "schema_id": { "const": "CAT_CAS_PHASE6B6_ANALYSIS_CHOICE_MANIFEST_V1" },
+    "contract_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "schedule_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "state_level": { "enum": ["S0", "S1", "S2"] },
+    "delay_length": { "enum": [null, 2, 4, 8, 16] },
+    "operator_class": { "type": "string" },
+    "regularization": { "type": "number" },
+    "o4_lift": {},
+    "thresholds": { "type": "object" },
+    "bootstrap_seeds": { "type": "object" },
+    "analysis_choice_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "additionalProperties": false
+}

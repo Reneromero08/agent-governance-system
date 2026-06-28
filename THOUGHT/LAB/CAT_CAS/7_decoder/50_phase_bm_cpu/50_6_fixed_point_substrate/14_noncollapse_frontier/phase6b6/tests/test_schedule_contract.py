@@ -20,6 +20,11 @@ from contracts.contract import (  # noqa: E402
     declared_and_executed_order,
     order_family_sequence,
 )
+from contracts.v2_interface import TONE_CODEWORD_TABLE, codebook, tone_hz  # noqa: E402
+from runtime.explicit_slot_runtime import run_mock  # noqa: E402
+from schemas.validate_objects import validate_named  # noqa: E402
+from analysis.pipeline import evaluate_sealed, select_on_validation  # noqa: E402
+from analysis.synthetic import synthetic_custody  # noqa: E402
 from contracts.schedule import campaign_schedule, validate_schedule  # noqa: E402
 
 
@@ -64,11 +69,28 @@ class ScheduleContractTests(unittest.TestCase):
         self.assertEqual(declared_order, ORDER_ARRAYS["RND2"])
         self.assertEqual(executed_order, ORDER_ARRAYS["RND1"])
 
+    def test_v2_tone_codeword_binding_is_not_order_array(self) -> None:
+        self.assertEqual(len(TONE_CODEWORD_TABLE["tones"]), 12)
+        self.assertAlmostEqual(TONE_CODEWORD_TABLE["tones"][0]["frequency_hz"], tone_hz(0))
+        self.assertEqual(TONE_CODEWORD_TABLE["codebook"], codebook())
+        self.assertNotEqual(tuple(TONE_CODEWORD_TABLE["codebook"]["basis"]), ORDER_ARRAYS["FWD"])
+
+    def test_generated_objects_validate_against_schemas(self) -> None:
+        validate_named("schedule.schema.json", self.schedule)
+        custody = run_mock(self.schedule)
+        validate_named("runtime_custody.schema.json", custody)
+        manifest = select_on_validation(synthetic_custody("shared_driven"))
+        validate_named("analysis_choice.schema.json", manifest)
+        result = evaluate_sealed(synthetic_custody("shared_driven"), manifest)
+        validate_named("adjudication_result.schema.json", result["adjudication"])
+
     def test_no_sender_epoch_in_sender_off_slots_and_contiguous_step_epoch(self) -> None:
         first_session = self.schedule["sessions"][0]
         off_slots = [slot for slot in first_session["slots"] if not slot["executed"]["drive_on"]]
         self.assertTrue(off_slots)
         self.assertTrue(all(slot["executed"]["sender_epoch_id"] is None for slot in off_slots))
+        self.assertTrue(all(slot["executed"]["codeword_bin_permutation"] is None for slot in off_slots))
+        self.assertTrue(all(slot["executed"]["physical_tone_index"] is None for slot in off_slots))
         step_slots = [slot for slot in first_session["slots"] if slot["packet_id"] == "s0:tone0:step" and slot["executed"]["drive_on"]]
         self.assertEqual(len(step_slots), 4)
         self.assertEqual(len({slot["executed"]["sender_epoch_id"] for slot in step_slots}), 1)

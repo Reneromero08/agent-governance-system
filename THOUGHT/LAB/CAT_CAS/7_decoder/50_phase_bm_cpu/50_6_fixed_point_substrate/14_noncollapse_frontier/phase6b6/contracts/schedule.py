@@ -13,8 +13,10 @@ try:
         NOMINAL_SAMPLES_PER_SLOT,
         ORDER_ARRAYS,
     )
+    from .v2_interface import TONE_CODEWORD_TABLE
 except ImportError:  # pragma: no cover - direct script execution fallback
     from contract import AUTHORITY, NOMINAL_SAMPLES_PER_SLOT, ORDER_ARRAYS  # type: ignore
+    from v2_interface import TONE_CODEWORD_TABLE  # type: ignore
 
 try:
     from .contract import (
@@ -59,10 +61,15 @@ def _base_slot(
     declared_order_family: str | None = None,
     executed_order_family: str | None = None,
     executed_order_position: int | None = None,
+    analysis_tone_index: int | None = None,
     packet_id: str | None = None,
     sender_epoch_id: str | None = None,
 ) -> dict[str, Any]:
     declared_tone = physical_tone_index
+    codeword_source = physical_tone_index if drive_on and physical_tone_index is not None else None
+    codeword_sign = None
+    if codeword_source is not None:
+        codeword_sign = TONE_CODEWORD_TABLE["tones"][codeword_source]["mode_signs"]["basis"]
     return {
         "session_index": session["session_index"],
         "slot_index": slot_index,
@@ -78,17 +85,22 @@ def _base_slot(
             "declared_physical_tone_index": declared_tone,
             "declared_order_family": declared_order_family,
             "declared_order_position": executed_order_position,
+            "analysis_tone_index": analysis_tone_index if analysis_tone_index is not None else declared_tone,
         },
         "executed": {
             "drive_on": drive_on,
             "executed_mode": mode,
-            "amplitude_level": amplitude_level,
-            "phase_action": phase_action,
-            "physical_tone_index": physical_tone_index,
+            "amplitude_level": amplitude_level if drive_on else None,
+            "phase_action": phase_action if drive_on else None,
+            "physical_tone_index": physical_tone_index if drive_on else None,
+            "analysis_tone_index": analysis_tone_index,
+            "tone_execution_order_position": executed_order_position,
             "executed_order_family": executed_order_family,
             "executed_order_position": executed_order_position,
-            "codeword_bin_permutation": list(ORDER_ARRAYS.get(executed_order_family or "FWD", ORDER_ARRAYS["FWD"])),
-            "sign": sign,
+            "codeword_bin_permutation": list(range(12)) if drive_on else None,
+            "codeword_source_index": codeword_source,
+            "codeword_sign": codeword_sign,
+            "sign": sign if drive_on else None,
             "sender_epoch_id": sender_epoch_id,
         },
     }
@@ -126,7 +138,7 @@ def session_schedule(session: dict[str, Any]) -> list[dict[str, Any]]:
     for _ in range(48):
         append("preamble", "SENDER_OFF_IDLE", False, None, None, None, "none")
     for tone in range(TONE_COUNT):
-        append("preamble", "CARRIER_OFF", False, tone, None, None, "none")
+        append("preamble", "CARRIER_OFF", False, tone, None, None, "none", analysis_tone_index=tone)
     for tone in range(TONE_COUNT):
         append(
             "preamble",
@@ -137,6 +149,7 @@ def session_schedule(session: dict[str, Any]) -> list[dict[str, Any]]:
             1,
             "0",
             declared_mode="ANCHOR_DECLARATION",
+            analysis_tone_index=tone,
         )
     for tone in range(TONE_COUNT):
         for sign in (1, -1):
@@ -193,7 +206,7 @@ def session_schedule(session: dict[str, Any]) -> list[dict[str, Any]]:
             sender_epoch_id=f"{packet_prefix}:impulse:drive",
         )
         for off_index in range(7):
-            append("trajectory", "IMPULSE_OFF", False, tone, 2, sign, "0", packet_id=f"{packet_prefix}:impulse")
+            append("trajectory", "IMPULSE_OFF", False, tone, 2, sign, "0", packet_id=f"{packet_prefix}:impulse", analysis_tone_index=tone)
 
         step_epoch = f"{packet_prefix}:step:epoch"
         for _ in range(4):
@@ -209,7 +222,7 @@ def session_schedule(session: dict[str, Any]) -> list[dict[str, Any]]:
                 sender_epoch_id=step_epoch,
             )
         for _ in range(4):
-            append("trajectory", "STEP_OFF", False, tone, 2, sign, "0", packet_id=f"{packet_prefix}:step")
+            append("trajectory", "STEP_OFF", False, tone, 2, sign, "0", packet_id=f"{packet_prefix}:step", analysis_tone_index=tone)
 
         phase_epoch = f"{packet_prefix}:phase_shift:epoch"
         for _ in range(2):
@@ -237,7 +250,7 @@ def session_schedule(session: dict[str, Any]) -> list[dict[str, Any]]:
                 sender_epoch_id=phase_epoch,
             )
         for _ in range(4):
-            append("trajectory", "PHASE_SHIFT_OFF", False, tone, 2, sign, phase_shift, packet_id=f"{packet_prefix}:phase_shift")
+            append("trajectory", "PHASE_SHIFT_OFF", False, tone, 2, sign, phase_shift, packet_id=f"{packet_prefix}:phase_shift", analysis_tone_index=tone)
 
         for _ in range(8):
             append(
@@ -250,6 +263,7 @@ def session_schedule(session: dict[str, Any]) -> list[dict[str, Any]]:
                 "0",
                 declared_mode="CARRIER_OFF_SHAM_DECLARED_DRIVE",
                 packet_id=f"{packet_prefix}:carrier_off_sham",
+                analysis_tone_index=tone,
             )
 
     for _ in range(12):

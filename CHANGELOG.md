@@ -2,6 +2,18 @@
 
 # Changelog
 
+## 2026-06-28: Phase 6B.6 source-review repair
+
+- Phase 6B.6: repair independent source review `4588166286` by binding the
+  qualified V2 tone/codeword interface, adding an explicit sender transition
+  state machine, canonical custody observation loading, per-tone preamble
+  gauges, training-only covariance, executable operator fitting, sealed
+  validation-to-test analysis choice manifests, computed adjudication, strict
+  emitted-object schema validation, six end-to-end synthetic verdict fixtures,
+  and pinned software-entry CI dependency setup. Hardware execution,
+  calibration, acquisition, restoration, target coupling, and Small Wall
+  authority remain false.
+
 ## 2026-06-28: Phase 6B.6 software-entry implementation
 
 - Phase 6B.6: add the software-only scientific entry package with frozen

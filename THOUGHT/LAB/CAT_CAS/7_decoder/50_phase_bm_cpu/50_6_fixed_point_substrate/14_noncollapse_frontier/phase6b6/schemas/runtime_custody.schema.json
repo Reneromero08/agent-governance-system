@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "CAT_CAS_PHASE6B6_MOCK_CAPTURE_CUSTODY_V1",
+  "type": "object",
+  "required": ["schema_id", "authority", "contract_sha256", "schedule_sha256", "session_count", "total_slots", "sessions", "custody_sha256"],
+  "properties": {
+    "schema_id": { "const": "CAT_CAS_PHASE6B6_MOCK_CAPTURE_CUSTODY_V1" },
+    "contract_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "schedule_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "session_count": { "const": 12 },
+    "total_slots": { "const": 10368 },
+    "authority": {
+      "type": "object",
+      "properties": {
+        "hardware_ran": { "const": false },
+        "authorization_artifact_created": { "const": false },
+        "calibration_authorized": { "const": false },
+        "scientific_acquisition_authorized": { "const": false },
+        "restoration_authorized": { "const": false },
+        "target_coupling_authorized": { "const": false },
+        "small_wall_authorized": { "const": false }
+      },
+      "required": ["hardware_ran", "authorization_artifact_created", "calibration_authorized", "scientific_acquisition_authorized", "restoration_authorized", "target_coupling_authorized", "small_wall_authorized"]
+    },
+    "sessions": { "type": "array", "minItems": 12, "maxItems": 12 },
+    "custody_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "additionalProperties": false
+}

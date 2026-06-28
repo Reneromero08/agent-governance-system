@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "CAT_CAS_PHASE6B6_EXPLICIT_SLOT_SCHEDULE_V1",
+  "type": "object",
+  "required": ["schema_id", "contract", "sessions", "session_count", "total_slots", "schedule_sha256"],
+  "properties": {
+    "schema_id": { "const": "CAT_CAS_PHASE6B6_EXPLICIT_SLOT_SCHEDULE_V1" },
+    "session_count": { "const": 12 },
+    "total_slots": { "const": 10368 },
+    "contract": { "type": "object" },
+    "sessions": { "type": "array", "minItems": 12, "maxItems": 12 },
+    "schedule_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "additionalProperties": false
+}

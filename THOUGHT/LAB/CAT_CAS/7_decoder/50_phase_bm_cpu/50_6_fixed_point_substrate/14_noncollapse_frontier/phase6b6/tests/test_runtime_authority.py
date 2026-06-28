@@ -12,6 +12,7 @@ sys.path.insert(0, str(ROOT))
 
 from contracts.schedule import campaign_schedule  # noqa: E402
 from runtime.explicit_slot_runtime import run_mock  # noqa: E402
+from runtime.state_machine import SenderStateMachine, validate_runtime_events  # noqa: E402
 
 
 class RuntimeAuthorityTests(unittest.TestCase):
@@ -53,6 +54,29 @@ class RuntimeAuthorityTests(unittest.TestCase):
         self.assertEqual(first["custody_sha256"], second["custody_sha256"])
         self.assertEqual(first["total_slots"], 10368)
         self.assertFalse(first["authority"]["hardware_ran"])
+        self.assertIn("runtime_events", first["sessions"][0]["slots"][0])
+        validate_runtime_events(first)
+
+    def test_invalid_epoch_replacement_inside_packet_rejected(self) -> None:
+        schedule = campaign_schedule()
+        session = schedule["sessions"][0]
+        step = [slot for slot in session["slots"] if slot["packet_id"] == "s0:tone0:step" and slot["executed"]["drive_on"]]
+        machine = SenderStateMachine()
+        machine.apply(step[0])
+        bad = dict(step[1])
+        bad["executed"] = dict(step[1]["executed"])
+        bad["executed"]["sender_epoch_id"] = "bad-epoch"
+        with self.assertRaises(ValueError):
+            machine.apply(bad)
+
+    def test_hidden_drive_in_sender_off_rejected(self) -> None:
+        schedule = campaign_schedule()
+        off = next(slot for slot in schedule["sessions"][0]["slots"] if not slot["executed"]["drive_on"])
+        bad = dict(off)
+        bad["executed"] = dict(off["executed"])
+        bad["executed"]["sender_epoch_id"] = "hidden"
+        with self.assertRaises(ValueError):
+            SenderStateMachine().apply(bad)
 
     def test_mock_runtime_writes_schedule_and_custody(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
