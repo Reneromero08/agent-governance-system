@@ -1,15 +1,15 @@
 # Phase 6B.6 Entry Package
 
-**Status:** `DESIGN_FROZEN_PENDING_PROJECT_OWNER_ENTRY_DECISION`
+**Status:** `SOFTWARE_ENTRY_APPROVED__IMPLEMENTATION_AUTHORIZED__HARDWARE_BLOCKED`
 **Base main head:** `19afa4a4696c068c45e9bb6fcc03f65b466f0500`
 **Gate R decision:** `APPROVED_FOR_INTEGRATION`
 **Gate R review:** `4585403632`
-**Phase 6B.6 entered:** false
-**Implementation authorized:** false
+**Phase 6B.6 entered:** true
+**Implementation authorized:** true
 **Hardware execution authorized:** false
 **Scientific acquisition authorized:** false
 
-This package freezes the scientific architecture that would govern Phase 6B.6. It does not enter Phase 6B.6, authorize implementation, create an acquisition authority, or permit execution on the Phenom target.
+This package freezes the scientific architecture that governs Phase 6B.6 software implementation. Project-owner approval `APPROVE_PHASE6B6_SOFTWARE_ENTRY_ONLY` was recorded on June 28, 2026 and bound by `PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json`. It authorizes software implementation, software-only qualification, and sealed-snapshot non-hardware target qualification. It does not authorize physical execution on the Phenom target.
 
 The algorithm is dead. Phase 6B.6 does not reduce the carrier to scalar candidate ranking. It preserves measured complex response, executed control, topology, phase, ordered path memory, and explicit projection boundaries. Any accepted operator must act on a declared measured equivalence class without smuggling route, session, target labels, or public candidate identity into state.
 
@@ -30,6 +30,9 @@ Gate R review = 4585403632
 Gate R integration = APPROVED_FOR_INTEGRATION
 plan SHA-256 = 3c1b8d3da4d24e97a4395747dc8f587f60d21ef6d789bd27da8cd95908b7ebb3
 source-bundle SHA-256 = bec71b2369587e68a88e9e2b5cb47837a07d5cdef6f13990417e0c0928e85f2f
+Phase 6B.6 architecture review = 4588082595
+Phase 6B.6 software entry = APPROVED
+software entry approval commit = 44cd771a06698436c49034cfd1b16bb76cdbf6ef
 ```
 
 V2 remains a sealed engineering reference. Phase 6B.6 must not rewrite its source, contracts, evidence, qualification claims, or authority state.
@@ -74,6 +77,7 @@ SHARED_PREDICTIVE_OPERATOR_SUPPORTED
 ROUTE_LOCAL_PREDICTIVE_OPERATOR_ONLY
 DRIVEN_RELATIONAL_TRANSPORT_ONLY
 PERSISTENT_STATE_CANDIDATE
+CONFOUNDED_NO_OPERATOR_CLAIM
 INSTRUMENTATION_BOUNDARY_REJECTED
 ```
 
@@ -181,7 +185,7 @@ v4s5 cores = [4, 5]
 v2s3 cores = [2, 3]
 read_hz = 8000
 slot_s = 0.5
-samples_per_slot = 4000
+nominal_samples_per_slot = 4000
 pin_khz = 1600000
 temperature_veto_c = 68.0
 automatic_retry = false
@@ -269,7 +273,7 @@ RND2 = [8, 2, 11, 4, 0, 7, 3, 10, 5, 1, 9, 6]
 
 The fifth family is `ORDER_LABEL_SHAM`. On even reboot blocks it physically executes `RND1` while declaring `RND2`. On odd reboot blocks it physically executes `RND2` while declaring `RND1`. Both declared and executed orders remain serialized.
 
-Each session contains all five order families. Their block sequence is counterbalanced by deterministic cyclic rotation using reboot-block index and route index. The sixth occurrence uses the mirrored sequence so chronology does not privilege one family.
+Within-session order-family sequencing is defined by the binding entry review addendum and must be deterministic. Runtime randomization is prohibited.
 
 Physical-tone-indexed and execution-order-indexed views must both be reported. Path-memory interpretation is forbidden until FWD, REV, RND1, RND2, and order-label sham are complete and accepted.
 
@@ -292,18 +296,21 @@ Across twelve sessions:
 ```text
 total slots = 10368
 active acquisition time = 86.4 minutes, excluding reboot and setup overhead
-raw sample count = 41472000 before rejected-slot accounting
+nominal_campaign_sample_count = 41472000
 ```
+
+Actual sample counts are empirical and must pass the frozen capture-quality contract. No padding, interpolation, synthetic replacement, or silent repetition is permitted.
 
 ### 8.1 Preamble, 96 slots
 
 ```text
 48 sender-off idle slots
-24 carrier-off or time-matched sham slots
+12 carrier-off slots
+12 time-matched declaration-sham slots
 24 amplitude-level-2 anchors, one positive and one negative sign for each tone
 ```
 
-Only the preamble may estimate `g_s`. The final 24 anchors are not part of model evaluation.
+Only the preamble may estimate `g_s`. Carrier-off and declaration-sham rows remain separate analysis strata. The 24 anchors are not part of model evaluation.
 
 ### 8.2 Prepared-state and order stage, 360 slots
 
@@ -326,12 +333,12 @@ IMPULSE:
   7 physically sender-off slots
 
 STEP:
-  4 driven slots at amplitude level 2
+  4 contiguous driven slots at amplitude level 2 on one absolute session timeline
   4 physically sender-off slots
 
 PHASE_SHIFT:
-  2 driven slots at phase 0
-  2 driven slots at phase +pi/2 or -pi/2
+  2 contiguous driven slots at phase 0
+  2 contiguous driven slots at phase +pi/2 or -pi/2 on the same sender epoch
   4 physically sender-off slots
 
 CARRIER_OFF_SHAM:
@@ -561,9 +568,9 @@ No outcome in this matrix authorizes restoration or target coupling.
 
 ---
 
-## 15. Implementation package required after entry approval
+## 15. Authorized software implementation package
 
-Only after explicit project-owner Phase 6B.6 entry approval may an implementation agent create:
+The project owner has approved software entry. An implementation agent may now create:
 
 ```text
 phase6b6 scientific contract and schema
@@ -609,13 +616,16 @@ Only then may a separate authority record be proposed for physical acquisition.
 ```json
 {
   "schema_id": "CAT_CAS_PHASE6B6_ENTRY_DECISION_V1",
-  "design_status": "FROZEN_PENDING_PROJECT_OWNER_ENTRY_DECISION",
+  "design_status": "SOFTWARE_ENTRY_APPROVED__IMPLEMENTATION_AUTHORIZED__HARDWARE_BLOCKED",
   "base_main_head": "19afa4a4696c068c45e9bb6fcc03f65b466f0500",
   "gate_r_review": 4585403632,
+  "architecture_review": 4588082595,
   "gate_r_integration_approved": true,
-  "phase6b6_entry_approved": false,
-  "phase6b6_entered": false,
-  "implementation_authorized": false,
+  "phase6b6_entry_approved": true,
+  "phase6b6_entered": true,
+  "implementation_authorized": true,
+  "software_qualification_authorized": true,
+  "non_hardware_target_qualification_authorized": true,
   "hardware_ran": false,
   "authorization_artifact_created": false,
   "calibration_authorized": false,
@@ -623,16 +633,8 @@ Only then may a separate authority record be proposed for physical acquisition.
   "restoration_authorized": false,
   "target_coupling_authorized": false,
   "small_wall_authorized": false,
-  "next_decision": "PROJECT_OWNER_PHASE6B6_ENTRY_DECISION"
+  "next_boundary": "INDEPENDENT_SOFTWARE_IMPLEMENTATION_AND_EVIDENCE_REVIEW_BEFORE_ACQUISITION_AUTHORITY"
 }
 ```
 
-Project-owner options:
-
-```text
-APPROVE_PHASE6B6_SOFTWARE_ENTRY_ONLY
-REJECT_AND_REVISE_PHASE6B6_ENTRY_DESIGN
-HOLD_PHASE6B6
-```
-
-`APPROVE_PHASE6B6_SOFTWARE_ENTRY_ONLY` would authorize implementation and software qualification of this frozen design. It would not authorize hardware execution or scientific acquisition.
+The next work is software implementation and software-only qualification of the frozen effective design. No physical execution is authorized.
