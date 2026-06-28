@@ -2,6 +2,16 @@
 
 # Changelog
 
+## 2026-06-28: Phase 6B.6 software-entry implementation
+
+- Phase 6B.6: add the software-only scientific entry package with frozen
+  contract constants, deterministic explicit-slot schedule generation,
+  fail-closed mock runtime, partitioned state/operator/adjudication helpers,
+  schemas, focused regressions, and a software-entry CI workflow. No final
+  campaign contracts, target qualification evidence, hardware execution,
+  calibration, scientific acquisition, restoration, target coupling, or
+  Small Wall authority is added.
+
 ## 2026-06-27: Phase 6 V2 validation-only raw-audit boundary
 
 - Phase 6 V2: reject validation-only run artifacts before raw-session

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "CAT_CAS_PHASE6B6_SCIENTIFIC_CONTRACT_V1",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "reboot_blocks",
+    "routes",
+    "splits",
+    "session_count",
+    "slots_per_session",
+    "total_slots",
+    "nominal_samples_per_slot",
+    "authority",
+    "measured_response_fields",
+    "executed_control_fields",
+    "declaration_fields",
+    "context_fields"
+  ],
+  "properties": {
+    "schema_id": { "const": "CAT_CAS_PHASE6B6_SCIENTIFIC_CONTRACT_V1" },
+    "session_count": { "const": 12 },
+    "slots_per_session": { "const": 864 },
+    "total_slots": { "const": 10368 },
+    "nominal_samples_per_slot": { "const": 4000 },
+    "authority": {
+      "type": "object",
+      "required": [
+        "implementation_authorized",
+        "hardware_ran",
+        "authorization_artifact_created",
+        "calibration_authorized",
+        "scientific_acquisition_authorized",
+        "restoration_authorized",
+        "target_coupling_authorized",
+        "small_wall_authorized"
+      ]
+    }
+  },
+  "additionalProperties": true
+}
