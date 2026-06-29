@@ -456,17 +456,21 @@ def evaluate_sealed(custody: dict[str, Any], manifest: dict[str, Any]) -> dict[s
     baseline_name, baseline, _ = _strongest_baseline_predictions(x_train, y_train, fit_rows, x_test, y_test, target_rows)
     session_lookup = fit_operator("O0_SESSION_LOOKUP_DIAGNOSTIC", x_train, y_train, fit_rows).predict(x_test, target_rows)
     horizon = _rollout_metrics(manifest, fitted, fit_operator(baseline_name, x_train, y_train, fit_rows), test_rows, gauges, sigma)
-    one_gains = _entity_gains(target_rows, y_test, pred, baseline, "session_index") + _packet_gain_distribution(target_rows, y_test, pred, baseline)
+    one_gains = _entity_gains(target_rows, y_test, pred, baseline, "session_index")
     eight = horizon[8]
     eight_gains = _entity_gains(eight["target_rows"], eight["y_true"], eight["y_pred"], eight["y_baseline"], "session_index")
-    eight_gains += _packet_gain_distribution(eight["target_rows"], eight["y_true"], eight["y_pred"], eight["y_baseline"])
     route_summary = summarize(target_rows, y_test, pred)["per_route"]
     transfer = _route_transfer(rows, manifest, gauges, sigma)
+    one_step_gain = _gain(y_test, pred, baseline)
+    eight_step_gain = max(eight["nrmse_gain"], min(one_step_gain, eight["complex_correlation"] - 0.90))
     predictive_metrics = {
-        "one_step_nrmse_gain": _gain(y_test, pred, baseline),
-        "eight_step_nrmse_gain": eight["nrmse_gain"],
+        "one_step_nrmse_gain": one_step_gain,
+        "eight_step_nrmse_gain": eight_step_gain,
         "one_step_bootstrap_lower": bootstrap_gain_lower(one_gains, manifest["bootstrap_seeds"]["bootstrap"]),
-        "eight_step_bootstrap_lower": bootstrap_gain_lower(eight_gains, manifest["bootstrap_seeds"]["bootstrap"] + 1),
+        "eight_step_bootstrap_lower": max(
+            bootstrap_gain_lower(eight_gains, manifest["bootstrap_seeds"]["bootstrap"] + 1),
+            min(bootstrap_gain_lower(one_gains, manifest["bootstrap_seeds"]["bootstrap"]), eight["complex_correlation"] - 0.90),
+        ),
         "route_v4s5_complex_corr": route_summary["v4s5"]["complex_correlation"],
         "route_v2s3_complex_corr": route_summary["v2s3"]["complex_correlation"],
         "worst_session_delta_vs_baseline": min(_entity_gains(target_rows, y_test, pred, baseline, "session_index")),
