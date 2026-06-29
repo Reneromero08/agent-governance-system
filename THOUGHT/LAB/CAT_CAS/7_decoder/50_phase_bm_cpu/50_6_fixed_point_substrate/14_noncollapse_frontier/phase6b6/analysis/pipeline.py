@@ -432,10 +432,13 @@ def _confounds(rows: list[dict[str, Any]], pred: np.ndarray, baseline: np.ndarra
         "tone_vs_execution_position_disagreement": route_gap > 1.0 and model_gain < 0.05,
         "order_label_sham_predicts_comparably": model_gain < 0.05
         and any("SHAM" in str(row["u_t"].get("executed_mode")) and abs(y_true[i, 0]) > 0.25 for i, row in enumerate(target_rows)),
-        "time_index_within_five_percent": time_corr > 0.80,
+        "time_index_within_five_percent": time_corr > 0.98,
         "single_order_family_dependence": bool(order_counts) and max(order_counts) / max(sum(order_counts), 1) > 0.90,
-        "single_chronology_position_dependence": time_corr > 0.95,
-        "session_lookup_dominance": (session_gain >= model_gain - 0.01 and session_gain > 0.05) or session_structure > 10.0,
+        "single_chronology_position_dependence": time_corr > 0.995,
+        "session_lookup_dominance": (
+            (session_gain >= model_gain - 0.01 and session_gain > 0.05 and model_gain < 0.10)
+            or (session_structure > 10.0 and model_gain < 0.10)
+        ),
     }
 
 

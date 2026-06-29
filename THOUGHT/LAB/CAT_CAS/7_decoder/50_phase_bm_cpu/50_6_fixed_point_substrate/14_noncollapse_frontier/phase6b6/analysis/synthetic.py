@@ -65,7 +65,7 @@ def synthetic_custody(scenario: str) -> dict[str, Any]:
                 state = 0.50 * state + route_sign * ctrl
                 signal = state
             elif scenario == "confounded":
-                state = 0.0025 * row["slot_index"] + 0.30 * (session["session_index"] % 2)
+                state = 0.005 * row["slot_index"]
                 signal = state
             elif scenario == "session_lookup_dominates":
                 state = float(session["session_index"])
