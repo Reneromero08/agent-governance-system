@@ -8,7 +8,7 @@ from typing import Any, Iterable
 import numpy as np
 
 from analysis.adjudication import derive_adjudication
-from analysis.metrics import bootstrap_gain_lower, complex_corr, nrmse, packet_groups, summarize
+from analysis.metrics import bootstrap_gain_lower, complex_corr, hierarchical_bootstrap_gain, nrmse, packet_groups, summarize
 from analysis.observations import assert_test_sealed, flatten_custody, split_rows
 from analysis.operators import (
     OPERATOR_LADDER,
@@ -16,7 +16,7 @@ from analysis.operators import (
     deterministic_seed,
     fit_operator,
 )
-from analysis.state import estimate_session_gauges, state_vector, training_global_covariance
+from analysis.state import estimate_session_gauges, executed_control_vector, state_vector, symmetric_inverse_sqrt, training_global_covariance
 from contracts.contract import DELAY_CANDIDATES, HORIZONS, O4_FIXED_LIFTS, REGULARIZATION_LADDER, digest
 
 
@@ -145,6 +145,14 @@ def create_analysis_choice_manifest(contract_sha256: str, schedule_sha256: str, 
         "regularization": choices["regularization"],
         "o4_lift": choices.get("o4_lift"),
         "validation_score": choices["validation_score"],
+        "selection_stop_gate": choices["selection_stop_gate"],
+        "evaluated_candidate": {
+            "state_level": choices["state_level"],
+            "delay_length": choices.get("delay_length"),
+            "operator_class": choices["operator_class"],
+            "regularization": choices["regularization"],
+            "validation_score": choices["validation_score"],
+        },
         "selection_rule": "S0_THEN_S1_THEN_S2_AND_O1_THEN_O2_THEN_O3_THEN_O4_SIMPLEST_WITHIN_2_PERCENT",
         "thresholds": {
             "one_step_nrmse_gain": 0.10,
@@ -177,13 +185,22 @@ def _best_operator_for_state(
 ) -> dict[str, Any]:
     x_train, y_train, fit_rows, _ = _dataset(train_rows, state_level, delay, gauges, sigma)
     x_val, y_val, val_target_rows, _ = _dataset(validation_rows, state_level, delay, gauges, sigma)
-    candidates: list[dict[str, Any]] = []
+    baseline_name, baseline_pred, _ = _strongest_baseline_predictions(x_train, y_train, fit_rows, x_val, y_val, val_target_rows)
+    baseline_fit = fit_operator(baseline_name, x_train, y_train, fit_rows)
+    best_candidate: dict[str, Any] | None = None
     for operator_class in SCIENCE_OPERATORS:
         regs = REGULARIZATION_LADDER if operator_class == "O4_FIXED_PHASE_NATIVE_LIFT_REGULARIZED_LINEAR" else (0.0,)
+        operator_candidates: list[dict[str, Any]] = []
         for reg in regs:
             fitted = fit_operator(operator_class, x_train, y_train, fit_rows, reg)
-            score = nrmse(y_val, fitted.predict(x_val, val_target_rows))
-            candidates.append(
+            pred = fitted.predict(x_val, val_target_rows)
+            score = nrmse(y_val, pred)
+            gain = _gain(y_val, pred, baseline_pred)
+            temp_manifest = {"state_level": state_level, "delay_length": delay}
+            validation_horizons = _rollout_metrics(temp_manifest, fitted, baseline_fit, validation_rows, gauges, sigma)
+            validation_h8_gain = validation_horizons[8]["nrmse_gain"]
+            validation_sufficiency_pass = gain >= 0.10 and validation_h8_gain >= 0.05
+            operator_candidates.append(
                 {
                     "state_level": state_level,
                     "delay_length": delay,
@@ -191,15 +208,21 @@ def _best_operator_for_state(
                     "regularization": reg,
                     "o4_lift": O4_FIXED_LIFTS if operator_class == "O4_FIXED_PHASE_NATIVE_LIFT_REGULARIZED_LINEAR" else None,
                     "validation_score": score,
+                    "validation_gain": gain,
+                    "validation_h8_gain": validation_h8_gain,
+                    "validation_sufficiency_pass": validation_sufficiency_pass,
+                    "selection_stop_gate": f"{state_level}:{operator_class}:validation_gain>=0.10_and_validation_h8_gain>=0.05",
                 }
             )
-    best = min(candidates, key=lambda item: item["validation_score"])
-    qualifying = [item for item in candidates if item["validation_score"] <= best["validation_score"] * 1.02]
-    for operator_class in SCIENCE_OPERATORS:
-        family = [item for item in qualifying if item["operator_class"] == operator_class]
-        if family:
-            return min(family, key=lambda item: item["regularization"])
-    raise AssertionError("unreachable")
+        selected = min(operator_candidates, key=lambda item: item["validation_score"])
+        if best_candidate is None or selected["validation_score"] < best_candidate["validation_score"]:
+            best_candidate = selected
+        if selected["validation_sufficiency_pass"]:
+            return selected
+    if best_candidate is None:
+        raise AssertionError("empty operator candidate set")
+    best_candidate["selection_stop_gate"] = f"{state_level}:exhausted_operator_ladder"
+    return best_candidate
 
 
 def select_on_validation(custody: dict[str, Any]) -> dict[str, Any]:
@@ -209,21 +232,21 @@ def select_on_validation(custody: dict[str, Any]) -> dict[str, Any]:
     validation_rows = split_rows(rows, "validation")
     gauges = estimate_session_gauges(rows)
     sigma = training_global_covariance([row for row in train_rows if row["stage"] == "preamble"])
-    state_winners = []
-    for state_level in ("S0", "S1", "S2"):
-        candidates = [(level, delay) for level, delay in _state_candidates() if level == state_level]
-        scored = [_best_operator_for_state(train_rows, validation_rows, level, delay, gauges, sigma) for level, delay in candidates]
-        best = min(scored, key=lambda item: item["validation_score"])
-        state_winners.append(best)
-        if best["validation_score"] <= 1e-4:
+    selected = None
+    for state_level in ("S0", "S1"):
+        candidate = _best_operator_for_state(train_rows, validation_rows, state_level, None, gauges, sigma)
+        selected = candidate
+        if candidate["validation_sufficiency_pass"]:
             break
-    selected = state_winners[-1]
-    if selected["state_level"] == "S2":
-        s2 = [item for item in state_winners if item["state_level"] == "S2"]
-        best_s2 = min(s2, key=lambda item: item["validation_score"])
+    if selected is None or not selected["validation_sufficiency_pass"]:
+        s2_candidates = [_best_operator_for_state(train_rows, validation_rows, "S2", delay, gauges, sigma) for delay in DELAY_CANDIDATES]
+        best_s2 = min(s2_candidates, key=lambda item: item["validation_score"])
         selected = min(
-            [item for item in s2 if item["validation_score"] <= best_s2["validation_score"] * 1.02],
+            [item for item in s2_candidates if item["validation_score"] <= best_s2["validation_score"] * 1.02],
             key=lambda item: item["delay_length"] or 0,
+        )
+        selected["selection_stop_gate"] = (
+            selected["selection_stop_gate"] if selected["validation_sufficiency_pass"] else "S2:exhausted_state_and_operator_ladders"
         )
     return create_analysis_choice_manifest(custody["contract_sha256"], custody["schedule_sha256"], selected)
 
@@ -284,10 +307,35 @@ def _rollout_metrics(
             tone = row["declared"].get("analysis_tone_index") or 0
         z = complex(float(pred_state[0]), float(pred_state[1]))
         centered = z - gauge.complex_anchor_alpha[int(tone)]
-        cov = np.array(sigma, dtype=float)
-        inv_sqrt = 1.0 / max(float(np.sqrt(np.trace(cov) / 2.0)), 1e-9)
-        zn = centered * inv_sqrt
-        return np.array([zn.real, zn.imag, float(pred_state[2])], dtype=float)
+        zn = symmetric_inverse_sqrt(sigma) @ np.array([centered.real, centered.imag], dtype=float)
+        return np.array([float(zn[0]), float(zn[1]), float(pred_state[2])], dtype=float)
+
+    def next_x(
+        group: list[dict[str, Any]],
+        start_index: int,
+        step: int,
+        predicted_states: list[np.ndarray],
+        gauge: Any,
+    ) -> np.ndarray:
+        state_level = manifest["state_level"]
+        if state_level == "S0":
+            return predicted_states[-1].reshape(1, -1)
+        if state_level == "S1":
+            return normalized_prediction(group[start_index + step + 1], gauge, predicted_states[-1]).reshape(1, -1)
+        delay = manifest.get("delay_length") or 2
+        history: list[np.ndarray] = []
+        for offset in range(delay):
+            absolute_index = start_index + step + 1 - offset
+            predicted_offset = step - offset
+            if predicted_offset >= 0:
+                history.append(normalized_prediction(group[absolute_index], gauge, predicted_states[predicted_offset]))
+            else:
+                history.append(state_vector(group, absolute_index, "S1", gauge, sigma)[:3])
+        controls = []
+        for offset in range(delay - 1):
+            absolute_index = start_index + step - offset
+            controls.append(executed_control_vector(group[absolute_index]))
+        return np.concatenate(history + controls).reshape(1, -1)
 
     for horizon in HORIZONS:
         y_true = []
@@ -300,36 +348,20 @@ def _rollout_metrics(
                     continue
                 gauge = gauges[group[i]["session_index"]]
                 x = state_vector(group, i, manifest["state_level"], gauge, sigma, manifest.get("delay_length")).reshape(1, -1)
+                x_base = x.copy()
                 pred_state = None
                 base_state = None
-                current_rows = [group[i + step] for step in range(horizon)]
+                predicted_states: list[np.ndarray] = []
+                baseline_states: list[np.ndarray] = []
                 for step in range(horizon):
                     target = group[i + step + 1]
                     pred_state = fitted.predict(x, [target])[0]
-                    base_state = baseline_fit.predict(x, [target])[0]
+                    base_state = baseline_fit.predict(x_base, [target])[0]
+                    predicted_states.append(pred_state)
+                    baseline_states.append(base_state)
                     if step < horizon - 1:
-                        if manifest["state_level"] == "S0":
-                            x = pred_state.reshape(1, -1)
-                        elif manifest["state_level"] == "S1":
-                            x = pred_state.reshape(1, -1)
-                        else:
-                            history = [pred_state]
-                            delay = manifest.get("delay_length") or 2
-                            history = [normalized_prediction(target, gauge, pred_state)]
-                            for j in range(1, delay):
-                                prior_index = i + step + 1 - j
-                                if prior_index < 0:
-                                    break
-                                history.append(state_vector(group, prior_index, "S0", gauge, sigma)[:3])
-                            while len(history) < delay:
-                                history.append(history[-1])
-                            controls = []
-                            for j in range(delay - 1):
-                                row = current_rows[max(0, step - j)]
-                                from analysis.state import executed_control_vector
-
-                                controls.append(executed_control_vector(row))
-                            x = np.concatenate(history[:delay] + controls[: delay - 1]).reshape(1, -1)
+                        x = next_x(group, i, step, predicted_states, gauge)
+                        x_base = next_x(group, i, step, baseline_states, gauge)
                 if pred_state is None or base_state is None:
                     continue
                 y_true.append(state_vector(group, i + horizon, "S0", gauge, sigma)[:3])
@@ -358,65 +390,119 @@ def _route_transfer(rows: list[dict[str, Any]], manifest: dict[str, Any], gauges
     test_rows = split_rows(rows, "test")
     for source, target in (("v4s5", "v2s3"), ("v2s3", "v4s5")):
         source_train = [row for row in train_rows if row["route"] == source]
+        target_train = [row for row in train_rows if row["route"] == target]
         target_test = [row for row in test_rows if row["route"] == target]
         x_train, y_train, fit_rows, _ = _dataset(source_train, manifest["state_level"], manifest.get("delay_length"), gauges, sigma)
+        x_base_train, y_base_train, base_fit_rows, _ = _dataset(target_train, manifest["state_level"], manifest.get("delay_length"), gauges, sigma)
         x_test, y_test, target_rows, _ = _dataset(target_test, manifest["state_level"], manifest.get("delay_length"), gauges, sigma)
         fitted = fit_operator(manifest["operator_class"], x_train, y_train, fit_rows, manifest["regularization"])
         pred = fitted.predict(x_test, target_rows)
-        _, baseline, _ = _strongest_baseline_predictions(x_train, y_train, fit_rows, x_test, y_test, target_rows)
-        gains = _packet_gain_distribution(target_rows, y_test, pred, baseline)
-        source_mean = float(np.mean(y_train[:, 0]))
-        target_mean = float(np.mean(y_test[:, 0]))
-        if source_mean * target_mean < 0.0:
-            gains = [-abs(gain) for gain in gains]
+        baseline_name, baseline, _ = _strongest_baseline_predictions(x_base_train, y_base_train, base_fit_rows, x_test, y_test, target_rows)
+        bootstrap = hierarchical_bootstrap_gain(target_rows, y_test, pred, baseline, manifest["bootstrap_seeds"]["route_transfer"])
         result[f"{source}_to_{target}"] = {
-            "gain_distribution": gains,
-            "lower_gain": bootstrap_gain_lower(gains, manifest["bootstrap_seeds"]["route_transfer"]),
+            "baseline_operator": baseline_name,
+            "gain_distribution": _packet_gain_distribution(target_rows, y_test, pred, baseline),
+            "bootstrap": bootstrap,
+            "lower_gain": bootstrap["lower_95_bound"],
             "complex_correlation": complex_corr(y_test, pred),
         }
     return result
 
 
 def _drive_off(rows: list[dict[str, Any]], manifest: dict[str, Any], pred: np.ndarray, base: np.ndarray, y_true: np.ndarray, target_rows: list[dict[str, Any]]) -> dict[str, Any]:
-    off_distances = []
-    sham_distances = []
-    packet_passes = []
+    sham_values = [
+        float(np.hypot(row["r_t"]["lockin_I"], row["r_t"]["lockin_Q"]))
+        for row in rows
+        if row["stage"] == "trajectory"
+        and (row["u_t"]["executed_mode"] in ("CARRIER_OFF_SHAM",) or "SHAM" in str(row["u_t"]["executed_mode"]))
+    ]
     raw_test_rows = [row for row in rows if row["split"] == "test" and row["stage"] == "trajectory"]
     raw_groups = {}
     for row in raw_test_rows:
         raw_groups.setdefault((row["session_index"], row.get("packet_id")), []).append(row)
+    position_values: dict[int, list[float]] = {}
     for packet in raw_groups.values():
         packet = sorted(packet, key=lambda row: row["slot_index"])
         if not packet:
             continue
-        first_drive = next((i for i, row in enumerate(packet) if row["u_t"]["drive_on"]), None)
-        if first_drive is None:
+        driven = [i for i, row in enumerate(packet) if row["u_t"]["drive_on"]]
+        if not driven:
             continue
-        off_rows = [row for row in packet[first_drive + 1 :] if not row["u_t"]["drive_on"]][:3]
-        if len(off_rows) >= 3:
-            off = [float(np.hypot(row["r_t"]["lockin_I"], row["r_t"]["lockin_Q"])) for row in off_rows]
-            off_distances.extend(off)
-            packet_passes.append(min(off) > 0.05)
-        if any("SHAM" in row["u_t"]["executed_mode"] for row in packet):
-            sham_distances.extend(float(np.hypot(row["r_t"]["lockin_I"], row["r_t"]["lockin_Q"])) for row in packet)
-    if off_distances:
-        sham_upper = max(sham_distances) if sham_distances else 0.0
-        distance_gain = (float(np.mean(off_distances)) - sham_upper) / max(float(np.mean(off_distances)), 1e-9)
-        gains = [distance_gain for _ in off_distances]
+        final_drive = max(driven)
+        off_rows = [row for row in packet[final_drive + 1 :] if not row["u_t"]["drive_on"]]
+        for offset, row in enumerate(off_rows[:7], start=1):
+            position_values.setdefault(offset, []).append(float(np.hypot(row["r_t"]["lockin_I"], row["r_t"]["lockin_Q"])))
+
+    def off_transition_dataset(source_rows: list[dict[str, Any]]) -> tuple[np.ndarray, np.ndarray, list[dict[str, Any]]]:
+        x_parts = []
+        y_parts = []
+        out_rows = []
+        for group in _grouped(source_rows):
+            for i in range(len(group) - 1):
+                if not group[i]["u_t"]["drive_on"] and not group[i + 1]["u_t"]["drive_on"]:
+                    x_parts.append(np.array([[group[i]["r_t"]["lockin_I"], group[i]["r_t"]["lockin_Q"], group[i]["r_t"]["ring_osc_period"]]], dtype=float)[0])
+                    y_parts.append(np.array([[group[i + 1]["r_t"]["lockin_I"], group[i + 1]["r_t"]["lockin_Q"], group[i + 1]["r_t"]["ring_osc_period"]]], dtype=float)[0])
+                    out_rows.append(group[i + 1])
+        if not x_parts:
+            return np.empty((0, 3)), np.empty((0, 3)), []
+        return np.vstack(x_parts), np.vstack(y_parts), out_rows
+
+    train_x, train_y, train_decay_rows = off_transition_dataset([row for row in rows if row["split"] in ("train", "validation")])
+    test_x, test_y, test_decay_rows = off_transition_dataset(raw_test_rows)
+    if len(train_x) and len(test_x):
+        decay = fit_operator("O1_SHARED_COMPLEX_AFFINE", train_x, train_y, train_decay_rows)
+        decay_pred = decay.predict(test_x, test_decay_rows)
+        baseline_scores = []
+        for baseline_name in ("O0_TRAINING_MEAN", "O0_RETURN_TO_BASELINE", "O0_LAST_VALUE"):
+            baseline_fit = fit_operator(baseline_name, train_x, train_y, train_decay_rows)
+            baseline_pred = baseline_fit.predict(test_x, test_decay_rows)
+            baseline_scores.append((baseline_name, baseline_pred, nrmse(test_y, baseline_pred)))
+        baseline_name, decay_base, _ = min(baseline_scores, key=lambda item: item[2])
+        decay_bootstrap = hierarchical_bootstrap_gain(test_decay_rows, test_y, decay_pred, decay_base, manifest["bootstrap_seeds"]["bootstrap"] + 9)
+        decay_gain = _gain(test_y, decay_pred, decay_base)
     else:
-        gains = []
+        baseline_name = "NO_ZERO_INPUT_TEST_ROWS"
+        decay_bootstrap = {
+            "session_draws": 0,
+            "nested_packet_draws": {},
+            "bootstrap_iterations": 200,
+            "gain_distribution": [],
+            "lower_95_bound": 0.0,
+        }
+        decay_gain = 0.0
+    sham_upper = float(np.quantile(sham_values, 0.975)) if sham_values else 0.0
+    consecutive = 0
+    for offset in sorted(position_values):
+        lower = float(np.quantile(position_values[offset], 0.025)) if position_values[offset] else 0.0
+        if lower > sham_upper:
+            consecutive += 1
+            if consecutive >= 3:
+                break
+        else:
+            consecutive = 0
     return {
-        "three_consecutive_lower_above_sham": bool(packet_passes) and sum(packet_passes) >= max(3, len(packet_passes) // 4),
-        "post_drive_distance_lower": min(off_distances) if off_distances else 0.0,
-        "sham_upper": max(sham_distances) if sham_distances else 0.0,
-        "zero_input_decay_gain": float(np.mean(gains)) if gains else 0.0,
-        "zero_input_decay_gain_lower": bootstrap_gain_lower(gains, manifest["bootstrap_seeds"]["bootstrap"] + 9),
+        "three_consecutive_lower_above_sham": consecutive >= 3,
+        "post_drive_position_lowers": {
+            str(offset): float(np.quantile(values, 0.025)) for offset, values in sorted(position_values.items()) if values
+        },
+        "sham_upper": sham_upper,
+        "zero_input_decay_operator": "O1_SHARED_COMPLEX_AFFINE_ON_SENDER_OFF_TRANSITIONS",
+        "zero_input_decay_baseline": baseline_name,
+        "zero_input_decay_gain": decay_gain,
+        "zero_input_decay_gain_lower": decay_bootstrap["lower_95_bound"],
+        "zero_input_decay_bootstrap": decay_bootstrap,
     }
 
 
-def _confounds(rows: list[dict[str, Any]], pred: np.ndarray, baseline: np.ndarray, session_lookup: np.ndarray, y_true: np.ndarray, target_rows: list[dict[str, Any]]) -> dict[str, bool]:
+def _confound(flag: bool, metric: float, threshold: float, comparison: str) -> dict[str, Any]:
+    return {"flag": bool(flag), "metric": float(metric), "threshold": float(threshold), "comparison": comparison}
+
+
+def _confounds(rows: list[dict[str, Any]], pred: np.ndarray, baseline: np.ndarray, session_lookup: np.ndarray, y_true: np.ndarray, target_rows: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
     model_gain = _gain(y_true, pred, baseline)
-    session_gain = _gain(y_true, session_lookup, baseline)
+    unknown_sessions = sorted({row["session_index"] for row in target_rows if np.allclose(session_lookup[target_rows.index(row)], np.mean(baseline, axis=0))})
+    session_lookup_valid = not unknown_sessions
+    session_gain = _gain(y_true, session_lookup, baseline) if session_lookup_valid else -1.0
     time_corr = abs(np.corrcoef([row["slot_index"] for row in target_rows], y_true[:, 0])[0, 1]) if len(target_rows) > 2 else 0.0
     route_means = {route: float(np.mean([y_true[i, 0] for i, row in enumerate(target_rows) if row["route"] == route])) for route in sorted({row["route"] for row in target_rows})}
     route_gap = max(route_means.values()) - min(route_means.values()) if len(route_means) > 1 else 0.0
@@ -428,16 +514,33 @@ def _confounds(rows: list[dict[str, Any]], pred: np.ndarray, baseline: np.ndarra
         for session in sorted({row["session_index"] for row in target_rows})
     ]
     session_structure = (float(np.std(session_means)) / max(float(np.mean(within_session)), 1e-9)) if session_means else 0.0
+    physical_tone_corr = abs(np.corrcoef([row["u_t"].get("physical_tone_index") or 0 for row in target_rows], y_true[:, 0])[0, 1]) if len(target_rows) > 2 else 0.0
+    execution_position_corr = abs(np.corrcoef([row["u_t"].get("executed_order_position") or 0 for row in target_rows], y_true[:, 0])[0, 1]) if len(target_rows) > 2 else 0.0
+    sham_strength = max(
+        [
+            abs(float(y_true[i, 0]))
+            for i, row in enumerate(target_rows)
+            if "SHAM" in str(row["u_t"].get("executed_mode"))
+        ]
+        or [0.0]
+    )
+    held_out_family_spread = (max(order_counts) / max(sum(order_counts), 1)) if order_counts else 0.0
     return {
-        "tone_vs_execution_position_disagreement": route_gap > 1.0 and model_gain < 0.05,
-        "order_label_sham_predicts_comparably": model_gain < 0.05
-        and any("SHAM" in str(row["u_t"].get("executed_mode")) and abs(y_true[i, 0]) > 0.25 for i, row in enumerate(target_rows)),
-        "time_index_within_five_percent": time_corr > 0.98,
-        "single_order_family_dependence": bool(order_counts) and max(order_counts) / max(sum(order_counts), 1) > 0.90,
-        "single_chronology_position_dependence": time_corr > 0.995,
-        "session_lookup_dominance": (
-            (session_gain >= model_gain - 0.01 and session_gain > 0.05 and model_gain < 0.10)
-            or (session_structure > 10.0 and model_gain < 0.10)
+        "physical_tone_indexed_performance": _confound(physical_tone_corr > 0.98 and model_gain < 0.05, physical_tone_corr, 0.98, "corr>threshold and model_gain<0.05"),
+        "execution_position_indexed_performance": _confound(execution_position_corr > 0.98 and model_gain < 0.05, execution_position_corr, 0.98, "corr>threshold and model_gain<0.05"),
+        "tone_vs_execution_position_disagreement": _confound(route_gap > 1.0 and model_gain < 0.05, route_gap, 1.0, "route_gap>threshold and model_gain<0.05"),
+        "order_label_sham_predicts_comparably": _confound(model_gain < 0.05 and sham_strength > 0.25, sham_strength, 0.25, "sham_strength>threshold and model_gain<0.05"),
+        "time_index_within_five_percent": _confound(time_corr > 0.98, time_corr, 0.98, "corr>threshold"),
+        "single_order_family_dependence": _confound(held_out_family_spread > 0.90, held_out_family_spread, 0.90, "family_share>threshold"),
+        "single_chronology_position_dependence": _confound(time_corr > 0.995, time_corr, 0.995, "corr>threshold"),
+        "session_lookup_dominance": _confound(
+            (
+                (session_lookup_valid and session_gain >= model_gain - 0.01 and session_gain > 0.05 and model_gain < 0.10)
+                or session_structure > 10.0
+            ),
+            max(session_gain, session_structure),
+            10.0,
+            "known-session lookup gain dominates model or held-out response is session-identity dominated",
         ),
     }
 
@@ -462,15 +565,21 @@ def evaluate_sealed(custody: dict[str, Any], manifest: dict[str, Any]) -> dict[s
     route_summary = summarize(target_rows, y_test, pred)["per_route"]
     transfer = _route_transfer(rows, manifest, gauges, sigma)
     one_step_gain = _gain(y_test, pred, baseline)
-    eight_step_gain = max(eight["nrmse_gain"], min(one_step_gain, eight["complex_correlation"] - 0.90))
+    one_bootstrap = hierarchical_bootstrap_gain(target_rows, y_test, pred, baseline, manifest["bootstrap_seeds"]["bootstrap"])
+    eight_bootstrap = hierarchical_bootstrap_gain(
+        eight["target_rows"],
+        eight["y_true"],
+        eight["y_pred"],
+        eight["y_baseline"],
+        manifest["bootstrap_seeds"]["bootstrap"] + 1,
+    )
     predictive_metrics = {
         "one_step_nrmse_gain": one_step_gain,
-        "eight_step_nrmse_gain": eight_step_gain,
-        "one_step_bootstrap_lower": bootstrap_gain_lower(one_gains, manifest["bootstrap_seeds"]["bootstrap"]),
-        "eight_step_bootstrap_lower": max(
-            bootstrap_gain_lower(eight_gains, manifest["bootstrap_seeds"]["bootstrap"] + 1),
-            min(bootstrap_gain_lower(one_gains, manifest["bootstrap_seeds"]["bootstrap"]), eight["complex_correlation"] - 0.90),
-        ),
+        "eight_step_nrmse_gain": eight["nrmse_gain"],
+        "one_step_bootstrap_lower": one_bootstrap["lower_95_bound"],
+        "eight_step_bootstrap_lower": eight_bootstrap["lower_95_bound"],
+        "one_step_bootstrap": one_bootstrap,
+        "eight_step_bootstrap": eight_bootstrap,
         "route_v4s5_complex_corr": route_summary["v4s5"]["complex_correlation"],
         "route_v2s3_complex_corr": route_summary["v2s3"]["complex_correlation"],
         "worst_session_delta_vs_baseline": min(_entity_gains(target_rows, y_test, pred, baseline, "session_index")),

@@ -73,6 +73,55 @@ def bootstrap_gain_lower(gains: list[float], seed: int, iterations: int = 200) -
     return float(np.quantile(means, 0.025))
 
 
+def _gain(y_true: np.ndarray, model: np.ndarray, baseline: np.ndarray) -> float:
+    base = nrmse(y_true, baseline)
+    mod = nrmse(y_true, model)
+    return (base - mod) / max(base, 1e-9)
+
+
+def hierarchical_bootstrap_gain(
+    rows: list[dict[str, Any]],
+    y_true: np.ndarray,
+    pred: np.ndarray,
+    base: np.ndarray,
+    seed: int,
+    iterations: int = 200,
+) -> dict[str, Any]:
+    by_session: dict[int, dict[str, list[int]]] = defaultdict(lambda: defaultdict(list))
+    for i, row in enumerate(rows):
+        by_session[int(row["session_index"])][str(row.get("packet_id"))].append(i)
+    sessions = sorted(by_session)
+    if not sessions:
+        return {
+            "session_draws": 0,
+            "nested_packet_draws": {},
+            "bootstrap_iterations": iterations,
+            "gain_distribution": [],
+            "lower_95_bound": 0.0,
+        }
+    rng = np.random.default_rng(seed)
+    gains: list[float] = []
+    nested_packet_draws = {str(session): len(by_session[session]) for session in sessions}
+    for _ in range(iterations):
+        indices: list[int] = []
+        sampled_sessions = rng.choice(np.array(sessions, dtype=int), size=len(sessions), replace=True)
+        for session in sampled_sessions:
+            packets = sorted(by_session[int(session)])
+            sampled_packets = rng.choice(np.array(packets, dtype=object), size=len(packets), replace=True)
+            for packet in sampled_packets:
+                indices.extend(by_session[int(session)][str(packet)])
+        if indices:
+            idx = np.array(indices, dtype=int)
+            gains.append(_gain(y_true[idx], pred[idx], base[idx]))
+    return {
+        "session_draws": len(sessions),
+        "nested_packet_draws": nested_packet_draws,
+        "bootstrap_iterations": iterations,
+        "gain_distribution": gains,
+        "lower_95_bound": float(np.quantile(gains, 0.025)) if gains else 0.0,
+    }
+
+
 def packet_groups(rows: list[dict[str, Any]]) -> dict[str, list[int]]:
     groups: dict[str, list[int]] = defaultdict(list)
     for i, row in enumerate(rows):

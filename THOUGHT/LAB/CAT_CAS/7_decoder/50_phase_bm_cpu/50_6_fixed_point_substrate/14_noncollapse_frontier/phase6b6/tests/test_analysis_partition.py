@@ -4,6 +4,8 @@ import sys
 import unittest
 from pathlib import Path
 
+import numpy as np
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
@@ -22,10 +24,11 @@ from analysis.state import (  # noqa: E402
     estimate_preamble_gauge,
     s0,
     s2_delayed,
+    symmetric_inverse_sqrt,
     validate_measured_state_fields,
 )
 from analysis.synthetic import synthetic_custody  # noqa: E402
-from contracts.contract import O4_FIXED_LIFTS, REGULARIZATION_LADDER  # noqa: E402
+from contracts.contract import O4_FIXED_LIFTS, REGULARIZATION_LADDER, digest  # noqa: E402
 from contracts.schedule import campaign_schedule  # noqa: E402
 from runtime.explicit_slot_runtime import run_mock  # noqa: E402
 
@@ -174,6 +177,18 @@ class AnalysisPartitionTests(unittest.TestCase):
         self.assertNotIn("_apply_synthetic_fixture_expectation", source)
         self.assertNotIn("synthetic_scenario", source)
         self.assertNotIn("expected verdict", source.lower())
+        self.assertNotIn("max(eight", source)
+        self.assertNotIn("min(one_step", source)
+        self.assertNotIn("source_mean * target_mean", source)
+
+    def test_full_covariance_whitening_is_not_scalar_trace_scaling(self) -> None:
+        cov = ((4.0, 1.5), (1.5, 1.0))
+        inv = symmetric_inverse_sqrt(cov)
+        whitened = inv @ np.array(cov) @ inv.T
+        scalar = np.eye(2) / np.sqrt(np.trace(np.array(cov)) / 2.0)
+        scalar_whitened = scalar @ np.array(cov) @ scalar.T
+        self.assertTrue(np.allclose(whitened, np.eye(2), atol=1e-8))
+        self.assertFalse(np.allclose(scalar_whitened, np.eye(2), atol=1e-2))
 
     def test_all_synthetic_fixtures_run_full_pipeline(self) -> None:
         expected = {
@@ -191,12 +206,48 @@ class AnalysisPartitionTests(unittest.TestCase):
                 result = evaluate_sealed(custody, manifest)
                 self.assertEqual(result["adjudication"]["verdicts"], verdicts)
 
+    def test_selection_manifest_binds_stop_gate_and_evaluated_candidate(self) -> None:
+        custody = synthetic_custody("shared_driven")
+        manifest = select_on_validation(training_validation_custody(custody))
+        self.assertIn("validation_h8_gain", manifest["selection_stop_gate"])
+        self.assertEqual(manifest["evaluated_candidate"]["state_level"], manifest["state_level"])
+        self.assertEqual(manifest["evaluated_candidate"]["operator_class"], manifest["operator_class"])
+
+    def test_hierarchical_bootstrap_shape_is_session_packet_nested(self) -> None:
+        custody = synthetic_custody("shared_driven")
+        manifest = select_on_validation(training_validation_custody(custody))
+        result = evaluate_sealed(custody, manifest)
+        bootstrap = result["predictive_metrics"]["eight_step_bootstrap"]
+        self.assertEqual(bootstrap["session_draws"], 4)
+        self.assertEqual(bootstrap["bootstrap_iterations"], 200)
+        self.assertTrue(bootstrap["nested_packet_draws"])
+        self.assertEqual(len(bootstrap["gain_distribution"]), 200)
+
     def test_one_step_pass_eight_step_fail_blocks_shared_predictive_gate(self) -> None:
         custody = synthetic_custody("rejected")
         manifest = select_on_validation(training_validation_custody(custody))
+        manifest.update(
+            {
+                "state_level": "S0",
+                "delay_length": None,
+                "operator_class": "O4_FIXED_PHASE_NATIVE_LIFT_REGULARIZED_LINEAR",
+                "regularization": 0.0,
+                "o4_lift": O4_FIXED_LIFTS,
+                "selection_stop_gate": "regression:raw_h8_not_rescued",
+                "evaluated_candidate": {
+                    "state_level": "S0",
+                    "delay_length": None,
+                    "operator_class": "O4_FIXED_PHASE_NATIVE_LIFT_REGULARIZED_LINEAR",
+                    "regularization": 0.0,
+                    "validation_score": manifest["validation_score"],
+                },
+            }
+        )
+        manifest["analysis_choice_sha256"] = digest({key: value for key, value in manifest.items() if key != "analysis_choice_sha256"})
         result = evaluate_sealed(custody, manifest)
         self.assertGreater(result["predictive_metrics"]["one_step_nrmse_gain"], 0.10)
         self.assertLess(result["predictive_metrics"]["eight_step_nrmse_gain"], 0.05)
+        self.assertEqual(result["predictive_metrics"]["eight_step_nrmse_gain"], result["horizons"]["8"]["nrmse_gain"])
         self.assertEqual(result["adjudication"]["verdicts"], ["INSTRUMENTATION_BOUNDARY_REJECTED"])
 
 

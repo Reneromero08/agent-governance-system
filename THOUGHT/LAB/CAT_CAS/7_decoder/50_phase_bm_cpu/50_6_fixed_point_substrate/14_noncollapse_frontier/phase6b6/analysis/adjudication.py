@@ -36,7 +36,7 @@ def derive_adjudication(results: dict[str, Any]) -> dict[str, Any]:
         and results["drive_off"]["zero_input_decay_gain"] >= 0.10
         and results["drive_off"]["zero_input_decay_gain_lower"] > 0.0
     )
-    confounded = any(results["confounds"].values())
+    confounded = any(value.get("flag", bool(value)) if isinstance(value, dict) else bool(value) for value in results["confounds"].values())
     if confounded:
         verdicts = ["CONFOUNDED_NO_OPERATOR_CLAIM"]
     elif predictive and transfer:

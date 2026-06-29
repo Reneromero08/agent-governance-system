@@ -6,7 +6,10 @@ import sys
 import tempfile
 import unittest
 from collections import Counter
+from copy import deepcopy
 from pathlib import Path
+
+from jsonschema import ValidationError
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -97,6 +100,14 @@ class ScheduleContractTests(unittest.TestCase):
         validate_named("analysis_choice.schema.json", manifest)
         result = evaluate_sealed(custody, manifest)
         validate_named("adjudication_result.schema.json", result["adjudication"])
+
+    def test_recursive_custody_schema_rejects_sender_off_codeword(self) -> None:
+        custody = run_mock(self.schedule)
+        mutated = deepcopy(custody)
+        off_row = next(slot for session in mutated["sessions"] for slot in session["slots"] if not slot["u_t"]["drive_on"])
+        off_row["u_t"]["codeword_sign"] = 1
+        with self.assertRaises(ValidationError):
+            validate_named("runtime_custody.schema.json", mutated)
 
     def test_no_sender_epoch_in_sender_off_slots_and_contiguous_step_epoch(self) -> None:
         first_session = self.schedule["sessions"][0]

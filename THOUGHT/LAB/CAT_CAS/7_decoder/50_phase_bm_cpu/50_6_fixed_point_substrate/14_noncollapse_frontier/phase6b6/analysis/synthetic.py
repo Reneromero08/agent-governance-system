@@ -49,7 +49,9 @@ def synthetic_custody(scenario: str) -> dict[str, Any]:
         route_sign = 1.0 if session["route"] == "v4s5" else -1.0
         for row in session["slots"]:
             ctrl = _control(row)
-            if scenario == "shared_persistent":
+            if scenario in ("shared_persistent", "shared_driven", "route_local") and "SHAM" in str(row["u_t"].get("executed_mode")):
+                signal = 0.02
+            elif scenario == "shared_persistent":
                 if row["u_t"]["drive_on"]:
                     state = 0.58 * state + ctrl
                 else:

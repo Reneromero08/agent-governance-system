@@ -77,6 +77,15 @@ def training_global_covariance(rows: list[dict[str, Any]]) -> tuple[tuple[float,
     return ((float(cov[0, 0]), float(cov[0, 1])), (float(cov[1, 0]), float(cov[1, 1])))
 
 
+def symmetric_inverse_sqrt(
+    sigma_train: tuple[tuple[float, float], tuple[float, float]],
+) -> np.ndarray:
+    cov = np.array(sigma_train, dtype=float)
+    values, vectors = np.linalg.eigh(cov)
+    clipped = np.maximum(values, 1e-9)
+    return vectors @ np.diag(1.0 / np.sqrt(clipped)) @ vectors.T
+
+
 def assert_training_only_global_covariance(rows: list[dict[str, Any]]) -> None:
     training_global_covariance(rows)
 
@@ -93,9 +102,8 @@ def gauge_normalize(
         tone = 0
     z, period = s0(row)
     centered = z - gauge.complex_anchor_alpha[int(tone)]
-    cov = np.array(sigma_train, dtype=float)
-    inv_sqrt = 1.0 / max(float(np.sqrt(np.trace(cov) / 2.0)), 1e-9)
-    return (centered * inv_sqrt, period)
+    whitened = symmetric_inverse_sqrt(sigma_train) @ np.array([centered.real, centered.imag], dtype=float)
+    return (complex(float(whitened[0]), float(whitened[1])), period)
 
 
 def executed_control_vector(row: dict[str, Any]) -> np.ndarray:
