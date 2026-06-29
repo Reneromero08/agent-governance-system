@@ -225,6 +225,12 @@ class AnalysisPartitionTests(unittest.TestCase):
 
     def test_one_step_pass_eight_step_fail_blocks_shared_predictive_gate(self) -> None:
         custody = synthetic_custody("rejected")
+        for session in custody["sessions"]:
+            for slot in session["slots"]:
+                state = 0.001 * ((slot["slot_index"] * 17 + session["session_index"] * 5) % 23 - 11)
+                slot["r_t"]["lockin_I"] = round(state, 9)
+                slot["r_t"]["lockin_Q"] = round(0.35 * state, 9)
+                slot["r_t"]["ring_osc_period"] = round(100.0 + 0.25 * state, 9)
         manifest = select_on_validation(training_validation_custody(custody))
         manifest.update(
             {

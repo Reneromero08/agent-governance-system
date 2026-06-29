@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import math
+import hashlib
 from typing import Any
 
 from contracts.schedule import campaign_schedule
@@ -73,7 +74,8 @@ def synthetic_custody(scenario: str) -> dict[str, Any]:
                 state = float(session["session_index"])
                 signal = state
             else:
-                state = 0.001 * ((row["slot_index"] * 17 + session["session_index"] * 5) % 23 - 11)
+                raw = hashlib.sha256(f"{session['session_index']}:{row['slot_index']}".encode("ascii")).digest()
+                state = 0.012 * ((int.from_bytes(raw[:4], "big") / (2**32 - 1)) * 2.0 - 1.0)
                 signal = state
             _write_response(row, signal)
     return custody
