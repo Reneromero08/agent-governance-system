@@ -180,6 +180,53 @@ class AnalysisPartitionTests(unittest.TestCase):
         self.assertNotIn("max(eight", source)
         self.assertNotIn("min(one_step", source)
         self.assertNotIn("source_mean * target_mean", source)
+        for forbidden in ("corrcoef", "route_gap", "sham_strength", "order_counts", "session_structure"):
+            self.assertNotIn(forbidden, source)
+
+    def test_confound_outputs_are_predictive_comparisons(self) -> None:
+        custody = synthetic_custody("confounded")
+        manifest = select_on_validation(training_validation_custody(custody))
+        result = evaluate_sealed(custody, manifest)
+        confounds = result["confounds"]
+        self.assertIn("held-out predictor", confounds["physical_tone_indexed_performance"]["comparison_model"])
+        self.assertIn("held-out predictor", confounds["execution_position_indexed_performance"]["comparison_model"])
+        self.assertIn("O0_TIME_INDEX held-out NRMSE", confounds["time_index_within_five_percent"]["comparison_model"])
+        self.assertIn("held_out_families", confounds["single_order_family_dependence"])
+        self.assertEqual(set(confounds["single_order_family_dependence"]["held_out_families"]), set(("FWD", "REV", "RND1", "RND2", "ORDER_LABEL_SHAM")))
+        self.assertIn("chronology_blocks", confounds["single_chronology_position_dependence"])
+        self.assertFalse(confounds["session_lookup_dominance"]["confidence_interval"]["sealed_test_identity_substitution"])
+        for payload in confounds.values():
+            self.assertIn("metric", payload)
+            self.assertIn("comparison_model", payload)
+            self.assertIn("threshold", payload)
+            self.assertIn("flag", payload)
+        self.assertEqual(result["adjudication"]["verdicts"], ["CONFOUNDED_NO_OPERATOR_CLAIM"])
+
+    def test_order_label_sham_compares_declared_and_executed_predictors(self) -> None:
+        custody = synthetic_custody("shared_driven")
+        manifest = select_on_validation(training_validation_custody(custody))
+        result = evaluate_sealed(custody, manifest)
+        sham = result["confounds"]["order_label_sham_predicts_comparably"]
+        self.assertIn("executed_order", sham)
+        self.assertIn("declared_order", sham)
+        self.assertIn("order_label_sham", sham)
+        self.assertIn("declared-order predictor", sham["declared_order"]["comparison_model"])
+        self.assertIn("executed-order predictor", sham["executed_order"]["comparison_model"])
+
+    def test_persistence_uses_test_only_matched_hierarchical_bounds(self) -> None:
+        custody = synthetic_custody("shared_persistent")
+        manifest = select_on_validation(training_validation_custody(custody))
+        result = evaluate_sealed(custody, manifest)
+        bounds = result["drive_off"]["position_bounds"]
+        self.assertTrue(result["drive_off"]["three_consecutive_lower_above_sham"])
+        for offset in ("1", "2", "3"):
+            payload = bounds[offset]
+            self.assertGreater(payload["post_drive_lower_95"], payload["matched_sham_upper_95"])
+            self.assertEqual(payload["matched_strata"], ["route", "tone", "packet_type", "sender_off_position", "reboot_block", "session_block"])
+            self.assertEqual(payload["post_drive_bootstrap"]["session_draws"], 4)
+            self.assertEqual(payload["matched_sham_bootstrap"]["session_draws"], 4)
+            self.assertTrue(payload["post_drive_bootstrap"]["mean_distribution"])
+            self.assertTrue(payload["matched_sham_bootstrap"]["mean_distribution"])
 
     def test_full_covariance_whitening_is_not_scalar_trace_scaling(self) -> None:
         cov = ((4.0, 1.5), (1.5, 1.0))
@@ -205,6 +252,66 @@ class AnalysisPartitionTests(unittest.TestCase):
                 manifest = select_on_validation(training_validation_custody(custody))
                 result = evaluate_sealed(custody, manifest)
                 self.assertEqual(result["adjudication"]["verdicts"], verdicts)
+
+    def test_route_local_requires_complete_within_route_gate(self) -> None:
+        computed = {
+            "predictive_metrics": {
+                "one_step_nrmse_gain": 0.0,
+                "eight_step_nrmse_gain": 0.0,
+                "one_step_bootstrap_lower": -0.1,
+                "eight_step_bootstrap_lower": -0.1,
+                "route_v4s5_complex_corr": 0.99,
+                "route_v2s3_complex_corr": 0.99,
+                "worst_session_delta_vs_baseline": 0.0,
+                "session_lookup_gain_margin": 0.0,
+            },
+            "route_transfer": {"v4s5_to_v2s3": {"lower_gain": -0.01}, "v2s3_to_v4s5": {"lower_gain": -0.01}},
+            "drive_off": {"three_consecutive_lower_above_sham": False, "zero_input_decay_gain": 0.0, "zero_input_decay_gain_lower": 0.0},
+            "confounds": {"session_lookup_dominance": {"flag": False}},
+            "route_local_gates": {
+                "v4s5": {
+                    "one_step_gain": 0.0,
+                    "eight_step_gain": 0.0,
+                    "one_step_blocked_lower": -0.1,
+                    "eight_step_blocked_lower": -0.1,
+                    "complex_correlation": 0.99,
+                    "worst_session_delta": 0.0,
+                    "session_dominance_passed": True,
+                    "pass": False,
+                }
+            },
+            "within_route_pass": True,
+        }
+        self.assertEqual(derive_adjudication(computed)["verdicts"], ["INSTRUMENTATION_BOUNDARY_REJECTED"])
+        computed["route_local_gates"]["v4s5"].update(
+            {
+                "one_step_gain": 0.10,
+                "eight_step_gain": 0.05,
+                "one_step_blocked_lower": 0.01,
+                "eight_step_blocked_lower": 0.01,
+                "pass": True,
+            }
+        )
+        self.assertEqual(derive_adjudication(computed)["verdicts"], ["ROUTE_LOCAL_PREDICTIVE_OPERATOR_ONLY"])
+
+    def test_route_local_fixture_exposes_complete_gate_payload(self) -> None:
+        custody = synthetic_custody("route_local")
+        manifest = select_on_validation(training_validation_custody(custody))
+        result = evaluate_sealed(custody, manifest)
+        self.assertEqual(result["adjudication"]["verdicts"], ["ROUTE_LOCAL_PREDICTIVE_OPERATOR_ONLY"])
+        for route, gate in result["route_local_gates"].items():
+            self.assertIn(route, ("v2s3", "v4s5"))
+            self.assertTrue(gate["pass"])
+            for key in (
+                "one_step_gain",
+                "eight_step_gain",
+                "one_step_blocked_lower",
+                "eight_step_blocked_lower",
+                "complex_correlation",
+                "worst_session_delta",
+                "session_dominance_passed",
+            ):
+                self.assertIn(key, gate)
 
     def test_selection_manifest_binds_stop_gate_and_evaluated_candidate(self) -> None:
         custody = synthetic_custody("shared_driven")

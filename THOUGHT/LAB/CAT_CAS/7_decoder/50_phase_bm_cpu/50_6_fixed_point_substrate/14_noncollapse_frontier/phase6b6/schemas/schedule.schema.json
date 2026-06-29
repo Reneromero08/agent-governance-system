@@ -77,10 +77,11 @@
     },
     "executed": {
       "type": "object",
-      "required": ["drive_on", "executed_mode", "amplitude_level", "phase_action", "physical_tone_index", "analysis_tone_index", "tone_execution_order_position", "executed_order_family", "executed_order_position", "executed_codeword_signs", "codeword_source_index", "codeword_sign", "sign", "sender_epoch_id"],
+      "required": ["drive_on", "executed_mode", "executed_v2_mode", "amplitude_level", "phase_action", "physical_tone_index", "analysis_tone_index", "tone_execution_order_position", "executed_order_family", "executed_order_position", "executed_codeword_signs", "codeword_source_index", "codeword_sign", "sign", "sender_epoch_id"],
       "properties": {
         "drive_on": { "type": "boolean" },
         "executed_mode": { "type": "string" },
+        "executed_v2_mode": { "enum": ["basis", null] },
         "amplitude_level": { "type": ["integer", "null"], "enum": [0, 1, 2, null] },
         "phase_action": { "enum": ["0", "pi", "pi/2", "-pi/2", null] },
         "physical_tone_index": { "type": ["integer", "null"], "minimum": 0, "maximum": 11 },

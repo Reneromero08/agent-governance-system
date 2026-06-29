@@ -160,6 +160,7 @@
       "required": [
         "drive_on",
         "executed_mode",
+        "executed_v2_mode",
         "amplitude_level",
         "phase_action",
         "physical_tone_index",
@@ -176,6 +177,7 @@
       "properties": {
         "drive_on": { "type": "boolean" },
         "executed_mode": { "type": "string", "minLength": 1 },
+        "executed_v2_mode": { "enum": ["basis", null] },
         "amplitude_level": { "$ref": "#/$defs/nullable_integer" },
         "phase_action": { "enum": [null, "none", "0", "pi", "pi/2", "-pi/2"] },
         "physical_tone_index": { "$ref": "#/$defs/nullable_integer" },
@@ -205,6 +207,7 @@
           "then": {
             "properties": {
               "sender_epoch_id": { "type": "null" },
+              "executed_v2_mode": { "type": "null" },
               "executed_codeword_signs": { "type": "null" },
               "codeword_source_index": { "type": "null" },
               "codeword_sign": { "type": "null" },
@@ -220,6 +223,7 @@
           "then": {
             "properties": {
               "sender_epoch_id": { "type": "string", "minLength": 1 },
+              "executed_v2_mode": { "const": "basis" },
               "executed_codeword_signs": { "type": "array", "minItems": 12, "maxItems": 12 },
               "codeword_source_index": { "type": "integer", "minimum": 0, "maximum": 11 },
               "codeword_sign": { "enum": [-1, 1] },

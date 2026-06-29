@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 import math
+import hashlib
+import json
+import re
+from pathlib import Path
 from typing import Any
-
-from .contract import digest
 
 
 QUALIFIED_V2_SOURCE = {
@@ -13,10 +15,18 @@ QUALIFIED_V2_SOURCE = {
     "generated_contracts": "500f7dfcd198e6e70dc3f999248aa61224d530cd",
     "corrective_evidence": "9291d61ab3eb8d27e2bff347f1ec90a046726228",
     "source_bundle_sha256": "bec71b2369587e68a88e9e2b5cb47837a07d5cdef6f13990417e0c0928e85f2f",
+    "physical_interface_source_path": "14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c",
+    "physical_interface_source_sha256": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976",
     "v2_source_bundle_manifest_schema": "CAT_CAS_PHASE6_V2_SOURCE_BUNDLE_MANIFEST_V1",
 }
 
 MODE_NAMES = ("basis", "rotation", "residual", "mini")
+V2_HARDWARE_SOURCE_PATH = Path(__file__).resolve().parents[2] / "holo_runtime_v2" / "combined_pdn_hardware.c"
+
+
+def digest(value: Any) -> str:
+    payload = json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
 def tone_hz(index: int) -> float:
@@ -69,11 +79,48 @@ def codebook() -> dict[str, tuple[int, ...]]:
     return {name: tuple(best[index]) for index, name in enumerate(MODE_NAMES)}
 
 
-def tone_codeword_table() -> dict[str, Any]:
+def _source_sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _extract_modes(source: str) -> tuple[str, ...]:
+    match = re.search(r'const char \*modes\[\] = \{([^}]+)\};', source)
+    if not match:
+        raise ValueError("qualified V2 mode table not found")
+    modes = tuple(re.findall(r'"([^"]+)"', match.group(1)))
+    if modes != MODE_NAMES:
+        raise ValueError("qualified V2 mode table changed")
+    return modes
+
+
+def _verify_source_semantics(source: str) -> None:
+    required = (
+        "double low = log(20), high = log(1500), x = index / 11.0;",
+        "1 + .013 * sin(2.399963 * (index + 1))",
+        "int weights[4] = {4, 5, 6, 7}",
+        "code_rng = 0x243F6A8885A308D3ULL ^ 7ULL;",
+        "iteration < 4000",
+        "return mode >= 0 && source >= 0 && source < 12 ? codebook[mode][source] : 0;",
+    )
+    missing = [snippet for snippet in required if snippet not in source]
+    if missing:
+        raise ValueError("qualified V2 physical interface source semantics changed")
+
+
+def extract_qualified_v2_table(source_path: Path | None = None) -> dict[str, Any]:
+    path = source_path or V2_HARDWARE_SOURCE_PATH
+    source = path.read_text(encoding="utf-8")
+    source_sha = _source_sha256(path)
+    if source_path is None and source_sha != QUALIFIED_V2_SOURCE["physical_interface_source_sha256"]:
+        raise ValueError("qualified V2 physical interface source digest mismatch")
+    _verify_source_semantics(source)
+    modes = _extract_modes(source)
     table = {
         "schema_id": "CAT_CAS_PHASE6B6_IMPORTED_V2_TONE_CODEWORD_TABLE_V1",
-        "source": QUALIFIED_V2_SOURCE,
+        "source": {**QUALIFIED_V2_SOURCE, "extracted_artifact_sha256": source_sha},
         "tone_hz_formula": "exp(log(20)+(log(1500)-log(20))*index/11)*(1+.013*sin(2.399963*(index+1)))",
+        "mode_names": modes,
+        "mode_to_codeword_mapping": {mode: index for index, mode in enumerate(modes)},
         "tones": [
             {
                 "physical_tone_index": index,
@@ -84,6 +131,42 @@ def tone_codeword_table() -> dict[str, Any]:
             for index in range(12)
         ],
         "codebook": codebook(),
+        "codebook_rows": [{"mode": mode, "row": codebook()[mode]} for mode in modes],
+    }
+    table["tone_codeword_table_sha256"] = digest(table)
+    return table
+
+
+def verify_v2_table_binding(source_path: Path | None = None, expected_table: dict[str, Any] | None = None) -> dict[str, Any]:
+    extracted = extract_qualified_v2_table(source_path)
+    expected = expected_table or TONE_CODEWORD_TABLE
+    if extracted["tone_codeword_table_sha256"] != expected["tone_codeword_table_sha256"]:
+        raise ValueError("Phase 6B.6 V2 extracted table binding mismatch")
+    return extracted
+
+
+def tone_codeword_table() -> dict[str, Any]:
+    return extract_qualified_v2_table()
+
+
+def reconstructed_tone_codeword_table() -> dict[str, Any]:
+    table = {
+        "schema_id": "CAT_CAS_PHASE6B6_IMPORTED_V2_TONE_CODEWORD_TABLE_V1",
+        "source": QUALIFIED_V2_SOURCE,
+        "tone_hz_formula": "exp(log(20)+(log(1500)-log(20))*index/11)*(1+.013*sin(2.399963*(index+1)))",
+        "mode_names": MODE_NAMES,
+        "mode_to_codeword_mapping": {mode: index for index, mode in enumerate(MODE_NAMES)},
+        "tones": [
+            {
+                "physical_tone_index": index,
+                "frequency_hz": tone_hz(index),
+                "codeword_source_index": index,
+                "mode_signs": {mode: signs[index] for mode, signs in codebook().items()},
+            }
+            for index in range(12)
+        ],
+        "codebook": codebook(),
+        "codebook_rows": [{"mode": mode, "row": codebook()[mode]} for mode in MODE_NAMES],
     }
     table["tone_codeword_table_sha256"] = digest(table)
     return table

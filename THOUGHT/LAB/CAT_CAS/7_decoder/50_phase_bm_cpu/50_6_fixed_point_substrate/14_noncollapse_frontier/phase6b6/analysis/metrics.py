@@ -122,6 +122,49 @@ def hierarchical_bootstrap_gain(
     }
 
 
+def hierarchical_bootstrap_bounds(
+    rows: list[dict[str, Any]],
+    values: np.ndarray,
+    seed: int,
+    iterations: int = 200,
+) -> dict[str, Any]:
+    by_session: dict[int, dict[str, list[int]]] = defaultdict(lambda: defaultdict(list))
+    for i, row in enumerate(rows):
+        by_session[int(row["session_index"])][str(row.get("packet_id"))].append(i)
+    sessions = sorted(by_session)
+    if not sessions:
+        return {
+            "session_draws": 0,
+            "nested_packet_draws": {},
+            "bootstrap_iterations": iterations,
+            "mean_distribution": [],
+            "lower_95_bound": 0.0,
+            "upper_95_bound": 0.0,
+        }
+    rng = np.random.default_rng(seed)
+    means: list[float] = []
+    nested_packet_draws = {str(session): len(by_session[session]) for session in sessions}
+    arr = np.asarray(values, dtype=float)
+    for _ in range(iterations):
+        indices: list[int] = []
+        sampled_sessions = rng.choice(np.array(sessions, dtype=int), size=len(sessions), replace=True)
+        for session in sampled_sessions:
+            packets = sorted(by_session[int(session)])
+            sampled_packets = rng.choice(np.array(packets, dtype=object), size=len(packets), replace=True)
+            for packet in sampled_packets:
+                indices.extend(by_session[int(session)][str(packet)])
+        if indices:
+            means.append(float(np.mean(arr[np.array(indices, dtype=int)])))
+    return {
+        "session_draws": len(sessions),
+        "nested_packet_draws": nested_packet_draws,
+        "bootstrap_iterations": iterations,
+        "mean_distribution": means,
+        "lower_95_bound": float(np.quantile(means, 0.025)) if means else 0.0,
+        "upper_95_bound": float(np.quantile(means, 0.975)) if means else 0.0,
+    }
+
+
 def packet_groups(rows: list[dict[str, Any]]) -> dict[str, list[int]]:
     groups: dict[str, list[int]] = defaultdict(list)
     for i, row in enumerate(rows):

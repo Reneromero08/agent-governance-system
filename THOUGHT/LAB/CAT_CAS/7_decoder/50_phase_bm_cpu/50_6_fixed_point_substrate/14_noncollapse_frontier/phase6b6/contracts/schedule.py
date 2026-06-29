@@ -66,10 +66,11 @@ def _base_slot(
     sender_epoch_id: str | None = None,
 ) -> dict[str, Any]:
     declared_tone = physical_tone_index
+    v2_mode = "basis" if drive_on else None
     codeword_source = physical_tone_index if drive_on and physical_tone_index is not None else None
     codeword_sign = None
     if codeword_source is not None:
-        codeword_sign = TONE_CODEWORD_TABLE["tones"][codeword_source]["mode_signs"]["basis"]
+        codeword_sign = TONE_CODEWORD_TABLE["tones"][codeword_source]["mode_signs"][v2_mode]
     return {
         "session_index": session["session_index"],
         "slot_index": slot_index,
@@ -90,6 +91,7 @@ def _base_slot(
         "executed": {
             "drive_on": drive_on,
             "executed_mode": mode,
+            "executed_v2_mode": v2_mode,
             "amplitude_level": amplitude_level if drive_on else None,
             "phase_action": phase_action if drive_on else None,
             "physical_tone_index": physical_tone_index if drive_on else None,
@@ -97,7 +99,7 @@ def _base_slot(
             "tone_execution_order_position": executed_order_position,
             "executed_order_family": executed_order_family,
             "executed_order_position": executed_order_position,
-            "executed_codeword_signs": list(TONE_CODEWORD_TABLE["codebook"]["basis"]) if drive_on else None,
+            "executed_codeword_signs": list(TONE_CODEWORD_TABLE["codebook"][v2_mode]) if drive_on else None,
             "codeword_source_index": codeword_source,
             "codeword_sign": codeword_sign,
             "sign": sign if drive_on else None,

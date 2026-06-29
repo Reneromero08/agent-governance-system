@@ -137,7 +137,18 @@ def _design_input_only(x: np.ndarray, rows: list[dict[str, Any]]) -> np.ndarray:
 
 
 def _design_time(rows: list[dict[str, Any]]) -> np.ndarray:
-    return np.array([[1.0, float(row["slot_index"])] for row in rows], dtype=float)
+    return np.array(
+        [
+            [
+                1.0,
+                float(row["slot_index"]),
+                float(row.get("session_chronology", 0)),
+                float(row["slot_index"]) * float(row.get("session_chronology", 0)),
+            ]
+            for row in rows
+        ],
+        dtype=float,
+    )
 
 
 def _design_session(rows: list[dict[str, Any]]) -> np.ndarray:

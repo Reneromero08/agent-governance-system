@@ -23,7 +23,7 @@ from contracts.contract import (  # noqa: E402
     declared_and_executed_order,
     order_family_sequence,
 )
-from contracts.v2_interface import QUALIFIED_V2_SOURCE, TONE_CODEWORD_TABLE, codebook, tone_hz  # noqa: E402
+from contracts.v2_interface import QUALIFIED_V2_SOURCE, TONE_CODEWORD_TABLE, codebook, tone_hz, verify_v2_table_binding  # noqa: E402
 from runtime.explicit_slot_runtime import run_mock  # noqa: E402
 from schemas.validate_objects import validate_named  # noqa: E402
 from analysis.pipeline import evaluate_sealed, select_on_validation, training_validation_custody  # noqa: E402
@@ -81,14 +81,35 @@ class ScheduleContractTests(unittest.TestCase):
     def test_v2_binding_reproduces_qualified_source_identity(self) -> None:
         v2_root = ROOT.parent / "holo_runtime_v2"
         waveform = (v2_root / "waveform_fixture.c").read_text(encoding="utf-8")
+        hardware = v2_root / "combined_pdn_hardware.c"
         self.assertIn("log(20.0)", waveform)
         self.assertIn("log(1500.0)", waveform)
         self.assertIn("sin(2.399963 * (index + 1))", waveform)
         self.assertEqual(len([tone_hz(i) for i in range(12)]), 12)
         self.assertEqual(TONE_CODEWORD_TABLE["codebook"]["basis"], codebook()["basis"])
         self.assertEqual(set(TONE_CODEWORD_TABLE["codebook"]), {"basis", "rotation", "residual", "mini"})
+        self.assertEqual(TONE_CODEWORD_TABLE["source"]["physical_interface_source_path"], "14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c")
+        self.assertEqual(TONE_CODEWORD_TABLE["source"]["extracted_artifact_sha256"], QUALIFIED_V2_SOURCE["physical_interface_source_sha256"])
+        self.assertEqual(TONE_CODEWORD_TABLE["mode_to_codeword_mapping"], {"basis": 0, "rotation": 1, "residual": 2, "mini": 3})
+        self.assertEqual(verify_v2_table_binding(hardware)["tone_codeword_table_sha256"], TONE_CODEWORD_TABLE["tone_codeword_table_sha256"])
         self.assertEqual(QUALIFIED_V2_SOURCE["reviewed_source"], "ba48125d15009a044bb869b5716c412b1a8baa1b")
         self.assertEqual(QUALIFIED_V2_SOURCE["source_bundle_sha256"], "bec71b2369587e68a88e9e2b5cb47837a07d5cdef6f13990417e0c0928e85f2f")
+
+    def test_v2_extraction_detects_tone_codeword_and_mapping_mutations(self) -> None:
+        source = ROOT.parent / "holo_runtime_v2" / "combined_pdn_hardware.c"
+        original = source.read_text(encoding="utf-8")
+        mutations = {
+            "tone": original.replace("log(1500)", "log(1501)", 1),
+            "codeword_bit": original.replace("int weights[4] = {4, 5, 6, 7}", "int weights[4] = {4, 5, 6, 8}", 1),
+            "mode_mapping": original.replace('"basis", "rotation", "residual", "mini"', '"basis", "residual", "rotation", "mini"', 1),
+        }
+        with tempfile.TemporaryDirectory() as temp:
+            for label, text in mutations.items():
+                with self.subTest(label=label):
+                    mutated = Path(temp) / f"{label}.c"
+                    mutated.write_text(text, encoding="utf-8")
+                    with self.assertRaises(ValueError):
+                        verify_v2_table_binding(mutated)
 
     def test_generated_objects_validate_against_schemas(self) -> None:
         validate_named("scientific_contract.schema.json", contract_manifest())
@@ -115,8 +136,10 @@ class ScheduleContractTests(unittest.TestCase):
         self.assertTrue(off_slots)
         self.assertTrue(all(slot["executed"]["sender_epoch_id"] is None for slot in off_slots))
         self.assertTrue(all(slot["executed"]["executed_codeword_signs"] is None for slot in off_slots))
+        self.assertTrue(all(slot["executed"]["executed_v2_mode"] is None for slot in off_slots))
         driven = [slot for slot in first_session["slots"] if slot["executed"]["drive_on"]]
         self.assertTrue(all(len(slot["executed"]["executed_codeword_signs"]) == 12 for slot in driven))
+        self.assertTrue(all(slot["executed"]["executed_v2_mode"] == "basis" for slot in driven))
         self.assertTrue(all(slot["executed"]["physical_tone_index"] is None for slot in off_slots))
         step_slots = [slot for slot in first_session["slots"] if slot["packet_id"] == "s0:tone0:step" and slot["executed"]["drive_on"]]
         self.assertEqual(len(step_slots), 4)

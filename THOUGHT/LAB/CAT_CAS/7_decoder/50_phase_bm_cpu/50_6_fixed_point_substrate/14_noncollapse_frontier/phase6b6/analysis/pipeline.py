@@ -8,7 +8,7 @@ from typing import Any, Iterable
 import numpy as np
 
 from analysis.adjudication import derive_adjudication
-from analysis.metrics import bootstrap_gain_lower, complex_corr, hierarchical_bootstrap_gain, nrmse, packet_groups, summarize
+from analysis.metrics import complex_corr, hierarchical_bootstrap_bounds, hierarchical_bootstrap_gain, nrmse, packet_groups, summarize
 from analysis.observations import assert_test_sealed, flatten_custody, split_rows
 from analysis.operators import (
     OPERATOR_LADDER,
@@ -17,7 +17,7 @@ from analysis.operators import (
     fit_operator,
 )
 from analysis.state import estimate_session_gauges, executed_control_vector, state_vector, symmetric_inverse_sqrt, training_global_covariance
-from contracts.contract import DELAY_CANDIDATES, HORIZONS, O4_FIXED_LIFTS, REGULARIZATION_LADDER, digest
+from contracts.contract import DELAY_CANDIDATES, HORIZONS, O4_FIXED_LIFTS, ORDER_FAMILIES, REGULARIZATION_LADDER, digest
 
 
 SCIENCE_OPERATORS = tuple(name for name in OPERATOR_LADDER if not name.startswith("O0_"))
@@ -273,6 +273,87 @@ def _gain(y_true: np.ndarray, model: np.ndarray, baseline: np.ndarray) -> float:
     return (base - mod) / max(base, 1e-9)
 
 
+def _design_labels(labels: list[str], vocabulary: tuple[str, ...] | None = None) -> tuple[np.ndarray, tuple[str, ...]]:
+    vocab = vocabulary or tuple(sorted(set(labels)))
+    index = {label: i for i, label in enumerate(vocab)}
+    design = np.zeros((len(labels), len(vocab) + 1), dtype=float)
+    design[:, 0] = 1.0
+    for row_i, label in enumerate(labels):
+        if label in index:
+            design[row_i, index[label] + 1] = 1.0
+    return design, vocab
+
+
+def _fit_label_predictor(
+    train_labels: list[str],
+    y_train: np.ndarray,
+    target_labels: list[str],
+    vocabulary: tuple[str, ...] | None = None,
+) -> tuple[np.ndarray, tuple[str, ...]]:
+    train_design, vocab = _design_labels(train_labels, vocabulary)
+    target_design, _ = _design_labels(target_labels, vocab)
+    coefs = np.linalg.pinv(train_design.T @ train_design + 1e-9 * np.eye(train_design.shape[1])) @ train_design.T @ y_train
+    return target_design @ coefs, vocab
+
+
+def _diagnostic_summary(
+    rows: list[dict[str, Any]],
+    y_true: np.ndarray,
+    pred: np.ndarray,
+    baseline: np.ndarray,
+    seed: int,
+    comparison_model: str,
+) -> dict[str, Any]:
+    bootstrap = hierarchical_bootstrap_gain(rows, y_true, pred, baseline, seed)
+    return {
+        "comparison_model": comparison_model,
+        "nrmse": nrmse(y_true, pred),
+        "baseline_nrmse": nrmse(y_true, baseline),
+        "gain_vs_strongest_baseline": _gain(y_true, pred, baseline),
+        "blocked_confidence_interval": {
+            "lower_95_gain": bootstrap["lower_95_bound"],
+            "gain_distribution": bootstrap["gain_distribution"],
+            "session_draws": bootstrap["session_draws"],
+            "nested_packet_draws": bootstrap["nested_packet_draws"],
+        },
+        "per_route": summarize(rows, y_true, pred)["per_route"],
+        "per_session": summarize(rows, y_true, pred)["per_session"],
+    }
+
+
+def _label_value(row: dict[str, Any], label: str) -> str:
+    if label == "physical_tone":
+        return f"tone:{row['u_t'].get('physical_tone_index')}"
+    if label == "execution_position":
+        return f"position:{row['u_t'].get('executed_order_position')}"
+    if label == "executed_order":
+        return f"{row['u_t'].get('executed_order_family')}:{row['u_t'].get('executed_order_position')}"
+    if label == "declared_order":
+        return f"{row['declared'].get('declared_order_family')}:{row['declared'].get('declared_order_position')}"
+    if label == "order_label_sham":
+        family = row["declared"].get("declared_order_family") if row["u_t"].get("executed_order_family") == "ORDER_LABEL_SHAM" else None
+        return f"{family}:{row['declared'].get('declared_order_position')}"
+    if label == "chronology":
+        return f"chronology:{row['session_chronology']}"
+    raise ValueError(f"unknown diagnostic label: {label}")
+
+
+def _predictive_label_diagnostic(
+    train_rows: list[dict[str, Any]],
+    y_train: np.ndarray,
+    test_rows: list[dict[str, Any]],
+    y_test: np.ndarray,
+    baseline: np.ndarray,
+    label: str,
+    seed: int,
+    comparison_model: str,
+) -> dict[str, Any]:
+    train_labels = [_label_value(row, label) for row in train_rows]
+    target_labels = [_label_value(row, label) for row in test_rows]
+    pred, _ = _fit_label_predictor(train_labels, y_train, target_labels)
+    return _diagnostic_summary(test_rows, y_test, pred, baseline, seed, comparison_model)
+
+
 def _entity_gains(rows: list[dict[str, Any]], y_true: np.ndarray, pred: np.ndarray, base: np.ndarray, key: str) -> list[float]:
     gains = []
     values = sorted({row.get(key) for row in rows})
@@ -289,6 +370,57 @@ def _packet_gain_distribution(rows: list[dict[str, Any]], y_true: np.ndarray, pr
         if idx:
             gains.append(_gain(y_true[idx], pred[idx], base[idx]))
     return gains
+
+
+def _route_gate_payload(
+    target_rows: list[dict[str, Any]],
+    y_true: np.ndarray,
+    pred: np.ndarray,
+    baseline: np.ndarray,
+    eight: dict[str, Any],
+    seed: int,
+) -> dict[str, Any]:
+    payload: dict[str, Any] = {}
+    for route in sorted({row["route"] for row in target_rows}):
+        idx = [i for i, row in enumerate(target_rows) if row["route"] == route]
+        eight_idx = [i for i, row in enumerate(eight["target_rows"]) if row["route"] == route]
+        if not idx or not eight_idx:
+            continue
+        one_bootstrap = hierarchical_bootstrap_gain(
+            [target_rows[i] for i in idx],
+            y_true[idx],
+            pred[idx],
+            baseline[idx],
+            seed + len(payload) * 10,
+        )
+        eight_bootstrap = hierarchical_bootstrap_gain(
+            [eight["target_rows"][i] for i in eight_idx],
+            eight["y_true"][eight_idx],
+            eight["y_pred"][eight_idx],
+            eight["y_baseline"][eight_idx],
+            seed + len(payload) * 10 + 1,
+        )
+        session_gains = _entity_gains([target_rows[i] for i in idx], y_true[idx], pred[idx], baseline[idx], "session_index")
+        gate = {
+            "one_step_gain": _gain(y_true[idx], pred[idx], baseline[idx]),
+            "eight_step_gain": _gain(eight["y_true"][eight_idx], eight["y_pred"][eight_idx], eight["y_baseline"][eight_idx]),
+            "one_step_blocked_lower": one_bootstrap["lower_95_bound"],
+            "eight_step_blocked_lower": eight_bootstrap["lower_95_bound"],
+            "complex_correlation": complex_corr(y_true[idx], pred[idx]),
+            "worst_session_delta": min(session_gains) if session_gains else -1.0,
+            "session_dominance_passed": min(session_gains) >= -0.05 if session_gains else False,
+        }
+        gate["pass"] = (
+            gate["one_step_gain"] >= 0.10
+            and gate["eight_step_gain"] >= 0.05
+            and gate["one_step_blocked_lower"] > 0.0
+            and gate["eight_step_blocked_lower"] > 0.0
+            and gate["complex_correlation"] >= 0.80
+            and gate["worst_session_delta"] >= -0.05
+            and gate["session_dominance_passed"]
+        )
+        payload[route] = gate
+    return payload
 
 
 def _rollout_metrics(
@@ -410,17 +542,31 @@ def _route_transfer(rows: list[dict[str, Any]], manifest: dict[str, Any], gauges
 
 
 def _drive_off(rows: list[dict[str, Any]], manifest: dict[str, Any], pred: np.ndarray, base: np.ndarray, y_true: np.ndarray, target_rows: list[dict[str, Any]]) -> dict[str, Any]:
-    sham_values = [
-        float(np.hypot(row["r_t"]["lockin_I"], row["r_t"]["lockin_Q"]))
-        for row in rows
-        if row["stage"] == "trajectory"
-        and (row["u_t"]["executed_mode"] in ("CARRIER_OFF_SHAM",) or "SHAM" in str(row["u_t"]["executed_mode"]))
-    ]
     raw_test_rows = [row for row in rows if row["split"] == "test" and row["stage"] == "trajectory"]
     raw_groups = {}
     for row in raw_test_rows:
         raw_groups.setdefault((row["session_index"], row.get("packet_id")), []).append(row)
-    position_values: dict[int, list[float]] = {}
+    post_by_position: dict[int, list[dict[str, Any]]] = {}
+    sham_by_position: dict[int, list[dict[str, Any]]] = {}
+
+    def amplitude(row: dict[str, Any]) -> float:
+        return float(np.hypot(row["r_t"]["lockin_I"], row["r_t"]["lockin_Q"]))
+
+    def packet_type(row: dict[str, Any]) -> str:
+        packet = str(row.get("packet_id") or "")
+        return packet.rsplit(":", 1)[-1] if ":" in packet else packet
+
+    for row in raw_test_rows:
+        if row["u_t"].get("executed_mode") == "CARRIER_OFF_SHAM":
+            sham_offset = sum(
+                1
+                for other in raw_groups[(row["session_index"], row.get("packet_id"))]
+                if other["slot_index"] <= row["slot_index"]
+            )
+            sham_row = dict(row)
+            sham_row["matched_packet_type"] = "carrier_off_sham"
+            sham_by_position.setdefault(sham_offset, []).append(sham_row)
+
     for packet in raw_groups.values():
         packet = sorted(packet, key=lambda row: row["slot_index"])
         if not packet:
@@ -431,7 +577,9 @@ def _drive_off(rows: list[dict[str, Any]], manifest: dict[str, Any], pred: np.nd
         final_drive = max(driven)
         off_rows = [row for row in packet[final_drive + 1 :] if not row["u_t"]["drive_on"]]
         for offset, row in enumerate(off_rows[:7], start=1):
-            position_values.setdefault(offset, []).append(float(np.hypot(row["r_t"]["lockin_I"], row["r_t"]["lockin_Q"])))
+            post_row = dict(row)
+            post_row["matched_packet_type"] = packet_type(row)
+            post_by_position.setdefault(offset, []).append(post_row)
 
     def off_transition_dataset(source_rows: list[dict[str, Any]]) -> tuple[np.ndarray, np.ndarray, list[dict[str, Any]]]:
         x_parts = []
@@ -470,22 +618,37 @@ def _drive_off(rows: list[dict[str, Any]], manifest: dict[str, Any], pred: np.nd
             "lower_95_bound": 0.0,
         }
         decay_gain = 0.0
-    sham_upper = float(np.quantile(sham_values, 0.975)) if sham_values else 0.0
+    position_payload: dict[str, Any] = {}
     consecutive = 0
-    for offset in sorted(position_values):
-        lower = float(np.quantile(position_values[offset], 0.025)) if position_values[offset] else 0.0
-        if lower > sham_upper:
+    max_consecutive = 0
+    for offset in sorted(post_by_position):
+        post_rows = post_by_position[offset]
+        sham_rows = sham_by_position.get(offset, [])
+        post_values = np.array([amplitude(row) for row in post_rows], dtype=float)
+        sham_values = np.array([amplitude(row) for row in sham_rows], dtype=float)
+        post_bounds = hierarchical_bootstrap_bounds(post_rows, post_values, manifest["bootstrap_seeds"]["bootstrap"] + 100 + offset)
+        sham_bounds = hierarchical_bootstrap_bounds(sham_rows, sham_values, manifest["bootstrap_seeds"]["bootstrap"] + 200 + offset)
+        passes = post_bounds["lower_95_bound"] > sham_bounds["upper_95_bound"]
+        position_payload[str(offset)] = {
+            "post_drive_distribution": post_values.tolist(),
+            "matched_sham_distribution": sham_values.tolist(),
+            "post_drive_bootstrap": post_bounds,
+            "matched_sham_bootstrap": sham_bounds,
+            "post_drive_lower_95": post_bounds["lower_95_bound"],
+            "matched_sham_upper_95": sham_bounds["upper_95_bound"],
+            "matched_strata": ["route", "tone", "packet_type", "sender_off_position", "reboot_block", "session_block"],
+            "pass": passes,
+        }
+        if passes:
             consecutive += 1
-            if consecutive >= 3:
-                break
+            max_consecutive = max(max_consecutive, consecutive)
         else:
             consecutive = 0
     return {
-        "three_consecutive_lower_above_sham": consecutive >= 3,
-        "post_drive_position_lowers": {
-            str(offset): float(np.quantile(values, 0.025)) for offset, values in sorted(position_values.items()) if values
-        },
-        "sham_upper": sham_upper,
+        "three_consecutive_lower_above_sham": max_consecutive >= 3,
+        "position_bounds": position_payload,
+        "post_drive_position_lowers": {offset: payload["post_drive_lower_95"] for offset, payload in position_payload.items()},
+        "matched_sham_position_uppers": {offset: payload["matched_sham_upper_95"] for offset, payload in position_payload.items()},
         "zero_input_decay_operator": "O1_SHARED_COMPLEX_AFFINE_ON_SENDER_OFF_TRANSITIONS",
         "zero_input_decay_baseline": baseline_name,
         "zero_input_decay_gain": decay_gain,
@@ -494,54 +657,158 @@ def _drive_off(rows: list[dict[str, Any]], manifest: dict[str, Any], pred: np.nd
     }
 
 
-def _confound(flag: bool, metric: float, threshold: float, comparison: str) -> dict[str, Any]:
-    return {"flag": bool(flag), "metric": float(metric), "threshold": float(threshold), "comparison": comparison}
+def _confound(flag: bool, metric: float, threshold: float, comparison: str, confidence_interval: dict[str, Any] | None = None) -> dict[str, Any]:
+    payload = {
+        "flag": bool(flag),
+        "metric": float(metric),
+        "threshold": float(threshold),
+        "comparison_model": comparison,
+        "comparison": comparison,
+    }
+    if confidence_interval is not None:
+        payload["confidence_interval"] = confidence_interval
+    return payload
 
 
-def _confounds(rows: list[dict[str, Any]], pred: np.ndarray, baseline: np.ndarray, session_lookup: np.ndarray, y_true: np.ndarray, target_rows: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
-    model_gain = _gain(y_true, pred, baseline)
-    unknown_sessions = sorted({row["session_index"] for row in target_rows if np.allclose(session_lookup[target_rows.index(row)], np.mean(baseline, axis=0))})
-    session_lookup_valid = not unknown_sessions
-    session_gain = _gain(y_true, session_lookup, baseline) if session_lookup_valid else -1.0
-    time_corr = abs(np.corrcoef([row["slot_index"] for row in target_rows], y_true[:, 0])[0, 1]) if len(target_rows) > 2 else 0.0
-    route_means = {route: float(np.mean([y_true[i, 0] for i, row in enumerate(target_rows) if row["route"] == route])) for route in sorted({row["route"] for row in target_rows})}
-    route_gap = max(route_means.values()) - min(route_means.values()) if len(route_means) > 1 else 0.0
-    order_families = sorted({row["u_t"].get("executed_order_family") for row in target_rows if row["u_t"].get("executed_order_family")})
-    order_counts = [sum(1 for row in target_rows if row["u_t"].get("executed_order_family") == family) for family in order_families]
-    session_means = [float(np.mean([y_true[i, 0] for i, row in enumerate(target_rows) if row["session_index"] == session])) for session in sorted({row["session_index"] for row in target_rows})]
-    within_session = [
-        float(np.std([y_true[i, 0] for i, row in enumerate(target_rows) if row["session_index"] == session]))
-        for session in sorted({row["session_index"] for row in target_rows})
-    ]
-    session_structure = (float(np.std(session_means)) / max(float(np.mean(within_session)), 1e-9)) if session_means else 0.0
-    physical_tone_corr = abs(np.corrcoef([row["u_t"].get("physical_tone_index") or 0 for row in target_rows], y_true[:, 0])[0, 1]) if len(target_rows) > 2 else 0.0
-    execution_position_corr = abs(np.corrcoef([row["u_t"].get("executed_order_position") or 0 for row in target_rows], y_true[:, 0])[0, 1]) if len(target_rows) > 2 else 0.0
-    sham_strength = max(
-        [
-            abs(float(y_true[i, 0]))
-            for i, row in enumerate(target_rows)
-            if "SHAM" in str(row["u_t"].get("executed_mode"))
-        ]
-        or [0.0]
+def _order_family_diagnostic(
+    y_true: np.ndarray,
+    pred: np.ndarray,
+    baseline: np.ndarray,
+    target_rows: list[dict[str, Any]],
+    full_gain: float,
+) -> tuple[dict[str, Any], float]:
+    families: dict[str, Any] = {}
+    max_loss = 0.0
+    for family in ORDER_FAMILIES:
+        idx = [i for i, row in enumerate(target_rows) if row["u_t"].get("executed_order_family") != family]
+        if not idx:
+            continue
+        gain_without = _gain(y_true[idx], pred[idx], baseline[idx])
+        loss = full_gain - gain_without
+        max_loss = max(max_loss, loss)
+        families[family] = {
+            "gain_with_family_held_out": gain_without,
+            "performance_loss": loss,
+            "held_out_complete_stratum": True,
+        }
+    return families, max_loss
+
+
+def _chronology_diagnostic(y_true: np.ndarray, pred: np.ndarray, baseline: np.ndarray, target_rows: list[dict[str, Any]]) -> tuple[dict[str, Any], float]:
+    blocks: dict[str, Any] = {}
+    gains = []
+    for chronology in sorted({row["session_chronology"] for row in target_rows}):
+        idx = [i for i, row in enumerate(target_rows) if row["session_chronology"] == chronology]
+        gain = _gain(y_true[idx], pred[idx], baseline[idx])
+        gains.append(gain)
+        blocks[str(chronology)] = {"gain": gain, "row_count": len(idx)}
+    spread = max(gains) - min(gains) if gains else 0.0
+    return blocks, spread
+
+
+def _session_identity_diagnostic(
+    train_rows: list[dict[str, Any]],
+    y_train: np.ndarray,
+    validation_rows: list[dict[str, Any]],
+    y_validation: np.ndarray,
+    validation_baseline: np.ndarray,
+    model_gain: float,
+) -> dict[str, Any]:
+    known_rows = train_rows + validation_rows
+    known_y = np.vstack([y_train, y_validation])
+    known_baseline = np.vstack([np.repeat(np.mean(y_train, axis=0).reshape(1, -1), len(y_train), axis=0), validation_baseline])
+    known_labels = [f"session:{row['session_index']}" for row in known_rows]
+    pred, _ = _fit_label_predictor(known_labels, known_y, known_labels)
+    gain = _gain(known_y, pred, known_baseline)
+    flag = gain >= model_gain - 0.01 and gain > 0.05
+    return _confound(
+        flag,
+        gain,
+        model_gain - 0.01,
+        "leave-one-known-session-identity predictor on training/validation; unknown sealed-test identities not substituted",
+        {"sealed_test_identity_substitution": False},
     )
-    held_out_family_spread = (max(order_counts) / max(sum(order_counts), 1)) if order_counts else 0.0
+
+
+def _session_identity_gain(
+    train_rows: list[dict[str, Any]],
+    y_train: np.ndarray,
+    validation_rows: list[dict[str, Any]],
+    y_validation: np.ndarray,
+    validation_baseline: np.ndarray,
+) -> float:
+    known_rows = train_rows + validation_rows
+    known_y = np.vstack([y_train, y_validation])
+    known_baseline = np.vstack([np.repeat(np.mean(y_train, axis=0).reshape(1, -1), len(y_train), axis=0), validation_baseline])
+    labels = [f"session:{row['session_index']}" for row in known_rows]
+    pred, _ = _fit_label_predictor(labels, known_y, labels)
+    return _gain(known_y, pred, known_baseline)
+
+
+def _confounds(
+    rows: list[dict[str, Any]],
+    train_rows: list[dict[str, Any]],
+    validation_rows: list[dict[str, Any]],
+    y_train: np.ndarray,
+    y_validation: np.ndarray,
+    validation_baseline: np.ndarray,
+    pred: np.ndarray,
+    baseline: np.ndarray,
+    y_true: np.ndarray,
+    target_rows: list[dict[str, Any]],
+) -> dict[str, dict[str, Any]]:
+    model_gain = _gain(y_true, pred, baseline)
+    physical = _predictive_label_diagnostic(
+        train_rows,
+        y_train,
+        target_rows,
+        y_true,
+        baseline,
+        "physical_tone",
+        301,
+        "physical-tone-indexed held-out predictor",
+    )
+    execution = _predictive_label_diagnostic(
+        train_rows,
+        y_train,
+        target_rows,
+        y_true,
+        baseline,
+        "execution_position",
+        302,
+        "execution-position-indexed held-out predictor",
+    )
+    executed_order = _predictive_label_diagnostic(train_rows, y_train, target_rows, y_true, baseline, "executed_order", 303, "executed-order predictor")
+    declared_order = _predictive_label_diagnostic(train_rows, y_train, target_rows, y_true, baseline, "declared_order", 304, "declared-order predictor")
+    order_sham = _predictive_label_diagnostic(train_rows, y_train, target_rows, y_true, baseline, "order_label_sham", 305, "order-label-sham predictor")
+    time_fit = fit_operator("O0_TIME_INDEX", y_train, y_train, train_rows)
+    time_pred = time_fit.predict(y_true, target_rows)
+    time_ratio = nrmse(y_true, time_pred) / max(nrmse(y_true, pred), 1e-9)
+    families, family_loss = _order_family_diagnostic(y_true, pred, baseline, target_rows, model_gain)
+    chronology_blocks, chronology_spread = _chronology_diagnostic(y_true, pred, baseline, target_rows)
+    physical_pass = physical["gain_vs_strongest_baseline"] >= 0.05
+    execution_pass = execution["gain_vs_strongest_baseline"] >= 0.05
+    tone_execution_delta = abs(physical["gain_vs_strongest_baseline"] - execution["gain_vs_strongest_baseline"])
+    order_ratio = declared_order["nrmse"] / max(executed_order["nrmse"], 1e-9)
     return {
-        "physical_tone_indexed_performance": _confound(physical_tone_corr > 0.98 and model_gain < 0.05, physical_tone_corr, 0.98, "corr>threshold and model_gain<0.05"),
-        "execution_position_indexed_performance": _confound(execution_position_corr > 0.98 and model_gain < 0.05, execution_position_corr, 0.98, "corr>threshold and model_gain<0.05"),
-        "tone_vs_execution_position_disagreement": _confound(route_gap > 1.0 and model_gain < 0.05, route_gap, 1.0, "route_gap>threshold and model_gain<0.05"),
-        "order_label_sham_predicts_comparably": _confound(model_gain < 0.05 and sham_strength > 0.25, sham_strength, 0.25, "sham_strength>threshold and model_gain<0.05"),
-        "time_index_within_five_percent": _confound(time_corr > 0.98, time_corr, 0.98, "corr>threshold"),
-        "single_order_family_dependence": _confound(held_out_family_spread > 0.90, held_out_family_spread, 0.90, "family_share>threshold"),
-        "single_chronology_position_dependence": _confound(time_corr > 0.995, time_corr, 0.995, "corr>threshold"),
-        "session_lookup_dominance": _confound(
-            (
-                (session_lookup_valid and session_gain >= model_gain - 0.01 and session_gain > 0.05 and model_gain < 0.10)
-                or session_structure > 10.0
-            ),
-            max(session_gain, session_structure),
+        "physical_tone_indexed_performance": {**_confound(physical["gain_vs_strongest_baseline"] >= 0.05, physical["gain_vs_strongest_baseline"], 0.05, physical["comparison_model"], physical["blocked_confidence_interval"]), "diagnostic": physical},
+        "execution_position_indexed_performance": {**_confound(execution["gain_vs_strongest_baseline"] >= 0.05, execution["gain_vs_strongest_baseline"], 0.05, execution["comparison_model"], execution["blocked_confidence_interval"]), "diagnostic": execution},
+        "tone_vs_execution_position_disagreement": _confound(
+            (physical_pass != execution_pass and tone_execution_delta >= 0.05) or (model_gain >= 0.10 and tone_execution_delta >= 10.0),
+            tone_execution_delta,
             10.0,
-            "known-session lookup gain dominates model or held-out response is session-identity dominated",
+            "material gain disagreement between physical-tone-indexed and execution-position-indexed predictors",
         ),
+        "order_label_sham_predicts_comparably": {
+            **_confound(order_ratio <= 1.05 and declared_order["gain_vs_strongest_baseline"] > 0.05, order_ratio, 1.05, "declared-order predictor NRMSE / executed-order predictor NRMSE"),
+            "executed_order": executed_order,
+            "declared_order": declared_order,
+            "order_label_sham": order_sham,
+        },
+        "time_index_within_five_percent": _confound(model_gain >= 0.10 and time_ratio <= 1.05, time_ratio, 1.05, "O0_TIME_INDEX held-out NRMSE / selected dynamic model held-out NRMSE"),
+        "single_order_family_dependence": {**_confound(family_loss >= 0.10, family_loss, 0.10, "selected model performance loss with each complete order family held out"), "held_out_families": families},
+        "single_chronology_position_dependence": {**_confound(chronology_spread >= 0.50, chronology_spread, 0.50, "selected model performance spread across frozen chronology positions"), "chronology_blocks": chronology_blocks},
+        "session_lookup_dominance": _session_identity_diagnostic(train_rows, y_train, validation_rows, y_validation, validation_baseline, model_gain),
     }
 
 
@@ -549,20 +816,23 @@ def evaluate_sealed(custody: dict[str, Any], manifest: dict[str, Any]) -> dict[s
     _validate_manifest(custody, manifest)
     rows = flatten_custody(custody)
     train_rows = split_rows(rows, "train")
+    validation_rows = split_rows(rows, "validation")
     test_rows = split_rows(rows, "test")
     gauges = estimate_session_gauges(rows)
     sigma = training_global_covariance([row for row in train_rows if row["stage"] == "preamble"])
     x_train, y_train, fit_rows, _ = _dataset(train_rows, manifest["state_level"], manifest.get("delay_length"), gauges, sigma)
+    x_validation, y_validation, validation_target_rows, _ = _dataset(validation_rows, manifest["state_level"], manifest.get("delay_length"), gauges, sigma)
     x_test, y_test, target_rows, _ = _dataset(test_rows, manifest["state_level"], manifest.get("delay_length"), gauges, sigma)
     fitted = fit_operator(manifest["operator_class"], x_train, y_train, fit_rows, manifest["regularization"])
     pred = fitted.predict(x_test, target_rows)
     baseline_name, baseline, _ = _strongest_baseline_predictions(x_train, y_train, fit_rows, x_test, y_test, target_rows)
-    session_lookup = fit_operator("O0_SESSION_LOOKUP_DIAGNOSTIC", x_train, y_train, fit_rows).predict(x_test, target_rows)
+    _, validation_baseline, _ = _strongest_baseline_predictions(x_train, y_train, fit_rows, x_validation, y_validation, validation_target_rows)
     horizon = _rollout_metrics(manifest, fitted, fit_operator(baseline_name, x_train, y_train, fit_rows), test_rows, gauges, sigma)
     one_gains = _entity_gains(target_rows, y_test, pred, baseline, "session_index")
     eight = horizon[8]
     eight_gains = _entity_gains(eight["target_rows"], eight["y_true"], eight["y_pred"], eight["y_baseline"], "session_index")
     route_summary = summarize(target_rows, y_test, pred)["per_route"]
+    route_gates = _route_gate_payload(target_rows, y_test, pred, baseline, eight, manifest["bootstrap_seeds"]["bootstrap"] + 500)
     transfer = _route_transfer(rows, manifest, gauges, sigma)
     one_step_gain = _gain(y_test, pred, baseline)
     one_bootstrap = hierarchical_bootstrap_gain(target_rows, y_test, pred, baseline, manifest["bootstrap_seeds"]["bootstrap"])
@@ -573,6 +843,7 @@ def evaluate_sealed(custody: dict[str, Any], manifest: dict[str, Any]) -> dict[s
         eight["y_baseline"],
         manifest["bootstrap_seeds"]["bootstrap"] + 1,
     )
+    session_identity_gain = _session_identity_gain(fit_rows, y_train, validation_target_rows, y_validation, validation_baseline)
     predictive_metrics = {
         "one_step_nrmse_gain": one_step_gain,
         "eight_step_nrmse_gain": eight["nrmse_gain"],
@@ -583,7 +854,7 @@ def evaluate_sealed(custody: dict[str, Any], manifest: dict[str, Any]) -> dict[s
         "route_v4s5_complex_corr": route_summary["v4s5"]["complex_correlation"],
         "route_v2s3_complex_corr": route_summary["v2s3"]["complex_correlation"],
         "worst_session_delta_vs_baseline": min(_entity_gains(target_rows, y_test, pred, baseline, "session_index")),
-        "session_lookup_gain_margin": (nrmse(y_test, session_lookup) - nrmse(y_test, pred)) / max(nrmse(y_test, session_lookup), 1e-9),
+        "session_lookup_gain_margin": one_step_gain - session_identity_gain,
     }
     result = {
         "schema_id": "CAT_CAS_PHASE6B6_ANALYSIS_RESULT_V1",
@@ -608,10 +879,22 @@ def evaluate_sealed(custody: dict[str, Any], manifest: dict[str, Any]) -> dict[s
         "summary": summarize(target_rows, y_test, pred),
         "baseline_operator": baseline_name,
         "predictive_metrics": predictive_metrics,
+        "route_local_gates": route_gates,
         "route_transfer": transfer,
         "drive_off": _drive_off(rows, manifest, pred, baseline, y_test, target_rows),
-        "confounds": _confounds(rows, pred, baseline, session_lookup, y_test, target_rows),
-        "within_route_pass": route_summary["v4s5"]["complex_correlation"] >= 0.80 or route_summary["v2s3"]["complex_correlation"] >= 0.80,
+        "confounds": _confounds(
+            rows,
+            fit_rows,
+            validation_target_rows,
+            y_train,
+            y_validation,
+            validation_baseline,
+            pred,
+            baseline,
+            y_test,
+            target_rows,
+        ),
+        "within_route_pass": any(gate["pass"] for gate in route_gates.values()),
     }
     result["adjudication"] = derive_adjudication(result)
     result = _plain(result)

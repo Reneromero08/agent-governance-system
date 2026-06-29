@@ -37,6 +37,9 @@ def derive_adjudication(results: dict[str, Any]) -> dict[str, Any]:
         and results["drive_off"]["zero_input_decay_gain_lower"] > 0.0
     )
     confounded = any(value.get("flag", bool(value)) if isinstance(value, dict) else bool(value) for value in results["confounds"].values())
+    route_local_pass = any(gate.get("pass", False) for gate in results.get("route_local_gates", {}).values())
+    if not results.get("route_local_gates") and not route_local_pass:
+        route_local_pass = results["within_route_pass"]
     if confounded:
         verdicts = ["CONFOUNDED_NO_OPERATOR_CLAIM"]
     elif predictive and transfer:
@@ -44,7 +47,7 @@ def derive_adjudication(results: dict[str, Any]) -> dict[str, Any]:
             "SHARED_PREDICTIVE_OPERATOR_SUPPORTED",
             "PERSISTENT_STATE_CANDIDATE" if drive_off else "DRIVEN_RELATIONAL_TRANSPORT_ONLY",
         ]
-    elif results["within_route_pass"] and not transfer:
+    elif route_local_pass and not transfer:
         verdicts = ["ROUTE_LOCAL_PREDICTIVE_OPERATOR_ONLY"]
     else:
         verdicts = ["INSTRUMENTATION_BOUNDARY_REJECTED"]

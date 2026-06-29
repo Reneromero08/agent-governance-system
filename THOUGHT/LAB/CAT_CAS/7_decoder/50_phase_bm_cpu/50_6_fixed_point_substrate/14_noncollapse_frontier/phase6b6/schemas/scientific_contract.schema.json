@@ -123,12 +123,14 @@
     },
     "v2_source": {
       "type": "object",
-      "required": ["reviewed_source", "generated_contracts", "corrective_evidence", "source_bundle_sha256", "v2_source_bundle_manifest_schema"],
+      "required": ["reviewed_source", "generated_contracts", "corrective_evidence", "source_bundle_sha256", "physical_interface_source_path", "physical_interface_source_sha256", "v2_source_bundle_manifest_schema"],
       "properties": {
         "reviewed_source": { "const": "ba48125d15009a044bb869b5716c412b1a8baa1b" },
         "generated_contracts": { "const": "500f7dfcd198e6e70dc3f999248aa61224d530cd" },
         "corrective_evidence": { "const": "9291d61ab3eb8d27e2bff347f1ec90a046726228" },
         "source_bundle_sha256": { "const": "bec71b2369587e68a88e9e2b5cb47837a07d5cdef6f13990417e0c0928e85f2f" },
+        "physical_interface_source_path": { "const": "14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c" },
+        "physical_interface_source_sha256": { "const": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976" },
         "v2_source_bundle_manifest_schema": { "const": "CAT_CAS_PHASE6_V2_SOURCE_BUNDLE_MANIFEST_V1" }
       },
       "additionalProperties": false
