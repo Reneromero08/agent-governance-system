@@ -14,4 +14,4 @@ SCHEMA_DIR = Path(__file__).resolve().parent
 
 def validate_named(name: str, payload: dict[str, Any]) -> None:
     schema = json.loads((SCHEMA_DIR / name).read_text(encoding="utf-8"))
-    Draft202012Validator(schema).validate(payload)
+    Draft202012Validator(schema).validate(json.loads(json.dumps(payload)))

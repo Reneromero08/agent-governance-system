@@ -128,7 +128,7 @@ u_t = [
   physical_tone_index,
   executed_order_family,
   executed_order_position,
-  codeword_bin_permutation
+  executed_codeword_signs
 ]
 ```
 

@@ -2,18 +2,64 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "CAT_CAS_PHASE6B6_ANALYSIS_CHOICE_MANIFEST_V1",
   "type": "object",
-  "required": ["schema_id", "contract_sha256", "schedule_sha256", "state_level", "operator_class", "regularization", "thresholds", "bootstrap_seeds", "analysis_choice_sha256"],
+  "required": ["schema_id", "contract_sha256", "schedule_sha256", "state_level", "delay_length", "operator_class", "regularization", "o4_lift", "validation_score", "selection_rule", "thresholds", "bootstrap_seeds", "created_before_test_open", "analysis_choice_sha256"],
   "properties": {
     "schema_id": { "const": "CAT_CAS_PHASE6B6_ANALYSIS_CHOICE_MANIFEST_V1" },
     "contract_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
     "schedule_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
     "state_level": { "enum": ["S0", "S1", "S2"] },
     "delay_length": { "enum": [null, 2, 4, 8, 16] },
-    "operator_class": { "type": "string" },
-    "regularization": { "type": "number" },
-    "o4_lift": {},
-    "thresholds": { "type": "object" },
-    "bootstrap_seeds": { "type": "object" },
+    "operator_class": {
+      "enum": [
+        "O1_SHARED_COMPLEX_AFFINE",
+        "O2_ROUTE_CONDITIONED_COMPLEX_AFFINE",
+        "O3_COMPLEX_BILINEAR_STATE_CONTROL",
+        "O4_FIXED_PHASE_NATIVE_LIFT_REGULARIZED_LINEAR"
+      ]
+    },
+    "regularization": { "enum": [0.0, 0.000001, 0.0001, 0.01, 1.0] },
+    "o4_lift": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "array",
+          "prefixItems": [
+            { "const": "z" },
+            { "const": "conjugate_z" },
+            { "const": "abs_z_squared" },
+            { "const": "z_tensor_u" },
+            { "const": "exp_i_executed_phase" },
+            { "const": "fixed_quadratic_cross_terms" }
+          ],
+          "minItems": 6,
+          "maxItems": 6
+        }
+      ]
+    },
+    "validation_score": { "type": "number" },
+    "selection_rule": { "const": "S0_THEN_S1_THEN_S2_AND_O1_THEN_O2_THEN_O3_THEN_O4_SIMPLEST_WITHIN_2_PERCENT" },
+    "thresholds": {
+      "type": "object",
+      "required": ["one_step_nrmse_gain", "eight_step_nrmse_gain", "route_complex_corr", "session_lookup_margin", "zero_input_decay_gain"],
+      "properties": {
+        "one_step_nrmse_gain": { "const": 0.1 },
+        "eight_step_nrmse_gain": { "const": 0.05 },
+        "route_complex_corr": { "const": 0.8 },
+        "session_lookup_margin": { "const": 0.05 },
+        "zero_input_decay_gain": { "const": 0.1 }
+      },
+      "additionalProperties": false
+    },
+    "bootstrap_seeds": {
+      "type": "object",
+      "required": ["bootstrap", "route_transfer"],
+      "properties": {
+        "bootstrap": { "type": "integer" },
+        "route_transfer": { "type": "integer" }
+      },
+      "additionalProperties": false
+    },
+    "created_before_test_open": { "const": true },
     "analysis_choice_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
   },
   "additionalProperties": false

@@ -31,6 +31,7 @@ class FittedOperator:
     regularization: float
     coefficients: Any
     baseline: np.ndarray
+    route_vocabulary: tuple[str, ...] = ("v2s3", "v4s5")
 
     def predict(self, x: np.ndarray, rows: list[dict[str, Any]]) -> np.ndarray:
         if self.operator_class == "O0_TRAINING_MEAN":
@@ -48,7 +49,7 @@ class FittedOperator:
         if self.operator_class == "O1_SHARED_COMPLEX_AFFINE":
             return _design_affine(x) @ self.coefficients
         if self.operator_class == "O2_ROUTE_CONDITIONED_COMPLEX_AFFINE":
-            return _design_route_affine(x, rows) @ self.coefficients
+            return _design_route_affine(x, rows, self.route_vocabulary) @ self.coefficients
         if self.operator_class == "O3_COMPLEX_BILINEAR_STATE_CONTROL":
             return _design_bilinear(x, rows) @ self.coefficients
         if self.operator_class == "O4_FIXED_PHASE_NATIVE_LIFT_REGULARIZED_LINEAR":
@@ -89,6 +90,7 @@ def choose_simplest_within_two_percent(candidates: Iterable[tuple[str, float]]) 
 
 def fit_operator(operator_class: str, x: np.ndarray, y: np.ndarray, rows: list[dict[str, Any]], regularization: float = 0.0) -> FittedOperator:
     baseline = np.mean(y, axis=0)
+    route_vocabulary = ("v2s3", "v4s5")
     if operator_class in ("O0_TRAINING_MEAN", "O0_LAST_VALUE", "O0_RETURN_TO_BASELINE"):
         return FittedOperator(operator_class, regularization, None, baseline)
     if operator_class == "O0_SESSION_LOOKUP_DIAGNOSTIC":
@@ -101,12 +103,12 @@ def fit_operator(operator_class: str, x: np.ndarray, y: np.ndarray, rows: list[d
         "O0_INPUT_ONLY": _design_input_only,
         "O0_TIME_INDEX": lambda _x, r: _design_time(r),
         "O1_SHARED_COMPLEX_AFFINE": lambda _x, _r: _design_affine(_x),
-        "O2_ROUTE_CONDITIONED_COMPLEX_AFFINE": _design_route_affine,
+        "O2_ROUTE_CONDITIONED_COMPLEX_AFFINE": lambda _x, r: _design_route_affine(_x, r, route_vocabulary),
         "O3_COMPLEX_BILINEAR_STATE_CONTROL": _design_bilinear,
         "O4_FIXED_PHASE_NATIVE_LIFT_REGULARIZED_LINEAR": _design_o4,
     }[operator_class](x, rows)
     coefs = _ridge(design, y, regularization)
-    return FittedOperator(operator_class, regularization, coefs, baseline)
+    return FittedOperator(operator_class, regularization, coefs, baseline, route_vocabulary)
 
 
 def _ridge(design: np.ndarray, y: np.ndarray, regularization: float) -> np.ndarray:
@@ -120,10 +122,12 @@ def _design_affine(x: np.ndarray) -> np.ndarray:
 
 
 def _design_input_only(x: np.ndarray, rows: list[dict[str, Any]]) -> np.ndarray:
+    phase_map = {None: 0.0, "none": 0.0, "0": 0.0, "pi": np.pi, "pi/2": np.pi / 2.0, "-pi/2": -np.pi / 2.0}
     controls = np.array([
         [
             1.0,
             1.0 if row["u_t"]["drive_on"] else 0.0,
+            float(phase_map.get(row["u_t"].get("phase_action"), 0.0)),
             -1.0 if row["u_t"].get("physical_tone_index") is None else float(row["u_t"]["physical_tone_index"]),
             0.0 if row["u_t"].get("codeword_sign") is None else float(row["u_t"]["codeword_sign"]),
         ]
@@ -145,10 +149,9 @@ def _design_session(rows: list[dict[str, Any]]) -> np.ndarray:
     return design
 
 
-def _design_route_affine(x: np.ndarray, rows: list[dict[str, Any]]) -> np.ndarray:
-    routes = sorted({row["route"] for row in rows})
+def _design_route_affine(x: np.ndarray, rows: list[dict[str, Any]], route_vocabulary: tuple[str, ...] = ("v2s3", "v4s5")) -> np.ndarray:
     parts = [np.ones((len(x), 1)), x]
-    for route in routes:
+    for route in route_vocabulary:
         mask = np.array([1.0 if row["route"] == route else 0.0 for row in rows]).reshape(-1, 1)
         parts.append(x * mask)
     return np.column_stack(parts)
@@ -165,7 +168,7 @@ def _design_bilinear(x: np.ndarray, rows: list[dict[str, Any]]) -> np.ndarray:
 def _design_o4(x: np.ndarray, rows: list[dict[str, Any]]) -> np.ndarray:
     z = x[:, 0] + 1j * x[:, 1]
     u = _design_input_only(x, rows)[:, 1:]
-    phase = np.exp(1j * u[:, 2])
+    phase = np.exp(1j * u[:, 1])
     features = [
         np.ones(len(x)),
         z.real,

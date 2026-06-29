@@ -62,7 +62,7 @@ EXECUTED_CONTROL_FIELDS = (
     "physical_tone_index",
     "executed_order_family",
     "executed_order_position",
-    "codeword_bin_permutation",
+    "executed_codeword_signs",
     "codeword_source_index",
     "codeword_sign",
 )

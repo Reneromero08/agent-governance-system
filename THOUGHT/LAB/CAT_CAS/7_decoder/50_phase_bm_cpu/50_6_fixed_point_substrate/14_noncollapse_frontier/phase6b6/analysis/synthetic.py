@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 from typing import Any
 
 from contracts.schedule import campaign_schedule
@@ -18,6 +19,25 @@ SCENARIOS = (
 )
 
 
+def _control(row: dict[str, Any]) -> float:
+    tone = row["u_t"].get("physical_tone_index")
+    analysis_tone = row["declared"].get("analysis_tone_index")
+    tone_term = 0.0 if tone is None else (tone + 1) * 0.015
+    if tone is None and analysis_tone is not None:
+        tone_term = (analysis_tone + 1) * 0.004
+    sign = row["u_t"].get("sign") or row["u_t"].get("codeword_sign") or 0
+    phase = row["u_t"].get("phase_action")
+    phase_term = {"0": 0.0, "pi": -0.10, "pi/2": 0.18, "-pi/2": -0.18}.get(phase, 0.0)
+    drive = 1.0 if row["u_t"]["drive_on"] else 0.0
+    return drive * (0.45 + tone_term + 0.08 * float(sign) + phase_term)
+
+
+def _write_response(row: dict[str, Any], signal: float) -> None:
+    row["r_t"]["lockin_I"] = round(signal, 9)
+    row["r_t"]["lockin_Q"] = round(0.35 * signal + 0.02 * math.sin(signal), 9)
+    row["r_t"]["ring_osc_period"] = round(100.0 + 0.25 * signal, 9)
+
+
 def synthetic_custody(scenario: str) -> dict[str, Any]:
     if scenario not in SCENARIOS:
         raise ValueError(f"unknown synthetic scenario: {scenario}")
@@ -25,23 +45,33 @@ def synthetic_custody(scenario: str) -> dict[str, Any]:
     custody = run_mock(schedule)
     custody["synthetic_scenario"] = scenario
     for session in custody["sessions"]:
+        state = 0.05 * (session["session_index"] + 1)
+        route_sign = 1.0 if session["route"] == "v4s5" else -1.0
         for row in session["slots"]:
-            tone = row["u_t"].get("physical_tone_index")
-            tone_term = 0.0 if tone is None else (tone + 1) * 0.01
-            drive = 1.0 if row["u_t"]["drive_on"] else 0.0
-            if scenario == "rejected":
-                signal = 0.001 * ((row["slot_index"] % 7) - 3)
-            elif scenario == "confounded":
-                signal = row["slot_index"] * 0.002
+            ctrl = _control(row)
+            if scenario == "shared_persistent":
+                if row["u_t"]["drive_on"]:
+                    state = 0.58 * state + ctrl
+                else:
+                    state = 0.94 * state + 0.02 * ((row["declared"].get("analysis_tone_index") or 0) + 1)
+                signal = state
+            elif scenario == "shared_driven":
+                if row["u_t"]["drive_on"]:
+                    state = 0.58 * state + ctrl
+                else:
+                    state = 0.01 * state
+                signal = state
             elif scenario == "route_local":
-                signal = (1.0 if row["route"] == "v4s5" else -1.0) * (drive + tone_term)
+                state = 0.50 * state + route_sign * ctrl
+                signal = state
+            elif scenario == "confounded":
+                state = 0.0025 * row["slot_index"] + 0.30 * (session["session_index"] % 2)
+                signal = state
             elif scenario == "session_lookup_dominates":
-                signal = float(row["session_index"])
+                state = float(session["session_index"])
+                signal = state
             else:
-                signal = drive + tone_term
-                if scenario == "shared_persistent" and row["stage"] == "trajectory" and not row["u_t"]["drive_on"]:
-                    signal += 0.3
-            row["r_t"]["lockin_I"] = round(signal, 9)
-            row["r_t"]["lockin_Q"] = round(signal * 0.5, 9)
-            row["r_t"]["ring_osc_period"] = round(100.0 + signal, 9)
+                state = 0.001 * ((row["slot_index"] * 17 + session["session_index"] * 5) % 23 - 11)
+                signal = state
+            _write_response(row, signal)
     return custody

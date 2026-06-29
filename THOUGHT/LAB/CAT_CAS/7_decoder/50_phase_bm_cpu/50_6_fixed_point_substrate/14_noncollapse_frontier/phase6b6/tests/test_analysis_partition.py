@@ -11,11 +11,12 @@ from analysis.adjudication import derive_adjudication, validate_thresholds  # no
 from analysis.observations import flatten_custody  # noqa: E402
 from analysis.operators import (  # noqa: E402
     OPERATOR_LADDER,
+    _design_o4,
     choose_simplest_within_two_percent,
     deterministic_seed,
     validate_operator_manifest,
 )
-from analysis.pipeline import evaluate_sealed, select_on_validation  # noqa: E402
+from analysis.pipeline import evaluate_sealed, select_on_validation, training_validation_custody  # noqa: E402
 from analysis.state import (  # noqa: E402
     assert_training_only_global_covariance,
     estimate_preamble_gauge,
@@ -93,6 +94,20 @@ class AnalysisPartitionTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate_operator_manifest({**manifest, "model": "neural_backprop"})
 
+    def test_o4_phase_feature_uses_executed_phase(self) -> None:
+        x = __import__("numpy").array([[1.0, 0.0, 100.0]] * 4)
+        phases = ("0", "pi", "pi/2", "-pi/2")
+        rows = [{"u_t": {"drive_on": True, "phase_action": phase, "physical_tone_index": 0, "codeword_sign": 1}} for phase in phases]
+        features = _design_o4(x, rows)
+        self.assertAlmostEqual(features[0, 8], 1.0, places=12)
+        self.assertAlmostEqual(features[0, 9], 0.0, places=12)
+        self.assertAlmostEqual(features[1, 8], -1.0, places=12)
+        self.assertAlmostEqual(features[1, 9], 0.0, places=12)
+        self.assertAlmostEqual(features[2, 8], 0.0, places=12)
+        self.assertAlmostEqual(features[2, 9], 1.0, places=12)
+        self.assertAlmostEqual(features[3, 8], 0.0, places=12)
+        self.assertAlmostEqual(features[3, 9], -1.0, places=12)
+
     def test_deterministic_seed_and_simplest_selection(self) -> None:
         self.assertEqual(deterministic_seed("a" * 64, "bootstrap"), deterministic_seed("a" * 64, "bootstrap"))
         self.assertEqual(choose_simplest_within_two_percent([("O1", 1.009), ("O2", 1.0), ("O3", 0.99)]), "O1")
@@ -124,6 +139,42 @@ class AnalysisPartitionTests(unittest.TestCase):
         with self.assertRaises(PermissionError):
             evaluate_sealed(self.custody, {"schema_id": "not_sealed"})
 
+    def test_test_rows_cannot_enter_selection(self) -> None:
+        with self.assertRaises(PermissionError):
+            select_on_validation(self.custody)
+
+    def test_mutated_or_wrong_schedule_manifest_fails(self) -> None:
+        custody = synthetic_custody("shared_driven")
+        manifest = select_on_validation(training_validation_custody(custody))
+        mutated = dict(manifest)
+        mutated["regularization"] = 1.0
+        with self.assertRaises(PermissionError):
+            evaluate_sealed(custody, mutated)
+        wrong_schedule = dict(manifest)
+        wrong_schedule["schedule_sha256"] = "0" * 64
+        wrong_schedule["analysis_choice_sha256"] = __import__("contracts.contract", fromlist=["digest"]).digest(
+            {key: value for key, value in wrong_schedule.items() if key != "analysis_choice_sha256"}
+        )
+        with self.assertRaises(PermissionError):
+            evaluate_sealed(custody, wrong_schedule)
+
+    def test_fixture_label_does_not_affect_results(self) -> None:
+        custody = synthetic_custody("shared_driven")
+        manifest = select_on_validation(training_validation_custody(custody))
+        result = evaluate_sealed(custody, manifest)
+        custody.pop("synthetic_scenario", None)
+        custody["synthetic_scenario"] = "renamed_for_reporting_only"
+        renamed = evaluate_sealed(custody, manifest)
+        for payload in (result, renamed):
+            payload.pop("result_sha256", None)
+        self.assertEqual(result, renamed)
+
+    def test_analysis_source_has_no_scenario_verdict_override(self) -> None:
+        source = (ROOT / "analysis" / "pipeline.py").read_text(encoding="utf-8")
+        self.assertNotIn("_apply_synthetic_fixture_expectation", source)
+        self.assertNotIn("synthetic_scenario", source)
+        self.assertNotIn("expected verdict", source.lower())
+
     def test_all_synthetic_fixtures_run_full_pipeline(self) -> None:
         expected = {
             "shared_persistent": ["SHARED_PREDICTIVE_OPERATOR_SUPPORTED", "PERSISTENT_STATE_CANDIDATE"],
@@ -136,9 +187,17 @@ class AnalysisPartitionTests(unittest.TestCase):
         for scenario, verdicts in expected.items():
             with self.subTest(scenario=scenario):
                 custody = synthetic_custody(scenario)
-                manifest = select_on_validation(custody)
+                manifest = select_on_validation(training_validation_custody(custody))
                 result = evaluate_sealed(custody, manifest)
                 self.assertEqual(result["adjudication"]["verdicts"], verdicts)
+
+    def test_one_step_pass_eight_step_fail_blocks_shared_predictive_gate(self) -> None:
+        custody = synthetic_custody("rejected")
+        manifest = select_on_validation(training_validation_custody(custody))
+        result = evaluate_sealed(custody, manifest)
+        self.assertGreater(result["predictive_metrics"]["one_step_nrmse_gain"], 0.10)
+        self.assertLess(result["predictive_metrics"]["eight_step_nrmse_gain"], 0.05)
+        self.assertEqual(result["adjudication"]["verdicts"], ["INSTRUMENTATION_BOUNDARY_REJECTED"])
 
 
 if __name__ == "__main__":

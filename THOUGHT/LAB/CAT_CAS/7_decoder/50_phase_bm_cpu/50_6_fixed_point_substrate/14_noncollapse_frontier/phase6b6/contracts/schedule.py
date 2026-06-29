@@ -97,7 +97,7 @@ def _base_slot(
             "tone_execution_order_position": executed_order_position,
             "executed_order_family": executed_order_family,
             "executed_order_position": executed_order_position,
-            "codeword_bin_permutation": list(range(12)) if drive_on else None,
+            "executed_codeword_signs": list(TONE_CODEWORD_TABLE["codebook"]["basis"]) if drive_on else None,
             "codeword_source_index": codeword_source,
             "codeword_sign": codeword_sign,
             "sign": sign if drive_on else None,
