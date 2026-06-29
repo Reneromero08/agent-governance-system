@@ -18,7 +18,7 @@ from analysis.operators import (  # noqa: E402
     deterministic_seed,
     validate_operator_manifest,
 )
-from analysis.pipeline import evaluate_sealed, select_on_validation, training_validation_custody  # noqa: E402
+from analysis.pipeline import _confounds, evaluate_sealed, select_on_validation, training_validation_custody  # noqa: E402
 from analysis.state import (  # noqa: E402
     assert_training_only_global_covariance,
     estimate_preamble_gauge,
@@ -47,6 +47,49 @@ def row(i: int, *, stage: str = "preamble", split: str = "train") -> dict[str, o
             "codeword_sign": 1,
         },
     }
+
+
+def diagnostic_row(
+    i: int,
+    *,
+    split: str,
+    session_index: int,
+    executed_family: str,
+    declared_family: str,
+    position: int,
+    tone: int = 0,
+) -> dict[str, object]:
+    return {
+        "stage": "prepared_order",
+        "split": split,
+        "packet_id": f"{split}:{session_index}:{i}",
+        "session_index": session_index,
+        "reboot_block": f"b{session_index}",
+        "route": "v4s5",
+        "sender_core": 4,
+        "receiver_core": 5,
+        "session_chronology": session_index,
+        "slot_index": i,
+        "declared": {
+            "declared_order_family": declared_family,
+            "declared_order_position": position,
+            "analysis_tone_index": tone,
+        },
+        "u_t": {
+            "drive_on": True,
+            "executed_mode": "PREPARED_ORDER",
+            "physical_tone_index": tone,
+            "executed_order_family": executed_family,
+            "executed_order_position": position,
+            "codeword_sign": 1,
+        },
+        "r_t": {"lockin_I": 0.0, "lockin_Q": 0.0, "ring_osc_period": 100.0},
+        "c_t": {},
+    }
+
+
+def y_from(values: list[float]) -> np.ndarray:
+    return np.array([[value, 0.25 * value, 100.0 + value] for value in values], dtype=float)
 
 
 class AnalysisPartitionTests(unittest.TestCase):
@@ -202,6 +245,21 @@ class AnalysisPartitionTests(unittest.TestCase):
             self.assertIn("flag", payload)
         self.assertEqual(result["adjudication"]["verdicts"], ["CONFOUNDED_NO_OPERATOR_CLAIM"])
 
+    def test_session_lookup_is_leave_one_known_session_out(self) -> None:
+        custody = synthetic_custody("session_lookup_dominates")
+        manifest = select_on_validation(training_validation_custody(custody))
+        result = evaluate_sealed(custody, manifest)
+        diagnostic = result["confounds"]["session_lookup_dominance"]
+        known_ids = set(diagnostic["held_out_session_ids"])
+        test_ids = {session["session_index"] for session in custody["sessions"] if session["split"] == "test"}
+        self.assertTrue(known_ids)
+        self.assertTrue(known_ids.isdisjoint(test_ids))
+        self.assertFalse(diagnostic["sealed_test_identity_substitution"])
+        self.assertFalse(diagnostic["confidence_interval"]["sealed_test_identity_substitution"])
+        for payload in diagnostic["per_session_nrmse"].values():
+            self.assertFalse(payload["session_id_seen_during_fit"])
+        self.assertIn("aggregate_gain", diagnostic)
+
     def test_order_label_sham_compares_declared_and_executed_predictors(self) -> None:
         custody = synthetic_custody("shared_driven")
         manifest = select_on_validation(training_validation_custody(custody))
@@ -212,6 +270,105 @@ class AnalysisPartitionTests(unittest.TestCase):
         self.assertIn("order_label_sham", sham)
         self.assertIn("declared-order predictor", sham["declared_order"]["comparison_model"])
         self.assertIn("executed-order predictor", sham["executed_order"]["comparison_model"])
+        self.assertIn("order-label-sham predictor NRMSE", sham["comparison_model"])
+        self.assertIn("executed_order_nrmse", sham)
+        self.assertIn("order_label_sham_gain", sham)
+
+    def test_physical_tone_diagnostic_alone_is_non_blocking(self) -> None:
+        train_rows = [
+            diagnostic_row(i, split="train", session_index=i // 2, executed_family="FWD", declared_family="FWD", position=0, tone=i % 2)
+            for i in range(8)
+        ]
+        validation_rows = [
+            diagnostic_row(i + 8, split="validation", session_index=4 + i // 2, executed_family="FWD", declared_family="FWD", position=0, tone=i % 2)
+            for i in range(4)
+        ]
+        target_rows = [
+            diagnostic_row(i + 12, split="test", session_index=8 + i // 2, executed_family="FWD", declared_family="FWD", position=0, tone=i % 2)
+            for i in range(4)
+        ]
+        y_train = y_from([1.0 if row["u_t"]["physical_tone_index"] else -1.0 for row in train_rows])
+        y_validation = y_from([1.0 if row["u_t"]["physical_tone_index"] else -1.0 for row in validation_rows])
+        y_true = y_from([1.0 if row["u_t"]["physical_tone_index"] else -1.0 for row in target_rows])
+        baseline = np.zeros_like(y_true)
+        confounds = _confounds(
+            train_rows + validation_rows + target_rows,
+            train_rows,
+            validation_rows,
+            y_train,
+            y_validation,
+            np.zeros_like(y_validation),
+            y_true,
+            baseline,
+            y_true,
+            target_rows,
+        )
+        self.assertGreater(confounds["physical_tone_indexed_performance"]["metric"], 0.05)
+        self.assertFalse(confounds["physical_tone_indexed_performance"]["flag"])
+        self.assertFalse(confounds["tone_vs_execution_position_disagreement"]["flag"])
+
+    def test_declared_order_prediction_does_not_substitute_for_order_label_sham(self) -> None:
+        train_rows = [
+            diagnostic_row(i, split="train", session_index=i // 2, executed_family="FWD" if i % 2 else "REV", declared_family="FWD" if i % 2 else "REV", position=0)
+            for i in range(8)
+        ]
+        validation_rows = [
+            diagnostic_row(i + 8, split="validation", session_index=4 + i // 2, executed_family="FWD" if i % 2 else "REV", declared_family="FWD" if i % 2 else "REV", position=0)
+            for i in range(4)
+        ]
+        target_rows = [
+            diagnostic_row(i + 12, split="test", session_index=8 + i // 2, executed_family="FWD" if i % 2 else "REV", declared_family="FWD" if i % 2 else "REV", position=0)
+            for i in range(4)
+        ]
+        y_train = y_from([1.0 if row["declared"]["declared_order_family"] == "FWD" else -1.0 for row in train_rows])
+        y_validation = y_from([1.0 if row["declared"]["declared_order_family"] == "FWD" else -1.0 for row in validation_rows])
+        y_true = y_from([1.0 if row["declared"]["declared_order_family"] == "FWD" else -1.0 for row in target_rows])
+        sham = _confounds(
+            train_rows + validation_rows + target_rows,
+            train_rows,
+            validation_rows,
+            y_train,
+            y_validation,
+            np.zeros_like(y_validation),
+            y_true,
+            np.zeros_like(y_true),
+            y_true,
+            target_rows,
+        )["order_label_sham_predicts_comparably"]
+        self.assertGreater(sham["declared_order"]["gain_vs_strongest_baseline"], 0.05)
+        self.assertLess(sham["order_label_sham_gain"], sham["executed_order_gain"])
+        self.assertFalse(sham["flag"])
+
+    def test_order_label_sham_confound_fires_when_sham_matches_executed_order(self) -> None:
+        train_rows = [
+            diagnostic_row(i, split="train", session_index=i // 2, executed_family="ORDER_LABEL_SHAM", declared_family="RND1", position=i % 2)
+            for i in range(8)
+        ]
+        validation_rows = [
+            diagnostic_row(i + 8, split="validation", session_index=4 + i // 2, executed_family="ORDER_LABEL_SHAM", declared_family="RND1", position=i % 2)
+            for i in range(4)
+        ]
+        target_rows = [
+            diagnostic_row(i + 12, split="test", session_index=8 + i // 2, executed_family="ORDER_LABEL_SHAM", declared_family="RND1", position=i % 2)
+            for i in range(4)
+        ]
+        y_train = y_from([1.0 if row["u_t"]["executed_order_position"] else -1.0 for row in train_rows])
+        y_validation = y_from([1.0 if row["u_t"]["executed_order_position"] else -1.0 for row in validation_rows])
+        y_true = y_from([1.0 if row["u_t"]["executed_order_position"] else -1.0 for row in target_rows])
+        sham = _confounds(
+            train_rows + validation_rows + target_rows,
+            train_rows,
+            validation_rows,
+            y_train,
+            y_validation,
+            np.zeros_like(y_validation),
+            y_true,
+            np.zeros_like(y_true),
+            y_true,
+            target_rows,
+        )["order_label_sham_predicts_comparably"]
+        self.assertLessEqual(sham["performance_ratio"], sham["threshold"])
+        self.assertTrue(sham["flag"])
 
     def test_persistence_uses_test_only_matched_hierarchical_bounds(self) -> None:
         custody = synthetic_custody("shared_persistent")
@@ -222,11 +379,32 @@ class AnalysisPartitionTests(unittest.TestCase):
         for offset in ("1", "2", "3"):
             payload = bounds[offset]
             self.assertGreater(payload["post_drive_lower_95"], payload["matched_sham_upper_95"])
-            self.assertEqual(payload["matched_strata"], ["route", "tone", "packet_type", "sender_off_position", "reboot_block", "session_block"])
+            self.assertEqual(payload["matched_strata"], ["route", "physical_tone", "sender_off_position", "reboot_block"])
+            self.assertEqual(payload["unmatched_row_count"], 0)
+            self.assertTrue(payload["matching_keys"])
             self.assertEqual(payload["post_drive_bootstrap"]["session_draws"], 4)
             self.assertEqual(payload["matched_sham_bootstrap"]["session_draws"], 4)
             self.assertTrue(payload["post_drive_bootstrap"]["mean_distribution"])
             self.assertTrue(payload["matched_sham_bootstrap"]["mean_distribution"])
+
+    def test_persistence_sham_route_mutation_removes_exact_match(self) -> None:
+        custody = synthetic_custody("shared_persistent")
+        mutated = False
+        for session in custody["sessions"]:
+            if session["split"] != "test":
+                continue
+            for slot in session["slots"]:
+                if slot["stage"] == "trajectory" and slot["u_t"].get("executed_mode") == "CARRIER_OFF_SHAM":
+                    slot["route"] = "mutated_route"
+                    mutated = True
+                    break
+            if mutated:
+                break
+        manifest = select_on_validation(training_validation_custody(custody))
+        result = evaluate_sealed(custody, manifest)
+        first = result["drive_off"]["position_bounds"]["1"]
+        self.assertGreater(first["unmatched_row_count"], 0)
+        self.assertFalse(first["pass"])
 
     def test_full_covariance_whitening_is_not_scalar_trace_scaling(self) -> None:
         cov = ((4.0, 1.5), (1.5, 1.0))
@@ -276,7 +454,9 @@ class AnalysisPartitionTests(unittest.TestCase):
                     "eight_step_blocked_lower": -0.1,
                     "complex_correlation": 0.99,
                     "worst_session_delta": 0.0,
-                    "session_dominance_passed": True,
+                    "session_identity_gain": 0.20,
+                    "session_identity_margin": -0.20,
+                    "session_dominance_passed": False,
                     "pass": False,
                 }
             },
@@ -289,6 +469,9 @@ class AnalysisPartitionTests(unittest.TestCase):
                 "eight_step_gain": 0.05,
                 "one_step_blocked_lower": 0.01,
                 "eight_step_blocked_lower": 0.01,
+                "session_identity_gain": 0.0,
+                "session_identity_margin": 0.10,
+                "session_dominance_passed": True,
                 "pass": True,
             }
         )
@@ -309,9 +492,13 @@ class AnalysisPartitionTests(unittest.TestCase):
                 "eight_step_blocked_lower",
                 "complex_correlation",
                 "worst_session_delta",
+                "session_identity_gain",
+                "session_identity_margin",
+                "session_identity_diagnostic",
                 "session_dominance_passed",
             ):
                 self.assertIn(key, gate)
+            self.assertGreater(gate["session_identity_margin"], 0.05)
 
     def test_selection_manifest_binds_stop_gate_and_evaluated_candidate(self) -> None:
         custody = synthetic_custody("shared_driven")

@@ -173,3 +173,22 @@ def reconstructed_tone_codeword_table() -> dict[str, Any]:
 
 
 TONE_CODEWORD_TABLE = tone_codeword_table()
+
+PRE_ACQUISITION_V2_EQUIVALENCE_REQUIREMENT = {
+    "schema_id": "CAT_CAS_PHASE6B6_PRE_ACQUISITION_V2_EQUIVALENCE_REQUIREMENT_V1",
+    "required_before": "ACQUISITION_AUTHORITY",
+    "non_hardware_qualification_must_emit_independent_table_from": QUALIFIED_V2_SOURCE["physical_interface_source_path"],
+    "comparison_method": "byte_for_byte_or_value_for_value",
+    "comparison_scope": (
+        "12 tone frequencies",
+        "4 mode names",
+        "4 complete codeword rows",
+        "mode-to-row mapping",
+        "source SHA-256",
+        "extracted table digest",
+    ),
+    "source_sha256": QUALIFIED_V2_SOURCE["physical_interface_source_sha256"],
+    "imported_table_digest": TONE_CODEWORD_TABLE["tone_codeword_table_sha256"],
+    "current_python_reproduction_is_independent_c_extraction": False,
+    "evidence_package_created": False,
+}

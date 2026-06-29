@@ -34,6 +34,7 @@
     "claim_ceiling",
     "qualified_v2_source",
     "imported_tone_codeword_table",
+    "pre_acquisition_v2_equivalence_requirement",
     "contract_sha256"
   ],
   "properties": {
@@ -85,6 +86,7 @@
     "claim_ceiling": { "$ref": "#/$defs/claim_ceiling" },
     "qualified_v2_source": { "$ref": "#/$defs/v2_source" },
     "imported_tone_codeword_table": { "type": "object" },
+    "pre_acquisition_v2_equivalence_requirement": { "$ref": "#/$defs/v2_equivalence_requirement" },
     "contract_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
   },
   "additionalProperties": false,
@@ -132,6 +134,34 @@
         "physical_interface_source_path": { "const": "14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c" },
         "physical_interface_source_sha256": { "const": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976" },
         "v2_source_bundle_manifest_schema": { "const": "CAT_CAS_PHASE6_V2_SOURCE_BUNDLE_MANIFEST_V1" }
+      },
+      "additionalProperties": false
+    },
+    "v2_equivalence_requirement": {
+      "type": "object",
+      "required": ["schema_id", "required_before", "non_hardware_qualification_must_emit_independent_table_from", "comparison_method", "comparison_scope", "source_sha256", "imported_table_digest", "current_python_reproduction_is_independent_c_extraction", "evidence_package_created"],
+      "properties": {
+        "schema_id": { "const": "CAT_CAS_PHASE6B6_PRE_ACQUISITION_V2_EQUIVALENCE_REQUIREMENT_V1" },
+        "required_before": { "const": "ACQUISITION_AUTHORITY" },
+        "non_hardware_qualification_must_emit_independent_table_from": { "const": "14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c" },
+        "comparison_method": { "const": "byte_for_byte_or_value_for_value" },
+        "comparison_scope": {
+          "type": "array",
+          "prefixItems": [
+            { "const": "12 tone frequencies" },
+            { "const": "4 mode names" },
+            { "const": "4 complete codeword rows" },
+            { "const": "mode-to-row mapping" },
+            { "const": "source SHA-256" },
+            { "const": "extracted table digest" }
+          ],
+          "minItems": 6,
+          "maxItems": 6
+        },
+        "source_sha256": { "const": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976" },
+        "imported_table_digest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "current_python_reproduction_is_independent_c_extraction": { "const": false },
+        "evidence_package_created": { "const": false }
       },
       "additionalProperties": false
     }

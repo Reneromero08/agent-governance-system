@@ -23,7 +23,14 @@ from contracts.contract import (  # noqa: E402
     declared_and_executed_order,
     order_family_sequence,
 )
-from contracts.v2_interface import QUALIFIED_V2_SOURCE, TONE_CODEWORD_TABLE, codebook, tone_hz, verify_v2_table_binding  # noqa: E402
+from contracts.v2_interface import (  # noqa: E402
+    PRE_ACQUISITION_V2_EQUIVALENCE_REQUIREMENT,
+    QUALIFIED_V2_SOURCE,
+    TONE_CODEWORD_TABLE,
+    codebook,
+    tone_hz,
+    verify_v2_table_binding,
+)
 from runtime.explicit_slot_runtime import run_mock  # noqa: E402
 from schemas.validate_objects import validate_named  # noqa: E402
 from analysis.pipeline import evaluate_sealed, select_on_validation, training_validation_custody  # noqa: E402
@@ -110,6 +117,30 @@ class ScheduleContractTests(unittest.TestCase):
                     mutated.write_text(text, encoding="utf-8")
                     with self.assertRaises(ValueError):
                         verify_v2_table_binding(mutated)
+
+    def test_v2_equivalence_is_future_non_hardware_qualification_requirement(self) -> None:
+        requirement = PRE_ACQUISITION_V2_EQUIVALENCE_REQUIREMENT
+        self.assertEqual(requirement["required_before"], "ACQUISITION_AUTHORITY")
+        self.assertEqual(
+            requirement["non_hardware_qualification_must_emit_independent_table_from"],
+            "14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c",
+        )
+        self.assertEqual(requirement["source_sha256"], QUALIFIED_V2_SOURCE["physical_interface_source_sha256"])
+        self.assertEqual(requirement["imported_table_digest"], TONE_CODEWORD_TABLE["tone_codeword_table_sha256"])
+        self.assertFalse(requirement["current_python_reproduction_is_independent_c_extraction"])
+        self.assertFalse(requirement["evidence_package_created"])
+        self.assertEqual(
+            set(requirement["comparison_scope"]),
+            {
+                "12 tone frequencies",
+                "4 mode names",
+                "4 complete codeword rows",
+                "mode-to-row mapping",
+                "source SHA-256",
+                "extracted table digest",
+            },
+        )
+        self.assertEqual(contract_manifest()["pre_acquisition_v2_equivalence_requirement"], requirement)
 
     def test_generated_objects_validate_against_schemas(self) -> None:
         validate_named("scientific_contract.schema.json", contract_manifest())

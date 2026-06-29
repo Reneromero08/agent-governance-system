@@ -183,12 +183,13 @@ def digest(value: Any) -> str:
 
 
 try:
-    from .v2_interface import QUALIFIED_V2_SOURCE, TONE_CODEWORD_TABLE
+    from .v2_interface import PRE_ACQUISITION_V2_EQUIVALENCE_REQUIREMENT, QUALIFIED_V2_SOURCE, TONE_CODEWORD_TABLE
 except ImportError:  # pragma: no cover
-    from v2_interface import QUALIFIED_V2_SOURCE, TONE_CODEWORD_TABLE  # type: ignore
+    from v2_interface import PRE_ACQUISITION_V2_EQUIVALENCE_REQUIREMENT, QUALIFIED_V2_SOURCE, TONE_CODEWORD_TABLE  # type: ignore
 
 CONTRACT["qualified_v2_source"] = QUALIFIED_V2_SOURCE
 CONTRACT["imported_tone_codeword_table"] = TONE_CODEWORD_TABLE
+CONTRACT["pre_acquisition_v2_equivalence_requirement"] = PRE_ACQUISITION_V2_EQUIVALENCE_REQUIREMENT
 
 
 def contract_manifest() -> dict[str, Any]:
