@@ -49,15 +49,15 @@ jobs:
           grep -q SOFTWARE_ENTRY_ONLY_AUTHORITY hardware.err
       - name: Strict C compile not applicable
         run: |
-          if find . -name '*.c' -print -quit | grep -q .; then
-            echo "unexpected C source under phase6b6 software-entry package"
+          if find . -path './qualification' -prune -o -name '*.c' -print -quit | grep -q .; then
+            echo "unexpected non-qualification C source under phase6b6 software-entry package"
             exit 1
           fi
-          echo "PHASE6B6_STRICT_C_COMPILE_NA_NO_C_SOURCES"
+          echo "PHASE6B6_STRICT_C_COMPILE_NA_NO_SOFTWARE_ENTRY_C_SOURCES"
       - name: ASan and UBSan not applicable
         run: |
-          if find . -name '*.c' -print -quit | grep -q .; then
-            echo "unexpected C source under phase6b6 software-entry package"
+          if find . -path './qualification' -prune -o -name '*.c' -print -quit | grep -q .; then
+            echo "unexpected non-qualification C source under phase6b6 software-entry package"
             exit 1
           fi
-          echo "PHASE6B6_ASAN_UBSAN_NA_NO_C_SOURCES"
+          echo "PHASE6B6_ASAN_UBSAN_NA_NO_SOFTWARE_ENTRY_C_SOURCES"

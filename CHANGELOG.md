@@ -7,10 +7,11 @@
 - Phase 6B.6: add the source-only non-hardware qualification namespace,
   independent C/reference V2 tone/codeword extraction wrapper, C/Python
   equivalence comparison, sealed-snapshot verifier, closed qualification
-  schemas, focused regressions, and software-only CI workflow. No target
-  evidence package, final campaign session, hardware execution, calibration,
-  acquisition authority, restoration, target coupling, or Small Wall
-  authority is added.
+  schemas, focused regressions, software-only CI workflow, and the matching
+  software-entry CI guard adjustment for qualification-owned C sources. No
+  target evidence package, final campaign session, hardware execution,
+  calibration, acquisition authority, restoration, target coupling, or Small
+  Wall authority is added.
 
 ## 2026-06-28: Phase 6B.6 source-review repair
 
