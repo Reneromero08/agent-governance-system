@@ -20,6 +20,9 @@
   Phase 6B.6 package identity, observed V2 source bytes, derived approval
   authority, and prohibited generated-content paths without creating evidence
   or acquisition authority.
+- Phase 6B.6: align hosted software-entry and non-hardware qualification
+  workflows so GitHub checkouts include the frozen snapshot subject commit
+  required by the Git-derived provenance verifier.
 
 ## 2026-06-28: Phase 6B.6 source-review repair
 
