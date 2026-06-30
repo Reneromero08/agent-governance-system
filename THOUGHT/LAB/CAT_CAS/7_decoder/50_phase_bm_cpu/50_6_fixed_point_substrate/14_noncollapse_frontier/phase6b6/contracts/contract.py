@@ -71,6 +71,7 @@ DECLARATION_FIELDS = (
     "declared_amplitude_level",
     "declared_phase_action",
     "declared_physical_tone_index",
+    "order_control_family",
     "declared_order_family",
     "declared_order_position",
 )
@@ -100,6 +101,7 @@ PROHIBITED_MEASURED_STATE_FIELDS = (
     "route",
     "target_label",
     "declared_mode",
+    "order_control_family",
     "declared_order_family",
     "declared_order_position",
     "session_chronology",

@@ -63,12 +63,13 @@
     },
     "declared": {
       "type": "object",
-      "required": ["declared_mode", "declared_amplitude_level", "declared_phase_action", "declared_physical_tone_index", "declared_order_family", "declared_order_position", "analysis_tone_index"],
+      "required": ["declared_mode", "declared_amplitude_level", "declared_phase_action", "declared_physical_tone_index", "order_control_family", "declared_order_family", "declared_order_position", "analysis_tone_index"],
       "properties": {
         "declared_mode": { "type": "string" },
         "declared_amplitude_level": { "type": ["integer", "null"], "enum": [0, 1, 2, null] },
         "declared_phase_action": { "enum": ["none", "0", "pi", "pi/2", "-pi/2", null] },
         "declared_physical_tone_index": { "type": ["integer", "null"], "minimum": 0, "maximum": 11 },
+        "order_control_family": { "type": ["string", "null"], "enum": ["FWD", "REV", "RND1", "RND2", "ORDER_LABEL_SHAM", null] },
         "declared_order_family": { "type": ["string", "null"], "enum": ["FWD", "REV", "RND1", "RND2", "ORDER_LABEL_SHAM", null] },
         "declared_order_position": { "type": ["integer", "null"], "minimum": 0, "maximum": 11 },
         "analysis_tone_index": { "type": ["integer", "null"], "minimum": 0, "maximum": 11 }

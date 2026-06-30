@@ -244,6 +244,7 @@
         "declared_amplitude_level",
         "declared_phase_action",
         "declared_physical_tone_index",
+        "order_control_family",
         "declared_order_family",
         "declared_order_position",
         "analysis_tone_index"
@@ -253,6 +254,7 @@
         "declared_amplitude_level": { "$ref": "#/$defs/nullable_integer" },
         "declared_phase_action": { "enum": ["none", "0", "pi", "pi/2", "-pi/2"] },
         "declared_physical_tone_index": { "$ref": "#/$defs/nullable_integer" },
+        "order_control_family": { "$ref": "#/$defs/nullable_string" },
         "declared_order_family": { "$ref": "#/$defs/nullable_string" },
         "declared_order_position": { "$ref": "#/$defs/nullable_integer" },
         "analysis_tone_index": { "$ref": "#/$defs/nullable_integer" }

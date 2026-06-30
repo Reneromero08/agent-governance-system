@@ -13,6 +13,7 @@
       { "required": ["session_id"] },
       { "required": ["route"] },
       { "required": ["target_label"] },
+      { "required": ["order_control_family"] },
       { "required": ["declared_order_family"] },
       { "required": ["session_chronology"] },
       { "required": ["future_value"] }

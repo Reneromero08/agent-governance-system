@@ -18,7 +18,7 @@ from analysis.operators import (  # noqa: E402
     deterministic_seed,
     validate_operator_manifest,
 )
-from analysis.pipeline import _confounds, evaluate_sealed, select_on_validation, training_validation_custody  # noqa: E402
+from analysis.pipeline import _confounds, _is_order_label_sham, evaluate_sealed, select_on_validation, training_validation_custody  # noqa: E402
 from analysis.state import (  # noqa: E402
     assert_training_only_global_covariance,
     estimate_preamble_gauge,
@@ -58,6 +58,8 @@ def diagnostic_row(
     declared_family: str,
     position: int,
     tone: int = 0,
+    order_control_family: str | None = None,
+    declared_position: int | None = None,
 ) -> dict[str, object]:
     return {
         "stage": "prepared_order",
@@ -71,8 +73,9 @@ def diagnostic_row(
         "session_chronology": session_index,
         "slot_index": i,
         "declared": {
+            "order_control_family": order_control_family if order_control_family is not None else declared_family,
             "declared_order_family": declared_family,
-            "declared_order_position": position,
+            "declared_order_position": declared_position if declared_position is not None else position,
             "analysis_tone_index": tone,
         },
         "u_t": {
@@ -100,7 +103,7 @@ class AnalysisPartitionTests(unittest.TestCase):
         cls.train_preamble = [row for row in cls.rows if row["split"] == "train" and row["stage"] == "preamble"]
 
     def test_measured_state_rejects_context_declared_and_future_leakage(self) -> None:
-        for field in ("session_id", "route", "declared_order_family", "future_value", "target_label", "session_chronology"):
+        for field in ("session_id", "route", "order_control_family", "declared_order_family", "future_value", "target_label", "session_chronology"):
             with self.subTest(field=field):
                 with self.assertRaises(ValueError):
                     validate_measured_state_fields(["lockin_I", field])
@@ -269,10 +272,28 @@ class AnalysisPartitionTests(unittest.TestCase):
         self.assertIn("declared_order", sham)
         self.assertIn("order_label_sham", sham)
         self.assertIn("declared-order predictor", sham["declared_order"]["comparison_model"])
-        self.assertIn("executed-order predictor", sham["executed_order"]["comparison_model"])
-        self.assertIn("order-label-sham predictor NRMSE", sham["comparison_model"])
+        self.assertIn("executed-order prediction on ORDER_LABEL_SHAM rows", sham["executed_order"]["comparison_model"])
+        self.assertIn("declared sham-label predictor NRMSE", sham["comparison_model"])
+        self.assertGreater(sham["actual_sham_row_count"], 0)
+        self.assertGreater(sham["ordinary_row_count"], 0)
         self.assertIn("executed_order_nrmse", sham)
         self.assertIn("order_label_sham_gain", sham)
+
+    def test_generated_order_label_sham_rows_are_detected_truthfully(self) -> None:
+        custody = run_mock(campaign_schedule())
+        rows = flatten_custody(custody)
+        sham_rows = [row for row in rows if _is_order_label_sham(row)]
+        ordinary_order_rows = [
+            row
+            for row in rows
+            if row["stage"] == "prepared_order" and row["declared"].get("order_control_family") != "ORDER_LABEL_SHAM"
+        ]
+        self.assertEqual(len(sham_rows), 12 * 72)
+        self.assertEqual(len(ordinary_order_rows), 12 * 4 * 72)
+        self.assertTrue(all(row["u_t"]["executed_order_family"] in ("RND1", "RND2") for row in sham_rows))
+        self.assertTrue(all(row["declared"]["declared_order_family"] in ("RND1", "RND2") for row in sham_rows))
+        self.assertTrue(all(row["declared"]["order_control_family"] == "ORDER_LABEL_SHAM" for row in sham_rows))
+        self.assertFalse(any(_is_order_label_sham(row) for row in ordinary_order_rows))
 
     def test_physical_tone_diagnostic_alone_is_non_blocking(self) -> None:
         train_rows = [
@@ -336,25 +357,26 @@ class AnalysisPartitionTests(unittest.TestCase):
             target_rows,
         )["order_label_sham_predicts_comparably"]
         self.assertGreater(sham["declared_order"]["gain_vs_strongest_baseline"], 0.05)
-        self.assertLess(sham["order_label_sham_gain"], sham["executed_order_gain"])
+        self.assertEqual(sham["actual_sham_row_count"], 0)
+        self.assertEqual(sham["ordinary_row_count"], len(target_rows))
         self.assertFalse(sham["flag"])
 
     def test_order_label_sham_confound_fires_when_sham_matches_executed_order(self) -> None:
         train_rows = [
-            diagnostic_row(i, split="train", session_index=i // 2, executed_family="ORDER_LABEL_SHAM", declared_family="RND1", position=i % 2)
+            diagnostic_row(i, split="train", session_index=i // 2, executed_family="RND2", declared_family="RND1", position=0, order_control_family="ORDER_LABEL_SHAM", declared_position=i % 2)
             for i in range(8)
         ]
         validation_rows = [
-            diagnostic_row(i + 8, split="validation", session_index=4 + i // 2, executed_family="ORDER_LABEL_SHAM", declared_family="RND1", position=i % 2)
+            diagnostic_row(i + 8, split="validation", session_index=4 + i // 2, executed_family="RND2", declared_family="RND1", position=0, order_control_family="ORDER_LABEL_SHAM", declared_position=i % 2)
             for i in range(4)
         ]
         target_rows = [
-            diagnostic_row(i + 12, split="test", session_index=8 + i // 2, executed_family="ORDER_LABEL_SHAM", declared_family="RND1", position=i % 2)
+            diagnostic_row(i + 12, split="test", session_index=8 + i // 2, executed_family="RND2", declared_family="RND1", position=0, order_control_family="ORDER_LABEL_SHAM", declared_position=i % 2)
             for i in range(4)
         ]
-        y_train = y_from([1.0 if row["u_t"]["executed_order_position"] else -1.0 for row in train_rows])
-        y_validation = y_from([1.0 if row["u_t"]["executed_order_position"] else -1.0 for row in validation_rows])
-        y_true = y_from([1.0 if row["u_t"]["executed_order_position"] else -1.0 for row in target_rows])
+        y_train = y_from([1.0 if row["declared"]["declared_order_position"] else -1.0 for row in train_rows])
+        y_validation = y_from([1.0 if row["declared"]["declared_order_position"] else -1.0 for row in validation_rows])
+        y_true = y_from([1.0 if row["declared"]["declared_order_position"] else -1.0 for row in target_rows])
         sham = _confounds(
             train_rows + validation_rows + target_rows,
             train_rows,
@@ -369,6 +391,50 @@ class AnalysisPartitionTests(unittest.TestCase):
         )["order_label_sham_predicts_comparably"]
         self.assertLessEqual(sham["performance_ratio"], sham["threshold"])
         self.assertTrue(sham["flag"])
+
+    def test_declared_sham_label_mutation_changes_sham_diagnostic(self) -> None:
+        train_rows = [
+            diagnostic_row(i, split="train", session_index=i // 2, executed_family="RND2", declared_family="RND1" if i % 2 else "RND2", position=0, order_control_family="ORDER_LABEL_SHAM")
+            for i in range(8)
+        ]
+        validation_rows = [
+            diagnostic_row(i + 8, split="validation", session_index=4 + i // 2, executed_family="RND2", declared_family="RND1" if i % 2 else "RND2", position=0, order_control_family="ORDER_LABEL_SHAM")
+            for i in range(4)
+        ]
+        target_rows = [
+            diagnostic_row(i + 12, split="test", session_index=8 + i // 2, executed_family="RND2", declared_family="RND1" if i % 2 else "RND2", position=0, order_control_family="ORDER_LABEL_SHAM")
+            for i in range(4)
+        ]
+        y_train = y_from([1.0 if row["declared"]["declared_order_family"] == "RND1" else -1.0 for row in train_rows])
+        y_validation = y_from([1.0 if row["declared"]["declared_order_family"] == "RND1" else -1.0 for row in validation_rows])
+        y_true = y_from([1.0 if row["declared"]["declared_order_family"] == "RND1" else -1.0 for row in target_rows])
+        base = _confounds(train_rows + validation_rows + target_rows, train_rows, validation_rows, y_train, y_validation, np.zeros_like(y_validation), y_true, np.zeros_like(y_true), y_true, target_rows)["order_label_sham_predicts_comparably"]
+        mutated_rows = [dict(row, declared={**row["declared"]}) for row in target_rows]
+        mutated_rows[0]["declared"]["declared_order_family"] = "RND2" if mutated_rows[0]["declared"]["declared_order_family"] == "RND1" else "RND1"
+        mutated = _confounds(train_rows + validation_rows + mutated_rows, train_rows, validation_rows, y_train, y_validation, np.zeros_like(y_validation), y_true, np.zeros_like(y_true), y_true, mutated_rows)["order_label_sham_predicts_comparably"]
+        self.assertNotEqual(base["order_label_sham_nrmse"], mutated["order_label_sham_nrmse"])
+
+    def test_executed_order_mutation_changes_executed_order_sham_prediction(self) -> None:
+        train_rows = [
+            diagnostic_row(i, split="train", session_index=i // 2, executed_family="RND1" if i % 2 else "RND2", declared_family="RND1", position=0, order_control_family="ORDER_LABEL_SHAM")
+            for i in range(8)
+        ]
+        validation_rows = [
+            diagnostic_row(i + 8, split="validation", session_index=4 + i // 2, executed_family="RND1" if i % 2 else "RND2", declared_family="RND1", position=0, order_control_family="ORDER_LABEL_SHAM")
+            for i in range(4)
+        ]
+        target_rows = [
+            diagnostic_row(i + 12, split="test", session_index=8 + i // 2, executed_family="RND1" if i % 2 else "RND2", declared_family="RND1", position=0, order_control_family="ORDER_LABEL_SHAM")
+            for i in range(4)
+        ]
+        y_train = y_from([1.0 if row["u_t"]["executed_order_family"] == "RND1" else -1.0 for row in train_rows])
+        y_validation = y_from([1.0 if row["u_t"]["executed_order_family"] == "RND1" else -1.0 for row in validation_rows])
+        y_true = y_from([1.0 if row["u_t"]["executed_order_family"] == "RND1" else -1.0 for row in target_rows])
+        base = _confounds(train_rows + validation_rows + target_rows, train_rows, validation_rows, y_train, y_validation, np.zeros_like(y_validation), y_true, np.zeros_like(y_true), y_true, target_rows)["order_label_sham_predicts_comparably"]
+        mutated_rows = [dict(row, u_t={**row["u_t"]}) for row in target_rows]
+        mutated_rows[0]["u_t"]["executed_order_family"] = "RND2" if mutated_rows[0]["u_t"]["executed_order_family"] == "RND1" else "RND1"
+        mutated = _confounds(train_rows + validation_rows + mutated_rows, train_rows, validation_rows, y_train, y_validation, np.zeros_like(y_validation), y_true, np.zeros_like(y_true), y_true, mutated_rows)["order_label_sham_predicts_comparably"]
+        self.assertNotEqual(base["executed_order_nrmse"], mutated["executed_order_nrmse"])
 
     def test_persistence_uses_test_only_matched_hierarchical_bounds(self) -> None:
         custody = synthetic_custody("shared_persistent")

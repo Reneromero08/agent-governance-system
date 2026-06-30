@@ -78,6 +78,23 @@ class ScheduleContractTests(unittest.TestCase):
         self.assertEqual((declared_family, executed_family), ("RND2", "RND1"))
         self.assertEqual(declared_order, ORDER_ARRAYS["RND2"])
         self.assertEqual(executed_order, ORDER_ARRAYS["RND1"])
+        sham_slots = [
+            slot
+            for session in self.schedule["sessions"]
+            for slot in session["slots"]
+            if slot["stage"] == "prepared_order" and slot["declared"]["order_control_family"] == "ORDER_LABEL_SHAM"
+        ]
+        ordinary_slots = [
+            slot
+            for session in self.schedule["sessions"]
+            for slot in session["slots"]
+            if slot["stage"] == "prepared_order" and slot["declared"]["order_control_family"] != "ORDER_LABEL_SHAM"
+        ]
+        self.assertEqual(len(sham_slots), 12 * 72)
+        self.assertEqual(len(ordinary_slots), 12 * 4 * 72)
+        self.assertTrue(all(slot["executed"]["executed_order_family"] in ("RND1", "RND2") for slot in sham_slots))
+        self.assertFalse(any(slot["executed"]["executed_order_family"] == "ORDER_LABEL_SHAM" for slot in sham_slots))
+        self.assertTrue(all(slot["declared"]["declared_order_family"] in ("RND1", "RND2") for slot in sham_slots))
 
     def test_v2_tone_codeword_binding_is_not_order_array(self) -> None:
         self.assertEqual(len(TONE_CODEWORD_TABLE["tones"]), 12)

@@ -331,8 +331,9 @@ def _label_value(row: dict[str, Any], label: str) -> str:
     if label == "declared_order":
         return f"{row['declared'].get('declared_order_family')}:{row['declared'].get('declared_order_position')}"
     if label == "order_label_sham":
-        family = row["declared"].get("declared_order_family") if row["u_t"].get("executed_order_family") == "ORDER_LABEL_SHAM" else None
-        return f"{family}:{row['declared'].get('declared_order_position')}"
+        if _is_order_label_sham(row):
+            return f"sham:{row['declared'].get('declared_order_family')}:{row['declared'].get('declared_order_position')}"
+        return "ordinary-order-control"
     if label == "chronology":
         return f"chronology:{row['session_chronology']}"
     raise ValueError(f"unknown diagnostic label: {label}")
@@ -352,6 +353,128 @@ def _predictive_label_diagnostic(
     target_labels = [_label_value(row, label) for row in test_rows]
     pred, _ = _fit_label_predictor(train_labels, y_train, target_labels)
     return _diagnostic_summary(test_rows, y_test, pred, baseline, seed, comparison_model)
+
+
+def _is_order_label_sham(row: dict[str, Any]) -> bool:
+    return row["declared"].get("order_control_family") == "ORDER_LABEL_SHAM"
+
+
+def _order_label_sham_diagnostic(
+    train_rows: list[dict[str, Any]],
+    y_train: np.ndarray,
+    target_rows: list[dict[str, Any]],
+    y_true: np.ndarray,
+    baseline: np.ndarray,
+    declared_order: dict[str, Any],
+) -> dict[str, Any]:
+    train_sham_idx = [i for i, row in enumerate(train_rows) if _is_order_label_sham(row)]
+    target_sham_idx = [i for i, row in enumerate(target_rows) if _is_order_label_sham(row)]
+    ordinary_count = len(target_rows) - len(target_sham_idx)
+    schedule_has_sham = bool(train_sham_idx or target_sham_idx)
+    if schedule_has_sham and not target_sham_idx:
+        return {
+            **_confound(True, float("inf"), 1.05, "ORDER_LABEL_SHAM control rows were present but no sham rows were detected for analysis"),
+            "actual_sham_row_count": 0,
+            "ordinary_row_count": ordinary_count,
+            "executed_order": {},
+            "declared_order": declared_order,
+            "order_label_sham": {},
+            "executed_order_prediction_on_sham_rows": {},
+            "declared_sham_label_prediction_on_sham_rows": {},
+            "blocked_confidence_information": {},
+            "executed_order_nrmse": float("inf"),
+            "executed_order_gain": 0.0,
+            "order_label_sham_nrmse": float("inf"),
+            "order_label_sham_gain": 0.0,
+            "performance_ratio": float("inf"),
+            "performance_delta": 0.0,
+        }
+    if not target_sham_idx:
+        return {
+            **_confound(False, float("inf"), 1.05, "no ORDER_LABEL_SHAM control rows present in analysis stratum"),
+            "actual_sham_row_count": 0,
+            "ordinary_row_count": ordinary_count,
+            "executed_order": {},
+            "declared_order": declared_order,
+            "order_label_sham": {},
+            "executed_order_prediction_on_sham_rows": {},
+            "declared_sham_label_prediction_on_sham_rows": {},
+            "blocked_confidence_information": {},
+            "executed_order_nrmse": float("inf"),
+            "executed_order_gain": 0.0,
+            "order_label_sham_nrmse": float("inf"),
+            "order_label_sham_gain": 0.0,
+            "performance_ratio": float("inf"),
+            "performance_delta": 0.0,
+        }
+    if not train_sham_idx:
+        return {
+            **_confound(True, float("inf"), 1.05, "ORDER_LABEL_SHAM target rows lack training sham controls"),
+            "actual_sham_row_count": len(target_sham_idx),
+            "ordinary_row_count": ordinary_count,
+            "executed_order": {},
+            "declared_order": declared_order,
+            "order_label_sham": {},
+            "executed_order_prediction_on_sham_rows": {},
+            "declared_sham_label_prediction_on_sham_rows": {},
+            "blocked_confidence_information": {},
+            "executed_order_nrmse": float("inf"),
+            "executed_order_gain": 0.0,
+            "order_label_sham_nrmse": float("inf"),
+            "order_label_sham_gain": 0.0,
+            "performance_ratio": float("inf"),
+            "performance_delta": 0.0,
+        }
+    sham_rows = [target_rows[i] for i in target_sham_idx]
+    y_sham = y_true[target_sham_idx]
+    baseline_sham = baseline[target_sham_idx]
+    executed_pred, _ = _fit_label_predictor(
+        [_label_value(row, "executed_order") for row in train_rows],
+        y_train,
+        [_label_value(row, "executed_order") for row in sham_rows],
+    )
+    sham_pred, _ = _fit_label_predictor(
+        [_label_value(train_rows[i], "order_label_sham") for i in train_sham_idx],
+        y_train[train_sham_idx],
+        [_label_value(row, "order_label_sham") for row in sham_rows],
+    )
+    executed_summary = _diagnostic_summary(sham_rows, y_sham, executed_pred, baseline_sham, 305, "executed-order prediction on ORDER_LABEL_SHAM rows")
+    sham_summary = _diagnostic_summary(sham_rows, y_sham, sham_pred, baseline_sham, 306, "declared sham-label prediction on ORDER_LABEL_SHAM rows")
+    direct_bootstrap = hierarchical_bootstrap_gain(sham_rows, y_sham, sham_pred, executed_pred, 307)
+    ratio = sham_summary["nrmse"] / max(executed_summary["nrmse"], 1e-9)
+    gain_delta = executed_summary["gain_vs_strongest_baseline"] - sham_summary["gain_vs_strongest_baseline"]
+    confidence = {
+        "executed_order_lower_95_gain": executed_summary["blocked_confidence_interval"]["lower_95_gain"],
+        "order_label_sham_lower_95_gain": sham_summary["blocked_confidence_interval"]["lower_95_gain"],
+        "sham_vs_executed_lower_95_gain": direct_bootstrap["lower_95_bound"],
+        "sham_vs_executed_gain_distribution": direct_bootstrap["gain_distribution"],
+        "blocked_gain_delta": gain_delta,
+        "session_draws": direct_bootstrap["session_draws"],
+        "nested_packet_draws": direct_bootstrap["nested_packet_draws"],
+    }
+    return {
+        **_confound(
+            ratio <= 1.05 and sham_summary["gain_vs_strongest_baseline"] > 0.05 and direct_bootstrap["lower_95_bound"] > 0.0,
+            ratio,
+            1.05,
+            "declared sham-label predictor NRMSE / executed-order predictor NRMSE on actual ORDER_LABEL_SHAM rows",
+            confidence,
+        ),
+        "actual_sham_row_count": len(target_sham_idx),
+        "ordinary_row_count": ordinary_count,
+        "executed_order": executed_summary,
+        "declared_order": declared_order,
+        "order_label_sham": sham_summary,
+        "executed_order_prediction_on_sham_rows": executed_summary,
+        "declared_sham_label_prediction_on_sham_rows": sham_summary,
+        "blocked_confidence_information": confidence,
+        "executed_order_nrmse": executed_summary["nrmse"],
+        "executed_order_gain": executed_summary["gain_vs_strongest_baseline"],
+        "order_label_sham_nrmse": sham_summary["nrmse"],
+        "order_label_sham_gain": sham_summary["gain_vs_strongest_baseline"],
+        "performance_ratio": ratio,
+        "performance_delta": gain_delta,
+    }
 
 
 def _entity_gains(rows: list[dict[str, Any]], y_true: np.ndarray, pred: np.ndarray, base: np.ndarray, key: str) -> list[float]:
@@ -908,15 +1031,13 @@ def _confounds(
     )
     executed_order = _predictive_label_diagnostic(train_rows, y_train, target_rows, y_true, baseline, "executed_order", 303, "executed-order predictor")
     declared_order = _predictive_label_diagnostic(train_rows, y_train, target_rows, y_true, baseline, "declared_order", 304, "declared-order predictor")
-    order_sham = _predictive_label_diagnostic(train_rows, y_train, target_rows, y_true, baseline, "order_label_sham", 305, "order-label-sham predictor")
+    order_sham = _order_label_sham_diagnostic(train_rows, y_train, target_rows, y_true, baseline, declared_order)
     time_fit = fit_operator("O0_TIME_INDEX", y_train, y_train, train_rows)
     time_pred = time_fit.predict(y_true, target_rows)
     time_ratio = nrmse(y_true, time_pred) / max(nrmse(y_true, pred), 1e-9)
     families, family_loss = _order_family_diagnostic(y_true, pred, baseline, target_rows, model_gain)
     chronology_blocks, chronology_spread = _chronology_diagnostic(y_true, pred, baseline, target_rows)
     tone_execution_delta = abs(physical["gain_vs_strongest_baseline"] - execution["gain_vs_strongest_baseline"])
-    order_ratio = order_sham["nrmse"] / max(executed_order["nrmse"], 1e-9)
-    order_gain_delta = executed_order["gain_vs_strongest_baseline"] - order_sham["gain_vs_strongest_baseline"]
     return {
         "physical_tone_indexed_performance": {**_confound(False, physical["gain_vs_strongest_baseline"], 0.05, physical["comparison_model"], physical["blocked_confidence_interval"]), "diagnostic": physical},
         "execution_position_indexed_performance": {**_confound(False, execution["gain_vs_strongest_baseline"], 0.05, execution["comparison_model"], execution["blocked_confidence_interval"]), "diagnostic": execution},
@@ -926,28 +1047,7 @@ def _confounds(
             10.0,
             "material gain disagreement between physical-tone-indexed and execution-position-indexed predictors",
         ),
-        "order_label_sham_predicts_comparably": {
-            **_confound(
-                order_ratio <= 1.05 and order_sham["gain_vs_strongest_baseline"] > 0.05,
-                order_ratio,
-                1.05,
-                "order-label-sham predictor NRMSE / executed-order predictor NRMSE",
-                {
-                    "executed_order_lower_95_gain": executed_order["blocked_confidence_interval"]["lower_95_gain"],
-                    "order_label_sham_lower_95_gain": order_sham["blocked_confidence_interval"]["lower_95_gain"],
-                    "blocked_gain_delta": order_gain_delta,
-                },
-            ),
-            "executed_order": executed_order,
-            "declared_order": declared_order,
-            "order_label_sham": order_sham,
-            "executed_order_nrmse": executed_order["nrmse"],
-            "executed_order_gain": executed_order["gain_vs_strongest_baseline"],
-            "order_label_sham_nrmse": order_sham["nrmse"],
-            "order_label_sham_gain": order_sham["gain_vs_strongest_baseline"],
-            "performance_ratio": order_ratio,
-            "performance_delta": order_gain_delta,
-        },
+        "order_label_sham_predicts_comparably": order_sham,
         "time_index_within_five_percent": _confound(model_gain >= 0.10 and time_ratio <= 1.05, time_ratio, 1.05, "O0_TIME_INDEX held-out NRMSE / selected dynamic model held-out NRMSE"),
         "single_order_family_dependence": {**_confound(family_loss >= 0.10, family_loss, 0.10, "selected model performance loss with each complete order family held out"), "held_out_families": families},
         "single_chronology_position_dependence": {**_confound(chronology_spread >= 0.50, chronology_spread, 0.50, "selected model performance spread across frozen chronology positions"), "chronology_blocks": chronology_blocks},
