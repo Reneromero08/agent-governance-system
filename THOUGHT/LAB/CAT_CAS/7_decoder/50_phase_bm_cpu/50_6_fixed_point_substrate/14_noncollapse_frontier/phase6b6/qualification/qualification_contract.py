@@ -41,6 +41,20 @@ from runtime.explicit_slot_runtime import run_mock  # noqa: E402
 SCHEMA_DIR = QUALIFICATION_ROOT / "schemas"
 EXPECTED_REVIEWED_IMPLEMENTATION_HEAD = "e33cb2d4b895746d7ca45e1aa2e6fde673fac20f"
 EXPECTED_MERGED_MAIN_HEAD = "d351a62f4f211589d57359d872734757b6e280d9"
+SNAPSHOT_SUBJECT_KIND = "PHASE6B6_SOFTWARE_IMPLEMENTATION_ONLY"
+SNAPSHOT_SUBJECT_COMMIT = EXPECTED_MERGED_MAIN_HEAD
+PHASE6B6_RELATIVE_ROOT = (
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/"
+    "14_noncollapse_frontier/phase6b6"
+)
+V2_RELATIVE_SOURCE = (
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/"
+    "14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c"
+)
+SNAPSHOT_SCOPE = (
+    PHASE6B6_RELATIVE_ROOT,
+    V2_RELATIVE_SOURCE,
+)
 SOURCE_REVIEW = 4596915321
 QUALIFIED_REVIEWED_SOURCE = "ba48125d15009a044bb869b5716c412b1a8baa1b"
 QUALIFICATION_SCHEMA_ID = "CAT_CAS_PHASE6B6_NONHARDWARE_QUALIFICATION_CONTRACT_V1"
@@ -123,6 +137,147 @@ def validate_schema(name: str, payload: dict[str, Any]) -> None:
     Draft202012Validator(schema).validate(json.loads(json.dumps(payload)))
 
 
+def _git(repo_root: Path, args: list[str], *, input_bytes: bytes | None = None) -> bytes:
+    result = subprocess.run(
+        ["git", *args],
+        cwd=str(repo_root),
+        input=input_bytes,
+        capture_output=True,
+        check=False,
+    )
+    if result.returncode != 0:
+        detail = (result.stderr or result.stdout or b"git command failed").decode("utf-8", errors="replace").strip()
+        raise QualificationError(f"git {' '.join(args)} failed: {detail}")
+    return result.stdout
+
+
+def _git_text(repo_root: Path, args: list[str]) -> str:
+    return _git(repo_root, args).decode("utf-8").strip()
+
+
+def _parse_ls_tree(raw: bytes) -> list[dict[str, Any]]:
+    entries: list[dict[str, Any]] = []
+    for record in raw.split(b"\0"):
+        if not record:
+            continue
+        try:
+            meta, path_bytes = record.split(b"\t", 1)
+            mode, object_type, object_sha = meta.decode("ascii").split(" ")
+            path = path_bytes.decode("utf-8")
+        except ValueError as exc:
+            raise QualificationError("could not parse git ls-tree record") from exc
+        entries.append({"path": path, "mode": mode, "git_object_type": object_type, "git_object_sha": object_sha})
+    return entries
+
+
+def _inventory_digest(entries: list[dict[str, Any]]) -> str:
+    return digest(entries)
+
+
+def _write_scoped_tree(repo_root: Path, entries: list[dict[str, Any]]) -> str:
+    with tempfile.TemporaryDirectory(prefix="phase6b6-snapshot-index-") as tmp:
+        index_path = Path(tmp) / "index"
+        env = os.environ.copy()
+        env["GIT_INDEX_FILE"] = str(index_path)
+        init = subprocess.run(["git", "read-tree", "--empty"], cwd=str(repo_root), env=env, capture_output=True, check=False)
+        if init.returncode != 0:
+            raise QualificationError("could not initialize temporary git index")
+        for entry in entries:
+            result = subprocess.run(
+                [
+                    "git",
+                    "update-index",
+                    "--add",
+                    "--cacheinfo",
+                    f"{entry['mode']},{entry['git_object_sha']},{entry['path']}",
+                ],
+                cwd=str(repo_root),
+                env=env,
+                capture_output=True,
+                check=False,
+            )
+            if result.returncode != 0:
+                detail = (result.stderr or result.stdout or b"git update-index failed").decode("utf-8", errors="replace").strip()
+                raise QualificationError(detail)
+        result = subprocess.run(["git", "write-tree"], cwd=str(repo_root), env=env, capture_output=True, check=False)
+        if result.returncode != 0:
+            detail = (result.stderr or result.stdout or b"git write-tree failed").decode("utf-8", errors="replace").strip()
+            raise QualificationError(detail)
+        return result.stdout.decode("ascii").strip()
+
+
+def _source_inventory_digest(entries: list[dict[str, Any]], prefix: str) -> str:
+    selected = [entry for entry in entries if entry["path"].startswith(prefix)]
+    return _inventory_digest(selected)
+
+
+def build_expected_snapshot_binding(repo_root: Path, expected_commit: str = SNAPSHOT_SUBJECT_COMMIT) -> dict[str, Any]:
+    """Build the trusted snapshot binding from Git, never from caller JSON."""
+    if expected_commit != SNAPSHOT_SUBJECT_COMMIT:
+        raise QualificationError("snapshot subject commit is frozen and cannot be caller-selected")
+    resolved_commit = _git_text(repo_root, ["rev-parse", f"{expected_commit}^{{commit}}"])
+    if resolved_commit != SNAPSHOT_SUBJECT_COMMIT:
+        raise QualificationError("resolved snapshot subject commit mismatch")
+    subject_tree = _git_text(repo_root, ["rev-parse", f"{resolved_commit}^{{tree}}"])
+    raw_tree = _git(
+        repo_root,
+        ["ls-tree", "-r", "-z", "--full-tree", resolved_commit, "--", *SNAPSHOT_SCOPE],
+    )
+    parsed = _parse_ls_tree(raw_tree)
+    if not parsed:
+        raise QualificationError("expected snapshot path set is empty")
+
+    entries: list[dict[str, Any]] = []
+    for item in parsed:
+        mode = item["mode"]
+        object_type = item["git_object_type"]
+        path = item["path"]
+        if mode not in ("100644", "100755") or object_type != "blob":
+            raise QualificationError(f"unsupported Git object in snapshot scope: {mode} {object_type} {path}")
+        blob = _git(repo_root, ["cat-file", "blob", item["git_object_sha"]])
+        entries.append(
+            {
+                "path": path,
+                "mode": mode,
+                "git_object_type": object_type,
+                "git_object_sha": item["git_object_sha"],
+                "sha256": hashlib.sha256(blob).hexdigest(),
+                "size": len(blob),
+            }
+        )
+    entries.sort(key=lambda entry: entry["path"])
+
+    expected_paths = {entry["path"] for entry in entries}
+    required_paths = {
+        V2_RELATIVE_SOURCE,
+        f"{PHASE6B6_RELATIVE_ROOT}/contracts/v2_interface.py",
+        f"{PHASE6B6_RELATIVE_ROOT}/contracts/contract.py",
+        f"{PHASE6B6_RELATIVE_ROOT}/contracts/schedule.py",
+        f"{PHASE6B6_RELATIVE_ROOT}/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json",
+    }
+    missing = sorted(required_paths - expected_paths)
+    if missing:
+        raise QualificationError(f"expected snapshot path set is incomplete: {missing}")
+
+    phase6b6_entries = [entry for entry in entries if entry["path"].startswith(f"{PHASE6B6_RELATIVE_ROOT}/")]
+    binding = {
+        "schema_id": "CAT_CAS_PHASE6B6_TRUSTED_SNAPSHOT_BINDING_V1",
+        "snapshot_subject_kind": SNAPSHOT_SUBJECT_KIND,
+        "snapshot_subject_commit": resolved_commit,
+        "snapshot_subject_tree": subject_tree,
+        "snapshot_scope": list(SNAPSHOT_SCOPE),
+        "qualification_harness_source_equals_snapshot_subject": False,
+        "tracked_file_count": len(entries),
+        "phase6b6_tracked_file_count": len(phase6b6_entries),
+        "path_mode_blob_inventory": entries,
+        "expected_inventory_sha256": _inventory_digest(entries),
+        "expected_phase6b6_subtree_inventory_sha256": _inventory_digest(phase6b6_entries),
+        "expected_scoped_tree": _write_scoped_tree(repo_root, entries),
+    }
+    validate_schema("trusted_snapshot_binding.schema.json", binding)
+    return binding
+
+
 def _qualified_v2_source_path() -> Path:
     return FRONTIER_ROOT / QUALIFIED_V2_SOURCE["physical_interface_source_path"].split("/", 1)[1]
 
@@ -171,6 +326,7 @@ def qualification_contract(
     _check_authority(authority_state)
 
     schedule_digest, mock_custody_digest = _schedule_and_mock_digests()
+    snapshot_binding = build_expected_snapshot_binding(REPO_ROOT, SNAPSHOT_SUBJECT_COMMIT)
     contract = {
         "schema_id": QUALIFICATION_SCHEMA_ID,
         "reviewed_implementation_head": reviewed_implementation_head,
@@ -183,6 +339,13 @@ def qualification_contract(
         "phase6b6_imported_table_digest": TONE_CODEWORD_TABLE["tone_codeword_table_sha256"],
         "schedule_digest": schedule_digest,
         "mock_custody_digest": mock_custody_digest,
+        "snapshot_subject_kind": snapshot_binding["snapshot_subject_kind"],
+        "snapshot_subject_commit": snapshot_binding["snapshot_subject_commit"],
+        "snapshot_subject_tree": snapshot_binding["snapshot_subject_tree"],
+        "snapshot_scope": snapshot_binding["snapshot_scope"],
+        "qualification_harness_source_equals_snapshot_subject": False,
+        "expected_inventory_sha256": snapshot_binding["expected_inventory_sha256"],
+        "expected_phase6b6_subtree_inventory_sha256": snapshot_binding["expected_phase6b6_subtree_inventory_sha256"],
         "pre_acquisition_v2_equivalence_requirement": PRE_ACQUISITION_V2_EQUIVALENCE_REQUIREMENT["schema_id"],
         "authority_state": authority_state,
         "qualification_evidence_created": False,
@@ -364,7 +527,7 @@ def main(argv: list[str] | None = None) -> int:
     mode.add_argument("--verify-snapshot", action="store_true")
     mode.add_argument("--validate-only", action="store_true")
     parser.add_argument("--snapshot-dir", type=Path)
-    parser.add_argument("--snapshot-identity", type=Path)
+    parser.add_argument("--write-observed-identity", type=Path)
     parser.add_argument("--sanitize", choices=("asan", "ubsan"))
     parser.add_argument("--out", type=Path)
     args = parser.parse_args(args_list)
@@ -383,14 +546,17 @@ def main(argv: list[str] | None = None) -> int:
             result = compare_reference()
             _write_or_print(result, args.out)
         elif args.verify_snapshot:
-            if args.snapshot_dir is None or args.snapshot_identity is None:
-                raise QualificationError("--verify-snapshot requires --snapshot-dir and --snapshot-identity")
+            if args.snapshot_dir is None:
+                raise QualificationError("--verify-snapshot requires --snapshot-dir")
             try:
-                from .verify_sealed_snapshot import verify_snapshot_identity
+                from .verify_sealed_snapshot import verify_snapshot_directory
             except ImportError:  # pragma: no cover
-                from verify_sealed_snapshot import verify_snapshot_identity  # type: ignore
+                from verify_sealed_snapshot import verify_snapshot_directory  # type: ignore
 
-            _write_or_print(verify_snapshot_identity(args.snapshot_dir, _load_json(args.snapshot_identity)), args.out)
+            result = verify_snapshot_directory(args.snapshot_dir)
+            if args.write_observed_identity:
+                _write_or_print(result["observed_snapshot_identity"], args.write_observed_identity)
+            _write_or_print(result, args.out)
         elif args.validate_only:
             _write_or_print(validate_only(), args.out)
         return 0

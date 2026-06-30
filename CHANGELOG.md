@@ -12,6 +12,14 @@
   target evidence package, final campaign session, hardware execution,
   calibration, acquisition authority, restoration, target coupling, or Small
   Wall authority is added.
+- Phase 6B.6: repair non-hardware snapshot qualification by replacing
+  caller-attested snapshot identity with a Git-derived trusted binding and an
+  independently reconstructed observed snapshot identity for the frozen
+  `PHASE6B6_SOFTWARE_IMPLEMENTATION_ONLY` subject commit. Snapshot verification
+  now checks path set, modes, Git blobs, SHA-256 inventory, scoped tree,
+  Phase 6B.6 package identity, observed V2 source bytes, derived approval
+  authority, and prohibited generated-content paths without creating evidence
+  or acquisition authority.
 
 ## 2026-06-28: Phase 6B.6 source-review repair
 

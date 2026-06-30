@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "CAT_CAS_PHASE6B6_SNAPSHOT_VERIFICATION_RESULT_V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "status",
+    "trusted_snapshot_binding",
+    "observed_snapshot_identity",
+    "qualification_contract_digest",
+    "checked",
+    "snapshot_verification_sha256"
+  ],
+  "properties": {
+    "schema_id": { "const": "CAT_CAS_PHASE6B6_SNAPSHOT_VERIFICATION_RESULT_V1" },
+    "status": { "const": "PHASE6B6_SEALED_SNAPSHOT_VERIFICATION_PASS" },
+    "trusted_snapshot_binding": { "type": "object" },
+    "observed_snapshot_identity": { "type": "object" },
+    "qualification_contract_digest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "checked": { "type": "array", "items": { "type": "string" } },
+    "snapshot_verification_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}

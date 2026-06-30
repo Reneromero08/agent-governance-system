@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "CAT_CAS_PHASE6B6_OBSERVED_SNAPSHOT_IDENTITY_V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "calculated_path_mode_blob_inventory",
+    "calculated_inventory_sha256",
+    "calculated_tree",
+    "calculated_phase6b6_subtree_inventory_sha256",
+    "calculated_v2_source_sha256",
+    "phase6b6_package_identity",
+    "derived_authority",
+    "prohibited_path_scan"
+  ],
+  "properties": {
+    "schema_id": { "const": "CAT_CAS_PHASE6B6_OBSERVED_SNAPSHOT_IDENTITY_V1" },
+    "calculated_path_mode_blob_inventory": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "mode", "git_object_type", "git_object_sha", "sha256", "size"],
+        "properties": {
+          "path": { "type": "string" },
+          "mode": { "enum": ["100644", "100755"] },
+          "git_object_type": { "const": "blob" },
+          "git_object_sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "size": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "calculated_inventory_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "calculated_tree": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "calculated_phase6b6_subtree_inventory_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "calculated_v2_source_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "phase6b6_package_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "root_path",
+        "tracked_file_count",
+        "subtree_inventory_digest",
+        "contract_source_sha256",
+        "schedule_source_sha256",
+        "runtime_source_inventory_digest",
+        "analysis_source_inventory_digest",
+        "schema_inventory_digest"
+      ],
+      "properties": {
+        "root_path": { "type": "string" },
+        "tracked_file_count": { "type": "integer", "minimum": 1 },
+        "subtree_inventory_digest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "contract_source_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "schedule_source_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "runtime_source_inventory_digest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "analysis_source_inventory_digest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "schema_inventory_digest": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "derived_authority": { "type": "object" },
+    "prohibited_path_scan": { "type": "object" }
+  }
+}

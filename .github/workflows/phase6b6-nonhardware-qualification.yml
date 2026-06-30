@@ -37,6 +37,23 @@ jobs:
           cmp "$left" "$right"
       - name: C versus Python equivalence
         run: python -m qualification.qualification_contract --compare-reference
+      - name: Exact Git snapshot provenance
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          SNAPSHOT_DIR="$tmp/snapshot" python - <<'PY'
+          import os
+          from pathlib import Path
+          from qualification.qualification_contract import REPO_ROOT, SNAPSHOT_SUBJECT_COMMIT, build_expected_snapshot_binding
+          from qualification.verify_sealed_snapshot import materialize_trusted_snapshot, verify_snapshot_directory
+          snapshot = Path(os.environ["SNAPSHOT_DIR"])
+          binding = build_expected_snapshot_binding(REPO_ROOT, SNAPSHOT_SUBJECT_COMMIT)
+          materialize_trusted_snapshot(binding, snapshot)
+          result = verify_snapshot_directory(snapshot)
+          assert result["observed_snapshot_identity"]["calculated_tree"] == binding["expected_scoped_tree"]
+          assert result["observed_snapshot_identity"]["calculated_inventory_sha256"] == binding["expected_inventory_sha256"]
+          print("PHASE6B6_GIT_SNAPSHOT_PROVENANCE_OK")
+          PY
       - name: Focused qualification tests
         run: python -m unittest discover -s tests -p 'test_nonhardware_qualification.py' -v
       - name: Existing Phase 6B.6 focused tests

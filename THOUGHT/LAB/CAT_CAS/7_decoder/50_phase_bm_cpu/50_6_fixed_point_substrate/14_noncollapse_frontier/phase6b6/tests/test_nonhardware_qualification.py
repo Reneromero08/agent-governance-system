@@ -2,28 +2,38 @@ from __future__ import annotations
 
 import copy
 import json
+import os
+import shutil
 import subprocess
 import sys
 import tempfile
 import unittest
 from pathlib import Path
 
-from contracts.contract import AUTHORITY
 from contracts.v2_interface import QUALIFIED_V2_SOURCE, TONE_CODEWORD_TABLE
 from qualification.compare_v2_reference import compare_reference_tables
 from qualification.qualification_contract import (
     EXPECTED_MERGED_MAIN_HEAD,
     EXPECTED_REVIEWED_IMPLEMENTATION_HEAD,
+    PHASE6B6_RELATIVE_ROOT,
     QualificationError,
+    REPO_ROOT,
+    SNAPSHOT_SUBJECT_COMMIT,
+    V2_RELATIVE_SOURCE,
+    build_expected_snapshot_binding,
     compile_reference_emitter,
     digest,
     emit_reference_table,
     qualification_contract,
-    qualification_authority_state,
     validate_only,
     validate_schema,
 )
-from qualification.verify_sealed_snapshot import SnapshotVerificationError, file_sha256, verify_snapshot_identity
+from qualification.verify_sealed_snapshot import (
+    SnapshotVerificationError,
+    _check_case_collisions,
+    materialize_trusted_snapshot,
+    verify_snapshot_directory,
+)
 
 
 class NonHardwareQualificationTests(unittest.TestCase):
@@ -32,11 +42,14 @@ class NonHardwareQualificationTests(unittest.TestCase):
         cls.reference = emit_reference_table()
         cls.equivalence = compare_reference_tables(cls.reference, TONE_CODEWORD_TABLE)
         cls.contract = qualification_contract()
+        cls.snapshot_binding = build_expected_snapshot_binding(REPO_ROOT, SNAPSHOT_SUBJECT_COMMIT)
 
     def test_contract_schema_binds_authority_and_digests(self) -> None:
         validate_schema("qualification_contract.schema.json", self.contract)
         self.assertEqual(self.contract["reviewed_implementation_head"], EXPECTED_REVIEWED_IMPLEMENTATION_HEAD)
         self.assertEqual(self.contract["merged_main_head"], EXPECTED_MERGED_MAIN_HEAD)
+        self.assertEqual(self.contract["snapshot_subject_commit"], SNAPSHOT_SUBJECT_COMMIT)
+        self.assertFalse(self.contract["qualification_harness_source_equals_snapshot_subject"])
         self.assertFalse(self.contract["qualification_evidence_created"])
         self.assertFalse(self.contract["hardware_ran"])
         self.assertFalse(self.contract["scientific_acquisition_authorized"])
@@ -98,62 +111,176 @@ class NonHardwareQualificationTests(unittest.TestCase):
         with self.assertRaises(QualificationError):
             qualification_contract(merged_main_head="0" * 40)
 
-    def _snapshot_identity(self, snapshot_dir: Path) -> dict[str, object]:
-        (snapshot_dir / "source.txt").write_text("sealed source bytes\n", encoding="utf-8")
-        inventory = {"source.txt": file_sha256(snapshot_dir / "source.txt")}
-        return {
-            "schema_id": "CAT_CAS_PHASE6B6_SNAPSHOT_IDENTITY_V1",
-            "expected_commit": EXPECTED_MERGED_MAIN_HEAD,
-            "expected_tree": "1" * 40,
-            "observed_tree": "1" * 40,
-            "file_sha256_inventory": inventory,
-            "qualification_contract_digest": self.contract["qualification_contract_sha256"],
-            "phase6b6_source_package_identity": {"root": "phase6b6"},
-            "v2_source_identity": {
-                "path": QUALIFIED_V2_SOURCE["physical_interface_source_path"],
-                "sha256": QUALIFIED_V2_SOURCE["physical_interface_source_sha256"],
-            },
-            "generated_final_campaign_sessions_present": False,
-            "authority": copy.deepcopy(qualification_authority_state()),
-        }
+    def _materialized_snapshot(self, tmp: str) -> Path:
+        snapshot_dir = Path(tmp)
+        materialize_trusted_snapshot(self.snapshot_binding, snapshot_dir)
+        return snapshot_dir
 
-    def test_snapshot_identity_passes_for_clean_inventory(self) -> None:
+    def _path(self, snapshot_dir: Path, relative: str) -> Path:
+        return snapshot_dir / relative
+
+    def test_real_git_snapshot_verification_passes(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
-            snapshot_dir = Path(tmp)
-            result = verify_snapshot_identity(snapshot_dir, self._snapshot_identity(snapshot_dir))
+            snapshot_dir = self._materialized_snapshot(tmp)
+            result = verify_snapshot_directory(snapshot_dir)
+            trusted = result["trusted_snapshot_binding"]
+            observed = result["observed_snapshot_identity"]
             self.assertEqual(result["status"], "PHASE6B6_SEALED_SNAPSHOT_VERIFICATION_PASS")
+            self.assertEqual(trusted["snapshot_subject_commit"], SNAPSHOT_SUBJECT_COMMIT)
+            self.assertEqual(observed["calculated_tree"], trusted["expected_scoped_tree"])
+            self.assertEqual(observed["calculated_path_mode_blob_inventory"], trusted["path_mode_blob_inventory"])
+            self.assertEqual(observed["calculated_inventory_sha256"], trusted["expected_inventory_sha256"])
+            self.assertEqual(
+                observed["calculated_phase6b6_subtree_inventory_sha256"],
+                trusted["expected_phase6b6_subtree_inventory_sha256"],
+            )
+            self.assertEqual(observed["calculated_v2_source_sha256"], QUALIFIED_V2_SOURCE["physical_interface_source_sha256"])
+            self.assertEqual(observed["phase6b6_package_identity"]["root_path"], PHASE6B6_RELATIVE_ROOT)
+            self.assertEqual(observed["prohibited_path_scan"]["status"], "PASS")
 
-    def test_dirty_or_extra_snapshot_files_fail(self) -> None:
+    def test_arbitrary_source_txt_snapshot_fails(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
-            snapshot_dir = Path(tmp)
-            identity = self._snapshot_identity(snapshot_dir)
-            (snapshot_dir / "extra.txt").write_text("unbound\n", encoding="utf-8")
+            Path(tmp, "source.txt").write_text("sealed source bytes\n", encoding="utf-8")
             with self.assertRaises(SnapshotVerificationError):
-                verify_snapshot_identity(snapshot_dir, identity)
+                verify_snapshot_directory(Path(tmp))
 
-    def test_changed_snapshot_bytes_fail(self) -> None:
+    def test_caller_supplied_fake_inventory_cannot_influence_verification(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
-            snapshot_dir = Path(tmp)
-            identity = self._snapshot_identity(snapshot_dir)
-            (snapshot_dir / "source.txt").write_text("changed\n", encoding="utf-8")
+            Path(tmp, "source.txt").write_text("sealed source bytes\n", encoding="utf-8")
+            fake_identity = {
+                "expected_tree": "1" * 40,
+                "observed_tree": "1" * 40,
+                "file_sha256_inventory": {"source.txt": "0" * 64},
+            }
+            self.assertIsNotNone(fake_identity)
             with self.assertRaises(SnapshotVerificationError):
-                verify_snapshot_identity(snapshot_dir, identity)
+                verify_snapshot_directory(Path(tmp))
 
-    def test_hardware_authority_fails_closed(self) -> None:
-        with tempfile.TemporaryDirectory() as tmp:
-            snapshot_dir = Path(tmp)
-            identity = self._snapshot_identity(snapshot_dir)
-            identity["authority"]["hardware_ran"] = True  # type: ignore[index]
-            with self.assertRaises(Exception):
-                verify_snapshot_identity(snapshot_dir, identity)
+    def test_wrong_commit_is_rejected(self) -> None:
+        with self.assertRaises(QualificationError):
+            build_expected_snapshot_binding(REPO_ROOT, EXPECTED_REVIEWED_IMPLEMENTATION_HEAD)
 
-    def test_acquisition_authority_fails_closed(self) -> None:
+    def test_wrong_commit_tree_strings_cannot_make_snapshot_pass(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
-            snapshot_dir = Path(tmp)
-            identity = self._snapshot_identity(snapshot_dir)
-            identity["authority"]["scientific_acquisition_authorized"] = True  # type: ignore[index]
-            with self.assertRaises(Exception):
-                verify_snapshot_identity(snapshot_dir, identity)
+            Path(tmp, "source.txt").write_text("not a git snapshot\n", encoding="utf-8")
+            with self.assertRaises(SnapshotVerificationError):
+                verify_snapshot_directory(Path(tmp))
+
+    def test_one_changed_file_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            snapshot_dir = self._materialized_snapshot(tmp)
+            target = self._path(snapshot_dir, f"{PHASE6B6_RELATIVE_ROOT}/contracts/contract.py")
+            target.write_text(target.read_text(encoding="utf-8") + "\n# changed\n", encoding="utf-8")
+            with self.assertRaises(SnapshotVerificationError):
+                verify_snapshot_directory(snapshot_dir)
+
+    def test_one_missing_file_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            snapshot_dir = self._materialized_snapshot(tmp)
+            self._path(snapshot_dir, f"{PHASE6B6_RELATIVE_ROOT}/contracts/schedule.py").unlink()
+            with self.assertRaises(SnapshotVerificationError):
+                verify_snapshot_directory(snapshot_dir)
+
+    def test_one_extra_file_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            snapshot_dir = self._materialized_snapshot(tmp)
+            extra = self._path(snapshot_dir, f"{PHASE6B6_RELATIVE_ROOT}/contracts/extra.py")
+            extra.write_text("extra\n", encoding="utf-8")
+            with self.assertRaises(SnapshotVerificationError):
+                verify_snapshot_directory(snapshot_dir)
+
+    def test_changed_executable_mode_fails(self) -> None:
+        if os.name == "nt":
+            self.skipTest("Windows filesystem does not expose Git executable-bit mutation reliably")
+        with tempfile.TemporaryDirectory() as tmp:
+            snapshot_dir = self._materialized_snapshot(tmp)
+            target = self._path(snapshot_dir, f"{PHASE6B6_RELATIVE_ROOT}/contracts/contract.py")
+            target.chmod(0o755)
+            with self.assertRaises(SnapshotVerificationError):
+                verify_snapshot_directory(snapshot_dir)
+
+    def test_symlink_substitution_fails(self) -> None:
+        if os.name == "nt":
+            self.skipTest("Windows symlink creation requires elevated privileges")
+        with tempfile.TemporaryDirectory() as tmp:
+            snapshot_dir = self._materialized_snapshot(tmp)
+            target = self._path(snapshot_dir, f"{PHASE6B6_RELATIVE_ROOT}/contracts/schedule.py")
+            target.unlink()
+            target.symlink_to("contract.py")
+            with self.assertRaises(SnapshotVerificationError):
+                verify_snapshot_directory(snapshot_dir)
+
+    def test_missing_phase6b6_package_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            snapshot_dir = self._materialized_snapshot(tmp)
+            shutil.rmtree(self._path(snapshot_dir, PHASE6B6_RELATIVE_ROOT))
+            with self.assertRaises(SnapshotVerificationError):
+                verify_snapshot_directory(snapshot_dir)
+
+    def test_missing_v2_source_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            snapshot_dir = self._materialized_snapshot(tmp)
+            self._path(snapshot_dir, V2_RELATIVE_SOURCE).unlink()
+            with self.assertRaises(SnapshotVerificationError):
+                verify_snapshot_directory(snapshot_dir)
+
+    def test_changed_v2_source_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            snapshot_dir = self._materialized_snapshot(tmp)
+            target = self._path(snapshot_dir, V2_RELATIVE_SOURCE)
+            target.write_text(target.read_text(encoding="utf-8") + "\n/* changed */\n", encoding="utf-8")
+            with self.assertRaises(SnapshotVerificationError):
+                verify_snapshot_directory(snapshot_dir)
+
+    def test_changed_v2_interface_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            snapshot_dir = self._materialized_snapshot(tmp)
+            target = self._path(snapshot_dir, f"{PHASE6B6_RELATIVE_ROOT}/contracts/v2_interface.py")
+            target.write_text(target.read_text(encoding="utf-8") + "\n# changed\n", encoding="utf-8")
+            with self.assertRaises(SnapshotVerificationError):
+                verify_snapshot_directory(snapshot_dir)
+
+    def test_changed_approval_json_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            snapshot_dir = self._materialized_snapshot(tmp)
+            target = self._path(snapshot_dir, f"{PHASE6B6_RELATIVE_ROOT}/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json")
+            payload = json.loads(target.read_text(encoding="utf-8"))
+            payload["phase6b6_entry_approved"] = False
+            target.write_text(json.dumps(payload, sort_keys=True), encoding="utf-8")
+            with self.assertRaises(SnapshotVerificationError):
+                verify_snapshot_directory(snapshot_dir)
+
+    def test_authority_flag_set_true_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            snapshot_dir = self._materialized_snapshot(tmp)
+            target = self._path(snapshot_dir, f"{PHASE6B6_RELATIVE_ROOT}/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json")
+            payload = json.loads(target.read_text(encoding="utf-8"))
+            payload["hardware_ran"] = True
+            target.write_text(json.dumps(payload, sort_keys=True), encoding="utf-8")
+            with self.assertRaises(SnapshotVerificationError):
+                verify_snapshot_directory(snapshot_dir)
+
+    def test_hidden_final_session_path_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            snapshot_dir = self._materialized_snapshot(tmp)
+            hidden = self._path(snapshot_dir, f"{PHASE6B6_RELATIVE_ROOT}/contracts/sessions/final.json")
+            hidden.parent.mkdir(parents=True, exist_ok=True)
+            hidden.write_text("{}\n", encoding="utf-8")
+            with self.assertRaises(SnapshotVerificationError):
+                verify_snapshot_directory(snapshot_dir)
+
+    def test_hidden_evidence_path_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            snapshot_dir = self._materialized_snapshot(tmp)
+            hidden = self._path(snapshot_dir, f"{PHASE6B6_RELATIVE_ROOT}/evidence/final.json")
+            hidden.parent.mkdir(parents=True, exist_ok=True)
+            hidden.write_text("{}\n", encoding="utf-8")
+            with self.assertRaises(SnapshotVerificationError):
+                verify_snapshot_directory(snapshot_dir)
+
+    def test_case_colliding_path_fails(self) -> None:
+        with self.assertRaises(SnapshotVerificationError):
+            _check_case_collisions(["a/contract.py", "a/CONTRACT.py"])
 
     def test_validate_only_cli_does_not_create_evidence(self) -> None:
         result = validate_only()
@@ -176,6 +303,7 @@ class NonHardwareQualificationTests(unittest.TestCase):
     def test_all_generated_temporary_objects_validate_against_schemas(self) -> None:
         validate_schema("c_reference_table.schema.json", self.reference)
         validate_schema("equivalence_result.schema.json", self.equivalence)
+        validate_schema("trusted_snapshot_binding.schema.json", self.snapshot_binding)
         self.assertRegex(digest(self.reference), r"^[0-9a-f]{64}$")
 
 
