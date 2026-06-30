@@ -4,6 +4,36 @@
 
 ## 2026-06-30: Phase 6B.6 non-hardware qualification harness
 
+- Phase 6B.6: close portable target qualification review `4600829669`
+  by binding final-result validation to trusted manifest, contract, snapshot,
+  strict, ASan, UBSan, runtime, and sender contexts; recursively closing
+  equivalence, runtime, sanitizer, and sender result schemas; and replacing
+  file-only package scanning with exact filesystem-entry verification for
+  regular files, directories, symlinks, special entries, and case collisions.
+  The hosted portable lane also suppresses target-side bytecode writes while
+  importing the copied verifier for live trusted-context checks and revalidates
+  final-result custody against the sender context captured by the target run.
+  The portable lane remains copy-only and non-hardware: no Git bundle, `.git`
+  directory, target jsonschema dependency, Phenom execution, sender workload,
+  MSR access, campaign session, target evidence, or acquisition authority is
+  added.
+- Phase 6B.6: close portable target qualification review `4599764362`
+  by requiring clean-HEAD Git-object export for portable support files,
+  separating base qualification and portable export identities, making the
+  manifest, trusted binding, qualification contract, copied-file records,
+  C-reference output, runtime validation, sanitizer execution, process
+  absence proof, and final result validators fail closed. The procedure
+  remains copy-only for the Phenom target: no Git bundle, `.git` directory,
+  target-side Git execution, jsonschema dependency, hardware execution,
+  sender workload, MSR access, campaign session, acquisition authority, or
+  scientific acquisition is added.
+- Phase 6B.6: add a copy-only portable target qualification package exporter,
+  standalone standard-library target verifier, pure-Python Git blob/scoped-tree
+  reconstruction, Git-hidden/jsonschema-absent portable CI lane, and focused
+  regressions for copied-file custody and fail-closed target checks. The
+  Phenom target remains a copied-file execution target only; no Git bundle,
+  `.git` directory, hardware execution, sender workload, MSR access,
+  campaign session, acquisition authority, or scientific acquisition is added.
 - Phase 6B.6: add the source-only non-hardware qualification namespace,
   independent C/reference V2 tone/codeword extraction wrapper, C/Python
   equivalence comparison, sealed-snapshot verifier, closed qualification
