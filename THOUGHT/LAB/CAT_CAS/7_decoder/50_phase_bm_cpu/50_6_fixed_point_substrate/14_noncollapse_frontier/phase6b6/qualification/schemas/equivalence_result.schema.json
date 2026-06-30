@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "CAT_CAS_PHASE6B6_V2_REFERENCE_EQUIVALENCE_RESULT_V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "status",
+    "tone_abs_tolerance_hz",
+    "tone_tolerance_justification",
+    "tone_comparison",
+    "codeword_comparison",
+    "failure",
+    "result_sha256"
+  ],
+  "properties": {
+    "schema_id": { "const": "CAT_CAS_PHASE6B6_V2_REFERENCE_EQUIVALENCE_RESULT_V1" },
+    "status": { "enum": ["V2_REFERENCE_EQUIVALENCE_PASS", "V2_REFERENCE_EQUIVALENCE_FAIL"] },
+    "tone_abs_tolerance_hz": { "const": 1e-9 },
+    "tone_tolerance_justification": { "type": "string" },
+    "tone_comparison": { "type": "object", "additionalProperties": true },
+    "codeword_comparison": { "type": "object", "additionalProperties": true },
+    "table_digest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "python_table_digest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "failure": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["field", "expected", "observed"],
+          "properties": {
+            "field": { "type": "string" },
+            "index": { "type": "integer" },
+            "expected": {},
+            "observed": {}
+          }
+        }
+      ]
+    },
+    "result_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}

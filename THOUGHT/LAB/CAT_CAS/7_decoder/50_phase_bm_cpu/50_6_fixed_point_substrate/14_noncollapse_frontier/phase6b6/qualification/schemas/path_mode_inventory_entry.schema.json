@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "CAT_CAS_PHASE6B6_PATH_MODE_INVENTORY_ENTRY_V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["path", "mode", "git_object_type", "git_object_sha", "sha256", "size"],
+  "properties": {
+    "path": { "type": "string", "minLength": 1 },
+    "mode": { "enum": ["100644", "100755"] },
+    "git_object_type": { "const": "blob" },
+    "git_object_sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "size": { "type": "integer", "minimum": 0 }
+  }
+}
