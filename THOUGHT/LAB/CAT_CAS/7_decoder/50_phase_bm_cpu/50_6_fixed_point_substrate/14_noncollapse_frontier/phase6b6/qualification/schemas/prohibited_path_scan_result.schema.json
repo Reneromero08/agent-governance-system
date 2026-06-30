@@ -7,8 +7,25 @@
   "properties": {
     "schema_id": { "const": "CAT_CAS_PHASE6B6_PROHIBITED_PATH_SCAN_RESULT_V1" },
     "status": { "enum": ["PASS", "FAIL"] },
-    "prohibited_prefixes": { "type": "array", "items": { "type": "string" } },
-    "matches": { "type": "array", "items": { "type": "string" } },
+    "prohibited_prefixes": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "prefixItems": [
+        { "const": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/sessions/" },
+        { "const": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/" },
+        { "const": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/target/" },
+        { "const": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/" },
+        { "const": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/calibration/" },
+        { "const": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/restoration/" },
+        { "const": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/target_coupling/" },
+        { "const": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/small_wall/" }
+      ]
+    },
+    "matches": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
     "generated_final_campaign_sessions_present": { "type": "boolean" }
   }
 }

@@ -31,7 +31,9 @@ from qualification.qualification_contract import (
 from qualification.verify_sealed_snapshot import (
     SnapshotVerificationError,
     _check_case_collisions,
+    assert_trusted_repository_unchanged,
     materialize_trusted_snapshot,
+    trusted_repository_object_state,
     verify_snapshot_directory,
 )
 
@@ -137,6 +139,107 @@ class NonHardwareQualificationTests(unittest.TestCase):
             self.assertEqual(observed["calculated_v2_source_sha256"], QUALIFIED_V2_SOURCE["physical_interface_source_sha256"])
             self.assertEqual(observed["phase6b6_package_identity"]["root_path"], PHASE6B6_RELATIVE_ROOT)
             self.assertEqual(observed["prohibited_path_scan"]["status"], "PASS")
+            self.assertEqual(observed["unexpected_entry_scan"]["unexpected_entries"], [])
+            validate_schema("snapshot_verification_result.schema.json", result)
+
+    def _assert_unexpected_entry_rejected(self, mutate, expected_path: str, expected_entry_type: str) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            snapshot_dir = self._materialized_snapshot(tmp)
+            mutate(snapshot_dir)
+            with self.assertRaises(SnapshotVerificationError) as cm:
+                verify_snapshot_directory(snapshot_dir)
+            message = str(cm.exception)
+            self.assertIn(expected_path, message)
+            self.assertIn(expected_entry_type, message)
+
+    def test_unbound_root_payload_file_fails(self) -> None:
+        self._assert_unexpected_entry_rejected(
+            lambda snapshot_dir: self._path(snapshot_dir, "payload.bin").write_bytes(b"payload\n"),
+            "payload.bin",
+            "regular_file",
+        )
+
+    def test_unbound_root_directory_payload_fails(self) -> None:
+        def mutate(snapshot_dir: Path) -> None:
+            target = self._path(snapshot_dir, "unbound/payload.bin")
+            target.parent.mkdir(parents=True)
+            target.write_bytes(b"payload\n")
+
+        self._assert_unexpected_entry_rejected(mutate, "unbound/payload.bin", "regular_file")
+
+    def test_unbound_holo_runtime_sibling_file_fails(self) -> None:
+        extra_path = (
+            "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/"
+            "14_noncollapse_frontier/holo_runtime_v2/extra.c"
+        )
+        self._assert_unexpected_entry_rejected(
+            lambda snapshot_dir: self._path(snapshot_dir, extra_path).write_text("extra\n", encoding="utf-8"),
+            extra_path,
+            "regular_file",
+        )
+
+    def test_unbound_holo_runtime_directory_payload_fails(self) -> None:
+        extra_path = (
+            "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/"
+            "14_noncollapse_frontier/holo_runtime_v2/unbound/payload.bin"
+        )
+
+        def mutate(snapshot_dir: Path) -> None:
+            target = self._path(snapshot_dir, extra_path)
+            target.parent.mkdir(parents=True)
+            target.write_bytes(b"payload\n")
+
+        self._assert_unexpected_entry_rejected(mutate, extra_path, "regular_file")
+
+    def test_unbound_out_of_scope_symlink_fails(self) -> None:
+        if os.name == "nt":
+            self.skipTest("Windows symlink creation requires elevated privileges")
+        self._assert_unexpected_entry_rejected(
+            lambda snapshot_dir: self._path(snapshot_dir, "unbound-link").symlink_to("payload.bin"),
+            "unbound-link",
+            "symlink",
+        )
+
+    def test_unbound_fifo_fails_where_supported(self) -> None:
+        if os.name == "nt" or not hasattr(os, "mkfifo"):
+            self.skipTest("FIFO creation is not supported on this platform")
+
+        def mutate(snapshot_dir: Path) -> None:
+            os.mkfifo(self._path(snapshot_dir, "unbound.fifo"))
+
+        self._assert_unexpected_entry_rejected(mutate, "unbound.fifo", "fifo")
+
+    def _assert_trusted_repo_unchanged(self, action, expect_failure: bool) -> None:
+        before = trusted_repository_object_state(REPO_ROOT)
+        if expect_failure:
+            with self.assertRaises(SnapshotVerificationError):
+                action()
+        else:
+            action()
+        after = trusted_repository_object_state(REPO_ROOT)
+        assert_trusted_repository_unchanged(before, after)
+        self.assertEqual(before["loose_object_paths"], after["loose_object_paths"])
+        self.assertEqual(before["pack_index_files"], after["pack_index_files"])
+        self.assertEqual(before["refs"], after["refs"])
+        self.assertEqual(before["index"], after["index"])
+        self.assertEqual(before["worktree_status"], after["worktree_status"])
+
+    def test_passing_snapshot_does_not_mutate_trusted_git_database(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            snapshot_dir = self._materialized_snapshot(tmp)
+            self._assert_trusted_repo_unchanged(lambda: verify_snapshot_directory(snapshot_dir), False)
+
+    def test_changed_file_failure_does_not_mutate_trusted_git_database(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            snapshot_dir = self._materialized_snapshot(tmp)
+            target = self._path(snapshot_dir, f"{PHASE6B6_RELATIVE_ROOT}/contracts/contract.py")
+            target.write_text(target.read_text(encoding="utf-8") + "\n# changed\n", encoding="utf-8")
+            self._assert_trusted_repo_unchanged(lambda: verify_snapshot_directory(snapshot_dir), True)
+
+    def test_arbitrary_payload_failure_does_not_mutate_trusted_git_database(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            Path(tmp, "payload.bin").write_bytes(b"arbitrary\n")
+            self._assert_trusted_repo_unchanged(lambda: verify_snapshot_directory(Path(tmp)), True)
 
     def test_arbitrary_source_txt_snapshot_fails(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -305,6 +408,47 @@ class NonHardwareQualificationTests(unittest.TestCase):
         validate_schema("equivalence_result.schema.json", self.equivalence)
         validate_schema("trusted_snapshot_binding.schema.json", self.snapshot_binding)
         self.assertRegex(digest(self.reference), r"^[0-9a-f]{64}$")
+
+    def _valid_snapshot_result(self) -> dict:
+        with tempfile.TemporaryDirectory() as tmp:
+            snapshot_dir = self._materialized_snapshot(tmp)
+            return verify_snapshot_directory(snapshot_dir)
+
+    def _assert_final_schema_rejects(self, mutate) -> None:
+        result = self._valid_snapshot_result()
+        mutate(result)
+        with self.assertRaises(Exception):
+            validate_schema("snapshot_verification_result.schema.json", result)
+
+    def test_final_schema_rejects_unknown_field_inside_derived_authority(self) -> None:
+        self._assert_final_schema_rejects(
+            lambda result: result["observed_snapshot_identity"]["derived_authority"].__setitem__("unknown", True)
+        )
+
+    def test_final_schema_rejects_unknown_field_inside_prohibited_scan(self) -> None:
+        self._assert_final_schema_rejects(
+            lambda result: result["observed_snapshot_identity"]["prohibited_path_scan"].__setitem__("unknown", True)
+        )
+
+    def test_final_schema_rejects_unknown_field_inside_trusted_binding(self) -> None:
+        self._assert_final_schema_rejects(
+            lambda result: result["trusted_snapshot_binding"].__setitem__("unknown", True)
+        )
+
+    def test_final_schema_rejects_unknown_field_inside_observed_identity(self) -> None:
+        self._assert_final_schema_rejects(
+            lambda result: result["observed_snapshot_identity"].__setitem__("unknown", True)
+        )
+
+    def test_final_schema_rejects_malformed_inventory_entry(self) -> None:
+        self._assert_final_schema_rejects(
+            lambda result: result["trusted_snapshot_binding"]["path_mode_blob_inventory"][0].__setitem__("mode", "040000")
+        )
+
+    def test_final_schema_rejects_altered_nested_status(self) -> None:
+        self._assert_final_schema_rejects(
+            lambda result: result["observed_snapshot_identity"]["prohibited_path_scan"].__setitem__("status", "FAIL")
+        )
 
 
 if __name__ == "__main__":

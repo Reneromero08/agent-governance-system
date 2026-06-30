@@ -15,10 +15,257 @@
   "properties": {
     "schema_id": { "const": "CAT_CAS_PHASE6B6_SNAPSHOT_VERIFICATION_RESULT_V1" },
     "status": { "const": "PHASE6B6_SEALED_SNAPSHOT_VERIFICATION_PASS" },
-    "trusted_snapshot_binding": { "type": "object" },
-    "observed_snapshot_identity": { "type": "object" },
-    "qualification_contract_digest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
-    "checked": { "type": "array", "items": { "type": "string" } },
-    "snapshot_verification_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+    "trusted_snapshot_binding": { "$ref": "#/$defs/trusted_snapshot_binding" },
+    "observed_snapshot_identity": { "$ref": "#/$defs/observed_snapshot_identity" },
+    "qualification_contract_digest": { "$ref": "#/$defs/hex64" },
+    "checked": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "prefixItems": [
+        { "const": "frozen_snapshot_subject_commit" },
+        { "const": "trusted_git_inventory" },
+        { "const": "observed_path_mode_blob_inventory" },
+        { "const": "observed_scoped_tree" },
+        { "const": "phase6b6_subtree_inventory" },
+        { "const": "observed_v2_source_sha256" },
+        { "const": "derived_authority" },
+        { "const": "prohibited_path_scan" },
+        { "const": "unexpected_entry_scan" }
+      ]
+    },
+    "snapshot_verification_sha256": { "$ref": "#/$defs/hex64" }
+  },
+  "$defs": {
+    "hex40": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "hex64": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "path_mode_inventory_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "mode", "git_object_type", "git_object_sha", "sha256", "size"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "mode": { "enum": ["100644", "100755"] },
+        "git_object_type": { "const": "blob" },
+        "git_object_sha": { "$ref": "#/$defs/hex40" },
+        "sha256": { "$ref": "#/$defs/hex64" },
+        "size": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "trusted_snapshot_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_id",
+        "snapshot_subject_kind",
+        "snapshot_subject_commit",
+        "snapshot_subject_tree",
+        "snapshot_scope",
+        "qualification_harness_source_equals_snapshot_subject",
+        "tracked_file_count",
+        "phase6b6_tracked_file_count",
+        "path_mode_blob_inventory",
+        "expected_inventory_sha256",
+        "expected_phase6b6_subtree_inventory_sha256",
+        "expected_scoped_tree"
+      ],
+      "properties": {
+        "schema_id": { "const": "CAT_CAS_PHASE6B6_TRUSTED_SNAPSHOT_BINDING_V1" },
+        "snapshot_subject_kind": { "const": "PHASE6B6_SOFTWARE_IMPLEMENTATION_ONLY" },
+        "snapshot_subject_commit": { "const": "d351a62f4f211589d57359d872734757b6e280d9" },
+        "snapshot_subject_tree": { "const": "1a927b20cb2d712a7220a823621c8fc83cbc984d" },
+        "snapshot_scope": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            { "const": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6" },
+            { "const": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c" }
+          ]
+        },
+        "qualification_harness_source_equals_snapshot_subject": { "const": false },
+        "tracked_file_count": { "type": "integer", "minimum": 1 },
+        "phase6b6_tracked_file_count": { "type": "integer", "minimum": 1 },
+        "path_mode_blob_inventory": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/path_mode_inventory_entry" }
+        },
+        "expected_inventory_sha256": { "const": "e47dea4c3467835a425d9d553803da48f672a8799970db4fc9b83e98596f50d8" },
+        "expected_phase6b6_subtree_inventory_sha256": { "const": "24789f0df9afa2d9f6a243a9050ff8f265cf22ffb42ab33bbe2f67521dbf44b5" },
+        "expected_scoped_tree": { "const": "408ee35257417898a992510b0f260602117a15af" }
+      }
+    },
+    "observed_snapshot_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_id",
+        "calculated_path_mode_blob_inventory",
+        "calculated_inventory_sha256",
+        "calculated_tree",
+        "calculated_phase6b6_subtree_inventory_sha256",
+        "calculated_v2_source_sha256",
+        "phase6b6_package_identity",
+        "derived_authority",
+        "prohibited_path_scan",
+        "unexpected_entry_scan"
+      ],
+      "properties": {
+        "schema_id": { "const": "CAT_CAS_PHASE6B6_OBSERVED_SNAPSHOT_IDENTITY_V1" },
+        "calculated_path_mode_blob_inventory": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/path_mode_inventory_entry" }
+        },
+        "calculated_inventory_sha256": { "const": "e47dea4c3467835a425d9d553803da48f672a8799970db4fc9b83e98596f50d8" },
+        "calculated_tree": { "const": "408ee35257417898a992510b0f260602117a15af" },
+        "calculated_phase6b6_subtree_inventory_sha256": { "const": "24789f0df9afa2d9f6a243a9050ff8f265cf22ffb42ab33bbe2f67521dbf44b5" },
+        "calculated_v2_source_sha256": { "const": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976" },
+        "phase6b6_package_identity": { "$ref": "#/$defs/phase6b6_package_identity" },
+        "derived_authority": { "$ref": "#/$defs/derived_authority" },
+        "prohibited_path_scan": { "$ref": "#/$defs/prohibited_path_scan" },
+        "unexpected_entry_scan": { "$ref": "#/$defs/unexpected_entry_scan" }
+      }
+    },
+    "phase6b6_package_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "root_path",
+        "tracked_file_count",
+        "subtree_inventory_digest",
+        "contract_source_sha256",
+        "schedule_source_sha256",
+        "runtime_source_inventory_digest",
+        "analysis_source_inventory_digest",
+        "schema_inventory_digest"
+      ],
+      "properties": {
+        "root_path": {
+          "const": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6"
+        },
+        "tracked_file_count": { "type": "integer", "minimum": 1 },
+        "subtree_inventory_digest": { "const": "24789f0df9afa2d9f6a243a9050ff8f265cf22ffb42ab33bbe2f67521dbf44b5" },
+        "contract_source_sha256": { "$ref": "#/$defs/hex64" },
+        "schedule_source_sha256": { "$ref": "#/$defs/hex64" },
+        "runtime_source_inventory_digest": { "$ref": "#/$defs/hex64" },
+        "analysis_source_inventory_digest": { "$ref": "#/$defs/hex64" },
+        "schema_inventory_digest": { "$ref": "#/$defs/hex64" }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "phase6b6_entry_approved",
+        "phase6b6_entered",
+        "implementation_authorized",
+        "software_qualification_authorized",
+        "non_hardware_target_qualification_authorized",
+        "hardware_ran",
+        "authorization_artifact_created",
+        "calibration_authorized",
+        "scientific_acquisition_authorized",
+        "restoration_authorized",
+        "target_coupling_authorized",
+        "small_wall_authorized"
+      ],
+      "properties": {
+        "phase6b6_entry_approved": { "const": true },
+        "phase6b6_entered": { "const": true },
+        "implementation_authorized": { "const": true },
+        "software_qualification_authorized": { "const": true },
+        "non_hardware_target_qualification_authorized": { "const": true },
+        "hardware_ran": { "const": false },
+        "authorization_artifact_created": { "const": false },
+        "calibration_authorized": { "const": false },
+        "scientific_acquisition_authorized": { "const": false },
+        "restoration_authorized": { "const": false },
+        "target_coupling_authorized": { "const": false },
+        "small_wall_authorized": { "const": false }
+      }
+    },
+    "derived_authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_id", "source_path", "source_sha256", "authority"],
+      "properties": {
+        "schema_id": { "const": "CAT_CAS_PHASE6B6_DERIVED_AUTHORITY_RESULT_V1" },
+        "source_path": {
+          "const": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json"
+        },
+        "source_sha256": { "$ref": "#/$defs/hex64" },
+        "authority": { "$ref": "#/$defs/authority" }
+      }
+    },
+    "prohibited_path_scan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_id", "status", "prohibited_prefixes", "matches", "generated_final_campaign_sessions_present"],
+      "properties": {
+        "schema_id": { "const": "CAT_CAS_PHASE6B6_PROHIBITED_PATH_SCAN_RESULT_V1" },
+        "status": { "const": "PASS" },
+        "prohibited_prefixes": {
+          "type": "array",
+          "minItems": 8,
+          "maxItems": 8,
+          "prefixItems": [
+            { "const": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/sessions/" },
+            { "const": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/" },
+            { "const": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/target/" },
+            { "const": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/" },
+            { "const": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/calibration/" },
+            { "const": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/restoration/" },
+            { "const": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/target_coupling/" },
+            { "const": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/small_wall/" }
+          ]
+        },
+        "matches": {
+          "type": "array",
+          "maxItems": 0,
+          "items": false
+        },
+        "generated_final_campaign_sessions_present": { "const": false }
+      }
+    },
+    "unexpected_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "entry_type", "reason"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "entry_type": {
+          "enum": ["regular_file", "directory", "symlink", "fifo", "socket", "character_device", "block_device", "other"]
+        },
+        "reason": {
+          "enum": ["not_trusted_file_or_ancestor_directory", "expected_file_replaced_by_non_file"]
+        }
+      }
+    },
+    "unexpected_entry_scan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_id", "expected_file_paths", "expected_ancestor_directories", "unexpected_entries"],
+      "properties": {
+        "schema_id": { "const": "CAT_CAS_PHASE6B6_UNEXPECTED_ENTRY_SCAN_V1" },
+        "expected_file_paths": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "expected_ancestor_directories": {
+          "type": "array",
+          "minItems": 1,
+          "contains": { "const": "." },
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "unexpected_entries": {
+          "type": "array",
+          "maxItems": 0,
+          "items": { "$ref": "#/$defs/unexpected_entry" }
+        }
+      }
+    }
   }
 }

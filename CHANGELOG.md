@@ -23,6 +23,10 @@
 - Phase 6B.6: align hosted software-entry and non-hardware qualification
   workflows so GitHub checkouts include the frozen snapshot subject commit
   required by the Git-derived provenance verifier.
+- Phase 6B.6: close the remaining sealed-snapshot custody review by rejecting
+  every unbound filesystem entry, reconstructing observed Git identity only in
+  an isolated temporary repository, recording trusted repository immutability
+  checks, and making the final snapshot verification schema recursively strict.
 
 ## 2026-06-28: Phase 6B.6 source-review repair
 

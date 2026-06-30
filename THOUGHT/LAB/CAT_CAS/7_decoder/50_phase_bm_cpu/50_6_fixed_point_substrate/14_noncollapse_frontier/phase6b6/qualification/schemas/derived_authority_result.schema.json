@@ -6,8 +6,13 @@
   "required": ["schema_id", "source_path", "source_sha256", "authority"],
   "properties": {
     "schema_id": { "const": "CAT_CAS_PHASE6B6_DERIVED_AUTHORITY_RESULT_V1" },
-    "source_path": { "type": "string" },
+    "source_path": {
+      "const": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json"
+    },
     "source_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "authority": { "$ref": "#/$defs/authority" }
+  },
+  "$defs": {
     "authority": {
       "type": "object",
       "additionalProperties": false,

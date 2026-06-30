@@ -57,6 +57,16 @@ PROHIBITED_PATH_PREFIXES = (
     f"{PHASE6B6_RELATIVE_ROOT}/small_wall/",
 )
 
+ENTRY_TYPE_BY_MODE = (
+    (stat.S_ISREG, "regular_file"),
+    (stat.S_ISDIR, "directory"),
+    (stat.S_ISLNK, "symlink"),
+    (stat.S_ISFIFO, "fifo"),
+    (stat.S_ISSOCK, "socket"),
+    (stat.S_ISCHR, "character_device"),
+    (stat.S_ISBLK, "block_device"),
+)
+
 
 def file_sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -76,10 +86,118 @@ def _check_case_collisions(paths: list[str]) -> None:
         seen[key] = path
 
 
-def _git_hash_object(repo_root: Path, path: Path) -> str:
+def _entry_type(mode: int) -> str:
+    for predicate, name in ENTRY_TYPE_BY_MODE:
+        if predicate(mode):
+            return name
+    return "other"
+
+
+def _git_path(repo_root: Path, args: list[str]) -> Path:
+    result = subprocess.run(
+        ["git", "rev-parse", "--git-path", *args],
+        cwd=str(repo_root),
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if result.returncode != 0:
+        raise SnapshotVerificationError((result.stderr or result.stdout or "git rev-parse --git-path failed").strip())
+    path = Path(result.stdout.strip())
+    if not path.is_absolute():
+        path = repo_root / path
+    return path.resolve()
+
+
+def _git_common_dir(repo_root: Path) -> Path:
+    result = subprocess.run(
+        ["git", "rev-parse", "--git-common-dir"],
+        cwd=str(repo_root),
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if result.returncode != 0:
+        raise SnapshotVerificationError((result.stderr or result.stdout or "git rev-parse --git-common-dir failed").strip())
+    path = Path(result.stdout.strip())
+    if not path.is_absolute():
+        path = repo_root / path
+    return path.resolve()
+
+
+def _file_fingerprint(path: Path) -> dict[str, Any]:
+    return {
+        "path": path.as_posix(),
+        "size": path.stat().st_size,
+        "sha256": file_sha256(path),
+    }
+
+
+def trusted_repository_object_state(repo_root: Path = REPO_ROOT) -> dict[str, Any]:
+    """Record trusted repository object/ref/index/worktree state without mutation."""
+    common_dir = _git_common_dir(repo_root)
+    objects_dir = _git_path(repo_root, ["objects"])
+    pack_dir = objects_dir / "pack"
+    refs_dir = common_dir / "refs"
+    index_path = _git_path(repo_root, ["index"])
+    packed_refs = common_dir / "packed-refs"
+
+    loose_objects: list[str] = []
+    if objects_dir.exists():
+        for path in objects_dir.glob("[0-9a-f][0-9a-f]/*"):
+            if path.is_file():
+                loose_objects.append(path.relative_to(objects_dir).as_posix())
+
+    pack_files = []
+    if pack_dir.exists():
+        pack_files = [_file_fingerprint(path) for path in sorted(pack_dir.iterdir()) if path.is_file()]
+
+    ref_files = []
+    if refs_dir.exists():
+        ref_files = [_file_fingerprint(path) for path in sorted(refs_dir.rglob("*")) if path.is_file()]
+    if packed_refs.is_file():
+        ref_files.append(_file_fingerprint(packed_refs))
+
+    status = subprocess.run(
+        ["git", "status", "--short", "--untracked-files=all"],
+        cwd=str(repo_root),
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if status.returncode != 0:
+        raise SnapshotVerificationError((status.stderr or status.stdout or "git status failed").strip())
+
+    return {
+        "loose_object_paths": sorted(loose_objects),
+        "pack_index_files": sorted(pack_files, key=lambda item: item["path"]),
+        "refs": sorted(ref_files, key=lambda item: item["path"]),
+        "index": _file_fingerprint(index_path) if index_path.is_file() else None,
+        "worktree_status": status.stdout,
+    }
+
+
+def assert_trusted_repository_unchanged(before: dict[str, Any], after: dict[str, Any]) -> None:
+    if before != after:
+        raise SnapshotVerificationError("trusted repository object/ref/index/worktree state changed")
+
+
+def _init_observed_git_repo(repo_root: Path) -> None:
+    result = subprocess.run(
+        ["git", "init", "--quiet"],
+        cwd=str(repo_root),
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if result.returncode != 0:
+        raise SnapshotVerificationError((result.stderr or result.stdout or "git init failed").strip())
+
+
+def _git_hash_object(observed_repo: Path, path: Path) -> str:
     result = subprocess.run(
         ["git", "hash-object", "-w", str(path)],
-        cwd=str(repo_root),
+        cwd=str(observed_repo),
         capture_output=True,
         text=True,
         check=False,
@@ -89,115 +207,117 @@ def _git_hash_object(repo_root: Path, path: Path) -> str:
     return result.stdout.strip()
 
 
-def _write_tree_from_entries(repo_root: Path, entries: list[dict[str, Any]]) -> str:
-    with tempfile.TemporaryDirectory(prefix="phase6b6-observed-index-") as tmp:
-        env = os.environ.copy()
-        env["GIT_INDEX_FILE"] = str(Path(tmp) / "index")
-        init = subprocess.run(["git", "read-tree", "--empty"], cwd=str(repo_root), env=env, capture_output=True, check=False)
-        if init.returncode != 0:
-            raise SnapshotVerificationError("could not initialize observed temporary git index")
-        for entry in entries:
-            result = subprocess.run(
-                [
-                    "git",
-                    "update-index",
-                    "--add",
-                    "--cacheinfo",
-                    f"{entry['mode']},{entry['git_object_sha']},{entry['path']}",
-                ],
-                cwd=str(repo_root),
-                env=env,
-                capture_output=True,
-                text=True,
-                check=False,
-            )
-            if result.returncode != 0:
-                raise SnapshotVerificationError((result.stderr or result.stdout or "git update-index failed").strip())
-        result = subprocess.run(["git", "write-tree"], cwd=str(repo_root), env=env, capture_output=True, text=True, check=False)
+def _write_tree_from_entries(observed_repo: Path, entries: list[dict[str, Any]]) -> str:
+    init = subprocess.run(["git", "read-tree", "--empty"], cwd=str(observed_repo), capture_output=True, text=True, check=False)
+    if init.returncode != 0:
+        raise SnapshotVerificationError((init.stderr or init.stdout or "could not initialize observed git index").strip())
+    for entry in entries:
+        result = subprocess.run(
+            [
+                "git",
+                "update-index",
+                "--add",
+                "--cacheinfo",
+                f"{entry['mode']},{entry['git_object_sha']},{entry['path']}",
+            ],
+            cwd=str(observed_repo),
+            capture_output=True,
+            text=True,
+            check=False,
+        )
         if result.returncode != 0:
-            raise SnapshotVerificationError((result.stderr or result.stdout or "git write-tree failed").strip())
-        return result.stdout.strip()
+            raise SnapshotVerificationError((result.stderr or result.stdout or "git update-index failed").strip())
+    result = subprocess.run(["git", "write-tree"], cwd=str(observed_repo), capture_output=True, text=True, check=False)
+    if result.returncode != 0:
+        raise SnapshotVerificationError((result.stderr or result.stdout or "git write-tree failed").strip())
+    return result.stdout.strip()
 
 
-def _scan_observed_scope(snapshot_dir: Path, trusted: dict[str, Any]) -> list[dict[str, Any]]:
+def _expected_ancestor_dirs(expected_paths: set[str]) -> list[str]:
+    expected_dirs: set[str] = {"."}
+    for path in expected_paths:
+        parts = path.split("/")[:-1]
+        for index in range(1, len(parts) + 1):
+            expected_dirs.add("/".join(parts[:index]))
+    return sorted(expected_dirs)
+
+
+def _scan_observed_scope(snapshot_dir: Path, trusted: dict[str, Any], observed_repo: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     root = snapshot_dir.resolve()
     if not root.is_dir():
         raise SnapshotVerificationError("snapshot directory does not exist")
 
     expected_paths = {entry["path"]: entry for entry in trusted["path_mode_blob_inventory"]}
-    expected_dirs: set[str] = set()
-    for path in expected_paths:
-        parts = path.split("/")[:-1]
-        for index in range(1, len(parts) + 1):
-            expected_dirs.add("/".join(parts[:index]))
+    expected_dirs = set(_expected_ancestor_dirs(set(expected_paths)))
 
     observed: list[dict[str, Any]] = []
     all_seen_paths: list[str] = []
+    unexpected_entries: list[dict[str, str]] = []
 
     for base, dirs, files in os.walk(root, topdown=True, followlinks=False):
         base_path = Path(base)
         rel_base = "" if base_path == root else _relative(base_path, root)
-        kept_dirs = []
+        recurse_dirs: list[str] = []
         for dirname in dirs:
             rel = f"{rel_base}/{dirname}" if rel_base else dirname
             full = base_path / dirname
             st = full.lstat()
-            if stat.S_ISLNK(st.st_mode):
-                raise SnapshotVerificationError(f"symlink substitution rejected: {rel}")
+            entry_type = _entry_type(st.st_mode)
+            all_seen_paths.append(rel)
+            if entry_type == "directory":
+                recurse_dirs.append(dirname)
             if rel in expected_paths:
-                raise SnapshotVerificationError(f"directory replaces tracked file: {rel}")
-            if not stat.S_ISDIR(st.st_mode):
-                raise SnapshotVerificationError(f"unsupported directory entry type: {rel}")
-            if rel in expected_dirs or any(path.startswith(f"{rel}/") for path in expected_paths):
-                kept_dirs.append(dirname)
-            elif rel.startswith(PHASE6B6_RELATIVE_ROOT):
-                all_seen_paths.append(rel)
-                kept_dirs.append(dirname)
-        dirs[:] = kept_dirs
+                unexpected_entries.append(
+                    {"path": rel, "entry_type": entry_type, "reason": "expected_file_replaced_by_non_file"}
+                )
+                continue
+            if rel not in expected_dirs:
+                unexpected_entries.append(
+                    {"path": rel, "entry_type": entry_type, "reason": "not_trusted_file_or_ancestor_directory"}
+                )
+        dirs[:] = recurse_dirs
 
         for filename in files:
             full = base_path / filename
             rel = f"{rel_base}/{filename}" if rel_base else filename
             st = full.lstat()
-            if stat.S_ISLNK(st.st_mode):
-                raise SnapshotVerificationError(f"symlink substitution rejected: {rel}")
-            if stat.S_ISDIR(st.st_mode):
-                raise SnapshotVerificationError(f"directory replaces tracked file: {rel}")
-            if not stat.S_ISREG(st.st_mode):
-                raise SnapshotVerificationError(f"unsupported snapshot file type: {rel}")
+            entry_type = _entry_type(st.st_mode)
+            all_seen_paths.append(rel)
+            if rel not in expected_paths:
+                unexpected_entries.append(
+                    {"path": rel, "entry_type": entry_type, "reason": "not_trusted_file_or_ancestor_directory"}
+                )
+                continue
+            if entry_type != "regular_file":
+                unexpected_entries.append(
+                    {"path": rel, "entry_type": entry_type, "reason": "expected_file_replaced_by_non_file"}
+                )
+                continue
             if getattr(st, "st_nlink", 1) > 1:
                 raise SnapshotVerificationError(f"hard-link ambiguity rejected: {rel}")
-            all_seen_paths.append(rel)
-            if rel not in expected_paths and (
-                rel.startswith(f"{PHASE6B6_RELATIVE_ROOT}/") or rel == V2_RELATIVE_SOURCE
-            ):
-                observed_mode = "100755" if (st.st_mode & stat.S_IXUSR) else "100644"
-                observed.append(
-                    {
-                        "path": rel,
-                        "mode": observed_mode,
-                        "git_object_type": "blob",
-                        "git_object_sha": _git_hash_object(REPO_ROOT, full),
-                        "sha256": file_sha256(full),
-                        "size": st.st_size,
-                    }
-                )
-            elif rel in expected_paths:
-                observed_mode = "100755" if (st.st_mode & stat.S_IXUSR) else "100644"
-                observed.append(
-                    {
-                        "path": rel,
-                        "mode": observed_mode,
-                        "git_object_type": "blob",
-                        "git_object_sha": _git_hash_object(REPO_ROOT, full),
-                        "sha256": file_sha256(full),
-                        "size": st.st_size,
-                    }
-                )
+            observed_mode = "100755" if (st.st_mode & stat.S_IXUSR) else "100644"
+            observed.append(
+                {
+                    "path": rel,
+                    "mode": observed_mode,
+                    "git_object_type": "blob",
+                    "git_object_sha": _git_hash_object(observed_repo, full),
+                    "sha256": file_sha256(full),
+                    "size": st.st_size,
+                }
+            )
 
     _check_case_collisions(all_seen_paths)
     observed.sort(key=lambda entry: entry["path"])
-    return observed
+    scan = {
+        "schema_id": "CAT_CAS_PHASE6B6_UNEXPECTED_ENTRY_SCAN_V1",
+        "expected_file_paths": sorted(expected_paths),
+        "expected_ancestor_directories": sorted(expected_dirs),
+        "unexpected_entries": sorted(unexpected_entries, key=lambda entry: entry["path"]),
+    }
+    if scan["unexpected_entries"]:
+        raise SnapshotVerificationError(f"unexpected snapshot entries: {scan['unexpected_entries']}")
+    return observed, scan
 
 
 def scan_prohibited_paths(observed_paths: list[str]) -> dict[str, Any]:
@@ -268,7 +388,11 @@ def _package_identity(snapshot_dir: Path, observed_entries: list[dict[str, Any]]
 
 
 def observed_snapshot_identity(snapshot_dir: Path, trusted: dict[str, Any]) -> dict[str, Any]:
-    observed_entries = _scan_observed_scope(snapshot_dir, trusted)
+    with tempfile.TemporaryDirectory(prefix="phase6b6-observed-git-") as tmp:
+        observed_repo = Path(tmp)
+        _init_observed_git_repo(observed_repo)
+        observed_entries, unexpected_entry_scan = _scan_observed_scope(snapshot_dir, trusted, observed_repo)
+        calculated_tree = _write_tree_from_entries(observed_repo, observed_entries)
     observed_paths = [entry["path"] for entry in observed_entries]
     prohibited = scan_prohibited_paths(observed_paths)
     if prohibited["status"] != "PASS":
@@ -291,12 +415,13 @@ def observed_snapshot_identity(snapshot_dir: Path, trusted: dict[str, Any]) -> d
         "schema_id": "CAT_CAS_PHASE6B6_OBSERVED_SNAPSHOT_IDENTITY_V1",
         "calculated_path_mode_blob_inventory": observed_entries,
         "calculated_inventory_sha256": digest(observed_entries),
-        "calculated_tree": _write_tree_from_entries(REPO_ROOT, observed_entries),
+        "calculated_tree": calculated_tree,
         "calculated_phase6b6_subtree_inventory_sha256": phase6b6_digest,
         "calculated_v2_source_sha256": v2_entry["sha256"],
         "phase6b6_package_identity": _package_identity(snapshot_dir, observed_entries, phase6b6_digest),
         "derived_authority": authority,
         "prohibited_path_scan": prohibited,
+        "unexpected_entry_scan": unexpected_entry_scan,
     }
     validate_schema("observed_snapshot_identity.schema.json", identity)
     return identity
@@ -338,6 +463,7 @@ def verify_snapshot_directory(snapshot_dir: Path) -> dict[str, Any]:
             "observed_v2_source_sha256",
             "derived_authority",
             "prohibited_path_scan",
+            "unexpected_entry_scan",
         ],
     }
     result["snapshot_verification_sha256"] = digest(result)
