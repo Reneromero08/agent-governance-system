@@ -2,6 +2,16 @@
 
 # Changelog
 
+## 2026-06-30: Phase 6B.6 non-hardware qualification harness
+
+- Phase 6B.6: add the source-only non-hardware qualification namespace,
+  independent C/reference V2 tone/codeword extraction wrapper, C/Python
+  equivalence comparison, sealed-snapshot verifier, closed qualification
+  schemas, focused regressions, and software-only CI workflow. No target
+  evidence package, final campaign session, hardware execution, calibration,
+  acquisition authority, restoration, target coupling, or Small Wall
+  authority is added.
+
 ## 2026-06-28: Phase 6B.6 source-review repair
 
 - Phase 6B.6: repair independent source review `4588166286` by binding the

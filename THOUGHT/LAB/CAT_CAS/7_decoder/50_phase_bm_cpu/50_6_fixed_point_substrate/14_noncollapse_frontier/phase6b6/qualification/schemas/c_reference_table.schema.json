@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "CAT_CAS_PHASE6B6_C_REFERENCE_TABLE_V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "format_version",
+    "qualified_source_sha256",
+    "tone_count",
+    "mode_count",
+    "mode_names",
+    "mode_to_codeword_mapping",
+    "tones",
+    "codebook",
+    "codebook_rows"
+  ],
+  "properties": {
+    "schema_id": { "const": "CAT_CAS_PHASE6B6_C_REFERENCE_TABLE_V1" },
+    "format_version": { "const": 1 },
+    "qualified_source_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "tone_count": { "const": 12 },
+    "mode_count": { "const": 4 },
+    "mode_names": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": { "enum": ["basis", "rotation", "residual", "mini"] }
+    },
+    "mode_to_codeword_mapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["basis", "rotation", "residual", "mini"],
+      "properties": {
+        "basis": { "type": "integer", "minimum": 0, "maximum": 3 },
+        "rotation": { "type": "integer", "minimum": 0, "maximum": 3 },
+        "residual": { "type": "integer", "minimum": 0, "maximum": 3 },
+        "mini": { "type": "integer", "minimum": 0, "maximum": 3 }
+      }
+    },
+    "tones": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["physical_tone_index", "frequency_hz", "codeword_source_index"],
+        "properties": {
+          "physical_tone_index": { "type": "integer", "minimum": 0, "maximum": 11 },
+          "frequency_hz": { "type": "number" },
+          "codeword_source_index": { "type": "integer", "minimum": 0, "maximum": 11 }
+        }
+      }
+    },
+    "codebook": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["basis", "rotation", "residual", "mini"],
+      "properties": {
+        "basis": { "$ref": "#/$defs/codeword" },
+        "rotation": { "$ref": "#/$defs/codeword" },
+        "residual": { "$ref": "#/$defs/codeword" },
+        "mini": { "$ref": "#/$defs/codeword" }
+      }
+    },
+    "codebook_rows": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["mode", "row"],
+        "properties": {
+          "mode": { "enum": ["basis", "rotation", "residual", "mini"] },
+          "row": { "$ref": "#/$defs/codeword" }
+        }
+      }
+    },
+    "reference_table_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "codeword": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": { "enum": [-1, 1] }
+    }
+  }
+}
