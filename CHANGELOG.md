@@ -4,6 +4,13 @@
 
 ## 2026-06-30: Phase 6B.6 non-hardware qualification harness
 
+- Phase 6B.6: add a copy-only portable target qualification package exporter,
+  standalone standard-library target verifier, pure-Python Git blob/scoped-tree
+  reconstruction, Git-hidden/jsonschema-absent portable CI lane, and focused
+  regressions for copied-file custody and fail-closed target checks. The
+  Phenom target remains a copied-file execution target only; no Git bundle,
+  `.git` directory, hardware execution, sender workload, MSR access,
+  campaign session, acquisition authority, or scientific acquisition is added.
 - Phase 6B.6: add the source-only non-hardware qualification namespace,
   independent C/reference V2 tone/codeword extraction wrapper, C/Python
   equivalence comparison, sealed-snapshot verifier, closed qualification

@@ -62,6 +62,37 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Validate-only qualification CLI
         run: python -m qualification.qualification_contract --validate-only
+      - name: Portable target package lane
+        run: |
+          set -euo pipefail
+          left="$(mktemp -u).tar"
+          right="$(mktemp -u).tar"
+          python -m qualification.qualification_contract --export-portable-target-package --out "$left"
+          python -m qualification.qualification_contract --export-portable-target-package --out "$right"
+          cmp "$left" "$right"
+          tar tf "$left" > portable.members
+          ! grep -E '(^|/)\.git(/|$)|\.bundle$' portable.members
+          extract="$(mktemp -d)"
+          tar xf "$left" -C "$extract"
+          python_bin="$(command -v python)"
+          bindir="$(mktemp -d)"
+          for tool in gcc cc as ld ar; do
+            if command -v "$tool" >/dev/null 2>&1; then
+              ln -s "$(command -v "$tool")" "$bindir/$tool"
+            fi
+          done
+          hook="$(mktemp -d)"
+          cat > "$hook/sitecustomize.py" <<'PY'
+          import builtins
+          _orig = __import__
+          def guarded(name, *args, **kwargs):
+              if name == "jsonschema" or name.startswith("jsonschema."):
+                  raise ImportError("jsonschema blocked for portable target workflow")
+              return _orig(name, *args, **kwargs)
+          builtins.__import__ = guarded
+          PY
+          PATH="$bindir" PYTHONPATH="$hook" "$python_bin" qualification/portable_target_qualification.py \
+            --package-root "$extract/phase6b6_portable_target_package"
       - name: Authority fail-closed
         run: |
           set +e

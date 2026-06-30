@@ -526,6 +526,7 @@ def main(argv: list[str] | None = None) -> int:
     mode.add_argument("--compare-reference", action="store_true")
     mode.add_argument("--verify-snapshot", action="store_true")
     mode.add_argument("--validate-only", action="store_true")
+    mode.add_argument("--export-portable-target-package", action="store_true")
     parser.add_argument("--snapshot-dir", type=Path)
     parser.add_argument("--write-observed-identity", type=Path)
     parser.add_argument("--sanitize", choices=("asan", "ubsan"))
@@ -559,6 +560,15 @@ def main(argv: list[str] | None = None) -> int:
             _write_or_print(result, args.out)
         elif args.validate_only:
             _write_or_print(validate_only(), args.out)
+        elif args.export_portable_target_package:
+            if args.out is None:
+                raise QualificationError("--export-portable-target-package requires --out")
+            try:
+                from .portable_package import export_portable_target_package
+            except ImportError:  # pragma: no cover
+                from portable_package import export_portable_target_package  # type: ignore
+
+            _write_or_print(export_portable_target_package(args.out), None)
         return 0
     except Exception as exc:
         print(str(exc), file=sys.stderr)
