@@ -65,6 +65,8 @@ jobs:
       - name: Portable target package lane
         run: |
           set -euo pipefail
+          git diff --quiet HEAD --
+          git diff --cached --quiet
           left="$(mktemp -u).tar"
           right="$(mktemp -u).tar"
           python -m qualification.qualification_contract --export-portable-target-package --out "$left"
@@ -93,6 +95,13 @@ jobs:
           PY
           PATH="$bindir" PYTHONPATH="$hook" "$python_bin" qualification/portable_target_qualification.py \
             --package-root "$extract/phase6b6_portable_target_package"
+          for option in --hardware --hardware=true --acquire --acquire=yes --calibrate --calibrate=1 --run-campaign --run-campaign=true --unknown; do
+            if PATH="$bindir" PYTHONPATH="$hook" "$python_bin" qualification/portable_target_qualification.py \
+              --package-root "$extract/phase6b6_portable_target_package" "$option" >/tmp/portable-option.out 2>/tmp/portable-option.err; then
+              echo "forbidden portable option unexpectedly passed: $option"
+              exit 1
+            fi
+          done
       - name: Authority fail-closed
         run: |
           set +e

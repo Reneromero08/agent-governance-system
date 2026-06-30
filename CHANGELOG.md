@@ -4,6 +4,16 @@
 
 ## 2026-06-30: Phase 6B.6 non-hardware qualification harness
 
+- Phase 6B.6: close portable target qualification review `4599764362`
+  by requiring clean-HEAD Git-object export for portable support files,
+  separating base qualification and portable export identities, making the
+  manifest, trusted binding, qualification contract, copied-file records,
+  C-reference output, runtime validation, sanitizer execution, process
+  absence proof, and final result validators fail closed. The procedure
+  remains copy-only for the Phenom target: no Git bundle, `.git` directory,
+  target-side Git execution, jsonschema dependency, hardware execution,
+  sender workload, MSR access, campaign session, acquisition authority, or
+  scientific acquisition is added.
 - Phase 6B.6: add a copy-only portable target qualification package exporter,
   standalone standard-library target verifier, pure-Python Git blob/scoped-tree
   reconstruction, Git-hidden/jsonschema-absent portable CI lane, and focused
