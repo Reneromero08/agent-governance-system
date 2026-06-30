@@ -4,6 +4,19 @@
 
 ## 2026-06-30: Phase 6B.6 non-hardware qualification harness
 
+- Phase 6B.6: close portable target qualification review `4600829669`
+  by binding final-result validation to trusted manifest, contract, snapshot,
+  strict, ASan, UBSan, runtime, and sender contexts; recursively closing
+  equivalence, runtime, sanitizer, and sender result schemas; and replacing
+  file-only package scanning with exact filesystem-entry verification for
+  regular files, directories, symlinks, special entries, and case collisions.
+  The hosted portable lane also suppresses target-side bytecode writes while
+  importing the copied verifier for live trusted-context checks and revalidates
+  final-result custody against the sender context captured by the target run.
+  The portable lane remains copy-only and non-hardware: no Git bundle, `.git`
+  directory, target jsonschema dependency, Phenom execution, sender workload,
+  MSR access, campaign session, target evidence, or acquisition authority is
+  added.
 - Phase 6B.6: close portable target qualification review `4599764362`
   by requiring clean-HEAD Git-object export for portable support files,
   separating base qualification and portable export identities, making the

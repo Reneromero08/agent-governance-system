@@ -105,6 +105,112 @@ class PortableTargetQualificationTests(unittest.TestCase):
         finally:
             source.write_bytes(original)
 
+    def _synthetic_emit(self, mode: str) -> dict[str, object]:
+        payload = portable.python_reference_table()
+        raw = portable.canonical_json(payload).encode("utf-8")
+        return {
+            "status": "PHASE6B6_PORTABLE_C_REFERENCE_EMIT_OK",
+            "mode": mode,
+            "raw_stdout_sha256": hashlib.sha256(raw).hexdigest(),
+            "stderr_sha256": portable.EMPTY_SHA256,
+            "payload": payload,
+            "raw_stdout": raw,
+        }
+
+    def _final_context_and_result(self) -> tuple[dict[str, object], dict[str, object]]:
+        root = self.package_root
+        manifest_sha = portable._read_manifest_sha(root)
+        manifest = portable.load_json(root / "PORTABLE_PACKAGE_MANIFEST.json")
+        binding = portable.load_json(root / "TRUSTED_SNAPSHOT_BINDING.json")
+        contract = portable.load_json(root / "QUALIFICATION_CONTRACT.json")
+        portable.validate_manifest(manifest)
+        portable.validate_binding(binding)
+        portable.validate_contract(contract)
+        portable.verify_copied_files(root, manifest)
+        snapshot = portable.verify_snapshot(root, binding)
+        strict = self._synthetic_emit("strict")
+        asan = self._synthetic_emit("asan")
+        ubsan = self._synthetic_emit("ubsan")
+        runtime = portable.runtime_validate_only(root, manifest, contract)
+        sender = {"status": "PHASE6B6_PORTABLE_SENDER_PROCESS_ABSENT", "scanned_pid_count": 0, "matches": []}
+        result = {
+            "schema_id": portable.RESULT_SCHEMA_ID,
+            "status": "PHASE6B6_PORTABLE_TARGET_QUALIFICATION_PASS",
+            "portable_manifest_sha256": manifest_sha,
+            "portable_export_commit": manifest["portable_export_commit"],
+            "portable_export_tree": manifest["portable_export_tree"],
+            "snapshot_subject_commit": manifest["snapshot_subject_commit"],
+            "snapshot_subject_tree": manifest["snapshot_subject_tree"],
+            "observed_inventory_sha256": snapshot["observed_inventory_sha256"],
+            "calculated_scoped_tree": snapshot["calculated_scoped_tree"],
+            "calculated_phase6b6_subtree_inventory_sha256": snapshot["calculated_phase6b6_subtree_inventory_sha256"],
+            "calculated_v2_source_sha256": snapshot["calculated_v2_source_sha256"],
+            "raw_c_emission_sha256": strict["raw_stdout_sha256"],
+            "c_reference_equivalence": portable.compare_reference(strict["payload"]),
+            "runtime_validate_only": runtime,
+            "strict_result": portable._public_emit_result(strict),
+            "asan_result": portable._public_emit_result(asan),
+            "ubsan_result": portable._public_emit_result(ubsan),
+            "sender_process_absence": sender,
+            "target_executed_git": False,
+            "jsonschema_required": False,
+            "hardware_ran": False,
+            "scientific_acquisition_authorized": False,
+        }
+        result["final_result_sha256"] = portable.digest(result)
+        context = {
+            "manifest": manifest,
+            "contract": contract,
+            "snapshot_result": snapshot,
+            "strict_emit": strict,
+            "asan_emit": asan,
+            "ubsan_emit": ubsan,
+            "runtime_result": runtime,
+            "sender_result": sender,
+            "manifest_sha256": manifest_sha,
+        }
+        portable.validate_final_result(result, **context)
+        return context, result
+
+    def _assert_final_mutation_rejected(self, mutator) -> None:
+        context, result = self._final_context_and_result()
+        result = json.loads(json.dumps(result))
+        mutator(result)
+        unsigned = dict(result)
+        unsigned.pop("final_result_sha256", None)
+        result["final_result_sha256"] = portable.digest(unsigned)
+        with self.assertRaises(portable.PortableQualificationError):
+            portable.validate_final_result(result, **context)
+
+    def _live_final_context(self, sender_result: dict[str, object] | None = None) -> dict[str, object]:
+        root = self.package_root
+        manifest_sha = portable._read_manifest_sha(root)
+        manifest = portable.load_json(root / "PORTABLE_PACKAGE_MANIFEST.json")
+        binding = portable.load_json(root / "TRUSTED_SNAPSHOT_BINDING.json")
+        contract = portable.load_json(root / "QUALIFICATION_CONTRACT.json")
+        portable.validate_manifest(manifest)
+        portable.validate_binding(binding)
+        portable.validate_contract(contract)
+        portable.verify_copied_files(root, manifest)
+        snapshot = portable.verify_snapshot(root, binding)
+        strict = portable.compile_and_emit(root)
+        asan = portable.compile_and_emit(root, sanitize="asan")
+        ubsan = portable.compile_and_emit(root, sanitize="ubsan")
+        runtime = portable.runtime_validate_only(root, manifest, contract)
+        fresh_sender = portable.sender_absence_probe()
+        sender = sender_result if sender_result is not None else fresh_sender
+        return {
+            "manifest": manifest,
+            "contract": contract,
+            "snapshot_result": snapshot,
+            "strict_emit": strict,
+            "asan_emit": asan,
+            "ubsan_emit": ubsan,
+            "runtime_result": runtime,
+            "sender_result": sender,
+            "manifest_sha256": manifest_sha,
+        }
+
     def test_export_is_deterministic(self) -> None:
         self.assertEqual(self.left.read_bytes(), self.right.read_bytes())
         self.assertEqual(self.left_result["archive_sha256"], self.right_result["archive_sha256"])
@@ -274,7 +380,85 @@ class PortableTargetQualificationTests(unittest.TestCase):
         self.assertEqual(payload["target_executed_git"], False)
         self.assertEqual(payload["jsonschema_required"], False)
         self.assertRegex(payload["raw_c_emission_sha256"], r"^[0-9a-f]{64}$")
-        portable.validate_final_result(payload)
+        portable.validate_final_result(payload, **self._live_final_context(payload["sender_process_absence"]))
+
+    def test_final_result_semantic_mutations_are_rejected_after_digest_recompute(self) -> None:
+        cases = {
+            "portable_manifest_sha256": lambda result: result.update({"portable_manifest_sha256": "0" * 64}),
+            "portable_export_commit": lambda result: result.update({"portable_export_commit": "0" * 40}),
+            "portable_export_tree": lambda result: result.update({"portable_export_tree": "0" * 40}),
+            "equivalence tone_count": lambda result: result["c_reference_equivalence"].update({"tone_count": 11}),
+            "equivalence mode_count": lambda result: result["c_reference_equivalence"].update({"mode_count": 5}),
+            "equivalence max_abs_error_hz": lambda result: result["c_reference_equivalence"].update({"max_abs_error_hz": 1e-6}),
+            "unknown equivalence field": lambda result: result["c_reference_equivalence"].update({"unexpected": True}),
+            "runtime schedule_digest": lambda result: result["runtime_validate_only"].update({"schedule_digest": "0" * 64}),
+            "runtime mock_custody_digest": lambda result: result["runtime_validate_only"].update({"mock_custody_digest": "0" * 64}),
+            "runtime session_count": lambda result: result["runtime_validate_only"].update({"session_count": 11}),
+            "runtime total_slots": lambda result: result["runtime_validate_only"].update({"total_slots": 10367}),
+            "runtime sham row count": lambda result: result["runtime_validate_only"].update({"order_label_sham_rows": 863}),
+            "runtime ordinary row count": lambda result: result["runtime_validate_only"].update({"ordinary_order_rows": 3455}),
+            "runtime drive_on_slot_count": lambda result: result["runtime_validate_only"].update({"drive_on_slot_count": 0}),
+            "runtime hardware_backend_rejected": lambda result: result["runtime_validate_only"].update({"hardware_backend_rejected": False}),
+            "unknown runtime field": lambda result: result["runtime_validate_only"].update({"unexpected": True}),
+            "strict raw digest": lambda result: result["strict_result"].update({"raw_stdout_sha256": "0" * 64}),
+            "ASan raw digest": lambda result: result["asan_result"].update({"raw_stdout_sha256": "0" * 64}),
+            "UBSan raw digest": lambda result: result["ubsan_result"].update({"raw_stdout_sha256": "0" * 64}),
+            "ASan stderr digest": lambda result: result["asan_result"].update({"stderr_sha256": "0" * 64}),
+            "UBSan stderr digest": lambda result: result["ubsan_result"].update({"stderr_sha256": "0" * 64}),
+            "unknown sanitizer field": lambda result: result["asan_result"].update({"unexpected": True}),
+            "sender scanned_pid_count as string": lambda result: result["sender_process_absence"].update({"scanned_pid_count": "0"}),
+            "sender scanned_pid_count as negative integer": lambda result: result["sender_process_absence"].update({"scanned_pid_count": -1}),
+            "nonempty sender matches": lambda result: result["sender_process_absence"].update({"matches": [{"pid": 1}]}),
+            "unknown sender field": lambda result: result["sender_process_absence"].update({"unexpected": True}),
+        }
+        for name, mutator in cases.items():
+            with self.subTest(name=name):
+                self._assert_final_mutation_rejected(mutator)
+
+    def test_package_file_and_directory_sets_are_exact(self) -> None:
+        manifest = portable.load_json(self.package_root / "PORTABLE_PACKAGE_MANIFEST.json")
+        entries = portable._scan_package_entries(self.package_root)
+        expected_files = {item["path"] for item in manifest["copied_files"]} | {
+            "PORTABLE_PACKAGE_MANIFEST.json",
+            "PORTABLE_PACKAGE_MANIFEST.sha256",
+            "TRUSTED_SNAPSHOT_BINDING.json",
+            "QUALIFICATION_CONTRACT.json",
+        }
+        self.assertEqual(entries["regular_files"], expected_files)
+        self.assertEqual(entries["directories"], portable._expected_directories(expected_files))
+        self.assertEqual(entries["symlinks"], set())
+        self.assertEqual(entries["special_entries"], set())
+
+    def test_unbound_empty_directories_fail(self) -> None:
+        cases = (
+            ("root", "unbound_empty_directory"),
+            ("snapshot", "snapshot/unbound_empty_directory"),
+            ("phase6b6", f"snapshot/{portable.PHASE6B6_RELATIVE_ROOT}/unbound_empty_directory"),
+        )
+        for name, rel in cases:
+            with self.subTest(name=name):
+                root = self._copy_package()
+                (root / rel).mkdir()
+                manifest = portable.load_json(root / "PORTABLE_PACKAGE_MANIFEST.json")
+                with self.assertRaises(portable.PortableQualificationError):
+                    portable.verify_copied_files(root, manifest)
+
+    def test_missing_expected_ancestor_directory_fails(self) -> None:
+        root = self._copy_package()
+        target = root / "snapshot" / portable.PHASE6B6_RELATIVE_ROOT / "contracts"
+        shutil.rmtree(target)
+        manifest = portable.load_json(root / "PORTABLE_PACKAGE_MANIFEST.json")
+        with self.assertRaises(portable.PortableQualificationError):
+            portable.verify_copied_files(root, manifest)
+
+    def test_file_replacing_expected_directory_fails(self) -> None:
+        root = self._copy_package()
+        target = root / "snapshot" / portable.PHASE6B6_RELATIVE_ROOT / "contracts"
+        shutil.rmtree(target)
+        target.write_text("not a directory\n", encoding="utf-8")
+        manifest = portable.load_json(root / "PORTABLE_PACKAGE_MANIFEST.json")
+        with self.assertRaises(portable.PortableQualificationError):
+            portable.verify_copied_files(root, manifest)
 
     def test_changed_copied_byte_fails(self) -> None:
         root = self._copy_package()

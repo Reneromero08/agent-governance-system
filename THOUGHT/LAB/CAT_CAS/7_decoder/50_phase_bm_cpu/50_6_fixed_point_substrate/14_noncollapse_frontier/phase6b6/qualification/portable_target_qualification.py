@@ -41,6 +41,7 @@ EXPECTED_V2_SOURCE_SHA256 = "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336
 QUALIFICATION_CONTRACT_DIGEST = "986d1eb27e6e715da0ed8765f58566b0608e464b94dbd0d58ab3d130d80fd0d2"
 SCHEDULE_DIGEST = "c632d59934c2610541e279cac3a48202f2c0a79bb734e995f2cc4f28d19e87d3"
 MOCK_CUSTODY_DIGEST = "4c0a58772fd25fe77759d6d09089ad532a09b3a5adcdce01dc099b6b7b00dba1"
+EMPTY_SHA256 = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 PHASE6B6_IMPORTED_TABLE_DIGEST = "b8af91cfa7bb6ae5dbd6bb2283d4612a71ba432d28a016cb3d662bf514d503cf"
 QUALIFIED_V2_SOURCE_BUNDLE_DIGEST = "bec71b2369587e68a88e9e2b5cb47837a07d5cdef6f13990417e0c0928e85f2f"
 REVIEWED_IMPLEMENTATION_HEAD = "e33cb2d4b895746d7ca45e1aa2e6fde673fac20f"
@@ -267,37 +268,50 @@ def _entry_mode(path: Path) -> str:
     return "100755" if (st.st_mode & stat.S_IXUSR) else "100644"
 
 
-def _scan_files(root: Path) -> list[str]:
-    paths: list[str] = []
-    for base, dirs, files in os.walk(root, topdown=True, followlinks=False):
-        base_path = Path(base)
-        rel_base = "" if base_path == root else base_path.relative_to(root).as_posix()
-        for dirname in list(dirs):
-            rel = f"{rel_base}/{dirname}" if rel_base else dirname
-            if dirname == ".git" or rel.endswith(".git") or ".git/" in rel:
-                raise PortableQualificationError(f"forbidden .git path present: {rel}")
-            st = (base_path / dirname).lstat()
-            if not stat.S_ISDIR(st.st_mode):
-                raise PortableQualificationError(f"non-directory traversal entry rejected: {rel}")
+def _scan_package_entries(root: Path) -> dict[str, set[str]]:
+    entries: dict[str, set[str]] = {"regular_files": set(), "directories": {""}, "symlinks": set(), "special_entries": set()}
+
+    def visit(directory: Path, rel_base: str) -> None:
+        for entry in os.scandir(directory):
+            rel = f"{rel_base}/{entry.name}" if rel_base else entry.name
             _reject_bad_path(rel)
-            paths.append(rel)
-        for filename in files:
-            rel = f"{rel_base}/{filename}" if rel_base else filename
-            _reject_bad_path(rel)
-            if rel.endswith(".bundle") or rel == ".git" or "/.git/" in f"/{rel}/":
+            if entry.name == ".git" or rel.endswith(".git") or "/.git/" in f"/{rel}/" or rel.endswith(".bundle"):
                 raise PortableQualificationError(f"forbidden Git content present: {rel}")
-            st = (base_path / filename).lstat()
-            if not stat.S_ISREG(st.st_mode):
-                raise PortableQualificationError(f"non-regular file rejected: {rel}")
-            paths.append(rel)
+            try:
+                st = entry.stat(follow_symlinks=False)
+            except OSError as exc:
+                raise PortableQualificationError(f"unreadable filesystem entry: {rel}") from exc
+            if stat.S_ISREG(st.st_mode):
+                entries["regular_files"].add(rel)
+            elif stat.S_ISDIR(st.st_mode):
+                entries["directories"].add(rel)
+                visit(Path(entry.path), rel)
+            elif stat.S_ISLNK(st.st_mode):
+                entries["symlinks"].add(rel)
+            else:
+                entries["special_entries"].add(rel)
+
+    visit(root, "")
+    all_paths: set[str] = set()
+    for paths in entries.values():
+        all_paths.update(paths)
     seen: dict[str, str] = {}
-    for path in paths:
+    for path in sorted(all_paths):
         key = path.casefold()
         previous = seen.get(key)
         if previous is not None and previous != path:
             raise PortableQualificationError(f"case-colliding paths: {previous} and {path}")
         seen[key] = path
-    return sorted(path for path in paths if (root / path).is_file())
+    return entries
+
+
+def _expected_directories(files: set[str]) -> set[str]:
+    expected = {""}
+    for rel in files:
+        parts = rel.split("/")[:-1]
+        for index in range(1, len(parts) + 1):
+            expected.add("/".join(parts[:index]))
+    return expected
 
 
 def _read_manifest_sha(root: Path) -> str:
@@ -609,16 +623,27 @@ def _manifest_files(manifest: dict[str, Any]) -> dict[str, dict[str, Any]]:
 
 def verify_copied_files(root: Path, manifest: dict[str, Any]) -> None:
     records = _manifest_files(manifest)
-    actual_files = set(_scan_files(root))
     expected_files = set(records) | {
         "PORTABLE_PACKAGE_MANIFEST.json",
         "PORTABLE_PACKAGE_MANIFEST.sha256",
         "TRUSTED_SNAPSHOT_BINDING.json",
         "QUALIFICATION_CONTRACT.json",
     }
+    expected_dirs = _expected_directories(expected_files)
+    entries = _scan_package_entries(root)
+    actual_files = entries["regular_files"]
+    actual_dirs = entries["directories"]
+    if entries["symlinks"]:
+        raise PortableQualificationError(f"portable package symlink entries rejected: {sorted(entries['symlinks'])}")
+    if entries["special_entries"]:
+        raise PortableQualificationError(f"portable package special entries rejected: {sorted(entries['special_entries'])}")
     if actual_files != expected_files:
         raise PortableQualificationError(
             f"portable package file set mismatch missing={sorted(expected_files - actual_files)} extra={sorted(actual_files - expected_files)}"
+        )
+    if actual_dirs != expected_dirs:
+        raise PortableQualificationError(
+            f"portable package directory set mismatch missing={sorted(expected_dirs - actual_dirs)} extra={sorted(actual_dirs - expected_dirs)}"
         )
     for rel, record in records.items():
         path = root / rel
@@ -1038,7 +1063,125 @@ def sender_absence_probe() -> dict[str, Any]:
     return {"status": "PHASE6B6_PORTABLE_SENDER_PROCESS_ABSENT", "scanned_pid_count": scanned, "matches": []}
 
 
-def validate_final_result(result: dict[str, Any]) -> None:
+def _require_dict(name: str, value: Any) -> dict[str, Any]:
+    if not isinstance(value, dict):
+        raise PortableQualificationError(f"{name} must be an object")
+    return value
+
+
+def _validate_snapshot_result(snapshot: dict[str, Any]) -> None:
+    _expect_keys(
+        "snapshot verification result",
+        snapshot,
+        {
+            "observed_inventory_sha256",
+            "calculated_scoped_tree",
+            "calculated_phase6b6_subtree_inventory_sha256",
+            "calculated_v2_source_sha256",
+        },
+    )
+    exact = {
+        "observed_inventory_sha256": EXPECTED_INVENTORY_SHA256,
+        "calculated_scoped_tree": EXPECTED_SCOPED_TREE,
+        "calculated_phase6b6_subtree_inventory_sha256": EXPECTED_PHASE6B6_SUBTREE_INVENTORY_SHA256,
+        "calculated_v2_source_sha256": EXPECTED_V2_SOURCE_SHA256,
+    }
+    for key, expected in exact.items():
+        if snapshot[key] != expected:
+            raise PortableQualificationError(f"snapshot verification result mismatch: {key}")
+
+
+def _validate_equivalence_result(equivalence: dict[str, Any]) -> None:
+    _expect_keys("C reference equivalence result", equivalence, {"status", "tone_count", "mode_count", "max_abs_error_hz"})
+    if equivalence["status"] != "V2_REFERENCE_EQUIVALENCE_PASS":
+        raise PortableQualificationError("C reference equivalence status mismatch")
+    if equivalence["tone_count"] != 12 or equivalence["mode_count"] != 4:
+        raise PortableQualificationError("C reference equivalence geometry mismatch")
+    error = equivalence["max_abs_error_hz"]
+    if isinstance(error, bool) or not isinstance(error, (int, float)) or not math.isfinite(float(error)) or error < 0 or error > 1e-9:
+        raise PortableQualificationError("C reference equivalence error bound mismatch")
+
+
+def _validate_runtime_result(runtime: dict[str, Any]) -> None:
+    _expect_keys(
+        "runtime validate-only result",
+        runtime,
+        {
+            "status",
+            "hardware_ran",
+            "scientific_acquisition_authorized",
+            "schedule_digest",
+            "mock_custody_digest",
+            "session_count",
+            "total_slots",
+            "order_label_sham_rows",
+            "ordinary_order_rows",
+            "drive_on_slot_count",
+            "hardware_backend_rejected",
+        },
+    )
+    exact = {
+        "status": "PHASE6B6_PORTABLE_RUNTIME_VALIDATE_ONLY_OK",
+        "hardware_ran": False,
+        "scientific_acquisition_authorized": False,
+        "schedule_digest": SCHEDULE_DIGEST,
+        "mock_custody_digest": MOCK_CUSTODY_DIGEST,
+        "session_count": 12,
+        "total_slots": 10368,
+        "order_label_sham_rows": 864,
+        "ordinary_order_rows": 3456,
+        "hardware_backend_rejected": True,
+    }
+    for key, expected in exact.items():
+        if runtime[key] != expected:
+            raise PortableQualificationError(f"runtime validate-only result mismatch: {key}")
+    if type(runtime["drive_on_slot_count"]) is not int or runtime["drive_on_slot_count"] <= 0:
+        raise PortableQualificationError("runtime validate-only drive_on count mismatch")
+
+
+def _validate_public_emit_result(emit: dict[str, Any], *, mode: str, raw_stdout_sha256: str) -> None:
+    _expect_keys(f"{mode} C emission result", emit, {"status", "mode", "raw_stdout_sha256", "stderr_sha256"})
+    if emit["status"] != "PHASE6B6_PORTABLE_C_REFERENCE_EMIT_OK" or emit["mode"] != mode:
+        raise PortableQualificationError(f"{mode} C emission result status mismatch")
+    if emit["raw_stdout_sha256"] != raw_stdout_sha256 or emit["stderr_sha256"] != EMPTY_SHA256:
+        raise PortableQualificationError(f"{mode} C emission digest mismatch")
+
+
+def _validate_sender_result(sender: dict[str, Any]) -> None:
+    _expect_keys("sender absence result", sender, {"status", "scanned_pid_count", "matches"})
+    if sender["status"] != "PHASE6B6_PORTABLE_SENDER_PROCESS_ABSENT":
+        raise PortableQualificationError("sender absence status mismatch")
+    if type(sender["scanned_pid_count"]) is not int or sender["scanned_pid_count"] < 0:
+        raise PortableQualificationError("sender absence scanned PID count mismatch")
+    if sender["matches"] != []:
+        raise PortableQualificationError("sender absence result mismatch")
+
+
+def validate_final_result(
+    result: dict[str, Any],
+    *,
+    manifest: dict[str, Any],
+    contract: dict[str, Any],
+    snapshot_result: dict[str, Any],
+    strict_emit: dict[str, Any],
+    asan_emit: dict[str, Any],
+    ubsan_emit: dict[str, Any],
+    runtime_result: dict[str, Any],
+    sender_result: dict[str, Any],
+    manifest_sha256: str | None = None,
+) -> None:
+    validate_manifest(manifest)
+    validate_contract(contract)
+    _validate_snapshot_result(snapshot_result)
+    expected_equivalence = compare_reference(_require_dict("trusted strict C reference payload", strict_emit.get("payload")))
+    _validate_equivalence_result(expected_equivalence)
+    _validate_runtime_result(runtime_result)
+    _validate_sender_result(sender_result)
+
+    expected_manifest_sha = manifest_sha256 if manifest_sha256 is not None else digest(manifest)
+    if not _hex(expected_manifest_sha, 64):
+        raise PortableQualificationError("trusted portable manifest digest mismatch")
+
     _expect_keys(
         "portable final result",
         result,
@@ -1057,6 +1200,7 @@ def validate_final_result(result: dict[str, Any]) -> None:
             "raw_c_emission_sha256",
             "c_reference_equivalence",
             "runtime_validate_only",
+            "strict_result",
             "asan_result",
             "ubsan_result",
             "sender_process_absence",
@@ -1070,12 +1214,16 @@ def validate_final_result(result: dict[str, Any]) -> None:
     exact = {
         "schema_id": RESULT_SCHEMA_ID,
         "status": "PHASE6B6_PORTABLE_TARGET_QUALIFICATION_PASS",
-        "snapshot_subject_commit": SNAPSHOT_SUBJECT_COMMIT,
-        "snapshot_subject_tree": SNAPSHOT_SUBJECT_TREE,
-        "observed_inventory_sha256": EXPECTED_INVENTORY_SHA256,
-        "calculated_scoped_tree": EXPECTED_SCOPED_TREE,
-        "calculated_phase6b6_subtree_inventory_sha256": EXPECTED_PHASE6B6_SUBTREE_INVENTORY_SHA256,
-        "calculated_v2_source_sha256": EXPECTED_V2_SOURCE_SHA256,
+        "portable_manifest_sha256": expected_manifest_sha,
+        "portable_export_commit": manifest["portable_export_commit"],
+        "portable_export_tree": manifest["portable_export_tree"],
+        "snapshot_subject_commit": manifest["snapshot_subject_commit"],
+        "snapshot_subject_tree": manifest["snapshot_subject_tree"],
+        "observed_inventory_sha256": snapshot_result["observed_inventory_sha256"],
+        "calculated_scoped_tree": snapshot_result["calculated_scoped_tree"],
+        "calculated_phase6b6_subtree_inventory_sha256": snapshot_result["calculated_phase6b6_subtree_inventory_sha256"],
+        "calculated_v2_source_sha256": snapshot_result["calculated_v2_source_sha256"],
+        "raw_c_emission_sha256": strict_emit["raw_stdout_sha256"],
         "target_executed_git": False,
         "jsonschema_required": False,
         "hardware_ran": False,
@@ -1090,21 +1238,30 @@ def validate_final_result(result: dict[str, Any]) -> None:
     for key in ("portable_export_commit", "portable_export_tree"):
         if not _hex(result[key], 40):
             raise PortableQualificationError(f"portable final result identity mismatch: {key}")
-    if result["c_reference_equivalence"].get("status") != "V2_REFERENCE_EQUIVALENCE_PASS":
-        raise PortableQualificationError("portable final result equivalence status mismatch")
-    if result["runtime_validate_only"].get("status") != "PHASE6B6_PORTABLE_RUNTIME_VALIDATE_ONLY_OK":
-        raise PortableQualificationError("portable final result runtime status mismatch")
-    for key, mode in (("asan_result", "asan"), ("ubsan_result", "ubsan")):
-        payload = result[key]
-        _expect_keys(f"{mode} result", payload, {"status", "mode", "raw_stdout_sha256", "stderr_sha256"})
-        if payload["status"] != "PHASE6B6_PORTABLE_C_REFERENCE_EMIT_OK" or payload["mode"] != mode:
-            raise PortableQualificationError(f"{mode} result status mismatch")
-        if not _hex(payload["raw_stdout_sha256"], 64) or not _hex(payload["stderr_sha256"], 64):
-            raise PortableQualificationError(f"{mode} result digest mismatch")
-    sender = result["sender_process_absence"]
-    _expect_keys("sender absence result", sender, {"status", "scanned_pid_count", "matches"})
-    if sender["status"] != "PHASE6B6_PORTABLE_SENDER_PROCESS_ABSENT" or sender["matches"] != []:
-        raise PortableQualificationError("sender absence result mismatch")
+    equivalence = _require_dict("portable final result equivalence", result["c_reference_equivalence"])
+    _validate_equivalence_result(equivalence)
+    if equivalence != expected_equivalence:
+        raise PortableQualificationError("portable final result equivalence context mismatch")
+    runtime = _require_dict("portable final result runtime", result["runtime_validate_only"])
+    _validate_runtime_result(runtime)
+    if runtime != runtime_result:
+        raise PortableQualificationError("portable final result runtime context mismatch")
+    public_strict = _public_emit_result(strict_emit)
+    public_asan = _public_emit_result(asan_emit)
+    public_ubsan = _public_emit_result(ubsan_emit)
+    for key, mode, expected in (
+        ("strict_result", "strict", public_strict),
+        ("asan_result", "asan", public_asan),
+        ("ubsan_result", "ubsan", public_ubsan),
+    ):
+        payload = _require_dict(f"portable final result {mode} emission", result[key])
+        _validate_public_emit_result(payload, mode=mode, raw_stdout_sha256=result["raw_c_emission_sha256"])
+        if payload != expected:
+            raise PortableQualificationError(f"portable final result {mode} emission context mismatch")
+    sender = _require_dict("portable final result sender absence", result["sender_process_absence"])
+    _validate_sender_result(sender)
+    if sender != sender_result:
+        raise PortableQualificationError("portable final result sender context mismatch")
     unsigned = copy.deepcopy(result)
     observed = unsigned.pop("final_result_sha256")
     if digest(unsigned) != observed:
@@ -1162,6 +1319,7 @@ def run(package_root: Path, args: list[str]) -> dict[str, Any]:
         "raw_c_emission_sha256": first["raw_stdout_sha256"],
         "c_reference_equivalence": equivalence,
         "runtime_validate_only": runtime,
+        "strict_result": _public_emit_result(first),
         "asan_result": _public_emit_result(asan),
         "ubsan_result": _public_emit_result(ubsan),
         "sender_process_absence": sender,
@@ -1171,7 +1329,18 @@ def run(package_root: Path, args: list[str]) -> dict[str, Any]:
         "scientific_acquisition_authorized": False,
     }
     result["final_result_sha256"] = digest(result)
-    validate_final_result(result)
+    validate_final_result(
+        result,
+        manifest=manifest,
+        contract=contract,
+        snapshot_result=snapshot,
+        strict_emit=first,
+        asan_emit=asan,
+        ubsan_emit=ubsan,
+        runtime_result=runtime,
+        sender_result=sender,
+        manifest_sha256=manifest_sha,
+    )
     return result
 
 

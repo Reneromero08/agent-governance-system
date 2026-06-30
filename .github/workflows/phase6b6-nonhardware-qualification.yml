@@ -93,11 +93,131 @@ jobs:
               return _orig(name, *args, **kwargs)
           builtins.__import__ = guarded
           PY
-          PATH="$bindir" PYTHONPATH="$hook" "$python_bin" qualification/portable_target_qualification.py \
-            --package-root "$extract/phase6b6_portable_target_package"
+          package_root="$extract/phase6b6_portable_target_package"
+          PATH="$bindir" PYTHONPATH="$hook" PYTHONDONTWRITEBYTECODE=1 "$python_bin" qualification/portable_target_qualification.py \
+            --package-root "$package_root" > portable-result.json
+          PACKAGE_ROOT="$package_root" PORTABLE_RESULT="$PWD/portable-result.json" PATH="$bindir" PYTHONPATH="$hook" PYTHONDONTWRITEBYTECODE=1 "$python_bin" - <<'PY'
+          import copy
+          import hashlib
+          import importlib.util
+          import json
+          import os
+          import pathlib
+          import shutil
+          import tempfile
+
+          root = pathlib.Path(os.environ["PACKAGE_ROOT"])
+          result_path = pathlib.Path(os.environ["PORTABLE_RESULT"])
+          spec = importlib.util.spec_from_file_location("copied_portable_target_qualification", root / "portable_target_qualification.py")
+          portable = importlib.util.module_from_spec(spec)
+          assert spec.loader is not None
+          spec.loader.exec_module(portable)
+
+          result = json.loads(result_path.read_text(encoding="utf-8"))
+          manifest_sha = portable._read_manifest_sha(root)
+          manifest = portable.load_json(root / "PORTABLE_PACKAGE_MANIFEST.json")
+          binding = portable.load_json(root / "TRUSTED_SNAPSHOT_BINDING.json")
+          contract = portable.load_json(root / "QUALIFICATION_CONTRACT.json")
+          portable.validate_manifest(manifest)
+          portable.validate_binding(binding)
+          portable.validate_contract(contract)
+          portable.verify_copied_files(root, manifest)
+          snapshot = portable.verify_snapshot(root, binding)
+          strict = portable.compile_and_emit(root)
+          asan = portable.compile_and_emit(root, sanitize="asan")
+          ubsan = portable.compile_and_emit(root, sanitize="ubsan")
+          if strict["raw_stdout_sha256"] != asan["raw_stdout_sha256"] or strict["raw_stdout_sha256"] != ubsan["raw_stdout_sha256"]:
+              raise AssertionError("strict/ASan/UBSan raw digest mismatch")
+          if strict["stderr_sha256"] != portable.EMPTY_SHA256 or asan["stderr_sha256"] != portable.EMPTY_SHA256 or ubsan["stderr_sha256"] != portable.EMPTY_SHA256:
+              raise AssertionError("nonempty sanitizer stderr digest")
+          runtime = portable.runtime_validate_only(root, manifest, contract)
+          portable.sender_absence_probe()
+          sender = result["sender_process_absence"]
+          context = {
+              "manifest": manifest,
+              "contract": contract,
+              "snapshot_result": snapshot,
+              "strict_emit": strict,
+              "asan_emit": asan,
+              "ubsan_emit": ubsan,
+              "runtime_result": runtime,
+              "sender_result": sender,
+              "manifest_sha256": manifest_sha,
+          }
+          portable.validate_final_result(result, **context)
+
+          def reject(mutator):
+              mutated = copy.deepcopy(result)
+              mutator(mutated)
+              unsigned = dict(mutated)
+              unsigned.pop("final_result_sha256", None)
+              mutated["final_result_sha256"] = portable.digest(unsigned)
+              try:
+                  portable.validate_final_result(mutated, **context)
+              except portable.PortableQualificationError:
+                  return
+              raise AssertionError("mutated final result unexpectedly passed")
+
+          mutations = [
+              lambda item: item.update({"portable_manifest_sha256": "0" * 64}),
+              lambda item: item.update({"portable_export_commit": "0" * 40}),
+              lambda item: item.update({"portable_export_tree": "0" * 40}),
+              lambda item: item["c_reference_equivalence"].update({"tone_count": 11}),
+              lambda item: item["c_reference_equivalence"].update({"mode_count": 5}),
+              lambda item: item["c_reference_equivalence"].update({"max_abs_error_hz": 1e-6}),
+              lambda item: item["c_reference_equivalence"].update({"unexpected": True}),
+              lambda item: item["runtime_validate_only"].update({"schedule_digest": "0" * 64}),
+              lambda item: item["runtime_validate_only"].update({"mock_custody_digest": "0" * 64}),
+              lambda item: item["runtime_validate_only"].update({"session_count": 11}),
+              lambda item: item["runtime_validate_only"].update({"total_slots": 10367}),
+              lambda item: item["runtime_validate_only"].update({"order_label_sham_rows": 863}),
+              lambda item: item["runtime_validate_only"].update({"ordinary_order_rows": 3455}),
+              lambda item: item["runtime_validate_only"].update({"drive_on_slot_count": 0}),
+              lambda item: item["runtime_validate_only"].update({"hardware_backend_rejected": False}),
+              lambda item: item["runtime_validate_only"].update({"unexpected": True}),
+              lambda item: item["strict_result"].update({"raw_stdout_sha256": "0" * 64}),
+              lambda item: item["asan_result"].update({"raw_stdout_sha256": "0" * 64}),
+              lambda item: item["ubsan_result"].update({"raw_stdout_sha256": "0" * 64}),
+              lambda item: item["asan_result"].update({"stderr_sha256": "0" * 64}),
+              lambda item: item["ubsan_result"].update({"stderr_sha256": "0" * 64}),
+              lambda item: item["asan_result"].update({"unexpected": True}),
+              lambda item: item["sender_process_absence"].update({"scanned_pid_count": "0"}),
+              lambda item: item["sender_process_absence"].update({"scanned_pid_count": -1}),
+              lambda item: item["sender_process_absence"].update({"matches": [{"pid": 1}]}),
+              lambda item: item["sender_process_absence"].update({"unexpected": True}),
+          ]
+          for mutation in mutations:
+              reject(mutation)
+
+          expected_files = {entry["path"] for entry in manifest["copied_files"]} | {
+              "PORTABLE_PACKAGE_MANIFEST.json",
+              "PORTABLE_PACKAGE_MANIFEST.sha256",
+              "TRUSTED_SNAPSHOT_BINDING.json",
+              "QUALIFICATION_CONTRACT.json",
+          }
+          entries = portable._scan_package_entries(root)
+          if entries["regular_files"] != expected_files:
+              raise AssertionError("portable regular file set mismatch")
+          if entries["directories"] != portable._expected_directories(expected_files):
+              raise AssertionError("portable directory set mismatch")
+          if entries["symlinks"] or entries["special_entries"]:
+              raise AssertionError("portable unsupported entries present")
+
+          with tempfile.TemporaryDirectory() as temp:
+              copied = pathlib.Path(temp) / "package"
+              shutil.copytree(root, copied)
+              (copied / "unbound_empty_directory").mkdir()
+              try:
+                  portable.verify_copied_files(copied, portable.load_json(copied / "PORTABLE_PACKAGE_MANIFEST.json"))
+              except portable.PortableQualificationError:
+                  pass
+              else:
+                  raise AssertionError("unbound empty directory unexpectedly passed")
+          print("PHASE6B6_PORTABLE_FINAL_RESULT_CUSTODY_OK")
+          PY
           for option in --hardware --hardware=true --acquire --acquire=yes --calibrate --calibrate=1 --run-campaign --run-campaign=true --unknown; do
-            if PATH="$bindir" PYTHONPATH="$hook" "$python_bin" qualification/portable_target_qualification.py \
-              --package-root "$extract/phase6b6_portable_target_package" "$option" >/tmp/portable-option.out 2>/tmp/portable-option.err; then
+            if PATH="$bindir" PYTHONPATH="$hook" PYTHONDONTWRITEBYTECODE=1 "$python_bin" qualification/portable_target_qualification.py \
+              --package-root "$package_root" "$option" >/tmp/portable-option.out 2>/tmp/portable-option.err; then
               echo "forbidden portable option unexpectedly passed: $option"
               exit 1
             fi
