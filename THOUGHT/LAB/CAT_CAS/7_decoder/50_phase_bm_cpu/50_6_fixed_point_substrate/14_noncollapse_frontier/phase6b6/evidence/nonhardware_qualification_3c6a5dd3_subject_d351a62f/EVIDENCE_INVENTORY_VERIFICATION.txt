@@ -5,5 +5,5 @@ extra_evidence_file_detected=true
 changed_path_detected=true
 changed_size_detected=true
 changed_digest_detected=true
-inventory_sha256=bd65e7fb959c6e5b791aef16c4f8abcec6f53ca2d986a5202a9a10ec8edaebdf
-file_count=362
+inventory_sha256=6ebbc4036d6fdefc99dcc484f569d76742f64e846219f9179ff6286f3cac0af3
+file_count=366

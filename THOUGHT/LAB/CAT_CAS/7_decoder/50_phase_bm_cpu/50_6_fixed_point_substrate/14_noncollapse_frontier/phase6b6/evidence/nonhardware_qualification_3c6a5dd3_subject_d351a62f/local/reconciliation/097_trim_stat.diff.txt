@@ -1,827 +1,827 @@
- .../EVIDENCE_INVENTORY.json                        | 7066 ++------------------
- .../EVIDENCE_INVENTORY.sha256                      |    2 +-
- .../EVIDENCE_INVENTORY_VERIFICATION.txt            |  Bin 319 -> 318 bytes
- .../FINAL_BINDINGS.json                            |    2 +-
- .../REMOVED_DUPLICATE_MUTATION_PACKAGE_TREES.json  |  112 +
- .../package/PORTABLE_PACKAGE_MANIFEST.json         |  447 --
- .../package/PORTABLE_PACKAGE_MANIFEST.sha256       |    1 -
- .../package/QUALIFICATION_CONTRACT.json            |   47 -
- .../package/TRUSTED_SNAPSHOT_BINDING.json          |  258 -
- .../package/capture_quality_contract.h             |   59 -
- .../changed_copied_byte/package/captured_file.h    |   28 -
- .../package/combined_pdn_hardware.h                |   73 -
- .../package/emit_v2_reference_table.c              |  100 -
- .../package/portable_target_qualification.py       | 1416 ----
- .../holo_runtime_v2/combined_pdn_hardware.c        | 1361 ----
- .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             |  640 --
- .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     |  160 -
- .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json |   50 -
- .../14_noncollapse_frontier/phase6b6/__init__.py   |    1 -
- .../phase6b6/analysis/__init__.py                  |    1 -
- .../phase6b6/analysis/adjudication.py              |   67 -
- .../phase6b6/analysis/metrics.py                   |  172 -
- .../phase6b6/analysis/observations.py              |   45 -
- .../phase6b6/analysis/operators.py                 |  202 -
- .../phase6b6/analysis/pipeline.py                  | 1157 ----
- .../phase6b6/analysis/state.py                     |  160 -
- .../phase6b6/analysis/synthetic.py                 |   81 -
- .../phase6b6/contracts/__init__.py                 |    1 -
- .../phase6b6/contracts/contract.py                 |  235 -
- .../phase6b6/contracts/schedule.py                 |  346 -
- .../phase6b6/contracts/v2_interface.py             |  194 -
- .../phase6b6/runtime/__init__.py                   |    1 -
- .../phase6b6/runtime/explicit_slot_runtime.py      |  170 -
- .../phase6b6/runtime/state_machine.py              |  105 -
- .../schemas/adjudication_result.schema.json        |   29 -
- .../phase6b6/schemas/analysis_choice.schema.json   |   86 -
- .../phase6b6/schemas/measured_state.schema.json    |   23 -
- .../phase6b6/schemas/runtime_custody.schema.json   |  297 -
- .../phase6b6/schemas/schedule.schema.json          |  107 -
- .../schemas/scientific_contract.schema.json        |  169 -
- .../phase6b6/schemas/validate_objects.py           |   17 -
- .../phase6b6/tests/test_analysis_partition.py      |  621 --
- .../phase6b6/tests/test_runtime_authority.py       |  107 -
- .../phase6b6/tests/test_schedule_contract.py       |  223 -
- .../package/PORTABLE_PACKAGE_MANIFEST.json         |  447 --
- .../package/PORTABLE_PACKAGE_MANIFEST.sha256       |    1 -
- .../package/QUALIFICATION_CONTRACT.json            |   47 -
- .../package/TRUSTED_SNAPSHOT_BINDING.json          |  258 -
- .../package/capture_quality_contract.h             |   59 -
- .../extra_empty_directory/package/captured_file.h  |   28 -
- .../package/combined_pdn_hardware.h                |   73 -
- .../package/emit_v2_reference_table.c              |  100 -
- .../package/portable_target_qualification.py       | 1416 ----
- .../holo_runtime_v2/combined_pdn_hardware.c        | 1361 ----
- .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             |  640 --
- .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     |  160 -
- .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json |   50 -
- .../14_noncollapse_frontier/phase6b6/__init__.py   |    1 -
- .../phase6b6/analysis/__init__.py                  |    1 -
- .../phase6b6/analysis/adjudication.py              |   67 -
- .../phase6b6/analysis/metrics.py                   |  172 -
- .../phase6b6/analysis/observations.py              |   45 -
- .../phase6b6/analysis/operators.py                 |  202 -
- .../phase6b6/analysis/pipeline.py                  | 1157 ----
- .../phase6b6/analysis/state.py                     |  160 -
- .../phase6b6/analysis/synthetic.py                 |   81 -
- .../phase6b6/contracts/__init__.py                 |    1 -
- .../phase6b6/contracts/contract.py                 |  235 -
- .../phase6b6/contracts/schedule.py                 |  346 -
- .../phase6b6/contracts/v2_interface.py             |  194 -
- .../phase6b6/runtime/__init__.py                   |    1 -
- .../phase6b6/runtime/explicit_slot_runtime.py      |  170 -
- .../phase6b6/runtime/state_machine.py              |  105 -
- .../schemas/adjudication_result.schema.json        |   29 -
- .../phase6b6/schemas/analysis_choice.schema.json   |   86 -
- .../phase6b6/schemas/measured_state.schema.json    |   23 -
- .../phase6b6/schemas/runtime_custody.schema.json   |  297 -
- .../phase6b6/schemas/schedule.schema.json          |  107 -
- .../schemas/scientific_contract.schema.json        |  169 -
- .../phase6b6/schemas/validate_objects.py           |   17 -
- .../phase6b6/tests/test_analysis_partition.py      |  621 --
- .../phase6b6/tests/test_runtime_authority.py       |  107 -
- .../phase6b6/tests/test_schedule_contract.py       |  223 -
- .../package/PORTABLE_PACKAGE_MANIFEST.json         |  447 --
- .../package/PORTABLE_PACKAGE_MANIFEST.sha256       |    1 -
- .../package/QUALIFICATION_CONTRACT.json            |   47 -
- .../package/TRUSTED_SNAPSHOT_BINDING.json          |  258 -
- .../package/capture_quality_contract.h             |   59 -
- .../extra_regular_file/package/captured_file.h     |   28 -
- .../package/combined_pdn_hardware.h                |   73 -
- .../package/emit_v2_reference_table.c              |  100 -
- .../package/portable_target_qualification.py       | 1416 ----
- .../holo_runtime_v2/combined_pdn_hardware.c        | 1361 ----
- .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             |  640 --
- .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     |  160 -
- .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json |   50 -
- .../14_noncollapse_frontier/phase6b6/__init__.py   |    1 -
- .../phase6b6/analysis/__init__.py                  |    1 -
- .../phase6b6/analysis/adjudication.py              |   67 -
- .../phase6b6/analysis/metrics.py                   |  172 -
- .../phase6b6/analysis/observations.py              |   45 -
- .../phase6b6/analysis/operators.py                 |  202 -
- .../phase6b6/analysis/pipeline.py                  | 1157 ----
- .../phase6b6/analysis/state.py                     |  160 -
- .../phase6b6/analysis/synthetic.py                 |   81 -
- .../phase6b6/contracts/__init__.py                 |    1 -
- .../phase6b6/contracts/contract.py                 |  235 -
- .../phase6b6/contracts/schedule.py                 |  346 -
- .../phase6b6/contracts/v2_interface.py             |  194 -
- .../phase6b6/runtime/__init__.py                   |    1 -
- .../phase6b6/runtime/explicit_slot_runtime.py      |  170 -
- .../phase6b6/runtime/state_machine.py              |  105 -
- .../schemas/adjudication_result.schema.json        |   29 -
- .../phase6b6/schemas/analysis_choice.schema.json   |   86 -
- .../phase6b6/schemas/measured_state.schema.json    |   23 -
- .../phase6b6/schemas/runtime_custody.schema.json   |  297 -
- .../phase6b6/schemas/schedule.schema.json          |  107 -
- .../schemas/scientific_contract.schema.json        |  169 -
- .../phase6b6/schemas/validate_objects.py           |   17 -
- .../phase6b6/tests/test_analysis_partition.py      |  621 --
- .../phase6b6/tests/test_runtime_authority.py       |  107 -
- .../phase6b6/tests/test_schedule_contract.py       |  223 -
- .../package/unbound_extra_file.txt                 |  Bin 10 -> 0 bytes
- .../package/PORTABLE_PACKAGE_MANIFEST.json         |  447 --
- .../package/PORTABLE_PACKAGE_MANIFEST.sha256       |    1 -
- .../package/QUALIFICATION_CONTRACT.json            |   47 -
- .../package/TRUSTED_SNAPSHOT_BINDING.json          |  258 -
- .../package/capture_quality_contract.h             |   59 -
- .../package/captured_file.h                        |   28 -
- .../package/combined_pdn_hardware.h                |   73 -
- .../package/emit_v2_reference_table.c              |  100 -
- .../package/portable_target_qualification.py       | 1416 ----
- .../holo_runtime_v2/combined_pdn_hardware.c        | 1361 ----
- .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             |  640 --
- .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     |  160 -
- .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json |   50 -
- .../14_noncollapse_frontier/phase6b6/__init__.py   |    1 -
- .../phase6b6/analysis/__init__.py                  |    1 -
- .../phase6b6/analysis/adjudication.py              |   67 -
- .../phase6b6/analysis/metrics.py                   |  172 -
- .../phase6b6/analysis/observations.py              |   45 -
- .../phase6b6/analysis/operators.py                 |  202 -
- .../phase6b6/analysis/pipeline.py                  | 1157 ----
- .../phase6b6/analysis/state.py                     |  160 -
- .../phase6b6/analysis/synthetic.py                 |   81 -
- .../phase6b6/contracts/__init__.py                 |    1 -
- .../phase6b6/contracts/contract.py                 |  235 -
- .../phase6b6/contracts/schedule.py                 |  346 -
- .../phase6b6/contracts/v2_interface.py             |  194 -
- .../phase6b6/runtime/__init__.py                   |    1 -
- .../phase6b6/runtime/explicit_slot_runtime.py      |  170 -
- .../phase6b6/runtime/state_machine.py              |  105 -
- .../schemas/adjudication_result.schema.json        |   29 -
- .../phase6b6/schemas/analysis_choice.schema.json   |   86 -
- .../phase6b6/schemas/measured_state.schema.json    |   23 -
- .../phase6b6/schemas/runtime_custody.schema.json   |  297 -
- .../phase6b6/schemas/schedule.schema.json          |  107 -
- .../schemas/scientific_contract.schema.json        |  169 -
- .../phase6b6/schemas/validate_objects.py           |   17 -
- .../phase6b6/tests/test_analysis_partition.py      |  621 --
- .../phase6b6/tests/test_runtime_authority.py       |  107 -
- .../phase6b6/tests/test_schedule_contract.py       |  223 -
- .../package/PORTABLE_PACKAGE_MANIFEST.json         |  447 --
- .../package/PORTABLE_PACKAGE_MANIFEST.sha256       |    1 -
- .../package/QUALIFICATION_CONTRACT.json            |   47 -
- .../package/TRUSTED_SNAPSHOT_BINDING.json          |  258 -
- .../package/capture_quality_contract.h             |   59 -
- .../package/captured_file.h                        |   28 -
- .../package/combined_pdn_hardware.h                |   73 -
- .../package/emit_v2_reference_table.c              |  100 -
- .../package/portable_target_qualification.py       | 1416 ----
- .../holo_runtime_v2/combined_pdn_hardware.c        | 1361 ----
- .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             |  640 --
- .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     |  160 -
- .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json |   50 -
- .../14_noncollapse_frontier/phase6b6/__init__.py   |    1 -
- .../phase6b6/analysis/__init__.py                  |    1 -
- .../phase6b6/analysis/adjudication.py              |   67 -
- .../phase6b6/analysis/metrics.py                   |  172 -
- .../phase6b6/analysis/observations.py              |   45 -
- .../phase6b6/analysis/operators.py                 |  202 -
- .../phase6b6/analysis/pipeline.py                  | 1157 ----
- .../phase6b6/analysis/state.py                     |  160 -
- .../phase6b6/analysis/synthetic.py                 |   81 -
- .../phase6b6/contracts/__init__.py                 |    1 -
- .../phase6b6/contracts/contract.py                 |  235 -
- .../phase6b6/contracts/schedule.py                 |  346 -
- .../phase6b6/contracts/v2_interface.py             |  194 -
- .../phase6b6/runtime/__init__.py                   |    1 -
- .../phase6b6/runtime/explicit_slot_runtime.py      |  170 -
- .../phase6b6/runtime/state_machine.py              |  105 -
- .../schemas/adjudication_result.schema.json        |   29 -
- .../phase6b6/schemas/analysis_choice.schema.json   |   86 -
- .../phase6b6/schemas/measured_state.schema.json    |   23 -
- .../phase6b6/schemas/runtime_custody.schema.json   |  297 -
- .../phase6b6/schemas/schedule.schema.json          |  107 -
- .../schemas/scientific_contract.schema.json        |  169 -
- .../phase6b6/schemas/validate_objects.py           |   17 -
- .../phase6b6/tests/test_analysis_partition.py      |  621 --
- .../phase6b6/tests/test_runtime_authority.py       |  107 -
- .../phase6b6/tests/test_schedule_contract.py       |  223 -
- .../package/PORTABLE_PACKAGE_MANIFEST.json         |  447 --
- .../package/PORTABLE_PACKAGE_MANIFEST.sha256       |    1 -
- .../package/QUALIFICATION_CONTRACT.json            |   47 -
- .../package/TRUSTED_SNAPSHOT_BINDING.json          |  258 -
- .../package/capture_quality_contract.h             |   59 -
- .../package/captured_file.h                        |   28 -
- .../package/combined_pdn_hardware.h                |   73 -
- .../package/emit_v2_reference_table.c              |  100 -
- .../package/portable_target_qualification.py       | 1416 ----
- .../holo_runtime_v2/combined_pdn_hardware.c        | 1361 ----
- .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             |  640 --
- .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     |  160 -
- .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json |   50 -
- .../14_noncollapse_frontier/phase6b6/__init__.py   |    1 -
- .../phase6b6/analysis/__init__.py                  |    1 -
- .../phase6b6/analysis/adjudication.py              |   67 -
- .../phase6b6/analysis/metrics.py                   |  172 -
- .../phase6b6/analysis/observations.py              |   45 -
- .../phase6b6/analysis/operators.py                 |  202 -
- .../phase6b6/analysis/pipeline.py                  | 1157 ----
- .../phase6b6/analysis/state.py                     |  160 -
- .../phase6b6/analysis/synthetic.py                 |   81 -
- .../phase6b6/contracts/__init__.py                 |    1 -
- .../phase6b6/contracts/contract.py                 |  235 -
- .../phase6b6/contracts/schedule.py                 |  346 -
- .../phase6b6/contracts/v2_interface.py             |  194 -
- .../phase6b6/runtime/__init__.py                   |    1 -
- .../phase6b6/runtime/explicit_slot_runtime.py      |  170 -
- .../phase6b6/runtime/state_machine.py              |  105 -
- .../schemas/adjudication_result.schema.json        |   29 -
- .../phase6b6/schemas/analysis_choice.schema.json   |   86 -
- .../phase6b6/schemas/measured_state.schema.json    |   23 -
- .../phase6b6/schemas/runtime_custody.schema.json   |  297 -
- .../phase6b6/schemas/schedule.schema.json          |  107 -
- .../schemas/scientific_contract.schema.json        |  169 -
- .../phase6b6/schemas/validate_objects.py           |   17 -
- .../phase6b6/tests/test_analysis_partition.py      |  621 --
- .../phase6b6/tests/test_runtime_authority.py       |  107 -
- .../phase6b6/tests/test_schedule_contract.py       |  223 -
- .../package/PORTABLE_PACKAGE_MANIFEST.json         |  447 --
- .../package/PORTABLE_PACKAGE_MANIFEST.sha256       |    1 -
- .../package/QUALIFICATION_CONTRACT.json            |   47 -
- .../package/TRUSTED_SNAPSHOT_BINDING.json          |  258 -
- .../missing_regular_file/package/captured_file.h   |   28 -
- .../package/combined_pdn_hardware.h                |   73 -
- .../package/emit_v2_reference_table.c              |  100 -
- .../package/portable_target_qualification.py       | 1416 ----
- .../holo_runtime_v2/combined_pdn_hardware.c        | 1361 ----
- .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             |  640 --
- .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     |  160 -
- .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json |   50 -
- .../14_noncollapse_frontier/phase6b6/__init__.py   |    1 -
- .../phase6b6/analysis/__init__.py                  |    1 -
- .../phase6b6/analysis/adjudication.py              |   67 -
- .../phase6b6/analysis/metrics.py                   |  172 -
- .../phase6b6/analysis/observations.py              |   45 -
- .../phase6b6/analysis/operators.py                 |  202 -
- .../phase6b6/analysis/pipeline.py                  | 1157 ----
- .../phase6b6/analysis/state.py                     |  160 -
- .../phase6b6/analysis/synthetic.py                 |   81 -
- .../phase6b6/contracts/__init__.py                 |    1 -
- .../phase6b6/contracts/contract.py                 |  235 -
- .../phase6b6/contracts/schedule.py                 |  346 -
- .../phase6b6/contracts/v2_interface.py             |  194 -
- .../phase6b6/runtime/__init__.py                   |    1 -
- .../phase6b6/runtime/explicit_slot_runtime.py      |  170 -
- .../phase6b6/runtime/state_machine.py              |  105 -
- .../schemas/adjudication_result.schema.json        |   29 -
- .../phase6b6/schemas/analysis_choice.schema.json   |   86 -
- .../phase6b6/schemas/measured_state.schema.json    |   23 -
- .../phase6b6/schemas/runtime_custody.schema.json   |  297 -
- .../phase6b6/schemas/schedule.schema.json          |  107 -
- .../schemas/scientific_contract.schema.json        |  169 -
- .../phase6b6/schemas/validate_objects.py           |   17 -
- .../phase6b6/tests/test_analysis_partition.py      |  621 --
- .../phase6b6/tests/test_runtime_authority.py       |  107 -
- .../phase6b6/tests/test_schedule_contract.py       |  223 -
- .../package/PORTABLE_PACKAGE_MANIFEST.json         |  447 --
- .../package/PORTABLE_PACKAGE_MANIFEST.sha256       |    1 -
- .../package/QUALIFICATION_CONTRACT.json            |   47 -
- .../package/TRUSTED_SNAPSHOT_BINDING.json          |  258 -
- .../package/capture_quality_contract.h             |   59 -
- .../mode_only_0644_to_0600/package/captured_file.h |   28 -
- .../package/combined_pdn_hardware.h                |   73 -
- .../package/emit_v2_reference_table.c              |  100 -
- .../package/portable_target_qualification.py       | 1416 ----
- .../holo_runtime_v2/combined_pdn_hardware.c        | 1361 ----
- .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             |  640 --
- .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     |  160 -
- .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json |   50 -
- .../14_noncollapse_frontier/phase6b6/__init__.py   |    1 -
- .../phase6b6/analysis/__init__.py                  |    1 -
- .../phase6b6/analysis/adjudication.py              |   67 -
- .../phase6b6/analysis/metrics.py                   |  172 -
- .../phase6b6/analysis/observations.py              |   45 -
- .../phase6b6/analysis/operators.py                 |  202 -
- .../phase6b6/analysis/pipeline.py                  | 1157 ----
- .../phase6b6/analysis/state.py                     |  160 -
- .../phase6b6/analysis/synthetic.py                 |   81 -
- .../phase6b6/contracts/__init__.py                 |    1 -
- .../phase6b6/contracts/contract.py                 |  235 -
- .../phase6b6/contracts/schedule.py                 |  346 -
- .../phase6b6/contracts/v2_interface.py             |  194 -
- .../phase6b6/runtime/__init__.py                   |    1 -
- .../phase6b6/runtime/explicit_slot_runtime.py      |  170 -
- .../phase6b6/runtime/state_machine.py              |  105 -
- .../schemas/adjudication_result.schema.json        |   29 -
- .../phase6b6/schemas/analysis_choice.schema.json   |   86 -
- .../phase6b6/schemas/measured_state.schema.json    |   23 -
- .../phase6b6/schemas/runtime_custody.schema.json   |  297 -
- .../phase6b6/schemas/schedule.schema.json          |  107 -
- .../schemas/scientific_contract.schema.json        |  169 -
- .../phase6b6/schemas/validate_objects.py           |   17 -
- .../phase6b6/tests/test_analysis_partition.py      |  621 --
- .../phase6b6/tests/test_runtime_authority.py       |  107 -
- .../phase6b6/tests/test_schedule_contract.py       |  223 -
- .../package/PORTABLE_PACKAGE_MANIFEST.json         |  447 --
- .../package/PORTABLE_PACKAGE_MANIFEST.sha256       |    1 -
- .../package/QUALIFICATION_CONTRACT.json            |   47 -
- .../package/TRUSTED_SNAPSHOT_BINDING.json          |  258 -
- .../package/capture_quality_contract.h             |   59 -
- .../package/captured_file.h                        |   28 -
- .../package/combined_pdn_hardware.h                |   73 -
- .../package/emit_v2_reference_table.c              |  100 -
- .../package/portable_target_qualification.py       | 1416 ----
- .../holo_runtime_v2/combined_pdn_hardware.c        | 1361 ----
- .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             |  640 --
- .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     |  160 -
- .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json |   50 -
- .../14_noncollapse_frontier/phase6b6/__init__.py   |    1 -
- .../phase6b6/analysis/__init__.py                  |    1 -
- .../phase6b6/analysis/adjudication.py              |   67 -
- .../phase6b6/analysis/metrics.py                   |  172 -
- .../phase6b6/analysis/observations.py              |   45 -
- .../phase6b6/analysis/operators.py                 |  202 -
- .../phase6b6/analysis/pipeline.py                  | 1157 ----
- .../phase6b6/analysis/state.py                     |  160 -
- .../phase6b6/analysis/synthetic.py                 |   81 -
- .../phase6b6/contracts/__init__.py                 |    1 -
- .../phase6b6/contracts/contract.py                 |  235 -
- .../phase6b6/contracts/schedule.py                 |  346 -
- .../phase6b6/contracts/v2_interface.py             |  194 -
- .../phase6b6/runtime/__init__.py                   |    1 -
- .../phase6b6/runtime/explicit_slot_runtime.py      |  170 -
- .../phase6b6/runtime/state_machine.py              |  105 -
- .../schemas/adjudication_result.schema.json        |   29 -
- .../phase6b6/schemas/analysis_choice.schema.json   |   86 -
- .../phase6b6/schemas/measured_state.schema.json    |   23 -
- .../phase6b6/schemas/runtime_custody.schema.json   |  297 -
- .../phase6b6/schemas/schedule.schema.json          |  107 -
- .../schemas/scientific_contract.schema.json        |  169 -
- .../phase6b6/schemas/validate_objects.py           |   17 -
- .../phase6b6/tests/test_analysis_partition.py      |  621 --
- .../phase6b6/tests/test_runtime_authority.py       |  107 -
- .../phase6b6/tests/test_schedule_contract.py       |  223 -
- .../package/PORTABLE_PACKAGE_MANIFEST.json         |  447 --
- .../package/PORTABLE_PACKAGE_MANIFEST.sha256       |    1 -
- .../package/QUALIFICATION_CONTRACT.json            |   47 -
- .../package/TRUSTED_SNAPSHOT_BINDING.json          |  258 -
- .../package/capture_quality_contract.h             |   59 -
- .../package/captured_file.h                        |   28 -
- .../package/combined_pdn_hardware.h                |   73 -
- .../package/emit_v2_reference_table.c              |  100 -
- .../package/portable_target_qualification.py       | 1416 ----
- .../holo_runtime_v2/combined_pdn_hardware.c        | 1361 ----
- .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             |  640 --
- .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     |  160 -
- .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json |   50 -
- .../14_noncollapse_frontier/phase6b6/__init__.py   |    1 -
- .../phase6b6/analysis/__init__.py                  |    1 -
- .../phase6b6/analysis/adjudication.py              |   67 -
- .../phase6b6/analysis/metrics.py                   |  172 -
- .../phase6b6/analysis/observations.py              |   45 -
- .../phase6b6/analysis/operators.py                 |  202 -
- .../phase6b6/analysis/pipeline.py                  | 1157 ----
- .../phase6b6/analysis/state.py                     |  160 -
- .../phase6b6/analysis/synthetic.py                 |   81 -
- .../phase6b6/contracts/__init__.py                 |    1 -
- .../phase6b6/contracts/contract.py                 |  235 -
- .../phase6b6/contracts/schedule.py                 |  346 -
- .../phase6b6/contracts/v2_interface.py             |  194 -
- .../phase6b6/runtime/__init__.py                   |    1 -
- .../phase6b6/runtime/explicit_slot_runtime.py      |  170 -
- .../phase6b6/runtime/state_machine.py              |  105 -
- .../schemas/adjudication_result.schema.json        |   29 -
- .../phase6b6/schemas/analysis_choice.schema.json   |   86 -
- .../phase6b6/schemas/measured_state.schema.json    |   23 -
- .../phase6b6/schemas/runtime_custody.schema.json   |  297 -
- .../phase6b6/schemas/schedule.schema.json          |  107 -
- .../schemas/scientific_contract.schema.json        |  169 -
- .../phase6b6/schemas/validate_objects.py           |   17 -
- .../phase6b6/tests/test_analysis_partition.py      |  621 --
- .../phase6b6/tests/test_runtime_authority.py       |  107 -
- .../phase6b6/tests/test_schedule_contract.py       |  223 -
- .../package/PORTABLE_PACKAGE_MANIFEST.json         |  447 --
- .../package/PORTABLE_PACKAGE_MANIFEST.sha256       |    1 -
- .../package/QUALIFICATION_CONTRACT.json            |   47 -
- .../package/TRUSTED_SNAPSHOT_BINDING.json          |  258 -
- .../package/capture_quality_contract.h             |   59 -
- .../setgid_directory/package/captured_file.h       |   28 -
- .../package/combined_pdn_hardware.h                |   73 -
- .../package/emit_v2_reference_table.c              |  100 -
- .../package/portable_target_qualification.py       | 1416 ----
- .../holo_runtime_v2/combined_pdn_hardware.c        | 1361 ----
- .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             |  640 --
- .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     |  160 -
- .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json |   50 -
- .../14_noncollapse_frontier/phase6b6/__init__.py   |    1 -
- .../phase6b6/analysis/__init__.py                  |    1 -
- .../phase6b6/analysis/adjudication.py              |   67 -
- .../phase6b6/analysis/metrics.py                   |  172 -
- .../phase6b6/analysis/observations.py              |   45 -
- .../phase6b6/analysis/operators.py                 |  202 -
- .../phase6b6/analysis/pipeline.py                  | 1157 ----
- .../phase6b6/analysis/state.py                     |  160 -
- .../phase6b6/analysis/synthetic.py                 |   81 -
- .../phase6b6/contracts/__init__.py                 |    1 -
- .../phase6b6/contracts/contract.py                 |  235 -
- .../phase6b6/contracts/schedule.py                 |  346 -
- .../phase6b6/contracts/v2_interface.py             |  194 -
- .../phase6b6/runtime/__init__.py                   |    1 -
- .../phase6b6/runtime/explicit_slot_runtime.py      |  170 -
- .../phase6b6/runtime/state_machine.py              |  105 -
- .../schemas/adjudication_result.schema.json        |   29 -
- .../phase6b6/schemas/analysis_choice.schema.json   |   86 -
- .../phase6b6/schemas/measured_state.schema.json    |   23 -
- .../phase6b6/schemas/runtime_custody.schema.json   |  297 -
- .../phase6b6/schemas/schedule.schema.json          |  107 -
- .../schemas/scientific_contract.schema.json        |  169 -
- .../phase6b6/schemas/validate_objects.py           |   17 -
- .../phase6b6/tests/test_analysis_partition.py      |  621 --
- .../phase6b6/tests/test_runtime_authority.py       |  107 -
- .../phase6b6/tests/test_schedule_contract.py       |  223 -
- .../package/PORTABLE_PACKAGE_MANIFEST.json         |  447 --
- .../package/PORTABLE_PACKAGE_MANIFEST.sha256       |    1 -
- .../package/QUALIFICATION_CONTRACT.json            |   47 -
- .../package/TRUSTED_SNAPSHOT_BINDING.json          |  258 -
- .../setuid_file/package/capture_quality_contract.h |   59 -
- .../setuid_file/package/captured_file.h            |   28 -
- .../setuid_file/package/combined_pdn_hardware.h    |   73 -
- .../setuid_file/package/emit_v2_reference_table.c  |  100 -
- .../package/portable_target_qualification.py       | 1416 ----
- .../holo_runtime_v2/combined_pdn_hardware.c        | 1361 ----
- .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             |  640 --
- .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     |  160 -
- .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json |   50 -
- .../14_noncollapse_frontier/phase6b6/__init__.py   |    1 -
- .../phase6b6/analysis/__init__.py                  |    1 -
- .../phase6b6/analysis/adjudication.py              |   67 -
- .../phase6b6/analysis/metrics.py                   |  172 -
- .../phase6b6/analysis/observations.py              |   45 -
- .../phase6b6/analysis/operators.py                 |  202 -
- .../phase6b6/analysis/pipeline.py                  | 1157 ----
- .../phase6b6/analysis/state.py                     |  160 -
- .../phase6b6/analysis/synthetic.py                 |   81 -
- .../phase6b6/contracts/__init__.py                 |    1 -
- .../phase6b6/contracts/contract.py                 |  235 -
- .../phase6b6/contracts/schedule.py                 |  346 -
- .../phase6b6/contracts/v2_interface.py             |  194 -
- .../phase6b6/runtime/__init__.py                   |    1 -
- .../phase6b6/runtime/explicit_slot_runtime.py      |  170 -
- .../phase6b6/runtime/state_machine.py              |  105 -
- .../schemas/adjudication_result.schema.json        |   29 -
- .../phase6b6/schemas/analysis_choice.schema.json   |   86 -
- .../phase6b6/schemas/measured_state.schema.json    |   23 -
- .../phase6b6/schemas/runtime_custody.schema.json   |  297 -
- .../phase6b6/schemas/schedule.schema.json          |  107 -
- .../schemas/scientific_contract.schema.json        |  169 -
- .../phase6b6/schemas/validate_objects.py           |   17 -
- .../phase6b6/tests/test_analysis_partition.py      |  621 --
- .../phase6b6/tests/test_runtime_authority.py       |  107 -
- .../phase6b6/tests/test_schedule_contract.py       |  223 -
- .../package/PORTABLE_PACKAGE_MANIFEST.json         |  447 --
- .../package/PORTABLE_PACKAGE_MANIFEST.sha256       |    1 -
- .../package/QUALIFICATION_CONTRACT.json            |   47 -
- .../package/TRUSTED_SNAPSHOT_BINDING.json          |  258 -
- .../package/capture_quality_contract.h             |   59 -
- .../package/captured_file.h                        |   28 -
- .../package/combined_pdn_hardware.h                |   73 -
- .../package/emit_v2_reference_table.c              |  100 -
- .../package/portable_target_qualification.py       | 1416 ----
- .../holo_runtime_v2/combined_pdn_hardware.c        | 1361 ----
- .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             |  640 --
- .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     |  160 -
- .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json |   50 -
- .../14_noncollapse_frontier/phase6b6/__init__.py   |    1 -
- .../phase6b6/analysis/__init__.py                  |    1 -
- .../phase6b6/analysis/adjudication.py              |   67 -
- .../phase6b6/analysis/metrics.py                   |  172 -
- .../phase6b6/analysis/observations.py              |   45 -
- .../phase6b6/analysis/operators.py                 |  202 -
- .../phase6b6/analysis/pipeline.py                  | 1157 ----
- .../phase6b6/analysis/state.py                     |  160 -
- .../phase6b6/analysis/synthetic.py                 |   81 -
- .../phase6b6/contracts/__init__.py                 |    1 -
- .../phase6b6/contracts/contract.py                 |  235 -
- .../phase6b6/contracts/schedule.py                 |  346 -
- .../phase6b6/contracts/v2_interface.py             |  194 -
- .../phase6b6/runtime/__init__.py                   |    1 -
- .../phase6b6/runtime/explicit_slot_runtime.py      |  170 -
- .../phase6b6/runtime/state_machine.py              |  105 -
- .../schemas/adjudication_result.schema.json        |   29 -
- .../phase6b6/schemas/analysis_choice.schema.json   |   86 -
- .../phase6b6/schemas/measured_state.schema.json    |   23 -
- .../phase6b6/schemas/runtime_custody.schema.json   |  297 -
- .../phase6b6/schemas/schedule.schema.json          |  107 -
- .../schemas/scientific_contract.schema.json        |  169 -
- .../phase6b6/schemas/validate_objects.py           |   17 -
- .../phase6b6/tests/test_analysis_partition.py      |  621 --
- .../phase6b6/tests/test_runtime_authority.py       |  107 -
- .../phase6b6/tests/test_schedule_contract.py       |  223 -
- .../package/PORTABLE_PACKAGE_MANIFEST.json         |  447 --
- .../package/PORTABLE_PACKAGE_MANIFEST.sha256       |    1 -
- .../package/QUALIFICATION_CONTRACT.json            |   47 -
- .../package/TRUSTED_SNAPSHOT_BINDING.json          |  258 -
- .../package/capture_quality_contract.h             |   59 -
- .../sticky_directory/package/captured_file.h       |   28 -
- .../package/combined_pdn_hardware.h                |   73 -
- .../package/emit_v2_reference_table.c              |  100 -
- .../package/portable_target_qualification.py       | 1416 ----
- .../holo_runtime_v2/combined_pdn_hardware.c        | 1361 ----
- .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             |  640 --
- .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     |  160 -
- .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json |   50 -
- .../14_noncollapse_frontier/phase6b6/__init__.py   |    1 -
- .../phase6b6/analysis/__init__.py                  |    1 -
- .../phase6b6/analysis/adjudication.py              |   67 -
- .../phase6b6/analysis/metrics.py                   |  172 -
- .../phase6b6/analysis/observations.py              |   45 -
- .../phase6b6/analysis/operators.py                 |  202 -
- .../phase6b6/analysis/pipeline.py                  | 1157 ----
- .../phase6b6/analysis/state.py                     |  160 -
- .../phase6b6/analysis/synthetic.py                 |   81 -
- .../phase6b6/contracts/__init__.py                 |    1 -
- .../phase6b6/contracts/contract.py                 |  235 -
- .../phase6b6/contracts/schedule.py                 |  346 -
- .../phase6b6/contracts/v2_interface.py             |  194 -
- .../phase6b6/runtime/__init__.py                   |    1 -
- .../phase6b6/runtime/explicit_slot_runtime.py      |  170 -
- .../phase6b6/runtime/state_machine.py              |  105 -
- .../schemas/adjudication_result.schema.json        |   29 -
- .../phase6b6/schemas/analysis_choice.schema.json   |   86 -
- .../phase6b6/schemas/measured_state.schema.json    |   23 -
- .../phase6b6/schemas/runtime_custody.schema.json   |  297 -
- .../phase6b6/schemas/schedule.schema.json          |  107 -
- .../schemas/scientific_contract.schema.json        |  169 -
- .../phase6b6/schemas/validate_objects.py           |   17 -
- .../phase6b6/tests/test_analysis_partition.py      |  621 --
- .../phase6b6/tests/test_runtime_authority.py       |  107 -
- .../phase6b6/tests/test_schedule_contract.py       |  223 -
- .../symlink/package/PORTABLE_PACKAGE_MANIFEST.json |  447 --
- .../package/PORTABLE_PACKAGE_MANIFEST.sha256       |    1 -
- .../symlink/package/QUALIFICATION_CONTRACT.json    |   47 -
- .../symlink/package/TRUSTED_SNAPSHOT_BINDING.json  |  258 -
- .../symlink/package/capture_quality_contract.h     |   59 -
- .../negative_tests/symlink/package/captured_file.h |   28 -
- .../symlink/package/combined_pdn_hardware.h        |   73 -
- .../symlink/package/emit_v2_reference_table.c      |  100 -
- .../package/portable_target_qualification.py       | 1416 ----
- .../holo_runtime_v2/combined_pdn_hardware.c        | 1361 ----
- .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             |  640 --
- .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     |  160 -
- .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json |   50 -
- .../14_noncollapse_frontier/phase6b6/__init__.py   |    1 -
- .../phase6b6/analysis/__init__.py                  |    1 -
- .../phase6b6/analysis/adjudication.py              |   67 -
- .../phase6b6/analysis/metrics.py                   |  172 -
- .../phase6b6/analysis/observations.py              |   45 -
- .../phase6b6/analysis/operators.py                 |  202 -
- .../phase6b6/analysis/pipeline.py                  | 1157 ----
- .../phase6b6/analysis/state.py                     |  160 -
- .../phase6b6/analysis/synthetic.py                 |   81 -
- .../phase6b6/contracts/__init__.py                 |    1 -
- .../phase6b6/contracts/contract.py                 |  235 -
- .../phase6b6/contracts/schedule.py                 |  346 -
- .../phase6b6/contracts/v2_interface.py             |  194 -
- .../phase6b6/runtime/__init__.py                   |    1 -
- .../phase6b6/runtime/explicit_slot_runtime.py      |  170 -
- .../phase6b6/runtime/state_machine.py              |  105 -
- .../schemas/adjudication_result.schema.json        |   29 -
- .../phase6b6/schemas/analysis_choice.schema.json   |   86 -
- .../phase6b6/schemas/measured_state.schema.json    |   23 -
- .../phase6b6/schemas/runtime_custody.schema.json   |  297 -
- .../phase6b6/schemas/schedule.schema.json          |  107 -
- .../schemas/scientific_contract.schema.json        |  169 -
- .../phase6b6/schemas/validate_objects.py           |   17 -
- .../phase6b6/tests/test_analysis_partition.py      |  621 --
- .../phase6b6/tests/test_runtime_authority.py       |  107 -
- .../phase6b6/tests/test_schedule_contract.py       |  223 -
- .../negative_tests/symlink/package/unbound_symlink |   59 -
- .../package/PORTABLE_PACKAGE_MANIFEST.json         |  447 --
- .../package/PORTABLE_PACKAGE_MANIFEST.sha256       |    1 -
- .../package/QUALIFICATION_CONTRACT.json            |   47 -
- .../package/TRUSTED_SNAPSHOT_BINDING.json          |  258 -
- .../package/capture_quality_contract.h             |   59 -
- .../changed_copied_byte/package/captured_file.h    |   28 -
- .../package/combined_pdn_hardware.h                |   73 -
- .../package/emit_v2_reference_table.c              |  100 -
- .../package/portable_target_qualification.py       | 1361 ----
- .../holo_runtime_v2/combined_pdn_hardware.c        | 1361 ----
- .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             |  640 --
- .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     |  160 -
- .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json |   50 -
- .../14_noncollapse_frontier/phase6b6/__init__.py   |    1 -
- .../phase6b6/analysis/__init__.py                  |    1 -
- .../phase6b6/analysis/adjudication.py              |   67 -
- .../phase6b6/analysis/metrics.py                   |  172 -
- .../phase6b6/analysis/observations.py              |   45 -
- .../phase6b6/analysis/operators.py                 |  202 -
- .../phase6b6/analysis/pipeline.py                  | 1157 ----
- .../phase6b6/analysis/state.py                     |  160 -
- .../phase6b6/analysis/synthetic.py                 |   81 -
- .../phase6b6/contracts/__init__.py                 |    1 -
- .../phase6b6/contracts/contract.py                 |  235 -
- .../phase6b6/contracts/schedule.py                 |  346 -
- .../phase6b6/contracts/v2_interface.py             |  194 -
- .../phase6b6/runtime/__init__.py                   |    1 -
- .../phase6b6/runtime/explicit_slot_runtime.py      |  170 -
- .../phase6b6/runtime/state_machine.py              |  105 -
- .../schemas/adjudication_result.schema.json        |   29 -
- .../phase6b6/schemas/analysis_choice.schema.json   |   86 -
- .../phase6b6/schemas/measured_state.schema.json    |   23 -
- .../phase6b6/schemas/runtime_custody.schema.json   |  297 -
- .../phase6b6/schemas/schedule.schema.json          |  107 -
- .../schemas/scientific_contract.schema.json        |  169 -
- .../phase6b6/schemas/validate_objects.py           |   17 -
- .../phase6b6/tests/test_analysis_partition.py      |  621 --
- .../phase6b6/tests/test_runtime_authority.py       |  107 -
- .../phase6b6/tests/test_schedule_contract.py       |  223 -
- .../package/PORTABLE_PACKAGE_MANIFEST.json         |  447 --
- .../package/PORTABLE_PACKAGE_MANIFEST.sha256       |    1 -
- .../package/QUALIFICATION_CONTRACT.json            |   47 -
- .../package/TRUSTED_SNAPSHOT_BINDING.json          |  258 -
- .../package/capture_quality_contract.h             |   59 -
- .../changed_mode/package/captured_file.h           |   28 -
- .../changed_mode/package/combined_pdn_hardware.h   |   73 -
- .../changed_mode/package/emit_v2_reference_table.c |  100 -
- .../package/portable_target_qualification.py       | 1361 ----
- .../holo_runtime_v2/combined_pdn_hardware.c        | 1361 ----
- .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             |  640 --
- .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     |  160 -
- .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json |   50 -
- .../14_noncollapse_frontier/phase6b6/__init__.py   |    1 -
- .../phase6b6/analysis/__init__.py                  |    1 -
- .../phase6b6/analysis/adjudication.py              |   67 -
- .../phase6b6/analysis/metrics.py                   |  172 -
- .../phase6b6/analysis/observations.py              |   45 -
- .../phase6b6/analysis/operators.py                 |  202 -
- .../phase6b6/analysis/pipeline.py                  | 1157 ----
- .../phase6b6/analysis/state.py                     |  160 -
- .../phase6b6/analysis/synthetic.py                 |   81 -
- .../phase6b6/contracts/__init__.py                 |    1 -
- .../phase6b6/contracts/contract.py                 |  235 -
- .../phase6b6/contracts/schedule.py                 |  346 -
- .../phase6b6/contracts/v2_interface.py             |  194 -
- .../phase6b6/runtime/__init__.py                   |    1 -
- .../phase6b6/runtime/explicit_slot_runtime.py      |  170 -
- .../phase6b6/runtime/state_machine.py              |  105 -
- .../schemas/adjudication_result.schema.json        |   29 -
- .../phase6b6/schemas/analysis_choice.schema.json   |   86 -
- .../phase6b6/schemas/measured_state.schema.json    |   23 -
- .../phase6b6/schemas/runtime_custody.schema.json   |  297 -
- .../phase6b6/schemas/schedule.schema.json          |  107 -
- .../schemas/scientific_contract.schema.json        |  169 -
- .../phase6b6/schemas/validate_objects.py           |   17 -
- .../phase6b6/tests/test_analysis_partition.py      |  621 --
- .../phase6b6/tests/test_runtime_authority.py       |  107 -
- .../phase6b6/tests/test_schedule_contract.py       |  223 -
- .../package/PORTABLE_PACKAGE_MANIFEST.json         |  447 --
- .../package/PORTABLE_PACKAGE_MANIFEST.sha256       |    1 -
- .../package/QUALIFICATION_CONTRACT.json            |   47 -
- .../package/TRUSTED_SNAPSHOT_BINDING.json          |  258 -
- .../package/capture_quality_contract.h             |   59 -
- .../extra_empty_directory/package/captured_file.h  |   28 -
- .../package/combined_pdn_hardware.h                |   73 -
- .../package/emit_v2_reference_table.c              |  100 -
- .../package/portable_target_qualification.py       | 1361 ----
- .../holo_runtime_v2/combined_pdn_hardware.c        | 1361 ----
- .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             |  640 --
- .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     |  160 -
- .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json |   50 -
- .../14_noncollapse_frontier/phase6b6/__init__.py   |    1 -
- .../phase6b6/analysis/__init__.py                  |    1 -
- .../phase6b6/analysis/adjudication.py              |   67 -
- .../phase6b6/analysis/metrics.py                   |  172 -
- .../phase6b6/analysis/observations.py              |   45 -
- .../phase6b6/analysis/operators.py                 |  202 -
- .../phase6b6/analysis/pipeline.py                  | 1157 ----
- .../phase6b6/analysis/state.py                     |  160 -
- .../phase6b6/analysis/synthetic.py                 |   81 -
- .../phase6b6/contracts/__init__.py                 |    1 -
- .../phase6b6/contracts/contract.py                 |  235 -
- .../phase6b6/contracts/schedule.py                 |  346 -
- .../phase6b6/contracts/v2_interface.py             |  194 -
- .../phase6b6/runtime/__init__.py                   |    1 -
- .../phase6b6/runtime/explicit_slot_runtime.py      |  170 -
- .../phase6b6/runtime/state_machine.py              |  105 -
- .../schemas/adjudication_result.schema.json        |   29 -
- .../phase6b6/schemas/analysis_choice.schema.json   |   86 -
- .../phase6b6/schemas/measured_state.schema.json    |   23 -
- .../phase6b6/schemas/runtime_custody.schema.json   |  297 -
- .../phase6b6/schemas/schedule.schema.json          |  107 -
- .../schemas/scientific_contract.schema.json        |  169 -
- .../phase6b6/schemas/validate_objects.py           |   17 -
- .../phase6b6/tests/test_analysis_partition.py      |  621 --
- .../phase6b6/tests/test_runtime_authority.py       |  107 -
- .../phase6b6/tests/test_schedule_contract.py       |  223 -
- .../package/PORTABLE_PACKAGE_MANIFEST.json         |  447 --
- .../package/PORTABLE_PACKAGE_MANIFEST.sha256       |    1 -
- .../package/QUALIFICATION_CONTRACT.json            |   47 -
- .../package/TRUSTED_SNAPSHOT_BINDING.json          |  258 -
- .../package/capture_quality_contract.h             |   59 -
- .../extra_regular_file/package/captured_file.h     |   28 -
- .../package/combined_pdn_hardware.h                |   73 -
- .../package/emit_v2_reference_table.c              |  100 -
- .../package/portable_target_qualification.py       | 1361 ----
- .../holo_runtime_v2/combined_pdn_hardware.c        | 1361 ----
- .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             |  640 --
- .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     |  160 -
- .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json |   50 -
- .../14_noncollapse_frontier/phase6b6/__init__.py   |    1 -
- .../phase6b6/analysis/__init__.py                  |    1 -
- .../phase6b6/analysis/adjudication.py              |   67 -
- .../phase6b6/analysis/metrics.py                   |  172 -
- .../phase6b6/analysis/observations.py              |   45 -
- .../phase6b6/analysis/operators.py                 |  202 -
- .../phase6b6/analysis/pipeline.py                  | 1157 ----
- .../phase6b6/analysis/state.py                     |  160 -
- .../phase6b6/analysis/synthetic.py                 |   81 -
- .../phase6b6/contracts/__init__.py                 |    1 -
- .../phase6b6/contracts/contract.py                 |  235 -
- .../phase6b6/contracts/schedule.py                 |  346 -
- .../phase6b6/contracts/v2_interface.py             |  194 -
- .../phase6b6/runtime/__init__.py                   |    1 -
- .../phase6b6/runtime/explicit_slot_runtime.py      |  170 -
- .../phase6b6/runtime/state_machine.py              |  105 -
- .../schemas/adjudication_result.schema.json        |   29 -
- .../phase6b6/schemas/analysis_choice.schema.json   |   86 -
- .../phase6b6/schemas/measured_state.schema.json    |   23 -
- .../phase6b6/schemas/runtime_custody.schema.json   |  297 -
- .../phase6b6/schemas/schedule.schema.json          |  107 -
- .../schemas/scientific_contract.schema.json        |  169 -
- .../phase6b6/schemas/validate_objects.py           |   17 -
- .../phase6b6/tests/test_analysis_partition.py      |  621 --
- .../phase6b6/tests/test_runtime_authority.py       |  107 -
- .../phase6b6/tests/test_schedule_contract.py       |  223 -
- .../package/unbound_extra_file.txt                 |  Bin 10 -> 0 bytes
- .../package/PORTABLE_PACKAGE_MANIFEST.json         |  447 --
- .../package/PORTABLE_PACKAGE_MANIFEST.sha256       |    1 -
- .../package/QUALIFICATION_CONTRACT.json            |   47 -
- .../package/TRUSTED_SNAPSHOT_BINDING.json          |  258 -
- .../missing_regular_file/package/captured_file.h   |   28 -
- .../package/combined_pdn_hardware.h                |   73 -
- .../package/emit_v2_reference_table.c              |  100 -
- .../package/portable_target_qualification.py       | 1361 ----
- .../holo_runtime_v2/combined_pdn_hardware.c        | 1361 ----
- .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             |  640 --
- .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     |  160 -
- .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json |   50 -
- .../14_noncollapse_frontier/phase6b6/__init__.py   |    1 -
- .../phase6b6/analysis/__init__.py                  |    1 -
- .../phase6b6/analysis/adjudication.py              |   67 -
- .../phase6b6/analysis/metrics.py                   |  172 -
- .../phase6b6/analysis/observations.py              |   45 -
- .../phase6b6/analysis/operators.py                 |  202 -
- .../phase6b6/analysis/pipeline.py                  | 1157 ----
- .../phase6b6/analysis/state.py                     |  160 -
- .../phase6b6/analysis/synthetic.py                 |   81 -
- .../phase6b6/contracts/__init__.py                 |    1 -
- .../phase6b6/contracts/contract.py                 |  235 -
- .../phase6b6/contracts/schedule.py                 |  346 -
- .../phase6b6/contracts/v2_interface.py             |  194 -
- .../phase6b6/runtime/__init__.py                   |    1 -
- .../phase6b6/runtime/explicit_slot_runtime.py      |  170 -
- .../phase6b6/runtime/state_machine.py              |  105 -
- .../schemas/adjudication_result.schema.json        |   29 -
- .../phase6b6/schemas/analysis_choice.schema.json   |   86 -
- .../phase6b6/schemas/measured_state.schema.json    |   23 -
- .../phase6b6/schemas/runtime_custody.schema.json   |  297 -
- .../phase6b6/schemas/schedule.schema.json          |  107 -
- .../schemas/scientific_contract.schema.json        |  169 -
- .../phase6b6/schemas/validate_objects.py           |   17 -
- .../phase6b6/tests/test_analysis_partition.py      |  621 --
- .../phase6b6/tests/test_runtime_authority.py       |  107 -
- .../phase6b6/tests/test_schedule_contract.py       |  223 -
- .../symlink/package/PORTABLE_PACKAGE_MANIFEST.json |  447 --
- .../package/PORTABLE_PACKAGE_MANIFEST.sha256       |    1 -
- .../symlink/package/QUALIFICATION_CONTRACT.json    |   47 -
- .../symlink/package/TRUSTED_SNAPSHOT_BINDING.json  |  258 -
- .../symlink/package/capture_quality_contract.h     |   59 -
- .../negative_tests/symlink/package/captured_file.h |   28 -
- .../symlink/package/combined_pdn_hardware.h        |   73 -
- .../symlink/package/emit_v2_reference_table.c      |  100 -
- .../package/portable_target_qualification.py       | 1361 ----
- .../holo_runtime_v2/combined_pdn_hardware.c        | 1361 ----
- .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             |  640 --
- .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     |  160 -
- .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json |   50 -
- .../14_noncollapse_frontier/phase6b6/__init__.py   |    1 -
- .../phase6b6/analysis/__init__.py                  |    1 -
- .../phase6b6/analysis/adjudication.py              |   67 -
- .../phase6b6/analysis/metrics.py                   |  172 -
- .../phase6b6/analysis/observations.py              |   45 -
- .../phase6b6/analysis/operators.py                 |  202 -
- .../phase6b6/analysis/pipeline.py                  | 1157 ----
- .../phase6b6/analysis/state.py                     |  160 -
- .../phase6b6/analysis/synthetic.py                 |   81 -
- .../phase6b6/contracts/__init__.py                 |    1 -
- .../phase6b6/contracts/contract.py                 |  235 -
- .../phase6b6/contracts/schedule.py                 |  346 -
- .../phase6b6/contracts/v2_interface.py             |  194 -
- .../phase6b6/runtime/__init__.py                   |    1 -
- .../phase6b6/runtime/explicit_slot_runtime.py      |  170 -
- .../phase6b6/runtime/state_machine.py              |  105 -
- .../schemas/adjudication_result.schema.json        |   29 -
- .../phase6b6/schemas/analysis_choice.schema.json   |   86 -
- .../phase6b6/schemas/measured_state.schema.json    |   23 -
- .../phase6b6/schemas/runtime_custody.schema.json   |  297 -
- .../phase6b6/schemas/schedule.schema.json          |  107 -
- .../schemas/scientific_contract.schema.json        |  169 -
- .../phase6b6/schemas/validate_objects.py           |   17 -
- .../phase6b6/tests/test_analysis_partition.py      |  621 --
- .../phase6b6/tests/test_runtime_authority.py       |  107 -
- .../phase6b6/tests/test_schedule_contract.py       |  223 -
- .../negative_tests/symlink/package/unbound_symlink |   59 -
- 826 files changed, 777 insertions(+), 200472 deletions(-)
+ .../EVIDENCE_INVENTORY.json                        | Bin 452046 -> 97483 bytes
+ .../EVIDENCE_INVENTORY.sha256                      | Bin 90 -> 90 bytes
+ .../EVIDENCE_INVENTORY_VERIFICATION.txt            | Bin 319 -> 318 bytes
+ .../FINAL_BINDINGS.json                            | Bin 7734 -> 7734 bytes
+ .../REMOVED_DUPLICATE_MUTATION_PACKAGE_TREES.json  | Bin 0 -> 7783 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.json         | Bin 27248 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.sha256       | Bin 97 -> 0 bytes
+ .../package/QUALIFICATION_CONTRACT.json            | Bin 2815 -> 0 bytes
+ .../package/TRUSTED_SNAPSHOT_BINDING.json          | Bin 12755 -> 0 bytes
+ .../package/capture_quality_contract.h             | Bin 2338 -> 0 bytes
+ .../changed_copied_byte/package/captured_file.h    | Bin 931 -> 0 bytes
+ .../package/combined_pdn_hardware.h                | Bin 1851 -> 0 bytes
+ .../package/emit_v2_reference_table.c              | Bin 2830 -> 0 bytes
+ .../package/portable_target_qualification.py       | Bin 63805 -> 0 bytes
+ .../holo_runtime_v2/combined_pdn_hardware.c        | Bin 49171 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             | Bin 21628 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     | Bin 5612 -> 0 bytes
+ .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json | Bin 1809 -> 0 bytes
+ .../14_noncollapse_frontier/phase6b6/__init__.py   | Bin 41 -> 0 bytes
+ .../phase6b6/analysis/__init__.py                  | Bin 63 -> 0 bytes
+ .../phase6b6/analysis/adjudication.py              | Bin 2748 -> 0 bytes
+ .../phase6b6/analysis/metrics.py                   | Bin 6889 -> 0 bytes
+ .../phase6b6/analysis/observations.py              | Bin 1242 -> 0 bytes
+ .../phase6b6/analysis/operators.py                 | Bin 8115 -> 0 bytes
+ .../phase6b6/analysis/pipeline.py                  | Bin 55386 -> 0 bytes
+ .../phase6b6/analysis/state.py                     | Bin 6803 -> 0 bytes
+ .../phase6b6/analysis/synthetic.py                 | Bin 3231 -> 0 bytes
+ .../phase6b6/contracts/__init__.py                 | Bin 59 -> 0 bytes
+ .../phase6b6/contracts/contract.py                 | Bin 7266 -> 0 bytes
+ .../phase6b6/contracts/schedule.py                 | Bin 12914 -> 0 bytes
+ .../phase6b6/contracts/v2_interface.py             | Bin 7604 -> 0 bytes
+ .../phase6b6/runtime/__init__.py                   | Bin 40 -> 0 bytes
+ .../phase6b6/runtime/explicit_slot_runtime.py      | Bin 6631 -> 0 bytes
+ .../phase6b6/runtime/state_machine.py              | Bin 4462 -> 0 bytes
+ .../schemas/adjudication_result.schema.json        | Bin 1144 -> 0 bytes
+ .../phase6b6/schemas/analysis_choice.schema.json   | Bin 3491 -> 0 bytes
+ .../phase6b6/schemas/measured_state.schema.json    | Bin 696 -> 0 bytes
+ .../phase6b6/schemas/runtime_custody.schema.json   | Bin 12255 -> 0 bytes
+ .../phase6b6/schemas/schedule.schema.json          | Bin 5621 -> 0 bytes
+ .../schemas/scientific_contract.schema.json        | Bin 9125 -> 0 bytes
+ .../phase6b6/schemas/validate_objects.py           | Bin 478 -> 0 bytes
+ .../phase6b6/tests/test_analysis_partition.py      | Bin 33874 -> 0 bytes
+ .../phase6b6/tests/test_runtime_authority.py       | Bin 4163 -> 0 bytes
+ .../phase6b6/tests/test_schedule_contract.py       | Bin 12508 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.json         | Bin 27248 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.sha256       | Bin 97 -> 0 bytes
+ .../package/QUALIFICATION_CONTRACT.json            | Bin 2815 -> 0 bytes
+ .../package/TRUSTED_SNAPSHOT_BINDING.json          | Bin 12755 -> 0 bytes
+ .../package/capture_quality_contract.h             | Bin 2338 -> 0 bytes
+ .../extra_empty_directory/package/captured_file.h  | Bin 931 -> 0 bytes
+ .../package/combined_pdn_hardware.h                | Bin 1851 -> 0 bytes
+ .../package/emit_v2_reference_table.c              | Bin 2830 -> 0 bytes
+ .../package/portable_target_qualification.py       | Bin 63805 -> 0 bytes
+ .../holo_runtime_v2/combined_pdn_hardware.c        | Bin 49171 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             | Bin 21628 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     | Bin 5612 -> 0 bytes
+ .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json | Bin 1809 -> 0 bytes
+ .../14_noncollapse_frontier/phase6b6/__init__.py   | Bin 41 -> 0 bytes
+ .../phase6b6/analysis/__init__.py                  | Bin 63 -> 0 bytes
+ .../phase6b6/analysis/adjudication.py              | Bin 2748 -> 0 bytes
+ .../phase6b6/analysis/metrics.py                   | Bin 6889 -> 0 bytes
+ .../phase6b6/analysis/observations.py              | Bin 1242 -> 0 bytes
+ .../phase6b6/analysis/operators.py                 | Bin 8115 -> 0 bytes
+ .../phase6b6/analysis/pipeline.py                  | Bin 55386 -> 0 bytes
+ .../phase6b6/analysis/state.py                     | Bin 6803 -> 0 bytes
+ .../phase6b6/analysis/synthetic.py                 | Bin 3231 -> 0 bytes
+ .../phase6b6/contracts/__init__.py                 | Bin 59 -> 0 bytes
+ .../phase6b6/contracts/contract.py                 | Bin 7266 -> 0 bytes
+ .../phase6b6/contracts/schedule.py                 | Bin 12914 -> 0 bytes
+ .../phase6b6/contracts/v2_interface.py             | Bin 7604 -> 0 bytes
+ .../phase6b6/runtime/__init__.py                   | Bin 40 -> 0 bytes
+ .../phase6b6/runtime/explicit_slot_runtime.py      | Bin 6631 -> 0 bytes
+ .../phase6b6/runtime/state_machine.py              | Bin 4462 -> 0 bytes
+ .../schemas/adjudication_result.schema.json        | Bin 1144 -> 0 bytes
+ .../phase6b6/schemas/analysis_choice.schema.json   | Bin 3491 -> 0 bytes
+ .../phase6b6/schemas/measured_state.schema.json    | Bin 696 -> 0 bytes
+ .../phase6b6/schemas/runtime_custody.schema.json   | Bin 12255 -> 0 bytes
+ .../phase6b6/schemas/schedule.schema.json          | Bin 5621 -> 0 bytes
+ .../schemas/scientific_contract.schema.json        | Bin 9125 -> 0 bytes
+ .../phase6b6/schemas/validate_objects.py           | Bin 478 -> 0 bytes
+ .../phase6b6/tests/test_analysis_partition.py      | Bin 33874 -> 0 bytes
+ .../phase6b6/tests/test_runtime_authority.py       | Bin 4163 -> 0 bytes
+ .../phase6b6/tests/test_schedule_contract.py       | Bin 12508 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.json         | Bin 27248 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.sha256       | Bin 97 -> 0 bytes
+ .../package/QUALIFICATION_CONTRACT.json            | Bin 2815 -> 0 bytes
+ .../package/TRUSTED_SNAPSHOT_BINDING.json          | Bin 12755 -> 0 bytes
+ .../package/capture_quality_contract.h             | Bin 2338 -> 0 bytes
+ .../extra_regular_file/package/captured_file.h     | Bin 931 -> 0 bytes
+ .../package/combined_pdn_hardware.h                | Bin 1851 -> 0 bytes
+ .../package/emit_v2_reference_table.c              | Bin 2830 -> 0 bytes
+ .../package/portable_target_qualification.py       | Bin 63805 -> 0 bytes
+ .../holo_runtime_v2/combined_pdn_hardware.c        | Bin 49171 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             | Bin 21628 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     | Bin 5612 -> 0 bytes
+ .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json | Bin 1809 -> 0 bytes
+ .../14_noncollapse_frontier/phase6b6/__init__.py   | Bin 41 -> 0 bytes
+ .../phase6b6/analysis/__init__.py                  | Bin 63 -> 0 bytes
+ .../phase6b6/analysis/adjudication.py              | Bin 2748 -> 0 bytes
+ .../phase6b6/analysis/metrics.py                   | Bin 6889 -> 0 bytes
+ .../phase6b6/analysis/observations.py              | Bin 1242 -> 0 bytes
+ .../phase6b6/analysis/operators.py                 | Bin 8115 -> 0 bytes
+ .../phase6b6/analysis/pipeline.py                  | Bin 55386 -> 0 bytes
+ .../phase6b6/analysis/state.py                     | Bin 6803 -> 0 bytes
+ .../phase6b6/analysis/synthetic.py                 | Bin 3231 -> 0 bytes
+ .../phase6b6/contracts/__init__.py                 | Bin 59 -> 0 bytes
+ .../phase6b6/contracts/contract.py                 | Bin 7266 -> 0 bytes
+ .../phase6b6/contracts/schedule.py                 | Bin 12914 -> 0 bytes
+ .../phase6b6/contracts/v2_interface.py             | Bin 7604 -> 0 bytes
+ .../phase6b6/runtime/__init__.py                   | Bin 40 -> 0 bytes
+ .../phase6b6/runtime/explicit_slot_runtime.py      | Bin 6631 -> 0 bytes
+ .../phase6b6/runtime/state_machine.py              | Bin 4462 -> 0 bytes
+ .../schemas/adjudication_result.schema.json        | Bin 1144 -> 0 bytes
+ .../phase6b6/schemas/analysis_choice.schema.json   | Bin 3491 -> 0 bytes
+ .../phase6b6/schemas/measured_state.schema.json    | Bin 696 -> 0 bytes
+ .../phase6b6/schemas/runtime_custody.schema.json   | Bin 12255 -> 0 bytes
+ .../phase6b6/schemas/schedule.schema.json          | Bin 5621 -> 0 bytes
+ .../schemas/scientific_contract.schema.json        | Bin 9125 -> 0 bytes
+ .../phase6b6/schemas/validate_objects.py           | Bin 478 -> 0 bytes
+ .../phase6b6/tests/test_analysis_partition.py      | Bin 33874 -> 0 bytes
+ .../phase6b6/tests/test_runtime_authority.py       | Bin 4163 -> 0 bytes
+ .../phase6b6/tests/test_schedule_contract.py       | Bin 12508 -> 0 bytes
+ .../package/unbound_extra_file.txt                 | Bin 10 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.json         | Bin 27248 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.sha256       | Bin 97 -> 0 bytes
+ .../package/QUALIFICATION_CONTRACT.json            | Bin 2815 -> 0 bytes
+ .../package/TRUSTED_SNAPSHOT_BINDING.json          | Bin 12755 -> 0 bytes
+ .../package/capture_quality_contract.h             | Bin 2338 -> 0 bytes
+ .../package/captured_file.h                        | Bin 931 -> 0 bytes
+ .../package/combined_pdn_hardware.h                | Bin 1851 -> 0 bytes
+ .../package/emit_v2_reference_table.c              | Bin 2830 -> 0 bytes
+ .../package/portable_target_qualification.py       | Bin 63805 -> 0 bytes
+ .../holo_runtime_v2/combined_pdn_hardware.c        | Bin 49171 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             | Bin 21628 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     | Bin 5612 -> 0 bytes
+ .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json | Bin 1809 -> 0 bytes
+ .../14_noncollapse_frontier/phase6b6/__init__.py   | Bin 41 -> 0 bytes
+ .../phase6b6/analysis/__init__.py                  | Bin 63 -> 0 bytes
+ .../phase6b6/analysis/adjudication.py              | Bin 2748 -> 0 bytes
+ .../phase6b6/analysis/metrics.py                   | Bin 6889 -> 0 bytes
+ .../phase6b6/analysis/observations.py              | Bin 1242 -> 0 bytes
+ .../phase6b6/analysis/operators.py                 | Bin 8115 -> 0 bytes
+ .../phase6b6/analysis/pipeline.py                  | Bin 55386 -> 0 bytes
+ .../phase6b6/analysis/state.py                     | Bin 6803 -> 0 bytes
+ .../phase6b6/analysis/synthetic.py                 | Bin 3231 -> 0 bytes
+ .../phase6b6/contracts/__init__.py                 | Bin 59 -> 0 bytes
+ .../phase6b6/contracts/contract.py                 | Bin 7266 -> 0 bytes
+ .../phase6b6/contracts/schedule.py                 | Bin 12914 -> 0 bytes
+ .../phase6b6/contracts/v2_interface.py             | Bin 7604 -> 0 bytes
+ .../phase6b6/runtime/__init__.py                   | Bin 40 -> 0 bytes
+ .../phase6b6/runtime/explicit_slot_runtime.py      | Bin 6631 -> 0 bytes
+ .../phase6b6/runtime/state_machine.py              | Bin 4462 -> 0 bytes
+ .../schemas/adjudication_result.schema.json        | Bin 1144 -> 0 bytes
+ .../phase6b6/schemas/analysis_choice.schema.json   | Bin 3491 -> 0 bytes
+ .../phase6b6/schemas/measured_state.schema.json    | Bin 696 -> 0 bytes
+ .../phase6b6/schemas/runtime_custody.schema.json   | Bin 12255 -> 0 bytes
+ .../phase6b6/schemas/schedule.schema.json          | Bin 5621 -> 0 bytes
+ .../schemas/scientific_contract.schema.json        | Bin 9125 -> 0 bytes
+ .../phase6b6/schemas/validate_objects.py           | Bin 478 -> 0 bytes
+ .../phase6b6/tests/test_analysis_partition.py      | Bin 33874 -> 0 bytes
+ .../phase6b6/tests/test_runtime_authority.py       | Bin 4163 -> 0 bytes
+ .../phase6b6/tests/test_schedule_contract.py       | Bin 12508 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.json         | Bin 27248 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.sha256       | Bin 97 -> 0 bytes
+ .../package/QUALIFICATION_CONTRACT.json            | Bin 2815 -> 0 bytes
+ .../package/TRUSTED_SNAPSHOT_BINDING.json          | Bin 12755 -> 0 bytes
+ .../package/capture_quality_contract.h             | Bin 2338 -> 0 bytes
+ .../package/captured_file.h                        | Bin 931 -> 0 bytes
+ .../package/combined_pdn_hardware.h                | Bin 1851 -> 0 bytes
+ .../package/emit_v2_reference_table.c              | Bin 2830 -> 0 bytes
+ .../package/portable_target_qualification.py       | Bin 63805 -> 0 bytes
+ .../holo_runtime_v2/combined_pdn_hardware.c        | Bin 49171 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             | Bin 21628 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     | Bin 5612 -> 0 bytes
+ .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json | Bin 1809 -> 0 bytes
+ .../14_noncollapse_frontier/phase6b6/__init__.py   | Bin 41 -> 0 bytes
+ .../phase6b6/analysis/__init__.py                  | Bin 63 -> 0 bytes
+ .../phase6b6/analysis/adjudication.py              | Bin 2748 -> 0 bytes
+ .../phase6b6/analysis/metrics.py                   | Bin 6889 -> 0 bytes
+ .../phase6b6/analysis/observations.py              | Bin 1242 -> 0 bytes
+ .../phase6b6/analysis/operators.py                 | Bin 8115 -> 0 bytes
+ .../phase6b6/analysis/pipeline.py                  | Bin 55386 -> 0 bytes
+ .../phase6b6/analysis/state.py                     | Bin 6803 -> 0 bytes
+ .../phase6b6/analysis/synthetic.py                 | Bin 3231 -> 0 bytes
+ .../phase6b6/contracts/__init__.py                 | Bin 59 -> 0 bytes
+ .../phase6b6/contracts/contract.py                 | Bin 7266 -> 0 bytes
+ .../phase6b6/contracts/schedule.py                 | Bin 12914 -> 0 bytes
+ .../phase6b6/contracts/v2_interface.py             | Bin 7604 -> 0 bytes
+ .../phase6b6/runtime/__init__.py                   | Bin 40 -> 0 bytes
+ .../phase6b6/runtime/explicit_slot_runtime.py      | Bin 6631 -> 0 bytes
+ .../phase6b6/runtime/state_machine.py              | Bin 4462 -> 0 bytes
+ .../schemas/adjudication_result.schema.json        | Bin 1144 -> 0 bytes
+ .../phase6b6/schemas/analysis_choice.schema.json   | Bin 3491 -> 0 bytes
+ .../phase6b6/schemas/measured_state.schema.json    | Bin 696 -> 0 bytes
+ .../phase6b6/schemas/runtime_custody.schema.json   | Bin 12255 -> 0 bytes
+ .../phase6b6/schemas/schedule.schema.json          | Bin 5621 -> 0 bytes
+ .../schemas/scientific_contract.schema.json        | Bin 9125 -> 0 bytes
+ .../phase6b6/schemas/validate_objects.py           | Bin 478 -> 0 bytes
+ .../phase6b6/tests/test_analysis_partition.py      | Bin 33874 -> 0 bytes
+ .../phase6b6/tests/test_runtime_authority.py       | Bin 4163 -> 0 bytes
+ .../phase6b6/tests/test_schedule_contract.py       | Bin 12508 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.json         | Bin 27248 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.sha256       | Bin 97 -> 0 bytes
+ .../package/QUALIFICATION_CONTRACT.json            | Bin 2815 -> 0 bytes
+ .../package/TRUSTED_SNAPSHOT_BINDING.json          | Bin 12755 -> 0 bytes
+ .../package/capture_quality_contract.h             | Bin 2338 -> 0 bytes
+ .../package/captured_file.h                        | Bin 931 -> 0 bytes
+ .../package/combined_pdn_hardware.h                | Bin 1851 -> 0 bytes
+ .../package/emit_v2_reference_table.c              | Bin 2830 -> 0 bytes
+ .../package/portable_target_qualification.py       | Bin 63805 -> 0 bytes
+ .../holo_runtime_v2/combined_pdn_hardware.c        | Bin 49171 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             | Bin 21628 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     | Bin 5612 -> 0 bytes
+ .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json | Bin 1809 -> 0 bytes
+ .../14_noncollapse_frontier/phase6b6/__init__.py   | Bin 41 -> 0 bytes
+ .../phase6b6/analysis/__init__.py                  | Bin 63 -> 0 bytes
+ .../phase6b6/analysis/adjudication.py              | Bin 2748 -> 0 bytes
+ .../phase6b6/analysis/metrics.py                   | Bin 6889 -> 0 bytes
+ .../phase6b6/analysis/observations.py              | Bin 1242 -> 0 bytes
+ .../phase6b6/analysis/operators.py                 | Bin 8115 -> 0 bytes
+ .../phase6b6/analysis/pipeline.py                  | Bin 55386 -> 0 bytes
+ .../phase6b6/analysis/state.py                     | Bin 6803 -> 0 bytes
+ .../phase6b6/analysis/synthetic.py                 | Bin 3231 -> 0 bytes
+ .../phase6b6/contracts/__init__.py                 | Bin 59 -> 0 bytes
+ .../phase6b6/contracts/contract.py                 | Bin 7266 -> 0 bytes
+ .../phase6b6/contracts/schedule.py                 | Bin 12914 -> 0 bytes
+ .../phase6b6/contracts/v2_interface.py             | Bin 7604 -> 0 bytes
+ .../phase6b6/runtime/__init__.py                   | Bin 40 -> 0 bytes
+ .../phase6b6/runtime/explicit_slot_runtime.py      | Bin 6631 -> 0 bytes
+ .../phase6b6/runtime/state_machine.py              | Bin 4462 -> 0 bytes
+ .../schemas/adjudication_result.schema.json        | Bin 1144 -> 0 bytes
+ .../phase6b6/schemas/analysis_choice.schema.json   | Bin 3491 -> 0 bytes
+ .../phase6b6/schemas/measured_state.schema.json    | Bin 696 -> 0 bytes
+ .../phase6b6/schemas/runtime_custody.schema.json   | Bin 12255 -> 0 bytes
+ .../phase6b6/schemas/schedule.schema.json          | Bin 5621 -> 0 bytes
+ .../schemas/scientific_contract.schema.json        | Bin 9125 -> 0 bytes
+ .../phase6b6/schemas/validate_objects.py           | Bin 478 -> 0 bytes
+ .../phase6b6/tests/test_analysis_partition.py      | Bin 33874 -> 0 bytes
+ .../phase6b6/tests/test_runtime_authority.py       | Bin 4163 -> 0 bytes
+ .../phase6b6/tests/test_schedule_contract.py       | Bin 12508 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.json         | Bin 27248 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.sha256       | Bin 97 -> 0 bytes
+ .../package/QUALIFICATION_CONTRACT.json            | Bin 2815 -> 0 bytes
+ .../package/TRUSTED_SNAPSHOT_BINDING.json          | Bin 12755 -> 0 bytes
+ .../missing_regular_file/package/captured_file.h   | Bin 931 -> 0 bytes
+ .../package/combined_pdn_hardware.h                | Bin 1851 -> 0 bytes
+ .../package/emit_v2_reference_table.c              | Bin 2830 -> 0 bytes
+ .../package/portable_target_qualification.py       | Bin 63805 -> 0 bytes
+ .../holo_runtime_v2/combined_pdn_hardware.c        | Bin 49171 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             | Bin 21628 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     | Bin 5612 -> 0 bytes
+ .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json | Bin 1809 -> 0 bytes
+ .../14_noncollapse_frontier/phase6b6/__init__.py   | Bin 41 -> 0 bytes
+ .../phase6b6/analysis/__init__.py                  | Bin 63 -> 0 bytes
+ .../phase6b6/analysis/adjudication.py              | Bin 2748 -> 0 bytes
+ .../phase6b6/analysis/metrics.py                   | Bin 6889 -> 0 bytes
+ .../phase6b6/analysis/observations.py              | Bin 1242 -> 0 bytes
+ .../phase6b6/analysis/operators.py                 | Bin 8115 -> 0 bytes
+ .../phase6b6/analysis/pipeline.py                  | Bin 55386 -> 0 bytes
+ .../phase6b6/analysis/state.py                     | Bin 6803 -> 0 bytes
+ .../phase6b6/analysis/synthetic.py                 | Bin 3231 -> 0 bytes
+ .../phase6b6/contracts/__init__.py                 | Bin 59 -> 0 bytes
+ .../phase6b6/contracts/contract.py                 | Bin 7266 -> 0 bytes
+ .../phase6b6/contracts/schedule.py                 | Bin 12914 -> 0 bytes
+ .../phase6b6/contracts/v2_interface.py             | Bin 7604 -> 0 bytes
+ .../phase6b6/runtime/__init__.py                   | Bin 40 -> 0 bytes
+ .../phase6b6/runtime/explicit_slot_runtime.py      | Bin 6631 -> 0 bytes
+ .../phase6b6/runtime/state_machine.py              | Bin 4462 -> 0 bytes
+ .../schemas/adjudication_result.schema.json        | Bin 1144 -> 0 bytes
+ .../phase6b6/schemas/analysis_choice.schema.json   | Bin 3491 -> 0 bytes
+ .../phase6b6/schemas/measured_state.schema.json    | Bin 696 -> 0 bytes
+ .../phase6b6/schemas/runtime_custody.schema.json   | Bin 12255 -> 0 bytes
+ .../phase6b6/schemas/schedule.schema.json          | Bin 5621 -> 0 bytes
+ .../schemas/scientific_contract.schema.json        | Bin 9125 -> 0 bytes
+ .../phase6b6/schemas/validate_objects.py           | Bin 478 -> 0 bytes
+ .../phase6b6/tests/test_analysis_partition.py      | Bin 33874 -> 0 bytes
+ .../phase6b6/tests/test_runtime_authority.py       | Bin 4163 -> 0 bytes
+ .../phase6b6/tests/test_schedule_contract.py       | Bin 12508 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.json         | Bin 27248 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.sha256       | Bin 97 -> 0 bytes
+ .../package/QUALIFICATION_CONTRACT.json            | Bin 2815 -> 0 bytes
+ .../package/TRUSTED_SNAPSHOT_BINDING.json          | Bin 12755 -> 0 bytes
+ .../package/capture_quality_contract.h             | Bin 2338 -> 0 bytes
+ .../mode_only_0644_to_0600/package/captured_file.h | Bin 931 -> 0 bytes
+ .../package/combined_pdn_hardware.h                | Bin 1851 -> 0 bytes
+ .../package/emit_v2_reference_table.c              | Bin 2830 -> 0 bytes
+ .../package/portable_target_qualification.py       | Bin 63805 -> 0 bytes
+ .../holo_runtime_v2/combined_pdn_hardware.c        | Bin 49171 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             | Bin 21628 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     | Bin 5612 -> 0 bytes
+ .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json | Bin 1809 -> 0 bytes
+ .../14_noncollapse_frontier/phase6b6/__init__.py   | Bin 41 -> 0 bytes
+ .../phase6b6/analysis/__init__.py                  | Bin 63 -> 0 bytes
+ .../phase6b6/analysis/adjudication.py              | Bin 2748 -> 0 bytes
+ .../phase6b6/analysis/metrics.py                   | Bin 6889 -> 0 bytes
+ .../phase6b6/analysis/observations.py              | Bin 1242 -> 0 bytes
+ .../phase6b6/analysis/operators.py                 | Bin 8115 -> 0 bytes
+ .../phase6b6/analysis/pipeline.py                  | Bin 55386 -> 0 bytes
+ .../phase6b6/analysis/state.py                     | Bin 6803 -> 0 bytes
+ .../phase6b6/analysis/synthetic.py                 | Bin 3231 -> 0 bytes
+ .../phase6b6/contracts/__init__.py                 | Bin 59 -> 0 bytes
+ .../phase6b6/contracts/contract.py                 | Bin 7266 -> 0 bytes
+ .../phase6b6/contracts/schedule.py                 | Bin 12914 -> 0 bytes
+ .../phase6b6/contracts/v2_interface.py             | Bin 7604 -> 0 bytes
+ .../phase6b6/runtime/__init__.py                   | Bin 40 -> 0 bytes
+ .../phase6b6/runtime/explicit_slot_runtime.py      | Bin 6631 -> 0 bytes
+ .../phase6b6/runtime/state_machine.py              | Bin 4462 -> 0 bytes
+ .../schemas/adjudication_result.schema.json        | Bin 1144 -> 0 bytes
+ .../phase6b6/schemas/analysis_choice.schema.json   | Bin 3491 -> 0 bytes
+ .../phase6b6/schemas/measured_state.schema.json    | Bin 696 -> 0 bytes
+ .../phase6b6/schemas/runtime_custody.schema.json   | Bin 12255 -> 0 bytes
+ .../phase6b6/schemas/schedule.schema.json          | Bin 5621 -> 0 bytes
+ .../schemas/scientific_contract.schema.json        | Bin 9125 -> 0 bytes
+ .../phase6b6/schemas/validate_objects.py           | Bin 478 -> 0 bytes
+ .../phase6b6/tests/test_analysis_partition.py      | Bin 33874 -> 0 bytes
+ .../phase6b6/tests/test_runtime_authority.py       | Bin 4163 -> 0 bytes
+ .../phase6b6/tests/test_schedule_contract.py       | Bin 12508 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.json         | Bin 27248 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.sha256       | Bin 97 -> 0 bytes
+ .../package/QUALIFICATION_CONTRACT.json            | Bin 2815 -> 0 bytes
+ .../package/TRUSTED_SNAPSHOT_BINDING.json          | Bin 12755 -> 0 bytes
+ .../package/capture_quality_contract.h             | Bin 2338 -> 0 bytes
+ .../package/captured_file.h                        | Bin 931 -> 0 bytes
+ .../package/combined_pdn_hardware.h                | Bin 1851 -> 0 bytes
+ .../package/emit_v2_reference_table.c              | Bin 2830 -> 0 bytes
+ .../package/portable_target_qualification.py       | Bin 63805 -> 0 bytes
+ .../holo_runtime_v2/combined_pdn_hardware.c        | Bin 49171 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             | Bin 21628 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     | Bin 5612 -> 0 bytes
+ .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json | Bin 1809 -> 0 bytes
+ .../14_noncollapse_frontier/phase6b6/__init__.py   | Bin 41 -> 0 bytes
+ .../phase6b6/analysis/__init__.py                  | Bin 63 -> 0 bytes
+ .../phase6b6/analysis/adjudication.py              | Bin 2748 -> 0 bytes
+ .../phase6b6/analysis/metrics.py                   | Bin 6889 -> 0 bytes
+ .../phase6b6/analysis/observations.py              | Bin 1242 -> 0 bytes
+ .../phase6b6/analysis/operators.py                 | Bin 8115 -> 0 bytes
+ .../phase6b6/analysis/pipeline.py                  | Bin 55386 -> 0 bytes
+ .../phase6b6/analysis/state.py                     | Bin 6803 -> 0 bytes
+ .../phase6b6/analysis/synthetic.py                 | Bin 3231 -> 0 bytes
+ .../phase6b6/contracts/__init__.py                 | Bin 59 -> 0 bytes
+ .../phase6b6/contracts/contract.py                 | Bin 7266 -> 0 bytes
+ .../phase6b6/contracts/schedule.py                 | Bin 12914 -> 0 bytes
+ .../phase6b6/contracts/v2_interface.py             | Bin 7604 -> 0 bytes
+ .../phase6b6/runtime/__init__.py                   | Bin 40 -> 0 bytes
+ .../phase6b6/runtime/explicit_slot_runtime.py      | Bin 6631 -> 0 bytes
+ .../phase6b6/runtime/state_machine.py              | Bin 4462 -> 0 bytes
+ .../schemas/adjudication_result.schema.json        | Bin 1144 -> 0 bytes
+ .../phase6b6/schemas/analysis_choice.schema.json   | Bin 3491 -> 0 bytes
+ .../phase6b6/schemas/measured_state.schema.json    | Bin 696 -> 0 bytes
+ .../phase6b6/schemas/runtime_custody.schema.json   | Bin 12255 -> 0 bytes
+ .../phase6b6/schemas/schedule.schema.json          | Bin 5621 -> 0 bytes
+ .../schemas/scientific_contract.schema.json        | Bin 9125 -> 0 bytes
+ .../phase6b6/schemas/validate_objects.py           | Bin 478 -> 0 bytes
+ .../phase6b6/tests/test_analysis_partition.py      | Bin 33874 -> 0 bytes
+ .../phase6b6/tests/test_runtime_authority.py       | Bin 4163 -> 0 bytes
+ .../phase6b6/tests/test_schedule_contract.py       | Bin 12508 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.json         | Bin 27248 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.sha256       | Bin 97 -> 0 bytes
+ .../package/QUALIFICATION_CONTRACT.json            | Bin 2815 -> 0 bytes
+ .../package/TRUSTED_SNAPSHOT_BINDING.json          | Bin 12755 -> 0 bytes
+ .../package/capture_quality_contract.h             | Bin 2338 -> 0 bytes
+ .../package/captured_file.h                        | Bin 931 -> 0 bytes
+ .../package/combined_pdn_hardware.h                | Bin 1851 -> 0 bytes
+ .../package/emit_v2_reference_table.c              | Bin 2830 -> 0 bytes
+ .../package/portable_target_qualification.py       | Bin 63805 -> 0 bytes
+ .../holo_runtime_v2/combined_pdn_hardware.c        | Bin 49171 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             | Bin 21628 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     | Bin 5612 -> 0 bytes
+ .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json | Bin 1809 -> 0 bytes
+ .../14_noncollapse_frontier/phase6b6/__init__.py   | Bin 41 -> 0 bytes
+ .../phase6b6/analysis/__init__.py                  | Bin 63 -> 0 bytes
+ .../phase6b6/analysis/adjudication.py              | Bin 2748 -> 0 bytes
+ .../phase6b6/analysis/metrics.py                   | Bin 6889 -> 0 bytes
+ .../phase6b6/analysis/observations.py              | Bin 1242 -> 0 bytes
+ .../phase6b6/analysis/operators.py                 | Bin 8115 -> 0 bytes
+ .../phase6b6/analysis/pipeline.py                  | Bin 55386 -> 0 bytes
+ .../phase6b6/analysis/state.py                     | Bin 6803 -> 0 bytes
+ .../phase6b6/analysis/synthetic.py                 | Bin 3231 -> 0 bytes
+ .../phase6b6/contracts/__init__.py                 | Bin 59 -> 0 bytes
+ .../phase6b6/contracts/contract.py                 | Bin 7266 -> 0 bytes
+ .../phase6b6/contracts/schedule.py                 | Bin 12914 -> 0 bytes
+ .../phase6b6/contracts/v2_interface.py             | Bin 7604 -> 0 bytes
+ .../phase6b6/runtime/__init__.py                   | Bin 40 -> 0 bytes
+ .../phase6b6/runtime/explicit_slot_runtime.py      | Bin 6631 -> 0 bytes
+ .../phase6b6/runtime/state_machine.py              | Bin 4462 -> 0 bytes
+ .../schemas/adjudication_result.schema.json        | Bin 1144 -> 0 bytes
+ .../phase6b6/schemas/analysis_choice.schema.json   | Bin 3491 -> 0 bytes
+ .../phase6b6/schemas/measured_state.schema.json    | Bin 696 -> 0 bytes
+ .../phase6b6/schemas/runtime_custody.schema.json   | Bin 12255 -> 0 bytes
+ .../phase6b6/schemas/schedule.schema.json          | Bin 5621 -> 0 bytes
+ .../schemas/scientific_contract.schema.json        | Bin 9125 -> 0 bytes
+ .../phase6b6/schemas/validate_objects.py           | Bin 478 -> 0 bytes
+ .../phase6b6/tests/test_analysis_partition.py      | Bin 33874 -> 0 bytes
+ .../phase6b6/tests/test_runtime_authority.py       | Bin 4163 -> 0 bytes
+ .../phase6b6/tests/test_schedule_contract.py       | Bin 12508 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.json         | Bin 27248 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.sha256       | Bin 97 -> 0 bytes
+ .../package/QUALIFICATION_CONTRACT.json            | Bin 2815 -> 0 bytes
+ .../package/TRUSTED_SNAPSHOT_BINDING.json          | Bin 12755 -> 0 bytes
+ .../package/capture_quality_contract.h             | Bin 2338 -> 0 bytes
+ .../setgid_directory/package/captured_file.h       | Bin 931 -> 0 bytes
+ .../package/combined_pdn_hardware.h                | Bin 1851 -> 0 bytes
+ .../package/emit_v2_reference_table.c              | Bin 2830 -> 0 bytes
+ .../package/portable_target_qualification.py       | Bin 63805 -> 0 bytes
+ .../holo_runtime_v2/combined_pdn_hardware.c        | Bin 49171 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             | Bin 21628 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     | Bin 5612 -> 0 bytes
+ .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json | Bin 1809 -> 0 bytes
+ .../14_noncollapse_frontier/phase6b6/__init__.py   | Bin 41 -> 0 bytes
+ .../phase6b6/analysis/__init__.py                  | Bin 63 -> 0 bytes
+ .../phase6b6/analysis/adjudication.py              | Bin 2748 -> 0 bytes
+ .../phase6b6/analysis/metrics.py                   | Bin 6889 -> 0 bytes
+ .../phase6b6/analysis/observations.py              | Bin 1242 -> 0 bytes
+ .../phase6b6/analysis/operators.py                 | Bin 8115 -> 0 bytes
+ .../phase6b6/analysis/pipeline.py                  | Bin 55386 -> 0 bytes
+ .../phase6b6/analysis/state.py                     | Bin 6803 -> 0 bytes
+ .../phase6b6/analysis/synthetic.py                 | Bin 3231 -> 0 bytes
+ .../phase6b6/contracts/__init__.py                 | Bin 59 -> 0 bytes
+ .../phase6b6/contracts/contract.py                 | Bin 7266 -> 0 bytes
+ .../phase6b6/contracts/schedule.py                 | Bin 12914 -> 0 bytes
+ .../phase6b6/contracts/v2_interface.py             | Bin 7604 -> 0 bytes
+ .../phase6b6/runtime/__init__.py                   | Bin 40 -> 0 bytes
+ .../phase6b6/runtime/explicit_slot_runtime.py      | Bin 6631 -> 0 bytes
+ .../phase6b6/runtime/state_machine.py              | Bin 4462 -> 0 bytes
+ .../schemas/adjudication_result.schema.json        | Bin 1144 -> 0 bytes
+ .../phase6b6/schemas/analysis_choice.schema.json   | Bin 3491 -> 0 bytes
+ .../phase6b6/schemas/measured_state.schema.json    | Bin 696 -> 0 bytes
+ .../phase6b6/schemas/runtime_custody.schema.json   | Bin 12255 -> 0 bytes
+ .../phase6b6/schemas/schedule.schema.json          | Bin 5621 -> 0 bytes
+ .../schemas/scientific_contract.schema.json        | Bin 9125 -> 0 bytes
+ .../phase6b6/schemas/validate_objects.py           | Bin 478 -> 0 bytes
+ .../phase6b6/tests/test_analysis_partition.py      | Bin 33874 -> 0 bytes
+ .../phase6b6/tests/test_runtime_authority.py       | Bin 4163 -> 0 bytes
+ .../phase6b6/tests/test_schedule_contract.py       | Bin 12508 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.json         | Bin 27248 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.sha256       | Bin 97 -> 0 bytes
+ .../package/QUALIFICATION_CONTRACT.json            | Bin 2815 -> 0 bytes
+ .../package/TRUSTED_SNAPSHOT_BINDING.json          | Bin 12755 -> 0 bytes
+ .../setuid_file/package/capture_quality_contract.h | Bin 2338 -> 0 bytes
+ .../setuid_file/package/captured_file.h            | Bin 931 -> 0 bytes
+ .../setuid_file/package/combined_pdn_hardware.h    | Bin 1851 -> 0 bytes
+ .../setuid_file/package/emit_v2_reference_table.c  | Bin 2830 -> 0 bytes
+ .../package/portable_target_qualification.py       | Bin 63805 -> 0 bytes
+ .../holo_runtime_v2/combined_pdn_hardware.c        | Bin 49171 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             | Bin 21628 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     | Bin 5612 -> 0 bytes
+ .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json | Bin 1809 -> 0 bytes
+ .../14_noncollapse_frontier/phase6b6/__init__.py   | Bin 41 -> 0 bytes
+ .../phase6b6/analysis/__init__.py                  | Bin 63 -> 0 bytes
+ .../phase6b6/analysis/adjudication.py              | Bin 2748 -> 0 bytes
+ .../phase6b6/analysis/metrics.py                   | Bin 6889 -> 0 bytes
+ .../phase6b6/analysis/observations.py              | Bin 1242 -> 0 bytes
+ .../phase6b6/analysis/operators.py                 | Bin 8115 -> 0 bytes
+ .../phase6b6/analysis/pipeline.py                  | Bin 55386 -> 0 bytes
+ .../phase6b6/analysis/state.py                     | Bin 6803 -> 0 bytes
+ .../phase6b6/analysis/synthetic.py                 | Bin 3231 -> 0 bytes
+ .../phase6b6/contracts/__init__.py                 | Bin 59 -> 0 bytes
+ .../phase6b6/contracts/contract.py                 | Bin 7266 -> 0 bytes
+ .../phase6b6/contracts/schedule.py                 | Bin 12914 -> 0 bytes
+ .../phase6b6/contracts/v2_interface.py             | Bin 7604 -> 0 bytes
+ .../phase6b6/runtime/__init__.py                   | Bin 40 -> 0 bytes
+ .../phase6b6/runtime/explicit_slot_runtime.py      | Bin 6631 -> 0 bytes
+ .../phase6b6/runtime/state_machine.py              | Bin 4462 -> 0 bytes
+ .../schemas/adjudication_result.schema.json        | Bin 1144 -> 0 bytes
+ .../phase6b6/schemas/analysis_choice.schema.json   | Bin 3491 -> 0 bytes
+ .../phase6b6/schemas/measured_state.schema.json    | Bin 696 -> 0 bytes
+ .../phase6b6/schemas/runtime_custody.schema.json   | Bin 12255 -> 0 bytes
+ .../phase6b6/schemas/schedule.schema.json          | Bin 5621 -> 0 bytes
+ .../schemas/scientific_contract.schema.json        | Bin 9125 -> 0 bytes
+ .../phase6b6/schemas/validate_objects.py           | Bin 478 -> 0 bytes
+ .../phase6b6/tests/test_analysis_partition.py      | Bin 33874 -> 0 bytes
+ .../phase6b6/tests/test_runtime_authority.py       | Bin 4163 -> 0 bytes
+ .../phase6b6/tests/test_schedule_contract.py       | Bin 12508 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.json         | Bin 27248 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.sha256       | Bin 97 -> 0 bytes
+ .../package/QUALIFICATION_CONTRACT.json            | Bin 2815 -> 0 bytes
+ .../package/TRUSTED_SNAPSHOT_BINDING.json          | Bin 12755 -> 0 bytes
+ .../package/capture_quality_contract.h             | Bin 2338 -> 0 bytes
+ .../package/captured_file.h                        | Bin 931 -> 0 bytes
+ .../package/combined_pdn_hardware.h                | Bin 1851 -> 0 bytes
+ .../package/emit_v2_reference_table.c              | Bin 2830 -> 0 bytes
+ .../package/portable_target_qualification.py       | Bin 63805 -> 0 bytes
+ .../holo_runtime_v2/combined_pdn_hardware.c        | Bin 49171 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             | Bin 21628 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     | Bin 5612 -> 0 bytes
+ .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json | Bin 1809 -> 0 bytes
+ .../14_noncollapse_frontier/phase6b6/__init__.py   | Bin 41 -> 0 bytes
+ .../phase6b6/analysis/__init__.py                  | Bin 63 -> 0 bytes
+ .../phase6b6/analysis/adjudication.py              | Bin 2748 -> 0 bytes
+ .../phase6b6/analysis/metrics.py                   | Bin 6889 -> 0 bytes
+ .../phase6b6/analysis/observations.py              | Bin 1242 -> 0 bytes
+ .../phase6b6/analysis/operators.py                 | Bin 8115 -> 0 bytes
+ .../phase6b6/analysis/pipeline.py                  | Bin 55386 -> 0 bytes
+ .../phase6b6/analysis/state.py                     | Bin 6803 -> 0 bytes
+ .../phase6b6/analysis/synthetic.py                 | Bin 3231 -> 0 bytes
+ .../phase6b6/contracts/__init__.py                 | Bin 59 -> 0 bytes
+ .../phase6b6/contracts/contract.py                 | Bin 7266 -> 0 bytes
+ .../phase6b6/contracts/schedule.py                 | Bin 12914 -> 0 bytes
+ .../phase6b6/contracts/v2_interface.py             | Bin 7604 -> 0 bytes
+ .../phase6b6/runtime/__init__.py                   | Bin 40 -> 0 bytes
+ .../phase6b6/runtime/explicit_slot_runtime.py      | Bin 6631 -> 0 bytes
+ .../phase6b6/runtime/state_machine.py              | Bin 4462 -> 0 bytes
+ .../schemas/adjudication_result.schema.json        | Bin 1144 -> 0 bytes
+ .../phase6b6/schemas/analysis_choice.schema.json   | Bin 3491 -> 0 bytes
+ .../phase6b6/schemas/measured_state.schema.json    | Bin 696 -> 0 bytes
+ .../phase6b6/schemas/runtime_custody.schema.json   | Bin 12255 -> 0 bytes
+ .../phase6b6/schemas/schedule.schema.json          | Bin 5621 -> 0 bytes
+ .../schemas/scientific_contract.schema.json        | Bin 9125 -> 0 bytes
+ .../phase6b6/schemas/validate_objects.py           | Bin 478 -> 0 bytes
+ .../phase6b6/tests/test_analysis_partition.py      | Bin 33874 -> 0 bytes
+ .../phase6b6/tests/test_runtime_authority.py       | Bin 4163 -> 0 bytes
+ .../phase6b6/tests/test_schedule_contract.py       | Bin 12508 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.json         | Bin 27248 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.sha256       | Bin 97 -> 0 bytes
+ .../package/QUALIFICATION_CONTRACT.json            | Bin 2815 -> 0 bytes
+ .../package/TRUSTED_SNAPSHOT_BINDING.json          | Bin 12755 -> 0 bytes
+ .../package/capture_quality_contract.h             | Bin 2338 -> 0 bytes
+ .../sticky_directory/package/captured_file.h       | Bin 931 -> 0 bytes
+ .../package/combined_pdn_hardware.h                | Bin 1851 -> 0 bytes
+ .../package/emit_v2_reference_table.c              | Bin 2830 -> 0 bytes
+ .../package/portable_target_qualification.py       | Bin 63805 -> 0 bytes
+ .../holo_runtime_v2/combined_pdn_hardware.c        | Bin 49171 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             | Bin 21628 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     | Bin 5612 -> 0 bytes
+ .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json | Bin 1809 -> 0 bytes
+ .../14_noncollapse_frontier/phase6b6/__init__.py   | Bin 41 -> 0 bytes
+ .../phase6b6/analysis/__init__.py                  | Bin 63 -> 0 bytes
+ .../phase6b6/analysis/adjudication.py              | Bin 2748 -> 0 bytes
+ .../phase6b6/analysis/metrics.py                   | Bin 6889 -> 0 bytes
+ .../phase6b6/analysis/observations.py              | Bin 1242 -> 0 bytes
+ .../phase6b6/analysis/operators.py                 | Bin 8115 -> 0 bytes
+ .../phase6b6/analysis/pipeline.py                  | Bin 55386 -> 0 bytes
+ .../phase6b6/analysis/state.py                     | Bin 6803 -> 0 bytes
+ .../phase6b6/analysis/synthetic.py                 | Bin 3231 -> 0 bytes
+ .../phase6b6/contracts/__init__.py                 | Bin 59 -> 0 bytes
+ .../phase6b6/contracts/contract.py                 | Bin 7266 -> 0 bytes
+ .../phase6b6/contracts/schedule.py                 | Bin 12914 -> 0 bytes
+ .../phase6b6/contracts/v2_interface.py             | Bin 7604 -> 0 bytes
+ .../phase6b6/runtime/__init__.py                   | Bin 40 -> 0 bytes
+ .../phase6b6/runtime/explicit_slot_runtime.py      | Bin 6631 -> 0 bytes
+ .../phase6b6/runtime/state_machine.py              | Bin 4462 -> 0 bytes
+ .../schemas/adjudication_result.schema.json        | Bin 1144 -> 0 bytes
+ .../phase6b6/schemas/analysis_choice.schema.json   | Bin 3491 -> 0 bytes
+ .../phase6b6/schemas/measured_state.schema.json    | Bin 696 -> 0 bytes
+ .../phase6b6/schemas/runtime_custody.schema.json   | Bin 12255 -> 0 bytes
+ .../phase6b6/schemas/schedule.schema.json          | Bin 5621 -> 0 bytes
+ .../schemas/scientific_contract.schema.json        | Bin 9125 -> 0 bytes
+ .../phase6b6/schemas/validate_objects.py           | Bin 478 -> 0 bytes
+ .../phase6b6/tests/test_analysis_partition.py      | Bin 33874 -> 0 bytes
+ .../phase6b6/tests/test_runtime_authority.py       | Bin 4163 -> 0 bytes
+ .../phase6b6/tests/test_schedule_contract.py       | Bin 12508 -> 0 bytes
+ .../symlink/package/PORTABLE_PACKAGE_MANIFEST.json | Bin 27248 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.sha256       | Bin 97 -> 0 bytes
+ .../symlink/package/QUALIFICATION_CONTRACT.json    | Bin 2815 -> 0 bytes
+ .../symlink/package/TRUSTED_SNAPSHOT_BINDING.json  | Bin 12755 -> 0 bytes
+ .../symlink/package/capture_quality_contract.h     | Bin 2338 -> 0 bytes
+ .../negative_tests/symlink/package/captured_file.h | Bin 931 -> 0 bytes
+ .../symlink/package/combined_pdn_hardware.h        | Bin 1851 -> 0 bytes
+ .../symlink/package/emit_v2_reference_table.c      | Bin 2830 -> 0 bytes
+ .../package/portable_target_qualification.py       | Bin 63805 -> 0 bytes
+ .../holo_runtime_v2/combined_pdn_hardware.c        | Bin 49171 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             | Bin 21628 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     | Bin 5612 -> 0 bytes
+ .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json | Bin 1809 -> 0 bytes
+ .../14_noncollapse_frontier/phase6b6/__init__.py   | Bin 41 -> 0 bytes
+ .../phase6b6/analysis/__init__.py                  | Bin 63 -> 0 bytes
+ .../phase6b6/analysis/adjudication.py              | Bin 2748 -> 0 bytes
+ .../phase6b6/analysis/metrics.py                   | Bin 6889 -> 0 bytes
+ .../phase6b6/analysis/observations.py              | Bin 1242 -> 0 bytes
+ .../phase6b6/analysis/operators.py                 | Bin 8115 -> 0 bytes
+ .../phase6b6/analysis/pipeline.py                  | Bin 55386 -> 0 bytes
+ .../phase6b6/analysis/state.py                     | Bin 6803 -> 0 bytes
+ .../phase6b6/analysis/synthetic.py                 | Bin 3231 -> 0 bytes
+ .../phase6b6/contracts/__init__.py                 | Bin 59 -> 0 bytes
+ .../phase6b6/contracts/contract.py                 | Bin 7266 -> 0 bytes
+ .../phase6b6/contracts/schedule.py                 | Bin 12914 -> 0 bytes
+ .../phase6b6/contracts/v2_interface.py             | Bin 7604 -> 0 bytes
+ .../phase6b6/runtime/__init__.py                   | Bin 40 -> 0 bytes
+ .../phase6b6/runtime/explicit_slot_runtime.py      | Bin 6631 -> 0 bytes
+ .../phase6b6/runtime/state_machine.py              | Bin 4462 -> 0 bytes
+ .../schemas/adjudication_result.schema.json        | Bin 1144 -> 0 bytes
+ .../phase6b6/schemas/analysis_choice.schema.json   | Bin 3491 -> 0 bytes
+ .../phase6b6/schemas/measured_state.schema.json    | Bin 696 -> 0 bytes
+ .../phase6b6/schemas/runtime_custody.schema.json   | Bin 12255 -> 0 bytes
+ .../phase6b6/schemas/schedule.schema.json          | Bin 5621 -> 0 bytes
+ .../schemas/scientific_contract.schema.json        | Bin 9125 -> 0 bytes
+ .../phase6b6/schemas/validate_objects.py           | Bin 478 -> 0 bytes
+ .../phase6b6/tests/test_analysis_partition.py      | Bin 33874 -> 0 bytes
+ .../phase6b6/tests/test_runtime_authority.py       | Bin 4163 -> 0 bytes
+ .../phase6b6/tests/test_schedule_contract.py       | Bin 12508 -> 0 bytes
+ .../negative_tests/symlink/package/unbound_symlink | Bin 2338 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.json         | Bin 27248 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.sha256       | Bin 97 -> 0 bytes
+ .../package/QUALIFICATION_CONTRACT.json            | Bin 2815 -> 0 bytes
+ .../package/TRUSTED_SNAPSHOT_BINDING.json          | Bin 12755 -> 0 bytes
+ .../package/capture_quality_contract.h             | Bin 2338 -> 0 bytes
+ .../changed_copied_byte/package/captured_file.h    | Bin 931 -> 0 bytes
+ .../package/combined_pdn_hardware.h                | Bin 1851 -> 0 bytes
+ .../package/emit_v2_reference_table.c              | Bin 2830 -> 0 bytes
+ .../package/portable_target_qualification.py       | Bin 61638 -> 0 bytes
+ .../holo_runtime_v2/combined_pdn_hardware.c        | Bin 49171 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             | Bin 21628 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     | Bin 5612 -> 0 bytes
+ .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json | Bin 1809 -> 0 bytes
+ .../14_noncollapse_frontier/phase6b6/__init__.py   | Bin 41 -> 0 bytes
+ .../phase6b6/analysis/__init__.py                  | Bin 63 -> 0 bytes
+ .../phase6b6/analysis/adjudication.py              | Bin 2748 -> 0 bytes
+ .../phase6b6/analysis/metrics.py                   | Bin 6889 -> 0 bytes
+ .../phase6b6/analysis/observations.py              | Bin 1242 -> 0 bytes
+ .../phase6b6/analysis/operators.py                 | Bin 8115 -> 0 bytes
+ .../phase6b6/analysis/pipeline.py                  | Bin 55386 -> 0 bytes
+ .../phase6b6/analysis/state.py                     | Bin 6803 -> 0 bytes
+ .../phase6b6/analysis/synthetic.py                 | Bin 3231 -> 0 bytes
+ .../phase6b6/contracts/__init__.py                 | Bin 59 -> 0 bytes
+ .../phase6b6/contracts/contract.py                 | Bin 7266 -> 0 bytes
+ .../phase6b6/contracts/schedule.py                 | Bin 12914 -> 0 bytes
+ .../phase6b6/contracts/v2_interface.py             | Bin 7604 -> 0 bytes
+ .../phase6b6/runtime/__init__.py                   | Bin 40 -> 0 bytes
+ .../phase6b6/runtime/explicit_slot_runtime.py      | Bin 6631 -> 0 bytes
+ .../phase6b6/runtime/state_machine.py              | Bin 4462 -> 0 bytes
+ .../schemas/adjudication_result.schema.json        | Bin 1144 -> 0 bytes
+ .../phase6b6/schemas/analysis_choice.schema.json   | Bin 3491 -> 0 bytes
+ .../phase6b6/schemas/measured_state.schema.json    | Bin 696 -> 0 bytes
+ .../phase6b6/schemas/runtime_custody.schema.json   | Bin 12255 -> 0 bytes
+ .../phase6b6/schemas/schedule.schema.json          | Bin 5621 -> 0 bytes
+ .../schemas/scientific_contract.schema.json        | Bin 9125 -> 0 bytes
+ .../phase6b6/schemas/validate_objects.py           | Bin 478 -> 0 bytes
+ .../phase6b6/tests/test_analysis_partition.py      | Bin 33874 -> 0 bytes
+ .../phase6b6/tests/test_runtime_authority.py       | Bin 4163 -> 0 bytes
+ .../phase6b6/tests/test_schedule_contract.py       | Bin 12508 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.json         | Bin 27248 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.sha256       | Bin 97 -> 0 bytes
+ .../package/QUALIFICATION_CONTRACT.json            | Bin 2815 -> 0 bytes
+ .../package/TRUSTED_SNAPSHOT_BINDING.json          | Bin 12755 -> 0 bytes
+ .../package/capture_quality_contract.h             | Bin 2338 -> 0 bytes
+ .../changed_mode/package/captured_file.h           | Bin 931 -> 0 bytes
+ .../changed_mode/package/combined_pdn_hardware.h   | Bin 1851 -> 0 bytes
+ .../changed_mode/package/emit_v2_reference_table.c | Bin 2830 -> 0 bytes
+ .../package/portable_target_qualification.py       | Bin 61638 -> 0 bytes
+ .../holo_runtime_v2/combined_pdn_hardware.c        | Bin 49171 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             | Bin 21628 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     | Bin 5612 -> 0 bytes
+ .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json | Bin 1809 -> 0 bytes
+ .../14_noncollapse_frontier/phase6b6/__init__.py   | Bin 41 -> 0 bytes
+ .../phase6b6/analysis/__init__.py                  | Bin 63 -> 0 bytes
+ .../phase6b6/analysis/adjudication.py              | Bin 2748 -> 0 bytes
+ .../phase6b6/analysis/metrics.py                   | Bin 6889 -> 0 bytes
+ .../phase6b6/analysis/observations.py              | Bin 1242 -> 0 bytes
+ .../phase6b6/analysis/operators.py                 | Bin 8115 -> 0 bytes
+ .../phase6b6/analysis/pipeline.py                  | Bin 55386 -> 0 bytes
+ .../phase6b6/analysis/state.py                     | Bin 6803 -> 0 bytes
+ .../phase6b6/analysis/synthetic.py                 | Bin 3231 -> 0 bytes
+ .../phase6b6/contracts/__init__.py                 | Bin 59 -> 0 bytes
+ .../phase6b6/contracts/contract.py                 | Bin 7266 -> 0 bytes
+ .../phase6b6/contracts/schedule.py                 | Bin 12914 -> 0 bytes
+ .../phase6b6/contracts/v2_interface.py             | Bin 7604 -> 0 bytes
+ .../phase6b6/runtime/__init__.py                   | Bin 40 -> 0 bytes
+ .../phase6b6/runtime/explicit_slot_runtime.py      | Bin 6631 -> 0 bytes
+ .../phase6b6/runtime/state_machine.py              | Bin 4462 -> 0 bytes
+ .../schemas/adjudication_result.schema.json        | Bin 1144 -> 0 bytes
+ .../phase6b6/schemas/analysis_choice.schema.json   | Bin 3491 -> 0 bytes
+ .../phase6b6/schemas/measured_state.schema.json    | Bin 696 -> 0 bytes
+ .../phase6b6/schemas/runtime_custody.schema.json   | Bin 12255 -> 0 bytes
+ .../phase6b6/schemas/schedule.schema.json          | Bin 5621 -> 0 bytes
+ .../schemas/scientific_contract.schema.json        | Bin 9125 -> 0 bytes
+ .../phase6b6/schemas/validate_objects.py           | Bin 478 -> 0 bytes
+ .../phase6b6/tests/test_analysis_partition.py      | Bin 33874 -> 0 bytes
+ .../phase6b6/tests/test_runtime_authority.py       | Bin 4163 -> 0 bytes
+ .../phase6b6/tests/test_schedule_contract.py       | Bin 12508 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.json         | Bin 27248 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.sha256       | Bin 97 -> 0 bytes
+ .../package/QUALIFICATION_CONTRACT.json            | Bin 2815 -> 0 bytes
+ .../package/TRUSTED_SNAPSHOT_BINDING.json          | Bin 12755 -> 0 bytes
+ .../package/capture_quality_contract.h             | Bin 2338 -> 0 bytes
+ .../extra_empty_directory/package/captured_file.h  | Bin 931 -> 0 bytes
+ .../package/combined_pdn_hardware.h                | Bin 1851 -> 0 bytes
+ .../package/emit_v2_reference_table.c              | Bin 2830 -> 0 bytes
+ .../package/portable_target_qualification.py       | Bin 61638 -> 0 bytes
+ .../holo_runtime_v2/combined_pdn_hardware.c        | Bin 49171 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             | Bin 21628 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     | Bin 5612 -> 0 bytes
+ .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json | Bin 1809 -> 0 bytes
+ .../14_noncollapse_frontier/phase6b6/__init__.py   | Bin 41 -> 0 bytes
+ .../phase6b6/analysis/__init__.py                  | Bin 63 -> 0 bytes
+ .../phase6b6/analysis/adjudication.py              | Bin 2748 -> 0 bytes
+ .../phase6b6/analysis/metrics.py                   | Bin 6889 -> 0 bytes
+ .../phase6b6/analysis/observations.py              | Bin 1242 -> 0 bytes
+ .../phase6b6/analysis/operators.py                 | Bin 8115 -> 0 bytes
+ .../phase6b6/analysis/pipeline.py                  | Bin 55386 -> 0 bytes
+ .../phase6b6/analysis/state.py                     | Bin 6803 -> 0 bytes
+ .../phase6b6/analysis/synthetic.py                 | Bin 3231 -> 0 bytes
+ .../phase6b6/contracts/__init__.py                 | Bin 59 -> 0 bytes
+ .../phase6b6/contracts/contract.py                 | Bin 7266 -> 0 bytes
+ .../phase6b6/contracts/schedule.py                 | Bin 12914 -> 0 bytes
+ .../phase6b6/contracts/v2_interface.py             | Bin 7604 -> 0 bytes
+ .../phase6b6/runtime/__init__.py                   | Bin 40 -> 0 bytes
+ .../phase6b6/runtime/explicit_slot_runtime.py      | Bin 6631 -> 0 bytes
+ .../phase6b6/runtime/state_machine.py              | Bin 4462 -> 0 bytes
+ .../schemas/adjudication_result.schema.json        | Bin 1144 -> 0 bytes
+ .../phase6b6/schemas/analysis_choice.schema.json   | Bin 3491 -> 0 bytes
+ .../phase6b6/schemas/measured_state.schema.json    | Bin 696 -> 0 bytes
+ .../phase6b6/schemas/runtime_custody.schema.json   | Bin 12255 -> 0 bytes
+ .../phase6b6/schemas/schedule.schema.json          | Bin 5621 -> 0 bytes
+ .../schemas/scientific_contract.schema.json        | Bin 9125 -> 0 bytes
+ .../phase6b6/schemas/validate_objects.py           | Bin 478 -> 0 bytes
+ .../phase6b6/tests/test_analysis_partition.py      | Bin 33874 -> 0 bytes
+ .../phase6b6/tests/test_runtime_authority.py       | Bin 4163 -> 0 bytes
+ .../phase6b6/tests/test_schedule_contract.py       | Bin 12508 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.json         | Bin 27248 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.sha256       | Bin 97 -> 0 bytes
+ .../package/QUALIFICATION_CONTRACT.json            | Bin 2815 -> 0 bytes
+ .../package/TRUSTED_SNAPSHOT_BINDING.json          | Bin 12755 -> 0 bytes
+ .../package/capture_quality_contract.h             | Bin 2338 -> 0 bytes
+ .../extra_regular_file/package/captured_file.h     | Bin 931 -> 0 bytes
+ .../package/combined_pdn_hardware.h                | Bin 1851 -> 0 bytes
+ .../package/emit_v2_reference_table.c              | Bin 2830 -> 0 bytes
+ .../package/portable_target_qualification.py       | Bin 61638 -> 0 bytes
+ .../holo_runtime_v2/combined_pdn_hardware.c        | Bin 49171 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             | Bin 21628 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     | Bin 5612 -> 0 bytes
+ .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json | Bin 1809 -> 0 bytes
+ .../14_noncollapse_frontier/phase6b6/__init__.py   | Bin 41 -> 0 bytes
+ .../phase6b6/analysis/__init__.py                  | Bin 63 -> 0 bytes
+ .../phase6b6/analysis/adjudication.py              | Bin 2748 -> 0 bytes
+ .../phase6b6/analysis/metrics.py                   | Bin 6889 -> 0 bytes
+ .../phase6b6/analysis/observations.py              | Bin 1242 -> 0 bytes
+ .../phase6b6/analysis/operators.py                 | Bin 8115 -> 0 bytes
+ .../phase6b6/analysis/pipeline.py                  | Bin 55386 -> 0 bytes
+ .../phase6b6/analysis/state.py                     | Bin 6803 -> 0 bytes
+ .../phase6b6/analysis/synthetic.py                 | Bin 3231 -> 0 bytes
+ .../phase6b6/contracts/__init__.py                 | Bin 59 -> 0 bytes
+ .../phase6b6/contracts/contract.py                 | Bin 7266 -> 0 bytes
+ .../phase6b6/contracts/schedule.py                 | Bin 12914 -> 0 bytes
+ .../phase6b6/contracts/v2_interface.py             | Bin 7604 -> 0 bytes
+ .../phase6b6/runtime/__init__.py                   | Bin 40 -> 0 bytes
+ .../phase6b6/runtime/explicit_slot_runtime.py      | Bin 6631 -> 0 bytes
+ .../phase6b6/runtime/state_machine.py              | Bin 4462 -> 0 bytes
+ .../schemas/adjudication_result.schema.json        | Bin 1144 -> 0 bytes
+ .../phase6b6/schemas/analysis_choice.schema.json   | Bin 3491 -> 0 bytes
+ .../phase6b6/schemas/measured_state.schema.json    | Bin 696 -> 0 bytes
+ .../phase6b6/schemas/runtime_custody.schema.json   | Bin 12255 -> 0 bytes
+ .../phase6b6/schemas/schedule.schema.json          | Bin 5621 -> 0 bytes
+ .../schemas/scientific_contract.schema.json        | Bin 9125 -> 0 bytes
+ .../phase6b6/schemas/validate_objects.py           | Bin 478 -> 0 bytes
+ .../phase6b6/tests/test_analysis_partition.py      | Bin 33874 -> 0 bytes
+ .../phase6b6/tests/test_runtime_authority.py       | Bin 4163 -> 0 bytes
+ .../phase6b6/tests/test_schedule_contract.py       | Bin 12508 -> 0 bytes
+ .../package/unbound_extra_file.txt                 | Bin 10 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.json         | Bin 27248 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.sha256       | Bin 97 -> 0 bytes
+ .../package/QUALIFICATION_CONTRACT.json            | Bin 2815 -> 0 bytes
+ .../package/TRUSTED_SNAPSHOT_BINDING.json          | Bin 12755 -> 0 bytes
+ .../missing_regular_file/package/captured_file.h   | Bin 931 -> 0 bytes
+ .../package/combined_pdn_hardware.h                | Bin 1851 -> 0 bytes
+ .../package/emit_v2_reference_table.c              | Bin 2830 -> 0 bytes
+ .../package/portable_target_qualification.py       | Bin 61638 -> 0 bytes
+ .../holo_runtime_v2/combined_pdn_hardware.c        | Bin 49171 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             | Bin 21628 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     | Bin 5612 -> 0 bytes
+ .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json | Bin 1809 -> 0 bytes
+ .../14_noncollapse_frontier/phase6b6/__init__.py   | Bin 41 -> 0 bytes
+ .../phase6b6/analysis/__init__.py                  | Bin 63 -> 0 bytes
+ .../phase6b6/analysis/adjudication.py              | Bin 2748 -> 0 bytes
+ .../phase6b6/analysis/metrics.py                   | Bin 6889 -> 0 bytes
+ .../phase6b6/analysis/observations.py              | Bin 1242 -> 0 bytes
+ .../phase6b6/analysis/operators.py                 | Bin 8115 -> 0 bytes
+ .../phase6b6/analysis/pipeline.py                  | Bin 55386 -> 0 bytes
+ .../phase6b6/analysis/state.py                     | Bin 6803 -> 0 bytes
+ .../phase6b6/analysis/synthetic.py                 | Bin 3231 -> 0 bytes
+ .../phase6b6/contracts/__init__.py                 | Bin 59 -> 0 bytes
+ .../phase6b6/contracts/contract.py                 | Bin 7266 -> 0 bytes
+ .../phase6b6/contracts/schedule.py                 | Bin 12914 -> 0 bytes
+ .../phase6b6/contracts/v2_interface.py             | Bin 7604 -> 0 bytes
+ .../phase6b6/runtime/__init__.py                   | Bin 40 -> 0 bytes
+ .../phase6b6/runtime/explicit_slot_runtime.py      | Bin 6631 -> 0 bytes
+ .../phase6b6/runtime/state_machine.py              | Bin 4462 -> 0 bytes
+ .../schemas/adjudication_result.schema.json        | Bin 1144 -> 0 bytes
+ .../phase6b6/schemas/analysis_choice.schema.json   | Bin 3491 -> 0 bytes
+ .../phase6b6/schemas/measured_state.schema.json    | Bin 696 -> 0 bytes
+ .../phase6b6/schemas/runtime_custody.schema.json   | Bin 12255 -> 0 bytes
+ .../phase6b6/schemas/schedule.schema.json          | Bin 5621 -> 0 bytes
+ .../schemas/scientific_contract.schema.json        | Bin 9125 -> 0 bytes
+ .../phase6b6/schemas/validate_objects.py           | Bin 478 -> 0 bytes
+ .../phase6b6/tests/test_analysis_partition.py      | Bin 33874 -> 0 bytes
+ .../phase6b6/tests/test_runtime_authority.py       | Bin 4163 -> 0 bytes
+ .../phase6b6/tests/test_schedule_contract.py       | Bin 12508 -> 0 bytes
+ .../symlink/package/PORTABLE_PACKAGE_MANIFEST.json | Bin 27248 -> 0 bytes
+ .../package/PORTABLE_PACKAGE_MANIFEST.sha256       | Bin 97 -> 0 bytes
+ .../symlink/package/QUALIFICATION_CONTRACT.json    | Bin 2815 -> 0 bytes
+ .../symlink/package/TRUSTED_SNAPSHOT_BINDING.json  | Bin 12755 -> 0 bytes
+ .../symlink/package/capture_quality_contract.h     | Bin 2338 -> 0 bytes
+ .../negative_tests/symlink/package/captured_file.h | Bin 931 -> 0 bytes
+ .../symlink/package/combined_pdn_hardware.h        | Bin 1851 -> 0 bytes
+ .../symlink/package/emit_v2_reference_table.c      | Bin 2830 -> 0 bytes
+ .../package/portable_target_qualification.py       | Bin 61638 -> 0 bytes
+ .../holo_runtime_v2/combined_pdn_hardware.c        | Bin 49171 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_PACKAGE.md             | Bin 21628 -> 0 bytes
+ .../phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md     | Bin 5612 -> 0 bytes
+ .../phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json | Bin 1809 -> 0 bytes
+ .../14_noncollapse_frontier/phase6b6/__init__.py   | Bin 41 -> 0 bytes
+ .../phase6b6/analysis/__init__.py                  | Bin 63 -> 0 bytes
+ .../phase6b6/analysis/adjudication.py              | Bin 2748 -> 0 bytes
+ .../phase6b6/analysis/metrics.py                   | Bin 6889 -> 0 bytes
+ .../phase6b6/analysis/observations.py              | Bin 1242 -> 0 bytes
+ .../phase6b6/analysis/operators.py                 | Bin 8115 -> 0 bytes
+ .../phase6b6/analysis/pipeline.py                  | Bin 55386 -> 0 bytes
+ .../phase6b6/analysis/state.py                     | Bin 6803 -> 0 bytes
+ .../phase6b6/analysis/synthetic.py                 | Bin 3231 -> 0 bytes
+ .../phase6b6/contracts/__init__.py                 | Bin 59 -> 0 bytes
+ .../phase6b6/contracts/contract.py                 | Bin 7266 -> 0 bytes
+ .../phase6b6/contracts/schedule.py                 | Bin 12914 -> 0 bytes
+ .../phase6b6/contracts/v2_interface.py             | Bin 7604 -> 0 bytes
+ .../phase6b6/runtime/__init__.py                   | Bin 40 -> 0 bytes
+ .../phase6b6/runtime/explicit_slot_runtime.py      | Bin 6631 -> 0 bytes
+ .../phase6b6/runtime/state_machine.py              | Bin 4462 -> 0 bytes
+ .../schemas/adjudication_result.schema.json        | Bin 1144 -> 0 bytes
+ .../phase6b6/schemas/analysis_choice.schema.json   | Bin 3491 -> 0 bytes
+ .../phase6b6/schemas/measured_state.schema.json    | Bin 696 -> 0 bytes
+ .../phase6b6/schemas/runtime_custody.schema.json   | Bin 12255 -> 0 bytes
+ .../phase6b6/schemas/schedule.schema.json          | Bin 5621 -> 0 bytes
+ .../schemas/scientific_contract.schema.json        | Bin 9125 -> 0 bytes
+ .../phase6b6/schemas/validate_objects.py           | Bin 478 -> 0 bytes
+ .../phase6b6/tests/test_analysis_partition.py      | Bin 33874 -> 0 bytes
+ .../phase6b6/tests/test_runtime_authority.py       | Bin 4163 -> 0 bytes
+ .../phase6b6/tests/test_schedule_contract.py       | Bin 12508 -> 0 bytes
+ .../negative_tests/symlink/package/unbound_symlink | Bin 2338 -> 0 bytes
+ 826 files changed, 0 insertions(+), 0 deletions(-)

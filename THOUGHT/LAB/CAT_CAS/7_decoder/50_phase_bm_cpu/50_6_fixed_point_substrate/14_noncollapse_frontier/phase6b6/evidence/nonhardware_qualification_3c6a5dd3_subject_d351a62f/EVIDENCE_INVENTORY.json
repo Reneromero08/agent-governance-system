@@ -1,11 +1,11 @@
 {
   "entries": [
     {
-      "byte_size": 50,
+      "byte_size": 64,
       "producing_command_sequence": null,
       "relative_path": ".gitattributes",
       "role": "evidence",
-      "sha256": "a390927d18faad53e8d0ffc049f2faf1060f816adfa16286714703047cc7a936"
+      "sha256": "b854533726e42be5734dd3686f9ded2e7e5baac7d2908c9a75c49cbdc66c8698"
     },
     {
       "byte_size": 941,
@@ -29,18 +29,18 @@
       "sha256": "5b234027492bc43137c67626c67620ff6df1576ef0e5d71267448e0be5f3050d"
     },
     {
-      "byte_size": 173246,
+      "byte_size": 175138,
       "producing_command_sequence": null,
       "relative_path": "COMMANDS.jsonl",
       "role": "append_only_command_ledger",
-      "sha256": "d1b3b926905dae101aed232d84119f715b5fd8f5cd3d74aefc2eea1bcc889065"
+      "sha256": "40ca5ed9557116672d7fba511d103cb2d3836eeb53220863041d0882d1ca4852"
     },
     {
       "byte_size": 9057,
       "producing_command_sequence": null,
       "relative_path": "FINAL_BINDINGS.json",
       "role": "structured_evidence_record",
-      "sha256": "12149b35a1aaa32dc1798ae39b24f69f971d10e04927b8e9f60ddd43c1ffd20d"
+      "sha256": "87488a247d4130354408cea5349dd37683ff9180ee2dfb8bec9199757dac3cb6"
     },
     {
       "byte_size": 60925,
@@ -54,7 +54,7 @@
       "producing_command_sequence": null,
       "relative_path": "POST_LEDGER_TRIM_RECONCILIATION.json",
       "role": "structured_evidence_record",
-      "sha256": "8835a0fb58babb8d95deaaa083f393a10850eba915cae0eb87bc251567a69cbd"
+      "sha256": "f3bd6fd34ec693978f9f03497109ce8e4f00fef9e43d85f6885bec66a73bfa5e"
     },
     {
       "byte_size": 1988,
@@ -568,11 +568,11 @@
       "sha256": "c221432feae558b9b5c8155af7ed21c76434d6b71e2170f2632ca99d6e55ba2e"
     },
     {
-      "byte_size": 51584,
+      "byte_size": 61945,
       "producing_command_sequence": null,
       "relative_path": "local/reconciliation/097_trim_stat.diff.txt",
       "role": "post_ledger_reconciliation_record_or_log",
-      "sha256": "939d4adf962fa17c96244eca6b8334f1c0b43d5302795685156f2e90ec22ac81"
+      "sha256": "911629015ed644e9ef90c2890bbae31f1d4dfbad956bff7b315fb28fc2b38def"
     },
     {
       "byte_size": 13307,
@@ -684,7 +684,7 @@
       "producing_command_sequence": null,
       "relative_path": "local/reconciliation/103_complete_local_evidence_validation.json",
       "role": "post_ledger_reconciliation_record_or_log",
-      "sha256": "0dd72a9b69a0640548b77126113e4a17dae7db5cf1cb8aaaa32d722ddec080f5"
+      "sha256": "97bf74b177bc64e3ec36adfe80518ac317be8d9a2e449b56727dab61b9145bc5"
     },
     {
       "byte_size": 0,
@@ -755,6 +755,34 @@
       "relative_path": "local/reconciliation/107_self-finalize-reconciled-control-records-after-ledger-append.stdout.txt",
       "role": "post_ledger_reconciliation_record_or_log",
       "sha256": "6b0f89dabdbc4e3c98a2035aca5b2ef9a25bd23e00fcb3c37978650eec871412"
+    },
+    {
+      "byte_size": 0,
+      "producing_command_sequence": 108,
+      "relative_path": "local/reconciliation/108_self-finalize-reconciled-control-records-after-text-binding.stderr.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "byte_size": 661,
+      "producing_command_sequence": 108,
+      "relative_path": "local/reconciliation/108_self-finalize-reconciled-control-records-after-text-binding.stdout.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "c44144949dd12c6dd3667e6808437d1dc90799f2f77473168b701a9d30e8c083"
+    },
+    {
+      "byte_size": 0,
+      "producing_command_sequence": 109,
+      "relative_path": "local/reconciliation/109_self-finalize-reconciled-control-records-after-diff-binding.stderr.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "byte_size": 661,
+      "producing_command_sequence": 109,
+      "relative_path": "local/reconciliation/109_self-finalize-reconciled-control-records-after-diff-binding.stdout.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "a3aaae02cbfc54a988f34c4bb6edd3bd98cf16eb0f843b93d25d524663cefa09"
     },
     {
       "byte_size": 96,
@@ -2541,8 +2569,8 @@
     "EVIDENCE_INVENTORY_VERIFICATION.txt",
     "FINAL_EVIDENCE_SEAL.json"
   ],
-  "file_count": 362,
-  "generated_utc": "2026-07-01T10:43:40Z",
+  "file_count": 366,
+  "generated_utc": "2026-07-01T10:47:42Z",
   "root": "D:/CCC 2.0/AI/agent-governance-system/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/nonhardware_qualification_3c6a5dd3_subject_d351a62f",
   "schema_id": "CAT_CAS_PHASE6B6_NONHARDWARE_EVIDENCE_INVENTORY_V1"
 }

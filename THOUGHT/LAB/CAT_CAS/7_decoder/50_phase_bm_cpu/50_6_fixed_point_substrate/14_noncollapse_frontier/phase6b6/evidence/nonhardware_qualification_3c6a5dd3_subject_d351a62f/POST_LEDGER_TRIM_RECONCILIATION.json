@@ -1,8 +1,8 @@
 {
   "authority_changed": false,
-  "generated_utc": "2026-07-01T10:43:39Z",
+  "generated_utc": "2026-07-01T10:47:40Z",
   "git_name_status_diff_sha256": "c221432feae558b9b5c8155af7ed21c76434d6b71e2170f2632ca99d6e55ba2e",
-  "git_stat_diff_sha256": "939d4adf962fa17c96244eca6b8334f1c0b43d5302795685156f2e90ec22ac81",
+  "git_stat_diff_sha256": "911629015ed644e9ef90c2890bbae31f1d4dfbad956bff7b315fb28fc2b38def",
   "historical_command_fabricated": false,
   "initial_evidence_commit": "951f30435ce27a96cbf63749b92c39c8488606d3",
   "ledger_last_contemporaneous_sequence": 95,
@@ -12,7 +12,7 @@
     "Git history provides the authoritative before-and-after record.",
     "The present reconciliation verifies the trim and binds the final retained evidence package."
   ],
-  "reconciliation_command_sequence_end": 107,
+  "reconciliation_command_sequence_end": 109,
   "reconciliation_command_sequence_start": 96,
   "removed_file_count": 821,
   "removed_package_tree_count": 21,
