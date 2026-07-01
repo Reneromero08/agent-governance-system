@@ -34,6 +34,12 @@ EXPECTED_PHASE6B6_SUBTREE_INVENTORY_SHA256 = "24789f0df9afa2d9f6a243a9050ff8f265
 EXPECTED_V2_SOURCE_SHA256 = "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976"
 PACKAGE_ROOT_DIR = "phase6b6_portable_target_package"
 QUALIFICATION_CONTRACT_DIGEST = "986d1eb27e6e715da0ed8765f58566b0608e464b94dbd0d58ab3d130d80fd0d2"
+GENERATED_CONTROL_FILES = (
+    "PORTABLE_PACKAGE_MANIFEST.json",
+    "PORTABLE_PACKAGE_MANIFEST.sha256",
+    "TRUSTED_SNAPSHOT_BINDING.json",
+    "QUALIFICATION_CONTRACT.json",
+)
 
 V2_HEADER_RELATIVE_SOURCE = (
     "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/"
@@ -81,6 +87,33 @@ def _canonical_json(value: Any) -> bytes:
 
 def _sha256_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
+
+
+def canonical_package_permissions(git_mode: str) -> int:
+    if git_mode == "100644":
+        return 0o644
+    if git_mode == "100755":
+        return 0o755
+    raise PortablePackageError(f"unsupported Git source mode for portable package: {git_mode}")
+
+
+def _format_permission(mode: int) -> str:
+    return f"{mode:04o}"
+
+
+def _posix_permissions_supported() -> bool:
+    return os.name != "nt"
+
+
+def _require_exact_permission(path: Path, expected: int, *, rel: str, kind: str) -> None:
+    if not _posix_permissions_supported():
+        return
+    observed = stat.S_IMODE(path.lstat().st_mode)
+    if observed != expected:
+        raise PortablePackageError(
+            f"{kind} permission mismatch: {rel} expected={_format_permission(expected)} "
+            f"observed={_format_permission(observed)}"
+        )
 
 
 def git_blob_sha1(data: bytes) -> str:
@@ -150,12 +183,11 @@ def _file_record(
 ) -> dict[str, Any]:
     _reject_bad_relative_path(package_path)
     _reject_bad_relative_path(source_path)
-    if mode not in ("100644", "100755"):
-        raise PortablePackageError(f"unsupported file mode for portable package: {mode} {source_path}")
+    package_permission = canonical_package_permissions(mode)
     data = _git(REPO_ROOT, ["cat-file", "blob", source_blob_sha1])
     if git_blob_sha1(data) != source_blob_sha1:
         raise PortablePackageError(f"exported bytes do not match source Git blob: {source_path}")
-    _write_file(package_root / package_path, data, 0o755 if mode == "100755" else 0o644)
+    _write_file(package_root / package_path, data, package_permission)
     return {
         "path": package_path,
         "source_path": source_path,
@@ -224,39 +256,80 @@ def _iter_tar_paths(root: Path) -> list[Path]:
 
 def _assert_regular_tree(root: Path) -> None:
     seen: list[str] = []
-    for path in root.rglob("*"):
-        rel = path.relative_to(root).as_posix()
-        _reject_bad_relative_path(rel)
-        seen.append(rel)
+    for path in _iter_tar_paths(root):
+        rel = path.relative_to(root).as_posix() if path != root else ""
+        label = rel or PACKAGE_ROOT_DIR
+        if rel:
+            _reject_bad_relative_path(rel)
+            seen.append(rel)
         st = path.lstat()
-        if path.is_dir():
+        if stat.S_ISDIR(st.st_mode):
+            _require_exact_permission(path, 0o755, rel=label, kind="directory")
             continue
         if not stat.S_ISREG(st.st_mode):
-            raise PortablePackageError(f"non-regular portable package entry rejected: {rel}")
+            raise PortablePackageError(f"non-regular portable package entry rejected: {label}")
+        mode = stat.S_IMODE(st.st_mode)
+        if _posix_permissions_supported() and mode not in (0o644, 0o755):
+            raise PortablePackageError(
+                f"regular file permission mismatch: {label} expected=0644-or-0755 observed={_format_permission(mode)}"
+            )
         if rel.endswith(".bundle") or "/.git/" in f"/{rel}/" or rel == ".git":
             raise PortablePackageError(f"forbidden Git package content rejected: {rel}")
     _case_collision_check(seen)
 
 
-def _write_deterministic_tar(package_root: Path, out: Path) -> None:
+def _canonicalize_directory_permissions(root: Path) -> None:
+    for path in _iter_tar_paths(root):
+        if path.is_dir():
+            path.chmod(0o755)
+
+
+def _assert_manifest_file_permissions(package_root: Path, manifest: dict[str, Any]) -> None:
+    for item in manifest["copied_files"]:
+        rel = item["path"]
+        expected = canonical_package_permissions(item["mode"])
+        path = package_root / rel
+        _reject_bad_relative_path(rel)
+        if not stat.S_ISREG(path.lstat().st_mode):
+            raise PortablePackageError(f"manifest-bound regular file required: {rel}")
+        _require_exact_permission(path, expected, rel=rel, kind=f"manifest file Git source mode {item['mode']}")
+
+
+def _expected_package_permissions(manifest: dict[str, Any]) -> dict[str, int]:
+    permissions = {item["path"]: canonical_package_permissions(item["mode"]) for item in manifest["copied_files"]}
+    for rel in GENERATED_CONTROL_FILES:
+        permissions[rel] = 0o644
+    return permissions
+
+
+def _write_deterministic_tar(package_root: Path, out: Path, manifest: dict[str, Any]) -> None:
     _assert_regular_tree(package_root)
+    file_permissions = _expected_package_permissions(manifest)
     out.parent.mkdir(parents=True, exist_ok=True)
     with tarfile.open(out, "w", format=tarfile.PAX_FORMAT) as archive:
         for path in _iter_tar_paths(package_root):
             arcname = path.relative_to(package_root.parent).as_posix()
+            rel = path.relative_to(package_root).as_posix() if path != package_root else ""
             info = archive.gettarinfo(str(path), arcname)
             info.uid = 0
             info.gid = 0
             info.uname = ""
             info.gname = ""
             info.mtime = 0
-            if path.is_dir():
+            st = path.lstat()
+            if stat.S_ISDIR(st.st_mode):
                 info.mode = 0o755
                 archive.addfile(info)
-            else:
-                info.mode = 0o644
+            elif stat.S_ISREG(st.st_mode):
+                if rel not in file_permissions:
+                    raise PortablePackageError(f"unexpected portable package file rejected before tar: {rel}")
+                expected = file_permissions[rel]
+                _require_exact_permission(path, expected, rel=rel, kind="regular file")
+                info.mode = expected
                 with path.open("rb") as handle:
                     archive.addfile(info, handle)
+            else:
+                raise PortablePackageError(f"unsupported portable package archive entry: {arcname}")
 
 
 def build_portable_package_tree(package_root: Path) -> dict[str, Any]:
@@ -370,8 +443,11 @@ def export_portable_target_package(out: Path) -> dict[str, Any]:
     with tempfile.TemporaryDirectory(prefix="phase6b6-portable-package-") as temp:
         staging = Path(temp) / PACKAGE_ROOT_DIR
         staging.mkdir(parents=True)
+        staging.chmod(0o755)
         result = build_portable_package_tree(staging)
-        _write_deterministic_tar(staging, out)
+        _canonicalize_directory_permissions(staging)
+        _assert_manifest_file_permissions(staging, result["manifest"])
+        _write_deterministic_tar(staging, out, result["manifest"])
     archive_sha = hashlib.sha256(out.read_bytes()).hexdigest()
     out.with_suffix(out.suffix + ".sha256").write_text(f"{archive_sha}  {out.name}\n", encoding="ascii")
     return {
