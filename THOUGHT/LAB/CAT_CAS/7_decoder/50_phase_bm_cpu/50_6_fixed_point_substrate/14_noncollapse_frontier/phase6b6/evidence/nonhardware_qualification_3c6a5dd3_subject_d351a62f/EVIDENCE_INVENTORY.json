@@ -29,71 +29,141 @@
       "sha256": "5b234027492bc43137c67626c67620ff6df1576ef0e5d71267448e0be5f3050d"
     },
     {
-      "byte_size": 164767,
+      "byte_size": 173246,
       "producing_command_sequence": null,
       "relative_path": "COMMANDS.jsonl",
       "role": "append_only_command_ledger",
-      "sha256": "c1089cb9a545cd2ce8a6aee05a3118e39f32ebce14b065c42d00fbc947a3c700"
+      "sha256": "d1b3b926905dae101aed232d84119f715b5fd8f5cd3d74aefc2eea1bcc889065"
     },
     {
-      "byte_size": 7910,
+      "byte_size": 9057,
       "producing_command_sequence": null,
       "relative_path": "FINAL_BINDINGS.json",
       "role": "structured_evidence_record",
-      "sha256": "df7f44a86a0caacd4e1a5c22e9b36a83429e62dc9997e68640580dd91873dfb3"
+      "sha256": "12149b35a1aaa32dc1798ae39b24f69f971d10e04927b8e9f60ddd43c1ffd20d"
+    },
+    {
+      "byte_size": 60925,
+      "producing_command_sequence": null,
+      "relative_path": "PORTABLE_PACKAGE_EXPORT.json",
+      "role": "structured_evidence_record",
+      "sha256": "906192856114f665015905488239de385db828455217983cf184135341af1f8f"
+    },
+    {
+      "byte_size": 9277,
+      "producing_command_sequence": null,
+      "relative_path": "POST_LEDGER_TRIM_RECONCILIATION.json",
+      "role": "structured_evidence_record",
+      "sha256": "8835a0fb58babb8d95deaaa083f393a10850eba915cae0eb87bc251567a69cbd"
+    },
+    {
+      "byte_size": 1988,
+      "producing_command_sequence": null,
+      "relative_path": "QUALIFICATION_SUMMARY.md",
+      "role": "human_summary",
+      "sha256": "760e94bf4075811933200a8527315081b92e77a946a33b130cd5b49505afdbc2"
+    },
+    {
+      "byte_size": 508,
+      "producing_command_sequence": null,
+      "relative_path": "REMOVED_ARCHIVE_PAYLOADS.json",
+      "role": "structured_evidence_record",
+      "sha256": "d62a2fec1e2076779ed4ecd509737911f321883108d4b49746311f6364ade16b"
+    },
+    {
+      "byte_size": 7895,
+      "producing_command_sequence": null,
+      "relative_path": "REMOVED_DUPLICATE_MUTATION_PACKAGE_TREES.json",
+      "role": "structured_evidence_record",
+      "sha256": "09e70ce3954de2bafdbb9d7a06381ef8bd61b9b8cd560a3328f8c7f7dc2e62de"
+    },
+    {
+      "byte_size": 730,
+      "producing_command_sequence": null,
+      "relative_path": "TARGET_GIT_REMOVAL_RECORD.json",
+      "role": "structured_evidence_record",
+      "sha256": "e3873e14e67b0aad1f0e5005c542679ce2982fbf286e8578f5f94d20206806d1"
+    },
+    {
+      "byte_size": 1980,
+      "producing_command_sequence": null,
+      "relative_path": "TARGET_NEGATIVE_MODE_ONLY_0644_TO_0600.json",
+      "role": "structured_evidence_record",
+      "sha256": "860b3d7cce8e0918e81774833872cb6123a69ac31b483c2f4c4c36c8ea5f4972"
+    },
+    {
+      "byte_size": 647,
+      "producing_command_sequence": null,
+      "relative_path": "TARGET_PROVISIONING_REVERSAL.json",
+      "role": "structured_evidence_record",
+      "sha256": "4eadcdf9e0bd73797e6b86487803a4c7dd5e9d6f83a91b82cb42d763bdf5c945"
+    },
+    {
+      "byte_size": 2918,
+      "producing_command_sequence": null,
+      "relative_path": "TARGET_QUALIFICATION_RESULT.json",
+      "role": "structured_evidence_record",
+      "sha256": "eb276be44682718cef579529265f2fb1384e570d61c84baabb72b0af45b27ac3"
+    },
+    {
+      "byte_size": 444,
+      "producing_command_sequence": null,
+      "relative_path": "TEST_COUNTS.json",
+      "role": "structured_evidence_record",
+      "sha256": "54374edf2a9e384de58acd070e815f7f54a99b00ef0650e3b6efe062d9e8a8c9"
     },
     {
       "byte_size": 0,
-      "producing_command_sequence": 93,
+      "producing_command_sequence": null,
       "relative_path": "local/cleanup/093_cleanup_local_package_temporaries.stderr.txt",
       "role": "local_generation_or_cleanup_log",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "byte_size": 605,
-      "producing_command_sequence": 93,
+      "producing_command_sequence": null,
       "relative_path": "local/cleanup/093_cleanup_local_package_temporaries.stdout.txt",
       "role": "local_generation_or_cleanup_log",
       "sha256": "1631924c6259164513a22e606da71e4b531d05b0d76cea0d34d3264cf43a0242"
     },
     {
       "byte_size": 0,
-      "producing_command_sequence": 91,
+      "producing_command_sequence": null,
       "relative_path": "local/finalization/091_create_final_evidence_role_aliases.stderr.txt",
       "role": "local_generation_or_cleanup_log",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "byte_size": 1078,
-      "producing_command_sequence": 91,
+      "producing_command_sequence": null,
       "relative_path": "local/finalization/091_create_final_evidence_role_aliases.stdout.txt",
       "role": "local_generation_or_cleanup_log",
       "sha256": "96e9b93e2bc66dc9e2726fce3525229dfb46161a55581ba6120a920f376ac316"
     },
     {
       "byte_size": 0,
-      "producing_command_sequence": 94,
+      "producing_command_sequence": null,
       "relative_path": "local/finalization/094_finalize_nonhardware_evidence_records.stderr.txt",
       "role": "local_generation_or_cleanup_log",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "byte_size": 525,
-      "producing_command_sequence": 94,
+      "producing_command_sequence": null,
       "relative_path": "local/finalization/094_finalize_nonhardware_evidence_records.stdout.txt",
       "role": "local_generation_or_cleanup_log",
       "sha256": "48a31664770e173b22a82352675c2834c1934fd04b1973fca646fa2b52101f78"
     },
     {
       "byte_size": 0,
-      "producing_command_sequence": 95,
+      "producing_command_sequence": null,
       "relative_path": "local/finalization/095_remove_raw_archive_payloads_from_evidence.stderr.txt",
       "role": "local_generation_or_cleanup_log",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "byte_size": 508,
-      "producing_command_sequence": 95,
+      "producing_command_sequence": null,
       "relative_path": "local/finalization/095_remove_raw_archive_payloads_from_evidence.stdout.txt",
       "role": "local_generation_or_cleanup_log",
       "sha256": "d62a2fec1e2076779ed4ecd509737911f321883108d4b49746311f6364ade16b"
@@ -456,43 +526,246 @@
       "sha256": "3a3f8775f92b83b4386165122c221e41d892293a22f040691790f74bf9a8e056"
     },
     {
-      "byte_size": 60925,
-      "producing_command_sequence": null,
-      "relative_path": "PORTABLE_PACKAGE_EXPORT.json",
-      "role": "structured_evidence_record",
-      "sha256": "906192856114f665015905488239de385db828455217983cf184135341af1f8f"
+      "byte_size": 0,
+      "producing_command_sequence": 96,
+      "relative_path": "local/reconciliation/096_verify-exact-evidence-branch-and-commit-identities.stderr.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
-      "byte_size": 1988,
-      "producing_command_sequence": null,
-      "relative_path": "QUALIFICATION_SUMMARY.md",
-      "role": "human_summary",
-      "sha256": "760e94bf4075811933200a8527315081b92e77a946a33b130cd5b49505afdbc2"
+      "byte_size": 862,
+      "producing_command_sequence": 96,
+      "relative_path": "local/reconciliation/096_verify-exact-evidence-branch-and-commit-identities.stdout.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "c3664908648c5b44bb85e22e5e6132c9ba590057af6bd304c1e23e2d5a3dd6c7"
     },
     {
-      "byte_size": 508,
-      "producing_command_sequence": null,
-      "relative_path": "REMOVED_ARCHIVE_PAYLOADS.json",
-      "role": "structured_evidence_record",
-      "sha256": "d62a2fec1e2076779ed4ecd509737911f321883108d4b49746311f6364ade16b"
+      "byte_size": 0,
+      "producing_command_sequence": 97,
+      "relative_path": "local/reconciliation/097_capture-git-diff-between-951f3043-and-c9568f9c.stderr.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
-      "byte_size": 7895,
+      "byte_size": 574,
+      "producing_command_sequence": 97,
+      "relative_path": "local/reconciliation/097_capture-git-diff-between-951f3043-and-c9568f9c.stdout.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "c8dd8e20995c628711decc34c9eaea4cca05dabc2deee609e5fabb6dc6460d49"
+    },
+    {
+      "byte_size": 574,
       "producing_command_sequence": null,
-      "relative_path": "REMOVED_DUPLICATE_MUTATION_PACKAGE_TREES.json",
-      "role": "structured_evidence_record",
-      "sha256": "09e70ce3954de2bafdbb9d7a06381ef8bd61b9b8cd560a3328f8c7f7dc2e62de"
+      "relative_path": "local/reconciliation/097_trim_diff_capture.json",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "c8dd8e20995c628711decc34c9eaea4cca05dabc2deee609e5fabb6dc6460d49"
+    },
+    {
+      "byte_size": 301370,
+      "producing_command_sequence": null,
+      "relative_path": "local/reconciliation/097_trim_name_status.diff.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "c221432feae558b9b5c8155af7ed21c76434d6b71e2170f2632ca99d6e55ba2e"
+    },
+    {
+      "byte_size": 51584,
+      "producing_command_sequence": null,
+      "relative_path": "local/reconciliation/097_trim_stat.diff.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "939d4adf962fa17c96244eca6b8334f1c0b43d5302795685156f2e90ec22ac81"
+    },
+    {
+      "byte_size": 13307,
+      "producing_command_sequence": null,
+      "relative_path": "local/reconciliation/098_removed_package_tree_verification.json",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "6633c8030458f747b704df6578537b1d1cbf40dafa1850b781e8e72df5b058e2"
+    },
+    {
+      "byte_size": 0,
+      "producing_command_sequence": 98,
+      "relative_path": "local/reconciliation/098_verify-removed-package-tree-roots-against-removal-record.stderr.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "byte_size": 13307,
+      "producing_command_sequence": 98,
+      "relative_path": "local/reconciliation/098_verify-removed-package-tree-roots-against-removal-record.stdout.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "6633c8030458f747b704df6578537b1d1cbf40dafa1850b781e8e72df5b058e2"
+    },
+    {
+      "byte_size": 1980,
+      "producing_command_sequence": null,
+      "relative_path": "local/reconciliation/099_retained_result_verification.json",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "857683109e14ed365064369ed209bde434f5fee1b0b1e10a0d4722be441f337c"
+    },
+    {
+      "byte_size": 66,
+      "producing_command_sequence": 99,
+      "relative_path": "local/reconciliation/099_verify-retained-target-evidence-unchanged.stderr.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "345e7571c279ad2c3027f4dbbb47abfe3d90ea09a1a8f9649b5ae101ae933e1d"
+    },
+    {
+      "byte_size": 0,
+      "producing_command_sequence": 99,
+      "relative_path": "local/reconciliation/099_verify-retained-target-evidence-unchanged.stdout.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "byte_size": 460,
+      "producing_command_sequence": null,
+      "relative_path": "local/reconciliation/100_current_evidence_path_set.json",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "905c43aa62d9171b219739ccf04c5dd96da129ddeac43f520e12dd24529b4e8a"
+    },
+    {
+      "byte_size": 66,
+      "producing_command_sequence": 100,
+      "relative_path": "local/reconciliation/100_verify-retained-target-evidence-unchanged-corrective.stderr.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "345e7571c279ad2c3027f4dbbb47abfe3d90ea09a1a8f9649b5ae101ae933e1d"
+    },
+    {
+      "byte_size": 0,
+      "producing_command_sequence": 100,
+      "relative_path": "local/reconciliation/100_verify-retained-target-evidence-unchanged-corrective.stdout.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "byte_size": 460,
+      "producing_command_sequence": null,
+      "relative_path": "local/reconciliation/101_preliminary_control_record_regeneration.json",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "7370f946ecec2e8c39a10d836dcfec176820bc7d8a48fefe2fac4c97dbfb4439"
+    },
+    {
+      "byte_size": 0,
+      "producing_command_sequence": 101,
+      "relative_path": "local/reconciliation/101_verify-retained-target-evidence-unchanged-filter-aware.stderr.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "byte_size": 1980,
+      "producing_command_sequence": 101,
+      "relative_path": "local/reconciliation/101_verify-retained-target-evidence-unchanged-filter-aware.stdout.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "857683109e14ed365064369ed209bde434f5fee1b0b1e10a0d4722be441f337c"
+    },
+    {
+      "byte_size": 448,
+      "producing_command_sequence": null,
+      "relative_path": "local/reconciliation/102_inventory_mutation_validation.json",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "24591cf4b9c6592ef089084330950039d34a2257fb189a8aae29c9f032397b5e"
+    },
+    {
+      "byte_size": 0,
+      "producing_command_sequence": 102,
+      "relative_path": "local/reconciliation/102_verify-current-evidence-path-set.stderr.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "byte_size": 460,
+      "producing_command_sequence": 102,
+      "relative_path": "local/reconciliation/102_verify-current-evidence-path-set.stdout.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "905c43aa62d9171b219739ccf04c5dd96da129ddeac43f520e12dd24529b4e8a"
+    },
+    {
+      "byte_size": 562,
+      "producing_command_sequence": null,
+      "relative_path": "local/reconciliation/103_complete_local_evidence_validation.json",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "0dd72a9b69a0640548b77126113e4a17dae7db5cf1cb8aaaa32d722ddec080f5"
+    },
+    {
+      "byte_size": 0,
+      "producing_command_sequence": 103,
+      "relative_path": "local/reconciliation/103_regenerate-reconciled-control-records-preliminary.stderr.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "byte_size": 460,
+      "producing_command_sequence": 103,
+      "relative_path": "local/reconciliation/103_regenerate-reconciled-control-records-preliminary.stdout.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "7370f946ecec2e8c39a10d836dcfec176820bc7d8a48fefe2fac4c97dbfb4439"
+    },
+    {
+      "byte_size": 77,
+      "producing_command_sequence": 104,
+      "relative_path": "local/reconciliation/104_run-inventory-mutation-validation.stderr.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "597f6cddd43f6581aafc92aae9c32e159361f6f7eec73c328818816012a33eb5"
+    },
+    {
+      "byte_size": 0,
+      "producing_command_sequence": 104,
+      "relative_path": "local/reconciliation/104_run-inventory-mutation-validation.stdout.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "byte_size": 0,
+      "producing_command_sequence": 105,
+      "relative_path": "local/reconciliation/105_run-inventory-mutation-validation-prospective-corrective.stderr.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "byte_size": 448,
+      "producing_command_sequence": 105,
+      "relative_path": "local/reconciliation/105_run-inventory-mutation-validation-prospective-corrective.stdout.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "24591cf4b9c6592ef089084330950039d34a2257fb189a8aae29c9f032397b5e"
+    },
+    {
+      "byte_size": 60,
+      "producing_command_sequence": 106,
+      "relative_path": "local/reconciliation/106_run-complete-local-evidence-validation-and-finalize-records.stderr.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "4846fb0c94fd527494ba66566adef871fb0c54becc9b225853f1b073b07be834"
+    },
+    {
+      "byte_size": 0,
+      "producing_command_sequence": 106,
+      "relative_path": "local/reconciliation/106_run-complete-local-evidence-validation-and-finalize-records.stdout.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "byte_size": 0,
+      "producing_command_sequence": 107,
+      "relative_path": "local/reconciliation/107_self-finalize-reconciled-control-records-after-ledger-append.stderr.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "byte_size": 661,
+      "producing_command_sequence": 107,
+      "relative_path": "local/reconciliation/107_self-finalize-reconciled-control-records-after-ledger-append.stdout.txt",
+      "role": "post_ledger_reconciliation_record_or_log",
+      "sha256": "6b0f89dabdbc4e3c98a2035aca5b2ef9a25bd23e00fcb3c37978650eec871412"
     },
     {
       "byte_size": 96,
-      "producing_command_sequence": 92,
+      "producing_command_sequence": null,
       "relative_path": "target/cleanup/092_cleanup_target_temporary_roots_and_verify_absence.stderr.txt",
       "role": "target_cleanup_log",
       "sha256": "f1444bc26193b76a5499e9c22580a036d7a81fdf2f50efc2303f14037cf3e31e"
     },
     {
       "byte_size": 269,
-      "producing_command_sequence": 92,
+      "producing_command_sequence": null,
       "relative_path": "target/cleanup/092_cleanup_target_temporary_roots_and_verify_absence.stdout.txt",
       "role": "target_cleanup_log",
       "sha256": "c57534a48c933a7f8849f7fa6bf50ee594dcca0cadf88f0efe37398fe7ae0488"
@@ -573,6 +846,13 @@
       "relative_path": "target/final_0c5f1cbf_root/logs/extracted_permission_inventory.json",
       "role": "copied_final_target_artifact",
       "sha256": "3b698065c1e1de801526b75e44c7c480d6bd280afea5413227382ff68321d6ec"
+    },
+    {
+      "byte_size": 1980,
+      "producing_command_sequence": null,
+      "relative_path": "target/final_0c5f1cbf_root/results/TARGET_NEGATIVE_MODE_ONLY_0644_TO_0600.json",
+      "role": "copied_final_target_artifact",
+      "sha256": "860b3d7cce8e0918e81774833872cb6123a69ac31b483c2f4c4c36c8ea5f4972"
     },
     {
       "byte_size": 1334,
@@ -1049,13 +1329,6 @@
       "relative_path": "target/final_0c5f1cbf_root/results/target-result-required-field-checks.json",
       "role": "copied_final_target_artifact",
       "sha256": "c48b4e0322f1fa144bd89c5651de6813fdacafcea17665c2089ce83c84f17272"
-    },
-    {
-      "byte_size": 1980,
-      "producing_command_sequence": null,
-      "relative_path": "target/final_0c5f1cbf_root/results/TARGET_NEGATIVE_MODE_ONLY_0644_TO_0600.json",
-      "role": "copied_final_target_artifact",
-      "sha256": "860b3d7cce8e0918e81774833872cb6123a69ac31b483c2f4c4c36c8ea5f4972"
     },
     {
       "byte_size": 37,
@@ -1933,41 +2206,6 @@
       "sha256": "f83163b0a4aa68cd28b9d85408b8be60d424615bcfeb51d046b187ba1fdc778d"
     },
     {
-      "byte_size": 730,
-      "producing_command_sequence": null,
-      "relative_path": "TARGET_GIT_REMOVAL_RECORD.json",
-      "role": "structured_evidence_record",
-      "sha256": "e3873e14e67b0aad1f0e5005c542679ce2982fbf286e8578f5f94d20206806d1"
-    },
-    {
-      "byte_size": 1980,
-      "producing_command_sequence": null,
-      "relative_path": "TARGET_NEGATIVE_MODE_ONLY_0644_TO_0600.json",
-      "role": "structured_evidence_record",
-      "sha256": "860b3d7cce8e0918e81774833872cb6123a69ac31b483c2f4c4c36c8ea5f4972"
-    },
-    {
-      "byte_size": 647,
-      "producing_command_sequence": null,
-      "relative_path": "TARGET_PROVISIONING_REVERSAL.json",
-      "role": "structured_evidence_record",
-      "sha256": "4eadcdf9e0bd73797e6b86487803a4c7dd5e9d6f83a91b82cb42d763bdf5c945"
-    },
-    {
-      "byte_size": 2918,
-      "producing_command_sequence": null,
-      "relative_path": "TARGET_QUALIFICATION_RESULT.json",
-      "role": "structured_evidence_record",
-      "sha256": "eb276be44682718cef579529265f2fb1384e570d61c84baabb72b0af45b27ac3"
-    },
-    {
-      "byte_size": 444,
-      "producing_command_sequence": null,
-      "relative_path": "TEST_COUNTS.json",
-      "role": "structured_evidence_record",
-      "sha256": "54374edf2a9e384de58acd070e815f7f54a99b00ef0650e3b6efe062d9e8a8c9"
-    },
-    {
       "byte_size": 0,
       "producing_command_sequence": 82,
       "relative_path": "transfer/082_local_create_detached_archive_digest.stderr.txt",
@@ -2011,28 +2249,28 @@
     },
     {
       "byte_size": 0,
-      "producing_command_sequence": 89,
+      "producing_command_sequence": null,
       "relative_path": "transfer/089_tarstream_final_target_evidence_back.stderr.txt",
       "role": "transfer_log_or_digest",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "byte_size": 0,
-      "producing_command_sequence": 89,
+      "producing_command_sequence": null,
       "relative_path": "transfer/089_tarstream_final_target_evidence_back.stdout.txt",
       "role": "transfer_log_or_digest",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "byte_size": 0,
-      "producing_command_sequence": 90,
+      "producing_command_sequence": null,
       "relative_path": "transfer/090_shortstage_final_target_evidence_back.stderr.txt",
       "role": "transfer_log_or_digest",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "byte_size": 423,
-      "producing_command_sequence": 90,
+      "producing_command_sequence": null,
       "relative_path": "transfer/090_shortstage_final_target_evidence_back.stdout.txt",
       "role": "transfer_log_or_digest",
       "sha256": "3ac664aec8e5db7d54868a0d9bbc8ab48493d6bd48537eaabb064bf7b357f7e8"
@@ -2300,10 +2538,11 @@
   "excluded_recursive_files": [
     "EVIDENCE_INVENTORY.json",
     "EVIDENCE_INVENTORY.sha256",
-    "EVIDENCE_INVENTORY_VERIFICATION.txt"
+    "EVIDENCE_INVENTORY_VERIFICATION.txt",
+    "FINAL_EVIDENCE_SEAL.json"
   ],
-  "file_count": 328,
-  "generated_utc": "2026-07-01T07:33:19Z",
+  "file_count": 362,
+  "generated_utc": "2026-07-01T10:43:40Z",
   "root": "D:/CCC 2.0/AI/agent-governance-system/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/nonhardware_qualification_3c6a5dd3_subject_d351a62f",
   "schema_id": "CAT_CAS_PHASE6B6_NONHARDWARE_EVIDENCE_INVENTORY_V1"
 }

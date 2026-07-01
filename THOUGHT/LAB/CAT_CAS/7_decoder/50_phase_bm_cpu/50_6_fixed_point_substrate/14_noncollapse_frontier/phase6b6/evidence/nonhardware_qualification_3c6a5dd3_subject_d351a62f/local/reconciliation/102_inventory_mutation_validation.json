@@ -1,0 +1,12 @@
+{
+  "changed_digest_detected": true,
+  "changed_evidence_byte_detected": true,
+  "changed_path_detected": true,
+  "changed_size_detected": true,
+  "extra_evidence_file_detected": true,
+  "file_count": 353,
+  "inventory_sha256": "663faa1f2809356e47abea9c73fcc8ee2f02d647b51ffb540caf968267c67ff7",
+  "missing_evidence_file_detected": true,
+  "schema_id": "CAT_CAS_PHASE6B6_EVIDENCE_INVENTORY_MUTATION_VALIDATION_V1",
+  "status": "PASS"
+}

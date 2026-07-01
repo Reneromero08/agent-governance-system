@@ -1,0 +1,15 @@
+exact_state_verified=true
+head=c9568f9cbd9a57eaff8fb2ef7282081ea3aeb246
+origin_branch=c9568f9cbd9a57eaff8fb2ef7282081ea3aeb246
+origin_main=0c5f1cbfb30ce9d6f8242674a1fc86f44372fa56
+git_status_begin
+## codex/phase6b6-nonhardware-evidence...origin/codex/phase6b6-nonhardware-evidence
+git_status_end
+git_log_begin
+c9568f9c (HEAD -> codex/phase6b6-nonhardware-evidence, origin/codex/phase6b6-nonhardware-evidence) phase6b6: trim duplicate target package evidence
+951f3043 phase6b6: collect portable non-hardware target evidence
+0c5f1cbf (origin/main, main) Merge pull request #32 from Reneromero08/codex/phase6b6-canonical-package-modes
+c2e3e353 phase6b6: enforce canonical portable package modes
+3ebd3ac0 Merge pull request #31 from Reneromero08/codex/phase6b6-portable-target-qualification
+ca5eacd0 phase6b6: seal portable result custody
+git_log_end

@@ -1,0 +1,51 @@
+{
+  "initial_evidence_commit": "951f30435ce27a96cbf63749b92c39c8488606d3",
+  "retained_target_result_changed": false,
+  "schema_id": "CAT_CAS_PHASE6B6_RETAINED_RESULT_VERIFICATION_V1",
+  "status": "PASS",
+  "trim_commit": "c9568f9cbd9a57eaff8fb2ef7282081ea3aeb246",
+  "verified_paths": [
+    {
+      "byte_identical_initial_to_trim": true,
+      "byte_size": 2918,
+      "relative_path": "TARGET_QUALIFICATION_RESULT.json",
+      "sha256": "eb276be44682718cef579529265f2fb1384e570d61c84baabb72b0af45b27ac3"
+    },
+    {
+      "byte_identical_initial_to_trim": true,
+      "byte_size": 1980,
+      "relative_path": "TARGET_NEGATIVE_MODE_ONLY_0644_TO_0600.json",
+      "sha256": "860b3d7cce8e0918e81774833872cb6123a69ac31b483c2f4c4c36c8ea5f4972"
+    },
+    {
+      "byte_identical_initial_to_trim": true,
+      "byte_size": 432,
+      "relative_path": "TEST_COUNTS.json",
+      "sha256": "0805328933fc87475c12837da87d7797f0256b1c54e65bc5c8fdb12eb6db3497"
+    },
+    {
+      "byte_identical_initial_to_trim": true,
+      "byte_size": 1941,
+      "relative_path": "QUALIFICATION_SUMMARY.md",
+      "sha256": "14dc2405ebe6318601c50f489beca5947fd3fcd31b3bf83dfeb80bbc152b1af2"
+    },
+    {
+      "byte_identical_initial_to_trim": true,
+      "byte_size": 2918,
+      "relative_path": "target/qualification/portable-target-result.json",
+      "sha256": "eb276be44682718cef579529265f2fb1384e570d61c84baabb72b0af45b27ac3"
+    },
+    {
+      "byte_identical_initial_to_trim": true,
+      "byte_size": 1980,
+      "relative_path": "target/permission_tests/TARGET_NEGATIVE_MODE_ONLY_0644_TO_0600.json",
+      "sha256": "860b3d7cce8e0918e81774833872cb6123a69ac31b483c2f4c4c36c8ea5f4972"
+    },
+    {
+      "byte_identical_initial_to_trim": true,
+      "byte_size": 27649,
+      "relative_path": "target/negative_tests/negative_test_summary.json",
+      "sha256": "fbff751382483d1e01be5b4dc3796afc1e742441deac6458f63aa93c6316b953"
+    }
+  ]
+}
