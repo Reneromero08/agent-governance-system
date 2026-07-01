@@ -50,6 +50,12 @@ SOURCE_REVIEW = 4596915321
 SNAPSHOT_SUBJECT_KIND = "PHASE6B6_SOFTWARE_IMPLEMENTATION_ONLY"
 PRE_ACQUISITION_REQUIREMENT = "CAT_CAS_PHASE6B6_PRE_ACQUISITION_V2_EQUIVALENCE_REQUIREMENT_V1"
 PACKAGE_ROOT_DIR = "phase6b6_portable_target_package"
+GENERATED_CONTROL_FILES = (
+    "PORTABLE_PACKAGE_MANIFEST.json",
+    "PORTABLE_PACKAGE_MANIFEST.sha256",
+    "TRUSTED_SNAPSHOT_BINDING.json",
+    "QUALIFICATION_CONTRACT.json",
+)
 
 PHASE6B6_RELATIVE_ROOT = (
     "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/"
@@ -259,6 +265,55 @@ def _reject_bad_path(path: str) -> None:
     parts = path.split("/")
     if any(part in ("", ".", "..") for part in parts):
         raise PortableQualificationError(f"unsafe path rejected: {path!r}")
+
+
+def canonical_package_permissions(git_mode: str) -> int:
+    if git_mode == "100644":
+        return 0o644
+    if git_mode == "100755":
+        return 0o755
+    raise PortableQualificationError(f"unsupported Git source mode for portable package: {git_mode}")
+
+
+def _format_permission(mode: int) -> str:
+    return f"{mode:04o}"
+
+
+def _posix_permissions_supported() -> bool:
+    return os.name != "nt"
+
+
+def _path_label(rel: str) -> str:
+    return rel if rel else PACKAGE_ROOT_DIR
+
+
+def _require_regular_file_with_permission(path: Path, rel: str, expected: int, *, git_mode: str | None = None) -> None:
+    st = path.lstat()
+    if not stat.S_ISREG(st.st_mode):
+        raise PortableQualificationError(f"regular file required: {_path_label(rel)}")
+    if not _posix_permissions_supported():
+        return
+    observed = stat.S_IMODE(st.st_mode)
+    if observed != expected:
+        git_detail = f" git_source_mode={git_mode}" if git_mode is not None else ""
+        raise PortableQualificationError(
+            f"package file permission mismatch: path={_path_label(rel)}{git_detail} "
+            f"expected={_format_permission(expected)} observed={_format_permission(observed)}"
+        )
+
+
+def _require_directory_with_permission(path: Path, rel: str, expected: int = 0o755) -> None:
+    st = path.lstat()
+    if not stat.S_ISDIR(st.st_mode):
+        raise PortableQualificationError(f"directory required: {_path_label(rel)}")
+    if not _posix_permissions_supported():
+        return
+    observed = stat.S_IMODE(st.st_mode)
+    if observed != expected:
+        raise PortableQualificationError(
+            f"package directory permission mismatch: path={_path_label(rel)} "
+            f"expected={_format_permission(expected)} observed={_format_permission(observed)}"
+        )
 
 
 def _entry_mode(path: Path) -> str:
@@ -623,12 +678,7 @@ def _manifest_files(manifest: dict[str, Any]) -> dict[str, dict[str, Any]]:
 
 def verify_copied_files(root: Path, manifest: dict[str, Any]) -> None:
     records = _manifest_files(manifest)
-    expected_files = set(records) | {
-        "PORTABLE_PACKAGE_MANIFEST.json",
-        "PORTABLE_PACKAGE_MANIFEST.sha256",
-        "TRUSTED_SNAPSHOT_BINDING.json",
-        "QUALIFICATION_CONTRACT.json",
-    }
+    expected_files = set(records) | set(GENERATED_CONTROL_FILES)
     expected_dirs = _expected_directories(expected_files)
     entries = _scan_package_entries(root)
     actual_files = entries["regular_files"]
@@ -645,8 +695,13 @@ def verify_copied_files(root: Path, manifest: dict[str, Any]) -> None:
         raise PortableQualificationError(
             f"portable package directory set mismatch missing={sorted(expected_dirs - actual_dirs)} extra={sorted(actual_dirs - expected_dirs)}"
         )
+    for rel in expected_dirs:
+        _require_directory_with_permission(root / rel if rel else root, rel)
+    for rel in GENERATED_CONTROL_FILES:
+        _require_regular_file_with_permission(root / rel, rel, 0o644)
     for rel, record in records.items():
         path = root / rel
+        _require_regular_file_with_permission(path, rel, canonical_package_permissions(record["mode"]), git_mode=record["mode"])
         data = path.read_bytes()
         if len(data) != record["size"]:
             raise PortableQualificationError(f"copied file size mismatch: {rel}")

@@ -4,6 +4,15 @@
 
 ## 2026-06-30: Phase 6B.6 non-hardware qualification harness
 
+- Phase 6B.6: repair the portable package permission boundary. The portable
+  target verifier previously interpreted Git mode `100644` only as a
+  non-executable-bit class, allowing permission-only mutations such as `0644`
+  to `0600`. The repair preserves Git provenance mode while separately
+  enforcing canonical package permissions: `100644 -> 0644`,
+  `100755 -> 0755`, directories `-> 0755`, and generated control files
+  `-> 0644`. Evidence collection remains blocked pending merge and a fresh
+  target rerun; this entry does not claim positive target qualification
+  completion.
 - Phase 6B.6: close portable target qualification review `4600829669`
   by binding final-result validation to trusted manifest, contract, snapshot,
   strict, ASan, UBSan, runtime, and sender contexts; recursively closing

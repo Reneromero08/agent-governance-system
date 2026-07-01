@@ -11,7 +11,7 @@ import tarfile
 import tempfile
 import time
 import unittest
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from unittest import mock
 
 
@@ -51,7 +51,7 @@ class PortableTargetQualificationTests(unittest.TestCase):
         names: list[str] = []
         for member in archive.getmembers():
             names.append(member.name)
-            parts = Path(member.name).parts
+            parts = PurePosixPath(member.name).parts
             if member.name.startswith("/") or ".." in parts:
                 raise AssertionError(f"unsafe archive member: {member.name}")
             if member.issym() or member.islnk() or member.isdev() or member.isfifo():
@@ -68,6 +68,90 @@ class PortableTargetQualificationTests(unittest.TestCase):
         target = self.temp / f"pkg-{len(list(self.temp.glob('pkg-*')))}"
         shutil.copytree(self.package_root, target, copy_function=shutil.copy2)
         return target
+
+    def _require_posix_permissions(self) -> None:
+        if os.name == "nt":
+            self.skipTest("POSIX permission mutations cannot be represented exactly on this filesystem")
+
+    def _chmod_exact_or_skip(self, path: Path, mode: int) -> None:
+        self._require_posix_permissions()
+        path.chmod(mode)
+        observed = stat.S_IMODE(path.lstat().st_mode)
+        if observed != mode:
+            self.skipTest(
+                f"POSIX permission mutation unavailable: requested {mode:04o}, observed {observed:04o}"
+            )
+
+    def _chmod_tree_canonical(self, root: Path) -> None:
+        self._require_posix_permissions()
+        for path in [root, *sorted(root.rglob("*"))]:
+            if path.is_dir():
+                self._chmod_exact_or_skip(path, 0o755)
+            elif path.is_file():
+                self._chmod_exact_or_skip(path, 0o644)
+
+    def _manifest_100644_file(self, root: Path) -> tuple[dict[str, object], Path]:
+        manifest = portable.load_json(root / "PORTABLE_PACKAGE_MANIFEST.json")
+        record = next(item for item in manifest["copied_files"] if item["mode"] == "100644")
+        return record, root / str(record["path"])
+
+    def _assert_permission_mutation_rejected(self, rel: str, mode: int) -> None:
+        root = self._copy_package()
+        target = root / rel
+        before = hashlib.sha256(target.read_bytes()).hexdigest()
+        self._chmod_exact_or_skip(target, mode)
+        after = hashlib.sha256(target.read_bytes()).hexdigest()
+        self.assertEqual(before, after)
+        manifest = portable.load_json(root / "PORTABLE_PACKAGE_MANIFEST.json")
+        with self.assertRaises(portable.PortableQualificationError):
+            portable.verify_copied_files(root, manifest)
+
+    def _minimal_manifest(self, path: str, data: bytes, git_mode: str) -> dict[str, object]:
+        return {
+            "copied_files": [
+                {
+                    "path": path,
+                    "source_path": path,
+                    "source_commit": "0" * 40,
+                    "source_tree": "1" * 40,
+                    "source_blob_sha1": portable.blob_sha1(data),
+                    "content_sha256": hashlib.sha256(data).hexdigest(),
+                    "mode": git_mode,
+                    "size": len(data),
+                    "role": "portable_target_runner",
+                }
+            ]
+        }
+
+    def _write_minimal_package(self, root: Path, *, path: str = "tool.sh", git_mode: str = "100755") -> dict[str, object]:
+        root.mkdir(parents=True)
+        self._chmod_exact_or_skip(root, 0o755)
+        data = b"#!/bin/sh\nexit 0\n"
+        target = root / path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        self._chmod_exact_or_skip(target.parent, 0o755)
+        target.write_bytes(data)
+        self._chmod_exact_or_skip(target, portable.canonical_package_permissions(git_mode))
+        for control in portable.GENERATED_CONTROL_FILES:
+            control_path = root / control
+            control_path.write_text("{}\n", encoding="utf-8")
+            self._chmod_exact_or_skip(control_path, 0o644)
+        return self._minimal_manifest(path, data, git_mode)
+
+    def _write_exporter_tree(self, root: Path, *, path: str = "file.txt") -> dict[str, object]:
+        root.mkdir(parents=True)
+        self._chmod_exact_or_skip(root, 0o755)
+        data = b"content\n"
+        target = root / path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        self._chmod_exact_or_skip(target.parent, 0o755)
+        target.write_bytes(data)
+        self._chmod_exact_or_skip(target, 0o644)
+        for control in portable_package.GENERATED_CONTROL_FILES:
+            control_path = root / control
+            control_path.write_text("{}\n", encoding="utf-8")
+            self._chmod_exact_or_skip(control_path, 0o644)
+        return self._minimal_manifest(path, data, "100644")
 
     def _rewrite_manifest(self, root: Path, manifest: dict[str, object]) -> None:
         manifest_path = root / "PORTABLE_PACKAGE_MANIFEST.json"
@@ -491,6 +575,103 @@ class PortableTargetQualificationTests(unittest.TestCase):
         target_record["mode"] = "100755"
         with self.assertRaises(portable.PortableQualificationError):
             portable.verify_copied_files(root, manifest)
+
+    def test_100644_permission_only_mutations_fail_with_unchanged_bytes(self) -> None:
+        root = self._copy_package()
+        _, target = self._manifest_100644_file(root)
+        rel = target.relative_to(root).as_posix()
+        for mode in (0o600, 0o640, 0o664, 0o666, 0o755, 0o777):
+            with self.subTest(mode=f"{mode:04o}"):
+                self._assert_permission_mutation_rejected(rel, mode)
+
+    def test_generated_control_file_permission_mutations_fail(self) -> None:
+        cases = (
+            ("PORTABLE_PACKAGE_MANIFEST.json", 0o600),
+            ("QUALIFICATION_CONTRACT.json", 0o664),
+        )
+        for rel, mode in cases:
+            with self.subTest(path=rel, mode=f"{mode:04o}"):
+                self._assert_permission_mutation_rejected(rel, mode)
+
+    def test_directory_permission_mutations_fail(self) -> None:
+        cases = (
+            ("", 0o700),
+            ("snapshot", 0o777),
+            (f"snapshot/{portable.PHASE6B6_RELATIVE_ROOT}/contracts", 0o750),
+        )
+        for rel, mode in cases:
+            with self.subTest(path=rel or "package-root", mode=f"{mode:04o}"):
+                root = self._copy_package()
+                target = root / rel if rel else root
+                self._chmod_exact_or_skip(target, mode)
+                manifest = portable.load_json(root / "PORTABLE_PACKAGE_MANIFEST.json")
+                with self.assertRaises(portable.PortableQualificationError):
+                    portable.verify_copied_files(root, manifest)
+
+    def test_special_permission_bits_fail(self) -> None:
+        root = self._copy_package()
+        _, file_target = self._manifest_100644_file(root)
+        file_rel = file_target.relative_to(root).as_posix()
+        cases = (
+            (file_rel, 0o4644),
+            ("snapshot", 0o2755),
+            ("snapshot", 0o1755),
+        )
+        for rel, mode in cases:
+            with self.subTest(path=rel, mode=f"{mode:04o}"):
+                copied = self._copy_package()
+                target = copied / rel
+                self._chmod_exact_or_skip(target, mode)
+                manifest = portable.load_json(copied / "PORTABLE_PACKAGE_MANIFEST.json")
+                with self.assertRaises(portable.PortableQualificationError):
+                    portable.verify_copied_files(copied, manifest)
+
+    def test_synthetic_100755_permission_policy_and_tar_mode(self) -> None:
+        root = self.temp / "synthetic-100755"
+        manifest = self._write_minimal_package(root, git_mode="100755")
+        portable.verify_copied_files(root, manifest)
+        for mode in (0o644, 0o700, 0o777):
+            with self.subTest(mode=f"{mode:04o}"):
+                copied = self.temp / f"synthetic-100755-{mode:o}"
+                shutil.copytree(root, copied, copy_function=shutil.copy2)
+                self._chmod_exact_or_skip(copied / "tool.sh", mode)
+                with self.assertRaises(portable.PortableQualificationError):
+                    portable.verify_copied_files(copied, manifest)
+        archive_path = self.temp / "synthetic-100755.tar"
+        portable_package._write_deterministic_tar(root, archive_path, manifest)
+        with tarfile.open(archive_path, "r") as archive:
+            member = archive.getmember(f"{root.name}/tool.sh")
+            self.assertEqual(member.mode, 0o755)
+
+    def test_tar_member_modes_match_canonical_package_policy(self) -> None:
+        manifest = portable.load_json(self.package_root / "PORTABLE_PACKAGE_MANIFEST.json")
+        expected = {item["path"]: portable.canonical_package_permissions(item["mode"]) for item in manifest["copied_files"]}
+        for rel in portable.GENERATED_CONTROL_FILES:
+            expected[rel] = 0o644
+        with tarfile.open(self.left, "r") as archive:
+            for member in archive.getmembers():
+                rel = PurePosixPath(member.name).relative_to(PACKAGE_ROOT_DIR).as_posix() if member.name != PACKAGE_ROOT_DIR else ""
+                if member.isdir():
+                    self.assertEqual(member.mode, 0o755, member.name)
+                else:
+                    self.assertEqual(member.mode, expected[rel], member.name)
+
+    def test_deterministic_tar_writer_rejects_bad_staging_modes(self) -> None:
+        cases = (
+            ("0600_regular_file", "file.txt", 0o600),
+            ("0777_regular_file", "file.txt", 0o777),
+            ("setuid_file", "file.txt", 0o4644),
+            ("0700_directory", "nested", 0o700),
+            ("0777_directory", "nested", 0o777),
+            ("setgid_directory", "nested", 0o2755),
+        )
+        for name, rel, mode in cases:
+            with self.subTest(name=name):
+                root = self.temp / f"bad-staging-{name}"
+                manifest = self._write_exporter_tree(root, path="nested/file.txt" if rel == "nested" else "file.txt")
+                self._chmod_exact_or_skip(root / rel, mode)
+                with self.assertRaises(portable_package.PortablePackageError):
+                    portable_package._write_deterministic_tar(root, self.temp / f"{name}.tar", manifest)
 
     def test_symlink_fails(self) -> None:
         root = self._copy_package()
