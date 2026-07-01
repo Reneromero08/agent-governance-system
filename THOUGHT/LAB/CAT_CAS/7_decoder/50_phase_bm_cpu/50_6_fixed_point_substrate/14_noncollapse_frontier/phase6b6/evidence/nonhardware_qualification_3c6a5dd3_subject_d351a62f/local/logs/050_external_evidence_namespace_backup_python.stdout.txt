@@ -1,0 +1,7 @@
+{
+  "backup_root": "D:\\CCC 2.0\\AI\\phase6b6_evidence_backup_ledgered_20260630T153651Z",
+  "copied_namespace": "D:\\CCC 2.0\\AI\\phase6b6_evidence_backup_ledgered_20260630T153651Z\\nonhardware_qualification_3c6a5dd3_subject_d351a62f",
+  "file_count": 107,
+  "inventory": "D:\\CCC 2.0\\AI\\phase6b6_evidence_backup_ledgered_20260630T153651Z\\backup_inventory.json",
+  "inventory_sha256": "d7250414423fb697f6421cac548ae12343e4ed6cb135f33e8cefa0287838f3b0"
+}

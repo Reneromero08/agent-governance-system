@@ -1,0 +1,5 @@
+bash: line 1: git: command not found
+bash: line 1: cd: checkout: No such file or directory
+bash: line 1: git: command not found
+bash: line 1: git: command not found
+bash: line 1: git: command not found

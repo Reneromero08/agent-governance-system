@@ -1,0 +1,1 @@
+package directory permission mismatch: path=phase6b6_portable_target_package expected=0755 observed=0700

@@ -1,0 +1,396 @@
+{
+  "archive_sha256": "affbc0b3e9725de62aa946774e3e8830399f9af12414713b1bfbc68547765ca4",
+  "case_collisions": [],
+  "directory_count": 16,
+  "file_count": 39,
+  "member_count": 55,
+  "members": [
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "path": "phase6b6_portable_target_package",
+      "size": 0,
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/PORTABLE_PACKAGE_MANIFEST.json",
+      "size": 27248,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/PORTABLE_PACKAGE_MANIFEST.sha256",
+      "size": 97,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/QUALIFICATION_CONTRACT.json",
+      "size": 2815,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/TRUSTED_SNAPSHOT_BINDING.json",
+      "size": 12755,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/capture_quality_contract.h",
+      "size": 2338,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/captured_file.h",
+      "size": 931,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/combined_pdn_hardware.h",
+      "size": 1851,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/emit_v2_reference_table.c",
+      "size": 2830,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/portable_target_qualification.py",
+      "size": 63805,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "path": "phase6b6_portable_target_package/snapshot",
+      "size": 0,
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT",
+      "size": 0,
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB",
+      "size": 0,
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS",
+      "size": 0,
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder",
+      "size": 0,
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu",
+      "size": 0,
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate",
+      "size": 0,
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier",
+      "size": 0,
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2",
+      "size": 0,
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c",
+      "size": 49171,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6",
+      "size": 0,
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_ENTRY_PACKAGE.md",
+      "size": 21628,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md",
+      "size": 5612,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json",
+      "size": 1809,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/__init__.py",
+      "size": 41,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis",
+      "size": 0,
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/__init__.py",
+      "size": 63,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/adjudication.py",
+      "size": 2748,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/metrics.py",
+      "size": 6889,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/observations.py",
+      "size": 1242,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/operators.py",
+      "size": 8115,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/pipeline.py",
+      "size": 55386,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/state.py",
+      "size": 6803,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/synthetic.py",
+      "size": 3231,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts",
+      "size": 0,
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/__init__.py",
+      "size": 59,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/contract.py",
+      "size": 7266,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/schedule.py",
+      "size": 12914,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/v2_interface.py",
+      "size": 7604,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime",
+      "size": 0,
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/__init__.py",
+      "size": 40,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/explicit_slot_runtime.py",
+      "size": 6631,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/state_machine.py",
+      "size": 4462,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas",
+      "size": 0,
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/adjudication_result.schema.json",
+      "size": 1144,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/analysis_choice.schema.json",
+      "size": 3491,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/measured_state.schema.json",
+      "size": 696,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/runtime_custody.schema.json",
+      "size": 12255,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/schedule.schema.json",
+      "size": 5621,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/scientific_contract.schema.json",
+      "size": 9125,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/validate_objects.py",
+      "size": 478,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests",
+      "size": 0,
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_analysis_partition.py",
+      "size": 33874,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_runtime_authority.py",
+      "size": 4163,
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "path": "phase6b6_portable_target_package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_schedule_contract.py",
+      "size": 12508,
+      "type": "file"
+    }
+  ],
+  "problems": [],
+  "safe_to_extract": true
+}

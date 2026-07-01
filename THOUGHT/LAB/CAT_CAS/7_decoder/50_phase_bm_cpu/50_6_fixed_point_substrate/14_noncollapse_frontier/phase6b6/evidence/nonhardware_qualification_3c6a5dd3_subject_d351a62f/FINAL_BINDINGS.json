@@ -1,0 +1,176 @@
+{
+  "authority_state": {
+    "authorization_artifact_created": false,
+    "calibration_authorized": false,
+    "evidence_package_created": true,
+    "hardware_ran": false,
+    "implementation_authorized": true,
+    "non_hardware_target_qualification_authorized": true,
+    "phase6b6_entered": true,
+    "phase6b6_entry_approved": true,
+    "qualification_evidence_collected": true,
+    "restoration_authorized": false,
+    "scientific_acquisition_authorized": false,
+    "small_wall_authorized": false,
+    "software_qualification_authorized": true,
+    "target_coupling_authorized": false
+  },
+  "cleanup": {
+    "final_copyback_file_count": "658",
+    "final_copyback_tar_archive_copied": "false",
+    "local_package_temporaries": [
+      {
+        "existed_before": false,
+        "exists_after": false,
+        "path": "D:\\phase6b6_portable_export_0c5f1cbf_20260701T064748Z"
+      },
+      {
+        "existed_before": true,
+        "exists_after": false,
+        "path": "D:\\phase6b6_portable_export_0c5f1cbf_20260701T064845Z"
+      },
+      {
+        "existed_before": true,
+        "exists_after": false,
+        "path": "D:\\phase6b6_portable_export_0c5f1cbf_20260701T064950Z"
+      },
+      {
+        "existed_before": true,
+        "exists_after": false,
+        "path": "D:\\p6b6_final_copy_short"
+      }
+    ],
+    "new_target_root_after": "absent",
+    "new_target_root_before": "present",
+    "old_target_root_after": "absent",
+    "old_target_root_before": "present"
+  },
+  "digests": {
+    "command_ledger_max_sequence": 95,
+    "command_ledger_sha256": "c1089cb9a545cd2ce8a6aee05a3118e39f32ebce14b065c42d00fbc947a3c700",
+    "mandatory_negative_file_sha256": "860b3d7cce8e0918e81774833872cb6123a69ac31b483c2f4c4c36c8ea5f4972",
+    "target_final_result_digest": "c2d1bf3c78e2a9318f51e06d27ac39a49fe7a49e3cd49c0c8850cd6c85a07f7f",
+    "target_identity_sha256": "f83163b0a4aa68cd28b9d85408b8be60d424615bcfeb51d046b187ba1fdc778d",
+    "target_result_file_sha256": "eb276be44682718cef579529265f2fb1384e570d61c84baabb72b0af45b27ac3"
+  },
+  "frozen_identities": {
+    "asan_raw_stdout_sha256": "56a26105b2b6969a05addbaafaa8db672d0d05a50158e1d145ed2903fec889c2",
+    "asan_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "expected_inventory_sha256": "e47dea4c3467835a425d9d553803da48f672a8799970db4fc9b83e98596f50d8",
+    "mock_custody_digest": "4c0a58772fd25fe77759d6d09089ad532a09b3a5adcdce01dc099b6b7b00dba1",
+    "observed_inventory_sha256": "e47dea4c3467835a425d9d553803da48f672a8799970db4fc9b83e98596f50d8",
+    "phase6b6_subtree_inventory_sha256": "24789f0df9afa2d9f6a243a9050ff8f265cf22ffb42ab33bbe2f67521dbf44b5",
+    "qualification_contract_sha256": "986d1eb27e6e715da0ed8765f58566b0608e464b94dbd0d58ab3d130d80fd0d2",
+    "schedule_digest": "c632d59934c2610541e279cac3a48202f2c0a79bb734e995f2cc4f28d19e87d3",
+    "scoped_tree": "408ee35257417898a992510b0f260602117a15af",
+    "snapshot_subject_commit": "d351a62f4f211589d57359d872734757b6e280d9",
+    "snapshot_subject_tree": "1a927b20cb2d712a7220a823621c8fc83cbc984d",
+    "strict_raw_stdout_sha256": "56a26105b2b6969a05addbaafaa8db672d0d05a50158e1d145ed2903fec889c2",
+    "strict_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ubsan_raw_stdout_sha256": "56a26105b2b6969a05addbaafaa8db672d0d05a50158e1d145ed2903fec889c2",
+    "ubsan_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "v2_source_sha256": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976"
+  },
+  "generated_utc": "2026-07-01T07:17:55Z",
+  "mandatory_mode_negative": {
+    "base_permission": "0644",
+    "base_sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140",
+    "mutated_permission": "0600",
+    "mutated_sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140",
+    "negative_exit_code": 2,
+    "rejection_message": "package file permission mismatch: path=capture_quality_contract.h git_source_mode=100644 expected=0644 observed=0600\n",
+    "result_sha256": "860b3d7cce8e0918e81774833872cb6123a69ac31b483c2f4c4c36c8ea5f4972",
+    "status": "PASS"
+  },
+  "negative_tests": {
+    "all_forbidden_options_rejected": true,
+    "all_mutations_rejected": true,
+    "forbidden_option_count": 9,
+    "forbidden_options": [
+      "--hardware",
+      "--hardware=true",
+      "--acquire",
+      "--acquire=yes",
+      "--calibrate",
+      "--calibrate=1",
+      "--run-campaign",
+      "--run-campaign=true",
+      "--unknown"
+    ],
+    "mutation_count": 15,
+    "other_negative_names": [
+      "extra_empty_directory",
+      "extra_regular_file",
+      "missing_regular_file",
+      "changed_copied_byte",
+      "symlink"
+    ],
+    "permission_negative_names": [
+      "mode_only_0644_to_0600",
+      "manifest_file_0644_to_0664",
+      "manifest_file_0644_to_0755",
+      "generated_control_0644_to_0600",
+      "package_root_0755_to_0700",
+      "snapshot_directory_0755_to_0777",
+      "nested_directory_0755_to_0750",
+      "setuid_file",
+      "setgid_directory",
+      "sticky_directory"
+    ]
+  },
+  "next_boundary": "independent evidence review",
+  "physical_acquisition": "NOT_AUTHORIZED_NOT_RUN",
+  "portable_package": {
+    "archive_byte_size": 481280,
+    "archive_sha256": "affbc0b3e9725de62aa946774e3e8830399f9af12414713b1bfbc68547765ca4",
+    "export_commit": "0c5f1cbfb30ce9d6f8242674a1fc86f44372fa56",
+    "export_tree": "940187df10582ec5560c5e13420685107d21e8c3",
+    "git_bundle_used": false,
+    "git_directory_copied": false,
+    "manifest_sha256": "59e5c5927cfa7f19bdaafdd740cb350f5819e81741b62821a22f2eb80ecd4676",
+    "safe_to_extract": true,
+    "tar_archive_committed": false,
+    "tar_member_count": 55,
+    "tar_member_directory_count": 16,
+    "tar_member_file_count": 39
+  },
+  "qualification_result": {
+    "c_reference_equivalence_status": "V2_REFERENCE_EQUIVALENCE_PASS",
+    "exit_code": 0,
+    "hardware_backend_rejected": true,
+    "runtime_validation_status": "PHASE6B6_PORTABLE_RUNTIME_VALIDATE_ONLY_OK",
+    "sender_matches": [],
+    "status": "PHASE6B6_PORTABLE_TARGET_QUALIFICATION_PASS",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "target_final_result_digest": "c2d1bf3c78e2a9318f51e06d27ac39a49fe7a49e3cd49c0c8850cd6c85a07f7f",
+    "target_result_file_sha256": "eb276be44682718cef579529265f2fb1384e570d61c84baabb72b0af45b27ac3"
+  },
+  "schema_id": "CAT_CAS_PHASE6B6_NONHARDWARE_FINAL_BINDINGS_V1",
+  "source_authority": {
+    "pr31_merge_commit": "3ebd3ac0a3098e29537cab0eaa9650f883b95fd4",
+    "pr31_reviewed_source_head": "ca5eacd0aee2f3b988bea26d41db59c19deddc02",
+    "pr32_merge_commit": "0c5f1cbfb30ce9d6f8242674a1fc86f44372fa56",
+    "pr32_review_result": "APPROVED_FOR_SOFTWARE_INTEGRATION",
+    "pr32_reviewed_source_head": "c2e3e353900cbe977160c31d4c093c184a76cd11",
+    "pr32_source_review": "4606307108"
+  },
+  "status": "PHASE6B6_NONHARDWARE_TARGET_QUALIFICATION_EVIDENCE_COMPLETE",
+  "superseded_defect": {
+    "defect": "PORTABLE_TARGET_MODE_ONLY_MUTATION_ACCEPTED",
+    "old_positive_result_was_provisional": true,
+    "qualification_source_merge": "3ebd3ac0a3098e29537cab0eaa9650f883b95fd4",
+    "source_repaired_in_pr_32": true,
+    "status": "BLOCKED",
+    "superseded_by_source_merge": "0c5f1cbfb30ce9d6f8242674a1fc86f44372fa56"
+  },
+  "target": {
+    "git_executable_present": false,
+    "hostname": "catcas",
+    "jsonschema_package_installed": false,
+    "jsonschema_required": false,
+    "os": "Debian GNU/Linux 13 trixie",
+    "ssh_target": "root@192.168.137.100",
+    "target_executed_git": false,
+    "target_identity_sha256": "f83163b0a4aa68cd28b9d85408b8be60d424615bcfeb51d046b187ba1fdc778d"
+  }
+}

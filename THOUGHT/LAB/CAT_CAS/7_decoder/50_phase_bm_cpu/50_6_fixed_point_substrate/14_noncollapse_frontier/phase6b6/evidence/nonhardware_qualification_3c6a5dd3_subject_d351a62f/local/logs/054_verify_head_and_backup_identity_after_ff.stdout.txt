@@ -1,0 +1,20 @@
+{
+  "backup_file_count": 107,
+  "backup_preserved_byte_identical": false,
+  "changed_backup_files": [
+    "COMMANDS.jsonl"
+  ],
+  "current_file_count": 115,
+  "extra_current_files_count": 8,
+  "extra_current_files_sample": [
+    "local/logs/050_external_evidence_namespace_backup_python.stderr.txt",
+    "local/logs/050_external_evidence_namespace_backup_python.stdout.txt",
+    "local/logs/051_git_fetch_all_prune.stderr.txt",
+    "local/logs/051_git_fetch_all_prune.stdout.txt",
+    "local/logs/052_verify_origin_main_and_branch_ancestry.stderr.txt",
+    "local/logs/052_verify_origin_main_and_branch_ancestry.stdout.txt",
+    "local/logs/053_git_merge_ff_only_origin_main.stderr.txt",
+    "local/logs/053_git_merge_ff_only_origin_main.stdout.txt"
+  ],
+  "missing_backup_files": []
+}

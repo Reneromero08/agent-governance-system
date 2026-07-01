@@ -1,0 +1,28 @@
+{
+  "exit_code": 2,
+  "mutation": {
+    "after": {
+      "mode": "0700",
+      "mode_symbolic": "drwx------",
+      "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/package_root_0755_to_0700/package",
+      "sha256": null
+    },
+    "before": {
+      "mode": "0755",
+      "mode_symbolic": "drwxr-xr-x",
+      "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/package_root_0755_to_0700/package",
+      "sha256": null
+    },
+    "relative_path": ".",
+    "type": "directory_permission"
+  },
+  "name": "package_root_0755_to_0700",
+  "rejected": true,
+  "stderr_bytes": 105,
+  "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/package_root_0755_to_0700/stderr.txt",
+  "stderr_sha256": "f06fc0e54dc0df916912e6f551410fb695bb5bcd1c09ba075eb6fe24d88e9f67",
+  "stderr_text": "package directory permission mismatch: path=phase6b6_portable_target_package expected=0755 observed=0700\n",
+  "stdout_bytes": 0,
+  "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/package_root_0755_to_0700/stdout.json",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

@@ -1,0 +1,173 @@
+{
+  "all_forbidden_options_rejected": true,
+  "all_mutations_rejected": false,
+  "mutation_results": [
+    {
+      "exit_code": 2,
+      "name": "extra_empty_directory",
+      "rejected": true,
+      "stderr_bytes": 85,
+      "stderr_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/extra_empty_directory/stderr.txt",
+      "stderr_sha256": "a5ac33abd60cecaec31692f18c0fc5aa43c4b1695f95b0383d860c833682383a",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/extra_empty_directory/stdout.json",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "name": "extra_regular_file",
+      "rejected": true,
+      "stderr_bytes": 79,
+      "stderr_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/extra_regular_file/stderr.txt",
+      "stderr_sha256": "daba43f61356858d32a142767cb37f0a20beb329e94da45ea72e70de1ff7c665",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/extra_regular_file/stdout.json",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "name": "missing_regular_file",
+      "rejected": true,
+      "stderr_bytes": 83,
+      "stderr_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/missing_regular_file/stderr.txt",
+      "stderr_sha256": "9dbfb6f7c9c82efdca1f6fc1714769c3b2724176bd012b3f88aa2ac96af17d34",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/missing_regular_file/stdout.json",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "name": "changed_copied_byte",
+      "rejected": true,
+      "stderr_bytes": 57,
+      "stderr_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/changed_copied_byte/stderr.txt",
+      "stderr_sha256": "4031ddc5e50695c676c74dad3eeed2c6628dbec941b45787b59ea292fff66c0a",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/changed_copied_byte/stdout.json",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 0,
+      "name": "changed_mode",
+      "rejected": false,
+      "stderr_bytes": 0,
+      "stderr_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/changed_mode/stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 2918,
+      "stdout_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/changed_mode/stdout.json",
+      "stdout_sha256": "c0ff38323ca9a878bf83abcf555af2a510242006ace6eebf42c121406c5269bc"
+    },
+    {
+      "exit_code": 2,
+      "name": "symlink",
+      "rejected": true,
+      "stderr_bytes": 63,
+      "stderr_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/symlink/stderr.txt",
+      "stderr_sha256": "daa666c1387dce1ed62fc8a7ed3d07a6a0263b2c0ce377e2a562f6dbbee105b9",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/symlink/stdout.json",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "option_results": [
+    {
+      "exit_code": 2,
+      "option": "--hardware",
+      "rejected": true,
+      "stderr_bytes": 73,
+      "stderr_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/option_hardware/stderr.txt",
+      "stderr_sha256": "f11460a9790d23a320287f0f55fd9d90222b80aa8eba4a8ff377d929a29cf08f",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/option_hardware/stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "option": "--hardware=true",
+      "rejected": true,
+      "stderr_bytes": 78,
+      "stderr_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/option_hardware_true/stderr.txt",
+      "stderr_sha256": "f0132cafed618367c8bedb99d929903f2f8464cdfdae4590c485ae72bf48d7e6",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/option_hardware_true/stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "option": "--acquire",
+      "rejected": true,
+      "stderr_bytes": 72,
+      "stderr_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/option_acquire/stderr.txt",
+      "stderr_sha256": "764f3df887f8458c33ffb8f1736ddc7ccb7565b73bb75482b56ef4da550260a4",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/option_acquire/stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "option": "--acquire=yes",
+      "rejected": true,
+      "stderr_bytes": 76,
+      "stderr_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/option_acquire_yes/stderr.txt",
+      "stderr_sha256": "440b7ca0e078e97aeb43cfdf60f72405bde0a218f0b7c0030e43fb64b04fef8e",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/option_acquire_yes/stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "option": "--calibrate",
+      "rejected": true,
+      "stderr_bytes": 74,
+      "stderr_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/option_calibrate/stderr.txt",
+      "stderr_sha256": "4617ce867b04bf2e0da58a4728522b37c9040d4524e2eeda5ff8fd556a576c57",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/option_calibrate/stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "option": "--calibrate=1",
+      "rejected": true,
+      "stderr_bytes": 76,
+      "stderr_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/option_calibrate_1/stderr.txt",
+      "stderr_sha256": "6c3b87842b5a586f3549f6a9c0757351e7b25c60811743337216563ee89354e7",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/option_calibrate_1/stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "option": "--run-campaign",
+      "rejected": true,
+      "stderr_bytes": 77,
+      "stderr_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/option_run-campaign/stderr.txt",
+      "stderr_sha256": "b82ddbe7bf0791c5e8b9db8309c04a7bed51a04d342a387d82879ff5f558bd11",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/option_run-campaign/stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "option": "--run-campaign=true",
+      "rejected": true,
+      "stderr_bytes": 82,
+      "stderr_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/option_run-campaign_true/stderr.txt",
+      "stderr_sha256": "83efedd6552b52b446e41bd1d7f8336575810e5f2462c3e50a7a015dd66e4b18",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/option_run-campaign_true/stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "option": "--unknown",
+      "rejected": true,
+      "stderr_bytes": 42,
+      "stderr_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/option_unknown/stderr.txt",
+      "stderr_sha256": "05bf1dfc3527f9c51f8e3fa970511e4bfb317b6458b64f40c46b7f2d513ef951",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_3ebd3ac0/results/negative_tests/option_unknown/stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+[
+    {
+        "path":  "D:\\phase6b6_portable_export_0c5f1cbf_20260701T064748Z",
+        "existed_before":  false,
+        "exists_after":  false
+    },
+    {
+        "path":  "D:\\phase6b6_portable_export_0c5f1cbf_20260701T064845Z",
+        "existed_before":  true,
+        "exists_after":  false
+    },
+    {
+        "path":  "D:\\phase6b6_portable_export_0c5f1cbf_20260701T064950Z",
+        "existed_before":  true,
+        "exists_after":  false
+    },
+    {
+        "path":  "D:\\p6b6_final_copy_short",
+        "existed_before":  true,
+        "exists_after":  false
+    }
+]

@@ -1,0 +1,89 @@
+utc_timestamp=2026-06-30T09:07:30Z
+
+### COMMAND: hostname
+catcas
+### EXIT: 0
+
+### COMMAND: uname -a
+Linux catcas 6.12.86+deb13-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.12.86-1 (2026-05-08) x86_64 GNU/Linux
+### EXIT: 0
+
+### FILE: /etc/os-release
+PRETTY_NAME="Debian GNU/Linux 13 (trixie)"
+NAME="Debian GNU/Linux"
+VERSION_ID="13"
+VERSION="13 (trixie)"
+VERSION_CODENAME=trixie
+DEBIAN_VERSION_FULL=13.5
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_URL="https://www.debian.org/support"
+BUG_REPORT_URL="https://bugs.debian.org/"
+### EXIT: 0
+
+### COMMAND: id
+uid=0(root) gid=0(root) groups=0(root)
+### EXIT: 0
+
+### PATH
+/root/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+### COMMAND: command -v git
+### EXIT: 1
+
+### COMMAND: git --version
+### EXIT: 127
+
+### PACKAGE_MANAGER_DETECTION
+/usr/bin/apt-get
+/usr/bin/apt
+
+### COMMAND: apt-get --version
+apt 3.0.3 (amd64)
+Supported modules:
+*Ver: Standard .deb
+*Pkg:  Debian dpkg interface (Priority 30)
+ Pkg:  Debian APT solver interface (Priority -1000)
+ Pkg:  Debian APT planner interface (Priority -1000)
+ S.L: 'deb' Debian binary tree
+ S.L: 'deb-src' Debian source tree
+ Idx: Debian Source Index
+ Idx: Debian Package Index
+ Idx: Debian Translation Index
+ Idx: Debian dpkg status file
+ Idx: Debian deb file
+ Idx: Debian dsc file
+ Idx: Debian control file
+ Idx: EDSP scenario file
+ Idx: EIPP scenario file
+### EXIT: 0
+
+### APT_GIT_POLICY
+git:
+  Installed: (none)
+  Candidate: 1:2.47.3-0+deb13u1
+  Version table:
+     1:2.47.3-0+deb13u1 500
+        500 http://deb.debian.org/debian trixie/main amd64 Packages
+### EXIT: 0
+
+### APT_SOURCES
+/etc/apt/sources.list
+deb http://deb.debian.org/debian trixie main contrib non-free non-free-firmware
+deb http://deb.debian.org/debian trixie-updates main contrib non-free non-free-firmware
+deb http://security.debian.org/debian-security trixie-security main contrib non-free non-free-firmware
+### EXIT: 0
+
+### COMMAND: dpkg-query -W -f=${Package}\t${Version}\t${Architecture}\t${Status}\n git
+git			unknown ok not-installed
+### EXIT: 0
+
+### COMMAND: df -B1 /
+Filesystem        1B-blocks        Used   Available Use% Mounted on
+/dev/sda2      117910323200 17834147840 94039314432  16% /
+### EXIT: 0
+
+### COMMAND: df -B1 /root
+Filesystem        1B-blocks        Used   Available Use% Mounted on
+/dev/sda2      117910323200 17834147840 94039314432  16% /
+### EXIT: 0

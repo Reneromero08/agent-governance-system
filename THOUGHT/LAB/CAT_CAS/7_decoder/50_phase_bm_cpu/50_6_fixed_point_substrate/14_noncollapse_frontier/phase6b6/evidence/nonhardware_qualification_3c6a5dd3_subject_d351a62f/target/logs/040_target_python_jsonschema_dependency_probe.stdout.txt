@@ -1,0 +1,19 @@
+utc_timestamp=2026-06-30T09:12:02Z
+
+### PYTHON_JSONSCHEMA_IMPORT
+3.13.5 (main, May  5 2026, 21:05:52) [GCC 14.2.0]
+jsonschema_import_exit=1
+
+### DPKG_PYTHON3_JSONSCHEMA
+dpkg_query_exit=1
+
+### APT_POLICY_PYTHON3_JSONSCHEMA
+python3-jsonschema:
+  Installed: (none)
+  Candidate: 4.19.2-6
+  Version table:
+     4.19.2-6 500
+        500 http://deb.debian.org/debian trixie/main amd64 Packages
+apt_policy_exit=0
+
+### SELF_EXCLUDING_PROCESS_PROBES

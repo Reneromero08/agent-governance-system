@@ -1,0 +1,9 @@
+current_inventory_verifies=true
+changed_evidence_byte_detected=true
+missing_evidence_file_detected=true
+extra_evidence_file_detected=true
+changed_path_detected=true
+changed_size_detected=true
+changed_digest_detected=true
+inventory_sha256=d1c11f7b775ac6b9c013e951cd1d61c816b2832575adf5f5a8b50ab00e161d9c
+file_count=1148

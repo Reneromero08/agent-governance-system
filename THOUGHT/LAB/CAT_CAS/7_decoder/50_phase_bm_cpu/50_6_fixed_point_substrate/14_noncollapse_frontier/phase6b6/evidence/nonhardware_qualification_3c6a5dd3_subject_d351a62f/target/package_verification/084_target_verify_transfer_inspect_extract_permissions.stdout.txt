@@ -1,0 +1,25 @@
+catcas
+2026-07-01T06:51:50Z
+481280 incoming/phase6b6-portable-A.tar
+    90 incoming/phase6b6-portable-A.tar.sha256
+481370 total
+affbc0b3e9725de62aa946774e3e8830399f9af12414713b1bfbc68547765ca4  phase6b6-portable-A.tar
+affbc0b3e9725de62aa946774e3e8830399f9af12414713b1bfbc68547765ca4  incoming/phase6b6-portable-A.tar
+phase6b6-portable-A.tar: OK
+{
+  "archive_sha256": "affbc0b3e9725de62aa946774e3e8830399f9af12414713b1bfbc68547765ca4",
+  "case_collisions": [],
+  "directory_count": 16,
+  "file_count": 39,
+  "member_count": 55,
+  "problems": [],
+  "safe_to_extract": true
+}
+pycache_or_pyc_count=0
+{
+  "all_permissions_ok": true,
+  "package_root": "/root/catcas_phase6b6_portable_0c5f1cbf/extract/phase6b6_portable_target_package",
+  "problems": [],
+  "record_count": 55,
+  "schema_id": "CAT_CAS_PHASE6B6_EXTRACTED_PERMISSION_INVENTORY_V1"
+}

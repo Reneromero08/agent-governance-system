@@ -1,0 +1,258 @@
+{
+  "expected_inventory_sha256": "e47dea4c3467835a425d9d553803da48f672a8799970db4fc9b83e98596f50d8",
+  "expected_phase6b6_subtree_inventory_sha256": "24789f0df9afa2d9f6a243a9050ff8f265cf22ffb42ab33bbe2f67521dbf44b5",
+  "expected_scoped_tree": "408ee35257417898a992510b0f260602117a15af",
+  "path_mode_blob_inventory": [
+    {
+      "git_object_sha": "dd3fa5b85365108164990dea7b23bcec4d21ea46",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c",
+      "sha256": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976",
+      "size": 49171
+    },
+    {
+      "git_object_sha": "d483442391a531a0ba406439d1e3479dcdc27cea",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_ENTRY_PACKAGE.md",
+      "sha256": "da01b489ce4d9ac80519e2fda8146e6cdd5209128438e8cca19ba13ee73170e1",
+      "size": 21628
+    },
+    {
+      "git_object_sha": "8eb2169dcc4e2aca919e96506d42c7fa299ba106",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md",
+      "sha256": "ae33a60d0204f3175d8a7bd9a228754ae6a1f939d7a780c54734a49a96b231ae",
+      "size": 5612
+    },
+    {
+      "git_object_sha": "3582011a9ebb17f9f54d2ffee67655270411e888",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json",
+      "sha256": "3c8fccb30401336f4676145e8d83adbcd2f1e750fc45cd0a9a2ad3b34db9db05",
+      "size": 1809
+    },
+    {
+      "git_object_sha": "45e573431f0a2a75b140270989c9f84f225aea21",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/__init__.py",
+      "sha256": "63381ad9086d317cf8206bbb7f7290a1fe24002bb7c779b5771998e23ca2fa8f",
+      "size": 41
+    },
+    {
+      "git_object_sha": "2c7dc004a28f607c96a4546152953d1b30008a6e",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/__init__.py",
+      "sha256": "20a422b22458d83f76def350945f055622828332f0dd12e06057d021d1867491",
+      "size": 63
+    },
+    {
+      "git_object_sha": "630c6a08b00a1bc1e55f98ebe417ae7ee702db4f",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/adjudication.py",
+      "sha256": "e13590585d1fc66b3293ad5340dbdf4257750ef47e31dc25b9a507c9266e443e",
+      "size": 2748
+    },
+    {
+      "git_object_sha": "0df65f09e6ac3b7d65ee129f02ea77de45c47f03",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/metrics.py",
+      "sha256": "f7e872b436d415969ae5682b931fa68c6c1b8aa672f29625a1ffc1d03ca02a62",
+      "size": 6889
+    },
+    {
+      "git_object_sha": "4467f7f4b3d5749c7e27014d92fc4bdb5b76e86c",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/observations.py",
+      "sha256": "48bf0674412d221daaebc75fd9c3b6b77a53785f379c82fbe7ae0eb04fa87d5b",
+      "size": 1242
+    },
+    {
+      "git_object_sha": "0f44011c53fa1f4e0faf4e100f1b451dcd192ec1",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/operators.py",
+      "sha256": "37c228644721cbe0b0c2287a56a56c9c5b806121ccf89a32eee5e2c072cfde66",
+      "size": 8115
+    },
+    {
+      "git_object_sha": "78d7b056507d78803238855ac12cb53f6b0247b6",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/pipeline.py",
+      "sha256": "bb1c9f5805126213bfe0e6e2844a786b23e0036611ff273e2b71de32995f08a3",
+      "size": 55386
+    },
+    {
+      "git_object_sha": "bb09af3b441fa79162b3c34a85a923f353438819",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/state.py",
+      "sha256": "775938f6359c2d9e1253fbbabe120999b241318849b2b87a3eef529acdf60fdb",
+      "size": 6803
+    },
+    {
+      "git_object_sha": "c8e11ecb7e0ee37c6d64fec036191ebeb1fb80dd",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/synthetic.py",
+      "sha256": "193b7b24dbf49ece40fef0fa3b5b7027e000922d4550e1dc94785ff80785b8d7",
+      "size": 3231
+    },
+    {
+      "git_object_sha": "d8a21c7a8637b25a7314d6a1c0de3f76ff65752c",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/__init__.py",
+      "sha256": "5b168f008a8767d9636c5db768c1cba510548d0d0fe257abe8d518b06db906be",
+      "size": 59
+    },
+    {
+      "git_object_sha": "25a0d5dfcc276eb8f644dc401277eb17864ef946",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/contract.py",
+      "sha256": "b5eed17d1a16461a51817617c7ca99c3805da667600f4fa8fc7f88bb81199750",
+      "size": 7266
+    },
+    {
+      "git_object_sha": "c80e99b0991911d7ab0cdd131b8964fe74b1bf19",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/schedule.py",
+      "sha256": "fcd8b424575a9e6f1feb6c1ecfce5436be274825272ecad0466ada62ec4f2476",
+      "size": 12914
+    },
+    {
+      "git_object_sha": "c0d2dbe3c21668ffb3bca76ae4b8e334dddd6408",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/v2_interface.py",
+      "sha256": "060a7ed100e06cafeec245a53c657270bc71c2ec38c37779d26b108a443876b4",
+      "size": 7604
+    },
+    {
+      "git_object_sha": "a537eb2e6d21435b55d85beebd7d7b3c2f2c0022",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/__init__.py",
+      "sha256": "856ab4c76bf7b81a23fbff4036962e7df6270922fc294fa21f43e7045e73dac8",
+      "size": 40
+    },
+    {
+      "git_object_sha": "0a9f558b782c1342e1c3fe194bd59956786d9531",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/explicit_slot_runtime.py",
+      "sha256": "71382b695b330833697fc39b59d552907593b218a8a8f47d196ed0280bbc54f9",
+      "size": 6631
+    },
+    {
+      "git_object_sha": "58f5f42b4deddba961cd8c4f0c9fb6e29d9601a0",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/state_machine.py",
+      "sha256": "1c721e7ee8e818f9821358f27ebe1f417c688c76ad58a69fef45fb5f3949b045",
+      "size": 4462
+    },
+    {
+      "git_object_sha": "eca11db2ab448fbaf964320ad5e3c4a5e1928d9c",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/adjudication_result.schema.json",
+      "sha256": "029147a7b9a9517f1155523a62de81ae46358d82bc2f7780d0bb4db80ea1f48c",
+      "size": 1144
+    },
+    {
+      "git_object_sha": "2c52fccd2fdb68e56ab9663844d015354b979c76",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/analysis_choice.schema.json",
+      "sha256": "6ace579c7b73b979d2c9ca0ef625051dfdea4d462d5eef67f8abd5a5b0842033",
+      "size": 3491
+    },
+    {
+      "git_object_sha": "fc8d11384909181c9c0dca35b7f1f2b0b2847316",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/measured_state.schema.json",
+      "sha256": "5fd87fb56ab1ddeb8a2c259a2a6cea5684e63084f68f9981314dad1cb9ed6eca",
+      "size": 696
+    },
+    {
+      "git_object_sha": "d5fb95a56150c3a3549095e171e05d08bb25acf4",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/runtime_custody.schema.json",
+      "sha256": "ec38ba94b18ac276038234a0c68c5b966f445431afff05ae9900e1d8733c0987",
+      "size": 12255
+    },
+    {
+      "git_object_sha": "db43af46a932b0d436595a9bf54ea1594757fa27",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/schedule.schema.json",
+      "sha256": "64c00887d0bab8c3e208bedff87c3e284593877a1b369c7fe544943e1667b072",
+      "size": 5621
+    },
+    {
+      "git_object_sha": "d38b55e0866740369957714fdc62e1f16f5eaba7",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/scientific_contract.schema.json",
+      "sha256": "32758199e1339d0db90aabfee632bbf05afb347a999e812eac519eefd1f3236b",
+      "size": 9125
+    },
+    {
+      "git_object_sha": "cd8f033fa1be0217c5d1dc34af6e1848d3356f82",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/validate_objects.py",
+      "sha256": "90d4724b504d99bc6d3b29debd205b4191f455772bb47a047af7bc80617a0d87",
+      "size": 478
+    },
+    {
+      "git_object_sha": "5855049de203c324b41df2ae74857ad4396be889",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_analysis_partition.py",
+      "sha256": "36aa05d681f210cc7ee31faa06f844732109888572c476f826ec8831cb8b02a2",
+      "size": 33874
+    },
+    {
+      "git_object_sha": "75d1eda72feace7956e2fd5165559fa176ca3d83",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_runtime_authority.py",
+      "sha256": "7ee6fdabd643dee7f92f28196d823eadcf3f4bf4930d18309a9c3016329144c6",
+      "size": 4163
+    },
+    {
+      "git_object_sha": "26aaf32d40ed20e4d308a6bfb132b91a70942947",
+      "git_object_type": "blob",
+      "mode": "100644",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_schedule_contract.py",
+      "sha256": "4f2887176714137fd34761417b4bf2ce46edb5b380c8b72d9ce84919da2ce4f8",
+      "size": 12508
+    }
+  ],
+  "phase6b6_tracked_file_count": 29,
+  "qualification_harness_source_equals_snapshot_subject": false,
+  "schema_id": "CAT_CAS_PHASE6B6_TRUSTED_SNAPSHOT_BINDING_V1",
+  "snapshot_scope": [
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c"
+  ],
+  "snapshot_subject_commit": "d351a62f4f211589d57359d872734757b6e280d9",
+  "snapshot_subject_kind": "PHASE6B6_SOFTWARE_IMPLEMENTATION_ONLY",
+  "snapshot_subject_tree": "1a927b20cb2d712a7220a823621c8fc83cbc984d",
+  "tracked_file_count": 30
+}

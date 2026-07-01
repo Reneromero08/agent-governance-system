@@ -1,0 +1,18 @@
+{
+  "cleanup_command_sequence": 92,
+  "git_executable_present_after_cleanup": false,
+  "hardware_ran": false,
+  "hostname": "catcas",
+  "jsonschema_spec_after_cleanup": "None",
+  "msr_access_occurred": false,
+  "new_root": "/root/catcas_phase6b6_portable_0c5f1cbf",
+  "new_root_after": "absent",
+  "new_root_before": "present",
+  "old_root": "/root/catcas_phase6b6_portable_3ebd3ac0",
+  "old_root_after": "absent",
+  "old_root_before": "present",
+  "schema_id": "CAT_CAS_PHASE6B6_TARGET_PROVISIONING_REVERSAL_V1",
+  "sender_workload_ran": false,
+  "status": "TARGET_TEMPORARY_ROOTS_REMOVED",
+  "target": "root@192.168.137.100"
+}

@@ -1,0 +1,297 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "CAT_CAS_PHASE6B6_MOCK_CAPTURE_CUSTODY_V1",
+  "type": "object",
+  "required": ["schema_id", "authority", "contract_sha256", "schedule_sha256", "session_count", "total_slots", "sessions", "custody_sha256"],
+  "properties": {
+    "schema_id": { "const": "CAT_CAS_PHASE6B6_MOCK_CAPTURE_CUSTODY_V1" },
+    "contract_sha256": { "$ref": "#/$defs/sha256" },
+    "schedule_sha256": { "$ref": "#/$defs/sha256" },
+    "session_count": { "const": 12 },
+    "total_slots": { "const": 10368 },
+    "authority": { "$ref": "#/$defs/authority" },
+    "sessions": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": { "$ref": "#/$defs/runtime_session" }
+    },
+    "custody_sha256": { "$ref": "#/$defs/sha256" }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "nullable_string": { "anyOf": [{ "type": "string" }, { "type": "null" }] },
+    "nullable_integer": { "anyOf": [{ "type": "integer" }, { "type": "null" }] },
+    "number": { "type": "number" },
+    "authority": {
+      "type": "object",
+      "required": [
+        "schema_id",
+        "architecture_review",
+        "software_entry_review",
+        "project_owner_decision",
+        "implementation_authorized",
+        "software_qualification_authorized",
+        "non_hardware_target_qualification_authorized",
+        "hardware_ran",
+        "authorization_artifact_created",
+        "calibration_authorized",
+        "scientific_acquisition_authorized",
+        "restoration_authorized",
+        "target_coupling_authorized",
+        "small_wall_authorized",
+        "automatic_retry"
+      ],
+      "properties": {
+        "schema_id": { "const": "CAT_CAS_PHASE6B6_SOFTWARE_ENTRY_RUNTIME_AUTHORITY_V1" },
+        "architecture_review": { "const": 4588082595 },
+        "software_entry_review": { "const": 4588098104 },
+        "project_owner_decision": { "const": "APPROVE_PHASE6B6_SOFTWARE_ENTRY_ONLY" },
+        "implementation_authorized": { "const": true },
+        "software_qualification_authorized": { "const": true },
+        "non_hardware_target_qualification_authorized": { "const": true },
+        "hardware_ran": { "const": false },
+        "authorization_artifact_created": { "const": false },
+        "calibration_authorized": { "const": false },
+        "scientific_acquisition_authorized": { "const": false },
+        "restoration_authorized": { "const": false },
+        "target_coupling_authorized": { "const": false },
+        "small_wall_authorized": { "const": false },
+        "automatic_retry": { "const": false }
+      },
+      "additionalProperties": false
+    },
+    "runtime_session": {
+      "type": "object",
+      "required": ["session_index", "route", "reboot_block", "sender_core", "receiver_core", "split", "session_chronology", "session_tsc_origin", "measured_tsc_hz", "slots"],
+      "properties": {
+        "session_index": { "type": "integer", "minimum": 0, "maximum": 11 },
+        "route": { "enum": ["v2s3", "v4s5"] },
+        "reboot_block": { "pattern": "^b[0-5]$" },
+        "sender_core": { "enum": [2, 4] },
+        "receiver_core": { "enum": [3, 5] },
+        "split": { "enum": ["train", "validation", "test"] },
+        "session_chronology": { "type": "integer", "minimum": 0, "maximum": 11 },
+        "session_tsc_origin": { "type": "integer" },
+        "measured_tsc_hz": { "type": "integer", "minimum": 1 },
+        "slots": {
+          "type": "array",
+          "minItems": 864,
+          "maxItems": 864,
+          "items": { "$ref": "#/$defs/runtime_observation" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "runtime_observation": {
+      "type": "object",
+      "required": [
+        "stage",
+        "packet_id",
+        "session_index",
+        "reboot_block",
+        "split",
+        "route",
+        "sender_core",
+        "receiver_core",
+        "session_chronology",
+        "slot_index",
+        "requested_start_tsc",
+        "requested_end_tsc",
+        "actual_start_tsc",
+        "actual_end_tsc",
+        "measured_tsc_hz",
+        "nominal_samples",
+        "measured_sample_count",
+        "empirical_sample_rate",
+        "temperature",
+        "r_t",
+        "u_t",
+        "declared",
+        "runtime_events",
+        "c_t",
+        "capture_quality"
+      ],
+      "properties": {
+        "stage": { "enum": ["preamble", "prepared_order", "trajectory", "tail_drift"] },
+        "packet_id": { "$ref": "#/$defs/nullable_string" },
+        "session_index": { "type": "integer", "minimum": 0, "maximum": 11 },
+        "reboot_block": { "pattern": "^b[0-5]$" },
+        "split": { "enum": ["train", "validation", "test"] },
+        "route": { "enum": ["v2s3", "v4s5"] },
+        "sender_core": { "enum": [2, 4] },
+        "receiver_core": { "enum": [3, 5] },
+        "session_chronology": { "type": "integer", "minimum": 0, "maximum": 11 },
+        "slot_index": { "type": "integer", "minimum": 0, "maximum": 863 },
+        "requested_start_tsc": { "type": "integer" },
+        "requested_end_tsc": { "type": "integer" },
+        "actual_start_tsc": { "type": "integer" },
+        "actual_end_tsc": { "type": "integer" },
+        "measured_tsc_hz": { "type": "integer", "minimum": 1 },
+        "nominal_samples": { "const": 4000 },
+        "measured_sample_count": { "const": 4000 },
+        "empirical_sample_rate": { "const": 8000.0 },
+        "temperature": { "$ref": "#/$defs/number" },
+        "r_t": { "$ref": "#/$defs/r_t" },
+        "u_t": { "$ref": "#/$defs/u_t" },
+        "declared": { "$ref": "#/$defs/declaration" },
+        "runtime_events": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/runtime_event" }
+        },
+        "c_t": { "$ref": "#/$defs/context" },
+        "capture_quality": { "const": "MOCK_ACCEPTED" }
+      },
+      "additionalProperties": false
+    },
+    "r_t": {
+      "type": "object",
+      "required": ["lockin_I", "lockin_Q", "ring_osc_period"],
+      "properties": {
+        "lockin_I": { "$ref": "#/$defs/number" },
+        "lockin_Q": { "$ref": "#/$defs/number" },
+        "ring_osc_period": { "$ref": "#/$defs/number" }
+      },
+      "additionalProperties": false
+    },
+    "u_t": {
+      "type": "object",
+      "required": [
+        "drive_on",
+        "executed_mode",
+        "executed_v2_mode",
+        "amplitude_level",
+        "phase_action",
+        "physical_tone_index",
+        "analysis_tone_index",
+        "tone_execution_order_position",
+        "executed_order_family",
+        "executed_order_position",
+        "executed_codeword_signs",
+        "codeword_source_index",
+        "codeword_sign",
+        "sign",
+        "sender_epoch_id"
+      ],
+      "properties": {
+        "drive_on": { "type": "boolean" },
+        "executed_mode": { "type": "string", "minLength": 1 },
+        "executed_v2_mode": { "enum": ["basis", null] },
+        "amplitude_level": { "$ref": "#/$defs/nullable_integer" },
+        "phase_action": { "enum": [null, "none", "0", "pi", "pi/2", "-pi/2"] },
+        "physical_tone_index": { "$ref": "#/$defs/nullable_integer" },
+        "analysis_tone_index": { "$ref": "#/$defs/nullable_integer" },
+        "tone_execution_order_position": { "$ref": "#/$defs/nullable_integer" },
+        "executed_order_family": { "$ref": "#/$defs/nullable_string" },
+        "executed_order_position": { "$ref": "#/$defs/nullable_integer" },
+        "executed_codeword_signs": {
+          "anyOf": [
+            { "type": "null" },
+            {
+              "type": "array",
+              "minItems": 12,
+              "maxItems": 12,
+              "items": { "enum": [-1, 1] }
+            }
+          ]
+        },
+        "codeword_source_index": { "$ref": "#/$defs/nullable_integer" },
+        "codeword_sign": { "anyOf": [{ "enum": [-1, 1] }, { "type": "null" }] },
+        "sign": { "anyOf": [{ "enum": [-1, 1] }, { "type": "null" }] },
+        "sender_epoch_id": { "$ref": "#/$defs/nullable_string" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "drive_on": { "const": false } }, "required": ["drive_on"] },
+          "then": {
+            "properties": {
+              "sender_epoch_id": { "type": "null" },
+              "executed_v2_mode": { "type": "null" },
+              "executed_codeword_signs": { "type": "null" },
+              "codeword_source_index": { "type": "null" },
+              "codeword_sign": { "type": "null" },
+              "sign": { "type": "null" },
+              "amplitude_level": { "type": "null" },
+              "phase_action": { "type": "null" },
+              "physical_tone_index": { "type": "null" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "drive_on": { "const": true } }, "required": ["drive_on"] },
+          "then": {
+            "properties": {
+              "sender_epoch_id": { "type": "string", "minLength": 1 },
+              "executed_v2_mode": { "const": "basis" },
+              "executed_codeword_signs": { "type": "array", "minItems": 12, "maxItems": 12 },
+              "codeword_source_index": { "type": "integer", "minimum": 0, "maximum": 11 },
+              "codeword_sign": { "enum": [-1, 1] },
+              "sign": { "enum": [-1, 1] },
+              "amplitude_level": { "type": "integer" },
+              "phase_action": { "enum": ["0", "pi", "pi/2", "-pi/2"] },
+              "physical_tone_index": { "type": "integer", "minimum": 0, "maximum": 11 }
+            }
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "declaration": {
+      "type": "object",
+      "required": [
+        "declared_mode",
+        "declared_amplitude_level",
+        "declared_phase_action",
+        "declared_physical_tone_index",
+        "order_control_family",
+        "declared_order_family",
+        "declared_order_position",
+        "analysis_tone_index"
+      ],
+      "properties": {
+        "declared_mode": { "type": "string", "minLength": 1 },
+        "declared_amplitude_level": { "$ref": "#/$defs/nullable_integer" },
+        "declared_phase_action": { "enum": ["none", "0", "pi", "pi/2", "-pi/2"] },
+        "declared_physical_tone_index": { "$ref": "#/$defs/nullable_integer" },
+        "order_control_family": { "$ref": "#/$defs/nullable_string" },
+        "declared_order_family": { "$ref": "#/$defs/nullable_string" },
+        "declared_order_position": { "$ref": "#/$defs/nullable_integer" },
+        "analysis_tone_index": { "$ref": "#/$defs/nullable_integer" }
+      },
+      "additionalProperties": false
+    },
+    "context": {
+      "type": "object",
+      "required": ["route", "sender_core", "receiver_core", "reboot_block", "session_chronology", "session_tsc_origin", "actual_start_tsc", "actual_end_tsc", "measured_tsc_hz", "empirical_sample_rate", "temperature", "P_state", "capture_quality"],
+      "properties": {
+        "route": { "enum": ["v2s3", "v4s5"] },
+        "sender_core": { "enum": [2, 4] },
+        "receiver_core": { "enum": [3, 5] },
+        "reboot_block": { "pattern": "^b[0-5]$" },
+        "session_chronology": { "type": "integer", "minimum": 0, "maximum": 11 },
+        "session_tsc_origin": { "type": "integer" },
+        "actual_start_tsc": { "type": "integer" },
+        "actual_end_tsc": { "type": "integer" },
+        "measured_tsc_hz": { "type": "integer", "minimum": 1 },
+        "empirical_sample_rate": { "const": 8000.0 },
+        "temperature": { "$ref": "#/$defs/number" },
+        "P_state": { "const": "MOCK_PINNED" },
+        "capture_quality": { "const": "MOCK_ACCEPTED" }
+      },
+      "additionalProperties": false
+    },
+    "runtime_event": {
+      "type": "object",
+      "required": ["event", "slot_index", "packet_id", "sender_epoch_id", "phase_action"],
+      "properties": {
+        "event": { "enum": ["SENDER_OFF", "SENDER_START", "SENDER_CONTINUE", "SENDER_PHASE_UPDATE", "SENDER_STOP"] },
+        "slot_index": { "type": "integer", "minimum": 0, "maximum": 863 },
+        "packet_id": { "$ref": "#/$defs/nullable_string" },
+        "sender_epoch_id": { "$ref": "#/$defs/nullable_string" },
+        "phase_action": { "enum": [null, "none", "0", "pi", "pi/2", "-pi/2"] }
+      },
+      "additionalProperties": false
+    }
+  }
+}

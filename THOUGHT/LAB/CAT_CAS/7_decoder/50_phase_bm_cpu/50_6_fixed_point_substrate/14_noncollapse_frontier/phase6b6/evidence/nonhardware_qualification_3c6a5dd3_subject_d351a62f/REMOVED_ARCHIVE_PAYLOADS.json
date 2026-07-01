@@ -1,0 +1,13 @@
+{
+  "removed_archive_count": 1,
+  "removed_archives": [
+    {
+      "byte_size": 481280,
+      "reason": "raw tar archive payload excluded from committed evidence; detached digest and package identity retained",
+      "relative_path": "target/superseded_3ebd3ac0_root/incoming/phase6b6-portable-A.tar",
+      "sha256": "6d0f655f26e2284d6adc17664f53010dd053865793e3f325c0021d71af01ce3e"
+    }
+  ],
+  "schema_id": "CAT_CAS_PHASE6B6_REMOVED_ARCHIVE_PAYLOADS_V1",
+  "tar_archive_committed": false
+}

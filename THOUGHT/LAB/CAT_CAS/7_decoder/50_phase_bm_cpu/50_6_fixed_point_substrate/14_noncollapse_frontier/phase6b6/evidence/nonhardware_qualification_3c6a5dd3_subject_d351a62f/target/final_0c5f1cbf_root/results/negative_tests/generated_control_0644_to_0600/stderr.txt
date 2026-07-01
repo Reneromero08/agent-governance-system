@@ -1,0 +1,1 @@
+package file permission mismatch: path=PORTABLE_PACKAGE_MANIFEST.json expected=0644 observed=0600

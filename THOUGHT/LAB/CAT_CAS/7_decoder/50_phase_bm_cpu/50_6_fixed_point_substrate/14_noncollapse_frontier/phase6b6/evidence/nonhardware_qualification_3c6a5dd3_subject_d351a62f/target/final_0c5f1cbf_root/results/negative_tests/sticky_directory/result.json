@@ -1,0 +1,28 @@
+{
+  "exit_code": 2,
+  "mutation": {
+    "after": {
+      "mode": "1755",
+      "mode_symbolic": "drwxr-xr-t",
+      "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/sticky_directory/package/snapshot",
+      "sha256": null
+    },
+    "before": {
+      "mode": "0755",
+      "mode_symbolic": "drwxr-xr-x",
+      "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/sticky_directory/package/snapshot",
+      "sha256": null
+    },
+    "relative_path": "snapshot",
+    "type": "directory_permission"
+  },
+  "name": "sticky_directory",
+  "rejected": true,
+  "stderr_bytes": 81,
+  "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/sticky_directory/stderr.txt",
+  "stderr_sha256": "bf26265fe1648d8b3b5793e0798ac33efac37f7b435960870f2b48bb4cf33f65",
+  "stderr_text": "package directory permission mismatch: path=snapshot expected=0755 observed=1755\n",
+  "stdout_bytes": 0,
+  "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/sticky_directory/stdout.json",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

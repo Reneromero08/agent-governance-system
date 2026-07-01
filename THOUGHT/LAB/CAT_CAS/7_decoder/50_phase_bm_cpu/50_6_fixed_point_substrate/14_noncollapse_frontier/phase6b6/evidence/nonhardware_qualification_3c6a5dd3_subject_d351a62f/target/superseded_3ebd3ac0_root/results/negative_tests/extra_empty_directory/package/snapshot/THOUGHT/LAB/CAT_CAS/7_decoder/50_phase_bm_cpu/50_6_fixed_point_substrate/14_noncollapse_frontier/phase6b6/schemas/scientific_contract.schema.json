@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "CAT_CAS_PHASE6B6_SCIENTIFIC_CONTRACT_V1",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "reboot_blocks",
+    "routes",
+    "route_cores",
+    "splits",
+    "session_count",
+    "slots_per_session",
+    "total_slots",
+    "read_hz",
+    "slot_s",
+    "nominal_samples_per_slot",
+    "nominal_campaign_sample_count",
+    "pin_khz",
+    "temperature_veto_c",
+    "automatic_retry",
+    "order_arrays",
+    "order_families",
+    "horizons",
+    "delay_candidates",
+    "regularization_ladder",
+    "o4_fixed_lifts",
+    "measured_response_fields",
+    "executed_control_fields",
+    "declaration_fields",
+    "context_fields",
+    "session_gauge_fields",
+    "prohibited_measured_state_fields",
+    "authority",
+    "claim_ceiling",
+    "qualified_v2_source",
+    "imported_tone_codeword_table",
+    "pre_acquisition_v2_equivalence_requirement",
+    "contract_sha256"
+  ],
+  "properties": {
+    "schema_id": { "const": "CAT_CAS_PHASE6B6_SCIENTIFIC_CONTRACT_V1" },
+    "reboot_blocks": { "type": "array", "prefixItems": [{ "const": "b0" }, { "const": "b1" }, { "const": "b2" }, { "const": "b3" }, { "const": "b4" }, { "const": "b5" }], "minItems": 6, "maxItems": 6 },
+    "routes": { "type": "array", "prefixItems": [{ "const": "v4s5" }, { "const": "v2s3" }], "minItems": 2, "maxItems": 2 },
+    "route_cores": {
+      "type": "object",
+      "required": ["v4s5", "v2s3"],
+      "properties": {
+        "v4s5": { "type": "array", "prefixItems": [{ "const": 4 }, { "const": 5 }], "minItems": 2, "maxItems": 2 },
+        "v2s3": { "type": "array", "prefixItems": [{ "const": 2 }, { "const": 3 }], "minItems": 2, "maxItems": 2 }
+      },
+      "additionalProperties": false
+    },
+    "splits": {
+      "type": "object",
+      "required": ["train", "validation", "test"],
+      "properties": {
+        "train": { "type": "array", "prefixItems": [{ "const": "b0" }, { "const": "b1" }, { "const": "b2" }], "minItems": 3, "maxItems": 3 },
+        "validation": { "type": "array", "prefixItems": [{ "const": "b3" }], "minItems": 1, "maxItems": 1 },
+        "test": { "type": "array", "prefixItems": [{ "const": "b4" }, { "const": "b5" }], "minItems": 2, "maxItems": 2 }
+      },
+      "additionalProperties": false
+    },
+    "session_count": { "const": 12 },
+    "slots_per_session": { "const": 864 },
+    "total_slots": { "const": 10368 },
+    "read_hz": { "const": 8000 },
+    "slot_s": { "const": 0.5 },
+    "nominal_samples_per_slot": { "const": 4000 },
+    "nominal_campaign_sample_count": { "const": 41472000 },
+    "pin_khz": { "const": 1600000 },
+    "temperature_veto_c": { "const": 68.0 },
+    "automatic_retry": { "const": false },
+    "order_arrays": { "type": "object", "required": ["FWD", "REV", "RND1", "RND2"], "additionalProperties": { "type": "array", "minItems": 12, "maxItems": 12, "items": { "type": "integer", "minimum": 0, "maximum": 11 } } },
+    "order_families": { "type": "array", "minItems": 5, "maxItems": 5, "items": { "enum": ["FWD", "REV", "RND1", "RND2", "ORDER_LABEL_SHAM"] } },
+    "horizons": { "type": "array", "prefixItems": [{ "const": 1 }, { "const": 2 }, { "const": 4 }, { "const": 8 }], "minItems": 4, "maxItems": 4 },
+    "delay_candidates": { "type": "array", "prefixItems": [{ "const": 2 }, { "const": 4 }, { "const": 8 }, { "const": 16 }], "minItems": 4, "maxItems": 4 },
+    "regularization_ladder": { "type": "array", "prefixItems": [{ "const": 0.0 }, { "const": 0.000001 }, { "const": 0.0001 }, { "const": 0.01 }, { "const": 1.0 }], "minItems": 5, "maxItems": 5 },
+    "o4_fixed_lifts": { "type": "array", "minItems": 6, "maxItems": 6, "items": { "type": "string" } },
+    "measured_response_fields": { "$ref": "#/$defs/string_list" },
+    "executed_control_fields": { "$ref": "#/$defs/string_list" },
+    "declaration_fields": { "$ref": "#/$defs/string_list" },
+    "context_fields": { "$ref": "#/$defs/string_list" },
+    "session_gauge_fields": { "$ref": "#/$defs/string_list" },
+    "prohibited_measured_state_fields": { "$ref": "#/$defs/string_list" },
+    "authority": { "$ref": "#/$defs/authority" },
+    "claim_ceiling": { "$ref": "#/$defs/claim_ceiling" },
+    "qualified_v2_source": { "$ref": "#/$defs/v2_source" },
+    "imported_tone_codeword_table": { "type": "object" },
+    "pre_acquisition_v2_equivalence_requirement": { "$ref": "#/$defs/v2_equivalence_requirement" },
+    "contract_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "string_list": { "type": "array", "items": { "type": "string" } },
+    "authority": {
+      "type": "object",
+      "required": ["schema_id", "architecture_review", "software_entry_review", "project_owner_decision", "implementation_authorized", "software_qualification_authorized", "non_hardware_target_qualification_authorized", "hardware_ran", "authorization_artifact_created", "calibration_authorized", "scientific_acquisition_authorized", "restoration_authorized", "target_coupling_authorized", "small_wall_authorized", "automatic_retry"],
+      "properties": {
+        "schema_id": { "const": "CAT_CAS_PHASE6B6_SOFTWARE_ENTRY_RUNTIME_AUTHORITY_V1" },
+        "architecture_review": { "const": 4588082595 },
+        "software_entry_review": { "const": 4588098104 },
+        "project_owner_decision": { "const": "APPROVE_PHASE6B6_SOFTWARE_ENTRY_ONLY" },
+        "implementation_authorized": { "const": true },
+        "software_qualification_authorized": { "const": true },
+        "non_hardware_target_qualification_authorized": { "const": true },
+        "hardware_ran": { "const": false },
+        "authorization_artifact_created": { "const": false },
+        "calibration_authorized": { "const": false },
+        "scientific_acquisition_authorized": { "const": false },
+        "restoration_authorized": { "const": false },
+        "target_coupling_authorized": { "const": false },
+        "small_wall_authorized": { "const": false },
+        "automatic_retry": { "const": false }
+      },
+      "additionalProperties": false
+    },
+    "claim_ceiling": {
+      "type": "object",
+      "required": ["maximum_positive_claim", "forbidden_claims"],
+      "properties": {
+        "maximum_positive_claim": { "const": "EMPIRICAL_PREDICTIVE_OBSERVABILITY_OF_TESTED_MEASURED_EQUIVALENCE_CLASS" },
+        "forbidden_claims": { "type": "array", "contains": { "const": "physical restoration" } }
+      },
+      "additionalProperties": false
+    },
+    "v2_source": {
+      "type": "object",
+      "required": ["reviewed_source", "generated_contracts", "corrective_evidence", "source_bundle_sha256", "physical_interface_source_path", "physical_interface_source_sha256", "v2_source_bundle_manifest_schema"],
+      "properties": {
+        "reviewed_source": { "const": "ba48125d15009a044bb869b5716c412b1a8baa1b" },
+        "generated_contracts": { "const": "500f7dfcd198e6e70dc3f999248aa61224d530cd" },
+        "corrective_evidence": { "const": "9291d61ab3eb8d27e2bff347f1ec90a046726228" },
+        "source_bundle_sha256": { "const": "bec71b2369587e68a88e9e2b5cb47837a07d5cdef6f13990417e0c0928e85f2f" },
+        "physical_interface_source_path": { "const": "14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c" },
+        "physical_interface_source_sha256": { "const": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976" },
+        "v2_source_bundle_manifest_schema": { "const": "CAT_CAS_PHASE6_V2_SOURCE_BUNDLE_MANIFEST_V1" }
+      },
+      "additionalProperties": false
+    },
+    "v2_equivalence_requirement": {
+      "type": "object",
+      "required": ["schema_id", "required_before", "non_hardware_qualification_must_emit_independent_table_from", "comparison_method", "comparison_scope", "source_sha256", "imported_table_digest", "current_python_reproduction_is_independent_c_extraction", "evidence_package_created"],
+      "properties": {
+        "schema_id": { "const": "CAT_CAS_PHASE6B6_PRE_ACQUISITION_V2_EQUIVALENCE_REQUIREMENT_V1" },
+        "required_before": { "const": "ACQUISITION_AUTHORITY" },
+        "non_hardware_qualification_must_emit_independent_table_from": { "const": "14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c" },
+        "comparison_method": { "const": "byte_for_byte_or_value_for_value" },
+        "comparison_scope": {
+          "type": "array",
+          "prefixItems": [
+            { "const": "12 tone frequencies" },
+            { "const": "4 mode names" },
+            { "const": "4 complete codeword rows" },
+            { "const": "mode-to-row mapping" },
+            { "const": "source SHA-256" },
+            { "const": "extracted table digest" }
+          ],
+          "minItems": 6,
+          "maxItems": 6
+        },
+        "source_sha256": { "const": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976" },
+        "imported_table_digest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "current_python_reproduction_is_independent_c_extraction": { "const": false },
+        "evidence_package_created": { "const": false }
+      },
+      "additionalProperties": false
+    }
+  }
+}

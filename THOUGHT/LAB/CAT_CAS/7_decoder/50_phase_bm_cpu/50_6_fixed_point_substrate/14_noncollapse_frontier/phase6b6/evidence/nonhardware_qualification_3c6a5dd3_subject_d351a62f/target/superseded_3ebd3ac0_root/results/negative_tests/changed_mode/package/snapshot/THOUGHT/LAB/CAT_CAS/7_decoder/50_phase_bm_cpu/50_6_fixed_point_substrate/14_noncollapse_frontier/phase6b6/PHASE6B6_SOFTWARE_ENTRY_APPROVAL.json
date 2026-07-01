@@ -1,0 +1,50 @@
+{
+  "schema_id": "CAT_CAS_PHASE6B6_SOFTWARE_ENTRY_APPROVAL_V1",
+  "decision": "APPROVE_PHASE6B6_SOFTWARE_ENTRY_ONLY",
+  "decision_date": "2026-06-28",
+  "project_owner": "Raul Romero",
+  "base_main_head": "19afa4a4696c068c45e9bb6fcc03f65b466f0500",
+  "entry_design_commit": "b4a154853a53db45c173e9c708563e0961244112",
+  "entry_review_head": "a25bfd9e5993f2ad9079d3b773bd23181e2abe25",
+  "entry_review": 4588082595,
+  "effective_design": [
+    "PHASE6B6_ENTRY_PACKAGE.md",
+    "PHASE6B6_ENTRY_REVIEW_ADDENDUM.md"
+  ],
+  "phase6b6_entry_approved": true,
+  "phase6b6_entered": true,
+  "implementation_authorized": true,
+  "software_qualification_authorized": true,
+  "non_hardware_target_qualification_authorized": true,
+  "hardware_ran": false,
+  "authorization_artifact_created": false,
+  "calibration_authorized": false,
+  "scientific_acquisition_authorized": false,
+  "restoration_authorized": false,
+  "target_coupling_authorized": false,
+  "small_wall_authorized": false,
+  "implementation_scope": [
+    "scientific contract and schemas",
+    "deterministic session schedule generation",
+    "explicit-slot software runtime and mock backend",
+    "capture and custody validators",
+    "state construction",
+    "phase-native operator ladder",
+    "analysis preregistration manifest",
+    "synthetic fixtures and negative controls",
+    "software-only CI",
+    "sealed-snapshot non-hardware Phenom qualification"
+  ],
+  "prohibited_scope": [
+    "real hardware execution",
+    "engineering smoke execution",
+    "calibration execution",
+    "scientific acquisition",
+    "restoration",
+    "target coupling",
+    "orientation recovery",
+    "fold-odd invariant recovery",
+    "Small Wall work"
+  ],
+  "next_boundary": "INDEPENDENT_SOFTWARE_IMPLEMENTATION_AND_EVIDENCE_REVIEW_BEFORE_ACQUISITION_AUTHORITY"
+}

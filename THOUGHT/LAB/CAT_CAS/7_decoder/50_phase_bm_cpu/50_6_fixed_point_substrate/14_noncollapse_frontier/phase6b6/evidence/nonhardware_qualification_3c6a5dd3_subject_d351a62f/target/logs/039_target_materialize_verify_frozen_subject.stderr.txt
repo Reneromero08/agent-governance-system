@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/root/catcas_phase6b6_nonhardware_3c6a5dd3_subject_d351a62f/checkout/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/qualification/qualification_contract.py", line 18, in <module>
+    from jsonschema import Draft202012Validator
+ModuleNotFoundError: No module named 'jsonschema'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<stdin>", line 3, in <module>
+  File "/root/catcas_phase6b6_nonhardware_3c6a5dd3_subject_d351a62f/checkout/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/qualification/qualification_contract.py", line 20, in <module>
+    from jsonschema import Draft7Validator as Draft202012Validator  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'jsonschema'

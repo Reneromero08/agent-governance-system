@@ -1,0 +1,29 @@
+{
+  "exit_code": 2,
+  "mutation": {
+    "after": {
+      "mode": "0644",
+      "mode_symbolic": "-rw-r--r--",
+      "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/changed_copied_byte/package/capture_quality_contract.h",
+      "sha256": "18590bedb1d5e632ea400e95ebf9e9bdfb107afca0ca80722226654d0009c7b6"
+    },
+    "before": {
+      "mode": "0644",
+      "mode_symbolic": "-rw-r--r--",
+      "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/changed_copied_byte/package/capture_quality_contract.h",
+      "sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140"
+    },
+    "bytes_unchanged": false,
+    "relative_path": "capture_quality_contract.h",
+    "type": "changed_copied_byte"
+  },
+  "name": "changed_copied_byte",
+  "rejected": true,
+  "stderr_bytes": 57,
+  "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/changed_copied_byte/stderr.txt",
+  "stderr_sha256": "4031ddc5e50695c676c74dad3eeed2c6628dbec941b45787b59ea292fff66c0a",
+  "stderr_text": "copied file SHA-256 mismatch: capture_quality_contract.h\n",
+  "stdout_bytes": 0,
+  "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/changed_copied_byte/stdout.json",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

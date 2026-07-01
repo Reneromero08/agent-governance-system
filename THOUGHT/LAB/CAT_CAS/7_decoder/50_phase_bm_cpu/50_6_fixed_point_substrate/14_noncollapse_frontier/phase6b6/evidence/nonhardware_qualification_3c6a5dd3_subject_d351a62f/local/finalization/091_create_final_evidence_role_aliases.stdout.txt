@@ -1,0 +1,24 @@
+{
+  "all_forbidden_options_rejected": true,
+  "all_mutations_rejected": true,
+  "created_alias_count": 11,
+  "created_aliases": [
+    "TARGET_QUALIFICATION_RESULT.json",
+    "TARGET_NEGATIVE_MODE_ONLY_0644_TO_0600.json",
+    "target/qualification/portable-target-result.json",
+    "target/qualification/portable-target-result.stderr",
+    "target/qualification/portable-target-command-meta.txt",
+    "target/qualification/target-result-required-field-checks.json",
+    "target/negative_tests/negative_test_summary.json",
+    "target/permission_tests/TARGET_NEGATIVE_MODE_ONLY_0644_TO_0600.json",
+    "target/package_verification/archive_member_inspection.json",
+    "target/package_verification/extracted_permission_inventory.json",
+    "transfer/phase6b6-portable-A.tar.sha256"
+  ],
+  "mandatory_exit_code": 2,
+  "mandatory_status": "PASS",
+  "mutation_count": 15,
+  "option_count": 9,
+  "target_final_result_sha256": "c2d1bf3c78e2a9318f51e06d27ac39a49fe7a49e3cd49c0c8850cd6c85a07f7f",
+  "target_status": "PHASE6B6_PORTABLE_TARGET_QUALIFICATION_PASS"
+}

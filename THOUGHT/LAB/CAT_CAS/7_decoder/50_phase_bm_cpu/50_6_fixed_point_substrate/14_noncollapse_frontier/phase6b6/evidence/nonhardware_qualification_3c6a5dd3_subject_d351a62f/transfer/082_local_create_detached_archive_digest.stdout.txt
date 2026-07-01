@@ -1,0 +1,5 @@
+archive_path=D:\phase6b6_portable_export_0c5f1cbf_20260701T064950Z\phase6b6-portable-A.tar
+archive_bytes=481280
+digest_path=D:\phase6b6_portable_export_0c5f1cbf_20260701T064950Z\phase6b6-portable-A.tar.sha256
+digest_bytes=90
+affbc0b3e9725de62aa946774e3e8830399f9af12414713b1bfbc68547765ca4  phase6b6-portable-A.tar

@@ -1,0 +1,11 @@
+{
+  "command_ledger_max_sequence": 93,
+  "command_ledger_sha256": "603d9f06b9ece9778086c4d50c2dc255eeb37fbb1bf817dc6ff65b7b13d505aa",
+  "inventory_file_count": 1143,
+  "inventory_sha256": "e6fd6eae9f7c4eaa954ac25693805b072725542d5bdee616cf36946c1c2bbf6f",
+  "mandatory_negative_exit_code": 2,
+  "mutation_count": 15,
+  "option_count": 9,
+  "status": "PHASE6B6_NONHARDWARE_TARGET_QUALIFICATION_EVIDENCE_COMPLETE",
+  "target_final_result_digest": "c2d1bf3c78e2a9318f51e06d27ac39a49fe7a49e3cd49c0c8850cd6c85a07f7f"
+}

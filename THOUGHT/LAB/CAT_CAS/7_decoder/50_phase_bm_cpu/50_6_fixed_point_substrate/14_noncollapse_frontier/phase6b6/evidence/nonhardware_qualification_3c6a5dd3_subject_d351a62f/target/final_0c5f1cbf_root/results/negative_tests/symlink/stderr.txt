@@ -1,0 +1,1 @@
+portable package symlink entries rejected: ['unbound_symlink']

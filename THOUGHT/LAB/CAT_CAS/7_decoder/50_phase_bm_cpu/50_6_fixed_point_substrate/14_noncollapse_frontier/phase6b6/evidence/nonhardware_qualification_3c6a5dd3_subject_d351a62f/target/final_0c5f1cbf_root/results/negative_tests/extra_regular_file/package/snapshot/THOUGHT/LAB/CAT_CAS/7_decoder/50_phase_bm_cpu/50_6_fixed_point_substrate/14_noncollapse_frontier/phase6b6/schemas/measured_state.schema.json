@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "CAT_CAS_PHASE6B6_MEASURED_STATE_V1",
+  "type": "object",
+  "required": ["lockin_I", "lockin_Q", "ring_osc_period"],
+  "properties": {
+    "lockin_I": { "type": "number" },
+    "lockin_Q": { "type": "number" },
+    "ring_osc_period": { "type": "number" }
+  },
+  "not": {
+    "anyOf": [
+      { "required": ["session_id"] },
+      { "required": ["route"] },
+      { "required": ["target_label"] },
+      { "required": ["order_control_family"] },
+      { "required": ["declared_order_family"] },
+      { "required": ["session_chronology"] },
+      { "required": ["future_value"] }
+    ]
+  },
+  "additionalProperties": false
+}

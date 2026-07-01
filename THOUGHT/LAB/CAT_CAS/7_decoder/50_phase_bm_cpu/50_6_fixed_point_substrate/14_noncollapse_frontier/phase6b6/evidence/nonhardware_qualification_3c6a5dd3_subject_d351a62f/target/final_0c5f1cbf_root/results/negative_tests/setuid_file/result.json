@@ -1,0 +1,29 @@
+{
+  "exit_code": 2,
+  "mutation": {
+    "after": {
+      "mode": "4644",
+      "mode_symbolic": "-rwSr--r--",
+      "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/setuid_file/package/capture_quality_contract.h",
+      "sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140"
+    },
+    "before": {
+      "mode": "0644",
+      "mode_symbolic": "-rw-r--r--",
+      "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/setuid_file/package/capture_quality_contract.h",
+      "sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140"
+    },
+    "bytes_unchanged": true,
+    "relative_path": "capture_quality_contract.h",
+    "type": "file_permission"
+  },
+  "name": "setuid_file",
+  "rejected": true,
+  "stderr_bytes": 117,
+  "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/setuid_file/stderr.txt",
+  "stderr_sha256": "b1a7ebd5b3c9b630040ad508f61dbeca1a46e198e990a2c5805f333885c8301b",
+  "stderr_text": "package file permission mismatch: path=capture_quality_contract.h git_source_mode=100644 expected=0644 observed=4644\n",
+  "stdout_bytes": 0,
+  "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/setuid_file/stdout.json",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

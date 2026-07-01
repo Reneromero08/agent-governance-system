@@ -1,0 +1,44 @@
+At line:53 char:10
++ & $py - <<'PY' $temp $e
++          ~
+Missing file specification after redirection operator.
+At line:53 char:9
++ & $py - <<'PY' $temp $e
++         ~
+The '<' operator is reserved for future use.
+At line:53 char:10
++ & $py - <<'PY' $temp $e
++          ~
+The '<' operator is reserved for future use.
+At line:57 char:23
++ problems=[]; seen=set(); case_seen={}; collisions=[]; inventory=[]; f ...
++                       ~
+An expression was expected after '('.
+At line:58 char:27
++ with tarfile.open(tar_path,'r') as tf:
++                           ~
+Missing argument in parameter list.
+At line:61 char:33
++     manifest=json.loads(mf.read().decode())
++                                 ~
+An expression was expected after '('.
+At line:63 char:8
++     for rel in ('PORTABLE_PACKAGE_MANIFEST.json','PORTABLE_PACKAGE_MA ...
++        ~
+Missing opening '(' after keyword 'for'.
+At line:66 char:8
++     for m in tf.getmembers():
++        ~
+Missing opening '(' after keyword 'for'.
+At line:66 char:28
++     for m in tf.getmembers():
++                            ~
+An expression was expected after '('.
+At line:67 char:80
++ ... h=pathlib.PurePosixPath(m.name); parts=path.parts; low=m.name.lower()
++                                                                         ~
+An expression was expected after '('.
+Not all parse errors were reported.  Correct the reported errors and try again.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : MissingFileSpecification
+ 
