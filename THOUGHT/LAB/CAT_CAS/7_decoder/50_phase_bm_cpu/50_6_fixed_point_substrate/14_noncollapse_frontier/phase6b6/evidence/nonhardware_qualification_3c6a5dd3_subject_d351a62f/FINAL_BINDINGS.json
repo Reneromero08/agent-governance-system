@@ -46,8 +46,8 @@
     "old_target_root_before": "present"
   },
   "digests": {
-    "command_ledger_max_sequence": 109,
-    "command_ledger_sha256": "40ca5ed9557116672d7fba511d103cb2d3836eeb53220863041d0882d1ca4852",
+    "command_ledger_max_sequence": 119,
+    "command_ledger_sha256": "d054ee6ad5b7d26b2b43adc5f3bb0f1143ef6508eb01bf1ea18636e5350ac322",
     "mandatory_negative_file_sha256": "860b3d7cce8e0918e81774833872cb6123a69ac31b483c2f4c4c36c8ea5f4972",
     "target_final_result_digest": "c2d1bf3c78e2a9318f51e06d27ac39a49fe7a49e3cd49c0c8850cd6c85a07f7f",
     "target_identity_sha256": "f83163b0a4aa68cd28b9d85408b8be60d424615bcfeb51d046b187ba1fdc778d",
@@ -57,10 +57,16 @@
     "evidence_collection_commit": "951f30435ce27a96cbf63749b92c39c8488606d3",
     "evidence_trim_commit": "c9568f9cbd9a57eaff8fb2ef7282081ea3aeb246",
     "final_evidence_seal_path": "FINAL_EVIDENCE_SEAL.json",
+    "first_reconciled_payload_commit": "6635476c2bdcbc01d357c111d22894da876a22fb",
+    "first_seal_commit": "cf315c14c9e472496ddcdcaf539a5fd8ae27563c",
+    "first_seal_status": "SUPERSEDED_GIT_OBJECT_INVENTORY_MISMATCH",
+    "inventory_byte_authority": "STAGED_GIT_BLOBS",
     "post_ledger_reconciliation_path": "POST_LEDGER_TRIM_RECONCILIATION.json",
     "post_ledger_trim_reconciled": true,
-    "review_id": "4607833783",
-    "review_result_closed": "REPAIR_REQUIRED_CLOSED_BY_RECONCILIATION"
+    "post_seal_reconciliation_path": "POST_SEAL_GIT_OBJECT_RECONCILIATION.json",
+    "review_id": "4608312642",
+    "review_result_closed": "REPAIR_REQUIRED_CLOSED_BY_GIT_OBJECT_RECONCILIATION",
+    "worktree_bytes_authoritative": false
   },
   "frozen_identities": {
     "asan_raw_stdout_sha256": "56a26105b2b6969a05addbaafaa8db672d0d05a50158e1d145ed2903fec889c2",
@@ -80,7 +86,7 @@
     "ubsan_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "v2_source_sha256": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976"
   },
-  "generated_utc": "2026-07-01T10:47:40Z",
+  "generated_utc": "2026-07-01T11:31:05Z",
   "mandatory_mode_negative": {
     "base_permission": "0644",
     "base_sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140",
@@ -129,12 +135,13 @@
   },
   "next_boundary": "independent evidence review",
   "payload_hashes": {
-    "COMMANDS.jsonl": "40ca5ed9557116672d7fba511d103cb2d3836eeb53220863041d0882d1ca4852",
+    "COMMANDS.jsonl": "d054ee6ad5b7d26b2b43adc5f3bb0f1143ef6508eb01bf1ea18636e5350ac322",
     "POST_LEDGER_TRIM_RECONCILIATION.json": "f3bd6fd34ec693978f9f03497109ce8e4f00fef9e43d85f6885bec66a73bfa5e",
-    "REMOVED_DUPLICATE_MUTATION_PACKAGE_TREES.json": "09e70ce3954de2bafdbb9d7a06381ef8bd61b9b8cd560a3328f8c7f7dc2e62de",
+    "POST_SEAL_GIT_OBJECT_RECONCILIATION.json": "fc48a126348a1c5f7d2ad4253e23a6eef3d093b837ec6c23312492a774dee370",
+    "REMOVED_DUPLICATE_MUTATION_PACKAGE_TREES.json": "5d44c19b624520fcacd7daa1a12e6ea34cc98d226dc29add9d49850de7cf6db4",
     "TARGET_NEGATIVE_MODE_ONLY_0644_TO_0600.json": "860b3d7cce8e0918e81774833872cb6123a69ac31b483c2f4c4c36c8ea5f4972",
     "TARGET_QUALIFICATION_RESULT.json": "eb276be44682718cef579529265f2fb1384e570d61c84baabb72b0af45b27ac3",
-    "TEST_COUNTS.json": "54374edf2a9e384de58acd070e815f7f54a99b00ef0650e3b6efe062d9e8a8c9"
+    "TEST_COUNTS.json": "0805328933fc87475c12837da87d7797f0256b1c54e65bc5c8fdb12eb6db3497"
   },
   "physical_acquisition": "NOT_AUTHORIZED_NOT_RUN",
   "portable_package": {

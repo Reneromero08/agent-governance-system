@@ -1,0 +1,1 @@
+validate_staged_inventory: PASS prospective_record=local/git_object_reconciliation/115_validate_staged_git_object_inventory.json

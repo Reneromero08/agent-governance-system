@@ -1,0 +1,12 @@
+{
+  "generated_utc": "2026-07-01T11:27:33Z",
+  "head": "cf315c14c9e472496ddcdcaf539a5fd8ae27563c",
+  "origin_branch_head": "cf315c14c9e472496ddcdcaf539a5fd8ae27563c",
+  "schema_id": "CAT_CAS_PHASE6B6_SUPERSEDED_IDENTITY_VERIFICATION_V1",
+  "status": "PASS",
+  "superseded_payload_commit": "6635476c2bdcbc01d357c111d22894da876a22fb",
+  "superseded_payload_tree": "ad7b9c515737a676c544c4240fcaba7ababc8ff9",
+  "superseded_seal_commit": "cf315c14c9e472496ddcdcaf539a5fd8ae27563c",
+  "superseded_seal_parent": "6635476c2bdcbc01d357c111d22894da876a22fb",
+  "superseded_seal_sha256": "e691e6b8f3ae00b13538c379713529bd0de8f3c37f550b8e5de417b2104674fe"
+}
