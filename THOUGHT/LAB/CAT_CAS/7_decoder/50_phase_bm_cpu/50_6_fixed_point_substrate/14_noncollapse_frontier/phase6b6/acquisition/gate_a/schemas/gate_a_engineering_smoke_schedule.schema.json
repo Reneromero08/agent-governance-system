@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "CAT_CAS_PHASE6B6_GATE_A_ENGINEERING_SMOKE_SCHEDULE_SCHEMA_V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "architecture_integration",
+    "base_main_commit",
+    "expanded_slot_rule",
+    "frequency_and_voltage",
+    "preconditions",
+    "schedule_sha256",
+    "schema_id",
+    "scientific_use",
+    "session",
+    "slot_definitions",
+    "slot_sequence",
+    "status",
+    "stop_conditions",
+    "target",
+    "timing"
+  ],
+  "properties": {
+    "architecture_integration": {
+      "const": {
+        "review_id": 4614574719,
+        "reviewed_head": "b3c0ec7cfceeaea95fc9d37fa98266987f418397",
+        "squash_merge_commit": "9c41637992536f43d10d152ec176a3577aef1623"
+      }
+    },
+    "base_main_commit": { "const": "9c41637992536f43d10d152ec176a3577aef1623" },
+    "expanded_slot_rule": {
+      "const": {
+        "nominal_samples": 4000,
+        "requested_end_tick": "array_index_plus_one",
+        "requested_start_tick": "array_index",
+        "slot_index": "array_index"
+      }
+    },
+    "frequency_and_voltage": {
+      "const": {
+        "expected_observed_khz": 1600000,
+        "frequency_write_authorized": false,
+        "mismatch_action": "STOP_BEFORE_DRIVE",
+        "msr_write_authorized": false,
+        "voltage_write_authorized": false
+      }
+    },
+    "preconditions": {
+      "type": "array",
+      "minItems": 8,
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "schedule_sha256": { "const": "418ff6e9801ba5def3f17fb25c7d56f044599e6e5bc8cc3260e0368d4877d116" },
+    "schema_id": { "const": "CAT_CAS_PHASE6B6_GATE_A_ENGINEERING_SMOKE_SCHEDULE_V1" },
+    "scientific_use": {
+      "const": {
+        "claim_generation": false,
+        "model_fitting": false,
+        "scientific_dataset_eligible": false,
+        "test_access": false,
+        "train_access": false,
+        "validation_access": false
+      }
+    },
+    "session": {
+      "const": {
+        "boot_state_count": 1,
+        "reboot_block": null,
+        "receiver_core": 5,
+        "route": "v4s5",
+        "run_namespace": "phase6b6/gate_a/engineering_smoke_01",
+        "scientific_split": null,
+        "sender_core": 4,
+        "session_count": 1,
+        "session_index": 0
+      }
+    },
+    "slot_definitions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["I", "C0", "D0", "S0E", "O0", "A0P", "A0N", "T"],
+      "properties": {
+        "I": { "$ref": "#/$defs/slot" },
+        "C0": { "$ref": "#/$defs/slot" },
+        "D0": { "$ref": "#/$defs/slot" },
+        "S0E": { "$ref": "#/$defs/slot" },
+        "O0": { "$ref": "#/$defs/slot" },
+        "A0P": { "$ref": "#/$defs/slot" },
+        "A0N": { "$ref": "#/$defs/slot" },
+        "T": { "$ref": "#/$defs/slot" }
+      }
+    },
+    "slot_sequence": {
+      "const": ["I", "I", "I", "I", "C0", "D0", "S0E", "S0E", "S0E", "S0E", "O0", "O0", "A0P", "A0N", "T", "T"]
+    },
+    "status": { "const": "PROPOSED__NO_EXECUTION_AUTHORITY" },
+    "stop_conditions": {
+      "type": "array",
+      "minItems": 9,
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "target": {
+      "const": {
+        "architecture_expected": "x86_64",
+        "cpu_model_expected": "AMD Phenom(tm) II X6 1090T Processor",
+        "hostname_expected": "catcas",
+        "kernel_evidence": "Linux catcas 6.12.86+deb13-amd64",
+        "ssh_target": "root@192.168.137.100",
+        "target_identity_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/nonhardware_qualification_3c6a5dd3_subject_d351a62f/target/target_identity.json",
+        "target_identity_stdout_sha256": "10618a70ceb3413d7507c22254d595d63632bb7ad9243dbe3dc6ebbaf13e19a4"
+      }
+    },
+    "timing": {
+      "const": {
+        "automatic_retry": false,
+        "maximum_execution_count": 1,
+        "nominal_duration_s": 8.0,
+        "nominal_samples_per_slot": 4000,
+        "read_hz": 8000,
+        "slot_count": 16,
+        "slot_s": 0.5,
+        "temperature_veto_c": 68.0
+      }
+    }
+  },
+  "$defs": {
+    "slot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "declared", "executed"],
+      "properties": {
+        "stage": { "type": "string" },
+        "declared": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "analysis_tone_index",
+            "declared_amplitude_level",
+            "declared_mode",
+            "declared_phase_action",
+            "declared_physical_tone_index",
+            "declared_sign"
+          ],
+          "properties": {
+            "analysis_tone_index": { "type": ["integer", "null"] },
+            "declared_amplitude_level": { "type": ["integer", "null"] },
+            "declared_mode": { "type": "string" },
+            "declared_phase_action": { "type": "string" },
+            "declared_physical_tone_index": { "type": ["integer", "null"] },
+            "declared_sign": { "type": ["integer", "null"] }
+          }
+        },
+        "executed": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "amplitude_level",
+            "drive_on",
+            "executed_mode",
+            "phase_action",
+            "physical_tone_index",
+            "sender_epoch_id",
+            "sign"
+          ],
+          "properties": {
+            "amplitude_level": { "type": ["integer", "null"] },
+            "drive_on": { "type": "boolean" },
+            "executed_mode": { "type": "string" },
+            "phase_action": { "type": ["string", "null"] },
+            "physical_tone_index": { "type": ["integer", "null"] },
+            "sender_epoch_id": { "type": ["string", "null"] },
+            "sign": { "type": ["integer", "null"] }
+          }
+        }
+      }
+    }
+  }
+}
