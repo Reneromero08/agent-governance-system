@@ -58,6 +58,12 @@
     "run_plan_frozen": true
   },
   "next_boundary": "INDEPENDENT_GATE_A_PLAN_AND_CANDIDATE_REVIEW",
+  "plan_bindings": {
+    "run_plan_git_blob_sha1": "f7352d9c92a5275fc426e791b5509fd8aae85251",
+    "run_plan_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/GATE_A_ENGINEERING_SMOKE_RUN_PLAN.md",
+    "target_namespace_binding_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/GATE_A_TARGET_NAMESPACE_BINDING.json",
+    "target_namespace_binding_sha256": "5b3090f642d28492e182630e6349eccd8181704f08129d40d886c8f529dfd50e"
+  },
   "post_review_boundary": "GATE_A_HARDWARE_ADAPTER_IMPLEMENTATION_AND_NONEXECUTING_QUALIFICATION",
   "review_state": {
     "candidate_review_complete": false,
