@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Target-side Gate A runner interface with no-drive qualification mode."""
+"""Target-side Gate A runner interface with no-drive qualification mode.
+
+This runner is Git-free. It imports only gate_a_target_bundle and
+gate_a_authority, both of which are packaged inside the deterministic archive.
+It never imports the host-only Git-aware bundle builder, so an extracted bundle
+can start it and validate itself without a .git repository.
+"""
 
 from __future__ import annotations
 
@@ -11,13 +17,14 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-import build_gate_a_execution_bundle as bundle
 import gate_a_authority
+import gate_a_target_bundle as target_bundle
 
 HERE = Path(__file__).resolve().parent
+BUNDLE_ROOT = HERE.parent
 WORKER = HERE / "gate_a_worker.c"
-EXPECTED_SCHEDULE_SHA256 = "418ff6e9801ba5def3f17fb25c7d56f044599e6e5bc8cc3260e0368d4877d116"
-EXPECTED_NAMESPACE_SHA256 = "5b3090f642d28492e182630e6349eccd8181704f08129d40d886c8f529dfd50e"
+EXPECTED_SCHEDULE_SHA256 = target_bundle.SCHEDULE_SHA256
+EXPECTED_NAMESPACE_SHA256 = target_bundle.NAMESPACE_SHA256
 EXPECTED_TARGET = gate_a_authority.EXPECTED_TARGET
 
 
@@ -36,6 +43,19 @@ def load_object(path: Path) -> dict[str, Any]:
     return value
 
 
+def remote_output_root_absent(path: Path) -> bool:
+    try:
+        return not path.exists()
+    except OSError:
+        return True
+
+
+def locally_validated_manifest(bundle_root: Path, *, strict: bool = True) -> dict[str, Any]:
+    manifest = target_bundle.load_manifest(bundle_root)
+    target_bundle.validate_extracted_bundle(bundle_root, manifest, strict=strict)
+    return manifest
+
+
 def compile_worker(output: Path, extra_flags: list[str] | None = None) -> None:
     flags = ["cc", "-std=c11", "-Wall", "-Wextra", "-Werror", "-pedantic", "-O2", "-pthread", str(WORKER), "-lm", "-o", str(output)]
     if extra_flags:
@@ -48,31 +68,39 @@ def run_validate_only(executable: Path) -> dict[str, Any]:
     return json.loads(result.stdout)
 
 
-def qualify_no_drive() -> dict[str, Any]:
-    with tempfile.TemporaryDirectory(prefix="gate_a_no_drive_") as tmp:
-        exe = Path(tmp) / "gate_a_worker"
-        compile_worker(exe)
-        payload = run_validate_only(exe)
-    require(payload["status"] == "GATE_A_WORKER_VALIDATE_ONLY_OK", "worker validation failed")
+def qualify_no_drive(bundle_root: Path = BUNDLE_ROOT, *, compile_c: bool = True) -> dict[str, Any]:
+    manifest = target_bundle.load_manifest(bundle_root)
+    local = target_bundle.validate_extracted_bundle(bundle_root, manifest, strict=False)
+    worker_payload: dict[str, Any] | None = None
+    compiled = False
+    if compile_c:
+        with tempfile.TemporaryDirectory(prefix="gate_a_no_drive_") as tmp:
+            exe = Path(tmp) / "gate_a_worker"
+            compile_worker(exe)
+            worker_payload = run_validate_only(exe)
+        require(worker_payload["status"] == "GATE_A_WORKER_VALIDATE_ONLY_OK", "worker validation failed")
+        compiled = True
     return {
         "status": "GATE_A_TARGET_RUNNER_NO_DRIVE_QUALIFIED",
         "null_baseline": "NO_DRIVE_ZERO_COUNT_BASELINE",
-        "compiled": True,
-        "worker_validate_only": payload,
+        "git_free": True,
+        "local_bundle_validation": local,
+        "compiled": compiled,
+        "worker_validate_only": worker_payload,
         "network_connections_opened": 0,
         "hardware_probes": 0,
         "sender_starts": 0,
         "receiver_captures": 0,
         "control_writes": 0,
+        "msr_accesses": 0,
         "hardware_executions": 0,
     }
 
 
-def validate_authority(path: Path, digest: str, args: argparse.Namespace) -> dict[str, Any]:
-    manifest = load_object(HERE / "GATE_A_EXECUTION_BUNDLE_MANIFEST.json")
+def validate_authority(path: Path, digest: str, args: argparse.Namespace, exact_manifest: dict[str, Any]) -> dict[str, Any]:
     require(args.source_head, "source head is required")
     require(args.independent_review_id is not None, "independent review ID is required")
-    require(args.execution_bundle_sha256 == manifest["execution_bundle_sha256"], "bundle argument mismatch")
+    require(args.execution_bundle_sha256 == exact_manifest["execution_bundle_sha256"], "bundle argument mismatch")
     require(args.schedule_sha256 == EXPECTED_SCHEDULE_SHA256, "schedule argument mismatch")
     require(args.target == EXPECTED_TARGET, "target argument mismatch")
     require(args.namespace_sha256 == EXPECTED_NAMESPACE_SHA256, "namespace argument mismatch")
@@ -84,7 +112,7 @@ def validate_authority(path: Path, digest: str, args: argparse.Namespace) -> dic
         authority_bytes=authority_bytes,
         expected_reviewed_adapter_head=args.source_head,
         expected_independent_review_id=args.independent_review_id,
-        expected_manifest=manifest,
+        exact_manifest=exact_manifest,
     )
 
 
@@ -98,8 +126,9 @@ def execute_authorized(args: argparse.Namespace) -> None:
     require(args.namespace_sha256, "namespace digest is required")
     require(args.output_root, "output root is required")
     output_root = Path(args.output_root)
-    require(not output_root.exists(), "existing output root rejected")
-    validate_authority(Path(args.authority_artifact), args.authority_sha256, args)
+    require(remote_output_root_absent(output_root), "existing output root rejected")
+    exact_manifest = locally_validated_manifest(BUNDLE_ROOT, strict=False)
+    validate_authority(Path(args.authority_artifact), args.authority_sha256, args, exact_manifest)
     raise TargetRunnerError("authorized live execution path is intentionally unused in this qualification phase")
 
 
@@ -145,6 +174,6 @@ def main(argv: list[str] | None = None) -> int:
 if __name__ == "__main__":
     try:
         raise SystemExit(main())
-    except (TargetRunnerError, bundle.BundleError, gate_a_authority.AuthorityError, subprocess.CalledProcessError, json.JSONDecodeError) as exc:
+    except (TargetRunnerError, target_bundle.TargetBundleError, gate_a_authority.AuthorityError, subprocess.CalledProcessError, json.JSONDecodeError) as exc:
         print(f"gate_a_target_runner: {exc}", file=sys.stderr)
         raise SystemExit(1)

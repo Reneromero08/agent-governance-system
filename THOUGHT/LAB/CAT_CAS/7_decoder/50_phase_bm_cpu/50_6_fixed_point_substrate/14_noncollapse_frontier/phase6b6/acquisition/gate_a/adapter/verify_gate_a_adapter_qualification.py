@@ -7,6 +7,7 @@ import copy
 import hashlib
 import json
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -15,6 +16,8 @@ from typing import Any, Callable
 
 import build_gate_a_execution_bundle as bundle
 import gate_a_hardware_adapter as adapter
+import gate_a_isolated_qualification as isolated_harness
+import gate_a_target_bundle as target_bundle
 import gate_a_target_runner
 
 HERE = Path(__file__).resolve().parent
@@ -114,10 +117,12 @@ def static_forbidden_surface_scan() -> dict[str, Any]:
     ]
     implementation_files = [
         HERE / "gate_a_authority.py",
+        HERE / "gate_a_target_bundle.py",
         HERE / "gate_a_hardware_adapter.py",
         HERE / "gate_a_target_runner.py",
         HERE / "gate_a_worker.c",
         HERE / "build_gate_a_execution_bundle.py",
+        HERE / "gate_a_isolated_qualification.py",
     ]
     matches: list[dict[str, str]] = []
     for path in implementation_files:
@@ -198,7 +203,8 @@ def validate_authority_host(path: Path, digest: str, manifest: dict[str, Any], r
 
 def validate_authority_both(path: Path, digest: str, manifest: dict[str, Any], reviewed_head: str, review_id: int) -> tuple[dict[str, Any], dict[str, Any]]:
     host_result = validate_authority_host(path, digest, manifest, reviewed_head, review_id)
-    runner_result = gate_a_target_runner.validate_authority(path, digest, target_args(manifest, reviewed_head, review_id))
+    exact_manifest = bundle.validate_committed_manifest_exact(manifest, "HEAD")
+    runner_result = gate_a_target_runner.validate_authority(path, digest, target_args(manifest, reviewed_head, review_id), exact_manifest)
     return host_result, runner_result
 
 
@@ -293,6 +299,7 @@ def authority_mutation_tests(manifest: dict[str, Any]) -> dict[str, Any]:
         host_result, runner_result = validate_authority_both(path, digest, manifest, reviewed_head, review_id)
         require(host_result == runner_result, "host/target authority validation result mismatch")
         equivalence_result = host_result
+        exact_manifest = bundle.validate_committed_manifest_exact(manifest, "HEAD")
 
         def reject_both(name: str, changed: dict[str, Any], expected_head: str = reviewed_head, expected_review_id: int = review_id, digest_override: str | None = None) -> str:
             actual_digest = write_authority(changed)
@@ -300,7 +307,7 @@ def authority_mutation_tests(manifest: dict[str, Any]) -> dict[str, Any]:
             def host_case() -> None:
                 validate_authority_host(path, use_digest, manifest, expected_head, expected_review_id)
             def runner_case() -> None:
-                gate_a_target_runner.validate_authority(path, use_digest, target_args(manifest, expected_head, expected_review_id))
+                gate_a_target_runner.validate_authority(path, use_digest, target_args(manifest, expected_head, expected_review_id), exact_manifest)
             assert_rejects(name + ":host", host_case)
             assert_rejects(name + ":target", runner_case)
             return name
@@ -456,6 +463,18 @@ def mutation_tests() -> dict[str, Any]:
     }
 
 
+def isolated_bundle_qualification() -> dict[str, Any]:
+    compile_c = shutil.which("cc") is not None
+    with tempfile.TemporaryDirectory(prefix="gate_a_extract_") as tmp:
+        root = Path(tmp) / "bundle"
+        bundle.write_extracted_tree(root, "HEAD")
+        require(not (root / ".git").exists(), "extracted bundle must not contain .git")
+        report = isolated_harness.build_isolated_report(root, require_isolated_origin=False, compile_c=compile_c)
+    require(report["status"] == "GATE_A_ISOLATED_BUNDLE_QUALIFICATION_PASS", "isolated bundle qualification failed")
+    report["c_compiler_present"] = compile_c
+    return report
+
+
 def validate_records() -> dict[str, Any]:
     manifest = load(MANIFEST)
     result = load(RESULT)
@@ -553,15 +572,19 @@ def main() -> int:
     require(manifest_a == manifest_b, "bundle double-build mismatch")
     records = validate_records()
     mutations = mutation_tests()
+    isolated = isolated_bundle_qualification()
     scan = static_forbidden_surface_scan()
     runtime_path = HERE.parents[2] / "runtime" / "explicit_slot_runtime.py"
     require("SOFTWARE_ENTRY_ONLY_AUTHORITY: real hardware execution is not authorized" in runtime_path.read_text(encoding="utf-8"), "runtime hardware rejection marker missing")
+    total_negative_tests = mutations["negative_tests"] + isolated["isolated_negative_tests"]
     result = {
         "status": "GATE_A_ADAPTER_QUALIFICATION_PASS",
         "null_baseline": "NO_DRIVE_ZERO_COUNT_BASELINE",
         "adapter_no_drive": no_drive["status"],
         "bundle_double_build_equivalence": True,
         "mutation_tests": mutations,
+        "isolated_bundle_qualification": isolated,
+        "total_negative_tests": total_negative_tests,
         "forbidden_surface_scan": scan,
         "records": records,
         "authority_artifact_absent": True,

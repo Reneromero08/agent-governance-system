@@ -2,6 +2,26 @@
 
 # Changelog
 
+## 2026-07-02: Phase 6B.6 Gate A self-contained target bundle
+
+- Phase 6B.6: make the deterministic Gate A target bundle self-contained so an
+  extracted bundle can start and validate itself without a `.git` repository.
+  Host-side Git custody stays exact (committed-tree reconstruction, exact Git
+  modes, blobs, sizes, and SHA-256). The shared future-authority validator no
+  longer imports the Git-aware bundle builder; it consumes an already validated
+  exact manifest. A new Git-free `gate_a_target_bundle.py` validates an
+  extracted bundle against the manifest (package path, byte size, SHA-256,
+  role, payload archive digest, execution bundle digest) and is packaged inside
+  the deterministic archive alongside the target runner and authority modules.
+  The builder emits a deployment archive (payload files plus a detached manifest
+  envelope, no digest cycle). The dedicated workflow now builds the archive
+  twice, extracts it outside the repository, and runs the target runner and a
+  synthetic-authority mutation suite with the repository excluded from
+  `PYTHONPATH`. This is hosted target-bundle isolation qualification only; the
+  actual target non-executing qualification remains incomplete, no execution
+  authority artifact is created, no Phenom connection or hardware execution is
+  authorized, and engineering smoke and `hardware_ran` remain false.
+
 ## 2026-07-02: Phase 6B.6 Gate A adapter custody repair
 
 - Phase 6B.6: close PR #36 Gate A adapter review blockers by making runtime

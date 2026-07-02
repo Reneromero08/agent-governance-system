@@ -159,13 +159,14 @@ def validate_future_authority(
     expected_independent_review_id: int,
     expected_manifest: dict[str, Any],
 ) -> dict[str, Any]:
+    exact_manifest = bundle.validate_committed_manifest_exact(expected_manifest, "HEAD")
     return gate_a_authority.validate_execution_authority(
         authority,
         authority_sha256=authority_sha256,
         authority_bytes=authority_bytes,
         expected_reviewed_adapter_head=expected_reviewed_adapter_head,
         expected_independent_review_id=expected_independent_review_id,
-        expected_manifest=expected_manifest,
+        exact_manifest=exact_manifest,
     )
 
 
@@ -180,12 +181,13 @@ def load_authority(
     require(path is not None and digest is not None, "future execution authority artifact and SHA-256 are required")
     require(expected_reviewed_adapter_head is not None, "reviewed adapter head is required")
     require(expected_independent_review_id is not None, "independent review ID is required")
+    exact_manifest = bundle.validate_committed_manifest_exact(expected_manifest, "HEAD")
     return gate_a_authority.load_and_validate_execution_authority(
         path,
         authority_sha256=digest,
         expected_reviewed_adapter_head=expected_reviewed_adapter_head,
         expected_independent_review_id=expected_independent_review_id,
-        expected_manifest=expected_manifest,
+        exact_manifest=exact_manifest,
     )
 
 

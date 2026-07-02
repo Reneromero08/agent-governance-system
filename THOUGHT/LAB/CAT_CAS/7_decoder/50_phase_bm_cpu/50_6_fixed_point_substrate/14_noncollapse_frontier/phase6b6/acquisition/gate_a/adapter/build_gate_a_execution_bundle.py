@@ -1,5 +1,23 @@
 #!/usr/bin/env python3
-"""Build and verify the deterministic Gate A execution-bundle manifest."""
+"""Build and verify the deterministic Gate A execution-bundle manifest.
+
+Host-side Git custody is exact and lives here: the manifest is reconstructed
+from committed Git tree objects, every Git mode and blob is validated, and the
+deterministic payload archive digest is computed from committed blob bytes.
+
+The Git-free digest algorithm and target-side validation live in
+gate_a_target_bundle.py, which is packaged inside the deterministic archive so
+an extracted bundle can validate itself without .git. This module delegates the
+canonical-bytes, sha256, and payload-archive-digest primitives to that shared
+module so host and target compute byte-identical digests.
+
+Digest layering (non-circular):
+  payload manifest core  -> execution_bundle_sha256 (sha256 of canonical core)
+  payload-only PAX tar   -> deterministic_archive_sha256
+  deployment archive      = payload files + a detached manifest envelope; the
+                            envelope stores the payload-tar digest, never its own
+                            container digest, so there is no cycle.
+"""
 
 from __future__ import annotations
 
@@ -15,6 +33,8 @@ from io import BytesIO
 from pathlib import Path
 from typing import Any
 
+import gate_a_target_bundle as target_bundle
+
 BASE_MAIN = "03985a74d27e654c151cccad28c6221d91f70180"
 REVIEWED_PLAN_HEAD = "65d20b4bc65ddd9260a3c90d92612d2da48763a6"
 PLAN_REVIEW_ID = 4617290767
@@ -28,6 +48,7 @@ MANIFEST_PATH = HERE / "GATE_A_EXECUTION_BUNDLE_MANIFEST.json"
 
 PACKAGE_FILES = [
     ("adapter/gate_a_authority.py", HERE / "gate_a_authority.py", "shared_authority_validator"),
+    ("adapter/gate_a_target_bundle.py", HERE / "gate_a_target_bundle.py", "target_bundle_validator"),
     ("adapter/gate_a_hardware_adapter.py", HERE / "gate_a_hardware_adapter.py", "host_adapter"),
     ("adapter/gate_a_target_runner.py", HERE / "gate_a_target_runner.py", "target_runner"),
     ("adapter/gate_a_worker.c", HERE / "gate_a_worker.c", "target_worker"),
@@ -37,31 +58,9 @@ PACKAGE_FILES = [
     ("GATE_A_TARGET_NAMESPACE_BINDING.json", GATE_A / "GATE_A_TARGET_NAMESPACE_BINDING.json", "target_namespace"),
 ]
 
-MANIFEST_KEYS = {
-    "schema_id",
-    "base_main_commit",
-    "reviewed_gate_a_plan_head",
-    "gate_a_plan_review",
-    "schedule_sha256",
-    "target_namespace_sha256",
-    "target_identity_stdout_sha256",
-    "authority_artifact_created",
-    "engineering_smoke_authorized",
-    "hardware_ran",
-    "files",
-    "execution_bundle_sha256",
-    "deterministic_archive_sha256",
-}
+MANIFEST_KEYS = target_bundle.MANIFEST_KEYS
 
-FILE_ENTRY_KEYS = {
-    "package_path",
-    "source_repository_path",
-    "git_mode",
-    "git_blob_sha1",
-    "byte_size",
-    "sha256",
-    "role",
-}
+FILE_ENTRY_KEYS = target_bundle.FILE_ENTRY_KEYS
 
 
 class BundleError(RuntimeError):
@@ -90,7 +89,7 @@ def git(args: list[str], *, input_text: str | None = None) -> str:
 
 
 def canonical_bytes(value: Any) -> bytes:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode("utf-8")
+    return target_bundle.canonical_bytes(value)
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -175,20 +174,8 @@ def validate_package_paths(entries: list[dict[str, Any]]) -> None:
 
 def archive_digest(entries: list[dict[str, Any]]) -> str:
     validate_package_paths(entries)
-    stream = BytesIO()
-    with tarfile.open(fileobj=stream, mode="w", format=tarfile.PAX_FORMAT) as archive:
-        for entry in entries:
-            data = blob_bytes(entry["git_blob_sha1"])
-            info = tarfile.TarInfo(name=entry["package_path"])
-            info.size = len(data)
-            info.mode = 0o644
-            info.mtime = 0
-            info.uid = 0
-            info.gid = 0
-            info.uname = ""
-            info.gname = ""
-            archive.addfile(info, BytesIO(data))
-    return sha256_bytes(stream.getvalue())
+    named_blobs = [(entry["package_path"], blob_bytes(entry["git_blob_sha1"])) for entry in entries]
+    return target_bundle.payload_archive_digest(named_blobs)
 
 
 def render_manifest(treeish: str) -> dict[str, Any]:
@@ -241,11 +228,51 @@ def validate_manifest_digests(manifest: dict[str, Any]) -> None:
     require(archive == archive_digest(manifest["files"]), "deterministic archive digest mismatch")
 
 
+def manifest_envelope_bytes(manifest: dict[str, Any]) -> bytes:
+    return (json.dumps(manifest, sort_keys=True, indent=2) + "\n").encode("utf-8")
+
+
+def deployment_members(manifest: dict[str, Any]) -> list[tuple[str, bytes]]:
+    members = [(entry["package_path"], blob_bytes(entry["git_blob_sha1"])) for entry in manifest["files"]]
+    members.append((target_bundle.MANIFEST_ENVELOPE_PACKAGE_PATH, manifest_envelope_bytes(manifest)))
+    return members
+
+
+def write_extracted_tree(dest: Path, treeish: str = "HEAD") -> dict[str, Any]:
+    manifest = render_manifest(treeish)
+    validate_committed_manifest_exact(manifest, treeish)
+    for name, data in deployment_members(manifest):
+        out = dest / name
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_bytes(data)
+    return manifest
+
+
+def write_deployment_archive(path: Path, treeish: str = "HEAD") -> dict[str, Any]:
+    manifest = render_manifest(treeish)
+    validate_committed_manifest_exact(manifest, treeish)
+    with tarfile.open(path, mode="w", format=tarfile.PAX_FORMAT) as archive:
+        for name, data in deployment_members(manifest):
+            info = tarfile.TarInfo(name=name)
+            info.size = len(data)
+            info.mode = 0o644
+            info.mtime = 0
+            info.uid = 0
+            info.gid = 0
+            info.uname = ""
+            info.gname = ""
+            archive.addfile(info, BytesIO(data))
+    return manifest
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Build Gate A deterministic execution bundle")
     parser.add_argument("--treeish", default="HEAD", help="Git treeish to read; ':' reads staged index")
     parser.add_argument("--write-manifest", action="store_true")
     parser.add_argument("--compare-twice", action="store_true")
+    parser.add_argument("--emit-tree", default=None, help="write payload files plus the manifest envelope to a directory")
+    parser.add_argument("--emit-archive", default=None, help="write the deterministic deployment archive to a path")
+    parser.add_argument("--quiet", action="store_true")
     args = parser.parse_args(argv)
     manifest = render_manifest(args.treeish)
     validate_manifest_digests(manifest)
@@ -256,7 +283,12 @@ def main(argv: list[str] | None = None) -> int:
         require(manifest == manifest_b, "bundle manifest is not stable across two builds")
     if args.write_manifest:
         MANIFEST_PATH.write_text(json.dumps(manifest, sort_keys=True, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps(manifest, sort_keys=True, indent=2))
+    if args.emit_tree:
+        write_extracted_tree(Path(args.emit_tree), args.treeish)
+    if args.emit_archive:
+        write_deployment_archive(Path(args.emit_archive), args.treeish)
+    if not args.quiet:
+        print(json.dumps(manifest, sort_keys=True, indent=2))
     return 0
 
 
