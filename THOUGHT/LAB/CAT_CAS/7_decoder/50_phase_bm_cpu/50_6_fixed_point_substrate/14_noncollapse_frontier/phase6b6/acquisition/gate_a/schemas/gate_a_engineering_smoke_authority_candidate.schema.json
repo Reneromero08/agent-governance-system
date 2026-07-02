@@ -22,91 +22,88 @@
     "status": { "const": "CANDIDATE__BLOCKED_PENDING_REVIEW_AND_EXECUTION_BUNDLE" },
     "base_main_commit": { "const": "9c41637992536f43d10d152ec176a3577aef1623" },
     "architecture_binding": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["architecture_merge_commit", "architecture_path", "architecture_review_id", "architecture_reviewed_head"],
-      "properties": {
-        "architecture_merge_commit": { "const": "9c41637992536f43d10d152ec176a3577aef1623" },
-        "architecture_path": { "type": "string" },
-        "architecture_review_id": { "const": 4614574719 },
-        "architecture_reviewed_head": { "const": "b3c0ec7cfceeaea95fc9d37fa98266987f418397" }
+      "const": {
+        "architecture_merge_commit": "9c41637992536f43d10d152ec176a3577aef1623",
+        "architecture_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/PHASE6B6_ACQUISITION_AUTHORITY_ARCHITECTURE.md",
+        "architecture_review_id": 4614574719,
+        "architecture_reviewed_head": "b3c0ec7cfceeaea95fc9d37fa98266987f418397"
       }
     },
-    "evidence_bindings": { "type": "object" },
+    "evidence_bindings": {
+      "const": {
+        "corrected_payload_commit": "38eccc2f8377c656b0c21cbd37dd296e81adfad4",
+        "corrected_payload_tree": "159c04abd72ed631e7647249b539b548d8351e4b",
+        "evidence_inventory_sha256": "7b205dd92482425505e498027a3e96db842297fad949fe22bdbf5542e95573e0",
+        "integrated_evidence_head": "b2b785d064d4704ef2955238593f9f5050425f55",
+        "mock_custody_digest": "4c0a58772fd25fe77759d6d09089ad532a09b3a5adcdce01dc099b6b7b00dba1",
+        "phase6b6_subtree_digest": "24789f0df9afa2d9f6a243a9050ff8f265cf22ffb42ab33bbe2f67521dbf44b5",
+        "portable_archive_sha256": "affbc0b3e9725de62aa946774e3e8830399f9af12414713b1bfbc68547765ca4",
+        "portable_manifest_sha256": "59e5c5927cfa7f19bdaafdd740cb350f5819e81741b62821a22f2eb80ecd4676",
+        "schedule_digest": "c632d59934c2610541e279cac3a48202f2c0a79bb734e995f2cc4f28d19e87d3",
+        "target_final_result_digest": "c2d1bf3c78e2a9318f51e06d27ac39a49fe7a49e3cd49c0c8850cd6c85a07f7f",
+        "target_identity_stdout_sha256": "10618a70ceb3413d7507c22254d595d63632bb7ad9243dbe3dc6ebbaf13e19a4",
+        "v2_source_digest": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976"
+      }
+    },
     "smoke_schedule": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["maximum_execution_count", "nominal_duration_s", "path", "schedule_sha256", "schema_id", "slot_count"],
-      "properties": {
-        "maximum_execution_count": { "const": 1 },
-        "nominal_duration_s": { "const": 8.0 },
-        "path": { "type": "string" },
-        "schedule_sha256": { "const": "418ff6e9801ba5def3f17fb25c7d56f044599e6e5bc8cc3260e0368d4877d116" },
-        "schema_id": { "const": "CAT_CAS_PHASE6B6_GATE_A_ENGINEERING_SMOKE_SCHEDULE_V1" },
-        "slot_count": { "const": 16 }
+      "const": {
+        "maximum_execution_count": 1,
+        "nominal_duration_s": 8.0,
+        "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/GATE_A_ENGINEERING_SMOKE_SCHEDULE.json",
+        "schedule_sha256": "418ff6e9801ba5def3f17fb25c7d56f044599e6e5bc8cc3260e0368d4877d116",
+        "schema_id": "CAT_CAS_PHASE6B6_GATE_A_ENGINEERING_SMOKE_SCHEDULE_V1",
+        "slot_count": 16
       }
     },
     "execution_bundle": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["execution_bundle_ready", "execution_bundle_sha256", "hardware_adapter_path", "hardware_adapter_qualified", "hardware_adapter_sha256", "qualified_portable_archive_sha256", "qualified_portable_manifest_sha256", "status"],
-      "properties": {
-        "execution_bundle_ready": { "const": false },
-        "execution_bundle_sha256": { "type": "null" },
-        "hardware_adapter_path": { "type": "null" },
-        "hardware_adapter_qualified": { "const": false },
-        "hardware_adapter_sha256": { "type": "null" },
-        "qualified_portable_archive_sha256": { "type": "string" },
-        "qualified_portable_manifest_sha256": { "type": "string" },
-        "status": { "const": "NOT_IMPLEMENTED__NOT_QUALIFIED" }
+      "const": {
+        "execution_bundle_ready": false,
+        "execution_bundle_sha256": null,
+        "hardware_adapter_path": null,
+        "hardware_adapter_qualified": false,
+        "hardware_adapter_sha256": null,
+        "qualified_portable_archive_sha256": "affbc0b3e9725de62aa946774e3e8830399f9af12414713b1bfbc68547765ca4",
+        "qualified_portable_manifest_sha256": "59e5c5927cfa7f19bdaafdd740cb350f5819e81741b62821a22f2eb80ecd4676",
+        "status": "NOT_IMPLEMENTED__NOT_QUALIFIED"
       }
     },
     "review_state": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["candidate_review_complete", "execution_bundle_review_complete", "project_owner_execution_approval_recorded", "run_plan_review_complete"],
-      "properties": {
-        "candidate_review_complete": { "const": false },
-        "execution_bundle_review_complete": { "const": false },
-        "project_owner_execution_approval_recorded": { "const": false },
-        "run_plan_review_complete": { "const": false }
+      "const": {
+        "candidate_review_complete": false,
+        "execution_bundle_review_complete": false,
+        "project_owner_execution_approval_recorded": false,
+        "run_plan_review_complete": false
       }
     },
     "gate_state": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["authorized", "consumed", "designed", "executed", "owner_approved", "reviewed", "run_plan_frozen"],
-      "properties": {
-        "authorized": { "const": false },
-        "consumed": { "const": false },
-        "designed": { "const": true },
-        "executed": { "const": false },
-        "owner_approved": { "const": false },
-        "reviewed": { "const": false },
-        "run_plan_frozen": { "const": true }
+      "const": {
+        "authorized": false,
+        "consumed": false,
+        "designed": true,
+        "executed": false,
+        "owner_approved": false,
+        "reviewed": false,
+        "run_plan_frozen": true
       }
     },
     "authority": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["phase6b6_entry_approved", "phase6b6_entered", "implementation_authorized", "software_qualification_authorized", "non_hardware_target_qualification_authorized", "evidence_package_created", "qualification_evidence_collected", "authorization_artifact_created", "engineering_smoke_authorized", "hardware_ran", "calibration_authorized", "scientific_acquisition_authorized", "restoration_authorized", "target_coupling_authorized", "small_wall_authorized", "automatic_retry"],
-      "properties": {
-        "phase6b6_entry_approved": { "const": true },
-        "phase6b6_entered": { "const": true },
-        "implementation_authorized": { "const": true },
-        "software_qualification_authorized": { "const": true },
-        "non_hardware_target_qualification_authorized": { "const": true },
-        "evidence_package_created": { "const": true },
-        "qualification_evidence_collected": { "const": true },
-        "authorization_artifact_created": { "const": false },
-        "engineering_smoke_authorized": { "const": false },
-        "hardware_ran": { "const": false },
-        "calibration_authorized": { "const": false },
-        "scientific_acquisition_authorized": { "const": false },
-        "restoration_authorized": { "const": false },
-        "target_coupling_authorized": { "const": false },
-        "small_wall_authorized": { "const": false },
-        "automatic_retry": { "const": false }
+      "const": {
+        "authorization_artifact_created": false,
+        "automatic_retry": false,
+        "calibration_authorized": false,
+        "engineering_smoke_authorized": false,
+        "evidence_package_created": true,
+        "hardware_ran": false,
+        "implementation_authorized": true,
+        "non_hardware_target_qualification_authorized": true,
+        "phase6b6_entered": true,
+        "phase6b6_entry_approved": true,
+        "qualification_evidence_collected": true,
+        "restoration_authorized": false,
+        "scientific_acquisition_authorized": false,
+        "small_wall_authorized": false,
+        "software_qualification_authorized": true,
+        "target_coupling_authorized": false
       }
     },
     "next_boundary": { "const": "INDEPENDENT_GATE_A_PLAN_AND_CANDIDATE_REVIEW" },
