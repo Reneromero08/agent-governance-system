@@ -1,0 +1,32 @@
+{
+  "schema_id": "CAT_CAS_PHASE6B6_GATE_A_ADAPTER_QUALIFICATION_RESULT_V1",
+  "status": "TARGET_NONEXECUTING_QUALIFICATION_REQUIRED",
+  "adapter_implementation_complete": true,
+  "hosted_nonexecuting_qualification_complete": true,
+  "target_nonexecuting_qualification_complete": false,
+  "execution_bundle_ready": true,
+  "execution_bundle_target_qualified": false,
+  "authority_artifact_created": false,
+  "engineering_smoke_authorized": false,
+  "hardware_ran": false,
+  "no_target_connection_occurred": true,
+  "no_ssh_occurred": true,
+  "no_sender_ran": true,
+  "no_receiver_capture_ran": true,
+  "no_control_write_occurred": true,
+  "next_boundary": "GATE_A_TARGET_NONEXECUTING_QUALIFICATION",
+  "execution_bundle_sha256": "abc9e50a517d764c553adc5096378992028b29a8f62480a9ae217ebbd5202bba",
+  "deterministic_archive_sha256": "04eaf73336f373865f4e837baca9ff4fe893d3b1b16dd8b8288af1259ff96f9c",
+  "bundle_manifest_sha256": "ccb7866db67170083cb00d546c334b61772c8ef909131ec9c62ed21115facc94",
+  "authority_false_state": {
+    "authorization_artifact_created": false,
+    "engineering_smoke_authorized": false,
+    "hardware_ran": false,
+    "calibration_authorized": false,
+    "scientific_acquisition_authorized": false,
+    "restoration_authorized": false,
+    "target_coupling_authorized": false,
+    "small_wall_authorized": false,
+    "automatic_retry": false
+  }
+}

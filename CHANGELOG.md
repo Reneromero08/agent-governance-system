@@ -2,6 +2,78 @@
 
 # Changelog
 
+## 2026-07-02: Phase 6B.6 Gate A fail-closed target precondition custody
+
+- Phase 6B.6: close the two remaining fail-closed defects in the Gate A target
+  runner. Output-root absence is now fail-closed: `inspect_output_root` returns
+  a three-valued `RootState` (ABSENT / PRESENT / UNOBSERVABLE), and only a
+  positively established absent path is accepted. A `PermissionError`, generic
+  `OSError`, existing directory, regular file, symlink, or special file all
+  reject the authorized path. The live filesystem precondition is separated from
+  authority validation and takes an injectable inspector seam so the synthetic
+  authority test uses a temporary positively-absent path without weakening the
+  production remote-root binding. Both production entry paths
+  (`--qualify-no-drive` and `--execute-authorized`) now use strict
+  extracted-bundle validation; the target runner no longer relies on the harness
+  for strict custody. The generated-file allowlist is narrowed to an exact set
+  (the detached manifest envelope only, plus an explicit caller-supplied
+  allowlist); arbitrary `gate_a_worker*` names and arbitrary `.pyc`/`.pyo`/
+  `__pycache__` bytecode are no longer accepted. The extracted bundle is treated
+  as immutable during qualification: bytecode writing is disabled and the worker
+  is compiled to an external temporary directory, and CI asserts the extracted
+  tree is byte-identical after qualification. Runner-level root-state and
+  strict-custody negative tests exercise the same production functions used by
+  `--execute-authorized`. Actual target qualification remains incomplete; no
+  execution authority artifact is created, no Phenom connection or hardware
+  execution is authorized, engineering smoke remains unauthorized, and
+  `hardware_ran` remains false.
+
+## 2026-07-02: Phase 6B.6 Gate A self-contained target bundle
+
+- Phase 6B.6: make the deterministic Gate A target bundle self-contained so an
+  extracted bundle can start and validate itself without a `.git` repository.
+  Host-side Git custody stays exact (committed-tree reconstruction, exact Git
+  modes, blobs, sizes, and SHA-256). The shared future-authority validator no
+  longer imports the Git-aware bundle builder; it consumes an already validated
+  exact manifest. A new Git-free `gate_a_target_bundle.py` validates an
+  extracted bundle against the manifest (package path, byte size, SHA-256,
+  role, payload archive digest, execution bundle digest) and is packaged inside
+  the deterministic archive alongside the target runner and authority modules.
+  The builder emits a deployment archive (payload files plus a detached manifest
+  envelope, no digest cycle). The dedicated workflow now builds the archive
+  twice, extracts it outside the repository, and runs the target runner and a
+  synthetic-authority mutation suite with the repository excluded from
+  `PYTHONPATH`. This is hosted target-bundle isolation qualification only; the
+  actual target non-executing qualification remains incomplete, no execution
+  authority artifact is created, no Phenom connection or hardware execution is
+  authorized, and engineering smoke and `hardware_ran` remain false.
+
+## 2026-07-02: Phase 6B.6 Gate A adapter custody repair
+
+- Phase 6B.6: close PR #36 Gate A adapter review blockers by making runtime
+  bundle-manifest validation reconstruct the exact committed Git-object
+  manifest, adding one shared exact future-authority validator for the host
+  adapter and target runner, expanding mutation coverage for manifest and
+  authority custody, removing pseudo-schema data fields from candidate/result
+  records, and pinning the dedicated adapter workflow runner and actions.
+  Target qualification remains incomplete; no execution authority artifact is
+  created, and no Phenom connection or hardware execution is authorized.
+
+## 2026-07-02: Phase 6B.6 Gate A adapter no-drive qualification
+
+- Phase 6B.6: add the Gate A hardware-adapter and execution-bundle layer under
+  the Gate A acquisition namespace, including no-drive host and target runner
+  interfaces, a validate-only C worker, deterministic Git-blob bundle manifest,
+  future one-shot authority schema, candidate V2, result record, mutation
+  verifier, and hosted no-drive qualification workflow. The existing
+  software-entry workflow now prunes this adapter namespace from its legacy
+  "no software-entry C sources" guard because the adapter workflow owns strict
+  C, ASan, and UBSan validation for the worker. The layer does not create an
+  execution authority artifact and does not connect to or execute on the
+  Phenom target; engineering smoke, hardware execution, control writes,
+  calibration, scientific acquisition, restoration, target coupling, and Small
+  Wall authority remain false.
+
 ## 2026-06-30: Phase 6B.6 non-hardware qualification harness
 
 - Phase 6B.6: repair the portable package permission boundary. The portable
