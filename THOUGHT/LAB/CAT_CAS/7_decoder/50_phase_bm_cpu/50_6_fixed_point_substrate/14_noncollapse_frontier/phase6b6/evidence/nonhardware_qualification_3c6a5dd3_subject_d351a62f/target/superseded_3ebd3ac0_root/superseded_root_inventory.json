@@ -1,0 +1,1367 @@
+[
+  {
+    "path": "incoming/phase6b6-portable-A.tar",
+    "size": 481280,
+    "sha256": "6d0f655f26e2284d6adc17664f53010dd053865793e3f325c0021d71af01ce3e"
+  },
+  {
+    "path": "incoming/phase6b6-portable-A.tar.sha256",
+    "size": 91,
+    "sha256": "983be12045f333ba356a14522b302cc9a55202c9f452f19262a45c5c147307d1"
+  },
+  {
+    "path": "logs/archive_member_inspection.json",
+    "size": 8182,
+    "sha256": "ff5cd5f8b631e07dfd05b4a288da36897cd8ed44f5ff5ec64bd9c7a2f8bc12cb"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/capture_quality_contract.h",
+    "size": 2338,
+    "sha256": "18590bedb1d5e632ea400e95ebf9e9bdfb107afca0ca80722226654d0009c7b6"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/captured_file.h",
+    "size": 931,
+    "sha256": "81c94e8c29bffc915f9a3fa2db50605387f8f1544e2f561a674b8c82e4043469"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/combined_pdn_hardware.h",
+    "size": 1851,
+    "sha256": "a85e202fd65c520cad4853eea9168d2af9d92aa0b05b640bb8b180aed34141ae"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/emit_v2_reference_table.c",
+    "size": 2830,
+    "sha256": "f48f2bbce9d74373d961ff95f8c8cd7455406bc81a23e5a601470b75782d0837"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/PORTABLE_PACKAGE_MANIFEST.json",
+    "size": 27248,
+    "sha256": "79da3b911bd5c751508a6b68628dd314a29f48f1bc3dd9de41d01ea50a9732c0"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/PORTABLE_PACKAGE_MANIFEST.sha256",
+    "size": 97,
+    "sha256": "a659e6a1ad03aaa0a8d0a06e815d260d51f4ed62e02215d54f61e3fc7fcf24f9"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/portable_target_qualification.py",
+    "size": 61638,
+    "sha256": "c58438719e2d574d63add7cd0a74c5e6432abe3c9515c2fd7ae663178d7c4b6e"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/QUALIFICATION_CONTRACT.json",
+    "size": 2815,
+    "sha256": "ce881ae640975a0f8974991272f2c4c22c292a707c071b43ded803a57dd68d4d"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c",
+    "size": 49171,
+    "sha256": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/__init__.py",
+    "size": 41,
+    "sha256": "63381ad9086d317cf8206bbb7f7290a1fe24002bb7c779b5771998e23ca2fa8f"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/__init__.py",
+    "size": 63,
+    "sha256": "20a422b22458d83f76def350945f055622828332f0dd12e06057d021d1867491"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/adjudication.py",
+    "size": 2748,
+    "sha256": "e13590585d1fc66b3293ad5340dbdf4257750ef47e31dc25b9a507c9266e443e"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/metrics.py",
+    "size": 6889,
+    "sha256": "f7e872b436d415969ae5682b931fa68c6c1b8aa672f29625a1ffc1d03ca02a62"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/observations.py",
+    "size": 1242,
+    "sha256": "48bf0674412d221daaebc75fd9c3b6b77a53785f379c82fbe7ae0eb04fa87d5b"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/operators.py",
+    "size": 8115,
+    "sha256": "37c228644721cbe0b0c2287a56a56c9c5b806121ccf89a32eee5e2c072cfde66"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/pipeline.py",
+    "size": 55386,
+    "sha256": "bb1c9f5805126213bfe0e6e2844a786b23e0036611ff273e2b71de32995f08a3"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/state.py",
+    "size": 6803,
+    "sha256": "775938f6359c2d9e1253fbbabe120999b241318849b2b87a3eef529acdf60fdb"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/synthetic.py",
+    "size": 3231,
+    "sha256": "193b7b24dbf49ece40fef0fa3b5b7027e000922d4550e1dc94785ff80785b8d7"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/__init__.py",
+    "size": 59,
+    "sha256": "5b168f008a8767d9636c5db768c1cba510548d0d0fe257abe8d518b06db906be"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/contract.py",
+    "size": 7266,
+    "sha256": "b5eed17d1a16461a51817617c7ca99c3805da667600f4fa8fc7f88bb81199750"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/schedule.py",
+    "size": 12914,
+    "sha256": "fcd8b424575a9e6f1feb6c1ecfce5436be274825272ecad0466ada62ec4f2476"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/v2_interface.py",
+    "size": 7604,
+    "sha256": "060a7ed100e06cafeec245a53c657270bc71c2ec38c37779d26b108a443876b4"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_ENTRY_PACKAGE.md",
+    "size": 21628,
+    "sha256": "da01b489ce4d9ac80519e2fda8146e6cdd5209128438e8cca19ba13ee73170e1"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md",
+    "size": 5612,
+    "sha256": "ae33a60d0204f3175d8a7bd9a228754ae6a1f939d7a780c54734a49a96b231ae"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json",
+    "size": 1809,
+    "sha256": "3c8fccb30401336f4676145e8d83adbcd2f1e750fc45cd0a9a2ad3b34db9db05"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/__init__.py",
+    "size": 40,
+    "sha256": "856ab4c76bf7b81a23fbff4036962e7df6270922fc294fa21f43e7045e73dac8"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/explicit_slot_runtime.py",
+    "size": 6631,
+    "sha256": "71382b695b330833697fc39b59d552907593b218a8a8f47d196ed0280bbc54f9"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/state_machine.py",
+    "size": 4462,
+    "sha256": "1c721e7ee8e818f9821358f27ebe1f417c688c76ad58a69fef45fb5f3949b045"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/adjudication_result.schema.json",
+    "size": 1144,
+    "sha256": "029147a7b9a9517f1155523a62de81ae46358d82bc2f7780d0bb4db80ea1f48c"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/analysis_choice.schema.json",
+    "size": 3491,
+    "sha256": "6ace579c7b73b979d2c9ca0ef625051dfdea4d462d5eef67f8abd5a5b0842033"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/measured_state.schema.json",
+    "size": 696,
+    "sha256": "5fd87fb56ab1ddeb8a2c259a2a6cea5684e63084f68f9981314dad1cb9ed6eca"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/runtime_custody.schema.json",
+    "size": 12255,
+    "sha256": "ec38ba94b18ac276038234a0c68c5b966f445431afff05ae9900e1d8733c0987"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/schedule.schema.json",
+    "size": 5621,
+    "sha256": "64c00887d0bab8c3e208bedff87c3e284593877a1b369c7fe544943e1667b072"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/scientific_contract.schema.json",
+    "size": 9125,
+    "sha256": "32758199e1339d0db90aabfee632bbf05afb347a999e812eac519eefd1f3236b"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/validate_objects.py",
+    "size": 478,
+    "sha256": "90d4724b504d99bc6d3b29debd205b4191f455772bb47a047af7bc80617a0d87"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_analysis_partition.py",
+    "size": 33874,
+    "sha256": "36aa05d681f210cc7ee31faa06f844732109888572c476f826ec8831cb8b02a2"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_runtime_authority.py",
+    "size": 4163,
+    "sha256": "7ee6fdabd643dee7f92f28196d823eadcf3f4bf4930d18309a9c3016329144c6"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_schedule_contract.py",
+    "size": 12508,
+    "sha256": "4f2887176714137fd34761417b4bf2ce46edb5b380c8b72d9ce84919da2ce4f8"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/package/TRUSTED_SNAPSHOT_BINDING.json",
+    "size": 12755,
+    "sha256": "ab66ed703d77f35f620e1a309cdb23108fdcbd32bce5cae177d45e2345f4d2fe"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/stderr.txt",
+    "size": 57,
+    "sha256": "4031ddc5e50695c676c74dad3eeed2c6628dbec941b45787b59ea292fff66c0a"
+  },
+  {
+    "path": "results/negative_tests/changed_copied_byte/stdout.json",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/capture_quality_contract.h",
+    "size": 2338,
+    "sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/captured_file.h",
+    "size": 931,
+    "sha256": "81c94e8c29bffc915f9a3fa2db50605387f8f1544e2f561a674b8c82e4043469"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/combined_pdn_hardware.h",
+    "size": 1851,
+    "sha256": "a85e202fd65c520cad4853eea9168d2af9d92aa0b05b640bb8b180aed34141ae"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/emit_v2_reference_table.c",
+    "size": 2830,
+    "sha256": "f48f2bbce9d74373d961ff95f8c8cd7455406bc81a23e5a601470b75782d0837"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/PORTABLE_PACKAGE_MANIFEST.json",
+    "size": 27248,
+    "sha256": "79da3b911bd5c751508a6b68628dd314a29f48f1bc3dd9de41d01ea50a9732c0"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/PORTABLE_PACKAGE_MANIFEST.sha256",
+    "size": 97,
+    "sha256": "a659e6a1ad03aaa0a8d0a06e815d260d51f4ed62e02215d54f61e3fc7fcf24f9"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/portable_target_qualification.py",
+    "size": 61638,
+    "sha256": "c58438719e2d574d63add7cd0a74c5e6432abe3c9515c2fd7ae663178d7c4b6e"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/QUALIFICATION_CONTRACT.json",
+    "size": 2815,
+    "sha256": "ce881ae640975a0f8974991272f2c4c22c292a707c071b43ded803a57dd68d4d"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c",
+    "size": 49171,
+    "sha256": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/__init__.py",
+    "size": 41,
+    "sha256": "63381ad9086d317cf8206bbb7f7290a1fe24002bb7c779b5771998e23ca2fa8f"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/__init__.py",
+    "size": 63,
+    "sha256": "20a422b22458d83f76def350945f055622828332f0dd12e06057d021d1867491"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/adjudication.py",
+    "size": 2748,
+    "sha256": "e13590585d1fc66b3293ad5340dbdf4257750ef47e31dc25b9a507c9266e443e"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/metrics.py",
+    "size": 6889,
+    "sha256": "f7e872b436d415969ae5682b931fa68c6c1b8aa672f29625a1ffc1d03ca02a62"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/observations.py",
+    "size": 1242,
+    "sha256": "48bf0674412d221daaebc75fd9c3b6b77a53785f379c82fbe7ae0eb04fa87d5b"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/operators.py",
+    "size": 8115,
+    "sha256": "37c228644721cbe0b0c2287a56a56c9c5b806121ccf89a32eee5e2c072cfde66"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/pipeline.py",
+    "size": 55386,
+    "sha256": "bb1c9f5805126213bfe0e6e2844a786b23e0036611ff273e2b71de32995f08a3"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/state.py",
+    "size": 6803,
+    "sha256": "775938f6359c2d9e1253fbbabe120999b241318849b2b87a3eef529acdf60fdb"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/synthetic.py",
+    "size": 3231,
+    "sha256": "193b7b24dbf49ece40fef0fa3b5b7027e000922d4550e1dc94785ff80785b8d7"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/__init__.py",
+    "size": 59,
+    "sha256": "5b168f008a8767d9636c5db768c1cba510548d0d0fe257abe8d518b06db906be"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/contract.py",
+    "size": 7266,
+    "sha256": "b5eed17d1a16461a51817617c7ca99c3805da667600f4fa8fc7f88bb81199750"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/schedule.py",
+    "size": 12914,
+    "sha256": "fcd8b424575a9e6f1feb6c1ecfce5436be274825272ecad0466ada62ec4f2476"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/v2_interface.py",
+    "size": 7604,
+    "sha256": "060a7ed100e06cafeec245a53c657270bc71c2ec38c37779d26b108a443876b4"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_ENTRY_PACKAGE.md",
+    "size": 21628,
+    "sha256": "da01b489ce4d9ac80519e2fda8146e6cdd5209128438e8cca19ba13ee73170e1"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md",
+    "size": 5612,
+    "sha256": "ae33a60d0204f3175d8a7bd9a228754ae6a1f939d7a780c54734a49a96b231ae"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json",
+    "size": 1809,
+    "sha256": "3c8fccb30401336f4676145e8d83adbcd2f1e750fc45cd0a9a2ad3b34db9db05"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/__init__.py",
+    "size": 40,
+    "sha256": "856ab4c76bf7b81a23fbff4036962e7df6270922fc294fa21f43e7045e73dac8"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/explicit_slot_runtime.py",
+    "size": 6631,
+    "sha256": "71382b695b330833697fc39b59d552907593b218a8a8f47d196ed0280bbc54f9"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/state_machine.py",
+    "size": 4462,
+    "sha256": "1c721e7ee8e818f9821358f27ebe1f417c688c76ad58a69fef45fb5f3949b045"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/adjudication_result.schema.json",
+    "size": 1144,
+    "sha256": "029147a7b9a9517f1155523a62de81ae46358d82bc2f7780d0bb4db80ea1f48c"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/analysis_choice.schema.json",
+    "size": 3491,
+    "sha256": "6ace579c7b73b979d2c9ca0ef625051dfdea4d462d5eef67f8abd5a5b0842033"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/measured_state.schema.json",
+    "size": 696,
+    "sha256": "5fd87fb56ab1ddeb8a2c259a2a6cea5684e63084f68f9981314dad1cb9ed6eca"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/runtime_custody.schema.json",
+    "size": 12255,
+    "sha256": "ec38ba94b18ac276038234a0c68c5b966f445431afff05ae9900e1d8733c0987"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/schedule.schema.json",
+    "size": 5621,
+    "sha256": "64c00887d0bab8c3e208bedff87c3e284593877a1b369c7fe544943e1667b072"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/scientific_contract.schema.json",
+    "size": 9125,
+    "sha256": "32758199e1339d0db90aabfee632bbf05afb347a999e812eac519eefd1f3236b"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/validate_objects.py",
+    "size": 478,
+    "sha256": "90d4724b504d99bc6d3b29debd205b4191f455772bb47a047af7bc80617a0d87"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_analysis_partition.py",
+    "size": 33874,
+    "sha256": "36aa05d681f210cc7ee31faa06f844732109888572c476f826ec8831cb8b02a2"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_runtime_authority.py",
+    "size": 4163,
+    "sha256": "7ee6fdabd643dee7f92f28196d823eadcf3f4bf4930d18309a9c3016329144c6"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_schedule_contract.py",
+    "size": 12508,
+    "sha256": "4f2887176714137fd34761417b4bf2ce46edb5b380c8b72d9ce84919da2ce4f8"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/package/TRUSTED_SNAPSHOT_BINDING.json",
+    "size": 12755,
+    "sha256": "ab66ed703d77f35f620e1a309cdb23108fdcbd32bce5cae177d45e2345f4d2fe"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/stderr.txt",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "results/negative_tests/changed_mode/stdout.json",
+    "size": 2918,
+    "sha256": "c0ff38323ca9a878bf83abcf555af2a510242006ace6eebf42c121406c5269bc"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/capture_quality_contract.h",
+    "size": 2338,
+    "sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/captured_file.h",
+    "size": 931,
+    "sha256": "81c94e8c29bffc915f9a3fa2db50605387f8f1544e2f561a674b8c82e4043469"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/combined_pdn_hardware.h",
+    "size": 1851,
+    "sha256": "a85e202fd65c520cad4853eea9168d2af9d92aa0b05b640bb8b180aed34141ae"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/emit_v2_reference_table.c",
+    "size": 2830,
+    "sha256": "f48f2bbce9d74373d961ff95f8c8cd7455406bc81a23e5a601470b75782d0837"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/PORTABLE_PACKAGE_MANIFEST.json",
+    "size": 27248,
+    "sha256": "79da3b911bd5c751508a6b68628dd314a29f48f1bc3dd9de41d01ea50a9732c0"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/PORTABLE_PACKAGE_MANIFEST.sha256",
+    "size": 97,
+    "sha256": "a659e6a1ad03aaa0a8d0a06e815d260d51f4ed62e02215d54f61e3fc7fcf24f9"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/portable_target_qualification.py",
+    "size": 61638,
+    "sha256": "c58438719e2d574d63add7cd0a74c5e6432abe3c9515c2fd7ae663178d7c4b6e"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/QUALIFICATION_CONTRACT.json",
+    "size": 2815,
+    "sha256": "ce881ae640975a0f8974991272f2c4c22c292a707c071b43ded803a57dd68d4d"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c",
+    "size": 49171,
+    "sha256": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/__init__.py",
+    "size": 41,
+    "sha256": "63381ad9086d317cf8206bbb7f7290a1fe24002bb7c779b5771998e23ca2fa8f"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/__init__.py",
+    "size": 63,
+    "sha256": "20a422b22458d83f76def350945f055622828332f0dd12e06057d021d1867491"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/adjudication.py",
+    "size": 2748,
+    "sha256": "e13590585d1fc66b3293ad5340dbdf4257750ef47e31dc25b9a507c9266e443e"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/metrics.py",
+    "size": 6889,
+    "sha256": "f7e872b436d415969ae5682b931fa68c6c1b8aa672f29625a1ffc1d03ca02a62"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/observations.py",
+    "size": 1242,
+    "sha256": "48bf0674412d221daaebc75fd9c3b6b77a53785f379c82fbe7ae0eb04fa87d5b"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/operators.py",
+    "size": 8115,
+    "sha256": "37c228644721cbe0b0c2287a56a56c9c5b806121ccf89a32eee5e2c072cfde66"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/pipeline.py",
+    "size": 55386,
+    "sha256": "bb1c9f5805126213bfe0e6e2844a786b23e0036611ff273e2b71de32995f08a3"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/state.py",
+    "size": 6803,
+    "sha256": "775938f6359c2d9e1253fbbabe120999b241318849b2b87a3eef529acdf60fdb"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/synthetic.py",
+    "size": 3231,
+    "sha256": "193b7b24dbf49ece40fef0fa3b5b7027e000922d4550e1dc94785ff80785b8d7"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/__init__.py",
+    "size": 59,
+    "sha256": "5b168f008a8767d9636c5db768c1cba510548d0d0fe257abe8d518b06db906be"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/contract.py",
+    "size": 7266,
+    "sha256": "b5eed17d1a16461a51817617c7ca99c3805da667600f4fa8fc7f88bb81199750"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/schedule.py",
+    "size": 12914,
+    "sha256": "fcd8b424575a9e6f1feb6c1ecfce5436be274825272ecad0466ada62ec4f2476"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/v2_interface.py",
+    "size": 7604,
+    "sha256": "060a7ed100e06cafeec245a53c657270bc71c2ec38c37779d26b108a443876b4"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_ENTRY_PACKAGE.md",
+    "size": 21628,
+    "sha256": "da01b489ce4d9ac80519e2fda8146e6cdd5209128438e8cca19ba13ee73170e1"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md",
+    "size": 5612,
+    "sha256": "ae33a60d0204f3175d8a7bd9a228754ae6a1f939d7a780c54734a49a96b231ae"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json",
+    "size": 1809,
+    "sha256": "3c8fccb30401336f4676145e8d83adbcd2f1e750fc45cd0a9a2ad3b34db9db05"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/__init__.py",
+    "size": 40,
+    "sha256": "856ab4c76bf7b81a23fbff4036962e7df6270922fc294fa21f43e7045e73dac8"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/explicit_slot_runtime.py",
+    "size": 6631,
+    "sha256": "71382b695b330833697fc39b59d552907593b218a8a8f47d196ed0280bbc54f9"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/state_machine.py",
+    "size": 4462,
+    "sha256": "1c721e7ee8e818f9821358f27ebe1f417c688c76ad58a69fef45fb5f3949b045"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/adjudication_result.schema.json",
+    "size": 1144,
+    "sha256": "029147a7b9a9517f1155523a62de81ae46358d82bc2f7780d0bb4db80ea1f48c"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/analysis_choice.schema.json",
+    "size": 3491,
+    "sha256": "6ace579c7b73b979d2c9ca0ef625051dfdea4d462d5eef67f8abd5a5b0842033"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/measured_state.schema.json",
+    "size": 696,
+    "sha256": "5fd87fb56ab1ddeb8a2c259a2a6cea5684e63084f68f9981314dad1cb9ed6eca"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/runtime_custody.schema.json",
+    "size": 12255,
+    "sha256": "ec38ba94b18ac276038234a0c68c5b966f445431afff05ae9900e1d8733c0987"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/schedule.schema.json",
+    "size": 5621,
+    "sha256": "64c00887d0bab8c3e208bedff87c3e284593877a1b369c7fe544943e1667b072"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/scientific_contract.schema.json",
+    "size": 9125,
+    "sha256": "32758199e1339d0db90aabfee632bbf05afb347a999e812eac519eefd1f3236b"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/validate_objects.py",
+    "size": 478,
+    "sha256": "90d4724b504d99bc6d3b29debd205b4191f455772bb47a047af7bc80617a0d87"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_analysis_partition.py",
+    "size": 33874,
+    "sha256": "36aa05d681f210cc7ee31faa06f844732109888572c476f826ec8831cb8b02a2"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_runtime_authority.py",
+    "size": 4163,
+    "sha256": "7ee6fdabd643dee7f92f28196d823eadcf3f4bf4930d18309a9c3016329144c6"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_schedule_contract.py",
+    "size": 12508,
+    "sha256": "4f2887176714137fd34761417b4bf2ce46edb5b380c8b72d9ce84919da2ce4f8"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/package/TRUSTED_SNAPSHOT_BINDING.json",
+    "size": 12755,
+    "sha256": "ab66ed703d77f35f620e1a309cdb23108fdcbd32bce5cae177d45e2345f4d2fe"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/stderr.txt",
+    "size": 85,
+    "sha256": "a5ac33abd60cecaec31692f18c0fc5aa43c4b1695f95b0383d860c833682383a"
+  },
+  {
+    "path": "results/negative_tests/extra_empty_directory/stdout.json",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/capture_quality_contract.h",
+    "size": 2338,
+    "sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/captured_file.h",
+    "size": 931,
+    "sha256": "81c94e8c29bffc915f9a3fa2db50605387f8f1544e2f561a674b8c82e4043469"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/combined_pdn_hardware.h",
+    "size": 1851,
+    "sha256": "a85e202fd65c520cad4853eea9168d2af9d92aa0b05b640bb8b180aed34141ae"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/emit_v2_reference_table.c",
+    "size": 2830,
+    "sha256": "f48f2bbce9d74373d961ff95f8c8cd7455406bc81a23e5a601470b75782d0837"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/PORTABLE_PACKAGE_MANIFEST.json",
+    "size": 27248,
+    "sha256": "79da3b911bd5c751508a6b68628dd314a29f48f1bc3dd9de41d01ea50a9732c0"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/PORTABLE_PACKAGE_MANIFEST.sha256",
+    "size": 97,
+    "sha256": "a659e6a1ad03aaa0a8d0a06e815d260d51f4ed62e02215d54f61e3fc7fcf24f9"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/portable_target_qualification.py",
+    "size": 61638,
+    "sha256": "c58438719e2d574d63add7cd0a74c5e6432abe3c9515c2fd7ae663178d7c4b6e"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/QUALIFICATION_CONTRACT.json",
+    "size": 2815,
+    "sha256": "ce881ae640975a0f8974991272f2c4c22c292a707c071b43ded803a57dd68d4d"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c",
+    "size": 49171,
+    "sha256": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/__init__.py",
+    "size": 41,
+    "sha256": "63381ad9086d317cf8206bbb7f7290a1fe24002bb7c779b5771998e23ca2fa8f"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/__init__.py",
+    "size": 63,
+    "sha256": "20a422b22458d83f76def350945f055622828332f0dd12e06057d021d1867491"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/adjudication.py",
+    "size": 2748,
+    "sha256": "e13590585d1fc66b3293ad5340dbdf4257750ef47e31dc25b9a507c9266e443e"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/metrics.py",
+    "size": 6889,
+    "sha256": "f7e872b436d415969ae5682b931fa68c6c1b8aa672f29625a1ffc1d03ca02a62"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/observations.py",
+    "size": 1242,
+    "sha256": "48bf0674412d221daaebc75fd9c3b6b77a53785f379c82fbe7ae0eb04fa87d5b"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/operators.py",
+    "size": 8115,
+    "sha256": "37c228644721cbe0b0c2287a56a56c9c5b806121ccf89a32eee5e2c072cfde66"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/pipeline.py",
+    "size": 55386,
+    "sha256": "bb1c9f5805126213bfe0e6e2844a786b23e0036611ff273e2b71de32995f08a3"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/state.py",
+    "size": 6803,
+    "sha256": "775938f6359c2d9e1253fbbabe120999b241318849b2b87a3eef529acdf60fdb"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/synthetic.py",
+    "size": 3231,
+    "sha256": "193b7b24dbf49ece40fef0fa3b5b7027e000922d4550e1dc94785ff80785b8d7"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/__init__.py",
+    "size": 59,
+    "sha256": "5b168f008a8767d9636c5db768c1cba510548d0d0fe257abe8d518b06db906be"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/contract.py",
+    "size": 7266,
+    "sha256": "b5eed17d1a16461a51817617c7ca99c3805da667600f4fa8fc7f88bb81199750"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/schedule.py",
+    "size": 12914,
+    "sha256": "fcd8b424575a9e6f1feb6c1ecfce5436be274825272ecad0466ada62ec4f2476"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/v2_interface.py",
+    "size": 7604,
+    "sha256": "060a7ed100e06cafeec245a53c657270bc71c2ec38c37779d26b108a443876b4"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_ENTRY_PACKAGE.md",
+    "size": 21628,
+    "sha256": "da01b489ce4d9ac80519e2fda8146e6cdd5209128438e8cca19ba13ee73170e1"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md",
+    "size": 5612,
+    "sha256": "ae33a60d0204f3175d8a7bd9a228754ae6a1f939d7a780c54734a49a96b231ae"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json",
+    "size": 1809,
+    "sha256": "3c8fccb30401336f4676145e8d83adbcd2f1e750fc45cd0a9a2ad3b34db9db05"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/__init__.py",
+    "size": 40,
+    "sha256": "856ab4c76bf7b81a23fbff4036962e7df6270922fc294fa21f43e7045e73dac8"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/explicit_slot_runtime.py",
+    "size": 6631,
+    "sha256": "71382b695b330833697fc39b59d552907593b218a8a8f47d196ed0280bbc54f9"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/state_machine.py",
+    "size": 4462,
+    "sha256": "1c721e7ee8e818f9821358f27ebe1f417c688c76ad58a69fef45fb5f3949b045"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/adjudication_result.schema.json",
+    "size": 1144,
+    "sha256": "029147a7b9a9517f1155523a62de81ae46358d82bc2f7780d0bb4db80ea1f48c"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/analysis_choice.schema.json",
+    "size": 3491,
+    "sha256": "6ace579c7b73b979d2c9ca0ef625051dfdea4d462d5eef67f8abd5a5b0842033"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/measured_state.schema.json",
+    "size": 696,
+    "sha256": "5fd87fb56ab1ddeb8a2c259a2a6cea5684e63084f68f9981314dad1cb9ed6eca"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/runtime_custody.schema.json",
+    "size": 12255,
+    "sha256": "ec38ba94b18ac276038234a0c68c5b966f445431afff05ae9900e1d8733c0987"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/schedule.schema.json",
+    "size": 5621,
+    "sha256": "64c00887d0bab8c3e208bedff87c3e284593877a1b369c7fe544943e1667b072"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/scientific_contract.schema.json",
+    "size": 9125,
+    "sha256": "32758199e1339d0db90aabfee632bbf05afb347a999e812eac519eefd1f3236b"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/validate_objects.py",
+    "size": 478,
+    "sha256": "90d4724b504d99bc6d3b29debd205b4191f455772bb47a047af7bc80617a0d87"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_analysis_partition.py",
+    "size": 33874,
+    "sha256": "36aa05d681f210cc7ee31faa06f844732109888572c476f826ec8831cb8b02a2"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_runtime_authority.py",
+    "size": 4163,
+    "sha256": "7ee6fdabd643dee7f92f28196d823eadcf3f4bf4930d18309a9c3016329144c6"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_schedule_contract.py",
+    "size": 12508,
+    "sha256": "4f2887176714137fd34761417b4bf2ce46edb5b380c8b72d9ce84919da2ce4f8"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/TRUSTED_SNAPSHOT_BINDING.json",
+    "size": 12755,
+    "sha256": "ab66ed703d77f35f620e1a309cdb23108fdcbd32bce5cae177d45e2345f4d2fe"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/package/unbound_extra_file.txt",
+    "size": 10,
+    "sha256": "0c2d016e4a7c5bb41fc5c04acefdb6946d933766943ce2c4f7130d1bca26e1dc"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/stderr.txt",
+    "size": 79,
+    "sha256": "daba43f61356858d32a142767cb37f0a20beb329e94da45ea72e70de1ff7c665"
+  },
+  {
+    "path": "results/negative_tests/extra_regular_file/stdout.json",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/captured_file.h",
+    "size": 931,
+    "sha256": "81c94e8c29bffc915f9a3fa2db50605387f8f1544e2f561a674b8c82e4043469"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/combined_pdn_hardware.h",
+    "size": 1851,
+    "sha256": "a85e202fd65c520cad4853eea9168d2af9d92aa0b05b640bb8b180aed34141ae"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/emit_v2_reference_table.c",
+    "size": 2830,
+    "sha256": "f48f2bbce9d74373d961ff95f8c8cd7455406bc81a23e5a601470b75782d0837"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/PORTABLE_PACKAGE_MANIFEST.json",
+    "size": 27248,
+    "sha256": "79da3b911bd5c751508a6b68628dd314a29f48f1bc3dd9de41d01ea50a9732c0"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/PORTABLE_PACKAGE_MANIFEST.sha256",
+    "size": 97,
+    "sha256": "a659e6a1ad03aaa0a8d0a06e815d260d51f4ed62e02215d54f61e3fc7fcf24f9"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/portable_target_qualification.py",
+    "size": 61638,
+    "sha256": "c58438719e2d574d63add7cd0a74c5e6432abe3c9515c2fd7ae663178d7c4b6e"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/QUALIFICATION_CONTRACT.json",
+    "size": 2815,
+    "sha256": "ce881ae640975a0f8974991272f2c4c22c292a707c071b43ded803a57dd68d4d"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c",
+    "size": 49171,
+    "sha256": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/__init__.py",
+    "size": 41,
+    "sha256": "63381ad9086d317cf8206bbb7f7290a1fe24002bb7c779b5771998e23ca2fa8f"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/__init__.py",
+    "size": 63,
+    "sha256": "20a422b22458d83f76def350945f055622828332f0dd12e06057d021d1867491"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/adjudication.py",
+    "size": 2748,
+    "sha256": "e13590585d1fc66b3293ad5340dbdf4257750ef47e31dc25b9a507c9266e443e"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/metrics.py",
+    "size": 6889,
+    "sha256": "f7e872b436d415969ae5682b931fa68c6c1b8aa672f29625a1ffc1d03ca02a62"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/observations.py",
+    "size": 1242,
+    "sha256": "48bf0674412d221daaebc75fd9c3b6b77a53785f379c82fbe7ae0eb04fa87d5b"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/operators.py",
+    "size": 8115,
+    "sha256": "37c228644721cbe0b0c2287a56a56c9c5b806121ccf89a32eee5e2c072cfde66"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/pipeline.py",
+    "size": 55386,
+    "sha256": "bb1c9f5805126213bfe0e6e2844a786b23e0036611ff273e2b71de32995f08a3"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/state.py",
+    "size": 6803,
+    "sha256": "775938f6359c2d9e1253fbbabe120999b241318849b2b87a3eef529acdf60fdb"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/synthetic.py",
+    "size": 3231,
+    "sha256": "193b7b24dbf49ece40fef0fa3b5b7027e000922d4550e1dc94785ff80785b8d7"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/__init__.py",
+    "size": 59,
+    "sha256": "5b168f008a8767d9636c5db768c1cba510548d0d0fe257abe8d518b06db906be"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/contract.py",
+    "size": 7266,
+    "sha256": "b5eed17d1a16461a51817617c7ca99c3805da667600f4fa8fc7f88bb81199750"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/schedule.py",
+    "size": 12914,
+    "sha256": "fcd8b424575a9e6f1feb6c1ecfce5436be274825272ecad0466ada62ec4f2476"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/v2_interface.py",
+    "size": 7604,
+    "sha256": "060a7ed100e06cafeec245a53c657270bc71c2ec38c37779d26b108a443876b4"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_ENTRY_PACKAGE.md",
+    "size": 21628,
+    "sha256": "da01b489ce4d9ac80519e2fda8146e6cdd5209128438e8cca19ba13ee73170e1"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md",
+    "size": 5612,
+    "sha256": "ae33a60d0204f3175d8a7bd9a228754ae6a1f939d7a780c54734a49a96b231ae"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json",
+    "size": 1809,
+    "sha256": "3c8fccb30401336f4676145e8d83adbcd2f1e750fc45cd0a9a2ad3b34db9db05"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/__init__.py",
+    "size": 40,
+    "sha256": "856ab4c76bf7b81a23fbff4036962e7df6270922fc294fa21f43e7045e73dac8"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/explicit_slot_runtime.py",
+    "size": 6631,
+    "sha256": "71382b695b330833697fc39b59d552907593b218a8a8f47d196ed0280bbc54f9"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/state_machine.py",
+    "size": 4462,
+    "sha256": "1c721e7ee8e818f9821358f27ebe1f417c688c76ad58a69fef45fb5f3949b045"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/adjudication_result.schema.json",
+    "size": 1144,
+    "sha256": "029147a7b9a9517f1155523a62de81ae46358d82bc2f7780d0bb4db80ea1f48c"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/analysis_choice.schema.json",
+    "size": 3491,
+    "sha256": "6ace579c7b73b979d2c9ca0ef625051dfdea4d462d5eef67f8abd5a5b0842033"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/measured_state.schema.json",
+    "size": 696,
+    "sha256": "5fd87fb56ab1ddeb8a2c259a2a6cea5684e63084f68f9981314dad1cb9ed6eca"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/runtime_custody.schema.json",
+    "size": 12255,
+    "sha256": "ec38ba94b18ac276038234a0c68c5b966f445431afff05ae9900e1d8733c0987"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/schedule.schema.json",
+    "size": 5621,
+    "sha256": "64c00887d0bab8c3e208bedff87c3e284593877a1b369c7fe544943e1667b072"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/scientific_contract.schema.json",
+    "size": 9125,
+    "sha256": "32758199e1339d0db90aabfee632bbf05afb347a999e812eac519eefd1f3236b"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/validate_objects.py",
+    "size": 478,
+    "sha256": "90d4724b504d99bc6d3b29debd205b4191f455772bb47a047af7bc80617a0d87"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_analysis_partition.py",
+    "size": 33874,
+    "sha256": "36aa05d681f210cc7ee31faa06f844732109888572c476f826ec8831cb8b02a2"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_runtime_authority.py",
+    "size": 4163,
+    "sha256": "7ee6fdabd643dee7f92f28196d823eadcf3f4bf4930d18309a9c3016329144c6"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_schedule_contract.py",
+    "size": 12508,
+    "sha256": "4f2887176714137fd34761417b4bf2ce46edb5b380c8b72d9ce84919da2ce4f8"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/package/TRUSTED_SNAPSHOT_BINDING.json",
+    "size": 12755,
+    "sha256": "ab66ed703d77f35f620e1a309cdb23108fdcbd32bce5cae177d45e2345f4d2fe"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/stderr.txt",
+    "size": 83,
+    "sha256": "9dbfb6f7c9c82efdca1f6fc1714769c3b2724176bd012b3f88aa2ac96af17d34"
+  },
+  {
+    "path": "results/negative_tests/missing_regular_file/stdout.json",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "results/negative_tests/negative_test_summary.json",
+    "size": 8486,
+    "sha256": "c5242e3641e7d201f8fdb5df6e9db61250683ef022d5dcc01b52b9a10fdbd3d6"
+  },
+  {
+    "path": "results/negative_tests/option_acquire_yes/stderr.txt",
+    "size": 76,
+    "sha256": "440b7ca0e078e97aeb43cfdf60f72405bde0a218f0b7c0030e43fb64b04fef8e"
+  },
+  {
+    "path": "results/negative_tests/option_acquire_yes/stdout.txt",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "results/negative_tests/option_acquire/stderr.txt",
+    "size": 72,
+    "sha256": "764f3df887f8458c33ffb8f1736ddc7ccb7565b73bb75482b56ef4da550260a4"
+  },
+  {
+    "path": "results/negative_tests/option_acquire/stdout.txt",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "results/negative_tests/option_calibrate_1/stderr.txt",
+    "size": 76,
+    "sha256": "6c3b87842b5a586f3549f6a9c0757351e7b25c60811743337216563ee89354e7"
+  },
+  {
+    "path": "results/negative_tests/option_calibrate_1/stdout.txt",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "results/negative_tests/option_calibrate/stderr.txt",
+    "size": 74,
+    "sha256": "4617ce867b04bf2e0da58a4728522b37c9040d4524e2eeda5ff8fd556a576c57"
+  },
+  {
+    "path": "results/negative_tests/option_calibrate/stdout.txt",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "results/negative_tests/option_hardware_true/stderr.txt",
+    "size": 78,
+    "sha256": "f0132cafed618367c8bedb99d929903f2f8464cdfdae4590c485ae72bf48d7e6"
+  },
+  {
+    "path": "results/negative_tests/option_hardware_true/stdout.txt",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "results/negative_tests/option_hardware/stderr.txt",
+    "size": 73,
+    "sha256": "f11460a9790d23a320287f0f55fd9d90222b80aa8eba4a8ff377d929a29cf08f"
+  },
+  {
+    "path": "results/negative_tests/option_hardware/stdout.txt",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "results/negative_tests/option_run-campaign_true/stderr.txt",
+    "size": 82,
+    "sha256": "83efedd6552b52b446e41bd1d7f8336575810e5f2462c3e50a7a015dd66e4b18"
+  },
+  {
+    "path": "results/negative_tests/option_run-campaign_true/stdout.txt",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "results/negative_tests/option_run-campaign/stderr.txt",
+    "size": 77,
+    "sha256": "b82ddbe7bf0791c5e8b9db8309c04a7bed51a04d342a387d82879ff5f558bd11"
+  },
+  {
+    "path": "results/negative_tests/option_run-campaign/stdout.txt",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "results/negative_tests/option_unknown/stderr.txt",
+    "size": 42,
+    "sha256": "05bf1dfc3527f9c51f8e3fa970511e4bfb317b6458b64f40c46b7f2d513ef951"
+  },
+  {
+    "path": "results/negative_tests/option_unknown/stdout.txt",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/capture_quality_contract.h",
+    "size": 2338,
+    "sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/captured_file.h",
+    "size": 931,
+    "sha256": "81c94e8c29bffc915f9a3fa2db50605387f8f1544e2f561a674b8c82e4043469"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/combined_pdn_hardware.h",
+    "size": 1851,
+    "sha256": "a85e202fd65c520cad4853eea9168d2af9d92aa0b05b640bb8b180aed34141ae"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/emit_v2_reference_table.c",
+    "size": 2830,
+    "sha256": "f48f2bbce9d74373d961ff95f8c8cd7455406bc81a23e5a601470b75782d0837"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/PORTABLE_PACKAGE_MANIFEST.json",
+    "size": 27248,
+    "sha256": "79da3b911bd5c751508a6b68628dd314a29f48f1bc3dd9de41d01ea50a9732c0"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/PORTABLE_PACKAGE_MANIFEST.sha256",
+    "size": 97,
+    "sha256": "a659e6a1ad03aaa0a8d0a06e815d260d51f4ed62e02215d54f61e3fc7fcf24f9"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/portable_target_qualification.py",
+    "size": 61638,
+    "sha256": "c58438719e2d574d63add7cd0a74c5e6432abe3c9515c2fd7ae663178d7c4b6e"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/QUALIFICATION_CONTRACT.json",
+    "size": 2815,
+    "sha256": "ce881ae640975a0f8974991272f2c4c22c292a707c071b43ded803a57dd68d4d"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c",
+    "size": 49171,
+    "sha256": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/__init__.py",
+    "size": 41,
+    "sha256": "63381ad9086d317cf8206bbb7f7290a1fe24002bb7c779b5771998e23ca2fa8f"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/__init__.py",
+    "size": 63,
+    "sha256": "20a422b22458d83f76def350945f055622828332f0dd12e06057d021d1867491"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/adjudication.py",
+    "size": 2748,
+    "sha256": "e13590585d1fc66b3293ad5340dbdf4257750ef47e31dc25b9a507c9266e443e"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/metrics.py",
+    "size": 6889,
+    "sha256": "f7e872b436d415969ae5682b931fa68c6c1b8aa672f29625a1ffc1d03ca02a62"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/observations.py",
+    "size": 1242,
+    "sha256": "48bf0674412d221daaebc75fd9c3b6b77a53785f379c82fbe7ae0eb04fa87d5b"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/operators.py",
+    "size": 8115,
+    "sha256": "37c228644721cbe0b0c2287a56a56c9c5b806121ccf89a32eee5e2c072cfde66"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/pipeline.py",
+    "size": 55386,
+    "sha256": "bb1c9f5805126213bfe0e6e2844a786b23e0036611ff273e2b71de32995f08a3"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/state.py",
+    "size": 6803,
+    "sha256": "775938f6359c2d9e1253fbbabe120999b241318849b2b87a3eef529acdf60fdb"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/synthetic.py",
+    "size": 3231,
+    "sha256": "193b7b24dbf49ece40fef0fa3b5b7027e000922d4550e1dc94785ff80785b8d7"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/__init__.py",
+    "size": 59,
+    "sha256": "5b168f008a8767d9636c5db768c1cba510548d0d0fe257abe8d518b06db906be"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/contract.py",
+    "size": 7266,
+    "sha256": "b5eed17d1a16461a51817617c7ca99c3805da667600f4fa8fc7f88bb81199750"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/schedule.py",
+    "size": 12914,
+    "sha256": "fcd8b424575a9e6f1feb6c1ecfce5436be274825272ecad0466ada62ec4f2476"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/v2_interface.py",
+    "size": 7604,
+    "sha256": "060a7ed100e06cafeec245a53c657270bc71c2ec38c37779d26b108a443876b4"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_ENTRY_PACKAGE.md",
+    "size": 21628,
+    "sha256": "da01b489ce4d9ac80519e2fda8146e6cdd5209128438e8cca19ba13ee73170e1"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md",
+    "size": 5612,
+    "sha256": "ae33a60d0204f3175d8a7bd9a228754ae6a1f939d7a780c54734a49a96b231ae"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json",
+    "size": 1809,
+    "sha256": "3c8fccb30401336f4676145e8d83adbcd2f1e750fc45cd0a9a2ad3b34db9db05"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/__init__.py",
+    "size": 40,
+    "sha256": "856ab4c76bf7b81a23fbff4036962e7df6270922fc294fa21f43e7045e73dac8"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/explicit_slot_runtime.py",
+    "size": 6631,
+    "sha256": "71382b695b330833697fc39b59d552907593b218a8a8f47d196ed0280bbc54f9"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/state_machine.py",
+    "size": 4462,
+    "sha256": "1c721e7ee8e818f9821358f27ebe1f417c688c76ad58a69fef45fb5f3949b045"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/adjudication_result.schema.json",
+    "size": 1144,
+    "sha256": "029147a7b9a9517f1155523a62de81ae46358d82bc2f7780d0bb4db80ea1f48c"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/analysis_choice.schema.json",
+    "size": 3491,
+    "sha256": "6ace579c7b73b979d2c9ca0ef625051dfdea4d462d5eef67f8abd5a5b0842033"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/measured_state.schema.json",
+    "size": 696,
+    "sha256": "5fd87fb56ab1ddeb8a2c259a2a6cea5684e63084f68f9981314dad1cb9ed6eca"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/runtime_custody.schema.json",
+    "size": 12255,
+    "sha256": "ec38ba94b18ac276038234a0c68c5b966f445431afff05ae9900e1d8733c0987"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/schedule.schema.json",
+    "size": 5621,
+    "sha256": "64c00887d0bab8c3e208bedff87c3e284593877a1b369c7fe544943e1667b072"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/scientific_contract.schema.json",
+    "size": 9125,
+    "sha256": "32758199e1339d0db90aabfee632bbf05afb347a999e812eac519eefd1f3236b"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/validate_objects.py",
+    "size": 478,
+    "sha256": "90d4724b504d99bc6d3b29debd205b4191f455772bb47a047af7bc80617a0d87"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_analysis_partition.py",
+    "size": 33874,
+    "sha256": "36aa05d681f210cc7ee31faa06f844732109888572c476f826ec8831cb8b02a2"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_runtime_authority.py",
+    "size": 4163,
+    "sha256": "7ee6fdabd643dee7f92f28196d823eadcf3f4bf4930d18309a9c3016329144c6"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_schedule_contract.py",
+    "size": 12508,
+    "sha256": "4f2887176714137fd34761417b4bf2ce46edb5b380c8b72d9ce84919da2ce4f8"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/TRUSTED_SNAPSHOT_BINDING.json",
+    "size": 12755,
+    "sha256": "ab66ed703d77f35f620e1a309cdb23108fdcbd32bce5cae177d45e2345f4d2fe"
+  },
+  {
+    "path": "results/negative_tests/symlink/package/unbound_symlink",
+    "size": 2338,
+    "sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140"
+  },
+  {
+    "path": "results/negative_tests/symlink/stderr.txt",
+    "size": 63,
+    "sha256": "daa666c1387dce1ed62fc8a7ed3d07a6a0263b2c0ce377e2a562f6dbbee105b9"
+  },
+  {
+    "path": "results/negative_tests/symlink/stdout.json",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "results/portable-target-command-meta.txt",
+    "size": 747,
+    "sha256": "6a083ef36d2c909c4c87bbe40d68ed5c65598d2ce02179fd6d94970a161d03fb"
+  },
+  {
+    "path": "results/portable-target-result.json",
+    "size": 2918,
+    "sha256": "7a51ea3511649659804b0f99003753677a7ed8575e8e7acaed18b1d1ecfea345"
+  },
+  {
+    "path": "results/portable-target-result.stderr",
+    "size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "results/target-result-required-field-checks.json",
+    "size": 2083,
+    "sha256": "085b504534676fb95061ed31f25d4351c9ea6e9ed4d0cd4f4cb0ad4bd1eefa66"
+  }
+]

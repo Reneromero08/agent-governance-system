@@ -1,0 +1,17 @@
+{
+  "exit_code": 2,
+  "mutation": {
+    "relative_path": "unbound_symlink",
+    "target": "capture_quality_contract.h",
+    "type": "symlink"
+  },
+  "name": "symlink",
+  "rejected": true,
+  "stderr_bytes": 63,
+  "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/symlink/stderr.txt",
+  "stderr_sha256": "daa666c1387dce1ed62fc8a7ed3d07a6a0263b2c0ce377e2a562f6dbbee105b9",
+  "stderr_text": "portable package symlink entries rejected: ['unbound_symlink']\n",
+  "stdout_bytes": 0,
+  "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/symlink/stdout.json",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

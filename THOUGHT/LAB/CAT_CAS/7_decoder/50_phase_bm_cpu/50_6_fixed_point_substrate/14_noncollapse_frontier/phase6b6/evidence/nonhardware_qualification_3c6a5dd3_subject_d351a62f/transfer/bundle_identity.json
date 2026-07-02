@@ -1,0 +1,11 @@
+{
+  "bundle_filename": "phase6b6_nonhardware_3c6a5dd3_subject_d351a62f.bundle",
+  "bundle_list_heads_stdout_path": "transfer/logs/012_git_bundle_list_heads.stdout.txt",
+  "bundle_payload_committed": false,
+  "bundle_sha256": "76036894439c642310c972c51776883b9e9a2bb46275bff326fda7395b74473b",
+  "bundle_size_bytes": 486057240,
+  "bundle_verify_stderr_path": "transfer/logs/011_git_bundle_verify.stderr.txt",
+  "bundle_verify_stdout_path": "transfer/logs/011_git_bundle_verify.stdout.txt",
+  "required_resolvable_subject": "d351a62f4f211589d57359d872734757b6e280d9",
+  "source_repository_head": "3c6a5dd344a58d729ea84d23cc90e9e34d6f8336"
+}

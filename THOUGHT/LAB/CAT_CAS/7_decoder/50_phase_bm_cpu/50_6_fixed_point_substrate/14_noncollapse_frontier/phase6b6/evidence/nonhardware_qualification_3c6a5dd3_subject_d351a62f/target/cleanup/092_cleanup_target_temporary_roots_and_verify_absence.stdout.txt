@@ -1,0 +1,9 @@
+hostname=catcas
+started_utc=2026-07-01T07:00:00Z
+old_root_before=present
+new_root_before=present
+old_root_after=absent
+new_root_after=absent
+git_command_path=git_version=git_package=git	
+jsonschema_spec=None
+python3_jsonschema_package=finished_utc=2026-07-01T07:00:00Z

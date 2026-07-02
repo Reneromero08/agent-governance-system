@@ -1,0 +1,29 @@
+{
+  "exit_code": 2,
+  "mutation": {
+    "after": {
+      "mode": "0600",
+      "mode_symbolic": "-rw-------",
+      "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/generated_control_0644_to_0600/package/PORTABLE_PACKAGE_MANIFEST.json",
+      "sha256": "59e5c5927cfa7f19bdaafdd740cb350f5819e81741b62821a22f2eb80ecd4676"
+    },
+    "before": {
+      "mode": "0644",
+      "mode_symbolic": "-rw-r--r--",
+      "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/generated_control_0644_to_0600/package/PORTABLE_PACKAGE_MANIFEST.json",
+      "sha256": "59e5c5927cfa7f19bdaafdd740cb350f5819e81741b62821a22f2eb80ecd4676"
+    },
+    "bytes_unchanged": true,
+    "relative_path": "PORTABLE_PACKAGE_MANIFEST.json",
+    "type": "file_permission"
+  },
+  "name": "generated_control_0644_to_0600",
+  "rejected": true,
+  "stderr_bytes": 98,
+  "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/generated_control_0644_to_0600/stderr.txt",
+  "stderr_sha256": "b26cfe5c2c5c13adb01da6ba8d7ac473921547d970ac058cc7ddbc467c0cb69b",
+  "stderr_text": "package file permission mismatch: path=PORTABLE_PACKAGE_MANIFEST.json expected=0644 observed=0600\n",
+  "stdout_bytes": 0,
+  "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/generated_control_0644_to_0600/stdout.json",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

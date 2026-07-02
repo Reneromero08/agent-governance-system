@@ -1,0 +1,19 @@
+{
+  "summary": {
+    "archive_byte_size": 481280,
+    "archive_sha256": "affbc0b3e9725de62aa946774e3e8830399f9af12414713b1bfbc68547765ca4",
+    "export_commit": "0c5f1cbfb30ce9d6f8242674a1fc86f44372fa56",
+    "export_tree": "940187df10582ec5560c5e13420685107d21e8c3",
+    "manifest_sha256": "59e5c5927cfa7f19bdaafdd740cb350f5819e81741b62821a22f2eb80ecd4676"
+  },
+  "tar": {
+    "archive_sha256": "affbc0b3e9725de62aa946774e3e8830399f9af12414713b1bfbc68547765ca4",
+    "case_collisions": [],
+    "directory_count": 16,
+    "file_count": 39,
+    "member_count": 55,
+    "problems": [],
+    "safe_to_extract": true,
+    "schema_id": "CAT_CAS_PHASE6B6_PORTABLE_TAR_MEMBER_MODE_INVENTORY_V1"
+  }
+}

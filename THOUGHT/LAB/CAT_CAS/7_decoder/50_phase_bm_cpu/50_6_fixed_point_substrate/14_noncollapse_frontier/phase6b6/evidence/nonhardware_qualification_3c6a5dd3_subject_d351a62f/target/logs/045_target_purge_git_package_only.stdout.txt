@@ -1,0 +1,58 @@
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages were automatically installed and are no longer required:
+  git-man libcurl3t64-gnutls liberror-perl libldap2 libnghttp2-14 libnghttp3-9
+  libngtcp2-16 libngtcp2-crypto-gnutls8 librtmp1 libsasl2-2
+  libsasl2-modules-db libssh2-1t64
+Use 'apt autoremove' to remove them.
+The following packages will be REMOVED:
+  git*
+0 upgraded, 0 newly installed, 1 to remove and 18 not upgraded.
+After this operation, 50.3 MB disk space will be freed.
+(Reading database ... 
+(Reading database ... 5%
+(Reading database ... 10%
+(Reading database ... 15%
+(Reading database ... 20%
+(Reading database ... 25%
+(Reading database ... 30%
+(Reading database ... 35%
+(Reading database ... 40%
+(Reading database ... 45%
+(Reading database ... 50%
+(Reading database ... 55%
+(Reading database ... 60%
+(Reading database ... 65%
+(Reading database ... 70%
+(Reading database ... 75%
+(Reading database ... 80%
+(Reading database ... 85%
+(Reading database ... 90%
+(Reading database ... 95%
+(Reading database ... 100%
+(Reading database ... 64159 files and directories currently installed.)
+Removing git (1:2.47.3-0+deb13u1) ...
+(Reading database ... 
+(Reading database ... 5%
+(Reading database ... 10%
+(Reading database ... 15%
+(Reading database ... 20%
+(Reading database ... 25%
+(Reading database ... 30%
+(Reading database ... 35%
+(Reading database ... 40%
+(Reading database ... 45%
+(Reading database ... 50%
+(Reading database ... 55%
+(Reading database ... 60%
+(Reading database ... 65%
+(Reading database ... 70%
+(Reading database ... 75%
+(Reading database ... 80%
+(Reading database ... 85%
+(Reading database ... 90%
+(Reading database ... 95%
+(Reading database ... 100%
+(Reading database ... 63224 files and directories currently installed.)
+Purging configuration files for git (1:2.47.3-0+deb13u1) ...

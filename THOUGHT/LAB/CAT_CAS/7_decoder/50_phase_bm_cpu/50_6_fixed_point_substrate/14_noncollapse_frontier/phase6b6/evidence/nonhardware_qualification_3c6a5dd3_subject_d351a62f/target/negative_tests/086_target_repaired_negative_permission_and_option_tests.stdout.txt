@@ -1,0 +1,45 @@
+{
+  "all_forbidden_options_rejected": true,
+  "all_mutations_rejected": true,
+  "mandatory": {
+    "base_permission": "0644",
+    "base_sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140",
+    "mutated_permission": "0600",
+    "mutated_sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140",
+    "negative_exit_code": 2,
+    "rejection_message": "package file permission mismatch: path=capture_quality_contract.h git_source_mode=100644 expected=0644 observed=0600\n",
+    "result": {
+      "exit_code": 2,
+      "mutation": {
+        "after": {
+          "mode": "0600",
+          "mode_symbolic": "-rw-------",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/mode_only_0644_to_0600/package/capture_quality_contract.h",
+          "sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140"
+        },
+        "before": {
+          "mode": "0644",
+          "mode_symbolic": "-rw-r--r--",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/mode_only_0644_to_0600/package/capture_quality_contract.h",
+          "sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140"
+        },
+        "bytes_unchanged": true,
+        "relative_path": "capture_quality_contract.h",
+        "type": "file_permission"
+      },
+      "name": "mode_only_0644_to_0600",
+      "rejected": true,
+      "stderr_bytes": 117,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/mode_only_0644_to_0600/stderr.txt",
+      "stderr_sha256": "cdc6e216b77427bfe2f72b64bd54d8c031a0b6a16cb518f3c81154e40698e9c8",
+      "stderr_text": "package file permission mismatch: path=capture_quality_contract.h git_source_mode=100644 expected=0644 observed=0600\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/mode_only_0644_to_0600/stdout.json",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "schema_id": "CAT_CAS_PHASE6B6_TARGET_NEGATIVE_MODE_ONLY_0644_TO_0600_V1",
+    "status": "PASS"
+  },
+  "mutation_count": 15,
+  "option_count": 9
+}

@@ -1,0 +1,145 @@
+{
+  "archive_sha256": "affbc0b3e9725de62aa946774e3e8830399f9af12414713b1bfbc68547765ca4",
+  "authority_state": {
+    "authorization_artifact_created": false,
+    "calibration_authorized": false,
+    "evidence_package_created": true,
+    "hardware_ran": false,
+    "implementation_authorized": true,
+    "non_hardware_target_qualification_authorized": true,
+    "phase6b6_entered": true,
+    "phase6b6_entry_approved": true,
+    "qualification_evidence_collected": true,
+    "restoration_authorized": false,
+    "scientific_acquisition_authorized": false,
+    "small_wall_authorized": false,
+    "software_qualification_authorized": true,
+    "target_coupling_authorized": false
+  },
+  "base_main_commit": "0c5f1cbfb30ce9d6f8242674a1fc86f44372fa56",
+  "command_ledger_max_sequence": 119,
+  "commands_sha256": "d054ee6ad5b7d26b2b43adc5f3bb0f1143ef6508eb01bf1ea18636e5350ac322",
+  "committed_payload_file_bindings": {
+    "COMMANDS.jsonl": {
+      "byte_size": 183929,
+      "git_blob_sha1": "162a413f8325b610e0da8d25c2e688b425677083",
+      "git_mode": "100644",
+      "sha256": "d054ee6ad5b7d26b2b43adc5f3bb0f1143ef6508eb01bf1ea18636e5350ac322"
+    },
+    "EVIDENCE_INVENTORY.json": {
+      "byte_size": 157148,
+      "sha256": "7b205dd92482425505e498027a3e96db842297fad949fe22bdbf5542e95573e0"
+    },
+    "EVIDENCE_INVENTORY.sha256": {
+      "byte_size": 90,
+      "sha256": "cc23aa65c4d699bdd58dd207073fb9721656478809da01fbdcfb536cccc866b0"
+    },
+    "EVIDENCE_INVENTORY_VERIFICATION.txt": {
+      "byte_size": 732,
+      "sha256": "0524fc68a1410fa84c835fd44d1b7ef6cb87a118aa5ce8743f213f336d884210"
+    },
+    "FINAL_BINDINGS.json": {
+      "byte_size": 9388,
+      "git_blob_sha1": "c71c1e79bef8d67e9ad00727361011b401f125af",
+      "git_mode": "100644",
+      "sha256": "87b70cc5aa5c37cde82491b182f3c99e30d254ad82d2a788afbd668121c01c64"
+    },
+    "POST_LEDGER_TRIM_RECONCILIATION.json": {
+      "byte_size": 9277,
+      "git_blob_sha1": "36ad6a001082af966b4b761c0590cf4d6f25505e",
+      "git_mode": "100644",
+      "sha256": "f3bd6fd34ec693978f9f03497109ce8e4f00fef9e43d85f6885bec66a73bfa5e"
+    },
+    "POST_SEAL_GIT_OBJECT_RECONCILIATION.json": {
+      "byte_size": 29157,
+      "git_blob_sha1": "bf19f7bc45ba6e42ca1b258d33d9aacd403a6c7b",
+      "git_mode": "100644",
+      "sha256": "fc48a126348a1c5f7d2ad4253e23a6eef3d093b837ec6c23312492a774dee370"
+    },
+    "REMOVED_DUPLICATE_MUTATION_PACKAGE_TREES.json": {
+      "byte_size": 7783,
+      "git_blob_sha1": "40da8c3be554fbd12d79d002512b89acb89ef077",
+      "git_mode": "100644",
+      "sha256": "5d44c19b624520fcacd7daa1a12e6ea34cc98d226dc29add9d49850de7cf6db4"
+    },
+    "TARGET_NEGATIVE_MODE_ONLY_0644_TO_0600.json": {
+      "byte_size": 1980,
+      "git_blob_sha1": "d3200937bc1fba8afec1576ab0e5759adc1b9ec8",
+      "git_mode": "100644",
+      "sha256": "860b3d7cce8e0918e81774833872cb6123a69ac31b483c2f4c4c36c8ea5f4972"
+    },
+    "TARGET_QUALIFICATION_RESULT.json": {
+      "byte_size": 2918,
+      "git_blob_sha1": "aeb64ea6598a39f425b825c74684e507f3eef6f8",
+      "git_mode": "100644",
+      "sha256": "eb276be44682718cef579529265f2fb1384e570d61c84baabb72b0af45b27ac3"
+    },
+    "TEST_COUNTS.json": {
+      "byte_size": 432,
+      "git_blob_sha1": "954d3502c4b12ea60f66024385e2f154ca78f9e1",
+      "git_mode": "100644",
+      "sha256": "0805328933fc87475c12837da87d7797f0256b1c54e65bc5c8fdb12eb6db3497"
+    }
+  },
+  "committed_tree_inventory_mismatch_count": 0,
+  "committed_tree_inventory_validation": "PASS",
+  "corrected_payload_commit": "38eccc2f8377c656b0c21cbd37dd296e81adfad4",
+  "corrected_payload_tree": "159c04abd72ed631e7647249b539b548d8351e4b",
+  "final_bindings_sha256": "87b70cc5aa5c37cde82491b182f3c99e30d254ad82d2a788afbd668121c01c64",
+  "generated_utc": "2026-07-01T11:37:07Z",
+  "independent_clean_checkout_mismatch_count": 0,
+  "independent_clean_checkout_validation": "PASS",
+  "inventory_byte_authority": "COMMITTED_GIT_BLOBS",
+  "inventory_detached_declared_digest": "7b205dd92482425505e498027a3e96db842297fad949fe22bdbf5542e95573e0",
+  "inventory_detached_file_sha256": "cc23aa65c4d699bdd58dd207073fb9721656478809da01fbdcfb536cccc866b0",
+  "inventory_file_count": 396,
+  "inventory_json_sha256": "7b205dd92482425505e498027a3e96db842297fad949fe22bdbf5542e95573e0",
+  "inventory_schema_id": "CAT_CAS_PHASE6B6_NONHARDWARE_GIT_OBJECT_EVIDENCE_INVENTORY_V2",
+  "inventory_verification_sha256": "0524fc68a1410fa84c835fd44d1b7ef6cb87a118aa5ce8743f213f336d884210",
+  "mandatory_negative_base_permission": "0644",
+  "mandatory_negative_bytes_unchanged": true,
+  "mandatory_negative_exit_code": 2,
+  "mandatory_negative_file_sha256": "860b3d7cce8e0918e81774833872cb6123a69ac31b483c2f4c4c36c8ea5f4972",
+  "mandatory_negative_mutated_permission": "0600",
+  "mock_custody_digest": "4c0a58772fd25fe77759d6d09089ad532a09b3a5adcdce01dc099b6b7b00dba1",
+  "phase6b6_subtree_digest": "24789f0df9afa2d9f6a243a9050ff8f265cf22ffb42ab33bbe2f67521dbf44b5",
+  "portable_export_commit": "0c5f1cbfb30ce9d6f8242674a1fc86f44372fa56",
+  "portable_export_tree": "940187df10582ec5560c5e13420685107d21e8c3",
+  "portable_manifest_sha256": "59e5c5927cfa7f19bdaafdd740cb350f5819e81741b62821a22f2eb80ecd4676",
+  "post_ledger_reconciliation_sha256": "f3bd6fd34ec693978f9f03497109ce8e4f00fef9e43d85f6885bec66a73bfa5e",
+  "post_seal_reconciliation": {
+    "historical_record_fabricated": false,
+    "mismatch_count": 58,
+    "reconciliation_command_sequence_end": 119,
+    "reconciliation_command_sequence_start": 110,
+    "review_id": "4608312642",
+    "source_changed": false,
+    "target_rerun_performed": false
+  },
+  "post_seal_reconciliation_sha256": "fc48a126348a1c5f7d2ad4253e23a6eef3d093b837ec6c23312492a774dee370",
+  "raw_c_emission_digest": "56a26105b2b6969a05addbaafaa8db672d0d05a50158e1d145ed2903fec889c2",
+  "recursive_inventory_exclusions": [
+    "EVIDENCE_INVENTORY.json",
+    "EVIDENCE_INVENTORY.sha256",
+    "EVIDENCE_INVENTORY_VERIFICATION.txt",
+    "FINAL_EVIDENCE_SEAL.json"
+  ],
+  "removed_duplicate_trees_record_sha256": "5d44c19b624520fcacd7daa1a12e6ea34cc98d226dc29add9d49850de7cf6db4",
+  "schedule_digest": "c632d59934c2610541e279cac3a48202f2c0a79bb734e995f2cc4f28d19e87d3",
+  "schema_id": "CAT_CAS_PHASE6B6_FINAL_EVIDENCE_SEAL_V2",
+  "scoped_tree": "408ee35257417898a992510b0f260602117a15af",
+  "snapshot_inventory_digest": "e47dea4c3467835a425d9d553803da48f672a8799970db4fc9b83e98596f50d8",
+  "source_changed": false,
+  "status": "PHASE6B6_NONHARDWARE_EVIDENCE_SEALED",
+  "superseded_inventory_sha256": "6ebbc4036d6fdefc99dcc484f569d76742f64e846219f9179ff6286f3cac0af3",
+  "superseded_payload_commit": "6635476c2bdcbc01d357c111d22894da876a22fb",
+  "superseded_payload_tree": "ad7b9c515737a676c544c4240fcaba7ababc8ff9",
+  "superseded_seal_commit": "cf315c14c9e472496ddcdcaf539a5fd8ae27563c",
+  "superseded_seal_reason": "WORKTREE_BYTES_DID_NOT_MATCH_COMMITTED_GIT_BLOBS",
+  "superseded_seal_sha256": "e691e6b8f3ae00b13538c379713529bd0de8f3c37f550b8e5de417b2104674fe",
+  "target_final_result_digest": "c2d1bf3c78e2a9318f51e06d27ac39a49fe7a49e3cd49c0c8850cd6c85a07f7f",
+  "target_qualification_result_file_sha256": "eb276be44682718cef579529265f2fb1384e570d61c84baabb72b0af45b27ac3",
+  "target_rerun_performed": false,
+  "test_counts_sha256": "0805328933fc87475c12837da87d7797f0256b1c54e65bc5c8fdb12eb6db3497",
+  "v2_source_digest": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976"
+}

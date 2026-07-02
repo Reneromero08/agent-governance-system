@@ -1,0 +1,21 @@
+{
+  "acquisition_authority_artifact_created": false,
+  "campaign_session_generated": false,
+  "created_utc": "2026-06-30T09:19:53Z",
+  "frequency_or_voltage_control_occurred": false,
+  "git_executable_absent": true,
+  "git_package_not_installed": true,
+  "hardware_ran": false,
+  "hostname": "catcas",
+  "msr_access_occurred": false,
+  "no_hardware_probe_sequence": 47,
+  "post_state_sequence": 46,
+  "pre_state_sequence": 44,
+  "purge_sequence": 45,
+  "python3_jsonschema_installed": false,
+  "schema_id": "CAT_CAS_PHASE6B6_TARGET_GIT_RESTORATION_RECORD_V1",
+  "scientific_acquisition_authorized": false,
+  "sender_workload_ran": false,
+  "status": "TARGET_GIT_REMOVED",
+  "target": "root@192.168.137.100"
+}

@@ -1,0 +1,17 @@
+{
+  "exit_code": 2,
+  "mutation": {
+    "relative_path": "unbound_extra_file.txt",
+    "sha256": "0c2d016e4a7c5bb41fc5c04acefdb6946d933766943ce2c4f7130d1bca26e1dc",
+    "type": "extra_regular_file"
+  },
+  "name": "extra_regular_file",
+  "rejected": true,
+  "stderr_bytes": 79,
+  "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/extra_regular_file/stderr.txt",
+  "stderr_sha256": "daba43f61356858d32a142767cb37f0a20beb329e94da45ea72e70de1ff7c665",
+  "stderr_text": "portable package file set mismatch missing=[] extra=['unbound_extra_file.txt']\n",
+  "stdout_bytes": 0,
+  "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/extra_regular_file/stdout.json",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

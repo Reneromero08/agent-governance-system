@@ -1,0 +1,14 @@
+{
+  "blocked_at": "target Git custody prerequisite",
+  "local_bundle_cleaned": true,
+  "next_required_action": "Install or expose an approved git executable on the target, or authorize a different sealed-transfer/materialization procedure that does not require target Git.",
+  "no_acquisition_authority_created": true,
+  "no_final_campaign_session_generated": true,
+  "no_hardware_experiment_ran": true,
+  "no_msr_access_occurred": true,
+  "no_sender_workload_ran": true,
+  "reason": "The Phenom target connection is available, but no git executable is available on PATH or under /usr, /usr/local, /opt, or /root at maxdepth 4. The request requires target Git version capture, opening/cloning the Git bundle, checking out 3c6a5dd344a58d729ea84d23cc90e9e34d6f8336, and resolving d351a62f4f211589d57359d872734757b6e280d9 on target.",
+  "remote_root_cleaned": true,
+  "ssh_target": "root@192.168.137.100",
+  "status": "BLOCKED"
+}

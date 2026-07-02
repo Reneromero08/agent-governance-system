@@ -1,0 +1,26 @@
+utc_timestamp=2026-06-30T09:19:54Z
+
+### COMMAND: command -v git || true
+### EXIT: 0
+
+### COMMAND: git --version || true
+### EXIT: 0
+
+### COMMAND: dpkg-query -W git || true
+git			unknown ok not-installed
+### EXIT: 0
+
+### COMMAND: dpkg -V git || true
+### EXIT: 0
+
+### APT_POLICY_GIT
+git:
+  Installed: (none)
+  Candidate: 1:2.47.3-0+deb13u1
+  Version table:
+     1:2.47.3-0+deb13u1 500
+        500 http://deb.debian.org/debian trixie/main amd64 Packages
+
+### FINAL_REQUIREMENTS
+git_executable_absent=true
+git_package_not_installed=true

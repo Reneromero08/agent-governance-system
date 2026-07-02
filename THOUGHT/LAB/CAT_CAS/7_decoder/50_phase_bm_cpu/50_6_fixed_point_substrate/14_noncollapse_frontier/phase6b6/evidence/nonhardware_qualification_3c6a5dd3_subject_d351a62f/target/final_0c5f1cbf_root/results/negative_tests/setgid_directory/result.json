@@ -1,0 +1,28 @@
+{
+  "exit_code": 2,
+  "mutation": {
+    "after": {
+      "mode": "2755",
+      "mode_symbolic": "drwxr-sr-x",
+      "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/setgid_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts",
+      "sha256": null
+    },
+    "before": {
+      "mode": "0755",
+      "mode_symbolic": "drwxr-xr-x",
+      "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/setgid_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts",
+      "sha256": null
+    },
+    "relative_path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts",
+    "type": "directory_permission"
+  },
+  "name": "setgid_directory",
+  "rejected": true,
+  "stderr_bytes": 197,
+  "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/setgid_directory/stderr.txt",
+  "stderr_sha256": "9d41a5c17c7b8ae37376b5bdfebc3de66ae7c1e6a1f0807983622ce45d5f8806",
+  "stderr_text": "package directory permission mismatch: path=snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts expected=0755 observed=2755\n",
+  "stdout_bytes": 0,
+  "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/setgid_directory/stdout.json",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

@@ -1,0 +1,6 @@
+3ebd3ac0a3098e29537cab0eaa9650f883b95fd4
+3c6a5dd344a58d729ea84d23cc90e9e34d6f8336
+3ebd3ac0 Merge pull request #31 from Reneromero08/codex/phase6b6-portable-target-qualification
+ca5eacd0 phase6b6: seal portable result custody
+a6ca7c87 phase6b6: close portable qualification review
+0fc1f1c0 phase6b6: add copy-only portable target qualification

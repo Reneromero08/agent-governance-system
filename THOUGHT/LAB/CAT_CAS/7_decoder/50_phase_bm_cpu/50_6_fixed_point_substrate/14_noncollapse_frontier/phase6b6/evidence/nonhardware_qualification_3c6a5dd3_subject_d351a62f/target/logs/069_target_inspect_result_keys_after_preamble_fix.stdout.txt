@@ -1,0 +1,74 @@
+BASH=/usr/bin/bash
+BASHOPTS=checkwinsize:cmdhist:complete_fullquote:extquote:force_fignore:globasciiranges:globskipdots:hostcomplete:interactive_comments:login_shell:patsub_replacement:progcomp:promptvars:sourcepath
+BASH_ALIASES=()
+BASH_ARGC=([0]="0")
+BASH_ARGV=()
+BASH_CMDS=()
+BASH_EXECUTION_STRING=set
+BASH_LINENO=()
+BASH_LOADABLES_PATH=/usr/local/lib/bash:/usr/lib/bash:/opt/local/lib/bash:/usr/pkg/lib/bash:/opt/pkg/lib/bash:.
+BASH_SOURCE=()
+BASH_VERSINFO=([0]="5" [1]="2" [2]="37" [3]="1" [4]="release" [5]="x86_64-pc-linux-gnu")
+BASH_VERSION='5.2.37(1)-release'
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/0/bus
+DIRSTACK=()
+EUID=0
+GROUPS=()
+HOME=/root
+HOSTNAME=catcas
+HOSTTYPE=x86_64
+IFS=$' \t\n'
+LANG=en_US.UTF-8
+LOGNAME=root
+MACHTYPE=x86_64-pc-linux-gnu
+MOTD_SHOWN=pam
+OPTERR=1
+OPTIND=1
+OSTYPE=linux-gnu
+PATH=/root/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PIPESTATUS=([0]="0")
+PPID=2342
+PS4='+ '
+PWD=/root
+SHELL=/bin/bash
+SHELLOPTS=braceexpand:hashall:interactive-comments
+SHLVL=2
+SSH_CLIENT='192.168.137.1 55078 22'
+SSH_CONNECTION='192.168.137.1 55078 192.168.137.100 22'
+TERM=dumb
+UID=0
+USER=root
+XDG_RUNTIME_DIR=/run/user/0
+XDG_SESSION_CLASS=user
+XDG_SESSION_ID=70
+XDG_SESSION_TYPE=tty
+_=/root/.cargo/env
+{
+  "final_result_sha256": "2b510e29d1649383f1046300f50ed75f58f048bcd850a5cd421934c5109af61d",
+  "status": "PHASE6B6_PORTABLE_TARGET_QUALIFICATION_PASS",
+  "top_level_keys": [
+    "asan_result",
+    "c_reference_equivalence",
+    "calculated_phase6b6_subtree_inventory_sha256",
+    "calculated_scoped_tree",
+    "calculated_v2_source_sha256",
+    "final_result_sha256",
+    "hardware_ran",
+    "jsonschema_required",
+    "observed_inventory_sha256",
+    "portable_export_commit",
+    "portable_export_tree",
+    "portable_manifest_sha256",
+    "raw_c_emission_sha256",
+    "runtime_validate_only",
+    "schema_id",
+    "scientific_acquisition_authorized",
+    "sender_process_absence",
+    "snapshot_subject_commit",
+    "snapshot_subject_tree",
+    "status",
+    "strict_result",
+    "target_executed_git",
+    "ubsan_result"
+  ]
+}

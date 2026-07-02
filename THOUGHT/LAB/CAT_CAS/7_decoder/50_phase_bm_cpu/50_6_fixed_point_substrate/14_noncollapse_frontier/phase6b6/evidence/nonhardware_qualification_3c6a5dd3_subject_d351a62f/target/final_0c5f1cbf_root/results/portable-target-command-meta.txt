@@ -1,0 +1,12 @@
+command=python3 /root/catcas_phase6b6_portable_0c5f1cbf/extract/phase6b6_portable_target_package/portable_target_qualification.py --package-root /root/catcas_phase6b6_portable_0c5f1cbf/extract/phase6b6_portable_target_package
+environment=PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1
+working_directory=/root
+started=2026-07-01T06:52:09Z
+finished=2026-07-01T06:52:21Z
+exit_code=0
+stdout_path=/root/catcas_phase6b6_portable_0c5f1cbf/results/portable-target-result.json
+stderr_path=/root/catcas_phase6b6_portable_0c5f1cbf/results/portable-target-result.stderr
+stdout_bytes=2918
+stderr_bytes=0
+stdout_sha256=eb276be44682718cef579529265f2fb1384e570d61c84baabb72b0af45b27ac3
+stderr_sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855

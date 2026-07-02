@@ -1,0 +1,27 @@
+{
+  "acquisition_authority_artifact_created": false,
+  "blocker": "TARGET_PYTHON_JSONSCHEMA_UNAVAILABLE",
+  "campaign_session_generated": false,
+  "cleanup_sequences": [
+    41,
+    42,
+    43
+  ],
+  "created_utc": "2026-06-30T09:12:02Z",
+  "dependency_probe_sequence": 40,
+  "description": "Target Python cannot import jsonschema, which the frozen Phase 6B.6 qualification harness requires before sealed snapshot materialization and schema validation.",
+  "first_failed_label": "target_materialize_verify_frozen_subject",
+  "first_failed_sequence": 39,
+  "frequency_or_voltage_control_occurred": false,
+  "git_provisioning_completed": true,
+  "hardware_ran": false,
+  "hostname": "catcas",
+  "msr_access_occurred": false,
+  "qualification_executed": false,
+  "schema_id": "CAT_CAS_PHASE6B6_NONHARDWARE_TARGET_BLOCKER_V1",
+  "scientific_acquisition_authorized": false,
+  "sender_workload_ran": false,
+  "status": "BLOCKED",
+  "target": "root@192.168.137.100",
+  "target_git_installed_by_native_package_manager": true
+}

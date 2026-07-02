@@ -1,0 +1,16 @@
+{
+  "archive_a": "D:\\CCC 2.0\\AI\\phase6b6_portable_export_3ebd3ac0_20260630T153914Z\\phase6b6-portable-A.tar",
+  "archive_a_bytes": 481280,
+  "archive_a_sha256": "6d0f655f26e2284d6adc17664f53010dd053865793e3f325c0021d71af01ce3e",
+  "archive_b": "D:\\CCC 2.0\\AI\\phase6b6_portable_export_3ebd3ac0_20260630T153914Z\\phase6b6-portable-B.tar",
+  "archive_b_bytes": 481280,
+  "archive_b_sha256": "6d0f655f26e2284d6adc17664f53010dd053865793e3f325c0021d71af01ce3e",
+  "archives_byte_identical": true,
+  "case_collisions": [],
+  "contained_directory_count": 16,
+  "contained_file_count": 39,
+  "entry_count": 55,
+  "portable_manifest_sha256": "79da3b911bd5c751508a6b68628dd314a29f48f1bc3dd9de41d01ea50a9732c0",
+  "problems": [],
+  "safe_archive": true
+}

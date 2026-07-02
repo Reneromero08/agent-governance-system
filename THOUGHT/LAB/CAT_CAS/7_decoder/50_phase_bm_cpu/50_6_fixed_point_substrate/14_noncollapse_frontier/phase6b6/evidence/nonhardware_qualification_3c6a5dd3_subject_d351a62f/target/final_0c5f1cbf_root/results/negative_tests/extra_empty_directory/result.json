@@ -1,0 +1,16 @@
+{
+  "exit_code": 2,
+  "mutation": {
+    "relative_path": "unbound_empty_directory",
+    "type": "extra_empty_directory"
+  },
+  "name": "extra_empty_directory",
+  "rejected": true,
+  "stderr_bytes": 85,
+  "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/extra_empty_directory/stderr.txt",
+  "stderr_sha256": "a5ac33abd60cecaec31692f18c0fc5aa43c4b1695f95b0383d860c833682383a",
+  "stderr_text": "portable package directory set mismatch missing=[] extra=['unbound_empty_directory']\n",
+  "stdout_bytes": 0,
+  "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/extra_empty_directory/stdout.json",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

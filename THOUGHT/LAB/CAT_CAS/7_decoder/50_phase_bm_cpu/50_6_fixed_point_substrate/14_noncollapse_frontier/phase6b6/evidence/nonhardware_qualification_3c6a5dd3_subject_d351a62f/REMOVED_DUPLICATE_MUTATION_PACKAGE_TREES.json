@@ -1,0 +1,112 @@
+{
+  "removed_package_tree_count": 21,
+  "removed_package_trees": [
+    {
+      "file_count": 39,
+      "reason": "duplicate mutation package tree excluded from committed evidence because structured result/stdout/stderr records bind the mutation and Software Entry forbids non-qualification C source under phase6b6",
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/changed_copied_byte/package"
+    },
+    {
+      "file_count": 39,
+      "reason": "duplicate mutation package tree excluded from committed evidence because structured result/stdout/stderr records bind the mutation and Software Entry forbids non-qualification C source under phase6b6",
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/extra_empty_directory/package"
+    },
+    {
+      "file_count": 40,
+      "reason": "duplicate mutation package tree excluded from committed evidence because structured result/stdout/stderr records bind the mutation and Software Entry forbids non-qualification C source under phase6b6",
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/extra_regular_file/package"
+    },
+    {
+      "file_count": 39,
+      "reason": "duplicate mutation package tree excluded from committed evidence because structured result/stdout/stderr records bind the mutation and Software Entry forbids non-qualification C source under phase6b6",
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/generated_control_0644_to_0600/package"
+    },
+    {
+      "file_count": 39,
+      "reason": "duplicate mutation package tree excluded from committed evidence because structured result/stdout/stderr records bind the mutation and Software Entry forbids non-qualification C source under phase6b6",
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/manifest_file_0644_to_0664/package"
+    },
+    {
+      "file_count": 39,
+      "reason": "duplicate mutation package tree excluded from committed evidence because structured result/stdout/stderr records bind the mutation and Software Entry forbids non-qualification C source under phase6b6",
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/manifest_file_0644_to_0755/package"
+    },
+    {
+      "file_count": 38,
+      "reason": "duplicate mutation package tree excluded from committed evidence because structured result/stdout/stderr records bind the mutation and Software Entry forbids non-qualification C source under phase6b6",
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/missing_regular_file/package"
+    },
+    {
+      "file_count": 39,
+      "reason": "duplicate mutation package tree excluded from committed evidence because structured result/stdout/stderr records bind the mutation and Software Entry forbids non-qualification C source under phase6b6",
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/mode_only_0644_to_0600/package"
+    },
+    {
+      "file_count": 39,
+      "reason": "duplicate mutation package tree excluded from committed evidence because structured result/stdout/stderr records bind the mutation and Software Entry forbids non-qualification C source under phase6b6",
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/nested_directory_0755_to_0750/package"
+    },
+    {
+      "file_count": 39,
+      "reason": "duplicate mutation package tree excluded from committed evidence because structured result/stdout/stderr records bind the mutation and Software Entry forbids non-qualification C source under phase6b6",
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/package_root_0755_to_0700/package"
+    },
+    {
+      "file_count": 39,
+      "reason": "duplicate mutation package tree excluded from committed evidence because structured result/stdout/stderr records bind the mutation and Software Entry forbids non-qualification C source under phase6b6",
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/setgid_directory/package"
+    },
+    {
+      "file_count": 39,
+      "reason": "duplicate mutation package tree excluded from committed evidence because structured result/stdout/stderr records bind the mutation and Software Entry forbids non-qualification C source under phase6b6",
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/setuid_file/package"
+    },
+    {
+      "file_count": 39,
+      "reason": "duplicate mutation package tree excluded from committed evidence because structured result/stdout/stderr records bind the mutation and Software Entry forbids non-qualification C source under phase6b6",
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/snapshot_directory_0755_to_0777/package"
+    },
+    {
+      "file_count": 39,
+      "reason": "duplicate mutation package tree excluded from committed evidence because structured result/stdout/stderr records bind the mutation and Software Entry forbids non-qualification C source under phase6b6",
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/sticky_directory/package"
+    },
+    {
+      "file_count": 40,
+      "reason": "duplicate mutation package tree excluded from committed evidence because structured result/stdout/stderr records bind the mutation and Software Entry forbids non-qualification C source under phase6b6",
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/symlink/package"
+    },
+    {
+      "file_count": 39,
+      "reason": "duplicate mutation package tree excluded from committed evidence because structured result/stdout/stderr records bind the mutation and Software Entry forbids non-qualification C source under phase6b6",
+      "relative_path": "target/superseded_3ebd3ac0_root/results/negative_tests/changed_copied_byte/package"
+    },
+    {
+      "file_count": 39,
+      "reason": "duplicate mutation package tree excluded from committed evidence because structured result/stdout/stderr records bind the mutation and Software Entry forbids non-qualification C source under phase6b6",
+      "relative_path": "target/superseded_3ebd3ac0_root/results/negative_tests/changed_mode/package"
+    },
+    {
+      "file_count": 39,
+      "reason": "duplicate mutation package tree excluded from committed evidence because structured result/stdout/stderr records bind the mutation and Software Entry forbids non-qualification C source under phase6b6",
+      "relative_path": "target/superseded_3ebd3ac0_root/results/negative_tests/extra_empty_directory/package"
+    },
+    {
+      "file_count": 40,
+      "reason": "duplicate mutation package tree excluded from committed evidence because structured result/stdout/stderr records bind the mutation and Software Entry forbids non-qualification C source under phase6b6",
+      "relative_path": "target/superseded_3ebd3ac0_root/results/negative_tests/extra_regular_file/package"
+    },
+    {
+      "file_count": 38,
+      "reason": "duplicate mutation package tree excluded from committed evidence because structured result/stdout/stderr records bind the mutation and Software Entry forbids non-qualification C source under phase6b6",
+      "relative_path": "target/superseded_3ebd3ac0_root/results/negative_tests/missing_regular_file/package"
+    },
+    {
+      "file_count": 40,
+      "reason": "duplicate mutation package tree excluded from committed evidence because structured result/stdout/stderr records bind the mutation and Software Entry forbids non-qualification C source under phase6b6",
+      "relative_path": "target/superseded_3ebd3ac0_root/results/negative_tests/symlink/package"
+    }
+  ],
+  "schema_id": "CAT_CAS_PHASE6B6_REMOVED_DUPLICATE_MUTATION_PACKAGE_TREES_V1",
+  "structured_negative_results_retained": true
+}

@@ -1,0 +1,8 @@
+{
+  "hostname_expected": "catcas",
+  "remote_root": "/root/catcas_phase6b6_nonhardware_3c6a5dd3_subject_d351a62f",
+  "ssh_target": "root@192.168.137.100",
+  "stderr_path": "target/logs/016_target_identity.stderr.txt",
+  "stdout_path": "target/logs/016_target_identity.stdout.txt",
+  "stdout_sha256": "10618a70ceb3413d7507c22254d595d63632bb7ad9243dbe3dc6ebbaf13e19a4"
+}

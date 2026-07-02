@@ -1,0 +1,69 @@
+utc_timestamp=2026-06-30T09:19:51Z
+
+### COMMAND: command -v git || true
+/usr/bin/git
+### EXIT: 0
+
+### COMMAND: dpkg-query -W git || true
+git	1:2.47.3-0+deb13u1	amd64	install ok installed
+### EXIT: 0
+
+### COMMAND: dpkg -V git || true
+### EXIT: 0
+
+### APT_HISTORY_RECENT_GIT_TRANSACTIONS
+Commandline: apt-get install -y tmux
+Install: libevent-core-2.1-7t64:amd64 (2.1.12-stable-10+b1, automatic), libjemalloc2:amd64 (5.3.0-3, automatic), tmux:amd64 (3.5a-3)
+End-Date: 2026-06-20  20:40:37
+
+Start-Date: 2026-06-30  03:07:34
+Commandline: apt-get install -y --no-install-recommends git
+Install: libngtcp2-16:amd64 (1.11.0-1+deb13u1, automatic), libnghttp2-14:amd64 (1.64.0-1.1+deb13u1, automatic), libngtcp2-crypto-gnutls8:amd64 (1.11.0-1+deb13u1, automatic), libldap2:amd64 (2.6.10+dfsg-1, automatic), git:amd64 (1:2.47.3-0+deb13u1), libsasl2-2:amd64 (2.1.28+dfsg1-9, automatic), librtmp1:amd64 (2.4+20151223.gitfa8646d.1-2+b5, automatic), libsasl2-modules-db:amd64 (2.1.28+dfsg1-9, automatic), libcurl3t64-gnutls:amd64 (8.14.1-2+deb13u3, automatic), libssh2-1t64:amd64 (1.11.1-1+deb13u1, automatic), libnghttp3-9:amd64 (1.8.0-1, automatic), liberror-perl:amd64 (0.17030-1, automatic), git-man:amd64 (1:2.47.3-0+deb13u1, automatic)
+End-Date: 2026-06-30  03:07:37
+
+### DPKG_LOG_RECENT_GIT
+2026-06-30 03:07:35 install git:amd64 <none> 1:2.47.3-0+deb13u1
+2026-06-30 03:07:36 configure git:amd64 1:2.47.3-0+deb13u1 <none>
+2026-06-30 03:07:36 status installed git:amd64 1:2.47.3-0+deb13u1
+
+### APT_CACHE_DEPENDS_GIT
+git
+  Depends: libc6
+  Depends: libcurl3t64-gnutls
+  Depends: libexpat1
+  Depends: libpcre2-8-0
+  Depends: zlib1g
+  Depends: perl
+  Depends: liberror-perl
+  Depends: git-man
+  Depends: git-man
+  Breaks: bash-completion
+  Breaks: <cogito>
+  Breaks: dgit
+  Breaks: git-buildpackage
+  Breaks: <git-el>
+  Breaks: <gitosis>
+  Breaks: gitpkg
+  Breaks: guilt
+  Breaks: openssh-client
+  Breaks: stgit
+  Breaks: stgit-contrib
+  Recommends: ca-certificates
+  Recommends: patch
+  Recommends: less
+  Recommends: <ssh-client>
+    openssh-client
+  Suggests: gettext-base
+  Suggests: git-doc
+  Suggests: git-email
+  Suggests: git-gui
+  Suggests: gitk
+  Suggests: gitweb
+  Suggests: git-cvs
+  Suggests: git-mediawiki
+  Suggests: git-svn
+
+### APT_CACHE_RDEPENDS_GIT
+git
+Reverse Depends:
+  libdpkg-perl

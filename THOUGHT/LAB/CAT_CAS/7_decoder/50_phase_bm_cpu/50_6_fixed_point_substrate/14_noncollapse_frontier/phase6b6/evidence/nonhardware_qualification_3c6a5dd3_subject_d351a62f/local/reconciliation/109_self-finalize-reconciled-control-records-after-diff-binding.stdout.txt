@@ -1,0 +1,12 @@
+self_finalize_after_ledger_append=true
+final_control_records_regenerated_after_sequence_109=true
+{
+  "command_ledger_max_sequence": 109,
+  "command_ledger_sha256": "c5aab9dc297c5dfdea7f4659fe954ca7931b8e558d09d646ea1d91f99791272f",
+  "final_bindings_sha256": "dbc77aed1d5bc30bf7a8ed7284ea8088166090e6dc1ea72ebc8743abfc3194b4",
+  "inventory_file_count": 366,
+  "inventory_sha256": "3a24e2a42be0780ed47383a12b9e6fe0de5e56f1e12d200d3d8ff092cdd96f6f",
+  "post_ledger_reconciliation_sha256": "11b4e260f40691ff114e3390e57932d5f70b108069cde75386888d99c22ccd7a",
+  "schema_id": "CAT_CAS_PHASE6B6_COMPLETE_LOCAL_EVIDENCE_VALIDATION_V1",
+  "status": "PASS"
+}

@@ -1,0 +1,10 @@
+{
+  "git_name_status_diff_path": "local/reconciliation/097_trim_name_status.diff.txt",
+  "git_name_status_diff_sha256": "c221432feae558b9b5c8155af7ed21c76434d6b71e2170f2632ca99d6e55ba2e",
+  "git_stat_diff_path": "local/reconciliation/097_trim_stat.diff.txt",
+  "git_stat_diff_sha256": "939d4adf962fa17c96244eca6b8334f1c0b43d5302795685156f2e90ec22ac81",
+  "initial_evidence_commit": "951f30435ce27a96cbf63749b92c39c8488606d3",
+  "schema_id": "CAT_CAS_PHASE6B6_TRIM_DIFF_CAPTURE_V1",
+  "status": "PASS",
+  "trim_commit": "c9568f9cbd9a57eaff8fb2ef7282081ea3aeb246"
+}

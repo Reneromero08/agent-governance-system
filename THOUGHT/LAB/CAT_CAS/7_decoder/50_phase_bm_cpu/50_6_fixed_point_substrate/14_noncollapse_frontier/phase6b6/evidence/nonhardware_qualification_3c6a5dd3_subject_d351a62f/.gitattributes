@@ -1,0 +1,4 @@
+* -text -diff
+*.stderr.txt -diff
+*.stdout.txt -diff
+*.txt -diff

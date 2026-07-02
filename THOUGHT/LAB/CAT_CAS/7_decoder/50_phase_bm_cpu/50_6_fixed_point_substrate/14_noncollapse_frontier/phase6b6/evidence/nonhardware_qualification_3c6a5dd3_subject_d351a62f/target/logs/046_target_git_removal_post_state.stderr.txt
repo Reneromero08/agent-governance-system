@@ -1,0 +1,2 @@
+bash: line 8: git: command not found
+dpkg: package 'git' is not installed

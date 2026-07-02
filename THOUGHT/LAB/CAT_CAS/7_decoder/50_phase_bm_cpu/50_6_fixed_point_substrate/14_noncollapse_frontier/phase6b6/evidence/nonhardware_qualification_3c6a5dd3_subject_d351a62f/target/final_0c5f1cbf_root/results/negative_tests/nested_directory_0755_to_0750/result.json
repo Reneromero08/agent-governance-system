@@ -1,0 +1,28 @@
+{
+  "exit_code": 2,
+  "mutation": {
+    "after": {
+      "mode": "0750",
+      "mode_symbolic": "drwxr-x---",
+      "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/nested_directory_0755_to_0750/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts",
+      "sha256": null
+    },
+    "before": {
+      "mode": "0755",
+      "mode_symbolic": "drwxr-xr-x",
+      "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/nested_directory_0755_to_0750/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts",
+      "sha256": null
+    },
+    "relative_path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts",
+    "type": "directory_permission"
+  },
+  "name": "nested_directory_0755_to_0750",
+  "rejected": true,
+  "stderr_bytes": 197,
+  "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/nested_directory_0755_to_0750/stderr.txt",
+  "stderr_sha256": "b2003096991f0a38f48b283f8905b93a22282a5b3a1821dc43c5c28ecf9537d9",
+  "stderr_text": "package directory permission mismatch: path=snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts expected=0755 observed=0750\n",
+  "stdout_bytes": 0,
+  "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/nested_directory_0755_to_0750/stdout.json",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

@@ -1,0 +1,2 @@
+bash: line 14: git: command not found
+dpkg-query: no packages found matching python3-jsonschema

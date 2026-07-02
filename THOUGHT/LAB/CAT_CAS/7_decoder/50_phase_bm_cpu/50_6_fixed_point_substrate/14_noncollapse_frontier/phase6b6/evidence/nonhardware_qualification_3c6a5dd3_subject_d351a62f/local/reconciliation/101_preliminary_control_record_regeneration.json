@@ -1,0 +1,9 @@
+{
+  "command_ledger_max_sequence_observed": 102,
+  "command_ledger_sha256_observed": "1039c6a365a355213bcf6129eb880d65f470aead957d3e37bf3334fec9197925",
+  "inventory_file_count": 348,
+  "inventory_sha256": "ecde56e7d980ed8963e080ddba0ebe8f3e92c398eda6208955331fb8eb694290",
+  "note": "Preliminary regeneration before final sequence 103 rebinding.",
+  "schema_id": "CAT_CAS_PHASE6B6_PRELIMINARY_RECONCILIATION_CONTROL_RECORDS_V1",
+  "status": "PASS"
+}

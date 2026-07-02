@@ -1,0 +1,1 @@
+PHASE6B6_PORTABLE_HARDWARE_AUTHORITY_ERROR: forbidden option: --acquire=yes

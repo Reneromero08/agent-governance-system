@@ -1,0 +1,61 @@
+{
+  "asan_result": {
+    "mode": "asan",
+    "raw_stdout_sha256": "56a26105b2b6969a05addbaafaa8db672d0d05a50158e1d145ed2903fec889c2",
+    "status": "PHASE6B6_PORTABLE_C_REFERENCE_EMIT_OK",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "c_reference_equivalence": {
+    "max_abs_error_hz": 0.0,
+    "mode_count": 4,
+    "status": "V2_REFERENCE_EQUIVALENCE_PASS",
+    "tone_count": 12
+  },
+  "calculated_phase6b6_subtree_inventory_sha256": "24789f0df9afa2d9f6a243a9050ff8f265cf22ffb42ab33bbe2f67521dbf44b5",
+  "calculated_scoped_tree": "408ee35257417898a992510b0f260602117a15af",
+  "calculated_v2_source_sha256": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976",
+  "final_result_sha256": "ffbcd1923da61785a2167a9ecc80b63d71cd1a8131bb5aeab5e318d4a1920c31",
+  "hardware_ran": false,
+  "jsonschema_required": false,
+  "observed_inventory_sha256": "e47dea4c3467835a425d9d553803da48f672a8799970db4fc9b83e98596f50d8",
+  "portable_export_commit": "3ebd3ac0a3098e29537cab0eaa9650f883b95fd4",
+  "portable_export_tree": "4df244b058ea966f9eb0c14f60943e746b4dbd31",
+  "portable_manifest_sha256": "79da3b911bd5c751508a6b68628dd314a29f48f1bc3dd9de41d01ea50a9732c0",
+  "raw_c_emission_sha256": "56a26105b2b6969a05addbaafaa8db672d0d05a50158e1d145ed2903fec889c2",
+  "runtime_validate_only": {
+    "drive_on_slot_count": 6048,
+    "hardware_backend_rejected": true,
+    "hardware_ran": false,
+    "mock_custody_digest": "4c0a58772fd25fe77759d6d09089ad532a09b3a5adcdce01dc099b6b7b00dba1",
+    "order_label_sham_rows": 864,
+    "ordinary_order_rows": 3456,
+    "schedule_digest": "c632d59934c2610541e279cac3a48202f2c0a79bb734e995f2cc4f28d19e87d3",
+    "scientific_acquisition_authorized": false,
+    "session_count": 12,
+    "status": "PHASE6B6_PORTABLE_RUNTIME_VALIDATE_ONLY_OK",
+    "total_slots": 10368
+  },
+  "schema_id": "CAT_CAS_PHASE6B6_PORTABLE_TARGET_QUALIFICATION_RESULT_V1",
+  "scientific_acquisition_authorized": false,
+  "sender_process_absence": {
+    "matches": [],
+    "scanned_pid_count": 139,
+    "status": "PHASE6B6_PORTABLE_SENDER_PROCESS_ABSENT"
+  },
+  "snapshot_subject_commit": "d351a62f4f211589d57359d872734757b6e280d9",
+  "snapshot_subject_tree": "1a927b20cb2d712a7220a823621c8fc83cbc984d",
+  "status": "PHASE6B6_PORTABLE_TARGET_QUALIFICATION_PASS",
+  "strict_result": {
+    "mode": "strict",
+    "raw_stdout_sha256": "56a26105b2b6969a05addbaafaa8db672d0d05a50158e1d145ed2903fec889c2",
+    "status": "PHASE6B6_PORTABLE_C_REFERENCE_EMIT_OK",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "target_executed_git": false,
+  "ubsan_result": {
+    "mode": "ubsan",
+    "raw_stdout_sha256": "56a26105b2b6969a05addbaafaa8db672d0d05a50158e1d145ed2903fec889c2",
+    "status": "PHASE6B6_PORTABLE_C_REFERENCE_EMIT_OK",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

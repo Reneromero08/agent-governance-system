@@ -1,0 +1,433 @@
+{
+  "all_permissions_ok": true,
+  "package_root": "/root/catcas_phase6b6_portable_0c5f1cbf/extract/phase6b6_portable_target_package",
+  "problems": [],
+  "record_count": 55,
+  "records": [
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "ok": true,
+      "path": "phase6b6_portable_target_package",
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "ok": true,
+      "path": "snapshot",
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "ok": true,
+      "path": "snapshot/THOUGHT",
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB",
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS",
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder",
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu",
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate",
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier",
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2",
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6",
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis",
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts",
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime",
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas",
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0755",
+      "mode": "0755",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests",
+      "type": "directory"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "PORTABLE_PACKAGE_MANIFEST.json",
+      "source_mode": "generated_control",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "PORTABLE_PACKAGE_MANIFEST.sha256",
+      "source_mode": "generated_control",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "QUALIFICATION_CONTRACT.json",
+      "source_mode": "generated_control",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "TRUSTED_SNAPSHOT_BINDING.json",
+      "source_mode": "generated_control",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "capture_quality_contract.h",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "captured_file.h",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "combined_pdn_hardware.h",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "emit_v2_reference_table.c",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "portable_target_qualification.py",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_ENTRY_PACKAGE.md",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_ENTRY_REVIEW_ADDENDUM.md",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/PHASE6B6_SOFTWARE_ENTRY_APPROVAL.json",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/__init__.py",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/__init__.py",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/adjudication.py",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/metrics.py",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/observations.py",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/operators.py",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/pipeline.py",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/state.py",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis/synthetic.py",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/__init__.py",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/contract.py",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/schedule.py",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts/v2_interface.py",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/__init__.py",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/explicit_slot_runtime.py",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime/state_machine.py",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/adjudication_result.schema.json",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/analysis_choice.schema.json",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/measured_state.schema.json",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/runtime_custody.schema.json",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/schedule.schema.json",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/scientific_contract.schema.json",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/schemas/validate_objects.py",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_analysis_partition.py",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_runtime_authority.py",
+      "source_mode": "100644",
+      "type": "file"
+    },
+    {
+      "expected_mode": "0644",
+      "mode": "0644",
+      "ok": true,
+      "path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/tests/test_schedule_contract.py",
+      "source_mode": "100644",
+      "type": "file"
+    }
+  ],
+  "schema_id": "CAT_CAS_PHASE6B6_EXTRACTED_PERMISSION_INVENTORY_V1"
+}

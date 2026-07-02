@@ -1,0 +1,1 @@
+self_finalize: ledger entry prepared; finalization follows append in same process

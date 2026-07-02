@@ -1,0 +1,278 @@
+{
+  "initial_evidence_commit": "951f30435ce27a96cbf63749b92c39c8488606d3",
+  "record_agrees_with_git_diff": true,
+  "removed_file_count": 821,
+  "removed_package_tree_count": 21,
+  "removed_trees": [
+    {
+      "absent_in_trim_commit": true,
+      "duplicate_sealed_package_material": true,
+      "existed_in_initial_commit": true,
+      "recorded_file_count": 39,
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/changed_copied_byte/package",
+      "removed_file_count": 39,
+      "retained_records": [
+        "target/final_0c5f1cbf_root/results/negative_tests/changed_copied_byte/result.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/changed_copied_byte/stdout.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/changed_copied_byte/stderr.txt"
+      ]
+    },
+    {
+      "absent_in_trim_commit": true,
+      "duplicate_sealed_package_material": true,
+      "existed_in_initial_commit": true,
+      "recorded_file_count": 39,
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/extra_empty_directory/package",
+      "removed_file_count": 39,
+      "retained_records": [
+        "target/final_0c5f1cbf_root/results/negative_tests/extra_empty_directory/result.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/extra_empty_directory/stdout.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/extra_empty_directory/stderr.txt"
+      ]
+    },
+    {
+      "absent_in_trim_commit": true,
+      "duplicate_sealed_package_material": true,
+      "existed_in_initial_commit": true,
+      "recorded_file_count": 40,
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/extra_regular_file/package",
+      "removed_file_count": 40,
+      "retained_records": [
+        "target/final_0c5f1cbf_root/results/negative_tests/extra_regular_file/result.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/extra_regular_file/stdout.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/extra_regular_file/stderr.txt"
+      ]
+    },
+    {
+      "absent_in_trim_commit": true,
+      "duplicate_sealed_package_material": true,
+      "existed_in_initial_commit": true,
+      "recorded_file_count": 39,
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/generated_control_0644_to_0600/package",
+      "removed_file_count": 39,
+      "retained_records": [
+        "target/final_0c5f1cbf_root/results/negative_tests/generated_control_0644_to_0600/result.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/generated_control_0644_to_0600/stdout.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/generated_control_0644_to_0600/stderr.txt"
+      ]
+    },
+    {
+      "absent_in_trim_commit": true,
+      "duplicate_sealed_package_material": true,
+      "existed_in_initial_commit": true,
+      "recorded_file_count": 39,
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/manifest_file_0644_to_0664/package",
+      "removed_file_count": 39,
+      "retained_records": [
+        "target/final_0c5f1cbf_root/results/negative_tests/manifest_file_0644_to_0664/result.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/manifest_file_0644_to_0664/stdout.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/manifest_file_0644_to_0664/stderr.txt"
+      ]
+    },
+    {
+      "absent_in_trim_commit": true,
+      "duplicate_sealed_package_material": true,
+      "existed_in_initial_commit": true,
+      "recorded_file_count": 39,
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/manifest_file_0644_to_0755/package",
+      "removed_file_count": 39,
+      "retained_records": [
+        "target/final_0c5f1cbf_root/results/negative_tests/manifest_file_0644_to_0755/result.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/manifest_file_0644_to_0755/stdout.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/manifest_file_0644_to_0755/stderr.txt"
+      ]
+    },
+    {
+      "absent_in_trim_commit": true,
+      "duplicate_sealed_package_material": true,
+      "existed_in_initial_commit": true,
+      "recorded_file_count": 38,
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/missing_regular_file/package",
+      "removed_file_count": 38,
+      "retained_records": [
+        "target/final_0c5f1cbf_root/results/negative_tests/missing_regular_file/result.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/missing_regular_file/stdout.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/missing_regular_file/stderr.txt"
+      ]
+    },
+    {
+      "absent_in_trim_commit": true,
+      "duplicate_sealed_package_material": true,
+      "existed_in_initial_commit": true,
+      "recorded_file_count": 39,
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/mode_only_0644_to_0600/package",
+      "removed_file_count": 39,
+      "retained_records": [
+        "target/final_0c5f1cbf_root/results/negative_tests/mode_only_0644_to_0600/result.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/mode_only_0644_to_0600/stdout.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/mode_only_0644_to_0600/stderr.txt"
+      ]
+    },
+    {
+      "absent_in_trim_commit": true,
+      "duplicate_sealed_package_material": true,
+      "existed_in_initial_commit": true,
+      "recorded_file_count": 39,
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/nested_directory_0755_to_0750/package",
+      "removed_file_count": 39,
+      "retained_records": [
+        "target/final_0c5f1cbf_root/results/negative_tests/nested_directory_0755_to_0750/result.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/nested_directory_0755_to_0750/stdout.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/nested_directory_0755_to_0750/stderr.txt"
+      ]
+    },
+    {
+      "absent_in_trim_commit": true,
+      "duplicate_sealed_package_material": true,
+      "existed_in_initial_commit": true,
+      "recorded_file_count": 39,
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/package_root_0755_to_0700/package",
+      "removed_file_count": 39,
+      "retained_records": [
+        "target/final_0c5f1cbf_root/results/negative_tests/package_root_0755_to_0700/result.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/package_root_0755_to_0700/stdout.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/package_root_0755_to_0700/stderr.txt"
+      ]
+    },
+    {
+      "absent_in_trim_commit": true,
+      "duplicate_sealed_package_material": true,
+      "existed_in_initial_commit": true,
+      "recorded_file_count": 39,
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/setgid_directory/package",
+      "removed_file_count": 39,
+      "retained_records": [
+        "target/final_0c5f1cbf_root/results/negative_tests/setgid_directory/result.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/setgid_directory/stdout.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/setgid_directory/stderr.txt"
+      ]
+    },
+    {
+      "absent_in_trim_commit": true,
+      "duplicate_sealed_package_material": true,
+      "existed_in_initial_commit": true,
+      "recorded_file_count": 39,
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/setuid_file/package",
+      "removed_file_count": 39,
+      "retained_records": [
+        "target/final_0c5f1cbf_root/results/negative_tests/setuid_file/result.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/setuid_file/stdout.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/setuid_file/stderr.txt"
+      ]
+    },
+    {
+      "absent_in_trim_commit": true,
+      "duplicate_sealed_package_material": true,
+      "existed_in_initial_commit": true,
+      "recorded_file_count": 39,
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/snapshot_directory_0755_to_0777/package",
+      "removed_file_count": 39,
+      "retained_records": [
+        "target/final_0c5f1cbf_root/results/negative_tests/snapshot_directory_0755_to_0777/result.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/snapshot_directory_0755_to_0777/stdout.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/snapshot_directory_0755_to_0777/stderr.txt"
+      ]
+    },
+    {
+      "absent_in_trim_commit": true,
+      "duplicate_sealed_package_material": true,
+      "existed_in_initial_commit": true,
+      "recorded_file_count": 39,
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/sticky_directory/package",
+      "removed_file_count": 39,
+      "retained_records": [
+        "target/final_0c5f1cbf_root/results/negative_tests/sticky_directory/result.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/sticky_directory/stdout.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/sticky_directory/stderr.txt"
+      ]
+    },
+    {
+      "absent_in_trim_commit": true,
+      "duplicate_sealed_package_material": true,
+      "existed_in_initial_commit": true,
+      "recorded_file_count": 40,
+      "relative_path": "target/final_0c5f1cbf_root/results/negative_tests/symlink/package",
+      "removed_file_count": 40,
+      "retained_records": [
+        "target/final_0c5f1cbf_root/results/negative_tests/symlink/result.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/symlink/stdout.json",
+        "target/final_0c5f1cbf_root/results/negative_tests/symlink/stderr.txt"
+      ]
+    },
+    {
+      "absent_in_trim_commit": true,
+      "duplicate_sealed_package_material": true,
+      "existed_in_initial_commit": true,
+      "recorded_file_count": 39,
+      "relative_path": "target/superseded_3ebd3ac0_root/results/negative_tests/changed_copied_byte/package",
+      "removed_file_count": 39,
+      "retained_records": [
+        "target/superseded_3ebd3ac0_root/results/negative_tests/changed_copied_byte/stdout.json",
+        "target/superseded_3ebd3ac0_root/results/negative_tests/changed_copied_byte/stderr.txt"
+      ]
+    },
+    {
+      "absent_in_trim_commit": true,
+      "duplicate_sealed_package_material": true,
+      "existed_in_initial_commit": true,
+      "recorded_file_count": 39,
+      "relative_path": "target/superseded_3ebd3ac0_root/results/negative_tests/changed_mode/package",
+      "removed_file_count": 39,
+      "retained_records": [
+        "target/superseded_3ebd3ac0_root/results/negative_tests/changed_mode/stdout.json",
+        "target/superseded_3ebd3ac0_root/results/negative_tests/changed_mode/stderr.txt"
+      ]
+    },
+    {
+      "absent_in_trim_commit": true,
+      "duplicate_sealed_package_material": true,
+      "existed_in_initial_commit": true,
+      "recorded_file_count": 39,
+      "relative_path": "target/superseded_3ebd3ac0_root/results/negative_tests/extra_empty_directory/package",
+      "removed_file_count": 39,
+      "retained_records": [
+        "target/superseded_3ebd3ac0_root/results/negative_tests/extra_empty_directory/stdout.json",
+        "target/superseded_3ebd3ac0_root/results/negative_tests/extra_empty_directory/stderr.txt"
+      ]
+    },
+    {
+      "absent_in_trim_commit": true,
+      "duplicate_sealed_package_material": true,
+      "existed_in_initial_commit": true,
+      "recorded_file_count": 40,
+      "relative_path": "target/superseded_3ebd3ac0_root/results/negative_tests/extra_regular_file/package",
+      "removed_file_count": 40,
+      "retained_records": [
+        "target/superseded_3ebd3ac0_root/results/negative_tests/extra_regular_file/stdout.json",
+        "target/superseded_3ebd3ac0_root/results/negative_tests/extra_regular_file/stderr.txt"
+      ]
+    },
+    {
+      "absent_in_trim_commit": true,
+      "duplicate_sealed_package_material": true,
+      "existed_in_initial_commit": true,
+      "recorded_file_count": 38,
+      "relative_path": "target/superseded_3ebd3ac0_root/results/negative_tests/missing_regular_file/package",
+      "removed_file_count": 38,
+      "retained_records": [
+        "target/superseded_3ebd3ac0_root/results/negative_tests/missing_regular_file/stdout.json",
+        "target/superseded_3ebd3ac0_root/results/negative_tests/missing_regular_file/stderr.txt"
+      ]
+    },
+    {
+      "absent_in_trim_commit": true,
+      "duplicate_sealed_package_material": true,
+      "existed_in_initial_commit": true,
+      "recorded_file_count": 40,
+      "relative_path": "target/superseded_3ebd3ac0_root/results/negative_tests/symlink/package",
+      "removed_file_count": 40,
+      "retained_records": [
+        "target/superseded_3ebd3ac0_root/results/negative_tests/symlink/stdout.json",
+        "target/superseded_3ebd3ac0_root/results/negative_tests/symlink/stderr.txt"
+      ]
+    }
+  ],
+  "schema_id": "CAT_CAS_PHASE6B6_REMOVED_PACKAGE_TREE_VERIFICATION_V1",
+  "status": "PASS",
+  "trim_commit": "c9568f9cbd9a57eaff8fb2ef7282081ea3aeb246"
+}

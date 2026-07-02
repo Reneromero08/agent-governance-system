@@ -1,0 +1,10 @@
+{
+  "command_ledger_max_sequence": 109,
+  "command_ledger_sha256": "40ca5ed9557116672d7fba511d103cb2d3836eeb53220863041d0882d1ca4852",
+  "final_bindings_sha256": "87488a247d4130354408cea5349dd37683ff9180ee2dfb8bec9199757dac3cb6",
+  "inventory_file_count": 366,
+  "inventory_sha256": "8a1e9538b0cada67c31d43745968428a4c5190c75a1cd569aa739b839930d186",
+  "post_ledger_reconciliation_sha256": "f3bd6fd34ec693978f9f03497109ce8e4f00fef9e43d85f6885bec66a73bfa5e",
+  "schema_id": "CAT_CAS_PHASE6B6_COMPLETE_LOCAL_EVIDENCE_VALIDATION_V1",
+  "status": "PASS"
+}

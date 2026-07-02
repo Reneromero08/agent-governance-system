@@ -1,0 +1,533 @@
+{
+  "all_forbidden_options_rejected": true,
+  "all_mutations_rejected": true,
+  "mandatory_mode_only_0644_to_0600": {
+    "exit_code": 2,
+    "mutation": {
+      "after": {
+        "mode": "0600",
+        "mode_symbolic": "-rw-------",
+        "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/mode_only_0644_to_0600/package/capture_quality_contract.h",
+        "sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140"
+      },
+      "before": {
+        "mode": "0644",
+        "mode_symbolic": "-rw-r--r--",
+        "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/mode_only_0644_to_0600/package/capture_quality_contract.h",
+        "sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140"
+      },
+      "bytes_unchanged": true,
+      "relative_path": "capture_quality_contract.h",
+      "type": "file_permission"
+    },
+    "name": "mode_only_0644_to_0600",
+    "rejected": true,
+    "stderr_bytes": 117,
+    "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/mode_only_0644_to_0600/stderr.txt",
+    "stderr_sha256": "cdc6e216b77427bfe2f72b64bd54d8c031a0b6a16cb518f3c81154e40698e9c8",
+    "stderr_text": "package file permission mismatch: path=capture_quality_contract.h git_source_mode=100644 expected=0644 observed=0600\n",
+    "stdout_bytes": 0,
+    "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/mode_only_0644_to_0600/stdout.json",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "manifest_0644_file": "capture_quality_contract.h",
+  "mutation_results": [
+    {
+      "exit_code": 2,
+      "mutation": {
+        "after": {
+          "mode": "0600",
+          "mode_symbolic": "-rw-------",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/mode_only_0644_to_0600/package/capture_quality_contract.h",
+          "sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140"
+        },
+        "before": {
+          "mode": "0644",
+          "mode_symbolic": "-rw-r--r--",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/mode_only_0644_to_0600/package/capture_quality_contract.h",
+          "sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140"
+        },
+        "bytes_unchanged": true,
+        "relative_path": "capture_quality_contract.h",
+        "type": "file_permission"
+      },
+      "name": "mode_only_0644_to_0600",
+      "rejected": true,
+      "stderr_bytes": 117,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/mode_only_0644_to_0600/stderr.txt",
+      "stderr_sha256": "cdc6e216b77427bfe2f72b64bd54d8c031a0b6a16cb518f3c81154e40698e9c8",
+      "stderr_text": "package file permission mismatch: path=capture_quality_contract.h git_source_mode=100644 expected=0644 observed=0600\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/mode_only_0644_to_0600/stdout.json",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "mutation": {
+        "after": {
+          "mode": "0664",
+          "mode_symbolic": "-rw-rw-r--",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/manifest_file_0644_to_0664/package/capture_quality_contract.h",
+          "sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140"
+        },
+        "before": {
+          "mode": "0644",
+          "mode_symbolic": "-rw-r--r--",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/manifest_file_0644_to_0664/package/capture_quality_contract.h",
+          "sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140"
+        },
+        "bytes_unchanged": true,
+        "relative_path": "capture_quality_contract.h",
+        "type": "file_permission"
+      },
+      "name": "manifest_file_0644_to_0664",
+      "rejected": true,
+      "stderr_bytes": 117,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/manifest_file_0644_to_0664/stderr.txt",
+      "stderr_sha256": "0f83e83db3f69bc020790721dd0729a3883028adc6dcfa0891814c22a91001a3",
+      "stderr_text": "package file permission mismatch: path=capture_quality_contract.h git_source_mode=100644 expected=0644 observed=0664\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/manifest_file_0644_to_0664/stdout.json",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "mutation": {
+        "after": {
+          "mode": "0755",
+          "mode_symbolic": "-rwxr-xr-x",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/manifest_file_0644_to_0755/package/capture_quality_contract.h",
+          "sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140"
+        },
+        "before": {
+          "mode": "0644",
+          "mode_symbolic": "-rw-r--r--",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/manifest_file_0644_to_0755/package/capture_quality_contract.h",
+          "sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140"
+        },
+        "bytes_unchanged": true,
+        "relative_path": "capture_quality_contract.h",
+        "type": "file_permission"
+      },
+      "name": "manifest_file_0644_to_0755",
+      "rejected": true,
+      "stderr_bytes": 117,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/manifest_file_0644_to_0755/stderr.txt",
+      "stderr_sha256": "8931fa8ea4639116a2bbd4ec9757eee90ba10dd499d617a8591229adfa6477ec",
+      "stderr_text": "package file permission mismatch: path=capture_quality_contract.h git_source_mode=100644 expected=0644 observed=0755\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/manifest_file_0644_to_0755/stdout.json",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "mutation": {
+        "after": {
+          "mode": "0600",
+          "mode_symbolic": "-rw-------",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/generated_control_0644_to_0600/package/PORTABLE_PACKAGE_MANIFEST.json",
+          "sha256": "59e5c5927cfa7f19bdaafdd740cb350f5819e81741b62821a22f2eb80ecd4676"
+        },
+        "before": {
+          "mode": "0644",
+          "mode_symbolic": "-rw-r--r--",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/generated_control_0644_to_0600/package/PORTABLE_PACKAGE_MANIFEST.json",
+          "sha256": "59e5c5927cfa7f19bdaafdd740cb350f5819e81741b62821a22f2eb80ecd4676"
+        },
+        "bytes_unchanged": true,
+        "relative_path": "PORTABLE_PACKAGE_MANIFEST.json",
+        "type": "file_permission"
+      },
+      "name": "generated_control_0644_to_0600",
+      "rejected": true,
+      "stderr_bytes": 98,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/generated_control_0644_to_0600/stderr.txt",
+      "stderr_sha256": "b26cfe5c2c5c13adb01da6ba8d7ac473921547d970ac058cc7ddbc467c0cb69b",
+      "stderr_text": "package file permission mismatch: path=PORTABLE_PACKAGE_MANIFEST.json expected=0644 observed=0600\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/generated_control_0644_to_0600/stdout.json",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "mutation": {
+        "after": {
+          "mode": "0700",
+          "mode_symbolic": "drwx------",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/package_root_0755_to_0700/package",
+          "sha256": null
+        },
+        "before": {
+          "mode": "0755",
+          "mode_symbolic": "drwxr-xr-x",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/package_root_0755_to_0700/package",
+          "sha256": null
+        },
+        "relative_path": ".",
+        "type": "directory_permission"
+      },
+      "name": "package_root_0755_to_0700",
+      "rejected": true,
+      "stderr_bytes": 105,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/package_root_0755_to_0700/stderr.txt",
+      "stderr_sha256": "f06fc0e54dc0df916912e6f551410fb695bb5bcd1c09ba075eb6fe24d88e9f67",
+      "stderr_text": "package directory permission mismatch: path=phase6b6_portable_target_package expected=0755 observed=0700\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/package_root_0755_to_0700/stdout.json",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "mutation": {
+        "after": {
+          "mode": "0777",
+          "mode_symbolic": "drwxrwxrwx",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/snapshot_directory_0755_to_0777/package/snapshot",
+          "sha256": null
+        },
+        "before": {
+          "mode": "0755",
+          "mode_symbolic": "drwxr-xr-x",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/snapshot_directory_0755_to_0777/package/snapshot",
+          "sha256": null
+        },
+        "relative_path": "snapshot",
+        "type": "directory_permission"
+      },
+      "name": "snapshot_directory_0755_to_0777",
+      "rejected": true,
+      "stderr_bytes": 81,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/snapshot_directory_0755_to_0777/stderr.txt",
+      "stderr_sha256": "a12202466fb7a1b795032def90c43f56912319a4d4be524cf41394d9baa48629",
+      "stderr_text": "package directory permission mismatch: path=snapshot expected=0755 observed=0777\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/snapshot_directory_0755_to_0777/stdout.json",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "mutation": {
+        "after": {
+          "mode": "0750",
+          "mode_symbolic": "drwxr-x---",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/nested_directory_0755_to_0750/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts",
+          "sha256": null
+        },
+        "before": {
+          "mode": "0755",
+          "mode_symbolic": "drwxr-xr-x",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/nested_directory_0755_to_0750/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts",
+          "sha256": null
+        },
+        "relative_path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts",
+        "type": "directory_permission"
+      },
+      "name": "nested_directory_0755_to_0750",
+      "rejected": true,
+      "stderr_bytes": 197,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/nested_directory_0755_to_0750/stderr.txt",
+      "stderr_sha256": "b2003096991f0a38f48b283f8905b93a22282a5b3a1821dc43c5c28ecf9537d9",
+      "stderr_text": "package directory permission mismatch: path=snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts expected=0755 observed=0750\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/nested_directory_0755_to_0750/stdout.json",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "mutation": {
+        "after": {
+          "mode": "4644",
+          "mode_symbolic": "-rwSr--r--",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/setuid_file/package/capture_quality_contract.h",
+          "sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140"
+        },
+        "before": {
+          "mode": "0644",
+          "mode_symbolic": "-rw-r--r--",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/setuid_file/package/capture_quality_contract.h",
+          "sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140"
+        },
+        "bytes_unchanged": true,
+        "relative_path": "capture_quality_contract.h",
+        "type": "file_permission"
+      },
+      "name": "setuid_file",
+      "rejected": true,
+      "stderr_bytes": 117,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/setuid_file/stderr.txt",
+      "stderr_sha256": "b1a7ebd5b3c9b630040ad508f61dbeca1a46e198e990a2c5805f333885c8301b",
+      "stderr_text": "package file permission mismatch: path=capture_quality_contract.h git_source_mode=100644 expected=0644 observed=4644\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/setuid_file/stdout.json",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "mutation": {
+        "after": {
+          "mode": "2755",
+          "mode_symbolic": "drwxr-sr-x",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/setgid_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts",
+          "sha256": null
+        },
+        "before": {
+          "mode": "0755",
+          "mode_symbolic": "drwxr-xr-x",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/setgid_directory/package/snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts",
+          "sha256": null
+        },
+        "relative_path": "snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts",
+        "type": "directory_permission"
+      },
+      "name": "setgid_directory",
+      "rejected": true,
+      "stderr_bytes": 197,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/setgid_directory/stderr.txt",
+      "stderr_sha256": "9d41a5c17c7b8ae37376b5bdfebc3de66ae7c1e6a1f0807983622ce45d5f8806",
+      "stderr_text": "package directory permission mismatch: path=snapshot/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts expected=0755 observed=2755\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/setgid_directory/stdout.json",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "mutation": {
+        "after": {
+          "mode": "1755",
+          "mode_symbolic": "drwxr-xr-t",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/sticky_directory/package/snapshot",
+          "sha256": null
+        },
+        "before": {
+          "mode": "0755",
+          "mode_symbolic": "drwxr-xr-x",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/sticky_directory/package/snapshot",
+          "sha256": null
+        },
+        "relative_path": "snapshot",
+        "type": "directory_permission"
+      },
+      "name": "sticky_directory",
+      "rejected": true,
+      "stderr_bytes": 81,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/sticky_directory/stderr.txt",
+      "stderr_sha256": "bf26265fe1648d8b3b5793e0798ac33efac37f7b435960870f2b48bb4cf33f65",
+      "stderr_text": "package directory permission mismatch: path=snapshot expected=0755 observed=1755\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/sticky_directory/stdout.json",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "mutation": {
+        "relative_path": "unbound_empty_directory",
+        "type": "extra_empty_directory"
+      },
+      "name": "extra_empty_directory",
+      "rejected": true,
+      "stderr_bytes": 85,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/extra_empty_directory/stderr.txt",
+      "stderr_sha256": "a5ac33abd60cecaec31692f18c0fc5aa43c4b1695f95b0383d860c833682383a",
+      "stderr_text": "portable package directory set mismatch missing=[] extra=['unbound_empty_directory']\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/extra_empty_directory/stdout.json",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "mutation": {
+        "relative_path": "unbound_extra_file.txt",
+        "sha256": "0c2d016e4a7c5bb41fc5c04acefdb6946d933766943ce2c4f7130d1bca26e1dc",
+        "type": "extra_regular_file"
+      },
+      "name": "extra_regular_file",
+      "rejected": true,
+      "stderr_bytes": 79,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/extra_regular_file/stderr.txt",
+      "stderr_sha256": "daba43f61356858d32a142767cb37f0a20beb329e94da45ea72e70de1ff7c665",
+      "stderr_text": "portable package file set mismatch missing=[] extra=['unbound_extra_file.txt']\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/extra_regular_file/stdout.json",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "mutation": {
+        "before": {
+          "mode": "0644",
+          "mode_symbolic": "-rw-r--r--",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/missing_regular_file/package/capture_quality_contract.h",
+          "sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140"
+        },
+        "relative_path": "capture_quality_contract.h",
+        "type": "missing_regular_file"
+      },
+      "name": "missing_regular_file",
+      "rejected": true,
+      "stderr_bytes": 83,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/missing_regular_file/stderr.txt",
+      "stderr_sha256": "9dbfb6f7c9c82efdca1f6fc1714769c3b2724176bd012b3f88aa2ac96af17d34",
+      "stderr_text": "portable package file set mismatch missing=['capture_quality_contract.h'] extra=[]\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/missing_regular_file/stdout.json",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "mutation": {
+        "after": {
+          "mode": "0644",
+          "mode_symbolic": "-rw-r--r--",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/changed_copied_byte/package/capture_quality_contract.h",
+          "sha256": "18590bedb1d5e632ea400e95ebf9e9bdfb107afca0ca80722226654d0009c7b6"
+        },
+        "before": {
+          "mode": "0644",
+          "mode_symbolic": "-rw-r--r--",
+          "path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/changed_copied_byte/package/capture_quality_contract.h",
+          "sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140"
+        },
+        "bytes_unchanged": false,
+        "relative_path": "capture_quality_contract.h",
+        "type": "changed_copied_byte"
+      },
+      "name": "changed_copied_byte",
+      "rejected": true,
+      "stderr_bytes": 57,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/changed_copied_byte/stderr.txt",
+      "stderr_sha256": "4031ddc5e50695c676c74dad3eeed2c6628dbec941b45787b59ea292fff66c0a",
+      "stderr_text": "copied file SHA-256 mismatch: capture_quality_contract.h\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/changed_copied_byte/stdout.json",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "mutation": {
+        "relative_path": "unbound_symlink",
+        "target": "capture_quality_contract.h",
+        "type": "symlink"
+      },
+      "name": "symlink",
+      "rejected": true,
+      "stderr_bytes": 63,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/symlink/stderr.txt",
+      "stderr_sha256": "daa666c1387dce1ed62fc8a7ed3d07a6a0263b2c0ce377e2a562f6dbbee105b9",
+      "stderr_text": "portable package symlink entries rejected: ['unbound_symlink']\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/symlink/stdout.json",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "option_results": [
+    {
+      "exit_code": 2,
+      "option": "--hardware",
+      "rejected": true,
+      "stderr_bytes": 73,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/option_hardware/stderr.txt",
+      "stderr_sha256": "f11460a9790d23a320287f0f55fd9d90222b80aa8eba4a8ff377d929a29cf08f",
+      "stderr_text": "PHASE6B6_PORTABLE_HARDWARE_AUTHORITY_ERROR: forbidden option: --hardware\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/option_hardware/stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "option": "--hardware=true",
+      "rejected": true,
+      "stderr_bytes": 78,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/option_hardware_true/stderr.txt",
+      "stderr_sha256": "f0132cafed618367c8bedb99d929903f2f8464cdfdae4590c485ae72bf48d7e6",
+      "stderr_text": "PHASE6B6_PORTABLE_HARDWARE_AUTHORITY_ERROR: forbidden option: --hardware=true\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/option_hardware_true/stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "option": "--acquire",
+      "rejected": true,
+      "stderr_bytes": 72,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/option_acquire/stderr.txt",
+      "stderr_sha256": "764f3df887f8458c33ffb8f1736ddc7ccb7565b73bb75482b56ef4da550260a4",
+      "stderr_text": "PHASE6B6_PORTABLE_HARDWARE_AUTHORITY_ERROR: forbidden option: --acquire\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/option_acquire/stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "option": "--acquire=yes",
+      "rejected": true,
+      "stderr_bytes": 76,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/option_acquire_yes/stderr.txt",
+      "stderr_sha256": "440b7ca0e078e97aeb43cfdf60f72405bde0a218f0b7c0030e43fb64b04fef8e",
+      "stderr_text": "PHASE6B6_PORTABLE_HARDWARE_AUTHORITY_ERROR: forbidden option: --acquire=yes\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/option_acquire_yes/stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "option": "--calibrate",
+      "rejected": true,
+      "stderr_bytes": 74,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/option_calibrate/stderr.txt",
+      "stderr_sha256": "4617ce867b04bf2e0da58a4728522b37c9040d4524e2eeda5ff8fd556a576c57",
+      "stderr_text": "PHASE6B6_PORTABLE_HARDWARE_AUTHORITY_ERROR: forbidden option: --calibrate\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/option_calibrate/stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "option": "--calibrate=1",
+      "rejected": true,
+      "stderr_bytes": 76,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/option_calibrate_1/stderr.txt",
+      "stderr_sha256": "6c3b87842b5a586f3549f6a9c0757351e7b25c60811743337216563ee89354e7",
+      "stderr_text": "PHASE6B6_PORTABLE_HARDWARE_AUTHORITY_ERROR: forbidden option: --calibrate=1\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/option_calibrate_1/stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "option": "--run-campaign",
+      "rejected": true,
+      "stderr_bytes": 77,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/option_run-campaign/stderr.txt",
+      "stderr_sha256": "b82ddbe7bf0791c5e8b9db8309c04a7bed51a04d342a387d82879ff5f558bd11",
+      "stderr_text": "PHASE6B6_PORTABLE_HARDWARE_AUTHORITY_ERROR: forbidden option: --run-campaign\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/option_run-campaign/stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "option": "--run-campaign=true",
+      "rejected": true,
+      "stderr_bytes": 82,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/option_run-campaign_true/stderr.txt",
+      "stderr_sha256": "83efedd6552b52b446e41bd1d7f8336575810e5f2462c3e50a7a015dd66e4b18",
+      "stderr_text": "PHASE6B6_PORTABLE_HARDWARE_AUTHORITY_ERROR: forbidden option: --run-campaign=true\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/option_run-campaign_true/stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 2,
+      "option": "--unknown",
+      "rejected": true,
+      "stderr_bytes": 42,
+      "stderr_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/option_unknown/stderr.txt",
+      "stderr_sha256": "05bf1dfc3527f9c51f8e3fa970511e4bfb317b6458b64f40c46b7f2d513ef951",
+      "stderr_text": "unknown portable target option: --unknown\n",
+      "stdout_bytes": 0,
+      "stdout_path": "/root/catcas_phase6b6_portable_0c5f1cbf/results/negative_tests/option_unknown/stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "schema_id": "CAT_CAS_PHASE6B6_TARGET_NEGATIVE_TEST_SUMMARY_V1"
+}

@@ -1,0 +1,14 @@
+{
+  "duplicate_path_detected": false,
+  "excluded_recursive_files": [
+    "EVIDENCE_INVENTORY.json",
+    "EVIDENCE_INVENTORY.sha256",
+    "EVIDENCE_INVENTORY_VERIFICATION.txt",
+    "FINAL_EVIDENCE_SEAL.json"
+  ],
+  "path_escape_detected": false,
+  "paths_sha256": "081e45db793ecdf4a03ef27fde0f550cd407f3436242c9f6ce40ff87df8754ad",
+  "regular_file_count": 345,
+  "schema_id": "CAT_CAS_PHASE6B6_CURRENT_EVIDENCE_PATH_SET_V1",
+  "status": "PASS"
+}

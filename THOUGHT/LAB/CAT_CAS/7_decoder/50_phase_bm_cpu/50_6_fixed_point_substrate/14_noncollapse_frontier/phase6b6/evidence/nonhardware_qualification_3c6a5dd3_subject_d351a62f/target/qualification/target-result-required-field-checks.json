@@ -1,0 +1,32 @@
+{
+  "all_required_checks_pass": true,
+  "checks": {
+    "asan_raw_stdout_sha256": "56a26105b2b6969a05addbaafaa8db672d0d05a50158e1d145ed2903fec889c2",
+    "asan_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "calculated_phase6b6_subtree_inventory_sha256": "24789f0df9afa2d9f6a243a9050ff8f265cf22ffb42ab33bbe2f67521dbf44b5",
+    "calculated_scoped_tree": "408ee35257417898a992510b0f260602117a15af",
+    "calculated_v2_source_sha256": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976",
+    "equivalence_status": "V2_REFERENCE_EQUIVALENCE_PASS",
+    "final_result_sha256": "c2d1bf3c78e2a9318f51e06d27ac39a49fe7a49e3cd49c0c8850cd6c85a07f7f",
+    "hardware_backend_rejected": true,
+    "hardware_ran": false,
+    "jsonschema_required": false,
+    "mock_custody_digest": "4c0a58772fd25fe77759d6d09089ad532a09b3a5adcdce01dc099b6b7b00dba1",
+    "observed_inventory_sha256": "e47dea4c3467835a425d9d553803da48f672a8799970db4fc9b83e98596f50d8",
+    "portable_export_commit": "0c5f1cbfb30ce9d6f8242674a1fc86f44372fa56",
+    "portable_export_tree": "940187df10582ec5560c5e13420685107d21e8c3",
+    "portable_manifest_sha256": "59e5c5927cfa7f19bdaafdd740cb350f5819e81741b62821a22f2eb80ecd4676",
+    "runtime_status": "PHASE6B6_PORTABLE_RUNTIME_VALIDATE_ONLY_OK",
+    "schedule_digest": "c632d59934c2610541e279cac3a48202f2c0a79bb734e995f2cc4f28d19e87d3",
+    "scientific_acquisition_authorized": false,
+    "sender_process_matches": [],
+    "status": "PHASE6B6_PORTABLE_TARGET_QUALIFICATION_PASS",
+    "strict_raw_stdout_sha256": "56a26105b2b6969a05addbaafaa8db672d0d05a50158e1d145ed2903fec889c2",
+    "strict_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "target_executed_git": false,
+    "ubsan_raw_stdout_sha256": "56a26105b2b6969a05addbaafaa8db672d0d05a50158e1d145ed2903fec889c2",
+    "ubsan_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "failures": {},
+  "schema_id": "CAT_CAS_PHASE6B6_TARGET_RESULT_REQUIRED_FIELD_CHECKS_V1"
+}

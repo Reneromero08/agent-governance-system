@@ -1,0 +1,7 @@
+copied_to=D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\phase6b6\evidence\nonhardware_qualification_3c6a5dd3_subject_d351a62f\target\final_0c5f1cbf_root
+stage=D:\p6b6_final_copy_short
+target_root=/root/catcas_phase6b6_portable_0c5f1cbf
+file_count=658
+dir_count=269
+tar_archive_copied=false
+contains_git_bundle_or_archive=false

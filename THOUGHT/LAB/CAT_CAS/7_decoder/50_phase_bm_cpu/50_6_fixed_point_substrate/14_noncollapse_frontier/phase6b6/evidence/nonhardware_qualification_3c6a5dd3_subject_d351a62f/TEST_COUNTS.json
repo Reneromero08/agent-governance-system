@@ -1,0 +1,12 @@
+{
+  "all_forbidden_options_rejected": true,
+  "all_mutations_rejected": true,
+  "focused_target_test_count": 25,
+  "mandatory_mode_only_0644_to_0600_rejected": true,
+  "other_package_negative_count": 5,
+  "permission_negative_count": 10,
+  "schema_id": "CAT_CAS_PHASE6B6_NONHARDWARE_TEST_COUNTS_V1",
+  "target_forbidden_option_negative_count": 9,
+  "target_mutation_negative_count": 15,
+  "target_positive_qualification_count": 1
+}

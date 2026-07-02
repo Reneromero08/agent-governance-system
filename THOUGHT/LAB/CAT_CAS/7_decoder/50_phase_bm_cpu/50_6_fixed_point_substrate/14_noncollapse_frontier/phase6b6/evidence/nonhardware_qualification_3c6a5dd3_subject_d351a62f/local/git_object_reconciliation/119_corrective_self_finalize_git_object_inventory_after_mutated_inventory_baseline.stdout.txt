@@ -1,0 +1,1 @@
+corrective_self_finalize: using sequence 110 mismatch baseline; appending sequence 119 before final staged-index inventory regeneration

@@ -1,0 +1,8 @@
+catcas
+2026-07-01T06:50:30Z
+/root/catcas_phase6b6_portable_0c5f1cbf
+/root/catcas_phase6b6_portable_0c5f1cbf/extract
+/root/catcas_phase6b6_portable_0c5f1cbf/incoming
+/root/catcas_phase6b6_portable_0c5f1cbf/logs
+/root/catcas_phase6b6_portable_0c5f1cbf/negative
+/root/catcas_phase6b6_portable_0c5f1cbf/results

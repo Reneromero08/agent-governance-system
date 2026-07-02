@@ -1,0 +1,1 @@
+package file permission mismatch: path=capture_quality_contract.h git_source_mode=100644 expected=0644 observed=0755
