@@ -1,5 +1,8 @@
 name: Phase 6B.6 Gate A Adapter Qualification
 
+permissions:
+  contents: read
+
 on:
   pull_request:
     branches:
@@ -13,15 +16,15 @@ on:
 
 jobs:
   no-drive-qualification:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout exact head
-        uses: actions/checkout@v4
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
         with:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: "3.11"
 

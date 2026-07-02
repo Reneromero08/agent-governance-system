@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import subprocess
 import sys
@@ -12,11 +11,14 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
+import build_gate_a_execution_bundle as bundle
+import gate_a_authority
+
 HERE = Path(__file__).resolve().parent
 WORKER = HERE / "gate_a_worker.c"
 EXPECTED_SCHEDULE_SHA256 = "418ff6e9801ba5def3f17fb25c7d56f044599e6e5bc8cc3260e0368d4877d116"
 EXPECTED_NAMESPACE_SHA256 = "5b3090f642d28492e182630e6349eccd8181704f08129d40d886c8f529dfd50e"
-EXPECTED_TARGET = "root@192.168.137.100"
+EXPECTED_TARGET = gate_a_authority.EXPECTED_TARGET
 
 
 class TargetRunnerError(RuntimeError):
@@ -26,10 +28,6 @@ class TargetRunnerError(RuntimeError):
 def require(value: bool, message: str) -> None:
     if not value:
         raise TargetRunnerError(message)
-
-
-def sha256_file(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def load_object(path: Path) -> dict[str, Any]:
@@ -70,27 +68,31 @@ def qualify_no_drive() -> dict[str, Any]:
     }
 
 
-def validate_authority(path: Path, digest: str, args: argparse.Namespace) -> None:
-    require(sha256_file(path) == digest, "authority SHA-256 mismatch")
-    authority = load_object(path)
-    require(authority["schema_id"] == "CAT_CAS_PHASE6B6_GATE_A_EXECUTION_AUTHORITY_V1", "authority schema mismatch")
-    require(authority["execution_bundle_sha256"] == args.execution_bundle_sha256, "bundle digest mismatch")
-    require(authority["schedule_sha256"] == EXPECTED_SCHEDULE_SHA256 == args.schedule_sha256, "schedule digest mismatch")
-    require(authority["target"] == EXPECTED_TARGET == args.target, "target mismatch")
-    require(authority["target_namespace_sha256"] == EXPECTED_NAMESPACE_SHA256 == args.namespace_sha256, "namespace digest mismatch")
-    require(authority["maximum_execution_count"] == 1, "maximum execution count mismatch")
-    require(authority["consumed"] is False, "authority consumed")
-    require(authority["project_owner_approved"] is True, "owner approval missing")
-    state = authority["authority_state"]
-    require(state["automatic_retry"] is False, "retry flag must be false")
-    for key in ("calibration_authorized", "scientific_acquisition_authorized", "restoration_authorized", "target_coupling_authorized", "small_wall_authorized"):
-        require(state[key] is False, f"forbidden authority enabled: {key}")
+def validate_authority(path: Path, digest: str, args: argparse.Namespace) -> dict[str, Any]:
+    manifest = load_object(HERE / "GATE_A_EXECUTION_BUNDLE_MANIFEST.json")
+    require(args.source_head, "source head is required")
+    require(args.independent_review_id is not None, "independent review ID is required")
+    require(args.execution_bundle_sha256 == manifest["execution_bundle_sha256"], "bundle argument mismatch")
+    require(args.schedule_sha256 == EXPECTED_SCHEDULE_SHA256, "schedule argument mismatch")
+    require(args.target == EXPECTED_TARGET, "target argument mismatch")
+    require(args.namespace_sha256 == EXPECTED_NAMESPACE_SHA256, "namespace argument mismatch")
+    require(args.output_root == gate_a_authority.REMOTE_OUTPUT_ROOT, "output root argument mismatch")
+    authority, authority_bytes = gate_a_authority.load_json_object_bytes(path)
+    return gate_a_authority.validate_execution_authority(
+        authority,
+        authority_sha256=digest,
+        authority_bytes=authority_bytes,
+        expected_reviewed_adapter_head=args.source_head,
+        expected_independent_review_id=args.independent_review_id,
+        expected_manifest=manifest,
+    )
 
 
 def execute_authorized(args: argparse.Namespace) -> None:
     require(args.authority_artifact and args.authority_sha256, "exact authority artifact and SHA-256 are required")
     require(args.execution_bundle_sha256, "execution bundle digest is required")
     require(args.source_head, "source head is required")
+    require(args.independent_review_id is not None, "independent review ID is required")
     require(args.schedule_sha256, "schedule digest is required")
     require(args.target, "target is required")
     require(args.namespace_sha256, "namespace digest is required")
@@ -120,6 +122,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--authority-sha256")
     parser.add_argument("--execution-bundle-sha256")
     parser.add_argument("--source-head")
+    parser.add_argument("--independent-review-id", type=int)
     parser.add_argument("--schedule-sha256")
     parser.add_argument("--target")
     parser.add_argument("--namespace-sha256")
@@ -142,6 +145,6 @@ def main(argv: list[str] | None = None) -> int:
 if __name__ == "__main__":
     try:
         raise SystemExit(main())
-    except (TargetRunnerError, subprocess.CalledProcessError, json.JSONDecodeError) as exc:
+    except (TargetRunnerError, bundle.BundleError, gate_a_authority.AuthorityError, subprocess.CalledProcessError, json.JSONDecodeError) as exc:
         print(f"gate_a_target_runner: {exc}", file=sys.stderr)
         raise SystemExit(1)

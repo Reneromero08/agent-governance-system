@@ -15,9 +15,9 @@
   "no_receiver_capture_ran": true,
   "no_control_write_occurred": true,
   "next_boundary": "GATE_A_TARGET_NONEXECUTING_QUALIFICATION",
-  "execution_bundle_sha256": "efb3be585e036c67add48a6ccbd9631fce9ab2bb439ff2e9d05c65bfc6fecf77",
-  "deterministic_archive_sha256": "10c299e781eb82a6590fc6dc76ef3cba2f0fa39e95299533cbc992a41c9339fd",
-  "bundle_manifest_sha256": "b3d56ff9b124db27713be5c93a5735550fa89ebc03ab186d0288dce684b72cca",
+  "execution_bundle_sha256": "8558f43d67cb7049b250527444a7a0fee7ea46957769ab1a259fe5b65b0b60fb",
+  "deterministic_archive_sha256": "397158144367ce715ed2a6fd5b8d6ff805139fcbdb083fbd234f0430019da03f",
+  "bundle_manifest_sha256": "7d99474a4a2812b7872f0beaa97a289654704b9b8f741b8ddfc714d7ae51583b",
   "authority_false_state": {
     "authorization_artifact_created": false,
     "engineering_smoke_authorized": false,
@@ -28,6 +28,5 @@
     "target_coupling_authorized": false,
     "small_wall_authorized": false,
     "automatic_retry": false
-  },
-  "additionalProperties": false
+  }
 }

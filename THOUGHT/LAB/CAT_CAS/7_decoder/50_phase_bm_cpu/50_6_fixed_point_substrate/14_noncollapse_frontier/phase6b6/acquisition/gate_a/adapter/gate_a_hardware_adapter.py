@@ -7,11 +7,13 @@ import argparse
 import copy
 import hashlib
 import json
-import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
+
+import build_gate_a_execution_bundle as bundle
+import gate_a_authority
 
 BASE_MAIN = "03985a74d27e654c151cccad28c6221d91f70180"
 REVIEWED_PLAN_HEAD = "65d20b4bc65ddd9260a3c90d92612d2da48763a6"
@@ -19,8 +21,8 @@ PLAN_REVIEW_ID = 4617290767
 SCHEDULE_SHA256 = "418ff6e9801ba5def3f17fb25c7d56f044599e6e5bc8cc3260e0368d4877d116"
 NAMESPACE_SHA256 = "5b3090f642d28492e182630e6349eccd8181704f08129d40d886c8f529dfd50e"
 TARGET_IDENTITY_SHA256 = "10618a70ceb3413d7507c22254d595d63632bb7ad9243dbe3dc6ebbaf13e19a4"
-REMOTE_EXECUTION_ROOT = "/root/catcas_phase6b6_gate_a_smoke_9c416379"
-REMOTE_OUTPUT_ROOT = "/root/catcas_phase6b6_gate_a_smoke_9c416379/evidence"
+REMOTE_EXECUTION_ROOT = gate_a_authority.REMOTE_EXECUTION_ROOT
+REMOTE_OUTPUT_ROOT = gate_a_authority.REMOTE_OUTPUT_ROOT
 EXPECTED_SEQUENCE = ["I", "I", "I", "I", "C0", "D0", "S0E", "S0E", "S0E", "S0E", "O0", "O0", "A0P", "A0N", "T", "T"]
 
 HERE = Path(__file__).resolve().parent
@@ -54,10 +56,6 @@ def sha256_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
-def sha256_file(path: Path) -> str:
-    return sha256_bytes(path.read_bytes())
-
-
 def digest_with_self_field_removed(value: dict[str, Any], field: str) -> str:
     unsigned = copy.deepcopy(value)
     unsigned.pop(field, None)
@@ -70,11 +68,6 @@ def repo_root() -> Path:
         if (parent / ".git").exists():
             return parent
     raise AdapterError("repository root not found")
-
-
-def git_output(args: Iterable[str]) -> str:
-    result = subprocess.run(["git", *args], cwd=repo_root(), check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    return result.stdout.strip()
 
 
 def validate_schedule(schedule: dict[str, Any]) -> None:
@@ -154,52 +147,46 @@ def validate_namespace(namespace: dict[str, Any]) -> None:
 
 
 def validate_bundle_manifest(manifest: dict[str, Any]) -> None:
-    require(manifest["schema_id"] == "CAT_CAS_PHASE6B6_GATE_A_EXECUTION_BUNDLE_MANIFEST_V1", "manifest schema mismatch")
-    require(manifest["base_main_commit"] == BASE_MAIN, "manifest base mismatch")
-    require(manifest["reviewed_gate_a_plan_head"] == REVIEWED_PLAN_HEAD, "manifest reviewed head mismatch")
-    require(manifest["gate_a_plan_review"] == PLAN_REVIEW_ID, "manifest review mismatch")
-    require(manifest["schedule_sha256"] == SCHEDULE_SHA256, "manifest schedule mismatch")
-    require(manifest["target_namespace_sha256"] == NAMESPACE_SHA256, "manifest namespace mismatch")
-    require(manifest["target_identity_stdout_sha256"] == TARGET_IDENTITY_SHA256, "manifest target identity mismatch")
-    require(manifest["authority_artifact_created"] is False, "authority artifact must not exist")
-    require(manifest["engineering_smoke_authorized"] is False, "smoke must remain unauthorized")
-    require(manifest["hardware_ran"] is False, "hardware must not run")
-    package_paths = [entry["package_path"] for entry in manifest["files"]]
-    require(len(package_paths) == len(set(package_paths)), "duplicate package paths")
-    require(len({path.lower() for path in package_paths}) == len(package_paths), "case-colliding package paths")
-    for entry in manifest["files"]:
-        require(entry["git_mode"] == "100644", f"unexpected Git mode: {entry['package_path']}")
-        require(".." not in Path(entry["package_path"]).parts and Path(entry["package_path"]).is_absolute() is False, f"unsafe package path: {entry['package_path']}")
+    bundle.validate_committed_manifest_exact(manifest, "HEAD")
 
 
-def validate_future_authority(authority: dict[str, Any], authority_sha256: str, expected_bundle_sha256: str | None = None) -> None:
-    require(sha256_file(Path(authority["_path"])) == authority_sha256, "authority SHA-256 mismatch")
-    require(authority["schema_id"] == "CAT_CAS_PHASE6B6_GATE_A_EXECUTION_AUTHORITY_V1", "authority schema mismatch")
-    require(authority["reviewed_adapter_head"] == git_output(["rev-parse", "HEAD"]), "reviewed adapter head mismatch")
-    require(isinstance(authority["independent_review_id"], int), "independent review ID missing")
-    if expected_bundle_sha256 is not None:
-        require(authority["execution_bundle_sha256"] == expected_bundle_sha256, "execution bundle digest mismatch")
-    require(authority["schedule_sha256"] == SCHEDULE_SHA256, "authority schedule mismatch")
-    require(authority["target_identity_sha256"] == TARGET_IDENTITY_SHA256, "authority target identity mismatch")
-    require(authority["target"] == "root@192.168.137.100", "authority target mismatch")
-    require(authority["remote_execution_root"] == REMOTE_EXECUTION_ROOT, "authority execution root mismatch")
-    require(authority["remote_output_root"] == REMOTE_OUTPUT_ROOT, "authority output root mismatch")
-    state = authority["authority_state"]
-    require(state["authorization_artifact_created"] is True, "future artifact must declare created")
-    require(state["engineering_smoke_authorized"] is True, "future artifact must authorize smoke")
-    for key in ("hardware_ran", "calibration_authorized", "scientific_acquisition_authorized", "restoration_authorized", "target_coupling_authorized", "small_wall_authorized", "automatic_retry"):
-        require(state[key] is False, f"forbidden authority state enabled: {key}")
-    require(authority["maximum_execution_count"] == 1, "execution count must be one")
-    require(authority["consumed"] is False, "authority already consumed")
-    require(authority["project_owner_approved"] is True, "project owner approval missing")
+def validate_future_authority(
+    authority: dict[str, Any],
+    *,
+    authority_sha256: str,
+    authority_bytes: bytes,
+    expected_reviewed_adapter_head: str,
+    expected_independent_review_id: int,
+    expected_manifest: dict[str, Any],
+) -> dict[str, Any]:
+    return gate_a_authority.validate_execution_authority(
+        authority,
+        authority_sha256=authority_sha256,
+        authority_bytes=authority_bytes,
+        expected_reviewed_adapter_head=expected_reviewed_adapter_head,
+        expected_independent_review_id=expected_independent_review_id,
+        expected_manifest=expected_manifest,
+    )
 
 
-def load_authority(path: Path | None, digest: str | None, expected_bundle_sha256: str | None = None) -> dict[str, Any]:
+def load_authority(
+    path: Path | None,
+    digest: str | None,
+    *,
+    expected_reviewed_adapter_head: str | None,
+    expected_independent_review_id: int | None,
+    expected_manifest: dict[str, Any],
+) -> dict[str, Any]:
     require(path is not None and digest is not None, "future execution authority artifact and SHA-256 are required")
-    authority = load_object(path)
-    authority["_path"] = str(path)
-    validate_future_authority(authority, digest, expected_bundle_sha256)
-    return authority
+    require(expected_reviewed_adapter_head is not None, "reviewed adapter head is required")
+    require(expected_independent_review_id is not None, "independent review ID is required")
+    return gate_a_authority.load_and_validate_execution_authority(
+        path,
+        authority_sha256=digest,
+        expected_reviewed_adapter_head=expected_reviewed_adapter_head,
+        expected_independent_review_id=expected_independent_review_id,
+        expected_manifest=expected_manifest,
+    )
 
 
 def render_operation_plan(schedule: dict[str, Any], namespace: dict[str, Any], manifest: dict[str, Any]) -> dict[str, Any]:
@@ -246,7 +233,13 @@ def load_context() -> AdapterContext:
 def reject_without_authority(action: str, args: argparse.Namespace, context: AdapterContext) -> None:
     if not args.authority_artifact or not args.authority_sha256:
         raise AdapterError(f"{action} rejected: exact future authority artifact is required")
-    load_authority(Path(args.authority_artifact), args.authority_sha256, context.manifest["execution_bundle_sha256"])
+    load_authority(
+        Path(args.authority_artifact),
+        args.authority_sha256,
+        expected_reviewed_adapter_head=args.reviewed_adapter_head,
+        expected_independent_review_id=args.independent_review_id,
+        expected_manifest=context.manifest,
+    )
     raise AdapterError(f"{action} rejected: live transport is not executed in this qualification phase")
 
 
@@ -280,6 +273,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--cleanup-after-verified-copy", action="store_true", help="reject cleanup without exact receipt and authority")
     parser.add_argument("--authority-artifact", default=None)
     parser.add_argument("--authority-sha256", default=None)
+    parser.add_argument("--reviewed-adapter-head", default=None)
+    parser.add_argument("--independent-review-id", type=int, default=None)
     parser.add_argument("--copy-back-receipt", default=None)
     args = parser.parse_args(argv)
 
@@ -311,6 +306,6 @@ def main(argv: list[str] | None = None) -> int:
 if __name__ == "__main__":
     try:
         raise SystemExit(main())
-    except (AdapterError, subprocess.CalledProcessError, json.JSONDecodeError) as exc:
+    except (AdapterError, bundle.BundleError, gate_a_authority.AuthorityError, json.JSONDecodeError) as exc:
         print(f"gate_a_hardware_adapter: {exc}", file=sys.stderr)
         raise SystemExit(1)

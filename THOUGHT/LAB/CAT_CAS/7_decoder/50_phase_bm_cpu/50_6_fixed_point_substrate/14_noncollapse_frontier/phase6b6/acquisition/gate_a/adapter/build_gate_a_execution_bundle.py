@@ -27,6 +27,7 @@ GATE_A = HERE.parent
 MANIFEST_PATH = HERE / "GATE_A_EXECUTION_BUNDLE_MANIFEST.json"
 
 PACKAGE_FILES = [
+    ("adapter/gate_a_authority.py", HERE / "gate_a_authority.py", "shared_authority_validator"),
     ("adapter/gate_a_hardware_adapter.py", HERE / "gate_a_hardware_adapter.py", "host_adapter"),
     ("adapter/gate_a_target_runner.py", HERE / "gate_a_target_runner.py", "target_runner"),
     ("adapter/gate_a_worker.c", HERE / "gate_a_worker.c", "target_worker"),
@@ -35,6 +36,32 @@ PACKAGE_FILES = [
     ("GATE_A_ENGINEERING_SMOKE_SCHEDULE.json", GATE_A / "GATE_A_ENGINEERING_SMOKE_SCHEDULE.json", "schedule"),
     ("GATE_A_TARGET_NAMESPACE_BINDING.json", GATE_A / "GATE_A_TARGET_NAMESPACE_BINDING.json", "target_namespace"),
 ]
+
+MANIFEST_KEYS = {
+    "schema_id",
+    "base_main_commit",
+    "reviewed_gate_a_plan_head",
+    "gate_a_plan_review",
+    "schedule_sha256",
+    "target_namespace_sha256",
+    "target_identity_stdout_sha256",
+    "authority_artifact_created",
+    "engineering_smoke_authorized",
+    "hardware_ran",
+    "files",
+    "execution_bundle_sha256",
+    "deterministic_archive_sha256",
+}
+
+FILE_ENTRY_KEYS = {
+    "package_path",
+    "source_repository_path",
+    "git_mode",
+    "git_blob_sha1",
+    "byte_size",
+    "sha256",
+    "role",
+}
 
 
 class BundleError(RuntimeError):
@@ -129,7 +156,25 @@ def build_entries(treeish: str) -> list[dict[str, Any]]:
     return entries
 
 
+def validate_package_paths(entries: list[dict[str, Any]]) -> None:
+    seen_package: set[str] = set()
+    seen_lower: set[str] = set()
+    for entry in entries:
+        require(set(entry) == FILE_ENTRY_KEYS, f"manifest file entry key set mismatch: {entry}")
+        package_path = entry["package_path"]
+        require(isinstance(package_path, str), "package path must be a string")
+        require(package_path not in seen_package, f"duplicate package path: {package_path}")
+        require(package_path.lower() not in seen_lower, f"case-colliding package path: {package_path}")
+        seen_package.add(package_path)
+        seen_lower.add(package_path.lower())
+        require(not Path(package_path).is_absolute() and ".." not in Path(package_path).parts, f"unsafe package path: {package_path}")
+        require(entry["git_mode"] == "100644", f"unexpected Git mode for {package_path}: {entry['git_mode']}")
+        require(isinstance(entry["source_repository_path"], str), f"source path must be a string: {package_path}")
+        require(not Path(entry["source_repository_path"]).is_absolute() and ".." not in Path(entry["source_repository_path"]).parts, f"unsafe source path: {entry['source_repository_path']}")
+
+
 def archive_digest(entries: list[dict[str, Any]]) -> str:
+    validate_package_paths(entries)
     stream = BytesIO()
     with tarfile.open(fileobj=stream, mode="w", format=tarfile.PAX_FORMAT) as archive:
         for entry in entries:
@@ -170,6 +215,23 @@ def render_manifest(treeish: str) -> dict[str, Any]:
 
 
 def validate_manifest(manifest: dict[str, Any]) -> None:
+    validate_committed_manifest_exact(manifest, "HEAD")
+
+
+def validate_committed_manifest_exact(manifest: dict[str, Any], treeish: str) -> dict[str, Any]:
+    require(set(manifest) == MANIFEST_KEYS, "manifest top-level key set mismatch")
+    require(isinstance(manifest["files"], list), "manifest files must be a list")
+    validate_package_paths(manifest["files"])
+    execution_digest = manifest["execution_bundle_sha256"]
+    archive = manifest["deterministic_archive_sha256"]
+    require(isinstance(execution_digest, str) and len(execution_digest) == 64, "execution bundle digest malformed")
+    require(isinstance(archive, str) and len(archive) == 64, "deterministic archive digest malformed")
+    expected = render_manifest(treeish)
+    require(manifest == expected, "committed execution bundle manifest mismatch")
+    return expected
+
+
+def validate_manifest_digests(manifest: dict[str, Any]) -> None:
     execution_digest = manifest["execution_bundle_sha256"]
     archive = manifest["deterministic_archive_sha256"]
     unsigned = dict(manifest)
@@ -186,7 +248,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--compare-twice", action="store_true")
     args = parser.parse_args(argv)
     manifest = render_manifest(args.treeish)
-    validate_manifest(manifest)
+    validate_manifest_digests(manifest)
+    validate_committed_manifest_exact(manifest, args.treeish)
     if args.compare_twice:
         with tempfile.TemporaryDirectory(prefix="gate_a_bundle_"):
             manifest_b = render_manifest(args.treeish)

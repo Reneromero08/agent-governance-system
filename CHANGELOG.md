@@ -2,6 +2,17 @@
 
 # Changelog
 
+## 2026-07-02: Phase 6B.6 Gate A adapter custody repair
+
+- Phase 6B.6: close PR #36 Gate A adapter review blockers by making runtime
+  bundle-manifest validation reconstruct the exact committed Git-object
+  manifest, adding one shared exact future-authority validator for the host
+  adapter and target runner, expanding mutation coverage for manifest and
+  authority custody, removing pseudo-schema data fields from candidate/result
+  records, and pinning the dedicated adapter workflow runner and actions.
+  Target qualification remains incomplete; no execution authority artifact is
+  created, and no Phenom connection or hardware execution is authorized.
+
 ## 2026-07-02: Phase 6B.6 Gate A adapter no-drive qualification
 
 - Phase 6B.6: add the Gate A hardware-adapter and execution-bundle layer under
