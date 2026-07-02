@@ -1,0 +1,1 @@
+{"extracted_to": "/root/catcas_phase6b6_gate_a_smoke_9c416379", "status": "EXTRACTED"}

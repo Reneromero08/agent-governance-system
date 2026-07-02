@@ -1,0 +1,8 @@
+{
+  "inventory_entry_count": 15,
+  "inventory_verified": true,
+  "retained_evidence_custody_verified": true,
+  "schema_id": "CAT_CAS_PHASE6B6_GATE_A_COPY_BACK_RECEIPT_V1",
+  "target_evidence_archive_sha256": "12adebbdea79c56db7760a9eb0ca4e1f7ae008e59257c619ad61a1752cb93477",
+  "unexpected_entries": []
+}
