@@ -2,188 +2,128 @@
 
 **Status:** `FROZEN_PLAN__NO_EXECUTION_AUTHORITY`
 
-**Base main:** `9c41637992536f43d10d152ec176a3577aef1623`
+```text
+base main = 9c41637992536f43d10d152ec176a3577aef1623
+architecture review = 4614574719
+architecture merge = 9c41637992536f43d10d152ec176a3577aef1623
+schedule digest = 418ff6e9801ba5def3f17fb25c7d56f044599e6e5bc8cc3260e0368d4877d116
+```
 
-**Architecture review:** `4614574719`
+## Purpose
 
-**Architecture merge:** `9c41637992536f43d10d152ec176a3577aef1623`
+Gate A proves only that a separately implemented and qualified adapter can cross the physical interface, execute one exact explicit-slot sequence, preserve raw custody, enforce vetoes, and cleanly stop.
 
-**Schedule digest:** `b2d73afb5b4d3fd351abbb4aa7f7f76cfa532dcff0808f331682b456d3e6e6ed`
-
-## 1. Purpose
-
-Gate A proves only that a separately implemented and qualified hardware adapter can cross the physical interface, obey one exact explicit-slot sequence, preserve raw custody, enforce vetoes, and cleanly stop.
-
-It is not a scientific mini-campaign. It cannot fit an operator, open train, validation, or test data, classify persistence, or support a physical observability claim.
+It is not a scientific mini-campaign. It cannot fit an operator, access scientific train, validation, or test data, classify persistence, or support an observability claim.
 
 This document does not authorize execution.
 
-## 2. Frozen target and route
+## Frozen geometry
 
 ```text
 target = root@192.168.137.100
 hostname = catcas
 CPU = AMD Phenom II X6 1090T
-architecture = x86_64
 route = v4s5
 sender core = 4
 receiver core = 5
 boot states = 1
 sessions = 1
-```
-
-The target identity must be revalidated immediately before execution and must match the sealed identity evidence whose stdout SHA-256 is:
-
-```text
-10618a70ceb3413d7507c22254d595d63632bb7ad9243dbe3dc6ebbaf13e19a4
-```
-
-## 3. Timing and execution ceiling
-
-```text
 read rate = 8000 Hz
 slot duration = 0.5 seconds
 nominal samples per slot = 4000
 slot count = 16
-nominal driven timeline = 8.0 seconds
+nominal duration = 8.0 seconds
 maximum execution count = 1
 automatic retry = false
 temperature veto = 68 C
 ```
 
-The observed frequency must already equal `1600000 kHz`. Gate A may observe and veto on mismatch, but it may not write frequency, voltage, or MSR state.
+The target identity must match sealed stdout SHA-256:
 
-## 4. Exact slot sequence
+```text
+10618a70ceb3413d7507c22254d595d63632bb7ad9243dbe3dc6ebbaf13e19a4
+```
 
-| Slots | Token | Physical meaning |
+The observed frequency must already equal `1600000 kHz`. Gate A may observe and veto, but may not write frequency, voltage, or MSR state.
+
+## Exact sequence
+
+| Slots | Token | Meaning |
 |---|---|---|
 | 0-3 | `I` | Sender absent, idle baseline |
-| 4 | `C0` | Carrier-off control for physical tone 0 |
-| 5 | `D0` | Declaration sham for tone 0, declared anchor but no drive |
-| 6-9 | `S0E` | Four contiguous driven STEP slots, tone 0, amplitude 2, positive sign, one sender epoch |
-| 10-11 | `O0` | STEP-off transition with sender absent |
-| 12 | `A0P` | Positive anchor, tone 0, amplitude 2, phase 0 |
-| 13 | `A0N` | Negative anchor, tone 0, amplitude 2, phase pi |
+| 4 | `C0` | Carrier-off control for tone 0 |
+| 5 | `D0` | Declared anchor context, no physical drive |
+| 6-9 | `S0E` | Four contiguous driven STEP slots in one sender epoch |
+| 10-11 | `O0` | STEP-off transition, sender absent |
+| 12 | `A0P` | Positive anchor |
+| 13 | `A0N` | Negative anchor |
 | 14-15 | `T` | Tail sender-off and cleanup confirmation |
 
-The canonical machine-readable schedule is `GATE_A_ENGINEERING_SMOKE_SCHEDULE.json`.
+The canonical schedule is `GATE_A_ENGINEERING_SMOKE_SCHEDULE.json`.
 
-The four `S0E` slots must share exactly one sender process epoch. The sender must be absent before slot 0, absent during all off and sham slots, and absent after the final driven slot.
+Each token stores `declared` and `executed` controls separately. Off and sham tokens retain declared analytical context while executed amplitude, phase, tone, sign, and sender epoch remain null.
 
-## 5. Preconditions
+## Preconditions
 
-Execution must stop before any drive if any precondition fails:
+Stop before drive unless all are true:
 
 ```text
 exact Gate A authority artifact validates
-artifact binds the reviewed run plan and schedule digest
-project-owner approval exactly names Gate A and the reviewed head
-hardware adapter digest matches the artifact
-execution bundle digest matches the artifact
-target identity matches catcas evidence
+artifact binds this run plan and schedule digest
+project-owner approval names the exact reviewed Gate A head
+adapter and execution-bundle digests match
+target identity matches
 sender process is absent
 temperature is below 68 C
-observed frequency is exactly 1600000 kHz
+observed frequency is 1600000 kHz
 no frequency, voltage, or MSR writer is present
-no scientific train, validation, or test namespace is mounted
+no scientific data namespace is available
 output namespace is new and empty
 automatic retry is disabled
 ```
 
-The current candidate fails the hardware-adapter and execution-bundle preconditions by design. Therefore it cannot authorize execution.
+The current candidate fails the adapter and execution-bundle requirements by design. It cannot authorize execution.
 
-## 6. Required custody
+## Required custody
 
-The eventual one-shot run must preserve:
+The eventual run must preserve:
 
 ```text
-exact authority artifact
-exact schedule and digest
+authority artifact and exact schedule
 source, adapter, executable, and bundle digests
-target identity before and after the run
-process table before, during transitions, and after cleanup
-session TSC origin
-measured TSC frequency
+target identity before and after
+process state before, during transitions, and after cleanup
+session TSC origin and measured TSC frequency
 requested and actual slot boundaries
-raw lock-in I and Q samples
-raw ring-oscillator period samples
-executed controls
-declared controls
-route and core identity
-temperature and observed P-state telemetry
-empirical sample rate
-maximum capture gap
-stdout and stderr
-complete command ledger
-file sizes, modes, and SHA-256 digests
+raw lock-in I and Q
+raw ring-oscillator periods
+declared and executed controls
+route, core, temperature, P-state, sample-rate, and gap telemetry
+stdout, stderr, command ledger, file modes, sizes, and SHA-256 digests
 cleanup proof
 ```
 
-Raw acquisition is primary. Summaries do not replace raw files.
+Raw acquisition remains primary.
 
-## 7. Fail-closed stop conditions
+## Stop conditions
 
-Stop immediately and preserve partial evidence when any condition occurs:
+Stop immediately and preserve partial evidence on any authority, digest, identity, sender-state, temperature, frequency, timing, capture-quality, process, file, network, raw-output, or slot failure.
 
-```text
-authority or digest mismatch
-unexpected source or schedule head
-target identity mismatch
-sender present before authorized start
-sender present during an off or sham slot
-sender epoch discontinuity across slots 6-9
-temperature reaches 68 C
-observed frequency differs from 1600000 kHz
-frequency, voltage, or MSR write attempt
-requested versus actual TSC boundary violation
-capture gap or empirical sample-rate veto
-unexpected process, file, or network activity
-missing raw output or command custody
-any failed slot
-```
+There is no catch-up, padding, interpolation, synthetic replacement, silent repetition, or retry.
 
-There is no catch-up slot, padding, interpolation, synthetic replacement, silent repetition, or retry.
+A failed or vetoed attempt requires independent review and a new project-owner decision.
 
-A failed or vetoed attempt consumes no implied second attempt. A new run requires a new evidence review and a new project-owner authority decision.
+## Cleanup
 
-## 8. Cleanup obligations
+Cleanup must prove all sender and receiver processes are absent, temporary roots are removed after verified copy-back, no background process remains, no hardware control state changed, and retained evidence hashes verify.
 
-Cleanup must prove:
+## Claim boundary
 
-```text
-sender process absent
-receiver process absent
-temporary executable and extraction roots removed
-no scheduled or background process remains
-no frequency, voltage, or MSR state was changed
-partial and final evidence copied back before deletion
-all retained evidence hashes verify
-target output namespace removed only after copy-back verification
-```
+A Gate A pass establishes only that the physical interface and custody path function under this exact smoke sequence.
 
-## 9. Engineering-only pass conditions
+It does not establish a relational state, predictive operator, persistence, restoration, target coupling, fold-odd recovery, or Small Wall crossing.
 
-Gate A evidence may pass only if:
-
-```text
-one exact execution occurred
-all 16 slots executed in order
-all requested and actual TSC boundaries are present
-sender-off semantics are physically real
-slots 6-9 preserve one sender epoch
-positive and negative anchors execute distinctly
-raw capture and telemetry are complete
-capture-quality checks pass
-temperature and observed-frequency predicates hold
-cleanup is complete
-evidence custody independently verifies
-```
-
-A pass establishes only that the physical interface and custody path function under this exact smoke sequence.
-
-It does not establish predictive observability, a relational state, an operator, persistence, restoration, target coupling, fold-odd recovery, or Small Wall crossing.
-
-## 10. Current blocking state
+## Current blocking state
 
 ```text
 run plan frozen = true
@@ -198,14 +138,12 @@ engineering smoke authorized = false
 hardware ran = false
 ```
 
-## 11. Next boundary
+## Next boundary
 
-The immediate boundary is independent review of the frozen Gate A plan, schedule, candidate, and verifier.
+The immediate boundary is independent review of the frozen plan, schedule, candidate, schema, and verifier.
 
-Even after that review, execution remains blocked. The next implementation boundary is:
+Execution remains blocked after that review. The next implementation boundary is:
 
 ```text
 GATE_A_HARDWARE_ADAPTER_IMPLEMENTATION_AND_NONEXECUTING_QUALIFICATION
 ```
-
-Only after an exact adapter and execution bundle are implemented, qualified without driving hardware, independently reviewed, and bound into a new authority artifact may project-owner execution approval be requested.
