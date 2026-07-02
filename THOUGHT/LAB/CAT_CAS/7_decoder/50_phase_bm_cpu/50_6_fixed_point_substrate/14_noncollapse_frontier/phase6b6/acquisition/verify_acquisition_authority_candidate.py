@@ -233,7 +233,7 @@ def validate_integrated_evidence() -> None:
     require(seal.get("corrected_payload_tree") == CORRECTED_PAYLOAD_TREE, "evidence payload tree mismatch")
     require(seal.get("inventory_json_sha256") == INVENTORY_SHA256, "evidence inventory mismatch")
     require(seal.get("inventory_file_count") == 396, "evidence inventory file count mismatch")
-    require(seal.get("portable_archive_sha256") == ARCHIVE_SHA256, "portable archive mismatch")
+    require(seal.get("archive_sha256") == ARCHIVE_SHA256, "portable archive mismatch")
     require(seal.get("portable_manifest_sha256") == MANIFEST_SHA256, "portable manifest mismatch")
     require(seal.get("target_final_result_digest") == TARGET_RESULT_DIGEST, "target final result mismatch")
     authority = seal.get("authority_state")
