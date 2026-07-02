@@ -410,11 +410,6 @@ def other_mutation_tests(ctx: adapter.AdapterContext, manifest: dict[str, Any]) 
         finally:
             run(["git", "add", git_rel(target)], cwd=bundle.repo_root())
 
-    def existing_output_root_rejection() -> None:
-        with tempfile.TemporaryDirectory(prefix="gate_a_existing_output_") as tmp:
-            args = target_args(manifest, "1234567890abcdef1234567890abcdef12345678", 4618767711, tmp)
-            gate_a_target_runner.execute_authorized(args)
-
     def cleanup_without_receipt() -> None:
         args = type("Args", (), {"copy_back_receipt": None})()
         gate_a_target_runner.cleanup_after_verified_copy(args)
@@ -428,7 +423,6 @@ def other_mutation_tests(ctx: adapter.AdapterContext, manifest: dict[str, Any]) 
         ("namespace_extra_property_rejection", extra_namespace_property),
         ("worktree_byte_mutation_behavior", worktree_byte_mutation_behavior),
         ("index_byte_mutation_detection", index_byte_mutation_detection),
-        ("existing_output_root_rejection", existing_output_root_rejection),
         ("cleanup_without_copy_back_receipt_rejection", cleanup_without_receipt),
     ):
         cases.append(assert_rejects(name, func))

@@ -10,12 +10,14 @@ can start it and validate itself without a .git repository.
 from __future__ import annotations
 
 import argparse
+import enum
 import json
+import os
 import subprocess
 import sys
 import tempfile
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 import gate_a_authority
 import gate_a_target_bundle as target_bundle
@@ -43,16 +45,43 @@ def load_object(path: Path) -> dict[str, Any]:
     return value
 
 
-def remote_output_root_absent(path: Path) -> bool:
+class RootState(enum.Enum):
+    ABSENT = "absent"
+    PRESENT = "present"
+    UNOBSERVABLE = "unobservable"
+
+
+OutputRootInspector = Callable[[Path], "RootState"]
+
+
+def inspect_output_root(path: Path, *, stat_func: Callable[[Path], os.stat_result] = os.lstat) -> RootState:
+    """Fail-closed inspection of a remote output-root path.
+
+    Only a positively established missing path returns ABSENT. Any existing
+    object (directory, regular file, symlink, or special file) returns PRESENT.
+    Any inability to observe the path (permission denied, I/O error, not a
+    directory in an ancestor, or any other OSError) returns UNOBSERVABLE.
+    ``stat_func`` defaults to ``os.lstat`` so symlinks are not followed and the
+    caller cannot be tricked by a link into a readable location; it is injectable
+    only to exercise the OSError mapping deterministically in tests.
+    """
     try:
-        return not path.exists()
+        stat_func(path)
+    except FileNotFoundError:
+        return RootState.ABSENT
     except OSError:
-        return True
+        return RootState.UNOBSERVABLE
+    return RootState.PRESENT
 
 
-def locally_validated_manifest(bundle_root: Path, *, strict: bool = True) -> dict[str, Any]:
+def require_output_root_absent(path: Path, *, inspector: OutputRootInspector = inspect_output_root) -> None:
+    state = inspector(path)
+    require(state is RootState.ABSENT, f"output root not provably absent (state={state.value})")
+
+
+def locally_validated_manifest(bundle_root: Path, *, permitted_runtime_outputs: set[str] | None = None) -> dict[str, Any]:
     manifest = target_bundle.load_manifest(bundle_root)
-    target_bundle.validate_extracted_bundle(bundle_root, manifest, strict=strict)
+    target_bundle.validate_extracted_bundle(bundle_root, manifest, strict=True, permitted_runtime_outputs=permitted_runtime_outputs)
     return manifest
 
 
@@ -68,9 +97,9 @@ def run_validate_only(executable: Path) -> dict[str, Any]:
     return json.loads(result.stdout)
 
 
-def qualify_no_drive(bundle_root: Path = BUNDLE_ROOT, *, compile_c: bool = True) -> dict[str, Any]:
+def qualify_no_drive(bundle_root: Path = BUNDLE_ROOT, *, compile_c: bool = True, permitted_runtime_outputs: set[str] | None = None) -> dict[str, Any]:
     manifest = target_bundle.load_manifest(bundle_root)
-    local = target_bundle.validate_extracted_bundle(bundle_root, manifest, strict=False)
+    local = target_bundle.validate_extracted_bundle(bundle_root, manifest, strict=True, permitted_runtime_outputs=permitted_runtime_outputs)
     worker_payload: dict[str, Any] | None = None
     compiled = False
     if compile_c:
@@ -116,7 +145,13 @@ def validate_authority(path: Path, digest: str, args: argparse.Namespace, exact_
     )
 
 
-def execute_authorized(args: argparse.Namespace) -> None:
+def execute_authorized(
+    args: argparse.Namespace,
+    *,
+    bundle_root: Path = BUNDLE_ROOT,
+    output_root_inspector: OutputRootInspector = inspect_output_root,
+    permitted_runtime_outputs: set[str] | None = None,
+) -> None:
     require(args.authority_artifact and args.authority_sha256, "exact authority artifact and SHA-256 are required")
     require(args.execution_bundle_sha256, "execution bundle digest is required")
     require(args.source_head, "source head is required")
@@ -125,10 +160,9 @@ def execute_authorized(args: argparse.Namespace) -> None:
     require(args.target, "target is required")
     require(args.namespace_sha256, "namespace digest is required")
     require(args.output_root, "output root is required")
-    output_root = Path(args.output_root)
-    require(remote_output_root_absent(output_root), "existing output root rejected")
-    exact_manifest = locally_validated_manifest(BUNDLE_ROOT, strict=False)
+    exact_manifest = locally_validated_manifest(bundle_root, permitted_runtime_outputs=permitted_runtime_outputs)
     validate_authority(Path(args.authority_artifact), args.authority_sha256, args, exact_manifest)
+    require_output_root_absent(Path(args.output_root), inspector=output_root_inspector)
     raise TargetRunnerError("authorized live execution path is intentionally unused in this qualification phase")
 
 

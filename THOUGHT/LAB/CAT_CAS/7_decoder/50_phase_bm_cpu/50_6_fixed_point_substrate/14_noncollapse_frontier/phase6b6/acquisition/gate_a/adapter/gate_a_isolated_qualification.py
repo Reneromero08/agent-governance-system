@@ -26,9 +26,14 @@ import tempfile
 from pathlib import Path
 from typing import Any, Callable
 
+# Keep the extracted bundle immutable during qualification: never write .pyc/.pyo
+# into the extracted adapter directory when importing the target modules.
+sys.dont_write_bytecode = True
+
 SYNTHETIC_REVIEWED_HEAD = "1234567890abcdef1234567890abcdef12345678"
 SYNTHETIC_REVIEW_ID = 4619537286
 AUTHORITY_NAME = "GATE_A_EXECUTION_AUTHORITY.json"
+LIVE_SENTINEL = "authorized live execution path is intentionally unused in this qualification phase"
 
 
 class HarnessError(RuntimeError):
@@ -42,6 +47,7 @@ def require(value: bool, message: str) -> None:
 
 def _import_target_modules(bundle_root: Path, require_isolated_origin: bool):
     adapter_dir = bundle_root / "adapter"
+    sys.dont_write_bytecode = True
     sys.path.insert(0, str(adapter_dir))
     import gate_a_target_bundle as target_bundle
     import gate_a_authority
@@ -271,7 +277,7 @@ def authority_mutation_suite(target_bundle, gate_a_authority, manifest: dict[str
     }
 
 
-def synthetic_authority_validation(target_bundle, gate_a_authority, gate_a_target_runner, manifest: dict[str, Any], work: Path) -> dict[str, Any]:
+def _valid_authority_and_args(target_bundle, gate_a_authority, manifest: dict[str, Any], work: Path):
     reviewed_head = SYNTHETIC_REVIEWED_HEAD
     review_id = SYNTHETIC_REVIEW_ID
     authority = authority_template(target_bundle, gate_a_authority, manifest, reviewed_head, review_id)
@@ -279,16 +285,6 @@ def synthetic_authority_validation(target_bundle, gate_a_authority, gate_a_targe
     data = (json.dumps(authority, sort_keys=True, indent=2) + "\n").encode("utf-8")
     path.write_bytes(data)
     digest = gate_a_authority.sha256_bytes(data)
-
-    shared_result = gate_a_authority.validate_execution_authority(
-        authority,
-        authority_sha256=digest,
-        authority_bytes=data,
-        expected_reviewed_adapter_head=reviewed_head,
-        expected_independent_review_id=review_id,
-        exact_manifest=manifest,
-    )
-
     args = argparse.Namespace(
         authority_artifact=str(path),
         authority_sha256=digest,
@@ -300,18 +296,260 @@ def synthetic_authority_validation(target_bundle, gate_a_authority, gate_a_targe
         namespace_sha256=target_bundle.NAMESPACE_SHA256,
         output_root=gate_a_authority.REMOTE_OUTPUT_ROOT,
     )
-    reached_live_sentinel = False
-    sentinel = "authorized live execution path is intentionally unused in this qualification phase"
+    return authority, data, digest, args
+
+
+def _absent_inspector(gate_a_target_runner, work: Path):
+    absent_path = work / "definitely_absent_output_root"
+    return lambda _path: gate_a_target_runner.inspect_output_root(absent_path)
+
+
+def _assert_no_sentinel(gate_a_target_runner, name: str, call: Callable[[], Any]) -> str:
     try:
-        gate_a_target_runner.execute_authorized(args)
+        call()
     except gate_a_target_runner.TargetRunnerError as exc:
-        reached_live_sentinel = str(exc) == sentinel
+        if str(exc) == LIVE_SENTINEL:
+            raise HarnessError(f"reached live sentinel despite {name}")
+        return name
+    except Exception:
+        return name
+    raise HarnessError(f"no rejection for {name}")
+
+
+def synthetic_authority_validation(target_bundle, gate_a_authority, gate_a_target_runner, manifest: dict[str, Any], work: Path, bundle_root: Path) -> dict[str, Any]:
+    authority, data, digest, args = _valid_authority_and_args(target_bundle, gate_a_authority, manifest, work)
+    reviewed_head = args.source_head
+    review_id = args.independent_review_id
+
+    shared_result = gate_a_authority.validate_execution_authority(
+        authority,
+        authority_sha256=digest,
+        authority_bytes=data,
+        expected_reviewed_adapter_head=reviewed_head,
+        expected_independent_review_id=review_id,
+        exact_manifest=manifest,
+    )
+
+    reached_live_sentinel = False
+    try:
+        gate_a_target_runner.execute_authorized(
+            args,
+            bundle_root=bundle_root,
+            output_root_inspector=_absent_inspector(gate_a_target_runner, work),
+        )
+    except gate_a_target_runner.TargetRunnerError as exc:
+        reached_live_sentinel = str(exc) == LIVE_SENTINEL
     require(reached_live_sentinel, "synthetic authority did not reach the intentionally-unused live sentinel")
     return {
         "status": "ISOLATED_SYNTHETIC_AUTHORITY_VALIDATED",
         "shared_validator_result": shared_result,
         "reached_intentionally_unused_live_sentinel": True,
         "authority_written_outside_bundle": True,
+        "positively_absent_output_root_accepted": True,
+    }
+
+
+def root_state_suite(target_bundle, gate_a_authority, gate_a_target_runner, manifest: dict[str, Any], work: Path, bundle_root: Path) -> dict[str, Any]:
+    _authority, _data, _digest, args = _valid_authority_and_args(target_bundle, gate_a_authority, manifest, work)
+    runner = gate_a_target_runner
+    cases: list[str] = []
+
+    def run_with_inspector(inspector) -> None:
+        runner.execute_authorized(args, bundle_root=bundle_root, output_root_inspector=inspector)
+
+    def reject(name: str, inspector) -> None:
+        cases.append(_assert_no_sentinel(runner, name, lambda: run_with_inspector(inspector)))
+
+    def raise_permission(_path):
+        raise PermissionError(13, "permission denied")
+
+    def raise_generic(_path):
+        raise OSError(5, "input/output error")
+
+    present_dir = work / "present_dir"
+    present_dir.mkdir()
+    present_file = work / "present_file"
+    present_file.write_text("x", encoding="utf-8")
+
+    reject("existing_directory", lambda _p: runner.inspect_output_root(present_dir))
+    reject("existing_regular_file", lambda _p: runner.inspect_output_root(present_file))
+    reject("permission_error_unobservable", lambda _p: runner.inspect_output_root(work / "pe", stat_func=raise_permission))
+    reject("generic_oserror_unobservable", lambda _p: runner.inspect_output_root(work / "io", stat_func=raise_generic))
+
+    # Positive control: a positively absent path reaches the intentionally-unused sentinel.
+    absent_reached = False
+    try:
+        run_with_inspector(_absent_inspector(runner, work))
+    except runner.TargetRunnerError as exc:
+        absent_reached = str(exc) == LIVE_SENTINEL
+    require(absent_reached, "positively absent output root did not reach the live sentinel")
+
+    # Direct production-function mapping checks (inspect_output_root is the default inspector).
+    require(runner.inspect_output_root(work / "definitely_absent") is runner.RootState.ABSENT, "absent mapping wrong")
+    require(runner.inspect_output_root(present_dir) is runner.RootState.PRESENT, "present-dir mapping wrong")
+    require(runner.inspect_output_root(present_file) is runner.RootState.PRESENT, "present-file mapping wrong")
+    require(runner.inspect_output_root(work / "pe", stat_func=raise_permission) is runner.RootState.UNOBSERVABLE, "permission mapping wrong")
+    require(runner.inspect_output_root(work / "io", stat_func=raise_generic) is runner.RootState.UNOBSERVABLE, "oserror mapping wrong")
+
+    best_effort: dict[str, Any] = {}
+
+    def best_effort_present(name: str, prepare) -> None:
+        record: dict[str, Any] = {"performed": False, "rejected": None}
+        try:
+            path = prepare()
+            record["performed"] = True
+        except OSError:
+            best_effort[name] = record
+            return
+        try:
+            run_with_inspector(lambda _p, _path=path: runner.inspect_output_root(Path(_path)))
+            record["rejected"] = False
+        except runner.TargetRunnerError as exc:
+            record["rejected"] = str(exc) != LIVE_SENTINEL
+        require(record["rejected"] is True, f"root-state best-effort not rejected: {name}")
+        best_effort[name] = record
+
+    def make_symlink():
+        link = work / "present_symlink"
+        os.symlink(str(present_dir), str(link))
+        return link
+
+    def make_broken_symlink():
+        link = work / "broken_symlink"
+        os.symlink(str(work / "missing_target"), str(link))
+        return link
+
+    def make_fifo():
+        fifo = work / "present_fifo"
+        os.mkfifo(str(fifo))  # type: ignore[attr-defined]
+        return fifo
+
+    best_effort_present("existing_symlink", make_symlink)
+    best_effort_present("broken_symlink", make_broken_symlink)
+    if hasattr(os, "mkfifo"):
+        best_effort_present("existing_special_file", make_fifo)
+
+    return {
+        "status": "ISOLATED_ROOT_STATE_TESTS_PASS",
+        "negative_tests": len(cases),
+        "cases": cases,
+        "positively_absent_accepted": True,
+        "best_effort": best_effort,
+    }
+
+
+def production_strict_custody_suite(target_bundle, gate_a_authority, gate_a_target_runner, manifest: dict[str, Any], bundle_root: Path, work: Path, scratch: Path) -> dict[str, Any]:
+    runner = gate_a_target_runner
+    _authority, _data, _digest, args = _valid_authority_and_args(target_bundle, gate_a_authority, manifest, work)
+    absent = _absent_inspector(runner, work)
+    cases: list[str] = []
+    counter = {"n": 0}
+
+    def fresh_copy() -> Path:
+        counter["n"] += 1
+        dest = scratch / f"custody_{counter['n']}"
+        shutil.copytree(bundle_root, dest)
+        return dest
+
+    authority_py = _first_payload_py(manifest)
+    schedule_json = "GATE_A_ENGINEERING_SMOKE_SCHEDULE.json"
+
+    def exec_on(root: Path):
+        return runner.execute_authorized(args, bundle_root=root, output_root_inspector=absent)
+
+    def reject_prod(name: str, mutate) -> None:
+        root = fresh_copy()
+        mutate(root)
+        _assert_rejects(name + ":qualify_no_drive", lambda: runner.qualify_no_drive(root, compile_c=False))
+        _assert_no_sentinel(runner, name + ":execute_authorized", lambda: exec_on(root))
+        cases.append(name)
+
+    def add_py(root: Path) -> None:
+        (root / "adapter" / "unexpected_extra.py").write_text("# extra\n", encoding="utf-8")
+
+    def add_json(root: Path) -> None:
+        (root / "adapter" / "unexpected_extra.json").write_text("{}\n", encoding="utf-8")
+
+    def add_worker_prefixed(root: Path) -> None:
+        (root / "adapter" / "gate_a_worker_backdoor").write_text("payload\n", encoding="utf-8")
+
+    def add_pyc(root: Path) -> None:
+        cache = root / "adapter" / "__pycache__"
+        cache.mkdir(parents=True, exist_ok=True)
+        (cache / "unrelated.pyc").write_bytes(b"\x00\x00\x00\x00undeclared")
+
+    def add_pyo(root: Path) -> None:
+        cache = root / "adapter" / "__pycache__"
+        cache.mkdir(parents=True, exist_ok=True)
+        (cache / "unrelated.pyo").write_bytes(b"\x00\x00\x00\x00undeclared")
+
+    def delete_payload(root: Path) -> None:
+        (root / schedule_json).unlink()
+
+    def change_payload(root: Path) -> None:
+        target = root / authority_py
+        data = bytearray(target.read_bytes())
+        data[0] = data[0] ^ 0x20
+        target.write_bytes(bytes(data))
+
+    reject_prod("unexpected_extra_python_file", add_py)
+    reject_prod("unexpected_extra_json_file", add_json)
+    reject_prod("unexpected_worker_prefixed_file", add_worker_prefixed)
+    reject_prod("undeclared_pyc", add_pyc)
+    reject_prod("undeclared_pyo", add_pyo)
+    reject_prod("missing_payload_file", delete_payload)
+    reject_prod("changed_payload_file", change_payload)
+
+    best_effort: dict[str, Any] = {}
+
+    def best_effort_case(name: str, mutate) -> None:
+        record: dict[str, Any] = {"performed": False, "rejected": None}
+        try:
+            root = fresh_copy()
+            mutate(root)
+            record["performed"] = True
+        except OSError:
+            best_effort[name] = record
+            return
+        rejected = True
+        try:
+            runner.qualify_no_drive(root, compile_c=False)
+            rejected = False
+        except Exception:
+            rejected = True
+        record["rejected"] = rejected
+        require(rejected, f"production strict custody best-effort not rejected: {name}")
+        best_effort[name] = record
+
+    def sym_payload(root: Path) -> None:
+        target = root / authority_py
+        target.unlink()
+        os.symlink(str(root / schedule_json), str(target))
+
+    def sym_extra(root: Path) -> None:
+        os.symlink(str(root / schedule_json), str(root / "adapter" / "extra_link"))
+
+    def case_collision(root: Path) -> None:
+        original = root / authority_py
+        collide = original.parent / original.name.upper()
+        if collide.exists():
+            raise OSError("case-insensitive filesystem")
+        collide.write_bytes(original.read_bytes())
+
+    def special_file(root: Path) -> None:
+        os.mkfifo(str(root / "adapter" / "extra_fifo"))  # type: ignore[attr-defined]
+
+    best_effort_case("symlink_payload_replacement", sym_payload)
+    best_effort_case("symlink_extra_file", sym_extra)
+    best_effort_case("case_colliding_payload_filename", case_collision)
+    if hasattr(os, "mkfifo"):
+        best_effort_case("special_file_in_bundle", special_file)
+
+    return {
+        "status": "ISOLATED_PRODUCTION_STRICT_CUSTODY_TESTS_PASS",
+        "negative_tests": len(cases),
+        "cases": cases,
+        "best_effort": best_effort,
     }
 
 
@@ -331,15 +569,26 @@ def build_isolated_report(bundle_root: Path, *, require_isolated_origin: bool = 
 
     with tempfile.TemporaryDirectory(prefix="gate_a_isolated_authority_") as tmp:
         work = Path(tmp)
-        synthetic = synthetic_authority_validation(target_bundle, gate_a_authority, gate_a_target_runner, manifest, work)
+        synthetic = synthetic_authority_validation(target_bundle, gate_a_authority, gate_a_target_runner, manifest, work, bundle_root)
         authority_mutations = authority_mutation_suite(target_bundle, gate_a_authority, manifest, work)
+
+    with tempfile.TemporaryDirectory(prefix="gate_a_isolated_rootstate_") as tmp:
+        root_state = root_state_suite(target_bundle, gate_a_authority, gate_a_target_runner, manifest, Path(tmp), bundle_root)
+
+    with tempfile.TemporaryDirectory(prefix="gate_a_isolated_authwork_") as work_tmp, tempfile.TemporaryDirectory(prefix="gate_a_isolated_custody_") as scratch_tmp:
+        strict_custody = production_strict_custody_suite(target_bundle, gate_a_authority, gate_a_target_runner, manifest, bundle_root, Path(work_tmp), Path(scratch_tmp))
 
     with tempfile.TemporaryDirectory(prefix="gate_a_isolated_bundle_") as tmp:
         bundle_mutations = bundle_mutation_suite(target_bundle, bundle_root, Path(tmp))
 
     require(not list(bundle_root.rglob(AUTHORITY_NAME)), "execution authority artifact must not exist inside bundle")
 
-    total = bundle_mutations["negative_tests"] + authority_mutations["negative_tests"]
+    total = (
+        bundle_mutations["negative_tests"]
+        + authority_mutations["negative_tests"]
+        + root_state["negative_tests"]
+        + strict_custody["negative_tests"]
+    )
     return {
         "status": "GATE_A_ISOLATED_BUNDLE_QUALIFICATION_PASS",
         "null_baseline": "NO_DRIVE_ZERO_COUNT_BASELINE",
@@ -348,6 +597,8 @@ def build_isolated_report(bundle_root: Path, *, require_isolated_origin: bool = 
         "extracted_bundle_validation": happy,
         "target_runner_no_drive": no_drive,
         "synthetic_authority": synthetic,
+        "root_state_tests": root_state,
+        "production_strict_custody_tests": strict_custody,
         "bundle_mutation_tests": bundle_mutations,
         "authority_mutation_tests": authority_mutations,
         "isolated_negative_tests": total,
@@ -365,17 +616,35 @@ def build_isolated_report(bundle_root: Path, *, require_isolated_origin: bool = 
     }
 
 
+def strict_only_report(bundle_root: Path, *, require_isolated_origin: bool = False) -> dict[str, Any]:
+    bundle_root = Path(bundle_root).resolve()
+    target_bundle, _gate_a_authority, _gate_a_target_runner = _import_target_modules(bundle_root, require_isolated_origin)
+    manifest = target_bundle.load_manifest(bundle_root)
+    happy = target_bundle.validate_extracted_bundle(bundle_root, manifest, strict=True)
+    require(not list(bundle_root.rglob(AUTHORITY_NAME)), "execution authority artifact must not exist inside bundle")
+    return {
+        "status": "GATE_A_ISOLATED_STRICT_ONLY_PASS",
+        "bundle_root_git_free": not (bundle_root / ".git").exists(),
+        "require_isolated_origin": require_isolated_origin,
+        "extracted_bundle_validation": happy,
+    }
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Isolated Gate A extracted-bundle qualification harness")
     parser.add_argument("--bundle-root", required=True)
     parser.add_argument("--require-isolated-origin", action="store_true")
     parser.add_argument("--no-compile-c", action="store_true")
+    parser.add_argument("--strict-only", action="store_true")
     args = parser.parse_args(argv)
-    report = build_isolated_report(
-        Path(args.bundle_root),
-        require_isolated_origin=args.require_isolated_origin,
-        compile_c=not args.no_compile_c,
-    )
+    if args.strict_only:
+        report = strict_only_report(Path(args.bundle_root), require_isolated_origin=args.require_isolated_origin)
+    else:
+        report = build_isolated_report(
+            Path(args.bundle_root),
+            require_isolated_origin=args.require_isolated_origin,
+            compile_c=not args.no_compile_c,
+        )
     print(json.dumps(report, sort_keys=True, indent=2))
     return 0
 

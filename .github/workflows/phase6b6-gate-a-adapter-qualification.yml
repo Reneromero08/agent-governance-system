@@ -56,11 +56,10 @@ jobs:
           cc -std=c11 -Wall -Wextra -Werror -pedantic -O2 -pthread -fsanitize=undefined gate_a_worker.c -lm -o gate_a_worker_ubsan
           ./gate_a_worker_ubsan --validate-only
 
-      - name: Adapter and target-runner no-drive qualification
+      - name: Host adapter no-drive qualification
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
         run: |
           python gate_a_hardware_adapter.py --qualify-no-drive
-          python gate_a_target_runner.py --qualify-no-drive
 
       - name: Build deterministic archive twice and extract outside repository
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
@@ -68,25 +67,38 @@ jobs:
           python build_gate_a_execution_bundle.py --emit-archive "$RUNNER_TEMP/gate_a_bundle_a.tar" --quiet
           python build_gate_a_execution_bundle.py --emit-archive "$RUNNER_TEMP/gate_a_bundle_b.tar" --quiet
           cmp "$RUNNER_TEMP/gate_a_bundle_a.tar" "$RUNNER_TEMP/gate_a_bundle_b.tar"
-          rm -rf "$RUNNER_TEMP/gate_a_extract"
-          mkdir -p "$RUNNER_TEMP/gate_a_extract"
+          rm -rf "$RUNNER_TEMP/gate_a_extract" "$RUNNER_TEMP/gate_a_extract_ref"
+          mkdir -p "$RUNNER_TEMP/gate_a_extract" "$RUNNER_TEMP/gate_a_extract_ref"
           tar -xf "$RUNNER_TEMP/gate_a_bundle_a.tar" -C "$RUNNER_TEMP/gate_a_extract"
+          tar -xf "$RUNNER_TEMP/gate_a_bundle_a.tar" -C "$RUNNER_TEMP/gate_a_extract_ref"
           test ! -e "$RUNNER_TEMP/gate_a_extract/.git"
           mkdir -p "$RUNNER_TEMP/gate_a_harness"
           cp gate_a_isolated_qualification.py "$RUNNER_TEMP/gate_a_harness/gate_a_isolated_qualification.py"
 
-      - name: Isolated extracted target-runner no-drive (repository excluded from PYTHONPATH)
+      - name: Strictly validate the untouched extracted tree
         run: |
           cd "$RUNNER_TEMP/gate_a_extract"
-          env -i PATH="$PATH" HOME="$RUNNER_TEMP/gate_a_home" PYTHONNOUSERSITE=1 PYTHONPATH="" \
+          env -i PATH="$PATH" HOME="$RUNNER_TEMP/gate_a_home" PYTHONNOUSERSITE=1 PYTHONPATH="" PYTHONDONTWRITEBYTECODE=1 \
+            python "$RUNNER_TEMP/gate_a_harness/gate_a_isolated_qualification.py" \
+              --bundle-root "$RUNNER_TEMP/gate_a_extract" --require-isolated-origin --strict-only
+
+      - name: Isolated extracted target-runner no-drive strict validation (repository excluded from PYTHONPATH)
+        run: |
+          cd "$RUNNER_TEMP/gate_a_extract"
+          env -i PATH="$PATH" HOME="$RUNNER_TEMP/gate_a_home" PYTHONNOUSERSITE=1 PYTHONPATH="" PYTHONDONTWRITEBYTECODE=1 \
             python adapter/gate_a_target_runner.py --qualify-no-drive
 
-      - name: Isolated synthetic authority validation and mutation suite (repository excluded)
+      - name: Isolated synthetic authority, root-state, and strict-custody suites (repository excluded)
         run: |
           cd "$RUNNER_TEMP/gate_a_extract"
-          env -i PATH="$PATH" HOME="$RUNNER_TEMP/gate_a_home" PYTHONNOUSERSITE=1 PYTHONPATH="" \
+          env -i PATH="$PATH" HOME="$RUNNER_TEMP/gate_a_home" PYTHONNOUSERSITE=1 PYTHONPATH="" PYTHONDONTWRITEBYTECODE=1 \
             python "$RUNNER_TEMP/gate_a_harness/gate_a_isolated_qualification.py" \
               --bundle-root "$RUNNER_TEMP/gate_a_extract" --require-isolated-origin
+
+      - name: Confirm extracted bundle unchanged after qualification
+        run: |
+          diff -r "$RUNNER_TEMP/gate_a_extract" "$RUNNER_TEMP/gate_a_extract_ref"
+          test ! -e "$RUNNER_TEMP/gate_a_extract/adapter/__pycache__"
 
       - name: Prove authority artifact absent and reviewed surfaces untouched
         shell: bash

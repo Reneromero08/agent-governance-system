@@ -215,18 +215,26 @@ def load_manifest(bundle_root: Path) -> dict[str, Any]:
     return value
 
 
-def _permitted_extra(rel_posix: str) -> bool:
-    if rel_posix == MANIFEST_ENVELOPE_PACKAGE_PATH:
-        return True
-    parts = rel_posix.split("/")
-    if "__pycache__" in parts:
-        return True
-    name = parts[-1]
-    if name.endswith(".pyc") or name.endswith(".pyo"):
-        return True
-    if name == "gate_a_worker" or name.startswith("gate_a_worker"):
-        return True
-    return False
+def default_permitted_extras() -> set[str]:
+    """The only non-payload file allowed inside a pristine extracted bundle.
+
+    The extracted bundle is treated as immutable during strict validation.
+    Generated runtime outputs (compiled worker, sanitizer binaries, Python
+    bytecode, temporary authority artifacts, receipts) must be written outside
+    the bundle root. No wildcard categories are accepted: any extra beyond this
+    exact set, or an explicit caller-supplied allowlist of exact relative paths,
+    is rejected.
+    """
+    return {MANIFEST_ENVELOPE_PACKAGE_PATH}
+
+
+def permitted_extra_set(permitted_runtime_outputs: set[str] | None) -> set[str]:
+    permitted = default_permitted_extras()
+    if permitted_runtime_outputs:
+        for rel in permitted_runtime_outputs:
+            require(isinstance(rel, str) and rel and _safe_package_path(rel), f"invalid permitted runtime output: {rel!r}")
+            permitted.add(rel)
+    return permitted
 
 
 def validate_payload_files(bundle_root: Path, manifest: dict[str, Any]) -> str:
@@ -267,10 +275,17 @@ def _enumerate_files(bundle_root: Path) -> list[str]:
     return found
 
 
-def validate_extracted_bundle(bundle_root: Path, manifest: dict[str, Any], *, strict: bool = True) -> dict[str, Any]:
+def validate_extracted_bundle(
+    bundle_root: Path,
+    manifest: dict[str, Any],
+    *,
+    strict: bool = True,
+    permitted_runtime_outputs: set[str] | None = None,
+) -> dict[str, Any]:
     validate_manifest_shape(manifest)
     archive_digest = validate_payload_files(bundle_root, manifest)
     declared = {entry["package_path"] for entry in manifest["files"]}
+    permitted = permitted_extra_set(permitted_runtime_outputs)
     if strict:
         actual = _enumerate_files(bundle_root)
         seen_lower: dict[str, str] = {}
@@ -279,7 +294,7 @@ def validate_extracted_bundle(bundle_root: Path, manifest: dict[str, Any], *, st
             require(lower not in seen_lower, f"case collision on disk: {rel} vs {seen_lower.get(lower)}")
             seen_lower[lower] = rel
         actual_set = set(actual)
-        extras = {rel for rel in actual_set if rel not in declared and not _permitted_extra(rel)}
+        extras = {rel for rel in actual_set if rel not in declared and rel not in permitted}
         require(not extras, f"unexpected files in extracted bundle: {sorted(extras)}")
     return {
         "status": "GATE_A_TARGET_BUNDLE_VALIDATED",

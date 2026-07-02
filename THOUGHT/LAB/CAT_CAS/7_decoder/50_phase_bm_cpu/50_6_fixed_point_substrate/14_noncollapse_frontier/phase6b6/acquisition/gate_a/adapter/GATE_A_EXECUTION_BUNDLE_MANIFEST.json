@@ -1,9 +1,9 @@
 {
   "authority_artifact_created": false,
   "base_main_commit": "03985a74d27e654c151cccad28c6221d91f70180",
-  "deterministic_archive_sha256": "456525ab2a43ffff63b89d7388d9a322e10c899627f30d2808d7e6cb21d44036",
+  "deterministic_archive_sha256": "04eaf73336f373865f4e837baca9ff4fe893d3b1b16dd8b8288af1259ff96f9c",
   "engineering_smoke_authorized": false,
-  "execution_bundle_sha256": "553615bf2f858bf31f0f799066d1545021a234e74ebda407fcd3255600587943",
+  "execution_bundle_sha256": "abc9e50a517d764c553adc5096378992028b29a8f62480a9ae217ebbd5202bba",
   "files": [
     {
       "byte_size": 7069,
@@ -15,12 +15,12 @@
       "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_authority.py"
     },
     {
-      "byte_size": 12622,
-      "git_blob_sha1": "13c9da8d7ea1262dabf089e7445dc4d1686704e2",
+      "byte_size": 13314,
+      "git_blob_sha1": "369613f6153c71dddba9aaf1e4086a04519d8a37",
       "git_mode": "100644",
       "package_path": "adapter/gate_a_target_bundle.py",
       "role": "target_bundle_validator",
-      "sha256": "4805c7a3f4c190afba10a3986fae5590f9d93d8de44bf70683c15bb8203464f7",
+      "sha256": "e862c732c67fb803ce4d715bacc5895f6c4e2698aff423308a2a81a1c68b9e22",
       "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_target_bundle.py"
     },
     {
@@ -33,12 +33,12 @@
       "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_hardware_adapter.py"
     },
     {
-      "byte_size": 7731,
-      "git_blob_sha1": "da06c4a22ef2d7a976138dc28cf00ea40a7e57dc",
+      "byte_size": 9287,
+      "git_blob_sha1": "7a17a6a514944888b594d37389e7d6105fbe97c4",
       "git_mode": "100644",
       "package_path": "adapter/gate_a_target_runner.py",
       "role": "target_runner",
-      "sha256": "25d9577bb189ef1e627f8884a5f20a66c2e1c36f8c246c2b5da41e1b570dd883",
+      "sha256": "ff2e26ce137403aa590ce002855f7b5ceabe2e22e5464a63f94fcba107502679",
       "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_target_runner.py"
     },
     {

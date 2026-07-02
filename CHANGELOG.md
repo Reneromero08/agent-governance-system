@@ -2,6 +2,32 @@
 
 # Changelog
 
+## 2026-07-02: Phase 6B.6 Gate A fail-closed target precondition custody
+
+- Phase 6B.6: close the two remaining fail-closed defects in the Gate A target
+  runner. Output-root absence is now fail-closed: `inspect_output_root` returns
+  a three-valued `RootState` (ABSENT / PRESENT / UNOBSERVABLE), and only a
+  positively established absent path is accepted. A `PermissionError`, generic
+  `OSError`, existing directory, regular file, symlink, or special file all
+  reject the authorized path. The live filesystem precondition is separated from
+  authority validation and takes an injectable inspector seam so the synthetic
+  authority test uses a temporary positively-absent path without weakening the
+  production remote-root binding. Both production entry paths
+  (`--qualify-no-drive` and `--execute-authorized`) now use strict
+  extracted-bundle validation; the target runner no longer relies on the harness
+  for strict custody. The generated-file allowlist is narrowed to an exact set
+  (the detached manifest envelope only, plus an explicit caller-supplied
+  allowlist); arbitrary `gate_a_worker*` names and arbitrary `.pyc`/`.pyo`/
+  `__pycache__` bytecode are no longer accepted. The extracted bundle is treated
+  as immutable during qualification: bytecode writing is disabled and the worker
+  is compiled to an external temporary directory, and CI asserts the extracted
+  tree is byte-identical after qualification. Runner-level root-state and
+  strict-custody negative tests exercise the same production functions used by
+  `--execute-authorized`. Actual target qualification remains incomplete; no
+  execution authority artifact is created, no Phenom connection or hardware
+  execution is authorized, engineering smoke remains unauthorized, and
+  `hardware_ran` remains false.
+
 ## 2026-07-02: Phase 6B.6 Gate A self-contained target bundle
 
 - Phase 6B.6: make the deterministic Gate A target bundle self-contained so an
