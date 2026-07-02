@@ -70,7 +70,7 @@
     "maximum_execution_count": 1,
     "nominal_duration_s": 8.0,
     "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/GATE_A_ENGINEERING_SMOKE_SCHEDULE.json",
-    "schedule_sha256": "b2d73afb5b4d3fd351abbb4aa7f7f76cfa532dcff0808f331682b456d3e6e6ed",
+    "schedule_sha256": "418ff6e9801ba5def3f17fb25c7d56f044599e6e5bc8cc3260e0368d4877d116",
     "schema_id": "CAT_CAS_PHASE6B6_GATE_A_ENGINEERING_SMOKE_SCHEDULE_V1",
     "slot_count": 16
   },
