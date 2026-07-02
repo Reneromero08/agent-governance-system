@@ -1,0 +1,66 @@
+{
+  "schema_id": "CAT_CAS_PHASE6B6_ACQUISITION_AUTHORITY_CANDIDATE_V1",
+  "status": "DESIGN_ONLY__NO_EXECUTION_AUTHORITY",
+  "base_main_commit": "1db6d5b0b1e0d9b38a0c1709b09c9c11a59217a2",
+  "architecture_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/PHASE6B6_ACQUISITION_AUTHORITY_ARCHITECTURE.md",
+  "evidence_bindings": {
+    "integrated_evidence_head": "b2b785d064d4704ef2955238593f9f5050425f55",
+    "evidence_review": 4614291991,
+    "corrected_payload_commit": "38eccc2f8377c656b0c21cbd37dd296e81adfad4",
+    "corrected_payload_tree": "159c04abd72ed631e7647249b539b548d8351e4b",
+    "evidence_inventory_sha256": "7b205dd92482425505e498027a3e96db842297fad949fe22bdbf5542e95573e0",
+    "portable_archive_sha256": "affbc0b3e9725de62aa946774e3e8830399f9af12414713b1bfbc68547765ca4",
+    "portable_manifest_sha256": "59e5c5927cfa7f19bdaafdd740cb350f5819e81741b62821a22f2eb80ecd4676",
+    "target_final_result_digest": "c2d1bf3c78e2a9318f51e06d27ac39a49fe7a49e3cd49c0c8850cd6c85a07f7f",
+    "schedule_digest": "c632d59934c2610541e279cac3a48202f2c0a79bb734e995f2cc4f28d19e87d3",
+    "mock_custody_digest": "4c0a58772fd25fe77759d6d09089ad532a09b3a5adcdce01dc099b6b7b00dba1",
+    "phase6b6_subtree_digest": "24789f0df9afa2d9f6a243a9050ff8f265cf22ffb42ab33bbe2f67521dbf44b5",
+    "v2_source_digest": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976"
+  },
+  "gate_state": {
+    "gate_a_engineering_smoke": {
+      "designed": true,
+      "reviewed": false,
+      "owner_approved": false,
+      "authorized": false,
+      "executed": false
+    },
+    "gate_b_calibration_capture_quality": {
+      "designed": true,
+      "reviewed": false,
+      "owner_approved": false,
+      "authorized": false,
+      "executed": false
+    },
+    "gate_c_scientific_acquisition": {
+      "designed": true,
+      "reviewed": false,
+      "owner_approved": false,
+      "authorized": false,
+      "executed": false
+    }
+  },
+  "authority": {
+    "phase6b6_entry_approved": true,
+    "phase6b6_entered": true,
+    "implementation_authorized": true,
+    "software_qualification_authorized": true,
+    "non_hardware_target_qualification_authorized": true,
+    "evidence_package_created": true,
+    "qualification_evidence_collected": true,
+    "hardware_ran": false,
+    "authorization_artifact_created": false,
+    "engineering_smoke_authorized": false,
+    "calibration_authorized": false,
+    "scientific_acquisition_authorized": false,
+    "restoration_authorized": false,
+    "target_coupling_authorized": false,
+    "small_wall_authorized": false,
+    "automatic_retry": false
+  },
+  "review_state": {
+    "architecture_review_complete": false,
+    "project_owner_execution_approval_recorded": false
+  },
+  "next_boundary": "INDEPENDENT_ACQUISITION_AUTHORITY_ARCHITECTURE_REVIEW"
+}
