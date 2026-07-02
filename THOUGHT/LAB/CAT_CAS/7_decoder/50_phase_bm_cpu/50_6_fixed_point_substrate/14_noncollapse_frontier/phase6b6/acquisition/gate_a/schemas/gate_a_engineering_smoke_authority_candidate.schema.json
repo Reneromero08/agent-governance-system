@@ -10,6 +10,7 @@
     "architecture_binding",
     "evidence_bindings",
     "smoke_schedule",
+    "plan_bindings",
     "execution_bundle",
     "review_state",
     "gate_state",
@@ -53,6 +54,14 @@
         "schedule_sha256": "418ff6e9801ba5def3f17fb25c7d56f044599e6e5bc8cc3260e0368d4877d116",
         "schema_id": "CAT_CAS_PHASE6B6_GATE_A_ENGINEERING_SMOKE_SCHEDULE_V1",
         "slot_count": 16
+      }
+    },
+    "plan_bindings": {
+      "const": {
+        "run_plan_git_blob_sha1": "f7352d9c92a5275fc426e791b5509fd8aae85251",
+        "run_plan_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/GATE_A_ENGINEERING_SMOKE_RUN_PLAN.md",
+        "target_namespace_binding_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/GATE_A_TARGET_NAMESPACE_BINDING.json",
+        "target_namespace_binding_sha256": "5b3090f642d28492e182630e6349eccd8181704f08129d40d886c8f529dfd50e"
       }
     },
     "execution_bundle": {
