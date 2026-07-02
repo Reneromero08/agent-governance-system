@@ -28,7 +28,7 @@
     "no scientific train validation or test namespace mounted",
     "automatic retry disabled"
   ],
-  "schedule_sha256": "b2d73afb5b4d3fd351abbb4aa7f7f76cfa532dcff0808f331682b456d3e6e6ed",
+  "schedule_sha256": "418ff6e9801ba5def3f17fb25c7d56f044599e6e5bc8cc3260e0368d4877d116",
   "schema_id": "CAT_CAS_PHASE6B6_GATE_A_ENGINEERING_SMOKE_SCHEDULE_V1",
   "scientific_use": {
     "claim_generation": false,
@@ -51,91 +51,163 @@
   },
   "slot_definitions": {
     "A0N": {
-      "amplitude_level": 2,
-      "declared_mode": "ANCHOR",
-      "drive_on": true,
-      "mode": "ANCHOR",
-      "phase_action": "pi",
-      "physical_tone_index": 0,
-      "sender_epoch_id": "gate-a:anchor:negative",
-      "sign": -1,
+      "declared": {
+        "analysis_tone_index": 0,
+        "declared_amplitude_level": 2,
+        "declared_mode": "ANCHOR",
+        "declared_phase_action": "pi",
+        "declared_physical_tone_index": 0,
+        "declared_sign": -1
+      },
+      "executed": {
+        "amplitude_level": 2,
+        "drive_on": true,
+        "executed_mode": "ANCHOR",
+        "phase_action": "pi",
+        "physical_tone_index": 0,
+        "sender_epoch_id": "gate-a:anchor:negative",
+        "sign": -1
+      },
       "stage": "engineering_smoke"
     },
     "A0P": {
-      "amplitude_level": 2,
-      "declared_mode": "ANCHOR",
-      "drive_on": true,
-      "mode": "ANCHOR",
-      "phase_action": "0",
-      "physical_tone_index": 0,
-      "sender_epoch_id": "gate-a:anchor:positive",
-      "sign": 1,
+      "declared": {
+        "analysis_tone_index": 0,
+        "declared_amplitude_level": 2,
+        "declared_mode": "ANCHOR",
+        "declared_phase_action": "0",
+        "declared_physical_tone_index": 0,
+        "declared_sign": 1
+      },
+      "executed": {
+        "amplitude_level": 2,
+        "drive_on": true,
+        "executed_mode": "ANCHOR",
+        "phase_action": "0",
+        "physical_tone_index": 0,
+        "sender_epoch_id": "gate-a:anchor:positive",
+        "sign": 1
+      },
       "stage": "engineering_smoke"
     },
     "C0": {
-      "amplitude_level": null,
-      "declared_mode": "CARRIER_OFF",
-      "drive_on": false,
-      "mode": "CARRIER_OFF",
-      "phase_action": "none",
-      "physical_tone_index": 0,
-      "sender_epoch_id": null,
-      "sign": null,
+      "declared": {
+        "analysis_tone_index": 0,
+        "declared_amplitude_level": null,
+        "declared_mode": "CARRIER_OFF",
+        "declared_phase_action": "none",
+        "declared_physical_tone_index": 0,
+        "declared_sign": null
+      },
+      "executed": {
+        "amplitude_level": null,
+        "drive_on": false,
+        "executed_mode": "CARRIER_OFF",
+        "phase_action": null,
+        "physical_tone_index": null,
+        "sender_epoch_id": null,
+        "sign": null
+      },
       "stage": "engineering_smoke"
     },
     "D0": {
-      "amplitude_level": 2,
-      "declared_mode": "ANCHOR_DECLARATION",
-      "drive_on": false,
-      "mode": "DECLARATION_SHAM",
-      "phase_action": "0",
-      "physical_tone_index": 0,
-      "sender_epoch_id": null,
-      "sign": 1,
+      "declared": {
+        "analysis_tone_index": 0,
+        "declared_amplitude_level": 2,
+        "declared_mode": "ANCHOR_DECLARATION",
+        "declared_phase_action": "0",
+        "declared_physical_tone_index": 0,
+        "declared_sign": 1
+      },
+      "executed": {
+        "amplitude_level": null,
+        "drive_on": false,
+        "executed_mode": "DECLARATION_SHAM",
+        "phase_action": null,
+        "physical_tone_index": null,
+        "sender_epoch_id": null,
+        "sign": null
+      },
       "stage": "engineering_smoke"
     },
     "I": {
-      "amplitude_level": null,
-      "declared_mode": "SENDER_OFF_IDLE",
-      "drive_on": false,
-      "mode": "SENDER_OFF_IDLE",
-      "phase_action": "none",
-      "physical_tone_index": null,
-      "sender_epoch_id": null,
-      "sign": null,
+      "declared": {
+        "analysis_tone_index": null,
+        "declared_amplitude_level": null,
+        "declared_mode": "SENDER_OFF_IDLE",
+        "declared_phase_action": "none",
+        "declared_physical_tone_index": null,
+        "declared_sign": null
+      },
+      "executed": {
+        "amplitude_level": null,
+        "drive_on": false,
+        "executed_mode": "SENDER_OFF_IDLE",
+        "phase_action": null,
+        "physical_tone_index": null,
+        "sender_epoch_id": null,
+        "sign": null
+      },
       "stage": "engineering_smoke"
     },
     "O0": {
-      "amplitude_level": 2,
-      "declared_mode": "STEP_OFF",
-      "drive_on": false,
-      "mode": "STEP_OFF",
-      "phase_action": "0",
-      "physical_tone_index": 0,
-      "sender_epoch_id": null,
-      "sign": 1,
+      "declared": {
+        "analysis_tone_index": 0,
+        "declared_amplitude_level": 2,
+        "declared_mode": "STEP_OFF",
+        "declared_phase_action": "0",
+        "declared_physical_tone_index": 0,
+        "declared_sign": 1
+      },
+      "executed": {
+        "amplitude_level": null,
+        "drive_on": false,
+        "executed_mode": "STEP_OFF",
+        "phase_action": null,
+        "physical_tone_index": null,
+        "sender_epoch_id": null,
+        "sign": null
+      },
       "stage": "engineering_smoke"
     },
     "S0E": {
-      "amplitude_level": 2,
-      "declared_mode": "STEP",
-      "drive_on": true,
-      "mode": "STEP",
-      "phase_action": "0",
-      "physical_tone_index": 0,
-      "sender_epoch_id": "gate-a:step:epoch0",
-      "sign": 1,
+      "declared": {
+        "analysis_tone_index": 0,
+        "declared_amplitude_level": 2,
+        "declared_mode": "STEP",
+        "declared_phase_action": "0",
+        "declared_physical_tone_index": 0,
+        "declared_sign": 1
+      },
+      "executed": {
+        "amplitude_level": 2,
+        "drive_on": true,
+        "executed_mode": "STEP",
+        "phase_action": "0",
+        "physical_tone_index": 0,
+        "sender_epoch_id": "gate-a:step:epoch0",
+        "sign": 1
+      },
       "stage": "engineering_smoke"
     },
     "T": {
-      "amplitude_level": null,
-      "declared_mode": "TAIL_SENDER_OFF",
-      "drive_on": false,
-      "mode": "TAIL_SENDER_OFF",
-      "phase_action": "none",
-      "physical_tone_index": null,
-      "sender_epoch_id": null,
-      "sign": null,
+      "declared": {
+        "analysis_tone_index": null,
+        "declared_amplitude_level": null,
+        "declared_mode": "TAIL_SENDER_OFF",
+        "declared_phase_action": "none",
+        "declared_physical_tone_index": null,
+        "declared_sign": null
+      },
+      "executed": {
+        "amplitude_level": null,
+        "drive_on": false,
+        "executed_mode": "TAIL_SENDER_OFF",
+        "phase_action": null,
+        "physical_tone_index": null,
+        "sender_epoch_id": null,
+        "sign": null
+      },
       "stage": "cleanup_confirmation"
     }
   },
@@ -175,7 +247,7 @@
     "hostname_expected": "catcas",
     "kernel_evidence": "Linux catcas 6.12.86+deb13-amd64",
     "ssh_target": "root@192.168.137.100",
-    "target_identity_path": "phase6b6/evidence/nonhardware_qualification_3c6a5dd3_subject_d351a62f/target/target_identity.json",
+    "target_identity_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/nonhardware_qualification_3c6a5dd3_subject_d351a62f/target/target_identity.json",
     "target_identity_stdout_sha256": "10618a70ceb3413d7507c22254d595d63632bb7ad9243dbe3dc6ebbaf13e19a4"
   },
   "timing": {
