@@ -1,0 +1,10 @@
+{
+  "base_main_commit": "9c41637992536f43d10d152ec176a3577aef1623",
+  "binding_sha256": "5b3090f642d28492e182630e6349eccd8181704f08129d40d886c8f529dfd50e",
+  "must_be_absent_before_deployment": true,
+  "remote_execution_root": "/root/catcas_phase6b6_gate_a_smoke_9c416379",
+  "remote_output_root": "/root/catcas_phase6b6_gate_a_smoke_9c416379/evidence",
+  "remove_only_after_verified_copy_back": true,
+  "schema_id": "CAT_CAS_PHASE6B6_GATE_A_TARGET_NAMESPACE_BINDING_V1",
+  "status": "FROZEN__NO_EXECUTION_AUTHORITY"
+}
