@@ -2,6 +2,21 @@
 
 # Changelog
 
+## 2026-07-02: Phase 6B.6 Gate A adapter no-drive qualification
+
+- Phase 6B.6: add the Gate A hardware-adapter and execution-bundle layer under
+  the Gate A acquisition namespace, including no-drive host and target runner
+  interfaces, a validate-only C worker, deterministic Git-blob bundle manifest,
+  future one-shot authority schema, candidate V2, result record, mutation
+  verifier, and hosted no-drive qualification workflow. The existing
+  software-entry workflow now prunes this adapter namespace from its legacy
+  "no software-entry C sources" guard because the adapter workflow owns strict
+  C, ASan, and UBSan validation for the worker. The layer does not create an
+  execution authority artifact and does not connect to or execute on the
+  Phenom target; engineering smoke, hardware execution, control writes,
+  calibration, scientific acquisition, restoration, target coupling, and Small
+  Wall authority remain false.
+
 ## 2026-06-30: Phase 6B.6 non-hardware qualification harness
 
 - Phase 6B.6: repair the portable package permission boundary. The portable

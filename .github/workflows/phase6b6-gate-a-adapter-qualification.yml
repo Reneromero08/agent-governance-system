@@ -1,0 +1,75 @@
+name: Phase 6B.6 Gate A Adapter Qualification
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/phase6b6-gate-a-adapter-qualification.yml"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/**"
+  push:
+    branches:
+      - codex/phase6b6-gate-a-adapter-qualification
+
+jobs:
+  no-drive-qualification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact head
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Compile new Python
+        run: |
+          python -m compileall THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
+
+      - name: Validate contract, schema, candidate, result, and bundle
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
+        run: |
+          python build_gate_a_execution_bundle.py --compare-twice
+          python verify_gate_a_adapter_qualification.py
+
+      - name: Compile C strictly and run validate-only
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
+        run: |
+          cc -std=c11 -Wall -Wextra -Werror -pedantic -O2 -pthread gate_a_worker.c -lm -o gate_a_worker
+          ./gate_a_worker --validate-only
+
+      - name: ASan validate-only
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
+        run: |
+          cc -std=c11 -Wall -Wextra -Werror -pedantic -O2 -pthread -fsanitize=address gate_a_worker.c -lm -o gate_a_worker_asan
+          ./gate_a_worker_asan --validate-only
+
+      - name: UBSan validate-only
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
+        run: |
+          cc -std=c11 -Wall -Wextra -Werror -pedantic -O2 -pthread -fsanitize=undefined gate_a_worker.c -lm -o gate_a_worker_ubsan
+          ./gate_a_worker_ubsan --validate-only
+
+      - name: Adapter and target-runner no-drive qualification
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
+        run: |
+          python gate_a_hardware_adapter.py --qualify-no-drive
+          python gate_a_target_runner.py --qualify-no-drive
+
+      - name: Prove authority artifact absent and reviewed surfaces untouched
+        shell: bash
+        run: |
+          test "$(find THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter -name GATE_A_EXECUTION_AUTHORITY.json | wc -l)" = "0"
+          git diff --exit-code origin/main...HEAD -- \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/qualification \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2
+
+      - name: git diff check
+        run: git diff --check

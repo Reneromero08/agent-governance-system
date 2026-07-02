@@ -1,0 +1,33 @@
+{
+  "schema_id": "CAT_CAS_PHASE6B6_GATE_A_ADAPTER_QUALIFICATION_RESULT_V1",
+  "status": "TARGET_NONEXECUTING_QUALIFICATION_REQUIRED",
+  "adapter_implementation_complete": true,
+  "hosted_nonexecuting_qualification_complete": true,
+  "target_nonexecuting_qualification_complete": false,
+  "execution_bundle_ready": true,
+  "execution_bundle_target_qualified": false,
+  "authority_artifact_created": false,
+  "engineering_smoke_authorized": false,
+  "hardware_ran": false,
+  "no_target_connection_occurred": true,
+  "no_ssh_occurred": true,
+  "no_sender_ran": true,
+  "no_receiver_capture_ran": true,
+  "no_control_write_occurred": true,
+  "next_boundary": "GATE_A_TARGET_NONEXECUTING_QUALIFICATION",
+  "execution_bundle_sha256": "efb3be585e036c67add48a6ccbd9631fce9ab2bb439ff2e9d05c65bfc6fecf77",
+  "deterministic_archive_sha256": "10c299e781eb82a6590fc6dc76ef3cba2f0fa39e95299533cbc992a41c9339fd",
+  "bundle_manifest_sha256": "b3d56ff9b124db27713be5c93a5735550fa89ebc03ab186d0288dce684b72cca",
+  "authority_false_state": {
+    "authorization_artifact_created": false,
+    "engineering_smoke_authorized": false,
+    "hardware_ran": false,
+    "calibration_authorized": false,
+    "scientific_acquisition_authorized": false,
+    "restoration_authorized": false,
+    "target_coupling_authorized": false,
+    "small_wall_authorized": false,
+    "automatic_retry": false
+  },
+  "additionalProperties": false
+}
