@@ -1,0 +1,78 @@
+{
+  "architecture_binding": {
+    "architecture_merge_commit": "9c41637992536f43d10d152ec176a3577aef1623",
+    "architecture_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/PHASE6B6_ACQUISITION_AUTHORITY_ARCHITECTURE.md",
+    "architecture_review_id": 4614574719,
+    "architecture_reviewed_head": "b3c0ec7cfceeaea95fc9d37fa98266987f418397"
+  },
+  "authority": {
+    "authorization_artifact_created": false,
+    "automatic_retry": false,
+    "calibration_authorized": false,
+    "engineering_smoke_authorized": false,
+    "evidence_package_created": true,
+    "hardware_ran": false,
+    "implementation_authorized": true,
+    "non_hardware_target_qualification_authorized": true,
+    "phase6b6_entered": true,
+    "phase6b6_entry_approved": true,
+    "qualification_evidence_collected": true,
+    "restoration_authorized": false,
+    "scientific_acquisition_authorized": false,
+    "small_wall_authorized": false,
+    "software_qualification_authorized": true,
+    "target_coupling_authorized": false
+  },
+  "base_main_commit": "9c41637992536f43d10d152ec176a3577aef1623",
+  "evidence_bindings": {
+    "corrected_payload_commit": "38eccc2f8377c656b0c21cbd37dd296e81adfad4",
+    "corrected_payload_tree": "159c04abd72ed631e7647249b539b548d8351e4b",
+    "evidence_inventory_sha256": "7b205dd92482425505e498027a3e96db842297fad949fe22bdbf5542e95573e0",
+    "integrated_evidence_head": "b2b785d064d4704ef2955238593f9f5050425f55",
+    "mock_custody_digest": "4c0a58772fd25fe77759d6d09089ad532a09b3a5adcdce01dc099b6b7b00dba1",
+    "phase6b6_subtree_digest": "24789f0df9afa2d9f6a243a9050ff8f265cf22ffb42ab33bbe2f67521dbf44b5",
+    "portable_archive_sha256": "affbc0b3e9725de62aa946774e3e8830399f9af12414713b1bfbc68547765ca4",
+    "portable_manifest_sha256": "59e5c5927cfa7f19bdaafdd740cb350f5819e81741b62821a22f2eb80ecd4676",
+    "schedule_digest": "c632d59934c2610541e279cac3a48202f2c0a79bb734e995f2cc4f28d19e87d3",
+    "target_final_result_digest": "c2d1bf3c78e2a9318f51e06d27ac39a49fe7a49e3cd49c0c8850cd6c85a07f7f",
+    "target_identity_stdout_sha256": "10618a70ceb3413d7507c22254d595d63632bb7ad9243dbe3dc6ebbaf13e19a4",
+    "v2_source_digest": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976"
+  },
+  "execution_bundle": {
+    "execution_bundle_ready": false,
+    "execution_bundle_sha256": null,
+    "hardware_adapter_path": null,
+    "hardware_adapter_qualified": false,
+    "hardware_adapter_sha256": null,
+    "qualified_portable_archive_sha256": "affbc0b3e9725de62aa946774e3e8830399f9af12414713b1bfbc68547765ca4",
+    "qualified_portable_manifest_sha256": "59e5c5927cfa7f19bdaafdd740cb350f5819e81741b62821a22f2eb80ecd4676",
+    "status": "NOT_IMPLEMENTED__NOT_QUALIFIED"
+  },
+  "gate_state": {
+    "authorized": false,
+    "consumed": false,
+    "designed": true,
+    "executed": false,
+    "owner_approved": false,
+    "reviewed": false,
+    "run_plan_frozen": true
+  },
+  "next_boundary": "INDEPENDENT_GATE_A_PLAN_AND_CANDIDATE_REVIEW",
+  "post_review_boundary": "GATE_A_HARDWARE_ADAPTER_IMPLEMENTATION_AND_NONEXECUTING_QUALIFICATION",
+  "review_state": {
+    "candidate_review_complete": false,
+    "execution_bundle_review_complete": false,
+    "project_owner_execution_approval_recorded": false,
+    "run_plan_review_complete": false
+  },
+  "schema_id": "CAT_CAS_PHASE6B6_GATE_A_ENGINEERING_SMOKE_AUTHORITY_CANDIDATE_V1",
+  "smoke_schedule": {
+    "maximum_execution_count": 1,
+    "nominal_duration_s": 8.0,
+    "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/GATE_A_ENGINEERING_SMOKE_SCHEDULE.json",
+    "schedule_sha256": "b2d73afb5b4d3fd351abbb4aa7f7f76cfa532dcff0808f331682b456d3e6e6ed",
+    "schema_id": "CAT_CAS_PHASE6B6_GATE_A_ENGINEERING_SMOKE_SCHEDULE_V1",
+    "slot_count": 16
+  },
+  "status": "CANDIDATE__BLOCKED_PENDING_REVIEW_AND_EXECUTION_BUNDLE"
+}
