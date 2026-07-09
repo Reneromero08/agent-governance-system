@@ -1,4 +1,0 @@
-interface:
-  display_name: "Pi Harness"
-  short_description: "Run persistent local Pi agent workers"
-  default_prompt: "Use $pi-harness to start a persistent local Pi worker and supervise its task."

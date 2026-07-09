@@ -2,38 +2,6 @@
 
 # Changelog
 
-## 2026-07-09: Manual-only Pi task context
-
-- Disable automatic Pi context files, skills, and prompt templates for every
-  worker turn. Add per-task manual context files/text, selectable tiktoken
-  encoding and token budget, read-scope validation, deterministic truncation,
-  and source hash/token receipts so each task receives only explicitly selected
-  context. Also disable Pi's default system prompt, remove automatic repository
-  governance instructions, transport multiline task packets through audited
-  prompt files on Windows, and accept both current `agent_end` and legacy
-  `agent_settled` terminal events.
-
-## 2026-07-09: Govern Pi shell execution
-
-- Replace Pi's free-form built-in `bash` path with a harness-owned governed
-  shell extension. Shell access now requires explicit native executable aliases,
-  literal argument arrays, a workspace-confined working directory, filtered
-  child environments, timeout/output caps, and structured audit events. The
-  harness validates shell program and cwd policy from Pi JSONL while continuing
-  to flag shell filesystem side effects as requiring independent diff review.
-
-## 2026-07-09: Add persistent local Pi worker harness
-
-- Add the `pi-harness` skill for headless background delegation to the local Pi
-  coding agent. It provides deterministic worker and task identities, persistent
-  Pi session reuse, task submission, polling, result/log retrieval, cancellation,
-  read-only defaults, explicit write enablement, scope-locked prompts, offline
-  fixtures, and unit tests. Hardened lifecycle controls add cross-process state
-  locks, launch-failure recovery, cancellation-safe finalization, process-tree
-  termination, bounded logs and prompts, explicit shell opt-in, strict Pi JSONL
-  validation, observed write-path scope audits, and hashed task receipts. Runtime
-  state and Pi session files stay under `LAW/CONTRACTS/_runs/pi-harness/`.
-
 ## 2026-07-02: Phase 6B.6 Gate A target non-executing qualification
 
 - Phase 6B.6: record the owner-authorized Gate A target non-executing
