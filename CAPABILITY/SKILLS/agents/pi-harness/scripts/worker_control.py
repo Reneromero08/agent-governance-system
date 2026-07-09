@@ -14,6 +14,7 @@ import uuid
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 
+from context_pack import pack_context
 from pi_harness import READ_ONLY_TOOLS, build_task_packet, resolve_executable, sha256_text
 from state_io import atomic_write, file_lock, read_json
 
@@ -219,7 +220,17 @@ class WorkerController:
                 worker["active_task_id"] = ""
                 atomic_write(self._worker_path(worker_id), worker)
 
-    def submit_task(self, worker_id: str, task: str, constraints: str = "", timeout: int = 1800) -> Dict[str, Any]:
+    def submit_task(
+        self,
+        worker_id: str,
+        task: str,
+        constraints: str = "",
+        timeout: int = 1800,
+        context_files: Iterable[str] | None = None,
+        context_texts: Iterable[str] | None = None,
+        context_token_budget: int = 0,
+        context_tokenizer: str = "cl100k_base",
+    ) -> Dict[str, Any]:
         with file_lock(self._worker_lock(worker_id)):
             worker = self.get_worker(worker_id)
             if not worker:
@@ -253,6 +264,14 @@ class WorkerController:
             task_id = f"{worker_id}-{sequence:06d}"
             stdout_path = self.logs_dir / f"{task_id}.jsonl"
             stderr_path = self.logs_dir / f"{task_id}.stderr.log"
+            manual_context, context_manifest = pack_context(
+                workspace=worker["workspace"],
+                read_roots=worker["read_roots"],
+                context_files=context_files or [],
+                context_texts=context_texts or [],
+                token_budget=context_token_budget,
+                tokenizer=context_tokenizer,
+            )
             prompt = build_task_packet(
                 task=task,
                 workspace=worker["workspace"],
@@ -261,6 +280,7 @@ class WorkerController:
                 tools=worker["tools"],
                 constraints=constraints,
                 shell_programs=worker.get("shell_programs", {}),
+                manual_context=manual_context,
             )
             record = {
                 "task_id": task_id,
@@ -276,6 +296,7 @@ class WorkerController:
                 "error": "",
                 "integrity": None,
                 "prompt_sha256": sha256_text(prompt),
+                "context_manifest": context_manifest,
                 "stdout_path": str(stdout_path),
                 "stderr_path": str(stderr_path),
                 "receipt_path": str(self.tasks_dir / f"{task_id}.receipt.json"),
@@ -447,6 +468,10 @@ def main(argv: Optional[List[str]] = None) -> int:
         item.add_argument(f"--{field}", required=True)
         item.add_argument("--constraints", default="")
         item.add_argument("--timeout", type=int, default=1800)
+        item.add_argument("--context-file", action="append", default=[])
+        item.add_argument("--context-text", action="append", default=[])
+        item.add_argument("--context-token-budget", type=int, default=0)
+        item.add_argument("--context-tokenizer", default="cl100k_base")
 
     args = parser.parse_args(argv)
     state_dir = Path(args.state_dir).resolve()
@@ -476,7 +501,16 @@ def main(argv: Optional[List[str]] = None) -> int:
             value = ctl.get_worker(args.worker_id) or {"error": "not found"}
         elif args.command in {"task-submit", "prompt"}:
             message = args.task if args.command == "task-submit" else args.message
-            value = ctl.submit_task(args.worker_id, message, constraints=args.constraints, timeout=args.timeout)
+            value = ctl.submit_task(
+                args.worker_id,
+                message,
+                constraints=args.constraints,
+                timeout=args.timeout,
+                context_files=args.context_file,
+                context_texts=args.context_text,
+                context_token_budget=args.context_token_budget,
+                context_tokenizer=args.context_tokenizer,
+            )
         elif args.command == "task-status":
             value = ctl.task_status(args.task_id)
         elif args.command == "task-result":

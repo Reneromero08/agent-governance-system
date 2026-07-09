@@ -52,6 +52,9 @@ def test_runner_records_last_assistant_text(tmp_path, monkeypatch):
         def __init__(self, command, **kwargs):
             assert command[command.index("--session-id") + 1] == task["session_id"]
             assert "--extension" in command
+            assert command[-1].startswith("@")
+            prompt_path = task_runner.Path(command[-1][1:])
+            assert prompt_path.read_text(encoding="utf-8") == "Review auth"
             assert json.loads(kwargs["env"]["PI_HARNESS_SHELL_PROGRAMS"])["python"] == sys.executable
             events = [
                 {"type": "message_end", "message": {"role": "assistant", "stopReason": "stop", "content": [{"type": "text", "text": "review complete"}]}},
@@ -75,6 +78,8 @@ def test_runner_records_last_assistant_text(tmp_path, monkeypatch):
     assert final["integrity"]["integrity_ok"] is True
     receipt = json.loads((tasks_dir / "receipt.json").read_text(encoding="utf-8"))
     assert receipt["prompt_sha256"] == final["prompt_sha256"]
+    assert receipt["prompt_file_sha256"] == final["prompt_sha256"]
+    assert final["prompt_path"].endswith("reviewer-000001.prompt.txt")
 
 
 def test_cancelled_task_cannot_be_overwritten_by_finalizer(tmp_path):

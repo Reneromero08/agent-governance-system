@@ -15,6 +15,7 @@ SCRIPTS = SKILL_DIR / "scripts"
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
+from context_pack import pack_context  # noqa: E402
 from pi_harness import build_task_packet  # noqa: E402
 
 
@@ -44,20 +45,32 @@ def run_skill(input_path: Path, output_path: Path) -> int:
         task = str(payload.get("task", "")).strip()
         if not task:
             raise ValueError("task is required")
+        workspace = str(payload.get("workspace", PROJECT_ROOT))
+        read_roots = payload.get("read_roots", []) or [workspace]
+        manual_context, context_manifest = pack_context(
+            workspace=workspace,
+            read_roots=read_roots,
+            context_files=payload.get("context_files", []),
+            context_texts=payload.get("context_texts", []),
+            token_budget=int(payload.get("context_token_budget", 0)),
+            tokenizer=str(payload.get("context_tokenizer", "cl100k_base")),
+        )
         prompt = build_task_packet(
             task=task,
-            workspace=str(payload.get("workspace", PROJECT_ROOT)),
-            read_roots=payload.get("read_roots", []),
+            workspace=workspace,
+            read_roots=read_roots,
             write_roots=payload.get("write_roots", []),
             tools=payload.get("tools", ["read", "grep", "find", "ls"]),
             constraints=str(payload.get("constraints", "")),
             shell_programs=payload.get("shell_programs", {}),
+            manual_context=manual_context,
         )
         result = {
             "ok": True,
             "skipped": True,
             "reason": "offline task-packet generation; live Pi execution is CLI-only",
             "result": prompt,
+            "context_manifest": context_manifest,
         }
         atomic_output(output_path, result)
         return 0

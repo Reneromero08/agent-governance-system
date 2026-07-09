@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from pi_harness import build_pi_command, inspect_jsonl, sha256_text
-from state_io import atomic_write, file_lock, read_json
+from state_io import atomic_write, atomic_write_text, file_lock, read_json
 
 CREATE_NO_WINDOW = 0x08000000
 POLL_SECONDS = 0.1
@@ -113,7 +113,17 @@ def run_task(spec_path: Path) -> int:
     process: subprocess.Popen[Any] | None = None
 
     try:
-        command = build_pi_command(spec["worker"], spec["prompt"], spec["pi_command"])
+        prompt_path = (tasks_dir / f"{task['task_id']}.prompt.txt").resolve()
+        if prompt_path.parent != tasks_dir:
+            raise ValueError("prompt path escapes task directory")
+        atomic_write_text(prompt_path, str(spec["prompt"]))
+        task = update_task(task_path, lock_path, {"prompt_path": str(prompt_path)})
+        command = build_pi_command(
+            spec["worker"],
+            spec["prompt"],
+            spec["pi_command"],
+            prompt_path=str(prompt_path),
+        )
         pi_env = os.environ.copy()
         if spec["worker"].get("allow_shell"):
             pi_env.update({
@@ -191,6 +201,9 @@ def run_task(spec_path: Path) -> int:
         "worker_id": task["worker_id"],
         "session_id": task["session_id"],
         "prompt_sha256": sha256_text(str(spec["prompt"])),
+        "prompt_path": str(prompt_path) if "prompt_path" in locals() else None,
+        "prompt_file_sha256": sha256_file(prompt_path) if "prompt_path" in locals() and prompt_path.exists() else None,
+        "context_manifest": task.get("context_manifest", {}),
         "spec_sha256": sha256_file(spec_path),
         "stdout_sha256": sha256_file(stdout_path) if stdout_path.exists() else None,
         "stderr_sha256": sha256_file(stderr_path) if stderr_path.exists() else None,

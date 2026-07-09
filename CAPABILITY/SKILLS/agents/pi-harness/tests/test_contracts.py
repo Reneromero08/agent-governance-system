@@ -14,6 +14,8 @@ def test_packet_is_scope_locked_and_forbids_git_actions(tmp_path):
     assert "STRICT SCOPE LOCK" in prompt
     assert "WRITE_SCOPE: NONE" in prompt
     assert "Do not commit, push, publish, or release" in prompt
+    assert "AGENTS.md" not in prompt
+    assert "repository governance" not in prompt
 
 
 def test_write_tools_require_write_scope(tmp_path):
@@ -35,7 +37,25 @@ def test_pi_command_reuses_exact_session_id(tmp_path):
     assert command[0] == str(Path(sys.executable).resolve())
     assert command[command.index("--session-id") + 1] == worker["session_id"]
     assert "--no-extensions" in command
+    assert "--no-context-files" in command
+    assert "--no-skills" in command
+    assert "--no-prompt-templates" in command
+    assert command[command.index("--system-prompt") + 1] == ""
     assert command[-1] == "hello"
+
+
+def test_pi_command_uses_prompt_file_for_multiline_transport(tmp_path):
+    prompt_path = tmp_path / "task.prompt.txt"
+    prompt_path.write_text("line one\nline two", encoding="utf-8")
+    worker = {
+        "worker_id": "reviewer",
+        "session_id": "11111111-1111-1111-1111-111111111111",
+        "session_dir": str(tmp_path / "sessions"),
+        "name": "reviewer",
+        "tools": ["read"],
+    }
+    command = build_pi_command(worker, "line one\nline two", sys.executable, str(prompt_path))
+    assert command[-1] == f"@{prompt_path.resolve()}"
 
 
 def test_extracts_last_assistant_message():
@@ -70,6 +90,28 @@ def test_integrity_accepts_settled_scoped_write(tmp_path):
     audit = inspect_jsonl("\n".join(json.dumps(event) for event in events), str(tmp_path), [str(allowed)])
     assert audit["integrity_ok"] is True
     assert audit["write_paths"] == [str((allowed / "file.txt").resolve())]
+
+
+def test_integrity_accepts_current_pi_agent_end(tmp_path):
+    events = [
+        {"type": "message_end", "message": {"role": "assistant", "stopReason": "stop", "content": [{"type": "text", "text": "done"}]}},
+        {"type": "agent_end", "messages": []},
+    ]
+    audit = inspect_jsonl("\n".join(json.dumps(event) for event in events), str(tmp_path), [])
+    assert audit["integrity_ok"] is True
+    assert audit["agent_completed"] is True
+    assert audit["agent_settled"] is False
+    assert audit["terminal_events"] == ["agent_end"]
+
+
+def test_integrity_rejects_missing_terminal_event(tmp_path):
+    event = {
+        "type": "message_end",
+        "message": {"role": "assistant", "stopReason": "stop", "content": [{"type": "text", "text": "done"}]},
+    }
+    audit = inspect_jsonl(json.dumps(event), str(tmp_path), [])
+    assert audit["integrity_ok"] is False
+    assert audit["agent_completed"] is False
 
 
 def test_integrity_rejects_non_allowlisted_shell_program(tmp_path):

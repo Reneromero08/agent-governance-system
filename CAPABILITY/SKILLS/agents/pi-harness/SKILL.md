@@ -1,7 +1,7 @@
 ---
 name: pi-harness
 description: Run the local Pi coding agent as a persistent, headless worker with stable session IDs, background tasks, status polling, result collection, cancellation, and follow-up prompts in the same session. Use when an agent or local automation needs to delegate work to Pi, let it continue in the background, check progress later, or resume the same Pi conversation across multiple turns.
-version: 0.2.0
+version: 0.3.0
 status: Active
 required_canon_version: ">=3.0.0"
 ---
@@ -10,6 +10,14 @@ required_canon_version: ">=3.0.0"
 
 Use Pi's headless JSON mode with an explicit `--session-id`. Keep worker state,
 Pi sessions, logs, and task receipts under `LAW/CONTRACTS/_runs/pi-harness/`.
+
+Pi workers load **no project context files, skills, prompt templates, or default
+Pi system prompt automatically**. The parent must manually select and inject
+every context block needed for each task. The harness always passes
+`--no-context-files`, `--no-skills`, `--no-prompt-templates`, and an explicitly
+empty `--system-prompt`. It transports the complete task packet through an
+audited generated prompt file so Windows command shims cannot truncate
+multiline instructions.
 
 ## Choose an entry path
 
@@ -71,6 +79,28 @@ Submit a background turn:
 ... worker_control.py task-submit --worker-id reviewer --task "Review the auth flow and report concrete risks."
 ```
 
+Select manual context independently for that task:
+
+```powershell
+... worker_control.py task-submit --worker-id reviewer `
+  --task "Review the auth flow." `
+  --context-file "src/auth/contract.md" `
+  --context-file "tests/auth_cases.md" `
+  --context-text "Focus on session fixation." `
+  --context-token-budget 6000 `
+  --context-tokenizer cl100k_base
+```
+
+Context files must be inside the worker's declared read roots. Sources are
+packed deterministically in command order (files, then text), truncated to the
+selected task budget using the selected tiktoken encoding, and recorded with
+source hashes and included/original token counts. With no `--context-file` or
+`--context-text`, the task receives no extra context and the token budget may be
+zero. Every later `prompt` can choose a different context set and budget while
+reusing the same Pi session. The selected budget applies only to manually
+injected context; the task packet, Pi system prompt, tool schemas, and prior
+session messages also consume the model's context window.
+
 The command returns immediately with a deterministic `task_id`. Then use:
 
 ```powershell
@@ -112,6 +142,8 @@ and the final assistant text; it does not declare the work correct.
 ## Operational constraints
 
 - Never use `--no-session`; persistence is the point of this skill.
+- Never assume Pi discovered repository instructions or governance. Manually
+  include exactly what the task requires through task context options.
 - Never reuse one worker ID for unrelated workspaces.
 - Do not modify a worker while a task is running.
 - Do not commit, push, merge, or release from Pi. Those actions remain subject
@@ -128,6 +160,7 @@ and the final assistant text; it does not declare the work correct.
 (`queued`, `running`, `complete`, `failed`, or `cancelled`), `session_id`,
 `pid`, `exit_code`, `result`, `integrity`, `receipt_path`, `stdout_path`, and
 `stderr_path`. A task can be `complete` only when Pi exits successfully, emits
-strict JSONL, reaches `agent_settled`, returns a non-empty assistant result, and
-has no observed out-of-scope `edit` or `write` call. Each task receipt hashes
-the prompt, stdout, stderr, and final result.
+strict JSONL, reaches the current Pi `agent_end` event (or legacy
+`agent_settled` event), returns a non-empty assistant result, and has no observed
+out-of-scope `edit` or `write` call. Each task receipt hashes the prompt, stdout,
+stderr, and final result.

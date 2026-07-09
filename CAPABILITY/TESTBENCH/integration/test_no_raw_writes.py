@@ -54,6 +54,16 @@ ALLOWED_FILES = {
     'test_worker_api.py',  # Hermes worker API tests - writes to pytest tmp_path
 }
 
+# Exact-path adapter and fixture exemptions. Keep these path-scoped so a
+# same-named file in another skill does not inherit raw-write authority.
+ALLOWED_RELATIVE_FILES = {
+    'CAPABILITY/SKILLS/agents/pi-harness/scripts/state_io.py',  # Atomic state and lock adapter
+    'CAPABILITY/SKILLS/agents/pi-harness/scripts/task_runner.py',  # Bounded subprocess log adapter
+    'CAPABILITY/SKILLS/agents/pi-harness/tests/test_context_pack.py',  # pytest tmp_path fixtures
+    'CAPABILITY/SKILLS/agents/pi-harness/tests/test_contracts.py',  # pytest tmp_path fixtures
+    'CAPABILITY/SKILLS/agents/pi-harness/tests/test_worker_control.py',  # pytest tmp_path fixtures
+}
+
 # Lines that should be ignored (comments, imports, defensive code)
 IGNORE_PATTERNS = [
     r'#.*',
@@ -73,6 +83,9 @@ def is_safe_line(line: str, filepath: str) -> bool:
     # Skip if file is allowed
     filename = Path(filepath).name
     if filename in ALLOWED_FILES:
+        return True
+    relative = Path(filepath).resolve().relative_to(REPO_ROOT).as_posix()
+    if relative in ALLOWED_RELATIVE_FILES:
         return True
 
     # Skip if line matches ignore patterns
@@ -114,6 +127,9 @@ def scan_for_raw_writes(directory: Path) -> list:
             
             # Skip allowed files
             if filename in ALLOWED_FILES:
+                continue
+            relative = Path(filepath).resolve().relative_to(REPO_ROOT).as_posix()
+            if relative in ALLOWED_RELATIVE_FILES:
                 continue
                 
             try:

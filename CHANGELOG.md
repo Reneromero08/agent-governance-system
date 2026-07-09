@@ -2,6 +2,17 @@
 
 # Changelog
 
+## 2026-07-09: Manual-only Pi task context
+
+- Disable automatic Pi context files, skills, and prompt templates for every
+  worker turn. Add per-task manual context files/text, selectable tiktoken
+  encoding and token budget, read-scope validation, deterministic truncation,
+  and source hash/token receipts so each task receives only explicitly selected
+  context. Also disable Pi's default system prompt, remove automatic repository
+  governance instructions, transport multiline task packets through audited
+  prompt files on Windows, and accept both current `agent_end` and legacy
+  `agent_settled` terminal events.
+
 ## 2026-07-09: Govern Pi shell execution
 
 - Replace Pi's free-form built-in `bash` path with a harness-owned governed
