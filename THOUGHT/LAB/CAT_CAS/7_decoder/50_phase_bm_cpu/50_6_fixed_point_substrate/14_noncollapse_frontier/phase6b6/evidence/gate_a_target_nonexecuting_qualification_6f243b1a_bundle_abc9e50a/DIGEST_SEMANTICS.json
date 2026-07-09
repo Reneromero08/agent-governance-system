@@ -1,0 +1,14 @@
+{
+  "schema_id": "CAT_CAS_PHASE6B6_GATE_A_TARGET_NONEXECUTING_DIGEST_SEMANTICS_V1",
+  "review_comments": [
+    4929354450,
+    4929446568
+  ],
+  "predecessor_adapter_qualification_result_sha256": "1d9d2c62cbf81f72eeb9c40f02841f9f507d52eae8229da73fc2f81eb0a15223",
+  "predecessor_candidate_v2_sha256": "d8f190bc7f8c9904659cd697ed091b192843efe18f5f1d74d713282e889b060e",
+  "predecessor_digest_meaning": "PR #36 adapter-package result and Candidate V2 digests, not PR #37 target qualification result or Candidate V3 committed file hashes",
+  "target_qualification_result_committed_sha256": "51d24873d1993c517c91db8595f72390fa8e5ecd225dd62342698445aab9099f",
+  "candidate_v3_committed_sha256": "dc6af2537914c465d6be087cf723d18fe274afdbcc69525bc2fa89c4b049f563",
+  "final_bindings_committed_sha256": "ce4980ad20121820ef251c5d37e1e7d2a96fc95a270420b9213cd378dbd5808f",
+  "self_hashing_policy": "Committed file hashes are bound externally: this file is bound by EVIDENCE_INVENTORY.json, FINAL_BINDINGS.json is bound here, and neither file contains its own final byte hash. EVIDENCE_INVENTORY.json and FINAL_BINDINGS.json are excluded from their own inventory closure to avoid a hash cycle."
+}

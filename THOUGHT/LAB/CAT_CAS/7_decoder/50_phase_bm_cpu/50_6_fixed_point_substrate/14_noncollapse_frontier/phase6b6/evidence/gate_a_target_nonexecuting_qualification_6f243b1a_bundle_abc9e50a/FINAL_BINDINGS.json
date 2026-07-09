@@ -1,5 +1,4 @@
 {
-  "_evidence_inventory_sha256": "6886c617ce0e50c1dfe492ec38bf7a8855a7ff105279726d92923f80ae7cc607",
   "after_tree_canonical_sha256": "4dfe92c2b0ae121315f70ad408eb8555a4e1a6df5eabc79c5d2c81f837035e70",
   "before_tree_canonical_sha256": "4dfe92c2b0ae121315f70ad408eb8555a4e1a6df5eabc79c5d2c81f837035e70",
   "bundle_manifest_file_sha256": "ccb7866db67170083cb00d546c334b61772c8ef909131ec9c62ed21115facc94",
@@ -36,6 +35,16 @@
   "execution_root_final_state": "ABSENT",
   "execution_root_predeploy_state": "ABSENT",
   "overall_status": "SUCCESS",
+  "owner_identity": "Raúl Romero",
+  "predecessor_adapter_package_digests": {
+    "predecessor_adapter_qualification_result_sha256": "1d9d2c62cbf81f72eeb9c40f02841f9f507d52eae8229da73fc2f81eb0a15223",
+    "predecessor_candidate_v2_sha256": "d8f190bc7f8c9904659cd697ed091b192843efe18f5f1d74d713282e889b060e",
+    "meaning": "PR #36 adapter-package result and Candidate V2 digests, not PR #37 target qualification result or Candidate V3 committed file hashes"
+  },
+  "target_qualification_result_committed_sha256": "51d24873d1993c517c91db8595f72390fa8e5ecd225dd62342698445aab9099f",
+  "candidate_v3_committed_sha256": "dc6af2537914c465d6be087cf723d18fe274afdbcc69525bc2fa89c4b049f563",
+  "digest_semantics_path": "DIGEST_SEMANTICS.json",
+  "self_hashing_policy": "The FINAL_BINDINGS committed byte hash is bound externally in DIGEST_SEMANTICS.json; the evidence inventory and FINAL_BINDINGS do not contain their own final byte hashes.",
   "predecessor_identity": {
     "architecture": "x86_64",
     "cpu_model": "AMD Phenom(tm) II X6 1090T Processor",

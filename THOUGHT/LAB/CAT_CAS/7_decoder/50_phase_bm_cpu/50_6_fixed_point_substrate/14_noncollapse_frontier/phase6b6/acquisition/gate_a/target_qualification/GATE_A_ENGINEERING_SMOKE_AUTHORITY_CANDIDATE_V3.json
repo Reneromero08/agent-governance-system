@@ -33,6 +33,11 @@
   "bundle_manifest_sha256": "ccb7866db67170083cb00d546c334b61772c8ef909131ec9c62ed21115facc94",
   "deployment_archive_sha256": "63003e99fb1d25e96a641ae726d0e10891d543c73267a9cfcf114bfc2b0c6207",
   "target_evidence_archive_sha256": "12adebbdea79c56db7760a9eb0ca4e1f7ae008e59257c619ad61a1752cb93477",
+  "predecessor_adapter_package_digests": {
+    "predecessor_adapter_qualification_result_sha256": "1d9d2c62cbf81f72eeb9c40f02841f9f507d52eae8229da73fc2f81eb0a15223",
+    "predecessor_candidate_v2_sha256": "d8f190bc7f8c9904659cd697ed091b192843efe18f5f1d74d713282e889b060e",
+    "meaning": "PR #36 adapter-package result and Candidate V2 digests, not PR #37 target qualification result or Candidate V3 committed file hashes"
+  },
   "target_qualification_result_evidence_dir": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_target_nonexecuting_qualification_6f243b1a_bundle_abc9e50a",
   "next_boundary": "GATE_A_ENGINEERING_SMOKE_AUTHORITY_REVIEW_AND_OWNER_DECISION"
 }

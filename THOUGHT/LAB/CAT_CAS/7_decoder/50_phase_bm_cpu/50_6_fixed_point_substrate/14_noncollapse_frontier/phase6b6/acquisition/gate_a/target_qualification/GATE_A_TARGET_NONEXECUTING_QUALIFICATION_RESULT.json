@@ -61,8 +61,6 @@
     "before_tree_canonical_sha256": "4dfe92c2b0ae121315f70ad408eb8555a4e1a6df5eabc79c5d2c81f837035e70",
     "after_tree_canonical_sha256": "4dfe92c2b0ae121315f70ad408eb8555a4e1a6df5eabc79c5d2c81f837035e70",
     "target_evidence_archive_sha256": "12adebbdea79c56db7760a9eb0ca4e1f7ae008e59257c619ad61a1752cb93477",
-    "evidence_inventory_sha256": "6886c617ce0e50c1dfe492ec38bf7a8855a7ff105279726d92923f80ae7cc607",
-    "final_bindings_sha256": "6806f4c1b85312b786d85c8d0dd72ecb2d8c6314a8213dc912187066f58e7a3b",
     "host_adapter_git_blob_sha1": "08ea193e341f2d1934fe1955f224b2566c5945e5",
     "target_runner_git_blob_sha1": "7a17a6a514944888b594d37389e7d6105fbe97c4",
     "target_worker_git_blob_sha1": "a1022c0109e0c4406d84f19a9777d8a0008696fb",
@@ -71,6 +69,11 @@
     "bundle_builder_git_blob_sha1": "2d67bf6e8ce293ddc12cfe562302d7b00619cff7",
     "qualification_verifier_git_blob_sha1": "62817afd128fcc2d6a9f25c654fca3174b2a5643",
     "isolated_qualification_harness_git_blob_sha1": "1dbeb06a6dceb6f1155d447835b3ef265571d19d"
+  },
+  "predecessor_adapter_package_digests": {
+    "predecessor_adapter_qualification_result_sha256": "1d9d2c62cbf81f72eeb9c40f02841f9f507d52eae8229da73fc2f81eb0a15223",
+    "predecessor_candidate_v2_sha256": "d8f190bc7f8c9904659cd697ed091b192843efe18f5f1d74d713282e889b060e",
+    "meaning": "PR #36 adapter-package result and Candidate V2 digests, not PR #37 target qualification result or Candidate V3 committed file hashes"
   },
   "authority_false_state": {
     "project_owner_execution_approval_recorded": false,

@@ -1,5 +1,5 @@
 {
-  "file_count": 75,
+  "file_count": 76,
   "files": [
     {
       "path": "cleanup/logs/021_cleanup_namespace.script.py",
@@ -122,6 +122,11 @@
       "size": 305
     },
     {
+      "path": "DIGEST_SEMANTICS.json",
+      "sha256": "b2a6f4d211b0e1dac53989454e43b23c1c1cea4d0fa2e27a809a2ddd73e82b78",
+      "size": 1186
+    },
+    {
       "path": "local/logs/001_host_build_compare_twice.stderr.txt",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "size": 0
@@ -163,8 +168,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "22c62b57e351d418fbebbfaea228d31b34ff82830836e0b87f397805a9fef446",
-      "size": 433
+      "sha256": "7ab11ba0a3a3788b218e396fe544be55be16858eaa083386b981e579adde2086",
+      "size": 679
     },
     {
       "path": "target/logs/005_target_identity_before.script.py",

@@ -1,7 +1,7 @@
 {
   "schema_id": "CAT_CAS_PHASE6B6_GATE_A_TARGET_NONEXECUTING_QUALIFICATION_AUTHORIZATION_V1",
   "decision": "AUTHORIZED_FOR_GATE_A_TARGET_NONEXECUTING_QUALIFICATION_ONLY",
-  "project_owner": "Raul Romero",
+  "project_owner": "Raúl Romero",
   "owner_instruction": "Authorize Gate A target nonexecuting qualification",
   "integrated_main": "6f243b1aaf7cfaa09f21b8d5816ddd9097612f72",
   "reviewed_adapter_head": "653d225594af088dc5a72b1655b8b6192b019fc3",
