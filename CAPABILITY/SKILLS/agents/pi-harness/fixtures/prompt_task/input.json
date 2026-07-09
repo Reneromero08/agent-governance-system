@@ -1,0 +1,8 @@
+{
+  "task": "Review the authentication module for unsafe error handling.",
+  "workspace": ".",
+  "read_roots": ["src/auth"],
+  "write_roots": [],
+  "tools": ["read", "grep", "find", "ls"],
+  "constraints": "Read-only review."
+}

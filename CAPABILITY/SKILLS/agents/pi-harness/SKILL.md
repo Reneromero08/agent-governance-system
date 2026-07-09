@@ -1,0 +1,124 @@
+---
+name: pi-harness
+description: Run the local Pi coding agent as a persistent, headless worker with stable session IDs, background tasks, status polling, result collection, cancellation, and follow-up prompts in the same session. Use when an agent or local automation needs to delegate work to Pi, let it continue in the background, check progress later, or resume the same Pi conversation across multiple turns.
+version: 0.1.0
+status: Active
+required_canon_version: ">=3.0.0"
+---
+
+# Pi Harness
+
+Use Pi's headless JSON mode with an explicit `--session-id`. Keep worker state,
+Pi sessions, logs, and task receipts under `LAW/CONTRACTS/_runs/pi-harness/`.
+
+## Choose an entry path
+
+- Use root `run.py` through `skill_run` to build and validate an offline task
+  packet. It never launches Pi or spends model tokens.
+- Use `scripts/worker_control.py` for live local workers.
+
+Always run Python through the repository virtual environment.
+
+## Create a worker
+
+```powershell
+.\.venv\Scripts\python.exe CAPABILITY\SKILLS\agents\pi-harness\scripts\worker_control.py worker-create `
+  --worker-id reviewer `
+  --workspace "D:\path\to\repo" `
+  --read-root "src,tests" `
+  --write-root "src,tests" `
+  --allow-write
+```
+
+Worker identity and Pi conversation identity are separate:
+
+- `worker_id` routes harness commands.
+- `session_id` is the stable Pi session UUID. Omit it to derive a deterministic
+  UUID from the worker ID and workspace.
+
+Workers are read-only by default (`read,grep,find,ls`). `--allow-write`
+explicitly enables `edit,write`; always provide narrow write roots. Shell access
+is separate because shell commands cannot be path-confined mechanically:
+
+```powershell
+... worker-create --worker-id builder --write-root "src,tests" --allow-write --allow-shell
+```
+
+Pi extensions are disabled by default because they execute code inside the
+worker process. Add `--allow-extensions` only when the required extensions are
+trusted.
+
+Optional model selection:
+
+```powershell
+... worker-create --worker-id reviewer --provider openai --model gpt-5
+```
+
+## Submit and supervise work
+
+Submit a background turn:
+
+```powershell
+... worker_control.py task-submit --worker-id reviewer --task "Review the auth flow and report concrete risks."
+```
+
+The command returns immediately with a deterministic `task_id`. Then use:
+
+```powershell
+... worker_control.py task-status --task-id reviewer-000001
+... worker_control.py task-result --task-id reviewer-000001
+... worker_control.py task-log --task-id reviewer-000001
+```
+
+Submit a new turn to the same Pi session after the prior task settles:
+
+```powershell
+... worker_control.py prompt --worker-id reviewer --message "Now fix the two high-severity findings."
+```
+
+`prompt` is an alias for another background task on the worker's unchanged
+`session_id`. A worker accepts only one running task at a time.
+
+Cancel a running task:
+
+```powershell
+... worker_control.py task-cancel --task-id reviewer-000001
+```
+
+## Task-packet contract
+
+Every live prompt includes:
+
+- the concrete goal;
+- absolute workspace;
+- read and write scope;
+- tool policy;
+- a branch/commit prohibition;
+- a required final result containing findings, changed files, and verification.
+
+Treat Pi as an untrusted external executable. Verify its claims and inspect the
+repository diff before accepting work. The harness records process exit status
+and the final assistant text; it does not declare the work correct.
+
+## Operational constraints
+
+- Never use `--no-session`; persistence is the point of this skill.
+- Never reuse one worker ID for unrelated workspaces.
+- Do not modify a worker while a task is running.
+- Do not commit, push, merge, or release from Pi. Those actions remain subject
+  to the parent session's explicit ceremonies.
+- Use task logs for progress. Do not spawn visible terminal windows.
+- When shell access is enabled, inspect `integrity.shell_scope_verifiable` and
+  independently review the workspace diff; shell side effects cannot be
+  confined by inspecting Pi's structured `edit`/`write` events.
+- Set `PI_COMMAND` only when `pi` is not on `PATH`.
+
+## Output shape
+
+`task-status` and `task-result` return JSON. Important fields are `status`
+(`queued`, `running`, `complete`, `failed`, or `cancelled`), `session_id`,
+`pid`, `exit_code`, `result`, `integrity`, `receipt_path`, `stdout_path`, and
+`stderr_path`. A task can be `complete` only when Pi exits successfully, emits
+strict JSONL, reaches `agent_settled`, returns a non-empty assistant result, and
+has no observed out-of-scope `edit` or `write` call. Each task receipt hashes
+the prompt, stdout, stderr, and final result.

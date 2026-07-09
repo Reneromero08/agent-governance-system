@@ -2,6 +2,18 @@
 
 # Changelog
 
+## 2026-07-09: Add persistent local Pi worker harness
+
+- Add the `pi-harness` skill for headless background delegation to the local Pi
+  coding agent. It provides deterministic worker and task identities, persistent
+  Pi session reuse, task submission, polling, result/log retrieval, cancellation,
+  read-only defaults, explicit write enablement, scope-locked prompts, offline
+  fixtures, and unit tests. Hardened lifecycle controls add cross-process state
+  locks, launch-failure recovery, cancellation-safe finalization, process-tree
+  termination, bounded logs and prompts, explicit shell opt-in, strict Pi JSONL
+  validation, observed write-path scope audits, and hashed task receipts. Runtime
+  state and Pi session files stay under `LAW/CONTRACTS/_runs/pi-harness/`.
+
 ## 2026-07-02: Phase 6B.6 Gate A target non-executing qualification
 
 - Phase 6B.6: record the owner-authorized Gate A target non-executing
