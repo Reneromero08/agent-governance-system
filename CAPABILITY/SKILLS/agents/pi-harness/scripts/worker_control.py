@@ -14,7 +14,7 @@ import uuid
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 
-from pi_harness import READ_ONLY_TOOLS, build_task_packet, sha256_text
+from pi_harness import READ_ONLY_TOOLS, build_task_packet, resolve_executable, sha256_text
 from state_io import atomic_write, file_lock, read_json
 
 SKILL_DIR = Path(__file__).resolve().parents[1]
@@ -87,6 +87,27 @@ def resolve_scopes(workspace: Path, values: Iterable[str] | str | None) -> List[
     return resolved
 
 
+def resolve_shell_programs(values: Iterable[str] | str | None) -> Dict[str, str]:
+    programs: Dict[str, str] = {}
+    for value in split_values(values):
+        alias, separator, command = value.partition("=")
+        if not separator:
+            command = alias
+            alias = Path(command).stem
+        validate_identifier(alias, "shell program alias", 64)
+        executable = resolve_executable(command)
+        if os.name == "nt" and Path(executable).suffix.lower() not in {".exe", ".com"}:
+            raise ValueError("governed shell programs on Windows must be native .exe or .com files")
+        if os.name != "nt" and not os.access(executable, os.X_OK):
+            raise ValueError(f"governed shell program is not executable: {executable}")
+        if alias in programs:
+            raise ValueError(f"duplicate shell program alias: {alias}")
+        programs[alias] = executable
+        if len(programs) > 32:
+            raise ValueError("governed shell supports at most 32 programs")
+    return programs
+
+
 class WorkerController:
     def __init__(self, state_dir: Path | str = DEFAULT_STATE_DIR, pi_command: Optional[str] = None):
         self.state_dir = Path(state_dir).resolve()
@@ -137,6 +158,7 @@ class WorkerController:
         allow_write: bool = False,
         allow_shell: bool = False,
         allow_extensions: bool = False,
+        shell_programs: Iterable[str] | str | None = None,
     ) -> Dict[str, Any]:
         validate_identifier(worker_id, "worker_id", 64)
         if len(name) > 128 or len(provider) > 128 or len(model) > 256:
@@ -146,8 +168,13 @@ class WorkerController:
             raise ValueError(f"workspace does not exist: {ws}")
         reads = resolve_scopes(ws, read_roots) or [str(ws)]
         writes = resolve_scopes(ws, write_roots)
+        programs = resolve_shell_programs(shell_programs)
         if (allow_write or allow_shell) and not writes:
             raise ValueError("write or shell access requires at least one --write-root")
+        if allow_shell and not programs:
+            raise ValueError("--allow-shell requires at least one --shell-program")
+        if programs and not allow_shell:
+            raise ValueError("--shell-program requires --allow-shell")
         stable_id = session_id or str(uuid.uuid5(uuid.NAMESPACE_URL, f"pi-harness:{worker_id}:{ws}"))
         try:
             uuid.UUID(stable_id)
@@ -168,6 +195,7 @@ class WorkerController:
             "allow_write": allow_write,
             "allow_shell": allow_shell,
             "allow_extensions": allow_extensions,
+            "shell_programs": programs,
             "next_task": 1,
             "active_task_id": "",
         }
@@ -232,6 +260,7 @@ class WorkerController:
                 write_roots=worker["write_roots"],
                 tools=worker["tools"],
                 constraints=constraints,
+                shell_programs=worker.get("shell_programs", {}),
             )
             record = {
                 "task_id": task_id,
@@ -404,6 +433,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     create.add_argument("--allow-write", action="store_true")
     create.add_argument("--allow-shell", action="store_true")
     create.add_argument("--allow-extensions", action="store_true")
+    create.add_argument("--shell-program", action="append", default=[])
     sub.add_parser("worker-list")
     get_worker = sub.add_parser("worker-get")
     get_worker.add_argument("--worker-id", required=True)
@@ -438,6 +468,7 @@ def main(argv: Optional[List[str]] = None) -> int:
                 allow_write=args.allow_write,
                 allow_shell=args.allow_shell,
                 allow_extensions=args.allow_extensions,
+                shell_programs=args.shell_program,
             )
         elif args.command == "worker-list":
             value = ctl.list_workers()

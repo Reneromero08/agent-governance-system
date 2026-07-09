@@ -27,9 +27,12 @@ def test_runner_records_last_assistant_text(tmp_path, monkeypatch):
         "session_dir": str(tmp_path / "sessions"),
         "workspace": str(tmp_path),
         "name": "reviewer",
-        "tools": ["read", "grep", "find", "ls"],
+        "tools": ["read", "grep", "find", "ls", "bash"],
         "provider": "",
         "model": "",
+        "allow_shell": True,
+        "shell_programs": {"python": sys.executable},
+        "write_roots": [str(tmp_path)],
     }
     task_runner.atomic_write(task_path, task)
     spec_path = tasks_dir / "spec.json"
@@ -48,6 +51,8 @@ def test_runner_records_last_assistant_text(tmp_path, monkeypatch):
 
         def __init__(self, command, **kwargs):
             assert command[command.index("--session-id") + 1] == task["session_id"]
+            assert "--extension" in command
+            assert json.loads(kwargs["env"]["PI_HARNESS_SHELL_PROGRAMS"])["python"] == sys.executable
             events = [
                 {"type": "message_end", "message": {"role": "assistant", "stopReason": "stop", "content": [{"type": "text", "text": "review complete"}]}},
                 {"type": "agent_settled"},

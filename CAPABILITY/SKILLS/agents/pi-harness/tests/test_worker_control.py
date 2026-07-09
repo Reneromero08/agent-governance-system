@@ -1,5 +1,6 @@
 from concurrent.futures import ThreadPoolExecutor
 import sys
+from pathlib import Path
 
 import pytest
 
@@ -28,6 +29,21 @@ def test_write_access_does_not_implicitly_enable_shell(tmp_path):
     assert "edit" in worker["tools"]
     assert "write" in worker["tools"]
     assert "bash" not in worker["tools"]
+
+
+def test_shell_requires_explicit_native_program_allowlist(tmp_path):
+    ctl = WorkerController(tmp_path / "state")
+    with pytest.raises(ValueError, match="shell-program"):
+        ctl.create_worker("shell", str(tmp_path), write_roots=["src"], allow_shell=True)
+    worker = ctl.create_worker(
+        "governed-shell",
+        str(tmp_path),
+        write_roots=["src"],
+        allow_shell=True,
+        shell_programs=[f"python={sys.executable}"],
+    )
+    assert worker["tools"][-1] == "bash"
+    assert worker["shell_programs"] == {"python": str(Path(sys.executable).resolve())}
 
 
 def test_scopes_are_absolute_and_cannot_escape_workspace(tmp_path):

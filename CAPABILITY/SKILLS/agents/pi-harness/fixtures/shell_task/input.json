@@ -1,0 +1,9 @@
+{
+  "task": "Run the approved verification command and report its exact result.",
+  "workspace": ".",
+  "read_roots": ["."],
+  "write_roots": ["LAW/CONTRACTS/_runs"],
+  "tools": ["read", "grep", "find", "ls", "bash"],
+  "shell_programs": {"git": "resolved-at-worker-creation"},
+  "constraints": "Use only the governed shell program aliases configured by the worker."
+}

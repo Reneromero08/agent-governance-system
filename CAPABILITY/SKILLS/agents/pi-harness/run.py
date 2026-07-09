@@ -51,6 +51,7 @@ def run_skill(input_path: Path, output_path: Path) -> int:
             write_roots=payload.get("write_roots", []),
             tools=payload.get("tools", ["read", "grep", "find", "ls"]),
             constraints=str(payload.get("constraints", "")),
+            shell_programs=payload.get("shell_programs", {}),
         )
         result = {
             "ok": True,

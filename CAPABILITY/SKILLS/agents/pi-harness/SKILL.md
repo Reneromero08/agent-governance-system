@@ -1,7 +1,7 @@
 ---
 name: pi-harness
 description: Run the local Pi coding agent as a persistent, headless worker with stable session IDs, background tasks, status polling, result collection, cancellation, and follow-up prompts in the same session. Use when an agent or local automation needs to delegate work to Pi, let it continue in the background, check progress later, or resume the same Pi conversation across multiple turns.
-version: 0.1.0
+version: 0.2.0
 status: Active
 required_canon_version: ">=3.0.0"
 ---
@@ -41,8 +41,17 @@ explicitly enables `edit,write`; always provide narrow write roots. Shell access
 is separate because shell commands cannot be path-confined mechanically:
 
 ```powershell
-... worker-create --worker-id builder --write-root "src,tests" --allow-write --allow-shell
+... worker-create --worker-id builder --write-root "src,tests" --allow-write --allow-shell `
+  --shell-program git `
+  --shell-program "python=.\.venv\Scripts\python.exe"
 ```
+
+The governed shell overrides Pi's built-in `bash` tool. It accepts only a
+program alias plus a literal argument array—never a shell command string—and
+resolves every allowed program to an absolute native executable when the worker
+is created. It confines `cwd` to the workspace, filters credentials from the
+child environment, applies timeout/output caps, and records structured calls in
+Pi JSONL. On Windows, `.cmd`, `.bat`, and PowerShell scripts are rejected.
 
 Pi extensions are disabled by default because they execute code inside the
 worker process. Add `--allow-extensions` only when the required extensions are

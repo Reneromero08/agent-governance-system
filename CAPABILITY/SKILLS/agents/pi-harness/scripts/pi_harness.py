@@ -15,6 +15,7 @@ ALL_TOOLS = READ_ONLY_TOOLS + WRITE_TOOLS
 MAX_TASK_CHARS = 100_000
 MAX_CONSTRAINT_CHARS = 20_000
 MAX_RESULT_CHARS = 1_000_000
+GOVERNED_SHELL_EXTENSION = Path(__file__).resolve().parents[1] / "extensions" / "governed-shell.ts"
 
 
 def _items(values: Iterable[str] | str | None) -> List[str]:
@@ -32,6 +33,7 @@ def build_task_packet(
     write_roots: Iterable[str] | str | None,
     tools: Iterable[str] | str | None,
     constraints: str = "",
+    shell_programs: Mapping[str, object] | None = None,
 ) -> str:
     goal = task.strip()
     if not goal:
@@ -51,6 +53,7 @@ def build_task_packet(
     if write_enabled and not writes:
         raise ValueError("write-capable tools require at least one write root")
     write_text = ", ".join(writes) if writes else "NONE (read-only task)"
+    shell_aliases = ", ".join(sorted((shell_programs or {}).keys())) or "NONE"
     extra = constraints.strip() or "None."
     return f"""PI WORKER TASK
 
@@ -64,12 +67,14 @@ STRICT SCOPE LOCK
 READ_SCOPE: {', '.join(reads)}
 WRITE_SCOPE: {write_text}
 TOOLS: {', '.join(enabled)}
+SHELL_PROGRAMS: {shell_aliases}
 
 RULES
 - Work only inside the workspace and the declared scopes.
 - Do not modify files outside WRITE_SCOPE.
 - Do not create, switch, merge, or delete branches.
 - Do not commit, push, publish, or release.
+- For bash, use only a SHELL_PROGRAMS alias plus a literal argument array. Never use shell command strings, pipes, redirects, or chaining.
 - Treat AGENTS.md and repository governance as binding.
 - If blocked, stop and identify the exact blocker.
 
@@ -100,6 +105,10 @@ def build_pi_command(worker: Mapping[str, object], prompt: str, pi_command: str)
         command.extend(["--model", model])
     if not bool(worker.get("allow_extensions", False)):
         command.append("--no-extensions")
+    if bool(worker.get("allow_shell", False)):
+        if not GOVERNED_SHELL_EXTENSION.is_file():
+            raise ValueError(f"governed shell extension is missing: {GOVERNED_SHELL_EXTENSION}")
+        command.extend(["--extension", str(GOVERNED_SHELL_EXTENSION)])
     command.append(prompt)
     return command
 
@@ -124,7 +133,12 @@ def resolve_executable(command: str) -> str:
     return str(Path(discovered).resolve())
 
 
-def inspect_jsonl(jsonl_text: str, workspace: str, write_roots: Iterable[str] | str | None) -> dict:
+def inspect_jsonl(
+    jsonl_text: str,
+    workspace: str,
+    write_roots: Iterable[str] | str | None,
+    shell_programs: Mapping[str, object] | None = None,
+) -> dict:
     roots = [Path(value).resolve() for value in _items(write_roots)]
     ws = Path(workspace).resolve()
     result = ""
@@ -134,6 +148,8 @@ def inspect_jsonl(jsonl_text: str, workspace: str, write_roots: Iterable[str] | 
     write_paths: List[str] = []
     scope_violations: List[str] = []
     shell_used = False
+    shell_policy_violations: List[str] = []
+    allowed_programs = set((shell_programs or {}).keys())
 
     for line in jsonl_text.splitlines():
         if not line.strip():
@@ -153,6 +169,16 @@ def inspect_jsonl(jsonl_text: str, workspace: str, write_roots: Iterable[str] | 
             args = event.get("args") if isinstance(event.get("args"), dict) else {}
             if tool == "bash":
                 shell_used = True
+                program = args.get("program")
+                raw_cwd = args.get("cwd", ".")
+                if not isinstance(program, str) or program not in allowed_programs:
+                    shell_policy_violations.append("bash:program-not-allowlisted")
+                if not isinstance(raw_cwd, str):
+                    shell_policy_violations.append("bash:invalid-cwd")
+                else:
+                    shell_cwd = (ws / raw_cwd).resolve()
+                    if not (shell_cwd == ws or shell_cwd.is_relative_to(ws)):
+                        shell_policy_violations.append(f"bash:cwd-escape:{shell_cwd}")
             if tool in {"edit", "write"}:
                 raw_path = args.get("path") or args.get("file") or args.get("filePath")
                 if not isinstance(raw_path, str) or not raw_path.strip():
@@ -193,6 +219,7 @@ def inspect_jsonl(jsonl_text: str, workspace: str, write_roots: Iterable[str] | 
         and settled
         and bool(full_result.strip())
         and not result_too_large
+        and not shell_policy_violations
     )
     return {
         "integrity_ok": integrity_ok,
@@ -202,6 +229,7 @@ def inspect_jsonl(jsonl_text: str, workspace: str, write_roots: Iterable[str] | 
         "write_paths": sorted(set(write_paths)),
         "scope_violations": sorted(set(scope_violations)),
         "shell_used": shell_used,
+        "shell_policy_violations": sorted(set(shell_policy_violations)),
         "shell_scope_verifiable": not shell_used,
         "scope_enforcement": "observed edit/write tool paths",
         "result_chars": len(full_result),

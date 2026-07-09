@@ -72,6 +72,22 @@ def test_integrity_accepts_settled_scoped_write(tmp_path):
     assert audit["write_paths"] == [str((allowed / "file.txt").resolve())]
 
 
+def test_integrity_rejects_non_allowlisted_shell_program(tmp_path):
+    events = [
+        {"type": "tool_execution_start", "toolName": "bash", "args": {"program": "powershell", "args": [], "cwd": "."}},
+        {"type": "message_end", "message": {"role": "assistant", "stopReason": "stop", "content": [{"type": "text", "text": "done"}]}},
+        {"type": "agent_settled"},
+    ]
+    audit = inspect_jsonl(
+        "\n".join(json.dumps(event) for event in events),
+        str(tmp_path),
+        [str(tmp_path)],
+        shell_programs={"git": "git.exe"},
+    )
+    assert audit["integrity_ok"] is False
+    assert audit["shell_policy_violations"] == ["bash:program-not-allowlisted"]
+
+
 def test_missing_pi_executable_fails_closed(monkeypatch):
     monkeypatch.setattr("pi_harness.shutil.which", lambda _: None)
     with pytest.raises(ValueError, match="not found on PATH"):

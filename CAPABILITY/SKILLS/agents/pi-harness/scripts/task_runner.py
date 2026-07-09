@@ -114,6 +114,14 @@ def run_task(spec_path: Path) -> int:
 
     try:
         command = build_pi_command(spec["worker"], spec["prompt"], spec["pi_command"])
+        pi_env = os.environ.copy()
+        if spec["worker"].get("allow_shell"):
+            pi_env.update({
+                "PI_HARNESS_WORKSPACE": str(spec["worker"]["workspace"]),
+                "PI_HARNESS_WRITE_ROOTS": json.dumps(spec["worker"].get("write_roots", []), sort_keys=True),
+                "PI_HARNESS_SHELL_PROGRAMS": json.dumps(spec["worker"].get("shell_programs", {}), sort_keys=True),
+                "PI_HARNESS_SHELL_MAX_TIMEOUT": "120",
+            })
         with file_lock(lock_path):
             if read_json(task_path).get("status") == "cancelled":
                 return 1
@@ -131,6 +139,7 @@ def run_task(spec_path: Path) -> int:
                 close_fds=os.name != "nt",
                 creationflags=flags,
                 start_new_session=os.name != "nt",
+                env=pi_env,
             )
             registered = register_agent_pid(task_path, lock_path, process.pid)
             if registered.get("status") == "cancelled":
@@ -171,6 +180,7 @@ def run_task(spec_path: Path) -> int:
         raw,
         workspace=str(spec["worker"]["workspace"]),
         write_roots=spec["worker"].get("write_roots", []),
+        shell_programs=spec["worker"].get("shell_programs", {}),
     )
     if exit_code == 0 and not integrity["integrity_ok"]:
         failure = "Pi output failed integrity checks"

@@ -2,6 +2,15 @@
 
 # Changelog
 
+## 2026-07-09: Govern Pi shell execution
+
+- Replace Pi's free-form built-in `bash` path with a harness-owned governed
+  shell extension. Shell access now requires explicit native executable aliases,
+  literal argument arrays, a workspace-confined working directory, filtered
+  child environments, timeout/output caps, and structured audit events. The
+  harness validates shell program and cwd policy from Pi JSONL while continuing
+  to flag shell filesystem side effects as requiring independent diff review.
+
 ## 2026-07-09: Add persistent local Pi worker harness
 
 - Add the `pi-harness` skill for headless background delegation to the local Pi
