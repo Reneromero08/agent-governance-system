@@ -1,0 +1,9 @@
+{
+  "architecture": "x86_64",
+  "cc_version_first_line": "cc (Debian 14.2.0-19) 14.2.0",
+  "cpu_count": 6,
+  "cpu_model": "AMD Phenom(tm) II X6 1090T Processor",
+  "hostname": "catcas",
+  "kernel": "Linux catcas 6.12.86+deb13-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.12.86-1 (2026-05-08) x86_64 GNU/Linux",
+  "python_version": "Python 3.13.5"
+}

@@ -1,0 +1,86 @@
+[
+  {
+    "mode": "0o644",
+    "path": "TARGET_BUNDLE_VALIDATION_AFTER.json",
+    "sha256": "677757dd51e175fa53493bee544bb3fbdbdface59a3740abe083c2316d168b91",
+    "size": 293
+  },
+  {
+    "mode": "0o644",
+    "path": "TARGET_BUNDLE_VALIDATION_BEFORE.json",
+    "sha256": "677757dd51e175fa53493bee544bb3fbdbdface59a3740abe083c2316d168b91",
+    "size": 293
+  },
+  {
+    "mode": "0o644",
+    "path": "TARGET_IDENTITY_AFTER.json",
+    "sha256": "7962ca938d5d9b2cfa04db170b31d957122e99ed35f26b0ee4a4fb0642c381de",
+    "size": 342
+  },
+  {
+    "mode": "0o644",
+    "path": "TARGET_IDENTITY_AFTER.stdout",
+    "sha256": "7962ca938d5d9b2cfa04db170b31d957122e99ed35f26b0ee4a4fb0642c381de",
+    "size": 342
+  },
+  {
+    "mode": "0o644",
+    "path": "TARGET_IDENTITY_BEFORE.json",
+    "sha256": "7962ca938d5d9b2cfa04db170b31d957122e99ed35f26b0ee4a4fb0642c381de",
+    "size": 342
+  },
+  {
+    "mode": "0o644",
+    "path": "TARGET_IDENTITY_BEFORE.stdout",
+    "sha256": "7962ca938d5d9b2cfa04db170b31d957122e99ed35f26b0ee4a4fb0642c381de",
+    "size": 342
+  },
+  {
+    "mode": "0o644",
+    "path": "TARGET_PROCESS_STATE_AFTER.txt",
+    "sha256": "fada00827285907ddcf174d9648859890f2b68af4d96222cf281d307b8c4b5da",
+    "size": 35
+  },
+  {
+    "mode": "0o644",
+    "path": "TARGET_PROCESS_STATE_BEFORE.txt",
+    "sha256": "fada00827285907ddcf174d9648859890f2b68af4d96222cf281d307b8c4b5da",
+    "size": 35
+  },
+  {
+    "mode": "0o644",
+    "path": "TARGET_QUALIFICATION.stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0
+  },
+  {
+    "mode": "0o644",
+    "path": "TARGET_QUALIFICATION_RESULT.json",
+    "sha256": "16899a5ed2327467a5fa84d4e8cf3bbae28f56bc4a0321a1cd2f203ae94c3746",
+    "size": 970
+  },
+  {
+    "mode": "0o644",
+    "path": "TARGET_TRANSFER_DIGEST.txt",
+    "sha256": "c11ca3b4998d7d5230a46d4b39172cd9de1868b5c12ac4497e67e2d3e998a8be",
+    "size": 65
+  },
+  {
+    "mode": "0o644",
+    "path": "TARGET_TREE_AFTER.json",
+    "sha256": "ab583648b4e56f6270c128c1139da9edf6c7247fc0a37706de79a86aeffcdfe5",
+    "size": 2239
+  },
+  {
+    "mode": "0o644",
+    "path": "TARGET_TREE_BEFORE.json",
+    "sha256": "ab583648b4e56f6270c128c1139da9edf6c7247fc0a37706de79a86aeffcdfe5",
+    "size": 2239
+  },
+  {
+    "mode": "0o644",
+    "path": "TARGET_TREE_COMPARISON.json",
+    "sha256": "cae9eddc304c70cb00346377b2f28007c54817729b6cb35df82f0788e4eb1c84",
+    "size": 260
+  }
+]

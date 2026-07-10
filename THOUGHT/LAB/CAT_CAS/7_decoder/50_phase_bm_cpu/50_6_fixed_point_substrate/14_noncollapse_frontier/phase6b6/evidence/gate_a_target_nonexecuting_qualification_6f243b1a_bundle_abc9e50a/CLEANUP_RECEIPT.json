@@ -1,0 +1,8 @@
+{
+  "exact_execution_root_removed": true,
+  "exact_transfer_stage_removed": true,
+  "execution_root_absence_proven": true,
+  "forbidden_processes_remaining": [],
+  "schema_id": "CAT_CAS_PHASE6B6_GATE_A_CLEANUP_RECEIPT_V1",
+  "transfer_stage_absence_proven": true
+}

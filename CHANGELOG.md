@@ -2,6 +2,91 @@
 
 # Changelog
 
+## 2026-07-09: Phase 6B.6 Gate A target non-executing attempt adjudication
+
+- Admit the sealed `_02` replacement evidence namespace in the three existing
+  Gate A hosted workflows. The smoke and adapter protected-surface guards now
+  exclude only the historical packet and this exact replacement packet, while
+  the target-qualification workflow watches both exact evidence roots; all
+  other Phase 6B.6 evidence paths remain rejected.
+
+- Seal the one authorized `_02` replacement qualification at execution HEAD
+  `1ea708cfdc93083cc9386a6b1b14cf51d1ed8367`. The orchestrator ran exactly
+  once with no retry: all four remote namespaces were absent before the first
+  temp-prefix write, the no-drive runner and validate-only worker passed, all
+  three fail-closed process scans returned zero with raw listings and zero
+  forbidden hits, copy-back and bundle custody verified, and cleanup proved the
+  execution root and transfer stage absent. The current ledger consumes `_02`,
+  marks target non-executing qualification and its execution bundle qualified,
+  and keeps every downstream authority false. Historical evidence, adjudication,
+  Candidate V4, and the roadmap verdict remain unchanged.
+
+- Add the one new closed owner authority `gate_a_replacement_593e9920_02`
+  only after repaired source `593e9920be533603217cee93572d79b86cc65cf9`
+  passed exact-head hosted CI and an independent no-findings review. The later
+  authority-bearing commit leaves every protected execution path identical to
+  that reviewed source, records its own execution HEAD dynamically, permits one
+  orchestrator-only no-drive qualification, and forbids automatic retry. The
+  prior `_01` authority remains byte-identical, superseded-unconsumed, and at
+  zero executions. No target contact occurs in this authority commit.
+
+- Repair the replacement Gate A runner's remote namespace preflight so it is
+  the first target operation and performs no remote write. It proves the exact
+  execution root, transfer stage, and evidence archive absent and proves zero
+  paths match the authority-bound temporary prefix; any inspection error,
+  unobservable state, malformed receipt, or collision fails closed. Preserve
+  authority `gate_a_replacement_71ab1528_01` byte-for-byte as
+  superseded-unconsumed with zero executions and no evidence, and leave the
+  active authority basename absent pending exact-head CI and independent source
+  review. No target contact or downstream authority is created in this source
+  commit.
+
+- Reconcile the exact committed V2 project-owner authority for one replacement
+  target non-executing qualification. A new closed current-state ledger records
+  authority `gate_a_replacement_71ab1528_01` as created, authorized, unconsumed,
+  and not yet executed. The verifier now validates the real authority with the
+  production semantic and two-commit custody functions, including exact source
+  commit/tree/review binding, strict ancestry, protected-source immutability,
+  current-HEAD blob/worktree equality, one-execution cap, no retry, and false
+  downstream authority. Candidate V4 and the historical adjudication remain
+  preserved pre-decision records. No target contact or replacement execution
+  occurs in this reconciliation step.
+
+- Repair the future replacement-authority custody model so owner authorization
+  uses two commits without a Git self-reference: a reviewed source commit binds
+  the protected runner and execution inputs, and a later authority-bearing
+  commit adds the exact closed owner artifact. The validator now requires the
+  reviewed source to be a strict ancestor of execution `HEAD`, rejects any
+  protected-source drift, binds the authority artifact to the current committed
+  blob and working tree, and records execution `HEAD` dynamically. A disposable
+  Git-repository integration test covers the valid two-commit sequence plus
+  runner drift, unrelated source, uncommitted authority, and modified authority
+  rejection. No real replacement authority is created and the preserved
+  attempt, blocked Candidate V4, and downstream false-authority state are
+  unchanged.
+
+- Phase 6B.6: preserve the owner-authorized target non-executing qualification
+  attempt and adjudicate it incomplete. The attempt ran once and produced a
+  complete custody packet, but later review found that process absence was not
+  proven fail closed: the before/after scanner did not bind the inner
+  `ps -eo pid,comm,args` return code or raw process listing, and cleanup
+  hardcoded an empty remaining-process list. The full historical packet remains
+  byte-for-byte unchanged. Its original positive result and Candidate V3 remain
+  historical records, superseded for current-status and authority purposes by
+  the adjudication and blocked Candidate V4. The future runner now requires a
+  new exact owner-authorization artifact and a new absent authority-bound
+  namespace, records transfer timeouts, and uses one fail-closed raw process
+  scanner before qualification, after qualification, and after cleanup. No
+  replacement run, engineering smoke, hardware execution, calibration,
+  scientific acquisition, restoration, target coupling, or Small Wall work is
+  authorized. The dedicated workflow keeps checkout credentials unpersisted,
+  includes the missing exact public metadata for the repository's historical
+  gitlink so checkout can clean credentials without initializing that
+  submodule, and asserts the checkout authorization header is absent. No
+  execution-authority artifact exists and automatic retry remains false. Next
+  boundary:
+  `PROJECT_OWNER_DECISION_FOR_ONE_REPLACEMENT_GATE_A_TARGET_NONEXECUTING_QUALIFICATION`.
+
 ## 2026-07-02: Phase 6B.6 Gate A fail-closed target precondition custody
 
 - Phase 6B.6: close the two remaining fail-closed defects in the Gate A target

@@ -1,0 +1,201 @@
+{
+  "after_tree_canonical_sha256": "4dfe92c2b0ae121315f70ad408eb8555a4e1a6df5eabc79c5d2c81f837035e70",
+  "before_tree_canonical_sha256": "4dfe92c2b0ae121315f70ad408eb8555a4e1a6df5eabc79c5d2c81f837035e70",
+  "bundle_manifest_file_sha256": "ccb7866db67170083cb00d546c334b61772c8ef909131ec9c62ed21115facc94",
+  "bundle_tree_unchanged": true,
+  "cleanup_verified": true,
+  "copied_back_archive_sha256": "12adebbdea79c56db7760a9eb0ca4e1f7ae008e59257c619ad61a1752cb93477",
+  "copy_back_verified": true,
+  "current_identity_after": {
+    "architecture": "x86_64",
+    "cc_version_first_line": "cc (Debian 14.2.0-19) 14.2.0",
+    "cpu_count": 6,
+    "cpu_model": "AMD Phenom(tm) II X6 1090T Processor",
+    "hostname": "catcas",
+    "kernel": "Linux catcas 6.12.86+deb13-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.12.86-1 (2026-05-08) x86_64 GNU/Linux",
+    "python_version": "Python 3.13.5"
+  },
+  "current_identity_after_sha256": "7962ca938d5d9b2cfa04db170b31d957122e99ed35f26b0ee4a4fb0642c381de",
+  "current_identity_before": {
+    "architecture": "x86_64",
+    "cc_version_first_line": "cc (Debian 14.2.0-19) 14.2.0",
+    "cpu_count": 6,
+    "cpu_model": "AMD Phenom(tm) II X6 1090T Processor",
+    "hostname": "catcas",
+    "kernel": "Linux catcas 6.12.86+deb13-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.12.86-1 (2026-05-08) x86_64 GNU/Linux",
+    "python_version": "Python 3.13.5"
+  },
+  "current_identity_before_sha256": "7962ca938d5d9b2cfa04db170b31d957122e99ed35f26b0ee4a4fb0642c381de",
+  "deployment_archive_host_sha256": "63003e99fb1d25e96a641ae726d0e10891d543c73267a9cfcf114bfc2b0c6207",
+  "deployment_archive_local_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\gate_a_deploy_vigdwci0\\catcas_gate_a_bundle_abc9e50a.deploy.tar",
+  "deployment_archive_size": 81920,
+  "deployment_archive_target_sha256": "63003e99fb1d25e96a641ae726d0e10891d543c73267a9cfcf114bfc2b0c6207",
+  "deterministic_archive_sha256": "04eaf73336f373865f4e837baca9ff4fe893d3b1b16dd8b8288af1259ff96f9c",
+  "execution_bundle_sha256": "abc9e50a517d764c553adc5096378992028b29a8f62480a9ae217ebbd5202bba",
+  "execution_root_final_state": "ABSENT",
+  "execution_root_predeploy_state": "ABSENT",
+  "overall_status": "SUCCESS",
+  "owner_identity": "Raúl Romero",
+  "predecessor_adapter_package_digests": {
+    "predecessor_adapter_qualification_result_sha256": "1d9d2c62cbf81f72eeb9c40f02841f9f507d52eae8229da73fc2f81eb0a15223",
+    "predecessor_candidate_v2_sha256": "d8f190bc7f8c9904659cd697ed091b192843efe18f5f1d74d713282e889b060e",
+    "meaning": "PR #36 adapter-package result and Candidate V2 digests, not PR #37 target qualification result or Candidate V3 committed file hashes"
+  },
+  "target_qualification_result_committed_sha256": "51d24873d1993c517c91db8595f72390fa8e5ecd225dd62342698445aab9099f",
+  "candidate_v3_committed_sha256": "dc6af2537914c465d6be087cf723d18fe274afdbcc69525bc2fa89c4b049f563",
+  "digest_semantics_path": "DIGEST_SEMANTICS.json",
+  "self_hashing_policy": "The FINAL_BINDINGS committed byte hash is bound externally in DIGEST_SEMANTICS.json; the evidence inventory and FINAL_BINDINGS do not contain their own final byte hashes.",
+  "predecessor_identity": {
+    "architecture": "x86_64",
+    "cpu_model": "AMD Phenom(tm) II X6 1090T Processor",
+    "hostname": "catcas"
+  },
+  "predecessor_identity_sha256": "10618a70ceb3413d7507c22254d595d63632bb7ad9243dbe3dc6ebbaf13e19a4",
+  "qualification_execution_count": 1,
+  "qualification_exit_code": 0,
+  "qualification_json": {
+    "compiled": true,
+    "control_writes": 0,
+    "git_free": true,
+    "hardware_executions": 0,
+    "hardware_probes": 0,
+    "local_bundle_validation": {
+      "deterministic_archive_sha256": "04eaf73336f373865f4e837baca9ff4fe893d3b1b16dd8b8288af1259ff96f9c",
+      "execution_bundle_sha256": "abc9e50a517d764c553adc5096378992028b29a8f62480a9ae217ebbd5202bba",
+      "payload_file_count": 9,
+      "status": "GATE_A_TARGET_BUNDLE_VALIDATED",
+      "strict": true
+    },
+    "msr_accesses": 0,
+    "network_connections_opened": 0,
+    "null_baseline": "NO_DRIVE_ZERO_COUNT_BASELINE",
+    "receiver_captures": 0,
+    "sender_starts": 0,
+    "status": "GATE_A_TARGET_RUNNER_NO_DRIVE_QUALIFIED",
+    "worker_validate_only": {
+      "automatic_retry": false,
+      "control_writes": 0,
+      "hardware_executions": 0,
+      "msr_reads": 0,
+      "msr_writes": 0,
+      "receiver_captures": 0,
+      "sender_starts": 0,
+      "slot_count": 16,
+      "status": "GATE_A_WORKER_VALIDATE_ONLY_OK",
+      "validate_only": true
+    }
+  },
+  "qualification_status": "GATE_A_TARGET_RUNNER_NO_DRIVE_QUALIFIED",
+  "schema_id": "CAT_CAS_PHASE6B6_GATE_A_TARGET_NONEXEC_ORCHESTRATION_V1",
+  "strict_validation_after": {
+    "deterministic_archive_sha256": "04eaf73336f373865f4e837baca9ff4fe893d3b1b16dd8b8288af1259ff96f9c",
+    "execution_bundle_sha256": "abc9e50a517d764c553adc5096378992028b29a8f62480a9ae217ebbd5202bba",
+    "payload_file_count": 9,
+    "status": "GATE_A_TARGET_BUNDLE_VALIDATED",
+    "strict": true
+  },
+  "strict_validation_before": {
+    "deterministic_archive_sha256": "04eaf73336f373865f4e837baca9ff4fe893d3b1b16dd8b8288af1259ff96f9c",
+    "execution_bundle_sha256": "abc9e50a517d764c553adc5096378992028b29a8f62480a9ae217ebbd5202bba",
+    "payload_file_count": 9,
+    "status": "GATE_A_TARGET_BUNDLE_VALIDATED",
+    "strict": true
+  },
+  "target_evidence_archive_sha256": "12adebbdea79c56db7760a9eb0ca4e1f7ae008e59257c619ad61a1752cb93477",
+  "target_evidence_inventory": [
+    {
+      "mode": "0o644",
+      "path": "TARGET_BUNDLE_VALIDATION_AFTER.json",
+      "sha256": "677757dd51e175fa53493bee544bb3fbdbdface59a3740abe083c2316d168b91",
+      "size": 293
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_BUNDLE_VALIDATION_BEFORE.json",
+      "sha256": "677757dd51e175fa53493bee544bb3fbdbdface59a3740abe083c2316d168b91",
+      "size": 293
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_EVIDENCE_INVENTORY.json",
+      "sha256": "182b00d44734fad564ad0035f4817705fb8595036422f5781652a9198deeacfb",
+      "size": 2415
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_IDENTITY_AFTER.json",
+      "sha256": "7962ca938d5d9b2cfa04db170b31d957122e99ed35f26b0ee4a4fb0642c381de",
+      "size": 342
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_IDENTITY_AFTER.stdout",
+      "sha256": "7962ca938d5d9b2cfa04db170b31d957122e99ed35f26b0ee4a4fb0642c381de",
+      "size": 342
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_IDENTITY_BEFORE.json",
+      "sha256": "7962ca938d5d9b2cfa04db170b31d957122e99ed35f26b0ee4a4fb0642c381de",
+      "size": 342
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_IDENTITY_BEFORE.stdout",
+      "sha256": "7962ca938d5d9b2cfa04db170b31d957122e99ed35f26b0ee4a4fb0642c381de",
+      "size": 342
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_PROCESS_STATE_AFTER.txt",
+      "sha256": "fada00827285907ddcf174d9648859890f2b68af4d96222cf281d307b8c4b5da",
+      "size": 35
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_PROCESS_STATE_BEFORE.txt",
+      "sha256": "fada00827285907ddcf174d9648859890f2b68af4d96222cf281d307b8c4b5da",
+      "size": 35
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_QUALIFICATION.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_QUALIFICATION_RESULT.json",
+      "sha256": "16899a5ed2327467a5fa84d4e8cf3bbae28f56bc4a0321a1cd2f203ae94c3746",
+      "size": 970
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_TRANSFER_DIGEST.txt",
+      "sha256": "c11ca3b4998d7d5230a46d4b39172cd9de1868b5c12ac4497e67e2d3e998a8be",
+      "size": 65
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_TREE_AFTER.json",
+      "sha256": "ab583648b4e56f6270c128c1139da9edf6c7247fc0a37706de79a86aeffcdfe5",
+      "size": 2239
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_TREE_BEFORE.json",
+      "sha256": "ab583648b4e56f6270c128c1139da9edf6c7247fc0a37706de79a86aeffcdfe5",
+      "size": 2239
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_TREE_COMPARISON.json",
+      "sha256": "cae9eddc304c70cb00346377b2f28007c54817729b6cb35df82f0788e4eb1c84",
+      "size": 260
+    }
+  ],
+  "transfer_digest_match": true,
+  "transfer_stage_final_state": "ABSENT",
+  "transfer_stage_predeploy_state": "ABSENT",
+  "worker_validate_only_status": "GATE_A_WORKER_VALIDATE_ONLY_OK"
+}

@@ -1,0 +1,279 @@
+{
+  "adapter_no_drive": "GATE_A_ADAPTER_NO_DRIVE_QUALIFIED",
+  "authority_artifact_absent": true,
+  "bundle_double_build_equivalence": true,
+  "control_write_count": 0,
+  "forbidden_surface_scan": {
+    "matches": 0,
+    "status": "FORBIDDEN_SURFACE_SCAN_PASS"
+  },
+  "hardware_execution_count": 0,
+  "isolated_bundle_qualification": {
+    "authority_artifact_absent": true,
+    "authority_mutation_tests": {
+      "cases": [
+        "wrong_authority_bundle_digest",
+        "wrong_authority_host_adapter_blob",
+        "wrong_authority_target_runner_blob",
+        "wrong_authority_target_worker_blob",
+        "wrong_schedule_digest",
+        "wrong_namespace_digest",
+        "wrong_target_identity_digest",
+        "wrong_reviewed_adapter_head",
+        "wrong_review_id",
+        "wrong_target",
+        "wrong_remote_execution_root",
+        "wrong_remote_output_root",
+        "consumed_authority",
+        "execution_count_greater_than_one",
+        "owner_approval_false",
+        "automatic_retry_true",
+        "hardware_ran_true",
+        "calibration_authority_true",
+        "scientific_acquisition_authority_true",
+        "restoration_authority_true",
+        "target_coupling_authority_true",
+        "small_wall_authority_true"
+      ],
+      "negative_tests": 22,
+      "status": "ISOLATED_AUTHORITY_MUTATION_TESTS_PASS"
+    },
+    "bundle_mutation_tests": {
+      "cases": [
+        "missing_imported_module",
+        "missing_payload_file",
+        "extra_unexpected_payload_file",
+        "changed_payload_sha256",
+        "changed_payload_size",
+        "changed_package_path",
+        "changed_file_role",
+        "changed_manifest_execution_bundle_digest",
+        "changed_manifest_archive_digest",
+        "unsafe_relative_path",
+        "extra_manifest_property",
+        "manifest_symlink_mode",
+        "case_colliding_filename"
+      ],
+      "negative_tests": 13,
+      "on_disk_extras": {
+        "on_disk_case_collision": {
+          "performed": false,
+          "rejected": null
+        },
+        "on_disk_symlink_substitution": {
+          "performed": true,
+          "rejected": true
+        }
+      },
+      "status": "ISOLATED_BUNDLE_MUTATION_TESTS_PASS"
+    },
+    "bundle_root_git_free": true,
+    "c_compiler_present": false,
+    "control_write_count": 0,
+    "extracted_bundle_validation": {
+      "deterministic_archive_sha256": "04eaf73336f373865f4e837baca9ff4fe893d3b1b16dd8b8288af1259ff96f9c",
+      "execution_bundle_sha256": "abc9e50a517d764c553adc5096378992028b29a8f62480a9ae217ebbd5202bba",
+      "payload_file_count": 9,
+      "status": "GATE_A_TARGET_BUNDLE_VALIDATED",
+      "strict": true
+    },
+    "hardware_execution_count": 0,
+    "isolated_negative_tests": 46,
+    "msr_access_count": 0,
+    "network_connections_opened": 0,
+    "null_baseline": "NO_DRIVE_ZERO_COUNT_BASELINE",
+    "production_strict_custody_tests": {
+      "best_effort": {
+        "case_colliding_payload_filename": {
+          "performed": false,
+          "rejected": null
+        },
+        "symlink_extra_file": {
+          "performed": true,
+          "rejected": true
+        },
+        "symlink_payload_replacement": {
+          "performed": true,
+          "rejected": true
+        }
+      },
+      "cases": [
+        "unexpected_extra_python_file",
+        "unexpected_extra_json_file",
+        "unexpected_worker_prefixed_file",
+        "undeclared_pyc",
+        "undeclared_pyo",
+        "missing_payload_file",
+        "changed_payload_file"
+      ],
+      "negative_tests": 7,
+      "status": "ISOLATED_PRODUCTION_STRICT_CUSTODY_TESTS_PASS"
+    },
+    "receiver_capture_count": 0,
+    "require_isolated_origin": false,
+    "root_state_tests": {
+      "best_effort": {
+        "broken_symlink": {
+          "performed": true,
+          "rejected": true
+        },
+        "existing_symlink": {
+          "performed": true,
+          "rejected": true
+        }
+      },
+      "cases": [
+        "existing_directory",
+        "existing_regular_file",
+        "permission_error_unobservable",
+        "generic_oserror_unobservable"
+      ],
+      "negative_tests": 4,
+      "positively_absent_accepted": true,
+      "status": "ISOLATED_ROOT_STATE_TESTS_PASS"
+    },
+    "sender_start_count": 0,
+    "ssh_count": 0,
+    "status": "GATE_A_ISOLATED_BUNDLE_QUALIFICATION_PASS",
+    "synthetic_authority": {
+      "authority_written_outside_bundle": true,
+      "positively_absent_output_root_accepted": true,
+      "reached_intentionally_unused_live_sentinel": true,
+      "shared_validator_result": {
+        "execution_bundle_sha256": "abc9e50a517d764c553adc5096378992028b29a8f62480a9ae217ebbd5202bba",
+        "independent_review_id": 4619537286,
+        "reviewed_adapter_head": "1234567890abcdef1234567890abcdef12345678",
+        "status": "GATE_A_EXECUTION_AUTHORITY_EXACT"
+      },
+      "status": "ISOLATED_SYNTHETIC_AUTHORITY_VALIDATED"
+    },
+    "target_connection_count": 0,
+    "target_directory_creation_count": 0,
+    "target_process_count": 0,
+    "target_runner_no_drive": {
+      "compiled": false,
+      "control_writes": 0,
+      "git_free": true,
+      "hardware_executions": 0,
+      "hardware_probes": 0,
+      "local_bundle_validation": {
+        "deterministic_archive_sha256": "04eaf73336f373865f4e837baca9ff4fe893d3b1b16dd8b8288af1259ff96f9c",
+        "execution_bundle_sha256": "abc9e50a517d764c553adc5096378992028b29a8f62480a9ae217ebbd5202bba",
+        "payload_file_count": 9,
+        "status": "GATE_A_TARGET_BUNDLE_VALIDATED",
+        "strict": true
+      },
+      "msr_accesses": 0,
+      "network_connections_opened": 0,
+      "null_baseline": "NO_DRIVE_ZERO_COUNT_BASELINE",
+      "receiver_captures": 0,
+      "sender_starts": 0,
+      "status": "GATE_A_TARGET_RUNNER_NO_DRIVE_QUALIFIED",
+      "worker_validate_only": null
+    }
+  },
+  "msr_access_count": 0,
+  "mutation_tests": {
+    "authority": {
+      "cases": [
+        "authority_extra_top_level_field",
+        "authority_missing_top_level_field",
+        "authority_extra_state_field",
+        "authority_missing_state_field",
+        "authority_wrong_schema_id",
+        "authority_wrong_reviewed_adapter_head",
+        "authority_wrong_independent_review_id",
+        "authority_review_id_zero",
+        "authority_wrong_bundle_digest",
+        "authority_wrong_host_adapter_blob",
+        "authority_wrong_target_runner_blob",
+        "authority_wrong_target_worker_blob",
+        "authority_wrong_schedule_digest",
+        "authority_wrong_namespace_digest",
+        "authority_wrong_target_identity_digest",
+        "authority_wrong_target",
+        "authority_wrong_remote_execution_root",
+        "authority_wrong_remote_output_root",
+        "authority_maximum_execution_count_gt_one",
+        "authority_consumed_true",
+        "authority_project_owner_approved_false",
+        "authority_artifact_created_false",
+        "authority_engineering_smoke_authorized_false",
+        "authority_hardware_ran_true",
+        "authority_automatic_retry_true",
+        "authority_calibration_authorized_true",
+        "authority_scientific_acquisition_authorized_true",
+        "authority_restoration_authorized_true",
+        "authority_target_coupling_authorized_true",
+        "authority_small_wall_authorized_true",
+        "authority_file_sha256_mismatch"
+      ],
+      "host_target_equivalence": {
+        "execution_bundle_sha256": "abc9e50a517d764c553adc5096378992028b29a8f62480a9ae217ebbd5202bba",
+        "independent_review_id": 4618767711,
+        "reviewed_adapter_head": "1234567890abcdef1234567890abcdef12345678",
+        "status": "GATE_A_EXECUTION_AUTHORITY_EXACT"
+      },
+      "negative_tests": 31,
+      "status": "AUTHORITY_MUTATION_TESTS_PASS"
+    },
+    "manifest": {
+      "cases": [
+        "manifest_execution_bundle_sha256_changed",
+        "manifest_deterministic_archive_sha256_changed",
+        "manifest_per_file_sha256_changed",
+        "manifest_byte_size_changed",
+        "manifest_source_repository_path_changed",
+        "manifest_package_path_changed",
+        "manifest_role_changed",
+        "manifest_git_blob_sha1_changed",
+        "manifest_git_mode_changed",
+        "manifest_missing_file",
+        "manifest_extra_file",
+        "manifest_duplicate_package_path",
+        "manifest_case_collision",
+        "manifest_unsafe_relative_path",
+        "manifest_symlink_mode",
+        "manifest_submodule_mode",
+        "manifest_extra_top_level_property"
+      ],
+      "negative_tests": 17,
+      "status": "MANIFEST_MUTATION_TESTS_PASS"
+    },
+    "negative_tests": 63,
+    "other": {
+      "cases": [
+        "schedule_slot_sequence_rejection",
+        "schedule_target_rejection",
+        "namespace_digest_rejection",
+        "slot_drive_mutation_rejection",
+        "step_sender_epoch_mutation_rejection",
+        "namespace_extra_property_rejection",
+        "worktree_byte_mutation_behavior",
+        "index_byte_mutation_detection",
+        "cleanup_without_copy_back_receipt_rejection",
+        "authority_bypass_rejection:--deploy",
+        "authority_bypass_rejection:--connect",
+        "authority_bypass_rejection:--start-sender",
+        "authority_bypass_rejection:--start-capture",
+        "authority_bypass_rejection:--write-control",
+        "authority_bypass_rejection:--cleanup-after-verified-copy"
+      ],
+      "negative_tests": 15,
+      "status": "OTHER_MUTATION_TESTS_PASS"
+    },
+    "status": "MUTATION_TESTS_PASS"
+  },
+  "null_baseline": "NO_DRIVE_ZERO_COUNT_BASELINE",
+  "records": {
+    "candidate_v2_sha256": "d8f190bc7f8c9904659cd697ed091b192843efe18f5f1d74d713282e889b060e",
+    "execution_bundle_sha256": "abc9e50a517d764c553adc5096378992028b29a8f62480a9ae217ebbd5202bba",
+    "manifest_sha256": "ccb7866db67170083cb00d546c334b61772c8ef909131ec9c62ed21115facc94",
+    "result_sha256": "1d9d2c62cbf81f72eeb9c40f02841f9f507d52eae8229da73fc2f81eb0a15223",
+    "status": "RECORDS_VALID"
+  },
+  "sender_start_count": 0,
+  "status": "GATE_A_ADAPTER_QUALIFICATION_PASS",
+  "target_connection_count": 0,
+  "total_negative_tests": 109
+}

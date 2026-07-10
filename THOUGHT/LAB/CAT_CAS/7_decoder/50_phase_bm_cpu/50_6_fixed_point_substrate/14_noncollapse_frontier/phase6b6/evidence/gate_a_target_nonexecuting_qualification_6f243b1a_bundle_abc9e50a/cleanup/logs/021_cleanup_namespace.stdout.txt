@@ -1,0 +1,1 @@
+{"exact_execution_root_removed": true, "exact_transfer_stage_removed": true, "execution_root_absence_proven": true, "execution_root_final_state": "ABSENT", "forbidden_processes_remaining": [], "transfer_stage_absence_proven": true, "transfer_stage_final_state": "ABSENT"}

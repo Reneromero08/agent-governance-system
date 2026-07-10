@@ -1,0 +1,4 @@
+[submodule "tripartite_discord"]
+	path = THOUGHT/LAB/FORMULA/v1/questions/critical_q54_1980/external_data/tripartite_discord
+	url = https://github.com/Vaishali-quantum/Tripartite-Quantum-Discord-Data.git
+	update = none
