@@ -1,0 +1,32 @@
+{
+  "compiled": true,
+  "control_writes": 0,
+  "git_free": true,
+  "hardware_executions": 0,
+  "hardware_probes": 0,
+  "local_bundle_validation": {
+    "deterministic_archive_sha256": "04eaf73336f373865f4e837baca9ff4fe893d3b1b16dd8b8288af1259ff96f9c",
+    "execution_bundle_sha256": "abc9e50a517d764c553adc5096378992028b29a8f62480a9ae217ebbd5202bba",
+    "payload_file_count": 9,
+    "status": "GATE_A_TARGET_BUNDLE_VALIDATED",
+    "strict": true
+  },
+  "msr_accesses": 0,
+  "network_connections_opened": 0,
+  "null_baseline": "NO_DRIVE_ZERO_COUNT_BASELINE",
+  "receiver_captures": 0,
+  "sender_starts": 0,
+  "status": "GATE_A_TARGET_RUNNER_NO_DRIVE_QUALIFIED",
+  "worker_validate_only": {
+    "automatic_retry": false,
+    "control_writes": 0,
+    "hardware_executions": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "receiver_captures": 0,
+    "sender_starts": 0,
+    "slot_count": 16,
+    "status": "GATE_A_WORKER_VALIDATE_ONLY_OK",
+    "validate_only": true
+  }
+}

@@ -10,3 +10,6 @@
 *.jpeg binary
 
 *.py text eol=lf
+
+# Preserve the exact one-shot Gate A replacement evidence bytes and bound hashes.
+THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_target_nonexecuting_qualification_replacement_gate_a_replacement_593e9920_02/** binary

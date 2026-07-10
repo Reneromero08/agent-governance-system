@@ -1,0 +1,1 @@
+{"extracted_to": "/root/catcas_phase6b6_gate_a_target_nonexec_gate_a_replacement_593e9920_02", "status": "EXTRACTED"}

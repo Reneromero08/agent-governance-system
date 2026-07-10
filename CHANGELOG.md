@@ -4,6 +4,17 @@
 
 ## 2026-07-09: Phase 6B.6 Gate A target non-executing attempt adjudication
 
+- Seal the one authorized `_02` replacement qualification at execution HEAD
+  `1ea708cfdc93083cc9386a6b1b14cf51d1ed8367`. The orchestrator ran exactly
+  once with no retry: all four remote namespaces were absent before the first
+  temp-prefix write, the no-drive runner and validate-only worker passed, all
+  three fail-closed process scans returned zero with raw listings and zero
+  forbidden hits, copy-back and bundle custody verified, and cleanup proved the
+  execution root and transfer stage absent. The current ledger consumes `_02`,
+  marks target non-executing qualification and its execution bundle qualified,
+  and keeps every downstream authority false. Historical evidence, adjudication,
+  Candidate V4, and the roadmap verdict remain unchanged.
+
 - Add the one new closed owner authority `gate_a_replacement_593e9920_02`
   only after repaired source `593e9920be533603217cee93572d79b86cc65cf9`
   passed exact-head hosted CI and an independent no-findings review. The later

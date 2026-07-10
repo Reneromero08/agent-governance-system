@@ -1,0 +1,310 @@
+{
+  "_evidence_inventory_sha256": "1c882900775358c634353b34394d79bcd19c509a003190fb214b1f2985505b20",
+  "after_tree_canonical_sha256": "4dfe92c2b0ae121315f70ad408eb8555a4e1a6df5eabc79c5d2c81f837035e70",
+  "authorized_source_commit": "593e9920be533603217cee93572d79b86cc65cf9",
+  "authorized_source_review_id": "PR_37_GATE_A_FOUR_WAY_REMOTE_NAMESPACE_PREFLIGHT_REVIEW",
+  "authorized_source_tree_sha1": "d9488e9968023a98fabc0808530fdbc731d5831a",
+  "automatic_retry": false,
+  "before_tree_canonical_sha256": "4dfe92c2b0ae121315f70ad408eb8555a4e1a6df5eabc79c5d2c81f837035e70",
+  "bundle_manifest_file_sha256": "ccb7866db67170083cb00d546c334b61772c8ef909131ec9c62ed21115facc94",
+  "bundle_tree_unchanged": true,
+  "cleanup_verified": true,
+  "copied_back_archive_sha256": "960426405b81571b762dfff833fc3b99d726667fd64f222bea41ddcebb056d6d",
+  "copy_back_verified": true,
+  "current_identity_after": {
+    "architecture": "x86_64",
+    "cc_version_first_line": "cc (Debian 14.2.0-19) 14.2.0",
+    "cpu_count": 6,
+    "cpu_model": "AMD Phenom(tm) II X6 1090T Processor",
+    "hostname": "catcas",
+    "kernel": "Linux catcas 6.12.86+deb13-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.12.86-1 (2026-05-08) x86_64 GNU/Linux",
+    "python_version": "Python 3.13.5"
+  },
+  "current_identity_after_sha256": "7962ca938d5d9b2cfa04db170b31d957122e99ed35f26b0ee4a4fb0642c381de",
+  "current_identity_before": {
+    "architecture": "x86_64",
+    "cc_version_first_line": "cc (Debian 14.2.0-19) 14.2.0",
+    "cpu_count": 6,
+    "cpu_model": "AMD Phenom(tm) II X6 1090T Processor",
+    "hostname": "catcas",
+    "kernel": "Linux catcas 6.12.86+deb13-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.12.86-1 (2026-05-08) x86_64 GNU/Linux",
+    "python_version": "Python 3.13.5"
+  },
+  "current_identity_before_sha256": "7962ca938d5d9b2cfa04db170b31d957122e99ed35f26b0ee4a4fb0642c381de",
+  "deployment_archive_host_sha256": "63003e99fb1d25e96a641ae726d0e10891d543c73267a9cfcf114bfc2b0c6207",
+  "deployment_archive_local_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\gate_a_deploy_x28rrcg5\\catcas_gate_a_bundle_gate_a_replacement_593e9920_02.deploy.tar",
+  "deployment_archive_size": 81920,
+  "deployment_archive_target_sha256": "63003e99fb1d25e96a641ae726d0e10891d543c73267a9cfcf114bfc2b0c6207",
+  "deterministic_archive_sha256": "04eaf73336f373865f4e837baca9ff4fe893d3b1b16dd8b8288af1259ff96f9c",
+  "evidence_archive_predeploy_state": "ABSENT",
+  "execution_bundle_sha256": "abc9e50a517d764c553adc5096378992028b29a8f62480a9ae217ebbd5202bba",
+  "execution_head": "1ea708cfdc93083cc9386a6b1b14cf51d1ed8367",
+  "execution_root_final_state": "ABSENT",
+  "execution_root_predeploy_state": "ABSENT",
+  "historical_authority_consumed": true,
+  "historical_evidence_dir": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_target_nonexecuting_qualification_6f243b1a_bundle_abc9e50a",
+  "maximum_target_qualification_executions": 1,
+  "overall_status": "SUCCESS",
+  "predecessor_identity": {
+    "architecture": "x86_64",
+    "cpu_model": "AMD Phenom(tm) II X6 1090T Processor",
+    "hostname": "catcas"
+  },
+  "predecessor_identity_sha256": "10618a70ceb3413d7507c22254d595d63632bb7ad9243dbe3dc6ebbaf13e19a4",
+  "process_scan_after": {
+    "command": [
+      "ps",
+      "-eo",
+      "pid,comm,args"
+    ],
+    "command_sha256": "d40de9582819745d28df782d252579af4b7bdbbef98018d72cb2096a9ea87fb8",
+    "forbidden_process_filter_evaluated": true,
+    "forbidden_process_hits": [],
+    "ps_executed_successfully": true,
+    "raw_process_listing": "    PID COMMAND         COMMAND\n      1 systemd         /sbin/init\n      2 kthreadd        [kthreadd]\n      3 pool_workqueue_ [pool_workqueue_release]\n      4 kworker/R-kvfre [kworker/R-kvfree_rcu_reclaim]\n      5 kworker/R-rcu_g [kworker/R-rcu_gp]\n      6 kworker/R-sync_ [kworker/R-sync_wq]\n      7 kworker/R-slub_ [kworker/R-slub_flushwq]\n      8 kworker/R-netns [kworker/R-netns]\n      9 kworker/0:0-eve [kworker/0:0-events]\n     11 kworker/0:0H-kb [kworker/0:0H-kblockd]\n     13 kworker/R-mm_pe [kworker/R-mm_percpu_wq]\n     14 rcu_tasks_kthre [rcu_tasks_kthread]\n     15 rcu_tasks_rude_ [rcu_tasks_rude_kthread]\n     16 rcu_tasks_trace [rcu_tasks_trace_kthread]\n     17 ksoftirqd/0     [ksoftirqd/0]\n     18 rcu_preempt     [rcu_preempt]\n     19 rcuog/0         [rcuog/0]\n     20 rcuop/0         [rcuop/0]\n     21 rcu_exp_par_gp_ [rcu_exp_par_gp_kthread_worker/0]\n     22 rcu_exp_gp_kthr [rcu_exp_gp_kthread_worker]\n     23 migration/0     [migration/0]\n     24 idle_inject/0   [idle_inject/0]\n     25 cpuhp/0         [cpuhp/0]\n     26 cpuhp/1         [cpuhp/1]\n     27 idle_inject/1   [idle_inject/1]\n     28 migration/1     [migration/1]\n     29 ksoftirqd/1     [ksoftirqd/1]\n     31 kworker/1:0H-ev [kworker/1:0H-events_highpri]\n     32 rcuop/1         [rcuop/1]\n     33 cpuhp/2         [cpuhp/2]\n     34 idle_inject/2   [idle_inject/2]\n     35 migration/2     [migration/2]\n     36 ksoftirqd/2     [ksoftirqd/2]\n     37 kworker/2:0-eve [kworker/2:0-events]\n     38 kworker/2:0H    [kworker/2:0H]\n     39 rcuop/2         [rcuop/2]\n     40 cpuhp/3         [cpuhp/3]\n     41 idle_inject/3   [idle_inject/3]\n     42 migration/3     [migration/3]\n     43 ksoftirqd/3     [ksoftirqd/3]\n     44 kworker/3:0-eve [kworker/3:0-events]\n     45 kworker/3:0H-kb [kworker/3:0H-kblockd]\n     46 rcuog/3         [rcuog/3]\n     47 rcuop/3         [rcuop/3]\n     48 cpuhp/4         [cpuhp/4]\n     49 idle_inject/4   [idle_inject/4]\n     50 migration/4     [migration/4]\n     51 ksoftirqd/4     [ksoftirqd/4]\n     52 kworker/4:0-eve [kworker/4:0-events]\n     53 kworker/4:0H    [kworker/4:0H]\n     54 rcuop/4         [rcuop/4]\n     55 cpuhp/5         [cpuhp/5]\n     56 idle_inject/5   [idle_inject/5]\n     57 migration/5     [migration/5]\n     58 ksoftirqd/5     [ksoftirqd/5]\n     59 kworker/5:0-eve [kworker/5:0-events]\n     60 kworker/5:0H    [kworker/5:0H]\n     61 rcuop/5         [rcuop/5]\n     67 kworker/u24:5-e [kworker/u24:5-events_unbound]\n     68 kdevtmpfs       [kdevtmpfs]\n     69 kworker/R-inet_ [kworker/R-inet_frag_wq]\n     70 kauditd         [kauditd]\n     71 khungtaskd      [khungtaskd]\n     72 oom_reaper      [oom_reaper]\n     73 kworker/R-write [kworker/R-writeback]\n     74 kcompactd0      [kcompactd0]\n     75 ksmd            [ksmd]\n     76 khugepaged      [khugepaged]\n     77 kworker/R-kinte [kworker/R-kintegrityd]\n     78 kworker/R-kbloc [kworker/R-kblockd]\n     79 kworker/R-blkcg [kworker/R-blkcg_punt_bio]\n     80 irq/9-acpi      [irq/9-acpi]\n     81 kworker/1:1-eve [kworker/1:1-events]\n     82 kworker/R-tpm_d [kworker/R-tpm_dev_wq]\n     83 kworker/R-edac- [kworker/R-edac-poller]\n     84 kworker/R-devfr [kworker/R-devfreq_wq]\n     85 kworker/R-quota [kworker/R-quota_events_unbound]\n     86 kworker/1:1H-kb [kworker/1:1H-kblockd]\n     87 kswapd0         [kswapd0]\n     94 kworker/R-kthro [kworker/R-kthrotld]\n     98 kworker/R-acpi_ [kworker/R-acpi_thermal_pm]\n     99 kworker/R-mld   [kworker/R-mld]\n    100 kworker/R-ipv6_ [kworker/R-ipv6_addrconf]\n    105 kworker/R-kstrp [kworker/R-kstrp]\n    107 kworker/u25:0   [kworker/u25:0]\n    163 kworker/u24:6-e [kworker/u24:6-events_unbound]\n    173 kworker/0:1H    [kworker/0:1H]\n    224 watchdogd       [watchdogd]\n    226 kworker/R-ata_s [kworker/R-ata_sff]\n    227 scsi_eh_0       [scsi_eh_0]\n    228 kworker/R-scsi_ [kworker/R-scsi_tmf_0]\n    229 scsi_eh_1       [scsi_eh_1]\n    230 kworker/R-scsi_ [kworker/R-scsi_tmf_1]\n    232 scsi_eh_2       [scsi_eh_2]\n    233 kworker/R-scsi_ [kworker/R-scsi_tmf_2]\n    234 scsi_eh_3       [scsi_eh_3]\n    235 kworker/R-scsi_ [kworker/R-scsi_tmf_3]\n    237 scsi_eh_4       [scsi_eh_4]\n    238 kworker/R-scsi_ [kworker/R-scsi_tmf_4]\n    239 scsi_eh_5       [scsi_eh_5]\n    240 kworker/R-scsi_ [kworker/R-scsi_tmf_5]\n    244 kworker/4:2-eve [kworker/4:2-events]\n    275 jbd2/sda2-8     [jbd2/sda2-8]\n    276 kworker/R-ext4- [kworker/R-ext4-rsv-conversion]\n    290 kworker/2:1     [kworker/2:1]\n    291 kworker/3:1-eve [kworker/3:1-events]\n    292 kworker/5:1     [kworker/5:1]\n    320 systemd-journal /usr/lib/systemd/systemd-journald\n    337 kworker/3:1H    [kworker/3:1H]\n    366 systemd-timesyn /usr/lib/systemd/systemd-timesyncd\n    374 systemd-udevd   /usr/lib/systemd/systemd-udevd\n    378 psimon          [psimon]\n    588 cron            /usr/sbin/cron -f\n    589 dbus-daemon     /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only\n    593 systemd-logind  /usr/lib/systemd/systemd-logind\n    651 kworker/R-nvkm- [kworker/R-nvkm-disp]\n    652 kworker/R-ttm   [kworker/R-ttm]\n    653 card0-crtc0     [card0-crtc0]\n    654 card0-crtc1     [card0-crtc1]\n    655 card0-crtc2     [card0-crtc2]\n    656 card0-crtc3     [card0-crtc3]\n    723 agetty          /sbin/agetty -o -- \\u --noreset --noclear - linux\n    724 sshd            sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups\n    803 kworker/u24:0-e [kworker/u24:0-events_power_efficient]\n    918 kworker/1:2-cgr [kworker/1:2-cgroup_free]\n    947 kworker/0:1-cgr [kworker/0:1-cgroup_free]\n    958 psimon          [psimon]\n    960 systemd         /usr/lib/systemd/systemd --user\n    961 kworker/1:0     [kworker/1:0]\n    963 (sd-pam)        (sd-pam)\n    968 psimon          [psimon]\n    982 kworker/0:2-cgr [kworker/0:2-cgroup_free]\n   1103 sshd-session    sshd-session: root [priv]\n   1110 sshd-session    sshd-session: root@notty\n   1111 python3         python3 -\n   1112 ps              ps -eo pid,comm,args\n",
+    "raw_process_listing_base64": "ICAgIFBJRCBDT01NQU5EICAgICAgICAgQ09NTUFORAogICAgICAxIHN5c3RlbWQgICAgICAgICAvc2Jpbi9pbml0CiAgICAgIDIga3RocmVhZGQgICAgICAgIFtrdGhyZWFkZF0KICAgICAgMyBwb29sX3dvcmtxdWV1ZV8gW3Bvb2xfd29ya3F1ZXVlX3JlbGVhc2VdCiAgICAgIDQga3dvcmtlci9SLWt2ZnJlIFtrd29ya2VyL1Ita3ZmcmVlX3JjdV9yZWNsYWltXQogICAgICA1IGt3b3JrZXIvUi1yY3VfZyBba3dvcmtlci9SLXJjdV9ncF0KICAgICAgNiBrd29ya2VyL1Itc3luY18gW2t3b3JrZXIvUi1zeW5jX3dxXQogICAgICA3IGt3b3JrZXIvUi1zbHViXyBba3dvcmtlci9SLXNsdWJfZmx1c2h3cV0KICAgICAgOCBrd29ya2VyL1ItbmV0bnMgW2t3b3JrZXIvUi1uZXRuc10KICAgICAgOSBrd29ya2VyLzA6MC1ldmUgW2t3b3JrZXIvMDowLWV2ZW50c10KICAgICAxMSBrd29ya2VyLzA6MEgta2IgW2t3b3JrZXIvMDowSC1rYmxvY2tkXQogICAgIDEzIGt3b3JrZXIvUi1tbV9wZSBba3dvcmtlci9SLW1tX3BlcmNwdV93cV0KICAgICAxNCByY3VfdGFza3Nfa3RocmUgW3JjdV90YXNrc19rdGhyZWFkXQogICAgIDE1IHJjdV90YXNrc19ydWRlXyBbcmN1X3Rhc2tzX3J1ZGVfa3RocmVhZF0KICAgICAxNiByY3VfdGFza3NfdHJhY2UgW3JjdV90YXNrc190cmFjZV9rdGhyZWFkXQogICAgIDE3IGtzb2Z0aXJxZC8wICAgICBba3NvZnRpcnFkLzBdCiAgICAgMTggcmN1X3ByZWVtcHQgICAgIFtyY3VfcHJlZW1wdF0KICAgICAxOSByY3VvZy8wICAgICAgICAgW3JjdW9nLzBdCiAgICAgMjAgcmN1b3AvMCAgICAgICAgIFtyY3VvcC8wXQogICAgIDIxIHJjdV9leHBfcGFyX2dwXyBbcmN1X2V4cF9wYXJfZ3Bfa3RocmVhZF93b3JrZXIvMF0KICAgICAyMiByY3VfZXhwX2dwX2t0aHIgW3JjdV9leHBfZ3Bfa3RocmVhZF93b3JrZXJdCiAgICAgMjMgbWlncmF0aW9uLzAgICAgIFttaWdyYXRpb24vMF0KICAgICAyNCBpZGxlX2luamVjdC8wICAgW2lkbGVfaW5qZWN0LzBdCiAgICAgMjUgY3B1aHAvMCAgICAgICAgIFtjcHVocC8wXQogICAgIDI2IGNwdWhwLzEgICAgICAgICBbY3B1aHAvMV0KICAgICAyNyBpZGxlX2luamVjdC8xICAgW2lkbGVfaW5qZWN0LzFdCiAgICAgMjggbWlncmF0aW9uLzEgICAgIFttaWdyYXRpb24vMV0KICAgICAyOSBrc29mdGlycWQvMSAgICAgW2tzb2Z0aXJxZC8xXQogICAgIDMxIGt3b3JrZXIvMTowSC1ldiBba3dvcmtlci8xOjBILWV2ZW50c19oaWdocHJpXQogICAgIDMyIHJjdW9wLzEgICAgICAgICBbcmN1b3AvMV0KICAgICAzMyBjcHVocC8yICAgICAgICAgW2NwdWhwLzJdCiAgICAgMzQgaWRsZV9pbmplY3QvMiAgIFtpZGxlX2luamVjdC8yXQogICAgIDM1IG1pZ3JhdGlvbi8yICAgICBbbWlncmF0aW9uLzJdCiAgICAgMzYga3NvZnRpcnFkLzIgICAgIFtrc29mdGlycWQvMl0KICAgICAzNyBrd29ya2VyLzI6MC1ldmUgW2t3b3JrZXIvMjowLWV2ZW50c10KICAgICAzOCBrd29ya2VyLzI6MEggICAgW2t3b3JrZXIvMjowSF0KICAgICAzOSByY3VvcC8yICAgICAgICAgW3JjdW9wLzJdCiAgICAgNDAgY3B1aHAvMyAgICAgICAgIFtjcHVocC8zXQogICAgIDQxIGlkbGVfaW5qZWN0LzMgICBbaWRsZV9pbmplY3QvM10KICAgICA0MiBtaWdyYXRpb24vMyAgICAgW21pZ3JhdGlvbi8zXQogICAgIDQzIGtzb2Z0aXJxZC8zICAgICBba3NvZnRpcnFkLzNdCiAgICAgNDQga3dvcmtlci8zOjAtZXZlIFtrd29ya2VyLzM6MC1ldmVudHNdCiAgICAgNDUga3dvcmtlci8zOjBILWtiIFtrd29ya2VyLzM6MEgta2Jsb2NrZF0KICAgICA0NiByY3VvZy8zICAgICAgICAgW3JjdW9nLzNdCiAgICAgNDcgcmN1b3AvMyAgICAgICAgIFtyY3VvcC8zXQogICAgIDQ4IGNwdWhwLzQgICAgICAgICBbY3B1aHAvNF0KICAgICA0OSBpZGxlX2luamVjdC80ICAgW2lkbGVfaW5qZWN0LzRdCiAgICAgNTAgbWlncmF0aW9uLzQgICAgIFttaWdyYXRpb24vNF0KICAgICA1MSBrc29mdGlycWQvNCAgICAgW2tzb2Z0aXJxZC80XQogICAgIDUyIGt3b3JrZXIvNDowLWV2ZSBba3dvcmtlci80OjAtZXZlbnRzXQogICAgIDUzIGt3b3JrZXIvNDowSCAgICBba3dvcmtlci80OjBIXQogICAgIDU0IHJjdW9wLzQgICAgICAgICBbcmN1b3AvNF0KICAgICA1NSBjcHVocC81ICAgICAgICAgW2NwdWhwLzVdCiAgICAgNTYgaWRsZV9pbmplY3QvNSAgIFtpZGxlX2luamVjdC81XQogICAgIDU3IG1pZ3JhdGlvbi81ICAgICBbbWlncmF0aW9uLzVdCiAgICAgNTgga3NvZnRpcnFkLzUgICAgIFtrc29mdGlycWQvNV0KICAgICA1OSBrd29ya2VyLzU6MC1ldmUgW2t3b3JrZXIvNTowLWV2ZW50c10KICAgICA2MCBrd29ya2VyLzU6MEggICAgW2t3b3JrZXIvNTowSF0KICAgICA2MSByY3VvcC81ICAgICAgICAgW3JjdW9wLzVdCiAgICAgNjcga3dvcmtlci91MjQ6NS1lIFtrd29ya2VyL3UyNDo1LWV2ZW50c191bmJvdW5kXQogICAgIDY4IGtkZXZ0bXBmcyAgICAgICBba2RldnRtcGZzXQogICAgIDY5IGt3b3JrZXIvUi1pbmV0XyBba3dvcmtlci9SLWluZXRfZnJhZ193cV0KICAgICA3MCBrYXVkaXRkICAgICAgICAgW2thdWRpdGRdCiAgICAgNzEga2h1bmd0YXNrZCAgICAgIFtraHVuZ3Rhc2tkXQogICAgIDcyIG9vbV9yZWFwZXIgICAgICBbb29tX3JlYXBlcl0KICAgICA3MyBrd29ya2VyL1Itd3JpdGUgW2t3b3JrZXIvUi13cml0ZWJhY2tdCiAgICAgNzQga2NvbXBhY3RkMCAgICAgIFtrY29tcGFjdGQwXQogICAgIDc1IGtzbWQgICAgICAgICAgICBba3NtZF0KICAgICA3NiBraHVnZXBhZ2VkICAgICAgW2todWdlcGFnZWRdCiAgICAgNzcga3dvcmtlci9SLWtpbnRlIFtrd29ya2VyL1Ita2ludGVncml0eWRdCiAgICAgNzgga3dvcmtlci9SLWtibG9jIFtrd29ya2VyL1Ita2Jsb2NrZF0KICAgICA3OSBrd29ya2VyL1ItYmxrY2cgW2t3b3JrZXIvUi1ibGtjZ19wdW50X2Jpb10KICAgICA4MCBpcnEvOS1hY3BpICAgICAgW2lycS85LWFjcGldCiAgICAgODEga3dvcmtlci8xOjEtZXZlIFtrd29ya2VyLzE6MS1ldmVudHNdCiAgICAgODIga3dvcmtlci9SLXRwbV9kIFtrd29ya2VyL1ItdHBtX2Rldl93cV0KICAgICA4MyBrd29ya2VyL1ItZWRhYy0gW2t3b3JrZXIvUi1lZGFjLXBvbGxlcl0KICAgICA4NCBrd29ya2VyL1ItZGV2ZnIgW2t3b3JrZXIvUi1kZXZmcmVxX3dxXQogICAgIDg1IGt3b3JrZXIvUi1xdW90YSBba3dvcmtlci9SLXF1b3RhX2V2ZW50c191bmJvdW5kXQogICAgIDg2IGt3b3JrZXIvMToxSC1rYiBba3dvcmtlci8xOjFILWtibG9ja2RdCiAgICAgODcga3N3YXBkMCAgICAgICAgIFtrc3dhcGQwXQogICAgIDk0IGt3b3JrZXIvUi1rdGhybyBba3dvcmtlci9SLWt0aHJvdGxkXQogICAgIDk4IGt3b3JrZXIvUi1hY3BpXyBba3dvcmtlci9SLWFjcGlfdGhlcm1hbF9wbV0KICAgICA5OSBrd29ya2VyL1ItbWxkICAgW2t3b3JrZXIvUi1tbGRdCiAgICAxMDAga3dvcmtlci9SLWlwdjZfIFtrd29ya2VyL1ItaXB2Nl9hZGRyY29uZl0KICAgIDEwNSBrd29ya2VyL1Ita3N0cnAgW2t3b3JrZXIvUi1rc3RycF0KICAgIDEwNyBrd29ya2VyL3UyNTowICAgW2t3b3JrZXIvdTI1OjBdCiAgICAxNjMga3dvcmtlci91MjQ6Ni1lIFtrd29ya2VyL3UyNDo2LWV2ZW50c191bmJvdW5kXQogICAgMTczIGt3b3JrZXIvMDoxSCAgICBba3dvcmtlci8wOjFIXQogICAgMjI0IHdhdGNoZG9nZCAgICAgICBbd2F0Y2hkb2dkXQogICAgMjI2IGt3b3JrZXIvUi1hdGFfcyBba3dvcmtlci9SLWF0YV9zZmZdCiAgICAyMjcgc2NzaV9laF8wICAgICAgIFtzY3NpX2VoXzBdCiAgICAyMjgga3dvcmtlci9SLXNjc2lfIFtrd29ya2VyL1Itc2NzaV90bWZfMF0KICAgIDIyOSBzY3NpX2VoXzEgICAgICAgW3Njc2lfZWhfMV0KICAgIDIzMCBrd29ya2VyL1Itc2NzaV8gW2t3b3JrZXIvUi1zY3NpX3RtZl8xXQogICAgMjMyIHNjc2lfZWhfMiAgICAgICBbc2NzaV9laF8yXQogICAgMjMzIGt3b3JrZXIvUi1zY3NpXyBba3dvcmtlci9SLXNjc2lfdG1mXzJdCiAgICAyMzQgc2NzaV9laF8zICAgICAgIFtzY3NpX2VoXzNdCiAgICAyMzUga3dvcmtlci9SLXNjc2lfIFtrd29ya2VyL1Itc2NzaV90bWZfM10KICAgIDIzNyBzY3NpX2VoXzQgICAgICAgW3Njc2lfZWhfNF0KICAgIDIzOCBrd29ya2VyL1Itc2NzaV8gW2t3b3JrZXIvUi1zY3NpX3RtZl80XQogICAgMjM5IHNjc2lfZWhfNSAgICAgICBbc2NzaV9laF81XQogICAgMjQwIGt3b3JrZXIvUi1zY3NpXyBba3dvcmtlci9SLXNjc2lfdG1mXzVdCiAgICAyNDQga3dvcmtlci80OjItZXZlIFtrd29ya2VyLzQ6Mi1ldmVudHNdCiAgICAyNzUgamJkMi9zZGEyLTggICAgIFtqYmQyL3NkYTItOF0KICAgIDI3NiBrd29ya2VyL1ItZXh0NC0gW2t3b3JrZXIvUi1leHQ0LXJzdi1jb252ZXJzaW9uXQogICAgMjkwIGt3b3JrZXIvMjoxICAgICBba3dvcmtlci8yOjFdCiAgICAyOTEga3dvcmtlci8zOjEtZXZlIFtrd29ya2VyLzM6MS1ldmVudHNdCiAgICAyOTIga3dvcmtlci81OjEgICAgIFtrd29ya2VyLzU6MV0KICAgIDMyMCBzeXN0ZW1kLWpvdXJuYWwgL3Vzci9saWIvc3lzdGVtZC9zeXN0ZW1kLWpvdXJuYWxkCiAgICAzMzcga3dvcmtlci8zOjFIICAgIFtrd29ya2VyLzM6MUhdCiAgICAzNjYgc3lzdGVtZC10aW1lc3luIC91c3IvbGliL3N5c3RlbWQvc3lzdGVtZC10aW1lc3luY2QKICAgIDM3NCBzeXN0ZW1kLXVkZXZkICAgL3Vzci9saWIvc3lzdGVtZC9zeXN0ZW1kLXVkZXZkCiAgICAzNzggcHNpbW9uICAgICAgICAgIFtwc2ltb25dCiAgICA1ODggY3JvbiAgICAgICAgICAgIC91c3Ivc2Jpbi9jcm9uIC1mCiAgICA1ODkgZGJ1cy1kYWVtb24gICAgIC91c3IvYmluL2RidXMtZGFlbW9uIC0tc3lzdGVtIC0tYWRkcmVzcz1zeXN0ZW1kOiAtLW5vZm9yayAtLW5vcGlkZmlsZSAtLXN5c3RlbWQtYWN0aXZhdGlvbiAtLXN5c2xvZy1vbmx5CiAgICA1OTMgc3lzdGVtZC1sb2dpbmQgIC91c3IvbGliL3N5c3RlbWQvc3lzdGVtZC1sb2dpbmQKICAgIDY1MSBrd29ya2VyL1ItbnZrbS0gW2t3b3JrZXIvUi1udmttLWRpc3BdCiAgICA2NTIga3dvcmtlci9SLXR0bSAgIFtrd29ya2VyL1ItdHRtXQogICAgNjUzIGNhcmQwLWNydGMwICAgICBbY2FyZDAtY3J0YzBdCiAgICA2NTQgY2FyZDAtY3J0YzEgICAgIFtjYXJkMC1jcnRjMV0KICAgIDY1NSBjYXJkMC1jcnRjMiAgICAgW2NhcmQwLWNydGMyXQogICAgNjU2IGNhcmQwLWNydGMzICAgICBbY2FyZDAtY3J0YzNdCiAgICA3MjMgYWdldHR5ICAgICAgICAgIC9zYmluL2FnZXR0eSAtbyAtLSBcdSAtLW5vcmVzZXQgLS1ub2NsZWFyIC0gbGludXgKICAgIDcyNCBzc2hkICAgICAgICAgICAgc3NoZDogL3Vzci9zYmluL3NzaGQgLUQgW2xpc3RlbmVyXSAwIG9mIDEwLTEwMCBzdGFydHVwcwogICAgODAzIGt3b3JrZXIvdTI0OjAtZSBba3dvcmtlci91MjQ6MC1ldmVudHNfcG93ZXJfZWZmaWNpZW50XQogICAgOTE4IGt3b3JrZXIvMToyLWNnciBba3dvcmtlci8xOjItY2dyb3VwX2ZyZWVdCiAgICA5NDcga3dvcmtlci8wOjEtY2dyIFtrd29ya2VyLzA6MS1jZ3JvdXBfZnJlZV0KICAgIDk1OCBwc2ltb24gICAgICAgICAgW3BzaW1vbl0KICAgIDk2MCBzeXN0ZW1kICAgICAgICAgL3Vzci9saWIvc3lzdGVtZC9zeXN0ZW1kIC0tdXNlcgogICAgOTYxIGt3b3JrZXIvMTowICAgICBba3dvcmtlci8xOjBdCiAgICA5NjMgKHNkLXBhbSkgICAgICAgIChzZC1wYW0pCiAgICA5NjggcHNpbW9uICAgICAgICAgIFtwc2ltb25dCiAgICA5ODIga3dvcmtlci8wOjItY2dyIFtrd29ya2VyLzA6Mi1jZ3JvdXBfZnJlZV0KICAgMTEwMyBzc2hkLXNlc3Npb24gICAgc3NoZC1zZXNzaW9uOiByb290IFtwcml2XQogICAxMTEwIHNzaGQtc2Vzc2lvbiAgICBzc2hkLXNlc3Npb246IHJvb3RAbm90dHkKICAgMTExMSBweXRob24zICAgICAgICAgcHl0aG9uMyAtCiAgIDExMTIgcHMgICAgICAgICAgICAgIHBzIC1lbyBwaWQsY29tbSxhcmdzCg==",
+    "raw_process_listing_preserved": true,
+    "raw_process_listing_sha256": "b9ffacbaa34cb3abc8648c5cd386e6f87976a1d54e0427a9b06709d205935bb6",
+    "raw_process_stderr": "",
+    "raw_process_stderr_base64": "",
+    "return_code": 0,
+    "scan_complete": true,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "b9ffacbaa34cb3abc8648c5cd386e6f87976a1d54e0427a9b06709d205935bb6"
+  },
+  "process_scan_after_cleanup": {
+    "command": [
+      "ps",
+      "-eo",
+      "pid,comm,args"
+    ],
+    "command_sha256": "d40de9582819745d28df782d252579af4b7bdbbef98018d72cb2096a9ea87fb8",
+    "forbidden_process_filter_evaluated": true,
+    "forbidden_process_hits": [],
+    "ps_executed_successfully": true,
+    "raw_process_listing": "    PID COMMAND         COMMAND\n      1 systemd         /sbin/init\n      2 kthreadd        [kthreadd]\n      3 pool_workqueue_ [pool_workqueue_release]\n      4 kworker/R-kvfre [kworker/R-kvfree_rcu_reclaim]\n      5 kworker/R-rcu_g [kworker/R-rcu_gp]\n      6 kworker/R-sync_ [kworker/R-sync_wq]\n      7 kworker/R-slub_ [kworker/R-slub_flushwq]\n      8 kworker/R-netns [kworker/R-netns]\n      9 kworker/0:0-cgr [kworker/0:0-cgroup_release]\n     11 kworker/0:0H-kb [kworker/0:0H-kblockd]\n     13 kworker/R-mm_pe [kworker/R-mm_percpu_wq]\n     14 rcu_tasks_kthre [rcu_tasks_kthread]\n     15 rcu_tasks_rude_ [rcu_tasks_rude_kthread]\n     16 rcu_tasks_trace [rcu_tasks_trace_kthread]\n     17 ksoftirqd/0     [ksoftirqd/0]\n     18 rcu_preempt     [rcu_preempt]\n     19 rcuog/0         [rcuog/0]\n     20 rcuop/0         [rcuop/0]\n     21 rcu_exp_par_gp_ [rcu_exp_par_gp_kthread_worker/0]\n     22 rcu_exp_gp_kthr [rcu_exp_gp_kthread_worker]\n     23 migration/0     [migration/0]\n     24 idle_inject/0   [idle_inject/0]\n     25 cpuhp/0         [cpuhp/0]\n     26 cpuhp/1         [cpuhp/1]\n     27 idle_inject/1   [idle_inject/1]\n     28 migration/1     [migration/1]\n     29 ksoftirqd/1     [ksoftirqd/1]\n     31 kworker/1:0H-ev [kworker/1:0H-events_highpri]\n     32 rcuop/1         [rcuop/1]\n     33 cpuhp/2         [cpuhp/2]\n     34 idle_inject/2   [idle_inject/2]\n     35 migration/2     [migration/2]\n     36 ksoftirqd/2     [ksoftirqd/2]\n     37 kworker/2:0-eve [kworker/2:0-events]\n     38 kworker/2:0H    [kworker/2:0H]\n     39 rcuop/2         [rcuop/2]\n     40 cpuhp/3         [cpuhp/3]\n     41 idle_inject/3   [idle_inject/3]\n     42 migration/3     [migration/3]\n     43 ksoftirqd/3     [ksoftirqd/3]\n     44 kworker/3:0-eve [kworker/3:0-events]\n     45 kworker/3:0H-kb [kworker/3:0H-kblockd]\n     46 rcuog/3         [rcuog/3]\n     47 rcuop/3         [rcuop/3]\n     48 cpuhp/4         [cpuhp/4]\n     49 idle_inject/4   [idle_inject/4]\n     50 migration/4     [migration/4]\n     51 ksoftirqd/4     [ksoftirqd/4]\n     52 kworker/4:0-eve [kworker/4:0-events]\n     53 kworker/4:0H    [kworker/4:0H]\n     54 rcuop/4         [rcuop/4]\n     55 cpuhp/5         [cpuhp/5]\n     56 idle_inject/5   [idle_inject/5]\n     57 migration/5     [migration/5]\n     58 ksoftirqd/5     [ksoftirqd/5]\n     59 kworker/5:0-eve [kworker/5:0-events]\n     60 kworker/5:0H    [kworker/5:0H]\n     61 rcuop/5         [rcuop/5]\n     67 kworker/u24:5-k [kworker/u24:5-kvfree_rcu_reclaim]\n     68 kdevtmpfs       [kdevtmpfs]\n     69 kworker/R-inet_ [kworker/R-inet_frag_wq]\n     70 kauditd         [kauditd]\n     71 khungtaskd      [khungtaskd]\n     72 oom_reaper      [oom_reaper]\n     73 kworker/R-write [kworker/R-writeback]\n     74 kcompactd0      [kcompactd0]\n     75 ksmd            [ksmd]\n     76 khugepaged      [khugepaged]\n     77 kworker/R-kinte [kworker/R-kintegrityd]\n     78 kworker/R-kbloc [kworker/R-kblockd]\n     79 kworker/R-blkcg [kworker/R-blkcg_punt_bio]\n     80 irq/9-acpi      [irq/9-acpi]\n     81 kworker/1:1-eve [kworker/1:1-events]\n     82 kworker/R-tpm_d [kworker/R-tpm_dev_wq]\n     83 kworker/R-edac- [kworker/R-edac-poller]\n     84 kworker/R-devfr [kworker/R-devfreq_wq]\n     85 kworker/R-quota [kworker/R-quota_events_unbound]\n     86 kworker/1:1H-kb [kworker/1:1H-kblockd]\n     87 kswapd0         [kswapd0]\n     94 kworker/R-kthro [kworker/R-kthrotld]\n     98 kworker/R-acpi_ [kworker/R-acpi_thermal_pm]\n     99 kworker/R-mld   [kworker/R-mld]\n    100 kworker/R-ipv6_ [kworker/R-ipv6_addrconf]\n    105 kworker/R-kstrp [kworker/R-kstrp]\n    107 kworker/u25:0   [kworker/u25:0]\n    163 kworker/u24:6-e [kworker/u24:6-events_unbound]\n    173 kworker/0:1H    [kworker/0:1H]\n    224 watchdogd       [watchdogd]\n    226 kworker/R-ata_s [kworker/R-ata_sff]\n    227 scsi_eh_0       [scsi_eh_0]\n    228 kworker/R-scsi_ [kworker/R-scsi_tmf_0]\n    229 scsi_eh_1       [scsi_eh_1]\n    230 kworker/R-scsi_ [kworker/R-scsi_tmf_1]\n    232 scsi_eh_2       [scsi_eh_2]\n    233 kworker/R-scsi_ [kworker/R-scsi_tmf_2]\n    234 scsi_eh_3       [scsi_eh_3]\n    235 kworker/R-scsi_ [kworker/R-scsi_tmf_3]\n    237 scsi_eh_4       [scsi_eh_4]\n    238 kworker/R-scsi_ [kworker/R-scsi_tmf_4]\n    239 scsi_eh_5       [scsi_eh_5]\n    240 kworker/R-scsi_ [kworker/R-scsi_tmf_5]\n    244 kworker/4:2-eve [kworker/4:2-events]\n    275 jbd2/sda2-8     [jbd2/sda2-8]\n    276 kworker/R-ext4- [kworker/R-ext4-rsv-conversion]\n    290 kworker/2:1     [kworker/2:1]\n    291 kworker/3:1-eve [kworker/3:1-events]\n    292 kworker/5:1     [kworker/5:1]\n    320 systemd-journal /usr/lib/systemd/systemd-journald\n    337 kworker/3:1H    [kworker/3:1H]\n    366 systemd-timesyn /usr/lib/systemd/systemd-timesyncd\n    374 systemd-udevd   /usr/lib/systemd/systemd-udevd\n    378 psimon          [psimon]\n    588 cron            /usr/sbin/cron -f\n    589 dbus-daemon     /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only\n    593 systemd-logind  /usr/lib/systemd/systemd-logind\n    651 kworker/R-nvkm- [kworker/R-nvkm-disp]\n    652 kworker/R-ttm   [kworker/R-ttm]\n    653 card0-crtc0     [card0-crtc0]\n    654 card0-crtc1     [card0-crtc1]\n    655 card0-crtc2     [card0-crtc2]\n    656 card0-crtc3     [card0-crtc3]\n    723 agetty          /sbin/agetty -o -- \\u --noreset --noclear - linux\n    724 sshd            sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups\n    803 kworker/u24:0-e [kworker/u24:0-events_power_efficient]\n    918 kworker/1:2-mm_ [kworker/1:2-mm_percpu_wq]\n    947 kworker/0:1-cgr [kworker/0:1-cgroup_free]\n    958 psimon          [psimon]\n    960 systemd         /usr/lib/systemd/systemd --user\n    961 kworker/1:0     [kworker/1:0]\n    963 (sd-pam)        (sd-pam)\n    968 psimon          [psimon]\n    982 kworker/0:2-cgr [kworker/0:2-cgroup_free]\n   1157 sshd-session    sshd-session: root [priv]\n   1164 sshd-session    sshd-session: root@notty\n   1165 python3         python3 -\n   1166 ps              ps -eo pid,comm,args\n",
+    "raw_process_listing_base64": "ICAgIFBJRCBDT01NQU5EICAgICAgICAgQ09NTUFORAogICAgICAxIHN5c3RlbWQgICAgICAgICAvc2Jpbi9pbml0CiAgICAgIDIga3RocmVhZGQgICAgICAgIFtrdGhyZWFkZF0KICAgICAgMyBwb29sX3dvcmtxdWV1ZV8gW3Bvb2xfd29ya3F1ZXVlX3JlbGVhc2VdCiAgICAgIDQga3dvcmtlci9SLWt2ZnJlIFtrd29ya2VyL1Ita3ZmcmVlX3JjdV9yZWNsYWltXQogICAgICA1IGt3b3JrZXIvUi1yY3VfZyBba3dvcmtlci9SLXJjdV9ncF0KICAgICAgNiBrd29ya2VyL1Itc3luY18gW2t3b3JrZXIvUi1zeW5jX3dxXQogICAgICA3IGt3b3JrZXIvUi1zbHViXyBba3dvcmtlci9SLXNsdWJfZmx1c2h3cV0KICAgICAgOCBrd29ya2VyL1ItbmV0bnMgW2t3b3JrZXIvUi1uZXRuc10KICAgICAgOSBrd29ya2VyLzA6MC1jZ3IgW2t3b3JrZXIvMDowLWNncm91cF9yZWxlYXNlXQogICAgIDExIGt3b3JrZXIvMDowSC1rYiBba3dvcmtlci8wOjBILWtibG9ja2RdCiAgICAgMTMga3dvcmtlci9SLW1tX3BlIFtrd29ya2VyL1ItbW1fcGVyY3B1X3dxXQogICAgIDE0IHJjdV90YXNrc19rdGhyZSBbcmN1X3Rhc2tzX2t0aHJlYWRdCiAgICAgMTUgcmN1X3Rhc2tzX3J1ZGVfIFtyY3VfdGFza3NfcnVkZV9rdGhyZWFkXQogICAgIDE2IHJjdV90YXNrc190cmFjZSBbcmN1X3Rhc2tzX3RyYWNlX2t0aHJlYWRdCiAgICAgMTcga3NvZnRpcnFkLzAgICAgIFtrc29mdGlycWQvMF0KICAgICAxOCByY3VfcHJlZW1wdCAgICAgW3JjdV9wcmVlbXB0XQogICAgIDE5IHJjdW9nLzAgICAgICAgICBbcmN1b2cvMF0KICAgICAyMCByY3VvcC8wICAgICAgICAgW3JjdW9wLzBdCiAgICAgMjEgcmN1X2V4cF9wYXJfZ3BfIFtyY3VfZXhwX3Bhcl9ncF9rdGhyZWFkX3dvcmtlci8wXQogICAgIDIyIHJjdV9leHBfZ3Bfa3RociBbcmN1X2V4cF9ncF9rdGhyZWFkX3dvcmtlcl0KICAgICAyMyBtaWdyYXRpb24vMCAgICAgW21pZ3JhdGlvbi8wXQogICAgIDI0IGlkbGVfaW5qZWN0LzAgICBbaWRsZV9pbmplY3QvMF0KICAgICAyNSBjcHVocC8wICAgICAgICAgW2NwdWhwLzBdCiAgICAgMjYgY3B1aHAvMSAgICAgICAgIFtjcHVocC8xXQogICAgIDI3IGlkbGVfaW5qZWN0LzEgICBbaWRsZV9pbmplY3QvMV0KICAgICAyOCBtaWdyYXRpb24vMSAgICAgW21pZ3JhdGlvbi8xXQogICAgIDI5IGtzb2Z0aXJxZC8xICAgICBba3NvZnRpcnFkLzFdCiAgICAgMzEga3dvcmtlci8xOjBILWV2IFtrd29ya2VyLzE6MEgtZXZlbnRzX2hpZ2hwcmldCiAgICAgMzIgcmN1b3AvMSAgICAgICAgIFtyY3VvcC8xXQogICAgIDMzIGNwdWhwLzIgICAgICAgICBbY3B1aHAvMl0KICAgICAzNCBpZGxlX2luamVjdC8yICAgW2lkbGVfaW5qZWN0LzJdCiAgICAgMzUgbWlncmF0aW9uLzIgICAgIFttaWdyYXRpb24vMl0KICAgICAzNiBrc29mdGlycWQvMiAgICAgW2tzb2Z0aXJxZC8yXQogICAgIDM3IGt3b3JrZXIvMjowLWV2ZSBba3dvcmtlci8yOjAtZXZlbnRzXQogICAgIDM4IGt3b3JrZXIvMjowSCAgICBba3dvcmtlci8yOjBIXQogICAgIDM5IHJjdW9wLzIgICAgICAgICBbcmN1b3AvMl0KICAgICA0MCBjcHVocC8zICAgICAgICAgW2NwdWhwLzNdCiAgICAgNDEgaWRsZV9pbmplY3QvMyAgIFtpZGxlX2luamVjdC8zXQogICAgIDQyIG1pZ3JhdGlvbi8zICAgICBbbWlncmF0aW9uLzNdCiAgICAgNDMga3NvZnRpcnFkLzMgICAgIFtrc29mdGlycWQvM10KICAgICA0NCBrd29ya2VyLzM6MC1ldmUgW2t3b3JrZXIvMzowLWV2ZW50c10KICAgICA0NSBrd29ya2VyLzM6MEgta2IgW2t3b3JrZXIvMzowSC1rYmxvY2tkXQogICAgIDQ2IHJjdW9nLzMgICAgICAgICBbcmN1b2cvM10KICAgICA0NyByY3VvcC8zICAgICAgICAgW3JjdW9wLzNdCiAgICAgNDggY3B1aHAvNCAgICAgICAgIFtjcHVocC80XQogICAgIDQ5IGlkbGVfaW5qZWN0LzQgICBbaWRsZV9pbmplY3QvNF0KICAgICA1MCBtaWdyYXRpb24vNCAgICAgW21pZ3JhdGlvbi80XQogICAgIDUxIGtzb2Z0aXJxZC80ICAgICBba3NvZnRpcnFkLzRdCiAgICAgNTIga3dvcmtlci80OjAtZXZlIFtrd29ya2VyLzQ6MC1ldmVudHNdCiAgICAgNTMga3dvcmtlci80OjBIICAgIFtrd29ya2VyLzQ6MEhdCiAgICAgNTQgcmN1b3AvNCAgICAgICAgIFtyY3VvcC80XQogICAgIDU1IGNwdWhwLzUgICAgICAgICBbY3B1aHAvNV0KICAgICA1NiBpZGxlX2luamVjdC81ICAgW2lkbGVfaW5qZWN0LzVdCiAgICAgNTcgbWlncmF0aW9uLzUgICAgIFttaWdyYXRpb24vNV0KICAgICA1OCBrc29mdGlycWQvNSAgICAgW2tzb2Z0aXJxZC81XQogICAgIDU5IGt3b3JrZXIvNTowLWV2ZSBba3dvcmtlci81OjAtZXZlbnRzXQogICAgIDYwIGt3b3JrZXIvNTowSCAgICBba3dvcmtlci81OjBIXQogICAgIDYxIHJjdW9wLzUgICAgICAgICBbcmN1b3AvNV0KICAgICA2NyBrd29ya2VyL3UyNDo1LWsgW2t3b3JrZXIvdTI0OjUta3ZmcmVlX3JjdV9yZWNsYWltXQogICAgIDY4IGtkZXZ0bXBmcyAgICAgICBba2RldnRtcGZzXQogICAgIDY5IGt3b3JrZXIvUi1pbmV0XyBba3dvcmtlci9SLWluZXRfZnJhZ193cV0KICAgICA3MCBrYXVkaXRkICAgICAgICAgW2thdWRpdGRdCiAgICAgNzEga2h1bmd0YXNrZCAgICAgIFtraHVuZ3Rhc2tkXQogICAgIDcyIG9vbV9yZWFwZXIgICAgICBbb29tX3JlYXBlcl0KICAgICA3MyBrd29ya2VyL1Itd3JpdGUgW2t3b3JrZXIvUi13cml0ZWJhY2tdCiAgICAgNzQga2NvbXBhY3RkMCAgICAgIFtrY29tcGFjdGQwXQogICAgIDc1IGtzbWQgICAgICAgICAgICBba3NtZF0KICAgICA3NiBraHVnZXBhZ2VkICAgICAgW2todWdlcGFnZWRdCiAgICAgNzcga3dvcmtlci9SLWtpbnRlIFtrd29ya2VyL1Ita2ludGVncml0eWRdCiAgICAgNzgga3dvcmtlci9SLWtibG9jIFtrd29ya2VyL1Ita2Jsb2NrZF0KICAgICA3OSBrd29ya2VyL1ItYmxrY2cgW2t3b3JrZXIvUi1ibGtjZ19wdW50X2Jpb10KICAgICA4MCBpcnEvOS1hY3BpICAgICAgW2lycS85LWFjcGldCiAgICAgODEga3dvcmtlci8xOjEtZXZlIFtrd29ya2VyLzE6MS1ldmVudHNdCiAgICAgODIga3dvcmtlci9SLXRwbV9kIFtrd29ya2VyL1ItdHBtX2Rldl93cV0KICAgICA4MyBrd29ya2VyL1ItZWRhYy0gW2t3b3JrZXIvUi1lZGFjLXBvbGxlcl0KICAgICA4NCBrd29ya2VyL1ItZGV2ZnIgW2t3b3JrZXIvUi1kZXZmcmVxX3dxXQogICAgIDg1IGt3b3JrZXIvUi1xdW90YSBba3dvcmtlci9SLXF1b3RhX2V2ZW50c191bmJvdW5kXQogICAgIDg2IGt3b3JrZXIvMToxSC1rYiBba3dvcmtlci8xOjFILWtibG9ja2RdCiAgICAgODcga3N3YXBkMCAgICAgICAgIFtrc3dhcGQwXQogICAgIDk0IGt3b3JrZXIvUi1rdGhybyBba3dvcmtlci9SLWt0aHJvdGxkXQogICAgIDk4IGt3b3JrZXIvUi1hY3BpXyBba3dvcmtlci9SLWFjcGlfdGhlcm1hbF9wbV0KICAgICA5OSBrd29ya2VyL1ItbWxkICAgW2t3b3JrZXIvUi1tbGRdCiAgICAxMDAga3dvcmtlci9SLWlwdjZfIFtrd29ya2VyL1ItaXB2Nl9hZGRyY29uZl0KICAgIDEwNSBrd29ya2VyL1Ita3N0cnAgW2t3b3JrZXIvUi1rc3RycF0KICAgIDEwNyBrd29ya2VyL3UyNTowICAgW2t3b3JrZXIvdTI1OjBdCiAgICAxNjMga3dvcmtlci91MjQ6Ni1lIFtrd29ya2VyL3UyNDo2LWV2ZW50c191bmJvdW5kXQogICAgMTczIGt3b3JrZXIvMDoxSCAgICBba3dvcmtlci8wOjFIXQogICAgMjI0IHdhdGNoZG9nZCAgICAgICBbd2F0Y2hkb2dkXQogICAgMjI2IGt3b3JrZXIvUi1hdGFfcyBba3dvcmtlci9SLWF0YV9zZmZdCiAgICAyMjcgc2NzaV9laF8wICAgICAgIFtzY3NpX2VoXzBdCiAgICAyMjgga3dvcmtlci9SLXNjc2lfIFtrd29ya2VyL1Itc2NzaV90bWZfMF0KICAgIDIyOSBzY3NpX2VoXzEgICAgICAgW3Njc2lfZWhfMV0KICAgIDIzMCBrd29ya2VyL1Itc2NzaV8gW2t3b3JrZXIvUi1zY3NpX3RtZl8xXQogICAgMjMyIHNjc2lfZWhfMiAgICAgICBbc2NzaV9laF8yXQogICAgMjMzIGt3b3JrZXIvUi1zY3NpXyBba3dvcmtlci9SLXNjc2lfdG1mXzJdCiAgICAyMzQgc2NzaV9laF8zICAgICAgIFtzY3NpX2VoXzNdCiAgICAyMzUga3dvcmtlci9SLXNjc2lfIFtrd29ya2VyL1Itc2NzaV90bWZfM10KICAgIDIzNyBzY3NpX2VoXzQgICAgICAgW3Njc2lfZWhfNF0KICAgIDIzOCBrd29ya2VyL1Itc2NzaV8gW2t3b3JrZXIvUi1zY3NpX3RtZl80XQogICAgMjM5IHNjc2lfZWhfNSAgICAgICBbc2NzaV9laF81XQogICAgMjQwIGt3b3JrZXIvUi1zY3NpXyBba3dvcmtlci9SLXNjc2lfdG1mXzVdCiAgICAyNDQga3dvcmtlci80OjItZXZlIFtrd29ya2VyLzQ6Mi1ldmVudHNdCiAgICAyNzUgamJkMi9zZGEyLTggICAgIFtqYmQyL3NkYTItOF0KICAgIDI3NiBrd29ya2VyL1ItZXh0NC0gW2t3b3JrZXIvUi1leHQ0LXJzdi1jb252ZXJzaW9uXQogICAgMjkwIGt3b3JrZXIvMjoxICAgICBba3dvcmtlci8yOjFdCiAgICAyOTEga3dvcmtlci8zOjEtZXZlIFtrd29ya2VyLzM6MS1ldmVudHNdCiAgICAyOTIga3dvcmtlci81OjEgICAgIFtrd29ya2VyLzU6MV0KICAgIDMyMCBzeXN0ZW1kLWpvdXJuYWwgL3Vzci9saWIvc3lzdGVtZC9zeXN0ZW1kLWpvdXJuYWxkCiAgICAzMzcga3dvcmtlci8zOjFIICAgIFtrd29ya2VyLzM6MUhdCiAgICAzNjYgc3lzdGVtZC10aW1lc3luIC91c3IvbGliL3N5c3RlbWQvc3lzdGVtZC10aW1lc3luY2QKICAgIDM3NCBzeXN0ZW1kLXVkZXZkICAgL3Vzci9saWIvc3lzdGVtZC9zeXN0ZW1kLXVkZXZkCiAgICAzNzggcHNpbW9uICAgICAgICAgIFtwc2ltb25dCiAgICA1ODggY3JvbiAgICAgICAgICAgIC91c3Ivc2Jpbi9jcm9uIC1mCiAgICA1ODkgZGJ1cy1kYWVtb24gICAgIC91c3IvYmluL2RidXMtZGFlbW9uIC0tc3lzdGVtIC0tYWRkcmVzcz1zeXN0ZW1kOiAtLW5vZm9yayAtLW5vcGlkZmlsZSAtLXN5c3RlbWQtYWN0aXZhdGlvbiAtLXN5c2xvZy1vbmx5CiAgICA1OTMgc3lzdGVtZC1sb2dpbmQgIC91c3IvbGliL3N5c3RlbWQvc3lzdGVtZC1sb2dpbmQKICAgIDY1MSBrd29ya2VyL1ItbnZrbS0gW2t3b3JrZXIvUi1udmttLWRpc3BdCiAgICA2NTIga3dvcmtlci9SLXR0bSAgIFtrd29ya2VyL1ItdHRtXQogICAgNjUzIGNhcmQwLWNydGMwICAgICBbY2FyZDAtY3J0YzBdCiAgICA2NTQgY2FyZDAtY3J0YzEgICAgIFtjYXJkMC1jcnRjMV0KICAgIDY1NSBjYXJkMC1jcnRjMiAgICAgW2NhcmQwLWNydGMyXQogICAgNjU2IGNhcmQwLWNydGMzICAgICBbY2FyZDAtY3J0YzNdCiAgICA3MjMgYWdldHR5ICAgICAgICAgIC9zYmluL2FnZXR0eSAtbyAtLSBcdSAtLW5vcmVzZXQgLS1ub2NsZWFyIC0gbGludXgKICAgIDcyNCBzc2hkICAgICAgICAgICAgc3NoZDogL3Vzci9zYmluL3NzaGQgLUQgW2xpc3RlbmVyXSAwIG9mIDEwLTEwMCBzdGFydHVwcwogICAgODAzIGt3b3JrZXIvdTI0OjAtZSBba3dvcmtlci91MjQ6MC1ldmVudHNfcG93ZXJfZWZmaWNpZW50XQogICAgOTE4IGt3b3JrZXIvMToyLW1tXyBba3dvcmtlci8xOjItbW1fcGVyY3B1X3dxXQogICAgOTQ3IGt3b3JrZXIvMDoxLWNnciBba3dvcmtlci8wOjEtY2dyb3VwX2ZyZWVdCiAgICA5NTggcHNpbW9uICAgICAgICAgIFtwc2ltb25dCiAgICA5NjAgc3lzdGVtZCAgICAgICAgIC91c3IvbGliL3N5c3RlbWQvc3lzdGVtZCAtLXVzZXIKICAgIDk2MSBrd29ya2VyLzE6MCAgICAgW2t3b3JrZXIvMTowXQogICAgOTYzIChzZC1wYW0pICAgICAgICAoc2QtcGFtKQogICAgOTY4IHBzaW1vbiAgICAgICAgICBbcHNpbW9uXQogICAgOTgyIGt3b3JrZXIvMDoyLWNnciBba3dvcmtlci8wOjItY2dyb3VwX2ZyZWVdCiAgIDExNTcgc3NoZC1zZXNzaW9uICAgIHNzaGQtc2Vzc2lvbjogcm9vdCBbcHJpdl0KICAgMTE2NCBzc2hkLXNlc3Npb24gICAgc3NoZC1zZXNzaW9uOiByb290QG5vdHR5CiAgIDExNjUgcHl0aG9uMyAgICAgICAgIHB5dGhvbjMgLQogICAxMTY2IHBzICAgICAgICAgICAgICBwcyAtZW8gcGlkLGNvbW0sYXJncwo=",
+    "raw_process_listing_preserved": true,
+    "raw_process_listing_sha256": "b315ab2b9fbe3b17ca2e8e65c2dae290020200da1d05c62f8e44047925711a7a",
+    "raw_process_stderr": "",
+    "raw_process_stderr_base64": "",
+    "return_code": 0,
+    "scan_complete": true,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "b315ab2b9fbe3b17ca2e8e65c2dae290020200da1d05c62f8e44047925711a7a"
+  },
+  "process_scan_before": {
+    "command": [
+      "ps",
+      "-eo",
+      "pid,comm,args"
+    ],
+    "command_sha256": "d40de9582819745d28df782d252579af4b7bdbbef98018d72cb2096a9ea87fb8",
+    "forbidden_process_filter_evaluated": true,
+    "forbidden_process_hits": [],
+    "ps_executed_successfully": true,
+    "raw_process_listing": "    PID COMMAND         COMMAND\n      1 systemd         /sbin/init\n      2 kthreadd        [kthreadd]\n      3 pool_workqueue_ [pool_workqueue_release]\n      4 kworker/R-kvfre [kworker/R-kvfree_rcu_reclaim]\n      5 kworker/R-rcu_g [kworker/R-rcu_gp]\n      6 kworker/R-sync_ [kworker/R-sync_wq]\n      7 kworker/R-slub_ [kworker/R-slub_flushwq]\n      8 kworker/R-netns [kworker/R-netns]\n      9 kworker/0:0-eve [kworker/0:0-events]\n     11 kworker/0:0H-kb [kworker/0:0H-kblockd]\n     13 kworker/R-mm_pe [kworker/R-mm_percpu_wq]\n     14 rcu_tasks_kthre [rcu_tasks_kthread]\n     15 rcu_tasks_rude_ [rcu_tasks_rude_kthread]\n     16 rcu_tasks_trace [rcu_tasks_trace_kthread]\n     17 ksoftirqd/0     [ksoftirqd/0]\n     18 rcu_preempt     [rcu_preempt]\n     19 rcuog/0         [rcuog/0]\n     20 rcuop/0         [rcuop/0]\n     21 rcu_exp_par_gp_ [rcu_exp_par_gp_kthread_worker/0]\n     22 rcu_exp_gp_kthr [rcu_exp_gp_kthread_worker]\n     23 migration/0     [migration/0]\n     24 idle_inject/0   [idle_inject/0]\n     25 cpuhp/0         [cpuhp/0]\n     26 cpuhp/1         [cpuhp/1]\n     27 idle_inject/1   [idle_inject/1]\n     28 migration/1     [migration/1]\n     29 ksoftirqd/1     [ksoftirqd/1]\n     31 kworker/1:0H-ev [kworker/1:0H-events_highpri]\n     32 rcuop/1         [rcuop/1]\n     33 cpuhp/2         [cpuhp/2]\n     34 idle_inject/2   [idle_inject/2]\n     35 migration/2     [migration/2]\n     36 ksoftirqd/2     [ksoftirqd/2]\n     37 kworker/2:0-eve [kworker/2:0-events]\n     38 kworker/2:0H    [kworker/2:0H]\n     39 rcuop/2         [rcuop/2]\n     40 cpuhp/3         [cpuhp/3]\n     41 idle_inject/3   [idle_inject/3]\n     42 migration/3     [migration/3]\n     43 ksoftirqd/3     [ksoftirqd/3]\n     44 kworker/3:0-eve [kworker/3:0-events]\n     45 kworker/3:0H-kb [kworker/3:0H-kblockd]\n     46 rcuog/3         [rcuog/3]\n     47 rcuop/3         [rcuop/3]\n     48 cpuhp/4         [cpuhp/4]\n     49 idle_inject/4   [idle_inject/4]\n     50 migration/4     [migration/4]\n     51 ksoftirqd/4     [ksoftirqd/4]\n     52 kworker/4:0-eve [kworker/4:0-events]\n     53 kworker/4:0H    [kworker/4:0H]\n     54 rcuop/4         [rcuop/4]\n     55 cpuhp/5         [cpuhp/5]\n     56 idle_inject/5   [idle_inject/5]\n     57 migration/5     [migration/5]\n     58 ksoftirqd/5     [ksoftirqd/5]\n     59 kworker/5:0-eve [kworker/5:0-events]\n     60 kworker/5:0H    [kworker/5:0H]\n     61 rcuop/5         [rcuop/5]\n     67 kworker/u24:5-e [kworker/u24:5-events_unbound]\n     68 kdevtmpfs       [kdevtmpfs]\n     69 kworker/R-inet_ [kworker/R-inet_frag_wq]\n     70 kauditd         [kauditd]\n     71 khungtaskd      [khungtaskd]\n     72 oom_reaper      [oom_reaper]\n     73 kworker/R-write [kworker/R-writeback]\n     74 kcompactd0      [kcompactd0]\n     75 ksmd            [ksmd]\n     76 khugepaged      [khugepaged]\n     77 kworker/R-kinte [kworker/R-kintegrityd]\n     78 kworker/R-kbloc [kworker/R-kblockd]\n     79 kworker/R-blkcg [kworker/R-blkcg_punt_bio]\n     80 irq/9-acpi      [irq/9-acpi]\n     81 kworker/1:1-eve [kworker/1:1-events]\n     82 kworker/R-tpm_d [kworker/R-tpm_dev_wq]\n     83 kworker/R-edac- [kworker/R-edac-poller]\n     84 kworker/R-devfr [kworker/R-devfreq_wq]\n     85 kworker/R-quota [kworker/R-quota_events_unbound]\n     86 kworker/1:1H-kb [kworker/1:1H-kblockd]\n     87 kswapd0         [kswapd0]\n     94 kworker/R-kthro [kworker/R-kthrotld]\n     98 kworker/R-acpi_ [kworker/R-acpi_thermal_pm]\n     99 kworker/R-mld   [kworker/R-mld]\n    100 kworker/R-ipv6_ [kworker/R-ipv6_addrconf]\n    105 kworker/R-kstrp [kworker/R-kstrp]\n    107 kworker/u25:0   [kworker/u25:0]\n    163 kworker/u24:6-k [kworker/u24:6-kvfree_rcu_reclaim]\n    173 kworker/0:1H    [kworker/0:1H]\n    224 watchdogd       [watchdogd]\n    226 kworker/R-ata_s [kworker/R-ata_sff]\n    227 scsi_eh_0       [scsi_eh_0]\n    228 kworker/R-scsi_ [kworker/R-scsi_tmf_0]\n    229 scsi_eh_1       [scsi_eh_1]\n    230 kworker/R-scsi_ [kworker/R-scsi_tmf_1]\n    232 scsi_eh_2       [scsi_eh_2]\n    233 kworker/R-scsi_ [kworker/R-scsi_tmf_2]\n    234 scsi_eh_3       [scsi_eh_3]\n    235 kworker/R-scsi_ [kworker/R-scsi_tmf_3]\n    237 scsi_eh_4       [scsi_eh_4]\n    238 kworker/R-scsi_ [kworker/R-scsi_tmf_4]\n    239 scsi_eh_5       [scsi_eh_5]\n    240 kworker/R-scsi_ [kworker/R-scsi_tmf_5]\n    244 kworker/4:2-eve [kworker/4:2-events]\n    275 jbd2/sda2-8     [jbd2/sda2-8]\n    276 kworker/R-ext4- [kworker/R-ext4-rsv-conversion]\n    290 kworker/2:1     [kworker/2:1]\n    291 kworker/3:1-eve [kworker/3:1-events]\n    292 kworker/5:1     [kworker/5:1]\n    320 systemd-journal /usr/lib/systemd/systemd-journald\n    337 kworker/3:1H    [kworker/3:1H]\n    366 systemd-timesyn /usr/lib/systemd/systemd-timesyncd\n    374 systemd-udevd   /usr/lib/systemd/systemd-udevd\n    378 psimon          [psimon]\n    588 cron            /usr/sbin/cron -f\n    589 dbus-daemon     /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only\n    593 systemd-logind  /usr/lib/systemd/systemd-logind\n    651 kworker/R-nvkm- [kworker/R-nvkm-disp]\n    652 kworker/R-ttm   [kworker/R-ttm]\n    653 card0-crtc0     [card0-crtc0]\n    654 card0-crtc1     [card0-crtc1]\n    655 card0-crtc2     [card0-crtc2]\n    656 card0-crtc3     [card0-crtc3]\n    723 agetty          /sbin/agetty -o -- \\u --noreset --noclear - linux\n    724 sshd            sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups\n    803 kworker/u24:0-e [kworker/u24:0-events_power_efficient]\n    918 kworker/1:2-cgr [kworker/1:2-cgroup_free]\n    947 kworker/0:1-cgr [kworker/0:1-cgroup_free]\n    958 psimon          [psimon]\n    960 systemd         /usr/lib/systemd/systemd --user\n    961 kworker/1:0     [kworker/1:0]\n    963 (sd-pam)        (sd-pam)\n    968 psimon          [psimon]\n    982 kworker/0:2-cgr [kworker/0:2-cgroup_free]\n   1044 sshd-session    sshd-session: root [priv]\n   1051 sshd-session    sshd-session: root@notty\n   1052 python3         python3 -\n   1053 ps              ps -eo pid,comm,args\n",
+    "raw_process_listing_base64": "ICAgIFBJRCBDT01NQU5EICAgICAgICAgQ09NTUFORAogICAgICAxIHN5c3RlbWQgICAgICAgICAvc2Jpbi9pbml0CiAgICAgIDIga3RocmVhZGQgICAgICAgIFtrdGhyZWFkZF0KICAgICAgMyBwb29sX3dvcmtxdWV1ZV8gW3Bvb2xfd29ya3F1ZXVlX3JlbGVhc2VdCiAgICAgIDQga3dvcmtlci9SLWt2ZnJlIFtrd29ya2VyL1Ita3ZmcmVlX3JjdV9yZWNsYWltXQogICAgICA1IGt3b3JrZXIvUi1yY3VfZyBba3dvcmtlci9SLXJjdV9ncF0KICAgICAgNiBrd29ya2VyL1Itc3luY18gW2t3b3JrZXIvUi1zeW5jX3dxXQogICAgICA3IGt3b3JrZXIvUi1zbHViXyBba3dvcmtlci9SLXNsdWJfZmx1c2h3cV0KICAgICAgOCBrd29ya2VyL1ItbmV0bnMgW2t3b3JrZXIvUi1uZXRuc10KICAgICAgOSBrd29ya2VyLzA6MC1ldmUgW2t3b3JrZXIvMDowLWV2ZW50c10KICAgICAxMSBrd29ya2VyLzA6MEgta2IgW2t3b3JrZXIvMDowSC1rYmxvY2tkXQogICAgIDEzIGt3b3JrZXIvUi1tbV9wZSBba3dvcmtlci9SLW1tX3BlcmNwdV93cV0KICAgICAxNCByY3VfdGFza3Nfa3RocmUgW3JjdV90YXNrc19rdGhyZWFkXQogICAgIDE1IHJjdV90YXNrc19ydWRlXyBbcmN1X3Rhc2tzX3J1ZGVfa3RocmVhZF0KICAgICAxNiByY3VfdGFza3NfdHJhY2UgW3JjdV90YXNrc190cmFjZV9rdGhyZWFkXQogICAgIDE3IGtzb2Z0aXJxZC8wICAgICBba3NvZnRpcnFkLzBdCiAgICAgMTggcmN1X3ByZWVtcHQgICAgIFtyY3VfcHJlZW1wdF0KICAgICAxOSByY3VvZy8wICAgICAgICAgW3JjdW9nLzBdCiAgICAgMjAgcmN1b3AvMCAgICAgICAgIFtyY3VvcC8wXQogICAgIDIxIHJjdV9leHBfcGFyX2dwXyBbcmN1X2V4cF9wYXJfZ3Bfa3RocmVhZF93b3JrZXIvMF0KICAgICAyMiByY3VfZXhwX2dwX2t0aHIgW3JjdV9leHBfZ3Bfa3RocmVhZF93b3JrZXJdCiAgICAgMjMgbWlncmF0aW9uLzAgICAgIFttaWdyYXRpb24vMF0KICAgICAyNCBpZGxlX2luamVjdC8wICAgW2lkbGVfaW5qZWN0LzBdCiAgICAgMjUgY3B1aHAvMCAgICAgICAgIFtjcHVocC8wXQogICAgIDI2IGNwdWhwLzEgICAgICAgICBbY3B1aHAvMV0KICAgICAyNyBpZGxlX2luamVjdC8xICAgW2lkbGVfaW5qZWN0LzFdCiAgICAgMjggbWlncmF0aW9uLzEgICAgIFttaWdyYXRpb24vMV0KICAgICAyOSBrc29mdGlycWQvMSAgICAgW2tzb2Z0aXJxZC8xXQogICAgIDMxIGt3b3JrZXIvMTowSC1ldiBba3dvcmtlci8xOjBILWV2ZW50c19oaWdocHJpXQogICAgIDMyIHJjdW9wLzEgICAgICAgICBbcmN1b3AvMV0KICAgICAzMyBjcHVocC8yICAgICAgICAgW2NwdWhwLzJdCiAgICAgMzQgaWRsZV9pbmplY3QvMiAgIFtpZGxlX2luamVjdC8yXQogICAgIDM1IG1pZ3JhdGlvbi8yICAgICBbbWlncmF0aW9uLzJdCiAgICAgMzYga3NvZnRpcnFkLzIgICAgIFtrc29mdGlycWQvMl0KICAgICAzNyBrd29ya2VyLzI6MC1ldmUgW2t3b3JrZXIvMjowLWV2ZW50c10KICAgICAzOCBrd29ya2VyLzI6MEggICAgW2t3b3JrZXIvMjowSF0KICAgICAzOSByY3VvcC8yICAgICAgICAgW3JjdW9wLzJdCiAgICAgNDAgY3B1aHAvMyAgICAgICAgIFtjcHVocC8zXQogICAgIDQxIGlkbGVfaW5qZWN0LzMgICBbaWRsZV9pbmplY3QvM10KICAgICA0MiBtaWdyYXRpb24vMyAgICAgW21pZ3JhdGlvbi8zXQogICAgIDQzIGtzb2Z0aXJxZC8zICAgICBba3NvZnRpcnFkLzNdCiAgICAgNDQga3dvcmtlci8zOjAtZXZlIFtrd29ya2VyLzM6MC1ldmVudHNdCiAgICAgNDUga3dvcmtlci8zOjBILWtiIFtrd29ya2VyLzM6MEgta2Jsb2NrZF0KICAgICA0NiByY3VvZy8zICAgICAgICAgW3JjdW9nLzNdCiAgICAgNDcgcmN1b3AvMyAgICAgICAgIFtyY3VvcC8zXQogICAgIDQ4IGNwdWhwLzQgICAgICAgICBbY3B1aHAvNF0KICAgICA0OSBpZGxlX2luamVjdC80ICAgW2lkbGVfaW5qZWN0LzRdCiAgICAgNTAgbWlncmF0aW9uLzQgICAgIFttaWdyYXRpb24vNF0KICAgICA1MSBrc29mdGlycWQvNCAgICAgW2tzb2Z0aXJxZC80XQogICAgIDUyIGt3b3JrZXIvNDowLWV2ZSBba3dvcmtlci80OjAtZXZlbnRzXQogICAgIDUzIGt3b3JrZXIvNDowSCAgICBba3dvcmtlci80OjBIXQogICAgIDU0IHJjdW9wLzQgICAgICAgICBbcmN1b3AvNF0KICAgICA1NSBjcHVocC81ICAgICAgICAgW2NwdWhwLzVdCiAgICAgNTYgaWRsZV9pbmplY3QvNSAgIFtpZGxlX2luamVjdC81XQogICAgIDU3IG1pZ3JhdGlvbi81ICAgICBbbWlncmF0aW9uLzVdCiAgICAgNTgga3NvZnRpcnFkLzUgICAgIFtrc29mdGlycWQvNV0KICAgICA1OSBrd29ya2VyLzU6MC1ldmUgW2t3b3JrZXIvNTowLWV2ZW50c10KICAgICA2MCBrd29ya2VyLzU6MEggICAgW2t3b3JrZXIvNTowSF0KICAgICA2MSByY3VvcC81ICAgICAgICAgW3JjdW9wLzVdCiAgICAgNjcga3dvcmtlci91MjQ6NS1lIFtrd29ya2VyL3UyNDo1LWV2ZW50c191bmJvdW5kXQogICAgIDY4IGtkZXZ0bXBmcyAgICAgICBba2RldnRtcGZzXQogICAgIDY5IGt3b3JrZXIvUi1pbmV0XyBba3dvcmtlci9SLWluZXRfZnJhZ193cV0KICAgICA3MCBrYXVkaXRkICAgICAgICAgW2thdWRpdGRdCiAgICAgNzEga2h1bmd0YXNrZCAgICAgIFtraHVuZ3Rhc2tkXQogICAgIDcyIG9vbV9yZWFwZXIgICAgICBbb29tX3JlYXBlcl0KICAgICA3MyBrd29ya2VyL1Itd3JpdGUgW2t3b3JrZXIvUi13cml0ZWJhY2tdCiAgICAgNzQga2NvbXBhY3RkMCAgICAgIFtrY29tcGFjdGQwXQogICAgIDc1IGtzbWQgICAgICAgICAgICBba3NtZF0KICAgICA3NiBraHVnZXBhZ2VkICAgICAgW2todWdlcGFnZWRdCiAgICAgNzcga3dvcmtlci9SLWtpbnRlIFtrd29ya2VyL1Ita2ludGVncml0eWRdCiAgICAgNzgga3dvcmtlci9SLWtibG9jIFtrd29ya2VyL1Ita2Jsb2NrZF0KICAgICA3OSBrd29ya2VyL1ItYmxrY2cgW2t3b3JrZXIvUi1ibGtjZ19wdW50X2Jpb10KICAgICA4MCBpcnEvOS1hY3BpICAgICAgW2lycS85LWFjcGldCiAgICAgODEga3dvcmtlci8xOjEtZXZlIFtrd29ya2VyLzE6MS1ldmVudHNdCiAgICAgODIga3dvcmtlci9SLXRwbV9kIFtrd29ya2VyL1ItdHBtX2Rldl93cV0KICAgICA4MyBrd29ya2VyL1ItZWRhYy0gW2t3b3JrZXIvUi1lZGFjLXBvbGxlcl0KICAgICA4NCBrd29ya2VyL1ItZGV2ZnIgW2t3b3JrZXIvUi1kZXZmcmVxX3dxXQogICAgIDg1IGt3b3JrZXIvUi1xdW90YSBba3dvcmtlci9SLXF1b3RhX2V2ZW50c191bmJvdW5kXQogICAgIDg2IGt3b3JrZXIvMToxSC1rYiBba3dvcmtlci8xOjFILWtibG9ja2RdCiAgICAgODcga3N3YXBkMCAgICAgICAgIFtrc3dhcGQwXQogICAgIDk0IGt3b3JrZXIvUi1rdGhybyBba3dvcmtlci9SLWt0aHJvdGxkXQogICAgIDk4IGt3b3JrZXIvUi1hY3BpXyBba3dvcmtlci9SLWFjcGlfdGhlcm1hbF9wbV0KICAgICA5OSBrd29ya2VyL1ItbWxkICAgW2t3b3JrZXIvUi1tbGRdCiAgICAxMDAga3dvcmtlci9SLWlwdjZfIFtrd29ya2VyL1ItaXB2Nl9hZGRyY29uZl0KICAgIDEwNSBrd29ya2VyL1Ita3N0cnAgW2t3b3JrZXIvUi1rc3RycF0KICAgIDEwNyBrd29ya2VyL3UyNTowICAgW2t3b3JrZXIvdTI1OjBdCiAgICAxNjMga3dvcmtlci91MjQ6Ni1rIFtrd29ya2VyL3UyNDo2LWt2ZnJlZV9yY3VfcmVjbGFpbV0KICAgIDE3MyBrd29ya2VyLzA6MUggICAgW2t3b3JrZXIvMDoxSF0KICAgIDIyNCB3YXRjaGRvZ2QgICAgICAgW3dhdGNoZG9nZF0KICAgIDIyNiBrd29ya2VyL1ItYXRhX3MgW2t3b3JrZXIvUi1hdGFfc2ZmXQogICAgMjI3IHNjc2lfZWhfMCAgICAgICBbc2NzaV9laF8wXQogICAgMjI4IGt3b3JrZXIvUi1zY3NpXyBba3dvcmtlci9SLXNjc2lfdG1mXzBdCiAgICAyMjkgc2NzaV9laF8xICAgICAgIFtzY3NpX2VoXzFdCiAgICAyMzAga3dvcmtlci9SLXNjc2lfIFtrd29ya2VyL1Itc2NzaV90bWZfMV0KICAgIDIzMiBzY3NpX2VoXzIgICAgICAgW3Njc2lfZWhfMl0KICAgIDIzMyBrd29ya2VyL1Itc2NzaV8gW2t3b3JrZXIvUi1zY3NpX3RtZl8yXQogICAgMjM0IHNjc2lfZWhfMyAgICAgICBbc2NzaV9laF8zXQogICAgMjM1IGt3b3JrZXIvUi1zY3NpXyBba3dvcmtlci9SLXNjc2lfdG1mXzNdCiAgICAyMzcgc2NzaV9laF80ICAgICAgIFtzY3NpX2VoXzRdCiAgICAyMzgga3dvcmtlci9SLXNjc2lfIFtrd29ya2VyL1Itc2NzaV90bWZfNF0KICAgIDIzOSBzY3NpX2VoXzUgICAgICAgW3Njc2lfZWhfNV0KICAgIDI0MCBrd29ya2VyL1Itc2NzaV8gW2t3b3JrZXIvUi1zY3NpX3RtZl81XQogICAgMjQ0IGt3b3JrZXIvNDoyLWV2ZSBba3dvcmtlci80OjItZXZlbnRzXQogICAgMjc1IGpiZDIvc2RhMi04ICAgICBbamJkMi9zZGEyLThdCiAgICAyNzYga3dvcmtlci9SLWV4dDQtIFtrd29ya2VyL1ItZXh0NC1yc3YtY29udmVyc2lvbl0KICAgIDI5MCBrd29ya2VyLzI6MSAgICAgW2t3b3JrZXIvMjoxXQogICAgMjkxIGt3b3JrZXIvMzoxLWV2ZSBba3dvcmtlci8zOjEtZXZlbnRzXQogICAgMjkyIGt3b3JrZXIvNToxICAgICBba3dvcmtlci81OjFdCiAgICAzMjAgc3lzdGVtZC1qb3VybmFsIC91c3IvbGliL3N5c3RlbWQvc3lzdGVtZC1qb3VybmFsZAogICAgMzM3IGt3b3JrZXIvMzoxSCAgICBba3dvcmtlci8zOjFIXQogICAgMzY2IHN5c3RlbWQtdGltZXN5biAvdXNyL2xpYi9zeXN0ZW1kL3N5c3RlbWQtdGltZXN5bmNkCiAgICAzNzQgc3lzdGVtZC11ZGV2ZCAgIC91c3IvbGliL3N5c3RlbWQvc3lzdGVtZC11ZGV2ZAogICAgMzc4IHBzaW1vbiAgICAgICAgICBbcHNpbW9uXQogICAgNTg4IGNyb24gICAgICAgICAgICAvdXNyL3NiaW4vY3JvbiAtZgogICAgNTg5IGRidXMtZGFlbW9uICAgICAvdXNyL2Jpbi9kYnVzLWRhZW1vbiAtLXN5c3RlbSAtLWFkZHJlc3M9c3lzdGVtZDogLS1ub2ZvcmsgLS1ub3BpZGZpbGUgLS1zeXN0ZW1kLWFjdGl2YXRpb24gLS1zeXNsb2ctb25seQogICAgNTkzIHN5c3RlbWQtbG9naW5kICAvdXNyL2xpYi9zeXN0ZW1kL3N5c3RlbWQtbG9naW5kCiAgICA2NTEga3dvcmtlci9SLW52a20tIFtrd29ya2VyL1ItbnZrbS1kaXNwXQogICAgNjUyIGt3b3JrZXIvUi10dG0gICBba3dvcmtlci9SLXR0bV0KICAgIDY1MyBjYXJkMC1jcnRjMCAgICAgW2NhcmQwLWNydGMwXQogICAgNjU0IGNhcmQwLWNydGMxICAgICBbY2FyZDAtY3J0YzFdCiAgICA2NTUgY2FyZDAtY3J0YzIgICAgIFtjYXJkMC1jcnRjMl0KICAgIDY1NiBjYXJkMC1jcnRjMyAgICAgW2NhcmQwLWNydGMzXQogICAgNzIzIGFnZXR0eSAgICAgICAgICAvc2Jpbi9hZ2V0dHkgLW8gLS0gXHUgLS1ub3Jlc2V0IC0tbm9jbGVhciAtIGxpbnV4CiAgICA3MjQgc3NoZCAgICAgICAgICAgIHNzaGQ6IC91c3Ivc2Jpbi9zc2hkIC1EIFtsaXN0ZW5lcl0gMCBvZiAxMC0xMDAgc3RhcnR1cHMKICAgIDgwMyBrd29ya2VyL3UyNDowLWUgW2t3b3JrZXIvdTI0OjAtZXZlbnRzX3Bvd2VyX2VmZmljaWVudF0KICAgIDkxOCBrd29ya2VyLzE6Mi1jZ3IgW2t3b3JrZXIvMToyLWNncm91cF9mcmVlXQogICAgOTQ3IGt3b3JrZXIvMDoxLWNnciBba3dvcmtlci8wOjEtY2dyb3VwX2ZyZWVdCiAgICA5NTggcHNpbW9uICAgICAgICAgIFtwc2ltb25dCiAgICA5NjAgc3lzdGVtZCAgICAgICAgIC91c3IvbGliL3N5c3RlbWQvc3lzdGVtZCAtLXVzZXIKICAgIDk2MSBrd29ya2VyLzE6MCAgICAgW2t3b3JrZXIvMTowXQogICAgOTYzIChzZC1wYW0pICAgICAgICAoc2QtcGFtKQogICAgOTY4IHBzaW1vbiAgICAgICAgICBbcHNpbW9uXQogICAgOTgyIGt3b3JrZXIvMDoyLWNnciBba3dvcmtlci8wOjItY2dyb3VwX2ZyZWVdCiAgIDEwNDQgc3NoZC1zZXNzaW9uICAgIHNzaGQtc2Vzc2lvbjogcm9vdCBbcHJpdl0KICAgMTA1MSBzc2hkLXNlc3Npb24gICAgc3NoZC1zZXNzaW9uOiByb290QG5vdHR5CiAgIDEwNTIgcHl0aG9uMyAgICAgICAgIHB5dGhvbjMgLQogICAxMDUzIHBzICAgICAgICAgICAgICBwcyAtZW8gcGlkLGNvbW0sYXJncwo=",
+    "raw_process_listing_preserved": true,
+    "raw_process_listing_sha256": "9582aa7700ecb9d668620461152431cb2d0b7c1a12ddfaba4e7e940022da020a",
+    "raw_process_stderr": "",
+    "raw_process_stderr_base64": "",
+    "return_code": 0,
+    "scan_complete": true,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "9582aa7700ecb9d668620461152431cb2d0b7c1a12ddfaba4e7e940022da020a"
+  },
+  "protected_execution_source_paths": [
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/target_qualification/run_target_nonexecuting_qualification.py",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/GATE_A_ENGINEERING_SMOKE_SCHEDULE.json",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/GATE_A_TARGET_NAMESPACE_BINDING.json",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/nonhardware_qualification_3c6a5dd3_subject_d351a62f/target/logs/016_target_identity.stdout.txt"
+  ],
+  "qualification_execution_count": 1,
+  "qualification_exit_code": 0,
+  "qualification_json": {
+    "compiled": true,
+    "control_writes": 0,
+    "git_free": true,
+    "hardware_executions": 0,
+    "hardware_probes": 0,
+    "local_bundle_validation": {
+      "deterministic_archive_sha256": "04eaf73336f373865f4e837baca9ff4fe893d3b1b16dd8b8288af1259ff96f9c",
+      "execution_bundle_sha256": "abc9e50a517d764c553adc5096378992028b29a8f62480a9ae217ebbd5202bba",
+      "payload_file_count": 9,
+      "status": "GATE_A_TARGET_BUNDLE_VALIDATED",
+      "strict": true
+    },
+    "msr_accesses": 0,
+    "network_connections_opened": 0,
+    "null_baseline": "NO_DRIVE_ZERO_COUNT_BASELINE",
+    "receiver_captures": 0,
+    "sender_starts": 0,
+    "status": "GATE_A_TARGET_RUNNER_NO_DRIVE_QUALIFIED",
+    "worker_validate_only": {
+      "automatic_retry": false,
+      "control_writes": 0,
+      "hardware_executions": 0,
+      "msr_reads": 0,
+      "msr_writes": 0,
+      "receiver_captures": 0,
+      "sender_starts": 0,
+      "slot_count": 16,
+      "status": "GATE_A_WORKER_VALIDATE_ONLY_OK",
+      "validate_only": true
+    }
+  },
+  "qualification_status": "GATE_A_TARGET_RUNNER_NO_DRIVE_QUALIFIED",
+  "remote_namespace_preflight": {
+    "evidence_archive": {
+      "error_message": null,
+      "error_type": null,
+      "path": "/tmp/catcas_gate_a_evidence_gate_a_replacement_593e9920_02.tar",
+      "state": "ABSENT"
+    },
+    "execution_root": {
+      "error_message": null,
+      "error_type": null,
+      "path": "/root/catcas_phase6b6_gate_a_target_nonexec_gate_a_replacement_593e9920_02",
+      "state": "ABSENT"
+    },
+    "inspection_complete": true,
+    "schema_id": "CAT_CAS_PHASE6B6_GATE_A_REMOTE_NAMESPACE_PREFLIGHT_V1",
+    "temp_prefix": {
+      "error_message": null,
+      "error_type": null,
+      "match_count": 0,
+      "matches": [],
+      "prefix": "/tmp/catcas_gate_a_tq_gate_a_replacement_593e9920_02_",
+      "state": "ABSENT"
+    },
+    "transfer_stage": {
+      "error_message": null,
+      "error_type": null,
+      "path": "/tmp/catcas_gate_a_bundle_gate_a_replacement_593e9920_02.deploy.tar",
+      "state": "ABSENT"
+    }
+  },
+  "replacement_authority_git_blob_sha1": "f7935a84b9cc11570b93a22551cce0fb2706aa97",
+  "replacement_authority_id": "gate_a_replacement_593e9920_02",
+  "replacement_authority_path": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\acquisition\\gate_a\\target_qualification\\GATE_A_REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_AUTHORIZATION.json",
+  "replacement_authority_schema_id": "CAT_CAS_PHASE6B6_GATE_A_REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_AUTHORIZATION_V2",
+  "replacement_authority_sha256": "ecfa7d590d393c96e4f4f31180045660eef68f42b53c2de5f01faf3e0f933286",
+  "replacement_evidence_dir": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_target_nonexecuting_qualification_replacement_gate_a_replacement_593e9920_02",
+  "schema_id": "CAT_CAS_PHASE6B6_GATE_A_TARGET_NONEXEC_ORCHESTRATION_V2",
+  "strict_validation_after": {
+    "deterministic_archive_sha256": "04eaf73336f373865f4e837baca9ff4fe893d3b1b16dd8b8288af1259ff96f9c",
+    "execution_bundle_sha256": "abc9e50a517d764c553adc5096378992028b29a8f62480a9ae217ebbd5202bba",
+    "payload_file_count": 9,
+    "status": "GATE_A_TARGET_BUNDLE_VALIDATED",
+    "strict": true
+  },
+  "strict_validation_before": {
+    "deterministic_archive_sha256": "04eaf73336f373865f4e837baca9ff4fe893d3b1b16dd8b8288af1259ff96f9c",
+    "execution_bundle_sha256": "abc9e50a517d764c553adc5096378992028b29a8f62480a9ae217ebbd5202bba",
+    "payload_file_count": 9,
+    "status": "GATE_A_TARGET_BUNDLE_VALIDATED",
+    "strict": true
+  },
+  "target_evidence_archive_sha256": "960426405b81571b762dfff833fc3b99d726667fd64f222bea41ddcebb056d6d",
+  "target_evidence_inventory": [
+    {
+      "mode": "0o644",
+      "path": "TARGET_BUNDLE_VALIDATION_AFTER.json",
+      "sha256": "677757dd51e175fa53493bee544bb3fbdbdface59a3740abe083c2316d168b91",
+      "size": 293
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_BUNDLE_VALIDATION_BEFORE.json",
+      "sha256": "677757dd51e175fa53493bee544bb3fbdbdface59a3740abe083c2316d168b91",
+      "size": 293
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_EVIDENCE_INVENTORY.json",
+      "sha256": "87b5458f7cb558fc599fed49e61c2370ff8b0b816b8a1d9dfd1e6efff1da17b8",
+      "size": 2421
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_IDENTITY_AFTER.json",
+      "sha256": "7962ca938d5d9b2cfa04db170b31d957122e99ed35f26b0ee4a4fb0642c381de",
+      "size": 342
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_IDENTITY_AFTER.stdout",
+      "sha256": "7962ca938d5d9b2cfa04db170b31d957122e99ed35f26b0ee4a4fb0642c381de",
+      "size": 342
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_IDENTITY_BEFORE.json",
+      "sha256": "7962ca938d5d9b2cfa04db170b31d957122e99ed35f26b0ee4a4fb0642c381de",
+      "size": 342
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_IDENTITY_BEFORE.stdout",
+      "sha256": "7962ca938d5d9b2cfa04db170b31d957122e99ed35f26b0ee4a4fb0642c381de",
+      "size": 342
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_PROCESS_STATE_AFTER.txt",
+      "sha256": "29bc0f47b4367d57cdef1482297e6227128cb8ae7d534082ed1a5df24045b518",
+      "size": 14750
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_PROCESS_STATE_BEFORE.txt",
+      "sha256": "b186176a7f99753e0e99d89a6f542b5eccf921abe74ef0b1992676f9148945a6",
+      "size": 14758
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_QUALIFICATION.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_QUALIFICATION_RESULT.json",
+      "sha256": "16899a5ed2327467a5fa84d4e8cf3bbae28f56bc4a0321a1cd2f203ae94c3746",
+      "size": 970
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_TRANSFER_DIGEST.txt",
+      "sha256": "c11ca3b4998d7d5230a46d4b39172cd9de1868b5c12ac4497e67e2d3e998a8be",
+      "size": 65
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_TREE_AFTER.json",
+      "sha256": "ab583648b4e56f6270c128c1139da9edf6c7247fc0a37706de79a86aeffcdfe5",
+      "size": 2239
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_TREE_BEFORE.json",
+      "sha256": "ab583648b4e56f6270c128c1139da9edf6c7247fc0a37706de79a86aeffcdfe5",
+      "size": 2239
+    },
+    {
+      "mode": "0o644",
+      "path": "TARGET_TREE_COMPARISON.json",
+      "sha256": "cae9eddc304c70cb00346377b2f28007c54817729b6cb35df82f0788e4eb1c84",
+      "size": 260
+    }
+  ],
+  "temp_prefix_predeploy_match_count": 0,
+  "temp_prefix_predeploy_matches": [],
+  "temp_prefix_predeploy_state": "ABSENT",
+  "transfer_digest_match": true,
+  "transfer_stage_final_state": "ABSENT",
+  "transfer_stage_predeploy_state": "ABSENT",
+  "worker_validate_only_status": "GATE_A_WORKER_VALIDATE_ONLY_OK"
+}

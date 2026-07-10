@@ -46,6 +46,11 @@ SUPERSEDED_REPLACEMENT_AUTHORITY = (
     / "GATE_A_REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_AUTHORIZATION_SUPERSEDED_71ab1528_01.json"
 )
 REPLACEMENT_AUTHORITY_STATE = HERE / "GATE_A_REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_AUTHORITY_STATE.json"
+REPLACEMENT_EVIDENCE = (
+    PHASE6B6
+    / "evidence"
+    / "gate_a_target_nonexecuting_qualification_replacement_gate_a_replacement_593e9920_02"
+)
 
 RESULT_SCHEMA = HERE / "schemas" / "gate_a_target_nonexecuting_qualification_result.schema.json"
 ADJUDICATION_SCHEMA = HERE / "schemas" / "gate_a_target_nonexecuting_qualification_adjudication.schema.json"
@@ -74,14 +79,21 @@ CURRENT_STATUS = (
     "TARGET_NONEXECUTING_QUALIFICATION_ATTEMPT_PRESERVED__FAIL_CLOSED_PROCESS_ABSENCE_NOT_PROVEN"
 )
 NEXT_BOUNDARY = "PROJECT_OWNER_DECISION_FOR_ONE_REPLACEMENT_GATE_A_TARGET_NONEXECUTING_QUALIFICATION"
-AUTHORIZED_CURRENT_STATUS = "REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_AUTHORIZED__NOT_EXECUTED"
-AUTHORIZED_NEXT_BOUNDARY = "EXECUTE_ONE_ORCHESTRATOR_ONLY_NO_DRIVE_QUALIFICATION__NO_RETRY"
+COMPLETED_CURRENT_STATUS = "REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_COMPLETE__AUTHORITY_CONSUMED"
+COMPLETED_NEXT_BOUNDARY = (
+    "STOP__REPLACEMENT_QUALIFICATION_COMPLETE__ALL_DOWNSTREAM_WORK_REQUIRES_NEW_OWNER_AUTHORITY"
+)
 REPAIRED_SOURCE_COMMIT = "593e9920be533603217cee93572d79b86cc65cf9"
 REPAIRED_SOURCE_TREE = "d9488e9968023a98fabc0808530fdbc731d5831a"
 REPAIRED_SOURCE_REVIEW_ID = "PR_37_GATE_A_FOUR_WAY_REMOTE_NAMESPACE_PREFLIGHT_REVIEW"
 ACTIVE_AUTHORITY_ID = "gate_a_replacement_593e9920_02"
 ACTIVE_AUTHORITY_SHA256 = "ecfa7d590d393c96e4f4f31180045660eef68f42b53c2de5f01faf3e0f933286"
 ACTIVE_AUTHORITY_BLOB = "f7935a84b9cc11570b93a22551cce0fb2706aa97"
+EXECUTION_HEAD = "1ea708cfdc93083cc9386a6b1b14cf51d1ed8367"
+FINAL_BINDINGS_SHA256 = "a584f34b677e5e0d0a8fc5c057e2831ef4f60e865218c674edcebcd322bd5dca"
+EVIDENCE_INVENTORY_SHA256 = "1c882900775358c634353b34394d79bcd19c509a003190fb214b1f2985505b20"
+COMMANDS_SHA256 = "006507e525eedba79b230099532a0b64756d186af23ae5b383916a8ea48dbc91"
+TARGET_EVIDENCE_ARCHIVE_SHA256 = "960426405b81571b762dfff833fc3b99d726667fd64f222bea41ddcebb056d6d"
 SUPERSEDED_SOURCE_COMMIT = "71ab1528e44fe6181e72850a0bd93a131b7a6335"
 SUPERSEDED_SOURCE_TREE = "527f5a275c9af59e3fd85716d5e752fa79db74d8"
 SUPERSEDED_SOURCE_REVIEW_ID = "PR_37_REPLACEMENT_AUTHORITY_TWO_COMMIT_SOURCE_BINDING_REVIEW"
@@ -695,17 +707,242 @@ def validate_committed_replacement_authority(authority: dict[str, Any]) -> dict[
     require(custody["authorized_source_tree_sha1"] == REPAIRED_SOURCE_TREE, "active custody source tree mismatch")
     require(custody["authorized_source_review_id"] == REPAIRED_SOURCE_REVIEW_ID, "active custody source review mismatch")
     require(custody["execution_head"] == future_runner.current_head(), "active custody execution HEAD mismatch")
-    require(not evidence_path.exists() and not evidence_path.is_symlink(), "active authority evidence exists before execution")
+    require(evidence_path.resolve() == REPLACEMENT_EVIDENCE.resolve(), "active authority evidence namespace mismatch")
+    require(evidence_path.is_dir() and not evidence_path.is_symlink(), "consumed active authority evidence directory missing")
     return {
         **custody,
-        "status": "COMMITTED_REPLACEMENT_AUTHORITY_VALID_UNCONSUMED",
+        "status": "COMMITTED_REPLACEMENT_AUTHORITY_VALID_CONSUMED",
         "authority_id": authority["authority_id"],
         "authority_artifact_path": REPLACEMENT_AUTHORITY.relative_to(REPO_ROOT).as_posix(),
         "authority_artifact_sha256": ACTIVE_AUTHORITY_SHA256,
-        "authority_consumed": False,
-        "replacement_execution_count": 0,
+        "authority_consumed": True,
+        "replacement_execution_count": 1,
         "replacement_evidence_dir": evidence_path.relative_to(REPO_ROOT).as_posix(),
-        "replacement_evidence_present": False,
+        "replacement_evidence_present": True,
+    }
+
+
+def validate_replacement_evidence(
+    evidence_dir: Path = REPLACEMENT_EVIDENCE,
+    *,
+    expected_binding: str = REPLACEMENT_EVIDENCE.relative_to(REPO_ROOT).as_posix(),
+    require_committed: bool = True,
+) -> dict[str, Any]:
+    """Independently adjudicate the one replacement evidence namespace."""
+    require(evidence_dir.is_dir() and not evidence_dir.is_symlink(), "replacement evidence directory missing")
+    for path in evidence_dir.rglob("*"):
+        require(not path.is_symlink(), f"replacement evidence contains symlink: {path}")
+
+    inventory_path = evidence_dir / "EVIDENCE_INVENTORY.json"
+    bindings_path = evidence_dir / "FINAL_BINDINGS.json"
+    commands_path = evidence_dir / "COMMANDS.jsonl"
+    require(sha256_file(inventory_path) == EVIDENCE_INVENTORY_SHA256, "replacement evidence inventory SHA-256 mismatch")
+    require(sha256_file(bindings_path) == FINAL_BINDINGS_SHA256, "replacement final bindings SHA-256 mismatch")
+    require(sha256_file(commands_path) == COMMANDS_SHA256, "replacement commands SHA-256 mismatch")
+
+    inventory = load(inventory_path)
+    require(set(inventory) == {"schema_id", "file_count", "files"}, "replacement evidence inventory key closure mismatch")
+    require(inventory["schema_id"] == "CAT_CAS_PHASE6B6_GATE_A_TARGET_NONEXEC_EVIDENCE_INVENTORY_V1", "replacement evidence inventory schema mismatch")
+    require(isinstance(inventory["files"], list), "replacement evidence inventory files must be a list")
+    require(inventory["file_count"] == len(inventory["files"]) == 78, "replacement evidence inventory count mismatch")
+    listed_paths: set[str] = set()
+    for entry in inventory["files"]:
+        require(isinstance(entry, dict) and set(entry) == {"path", "sha256", "size"}, "replacement inventory entry malformed")
+        relative = Path(entry["path"])
+        require(not relative.is_absolute() and ".." not in relative.parts and entry["path"] == relative.as_posix(), "unsafe replacement inventory path")
+        require(entry["path"] not in listed_paths, "duplicate replacement inventory path")
+        listed_paths.add(entry["path"])
+        path = evidence_dir / relative
+        require(path.is_file() and not path.is_symlink(), f"replacement inventory file missing: {entry['path']}")
+        require(path.stat().st_size == entry["size"], f"replacement inventory size mismatch: {entry['path']}")
+        require(sha256_file(path) == entry["sha256"], f"replacement inventory SHA-256 mismatch: {entry['path']}")
+    actual_paths = {
+        path.relative_to(evidence_dir).as_posix()
+        for path in evidence_dir.rglob("*")
+        if path.is_file() and path.name not in {"EVIDENCE_INVENTORY.json", "FINAL_BINDINGS.json"}
+    }
+    require(listed_paths == actual_paths, "replacement evidence inventory does not close over actual files")
+
+    bindings = load(bindings_path)
+    require(bindings["schema_id"] == "CAT_CAS_PHASE6B6_GATE_A_TARGET_NONEXEC_ORCHESTRATION_V2", "replacement binding schema mismatch")
+    require(bindings["overall_status"] == "SUCCESS", "replacement orchestration did not succeed")
+    require(bindings["execution_head"] == EXECUTION_HEAD, "replacement execution HEAD mismatch")
+    require(bindings["authorized_source_commit"] == REPAIRED_SOURCE_COMMIT, "replacement evidence source commit mismatch")
+    require(bindings["authorized_source_tree_sha1"] == REPAIRED_SOURCE_TREE, "replacement evidence source tree mismatch")
+    require(bindings["authorized_source_review_id"] == REPAIRED_SOURCE_REVIEW_ID, "replacement evidence review id mismatch")
+    require(bindings["replacement_authority_id"] == ACTIVE_AUTHORITY_ID, "replacement evidence authority id mismatch")
+    require(bindings["replacement_authority_sha256"] == ACTIVE_AUTHORITY_SHA256, "replacement evidence authority SHA-256 mismatch")
+    require(bindings["replacement_authority_git_blob_sha1"] == ACTIVE_AUTHORITY_BLOB, "replacement evidence authority blob mismatch")
+    require(bindings["replacement_evidence_dir"] == expected_binding, "replacement evidence path binding mismatch")
+    require(bindings["_evidence_inventory_sha256"] == EVIDENCE_INVENTORY_SHA256, "final bindings inventory digest mismatch")
+    require(bindings["maximum_target_qualification_executions"] == 1, "replacement maximum execution count mismatch")
+    require(bindings["qualification_execution_count"] == 1, "replacement qualification execution count mismatch")
+    require(bindings["automatic_retry"] is False, "replacement evidence automatic retry must be false")
+    require(bindings["qualification_exit_code"] == 0, "replacement qualification exit code nonzero")
+    require(bindings["qualification_status"] == "GATE_A_TARGET_RUNNER_NO_DRIVE_QUALIFIED", "replacement qualification status mismatch")
+    require(bindings["worker_validate_only_status"] == "GATE_A_WORKER_VALIDATE_ONLY_OK", "replacement worker status mismatch")
+
+    authority = load(REPLACEMENT_AUTHORITY)
+    with (
+        mock.patch.object(future_runner, "EXEC_ROOT", authority["remote_execution_root"], create=True),
+        mock.patch.object(future_runner, "TRANSFER_STAGE", authority["remote_transfer_stage"], create=True),
+        mock.patch.object(future_runner, "EV_ARCHIVE", authority["remote_evidence_archive"], create=True),
+        mock.patch.object(future_runner, "TP", authority["remote_temp_prefix"], create=True),
+    ):
+        future_runner.validate_remote_namespace_preflight(bindings["remote_namespace_preflight"])
+    require(bindings["execution_root_predeploy_state"] == "ABSENT", "replacement execution root was not absent at preflight")
+    require(bindings["transfer_stage_predeploy_state"] == "ABSENT", "replacement transfer stage was not absent at preflight")
+    require(bindings["evidence_archive_predeploy_state"] == "ABSENT", "replacement evidence archive was not absent at preflight")
+    require(bindings["temp_prefix_predeploy_state"] == "ABSENT", "replacement temp prefix was not absent at preflight")
+    require(bindings["temp_prefix_predeploy_match_count"] == 0, "replacement temp prefix match count nonzero")
+    require(bindings["temp_prefix_predeploy_matches"] == [], "replacement temp prefix matches present")
+
+    for key in ("process_scan_before", "process_scan_after", "process_scan_after_cleanup"):
+        future_runner.validate_process_scan(bindings[key], f"replacement {key}")
+        require(bindings[key]["forbidden_process_hits"] == [], f"replacement {key} has forbidden process hits")
+    qualification = bindings["qualification_json"]
+    validate_qualification_json(qualification)
+    require(qualification == load(evidence_dir / "copy_back" / "target_evidence" / "TARGET_QUALIFICATION_RESULT.json"), "copied qualification differs from final bindings")
+    require(qualification["hardware_probes"] == 0, "replacement qualification probed hardware")
+    require(qualification["sender_starts"] == 0, "replacement qualification started sender")
+    require(qualification["receiver_captures"] == 0, "replacement qualification captured receiver")
+    require(qualification["control_writes"] == 0, "replacement qualification wrote controls")
+    require(qualification["msr_accesses"] == 0, "replacement qualification accessed MSRs")
+    require(qualification["hardware_executions"] == 0, "replacement qualification executed hardware")
+    require(bindings["strict_validation_before"] == bindings["strict_validation_after"], "strict bundle validation changed")
+    require(bindings["bundle_tree_unchanged"] is True, "replacement bundle tree changed")
+    require(bindings["before_tree_canonical_sha256"] == bindings["after_tree_canonical_sha256"], "replacement bundle tree digest changed")
+    require(bindings["transfer_digest_match"] is True, "replacement transfer digest mismatch")
+    require(bindings["copy_back_verified"] is True, "replacement copy-back not verified")
+    require(bindings["cleanup_verified"] is True, "replacement cleanup not verified")
+    require(bindings["execution_root_final_state"] == "ABSENT", "replacement execution root cleanup not proven")
+    require(bindings["transfer_stage_final_state"] == "ABSENT", "replacement transfer stage cleanup not proven")
+    require(bindings["current_identity_before"] == bindings["current_identity_after"], "replacement target identity changed")
+    require(bindings["current_identity_before"]["hostname"] == EXPECTED_HOSTNAME, "replacement target hostname mismatch")
+    require(bindings["current_identity_before"]["architecture"] == EXPECTED_ARCH, "replacement target architecture mismatch")
+    require(bindings["current_identity_before"]["cpu_model"] == EXPECTED_CPU, "replacement target CPU mismatch")
+
+    copy_back = load(evidence_dir / "COPY_BACK_RECEIPT.json")
+    require(set(copy_back) == {"inventory_entry_count", "inventory_verified", "retained_evidence_custody_verified", "schema_id", "target_evidence_archive_sha256", "unexpected_entries"}, "replacement copy-back receipt key closure mismatch")
+    require(copy_back["schema_id"] == "CAT_CAS_PHASE6B6_GATE_A_COPY_BACK_RECEIPT_V1", "replacement copy-back schema mismatch")
+    require(copy_back["inventory_entry_count"] == 15, "replacement copy-back inventory count mismatch")
+    require(copy_back["inventory_verified"] is True and copy_back["retained_evidence_custody_verified"] is True, "replacement copy-back custody unverified")
+    require(copy_back["unexpected_entries"] == [], "replacement copy-back contains unexpected entries")
+    require(copy_back["target_evidence_archive_sha256"] == TARGET_EVIDENCE_ARCHIVE_SHA256, "replacement target archive receipt mismatch")
+    require(sha256_file(evidence_dir / "copy_back" / "target_evidence.tar") == TARGET_EVIDENCE_ARCHIVE_SHA256, "replacement copied archive SHA-256 mismatch")
+
+    copied_dir = evidence_dir / "copy_back" / "target_evidence"
+    target_inventory_path = copied_dir / "TARGET_EVIDENCE_INVENTORY.json"
+    target_inventory = json.loads(target_inventory_path.read_text(encoding="utf-8"))
+    require(isinstance(target_inventory, list) and len(target_inventory) == 14, "replacement target inventory count mismatch")
+    target_names: set[str] = set()
+    for entry in target_inventory:
+        require(isinstance(entry, dict) and set(entry) == {"mode", "path", "sha256", "size"}, "replacement target inventory entry malformed")
+        require("/" not in entry["path"] and "\\" not in entry["path"] and entry["path"] not in {".", ".."}, "unsafe replacement target inventory path")
+        require(entry["path"] not in target_names, "duplicate replacement target inventory path")
+        target_names.add(entry["path"])
+        path = copied_dir / entry["path"]
+        require(path.is_file() and not path.is_symlink(), f"replacement copied target file missing: {entry['path']}")
+        require(path.stat().st_size == entry["size"] and sha256_file(path) == entry["sha256"], f"replacement copied target file mismatch: {entry['path']}")
+    actual_target_names = {path.name for path in copied_dir.iterdir() if path.is_file()}
+    require(target_names | {"TARGET_EVIDENCE_INVENTORY.json"} == actual_target_names, "replacement copied target inventory is not closed")
+    bound_target_inventory = bindings["target_evidence_inventory"]
+    require(isinstance(bound_target_inventory, list) and len(bound_target_inventory) == 15, "replacement bound target inventory count mismatch")
+    bound_names: set[str] = set()
+    for entry in bound_target_inventory:
+        require(isinstance(entry, dict) and set(entry) == {"mode", "path", "sha256", "size"}, "replacement bound target inventory entry malformed")
+        require(entry["path"] not in bound_names, "duplicate replacement bound target inventory path")
+        bound_names.add(entry["path"])
+        path = copied_dir / entry["path"]
+        require(path.is_file() and not path.is_symlink(), f"replacement bound target file missing: {entry['path']}")
+        require(path.stat().st_size == entry["size"] and sha256_file(path) == entry["sha256"], f"replacement bound target file mismatch: {entry['path']}")
+    require(bound_names == actual_target_names, "replacement bound target inventory is not closed")
+    require(
+        [entry for entry in bound_target_inventory if entry["path"] != "TARGET_EVIDENCE_INVENTORY.json"] == target_inventory,
+        "replacement target inventory binding mismatch",
+    )
+
+    cleanup = load(evidence_dir / "CLEANUP_RECEIPT.json")
+    require(set(cleanup) == {"schema_id", "exact_execution_root_removed", "exact_transfer_stage_removed", "execution_root_absence_proven", "transfer_stage_absence_proven", "forbidden_processes_remaining", "process_scan"}, "replacement cleanup receipt key closure mismatch")
+    require(cleanup["schema_id"] == "CAT_CAS_PHASE6B6_GATE_A_CLEANUP_RECEIPT_V2", "replacement cleanup schema mismatch")
+    for key in ("exact_execution_root_removed", "exact_transfer_stage_removed", "execution_root_absence_proven", "transfer_stage_absence_proven"):
+        require(cleanup[key] is True, f"replacement cleanup field false: {key}")
+    require(cleanup["forbidden_processes_remaining"] == [], "replacement cleanup left forbidden processes")
+    future_runner.validate_process_scan(cleanup["process_scan"], "replacement cleanup receipt process scan")
+    require(cleanup["process_scan"] == bindings["process_scan_after_cleanup"], "cleanup process receipt differs from final bindings")
+
+    command_lines = commands_path.read_text(encoding="utf-8").splitlines()
+    commands = [json.loads(line) for line in command_lines]
+    require(len(commands) == 22, "replacement command count mismatch")
+    require([command["sequence"] for command in commands] == list(range(1, 23)), "replacement command sequence mismatch")
+    require(all(command["exit_code"] == 0 for command in commands), "replacement command returned nonzero")
+    qualification_commands = [
+        command
+        for command in commands
+        if "gate_a_target_runner.py --qualify-no-drive" in " ".join(command["argv"])
+    ]
+    require(len(qualification_commands) == 1, "replacement qualification command did not execute exactly once")
+    preflight_command = commands[4]
+    require(preflight_command["stdin_script_path"].endswith("005_prove_four_way_absence.script.py"), "four-way preflight was not first target operation")
+    require(set(preflight_command["environment"]) == {"ROOT", "STAGE", "EVARCHIVE", "TP"}, "four-way preflight environment was not read-only")
+    require("006_target_identity_before" in commands[5]["stdout_path"], "temp-prefix write did not follow four-way preflight")
+    for command in commands:
+        argv_text = " ".join(command["argv"])
+        for forbidden in FORBIDDEN_COMMAND_SUBSTRINGS:
+            require(forbidden not in argv_text, f"forbidden replacement command detected: {forbidden}")
+
+    git_custody: dict[str, Any] = {"required": require_committed}
+    if require_committed:
+        evidence_rel = REPLACEMENT_EVIDENCE.relative_to(REPO_ROOT).as_posix()
+        require(evidence_dir.resolve() == REPLACEMENT_EVIDENCE.resolve(), "committed evidence custody requires canonical evidence path")
+        tree = subprocess.run(
+            ["git", "ls-tree", "-r", "--name-only", "HEAD", "--", evidence_rel],
+            cwd=str(REPO_ROOT),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        require(tree.returncode == 0, f"cannot enumerate committed replacement evidence: {tree.stderr}")
+        committed = {line for line in tree.stdout.splitlines() if line}
+        expected_committed = {
+            f"{evidence_rel}/{path.relative_to(evidence_dir).as_posix()}"
+            for path in evidence_dir.rglob("*")
+            if path.is_file()
+        }
+        require(committed == expected_committed, "current HEAD replacement evidence tree mismatch")
+        worktree = subprocess.run(
+            ["git", "status", "--porcelain=v1", "--untracked-files=all", "--", evidence_rel],
+            cwd=str(REPO_ROOT),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        require(worktree.returncode == 0 and worktree.stdout == "", "replacement evidence differs from current HEAD")
+        git_custody = {
+            "required": True,
+            "committed_file_count": len(committed),
+            "current_head": future_runner.current_head(),
+            "worktree_clean": True,
+        }
+
+    return {
+        "status": "REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_COMPLETE",
+        "execution_head": EXECUTION_HEAD,
+        "authority_id": ACTIVE_AUTHORITY_ID,
+        "qualification_execution_count": 1,
+        "automatic_retry": False,
+        "four_way_namespace_preflight": True,
+        "process_scans_complete": 3,
+        "forbidden_process_hits": 0,
+        "copy_back_verified": True,
+        "cleanup_verified": True,
+        "evidence_file_count": inventory["file_count"] + 2,
+        "evidence_inventory_sha256": EVIDENCE_INVENTORY_SHA256,
+        "final_bindings_sha256": FINAL_BINDINGS_SHA256,
+        "target_evidence_archive_sha256": TARGET_EVIDENCE_ARCHIVE_SHA256,
+        "git_custody": git_custody,
+        "target_nonexecuting_qualification_complete": True,
+        "execution_bundle_target_qualified": True,
     }
 
 
@@ -716,7 +953,7 @@ def validate_replacement_authority_state(
     superseded_custody: dict[str, Any],
 ) -> None:
     validate_const_instance(state, schema, "replacement authority state")
-    require(state["status"] == AUTHORIZED_CURRENT_STATUS, "authorized current status mismatch")
+    require(state["status"] == COMPLETED_CURRENT_STATUS, "completed current status mismatch")
     require(state["superseded_authority_id"] == superseded_custody["authority_id"], "superseded authority state id mismatch")
     require(state["superseded_authority_artifact_path"] == superseded_custody["authority_artifact_path"], "superseded authority path mismatch")
     require(state["superseded_authority_artifact_sha256"] == superseded_custody["authority_artifact_sha256"], "superseded authority SHA-256 mismatch")
@@ -731,20 +968,29 @@ def validate_replacement_authority_state(
     require(state["authorized_source_tree_sha1"] == active_custody["authorized_source_tree_sha1"], "active authority source tree mismatch")
     require(state["authorized_source_review_id"] == active_custody["authorized_source_review_id"], "active authority review id mismatch")
     require(state["authority_execution_head_recorded_dynamically"] is True, "authority state must use dynamic execution HEAD")
+    require(state["execution_head"] == EXECUTION_HEAD, "authority state execution HEAD mismatch")
     require(state["active_replacement_authority_present"] is True, "active authority must be present")
     require(state["new_replacement_authority_artifact_created"] is True, "new authority artifact must be recorded")
-    require(state["replacement_qualification_authorized"] is True, "one replacement qualification must be authorized")
+    require(state["replacement_qualification_was_authorized"] is True, "replacement qualification authorization history missing")
+    require(state["replacement_qualification_authorized"] is False, "consumed authority must not authorize another target contact")
     require(state["orchestrator_only_no_drive_qualification"] is True, "replacement authority must remain orchestrator-only and no-drive")
-    require(state["authority_consumed"] is False, "active authority cannot be consumed before execution")
-    require(state["replacement_execution_count"] == 0, "active replacement execution count must be zero")
-    require(state["replacement_evidence_present"] is False, "active replacement evidence must be absent")
+    require(state["authority_consumed"] is True, "active authority must be consumed after execution")
+    require(state["replacement_execution_count"] == 1, "active replacement execution count must be one")
+    require(state["replacement_evidence_present"] is True, "active replacement evidence must be present")
     require(state["replacement_evidence_dir"] == active_custody["replacement_evidence_dir"], "active replacement evidence namespace mismatch")
     require(state["automatic_retry"] is False, "active authority automatic retry must be false")
-    require(state["target_nonexecuting_qualification_complete"] is False, "target qualification must remain incomplete before execution")
-    require(state["execution_bundle_target_qualified"] is False, "target bundle must remain unqualified before execution")
+    require(state["replacement_result_status"] == "SUCCESS", "replacement result status mismatch")
+    require(state["final_bindings_sha256"] == FINAL_BINDINGS_SHA256, "authority state final bindings digest mismatch")
+    require(state["evidence_inventory_sha256"] == EVIDENCE_INVENTORY_SHA256, "authority state evidence inventory digest mismatch")
+    require(state["copy_back_verified"] is True, "authority state copy-back must be verified")
+    require(state["cleanup_verified"] is True, "authority state cleanup must be verified")
+    require(state["process_absence_proven"] is True, "authority state process absence must be proven")
+    require(state["four_way_remote_namespace_preflight_passed"] is True, "authority state four-way preflight must pass")
+    require(state["target_nonexecuting_qualification_complete"] is True, "target qualification must be complete")
+    require(state["execution_bundle_target_qualified"] is True, "target bundle must be qualified")
     for field in DOWNSTREAM_FALSE_FIELDS:
         require(state[field] is False, f"active authority downstream field must be false: {field}")
-    require(state["next_boundary"] == AUTHORIZED_NEXT_BOUNDARY, "active authority next boundary mismatch")
+    require(state["next_boundary"] == COMPLETED_NEXT_BOUNDARY, "completed authority next boundary mismatch")
 
 
 def require_no_unaccented_owner() -> None:
@@ -1379,13 +1625,17 @@ def mutation_tests(
         ("authority_state_automatic_retry_true", mutated(replacement_authority_state, lambda value: value.__setitem__("automatic_retry", True), replacement_authority_state_validator)),
         ("authority_state_active_authority_hidden", mutated(replacement_authority_state, lambda value: value.__setitem__("active_replacement_authority_present", False), replacement_authority_state_validator)),
         ("authority_state_new_authority_artifact_hidden", mutated(replacement_authority_state, lambda value: value.__setitem__("new_replacement_authority_artifact_created", False), replacement_authority_state_validator)),
-        ("authority_state_target_contact_authority_removed", mutated(replacement_authority_state, lambda value: value.__setitem__("replacement_qualification_authorized", False), replacement_authority_state_validator)),
+        ("authority_state_reauthorized_after_consumption", mutated(replacement_authority_state, lambda value: value.__setitem__("replacement_qualification_authorized", True), replacement_authority_state_validator)),
+        ("authority_state_authorization_history_removed", mutated(replacement_authority_state, lambda value: value.__setitem__("replacement_qualification_was_authorized", False), replacement_authority_state_validator)),
         ("authority_state_orchestrator_only_removed", mutated(replacement_authority_state, lambda value: value.__setitem__("orchestrator_only_no_drive_qualification", False), replacement_authority_state_validator)),
-        ("authority_state_consumed_before_execution", mutated(replacement_authority_state, lambda value: value.__setitem__("authority_consumed", True), replacement_authority_state_validator)),
-        ("authority_state_execution_count_before_execution", mutated(replacement_authority_state, lambda value: value.__setitem__("replacement_execution_count", 1), replacement_authority_state_validator)),
-        ("authority_state_evidence_present_before_execution", mutated(replacement_authority_state, lambda value: value.__setitem__("replacement_evidence_present", True), replacement_authority_state_validator)),
-        ("authority_state_target_qualification_promoted_before_execution", mutated(replacement_authority_state, lambda value: value.__setitem__("target_nonexecuting_qualification_complete", True), replacement_authority_state_validator)),
-        ("authority_state_target_bundle_promoted_before_execution", mutated(replacement_authority_state, lambda value: value.__setitem__("execution_bundle_target_qualified", True), replacement_authority_state_validator)),
+        ("authority_state_unconsumed_after_execution", mutated(replacement_authority_state, lambda value: value.__setitem__("authority_consumed", False), replacement_authority_state_validator)),
+        ("authority_state_execution_count_reset", mutated(replacement_authority_state, lambda value: value.__setitem__("replacement_execution_count", 0), replacement_authority_state_validator)),
+        ("authority_state_evidence_hidden", mutated(replacement_authority_state, lambda value: value.__setitem__("replacement_evidence_present", False), replacement_authority_state_validator)),
+        ("authority_state_result_status_changed", mutated(replacement_authority_state, lambda value: value.__setitem__("replacement_result_status", "FAILURE"), replacement_authority_state_validator)),
+        ("authority_state_copy_back_unverified", mutated(replacement_authority_state, lambda value: value.__setitem__("copy_back_verified", False), replacement_authority_state_validator)),
+        ("authority_state_cleanup_unverified", mutated(replacement_authority_state, lambda value: value.__setitem__("cleanup_verified", False), replacement_authority_state_validator)),
+        ("authority_state_target_qualification_demoted", mutated(replacement_authority_state, lambda value: value.__setitem__("target_nonexecuting_qualification_complete", False), replacement_authority_state_validator)),
+        ("authority_state_target_bundle_demoted", mutated(replacement_authority_state, lambda value: value.__setitem__("execution_bundle_target_qualified", False), replacement_authority_state_validator)),
     ]
     for field in future_runner.DOWNSTREAM_FALSE_FIELDS:
         checks.append((f"replacement_authority_downstream_{field}_true", mutated(replacement_authority, lambda value, key=field: value.__setitem__(key, True), replacement_authority_validator)))
@@ -1414,6 +1664,34 @@ def mutation_tests(
     cases.append(assert_rejects(
         "historical_evidence_extra_file",
         lambda: validate_mutated_evidence(lambda copied: (copied / "UNEXPECTED_EXTRA.txt").write_text("x", encoding="utf-8")),
+    ))
+
+    def validate_mutated_replacement_evidence(mutator: Callable[[Path], None]) -> None:
+        with tempfile.TemporaryDirectory(prefix="gate_a_replacement_evidence_mutation_") as temp_dir:
+            copied = Path(temp_dir) / REPLACEMENT_EVIDENCE.name
+            shutil.copytree(REPLACEMENT_EVIDENCE, copied)
+            mutator(copied)
+            validate_replacement_evidence(copied, require_committed=False)
+
+    cases.append(assert_rejects(
+        "replacement_evidence_file_changes",
+        lambda: validate_mutated_replacement_evidence(
+            lambda copied: (copied / "FINAL_BINDINGS.json").write_bytes(
+                (copied / "FINAL_BINDINGS.json").read_bytes() + b"\n"
+            )
+        ),
+    ))
+    cases.append(assert_rejects(
+        "replacement_evidence_file_removed",
+        lambda: validate_mutated_replacement_evidence(
+            lambda copied: (copied / "target" / "logs" / "005_prove_four_way_absence.stdout.txt").unlink()
+        ),
+    ))
+    cases.append(assert_rejects(
+        "replacement_evidence_extra_file",
+        lambda: validate_mutated_replacement_evidence(
+            lambda copied: (copied / "UNEXPECTED_EXTRA.txt").write_text("x", encoding="utf-8")
+        ),
     ))
 
     def execution_authority_appears() -> None:
@@ -1495,6 +1773,7 @@ def main() -> int:
     validate_candidate_v4(candidate_v4, candidate_v4_schema)
     superseded_authority_custody = validate_superseded_replacement_authority(superseded_replacement_authority)
     replacement_authority_custody = validate_committed_replacement_authority(replacement_authority)
+    replacement_evidence = validate_replacement_evidence()
     validate_replacement_authority_state(
         replacement_authority_state,
         replacement_authority_state_schema,
@@ -1530,26 +1809,27 @@ def main() -> int:
     )
 
     output = {
-        "status": AUTHORIZED_CURRENT_STATUS,
+        "status": COMPLETED_CURRENT_STATUS,
         "integrated_main": INTEGRATED_MAIN,
         "pre_repair_pr_head": PRE_REPAIR_HEAD,
         "historical_attempt_authorized": True,
         "historical_attempt_execution_count": 1,
         "historical_evidence_immutable": immutability,
         "process_evidence_defect": defect,
-        "target_nonexecuting_qualification_complete": False,
-        "execution_bundle_target_qualified": False,
+        "target_nonexecuting_qualification_complete": True,
+        "execution_bundle_target_qualified": True,
         "original_authority_consumed": True,
-        "replacement_qualification_authorized": True,
+        "replacement_qualification_authorized": False,
         "project_owner_execution_approval_recorded": False,
         "authorization_artifact_created": False,
         "active_replacement_authority_present": True,
         "new_replacement_authority_artifact_created": True,
         "superseded_replacement_authority_preserved": True,
         "superseded_replacement_authority_state": "SUPERSEDED_UNCONSUMED",
-        "replacement_authority_consumed": False,
-        "replacement_execution_count": 0,
+        "replacement_authority_consumed": True,
+        "replacement_execution_count": 1,
         "replacement_authority_custody": replacement_authority_custody,
+        "replacement_evidence_adjudication": replacement_evidence,
         "superseded_replacement_authority_custody": superseded_authority_custody,
         "engineering_smoke_authorized": False,
         "hardware_ran": False,
@@ -1565,8 +1845,9 @@ def main() -> int:
         "repaired_source_review_id": REPAIRED_SOURCE_REVIEW_ID,
         "repaired_source_commit": REPAIRED_SOURCE_COMMIT,
         "repaired_source_tree_sha1": REPAIRED_SOURCE_TREE,
-        "authority_bearing_execution_head": future_runner.current_head(),
-        "next_boundary": AUTHORIZED_NEXT_BOUNDARY,
+        "execution_head": EXECUTION_HEAD,
+        "current_verification_head": future_runner.current_head(),
+        "next_boundary": COMPLETED_NEXT_BOUNDARY,
     }
     print(json.dumps(output, sort_keys=True, indent=2))
     return 0
