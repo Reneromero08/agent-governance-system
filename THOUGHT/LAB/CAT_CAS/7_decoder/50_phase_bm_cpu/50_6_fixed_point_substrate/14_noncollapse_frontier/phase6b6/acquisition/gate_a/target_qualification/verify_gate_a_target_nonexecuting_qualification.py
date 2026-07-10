@@ -664,20 +664,25 @@ def future_scanner_nonzero_test() -> dict[str, Any]:
         }
 
 
-def future_replacement_authority_contract_test() -> dict[str, Any]:
-    source_commit = future_runner.current_head()
-    authority_id = "synthetic_owner_decision_test"
+def synthetic_replacement_authority(
+    source_commit: str,
+    source_tree_sha1: str,
+    *,
+    authority_id: str = "synthetic_owner_decision_test",
+) -> dict[str, Any]:
     local_evidence_dir = (
         future_runner.EVIDENCE_PARENT.relative_to(future_runner.REPO_ROOT).as_posix()
         + f"/gate_a_target_nonexecuting_qualification_replacement_{authority_id}"
     )
-    authority: dict[str, Any] = {
+    return {
         "schema_id": future_runner.REPLACEMENT_AUTHORITY_SCHEMA_ID,
         "decision": future_runner.REPLACEMENT_AUTHORITY_DECISION,
         "project_owner": EXPECTED_OWNER,
         "owner_instruction": "Authorize one synthetic contract-validation replacement only",
         "authority_id": authority_id,
         "authorized_source_commit": source_commit,
+        "authorized_source_tree_sha1": source_tree_sha1,
+        "authorized_source_review_id": future_runner.AUTHORIZED_SOURCE_REVIEW_ID,
         "historical_authorization_path": future_runner.HISTORICAL_AUTHORIZATION_REL,
         "historical_authority_consumed": True,
         "historical_evidence_dir": future_runner.HISTORICAL_EVIDENCE_REL,
@@ -712,21 +717,166 @@ def future_replacement_authority_contract_test() -> dict[str, Any]:
         "small_wall_authorized": False,
         "execution_authority_artifact_creation_authorized": False,
     }
+
+
+def future_replacement_authority_contract_test() -> dict[str, Any]:
+    source_commit = future_runner.current_head()
+    source_tree = subprocess.run(
+        ["git", "rev-parse", f"{source_commit}^{{tree}}"],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        check=True,
+    ).stdout.strip()
+    authority = synthetic_replacement_authority(source_commit, source_tree)
     with tempfile.TemporaryDirectory(prefix="gate_a_authority_contract_") as temp_dir:
         authority_path = Path(temp_dir) / "GATE_A_REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_AUTHORIZATION.json"
         evidence_path = future_runner.validate_replacement_authority(
             authority,
             authority_path,
-            source_commit=source_commit,
         )
-    require(evidence_path == future_runner.REPO_ROOT / local_evidence_dir, "future authority resolved wrong evidence namespace")
+    expected_evidence_path = future_runner.REPO_ROOT / authority["local_evidence_dir"]
+    require(evidence_path == expected_evidence_path, "future authority resolved wrong evidence namespace")
     future_runner.ensure_new_evidence_namespace(evidence_path)
     return {
         "status": "SYNTHETIC_REPLACEMENT_AUTHORITY_CONTRACT_VALID",
         "closed_key_count": len(authority),
+        "two_commit_source_binding": True,
+        "authorized_source_review_id": authority["authorized_source_review_id"],
         "historical_namespace_reused": False,
         "automatic_retry": authority["automatic_retry"],
         "downstream_authority_false": True,
+    }
+
+
+def replacement_authority_two_commit_git_integration_test() -> dict[str, Any]:
+    """Exercise the production custody validator in a disposable Git repository."""
+
+    def git(root: Path, *args: str) -> str:
+        proc = subprocess.run(
+            ["git", *args],
+            cwd=str(root),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        if proc.returncode != 0:
+            raise VerifyError(f"temporary Git command failed: git {' '.join(args)}: {proc.stderr.strip()}")
+        return proc.stdout.strip()
+
+    def write_authority(path: Path, source_commit: str, source_tree: str, authority_id: str) -> dict[str, Any]:
+        authority = synthetic_replacement_authority(
+            source_commit,
+            source_tree,
+            authority_id=authority_id,
+        )
+        path.write_text(json.dumps(authority, sort_keys=True, indent=2) + "\n", encoding="utf-8")
+        future_runner.validate_replacement_authority(authority, path)
+        return authority
+
+    def custody(root: Path, path: Path, authority: dict[str, Any]) -> dict[str, Any]:
+        return future_runner.validate_replacement_authority_custody(
+            path,
+            authority["authorized_source_commit"],
+            authority["authorized_source_tree_sha1"],
+            expected_authority=authority,
+            repo_root=root,
+            protected_paths=("reviewed_runner.py",),
+        )
+
+    with tempfile.TemporaryDirectory(prefix="gate_a_two_commit_git_") as temp_dir:
+        root = Path(temp_dir)
+        git(root, "init", "-b", "main")
+        git(root, "config", "user.name", "Gate A Integration Test")
+        git(root, "config", "user.email", "gate-a-test@example.invalid")
+        git(root, "config", "core.autocrlf", "false")
+
+        runner_path = root / "reviewed_runner.py"
+        authority_path = root / "GATE_A_REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_AUTHORIZATION.json"
+        runner_path.write_text("print('reviewed runner')\n", encoding="utf-8")
+        git(root, "add", "reviewed_runner.py")
+        git(root, "commit", "-m", "commit A reviewed source")
+        commit_a = git(root, "rev-parse", "HEAD")
+        tree_a = git(root, "rev-parse", f"{commit_a}^{{tree}}")
+
+        unrelated = git(root, "commit-tree", tree_a, "-m", "unrelated source object")
+
+        authority_b = write_authority(authority_path, commit_a, tree_a, "synthetic_commit_b_success")
+        git(root, "add", authority_path.name)
+        git(root, "commit", "-m", "commit B owner authority")
+        commit_b = git(root, "rev-parse", "HEAD")
+        success = custody(root, authority_path, authority_b)
+        require(success["authorized_source_commit"] == commit_a, "commit A source binding lost")
+        require(success["execution_head"] == commit_b, "commit B execution HEAD not recorded")
+
+        self_referential_authority = copy.deepcopy(authority_b)
+        self_referential_authority["authorized_source_commit"] = commit_b
+        self_referential_authority["authorized_source_tree_sha1"] = git(root, "rev-parse", f"{commit_b}^{{tree}}")
+        self_reference_case = assert_rejects(
+            "two_commit_self_reference_rejected",
+            lambda: custody(root, authority_path, self_referential_authority),
+        )
+
+        original_authority_bytes = authority_path.read_bytes()
+        authority_path.write_bytes(original_authority_bytes + b" ")
+        modified_authority_case = assert_rejects(
+            "two_commit_modified_authority_rejected",
+            lambda: custody(root, authority_path, authority_b),
+        )
+        authority_path.write_bytes(original_authority_bytes)
+
+        git(root, "switch", "-c", "runner-drift", commit_a)
+        runner_path.write_text("print('drifted runner')\n", encoding="utf-8")
+        drift_authority = write_authority(authority_path, commit_a, tree_a, "synthetic_commit_b_drift")
+        git(root, "add", "reviewed_runner.py", authority_path.name)
+        git(root, "commit", "-m", "commit B with forbidden runner drift")
+        runner_drift_case = assert_rejects(
+            "two_commit_runner_drift_rejected",
+            lambda: custody(root, authority_path, drift_authority),
+        )
+
+        git(root, "switch", "-c", "nonancestor", commit_a)
+        unrelated_authority = write_authority(
+            authority_path,
+            unrelated,
+            tree_a,
+            "synthetic_nonancestor_source",
+        )
+        git(root, "add", authority_path.name)
+        git(root, "commit", "-m", "authority naming unrelated source")
+        nonancestor_case = assert_rejects(
+            "two_commit_nonancestor_source_rejected",
+            lambda: custody(root, authority_path, unrelated_authority),
+        )
+
+        git(root, "switch", "-c", "uncommitted-authority", commit_a)
+        (root / "authority_later_marker.txt").write_text("later commit without authority\n", encoding="utf-8")
+        git(root, "add", "authority_later_marker.txt")
+        git(root, "commit", "-m", "later commit without authority")
+        uncommitted_authority = write_authority(
+            authority_path,
+            commit_a,
+            tree_a,
+            "synthetic_uncommitted_authority",
+        )
+        uncommitted_case = assert_rejects(
+            "two_commit_uncommitted_authority_rejected",
+            lambda: custody(root, authority_path, uncommitted_authority),
+        )
+
+    return {
+        "status": "TWO_COMMIT_REPLACEMENT_AUTHORITY_GIT_INTEGRATION_PASS",
+        "commit_a_reviewed_source": True,
+        "commit_b_authority_blob_bound": True,
+        "execution_head_recorded_dynamically": True,
+        "rejection_cases": [
+            runner_drift_case,
+            nonancestor_case,
+            uncommitted_case,
+            modified_authority_case,
+            self_reference_case,
+        ],
     }
 
 
@@ -904,7 +1054,6 @@ def mutation_tests(
         future_runner.validate_replacement_authority(
             authorization,
             AUTHORIZATION,
-            source_commit=PRE_REPAIR_HEAD,
         )
 
     cases.append(assert_rejects("future_runner_reuses_original_authority", original_authority_reused_by_future_runner))
@@ -922,6 +1071,7 @@ def mutation_tests(
             future_runner.validate_replacement_authority_custody(
                 authority_path,
                 future_runner.current_head(),
+                "0" * 40,
             )
 
     cases.append(assert_rejects("future_runner_rejects_uncommitted_owner_authority", uncommitted_replacement_authority))
@@ -971,6 +1121,7 @@ def main() -> int:
     scanner_test = future_scanner_nonzero_test()
     scanner_receipt_test = future_process_scan_receipt_contract_test()
     future_authority_test = future_replacement_authority_contract_test()
+    two_commit_git_test = replacement_authority_two_commit_git_integration_test()
     mutations = mutation_tests(
         result,
         authorization,
@@ -1006,6 +1157,7 @@ def main() -> int:
         "future_scanner_nonzero_test": scanner_test,
         "future_process_scan_receipt_contract_test": scanner_receipt_test,
         "future_replacement_authority_contract_test": future_authority_test,
+        "replacement_authority_two_commit_git_integration_test": two_commit_git_test,
         "mutation_tests": mutations,
         "historical_evidence_inventory_sha256": sha256_file(EVID / "EVIDENCE_INVENTORY.json"),
         "next_boundary": NEXT_BOUNDARY,

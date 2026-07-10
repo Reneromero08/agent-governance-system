@@ -4,6 +4,19 @@
 
 ## 2026-07-09: Phase 6B.6 Gate A target non-executing attempt adjudication
 
+- Repair the future replacement-authority custody model so owner authorization
+  uses two commits without a Git self-reference: a reviewed source commit binds
+  the protected runner and execution inputs, and a later authority-bearing
+  commit adds the exact closed owner artifact. The validator now requires the
+  reviewed source to be a strict ancestor of execution `HEAD`, rejects any
+  protected-source drift, binds the authority artifact to the current committed
+  blob and working tree, and records execution `HEAD` dynamically. A disposable
+  Git-repository integration test covers the valid two-commit sequence plus
+  runner drift, unrelated source, uncommitted authority, and modified authority
+  rejection. No real replacement authority is created and the preserved
+  attempt, blocked Candidate V4, and downstream false-authority state are
+  unchanged.
+
 - Phase 6B.6: preserve the owner-authorized target non-executing qualification
   attempt and adjudicate it incomplete. The attempt ran once and produced a
   complete custody packet, but later review found that process absence was not

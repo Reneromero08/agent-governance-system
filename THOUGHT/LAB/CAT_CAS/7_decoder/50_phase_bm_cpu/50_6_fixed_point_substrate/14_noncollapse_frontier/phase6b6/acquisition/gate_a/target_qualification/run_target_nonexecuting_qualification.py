@@ -63,6 +63,7 @@ REPLACEMENT_AUTHORITY: dict[str, Any]
 REPLACEMENT_AUTHORITY_PATH: Path
 REPLACEMENT_AUTHORITY_SHA256: str
 REPLACEMENT_AUTHORITY_GIT_BLOB_SHA1: str
+REPLACEMENT_AUTHORITY_CUSTODY: dict[str, Any]
 
 EXPECTED_EXECUTION_BUNDLE = "abc9e50a517d764c553adc5096378992028b29a8f62480a9ae217ebbd5202bba"
 EXPECTED_ARCHIVE = "04eaf73336f373865f4e837baca9ff4fe893d3b1b16dd8b8288af1259ff96f9c"
@@ -75,13 +76,30 @@ EXPECTED_CPU = "AMD Phenom(tm) II X6 1090T Processor"
 LOCAL_HOST = socket.gethostname()
 
 REPLACEMENT_AUTHORITY_SCHEMA_ID = (
-    "CAT_CAS_PHASE6B6_GATE_A_REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_AUTHORIZATION_V1"
+    "CAT_CAS_PHASE6B6_GATE_A_REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_AUTHORIZATION_V2"
 )
 REPLACEMENT_AUTHORITY_DECISION = (
     "AUTHORIZED_FOR_ONE_REPLACEMENT_GATE_A_TARGET_NONEXECUTING_QUALIFICATION"
 )
+AUTHORIZED_SOURCE_REVIEW_ID = "PR_37_REPLACEMENT_AUTHORITY_TWO_COMMIT_SOURCE_BINDING_REVIEW"
 HISTORICAL_EVIDENCE_REL = HISTORICAL_EVID.relative_to(REPO_ROOT).as_posix()
 HISTORICAL_AUTHORIZATION_REL = HISTORICAL_AUTHORIZATION.relative_to(REPO_ROOT).as_posix()
+RUNNER_REL = Path(__file__).resolve().relative_to(REPO_ROOT).as_posix()
+ADAPTER_REL = ADAPTER.relative_to(REPO_ROOT).as_posix()
+SCHEDULE_REL = (GATE_A / "GATE_A_ENGINEERING_SMOKE_SCHEDULE.json").relative_to(REPO_ROOT).as_posix()
+NAMESPACE_REL = (GATE_A / "GATE_A_TARGET_NAMESPACE_BINDING.json").relative_to(REPO_ROOT).as_posix()
+PREDECESSOR_IDENTITY_REL = PREDECESSOR_IDENTITY.relative_to(REPO_ROOT).as_posix()
+
+# A future owner reviews commit A and names it in the authority artifact added
+# by commit B.  Every source surface capable of changing what B would execute
+# is frozen against A; the authority artifact itself is separately bound to B.
+PROTECTED_EXECUTION_SOURCE_PATHS = (
+    RUNNER_REL,
+    ADAPTER_REL,
+    SCHEDULE_REL,
+    NAMESPACE_REL,
+    PREDECESSOR_IDENTITY_REL,
+)
 
 REPLACEMENT_AUTHORITY_KEYS = {
     "schema_id",
@@ -90,6 +108,8 @@ REPLACEMENT_AUTHORITY_KEYS = {
     "owner_instruction",
     "authority_id",
     "authorized_source_commit",
+    "authorized_source_tree_sha1",
+    "authorized_source_review_id",
     "historical_authorization_path",
     "historical_authority_consumed",
     "historical_evidence_dir",
@@ -170,10 +190,10 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
-def current_head() -> str:
+def current_head(repo_root: Path = REPO_ROOT) -> str:
     proc = subprocess.run(
         ["git", "rev-parse", "HEAD"],
-        cwd=str(REPO_ROOT),
+        cwd=str(repo_root),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True,
@@ -201,8 +221,6 @@ def load_replacement_authority(path: Path) -> dict[str, Any]:
 def validate_replacement_authority(
     authority: dict[str, Any],
     authority_path: Path,
-    *,
-    source_commit: str,
 ) -> Path:
     """Validate closed replacement authority before any SSH or SCP is possible."""
     if set(authority) != REPLACEMENT_AUTHORITY_KEYS:
@@ -213,7 +231,7 @@ def validate_replacement_authority(
         "schema_id": REPLACEMENT_AUTHORITY_SCHEMA_ID,
         "decision": REPLACEMENT_AUTHORITY_DECISION,
         "project_owner": "Raúl Romero",
-        "authorized_source_commit": source_commit,
+        "authorized_source_review_id": AUTHORIZED_SOURCE_REVIEW_ID,
         "historical_authorization_path": HISTORICAL_AUTHORIZATION_REL,
         "historical_evidence_dir": HISTORICAL_EVIDENCE_REL,
         "ssh_target": SSH_TARGET,
@@ -230,6 +248,9 @@ def validate_replacement_authority(
     for key, expected in expected_scalars.items():
         if authority[key] != expected:
             raise QualError(f"replacement authorization {key} mismatch")
+    for key in ("authorized_source_commit", "authorized_source_tree_sha1"):
+        if not isinstance(authority[key], str) or re.fullmatch(r"[0-9a-f]{40}", authority[key]) is None:
+            raise QualError(f"replacement authorization {key} must be an exact lowercase Git object id")
     if not isinstance(authority["owner_instruction"], str) or not authority["owner_instruction"].strip():
         raise QualError("replacement authorization owner_instruction must be nonempty")
     for key in NARROW_TRUE_FIELDS:
@@ -280,55 +301,173 @@ def ensure_new_evidence_namespace(path: Path) -> None:
         raise QualError(f"replacement evidence namespace must be absent: {path}")
 
 
-def validate_replacement_authority_custody(authority_path: Path, source_commit: str) -> str:
-    """Bind the owner artifact and runner bytes to the exact authorized commit."""
+def validate_replacement_authority_custody(
+    authority_path: Path,
+    source_commit: str,
+    source_tree_sha1: str,
+    *,
+    expected_authority: dict[str, Any] | None = None,
+    repo_root: Path = REPO_ROOT,
+    protected_paths: tuple[str, ...] = PROTECTED_EXECUTION_SOURCE_PATHS,
+) -> dict[str, Any]:
+    """Bind reviewed commit A, protected source, and authority-bearing commit B."""
+    repo_root = repo_root.resolve()
     resolved = authority_path.resolve()
     try:
-        authority_rel = resolved.relative_to(REPO_ROOT).as_posix()
+        authority_rel = resolved.relative_to(repo_root).as_posix()
     except ValueError as exc:
         raise QualError("replacement authorization must be committed inside the repository") from exc
-    runner_rel = Path(__file__).resolve().relative_to(REPO_ROOT).as_posix()
-    for rel in (authority_rel, runner_rel):
+    if not resolved.is_file() or resolved.is_symlink():
+        raise QualError("replacement authorization must be a real regular file")
+
+    execution_head = current_head(repo_root)
+    if source_commit == execution_head:
+        raise QualError("authorized source commit must precede the authority-bearing execution HEAD")
+    source_object = subprocess.run(
+        ["git", "cat-file", "-e", f"{source_commit}^{{commit}}"],
+        cwd=str(repo_root),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if source_object.returncode != 0:
+        raise QualError("authorized source commit is not an exact commit object")
+    ancestor = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", source_commit, execution_head],
+        cwd=str(repo_root),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if ancestor.returncode != 0:
+        raise QualError("authorized source commit is not an ancestor of current execution HEAD")
+    tree = subprocess.run(
+        ["git", "rev-parse", f"{source_commit}^{{tree}}"],
+        cwd=str(repo_root),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    if tree.returncode != 0 or tree.stdout.strip() != source_tree_sha1:
+        raise QualError("authorized source tree binding mismatch")
+
+    source_authority = subprocess.run(
+        ["git", "cat-file", "-e", f"{source_commit}:{authority_rel}"],
+        cwd=str(repo_root),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if source_authority.returncode == 0:
+        raise QualError("replacement authorization must be added after the reviewed source commit")
+
+    for rel in protected_paths:
         tracked = subprocess.run(
             ["git", "cat-file", "-e", f"{source_commit}:{rel}"],
-            cwd=str(REPO_ROOT),
+            cwd=str(repo_root),
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
         )
         if tracked.returncode != 0:
-            raise QualError(f"authorized source commit does not contain exact required path: {rel}")
-    clean = subprocess.run(
-        ["git", "diff", "--exit-code", source_commit, "--", authority_rel, runner_rel],
-        cwd=str(REPO_ROOT),
+            raise QualError(f"authorized source commit does not contain protected path: {rel}")
+        current = subprocess.run(
+            ["git", "cat-file", "-e", f"{execution_head}:{rel}"],
+            cwd=str(repo_root),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        if current.returncode != 0:
+            raise QualError(f"current execution HEAD does not contain protected path: {rel}")
+    committed_source_clean = subprocess.run(
+        ["git", "diff", "--quiet", source_commit, execution_head, "--", *protected_paths],
+        cwd=str(repo_root),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )
-    if clean.returncode != 0:
-        raise QualError("replacement authorization or runner differs from the authorized source commit")
+    if committed_source_clean.returncode != 0:
+        raise QualError("protected execution source drifted after the authorized source commit")
+    worktree_source_clean = subprocess.run(
+        ["git", "diff", "--quiet", execution_head, "--", *protected_paths],
+        cwd=str(repo_root),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if worktree_source_clean.returncode != 0:
+        raise QualError("protected execution source differs from current execution HEAD")
+    worktree_source_status = subprocess.run(
+        ["git", "status", "--porcelain=v1", "--untracked-files=all", "--", *protected_paths],
+        cwd=str(repo_root),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    if worktree_source_status.returncode != 0 or worktree_source_status.stdout:
+        raise QualError("protected execution source has tracked or untracked working-tree drift")
+
+    tracked_authority = subprocess.run(
+        ["git", "cat-file", "-e", f"{execution_head}:{authority_rel}"],
+        cwd=str(repo_root),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if tracked_authority.returncode != 0:
+        raise QualError("current execution HEAD does not contain replacement authorization")
     blob = subprocess.run(
-        ["git", "rev-parse", f"{source_commit}:{authority_rel}"],
-        cwd=str(REPO_ROOT),
+        ["git", "rev-parse", f"{execution_head}:{authority_rel}"],
+        cwd=str(repo_root),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True,
     )
     if blob.returncode != 0 or re.fullmatch(r"[0-9a-f]{40}", blob.stdout.strip()) is None:
         raise QualError("cannot bind replacement authorization Git blob")
-    return blob.stdout.strip()
+    blob_sha1 = blob.stdout.strip()
+    committed_bytes = subprocess.run(
+        ["git", "cat-file", "blob", blob_sha1],
+        cwd=str(repo_root),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if committed_bytes.returncode != 0 or committed_bytes.stdout != resolved.read_bytes():
+        raise QualError("replacement authorization working tree bytes differ from current HEAD blob")
+    if expected_authority is not None:
+        try:
+            committed_authority = json.loads(committed_bytes.stdout.decode("utf-8"))
+        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise QualError("replacement authorization committed blob is not valid UTF-8 JSON") from exc
+        if committed_authority != expected_authority:
+            raise QualError("validated replacement authorization object differs from current HEAD blob")
+    authority_clean = subprocess.run(
+        ["git", "diff", "--quiet", execution_head, "--", authority_rel],
+        cwd=str(repo_root),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if authority_clean.returncode != 0:
+        raise QualError("replacement authorization differs from current execution HEAD")
+    return {
+        "authorized_source_commit": source_commit,
+        "authorized_source_tree_sha1": source_tree_sha1,
+        "authorized_source_review_id": AUTHORIZED_SOURCE_REVIEW_ID,
+        "execution_head": execution_head,
+        "replacement_authority_git_blob_sha1": blob_sha1,
+        "protected_execution_source_paths": list(protected_paths),
+    }
 
 
 def configure_runtime(authority: dict[str, Any], authority_path: Path) -> None:
     global EVID, EXEC_ROOT, EVIDENCE_ROOT, TRANSFER_STAGE, EV_ARCHIVE, TP
     global QUAL_STDOUT, QUAL_STDERR, REPLACEMENT_AUTHORITY, REPLACEMENT_AUTHORITY_PATH
     global REPLACEMENT_AUTHORITY_SHA256, REPLACEMENT_AUTHORITY_GIT_BLOB_SHA1
+    global REPLACEMENT_AUTHORITY_CUSTODY
 
-    source_commit = current_head()
     evidence_path = validate_replacement_authority(
         authority,
         authority_path,
-        source_commit=source_commit,
     )
-    authority_blob = validate_replacement_authority_custody(authority_path, source_commit)
+    custody = validate_replacement_authority_custody(
+        authority_path,
+        authority["authorized_source_commit"],
+        authority["authorized_source_tree_sha1"],
+        expected_authority=authority,
+    )
     ensure_new_evidence_namespace(evidence_path)
     EVID = evidence_path
     EXEC_ROOT = authority["remote_execution_root"]
@@ -341,7 +480,8 @@ def configure_runtime(authority: dict[str, Any], authority_path: Path) -> None:
     REPLACEMENT_AUTHORITY = authority
     REPLACEMENT_AUTHORITY_PATH = authority_path.resolve()
     REPLACEMENT_AUTHORITY_SHA256 = sha256_file(REPLACEMENT_AUTHORITY_PATH)
-    REPLACEMENT_AUTHORITY_GIT_BLOB_SHA1 = authority_blob
+    REPLACEMENT_AUTHORITY_GIT_BLOB_SHA1 = custody["replacement_authority_git_blob_sha1"]
+    REPLACEMENT_AUTHORITY_CUSTODY = custody
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -816,6 +956,11 @@ def main(argv: list[str] | None = None) -> int:
         "replacement_authority_path": str(authority_path),
         "replacement_authority_sha256": REPLACEMENT_AUTHORITY_SHA256,
         "replacement_authority_git_blob_sha1": REPLACEMENT_AUTHORITY_GIT_BLOB_SHA1,
+        "authorized_source_commit": REPLACEMENT_AUTHORITY_CUSTODY["authorized_source_commit"],
+        "authorized_source_tree_sha1": REPLACEMENT_AUTHORITY_CUSTODY["authorized_source_tree_sha1"],
+        "authorized_source_review_id": REPLACEMENT_AUTHORITY_CUSTODY["authorized_source_review_id"],
+        "execution_head": REPLACEMENT_AUTHORITY_CUSTODY["execution_head"],
+        "protected_execution_source_paths": REPLACEMENT_AUTHORITY_CUSTODY["protected_execution_source_paths"],
         "historical_authority_consumed": True,
         "historical_evidence_dir": HISTORICAL_EVIDENCE_REL,
         "replacement_evidence_dir": EVID.relative_to(REPO_ROOT).as_posix(),
