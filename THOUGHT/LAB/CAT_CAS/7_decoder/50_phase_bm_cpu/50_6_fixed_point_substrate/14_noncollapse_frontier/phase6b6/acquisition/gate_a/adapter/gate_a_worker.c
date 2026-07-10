@@ -220,13 +220,19 @@ static int execute_authorized(int argc, char **argv) {
     return 0;
 }
 
-static int self_test(void) {
+static int self_test(const char *retained_output) {
     char base[] = "/tmp/gate_a_worker_selftest_XXXXXX";
-    if (!mkdtemp(base)) return 1;
     char output[CP_PATH_MAX];
-    if (snprintf(output, sizeof(output), "%s/runtime", base) >= (int)sizeof(output)) {
-        rmdir(base);
-        return 1;
+    if (retained_output) {
+        if (compiled_authority_sha256 || compiled_output_root ||
+            retained_output[0] != '/' || strlen(retained_output) >= sizeof(output)) return 2;
+        memcpy(output, retained_output, strlen(retained_output) + 1);
+    } else {
+        if (!mkdtemp(base)) return 1;
+        if (snprintf(output, sizeof(output), "%s/runtime", base) >= (int)sizeof(output)) {
+            rmdir(base);
+            return 1;
+        }
     }
     GateASmokeArgs args = {
         .output_dir = output,
@@ -250,15 +256,21 @@ static int self_test(void) {
                 result.capture_deadline_tsc - result.capture_last_sample_tsc > 400000ULL ||
                 result.frequency_writes || result.voltage_writes ||
                 result.msr_reads || result.msr_writes)) rc = 1;
-    const char *names[] = {"raw_samples.bin", "slot_trace.jsonl", "runtime_result.json"};
+    const char *names[] = {
+        "raw_samples.bin", "slot_trace.jsonl", "LOCKIN_IQ.jsonl",
+        "SENDER_LIFECYCLE.jsonl", "runtime_result.json"
+    };
     for (size_t i = 0; i < sizeof(names) / sizeof(names[0]); i++) {
         char path[CP_PATH_MAX];
         if (snprintf(path, sizeof(path), "%s/%s", output, names[i]) < (int)sizeof(path)) {
-            unlink(path);
+            if (access(path, F_OK)) rc = 1;
+            if (!retained_output) unlink(path);
         }
     }
-    rmdir(output);
-    rmdir(base);
+    if (!retained_output) {
+        rmdir(output);
+        rmdir(base);
+    }
     if (rc) return rc;
     puts("{\"status\":\"GATE_A_WORKER_MOCK_SELF_TEST_OK\","
          "\"network_connections\":0,\"hardware_executions\":0,"
@@ -271,10 +283,11 @@ static int self_test(void) {
 int main(int argc, char **argv) {
     if (argc == 2 && string_equal(argv[1], "--validate-only")) return validate_only();
     if (argc == 2 && string_equal(argv[1], "--probe-only")) return probe_only();
-    if (argc == 2 && string_equal(argv[1], "--self-test")) return self_test();
+    if (argc == 2 && string_equal(argv[1], "--self-test")) return self_test(NULL);
+    if (argc == 3 && string_equal(argv[1], "--self-test-retain")) return self_test(argv[2]);
     if (argc >= 2 && string_equal(argv[1], "--execute-authorized")) {
         return execute_authorized(argc, argv);
     }
-    fputs("usage: gate_a_worker --validate-only | --self-test | --execute-authorized ...\n", stderr);
+    fputs("usage: gate_a_worker --validate-only | --self-test | --self-test-retain ABSOLUTE_OUTPUT | --execute-authorized ...\n", stderr);
     return 2;
 }

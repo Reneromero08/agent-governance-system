@@ -32,6 +32,7 @@ SCHEDULE = BUNDLE_ROOT / "GATE_A_ENGINEERING_SMOKE_SCHEDULE.json"
 EXPECTED_SCHEDULE_SHA256 = target_bundle.SCHEDULE_SHA256
 EXPECTED_NAMESPACE_SHA256 = target_bundle.NAMESPACE_SHA256
 EXPECTED_TARGET = gate_a_authority.EXPECTED_TARGET
+TRANSPORT_CLAIM_SCHEMA = "CAT_CAS_PHASE6B6_GATE_A_TRANSPORT_CLAIM_V1"
 
 
 class TargetRunnerError(RuntimeError):
@@ -47,6 +48,102 @@ def load_object(path: Path) -> dict[str, Any]:
     value = json.loads(path.read_text(encoding="utf-8"))
     require(isinstance(value, dict), f"JSON object required: {path}")
     return value
+
+
+def _sha256_file(path: Path) -> str:
+    require(path.is_file() and not path.is_symlink(), f"regular file required: {path}")
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def expected_transport_claim_root(authority_sha256: str) -> Path:
+    require(len(authority_sha256) == 64 and all(c in "0123456789abcdef" for c in authority_sha256), "transport claim authority digest malformed")
+    return Path(f"/root/.catcas_gate_a_claim_{authority_sha256}")
+
+
+def expected_transport_claim(authority_sha256: str, execution_bundle_sha256: str) -> dict[str, Any]:
+    return {
+        "schema_id": TRANSPORT_CLAIM_SCHEMA,
+        "authority_sha256": authority_sha256,
+        "execution_bundle_sha256": execution_bundle_sha256,
+        "maximum_execution_count": 1,
+        "automatic_retry": False,
+    }
+
+
+def expected_execution_started(authority_sha256: str, execution_bundle_sha256: str) -> dict[str, Any]:
+    return {
+        "schema_id": "CAT_CAS_PHASE6B6_GATE_A_EXECUTION_STARTED_V1",
+        "authority_sha256": authority_sha256,
+        "execution_bundle_sha256": execution_bundle_sha256,
+        "runtime_execution_count": 1,
+        "automatic_retry": False,
+    }
+
+
+def validate_transport_claim_and_mark_started(
+    claim_root: Path,
+    *,
+    authority_sha256: str,
+    execution_bundle_sha256: str,
+) -> dict[str, Any]:
+    require(claim_root == expected_transport_claim_root(authority_sha256), "transport claim root mismatch")
+    require(claim_root.is_dir() and not claim_root.is_symlink(), "transport claim root is not a real directory")
+    claim_path = claim_root / "CLAIM.json"
+    claim = load_object(claim_path)
+    expected_claim = expected_transport_claim(authority_sha256, execution_bundle_sha256)
+    require(set(claim) == set(expected_claim), "transport claim key set mismatch")
+    require(claim == expected_claim, "transport claim binding mismatch")
+    marker_path = claim_root / "EXECUTION_STARTED.json"
+    flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL
+    flags |= getattr(os, "O_BINARY", 0)
+    if hasattr(os, "O_CLOEXEC"):
+        flags |= os.O_CLOEXEC
+    if hasattr(os, "O_NOFOLLOW"):
+        flags |= os.O_NOFOLLOW
+    try:
+        fd = os.open(marker_path, flags, 0o600)
+    except FileExistsError as exc:
+        raise TargetRunnerError("transport claim has already started execution") from exc
+    marker = expected_execution_started(authority_sha256, execution_bundle_sha256)
+    payload = (json.dumps(marker, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
+    try:
+        smoke_executor._write_all(fd, payload)
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+    directory_fd = os.open(claim_root, os.O_RDONLY)
+    try:
+        os.fsync(directory_fd)
+    finally:
+        os.close(directory_fd)
+    return {
+        "claim_sha256": _sha256_file(claim_path),
+        "execution_started_sha256": _sha256_file(marker_path),
+    }
+
+
+def validate_retained_transport_claim(
+    claim_root: Path,
+    *,
+    authority_sha256: str,
+    execution_bundle_sha256: str,
+) -> dict[str, str]:
+    require(claim_root == expected_transport_claim_root(authority_sha256), "retained transport claim root mismatch")
+    require(claim_root.is_dir() and not claim_root.is_symlink(), "retained transport claim root is not a real directory")
+    claim_path = claim_root / "CLAIM.json"
+    marker_path = claim_root / "EXECUTION_STARTED.json"
+    claim_sha256 = _sha256_file(claim_path)
+    marker_sha256 = _sha256_file(marker_path)
+    claim = load_object(claim_path)
+    marker = load_object(marker_path)
+    expected_claim = expected_transport_claim(authority_sha256, execution_bundle_sha256)
+    expected_marker = expected_execution_started(authority_sha256, execution_bundle_sha256)
+    require(set(claim) == set(expected_claim) and claim == expected_claim, "retained transport claim binding mismatch")
+    require(set(marker) == set(expected_marker) and marker == expected_marker, "execution-start marker binding mismatch")
+    return {
+        "claim_sha256": claim_sha256,
+        "execution_started_sha256": marker_sha256,
+    }
 
 
 class RootState(enum.Enum):
@@ -134,6 +231,7 @@ class BoundWorkerRuntime:
 
     def __init__(self):
         self.calls = 0
+        self._worker: smoke_executor.WorkerRuntime | None = None
 
     def execute(self, plan: smoke_executor.FrozenPlan) -> dict[str, Any]:
         require(self.calls == 0, "bound worker runtime may execute only once")
@@ -149,7 +247,12 @@ class BoundWorkerRuntime:
             authorized_output_root=plan.output_root / "runtime",
             temp_dir=temp_dir,
         )
-        return smoke_executor.WorkerRuntime(executable).execute(plan)
+        self._worker = smoke_executor.WorkerRuntime(executable)
+        return self._worker.execute(plan)
+
+    def verify_evidence(self, plan: smoke_executor.FrozenPlan, result: dict[str, Any]) -> None:
+        require(self._worker is not None, "bound worker evidence verifier called before execution")
+        self._worker.verify_evidence(plan, result)
 
 
 def run_validate_only(executable: Path) -> dict[str, Any]:
@@ -157,9 +260,76 @@ def run_validate_only(executable: Path) -> dict[str, Any]:
     return json.loads(result.stdout)
 
 
-def run_mock_self_test(executable: Path) -> dict[str, Any]:
-    result = subprocess.run([str(executable), "--self-test"], check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    return json.loads(result.stdout)
+def _mock_slot_record(index: int, token: str) -> dict[str, Any]:
+    driven = token in {"S0E", "A0P", "A0N"}
+    phase = 4 if token == "A0N" else (0 if driven else None)
+    sign = -1 if token == "A0N" else (1 if driven else None)
+    epoch = None
+    if token == "S0E":
+        epoch = "gate-a:step:epoch0"
+    elif token == "A0P":
+        epoch = "gate-a:anchor:positive"
+    elif token == "A0N":
+        epoch = "gate-a:anchor:negative"
+    return {
+        "index": index,
+        "token": token,
+        "requested_start_s": index * 0.5,
+        "requested_end_s": (index + 1) * 0.5,
+        "drive_on": driven,
+        "amplitude_level": 2 if driven else None,
+        "phase_index": phase,
+        "sign": sign,
+        "sender_epoch_id": epoch,
+    }
+
+
+def run_mock_self_test(executable: Path, evidence_root: Path) -> dict[str, Any]:
+    evidence_root.mkdir(mode=0o700, parents=False, exist_ok=False)
+    runtime_root = evidence_root / "runtime"
+    result = subprocess.run(
+        [str(executable), "--self-test-retain", str(runtime_root)],
+        check=True,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    payload = json.loads(result.stdout)
+    retained = load_object(runtime_root / "runtime_result.json")
+    runtime_result = {
+        "status": "GATE_A_ENGINEERING_SMOKE_COMPLETE",
+        "automatic_retry": False,
+        "runtime_execution_count": 1,
+        "slot_records": [
+            _mock_slot_record(index, token)
+            for index, token in enumerate(smoke_executor.SEQUENCE)
+        ],
+        "capture": {
+            "continuous": True,
+            "covers_complete_sequence": True,
+            "sample_count": retained["sample_count"],
+            "slot_sample_counts": [4000] * 16,
+            "origin_tsc": retained["capture_origin_tsc"],
+            "deadline_tsc": retained["capture_deadline_tsc"],
+            "first_sample_tsc": retained["capture_first_sample_tsc"],
+            "last_sample_tsc": retained["capture_last_sample_tsc"],
+            "tsc_hz": retained["capture_tsc_hz"],
+        },
+        "frequency_writes": 0,
+        "voltage_writes": 0,
+        "msr_reads": 0,
+        "msr_writes": 0,
+        "step_sender_epoch_count": 1,
+        "hardware_executed": False,
+    }
+    plan = smoke_executor.FrozenPlan(
+        authority_sha256="a" * 64,
+        execution_bundle_sha256="b" * 64,
+        output_root=evidence_root,
+    )
+    smoke_executor.verify_retained_runtime_evidence(plan, runtime_result)
+    payload["retained_raw_lockin_and_lifecycle_verified"] = True
+    return payload
 
 
 def prove_unbound_worker_rejects_live(executable: Path, output_root: Path) -> bool:
@@ -193,11 +363,12 @@ def qualify_no_drive(bundle_root: Path = BUNDLE_ROOT, *, compile_c: bool = True,
             exe = Path(tmp) / "gate_a_worker"
             compile_worker(exe)
             worker_payload = run_validate_only(exe)
-            self_test_payload = run_mock_self_test(exe)
+            self_test_payload = run_mock_self_test(exe, Path(tmp) / "mock_evidence")
             direct_live_rejected = prove_unbound_worker_rejects_live(exe, Path(tmp) / "unbound_runtime")
         require(worker_payload["status"] == "GATE_A_WORKER_VALIDATE_ONLY_OK", "worker validation failed")
         require(worker_payload["live_execution_bound"] is False, "ordinary qualification worker unexpectedly authority-bound")
         require(self_test_payload["status"] == "GATE_A_WORKER_MOCK_SELF_TEST_OK", "worker mock self-test failed")
+        require(self_test_payload["retained_raw_lockin_and_lifecycle_verified"] is True, "worker raw lock-in/lifecycle custody verification failed")
         compiled = True
     return {
         "status": "GATE_A_TARGET_RUNNER_NO_DRIVE_QUALIFIED",
@@ -272,6 +443,12 @@ def execute_authorized(
         )
 
     require(compile_c, "production execution requires the packaged C worker")
+    require(args.transport_claim_root, "durable transport claim root is required")
+    validate_transport_claim_and_mark_started(
+        Path(args.transport_claim_root),
+        authority_sha256=args.authority_sha256,
+        execution_bundle_sha256=exact_manifest["execution_bundle_sha256"],
+    )
     claim_root = Path(args.claim_root or "/root/.catcas_phase6b6_gate_a_claims")
     live_surfaces = smoke_executor.ExecutionSurfaces(
         preflight=smoke_executor.LocalPreflight(),
@@ -320,11 +497,13 @@ def cleanup_after_verified_copy(
     require(args.output_root == expected_output_root, "cleanup output root is not the frozen namespace")
     require(args.authority_sha256, "cleanup authority digest is required")
     require(args.execution_bundle_sha256, "cleanup bundle digest is required")
+    require(getattr(args, "transport_claim_root", None), "retained transport claim root is required")
     receipt = load_object(Path(args.copy_back_receipt))
     require(set(receipt) == {
         "schema_id", "remote_output_root", "retained_evidence_custody_verified",
         "evidence_inventory_sha256", "copy_back_complete", "authority_sha256",
-        "execution_bundle_sha256",
+        "execution_bundle_sha256", "target_evidence_inventory_sha256",
+        "downloaded_evidence_inventory_sha256", "archive_sha256",
     }, "copy-back receipt key set mismatch")
     require(receipt["schema_id"] == "CAT_CAS_PHASE6B6_GATE_A_COPY_BACK_RECEIPT_V1", "copy-back receipt schema mismatch")
     require(receipt["remote_output_root"] == args.output_root, "copy-back receipt output-root mismatch")
@@ -332,6 +511,10 @@ def cleanup_after_verified_copy(
     require(receipt["execution_bundle_sha256"] == args.execution_bundle_sha256, "copy-back receipt bundle mismatch")
     require(receipt["retained_evidence_custody_verified"] is True, "retained-evidence custody not verified")
     require(receipt["copy_back_complete"] is True, "copy-back is incomplete")
+    require(receipt["target_evidence_inventory_sha256"] == receipt["downloaded_evidence_inventory_sha256"], "target/downloaded inventory mismatch")
+    require(receipt["target_evidence_inventory_sha256"] == receipt["evidence_inventory_sha256"], "copy-back inventory binding mismatch")
+    archive_sha256 = receipt["archive_sha256"]
+    require(isinstance(archive_sha256, str) and len(archive_sha256) == 64 and all(c in "0123456789abcdef" for c in archive_sha256), "archive digest malformed")
     digest = receipt["evidence_inventory_sha256"]
     require(isinstance(digest, str) and len(digest) == 64 and all(c in "0123456789abcdef" for c in digest), "evidence inventory digest malformed")
     output_root = Path(args.output_root)
@@ -342,12 +525,25 @@ def cleanup_after_verified_copy(
     require(attempt.get("authority_sha256") == args.authority_sha256, "retained attempt authority mismatch")
     require(attempt.get("execution_bundle_sha256") == args.execution_bundle_sha256, "retained attempt bundle mismatch")
     require(evidence_inventory_sha256(output_root) == digest, "copy-back receipt inventory does not match retained evidence")
+    retained_claim = validate_retained_transport_claim(
+        Path(args.transport_claim_root),
+        authority_sha256=args.authority_sha256,
+        execution_bundle_sha256=args.execution_bundle_sha256,
+    )
     remove_tree(output_root)
     require(not output_root.exists(), "output root cleanup not verified")
+    retained_claim_after = validate_retained_transport_claim(
+        Path(args.transport_claim_root),
+        authority_sha256=args.authority_sha256,
+        execution_bundle_sha256=args.execution_bundle_sha256,
+    )
+    require(retained_claim_after == retained_claim, "retained transport claim changed during cleanup")
     return {
         "status": "GATE_A_CLEANUP_COMPLETE_AFTER_VERIFIED_COPY_BACK",
         "remote_output_root": args.output_root,
         "claim_retained": True,
+        "claim_sha256": retained_claim["claim_sha256"],
+        "execution_started_sha256": retained_claim["execution_started_sha256"],
     }
 
 
@@ -369,6 +565,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--output-root")
     parser.add_argument("--claim-root")
     parser.add_argument("--copy-back-receipt")
+    parser.add_argument("--transport-claim-root")
     args = parser.parse_args(argv)
 
     if args.qualify_no_drive:

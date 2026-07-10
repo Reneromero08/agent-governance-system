@@ -1,10 +1,10 @@
 {
   "authority_artifact_created": false,
   "base_main_commit": "03985a74d27e654c151cccad28c6221d91f70180",
-  "deterministic_archive_sha256": "aee9b08dfdd5d5d738c087c8915230ba5eaa8cd3a9892266042089ff60e91fec",
+  "deterministic_archive_sha256": "e844c6d550dba851fd294a7f312d2a1474b438dbfa96daeae0c30f90e74203ca",
   "engineering_smoke_authorized": false,
   "engineering_smoke_executor_implemented": true,
-  "execution_bundle_sha256": "02f5dd10472f0423eff97a14557ad92e2dabfbdf75d7bfde543855e3bef695ad",
+  "execution_bundle_sha256": "1fdfe797a7b624c87315c053e7333f95847b9206dad0a786a258e3f9db88ef98",
   "execution_bundle_target_qualified": true,
   "files": [
     {
@@ -26,57 +26,66 @@
       "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_target_bundle.py"
     },
     {
-      "byte_size": 22055,
-      "git_blob_sha1": "cdf49ce2511e4fb8b260498319d58446db98a820",
+      "byte_size": 35988,
+      "git_blob_sha1": "2d0d528c4b943ef82d1d897f2ebf48e072a17762",
       "git_mode": "100644",
       "package_path": "adapter/gate_a_engineering_smoke_executor.py",
       "role": "target_execution_gate",
-      "sha256": "0e34e6ea164e3447a46b5f7c6ed817c59697755bb205d14b98dc35a2c3095b42",
+      "sha256": "b3597ec5c7bab131e762ad6fc146a45e2f6b593a9ed7e72f2ece5bd72ff89979",
       "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_engineering_smoke_executor.py"
     },
     {
-      "byte_size": 13886,
-      "git_blob_sha1": "78c09194d903a13e2d2531909c5ec4d20030efaa",
+      "byte_size": 10362,
+      "git_blob_sha1": "422ece78db7f4732dc0a925fe6aaa51c3cd93f98",
+      "git_mode": "100644",
+      "package_path": "adapter/gate_a_process_custody.py",
+      "role": "process_custody",
+      "sha256": "c53547b294902794d6f5840b75f7c7911367e0b825d660d9c181334ced00a8bc",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_process_custody.py"
+    },
+    {
+      "byte_size": 60027,
+      "git_blob_sha1": "18666bc7c15c6bb234be3d5cfefcb122305e717e",
       "git_mode": "100644",
       "package_path": "adapter/gate_a_engineering_smoke_transport.py",
       "role": "host_authorized_transport",
-      "sha256": "9a2e4a2226ef52380221c1b12cacca285635d547b607d8d2148966a380c16acc",
+      "sha256": "b997462a37568c9694f3847b6dac4ba98c0104449f922185cd93d631ae9ef581",
       "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_engineering_smoke_transport.py"
     },
     {
-      "byte_size": 22060,
-      "git_blob_sha1": "64ab25c2b170bdada3da4c3f2b9bf6002d93a478",
+      "byte_size": 26448,
+      "git_blob_sha1": "016bb62d78b749c18785f7c3d3abfdaef012ab61",
       "git_mode": "100644",
       "package_path": "adapter/gate_a_hardware_adapter.py",
       "role": "host_adapter",
-      "sha256": "0b7926c454399f34442f6c2f4362e66688e1fe8b242e56b02d4797ceec149707",
+      "sha256": "b0efe338fb1f9473e7288ad2f6e3197a9cf91eb53835ca73c80c6d6fca8066d0",
       "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_hardware_adapter.py"
     },
     {
-      "byte_size": 17996,
-      "git_blob_sha1": "cc509a78534092625ada7c3379be39417f904f9f",
+      "byte_size": 26749,
+      "git_blob_sha1": "7fcd2ced3b1f582eb7673cd1bb973ab41fba147c",
       "git_mode": "100644",
       "package_path": "adapter/gate_a_target_runner.py",
       "role": "target_runner",
-      "sha256": "3d1574032f39d448f782c79ebd7912e61bd02370bc8f4cff3df1bc91af495563",
+      "sha256": "083ca393d4aedba9bf2276de814ad51a4caa7d1d2c415fe7031def24f50a2c3c",
       "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_target_runner.py"
     },
     {
-      "byte_size": 11342,
-      "git_blob_sha1": "c27af53ae0b684eaffca5b0a604965b40d1a1607",
+      "byte_size": 11969,
+      "git_blob_sha1": "46dfb31673299a0e1ea4cf8cd50a3e5beb1a13a9",
       "git_mode": "100644",
       "package_path": "adapter/gate_a_worker.c",
       "role": "target_worker",
-      "sha256": "5a3708be60779dd27d06d58da5f0a19fd51875abe050a46e7419955033b85055",
+      "sha256": "a828dc77426c600f571cba8c11f6e271d1cc1b1bb95560b500ae68faa4fd2640",
       "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_worker.c"
     },
     {
-      "byte_size": 5876,
-      "git_blob_sha1": "6a86b32d33cd8ff3aef82538e1a438fd30ecd203",
+      "byte_size": 6720,
+      "git_blob_sha1": "f4a78f159405c7b38ceaf121250a0b770abe8151",
       "git_mode": "100644",
       "package_path": "adapter/GATE_A_ADAPTER_QUALIFICATION_CONTRACT.json",
       "role": "qualification_contract",
-      "sha256": "a45dc84b59fbf5e2e4a0adffd68bd6d37e8e98014ca11121aec38ebaf4589b96",
+      "sha256": "0d8026dc5c7fd96421e8bc751b01749dab02d4e9d516625fa1b138dbead47b12",
       "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/GATE_A_ADAPTER_QUALIFICATION_CONTRACT.json"
     },
     {
@@ -107,12 +116,12 @@
       "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.h"
     },
     {
-      "byte_size": 17937,
-      "git_blob_sha1": "e4a6267dbcdee89ceb1b0e182e98486991e3e414",
+      "byte_size": 41599,
+      "git_blob_sha1": "3cdc8366583c3c9ecb3d3554da0ac984a454ebe3",
       "git_mode": "100644",
       "package_path": "runtime/gate_a_engineering_smoke_runtime.c",
       "role": "physical_runtime_gate_a",
-      "sha256": "6dfab0697d51e89ef6682ab2b7ac60c6856c25f3c5ab38569538ec0190671ccb",
+      "sha256": "2c55a4dbc8a8ebc2eb573833d34a7fa7b7024d33b02abf82fa06f0a95c3b9187",
       "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/gate_a_engineering_smoke_runtime.c"
     },
     {

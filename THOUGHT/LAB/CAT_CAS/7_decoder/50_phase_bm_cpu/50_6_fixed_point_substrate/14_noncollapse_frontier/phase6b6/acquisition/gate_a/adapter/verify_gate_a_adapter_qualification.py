@@ -125,12 +125,29 @@ def validate_contract(contract: dict[str, Any]) -> None:
         "partial evidence preservation",
         "cleanup requires verified copy-back",
         "cleanup inventory digest recomputation",
+        "physically absent sender lifecycle custody",
+        "one contiguous STEP sender epoch",
+        "distinct bounded anchor epochs",
+        "continuous capture across sender lifecycle",
+        "raw-derived per-slot lock-in I/Q recomputation",
+        "altered lock-in range, tone, slot, I or Q rejection",
+        "pre-runtime process receipt required",
+        "post-runtime process receipt required on success and failure",
+        "post-cleanup process receipt required",
+        "process command, return code, raw streams and hashes bound",
+        "complete retained host evidence packet",
+        "final evidence inventory closure",
+        "host command ledger closure",
+        "durable authority claim survives cleanup",
+        "transport failure injection preserves local failure receipt",
+        "transport failure state machine never retries runtime",
         "zero network contact in tests",
     ):
         require(expected in required_tests, f"contract negative test missing: {expected}")
     expected_sources = set(contract["expected_source_files"])
     for expected in (
         "gate_a_engineering_smoke_executor.py",
+        "gate_a_process_custody.py",
         "gate_a_engineering_smoke_transport.py",
         "../../../../holo_runtime_v2/combined_pdn_hardware.c",
         "../../../../holo_runtime_v2/gate_a_engineering_smoke_runtime.c",
@@ -151,6 +168,7 @@ def static_forbidden_surface_scan() -> dict[str, Any]:
         HERE / "gate_a_authority.py",
         HERE / "gate_a_target_bundle.py",
         HERE / "gate_a_engineering_smoke_executor.py",
+        HERE / "gate_a_process_custody.py",
         HERE / "gate_a_engineering_smoke_transport.py",
         HERE / "gate_a_hardware_adapter.py",
         HERE / "gate_a_target_runner.py",
@@ -170,6 +188,7 @@ def static_forbidden_surface_scan() -> dict[str, Any]:
     host_text = (HERE / "gate_a_hardware_adapter.py").read_text(encoding="utf-8")
     executor_text = (HERE / "gate_a_engineering_smoke_executor.py").read_text(encoding="utf-8")
     transport_text = (HERE / "gate_a_engineering_smoke_transport.py").read_text(encoding="utf-8")
+    process_text = (HERE / "gate_a_process_custody.py").read_text(encoding="utf-8")
     require("authorized live execution path is intentionally unused" not in runner_text, "target execution sentinel remains")
     require("live execution unavailable" not in worker_text, "worker execution sentinel remains")
     require("run_gate_a_engineering_smoke" in worker_text, "worker does not call the bounded physical runtime")
@@ -178,6 +197,18 @@ def static_forbidden_surface_scan() -> dict[str, Any]:
     require("timeout=self.timeout_s" in executor_text, "target worker timeout missing")
     require("start_new_session=True" in transport_text and "os.killpg" in transport_text and "signal.SIGKILL" in transport_text, "target process-group timeout cleanup missing")
     require("GATE_A_COMPILED_AUTHORITY_SHA256" in worker_text, "worker compile-time authority binding missing")
+    require("PRE_RUNTIME_PROCESS_RECEIPT.json" in executor_text and "POST_RUNTIME_PROCESS_RECEIPT.json" in executor_text, "target process receipts are not retained")
+    require("POST_CLEANUP_PROCESS_RECEIPT.json" in transport_text, "post-cleanup process receipt is not retained")
+    require("raw_stdout_base64" in process_text and "stdout_sha256" in process_text and "parsed_forbidden_hits" in process_text, "shared process custody is incomplete")
+    for retained in (
+        "AUTHORITY_ARTIFACT.json", "SCHEDULE.json", "EXECUTION_BUNDLE_MANIFEST.json",
+        "SOURCE_REVIEW_BINDING.json", "HOST_COMMANDS.jsonl", "TARGET_EXECUTION_RECEIPT.json",
+        "TARGET_EVIDENCE_INVENTORY.json", "COPY_BACK_RECEIPT.json",
+        "POST_RUNTIME_PROCESS_RECEIPT.json", "POST_CLEANUP_PROCESS_RECEIPT.json",
+        "CLEANUP_RECEIPT.json",
+        "FINAL_EVIDENCE_INVENTORY.json", "FINAL_BINDINGS.json",
+    ):
+        require(retained in transport_text, f"retained host packet artifact missing: {retained}")
 
     runtime = HERE.parents[3] / "holo_runtime_v2" / "gate_a_engineering_smoke_runtime.c"
     runtime_text = runtime.read_text(encoding="utf-8")
@@ -185,6 +216,9 @@ def static_forbidden_surface_scan() -> dict[str, Any]:
     require(marker in runtime_text, "bounded Gate A physical-runtime entry point missing")
     gate_a_body = runtime_text[runtime_text.index(marker):]
     require("GATE_A_COMPILED_OUTPUT_ROOT" in worker_text and "gate_a_runtime_output_root" in gate_a_body, "worker one-shot output binding missing")
+    require("LOCKIN_IQ.jsonl" in runtime_text and "lockin(" in runtime_text, "raw-derived lock-in custody missing")
+    require("SENDER_LIFECYCLE.jsonl" in runtime_text and "gate-a:anchor:positive" in runtime_text and "gate-a:anchor:negative" in runtime_text, "bounded sender lifecycle custody missing")
+    require("16.0 * sender->slot_s" not in runtime_text, "one sender thread still spans the complete sequence")
     for name, needle in (
         ("frequency_control", "pin_frequency("),
         ("msr_access", "msr_read("),
@@ -653,7 +687,7 @@ def focused_executor_tests() -> dict[str, Any]:
     ], cwd=bundle.repo_root(), check=False)
     require(completed.returncode == 0, f"focused executor tests failed:\n{completed.stdout}\n{completed.stderr}")
     count = sum(1 for line in completed.stderr.splitlines() if line.rstrip().endswith("... ok"))
-    require(count >= 14, "focused executor test count below required minimum")
+    require(count >= 30, "focused executor test count below required minimum")
     return {
         "status": "GATE_A_ENGINEERING_SMOKE_EXECUTOR_TESTS_PASS",
         "tests_run": count,

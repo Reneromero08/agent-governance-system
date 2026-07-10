@@ -266,11 +266,17 @@ def validate_authority_git_custody(
     except (UnicodeDecodeError, json.JSONDecodeError) as exc:
         raise AdapterError("committed authority blob is not UTF-8 JSON") from exc
     require(committed_authority == authority, "validated authority differs from committed blob")
+    reviewed_tree_result = _git(use_root, "rev-parse", f"{reviewed_head}^{{tree}}")
+    execution_tree_result = _git(use_root, "rev-parse", f"{execution_head}^{{tree}}")
+    require(reviewed_tree_result.returncode == 0 and re.fullmatch(r"[0-9a-f]{40}", reviewed_tree_result.stdout.strip()) is not None, "reviewed source tree unavailable")
+    require(execution_tree_result.returncode == 0 and re.fullmatch(r"[0-9a-f]{40}", execution_tree_result.stdout.strip()) is not None, "authority-bearing tree unavailable")
     return {
         "status": "GATE_A_EXECUTION_AUTHORITY_GIT_CUSTODY_EXACT",
         "reviewed_adapter_head": reviewed_head,
+        "reviewed_source_tree": reviewed_tree_result.stdout.strip(),
         "independent_review_id": authority["independent_review_id"],
         "authority_bearing_head": execution_head,
+        "authority_bearing_tree": execution_tree_result.stdout.strip(),
         "authority_git_blob_sha1": blob,
         "protected_path_count": len(protected_paths),
     }
@@ -306,6 +312,53 @@ class AdapterContext:
     schedule: dict[str, Any]
     namespace: dict[str, Any]
     manifest: dict[str, Any]
+
+
+def _committed_path_bytes(path: Path, *, head: str) -> bytes:
+    root = repo_root().resolve()
+    relative = path.resolve().relative_to(root).as_posix()
+    completed = _git(root, "show", f"{head}:{relative}", text=False)
+    require(completed.returncode == 0, f"committed source unavailable: {relative}")
+    return completed.stdout
+
+
+def build_source_review_binding(
+    *,
+    validated: dict[str, Any],
+    custody: dict[str, Any],
+    context: AdapterContext,
+    authority_sha256: str,
+) -> dict[str, Any]:
+    identities = []
+    for entry in sorted(context.manifest["files"], key=lambda item: item["package_path"]):
+        identities.append({
+            "role": entry["role"],
+            "package_path": entry["package_path"],
+            "source_repository_path": entry["source_repository_path"],
+            "git_blob_sha1": entry["git_blob_sha1"],
+            "git_mode": entry["git_mode"],
+            "sha256": entry["sha256"],
+            "byte_size": entry["byte_size"],
+        })
+    return {
+        "schema_id": "CAT_CAS_PHASE6B6_GATE_A_SOURCE_REVIEW_BINDING_V1",
+        "reviewed_source_commit": custody["reviewed_adapter_head"],
+        "reviewed_source_tree": custody["reviewed_source_tree"],
+        "independent_review_id": custody["independent_review_id"],
+        "authority_bearing_execution_commit": custody["authority_bearing_head"],
+        "authority_bearing_execution_tree": custody["authority_bearing_tree"],
+        "authority_sha256": authority_sha256,
+        "authority_git_blob_sha1": custody["authority_git_blob_sha1"],
+        "source_identities": identities,
+        "schedule_sha256": context.schedule["schedule_sha256"],
+        "target_namespace_sha256": context.namespace["binding_sha256"],
+        "execution_bundle_sha256": context.manifest["execution_bundle_sha256"],
+        "deterministic_archive_sha256": context.manifest["deterministic_archive_sha256"],
+        "target_identity_sha256": context.manifest["target_identity_stdout_sha256"],
+        "target": validated["target"],
+        "remote_execution_root": context.namespace["remote_execution_root"],
+        "remote_output_root": context.namespace["remote_output_root"],
+    }
 
 
 def load_context() -> AdapterContext:
@@ -359,6 +412,25 @@ def execute_authorized(
     require(custody.get("status") == "GATE_A_EXECUTION_AUTHORITY_GIT_CUSTODY_EXACT", "exact committed authority custody required")
     require(custody.get("reviewed_adapter_head") == validated["reviewed_adapter_head"], "authority custody reviewed-head mismatch")
     require(custody.get("independent_review_id") == validated["independent_review_id"], "authority custody review-ID mismatch")
+    for field in (
+        "reviewed_source_tree", "authority_bearing_head",
+        "authority_bearing_tree", "authority_git_blob_sha1",
+    ):
+        require(isinstance(custody.get(field), str) and re.fullmatch(r"[0-9a-f]{40}", custody[field]) is not None, f"authority custody {field} missing")
+
+    execution_head = custody["authority_bearing_head"]
+    authority_bytes = _committed_path_bytes(authority_path, head=execution_head)
+    schedule_bytes = _committed_path_bytes(SCHEDULE_PATH, head=execution_head)
+    manifest_bytes = _committed_path_bytes(MANIFEST_PATH, head=execution_head)
+    require(hashlib.sha256(authority_bytes).hexdigest() == args.authority_sha256, "retained authority byte digest mismatch")
+    source_review_binding = build_source_review_binding(
+        validated=validated,
+        custody=custody,
+        context=context,
+        authority_sha256=args.authority_sha256,
+    )
+    current_head = _git(repo_root(), "rev-parse", "HEAD")
+    require(current_head.returncode == 0 and current_head.stdout.strip() == execution_head, "HEAD moved after authority custody validation")
 
     factory = transport_factory or smoke_transport.SshScpTransport
     transport = factory()
@@ -374,6 +446,14 @@ def execute_authorized(
         remote_execution_root=context.namespace["remote_execution_root"],
         remote_output_root=context.namespace["remote_output_root"],
         local_evidence_root=Path(args.local_evidence_root),
+        authority_bytes=authority_bytes,
+        schedule_bytes=schedule_bytes,
+        manifest_bytes=manifest_bytes,
+        source_review_binding=source_review_binding,
+        authority_bearing_execution_commit=execution_head,
+        reviewed_source_tree=custody["reviewed_source_tree"],
+        authority_bearing_execution_tree=custody["authority_bearing_tree"],
+        authority_git_blob_sha1=custody["authority_git_blob_sha1"],
     )
     result = transport.execute(request)
     require(result.get("transport_execution_count") == 1, "transport execution count mismatch")

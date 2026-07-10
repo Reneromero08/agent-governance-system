@@ -21,6 +21,7 @@ import copy
 import json
 import os
 import shutil
+import subprocess
 import sys
 import tempfile
 from pathlib import Path
@@ -386,9 +387,18 @@ def _fake_execution_surfaces(runner):
             counts["namespace"] += 1
             return smoke.NamespaceState.ABSENT
 
-        def process_snapshot(self):
+        def process_snapshot(self, phase: str):
             counts["process"] += 1
-            return smoke.ProcessSnapshot(True, 0, "synthetic", "", ())
+            completed = subprocess.CompletedProcess(
+                list(smoke.process_custody.PROCESS_COMMAND),
+                0,
+                stdout=b"1 init /sbin/init\n",
+                stderr=b"",
+            )
+            return smoke.process_custody.scan_processes(
+                phase,
+                runner=lambda *_args, **_kwargs: completed,
+            )
 
         def temperature_c(self) -> float:
             counts["temperature"] += 1
@@ -410,6 +420,9 @@ def _fake_execution_surfaces(runner):
         def event(self, _value) -> None:
             return None
 
+        def process_receipt(self, _phase, _receipt) -> None:
+            return None
+
         def complete(self, _result) -> None:
             counts["evidence_complete"] += 1
 
@@ -421,6 +434,9 @@ def _fake_execution_surfaces(runner):
             require(counts["runtime"] == 0, "synthetic runtime called more than once")
             counts["runtime"] += 1
             return _fake_runtime_result(runner)
+
+        def verify_evidence(self, _plan, _result) -> None:
+            return None
 
     return smoke.ExecutionSurfaces(FakePreflight(), FakeClaims(), FakeEvidence(), FakeRuntime()), counts
 

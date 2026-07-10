@@ -63,43 +63,134 @@ static int gate_a_cycle_state(int slot, uint64_t now, uint64_t session_origin,
     return (int)((state % 8 + 8) % 8);
 }
 
+#define GATE_A_JOIN_GUARD_SECONDS 0.002
+
 typedef struct {
     atomic_int stop;
     atomic_int ready;
-    atomic_ullong origin;
+    atomic_ullong ready_tsc;
+    atomic_ullong epoch_start_tsc;
+    atomic_ullong first_drive_tsc;
+    atomic_ullong thread_exit_tsc;
     atomic_ullong transition_tsc[16];
     pthread_t thread;
     int alive;
+    int joined;
     int core;
+    int first_slot;
+    int end_slot;
+    int phase_index;
+    int sign;
+    const char *epoch_id;
     double tsc_hz;
     double slot_s;
+    uint64_t session_origin;
+    uint64_t requested_start_tsc;
+    uint64_t requested_end_tsc;
+    uint64_t planned_stop_tsc;
+    uint64_t thread_create_tsc;
+    uint64_t stop_requested_tsc;
+    uint64_t thread_join_start_tsc;
+    uint64_t thread_join_tsc;
 } GateASender;
+
+typedef struct {
+    atomic_int ready;
+    atomic_int done;
+    atomic_ullong ready_tsc;
+    pthread_t thread;
+    int alive;
+    int core;
+    long read_hz;
+    double tsc_hz;
+    uint64_t origin;
+    int capacity;
+    uint64_t *timestamps;
+    double *observations;
+    uint64_t receiver_epoch;
+    int count;
+} GateAReceiver;
+
+static int gate_a_json_u64(FILE *f, uint64_t value) {
+    if (!value) return fputs("null", f) < 0 ? -1 : 0;
+    return fprintf(f, "%llu", (unsigned long long)value) < 0 ? -1 : 0;
+}
+
+static int gate_a_lifecycle_record(FILE *f, const char *record_type,
+                                   const char *state, int slot,
+                                   uint64_t event_tsc,
+                                   uint64_t requested_start,
+                                   uint64_t requested_end,
+                                   const GateASender *sender) {
+    if (!f || !record_type || !state || slot < 0 || slot >= 16 || !event_tsc) return -1;
+    if (fprintf(f,
+            "{\"schema_id\":\"CAT_CAS_PHASE6B6_GATE_A_SENDER_LIFECYCLE_V1\","
+            "\"record_type\":\"%s\",\"event_tsc\":%llu,\"slot_index\":%d,"
+            "\"token\":\"%s\",\"sender_state\":\"%s\",\"sender_epoch_id\":",
+            record_type, (unsigned long long)event_tsc, slot,
+            gate_a_tokens[slot], state) < 0) return -1;
+    if (sender) {
+        if (fprintf(f, "\"%s\",\"phase_index\":%d,\"sign\":%d,",
+                    sender->epoch_id, sender->phase_index, sender->sign) < 0) return -1;
+    } else if (fputs("null,\"phase_index\":null,\"sign\":null,", f) < 0) return -1;
+    if (fputs("\"requested_start_tsc\":", f) < 0 ||
+        gate_a_json_u64(f, requested_start) ||
+        fputs(",\"requested_end_tsc\":", f) < 0 ||
+        gate_a_json_u64(f, requested_end) ||
+        fputs(",\"sender_transition_tsc\":", f) < 0 ||
+        gate_a_json_u64(
+            f,
+            sender && !strcmp(record_type, "slot_transition") && !strcmp(state, "active")
+                ? atomic_load_explicit(&sender->transition_tsc[slot], memory_order_acquire)
+                : 0) ||
+        fputs(",\"thread_create_tsc\":", f) < 0 ||
+        gate_a_json_u64(f, sender ? sender->thread_create_tsc : 0) ||
+        fputs(",\"thread_ready_tsc\":", f) < 0 ||
+        gate_a_json_u64(f, sender ? atomic_load_explicit(&sender->ready_tsc, memory_order_acquire) : 0) ||
+        fputs(",\"epoch_start_tsc\":", f) < 0 ||
+        gate_a_json_u64(f, sender ? atomic_load_explicit(&sender->epoch_start_tsc, memory_order_acquire) : 0) ||
+        fputs(",\"first_drive_tsc\":", f) < 0 ||
+        gate_a_json_u64(f, sender ? atomic_load_explicit(&sender->first_drive_tsc, memory_order_acquire) : 0) ||
+        fputs(",\"stop_requested_tsc\":", f) < 0 ||
+        gate_a_json_u64(f, sender ? sender->stop_requested_tsc : 0) ||
+        fputs(",\"thread_exit_tsc\":", f) < 0 ||
+        gate_a_json_u64(f, sender ? atomic_load_explicit(&sender->thread_exit_tsc, memory_order_acquire) : 0) ||
+        fputs(",\"thread_join_start_tsc\":", f) < 0 ||
+        gate_a_json_u64(f, sender ? sender->thread_join_start_tsc : 0) ||
+        fputs(",\"thread_join_tsc\":", f) < 0 ||
+        gate_a_json_u64(f, sender ? sender->thread_join_tsc : 0) ||
+        fputs("}\n", f) < 0 || fflush(f) || fsync(fileno(f))) return -1;
+    return 0;
+}
+
+static int gate_a_epoch_cycle_state(const GateASender *sender, uint64_t now) {
+    double step_ticks = sender->tsc_hz / (8.0 * tone(0));
+    double offset = (double)(now - sender->requested_start_tsc) -
+                    sender->phase_index * step_ticks;
+    long state = (long)floor(offset / step_ticks);
+    return (int)((state % 8 + 8) % 8);
+}
 
 static void *gate_a_sender_loop(void *opaque) {
     GateASender *sender = opaque;
-    if (pin_core(sender->core)) return (void *)1;
+    if (pin_core(sender->core)) {
+        atomic_store_explicit(&sender->thread_exit_tsc, rdtsc_now(), memory_order_release);
+        return (void *)1;
+    }
+    uint64_t ready = rdtsc_now();
+    atomic_store_explicit(&sender->ready_tsc, ready, memory_order_release);
+    atomic_store_explicit(&sender->epoch_start_tsc, ready, memory_order_release);
     atomic_store_explicit(&sender->ready, 1, memory_order_release);
-    uint64_t origin = 0;
-    while (!(origin = atomic_load_explicit(&sender->origin, memory_order_acquire)) &&
-           !atomic_load_explicit(&sender->stop, memory_order_acquire)) {
-        __asm__ volatile("pause");
-    }
-    if (atomic_load_explicit(&sender->stop, memory_order_acquire)) return NULL;
-    while (rdtsc_now() < origin &&
-           !atomic_load_explicit(&sender->stop, memory_order_acquire)) {
-        __asm__ volatile("pause");
-    }
-
-    uint64_t end = origin + (uint64_t)(16.0 * sender->slot_s * sender->tsc_hz);
-    uint64_t seed = 0x9e3779b9u + (uint64_t)sender->core;
+    uint64_t seed = 0x9e3779b9u + (uint64_t)sender->core +
+                    (uint64_t)sender->first_slot;
     volatile double sink = 0;
     int previous_slot = -1;
     while (!atomic_load_explicit(&sender->stop, memory_order_acquire)) {
         uint64_t now = rdtsc_now();
-        if (now >= end) break;
-        int slot = (int)((double)(now - origin) /
-                         (sender->slot_s * sender->tsc_hz));
-        if (slot < 0 || slot >= 16) {
+        int slot = sender->first_slot +
+            (int)((double)(now - sender->requested_start_tsc) /
+                  (sender->slot_s * sender->tsc_hz));
+        if (slot < sender->first_slot || slot >= sender->end_slot) {
             __asm__ volatile("pause");
             continue;
         }
@@ -110,56 +201,155 @@ static void *gate_a_sender_loop(void *opaque) {
                 memory_order_release, memory_order_relaxed);
             previous_slot = slot;
         }
-        if (!gate_a_driven_slot(slot)) {
-            __asm__ volatile("pause");
-            continue;
-        }
-        int cycle_state = gate_a_cycle_state(slot, now, origin,
-                                             sender->slot_s, sender->tsc_hz);
-        if (cycle_state < 2) {
+        if (gate_a_epoch_cycle_state(sender, now) < 2) {
+            unsigned long long expected = 0;
+            atomic_compare_exchange_strong_explicit(
+                &sender->first_drive_tsc, &expected, now,
+                memory_order_release, memory_order_relaxed);
             sink += alu_burst(&seed);
         } else {
             __asm__ volatile("pause");
         }
     }
+    atomic_store_explicit(&sender->thread_exit_tsc, rdtsc_now(), memory_order_release);
     return (void *)(uintptr_t)(sink != sink);
 }
 
-static int gate_a_sender_arm(GateASender *sender, int core, double tsc_hz,
-                             double slot_s) {
+static int gate_a_sender_abort(GateASender *sender) {
+    if (!sender->alive) return 0;
+    if (!sender->stop_requested_tsc) sender->stop_requested_tsc = rdtsc_now();
+    atomic_store_explicit(&sender->stop, 1, memory_order_release);
+    sender->thread_join_start_tsc = rdtsc_now();
+    void *result = NULL;
+    int rc = pthread_join(sender->thread, &result);
+    sender->thread_join_tsc = rdtsc_now();
+    sender->alive = 0;
+    sender->joined = rc == 0;
+    return rc || result ? -1 : 0;
+}
+
+static int gate_a_sender_arm(GateASender *sender, FILE *lifecycle,
+                             const GateAReceiver *receiver,
+                             int core, double tsc_hz, double slot_s,
+                             uint64_t session_origin, int first_slot,
+                             int end_slot, int phase_index, int sign,
+                             const char *epoch_id) {
     memset(sender, 0, sizeof(*sender));
     sender->core = core;
     sender->tsc_hz = tsc_hz;
     sender->slot_s = slot_s;
+    sender->session_origin = session_origin;
+    sender->first_slot = first_slot;
+    sender->end_slot = end_slot;
+    sender->phase_index = phase_index;
+    sender->sign = sign;
+    sender->epoch_id = epoch_id;
+    sender->requested_start_tsc = session_origin +
+        (uint64_t)(first_slot * slot_s * tsc_hz);
+    sender->requested_end_tsc = session_origin +
+        (uint64_t)(end_slot * slot_s * tsc_hz);
+    sender->planned_stop_tsc = sender->requested_end_tsc -
+        (uint64_t)(GATE_A_JOIN_GUARD_SECONDS * tsc_hz);
     atomic_init(&sender->stop, 0);
     atomic_init(&sender->ready, 0);
-    atomic_init(&sender->origin, 0);
+    atomic_init(&sender->ready_tsc, 0);
+    atomic_init(&sender->epoch_start_tsc, 0);
+    atomic_init(&sender->first_drive_tsc, 0);
+    atomic_init(&sender->thread_exit_tsc, 0);
     for (int i = 0; i < 16; i++) atomic_init(&sender->transition_tsc[i], 0);
+    sender->thread_create_tsc = rdtsc_now();
+    if (sender->thread_create_tsc < sender->requested_start_tsc ||
+        gate_a_lifecycle_record(lifecycle, "sender_state", "starting",
+                                first_slot, sender->thread_create_tsc,
+                                sender->requested_start_tsc,
+                                sender->requested_end_tsc, sender)) return -1;
     pthread_attr_t attr;
-    pthread_attr_init(&attr);
+    if (pthread_attr_init(&attr)) return -1;
     cpu_set_t set;
     CPU_ZERO(&set);
     CPU_SET(core, &set);
-    pthread_attr_setaffinity_np(&attr, sizeof(set), &set);
-    int rc = pthread_create(&sender->thread, &attr, gate_a_sender_loop, sender);
-    pthread_attr_destroy(&attr);
-    if (rc) return -1;
-    sender->alive = 1;
-    uint64_t timeout = rdtsc_now() + (uint64_t)(0.5 * tsc_hz);
+    int attr_rc = pthread_attr_setaffinity_np(&attr, sizeof(set), &set);
+    int create_rc = attr_rc ? attr_rc :
+        pthread_create(&sender->thread, &attr, gate_a_sender_loop, sender);
+    if (!create_rc) sender->alive = 1;
+    int destroy_rc = pthread_attr_destroy(&attr);
+    if (create_rc || destroy_rc) {
+        if (sender->alive) (void)gate_a_sender_abort(sender);
+        return -1;
+    }
+    uint64_t timeout = sender->requested_start_tsc +
+        (uint64_t)(MAX_EPOCH_SKEW_SECONDS * tsc_hz);
     while (!atomic_load_explicit(&sender->ready, memory_order_acquire)) {
-        if (rdtsc_now() > timeout) return -1;
+        if (atomic_load_explicit(&receiver->done, memory_order_acquire) ||
+            rdtsc_now() > timeout) {
+            (void)gate_a_sender_abort(sender);
+            return -1;
+        }
         __asm__ volatile("pause");
+    }
+    uint64_t ready = atomic_load_explicit(&sender->ready_tsc, memory_order_acquire);
+    if (ready < sender->requested_start_tsc || ready > timeout ||
+        gate_a_lifecycle_record(lifecycle, "sender_state", "active",
+                                first_slot, ready,
+                                sender->requested_start_tsc,
+                                sender->requested_end_tsc, sender)) {
+        (void)gate_a_sender_abort(sender);
+        return -1;
     }
     return 0;
 }
 
-static int gate_a_sender_stop(GateASender *sender) {
-    if (!sender->alive) return 0;
+static int gate_a_sender_stop_join(GateASender *sender, FILE *lifecycle,
+                                   const GateAReceiver *receiver) {
+    if (!sender->alive) return -1;
+    int capture_stopped = 0;
+    while (rdtsc_now() < sender->planned_stop_tsc) {
+        if (atomic_load_explicit(&receiver->done, memory_order_acquire)) {
+            capture_stopped = 1;
+            break;
+        }
+        __asm__ volatile("pause");
+    }
+    sender->stop_requested_tsc = rdtsc_now();
     atomic_store_explicit(&sender->stop, 1, memory_order_release);
+    if (gate_a_lifecycle_record(lifecycle, "sender_state", "stopping",
+                                sender->end_slot - 1,
+                                sender->stop_requested_tsc,
+                                sender->requested_start_tsc,
+                                sender->requested_end_tsc, sender)) return -1;
+    sender->thread_join_start_tsc = rdtsc_now();
     void *result = NULL;
     int rc = pthread_join(sender->thread, &result);
+    sender->thread_join_tsc = rdtsc_now();
     sender->alive = 0;
-    return rc || result ? -1 : 0;
+    sender->joined = rc == 0;
+    uint64_t exited = atomic_load_explicit(&sender->thread_exit_tsc,
+                                           memory_order_acquire);
+    if (capture_stopped || rc || result || !exited ||
+        sender->thread_join_tsc > sender->requested_end_tsc ||
+        gate_a_lifecycle_record(lifecycle, "sender_state", "joined",
+                                sender->end_slot - 1,
+                                sender->thread_join_tsc,
+                                sender->requested_start_tsc,
+                                sender->requested_end_tsc, sender)) return -1;
+    return 0;
+}
+
+static void *gate_a_receiver_loop(void *opaque) {
+    GateAReceiver *receiver = opaque;
+    if (pin_core(receiver->core)) {
+        receiver->count = -1;
+        atomic_store_explicit(&receiver->done, 1, memory_order_release);
+        return (void *)1;
+    }
+    atomic_store_explicit(&receiver->ready_tsc, rdtsc_now(), memory_order_release);
+    atomic_store_explicit(&receiver->ready, 1, memory_order_release);
+    receiver->count = capture_at_origin(
+        receiver->core, receiver->read_hz, 8.0, receiver->tsc_hz,
+        receiver->origin, &receiver->receiver_epoch,
+        receiver->timestamps, receiver->observations, receiver->capacity);
+    atomic_store_explicit(&receiver->done, 1, memory_order_release);
+    return receiver->count < 0 ? (void *)1 : NULL;
 }
 
 static int gate_a_write_failure(const char *dir, const char *reason) {
@@ -220,15 +410,251 @@ static int gate_a_write_result(const GateASmokeArgs *args,
     return close_sync(&f);
 }
 
+static int gate_a_mock_epoch(GateASender *sender, FILE *lifecycle,
+                             int core, double tsc_hz, double slot_s,
+                             uint64_t session_origin, int first_slot,
+                             int end_slot, int phase_index, int sign,
+                             const char *epoch_id) {
+    memset(sender, 0, sizeof(*sender));
+    sender->core = core;
+    sender->tsc_hz = tsc_hz;
+    sender->slot_s = slot_s;
+    sender->session_origin = session_origin;
+    sender->first_slot = first_slot;
+    sender->end_slot = end_slot;
+    sender->phase_index = phase_index;
+    sender->sign = sign;
+    sender->epoch_id = epoch_id;
+    sender->requested_start_tsc = session_origin +
+        (uint64_t)(first_slot * slot_s * tsc_hz);
+    sender->requested_end_tsc = session_origin +
+        (uint64_t)(end_slot * slot_s * tsc_hz);
+    sender->planned_stop_tsc = sender->requested_end_tsc -
+        (uint64_t)(GATE_A_JOIN_GUARD_SECONDS * tsc_hz);
+    sender->thread_create_tsc = sender->requested_start_tsc + 1;
+    sender->stop_requested_tsc = sender->planned_stop_tsc;
+    sender->thread_join_start_tsc = sender->planned_stop_tsc + 2;
+    sender->thread_join_tsc = sender->planned_stop_tsc + 4;
+    sender->joined = 1;
+    atomic_init(&sender->stop, 0);
+    atomic_init(&sender->ready, 1);
+    atomic_init(&sender->ready_tsc, sender->requested_start_tsc + 2);
+    atomic_init(&sender->epoch_start_tsc, sender->requested_start_tsc + 3);
+    uint64_t first_drive = sender->requested_start_tsc + 4;
+    if (phase_index == 4) first_drive += (uint64_t)(0.5 / tone(0) * tsc_hz);
+    atomic_init(&sender->first_drive_tsc, first_drive);
+    atomic_init(&sender->thread_exit_tsc, sender->planned_stop_tsc + 3);
+    for (int slot = 0; slot < 16; slot++) {
+        uint64_t value = slot >= first_slot && slot < end_slot
+            ? session_origin + (uint64_t)(slot * slot_s * tsc_hz) + 3 : 0;
+        atomic_init(&sender->transition_tsc[slot], value);
+    }
+    if (gate_a_lifecycle_record(lifecycle, "sender_state", "starting",
+                                first_slot, sender->thread_create_tsc,
+                                sender->requested_start_tsc,
+                                sender->requested_end_tsc, sender) ||
+        gate_a_lifecycle_record(lifecycle, "sender_state", "active",
+                                first_slot,
+                                atomic_load_explicit(&sender->ready_tsc, memory_order_acquire),
+                                sender->requested_start_tsc,
+                                sender->requested_end_tsc, sender) ||
+        gate_a_lifecycle_record(lifecycle, "sender_state", "stopping",
+                                end_slot - 1, sender->stop_requested_tsc,
+                                sender->requested_start_tsc,
+                                sender->requested_end_tsc, sender) ||
+        gate_a_lifecycle_record(lifecycle, "sender_state", "joined",
+                                end_slot - 1, sender->thread_join_tsc,
+                                sender->requested_start_tsc,
+                                sender->requested_end_tsc, sender)) return -1;
+    return 0;
+}
+
+static int gate_a_validate_epoch(const GateASender *sender) {
+    uint64_t ready = atomic_load_explicit(&sender->ready_tsc, memory_order_acquire);
+    uint64_t started = atomic_load_explicit(&sender->epoch_start_tsc, memory_order_acquire);
+    uint64_t first_drive = atomic_load_explicit(&sender->first_drive_tsc, memory_order_acquire);
+    uint64_t exited = atomic_load_explicit(&sender->thread_exit_tsc, memory_order_acquire);
+    uint64_t skew = (uint64_t)(MAX_EPOCH_SKEW_SECONDS * sender->tsc_hz);
+    uint64_t expected_drive_offset = sender->phase_index == 4
+        ? (uint64_t)(0.5 / tone(0) * sender->tsc_hz) : 0;
+    uint64_t observed_drive_offset = first_drive >= sender->requested_start_tsc
+        ? first_drive - sender->requested_start_tsc : UINT64_MAX;
+    if (!sender->joined || sender->alive ||
+        sender->thread_create_tsc < sender->requested_start_tsc ||
+        ready < sender->thread_create_tsc || ready > sender->requested_start_tsc + skew ||
+        started < ready || first_drive < started ||
+        sender->stop_requested_tsc <= first_drive || exited < sender->stop_requested_tsc ||
+        sender->thread_join_start_tsc < sender->stop_requested_tsc ||
+        sender->thread_join_tsc < exited ||
+        sender->thread_join_tsc < sender->thread_join_start_tsc ||
+        sender->thread_join_tsc > sender->requested_end_tsc ||
+        observed_drive_offset < expected_drive_offset ||
+        observed_drive_offset > expected_drive_offset + skew) return -1;
+    for (int slot = sender->first_slot; slot < sender->end_slot; slot++) {
+        uint64_t requested = sender->session_origin +
+            (uint64_t)(slot * sender->slot_s * sender->tsc_hz);
+        uint64_t actual = atomic_load_explicit(&sender->transition_tsc[slot],
+                                               memory_order_acquire);
+        if (!actual || actual < requested || actual > requested + skew) return -1;
+    }
+    return 0;
+}
+
+static int gate_a_run_real_capture(const GateASmokeArgs *args,
+                                   double tsc_hz, uint64_t origin,
+                                   uint64_t *timestamps, double *observations,
+                                   int capacity, FILE *lifecycle,
+                                   GateASender epochs[3],
+                                   uint64_t *receiver_epoch) {
+    GateAReceiver receiver;
+    memset(&receiver, 0, sizeof(receiver));
+    receiver.core = args->receiver_core;
+    receiver.read_hz = args->read_hz;
+    receiver.tsc_hz = tsc_hz;
+    receiver.origin = origin;
+    receiver.capacity = capacity;
+    receiver.timestamps = timestamps;
+    receiver.observations = observations;
+    atomic_init(&receiver.ready, 0);
+    atomic_init(&receiver.done, 0);
+    atomic_init(&receiver.ready_tsc, 0);
+    receiver.count = -1;
+    if (pthread_create(&receiver.thread, NULL, gate_a_receiver_loop, &receiver)) return -1;
+    receiver.alive = 1;
+    while (!atomic_load_explicit(&receiver.ready, memory_order_acquire)) {
+        if (atomic_load_explicit(&receiver.done, memory_order_acquire) ||
+            rdtsc_now() >= origin) goto failure;
+        __asm__ volatile("pause");
+    }
+    if (pin_core(0)) goto failure;
+    for (int slot = 0; slot < 16; slot++) {
+        uint64_t requested = origin + (uint64_t)(slot * args->slot_s * tsc_hz);
+        while (rdtsc_now() < requested) {
+            if (atomic_load_explicit(&receiver.done, memory_order_acquire)) goto failure;
+            __asm__ volatile("pause");
+        }
+        if (atomic_load_explicit(&receiver.done, memory_order_acquire)) goto failure;
+        if (slot == 6 && gate_a_sender_arm(
+                &epochs[0], lifecycle, &receiver, args->sender_core, tsc_hz, args->slot_s,
+                origin, 6, 10, 0, 1, "gate-a:step:epoch0")) goto failure;
+        if (slot == 9 && gate_a_sender_stop_join(&epochs[0], lifecycle, &receiver)) goto failure;
+        if (slot == 12) {
+            if (gate_a_sender_arm(
+                    &epochs[1], lifecycle, &receiver, args->sender_core, tsc_hz, args->slot_s,
+                    origin, 12, 13, 0, 1, "gate-a:anchor:positive") ||
+                gate_a_sender_stop_join(&epochs[1], lifecycle, &receiver)) goto failure;
+        }
+        if (slot == 13) {
+            if (gate_a_sender_arm(
+                    &epochs[2], lifecycle, &receiver, args->sender_core, tsc_hz, args->slot_s,
+                    origin, 13, 14, 4, -1, "gate-a:anchor:negative") ||
+                gate_a_sender_stop_join(&epochs[2], lifecycle, &receiver)) goto failure;
+        }
+    }
+    uint64_t capture_deadline = origin + (uint64_t)(8.0 * tsc_hz);
+    while (rdtsc_now() < capture_deadline) {
+        if (atomic_load_explicit(&receiver.done, memory_order_acquire)) {
+            if (rdtsc_now() < capture_deadline) goto failure;
+            break;
+        }
+        __asm__ volatile("pause");
+    }
+    {
+        void *receiver_result = NULL;
+        int join_rc = pthread_join(receiver.thread, &receiver_result);
+        receiver.alive = 0;
+        if (join_rc || receiver_result) return -1;
+    }
+    *receiver_epoch = receiver.receiver_epoch;
+    return receiver.count;
+
+failure:
+    for (int index = 0; index < 3; index++) {
+        if (epochs[index].alive) {
+            int aborted = gate_a_sender_abort(&epochs[index]);
+            if (!aborted) {
+                (void)gate_a_lifecycle_record(
+                    lifecycle, "sender_state", "joined",
+                    epochs[index].end_slot - 1, epochs[index].thread_join_tsc,
+                    epochs[index].requested_start_tsc,
+                    epochs[index].requested_end_tsc, &epochs[index]);
+            }
+        }
+    }
+    if (receiver.alive) {
+        void *receiver_result = NULL;
+        (void)pthread_join(receiver.thread, &receiver_result);
+        receiver.alive = 0;
+    }
+    return -1;
+}
+
+static int gate_a_write_lockin(const GateASmokeArgs *args,
+                               const GateASmokeResult *result,
+                               const uint64_t *timestamps,
+                               const double *observations,
+                               const int starts[16], const int ends[16]) {
+    char path[CP_PATH_MAX];
+    if (joinp(path, sizeof(path), args->output_dir, "LOCKIN_IQ.jsonl")) return -1;
+    FILE *f = fopen(path, "wx");
+    if (!f) return -1;
+    double frequency = tone(0);
+    for (int slot = 0; slot < 16; slot++) {
+        int count = ends[slot] - starts[slot];
+        if (count < 2) {
+            fclose(f);
+            return -1;
+        }
+        uint64_t slot_start = result->capture_origin_tsc +
+            (uint64_t)(slot * args->slot_s * result->capture_tsc_hz);
+        uint64_t slot_end = result->capture_origin_tsc +
+            (uint64_t)((slot + 1) * args->slot_s * result->capture_tsc_hz);
+        uint64_t analysis_origin = result->capture_origin_tsc +
+            (uint64_t)((slot >= 6 && slot <= 9 ? 6 : slot) *
+                       args->slot_s * result->capture_tsc_hz);
+        double i_value, q_value, magnitude, floor;
+        lockin(timestamps + starts[slot], observations + starts[slot], count,
+               frequency, analysis_origin, result->capture_tsc_hz,
+               &i_value, &q_value, &magnitude, &floor);
+        if (!isfinite(i_value) || !isfinite(q_value) ||
+            !isfinite(magnitude) || !isfinite(floor) ||
+            fprintf(f,
+                "{\"schema_id\":\"CAT_CAS_PHASE6B6_GATE_A_LOCKIN_IQ_V1\","
+                "\"slot_index\":%d,\"token\":\"%s\","
+                "\"raw_sample_start_index\":%d,\"raw_sample_end_index\":%d,"
+                "\"sample_count\":%d,\"tone_frequency_hz\":%.17g,"
+                "\"lockin_i\":%.17g,\"lockin_q\":%.17g,"
+                "\"magnitude\":%.17g,\"off_frequency_floor\":%.17g,"
+                "\"origin_tsc\":%llu,\"slot_start_tsc\":%llu,"
+                "\"slot_end_tsc\":%llu}\n",
+                slot, gate_a_tokens[slot], starts[slot], ends[slot], count,
+                frequency, i_value, q_value, magnitude, floor,
+                (unsigned long long)analysis_origin,
+                (unsigned long long)slot_start,
+                (unsigned long long)slot_end) < 0 ||
+            fflush(f) || fsync(fileno(f))) {
+            fclose(f);
+            return -1;
+        }
+    }
+    return close_sync(&f);
+}
+
 int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
                                  GateASmokeResult *result) {
     int mock = args && args->backend == BACKEND_MOCK;
     int rc = 0;
     const char *reason = "";
-    FILE *raw = NULL, *trace = NULL;
+    FILE *raw = NULL, *trace = NULL, *lifecycle = NULL;
     uint64_t *timestamps = NULL;
     double *observations = NULL;
-    GateASender sender = {0};
+    GateASender epochs[3];
+    int starts[16], ends[16];
+    memset(epochs, 0, sizeof(epochs));
+    for (int slot = 0; slot < 16; slot++) {
+        starts[slot] = -1;
+        ends[slot] = -1;
+    }
     char path[CP_PATH_MAX];
     if (!args || !result || !args->output_dir || !args->authority_sha256 ||
         !args->execution_bundle_sha256 || args->sender_core != 4 ||
@@ -258,7 +684,13 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
         goto cleanup;
     }
     trace = fopen(path, "wx");
-    if (!raw || !trace) {
+    if (joinp(path, sizeof(path), args->output_dir, "SENDER_LIFECYCLE.jsonl")) {
+        reason = "PATH_JOIN_FAILURE";
+        rc = 5;
+        goto cleanup;
+    }
+    lifecycle = fopen(path, "wx");
+    if (!raw || !trace || !lifecycle) {
         reason = "EVIDENCE_OPEN_FAILURE";
         rc = 5;
         goto cleanup;
@@ -320,27 +752,46 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
     if (mock) {
         count = args->read_hz * 8;
         double spacing = tsc_hz / args->read_hz;
+        if (gate_a_mock_epoch(&epochs[0], lifecycle, args->sender_core,
+                              tsc_hz, args->slot_s, origin, 6, 10, 0, 1,
+                              "gate-a:step:epoch0") ||
+            gate_a_mock_epoch(&epochs[1], lifecycle, args->sender_core,
+                              tsc_hz, args->slot_s, origin, 12, 13, 0, 1,
+                              "gate-a:anchor:positive") ||
+            gate_a_mock_epoch(&epochs[2], lifecycle, args->sender_core,
+                              tsc_hz, args->slot_s, origin, 13, 14, 4, -1,
+                              "gate-a:anchor:negative")) {
+            reason = "MOCK_LIFECYCLE_EVIDENCE_FAILURE";
+            rc = 4;
+            goto cleanup;
+        }
         receiver_epoch = origin;
         for (int i = 0; i < count; i++) {
             timestamps[i] = origin + (uint64_t)(i * spacing);
             observations[i] = 100.0 + (double)(i % 17) * 0.001;
-        }
-        for (int i = 0; i < 16; i++) {
-            atomic_init(&sender.transition_tsc[i],
-                        origin + (uint64_t)(i * args->slot_s * tsc_hz));
+            int slot = (int)((double)(timestamps[i] - origin) /
+                             (args->slot_s * tsc_hz));
+            if (slot >= 0 && slot < 16 && gate_a_driven_slot(slot)) {
+                uint64_t epoch_origin = gate_a_epoch_origin(
+                    slot, origin, args->slot_s, tsc_hz);
+                double phase = slot == 13 ? M_PI : 0.0;
+                double seconds = (double)(timestamps[i] - epoch_origin) / tsc_hz;
+                observations[i] += 0.25 * cos(2.0 * M_PI * tone(0) * seconds + phase);
+            }
         }
     } else {
-        if (gate_a_sender_arm(&sender, args->sender_core, tsc_hz, args->slot_s)) {
-            reason = "SENDER_ARM_FAILURE";
+        count = gate_a_run_real_capture(
+            args, tsc_hz, origin, timestamps, observations, cap,
+            lifecycle, epochs, &receiver_epoch);
+        if (count < 0) {
+            reason = "SENDER_OR_RECEIVER_LIFECYCLE_FAILURE";
             rc = 4;
             goto cleanup;
         }
-        atomic_store_explicit(&sender.origin, origin, memory_order_release);
-        count = capture_at_origin(args->receiver_core, args->read_hz, 8.0,
-                                  tsc_hz, origin, &receiver_epoch,
-                                  timestamps, observations, cap);
-        if (gate_a_sender_stop(&sender)) {
-            reason = "SENDER_STOP_FAILURE";
+    }
+    for (int epoch = 0; epoch < 3; epoch++) {
+        if (gate_a_validate_epoch(&epochs[epoch])) {
+            reason = "SENDER_EPOCH_CUSTODY_FAILURE";
             rc = 4;
             goto cleanup;
         }
@@ -360,7 +811,11 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
             }
             double offset = (double)(timestamps[i] - origin) / tsc_hz;
             int slot = (int)(offset / args->slot_s);
-            if (slot >= 0 && slot < 16) result->slot_sample_counts[slot]++;
+            if (slot >= 0 && slot < 16) {
+                if (starts[slot] < 0) starts[slot] = i;
+                ends[slot] = i + 1;
+                result->slot_sample_counts[slot]++;
+            }
         }
     }
     if (close_sync(&raw)) {
@@ -370,6 +825,20 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
     }
     if (count < (int)(0.9 * args->read_hz * 8.0)) {
         reason = "SHORT_COMPLETE_CAPTURE";
+        rc = 5;
+        goto cleanup;
+    }
+    for (int slot = 0; slot < 16; slot++) {
+        if (starts[slot] < 0 || ends[slot] <= starts[slot] ||
+            (slot == 0 ? starts[slot] != 0 : starts[slot] != ends[slot - 1])) {
+            reason = "RAW_SLOT_RANGE_FAILURE";
+            rc = 5;
+            goto cleanup;
+        }
+    }
+    if (ends[15] != count || gate_a_write_lockin(
+            args, result, timestamps, observations, starts, ends)) {
+        reason = "LOCKIN_CUSTODY_FAILURE";
         rc = 5;
         goto cleanup;
     }
@@ -391,8 +860,7 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
     for (int slot = 0; slot < 16; slot++) {
         uint64_t requested = origin +
             (uint64_t)(slot * args->slot_s * tsc_hz);
-        uint64_t actual = atomic_load_explicit(&sender.transition_tsc[slot],
-                                               memory_order_acquire);
+        uint64_t actual = timestamps[starts[slot]];
         uint64_t skew = actual > requested ? actual - requested : requested - actual;
         if (!actual || (!mock && skew > (uint64_t)(MAX_EPOCH_SKEW_SECONDS * tsc_hz)) ||
             result->slot_sample_counts[slot] < (int)(0.9 * args->read_hz * args->slot_s)) {
@@ -433,10 +901,42 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
             rc = 5;
             goto cleanup;
         }
+        GateASender *slot_sender = NULL;
+        const char *state = "not_created";
+        if (slot >= 6 && slot <= 9) {
+            slot_sender = &epochs[0];
+            state = "active";
+        } else if (slot == 12) {
+            slot_sender = &epochs[1];
+            state = "active";
+        } else if (slot == 13) {
+            slot_sender = &epochs[2];
+            state = "active";
+        } else if (slot == 10 || slot == 11) {
+            slot_sender = &epochs[0];
+            state = "joined";
+        } else if (slot == 14 || slot == 15) {
+            slot_sender = &epochs[2];
+            state = "joined";
+        }
+        if (gate_a_lifecycle_record(
+                lifecycle, "slot_transition", state, slot, actual,
+                requested, origin +
+                    (uint64_t)((slot + 1) * args->slot_s * tsc_hz),
+                slot_sender)) {
+            reason = "LIFECYCLE_WRITER_FAILURE";
+            rc = 5;
+            goto cleanup;
+        }
     }
     result->sample_count = count;
     if (close_sync(&trace)) {
         reason = "TRACE_SYNC_FAILURE";
+        rc = 5;
+        goto cleanup;
+    }
+    if (close_sync(&lifecycle)) {
+        reason = "LIFECYCLE_SYNC_FAILURE";
         rc = 5;
         goto cleanup;
     }
@@ -456,9 +956,11 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
     }
 
 cleanup:
-    if (sender.alive && gate_a_sender_stop(&sender) && rc == 0) {
-        reason = "SENDER_STOP_FAILURE";
-        rc = 4;
+    for (int epoch = 0; epoch < 3; epoch++) {
+        if (epochs[epoch].alive && gate_a_sender_abort(&epochs[epoch]) && rc == 0) {
+            reason = "SENDER_ABORT_JOIN_FAILURE";
+            rc = 4;
+        }
     }
     if (raw && close_sync(&raw) && rc == 0) {
         reason = "RAW_SYNC_FAILURE";
@@ -466,6 +968,10 @@ cleanup:
     }
     if (trace && close_sync(&trace) && rc == 0) {
         reason = "TRACE_SYNC_FAILURE";
+        rc = 5;
+    }
+    if (lifecycle && close_sync(&lifecycle) && rc == 0) {
+        reason = "LIFECYCLE_SYNC_FAILURE";
         rc = 5;
     }
     free(timestamps);

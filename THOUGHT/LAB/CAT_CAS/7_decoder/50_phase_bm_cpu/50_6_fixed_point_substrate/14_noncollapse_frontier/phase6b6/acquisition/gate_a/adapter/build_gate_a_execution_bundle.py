@@ -51,6 +51,7 @@ PACKAGE_FILES = [
     ("adapter/gate_a_authority.py", HERE / "gate_a_authority.py", "shared_authority_validator"),
     ("adapter/gate_a_target_bundle.py", HERE / "gate_a_target_bundle.py", "target_bundle_validator"),
     ("adapter/gate_a_engineering_smoke_executor.py", HERE / "gate_a_engineering_smoke_executor.py", "target_execution_gate"),
+    ("adapter/gate_a_process_custody.py", HERE / "gate_a_process_custody.py", "process_custody"),
     ("adapter/gate_a_engineering_smoke_transport.py", HERE / "gate_a_engineering_smoke_transport.py", "host_authorized_transport"),
     ("adapter/gate_a_hardware_adapter.py", HERE / "gate_a_hardware_adapter.py", "host_adapter"),
     ("adapter/gate_a_target_runner.py", HERE / "gate_a_target_runner.py", "target_runner"),
