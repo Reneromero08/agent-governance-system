@@ -44,16 +44,26 @@ TARGET_IDENTITY_SHA256 = "10618a70ceb3413d7507c22254d595d63632bb7ad9243dbe3dc6eb
 
 HERE = Path(__file__).resolve().parent
 GATE_A = HERE.parent
+PHYSICAL_RUNTIME = HERE.parents[3] / "holo_runtime_v2"
 MANIFEST_PATH = HERE / "GATE_A_EXECUTION_BUNDLE_MANIFEST.json"
 
 PACKAGE_FILES = [
     ("adapter/gate_a_authority.py", HERE / "gate_a_authority.py", "shared_authority_validator"),
     ("adapter/gate_a_target_bundle.py", HERE / "gate_a_target_bundle.py", "target_bundle_validator"),
+    ("adapter/gate_a_engineering_smoke_executor.py", HERE / "gate_a_engineering_smoke_executor.py", "target_execution_gate"),
+    ("adapter/gate_a_engineering_smoke_transport.py", HERE / "gate_a_engineering_smoke_transport.py", "host_authorized_transport"),
     ("adapter/gate_a_hardware_adapter.py", HERE / "gate_a_hardware_adapter.py", "host_adapter"),
     ("adapter/gate_a_target_runner.py", HERE / "gate_a_target_runner.py", "target_runner"),
     ("adapter/gate_a_worker.c", HERE / "gate_a_worker.c", "target_worker"),
     ("adapter/GATE_A_ADAPTER_QUALIFICATION_CONTRACT.json", HERE / "GATE_A_ADAPTER_QUALIFICATION_CONTRACT.json", "qualification_contract"),
     ("adapter/schemas/gate_a_execution_authority.schema.json", HERE / "schemas" / "gate_a_execution_authority.schema.json", "future_authority_schema"),
+    ("runtime/combined_pdn_hardware.c", PHYSICAL_RUNTIME / "combined_pdn_hardware.c", "physical_runtime"),
+    ("runtime/combined_pdn_hardware.h", PHYSICAL_RUNTIME / "combined_pdn_hardware.h", "physical_runtime_header"),
+    ("runtime/gate_a_engineering_smoke_runtime.c", PHYSICAL_RUNTIME / "gate_a_engineering_smoke_runtime.c", "physical_runtime_gate_a"),
+    ("runtime/gate_a_engineering_smoke_runtime.h", PHYSICAL_RUNTIME / "gate_a_engineering_smoke_runtime.h", "physical_runtime_gate_a_header"),
+    ("runtime/captured_file.c", PHYSICAL_RUNTIME / "captured_file.c", "captured_file_runtime"),
+    ("runtime/captured_file.h", PHYSICAL_RUNTIME / "captured_file.h", "captured_file_header"),
+    ("runtime/capture_quality_contract.h", PHYSICAL_RUNTIME / "capture_quality_contract.h", "capture_quality_contract"),
     ("GATE_A_ENGINEERING_SMOKE_SCHEDULE.json", GATE_A / "GATE_A_ENGINEERING_SMOKE_SCHEDULE.json", "schedule"),
     ("GATE_A_TARGET_NAMESPACE_BINDING.json", GATE_A / "GATE_A_TARGET_NAMESPACE_BINDING.json", "target_namespace"),
 ]
@@ -192,6 +202,8 @@ def render_manifest(treeish: str) -> dict[str, Any]:
         "target_namespace_sha256": NAMESPACE_SHA256,
         "target_identity_stdout_sha256": TARGET_IDENTITY_SHA256,
         "authority_artifact_created": False,
+        "engineering_smoke_executor_implemented": True,
+        "execution_bundle_target_qualified": True,
         "engineering_smoke_authorized": False,
         "hardware_ran": False,
         "files": entries,

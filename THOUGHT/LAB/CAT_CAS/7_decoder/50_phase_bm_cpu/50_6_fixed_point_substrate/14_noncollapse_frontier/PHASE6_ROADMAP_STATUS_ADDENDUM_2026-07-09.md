@@ -11,28 +11,18 @@ The attempt is not accepted as a completed target qualification. The before/afte
 Current state:
 
 ```text
-PHASE6B6_ENTERED
-SOFTWARE_AND_NONHARDWARE_QUALIFICATION_COMPLETE
-GATE_A_PLAN_AND_ADAPTER_COMPLETE
-GATE_A_TARGET_NONEXECUTING_ATTEMPT_PRESERVED
-TARGET_PROCESS_ABSENCE_NOT_PROVEN_FAIL_CLOSED
-TARGET_NONEXECUTING_QUALIFICATION_INCOMPLETE
-EXECUTION_BUNDLE_TARGET_QUALIFICATION_NOT_ACCEPTED
-REPLACEMENT_TARGET_NONEXECUTING_AUTHORITY_ARTIFACT_COMMITTED
-ONE_REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_AUTHORIZED
-REPLACEMENT_AUTHORITY_UNCONSUMED
-REPLACEMENT_EXECUTION_COUNT_ZERO
-GATE_A_ENGINEERING_SMOKE_UNAUTHORIZED
-HARDWARE_RAN_FALSE
-AUTOMATIC_RETRY_FALSE
+target bundle qualified = true
+engineering smoke executor implemented = true
+engineering smoke authorized = false
+hardware ran = false
 ```
 
-The project owner has authorized exactly one replacement target non-executing qualification under committed authority `gate_a_replacement_71ab1528_01`. The authority is unconsumed, the replacement execution count is zero, and no replacement evidence exists yet. There is no automatic retry. Gate A engineering smoke, hardware execution, calibration, scientific acquisition, restoration, target coupling, and Small Wall work remain unauthorized.
+The later replacement target non-executing qualification completed and the target bundle is qualified. The bounded Gate A engineering-smoke executor is now implemented and covered by non-driving tests. No engineering-smoke execution authority artifact exists, no engineering smoke is authorized, and no hardware ran. There is no automatic retry. Calibration, scientific acquisition, restoration, target coupling, and Small Wall work remain unauthorized.
 
 The exact next boundary is:
 
 ```text
-EXECUTE_ONE_AUTHORIZED_REPLACEMENT_GATE_A_TARGET_NONEXECUTING_QUALIFICATION
+INDEPENDENT_EXACT_HEAD_REVIEW_FOR_GATE_A_ENGINEERING_SMOKE_AUTHORITY
 ```
 
 This addendum does not rewrite the older roadmap history.

@@ -10,11 +10,19 @@ on:
     paths:
       - ".github/workflows/phase6b6-gate-a-target-nonexecuting-qualification.yml"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/target_qualification/**"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/**"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.h"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/gate_a_engineering_smoke_runtime.c"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/gate_a_engineering_smoke_runtime.h"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/captured_file.c"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/captured_file.h"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/capture_quality_contract.h"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_target_nonexecuting_qualification_6f243b1a_bundle_abc9e50a/**"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_target_nonexecuting_qualification_replacement_gate_a_replacement_593e9920_02/**"
   push:
     branches:
-      - codex/phase6b6-gate-a-target-nonexecuting-qualification
+      - codex/phase6b6-gate-a-engineering-smoke-executor
 
 jobs:
   verify-target-nonexecuting-qualification:
@@ -46,7 +54,7 @@ jobs:
         run: |
           python verify_gate_a_target_nonexecuting_qualification.py
 
-      - name: Prove no execution authority artifact and reviewed surfaces untouched
+      - name: Prove no execution authority artifact and historical surfaces untouched
         shell: bash
         run: |
           test "$(git ls-files '*GATE_A_EXECUTION_AUTHORITY.json' | wc -l)" = "0"
@@ -54,9 +62,24 @@ jobs:
             THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts \
             THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime \
             THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis \
-            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/qualification \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/qualification
+          git diff --name-only origin/main...HEAD -- \
             THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2 \
-            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter > executor-paths.txt
+          unexpected=$(grep -v -E '^THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/(holo_runtime_v2/gate_a_engineering_smoke_runtime\.(c|h)|phase6b6/acquisition/gate_a/adapter/(GATE_A_ADAPTER_QUALIFICATION_CONTRACT\.json|GATE_A_EXECUTION_BUNDLE_MANIFEST\.json|build_gate_a_execution_bundle\.py|gate_a_engineering_smoke_executor\.py|gate_a_engineering_smoke_transport\.py|gate_a_hardware_adapter\.py|gate_a_isolated_qualification\.py|gate_a_target_bundle\.py|gate_a_target_runner\.py|gate_a_worker\.c|test_gate_a_engineering_smoke_executor\.py|verify_gate_a_adapter_qualification\.py))$' executor-paths.txt || true)
+          if [ -n "$unexpected" ]; then
+            echo "unexpected adapter or physical-runtime path changed" >&2
+            printf '%s\n' "$unexpected" >&2
+            exit 1
+          fi
+          git diff --name-only origin/main...HEAD -- \
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/target_qualification > target-qualification-paths.txt
+          unexpected_target=$(grep -v -E '^THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/target_qualification/verify_gate_a_target_nonexecuting_qualification\.py$' target-qualification-paths.txt || true)
+          if [ -n "$unexpected_target" ]; then
+            echo "historical target-qualification source or authority state changed" >&2
+            printf '%s\n' "$unexpected_target" >&2
+            exit 1
+          fi
 
       - name: git diff check
         run: git diff --check

@@ -10,9 +10,16 @@ on:
     paths:
       - ".github/workflows/phase6b6-gate-a-adapter-qualification.yml"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/**"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.h"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/gate_a_engineering_smoke_runtime.c"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/gate_a_engineering_smoke_runtime.h"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/captured_file.c"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/captured_file.h"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/capture_quality_contract.h"
   push:
     branches:
-      - codex/phase6b6-gate-a-adapter-qualification
+      - codex/phase6b6-gate-a-engineering-smoke-executor
 
 jobs:
   no-drive-qualification:
@@ -38,23 +45,27 @@ jobs:
           python build_gate_a_execution_bundle.py --compare-twice
           python verify_gate_a_adapter_qualification.py
 
-      - name: Compile C strictly and run validate-only
+      - name: Compile C strictly and run non-driving validation
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
         run: |
-          cc -std=c11 -Wall -Wextra -Werror -pedantic -O2 -pthread gate_a_worker.c -lm -o gate_a_worker
+          runtime=../../../../holo_runtime_v2
+          cc -std=c11 -Wall -Wextra -Werror -pedantic -O2 -pthread gate_a_worker.c "$runtime/gate_a_engineering_smoke_runtime.c" "$runtime/captured_file.c" -I"$runtime" -lm -o gate_a_worker
           ./gate_a_worker --validate-only
+          ./gate_a_worker --self-test
 
-      - name: ASan validate-only
+      - name: ASan non-driving self-test
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
         run: |
-          cc -std=c11 -Wall -Wextra -Werror -pedantic -O2 -pthread -fsanitize=address gate_a_worker.c -lm -o gate_a_worker_asan
-          ./gate_a_worker_asan --validate-only
+          runtime=../../../../holo_runtime_v2
+          cc -std=c11 -Wall -Wextra -Werror -pedantic -O2 -pthread -fsanitize=address gate_a_worker.c "$runtime/gate_a_engineering_smoke_runtime.c" "$runtime/captured_file.c" -I"$runtime" -lm -o gate_a_worker_asan
+          ./gate_a_worker_asan --self-test
 
-      - name: UBSan validate-only
+      - name: UBSan non-driving self-test
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
         run: |
-          cc -std=c11 -Wall -Wextra -Werror -pedantic -O2 -pthread -fsanitize=undefined gate_a_worker.c -lm -o gate_a_worker_ubsan
-          ./gate_a_worker_ubsan --validate-only
+          runtime=../../../../holo_runtime_v2
+          cc -std=c11 -Wall -Wextra -Werror -pedantic -O2 -pthread -fsanitize=undefined gate_a_worker.c "$runtime/gate_a_engineering_smoke_runtime.c" "$runtime/captured_file.c" -I"$runtime" -lm -o gate_a_worker_ubsan
+          ./gate_a_worker_ubsan --self-test
 
       - name: Host adapter no-drive qualification
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
@@ -112,7 +123,9 @@ jobs:
             THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence \
             ":(exclude)THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_target_nonexecuting_qualification_6f243b1a_bundle_abc9e50a/**" \
             ":(exclude)THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_target_nonexecuting_qualification_replacement_gate_a_replacement_593e9920_02/**" \
-            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2 \
+            ":(exclude)THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/gate_a_engineering_smoke_runtime.c" \
+            ":(exclude)THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/gate_a_engineering_smoke_runtime.h"
 
       - name: git diff check
         run: git diff --check

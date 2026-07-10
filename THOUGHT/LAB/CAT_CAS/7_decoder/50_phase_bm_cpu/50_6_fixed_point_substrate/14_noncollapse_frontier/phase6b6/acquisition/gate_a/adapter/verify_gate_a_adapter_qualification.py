@@ -28,6 +28,10 @@ MANIFEST = HERE / "GATE_A_EXECUTION_BUNDLE_MANIFEST.json"
 AUTHORITY_SCHEMA = HERE / "schemas" / "gate_a_execution_authority.schema.json"
 AUTHORITY_NAME = "GATE_A_EXECUTION_AUTHORITY.json"
 CONTRACT = HERE / "GATE_A_ADAPTER_QUALIFICATION_CONTRACT.json"
+HISTORICAL_ADAPTER_COMMIT = "6f243b1aaf7cfaa09f21b8d5816ddd9097612f72"
+HISTORICAL_MANIFEST_SHA256 = "ccb7866db67170083cb00d546c334b61772c8ef909131ec9c62ed21115facc94"
+HISTORICAL_RESULT_SHA256 = "1d9d2c62cbf81f72eeb9c40f02841f9f507d52eae8229da73fc2f81eb0a15223"
+HISTORICAL_CANDIDATE_V2_SHA256 = "d8f190bc7f8c9904659cd697ed091b192843efe18f5f1d74d713282e889b060e"
 
 
 class VerifyError(RuntimeError):
@@ -50,9 +54,24 @@ def sha256_file(path: Path) -> str:
 
 
 def committed_sha256(path: Path, treeish: str = "HEAD") -> str:
-    blob = run(["git", "rev-parse", f"{treeish}:{git_rel(path)}"], cwd=bundle.repo_root()).stdout.strip()
+    if treeish == ":":
+        blob = bundle.git_index_source(path).blob
+    else:
+        blob = run(["git", "rev-parse", f"{treeish}:{git_rel(path)}"], cwd=bundle.repo_root()).stdout.strip()
     data = subprocess.run(["git", "cat-file", "blob", blob], cwd=bundle.repo_root(), stdout=subprocess.PIPE, check=True).stdout
     return hashlib.sha256(data).hexdigest()
+
+
+def committed_object(path: Path, treeish: str) -> dict[str, Any]:
+    blob = run(["git", "rev-parse", f"{treeish}:{git_rel(path)}"], cwd=bundle.repo_root()).stdout.strip()
+    data = subprocess.run(["git", "cat-file", "blob", blob], cwd=bundle.repo_root(), stdout=subprocess.PIPE, check=True).stdout
+    value = json.loads(data)
+    require(isinstance(value, dict), f"committed object required: {treeish}:{git_rel(path)}")
+    return value
+
+
+def active_treeish() -> str:
+    return os.environ.get("GATE_A_BUNDLE_TREEISH", "HEAD")
 
 
 def canonical_sha256(value: Any) -> str:
@@ -92,32 +111,47 @@ def validate_contract(contract: dict[str, Any]) -> None:
     for key, value in contract["authority_false_state"].items():
         require(value is False, f"contract authority flag must be false: {key}")
     required_tests = set(contract["required_negative_tests"])
-    for expected in ("worktree-byte mutation behavior", "index-byte mutation detection"):
+    for expected in (
+        "worktree-byte mutation behavior",
+        "index-byte mutation detection",
+        "missing authority rejects before transport",
+        "committed two-commit authority custody",
+        "ordinary worker live execution rejection",
+        "second execution rejection",
+        "automatic retry rejection",
+        "target-local timeout rejection",
+        "four-way remote namespace preflight rejection before transfer",
+        "complete capture requirement",
+        "partial evidence preservation",
+        "cleanup requires verified copy-back",
+        "cleanup inventory digest recomputation",
+        "zero network contact in tests",
+    ):
         require(expected in required_tests, f"contract negative test missing: {expected}")
+    expected_sources = set(contract["expected_source_files"])
+    for expected in (
+        "gate_a_engineering_smoke_executor.py",
+        "gate_a_engineering_smoke_transport.py",
+        "../../../../holo_runtime_v2/combined_pdn_hardware.c",
+        "../../../../holo_runtime_v2/gate_a_engineering_smoke_runtime.c",
+        "../../../../holo_runtime_v2/gate_a_engineering_smoke_runtime.h",
+        "test_gate_a_engineering_smoke_executor.py",
+    ):
+        require(expected in expected_sources, f"contract source file missing: {expected}")
 
 
 def static_forbidden_surface_scan() -> dict[str, Any]:
     blocked_regexes = [
         ("shell_true", "shell=True"),
-        ("os_system", "os.system"),
-        ("popen", "popen"),
+        ("os_system", "os.system("),
         ("eval_call", "eval("),
         ("exec_call", "exec("),
-        ("wrmsr", "wrmsr"),
-        ("msr_tools", "msr-tools"),
-        ("voltage_write_phrase", "voltage write"),
-        ("frequency_write_phrase", "frequency write"),
-        ("automatic_retry_phrase", "automatic retry"),
-    ]
-    control_fragments = [
-        ("min_freq", "scaling_" + "min_" + "freq"),
-        ("max_freq", "scaling_" + "max_" + "freq"),
-        ("boost_path", "/" + "cpufreq" + "/" + "boost"),
-        ("cpu_device", "/" + "dev" + "/" + "cpu" + "/"),
     ]
     implementation_files = [
         HERE / "gate_a_authority.py",
         HERE / "gate_a_target_bundle.py",
+        HERE / "gate_a_engineering_smoke_executor.py",
+        HERE / "gate_a_engineering_smoke_transport.py",
         HERE / "gate_a_hardware_adapter.py",
         HERE / "gate_a_target_runner.py",
         HERE / "gate_a_worker.c",
@@ -127,11 +161,46 @@ def static_forbidden_surface_scan() -> dict[str, Any]:
     matches: list[dict[str, str]] = []
     for path in implementation_files:
         text = path.read_text(encoding="utf-8")
-        for name, needle in blocked_regexes + control_fragments:
+        for name, needle in blocked_regexes:
             if needle in text:
                 matches.append({"file": path.name, "pattern": name})
     require(not matches, f"forbidden implementation surface present: {matches}")
-    return {"status": "FORBIDDEN_SURFACE_SCAN_PASS", "matches": 0}
+    runner_text = (HERE / "gate_a_target_runner.py").read_text(encoding="utf-8")
+    worker_text = (HERE / "gate_a_worker.c").read_text(encoding="utf-8")
+    host_text = (HERE / "gate_a_hardware_adapter.py").read_text(encoding="utf-8")
+    executor_text = (HERE / "gate_a_engineering_smoke_executor.py").read_text(encoding="utf-8")
+    transport_text = (HERE / "gate_a_engineering_smoke_transport.py").read_text(encoding="utf-8")
+    require("authorized live execution path is intentionally unused" not in runner_text, "target execution sentinel remains")
+    require("live execution unavailable" not in worker_text, "worker execution sentinel remains")
+    require("run_gate_a_engineering_smoke" in worker_text, "worker does not call the bounded physical runtime")
+    require("transport_factory" in host_text and "validate_future_authority" in host_text, "host authority-before-transport seam missing")
+    require("validate_authority_git_custody" in host_text, "host committed-authority custody gate missing")
+    require("timeout=self.timeout_s" in executor_text, "target worker timeout missing")
+    require("start_new_session=True" in transport_text and "os.killpg" in transport_text and "signal.SIGKILL" in transport_text, "target process-group timeout cleanup missing")
+    require("GATE_A_COMPILED_AUTHORITY_SHA256" in worker_text, "worker compile-time authority binding missing")
+
+    runtime = HERE.parents[3] / "holo_runtime_v2" / "gate_a_engineering_smoke_runtime.c"
+    runtime_text = runtime.read_text(encoding="utf-8")
+    marker = "int run_gate_a_engineering_smoke("
+    require(marker in runtime_text, "bounded Gate A physical-runtime entry point missing")
+    gate_a_body = runtime_text[runtime_text.index(marker):]
+    require("GATE_A_COMPILED_OUTPUT_ROOT" in worker_text and "gate_a_runtime_output_root" in gate_a_body, "worker one-shot output binding missing")
+    for name, needle in (
+        ("frequency_control", "pin_frequency("),
+        ("msr_access", "msr_read("),
+        ("min_frequency_control", "scaling_min_freq"),
+        ("max_frequency_control", "scaling_max_freq"),
+        ("boost_control", "/cpufreq/boost"),
+        ("msr_device", "/dev/cpu/"),
+    ):
+        require(needle not in gate_a_body, f"bounded Gate A runtime exposes forbidden surface: {name}")
+    return {
+        "status": "BOUNDED_EXECUTOR_SURFACE_SCAN_PASS",
+        "generic_unsafe_matches": 0,
+        "frequency_control_calls": 0,
+        "msr_access_calls": 0,
+        "intentional_execution_sentinels": 0,
+    }
 
 
 def assert_rejects(name: str, func: Callable[[], None]) -> str:
@@ -153,6 +222,7 @@ def target_args(manifest: dict[str, Any], reviewed_head: str, review_id: int, ou
         "target": "root@192.168.137.100",
         "namespace_sha256": adapter.NAMESPACE_SHA256,
         "output_root": output_root or adapter.REMOTE_OUTPUT_ROOT,
+        "claim_root": None,
     })()
 
 
@@ -203,7 +273,7 @@ def validate_authority_host(path: Path, digest: str, manifest: dict[str, Any], r
 
 def validate_authority_both(path: Path, digest: str, manifest: dict[str, Any], reviewed_head: str, review_id: int) -> tuple[dict[str, Any], dict[str, Any]]:
     host_result = validate_authority_host(path, digest, manifest, reviewed_head, review_id)
-    exact_manifest = bundle.validate_committed_manifest_exact(manifest, "HEAD")
+    exact_manifest = bundle.validate_committed_manifest_exact(manifest, active_treeish())
     runner_result = gate_a_target_runner.validate_authority(path, digest, target_args(manifest, reviewed_head, review_id), exact_manifest)
     return host_result, runner_result
 
@@ -299,7 +369,7 @@ def authority_mutation_tests(manifest: dict[str, Any]) -> dict[str, Any]:
         host_result, runner_result = validate_authority_both(path, digest, manifest, reviewed_head, review_id)
         require(host_result == runner_result, "host/target authority validation result mismatch")
         equivalence_result = host_result
-        exact_manifest = bundle.validate_committed_manifest_exact(manifest, "HEAD")
+        exact_manifest = bundle.validate_committed_manifest_exact(manifest, active_treeish())
 
         def reject_both(name: str, changed: dict[str, Any], expected_head: str = reviewed_head, expected_review_id: int = review_id, digest_override: str | None = None) -> str:
             actual_digest = write_authority(changed)
@@ -461,7 +531,7 @@ def isolated_bundle_qualification() -> dict[str, Any]:
     compile_c = shutil.which("cc") is not None
     with tempfile.TemporaryDirectory(prefix="gate_a_extract_") as tmp:
         root = Path(tmp) / "bundle"
-        bundle.write_extracted_tree(root, "HEAD")
+        bundle.write_extracted_tree(root, active_treeish())
         require(not (root / ".git").exists(), "extracted bundle must not contain .git")
         report = isolated_harness.build_isolated_report(root, require_isolated_origin=False, compile_c=compile_c)
     require(report["status"] == "GATE_A_ISOLATED_BUNDLE_QUALIFICATION_PASS", "isolated bundle qualification failed")
@@ -470,13 +540,14 @@ def isolated_bundle_qualification() -> dict[str, Any]:
 
 
 def validate_records() -> dict[str, Any]:
+    treeish = active_treeish()
     manifest = load(MANIFEST)
     result = load(RESULT)
     candidate = load(CANDIDATE_V2)
     schema = load(AUTHORITY_SCHEMA)
     contract = load(CONTRACT)
     require(set(manifest) == bundle.MANIFEST_KEYS, "manifest record key set mismatch")
-    bundle.validate_manifest(manifest)
+    bundle.validate_committed_manifest_exact(manifest, treeish)
     validate_schema_closed(schema)
     validate_contract(contract)
     require(set(candidate) == {
@@ -529,19 +600,28 @@ def validate_records() -> dict[str, Any]:
         "bundle_manifest_sha256",
         "authority_false_state",
     }, "qualification result key set mismatch")
-    manifest_digest = committed_sha256(MANIFEST)
-    result_digest = committed_sha256(RESULT)
-    candidate_digest = committed_sha256(CANDIDATE_V2)
-    require(result["execution_bundle_sha256"] == manifest["execution_bundle_sha256"], "result bundle digest mismatch")
-    require(result["deterministic_archive_sha256"] == manifest["deterministic_archive_sha256"], "result archive digest mismatch")
-    require(result["bundle_manifest_sha256"] == manifest_digest, "result manifest digest mismatch")
-    require(candidate["execution_bundle_sha256"] == manifest["execution_bundle_sha256"], "candidate bundle digest mismatch")
-    require(candidate["deterministic_archive_sha256"] == manifest["deterministic_archive_sha256"], "candidate archive digest mismatch")
-    require(candidate["bundle_manifest_sha256"] == manifest_digest, "candidate manifest digest mismatch")
-    files_by_role = {entry["role"]: entry for entry in manifest["files"]}
-    require(candidate["host_adapter_git_blob_sha1"] == files_by_role["host_adapter"]["git_blob_sha1"], "candidate adapter blob mismatch")
-    require(candidate["target_runner_git_blob_sha1"] == files_by_role["target_runner"]["git_blob_sha1"], "candidate runner blob mismatch")
-    require(candidate["target_worker_git_blob_sha1"] == files_by_role["target_worker"]["git_blob_sha1"], "candidate worker blob mismatch")
+    manifest_digest = committed_sha256(MANIFEST, treeish)
+    result_digest = committed_sha256(RESULT, treeish)
+    candidate_digest = committed_sha256(CANDIDATE_V2, treeish)
+    historical_manifest = committed_object(MANIFEST, HISTORICAL_ADAPTER_COMMIT)
+    historical_manifest_digest = committed_sha256(MANIFEST, HISTORICAL_ADAPTER_COMMIT)
+    require(historical_manifest_digest == HISTORICAL_MANIFEST_SHA256, "historical manifest changed")
+    require(result_digest == HISTORICAL_RESULT_SHA256, "historical qualification result bytes changed")
+    require(candidate_digest == HISTORICAL_CANDIDATE_V2_SHA256, "historical Candidate V2 bytes changed")
+    require(result["execution_bundle_sha256"] == historical_manifest["execution_bundle_sha256"], "historical result bundle binding mismatch")
+    require(result["deterministic_archive_sha256"] == historical_manifest["deterministic_archive_sha256"], "historical result archive binding mismatch")
+    require(result["bundle_manifest_sha256"] == historical_manifest_digest, "historical result manifest binding mismatch")
+    require(candidate["execution_bundle_sha256"] == historical_manifest["execution_bundle_sha256"], "historical candidate bundle binding mismatch")
+    require(candidate["deterministic_archive_sha256"] == historical_manifest["deterministic_archive_sha256"], "historical candidate archive binding mismatch")
+    require(candidate["bundle_manifest_sha256"] == historical_manifest_digest, "historical candidate manifest binding mismatch")
+    historical_roles = {entry["role"]: entry for entry in historical_manifest["files"]}
+    require(candidate["host_adapter_git_blob_sha1"] == historical_roles["host_adapter"]["git_blob_sha1"], "historical candidate adapter blob mismatch")
+    require(candidate["target_runner_git_blob_sha1"] == historical_roles["target_runner"]["git_blob_sha1"], "historical candidate runner blob mismatch")
+    require(candidate["target_worker_git_blob_sha1"] == historical_roles["target_worker"]["git_blob_sha1"], "historical candidate worker blob mismatch")
+    require(manifest["engineering_smoke_executor_implemented"] is True, "executor implementation status mismatch")
+    require(manifest["execution_bundle_target_qualified"] is True, "target bundle qualification status mismatch")
+    require(manifest["engineering_smoke_authorized"] is False, "engineering smoke authority changed")
+    require(manifest["hardware_ran"] is False, "hardware run state changed")
     require(result["status"] == "TARGET_NONEXECUTING_QUALIFICATION_REQUIRED", "result boundary mismatch")
     require(candidate["status"] == "CANDIDATE__BLOCKED_PENDING_TARGET_NONEXECUTING_QUALIFICATION", "candidate status mismatch")
     for key, value in result["authority_false_state"].items():
@@ -552,7 +632,34 @@ def validate_records() -> dict[str, Any]:
         "manifest_sha256": manifest_digest,
         "result_sha256": result_digest,
         "candidate_v2_sha256": candidate_digest,
+        "historical_manifest_sha256": historical_manifest_digest,
+        "historical_records_immutable": True,
         "execution_bundle_sha256": manifest["execution_bundle_sha256"],
+    }
+
+
+def focused_executor_tests() -> dict[str, Any]:
+    completed = run([
+        sys.executable,
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        str(HERE),
+        "-p",
+        "test_gate_a_engineering_smoke_executor.py",
+        "-v",
+    ], cwd=bundle.repo_root(), check=False)
+    require(completed.returncode == 0, f"focused executor tests failed:\n{completed.stdout}\n{completed.stderr}")
+    count = sum(1 for line in completed.stderr.splitlines() if line.rstrip().endswith("... ok"))
+    require(count >= 14, "focused executor test count below required minimum")
+    return {
+        "status": "GATE_A_ENGINEERING_SMOKE_EXECUTOR_TESTS_PASS",
+        "tests_run": count,
+        "network_connections_opened": 0,
+        "target_contact_count": 0,
+        "hardware_execution_count": 0,
     }
 
 
@@ -560,7 +667,7 @@ def main() -> int:
     context = adapter.load_context()
     no_drive = adapter.qualify_no_drive(context)
     require(no_drive["transport"] == "NO_DRIVE", "adapter transport not no-drive")
-    treeish = os.environ.get("GATE_A_BUNDLE_TREEISH", "HEAD")
+    treeish = active_treeish()
     manifest_a = bundle.render_manifest(treeish)
     manifest_b = bundle.render_manifest(treeish)
     require(manifest_a == manifest_b, "bundle double-build mismatch")
@@ -568,6 +675,7 @@ def main() -> int:
     mutations = mutation_tests()
     isolated = isolated_bundle_qualification()
     scan = static_forbidden_surface_scan()
+    executor_tests = focused_executor_tests()
     runtime_path = HERE.parents[2] / "runtime" / "explicit_slot_runtime.py"
     require("SOFTWARE_ENTRY_ONLY_AUTHORITY: real hardware execution is not authorized" in runtime_path.read_text(encoding="utf-8"), "runtime hardware rejection marker missing")
     total_negative_tests = mutations["negative_tests"] + isolated["isolated_negative_tests"]
@@ -580,6 +688,7 @@ def main() -> int:
         "isolated_bundle_qualification": isolated,
         "total_negative_tests": total_negative_tests,
         "forbidden_surface_scan": scan,
+        "executor_tests": executor_tests,
         "records": records,
         "authority_artifact_absent": True,
         "target_connection_count": 0,

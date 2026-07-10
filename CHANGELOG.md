@@ -2,6 +2,24 @@
 
 # Changelog
 
+## 2026-07-10: Phase 6B.6 bounded Gate A engineering-smoke executor
+
+- Implement the exact-authority-gated Gate A engineering-smoke execution path
+  for only the frozen 16-slot, eight-second schedule. The host validates exact
+  owner authority before constructing transport, the target consumes one
+  durable attempt only after exact bundle and namespace validation, and the
+  existing `holo_runtime_v2` physical and capture primitives execute one
+  continuous, fixed-timeline session with one S0E sender epoch. The bounded
+  path exposes no frequency write, voltage write, or MSR operation and permits
+  no automatic retry.
+
+- Add dependency-injected non-driving coverage for authority, namespace,
+  process, temperature, frequency, one-shot custody, physical token mapping,
+  timing, continuous capture, partial evidence, verified-copy cleanup, and
+  zero network contact. Preserve all historical qualification evidence,
+  adjudication, and Candidate V1-V4 records unchanged. No execution-authority
+  artifact is created and no target contact or hardware execution occurs.
+
 ## 2026-07-09: Phase 6B.6 Gate A target non-executing attempt adjudication
 
 - Admit the sealed `_02` replacement evidence namespace in the three existing
