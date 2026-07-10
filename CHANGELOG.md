@@ -4,6 +4,12 @@
 
 ## 2026-07-09: Phase 6B.6 Gate A target non-executing attempt adjudication
 
+- Admit the sealed `_02` replacement evidence namespace in the three existing
+  Gate A hosted workflows. The smoke and adapter protected-surface guards now
+  exclude only the historical packet and this exact replacement packet, while
+  the target-qualification workflow watches both exact evidence roots; all
+  other Phase 6B.6 evidence paths remain rejected.
+
 - Seal the one authorized `_02` replacement qualification at execution HEAD
   `1ea708cfdc93083cc9386a6b1b14cf51d1ed8367`. The orchestrator ran exactly
   once with no retry: all four remote namespaces were absent before the first
