@@ -18,9 +18,11 @@ It is a lab tool, not a packaged bundle payload. It performs no hardware drive.
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import os
+import re
 import shutil
 import socket
 import subprocess
@@ -35,7 +37,10 @@ HERE = Path(__file__).resolve().parent
 GATE_A = HERE.parent
 ADAPTER = GATE_A / "adapter"
 PHASE6B6 = HERE.parents[2]
-EVID = PHASE6B6 / "evidence" / "gate_a_target_nonexecuting_qualification_6f243b1a_bundle_abc9e50a"
+REPO_ROOT = PHASE6B6.parents[7]
+EVIDENCE_PARENT = PHASE6B6 / "evidence"
+HISTORICAL_EVID = EVIDENCE_PARENT / "gate_a_target_nonexecuting_qualification_6f243b1a_bundle_abc9e50a"
+HISTORICAL_AUTHORIZATION = HERE / "GATE_A_TARGET_NONEXECUTING_QUALIFICATION_AUTHORIZATION.json"
 PREDECESSOR_IDENTITY = PHASE6B6 / "evidence" / "nonhardware_qualification_3c6a5dd3_subject_d351a62f" / "target" / "logs" / "016_target_identity.stdout.txt"
 
 SSH_TARGET = "root@192.168.137.100"
@@ -43,13 +48,21 @@ TARGET_HOSTNAME = "catcas"
 SSH_OPTS = ["-o", "BatchMode=yes", "-o", "ConnectTimeout=15", "-o", "StrictHostKeyChecking=yes"]
 SCP_OPTS = ["-o", "BatchMode=yes", "-o", "ConnectTimeout=15", "-o", "StrictHostKeyChecking=yes"]
 
-EXEC_ROOT = "/root/catcas_phase6b6_gate_a_smoke_9c416379"
-EVIDENCE_ROOT = EXEC_ROOT + "/evidence"
-TRANSFER_STAGE = "/tmp/catcas_gate_a_bundle_abc9e50a.deploy.tar"
-EV_ARCHIVE = "/tmp/catcas_gate_a_evidence_abc9e50a.tar"
-TP = "/tmp/catcas_gate_a_tq_"
-QUAL_STDOUT = TP + "qual.stdout"
-QUAL_STDERR = TP + "qual.stderr"
+# These values are intentionally unset until a new, closed, exact owner
+# authorization artifact has been validated.  There is no default that can
+# accidentally reuse the consumed historical authority or evidence namespace.
+EVID: Path
+EXEC_ROOT: str
+EVIDENCE_ROOT: str
+TRANSFER_STAGE: str
+EV_ARCHIVE: str
+TP: str
+QUAL_STDOUT: str
+QUAL_STDERR: str
+REPLACEMENT_AUTHORITY: dict[str, Any]
+REPLACEMENT_AUTHORITY_PATH: Path
+REPLACEMENT_AUTHORITY_SHA256: str
+REPLACEMENT_AUTHORITY_GIT_BLOB_SHA1: str
 
 EXPECTED_EXECUTION_BUNDLE = "abc9e50a517d764c553adc5096378992028b29a8f62480a9ae217ebbd5202bba"
 EXPECTED_ARCHIVE = "04eaf73336f373865f4e837baca9ff4fe893d3b1b16dd8b8288af1259ff96f9c"
@@ -61,9 +74,274 @@ EXPECTED_CPU = "AMD Phenom(tm) II X6 1090T Processor"
 
 LOCAL_HOST = socket.gethostname()
 
+REPLACEMENT_AUTHORITY_SCHEMA_ID = (
+    "CAT_CAS_PHASE6B6_GATE_A_REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_AUTHORIZATION_V1"
+)
+REPLACEMENT_AUTHORITY_DECISION = (
+    "AUTHORIZED_FOR_ONE_REPLACEMENT_GATE_A_TARGET_NONEXECUTING_QUALIFICATION"
+)
+HISTORICAL_EVIDENCE_REL = HISTORICAL_EVID.relative_to(REPO_ROOT).as_posix()
+HISTORICAL_AUTHORIZATION_REL = HISTORICAL_AUTHORIZATION.relative_to(REPO_ROOT).as_posix()
+
+REPLACEMENT_AUTHORITY_KEYS = {
+    "schema_id",
+    "decision",
+    "project_owner",
+    "owner_instruction",
+    "authority_id",
+    "authorized_source_commit",
+    "historical_authorization_path",
+    "historical_authority_consumed",
+    "historical_evidence_dir",
+    "local_evidence_dir",
+    "ssh_target",
+    "expected_hostname",
+    "expected_architecture",
+    "expected_cpu_model",
+    "remote_execution_root",
+    "remote_evidence_root",
+    "remote_transfer_stage",
+    "remote_evidence_archive",
+    "remote_temp_prefix",
+    "execution_bundle_sha256",
+    "deterministic_archive_sha256",
+    "bundle_manifest_sha256",
+    "maximum_target_qualification_executions",
+    "automatic_retry",
+    "replacement_qualification_authorized",
+    "ssh_authorized",
+    "copy_authorized",
+    "target_filesystem_staging_authorized",
+    "compile_validate_only_authorized",
+    "no_drive_runner_authorized",
+    "probe_authorized",
+    "engineering_smoke_authorized",
+    "hardware_execution_authorized",
+    "calibration_authorized",
+    "scientific_acquisition_authorized",
+    "restoration_authorized",
+    "target_coupling_authorized",
+    "small_wall_authorized",
+    "execution_authority_artifact_creation_authorized",
+}
+
+NARROW_TRUE_FIELDS = (
+    "replacement_qualification_authorized",
+    "ssh_authorized",
+    "copy_authorized",
+    "target_filesystem_staging_authorized",
+    "compile_validate_only_authorized",
+    "no_drive_runner_authorized",
+)
+
+DOWNSTREAM_FALSE_FIELDS = (
+    "probe_authorized",
+    "engineering_smoke_authorized",
+    "hardware_execution_authorized",
+    "calibration_authorized",
+    "scientific_acquisition_authorized",
+    "restoration_authorized",
+    "target_coupling_authorized",
+    "small_wall_authorized",
+    "execution_authority_artifact_creation_authorized",
+)
+
 
 class QualError(RuntimeError):
     pass
+
+
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Run one replacement Gate A target non-executing qualification only "
+            "under a new exact project-owner authorization artifact."
+        )
+    )
+    parser.add_argument(
+        "--replacement-authorization",
+        required=True,
+        type=Path,
+        help=(
+            "Path to GATE_A_REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_AUTHORIZATION.json; "
+            "the consumed historical authorization is rejected"
+        ),
+    )
+    return parser.parse_args(argv)
+
+
+def current_head() -> str:
+    proc = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    if proc.returncode != 0:
+        raise QualError(f"cannot resolve exact source commit: {proc.stderr.strip()[:300]}")
+    return proc.stdout.strip()
+
+
+def load_replacement_authority(path: Path) -> dict[str, Any]:
+    resolved = path.resolve()
+    if resolved == HISTORICAL_AUTHORIZATION.resolve():
+        raise QualError("the historical target-qualification authority is consumed and cannot be reused")
+    if resolved.name != "GATE_A_REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_AUTHORIZATION.json":
+        raise QualError("replacement authorization must use the exact required artifact name")
+    try:
+        value = json.loads(resolved.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise QualError(f"cannot load replacement authorization: {exc}") from exc
+    if not isinstance(value, dict):
+        raise QualError("replacement authorization must be a JSON object")
+    return value
+
+
+def validate_replacement_authority(
+    authority: dict[str, Any],
+    authority_path: Path,
+    *,
+    source_commit: str,
+) -> Path:
+    """Validate closed replacement authority before any SSH or SCP is possible."""
+    if set(authority) != REPLACEMENT_AUTHORITY_KEYS:
+        missing = sorted(REPLACEMENT_AUTHORITY_KEYS - set(authority))
+        extra = sorted(set(authority) - REPLACEMENT_AUTHORITY_KEYS)
+        raise QualError(f"replacement authorization key closure failed: missing={missing}, extra={extra}")
+    expected_scalars = {
+        "schema_id": REPLACEMENT_AUTHORITY_SCHEMA_ID,
+        "decision": REPLACEMENT_AUTHORITY_DECISION,
+        "project_owner": "Raúl Romero",
+        "authorized_source_commit": source_commit,
+        "historical_authorization_path": HISTORICAL_AUTHORIZATION_REL,
+        "historical_evidence_dir": HISTORICAL_EVIDENCE_REL,
+        "ssh_target": SSH_TARGET,
+        "expected_hostname": EXPECTED_HOSTNAME,
+        "expected_architecture": EXPECTED_ARCH,
+        "expected_cpu_model": EXPECTED_CPU,
+        "execution_bundle_sha256": EXPECTED_EXECUTION_BUNDLE,
+        "deterministic_archive_sha256": EXPECTED_ARCHIVE,
+        "bundle_manifest_sha256": EXPECTED_MANIFEST_FILE,
+        "maximum_target_qualification_executions": 1,
+        "automatic_retry": False,
+        "historical_authority_consumed": True,
+    }
+    for key, expected in expected_scalars.items():
+        if authority[key] != expected:
+            raise QualError(f"replacement authorization {key} mismatch")
+    if not isinstance(authority["owner_instruction"], str) or not authority["owner_instruction"].strip():
+        raise QualError("replacement authorization owner_instruction must be nonempty")
+    for key in NARROW_TRUE_FIELDS:
+        if authority[key] is not True:
+            raise QualError(f"replacement authorization {key} must be true")
+    for key in DOWNSTREAM_FALSE_FIELDS:
+        if authority[key] is not False:
+            raise QualError(f"replacement authorization {key} must be false")
+
+    authority_id = authority["authority_id"]
+    if not isinstance(authority_id, str) or re.fullmatch(r"[a-z0-9][a-z0-9_-]{7,63}", authority_id) is None:
+        raise QualError("replacement authority_id must be a safe 8-64 character lowercase identifier")
+    if authority_id in HISTORICAL_EVID.name:
+        raise QualError("replacement authority_id must not reuse the historical namespace")
+
+    expected_local_rel = (
+        EVIDENCE_PARENT.relative_to(REPO_ROOT).as_posix()
+        + f"/gate_a_target_nonexecuting_qualification_replacement_{authority_id}"
+    )
+    if authority["local_evidence_dir"] != expected_local_rel:
+        raise QualError("replacement local evidence namespace is not exactly authority-bound")
+    evidence_path = (REPO_ROOT / expected_local_rel).resolve()
+    if evidence_path == HISTORICAL_EVID.resolve():
+        raise QualError("historical evidence namespace cannot be reused")
+    if evidence_path.parent != EVIDENCE_PARENT.resolve():
+        raise QualError("replacement evidence namespace escaped the evidence parent")
+
+    expected_remote = {
+        "remote_execution_root": f"/root/catcas_phase6b6_gate_a_target_nonexec_{authority_id}",
+        "remote_evidence_root": f"/root/catcas_phase6b6_gate_a_target_nonexec_{authority_id}/evidence",
+        "remote_transfer_stage": f"/tmp/catcas_gate_a_bundle_{authority_id}.deploy.tar",
+        "remote_evidence_archive": f"/tmp/catcas_gate_a_evidence_{authority_id}.tar",
+        "remote_temp_prefix": f"/tmp/catcas_gate_a_tq_{authority_id}_",
+    }
+    for key, expected in expected_remote.items():
+        if authority[key] != expected:
+            raise QualError(f"replacement authorization {key} is not exactly authority-bound")
+
+    if authority_path.resolve() == HISTORICAL_AUTHORIZATION.resolve():
+        raise QualError("historical authorization cannot be reused")
+    return evidence_path
+
+
+def ensure_new_evidence_namespace(path: Path) -> None:
+    if not EVIDENCE_PARENT.is_dir() or EVIDENCE_PARENT.is_symlink():
+        raise QualError(f"evidence parent must be an existing real directory: {EVIDENCE_PARENT}")
+    if path.exists() or path.is_symlink():
+        raise QualError(f"replacement evidence namespace must be absent: {path}")
+
+
+def validate_replacement_authority_custody(authority_path: Path, source_commit: str) -> str:
+    """Bind the owner artifact and runner bytes to the exact authorized commit."""
+    resolved = authority_path.resolve()
+    try:
+        authority_rel = resolved.relative_to(REPO_ROOT).as_posix()
+    except ValueError as exc:
+        raise QualError("replacement authorization must be committed inside the repository") from exc
+    runner_rel = Path(__file__).resolve().relative_to(REPO_ROOT).as_posix()
+    for rel in (authority_rel, runner_rel):
+        tracked = subprocess.run(
+            ["git", "cat-file", "-e", f"{source_commit}:{rel}"],
+            cwd=str(REPO_ROOT),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        if tracked.returncode != 0:
+            raise QualError(f"authorized source commit does not contain exact required path: {rel}")
+    clean = subprocess.run(
+        ["git", "diff", "--exit-code", source_commit, "--", authority_rel, runner_rel],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if clean.returncode != 0:
+        raise QualError("replacement authorization or runner differs from the authorized source commit")
+    blob = subprocess.run(
+        ["git", "rev-parse", f"{source_commit}:{authority_rel}"],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    if blob.returncode != 0 or re.fullmatch(r"[0-9a-f]{40}", blob.stdout.strip()) is None:
+        raise QualError("cannot bind replacement authorization Git blob")
+    return blob.stdout.strip()
+
+
+def configure_runtime(authority: dict[str, Any], authority_path: Path) -> None:
+    global EVID, EXEC_ROOT, EVIDENCE_ROOT, TRANSFER_STAGE, EV_ARCHIVE, TP
+    global QUAL_STDOUT, QUAL_STDERR, REPLACEMENT_AUTHORITY, REPLACEMENT_AUTHORITY_PATH
+    global REPLACEMENT_AUTHORITY_SHA256, REPLACEMENT_AUTHORITY_GIT_BLOB_SHA1
+
+    source_commit = current_head()
+    evidence_path = validate_replacement_authority(
+        authority,
+        authority_path,
+        source_commit=source_commit,
+    )
+    authority_blob = validate_replacement_authority_custody(authority_path, source_commit)
+    ensure_new_evidence_namespace(evidence_path)
+    EVID = evidence_path
+    EXEC_ROOT = authority["remote_execution_root"]
+    EVIDENCE_ROOT = authority["remote_evidence_root"]
+    TRANSFER_STAGE = authority["remote_transfer_stage"]
+    EV_ARCHIVE = authority["remote_evidence_archive"]
+    TP = authority["remote_temp_prefix"]
+    QUAL_STDOUT = TP + "qual.stdout"
+    QUAL_STDERR = TP + "qual.stderr"
+    REPLACEMENT_AUTHORITY = authority
+    REPLACEMENT_AUTHORITY_PATH = authority_path.resolve()
+    REPLACEMENT_AUTHORITY_SHA256 = sha256_file(REPLACEMENT_AUTHORITY_PATH)
+    REPLACEMENT_AUTHORITY_GIT_BLOB_SHA1 = authority_blob
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -203,30 +481,38 @@ def run_ssh_py(name: str, script: str, remote_env: dict[str, str] | None = None,
     return entry
 
 
+def _scp(name: str, argv: list[str], *, subdir: str, direction: str) -> dict[str, Any]:
+    started = time.time()
+    try:
+        proc = subprocess.run(argv, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=300)
+        rc, out, err = proc.returncode, proc.stdout, proc.stderr
+    except subprocess.TimeoutExpired as exc:
+        rc = 124
+        out = exc.stdout or b""
+        err = (exc.stderr or b"") + b"\n[timeout]"
+    except OSError as exc:
+        rc = 127
+        out = b""
+        err = f"{type(exc).__name__}: {exc}".encode("utf-8", "replace")
+    finished = time.time()
+    entry = REC.record(subdir=subdir, name=name, argv=argv, hostname=LOCAL_HOST, cwd=os.getcwd(),
+                       started=started, finished=finished, exit_code=rc,
+                       stdout=out, stderr=err, environment={})
+    entry["_stdout"] = out
+    entry["_stderr"] = err
+    if rc != 0:
+        raise QualError(f"scp {direction} failed: {name} rc={rc}: {err.decode('utf-8','replace')[:400]}")
+    return entry
+
+
 def scp_to(name: str, local: Path, remote: str) -> dict[str, Any]:
     argv = ["scp", *SCP_OPTS, str(local), f"{SSH_TARGET}:{remote}"]
-    started = time.time()
-    proc = subprocess.run(argv, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=300)
-    finished = time.time()
-    entry = REC.record(subdir="transfer", name=name, argv=argv, hostname=LOCAL_HOST, cwd=os.getcwd(),
-                       started=started, finished=finished, exit_code=proc.returncode,
-                       stdout=proc.stdout, stderr=proc.stderr, environment={})
-    if proc.returncode != 0:
-        raise QualError(f"scp upload failed: {name}: {proc.stderr.decode('utf-8','replace')[:400]}")
-    return entry
+    return _scp(name, argv, subdir="transfer", direction="upload")
 
 
 def scp_from(name: str, remote: str, local: Path, *, subdir: str = "copy_back") -> dict[str, Any]:
     argv = ["scp", *SCP_OPTS, f"{SSH_TARGET}:{remote}", str(local)]
-    started = time.time()
-    proc = subprocess.run(argv, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=300)
-    finished = time.time()
-    entry = REC.record(subdir=subdir, name=name, argv=argv, hostname=LOCAL_HOST, cwd=os.getcwd(),
-                       started=started, finished=finished, exit_code=proc.returncode,
-                       stdout=proc.stdout, stderr=proc.stderr, environment={})
-    if proc.returncode != 0:
-        raise QualError(f"scp download failed: {name}: {proc.stderr.decode('utf-8','replace')[:400]}")
-    return entry
+    return _scp(name, argv, subdir=subdir, direction="download")
 
 
 # ---- target-side python programs (Git-free) ----
@@ -390,20 +676,99 @@ print(text)
 
 def process_script() -> str:
     return r'''
-import os, json, subprocess
+import os, json, subprocess, hashlib, base64
 pats=["combined_pdn_runner","run_combined_campaign","explicit_slot_runtime","wrmsr","rdmsr","cpupower","turbostat","gate_a_worker"]
-out=subprocess.run(["ps","-eo","pid,comm,args"], stdout=subprocess.PIPE).stdout.decode('utf-8','replace')
+cmd=json.loads(os.environ.get("PROCESS_SCAN_COMMAND_JSON", '["ps","-eo","pid,comm,args"]'))
+proc=subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+raw_stdout=proc.stdout.decode('utf-8','replace')
+raw_stderr=proc.stderr.decode('utf-8','replace')
+receipt={
+ "command":cmd,
+ "command_sha256":hashlib.sha256(json.dumps(cmd,sort_keys=True,separators=(',',':'),ensure_ascii=True).encode('utf-8')).hexdigest(),
+ "return_code":proc.returncode,
+ "stdout_sha256":hashlib.sha256(proc.stdout).hexdigest(),
+ "stderr_sha256":hashlib.sha256(proc.stderr).hexdigest(),
+ "raw_process_listing":raw_stdout,
+ "raw_process_listing_base64":base64.b64encode(proc.stdout).decode('ascii'),
+ "raw_process_listing_sha256":hashlib.sha256(proc.stdout).hexdigest(),
+ "raw_process_stderr":raw_stderr,
+ "raw_process_stderr_base64":base64.b64encode(proc.stderr).decode('ascii'),
+ "ps_executed_successfully":False,
+ "raw_process_listing_preserved":True,
+ "forbidden_process_filter_evaluated":False,
+ "forbidden_process_hits":[],
+ "scan_complete":False,
+}
+def emit(exit_code):
+    text=json.dumps(receipt, sort_keys=True)
+    out_path=os.environ.get("OUT")
+    if out_path:
+        with open(out_path,'w') as f: f.write(text)
+    print(text)
+    raise SystemExit(exit_code)
+if proc.returncode != 0:
+    receipt["failure"]="ps returned nonzero"
+    emit(70)
+lines=raw_stdout.splitlines()
+if not lines or "PID" not in lines[0].upper():
+    receipt["failure"]="ps output missing expected header"
+    emit(71)
 hits=[]
-for line in out.splitlines()[1:]:
+for line in lines[1:]:
     for p in pats:
         if p in line and 'ps -eo' not in line:
             hits.append(line.strip())
-text=json.dumps({"forbidden_process_hits":hits}, sort_keys=True)
-out=os.environ.get("OUT")
-if out:
-    with open(out,'w') as f: f.write(text)
+receipt["forbidden_process_hits"]=hits
+receipt["ps_executed_successfully"]=True
+receipt["forbidden_process_filter_evaluated"]=True
+receipt["scan_complete"]=True
+text=json.dumps(receipt, sort_keys=True)
+out_path=os.environ.get("OUT")
+if out_path:
+    with open(out_path,'w') as f: f.write(text)
 print(text)
 '''
+
+
+def validate_process_scan(scan: dict[str, Any], context: str) -> None:
+    import base64
+
+    expected_command = ["ps", "-eo", "pid,comm,args"]
+    checks = {
+        "command": expected_command,
+        "return_code": 0,
+        "ps_executed_successfully": True,
+        "raw_process_listing_preserved": True,
+        "forbidden_process_filter_evaluated": True,
+        "scan_complete": True,
+    }
+    for key, expected in checks.items():
+        if scan.get(key) != expected:
+            raise QualError(f"{context} process scan {key}={scan.get(key)!r} != {expected!r}")
+    raw_stdout = scan.get("raw_process_listing")
+    raw_stderr = scan.get("raw_process_stderr")
+    if not isinstance(raw_stdout, str) or not isinstance(raw_stderr, str):
+        raise QualError(f"{context} process scan did not preserve raw stdout/stderr")
+    try:
+        raw_stdout_bytes = base64.b64decode(scan.get("raw_process_listing_base64", ""), validate=True)
+        raw_stderr_bytes = base64.b64decode(scan.get("raw_process_stderr_base64", ""), validate=True)
+    except (ValueError, TypeError) as exc:
+        raise QualError(f"{context} process scan raw base64 invalid: {exc}") from exc
+    if raw_stdout_bytes.decode("utf-8", "replace") != raw_stdout:
+        raise QualError(f"{context} process scan raw stdout representation mismatch")
+    if raw_stderr_bytes.decode("utf-8", "replace") != raw_stderr:
+        raise QualError(f"{context} process scan raw stderr representation mismatch")
+    expected_command_sha = sha256_bytes(canonical(expected_command))
+    if scan.get("command_sha256") != expected_command_sha:
+        raise QualError(f"{context} process scan command hash mismatch")
+    if scan.get("stdout_sha256") != sha256_bytes(raw_stdout_bytes):
+        raise QualError(f"{context} process scan stdout hash mismatch")
+    if scan.get("raw_process_listing_sha256") != sha256_bytes(raw_stdout_bytes):
+        raise QualError(f"{context} process scan raw-listing hash mismatch")
+    if scan.get("stderr_sha256") != sha256_bytes(raw_stderr_bytes):
+        raise QualError(f"{context} process scan stderr hash mismatch")
+    if not isinstance(scan.get("forbidden_process_hits"), list):
+        raise QualError(f"{context} process scan hits must be a list")
 
 
 def parse_json_stdout(entry: dict[str, Any]) -> Any:
@@ -429,17 +794,36 @@ def parse_predecessor_identity(text: str) -> dict[str, str]:
     return ident
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
     global REC
-    EVID.mkdir(parents=True, exist_ok=True)
+    args = parse_args(argv)
+    authority_path = args.replacement_authorization.resolve()
+    authority = load_replacement_authority(authority_path)
+    configure_runtime(authority, authority_path)
+
+    # Authority and namespace closure are complete before any evidence path is
+    # created and before any SSH/SCP helper can be called.
+    EVID.mkdir(parents=False, exist_ok=False)
     for sub in ("local", "transfer", "target", "copy_back", "cleanup"):
         (EVID / sub / "logs").mkdir(parents=True, exist_ok=True)
     (EVID / "target" / "results").mkdir(parents=True, exist_ok=True)
     REC = Recorder(EVID)
 
-    bindings: dict[str, Any] = {"schema_id": "CAT_CAS_PHASE6B6_GATE_A_TARGET_NONEXEC_ORCHESTRATION_V1"}
+    bindings: dict[str, Any] = {
+        "schema_id": "CAT_CAS_PHASE6B6_GATE_A_TARGET_NONEXEC_ORCHESTRATION_V2",
+        "replacement_authority_schema_id": authority["schema_id"],
+        "replacement_authority_id": authority["authority_id"],
+        "replacement_authority_path": str(authority_path),
+        "replacement_authority_sha256": REPLACEMENT_AUTHORITY_SHA256,
+        "replacement_authority_git_blob_sha1": REPLACEMENT_AUTHORITY_GIT_BLOB_SHA1,
+        "historical_authority_consumed": True,
+        "historical_evidence_dir": HISTORICAL_EVIDENCE_REL,
+        "replacement_evidence_dir": EVID.relative_to(REPO_ROOT).as_posix(),
+        "maximum_target_qualification_executions": 1,
+        "automatic_retry": False,
+    }
     tmpdir = Path(tempfile.mkdtemp(prefix="gate_a_deploy_"))
-    deploy = tmpdir / "catcas_gate_a_bundle_abc9e50a.deploy.tar"
+    deploy = tmpdir / Path(TRANSFER_STAGE).name
 
     try:
         # ---- Phase 1: host reconstruction ----
@@ -502,8 +886,10 @@ def main() -> int:
         if before["forbidden_generated_files"]:
             raise QualError(f"pre-run generated files present: {before['forbidden_generated_files']}")
         proc_before = parse_json_stdout(run_ssh_py("process_before", process_script(), {"OUT": TP + "proc_before.json"}, subdir="target"))
+        validate_process_scan(proc_before, "before qualification")
         if proc_before["forbidden_process_hits"]:
             raise QualError(f"forbidden processes before: {proc_before['forbidden_process_hits']}")
+        bindings["process_scan_before"] = proc_before
         bindings["strict_validation_before"] = before["validation"]
         bindings["before_tree_canonical_sha256"] = before["tree_canonical_sha256"]
 
@@ -557,8 +943,10 @@ def main() -> int:
         if after["tree_canonical_sha256"] != before["tree_canonical_sha256"]:
             raise QualError("bundle tree canonical digest changed after qualification")
         proc_after = parse_json_stdout(run_ssh_py("process_after", process_script(), {"OUT": TP + "proc_after.json"}, subdir="target"))
+        validate_process_scan(proc_after, "after qualification")
         if proc_after["forbidden_process_hits"]:
             raise QualError(f"forbidden processes after: {proc_after['forbidden_process_hits']}")
+        bindings["process_scan_after"] = proc_after
         id_after = run_ssh_py("target_identity_after", target_identity_script(), {"OUT": TP + "id_after.json"}, subdir="target")
         ident_after = parse_json_stdout(id_after)
         for key in ("hostname", "architecture", "cpu_model"):
@@ -626,18 +1014,26 @@ def main() -> int:
         cleanup = parse_json_stdout(run_ssh_py("cleanup_namespace", cleanup_script(), {"ROOT": EXEC_ROOT, "STAGE": TRANSFER_STAGE, "EVARCHIVE": EV_ARCHIVE, "TP": TP}, subdir="cleanup"))
         if not (cleanup["exact_execution_root_removed"] and cleanup["exact_transfer_stage_removed"] and cleanup["execution_root_absence_proven"] and cleanup["transfer_stage_absence_proven"]):
             raise QualError(f"cleanup incomplete: {cleanup}")
+        cleanup_scan = parse_json_stdout(
+            run_ssh_py("process_after_cleanup", process_script(), subdir="cleanup")
+        )
+        validate_process_scan(cleanup_scan, "after cleanup")
+        if cleanup_scan["forbidden_process_hits"]:
+            raise QualError(f"forbidden processes after cleanup: {cleanup_scan['forbidden_process_hits']}")
         cleanup_receipt = {
-            "schema_id": "CAT_CAS_PHASE6B6_GATE_A_CLEANUP_RECEIPT_V1",
+            "schema_id": "CAT_CAS_PHASE6B6_GATE_A_CLEANUP_RECEIPT_V2",
             "exact_execution_root_removed": True,
             "exact_transfer_stage_removed": True,
             "execution_root_absence_proven": True,
             "transfer_stage_absence_proven": True,
-            "forbidden_processes_remaining": cleanup.get("forbidden_processes_remaining", []),
+            "process_scan": cleanup_scan,
+            "forbidden_processes_remaining": cleanup_scan["forbidden_process_hits"],
         }
         (EVID / "CLEANUP_RECEIPT.json").write_text(json.dumps(cleanup_receipt, sort_keys=True, indent=2) + "\n", encoding="utf-8")
         bindings["cleanup_verified"] = True
         bindings["execution_root_final_state"] = cleanup["execution_root_final_state"]
         bindings["transfer_stage_final_state"] = cleanup["transfer_stage_final_state"]
+        bindings["process_scan_after_cleanup"] = cleanup_scan
 
         bindings["overall_status"] = "SUCCESS"
     except Exception as exc:  # noqa: BLE001 - deterministic fail-closed capture
@@ -719,14 +1115,15 @@ print(json.dumps({"inventory":inv,"archive_sha256":archive_sha}, sort_keys=True)
 
 
 def cleanup_script() -> str:
-    return r'''
+    return f'''
 import os, json, shutil, glob
 root=os.environ["ROOT"]; stage=os.environ["STAGE"]; evarchive=os.environ["EVARCHIVE"]; tp=os.environ["TP"]
-res={}
+res={{}}
 # exact-string guards
-assert root=="/root/catcas_phase6b6_gate_a_smoke_9c416379", "root guard"
-assert stage=="/tmp/catcas_gate_a_bundle_abc9e50a.deploy.tar", "stage guard"
-assert tp=="/tmp/catcas_gate_a_tq_", "tp guard"
+assert root=={EXEC_ROOT!r}, "root guard"
+assert stage=={TRANSFER_STAGE!r}, "stage guard"
+assert evarchive=={EV_ARCHIVE!r}, "evidence archive guard"
+assert tp=={TP!r}, "tp guard"
 def state(p):
     try:
         os.lstat(p); return "PRESENT"
@@ -751,7 +1148,6 @@ res["exact_execution_root_removed"]= state(root)=="ABSENT"
 res["exact_transfer_stage_removed"]= state(stage)=="ABSENT"
 res["execution_root_absence_proven"]= state(root)=="ABSENT"
 res["transfer_stage_absence_proven"]= state(stage)=="ABSENT"
-res["forbidden_processes_remaining"]=[]
 print(json.dumps(res, sort_keys=True))
 '''
 

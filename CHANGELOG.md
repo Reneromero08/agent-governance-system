@@ -2,32 +2,29 @@
 
 # Changelog
 
-## 2026-07-02: Phase 6B.6 Gate A target non-executing qualification
+## 2026-07-09: Phase 6B.6 Gate A target non-executing attempt adjudication
 
-- Phase 6B.6: record the owner-authorized Gate A target non-executing
-  qualification. Under `AUTHORIZED_FOR_GATE_A_TARGET_NONEXECUTING_QUALIFICATION_ONLY`,
-  the exact reviewed deterministic execution bundle (execution bundle
-  `abc9e50a...`, deterministic archive `04eaf733...`, manifest file
-  `ccb7866d...`) was transferred to the Phenom target `catcas`
-  (`root@192.168.137.100`), verified in an isolated Git-free namespace, and the
-  target runner's `--qualify-no-drive` mode ran exactly once (worker
-  `--validate-only` OK; all network, probe, sender, receiver, control-write,
-  MSR, and hardware-execution counters zero). The extracted bundle tree was
-  byte-identical before and after, evidence was copy-back verified, and the
-  target namespace and transfer stage were cleaned and proven absent. Adds the
-  target-qualification authorization, contract, result, Candidate V3, result
-  schema, deterministic orchestrator, verifier (33 mutation tests), a hosted
-  CI workflow that validates only committed evidence (no SSH, no target
-  contact), and the full deterministic evidence package. Git was never used on
-  the target; no package was installed; no probe or execute-authorized mode
-  ran; no execution authority artifact was created. Target qualification is now
-  complete but the engineering smoke remains unauthorized: `engineering_smoke_authorized`
-  and `hardware_ran` remain false. Next boundary:
-  `GATE_A_ENGINEERING_SMOKE_AUTHORITY_REVIEW_AND_OWNER_DECISION`. The Gate A
-  adapter-qualification and smoke-authority CI guards over `phase6b6/evidence`
-  were narrowed to permit this one authorized target-qualification evidence
-  directory while still protecting all reviewed contracts, runtime, analysis,
-  qualification, holo_runtime_v2, and every other evidence path.
+- Phase 6B.6: preserve the owner-authorized target non-executing qualification
+  attempt and adjudicate it incomplete. The attempt ran once and produced a
+  complete custody packet, but later review found that process absence was not
+  proven fail closed: the before/after scanner did not bind the inner
+  `ps -eo pid,comm,args` return code or raw process listing, and cleanup
+  hardcoded an empty remaining-process list. The full historical packet remains
+  byte-for-byte unchanged. Its original positive result and Candidate V3 remain
+  historical records, superseded for current-status and authority purposes by
+  the adjudication and blocked Candidate V4. The future runner now requires a
+  new exact owner-authorization artifact and a new absent authority-bound
+  namespace, records transfer timeouts, and uses one fail-closed raw process
+  scanner before qualification, after qualification, and after cleanup. No
+  replacement run, engineering smoke, hardware execution, calibration,
+  scientific acquisition, restoration, target coupling, or Small Wall work is
+  authorized. The dedicated workflow keeps checkout credentials unpersisted,
+  includes the missing exact public metadata for the repository's historical
+  gitlink so checkout can clean credentials without initializing that
+  submodule, and asserts the checkout authorization header is absent. No
+  execution-authority artifact exists and automatic retry remains false. Next
+  boundary:
+  `PROJECT_OWNER_DECISION_FOR_ONE_REPLACEMENT_GATE_A_TARGET_NONEXECUTING_QUALIFICATION`.
 
 ## 2026-07-02: Phase 6B.6 Gate A fail-closed target precondition custody
 
