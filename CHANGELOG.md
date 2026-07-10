@@ -4,6 +4,15 @@
 
 ## 2026-07-09: Phase 6B.6 Gate A target non-executing attempt adjudication
 
+- Add the one new closed owner authority `gate_a_replacement_593e9920_02`
+  only after repaired source `593e9920be533603217cee93572d79b86cc65cf9`
+  passed exact-head hosted CI and an independent no-findings review. The later
+  authority-bearing commit leaves every protected execution path identical to
+  that reviewed source, records its own execution HEAD dynamically, permits one
+  orchestrator-only no-drive qualification, and forbids automatic retry. The
+  prior `_01` authority remains byte-identical, superseded-unconsumed, and at
+  zero executions. No target contact occurs in this authority commit.
+
 - Repair the replacement Gate A runner's remote namespace preflight so it is
   the first target operation and performs no remote write. It proves the exact
   execution root, transfer stage, and evidence archive absent and proves zero
