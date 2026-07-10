@@ -4,6 +4,17 @@
 
 ## 2026-07-09: Phase 6B.6 Gate A target non-executing attempt adjudication
 
+- Repair the replacement Gate A runner's remote namespace preflight so it is
+  the first target operation and performs no remote write. It proves the exact
+  execution root, transfer stage, and evidence archive absent and proves zero
+  paths match the authority-bound temporary prefix; any inspection error,
+  unobservable state, malformed receipt, or collision fails closed. Preserve
+  authority `gate_a_replacement_71ab1528_01` byte-for-byte as
+  superseded-unconsumed with zero executions and no evidence, and leave the
+  active authority basename absent pending exact-head CI and independent source
+  review. No target contact or downstream authority is created in this source
+  commit.
+
 - Reconcile the exact committed V2 project-owner authority for one replacement
   target non-executing qualification. A new closed current-state ledger records
   authority `gate_a_replacement_71ab1528_01` as created, authorized, unconsumed,

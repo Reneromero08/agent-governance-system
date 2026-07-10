@@ -13,6 +13,7 @@ from __future__ import annotations
 import base64
 import copy
 import hashlib
+import inspect
 import json
 import os
 import shutil
@@ -40,6 +41,10 @@ CANDIDATE_V3 = HERE / "GATE_A_ENGINEERING_SMOKE_AUTHORITY_CANDIDATE_V3.json"
 ADJUDICATION = HERE / "GATE_A_TARGET_NONEXECUTING_QUALIFICATION_ADJUDICATION.json"
 CANDIDATE_V4 = HERE / "GATE_A_ENGINEERING_SMOKE_AUTHORITY_CANDIDATE_V4.json"
 REPLACEMENT_AUTHORITY = HERE / "GATE_A_REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_AUTHORIZATION.json"
+SUPERSEDED_REPLACEMENT_AUTHORITY = (
+    HERE
+    / "GATE_A_REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_AUTHORIZATION_SUPERSEDED_71ab1528_01.json"
+)
 REPLACEMENT_AUTHORITY_STATE = HERE / "GATE_A_REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_AUTHORITY_STATE.json"
 
 RESULT_SCHEMA = HERE / "schemas" / "gate_a_target_nonexecuting_qualification_result.schema.json"
@@ -69,8 +74,12 @@ CURRENT_STATUS = (
     "TARGET_NONEXECUTING_QUALIFICATION_ATTEMPT_PRESERVED__FAIL_CLOSED_PROCESS_ABSENCE_NOT_PROVEN"
 )
 NEXT_BOUNDARY = "PROJECT_OWNER_DECISION_FOR_ONE_REPLACEMENT_GATE_A_TARGET_NONEXECUTING_QUALIFICATION"
-AUTHORIZED_CURRENT_STATUS = "REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_AUTHORIZED__NOT_EXECUTED"
-AUTHORIZED_NEXT_BOUNDARY = "EXECUTE_ONE_AUTHORIZED_REPLACEMENT_GATE_A_TARGET_NONEXECUTING_QUALIFICATION"
+SOURCE_REPAIR_CURRENT_STATUS = (
+    "REPLACEMENT_AUTHORITY_SUPERSEDED_UNCONSUMED__FOUR_WAY_PREFLIGHT_SOURCE_AWAITING_REVIEW"
+)
+SOURCE_REPAIR_NEXT_BOUNDARY = (
+    "INDEPENDENT_REVIEW_AND_EXACT_HEAD_GREEN_FOR_FOUR_WAY_REMOTE_NAMESPACE_PREFLIGHT_SOURCE"
+)
 AUTHORIZED_SOURCE_COMMIT = "71ab1528e44fe6181e72850a0bd93a131b7a6335"
 AUTHORIZED_SOURCE_TREE = "527f5a275c9af59e3fd85716d5e752fa79db74d8"
 AUTHORIZED_SOURCE_REVIEW_ID = "PR_37_REPLACEMENT_AUTHORITY_TWO_COMMIT_SOURCE_BINDING_REVIEW"
@@ -589,96 +598,101 @@ def require_no_execution_authority(search_root: Path, *, check_tracked: bool) ->
         require(proc.stdout.strip() == "", f"execution authority artifact tracked: {proc.stdout.strip()}")
 
 
-def validate_committed_replacement_authority(authority: dict[str, Any]) -> dict[str, Any]:
-    """Validate the exact owner authority through the production custody path."""
-    expected_path = HERE / "GATE_A_REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_AUTHORIZATION.json"
-    require(REPLACEMENT_AUTHORITY.resolve() == expected_path.resolve(), "replacement authority path mismatch")
-    require(REPLACEMENT_AUTHORITY.is_file() and not REPLACEMENT_AUTHORITY.is_symlink(), "replacement authority must be a real file")
-
-    evidence_path = future_runner.validate_replacement_authority(authority, REPLACEMENT_AUTHORITY)
-    custody = future_runner.validate_replacement_authority_custody(
-        REPLACEMENT_AUTHORITY,
-        authority["authorized_source_commit"],
-        authority["authorized_source_tree_sha1"],
-        expected_authority=authority,
+def validate_superseded_replacement_authority(authority: dict[str, Any]) -> dict[str, Any]:
+    """Preserve _01 exactly while proving that it is no longer active authority."""
+    require(not REPLACEMENT_AUTHORITY.exists() and not REPLACEMENT_AUTHORITY.is_symlink(), "active replacement authority must be absent from repaired source")
+    require(
+        SUPERSEDED_REPLACEMENT_AUTHORITY.is_file() and not SUPERSEDED_REPLACEMENT_AUTHORITY.is_symlink(),
+        "superseded replacement authority must be a real file",
     )
-    require(authority["project_owner"] == EXPECTED_OWNER, "replacement authority owner mismatch")
-    require(authority["authority_id"] == "gate_a_replacement_71ab1528_01", "replacement authority id mismatch")
-    require(authority["authorized_source_commit"] == AUTHORIZED_SOURCE_COMMIT, "replacement authority source commit mismatch")
-    require(authority["authorized_source_tree_sha1"] == AUTHORIZED_SOURCE_TREE, "replacement authority source tree mismatch")
-    require(authority["authorized_source_review_id"] == AUTHORIZED_SOURCE_REVIEW_ID, "replacement authority review label mismatch")
-    require(authority["maximum_target_qualification_executions"] == 1, "replacement authority maximum execution mismatch")
-    require(authority["automatic_retry"] is False, "replacement authority automatic retry must be false")
-    require(authority["replacement_qualification_authorized"] is True, "replacement qualification must be authorized")
+    require(authority == load(SUPERSEDED_REPLACEMENT_AUTHORITY), "superseded authority object differs from preserved artifact")
+    require(authority["project_owner"] == EXPECTED_OWNER, "superseded authority owner mismatch")
+    require(authority["authority_id"] == "gate_a_replacement_71ab1528_01", "superseded authority id mismatch")
+    require(authority["authorized_source_commit"] == AUTHORIZED_SOURCE_COMMIT, "superseded authority source commit mismatch")
+    require(authority["authorized_source_tree_sha1"] == AUTHORIZED_SOURCE_TREE, "superseded authority source tree mismatch")
+    require(authority["authorized_source_review_id"] == AUTHORIZED_SOURCE_REVIEW_ID, "superseded authority review label mismatch")
+    require(authority["maximum_target_qualification_executions"] == 1, "superseded authority maximum execution mismatch")
+    require(authority["automatic_retry"] is False, "superseded authority automatic retry must be false")
     for field in future_runner.DOWNSTREAM_FALSE_FIELDS:
-        require(authority[field] is False, f"replacement authority downstream field must be false: {field}")
+        require(authority[field] is False, f"superseded authority downstream field must be false: {field}")
 
-    require(sha256_file(REPLACEMENT_AUTHORITY) == REPLACEMENT_AUTHORITY_SHA256, "replacement authority SHA-256 mismatch")
-    require(custody["replacement_authority_git_blob_sha1"] == REPLACEMENT_AUTHORITY_BLOB, "replacement authority Git blob mismatch")
-    require(custody["authorized_source_commit"] == AUTHORIZED_SOURCE_COMMIT, "custody source commit mismatch")
-    require(custody["authorized_source_tree_sha1"] == AUTHORIZED_SOURCE_TREE, "custody source tree mismatch")
-    require(custody["authorized_source_review_id"] == AUTHORIZED_SOURCE_REVIEW_ID, "custody review label mismatch")
-    require(custody["execution_head"] == future_runner.current_head(), "custody execution HEAD mismatch")
-
-    authority_rel = REPLACEMENT_AUTHORITY.relative_to(REPO_ROOT).as_posix()
-    bearing_blob = subprocess.run(
-        ["git", "rev-parse", f"{AUTHORITY_BEARING_COMMIT}:{authority_rel}"],
+    archived_rel = SUPERSEDED_REPLACEMENT_AUTHORITY.relative_to(REPO_ROOT).as_posix()
+    original_rel = REPLACEMENT_AUTHORITY.relative_to(REPO_ROOT).as_posix()
+    require(sha256_file(SUPERSEDED_REPLACEMENT_AUTHORITY) == REPLACEMENT_AUTHORITY_SHA256, "superseded authority SHA-256 mismatch")
+    require(git_blob(SUPERSEDED_REPLACEMENT_AUTHORITY) == REPLACEMENT_AUTHORITY_BLOB, "superseded authority worktree blob mismatch")
+    current_blob = subprocess.run(
+        ["git", "rev-parse", f"HEAD:{archived_rel}"],
         cwd=str(REPO_ROOT),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True,
     )
-    require(bearing_blob.returncode == 0 and bearing_blob.stdout.strip() == REPLACEMENT_AUTHORITY_BLOB, "authority-bearing commit blob mismatch")
-    parent_absence = subprocess.run(
-        ["git", "cat-file", "-e", f"{AUTHORITY_BEARING_COMMIT}^:{authority_rel}"],
+    require(current_blob.returncode == 0 and current_blob.stdout.strip() == REPLACEMENT_AUTHORITY_BLOB, "superseded authority committed blob mismatch")
+    active_at_head = subprocess.run(
+        ["git", "cat-file", "-e", f"HEAD:{original_rel}"],
         cwd=str(REPO_ROOT),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )
-    require(parent_absence.returncode != 0, "replacement authority existed before authority-bearing commit")
-    require(not evidence_path.exists() and not evidence_path.is_symlink(), "replacement evidence exists before authorized execution")
+    require(active_at_head.returncode != 0, "active authority basename remains in repaired source commit")
+    original_blob = subprocess.run(
+        ["git", "rev-parse", f"{AUTHORITY_BEARING_COMMIT}:{original_rel}"],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    require(original_blob.returncode == 0 and original_blob.stdout.strip() == REPLACEMENT_AUTHORITY_BLOB, "original authority-bearing blob mismatch")
+    evidence_path = REPO_ROOT / authority["local_evidence_dir"]
+    require(not evidence_path.exists() and not evidence_path.is_symlink(), "superseded authority evidence exists despite zero executions")
+    protected_drift = subprocess.run(
+        ["git", "diff", "--quiet", AUTHORIZED_SOURCE_COMMIT, "HEAD", "--", future_runner.RUNNER_REL],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    require(protected_drift.returncode == 1, "superseded authority source unexpectedly remains current")
     return {
-        **custody,
-        "authority_artifact_path": authority_rel,
+        "status": "SUPERSEDED_REPLACEMENT_AUTHORITY_PRESERVED_UNCONSUMED",
+        "authority_id": authority["authority_id"],
+        "authority_artifact_path": archived_rel,
         "authority_artifact_sha256": REPLACEMENT_AUTHORITY_SHA256,
+        "authority_artifact_git_blob_sha1": REPLACEMENT_AUTHORITY_BLOB,
+        "authorized_source_commit": AUTHORIZED_SOURCE_COMMIT,
+        "authorized_source_tree_sha1": AUTHORIZED_SOURCE_TREE,
+        "authorized_source_review_id": AUTHORIZED_SOURCE_REVIEW_ID,
         "authority_bearing_commit": AUTHORITY_BEARING_COMMIT,
         "authority_consumed": False,
         "replacement_execution_count": 0,
         "replacement_evidence_dir": evidence_path.relative_to(REPO_ROOT).as_posix(),
         "replacement_evidence_present": False,
-        "status": "COMMITTED_REPLACEMENT_AUTHORITY_VALID_UNCONSUMED",
+        "active_replacement_authority_present": False,
+        "protected_runner_drift_invalidates_target_contact": True,
     }
 
 
 def validate_replacement_authority_state(
     state: dict[str, Any],
     schema: dict[str, Any],
-    authority: dict[str, Any],
     custody: dict[str, Any],
 ) -> None:
     validate_const_instance(state, schema, "replacement authority state")
-    require(state["status"] == AUTHORIZED_CURRENT_STATUS, "replacement authority current status mismatch")
-    require(state["authority_id"] == authority["authority_id"], "authority state id mismatch")
-    require(state["authority_artifact_sha256"] == custody["authority_artifact_sha256"], "authority state SHA-256 mismatch")
-    require(state["authority_artifact_git_blob_sha1"] == custody["replacement_authority_git_blob_sha1"], "authority state blob mismatch")
-    require(state["authorized_source_commit"] == custody["authorized_source_commit"], "authority state source commit mismatch")
-    require(state["authorized_source_tree_sha1"] == custody["authorized_source_tree_sha1"], "authority state source tree mismatch")
-    require(state["authorized_source_review_id"] == custody["authorized_source_review_id"], "authority state review label mismatch")
-    require(state["authority_bearing_commit"] == custody["authority_bearing_commit"], "authority state bearing commit mismatch")
-    require(state["authority_consumed"] is False, "authority cannot be consumed before evidence exists")
-    require(state["replacement_execution_count"] == 0, "replacement execution count must be zero before execution")
-    require(state["replacement_evidence_present"] is False, "replacement evidence must be absent before execution")
-    require(state["replacement_evidence_dir"] == custody["replacement_evidence_dir"], "replacement evidence namespace mismatch")
-    require(state["replacement_authority_artifact_created"] is True, "current state must record replacement authority artifact")
-    require(state["replacement_qualification_authorized"] is True, "current state must record replacement authorization")
-    require(state["target_nonexecuting_qualification_complete"] is False, "target qualification must remain incomplete before execution")
-    require(state["execution_bundle_target_qualified"] is False, "target bundle must remain unqualified before execution")
-    require(state["automatic_retry"] is False, "current state automatic retry must be false")
+    require(state["status"] == SOURCE_REPAIR_CURRENT_STATUS, "source repair current status mismatch")
+    require(state["superseded_authority_id"] == custody["authority_id"], "superseded authority state id mismatch")
+    require(state["superseded_authority_artifact_path"] == custody["authority_artifact_path"], "superseded authority path mismatch")
+    require(state["superseded_authority_artifact_sha256"] == custody["authority_artifact_sha256"], "superseded authority SHA-256 mismatch")
+    require(state["superseded_authority_artifact_git_blob_sha1"] == custody["authority_artifact_git_blob_sha1"], "superseded authority blob mismatch")
+    require(state["superseded_authority_consumed"] is False, "superseded authority cannot be consumed")
+    require(state["superseded_replacement_execution_count"] == 0, "superseded authority execution count must remain zero")
+    require(state["active_replacement_authority_present"] is False, "source commit cannot contain active authority")
+    require(state["new_replacement_authority_artifact_created"] is False, "new authority cannot exist before source review")
+    require(state["replacement_qualification_authorized"] is False, "target contact cannot be authorized by source commit")
+    require(state["automatic_retry"] is False, "source repair automatic retry must be false")
+    require(state["target_nonexecuting_qualification_complete"] is False, "target qualification must remain incomplete")
+    require(state["execution_bundle_target_qualified"] is False, "target bundle must remain unqualified")
     for field in DOWNSTREAM_FALSE_FIELDS:
-        require(state[field] is False, f"current state downstream field must be false: {field}")
-    require(state["project_owner_execution_approval_recorded"] is False, "current state execution approval must be false")
-    require(state["authorization_artifact_created"] is False, "current state execution authority artifact must be false")
-    require(state["next_boundary"] == AUTHORIZED_NEXT_BOUNDARY, "current authority next boundary mismatch")
+        require(state[field] is False, f"source repair downstream field must be false: {field}")
+    require(state["next_boundary"] == SOURCE_REPAIR_NEXT_BOUNDARY, "source repair next boundary mismatch")
 
 
 def require_no_unaccented_owner() -> None:
@@ -1005,6 +1019,191 @@ def future_process_scan_receipt_contract_test() -> dict[str, Any]:
     }
 
 
+def remote_namespace_preflight_contract_test() -> dict[str, Any]:
+    """Exercise the four-way, read-only, fail-closed remote preflight locally."""
+    cases: list[str] = []
+
+    def snapshot(root: Path) -> dict[str, dict[str, Any]]:
+        result: dict[str, dict[str, Any]] = {}
+        for path in [root, *sorted(root.rglob("*"))]:
+            stat_result = path.lstat()
+            relative = "." if path == root else path.relative_to(root).as_posix()
+            entry: dict[str, Any] = {
+                "mode": stat_result.st_mode,
+                "size": stat_result.st_size,
+                "mtime_ns": stat_result.st_mtime_ns,
+            }
+            if path.is_file() and not path.is_symlink():
+                entry["sha256"] = sha256_file(path)
+            if path.is_symlink():
+                entry["symlink_target"] = os.readlink(path)
+            result[relative] = entry
+        return result
+
+    def execute_script(execution_root: Path, transfer_stage: Path, evidence_archive: Path, temp_prefix: Path) -> dict[str, Any]:
+        env = os.environ.copy()
+        env.update(
+            {
+                "ROOT": str(execution_root),
+                "STAGE": str(transfer_stage),
+                "EVARCHIVE": str(evidence_archive),
+                "TP": str(temp_prefix),
+            }
+        )
+        proc = subprocess.run(
+            [sys.executable, "-c", future_runner.absence_script()],
+            env=env,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        require(proc.returncode == 0, f"remote namespace preflight script failed closed without receipt: {proc.stderr}")
+        value = json.loads(proc.stdout)
+        require(isinstance(value, dict), "remote namespace preflight script did not return an object")
+        return value
+
+    def validate_for(
+        report: dict[str, Any],
+        execution_root: Path,
+        transfer_stage: Path,
+        evidence_archive: Path,
+        temp_prefix: Path,
+    ) -> None:
+        with (
+            mock.patch.object(future_runner, "EXEC_ROOT", str(execution_root), create=True),
+            mock.patch.object(future_runner, "TRANSFER_STAGE", str(transfer_stage), create=True),
+            mock.patch.object(future_runner, "EV_ARCHIVE", str(evidence_archive), create=True),
+            mock.patch.object(future_runner, "TP", str(temp_prefix), create=True),
+        ):
+            future_runner.validate_remote_namespace_preflight(report)
+
+    with tempfile.TemporaryDirectory(prefix="gate_a_namespace_preflight_") as temp_dir:
+        root = Path(temp_dir)
+        execution_root = root / "execution_root"
+        transfer_stage = root / "transfer_stage.deploy.tar"
+        evidence_archive = root / "evidence_archive.tar"
+        temp_prefix = root / "remote_temp_prefix_"
+        sentinel = root / "unrelated_sentinel.txt"
+        sentinel.write_text("unchanged\n", encoding="utf-8")
+
+        before = snapshot(root)
+        valid = execute_script(execution_root, transfer_stage, evidence_archive, temp_prefix)
+        after = snapshot(root)
+        require(before == after, "remote namespace preflight changed the inspected filesystem")
+        validate_for(valid, execution_root, transfer_stage, evidence_archive, temp_prefix)
+        require(valid["temp_prefix"]["match_count"] == 0, "valid preflight did not prove zero prefix matches")
+        cases.extend(("all_four_namespaces_absent", "preflight_script_filesystem_immutable"))
+
+        execution_root.mkdir()
+        cases.append(assert_rejects("execution_root_present", lambda: validate_for(execute_script(execution_root, transfer_stage, evidence_archive, temp_prefix), execution_root, transfer_stage, evidence_archive, temp_prefix)))
+        execution_root.rmdir()
+
+        transfer_stage.write_bytes(b"collision")
+        cases.append(assert_rejects("transfer_stage_present", lambda: validate_for(execute_script(execution_root, transfer_stage, evidence_archive, temp_prefix), execution_root, transfer_stage, evidence_archive, temp_prefix)))
+        transfer_stage.unlink()
+
+        evidence_archive.write_bytes(b"collision")
+        cases.append(assert_rejects("evidence_archive_present", lambda: validate_for(execute_script(execution_root, transfer_stage, evidence_archive, temp_prefix), execution_root, transfer_stage, evidence_archive, temp_prefix)))
+        evidence_archive.unlink()
+
+        prefix_file = root / "remote_temp_prefix_one"
+        prefix_dir = root / "remote_temp_prefix_two"
+        prefix_file.write_bytes(b"collision")
+        prefix_dir.mkdir()
+        prefix_collision = execute_script(execution_root, transfer_stage, evidence_archive, temp_prefix)
+        require(prefix_collision["temp_prefix"]["match_count"] == 2, "prefix collision count not bound")
+        cases.append(assert_rejects("temp_prefix_matches_present", lambda: validate_for(prefix_collision, execution_root, transfer_stage, evidence_archive, temp_prefix)))
+        prefix_file.unlink()
+        prefix_dir.rmdir()
+
+        unobservable_prefix = root / "missing_parent" / "remote_temp_prefix_"
+        unobservable = execute_script(execution_root, transfer_stage, evidence_archive, unobservable_prefix)
+        require(unobservable["temp_prefix"]["state"] == "UNOBSERVABLE", "prefix inspection error was not bound")
+        cases.append(assert_rejects("temp_prefix_unobservable", lambda: validate_for(unobservable, execution_root, transfer_stage, evidence_archive, unobservable_prefix)))
+
+        malformed_cases: list[tuple[str, Any]] = []
+        missing = copy.deepcopy(valid)
+        del missing["evidence_archive"]
+        malformed_cases.append(("preflight_missing_key", missing))
+        opened = copy.deepcopy(valid)
+        opened["unexpected"] = False
+        malformed_cases.append(("preflight_extra_key", opened))
+        incomplete = copy.deepcopy(valid)
+        incomplete["inspection_complete"] = False
+        malformed_cases.append(("preflight_incomplete", incomplete))
+        exact_unobservable = copy.deepcopy(valid)
+        exact_unobservable["execution_root"].update(
+            {"state": "UNOBSERVABLE", "error_type": "PermissionError", "error_message": "denied"}
+        )
+        malformed_cases.append(("execution_root_unobservable", exact_unobservable))
+        inconsistent_count = copy.deepcopy(valid)
+        inconsistent_count["temp_prefix"]["match_count"] = 1
+        malformed_cases.append(("temp_prefix_count_inconsistent", inconsistent_count))
+        boolean_count = copy.deepcopy(valid)
+        boolean_count["temp_prefix"]["match_count"] = False
+        malformed_cases.append(("temp_prefix_count_boolean", boolean_count))
+        prefix_open = copy.deepcopy(valid)
+        prefix_open["temp_prefix"]["unexpected"] = 0
+        malformed_cases.append(("temp_prefix_observation_open", prefix_open))
+        for name, malformed in malformed_cases:
+            cases.append(assert_rejects(name, lambda value=malformed: validate_for(value, execution_root, transfer_stage, evidence_archive, temp_prefix)))
+        cases.append(assert_rejects("preflight_non_object", lambda: validate_for([], execution_root, transfer_stage, evidence_archive, temp_prefix)))  # type: ignore[arg-type]
+
+        with (
+            mock.patch.object(future_runner, "EXEC_ROOT", str(execution_root), create=True),
+            mock.patch.object(future_runner, "TRANSFER_STAGE", str(transfer_stage), create=True),
+            mock.patch.object(future_runner, "EV_ARCHIVE", str(evidence_archive), create=True),
+            mock.patch.object(future_runner, "TP", str(temp_prefix), create=True),
+            mock.patch.object(future_runner, "run_ssh_py", return_value={"receipt": True}) as remote_call,
+            mock.patch.object(future_runner, "parse_json_stdout", return_value=valid),
+        ):
+            require(future_runner.run_remote_namespace_preflight() == valid, "preflight helper changed validated receipt")
+            remote_call.assert_called_once_with(
+                "prove_four_way_absence",
+                future_runner.absence_script(),
+                {
+                    "ROOT": str(execution_root),
+                    "STAGE": str(transfer_stage),
+                    "EVARCHIVE": str(evidence_archive),
+                    "TP": str(temp_prefix),
+                },
+                subdir="target",
+            )
+            require("OUT" not in remote_call.call_args.args[2], "read-only preflight unexpectedly received an output path")
+        cases.append("preflight_helper_exact_environment_no_output_path")
+
+        with (
+            mock.patch.object(future_runner, "EXEC_ROOT", str(execution_root), create=True),
+            mock.patch.object(future_runner, "TRANSFER_STAGE", str(transfer_stage), create=True),
+            mock.patch.object(future_runner, "EV_ARCHIVE", str(evidence_archive), create=True),
+            mock.patch.object(future_runner, "TP", str(temp_prefix), create=True),
+            mock.patch.object(future_runner, "run_ssh_py", return_value={"receipt": True}) as failed_remote_call,
+            mock.patch.object(future_runner, "parse_json_stdout", return_value=exact_unobservable),
+        ):
+            cases.append(assert_rejects("failed_preflight_stops_helper", future_runner.run_remote_namespace_preflight))
+            require(failed_remote_call.call_count == 1, "failed preflight issued more than one remote operation")
+
+    main_source = inspect.getsource(future_runner.main)
+    preflight_index = main_source.index("namespace_preflight = run_remote_namespace_preflight()")
+    identity_index = main_source.index('run_ssh_py("target_identity_before"')
+    require(preflight_index < identity_index, "temp-prefix identity write precedes remote namespace preflight")
+    before_preflight = main_source[:preflight_index]
+    for forbidden_call in ("run_ssh(", "run_ssh_py(", "scp_to(", "scp_from("):
+        require(forbidden_call not in before_preflight, f"remote operation precedes namespace preflight: {forbidden_call}")
+    preflight_script = future_runner.absence_script()
+    for forbidden_write in ("open(", "mkdir", "makedirs", "unlink", "remove(", "rmdir", "rename(", "replace("):
+        require(forbidden_write not in preflight_script, f"preflight script contains filesystem write primitive: {forbidden_write}")
+    cases.append("preflight_is_first_remote_operation_before_temp_prefix_write")
+
+    return {
+        "status": "FOUR_WAY_REMOTE_NAMESPACE_PREFLIGHT_CONTRACT_PASS",
+        "case_count": len(cases),
+        "cases": cases,
+        "filesystem_write_count": 0,
+        "remote_temp_prefix_match_requirement": 0,
+    }
+
+
 def verify_scp_timeout_recording(direction: str) -> str:
     with tempfile.TemporaryDirectory(prefix=f"gate_a_scp_{direction}_") as temp_dir:
         evidence = Path(temp_dir)
@@ -1067,11 +1266,10 @@ def mutation_tests(
     qualification_validator = lambda value: validate_qualification_json(value)
     adjudication_validator = lambda value: validate_adjudication(value, adjudication_schema, defect)
     candidate_v4_validator = lambda value: validate_candidate_v4(value, candidate_v4_schema)
-    replacement_authority_validator = lambda value: validate_committed_replacement_authority(value)
+    replacement_authority_validator = lambda value: validate_superseded_replacement_authority(value)
     replacement_authority_state_validator = lambda value: validate_replacement_authority_state(
         value,
         replacement_authority_state_schema,
-        replacement_authority,
         replacement_authority_custody,
     )
 
@@ -1119,9 +1317,12 @@ def mutation_tests(
         ("replacement_authority_wrong_review_label", mutated(replacement_authority, lambda value: value.__setitem__("authorized_source_review_id", "WRONG_REVIEW"), replacement_authority_validator)),
         ("replacement_authority_execution_count_above_one", mutated(replacement_authority, lambda value: value.__setitem__("maximum_target_qualification_executions", 2), replacement_authority_validator)),
         ("replacement_authority_automatic_retry_true", mutated(replacement_authority, lambda value: value.__setitem__("automatic_retry", True), replacement_authority_validator)),
-        ("authority_state_consumed_before_evidence", mutated(replacement_authority_state, lambda value: value.__setitem__("authority_consumed", True), replacement_authority_state_validator)),
-        ("authority_state_execution_count_above_one", mutated(replacement_authority_state, lambda value: value.__setitem__("replacement_execution_count", 2), replacement_authority_state_validator)),
+        ("superseded_authority_falsely_consumed", mutated(replacement_authority_state, lambda value: value.__setitem__("superseded_authority_consumed", True), replacement_authority_state_validator)),
+        ("superseded_authority_execution_count_nonzero", mutated(replacement_authority_state, lambda value: value.__setitem__("superseded_replacement_execution_count", 1), replacement_authority_state_validator)),
         ("authority_state_automatic_retry_true", mutated(replacement_authority_state, lambda value: value.__setitem__("automatic_retry", True), replacement_authority_state_validator)),
+        ("authority_state_active_authority_present_before_review", mutated(replacement_authority_state, lambda value: value.__setitem__("active_replacement_authority_present", True), replacement_authority_state_validator)),
+        ("authority_state_new_authority_created_before_review", mutated(replacement_authority_state, lambda value: value.__setitem__("new_replacement_authority_artifact_created", True), replacement_authority_state_validator)),
+        ("authority_state_target_contact_authorized_before_review", mutated(replacement_authority_state, lambda value: value.__setitem__("replacement_qualification_authorized", True), replacement_authority_state_validator)),
         ("authority_state_target_qualification_promoted_before_execution", mutated(replacement_authority_state, lambda value: value.__setitem__("target_nonexecuting_qualification_complete", True), replacement_authority_state_validator)),
         ("authority_state_target_bundle_promoted_before_execution", mutated(replacement_authority_state, lambda value: value.__setitem__("execution_bundle_target_qualified", True), replacement_authority_state_validator)),
     ]
@@ -1206,7 +1407,7 @@ def main() -> int:
     candidate_v3 = load(CANDIDATE_V3)
     adjudication = load(ADJUDICATION)
     candidate_v4 = load(CANDIDATE_V4)
-    replacement_authority = load(REPLACEMENT_AUTHORITY)
+    replacement_authority = load(SUPERSEDED_REPLACEMENT_AUTHORITY)
     replacement_authority_state = load(REPLACEMENT_AUTHORITY_STATE)
     result_schema = load(RESULT_SCHEMA)
     adjudication_schema = load(ADJUDICATION_SCHEMA)
@@ -1230,11 +1431,10 @@ def main() -> int:
     defect = detect_historical_process_evidence_defect()
     validate_adjudication(adjudication, adjudication_schema, defect)
     validate_candidate_v4(candidate_v4, candidate_v4_schema)
-    replacement_authority_custody = validate_committed_replacement_authority(replacement_authority)
+    replacement_authority_custody = validate_superseded_replacement_authority(replacement_authority)
     validate_replacement_authority_state(
         replacement_authority_state,
         replacement_authority_state_schema,
-        replacement_authority,
         replacement_authority_custody,
     )
     require_no_unaccented_owner()
@@ -1242,6 +1442,7 @@ def main() -> int:
 
     scanner_test = future_scanner_nonzero_test()
     scanner_receipt_test = future_process_scan_receipt_contract_test()
+    namespace_preflight_test = remote_namespace_preflight_contract_test()
     future_authority_test = future_replacement_authority_contract_test()
     two_commit_git_test = replacement_authority_two_commit_git_integration_test()
     mutations = mutation_tests(
@@ -1263,7 +1464,7 @@ def main() -> int:
     )
 
     output = {
-        "status": AUTHORIZED_CURRENT_STATUS,
+        "status": SOURCE_REPAIR_CURRENT_STATUS,
         "integrated_main": INTEGRATED_MAIN,
         "pre_repair_pr_head": PRE_REPAIR_HEAD,
         "historical_attempt_authorized": True,
@@ -1273,10 +1474,14 @@ def main() -> int:
         "target_nonexecuting_qualification_complete": False,
         "execution_bundle_target_qualified": False,
         "original_authority_consumed": True,
-        "replacement_qualification_authorized": True,
+        "replacement_qualification_authorized": False,
         "project_owner_execution_approval_recorded": False,
         "authorization_artifact_created": False,
-        "replacement_authority_artifact_created": True,
+        "active_replacement_authority_present": False,
+        "new_replacement_authority_artifact_created": False,
+        "new_authority_creation_conditionally_authorized": True,
+        "superseded_replacement_authority_preserved": True,
+        "superseded_replacement_authority_state": "SUPERSEDED_UNCONSUMED",
         "replacement_authority_consumed": False,
         "replacement_execution_count": 0,
         "replacement_authority_custody": replacement_authority_custody,
@@ -1285,12 +1490,15 @@ def main() -> int:
         "automatic_retry": False,
         "future_scanner_nonzero_test": scanner_test,
         "future_process_scan_receipt_contract_test": scanner_receipt_test,
+        "remote_namespace_preflight_contract_test": namespace_preflight_test,
         "future_replacement_authority_contract_test": future_authority_test,
         "replacement_authority_two_commit_git_integration_test": two_commit_git_test,
         "mutation_tests": mutations,
         "historical_evidence_inventory_sha256": sha256_file(EVID / "EVIDENCE_INVENTORY.json"),
         "candidate_v4_preserved_predecision_state": True,
-        "next_boundary": AUTHORIZED_NEXT_BOUNDARY,
+        "repaired_source_review_id": future_runner.AUTHORIZED_SOURCE_REVIEW_ID,
+        "repaired_source_commit": future_runner.current_head(),
+        "next_boundary": SOURCE_REPAIR_NEXT_BOUNDARY,
     }
     print(json.dumps(output, sort_keys=True, indent=2))
     return 0

@@ -81,7 +81,7 @@ REPLACEMENT_AUTHORITY_SCHEMA_ID = (
 REPLACEMENT_AUTHORITY_DECISION = (
     "AUTHORIZED_FOR_ONE_REPLACEMENT_GATE_A_TARGET_NONEXECUTING_QUALIFICATION"
 )
-AUTHORIZED_SOURCE_REVIEW_ID = "PR_37_REPLACEMENT_AUTHORITY_TWO_COMMIT_SOURCE_BINDING_REVIEW"
+AUTHORIZED_SOURCE_REVIEW_ID = "PR_37_GATE_A_FOUR_WAY_REMOTE_NAMESPACE_PREFLIGHT_REVIEW"
 HISTORICAL_EVIDENCE_REL = HISTORICAL_EVID.relative_to(REPO_ROOT).as_posix()
 HISTORICAL_AUTHORIZATION_REL = HISTORICAL_AUTHORIZATION.relative_to(REPO_ROOT).as_posix()
 RUNNER_REL = Path(__file__).resolve().relative_to(REPO_ROOT).as_posix()
@@ -723,16 +723,103 @@ print(text)
 def absence_script() -> str:
     return r'''
 import os, json
-def state(p):
+def inspect_exact(path):
     try:
-        os.lstat(p); return "PRESENT"
+        os.lstat(path)
+        return {"path":path,"state":"PRESENT","error_type":None,"error_message":None}
     except FileNotFoundError:
-        return "ABSENT"
+        return {"path":path,"state":"ABSENT","error_type":None,"error_message":None}
     except OSError as e:
-        return "UNOBSERVABLE:%s"%type(e).__name__
-res={"execution_root":state(os.environ["ROOT"]),"transfer_stage":state(os.environ["STAGE"])}
+        return {"path":path,"state":"UNOBSERVABLE","error_type":type(e).__name__,"error_message":str(e)}
+def inspect_prefix(prefix):
+    parent=os.path.dirname(prefix)
+    basename=os.path.basename(prefix)
+    try:
+        matches=[]
+        with os.scandir(parent) as entries:
+            for entry in entries:
+                if entry.name.startswith(basename):
+                    matches.append(os.path.join(parent,entry.name))
+        matches.sort()
+        return {"prefix":prefix,"state":("ABSENT" if not matches else "PRESENT"),"match_count":len(matches),"matches":matches,"error_type":None,"error_message":None}
+    except OSError as e:
+        return {"prefix":prefix,"state":"UNOBSERVABLE","match_count":None,"matches":[],"error_type":type(e).__name__,"error_message":str(e)}
+res={
+ "schema_id":"CAT_CAS_PHASE6B6_GATE_A_REMOTE_NAMESPACE_PREFLIGHT_V1",
+ "execution_root":inspect_exact(os.environ["ROOT"]),
+ "transfer_stage":inspect_exact(os.environ["STAGE"]),
+ "evidence_archive":inspect_exact(os.environ["EVARCHIVE"]),
+ "temp_prefix":inspect_prefix(os.environ["TP"]),
+}
+res["inspection_complete"]=all(res[key]["state"]!="UNOBSERVABLE" for key in ("execution_root","transfer_stage","evidence_archive","temp_prefix"))
 print(json.dumps(res, sort_keys=True))
 '''
+
+
+def validate_remote_namespace_preflight(report: dict[str, Any]) -> None:
+    if not isinstance(report, dict):
+        raise QualError("remote namespace preflight must be a JSON object")
+    expected_top = {
+        "schema_id",
+        "inspection_complete",
+        "execution_root",
+        "transfer_stage",
+        "evidence_archive",
+        "temp_prefix",
+    }
+    if set(report) != expected_top:
+        raise QualError("remote namespace preflight key closure failed")
+    if report["schema_id"] != "CAT_CAS_PHASE6B6_GATE_A_REMOTE_NAMESPACE_PREFLIGHT_V1":
+        raise QualError("remote namespace preflight schema mismatch")
+    if report["inspection_complete"] is not True:
+        raise QualError(f"remote namespace preflight incomplete: {report}")
+    exact_expectations = {
+        "execution_root": EXEC_ROOT,
+        "transfer_stage": TRANSFER_STAGE,
+        "evidence_archive": EV_ARCHIVE,
+    }
+    for key, expected_path in exact_expectations.items():
+        observation = report[key]
+        if not isinstance(observation, dict):
+            raise QualError(f"remote namespace preflight {key} observation must be an object")
+        if set(observation) != {"path", "state", "error_type", "error_message"}:
+            raise QualError(f"remote namespace preflight {key} observation is open or incomplete")
+        if observation["path"] != expected_path:
+            raise QualError(f"remote namespace preflight {key} inspected wrong path")
+        if observation["state"] != "ABSENT":
+            raise QualError(f"remote namespace preflight {key} not absent: {observation}")
+        if observation["error_type"] is not None or observation["error_message"] is not None:
+            raise QualError(f"remote namespace preflight {key} contains inspection error")
+    prefix = report["temp_prefix"]
+    if not isinstance(prefix, dict):
+        raise QualError("remote namespace preflight temp-prefix observation must be an object")
+    if set(prefix) != {"prefix", "state", "match_count", "matches", "error_type", "error_message"}:
+        raise QualError("remote namespace preflight temp-prefix observation is open or incomplete")
+    if prefix["prefix"] != TP:
+        raise QualError("remote namespace preflight inspected wrong temp prefix")
+    if not isinstance(prefix["matches"], list):
+        raise QualError("remote namespace temp-prefix matches must be a list")
+    if not isinstance(prefix["match_count"], int) or isinstance(prefix["match_count"], bool):
+        raise QualError("remote namespace temp-prefix match count must be an integer")
+    if prefix["match_count"] != len(prefix["matches"]):
+        raise QualError("remote namespace temp-prefix match count is inconsistent")
+    if prefix["state"] != "ABSENT" or prefix["match_count"] != 0 or prefix["matches"] != []:
+        raise QualError(f"remote namespace temp-prefix collision: {prefix}")
+    if prefix["error_type"] is not None or prefix["error_message"] is not None:
+        raise QualError("remote namespace temp-prefix inspection error")
+
+
+def run_remote_namespace_preflight() -> dict[str, Any]:
+    """Perform the first remote operation; it must not write beneath TP."""
+    entry = run_ssh_py(
+        "prove_four_way_absence",
+        absence_script(),
+        {"ROOT": EXEC_ROOT, "STAGE": TRANSFER_STAGE, "EVARCHIVE": EV_ARCHIVE, "TP": TP},
+        subdir="target",
+    )
+    report = parse_json_stdout(entry)
+    validate_remote_namespace_preflight(report)
+    return report
 
 
 def members_script() -> str:
@@ -985,7 +1072,17 @@ def main(argv: list[str] | None = None) -> int:
         bindings["deterministic_archive_sha256"] = EXPECTED_ARCHIVE
         bindings["bundle_manifest_file_sha256"] = EXPECTED_MANIFEST_FILE
 
-        # ---- Phase 2: preflight + identity ----
+        # ---- Phase 2: four-way namespace preflight (first remote operation) ----
+        namespace_preflight = run_remote_namespace_preflight()
+        bindings["remote_namespace_preflight"] = namespace_preflight
+        bindings["execution_root_predeploy_state"] = namespace_preflight["execution_root"]["state"]
+        bindings["transfer_stage_predeploy_state"] = namespace_preflight["transfer_stage"]["state"]
+        bindings["evidence_archive_predeploy_state"] = namespace_preflight["evidence_archive"]["state"]
+        bindings["temp_prefix_predeploy_state"] = namespace_preflight["temp_prefix"]["state"]
+        bindings["temp_prefix_predeploy_match_count"] = namespace_preflight["temp_prefix"]["match_count"]
+        bindings["temp_prefix_predeploy_matches"] = namespace_preflight["temp_prefix"]["matches"]
+
+        # ---- Phase 3: target identity (first write beneath remote_temp_prefix) ----
         id_before = run_ssh_py("target_identity_before", target_identity_script(), {"OUT": TP + "id_before.json"}, subdir="target")
         ident_before = parse_json_stdout(id_before)
         id_before_sha = id_before["stdout_sha256"]
@@ -999,13 +1096,6 @@ def main(argv: list[str] | None = None) -> int:
         bindings["predecessor_identity_sha256"] = PREDECESSOR_ID_SHA
         bindings["current_identity_before"] = ident_before
         bindings["current_identity_before_sha256"] = id_before_sha
-
-        # ---- Phase 3: prove namespace absence ----
-        absent = parse_json_stdout(run_ssh_py("prove_absence", absence_script(), {"ROOT": EXEC_ROOT, "STAGE": TRANSFER_STAGE}, subdir="target"))
-        bindings["execution_root_predeploy_state"] = absent["execution_root"]
-        bindings["transfer_stage_predeploy_state"] = absent["transfer_stage"]
-        if absent["execution_root"] != "ABSENT" or absent["transfer_stage"] != "ABSENT":
-            raise QualError(f"namespace not provably absent: {absent}")
 
         # ---- Phase 4: transfer + verify + members + extract ----
         scp_to("upload_deploy_archive", deploy, TRANSFER_STAGE)
