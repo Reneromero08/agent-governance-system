@@ -4,6 +4,17 @@
 
 ## 2026-07-09: Phase 6B.6 Gate A target non-executing attempt adjudication
 
+- Reconcile the exact committed V2 project-owner authority for one replacement
+  target non-executing qualification. A new closed current-state ledger records
+  authority `gate_a_replacement_71ab1528_01` as created, authorized, unconsumed,
+  and not yet executed. The verifier now validates the real authority with the
+  production semantic and two-commit custody functions, including exact source
+  commit/tree/review binding, strict ancestry, protected-source immutability,
+  current-HEAD blob/worktree equality, one-execution cap, no retry, and false
+  downstream authority. Candidate V4 and the historical adjudication remain
+  preserved pre-decision records. No target contact or replacement execution
+  occurs in this reconciliation step.
+
 - Repair the future replacement-authority custody model so owner authorization
   uses two commits without a Git self-reference: a reviewed source commit binds
   the protected runner and execution inputs, and a later authority-bearing

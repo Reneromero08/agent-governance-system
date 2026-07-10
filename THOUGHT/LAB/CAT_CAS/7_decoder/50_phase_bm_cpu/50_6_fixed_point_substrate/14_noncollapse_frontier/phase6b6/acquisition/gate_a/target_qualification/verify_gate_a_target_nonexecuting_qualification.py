@@ -39,10 +39,13 @@ RESULT = HERE / "GATE_A_TARGET_NONEXECUTING_QUALIFICATION_RESULT.json"
 CANDIDATE_V3 = HERE / "GATE_A_ENGINEERING_SMOKE_AUTHORITY_CANDIDATE_V3.json"
 ADJUDICATION = HERE / "GATE_A_TARGET_NONEXECUTING_QUALIFICATION_ADJUDICATION.json"
 CANDIDATE_V4 = HERE / "GATE_A_ENGINEERING_SMOKE_AUTHORITY_CANDIDATE_V4.json"
+REPLACEMENT_AUTHORITY = HERE / "GATE_A_REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_AUTHORIZATION.json"
+REPLACEMENT_AUTHORITY_STATE = HERE / "GATE_A_REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_AUTHORITY_STATE.json"
 
 RESULT_SCHEMA = HERE / "schemas" / "gate_a_target_nonexecuting_qualification_result.schema.json"
 ADJUDICATION_SCHEMA = HERE / "schemas" / "gate_a_target_nonexecuting_qualification_adjudication.schema.json"
 CANDIDATE_V4_SCHEMA = HERE / "schemas" / "gate_a_engineering_smoke_authority_candidate_v4.schema.json"
+REPLACEMENT_AUTHORITY_STATE_SCHEMA = HERE / "schemas" / "gate_a_replacement_target_nonexecuting_qualification_authority_state.schema.json"
 
 PRE_REPAIR_HEAD = "310efd0ec4103654b122a961b001bc5b79cf5896"
 INTEGRATED_MAIN = "6f243b1aaf7cfaa09f21b8d5816ddd9097612f72"
@@ -66,6 +69,14 @@ CURRENT_STATUS = (
     "TARGET_NONEXECUTING_QUALIFICATION_ATTEMPT_PRESERVED__FAIL_CLOSED_PROCESS_ABSENCE_NOT_PROVEN"
 )
 NEXT_BOUNDARY = "PROJECT_OWNER_DECISION_FOR_ONE_REPLACEMENT_GATE_A_TARGET_NONEXECUTING_QUALIFICATION"
+AUTHORIZED_CURRENT_STATUS = "REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_AUTHORIZED__NOT_EXECUTED"
+AUTHORIZED_NEXT_BOUNDARY = "EXECUTE_ONE_AUTHORIZED_REPLACEMENT_GATE_A_TARGET_NONEXECUTING_QUALIFICATION"
+AUTHORIZED_SOURCE_COMMIT = "71ab1528e44fe6181e72850a0bd93a131b7a6335"
+AUTHORIZED_SOURCE_TREE = "527f5a275c9af59e3fd85716d5e752fa79db74d8"
+AUTHORIZED_SOURCE_REVIEW_ID = "PR_37_REPLACEMENT_AUTHORITY_TWO_COMMIT_SOURCE_BINDING_REVIEW"
+AUTHORITY_BEARING_COMMIT = "1c293410d97b6ed7579cec94dd813890cda45f98"
+REPLACEMENT_AUTHORITY_SHA256 = "13fde796b2a3caa71db4d08e02c6d62e785cfabc4301b7e8ad94b4946f215d87"
+REPLACEMENT_AUTHORITY_BLOB = "289e3a9745337a5ed2b7bcc6230b8423eb49ce16"
 
 DIGEST_SEMANTICS_NAME = "DIGEST_SEMANTICS.json"
 
@@ -578,19 +589,96 @@ def require_no_execution_authority(search_root: Path, *, check_tracked: bool) ->
         require(proc.stdout.strip() == "", f"execution authority artifact tracked: {proc.stdout.strip()}")
 
 
-def require_no_replacement_authority_artifact() -> None:
-    name = "GATE_A_REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_AUTHORIZATION.json"
-    hits = list(PHASE6B6.rglob(name))
-    require(not hits, f"replacement target-qualification authority artifact present: {hits}")
-    proc = subprocess.run(
-        ["git", "ls-files", f"*{name}"],
+def validate_committed_replacement_authority(authority: dict[str, Any]) -> dict[str, Any]:
+    """Validate the exact owner authority through the production custody path."""
+    expected_path = HERE / "GATE_A_REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_AUTHORIZATION.json"
+    require(REPLACEMENT_AUTHORITY.resolve() == expected_path.resolve(), "replacement authority path mismatch")
+    require(REPLACEMENT_AUTHORITY.is_file() and not REPLACEMENT_AUTHORITY.is_symlink(), "replacement authority must be a real file")
+
+    evidence_path = future_runner.validate_replacement_authority(authority, REPLACEMENT_AUTHORITY)
+    custody = future_runner.validate_replacement_authority_custody(
+        REPLACEMENT_AUTHORITY,
+        authority["authorized_source_commit"],
+        authority["authorized_source_tree_sha1"],
+        expected_authority=authority,
+    )
+    require(authority["project_owner"] == EXPECTED_OWNER, "replacement authority owner mismatch")
+    require(authority["authority_id"] == "gate_a_replacement_71ab1528_01", "replacement authority id mismatch")
+    require(authority["authorized_source_commit"] == AUTHORIZED_SOURCE_COMMIT, "replacement authority source commit mismatch")
+    require(authority["authorized_source_tree_sha1"] == AUTHORIZED_SOURCE_TREE, "replacement authority source tree mismatch")
+    require(authority["authorized_source_review_id"] == AUTHORIZED_SOURCE_REVIEW_ID, "replacement authority review label mismatch")
+    require(authority["maximum_target_qualification_executions"] == 1, "replacement authority maximum execution mismatch")
+    require(authority["automatic_retry"] is False, "replacement authority automatic retry must be false")
+    require(authority["replacement_qualification_authorized"] is True, "replacement qualification must be authorized")
+    for field in future_runner.DOWNSTREAM_FALSE_FIELDS:
+        require(authority[field] is False, f"replacement authority downstream field must be false: {field}")
+
+    require(sha256_file(REPLACEMENT_AUTHORITY) == REPLACEMENT_AUTHORITY_SHA256, "replacement authority SHA-256 mismatch")
+    require(custody["replacement_authority_git_blob_sha1"] == REPLACEMENT_AUTHORITY_BLOB, "replacement authority Git blob mismatch")
+    require(custody["authorized_source_commit"] == AUTHORIZED_SOURCE_COMMIT, "custody source commit mismatch")
+    require(custody["authorized_source_tree_sha1"] == AUTHORIZED_SOURCE_TREE, "custody source tree mismatch")
+    require(custody["authorized_source_review_id"] == AUTHORIZED_SOURCE_REVIEW_ID, "custody review label mismatch")
+    require(custody["execution_head"] == future_runner.current_head(), "custody execution HEAD mismatch")
+
+    authority_rel = REPLACEMENT_AUTHORITY.relative_to(REPO_ROOT).as_posix()
+    bearing_blob = subprocess.run(
+        ["git", "rev-parse", f"{AUTHORITY_BEARING_COMMIT}:{authority_rel}"],
         cwd=str(REPO_ROOT),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True,
     )
-    require(proc.returncode == 0, f"git ls-files replacement authority check failed: {proc.stderr}")
-    require(proc.stdout.strip() == "", f"replacement target-qualification authority artifact tracked: {proc.stdout.strip()}")
+    require(bearing_blob.returncode == 0 and bearing_blob.stdout.strip() == REPLACEMENT_AUTHORITY_BLOB, "authority-bearing commit blob mismatch")
+    parent_absence = subprocess.run(
+        ["git", "cat-file", "-e", f"{AUTHORITY_BEARING_COMMIT}^:{authority_rel}"],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    require(parent_absence.returncode != 0, "replacement authority existed before authority-bearing commit")
+    require(not evidence_path.exists() and not evidence_path.is_symlink(), "replacement evidence exists before authorized execution")
+    return {
+        **custody,
+        "authority_artifact_path": authority_rel,
+        "authority_artifact_sha256": REPLACEMENT_AUTHORITY_SHA256,
+        "authority_bearing_commit": AUTHORITY_BEARING_COMMIT,
+        "authority_consumed": False,
+        "replacement_execution_count": 0,
+        "replacement_evidence_dir": evidence_path.relative_to(REPO_ROOT).as_posix(),
+        "replacement_evidence_present": False,
+        "status": "COMMITTED_REPLACEMENT_AUTHORITY_VALID_UNCONSUMED",
+    }
+
+
+def validate_replacement_authority_state(
+    state: dict[str, Any],
+    schema: dict[str, Any],
+    authority: dict[str, Any],
+    custody: dict[str, Any],
+) -> None:
+    validate_const_instance(state, schema, "replacement authority state")
+    require(state["status"] == AUTHORIZED_CURRENT_STATUS, "replacement authority current status mismatch")
+    require(state["authority_id"] == authority["authority_id"], "authority state id mismatch")
+    require(state["authority_artifact_sha256"] == custody["authority_artifact_sha256"], "authority state SHA-256 mismatch")
+    require(state["authority_artifact_git_blob_sha1"] == custody["replacement_authority_git_blob_sha1"], "authority state blob mismatch")
+    require(state["authorized_source_commit"] == custody["authorized_source_commit"], "authority state source commit mismatch")
+    require(state["authorized_source_tree_sha1"] == custody["authorized_source_tree_sha1"], "authority state source tree mismatch")
+    require(state["authorized_source_review_id"] == custody["authorized_source_review_id"], "authority state review label mismatch")
+    require(state["authority_bearing_commit"] == custody["authority_bearing_commit"], "authority state bearing commit mismatch")
+    require(state["authority_consumed"] is False, "authority cannot be consumed before evidence exists")
+    require(state["replacement_execution_count"] == 0, "replacement execution count must be zero before execution")
+    require(state["replacement_evidence_present"] is False, "replacement evidence must be absent before execution")
+    require(state["replacement_evidence_dir"] == custody["replacement_evidence_dir"], "replacement evidence namespace mismatch")
+    require(state["replacement_authority_artifact_created"] is True, "current state must record replacement authority artifact")
+    require(state["replacement_qualification_authorized"] is True, "current state must record replacement authorization")
+    require(state["target_nonexecuting_qualification_complete"] is False, "target qualification must remain incomplete before execution")
+    require(state["execution_bundle_target_qualified"] is False, "target bundle must remain unqualified before execution")
+    require(state["automatic_retry"] is False, "current state automatic retry must be false")
+    for field in DOWNSTREAM_FALSE_FIELDS:
+        require(state[field] is False, f"current state downstream field must be false: {field}")
+    require(state["project_owner_execution_approval_recorded"] is False, "current state execution approval must be false")
+    require(state["authorization_artifact_created"] is False, "current state execution authority artifact must be false")
+    require(state["next_boundary"] == AUTHORIZED_NEXT_BOUNDARY, "current authority next boundary mismatch")
 
 
 def require_no_unaccented_owner() -> None:
@@ -959,6 +1047,10 @@ def mutation_tests(
     candidate_v4: dict[str, Any],
     candidate_v4_schema: dict[str, Any],
     defect: dict[str, Any],
+    replacement_authority: dict[str, Any],
+    replacement_authority_state: dict[str, Any],
+    replacement_authority_state_schema: dict[str, Any],
+    replacement_authority_custody: dict[str, Any],
 ) -> dict[str, Any]:
     cases: list[str] = []
 
@@ -975,6 +1067,13 @@ def mutation_tests(
     qualification_validator = lambda value: validate_qualification_json(value)
     adjudication_validator = lambda value: validate_adjudication(value, adjudication_schema, defect)
     candidate_v4_validator = lambda value: validate_candidate_v4(value, candidate_v4_schema)
+    replacement_authority_validator = lambda value: validate_committed_replacement_authority(value)
+    replacement_authority_state_validator = lambda value: validate_replacement_authority_state(
+        value,
+        replacement_authority_state_schema,
+        replacement_authority,
+        replacement_authority_custody,
+    )
 
     def semantics_validator(value: dict[str, Any]) -> None:
         validate_digest_semantics(value, final_bindings, EVID)
@@ -1015,10 +1114,23 @@ def mutation_tests(
         ("adjudication_execution_approval_true", mutated(adjudication, lambda value: value.__setitem__("project_owner_execution_approval_recorded", True), adjudication_validator)),
         ("adjudication_execution_artifact_created", mutated(adjudication, lambda value: value.__setitem__("authorization_artifact_created", True), adjudication_validator)),
         ("candidate_v4_execution_artifact_created", mutated(candidate_v4, lambda value: value.__setitem__("authorization_artifact_created", True), candidate_v4_validator)),
+        ("replacement_authority_wrong_source_commit", mutated(replacement_authority, lambda value: value.__setitem__("authorized_source_commit", "0" * 40), replacement_authority_validator)),
+        ("replacement_authority_wrong_source_tree", mutated(replacement_authority, lambda value: value.__setitem__("authorized_source_tree_sha1", "0" * 40), replacement_authority_validator)),
+        ("replacement_authority_wrong_review_label", mutated(replacement_authority, lambda value: value.__setitem__("authorized_source_review_id", "WRONG_REVIEW"), replacement_authority_validator)),
+        ("replacement_authority_execution_count_above_one", mutated(replacement_authority, lambda value: value.__setitem__("maximum_target_qualification_executions", 2), replacement_authority_validator)),
+        ("replacement_authority_automatic_retry_true", mutated(replacement_authority, lambda value: value.__setitem__("automatic_retry", True), replacement_authority_validator)),
+        ("authority_state_consumed_before_evidence", mutated(replacement_authority_state, lambda value: value.__setitem__("authority_consumed", True), replacement_authority_state_validator)),
+        ("authority_state_execution_count_above_one", mutated(replacement_authority_state, lambda value: value.__setitem__("replacement_execution_count", 2), replacement_authority_state_validator)),
+        ("authority_state_automatic_retry_true", mutated(replacement_authority_state, lambda value: value.__setitem__("automatic_retry", True), replacement_authority_state_validator)),
+        ("authority_state_target_qualification_promoted_before_execution", mutated(replacement_authority_state, lambda value: value.__setitem__("target_nonexecuting_qualification_complete", True), replacement_authority_state_validator)),
+        ("authority_state_target_bundle_promoted_before_execution", mutated(replacement_authority_state, lambda value: value.__setitem__("execution_bundle_target_qualified", True), replacement_authority_state_validator)),
     ]
+    for field in future_runner.DOWNSTREAM_FALSE_FIELDS:
+        checks.append((f"replacement_authority_downstream_{field}_true", mutated(replacement_authority, lambda value, key=field: value.__setitem__(key, True), replacement_authority_validator)))
     for field in DOWNSTREAM_FALSE_FIELDS:
         checks.append((f"adjudication_downstream_{field}_true", mutated(adjudication, lambda value, key=field: value.__setitem__(key, True), adjudication_validator)))
         checks.append((f"candidate_v4_downstream_{field}_true", mutated(candidate_v4, lambda value, key=field: value.__setitem__(key, True), candidate_v4_validator)))
+        checks.append((f"authority_state_downstream_{field}_true", mutated(replacement_authority_state, lambda value, key=field: value.__setitem__(key, True), replacement_authority_state_validator)))
     for name, check in checks:
         cases.append(assert_rejects(name, check))
 
@@ -1094,9 +1206,12 @@ def main() -> int:
     candidate_v3 = load(CANDIDATE_V3)
     adjudication = load(ADJUDICATION)
     candidate_v4 = load(CANDIDATE_V4)
+    replacement_authority = load(REPLACEMENT_AUTHORITY)
+    replacement_authority_state = load(REPLACEMENT_AUTHORITY_STATE)
     result_schema = load(RESULT_SCHEMA)
     adjudication_schema = load(ADJUDICATION_SCHEMA)
     candidate_v4_schema = load(CANDIDATE_V4_SCHEMA)
+    replacement_authority_state_schema = load(REPLACEMENT_AUTHORITY_STATE_SCHEMA)
 
     validate_schema_closed(
         result_schema,
@@ -1104,6 +1219,7 @@ def main() -> int:
     )
     validate_schema_closed(adjudication_schema)
     validate_schema_closed(candidate_v4_schema, ("predecessor_adapter_package_digests",))
+    validate_schema_closed(replacement_authority_state_schema)
 
     validate_historical_authorization(authorization)
     validate_historical_contract(contract)
@@ -1114,9 +1230,15 @@ def main() -> int:
     defect = detect_historical_process_evidence_defect()
     validate_adjudication(adjudication, adjudication_schema, defect)
     validate_candidate_v4(candidate_v4, candidate_v4_schema)
+    replacement_authority_custody = validate_committed_replacement_authority(replacement_authority)
+    validate_replacement_authority_state(
+        replacement_authority_state,
+        replacement_authority_state_schema,
+        replacement_authority,
+        replacement_authority_custody,
+    )
     require_no_unaccented_owner()
     require_no_execution_authority(PHASE6B6, check_tracked=True)
-    require_no_replacement_authority_artifact()
 
     scanner_test = future_scanner_nonzero_test()
     scanner_receipt_test = future_process_scan_receipt_contract_test()
@@ -1134,10 +1256,14 @@ def main() -> int:
         candidate_v4,
         candidate_v4_schema,
         defect,
+        replacement_authority,
+        replacement_authority_state,
+        replacement_authority_state_schema,
+        replacement_authority_custody,
     )
 
     output = {
-        "status": CURRENT_STATUS,
+        "status": AUTHORIZED_CURRENT_STATUS,
         "integrated_main": INTEGRATED_MAIN,
         "pre_repair_pr_head": PRE_REPAIR_HEAD,
         "historical_attempt_authorized": True,
@@ -1147,10 +1273,13 @@ def main() -> int:
         "target_nonexecuting_qualification_complete": False,
         "execution_bundle_target_qualified": False,
         "original_authority_consumed": True,
-        "replacement_qualification_authorized": False,
+        "replacement_qualification_authorized": True,
         "project_owner_execution_approval_recorded": False,
         "authorization_artifact_created": False,
-        "replacement_authority_artifact_created": False,
+        "replacement_authority_artifact_created": True,
+        "replacement_authority_consumed": False,
+        "replacement_execution_count": 0,
+        "replacement_authority_custody": replacement_authority_custody,
         "engineering_smoke_authorized": False,
         "hardware_ran": False,
         "automatic_retry": False,
@@ -1160,7 +1289,8 @@ def main() -> int:
         "replacement_authority_two_commit_git_integration_test": two_commit_git_test,
         "mutation_tests": mutations,
         "historical_evidence_inventory_sha256": sha256_file(EVID / "EVIDENCE_INVENTORY.json"),
-        "next_boundary": NEXT_BOUNDARY,
+        "candidate_v4_preserved_predecision_state": True,
+        "next_boundary": AUTHORIZED_NEXT_BOUNDARY,
     }
     print(json.dumps(output, sort_keys=True, indent=2))
     return 0

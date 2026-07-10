@@ -18,17 +18,21 @@ GATE_A_TARGET_NONEXECUTING_ATTEMPT_PRESERVED
 TARGET_PROCESS_ABSENCE_NOT_PROVEN_FAIL_CLOSED
 TARGET_NONEXECUTING_QUALIFICATION_INCOMPLETE
 EXECUTION_BUNDLE_TARGET_QUALIFICATION_NOT_ACCEPTED
+REPLACEMENT_TARGET_NONEXECUTING_AUTHORITY_ARTIFACT_COMMITTED
+ONE_REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_AUTHORIZED
+REPLACEMENT_AUTHORITY_UNCONSUMED
+REPLACEMENT_EXECUTION_COUNT_ZERO
 GATE_A_ENGINEERING_SMOKE_UNAUTHORIZED
 HARDWARE_RAN_FALSE
 AUTOMATIC_RETRY_FALSE
 ```
 
-No replacement target qualification is authorized. There is no automatic retry. Gate A engineering smoke, hardware execution, calibration, scientific acquisition, restoration, target coupling, and Small Wall work remain unauthorized.
+The project owner has authorized exactly one replacement target non-executing qualification under committed authority `gate_a_replacement_71ab1528_01`. The authority is unconsumed, the replacement execution count is zero, and no replacement evidence exists yet. There is no automatic retry. Gate A engineering smoke, hardware execution, calibration, scientific acquisition, restoration, target coupling, and Small Wall work remain unauthorized.
 
 The exact next boundary is:
 
 ```text
-PROJECT_OWNER_DECISION_FOR_ONE_REPLACEMENT_GATE_A_TARGET_NONEXECUTING_QUALIFICATION
+EXECUTE_ONE_AUTHORIZED_REPLACEMENT_GATE_A_TARGET_NONEXECUTING_QUALIFICATION
 ```
 
 This addendum does not rewrite the older roadmap history.
