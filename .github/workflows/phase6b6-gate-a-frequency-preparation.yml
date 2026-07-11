@@ -1,0 +1,74 @@
+name: Phase 6B.6 Gate A Frequency Preparation Restoration
+
+permissions:
+  contents: read
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/phase6b6-gate-a-frequency-preparation.yml"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/frequency_preparation/**"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/phase6b6-gate-a-frequency-preparation.yml"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/frequency_preparation/**"
+
+jobs:
+  synthetic-qualification:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout exact head
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+          submodules: false
+
+      - name: Prove checkout credentials are absent
+        shell: bash
+        run: |
+          set +e
+          git config --local --get-all http.https://github.com/.extraheader >/dev/null
+          rc=$?
+          set -e
+          case "$rc" in
+            1) ;;
+            0) echo "checkout authorization header remains configured" >&2; exit 1 ;;
+            *) echo "checkout authorization-header inspection failed with rc=$rc" >&2; exit "$rc" ;;
+          esac
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.11"
+
+      - name: Compile preparation source
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/frequency_preparation
+        run: python -m compileall -q .
+
+      - name: Run synthetic preparation and restoration tests
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/frequency_preparation
+        run: python -m unittest discover -s . -p 'test_gate_a_frequency_preparation.py' -v
+
+      - name: Verify source and authority boundary
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/frequency_preparation
+        run: python verify_gate_a_frequency_preparation.py
+
+      - name: Prove live CLI refuses execution
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/frequency_preparation
+        shell: bash
+        run: |
+          set +e
+          python gate_a_frequency_preparation.py >stdout.txt 2>stderr.txt
+          rc=$?
+          set -e
+          test "$rc" = 2
+          grep -Fx 'LIVE_FREQUENCY_PREPARATION_NOT_AUTHORIZED' stderr.txt
+
+      - name: Diff hygiene
+        run: git diff --check
