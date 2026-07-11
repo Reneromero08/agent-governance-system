@@ -14,6 +14,7 @@ on:
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_target_nonexecuting_qualification_6f243b1a_bundle_abc9e50a/**"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_target_nonexecuting_qualification_replacement_gate_a_replacement_593e9920_02/**"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_engineering_smoke_7e1e8835/**"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_engineering_smoke_1dabfc7b/**"
   push:
     branches:
       - codex/phase6b6-gate-a-engineering-smoke-executor
@@ -90,6 +91,8 @@ jobs:
         run: |
           if [ -f GATE_A_EXECUTION_AUTHORITY.json ]; then
             python verify_gate_a_active_authority.py
+          elif [ -f GATE_A_EXECUTION_AUTHORITY_CONSUMED_1dabfc7b.json ]; then
+            python verify_gate_a_second_attempt_closure.py
           else
             python verify_gate_a_k10temp_repair.py
           fi
@@ -105,7 +108,7 @@ jobs:
           git diff --name-only origin/main...HEAD -- \
             THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2 \
             THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter > executor-paths.txt
-          unexpected=$(grep -v -E '^THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/(holo_runtime_v2/gate_a_engineering_smoke_runtime\.(c|h)|phase6b6/acquisition/gate_a/adapter/(GATE_A_ADAPTER_QUALIFICATION_CONTRACT\.json|GATE_A_EXECUTION_AUTHORITY\.json|GATE_A_EXECUTION_AUTHORITY_CONSUMED_7e1e8835\.json|GATE_A_EXECUTION_BUNDLE_MANIFEST\.json|build_gate_a_execution_bundle\.py|gate_a_engineering_smoke_executor\.py|gate_a_engineering_smoke_executor_k10temp\.py|gate_a_temperature_custody\.py|gate_a_engineering_smoke_transport\.py|gate_a_process_custody\.py|gate_a_hardware_adapter\.py|gate_a_isolated_qualification\.py|gate_a_target_bundle\.py|gate_a_target_runner\.py|gate_a_worker\.c|test_gate_a_engineering_smoke_executor\.py|test_gate_a_k10temp_executor\.py|test_gate_a_native_temperature\.c|test_gate_a_process_custody\.py|test_gate_a_temperature_custody\.py|verify_gate_a_active_authority\.py|verify_gate_a_adapter_qualification\.py|verify_gate_a_k10temp_repair\.py))$' executor-paths.txt || true)
+          unexpected=$(grep -v -E '^THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/(holo_runtime_v2/gate_a_engineering_smoke_runtime\.(c|h)|phase6b6/acquisition/gate_a/adapter/(GATE_A_ADAPTER_QUALIFICATION_CONTRACT\.json|GATE_A_EXECUTION_AUTHORITY\.json|GATE_A_EXECUTION_AUTHORITY_CONSUMED_7e1e8835\.json|GATE_A_EXECUTION_AUTHORITY_CONSUMED_1dabfc7b\.json|GATE_A_EXECUTION_BUNDLE_MANIFEST\.json|build_gate_a_execution_bundle\.py|gate_a_engineering_smoke_executor\.py|gate_a_engineering_smoke_executor_k10temp\.py|gate_a_temperature_custody\.py|gate_a_engineering_smoke_transport\.py|gate_a_process_custody\.py|gate_a_hardware_adapter\.py|gate_a_isolated_qualification\.py|gate_a_target_bundle\.py|gate_a_target_runner\.py|gate_a_worker\.c|test_gate_a_engineering_smoke_executor\.py|test_gate_a_k10temp_executor\.py|test_gate_a_native_temperature\.c|test_gate_a_process_custody\.py|test_gate_a_temperature_custody\.py|verify_gate_a_active_authority\.py|verify_gate_a_adapter_qualification\.py|verify_gate_a_k10temp_repair\.py|verify_gate_a_second_attempt_closure\.py))$' executor-paths.txt || true)
           if [ -n "$unexpected" ]; then
             echo "unexpected adapter or physical-runtime path changed" >&2
             printf '%s\n' "$unexpected" >&2
