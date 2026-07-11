@@ -574,14 +574,18 @@ def _rollout_metrics(
     sigma: tuple[tuple[float, float], tuple[float, float]],
 ) -> dict[int, dict[str, Any]]:
     horizon_metrics: dict[int, dict[str, Any]] = {}
+    state_level = manifest["state_level"]
+    whitener = symmetric_inverse_sqrt(sigma) if state_level in ("S1", "S2") else None
 
     def normalized_prediction(row: dict[str, Any], gauge: Any, pred_state: np.ndarray) -> np.ndarray:
+        if whitener is None:
+            raise ValueError("normalized prediction requires a whitened state level")
         tone = row["u_t"].get("physical_tone_index")
         if tone is None:
             tone = row["declared"].get("analysis_tone_index") or 0
         z = complex(float(pred_state[0]), float(pred_state[1]))
         centered = z - gauge.complex_anchor_alpha[int(tone)]
-        zn = symmetric_inverse_sqrt(sigma) @ np.array([centered.real, centered.imag], dtype=float)
+        zn = whitener @ np.array([centered.real, centered.imag], dtype=float)
         return np.array([float(zn[0]), float(zn[1]), float(pred_state[2])], dtype=float)
 
     def next_x(
@@ -591,7 +595,6 @@ def _rollout_metrics(
         predicted_states: list[np.ndarray],
         gauge: Any,
     ) -> np.ndarray:
-        state_level = manifest["state_level"]
         if state_level == "S0":
             return predicted_states[-1].reshape(1, -1)
         if state_level == "S1":

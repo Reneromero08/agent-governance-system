@@ -56,8 +56,6 @@ jobs:
           assert result["observed_snapshot_identity"]["calculated_inventory_sha256"] == binding["expected_inventory_sha256"]
           print("PHASE6B6_GIT_SNAPSHOT_PROVENANCE_OK")
           PY
-      - name: Focused qualification tests
-        run: python -m unittest discover -s tests -p 'test_nonhardware_qualification.py' -v
       - name: Existing Phase 6B.6 focused tests
         run: python -m unittest discover -s tests -v
       - name: Validate-only qualification CLI
