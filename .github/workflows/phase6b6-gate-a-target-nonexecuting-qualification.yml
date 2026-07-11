@@ -35,6 +35,24 @@ jobs:
         run: |
           test -z "$(git config --local --get-all http.https://github.com/.extraheader || true)"
 
+      - name: Restore immutable PR 37 object custody
+        shell: bash
+        run: |
+          archive_ref=refs/remotes/origin/archive/pr37-head
+          expected_head=99e3fbc9884e38f0fb5a27c0a70975d065a970b5
+          git fetch --no-tags origin "+refs/pull/37/head:$archive_ref"
+          test "$(git rev-parse "$archive_ref")" = "$expected_head"
+          for commit in \
+            310efd0ec4103654b122a961b001bc5b79cf5896 \
+            71ab1528e44fe6181e72850a0bd93a131b7a6335 \
+            1c293410d97b6ed7579cec94dd813890cda45f98 \
+            593e9920be533603217cee93572d79b86cc65cf9 \
+            1ea708cfdc93083cc9386a6b1b14cf51d1ed8367
+          do
+            git cat-file -e "$commit^{commit}"
+            git merge-base --is-ancestor "$commit" "$archive_ref"
+          done
+
       - name: Set up Python
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
