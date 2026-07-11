@@ -21,6 +21,7 @@ import copy
 import json
 import os
 import shutil
+import subprocess
 import sys
 import tempfile
 from pathlib import Path
@@ -33,7 +34,6 @@ sys.dont_write_bytecode = True
 SYNTHETIC_REVIEWED_HEAD = "1234567890abcdef1234567890abcdef12345678"
 SYNTHETIC_REVIEW_ID = 4619537286
 AUTHORITY_NAME = "GATE_A_EXECUTION_AUTHORITY.json"
-LIVE_SENTINEL = "authorized live execution path is intentionally unused in this qualification phase"
 
 
 class HarnessError(RuntimeError):
@@ -304,16 +304,141 @@ def _absent_inspector(gate_a_target_runner, work: Path):
     return lambda _path: gate_a_target_runner.inspect_output_root(absent_path)
 
 
-def _assert_no_sentinel(gate_a_target_runner, name: str, call: Callable[[], Any]) -> str:
+def _assert_executor_rejects(gate_a_target_runner, name: str, call: Callable[[], Any]) -> str:
     try:
         call()
-    except gate_a_target_runner.TargetRunnerError as exc:
-        if str(exc) == LIVE_SENTINEL:
-            raise HarnessError(f"reached live sentinel despite {name}")
-        return name
     except Exception:
         return name
     raise HarnessError(f"no rejection for {name}")
+
+
+def _fake_runtime_result(runner) -> dict[str, Any]:
+    smoke = runner.smoke_executor
+    records: list[dict[str, Any]] = []
+    for index, token in enumerate(smoke.SEQUENCE):
+        record: dict[str, Any] = {
+            "index": index,
+            "token": token,
+            "requested_start_s": index * smoke.SLOT_S,
+            "requested_end_s": (index + 1) * smoke.SLOT_S,
+            "drive_on": False,
+            "amplitude_level": None,
+            "phase_index": None,
+            "sign": None,
+            "sender_epoch_id": None,
+        }
+        if token == "S0E":
+            record.update({
+                "drive_on": True,
+                "amplitude_level": 2,
+                "phase_index": 0,
+                "sign": 1,
+                "sender_epoch_id": "gate-a:step:epoch0",
+            })
+        elif token == "A0P":
+            record.update({"drive_on": True, "amplitude_level": 2, "phase_index": 0, "sign": 1})
+        elif token == "A0N":
+            record.update({"drive_on": True, "amplitude_level": 2, "phase_index": 4, "sign": -1})
+        records.append(record)
+    return {
+        "status": "GATE_A_ENGINEERING_SMOKE_COMPLETE",
+        "automatic_retry": False,
+        "runtime_execution_count": 1,
+        "slot_records": records,
+        "capture": {
+            "continuous": True,
+            "covers_complete_sequence": True,
+            "sample_count": smoke.READ_HZ * int(smoke.NOMINAL_DURATION_S),
+            "slot_sample_counts": [smoke.NOMINAL_SAMPLES_PER_SLOT] * smoke.SLOT_COUNT,
+            "origin_tsc": 1_000_000_000,
+            "deadline_tsc": 26_600_000_000,
+            "first_sample_tsc": 1_000_000_000,
+            "last_sample_tsc": 26_599_600_000,
+            "tsc_hz": 3_200_000_000.0,
+        },
+        "frequency_writes": 0,
+        "voltage_writes": 0,
+        "msr_reads": 0,
+        "msr_writes": 0,
+        "step_sender_epoch_count": 1,
+        "hardware_executed": True,
+    }
+
+
+def _fake_execution_surfaces(runner):
+    smoke = runner.smoke_executor
+    counts = {
+        "namespace": 0,
+        "process": 0,
+        "temperature": 0,
+        "frequency": 0,
+        "claim": 0,
+        "runtime": 0,
+        "evidence_begin": 0,
+        "evidence_complete": 0,
+        "network": 0,
+        "hardware": 0,
+        "msr": 0,
+        "control_write": 0,
+    }
+
+    class FakePreflight:
+        def inspect_namespace(self, _path: Path):
+            counts["namespace"] += 1
+            return smoke.NamespaceState.ABSENT
+
+        def process_snapshot(self, phase: str):
+            counts["process"] += 1
+            completed = subprocess.CompletedProcess(
+                list(smoke.process_custody.PROCESS_COMMAND),
+                0,
+                stdout=b"1 init /sbin/init\n",
+                stderr=b"",
+            )
+            return smoke.process_custody.scan_processes(
+                phase,
+                runner=lambda *_args, **_kwargs: completed,
+            )
+
+        def temperature_c(self) -> float:
+            counts["temperature"] += 1
+            return 42.0
+
+        def frequency_khz(self, _core: int) -> int:
+            counts["frequency"] += 1
+            return smoke.REQUIRED_FREQUENCY_KHZ
+
+    class FakeClaims:
+        def claim(self, _authority_sha256: str, _plan) -> None:
+            require(counts["claim"] == 0, "synthetic authority claimed more than once")
+            counts["claim"] += 1
+
+    class FakeEvidence:
+        def begin(self, _plan, _preflight) -> None:
+            counts["evidence_begin"] += 1
+
+        def event(self, _value) -> None:
+            return None
+
+        def process_receipt(self, _phase, _receipt) -> None:
+            return None
+
+        def complete(self, _result) -> None:
+            counts["evidence_complete"] += 1
+
+        def fail(self, _reason: str) -> None:
+            raise HarnessError("synthetic runtime unexpectedly failed")
+
+    class FakeRuntime:
+        def execute(self, _plan):
+            require(counts["runtime"] == 0, "synthetic runtime called more than once")
+            counts["runtime"] += 1
+            return _fake_runtime_result(runner)
+
+        def verify_evidence(self, _plan, _result) -> None:
+            return None
+
+    return smoke.ExecutionSurfaces(FakePreflight(), FakeClaims(), FakeEvidence(), FakeRuntime()), counts
 
 
 def synthetic_authority_validation(target_bundle, gate_a_authority, gate_a_target_runner, manifest: dict[str, Any], work: Path, bundle_root: Path) -> dict[str, Any]:
@@ -330,22 +455,30 @@ def synthetic_authority_validation(target_bundle, gate_a_authority, gate_a_targe
         exact_manifest=manifest,
     )
 
-    reached_live_sentinel = False
-    try:
-        gate_a_target_runner.execute_authorized(
-            args,
-            bundle_root=bundle_root,
-            output_root_inspector=_absent_inspector(gate_a_target_runner, work),
-        )
-    except gate_a_target_runner.TargetRunnerError as exc:
-        reached_live_sentinel = str(exc) == LIVE_SENTINEL
-    require(reached_live_sentinel, "synthetic authority did not reach the intentionally-unused live sentinel")
+    surfaces, counts = _fake_execution_surfaces(gate_a_target_runner)
+    result = gate_a_target_runner.execute_authorized(
+        args,
+        bundle_root=bundle_root,
+        output_root_inspector=_absent_inspector(gate_a_target_runner, work),
+        surfaces=surfaces,
+        compile_c=False,
+    )
+    require(result["status"] == "GATE_A_ENGINEERING_SMOKE_COMPLETE", "synthetic execution did not complete")
+    require(counts["claim"] == 1 and counts["runtime"] == 1, "synthetic one-shot counts changed")
+    require(counts["network"] == counts["hardware"] == counts["msr"] == counts["control_write"] == 0, "non-driving fake touched a forbidden surface")
     return {
-        "status": "ISOLATED_SYNTHETIC_AUTHORITY_VALIDATED",
+        "status": "ISOLATED_SYNTHETIC_AUTHORITY_AND_EXECUTOR_VALIDATED",
         "shared_validator_result": shared_result,
-        "reached_intentionally_unused_live_sentinel": True,
+        "executor_result": result["status"],
+        "durable_claim_count": counts["claim"],
+        "runtime_execution_count": counts["runtime"],
+        "automatic_retry": False,
         "authority_written_outside_bundle": True,
         "positively_absent_output_root_accepted": True,
+        "network_connections_opened": counts["network"],
+        "hardware_execution_count": counts["hardware"],
+        "msr_access_count": counts["msr"],
+        "control_write_count": counts["control_write"],
     }
 
 
@@ -354,11 +487,18 @@ def root_state_suite(target_bundle, gate_a_authority, gate_a_target_runner, mani
     runner = gate_a_target_runner
     cases: list[str] = []
 
-    def run_with_inspector(inspector) -> None:
-        runner.execute_authorized(args, bundle_root=bundle_root, output_root_inspector=inspector)
+    def run_with_inspector(inspector) -> dict[str, Any]:
+        surfaces, _counts = _fake_execution_surfaces(runner)
+        return runner.execute_authorized(
+            args,
+            bundle_root=bundle_root,
+            output_root_inspector=inspector,
+            surfaces=surfaces,
+            compile_c=False,
+        )
 
     def reject(name: str, inspector) -> None:
-        cases.append(_assert_no_sentinel(runner, name, lambda: run_with_inspector(inspector)))
+        cases.append(_assert_executor_rejects(runner, name, lambda: run_with_inspector(inspector)))
 
     def raise_permission(_path):
         raise PermissionError(13, "permission denied")
@@ -376,13 +516,9 @@ def root_state_suite(target_bundle, gate_a_authority, gate_a_target_runner, mani
     reject("permission_error_unobservable", lambda _p: runner.inspect_output_root(work / "pe", stat_func=raise_permission))
     reject("generic_oserror_unobservable", lambda _p: runner.inspect_output_root(work / "io", stat_func=raise_generic))
 
-    # Positive control: a positively absent path reaches the intentionally-unused sentinel.
-    absent_reached = False
-    try:
-        run_with_inspector(_absent_inspector(runner, work))
-    except runner.TargetRunnerError as exc:
-        absent_reached = str(exc) == LIVE_SENTINEL
-    require(absent_reached, "positively absent output root did not reach the live sentinel")
+    # Positive control: a positively absent path reaches the injected executor.
+    absent_result = run_with_inspector(_absent_inspector(runner, work))
+    require(absent_result["status"] == "GATE_A_ENGINEERING_SMOKE_COMPLETE", "positively absent output root did not reach the injected executor")
 
     # Direct production-function mapping checks (inspect_output_root is the default inspector).
     require(runner.inspect_output_root(work / "definitely_absent") is runner.RootState.ABSENT, "absent mapping wrong")
@@ -404,8 +540,8 @@ def root_state_suite(target_bundle, gate_a_authority, gate_a_target_runner, mani
         try:
             run_with_inspector(lambda _p, _path=path: runner.inspect_output_root(Path(_path)))
             record["rejected"] = False
-        except runner.TargetRunnerError as exc:
-            record["rejected"] = str(exc) != LIVE_SENTINEL
+        except runner.TargetRunnerError:
+            record["rejected"] = True
         require(record["rejected"] is True, f"root-state best-effort not rejected: {name}")
         best_effort[name] = record
 
@@ -455,13 +591,20 @@ def production_strict_custody_suite(target_bundle, gate_a_authority, gate_a_targ
     schedule_json = "GATE_A_ENGINEERING_SMOKE_SCHEDULE.json"
 
     def exec_on(root: Path):
-        return runner.execute_authorized(args, bundle_root=root, output_root_inspector=absent)
+        surfaces, _counts = _fake_execution_surfaces(runner)
+        return runner.execute_authorized(
+            args,
+            bundle_root=root,
+            output_root_inspector=absent,
+            surfaces=surfaces,
+            compile_c=False,
+        )
 
     def reject_prod(name: str, mutate) -> None:
         root = fresh_copy()
         mutate(root)
         _assert_rejects(name + ":qualify_no_drive", lambda: runner.qualify_no_drive(root, compile_c=False))
-        _assert_no_sentinel(runner, name + ":execute_authorized", lambda: exec_on(root))
+        _assert_executor_rejects(runner, name + ":execute_authorized", lambda: exec_on(root))
         cases.append(name)
 
     def add_py(root: Path) -> None:

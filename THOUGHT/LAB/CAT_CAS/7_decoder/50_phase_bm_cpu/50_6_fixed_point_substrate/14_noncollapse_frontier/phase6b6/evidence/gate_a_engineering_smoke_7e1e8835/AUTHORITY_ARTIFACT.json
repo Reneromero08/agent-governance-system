@@ -1,0 +1,29 @@
+{
+  "schema_id": "CAT_CAS_PHASE6B6_GATE_A_EXECUTION_AUTHORITY_V1",
+  "reviewed_adapter_head": "4d281112d9da56cd3c99e6860121d1ab1b9d3e47",
+  "independent_review_id": 4676060226,
+  "execution_bundle_sha256": "1fdfe797a7b624c87315c053e7333f95847b9206dad0a786a258e3f9db88ef98",
+  "host_adapter_git_blob_sha1": "016bb62d78b749c18785f7c3d3abfdaef012ab61",
+  "target_runner_git_blob_sha1": "7fcd2ced3b1f582eb7673cd1bb973ab41fba147c",
+  "target_worker_git_blob_sha1": "46dfb31673299a0e1ea4cf8cd50a3e5beb1a13a9",
+  "schedule_sha256": "418ff6e9801ba5def3f17fb25c7d56f044599e6e5bc8cc3260e0368d4877d116",
+  "target_namespace_sha256": "5b3090f642d28492e182630e6349eccd8181704f08129d40d886c8f529dfd50e",
+  "target_identity_sha256": "10618a70ceb3413d7507c22254d595d63632bb7ad9243dbe3dc6ebbaf13e19a4",
+  "target": "root@192.168.137.100",
+  "remote_execution_root": "/root/catcas_phase6b6_gate_a_smoke_9c416379",
+  "remote_output_root": "/root/catcas_phase6b6_gate_a_smoke_9c416379/evidence",
+  "maximum_execution_count": 1,
+  "consumed": false,
+  "project_owner_approved": true,
+  "authority_state": {
+    "authorization_artifact_created": true,
+    "engineering_smoke_authorized": true,
+    "hardware_ran": false,
+    "calibration_authorized": false,
+    "scientific_acquisition_authorized": false,
+    "restoration_authorized": false,
+    "target_coupling_authorized": false,
+    "small_wall_authorized": false,
+    "automatic_retry": false
+  }
+}

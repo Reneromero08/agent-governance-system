@@ -1,0 +1,33 @@
+{
+  "authority_sha256": "7e1e8835bd67590e4e554ae112a2c8a6ca99dd8b9b3a9aafdb23fee31907d682",
+  "automatic_retry": false,
+  "execution_bundle_sha256": "1fdfe797a7b624c87315c053e7333f95847b9206dad0a786a258e3f9db88ef98",
+  "maximum_execution_count": 1,
+  "preflight": {
+    "frequency_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "namespace_state": "absent",
+    "preflight_complete": false,
+    "voltage_writes": 0
+  },
+  "schema_id": "CAT_CAS_PHASE6B6_GATE_A_ATTEMPT_V1",
+  "sequence": [
+    "I",
+    "I",
+    "I",
+    "I",
+    "C0",
+    "D0",
+    "S0E",
+    "S0E",
+    "S0E",
+    "S0E",
+    "O0",
+    "O0",
+    "A0P",
+    "A0N",
+    "T",
+    "T"
+  ]
+}

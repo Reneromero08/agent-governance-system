@@ -1,0 +1,2 @@
+{"event":"pre_runtime_process_scan","forbidden_process_hits":[],"return_code":0,"scan_complete":true,"stderr_sha256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855","stdout_sha256":"c44baa2c70fdf4a9a38e61ad86c4a57f53a08eb4b5534da7338a708fc03e0458"}
+{"event":"runtime_failed","reason":"temperature unobservable"}

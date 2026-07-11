@@ -1,0 +1,14 @@
+{
+  "authority_claim_preserved": true,
+  "authority_claim_state": "confirmed",
+  "automatic_retry": false,
+  "cleanup_attempted": true,
+  "copy_back_verified": true,
+  "failed_stage": "target_result_verification",
+  "mutation_attempted": true,
+  "primary_error": "authorized runtime failed after evidence custody",
+  "retry_count": 0,
+  "runner_start_count": 1,
+  "schema_id": "CAT_CAS_PHASE6B6_GATE_A_TRANSPORT_FAILURE_V1",
+  "secondary_errors": []
+}
