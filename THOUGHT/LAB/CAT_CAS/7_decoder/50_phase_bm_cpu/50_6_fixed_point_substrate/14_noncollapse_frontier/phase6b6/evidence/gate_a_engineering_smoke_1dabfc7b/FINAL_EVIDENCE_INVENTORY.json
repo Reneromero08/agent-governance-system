@@ -1,0 +1,106 @@
+{
+  "files": [
+    {
+      "path": "AUTHORITY_ARTIFACT.json",
+      "sha256": "1dabfc7bbfc65e988542b0c4580f031309c5abfc53521dd849e5c0ac71e24fd4",
+      "size": 1433
+    },
+    {
+      "path": "AUTHORITY_CLAIM_RECEIPT.json",
+      "sha256": "6a3e2634ca268a2b871502d8c198a183d1b89c76357f4c33e6251b70312a9874",
+      "size": 225
+    },
+    {
+      "path": "CLEANUP_RECEIPT.json",
+      "sha256": "389222ef47bbbfe1eb1a7af1d3fc66a615c8a378c4250d0fda6cf88cdd69f020",
+      "size": 2237
+    },
+    {
+      "path": "COPY_BACK_RECEIPT.json",
+      "sha256": "2091d3104446dcb7fcd38567e1f05020e32c18e552a5636e62c1e9bdcfb826c2",
+      "size": 812
+    },
+    {
+      "path": "EXECUTION_BUNDLE_MANIFEST.json",
+      "sha256": "9fda0730579383278ec88a5bf416ee3254216dc7927eaaa74ba5f162011cecca",
+      "size": 11605
+    },
+    {
+      "path": "FINAL_BINDINGS.json",
+      "sha256": "677595380ddc3f7a1f8e21749ec5811d72e0aaedf2c99cf032b6f45597b9f745",
+      "size": 2691
+    },
+    {
+      "path": "HOST_COMMANDS.jsonl",
+      "sha256": "a05f436952a981780719359baf9e43cbb7ab0337e050499d3319b6b8bd55eefd",
+      "size": 41322
+    },
+    {
+      "path": "POST_CLEANUP_PROCESS_RECEIPT.json",
+      "sha256": "1722e68c9a4fec6b216a487aa31a85e22b1f870533d0c82e098617f387274426",
+      "size": 14679
+    },
+    {
+      "path": "POST_RUNTIME_PROCESS_RECEIPT.json",
+      "sha256": "4fdff95e1978612be3eb351ffdb12fb8b1e1a9b38baf7688d73a6774c9c43665",
+      "size": 14525
+    },
+    {
+      "path": "SCHEDULE.json",
+      "sha256": "901cc7b9e52fe7a2d5edb537cfec009992742fcc0c1b5e978899d96fb5c2831a",
+      "size": 7795
+    },
+    {
+      "path": "SOURCE_REVIEW_BINDING.json",
+      "sha256": "45c50b872c8e923edbc99b1fe3e2289e675d54cb457914f84d304005a91f1938",
+      "size": 11929
+    },
+    {
+      "path": "TARGET_EVIDENCE_INVENTORY.json",
+      "sha256": "865cebb3e9e45118e9955446b0a703e5c907cc778c5c0ec2452c755fcba1be36",
+      "size": 1022
+    },
+    {
+      "path": "TARGET_EXECUTION_RECEIPT.json",
+      "sha256": "ddc63262a2151fe932474f835e58d1605aa856ee7becd8871818508f13d9c291",
+      "size": 17226
+    },
+    {
+      "path": "TARGET_OUTPUT/ATTEMPT.json",
+      "sha256": "3fc2c43944e761ec7f32c261828f159a0ba6fb71bf3d996fc9fa78e74f683d71",
+      "size": 663
+    },
+    {
+      "path": "TARGET_OUTPUT/EVENTS.jsonl",
+      "sha256": "328f7debf9f849c73c0e645e2495e7d2bc80a2fe6bd22b548ed5803cd226fad9",
+      "size": 606
+    },
+    {
+      "path": "TARGET_OUTPUT/FAILURE.json",
+      "sha256": "73b9d04572361bae17d122549928904177a621811c7e27e05b2ace964f14d13e",
+      "size": 152
+    },
+    {
+      "path": "TARGET_OUTPUT/POST_RUNTIME_PROCESS_RECEIPT.json",
+      "sha256": "4fdff95e1978612be3eb351ffdb12fb8b1e1a9b38baf7688d73a6774c9c43665",
+      "size": 14525
+    },
+    {
+      "path": "TARGET_OUTPUT/PRE_RUNTIME_PROCESS_RECEIPT.json",
+      "sha256": "818c64b3509a09036fd38dfb8dcde6d5ae462d5a0688f17f688b1a9bc30a54d7",
+      "size": 16534
+    },
+    {
+      "path": "TARGET_OUTPUT/TEMPERATURE_PREFLIGHT_RECEIPT.json",
+      "sha256": "e225efb3f4420f5ae3a4084059d8315f01cc50b6ffc88a4598aedf32fe536e83",
+      "size": 1204
+    },
+    {
+      "path": "TRANSPORT_FAILURE_RECEIPT.json",
+      "sha256": "86b85d6229ed633584e79928b36d401a89c11b64ff45c62c7605dccfcccb3bd0",
+      "size": 452
+    }
+  ],
+  "schema_id": "CAT_CAS_PHASE6B6_GATE_A_FINAL_EVIDENCE_INVENTORY_V1",
+  "self_exclusion": "FINAL_EVIDENCE_INVENTORY.json"
+}

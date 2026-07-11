@@ -1,0 +1,6 @@
+{
+  "automatic_retry": false,
+  "partial_evidence_preserved": true,
+  "reason": "frequency veto",
+  "schema_id": "CAT_CAS_PHASE6B6_GATE_A_FAILURE_V1"
+}

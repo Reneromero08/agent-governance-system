@@ -1,0 +1,35 @@
+{
+  "files": [
+    {
+      "path": "ATTEMPT.json",
+      "sha256": "3fc2c43944e761ec7f32c261828f159a0ba6fb71bf3d996fc9fa78e74f683d71",
+      "size": 663
+    },
+    {
+      "path": "EVENTS.jsonl",
+      "sha256": "328f7debf9f849c73c0e645e2495e7d2bc80a2fe6bd22b548ed5803cd226fad9",
+      "size": 606
+    },
+    {
+      "path": "FAILURE.json",
+      "sha256": "73b9d04572361bae17d122549928904177a621811c7e27e05b2ace964f14d13e",
+      "size": 152
+    },
+    {
+      "path": "POST_RUNTIME_PROCESS_RECEIPT.json",
+      "sha256": "4fdff95e1978612be3eb351ffdb12fb8b1e1a9b38baf7688d73a6774c9c43665",
+      "size": 14525
+    },
+    {
+      "path": "PRE_RUNTIME_PROCESS_RECEIPT.json",
+      "sha256": "818c64b3509a09036fd38dfb8dcde6d5ae462d5a0688f17f688b1a9bc30a54d7",
+      "size": 16534
+    },
+    {
+      "path": "TEMPERATURE_PREFLIGHT_RECEIPT.json",
+      "sha256": "e225efb3f4420f5ae3a4084059d8315f01cc50b6ffc88a4598aedf32fe536e83",
+      "size": 1204
+    }
+  ],
+  "schema_id": "CAT_CAS_PHASE6B6_GATE_A_EVIDENCE_INVENTORY_V1"
+}

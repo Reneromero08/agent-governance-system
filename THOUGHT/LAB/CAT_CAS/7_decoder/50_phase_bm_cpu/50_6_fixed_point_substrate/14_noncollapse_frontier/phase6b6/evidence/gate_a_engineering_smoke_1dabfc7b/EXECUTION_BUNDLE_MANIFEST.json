@@ -1,0 +1,207 @@
+{
+  "authority_artifact_created": false,
+  "base_main_commit": "03985a74d27e654c151cccad28c6221d91f70180",
+  "deterministic_archive_sha256": "9d5b7fb7735d90bfbd699e956297bf00df662395f0f644c9500283defe648d52",
+  "engineering_smoke_authorized": false,
+  "engineering_smoke_executor_implemented": true,
+  "execution_bundle_sha256": "353f7e2d865508ebc018cb72648d3d3f227dc1c1128681fd9b4e99d81c9aa47f",
+  "execution_bundle_target_qualified": true,
+  "files": [
+    {
+      "byte_size": 7069,
+      "git_blob_sha1": "13d657941e20919281a18c4d31dbd174addcfae3",
+      "git_mode": "100644",
+      "package_path": "adapter/gate_a_authority.py",
+      "role": "shared_authority_validator",
+      "sha256": "bcf2fa8d6e3fd2dcfbaead18554b2d3e863e1b97a3495277cc51de1b1d2866f1",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_authority.py"
+    },
+    {
+      "byte_size": 13805,
+      "git_blob_sha1": "755a92f0ae539c9f8c523d7d32bcd9aa8d348c68",
+      "git_mode": "100644",
+      "package_path": "adapter/gate_a_target_bundle.py",
+      "role": "target_bundle_validator",
+      "sha256": "386709f6a31ac116b5b4e6ead84e55a5b4c977c27f1237078ba3507175f7aea2",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_target_bundle.py"
+    },
+    {
+      "byte_size": 19115,
+      "git_blob_sha1": "372c1c2e2312c2162b8266098d35c04e2ed2f80c",
+      "git_mode": "100644",
+      "package_path": "adapter/gate_a_engineering_smoke_executor.py",
+      "role": "target_execution_gate",
+      "sha256": "b6189677ede24f59b75bb9c78baa584caf58f44b2db3c6c382f8a32f89edd462",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_engineering_smoke_executor_k10temp.py"
+    },
+    {
+      "byte_size": 35988,
+      "git_blob_sha1": "2d0d528c4b943ef82d1d897f2ebf48e072a17762",
+      "git_mode": "100644",
+      "package_path": "adapter/gate_a_engineering_smoke_executor_base.py",
+      "role": "target_execution_gate_base",
+      "sha256": "b3597ec5c7bab131e762ad6fc146a45e2f6b593a9ed7e72f2ece5bd72ff89979",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_engineering_smoke_executor.py"
+    },
+    {
+      "byte_size": 10707,
+      "git_blob_sha1": "36d2e293466bf70f5a8b052e0ade22b1c2fee577",
+      "git_mode": "100644",
+      "package_path": "adapter/gate_a_temperature_custody.py",
+      "role": "temperature_custody",
+      "sha256": "17ead860963fe593c954bebf73b0a182c544513629888826df8fc627fecaef93",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_temperature_custody.py"
+    },
+    {
+      "byte_size": 10448,
+      "git_blob_sha1": "c15831fa91c75cc6f388504398220181ecda1d28",
+      "git_mode": "100644",
+      "package_path": "adapter/gate_a_process_custody.py",
+      "role": "process_custody",
+      "sha256": "ed47d12ff1a6d624d095a5109c587d77809dd4a2df917c6cc0e4d3ad48ec907b",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_process_custody.py"
+    },
+    {
+      "byte_size": 60027,
+      "git_blob_sha1": "18666bc7c15c6bb234be3d5cfefcb122305e717e",
+      "git_mode": "100644",
+      "package_path": "adapter/gate_a_engineering_smoke_transport.py",
+      "role": "host_authorized_transport",
+      "sha256": "b997462a37568c9694f3847b6dac4ba98c0104449f922185cd93d631ae9ef581",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_engineering_smoke_transport.py"
+    },
+    {
+      "byte_size": 26448,
+      "git_blob_sha1": "016bb62d78b749c18785f7c3d3abfdaef012ab61",
+      "git_mode": "100644",
+      "package_path": "adapter/gate_a_hardware_adapter.py",
+      "role": "host_adapter",
+      "sha256": "b0efe338fb1f9473e7288ad2f6e3197a9cf91eb53835ca73c80c6d6fca8066d0",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_hardware_adapter.py"
+    },
+    {
+      "byte_size": 26966,
+      "git_blob_sha1": "ec2b1674e7c76b36eaf6a140ff47275ba8c170ba",
+      "git_mode": "100644",
+      "package_path": "adapter/gate_a_target_runner.py",
+      "role": "target_runner",
+      "sha256": "8b11a3b88c3b95a0989e771244b8fac5083f7c00c05adfd37471d66bc609c4a1",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_target_runner.py"
+    },
+    {
+      "byte_size": 12213,
+      "git_blob_sha1": "ffc3ae119901e33510f941240ca98e09139bec9c",
+      "git_mode": "100644",
+      "package_path": "adapter/gate_a_worker.c",
+      "role": "target_worker",
+      "sha256": "6f89a0766d20048fee459e33e9cd88f5dcb8b8a3e4e24529c20737ce716efde8",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_worker.c"
+    },
+    {
+      "byte_size": 8527,
+      "git_blob_sha1": "5156ab2561ec0aa795e168b55a5022b0583024d8",
+      "git_mode": "100644",
+      "package_path": "adapter/GATE_A_ADAPTER_QUALIFICATION_CONTRACT.json",
+      "role": "qualification_contract",
+      "sha256": "966a9647f21344657e6925254a68c1e694f2147d1a1d220f03825ca3afceffa5",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/GATE_A_ADAPTER_QUALIFICATION_CONTRACT.json"
+    },
+    {
+      "byte_size": 2909,
+      "git_blob_sha1": "f57e60130e9d750baf25b9bf26278379a680d681",
+      "git_mode": "100644",
+      "package_path": "adapter/schemas/gate_a_execution_authority.schema.json",
+      "role": "future_authority_schema",
+      "sha256": "e70b5349e2197366d83c67e5cbdb43c4929281625c4a63c0998740cce41b29d0",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/schemas/gate_a_execution_authority.schema.json"
+    },
+    {
+      "byte_size": 49171,
+      "git_blob_sha1": "dd3fa5b85365108164990dea7b23bcec4d21ea46",
+      "git_mode": "100644",
+      "package_path": "runtime/combined_pdn_hardware.c",
+      "role": "physical_runtime",
+      "sha256": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c"
+    },
+    {
+      "byte_size": 1851,
+      "git_blob_sha1": "3b6c466dbe5a2306903fad8dc3e12eb8d63a4413",
+      "git_mode": "100644",
+      "package_path": "runtime/combined_pdn_hardware.h",
+      "role": "physical_runtime_header",
+      "sha256": "a85e202fd65c520cad4853eea9168d2af9d92aa0b05b640bb8b180aed34141ae",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.h"
+    },
+    {
+      "byte_size": 61845,
+      "git_blob_sha1": "5fc105ccf288927f78dffc8eed7bc7ecc55ee97d",
+      "git_mode": "100644",
+      "package_path": "runtime/gate_a_engineering_smoke_runtime.c",
+      "role": "physical_runtime_gate_a",
+      "sha256": "77e4ce922b4261c60d25feb5f0fbb834b5170d3118d26d02430fef6c7b146fe9",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/gate_a_engineering_smoke_runtime.c"
+    },
+    {
+      "byte_size": 1960,
+      "git_blob_sha1": "eb4eace6b2f42603d245df5a2ed8b282187de39a",
+      "git_mode": "100644",
+      "package_path": "runtime/gate_a_engineering_smoke_runtime.h",
+      "role": "physical_runtime_gate_a_header",
+      "sha256": "a6118ac255b5d470282601fb1abd0abadefb80b39f01742d5601c16d7c9d13e5",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/gate_a_engineering_smoke_runtime.h"
+    },
+    {
+      "byte_size": 10242,
+      "git_blob_sha1": "234c878eae2067ac136502f21af721487d0bc1f8",
+      "git_mode": "100644",
+      "package_path": "runtime/captured_file.c",
+      "role": "captured_file_runtime",
+      "sha256": "16eb25af4116d0683ce2dee03aad2539ac7728ef58d07fbf4e83598c7d788a51",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/captured_file.c"
+    },
+    {
+      "byte_size": 931,
+      "git_blob_sha1": "e7c709fb2a12906369e558c669e272b652c6388d",
+      "git_mode": "100644",
+      "package_path": "runtime/captured_file.h",
+      "role": "captured_file_header",
+      "sha256": "81c94e8c29bffc915f9a3fa2db50605387f8f1544e2f561a674b8c82e4043469",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/captured_file.h"
+    },
+    {
+      "byte_size": 2338,
+      "git_blob_sha1": "4db0636eb3b5045462ca34ea913ada6f50fdda50",
+      "git_mode": "100644",
+      "package_path": "runtime/capture_quality_contract.h",
+      "role": "capture_quality_contract",
+      "sha256": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/capture_quality_contract.h"
+    },
+    {
+      "byte_size": 7795,
+      "git_blob_sha1": "a422c35b66ffeb904cc48a635698fcf76a6ced26",
+      "git_mode": "100644",
+      "package_path": "GATE_A_ENGINEERING_SMOKE_SCHEDULE.json",
+      "role": "schedule",
+      "sha256": "901cc7b9e52fe7a2d5edb537cfec009992742fcc0c1b5e978899d96fb5c2831a",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/GATE_A_ENGINEERING_SMOKE_SCHEDULE.json"
+    },
+    {
+      "byte_size": 519,
+      "git_blob_sha1": "5fcd0a2da3ab1003487e12a221e2b8f713837b00",
+      "git_mode": "100644",
+      "package_path": "GATE_A_TARGET_NAMESPACE_BINDING.json",
+      "role": "target_namespace",
+      "sha256": "e227acde3b77a8300be08df70f86b501a06641fd5077a741d2358f7fd3c17ed6",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/GATE_A_TARGET_NAMESPACE_BINDING.json"
+    }
+  ],
+  "gate_a_plan_review": 4617290767,
+  "hardware_ran": false,
+  "reviewed_gate_a_plan_head": "65d20b4bc65ddd9260a3c90d92612d2da48763a6",
+  "schedule_sha256": "418ff6e9801ba5def3f17fb25c7d56f044599e6e5bc8cc3260e0368d4877d116",
+  "schema_id": "CAT_CAS_PHASE6B6_GATE_A_EXECUTION_BUNDLE_MANIFEST_V1",
+  "target_identity_stdout_sha256": "10618a70ceb3413d7507c22254d595d63632bb7ad9243dbe3dc6ebbaf13e19a4",
+  "target_namespace_sha256": "5b3090f642d28492e182630e6349eccd8181704f08129d40d886c8f529dfd50e"
+}
