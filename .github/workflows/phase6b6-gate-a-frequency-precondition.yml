@@ -10,12 +10,14 @@ on:
     paths:
       - ".github/workflows/phase6b6-gate-a-frequency-precondition.yml"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/frequency_precondition/**"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_frequency_precondition_observation_dde70523_01/**"
   push:
     branches:
       - main
     paths:
       - ".github/workflows/phase6b6-gate-a-frequency-precondition.yml"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/frequency_precondition/**"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_frequency_precondition_observation_dde70523_01/**"
 
 jobs:
   read-only-qualification:
@@ -67,6 +69,14 @@ jobs:
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/frequency_precondition
         run: |
           python verify_gate_a_frequency_precondition_review.py
+
+      - name: Verify sealed target observation when present
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/frequency_precondition
+        run: |
+          evidence=../../../evidence/gate_a_frequency_precondition_observation_dde70523_01
+          if [ -d "$evidence" ]; then
+            python verify_gate_a_frequency_precondition_observation.py
+          fi
 
       - name: Diff hygiene
         run: git diff --check
