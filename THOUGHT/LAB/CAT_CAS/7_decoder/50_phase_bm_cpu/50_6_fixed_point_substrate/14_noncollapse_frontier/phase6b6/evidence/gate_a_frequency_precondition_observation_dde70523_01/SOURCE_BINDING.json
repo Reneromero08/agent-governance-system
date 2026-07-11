@@ -1,0 +1,17 @@
+{
+  "schema_id": "CAT_CAS_PHASE6B6_GATE_A_FREQUENCY_PRECONDITION_SOURCE_BINDING_V1",
+  "integrated_main_commit": "dde70523d639d34defa37f1b55982e789ea52c18",
+  "pr_42_source_head": "fa95603b12afd5a1cbb61254efe855bf1aaa23e8",
+  "source_review_comment_id": "4948537605",
+  "source_review_status": "GATE_A_FREQUENCY_PRECONDITION_REVIEW_EXACT",
+  "probe": {
+    "repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/frequency_precondition/gate_a_frequency_precondition_probe.py",
+    "git_blob": "296e4ee9624fb5a5685148423e337bff6c0c4cec",
+    "sha256": "03138d8c30078940001b018df4cea250dca6e7ec4b65122f72c74a5ef4a50762",
+    "byte_size": 11894
+  },
+  "target": "root@192.168.137.100",
+  "sample_count": 200,
+  "sample_interval_ms": 10,
+  "required_frequency_khz": 1600000
+}

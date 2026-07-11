@@ -7,6 +7,7 @@ on:
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/**"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_engineering_smoke_7e1e8835/**"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_engineering_smoke_1dabfc7b/**"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_frequency_precondition_observation_dde70523_01/**"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.h"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/gate_a_engineering_smoke_runtime.c"
@@ -54,7 +55,7 @@ jobs:
         run: |
           git diff --name-only origin/main...HEAD > changed-paths.txt
           forbidden=$(grep -E '/phase6b6/(contracts|runtime|analysis|qualification)/|/holo_runtime_v2/' changed-paths.txt | grep -v -E '^THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/gate_a_engineering_smoke_runtime\.(c|h)$' || true)
-          evidence_touched=$(grep -E '/phase6b6/evidence/' changed-paths.txt | grep -v -E '^THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/(gate_a_target_nonexecuting_qualification_6f243b1a_bundle_abc9e50a|gate_a_target_nonexecuting_qualification_replacement_gate_a_replacement_593e9920_02|gate_a_engineering_smoke_7e1e8835|gate_a_engineering_smoke_1dabfc7b)/' || true)
+          evidence_touched=$(grep -E '/phase6b6/evidence/' changed-paths.txt | grep -v -E '^THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/(gate_a_target_nonexecuting_qualification_6f243b1a_bundle_abc9e50a|gate_a_target_nonexecuting_qualification_replacement_gate_a_replacement_593e9920_02|gate_a_engineering_smoke_7e1e8835|gate_a_engineering_smoke_1dabfc7b|gate_a_frequency_precondition_observation_dde70523_01)/' || true)
           if [ -n "$forbidden" ] || [ -n "$evidence_touched" ]; then
             echo "reviewed scientific, runtime, qualification, or non-authorized evidence path changed" >&2
             printf '%s\n' "$forbidden" "$evidence_touched" >&2
