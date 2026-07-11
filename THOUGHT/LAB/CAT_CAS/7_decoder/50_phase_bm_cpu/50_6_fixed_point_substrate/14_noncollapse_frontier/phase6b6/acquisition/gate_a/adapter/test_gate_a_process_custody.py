@@ -59,6 +59,7 @@ class ProcessCustodyEquivalenceTests(unittest.TestCase):
             (b"", "PROCESS_STDOUT_EMPTY"),
             (b"\xff", "PROCESS_STDOUT_NOT_UTF8"),
             (b"malformed\n", "PROCESS_STDOUT_MALFORMED"),
+            (b"99 gate_a_worker gate_a_worker --execute-authorized\nmalformed\n", "PROCESS_STDOUT_MALFORMED"),
         )
         for stdout, expected_failure in cases:
             with self.subTest(stdout=stdout, expected_failure=expected_failure):

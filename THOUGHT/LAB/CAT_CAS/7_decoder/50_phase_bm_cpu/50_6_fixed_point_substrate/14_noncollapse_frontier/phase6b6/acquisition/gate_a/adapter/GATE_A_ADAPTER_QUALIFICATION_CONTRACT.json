@@ -64,6 +64,7 @@
     "python -m unittest discover -s adapter -p test_gate_a_engineering_smoke_executor.py -v",
     "python -m unittest discover -s adapter -p test_gate_a_temperature_custody.py -v",
     "python -m unittest discover -s adapter -p test_gate_a_k10temp_executor.py -v",
+    "python -m unittest discover -s adapter -p test_gate_a_process_custody.py -v",
     "python adapter/verify_gate_a_adapter_qualification.py"
   ],
   "expected_source_files": [
@@ -84,6 +85,7 @@
     "test_gate_a_engineering_smoke_executor.py",
     "test_gate_a_k10temp_executor.py",
     "test_gate_a_native_temperature.c",
+    "test_gate_a_process_custody.py",
     "test_gate_a_temperature_custody.py",
     "GATE_A_ADAPTER_QUALIFICATION_CONTRACT.json",
     "schemas/gate_a_execution_authority.schema.json",
@@ -133,6 +135,7 @@
     "post-runtime process receipt required on success and failure",
     "post-cleanup process receipt required",
     "process command, return code, raw streams and hashes bound",
+    "local and rendered-remote process failure-code equivalence for empty, non-UTF8, and malformed stdout",
     "complete retained host evidence packet",
     "final evidence inventory closure",
     "host command ledger closure",

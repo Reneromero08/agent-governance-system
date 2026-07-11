@@ -1,10 +1,10 @@
 {
   "authority_artifact_created": false,
   "base_main_commit": "03985a74d27e654c151cccad28c6221d91f70180",
-  "deterministic_archive_sha256": "f25cd2f4e4ddd2bfa5d989cc45c914506100e11b6427006545b9329c2f4a4eb8",
+  "deterministic_archive_sha256": "9d5b7fb7735d90bfbd699e956297bf00df662395f0f644c9500283defe648d52",
   "engineering_smoke_authorized": false,
   "engineering_smoke_executor_implemented": true,
-  "execution_bundle_sha256": "e66fa9099945c9a53ca6e045fa3f5d5c2c877de66575cf7db61a268f297f0f74",
+  "execution_bundle_sha256": "353f7e2d865508ebc018cb72648d3d3f227dc1c1128681fd9b4e99d81c9aa47f",
   "execution_bundle_target_qualified": true,
   "files": [
     {
@@ -53,12 +53,12 @@
       "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_temperature_custody.py"
     },
     {
-      "byte_size": 10362,
-      "git_blob_sha1": "422ece78db7f4732dc0a925fe6aaa51c3cd93f98",
+      "byte_size": 10448,
+      "git_blob_sha1": "c15831fa91c75cc6f388504398220181ecda1d28",
       "git_mode": "100644",
       "package_path": "adapter/gate_a_process_custody.py",
       "role": "process_custody",
-      "sha256": "c53547b294902794d6f5840b75f7c7911367e0b825d660d9c181334ced00a8bc",
+      "sha256": "ed47d12ff1a6d624d095a5109c587d77809dd4a2df917c6cc0e4d3ad48ec907b",
       "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_process_custody.py"
     },
     {
@@ -98,12 +98,12 @@
       "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_worker.c"
     },
     {
-      "byte_size": 8298,
-      "git_blob_sha1": "9a92472cf4e71f2440899ba1a73792d8f05aa599",
+      "byte_size": 8527,
+      "git_blob_sha1": "5156ab2561ec0aa795e168b55a5022b0583024d8",
       "git_mode": "100644",
       "package_path": "adapter/GATE_A_ADAPTER_QUALIFICATION_CONTRACT.json",
       "role": "qualification_contract",
-      "sha256": "5e7e864b2df8c0aca91b2eec1d011eb7b63275076450034004c57960b284c063",
+      "sha256": "966a9647f21344657e6925254a68c1e694f2147d1a1d220f03825ca3afceffa5",
       "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/GATE_A_ADAPTER_QUALIFICATION_CONTRACT.json"
     },
     {

@@ -30,7 +30,22 @@ jobs:
 
       - name: Prove checkout credentials are absent
         shell: bash
-        run: test -z "$(git config --local --get-all http.https://github.com/.extraheader || true)"
+        run: |
+          set +e
+          git config --local --get-all http.https://github.com/.extraheader >/dev/null
+          checkout_header_rc=$?
+          set -e
+          case "$checkout_header_rc" in
+            1) ;;
+            0)
+              echo "checkout authorization header remains configured" >&2
+              exit 1
+              ;;
+            *)
+              echo "checkout authorization-header inspection failed with rc=$checkout_header_rc" >&2
+              exit "$checkout_header_rc"
+              ;;
+          esac
 
       - name: Set up Python
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065

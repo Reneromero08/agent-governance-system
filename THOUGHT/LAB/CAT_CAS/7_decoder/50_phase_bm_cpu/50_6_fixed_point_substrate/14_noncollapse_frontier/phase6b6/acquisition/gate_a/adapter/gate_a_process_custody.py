@@ -91,7 +91,7 @@ def _parse_hits(stdout: bytes) -> tuple[list[dict[str, Any]], str | None]:
             continue
         match = re.match(r"^\s*(\d+)\s+(\S+)\s*(.*)$", raw_line)
         if match is None:
-            return [], "PROCESS_STDOUT_MALFORMED"
+            return hits, "PROCESS_STDOUT_MALFORMED"
         parsed += 1
         pid, comm, args = match.groups()
         haystack = f"{comm} {args}"
