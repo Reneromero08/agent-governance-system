@@ -1,0 +1,4 @@
+{"event":"pre_runtime_process_scan","forbidden_process_hits":[],"return_code":0,"scan_complete":true,"stderr_sha256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855","stdout_sha256":"282b165b5b97df3d7112a55767695bc4483d14be049f7e2a3f475ded58c2223d"}
+{"event":"temperature_preflight","failure":null,"observation_complete":true,"temperature_c":38.5,"temperature_receipt_sha256":"98dfca5c0bb5eb881fd1852a1ecbc09514bfd34edbb6cc77d4f85599522fb9eb","veto_passed":true}
+{"event":"frequency_preflight","frequency_khz":{"4":800000,"5":800000}}
+{"event":"runtime_failed","reason":"frequency veto"}

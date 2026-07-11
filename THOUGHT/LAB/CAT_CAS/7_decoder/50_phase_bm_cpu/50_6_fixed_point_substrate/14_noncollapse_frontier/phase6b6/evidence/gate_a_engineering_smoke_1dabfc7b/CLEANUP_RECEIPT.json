@@ -1,0 +1,23 @@
+{
+  "parsed": {
+    "archive_absent": true,
+    "authority_absent": true,
+    "claim_retained": true,
+    "claim_sha256": "e6f9302b844d25caf0673517ad9a628d16a4589b0c0a2892c162727b568e0b47",
+    "cleanup_mode": "verified_copyback",
+    "cleanup_return_code": 0,
+    "cleanup_runner_stderr": "",
+    "cleanup_runner_stdout": "{\n  \"claim_retained\": true,\n  \"claim_sha256\": \"e6f9302b844d25caf0673517ad9a628d16a4589b0c0a2892c162727b568e0b47\",\n  \"execution_started_sha256\": \"d13a9471f910052c9fda5f0c4f68d58e4c99124d80a5c3d3e3128df9f77ed5b3\",\n  \"remote_output_root\": \"/root/catcas_phase6b6_gate_a_smoke_9c416379/evidence\",\n  \"status\": \"GATE_A_CLEANUP_COMPLETE_AFTER_VERIFIED_COPY_BACK\"\n}\n",
+    "execution_root_absent": true,
+    "execution_started_sha256": "d13a9471f910052c9fda5f0c4f68d58e4c99124d80a5c3d3e3128df9f77ed5b3",
+    "output_root_absent": true,
+    "receipt_absent": true,
+    "stage_absent": true,
+    "target_inventory_absent": true
+  },
+  "raw_response": "{\"archive_absent\": true, \"authority_absent\": true, \"claim_retained\": true, \"claim_sha256\": \"e6f9302b844d25caf0673517ad9a628d16a4589b0c0a2892c162727b568e0b47\", \"cleanup_mode\": \"verified_copyback\", \"cleanup_return_code\": 0, \"cleanup_runner_stderr\": \"\", \"cleanup_runner_stdout\": \"{\\n  \\\"claim_retained\\\": true,\\n  \\\"claim_sha256\\\": \\\"e6f9302b844d25caf0673517ad9a628d16a4589b0c0a2892c162727b568e0b47\\\",\\n  \\\"execution_started_sha256\\\": \\\"d13a9471f910052c9fda5f0c4f68d58e4c99124d80a5c3d3e3128df9f77ed5b3\\\",\\n  \\\"remote_output_root\\\": \\\"/root/catcas_phase6b6_gate_a_smoke_9c416379/evidence\\\",\\n  \\\"status\\\": \\\"GATE_A_CLEANUP_COMPLETE_AFTER_VERIFIED_COPY_BACK\\\"\\n}\\n\", \"execution_root_absent\": true, \"execution_started_sha256\": \"d13a9471f910052c9fda5f0c4f68d58e4c99124d80a5c3d3e3128df9f77ed5b3\", \"output_root_absent\": true, \"receipt_absent\": true, \"stage_absent\": true, \"target_inventory_absent\": true}\n",
+  "raw_response_sha256": "2b99944ffd1ac01023b98693c6d1a577e605107202b7f680ea923ff1cecbbfd3",
+  "raw_stderr": "",
+  "raw_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "schema_id": "CAT_CAS_PHASE6B6_GATE_A_CLEANUP_RECEIPT_V1"
+}

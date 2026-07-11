@@ -6,6 +6,7 @@ on:
       - ".github/workflows/phase6b6-gate-a-smoke-authority.yml"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/**"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_engineering_smoke_7e1e8835/**"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_engineering_smoke_1dabfc7b/**"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.h"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/gate_a_engineering_smoke_runtime.c"
@@ -32,20 +33,28 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Validate Gate A package
+      - name: Validate Gate A package and authority state
         run: |
           python -m compileall -q THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/verify_gate_a_smoke_candidate.py
           python -m compileall -q THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/verify_gate_a_exact_bindings.py
           python -m compileall -q THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/verify_gate_a_plan_bindings.py
+          python -m compileall -q THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/verify_gate_a_active_authority.py
+          python -m compileall -q THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/verify_gate_a_second_attempt_closure.py
           python THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/verify_gate_a_smoke_candidate.py --self-test
           python THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/verify_gate_a_exact_bindings.py
           python THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/verify_gate_a_plan_bindings.py
+          adapter=THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
+          if [ -f "$adapter/GATE_A_EXECUTION_AUTHORITY.json" ]; then
+            python "$adapter/verify_gate_a_active_authority.py"
+          elif [ -f "$adapter/GATE_A_EXECUTION_AUTHORITY_CONSUMED_1dabfc7b.json" ]; then
+            python "$adapter/verify_gate_a_second_attempt_closure.py"
+          fi
 
       - name: Prove reviewed source remains untouched
         run: |
           git diff --name-only origin/main...HEAD > changed-paths.txt
           forbidden=$(grep -E '/phase6b6/(contracts|runtime|analysis|qualification)/|/holo_runtime_v2/' changed-paths.txt | grep -v -E '^THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/gate_a_engineering_smoke_runtime\.(c|h)$' || true)
-          evidence_touched=$(grep -E '/phase6b6/evidence/' changed-paths.txt | grep -v -E '^THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/(gate_a_target_nonexecuting_qualification_6f243b1a_bundle_abc9e50a|gate_a_target_nonexecuting_qualification_replacement_gate_a_replacement_593e9920_02|gate_a_engineering_smoke_7e1e8835)/' || true)
+          evidence_touched=$(grep -E '/phase6b6/evidence/' changed-paths.txt | grep -v -E '^THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/(gate_a_target_nonexecuting_qualification_6f243b1a_bundle_abc9e50a|gate_a_target_nonexecuting_qualification_replacement_gate_a_replacement_593e9920_02|gate_a_engineering_smoke_7e1e8835|gate_a_engineering_smoke_1dabfc7b)/' || true)
           if [ -n "$forbidden" ] || [ -n "$evidence_touched" ]; then
             echo "reviewed scientific, runtime, qualification, or non-authorized evidence path changed" >&2
             printf '%s\n' "$forbidden" "$evidence_touched" >&2

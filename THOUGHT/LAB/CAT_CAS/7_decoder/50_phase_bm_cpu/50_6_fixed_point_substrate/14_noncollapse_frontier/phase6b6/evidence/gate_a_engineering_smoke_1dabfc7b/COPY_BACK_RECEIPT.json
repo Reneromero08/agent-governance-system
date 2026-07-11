@@ -1,0 +1,12 @@
+{
+  "archive_sha256": "88e8060f82581005f0161f8870161246ab1d0416bf5e5ea47a8afeb8b6de1e17",
+  "authority_sha256": "1dabfc7bbfc65e988542b0c4580f031309c5abfc53521dd849e5c0ac71e24fd4",
+  "copy_back_complete": true,
+  "downloaded_evidence_inventory_sha256": "2ae98334dfb8f282e1b5431dd0b87d9e3a76a747c2c6ca04e00aae00b19d79a9",
+  "evidence_inventory_sha256": "2ae98334dfb8f282e1b5431dd0b87d9e3a76a747c2c6ca04e00aae00b19d79a9",
+  "execution_bundle_sha256": "353f7e2d865508ebc018cb72648d3d3f227dc1c1128681fd9b4e99d81c9aa47f",
+  "remote_output_root": "/root/catcas_phase6b6_gate_a_smoke_9c416379/evidence",
+  "retained_evidence_custody_verified": true,
+  "schema_id": "CAT_CAS_PHASE6B6_GATE_A_COPY_BACK_RECEIPT_V1",
+  "target_evidence_inventory_sha256": "2ae98334dfb8f282e1b5431dd0b87d9e3a76a747c2c6ca04e00aae00b19d79a9"
+}

@@ -1,0 +1,33 @@
+{
+  "enumerated_entries": [
+    {
+      "driver_name": "k10temp",
+      "driver_name_sha256": "66b92cb9d067cfc6633c86451f12f7752830b0327bf6ea3393a8208bac9575f8",
+      "entry": "/sys/class/hwmon/hwmon0",
+      "name_path": "/sys/class/hwmon/hwmon0/name"
+    },
+    {
+      "driver_name": "nouveau",
+      "driver_name_sha256": "a902f8d3e2c951c2d22ae91d61320026aea106a1ff09ed7c3fe981c1a41894d8",
+      "entry": "/sys/class/hwmon/hwmon1",
+      "name_path": "/sys/class/hwmon/hwmon1/name"
+    }
+  ],
+  "failure": null,
+  "hwmon_root": "/sys/class/hwmon",
+  "millidegrees_per_c": 1000,
+  "normalized_temperature_c": 38.5,
+  "observation_complete": true,
+  "phase": "pre_runtime",
+  "raw_millidegrees_c": 38500,
+  "raw_temperature_sha256": "a5aacb5198688cc4e8182cfbdc7ce9680a2b81645629233977709063978f9b08",
+  "raw_temperature_text": "38500\n",
+  "required_driver_name": "k10temp",
+  "required_temperature_input": "temp1_input",
+  "schema_id": "CAT_CAS_PHASE6B6_GATE_A_TEMPERATURE_RECEIPT_V1",
+  "selected_driver_name": "k10temp",
+  "selected_hwmon_entry": "/sys/class/hwmon/hwmon0",
+  "selected_temperature_path": "/sys/class/hwmon/hwmon0/temp1_input",
+  "veto_passed": true,
+  "veto_temperature_c": 68.0
+}

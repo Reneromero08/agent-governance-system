@@ -11,6 +11,7 @@ on:
       - ".github/workflows/phase6b6-gate-a-adapter-qualification.yml"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/**"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_engineering_smoke_7e1e8835/**"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_engineering_smoke_1dabfc7b/**"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/**"
   push:
     branches:
@@ -71,11 +72,17 @@ jobs:
           python -m unittest discover -s . -p 'test_gate_a_k10temp_executor.py' -v
           python -m unittest discover -s . -p 'test_gate_a_process_custody.py' -v
 
-      - name: Validate current repair contract and deterministic bundle
+      - name: Validate current package and authority state
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
         run: |
           python build_gate_a_execution_bundle.py --compare-twice
-          python verify_gate_a_k10temp_repair.py
+          if [ -f GATE_A_EXECUTION_AUTHORITY.json ]; then
+            python verify_gate_a_active_authority.py
+          elif [ -f GATE_A_EXECUTION_AUTHORITY_CONSUMED_1dabfc7b.json ]; then
+            python verify_gate_a_second_attempt_closure.py
+          else
+            python verify_gate_a_k10temp_repair.py
+          fi
 
       - name: Compile C strictly and run non-driving validation
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
@@ -148,27 +155,6 @@ jobs:
         run: |
           diff -r "$RUNNER_TEMP/gate_a_extract" "$RUNNER_TEMP/gate_a_extract_ref"
           test ! -e "$RUNNER_TEMP/gate_a_extract/adapter/__pycache__"
-
-      - name: Prove consumed authority archived and active slot absent
-        shell: bash
-        run: |
-          adapter=THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
-          active="$adapter/GATE_A_EXECUTION_AUTHORITY.json"
-          consumed="$adapter/GATE_A_EXECUTION_AUTHORITY_CONSUMED_7e1e8835.json"
-          authority_schema="$adapter/schemas/gate_a_execution_authority.schema.json"
-          expected_sha256=7e1e8835bd67590e4e554ae112a2c8a6ca99dd8b9b3a9aafdb23fee31907d682
-          expected_blob=709c799f60e30984d3c80715af480fbe5deac952
-          test ! -e "$active"
-          test -f "$consumed"
-          test ! -L "$consumed"
-          test "$(sha256sum "$consumed" | awk '{print $1}')" = "$expected_sha256"
-          test "$(git hash-object "$consumed")" = "$expected_blob"
-          test "$(git rev-parse "HEAD:$consumed")" = "$expected_blob"
-          filesystem_output=$(find . -path './.git' -prune -o -iname 'gate_a_execution_authority*.json' ! -path "./$authority_schema" -print | sed 's#^./##' | sort)
-          tracked_output=$(git ls-files | awk -v schema="$authority_schema" 'tolower($0) ~ /(^|\/)gate_a_execution_authority[^\/]*\.json$/ && $0 != schema { print }' | sort)
-          test "$filesystem_output" = "$consumed"
-          test "$tracked_output" = "$consumed"
-          test -z "$(git status --porcelain=v1 --untracked-files=all -- ':(icase,glob)**/gate_a_execution_authority*.json' ":(exclude)$authority_schema")"
 
       - name: git diff check
         run: git diff --check
