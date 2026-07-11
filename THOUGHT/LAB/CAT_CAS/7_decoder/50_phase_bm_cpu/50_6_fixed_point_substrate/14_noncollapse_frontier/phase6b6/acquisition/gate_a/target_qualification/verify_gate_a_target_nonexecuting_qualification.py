@@ -4,8 +4,9 @@
 This verifier is local-only.  It never opens SSH/SCP or contacts the target.  A
 green result means the historical packet is byte-for-byte unchanged, the one
 historical attempt is still represented accurately, the process-evidence gaps
-are detected, the old completion interpretation is superseded, and every
-current or downstream authority field remains false.
+are detected, the old completion interpretation is superseded, historical and
+downstream authority fields remain false, and any current Gate A execution
+authority is the one exact production-validated committed artifact.
 """
 
 from __future__ import annotations
@@ -147,6 +148,10 @@ DOWNSTREAM_FALSE_FIELDS = (
     "target_coupling_authorized",
     "small_wall_authorized",
 )
+
+if str(ADAPTER) not in sys.path:
+    sys.path.insert(0, str(ADAPTER))
+import verify_gate_a_adapter_qualification as adapter_qualification
 
 
 class VerifyError(RuntimeError):
@@ -657,6 +662,53 @@ def require_no_execution_authority(search_root: Path, *, check_tracked: bool) ->
         )
         require(proc.returncode == 0, f"git ls-files authority check failed: {proc.stderr}")
         require(proc.stdout.strip() == "", f"execution authority artifact tracked: {proc.stdout.strip()}")
+
+
+def validate_gate_a_execution_authority_state() -> dict[str, Any]:
+    """Recognize absence or the one exact current Gate A execution authority."""
+
+    try:
+        manifest = adapter_qualification.load(adapter_qualification.MANIFEST)
+        state = adapter_qualification.validate_execution_authority_state(manifest)
+    except (
+        RuntimeError,
+        subprocess.CalledProcessError,
+        json.JSONDecodeError,
+        OSError,
+        ValueError,
+    ) as exc:
+        raise VerifyError(f"Gate A execution authority state invalid: {exc}") from exc
+    if state["authority_artifact_present"]:
+        require(
+            state["authority_artifact_path"]
+            == adapter_qualification.git_rel(adapter_qualification.AUTHORITY),
+            "Gate A execution authority canonical path mismatch",
+        )
+        require(
+            state["authority_sha256"] == adapter_qualification.EXECUTION_AUTHORITY_SHA256,
+            "Gate A execution authority SHA-256 mismatch",
+        )
+        require(
+            state["authority_git_blob_sha1"] == adapter_qualification.EXECUTION_AUTHORITY_BLOB_SHA1,
+            "Gate A execution authority blob mismatch",
+        )
+        require(
+            state["reviewed_source_commit"] == adapter_qualification.REVIEWED_EXECUTION_SOURCE_COMMIT,
+            "Gate A reviewed source mismatch",
+        )
+        require(
+            state["reviewed_source_tree"] == adapter_qualification.REVIEWED_EXECUTION_SOURCE_TREE,
+            "Gate A reviewed source tree mismatch",
+        )
+        require(
+            state["independent_review_id"] == adapter_qualification.REVIEWED_EXECUTION_SOURCE_REVIEW_ID,
+            "Gate A independent review mismatch",
+        )
+        require(state["maximum_execution_count"] == 1, "Gate A maximum execution count mismatch")
+        require(state["consumed"] is False, "Gate A execution authority must be unconsumed")
+        require(state["automatic_retry"] is False, "Gate A automatic retry must remain false")
+        require(state["downstream_authority_false"] is True, "Gate A downstream authority changed")
+    return state
 
 
 def validate_superseded_replacement_authority(authority: dict[str, Any]) -> dict[str, Any]:
@@ -1923,7 +1975,7 @@ def main() -> int:
         superseded_authority_custody,
     )
     require_no_unaccented_owner()
-    require_no_execution_authority(PHASE6B6, check_tracked=True)
+    gate_a_execution_authority = validate_gate_a_execution_authority_state()
 
     scanner_test = future_scanner_nonzero_test()
     scanner_receipt_test = future_process_scan_receipt_contract_test()
@@ -1962,8 +2014,8 @@ def main() -> int:
         "execution_bundle_target_qualified": True,
         "original_authority_consumed": True,
         "replacement_qualification_authorized": False,
-        "project_owner_execution_approval_recorded": False,
-        "authorization_artifact_created": False,
+        "project_owner_execution_approval_recorded": gate_a_execution_authority["authority_artifact_present"],
+        "authorization_artifact_created": gate_a_execution_authority["authority_artifact_present"],
         "active_replacement_authority_present": True,
         "new_replacement_authority_artifact_created": True,
         "superseded_replacement_authority_preserved": True,
@@ -1973,9 +2025,10 @@ def main() -> int:
         "replacement_authority_custody": replacement_authority_custody,
         "replacement_evidence_adjudication": replacement_evidence,
         "superseded_replacement_authority_custody": superseded_authority_custody,
-        "engineering_smoke_authorized": False,
+        "engineering_smoke_authorized": gate_a_execution_authority["authority_artifact_present"],
         "hardware_ran": False,
         "automatic_retry": False,
+        "gate_a_execution_authority": gate_a_execution_authority,
         "future_scanner_nonzero_test": scanner_test,
         "future_process_scan_receipt_contract_test": scanner_receipt_test,
         "remote_namespace_preflight_contract_test": namespace_preflight_test,

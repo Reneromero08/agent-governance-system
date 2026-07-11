@@ -27,11 +27,19 @@ CANDIDATE_V2 = HERE / "GATE_A_ENGINEERING_SMOKE_AUTHORITY_CANDIDATE_V2.json"
 MANIFEST = HERE / "GATE_A_EXECUTION_BUNDLE_MANIFEST.json"
 AUTHORITY_SCHEMA = HERE / "schemas" / "gate_a_execution_authority.schema.json"
 AUTHORITY_NAME = "GATE_A_EXECUTION_AUTHORITY.json"
+AUTHORITY = HERE / AUTHORITY_NAME
 CONTRACT = HERE / "GATE_A_ADAPTER_QUALIFICATION_CONTRACT.json"
 HISTORICAL_ADAPTER_COMMIT = "6f243b1aaf7cfaa09f21b8d5816ddd9097612f72"
 HISTORICAL_MANIFEST_SHA256 = "ccb7866db67170083cb00d546c334b61772c8ef909131ec9c62ed21115facc94"
 HISTORICAL_RESULT_SHA256 = "1d9d2c62cbf81f72eeb9c40f02841f9f507d52eae8229da73fc2f81eb0a15223"
 HISTORICAL_CANDIDATE_V2_SHA256 = "d8f190bc7f8c9904659cd697ed091b192843efe18f5f1d74d713282e889b060e"
+REVIEWED_EXECUTION_SOURCE_COMMIT = "4d281112d9da56cd3c99e6860121d1ab1b9d3e47"
+REVIEWED_EXECUTION_SOURCE_TREE = "7a41d145eed40c79f068f01223f6f1e1b076c6bc"
+REVIEWED_EXECUTION_SOURCE_REVIEW_ID = 4676060226
+REVIEWED_MANIFEST_BLOB_SHA1 = "9fa8a9e573b482c75df18a3da99669467dbbdd13"
+REVIEWED_MANIFEST_SHA256 = "117cf39db81b1e1a84948eb6ceaf40912be1f3e2e0b2f6e1c489e5f21944fb71"
+EXECUTION_AUTHORITY_SHA256 = "7e1e8835bd67590e4e554ae112a2c8a6ca99dd8b9b3a9aafdb23fee31907d682"
+EXECUTION_AUTHORITY_BLOB_SHA1 = "709c799f60e30984d3c80715af480fbe5deac952"
 
 
 class VerifyError(RuntimeError):
@@ -88,6 +96,203 @@ def git_blob(path: Path) -> str:
 
 def git_rel(path: Path) -> str:
     return path.resolve().relative_to(bundle.repo_root().resolve()).as_posix()
+
+
+def validate_execution_authority_inventory(
+    filesystem_hits: list[str],
+    tracked_hits: list[str],
+    canonical_rel: str,
+) -> bool:
+    if not filesystem_hits and not tracked_hits:
+        return False
+    require(filesystem_hits == [canonical_rel], f"alternate or worktree-only execution authority present: {filesystem_hits}")
+    require(tracked_hits == [canonical_rel], f"execution authority tracked-path set mismatch: {tracked_hits}")
+    return True
+
+
+def validate_execution_authority_state(manifest: dict[str, Any]) -> dict[str, Any]:
+    """Accept absence or validate the one exact canonical committed authority."""
+
+    root = bundle.repo_root().resolve()
+    authority_search_root = GATE_A.parents[1].resolve()
+    canonical_rel = git_rel(AUTHORITY)
+    schema_rel = git_rel(AUTHORITY_SCHEMA)
+    filesystem_hits: list[str] = []
+
+    def fail_walk(error: OSError) -> None:
+        raise VerifyError(f"cannot inspect execution-authority namespace: {error}")
+
+    for directory, _child_directories, filenames in os.walk(
+        authority_search_root,
+        topdown=True,
+        onerror=fail_walk,
+        followlinks=False,
+    ):
+        for filename in filenames:
+            folded = filename.casefold()
+            if not folded.startswith("gate_a_execution_authority") or not folded.endswith(".json"):
+                continue
+            relative = (Path(directory) / filename).relative_to(root).as_posix()
+            if relative != schema_rel:
+                filesystem_hits.append(relative)
+    filesystem_hits.sort()
+    tracked_result = run(
+        ["git", "ls-files"],
+        cwd=root,
+        check=False,
+    )
+    require(tracked_result.returncode == 0, f"cannot enumerate tracked execution authorities: {tracked_result.stderr}")
+    tracked_hits = sorted(
+        line
+        for line in tracked_result.stdout.splitlines()
+        if line != schema_rel
+        and Path(line).name.casefold().startswith("gate_a_execution_authority")
+        and Path(line).name.casefold().endswith(".json")
+    )
+
+    status = run(
+        [
+            "git",
+            "status",
+            "--porcelain=v1",
+            "--untracked-files=all",
+            "--",
+            ":(icase,glob)**/gate_a_execution_authority*.json",
+            f":(exclude){schema_rel}",
+        ],
+        cwd=root,
+        check=False,
+    )
+    require(status.returncode == 0 and status.stdout == "", "execution authority differs from current HEAD")
+
+    head = run(["git", "rev-parse", "HEAD"], cwd=root).stdout.strip()
+    reviewed_source_available = run(
+        ["git", "cat-file", "-e", f"{REVIEWED_EXECUTION_SOURCE_COMMIT}^{{commit}}"],
+        cwd=root,
+        check=False,
+    ).returncode == 0
+    reviewed_source_lane = False
+    if reviewed_source_available:
+        ancestor = run(
+            ["git", "merge-base", "--is-ancestor", REVIEWED_EXECUTION_SOURCE_COMMIT, head],
+            cwd=root,
+            check=False,
+        )
+        require(ancestor.returncode in (0, 1), "cannot determine reviewed-source ancestry")
+        reviewed_source_lane = ancestor.returncode == 0
+
+    protected_paths = tuple(sorted({
+        *(bundle.rel(source) for _package, source, _role in bundle.PACKAGE_FILES),
+        bundle.rel(bundle.MANIFEST_PATH),
+    }))
+    if reviewed_source_lane:
+        reviewed_tree = run(
+            ["git", "rev-parse", f"{REVIEWED_EXECUTION_SOURCE_COMMIT}^{{tree}}"],
+            cwd=root,
+        ).stdout.strip()
+        require(reviewed_tree == REVIEWED_EXECUTION_SOURCE_TREE, "reviewed source tree mismatch")
+        manifest_rel = git_rel(MANIFEST)
+        reviewed_manifest_blob = run(
+            ["git", "rev-parse", f"{REVIEWED_EXECUTION_SOURCE_COMMIT}:{manifest_rel}"],
+            cwd=root,
+        ).stdout.strip()
+        head_manifest_blob = run(
+            ["git", "rev-parse", f"HEAD:{manifest_rel}"],
+            cwd=root,
+        ).stdout.strip()
+        require(reviewed_manifest_blob == REVIEWED_MANIFEST_BLOB_SHA1, "reviewed execution manifest blob mismatch")
+        require(head_manifest_blob == REVIEWED_MANIFEST_BLOB_SHA1, "current execution manifest differs from reviewed source")
+        require(
+            committed_sha256(MANIFEST, REVIEWED_EXECUTION_SOURCE_COMMIT) == REVIEWED_MANIFEST_SHA256,
+            "reviewed execution manifest SHA-256 mismatch",
+        )
+        require(committed_sha256(MANIFEST, "HEAD") == REVIEWED_MANIFEST_SHA256, "current execution manifest bytes drifted")
+        protected_drift = run(
+            ["git", "diff", "--quiet", REVIEWED_EXECUTION_SOURCE_COMMIT, head, "--", *protected_paths],
+            cwd=root,
+            check=False,
+        )
+        require(protected_drift.returncode == 0, "protected execution source drifted after review")
+        protected_status = run(
+            ["git", "status", "--porcelain=v1", "--untracked-files=all", "--", *protected_paths],
+            cwd=root,
+            check=False,
+        )
+        require(
+            protected_status.returncode == 0 and protected_status.stdout == "",
+            "protected execution source differs from current HEAD",
+        )
+
+    authority_present = validate_execution_authority_inventory(filesystem_hits, tracked_hits, canonical_rel)
+    if not authority_present:
+        require(
+            not reviewed_source_lane or head == REVIEWED_EXECUTION_SOURCE_COMMIT,
+            "reviewed-source descendant is missing its committed execution authority",
+        )
+        return {
+            "status": "GATE_A_EXECUTION_AUTHORITY_ABSENT",
+            "authority_artifact_present": False,
+        }
+
+    require(reviewed_source_lane, "execution authority is not descended from the reviewed source")
+    require(AUTHORITY.is_file() and not AUTHORITY.is_symlink(), "canonical execution authority must be a real regular file")
+
+    authority_bytes = AUTHORITY.read_bytes()
+    authority = load(AUTHORITY)
+    require(sha256_file(AUTHORITY) == EXECUTION_AUTHORITY_SHA256, "execution authority SHA-256 mismatch")
+    require(git_blob(AUTHORITY) == EXECUTION_AUTHORITY_BLOB_SHA1, "execution authority worktree blob mismatch")
+    head_authority_blob = run(
+        ["git", "rev-parse", f"HEAD:{canonical_rel}"],
+        cwd=root,
+    ).stdout.strip()
+    require(head_authority_blob == EXECUTION_AUTHORITY_BLOB_SHA1, "execution authority committed blob mismatch")
+
+    exact_manifest = bundle.validate_committed_manifest_exact(manifest, "HEAD")
+    validation = adapter.gate_a_authority.validate_execution_authority(
+        authority,
+        authority_sha256=EXECUTION_AUTHORITY_SHA256,
+        authority_bytes=authority_bytes,
+        expected_reviewed_adapter_head=REVIEWED_EXECUTION_SOURCE_COMMIT,
+        expected_independent_review_id=REVIEWED_EXECUTION_SOURCE_REVIEW_ID,
+        exact_manifest=exact_manifest,
+    )
+    custody = adapter.validate_authority_git_custody(AUTHORITY, authority)
+    require(validation["status"] == "GATE_A_EXECUTION_AUTHORITY_EXACT", "production authority validation failed")
+    require(validation["reviewed_adapter_head"] == REVIEWED_EXECUTION_SOURCE_COMMIT, "authority reviewed source mismatch")
+    require(validation["independent_review_id"] == REVIEWED_EXECUTION_SOURCE_REVIEW_ID, "authority review binding mismatch")
+    require(custody["reviewed_source_tree"] == REVIEWED_EXECUTION_SOURCE_TREE, "reviewed source tree mismatch")
+    require(custody["authority_git_blob_sha1"] == EXECUTION_AUTHORITY_BLOB_SHA1, "authority custody blob mismatch")
+    require(custody["protected_path_count"] == len(protected_paths), "protected source count mismatch")
+    require(authority["project_owner_approved"] is True, "project-owner execution approval missing")
+    require(authority["maximum_execution_count"] == 1, "execution authority count must be one")
+    require(authority["consumed"] is False, "execution authority must be unconsumed")
+    require(authority["authority_state"]["automatic_retry"] is False, "automatic retry must remain false")
+    for field in (
+        "calibration_authorized",
+        "scientific_acquisition_authorized",
+        "restoration_authorized",
+        "target_coupling_authorized",
+        "small_wall_authorized",
+    ):
+        require(authority["authority_state"][field] is False, f"downstream authority must remain false: {field}")
+    return {
+        "status": "GATE_A_EXECUTION_AUTHORITY_COMMITTED_EXACT",
+        "authority_artifact_present": True,
+        "authority_artifact_path": canonical_rel,
+        "authority_sha256": EXECUTION_AUTHORITY_SHA256,
+        "authority_git_blob_sha1": EXECUTION_AUTHORITY_BLOB_SHA1,
+        "reviewed_source_commit": REVIEWED_EXECUTION_SOURCE_COMMIT,
+        "reviewed_source_tree": REVIEWED_EXECUTION_SOURCE_TREE,
+        "independent_review_id": REVIEWED_EXECUTION_SOURCE_REVIEW_ID,
+        "authority_bearing_head": custody["authority_bearing_head"],
+        "authority_bearing_tree": custody["authority_bearing_tree"],
+        "protected_path_count": custody["protected_path_count"],
+        "execution_bundle_sha256": validation["execution_bundle_sha256"],
+        "maximum_execution_count": authority["maximum_execution_count"],
+        "consumed": authority["consumed"],
+        "automatic_retry": authority["authority_state"]["automatic_retry"],
+        "downstream_authority_false": True,
+    }
 
 
 def validate_schema_closed(schema: dict[str, Any]) -> None:
@@ -463,6 +668,40 @@ def authority_mutation_tests(manifest: dict[str, Any]) -> dict[str, Any]:
 
 def other_mutation_tests(ctx: adapter.AdapterContext, manifest: dict[str, Any]) -> dict[str, Any]:
     cases: list[str] = []
+    canonical_authority = git_rel(AUTHORITY)
+    alternate_authority = f"alternate/{AUTHORITY_NAME}"
+    uppercase_extension_authority = "alternate/GATE_A_EXECUTION_AUTHORITY.JSON"
+    require(
+        validate_execution_authority_inventory([], [], canonical_authority) is False,
+        "absent execution-authority inventory was not accepted",
+    )
+    require(
+        validate_execution_authority_inventory(
+            [canonical_authority],
+            [canonical_authority],
+            canonical_authority,
+        ) is True,
+        "canonical execution-authority inventory was not accepted",
+    )
+    for name, filesystem_hits, tracked_hits in (
+        ("untracked_execution_authority_rejection", [canonical_authority], []),
+        ("tracked_missing_execution_authority_rejection", [], [canonical_authority]),
+        ("alternate_execution_authority_rejection", [alternate_authority], [alternate_authority]),
+        ("uppercase_extension_execution_authority_rejection", [uppercase_extension_authority], []),
+        (
+            "sibling_execution_authority_rejection",
+            [canonical_authority, alternate_authority],
+            [canonical_authority],
+        ),
+    ):
+        cases.append(assert_rejects(
+            name,
+            lambda filesystem_hits=filesystem_hits, tracked_hits=tracked_hits: validate_execution_authority_inventory(
+                filesystem_hits,
+                tracked_hits,
+                canonical_authority,
+            ),
+        ))
 
     def wrong_schedule() -> None:
         changed = copy.deepcopy(ctx.schedule)
@@ -660,7 +899,7 @@ def validate_records() -> dict[str, Any]:
     require(candidate["status"] == "CANDIDATE__BLOCKED_PENDING_TARGET_NONEXECUTING_QUALIFICATION", "candidate status mismatch")
     for key, value in result["authority_false_state"].items():
         require(value is False, f"result authority flag must be false: {key}")
-    require(not list(HERE.rglob(AUTHORITY_NAME)), "execution authority artifact must not exist")
+    execution_authority = validate_execution_authority_state(manifest)
     return {
         "status": "RECORDS_VALID",
         "manifest_sha256": manifest_digest,
@@ -669,6 +908,7 @@ def validate_records() -> dict[str, Any]:
         "historical_manifest_sha256": historical_manifest_digest,
         "historical_records_immutable": True,
         "execution_bundle_sha256": manifest["execution_bundle_sha256"],
+        "execution_authority": execution_authority,
     }
 
 
@@ -724,7 +964,8 @@ def main() -> int:
         "forbidden_surface_scan": scan,
         "executor_tests": executor_tests,
         "records": records,
-        "authority_artifact_absent": True,
+        "authority_artifact_present": records["execution_authority"]["authority_artifact_present"],
+        "execution_authority": records["execution_authority"],
         "target_connection_count": 0,
         "sender_start_count": 0,
         "control_write_count": 0,
@@ -738,6 +979,13 @@ def main() -> int:
 if __name__ == "__main__":
     try:
         raise SystemExit(main())
-    except (VerifyError, adapter.AdapterError, bundle.BundleError, subprocess.CalledProcessError, json.JSONDecodeError) as exc:
+    except (
+        VerifyError,
+        adapter.AdapterError,
+        adapter.gate_a_authority.AuthorityError,
+        bundle.BundleError,
+        subprocess.CalledProcessError,
+        json.JSONDecodeError,
+    ) as exc:
         print(f"verify_gate_a_adapter_qualification: {exc}", file=sys.stderr)
         raise SystemExit(1)
