@@ -2,6 +2,53 @@
 
 # Changelog
 
+## 2026-07-11: Gate A process-custody bundle closure
+
+- Close exact local/rendered-remote process receipt and failure-code equivalence
+  for valid, empty, non-UTF8, malformed, and partially parsed malformed stdout,
+  with focused regression coverage, and make checkout credential inspection
+  reject both configured headers and unobservable Git state. Regenerate the
+  21-file execution bundle as `353f7e2d865508ebc018cb72648d3d3f227dc1c1128681fd9b4e99d81c9aa47f`,
+  payload archive as `9d5b7fb7735d90bfbd699e956297bf00df662395f0f644c9500283defe648d52`,
+  committed manifest as `9fda0730579383278ec88a5bf416ee3254216dc7927eaaa74ba5f162011cecca`,
+  and byte-identical deployment archives as
+  `dee71a6b9b44b529547a18b6bfe420db8d7ad044a90a9e7b5f7cca262f7e864b`.
+  No authority or evidence changed; no target contact or physical execution
+  occurred.
+
+## 2026-07-10: Phase 6B.6 bounded Gate A engineering-smoke executor
+
+- Implement the exact-authority-gated Gate A engineering-smoke execution path
+  for only the frozen 16-slot, eight-second schedule. The host validates exact
+  owner authority before constructing transport, the target consumes one
+  durable attempt only after exact bundle and namespace validation, and the
+  existing `holo_runtime_v2` physical and capture primitives execute one
+  continuous, fixed-timeline session with one S0E sender epoch. The bounded
+  path exposes no frequency write, voltage write, or MSR operation and permits
+  no automatic retry.
+
+- Add dependency-injected non-driving coverage for authority, namespace,
+  process, temperature, frequency, one-shot custody, physical token mapping,
+  timing, continuous capture, partial evidence, verified-copy cleanup, and
+  zero network contact. Preserve all historical qualification evidence,
+  adjudication, and Candidate V1-V4 records unchanged. No execution-authority
+  artifact is created and no target contact or hardware execution occurs.
+
+- Complete native Gate A k10temp custody with exact deterministic hwmon
+  selection, stable repeated reads, raw-value hashing, closed and durable
+  pre-capture and post-capture receipts, exact 67.999/68.000 C boundary
+  handling, and fail-closed ambiguity or observation errors. The retained
+  runtime verifier now binds both native receipts to one sensor and to the
+  complete capture interval.
+
+- Add strict C, ASan, UBSan, mutation-baseline, and extracted-bundle coverage
+  for the native custody path. Pre-capture thermal failure proves zero physical
+  starts; post-capture thermal failure preserves complete raw, lock-in, trace,
+  and lifecycle evidence. No active authority, target contact, or hardware
+  execution is introduced. The smoke-authority workflow checks out the exact
+  pull-request head so its protected-source guard cannot attribute unrelated
+  base-branch merge content to the reviewed branch.
+
 ## 2026-07-09: Phase 6B.6 Gate A target non-executing attempt adjudication
 
 - Admit the sealed `_02` replacement evidence namespace in the three existing

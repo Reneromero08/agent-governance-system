@@ -4,8 +4,9 @@
 This verifier is local-only.  It never opens SSH/SCP or contacts the target.  A
 green result means the historical packet is byte-for-byte unchanged, the one
 historical attempt is still represented accurately, the process-evidence gaps
-are detected, the old completion interpretation is superseded, and every
-current or downstream authority field remains false.
+are detected, the old completion interpretation is superseded, historical and
+downstream authority fields remain false, and the exact Gate A authority input
+and sealed one-shot result are reconciled without rewriting either history.
 """
 
 from __future__ import annotations
@@ -58,6 +59,8 @@ CANDIDATE_V4_SCHEMA = HERE / "schemas" / "gate_a_engineering_smoke_authority_can
 REPLACEMENT_AUTHORITY_STATE_SCHEMA = HERE / "schemas" / "gate_a_replacement_target_nonexecuting_qualification_authority_state.schema.json"
 
 PRE_REPAIR_HEAD = "310efd0ec4103654b122a961b001bc5b79cf5896"
+MERGED_PR37_BASELINE = "e03502b1859d6a3b79699fa56252710ba85f3595"
+HISTORICAL_EVIDENCE_TREE_SHA1 = "a02edbfb85bb2b1816a3be92089112f29c639da9"
 INTEGRATED_MAIN = "6f243b1aaf7cfaa09f21b8d5816ddd9097612f72"
 REVIEWED_HEAD = "653d225594af088dc5a72b1655b8b6192b019fc3"
 REVIEW_ID = 4621557139
@@ -83,6 +86,10 @@ COMPLETED_CURRENT_STATUS = "REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_COMPLE
 COMPLETED_NEXT_BOUNDARY = (
     "STOP__REPLACEMENT_QUALIFICATION_COMPLETE__ALL_DOWNSTREAM_WORK_REQUIRES_NEW_OWNER_AUTHORITY"
 )
+ENGINEERING_SMOKE_CURRENT_STATUS = (
+    "GATE_A_ENGINEERING_SMOKE_FAILED_CLOSED__TEMPERATURE_UNOBSERVABLE__AUTHORITY_CONSUMED"
+)
+ENGINEERING_SMOKE_NEXT_BOUNDARY = "INDEPENDENT_GATE_A_ENGINEERING_SMOKE_EVIDENCE_REVIEW"
 REPAIRED_SOURCE_COMMIT = "593e9920be533603217cee93572d79b86cc65cf9"
 REPAIRED_SOURCE_TREE = "d9488e9968023a98fabc0808530fdbc731d5831a"
 REPAIRED_SOURCE_REVIEW_ID = "PR_37_GATE_A_FOUR_WAY_REMOTE_NAMESPACE_PREFLIGHT_REVIEW"
@@ -146,6 +153,10 @@ DOWNSTREAM_FALSE_FIELDS = (
     "small_wall_authorized",
 )
 
+if str(ADAPTER) not in sys.path:
+    sys.path.insert(0, str(ADAPTER))
+import verify_gate_a_adapter_qualification as adapter_qualification
+
 
 class VerifyError(RuntimeError):
     pass
@@ -182,6 +193,31 @@ def git_blob(path: Path) -> str:
     return proc.stdout.strip()
 
 
+def git_blob_at(treeish: str, path: Path) -> str:
+    relative = path.relative_to(REPO_ROOT).as_posix()
+    proc = subprocess.run(
+        ["git", "rev-parse", f"{treeish}:{relative}"],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=True,
+        text=True,
+    )
+    return proc.stdout.strip()
+
+
+def git_sha256_at(treeish: str, path: Path) -> str:
+    blob = git_blob_at(treeish, path)
+    data = subprocess.run(
+        ["git", "cat-file", "blob", blob],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=True,
+    ).stdout
+    return hashlib.sha256(data).hexdigest()
+
+
 def validate_schema_closed(schema: dict[str, Any], nested_keys: tuple[str, ...] = ()) -> None:
     require(schema["type"] == "object", "schema top level is not object")
     require(schema["additionalProperties"] is False, "schema top level open")
@@ -213,14 +249,34 @@ def validate_const_instance(value: Any, schema: dict[str, Any], context: str) ->
 
 
 def assert_historical_evidence_immutable() -> dict[str, Any]:
+    baseline = subprocess.run(
+        ["git", "rev-parse", f"{MERGED_PR37_BASELINE}:{EVID_REL}"],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    current = subprocess.run(
+        ["git", "rev-parse", f"HEAD:{EVID_REL}"],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    require(baseline.returncode == 0, f"cannot read historical evidence baseline tree: {baseline.stderr}")
+    require(current.returncode == 0, f"cannot read current historical evidence tree: {current.stderr}")
+    require(baseline.stdout.strip() == HISTORICAL_EVIDENCE_TREE_SHA1, "historical evidence baseline tree binding changed")
+    require(current.stdout.strip() == HISTORICAL_EVIDENCE_TREE_SHA1, "historical evidence committed tree changed")
+
     commands = [
-        ["git", "diff", "--exit-code", f"{PRE_REPAIR_HEAD}...HEAD", "--", EVID_REL],
         ["git", "diff", "--exit-code", "--", EVID_REL],
         ["git", "diff", "--cached", "--exit-code", "--", EVID_REL],
     ]
-    labels = ("committed_range", "worktree", "index")
+    labels = ("worktree", "index")
     proof: dict[str, Any] = {
-        "baseline_head": PRE_REPAIR_HEAD,
+        "baseline_head": MERGED_PR37_BASELINE,
+        "historical_evidence_tree_sha1": HISTORICAL_EVIDENCE_TREE_SHA1,
+        "committed_tree_exit_code": 0,
         "historical_evidence_dir": EVID_REL,
     }
     for label, argv in zip(labels, commands, strict=True):
@@ -612,6 +668,53 @@ def require_no_execution_authority(search_root: Path, *, check_tracked: bool) ->
         require(proc.stdout.strip() == "", f"execution authority artifact tracked: {proc.stdout.strip()}")
 
 
+def validate_gate_a_execution_authority_state() -> dict[str, Any]:
+    """Recognize absence or the one exact current Gate A execution authority."""
+
+    try:
+        manifest = adapter_qualification.load(adapter_qualification.MANIFEST)
+        state = adapter_qualification.validate_execution_authority_state(manifest)
+    except (
+        RuntimeError,
+        subprocess.CalledProcessError,
+        json.JSONDecodeError,
+        OSError,
+        ValueError,
+    ) as exc:
+        raise VerifyError(f"Gate A execution authority state invalid: {exc}") from exc
+    if state["authority_artifact_present"]:
+        require(
+            state["authority_artifact_path"]
+            == adapter_qualification.git_rel(adapter_qualification.AUTHORITY),
+            "Gate A execution authority canonical path mismatch",
+        )
+        require(
+            state["authority_sha256"] == adapter_qualification.EXECUTION_AUTHORITY_SHA256,
+            "Gate A execution authority SHA-256 mismatch",
+        )
+        require(
+            state["authority_git_blob_sha1"] == adapter_qualification.EXECUTION_AUTHORITY_BLOB_SHA1,
+            "Gate A execution authority blob mismatch",
+        )
+        require(
+            state["reviewed_source_commit"] == adapter_qualification.REVIEWED_EXECUTION_SOURCE_COMMIT,
+            "Gate A reviewed source mismatch",
+        )
+        require(
+            state["reviewed_source_tree"] == adapter_qualification.REVIEWED_EXECUTION_SOURCE_TREE,
+            "Gate A reviewed source tree mismatch",
+        )
+        require(
+            state["independent_review_id"] == adapter_qualification.REVIEWED_EXECUTION_SOURCE_REVIEW_ID,
+            "Gate A independent review mismatch",
+        )
+        require(state["maximum_execution_count"] == 1, "Gate A maximum execution count mismatch")
+        require(state["consumed"] is False, "Gate A execution authority must be unconsumed")
+        require(state["automatic_retry"] is False, "Gate A automatic retry must remain false")
+        require(state["downstream_authority_false"] is True, "Gate A downstream authority changed")
+    return state
+
+
 def validate_superseded_replacement_authority(authority: dict[str, Any]) -> dict[str, Any]:
     """Preserve _01 exactly while proving that it is no longer active authority."""
     require(
@@ -676,6 +779,98 @@ def validate_superseded_replacement_authority(authority: dict[str, Any]) -> dict
     }
 
 
+def validate_historical_replacement_authority_custody(
+    authority: dict[str, Any],
+) -> dict[str, Any]:
+    """Validate consumed authority against its recorded execution commit.
+
+    This is intentionally verifier-local.  Production custody continues to
+    require current HEAD; a squash merge must not rewrite the HEAD that
+    actually carried and consumed this historical authority.
+    """
+    authority_rel = REPLACEMENT_AUTHORITY.relative_to(REPO_ROOT).as_posix()
+    source_commit = authority["authorized_source_commit"]
+    source_tree = authority["authorized_source_tree_sha1"]
+    for commit, label in ((source_commit, "authorized source"), (EXECUTION_HEAD, "recorded execution HEAD")):
+        object_check = subprocess.run(
+            ["git", "cat-file", "-e", f"{commit}^{{commit}}"],
+            cwd=str(REPO_ROOT),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        require(object_check.returncode == 0, f"{label} is not an exact commit object")
+    ancestor = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", source_commit, EXECUTION_HEAD],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    require(ancestor.returncode == 0 and source_commit != EXECUTION_HEAD, "historical authority source is not a strict execution ancestor")
+    tree = subprocess.run(
+        ["git", "rev-parse", f"{source_commit}^{{tree}}"],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    require(tree.returncode == 0 and tree.stdout.strip() == source_tree, "historical authority source tree mismatch")
+    source_authority = subprocess.run(
+        ["git", "cat-file", "-e", f"{source_commit}:{authority_rel}"],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    require(source_authority.returncode != 0, "historical authority existed in reviewed source commit")
+    for rel in future_runner.PROTECTED_EXECUTION_SOURCE_PATHS:
+        for commit, label in ((source_commit, "source"), (EXECUTION_HEAD, "execution")):
+            present = subprocess.run(
+                ["git", "cat-file", "-e", f"{commit}:{rel}"],
+                cwd=str(REPO_ROOT),
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+            )
+            require(present.returncode == 0, f"historical protected path absent from {label}: {rel}")
+    drift = subprocess.run(
+        ["git", "diff", "--quiet", source_commit, EXECUTION_HEAD, "--", *future_runner.PROTECTED_EXECUTION_SOURCE_PATHS],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    require(drift.returncode == 0, "historical protected source drifted before execution")
+    blob = subprocess.run(
+        ["git", "rev-parse", f"{EXECUTION_HEAD}:{authority_rel}"],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    require(blob.returncode == 0 and blob.stdout.strip() == ACTIVE_AUTHORITY_BLOB, "historical execution authority blob mismatch")
+    current_blob = subprocess.run(
+        ["git", "rev-parse", f"HEAD:{authority_rel}"],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    require(current_blob.returncode == 0 and current_blob.stdout.strip() == ACTIVE_AUTHORITY_BLOB, "preserved authority blob differs from historical execution")
+    committed_bytes = subprocess.run(
+        ["git", "cat-file", "blob", ACTIVE_AUTHORITY_BLOB],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    require(committed_bytes.returncode == 0 and committed_bytes.stdout == REPLACEMENT_AUTHORITY.read_bytes(), "preserved authority working-tree bytes changed")
+    require(json.loads(committed_bytes.stdout) == authority, "historical authority object differs from execution blob")
+    return {
+        "authorized_source_commit": source_commit,
+        "authorized_source_tree_sha1": source_tree,
+        "authorized_source_review_id": REPAIRED_SOURCE_REVIEW_ID,
+        "execution_head": EXECUTION_HEAD,
+        "replacement_authority_git_blob_sha1": ACTIVE_AUTHORITY_BLOB,
+        "protected_execution_source_paths": list(future_runner.PROTECTED_EXECUTION_SOURCE_PATHS),
+    }
+
+
 def validate_committed_replacement_authority(authority: dict[str, Any]) -> dict[str, Any]:
     """Validate the one active authority against reviewed source commit A."""
     require(REPLACEMENT_AUTHORITY.is_file() and not REPLACEMENT_AUTHORITY.is_symlink(), "active replacement authority must be a real file")
@@ -684,12 +879,7 @@ def validate_committed_replacement_authority(authority: dict[str, Any]) -> dict[
         "active replacement authority object differs from exact artifact",
     )
     evidence_path = future_runner.validate_replacement_authority(authority, REPLACEMENT_AUTHORITY)
-    custody = future_runner.validate_replacement_authority_custody(
-        REPLACEMENT_AUTHORITY,
-        authority["authorized_source_commit"],
-        authority["authorized_source_tree_sha1"],
-        expected_authority=authority,
-    )
+    custody = validate_historical_replacement_authority_custody(authority)
     require(authority["project_owner"] == EXPECTED_OWNER, "active authority owner mismatch")
     require(authority["authority_id"] == ACTIVE_AUTHORITY_ID, "active authority id mismatch")
     require(authority["authorized_source_commit"] == REPAIRED_SOURCE_COMMIT, "active authority source commit mismatch")
@@ -706,7 +896,7 @@ def validate_committed_replacement_authority(authority: dict[str, Any]) -> dict[
     require(custody["authorized_source_commit"] == REPAIRED_SOURCE_COMMIT, "active custody source commit mismatch")
     require(custody["authorized_source_tree_sha1"] == REPAIRED_SOURCE_TREE, "active custody source tree mismatch")
     require(custody["authorized_source_review_id"] == REPAIRED_SOURCE_REVIEW_ID, "active custody source review mismatch")
-    require(custody["execution_head"] == future_runner.current_head(), "active custody execution HEAD mismatch")
+    require(custody["execution_head"] == EXECUTION_HEAD, "active custody execution HEAD mismatch")
     require(evidence_path.resolve() == REPLACEMENT_EVIDENCE.resolve(), "active authority evidence namespace mismatch")
     require(evidence_path.is_dir() and not evidence_path.is_symlink(), "consumed active authority evidence directory missing")
     return {
@@ -1007,11 +1197,19 @@ def require_no_unaccented_owner() -> None:
 
 
 def verify_adapter_blobs() -> None:
+    ancestry = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", INTEGRATED_MAIN, "HEAD"],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    require(ancestry.returncode == 0, "historical adapter commit is not an ancestor of HEAD")
     for name, blob in EXPECTED_BLOBS.items():
-        actual = git_blob(ADAPTER / name)
-        require(actual == blob, f"adapter blob {name} mismatch: {actual} != {blob}")
-    manifest_sha = sha256_file(ADAPTER / "GATE_A_EXECUTION_BUNDLE_MANIFEST.json")
-    require(manifest_sha == MANIFEST_FILE_SHA, f"adapter manifest file sha mismatch: {manifest_sha}")
+        actual = git_blob_at(INTEGRATED_MAIN, ADAPTER / name)
+        require(actual == blob, f"historical adapter blob {name} mismatch: {actual} != {blob}")
+    manifest_sha = git_sha256_at(INTEGRATED_MAIN, ADAPTER / "GATE_A_EXECUTION_BUNDLE_MANIFEST.json")
+    require(manifest_sha == MANIFEST_FILE_SHA, f"historical adapter manifest file sha mismatch: {manifest_sha}")
 
 
 def assert_rejects(name: str, func: Callable[[], None]) -> str:
@@ -1781,7 +1979,12 @@ def main() -> int:
         superseded_authority_custody,
     )
     require_no_unaccented_owner()
-    require_no_execution_authority(PHASE6B6, check_tracked=True)
+    gate_a_execution_authority = validate_gate_a_execution_authority_state()
+    engineering_smoke = adapter_qualification.validate_engineering_smoke_evidence_state()
+    require(engineering_smoke["authority_artifact_consumed_field"] is False, "historical Gate A authority input changed")
+    require(engineering_smoke["authority_consumed"] is True, "Gate A authority was not reconciled as consumed")
+    require(engineering_smoke["engineering_smoke_authorized"] is False, "consumed Gate A authority remains active")
+    require(engineering_smoke["hardware_ran"] is False, "Gate A hardware state mismatch")
 
     scanner_test = future_scanner_nonzero_test()
     scanner_receipt_test = future_process_scan_receipt_contract_test()
@@ -1809,7 +2012,7 @@ def main() -> int:
     )
 
     output = {
-        "status": COMPLETED_CURRENT_STATUS,
+        "status": ENGINEERING_SMOKE_CURRENT_STATUS,
         "integrated_main": INTEGRATED_MAIN,
         "pre_repair_pr_head": PRE_REPAIR_HEAD,
         "historical_attempt_authorized": True,
@@ -1820,8 +2023,8 @@ def main() -> int:
         "execution_bundle_target_qualified": True,
         "original_authority_consumed": True,
         "replacement_qualification_authorized": False,
-        "project_owner_execution_approval_recorded": False,
-        "authorization_artifact_created": False,
+        "project_owner_execution_approval_recorded": gate_a_execution_authority["authority_artifact_present"],
+        "authorization_artifact_created": gate_a_execution_authority["authority_artifact_present"],
         "active_replacement_authority_present": True,
         "new_replacement_authority_artifact_created": True,
         "superseded_replacement_authority_preserved": True,
@@ -1831,9 +2034,21 @@ def main() -> int:
         "replacement_authority_custody": replacement_authority_custody,
         "replacement_evidence_adjudication": replacement_evidence,
         "superseded_replacement_authority_custody": superseded_authority_custody,
-        "engineering_smoke_authorized": False,
-        "hardware_ran": False,
-        "automatic_retry": False,
+        "engineering_smoke_attempted": engineering_smoke["smoke_attempted"],
+        "engineering_smoke_orchestrator_invocation_count": engineering_smoke["orchestrator_invocation_count"],
+        "engineering_smoke_target_contact_occurred": engineering_smoke["target_contact_occurred"],
+        "engineering_smoke_target_contact_attempt_count": engineering_smoke["target_contact_attempt_count"],
+        "gate_a_execution_authority_consumed": engineering_smoke["authority_consumed"],
+        "engineering_smoke_execution_count": engineering_smoke["execution_count"],
+        "engineering_smoke_transport_execution_count": engineering_smoke["transport_execution_count"],
+        "engineering_smoke_runner_start_count": engineering_smoke["runner_start_count"],
+        "engineering_smoke_physical_runtime_execution_count": engineering_smoke["physical_runtime_execution_count"],
+        "engineering_smoke_retry_count": engineering_smoke["retry_count"],
+        "engineering_smoke_authorized": engineering_smoke["engineering_smoke_authorized"],
+        "hardware_ran": engineering_smoke["hardware_ran"],
+        "automatic_retry": engineering_smoke["automatic_retry"],
+        "gate_a_engineering_smoke_result": engineering_smoke,
+        "gate_a_execution_authority": gate_a_execution_authority,
         "future_scanner_nonzero_test": scanner_test,
         "future_process_scan_receipt_contract_test": scanner_receipt_test,
         "remote_namespace_preflight_contract_test": namespace_preflight_test,
@@ -1845,9 +2060,11 @@ def main() -> int:
         "repaired_source_review_id": REPAIRED_SOURCE_REVIEW_ID,
         "repaired_source_commit": REPAIRED_SOURCE_COMMIT,
         "repaired_source_tree_sha1": REPAIRED_SOURCE_TREE,
-        "execution_head": EXECUTION_HEAD,
+        "replacement_qualification_execution_head": EXECUTION_HEAD,
+        "execution_head": engineering_smoke["execution_head"],
+        "execution_tree": engineering_smoke["execution_tree"],
         "current_verification_head": future_runner.current_head(),
-        "next_boundary": COMPLETED_NEXT_BOUNDARY,
+        "next_boundary": ENGINEERING_SMOKE_NEXT_BOUNDARY,
     }
     print(json.dumps(output, sort_keys=True, indent=2))
     return 0
@@ -1858,6 +2075,7 @@ if __name__ == "__main__":
         raise SystemExit(main())
     except (
         VerifyError,
+        adapter_qualification.VerifyError,
         future_runner.QualError,
         subprocess.CalledProcessError,
         json.JSONDecodeError,

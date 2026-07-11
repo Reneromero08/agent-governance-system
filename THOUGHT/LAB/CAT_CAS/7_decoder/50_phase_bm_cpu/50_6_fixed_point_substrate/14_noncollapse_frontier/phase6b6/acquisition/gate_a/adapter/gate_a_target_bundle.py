@@ -59,6 +59,8 @@ MANIFEST_KEYS = {
     "target_namespace_sha256",
     "target_identity_stdout_sha256",
     "authority_artifact_created",
+    "engineering_smoke_executor_implemented",
+    "execution_bundle_target_qualified",
     "engineering_smoke_authorized",
     "hardware_ran",
     "files",
@@ -76,7 +78,11 @@ FILE_ENTRY_KEYS = {
     "role",
 }
 
-REQUIRED_ROLES = {"host_adapter", "target_runner", "target_worker"}
+REQUIRED_ROLES = {
+    "host_adapter", "target_runner", "target_worker", "target_execution_gate",
+    "physical_runtime", "physical_runtime_gate_a", "physical_runtime_gate_a_header",
+    "captured_file_runtime", "capture_quality_contract",
+}
 
 
 class TargetBundleError(RuntimeError):
@@ -160,6 +166,8 @@ def validate_manifest_shape(manifest: dict[str, Any]) -> None:
     require(manifest["target_namespace_sha256"] == NAMESPACE_SHA256, "manifest namespace digest mismatch")
     require(manifest["target_identity_stdout_sha256"] == TARGET_IDENTITY_SHA256, "manifest target identity mismatch")
     require(manifest["authority_artifact_created"] is False, "manifest authority-artifact flag must be false")
+    require(manifest["engineering_smoke_executor_implemented"] is True, "manifest executor implementation flag missing")
+    require(manifest["execution_bundle_target_qualified"] is True, "manifest target-qualified flag missing")
     require(manifest["engineering_smoke_authorized"] is False, "manifest smoke flag must be false")
     require(manifest["hardware_ran"] is False, "manifest hardware-ran flag must be false")
 

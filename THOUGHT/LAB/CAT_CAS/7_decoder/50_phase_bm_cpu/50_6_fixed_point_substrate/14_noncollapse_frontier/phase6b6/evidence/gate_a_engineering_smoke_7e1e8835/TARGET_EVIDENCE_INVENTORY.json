@@ -1,0 +1,30 @@
+{
+  "files": [
+    {
+      "path": "ATTEMPT.json",
+      "sha256": "03606cbbce36d2fb7b9b936a3b6be2e72f349bb94b9c8c4eb8cf3aa993707561",
+      "size": 663
+    },
+    {
+      "path": "EVENTS.jsonl",
+      "sha256": "eac2cd81618cd385c95e5795443f275f1e4c20468796a7d0a5d1eff56ea02fbc",
+      "size": 331
+    },
+    {
+      "path": "FAILURE.json",
+      "sha256": "d12cbe85a88c3ddd17198f903c582c78a06165afdac8398b0ba4f4621750bf6c",
+      "size": 162
+    },
+    {
+      "path": "POST_RUNTIME_PROCESS_RECEIPT.json",
+      "sha256": "154c65020bf631d04bf0db101514320ee7597ccc344b4211eb2d15620741d895",
+      "size": 14624
+    },
+    {
+      "path": "PRE_RUNTIME_PROCESS_RECEIPT.json",
+      "sha256": "bea8546413010c34466b73870dab596c5001cc8f4f5a58cef87277f07cdb8459",
+      "size": 16631
+    }
+  ],
+  "schema_id": "CAT_CAS_PHASE6B6_GATE_A_EVIDENCE_INVENTORY_V1"
+}
