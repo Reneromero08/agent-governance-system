@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+import copy
 import sys
 import unittest
 from pathlib import Path
+from unittest import mock
 
 import numpy as np
 
@@ -18,8 +20,11 @@ from analysis.operators import (  # noqa: E402
     deterministic_seed,
     validate_operator_manifest,
 )
+from analysis import pipeline as analysis_pipeline  # noqa: E402
+from analysis import state as analysis_state  # noqa: E402
 from analysis.pipeline import _confounds, _is_order_label_sham, evaluate_sealed, select_on_validation, training_validation_custody  # noqa: E402
 from analysis.state import (  # noqa: E402
+    Gauge,
     assert_training_only_global_covariance,
     estimate_preamble_gauge,
     s0,
@@ -96,11 +101,24 @@ def y_from(values: list[float]) -> np.ndarray:
 
 
 class AnalysisPartitionTests(unittest.TestCase):
+    _synthetic_baselines: dict[str, tuple[dict[str, object], dict[str, object], dict[str, object]]] = {}
+
     @classmethod
     def setUpClass(cls) -> None:
         cls.custody = run_mock(campaign_schedule())
         cls.rows = flatten_custody(cls.custody)
         cls.train_preamble = [row for row in cls.rows if row["split"] == "train" and row["stage"] == "preamble"]
+
+    @classmethod
+    def _synthetic_baseline(
+        cls, scenario: str
+    ) -> tuple[dict[str, object], dict[str, object], dict[str, object]]:
+        if scenario not in cls._synthetic_baselines:
+            custody = synthetic_custody(scenario)
+            manifest = select_on_validation(training_validation_custody(custody))
+            result = evaluate_sealed(custody, manifest)
+            cls._synthetic_baselines[scenario] = (custody, manifest, result)
+        return copy.deepcopy(cls._synthetic_baselines[scenario])
 
     def test_measured_state_rejects_context_declared_and_future_leakage(self) -> None:
         for field in ("session_id", "route", "order_control_family", "declared_order_family", "future_value", "target_label", "session_chronology"):
@@ -208,9 +226,7 @@ class AnalysisPartitionTests(unittest.TestCase):
             evaluate_sealed(custody, wrong_schedule)
 
     def test_fixture_label_does_not_affect_results(self) -> None:
-        custody = synthetic_custody("shared_driven")
-        manifest = select_on_validation(training_validation_custody(custody))
-        result = evaluate_sealed(custody, manifest)
+        custody, manifest, result = self._synthetic_baseline("shared_driven")
         custody.pop("synthetic_scenario", None)
         custody["synthetic_scenario"] = "renamed_for_reporting_only"
         renamed = evaluate_sealed(custody, manifest)
@@ -230,9 +246,7 @@ class AnalysisPartitionTests(unittest.TestCase):
             self.assertNotIn(forbidden, source)
 
     def test_confound_outputs_are_predictive_comparisons(self) -> None:
-        custody = synthetic_custody("confounded")
-        manifest = select_on_validation(training_validation_custody(custody))
-        result = evaluate_sealed(custody, manifest)
+        _, _, result = self._synthetic_baseline("confounded")
         confounds = result["confounds"]
         self.assertIn("held-out predictor", confounds["physical_tone_indexed_performance"]["comparison_model"])
         self.assertIn("held-out predictor", confounds["execution_position_indexed_performance"]["comparison_model"])
@@ -249,9 +263,7 @@ class AnalysisPartitionTests(unittest.TestCase):
         self.assertEqual(result["adjudication"]["verdicts"], ["CONFOUNDED_NO_OPERATOR_CLAIM"])
 
     def test_session_lookup_is_leave_one_known_session_out(self) -> None:
-        custody = synthetic_custody("session_lookup_dominates")
-        manifest = select_on_validation(training_validation_custody(custody))
-        result = evaluate_sealed(custody, manifest)
+        custody, _, result = self._synthetic_baseline("session_lookup_dominates")
         diagnostic = result["confounds"]["session_lookup_dominance"]
         known_ids = set(diagnostic["held_out_session_ids"])
         test_ids = {session["session_index"] for session in custody["sessions"] if session["split"] == "test"}
@@ -264,9 +276,7 @@ class AnalysisPartitionTests(unittest.TestCase):
         self.assertIn("aggregate_gain", diagnostic)
 
     def test_order_label_sham_compares_declared_and_executed_predictors(self) -> None:
-        custody = synthetic_custody("shared_driven")
-        manifest = select_on_validation(training_validation_custody(custody))
-        result = evaluate_sealed(custody, manifest)
+        _, _, result = self._synthetic_baseline("shared_driven")
         sham = result["confounds"]["order_label_sham_predicts_comparably"]
         self.assertIn("executed_order", sham)
         self.assertIn("declared_order", sham)
@@ -437,9 +447,7 @@ class AnalysisPartitionTests(unittest.TestCase):
         self.assertNotEqual(base["executed_order_nrmse"], mutated["executed_order_nrmse"])
 
     def test_persistence_uses_test_only_matched_hierarchical_bounds(self) -> None:
-        custody = synthetic_custody("shared_persistent")
-        manifest = select_on_validation(training_validation_custody(custody))
-        result = evaluate_sealed(custody, manifest)
+        _, _, result = self._synthetic_baseline("shared_persistent")
         bounds = result["drive_off"]["position_bounds"]
         self.assertTrue(result["drive_off"]["three_consecutive_lower_above_sham"])
         for offset in ("1", "2", "3"):
@@ -481,6 +489,85 @@ class AnalysisPartitionTests(unittest.TestCase):
         self.assertTrue(np.allclose(whitened, np.eye(2), atol=1e-8))
         self.assertFalse(np.allclose(scalar_whitened, np.eye(2), atol=1e-2))
 
+    def test_whitener_cache_preserves_independent_array_results(self) -> None:
+        cov = ((3.75, 0.625), (0.625, 1.25))
+        values, vectors = np.linalg.eigh(np.array(cov, dtype=float))
+        expected = vectors @ np.diag(1.0 / np.sqrt(np.maximum(values, 1e-9))) @ vectors.T
+        analysis_state._symmetric_inverse_sqrt_values.cache_clear()
+        with mock.patch.object(
+            analysis_state.np.linalg,
+            "eigh",
+            wraps=analysis_state.np.linalg.eigh,
+        ) as eigh:
+            first = symmetric_inverse_sqrt(cov)
+            second = symmetric_inverse_sqrt(cov)
+        self.assertEqual(eigh.call_count, 1)
+        self.assertTrue(np.array_equal(first, expected))
+        self.assertTrue(np.array_equal(first, second))
+        first[0, 0] += 1.0
+        self.assertFalse(np.array_equal(first, second))
+        self.assertTrue(np.allclose(second @ np.array(cov) @ second.T, np.eye(2), atol=1e-8))
+
+    def test_rollout_reuses_one_whitener_per_call(self) -> None:
+        rows = []
+        for index in range(10):
+            item = diagnostic_row(
+                index,
+                split="test",
+                session_index=0,
+                executed_family="RND1",
+                declared_family="RND1",
+                position=index,
+            )
+            item["packet_id"] = "rollout-whitener-regression"
+            item["r_t"] = {
+                "lockin_I": float(index + 1),
+                "lockin_Q": float(index + 1) / 4.0,
+                "ring_osc_period": 100.0 + index,
+            }
+            rows.append(item)
+
+        gauge = Gauge(
+            complex_anchor_alpha=(0j,) * 12,
+            amplitude_floor=(0.0,) * 12,
+            preamble_drift_estimate=0j,
+            local_idle_covariance=((1.0, 0.0), (0.0, 1.0)),
+        )
+
+        class ExactPredictor:
+            def predict(self, _x: np.ndarray, target_rows: list[dict[str, object]]) -> np.ndarray:
+                return np.array(
+                    [
+                        [
+                            float(target["r_t"]["lockin_I"]),  # type: ignore[index]
+                            float(target["r_t"]["lockin_Q"]),  # type: ignore[index]
+                            float(target["r_t"]["ring_osc_period"]),  # type: ignore[index]
+                        ]
+                        for target in target_rows
+                    ],
+                    dtype=float,
+                )
+
+        predictor = ExactPredictor()
+        sigma = ((2.0, 0.25), (0.25, 1.0))
+        for state_level, expected_calls in (("S0", 0), ("S1", 1)):
+            with self.subTest(state_level=state_level):
+                with mock.patch.object(
+                    analysis_pipeline,
+                    "symmetric_inverse_sqrt",
+                    wraps=analysis_pipeline.symmetric_inverse_sqrt,
+                ) as inverse_sqrt:
+                    metrics = analysis_pipeline._rollout_metrics(
+                        {"state_level": state_level},
+                        predictor,
+                        predictor,
+                        rows,
+                        {0: gauge},
+                        sigma,
+                    )
+                self.assertEqual(set(metrics), {1, 2, 4, 8})
+                self.assertEqual(inverse_sqrt.call_count, expected_calls)
+
     def test_all_synthetic_fixtures_run_full_pipeline(self) -> None:
         expected = {
             "shared_persistent": ["SHARED_PREDICTIVE_OPERATOR_SUPPORTED", "PERSISTENT_STATE_CANDIDATE"],
@@ -492,9 +579,7 @@ class AnalysisPartitionTests(unittest.TestCase):
         }
         for scenario, verdicts in expected.items():
             with self.subTest(scenario=scenario):
-                custody = synthetic_custody(scenario)
-                manifest = select_on_validation(training_validation_custody(custody))
-                result = evaluate_sealed(custody, manifest)
+                _, _, result = self._synthetic_baseline(scenario)
                 self.assertEqual(result["adjudication"]["verdicts"], verdicts)
 
     def test_route_local_requires_complete_within_route_gate(self) -> None:
@@ -544,9 +629,7 @@ class AnalysisPartitionTests(unittest.TestCase):
         self.assertEqual(derive_adjudication(computed)["verdicts"], ["ROUTE_LOCAL_PREDICTIVE_OPERATOR_ONLY"])
 
     def test_route_local_fixture_exposes_complete_gate_payload(self) -> None:
-        custody = synthetic_custody("route_local")
-        manifest = select_on_validation(training_validation_custody(custody))
-        result = evaluate_sealed(custody, manifest)
+        _, _, result = self._synthetic_baseline("route_local")
         self.assertEqual(result["adjudication"]["verdicts"], ["ROUTE_LOCAL_PREDICTIVE_OPERATOR_ONLY"])
         for route, gate in result["route_local_gates"].items():
             self.assertIn(route, ("v2s3", "v4s5"))
@@ -574,9 +657,7 @@ class AnalysisPartitionTests(unittest.TestCase):
         self.assertEqual(manifest["evaluated_candidate"]["operator_class"], manifest["operator_class"])
 
     def test_hierarchical_bootstrap_shape_is_session_packet_nested(self) -> None:
-        custody = synthetic_custody("shared_driven")
-        manifest = select_on_validation(training_validation_custody(custody))
-        result = evaluate_sealed(custody, manifest)
+        _, _, result = self._synthetic_baseline("shared_driven")
         bootstrap = result["predictive_metrics"]["eight_step_bootstrap"]
         self.assertEqual(bootstrap["session_draws"], 4)
         self.assertEqual(bootstrap["bootstrap_iterations"], 200)

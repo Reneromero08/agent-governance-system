@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from functools import lru_cache
 from typing import Any, Iterable
 
 import numpy as np
@@ -77,13 +78,24 @@ def training_global_covariance(rows: list[dict[str, Any]]) -> tuple[tuple[float,
     return ((float(cov[0, 0]), float(cov[0, 1])), (float(cov[1, 0]), float(cov[1, 1])))
 
 
-def symmetric_inverse_sqrt(
+@lru_cache(maxsize=32)
+def _symmetric_inverse_sqrt_values(
     sigma_train: tuple[tuple[float, float], tuple[float, float]],
-) -> np.ndarray:
+) -> tuple[tuple[float, float], tuple[float, float]]:
     cov = np.array(sigma_train, dtype=float)
     values, vectors = np.linalg.eigh(cov)
     clipped = np.maximum(values, 1e-9)
-    return vectors @ np.diag(1.0 / np.sqrt(clipped)) @ vectors.T
+    result = vectors @ np.diag(1.0 / np.sqrt(clipped)) @ vectors.T
+    return (
+        (float(result[0, 0]), float(result[0, 1])),
+        (float(result[1, 0]), float(result[1, 1])),
+    )
+
+
+def symmetric_inverse_sqrt(
+    sigma_train: tuple[tuple[float, float], tuple[float, float]],
+) -> np.ndarray:
+    return np.array(_symmetric_inverse_sqrt_values(sigma_train), dtype=float)
 
 
 def assert_training_only_global_covariance(rows: list[dict[str, Any]]) -> None:
