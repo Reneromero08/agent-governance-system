@@ -55,10 +55,15 @@
     "cc -std=c11 -Wall -Wextra -Werror -pedantic -O2 -pthread adapter/gate_a_worker.c runtime/gate_a_engineering_smoke_runtime.c runtime/captured_file.c -Iruntime -lm -o gate_a_worker",
     "gate_a_worker --validate-only",
     "gate_a_worker --self-test",
+    "cc -DGATE_A_NATIVE_TEMPERATURE_TESTING -std=c11 -Wall -Wextra -Werror -pedantic -O2 -pthread adapter/test_gate_a_native_temperature.c runtime/gate_a_engineering_smoke_runtime.c runtime/captured_file.c -Iruntime -lm -o test_gate_a_native_temperature",
+    "test_gate_a_native_temperature",
+    "ASan gate_a_worker and test_gate_a_native_temperature self-tests",
+    "UBSan gate_a_worker and test_gate_a_native_temperature self-tests",
     "python adapter/gate_a_hardware_adapter.py --qualify-no-drive",
     "python adapter/gate_a_target_runner.py --qualify-no-drive",
     "python -m unittest discover -s adapter -p test_gate_a_engineering_smoke_executor.py -v",
     "python -m unittest discover -s adapter -p test_gate_a_temperature_custody.py -v",
+    "python -m unittest discover -s adapter -p test_gate_a_k10temp_executor.py -v",
     "python adapter/verify_gate_a_adapter_qualification.py"
   ],
   "expected_source_files": [
@@ -77,6 +82,8 @@
     "build_gate_a_execution_bundle.py",
     "verify_gate_a_adapter_qualification.py",
     "test_gate_a_engineering_smoke_executor.py",
+    "test_gate_a_k10temp_executor.py",
+    "test_gate_a_native_temperature.c",
     "test_gate_a_temperature_custody.py",
     "GATE_A_ADAPTER_QUALIFICATION_CONTRACT.json",
     "schemas/gate_a_execution_authority.schema.json",
@@ -149,7 +156,12 @@
     "inconsistent repeated temperature read rejection",
     "temperature receipt mutation rejection",
     "temperature at or above 68 C rejection",
-    "temperature receipt retained before runtime"
+    "temperature receipt retained before runtime",
+    "native pre-capture temperature receipt retained before physical start",
+    "native post-capture temperature receipt retained after complete raw evidence",
+    "native Python and C constant equivalence",
+    "native temperature receipt closed key-set rejection",
+    "native altered phase, path, raw value, scale, Celsius and veto result rejection"
   ],
   "authority_false_state": {
     "authorization_artifact_created": false,

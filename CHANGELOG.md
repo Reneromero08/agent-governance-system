@@ -20,6 +20,21 @@
   adjudication, and Candidate V1-V4 records unchanged. No execution-authority
   artifact is created and no target contact or hardware execution occurs.
 
+- Complete native Gate A k10temp custody with exact deterministic hwmon
+  selection, stable repeated reads, raw-value hashing, closed and durable
+  pre-capture and post-capture receipts, exact 67.999/68.000 C boundary
+  handling, and fail-closed ambiguity or observation errors. The retained
+  runtime verifier now binds both native receipts to one sensor and to the
+  complete capture interval.
+
+- Add strict C, ASan, UBSan, mutation-baseline, and extracted-bundle coverage
+  for the native custody path. Pre-capture thermal failure proves zero physical
+  starts; post-capture thermal failure preserves complete raw, lock-in, trace,
+  and lifecycle evidence. No active authority, target contact, or hardware
+  execution is introduced. The smoke-authority workflow checks out the exact
+  pull-request head so its protected-source guard cannot attribute unrelated
+  base-branch merge content to the reviewed branch.
+
 ## 2026-07-09: Phase 6B.6 Gate A target non-executing attempt adjudication
 
 - Admit the sealed `_02` replacement evidence namespace in the three existing

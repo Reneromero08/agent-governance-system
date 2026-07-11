@@ -46,6 +46,7 @@ jobs:
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
         run: |
           python -m unittest discover -s . -p 'test_gate_a_temperature_custody.py' -v
+          python -m unittest discover -s . -p 'test_gate_a_k10temp_executor.py' -v
 
       - name: Validate current repair contract and deterministic bundle
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
@@ -58,22 +59,28 @@ jobs:
         run: |
           runtime=../../../../holo_runtime_v2
           cc -std=c11 -Wall -Wextra -Werror -pedantic -O2 -pthread gate_a_worker.c "$runtime/gate_a_engineering_smoke_runtime.c" "$runtime/captured_file.c" -I"$runtime" -lm -o gate_a_worker
+          cc -DGATE_A_NATIVE_TEMPERATURE_TESTING -std=c11 -Wall -Wextra -Werror -pedantic -O2 -pthread test_gate_a_native_temperature.c "$runtime/gate_a_engineering_smoke_runtime.c" "$runtime/captured_file.c" -I"$runtime" -lm -o test_gate_a_native_temperature
           ./gate_a_worker --validate-only
           ./gate_a_worker --self-test
+          ./test_gate_a_native_temperature
 
       - name: ASan non-driving self-test
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
         run: |
           runtime=../../../../holo_runtime_v2
-          cc -std=c11 -Wall -Wextra -Werror -pedantic -O2 -pthread -fsanitize=address gate_a_worker.c "$runtime/gate_a_engineering_smoke_runtime.c" "$runtime/captured_file.c" -I"$runtime" -lm -o gate_a_worker_asan
-          ./gate_a_worker_asan --self-test
+          cc -std=c11 -Wall -Wextra -Werror -pedantic -O1 -g -pthread -fsanitize=address -fno-omit-frame-pointer gate_a_worker.c "$runtime/gate_a_engineering_smoke_runtime.c" "$runtime/captured_file.c" -I"$runtime" -lm -o gate_a_worker_asan
+          cc -DGATE_A_NATIVE_TEMPERATURE_TESTING -std=c11 -Wall -Wextra -Werror -pedantic -O1 -g -pthread -fsanitize=address -fno-omit-frame-pointer test_gate_a_native_temperature.c "$runtime/gate_a_engineering_smoke_runtime.c" "$runtime/captured_file.c" -I"$runtime" -lm -o test_gate_a_native_temperature_asan
+          ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 ./gate_a_worker_asan --self-test
+          ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 ./test_gate_a_native_temperature_asan
 
       - name: UBSan non-driving self-test
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
         run: |
           runtime=../../../../holo_runtime_v2
-          cc -std=c11 -Wall -Wextra -Werror -pedantic -O2 -pthread -fsanitize=undefined gate_a_worker.c "$runtime/gate_a_engineering_smoke_runtime.c" "$runtime/captured_file.c" -I"$runtime" -lm -o gate_a_worker_ubsan
-          ./gate_a_worker_ubsan --self-test
+          cc -std=c11 -Wall -Wextra -Werror -pedantic -O1 -g -pthread -fsanitize=undefined -fno-omit-frame-pointer gate_a_worker.c "$runtime/gate_a_engineering_smoke_runtime.c" "$runtime/captured_file.c" -I"$runtime" -lm -o gate_a_worker_ubsan
+          cc -DGATE_A_NATIVE_TEMPERATURE_TESTING -std=c11 -Wall -Wextra -Werror -pedantic -O1 -g -pthread -fsanitize=undefined -fno-omit-frame-pointer test_gate_a_native_temperature.c "$runtime/gate_a_engineering_smoke_runtime.c" "$runtime/captured_file.c" -I"$runtime" -lm -o test_gate_a_native_temperature_ubsan
+          UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 ./gate_a_worker_ubsan --self-test
+          UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 ./test_gate_a_native_temperature_ubsan
 
       - name: Host adapter no-drive qualification
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter

@@ -329,6 +329,7 @@ def run_mock_self_test(executable: Path, evidence_root: Path) -> dict[str, Any]:
     )
     smoke_executor.verify_retained_runtime_evidence(plan, runtime_result)
     payload["retained_raw_lockin_and_lifecycle_verified"] = True
+    payload["retained_native_temperature_receipts_verified"] = True
     return payload
 
 
@@ -369,6 +370,7 @@ def qualify_no_drive(bundle_root: Path = BUNDLE_ROOT, *, compile_c: bool = True,
         require(worker_payload["live_execution_bound"] is False, "ordinary qualification worker unexpectedly authority-bound")
         require(self_test_payload["status"] == "GATE_A_WORKER_MOCK_SELF_TEST_OK", "worker mock self-test failed")
         require(self_test_payload["retained_raw_lockin_and_lifecycle_verified"] is True, "worker raw lock-in/lifecycle custody verification failed")
+        require(self_test_payload["retained_native_temperature_receipts_verified"] is True, "worker native temperature custody verification failed")
         compiled = True
     return {
         "status": "GATE_A_TARGET_RUNNER_NO_DRIVE_QUALIFIED",

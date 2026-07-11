@@ -11,12 +11,234 @@ when observation or the 68 C veto fails.
 
 from __future__ import annotations
 
-from pathlib import Path
+import hashlib
+import json
+import math
+import re
+from pathlib import Path, PurePosixPath
 from typing import Any
 
 import gate_a_engineering_smoke_executor_base as base
 import gate_a_temperature_custody as temperature_custody
 from gate_a_engineering_smoke_executor_base import *  # noqa: F401,F403
+
+_write_all = base._write_all
+
+NATIVE_TEMPERATURE_SCHEMA_ID = "CAT_CAS_PHASE6B6_GATE_A_NATIVE_TEMPERATURE_RECEIPT_V1"
+NATIVE_TEMPERATURE_RECEIPT_FILE = "TEMPERATURE_RECEIPTS.jsonl"
+NATIVE_TEMPERATURE_HWMON_ROOT = "/sys/class/hwmon"
+NATIVE_TEMPERATURE_PHASES = ("pre_capture", "post_capture")
+NATIVE_TEMPERATURE_RECEIPT_KEYS = frozenset({
+    "schema_id",
+    "phase",
+    "hwmon_root",
+    "required_driver_name",
+    "required_temperature_input",
+    "millidegrees_per_c",
+    "enumerated_hwmon_count",
+    "k10temp_candidate_count",
+    "selected_hwmon_entry",
+    "selected_driver_name",
+    "selected_temperature_path",
+    "raw_temperature_text",
+    "raw_temperature_sha256",
+    "raw_millidegrees_c",
+    "normalized_temperature_c",
+    "veto_temperature_c",
+    "observation_complete",
+    "veto_passed",
+    "failure",
+    "observation_tsc",
+})
+NATIVE_TEMPERATURE_FAILURES = frozenset({
+    "TEMPERATURE_CONTRACT_INVALID",
+    "HWMON_ROOT_UNOBSERVABLE",
+    "HWMON_ENUMERATION_EMPTY",
+    "HWMON_ENUMERATION_LIMIT",
+    "HWMON_ENUMERATION_UNOBSERVABLE",
+    "DRIVER_NAME_UNOBSERVABLE",
+    "DRIVER_NAME_EMPTY",
+    "TEMPERATURE_PATH_INVALID",
+    "K10TEMP_CANDIDATE_COUNT",
+    "TEMPERATURE_INPUT_UNOBSERVABLE",
+    "TEMPERATURE_RAW_HASH_FAILURE",
+    "TEMPERATURE_INTEGER_MALFORMED",
+    "TEMPERATURE_IMPLAUSIBLE",
+    "TEMPERATURE_RAW_FORMAT_FAILURE",
+    "TEMPERATURE_VETO",
+})
+
+
+def validate_native_temperature_receipt(
+    receipt: dict[str, Any],
+    *,
+    expected_phase: str,
+    require_pass: bool,
+    expected_hwmon_root: str = NATIVE_TEMPERATURE_HWMON_ROOT,
+) -> None:
+    """Validate the native runtime's closed thermal custody record."""
+
+    base.require(
+        isinstance(receipt, dict) and set(receipt) == NATIVE_TEMPERATURE_RECEIPT_KEYS,
+        "native temperature receipt key set mismatch",
+    )
+    base.require(receipt["schema_id"] == NATIVE_TEMPERATURE_SCHEMA_ID, "native temperature schema mismatch")
+    base.require(expected_phase in NATIVE_TEMPERATURE_PHASES, "native temperature expected phase is not closed")
+    base.require(receipt["phase"] == expected_phase, "native temperature phase mismatch")
+    base.require(receipt["hwmon_root"] == expected_hwmon_root, "native temperature hwmon root mismatch")
+    base.require(receipt["required_driver_name"] == temperature_custody.DRIVER_NAME, "native temperature driver mismatch")
+    base.require(receipt["required_temperature_input"] == temperature_custody.TEMPERATURE_INPUT, "native temperature input mismatch")
+    base.require(receipt["millidegrees_per_c"] == temperature_custody.MILLIDEGREES_PER_C, "native temperature scale mismatch")
+    base.require(receipt["veto_temperature_c"] == temperature_custody.VETO_C, "native temperature veto threshold mismatch")
+    enumerated = receipt["enumerated_hwmon_count"]
+    candidates = receipt["k10temp_candidate_count"]
+    base.require(isinstance(enumerated, int) and not isinstance(enumerated, bool) and 0 <= enumerated <= 64, "native hwmon count malformed")
+    base.require(isinstance(candidates, int) and not isinstance(candidates, bool) and 0 <= candidates <= enumerated, "native k10temp count malformed")
+    base.require(
+        isinstance(receipt["observation_tsc"], int)
+        and not isinstance(receipt["observation_tsc"], bool)
+        and receipt["observation_tsc"] > 0,
+        "native temperature observation TSC malformed",
+    )
+    base.require(type(receipt["observation_complete"]) is bool, "native temperature completeness malformed")
+    base.require(type(receipt["veto_passed"]) is bool, "native temperature veto result malformed")
+    base.require(
+        receipt["failure"] is None or isinstance(receipt["failure"], str),
+        "native temperature failure malformed",
+    )
+
+    selected = receipt["selected_hwmon_entry"]
+    selected_driver = receipt["selected_driver_name"]
+    selected_path = receipt["selected_temperature_path"]
+    if selected is None:
+        base.require(selected_driver is None and selected_path is None, "native temperature partial selection")
+    else:
+        base.require(
+            isinstance(selected, str)
+            and re.fullmatch(re.escape(expected_hwmon_root) + r"/hwmon[0-9]+", selected) is not None,
+            "native temperature selected hwmon path mismatch",
+        )
+        base.require(selected_driver == temperature_custody.DRIVER_NAME, "native temperature selected driver mismatch")
+        base.require(
+            selected_path == str(PurePosixPath(selected) / temperature_custody.TEMPERATURE_INPUT),
+            "native temperature selected input path mismatch",
+        )
+
+    raw_text = receipt["raw_temperature_text"]
+    raw_digest = receipt["raw_temperature_sha256"]
+    raw_millidegrees = receipt["raw_millidegrees_c"]
+    normalized = receipt["normalized_temperature_c"]
+    if raw_text is None:
+        base.require(raw_digest is None, "native temperature raw digest without raw text")
+    else:
+        base.require(isinstance(raw_text, str) and raw_text != "", "native temperature raw text malformed")
+        try:
+            raw_bytes = raw_text.encode("ascii")
+        except UnicodeEncodeError as exc:
+            raise base.ExecutorError("native temperature raw text is not ASCII") from exc
+        base.require(hashlib.sha256(raw_bytes).hexdigest() == raw_digest, "native temperature raw digest mismatch")
+    if raw_millidegrees is not None:
+        base.require(raw_text is not None, "native temperature integer lacks raw text")
+        stripped = raw_text.strip()
+        base.require(re.fullmatch(r"[+-]?[0-9]+", stripped) is not None, "native temperature raw integer malformed")
+        base.require(type(raw_millidegrees) is int and int(stripped, 10) == raw_millidegrees, "native temperature integer mismatch")
+    if normalized is not None:
+        base.require(raw_millidegrees is not None, "native normalized temperature lacks integer")
+        expected_normalized = raw_millidegrees / temperature_custody.MILLIDEGREES_PER_C
+        base.require(
+            isinstance(normalized, (int, float))
+            and not isinstance(normalized, bool)
+            and math.isfinite(normalized)
+            and math.isclose(normalized, expected_normalized, rel_tol=0.0, abs_tol=1e-12),
+            "native normalized temperature mismatch",
+        )
+
+    if receipt["observation_complete"]:
+        base.require(enumerated > 0 and candidates == 1 and selected is not None, "native complete observation lacks exact k10temp selection")
+        base.require(raw_millidegrees is not None and normalized is not None, "native complete observation lacks temperature value")
+        base.require(
+            temperature_custody.MIN_PLAUSIBLE_C <= normalized <= temperature_custody.MAX_PLAUSIBLE_C,
+            "native temperature is implausible",
+        )
+        expected_pass = raw_millidegrees < int(
+            temperature_custody.VETO_C * temperature_custody.MILLIDEGREES_PER_C
+        )
+        expected_failure = None if expected_pass else "TEMPERATURE_VETO"
+        base.require(receipt["veto_passed"] is expected_pass, "native temperature veto result mismatch")
+        base.require(receipt["failure"] == expected_failure, "native temperature completion failure mismatch")
+    else:
+        base.require(receipt["veto_passed"] is False, "incomplete native temperature observation passed")
+        base.require(receipt["failure"] in NATIVE_TEMPERATURE_FAILURES - {"TEMPERATURE_VETO"}, "native temperature failure is not closed")
+    if receipt["failure"] is not None:
+        base.require(receipt["failure"] in NATIVE_TEMPERATURE_FAILURES, "native temperature failure code mismatch")
+    if require_pass:
+        base.require(receipt["observation_complete"] is True, "native temperature observation incomplete")
+        base.require(receipt["veto_passed"] is True, "native temperature veto")
+
+
+def verify_native_temperature_receipts(
+    runtime_root: Path,
+    result: dict[str, Any],
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    path = runtime_root / NATIVE_TEMPERATURE_RECEIPT_FILE
+    base.require(path.is_file() and not path.is_symlink(), "native temperature receipt file missing")
+    try:
+        raw = path.read_bytes()
+    except OSError as exc:
+        raise base.ExecutorError("native temperature receipt file unreadable") from exc
+    base.require(raw != b"" and raw.endswith(b"\n"), "native temperature receipt file is incomplete")
+    lines = raw.splitlines()
+    base.require(len(lines) == 2 and all(lines), "native temperature receipt count mismatch")
+    try:
+        receipts = [json.loads(line.decode("ascii")) for line in lines]
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise base.ExecutorError("native temperature receipt JSON malformed") from exc
+    for receipt, phase in zip(receipts, NATIVE_TEMPERATURE_PHASES, strict=True):
+        validate_native_temperature_receipt(
+            receipt,
+            expected_phase=phase,
+            require_pass=True,
+        )
+    pre, post = receipts
+    base.require(
+        (
+            pre["hwmon_root"],
+            pre["selected_hwmon_entry"],
+            pre["selected_driver_name"],
+            pre["selected_temperature_path"],
+        )
+        == (
+            post["hwmon_root"],
+            post["selected_hwmon_entry"],
+            post["selected_driver_name"],
+            post["selected_temperature_path"],
+        ),
+        "native temperature sensor identity changed across capture",
+    )
+    base.require(pre["observation_tsc"] < post["observation_tsc"], "native temperature observation order mismatch")
+    capture = result["capture"]
+    base.require(pre["observation_tsc"] < capture["origin_tsc"], "native pre-capture receipt was not observed before capture")
+    base.require(post["observation_tsc"] > capture["last_sample_tsc"], "native post-capture receipt was not observed after capture")
+    return pre, post
+
+
+def verify_retained_runtime_evidence(
+    plan: base.FrozenPlan,
+    result: dict[str, Any],
+) -> None:
+    base.verify_retained_runtime_evidence(plan, result)
+    verify_native_temperature_receipts(plan.output_root / "runtime", result)
+
+
+class WorkerRuntime(base.WorkerRuntime):
+    """Reviewed worker bridge plus native k10temp receipt verification."""
+
+    def verify_evidence(
+        self,
+        plan: base.FrozenPlan,
+        result: dict[str, Any],
+    ) -> None:
+        verify_retained_runtime_evidence(plan, result)
 
 
 class LocalPreflight(base.LocalPreflight):
@@ -36,11 +258,14 @@ class LocalPreflight(base.LocalPreflight):
 
     def temperature_c(self) -> float:
         receipt = self.observe_temperature_receipt()
-        temperature_custody.validate_temperature_receipt(
-            receipt,
-            expected_phase="pre_runtime",
-            require_pass=True,
-        )
+        try:
+            temperature_custody.validate_temperature_receipt(
+                receipt,
+                expected_phase="pre_runtime",
+                require_pass=True,
+            )
+        except temperature_custody.TemperatureCustodyError as exc:
+            raise base.ExecutorError(str(exc)) from exc
         return temperature_custody.normalized_temperature_c(receipt)
 
     def temperature_receipt(self) -> dict[str, Any]:
@@ -83,11 +308,14 @@ def _retain_temperature_receipt(
             "failure": receipt["failure"],
         })
         # The closed receipt is durable before this pass/fail enforcement.
-        temperature_custody.validate_temperature_receipt(
-            receipt,
-            expected_phase="pre_runtime",
-            require_pass=True,
-        )
+        try:
+            temperature_custody.validate_temperature_receipt(
+                receipt,
+                expected_phase="pre_runtime",
+                require_pass=True,
+            )
+        except temperature_custody.TemperatureCustodyError as exc:
+            raise base.ExecutorError(str(exc)) from exc
         return temperature_custody.normalized_temperature_c(receipt)
 
     # Compatibility for dependency-injected qualification fakes.  The live
@@ -180,4 +408,6 @@ def execute_once(
     except Exception as exc:
         if evidence_started:
             surfaces.evidence.fail(str(exc))
+        if isinstance(exc, temperature_custody.TemperatureCustodyError):
+            raise base.ExecutorError(str(exc)) from exc
         raise

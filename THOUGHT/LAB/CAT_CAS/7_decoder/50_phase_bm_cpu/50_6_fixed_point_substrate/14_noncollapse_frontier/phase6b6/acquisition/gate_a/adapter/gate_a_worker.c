@@ -250,6 +250,9 @@ static int self_test(const char *retained_output) {
     int rc = run_gate_a_engineering_smoke(&args, &result);
     if (!rc && (result.slot_count != 16 || result.sample_count != 64000 ||
                 result.step_sender_epoch_count != 1 || result.hardware_executed ||
+                result.sender_start_count != 0 ||
+                result.receiver_start_count != 0 ||
+                result.temperature_receipt_count != 2 ||
                 result.capture_origin_tsc != 1000000000ULL ||
                 result.capture_first_sample_tsc != result.capture_origin_tsc ||
                 result.capture_last_sample_tsc >= result.capture_deadline_tsc ||
@@ -258,7 +261,8 @@ static int self_test(const char *retained_output) {
                 result.msr_reads || result.msr_writes)) rc = 1;
     const char *names[] = {
         "raw_samples.bin", "slot_trace.jsonl", "LOCKIN_IQ.jsonl",
-        "SENDER_LIFECYCLE.jsonl", "runtime_result.json"
+        "SENDER_LIFECYCLE.jsonl", GATE_A_TEMPERATURE_RECEIPT_FILE,
+        "runtime_result.json"
     };
     for (size_t i = 0; i < sizeof(names) / sizeof(names[0]); i++) {
         char path[CP_PATH_MAX];
@@ -276,7 +280,8 @@ static int self_test(const char *retained_output) {
          "\"network_connections\":0,\"hardware_executions\":0,"
          "\"frequency_writes\":0,\"voltage_writes\":0,"
          "\"msr_reads\":0,\"msr_writes\":0,\"slot_count\":16,"
-         "\"sample_count\":64000,\"step_sender_epoch_count\":1}");
+         "\"sample_count\":64000,\"step_sender_epoch_count\":1,"
+         "\"temperature_receipt_count\":2}");
     return 0;
 }
 

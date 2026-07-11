@@ -1,5 +1,8 @@
 #include "combined_pdn_hardware.c"
+#include "captured_file.h"
 #include "gate_a_engineering_smoke_runtime.h"
+
+#include <ctype.h>
 
 /*
  * Gate A is deliberately a separate bounded entry point inside this physical
@@ -230,6 +233,7 @@ static int gate_a_sender_abort(GateASender *sender) {
 
 static int gate_a_sender_arm(GateASender *sender, FILE *lifecycle,
                              const GateAReceiver *receiver,
+                             GateASmokeResult *result,
                              int core, double tsc_hz, double slot_s,
                              uint64_t session_origin, int first_slot,
                              int end_slot, int phase_index, int sign,
@@ -271,7 +275,10 @@ static int gate_a_sender_arm(GateASender *sender, FILE *lifecycle,
     int attr_rc = pthread_attr_setaffinity_np(&attr, sizeof(set), &set);
     int create_rc = attr_rc ? attr_rc :
         pthread_create(&sender->thread, &attr, gate_a_sender_loop, sender);
-    if (!create_rc) sender->alive = 1;
+    if (!create_rc) {
+        sender->alive = 1;
+        result->sender_start_count++;
+    }
     int destroy_rc = pthread_attr_destroy(&attr);
     if (create_rc || destroy_rc) {
         if (sender->alive) (void)gate_a_sender_abort(sender);
@@ -388,6 +395,9 @@ static int gate_a_write_result(const GateASmokeArgs *args,
             "  \"capture_tsc_hz\": %.17g,\n"
             "  \"step_sender_epoch_count\": %d,\n"
             "  \"hardware_executed\": %s,\n"
+            "  \"sender_start_count\": %d,\n"
+            "  \"receiver_start_count\": %d,\n"
+            "  \"temperature_receipt_count\": %d,\n"
             "  \"frequency_writes\": 0,\n"
             "  \"voltage_writes\": 0,\n"
             "  \"msr_reads\": 0,\n"
@@ -402,7 +412,10 @@ static int gate_a_write_result(const GateASmokeArgs *args,
             (unsigned long long)result->capture_last_sample_tsc,
             result->capture_tsc_hz,
             result->step_sender_epoch_count,
-            result->hardware_executed ? "true" : "false") < 0) {
+            result->hardware_executed ? "true" : "false",
+            result->sender_start_count,
+            result->receiver_start_count,
+            result->temperature_receipt_count) < 0) {
         fclose(f);
         unlink(path);
         return -1;
@@ -505,7 +518,8 @@ static int gate_a_run_real_capture(const GateASmokeArgs *args,
                                    uint64_t *timestamps, double *observations,
                                    int capacity, FILE *lifecycle,
                                    GateASender epochs[3],
-                                   uint64_t *receiver_epoch) {
+                                   uint64_t *receiver_epoch,
+                                   GateASmokeResult *result) {
     GateAReceiver receiver;
     memset(&receiver, 0, sizeof(receiver));
     receiver.core = args->receiver_core;
@@ -521,6 +535,8 @@ static int gate_a_run_real_capture(const GateASmokeArgs *args,
     receiver.count = -1;
     if (pthread_create(&receiver.thread, NULL, gate_a_receiver_loop, &receiver)) return -1;
     receiver.alive = 1;
+    result->receiver_start_count++;
+    result->hardware_executed = 1;
     while (!atomic_load_explicit(&receiver.ready, memory_order_acquire)) {
         if (atomic_load_explicit(&receiver.done, memory_order_acquire) ||
             rdtsc_now() >= origin) goto failure;
@@ -535,18 +551,21 @@ static int gate_a_run_real_capture(const GateASmokeArgs *args,
         }
         if (atomic_load_explicit(&receiver.done, memory_order_acquire)) goto failure;
         if (slot == 6 && gate_a_sender_arm(
-                &epochs[0], lifecycle, &receiver, args->sender_core, tsc_hz, args->slot_s,
+                &epochs[0], lifecycle, &receiver, result,
+                args->sender_core, tsc_hz, args->slot_s,
                 origin, 6, 10, 0, 1, "gate-a:step:epoch0")) goto failure;
         if (slot == 9 && gate_a_sender_stop_join(&epochs[0], lifecycle, &receiver)) goto failure;
         if (slot == 12) {
             if (gate_a_sender_arm(
-                    &epochs[1], lifecycle, &receiver, args->sender_core, tsc_hz, args->slot_s,
+                    &epochs[1], lifecycle, &receiver, result,
+                    args->sender_core, tsc_hz, args->slot_s,
                     origin, 12, 13, 0, 1, "gate-a:anchor:positive") ||
                 gate_a_sender_stop_join(&epochs[1], lifecycle, &receiver)) goto failure;
         }
         if (slot == 13) {
             if (gate_a_sender_arm(
-                    &epochs[2], lifecycle, &receiver, args->sender_core, tsc_hz, args->slot_s,
+                    &epochs[2], lifecycle, &receiver, result,
+                    args->sender_core, tsc_hz, args->slot_s,
                     origin, 13, 14, 4, -1, "gate-a:anchor:negative") ||
                 gate_a_sender_stop_join(&epochs[2], lifecycle, &receiver)) goto failure;
         }
@@ -588,6 +607,462 @@ failure:
     }
     return -1;
 }
+
+#define GATE_A_TEMPERATURE_MAX_ENTRIES 64
+#define GATE_A_TEMPERATURE_ENTRY_NAME_MAX 64
+#define GATE_A_TEMPERATURE_TEXT_MAX 128
+
+typedef struct {
+    char phase[32];
+    char hwmon_root[CP_PATH_MAX];
+    int enumerated_hwmon_count;
+    int k10temp_candidate_count;
+    char selected_hwmon_entry[CP_PATH_MAX];
+    char selected_driver_name[GATE_A_TEMPERATURE_TEXT_MAX];
+    char selected_temperature_path[CP_PATH_MAX];
+    char raw_temperature_text[GATE_A_TEMPERATURE_TEXT_MAX];
+    char raw_temperature_sha256[CAPTURED_SHA256_LEN + 1];
+    long raw_millidegrees_c;
+    double normalized_temperature_c;
+    int selected;
+    int raw_available;
+    int raw_millidegrees_available;
+    int normalized_available;
+    int observation_complete;
+    int veto_passed;
+    const char *failure;
+    uint64_t observation_tsc;
+} GateATemperatureReceipt;
+
+static int gate_a_copy_text(char *destination, size_t capacity,
+                            const char *source) {
+    size_t length;
+    if (!destination || !capacity || !source) return -1;
+    length = strlen(source);
+    if (length >= capacity) return -1;
+    memcpy(destination, source, length + 1);
+    return 0;
+}
+
+static int gate_a_hwmon_entry_name(const char *name) {
+    size_t index;
+    if (!name || strncmp(name, "hwmon", 5) || !name[5]) return 0;
+    for (index = 5; name[index]; index++) {
+        if (!isdigit((unsigned char)name[index])) return 0;
+    }
+    return 1;
+}
+
+static int gate_a_compare_entry_names(const void *left, const void *right) {
+    return strcmp((const char *)left, (const char *)right);
+}
+
+static int gate_a_same_identity(const struct stat *left,
+                                const struct stat *right) {
+    return left->st_dev == right->st_dev &&
+           left->st_ino == right->st_ino &&
+           left->st_mode == right->st_mode;
+}
+
+static int gate_a_read_text_once(const char *path, char *output,
+                                 size_t capacity, size_t *size_out) {
+    int flags = O_RDONLY;
+    int descriptor;
+    size_t total = 0;
+    unsigned char extra;
+#ifdef O_CLOEXEC
+    flags |= O_CLOEXEC;
+#endif
+    if (!path || !output || capacity < 2 || !size_out) return -1;
+    descriptor = open(path, flags);
+    if (descriptor < 0) return -1;
+    while (total < capacity - 1) {
+        ssize_t count = read(descriptor, output + total, capacity - 1 - total);
+        if (count < 0 && errno == EINTR) continue;
+        if (count < 0) {
+            close(descriptor);
+            return -1;
+        }
+        if (!count) break;
+        total += (size_t)count;
+    }
+    for (;;) {
+        ssize_t count = read(descriptor, &extra, 1);
+        if (count < 0 && errno == EINTR) continue;
+        if (count != 0) {
+            close(descriptor);
+            return -1;
+        }
+        break;
+    }
+    if (close(descriptor)) return -1;
+    if (!total) return -1;
+    for (size_t index = 0; index < total; index++) {
+        unsigned char value = (unsigned char)output[index];
+        if (!value || value > 0x7f) return -1;
+    }
+    output[total] = '\0';
+    *size_out = total;
+    return 0;
+}
+
+static int gate_a_read_stable_text(const char *path, char *output,
+                                   size_t capacity, size_t *size_out) {
+    struct stat before, middle, after;
+    char repeated[GATE_A_TEMPERATURE_TEXT_MAX];
+    size_t first_size = 0, second_size = 0;
+    if (capacity > sizeof(repeated) ||
+        stat(path, &before) || !S_ISREG(before.st_mode) ||
+        gate_a_read_text_once(path, output, capacity, &first_size) ||
+        stat(path, &middle) ||
+        gate_a_read_text_once(path, repeated, capacity, &second_size) ||
+        stat(path, &after) ||
+        !gate_a_same_identity(&before, &middle) ||
+        !gate_a_same_identity(&middle, &after) ||
+        first_size != second_size ||
+        memcmp(output, repeated, first_size)) {
+        return -1;
+    }
+    *size_out = first_size;
+    return 0;
+}
+
+static int gate_a_trimmed_text(const char *raw, size_t raw_size,
+                               char *output, size_t capacity) {
+    size_t first = 0, last = raw_size, length;
+    while (first < last && isspace((unsigned char)raw[first])) first++;
+    while (last > first && isspace((unsigned char)raw[last - 1])) last--;
+    length = last - first;
+    if (!length || length >= capacity) return -1;
+    memcpy(output, raw + first, length);
+    output[length] = '\0';
+    return 0;
+}
+
+static int gate_a_parse_millidegrees(const char *raw, size_t raw_size,
+                                     long *value) {
+    char number[GATE_A_TEMPERATURE_TEXT_MAX];
+    char *end = NULL;
+    size_t index = 0;
+    if (gate_a_trimmed_text(raw, raw_size, number, sizeof(number))) return -1;
+    if (number[index] == '+' || number[index] == '-') index++;
+    if (!number[index]) return -1;
+    for (; number[index]; index++) {
+        if (!isdigit((unsigned char)number[index])) return -1;
+    }
+    errno = 0;
+    *value = strtol(number, &end, 10);
+    return errno || !end || *end ? -1 : 0;
+}
+
+static void gate_a_temperature_init(GateATemperatureReceipt *receipt,
+                                    const char *root, const char *phase) {
+    memset(receipt, 0, sizeof(*receipt));
+    if (gate_a_copy_text(receipt->phase, sizeof(receipt->phase), phase) ||
+        gate_a_copy_text(receipt->hwmon_root, sizeof(receipt->hwmon_root), root)) {
+        receipt->failure = "TEMPERATURE_CONTRACT_INVALID";
+    }
+}
+
+static int gate_a_observe_temperature(const char *root, const char *phase,
+                                      uint64_t observation_tsc,
+                                      GateATemperatureReceipt *receipt) {
+    DIR *directory = NULL;
+    struct dirent *entry;
+    char names[GATE_A_TEMPERATURE_MAX_ENTRIES]
+              [GATE_A_TEMPERATURE_ENTRY_NAME_MAX];
+    int name_count = 0;
+    gate_a_temperature_init(receipt, root, phase);
+    if (receipt->failure) goto done;
+    directory = opendir(root);
+    if (!directory) {
+        receipt->failure = "HWMON_ROOT_UNOBSERVABLE";
+        goto done;
+    }
+    errno = 0;
+    while ((entry = readdir(directory)) != NULL) {
+        if (!gate_a_hwmon_entry_name(entry->d_name)) continue;
+        if (name_count >= GATE_A_TEMPERATURE_MAX_ENTRIES ||
+            gate_a_copy_text(names[name_count], sizeof(names[name_count]),
+                             entry->d_name)) {
+            receipt->failure = "HWMON_ENUMERATION_LIMIT";
+            goto done;
+        }
+        name_count++;
+    }
+    if (errno) {
+        receipt->failure = "HWMON_ENUMERATION_UNOBSERVABLE";
+        goto done;
+    }
+    if (!name_count) {
+        receipt->failure = "HWMON_ENUMERATION_EMPTY";
+        goto done;
+    }
+    qsort(names, (size_t)name_count, sizeof(names[0]),
+          gate_a_compare_entry_names);
+    receipt->enumerated_hwmon_count = name_count;
+    for (int index = 0; index < name_count; index++) {
+        char entry_path[CP_PATH_MAX], name_path[CP_PATH_MAX];
+        char driver_raw[GATE_A_TEMPERATURE_TEXT_MAX];
+        char driver_name[GATE_A_TEMPERATURE_TEXT_MAX];
+        size_t driver_size = 0;
+        if (joinp(entry_path, sizeof(entry_path), root, names[index]) ||
+            joinp(name_path, sizeof(name_path), entry_path, "name") ||
+            gate_a_read_stable_text(name_path, driver_raw,
+                                    sizeof(driver_raw), &driver_size)) {
+            receipt->failure = "DRIVER_NAME_UNOBSERVABLE";
+            goto done;
+        }
+        if (gate_a_trimmed_text(driver_raw, driver_size, driver_name,
+                                sizeof(driver_name))) {
+            receipt->failure = "DRIVER_NAME_EMPTY";
+            goto done;
+        }
+        if (strcmp(driver_name, GATE_A_TEMPERATURE_DRIVER_NAME)) continue;
+        receipt->k10temp_candidate_count++;
+        if (receipt->k10temp_candidate_count == 1) {
+            if (gate_a_copy_text(receipt->selected_hwmon_entry,
+                                 sizeof(receipt->selected_hwmon_entry),
+                                 entry_path) ||
+                gate_a_copy_text(receipt->selected_driver_name,
+                                 sizeof(receipt->selected_driver_name),
+                                 driver_name) ||
+                joinp(receipt->selected_temperature_path,
+                      sizeof(receipt->selected_temperature_path),
+                      entry_path, GATE_A_TEMPERATURE_INPUT)) {
+                receipt->failure = "TEMPERATURE_PATH_INVALID";
+                goto done;
+            }
+        }
+    }
+    if (receipt->k10temp_candidate_count != 1) {
+        receipt->failure = "K10TEMP_CANDIDATE_COUNT";
+        goto done;
+    }
+    receipt->selected = 1;
+    {
+        size_t raw_size = 0;
+        if (gate_a_read_stable_text(
+                receipt->selected_temperature_path,
+                receipt->raw_temperature_text,
+                sizeof(receipt->raw_temperature_text), &raw_size)) {
+            receipt->failure = "TEMPERATURE_INPUT_UNOBSERVABLE";
+            goto done;
+        }
+        receipt->raw_available = 1;
+        if (hash_captured(
+                (const unsigned char *)receipt->raw_temperature_text,
+                raw_size, receipt->raw_temperature_sha256)) {
+            receipt->failure = "TEMPERATURE_RAW_HASH_FAILURE";
+            goto done;
+        }
+        if (gate_a_parse_millidegrees(receipt->raw_temperature_text,
+                                      raw_size,
+                                      &receipt->raw_millidegrees_c)) {
+            receipt->failure = "TEMPERATURE_INTEGER_MALFORMED";
+            goto done;
+        }
+    }
+    receipt->raw_millidegrees_available = 1;
+    if (receipt->raw_millidegrees_c <
+            GATE_A_TEMPERATURE_MIN_MILLIDEGREES ||
+        receipt->raw_millidegrees_c >
+            GATE_A_TEMPERATURE_MAX_MILLIDEGREES) {
+        receipt->failure = "TEMPERATURE_IMPLAUSIBLE";
+        goto done;
+    }
+    receipt->normalized_temperature_c =
+        (double)receipt->raw_millidegrees_c /
+        (double)GATE_A_TEMPERATURE_MILLIDEGREES_PER_C;
+    receipt->normalized_available = 1;
+    receipt->observation_complete = 1;
+    receipt->veto_passed =
+        receipt->raw_millidegrees_c <
+        GATE_A_TEMPERATURE_VETO_MILLIDEGREES;
+    receipt->failure = receipt->veto_passed ? NULL : "TEMPERATURE_VETO";
+
+done:
+    if (directory) {
+        if (closedir(directory) && !receipt->failure) {
+            receipt->observation_complete = 0;
+            receipt->veto_passed = 0;
+            receipt->failure = "HWMON_ENUMERATION_UNOBSERVABLE";
+        }
+    }
+    receipt->observation_tsc = observation_tsc
+        ? observation_tsc : rdtsc_now();
+    return receipt->observation_complete && receipt->veto_passed ? 0 : 1;
+}
+
+static int gate_a_mock_temperature(long millidegrees, const char *phase,
+                                   uint64_t observation_tsc,
+                                   GateATemperatureReceipt *receipt) {
+    size_t raw_size;
+    if (!millidegrees) millidegrees = 42000;
+    gate_a_temperature_init(receipt, GATE_A_TEMPERATURE_HWMON_ROOT, phase);
+    receipt->enumerated_hwmon_count = 1;
+    receipt->k10temp_candidate_count = 1;
+    if (joinp(receipt->selected_hwmon_entry,
+              sizeof(receipt->selected_hwmon_entry),
+              GATE_A_TEMPERATURE_HWMON_ROOT, "hwmon0") ||
+        gate_a_copy_text(receipt->selected_driver_name,
+                         sizeof(receipt->selected_driver_name),
+                         GATE_A_TEMPERATURE_DRIVER_NAME) ||
+        joinp(receipt->selected_temperature_path,
+              sizeof(receipt->selected_temperature_path),
+              receipt->selected_hwmon_entry,
+              GATE_A_TEMPERATURE_INPUT)) {
+        receipt->failure = "TEMPERATURE_CONTRACT_INVALID";
+        receipt->observation_tsc = observation_tsc;
+        return 1;
+    }
+    receipt->selected = 1;
+    if (snprintf(receipt->raw_temperature_text,
+                 sizeof(receipt->raw_temperature_text), "%ld\n",
+                 millidegrees) < 0) {
+        receipt->failure = "TEMPERATURE_RAW_FORMAT_FAILURE";
+        receipt->observation_tsc = observation_tsc;
+        return 1;
+    }
+    raw_size = strlen(receipt->raw_temperature_text);
+    receipt->raw_available = 1;
+    if (hash_captured(
+            (const unsigned char *)receipt->raw_temperature_text,
+            raw_size, receipt->raw_temperature_sha256)) {
+        receipt->failure = "TEMPERATURE_RAW_HASH_FAILURE";
+        receipt->observation_tsc = observation_tsc;
+        return 1;
+    }
+    receipt->raw_millidegrees_c = millidegrees;
+    receipt->raw_millidegrees_available = 1;
+    if (millidegrees < GATE_A_TEMPERATURE_MIN_MILLIDEGREES ||
+        millidegrees > GATE_A_TEMPERATURE_MAX_MILLIDEGREES) {
+        receipt->failure = "TEMPERATURE_IMPLAUSIBLE";
+        receipt->observation_tsc = observation_tsc;
+        return 1;
+    }
+    receipt->normalized_temperature_c =
+        (double)millidegrees /
+        (double)GATE_A_TEMPERATURE_MILLIDEGREES_PER_C;
+    receipt->normalized_available = 1;
+    receipt->observation_complete = 1;
+    receipt->veto_passed =
+        millidegrees < GATE_A_TEMPERATURE_VETO_MILLIDEGREES;
+    receipt->failure = receipt->veto_passed ? NULL : "TEMPERATURE_VETO";
+    receipt->observation_tsc = observation_tsc;
+    return receipt->veto_passed ? 0 : 1;
+}
+
+static int gate_a_json_string_or_null(FILE *file, const char *value,
+                                      int available) {
+    if (!available) return fputs("null", file) < 0 ? -1 : 0;
+    if (fputc('"', file) == EOF || json_escape(file, value) ||
+        fputc('"', file) == EOF) return -1;
+    return 0;
+}
+
+static int gate_a_write_temperature_receipt(
+        FILE *file, const GateATemperatureReceipt *receipt) {
+    if (!file || !receipt || !receipt->observation_tsc ||
+        fprintf(file,
+            "{\"schema_id\":\"%s\",\"phase\":\"%s\","
+            "\"hwmon_root\":\"",
+            GATE_A_TEMPERATURE_SCHEMA_ID, receipt->phase) < 0 ||
+        json_escape(file, receipt->hwmon_root) ||
+        fprintf(file,
+            "\",\"required_driver_name\":\"%s\","
+            "\"required_temperature_input\":\"%s\","
+            "\"millidegrees_per_c\":%ld,"
+            "\"enumerated_hwmon_count\":%d,"
+            "\"k10temp_candidate_count\":%d,"
+            "\"selected_hwmon_entry\":",
+            GATE_A_TEMPERATURE_DRIVER_NAME, GATE_A_TEMPERATURE_INPUT,
+            GATE_A_TEMPERATURE_MILLIDEGREES_PER_C,
+            receipt->enumerated_hwmon_count,
+            receipt->k10temp_candidate_count) < 0 ||
+        gate_a_json_string_or_null(file, receipt->selected_hwmon_entry,
+                                   receipt->selected) ||
+        fputs(",\"selected_driver_name\":", file) < 0 ||
+        gate_a_json_string_or_null(file, receipt->selected_driver_name,
+                                   receipt->selected) ||
+        fputs(",\"selected_temperature_path\":", file) < 0 ||
+        gate_a_json_string_or_null(file,
+                                   receipt->selected_temperature_path,
+                                   receipt->selected) ||
+        fputs(",\"raw_temperature_text\":", file) < 0 ||
+        gate_a_json_string_or_null(file, receipt->raw_temperature_text,
+                                   receipt->raw_available) ||
+        fputs(",\"raw_temperature_sha256\":", file) < 0 ||
+        gate_a_json_string_or_null(file,
+                                   receipt->raw_temperature_sha256,
+                                   receipt->raw_available) ||
+        fputs(",\"raw_millidegrees_c\":", file) < 0) {
+        return -1;
+    }
+    if (receipt->raw_millidegrees_available) {
+        if (fprintf(file, "%ld", receipt->raw_millidegrees_c) < 0) return -1;
+    } else if (fputs("null", file) < 0) {
+        return -1;
+    }
+    if (fputs(",\"normalized_temperature_c\":", file) < 0) return -1;
+    if (receipt->normalized_available) {
+        if (fprintf(file, "%.17g", receipt->normalized_temperature_c) < 0) {
+            return -1;
+        }
+    } else if (fputs("null", file) < 0) {
+        return -1;
+    }
+    if (fprintf(file,
+            ",\"veto_temperature_c\":%.17g,"
+            "\"observation_complete\":%s,\"veto_passed\":%s,"
+            "\"failure\":",
+            (double)GATE_A_TEMPERATURE_VETO_MILLIDEGREES /
+                (double)GATE_A_TEMPERATURE_MILLIDEGREES_PER_C,
+            receipt->observation_complete ? "true" : "false",
+            receipt->veto_passed ? "true" : "false") < 0 ||
+        gate_a_json_string_or_null(file, receipt->failure,
+                                   receipt->failure != NULL) ||
+        fprintf(file, ",\"observation_tsc\":%llu}\n",
+                (unsigned long long)receipt->observation_tsc) < 0 ||
+        fflush(file) || fsync(fileno(file))) {
+        return -1;
+    }
+    return 0;
+}
+
+static int gate_a_retain_temperature(
+        FILE *file, const char *phase, int mock, long mock_millidegrees,
+        uint64_t observation_tsc, GateATemperatureReceipt *receipt) {
+    int observation = mock
+        ? gate_a_mock_temperature(mock_millidegrees, phase,
+                                  observation_tsc, receipt)
+        : gate_a_observe_temperature(GATE_A_TEMPERATURE_HWMON_ROOT,
+                                     phase, observation_tsc, receipt);
+    if (gate_a_write_temperature_receipt(file, receipt)) return -1;
+    return observation;
+}
+
+#ifdef GATE_A_NATIVE_TEMPERATURE_TESTING
+int gate_a_test_observe_temperature(const char *hwmon_root,
+                                    const char *phase,
+                                    const char *receipt_path,
+                                    uint64_t observation_tsc) {
+    GateATemperatureReceipt receipt;
+    FILE *file;
+    int observation;
+    if (!hwmon_root || !phase || !receipt_path ||
+        !observation_tsc ||
+        (strcmp(phase, "pre_capture") &&
+         strcmp(phase, "post_capture"))) return -1;
+    file = fopen(receipt_path, "wx");
+    if (!file) return -1;
+    observation = gate_a_observe_temperature(
+        hwmon_root, phase, observation_tsc, &receipt);
+    if (gate_a_write_temperature_receipt(file, &receipt) ||
+        close_sync(&file)) return -1;
+    return observation;
+}
+#endif
 
 static int gate_a_write_lockin(const GateASmokeArgs *args,
                                const GateASmokeResult *result,
@@ -646,6 +1121,7 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
     int rc = 0;
     const char *reason = "";
     FILE *raw = NULL, *trace = NULL, *lifecycle = NULL;
+    FILE *temperature_receipts = NULL;
     uint64_t *timestamps = NULL;
     double *observations = NULL;
     GateASender epochs[3];
@@ -673,10 +1149,19 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
     memset(result, 0, sizeof(*result));
     result->slot_count = 16;
     result->step_sender_epoch_count = 1;
-    result->hardware_executed = !mock;
-
     if (mkdir(args->output_dir, 0700)) return 2;
-    if (joinp(path, sizeof(path), args->output_dir, "raw_samples.bin")) return 5;
+    if (joinp(path, sizeof(path), args->output_dir,
+              GATE_A_TEMPERATURE_RECEIPT_FILE)) {
+        reason = "PATH_JOIN_FAILURE";
+        rc = 5;
+        goto cleanup;
+    }
+    temperature_receipts = fopen(path, "wx");
+    if (joinp(path, sizeof(path), args->output_dir, "raw_samples.bin")) {
+        reason = "PATH_JOIN_FAILURE";
+        rc = 5;
+        goto cleanup;
+    }
     raw = fopen(path, "wbx");
     if (joinp(path, sizeof(path), args->output_dir, "slot_trace.jsonl")) {
         reason = "PATH_JOIN_FAILURE";
@@ -690,7 +1175,7 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
         goto cleanup;
     }
     lifecycle = fopen(path, "wx");
-    if (!raw || !trace || !lifecycle) {
+    if (!temperature_receipts || !raw || !trace || !lifecycle) {
         reason = "EVIDENCE_OPEN_FAILURE";
         rc = 5;
         goto cleanup;
@@ -715,18 +1200,26 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
         rc = 4;
         goto cleanup;
     }
+    {
+        GateATemperatureReceipt pre_temperature;
+        int pre_status = gate_a_retain_temperature(
+            temperature_receipts, "pre_capture", mock,
+            args->mock_pre_temperature_millidegrees,
+            mock ? 900000000ULL : 0, &pre_temperature);
+        if (pre_status < 0) {
+            reason = "TEMPERATURE_RECEIPT_WRITE_FAILURE";
+            rc = 5;
+            goto cleanup;
+        }
+        result->temperature_receipt_count++;
+        if (pre_status > 0) {
+            reason = pre_temperature.failure
+                ? pre_temperature.failure : "TEMPERATURE_UNOBSERVABLE";
+            rc = 3;
+            goto cleanup;
+        }
+    }
     if (!mock) {
-        if (locate_temp()) {
-            reason = "TEMPERATURE_UNOBSERVABLE";
-            rc = 3;
-            goto cleanup;
-        }
-        double observed_temp = temperature();
-        if (!isfinite(observed_temp) || observed_temp >= args->temperature_veto_c) {
-            reason = "THERMAL_VETO";
-            rc = 3;
-            goto cleanup;
-        }
         long sender_khz = cur_khz(args->sender_core);
         long receiver_khz = cur_khz(args->receiver_core);
         if (sender_khz != args->required_frequency_khz ||
@@ -782,7 +1275,7 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
     } else {
         count = gate_a_run_real_capture(
             args, tsc_hz, origin, timestamps, observations, cap,
-            lifecycle, epochs, &receiver_epoch);
+            lifecycle, epochs, &receiver_epoch, result);
         if (count < 0) {
             reason = "SENDER_OR_RECEIVER_LIFECYCLE_FAILURE";
             rc = 4;
@@ -940,15 +1433,36 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
         rc = 5;
         goto cleanup;
     }
-    if (!mock) {
-        double observed_temp = temperature();
-        if (!isfinite(observed_temp) || observed_temp >= args->temperature_veto_c ||
-            cur_khz(args->sender_core) != args->required_frequency_khz ||
-            cur_khz(args->receiver_core) != args->required_frequency_khz) {
-            reason = "POST_CAPTURE_VETO";
+    {
+        GateATemperatureReceipt post_temperature;
+        int post_status = gate_a_retain_temperature(
+            temperature_receipts, "post_capture", mock,
+            args->mock_post_temperature_millidegrees,
+            mock ? 26600000001ULL : 0, &post_temperature);
+        if (post_status < 0) {
+            reason = "TEMPERATURE_RECEIPT_WRITE_FAILURE";
+            rc = 5;
+            goto cleanup;
+        }
+        result->temperature_receipt_count++;
+        if (post_status > 0) {
+            reason = post_temperature.failure
+                ? post_temperature.failure : "TEMPERATURE_UNOBSERVABLE";
             rc = 3;
             goto cleanup;
         }
+    }
+    if (!mock &&
+        (cur_khz(args->sender_core) != args->required_frequency_khz ||
+         cur_khz(args->receiver_core) != args->required_frequency_khz)) {
+        reason = "POST_CAPTURE_FREQUENCY_VETO";
+        rc = 3;
+        goto cleanup;
+    }
+    if (close_sync(&temperature_receipts)) {
+        reason = "TEMPERATURE_RECEIPT_SYNC_FAILURE";
+        rc = 5;
+        goto cleanup;
     }
     if (gate_a_write_result(args, result)) {
         reason = "RESULT_WRITER_FAILURE";
@@ -972,6 +1486,11 @@ cleanup:
     }
     if (lifecycle && close_sync(&lifecycle) && rc == 0) {
         reason = "LIFECYCLE_SYNC_FAILURE";
+        rc = 5;
+    }
+    if (temperature_receipts &&
+        close_sync(&temperature_receipts) && rc == 0) {
+        reason = "TEMPERATURE_RECEIPT_SYNC_FAILURE";
         rc = 5;
     }
     free(timestamps);
