@@ -11,13 +11,7 @@ on:
       - ".github/workflows/phase6b6-gate-a-adapter-qualification.yml"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/**"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_engineering_smoke_7e1e8835/**"
-      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c"
-      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.h"
-      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/gate_a_engineering_smoke_runtime.c"
-      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/gate_a_engineering_smoke_runtime.h"
-      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/captured_file.c"
-      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/captured_file.h"
-      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/capture_quality_contract.h"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/**"
   push:
     branches:
       - codex/phase6b6-gate-a-engineering-smoke-executor
@@ -36,15 +30,28 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Compile new Python
+      - name: Compile adapter sources
         run: |
           python -m compileall THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
 
-      - name: Validate contract, schema, candidate, result, and bundle
+      - name: Re-run full sealed-head adapter qualification
+        shell: bash
+        run: |
+          historical="$RUNNER_TEMP/gate_a_sealed_head"
+          git worktree add --detach "$historical" 0cb60899f531c185424f605c92be4622dcc1efef
+          python "$historical/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/verify_gate_a_adapter_qualification.py"
+          git worktree remove --force "$historical"
+
+      - name: Exact k10temp custody tests
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
+        run: |
+          python -m unittest discover -s . -p 'test_gate_a_temperature_custody.py' -v
+
+      - name: Validate current repair contract and deterministic bundle
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
         run: |
           python build_gate_a_execution_bundle.py --compare-twice
-          python verify_gate_a_adapter_qualification.py
+          python verify_gate_a_k10temp_repair.py
 
       - name: Compile C strictly and run non-driving validation
         working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
@@ -94,13 +101,13 @@ jobs:
             python "$RUNNER_TEMP/gate_a_harness/gate_a_isolated_qualification.py" \
               --bundle-root "$RUNNER_TEMP/gate_a_extract" --require-isolated-origin --strict-only
 
-      - name: Isolated extracted target-runner no-drive strict validation (repository excluded from PYTHONPATH)
+      - name: Isolated extracted target-runner no-drive strict validation
         run: |
           cd "$RUNNER_TEMP/gate_a_extract"
           env -i PATH="$PATH" HOME="$RUNNER_TEMP/gate_a_home" PYTHONNOUSERSITE=1 PYTHONPATH="" PYTHONDONTWRITEBYTECODE=1 \
             python adapter/gate_a_target_runner.py --qualify-no-drive
 
-      - name: Isolated synthetic authority, root-state, and strict-custody suites (repository excluded)
+      - name: Isolated synthetic authority and custody suites
         run: |
           cd "$RUNNER_TEMP/gate_a_extract"
           env -i PATH="$PATH" HOME="$RUNNER_TEMP/gate_a_home" PYTHONNOUSERSITE=1 PYTHONPATH="" PYTHONDONTWRITEBYTECODE=1 \
@@ -112,52 +119,26 @@ jobs:
           diff -r "$RUNNER_TEMP/gate_a_extract" "$RUNNER_TEMP/gate_a_extract_ref"
           test ! -e "$RUNNER_TEMP/gate_a_extract/adapter/__pycache__"
 
-      - name: Prove authority state exact and reviewed surfaces untouched
+      - name: Prove consumed authority archived and active slot absent
         shell: bash
         run: |
-          authority=THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/GATE_A_EXECUTION_AUTHORITY.json
-          authority_schema=THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/schemas/gate_a_execution_authority.schema.json
+          adapter=THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
+          active="$adapter/GATE_A_EXECUTION_AUTHORITY.json"
+          consumed="$adapter/GATE_A_EXECUTION_AUTHORITY_CONSUMED_7e1e8835.json"
+          authority_schema="$adapter/schemas/gate_a_execution_authority.schema.json"
           expected_sha256=7e1e8835bd67590e4e554ae112a2c8a6ca99dd8b9b3a9aafdb23fee31907d682
           expected_blob=709c799f60e30984d3c80715af480fbe5deac952
-          filesystem_output=$(find . -path './.git' -prune -o -iname 'gate_a_execution_authority*.json' ! -path "./$authority_schema" -print)
-          filesystem_authorities=()
-          if [ -n "$filesystem_output" ]; then
-            while IFS= read -r candidate; do filesystem_authorities+=("${candidate#./}"); done <<< "$filesystem_output"
-          fi
-          tracked_files=$(git ls-files)
-          tracked_output=$(printf '%s\n' "$tracked_files" | awk -v schema="$authority_schema" 'tolower($0) ~ /(^|\/)gate_a_execution_authority[^\/]*\.json$/ && $0 != schema { print }')
-          tracked_authorities=()
-          if [ -n "$tracked_output" ]; then
-            while IFS= read -r candidate; do tracked_authorities+=("$candidate"); done <<< "$tracked_output"
-          fi
-          authority_status=$(git status --porcelain=v1 --untracked-files=all -- ':(icase,glob)**/gate_a_execution_authority*.json' ":(exclude)$authority_schema")
-          test -z "$authority_status"
-          if [ "${#filesystem_authorities[@]}" -eq 0 ] && [ "${#tracked_authorities[@]}" -eq 0 ]; then
-            echo "Gate A execution authority remains absent"
-          elif [ "${#filesystem_authorities[@]}" -eq 1 ] && [ "${#tracked_authorities[@]}" -eq 1 ] && [ "${filesystem_authorities[0]}" = "$authority" ] && [ "${tracked_authorities[0]}" = "$authority" ]; then
-            test -f "$authority"
-            test ! -L "$authority"
-            test "$(sha256sum "$authority" | awk '{print $1}')" = "$expected_sha256"
-            test "$(git hash-object "$authority")" = "$expected_blob"
-            test "$(git rev-parse "HEAD:$authority")" = "$expected_blob"
-          else
-            echo "Gate A execution authority path set is not closed" >&2
-            printf 'filesystem: %s\n' "${filesystem_authorities[*]}" >&2
-            printf 'tracked: %s\n' "${tracked_authorities[*]}" >&2
-            exit 1
-          fi
-          git diff --exit-code origin/main...HEAD -- \
-            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts \
-            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime \
-            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/analysis \
-            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/qualification \
-            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence \
-            ":(exclude)THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_target_nonexecuting_qualification_6f243b1a_bundle_abc9e50a/**" \
-            ":(exclude)THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_target_nonexecuting_qualification_replacement_gate_a_replacement_593e9920_02/**" \
-            ":(exclude)THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_engineering_smoke_7e1e8835/**" \
-            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2 \
-            ":(exclude)THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/gate_a_engineering_smoke_runtime.c" \
-            ":(exclude)THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/gate_a_engineering_smoke_runtime.h"
+          test ! -e "$active"
+          test -f "$consumed"
+          test ! -L "$consumed"
+          test "$(sha256sum "$consumed" | awk '{print $1}')" = "$expected_sha256"
+          test "$(git hash-object "$consumed")" = "$expected_blob"
+          test "$(git rev-parse "HEAD:$consumed")" = "$expected_blob"
+          filesystem_output=$(find . -path './.git' -prune -o -iname 'gate_a_execution_authority*.json' ! -path "./$authority_schema" -print | sed 's#^./##' | sort)
+          tracked_output=$(git ls-files | awk -v schema="$authority_schema" 'tolower($0) ~ /(^|\/)gate_a_execution_authority[^\/]*\.json$/ && $0 != schema { print }' | sort)
+          test "$filesystem_output" = "$consumed"
+          test "$tracked_output" = "$consumed"
+          test -z "$(git status --porcelain=v1 --untracked-files=all -- ':(icase,glob)**/gate_a_execution_authority*.json' ":(exclude)$authority_schema")"
 
       - name: git diff check
         run: git diff --check

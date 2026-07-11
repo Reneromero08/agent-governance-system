@@ -15,8 +15,8 @@ Digest layering (non-circular):
   payload manifest core  -> execution_bundle_sha256 (sha256 of canonical core)
   payload-only PAX tar   -> deterministic_archive_sha256
   deployment archive      = payload files + a detached manifest envelope; the
-                            envelope stores the payload-tar digest, never its own
-                            container digest, so there is no cycle.
+                             envelope stores the payload-tar digest, never its own
+                             container digest, so there is no cycle.
 """
 
 from __future__ import annotations
@@ -50,7 +50,9 @@ MANIFEST_PATH = HERE / "GATE_A_EXECUTION_BUNDLE_MANIFEST.json"
 PACKAGE_FILES = [
     ("adapter/gate_a_authority.py", HERE / "gate_a_authority.py", "shared_authority_validator"),
     ("adapter/gate_a_target_bundle.py", HERE / "gate_a_target_bundle.py", "target_bundle_validator"),
-    ("adapter/gate_a_engineering_smoke_executor.py", HERE / "gate_a_engineering_smoke_executor.py", "target_execution_gate"),
+    ("adapter/gate_a_engineering_smoke_executor.py", HERE / "gate_a_engineering_smoke_executor_k10temp.py", "target_execution_gate"),
+    ("adapter/gate_a_engineering_smoke_executor_base.py", HERE / "gate_a_engineering_smoke_executor.py", "target_execution_gate_base"),
+    ("adapter/gate_a_temperature_custody.py", HERE / "gate_a_temperature_custody.py", "temperature_custody"),
     ("adapter/gate_a_process_custody.py", HERE / "gate_a_process_custody.py", "process_custody"),
     ("adapter/gate_a_engineering_smoke_transport.py", HERE / "gate_a_engineering_smoke_transport.py", "host_authorized_transport"),
     ("adapter/gate_a_hardware_adapter.py", HERE / "gate_a_hardware_adapter.py", "host_adapter"),

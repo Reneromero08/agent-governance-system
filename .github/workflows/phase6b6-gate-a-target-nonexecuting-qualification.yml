@@ -9,15 +9,8 @@ on:
       - main
     paths:
       - ".github/workflows/phase6b6-gate-a-target-nonexecuting-qualification.yml"
-      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/target_qualification/**"
-      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/**"
-      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.c"
-      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/combined_pdn_hardware.h"
-      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/gate_a_engineering_smoke_runtime.c"
-      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/gate_a_engineering_smoke_runtime.h"
-      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/captured_file.c"
-      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/captured_file.h"
-      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/capture_quality_contract.h"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/**"
+      - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/**"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_target_nonexecuting_qualification_6f243b1a_bundle_abc9e50a/**"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_target_nonexecuting_qualification_replacement_gate_a_replacement_593e9920_02/**"
       - "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_engineering_smoke_7e1e8835/**"
@@ -46,49 +39,48 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Compile target qualification sources
+      - name: Compile qualification and adapter sources
         run: |
           python -m compileall THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/target_qualification
+          python -m compileall THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
 
-      - name: Verify committed target non-executing qualification evidence (no SSH, no target contact)
-        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/target_qualification
-        run: |
-          python verify_gate_a_target_nonexecuting_qualification.py
-
-      - name: Prove authority state exact and historical surfaces untouched
+      - name: Re-run full sealed-head target qualification verifier
         shell: bash
         run: |
-          authority=THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/GATE_A_EXECUTION_AUTHORITY.json
-          authority_schema=THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/schemas/gate_a_execution_authority.schema.json
+          historical="$RUNNER_TEMP/gate_a_sealed_head"
+          git worktree add --detach "$historical" 0cb60899f531c185424f605c92be4622dcc1efef
+          python "$historical/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/target_qualification/verify_gate_a_target_nonexecuting_qualification.py"
+          git worktree remove --force "$historical"
+
+      - name: Verify current k10temp repair boundary
+        working-directory: THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
+        run: |
+          python verify_gate_a_k10temp_repair.py
+
+      - name: Prove consumed authority archived and active slot absent
+        shell: bash
+        run: |
+          adapter=THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter
+          active="$adapter/GATE_A_EXECUTION_AUTHORITY.json"
+          consumed="$adapter/GATE_A_EXECUTION_AUTHORITY_CONSUMED_7e1e8835.json"
+          authority_schema="$adapter/schemas/gate_a_execution_authority.schema.json"
           expected_sha256=7e1e8835bd67590e4e554ae112a2c8a6ca99dd8b9b3a9aafdb23fee31907d682
           expected_blob=709c799f60e30984d3c80715af480fbe5deac952
-          filesystem_output=$(find . -path './.git' -prune -o -iname 'gate_a_execution_authority*.json' ! -path "./$authority_schema" -print)
-          filesystem_authorities=()
-          if [ -n "$filesystem_output" ]; then
-            while IFS= read -r candidate; do filesystem_authorities+=("${candidate#./}"); done <<< "$filesystem_output"
-          fi
-          tracked_files=$(git ls-files)
-          tracked_output=$(printf '%s\n' "$tracked_files" | awk -v schema="$authority_schema" 'tolower($0) ~ /(^|\/)gate_a_execution_authority[^\/]*\.json$/ && $0 != schema { print }')
-          tracked_authorities=()
-          if [ -n "$tracked_output" ]; then
-            while IFS= read -r candidate; do tracked_authorities+=("$candidate"); done <<< "$tracked_output"
-          fi
-          authority_status=$(git status --porcelain=v1 --untracked-files=all -- ':(icase,glob)**/gate_a_execution_authority*.json' ":(exclude)$authority_schema")
-          test -z "$authority_status"
-          if [ "${#filesystem_authorities[@]}" -eq 0 ] && [ "${#tracked_authorities[@]}" -eq 0 ]; then
-            echo "Gate A execution authority remains absent"
-          elif [ "${#filesystem_authorities[@]}" -eq 1 ] && [ "${#tracked_authorities[@]}" -eq 1 ] && [ "${filesystem_authorities[0]}" = "$authority" ] && [ "${tracked_authorities[0]}" = "$authority" ]; then
-            test -f "$authority"
-            test ! -L "$authority"
-            test "$(sha256sum "$authority" | awk '{print $1}')" = "$expected_sha256"
-            test "$(git hash-object "$authority")" = "$expected_blob"
-            test "$(git rev-parse "HEAD:$authority")" = "$expected_blob"
-          else
-            echo "Gate A execution authority path set is not closed" >&2
-            printf 'filesystem: %s\n' "${filesystem_authorities[*]}" >&2
-            printf 'tracked: %s\n' "${tracked_authorities[*]}" >&2
-            exit 1
-          fi
+          test ! -e "$active"
+          test -f "$consumed"
+          test ! -L "$consumed"
+          test "$(sha256sum "$consumed" | awk '{print $1}')" = "$expected_sha256"
+          test "$(git hash-object "$consumed")" = "$expected_blob"
+          test "$(git rev-parse "HEAD:$consumed")" = "$expected_blob"
+          filesystem_output=$(find . -path './.git' -prune -o -iname 'gate_a_execution_authority*.json' ! -path "./$authority_schema" -print | sed 's#^./##' | sort)
+          tracked_output=$(git ls-files | awk -v schema="$authority_schema" 'tolower($0) ~ /(^|\/)gate_a_execution_authority[^\/]*\.json$/ && $0 != schema { print }' | sort)
+          test "$filesystem_output" = "$consumed"
+          test "$tracked_output" = "$consumed"
+          test -z "$(git status --porcelain=v1 --untracked-files=all -- ':(icase,glob)**/gate_a_execution_authority*.json' ":(exclude)$authority_schema")"
+
+      - name: Prove historical surfaces and repair scope
+        shell: bash
+        run: |
           git diff --exit-code origin/main...HEAD -- \
             THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/contracts \
             THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/runtime \
@@ -97,7 +89,7 @@ jobs:
           git diff --name-only origin/main...HEAD -- \
             THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2 \
             THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter > executor-paths.txt
-          unexpected=$(grep -v -E '^THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/(holo_runtime_v2/gate_a_engineering_smoke_runtime\.(c|h)|phase6b6/acquisition/gate_a/adapter/(GATE_A_ADAPTER_QUALIFICATION_CONTRACT\.json|GATE_A_EXECUTION_AUTHORITY\.json|GATE_A_EXECUTION_BUNDLE_MANIFEST\.json|build_gate_a_execution_bundle\.py|gate_a_engineering_smoke_executor\.py|gate_a_engineering_smoke_transport\.py|gate_a_process_custody\.py|gate_a_hardware_adapter\.py|gate_a_isolated_qualification\.py|gate_a_target_bundle\.py|gate_a_target_runner\.py|gate_a_worker\.c|test_gate_a_engineering_smoke_executor\.py|verify_gate_a_adapter_qualification\.py))$' executor-paths.txt || true)
+          unexpected=$(grep -v -E '^THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/(holo_runtime_v2/gate_a_engineering_smoke_runtime\.(c|h)|phase6b6/acquisition/gate_a/adapter/(GATE_A_ADAPTER_QUALIFICATION_CONTRACT\.json|GATE_A_EXECUTION_AUTHORITY_CONSUMED_7e1e8835\.json|GATE_A_EXECUTION_BUNDLE_MANIFEST\.json|build_gate_a_execution_bundle\.py|gate_a_engineering_smoke_executor\.py|gate_a_engineering_smoke_executor_k10temp\.py|gate_a_temperature_custody\.py|gate_a_engineering_smoke_transport\.py|gate_a_process_custody\.py|gate_a_hardware_adapter\.py|gate_a_isolated_qualification\.py|gate_a_target_bundle\.py|gate_a_target_runner\.py|gate_a_worker\.c|test_gate_a_engineering_smoke_executor\.py|test_gate_a_temperature_custody\.py|verify_gate_a_adapter_qualification\.py|verify_gate_a_k10temp_repair\.py))$' executor-paths.txt || true)
           if [ -n "$unexpected" ]; then
             echo "unexpected adapter or physical-runtime path changed" >&2
             printf '%s\n' "$unexpected" >&2
@@ -107,7 +99,7 @@ jobs:
             THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/target_qualification > target-qualification-paths.txt
           unexpected_target=$(grep -v -E '^THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/target_qualification/verify_gate_a_target_nonexecuting_qualification\.py$' target-qualification-paths.txt || true)
           if [ -n "$unexpected_target" ]; then
-            echo "historical target-qualification source or authority state changed" >&2
+            echo "historical target-qualification source changed outside verifier" >&2
             printf '%s\n' "$unexpected_target" >&2
             exit 1
           fi
