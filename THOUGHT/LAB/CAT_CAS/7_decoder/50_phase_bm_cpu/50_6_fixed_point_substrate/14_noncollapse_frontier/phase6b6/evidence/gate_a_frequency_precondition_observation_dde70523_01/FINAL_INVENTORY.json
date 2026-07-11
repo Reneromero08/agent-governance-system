@@ -1,0 +1,44 @@
+{
+  "schema_id": "CAT_CAS_PHASE6B6_GATE_A_FREQUENCY_PRECONDITION_FINAL_INVENTORY_V1",
+  "evidence_root": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_frequency_precondition_observation_dde70523_01",
+  "inventory_scope": "ALL_RETAINED_FILES_EXCEPT_FINAL_INVENTORY",
+  "self_excluded": true,
+  "file_count": 7,
+  "files": [
+    {
+      "path": "HOST_COMMAND.json",
+      "size_bytes": 1291,
+      "sha256": "334184e309e4b6e4cdb83f639f4d6bfd5719001821beb259ab768b3d2c2580f9"
+    },
+    {
+      "path": "PROBE_RECEIPT.json",
+      "size_bytes": 33223,
+      "sha256": "de0eece9a52cbfa3f7ab4acbe6224df36b41764156eb402cf57bffe7db2f2522"
+    },
+    {
+      "path": "PROBE_SOURCE.py",
+      "size_bytes": 11894,
+      "sha256": "03138d8c30078940001b018df4cea250dca6e7ec4b65122f72c74a5ef4a50762"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 1610,
+      "sha256": "393b08c0b1dec17c58555adc2d515f46a5f89c98e767b0c578deb9a4529766b8"
+    },
+    {
+      "path": "RESULT.json",
+      "size_bytes": 2029,
+      "sha256": "31b8fe9e0b458c17def31b75e1e06bea07004d84e611e9dbdc23e8b0429bc372"
+    },
+    {
+      "path": "SOURCE_BINDING.json",
+      "size_bytes": 861,
+      "sha256": "ddef48dc7b0c73c273b7d980301782fcc7195f1f210f9c8a5c4ffead8594775a"
+    },
+    {
+      "path": "STDERR.txt",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

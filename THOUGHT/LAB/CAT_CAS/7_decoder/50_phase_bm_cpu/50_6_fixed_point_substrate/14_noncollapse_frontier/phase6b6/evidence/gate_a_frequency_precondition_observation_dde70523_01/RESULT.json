@@ -1,0 +1,73 @@
+{
+  "schema_id": "CAT_CAS_PHASE6B6_GATE_A_FREQUENCY_PRECONDITION_RESULT_V1",
+  "status": "FAIL_REQUIRED_FREQUENCY_NOT_OBSERVED",
+  "failure": "REQUIRED_FREQUENCY_NEVER_OBSERVED_ON_BOTH_CORES",
+  "receipt_sha256": "de0eece9a52cbfa3f7ab4acbe6224df36b41764156eb402cf57bffe7db2f2522",
+  "driver": {
+    "4": "acpi-cpufreq",
+    "5": "acpi-cpufreq"
+  },
+  "governor": {
+    "4": "schedutil",
+    "5": "schedutil"
+  },
+  "policy_identity": {
+    "4": {
+      "requested_path": "/sys/devices/system/cpu/cpu4/cpufreq",
+      "resolved_path": "/sys/devices/system/cpu/cpufreq/policy4",
+      "device": 22,
+      "inode": 30960,
+      "affected_cpus": [4],
+      "related_cpus": [4]
+    },
+    "5": {
+      "requested_path": "/sys/devices/system/cpu/cpu5/cpufreq",
+      "resolved_path": "/sys/devices/system/cpu/cpufreq/policy5",
+      "device": 22,
+      "inode": 30985,
+      "affected_cpus": [5],
+      "related_cpus": [5]
+    }
+  },
+  "cpuinfo_frequency_bounds_khz": {
+    "4": {"minimum": 800000, "maximum": 3200000},
+    "5": {"minimum": 800000, "maximum": 3200000}
+  },
+  "scaling_frequency_bounds_khz": {
+    "4": {"minimum": 800000, "maximum": 3200000},
+    "5": {"minimum": 800000, "maximum": 3200000}
+  },
+  "required_frequency_support": {
+    "required_frequency_khz": 1600000,
+    "per_core": {"4": true, "5": true},
+    "all_cores": true
+  },
+  "per_core": {
+    "4": {
+      "minimum_khz": 800000,
+      "maximum_khz": 800000,
+      "unique_khz": [800000]
+    },
+    "5": {
+      "minimum_khz": 800000,
+      "maximum_khz": 800000,
+      "unique_khz": [800000]
+    }
+  },
+  "paired_exact_sample_count": 0,
+  "longest_consecutive_exact_pair_run": 0,
+  "all_pairs_exact": false,
+  "any_pair_exact": false,
+  "target_contacts": 1,
+  "ssh_invocations": 1,
+  "scp_invocations": 0,
+  "retry_count": 0,
+  "control_writes": 0,
+  "frequency_writes": 0,
+  "voltage_writes": 0,
+  "msr_accesses": 0,
+  "msr_reads": 0,
+  "msr_writes": 0,
+  "smoke_executions": 0,
+  "next_boundary": "SEPARATE_FREQUENCY_PREPARATION_RESTORATION_DESIGN"
+}
