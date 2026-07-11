@@ -15,8 +15,10 @@ from pathlib import Path
 from typing import Any, Callable
 
 import build_gate_a_execution_bundle as bundle
+import gate_a_engineering_smoke_transport as smoke_transport
 import gate_a_hardware_adapter as adapter
 import gate_a_isolated_qualification as isolated_harness
+import gate_a_process_custody as process_custody
 import gate_a_target_bundle as target_bundle
 import gate_a_target_runner
 
@@ -40,6 +42,19 @@ REVIEWED_MANIFEST_BLOB_SHA1 = "9fa8a9e573b482c75df18a3da99669467dbbdd13"
 REVIEWED_MANIFEST_SHA256 = "117cf39db81b1e1a84948eb6ceaf40912be1f3e2e0b2f6e1c489e5f21944fb71"
 EXECUTION_AUTHORITY_SHA256 = "7e1e8835bd67590e4e554ae112a2c8a6ca99dd8b9b3a9aafdb23fee31907d682"
 EXECUTION_AUTHORITY_BLOB_SHA1 = "709c799f60e30984d3c80715af480fbe5deac952"
+ENGINEERING_SMOKE_EVIDENCE = (
+    GATE_A.parents[1] / "evidence" / "gate_a_engineering_smoke_7e1e8835"
+)
+ENGINEERING_SMOKE_EXECUTION_COMMIT = "9fd5ae7fccf76956b63afaa77442fa8bc337170a"
+ENGINEERING_SMOKE_EXECUTION_TREE = "1fa555764ea50de60176d3e8e2670cdaa0cde1e2"
+ENGINEERING_SMOKE_FINAL_INVENTORY_SHA256 = "c87b9b2b392c9918ba3af01ca80afa3fc53fca5beae8ae30ee06055158f71c44"
+ENGINEERING_SMOKE_FINAL_INVENTORY_CANONICAL_SHA256 = "9e6dbffd166f34204fed9d38369daee2670c592aa335751d3cefe11e4521a239"
+ENGINEERING_SMOKE_FINAL_BINDINGS_SHA256 = "c0a5e30334c568dd6e2b37a090b4637c102a24936e2aa8e760c840f24ec4314d"
+ENGINEERING_SMOKE_HOST_COMMANDS_SHA256 = "d6277d83bce7b8608e9c775bf0195c4a60b2d11cda7cba1e26df167e08b1a3af"
+ENGINEERING_SMOKE_TARGET_INVENTORY_SHA256 = "91f9d8b953b919049f8078c0a8ce1cf87f7ea35a150b87cdececd67caabf0646"
+ENGINEERING_SMOKE_AUTHORITY_CLAIM_SHA256 = "fdaa4b71e2e37dea828d6a0a1ba9494c6bddc36b885ff6cab7b4a9be72959dbf"
+ENGINEERING_SMOKE_EXECUTION_STARTED_SHA256 = "80e2362808ce3defbe6e5c20431f3f4802fff28df1b846634ad6cb4ffb7f6121"
+ENGINEERING_SMOKE_NEXT_BOUNDARY = "INDEPENDENT_GATE_A_ENGINEERING_SMOKE_EVIDENCE_REVIEW"
 
 
 class VerifyError(RuntimeError):
@@ -59,6 +74,10 @@ def load(path: Path) -> dict[str, Any]:
 
 def sha256_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def sha256_text(value: str) -> str:
+    return hashlib.sha256(value.encode("utf-8")).hexdigest()
 
 
 def committed_sha256(path: Path, treeish: str = "HEAD") -> str:
@@ -292,6 +311,466 @@ def validate_execution_authority_state(manifest: dict[str, Any]) -> dict[str, An
         "consumed": authority["consumed"],
         "automatic_retry": authority["authority_state"]["automatic_retry"],
         "downstream_authority_false": True,
+    }
+
+
+def validate_engineering_smoke_evidence_git_custody(
+    evidence_root: Path,
+    *,
+    treeish: str,
+) -> dict[str, Any]:
+    """Require one exact committed packet whose blobs match the working tree."""
+
+    root = bundle.repo_root().resolve()
+    require(
+        evidence_root.resolve() == ENGINEERING_SMOKE_EVIDENCE.resolve(),
+        "engineering-smoke evidence is not at its canonical path",
+    )
+    evidence_rel = git_rel(evidence_root)
+    actual_files: dict[str, Path] = {}
+    actual_directories: set[str] = set()
+    for path in evidence_root.rglob("*"):
+        require(not path.is_symlink(), f"engineering-smoke evidence contains symlink: {path}")
+        relative = path.relative_to(evidence_root).as_posix()
+        if path.is_dir():
+            actual_directories.add(relative)
+        elif path.is_file():
+            actual_files[git_rel(path)] = path
+        else:
+            raise VerifyError(f"engineering-smoke evidence contains non-file object: {path}")
+    require(actual_directories == {"TARGET_OUTPUT"}, "engineering-smoke evidence directory set mismatch")
+    require(len(actual_files) == 20, "engineering-smoke evidence file count mismatch")
+
+    if treeish == ":":
+        listing = run(["git", "ls-files", "--stage", "--", evidence_rel], cwd=root, check=False)
+    else:
+        listing = run(["git", "ls-tree", "-r", treeish, "--", evidence_rel], cwd=root, check=False)
+    require(listing.returncode == 0, f"cannot enumerate committed engineering-smoke evidence: {listing.stderr}")
+    committed: dict[str, tuple[str, str]] = {}
+    for line in listing.stdout.splitlines():
+        metadata, separator, path = line.partition("\t")
+        require(separator == "\t", "malformed committed engineering-smoke evidence entry")
+        fields = metadata.split()
+        require(len(fields) == 3, "malformed committed engineering-smoke evidence metadata")
+        mode = fields[0]
+        if treeish == ":":
+            blob = fields[1]
+        else:
+            require(fields[1] == "blob", "engineering-smoke evidence Git object is not a blob")
+            blob = fields[2]
+        committed[path] = (mode, blob)
+    require(set(committed) == set(actual_files), "committed engineering-smoke evidence tree mismatch")
+    for relative, path in actual_files.items():
+        mode, blob = committed[relative]
+        require(mode == "100644", f"engineering-smoke evidence mode mismatch: {relative}")
+        require(blob == git_blob(path), f"engineering-smoke evidence blob differs from working tree: {relative}")
+
+    if treeish == ":":
+        clean = run(["git", "diff", "--quiet", "--", evidence_rel], cwd=root, check=False)
+        require(clean.returncode == 0, "engineering-smoke evidence working tree differs from staged packet")
+    else:
+        status = run(
+            ["git", "status", "--porcelain=v1", "--untracked-files=all", "--", evidence_rel],
+            cwd=root,
+            check=False,
+        )
+        require(
+            status.returncode == 0 and status.stdout == "",
+            "engineering-smoke evidence differs from current HEAD",
+        )
+    return {
+        "treeish": treeish,
+        "file_count": len(actual_files),
+        "working_tree_matches_committed_blobs": True,
+    }
+
+
+def validate_engineering_smoke_evidence_state(
+    evidence_root: Path = ENGINEERING_SMOKE_EVIDENCE,
+    *,
+    require_committed: bool = True,
+) -> dict[str, Any]:
+    """Validate and project current state from the sealed one-shot packet."""
+
+    require(evidence_root.is_dir() and not evidence_root.is_symlink(), "engineering-smoke evidence directory missing")
+    try:
+        packet = smoke_transport.validate_final_packet(evidence_root)
+    except smoke_transport.TransportError as exc:
+        raise VerifyError(f"engineering-smoke final packet invalid: {exc}") from exc
+    require(packet["status"] == "GATE_A_FINAL_PACKET_VALID", "engineering-smoke final packet status mismatch")
+    require(packet["file_count"] == 19, "engineering-smoke final inventory entry count mismatch")
+    require(
+        packet["final_inventory_sha256"] == ENGINEERING_SMOKE_FINAL_INVENTORY_CANONICAL_SHA256,
+        "engineering-smoke canonical inventory digest mismatch",
+    )
+    require(
+        sha256_file(evidence_root / "FINAL_EVIDENCE_INVENTORY.json")
+        == ENGINEERING_SMOKE_FINAL_INVENTORY_SHA256,
+        "engineering-smoke final inventory file SHA-256 mismatch",
+    )
+    require(
+        sha256_file(evidence_root / "FINAL_BINDINGS.json") == ENGINEERING_SMOKE_FINAL_BINDINGS_SHA256,
+        "engineering-smoke final bindings SHA-256 mismatch",
+    )
+    require(
+        sha256_file(evidence_root / "HOST_COMMANDS.jsonl") == ENGINEERING_SMOKE_HOST_COMMANDS_SHA256,
+        "engineering-smoke host command ledger SHA-256 mismatch",
+    )
+
+    execution_tree = run(
+        ["git", "rev-parse", f"{ENGINEERING_SMOKE_EXECUTION_COMMIT}^{{tree}}"],
+        cwd=bundle.repo_root(),
+    ).stdout.strip()
+    require(execution_tree == ENGINEERING_SMOKE_EXECUTION_TREE, "engineering-smoke execution tree mismatch")
+    execution_ancestor = run(
+        ["git", "merge-base", "--is-ancestor", ENGINEERING_SMOKE_EXECUTION_COMMIT, "HEAD"],
+        cwd=bundle.repo_root(),
+        check=False,
+    )
+    require(execution_ancestor.returncode == 0, "engineering-smoke execution commit is not an ancestor of HEAD")
+
+    manifest = load(evidence_root / "EXECUTION_BUNDLE_MANIFEST.json")
+    authority = load(AUTHORITY)
+    authority_copy = evidence_root / "AUTHORITY_ARTIFACT.json"
+    schedule_copy = evidence_root / "SCHEDULE.json"
+    schedule_source = GATE_A / "GATE_A_ENGINEERING_SMOKE_SCHEDULE.json"
+    require(authority_copy.read_bytes() == AUTHORITY.read_bytes(), "sealed authority copy differs from canonical artifact")
+    require(sha256_file(authority_copy) == EXECUTION_AUTHORITY_SHA256, "sealed authority copy SHA-256 mismatch")
+    require(manifest == load(MANIFEST), "sealed execution manifest differs from reviewed manifest")
+    require(sha256_file(evidence_root / "EXECUTION_BUNDLE_MANIFEST.json") == REVIEWED_MANIFEST_SHA256, "sealed manifest SHA-256 mismatch")
+    require(schedule_copy.read_bytes() == schedule_source.read_bytes(), "sealed schedule differs from frozen schedule")
+
+    source_binding = load(evidence_root / "SOURCE_REVIEW_BINDING.json")
+    request = smoke_transport.HostExecutionRequest(
+        target=authority["target"],
+        authority_path=AUTHORITY,
+        authority_sha256=EXECUTION_AUTHORITY_SHA256,
+        reviewed_adapter_head=REVIEWED_EXECUTION_SOURCE_COMMIT,
+        independent_review_id=REVIEWED_EXECUTION_SOURCE_REVIEW_ID,
+        execution_bundle_sha256=manifest["execution_bundle_sha256"],
+        schedule_sha256=bundle.SCHEDULE_SHA256,
+        namespace_sha256=bundle.NAMESPACE_SHA256,
+        remote_execution_root=authority["remote_execution_root"],
+        remote_output_root=authority["remote_output_root"],
+        local_evidence_root=evidence_root,
+        authority_bytes=authority_copy.read_bytes(),
+        schedule_bytes=schedule_copy.read_bytes(),
+        manifest_bytes=(evidence_root / "EXECUTION_BUNDLE_MANIFEST.json").read_bytes(),
+        source_review_binding=source_binding,
+        authority_bearing_execution_commit=ENGINEERING_SMOKE_EXECUTION_COMMIT,
+        reviewed_source_tree=REVIEWED_EXECUTION_SOURCE_TREE,
+        authority_bearing_execution_tree=ENGINEERING_SMOKE_EXECUTION_TREE,
+        authority_git_blob_sha1=EXECUTION_AUTHORITY_BLOB_SHA1,
+    )
+    try:
+        smoke_transport.validate_source_review_binding(source_binding, request=request, manifest=manifest)
+    except smoke_transport.TransportError as exc:
+        raise VerifyError(f"engineering-smoke source-review binding invalid: {exc}") from exc
+
+    bindings = load(evidence_root / "FINAL_BINDINGS.json")
+    require(set(bindings) == {
+        "artifact_sha256", "authority_bearing_execution_commit", "authority_sha256",
+        "automatic_retry", "completed_stages", "execution_bundle_sha256", "failed_stage",
+        "independent_review_id", "namespace_sha256", "primary_error", "retry_count",
+        "reviewed_source_commit", "runner_start_count", "schedule_sha256", "schema_id",
+        "secondary_errors", "status", "transport_execution_count",
+    }, "engineering-smoke final bindings key set mismatch")
+    require(bindings["schema_id"] == "CAT_CAS_PHASE6B6_GATE_A_FINAL_BINDINGS_V1", "engineering-smoke bindings schema mismatch")
+    require(bindings["status"] == "GATE_A_AUTHORIZED_TRANSPORT_FAILED_CLOSED", "engineering-smoke transport result mismatch")
+    require(bindings["failed_stage"] == "target_result_verification", "engineering-smoke failed stage mismatch")
+    require(bindings["primary_error"] == "authorized runtime failed after evidence custody", "engineering-smoke primary error mismatch")
+    require(bindings["secondary_errors"] == [], "engineering-smoke secondary errors present")
+    require(bindings["authority_bearing_execution_commit"] == ENGINEERING_SMOKE_EXECUTION_COMMIT, "engineering-smoke execution commit binding mismatch")
+    require(bindings["reviewed_source_commit"] == REVIEWED_EXECUTION_SOURCE_COMMIT, "engineering-smoke reviewed source binding mismatch")
+    require(bindings["independent_review_id"] == REVIEWED_EXECUTION_SOURCE_REVIEW_ID, "engineering-smoke review binding mismatch")
+    require(bindings["authority_sha256"] == EXECUTION_AUTHORITY_SHA256, "engineering-smoke authority binding mismatch")
+    require(bindings["execution_bundle_sha256"] == manifest["execution_bundle_sha256"], "engineering-smoke bundle binding mismatch")
+    require(bindings["schedule_sha256"] == bundle.SCHEDULE_SHA256, "engineering-smoke schedule binding mismatch")
+    require(bindings["namespace_sha256"] == bundle.NAMESPACE_SHA256, "engineering-smoke namespace binding mismatch")
+    require(bindings["transport_execution_count"] == 1, "engineering-smoke transport execution count mismatch")
+    require(bindings["runner_start_count"] == 1, "engineering-smoke runner start count mismatch")
+    require(bindings["retry_count"] == 0, "engineering-smoke retry count changed")
+    require(bindings["automatic_retry"] is False, "engineering-smoke automatic retry changed")
+    require(bindings["completed_stages"] == [
+        "authority_validated", "remote_namespace_inspected", "authority_claimed", "bundle_staged",
+        "authority_staged", "target_runner_started", "post_runtime_process_scanned",
+        "evidence_archived", "evidence_copied_back", "copy_back_verified",
+        "copy_back_receipt_uploaded", "remote_cleanup_attempted", "post_cleanup_process_scanned",
+    ], "engineering-smoke completed-stage sequence mismatch")
+    artifact_digests = bindings["artifact_sha256"]
+    expected_artifacts = {
+        "AUTHORITY_ARTIFACT.json", "AUTHORITY_CLAIM_RECEIPT.json", "CLEANUP_RECEIPT.json",
+        "COPY_BACK_RECEIPT.json", "EXECUTION_BUNDLE_MANIFEST.json", "HOST_COMMANDS.jsonl",
+        "POST_CLEANUP_PROCESS_RECEIPT.json", "POST_RUNTIME_PROCESS_RECEIPT.json", "SCHEDULE.json",
+        "SOURCE_REVIEW_BINDING.json", "TARGET_EVIDENCE_INVENTORY.json",
+        "TARGET_EXECUTION_RECEIPT.json", "TRANSPORT_FAILURE_RECEIPT.json",
+    }
+    require(isinstance(artifact_digests, dict) and set(artifact_digests) == expected_artifacts, "engineering-smoke artifact digest set mismatch")
+    for name, digest in artifact_digests.items():
+        require(digest == sha256_file(evidence_root / name), f"engineering-smoke artifact digest mismatch: {name}")
+
+    failure_receipt = load(evidence_root / "TRANSPORT_FAILURE_RECEIPT.json")
+    require(set(failure_receipt) == {
+        "authority_claim_preserved", "authority_claim_state", "automatic_retry", "cleanup_attempted",
+        "copy_back_verified", "failed_stage", "mutation_attempted", "primary_error", "retry_count",
+        "runner_start_count", "schema_id", "secondary_errors",
+    }, "engineering-smoke transport failure receipt key set mismatch")
+    require(failure_receipt == {
+        "authority_claim_preserved": True,
+        "authority_claim_state": "confirmed",
+        "automatic_retry": False,
+        "cleanup_attempted": True,
+        "copy_back_verified": True,
+        "failed_stage": "target_result_verification",
+        "mutation_attempted": True,
+        "primary_error": "authorized runtime failed after evidence custody",
+        "retry_count": 0,
+        "runner_start_count": 1,
+        "schema_id": "CAT_CAS_PHASE6B6_GATE_A_TRANSPORT_FAILURE_V1",
+        "secondary_errors": [],
+    }, "engineering-smoke transport failure receipt mismatch")
+
+    claim = load(evidence_root / "AUTHORITY_CLAIM_RECEIPT.json")
+    require(set(claim) == {"claim_created", "claim_root", "claim_sha256"}, "engineering-smoke authority claim key set mismatch")
+    require(claim["claim_created"] is True, "engineering-smoke authority claim was not created")
+    require(claim["claim_sha256"] == ENGINEERING_SMOKE_AUTHORITY_CLAIM_SHA256, "engineering-smoke authority claim digest mismatch")
+    require(claim["claim_root"].endswith(EXECUTION_AUTHORITY_SHA256), "engineering-smoke authority claim root mismatch")
+
+    attempt = load(evidence_root / "TARGET_OUTPUT" / "ATTEMPT.json")
+    require(set(attempt) == {
+        "authority_sha256", "automatic_retry", "execution_bundle_sha256",
+        "maximum_execution_count", "preflight", "schema_id", "sequence",
+    }, "engineering-smoke attempt key set mismatch")
+    require(attempt["schema_id"] == "CAT_CAS_PHASE6B6_GATE_A_ATTEMPT_V1", "engineering-smoke attempt schema mismatch")
+    require(attempt["authority_sha256"] == EXECUTION_AUTHORITY_SHA256, "engineering-smoke attempt authority mismatch")
+    require(attempt["execution_bundle_sha256"] == manifest["execution_bundle_sha256"], "engineering-smoke attempt bundle mismatch")
+    require(attempt["maximum_execution_count"] == 1, "engineering-smoke attempt execution cap mismatch")
+    require(attempt["automatic_retry"] is False, "engineering-smoke attempt automatic retry changed")
+    require(attempt["sequence"] == [
+        "I", "I", "I", "I", "C0", "D0", "S0E", "S0E", "S0E", "S0E",
+        "O0", "O0", "A0P", "A0N", "T", "T",
+    ], "engineering-smoke frozen sequence mismatch")
+    require(attempt["preflight"] == {
+        "frequency_writes": 0,
+        "msr_reads": 0,
+        "msr_writes": 0,
+        "namespace_state": "absent",
+        "preflight_complete": False,
+        "voltage_writes": 0,
+    }, "engineering-smoke preflight receipt mismatch")
+    failure = load(evidence_root / "TARGET_OUTPUT" / "FAILURE.json")
+    require(failure == {
+        "automatic_retry": False,
+        "partial_evidence_preserved": True,
+        "reason": "temperature unobservable",
+        "schema_id": "CAT_CAS_PHASE6B6_GATE_A_FAILURE_V1",
+    }, "engineering-smoke target failure mismatch")
+
+    events = [json.loads(line) for line in (evidence_root / "TARGET_OUTPUT" / "EVENTS.jsonl").read_text(encoding="utf-8").splitlines()]
+    require(len(events) == 2, "engineering-smoke event count mismatch")
+    require(events[0] == {
+        "event": "pre_runtime_process_scan",
+        "forbidden_process_hits": [],
+        "return_code": 0,
+        "scan_complete": True,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "c44baa2c70fdf4a9a38e61ad86c4a57f53a08eb4b5534da7338a708fc03e0458",
+    }, "engineering-smoke pre-runtime event mismatch")
+    require(events[1] == {"event": "runtime_failed", "reason": "temperature unobservable"}, "engineering-smoke failure event mismatch")
+
+    target_inventory = load(evidence_root / "TARGET_EVIDENCE_INVENTORY.json")
+    try:
+        target_inventory_digest = smoke_transport._validate_inventory_shape(target_inventory)
+    except smoke_transport.TransportError as exc:
+        raise VerifyError(f"engineering-smoke target inventory invalid: {exc}") from exc
+    require(target_inventory_digest == ENGINEERING_SMOKE_TARGET_INVENTORY_SHA256, "engineering-smoke target inventory digest mismatch")
+    target_output = evidence_root / "TARGET_OUTPUT"
+    require(
+        {item["path"] for item in target_inventory["files"]}
+        == {path.name for path in target_output.iterdir() if path.is_file()},
+        "engineering-smoke target inventory does not close over target output",
+    )
+    for item in target_inventory["files"]:
+        path = target_output / item["path"]
+        require(path.stat().st_size == item["size"], f"engineering-smoke target evidence size mismatch: {item['path']}")
+        require(sha256_file(path) == item["sha256"], f"engineering-smoke target evidence SHA-256 mismatch: {item['path']}")
+
+    target_execution = load(evidence_root / "TARGET_EXECUTION_RECEIPT.json")
+    require(set(target_execution) == {
+        "evidence_archive_created", "post_runtime_process_receipt", "runner_command",
+        "runner_return_code", "runner_stderr", "runner_stderr_sha256", "runner_stdout",
+        "runner_stdout_sha256", "target_evidence_inventory", "target_evidence_inventory_sha256",
+        "target_timeout",
+    }, "engineering-smoke target execution receipt key set mismatch")
+    require(target_execution["runner_return_code"] == 1, "engineering-smoke target runner return code mismatch")
+    require(target_execution["target_timeout"] is False, "engineering-smoke target runner timed out")
+    require(target_execution["evidence_archive_created"] is True, "engineering-smoke target archive missing")
+    require(target_execution["runner_stdout"] == "", "engineering-smoke target runner stdout changed")
+    require(target_execution["runner_stderr"] == "gate_a_target_runner: temperature unobservable\n", "engineering-smoke target runner stderr mismatch")
+    require(target_execution["runner_stdout_sha256"] == sha256_text(target_execution["runner_stdout"]), "engineering-smoke target stdout digest mismatch")
+    require(target_execution["runner_stderr_sha256"] == sha256_text(target_execution["runner_stderr"]), "engineering-smoke target stderr digest mismatch")
+    require(target_execution["target_evidence_inventory"] == target_inventory, "engineering-smoke embedded target inventory mismatch")
+    require(target_execution["target_evidence_inventory_sha256"] == ENGINEERING_SMOKE_TARGET_INVENTORY_SHA256, "engineering-smoke embedded target inventory digest mismatch")
+    runner_command = target_execution["runner_command"]
+    require(isinstance(runner_command, list) and runner_command.count("--execute-authorized") == 1, "engineering-smoke target runner command count mismatch")
+    require(runner_command[0:3] == ["/usr/bin/python3", "-B", f"{authority['remote_execution_root']}/adapter/gate_a_target_runner.py"], "engineering-smoke target runner prefix mismatch")
+    for flag, expected in (
+        ("--authority-sha256", EXECUTION_AUTHORITY_SHA256),
+        ("--execution-bundle-sha256", manifest["execution_bundle_sha256"]),
+        ("--source-head", REVIEWED_EXECUTION_SOURCE_COMMIT),
+        ("--independent-review-id", str(REVIEWED_EXECUTION_SOURCE_REVIEW_ID)),
+        ("--schedule-sha256", bundle.SCHEDULE_SHA256),
+        ("--target", authority["target"]),
+        ("--namespace-sha256", bundle.NAMESPACE_SHA256),
+        ("--output-root", authority["remote_output_root"]),
+        ("--transport-claim-root", claim["claim_root"]),
+    ):
+        require(runner_command.count(flag) == 1, f"engineering-smoke target runner flag count mismatch: {flag}")
+        index = runner_command.index(flag)
+        require(index + 1 < len(runner_command) and runner_command[index + 1] == expected, f"engineering-smoke target runner binding mismatch: {flag}")
+
+    pre_runtime = load(target_output / "PRE_RUNTIME_PROCESS_RECEIPT.json")
+    target_post_runtime = load(target_output / "POST_RUNTIME_PROCESS_RECEIPT.json")
+    post_runtime = load(evidence_root / "POST_RUNTIME_PROCESS_RECEIPT.json")
+    post_cleanup = load(evidence_root / "POST_CLEANUP_PROCESS_RECEIPT.json")
+    try:
+        process_custody.validate_process_receipt(pre_runtime, expected_phase="pre_runtime")
+        process_custody.validate_process_receipt(target_post_runtime, expected_phase="post_runtime")
+        process_custody.validate_process_receipt(post_runtime, expected_phase="post_runtime")
+        process_custody.validate_process_receipt(post_cleanup, expected_phase="post_cleanup")
+    except process_custody.ProcessCustodyError as exc:
+        raise VerifyError(f"engineering-smoke process custody invalid: {exc}") from exc
+    require(target_post_runtime == post_runtime, "engineering-smoke post-runtime process receipts differ")
+    require(target_execution["post_runtime_process_receipt"] == post_runtime, "engineering-smoke embedded post-runtime receipt differs")
+
+    copy_back = load(evidence_root / "COPY_BACK_RECEIPT.json")
+    require(set(copy_back) == {
+        "archive_sha256", "authority_sha256", "copy_back_complete",
+        "downloaded_evidence_inventory_sha256", "evidence_inventory_sha256",
+        "execution_bundle_sha256", "remote_output_root", "retained_evidence_custody_verified",
+        "schema_id", "target_evidence_inventory_sha256",
+    }, "engineering-smoke copy-back receipt key set mismatch")
+    require(copy_back["schema_id"] == "CAT_CAS_PHASE6B6_GATE_A_COPY_BACK_RECEIPT_V1", "engineering-smoke copy-back schema mismatch")
+    require(copy_back["authority_sha256"] == EXECUTION_AUTHORITY_SHA256, "engineering-smoke copy-back authority mismatch")
+    require(copy_back["execution_bundle_sha256"] == manifest["execution_bundle_sha256"], "engineering-smoke copy-back bundle mismatch")
+    require(copy_back["remote_output_root"] == authority["remote_output_root"], "engineering-smoke copy-back output root mismatch")
+    require(copy_back["copy_back_complete"] is True and copy_back["retained_evidence_custody_verified"] is True, "engineering-smoke copy-back custody unverified")
+    for field in (
+        "downloaded_evidence_inventory_sha256", "evidence_inventory_sha256",
+        "target_evidence_inventory_sha256",
+    ):
+        require(copy_back[field] == ENGINEERING_SMOKE_TARGET_INVENTORY_SHA256, f"engineering-smoke copy-back inventory mismatch: {field}")
+
+    cleanup = load(evidence_root / "CLEANUP_RECEIPT.json")
+    require(set(cleanup) == {
+        "parsed", "raw_response", "raw_response_sha256", "raw_stderr",
+        "raw_stderr_sha256", "schema_id",
+    }, "engineering-smoke cleanup receipt key set mismatch")
+    require(cleanup["schema_id"] == "CAT_CAS_PHASE6B6_GATE_A_CLEANUP_RECEIPT_V1", "engineering-smoke cleanup schema mismatch")
+    require(cleanup["raw_response_sha256"] == sha256_text(cleanup["raw_response"]), "engineering-smoke cleanup response digest mismatch")
+    require(cleanup["raw_stderr_sha256"] == sha256_text(cleanup["raw_stderr"]), "engineering-smoke cleanup stderr digest mismatch")
+    require(cleanup["raw_stderr"] == "", "engineering-smoke cleanup command wrote stderr")
+    require(json.loads(cleanup["raw_response"]) == cleanup["parsed"], "engineering-smoke cleanup parsed/raw observations differ")
+    try:
+        smoke_transport.validate_cleanup_result(cleanup["parsed"], request=request)
+    except smoke_transport.TransportError as exc:
+        raise VerifyError(f"engineering-smoke cleanup receipt invalid: {exc}") from exc
+    require(cleanup["parsed"]["cleanup_mode"] == "verified_copyback", "engineering-smoke cleanup mode mismatch")
+    require(cleanup["parsed"]["execution_started_sha256"] == ENGINEERING_SMOKE_EXECUTION_STARTED_SHA256, "engineering-smoke execution-start marker mismatch")
+
+    command_lines = (evidence_root / "HOST_COMMANDS.jsonl").read_text(encoding="utf-8").splitlines()
+    commands = [json.loads(line) for line in command_lines]
+    expected_operations = [
+        ("remote_namespace_inspected", "remote_namespace_inspected", "ssh"),
+        ("authority_claimed", "authority_claimed", "ssh"),
+        ("bundle_staged", "bundle_staged", "scp"),
+        ("authority_staged", "authority_staged", "scp"),
+        ("target_runner_started", "target_runner_started", "ssh"),
+        ("evidence_download", "evidence_copied_back", "scp"),
+        ("copy_back_receipt_upload", "copy_back_receipt_uploaded", "scp"),
+        ("remote_cleanup_attempted", "remote_cleanup_attempted", "ssh"),
+        ("post_cleanup_process_scan", "post_cleanup_process_scanned", "ssh"),
+    ]
+    require(len(commands) == len(expected_operations), "engineering-smoke host command count mismatch")
+    for sequence, (command, expected) in enumerate(zip(commands, expected_operations), start=1):
+        operation, stage, program = expected
+        require(set(command) == {
+            "command", "command_sha256", "end_monotonic_ns", "end_utc_ns", "failure",
+            "operation", "raw_stderr", "raw_stdout", "return_code", "schema_id", "sequence",
+            "stage", "start_monotonic_ns", "start_utc_ns", "stderr_sha256", "stdin_sha256",
+            "stdin_size", "stdout_sha256", "timed_out", "timeout_seconds",
+        }, f"engineering-smoke host command key set mismatch: {sequence}")
+        require(command["schema_id"] == "CAT_CAS_PHASE6B6_GATE_A_HOST_COMMAND_V1", f"engineering-smoke host command schema mismatch: {sequence}")
+        require(command["sequence"] == sequence, f"engineering-smoke host command sequence mismatch: {sequence}")
+        require(command["operation"] == operation and command["stage"] == stage, f"engineering-smoke host command operation mismatch: {sequence}")
+        require(isinstance(command["command"], list) and command["command"][0] == program, f"engineering-smoke host command transport mismatch: {sequence}")
+        require(command["command_sha256"] == canonical_sha256(command["command"]), f"engineering-smoke host command digest mismatch: {sequence}")
+        require(command["return_code"] == 0 and command["timed_out"] is False and command["failure"] is None, f"engineering-smoke host command failed: {sequence}")
+        require(command["stdout_sha256"] == sha256_text(command["raw_stdout"]), f"engineering-smoke host stdout digest mismatch: {sequence}")
+        require(command["stderr_sha256"] == sha256_text(command["raw_stderr"]), f"engineering-smoke host stderr digest mismatch: {sequence}")
+    require(sum(command["operation"] == "target_runner_started" for command in commands) == 1, "engineering-smoke runner was not started exactly once")
+    require(sum(command["command"][0] == "ssh" for command in commands) == 5, "engineering-smoke SSH command count mismatch")
+    require(sum(command["command"][0] == "scp" for command in commands) == 4, "engineering-smoke SCP command count mismatch")
+
+    expected_target_files = {
+        "ATTEMPT.json", "EVENTS.jsonl", "FAILURE.json",
+        "POST_RUNTIME_PROCESS_RECEIPT.json", "PRE_RUNTIME_PROCESS_RECEIPT.json",
+    }
+    require({path.name for path in target_output.iterdir()} == expected_target_files, "physical-runtime, sender, or capture artifact unexpectedly present")
+
+    git_custody: dict[str, Any] = {"required": require_committed}
+    if require_committed:
+        git_custody.update(
+            validate_engineering_smoke_evidence_git_custody(
+                evidence_root,
+                treeish=active_treeish(),
+            )
+        )
+    return {
+        "status": "GATE_A_ENGINEERING_SMOKE_FAILED_CLOSED__TEMPERATURE_UNOBSERVABLE",
+        "result": "FAILED_CLOSED",
+        "failure_reason": "temperature unobservable",
+        "smoke_attempted": True,
+        "orchestrator_invocation_count": 1,
+        "target_contact_occurred": True,
+        "target_contact_attempt_count": 1,
+        "authority_artifact_consumed_field": authority["consumed"],
+        "authority_consumed": True,
+        "engineering_smoke_authorized": False,
+        "execution_count": 1,
+        "transport_execution_count": 1,
+        "runner_start_count": 1,
+        "physical_runtime_execution_count": 0,
+        "retry_count": 0,
+        "automatic_retry": False,
+        "preflight_complete": False,
+        "hardware_ran": False,
+        "sender_started": False,
+        "capture_started": False,
+        "frequency_writes": 0,
+        "voltage_writes": 0,
+        "msr_reads": 0,
+        "msr_writes": 0,
+        "copy_back_verified": True,
+        "cleanup_verified": True,
+        "durable_authority_claim_preserved": True,
+        "pre_runtime_process_custody": "PASS",
+        "post_runtime_process_custody": "PASS",
+        "post_cleanup_process_custody": "PASS",
+        "sender_lifecycle_custody": "NOT_APPLICABLE__PHYSICAL_RUNTIME_NOT_ENTERED",
+        "raw_derived_iq_custody": "NOT_APPLICABLE__PHYSICAL_RUNTIME_NOT_ENTERED",
+        "host_command_count": len(commands),
+        "ssh_command_count": 5,
+        "scp_command_count": 4,
+        "evidence_path": git_rel(evidence_root),
+        "execution_head": ENGINEERING_SMOKE_EXECUTION_COMMIT,
+        "execution_tree": ENGINEERING_SMOKE_EXECUTION_TREE,
+        "final_evidence_inventory_sha256": ENGINEERING_SMOKE_FINAL_INVENTORY_SHA256,
+        "final_bindings_sha256": ENGINEERING_SMOKE_FINAL_BINDINGS_SHA256,
+        "host_commands_sha256": ENGINEERING_SMOKE_HOST_COMMANDS_SHA256,
+        "target_evidence_inventory_sha256": ENGINEERING_SMOKE_TARGET_INVENTORY_SHA256,
+        "git_custody": git_custody,
+        "next_boundary": ENGINEERING_SMOKE_NEXT_BOUNDARY,
     }
 
 
@@ -900,6 +1379,9 @@ def validate_records() -> dict[str, Any]:
     for key, value in result["authority_false_state"].items():
         require(value is False, f"result authority flag must be false: {key}")
     execution_authority = validate_execution_authority_state(manifest)
+    current_engineering_smoke = validate_engineering_smoke_evidence_state()
+    require(execution_authority["authority_artifact_present"] is True, "consumed smoke authority input missing")
+    require(execution_authority["consumed"] is False, "historical authority input consumed field changed")
     return {
         "status": "RECORDS_VALID",
         "manifest_sha256": manifest_digest,
@@ -909,6 +1391,7 @@ def validate_records() -> dict[str, Any]:
         "historical_records_immutable": True,
         "execution_bundle_sha256": manifest["execution_bundle_sha256"],
         "execution_authority": execution_authority,
+        "current_engineering_smoke": current_engineering_smoke,
     }
 
 
@@ -966,7 +1449,12 @@ def main() -> int:
         "records": records,
         "authority_artifact_present": records["execution_authority"]["authority_artifact_present"],
         "execution_authority": records["execution_authority"],
-        "target_connection_count": 0,
+        "current_engineering_smoke": records["current_engineering_smoke"],
+        "engineering_smoke_attempted": records["current_engineering_smoke"]["smoke_attempted"],
+        "authority_consumed": records["current_engineering_smoke"]["authority_consumed"],
+        "engineering_smoke_authorized": records["current_engineering_smoke"]["engineering_smoke_authorized"],
+        "hardware_ran": records["current_engineering_smoke"]["hardware_ran"],
+        "verification_target_connection_count": 0,
         "sender_start_count": 0,
         "control_write_count": 0,
         "msr_access_count": 0,
@@ -984,6 +1472,8 @@ if __name__ == "__main__":
         adapter.AdapterError,
         adapter.gate_a_authority.AuthorityError,
         bundle.BundleError,
+        process_custody.ProcessCustodyError,
+        smoke_transport.TransportError,
         subprocess.CalledProcessError,
         json.JSONDecodeError,
     ) as exc:

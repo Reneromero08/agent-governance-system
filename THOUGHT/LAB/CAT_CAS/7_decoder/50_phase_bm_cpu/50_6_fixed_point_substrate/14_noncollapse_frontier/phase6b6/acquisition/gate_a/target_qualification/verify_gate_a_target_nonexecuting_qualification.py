@@ -5,8 +5,8 @@ This verifier is local-only.  It never opens SSH/SCP or contacts the target.  A
 green result means the historical packet is byte-for-byte unchanged, the one
 historical attempt is still represented accurately, the process-evidence gaps
 are detected, the old completion interpretation is superseded, historical and
-downstream authority fields remain false, and any current Gate A execution
-authority is the one exact production-validated committed artifact.
+downstream authority fields remain false, and the exact Gate A authority input
+and sealed one-shot result are reconciled without rewriting either history.
 """
 
 from __future__ import annotations
@@ -86,6 +86,10 @@ COMPLETED_CURRENT_STATUS = "REPLACEMENT_TARGET_NONEXECUTING_QUALIFICATION_COMPLE
 COMPLETED_NEXT_BOUNDARY = (
     "STOP__REPLACEMENT_QUALIFICATION_COMPLETE__ALL_DOWNSTREAM_WORK_REQUIRES_NEW_OWNER_AUTHORITY"
 )
+ENGINEERING_SMOKE_CURRENT_STATUS = (
+    "GATE_A_ENGINEERING_SMOKE_FAILED_CLOSED__TEMPERATURE_UNOBSERVABLE__AUTHORITY_CONSUMED"
+)
+ENGINEERING_SMOKE_NEXT_BOUNDARY = "INDEPENDENT_GATE_A_ENGINEERING_SMOKE_EVIDENCE_REVIEW"
 REPAIRED_SOURCE_COMMIT = "593e9920be533603217cee93572d79b86cc65cf9"
 REPAIRED_SOURCE_TREE = "d9488e9968023a98fabc0808530fdbc731d5831a"
 REPAIRED_SOURCE_REVIEW_ID = "PR_37_GATE_A_FOUR_WAY_REMOTE_NAMESPACE_PREFLIGHT_REVIEW"
@@ -1976,6 +1980,11 @@ def main() -> int:
     )
     require_no_unaccented_owner()
     gate_a_execution_authority = validate_gate_a_execution_authority_state()
+    engineering_smoke = adapter_qualification.validate_engineering_smoke_evidence_state()
+    require(engineering_smoke["authority_artifact_consumed_field"] is False, "historical Gate A authority input changed")
+    require(engineering_smoke["authority_consumed"] is True, "Gate A authority was not reconciled as consumed")
+    require(engineering_smoke["engineering_smoke_authorized"] is False, "consumed Gate A authority remains active")
+    require(engineering_smoke["hardware_ran"] is False, "Gate A hardware state mismatch")
 
     scanner_test = future_scanner_nonzero_test()
     scanner_receipt_test = future_process_scan_receipt_contract_test()
@@ -2003,7 +2012,7 @@ def main() -> int:
     )
 
     output = {
-        "status": COMPLETED_CURRENT_STATUS,
+        "status": ENGINEERING_SMOKE_CURRENT_STATUS,
         "integrated_main": INTEGRATED_MAIN,
         "pre_repair_pr_head": PRE_REPAIR_HEAD,
         "historical_attempt_authorized": True,
@@ -2025,9 +2034,20 @@ def main() -> int:
         "replacement_authority_custody": replacement_authority_custody,
         "replacement_evidence_adjudication": replacement_evidence,
         "superseded_replacement_authority_custody": superseded_authority_custody,
-        "engineering_smoke_authorized": gate_a_execution_authority["authority_artifact_present"],
-        "hardware_ran": False,
-        "automatic_retry": False,
+        "engineering_smoke_attempted": engineering_smoke["smoke_attempted"],
+        "engineering_smoke_orchestrator_invocation_count": engineering_smoke["orchestrator_invocation_count"],
+        "engineering_smoke_target_contact_occurred": engineering_smoke["target_contact_occurred"],
+        "engineering_smoke_target_contact_attempt_count": engineering_smoke["target_contact_attempt_count"],
+        "gate_a_execution_authority_consumed": engineering_smoke["authority_consumed"],
+        "engineering_smoke_execution_count": engineering_smoke["execution_count"],
+        "engineering_smoke_transport_execution_count": engineering_smoke["transport_execution_count"],
+        "engineering_smoke_runner_start_count": engineering_smoke["runner_start_count"],
+        "engineering_smoke_physical_runtime_execution_count": engineering_smoke["physical_runtime_execution_count"],
+        "engineering_smoke_retry_count": engineering_smoke["retry_count"],
+        "engineering_smoke_authorized": engineering_smoke["engineering_smoke_authorized"],
+        "hardware_ran": engineering_smoke["hardware_ran"],
+        "automatic_retry": engineering_smoke["automatic_retry"],
+        "gate_a_engineering_smoke_result": engineering_smoke,
         "gate_a_execution_authority": gate_a_execution_authority,
         "future_scanner_nonzero_test": scanner_test,
         "future_process_scan_receipt_contract_test": scanner_receipt_test,
@@ -2040,9 +2060,11 @@ def main() -> int:
         "repaired_source_review_id": REPAIRED_SOURCE_REVIEW_ID,
         "repaired_source_commit": REPAIRED_SOURCE_COMMIT,
         "repaired_source_tree_sha1": REPAIRED_SOURCE_TREE,
-        "execution_head": EXECUTION_HEAD,
+        "replacement_qualification_execution_head": EXECUTION_HEAD,
+        "execution_head": engineering_smoke["execution_head"],
+        "execution_tree": engineering_smoke["execution_tree"],
         "current_verification_head": future_runner.current_head(),
-        "next_boundary": COMPLETED_NEXT_BOUNDARY,
+        "next_boundary": ENGINEERING_SMOKE_NEXT_BOUNDARY,
     }
     print(json.dumps(output, sort_keys=True, indent=2))
     return 0
@@ -2053,6 +2075,7 @@ if __name__ == "__main__":
         raise SystemExit(main())
     except (
         VerifyError,
+        adapter_qualification.VerifyError,
         future_runner.QualError,
         subprocess.CalledProcessError,
         json.JSONDecodeError,
