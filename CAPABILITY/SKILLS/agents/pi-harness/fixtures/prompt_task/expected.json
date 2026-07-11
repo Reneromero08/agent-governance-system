@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "contains": [
+    "PI WORKER TASK",
+    "STRICT SCOPE LOCK",
+    "WRITE_SCOPE: NONE",
+    "offline task-packet generation"
+  ],
+  "forbidden": [
+    "--no-session"
+  ]
+}
