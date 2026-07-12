@@ -103,6 +103,7 @@ def execute(run_id: str, *, pilot_variant: str, keep_remote: bool) -> dict[str, 
             "coded-preprojection-warm-phase-local-loop",
             "coded-preprojection-active-query-loop",
             "coded-preprojection-source-phase-chop-loop",
+            "coded-preprojection-active-source-chop-loop",
         },
         "pilot variant is not closed",
     )
@@ -204,6 +205,7 @@ def parse_args() -> argparse.Namespace:
             "coded-preprojection-warm-phase-local-loop",
             "coded-preprojection-active-query-loop",
             "coded-preprojection-source-phase-chop-loop",
+            "coded-preprojection-active-source-chop-loop",
         ),
         default="pn",
     )

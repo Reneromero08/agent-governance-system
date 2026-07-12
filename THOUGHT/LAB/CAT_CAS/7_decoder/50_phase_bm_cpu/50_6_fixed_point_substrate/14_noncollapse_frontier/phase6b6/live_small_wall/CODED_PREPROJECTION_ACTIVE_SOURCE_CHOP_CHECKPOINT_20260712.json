@@ -1,0 +1,136 @@
+{
+  "schema_id": "CAT_CAS_CODED_PREPROJECTION_ACTIVE_SOURCE_CHOP_CHECKPOINT_V1",
+  "checkpoint_date": "2026-07-12",
+  "starting_commit": "542a6022967b63cc0f220a44fce88eef69459563",
+  "run": {
+    "run_id": "coded_preprojection_active_source_chop_0",
+    "pilot_variant": "coded-preprojection-active-source-chop-loop",
+    "local_run": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/coded_preprojection_active_source_chop_0",
+    "remote_run": "/root/catcas_live_small_wall/coded_preprojection_active_source_chop_0",
+    "command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_gate_a_first_light.py --run-id coded_preprojection_active_source_chop_0 --pilot-variant coded-preprojection-active-source-chop-loop",
+    "lab_device": "root@192.168.137.100",
+    "controller_status": "GATE_A_FIRST_LIGHT_COMPLETE",
+    "remote_returncode": 0,
+    "copy_verified": true,
+    "remote_cleaned": true,
+    "verified_file_count": 15
+  },
+  "source_binding": {
+    "source_bundle_sha256": "420b045fe92a655c8f73443a8003ba09cfe80d355c20b3014eda8b9115b9caa1",
+    "schedule_sha256": "f1a5da565e0f0cc6da880bf27918ae3d29fde52745f03d237ffb8d0b54caa292",
+    "schedule_tokens": "WU WU N0 P0 C0 M0 M1 C1 P1 P2 C2 M2 M3 C3 P3 N1",
+    "access_law": "CAT_CAS_ACTIVE_QUERY_SOURCE_PHASE_CHOP_V1",
+    "measurement_mode": "catcas_active_query_source_phase_chop_delta_cycles",
+    "observation_kind": "experiment_owned_active_query_delta_under_source_phase_chop"
+  },
+  "predeclared_discriminator": {
+    "wall": "access-model selection after active-query receiver-delta and source-phase-chop failed separately",
+    "carrier": "CAT_CAS-owned occupancy and response buffers with one source-side phase-chopped epoch and receiver-side active-query subbank deltas",
+    "operator": "same phase-local public P/C/M token sequence, but the source burst is internally phase-chopped while the receiver records balanced active-query positive-minus-negative subbank deltas",
+    "observable": "source-phase-aligned lock-in over active-query receiver deltas before scalar projection",
+    "strongest_alternative_explanation": "source-segment timing/service curvature or active-query service curvature, not a restored fold-odd carrier",
+    "killing_controls_present_in_run": "C slots, N0/N1 neutral restoration, source-off controls, balanced public phase sequence, one sender epoch, complete burst coverage",
+    "additional_control_needed_if_positive": "matched combined active-query/source-phase sham before any Small Wall claim",
+    "restoration_class": "neutral active-query response restoration plus policy4/policy5 readback and verified copy-back"
+  },
+  "decoded_observables": {
+    "source_phase_chop_plus_mean": -1.0966145833333336,
+    "source_phase_chop_minus_mean": -0.09563802083333339,
+    "source_phase_chop_control_mean": 1.06171875,
+    "source_phase_chop_control_floor": 3.5234375,
+    "three_x_control_floor": 10.5703125,
+    "opposed_sign": false,
+    "exceeds_controls": false,
+    "signal_candidate": false,
+    "fold_odd_balance_error_cycles": 1.0009765625000002,
+    "neutral_absolute_delta_cycles": 0.083640625,
+    "neutral_restoration_passed": true,
+    "sufficient_segment_samples": true
+  },
+  "integrity": {
+    "capture_quality_classification": "CAPTURE_ACCEPTED_WITH_SERVICE_SPIKES",
+    "sample_count": 16000,
+    "sample_count_per_slot": [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000],
+    "all_bursts_completed_inside_slots": true,
+    "record_integrity_failure": false,
+    "missing_slot": false,
+    "sender_spill": false,
+    "skipped_deadline_count": 0,
+    "missed_deadline_count": 0,
+    "step_sender_epoch_count": 1,
+    "runtime_execution_count": 1
+  },
+  "lab_device_boundary": {
+    "temperature_preflight_c": 49.375,
+    "temperature_veto_c": 68.0,
+    "frequency_write_attempt_count": 8,
+    "restoration_complete": true,
+    "restoration_readback": {
+      "policy4": {
+        "scaling_min_freq": 800000,
+        "scaling_max_freq": 3200000,
+        "resolved_path": "/sys/devices/system/cpu/cpufreq/policy4"
+      },
+      "policy5": {
+        "scaling_min_freq": 800000,
+        "scaling_max_freq": 3200000,
+        "resolved_path": "/sys/devices/system/cpu/cpufreq/policy5"
+      }
+    },
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "physical_address_access": false,
+    "cache_set_mapping": false,
+    "experiment_owned_memory_only": true,
+    "forbidden_process_matches_before": 0,
+    "forbidden_process_matches_after": 0
+  },
+  "focused_validation": [
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": ".\\.venv\\Scripts\\python.exe -m py_compile THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\live_gate_a_target.py THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_gate_a_first_light.py",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": "gate_a_worker_combined_check --validate-only && gate_a_worker_combined_check --self-test-coded-preprojection-active-source-chop",
+      "exit_code": 0,
+      "output": "{\"automatic_retry\":false,\"control_writes\":0,\"engineering_smoke_executor_implemented\":true,\"hardware_executions\":0,\"msr_reads\":0,\"msr_writes\":0,\"receiver_captures\":0,\"sender_starts\":0,\"slot_count\":16,\"status\":\"GATE_A_WORKER_VALIDATE_ONLY_OK\",\"validate_only\":true,\"live_execution_bound\":false}\n{\"status\":\"GATE_A_WORKER_MOCK_SELF_TEST_OK\",\"network_connections\":0,\"hardware_executions\":0,\"frequency_writes\":0,\"voltage_writes\":0,\"msr_reads\":0,\"msr_writes\":0,\"slot_count\":16,\"sample_count\":16000,\"step_sender_epoch_count\":1,\"temperature_receipt_count\":2}"
+    }
+  ],
+  "architecture_advisor": {
+    "subagent_spawned": true,
+    "subagent_boundary": "read-only, no checkout mutation, no lab-device contact, no Git write",
+    "result": "nonresponsive after repeated waits; interrupted before live execution; main agent proceeded from retained evidence"
+  },
+  "stash_comparison": {
+    "stash": "stash@{0}",
+    "lab_subtree_diff_against_current_main": "empty",
+    "action": "left untouched"
+  },
+  "raw_outputs": {
+    "CONTROLLER_RESULT.json": {"size": 795, "sha256": "52b7d0f4371581158d001d17e18a5dc8c435c6468da747e198a0c649119e9d99"},
+    "FINAL_RESULT.json": {"size": 8160, "sha256": "ef1d730e3ebd78d1ae0440f03375bc0c807dd09d53d36953c416492ffece9b1b"},
+    "FIRST_LIGHT_ANALYSIS.json": {"size": 22892, "sha256": "5973eb0159f90a609c7db8b25ca2fda3d22ccc1d232a94db50012b85ce3a5e27"},
+    "FILE_MANIFEST.json": {"size": 1953, "sha256": "96b847ff5534b801cf60236b187a4f7993b4bf7e478364530de65c6785c6a279"},
+    "CONTROLLER_STDOUT.txt": {"size": 8290, "sha256": "267df8c01d06e8bfcec0b4ee6eb0b4edf975b32722d0a331995f83a7f7e07113"},
+    "CONTROLLER_STDERR.txt": {"size": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"},
+    "FREQUENCY_WRITE_LEDGER.json": {"size": 3901, "sha256": "dca0b7766dff10ed73996cc0fee2ed942e5920320f51e473522406b0038d7437"},
+    "PINNED_OBSERVATION.json": {"size": 46226, "sha256": "5f5b5a81d20ff9eefebe093c0f2a49ce2c9ab4198d1dab293d07e614b97ad79d"},
+    "POLICY_SNAPSHOT.json": {"size": 2300, "sha256": "a91d64655d220d267c0b746ac672475e51097db9e715326ccb0773f0fe50cc34"},
+    "RUNTIME_MONITOR.json": {"size": 18679, "sha256": "c5551a825372c60109c0b1740b385688d84fd4d1371445d029618c069b740036"},
+    "RUNTIME_PROCESS.json": {"size": 4767, "sha256": "983d1f1c33489d9ece77dcc39f57eb022f320a7f264a5ec0527d2a7a54718dad"}
+  },
+  "classification": {
+    "marker": "CODED_PREPROJECTION_ACTIVE_SOURCE_CHOP_RESPONSE_NOT_ESTABLISHED",
+    "mechanical_failure": false,
+    "scientific_result": "negative for combined active-query/source-phase-chop access model under this schedule",
+    "interpretation": "The combined access law restored and captured cleanly, but the phase-aligned active-query means were same-signed and below the control threshold. This kills this exact combined mapping without killing all source-owned carrier or query-algebra directions.",
+    "claim_ceiling_after_run": "EVICTION_SENTINEL_RESPONSE_FOUND"
+  }
+}

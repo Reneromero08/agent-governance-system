@@ -6,7 +6,7 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`LOCKED_HISTORY_RESPONSE_NOT_ESTABLISHED`
+`CODED_PREPROJECTION_ACTIVE_SOURCE_CHOP_RESPONSE_NOT_ESTABLISHED`
 
 **Active wall:**
 The current wall is still carrier/access-model selection. Timing, ownership-intent PMU
@@ -16,16 +16,20 @@ receiver-delta access model, the first source-side phase-chopped access model,
 same-core public branch-history, read-only translation/page-footprint, same-core
 stream/stride prefetching, and a source-process/fresh-measurement-process lifecycle
 carrier, same-core public indirect-target history, and same-page-offset store/load
-alias-history, and a locked no-op history carrier either failed controls or did not
-expose a usable fold-odd carrier. The eviction-sentinel first-light run remains useful
-because it changed restoration from byte equality to a measured carrier equivalence
-class, but the phase-local remaps did not promote it.
+alias-history, a locked no-op history carrier, and the combined
+active-query/source-phase-chop access model either failed controls or did not expose a
+usable fold-odd carrier. The eviction-sentinel first-light run remains useful because
+it changed restoration from byte equality to a measured carrier equivalence class, but
+the phase-local remaps did not promote it.
 `coded_preprojection_active_query_0` moved the query into the receiver's measured
 workload before scalar recording and restored cleanly, but its opposed fold-odd
 candidate did not clear the post-control floor.
 `coded_preprojection_source_phase_chop_0` moved the public phase waveform into the
 source burst before scalar recording and also restored cleanly, but its control floor
-was too large for the `3x` rule. The restored history-sentinel, branch-history,
+was too large for the `3x` rule. `coded_preprojection_active_source_chop_0` combined
+that source-side phase waveform with receiver active-query subbank deltas and restored
+cleanly, but its phase-aligned means were same-signed and below the control threshold.
+The restored history-sentinel, branch-history,
 translation-history, prefetch-stream, and process-lifecycle probes all ran cleanly and
 stayed inside neutral/shuffle controls. The remaining wall is no longer ordinary local
 history over cache lines, branch outcomes, page footprints, stream prefetching, or
@@ -1912,13 +1916,56 @@ ownership operator to serializing locked logical no-ops, but the forward/reverse
 residuals remain inside neutral/shuffle controls. Do not rerun this
 neutral/forward/reverse/shuffle locked-history sequence unchanged.
 
+### Combined active-query/source-phase-chop access model
+
+The combined active-query/source-phase-chop discriminator joined the two previously
+separate access-model repairs: the source burst used the public in-slot phase chop
+while the receiver measured balanced active-query positive-minus-negative subbank
+deltas before scalar projection.
+
+```text
+run id        coded_preprojection_active_source_chop_0
+source bundle 420b045fe92a655c8f73443a8003ba09cfe80d355c20b3014eda8b9115b9caa1
+schedule hash f1a5da565e0f0cc6da880bf27918ae3d29fde52745f03d237ffb8d0b54caa292
+worker status GATE_A_ENGINEERING_SMOKE_COMPLETE
+```
+
+The transaction completed with verified copy-back and remote cleanup. It restored
+policy4 and policy5 to 800000-3200000 kHz, performed zero voltage access and zero MSR
+reads/writes, stayed below the 68 C temperature veto, captured all 16000 samples, had
+zero skipped deadlines, accepted service spikes as physical data, completed all source
+bursts inside their slots, and used one sender epoch.
+
+Decoded source-phase-aligned active-query deltas:
+
+```text
+plus mean        -1.0966145833333336
+minus mean       -0.09563802083333339
+control mean     +1.06171875
+control floor     3.5234375
+opposed sign      false
+exceeds controls  false
+signal            false
+neutral delta     0.083640625 cycles
+```
+
+Checkpoint:
+
+`CODED_PREPROJECTION_ACTIVE_SOURCE_CHOP_CHECKPOINT_20260712.json`
+
+**Status:** this exact combined active-query/source-phase-chop mapping is negative.
+It changed the access model by combining source-side pre-projection phase chopping with
+receiver active-query deltas, but the resulting fold-odd coordinate was same-signed and
+below controls. Do not rerun this exact combined schedule unchanged.
+
 ## Cheapest current discriminator
 
 Change carrier family or access model again, not another remap of the same
 phase-local timing/PMU/eviction/active-query/source-phase-chop/restored-history,
 simple branch-history/indirect-target-history/translation-footprint/prefetch-stream
-geometry, same-page-offset store/load alias-history, locked no-op history, or the
-current fresh source-process lifecycle sentinel. The run must stay closed:
+geometry, same-page-offset store/load alias-history, locked no-op history, the
+combined active-query/source-phase-chop schedule, or the current fresh source-process
+lifecycle sentinel. The run must stay closed:
 CAT_CAS-owned buffers only, predetermined geometry, no physical-address access, no
 cache-set mapping, no unrelated-process observation, and no MSR or voltage access.
 
@@ -1942,9 +1989,11 @@ page-footprint discriminator unchanged. Do not rerun the same prefetch-stream
 sentinel discriminator unchanged. Do not rerun
 `coded_preprojection_active_query_0` or the same active-query receiver-delta schedule
 unchanged. Do not rerun `coded_preprojection_source_phase_chop_0` or the same
-source-phase-chop schedule unchanged. Do not rerun `f10_process_lifecycle_0` or the
-same neutral/forward/reverse/shuffle child-process read-store lifecycle sentinel
-unchanged. Do not rerun `f10_indirect_target_history_0` or the same
+source-phase-chop schedule unchanged. Do not rerun
+`coded_preprojection_active_source_chop_0` or the same combined active-query/source
+phase-chop schedule unchanged. Do not rerun `f10_process_lifecycle_0` or the same
+neutral/forward/reverse/shuffle child-process read-store lifecycle sentinel unchanged.
+Do not rerun `f10_indirect_target_history_0` or the same
 neutral/forward/reverse/shuffle indirect-target sequence unchanged. Do not rerun
 `f10_store_load_alias_0` or the same neutral/forward/reverse/shuffle same-offset
 store/load alias sequence unchanged. Do not rerun `f10_locked_history_0` or the same
@@ -1995,12 +2044,15 @@ negative. `f10_indirect_target_history_0` then changed the public branch carrier
 conditional outcomes to indirect target selection and also stayed negative.
 `f10_store_load_alias_0` then changed carrier family to same-page-offset store/load
 alias history and also stayed negative. `f10_locked_history_0` then changed the
-ownership operator to serializing locked logical no-ops and also stayed negative. The
-next move must change carrier family or access model rather than keep remapping the
+ownership operator to serializing locked logical no-ops and also stayed negative.
+`coded_preprojection_active_source_chop_0` then combined receiver active-query deltas
+with source-side phase chopping and also stayed negative. The next move must change
+carrier family or access model rather than keep remapping the
 same eviction-sentinel PMU/timing, active-query phase-local, source-phase-chop,
 restored two-line-set ownership-history, simple branch-history, indirect-target-
 history, translation-footprint, store/load alias-history, locked-history,
-prefetch-stream, or source-process lifecycle geometry.
+prefetch-stream, combined active-query/source-chop, or source-process lifecycle
+geometry.
 
 ## State update rule
 

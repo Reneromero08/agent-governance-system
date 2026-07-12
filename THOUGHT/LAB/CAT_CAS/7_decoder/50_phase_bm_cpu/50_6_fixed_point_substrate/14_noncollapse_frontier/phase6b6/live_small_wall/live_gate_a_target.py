@@ -43,6 +43,7 @@ CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_SCHEDULE_SHA256 = "51f3fb66cd4f03dff2d
 CODED_PREPROJECTION_WARM_PHASE_LOCAL_SCHEDULE_SHA256 = "1144b929905e30f3da1261fdedf5e6393c30d31a41c9a4dd2dc39e8573f4cbc4"
 CODED_PREPROJECTION_ACTIVE_QUERY_SCHEDULE_SHA256 = "5a0ac285435ba33a80a3272020f19c85004fc63949f1df4325a3ad90fdcd87f2"
 CODED_PREPROJECTION_SOURCE_PHASE_CHOP_SCHEDULE_SHA256 = "0308e6518c6e8e4fd60862f3825750a3865d3f8cb4cbef59d140eefb6d2e0fb1"
+CODED_PREPROJECTION_ACTIVE_SOURCE_CHOP_SCHEDULE_SHA256 = "f1a5da565e0f0cc6da880bf27918ae3d29fde52745f03d237ffb8d0b54caa292"
 READONLY_MICRO_READ_HZ = 2_000
 CODED_PREPROJECTION_READ_HZ = 2_000
 LEGACY_READ_HZ = 8_000
@@ -72,6 +73,7 @@ CODED_PREPROJECTION_VARIANTS = frozenset({
     "coded-preprojection-warm-phase-local-loop",
     "coded-preprojection-active-query-loop",
     "coded-preprojection-source-phase-chop-loop",
+    "coded-preprojection-active-source-chop-loop",
 })
 CODED_PREPROJECTION_RESTORED_VARIANTS = frozenset({
     "coded-preprojection-restored-loop",
@@ -85,6 +87,7 @@ CODED_PREPROJECTION_WARM_RESTORED_VARIANTS = frozenset({
     "coded-preprojection-warm-phase-local-loop",
     "coded-preprojection-active-query-loop",
     "coded-preprojection-source-phase-chop-loop",
+    "coded-preprojection-active-source-chop-loop",
 })
 CODED_PREPROJECTION_QUERY_SCRAMBLE_VARIANTS = frozenset({
     "coded-preprojection-warm-query-scramble-loop",
@@ -103,12 +106,18 @@ CODED_PREPROJECTION_PHASE_LOCAL_VARIANTS = frozenset({
     "coded-preprojection-warm-phase-local-loop",
     "coded-preprojection-active-query-loop",
     "coded-preprojection-source-phase-chop-loop",
+    "coded-preprojection-active-source-chop-loop",
 })
 CODED_PREPROJECTION_ACTIVE_QUERY_VARIANTS = frozenset({
     "coded-preprojection-active-query-loop",
+    "coded-preprojection-active-source-chop-loop",
 })
 CODED_PREPROJECTION_SOURCE_PHASE_CHOP_VARIANTS = frozenset({
     "coded-preprojection-source-phase-chop-loop",
+    "coded-preprojection-active-source-chop-loop",
+})
+CODED_PREPROJECTION_ACTIVE_SOURCE_CHOP_VARIANTS = frozenset({
+    "coded-preprojection-active-source-chop-loop",
 })
 CODED_PREPROJECTION_NULL_CONTROL_VARIANTS = (
     CODED_PREPROJECTION_QUERY_SCRAMBLE_VARIANTS |
@@ -138,6 +147,8 @@ FORBIDDEN_PROCESS_MARKERS = (
 
 
 def coded_preprojection_schedule_sha256(pilot_variant: str) -> str:
+    if pilot_variant in CODED_PREPROJECTION_ACTIVE_SOURCE_CHOP_VARIANTS:
+        return CODED_PREPROJECTION_ACTIVE_SOURCE_CHOP_SCHEDULE_SHA256
     if pilot_variant in CODED_PREPROJECTION_SOURCE_PHASE_CHOP_VARIANTS:
         return CODED_PREPROJECTION_SOURCE_PHASE_CHOP_SCHEDULE_SHA256
     if pilot_variant in CODED_PREPROJECTION_ACTIVE_QUERY_VARIANTS:
@@ -1293,17 +1304,23 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
     )
     active_query = pilot_variant in CODED_PREPROJECTION_ACTIVE_QUERY_VARIANTS
     measurement_mode = (
-        "catcas_source_phase_chop_response_cycles"
-        if source_phase_chop else (
-            "catcas_active_query_delta_cycles"
-            if active_query else "catcas_coded_preprojection_response_cycles"
+        "catcas_active_query_source_phase_chop_delta_cycles"
+        if active_query and source_phase_chop else (
+            "catcas_source_phase_chop_response_cycles"
+            if source_phase_chop else (
+                "catcas_active_query_delta_cycles"
+                if active_query else "catcas_coded_preprojection_response_cycles"
+            )
         )
     )
     primary_coordinate = (
-        "source-side in-slot phase-chop lock-in aligned by public token phase"
-        if source_phase_chop else (
-            "active-query balanced subbank delta quadrature fold-odd response"
-            if active_query else "post-control-centered quadrature fold-odd response"
+        "source-phase-aligned fold-odd lock-in over active-query balanced subbank deltas"
+        if active_query and source_phase_chop else (
+            "source-side in-slot phase-chop lock-in aligned by public token phase"
+            if source_phase_chop else (
+                "active-query balanced subbank delta quadrature fold-odd response"
+                if active_query else "post-control-centered quadrature fold-odd response"
+            )
         )
     )
     return {
@@ -1312,6 +1329,7 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
         "measurement_mode": measurement_mode,
         "active_query_receiver_delta": active_query,
         "source_phase_chop": source_phase_chop,
+        "active_query_source_phase_chop": pilot_variant in CODED_PREPROJECTION_ACTIVE_SOURCE_CHOP_VARIANTS,
         "schedule": {
             "schedule_sha256": schedule_sha256,
             "slot_count": 16,
@@ -1399,11 +1417,14 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
             f"{null_control_kind.replace('_', '-')} killing control only; no OrbitState coupling, path memory, holonomy, or Small Wall claim"
             if coded_null_control
             else (
-                "source-phase-chop coded-loop physical mapping only; requires matched source-phase sham before any Small Wall claim"
-                if source_phase_chop else (
-                    "active-query coded-loop physical mapping only; requires matched active-query controls before any Small Wall claim"
-                    if active_query
-                    else "single coded-loop physical mapping; no OrbitState coupling, path memory, holonomy, or Small Wall claim"
+                "combined active-query/source-phase-chop coded-loop mapping only; requires matched controls before any Small Wall claim"
+                if active_query and source_phase_chop else (
+                    "source-phase-chop coded-loop physical mapping only; requires matched source-phase sham before any Small Wall claim"
+                    if source_phase_chop else (
+                        "active-query coded-loop physical mapping only; requires matched active-query controls before any Small Wall claim"
+                        if active_query
+                        else "single coded-loop physical mapping; no OrbitState coupling, path memory, holonomy, or Small Wall claim"
+                    )
                 )
             )
         ),
@@ -1545,6 +1566,7 @@ def execute(source_root: Path, output_root: Path, pilot_variant: str) -> dict[st
             "coded-preprojection-warm-phase-local-loop",
             "coded-preprojection-active-query-loop",
             "coded-preprojection-source-phase-chop-loop",
+            "coded-preprojection-active-source-chop-loop",
         },
         "unknown pilot variant",
     )
@@ -1702,6 +1724,7 @@ def parse_args() -> argparse.Namespace:
             "coded-preprojection-warm-phase-local-loop",
             "coded-preprojection-active-query-loop",
             "coded-preprojection-source-phase-chop-loop",
+            "coded-preprojection-active-source-chop-loop",
         ),
         default="pn",
     )

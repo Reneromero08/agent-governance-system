@@ -140,7 +140,8 @@ static int gate_a_occupancy_pilot(void) {
            gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_LOOP ||
            gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP ||
            gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_ACTIVE_QUERY_LOOP ||
-           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_SOURCE_PHASE_CHOP_LOOP;
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_SOURCE_PHASE_CHOP_LOOP ||
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_ACTIVE_SOURCE_CHOP_LOOP;
 }
 
 static int gate_a_coded_preprojection_pilot(void) {
@@ -153,7 +154,8 @@ static int gate_a_coded_preprojection_pilot(void) {
            gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_LOOP ||
            gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP ||
            gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_ACTIVE_QUERY_LOOP ||
-           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_SOURCE_PHASE_CHOP_LOOP;
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_SOURCE_PHASE_CHOP_LOOP ||
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_ACTIVE_SOURCE_CHOP_LOOP;
 }
 
 static int gate_a_coded_preprojection_query_scramble_pilot(void) {
@@ -176,15 +178,18 @@ static int gate_a_coded_preprojection_phase_local_pilot(void) {
     return gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_LOOP ||
            gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP ||
            gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_ACTIVE_QUERY_LOOP ||
-           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_SOURCE_PHASE_CHOP_LOOP;
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_SOURCE_PHASE_CHOP_LOOP ||
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_ACTIVE_SOURCE_CHOP_LOOP;
 }
 
 static int gate_a_coded_preprojection_active_query_pilot(void) {
-    return gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_ACTIVE_QUERY_LOOP;
+    return gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_ACTIVE_QUERY_LOOP ||
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_ACTIVE_SOURCE_CHOP_LOOP;
 }
 
 static int gate_a_coded_preprojection_source_phase_chop_pilot(void) {
-    return gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_SOURCE_PHASE_CHOP_LOOP;
+    return gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_SOURCE_PHASE_CHOP_LOOP ||
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_ACTIVE_SOURCE_CHOP_LOOP;
 }
 
 static int gate_a_coded_preprojection_warm_restored_pilot(void) {
@@ -223,7 +228,8 @@ static int gate_a_variant_is_readonly_occupancy(int variant) {
            variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_LOOP ||
            variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP ||
            variant == GATE_A_PILOT_CODED_PREPROJECTION_ACTIVE_QUERY_LOOP ||
-           variant == GATE_A_PILOT_CODED_PREPROJECTION_SOURCE_PHASE_CHOP_LOOP;
+           variant == GATE_A_PILOT_CODED_PREPROJECTION_SOURCE_PHASE_CHOP_LOOP ||
+           variant == GATE_A_PILOT_CODED_PREPROJECTION_ACTIVE_SOURCE_CHOP_LOOP;
 }
 
 static int gate_a_slot_count(void) {
@@ -342,6 +348,10 @@ static size_t gate_a_occupancy_bytes(int slot) {
 }
 
 static const char *gate_a_measurement_mode(void) {
+    if (gate_a_coded_preprojection_active_query_pilot() &&
+        gate_a_coded_preprojection_source_phase_chop_pilot()) {
+        return "catcas_active_query_source_phase_chop_delta_cycles";
+    }
     if (gate_a_coded_preprojection_source_phase_chop_pilot()) {
         return "catcas_source_phase_chop_response_cycles";
     }
@@ -360,6 +370,10 @@ static const char *gate_a_measurement_mode(void) {
 }
 
 static const char *gate_a_observation_kind(void) {
+    if (gate_a_coded_preprojection_active_query_pilot() &&
+        gate_a_coded_preprojection_source_phase_chop_pilot()) {
+        return "experiment_owned_active_query_delta_with_source_phase_chop_cycles_per_access";
+    }
     if (gate_a_coded_preprojection_source_phase_chop_pilot()) {
         return "experiment_owned_source_phase_chopped_buffer_cycles_per_access";
     }
@@ -378,6 +392,10 @@ static const char *gate_a_observation_kind(void) {
 }
 
 static const char *gate_a_occupancy_classification(void) {
+    if (gate_a_coded_preprojection_active_query_pilot() &&
+        gate_a_coded_preprojection_source_phase_chop_pilot()) {
+        return "ACTIVE_SOURCE_PHASE_CHOP_PREPROJECTION_DELTA";
+    }
     if (gate_a_coded_preprojection_source_phase_chop_pilot()) return "SOURCE_PHASE_CHOP_PREPROJECTION";
     if (gate_a_coded_preprojection_active_query_pilot()) return "ACTIVE_QUERY_PREPROJECTION_DELTA";
     if (gate_a_coded_preprojection_pilot()) return "CODED_PREPROJECTION";
@@ -2871,7 +2889,7 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
         args->slot_s != 0.5 || args->temperature_veto_c != 68.0 ||
         args->required_frequency_khz != 1600000 ||
         args->pilot_variant < GATE_A_PILOT_PN ||
-        args->pilot_variant > GATE_A_PILOT_CODED_PREPROJECTION_SOURCE_PHASE_CHOP_LOOP) {
+        args->pilot_variant > GATE_A_PILOT_CODED_PREPROJECTION_ACTIVE_SOURCE_CHOP_LOOP) {
         return 2;
     }
     gate_a_pilot_variant = args->pilot_variant;
