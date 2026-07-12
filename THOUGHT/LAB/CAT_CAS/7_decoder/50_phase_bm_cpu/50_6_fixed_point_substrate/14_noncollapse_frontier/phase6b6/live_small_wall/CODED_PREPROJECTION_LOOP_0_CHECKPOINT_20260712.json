@@ -1,0 +1,99 @@
+{
+  "schema_id": "CAT_CAS_CODED_PREPROJECTION_LOOP_CHECKPOINT_V1",
+  "run_id": "coded_preprojection_loop_0",
+  "pilot_variant": "coded-preprojection-loop",
+  "local_run": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/coded_preprojection_loop_0",
+  "source_bundle_sha256": "b3213de1068b8787a9ca1d4783e4797a036d6ec37e53464a92a0d3545d0f62dd",
+  "schedule_sha256": "35496568999774114af1057ac70fda4b6aeb8a8989e8daf1d1672e508523d07c",
+  "transaction": {
+    "final_status": "GATE_A_FIRST_LIGHT_COMPLETE",
+    "remote_returncode": 0,
+    "copy_verified": true,
+    "remote_cleaned": true,
+    "restoration_complete": true,
+    "frequency_write_attempt_count": 8,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "preflight_temperature_c": 41.0,
+    "forbidden_process_matches_before": 0,
+    "forbidden_process_matches_after": 0,
+    "policy4_restored_khz": {
+      "scaling_min_freq": 800000,
+      "scaling_max_freq": 3200000
+    },
+    "policy5_restored_khz": {
+      "scaling_min_freq": 800000,
+      "scaling_max_freq": 3200000
+    }
+  },
+  "capture": {
+    "classification": "CAPTURE_ACCEPTED_WITH_SERVICE_SPIKES",
+    "sample_count": 16000,
+    "slot_count": 16,
+    "read_hz": 2000,
+    "sample_count_per_slot": [
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000
+    ],
+    "record_integrity_failure": false,
+    "missing_slot": false,
+    "sender_spill": false,
+    "skipped_deadline_count": 0,
+    "all_bursts_completed_inside_slots": true,
+    "sufficient_during_burst_samples": true
+  },
+  "decoded_coordinates": {
+    "pre_projection_private_fold_plus": {
+      "real": 70.39943549177116,
+      "imag": 84.45585937499999,
+      "abs": 109.94940973161167
+    },
+    "pre_projection_private_fold_minus": {
+      "real": 60.07799479166664,
+      "imag": -91.50247395833333,
+      "abs": 109.46263380114236
+    },
+    "post_projection_control": {
+      "real": 25.857421875000007,
+      "imag": 0.9222656250000005,
+      "abs": 25.87386403119537
+    }
+  },
+  "controls": {
+    "source_off_whole_slot_range_cycles": 0.767593749999989,
+    "control_floor_cycles": 0.9222656250000005,
+    "fold_odd_opposed": true,
+    "fold_odd_exceeds_controls": true,
+    "fold_odd_signal_candidate": true
+  },
+  "neutral_restoration": {
+    "before_slot": 0,
+    "after_slot": 14,
+    "before_mean_response_cycles": 168.587640625,
+    "after_mean_response_cycles": 83.10940625,
+    "absolute_delta_cycles": 85.478234375,
+    "tolerance_cycles": 5.0,
+    "passed": false
+  },
+  "adjudication": {
+    "marker": "FOLD_ODD_BOUNDARY_SIGNAL_CANDIDATE_WITH_NEUTRAL_RESTORATION_FAILURE",
+    "small_wall_crossed": false,
+    "claim_ceiling": "Physical coded-loop first light only: an opposed fold-odd timing coordinate appeared under the fixed pre-projection mapping, but the neutral physical-state probe did not restore, so no fold-odd boundary signal, OrbitState coupling, path memory, holonomy, or Small Wall crossing is claimed.",
+    "next_bottleneck": "Neutral restoration probe is polluted by the first-slot cold response; repair the schedule so warmup and neutral restoration are distinct before promoting the signal."
+  }
+}

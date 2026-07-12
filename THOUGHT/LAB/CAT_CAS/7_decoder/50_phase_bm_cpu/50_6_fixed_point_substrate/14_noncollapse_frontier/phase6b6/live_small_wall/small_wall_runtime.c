@@ -27,8 +27,14 @@ static const char *readonly_micro_tokens[GATE_A_READONLY_MICRO_SLOT_COUNT] = {
     "I", "I", "F0", "F1", "F1", "F0", "I", "I"
 };
 
+static const char *coded_preprojection_tokens[GATE_A_CODED_PREPROJECTION_SLOT_COUNT] = {
+    "N0", "SO", "P0", "P1", "P2", "P3", "M0", "M1",
+    "M2", "M3", "C0", "C1", "C2", "C3", "N1", "SO"
+};
+
 static int gate_a_pilot_variant = GATE_A_PILOT_PN;
 
+static int gate_a_coded_preprojection_pilot(void);
 static int gate_a_readonly_occupancy_pilot(void);
 
 /* Closed CAT_CAS-owned shared-cache response geometry.  These buffers contain
@@ -47,6 +53,9 @@ static const char *gate_a_runtime_output_root = NULL;
 #endif
 
 static int gate_a_driven_slot(int slot) {
+    if (gate_a_coded_preprojection_pilot()) {
+        return slot >= 2 && slot <= 13;
+    }
     if (gate_a_readonly_occupancy_pilot()) {
         return slot >= 2 && slot <= 5;
     }
@@ -62,6 +71,7 @@ static int gate_a_driven_slot(int slot) {
 }
 
 static int gate_a_step_end_slot(void) {
+    if (gate_a_coded_preprojection_pilot()) return 14;
     if (gate_a_readonly_occupancy_pilot()) return 6;
     return gate_a_pilot_variant == GATE_A_PILOT_IMPULSE ? 7 : 10;
 }
@@ -83,22 +93,32 @@ static int gate_a_occupancy_pilot(void) {
            gate_a_pilot_variant == GATE_A_PILOT_OCCUPANCY_EQUAL ||
            gate_a_pilot_variant == GATE_A_PILOT_READONLY_OCCUPANCY_FORWARD ||
            gate_a_pilot_variant == GATE_A_PILOT_READONLY_OCCUPANCY_REVERSE ||
-           gate_a_pilot_variant == GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL;
+           gate_a_pilot_variant == GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL ||
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_LOOP;
+}
+
+static int gate_a_coded_preprojection_pilot(void) {
+    return gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_LOOP;
 }
 
 static int gate_a_readonly_occupancy_pilot(void) {
     return gate_a_pilot_variant == GATE_A_PILOT_READONLY_OCCUPANCY_FORWARD ||
            gate_a_pilot_variant == GATE_A_PILOT_READONLY_OCCUPANCY_REVERSE ||
-           gate_a_pilot_variant == GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL;
+           gate_a_pilot_variant == GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL ||
+           gate_a_coded_preprojection_pilot();
 }
 
 static int gate_a_variant_is_readonly_occupancy(int variant) {
     return variant == GATE_A_PILOT_READONLY_OCCUPANCY_FORWARD ||
            variant == GATE_A_PILOT_READONLY_OCCUPANCY_REVERSE ||
-           variant == GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL;
+           variant == GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL ||
+           variant == GATE_A_PILOT_CODED_PREPROJECTION_LOOP;
 }
 
 static int gate_a_slot_count(void) {
+    if (gate_a_coded_preprojection_pilot()) {
+        return GATE_A_CODED_PREPROJECTION_SLOT_COUNT;
+    }
     return gate_a_readonly_occupancy_pilot()
         ? GATE_A_READONLY_MICRO_SLOT_COUNT : GATE_A_LEGACY_SLOT_COUNT;
 }
@@ -108,6 +128,10 @@ static double gate_a_duration_s(const GateASmokeArgs *args) {
 }
 
 static const char *gate_a_slot_token(int slot) {
+    if (gate_a_coded_preprojection_pilot()) {
+        return slot >= 0 && slot < GATE_A_CODED_PREPROJECTION_SLOT_COUNT
+            ? coded_preprojection_tokens[slot] : "OUT_OF_RANGE";
+    }
     if (gate_a_readonly_occupancy_pilot()) {
         return slot >= 0 && slot < GATE_A_READONLY_MICRO_SLOT_COUNT
             ? readonly_micro_tokens[slot] : "OUT_OF_RANGE";
@@ -117,15 +141,25 @@ static const char *gate_a_slot_token(int slot) {
 }
 
 static int gate_a_readonly_stimulus_first_slot(void) {
+    if (gate_a_coded_preprojection_pilot()) return 2;
     return gate_a_readonly_occupancy_pilot() ? 2 : 6;
 }
 
 static int gate_a_readonly_stimulus_end_slot(void) {
+    if (gate_a_coded_preprojection_pilot()) return 14;
     return gate_a_readonly_occupancy_pilot() ? 6 : 10;
 }
 
 static size_t gate_a_occupancy_bytes(int slot) {
     if (!gate_a_occupancy_pilot()) return 0;
+    if (gate_a_coded_preprojection_pilot()) {
+        if (slot < 2 || slot > 13) return 0;
+        if (slot >= 10 && slot <= 13) return GATE_A_OCCUPANCY_EQUAL_BYTES;
+        if (slot == 2 || slot == 3 || slot == 6 || slot == 9) {
+            return GATE_A_OCCUPANCY_LARGE_BYTES;
+        }
+        return GATE_A_OCCUPANCY_SMALL_BYTES;
+    }
     if (gate_a_readonly_occupancy_pilot()) {
         if (slot < 2 || slot > 5) return 0;
         if (gate_a_pilot_variant == GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL) {
@@ -153,6 +187,9 @@ static size_t gate_a_occupancy_bytes(int slot) {
 }
 
 static const char *gate_a_measurement_mode(void) {
+    if (gate_a_coded_preprojection_pilot()) {
+        return "catcas_coded_preprojection_response_cycles";
+    }
     if (gate_a_readonly_occupancy_pilot()) {
         return "catcas_readonly_occupancy_response_cycles";
     }
@@ -162,6 +199,9 @@ static const char *gate_a_measurement_mode(void) {
 }
 
 static const char *gate_a_observation_kind(void) {
+    if (gate_a_coded_preprojection_pilot()) {
+        return "experiment_owned_coded_preprojection_buffer_cycles_per_access";
+    }
     if (gate_a_readonly_occupancy_pilot()) {
         return "experiment_owned_readonly_buffer_cycles_per_access";
     }
@@ -171,6 +211,7 @@ static const char *gate_a_observation_kind(void) {
 }
 
 static const char *gate_a_occupancy_classification(void) {
+    if (gate_a_coded_preprojection_pilot()) return "CODED_PREPROJECTION";
     if (gate_a_readonly_occupancy_pilot()) return "READONLY_OCCUPANCY";
     if (gate_a_occupancy_pilot()) return "DIRTY_OCCUPANCY_FABRIC_PRESSURE";
     return "NOT_APPLICABLE";
@@ -217,6 +258,10 @@ static int gate_a_orbit_value(int slot) {
 }
 
 static int gate_a_phase_index(int slot) {
+    if (gate_a_coded_preprojection_pilot()) {
+        if (slot >= 2 && slot <= 13) return ((slot - 2) % 4) * 2;
+        return 0;
+    }
     if (gate_a_readonly_occupancy_pilot()) return 0;
     if (slot >= 6 && slot <= 9 && gate_a_pilot_variant == GATE_A_PILOT_PHASE_FORWARD) {
         return slot < 8 ? 0 : 2;
@@ -230,6 +275,9 @@ static int gate_a_phase_index(int slot) {
 }
 
 static int gate_a_sign(int slot) {
+    if (gate_a_coded_preprojection_pilot()) {
+        return gate_a_phase_index(slot) >= 4 ? -1 : 1;
+    }
     return gate_a_phase_index(slot) == 4 ? -1 : 1;
 }
 
@@ -238,6 +286,10 @@ static int gate_a_expected_origin_state(int slot) {
 }
 
 static const char *gate_a_epoch(int slot) {
+    if (gate_a_coded_preprojection_pilot()) {
+        return slot >= 2 && slot <= 13
+            ? "coded-preprojection:loop:epoch0" : NULL;
+    }
     if (gate_a_readonly_occupancy_pilot()) {
         return slot >= 2 && slot <= 5 ? "readonly-occupancy:micro:epoch0" : NULL;
     }
@@ -270,7 +322,9 @@ static int gate_a_policy_limits_exact(int core, long required_khz) {
 static uint64_t gate_a_epoch_origin(int slot, uint64_t session_origin,
                                     double slot_s, double tsc_hz) {
     int epoch_slot = slot;
-    if (gate_a_readonly_occupancy_pilot() && slot >= 2 && slot <= 5) {
+    if (gate_a_coded_preprojection_pilot() && slot >= 2 && slot <= 13) {
+        epoch_slot = 2;
+    } else if (gate_a_readonly_occupancy_pilot() && slot >= 2 && slot <= 5) {
         epoch_slot = 2;
     } else if (slot >= 6 && slot <= 9) {
         epoch_slot = gate_a_split_step() && slot >= 8 ? 8 : 6;
@@ -2456,7 +2510,7 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
         args->slot_s != 0.5 || args->temperature_veto_c != 68.0 ||
         args->required_frequency_khz != 1600000 ||
         args->pilot_variant < GATE_A_PILOT_PN ||
-        args->pilot_variant > GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL) {
+        args->pilot_variant > GATE_A_PILOT_CODED_PREPROJECTION_LOOP) {
         return 2;
     }
     gate_a_pilot_variant = args->pilot_variant;
@@ -2518,13 +2572,20 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
     }
     uint64_t mapping_origin = 1000000000ULL;
     if (gate_a_readonly_occupancy_pilot()) {
-        uint64_t micro_origin = gate_a_epoch_origin(2, mapping_origin,
-                                                    args->slot_s, tsc_hz);
-        if (gate_a_epoch_origin(3, mapping_origin, args->slot_s, tsc_hz) != micro_origin ||
-            gate_a_epoch_origin(4, mapping_origin, args->slot_s, tsc_hz) != micro_origin ||
-            gate_a_epoch_origin(5, mapping_origin, args->slot_s, tsc_hz) != micro_origin ||
-            gate_a_cycle_state(2, micro_origin, mapping_origin, args->slot_s, tsc_hz) !=
-                gate_a_expected_origin_state(2)) {
+        int first_slot = gate_a_readonly_stimulus_first_slot();
+        int end_slot = gate_a_readonly_stimulus_end_slot();
+        uint64_t readonly_origin = gate_a_epoch_origin(first_slot, mapping_origin,
+                                                       args->slot_s, tsc_hz);
+        int mapping_failed = gate_a_cycle_state(
+            first_slot, readonly_origin, mapping_origin, args->slot_s, tsc_hz) !=
+                gate_a_expected_origin_state(first_slot);
+        for (int slot = first_slot + 1; slot < end_slot; slot++) {
+            if (gate_a_epoch_origin(slot, mapping_origin, args->slot_s, tsc_hz) !=
+                readonly_origin) {
+                mapping_failed = 1;
+            }
+        }
+        if (mapping_failed) {
             reason = "PHYSICAL_MAPPING_FAILURE";
             rc = 4;
             goto cleanup;

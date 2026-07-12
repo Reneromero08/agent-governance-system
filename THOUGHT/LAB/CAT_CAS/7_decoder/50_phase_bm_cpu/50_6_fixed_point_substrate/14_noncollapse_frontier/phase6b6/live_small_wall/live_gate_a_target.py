@@ -33,7 +33,9 @@ WORKER_TIMEOUT_S = 20.0
 TRANSACTION_TIMEOUT_S = 45
 SCHEDULE_SHA256 = "418ff6e9801ba5def3f17fb25c7d56f044599e6e5bc8cc3260e0368d4877d116"
 READONLY_MICRO_SCHEDULE_SHA256 = "57f6aa152d2c099429e7ca2c4d843102739c81b2158e46c4d49f07a96b6f4758"
+CODED_PREPROJECTION_SCHEDULE_SHA256 = "35496568999774114af1057ac70fda4b6aeb8a8989e8daf1d1672e508523d07c"
 READONLY_MICRO_READ_HZ = 2_000
+CODED_PREPROJECTION_READ_HZ = 2_000
 LEGACY_READ_HZ = 8_000
 USER_DIRECTIVE_SHA256 = hashlib.sha256(
     b"CAT_CAS_EXPLICIT_USER_LIVE_AUTHORIZATION__SMALL_WALL_GOAL__2026-07-11"
@@ -50,6 +52,10 @@ READONLY_VARIANTS = frozenset({
     "readonly-occupancy-reverse",
     "readonly-occupancy-equal",
 })
+CODED_PREPROJECTION_VARIANTS = frozenset({
+    "coded-preprojection-loop",
+})
+READONLY_TIMING_VARIANTS = READONLY_VARIANTS | CODED_PREPROJECTION_VARIANTS
 SOURCE_NAMES = (
     "live_gate_a_target.py",
     "gate_a_frequency_preparation.py",
@@ -450,8 +456,15 @@ def run_worker_monitored(
     temp_path: Path,
     pilot_variant: str,
 ) -> tuple[int, str, str, list[dict[str, Any]], str | None]:
-    schedule_sha256 = READONLY_MICRO_SCHEDULE_SHA256 if pilot_variant in READONLY_VARIANTS else SCHEDULE_SHA256
-    read_hz = READONLY_MICRO_READ_HZ if pilot_variant in READONLY_VARIANTS else LEGACY_READ_HZ
+    if pilot_variant in CODED_PREPROJECTION_VARIANTS:
+        schedule_sha256 = CODED_PREPROJECTION_SCHEDULE_SHA256
+        read_hz = CODED_PREPROJECTION_READ_HZ
+    elif pilot_variant in READONLY_VARIANTS:
+        schedule_sha256 = READONLY_MICRO_SCHEDULE_SHA256
+        read_hz = READONLY_MICRO_READ_HZ
+    else:
+        schedule_sha256 = SCHEDULE_SHA256
+        read_hz = LEGACY_READ_HZ
     command = [
         str(binary),
         "--execute-authorized",
@@ -485,7 +498,8 @@ def run_worker_monitored(
     receiver_exact_seen = False
     sender_step_exact_seen = False
     sender_anchor_exact_seen = False
-    readonly_micro = pilot_variant in READONLY_VARIANTS
+    readonly_timing = pilot_variant in READONLY_TIMING_VARIANTS
+    coded_preprojection = pilot_variant in CODED_PREPROJECTION_VARIANTS
     try:
         while process.poll() is None:
             elapsed = time.monotonic() - start
@@ -510,13 +524,16 @@ def run_worker_monitored(
                 veto = f"frequency limit drift during runtime: {limits}"
             elif elapsed >= 0.5 and frequencies["5"] != REQUIRED_FREQUENCY_KHZ:
                 veto = f"active receiver frequency drift during runtime: {frequencies}"
-            elif readonly_micro and 1.05 <= elapsed <= 2.95 and frequencies["4"] != REQUIRED_FREQUENCY_KHZ:
+            elif readonly_timing and (
+                (coded_preprojection and 1.05 <= elapsed <= 6.95)
+                or ((not coded_preprojection) and 1.05 <= elapsed <= 2.95)
+            ) and frequencies["4"] != REQUIRED_FREQUENCY_KHZ:
                 veto = f"active micro-stimulus frequency drift during runtime: {frequencies}"
-            elif (not readonly_micro) and pilot_variant not in {"step-sham"} and 3.15 <= elapsed <= (
+            elif (not readonly_timing) and pilot_variant not in {"step-sham"} and 3.15 <= elapsed <= (
                 3.35 if pilot_variant == "impulse" else 4.85
             ) and frequencies["4"] != REQUIRED_FREQUENCY_KHZ:
                 veto = f"active step-sender frequency drift during runtime: {frequencies}"
-            elif (not readonly_micro) and 6.15 <= elapsed <= 6.85 and frequencies["4"] != REQUIRED_FREQUENCY_KHZ:
+            elif (not readonly_timing) and 6.15 <= elapsed <= 6.85 and frequencies["4"] != REQUIRED_FREQUENCY_KHZ:
                 veto = f"active anchor-sender frequency drift during runtime: {frequencies}"
             elif elapsed > WORKER_TIMEOUT_S:
                 veto = "worker timeout"
@@ -525,16 +542,22 @@ def run_worker_monitored(
             )
             sender_step_exact_seen = sender_step_exact_seen or (
                 (
-                    (readonly_micro and 1.05 <= elapsed <= 2.95)
+                    (
+                        readonly_timing
+                        and (
+                            (coded_preprojection and 1.05 <= elapsed <= 6.95)
+                            or ((not coded_preprojection) and 1.05 <= elapsed <= 2.95)
+                        )
+                    )
                     or (
-                        (not readonly_micro)
+                        (not readonly_timing)
                         and 3.15 <= elapsed <= (3.35 if pilot_variant == "impulse" else 4.85)
                     )
                 )
                 and frequencies["4"] == REQUIRED_FREQUENCY_KHZ
             )
             sender_anchor_exact_seen = sender_anchor_exact_seen or (
-                (readonly_micro or 6.15 <= elapsed <= 6.85)
+                (readonly_timing or 6.15 <= elapsed <= 6.85)
                 and frequencies["4"] == REQUIRED_FREQUENCY_KHZ
             )
             if veto is not None:
@@ -544,7 +567,7 @@ def run_worker_monitored(
         stdout, stderr = process.communicate(timeout=3)
     finally:
         stop_process(process)
-    anchor_complete = readonly_micro or pilot_variant == "anchor-sham" or sender_anchor_exact_seen
+    anchor_complete = readonly_timing or pilot_variant == "anchor-sham" or sender_anchor_exact_seen
     step_complete = pilot_variant == "step-sham" or sender_step_exact_seen
     if veto is None and not (receiver_exact_seen and step_complete and anchor_complete):
         veto = "scheduled active-frequency observation incomplete"
@@ -891,7 +914,199 @@ def analyze_readonly_micro_runtime(runtime_root: Path, pilot_variant: str) -> di
     }
 
 
+CODED_PHASES = (0.0, math.pi / 2.0, math.pi, 3.0 * math.pi / 2.0)
+
+
+def reconstruct_coded_complex(values: list[float]) -> dict[str, float]:
+    require(len(values) == len(CODED_PHASES), "coded decoder requires four phases")
+    total = 0.0 + 0.0j
+    for value, phase in zip(values, CODED_PHASES):
+        total += value * complex(math.cos(phase), math.sin(phase))
+    z = (2.0 / float(len(CODED_PHASES))) * total
+    return {"real": z.real, "imag": z.imag, "abs": abs(z)}
+
+
+def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) -> dict[str, Any]:
+    lockin = [json.loads(line) for line in (runtime_root / "LOCKIN_IQ.jsonl").read_text().splitlines() if line]
+    require(len(lockin) == 16, "expected 16 coded-loop lock-in records")
+    raw_bytes = (runtime_root / "raw_samples.bin").read_bytes()
+    require(len(raw_bytes) % 16 == 0, "raw sample file is not packed Qd records")
+    raw = [(int(tsc), float(value)) for tsc, value in struct.iter_unpack("<Qd", raw_bytes)]
+    timing_summary = sample_timing_summary(runtime_root, len(raw))
+    require(timing_summary is not None, "coded-loop timing summary missing")
+    timing_rows = parse_sample_timing(runtime_root / "sample_timing.bin")
+    require(len(timing_rows) == len(raw), "coded-loop raw/timing count mismatch")
+    diagnostic = timing_summary["diagnostic"]
+    burst_by_slot = {
+        int(row["slot_index"]): row for row in diagnostic.get("sender_burst_boundaries", [])
+    }
+    require(all(slot in burst_by_slot for slot in range(2, 14)), "coded-loop burst boundary missing")
+
+    slot_summaries: list[dict[str, Any]] = []
+    during_means: dict[int, float | None] = {}
+    whole_means: dict[int, float | None] = {}
+    sufficient = True
+    for slot in range(16):
+        slot_values = [
+            value for index, (_tsc, value) in enumerate(raw)
+            if timing_rows[index]["actual_slot"] == slot and timing_rows[index]["valid_measurement"] == 1
+        ]
+        burst = burst_by_slot.get(slot)
+        before_values: list[float] = []
+        during_values: list[float] = []
+        after_values: list[float] = []
+        if burst is not None:
+            burst_start = int(burst["burst_start_tsc"])
+            burst_finish = int(burst["burst_finish_tsc"])
+            for index, (_tsc, value) in enumerate(raw):
+                row = timing_rows[index]
+                if row["actual_slot"] != slot or row["valid_measurement"] != 1:
+                    continue
+                if row["finished_tsc"] <= burst_start:
+                    before_values.append(value)
+                elif row["started_tsc"] >= burst_finish:
+                    after_values.append(value)
+                elif row["started_tsc"] < burst_finish and row["finished_tsc"] > burst_start:
+                    during_values.append(value)
+            if len(during_values) < 10:
+                sufficient = False
+        whole_means[slot] = _mean(slot_values)
+        during_means[slot] = _mean(during_values)
+        slot_summaries.append(
+            {
+                "slot_index": slot,
+                "token": lockin[slot]["token"],
+                "phase_index": None if slot < 2 or slot > 13 else ((slot - 2) % 4) * 2,
+                "whole_slot": {
+                    "sample_count": len(slot_values),
+                    "mean_response_cycles": whole_means[slot],
+                },
+                "before_burst": {
+                    "sample_count": len(before_values),
+                    "mean_response_cycles": _mean(before_values),
+                },
+                "during_burst": {
+                    "sample_count": len(during_values),
+                    "mean_response_cycles": during_means[slot],
+                },
+                "after_burst": {
+                    "sample_count": len(after_values),
+                    "mean_response_cycles": _mean(after_values),
+                },
+                "burst": burst,
+            }
+        )
+
+    plus_slots = [2, 3, 4, 5]
+    minus_slots = [6, 7, 8, 9]
+    post_slots = [10, 11, 12, 13]
+    require(
+        all(during_means[slot] is not None for slot in plus_slots + minus_slots + post_slots),
+        "coded-loop missing during-burst mean",
+    )
+    plus_values = [float(during_means[slot]) for slot in plus_slots]
+    minus_values = [float(during_means[slot]) for slot in minus_slots]
+    post_values = [float(during_means[slot]) for slot in post_slots]
+    plus_net = [value - control for value, control in zip(plus_values, post_values)]
+    minus_net = [value - control for value, control in zip(minus_values, post_values)]
+    post_center = statistics.fmean(post_values)
+    post_net = [value - post_center for value in post_values]
+    plus_z = reconstruct_coded_complex(plus_net)
+    minus_z = reconstruct_coded_complex(minus_net)
+    post_z = reconstruct_coded_complex(post_net)
+    source_off_values = [
+        value for slot in (1, 15)
+        for value in [whole_means[slot]]
+        if value is not None
+    ]
+    source_off_range = max(source_off_values) - min(source_off_values) if source_off_values else None
+    neutral_before = whole_means[0]
+    neutral_after = whole_means[14]
+    neutral_delta = (
+        abs(neutral_after - neutral_before)
+        if neutral_before is not None and neutral_after is not None
+        else None
+    )
+    fold_odd_opposed = plus_z["imag"] * minus_z["imag"] < 0.0
+    fold_odd_balance = abs(abs(plus_z["imag"]) - abs(minus_z["imag"]))
+    control_floor = max(abs(post_z["imag"]), source_off_range or 0.0)
+    fold_odd_exceeds_controls = min(abs(plus_z["imag"]), abs(minus_z["imag"])) > 3.0 * control_floor
+    neutral_restoration_tolerance = max(5.0, 3.0 * (source_off_range or 0.0))
+    neutral_restoration_passed = (
+        neutral_delta is not None and neutral_delta <= neutral_restoration_tolerance
+    )
+    fold_odd_signal_candidate = bool(
+        sufficient
+        and fold_odd_opposed
+        and fold_odd_exceeds_controls
+        and all(bool(burst_by_slot[slot].get("completed_before_slot_end")) for slot in range(2, 14))
+    )
+    engineering_candidate = bool(
+        fold_odd_signal_candidate
+        and neutral_restoration_passed
+    )
+    return {
+        "schema_id": "CAT_CAS_CODED_PREPROJECTION_LOOP_ANALYSIS_V1",
+        "pilot_variant": pilot_variant,
+        "measurement_mode": "catcas_coded_preprojection_response_cycles",
+        "schedule": {
+            "schedule_sha256": CODED_PREPROJECTION_SCHEDULE_SHA256,
+            "slot_count": 16,
+            "slot_duration_s": 0.5,
+            "duration_s": 8.0,
+            "read_hz": CODED_PREPROJECTION_READ_HZ,
+            "tokens": [row["token"] for row in lockin],
+            "primary_coordinate": "post-control-centered quadrature fold-odd response",
+            "stimulus_slots": list(range(2, 14)),
+            "pre_plus_slots": plus_slots,
+            "pre_minus_slots": minus_slots,
+            "post_projection_control_slots": post_slots,
+        },
+        "sample_timing": timing_summary,
+        "slot_response_summaries": slot_summaries,
+        "during_burst_means": {
+            "pre_projection_private_fold_plus": plus_values,
+            "pre_projection_private_fold_minus": minus_values,
+            "post_projection_control": post_values,
+        },
+        "post_control_centered_responses": {
+            "pre_projection_private_fold_plus": plus_net,
+            "pre_projection_private_fold_minus": minus_net,
+            "post_projection_control": post_net,
+        },
+        "decoded_coordinates": {
+            "pre_projection_private_fold_plus": plus_z,
+            "pre_projection_private_fold_minus": minus_z,
+            "post_projection_control": post_z,
+        },
+        "source_off_whole_slot_range_cycles": source_off_range,
+        "neutral_restoration": {
+            "before_slot": 0,
+            "after_slot": 14,
+            "before_mean_response_cycles": neutral_before,
+            "after_mean_response_cycles": neutral_after,
+            "absolute_delta_cycles": neutral_delta,
+            "tolerance_cycles": neutral_restoration_tolerance,
+            "passed": neutral_restoration_passed,
+        },
+        "fold_odd_opposed": fold_odd_opposed,
+        "fold_odd_balance_error_cycles": fold_odd_balance,
+        "control_floor_cycles": control_floor,
+        "fold_odd_exceeds_controls": fold_odd_exceeds_controls,
+        "fold_odd_signal_candidate": fold_odd_signal_candidate,
+        "sufficient_during_burst_samples": sufficient,
+        "all_bursts_completed_inside_slots": all(
+            bool(burst_by_slot[slot].get("completed_before_slot_end")) for slot in range(2, 14)
+        ),
+        "engineering_candidate": engineering_candidate,
+        "engineering_first_light_candidate": engineering_candidate,
+        "claim_ceiling": "single coded-loop physical mapping; no OrbitState coupling, path memory, holonomy, or Small Wall claim",
+    }
+
+
 def analyze_runtime(runtime_root: Path, pilot_variant: str) -> dict[str, Any]:
+    if pilot_variant in CODED_PREPROJECTION_VARIANTS:
+        return analyze_coded_preprojection_runtime(runtime_root, pilot_variant)
     if pilot_variant in READONLY_VARIANTS:
         return analyze_readonly_micro_runtime(runtime_root, pilot_variant)
     lockin = [json.loads(line) for line in (runtime_root / "LOCKIN_IQ.jsonl").read_text().splitlines() if line]
@@ -1014,6 +1229,7 @@ def execute(source_root: Path, output_root: Path, pilot_variant: str) -> dict[st
             "occupancy-forward", "occupancy-reverse", "occupancy-equal",
             "readonly-occupancy-forward", "readonly-occupancy-reverse",
             "readonly-occupancy-equal",
+            "coded-preprojection-loop",
         },
         "unknown pilot variant",
     )
@@ -1116,7 +1332,11 @@ def execute(source_root: Path, output_root: Path, pilot_variant: str) -> dict[st
         "source_bundle_sha256": bundle_sha256,
         "source_hashes": source_digest(source_root)[1],
         "user_directive_sha256": USER_DIRECTIVE_SHA256,
-        "schedule_sha256": READONLY_MICRO_SCHEDULE_SHA256 if pilot_variant in READONLY_VARIANTS else SCHEDULE_SHA256,
+        "schedule_sha256": (
+            CODED_PREPROJECTION_SCHEDULE_SHA256
+            if pilot_variant in CODED_PREPROJECTION_VARIANTS
+            else (READONLY_MICRO_SCHEDULE_SHA256 if pilot_variant in READONLY_VARIANTS else SCHEDULE_SHA256)
+        ),
         "compile_command": compile_command,
         "preflight_temperature_c": pre_temperature,
         "temperature_path": str(temp_path),
@@ -1157,6 +1377,7 @@ def parse_args() -> argparse.Namespace:
             "occupancy-forward", "occupancy-reverse", "occupancy-equal",
             "readonly-occupancy-forward", "readonly-occupancy-reverse",
             "readonly-occupancy-equal",
+            "coded-preprojection-loop",
         ),
         default="pn",
     )

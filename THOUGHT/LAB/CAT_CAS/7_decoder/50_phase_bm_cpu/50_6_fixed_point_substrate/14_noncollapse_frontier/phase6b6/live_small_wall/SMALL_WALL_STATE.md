@@ -9,16 +9,18 @@
 `CONTROLLED_COHERENCE_STATE_FOUND`
 
 **Active wall:**
-The current wall is now physical coupling for a declared pre-projection coded-query
-access model. Several cheap physical discriminators made a byte-preserving remote
-ownership-intent store visible, but simple cache-line paths, route-vector state, and
-transient timing pivots did not produce a repeatable antisymmetric or restored
-relational coordinate. A non-driving coded-query model now preserves the old passive
-fold-even boundary while showing that a public quadrature query can retain a fold-odd
-coordinate only when it acts before projection. The next build is the smallest physical
-mapping of that coded query onto an experiment-owned timing or ownership-intent
-carrier with post-projection, query-scramble, source-off, query-off, declaration-sham,
-private-fold, and neutral-restoration controls.
+The current wall is now restoration-clean physical coupling for a declared
+pre-projection coded-query access model. Several cheap physical discriminators made a
+byte-preserving remote ownership-intent store visible, but simple cache-line paths,
+route-vector state, and transient timing pivots did not produce a repeatable
+antisymmetric or restored relational coordinate. A non-driving coded-query model
+preserved the old passive fold-even boundary while showing that a public quadrature
+query can retain a fold-odd coordinate only when it acts before projection.
+`coded_preprojection_loop_0` then produced an opposed physical fold-odd timing
+coordinate under a fixed single-run coded mapping, but its neutral pre/post probe did
+not restore because the first neutral slot carried a large cold-response offset. The
+next build must separate warmup from the neutral restoration probe before promoting any
+fold-odd boundary signal.
 
 ## Established
 
@@ -737,9 +739,45 @@ phase schedule; it does not route a private branch, orientation, target identity
 session chronology, or future value. This is a model/access-law result only. Physical
 coupling is not built.
 
-**Status:** promoted to the next engineering move at non-driving model/checker level.
-Build the minimal physical coded loop next. Do not claim physical coupling,
-restoration, fold-odd recovery, or Small Wall crossing from the model alone.
+`coded_preprojection_loop_0` mapped the public quadrature query onto the existing
+CAT_CAS-owned timing-response carrier in one fixed 16-slot run:
+
+```text
+N0 SO P0 P1 P2 P3 M0 M1 M2 M3 C0 C1 C2 C3 N1 SO
+```
+
+The transaction completed, copied back, cleaned the remote run root, restored policies
+4 and 5 to `800000-3200000` kHz by readback, and performed zero voltage access and
+zero MSR access. Capture was accepted with service spikes, all 16 slots had 1000
+samples, all stimulus bursts completed inside their slots, there were no skipped
+deadlines, no missing slots, no sender spill, and no record-integrity failure.
+
+The post-control-centered physical decoder produced an opposed fold-odd coordinate:
+
+```text
+pre_projection_private_fold_plus   imag +84.45585937499999
+pre_projection_private_fold_minus  imag -91.50247395833333
+post_projection_control            imag +0.9222656250000005
+source_off SO-to-SO range               0.767593749999989
+```
+
+This clears the immediate source-off and post-projection fold-odd controls, but it does
+not clear restoration. The neutral probe was:
+
+```text
+N0 whole-slot mean 168.587640625
+N1 whole-slot mean  83.10940625
+delta               85.478234375
+```
+
+Checkpoint:
+
+`CODED_PREPROJECTION_LOOP_0_CHECKPOINT_20260712.json`
+
+**Status:** physical fold-odd signal candidate with neutral restoration failure. Do
+not claim `FOLD_ODD_BOUNDARY_SIGNAL`, restoration, OrbitState coupling, or Small Wall
+crossing. The next H5 move is a repaired schedule that treats the first slot as warmup
+and compares a post-warmup neutral probe against the post-loop neutral probe.
 
 ### H6 - Alternative carriers remain available
 
@@ -759,8 +797,9 @@ operator, observability, or restoration wall that it can attack.
 
 ## Cheapest current discriminator
 
-Build `coded_preprojection_loop_0`: the thinnest physical mapping of the model-passed
-public quadrature query onto an experiment-owned carrier.
+Build `coded_preprojection_loop_1`: the thinnest repair of the physical coded loop
+that separates first-slot warmup from the neutral restoration probe while preserving
+the same public quadrature mapping and post-projection/source-off controls.
 
 The next probe should answer:
 
@@ -772,8 +811,8 @@ The next probe should answer:
    for pre-projection coupling?
 3. Do post-projection, query-scramble, query-off, source-off, declaration-sham, and
    private-fold controls behave as predicted before any promotion?
-4. Does a neutral pre/post probe show restoration to a measured physical equivalence
-   class beyond byte equality?
+4. Does a post-warmup neutral pre/post probe show restoration to a measured physical
+   equivalence class beyond byte equality?
 
 Do not run another scalar PMU route metric, unconditioned transient timing repeat, or
 unlabeled cache-line rectangle unchanged. The useful build now is a coded physical loop
@@ -784,9 +823,10 @@ with the model's controls preserved.
 `CONTROLLED_COHERENCE_STATE_FOUND`
 
 The next major scientific threshold is a physical coded pre-projection response with
-restoration and killing controls. The next useful marker is likely
-`FOLD_ODD_BOUNDARY_SIGNAL`, but only after physical coupling and restoration are shown;
-the model checkpoint does not reach that marker.
+restoration and killing controls. `coded_preprojection_loop_0` reached only
+`FOLD_ODD_BOUNDARY_SIGNAL_CANDIDATE_WITH_NEUTRAL_RESTORATION_FAILURE`. The next useful
+marker remains `FOLD_ODD_BOUNDARY_SIGNAL`, but only after the neutral restoration probe
+is repaired and control-clean.
 
 ## State update rule
 

@@ -15,6 +15,8 @@ static const char *expected_schedule_sha256 =
     "418ff6e9801ba5def3f17fb25c7d56f044599e6e5bc8cc3260e0368d4877d116";
 static const char *readonly_micro_schedule_sha256 =
     "57f6aa152d2c099429e7ca2c4d843102739c81b2158e46c4d49f07a96b6f4758";
+static const char *coded_preprojection_schedule_sha256 =
+    "35496568999774114af1057ac70fda4b6aeb8a8989e8daf1d1672e508523d07c";
 #ifdef GATE_A_COMPILED_AUTHORITY_SHA256
 static const char *compiled_authority_sha256 = GATE_A_COMPILED_AUTHORITY_SHA256;
 #else
@@ -32,6 +34,11 @@ static const char *expected_sequence[16] = {
 
 static const char *readonly_micro_sequence[8] = {
     "I", "I", "F0", "F1", "F1", "F0", "I", "I"
+};
+
+static const char *coded_preprojection_sequence[16] = {
+    "N0", "SO", "P0", "P1", "P2", "P3", "M0", "M1",
+    "M2", "M3", "C0", "C1", "C2", "C3", "N1", "SO"
 };
 
 static bool string_equal(const char *left, const char *right) {
@@ -100,6 +107,22 @@ static int readonly_micro_variant(int pilot) {
            pilot == GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL;
 }
 
+static int coded_preprojection_variant(int pilot) {
+    return pilot == GATE_A_PILOT_CODED_PREPROJECTION_LOOP;
+}
+
+static int readonly_timing_variant(int pilot) {
+    return readonly_micro_variant(pilot) || coded_preprojection_variant(pilot);
+}
+
+static int readonly_stimulus_first_slot(int pilot) {
+    return coded_preprojection_variant(pilot) ? 2 : 2;
+}
+
+static int readonly_stimulus_end_slot(int pilot) {
+    return coded_preprojection_variant(pilot) ? 14 : 6;
+}
+
 static int validate_readonly_micro_schedule_semantics(void) {
     return string_equal(readonly_micro_sequence[0], "I") &&
            string_equal(readonly_micro_sequence[1], "I") &&
@@ -111,8 +134,29 @@ static int validate_readonly_micro_schedule_semantics(void) {
            string_equal(readonly_micro_sequence[7], "I") ? 0 : 1;
 }
 
+static int validate_coded_preprojection_schedule_semantics(void) {
+    return string_equal(coded_preprojection_sequence[0], "N0") &&
+           string_equal(coded_preprojection_sequence[1], "SO") &&
+           string_equal(coded_preprojection_sequence[2], "P0") &&
+           string_equal(coded_preprojection_sequence[3], "P1") &&
+           string_equal(coded_preprojection_sequence[4], "P2") &&
+           string_equal(coded_preprojection_sequence[5], "P3") &&
+           string_equal(coded_preprojection_sequence[6], "M0") &&
+           string_equal(coded_preprojection_sequence[7], "M1") &&
+           string_equal(coded_preprojection_sequence[8], "M2") &&
+           string_equal(coded_preprojection_sequence[9], "M3") &&
+           string_equal(coded_preprojection_sequence[10], "C0") &&
+           string_equal(coded_preprojection_sequence[11], "C1") &&
+           string_equal(coded_preprojection_sequence[12], "C2") &&
+           string_equal(coded_preprojection_sequence[13], "C3") &&
+           string_equal(coded_preprojection_sequence[14], "N1") &&
+           string_equal(coded_preprojection_sequence[15], "SO") ? 0 : 1;
+}
+
 static int validate_only(void) {
-    if (validate_schedule_semantics() != 0) {
+    if (validate_schedule_semantics() != 0 ||
+        validate_readonly_micro_schedule_semantics() != 0 ||
+        validate_coded_preprojection_schedule_semantics() != 0) {
         fputs("{\"status\":\"GATE_A_WORKER_VALIDATE_ONLY_FAILED\"}\n", stderr);
         return 1;
     }
@@ -155,10 +199,19 @@ static int pilot_variant_value(const char *text) {
     if (string_equal(text, "readonly-occupancy-forward")) return GATE_A_PILOT_READONLY_OCCUPANCY_FORWARD;
     if (string_equal(text, "readonly-occupancy-reverse")) return GATE_A_PILOT_READONLY_OCCUPANCY_REVERSE;
     if (string_equal(text, "readonly-occupancy-equal")) return GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL;
+    if (string_equal(text, "coded-preprojection-loop")) return GATE_A_PILOT_CODED_PREPROJECTION_LOOP;
     return -1;
 }
 
 static size_t pilot_working_set_bytes(int slot, int pilot) {
+    if (coded_preprojection_variant(pilot)) {
+        if (slot < 2 || slot > 13) return 0;
+        if (slot >= 10 && slot <= 13) return GATE_A_OCCUPANCY_EQUAL_BYTES;
+        if (slot == 2 || slot == 3 || slot == 6 || slot == 9) {
+            return GATE_A_OCCUPANCY_LARGE_BYTES;
+        }
+        return GATE_A_OCCUPANCY_SMALL_BYTES;
+    }
     if (readonly_micro_variant(pilot)) {
         if (slot < 2 || slot > 5) return 0;
         if (pilot == GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL) {
@@ -202,6 +255,9 @@ static int pilot_value(int slot, int pilot) {
 }
 
 static int pilot_driven(int slot, int pilot) {
+    if (coded_preprojection_variant(pilot)) {
+        return slot >= 2 && slot <= 13;
+    }
     if (readonly_micro_variant(pilot)) {
         return slot >= 2 && slot <= 5;
     }
@@ -214,6 +270,10 @@ static int pilot_driven(int slot, int pilot) {
 }
 
 static int pilot_phase(int slot, int pilot) {
+    if (coded_preprojection_variant(pilot)) {
+        if (slot >= 2 && slot <= 13) return ((slot - 2) % 4) * 2;
+        return 0;
+    }
     if (readonly_micro_variant(pilot)) return 0;
     if (slot >= 6 && slot <= 9 && pilot == GATE_A_PILOT_PHASE_FORWARD) {
         return slot < 8 ? 0 : 2;
@@ -232,8 +292,10 @@ static void emit_slot_records(int pilot) {
     for (int slot = 0; slot < slot_count; slot++) {
         int driven = pilot_driven(slot, pilot);
         if (slot) putchar(',');
-        const char *token = readonly_micro_variant(pilot)
-            ? readonly_micro_sequence[slot] : expected_sequence[slot];
+        const char *token = coded_preprojection_variant(pilot)
+            ? coded_preprojection_sequence[slot]
+            : (readonly_micro_variant(pilot)
+                ? readonly_micro_sequence[slot] : expected_sequence[slot]);
         printf("{\"index\":%d,\"token\":\"%s\",\"requested_start_s\":%.1f,"
                "\"requested_end_s\":%.1f,\"drive_on\":%s,"
                "\"amplitude_level\":",
@@ -245,10 +307,13 @@ static void emit_slot_records(int pilot) {
                   "\"sender_epoch_id\":null}", stdout);
         } else {
             int phase = pilot_phase(slot, pilot);
-            int sign = phase == 4 ? -1 : 1;
+            int sign = coded_preprojection_variant(pilot)
+                ? (phase >= 4 ? -1 : 1) : (phase == 4 ? -1 : 1);
             int orbit_value = pilot_value(slot, pilot);
             const char *epoch;
-            if (readonly_micro_variant(pilot)) {
+            if (coded_preprojection_variant(pilot)) {
+                epoch = "coded-preprojection:loop:epoch0";
+            } else if (readonly_micro_variant(pilot)) {
                 epoch = "readonly-occupancy:micro:epoch0";
             } else if (slot >= 6 && slot <= 9) {
                 if (pilot == GATE_A_PILOT_PHASE_FORWARD ||
@@ -333,9 +398,11 @@ static int execute_authorized(int argc, char **argv) {
     double slot_s = 0, temp = 0;
     if (!pilot_text) pilot_text = "pn";
     int pilot = pilot_variant_value(pilot_text);
-    const char *required_schedule = readonly_micro_variant(pilot)
-        ? readonly_micro_schedule_sha256 : expected_schedule_sha256;
-    long required_read_hz = readonly_micro_variant(pilot)
+    const char *required_schedule = coded_preprojection_variant(pilot)
+        ? coded_preprojection_schedule_sha256
+        : (readonly_micro_variant(pilot)
+            ? readonly_micro_schedule_sha256 : expected_schedule_sha256);
+    long required_read_hz = readonly_timing_variant(pilot)
         ? GATE_A_READONLY_MICRO_READ_HZ : 8000L;
     if (!compiled_authority_sha256 || !compiled_output_root ||
         !string_equal(authority, compiled_authority_sha256) ||
@@ -348,10 +415,12 @@ static int execute_authorized(int argc, char **argv) {
         parse_double_exact(slot_text, &slot_s) || slot_s != 0.5 ||
         parse_double_exact(temp_text, &temp) || temp != 68.0 ||
         parse_long_exact(frequency_text, &frequency) || frequency != 1600000 ||
-        pilot < GATE_A_PILOT_PN || pilot > GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL ||
-        (readonly_micro_variant(pilot)
-            ? validate_readonly_micro_schedule_semantics()
-            : validate_schedule_semantics())) {
+        pilot < GATE_A_PILOT_PN || pilot > GATE_A_PILOT_CODED_PREPROJECTION_LOOP ||
+        (coded_preprojection_variant(pilot)
+            ? validate_coded_preprojection_schedule_semantics()
+            : (readonly_micro_variant(pilot)
+                ? validate_readonly_micro_schedule_semantics()
+                : validate_schedule_semantics()))) {
         fputs("execute-authorized requires a worker compiled for the exact validated authority and frozen geometry\n", stderr);
         return 2;
     }
@@ -398,7 +467,7 @@ static int self_test(const char *retained_output, int pilot) {
         .execution_bundle_sha256 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
         .sender_core = 4,
         .receiver_core = 5,
-        .read_hz = readonly_micro_variant(pilot) ? GATE_A_READONLY_MICRO_READ_HZ : 8000,
+        .read_hz = readonly_timing_variant(pilot) ? GATE_A_READONLY_MICRO_READ_HZ : 8000,
         .slot_s = 0.5,
         .temperature_veto_c = 68.0,
         .required_frequency_khz = 1600000,
@@ -408,7 +477,7 @@ static int self_test(const char *retained_output, int pilot) {
     GateASmokeResult result = {0};
     int rc = run_gate_a_engineering_smoke(&args, &result);
     int expected_slot_count = readonly_micro_variant(pilot) ? 8 : 16;
-    int expected_sample_count = readonly_micro_variant(pilot) ? 8000 : 64000;
+    int expected_sample_count = (int)(args.read_hz * args.slot_s * expected_slot_count);
     uint64_t expected_spacing_tsc =
         (uint64_t)(3200000000.0 / (double)args.read_hz);
     if (!rc && (result.slot_count != expected_slot_count ||
@@ -424,14 +493,15 @@ static int self_test(const char *retained_output, int pilot) {
                     expected_spacing_tsc ||
                 result.frequency_writes || result.voltage_writes ||
                 result.msr_reads || result.msr_writes)) rc = 1;
-    if (!rc && pilot >= GATE_A_PILOT_READONLY_OCCUPANCY_FORWARD) {
+    if (!rc && readonly_timing_variant(pilot)) {
         if (!result.occupancy_prefaulted ||
             !result.occupancy_digest_unchanged ||
             strcmp(result.occupancy_digest_before,
                    result.occupancy_digest_after) ||
             strcmp(result.capture_quality_classification,
                    "CAPTURE_ACCEPTED")) rc = 1;
-        for (int slot = 2; slot <= 5; slot++) {
+        for (int slot = readonly_stimulus_first_slot(pilot);
+             slot < readonly_stimulus_end_slot(pilot); slot++) {
             if (result.occupancy_touch_count[slot] !=
                     GATE_A_READONLY_SLOT_TOUCHES ||
                 !result.occupancy_burst_start_tsc[slot] ||
@@ -455,7 +525,7 @@ static int self_test(const char *retained_output, int pilot) {
             if (!retained_output) unlink(path);
         }
     }
-    if (!rc && pilot >= GATE_A_PILOT_READONLY_OCCUPANCY_FORWARD) {
+    if (!rc && readonly_timing_variant(pilot)) {
         const char *readonly_names[] = {
             GATE_A_TIMING_DIAGNOSTIC_FILE,
         };
@@ -518,7 +588,8 @@ static int cache_response_self_test(void) {
     if (self_test(NULL, GATE_A_PILOT_OCCUPANCY_EQUAL)) return 1;
     if (self_test(NULL, GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL)) return 1;
     if (self_test(NULL, GATE_A_PILOT_READONLY_OCCUPANCY_FORWARD)) return 1;
-    return self_test(NULL, GATE_A_PILOT_READONLY_OCCUPANCY_REVERSE);
+    if (self_test(NULL, GATE_A_PILOT_READONLY_OCCUPANCY_REVERSE)) return 1;
+    return self_test(NULL, GATE_A_PILOT_CODED_PREPROJECTION_LOOP);
 }
 
 static int timing_diagnostics_self_test(void) {
@@ -543,6 +614,9 @@ int main(int argc, char **argv) {
     if (argc == 2 && string_equal(argv[1], "--self-test-timing-diagnostics")) {
         return timing_diagnostics_self_test();
     }
+    if (argc == 2 && string_equal(argv[1], "--self-test-coded-preprojection")) {
+        return self_test(NULL, GATE_A_PILOT_CODED_PREPROJECTION_LOOP);
+    }
     if (argc == 3 && string_equal(argv[1], "--self-test-retain")) {
         return self_test(argv[2], GATE_A_PILOT_PN);
     }
@@ -552,9 +626,12 @@ int main(int argc, char **argv) {
     if (argc == 3 && string_equal(argv[1], "--self-test-readonly-cache-response-retain")) {
         return self_test(argv[2], GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL);
     }
+    if (argc == 3 && string_equal(argv[1], "--self-test-coded-preprojection-retain")) {
+        return self_test(argv[2], GATE_A_PILOT_CODED_PREPROJECTION_LOOP);
+    }
     if (argc >= 2 && string_equal(argv[1], "--execute-authorized")) {
         return execute_authorized(argc, argv);
     }
-    fputs("usage: gate_a_worker --validate-only | --self-test | --self-test-cache-response | --self-test-timing-diagnostics | --self-test-retain ABSOLUTE_OUTPUT | --self-test-cache-response-retain ABSOLUTE_OUTPUT | --self-test-readonly-cache-response-retain ABSOLUTE_OUTPUT | --execute-authorized ...\n", stderr);
+    fputs("usage: gate_a_worker --validate-only | --self-test | --self-test-cache-response | --self-test-timing-diagnostics | --self-test-coded-preprojection | --self-test-retain ABSOLUTE_OUTPUT | --self-test-cache-response-retain ABSOLUTE_OUTPUT | --self-test-readonly-cache-response-retain ABSOLUTE_OUTPUT | --self-test-coded-preprojection-retain ABSOLUTE_OUTPUT | --execute-authorized ...\n", stderr);
     return 2;
 }
