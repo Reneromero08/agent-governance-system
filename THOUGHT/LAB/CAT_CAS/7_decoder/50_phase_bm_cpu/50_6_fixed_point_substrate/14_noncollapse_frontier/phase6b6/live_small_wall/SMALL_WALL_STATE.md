@@ -6,48 +6,20 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`WC_FLUSH_ORDER_RESPONSE_NOT_ESTABLISHED`
+`EVICTION_SENTINEL_RESPONSE_FOUND`
 
 **Active wall:**
-The current wall is now restoration-clean physical coupling for a declared
-pre-projection coded-query access model. Several cheap physical discriminators made a
-byte-preserving remote ownership-intent store visible, but simple cache-line paths,
-route-vector state, and transient timing pivots did not produce a repeatable
-antisymmetric or restored relational coordinate. A non-driving coded-query model
-preserved the old passive fold-even boundary while showing that a public quadrature
-query can retain a fold-odd coordinate only when it acts before projection.
-`coded_preprojection_loop_0` then produced an opposed physical fold-odd timing
-coordinate under a fixed single-run coded mapping, but its neutral pre/post probe did
-not restore because the first neutral slot carried a large cold-response offset.
-`coded_preprojection_loop_2` repaired the warmup geometry and produced a restored
-opposed fold-odd candidate. `coded_preprojection_warm_query_scramble_0` then used the
-same warm-restored geometry with a scrambled public query binding and decoded null
-under the frozen quadrature weights. `coded_preprojection_warm_query_off_0` completed
-and restored with equal physical footprint through the query window, but it did not
-satisfy the predeclared null bound; it produced same-sign residual curvature rather
-than the candidate's opposed fold-odd response. `coded_preprojection_warm_declaration_sham_0`
-then kept the candidate's P/M/C declarations and timing while making every P, M, and C
-physical footprint equal. It also produced same-sign residual curvature and no opposed
-fold-odd coordinate. `coded_preprojection_warm_phase_local_sham_0` then placed matched
-controls adjacent to each public phase and passed the phase-local null classification.
-The matched physical candidate `coded_preprojection_warm_phase_local_0` restored and
-ran cleanly, but it did not produce an opposed fold-odd coordinate. A follow-on
-ownership-intent PMU carrier discriminator, `f10_phase_local_pmu_0`, also restored and
-ran cleanly. It produced opposed candidate signs in both established coherence
-counters, but the magnitudes stayed below the predeclared three-times-sham-floor rule.
-The active wall is now carrier/observable selection for the declared pre-projection
-access model: neither the current timing carrier nor the tested PMU ownership-intent
-footprint carrier preserves a control-clean phase-local fold-odd response. A minimal
-IBS availability probe found that the lab kernel exposes `ibs_fetch` and `ibs_op`
-event sources, but every tested ordinary `perf_event_open` form returned `EINVAL`,
-including direct IBS sources and precise raw `r076:p`/`r0C1:p` attempts. IBS is not a
-near-term carrier without changing kernel/tool access or adding a different sampling
-implementation. A user-space write-combining/flush-order probe then showed that
-`clflush` and non-temporal same-value store operators are measurable and restore, but
-the tested order pair did not produce a control-clean order response. The active wall
-is now a stronger restoration-sentinel carrier: the next useful probe must measure a
-physical state beyond byte equality without repeating timing, PMU footprint, IBS, or
-WC/flush-order geometry unchanged.
+The current wall is phase-local use of a newly visible restoration-sentinel carrier
+for the declared pre-projection coded-query access model. Timing, ownership-intent PMU
+footprint, IBS availability, and WC/flush-order probes either failed controls or did
+not expose a usable carrier. The eviction-sentinel first-light run changed the access
+model from "bytes restored" to a measured restoration equivalence class: a
+predetermined CAT_CAS-owned eviction-buffer preconditioner measurably changes a later
+byte-preserving ownership-intent sentinel while both the carrier and eviction buffer
+restore. That is a useful physical carrier, not path memory, holonomy, fold-odd
+recovery, or a Small Wall crossing. The next discriminator must map the public
+P/C/M phases onto this eviction-sentinel carrier with matched equal-prep sham
+controls, fixed quadrature weights, and no private branch routing.
 
 ## Established
 
@@ -1136,36 +1108,78 @@ Checkpoint:
 but this order pair does not carry the needed relation. Do not repeat this WC/flush
 order discriminator unchanged.
 
+The eviction/topology first-light probe used a separate 16 MiB CAT_CAS-owned
+eviction buffer as a predetermined physical preconditioner, then measured the
+established byte-preserving remote same-value-store sentinel with the
+`primary_nb_coherence` PMU group:
+
+```text
+run id        f10_eviction_sentinel_0
+source bundle 50fd61fd5747474734761f1ba23590dc99f8486fa6a7b94b55e89f59eb73b79c
+worker status EVICTION_SENTINEL_RESPONSE_FOUND
+```
+
+The transaction completed with verified copy-back and remote cleanup, zero frequency
+writes, zero voltage access, zero MSR reads/writes, no physical-address access, no
+cache-set mapping, no unrelated-process observation, temperature below veto, every PMU
+window unmultiplexed, and both carrier and eviction-buffer digests restored.
+
+Baseline and sentinel movement:
+
+```text
+baseline change_to_dirty 2067, movement threshold 206
+baseline probe_dirty     4476, movement threshold 447
+
+home_read_eviction:
+  change_to_dirty 1908, delta 159
+  probe_dirty     5403, delta 927
+
+home_write_eviction:
+  change_to_dirty 1783, delta 284
+  probe_dirty     5092, delta 616
+
+remote_write_eviction:
+  change_to_dirty 1892, delta 175
+  probe_dirty     5355, delta 879
+
+remote_then_home_read_eviction:
+  change_to_dirty 2034, delta 33
+  probe_dirty     5340, delta 864
+```
+
+Checkpoint:
+
+`F10_EVICTION_SENTINEL_CHECKPOINT_20260712.json`
+
+**Status:** a restoration-sentinel carrier is established. The useful next move is a
+phase-local coded discriminator on this carrier, with an equal-prep sham and fixed
+public quadrature weights. This still does not establish path memory, holonomy,
+fold-odd recovery, or a Small Wall crossing.
+
 ## Cheapest current discriminator
 
-Build the next discriminator by changing carrier/observable, not by repeating the same
-timing-response coded loop or the same ownership-intent PMU footprint loop. The
-cheapest useful route is now a restoration-sentinel eviction/topology carrier. It must
+Build a phase-local coded discriminator on the eviction-sentinel carrier. The run must
 stay closed: CAT_CAS-owned buffers only, predetermined geometry, no physical-address
 access, no cache-set mapping, no unrelated-process observation, and no MSR or voltage
-access. The point is not another scalar PMU magnitude; it is to define a measurable
-restoration equivalence class using a sentinel response before and after a closed
-operator loop.
+access.
 
 The next probe should answer:
 
-1. Can a CAT_CAS-owned eviction/topology carrier be prepared and restored without
-   voltage, MSR, kernel, physical-address, or cache-set access?
-2. Does its sentinel response provide a stronger restoration law than byte equality?
-3. Does the fixed quadrature observable
-   `z = (2/K) * sum(response_k * exp(i * theta_k))` show lower sham curvature than
-   `f10_phase_local_pmu_0`?
-4. Does a killing control remove the response without repeating the timing or PMU
-   footprint geometry?
+1. Can the public P/C/M phases be mapped to fixed eviction preconditioners without
+   private branch routing?
+2. Does the equal-prep sham stay bounded under the same phase-local quadrature law?
+3. Does a candidate P/M prep split produce opposed signs in
+   `probe_responses_dirty` or `cache_block_commands_change_to_dirty` with magnitude
+   greater than three times the sham floor?
+4. Do carrier bytes and the eviction buffer still restore after every window?
 
 Do not rerun the same timing coded loop, another scalar PMU route metric,
-unconditioned transient timing repeat, or unlabeled cache-line rectangle unchanged. The
-useful build now is a first-light check for a different measured carrier, followed only
-if available by a coded physical loop with the model's controls preserved.
+unconditioned transient timing repeat, IBS availability probe, WC/flush-order pair, or
+unlabeled cache-line rectangle unchanged.
 
 ## Current claim ceiling
 
-`CONTROLLED_COHERENCE_STATE_FOUND`
+`EVICTION_SENTINEL_RESPONSE_FOUND`
 
 The next major scientific threshold is a physical coded pre-projection response with
 restoration and killing controls. `coded_preprojection_loop_2` is a restored physical
@@ -1178,9 +1192,11 @@ physical query-scramble alternative. `coded_preprojection_warm_query_off_0` and
 three-times-sham-floor rule. `f10_ibs_first_light_1` showed that IBS is exposed in
 sysfs but not usable through the tested ordinary `perf_event_open` forms.
 `f10_wc_flush_order_0` made flush/non-temporal operators visible but not order-sensitive
-under controls. The next useful marker remains short of
-`SMALL_WALL_CROSSED`; the next move must change carrier/observable rather than promote
-the timing, PMU footprint, IBS availability, or WC/flush-order result.
+under controls. `f10_eviction_sentinel_0` then established a measured
+restoration-sentinel carrier by showing that predetermined eviction-buffer
+preconditioning changes the later ownership-intent sentinel while both buffers restore.
+This marker remains short of `SMALL_WALL_CROSSED`; the next move must use this carrier
+in a phase-local coded discriminator with equal-prep killing controls.
 
 ## State update rule
 

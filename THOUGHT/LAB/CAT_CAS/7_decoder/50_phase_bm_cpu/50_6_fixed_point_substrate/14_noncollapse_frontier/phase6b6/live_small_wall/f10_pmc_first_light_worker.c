@@ -43,7 +43,10 @@
 #define PHASE_LOCAL_PMU_RESULT_SCHEMA "CAT_CAS_F10_PHASE_LOCAL_PMU_RESULT_V1"
 #define IBS_FIRST_LIGHT_RESULT_SCHEMA "CAT_CAS_F10_IBS_FIRST_LIGHT_RESULT_V1"
 #define WC_FLUSH_ORDER_RESULT_SCHEMA "CAT_CAS_F10_WC_FLUSH_ORDER_RESULT_V1"
+#define EVICTION_SENTINEL_RESULT_SCHEMA "CAT_CAS_F10_EVICTION_SENTINEL_RESULT_V1"
 #define PHASE_LOCAL_BANK_LINES 512u
+#define EVICTION_LINES 262144u
+#define EVICTION_ITERATIONS 3
 
 struct event_def {
     const char *name;
@@ -131,6 +134,16 @@ enum wc_flush_op {
     WC_OP_NT_STORE_SAME = 3,
     WC_OP_FLUSH_THEN_NT_STORE = 4,
     WC_OP_NT_STORE_THEN_FLUSH = 5
+};
+
+enum eviction_prep_op {
+    EVICT_PREP_NONE = 0,
+    EVICT_PREP_HOME_READ = 1,
+    EVICT_PREP_REMOTE_READ = 2,
+    EVICT_PREP_HOME_WRITE = 3,
+    EVICT_PREP_REMOTE_WRITE = 4,
+    EVICT_PREP_HOME_THEN_REMOTE_READ = 5,
+    EVICT_PREP_REMOTE_THEN_HOME_READ = 6
 };
 
 struct route_spec {
@@ -602,6 +615,74 @@ static int run_wc_flush_operator(struct carrier *carrier, enum wc_flush_op op) {
     if (op == WC_OP_NT_STORE_THEN_FLUSH) {
         nt_store_same_value_all_on_core(carrier, CATCAS_CORE_B);
         flush_all_on_core(carrier, CATCAS_CORE_B);
+        return 0;
+    }
+    return -1;
+}
+
+static const char *eviction_prep_op_name(enum eviction_prep_op op) {
+    if (op == EVICT_PREP_NONE) return "none";
+    if (op == EVICT_PREP_HOME_READ) return "home_read_eviction";
+    if (op == EVICT_PREP_REMOTE_READ) return "remote_read_eviction";
+    if (op == EVICT_PREP_HOME_WRITE) return "home_write_eviction";
+    if (op == EVICT_PREP_REMOTE_WRITE) return "remote_write_eviction";
+    if (op == EVICT_PREP_HOME_THEN_REMOTE_READ) return "home_then_remote_read_eviction";
+    if (op == EVICT_PREP_REMOTE_THEN_HOME_READ) return "remote_then_home_read_eviction";
+    return "unknown";
+}
+
+__attribute__((noinline, noclone))
+static void eviction_read_sweep_on_core(struct carrier *eviction, int core) {
+    volatile uint64_t sink = 0;
+    if (pin_to_core(core) != 0) return;
+    for (int iter = 0; iter < EVICTION_ITERATIONS; iter++) {
+        for (size_t line = 0; line < eviction->line_count; line++) {
+            volatile uint64_t *p = (volatile uint64_t *)(void *)(eviction->bytes + line * CACHE_LINE_BYTES);
+            sink += *p;
+        }
+    }
+    if (sink == 0x456789abull) eviction->bytes[0] ^= 1u;
+}
+
+__attribute__((noinline, noclone))
+static void eviction_write_sweep_on_core(struct carrier *eviction, int core) {
+    if (pin_to_core(core) != 0) return;
+    for (int iter = 0; iter < EVICTION_ITERATIONS; iter++) {
+        for (size_t line = 0; line < eviction->line_count; line++) {
+            size_t base = line * CACHE_LINE_BYTES;
+            volatile uint64_t *p = (volatile uint64_t *)(void *)(eviction->bytes + base);
+            *p = carrier_pattern_u64(base);
+        }
+    }
+    __asm__ __volatile__("mfence" : : : "memory");
+}
+
+static int run_eviction_prep_operator(struct carrier *eviction, enum eviction_prep_op op) {
+    if (op == EVICT_PREP_NONE) return 0;
+    if (op == EVICT_PREP_HOME_READ) {
+        eviction_read_sweep_on_core(eviction, CATCAS_CORE_A);
+        return 0;
+    }
+    if (op == EVICT_PREP_REMOTE_READ) {
+        eviction_read_sweep_on_core(eviction, CATCAS_CORE_B);
+        return 0;
+    }
+    if (op == EVICT_PREP_HOME_WRITE) {
+        eviction_write_sweep_on_core(eviction, CATCAS_CORE_A);
+        return 0;
+    }
+    if (op == EVICT_PREP_REMOTE_WRITE) {
+        eviction_write_sweep_on_core(eviction, CATCAS_CORE_B);
+        return 0;
+    }
+    if (op == EVICT_PREP_HOME_THEN_REMOTE_READ) {
+        eviction_read_sweep_on_core(eviction, CATCAS_CORE_A);
+        eviction_read_sweep_on_core(eviction, CATCAS_CORE_B);
+        return 0;
+    }
+    if (op == EVICT_PREP_REMOTE_THEN_HOME_READ) {
+        eviction_read_sweep_on_core(eviction, CATCAS_CORE_B);
+        eviction_read_sweep_on_core(eviction, CATCAS_CORE_A);
         return 0;
     }
     return -1;
@@ -1524,6 +1605,210 @@ static int run_wc_flush_order_mode(const char *output_root, struct carrier *carr
     fclose(out);
     printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"primary_nb_coherence\"}\n",
         wc_flush_order_response ? "WC_FLUSH_ORDER_RESPONSE_FOUND" : "WC_FLUSH_ORDER_RESPONSE_NOT_ESTABLISHED",
+        result_path);
+    return 0;
+}
+
+static int measure_eviction_sentinel_window(
+    const struct event_def group[MAX_GROUP_EVENTS],
+    enum eviction_prep_op prep,
+    struct carrier *carrier,
+    struct carrier *eviction,
+    struct group_result *result,
+    uint64_t *duration_ns,
+    uint64_t *digest_before,
+    uint64_t *digest_after_restore,
+    uint64_t *eviction_digest_after
+) {
+    int fds[MAX_GROUP_EVENTS];
+    uint64_t ids[MAX_GROUP_EVENTS];
+    memset(result, 0, sizeof(*result));
+    restore_on_core(eviction, CATCAS_CORE_A);
+    int prep_rc = run_eviction_prep_operator(eviction, prep);
+    *eviction_digest_after = fnv1a64(eviction->bytes, eviction->byte_count);
+    if (prep_rc != 0) return prep_rc;
+    restore_on_core(carrier, CATCAS_CORE_A);
+    prefault_carrier(carrier);
+    restore_on_core(carrier, CATCAS_CORE_A);
+    *digest_before = fnv1a64(carrier->bytes, carrier->byte_count);
+    int opened = open_group(group, CATCAS_CORE_B, fds, ids);
+    if (opened != 0) {
+        result->open_errno = -opened;
+        return opened;
+    }
+    result->opened = true;
+    if (ioctl(fds[0], PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t start = monotonic_ns();
+    if (ioctl(fds[0], PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    int work_rc = run_coherence_operator(carrier, OP_REMOTE_STORE_SAME_VALUE);
+    if (ioctl(fds[0], PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t end = monotonic_ns();
+    int read_rc = read_group(fds[0], result);
+    for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+    if (read_rc != 0) return read_rc;
+    if (work_rc != 0) return -EIO;
+    *duration_ns = end >= start ? end - start : 0;
+    home_core_restore(carrier);
+    *digest_after_restore = fnv1a64(carrier->bytes, carrier->byte_count);
+    return 0;
+}
+
+static int run_eviction_sentinel_mode(const char *output_root, struct carrier *carrier, uint64_t initial_digest) {
+    struct carrier eviction;
+    eviction.line_count = EVICTION_LINES;
+    eviction.byte_count = EVICTION_LINES * CACHE_LINE_BYTES;
+    if (posix_memalign((void **)&eviction.bytes, CACHE_LINE_BYTES, eviction.byte_count) != 0) {
+        fprintf(stderr, "eviction allocation failed\n");
+        return 1;
+    }
+    init_carrier(&eviction);
+    uint64_t eviction_initial_digest = fnv1a64(eviction.bytes, eviction.byte_count);
+
+    int primary_fds[MAX_GROUP_EVENTS];
+    uint64_t primary_ids[MAX_GROUP_EVENTS];
+    int primary_open_rc = open_group(primary_group, CATCAS_CORE_B, primary_fds, primary_ids);
+    if (primary_open_rc == 0) {
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(primary_fds[i]);
+    }
+
+    const enum eviction_prep_op preps[] = {
+        EVICT_PREP_NONE,
+        EVICT_PREP_HOME_READ,
+        EVICT_PREP_REMOTE_READ,
+        EVICT_PREP_HOME_WRITE,
+        EVICT_PREP_REMOTE_WRITE,
+        EVICT_PREP_HOME_THEN_REMOTE_READ,
+        EVICT_PREP_REMOTE_THEN_HOME_READ
+    };
+    enum { EVICTION_WINDOW_COUNT = 7 };
+    struct group_result results[EVICTION_WINDOW_COUNT];
+    uint64_t durations[EVICTION_WINDOW_COUNT];
+    uint64_t digest_before[EVICTION_WINDOW_COUNT];
+    uint64_t digest_after[EVICTION_WINDOW_COUNT];
+    uint64_t eviction_digest_after[EVICTION_WINDOW_COUNT];
+    int window_rc[EVICTION_WINDOW_COUNT];
+    for (int i = 0; i < EVICTION_WINDOW_COUNT; i++) {
+        memset(&results[i], 0, sizeof(results[i]));
+        durations[i] = 0;
+        digest_before[i] = 0;
+        digest_after[i] = 0;
+        eviction_digest_after[i] = 0;
+        if (primary_open_rc != 0) {
+            window_rc[i] = -ENODEV;
+        } else {
+            window_rc[i] = measure_eviction_sentinel_window(
+                primary_group,
+                preps[i],
+                carrier,
+                &eviction,
+                &results[i],
+                &durations[i],
+                &digest_before[i],
+                &digest_after[i],
+                &eviction_digest_after[i]
+            );
+        }
+    }
+
+    bool all_windows_ok = true;
+    bool all_unmultiplexed = true;
+    bool carrier_restored = true;
+    bool eviction_restored = true;
+    for (int i = 0; i < EVICTION_WINDOW_COUNT; i++) {
+        all_windows_ok = all_windows_ok && window_rc[i] == 0;
+        all_unmultiplexed = all_unmultiplexed && results[i].unmultiplexed;
+        carrier_restored = carrier_restored && digest_after[i] == initial_digest;
+        eviction_restored = eviction_restored && eviction_digest_after[i] == eviction_initial_digest;
+    }
+
+    uint64_t c2d[EVICTION_WINDOW_COUNT];
+    uint64_t probe[EVICTION_WINDOW_COUNT];
+    for (int i = 0; i < EVICTION_WINDOW_COUNT; i++) {
+        c2d[i] = event_value_by_name(&results[i], primary_group, "cache_block_commands_change_to_dirty");
+        probe[i] = event_value_by_name(&results[i], primary_group, "probe_responses_dirty");
+    }
+    uint64_t c2d_threshold = max_u64(32u, c2d[0] / 10u);
+    uint64_t probe_threshold = max_u64(32u, probe[0] / 10u);
+    bool c2d_sentinel_moved = false;
+    bool probe_sentinel_moved = false;
+    for (int i = 1; i < EVICTION_WINDOW_COUNT; i++) {
+        c2d_sentinel_moved = c2d_sentinel_moved || abs_diff_u64(c2d[i], c2d[0]) > c2d_threshold;
+        probe_sentinel_moved = probe_sentinel_moved || abs_diff_u64(probe[i], probe[0]) > probe_threshold;
+    }
+    bool eviction_sentinel_response = primary_open_rc == 0 && all_windows_ok && all_unmultiplexed &&
+        carrier_restored && eviction_restored && (c2d_sentinel_moved || probe_sentinel_moved);
+
+    char result_path[4096];
+    int n = snprintf(result_path, sizeof(result_path), "%s/F10_EVICTION_SENTINEL_RESULT.json", output_root);
+    if (n <= 0 || (size_t)n >= sizeof(result_path)) {
+        free(eviction.bytes);
+        return 1;
+    }
+    FILE *out = fopen(result_path, "w");
+    if (!out) {
+        fprintf(stderr, "cannot open result: %s\n", strerror(errno));
+        free(eviction.bytes);
+        return 1;
+    }
+
+    fprintf(out, "{\n");
+    fprintf(out, "  \"schema_id\": \"%s\",\n", EVICTION_SENTINEL_RESULT_SCHEMA);
+    fprintf(out, "  \"status\": \"%s\",\n", eviction_sentinel_response ? "EVICTION_SENTINEL_RESPONSE_FOUND" : "EVICTION_SENTINEL_RESPONSE_NOT_ESTABLISHED");
+    fprintf(out, "  \"claim_ceiling\": \"Eviction/topology sentinel PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim\",\n");
+    fprintf(out, "  \"cores\": {\"home_core\": %d, \"observed_core\": %d},\n", CATCAS_CORE_A, CATCAS_CORE_B);
+    fprintf(out, "  \"source_constraints\": {\"direct_msr_access\": false, \"voltage_access\": false, \"frequency_writes\": 0, \"experiment_owned_memory_only\": true, \"physical_address_access\": false, \"cache_set_mapping\": false},\n");
+    fprintf(out, "  \"carrier\": {\"line_count\": %zu, \"line_bytes\": %d, \"byte_count\": %zu, \"digest_kind\": \"fnv1a64\", \"initial_digest_hex\": \"0x%016" PRIx64 "\"},\n", carrier->line_count, CACHE_LINE_BYTES, carrier->byte_count, initial_digest);
+    fprintf(out, "  \"eviction_buffer\": {\"line_count\": %zu, \"line_bytes\": %d, \"byte_count\": %zu, \"iterations\": %d, \"digest_kind\": \"fnv1a64\", \"initial_digest_hex\": \"0x%016" PRIx64 "\"},\n", eviction.line_count, CACHE_LINE_BYTES, eviction.byte_count, EVICTION_ITERATIONS, eviction_initial_digest);
+    fprintf(out, "  \"selected_group\": \"primary_nb_coherence\",\n");
+    fprintf(out, "  \"group_open_rc\": %d,\n", primary_open_rc);
+    fprintf(out, "  \"selected_events\": ");
+    print_group_defs(out, primary_group);
+    fprintf(out, ",\n");
+    fprintf(out, "  \"predeclared_observable\": {\"sentinel\": \"remote_store_same_value over carrier after eviction-buffer preconditioning\", \"primary\": \"sentinel response delta versus no-prep baseline\", \"acceptance\": \"any precondition changes Change-to-Dirty or dirty-probe sentinel by more than max(32, baseline/10) while both buffers restore\"},\n");
+    fprintf(out, "  \"windows\": [\n");
+    for (int i = 0; i < EVICTION_WINDOW_COUNT; i++) {
+        fprintf(out, "    {\"prep\": \"%s\", \"rc\": %d, \"duration_ns\": %" PRIu64 ", \"carrier_digest_before_hex\": \"0x%016" PRIx64 "\", \"carrier_digest_after_restore_hex\": \"0x%016" PRIx64 "\", \"carrier_restored\": %s, \"eviction_digest_after_hex\": \"0x%016" PRIx64 "\", \"eviction_restored\": %s, \"change_to_dirty_delta_from_baseline\": %" PRIu64 ", \"probe_dirty_delta_from_baseline\": %" PRIu64 ", \"group\": ",
+            eviction_prep_op_name(preps[i]),
+            window_rc[i],
+            durations[i],
+            digest_before[i],
+            digest_after[i],
+            json_bool(digest_after[i] == initial_digest),
+            eviction_digest_after[i],
+            json_bool(eviction_digest_after[i] == eviction_initial_digest),
+            abs_diff_u64(c2d[i], c2d[0]),
+            abs_diff_u64(probe[i], probe[0]));
+        print_group_result(out, primary_group, &results[i]);
+        fprintf(out, "}%s\n", i + 1 == EVICTION_WINDOW_COUNT ? "" : ",");
+    }
+    fprintf(out, "  ],\n");
+    fprintf(out, "  \"baseline_counts\": {\"change_to_dirty\": %" PRIu64 ", \"probe_dirty\": %" PRIu64 ", \"change_to_dirty_threshold\": %" PRIu64 ", \"probe_dirty_threshold\": %" PRIu64 "},\n",
+        c2d[0], probe[0], c2d_threshold, probe_threshold);
+    fprintf(out, "  \"acceptance\": {\"all_windows_ok\": %s, \"all_unmultiplexed\": %s, \"carrier_restored\": %s, \"eviction_buffer_restored\": %s, \"change_to_dirty_sentinel_moved\": %s, \"probe_dirty_sentinel_moved\": %s, \"eviction_sentinel_response\": %s}\n",
+        json_bool(all_windows_ok),
+        json_bool(all_unmultiplexed),
+        json_bool(carrier_restored),
+        json_bool(eviction_restored),
+        json_bool(c2d_sentinel_moved),
+        json_bool(probe_sentinel_moved),
+        json_bool(eviction_sentinel_response));
+    fprintf(out, "}\n");
+    fclose(out);
+    free(eviction.bytes);
+    printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"primary_nb_coherence\"}\n",
+        eviction_sentinel_response ? "EVICTION_SENTINEL_RESPONSE_FOUND" : "EVICTION_SENTINEL_RESPONSE_NOT_ESTABLISHED",
         result_path);
     return 0;
 }
@@ -2483,6 +2768,7 @@ int main(int argc, char **argv) {
     bool phase_local_pmu_mode = false;
     bool ibs_first_light_mode = false;
     bool wc_flush_order_mode = false;
+    bool eviction_sentinel_mode = false;
     if (argc == 3 && strcmp(argv[1], "--output-root") == 0) {
         output_root = argv[2];
     } else if (argc == 4 && strcmp(argv[1], "--coherence-operators") == 0 &&
@@ -2517,10 +2803,14 @@ int main(int argc, char **argv) {
                strcmp(argv[2], "--output-root") == 0) {
         wc_flush_order_mode = true;
         output_root = argv[3];
+    } else if (argc == 4 && strcmp(argv[1], "--eviction-sentinel") == 0 &&
+               strcmp(argv[2], "--output-root") == 0) {
+        eviction_sentinel_mode = true;
+        output_root = argv[3];
     } else if (argc == 2 && strcmp(argv[1], "--self-test") == 0) {
         return self_test();
     } else {
-        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root>\n", argv[0]);
+        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root>\n", argv[0]);
         return 2;
     }
     if (output_root[0] != '/') {
@@ -2579,6 +2869,11 @@ int main(int argc, char **argv) {
     }
     if (wc_flush_order_mode) {
         int rc = run_wc_flush_order_mode(output_root, &carrier, initial_digest);
+        free(carrier.bytes);
+        return rc;
+    }
+    if (eviction_sentinel_mode) {
+        int rc = run_eviction_sentinel_mode(output_root, &carrier, initial_digest);
         free(carrier.bytes);
         return rc;
     }

@@ -1,0 +1,73 @@
+{
+  "schema_id": "CAT_CAS_F10_EVICTION_SENTINEL_CHECKPOINT_V1",
+  "starting_head": "96d480d10bc7bf0c5166200f5a93c7519df246b5",
+  "run_id": "f10_eviction_sentinel_0",
+  "mode": "eviction-sentinel",
+  "command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_coherence_operators.py --run-id f10_eviction_sentinel_0 --mode eviction-sentinel",
+  "local_run": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/f10_eviction_sentinel_0",
+  "source_bundle_sha256": "50fd61fd5747474734761f1ba23590dc99f8486fa6a7b94b55e89f59eb73b79c",
+  "result_hashes": {
+    "CONTROLLER_RESULT.json": "3704724641249c2d5fd374e2da371d96234b233f459f46980aecb3a7858cfd5e",
+    "CONTROLLER_STDERR.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "CONTROLLER_STDOUT.txt": "1bad8a7515e13d85b2171de574ffec08a23f2633fdc204cb3a6add8a018571ce",
+    "F10_EVICTION_SENTINEL_RESULT.json": "3e090cfdfec4781d00d50006935857a7d1a4dbafa8b455ca10367838417cec7a",
+    "FILE_MANIFEST.json": "95eb0159ad05c6bda61989ea8c4c6c3a3685d916f14256d3eb87285916e258bb",
+    "FINAL_RESULT.json": "4e84dd475ada90e8601af0c93412fe1fa36f0b3ea8be44a7b50c81b94801506e"
+  },
+  "target_status": "F10_EVICTION_SENTINEL_TARGET_COMPLETE",
+  "worker_status": "EVICTION_SENTINEL_RESPONSE_FOUND",
+  "copy_verified": true,
+  "remote_cleaned": true,
+  "remote_returncode": 0,
+  "temperature": {
+    "preflight_c": 50.0,
+    "post_c": 50.0,
+    "veto_c": 68.0,
+    "below_veto": true
+  },
+  "device_access": {
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "physical_address_access": false,
+    "cache_set_mapping": false,
+    "forbidden_process_matches_after": []
+  },
+  "baseline_counts": {
+    "change_to_dirty": 2067,
+    "probe_dirty": 4476,
+    "change_to_dirty_threshold": 206,
+    "probe_dirty_threshold": 447
+  },
+  "sentinel_deltas": {
+    "home_read_eviction": {"change_to_dirty_delta": 159, "probe_dirty_delta": 927},
+    "remote_read_eviction": {"change_to_dirty_delta": 81, "probe_dirty_delta": 803},
+    "home_write_eviction": {"change_to_dirty_delta": 284, "probe_dirty_delta": 616},
+    "remote_write_eviction": {"change_to_dirty_delta": 175, "probe_dirty_delta": 879},
+    "home_then_remote_read_eviction": {"change_to_dirty_delta": 138, "probe_dirty_delta": 900},
+    "remote_then_home_read_eviction": {"change_to_dirty_delta": 33, "probe_dirty_delta": 864}
+  },
+  "acceptance": {
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "carrier_restored": true,
+    "eviction_buffer_restored": true,
+    "change_to_dirty_sentinel_moved": true,
+    "probe_dirty_sentinel_moved": true,
+    "eviction_sentinel_response": true
+  },
+  "adjudication": {
+    "marker": "EVICTION_SENTINEL_RESPONSE_FOUND",
+    "meaning": "Predetermined eviction-buffer preconditioning changes a later ownership-intent sentinel response while carrier bytes and eviction-buffer bytes restore. This establishes a measurable restoration-sentinel carrier, not path memory or fold-odd recovery.",
+    "claim_ceiling": "EVICTION_SENTINEL_RESPONSE_FOUND",
+    "excluded_claims": [
+      "path memory",
+      "coherence holonomy",
+      "OrbitState coupling",
+      "fold-odd recovery",
+      "Small Wall crossing"
+    ],
+    "next_wall": "Build the phase-local coded discriminator on this eviction-sentinel carrier with matched equal-prep sham and no private branch routing."
+  }
+}
