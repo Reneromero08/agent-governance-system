@@ -2,10 +2,10 @@
   "schema_id": "CAT_CAS_F10_PMC_FIRST_LIGHT_CHECKPOINT_V1",
   "classification": "F10_PMC_FIRST_LIGHT",
   "claim_ceiling": "Family 10h PMU visibility of a controlled CAT_CAS-owned physical transition; no controlled restored coherence state, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim.",
-  "command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_pmc_first_light.py --run-id f10_pmc_first_light_1",
-  "run_id": "f10_pmc_first_light_1",
-  "local_run_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/f10_pmc_first_light_1",
-  "remote_run_path": "/root/catcas_live_small_wall/f10_pmc_first_light_1",
+  "command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_pmc_first_light.py --run-id f10_pmc_first_light_2",
+  "run_id": "f10_pmc_first_light_2",
+  "local_run_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/f10_pmc_first_light_2",
+  "remote_run_path": "/root/catcas_live_small_wall/f10_pmc_first_light_2",
   "controller": {
     "copy_verified": true,
     "remote_cleaned": true,
@@ -48,9 +48,9 @@
       "-mtune=amdfam10",
       "-fno-lto",
       "-pthread",
-      "/root/catcas_live_small_wall/f10_pmc_first_light_1/source/f10_pmc_first_light_worker.c",
+      "/root/catcas_live_small_wall/f10_pmc_first_light_2/source/f10_pmc_first_light_worker.c",
       "-o",
-      "/root/catcas_live_small_wall/f10_pmc_first_light_1/source/f10_pmc_first_light_worker"
+      "/root/catcas_live_small_wall/f10_pmc_first_light_2/source/f10_pmc_first_light_worker"
     ]
   },
   "pmu_events": {
@@ -92,8 +92,8 @@
     "probe_dirty_moved": true,
     "first_light": true,
     "temperature_below_veto": true,
-    "preflight_temperature_c": 51.0,
-    "post_temperature_c": 51.375,
+    "preflight_temperature_c": 51.25,
+    "post_temperature_c": 51.625,
     "frequency_writes": 0,
     "voltage_writes": 0,
     "msr_reads": 0,
@@ -103,9 +103,9 @@
   "windows": [
     {
       "name": "idle_pause",
-      "duration_ns": 100080757,
-      "time_enabled": 100073177,
-      "time_running": 100073177,
+      "duration_ns": 100098576,
+      "time_enabled": 100087292,
+      "time_running": 100087292,
       "carrier_restored": true,
       "counts": {
         "cpu_cycles_not_halted": 0,
@@ -116,41 +116,41 @@
     },
     {
       "name": "core4_read_sweep",
-      "duration_ns": 6569764,
-      "time_enabled": 6563919,
-      "time_running": 6563919,
+      "duration_ns": 6548329,
+      "time_enabled": 6541220,
+      "time_running": 6541220,
       "carrier_restored": true,
       "counts": {
-        "cpu_cycles_not_halted": 20898660,
-        "dc_refills_from_nb_all_states": 4187,
-        "cache_block_commands_change_to_dirty": 28,
-        "probe_responses_dirty": 3934
+        "cpu_cycles_not_halted": 20704155,
+        "dc_refills_from_nb_all_states": 4116,
+        "cache_block_commands_change_to_dirty": 6,
+        "probe_responses_dirty": 4092
       }
     },
     {
       "name": "core4_write_sweep",
-      "duration_ns": 9873446,
-      "time_enabled": 9870808,
-      "time_running": 9870808,
+      "duration_ns": 9866532,
+      "time_enabled": 9863898,
+      "time_running": 9863898,
       "carrier_restored": true,
       "counts": {
-        "cpu_cycles_not_halted": 31706226,
-        "dc_refills_from_nb_all_states": 86,
-        "cache_block_commands_change_to_dirty": 96,
-        "probe_responses_dirty": 179
+        "cpu_cycles_not_halted": 31685768,
+        "dc_refills_from_nb_all_states": 20,
+        "cache_block_commands_change_to_dirty": 40,
+        "probe_responses_dirty": 94
       }
     },
     {
       "name": "cross_core_pingpong_write",
-      "duration_ns": 27568747,
-      "time_enabled": 27565644,
-      "time_running": 27565644,
+      "duration_ns": 27192637,
+      "time_enabled": 27189186,
+      "time_running": 27189186,
       "carrier_restored": true,
       "counts": {
-        "cpu_cycles_not_halted": 50272357,
-        "dc_refills_from_nb_all_states": 987343,
-        "cache_block_commands_change_to_dirty": 235733,
-        "probe_responses_dirty": 1153514
+        "cpu_cycles_not_halted": 49617510,
+        "dc_refills_from_nb_all_states": 988270,
+        "cache_block_commands_change_to_dirty": 237213,
+        "probe_responses_dirty": 1155485
       }
     }
   ],

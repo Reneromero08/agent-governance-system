@@ -6,7 +6,7 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`F10_PMC_FIRST_LIGHT`
+`CONTROLLED_COHERENCE_STATE_FOUND`
 
 **Active wall:**
 Move from a calibrated footprint-dependent timing sensor to a relational,
@@ -85,7 +85,7 @@ discriminator on the user's AMD Phenom II X6 lab device.
 
 Run:
 
-`runs/f10_pmc_first_light_1`
+`runs/f10_pmc_first_light_2`
 
 Checkpoint:
 
@@ -111,8 +111,8 @@ transition on cores 4 and 5 moved both predeclared physical counters relative to
 and same-core controls:
 
 ```text
-change_to_dirty: idle 0, read control 28, cross-core transition 235733
-probe_dirty:     idle 0, read control 3934, cross-core transition 1153514
+change_to_dirty: idle 0, read control 6, cross-core transition 237213
+probe_dirty:     idle 0, read control 4092, cross-core transition 1155485
 ```
 
 The carrier bytes restored to the initial digest after every window:
@@ -131,6 +131,64 @@ Claim ceiling:
 
 This still does not establish controlled preparation of a named coherence state, path
 memory, holonomy, OrbitState coupling, fold-odd recovery, or a Small Wall crossing.
+
+### Controlled coherence-state operator
+
+A minimal named operator now moves the expected Family 10h physical coordinates under
+matched controls.
+
+Run:
+
+`runs/f10_coherence_ops_2`
+
+Checkpoint:
+
+`F10_COHERENCE_OPERATOR_CHECKPOINT_20260712.json`
+
+Geometry:
+
+- home/preparation core: 4;
+- observed/operator core: 5;
+- carrier: 4096 naturally aligned 64-byte CAT_CAS-owned lines;
+- operator window: ordinary Linux `perf_event_open` raw PMU group on core 5;
+- restoration: carrier byte digest restored after every operator window.
+
+The accepted operator was `remote_store_same_value`: core 4 prepared the lines, then
+core 5 loaded each aligned word and stored the same value back. This preserves logical
+bytes while requesting write ownership.
+
+Key counts:
+
+```text
+change_to_dirty:
+  identity                  0
+  remote_read_shared       13
+  same_core_store_same      3
+  remote_store_same      2104
+
+probe_dirty:
+  identity                  0
+  remote_read_shared     2738
+  same_core_store_same      4
+  remote_store_same      5728
+```
+
+The first attempted `PREFETCHW` and locked logical no-op forms did not satisfy the
+movement criterion. That localizes the previous wall to operator strength and
+measurement geometry, not to PMU availability or byte restoration.
+
+Accepted marker:
+
+`CONTROLLED_COHERENCE_STATE_FOUND`
+
+Claim ceiling:
+
+> A byte-preserving CAT_CAS-owned ownership-intent store can prepare a measurable
+> coherence-transition response distinct from identity, read-shared, and same-core
+> store controls on the AMD Phenom II X6.
+
+This still does not establish path memory, noncommutation, physical holonomy,
+OrbitState coupling, fold-odd recovery, or a Small Wall crossing.
 
 ### Information-law boundary
 
@@ -174,6 +232,7 @@ run_gate_a_first_light.py
 f10_pmc_first_light_worker.c
 f10_pmc_first_light_target.py
 run_f10_pmc_first_light.py
+run_f10_coherence_operators.py
 READONLY_OCCUPANCY_BASELINE_CLOSURE.json
 ```
 
@@ -206,7 +265,7 @@ response and whether a richer state exists than footprint size alone.
 coherence-state operators can be prepared and killed with matched controls, using the
 PMU coordinates as observables.
 
-**Current evidence:** `f10_pmc_first_light_1` opened the intended raw event support
+**Current evidence:** `f10_pmc_first_light_2` opened the intended raw event support
 matrix, ran the `primary_nb_coherence` group without multiplexing, and observed a large
 cross-core transition response in `cache_block_commands_change_to_dirty` and
 `probe_responses_dirty` while carrier bytes restored.
@@ -236,11 +295,12 @@ state or equivalence class.
 **Cheapest discriminator:** forward and reverse two-line paths with the same operation
 multiset, identity and shuffled controls, and a predeclared signed area.
 
-**Current evidence:** sensor is calibrated, and Family 10h PMU first light now observes
-cross-core transition-sensitive counters. A named coherence-state operator library is
-not yet built.
+**Current evidence:** `f10_coherence_ops_2` established that `remote_store_same_value`
+moves `cache_block_commands_change_to_dirty` and `probe_responses_dirty` relative to
+identity, read-shared, and same-core store controls while restoring bytes.
 
-**Status:** strongest immediate opening.
+**Status:** established at controlled-operator level; next test is path memory and
+noncommutation.
 
 ### H3 - Shared L3 or Northbridge routing is the dominant relational carrier
 
@@ -333,28 +393,26 @@ operator, observability, or restoration wall that it can attack.
 
 ## Cheapest current discriminator
 
-Build the thinnest controlled coherence-state operator discriminator over
-experiment-owned aligned cache lines.
+Build the thinnest path-dependence discriminator over experiment-owned aligned cache
+lines.
 
 The next probe should answer:
 
-1. Can `READ_SHARED`, `PREFETCHW_OWNERSHIP_REQUEST`, `LOCKED_LOGICAL_NOOP`,
-   `CROSS_CORE_READ`, and `HOME_CORE_RESTORE` be expressed as closed CAT_CAS
-   operators with byte restoration?
-2. Does at least one named operator move a predeclared PMU coordinate while matched
-   same-core, identity, and reset controls do not?
-3. Can a restoration equivalence class be measured beyond byte equality, using PMU
-   coordinates and the calibrated timing sensor?
-4. Which route or operator family gives the cheapest path toward a noncommuting loop?
+1. Can two or more carrier lines execute forward and reverse paths with the same
+   operation multiset and byte-identical endpoints?
+2. Does a predeclared antisymmetric observable, such as signed area in
+   `(change_to_dirty, probe_dirty)` or a timing-plus-PMU plane, flip under path
+   reversal while identity and shuffled controls cancel?
+3. Can the carrier return to a measured equivalence class beyond byte equality?
+4. Does the result survive a fresh process start without route or label leakage?
 
 ## Current claim ceiling
 
-`F10_PMC_FIRST_LIGHT`
+`CONTROLLED_COHERENCE_STATE_FOUND`
 
-The next major scientific threshold is controlled preparation of a physical state
-beyond footprint size. The next useful marker is likely
-`CONTROLLED_COHERENCE_STATE_FOUND`, or a better mechanism-specific marker discovered by
-the loop.
+The next major scientific threshold is path-dependent, restored physical evolution.
+The next useful marker is likely `PHYSICAL_COHERENCE_HOLONOMY_CANDIDATE`, or a better
+mechanism-specific marker discovered by the loop.
 
 ## State update rule
 

@@ -1,0 +1,142 @@
+{
+  "schema_id": "CAT_CAS_F10_COHERENCE_OPERATOR_CHECKPOINT_V1",
+  "classification": "CONTROLLED_COHERENCE_STATE_FOUND",
+  "claim_ceiling": "A byte-preserving CAT_CAS-owned ownership-intent store can prepare a measurable coherence-transition response distinct from identity, read-shared, and same-core store controls on the AMD Phenom II X6.",
+  "claim_exclusions": [
+    "path memory",
+    "coherence holonomy",
+    "OrbitState coupling",
+    "fold-odd recovery",
+    "Small Wall crossing"
+  ],
+  "run": {
+    "run_id": "f10_coherence_ops_2",
+    "local_run_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/f10_coherence_ops_2",
+    "remote_run_path": "/root/catcas_live_small_wall/f10_coherence_ops_2",
+    "command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_coherence_operators.py --run-id f10_coherence_ops_2",
+    "target_status": "F10_COHERENCE_OPERATOR_TARGET_COMPLETE",
+    "worker_status": "CONTROLLED_COHERENCE_STATE_FOUND",
+    "copy_verified": true,
+    "remote_cleaned": true
+  },
+  "source_binding": {
+    "source_bundle_sha256": "d10a716d0c905e5ace61cbda54adddedca8394445d021b487e3933b2e9880865",
+    "source_hashes": {
+      "f10_pmc_first_light_target.py": "4175fec3238cc734efb5af82b448fcb77ad70318cfc76cad6af875ed1cb6da54",
+      "f10_pmc_first_light_worker.c": "de8ea27c5690c2acfad969ae49bb7ef634cefcd2e910c3597538f0c99d29ab0f"
+    }
+  },
+  "environment": {
+    "device": "user-owned AMD Phenom II X6 lab computer",
+    "cpu_model": "AMD Phenom(tm) II X6 1090T Processor",
+    "cpu_family": "16",
+    "model": "10",
+    "stepping": "0",
+    "kernel": "6.12.86+deb13-amd64",
+    "perf_event_paranoid": "3",
+    "cpu_online": "0-5",
+    "pmu_event_format": "config:0-7,32-35",
+    "pmu_umask_format": "config:8-15"
+  },
+  "source_constraints": {
+    "perf_interface": "perf_event_open PERF_TYPE_RAW",
+    "experiment_owned_memory_only": true,
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "direct_msr_access": false
+  },
+  "temperature": {
+    "veto_c": 68.0,
+    "preflight_c": 50.875,
+    "post_c": 51.0,
+    "below_veto": true
+  },
+  "geometry": {
+    "home_core": 4,
+    "observed_core": 5,
+    "line_count": 4096,
+    "line_bytes": 64,
+    "byte_count": 262144,
+    "digest_kind": "fnv1a64",
+    "all_operator_windows_restored": true
+  },
+  "selected_events": [
+    {
+      "name": "cpu_cycles_not_halted",
+      "event_select_hex": "0x076",
+      "unit_mask_hex": "0x00",
+      "raw_config_hex": "0x76"
+    },
+    {
+      "name": "dc_refills_from_nb_all_states",
+      "event_select_hex": "0x043",
+      "unit_mask_hex": "0x1f",
+      "raw_config_hex": "0x1f43"
+    },
+    {
+      "name": "cache_block_commands_change_to_dirty",
+      "event_select_hex": "0x0ea",
+      "unit_mask_hex": "0x20",
+      "raw_config_hex": "0x20ea"
+    },
+    {
+      "name": "probe_responses_dirty",
+      "event_select_hex": "0x0ec",
+      "unit_mask_hex": "0x0c",
+      "raw_config_hex": "0xcec"
+    }
+  ],
+  "acceptance": {
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "carrier_restored": true,
+    "prefetch_change_to_dirty_moved": false,
+    "prefetch_probe_dirty_moved": true,
+    "locked_change_to_dirty_moved": false,
+    "locked_probe_dirty_moved": false,
+    "store_same_value_change_to_dirty_moved": true,
+    "store_same_value_probe_dirty_moved": false,
+    "controlled_state_found": true
+  },
+  "contrast_counts": {
+    "change_to_dirty": {
+      "identity": 0,
+      "remote_read_shared": 13,
+      "same_core_store_same_value": 3,
+      "remote_store_same_value": 2104,
+      "same_core_locked_noop": 69,
+      "remote_locked_noop": 10
+    },
+    "probe_dirty": {
+      "identity": 0,
+      "remote_read_shared": 2738,
+      "same_core_store_same_value": 4,
+      "remote_store_same_value": 5728,
+      "same_core_locked_noop": 114,
+      "remote_locked_noop": 3648
+    }
+  },
+  "negative_operator_notes": {
+    "f10_coherence_ops_0": "PREFETCHW and locked logical no-op were weak, and the PMU group was opened on the wrong core for remote-only work",
+    "f10_coherence_ops_1": "byte-preserving same-value store was added, but the PMU group was still opened on the wrong core for remote-only work",
+    "surviving_interpretation": "byte-preserving remote same-value store is the first accepted ownership-intent operator; PREFETCHW and locked logical no-op remain insufficient as implemented"
+  },
+  "focused_validation": [
+    {
+      "command": ".\\.venv\\Scripts\\python.exe -m py_compile THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\f10_pmc_first_light_target.py THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_coherence_operators.py",
+      "result": "pass"
+    },
+    {
+      "command": "wsl bash -lc 'cd \"/mnt/d/CCC 2.0/AI/agent-governance-system\" && cc -std=c11 -Wall -Wextra -Werror -pedantic -O2 -march=amdfam10 -mtune=amdfam10 -fno-lto -pthread THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/f10_pmc_first_light_worker.c -o /tmp/f10_pmc_coherence_worker_check && /tmp/f10_pmc_coherence_worker_check --self-test'",
+      "result": "pass",
+      "stdout": "F10_PMC_FIRST_LIGHT_WORKER_SELF_TEST_OK"
+    }
+  ],
+  "next_boundary": {
+    "wall": "path-dependent restored physical evolution",
+    "cheapest_discriminator": "two-line forward/reverse paths using the accepted byte-preserving remote-store operator, identical operation multiset, identity/shuffle controls, and a predeclared signed PMU/timing area",
+    "likely_next_marker": "PHYSICAL_COHERENCE_HOLONOMY_CANDIDATE"
+  }
+}

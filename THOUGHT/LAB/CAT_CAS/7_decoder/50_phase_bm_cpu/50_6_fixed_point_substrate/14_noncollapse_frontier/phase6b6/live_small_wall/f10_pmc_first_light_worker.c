@@ -27,9 +27,11 @@
 #define READ_ITERATIONS 512
 #define WRITE_ITERATIONS 512
 #define PINGPONG_ITERATIONS 192
+#define OPERATOR_ITERATIONS 96
 #define MAX_GROUP_EVENTS 4
 #define SUPPORT_EVENTS 8
 #define RESULT_SCHEMA "CAT_CAS_F10_PMC_FIRST_LIGHT_RESULT_V1"
+#define COHERENCE_RESULT_SCHEMA "CAT_CAS_F10_COHERENCE_OPERATOR_RESULT_V1"
 
 struct event_def {
     const char *name;
@@ -65,6 +67,25 @@ struct pingpong_context {
     atomic_int done;
     volatile uint64_t sink_a;
     volatile uint64_t sink_b;
+};
+
+enum coherence_operator {
+    OP_IDENTITY = 0,
+    OP_SAME_CORE_PREFETCHW = 1,
+    OP_REMOTE_READ_SHARED = 2,
+    OP_REMOTE_PREFETCHW = 3,
+    OP_SAME_CORE_LOCKED_NOOP = 4,
+    OP_REMOTE_LOCKED_NOOP = 5,
+    OP_SAME_CORE_STORE_SAME_VALUE = 6,
+    OP_REMOTE_STORE_SAME_VALUE = 7
+};
+
+struct operator_context {
+    struct carrier *carrier;
+    enum coherence_operator op;
+    atomic_int ready;
+    atomic_int done;
+    volatile uint64_t sink;
 };
 
 static const struct event_def support_events[SUPPORT_EVENTS] = {
@@ -163,9 +184,13 @@ static uint64_t fnv1a64(const unsigned char *data, size_t len) {
     return hash;
 }
 
+static unsigned char carrier_pattern_byte(size_t index) {
+    return (unsigned char)((index * 131u + 17u) & 0xffu);
+}
+
 static void init_carrier(struct carrier *carrier) {
     for (size_t i = 0; i < carrier->byte_count; i++) {
-        carrier->bytes[i] = (unsigned char)((i * 131u + 17u) & 0xffu);
+        carrier->bytes[i] = carrier_pattern_byte(i);
     }
 }
 
@@ -178,6 +203,103 @@ static void prefault_carrier(struct carrier *carrier) {
     }
     if (sink == 255u) {
         carrier->bytes[0] ^= sink;
+    }
+}
+
+__attribute__((noinline, noclone))
+static void restore_on_core(struct carrier *carrier, int core) {
+    if (pin_to_core(core) != 0) return;
+    for (size_t line = 0; line < carrier->line_count; line++) {
+        size_t base = line * CACHE_LINE_BYTES;
+        for (size_t offset = 0; offset < CACHE_LINE_BYTES; offset++) {
+            volatile unsigned char *p = (volatile unsigned char *)(void *)(carrier->bytes + base + offset);
+            *p = carrier_pattern_byte(base + offset);
+        }
+    }
+}
+
+static void home_core_restore(struct carrier *carrier) {
+    restore_on_core(carrier, CATCAS_CORE_A);
+}
+
+__attribute__((noinline, noclone))
+static void same_core_prefetchw(struct carrier *carrier) {
+    if (pin_to_core(CATCAS_CORE_B) != 0) return;
+    for (int iter = 0; iter < OPERATOR_ITERATIONS; iter++) {
+        for (size_t line = 0; line < carrier->line_count; line++) {
+            void *p = carrier->bytes + line * CACHE_LINE_BYTES;
+            __asm__ __volatile__("prefetchw (%0)" : : "r"(p) : "memory");
+        }
+    }
+}
+
+__attribute__((noinline, noclone))
+static void same_core_locked_noop(struct carrier *carrier) {
+    if (pin_to_core(CATCAS_CORE_B) != 0) return;
+    for (int iter = 0; iter < OPERATOR_ITERATIONS; iter++) {
+        for (size_t line = 0; line < carrier->line_count; line++) {
+            volatile uint64_t *p = (volatile uint64_t *)(void *)(carrier->bytes + line * CACHE_LINE_BYTES);
+            __asm__ __volatile__("lock orq $0, %0" : "+m"(*p) : : "memory", "cc");
+        }
+    }
+}
+
+__attribute__((noinline, noclone))
+static void same_core_store_same_value(struct carrier *carrier) {
+    if (pin_to_core(CATCAS_CORE_B) != 0) return;
+    for (int iter = 0; iter < OPERATOR_ITERATIONS; iter++) {
+        for (size_t line = 0; line < carrier->line_count; line++) {
+            volatile uint64_t *p = (volatile uint64_t *)(void *)(carrier->bytes + line * CACHE_LINE_BYTES);
+            uint64_t value = *p;
+            *p = value;
+        }
+    }
+}
+
+__attribute__((noinline, noclone))
+static void remote_read_shared(struct carrier *carrier) {
+    volatile uint64_t sink = 0;
+    if (pin_to_core(CATCAS_CORE_B) != 0) return;
+    for (int iter = 0; iter < OPERATOR_ITERATIONS; iter++) {
+        for (size_t line = 0; line < carrier->line_count; line++) {
+            volatile uint64_t *p = (volatile uint64_t *)(void *)(carrier->bytes + line * CACHE_LINE_BYTES);
+            sink += *p;
+        }
+    }
+    if (sink == 0x12345678ull) carrier->bytes[0] ^= 1u;
+}
+
+__attribute__((noinline, noclone))
+static void remote_prefetchw(struct carrier *carrier) {
+    if (pin_to_core(CATCAS_CORE_B) != 0) return;
+    for (int iter = 0; iter < OPERATOR_ITERATIONS; iter++) {
+        for (size_t line = 0; line < carrier->line_count; line++) {
+            void *p = carrier->bytes + line * CACHE_LINE_BYTES;
+            __asm__ __volatile__("prefetchw (%0)" : : "r"(p) : "memory");
+        }
+    }
+}
+
+__attribute__((noinline, noclone))
+static void remote_locked_noop(struct carrier *carrier) {
+    if (pin_to_core(CATCAS_CORE_B) != 0) return;
+    for (int iter = 0; iter < OPERATOR_ITERATIONS; iter++) {
+        for (size_t line = 0; line < carrier->line_count; line++) {
+            volatile uint64_t *p = (volatile uint64_t *)(void *)(carrier->bytes + line * CACHE_LINE_BYTES);
+            __asm__ __volatile__("lock orq $0, %0" : "+m"(*p) : : "memory", "cc");
+        }
+    }
+}
+
+__attribute__((noinline, noclone))
+static void remote_store_same_value(struct carrier *carrier) {
+    if (pin_to_core(CATCAS_CORE_B) != 0) return;
+    for (int iter = 0; iter < OPERATOR_ITERATIONS; iter++) {
+        for (size_t line = 0; line < carrier->line_count; line++) {
+            volatile uint64_t *p = (volatile uint64_t *)(void *)(carrier->bytes + line * CACHE_LINE_BYTES);
+            uint64_t value = *p;
+            *p = value;
+        }
     }
 }
 
@@ -288,6 +410,72 @@ static int cross_core_pingpong_write(struct carrier *carrier) {
     pthread_join(a, NULL);
     pthread_join(b, NULL);
     return atomic_load(&ctx.done) == 0 ? 0 : -1;
+}
+
+static const char *coherence_operator_name(enum coherence_operator op) {
+    switch (op) {
+        case OP_IDENTITY: return "identity_home_prepared";
+        case OP_SAME_CORE_PREFETCHW: return "same_core_prefetchw_control";
+        case OP_REMOTE_READ_SHARED: return "remote_read_shared";
+        case OP_REMOTE_PREFETCHW: return "remote_prefetchw_ownership_request";
+        case OP_SAME_CORE_LOCKED_NOOP: return "same_core_locked_logical_noop_control";
+        case OP_REMOTE_LOCKED_NOOP: return "remote_locked_logical_noop";
+        case OP_SAME_CORE_STORE_SAME_VALUE: return "same_core_store_same_value_control";
+        case OP_REMOTE_STORE_SAME_VALUE: return "remote_store_same_value";
+        default: return "unknown_operator";
+    }
+}
+
+static void *remote_operator_thread(void *arg) {
+    struct operator_context *ctx = (struct operator_context *)arg;
+    atomic_store_explicit(&ctx->ready, 1, memory_order_release);
+    if (ctx->op == OP_REMOTE_READ_SHARED) {
+        remote_read_shared(ctx->carrier);
+    } else if (ctx->op == OP_REMOTE_PREFETCHW) {
+        remote_prefetchw(ctx->carrier);
+    } else if (ctx->op == OP_REMOTE_LOCKED_NOOP) {
+        remote_locked_noop(ctx->carrier);
+    } else if (ctx->op == OP_REMOTE_STORE_SAME_VALUE) {
+        remote_store_same_value(ctx->carrier);
+    } else {
+        atomic_store_explicit(&ctx->done, 1, memory_order_release);
+        return NULL;
+    }
+    atomic_store_explicit(&ctx->done, 1, memory_order_release);
+    return NULL;
+}
+
+static int run_coherence_operator(struct carrier *carrier, enum coherence_operator op) {
+    if (op == OP_IDENTITY) return 0;
+    if (op == OP_SAME_CORE_PREFETCHW) {
+        same_core_prefetchw(carrier);
+        return 0;
+    }
+    if (op == OP_SAME_CORE_LOCKED_NOOP) {
+        same_core_locked_noop(carrier);
+        return 0;
+    }
+    if (op == OP_SAME_CORE_STORE_SAME_VALUE) {
+        same_core_store_same_value(carrier);
+        return 0;
+    }
+    if (op == OP_REMOTE_READ_SHARED || op == OP_REMOTE_PREFETCHW ||
+        op == OP_REMOTE_LOCKED_NOOP || op == OP_REMOTE_STORE_SAME_VALUE) {
+        pthread_t thread;
+        struct operator_context ctx;
+        memset(&ctx, 0, sizeof(ctx));
+        ctx.carrier = carrier;
+        ctx.op = op;
+        atomic_init(&ctx.ready, 0);
+        atomic_init(&ctx.done, 0);
+        if (pthread_create(&thread, NULL, remote_operator_thread, &ctx) != 0) return -1;
+        while (atomic_load_explicit(&ctx.ready, memory_order_acquire) == 0) {
+            sched_yield();
+        }
+        pthread_join(thread, NULL);
+        return atomic_load_explicit(&ctx.done, memory_order_acquire) == 1 ? 0 : -1;
+    }
+    return -1;
 }
 
 static int open_single_event(const struct event_def *event, int core, uint64_t *id_out) {
@@ -402,6 +590,59 @@ static int measure_window(
     return 0;
 }
 
+static int measure_coherence_window(
+    const struct event_def group[MAX_GROUP_EVENTS],
+    enum coherence_operator op,
+    struct carrier *carrier,
+    struct group_result *result,
+    uint64_t *duration_ns,
+    uint64_t *digest_before,
+    uint64_t *digest_after_restore
+) {
+    int fds[MAX_GROUP_EVENTS];
+    uint64_t ids[MAX_GROUP_EVENTS];
+    memset(result, 0, sizeof(*result));
+    int prep_core = (op == OP_SAME_CORE_PREFETCHW ||
+        op == OP_SAME_CORE_LOCKED_NOOP ||
+        op == OP_SAME_CORE_STORE_SAME_VALUE) ? CATCAS_CORE_B : CATCAS_CORE_A;
+    restore_on_core(carrier, prep_core);
+    prefault_carrier(carrier);
+    restore_on_core(carrier, prep_core);
+    *digest_before = fnv1a64(carrier->bytes, carrier->byte_count);
+    int opened = open_group(group, CATCAS_CORE_B, fds, ids);
+    if (opened != 0) {
+        result->open_errno = -opened;
+        return opened;
+    }
+    result->opened = true;
+    if (ioctl(fds[0], PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t start = monotonic_ns();
+    if (ioctl(fds[0], PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    int work_rc = run_coherence_operator(carrier, op);
+    if (ioctl(fds[0], PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t end = monotonic_ns();
+    int read_rc = read_group(fds[0], result);
+    for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+    if (read_rc != 0) return read_rc;
+    if (work_rc != 0) return -EIO;
+    *duration_ns = end >= start ? end - start : 0;
+    home_core_restore(carrier);
+    *digest_after_restore = fnv1a64(carrier->bytes, carrier->byte_count);
+    return 0;
+}
+
 static const char *json_bool(bool value) {
     return value ? "true" : "false";
 }
@@ -463,14 +704,177 @@ static int ensure_dir(const char *path) {
     return -1;
 }
 
+static int run_coherence_operator_mode(const char *output_root, struct carrier *carrier, uint64_t initial_digest) {
+    int primary_fds[MAX_GROUP_EVENTS];
+    uint64_t primary_ids[MAX_GROUP_EVENTS];
+    int primary_open_rc = open_group(primary_group, CATCAS_CORE_B, primary_fds, primary_ids);
+    if (primary_open_rc == 0) {
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(primary_fds[i]);
+    }
+
+    const enum coherence_operator ops[] = {
+        OP_IDENTITY,
+        OP_SAME_CORE_PREFETCHW,
+        OP_REMOTE_READ_SHARED,
+        OP_REMOTE_PREFETCHW,
+        OP_SAME_CORE_LOCKED_NOOP,
+        OP_REMOTE_LOCKED_NOOP,
+        OP_SAME_CORE_STORE_SAME_VALUE,
+        OP_REMOTE_STORE_SAME_VALUE
+    };
+    enum { OP_WINDOW_COUNT = 8 };
+    struct group_result results[OP_WINDOW_COUNT];
+    uint64_t durations[OP_WINDOW_COUNT];
+    uint64_t digest_before[OP_WINDOW_COUNT];
+    uint64_t digest_after[OP_WINDOW_COUNT];
+    int window_rc[OP_WINDOW_COUNT];
+    for (int i = 0; i < OP_WINDOW_COUNT; i++) {
+        memset(&results[i], 0, sizeof(results[i]));
+        durations[i] = 0;
+        digest_before[i] = 0;
+        digest_after[i] = 0;
+        if (primary_open_rc != 0) {
+            window_rc[i] = -ENODEV;
+        } else {
+            window_rc[i] = measure_coherence_window(
+                primary_group,
+                ops[i],
+                carrier,
+                &results[i],
+                &durations[i],
+                &digest_before[i],
+                &digest_after[i]
+            );
+        }
+    }
+
+    bool all_windows_ok = true;
+    bool all_unmultiplexed = true;
+    bool all_restored = true;
+    for (int i = 0; i < OP_WINDOW_COUNT; i++) {
+        all_windows_ok = all_windows_ok && window_rc[i] == 0;
+        all_unmultiplexed = all_unmultiplexed && results[i].unmultiplexed;
+        all_restored = all_restored && digest_after[i] == initial_digest;
+    }
+
+    uint64_t identity_c2d = event_value_by_name(&results[0], primary_group, "cache_block_commands_change_to_dirty");
+    uint64_t same_prefetch_c2d = event_value_by_name(&results[1], primary_group, "cache_block_commands_change_to_dirty");
+    uint64_t remote_read_c2d = event_value_by_name(&results[2], primary_group, "cache_block_commands_change_to_dirty");
+    uint64_t remote_prefetch_c2d = event_value_by_name(&results[3], primary_group, "cache_block_commands_change_to_dirty");
+    uint64_t same_locked_c2d = event_value_by_name(&results[4], primary_group, "cache_block_commands_change_to_dirty");
+    uint64_t remote_locked_c2d = event_value_by_name(&results[5], primary_group, "cache_block_commands_change_to_dirty");
+    uint64_t same_store_c2d = event_value_by_name(&results[6], primary_group, "cache_block_commands_change_to_dirty");
+    uint64_t remote_store_c2d = event_value_by_name(&results[7], primary_group, "cache_block_commands_change_to_dirty");
+    uint64_t identity_probe = event_value_by_name(&results[0], primary_group, "probe_responses_dirty");
+    uint64_t same_prefetch_probe = event_value_by_name(&results[1], primary_group, "probe_responses_dirty");
+    uint64_t remote_read_probe = event_value_by_name(&results[2], primary_group, "probe_responses_dirty");
+    uint64_t remote_prefetch_probe = event_value_by_name(&results[3], primary_group, "probe_responses_dirty");
+    uint64_t same_locked_probe = event_value_by_name(&results[4], primary_group, "probe_responses_dirty");
+    uint64_t remote_locked_probe = event_value_by_name(&results[5], primary_group, "probe_responses_dirty");
+    uint64_t same_store_probe = event_value_by_name(&results[6], primary_group, "probe_responses_dirty");
+    uint64_t remote_store_probe = event_value_by_name(&results[7], primary_group, "probe_responses_dirty");
+
+    uint64_t prefetch_c2d_control = identity_c2d > same_prefetch_c2d ? identity_c2d : same_prefetch_c2d;
+    uint64_t prefetch_probe_control = identity_probe > same_prefetch_probe ? identity_probe : same_prefetch_probe;
+    uint64_t locked_c2d_control = same_locked_c2d > remote_read_c2d ? same_locked_c2d : remote_read_c2d;
+    if (identity_c2d > locked_c2d_control) locked_c2d_control = identity_c2d;
+    uint64_t locked_probe_control = same_locked_probe > remote_read_probe ? same_locked_probe : remote_read_probe;
+    if (identity_probe > locked_probe_control) locked_probe_control = identity_probe;
+    uint64_t store_c2d_control = same_store_c2d > remote_read_c2d ? same_store_c2d : remote_read_c2d;
+    if (identity_c2d > store_c2d_control) store_c2d_control = identity_c2d;
+    uint64_t store_probe_control = same_store_probe > remote_read_probe ? same_store_probe : remote_read_probe;
+    if (identity_probe > store_probe_control) store_probe_control = identity_probe;
+
+    bool prefetch_c2d_moved = remote_prefetch_c2d > prefetch_c2d_control + 32u &&
+        remote_prefetch_c2d > prefetch_c2d_control * 3u;
+    bool prefetch_probe_moved = remote_prefetch_probe > prefetch_probe_control + 32u &&
+        remote_prefetch_probe > prefetch_probe_control * 3u;
+    bool locked_c2d_moved = remote_locked_c2d > locked_c2d_control + 32u &&
+        remote_locked_c2d > locked_c2d_control * 3u;
+    bool locked_probe_moved = remote_locked_probe > locked_probe_control + 32u &&
+        remote_locked_probe > locked_probe_control * 3u;
+    bool store_c2d_moved = remote_store_c2d > store_c2d_control + 32u &&
+        remote_store_c2d > store_c2d_control * 3u;
+    bool store_probe_moved = remote_store_probe > store_probe_control + 32u &&
+        remote_store_probe > store_probe_control * 3u;
+    bool controlled_state_found = primary_open_rc == 0 && all_windows_ok && all_unmultiplexed &&
+        all_restored && (prefetch_c2d_moved || prefetch_probe_moved || locked_c2d_moved ||
+        locked_probe_moved || store_c2d_moved || store_probe_moved);
+
+    char result_path[4096];
+    int n = snprintf(result_path, sizeof(result_path), "%s/F10_COHERENCE_OPERATOR_RESULT.json", output_root);
+    if (n <= 0 || (size_t)n >= sizeof(result_path)) return 1;
+    FILE *out = fopen(result_path, "w");
+    if (!out) {
+        fprintf(stderr, "cannot open result: %s\n", strerror(errno));
+        return 1;
+    }
+
+    fprintf(out, "{\n");
+    fprintf(out, "  \"schema_id\": \"%s\",\n", COHERENCE_RESULT_SCHEMA);
+    fprintf(out, "  \"status\": \"%s\",\n", controlled_state_found ? "CONTROLLED_COHERENCE_STATE_FOUND" : "CONTROLLED_COHERENCE_STATE_NOT_ESTABLISHED");
+    fprintf(out, "  \"claim_ceiling\": \"Controlled coherence-operator PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim\",\n");
+    fprintf(out, "  \"cores\": {\"home_core\": %d, \"observed_core\": %d},\n", CATCAS_CORE_A, CATCAS_CORE_B);
+    fprintf(out, "  \"perf_interface\": {\"type\": \"PERF_TYPE_RAW\", \"event_format\": \"config:0-7,32-35\", \"umask_format\": \"config:8-15\", \"exclude_kernel\": true, \"exclude_hv\": true},\n");
+    fprintf(out, "  \"source_constraints\": {\"direct_msr_access\": false, \"voltage_access\": false, \"frequency_writes\": 0, \"experiment_owned_memory_only\": true},\n");
+    fprintf(out, "  \"carrier\": {\"line_count\": %zu, \"line_bytes\": %d, \"byte_count\": %zu, \"digest_kind\": \"fnv1a64\", \"initial_digest_hex\": \"0x%016" PRIx64 "\"},\n", carrier->line_count, CACHE_LINE_BYTES, carrier->byte_count, initial_digest);
+    fprintf(out, "  \"selected_group\": \"primary_nb_coherence\",\n");
+    fprintf(out, "  \"group_open_rc\": %d,\n", primary_open_rc);
+    fprintf(out, "  \"selected_events\": ");
+    print_group_defs(out, primary_group);
+    fprintf(out, ",\n");
+    fprintf(out, "  \"predeclared_observable\": {\"primary\": \"cache_block_commands_change_to_dirty\", \"secondary\": \"probe_responses_dirty\", \"comparison\": \"remote ownership-intent operators greater than identity, read-shared, and same-core controls\"},\n");
+    fprintf(out, "  \"operators\": [\n");
+    for (int i = 0; i < OP_WINDOW_COUNT; i++) {
+        fprintf(out, "    {\"name\": \"%s\", \"rc\": %d, \"duration_ns\": %" PRIu64 ", \"carrier_digest_before_hex\": \"0x%016" PRIx64 "\", \"carrier_digest_after_restore_hex\": \"0x%016" PRIx64 "\", \"carrier_restored\": %s, \"group\": ",
+            coherence_operator_name(ops[i]),
+            window_rc[i],
+            durations[i],
+            digest_before[i],
+            digest_after[i],
+            json_bool(digest_after[i] == initial_digest));
+        print_group_result(out, primary_group, &results[i]);
+        fprintf(out, "}%s\n", i + 1 == OP_WINDOW_COUNT ? "" : ",");
+    }
+    fprintf(out, "  ],\n");
+    fprintf(out, "  \"contrast_counts\": {\n");
+    fprintf(out, "    \"change_to_dirty\": {\"identity\": %" PRIu64 ", \"same_core_prefetchw\": %" PRIu64 ", \"remote_read_shared\": %" PRIu64 ", \"remote_prefetchw\": %" PRIu64 ", \"same_core_locked_noop\": %" PRIu64 ", \"remote_locked_noop\": %" PRIu64 ", \"same_core_store_same_value\": %" PRIu64 ", \"remote_store_same_value\": %" PRIu64 "},\n",
+        identity_c2d, same_prefetch_c2d, remote_read_c2d, remote_prefetch_c2d, same_locked_c2d, remote_locked_c2d, same_store_c2d, remote_store_c2d);
+    fprintf(out, "    \"probe_dirty\": {\"identity\": %" PRIu64 ", \"same_core_prefetchw\": %" PRIu64 ", \"remote_read_shared\": %" PRIu64 ", \"remote_prefetchw\": %" PRIu64 ", \"same_core_locked_noop\": %" PRIu64 ", \"remote_locked_noop\": %" PRIu64 ", \"same_core_store_same_value\": %" PRIu64 ", \"remote_store_same_value\": %" PRIu64 "}\n",
+        identity_probe, same_prefetch_probe, remote_read_probe, remote_prefetch_probe, same_locked_probe, remote_locked_probe, same_store_probe, remote_store_probe);
+    fprintf(out, "  },\n");
+    fprintf(out, "  \"acceptance\": {\"all_windows_ok\": %s, \"all_unmultiplexed\": %s, \"carrier_restored\": %s, \"prefetch_change_to_dirty_moved\": %s, \"prefetch_probe_dirty_moved\": %s, \"locked_change_to_dirty_moved\": %s, \"locked_probe_dirty_moved\": %s, \"store_same_value_change_to_dirty_moved\": %s, \"store_same_value_probe_dirty_moved\": %s, \"controlled_state_found\": %s}\n",
+        json_bool(all_windows_ok),
+        json_bool(all_unmultiplexed),
+        json_bool(all_restored),
+        json_bool(prefetch_c2d_moved),
+        json_bool(prefetch_probe_moved),
+        json_bool(locked_c2d_moved),
+        json_bool(locked_probe_moved),
+        json_bool(store_c2d_moved),
+        json_bool(store_probe_moved),
+        json_bool(controlled_state_found));
+    fprintf(out, "}\n");
+    fclose(out);
+    printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"primary_nb_coherence\"}\n",
+        controlled_state_found ? "CONTROLLED_COHERENCE_STATE_FOUND" : "CONTROLLED_COHERENCE_STATE_NOT_ESTABLISHED",
+        result_path);
+    return 0;
+}
+
 int main(int argc, char **argv) {
     const char *output_root = NULL;
+    bool coherence_operator_mode = false;
     if (argc == 3 && strcmp(argv[1], "--output-root") == 0) {
         output_root = argv[2];
+    } else if (argc == 4 && strcmp(argv[1], "--coherence-operators") == 0 &&
+               strcmp(argv[2], "--output-root") == 0) {
+        coherence_operator_mode = true;
+        output_root = argv[3];
     } else if (argc == 2 && strcmp(argv[1], "--self-test") == 0) {
         return self_test();
     } else {
-        fprintf(stderr, "usage: %s --output-root <absolute-output-root>\n", argv[0]);
+        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root>\n", argv[0]);
         return 2;
     }
     if (output_root[0] != '/') {
@@ -491,6 +895,12 @@ int main(int argc, char **argv) {
     }
     init_carrier(&carrier);
     uint64_t initial_digest = fnv1a64(carrier.bytes, carrier.byte_count);
+
+    if (coherence_operator_mode) {
+        int rc = run_coherence_operator_mode(output_root, &carrier, initial_digest);
+        free(carrier.bytes);
+        return rc;
+    }
 
     uint64_t support_ids[SUPPORT_EVENTS];
     int support_rc[SUPPORT_EVENTS];

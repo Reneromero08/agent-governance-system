@@ -15,6 +15,22 @@ from typing import Any
 
 TEMPERATURE_VETO_C = 68.0
 SOURCE_NAMES = ("f10_pmc_first_light_target.py", "f10_pmc_first_light_worker.c")
+MODES: dict[str, dict[str, Any]] = {
+    "pmu-first-light": {
+        "worker_args": [],
+        "result_file": "F10_PMC_FIRST_LIGHT_RESULT.json",
+        "complete_status": "F10_PMC_FIRST_LIGHT_TARGET_COMPLETE",
+        "failed_status": "F10_PMC_FIRST_LIGHT_TARGET_FAILED",
+        "claim_ceiling": "Family 10h PMU first-light discriminator only; no coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
+    },
+    "coherence-operators": {
+        "worker_args": ["--coherence-operators"],
+        "result_file": "F10_COHERENCE_OPERATOR_RESULT.json",
+        "complete_status": "F10_COHERENCE_OPERATOR_TARGET_COMPLETE",
+        "failed_status": "F10_COHERENCE_OPERATOR_TARGET_FAILED",
+        "claim_ceiling": "Controlled coherence-operator PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
+    },
+}
 FORBIDDEN_PROCESS_MARKERS = (
     "f10_pmc_first_light_worker",
     "gate_a_worker_live",
@@ -174,7 +190,9 @@ def build_file_manifest(output_root: Path) -> dict[str, Any]:
     return {"schema_id": "CAT_CAS_F10_PMC_FIRST_LIGHT_FILE_MANIFEST_V1", "files": files}
 
 
-def execute(source_root: Path, output_root: Path) -> dict[str, Any]:
+def execute(source_root: Path, output_root: Path, mode: str) -> dict[str, Any]:
+    require(mode in MODES, f"unsupported mode: {mode}")
+    mode_config = MODES[mode]
     require(source_root.is_dir(), f"source root missing: {source_root}")
     require(not output_root.exists(), f"output root already exists: {output_root}")
     for name in SOURCE_NAMES:
@@ -187,9 +205,10 @@ def execute(source_root: Path, output_root: Path) -> dict[str, Any]:
     pre_temperature = read_temperature_c(temp_path)
     require(pre_temperature < TEMPERATURE_VETO_C, f"preflight temperature veto: {pre_temperature} C")
     source_bundle_sha256, compile_command = compile_worker(source_root, binary)
+    worker_command = [str(binary), *mode_config["worker_args"], "--output-root", str(output_root)]
     start = time.monotonic_ns()
     completed = subprocess.run(
-        [str(binary), "--output-root", str(output_root)],
+        worker_command,
         text=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
@@ -199,15 +218,17 @@ def execute(source_root: Path, output_root: Path) -> dict[str, Any]:
     finish = time.monotonic_ns()
     post_temperature = read_temperature_c(temp_path)
     process_cleanup = process_snapshot()
-    result_path = output_root / "F10_PMC_FIRST_LIGHT_RESULT.json"
+    result_path = output_root / str(mode_config["result_file"])
     result_available = result_path.is_file()
     result = json.loads(result_path.read_text(encoding="utf-8")) if result_available else None
     final = {
         "schema_id": "CAT_CAS_F10_PMC_FIRST_LIGHT_TARGET_RESULT_V1",
-        "status": "F10_PMC_FIRST_LIGHT_TARGET_COMPLETE" if completed.returncode == 0 and result_available else "F10_PMC_FIRST_LIGHT_TARGET_FAILED",
+        "mode": mode,
+        "status": mode_config["complete_status"] if completed.returncode == 0 and result_available else mode_config["failed_status"],
         "source_bundle_sha256": source_bundle_sha256,
         "source_hashes": source_digest(source_root)[1],
         "compile_command": compile_command,
+        "worker_command": worker_command,
         "cpuinfo": cpuinfo_snapshot(),
         "kernel": os.uname().release,
         "pmu_sysfs": pmu_sysfs_snapshot(),
@@ -228,11 +249,12 @@ def execute(source_root: Path, output_root: Path) -> dict[str, Any]:
         },
         "worker_result_available": result_available,
         "worker_status": None if result is None else result.get("status"),
+        "worker_result_file": str(mode_config["result_file"]),
         "frequency_writes": 0,
         "voltage_writes": 0,
         "msr_reads": 0,
         "msr_writes": 0,
-        "claim_ceiling": "Family 10h PMU first-light discriminator only; no coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
+        "claim_ceiling": mode_config["claim_ceiling"],
     }
     write_json(output_root / "FINAL_RESULT.json", final)
     write_json(output_root / "FILE_MANIFEST.json", build_file_manifest(output_root))
@@ -244,17 +266,18 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--source-root", type=Path, required=True)
     parser.add_argument("--output-root", type=Path, required=True)
+    parser.add_argument("--mode", choices=sorted(MODES), default="pmu-first-light")
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
     try:
-        result = execute(args.source_root, args.output_root)
+        result = execute(args.source_root, args.output_root, args.mode)
     except (PmcFirstLightError, OSError, subprocess.SubprocessError, json.JSONDecodeError) as exc:
         print(f"f10_pmc_first_light_target: {exc}", file=__import__("sys").stderr)
         return 1
-    return 0 if result["status"] == "F10_PMC_FIRST_LIGHT_TARGET_COMPLETE" else 1
+    return 0 if result["status"].endswith("_TARGET_COMPLETE") else 1
 
 
 if __name__ == "__main__":
