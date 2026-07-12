@@ -30,6 +30,22 @@ MODES: dict[str, dict[str, Any]] = {
         "failed_status": "F10_COHERENCE_OPERATOR_TARGET_FAILED",
         "claim_ceiling": "Controlled coherence-operator PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
     },
+    "coherence-operators-route45": {
+        "worker_args": ["--coherence-operators"],
+        "result_file": "F10_COHERENCE_OPERATOR_RESULT.json",
+        "complete_status": "F10_COHERENCE_OPERATOR_ROUTE45_TARGET_COMPLETE",
+        "failed_status": "F10_COHERENCE_OPERATOR_ROUTE45_TARGET_FAILED",
+        "compile_defines": ["-DCATCAS_CORE_A=4", "-DCATCAS_CORE_B=5"],
+        "claim_ceiling": "Route 4-to-5 controlled coherence-operator PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
+    },
+    "coherence-operators-route23": {
+        "worker_args": ["--coherence-operators"],
+        "result_file": "F10_COHERENCE_OPERATOR_RESULT.json",
+        "complete_status": "F10_COHERENCE_OPERATOR_ROUTE23_TARGET_COMPLETE",
+        "failed_status": "F10_COHERENCE_OPERATOR_ROUTE23_TARGET_FAILED",
+        "compile_defines": ["-DCATCAS_CORE_A=2", "-DCATCAS_CORE_B=3"],
+        "claim_ceiling": "Route 2-to-3 controlled coherence-operator PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
+    },
     "path-dependence": {
         "worker_args": ["--path-dependence"],
         "result_file": "F10_PATH_DEPENDENCE_PILOT_RESULT.json",
@@ -50,6 +66,13 @@ MODES: dict[str, dict[str, Any]] = {
         "complete_status": "F10_PATH_RW_OBSERVE_TARGET_COMPLETE",
         "failed_status": "F10_PATH_RW_OBSERVE_TARGET_FAILED",
         "claim_ceiling": "Read/store path pilot only; no coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
+    },
+    "route-state": {
+        "worker_args": ["--route-state"],
+        "result_file": "F10_ROUTE_STATE_RESULT.json",
+        "complete_status": "F10_ROUTE_STATE_TARGET_COMPLETE",
+        "failed_status": "F10_ROUTE_STATE_TARGET_FAILED",
+        "claim_ceiling": "Route-state PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
     },
 }
 FORBIDDEN_PROCESS_MARKERS = (
@@ -138,7 +161,7 @@ def source_digest(source_root: Path) -> tuple[str, dict[str, str]]:
     return hashlib.sha256(canonical_bytes(hashes)).hexdigest(), hashes
 
 
-def compile_worker(source_root: Path, binary: Path) -> tuple[str, list[str]]:
+def compile_worker(source_root: Path, binary: Path, mode_config: dict[str, Any]) -> tuple[str, list[str]]:
     bundle_sha256, _hashes = source_digest(source_root)
     command = [
         "cc",
@@ -152,6 +175,7 @@ def compile_worker(source_root: Path, binary: Path) -> tuple[str, list[str]]:
         "-mtune=amdfam10",
         "-fno-lto",
         "-pthread",
+        *mode_config.get("compile_defines", []),
         str(source_root / "f10_pmc_first_light_worker.c"),
         "-o",
         str(binary),
@@ -225,7 +249,7 @@ def execute(source_root: Path, output_root: Path, mode: str) -> dict[str, Any]:
     require(not preflight_processes["forbidden_matches"], "forbidden CAT_CAS process present before PMU transaction")
     pre_temperature = read_temperature_c(temp_path)
     require(pre_temperature < TEMPERATURE_VETO_C, f"preflight temperature veto: {pre_temperature} C")
-    source_bundle_sha256, compile_command = compile_worker(source_root, binary)
+    source_bundle_sha256, compile_command = compile_worker(source_root, binary, mode_config)
     worker_command = [str(binary), *mode_config["worker_args"], "--output-root", str(output_root)]
     start = time.monotonic_ns()
     completed = subprocess.run(

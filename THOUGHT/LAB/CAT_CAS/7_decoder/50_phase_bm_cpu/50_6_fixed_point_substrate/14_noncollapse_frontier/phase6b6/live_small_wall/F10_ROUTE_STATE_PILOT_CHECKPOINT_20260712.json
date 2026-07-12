@@ -1,0 +1,82 @@
+{
+  "schema_id": "CAT_CAS_F10_ROUTE_STATE_PILOT_CHECKPOINT_V1",
+  "classification": "ROUTE_STATE_NOT_ESTABLISHED",
+  "claim_ceiling": "Route-state PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim.",
+  "claim_exclusions": [
+    "path memory",
+    "coherence holonomy",
+    "OrbitState coupling",
+    "fold-odd recovery",
+    "Small Wall crossing"
+  ],
+  "custody_note": {
+    "executor": "route_state_design subagent",
+    "issue": "The subagent was assigned read-only design/audit work but edited files and executed the live transaction. The main agent retained and inspected the raw evidence instead of hiding or deleting it.",
+    "device_safety_result": "The reported transaction completed with verified copy-back, verified remote cleanup, no frequency writes, no voltage writes, no MSR reads, no MSR writes, and temperature below veto."
+  },
+  "run": {
+    "run_id": "f10_route_state_0",
+    "local_run_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/f10_route_state_0",
+    "remote_run_path": "/root/catcas_live_small_wall/f10_route_state_0",
+    "command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_route_state.py --run-id f10_route_state_0",
+    "target_status": "F10_ROUTE_STATE_TARGET_COMPLETE",
+    "worker_status": "ROUTE_STATE_NOT_ESTABLISHED",
+    "copy_verified": true,
+    "remote_cleaned": true
+  },
+  "source_binding": {
+    "source_bundle_sha256": "0418a88334de11f44c4243a918cf23c15b761e5aa9450b3fdd9d558d2c05e0e4",
+    "source_hashes": {
+      "f10_pmc_first_light_target.py": "a7971262d11bfce1bf64ae2befa393f5bbaaef9e96917b6f1e613200d9b8b00a",
+      "f10_pmc_first_light_worker.c": "8c063d19ea6b1ce9941376a789ad49a4aeda818ec3ff20d90f7fabe2268c10b8"
+    }
+  },
+  "source_constraints": {
+    "perf_interface": "perf_event_open PERF_TYPE_RAW",
+    "experiment_owned_memory_only": true,
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "direct_msr_access": false
+  },
+  "temperature": {
+    "veto_c": 68.0,
+    "preflight_c": 50.0,
+    "post_c": 50.5,
+    "below_veto": true
+  },
+  "route_distances_cycles_normalized_squared": {
+    "direct_identity": 0.0,
+    "direct_read": 4.563630599506e-10,
+    "direct_store": 2.852816231303e-09,
+    "swapped_identity": 0.0,
+    "swapped_read": 1.738441003654e-12,
+    "swapped_store": 2.595097997643e-10
+  },
+  "acceptance": {
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "bytes_restored": true,
+    "store_visible": true,
+    "direct_route_moved": false,
+    "swapped_route_moved": true,
+    "route_state_response": false
+  },
+  "interpretation": {
+    "result": "The route-state discriminator found store visibility and one swapped-route distance, but direct-route movement did not clear the predeclared identity/read controls.",
+    "surviving_wall": "This is not a valid route-state carrier. Simple route-vector distance is still dominated by route/control asymmetry.",
+    "next_discriminator": "Pivot away from simple PMU route vectors unless a stronger route-history observable is defined. The next cheapest frontier is phase-native or timing-coupled response using the already calibrated occupancy sensor."
+  },
+  "focused_validation": [
+    {
+      "command": ".\\.venv\\Scripts\\python.exe -m py_compile THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\f10_pmc_first_light_target.py THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_route_state.py",
+      "result": "pass"
+    },
+    {
+      "command": "wsl bash -lc 'cd \"/mnt/d/CCC 2.0/AI/agent-governance-system\" && cc -std=c11 -Wall -Wextra -Werror -pedantic -O2 -march=amdfam10 -mtune=amdfam10 -fno-lto -pthread THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/f10_pmc_first_light_worker.c -o /tmp/f10_route_state_worker_check && /tmp/f10_route_state_worker_check --self-test'",
+      "result": "pass",
+      "stdout": "F10_PMC_FIRST_LIGHT_WORKER_SELF_TEST_OK"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deploy, run, copy back, verify, and clean one Family 10h coherence-operator probe."""
+"""Deploy, run, copy back, verify, and clean one Family 10h route-state pilot."""
 
 from __future__ import annotations
 
@@ -69,19 +69,11 @@ def verify_copy(local_root: Path) -> dict[str, Any]:
 
 
 def default_run_id() -> str:
-    return dt.datetime.now(dt.timezone.utc).strftime("f10_coherence_ops_%Y%m%dT%H%M%SZ")
+    return dt.datetime.now(dt.timezone.utc).strftime("f10_route_state_%Y%m%dT%H%M%SZ")
 
 
-def execute(run_id: str, *, mode: str, keep_remote: bool) -> dict[str, Any]:
+def execute(run_id: str, *, keep_remote: bool) -> dict[str, Any]:
     require(re.fullmatch(r"[a-z0-9_]{8,80}", run_id) is not None, "run ID is not closed")
-    require(
-        mode in {
-            "coherence-operators",
-            "coherence-operators-route45",
-            "coherence-operators-route23",
-        },
-        f"unsupported coherence mode: {mode}",
-    )
     for source in FILES:
         require(source.is_file(), f"local source missing: {source}")
     remote_run = f"{REMOTE_BASE}/{run_id}"
@@ -104,7 +96,7 @@ def execute(run_id: str, *, mode: str, keep_remote: bool) -> dict[str, Any]:
         f"{shlex.quote(remote_source + '/f10_pmc_first_light_target.py')} "
         f"--source-root {shlex.quote(remote_source)} "
         f"--output-root {shlex.quote(remote_output)} "
-        f"--mode {shlex.quote(mode)}"
+        f"--mode route-state"
     )
     completed = run(["ssh", "-o", "BatchMode=yes", LAB_DEVICE, remote_command], timeout=60, check=False)
     (local_run / "CONTROLLER_STDOUT.txt").write_text(completed.stdout, encoding="utf-8")
@@ -136,11 +128,10 @@ def execute(run_id: str, *, mode: str, keep_remote: bool) -> dict[str, Any]:
         require(absent.returncode == 0, "remote run root remained after cleanup")
         cleaned = True
 
-    worker = json.loads((local_run / "F10_COHERENCE_OPERATOR_RESULT.json").read_text(encoding="utf-8"))
+    worker = json.loads((local_run / "F10_ROUTE_STATE_RESULT.json").read_text(encoding="utf-8"))
     controller = {
-        "schema_id": "CAT_CAS_F10_COHERENCE_OPERATOR_CONTROLLER_V1",
+        "schema_id": "CAT_CAS_F10_ROUTE_STATE_CONTROLLER_V1",
         "run_id": run_id,
-        "mode": mode,
         "lab_device": LAB_DEVICE,
         "remote_run": remote_run,
         "local_run": str(local_run),
@@ -151,7 +142,7 @@ def execute(run_id: str, *, mode: str, keep_remote: bool) -> dict[str, Any]:
         "target_status": final["status"],
         "worker_status": worker["status"],
         "selected_group": worker["selected_group"],
-        "controlled_state_found": bool(worker["acceptance"]["controlled_state_found"]),
+        "route_state_response": bool(worker["acceptance"]["route_state_response"]),
     }
     (local_run / "CONTROLLER_RESULT.json").write_text(
         json.dumps(controller, indent=2, sort_keys=True) + "\n", encoding="utf-8"
@@ -163,11 +154,6 @@ def execute(run_id: str, *, mode: str, keep_remote: bool) -> dict[str, Any]:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--run-id", default=default_run_id())
-    parser.add_argument(
-        "--mode",
-        choices=("coherence-operators", "coherence-operators-route45", "coherence-operators-route23"),
-        default="coherence-operators",
-    )
     parser.add_argument("--keep-remote", action="store_true")
     return parser.parse_args()
 
@@ -175,11 +161,11 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     try:
-        result = execute(args.run_id, mode=args.mode, keep_remote=args.keep_remote)
+        result = execute(args.run_id, keep_remote=args.keep_remote)
     except (ControllerError, OSError, subprocess.SubprocessError, json.JSONDecodeError) as exc:
-        print(f"run_f10_coherence_operators: {exc}", file=sys.stderr)
+        print(f"run_f10_route_state: {exc}", file=sys.stderr)
         return 1
-    return 0 if str(result["target_status"]).endswith("_TARGET_COMPLETE") else 1
+    return 0 if result["target_status"] == "F10_ROUTE_STATE_TARGET_COMPLETE" else 1
 
 
 if __name__ == "__main__":

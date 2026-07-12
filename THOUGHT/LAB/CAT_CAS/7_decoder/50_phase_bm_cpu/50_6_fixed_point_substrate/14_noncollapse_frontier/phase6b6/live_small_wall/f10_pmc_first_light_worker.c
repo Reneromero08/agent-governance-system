@@ -20,8 +20,12 @@
 #include <time.h>
 #include <unistd.h>
 
+#ifndef CATCAS_CORE_A
 #define CATCAS_CORE_A 4
+#endif
+#ifndef CATCAS_CORE_B
 #define CATCAS_CORE_B 5
+#endif
 #define CACHE_LINE_BYTES 64
 #define CARRIER_LINES 4096
 #define READ_ITERATIONS 512
@@ -35,6 +39,7 @@
 #define PATH_RESULT_SCHEMA "CAT_CAS_F10_PATH_DEPENDENCE_PILOT_RESULT_V1"
 #define PATH_DUAL_OBSERVE_RESULT_SCHEMA "CAT_CAS_F10_PATH_DUAL_OBSERVE_RESULT_V1"
 #define PATH_RW_OBSERVE_RESULT_SCHEMA "CAT_CAS_F10_PATH_RW_OBSERVE_RESULT_V1"
+#define ROUTE_STATE_RESULT_SCHEMA "CAT_CAS_F10_ROUTE_STATE_PILOT_RESULT_V1"
 
 struct event_def {
     const char *name;
@@ -107,6 +112,18 @@ struct path_step {
     const char *name;
     enum path_op op;
     int line_set;
+};
+
+enum route_op {
+    ROUTE_IDENTITY = 0,
+    ROUTE_READ = 1,
+    ROUTE_STORE = 2
+};
+
+struct route_spec {
+    const char *name;
+    int home_core;
+    int remote_core;
 };
 
 static const struct event_def support_events[SUPPORT_EVENTS] = {
@@ -356,6 +373,32 @@ static void read_subset_on_core(struct carrier *carrier, int core, int line_set)
     if (sink == 0x12345678ull) carrier->bytes[0] ^= 1u;
 }
 
+__attribute__((noinline, noclone))
+static void read_all_on_core(struct carrier *carrier, int core) {
+    volatile uint64_t sink = 0;
+    if (pin_to_core(core) != 0) return;
+    for (int iter = 0; iter < OPERATOR_ITERATIONS; iter++) {
+        for (size_t line = 0; line < carrier->line_count; line++) {
+            volatile uint64_t *p = (volatile uint64_t *)(void *)(carrier->bytes + line * CACHE_LINE_BYTES);
+            sink += *p;
+        }
+    }
+    if (sink == 0xabcdef01ull) carrier->bytes[0] ^= 1u;
+}
+
+__attribute__((noinline, noclone))
+static void store_same_value_all_on_core(struct carrier *carrier, int core) {
+    if (pin_to_core(core) != 0) return;
+    for (int iter = 0; iter < OPERATOR_ITERATIONS; iter++) {
+        for (size_t line = 0; line < carrier->line_count; line++) {
+            volatile uint64_t *p = (volatile uint64_t *)(void *)(carrier->bytes + line * CACHE_LINE_BYTES);
+            uint64_t value = *p;
+            *p = value;
+        }
+    }
+    __asm__ __volatile__("mfence" : : : "memory");
+}
+
 static int run_path_step_operator(struct carrier *carrier, const struct path_step *step) {
     if (step->line_set != 0 && step->line_set != 1) return -1;
     if (step->op == PATH_REMOTE_READ) {
@@ -377,6 +420,28 @@ static int path_step_actor_core(const struct path_step *step) {
     if (step->op == PATH_REMOTE_READ) return CATCAS_CORE_B;
     if (step->op == PATH_REMOTE_STORE) return CATCAS_CORE_B;
     if (step->op == PATH_HOME_STORE) return CATCAS_CORE_A;
+    return -1;
+}
+
+__attribute__((unused))
+static const char *route_op_name(enum route_op op) {
+    if (op == ROUTE_IDENTITY) return "identity";
+    if (op == ROUTE_READ) return "remote_read";
+    if (op == ROUTE_STORE) return "remote_store_same_value";
+    return "unknown";
+}
+
+__attribute__((unused))
+static int run_route_operator(struct carrier *carrier, enum route_op op, int remote_core) {
+    if (op == ROUTE_IDENTITY) return 0;
+    if (op == ROUTE_READ) {
+        read_all_on_core(carrier, remote_core);
+        return 0;
+    }
+    if (op == ROUTE_STORE) {
+        store_same_value_all_on_core(carrier, remote_core);
+        return 0;
+    }
     return -1;
 }
 
@@ -767,6 +832,58 @@ static int measure_path_step(
     return 0;
 }
 
+__attribute__((unused))
+static int measure_route_window(
+    const struct event_def group[MAX_GROUP_EVENTS],
+    const struct route_spec *route,
+    enum route_op op,
+    struct carrier *carrier,
+    struct group_result *result,
+    uint64_t *duration_ns,
+    uint64_t *digest_before,
+    uint64_t *digest_after_restore
+) {
+    int fds[MAX_GROUP_EVENTS];
+    uint64_t ids[MAX_GROUP_EVENTS];
+    memset(result, 0, sizeof(*result));
+    restore_on_core(carrier, route->home_core);
+    prefault_carrier(carrier);
+    restore_on_core(carrier, route->home_core);
+    *digest_before = fnv1a64(carrier->bytes, carrier->byte_count);
+    int opened = open_group(group, route->remote_core, fds, ids);
+    if (opened != 0) {
+        result->open_errno = -opened;
+        return opened;
+    }
+    result->opened = true;
+    if (ioctl(fds[0], PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t start = monotonic_ns();
+    if (ioctl(fds[0], PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    int work_rc = run_route_operator(carrier, op, route->remote_core);
+    if (ioctl(fds[0], PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t end = monotonic_ns();
+    int read_rc = read_group(fds[0], result);
+    for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+    if (read_rc != 0) return read_rc;
+    if (work_rc != 0) return -EIO;
+    *duration_ns = end >= start ? end - start : 0;
+    restore_on_core(carrier, route->home_core);
+    *digest_after_restore = fnv1a64(carrier->bytes, carrier->byte_count);
+    return 0;
+}
+
 static uint64_t event_value_by_name(const struct group_result *result, const struct event_def group[MAX_GROUP_EVENTS], const char *name);
 
 static long double normalized_event_value(
@@ -798,6 +915,21 @@ static long double path_signed_area(
 
 static long double abs_ld(long double value) {
     return value < 0.0L ? -value : value;
+}
+
+__attribute__((unused))
+static long double route_vector_distance2(
+    const struct group_result *a,
+    const struct group_result *b,
+    const struct event_def group[MAX_GROUP_EVENTS]
+) {
+    long double ax = normalized_event_value(a, group, "cache_block_commands_change_to_dirty");
+    long double ay = normalized_event_value(a, group, "probe_responses_dirty");
+    long double bx = normalized_event_value(b, group, "cache_block_commands_change_to_dirty");
+    long double by = normalized_event_value(b, group, "probe_responses_dirty");
+    long double dx = ax - bx;
+    long double dy = ay - by;
+    return dx * dx + dy * dy;
 }
 
 static const char *json_bool(bool value) {
@@ -1295,12 +1427,180 @@ static int run_path_rw_observe_mode(const char *output_root, struct carrier *car
     return run_path_mode(output_root, carrier, initial_digest, PATH_MODE_RW_OBSERVE);
 }
 
+static void print_route_windows(
+    FILE *out,
+    const struct route_spec *route,
+    const enum route_op ops[3],
+    const struct group_result results[3],
+    const uint64_t durations[3],
+    const uint64_t digest_before[3],
+    const uint64_t digest_after[3],
+    const int rc[3],
+    uint64_t initial_digest
+) {
+    fprintf(out, "    {\"name\": \"%s\", \"home_core\": %d, \"remote_core\": %d, \"windows\": [\n",
+        route->name,
+        route->home_core,
+        route->remote_core);
+    for (int i = 0; i < 3; i++) {
+        fprintf(out, "      {\"op\": \"%s\", \"rc\": %d, \"duration_ns\": %" PRIu64 ", \"carrier_digest_before_hex\": \"0x%016" PRIx64 "\", \"carrier_digest_after_restore_hex\": \"0x%016" PRIx64 "\", \"bytes_restored\": %s, \"group\": ",
+            route_op_name(ops[i]),
+            rc[i],
+            durations[i],
+            digest_before[i],
+            digest_after[i],
+            json_bool(digest_before[i] == initial_digest && digest_after[i] == initial_digest));
+        print_group_result(out, primary_group, &results[i]);
+        fprintf(out, "}%s\n", i + 1 == 3 ? "" : ",");
+    }
+    fprintf(out, "    ]}");
+}
+
+static int run_route_state_mode(const char *output_root, struct carrier *carrier, uint64_t initial_digest) {
+    const struct route_spec routes[4] = {
+        {"route_4_to_5", 4, 5},
+        {"route_5_to_4", 5, 4},
+        {"route_2_to_3", 2, 3},
+        {"route_3_to_2", 3, 2}
+    };
+    const enum route_op ops[3] = {
+        ROUTE_IDENTITY,
+        ROUTE_READ,
+        ROUTE_STORE
+    };
+    int group_open_rc[4];
+    bool groups_available = true;
+    for (int route = 0; route < 4; route++) {
+        group_open_rc[route] = probe_primary_group_on_core(routes[route].remote_core);
+        groups_available = groups_available && group_open_rc[route] == 0;
+    }
+
+    struct group_result results[4][3];
+    uint64_t durations[4][3];
+    uint64_t digest_before[4][3];
+    uint64_t digest_after[4][3];
+    int rc[4][3];
+    for (int route = 0; route < 4; route++) {
+        for (int op = 0; op < 3; op++) {
+            memset(&results[route][op], 0, sizeof(results[route][op]));
+            durations[route][op] = 0;
+            digest_before[route][op] = 0;
+            digest_after[route][op] = 0;
+            rc[route][op] = -ENODEV;
+        }
+    }
+    if (groups_available) {
+        for (int route = 0; route < 4; route++) {
+            for (int op = 0; op < 3; op++) {
+                rc[route][op] = measure_route_window(primary_group, &routes[route], ops[op],
+                    carrier, &results[route][op], &durations[route][op],
+                    &digest_before[route][op], &digest_after[route][op]);
+            }
+        }
+    }
+    home_core_restore(carrier);
+    bool final_digest_restored = fnv1a64(carrier->bytes, carrier->byte_count) == initial_digest;
+
+    bool all_windows_ok = groups_available;
+    bool all_unmultiplexed = groups_available;
+    bool bytes_restored = final_digest_restored;
+    bool store_visible = groups_available;
+    for (int route = 0; route < 4; route++) {
+        uint64_t read_c2d = event_value_by_name(&results[route][1], primary_group, "cache_block_commands_change_to_dirty");
+        uint64_t read_probe = event_value_by_name(&results[route][1], primary_group, "probe_responses_dirty");
+        uint64_t store_c2d = event_value_by_name(&results[route][2], primary_group, "cache_block_commands_change_to_dirty");
+        uint64_t store_probe = event_value_by_name(&results[route][2], primary_group, "probe_responses_dirty");
+        store_visible = store_visible && (store_c2d + store_probe > read_c2d + read_probe);
+        for (int op = 0; op < 3; op++) {
+            all_windows_ok = all_windows_ok && rc[route][op] == 0;
+            all_unmultiplexed = all_unmultiplexed && results[route][op].unmultiplexed;
+            bytes_restored = bytes_restored &&
+                digest_before[route][op] == initial_digest &&
+                digest_after[route][op] == initial_digest;
+        }
+    }
+
+    long double direct_identity_distance2 = route_vector_distance2(&results[0][0], &results[2][0], primary_group);
+    long double direct_read_distance2 = route_vector_distance2(&results[0][1], &results[2][1], primary_group);
+    long double direct_store_distance2 = route_vector_distance2(&results[0][2], &results[2][2], primary_group);
+    long double swapped_identity_distance2 = route_vector_distance2(&results[1][0], &results[3][0], primary_group);
+    long double swapped_read_distance2 = route_vector_distance2(&results[1][1], &results[3][1], primary_group);
+    long double swapped_store_distance2 = route_vector_distance2(&results[1][2], &results[3][2], primary_group);
+    bool direct_route_moved = direct_store_distance2 > 0.0L &&
+        direct_store_distance2 > direct_identity_distance2 * 9.0L &&
+        direct_store_distance2 > direct_read_distance2 * 9.0L;
+    bool swapped_route_moved = swapped_store_distance2 > 0.0L &&
+        swapped_store_distance2 > swapped_identity_distance2 * 9.0L &&
+        swapped_store_distance2 > swapped_read_distance2 * 9.0L;
+    bool route_state_response = all_windows_ok && all_unmultiplexed && bytes_restored &&
+        store_visible && direct_route_moved && swapped_route_moved;
+
+    char result_path[4096];
+    int n = snprintf(result_path, sizeof(result_path), "%s/F10_ROUTE_STATE_RESULT.json", output_root);
+    if (n <= 0 || (size_t)n >= sizeof(result_path)) return 1;
+    FILE *out = fopen(result_path, "w");
+    if (!out) {
+        fprintf(stderr, "cannot open result: %s\n", strerror(errno));
+        return 1;
+    }
+    fprintf(out, "{\n");
+    fprintf(out, "  \"schema_id\": \"%s\",\n", ROUTE_STATE_RESULT_SCHEMA);
+    fprintf(out, "  \"status\": \"%s\",\n", route_state_response ? "ROUTE_STATE_RESPONSE_FOUND" : "ROUTE_STATE_NOT_ESTABLISHED");
+    fprintf(out, "  \"claim_ceiling\": \"Route-state PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim\",\n");
+    fprintf(out, "  \"source_constraints\": {\"direct_msr_access\": false, \"voltage_access\": false, \"frequency_writes\": 0, \"experiment_owned_memory_only\": true},\n");
+    fprintf(out, "  \"carrier\": {\"line_count\": %zu, \"line_bytes\": %d, \"byte_count\": %zu, \"digest_kind\": \"fnv1a64\", \"initial_digest_hex\": \"0x%016" PRIx64 "\", \"final_digest_restored\": %s},\n",
+        carrier->line_count,
+        CACHE_LINE_BYTES,
+        carrier->byte_count,
+        initial_digest,
+        json_bool(final_digest_restored));
+    fprintf(out, "  \"selected_group\": \"primary_nb_coherence\",\n");
+    fprintf(out, "  \"group_open_rc\": {\"route_4_to_5\": %d, \"route_5_to_4\": %d, \"route_2_to_3\": %d, \"route_3_to_2\": %d},\n",
+        group_open_rc[0],
+        group_open_rc[1],
+        group_open_rc[2],
+        group_open_rc[3]);
+    fprintf(out, "  \"selected_events\": ");
+    print_group_defs(out, primary_group);
+    fprintf(out, ",\n");
+    fprintf(out, "  \"predeclared_observable\": {\"coordinate_x\": \"cache_block_commands_change_to_dirty / cpu_cycles_not_halted\", \"coordinate_y\": \"probe_responses_dirty / cpu_cycles_not_halted\", \"route_distance\": \"squared distance between route vectors\", \"promotion_law\": \"store route distance must exceed matching identity and read route controls by more than 3x magnitude for both 4_to_5_vs_2_to_3 and 5_to_4_vs_3_to_2\"},\n");
+    fprintf(out, "  \"routes\": [\n");
+    for (int route = 0; route < 4; route++) {
+        print_route_windows(out, &routes[route], ops, results[route], durations[route],
+            digest_before[route], digest_after[route], rc[route], initial_digest);
+        fprintf(out, "%s\n", route + 1 == 4 ? "" : ",");
+    }
+    fprintf(out, "  ],\n");
+    fprintf(out, "  \"route_distances_cycles_normalized_squared\": {\"direct_identity\": %.12Le, \"direct_read\": %.12Le, \"direct_store\": %.12Le, \"swapped_identity\": %.12Le, \"swapped_read\": %.12Le, \"swapped_store\": %.12Le},\n",
+        direct_identity_distance2,
+        direct_read_distance2,
+        direct_store_distance2,
+        swapped_identity_distance2,
+        swapped_read_distance2,
+        swapped_store_distance2);
+    fprintf(out, "  \"acceptance\": {\"all_windows_ok\": %s, \"all_unmultiplexed\": %s, \"bytes_restored\": %s, \"store_visible\": %s, \"direct_route_moved\": %s, \"swapped_route_moved\": %s, \"route_state_response\": %s}\n",
+        json_bool(all_windows_ok),
+        json_bool(all_unmultiplexed),
+        json_bool(bytes_restored),
+        json_bool(store_visible),
+        json_bool(direct_route_moved),
+        json_bool(swapped_route_moved),
+        json_bool(route_state_response));
+    fprintf(out, "}\n");
+    fclose(out);
+    printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"primary_nb_coherence\"}\n",
+        route_state_response ? "ROUTE_STATE_RESPONSE_FOUND" : "ROUTE_STATE_NOT_ESTABLISHED",
+        result_path);
+    return 0;
+}
+
 int main(int argc, char **argv) {
     const char *output_root = NULL;
     bool coherence_operator_mode = false;
     bool path_dependence_mode = false;
     bool path_dual_observe_mode = false;
     bool path_rw_observe_mode = false;
+    bool route_state_mode = false;
     if (argc == 3 && strcmp(argv[1], "--output-root") == 0) {
         output_root = argv[2];
     } else if (argc == 4 && strcmp(argv[1], "--coherence-operators") == 0 &&
@@ -1319,10 +1619,14 @@ int main(int argc, char **argv) {
                strcmp(argv[2], "--output-root") == 0) {
         path_rw_observe_mode = true;
         output_root = argv[3];
+    } else if (argc == 4 && strcmp(argv[1], "--route-state") == 0 &&
+               strcmp(argv[2], "--output-root") == 0) {
+        route_state_mode = true;
+        output_root = argv[3];
     } else if (argc == 2 && strcmp(argv[1], "--self-test") == 0) {
         return self_test();
     } else {
-        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root>\n", argv[0]);
+        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root>\n", argv[0]);
         return 2;
     }
     if (output_root[0] != '/') {
@@ -1361,6 +1665,11 @@ int main(int argc, char **argv) {
     }
     if (path_rw_observe_mode) {
         int rc = run_path_rw_observe_mode(output_root, &carrier, initial_digest);
+        free(carrier.bytes);
+        return rc;
+    }
+    if (route_state_mode) {
+        int rc = run_route_state_mode(output_root, &carrier, initial_digest);
         free(carrier.bytes);
         return rc;
     }

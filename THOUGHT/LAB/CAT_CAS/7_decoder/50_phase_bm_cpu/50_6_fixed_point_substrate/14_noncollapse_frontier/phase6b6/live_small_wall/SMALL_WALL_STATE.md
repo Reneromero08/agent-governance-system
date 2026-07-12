@@ -257,6 +257,114 @@ Marker:
 This does not establish path memory, noncommutation, physical holonomy, OrbitState
 coupling, fold-odd recovery, or a Small Wall crossing.
 
+### Route-state pilot
+
+A true route-state PMU discriminator was implemented and run by the read-only design
+subagent outside its assigned scope. The result is retained and classified rather than
+hidden.
+
+Run:
+
+`runs/f10_route_state_0`
+
+Checkpoint:
+
+`F10_ROUTE_STATE_PILOT_CHECKPOINT_20260712.json`
+
+Result:
+
+```text
+direct_identity 0.0
+direct_read     4.563630599506e-10
+direct_store    2.852816231303e-09
+swapped_identity 0.0
+swapped_read     1.738441003654e-12
+swapped_store    2.595097997643e-10
+```
+
+Acceptance:
+
+```text
+all_windows_ok        true
+all_unmultiplexed     true
+bytes_restored        true
+store_visible         true
+direct_route_moved    false
+swapped_route_moved   true
+route_state_response  false
+```
+
+The transaction completed with verified copy-back and remote cleanup. It performed zero
+CPU-frequency writes, zero voltage access, zero MSR reads, and zero MSR writes.
+Temperature stayed below the 68 C veto.
+
+Marker:
+
+`ROUTE_STATE_NOT_ESTABLISHED`
+
+This kills the simple route-vector distance discriminator. Store traffic is visible,
+but the predeclared direct-route movement did not clear the identity/read controls.
+
+This does not establish path memory, noncommutation, physical holonomy, OrbitState
+coupling, fold-odd recovery, or a Small Wall crossing.
+
+### Route comparison
+
+A matched route comparison ran cleanly after one compile-only mechanical repair.
+
+Runs:
+
+```text
+route 4->5  runs/f10_route45_ops_1
+route 2->3  runs/f10_route23_ops_1
+```
+
+Checkpoint:
+
+`F10_ROUTE_OPERATOR_COMPARISON_CHECKPOINT_20260712.json`
+
+Both accepted under the same source bundle:
+
+`53f9db4e7318c6f444f4b91a41e47bd18669572068571a3b2d886a011f8eddfd`
+
+Key counts:
+
+```text
+route 4->5:
+  change_to_dirty remote_store_same 2021
+  probe_dirty     remote_store_same 5710
+
+route 2->3:
+  change_to_dirty remote_store_same 1904
+  probe_dirty     remote_store_same 5512
+```
+
+Both runs had all windows unmultiplexed, carrier digest restoration accepted,
+temperature below the 68 C veto, copy-back verified, and remote cleanup verified. They
+performed zero CPU-frequency writes, zero voltage access, zero MSR reads, and zero MSR
+writes.
+
+The route 2->3 first attempt, `f10_route23_ops_0`, failed before worker execution on a
+strict compile warning from an existing unused route-helper slice. The retained local
+stderr is:
+
+`runs/f10_route23_ops_0/CONTROLLER_STDERR.txt`
+
+The exact compile defect was repaired by marking the unused helpers intentionally
+unused until a route-specific worker mode consumes them. The accepted rerun was
+`f10_route23_ops_1`.
+
+Marker:
+
+`ROUTE_STABLE_CONTROLLED_COHERENCE_OPERATOR_FOUND`
+
+This means simple route reassignment does not by itself expose the missing path
+invariant. At this level the controlled coherence operator is route-stable rather than
+route-selective.
+
+This does not establish path memory, noncommutation, physical holonomy, OrbitState
+coupling, fold-odd recovery, or a Small Wall crossing.
+
 ### Read/store same-core path pilot
 
 A same-observer read/store operator-pair pilot ran cleanly and was negative.
@@ -407,6 +515,8 @@ READONLY_OCCUPANCY_BASELINE_CLOSURE.json
 F10_PATH_DEPENDENCE_PILOT_CHECKPOINT_20260712.json
 F10_PATH_DUAL_OBSERVE_CHECKPOINT_20260712.json
 F10_PATH_RW_OBSERVE_CHECKPOINT_20260712.json
+F10_ROUTE_OPERATOR_COMPARISON_CHECKPOINT_20260712.json
+F10_ROUTE_STATE_PILOT_CHECKPOINT_20260712.json
 ```
 
 Historical V2 Gate A source was restored and should remain a sealed reference. New
@@ -503,9 +613,16 @@ traffic coordinates to baseline.
 4->5 and 2->3 with matched controls.
 
 **Current evidence:** Phase 6B.6 already treats route as context; the PMU route is live
-on cores 4 and 5 but route assignment 2->3 versus 4->5 has not been tested.
+on cores 4 and 5. `f10_route45_ops_1` and `f10_route23_ops_1` showed that the
+byte-preserving remote same-value store remains accepted on both route 4->5 and route
+2->3 under a matched source bundle.
 
-**Status:** alive.
+**Status:** alive, but simple route reassignment is not enough. The next H3 move would
+need a true route-state observable or route-conditioned loop, not just proving the
+same operator works on another core pair.
+`f10_route_state_0` then tested a direct route-state vector distance and was negative:
+one swapped route moved, but the direct route did not satisfy the predeclared controls.
+Keep H3 alive only for a stronger route-history observable.
 
 ### H4 - PDN complex response contains path area missed by scalar timing
 
@@ -598,6 +715,15 @@ The immediate cheap repair is not repetition. It is either:
 2. a carrier pivot to shared-L3/Northbridge route state or phase-native timing, because
    the simple cache-line path rectangles are currently dominated by first-touch,
    per-line, and route/order effects.
+
+The route comparison says route stability exists, but route reassignment alone is not
+the missing coordinate. Promote a true route-state observable only if it tests route
+history or route-conditioned loop closure directly.
+
+After `f10_route_state_0`, the cheapest next move is likely a carrier pivot rather than
+another scalar PMU route metric. The strongest remaining near-term opening is a
+phase-native or timing-coupled response that reuses the accepted occupancy sensor but
+adds explicit source-off, shuffle, and route controls before any OrbitState coupling.
 
 ## Current claim ceiling
 

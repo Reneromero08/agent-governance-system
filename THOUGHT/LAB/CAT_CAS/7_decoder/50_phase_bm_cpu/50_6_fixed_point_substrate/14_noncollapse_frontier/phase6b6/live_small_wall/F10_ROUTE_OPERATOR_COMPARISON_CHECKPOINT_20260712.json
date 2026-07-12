@@ -1,0 +1,120 @@
+{
+  "schema_id": "CAT_CAS_F10_ROUTE_OPERATOR_COMPARISON_CHECKPOINT_V1",
+  "classification": "ROUTE_STABLE_CONTROLLED_COHERENCE_OPERATOR_FOUND",
+  "claim_ceiling": "Route comparison for the controlled coherence operator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim.",
+  "claim_exclusions": [
+    "path memory",
+    "coherence holonomy",
+    "OrbitState coupling",
+    "fold-odd recovery",
+    "Small Wall crossing"
+  ],
+  "matched_source_binding": {
+    "source_bundle_sha256": "53f9db4e7318c6f444f4b91a41e47bd18669572068571a3b2d886a011f8eddfd",
+    "source_hashes": {
+      "f10_pmc_first_light_target.py": "8e633abee2d3b0fb8ff13b7bee75806f05c7749fbdda70a7f2dfa4feff659359",
+      "f10_pmc_first_light_worker.c": "3148f8d1e3d6eec18c99e79063e26c9457fbae5f62c0c3ee653fd530b9d7af04"
+    }
+  },
+  "runs": {
+    "route45": {
+      "run_id": "f10_route45_ops_1",
+      "local_run_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/f10_route45_ops_1",
+      "remote_run_path": "/root/catcas_live_small_wall/f10_route45_ops_1",
+      "command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_coherence_operators.py --run-id f10_route45_ops_1 --mode coherence-operators-route45",
+      "target_status": "F10_COHERENCE_OPERATOR_ROUTE45_TARGET_COMPLETE",
+      "worker_status": "CONTROLLED_COHERENCE_STATE_FOUND",
+      "copy_verified": true,
+      "remote_cleaned": true,
+      "temperature": {
+        "veto_c": 68.0,
+        "preflight_c": 50.5,
+        "post_c": 50.625,
+        "below_veto": true
+      },
+      "cores": {
+        "home_core": 4,
+        "observed_core": 5
+      },
+      "change_to_dirty": {
+        "identity": 0,
+        "remote_read_shared": 15,
+        "same_core_store_same_value": 1,
+        "remote_store_same_value": 2021
+      },
+      "probe_dirty": {
+        "identity": 0,
+        "remote_read_shared": 2855,
+        "same_core_store_same_value": 3,
+        "remote_store_same_value": 5710
+      }
+    },
+    "route23": {
+      "run_id": "f10_route23_ops_1",
+      "local_run_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/f10_route23_ops_1",
+      "remote_run_path": "/root/catcas_live_small_wall/f10_route23_ops_1",
+      "command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_coherence_operators.py --run-id f10_route23_ops_1 --mode coherence-operators-route23",
+      "target_status": "F10_COHERENCE_OPERATOR_ROUTE23_TARGET_COMPLETE",
+      "worker_status": "CONTROLLED_COHERENCE_STATE_FOUND",
+      "copy_verified": true,
+      "remote_cleaned": true,
+      "temperature": {
+        "veto_c": 68.0,
+        "preflight_c": 50.0,
+        "post_c": 50.125,
+        "below_veto": true
+      },
+      "cores": {
+        "home_core": 2,
+        "observed_core": 3
+      },
+      "change_to_dirty": {
+        "identity": 0,
+        "remote_read_shared": 21,
+        "same_core_store_same_value": 1,
+        "remote_store_same_value": 1904
+      },
+      "probe_dirty": {
+        "identity": 0,
+        "remote_read_shared": 2146,
+        "same_core_store_same_value": 2,
+        "remote_store_same_value": 5512
+      }
+    }
+  },
+  "mechanical_repair": {
+    "failed_run_id": "f10_route23_ops_0",
+    "failure_class": "compile-only strict-warning failure before worker execution",
+    "local_raw_stderr_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/f10_route23_ops_0/CONTROLLER_STDERR.txt",
+    "repair": "mark pre-existing route helper functions unused until a route-specific worker mode consumes them"
+  },
+  "acceptance": {
+    "route45_controlled_state_found": true,
+    "route23_controlled_state_found": true,
+    "same_source_bundle": true,
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "carrier_restored": true,
+    "temperature_below_veto": true,
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0
+  },
+  "interpretation": {
+    "result": "The byte-preserving remote same-value store remains a controlled coherence operator on both route 4-to-5 and route 2-to-3 under matched source.",
+    "surviving_wall": "Simple route reassignment does not by itself expose the missing path invariant. At this level the controlled operator is route-stable rather than route-selective.",
+    "next_discriminator": "Either build a true route-state mode from the existing route helpers, with route identity as the observable, or pivot to a phase-native/timing coordinate because simple cache-line PMU path rectangles are dominated by first-touch and per-line effects."
+  },
+  "focused_validation": [
+    {
+      "command": ".\\.venv\\Scripts\\python.exe -m py_compile THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\f10_pmc_first_light_target.py THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_coherence_operators.py",
+      "result": "pass"
+    },
+    {
+      "command": "wsl bash -lc 'cd \"/mnt/d/CCC 2.0/AI/agent-governance-system\" && cc -std=c11 -Wall -Wextra -Werror -pedantic -O2 -march=amdfam10 -mtune=amdfam10 -fno-lto -pthread -DCATCAS_CORE_A=2 -DCATCAS_CORE_B=3 THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/f10_pmc_first_light_worker.c -o /tmp/f10_route23_worker_check && /tmp/f10_route23_worker_check --self-test'",
+      "result": "pass",
+      "stdout": "F10_PMC_FIRST_LIGHT_WORKER_SELF_TEST_OK"
+    }
+  ]
+}
