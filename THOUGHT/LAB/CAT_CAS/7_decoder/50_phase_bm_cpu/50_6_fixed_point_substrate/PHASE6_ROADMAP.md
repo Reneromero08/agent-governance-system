@@ -1,11 +1,11 @@
 # Phase 6 Roadmap
 
 **Role:** master chronological task ledger.
-**Current head:** `PHASE6_V2_EXACT_HEAD_GATE_R_INTEGRATION_APPROVED__PHASE6B6_NOT_ENTERED`
+**Current head:** `PHASE6B6_FREQUENCY_PREPARATION_SOURCE_INTEGRATED__OWNER_DECISION_PENDING`
 **Binding directive:** `14_noncollapse_frontier/COURSE_CORRECTION.md`, `14_noncollapse_frontier/COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `14_noncollapse_frontier/PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
-**Immediate engineering gate:** V2 exact-head engineering qualification, source review, generated-head review, final evidence review, Gate R review, and project-owner Gate R integration approval are complete.
-**Immediate scientific gate:** Phase 6B.6 remains a separate future phase requiring separate explicit authority; Gate R integration approval does not authorize physical execution.
-**Next physical control:** reversed/randomized tone order, proposed but not authorized.
+**Immediate engineering gate:** Phase 6B.6 is entered; the target bundle and bounded Gate A engineering-smoke executor remain qualified. Two exact smoke authorities were consumed before physical runtime. The separate frequency preparation/restoration core, authority-gated transport, and process-custody repair are now integrated and exact-head reviewed, with no authority artifact and no live target action.
+**Immediate scientific gate:** Gate A engineering smoke is not complete or currently authorized. Gate A physical runtime, sender execution, capture, calibration, scientific acquisition, restoration, target coupling, fold-odd recovery, Gate B, and Small Wall work remain unauthorized.
+**Next engineering boundary:** `PROJECT_OWNER_DECISION_FOR_ONE_NO_RETRY_FREQUENCY_PREPARATION_QUALIFICATION_AUTHORITY`. No preparation authority exists, no target contact is authorized, and no third smoke attempt is authorized.
 **Observability acquisition:** not authorized.
 
 ---
@@ -354,10 +354,40 @@ Gate R integration: approved
 Gate R reviewer: assistant review chain
 project-owner approval: complete
 separate external-human review pending: false
-Phase 6B.6: not entered
-phase6b6_entered: false
+Phase 6B.6: entered
+phase6b6_entered: true
+target_bundle_qualified: true
+engineering_smoke_executor_implemented: true
+engineering_smoke_complete: false
+engineering_smoke_authorized: false
+active_execution_authority_artifact_present: false
+consumed_execution_authorities: 2
+first_authorized_attempt: failed closed before physical runtime because temperature was unobservable
+second_authorized_attempt: failed closed before physical runtime on frequency veto; core 4 = 800000 kHz; core 5 = 800000 kHz; required = 1600000 kHz
+gate_a_physical_runtime_executions: 0
+gate_a_sender_starts: 0
+gate_a_capture_starts: 0
 hardware_ran: false
-authorization_artifact_created: false
+frequency_precondition_observation: FAIL_REQUIRED_FREQUENCY_NOT_OBSERVED
+frequency_precondition_evidence: 14_noncollapse_frontier/phase6b6/evidence/gate_a_frequency_precondition_observation_dde70523_01
+frequency_precondition_source_commit: dde70523d639d34defa37f1b55982e789ea52c18
+frequency_precondition_evidence_commit: f617e288d93eb20d3845356b4c233d15d8cf5c2d
+frequency_precondition_source_review_comment: 4948537605
+frequency_precondition_samples: 200 paired samples at 10 ms; both cores always 800000 kHz; 1600000 kHz supported but never observed as a pair
+frequency_precondition_integration_commit: 8726b3d92e80fe4c3047f0b9708248d0da0c92ea
+frequency_preparation_restoration_source_integrated: true
+frequency_preparation_restoration_reviewed_head: 1d096f15839aa9f12c2099ff44aeab9822244e0f
+frequency_preparation_restoration_integration_commit: 3cf5ae149251d0ba1e77a3c018177dba1e055e00
+frequency_preparation_authority_transport_integrated: true
+frequency_preparation_authority_transport_reviewed_head: 5c40a467fc8a1d38cee043293064b3f3cb18339e
+frequency_preparation_authority_transport_integration_commit: f095f30de4821e15587b0f0e86a0842ce2d5aa5c
+frequency_preparation_process_custody_reviewed_head: 6576ae4024a3fe5d813a559a079e705b8f1b30b2
+frequency_preparation_process_custody_integration_commit: 726f036f0021bdda90513430f4f0cca35aa65668
+frequency_preparation_authority_artifact_present: false
+live_frequency_preparation_authorized: false
+preparation_qualification_authorized: false
+target_contact_authorized: false
+third_engineering_smoke_attempt_authorized: false
 calibration_authorized: false
 scientific_acquisition_authorized: false
 restoration_authorized: false
@@ -395,7 +425,24 @@ Output: `14_noncollapse_frontier/gate_r/GATE_R_INTEGRATION_APPROVAL.json`, using
 
 ### Phase 6B.6 — Physical observability/operator identification
 
-Only after carrier scope is frozen, Gate R is accepted, and explicit acquisition authorization is recorded:
+Phase 6B.6 has been entered through the approved software-entry boundary. The target-qualified bundle and bounded executor exist, but no Gate A physical runtime has begun:
+
+- [x] qualify the target execution bundle
+- [x] implement and non-driving-test the frozen Gate A engineering-smoke executor
+- [x] preserve the first owner-authorized attempt as fail-closed on unobservable temperature before physical runtime
+- [x] preserve the second owner-authorized attempt as fail-closed on the `800000 kHz` versus `1600000 kHz` frequency veto before physical runtime
+- [x] seal the read-only frequency-precondition observation at `14_noncollapse_frontier/phase6b6/evidence/gate_a_frequency_precondition_observation_dde70523_01`, commit `f617e288d93eb20d3845356b4c233d15d8cf5c2d`
+- [x] establish from 200 paired `10 ms` samples that cores 4 and 5 remained at `800000 kHz`; the required `1600000 kHz` is supported but was never observed as a pair
+- [x] independently validate and integrate the sealed frequency-observation evidence in `8726b3d92e80fe4c3047f0b9708248d0da0c92ea`
+- [x] implement, exact-head review, and integrate the bounded frequency preparation/restoration core in `3cf5ae149251d0ba1e77a3c018177dba1e055e00`
+- [x] implement, exact-head review, and integrate the authority-gated transport in `f095f30de4821e15587b0f0e86a0842ce2d5aa5c`
+- [x] close the transport process-custody self-hit and integrate the exact-head-reviewed repair in `726f036f0021bdda90513430f4f0cca35aa65668`
+- [ ] receive a project-owner decision for one no-retry frequency-preparation qualification authority
+- [ ] if approved, create one exact authority artifact before any target contact
+
+Current boundary: neither an active Gate A execution authority nor a frequency-preparation authority exists. Live preparation, target contact, a third smoke attempt, Gate A physical runtime, sender execution, capture, calibration, scientific acquisition, restoration beyond the bounded preparation transaction, target coupling, fold-odd recovery, Gate B, and Small Wall work remain unauthorized.
+
+Only after the current boundary is closed and explicit acquisition authorization is recorded:
 
 - [ ] freeze acquisition cadence, TSC alignment, routes, sessions, schedules, and splits
 - [ ] collect idle covariance from training sessions only
@@ -459,6 +506,14 @@ One positive does not authorize Big Wall generalization.
 | V1 combined-observability campaign | Permanent negative adjudication; no stable predictive operator |
 | V2 executor/calibration architecture | Exact generated head qualified as software engineering object; not hardware-executed or scientifically authorized |
 | V2 generated-contract and evidence chain | Reviewed, regenerated, hosted-qualified, sealed-target-qualified, evidence-bound at `500f7dfcd198e6e70dc3f999248aa61224d530cd`, and Gate R integration-approved |
+| Phase 6B.6 entry | Entered through the approved software-entry boundary; later physical and scientific gates remain separately controlled |
+| Gate A target bundle and executor | Target bundle qualified and bounded engineering-smoke executor implemented; physical runtime, sender, and capture counts remain zero |
+| First authorized Gate A attempt | Authority consumed; failed closed on unobservable temperature before physical runtime; evidence sealed at `gate_a_engineering_smoke_7e1e8835` |
+| Second authorized Gate A attempt | Authority consumed; temperature passed at `38.5 C`, then frequency vetoed at `800000 kHz` on cores 4 and 5 versus `1600000 kHz` required; physical runtime did not begin; evidence sealed at `gate_a_engineering_smoke_1dabfc7b` |
+| Frequency-precondition observation | `FAIL_REQUIRED_FREQUENCY_NOT_OBSERVED`; 200 paired `10 ms` samples remained at `800000 kHz` on both cores, although `1600000 kHz` is supported |
+| Frequency preparation/restoration core | Implemented, synthetic-tested, exact-head reviewed, and integrated at `3cf5ae149251d0ba1e77a3c018177dba1e055e00`; live writes not authorized |
+| Frequency preparation authority transport | Implemented, exact-head reviewed, process-custody repaired, and integrated through `726f036f0021bdda90513430f4f0cca35aa65668`; no authority artifact or target contact authorized |
+| Gate A engineering smoke | Not completed; no active execution authority and no third attempt authorized |
 | Reversed/randomized tone-order control | Selected but not designed, reviewed, or authorized |
 | Software `.holo` geometric memory | Supported at L1/L2 |
 | History-backed software restoration | Supported |
