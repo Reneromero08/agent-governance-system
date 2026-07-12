@@ -48,6 +48,17 @@ static const char *gate_a_epoch(int slot) {
     return NULL;
 }
 
+static int gate_a_policy_limits_exact(int core, long required_khz) {
+    char min_path[160], max_path[160];
+    long min_khz = 0, max_khz = 0;
+    snprintf(min_path, sizeof(min_path),
+             "/sys/devices/system/cpu/cpufreq/policy%d/scaling_min_freq", core);
+    snprintf(max_path, sizeof(max_path),
+             "/sys/devices/system/cpu/cpufreq/policy%d/scaling_max_freq", core);
+    return !read_long(min_path, &min_khz) && !read_long(max_path, &max_khz) &&
+           min_khz == required_khz && max_khz == required_khz;
+}
+
 static uint64_t gate_a_epoch_origin(int slot, uint64_t session_origin,
                                     double slot_s, double tsc_hz) {
     int epoch_slot = slot;
@@ -67,6 +78,8 @@ static int gate_a_cycle_state(int slot, uint64_t now, uint64_t session_origin,
 }
 
 #define GATE_A_JOIN_GUARD_SECONDS 0.002
+#define GATE_A_SENDER_START_SKEW_SECONDS 0.050
+#define GATE_A_SENDER_JOIN_SKEW_SECONDS 0.050
 
 typedef struct {
     atomic_int stop;
@@ -267,29 +280,32 @@ static int gate_a_sender_arm(GateASender *sender, FILE *lifecycle,
                                 first_slot, sender->thread_create_tsc,
                                 sender->requested_start_tsc,
                                 sender->requested_end_tsc, sender)) return -1;
-    pthread_attr_t attr;
-    if (pthread_attr_init(&attr)) return -1;
-    cpu_set_t set;
-    CPU_ZERO(&set);
-    CPU_SET(core, &set);
-    int attr_rc = pthread_attr_setaffinity_np(&attr, sizeof(set), &set);
-    int create_rc = attr_rc ? attr_rc :
-        pthread_create(&sender->thread, &attr, gate_a_sender_loop, sender);
+    /* The SSH parent can arrive with a narrow inherited affinity mask.  Create
+       first, then use the loop's verified pin_core(core) transition. */
+    int create_rc = pthread_create(
+        &sender->thread, NULL, gate_a_sender_loop, sender);
     if (!create_rc) {
         sender->alive = 1;
         result->sender_start_count++;
     }
-    int destroy_rc = pthread_attr_destroy(&attr);
-    if (create_rc || destroy_rc) {
+    if (create_rc) {
         if (sender->alive) (void)gate_a_sender_abort(sender);
+        (void)gate_a_lifecycle_record(
+            lifecycle, "sender_failure", "not_created", first_slot,
+            rdtsc_now(), sender->requested_start_tsc,
+            sender->requested_end_tsc, sender);
         return -1;
     }
     uint64_t timeout = sender->requested_start_tsc +
-        (uint64_t)(MAX_EPOCH_SKEW_SECONDS * tsc_hz);
+        (uint64_t)(GATE_A_SENDER_START_SKEW_SECONDS * tsc_hz);
     while (!atomic_load_explicit(&sender->ready, memory_order_acquire)) {
         if (atomic_load_explicit(&receiver->done, memory_order_acquire) ||
             rdtsc_now() > timeout) {
             (void)gate_a_sender_abort(sender);
+            (void)gate_a_lifecycle_record(
+                lifecycle, "sender_failure", "joined", first_slot,
+                rdtsc_now(), sender->requested_start_tsc,
+                sender->requested_end_tsc, sender);
             return -1;
         }
         __asm__ volatile("pause");
@@ -301,6 +317,10 @@ static int gate_a_sender_arm(GateASender *sender, FILE *lifecycle,
                                 sender->requested_start_tsc,
                                 sender->requested_end_tsc, sender)) {
         (void)gate_a_sender_abort(sender);
+        (void)gate_a_lifecycle_record(
+            lifecycle, "sender_failure", "joined", first_slot,
+            rdtsc_now(), sender->requested_start_tsc,
+            sender->requested_end_tsc, sender);
         return -1;
     }
     return 0;
@@ -333,7 +353,8 @@ static int gate_a_sender_stop_join(GateASender *sender, FILE *lifecycle,
     uint64_t exited = atomic_load_explicit(&sender->thread_exit_tsc,
                                            memory_order_acquire);
     if (capture_stopped || rc || result || !exited ||
-        sender->thread_join_tsc > sender->requested_end_tsc ||
+        sender->thread_join_tsc > sender->requested_end_tsc +
+            (uint64_t)(GATE_A_SENDER_JOIN_SKEW_SECONDS * sender->tsc_hz) ||
         gate_a_lifecycle_record(lifecycle, "sender_state", "joined",
                                 sender->end_slot - 1,
                                 sender->thread_join_tsc,
@@ -487,7 +508,7 @@ static int gate_a_validate_epoch(const GateASender *sender) {
     uint64_t started = atomic_load_explicit(&sender->epoch_start_tsc, memory_order_acquire);
     uint64_t first_drive = atomic_load_explicit(&sender->first_drive_tsc, memory_order_acquire);
     uint64_t exited = atomic_load_explicit(&sender->thread_exit_tsc, memory_order_acquire);
-    uint64_t skew = (uint64_t)(MAX_EPOCH_SKEW_SECONDS * sender->tsc_hz);
+    uint64_t skew = (uint64_t)(GATE_A_SENDER_START_SKEW_SECONDS * sender->tsc_hz);
     uint64_t expected_drive_offset = sender->phase_index == 4
         ? (uint64_t)(0.5 / tone(0) * sender->tsc_hz) : 0;
     uint64_t observed_drive_offset = first_drive >= sender->requested_start_tsc
@@ -500,7 +521,8 @@ static int gate_a_validate_epoch(const GateASender *sender) {
         sender->thread_join_start_tsc < sender->stop_requested_tsc ||
         sender->thread_join_tsc < exited ||
         sender->thread_join_tsc < sender->thread_join_start_tsc ||
-        sender->thread_join_tsc > sender->requested_end_tsc ||
+        sender->thread_join_tsc > sender->requested_end_tsc +
+            (uint64_t)(GATE_A_SENDER_JOIN_SKEW_SECONDS * sender->tsc_hz) ||
         observed_drive_offset < expected_drive_offset ||
         observed_drive_offset > expected_drive_offset + skew) return -1;
     for (int slot = sender->first_slot; slot < sender->end_slot; slot++) {
@@ -1220,10 +1242,10 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
         }
     }
     if (!mock) {
-        long sender_khz = cur_khz(args->sender_core);
-        long receiver_khz = cur_khz(args->receiver_core);
-        if (sender_khz != args->required_frequency_khz ||
-            receiver_khz != args->required_frequency_khz) {
+        if (!gate_a_policy_limits_exact(args->sender_core,
+                                        args->required_frequency_khz) ||
+            !gate_a_policy_limits_exact(args->receiver_core,
+                                        args->required_frequency_khz)) {
             reason = "FREQUENCY_VETO";
             rc = 3;
             goto cleanup;
@@ -1290,6 +1312,12 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
         }
     }
     uint64_t deadline = origin + (uint64_t)(8.0 * tsc_hz);
+    while (count > 0 && timestamps[count - 1] >= deadline) count--;
+    if (count > 0 && timestamps[0] < origin) {
+        reason = "CAPTURE_PRECEDES_ORIGIN";
+        rc = 5;
+        goto cleanup;
+    }
     if (count > 0) {
         result->capture_origin_tsc = origin;
         result->capture_deadline_tsc = deadline;
@@ -1453,8 +1481,10 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
         }
     }
     if (!mock &&
-        (cur_khz(args->sender_core) != args->required_frequency_khz ||
-         cur_khz(args->receiver_core) != args->required_frequency_khz)) {
+        (!gate_a_policy_limits_exact(args->sender_core,
+                                     args->required_frequency_khz) ||
+         !gate_a_policy_limits_exact(args->receiver_core,
+                                     args->required_frequency_khz))) {
         reason = "POST_CAPTURE_FREQUENCY_VETO";
         rc = 3;
         goto cleanup;

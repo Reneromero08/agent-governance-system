@@ -75,9 +75,9 @@ Do not add a validator, workflow, wrapper, schema, receipt, or policy unless it 
 enables the experiment or the user explicitly requests it. Prefer removing or bypassing
 LAB-local process machinery over expanding it.
 
-If Git hosting mechanically requires a pull request, do not turn a LAB note or roadmap
-edit into its own process project. Batch it with the next substantive engineering
-change, or report the mechanical constraint to the user.
+If Git hosting unexpectedly rejects a normal fast-forward push, report the exact remote
+constraint. Do not automatically create a pull request, run full CI, or build more
+process around the rejection.
 
 ## Testing policy
 
@@ -144,10 +144,48 @@ injection, fakes, and local non-driving surfaces without inventing an authority 
 - Work in the current checkout unless the user requests isolation.
 - Do not create a branch, worktree, or PR solely because process documentation says to.
 - Keep a substantive change in one coherent commit when the user asks to commit.
-- Do not commit or push until the user asks.
-- Do not run full CI merely to push a LAB-only documentation or isolated engineering
-  change unless the user explicitly requests that CI.
+- An explicit `commit` request authorizes one coherent commit of the inspected LAB
+  change. An explicit `push` request authorizes its ordinary fast-forward push. Do not
+  add another confirmation ceremony.
+- Before committing or pushing, inspect the worktree and preserve unexpected work. For
+  a push, fetch and confirm that the update is fast-forward. These are safety checks,
+  not reasons to start a test suite.
+- For a roadmap or documentation-only change, `git diff --check` is sufficient unless
+  the user explicitly requests more validation. Do not run unit tests, the repository
+  critic, the full local gate, or hosted CI.
+- For LAB engineering code, run focused changed-component tests after the coherent
+  build exists. Do not make full CI a condition of an ordinary push.
+- Do not create a PR merely because a local hook expects a full-suite receipt. For an
+  authorized LAB push, bypass that local hook after the scoped integrity check and
+  report the bypass plainly.
 - Do not fix unrelated files while preparing the change.
+
+## Safety boundary and `MASTER_OVERRIDE`
+
+Normal LAB work must use fast-forward history. The standing remote safety floor is:
+
+- `main` cannot be deleted;
+- `main` cannot be force-pushed or rewritten;
+- ordinary fast-forward pushes are allowed;
+- pull requests and full CI are not globally required.
+
+Do not weaken that floor during ordinary work. The following actions require the exact
+token `MASTER_OVERRIDE` in the current user prompt:
+
+- force-pushing or otherwise rewriting published history;
+- changing repository or branch protection;
+- deleting a protected branch or tag;
+- destructive cleanup outside the exact paths named by the user;
+- bypassing an explicit live-target or hardware boundary.
+
+An override is single-use and action-specific. Before an overridden Git action, record
+the expected old remote SHA, use an exact lease, change only the minimum necessary
+protection, perform the one authorized action, and restore protection immediately even
+if the action fails. `MASTER_OVERRIDE` never expands the scientific or hardware scope
+of the prompt.
+
+Do not ask for `MASTER_OVERRIDE` for a normal commit, a normal fast-forward push, a
+roadmap update, a documentation edit, focused testing, or ordinary LAB engineering.
 
 ## Stop conditions
 

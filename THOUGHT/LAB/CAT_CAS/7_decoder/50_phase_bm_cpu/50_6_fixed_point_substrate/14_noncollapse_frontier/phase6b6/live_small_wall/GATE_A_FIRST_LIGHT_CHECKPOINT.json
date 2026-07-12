@@ -1,0 +1,66 @@
+{
+  "schema_id": "CAT_CAS_GATE_A_FIRST_LIGHT_CHECKPOINT_V1",
+  "milestone": "GATE_A_FIRST_LIGHT",
+  "starting_commit": "0cb7ec49845f54b2e8ab67758c315c40c2077078",
+  "run_id": "gate_a_first_light_20260711i",
+  "target": "root@192.168.137.100",
+  "command": ".venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_gate_a_first_light.py --run-id gate_a_first_light_20260711i",
+  "local_raw_root": "phase6b6/live_small_wall/runs/gate_a_first_light_20260711i",
+  "source_bundle_sha256": "8bcbe9f56cfedb6b1f1d60f38baa30f686e3a6ded84f1be8c59740f05c58ae65",
+  "schedule_sha256": "418ff6e9801ba5def3f17fb25c7d56f044599e6e5bc8cc3260e0368d4877d116",
+  "status": "GATE_A_FIRST_LIGHT_COMPLETE",
+  "physical_result": {
+    "slot_count": 16,
+    "sample_count": 63985,
+    "slot_sample_counts": [3999, 3999, 3999, 3999, 3999, 3999, 3999, 3999, 3999, 3999, 3999, 3999, 3999, 4000, 3999, 3999],
+    "capture_tsc_hz": 3214782543.762586,
+    "step_sender_epoch_count": 1,
+    "sender_start_count": 3,
+    "receiver_start_count": 1,
+    "pinned_settle_exact_pair_count": 20,
+    "pinned_observation_exact_pair_count": 200,
+    "runtime_monitor_sample_count": 83,
+    "runtime_monitor_max_temperature_c": 44.0,
+    "native_pre_temperature_c": 43.5,
+    "native_post_temperature_c": 43.5
+  },
+  "first_light_analysis": {
+    "step_mean_lockin_magnitude": 0.7516808471681746,
+    "off_mean_lockin_magnitude": 0.10001039900405244,
+    "step_minus_off_lockin_magnitude": 0.6516704481641222,
+    "step_vs_off_exact_permutation_p": 0.000999000999000999,
+    "positive_anchor_mean_lockin_magnitude": 0.5271591646168163,
+    "negative_anchor_mean_lockin_magnitude": 0.4678281908378659,
+    "anchor_phase_delta_rad": -3.0189059864780456,
+    "anchor_opposed_within_pi_over_4": true,
+    "engineering_first_light_candidate": true
+  },
+  "restoration": {
+    "complete": true,
+    "policy4_restored_min_khz": 800000,
+    "policy4_restored_max_khz": 3200000,
+    "policy5_restored_min_khz": 800000,
+    "policy5_restored_max_khz": 3200000,
+    "forbidden_processes_after": [],
+    "remote_copy_verified": true,
+    "remote_run_removed_after_verified_copy": true,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0
+  },
+  "retained_hashes": {
+    "FINAL_RESULT.json": "8b8b13addc9152f6fc6ba67a99093a364a1cfdb117df3f0ed50cddc8011fad75",
+    "FIRST_LIGHT_ANALYSIS.json": "65ee851d86d9b7680262bc42ceec38fa26ecdf0805817ebc5488afee299255f4",
+    "runtime/raw_samples.bin": "46e1ebc816c6f38b09264f744e936edf580484cf0db252c98e4437cbc1c3002b",
+    "runtime/LOCKIN_IQ.jsonl": "311d732f21fb2e3eb49a3ebc4b9b8bd52c4186cf101a1200014fa74422692c93",
+    "runtime/SENDER_LIFECYCLE.jsonl": "427fdebae65f9a09fcbaaa8c12c1f09756bc71c05ba5c737c59e17e7144d11a9"
+  },
+  "mechanism_repairs": [
+    "added bounded sysfs readback settling for the target's 4000 us transition latency",
+    "replaced idle scaling_cur_freq preflight with exact policy bounds plus loaded and schedule-aware observation",
+    "removed redundant creation-time sender affinity and retained verified in-thread pinning",
+    "separated sender startup and join accounting tolerances from 5 ms capture transition tolerance",
+    "clamped the capture primitive's single post-deadline overshoot sample to the declared half-open interval"
+  ],
+  "claim_ceiling": "single-run engineering first light; observable carrier state, physical restoration R2, target coupling, and Small Wall crossing are not yet established"
+}
