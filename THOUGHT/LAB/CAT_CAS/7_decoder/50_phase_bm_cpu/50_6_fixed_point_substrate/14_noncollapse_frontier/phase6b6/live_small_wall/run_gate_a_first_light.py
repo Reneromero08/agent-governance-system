@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deploy, run, copy back, verify, and clean one Gate A first-light slice."""
+"""Deploy, run, copy back, verify, and clean one Gate A lab-device slice."""
 
 from __future__ import annotations
 
@@ -90,6 +90,8 @@ def execute(run_id: str, *, pilot_variant: str, keep_remote: bool) -> dict[str, 
         pilot_variant in {
             "pn", "np", "anchor-sham", "impulse", "step-sham",
             "phase-forward", "phase-reverse",
+            "value-forward", "value-reverse", "value-equal",
+            "occupancy-forward", "occupancy-reverse", "occupancy-equal",
         },
         "pilot variant is not closed",
     )
@@ -177,6 +179,8 @@ def parse_args() -> argparse.Namespace:
         choices=(
             "pn", "np", "anchor-sham", "impulse", "step-sham",
             "phase-forward", "phase-reverse",
+            "value-forward", "value-reverse", "value-equal",
+            "occupancy-forward", "occupancy-reverse", "occupancy-equal",
         ),
         default="pn",
     )

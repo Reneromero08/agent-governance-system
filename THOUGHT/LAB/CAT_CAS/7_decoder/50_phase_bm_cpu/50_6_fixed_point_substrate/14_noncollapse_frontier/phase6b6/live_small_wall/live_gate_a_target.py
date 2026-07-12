@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Direct user-authorized Gate A first-light transaction on the CAT_CAS target.
+"""Direct user-authorized Gate A first-light transaction on the CAT_CAS lab device.
 
 This joins the existing frequency preparation core to the existing Gate A C
 runtime.  It creates no authority artifact and contains no voltage or MSR API.
@@ -541,6 +541,9 @@ def exact_permutation_p(step: list[float], off: list[float]) -> float:
 def analyze_runtime(runtime_root: Path, pilot_variant: str) -> dict[str, Any]:
     lockin = [json.loads(line) for line in (runtime_root / "LOCKIN_IQ.jsonl").read_text().splitlines() if line]
     require(len(lockin) == 16, "expected 16 lock-in records")
+    measurement_modes = {str(row.get("measurement_mode", "ring_period_cycles")) for row in lockin}
+    require(len(measurement_modes) == 1, "measurement mode drift")
+    measurement_mode = measurement_modes.pop()
     raw_bytes = (runtime_root / "raw_samples.bin").read_bytes()
     require(len(raw_bytes) % 16 == 0, "raw sample file is not packed Qd records")
     raw = [record for record in struct.iter_unpack("<Qd", raw_bytes)]
@@ -579,7 +582,9 @@ def analyze_runtime(runtime_root: Path, pilot_variant: str) -> dict[str, Any]:
                 "token": row["token"],
                 "sample_count": len(values),
                 "mean_ring_period": statistics.fmean(values),
+                "mean_response_cycles": statistics.fmean(values),
                 "stdev_ring_period": statistics.pstdev(values),
+                "stdev_response_cycles": statistics.pstdev(values),
             }
         )
 
@@ -591,6 +596,7 @@ def analyze_runtime(runtime_root: Path, pilot_variant: str) -> dict[str, Any]:
     return {
         "schema_id": "CAT_CAS_GATE_A_FIRST_LIGHT_ANALYSIS_V1",
         "pilot_variant": pilot_variant,
+        "measurement_mode": measurement_mode,
         "executed_anchor_order": {
             "pn": ["positive", "negative"],
             "np": ["negative", "positive"],
@@ -599,6 +605,12 @@ def analyze_runtime(runtime_root: Path, pilot_variant: str) -> dict[str, Any]:
             "step-sham": ["positive", "negative"],
             "phase-forward": ["positive", "negative"],
             "phase-reverse": ["positive", "negative"],
+            "value-forward": ["positive", "negative"],
+            "value-reverse": ["positive", "negative"],
+            "value-equal": ["positive", "negative"],
+            "occupancy-forward": ["positive", "negative"],
+            "occupancy-reverse": ["positive", "negative"],
+            "occupancy-equal": ["positive", "negative"],
         }[pilot_variant],
         "groups": summaries,
         "step_minus_off_magnitude": step_mean - off_mean,
@@ -638,6 +650,8 @@ def execute(source_root: Path, output_root: Path, pilot_variant: str) -> dict[st
         pilot_variant in {
             "pn", "np", "anchor-sham", "impulse", "step-sham",
             "phase-forward", "phase-reverse",
+            "value-forward", "value-reverse", "value-equal",
+            "occupancy-forward", "occupancy-reverse", "occupancy-equal",
         },
         "unknown pilot variant",
     )
@@ -776,6 +790,8 @@ def parse_args() -> argparse.Namespace:
         choices=(
             "pn", "np", "anchor-sham", "impulse", "step-sham",
             "phase-forward", "phase-reverse",
+            "value-forward", "value-reverse", "value-equal",
+            "occupancy-forward", "occupancy-reverse", "occupancy-equal",
         ),
         default="pn",
     )

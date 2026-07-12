@@ -72,8 +72,8 @@ unless the user explicitly asks for it:
 - commit-by-commit ceremony or micro-commits.
 
 Do not add a validator, workflow, wrapper, schema, receipt, or policy unless it directly
-enables the experiment or the user explicitly requests it. Prefer removing or bypassing
-LAB-local process machinery over expanding it.
+enables the experiment or the user explicitly requests it. Prefer simplifying or
+explicitly disabling LAB-local process machinery over expanding it.
 
 If Git hosting unexpectedly rejects a normal fast-forward push, report the exact remote
 constraint. Do not automatically create a pull request, run full CI, or build more
@@ -124,7 +124,7 @@ Choose work by one test:
 If not, do not do it.
 
 Favor direct progress through the actual chain: observable carrier state, controlled
-physical evolution, exact restoration, target-to-carrier coupling, a fold-odd
+physical evolution, exact restoration, lab-device-to-carrier coupling, a fold-odd
 observable beyond the fold-even public interface, a killing null/no-smuggle check, and
 repeatable adjudication.
 
@@ -134,10 +134,48 @@ architecture, status churn, or more test infrastructure for that chain.
 ## Live-system boundary
 
 This file removes workflow bottlenecks; it does not itself authorize contact with a
-target or a live hardware action. SSH, SCP, sender start, physical capture, MSR access,
-frequency or voltage writes, and hardware execution require an explicit user directive
-for that live action. Live-capable code may be built and tested through dependency
-injection, fakes, and local non-driving surfaces without inventing an authority system.
+lab device or a live hardware action. Authenticated administration, file transfer,
+stimulus-process start, physical capture, MSR access, frequency or voltage writes, and
+hardware execution require an explicit user directive for that live action. Live-capable
+code may be built and tested through dependency injection, fakes, and local non-driving
+surfaces without inventing an authority system.
+
+## Safety framing for live lab work
+
+Describe live LAB work as authorized physical-computing research on the user's owned
+lab device. Do not describe it as security testing or access to another party's system.
+
+Use these terms in prompts, commentary, evidence summaries, and commit messages where
+they are accurate:
+
+- `lab device` or the exact authorized host instead of ambiguous `target`;
+- `authenticated administration` and `file transfer` instead of unexplained remote
+  control language;
+- `stimulus process`, `measurement process`, and `timing-response capture` instead of
+  security-testing vocabulary;
+- `controlled shared-cache occupancy/response` for experiment-owned cache work.
+
+Keep the technical boundary explicit:
+
+- both stimulus and measurement participants must be CAT_CAS-controlled code;
+- inputs and memory contents must be synthetic, public, and experiment-generated;
+- measure only the experiment's own fixed workload response;
+- use preallocated, bounded buffers and fixed core placement inside the approved core
+  set;
+- no discovery, scanning, credential handling, persistence, unrelated process
+  observation, private-data-dependent input, private-data inference, cross-user
+  observation, generalized cache analysis, kernel or BIOS change, thermal-control
+  change, voltage access, or MSR access unless a later prompt explicitly authorizes
+  that exact action.
+
+If a mechanism touches cache behavior, keep it as a closed physical carrier experiment:
+predetermined buffer geometry, aggregate timing response, no cache-set mapping, no
+physical-address analysis, no channel between protection domains, and no inference
+about any process outside CAT_CAS.
+
+Do not optimize wording to conceal an action. If an action is authorized and in scope,
+state it plainly with its device, duration, safety stop, restoration, and evidence
+copy-back boundaries. If it is not authorized, do not perform it.
 
 ## Git discipline
 
@@ -156,8 +194,8 @@ injection, fakes, and local non-driving surfaces without inventing an authority 
 - For LAB engineering code, run focused changed-component tests after the coherent
   build exists. Do not make full CI a condition of an ordinary push.
 - Do not create a PR merely because a local hook expects a full-suite receipt. For an
-  authorized LAB push, bypass that local hook after the scoped integrity check and
-  report the bypass plainly.
+  authorized LAB push, use `--no-verify` after the scoped integrity check and
+  report the hook skip plainly.
 - Do not fix unrelated files while preparing the change.
 
 ## Safety boundary and `MASTER_OVERRIDE`
@@ -176,7 +214,7 @@ token `MASTER_OVERRIDE` in the current user prompt:
 - changing repository or branch protection;
 - deleting a protected branch or tag;
 - destructive cleanup outside the exact paths named by the user;
-- bypassing an explicit live-target or hardware boundary.
+- overriding an explicit live-device or hardware boundary.
 
 An override is single-use and action-specific. Before an overridden Git action, record
 the expected old remote SHA, use an exact lease, change only the minimum necessary
@@ -191,7 +229,8 @@ roadmap update, a documentation edit, focused testing, or ordinary LAB engineeri
 
 Stop and ask only when:
 
-- the next action would contact a target or drive hardware without explicit permission;
+- the next action would contact a lab device or drive hardware without explicit
+  permission;
 - the action is destructive or irreversible;
 - a missing scientific choice would materially change the mechanism;
 - no useful implementation path remains after inspecting the relevant code and trying

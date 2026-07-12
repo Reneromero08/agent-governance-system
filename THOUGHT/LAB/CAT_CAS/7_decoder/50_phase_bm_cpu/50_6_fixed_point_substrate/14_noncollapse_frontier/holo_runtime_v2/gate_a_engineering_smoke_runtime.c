@@ -19,6 +19,9 @@ static const char *gate_a_tokens[16] = {
 
 static int gate_a_pilot_variant = GATE_A_PILOT_PN;
 
+/* Closed CAT_CAS-owned shared-cache response geometry.  These buffers contain
+   only synthetic experiment data.  The experiment uses no address discovery,
+   cache-set mapping, flush instruction, or observation outside this runtime. */
 #ifdef GATE_A_COMPILED_AUTHORITY_SHA256
 static const char *gate_a_runtime_authority_sha256 =
     GATE_A_COMPILED_AUTHORITY_SHA256;
@@ -52,6 +55,75 @@ static int gate_a_split_step(void) {
            gate_a_pilot_variant == GATE_A_PILOT_PHASE_REVERSE;
 }
 
+static int gate_a_value_pilot(void) {
+    return gate_a_pilot_variant == GATE_A_PILOT_VALUE_FORWARD ||
+           gate_a_pilot_variant == GATE_A_PILOT_VALUE_REVERSE ||
+           gate_a_pilot_variant == GATE_A_PILOT_VALUE_EQUAL;
+}
+
+static int gate_a_occupancy_pilot(void) {
+    return gate_a_pilot_variant == GATE_A_PILOT_OCCUPANCY_FORWARD ||
+           gate_a_pilot_variant == GATE_A_PILOT_OCCUPANCY_REVERSE ||
+           gate_a_pilot_variant == GATE_A_PILOT_OCCUPANCY_EQUAL;
+}
+
+static size_t gate_a_occupancy_bytes(int slot) {
+    if (slot < 6 || slot > 9 || !gate_a_occupancy_pilot()) return 0;
+    if (gate_a_pilot_variant == GATE_A_PILOT_OCCUPANCY_EQUAL) {
+        return GATE_A_OCCUPANCY_EQUAL_BYTES;
+    }
+    if (gate_a_pilot_variant == GATE_A_PILOT_OCCUPANCY_FORWARD) {
+        return slot == 6 || slot == 9
+            ? GATE_A_OCCUPANCY_SMALL_BYTES : GATE_A_OCCUPANCY_LARGE_BYTES;
+    }
+    return slot == 6 || slot == 9
+        ? GATE_A_OCCUPANCY_LARGE_BYTES : GATE_A_OCCUPANCY_SMALL_BYTES;
+}
+
+static const char *gate_a_measurement_mode(void) {
+    return gate_a_occupancy_pilot()
+        ? "catcas_owned_cache_response_cycles"
+        : "ring_period_cycles";
+}
+
+static const char *gate_a_observation_kind(void) {
+    return gate_a_occupancy_pilot()
+        ? "experiment_owned_buffer_cycles_per_access"
+        : "ring_period_cycles_per_iteration";
+}
+
+static int gate_a_power_of_two(size_t value) {
+    return value && !(value & (value - 1U));
+}
+
+static int gate_a_occupancy_geometry_valid(void) {
+    const size_t footprints[] = {
+        GATE_A_OCCUPANCY_SMALL_BYTES,
+        GATE_A_OCCUPANCY_EQUAL_BYTES,
+        GATE_A_OCCUPANCY_LARGE_BYTES,
+        GATE_A_RESPONSE_BUFFER_BYTES,
+    };
+    for (size_t index = 0; index < sizeof(footprints) / sizeof(footprints[0]); index++) {
+        size_t lines = footprints[index] / GATE_A_CACHE_LINE_BYTES;
+        if (footprints[index] % GATE_A_CACHE_LINE_BYTES ||
+            !gate_a_power_of_two(lines)) return 0;
+    }
+    if (!(GATE_A_OCCUPANCY_LINE_STRIDE & 1U) ||
+        !(GATE_A_RESPONSE_LINE_STRIDE & 1U) ||
+        GATE_A_OCCUPANCY_SMALL_BYTES >= GATE_A_OCCUPANCY_EQUAL_BYTES ||
+        GATE_A_OCCUPANCY_EQUAL_BYTES >= GATE_A_OCCUPANCY_LARGE_BYTES) return 0;
+    return 1;
+}
+
+static int gate_a_orbit_value(int slot) {
+    if (slot < 6 || slot > 9 || !gate_a_value_pilot()) return -1;
+    if (gate_a_pilot_variant == GATE_A_PILOT_VALUE_EQUAL) return 42;
+    if (gate_a_pilot_variant == GATE_A_PILOT_VALUE_FORWARD) {
+        return slot == 6 || slot == 9 ? 125 : 131;
+    }
+    return slot == 6 || slot == 9 ? 131 : 125;
+}
+
 static int gate_a_phase_index(int slot) {
     if (slot >= 6 && slot <= 9 && gate_a_pilot_variant == GATE_A_PILOT_PHASE_FORWARD) {
         return slot < 8 ? 0 : 2;
@@ -74,6 +146,8 @@ static int gate_a_expected_origin_state(int slot) {
 
 static const char *gate_a_epoch(int slot) {
     if (slot >= 6 && slot <= 9) {
+        if (gate_a_occupancy_pilot()) return "gate-a:occupancy:epoch0";
+        if (gate_a_value_pilot()) return "gate-a:value:epoch0";
         if (gate_a_split_step()) {
             return slot < 8 ? "gate-a:phase:first" : "gate-a:phase:second";
         }
@@ -137,6 +211,10 @@ typedef struct {
     int end_slot;
     int phase_index;
     int sign;
+    int orbit_value;
+    uint64_t switching_bank[256];
+    volatile uint64_t *occupancy_bank;
+    size_t occupancy_cursor;
     const char *epoch_id;
     double tsc_hz;
     double slot_s;
@@ -163,6 +241,10 @@ typedef struct {
     int capacity;
     uint64_t *timestamps;
     double *observations;
+    const uint64_t *response_bank;
+    size_t response_line_count;
+    size_t response_index;
+    int cache_response_mode;
     uint64_t receiver_epoch;
     int count;
 } GateAReceiver;
@@ -186,9 +268,14 @@ static int gate_a_lifecycle_record(FILE *f, const char *record_type,
             record_type, (unsigned long long)event_tsc, slot,
             gate_a_tokens[slot], state) < 0) return -1;
     if (sender) {
-        if (fprintf(f, "\"%s\",\"phase_index\":%d,\"sign\":%d,",
+        if (fprintf(f, "\"%s\",\"phase_index\":%d,\"sign\":%d,\"orbit_value\":",
                     sender->epoch_id, sender->phase_index, sender->sign) < 0) return -1;
-    } else if (fputs("null,\"phase_index\":null,\"sign\":null,", f) < 0) return -1;
+        int orbit_value = gate_a_orbit_value(slot);
+        if (orbit_value < 0) orbit_value = sender->orbit_value;
+        if (orbit_value >= 0) {
+            if (fprintf(f, "%d,", orbit_value) < 0) return -1;
+        } else if (fputs("null,", f) < 0) return -1;
+    } else if (fputs("null,\"phase_index\":null,\"sign\":null,\"orbit_value\":null,", f) < 0) return -1;
     if (fputs("\"requested_start_tsc\":", f) < 0 ||
         gate_a_json_u64(f, requested_start) ||
         fputs(",\"requested_end_tsc\":", f) < 0 ||
@@ -227,6 +314,39 @@ static int gate_a_epoch_cycle_state(const GateASender *sender, uint64_t now) {
     return (int)((state % 8 + 8) % 8);
 }
 
+/* Equal-count integer path whose switching state consumes the public orbit
+   value.  The value changes data, never duration, phase, or control flow. */
+static double gate_a_value_burst(uint64_t *seed,
+                                 volatile uint64_t switching_bank[256],
+                                 int orbit_value) {
+    uint64_t byte = (uint64_t)(unsigned int)(orbit_value & 255);
+    uint64_t pattern = byte * UINT64_C(0x0101010101010101);
+    for (int index = 0; index < 256; index++) {
+        switching_bank[index] ^= pattern;
+    }
+    *seed ^= switching_bank[(unsigned int)orbit_value & 255U] ^ pattern;
+    return (double)(*seed & 0xffffU);
+}
+
+static double gate_a_occupancy_burst(
+        uint64_t *seed, volatile uint64_t *bank,
+        size_t footprint_bytes, size_t *cursor) {
+    size_t line_count = footprint_bytes / GATE_A_CACHE_LINE_BYTES;
+    size_t line_mask = line_count - 1U;
+    size_t words_per_line = GATE_A_CACHE_LINE_BYTES / sizeof(uint64_t);
+    size_t line = *cursor & line_mask;
+    uint64_t value = *seed;
+    for (size_t touch = 0; touch < GATE_A_OCCUPANCY_BURST_TOUCHES; touch++) {
+        line = (line + GATE_A_OCCUPANCY_LINE_STRIDE) & line_mask;
+        size_t word = line * words_per_line;
+        value ^= bank[word] + (uint64_t)line;
+        bank[word] = value ^ UINT64_C(0x9e3779b97f4a7c15);
+    }
+    *cursor = line;
+    *seed = value;
+    return (double)(value & 0xffffU);
+}
+
 static void *gate_a_sender_loop(void *opaque) {
     GateASender *sender = opaque;
     if (pin_core(sender->core)) {
@@ -237,8 +357,8 @@ static void *gate_a_sender_loop(void *opaque) {
     atomic_store_explicit(&sender->ready_tsc, ready, memory_order_release);
     atomic_store_explicit(&sender->epoch_start_tsc, ready, memory_order_release);
     atomic_store_explicit(&sender->ready, 1, memory_order_release);
-    uint64_t seed = 0x9e3779b9u + (uint64_t)sender->core +
-                    (uint64_t)sender->first_slot;
+    uint64_t seed = 0x9e3779b9u + (uint64_t)sender->core;
+    if (sender->orbit_value < 0) seed += (uint64_t)sender->first_slot;
     volatile double sink = 0;
     int previous_slot = -1;
     while (!atomic_load_explicit(&sender->stop, memory_order_acquire)) {
@@ -262,7 +382,19 @@ static void *gate_a_sender_loop(void *opaque) {
             atomic_compare_exchange_strong_explicit(
                 &sender->first_drive_tsc, &expected, now,
                 memory_order_release, memory_order_relaxed);
-            sink += alu_burst(&seed);
+            int orbit_value = gate_a_orbit_value(slot);
+            if (orbit_value < 0) orbit_value = sender->orbit_value;
+            size_t occupancy_bytes = gate_a_occupancy_bytes(slot);
+            if (occupancy_bytes) {
+                sink += gate_a_occupancy_burst(
+                    &seed, sender->occupancy_bank, occupancy_bytes,
+                    &sender->occupancy_cursor);
+            } else if (orbit_value >= 0) {
+                sink += gate_a_value_burst(
+                    &seed, sender->switching_bank, orbit_value);
+            } else {
+                sink += alu_burst(&seed);
+            }
         } else {
             __asm__ volatile("pause");
         }
@@ -290,7 +422,8 @@ static int gate_a_sender_arm(GateASender *sender, FILE *lifecycle,
                              int core, double tsc_hz, double slot_s,
                              uint64_t session_origin, int first_slot,
                              int end_slot, int phase_index, int sign,
-                             const char *epoch_id) {
+                             const char *epoch_id,
+                             volatile uint64_t *occupancy_bank) {
     memset(sender, 0, sizeof(*sender));
     sender->core = core;
     sender->tsc_hz = tsc_hz;
@@ -300,6 +433,8 @@ static int gate_a_sender_arm(GateASender *sender, FILE *lifecycle,
     sender->end_slot = end_slot;
     sender->phase_index = phase_index;
     sender->sign = sign;
+    sender->orbit_value = gate_a_orbit_value(first_slot);
+    sender->occupancy_bank = occupancy_bank;
     sender->epoch_id = epoch_id;
     sender->requested_start_tsc = session_origin +
         (uint64_t)(first_slot * slot_s * tsc_hz);
@@ -412,10 +547,49 @@ static void *gate_a_receiver_loop(void *opaque) {
     }
     atomic_store_explicit(&receiver->ready_tsc, rdtsc_now(), memory_order_release);
     atomic_store_explicit(&receiver->ready, 1, memory_order_release);
-    receiver->count = capture_at_origin(
-        receiver->core, receiver->read_hz, 8.0, receiver->tsc_hz,
-        receiver->origin, &receiver->receiver_epoch,
-        receiver->timestamps, receiver->observations, receiver->capacity);
+    if (receiver->cache_response_mode) {
+        while (rdtsc_now() < receiver->origin && !interrupted) {
+            __asm__ volatile("pause");
+        }
+        receiver->receiver_epoch = rdtsc_now();
+        uint64_t end = receiver->origin + (uint64_t)(8.0 * receiver->tsc_hz);
+        double spacing = receiver->tsc_hz / receiver->read_hz;
+        size_t words_per_line = GATE_A_CACHE_LINE_BYTES / sizeof(uint64_t);
+        size_t index = receiver->response_index;
+        int count = 0;
+        while (count < receiver->capacity && !interrupted) {
+            uint64_t requested = receiver->origin + (uint64_t)(count * spacing);
+            if (requested >= end) break;
+            while (rdtsc_now() < requested && !interrupted) {
+                __asm__ volatile("pause");
+            }
+            uint64_t started = rdtscp_now();
+            int valid = 1;
+            for (size_t touch = 0; touch < GATE_A_RESPONSE_TOUCHES; touch++) {
+                if (index >= receiver->response_line_count) {
+                    valid = 0;
+                    break;
+                }
+                index = (size_t)receiver->response_bank[index * words_per_line];
+            }
+            if (!valid || index >= receiver->response_line_count) {
+                count = -1;
+                break;
+            }
+            uint64_t finished = rdtscp_now();
+            receiver->timestamps[count] = finished;
+            receiver->observations[count] =
+                (double)(finished - started) / GATE_A_RESPONSE_TOUCHES;
+            count++;
+        }
+        receiver->response_index = index;
+        receiver->count = count;
+    } else {
+        receiver->count = capture_at_origin(
+            receiver->core, receiver->read_hz, 8.0, receiver->tsc_hz,
+            receiver->origin, &receiver->receiver_epoch,
+            receiver->timestamps, receiver->observations, receiver->capacity);
+    }
     atomic_store_explicit(&receiver->done, 1, memory_order_release);
     return receiver->count < 0 ? (void *)1 : NULL;
 }
@@ -460,6 +634,10 @@ static int gate_a_write_result(const GateASmokeArgs *args,
             "  \"receiver_start_count\": %d,\n"
             "  \"temperature_receipt_count\": %d,\n"
             "  \"pilot_variant\": %d,\n"
+            "  \"measurement_mode\": \"%s\",\n"
+            "  \"observation_kind\": \"%s\",\n"
+            "  \"response_buffer_bytes\": %u,\n"
+            "  \"response_touches_per_sample\": %u,\n"
             "  \"frequency_writes\": 0,\n"
             "  \"voltage_writes\": 0,\n"
             "  \"msr_reads\": 0,\n"
@@ -478,7 +656,11 @@ static int gate_a_write_result(const GateASmokeArgs *args,
             result->sender_start_count,
             result->receiver_start_count,
             result->temperature_receipt_count,
-            args->pilot_variant) < 0) {
+            args->pilot_variant,
+            gate_a_measurement_mode(),
+            gate_a_observation_kind(),
+            gate_a_occupancy_pilot() ? GATE_A_RESPONSE_BUFFER_BYTES : 0U,
+            gate_a_occupancy_pilot() ? GATE_A_RESPONSE_TOUCHES : 0U) < 0) {
         fclose(f);
         unlink(path);
         return -1;
@@ -500,6 +682,7 @@ static int gate_a_mock_epoch(GateASender *sender, FILE *lifecycle,
     sender->end_slot = end_slot;
     sender->phase_index = phase_index;
     sender->sign = sign;
+    sender->orbit_value = gate_a_orbit_value(first_slot);
     sender->epoch_id = epoch_id;
     sender->requested_start_tsc = session_origin +
         (uint64_t)(first_slot * slot_s * tsc_hz);
@@ -580,6 +763,8 @@ static int gate_a_validate_epoch(const GateASender *sender) {
 static int gate_a_run_real_capture(const GateASmokeArgs *args,
                                    double tsc_hz, uint64_t origin,
                                    uint64_t *timestamps, double *observations,
+                                   const uint64_t *response_bank,
+                                   volatile uint64_t *occupancy_bank,
                                    int capacity, FILE *lifecycle,
                                    GateASender epochs[4],
                                    uint64_t *receiver_epoch,
@@ -593,6 +778,11 @@ static int gate_a_run_real_capture(const GateASmokeArgs *args,
     receiver.capacity = capacity;
     receiver.timestamps = timestamps;
     receiver.observations = observations;
+    receiver.response_bank = response_bank;
+    receiver.response_line_count = gate_a_occupancy_pilot()
+        ? GATE_A_RESPONSE_BUFFER_BYTES / GATE_A_CACHE_LINE_BYTES : 0;
+    receiver.response_index = 0;
+    receiver.cache_response_mode = gate_a_occupancy_pilot();
     atomic_init(&receiver.ready, 0);
     atomic_init(&receiver.done, 0);
     atomic_init(&receiver.ready_tsc, 0);
@@ -619,14 +809,14 @@ static int gate_a_run_real_capture(const GateASmokeArgs *args,
                 &epochs[0], lifecycle, &receiver, result,
                 args->sender_core, tsc_hz, args->slot_s,
                 origin, 6, first_step_end, gate_a_phase_index(6),
-                gate_a_sign(6), gate_a_epoch(6))) goto failure;
+                gate_a_sign(6), gate_a_epoch(6), occupancy_bank)) goto failure;
         if (slot == first_step_end - 1 && gate_a_driven_slot(6) &&
             gate_a_sender_stop_join(&epochs[0], lifecycle, &receiver)) goto failure;
         if (slot == 8 && gate_a_split_step() && gate_a_sender_arm(
                 &epochs[1], lifecycle, &receiver, result,
                 args->sender_core, tsc_hz, args->slot_s,
                 origin, 8, 10, gate_a_phase_index(8),
-                gate_a_sign(8), gate_a_epoch(8))) goto failure;
+                gate_a_sign(8), gate_a_epoch(8), occupancy_bank)) goto failure;
         if (slot == 9 && gate_a_split_step() &&
             gate_a_sender_stop_join(&epochs[1], lifecycle, &receiver)) goto failure;
         if (slot == 12) {
@@ -634,7 +824,7 @@ static int gate_a_run_real_capture(const GateASmokeArgs *args,
                     &epochs[2], lifecycle, &receiver, result,
                     args->sender_core, tsc_hz, args->slot_s,
                     origin, 12, 13, gate_a_phase_index(slot),
-                    gate_a_sign(slot), gate_a_epoch(slot)) ||
+                    gate_a_sign(slot), gate_a_epoch(slot), NULL) ||
                 gate_a_sender_stop_join(&epochs[2], lifecycle, &receiver))) goto failure;
         }
         if (slot == 13) {
@@ -642,7 +832,7 @@ static int gate_a_run_real_capture(const GateASmokeArgs *args,
                     &epochs[3], lifecycle, &receiver, result,
                     args->sender_core, tsc_hz, args->slot_s,
                     origin, 13, 14, gate_a_phase_index(slot),
-                    gate_a_sign(slot), gate_a_epoch(slot)) ||
+                    gate_a_sign(slot), gate_a_epoch(slot), NULL) ||
                 gate_a_sender_stop_join(&epochs[3], lifecycle, &receiver))) goto failure;
         }
     }
@@ -1178,12 +1368,15 @@ static int gate_a_write_lockin(const GateASmokeArgs *args,
                 "\"slot_index\":%d,\"token\":\"%s\","
                 "\"raw_sample_start_index\":%d,\"raw_sample_end_index\":%d,"
                 "\"sample_count\":%d,\"tone_frequency_hz\":%.17g,"
+                "\"measurement_mode\":\"%s\","
+                "\"observation_kind\":\"%s\","
                 "\"lockin_i\":%.17g,\"lockin_q\":%.17g,"
                 "\"magnitude\":%.17g,\"off_frequency_floor\":%.17g,"
                 "\"origin_tsc\":%llu,\"slot_start_tsc\":%llu,"
                 "\"slot_end_tsc\":%llu}\n",
                 slot, gate_a_tokens[slot], starts[slot], ends[slot], count,
-                frequency, i_value, q_value, magnitude, floor,
+                frequency, gate_a_measurement_mode(), gate_a_observation_kind(),
+                i_value, q_value, magnitude, floor,
                 (unsigned long long)analysis_origin,
                 (unsigned long long)slot_start,
                 (unsigned long long)slot_end) < 0 ||
@@ -1204,6 +1397,8 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
     FILE *temperature_receipts = NULL;
     uint64_t *timestamps = NULL;
     double *observations = NULL;
+    uint64_t *response_bank = NULL;
+    volatile uint64_t *occupancy_bank = NULL;
     GateASender epochs[4];
     int starts[16], ends[16];
     memset(epochs, 0, sizeof(epochs));
@@ -1218,7 +1413,8 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
         args->slot_s != 0.5 || args->temperature_veto_c != 68.0 ||
         args->required_frequency_khz != 1600000 ||
         args->pilot_variant < GATE_A_PILOT_PN ||
-        args->pilot_variant > GATE_A_PILOT_PHASE_REVERSE) {
+        args->pilot_variant > GATE_A_PILOT_OCCUPANCY_EQUAL ||
+        !gate_a_occupancy_geometry_valid()) {
         return 2;
     }
     gate_a_pilot_variant = args->pilot_variant;
@@ -1293,6 +1489,36 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
         rc = 4;
         goto cleanup;
     }
+    if (gate_a_occupancy_pilot()) {
+        size_t response_lines =
+            GATE_A_RESPONSE_BUFFER_BYTES / GATE_A_CACHE_LINE_BYTES;
+        size_t response_words =
+            GATE_A_RESPONSE_BUFFER_BYTES / sizeof(uint64_t);
+        size_t occupancy_words =
+            GATE_A_OCCUPANCY_LARGE_BYTES / sizeof(uint64_t);
+        size_t words_per_line =
+            GATE_A_CACHE_LINE_BYTES / sizeof(uint64_t);
+        response_bank = aligned_alloc(
+            GATE_A_CACHE_LINE_BYTES, GATE_A_RESPONSE_BUFFER_BYTES);
+        occupancy_bank = aligned_alloc(
+            GATE_A_CACHE_LINE_BYTES, GATE_A_OCCUPANCY_LARGE_BYTES);
+        if (!response_bank || !occupancy_bank) {
+            reason = "CACHE_RESPONSE_BUFFER_ALLOCATION_FAILURE";
+            rc = 5;
+            goto cleanup;
+        }
+        memset(response_bank, 0, response_words * sizeof(*response_bank));
+        memset((void *)occupancy_bank, 0,
+               occupancy_words * sizeof(*occupancy_bank));
+        for (size_t line = 0; line < response_lines; line++) {
+            response_bank[line * words_per_line] =
+                (line + GATE_A_RESPONSE_LINE_STRIDE) & (response_lines - 1U);
+        }
+        for (size_t word = 0; word < occupancy_words; word++) {
+            occupancy_bank[word] =
+                UINT64_C(0x9e3779b97f4a7c15) ^ (uint64_t)word;
+        }
+    }
     {
         GateATemperatureReceipt pre_temperature;
         int pre_status = gate_a_retain_temperature(
@@ -1338,15 +1564,20 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
     if (mock) {
         count = args->read_hz * 8;
         double spacing = tsc_hz / args->read_hz;
+        int first_step_end = gate_a_split_step() ? 8 : gate_a_step_end_slot();
         if (gate_a_mock_epoch(&epochs[0], lifecycle, args->sender_core,
-                              tsc_hz, args->slot_s, origin, 6, 10, 0, 1,
-                              "gate-a:step:epoch0") ||
+                              tsc_hz, args->slot_s, origin, 6, first_step_end,
+                              gate_a_phase_index(6), gate_a_sign(6), gate_a_epoch(6)) ||
+            (gate_a_split_step() && gate_a_mock_epoch(
+                              &epochs[1], lifecycle, args->sender_core,
+                              tsc_hz, args->slot_s, origin, 8, 10,
+                              gate_a_phase_index(8), gate_a_sign(8), gate_a_epoch(8))) ||
             gate_a_mock_epoch(&epochs[2], lifecycle, args->sender_core,
-                               tsc_hz, args->slot_s, origin, 12, 13, 0, 1,
-                               "gate-a:anchor:positive") ||
+                               tsc_hz, args->slot_s, origin, 12, 13,
+                               gate_a_phase_index(12), gate_a_sign(12), gate_a_epoch(12)) ||
             gate_a_mock_epoch(&epochs[3], lifecycle, args->sender_core,
-                               tsc_hz, args->slot_s, origin, 13, 14, 4, -1,
-                              "gate-a:anchor:negative")) {
+                               tsc_hz, args->slot_s, origin, 13, 14,
+                               gate_a_phase_index(13), gate_a_sign(13), gate_a_epoch(13))) {
             reason = "MOCK_LIFECYCLE_EVIDENCE_FAILURE";
             rc = 4;
             goto cleanup;
@@ -1360,15 +1591,16 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
             if (slot >= 0 && slot < 16 && gate_a_driven_slot(slot)) {
                 uint64_t epoch_origin = gate_a_epoch_origin(
                     slot, origin, args->slot_s, tsc_hz);
-                double phase = slot == 13 ? M_PI : 0.0;
+                double phase = 2.0 * M_PI * gate_a_phase_index(slot) / 8.0;
                 double seconds = (double)(timestamps[i] - epoch_origin) / tsc_hz;
                 observations[i] += 0.25 * cos(2.0 * M_PI * tone(0) * seconds + phase);
             }
         }
     } else {
         count = gate_a_run_real_capture(
-            args, tsc_hz, origin, timestamps, observations, cap,
-            lifecycle, epochs, &receiver_epoch, result);
+            args, tsc_hz, origin, timestamps, observations,
+            response_bank, occupancy_bank, cap, lifecycle, epochs,
+            &receiver_epoch, result);
         if (count < 0) {
             reason = "SENDER_OR_RECEIVER_LIFECYCLE_FAILURE";
             rc = 4;
@@ -1475,25 +1707,38 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
                 "{\"index\":%d,\"token\":\"%s\",\"requested_start_s\":%.1f,"
                 "\"requested_end_s\":%.1f,\"requested_start_tsc\":%llu,"
                 "\"actual_transition_tsc\":%llu,\"sample_count\":%d,"
+                "\"measurement_mode\":\"%s\","
+                "\"observation_kind\":\"%s\","
                 "\"drive_on\":%s,\"amplitude_level\":",
                 slot, gate_a_tokens[slot], slot * args->slot_s,
                 (slot + 1) * args->slot_s,
                 (unsigned long long)requested, (unsigned long long)actual,
-                result->slot_sample_counts[slot], driven ? "true" : "false") < 0) {
+                result->slot_sample_counts[slot], gate_a_measurement_mode(),
+                gate_a_observation_kind(),
+                driven ? "true" : "false") < 0) {
             reason = "TRACE_WRITER_FAILURE";
             rc = 5;
             goto cleanup;
         }
         if (driven) {
             if (fprintf(trace,
-                    "2,\"phase_index\":%d,\"sign\":%d,\"sender_epoch_id\":\"%s\"}\n",
-                    gate_a_phase_index(slot), gate_a_sign(slot),
-                    gate_a_epoch(slot)) < 0) {
+                    "2,\"phase_index\":%d,\"sign\":%d,\"orbit_value\":",
+                    gate_a_phase_index(slot), gate_a_sign(slot)) < 0) {
                 reason = "TRACE_WRITER_FAILURE";
                 rc = 5;
                 goto cleanup;
             }
-        } else if (fputs("null,\"phase_index\":null,\"sign\":null,\"sender_epoch_id\":null}\n", trace) < 0) {
+            int orbit_value = gate_a_orbit_value(slot);
+            if ((orbit_value >= 0 && fprintf(trace, "%d", orbit_value) < 0) ||
+                (orbit_value < 0 && fputs("null", trace) < 0) ||
+                fprintf(trace, ",\"working_set_bytes\":%zu,"
+                        "\"sender_epoch_id\":\"%s\"}\n",
+                        gate_a_occupancy_bytes(slot), gate_a_epoch(slot)) < 0) {
+                reason = "TRACE_WRITER_FAILURE";
+                rc = 5;
+                goto cleanup;
+            }
+        } else if (fputs("null,\"phase_index\":null,\"sign\":null,\"orbit_value\":null,\"working_set_bytes\":0,\"sender_epoch_id\":null}\n", trace) < 0) {
             reason = "TRACE_WRITER_FAILURE";
             rc = 5;
             goto cleanup;
@@ -1608,6 +1853,8 @@ cleanup:
     }
     free(timestamps);
     free(observations);
+    free(response_bank);
+    free((void *)occupancy_bank);
     if (rc) gate_a_write_failure(args->output_dir, reason);
     (void)receiver_epoch;
     return rc;

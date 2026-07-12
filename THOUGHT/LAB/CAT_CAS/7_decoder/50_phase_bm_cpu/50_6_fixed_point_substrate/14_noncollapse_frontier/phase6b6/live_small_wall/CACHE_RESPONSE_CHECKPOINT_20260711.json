@@ -1,0 +1,57 @@
+{
+  "schema_id": "CAT_CAS_SMALL_WALL_ENGINEERING_CHECKPOINT_V1",
+  "checkpoint_date": "2026-07-11",
+  "repository": "D:/CCC 2.0/AI/agent-governance-system",
+  "branch": "main",
+  "starting_head": "397f25825ad699f36057e6638f061ad2a4413cff",
+  "validation_status": "LOCAL_BUILD_AND_MOCK_SMOKE_PASS_LIVE_VALIDATION_PENDING",
+  "current_mechanism": {
+    "description": "Closed CAT_CAS-owned shared-cache occupancy/response preparation using separate synthetic experiment buffers and aggregate timing only",
+    "schedule": "I I I I C0 D0 S0E S0E S0E S0E O0 O0 A0P A0N T T",
+    "sender_core": 4,
+    "receiver_core": 5,
+    "read_hz": 8000,
+    "slot_seconds": 0.5,
+    "slot_count": 16,
+    "response_buffer_bytes": 2097152,
+    "response_touches_per_sample": 64,
+    "occupancy_burst_touches": 256,
+    "occupancy_small_bytes": 262144,
+    "occupancy_equal_bytes": 4194304,
+    "occupancy_large_bytes": 33554432,
+    "forward_slots_6_through_9_bytes": [262144, 33554432, 33554432, 262144],
+    "reverse_slots_6_through_9_bytes": [33554432, 262144, 262144, 33554432],
+    "equal_slots_6_through_9_bytes": [4194304, 4194304, 4194304, 4194304],
+    "safety_boundary": "CAT_CAS-controlled threads, synthetic experiment-owned memory, predetermined geometry, no address discovery, no cache-set mapping, no flush instruction, no unrelated-process observation"
+  },
+  "exact_command": "wsl bash -lc 'set -euo pipefail; cc -std=c11 -O2 -pthread -Wall -Wextra -Werror -pedantic <LAB>/phase6b6/acquisition/gate_a/adapter/gate_a_worker.c <LAB>/holo_runtime_v2/gate_a_engineering_smoke_runtime.c <LAB>/holo_runtime_v2/captured_file.c -I<LAB>/holo_runtime_v2 -lm -o /tmp/gate_a_worker; /tmp/gate_a_worker --self-test; /tmp/gate_a_worker --self-test-cache-response; cc -std=c11 -O1 -g -pthread -Wall -Wextra -Werror -pedantic -fsanitize=address,undefined -fno-omit-frame-pointer <same sources and include> -lm -o /tmp/gate_a_worker_san; ASAN_OPTIONS=detect_leaks=1 /tmp/gate_a_worker_san --self-test-cache-response; rm -f -- /tmp/gate_a_worker /tmp/gate_a_worker_san' where <LAB>=/mnt/d/CCC 2.0/AI/agent-governance-system/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier",
+  "raw_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/CACHE_RESPONSE_CHECKPOINT_20260711.json#raw_output",
+  "raw_output": [
+    "{\"status\":\"GATE_A_WORKER_MOCK_SELF_TEST_OK\",\"network_connections\":0,\"hardware_executions\":0,\"frequency_writes\":0,\"voltage_writes\":0,\"msr_reads\":0,\"msr_writes\":0,\"slot_count\":16,\"sample_count\":64000,\"step_sender_epoch_count\":1,\"temperature_receipt_count\":2}",
+    "{\"status\":\"GATE_A_WORKER_MOCK_SELF_TEST_OK\",\"network_connections\":0,\"hardware_executions\":0,\"frequency_writes\":0,\"voltage_writes\":0,\"msr_reads\":0,\"msr_writes\":0,\"slot_count\":16,\"sample_count\":64000,\"step_sender_epoch_count\":1,\"temperature_receipt_count\":2}",
+    "{\"status\":\"GATE_A_WORKER_MOCK_SELF_TEST_OK\",\"network_connections\":0,\"hardware_executions\":0,\"frequency_writes\":0,\"voltage_writes\":0,\"msr_reads\":0,\"msr_writes\":0,\"slot_count\":16,\"sample_count\":64000,\"step_sender_epoch_count\":1,\"temperature_receipt_count\":2}"
+  ],
+  "observed_result": "Strict C build passed; legacy mock passed; cache-response mock passed; ASan/UBSan cache-response mock passed; live response remains unmeasured",
+  "current_bottleneck": "The mechanism builds and its bounded mock/evidence paths are coherent, but no live CAT_CAS-owned occupancy response has been measured, so observability and Small Wall progress remain unadjudicated",
+  "target_actions_performed": [],
+  "live_hardware_operation_occurred": false,
+  "hardware_state_restored": "NOT_APPLICABLE_NO_LIVE_OPERATION_OR_HARDWARE_STATE_CHANGE",
+  "frequency_state_restored": "NOT_APPLICABLE_NO_CPUFREQ_READ_OR_WRITE_PERFORMED",
+  "raw_live_output_retained": "NOT_APPLICABLE_NO_LIVE_RUN",
+  "files_changed": [
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/AGENTS.md",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/gate_a_engineering_smoke_runtime.c",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/gate_a_engineering_smoke_runtime.h",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/gate_a_worker.c",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/live_gate_a_target.py",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/run_gate_a_first_light.py",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/analyze_value_abba.py",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/analyze_occupancy_abba.py",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/CACHE_RESPONSE_CHECKPOINT_20260711.json"
+  ],
+  "validation_pending": [
+    "Live CAT_CAS-owned occupancy response",
+    "Forward/reverse/equal repeated-pair adjudication",
+    "Observable carrier-state and Small Wall claims"
+  ]
+}
