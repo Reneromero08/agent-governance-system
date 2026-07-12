@@ -80,6 +80,7 @@ def execute(run_id: str, *, mode: str, keep_remote: bool) -> dict[str, Any]:
             "coherence-operators-route45",
             "coherence-operators-route23",
             "phase-local-pmu",
+            "ibs-first-light",
         },
         f"unsupported coherence mode: {mode}",
     )
@@ -137,11 +138,11 @@ def execute(run_id: str, *, mode: str, keep_remote: bool) -> dict[str, Any]:
         require(absent.returncode == 0, "remote run root remained after cleanup")
         cleaned = True
 
-    worker_result_file = (
-        "F10_PHASE_LOCAL_PMU_RESULT.json"
-        if mode == "phase-local-pmu"
-        else "F10_COHERENCE_OPERATOR_RESULT.json"
-    )
+    worker_result_files = {
+        "phase-local-pmu": "F10_PHASE_LOCAL_PMU_RESULT.json",
+        "ibs-first-light": "F10_IBS_FIRST_LIGHT_RESULT.json",
+    }
+    worker_result_file = worker_result_files.get(mode, "F10_COHERENCE_OPERATOR_RESULT.json")
     worker = json.loads((local_run / worker_result_file).read_text(encoding="utf-8"))
     controller = {
         "schema_id": "CAT_CAS_F10_COHERENCE_OPERATOR_CONTROLLER_V1",
@@ -156,11 +157,14 @@ def execute(run_id: str, *, mode: str, keep_remote: bool) -> dict[str, Any]:
         "remote_cleaned": cleaned,
         "target_status": final["status"],
         "worker_status": worker["status"],
-        "selected_group": worker["selected_group"],
+        "selected_group": worker.get("selected_group", mode),
         "worker_result_file": worker_result_file,
     }
     if mode == "phase-local-pmu":
         controller["phase_local_pmu_captured"] = bool(worker["acceptance"]["phase_local_pmu_captured"])
+    elif mode == "ibs-first-light":
+        controller["ibs_first_light_available"] = bool(worker["acceptance"]["ibs_first_light_available"])
+        controller["ibs_workload_response"] = bool(worker["acceptance"]["any_workload_response"])
     else:
         controller["controlled_state_found"] = bool(worker["acceptance"]["controlled_state_found"])
     (local_run / "CONTROLLER_RESULT.json").write_text(
@@ -175,7 +179,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--run-id", default=default_run_id())
     parser.add_argument(
         "--mode",
-        choices=("coherence-operators", "coherence-operators-route45", "coherence-operators-route23", "phase-local-pmu"),
+        choices=("coherence-operators", "coherence-operators-route45", "coherence-operators-route23", "phase-local-pmu", "ibs-first-light"),
         default="coherence-operators",
     )
     parser.add_argument("--keep-remote", action="store_true")

@@ -41,6 +41,7 @@
 #define PATH_RW_OBSERVE_RESULT_SCHEMA "CAT_CAS_F10_PATH_RW_OBSERVE_RESULT_V1"
 #define ROUTE_STATE_RESULT_SCHEMA "CAT_CAS_F10_ROUTE_STATE_PILOT_RESULT_V1"
 #define PHASE_LOCAL_PMU_RESULT_SCHEMA "CAT_CAS_F10_PHASE_LOCAL_PMU_RESULT_V1"
+#define IBS_FIRST_LIGHT_RESULT_SCHEMA "CAT_CAS_F10_IBS_FIRST_LIGHT_RESULT_V1"
 #define PHASE_LOCAL_BANK_LINES 512u
 
 struct event_def {
@@ -171,6 +172,24 @@ struct read_group_payload {
     } values[MAX_GROUP_EVENTS];
 };
 
+struct read_single_payload {
+    uint64_t value;
+    uint64_t time_enabled;
+    uint64_t time_running;
+    uint64_t id;
+};
+
+struct single_event_result {
+    bool opened;
+    bool unmultiplexed;
+    int open_errno;
+    int read_rc;
+    uint64_t value;
+    uint64_t id;
+    uint64_t time_enabled;
+    uint64_t time_running;
+};
+
 static long perf_event_open_call(
     struct perf_event_attr *attr,
     pid_t pid,
@@ -208,6 +227,40 @@ static void fill_attr(struct perf_event_attr *attr, const struct event_def *even
         PERF_FORMAT_TOTAL_TIME_ENABLED |
         PERF_FORMAT_TOTAL_TIME_RUNNING |
         PERF_FORMAT_ID;
+}
+
+static void fill_ibs_attr(
+    struct perf_event_attr *attr,
+    unsigned int pmu_type,
+    uint64_t config,
+    unsigned int precise_ip,
+    bool disabled
+) {
+    memset(attr, 0, sizeof(*attr));
+    attr->type = pmu_type;
+    attr->size = sizeof(*attr);
+    attr->config = config;
+    attr->sample_period = 4096u;
+    attr->sample_type = PERF_SAMPLE_IP | PERF_SAMPLE_TID | PERF_SAMPLE_TIME;
+    attr->disabled = disabled ? 1u : 0u;
+    attr->exclude_kernel = 1u;
+    attr->exclude_hv = 1u;
+    attr->precise_ip = precise_ip;
+    attr->read_format = PERF_FORMAT_TOTAL_TIME_ENABLED |
+        PERF_FORMAT_TOTAL_TIME_RUNNING |
+        PERF_FORMAT_ID;
+}
+
+static int read_uint_sysfs(const char *path, unsigned int *value_out) {
+    FILE *in = fopen(path, "r");
+    if (!in) return -errno;
+    unsigned int value = 0;
+    int matched = fscanf(in, "%u", &value);
+    int saved = ferror(in) ? errno : 0;
+    fclose(in);
+    if (matched != 1) return saved ? -saved : -EINVAL;
+    *value_out = value;
+    return 0;
 }
 
 static int pin_to_core(int core) {
@@ -700,6 +753,20 @@ static int read_group(int leader_fd, struct group_result *result) {
     return 0;
 }
 
+static int read_single_event(int fd, struct single_event_result *result) {
+    struct read_single_payload payload;
+    memset(&payload, 0, sizeof(payload));
+    ssize_t got = read(fd, &payload, sizeof(payload));
+    if (got < 0) return -errno;
+    if ((size_t)got < sizeof(payload)) return -EIO;
+    result->value = payload.value;
+    result->time_enabled = payload.time_enabled;
+    result->time_running = payload.time_running;
+    result->id = payload.id;
+    result->unmultiplexed = payload.time_enabled == payload.time_running;
+    return 0;
+}
+
 static int measure_window(
     const struct event_def group[MAX_GROUP_EVENTS],
     const char *window_name,
@@ -1008,6 +1075,21 @@ static void print_group_result(FILE *out, const struct event_def group[MAX_GROUP
     fprintf(out, "]}");
 }
 
+static void print_single_event_result(FILE *out, const struct single_event_result *result) {
+    fprintf(
+        out,
+        "{\"opened\":%s,\"unmultiplexed\":%s,\"open_errno\":%d,\"read_rc\":%d,\"id\":%" PRIu64 ",\"value\":%" PRIu64 ",\"time_enabled\":%" PRIu64 ",\"time_running\":%" PRIu64 "}",
+        json_bool(result->opened),
+        json_bool(result->unmultiplexed),
+        result->open_errno,
+        result->read_rc,
+        result->id,
+        result->value,
+        result->time_enabled,
+        result->time_running
+    );
+}
+
 static uint64_t event_value_by_name(const struct group_result *result, const struct event_def group[MAX_GROUP_EVENTS], const char *name) {
     for (int i = 0; i < MAX_GROUP_EVENTS; i++) {
         if (strcmp(group[i].name, name) == 0) return result->events[i].value;
@@ -1176,6 +1258,220 @@ static int run_coherence_operator_mode(const char *output_root, struct carrier *
     printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"primary_nb_coherence\"}\n",
         controlled_state_found ? "CONTROLLED_COHERENCE_STATE_FOUND" : "CONTROLLED_COHERENCE_STATE_NOT_ESTABLISHED",
         result_path);
+    return 0;
+}
+
+struct ibs_source_spec {
+    const char *name;
+    const char *type_path;
+    unsigned int fixed_type;
+    bool use_fixed_type;
+    uint64_t config;
+    unsigned int precise_ip;
+    const char *config_note;
+};
+
+static int run_ibs_workload(const char *workload, struct carrier *carrier) {
+    if (strcmp(workload, "idle_pause") == 0) {
+        idle_pause();
+        return 0;
+    }
+    if (strcmp(workload, "remote_read_shared") == 0) {
+        remote_read_shared(carrier);
+        return 0;
+    }
+    if (strcmp(workload, "remote_store_same_value") == 0) {
+        remote_store_same_value(carrier);
+        return 0;
+    }
+    return -EINVAL;
+}
+
+static int measure_ibs_window(
+    unsigned int pmu_type,
+    uint64_t config,
+    unsigned int precise_ip,
+    const char *workload,
+    struct carrier *carrier,
+    struct single_event_result *result,
+    uint64_t *duration_ns,
+    uint64_t *digest_before,
+    uint64_t *digest_after_restore
+) {
+    memset(result, 0, sizeof(*result));
+    result->read_rc = -ENODATA;
+    restore_on_core(carrier, CATCAS_CORE_A);
+    prefault_carrier(carrier);
+    restore_on_core(carrier, CATCAS_CORE_A);
+    *digest_before = fnv1a64(carrier->bytes, carrier->byte_count);
+
+    struct perf_event_attr attr;
+    fill_ibs_attr(&attr, pmu_type, config, precise_ip, true);
+    int fd = (int)perf_event_open_call(&attr, -1, CATCAS_CORE_B, -1, PERF_FLAG_FD_CLOEXEC);
+    if (fd < 0) {
+        result->open_errno = errno;
+        return -errno;
+    }
+    result->opened = true;
+    if (ioctl(fd, PERF_EVENT_IOC_RESET, 0) != 0) {
+        int saved = errno;
+        close(fd);
+        return -saved;
+    }
+    uint64_t start = monotonic_ns();
+    if (ioctl(fd, PERF_EVENT_IOC_ENABLE, 0) != 0) {
+        int saved = errno;
+        close(fd);
+        return -saved;
+    }
+    int work_rc = run_ibs_workload(workload, carrier);
+    if (ioctl(fd, PERF_EVENT_IOC_DISABLE, 0) != 0) {
+        int saved = errno;
+        close(fd);
+        return -saved;
+    }
+    uint64_t end = monotonic_ns();
+    result->read_rc = read_single_event(fd, result);
+    close(fd);
+    if (result->read_rc != 0) return result->read_rc;
+    if (work_rc != 0) return work_rc;
+    *duration_ns = end >= start ? end - start : 0;
+    home_core_restore(carrier);
+    *digest_after_restore = fnv1a64(carrier->bytes, carrier->byte_count);
+    return 0;
+}
+
+static int run_ibs_first_light_mode(const char *output_root, struct carrier *carrier, uint64_t initial_digest) {
+    enum { IBS_SOURCE_COUNT = 6, IBS_WORKLOAD_COUNT = 3 };
+    const struct ibs_source_spec sources[IBS_SOURCE_COUNT] = {
+        {"ibs_fetch_default", "/sys/bus/event_source/devices/ibs_fetch/type", 0u, false, 0ull, 0u, "direct ibs_fetch config=0"},
+        {"ibs_fetch_rand_en", "/sys/bus/event_source/devices/ibs_fetch/type", 0u, false, 1ull << 57, 0u, "direct ibs_fetch rand_en bit 57 set"},
+        {"ibs_op_default", "/sys/bus/event_source/devices/ibs_op/type", 0u, false, 0ull, 0u, "direct ibs_op config=0"},
+        {"ibs_op_cnt_ctl", "/sys/bus/event_source/devices/ibs_op/type", 0u, false, 1ull << 19, 0u, "direct ibs_op cnt_ctl bit 19 set"},
+        {"raw_cycles_precise", "", PERF_TYPE_RAW, true, raw_config(0x076u, 0x00u), 1u, "r076:p precise raw cycles route"},
+        {"raw_uops_precise", "", PERF_TYPE_RAW, true, raw_config(0x0c1u, 0x00u), 1u, "r0C1:p precise raw uops route"}
+    };
+    const char *workloads[IBS_WORKLOAD_COUNT] = {
+        "idle_pause",
+        "remote_read_shared",
+        "remote_store_same_value"
+    };
+    unsigned int pmu_types[IBS_SOURCE_COUNT] = {0u, 0u, 0u, 0u};
+    int type_rc[IBS_SOURCE_COUNT] = {0, 0, 0, 0};
+    for (int source = 0; source < IBS_SOURCE_COUNT; source++) {
+        if (sources[source].use_fixed_type) {
+            pmu_types[source] = sources[source].fixed_type;
+            type_rc[source] = 0;
+        } else {
+            type_rc[source] = read_uint_sysfs(sources[source].type_path, &pmu_types[source]);
+        }
+    }
+
+    struct single_event_result results[IBS_SOURCE_COUNT][IBS_WORKLOAD_COUNT];
+    uint64_t durations[IBS_SOURCE_COUNT][IBS_WORKLOAD_COUNT];
+    uint64_t digest_before[IBS_SOURCE_COUNT][IBS_WORKLOAD_COUNT];
+    uint64_t digest_after[IBS_SOURCE_COUNT][IBS_WORKLOAD_COUNT];
+    int window_rc[IBS_SOURCE_COUNT][IBS_WORKLOAD_COUNT];
+
+    for (int source = 0; source < IBS_SOURCE_COUNT; source++) {
+        for (int workload = 0; workload < IBS_WORKLOAD_COUNT; workload++) {
+            memset(&results[source][workload], 0, sizeof(results[source][workload]));
+            durations[source][workload] = 0;
+            digest_before[source][workload] = 0;
+            digest_after[source][workload] = 0;
+            if (type_rc[source] != 0) {
+                window_rc[source][workload] = type_rc[source];
+            } else {
+                window_rc[source][workload] = measure_ibs_window(
+                    pmu_types[source],
+                    sources[source].config,
+                    sources[source].precise_ip,
+                    workloads[workload],
+                    carrier,
+                    &results[source][workload],
+                    &durations[source][workload],
+                    &digest_before[source][workload],
+                    &digest_after[source][workload]
+                );
+            }
+        }
+    }
+
+    bool any_opened = false;
+    bool any_read_ok = false;
+    bool any_nonzero = false;
+    bool all_restored = true;
+    bool any_workload_response = false;
+    for (int source = 0; source < IBS_SOURCE_COUNT; source++) {
+        uint64_t idle_value = results[source][0].value;
+        for (int workload = 0; workload < IBS_WORKLOAD_COUNT; workload++) {
+            any_opened = any_opened || results[source][workload].opened;
+            any_read_ok = any_read_ok || results[source][workload].read_rc == 0;
+            any_nonzero = any_nonzero || results[source][workload].value != 0u;
+            all_restored = all_restored && (!results[source][workload].opened ||
+                digest_after[source][workload] == initial_digest);
+            if (workload > 0 && results[source][workload].read_rc == 0 &&
+                results[source][workload].value > idle_value) {
+                any_workload_response = true;
+            }
+        }
+    }
+    bool ibs_available = any_opened && any_read_ok && all_restored;
+
+    char result_path[4096];
+    int n = snprintf(result_path, sizeof(result_path), "%s/F10_IBS_FIRST_LIGHT_RESULT.json", output_root);
+    if (n <= 0 || (size_t)n >= sizeof(result_path)) return 1;
+    FILE *out = fopen(result_path, "w");
+    if (!out) {
+        fprintf(stderr, "cannot open result: %s\n", strerror(errno));
+        return 1;
+    }
+
+    fprintf(out, "{\n");
+    fprintf(out, "  \"schema_id\": \"%s\",\n", IBS_FIRST_LIGHT_RESULT_SCHEMA);
+    fprintf(out, "  \"status\": \"%s\",\n", ibs_available ? "IBS_FIRST_LIGHT_AVAILABLE" : "IBS_FIRST_LIGHT_NOT_AVAILABLE");
+    fprintf(out, "  \"claim_ceiling\": \"IBS availability and first-light probe only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim\",\n");
+    fprintf(out, "  \"cores\": {\"home_core\": %d, \"observed_core\": %d},\n", CATCAS_CORE_A, CATCAS_CORE_B);
+    fprintf(out, "  \"source_constraints\": {\"direct_msr_access\": false, \"voltage_access\": false, \"frequency_writes\": 0, \"experiment_owned_memory_only\": true},\n");
+    fprintf(out, "  \"carrier\": {\"line_count\": %zu, \"line_bytes\": %d, \"byte_count\": %zu, \"digest_kind\": \"fnv1a64\", \"initial_digest_hex\": \"0x%016" PRIx64 "\"},\n", carrier->line_count, CACHE_LINE_BYTES, carrier->byte_count, initial_digest);
+    fprintf(out, "  \"predeclared_observable\": {\"primary\": \"ordinary perf_event_open success for ibs_fetch/ibs_op\", \"secondary\": \"readable event value during CAT_CAS-owned idle/read/store windows\", \"purpose\": \"carrier availability before any phase-local claim\"},\n");
+    fprintf(out, "  \"sources\": [\n");
+    for (int source = 0; source < IBS_SOURCE_COUNT; source++) {
+        fprintf(out, "    {\"name\": \"%s\", \"type_path\": \"%s\", \"type_read_rc\": %d, \"pmu_type\": %u, \"config_hex\": \"0x%016" PRIx64 "\", \"precise_ip\": %u, \"config_note\": \"%s\", \"windows\": [\n",
+            sources[source].name,
+            sources[source].type_path,
+            type_rc[source],
+            pmu_types[source],
+            sources[source].config,
+            sources[source].precise_ip,
+            sources[source].config_note);
+        for (int workload = 0; workload < IBS_WORKLOAD_COUNT; workload++) {
+            fprintf(out, "      {\"workload\": \"%s\", \"rc\": %d, \"duration_ns\": %" PRIu64 ", \"carrier_digest_before_hex\": \"0x%016" PRIx64 "\", \"carrier_digest_after_restore_hex\": \"0x%016" PRIx64 "\", \"carrier_restored\": %s, \"event\": ",
+                workloads[workload],
+                window_rc[source][workload],
+                durations[source][workload],
+                digest_before[source][workload],
+                digest_after[source][workload],
+                json_bool(window_rc[source][workload] == 0 && digest_after[source][workload] == initial_digest));
+            print_single_event_result(out, &results[source][workload]);
+            fprintf(out, "}%s\n", workload + 1 == IBS_WORKLOAD_COUNT ? "" : ",");
+        }
+        fprintf(out, "    ]}%s\n", source + 1 == IBS_SOURCE_COUNT ? "" : ",");
+    }
+    fprintf(out, "  ],\n");
+    fprintf(out, "  \"acceptance\": {\"any_opened\": %s, \"any_read_ok\": %s, \"any_nonzero\": %s, \"all_restored\": %s, \"any_workload_response\": %s, \"ibs_first_light_available\": %s}\n",
+        json_bool(any_opened),
+        json_bool(any_read_ok),
+        json_bool(any_nonzero),
+        json_bool(all_restored),
+        json_bool(any_workload_response),
+        json_bool(ibs_available));
+    fprintf(out, "}\n");
+    fclose(out);
+    printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"any_workload_response\":%s}\n",
+        ibs_available ? "IBS_FIRST_LIGHT_AVAILABLE" : "IBS_FIRST_LIGHT_NOT_AVAILABLE",
+        result_path,
+        json_bool(any_workload_response));
     return 0;
 }
 
@@ -1918,6 +2214,7 @@ int main(int argc, char **argv) {
     bool path_rw_observe_mode = false;
     bool route_state_mode = false;
     bool phase_local_pmu_mode = false;
+    bool ibs_first_light_mode = false;
     if (argc == 3 && strcmp(argv[1], "--output-root") == 0) {
         output_root = argv[2];
     } else if (argc == 4 && strcmp(argv[1], "--coherence-operators") == 0 &&
@@ -1944,10 +2241,14 @@ int main(int argc, char **argv) {
                strcmp(argv[2], "--output-root") == 0) {
         phase_local_pmu_mode = true;
         output_root = argv[3];
+    } else if (argc == 4 && strcmp(argv[1], "--ibs-first-light") == 0 &&
+               strcmp(argv[2], "--output-root") == 0) {
+        ibs_first_light_mode = true;
+        output_root = argv[3];
     } else if (argc == 2 && strcmp(argv[1], "--self-test") == 0) {
         return self_test();
     } else {
-        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root>\n", argv[0]);
+        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root>\n", argv[0]);
         return 2;
     }
     if (output_root[0] != '/') {
@@ -1996,6 +2297,11 @@ int main(int argc, char **argv) {
     }
     if (phase_local_pmu_mode) {
         int rc = run_phase_local_pmu_mode(output_root, &carrier, initial_digest);
+        free(carrier.bytes);
+        return rc;
+    }
+    if (ibs_first_light_mode) {
+        int rc = run_ibs_first_light_mode(output_root, &carrier, initial_digest);
         free(carrier.bytes);
         return rc;
     }

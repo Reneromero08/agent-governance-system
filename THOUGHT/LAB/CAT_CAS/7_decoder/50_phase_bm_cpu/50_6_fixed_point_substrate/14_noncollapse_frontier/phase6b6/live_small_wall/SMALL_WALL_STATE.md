@@ -6,7 +6,7 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`PHASE_LOCAL_PMU_CODED_RESPONSE_NOT_ESTABLISHED`
+`IBS_FIRST_LIGHT_NOT_AVAILABLE`
 
 **Active wall:**
 The current wall is now restoration-clean physical coupling for a declared
@@ -37,7 +37,12 @@ ran cleanly. It produced opposed candidate signs in both established coherence
 counters, but the magnitudes stayed below the predeclared three-times-sham-floor rule.
 The active wall is now carrier/observable selection for the declared pre-projection
 access model: neither the current timing carrier nor the tested PMU ownership-intent
-footprint carrier preserves a control-clean phase-local fold-odd response.
+footprint carrier preserves a control-clean phase-local fold-odd response. A minimal
+IBS availability probe found that the lab kernel exposes `ibs_fetch` and `ibs_op`
+event sources, but every tested ordinary `perf_event_open` form returned `EINVAL`,
+including direct IBS sources and precise raw `r076:p`/`r0C1:p` attempts. IBS is not a
+near-term carrier without changing kernel/tool access or adding a different sampling
+implementation.
 
 ## Established
 
@@ -1036,7 +1041,8 @@ timing or PMU footprint discriminator unchanged.
 
 Candidate families:
 
-- Instruction Based Sampling as a diagnostic microscope;
+- Instruction Based Sampling as a diagnostic microscope only if a later kernel/tool
+  path exposes usable samples;
 - write-combining buffer state and flush order;
 - thermal afterimage on longer timescales;
 - cache-line eviction topology;
@@ -1046,29 +1052,60 @@ Candidate families:
 These are not fallback decorations. Promote one when H1-H5 expose a precise carrier,
 operator, observability, or restoration wall that it can attack.
 
-**Status:** reserve frontier.
+The first IBS availability probe was negative:
+
+```text
+run id        f10_ibs_first_light_1
+source bundle 0a28ed323e162800e3df2970dc4bafee4fd353ce420e50b43a7574497bea5d01
+worker status IBS_FIRST_LIGHT_NOT_AVAILABLE
+```
+
+The lab kernel exposed `ibs_fetch` type `10` and `ibs_op` type `11`, but all tested
+ordinary `perf_event_open` forms failed with `EINVAL`:
+
+```text
+ibs_fetch_default   open_errno 22
+ibs_fetch_rand_en   open_errno 22
+ibs_op_default      open_errno 22
+ibs_op_cnt_ctl      open_errno 22
+raw_cycles_precise  open_errno 22
+raw_uops_precise    open_errno 22
+```
+
+The transaction completed with verified copy-back and remote cleanup, zero frequency
+writes, zero voltage access, zero MSR reads/writes, temperature below veto, and no
+forbidden CAT_CAS process residue.
+
+Checkpoint:
+
+`F10_IBS_FIRST_LIGHT_CHECKPOINT_20260712.json`
+
+**Status:** IBS is not a usable near-term carrier under the current ordinary
+`perf_event_open` access path. Do not spend the next loop on IBS unless the mechanism
+changes to a real sampler or the kernel/tool boundary changes.
 
 ## Cheapest current discriminator
 
 Build the next discriminator by changing carrier/observable, not by repeating the same
 timing-response coded loop or the same ownership-intent PMU footprint loop. The
-cheapest useful route is now an IBS or phase-native availability probe on the Phenom II
-ordinary Linux performance interface: first establish whether the lab kernel exposes an
-IBS fetch/op or adjacent event source usable through `perf_event_open`, then run the
-smallest CAT_CAS-owned read/store sample that tells whether it preserves a
-pre-projection phase-local coordinate with lower sham curvature than the timing and
-PMU footprint carriers.
+cheapest useful route is now a non-IBS, non-PMU-footprint carrier probe. The most
+direct candidate is write-combining or flush-order state because it changes the
+physical buffering/order carrier while keeping CAT_CAS-owned bytes, public phase
+queries, and ordinary user-space instructions. If that cannot be built without new
+privilege, use a cache-line eviction/topology carrier that measures restoration by a
+sentinel response rather than by byte digest alone.
 
 The next probe should answer:
 
-1. Does the lab kernel expose an IBS fetch/op or adjacent phase-native event source
-   through ordinary `perf_event_open` without MSR access?
-2. Can that carrier measure a CAT_CAS-owned synthetic read/store stimulus without
-   observing unrelated processes, private data, cache sets, or physical addresses?
+1. Can a CAT_CAS-owned write-combining, flush-order, or eviction/topology carrier be
+   prepared and restored without voltage, MSR, kernel, physical-address, or cache-set
+   access?
+2. Does its sentinel response provide a stronger restoration law than byte equality?
 3. Does the fixed quadrature observable
    `z = (2/K) * sum(response_k * exp(i * theta_k))` show lower sham curvature than
    `f10_phase_local_pmu_0`?
-4. What restoration class is directly measurable for that carrier beyond byte equality?
+4. Does a killing control remove the response without repeating the timing or PMU
+   footprint geometry?
 
 Do not rerun the same timing coded loop, another scalar PMU route metric,
 unconditioned transient timing repeat, or unlabeled cache-line rectangle unchanged. The
@@ -1087,9 +1124,11 @@ physical query-scramble alternative. `coded_preprojection_warm_query_off_0` and
 `coded_preprojection_warm_phase_local_sham_0` passed the phase-local null rule, but
 `coded_preprojection_warm_phase_local_0` did not produce an opposed fold-odd signal.
 `f10_phase_local_pmu_0` then produced opposed PMU signs but stayed below the
-three-times-sham-floor rule. The next useful marker remains short of
+three-times-sham-floor rule. `f10_ibs_first_light_1` showed that IBS is exposed in
+sysfs but not usable through the tested ordinary `perf_event_open` forms. The next
+useful marker remains short of
 `SMALL_WALL_CROSSED`; the next move must change carrier/observable rather than promote
-the timing or PMU footprint result.
+the timing, PMU footprint, or IBS availability result.
 
 ## State update rule
 

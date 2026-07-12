@@ -81,6 +81,13 @@ MODES: dict[str, dict[str, Any]] = {
         "failed_status": "F10_PHASE_LOCAL_PMU_TARGET_FAILED",
         "claim_ceiling": "Phase-local ownership-intent PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
     },
+    "ibs-first-light": {
+        "worker_args": ["--ibs-first-light"],
+        "result_file": "F10_IBS_FIRST_LIGHT_RESULT.json",
+        "complete_status": "F10_IBS_FIRST_LIGHT_TARGET_COMPLETE",
+        "failed_status": "F10_IBS_FIRST_LIGHT_TARGET_FAILED",
+        "claim_ceiling": "IBS availability and first-light probe only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
+    },
 }
 FORBIDDEN_PROCESS_MARKERS = (
     "f10_pmc_first_light_worker",

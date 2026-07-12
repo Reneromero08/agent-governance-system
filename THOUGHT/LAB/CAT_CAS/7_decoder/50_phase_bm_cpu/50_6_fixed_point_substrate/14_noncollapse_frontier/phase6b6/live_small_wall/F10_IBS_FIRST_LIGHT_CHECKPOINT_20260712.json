@@ -1,0 +1,65 @@
+{
+  "schema_id": "CAT_CAS_F10_IBS_FIRST_LIGHT_CHECKPOINT_V1",
+  "starting_head": "c40d75a02a9f2704275bfe1076150436e49610bb",
+  "run_id": "f10_ibs_first_light_1",
+  "mode": "ibs-first-light",
+  "command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_coherence_operators.py --run-id f10_ibs_first_light_1 --mode ibs-first-light",
+  "local_run": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/f10_ibs_first_light_1",
+  "source_bundle_sha256": "0a28ed323e162800e3df2970dc4bafee4fd353ce420e50b43a7574497bea5d01",
+  "result_hashes": {
+    "CONTROLLER_RESULT.json": "51a0474f484fcf88b524bee18f4c5274ff84612b2d827bf772befd4a772cbe37",
+    "CONTROLLER_STDERR.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "CONTROLLER_STDOUT.txt": "2c027495b13a694eded3e0aa6358b88f9eaa3f49b67c92eb8d3fd9cb73522cf3",
+    "F10_IBS_FIRST_LIGHT_RESULT.json": "cf444e41a9a84e6a895f7c40c6b0cb16ded05c457be308e5036a42413678f1b7",
+    "FILE_MANIFEST.json": "4452b39ce88ee1aebd80af15393fd477b6f7ce4543ad3accff8f5771d9eb1a39",
+    "FINAL_RESULT.json": "c55e7636ae73e89860892303f7b7c88f0820549187383f09247dabdb330d878a"
+  },
+  "target_status": "F10_IBS_FIRST_LIGHT_TARGET_COMPLETE",
+  "worker_status": "IBS_FIRST_LIGHT_NOT_AVAILABLE",
+  "copy_verified": true,
+  "remote_cleaned": true,
+  "remote_returncode": 0,
+  "temperature": {
+    "preflight_c": 49.5,
+    "post_c": 50.0,
+    "veto_c": 68.0,
+    "below_veto": true
+  },
+  "device_access": {
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "forbidden_process_matches_after": []
+  },
+  "tested_sources": {
+    "ibs_fetch_default": {"pmu_type": 10, "config_hex": "0x0000000000000000", "precise_ip": 0, "open_errno": 22},
+    "ibs_fetch_rand_en": {"pmu_type": 10, "config_hex": "0x0200000000000000", "precise_ip": 0, "open_errno": 22},
+    "ibs_op_default": {"pmu_type": 11, "config_hex": "0x0000000000000000", "precise_ip": 0, "open_errno": 22},
+    "ibs_op_cnt_ctl": {"pmu_type": 11, "config_hex": "0x0000000000080000", "precise_ip": 0, "open_errno": 22},
+    "raw_cycles_precise": {"pmu_type": 4, "config_hex": "0x0000000000000076", "precise_ip": 1, "open_errno": 22},
+    "raw_uops_precise": {"pmu_type": 4, "config_hex": "0x00000000000000c1", "precise_ip": 1, "open_errno": 22}
+  },
+  "acceptance": {
+    "any_opened": false,
+    "any_read_ok": false,
+    "any_nonzero": false,
+    "all_restored": true,
+    "any_workload_response": false,
+    "ibs_first_light_available": false
+  },
+  "adjudication": {
+    "marker": "IBS_FIRST_LIGHT_NOT_AVAILABLE",
+    "meaning": "The kernel exposes ibs_fetch and ibs_op event sources, but the tested ordinary perf_event_open forms all failed with EINVAL. IBS is not a usable near-term CAT_CAS carrier without changing kernel/tool access or adding a different sampling implementation.",
+    "claim_ceiling": "CONTROLLED_COHERENCE_STATE_FOUND",
+    "excluded_claims": [
+      "IBS carrier availability",
+      "path memory",
+      "coherence holonomy",
+      "OrbitState coupling",
+      "fold-odd recovery",
+      "Small Wall crossing"
+    ],
+    "next_wall": "Pick a different measurable carrier that does not require direct IBS access, kernel changes, MSR access, or perf tooling unavailable on the lab device."
+  }
+}
