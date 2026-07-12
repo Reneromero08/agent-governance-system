@@ -26,7 +26,6 @@ import gate_a_frequency_preparation_bundle as target_bundle
 
 SSH_OPTIONS = ["-o", "BatchMode=yes", "-o", "ConnectTimeout=15", "-o", "StrictHostKeyChecking=yes"]
 SCP_OPTIONS = ["-o", "BatchMode=yes", "-o", "ConnectTimeout=15", "-o", "StrictHostKeyChecking=yes"]
-FORBIDDEN_PROCESS_TOKENS = ("gate_a_frequency_preparation_target.py", "catcas_phase6b6_gate_a_freqprep_")
 
 
 class TransportError(RuntimeError):
@@ -258,10 +257,11 @@ print(json.dumps({"status":"cleanup_complete"},sort_keys=True))
 '''.strip()
 
 PROCESS_SCRIPT = r'''
-import json, os, subprocess, sys
+import json, os, subprocess
 p=subprocess.run(["ps","-ww","-eo","pid=,comm=,args="],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
 text=p.stdout.decode("utf-8","strict")
-tokens=sys.argv[1:]; me=os.getpid(); hits=[]
+tokens=["gate_a_"+"frequency_"+"preparation_"+"target.py","catcas_"+"phase6b6_"+"gate_a_"+"freqprep_"]
+me=os.getpid(); hits=[]
 for line in text.splitlines():
  parts=line.split(None,1)
  if not parts: continue
@@ -449,7 +449,7 @@ def run_transport(request: TransportRequest, *, runner: Runner = default_runner)
         )
         require(invoke.returncode in {0, 1}, "target runner returned invalid status")
 
-        scan = contact(ssh_argv(target, *_remote_python(PROCESS_SCRIPT, *FORBIDDEN_PROCESS_TOKENS)))
+        scan = contact(ssh_argv(target, *_remote_python(PROCESS_SCRIPT)))
         process_receipt = parse_process_receipt(scan.stdout)
         write_json(root / "POST_RUNTIME_PROCESS_RECEIPT.json", process_receipt)
         writer_absent = True
@@ -476,7 +476,7 @@ def run_transport(request: TransportRequest, *, runner: Runner = default_runner)
         require(cleanup.returncode == 0, "remote cleanup failed")
         absence = contact(ssh_argv(target, *_remote_python(ABSENCE_SCRIPT, permit.remote_execution_root, permit.remote_stage_archive, permit.remote_evidence_archive)))
         require(absence.returncode == 0, "post-cleanup absence failed")
-        post = contact(ssh_argv(target, *_remote_python(PROCESS_SCRIPT, *FORBIDDEN_PROCESS_TOKENS)))
+        post = contact(ssh_argv(target, *_remote_python(PROCESS_SCRIPT)))
         post_receipt = parse_process_receipt(post.stdout)
         write_json(root / "POST_CLEANUP_PROCESS_RECEIPT.json", post_receipt)
         write_json(root / "CLEANUP_RECEIPT.json", {
@@ -494,7 +494,7 @@ def run_transport(request: TransportRequest, *, runner: Runner = default_runner)
         result["status"] = "FAILED_CLOSED_TRANSPORT"
         if mutated and not writer_absent:
             try:
-                scan = contact(ssh_argv(target, *_remote_python(PROCESS_SCRIPT, *FORBIDDEN_PROCESS_TOKENS)))
+                scan = contact(ssh_argv(target, *_remote_python(PROCESS_SCRIPT)))
                 process_receipt = parse_process_receipt(scan.stdout)
                 write_json(root / "FAILURE_PROCESS_RECEIPT.json", process_receipt)
                 writer_absent = True
