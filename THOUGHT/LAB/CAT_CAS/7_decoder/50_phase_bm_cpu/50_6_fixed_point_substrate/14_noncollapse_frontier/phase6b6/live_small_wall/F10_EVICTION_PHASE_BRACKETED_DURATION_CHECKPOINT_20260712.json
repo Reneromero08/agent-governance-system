@@ -1,0 +1,135 @@
+{
+  "schema_id": "CAT_CAS_F10_EVICTION_PHASE_BRACKETED_DURATION_CHECKPOINT_V1",
+  "checkpoint_date": "2026-07-12",
+  "starting_commit": "d9eaef829fb0930cb7d18efed953b595885f39c7",
+  "failed_attempt": {
+    "run_id": "f10_eviction_duration_0",
+    "source_bundle_sha256": "e70f16b07332901cc77db6b73f4051cf1e42ea4b94d8d43f7ca54c0cc95c7231",
+    "mode": "eviction-phase-bracketed-duration",
+    "mechanical_failure": "worker exited -11 before writing F10_EVICTION_PHASE_BRACKETED_DURATION_RESULT.json with enlarged eviction buffer",
+    "remote_returncode": -11,
+    "lab_device_status": "F10_EVICTION_PHASE_BRACKETED_DURATION_TARGET_FAILED",
+    "copy_verified": true,
+    "remote_cleaned_verified": true,
+    "temperature_preflight_c": 50.0,
+    "temperature_post_c": 50.0,
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "raw_outputs": {
+      "FINAL_RESULT.json": {
+        "size": 2427,
+        "sha256": "78b0bfa43290e266e9b464db66538ef016e2ecfce2c53d167d028fdef3252a36"
+      },
+      "FILE_MANIFEST.json": {
+        "size": 188,
+        "sha256": "dd944f1e09c7b7694d9da8314bc623875f63638f0e507dee4cbda744adffd1d8"
+      }
+    }
+  },
+  "accepted_attempt": {
+    "run_id": "f10_eviction_duration_1",
+    "source_bundle_sha256": "8d6a0d63213bcc479cdf0003a8363b24db12ecbc0b3a79079727b750dee97687",
+    "mode": "eviction-phase-bracketed-duration",
+    "local_run": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/f10_eviction_duration_1",
+    "remote_run": "/root/catcas_live_small_wall/f10_eviction_duration_1",
+    "command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_coherence_operators.py --run-id f10_eviction_duration_1 --mode eviction-phase-bracketed-duration",
+    "lab_device": "root@192.168.137.100",
+    "remote_returncode": 0,
+    "lab_device_status": "F10_EVICTION_PHASE_BRACKETED_DURATION_TARGET_COMPLETE",
+    "worker_status": "EVICTION_PHASE_BRACKETED_DURATION_RESPONSE_NOT_ESTABLISHED",
+    "copy_verified": true,
+    "remote_cleaned": true
+  },
+  "predeclared_observable": {
+    "carrier": "eviction-sentinel duration response after predetermined CAT_CAS-owned eviction-buffer preconditioning",
+    "token_sequence": "P0 M0 M1 P1 P2 M2 M3 P3",
+    "bracket": "control_before token control_after",
+    "control_prep": "remote_read_eviction",
+    "high_prep": "none",
+    "low_prep": "home_write_eviction",
+    "primary": "duration_ns",
+    "acceptance": "opposed candidate Im plus/minus and min(abs(candidate imag)) > 3 * sham_floor for bracketed duration_ns"
+  },
+  "decoded_observables": {
+    "duration_ns": {
+      "sham_floor": 7604.25,
+      "sham_plus_imag": 51.25,
+      "sham_minus_imag": -7604.25,
+      "candidate_plus_imag": -4132.5,
+      "candidate_minus_imag": 6568.75,
+      "opposed_sign": true,
+      "exceeds_three_x_sham_floor": false,
+      "phase_local_signal": false
+    },
+    "cache_block_commands_change_to_dirty": {
+      "sham_floor": 0.00001227478200979,
+      "candidate_plus_imag": 0.0000008806087259805,
+      "candidate_minus_imag": -0.000008467215081352,
+      "opposed_sign": true,
+      "phase_local_signal": false
+    },
+    "probe_responses_dirty": {
+      "sham_floor": 0.0000112514974556,
+      "candidate_plus_imag": -0.000004143382090217,
+      "candidate_minus_imag": -0.00001254773635772,
+      "opposed_sign": false,
+      "phase_local_signal": false
+    }
+  },
+  "acceptance": {
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "carrier_restored": true,
+    "eviction_buffer_restored": true,
+    "duration_phase_local_signal": false,
+    "eviction_phase_bracketed_captured": false
+  },
+  "lab_device_boundary": {
+    "temperature_preflight_c": 50.0,
+    "temperature_post_c": 50.0,
+    "temperature_veto_c": 68.0,
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "forbidden_process_matches_before": 0,
+    "forbidden_process_matches_after": 0,
+    "physical_address_access": false,
+    "cache_set_mapping": false,
+    "experiment_owned_memory_only": true
+  },
+  "raw_outputs": {
+    "F10_EVICTION_PHASE_BRACKETED_DURATION_RESULT.json": {
+      "size": 38537,
+      "sha256": "f21db390dc897337787c24ef430765b9a8f50121a226184a5c921b4ec34cf0ba"
+    },
+    "FINAL_RESULT.json": {
+      "size": 2735,
+      "sha256": "fc101f70b76c5cc6de9f5fa6b8a89c3a4f7de5f9aa98009d412b769edbd5714c"
+    },
+    "CONTROLLER_RESULT.json": {
+      "size": 972,
+      "sha256": "1784bdd7960831240c2556d6828fca6de82858a05650e1c590f84c8a2152face"
+    },
+    "FILE_MANIFEST.json": {
+      "size": 338,
+      "sha256": "ba18ecbf0122cf9b4272573dced755625136d9b51da3c9b6e8d92dfb6607e457"
+    },
+    "CONTROLLER_STDOUT.txt": {
+      "size": 2865,
+      "sha256": "4b19a87a5a9f99095e5d95ec9b09eb27eb03a0f1087d5ec775a5550f7ef6afa4"
+    },
+    "CONTROLLER_STDERR.txt": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "classification": {
+    "marker": "EVICTION_PHASE_BRACKETED_DURATION_RESPONSE_NOT_ESTABLISHED",
+    "mechanical_failure": false,
+    "scientific_result": "negative for bracketed duration as the primary observable",
+    "interpretation": "Duration preserved opposed candidate signs but did not exceed the three-times-sham floor. Together with the PMU negatives, this weakens the eviction-sentinel phase-local family as the next Small Wall carrier."
+  }
+}

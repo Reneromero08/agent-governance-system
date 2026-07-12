@@ -6,7 +6,7 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`EVICTION_PHASE_BRACKETED_C2D_RESPONSE_NOT_ESTABLISHED`
+`EVICTION_PHASE_BRACKETED_DURATION_RESPONSE_NOT_ESTABLISHED`
 
 **Active wall:**
 The current wall is phase-local use of a newly visible restoration-sentinel carrier
@@ -28,7 +28,9 @@ the eviction-sentinel carrier, not carrier absence. The bracketed follow-on
 in Change-to-Dirty, but missed the three-times-sham rule. The active wall is now prep
 contrast under local bracketing. The stronger `none` versus `home_write_eviction`
 contrast did not preserve the opposed-sign geometry, so the eviction-sentinel carrier
-is not yet a control-clean phase-local fold-odd carrier.
+is not yet a control-clean phase-local fold-odd carrier. A duration-primary bracketed
+run also preserved opposed signs but remained below the three-times-sham rule. The
+active wall is now carrier-family selection beyond eviction-sentinel PMU/timing.
 
 ## Established
 
@@ -1290,21 +1292,62 @@ Checkpoint:
 same-sign probe response and did not preserve the opposed Change-to-Dirty geometry.
 Do not repeat this eviction-sentinel phase-local family unchanged.
 
+The duration-primary bracketed discriminator then used the same no-prep versus
+home-write centers and made bracketed duration the primary observable. The first
+enlarged-buffer attempt, `f10_eviction_duration_0`, failed mechanically with worker
+return `-11` before writing the worker result. It copied back `FINAL_RESULT.json`,
+performed zero frequency writes, zero voltage access, zero MSR reads/writes,
+temperature stayed below veto, and the remote run root was verified absent after
+cleanup. The exact enlargement was removed before the single rerun.
+
+The repaired standard-buffer duration run was:
+
+```text
+run id        f10_eviction_duration_1
+source bundle 8d6a0d63213bcc479cdf0003a8363b24db12ecbc0b3a79079727b750dee97687
+worker status EVICTION_PHASE_BRACKETED_DURATION_RESPONSE_NOT_ESTABLISHED
+```
+
+The transaction completed with verified copy-back and remote cleanup, zero frequency
+writes, zero voltage access, zero MSR reads/writes, no physical-address access, no
+cache-set mapping, no unrelated-process observation, temperature below veto, every PMU
+window unmultiplexed, and both carrier and eviction-buffer digests restored.
+
+Primary decoded duration:
+
+```text
+duration_ns:
+  sham floor       7604.25
+  candidate plus  -4132.5
+  candidate minus  6568.75
+  opposed sign     true
+  signal           false
+```
+
+Checkpoint:
+
+`F10_EVICTION_PHASE_BRACKETED_DURATION_CHECKPOINT_20260712.json`
+
+**Status:** duration bracketing is negative. The eviction-sentinel carrier remains a
+useful restoration-sentinel calibration, but the tested PMU and duration phase-local
+uses do not establish a control-clean fold-odd response. The next move should change
+carrier family or access model rather than continuing eviction-sentinel remaps.
+
 ## Cheapest current discriminator
 
-Change carrier or observable family. The run must stay closed: CAT_CAS-owned buffers
+Change carrier family or access model. The run must stay closed: CAT_CAS-owned buffers
 only, predetermined geometry, no physical-address access, no cache-set mapping, no
 unrelated-process observation, and no MSR or voltage access.
 
 The next probe should answer:
 
-1. Is there a non-PMU aggregate timing or runtime-level observable that couples to the
-   bracketed eviction state before the PMU projection collapses the sign?
-2. Can the active pre-projection query be expressed as a declared source-side phase
-   rather than as post-hoc PMU counter labels?
-3. Does a killing control remove the response without relying on route, line-set, or
-   sequence-position imbalance?
-4. Does the carrier still restore beyond byte equality under the new observable?
+1. Can the active pre-projection query be expressed as a declared source-side phase
+   rather than as a post-hoc PMU or duration label?
+2. Is there a source-owned runtime carrier whose state survives long enough to couple
+   before the public fold-even projection?
+3. Does a killing control remove the response without relying on route, line-set,
+   eviction-prep, or sequence-position imbalance?
+4. Does the carrier restore beyond byte equality under the new observable?
 
 Do not rerun the same timing coded loop, another scalar PMU route metric,
 unconditioned transient timing repeat, IBS availability probe, WC/flush-order pair, or
@@ -1329,13 +1372,14 @@ under controls. `f10_eviction_sentinel_0` then established a measured
 restoration-sentinel carrier by showing that predetermined eviction-buffer
 preconditioning changes the later ownership-intent sentinel while both buffers restore.
 `f10_eviction_phase_local_0` did not promote that carrier into a phase-local coded
-response because the equal-prep sham curvature exceeded the candidate. This marker
+response because the equal-prep sham curvature exceeded the candidate.
 `f10_eviction_bracket_0` reduced the sham floor and produced opposed Change-to-Dirty
-candidate signs, but did not exceed the three-times-sham threshold. This marker remains
-short of `SMALL_WALL_CROSSED`. `f10_eviction_bracket_c2d_0` then showed that simply
-strengthening the bracketed prep contrast collapses the sign. The next move must change
-carrier or observable family rather than keep remapping the same eviction-sentinel PMU
-phase-local geometry.
+candidate signs, but did not exceed the three-times-sham threshold.
+`f10_eviction_bracket_c2d_0` then showed that simply strengthening the bracketed prep
+contrast collapses the sign. `f10_eviction_duration_1` extended the rejection to a
+duration-primary observable. The current marker remains short of
+`SMALL_WALL_CROSSED`; the next move must change carrier family or access model rather
+than keep remapping the same eviction-sentinel PMU/timing phase-local geometry.
 
 ## State update rule
 
