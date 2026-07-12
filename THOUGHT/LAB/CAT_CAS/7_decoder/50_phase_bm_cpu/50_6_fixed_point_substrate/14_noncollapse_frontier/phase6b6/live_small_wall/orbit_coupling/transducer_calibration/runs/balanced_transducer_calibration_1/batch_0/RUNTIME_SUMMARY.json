@@ -1,0 +1,18 @@
+{
+  "schema_id": "CAT_CAS_BALANCED_TRANSDUCER_RUNTIME_SUMMARY_V1",
+  "replicate_index": 0,
+  "status": "BALANCED_TRANSDUCER_RUNTIME_COMPLETE",
+  "trial_count": 112,
+  "failed_trial_count": 0,
+  "duration_ns": 416776266,
+  "source_core": 4,
+  "receiver_core": 5,
+  "bank_lines": 4096,
+  "line_bytes": 64,
+  "frequency_writes": 0,
+  "voltage_writes": 0,
+  "msr_reads": 0,
+  "msr_writes": 0,
+  "physical_address_access": false,
+  "cache_set_mapping": false
+}

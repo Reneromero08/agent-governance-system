@@ -1,0 +1,2542 @@
+{
+  "adjudication_sha256": "8efb0e5292b7da8d596d77ec234b588932e30b7a6a8831c445d4b2bf8ffcdb7f",
+  "claim_ceiling": "public balanced transducer only; no OrbitState coupling candidate and no Small Wall crossing claim",
+  "coordinate_priority": [
+    "change_to_dirty",
+    "probe_dirty",
+    "change_to_dirty_per_cycle",
+    "probe_dirty_per_cycle",
+    "cycles"
+  ],
+  "coordinate_results": {
+    "change_to_dirty": {
+      "aggregate": {
+        "gain_floor": 231.0,
+        "laws": {
+          "gain_law": true,
+          "logical_pointer_swap_invariance_law": false,
+          "measurement_order_law": false,
+          "monotonicity_law": true,
+          "oddness_law": true,
+          "physical_pointer_swap_reversal_law": false,
+          "restoration_law": true,
+          "sign_law": true,
+          "source_order_law": false,
+          "stratum_transfer_law": true,
+          "zero_law": true
+        },
+        "max_measurement_order_error": 1.691358024691358,
+        "max_physical_reversal_error": 1.4252873563218391,
+        "max_pointer_swap_error": 1.4252873563218391,
+        "max_source_order_error": 0.5294117647058824,
+        "means_by_q": {
+          "-1024": -1274.125,
+          "-1536": -1881.09375,
+          "-512": -633.625,
+          "0": -1.5625,
+          "1024": 1267.0625,
+          "1536": 1911.125,
+          "512": 642.28125
+        },
+        "null_components": {
+          "absolute_floor": 1.0,
+          "complete_null_ceiling": 77.0,
+          "fresh_process_variation": 11.625,
+          "q0_abs": 77.0,
+          "q0_mapping_order_residual": 7.0,
+          "q0_mapping_residual": 25.5,
+          "q0_measurement_order_residual": 17.75,
+          "q0_source_order_residual": 7.0,
+          "restoration_sentinel_variation": 0.0
+        },
+        "oddness_errors": {
+          "1024": 0.005543019719415285,
+          "1536": 0.015713911962849107,
+          "512": 0.013477351238262054
+        },
+        "passed": false,
+        "restoration_sentinel": {
+          "floor": 1024.0,
+          "max_error": 0.0,
+          "passed": true
+        },
+        "sign_convention": "direct",
+        "stratum_results": [
+          {
+            "gain_law": true,
+            "mapping": 0,
+            "measurement_order": "positive_first",
+            "oddness_law": true,
+            "passed": true,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "positive_first"
+          },
+          {
+            "gain_law": true,
+            "mapping": 0,
+            "measurement_order": "negative_first",
+            "oddness_law": true,
+            "passed": true,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "positive_first"
+          },
+          {
+            "gain_law": true,
+            "mapping": 0,
+            "measurement_order": "positive_first",
+            "oddness_law": true,
+            "passed": true,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "negative_first"
+          },
+          {
+            "gain_law": true,
+            "mapping": 0,
+            "measurement_order": "negative_first",
+            "oddness_law": true,
+            "passed": true,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "negative_first"
+          },
+          {
+            "gain_law": true,
+            "mapping": 1,
+            "measurement_order": "positive_first",
+            "oddness_law": true,
+            "passed": true,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "positive_first"
+          },
+          {
+            "gain_law": true,
+            "mapping": 1,
+            "measurement_order": "negative_first",
+            "oddness_law": true,
+            "passed": true,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "positive_first"
+          },
+          {
+            "gain_law": true,
+            "mapping": 1,
+            "measurement_order": "positive_first",
+            "oddness_law": true,
+            "passed": true,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "negative_first"
+          },
+          {
+            "gain_law": true,
+            "mapping": 1,
+            "measurement_order": "negative_first",
+            "oddness_law": true,
+            "passed": true,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "negative_first"
+          }
+        ],
+        "zero_test_mean": 12.3125
+      },
+      "diagnostic_only": false,
+      "hard_integrity": true,
+      "max_replicate_error": 0.05884019644880997,
+      "passed": false,
+      "per_replicate": {
+        "0": {
+          "gain_floor": 156.0,
+          "laws": {
+            "gain_law": true,
+            "logical_pointer_swap_invariance_law": false,
+            "measurement_order_law": false,
+            "monotonicity_law": true,
+            "oddness_law": true,
+            "physical_pointer_swap_reversal_law": false,
+            "restoration_law": true,
+            "sign_law": true,
+            "source_order_law": false,
+            "stratum_transfer_law": true,
+            "zero_law": true
+          },
+          "max_measurement_order_error": 1.3148148148148149,
+          "max_physical_reversal_error": 1.4676258992805755,
+          "max_pointer_swap_error": 1.4676258992805755,
+          "max_source_order_error": 0.8615384615384616,
+          "means_by_q": {
+            "-1024": -1277.125,
+            "-1536": -1887.5,
+            "-512": -629.25,
+            "0": 4.625,
+            "1024": 1266.5,
+            "1536": 1903.0,
+            "512": 622.8125
+          },
+          "null_components": {
+            "absolute_floor": 1.0,
+            "complete_null_ceiling": 52.0,
+            "fresh_process_variation": 0.0,
+            "q0_abs": 52.0,
+            "q0_mapping_order_residual": 7.0,
+            "q0_mapping_residual": 25.5,
+            "q0_measurement_order_residual": 17.75,
+            "q0_source_order_residual": 7.0,
+            "restoration_sentinel_variation": 0.0
+          },
+          "oddness_errors": {
+            "1024": 0.008319467554076539,
+            "1536": 0.00814503415659485,
+            "512": 0.010230433055224473
+          },
+          "passed": false,
+          "restoration_sentinel": {
+            "floor": 1024.0,
+            "max_error": 0.0,
+            "passed": true
+          },
+          "sign_convention": "direct",
+          "stratum_results": [
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            }
+          ],
+          "zero_test_mean": 18.875
+        },
+        "1": {
+          "gain_floor": 231.0,
+          "laws": {
+            "gain_law": true,
+            "logical_pointer_swap_invariance_law": false,
+            "measurement_order_law": false,
+            "monotonicity_law": true,
+            "oddness_law": true,
+            "physical_pointer_swap_reversal_law": false,
+            "restoration_law": true,
+            "sign_law": true,
+            "source_order_law": false,
+            "stratum_transfer_law": true,
+            "zero_law": true
+          },
+          "max_measurement_order_error": 1.03125,
+          "max_physical_reversal_error": 0.7843137254901961,
+          "max_pointer_swap_error": 0.7843137254901961,
+          "max_source_order_error": 0.4691358024691358,
+          "means_by_q": {
+            "-1024": -1271.125,
+            "-1536": -1874.6875,
+            "-512": -638.0,
+            "0": -7.75,
+            "1024": 1267.625,
+            "1536": 1919.25,
+            "512": 661.75
+          },
+          "null_components": {
+            "absolute_floor": 1.0,
+            "complete_null_ceiling": 77.0,
+            "fresh_process_variation": 0.0,
+            "q0_abs": 77.0,
+            "q0_mapping_order_residual": 4.75,
+            "q0_mapping_residual": 10.0,
+            "q0_measurement_order_residual": 16.5,
+            "q0_source_order_residual": 4.75,
+            "restoration_sentinel_variation": 0.0
+          },
+          "oddness_errors": {
+            "1024": 0.0027534664175435145,
+            "1536": 0.023218705223394556,
+            "512": 0.035889686437476385
+          },
+          "passed": false,
+          "restoration_sentinel": {
+            "floor": 1024.0,
+            "max_error": 0.0,
+            "passed": true
+          },
+          "sign_convention": "direct",
+          "stratum_results": [
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            }
+          ],
+          "zero_test_mean": 5.75
+        }
+      },
+      "replicate_consistency_law": true,
+      "replicate_sign_conventions": [
+        "direct",
+        "direct"
+      ],
+      "same_replicate_sign_convention": true
+    },
+    "change_to_dirty_per_cycle": {
+      "aggregate": {
+        "gain_floor": 3.0,
+        "laws": {
+          "gain_law": false,
+          "logical_pointer_swap_invariance_law": true,
+          "measurement_order_law": true,
+          "monotonicity_law": true,
+          "oddness_law": true,
+          "physical_pointer_swap_reversal_law": true,
+          "restoration_law": true,
+          "sign_law": false,
+          "source_order_law": true,
+          "stratum_transfer_law": false,
+          "zero_law": true
+        },
+        "max_measurement_order_error": 0.0008558273684236167,
+        "max_physical_reversal_error": 0.00021777330801616736,
+        "max_pointer_swap_error": 0.00021777330801616736,
+        "max_source_order_error": 0.00015102265515217834,
+        "means_by_q": {
+          "-1024": -0.003616946004474061,
+          "-1536": -0.006111040050053014,
+          "-512": -0.0016002958189140389,
+          "0": 3.803747046199159e-05,
+          "1024": 0.0035816350656087195,
+          "1536": 0.006040469701896684,
+          "512": 0.0016597306423726612
+        },
+        "null_components": {
+          "absolute_floor": 1.0,
+          "complete_null_ceiling": 1.0,
+          "fresh_process_variation": 3.661575097149369e-05,
+          "q0_abs": 0.0008601578166163625,
+          "q0_mapping_order_residual": 0.000233048719707384,
+          "q0_mapping_residual": 6.0171759866940885e-05,
+          "q0_measurement_order_residual": 0.0008584116731022798,
+          "q0_source_order_residual": 0.000233048719707384,
+          "restoration_sentinel_variation": 0.0
+        },
+        "oddness_errors": {
+          "1024": 3.5310938865341576e-05,
+          "1536": 7.057034815632999e-05,
+          "512": 5.943482345862239e-05
+        },
+        "passed": false,
+        "restoration_sentinel": {
+          "floor": 1e-06,
+          "max_error": 0.0,
+          "passed": true
+        },
+        "sign_convention": "none",
+        "stratum_results": [
+          {
+            "gain_law": false,
+            "mapping": 0,
+            "measurement_order": "positive_first",
+            "oddness_law": true,
+            "passed": false,
+            "sign_convention": "none",
+            "sign_law": false,
+            "source_order": "positive_first"
+          },
+          {
+            "gain_law": false,
+            "mapping": 0,
+            "measurement_order": "negative_first",
+            "oddness_law": true,
+            "passed": false,
+            "sign_convention": "none",
+            "sign_law": false,
+            "source_order": "positive_first"
+          },
+          {
+            "gain_law": false,
+            "mapping": 0,
+            "measurement_order": "positive_first",
+            "oddness_law": true,
+            "passed": false,
+            "sign_convention": "none",
+            "sign_law": false,
+            "source_order": "negative_first"
+          },
+          {
+            "gain_law": false,
+            "mapping": 0,
+            "measurement_order": "negative_first",
+            "oddness_law": true,
+            "passed": false,
+            "sign_convention": "none",
+            "sign_law": false,
+            "source_order": "negative_first"
+          },
+          {
+            "gain_law": false,
+            "mapping": 1,
+            "measurement_order": "positive_first",
+            "oddness_law": true,
+            "passed": false,
+            "sign_convention": "none",
+            "sign_law": false,
+            "source_order": "positive_first"
+          },
+          {
+            "gain_law": false,
+            "mapping": 1,
+            "measurement_order": "negative_first",
+            "oddness_law": true,
+            "passed": false,
+            "sign_convention": "none",
+            "sign_law": false,
+            "source_order": "positive_first"
+          },
+          {
+            "gain_law": false,
+            "mapping": 1,
+            "measurement_order": "positive_first",
+            "oddness_law": true,
+            "passed": false,
+            "sign_convention": "none",
+            "sign_law": false,
+            "source_order": "negative_first"
+          },
+          {
+            "gain_law": false,
+            "mapping": 1,
+            "measurement_order": "negative_first",
+            "oddness_law": true,
+            "passed": false,
+            "sign_convention": "none",
+            "sign_law": false,
+            "source_order": "negative_first"
+          }
+        ],
+        "zero_test_mean": 4.332052095769431e-05
+      },
+      "diagnostic_only": false,
+      "hard_integrity": true,
+      "max_replicate_error": 0.0001466589995222237,
+      "passed": false,
+      "per_replicate": {
+        "0": {
+          "gain_floor": 3.0,
+          "laws": {
+            "gain_law": false,
+            "logical_pointer_swap_invariance_law": true,
+            "measurement_order_law": true,
+            "monotonicity_law": true,
+            "oddness_law": true,
+            "physical_pointer_swap_reversal_law": true,
+            "restoration_law": true,
+            "sign_law": false,
+            "source_order_law": true,
+            "stratum_transfer_law": false,
+            "zero_law": true
+          },
+          "max_measurement_order_error": 0.0009612997149161802,
+          "max_physical_reversal_error": 0.000362516924782179,
+          "max_pointer_swap_error": 0.000362516924782179,
+          "max_source_order_error": 0.00014317248633014977,
+          "means_by_q": {
+            "-1024": -0.0036431863048026047,
+            "-1536": -0.006119202078713066,
+            "-512": -0.0016493140700201225,
+            "0": 4.4705058955316946e-05,
+            "1024": 0.0035083055658476077,
+            "1536": 0.006056996449225347,
+            "512": 0.0016317630678750626
+          },
+          "null_components": {
+            "absolute_floor": 1.0,
+            "complete_null_ceiling": 1.0,
+            "fresh_process_variation": 0.0,
+            "q0_abs": 0.0005661964634830537,
+            "q0_mapping_order_residual": 6.899659059697268e-05,
+            "q0_mapping_residual": 6.0171759866940885e-05,
+            "q0_measurement_order_residual": 0.0008532430637449535,
+            "q0_source_order_residual": 6.899659059697268e-05,
+            "restoration_sentinel_variation": 0.0
+          },
+          "oddness_errors": {
+            "1024": 0.000134880738954997,
+            "1536": 6.220562948771897e-05,
+            "512": 1.7551002145059936e-05
+          },
+          "passed": false,
+          "restoration_sentinel": {
+            "floor": 1e-06,
+            "max_error": 0.0,
+            "passed": true
+          },
+          "sign_convention": "none",
+          "stratum_results": [
+            {
+              "gain_law": false,
+              "mapping": 0,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 0,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 0,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 0,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 1,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 1,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 1,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 1,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "negative_first"
+            }
+          ],
+          "zero_test_mean": 3.834782245859818e-05
+        },
+        "1": {
+          "gain_floor": 3.0,
+          "laws": {
+            "gain_law": false,
+            "logical_pointer_swap_invariance_law": true,
+            "measurement_order_law": true,
+            "monotonicity_law": true,
+            "oddness_law": true,
+            "physical_pointer_swap_reversal_law": true,
+            "restoration_law": true,
+            "sign_law": false,
+            "source_order_law": true,
+            "stratum_transfer_law": false,
+            "zero_law": true
+          },
+          "max_measurement_order_error": 0.0008584116731022798,
+          "max_physical_reversal_error": 0.00036261688046709904,
+          "max_pointer_swap_error": 0.00036261688046709904,
+          "max_source_order_error": 0.00034381689077906015,
+          "means_by_q": {
+            "-1024": -0.0035907057041455175,
+            "-1536": -0.00610287802139296,
+            "-512": -0.0015512775678079554,
+            "0": 3.1369881968666235e-05,
+            "1024": 0.0036549645653698314,
+            "1536": 0.00602394295456802,
+            "512": 0.0016876982168702597
+          },
+          "null_components": {
+            "absolute_floor": 1.0,
+            "complete_null_ceiling": 1.0,
+            "fresh_process_variation": 0.0,
+            "q0_abs": 0.0008601578166163625,
+            "q0_mapping_order_residual": 0.000233048719707384,
+            "q0_mapping_residual": 5.449508699432114e-05,
+            "q0_measurement_order_residual": 0.0008584116731022798,
+            "q0_source_order_residual": 0.000233048719707384,
+            "restoration_sentinel_variation": 0.0
+          },
+          "oddness_errors": {
+            "1024": 6.425886122431385e-05,
+            "1536": 7.893506682494014e-05,
+            "512": 0.00013642064906230428
+          },
+          "passed": false,
+          "restoration_sentinel": {
+            "floor": 1e-06,
+            "max_error": 0.0,
+            "passed": true
+          },
+          "sign_convention": "none",
+          "stratum_results": [
+            {
+              "gain_law": false,
+              "mapping": 0,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 0,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 0,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 0,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 1,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 1,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 1,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 1,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "negative_first"
+            }
+          ],
+          "zero_test_mean": 4.829321945679045e-05
+        }
+      },
+      "replicate_consistency_law": true,
+      "replicate_sign_conventions": [
+        "none",
+        "none"
+      ],
+      "same_replicate_sign_convention": false
+    },
+    "cycles": {
+      "aggregate": {
+        "gain_floor": 60405.0,
+        "laws": {
+          "gain_law": true,
+          "logical_pointer_swap_invariance_law": false,
+          "measurement_order_law": false,
+          "monotonicity_law": true,
+          "oddness_law": true,
+          "physical_pointer_swap_reversal_law": false,
+          "restoration_law": false,
+          "sign_law": true,
+          "source_order_law": false,
+          "stratum_transfer_law": false,
+          "zero_law": true
+        },
+        "max_measurement_order_error": 1.7672072872694957,
+        "max_physical_reversal_error": 0.6279952861071101,
+        "max_pointer_swap_error": 0.6279952861071101,
+        "max_source_order_error": 1.2511613502632395,
+        "means_by_q": {
+          "-1024": -93552.34375,
+          "-1536": -137585.65625,
+          "-512": -48298.09375,
+          "0": -982.3125,
+          "1024": 93047.0,
+          "1536": 143097.46875,
+          "512": 48257.25
+        },
+        "null_components": {
+          "absolute_floor": 1.0,
+          "complete_null_ceiling": 20135.0,
+          "fresh_process_variation": 1003.5,
+          "q0_abs": 20135.0,
+          "q0_mapping_order_residual": 4285.0,
+          "q0_mapping_residual": 4344.5,
+          "q0_measurement_order_residual": 15097.0,
+          "q0_source_order_residual": 4285.0,
+          "restoration_sentinel_variation": 9575.0
+        },
+        "oddness_errors": {
+          "1024": 0.005401721963807026,
+          "1536": 0.03851788957657576,
+          "512": 0.0008456596695392352
+        },
+        "passed": false,
+        "restoration_sentinel": {
+          "floor": 1024.0,
+          "max_error": 1.9941002949852507,
+          "passed": false
+        },
+        "sign_convention": "direct",
+        "stratum_results": [
+          {
+            "gain_law": true,
+            "mapping": 0,
+            "measurement_order": "positive_first",
+            "oddness_law": false,
+            "passed": false,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "positive_first"
+          },
+          {
+            "gain_law": true,
+            "mapping": 0,
+            "measurement_order": "negative_first",
+            "oddness_law": false,
+            "passed": false,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "positive_first"
+          },
+          {
+            "gain_law": true,
+            "mapping": 0,
+            "measurement_order": "positive_first",
+            "oddness_law": true,
+            "passed": true,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "negative_first"
+          },
+          {
+            "gain_law": true,
+            "mapping": 0,
+            "measurement_order": "negative_first",
+            "oddness_law": false,
+            "passed": false,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "negative_first"
+          },
+          {
+            "gain_law": true,
+            "mapping": 1,
+            "measurement_order": "positive_first",
+            "oddness_law": true,
+            "passed": true,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "positive_first"
+          },
+          {
+            "gain_law": true,
+            "mapping": 1,
+            "measurement_order": "negative_first",
+            "oddness_law": true,
+            "passed": true,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "positive_first"
+          },
+          {
+            "gain_law": true,
+            "mapping": 1,
+            "measurement_order": "positive_first",
+            "oddness_law": false,
+            "passed": false,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "negative_first"
+          },
+          {
+            "gain_law": true,
+            "mapping": 1,
+            "measurement_order": "negative_first",
+            "oddness_law": false,
+            "passed": false,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "negative_first"
+          }
+        ],
+        "zero_test_mean": 693.375
+      },
+      "diagnostic_only": false,
+      "hard_integrity": true,
+      "max_replicate_error": 0.07234847302754355,
+      "passed": false,
+      "per_replicate": {
+        "0": {
+          "gain_floor": 46848.0,
+          "laws": {
+            "gain_law": true,
+            "logical_pointer_swap_invariance_law": false,
+            "measurement_order_law": false,
+            "monotonicity_law": true,
+            "oddness_law": true,
+            "physical_pointer_swap_reversal_law": false,
+            "restoration_law": false,
+            "sign_law": true,
+            "source_order_law": false,
+            "stratum_transfer_law": false,
+            "zero_law": true
+          },
+          "max_measurement_order_error": 1.9322522995196012,
+          "max_physical_reversal_error": 1.7874922855379551,
+          "max_pointer_swap_error": 1.7874922855379551,
+          "max_source_order_error": 1.6306096906847845,
+          "means_by_q": {
+            "-1024": -93320.375,
+            "-1536": -138553.0625,
+            "-512": -46727.8125,
+            "0": -258.25,
+            "1024": 94793.375,
+            "1536": 142272.75,
+            "512": 46446.0625
+          },
+          "null_components": {
+            "absolute_floor": 1.0,
+            "complete_null_ceiling": 15616.0,
+            "fresh_process_variation": 0.0,
+            "q0_abs": 15616.0,
+            "q0_mapping_order_residual": 2280.0,
+            "q0_mapping_residual": 4344.5,
+            "q0_measurement_order_residual": 14731.25,
+            "q0_source_order_residual": 2280.0,
+            "restoration_sentinel_variation": 8949.0
+          },
+          "oddness_errors": {
+            "1024": 0.015539060614731778,
+            "1536": 0.026144764194127125,
+            "512": 0.006029599609440309
+          },
+          "passed": false,
+          "restoration_sentinel": {
+            "floor": 1024.0,
+            "max_error": 1.9941002949852507,
+            "passed": false
+          },
+          "sign_convention": "direct",
+          "stratum_results": [
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "negative_first",
+              "oddness_law": false,
+              "passed": false,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "positive_first",
+              "oddness_law": false,
+              "passed": false,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "negative_first",
+              "oddness_law": false,
+              "passed": false,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "positive_first",
+              "oddness_law": false,
+              "passed": false,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "positive_first",
+              "oddness_law": false,
+              "passed": false,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "negative_first",
+              "oddness_law": false,
+              "passed": false,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            }
+          ],
+          "zero_test_mean": 1639.75
+        },
+        "1": {
+          "gain_floor": 60405.0,
+          "laws": {
+            "gain_law": true,
+            "logical_pointer_swap_invariance_law": false,
+            "measurement_order_law": false,
+            "monotonicity_law": true,
+            "oddness_law": true,
+            "physical_pointer_swap_reversal_law": false,
+            "restoration_law": false,
+            "sign_law": true,
+            "source_order_law": false,
+            "stratum_transfer_law": false,
+            "zero_law": true
+          },
+          "max_measurement_order_error": 1.6312483961155608,
+          "max_physical_reversal_error": 0.8545416404447241,
+          "max_pointer_swap_error": 0.8545416404447241,
+          "max_source_order_error": 1.1133123315254458,
+          "means_by_q": {
+            "-1024": -93784.3125,
+            "-1536": -136618.25,
+            "-512": -49868.375,
+            "0": -1706.375,
+            "1024": 91300.625,
+            "1536": 143922.1875,
+            "512": 50068.4375
+          },
+          "null_components": {
+            "absolute_floor": 1.0,
+            "complete_null_ceiling": 20135.0,
+            "fresh_process_variation": 0.0,
+            "q0_abs": 20135.0,
+            "q0_mapping_order_residual": 4285.0,
+            "q0_mapping_residual": 2546.0,
+            "q0_measurement_order_residual": 15097.0,
+            "q0_source_order_residual": 4285.0,
+            "restoration_sentinel_variation": 9575.0
+          },
+          "oddness_errors": {
+            "1024": 0.02648297389821992,
+            "1536": 0.05074921127084731,
+            "512": 0.003995780775064131
+          },
+          "passed": false,
+          "restoration_sentinel": {
+            "floor": 1024.0,
+            "max_error": 1.9577848388561052,
+            "passed": false
+          },
+          "sign_convention": "direct",
+          "stratum_results": [
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "positive_first",
+              "oddness_law": false,
+              "passed": false,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "negative_first",
+              "oddness_law": false,
+              "passed": false,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "positive_first",
+              "oddness_law": false,
+              "passed": false,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            }
+          ],
+          "zero_test_mean": -253.0
+        }
+      },
+      "replicate_consistency_law": true,
+      "replicate_sign_conventions": [
+        "direct",
+        "direct"
+      ],
+      "same_replicate_sign_convention": true
+    },
+    "duration_ns": {
+      "aggregate": {
+        "gain_floor": 32058.0,
+        "laws": {
+          "gain_law": false,
+          "logical_pointer_swap_invariance_law": false,
+          "measurement_order_law": false,
+          "monotonicity_law": true,
+          "oddness_law": true,
+          "physical_pointer_swap_reversal_law": false,
+          "restoration_law": false,
+          "sign_law": true,
+          "source_order_law": false,
+          "stratum_transfer_law": false,
+          "zero_law": true
+        },
+        "max_measurement_order_error": 1.7621984958091685,
+        "max_physical_reversal_error": 1.3078024337866858,
+        "max_pointer_swap_error": 1.3078024337866858,
+        "max_source_order_error": 1.4848161960575386,
+        "means_by_q": {
+          "-1024": -29236.78125,
+          "-1536": -42864.09375,
+          "-512": -15137.34375,
+          "0": -362.625,
+          "1024": 28957.28125,
+          "1536": 44615.75,
+          "512": 15225.8125
+        },
+        "null_components": {
+          "absolute_floor": 1.0,
+          "complete_null_ceiling": 10686.0,
+          "fresh_process_variation": 1497.25,
+          "q0_abs": 10073.0,
+          "q0_mapping_order_residual": 3472.125,
+          "q0_mapping_residual": 1452.625,
+          "q0_measurement_order_residual": 6564.125,
+          "q0_source_order_residual": 3472.125,
+          "restoration_sentinel_variation": 10686.0
+        },
+        "oddness_errors": {
+          "1024": 0.009559875884080091,
+          "1536": 0.03926093924230793,
+          "512": 0.005810445255384565
+        },
+        "passed": false,
+        "restoration_sentinel": {
+          "floor": 1024.0,
+          "max_error": 1.8901209677419355,
+          "passed": false
+        },
+        "sign_convention": "direct",
+        "stratum_results": [
+          {
+            "gain_law": false,
+            "mapping": 0,
+            "measurement_order": "positive_first",
+            "oddness_law": true,
+            "passed": false,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "positive_first"
+          },
+          {
+            "gain_law": false,
+            "mapping": 0,
+            "measurement_order": "negative_first",
+            "oddness_law": false,
+            "passed": false,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "positive_first"
+          },
+          {
+            "gain_law": false,
+            "mapping": 0,
+            "measurement_order": "positive_first",
+            "oddness_law": true,
+            "passed": false,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "negative_first"
+          },
+          {
+            "gain_law": false,
+            "mapping": 0,
+            "measurement_order": "negative_first",
+            "oddness_law": true,
+            "passed": false,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "negative_first"
+          },
+          {
+            "gain_law": false,
+            "mapping": 1,
+            "measurement_order": "positive_first",
+            "oddness_law": true,
+            "passed": false,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "positive_first"
+          },
+          {
+            "gain_law": false,
+            "mapping": 1,
+            "measurement_order": "negative_first",
+            "oddness_law": true,
+            "passed": false,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "positive_first"
+          },
+          {
+            "gain_law": false,
+            "mapping": 1,
+            "measurement_order": "positive_first",
+            "oddness_law": false,
+            "passed": false,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "negative_first"
+          },
+          {
+            "gain_law": false,
+            "mapping": 1,
+            "measurement_order": "negative_first",
+            "oddness_law": false,
+            "passed": false,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "negative_first"
+          }
+        ],
+        "zero_test_mean": 682.375
+      },
+      "diagnostic_only": true,
+      "hard_integrity": true,
+      "max_replicate_error": 0.07258902032874553,
+      "passed": false,
+      "per_replicate": {
+        "0": {
+          "gain_floor": 14607.0,
+          "laws": {
+            "gain_law": true,
+            "logical_pointer_swap_invariance_law": false,
+            "measurement_order_law": false,
+            "monotonicity_law": true,
+            "oddness_law": true,
+            "physical_pointer_swap_reversal_law": false,
+            "restoration_law": false,
+            "sign_law": true,
+            "source_order_law": false,
+            "stratum_transfer_law": false,
+            "zero_law": true
+          },
+          "max_measurement_order_error": 1.9095887285380184,
+          "max_physical_reversal_error": 1.759957595032561,
+          "max_pointer_swap_error": 1.759957595032561,
+          "max_source_order_error": 1.5628792057363485,
+          "means_by_q": {
+            "-1024": -29271.75,
+            "-1536": -43175.9375,
+            "-512": -14567.25,
+            "0": -99.0625,
+            "1024": 29524.6875,
+            "1536": 44878.0625,
+            "512": 14896.25
+          },
+          "null_components": {
+            "absolute_floor": 1.0,
+            "complete_null_ceiling": 4869.0,
+            "fresh_process_variation": 0.0,
+            "q0_abs": 4748.0,
+            "q0_mapping_order_residual": 708.375,
+            "q0_mapping_residual": 1452.625,
+            "q0_measurement_order_residual": 4184.625,
+            "q0_source_order_residual": 708.375,
+            "restoration_sentinel_variation": 4869.0
+          },
+          "oddness_errors": {
+            "1024": 0.008566983139110279,
+            "1536": 0.03792777373131917,
+            "512": 0.02208609549383234
+          },
+          "passed": false,
+          "restoration_sentinel": {
+            "floor": 1024.0,
+            "max_error": 1.8901209677419355,
+            "passed": false
+          },
+          "sign_convention": "direct",
+          "stratum_results": [
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "negative_first",
+              "oddness_law": false,
+              "passed": false,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "positive_first",
+              "oddness_law": false,
+              "passed": false,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "negative_first",
+              "oddness_law": false,
+              "passed": false,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "positive_first",
+              "oddness_law": false,
+              "passed": false,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "positive_first",
+              "oddness_law": false,
+              "passed": false,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "negative_first",
+              "oddness_law": false,
+              "passed": false,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            }
+          ],
+          "zero_test_mean": 460.875
+        },
+        "1": {
+          "gain_floor": 32058.0,
+          "laws": {
+            "gain_law": false,
+            "logical_pointer_swap_invariance_law": false,
+            "measurement_order_law": false,
+            "monotonicity_law": true,
+            "oddness_law": true,
+            "physical_pointer_swap_reversal_law": false,
+            "restoration_law": false,
+            "sign_law": true,
+            "source_order_law": false,
+            "stratum_transfer_law": false,
+            "zero_law": true
+          },
+          "max_measurement_order_error": 1.6795560672935457,
+          "max_physical_reversal_error": 1.0139750024603877,
+          "max_pointer_swap_error": 1.0139750024603877,
+          "max_source_order_error": 1.469838078103503,
+          "means_by_q": {
+            "-1024": -29201.8125,
+            "-1536": -42552.25,
+            "-512": -15707.4375,
+            "0": -626.1875,
+            "1024": 28389.875,
+            "1536": 44353.4375,
+            "512": 15555.375
+          },
+          "null_components": {
+            "absolute_floor": 1.0,
+            "complete_null_ceiling": 10686.0,
+            "fresh_process_variation": 0.0,
+            "q0_abs": 10073.0,
+            "q0_mapping_order_residual": 3472.125,
+            "q0_mapping_residual": 1287.875,
+            "q0_measurement_order_residual": 6564.125,
+            "q0_source_order_residual": 3472.125,
+            "restoration_sentinel_variation": 10686.0
+          },
+          "oddness_errors": {
+            "1024": 0.027804352897615518,
+            "1536": 0.04060987381192269,
+            "512": 0.009680923447888939
+          },
+          "passed": false,
+          "restoration_sentinel": {
+            "floor": 1024.0,
+            "max_error": 1.719074598677998,
+            "passed": false
+          },
+          "sign_convention": "direct",
+          "stratum_results": [
+            {
+              "gain_law": false,
+              "mapping": 0,
+              "measurement_order": "positive_first",
+              "oddness_law": false,
+              "passed": false,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 0,
+              "measurement_order": "negative_first",
+              "oddness_law": false,
+              "passed": false,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 0,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 0,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 1,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 1,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 1,
+              "measurement_order": "positive_first",
+              "oddness_law": false,
+              "passed": false,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 1,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            }
+          ],
+          "zero_test_mean": 903.875
+        }
+      },
+      "replicate_consistency_law": true,
+      "replicate_sign_conventions": [
+        "direct",
+        "direct"
+      ],
+      "same_replicate_sign_convention": true
+    },
+    "probe_dirty": {
+      "aggregate": {
+        "gain_floor": 225.0,
+        "laws": {
+          "gain_law": true,
+          "logical_pointer_swap_invariance_law": false,
+          "measurement_order_law": false,
+          "monotonicity_law": true,
+          "oddness_law": true,
+          "physical_pointer_swap_reversal_law": false,
+          "restoration_law": true,
+          "sign_law": true,
+          "source_order_law": false,
+          "stratum_transfer_law": true,
+          "zero_law": true
+        },
+        "max_measurement_order_error": 0.6702127659574468,
+        "max_physical_reversal_error": 1.1319444444444444,
+        "max_pointer_swap_error": 1.1319444444444444,
+        "max_source_order_error": 1.396135265700483,
+        "means_by_q": {
+          "-1024": -3316.0,
+          "-1536": -4947.28125,
+          "-512": -1651.875,
+          "0": 3.90625,
+          "1024": 3302.125,
+          "1536": 4951.8125,
+          "512": 1658.71875
+        },
+        "null_components": {
+          "absolute_floor": 1.0,
+          "complete_null_ceiling": 75.0,
+          "fresh_process_variation": 5.75,
+          "q0_abs": 75.0,
+          "q0_mapping_order_residual": 18.5,
+          "q0_mapping_residual": 23.875,
+          "q0_measurement_order_residual": 15.875,
+          "q0_source_order_residual": 18.5,
+          "restoration_sentinel_variation": 0.0
+        },
+        "oddness_errors": {
+          "1024": 0.004184258142340169,
+          "1536": 0.0009150689772684244,
+          "512": 0.0041259255072627595
+        },
+        "passed": false,
+        "restoration_sentinel": {
+          "floor": 1024.0,
+          "max_error": 0.0,
+          "passed": true
+        },
+        "sign_convention": "direct",
+        "stratum_results": [
+          {
+            "gain_law": true,
+            "mapping": 0,
+            "measurement_order": "positive_first",
+            "oddness_law": true,
+            "passed": true,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "positive_first"
+          },
+          {
+            "gain_law": true,
+            "mapping": 0,
+            "measurement_order": "negative_first",
+            "oddness_law": true,
+            "passed": true,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "positive_first"
+          },
+          {
+            "gain_law": true,
+            "mapping": 0,
+            "measurement_order": "positive_first",
+            "oddness_law": true,
+            "passed": true,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "negative_first"
+          },
+          {
+            "gain_law": true,
+            "mapping": 0,
+            "measurement_order": "negative_first",
+            "oddness_law": true,
+            "passed": true,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "negative_first"
+          },
+          {
+            "gain_law": true,
+            "mapping": 1,
+            "measurement_order": "positive_first",
+            "oddness_law": true,
+            "passed": true,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "positive_first"
+          },
+          {
+            "gain_law": true,
+            "mapping": 1,
+            "measurement_order": "negative_first",
+            "oddness_law": true,
+            "passed": true,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "positive_first"
+          },
+          {
+            "gain_law": true,
+            "mapping": 1,
+            "measurement_order": "positive_first",
+            "oddness_law": true,
+            "passed": true,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "negative_first"
+          },
+          {
+            "gain_law": true,
+            "mapping": 1,
+            "measurement_order": "negative_first",
+            "oddness_law": true,
+            "passed": true,
+            "sign_convention": "direct",
+            "sign_law": true,
+            "source_order": "negative_first"
+          }
+        ],
+        "zero_test_mean": 19.4375
+      },
+      "diagnostic_only": false,
+      "hard_integrity": true,
+      "max_replicate_error": 0.01596082682316002,
+      "passed": false,
+      "per_replicate": {
+        "0": {
+          "gain_floor": 150.0,
+          "laws": {
+            "gain_law": true,
+            "logical_pointer_swap_invariance_law": false,
+            "measurement_order_law": false,
+            "monotonicity_law": true,
+            "oddness_law": true,
+            "physical_pointer_swap_reversal_law": false,
+            "restoration_law": true,
+            "sign_law": true,
+            "source_order_law": false,
+            "stratum_transfer_law": true,
+            "zero_law": true
+          },
+          "max_measurement_order_error": 1.0,
+          "max_physical_reversal_error": 1.20125786163522,
+          "max_pointer_swap_error": 1.20125786163522,
+          "max_source_order_error": 1.0522388059701493,
+          "means_by_q": {
+            "-1024": -3319.9375,
+            "-1536": -4956.625,
+            "-512": -1651.1875,
+            "0": 7.9375,
+            "1024": 3311.8125,
+            "1536": 4972.375,
+            "512": 1645.375
+          },
+          "null_components": {
+            "absolute_floor": 1.0,
+            "complete_null_ceiling": 50.0,
+            "fresh_process_variation": 0.0,
+            "q0_abs": 50.0,
+            "q0_mapping_order_residual": 17.625,
+            "q0_mapping_residual": 23.875,
+            "q0_measurement_order_residual": 15.875,
+            "q0_source_order_residual": 17.625,
+            "restoration_sentinel_variation": 0.0
+          },
+          "oddness_errors": {
+            "1024": 0.0024473352284493308,
+            "1536": 0.003167500439930617,
+            "512": 0.0035201937999167266
+          },
+          "passed": false,
+          "restoration_sentinel": {
+            "floor": 1024.0,
+            "max_error": 0.0,
+            "passed": true
+          },
+          "sign_convention": "direct",
+          "stratum_results": [
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            }
+          ],
+          "zero_test_mean": 24.625
+        },
+        "1": {
+          "gain_floor": 225.0,
+          "laws": {
+            "gain_law": true,
+            "logical_pointer_swap_invariance_law": false,
+            "measurement_order_law": false,
+            "monotonicity_law": true,
+            "oddness_law": true,
+            "physical_pointer_swap_reversal_law": false,
+            "restoration_law": true,
+            "sign_law": true,
+            "source_order_law": false,
+            "stratum_transfer_law": true,
+            "zero_law": true
+          },
+          "max_measurement_order_error": 1.9393939393939394,
+          "max_physical_reversal_error": 1.8666666666666667,
+          "max_pointer_swap_error": 1.8666666666666667,
+          "max_source_order_error": 1.9733333333333334,
+          "means_by_q": {
+            "-1024": -3312.0625,
+            "-1536": -4937.9375,
+            "-512": -1652.5625,
+            "0": -0.125,
+            "1024": 3292.4375,
+            "1536": 4931.25,
+            "512": 1672.0625
+          },
+          "null_components": {
+            "absolute_floor": 1.0,
+            "complete_null_ceiling": 75.0,
+            "fresh_process_variation": 0.0,
+            "q0_abs": 75.0,
+            "q0_mapping_order_residual": 18.5,
+            "q0_mapping_residual": 3.5,
+            "q0_measurement_order_residual": 8.0,
+            "q0_source_order_residual": 18.5,
+            "restoration_sentinel_variation": 0.0
+          },
+          "oddness_errors": {
+            "1024": 0.005925310890117563,
+            "1536": 0.001354310377561482,
+            "512": 0.01166224348671177
+          },
+          "passed": false,
+          "restoration_sentinel": {
+            "floor": 1024.0,
+            "max_error": 0.0,
+            "passed": true
+          },
+          "sign_convention": "direct",
+          "stratum_results": [
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 0,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": true,
+              "mapping": 1,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": true,
+              "sign_convention": "direct",
+              "sign_law": true,
+              "source_order": "negative_first"
+            }
+          ],
+          "zero_test_mean": 14.25
+        }
+      },
+      "replicate_consistency_law": true,
+      "replicate_sign_conventions": [
+        "direct",
+        "direct"
+      ],
+      "same_replicate_sign_convention": true
+    },
+    "probe_dirty_per_cycle": {
+      "aggregate": {
+        "gain_floor": 3.0,
+        "laws": {
+          "gain_law": false,
+          "logical_pointer_swap_invariance_law": true,
+          "measurement_order_law": true,
+          "monotonicity_law": true,
+          "oddness_law": true,
+          "physical_pointer_swap_reversal_law": true,
+          "restoration_law": true,
+          "sign_law": false,
+          "source_order_law": true,
+          "stratum_transfer_law": false,
+          "zero_law": true
+        },
+        "max_measurement_order_error": 0.00205867086790548,
+        "max_physical_reversal_error": 0.0006445318406833288,
+        "max_pointer_swap_error": 0.0006445318406833288,
+        "max_source_order_error": 0.0004804708401524322,
+        "means_by_q": {
+          "-1024": -0.009382982558040993,
+          "-1536": -0.01610418699476552,
+          "-512": -0.004149354888798112,
+          "0": 0.00014545446329807866,
+          "1024": 0.009362736166128203,
+          "1536": 0.015580034167455396,
+          "512": 0.0042286625675023535
+        },
+        "null_components": {
+          "absolute_floor": 1.0,
+          "complete_null_ceiling": 1.0,
+          "fresh_process_variation": 5.857730264000483e-05,
+          "q0_abs": 0.002292948798212395,
+          "q0_mapping_order_residual": 0.00037858955683138084,
+          "q0_mapping_residual": 0.0004274144532742776,
+          "q0_measurement_order_residual": 0.002051367601654604,
+          "q0_source_order_residual": 0.00037858955683138084,
+          "restoration_sentinel_variation": 0.0
+        },
+        "oddness_errors": {
+          "1024": 2.024639191279022e-05,
+          "1536": 0.0005241528273101231,
+          "512": 7.930767870424106e-05
+        },
+        "passed": false,
+        "restoration_sentinel": {
+          "floor": 1e-06,
+          "max_error": 0.0,
+          "passed": true
+        },
+        "sign_convention": "none",
+        "stratum_results": [
+          {
+            "gain_law": false,
+            "mapping": 0,
+            "measurement_order": "positive_first",
+            "oddness_law": true,
+            "passed": false,
+            "sign_convention": "none",
+            "sign_law": false,
+            "source_order": "positive_first"
+          },
+          {
+            "gain_law": false,
+            "mapping": 0,
+            "measurement_order": "negative_first",
+            "oddness_law": true,
+            "passed": false,
+            "sign_convention": "none",
+            "sign_law": false,
+            "source_order": "positive_first"
+          },
+          {
+            "gain_law": false,
+            "mapping": 0,
+            "measurement_order": "positive_first",
+            "oddness_law": true,
+            "passed": false,
+            "sign_convention": "none",
+            "sign_law": false,
+            "source_order": "negative_first"
+          },
+          {
+            "gain_law": false,
+            "mapping": 0,
+            "measurement_order": "negative_first",
+            "oddness_law": true,
+            "passed": false,
+            "sign_convention": "none",
+            "sign_law": false,
+            "source_order": "negative_first"
+          },
+          {
+            "gain_law": false,
+            "mapping": 1,
+            "measurement_order": "positive_first",
+            "oddness_law": true,
+            "passed": false,
+            "sign_convention": "none",
+            "sign_law": false,
+            "source_order": "positive_first"
+          },
+          {
+            "gain_law": false,
+            "mapping": 1,
+            "measurement_order": "negative_first",
+            "oddness_law": true,
+            "passed": false,
+            "sign_convention": "none",
+            "sign_law": false,
+            "source_order": "positive_first"
+          },
+          {
+            "gain_law": false,
+            "mapping": 1,
+            "measurement_order": "positive_first",
+            "oddness_law": true,
+            "passed": false,
+            "sign_convention": "none",
+            "sign_law": false,
+            "source_order": "negative_first"
+          },
+          {
+            "gain_law": false,
+            "mapping": 1,
+            "measurement_order": "negative_first",
+            "oddness_law": true,
+            "passed": false,
+            "sign_convention": "none",
+            "sign_law": false,
+            "source_order": "negative_first"
+          }
+        ],
+        "zero_test_mean": 3.209933279113217e-05
+      },
+      "diagnostic_only": false,
+      "hard_integrity": true,
+      "max_replicate_error": 0.00039812155474094023,
+      "passed": false,
+      "per_replicate": {
+        "0": {
+          "gain_floor": 3.0,
+          "laws": {
+            "gain_law": false,
+            "logical_pointer_swap_invariance_law": true,
+            "measurement_order_law": true,
+            "monotonicity_law": true,
+            "oddness_law": true,
+            "physical_pointer_swap_reversal_law": true,
+            "restoration_law": true,
+            "sign_law": false,
+            "source_order_law": true,
+            "stratum_transfer_law": false,
+            "zero_law": true
+          },
+          "max_measurement_order_error": 0.0023372457269666106,
+          "max_physical_reversal_error": 0.001071159132005466,
+          "max_pointer_swap_error": 0.001071159132005466,
+          "max_source_order_error": 0.0006533837403716342,
+          "means_by_q": {
+            "-1024": -0.009417231753301912,
+            "-1536": -0.016050264094183114,
+            "-512": -0.004336490536504072,
+            "0": 8.612632277967729e-05,
+            "1024": 0.009207836081110487,
+            "1536": 0.015779094944825867,
+            "512": 0.004355097490348845
+          },
+          "null_components": {
+            "absolute_floor": 1.0,
+            "complete_null_ceiling": 1.0,
+            "fresh_process_variation": 0.0,
+            "q0_abs": 0.0018591139705253189,
+            "q0_mapping_order_residual": 0.0001858530650231593,
+            "q0_mapping_residual": 0.0004274144532742776,
+            "q0_measurement_order_residual": 0.002051367601654604,
+            "q0_source_order_residual": 0.0001858530650231593,
+            "restoration_sentinel_variation": 0.0
+          },
+          "oddness_errors": {
+            "1024": 0.00020939567219142516,
+            "1536": 0.000271169149357247,
+            "512": 1.8606953844773136e-05
+          },
+          "passed": false,
+          "restoration_sentinel": {
+            "floor": 1e-06,
+            "max_error": 0.0,
+            "passed": true
+          },
+          "sign_convention": "none",
+          "stratum_results": [
+            {
+              "gain_law": false,
+              "mapping": 0,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 0,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 0,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 0,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 1,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 1,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 1,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 1,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "negative_first"
+            }
+          ],
+          "zero_test_mean": -5.7268296925668156e-05
+        },
+        "1": {
+          "gain_floor": 3.0,
+          "laws": {
+            "gain_law": false,
+            "logical_pointer_swap_invariance_law": true,
+            "measurement_order_law": true,
+            "monotonicity_law": true,
+            "oddness_law": true,
+            "physical_pointer_swap_reversal_law": true,
+            "restoration_law": true,
+            "sign_law": false,
+            "source_order_law": true,
+            "stratum_transfer_law": false,
+            "zero_law": true
+          },
+          "max_measurement_order_error": 0.0019259720047297407,
+          "max_physical_reversal_error": 0.0012096976073883194,
+          "max_pointer_swap_error": 0.0012096976073883194,
+          "max_source_order_error": 0.00096911320382056,
+          "means_by_q": {
+            "-1024": -0.009348733362780077,
+            "-1536": -0.01615810989534792,
+            "-512": -0.003962219241092153,
+            "0": 0.00020478260381648003,
+            "1024": 0.00951763625114592,
+            "1536": 0.015380973390084927,
+            "512": 0.004102227644655862
+          },
+          "null_components": {
+            "absolute_floor": 1.0,
+            "complete_null_ceiling": 1.0,
+            "fresh_process_variation": 0.0,
+            "q0_abs": 0.002292948798212395,
+            "q0_mapping_order_residual": 0.00037858955683138084,
+            "q0_mapping_residual": 0.0002594246176446857,
+            "q0_measurement_order_residual": 0.0019259720047297407,
+            "q0_source_order_residual": 0.00037858955683138084,
+            "restoration_sentinel_variation": 0.0
+          },
+          "oddness_errors": {
+            "1024": 0.00016890288836584298,
+            "1536": 0.0007771365052629941,
+            "512": 0.00014000840356370899
+          },
+          "passed": false,
+          "restoration_sentinel": {
+            "floor": 1e-06,
+            "max_error": 0.0,
+            "passed": true
+          },
+          "sign_convention": "none",
+          "stratum_results": [
+            {
+              "gain_law": false,
+              "mapping": 0,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 0,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 0,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 0,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 1,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 1,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "positive_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 1,
+              "measurement_order": "positive_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "negative_first"
+            },
+            {
+              "gain_law": false,
+              "mapping": 1,
+              "measurement_order": "negative_first",
+              "oddness_law": true,
+              "passed": false,
+              "sign_convention": "none",
+              "sign_law": false,
+              "source_order": "negative_first"
+            }
+          ],
+          "zero_test_mean": 0.00012146696250793249
+        }
+      },
+      "replicate_consistency_law": true,
+      "replicate_sign_conventions": [
+        "none",
+        "none"
+      ],
+      "same_replicate_sign_convention": false
+    }
+  },
+  "eligible_coordinates": [],
+  "integrity": {
+    "failure_count": 0,
+    "failures": [],
+    "schedule_matched": true
+  },
+  "partial_candidate_coordinates": [
+    "change_to_dirty",
+    "probe_dirty",
+    "cycles",
+    "duration_ns"
+  ],
+  "primary_coordinate": null,
+  "schema_id": "CAT_CAS_BALANCED_TRANSDUCER_ADJUDICATION_V1",
+  "status": "BALANCED_PHYSICAL_TRANSDUCER_PARTIAL"
+}

@@ -1,0 +1,20 @@
+{
+  "adjudication_status": "BALANCED_PHYSICAL_TRANSDUCER_PARTIAL",
+  "copy_verified": true,
+  "eligible_coordinates": [],
+  "failure": null,
+  "final_status": "BALANCED_TRANSDUCER_TARGET_COMPLETE",
+  "local_run": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\transducer_calibration\\runs\\balanced_transducer_calibration_1",
+  "primary_coordinate": null,
+  "public_trial_schedule_sha256": "3c6d499c6085ad9e9168a238ca30c63d0f642f8d26a3af13d25fd2b8f12adff1",
+  "raw_capture_sha256": "942328fde50ed2fca6d0fb620e97e3ebe15c1bd2b7de887e6b04e73d7ba96dab",
+  "remote_cleaned": true,
+  "remote_returncode": 0,
+  "remote_run": "/root/catcas_live_small_wall/balanced_transducer_calibration_1",
+  "restoration_sentinels_sha256": "b516983c5440ab58c7ea73e043d91234bff40f4a1c7e2e2eea4f5e42dcb14299",
+  "run_id": "balanced_transducer_calibration_1",
+  "schema_id": "CAT_CAS_BALANCED_TRANSDUCER_CONTROLLER_V1",
+  "source_bundle_sha256": "61155e514bea9cfcfd24644553ff87c386b1756f093c0a159bab03a3a8c7c2d1",
+  "target": "root@192.168.137.100",
+  "verified_file_count": 19
+}

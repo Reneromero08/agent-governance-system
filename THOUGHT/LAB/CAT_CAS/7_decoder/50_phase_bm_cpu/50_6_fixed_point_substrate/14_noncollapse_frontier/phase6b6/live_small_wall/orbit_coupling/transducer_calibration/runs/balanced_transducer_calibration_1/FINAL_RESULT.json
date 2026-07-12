@@ -1,0 +1,157 @@
+{
+  "adjudication_sha256": "6e30bcf2bb15830c63a9e5fbc1920cc8283408ad1e95706b4caace4bb0807b35",
+  "adjudication_status": "BALANCED_PHYSICAL_TRANSDUCER_PARTIAL",
+  "cache_set_mapping": false,
+  "claim_ceiling": "public balanced transducer only; no OrbitState coupling candidate and no Small Wall crossing claim",
+  "compile_command": [
+    "cc",
+    "-std=c11",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-pedantic",
+    "-O2",
+    "-march=amdfam10",
+    "-mtune=amdfam10",
+    "-fno-lto",
+    "-pthread",
+    "-I",
+    "/root/catcas_live_small_wall/balanced_transducer_calibration_1/source",
+    "/root/catcas_live_small_wall/balanced_transducer_calibration_1/source/balanced_transducer_runtime.c",
+    "-o",
+    "/root/catcas_live_small_wall/balanced_transducer_calibration_1/source/balanced_transducer_runtime"
+  ],
+  "cpu_frequency_policy_restored": true,
+  "cpuinfo": {
+    "cpu family": "16",
+    "model": "10",
+    "model name": "AMD Phenom(tm) II X6 1090T Processor",
+    "stepping": "0",
+    "vendor_id": "AuthenticAMD"
+  },
+  "eligible_coordinates": [],
+  "failure": null,
+  "features_sha256": "be2d4ba96e7a93c599fd6926b74784d5ed65e6dbd6db1e6eaf623e8956b0b9ff",
+  "frequency_writes": 0,
+  "kernel": "6.12.86+deb13-amd64",
+  "msr_reads": 0,
+  "msr_writes": 0,
+  "physical_address_access": false,
+  "pmu_sysfs": {
+    "cpu_online": "0-5",
+    "cpu_pmu_type": "4",
+    "format": {
+      "cmask": "config:24-31",
+      "edge": "config:18",
+      "event": "config:0-7,32-35",
+      "inv": "config:23",
+      "umask": "config:8-15"
+    },
+    "perf_event_paranoid": "3"
+  },
+  "policy_after": {
+    "policy4": {
+      "resolved_path": "/sys/devices/system/cpu/cpufreq/policy4",
+      "scaling_cur_freq": 3200000,
+      "scaling_max_freq": 3200000,
+      "scaling_min_freq": 800000
+    },
+    "policy5": {
+      "resolved_path": "/sys/devices/system/cpu/cpufreq/policy5",
+      "scaling_cur_freq": 3200000,
+      "scaling_max_freq": 3200000,
+      "scaling_min_freq": 800000
+    }
+  },
+  "policy_before": {
+    "policy4": {
+      "resolved_path": "/sys/devices/system/cpu/cpufreq/policy4",
+      "scaling_cur_freq": 3200000,
+      "scaling_max_freq": 3200000,
+      "scaling_min_freq": 800000
+    },
+    "policy5": {
+      "resolved_path": "/sys/devices/system/cpu/cpufreq/policy5",
+      "scaling_cur_freq": 3200000,
+      "scaling_max_freq": 3200000,
+      "scaling_min_freq": 800000
+    }
+  },
+  "preflight_processes": {
+    "forbidden_matches": [],
+    "observed_process_count": 139
+  },
+  "primary_coordinate": null,
+  "process_cleanup": {
+    "forbidden_matches": [],
+    "observed_process_count": 139
+  },
+  "public_trial_schedule_sha256": "3c6d499c6085ad9e9168a238ca30c63d0f642f8d26a3af13d25fd2b8f12adff1",
+  "raw_capture_sha256": "942328fde50ed2fca6d0fb620e97e3ebe15c1bd2b7de887e6b04e73d7ba96dab",
+  "raw_record_count": 224,
+  "restoration_sentinels_sha256": "b516983c5440ab58c7ea73e043d91234bff40f4a1c7e2e2eea4f5e42dcb14299",
+  "runtime_binary_sha256": "33abff53d787831f76ef5782b7c8e7acb4000ec90d7f1d4b16bcb3a1ddc99525",
+  "runtime_duration_ns": 851945881,
+  "runtime_results": [
+    {
+      "batch_root": "/root/catcas_live_small_wall/balanced_transducer_calibration_1/output/batch_0",
+      "command": [
+        "/root/catcas_live_small_wall/balanced_transducer_calibration_1/source/balanced_transducer_runtime",
+        "--schedule-tsv",
+        "/root/catcas_live_small_wall/balanced_transducer_calibration_1/output/PUBLIC_TRIAL_SCHEDULE.tsv",
+        "--output-root",
+        "/root/catcas_live_small_wall/balanced_transducer_calibration_1/output/batch_0",
+        "--replicate",
+        "0"
+      ],
+      "post_temperature_c": 50.5,
+      "pre_temperature_c": 50.625,
+      "replicate": 0,
+      "returncode": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "d3827719912ff7a4be4f6505f3865d9e2bf1b8348c9b26c7d42d5f2c8f4a0b76"
+    },
+    {
+      "batch_root": "/root/catcas_live_small_wall/balanced_transducer_calibration_1/output/batch_1",
+      "command": [
+        "/root/catcas_live_small_wall/balanced_transducer_calibration_1/source/balanced_transducer_runtime",
+        "--schedule-tsv",
+        "/root/catcas_live_small_wall/balanced_transducer_calibration_1/output/PUBLIC_TRIAL_SCHEDULE.tsv",
+        "--output-root",
+        "/root/catcas_live_small_wall/balanced_transducer_calibration_1/output/batch_1",
+        "--replicate",
+        "1"
+      ],
+      "post_temperature_c": 51.0,
+      "pre_temperature_c": 50.5,
+      "replicate": 1,
+      "returncode": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "b90a59028589d55ec7c580001995af4710b170bc83d4e9c7f5d77af284973f2c"
+    }
+  ],
+  "schema_id": "CAT_CAS_BALANCED_TRANSDUCER_TARGET_RESULT_V1",
+  "sentinel_record_count": 224,
+  "source_bundle_file_sha256": "a7e8c67acf85ff3f123937efb8a14e0fd99c41ccc7160e69c63cadb78643938c",
+  "source_bundle_sha256": "61155e514bea9cfcfd24644553ff87c386b1756f093c0a159bab03a3a8c7c2d1",
+  "source_hashes": {
+    "BALANCED_TRANSDUCER_CONTRACT.md": "95b05c0781a7eeae0374790421ffafc1e92ea9f472d5957d1496aa6a006fa6bb",
+    "FIRST_LIGHT_TRANSDUCER_AUDIT.md": "e8bb73b9f01355b4322e6a66e019af215d693d249aa12204a8a8b58e758a714d",
+    "PUBLIC_TRIAL_SCHEDULE.json": "3c6d499c6085ad9e9168a238ca30c63d0f642f8d26a3af13d25fd2b8f12adff1",
+    "PUBLIC_TRIAL_SCHEDULE.sha256": "619766778c5490d0c7edb27cc190881cb641debaff65117f2137644696d039ff",
+    "PUBLIC_TRIAL_SCHEDULE.tsv": "c2379addceb6dcb712d776c1b905680ea79666a2ebaa526fbe805f9905f109fc",
+    "balanced_transducer_public.py": "0addae6e1c1d4dc587e1eaf807b4bc4e098936e5001dc48faebde8fab7a388f3",
+    "balanced_transducer_runtime.c": "fccc2fe82edb8b7ee26e6f2137d6b0294b40f813f482375609d03799ac9060d3",
+    "balanced_transducer_runtime.h": "124e79ea826d2d3511c3360b393786f190568cf6bd727dc6c1c6dca074577296",
+    "balanced_transducer_target.py": "17945ff3fbece6b922e3432e46328b18595c5f8c06440dadb287f8d8092044d9"
+  },
+  "status": "BALANCED_TRANSDUCER_TARGET_COMPLETE",
+  "temperature": {
+    "below_veto": true,
+    "path": "/sys/class/hwmon/hwmon0/temp1_input",
+    "post_c": 50.625,
+    "preflight_c": 50.875,
+    "veto_c": 68.0
+  },
+  "voltage_writes": 0
+}

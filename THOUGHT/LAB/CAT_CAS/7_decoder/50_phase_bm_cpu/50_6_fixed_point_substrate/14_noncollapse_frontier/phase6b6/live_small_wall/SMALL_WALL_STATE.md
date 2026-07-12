@@ -2303,7 +2303,7 @@ page-recovery sequence unchanged.
 
 ## Current claim ceiling
 
-`EVICTION_SENTINEL_RESPONSE_FOUND`
+`BALANCED_PHYSICAL_TRANSDUCER_PARTIAL`
 
 The next major scientific threshold is a physical coded pre-projection response with
 restoration and killing controls. `coded_preprojection_loop_2` is a restored physical
@@ -2362,14 +2362,18 @@ integrity closed. `balanced_transducer_calibration_0` then added the public bala
 transducer lane and consumed the one authorized target contact, but the target stopped
 before raw capture or adjudication with an undefined schedule TSV path; copied failure
 evidence and remote cleanup are retained, and the target path is locally repaired but
-not rerun. The next useful move must change authorization class rather than keep
-remapping the same eviction-sentinel PMU/timing, active-query
-phase-local, source-phase-chop, restored two-line-set ownership-history, simple
-branch-history, indirect-target-history, translation-footprint, store/load
-alias-history, locked-history, prefetch-stream, combined active-query/source-chop,
-source-process lifecycle, compiled code-footprint history, return-stack history, FP
-pipeline history, owned page-permission, owned page-recovery geometry, or public
-transducer schedule-binding defect.
+not rerun. The renewed `balanced_transducer_calibration_1` contact completed the
+repaired public calibration with 224 raw records and 224 restoration sentinels
+(`source_bundle_sha256=61155e514bea9cfcfd24644553ff87c386b1756f093c0a159bab03a3a8c7c2d1`,
+`raw_capture_sha256=942328fde50ed2fca6d0fb620e97e3ebe15c1bd2b7de887e6b04e73d7ba96dab`).
+It classified `BALANCED_PHYSICAL_TRANSDUCER_PARTIAL`: Change-to-Dirty, dirty probes,
+cycles, and duration showed a direct-sign, odd, monotonic response with matching fresh
+process sign convention, but no coordinate was eligible because pointer-swap,
+physical A-minus-B reversal, source-order, and receiver-order controls failed; cycles
+and duration also failed restoration, while normalized coordinates lost sign/gain above
+the absolute floor. The public transfer is therefore visible but not a calibrated odd
+transducer, and it does not authorize an OrbitState coupling candidate or
+`SMALL_WALL_CROSSED`.
 
 ## State update rule
 
