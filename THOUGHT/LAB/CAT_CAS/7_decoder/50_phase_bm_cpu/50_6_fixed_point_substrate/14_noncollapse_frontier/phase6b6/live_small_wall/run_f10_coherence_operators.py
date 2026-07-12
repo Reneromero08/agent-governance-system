@@ -84,6 +84,7 @@ def execute(run_id: str, *, mode: str, keep_remote: bool) -> dict[str, Any]:
             "wc-flush-order",
             "eviction-sentinel",
             "eviction-phase-local",
+            "eviction-phase-bracketed",
         },
         f"unsupported coherence mode: {mode}",
     )
@@ -147,6 +148,7 @@ def execute(run_id: str, *, mode: str, keep_remote: bool) -> dict[str, Any]:
         "wc-flush-order": "F10_WC_FLUSH_ORDER_RESULT.json",
         "eviction-sentinel": "F10_EVICTION_SENTINEL_RESULT.json",
         "eviction-phase-local": "F10_EVICTION_PHASE_LOCAL_RESULT.json",
+        "eviction-phase-bracketed": "F10_EVICTION_PHASE_BRACKETED_RESULT.json",
     }
     worker_result_file = worker_result_files.get(mode, "F10_COHERENCE_OPERATOR_RESULT.json")
     worker = json.loads((local_run / worker_result_file).read_text(encoding="utf-8"))
@@ -177,6 +179,8 @@ def execute(run_id: str, *, mode: str, keep_remote: bool) -> dict[str, Any]:
         controller["eviction_sentinel_response"] = bool(worker["acceptance"]["eviction_sentinel_response"])
     elif mode == "eviction-phase-local":
         controller["eviction_phase_local_captured"] = bool(worker["acceptance"]["eviction_phase_local_captured"])
+    elif mode == "eviction-phase-bracketed":
+        controller["eviction_phase_bracketed_captured"] = bool(worker["acceptance"]["eviction_phase_bracketed_captured"])
     else:
         controller["controlled_state_found"] = bool(worker["acceptance"]["controlled_state_found"])
     (local_run / "CONTROLLER_RESULT.json").write_text(
@@ -191,7 +195,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--run-id", default=default_run_id())
     parser.add_argument(
         "--mode",
-        choices=("coherence-operators", "coherence-operators-route45", "coherence-operators-route23", "phase-local-pmu", "ibs-first-light", "wc-flush-order", "eviction-sentinel", "eviction-phase-local"),
+        choices=("coherence-operators", "coherence-operators-route45", "coherence-operators-route23", "phase-local-pmu", "ibs-first-light", "wc-flush-order", "eviction-sentinel", "eviction-phase-local", "eviction-phase-bracketed"),
         default="coherence-operators",
     )
     parser.add_argument("--keep-remote", action="store_true")

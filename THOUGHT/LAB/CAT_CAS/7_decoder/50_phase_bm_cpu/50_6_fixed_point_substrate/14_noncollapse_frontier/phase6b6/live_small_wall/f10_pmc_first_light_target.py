@@ -109,6 +109,13 @@ MODES: dict[str, dict[str, Any]] = {
         "failed_status": "F10_EVICTION_PHASE_LOCAL_TARGET_FAILED",
         "claim_ceiling": "Phase-local eviction-sentinel PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
     },
+    "eviction-phase-bracketed": {
+        "worker_args": ["--eviction-phase-bracketed"],
+        "result_file": "F10_EVICTION_PHASE_BRACKETED_RESULT.json",
+        "complete_status": "F10_EVICTION_PHASE_BRACKETED_TARGET_COMPLETE",
+        "failed_status": "F10_EVICTION_PHASE_BRACKETED_TARGET_FAILED",
+        "claim_ceiling": "Bracketed phase-local eviction-sentinel PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
+    },
 }
 FORBIDDEN_PROCESS_MARKERS = (
     "f10_pmc_first_light_worker",

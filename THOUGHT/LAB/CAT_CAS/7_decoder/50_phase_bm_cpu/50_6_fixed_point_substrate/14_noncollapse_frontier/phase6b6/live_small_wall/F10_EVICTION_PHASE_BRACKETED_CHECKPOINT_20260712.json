@@ -1,0 +1,109 @@
+{
+  "schema_id": "CAT_CAS_F10_EVICTION_PHASE_BRACKETED_CHECKPOINT_V1",
+  "checkpoint_date": "2026-07-12",
+  "starting_commit": "101db8c2a10fb508902980494f46365ce55dfd94",
+  "source_bundle_sha256": "5e3fc671e398fafe21d11bf4539a16b935f9c1275c7e97d0daf0ca8ea644c237",
+  "run": {
+    "run_id": "f10_eviction_bracket_0",
+    "mode": "eviction-phase-bracketed",
+    "local_run": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/f10_eviction_bracket_0",
+    "remote_run": "/root/catcas_live_small_wall/f10_eviction_bracket_0",
+    "command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_coherence_operators.py --run-id f10_eviction_bracket_0 --mode eviction-phase-bracketed",
+    "lab_device": "root@192.168.137.100",
+    "remote_returncode": 0,
+    "lab_device_status": "F10_EVICTION_PHASE_BRACKETED_TARGET_COMPLETE",
+    "worker_status": "EVICTION_PHASE_BRACKETED_CODED_RESPONSE_NOT_ESTABLISHED",
+    "copy_verified": true,
+    "remote_cleaned": true
+  },
+  "predeclared_observable": {
+    "carrier": "eviction-sentinel PMU response after predetermined CAT_CAS-owned eviction-buffer preconditioning",
+    "token_sequence": "P0 M0 M1 P1 P2 M2 M3 P3",
+    "bracket": "control_before token control_after",
+    "control_prep": "remote_read_eviction",
+    "high_prep": "home_read_eviction",
+    "low_prep": "home_write_eviction",
+    "sham": "all token centers and bracket controls use control prep",
+    "candidate": "P and M centers swap high/low preps across imaginary quadrature phases",
+    "decode": "z=(2/4)*sum(response_k*exp(i*theta_k))",
+    "acceptance": "opposed candidate Im plus/minus and min(abs(candidate imag)) > 3 * sham_floor for either established coherence counter"
+  },
+  "decoded_observables": {
+    "cache_block_commands_change_to_dirty": {
+      "sham_floor": 0.000004272108439287,
+      "sham_plus_imag": -0.000002668375218106,
+      "sham_minus_imag": 0.000004272108439287,
+      "candidate_plus_imag": 0.00001171144192425,
+      "candidate_minus_imag": -0.000009952010687383,
+      "opposed_sign": true,
+      "exceeds_three_x_sham_floor": false,
+      "phase_local_signal": false,
+      "miss_ratio_to_three_x_floor": 0.776475
+    },
+    "probe_responses_dirty": {
+      "sham_floor": 0.000002939070290535,
+      "sham_plus_imag": -0.000002939070290535,
+      "sham_minus_imag": 0.0000002375640218123,
+      "candidate_plus_imag": 0.00001442723561986,
+      "candidate_minus_imag": -0.0000007041693848168,
+      "opposed_sign": true,
+      "exceeds_three_x_sham_floor": false,
+      "phase_local_signal": false
+    }
+  },
+  "acceptance": {
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "carrier_restored": true,
+    "eviction_buffer_restored": true,
+    "change_to_dirty_phase_local_signal": false,
+    "probe_dirty_phase_local_signal": false,
+    "eviction_phase_bracketed_captured": false
+  },
+  "lab_device_boundary": {
+    "temperature_preflight_c": 50.125,
+    "temperature_post_c": 50.0,
+    "temperature_veto_c": 68.0,
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "forbidden_process_matches_before": 0,
+    "forbidden_process_matches_after": 0,
+    "physical_address_access": false,
+    "cache_set_mapping": false,
+    "experiment_owned_memory_only": true
+  },
+  "raw_outputs": {
+    "F10_EVICTION_PHASE_BRACKETED_RESULT.json": {
+      "size": 38112,
+      "sha256": "8a33afb4c1dc36344aee02310a8eceb1fc18e763c4d613d7afc6540a9e0cc3ed"
+    },
+    "FINAL_RESULT.json": {
+      "size": 2688,
+      "sha256": "5421a5e47dc35c68958b04c35f04cea2f6bd89acfed9297c17a6ff53dfba7b27"
+    },
+    "CONTROLLER_RESULT.json": {
+      "size": 898,
+      "sha256": "1a0090c4f2672dfa3d448209c66260316a6cd97ca7de3fe4e080438883b770c8"
+    },
+    "FILE_MANIFEST.json": {
+      "size": 329,
+      "sha256": "9dbe628e7ebbd40b166e7896897713462c999877eb6fc6a7c9eb0e7acd86957c"
+    },
+    "CONTROLLER_STDOUT.txt": {
+      "size": 2818,
+      "sha256": "fdd1932d5bedf96f73b8abca3c203d2e7e2b9b339bfcded364ad23f37c9894f2"
+    },
+    "CONTROLLER_STDERR.txt": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "classification": {
+    "marker": "EVICTION_PHASE_BRACKETED_CODED_RESPONSE_NOT_ESTABLISHED",
+    "mechanical_failure": false,
+    "scientific_result": "negative but close for this bracketed high/low mapping",
+    "interpretation": "Immediate control bracketing reduced sham curvature. Change-to-Dirty had opposed candidate signs, but minimum candidate magnitude did not exceed three times the sham floor. This suggests changing the prep contrast, not repeating the same mapping unchanged."
+  }
+}

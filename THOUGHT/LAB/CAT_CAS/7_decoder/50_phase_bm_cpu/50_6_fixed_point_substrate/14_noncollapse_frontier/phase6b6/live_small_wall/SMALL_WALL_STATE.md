@@ -6,7 +6,7 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`EVICTION_PHASE_LOCAL_CODED_RESPONSE_NOT_ESTABLISHED`
+`EVICTION_PHASE_BRACKETED_CODED_RESPONSE_NOT_ESTABLISHED`
 
 **Active wall:**
 The current wall is phase-local use of a newly visible restoration-sentinel carrier
@@ -23,7 +23,10 @@ controls, fixed quadrature weights, and no private branch routing. The first suc
 mapping, `f10_eviction_phase_local_0`, completed and restored but failed the
 phase-local rule: the equal-prep sham curvature was larger than the candidate in the
 primary decoded coordinate. The active wall is now sequence-position cancellation for
-the eviction-sentinel carrier, not carrier absence.
+the eviction-sentinel carrier, not carrier absence. The bracketed follow-on
+`f10_eviction_bracket_0` reduced the sham floor and produced opposed candidate signs
+in Change-to-Dirty, but missed the three-times-sham rule. The active wall is now prep
+contrast under local bracketing.
 
 ## Established
 
@@ -1202,21 +1205,63 @@ but the equal-prep sham exposed sequence-position curvature. The next discrimina
 must cancel local drift by construction, for example by bracketing each P or M token
 with immediate control-prep sentinel windows before decoding.
 
+The bracketed phase-local discriminator then measured each public P/M token between
+immediate control-prep sentinel windows:
+
+```text
+run id        f10_eviction_bracket_0
+source bundle 5e3fc671e398fafe21d11bf4539a16b935f9c1275c7e97d0daf0ca8ea644c237
+worker status EVICTION_PHASE_BRACKETED_CODED_RESPONSE_NOT_ESTABLISHED
+```
+
+The transaction completed with verified copy-back and remote cleanup, zero frequency
+writes, zero voltage access, zero MSR reads/writes, no physical-address access, no
+cache-set mapping, no unrelated-process observation, temperature below veto, every PMU
+window unmultiplexed, and both carrier and eviction-buffer digests restored.
+
+Decoded observables:
+
+```text
+cache_block_commands_change_to_dirty:
+  sham floor       4.272108439287e-06
+  candidate plus   1.171144192425e-05
+  candidate minus -9.952010687383e-06
+  opposed sign     true
+  signal           false
+
+probe_responses_dirty:
+  sham floor       2.939070290535e-06
+  candidate plus   1.442723561986e-05
+  candidate minus -7.041693848168e-07
+  opposed sign     true
+  signal           false
+```
+
+Checkpoint:
+
+`F10_EVICTION_PHASE_BRACKETED_CHECKPOINT_20260712.json`
+
+**Status:** bracketing helped but did not promote. Change-to-Dirty is now the active
+coordinate: it had opposed signs and missed the `3 * sham_floor` rule by margin rather
+than by sign. The next cheap discriminator is a stronger Change-to-Dirty contrast
+using the same bracketing, not a repeat of the same high=`home_read_eviction`,
+low=`home_write_eviction` mapping.
+
 ## Cheapest current discriminator
 
-Build a bracketed phase-local coded discriminator on the eviction-sentinel carrier.
-The run must stay closed: CAT_CAS-owned buffers only, predetermined geometry, no
-physical-address access, no cache-set mapping, no unrelated-process observation, and no
-MSR or voltage access.
+Build a stronger Change-to-Dirty bracketed discriminator on the eviction-sentinel
+carrier. The run must stay closed: CAT_CAS-owned buffers only, predetermined geometry,
+no physical-address access, no cache-set mapping, no unrelated-process observation, and
+no MSR or voltage access.
 
 The next probe should answer:
 
-1. Can immediate control bracketing remove the sequence-position sham curvature seen
-   in `f10_eviction_phase_local_0`?
+1. Does swapping the active contrast to high=`none` and low=`home_write_eviction`
+   increase the Change-to-Dirty candidate magnitude under the same bracketed law?
 2. Does an equal-bracket sham stay bounded under the same quadrature law?
-3. Does a candidate P/M prep split produce opposed signs in
-   `probe_responses_dirty` or `cache_block_commands_change_to_dirty` with magnitude
-   greater than three times the bracketed sham floor?
+3. Does the stronger prep split produce opposed signs in
+   `cache_block_commands_change_to_dirty` with magnitude greater than three times the
+   bracketed sham floor?
 4. Do carrier bytes and the eviction buffer still restore after every window?
 
 Do not rerun the same timing coded loop, another scalar PMU route metric,
@@ -1243,8 +1288,10 @@ restoration-sentinel carrier by showing that predetermined eviction-buffer
 preconditioning changes the later ownership-intent sentinel while both buffers restore.
 `f10_eviction_phase_local_0` did not promote that carrier into a phase-local coded
 response because the equal-prep sham curvature exceeded the candidate. This marker
-remains short of `SMALL_WALL_CROSSED`; the next move must cancel sequence-position
-curvature by construction before another promotion attempt.
+`f10_eviction_bracket_0` reduced the sham floor and produced opposed Change-to-Dirty
+candidate signs, but did not exceed the three-times-sham threshold. This marker remains
+short of `SMALL_WALL_CROSSED`; the next move must strengthen the bracketed prep
+contrast before another promotion attempt.
 
 ## State update rule
 
