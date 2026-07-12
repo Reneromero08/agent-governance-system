@@ -214,6 +214,13 @@ MODES: dict[str, dict[str, Any]] = {
         "failed_status": "F10_PAGE_PERMISSION_HISTORY_TARGET_FAILED",
         "claim_ceiling": "Owned page-permission-state timing/PMU discriminator only; no memory disclosure, isolation bypass, path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, target coupling, or Small Wall crossing claim",
     },
+    "owned-recovery-history": {
+        "worker_args": ["--owned-recovery-history"],
+        "result_file": "F10_OWNED_RECOVERY_HISTORY_RESULT.json",
+        "complete_status": "F10_OWNED_RECOVERY_HISTORY_TARGET_COMPLETE",
+        "failed_status": "F10_OWNED_RECOVERY_HISTORY_TARGET_FAILED",
+        "claim_ceiling": "Owned synchronous page-recovery timing/PMU discriminator only; no memory disclosure, isolation bypass, path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, target coupling, or Small Wall crossing claim",
+    },
 }
 FORBIDDEN_PROCESS_MARKERS = (
     "f10_pmc_first_light_worker",

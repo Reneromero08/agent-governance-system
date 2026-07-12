@@ -6,6 +6,7 @@
 #include <linux/perf_event.h>
 #include <pthread.h>
 #include <sched.h>
+#include <signal.h>
 #include <stdatomic.h>
 #include <stdbool.h>
 #include <stdint.h>
@@ -14,6 +15,7 @@
 #include <string.h>
 #include <sys/ioctl.h>
 #include <sys/mman.h>
+#include <sys/resource.h>
 #include <sys/stat.h>
 #include <sys/syscall.h>
 #include <sys/time.h>
@@ -62,6 +64,7 @@
 #define RETURN_STACK_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_RETURN_STACK_HISTORY_RESULT_V1"
 #define FP_PIPELINE_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_FP_PIPELINE_HISTORY_RESULT_V1"
 #define PAGE_PERMISSION_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_PAGE_PERMISSION_HISTORY_RESULT_V1"
+#define OWNED_RECOVERY_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_OWNED_RECOVERY_HISTORY_RESULT_V1"
 #define PHASE_LOCAL_BANK_LINES 512u
 #define EVICTION_LINES 262144u
 #define EVICTION_ITERATIONS 3
@@ -104,6 +107,9 @@
 #define PAGE_PERMISSION_RESTORE_LOOPS 2u
 #define PAGE_PERMISSION_HISTORY_LOOPS 2u
 #define PAGE_PERMISSION_SENTINEL_LOOPS 64u
+#define OWNED_RECOVERY_PAGE_COUNT 256u
+#define OWNED_RECOVERY_HISTORY_LOOPS 1u
+#define OWNED_RECOVERY_SENTINEL_LOOPS 64u
 
 struct event_def {
     const char *name;
@@ -389,6 +395,20 @@ struct page_permission_sequence_spec {
     unsigned int history_loops;
 };
 
+enum owned_recovery_kind {
+    OWNED_RECOVERY_NEUTRAL = 0,
+    OWNED_RECOVERY_FORWARD = 1,
+    OWNED_RECOVERY_REVERSE = 2,
+    OWNED_RECOVERY_SHUFFLE = 3,
+    OWNED_RECOVERY_SENTINEL = 4
+};
+
+struct owned_recovery_sequence_spec {
+    const char *name;
+    enum owned_recovery_kind history_pattern;
+    unsigned int history_loops;
+};
+
 static const struct event_def support_events[SUPPORT_EVENTS] = {
     {"cpu_cycles_not_halted", 0x076, 0x00, "core"},
     {"dc_refills_l2_or_nb_all_states", 0x042, 0x1f, "core"},
@@ -464,6 +484,13 @@ static const struct event_def fp_pipeline_group[MAX_GROUP_EVENTS] = {
 };
 
 static const struct event_def page_permission_group[MAX_GROUP_EVENTS] = {
+    {"cpu_cycles_not_halted", 0x076, 0x00, "core"},
+    {"retired_instructions", 0x0c0, 0x00, "core"},
+    {"cache_references", 0x07d, 0x07, "core"},
+    {"cache_misses", 0x07e, 0x07, "core"}
+};
+
+static const struct event_def owned_recovery_group[MAX_GROUP_EVENTS] = {
     {"cpu_cycles_not_halted", 0x076, 0x00, "core"},
     {"retired_instructions", 0x0c0, 0x00, "core"},
     {"cache_references", 0x07d, 0x07, "core"},
@@ -4892,6 +4919,537 @@ static int run_page_permission_history_mode(const char *output_root) {
     return 0;
 }
 
+struct owned_recovery_context {
+    unsigned char *pages;
+    size_t page_size;
+    size_t page_count;
+    volatile sig_atomic_t active;
+    volatile sig_atomic_t handler_count;
+    volatile sig_atomic_t escaped_count;
+};
+
+static struct owned_recovery_context owned_recovery_ctx = {NULL, 0u, 0u, 0, 0, 0};
+static struct sigaction owned_recovery_old_action;
+static bool owned_recovery_handler_installed = false;
+static volatile uint64_t owned_recovery_sink = 0;
+
+static void owned_recovery_sigsegv_handler(int sig, siginfo_t *info, void *ucontext) {
+    (void)ucontext;
+    uintptr_t fault_addr = info ? (uintptr_t)info->si_addr : 0u;
+    uintptr_t base = (uintptr_t)owned_recovery_ctx.pages;
+    size_t byte_count = owned_recovery_ctx.page_size * owned_recovery_ctx.page_count;
+    uintptr_t end = base + byte_count;
+    if (owned_recovery_ctx.active != 0 && base != 0u &&
+        fault_addr >= base && fault_addr < end && owned_recovery_ctx.page_size > 0u) {
+        size_t page_index = (size_t)((fault_addr - base) / owned_recovery_ctx.page_size);
+        unsigned char *page = owned_recovery_ctx.pages + (page_index * owned_recovery_ctx.page_size);
+        if (mprotect(page, owned_recovery_ctx.page_size, PROT_READ | PROT_WRITE) == 0) {
+            owned_recovery_ctx.handler_count++;
+            return;
+        }
+    }
+    owned_recovery_ctx.escaped_count++;
+    owned_recovery_ctx.active = 0;
+    (void)sigaction(SIGSEGV, &owned_recovery_old_action, NULL);
+    (void)raise(sig);
+}
+
+static int install_owned_recovery_handler(unsigned char *pages, size_t page_size, size_t page_count) {
+    struct sigaction action;
+    memset(&action, 0, sizeof(action));
+    action.sa_sigaction = owned_recovery_sigsegv_handler;
+    action.sa_flags = SA_SIGINFO;
+    if (sigemptyset(&action.sa_mask) != 0) return -errno;
+    owned_recovery_ctx.pages = pages;
+    owned_recovery_ctx.page_size = page_size;
+    owned_recovery_ctx.page_count = page_count;
+    owned_recovery_ctx.active = 0;
+    owned_recovery_ctx.handler_count = 0;
+    owned_recovery_ctx.escaped_count = 0;
+    if (sigaction(SIGSEGV, &action, &owned_recovery_old_action) != 0) return -errno;
+    owned_recovery_handler_installed = true;
+    return 0;
+}
+
+static int restore_owned_recovery_handler(void) {
+    owned_recovery_ctx.active = 0;
+    if (!owned_recovery_handler_installed) return 0;
+    if (sigaction(SIGSEGV, &owned_recovery_old_action, NULL) != 0) return -errno;
+    owned_recovery_handler_installed = false;
+    owned_recovery_ctx.pages = NULL;
+    owned_recovery_ctx.page_size = 0u;
+    owned_recovery_ctx.page_count = 0u;
+    return 0;
+}
+
+static int restore_owned_recovery_permissions(unsigned char *pages, size_t page_size, size_t page_count) {
+    for (size_t page = 0; page < page_count; page++) {
+        unsigned char *addr = pages + (page * page_size);
+        if (mprotect(addr, page_size, PROT_READ | PROT_WRITE) != 0) return -errno;
+        addr[0] = (unsigned char)((addr[0] + 0u) & 0xffu);
+    }
+    return 0;
+}
+
+static int check_owned_recovery_resident(unsigned char *pages, size_t page_size, size_t page_count) {
+    unsigned char vec[OWNED_RECOVERY_PAGE_COUNT];
+    if (page_count > OWNED_RECOVERY_PAGE_COUNT) return -EINVAL;
+    memset(vec, 0, sizeof(vec));
+    if (mincore(pages, page_size * page_count, vec) != 0) return -errno;
+    for (size_t page = 0; page < page_count; page++) {
+        if ((vec[page] & 0x1u) == 0u) return -ENOENT;
+    }
+    return 0;
+}
+
+static size_t owned_recovery_group_index(enum owned_recovery_kind kind, size_t position) {
+    static const size_t neutral_order[4] = {0u, 2u, 1u, 3u};
+    static const size_t forward_order[4] = {0u, 1u, 2u, 3u};
+    static const size_t reverse_order[4] = {3u, 2u, 1u, 0u};
+    static const size_t shuffle_order[4] = {1u, 3u, 0u, 2u};
+    const size_t *order = forward_order;
+    switch (kind) {
+        case OWNED_RECOVERY_NEUTRAL:
+            order = neutral_order;
+            break;
+        case OWNED_RECOVERY_FORWARD:
+            order = forward_order;
+            break;
+        case OWNED_RECOVERY_REVERSE:
+            order = reverse_order;
+            break;
+        case OWNED_RECOVERY_SHUFFLE:
+            order = shuffle_order;
+            break;
+        case OWNED_RECOVERY_SENTINEL:
+            order = forward_order;
+            break;
+    }
+    return order[position & 3u];
+}
+
+static int run_owned_recovery_history_pattern(
+    unsigned char *pages,
+    size_t page_size,
+    size_t page_count,
+    enum owned_recovery_kind kind,
+    unsigned int loops,
+    int *handler_delta,
+    long *minor_delta
+) {
+    struct rusage before;
+    struct rusage after;
+    if (handler_delta) *handler_delta = 0;
+    if (minor_delta) *minor_delta = 0;
+    if (page_count == 0u || (page_count % 4u) != 0u) return -EINVAL;
+    if (getrusage(RUSAGE_SELF, &before) != 0) return -errno;
+    sig_atomic_t handler_before = owned_recovery_ctx.handler_count;
+    sig_atomic_t escaped_before = owned_recovery_ctx.escaped_count;
+    size_t group_pages = page_count / 4u;
+    uint64_t acc = owned_recovery_sink + page_count + loops + (uint64_t)kind;
+    owned_recovery_ctx.active = 1;
+    for (unsigned int loop = 0; loop < loops; loop++) {
+        for (size_t group_slot = 0; group_slot < 4u; group_slot++) {
+            size_t group = owned_recovery_group_index(kind, group_slot);
+            for (size_t offset = 0; offset < group_pages; offset++) {
+                size_t page_index = (group * group_pages) + offset;
+                unsigned char *addr = pages + (page_index * page_size);
+                if (mprotect(addr, page_size, PROT_NONE) != 0) {
+                    owned_recovery_ctx.active = 0;
+                    return -errno;
+                }
+                volatile unsigned char *probe = addr;
+                acc += (uint64_t)(*probe);
+                acc ^= ((uint64_t)page_index + 1u) * 0x9e3779b97f4a7c15ull;
+                __asm__ __volatile__("" : "+r"(acc) :: "memory");
+            }
+        }
+    }
+    owned_recovery_ctx.active = 0;
+    if (getrusage(RUSAGE_SELF, &after) != 0) return -errno;
+    if (handler_delta) {
+        *handler_delta = (int)(owned_recovery_ctx.handler_count - handler_before);
+    }
+    if (minor_delta) {
+        *minor_delta = after.ru_minflt - before.ru_minflt;
+    }
+    owned_recovery_sink = acc;
+    return owned_recovery_ctx.escaped_count == escaped_before ? 0 : -EFAULT;
+}
+
+__attribute__((noinline))
+static int run_owned_recovery_sentinel(
+    volatile unsigned char *pages,
+    size_t page_size,
+    size_t page_count,
+    unsigned int loops,
+    int *handler_delta,
+    long *minor_delta
+) {
+    struct rusage before;
+    struct rusage after;
+    if (handler_delta) *handler_delta = 0;
+    if (minor_delta) *minor_delta = 0;
+    if (page_count == 0u || (page_count % 4u) != 0u) return -EINVAL;
+    if (getrusage(RUSAGE_SELF, &before) != 0) return -errno;
+    sig_atomic_t handler_before = owned_recovery_ctx.handler_count;
+    sig_atomic_t escaped_before = owned_recovery_ctx.escaped_count;
+    size_t group_pages = page_count / 4u;
+    uint64_t acc = owned_recovery_sink + loops + 0xd6e8feb86659fd93ull;
+    for (unsigned int loop = 0; loop < loops; loop++) {
+        for (size_t group_slot = 0; group_slot < 4u; group_slot++) {
+            size_t group = owned_recovery_group_index(OWNED_RECOVERY_SENTINEL, group_slot);
+            for (size_t offset = 0; offset < group_pages; offset++) {
+                size_t page_index = (group * group_pages) + offset;
+                acc += (uint64_t)pages[page_index * page_size];
+                acc ^= ((uint64_t)page_index + 1u) * 0xbf58476d1ce4e5b9ull;
+                __asm__ __volatile__("" : "+r"(acc) :: "memory");
+            }
+        }
+    }
+    if (getrusage(RUSAGE_SELF, &after) != 0) return -errno;
+    if (handler_delta) {
+        *handler_delta = (int)(owned_recovery_ctx.handler_count - handler_before);
+    }
+    if (minor_delta) {
+        *minor_delta = after.ru_minflt - before.ru_minflt;
+    }
+    owned_recovery_sink = acc;
+    return owned_recovery_ctx.escaped_count == escaped_before ? 0 : -EFAULT;
+}
+
+static int measure_owned_recovery_window(
+    const struct event_def group[MAX_GROUP_EVENTS],
+    const struct owned_recovery_sequence_spec *sequence,
+    unsigned char *pages,
+    size_t page_size,
+    size_t page_count,
+    struct group_result *result,
+    uint64_t *duration_ns,
+    uint64_t *digest_after_history,
+    uint64_t *digest_after_restore,
+    int *history_handler_delta,
+    long *history_minor_delta,
+    int *sentinel_handler_delta,
+    long *sentinel_minor_delta,
+    int *resident_probe_rc,
+    int *permission_restore_probe_rc
+) {
+    int fds[MAX_GROUP_EVENTS];
+    uint64_t ids[MAX_GROUP_EVENTS];
+    memset(result, 0, sizeof(*result));
+    if (pin_to_core(CATCAS_CORE_B) != 0) return -EINVAL;
+    int restore_rc = restore_owned_recovery_permissions(pages, page_size, page_count);
+    if (restore_rc != 0) return restore_rc;
+    int resident_before_rc = check_owned_recovery_resident(pages, page_size, page_count);
+    if (resident_probe_rc) *resident_probe_rc = resident_before_rc;
+    if (resident_before_rc != 0) return resident_before_rc;
+    int history_rc = run_owned_recovery_history_pattern(
+        pages, page_size, page_count, sequence->history_pattern,
+        sequence->history_loops, history_handler_delta, history_minor_delta);
+    if (history_rc != 0) {
+        (void)restore_owned_recovery_permissions(pages, page_size, page_count);
+        return history_rc;
+    }
+    *digest_after_history = fnv1a64(pages, page_size * page_count);
+    int opened = open_group(group, CATCAS_CORE_B, fds, ids);
+    if (opened != 0) {
+        result->open_errno = -opened;
+        (void)restore_owned_recovery_permissions(pages, page_size, page_count);
+        return opened;
+    }
+    result->opened = true;
+    if (ioctl(fds[0], PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        (void)restore_owned_recovery_permissions(pages, page_size, page_count);
+        return -saved;
+    }
+    uint64_t start = monotonic_ns();
+    if (ioctl(fds[0], PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        (void)restore_owned_recovery_permissions(pages, page_size, page_count);
+        return -saved;
+    }
+    int sentinel_rc = run_owned_recovery_sentinel(
+        pages, page_size, page_count, OWNED_RECOVERY_SENTINEL_LOOPS,
+        sentinel_handler_delta, sentinel_minor_delta);
+    if (ioctl(fds[0], PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        (void)restore_owned_recovery_permissions(pages, page_size, page_count);
+        return -saved;
+    }
+    uint64_t end = monotonic_ns();
+    int read_rc = read_group(fds[0], result);
+    for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+    if (sentinel_rc != 0) {
+        (void)restore_owned_recovery_permissions(pages, page_size, page_count);
+        return sentinel_rc;
+    }
+    if (read_rc != 0) {
+        (void)restore_owned_recovery_permissions(pages, page_size, page_count);
+        return read_rc;
+    }
+    int final_restore_rc = restore_owned_recovery_permissions(pages, page_size, page_count);
+    if (permission_restore_probe_rc) *permission_restore_probe_rc = final_restore_rc;
+    if (final_restore_rc != 0) return final_restore_rc;
+    int resident_after_rc = check_owned_recovery_resident(pages, page_size, page_count);
+    if (resident_probe_rc) *resident_probe_rc = resident_after_rc;
+    if (resident_after_rc != 0) return resident_after_rc;
+    *digest_after_restore = fnv1a64(pages, page_size * page_count);
+    *duration_ns = end >= start ? end - start : 0;
+    return 0;
+}
+
+static int run_owned_recovery_history_mode(const char *output_root) {
+    long page_size_long = sysconf(_SC_PAGESIZE);
+    if (page_size_long <= 0) {
+        fprintf(stderr, "page size unavailable\n");
+        return 1;
+    }
+    size_t page_size = (size_t)page_size_long;
+    size_t byte_count = page_size * OWNED_RECOVERY_PAGE_COUNT;
+    unsigned char *pages = mmap(NULL, byte_count, PROT_READ | PROT_WRITE,
+                                MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+    if (pages == MAP_FAILED) {
+        fprintf(stderr, "owned recovery mmap failed: %s\n", strerror(errno));
+        return 1;
+    }
+    for (size_t page = 0; page < OWNED_RECOVERY_PAGE_COUNT; page++) {
+        pages[page * page_size] = (unsigned char)((page * 131u + 41u) & 0xffu);
+    }
+    uint64_t initial_digest = fnv1a64(pages, byte_count);
+    int initial_resident_rc = check_owned_recovery_resident(pages, page_size, OWNED_RECOVERY_PAGE_COUNT);
+
+    int recovery_fds[MAX_GROUP_EVENTS];
+    uint64_t recovery_ids[MAX_GROUP_EVENTS];
+    int recovery_open_rc = open_group(owned_recovery_group, CATCAS_CORE_B,
+                                      recovery_fds, recovery_ids);
+    if (recovery_open_rc == 0) {
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(recovery_fds[i]);
+    }
+    int handler_install_rc = 0;
+    if (recovery_open_rc == 0 && initial_resident_rc == 0) {
+        handler_install_rc = install_owned_recovery_handler(
+            pages, page_size, OWNED_RECOVERY_PAGE_COUNT);
+    }
+
+    const struct owned_recovery_sequence_spec sequences[] = {
+        {"neutral_owned_recovery_history", OWNED_RECOVERY_NEUTRAL, OWNED_RECOVERY_HISTORY_LOOPS},
+        {"forward_owned_recovery_history", OWNED_RECOVERY_FORWARD, OWNED_RECOVERY_HISTORY_LOOPS},
+        {"reverse_owned_recovery_history", OWNED_RECOVERY_REVERSE, OWNED_RECOVERY_HISTORY_LOOPS},
+        {"shuffle_owned_recovery_history", OWNED_RECOVERY_SHUFFLE, OWNED_RECOVERY_HISTORY_LOOPS},
+    };
+    enum { OWNED_RECOVERY_WINDOW_COUNT = 4 };
+    struct group_result results[OWNED_RECOVERY_WINDOW_COUNT];
+    uint64_t durations[OWNED_RECOVERY_WINDOW_COUNT];
+    uint64_t digest_after_history[OWNED_RECOVERY_WINDOW_COUNT];
+    uint64_t digest_after_restore[OWNED_RECOVERY_WINDOW_COUNT];
+    int history_handler_delta[OWNED_RECOVERY_WINDOW_COUNT];
+    long history_minor_delta[OWNED_RECOVERY_WINDOW_COUNT];
+    int sentinel_handler_delta[OWNED_RECOVERY_WINDOW_COUNT];
+    long sentinel_minor_delta[OWNED_RECOVERY_WINDOW_COUNT];
+    int resident_probe_rc[OWNED_RECOVERY_WINDOW_COUNT];
+    int restore_probe_rc[OWNED_RECOVERY_WINDOW_COUNT];
+    int window_rc[OWNED_RECOVERY_WINDOW_COUNT];
+    for (int i = 0; i < OWNED_RECOVERY_WINDOW_COUNT; i++) {
+        memset(&results[i], 0, sizeof(results[i]));
+        durations[i] = 0;
+        digest_after_history[i] = 0;
+        digest_after_restore[i] = 0;
+        history_handler_delta[i] = 0;
+        history_minor_delta[i] = 0;
+        sentinel_handler_delta[i] = 0;
+        sentinel_minor_delta[i] = 0;
+        resident_probe_rc[i] = -1;
+        restore_probe_rc[i] = -1;
+        if (recovery_open_rc != 0) {
+            window_rc[i] = -ENODEV;
+        } else if (initial_resident_rc != 0) {
+            window_rc[i] = initial_resident_rc;
+        } else if (handler_install_rc != 0) {
+            window_rc[i] = handler_install_rc;
+        } else {
+            window_rc[i] = measure_owned_recovery_window(
+                owned_recovery_group,
+                &sequences[i],
+                pages,
+                page_size,
+                OWNED_RECOVERY_PAGE_COUNT,
+                &results[i],
+                &durations[i],
+                &digest_after_history[i],
+                &digest_after_restore[i],
+                &history_handler_delta[i],
+                &history_minor_delta[i],
+                &sentinel_handler_delta[i],
+                &sentinel_minor_delta[i],
+                &resident_probe_rc[i],
+                &restore_probe_rc[i]);
+        }
+    }
+
+    int handler_restore_rc = restore_owned_recovery_handler();
+    int final_permission_rc = restore_owned_recovery_permissions(pages, page_size, OWNED_RECOVERY_PAGE_COUNT);
+    uint64_t final_digest = fnv1a64(pages, byte_count);
+
+    bool all_windows_ok = true;
+    bool all_unmultiplexed = true;
+    bool bytes_unchanged_after_history = true;
+    bool bytes_unchanged_after_restore = true;
+    bool permissions_restored = final_permission_rc == 0 && handler_restore_rc == 0;
+    bool pages_resident = initial_resident_rc == 0;
+    bool handler_counts_expected = true;
+    bool history_minor_counts_equal = true;
+    bool sentinel_handler_zero = true;
+    bool sentinel_minor_zero = true;
+    int expected_history_handlers = (int)(OWNED_RECOVERY_PAGE_COUNT * OWNED_RECOVERY_HISTORY_LOOPS);
+    long reference_history_minor = history_minor_delta[0];
+    for (int i = 0; i < OWNED_RECOVERY_WINDOW_COUNT; i++) {
+        all_windows_ok = all_windows_ok && window_rc[i] == 0;
+        all_unmultiplexed = all_unmultiplexed && results[i].unmultiplexed;
+        bytes_unchanged_after_history =
+            bytes_unchanged_after_history && digest_after_history[i] == initial_digest;
+        bytes_unchanged_after_restore =
+            bytes_unchanged_after_restore && digest_after_restore[i] == initial_digest;
+        permissions_restored = permissions_restored && restore_probe_rc[i] == 0;
+        pages_resident = pages_resident && resident_probe_rc[i] == 0;
+        handler_counts_expected =
+            handler_counts_expected && history_handler_delta[i] == expected_history_handlers;
+        history_minor_counts_equal =
+            history_minor_counts_equal && history_minor_delta[i] == reference_history_minor;
+        sentinel_handler_zero = sentinel_handler_zero && sentinel_handler_delta[i] == 0;
+        sentinel_minor_zero = sentinel_minor_zero && sentinel_minor_delta[i] == 0;
+    }
+    bool no_escaped_recovery = owned_recovery_ctx.escaped_count == 0;
+    bool final_digest_restored = final_digest == initial_digest;
+
+    uint64_t identity_misses = event_value_by_name(&results[0], owned_recovery_group, "cache_misses");
+    uint64_t forward_misses = event_value_by_name(&results[1], owned_recovery_group, "cache_misses");
+    uint64_t reverse_misses = event_value_by_name(&results[2], owned_recovery_group, "cache_misses");
+    uint64_t shuffle_misses = event_value_by_name(&results[3], owned_recovery_group, "cache_misses");
+    uint64_t miss_delta = abs_diff_u64(forward_misses, reverse_misses);
+    uint64_t miss_control = abs_diff_u64(identity_misses, shuffle_misses);
+    uint64_t miss_threshold = max_u64(32u, 3u * miss_control);
+    bool miss_signal = miss_delta > miss_threshold;
+
+    uint64_t identity_cycles = event_value_by_name(&results[0], owned_recovery_group, "cpu_cycles_not_halted");
+    uint64_t forward_cycles = event_value_by_name(&results[1], owned_recovery_group, "cpu_cycles_not_halted");
+    uint64_t reverse_cycles = event_value_by_name(&results[2], owned_recovery_group, "cpu_cycles_not_halted");
+    uint64_t shuffle_cycles = event_value_by_name(&results[3], owned_recovery_group, "cpu_cycles_not_halted");
+    uint64_t cycles_delta = abs_diff_u64(forward_cycles, reverse_cycles);
+    uint64_t cycles_control = abs_diff_u64(identity_cycles, shuffle_cycles);
+    uint64_t cycles_threshold = max_u64(10000u, 3u * cycles_control);
+    bool cycles_signal = cycles_delta > cycles_threshold;
+
+    uint64_t identity_duration = durations[0];
+    uint64_t forward_duration = durations[1];
+    uint64_t reverse_duration = durations[2];
+    uint64_t shuffle_duration = durations[3];
+    uint64_t duration_delta = abs_diff_u64(forward_duration, reverse_duration);
+    uint64_t duration_control = abs_diff_u64(identity_duration, shuffle_duration);
+    uint64_t duration_threshold = max_u64(10000u, 3u * duration_control);
+    bool duration_signal = duration_delta > duration_threshold;
+
+    bool integrity_closed = recovery_open_rc == 0 && handler_install_rc == 0 &&
+        all_windows_ok && all_unmultiplexed && bytes_unchanged_after_history &&
+        bytes_unchanged_after_restore && final_digest_restored && permissions_restored &&
+        pages_resident && handler_counts_expected && history_minor_counts_equal &&
+        sentinel_handler_zero && sentinel_minor_zero && no_escaped_recovery;
+    bool owned_recovery_history_response = integrity_closed &&
+        (miss_signal || cycles_signal || duration_signal);
+
+    char result_path[4096];
+    int n = snprintf(result_path, sizeof(result_path), "%s/F10_OWNED_RECOVERY_HISTORY_RESULT.json", output_root);
+    if (n <= 0 || (size_t)n >= sizeof(result_path)) {
+        (void)munmap(pages, byte_count);
+        return 1;
+    }
+    FILE *out = fopen(result_path, "w");
+    if (!out) {
+        fprintf(stderr, "cannot open result: %s\n", strerror(errno));
+        (void)munmap(pages, byte_count);
+        return 1;
+    }
+    fprintf(out, "{\n");
+    fprintf(out, "  \"schema_id\": \"%s\",\n", OWNED_RECOVERY_HISTORY_RESULT_SCHEMA);
+    fprintf(out, "  \"status\": \"%s\",\n", owned_recovery_history_response ? "OWNED_RECOVERY_HISTORY_RESPONSE_FOUND" : "OWNED_RECOVERY_HISTORY_RESPONSE_NOT_ESTABLISHED");
+    fprintf(out, "  \"claim_ceiling\": \"Owned synchronous page-recovery timing/PMU discriminator only; no memory disclosure, isolation bypass, path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, target coupling, or Small Wall crossing claim\",\n");
+    fprintf(out, "  \"cores\": {\"owned_recovery_core\": %d},\n", CATCAS_CORE_B);
+    fprintf(out, "  \"perf_interface\": {\"type\": \"PERF_TYPE_RAW\", \"event_format\": \"config:0-7,32-35\", \"umask_format\": \"config:8-15\", \"exclude_kernel\": true, \"exclude_hv\": true},\n");
+    fprintf(out, "  \"source_constraints\": {\"direct_msr_access\": false, \"voltage_access\": false, \"frequency_writes\": 0, \"experiment_owned_pages_only\": true, \"synthetic_public_contents_only\": true, \"physical_address_access\": false, \"cache_set_mapping\": false, \"unrelated_process_observation\": false, \"cross_domain_observation\": false},\n");
+    fprintf(out, "  \"owned_recovery_carrier\": {\"page_count\": %u, \"page_bytes\": %zu, \"byte_count\": %zu, \"history_loops\": %u, \"sentinel_loops\": %u, \"history_recovery_count_per_window\": %d, \"digest_kind\": \"fnv1a64\", \"initial_digest_hex\": \"0x%016" PRIx64 "\", \"final_digest_hex\": \"0x%016" PRIx64 "\"},\n",
+        OWNED_RECOVERY_PAGE_COUNT, page_size, byte_count,
+        OWNED_RECOVERY_HISTORY_LOOPS, OWNED_RECOVERY_SENTINEL_LOOPS,
+        expected_history_handlers, initial_digest, final_digest);
+    fprintf(out, "  \"selected_group\": \"owned_recovery_group\",\n");
+    fprintf(out, "  \"group_open_rc\": %d,\n", recovery_open_rc);
+    fprintf(out, "  \"handler_install_rc\": %d,\n", handler_install_rc);
+    fprintf(out, "  \"handler_restore_rc\": %d,\n", handler_restore_rc);
+    fprintf(out, "  \"final_permission_restore_rc\": %d,\n", final_permission_rc);
+    fprintf(out, "  \"initial_resident_rc\": %d,\n", initial_resident_rc);
+    fprintf(out, "  \"selected_events\": ");
+    print_group_defs(out, owned_recovery_group);
+    fprintf(out, ",\n");
+    fprintf(out, "  \"predeclared_observable\": {\"history\": \"each CAT_CAS-owned page is made temporarily unreadable and synchronously recovered exactly once per history window\", \"balanced_histories\": \"neutral G0-G2-G1-G3, forward G0-G1-G2-G3, reverse G3-G2-G1-G0, shuffle G1-G3-G0-G2\", \"sentinel\": \"fixed no-recovery read sequence G0-G1-G2-G3\", \"restoration\": \"permissions restored to read-write, bytes unchanged, pages resident, handler counts equal, sentinel recovery count zero\", \"primary_acceptance\": \"forward/reverse cache_misses, cycles, or duration delta exceeds max(floor, 3 * neutral/shuffle control spread)\"},\n");
+    fprintf(out, "  \"windows\": [\n");
+    for (int i = 0; i < OWNED_RECOVERY_WINDOW_COUNT; i++) {
+        fprintf(out, "    {\"name\": \"%s\", \"rc\": %d, \"duration_ns\": %" PRIu64 ", \"history_loops\": %u, \"history_handler_delta\": %d, \"history_minor_delta\": %ld, \"sentinel_handler_delta\": %d, \"sentinel_minor_delta\": %ld, \"resident_probe_rc\": %d, \"permission_restore_probe_rc\": %d, \"digest_after_history_hex\": \"0x%016" PRIx64 "\", \"digest_after_restore_hex\": \"0x%016" PRIx64 "\", \"bytes_unchanged_after_history\": %s, \"bytes_unchanged_after_restore\": %s, \"group\": ",
+            sequences[i].name,
+            window_rc[i],
+            durations[i],
+            sequences[i].history_loops,
+            history_handler_delta[i],
+            history_minor_delta[i],
+            sentinel_handler_delta[i],
+            sentinel_minor_delta[i],
+            resident_probe_rc[i],
+            restore_probe_rc[i],
+            digest_after_history[i],
+            digest_after_restore[i],
+            json_bool(digest_after_history[i] == initial_digest),
+            json_bool(digest_after_restore[i] == initial_digest));
+        print_group_result(out, owned_recovery_group, &results[i]);
+        fprintf(out, "}%s\n", i + 1 == OWNED_RECOVERY_WINDOW_COUNT ? "" : ",");
+    }
+    fprintf(out, "  ],\n");
+    fprintf(out, "  \"contrast_counts\": {\n");
+    fprintf(out, "    \"cache_misses\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s},\n",
+        identity_misses, forward_misses, reverse_misses, shuffle_misses, miss_delta, miss_control, miss_threshold, json_bool(miss_signal));
+    fprintf(out, "    \"cpu_cycles_not_halted\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s},\n",
+        identity_cycles, forward_cycles, reverse_cycles, shuffle_cycles, cycles_delta, cycles_control, cycles_threshold, json_bool(cycles_signal));
+    fprintf(out, "    \"duration_ns\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s}\n",
+        identity_duration, forward_duration, reverse_duration, shuffle_duration, duration_delta, duration_control, duration_threshold, json_bool(duration_signal));
+    fprintf(out, "  },\n");
+    fprintf(out, "  \"acceptance\": {\"all_windows_ok\": %s, \"all_unmultiplexed\": %s, \"bytes_unchanged_after_history\": %s, \"bytes_unchanged_after_restore\": %s, \"final_digest_restored\": %s, \"permissions_restored\": %s, \"pages_resident\": %s, \"handler_counts_expected\": %s, \"history_minor_counts_equal\": %s, \"sentinel_handler_zero\": %s, \"sentinel_minor_zero\": %s, \"no_escaped_recovery\": %s, \"cache_miss_signal\": %s, \"cycle_signal\": %s, \"duration_signal\": %s, \"integrity_closed\": %s, \"owned_recovery_history_response\": %s}\n",
+        json_bool(all_windows_ok),
+        json_bool(all_unmultiplexed),
+        json_bool(bytes_unchanged_after_history),
+        json_bool(bytes_unchanged_after_restore),
+        json_bool(final_digest_restored),
+        json_bool(permissions_restored),
+        json_bool(pages_resident),
+        json_bool(handler_counts_expected),
+        json_bool(history_minor_counts_equal),
+        json_bool(sentinel_handler_zero),
+        json_bool(sentinel_minor_zero),
+        json_bool(no_escaped_recovery),
+        json_bool(miss_signal),
+        json_bool(cycles_signal),
+        json_bool(duration_signal),
+        json_bool(integrity_closed),
+        json_bool(owned_recovery_history_response));
+    fprintf(out, "}\n");
+    fclose(out);
+    printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"owned_recovery_group\"}\n",
+        owned_recovery_history_response ? "OWNED_RECOVERY_HISTORY_RESPONSE_FOUND" : "OWNED_RECOVERY_HISTORY_RESPONSE_NOT_ESTABLISHED",
+        result_path);
+    (void)munmap(pages, byte_count);
+    return 0;
+}
+
 static int wait_child_ok(pid_t pid, int *child_status) {
     int status = 0;
     pid_t waited = 0;
@@ -7078,6 +7636,7 @@ int main(int argc, char **argv) {
     bool return_stack_history_mode = false;
     bool fp_pipeline_history_mode = false;
     bool page_permission_history_mode = false;
+    bool owned_recovery_history_mode = false;
     if (argc == 3 && strcmp(argv[1], "--output-root") == 0) {
         output_root = argv[2];
     } else if (argc == 4 && strcmp(argv[1], "--coherence-operators") == 0 &&
@@ -7180,10 +7739,14 @@ int main(int argc, char **argv) {
                strcmp(argv[2], "--output-root") == 0) {
         page_permission_history_mode = true;
         output_root = argv[3];
+    } else if (argc == 4 && strcmp(argv[1], "--owned-recovery-history") == 0 &&
+               strcmp(argv[2], "--output-root") == 0) {
+        owned_recovery_history_mode = true;
+        output_root = argv[3];
     } else if (argc == 2 && strcmp(argv[1], "--self-test") == 0) {
         return self_test();
     } else {
-        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root> | --eviction-phase-bracketed --output-root <absolute-output-root> | --eviction-phase-bracketed-c2d --output-root <absolute-output-root> | --eviction-phase-bracketed-duration --output-root <absolute-output-root> | --history-sentinel --output-root <absolute-output-root> | --locked-history --output-root <absolute-output-root> | --branch-history --output-root <absolute-output-root> | --indirect-target-history --output-root <absolute-output-root> | --translation-history --output-root <absolute-output-root> | --store-load-alias-history --output-root <absolute-output-root> | --prefetch-stream --output-root <absolute-output-root> | --process-lifecycle --output-root <absolute-output-root> | --code-footprint-history --output-root <absolute-output-root> | --return-stack-history --output-root <absolute-output-root> | --fp-pipeline-history --output-root <absolute-output-root> | --page-permission-history --output-root <absolute-output-root>\n", argv[0]);
+        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root> | --eviction-phase-bracketed --output-root <absolute-output-root> | --eviction-phase-bracketed-c2d --output-root <absolute-output-root> | --eviction-phase-bracketed-duration --output-root <absolute-output-root> | --history-sentinel --output-root <absolute-output-root> | --locked-history --output-root <absolute-output-root> | --branch-history --output-root <absolute-output-root> | --indirect-target-history --output-root <absolute-output-root> | --translation-history --output-root <absolute-output-root> | --store-load-alias-history --output-root <absolute-output-root> | --prefetch-stream --output-root <absolute-output-root> | --process-lifecycle --output-root <absolute-output-root> | --code-footprint-history --output-root <absolute-output-root> | --return-stack-history --output-root <absolute-output-root> | --fp-pipeline-history --output-root <absolute-output-root> | --page-permission-history --output-root <absolute-output-root> | --owned-recovery-history --output-root <absolute-output-root>\n", argv[0]);
         return 2;
     }
     if (output_root[0] != '/') {
@@ -7327,6 +7890,11 @@ int main(int argc, char **argv) {
     }
     if (page_permission_history_mode) {
         int rc = run_page_permission_history_mode(output_root);
+        free(carrier.bytes);
+        return rc;
+    }
+    if (owned_recovery_history_mode) {
+        int rc = run_owned_recovery_history_mode(output_root);
         free(carrier.bytes);
         return rc;
     }

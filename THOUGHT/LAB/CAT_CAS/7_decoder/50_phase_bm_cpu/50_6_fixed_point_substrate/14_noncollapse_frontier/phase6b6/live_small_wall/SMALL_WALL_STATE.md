@@ -6,7 +6,7 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`CODED_PREPROJECTION_ACTIVE_SOURCE_CHOP_RESPONSE_NOT_ESTABLISHED`
+`OWNED_RECOVERY_HISTORY_RESPONSE_NOT_ESTABLISHED`
 
 **Active wall:**
 The current wall is still carrier/access-model selection. Timing, ownership-intent PMU
@@ -29,12 +29,14 @@ source burst before scalar recording and also restored cleanly, but its control 
 was too large for the `3x` rule. `coded_preprojection_active_source_chop_0` combined
 that source-side phase waveform with receiver active-query subbank deltas and restored
 cleanly, but its phase-aligned means were same-signed and below the control threshold.
-The restored history-sentinel, branch-history,
-translation-history, prefetch-stream, and process-lifecycle probes all ran cleanly and
-stayed inside neutral/shuffle controls. The remaining wall is no longer ordinary local
-history over cache lines, branch outcomes, page footprints, stream prefetching, or
-simple source-process lifecycle residue; it is a stronger coupling/access-model or
-representation-level carrier that preserves a coordinate before fold-even loss.
+The restored history-sentinel, branch-history, translation-history, prefetch-stream,
+process-lifecycle, indirect-target, store/load-alias, locked-history, code-footprint,
+return-stack, FP-pipeline, page-permission, and owned page-recovery probes all ran
+cleanly and stayed inside neutral/shuffle controls. The remaining wall is no longer
+ordinary local history over cache lines, branch outcomes, page footprints, stream
+prefetching, execution-unit state, user-space permission flips, or synchronous owned
+page recovery; it is a changed authorization class for stronger coupling/access-model
+work or representation-level access that preserves a coordinate before fold-even loss.
 
 ## Established
 
@@ -2176,29 +2178,83 @@ or isolation-boundary claims, but the forward/reverse residuals remain inside
 neutral/shuffle controls. Do not rerun this neutral/forward/reverse/shuffle
 page-permission sequence unchanged.
 
+### Owned synchronous page-recovery history carrier
+
+The owned page-recovery history discriminator changed the permission carrier from
+plain permission flips to synchronous recovery of CAT_CAS-owned pages before a fixed
+no-recovery sentinel. Each window recovered exactly the same 256 owned pages, then
+measured a fixed page-read sentinel under the `owned_recovery_group` PMU group:
+
+```text
+run id        f10_owned_recovery_history_0
+source bundle a07ee1f512481b9c8fed8b1b3b9eee5e503a0b05ff3fc1a93c12bac7ebfc96d5
+worker status OWNED_RECOVERY_HISTORY_RESPONSE_NOT_ESTABLISHED
+```
+
+The transaction completed with verified copy-back and remote cleanup. It performed
+zero frequency writes, zero voltage access, zero MSR reads/writes, stayed below the
+68 C temperature veto, found no forbidden CAT_CAS process residue, all PMU windows
+were unmultiplexed, pages were resident, all pages restored to read-write, all bytes
+and final digests restored, each history window had 256 handler recoveries, and the
+measured sentinel had zero recoveries and zero minor events.
+
+Owned-recovery sentinel contrasts:
+
+```text
+cache_misses:
+  identity 16729
+  forward  16697
+  reverse  16785
+  shuffle  16603
+  delta       88
+  floor      126
+  threshold  378
+  signal false
+
+cpu_cycles_not_halted:
+  identity 424110
+  forward  417575
+  reverse  416027
+  shuffle  417656
+  delta      1548
+  floor      6454
+  threshold 19362
+  signal false
+
+duration_ns:
+  identity 143280
+  forward  138818
+  reverse  137986
+  shuffle  138540
+  delta       832
+  floor      4740
+  threshold 14220
+  signal false
+```
+
+Checkpoint:
+
+`F10_OWNED_RECOVERY_HISTORY_CHECKPOINT_20260712.json`
+
+**Status:** this exact owned synchronous page-recovery carrier is negative. It is not
+the previous page-permission run: the history includes equal owned page-recovery
+events before the fixed no-recovery sentinel. It still stayed inside controls and did
+not expose a usable fold-odd carrier. Do not rerun this neutral/forward/reverse/shuffle
+owned-recovery sequence unchanged.
+
 ## Cheapest current discriminator
 
-Change carrier family or access model again, not another remap of the same
-phase-local timing/PMU/eviction/active-query/source-phase-chop/restored-history,
-simple branch-history/indirect-target-history/translation-footprint/prefetch-stream
-geometry, same-page-offset store/load alias-history, locked no-op history,
-compiled code-footprint history, return-stack history, FP pipeline history, owned
-page-permission history, the combined active-query/source-phase-chop schedule, or the
-current fresh source-process lifecycle sentinel.
-The run must stay closed:
-CAT_CAS-owned buffers only, predetermined geometry, no physical-address access, no
-cache-set mapping, no unrelated-process observation, and no MSR or voltage access.
+No cheap closed discriminator remains inside the current live boundary after the
+negative owned-recovery run. The next useful direction is no longer another remap of
+the same phase-local timing/PMU/eviction/active-query/source-phase-chop/restored-
+history geometry, branch-history/indirect-target-history, translation/prefetch,
+store/load aliasing, locked no-op ownership, code footprint, return-stack, FP pipeline,
+process lifecycle, page-permission, or owned page-recovery carrier.
 
-The next probe should answer:
-
-1. Is there a source-owned runtime carrier whose state survives long enough to couple
-   before the public fold-even projection?
-2. Can the query algebra preserve a conjugate/source-side coordinate without turning
-   into receiver-order service curvature or source-segment timing spread?
-3. Does a killing control remove the response without relying on route, line-set,
-   eviction-prep, active-query subbank order, source-segment timing spread, or
-   sequence-position or process-lifecycle imbalance?
-4. Does the carrier restore beyond byte equality under the new observable?
+The next useful move appears to require a changed authorization class, for example a
+deeper diagnostic interface, kernel/tool boundary change, reboot-persistence test, or
+actual target/OrbitState coupling. Under the current boundary, a further run would be
+more likely to remap a killed carrier than reduce the Small Wall uncertainty.
 
 Do not rerun the same timing coded loop, another scalar PMU route metric,
 unconditioned transient timing repeat, IBS availability probe, WC/flush-order pair, or
@@ -2223,7 +2279,9 @@ code-footprint sequence unchanged. Do not rerun `f10_return_stack_history_0` or 
 same neutral/forward/reverse/shuffle return-stack sequence unchanged. Do not rerun
 `f10_fp_pipeline_history_0` or the same neutral/forward/reverse/shuffle FP pipeline
 sequence unchanged. Do not rerun `f10_page_permission_history_0` or the same
-neutral/forward/reverse/shuffle owned page-permission sequence unchanged.
+neutral/forward/reverse/shuffle owned page-permission sequence unchanged. Do not rerun
+`f10_owned_recovery_history_0` or the same neutral/forward/reverse/shuffle owned
+page-recovery sequence unchanged.
 
 ## Current claim ceiling
 
@@ -2280,13 +2338,15 @@ also stayed negative.
 and also stayed negative.
 `f10_page_permission_history_0` then tested owned user-space page-permission state and
 also stayed negative.
-The next move must change carrier family or access model rather than keep remapping the
-same eviction-sentinel PMU/timing, active-query phase-local, source-phase-chop,
-restored two-line-set ownership-history, simple branch-history, indirect-target-
-history, translation-footprint, store/load alias-history, locked-history,
-prefetch-stream, combined active-query/source-chop, source-process lifecycle,
-compiled code-footprint history, return-stack history, FP pipeline history, or owned
-page-permission history geometry.
+`f10_owned_recovery_history_0` then tested equal-count synchronous recovery of
+CAT_CAS-owned pages before a fixed no-recovery sentinel and also stayed negative with
+integrity closed. The next useful move must change authorization class rather than
+keep remapping the same eviction-sentinel PMU/timing, active-query phase-local,
+source-phase-chop, restored two-line-set ownership-history, simple branch-history,
+indirect-target-history, translation-footprint, store/load alias-history,
+locked-history, prefetch-stream, combined active-query/source-chop, source-process
+lifecycle, compiled code-footprint history, return-stack history, FP pipeline history,
+owned page-permission, or owned page-recovery geometry.
 
 ## State update rule
 

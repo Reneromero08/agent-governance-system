@@ -1,0 +1,126 @@
+{
+  "schema_id": "CAT_CAS_SMALL_WALL_OWNED_RECOVERY_HISTORY_CHECKPOINT_V1",
+  "result": "OWNED_RECOVERY_HISTORY_RESPONSE_NOT_ESTABLISHED",
+  "run_id": "f10_owned_recovery_history_0",
+  "mode": "owned-recovery-history",
+  "source_binding": {
+    "source_bundle_sha256": "a07ee1f512481b9c8fed8b1b3b9eee5e503a0b05ff3fc1a93c12bac7ebfc96d5",
+    "source_hashes": {
+      "f10_pmc_first_light_target.py": "e52b7495f2912dbe7e30a62f67531ae2debe34bc8863b4705bb004e83bfc4c01",
+      "f10_pmc_first_light_worker.c": "d86b9157538c62f48abcf58a4abd41ddb5646bb664eb746d9bd8fcc30086e0e5"
+    }
+  },
+  "architecture_adjudication": {
+    "selected_direction": "owned synchronous page-recovery history",
+    "reason": "This is materially different from the prior owned page-permission run because each history window performs equal owned-page recovery before a fixed no-recovery sentinel; the prior run only flipped permissions outside the measured sentinel.",
+    "subagent_boundary": "read-only architecture review; no checkout mutation, no lab-device contact, no Git writes",
+    "next_boundary_if_negative": "cheap closed CAT_CAS-owned carrier/access-model options appear exhausted; next useful moves require a changed authorization class"
+  },
+  "run_paths": {
+    "local_run": "runs/f10_owned_recovery_history_0",
+    "worker_result": "runs/f10_owned_recovery_history_0/F10_OWNED_RECOVERY_HISTORY_RESULT.json",
+    "final_result": "runs/f10_owned_recovery_history_0/FINAL_RESULT.json",
+    "controller_result": "runs/f10_owned_recovery_history_0/CONTROLLER_RESULT.json"
+  },
+  "lab_device": {
+    "host": "root@192.168.137.100",
+    "cpu_model": "AMD Phenom(tm) II X6 1090T Processor",
+    "kernel": "6.12.86+deb13-amd64"
+  },
+  "predeclared_experiment": {
+    "carrier": "CAT_CAS-owned anonymous user-space pages plus synchronous owned page-recovery state",
+    "history_operator": "neutral, forward, reverse, or shuffle recovery histories over four fixed page groups; each owned page recovers exactly once per history window",
+    "sentinel": "fixed owned-page read sequence G0-G1-G2-G3 with no recovery during the measured sentinel",
+    "observable": "owned_recovery_group PMU cache counters, cycles, and sentinel duration",
+    "killing_controls": [
+      "neutral versus shuffle control spread",
+      "equal history handler count",
+      "equal history minor-event count",
+      "zero sentinel handler count",
+      "zero sentinel minor-event count",
+      "unchanged digest",
+      "resident owned pages",
+      "restored read-write permissions"
+    ],
+    "restoration_class": "all owned pages end read-write, bytes unchanged, pages resident, handler counts equal, sentinel recovery count zero, and no escaped recovery"
+  },
+  "transaction_integrity": {
+    "target_status": "F10_OWNED_RECOVERY_HISTORY_TARGET_COMPLETE",
+    "worker_status": "OWNED_RECOVERY_HISTORY_RESPONSE_NOT_ESTABLISHED",
+    "copy_verified": true,
+    "verified_file_count": 2,
+    "remote_cleaned": true,
+    "remote_returncode": 0,
+    "temperature_preflight_c": 44.25,
+    "temperature_post_c": 45.5,
+    "temperature_veto_c": 68.0,
+    "temperature_below_veto": true,
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "forbidden_process_matches_preflight": 0,
+    "forbidden_process_matches_cleanup": 0
+  },
+  "observed_counts": {
+    "cache_misses": {
+      "identity": 16729,
+      "forward": 16697,
+      "reverse": 16785,
+      "shuffle": 16603,
+      "forward_reverse_delta": 88,
+      "control_floor": 126,
+      "threshold": 378,
+      "signal": false
+    },
+    "cpu_cycles_not_halted": {
+      "identity": 424110,
+      "forward": 417575,
+      "reverse": 416027,
+      "shuffle": 417656,
+      "forward_reverse_delta": 1548,
+      "control_floor": 6454,
+      "threshold": 19362,
+      "signal": false
+    },
+    "duration_ns": {
+      "identity": 143280,
+      "forward": 138818,
+      "reverse": 137986,
+      "shuffle": 138540,
+      "forward_reverse_delta": 832,
+      "control_floor": 4740,
+      "threshold": 14220,
+      "signal": false
+    }
+  },
+  "window_integrity": {
+    "history_handler_delta_each_window": 256,
+    "history_minor_delta_each_window": 0,
+    "sentinel_handler_delta_each_window": 0,
+    "sentinel_minor_delta_each_window": 0,
+    "resident_probe_rc_each_window": 0,
+    "permission_restore_probe_rc_each_window": 0
+  },
+  "acceptance": {
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "bytes_unchanged_after_history": true,
+    "bytes_unchanged_after_restore": true,
+    "final_digest_restored": true,
+    "permissions_restored": true,
+    "pages_resident": true,
+    "handler_counts_expected": true,
+    "history_minor_counts_equal": true,
+    "sentinel_handler_zero": true,
+    "sentinel_minor_zero": true,
+    "no_escaped_recovery": true,
+    "cache_miss_signal": false,
+    "cycle_signal": false,
+    "duration_signal": false,
+    "integrity_closed": true,
+    "owned_recovery_history_response": false
+  },
+  "claim_ceiling": "Owned synchronous page-recovery timing/PMU discriminator only; no private-data or cross-domain observation, path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, target coupling, or Small Wall crossing claim",
+  "frontier_update": "The owned synchronous page-recovery history carrier is negative under equal recovery-count and no-recovery sentinel controls. Do not rerun this neutral/forward/reverse/shuffle owned-recovery sequence unchanged."
+}
