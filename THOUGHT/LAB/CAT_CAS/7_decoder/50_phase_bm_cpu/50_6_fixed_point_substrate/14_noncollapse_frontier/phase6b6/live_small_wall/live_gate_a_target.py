@@ -431,6 +431,7 @@ def run_worker_monitored(
     runtime_output: Path,
     bundle_sha256: str,
     temp_path: Path,
+    pilot_variant: str,
 ) -> tuple[int, str, str, list[dict[str, Any]], str | None]:
     command = [
         str(binary),
@@ -455,6 +456,8 @@ def run_worker_monitored(
         "68.0",
         "--required-frequency-khz",
         "1600000",
+        "--pilot-variant",
+        pilot_variant,
     ]
     process = subprocess.Popen(command, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     observations: list[dict[str, Any]] = []
@@ -487,7 +490,9 @@ def run_worker_monitored(
                 veto = f"frequency limit drift during runtime: {limits}"
             elif elapsed >= 0.5 and frequencies["5"] != REQUIRED_FREQUENCY_KHZ:
                 veto = f"active receiver frequency drift during runtime: {frequencies}"
-            elif 3.15 <= elapsed <= 4.85 and frequencies["4"] != REQUIRED_FREQUENCY_KHZ:
+            elif pilot_variant not in {"step-sham"} and 3.15 <= elapsed <= (
+                3.35 if pilot_variant == "impulse" else 4.85
+            ) and frequencies["4"] != REQUIRED_FREQUENCY_KHZ:
                 veto = f"active step-sender frequency drift during runtime: {frequencies}"
             elif 6.15 <= elapsed <= 6.85 and frequencies["4"] != REQUIRED_FREQUENCY_KHZ:
                 veto = f"active anchor-sender frequency drift during runtime: {frequencies}"
@@ -497,7 +502,8 @@ def run_worker_monitored(
                 elapsed >= 0.5 and frequencies["5"] == REQUIRED_FREQUENCY_KHZ
             )
             sender_step_exact_seen = sender_step_exact_seen or (
-                3.15 <= elapsed <= 4.85 and frequencies["4"] == REQUIRED_FREQUENCY_KHZ
+                3.15 <= elapsed <= (3.35 if pilot_variant == "impulse" else 4.85)
+                and frequencies["4"] == REQUIRED_FREQUENCY_KHZ
             )
             sender_anchor_exact_seen = sender_anchor_exact_seen or (
                 6.15 <= elapsed <= 6.85 and frequencies["4"] == REQUIRED_FREQUENCY_KHZ
@@ -509,7 +515,9 @@ def run_worker_monitored(
         stdout, stderr = process.communicate(timeout=3)
     finally:
         stop_process(process)
-    if veto is None and not (receiver_exact_seen and sender_step_exact_seen and sender_anchor_exact_seen):
+    anchor_complete = pilot_variant == "anchor-sham" or sender_anchor_exact_seen
+    step_complete = pilot_variant == "step-sham" or sender_step_exact_seen
+    if veto is None and not (receiver_exact_seen and step_complete and anchor_complete):
         veto = "scheduled active-frequency observation incomplete"
     return int(process.returncode or 0), stdout, stderr, observations, veto
 
@@ -530,7 +538,7 @@ def exact_permutation_p(step: list[float], off: list[float]) -> float:
     return exceed / total
 
 
-def analyze_runtime(runtime_root: Path) -> dict[str, Any]:
+def analyze_runtime(runtime_root: Path, pilot_variant: str) -> dict[str, Any]:
     lockin = [json.loads(line) for line in (runtime_root / "LOCKIN_IQ.jsonl").read_text().splitlines() if line]
     require(len(lockin) == 16, "expected 16 lock-in records")
     raw_bytes = (runtime_root / "raw_samples.bin").read_bytes()
@@ -582,6 +590,16 @@ def analyze_runtime(runtime_root: Path) -> dict[str, Any]:
     anchor_opposed = phase_delta is not None and abs(abs(phase_delta) - math.pi) <= math.pi / 4.0
     return {
         "schema_id": "CAT_CAS_GATE_A_FIRST_LIGHT_ANALYSIS_V1",
+        "pilot_variant": pilot_variant,
+        "executed_anchor_order": {
+            "pn": ["positive", "negative"],
+            "np": ["negative", "positive"],
+            "anchor-sham": ["off", "off"],
+            "impulse": ["positive", "negative"],
+            "step-sham": ["positive", "negative"],
+            "phase-forward": ["positive", "negative"],
+            "phase-reverse": ["positive", "negative"],
+        }[pilot_variant],
         "groups": summaries,
         "step_minus_off_magnitude": step_mean - off_mean,
         "step_vs_off_exact_permutation_p": exact_permutation_p(step_magnitudes, off_magnitudes),
@@ -613,9 +631,16 @@ def build_file_manifest(output_root: Path) -> dict[str, Any]:
     return {"schema_id": "CAT_CAS_LIVE_SMALL_WALL_FILE_MANIFEST_V1", "files": files}
 
 
-def execute(source_root: Path, output_root: Path) -> dict[str, Any]:
+def execute(source_root: Path, output_root: Path, pilot_variant: str) -> dict[str, Any]:
     require(source_root.is_dir(), f"source root missing: {source_root}")
     require(not output_root.exists(), f"output root already exists: {output_root}")
+    require(
+        pilot_variant in {
+            "pn", "np", "anchor-sham", "impulse", "step-sham",
+            "phase-forward", "phase-reverse",
+        },
+        "unknown pilot variant",
+    )
     for name in SOURCE_NAMES:
         require((source_root / name).is_file(), f"source missing: {name}")
     output_root.mkdir(mode=0o700, parents=True, exist_ok=False)
@@ -666,7 +691,7 @@ def execute(source_root: Path, output_root: Path) -> dict[str, Any]:
         require(pinned["settled"], "pinned frequency never established a stable epoch")
         require(pinned["all_pairs_exact"], "pinned frequency drifted during exact observation")
         returncode, stdout, stderr, monitor, veto = run_worker_monitored(
-            binary, runtime_root, bundle_sha256, temp_path
+            binary, runtime_root, bundle_sha256, temp_path, pilot_variant
         )
         runtime = {
             "returncode": returncode,
@@ -700,7 +725,7 @@ def execute(source_root: Path, output_root: Path) -> dict[str, Any]:
     analysis: dict[str, Any] | None = None
     if (runtime_root / "LOCKIN_IQ.jsonl").is_file() and (runtime_root / "raw_samples.bin").is_file():
         try:
-            analysis = analyze_runtime(runtime_root)
+            analysis = analyze_runtime(runtime_root, pilot_variant)
             write_json(output_root / "FIRST_LIGHT_ANALYSIS.json", analysis)
         except Exception as exc:
             if error is None:
@@ -711,6 +736,7 @@ def execute(source_root: Path, output_root: Path) -> dict[str, Any]:
     final = {
         "schema_id": "CAT_CAS_DIRECT_USER_AUTHORIZED_GATE_A_FIRST_LIGHT_V1",
         "status": "GATE_A_FIRST_LIGHT_COMPLETE" if error is None and restoration_complete else "GATE_A_FIRST_LIGHT_FAILED",
+        "pilot_variant": pilot_variant,
         "source_bundle_sha256": bundle_sha256,
         "source_hashes": source_digest(source_root)[1],
         "user_directive_sha256": USER_DIRECTIVE_SHA256,
@@ -745,13 +771,21 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--source-root", type=Path, required=True)
     parser.add_argument("--output-root", type=Path, required=True)
+    parser.add_argument(
+        "--pilot-variant",
+        choices=(
+            "pn", "np", "anchor-sham", "impulse", "step-sham",
+            "phase-forward", "phase-reverse",
+        ),
+        default="pn",
+    )
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
     try:
-        result = execute(args.source_root.resolve(), args.output_root.resolve())
+        result = execute(args.source_root.resolve(), args.output_root.resolve(), args.pilot_variant)
     except Exception as exc:
         print(f"live_gate_a_target: {exc}", file=sys.stderr)
         return 1

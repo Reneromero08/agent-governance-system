@@ -1,0 +1,68 @@
+{
+  "schema_id": "CAT_CAS_CARRIER_STATE_PILOT_CHECKPOINT_V1",
+  "date": "2026-07-11",
+  "first_light_runs": [
+    "gate_a_first_light_20260711i",
+    "gate_a_first_light_20260711j"
+  ],
+  "causal_phase_control_runs": [
+    "pilot_anchor_np_20260711b",
+    "pilot_anchor_sham_20260711a"
+  ],
+  "impulse_control_runs": [
+    "pilot_impulse_20260711a",
+    "pilot_impulse_20260711b",
+    "pilot_step_sham_20260711a",
+    "pilot_step_sham_20260711b"
+  ],
+  "valid_phase_order_runs": [
+    "pilot_phase_forward_20260711b",
+    "pilot_phase_reverse_20260711c",
+    "pilot_phase_forward_20260711c",
+    "pilot_phase_reverse_20260711d"
+  ],
+  "superseded_phase_order_runs": {
+    "pilot_phase_forward_20260711a": "second sender epoch was demodulated against the first epoch origin",
+    "pilot_phase_reverse_20260711b": "second sender epoch was demodulated against the first epoch origin"
+  },
+  "analysis_repair": "split sender epochs now use their own TSC origin for lock-in demodulation",
+  "causal_channel_result": {
+    "physical_phase_follows_executed_phase_not_label": true,
+    "anchor_sham_is_at_noise_floor": true,
+    "claim": "live phase-sensitive physical readout"
+  },
+  "state_operator_result": {
+    "response_fields": [
+      "lockin_I",
+      "lockin_Q",
+      "ring_osc_period"
+    ],
+    "held_out_session_count": 6,
+    "target_row_count": 90,
+    "input_only_normalized_rmse": 0.6080377275358749,
+    "state_control_normalized_rmse": 0.5993616615110625,
+    "state_control_to_input_only_ratio": 0.98573103998008,
+    "state_control_wins_every_held_out_fold": false,
+    "observable_carrier_state_found": false
+  },
+  "transient_result": {
+    "repeatable_post_drive_memory_found": false,
+    "reason": "immediate ring-period contrasts did not separate from time-matched sham drift"
+  },
+  "phase_order_result": {
+    "repeatable_history_dependence_found": false,
+    "reason": "matched-phase displacement changed across the replication pair and the state-aware model lost held-out folds"
+  },
+  "safety": {
+    "all_counted_runs_copy_verified": true,
+    "all_counted_runs_remote_cleaned": true,
+    "all_counted_runs_frequency_restored": true,
+    "temperature_veto_c": 68.0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0
+  },
+  "verdict": "CURRENT_DIRECT_PHASE_INSTRUMENT_BOUNDARY_INSUFFICIENT_FOR_OBSERVABLE_CARRIER_STATE",
+  "next_mechanism": "operand-dependent physical preparation with crossed value and sham controls",
+  "small_wall_crossed": false
+}

@@ -14,6 +14,16 @@
 #define GATE_A_TEMPERATURE_MIN_MILLIDEGREES (-40000L)
 #define GATE_A_TEMPERATURE_MAX_MILLIDEGREES 125000L
 
+enum {
+    GATE_A_PILOT_PN = 0,
+    GATE_A_PILOT_NP = 1,
+    GATE_A_PILOT_ANCHOR_SHAM = 2,
+    GATE_A_PILOT_IMPULSE = 3,
+    GATE_A_PILOT_STEP_SHAM = 4,
+    GATE_A_PILOT_PHASE_FORWARD = 5,
+    GATE_A_PILOT_PHASE_REVERSE = 6
+};
+
 typedef struct {
     const char *output_dir;
     const char *authority_sha256;
@@ -24,6 +34,7 @@ typedef struct {
     double slot_s;
     double temperature_veto_c;
     long required_frequency_khz;
+    int pilot_variant;
     int backend;
     long mock_pre_temperature_millidegrees;
     long mock_post_temperature_millidegrees;

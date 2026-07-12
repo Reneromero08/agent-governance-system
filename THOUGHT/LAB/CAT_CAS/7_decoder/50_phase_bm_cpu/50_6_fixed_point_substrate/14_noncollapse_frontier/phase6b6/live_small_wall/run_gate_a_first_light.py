@@ -84,8 +84,15 @@ def default_run_id() -> str:
     return dt.datetime.now(dt.timezone.utc).strftime("gate_a_first_light_%Y%m%dT%H%M%SZ")
 
 
-def execute(run_id: str, *, keep_remote: bool) -> dict[str, Any]:
+def execute(run_id: str, *, pilot_variant: str, keep_remote: bool) -> dict[str, Any]:
     require(re.fullmatch(r"[a-z0-9_]{8,80}", run_id) is not None, "run ID is not closed")
+    require(
+        pilot_variant in {
+            "pn", "np", "anchor-sham", "impulse", "step-sham",
+            "phase-forward", "phase-reverse",
+        },
+        "pilot variant is not closed",
+    )
     for source in FILES:
         require(source.is_file(), f"local source missing: {source}")
     remote_run = f"{REMOTE_BASE}/{run_id}"
@@ -107,7 +114,8 @@ def execute(run_id: str, *, keep_remote: bool) -> dict[str, Any]:
         f"timeout --signal=TERM --kill-after=5s 60s python3 "
         f"{shlex.quote(remote_source + '/live_gate_a_target.py')} "
         f"--source-root {shlex.quote(remote_source)} "
-        f"--output-root {shlex.quote(remote_output)}"
+        f"--output-root {shlex.quote(remote_output)} "
+        f"--pilot-variant {shlex.quote(pilot_variant)}"
     )
     completed = run(["ssh", "-o", "BatchMode=yes", TARGET, remote_command], timeout=75, check=False)
     (local_run / "CONTROLLER_STDOUT.txt").write_text(completed.stdout, encoding="utf-8")
@@ -143,6 +151,7 @@ def execute(run_id: str, *, keep_remote: bool) -> dict[str, Any]:
         "schema_id": "CAT_CAS_GATE_A_FIRST_LIGHT_CONTROLLER_V1",
         "run_id": run_id,
         "target": TARGET,
+        "pilot_variant": pilot_variant,
         "remote_run": remote_run,
         "local_run": str(local_run),
         "remote_returncode": completed.returncode,
@@ -163,6 +172,14 @@ def execute(run_id: str, *, keep_remote: bool) -> dict[str, Any]:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--run-id", default=default_run_id())
+    parser.add_argument(
+        "--pilot-variant",
+        choices=(
+            "pn", "np", "anchor-sham", "impulse", "step-sham",
+            "phase-forward", "phase-reverse",
+        ),
+        default="pn",
+    )
     parser.add_argument("--keep-remote", action="store_true")
     return parser.parse_args()
 
@@ -170,7 +187,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     try:
-        result = execute(args.run_id, keep_remote=args.keep_remote)
+        result = execute(args.run_id, pilot_variant=args.pilot_variant, keep_remote=args.keep_remote)
     except (ControllerError, OSError, subprocess.SubprocessError, json.JSONDecodeError) as exc:
         print(f"run_gate_a_first_light: {exc}", file=sys.stderr)
         return 1

@@ -115,10 +115,42 @@ static int probe_only(void) {
     return 2;
 }
 
-static void emit_slot_records(void) {
+static int pilot_variant_value(const char *text) {
+    if (string_equal(text, "pn")) return GATE_A_PILOT_PN;
+    if (string_equal(text, "np")) return GATE_A_PILOT_NP;
+    if (string_equal(text, "anchor-sham")) return GATE_A_PILOT_ANCHOR_SHAM;
+    if (string_equal(text, "impulse")) return GATE_A_PILOT_IMPULSE;
+    if (string_equal(text, "step-sham")) return GATE_A_PILOT_STEP_SHAM;
+    if (string_equal(text, "phase-forward")) return GATE_A_PILOT_PHASE_FORWARD;
+    if (string_equal(text, "phase-reverse")) return GATE_A_PILOT_PHASE_REVERSE;
+    return -1;
+}
+
+static int pilot_driven(int slot, int pilot) {
+    if (slot >= 6 && slot <= 9) {
+        if (pilot == GATE_A_PILOT_STEP_SHAM) return 0;
+        if (pilot == GATE_A_PILOT_IMPULSE) return slot == 6;
+        return 1;
+    }
+    return (slot == 12 || slot == 13) && pilot != GATE_A_PILOT_ANCHOR_SHAM;
+}
+
+static int pilot_phase(int slot, int pilot) {
+    if (slot >= 6 && slot <= 9 && pilot == GATE_A_PILOT_PHASE_FORWARD) {
+        return slot < 8 ? 0 : 2;
+    }
+    if (slot >= 6 && slot <= 9 && pilot == GATE_A_PILOT_PHASE_REVERSE) {
+        return slot < 8 ? 2 : 0;
+    }
+    if (pilot == GATE_A_PILOT_NP && slot == 12) return 4;
+    if (pilot == GATE_A_PILOT_NP && slot == 13) return 0;
+    return slot == 13 ? 4 : 0;
+}
+
+static void emit_slot_records(int pilot) {
     putchar('[');
     for (int slot = 0; slot < 16; slot++) {
-        int driven = (slot >= 6 && slot <= 9) || slot == 12 || slot == 13;
+        int driven = pilot_driven(slot, pilot);
         if (slot) putchar(',');
         printf("{\"index\":%d,\"token\":\"%s\",\"requested_start_s\":%.1f,"
                "\"requested_end_s\":%.1f,\"drive_on\":%s,"
@@ -129,12 +161,21 @@ static void emit_slot_records(void) {
             fputs("null,\"phase_index\":null,\"sign\":null,"
                   "\"sender_epoch_id\":null}", stdout);
         } else {
-            int phase = slot == 13 ? 4 : 0;
-            int sign = slot == 13 ? -1 : 1;
-            const char *epoch = slot >= 6 && slot <= 9
-                ? "gate-a:step:epoch0"
-                : (slot == 12 ? "gate-a:anchor:positive"
-                              : "gate-a:anchor:negative");
+            int phase = pilot_phase(slot, pilot);
+            int sign = phase == 4 ? -1 : 1;
+            const char *epoch;
+            if (slot >= 6 && slot <= 9) {
+                if (pilot == GATE_A_PILOT_PHASE_FORWARD ||
+                    pilot == GATE_A_PILOT_PHASE_REVERSE) {
+                    epoch = slot < 8 ? "gate-a:phase:first"
+                                     : "gate-a:phase:second";
+                } else {
+                    epoch = "gate-a:step:epoch0";
+                }
+            } else {
+                epoch = phase == 4 ? "gate-a:anchor:negative"
+                                   : "gate-a:anchor:positive";
+            }
             printf("2,\"phase_index\":%d,\"sign\":%d,"
                    "\"sender_epoch_id\":\"%s\"}", phase, sign, epoch);
         }
@@ -142,11 +183,15 @@ static void emit_slot_records(void) {
     putchar(']');
 }
 
-static void emit_execution_result(const GateASmokeResult *result) {
+static void emit_execution_result(const GateASmokeResult *result,
+                                  const char *pilot_text, int pilot) {
     fputs("{\"status\":\"GATE_A_ENGINEERING_SMOKE_COMPLETE\","
           "\"automatic_retry\":false,\"runtime_execution_count\":1,"
+          "\"pilot_variant\":\"", stdout);
+    fputs(pilot_text, stdout);
+    fputs("\","
           "\"slot_records\":", stdout);
-    emit_slot_records();
+    emit_slot_records(pilot);
     printf(",\"capture\":{\"continuous\":true,"
            "\"covers_complete_sequence\":true,\"sample_count\":%d,"
            "\"slot_sample_counts\":[", result->sample_count);
@@ -181,8 +226,11 @@ static int execute_authorized(int argc, char **argv) {
     const char *slot_text = option_value(argc, argv, "--slot-s");
     const char *temp_text = option_value(argc, argv, "--temperature-veto-c");
     const char *frequency_text = option_value(argc, argv, "--required-frequency-khz");
+    const char *pilot_text = option_value(argc, argv, "--pilot-variant");
     long sender = 0, receiver = 0, read_hz = 0, frequency = 0;
     double slot_s = 0, temp = 0;
+    if (!pilot_text) pilot_text = "pn";
+    int pilot = pilot_variant_value(pilot_text);
     if (!compiled_authority_sha256 || !compiled_output_root ||
         !string_equal(authority, compiled_authority_sha256) ||
         !string_equal(output, compiled_output_root) ||
@@ -194,6 +242,7 @@ static int execute_authorized(int argc, char **argv) {
         parse_double_exact(slot_text, &slot_s) || slot_s != 0.5 ||
         parse_double_exact(temp_text, &temp) || temp != 68.0 ||
         parse_long_exact(frequency_text, &frequency) || frequency != 1600000 ||
+        pilot < GATE_A_PILOT_PN || pilot > GATE_A_PILOT_PHASE_REVERSE ||
         validate_schedule_semantics()) {
         fputs("execute-authorized requires a worker compiled for the exact validated authority and frozen geometry\n", stderr);
         return 2;
@@ -208,6 +257,7 @@ static int execute_authorized(int argc, char **argv) {
         .slot_s = slot_s,
         .temperature_veto_c = temp,
         .required_frequency_khz = frequency,
+        .pilot_variant = pilot,
         .backend = BACKEND_REAL,
     };
     GateASmokeResult result = {0};
@@ -216,7 +266,7 @@ static int execute_authorized(int argc, char **argv) {
         fprintf(stderr, "Gate A runtime failed closed (rc=%d)\n", rc);
         return rc;
     }
-    emit_execution_result(&result);
+    emit_execution_result(&result, pilot_text, pilot);
     return 0;
 }
 

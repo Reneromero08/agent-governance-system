@@ -17,6 +17,8 @@ static const char *gate_a_tokens[16] = {
     "S0E", "S0E", "O0", "O0", "A0P", "A0N", "T", "T"
 };
 
+static int gate_a_pilot_variant = GATE_A_PILOT_PN;
+
 #ifdef GATE_A_COMPILED_AUTHORITY_SHA256
 static const char *gate_a_runtime_authority_sha256 =
     GATE_A_COMPILED_AUTHORITY_SHA256;
@@ -30,21 +32,57 @@ static const char *gate_a_runtime_output_root = NULL;
 #endif
 
 static int gate_a_driven_slot(int slot) {
-    return (slot >= 6 && slot <= 9) || slot == 12 || slot == 13;
+    if (slot >= 6 && slot <= 9) {
+        if (gate_a_pilot_variant == GATE_A_PILOT_STEP_SHAM) return 0;
+        if (gate_a_pilot_variant == GATE_A_PILOT_IMPULSE) return slot == 6;
+        return 1;
+    }
+    if (slot == 12 || slot == 13) {
+        return gate_a_pilot_variant != GATE_A_PILOT_ANCHOR_SHAM;
+    }
+    return 0;
+}
+
+static int gate_a_step_end_slot(void) {
+    return gate_a_pilot_variant == GATE_A_PILOT_IMPULSE ? 7 : 10;
+}
+
+static int gate_a_split_step(void) {
+    return gate_a_pilot_variant == GATE_A_PILOT_PHASE_FORWARD ||
+           gate_a_pilot_variant == GATE_A_PILOT_PHASE_REVERSE;
 }
 
 static int gate_a_phase_index(int slot) {
+    if (slot >= 6 && slot <= 9 && gate_a_pilot_variant == GATE_A_PILOT_PHASE_FORWARD) {
+        return slot < 8 ? 0 : 2;
+    }
+    if (slot >= 6 && slot <= 9 && gate_a_pilot_variant == GATE_A_PILOT_PHASE_REVERSE) {
+        return slot < 8 ? 2 : 0;
+    }
+    if (gate_a_pilot_variant == GATE_A_PILOT_NP && slot == 12) return 4;
+    if (gate_a_pilot_variant == GATE_A_PILOT_NP && slot == 13) return 0;
     return slot == 13 ? 4 : 0;
 }
 
 static int gate_a_sign(int slot) {
-    return slot == 13 ? -1 : 1;
+    return gate_a_phase_index(slot) == 4 ? -1 : 1;
+}
+
+static int gate_a_expected_origin_state(int slot) {
+    return (8 - gate_a_phase_index(slot)) % 8;
 }
 
 static const char *gate_a_epoch(int slot) {
-    if (slot >= 6 && slot <= 9) return "gate-a:step:epoch0";
-    if (slot == 12) return "gate-a:anchor:positive";
-    if (slot == 13) return "gate-a:anchor:negative";
+    if (slot >= 6 && slot <= 9) {
+        if (gate_a_split_step()) {
+            return slot < 8 ? "gate-a:phase:first" : "gate-a:phase:second";
+        }
+        return "gate-a:step:epoch0";
+    }
+    if (slot == 12 || slot == 13) {
+        return gate_a_phase_index(slot) == 4
+            ? "gate-a:anchor:negative" : "gate-a:anchor:positive";
+    }
     return NULL;
 }
 
@@ -62,7 +100,9 @@ static int gate_a_policy_limits_exact(int core, long required_khz) {
 static uint64_t gate_a_epoch_origin(int slot, uint64_t session_origin,
                                     double slot_s, double tsc_hz) {
     int epoch_slot = slot;
-    if (slot >= 6 && slot <= 9) epoch_slot = 6;
+    if (slot >= 6 && slot <= 9) {
+        epoch_slot = gate_a_split_step() && slot >= 8 ? 8 : 6;
+    }
     return session_origin + (uint64_t)(epoch_slot * slot_s * tsc_hz);
 }
 
@@ -419,6 +459,7 @@ static int gate_a_write_result(const GateASmokeArgs *args,
             "  \"sender_start_count\": %d,\n"
             "  \"receiver_start_count\": %d,\n"
             "  \"temperature_receipt_count\": %d,\n"
+            "  \"pilot_variant\": %d,\n"
             "  \"frequency_writes\": 0,\n"
             "  \"voltage_writes\": 0,\n"
             "  \"msr_reads\": 0,\n"
@@ -436,7 +477,8 @@ static int gate_a_write_result(const GateASmokeArgs *args,
             result->hardware_executed ? "true" : "false",
             result->sender_start_count,
             result->receiver_start_count,
-            result->temperature_receipt_count) < 0) {
+            result->temperature_receipt_count,
+            args->pilot_variant) < 0) {
         fclose(f);
         unlink(path);
         return -1;
@@ -509,8 +551,8 @@ static int gate_a_validate_epoch(const GateASender *sender) {
     uint64_t first_drive = atomic_load_explicit(&sender->first_drive_tsc, memory_order_acquire);
     uint64_t exited = atomic_load_explicit(&sender->thread_exit_tsc, memory_order_acquire);
     uint64_t skew = (uint64_t)(GATE_A_SENDER_START_SKEW_SECONDS * sender->tsc_hz);
-    uint64_t expected_drive_offset = sender->phase_index == 4
-        ? (uint64_t)(0.5 / tone(0) * sender->tsc_hz) : 0;
+    uint64_t expected_drive_offset = (uint64_t)(
+        ((double)sender->phase_index / 8.0) / tone(0) * sender->tsc_hz);
     uint64_t observed_drive_offset = first_drive >= sender->requested_start_tsc
         ? first_drive - sender->requested_start_tsc : UINT64_MAX;
     if (!sender->joined || sender->alive ||
@@ -539,7 +581,7 @@ static int gate_a_run_real_capture(const GateASmokeArgs *args,
                                    double tsc_hz, uint64_t origin,
                                    uint64_t *timestamps, double *observations,
                                    int capacity, FILE *lifecycle,
-                                   GateASender epochs[3],
+                                   GateASender epochs[4],
                                    uint64_t *receiver_epoch,
                                    GateASmokeResult *result) {
     GateAReceiver receiver;
@@ -572,24 +614,36 @@ static int gate_a_run_real_capture(const GateASmokeArgs *args,
             __asm__ volatile("pause");
         }
         if (atomic_load_explicit(&receiver.done, memory_order_acquire)) goto failure;
-        if (slot == 6 && gate_a_sender_arm(
+        int first_step_end = gate_a_split_step() ? 8 : gate_a_step_end_slot();
+        if (slot == 6 && gate_a_driven_slot(slot) && gate_a_sender_arm(
                 &epochs[0], lifecycle, &receiver, result,
                 args->sender_core, tsc_hz, args->slot_s,
-                origin, 6, 10, 0, 1, "gate-a:step:epoch0")) goto failure;
-        if (slot == 9 && gate_a_sender_stop_join(&epochs[0], lifecycle, &receiver)) goto failure;
+                origin, 6, first_step_end, gate_a_phase_index(6),
+                gate_a_sign(6), gate_a_epoch(6))) goto failure;
+        if (slot == first_step_end - 1 && gate_a_driven_slot(6) &&
+            gate_a_sender_stop_join(&epochs[0], lifecycle, &receiver)) goto failure;
+        if (slot == 8 && gate_a_split_step() && gate_a_sender_arm(
+                &epochs[1], lifecycle, &receiver, result,
+                args->sender_core, tsc_hz, args->slot_s,
+                origin, 8, 10, gate_a_phase_index(8),
+                gate_a_sign(8), gate_a_epoch(8))) goto failure;
+        if (slot == 9 && gate_a_split_step() &&
+            gate_a_sender_stop_join(&epochs[1], lifecycle, &receiver)) goto failure;
         if (slot == 12) {
-            if (gate_a_sender_arm(
-                    &epochs[1], lifecycle, &receiver, result,
-                    args->sender_core, tsc_hz, args->slot_s,
-                    origin, 12, 13, 0, 1, "gate-a:anchor:positive") ||
-                gate_a_sender_stop_join(&epochs[1], lifecycle, &receiver)) goto failure;
-        }
-        if (slot == 13) {
-            if (gate_a_sender_arm(
+            if (gate_a_driven_slot(slot) && (gate_a_sender_arm(
                     &epochs[2], lifecycle, &receiver, result,
                     args->sender_core, tsc_hz, args->slot_s,
-                    origin, 13, 14, 4, -1, "gate-a:anchor:negative") ||
-                gate_a_sender_stop_join(&epochs[2], lifecycle, &receiver)) goto failure;
+                    origin, 12, 13, gate_a_phase_index(slot),
+                    gate_a_sign(slot), gate_a_epoch(slot)) ||
+                gate_a_sender_stop_join(&epochs[2], lifecycle, &receiver))) goto failure;
+        }
+        if (slot == 13) {
+            if (gate_a_driven_slot(slot) && (gate_a_sender_arm(
+                    &epochs[3], lifecycle, &receiver, result,
+                    args->sender_core, tsc_hz, args->slot_s,
+                    origin, 13, 14, gate_a_phase_index(slot),
+                    gate_a_sign(slot), gate_a_epoch(slot)) ||
+                gate_a_sender_stop_join(&epochs[3], lifecycle, &receiver))) goto failure;
         }
     }
     uint64_t capture_deadline = origin + (uint64_t)(8.0 * tsc_hz);
@@ -610,7 +664,7 @@ static int gate_a_run_real_capture(const GateASmokeArgs *args,
     return receiver.count;
 
 failure:
-    for (int index = 0; index < 3; index++) {
+    for (int index = 0; index < 4; index++) {
         if (epochs[index].alive) {
             int aborted = gate_a_sender_abort(&epochs[index]);
             if (!aborted) {
@@ -1106,9 +1160,13 @@ static int gate_a_write_lockin(const GateASmokeArgs *args,
             (uint64_t)(slot * args->slot_s * result->capture_tsc_hz);
         uint64_t slot_end = result->capture_origin_tsc +
             (uint64_t)((slot + 1) * args->slot_s * result->capture_tsc_hz);
+        int analysis_origin_slot = slot;
+        if (slot >= 6 && slot <= 9) {
+            analysis_origin_slot = gate_a_split_step() && slot >= 8 ? 8 : 6;
+        }
         uint64_t analysis_origin = result->capture_origin_tsc +
-            (uint64_t)((slot >= 6 && slot <= 9 ? 6 : slot) *
-                       args->slot_s * result->capture_tsc_hz);
+            (uint64_t)(analysis_origin_slot * args->slot_s *
+                       result->capture_tsc_hz);
         double i_value, q_value, magnitude, floor;
         lockin(timestamps + starts[slot], observations + starts[slot], count,
                frequency, analysis_origin, result->capture_tsc_hz,
@@ -1146,7 +1204,7 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
     FILE *temperature_receipts = NULL;
     uint64_t *timestamps = NULL;
     double *observations = NULL;
-    GateASender epochs[3];
+    GateASender epochs[4];
     int starts[16], ends[16];
     memset(epochs, 0, sizeof(epochs));
     for (int slot = 0; slot < 16; slot++) {
@@ -1158,9 +1216,12 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
         !args->execution_bundle_sha256 || args->sender_core != 4 ||
         args->receiver_core != 5 || args->read_hz != 8000 ||
         args->slot_s != 0.5 || args->temperature_veto_c != 68.0 ||
-        args->required_frequency_khz != 1600000) {
+        args->required_frequency_khz != 1600000 ||
+        args->pilot_variant < GATE_A_PILOT_PN ||
+        args->pilot_variant > GATE_A_PILOT_PHASE_REVERSE) {
         return 2;
     }
+    gate_a_pilot_variant = args->pilot_variant;
     if (!mock && (!gate_a_runtime_authority_sha256 ||
                   !gate_a_runtime_output_root ||
                   strcmp(args->authority_sha256,
@@ -1170,7 +1231,8 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
     }
     memset(result, 0, sizeof(*result));
     result->slot_count = 16;
-    result->step_sender_epoch_count = 1;
+    result->step_sender_epoch_count = gate_a_pilot_variant == GATE_A_PILOT_STEP_SHAM
+        ? 0 : (gate_a_split_step() ? 2 : 1);
     if (mkdir(args->output_dir, 0700)) return 2;
     if (joinp(path, sizeof(path), args->output_dir,
               GATE_A_TEMPERATURE_RECEIPT_FILE)) {
@@ -1213,11 +1275,20 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
     uint64_t s0e_origin = gate_a_epoch_origin(6, mapping_origin,
                                               args->slot_s, tsc_hz);
     if (gate_a_epoch_origin(7, mapping_origin, args->slot_s, tsc_hz) != s0e_origin ||
-        gate_a_cycle_state(6, s0e_origin, mapping_origin, args->slot_s, tsc_hz) != 0 ||
-        gate_a_cycle_state(12, gate_a_epoch_origin(12, mapping_origin, args->slot_s, tsc_hz),
-                           mapping_origin, args->slot_s, tsc_hz) != 0 ||
-        gate_a_cycle_state(13, gate_a_epoch_origin(13, mapping_origin, args->slot_s, tsc_hz),
-                           mapping_origin, args->slot_s, tsc_hz) != 4) {
+        gate_a_cycle_state(6, s0e_origin, mapping_origin, args->slot_s, tsc_hz) !=
+            gate_a_expected_origin_state(6) ||
+        (gate_a_split_step() && gate_a_cycle_state(
+            8, gate_a_epoch_origin(8, mapping_origin, args->slot_s, tsc_hz),
+            mapping_origin, args->slot_s, tsc_hz) !=
+                gate_a_expected_origin_state(8)) ||
+        (gate_a_driven_slot(12) && gate_a_cycle_state(
+            12, gate_a_epoch_origin(12, mapping_origin, args->slot_s, tsc_hz),
+            mapping_origin, args->slot_s, tsc_hz) !=
+                gate_a_expected_origin_state(12)) ||
+        (gate_a_driven_slot(13) && gate_a_cycle_state(
+            13, gate_a_epoch_origin(13, mapping_origin, args->slot_s, tsc_hz),
+            mapping_origin, args->slot_s, tsc_hz) !=
+                gate_a_expected_origin_state(13))) {
         reason = "PHYSICAL_MAPPING_FAILURE";
         rc = 4;
         goto cleanup;
@@ -1270,11 +1341,11 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
         if (gate_a_mock_epoch(&epochs[0], lifecycle, args->sender_core,
                               tsc_hz, args->slot_s, origin, 6, 10, 0, 1,
                               "gate-a:step:epoch0") ||
-            gate_a_mock_epoch(&epochs[1], lifecycle, args->sender_core,
-                              tsc_hz, args->slot_s, origin, 12, 13, 0, 1,
-                              "gate-a:anchor:positive") ||
             gate_a_mock_epoch(&epochs[2], lifecycle, args->sender_core,
-                              tsc_hz, args->slot_s, origin, 13, 14, 4, -1,
+                               tsc_hz, args->slot_s, origin, 12, 13, 0, 1,
+                               "gate-a:anchor:positive") ||
+            gate_a_mock_epoch(&epochs[3], lifecycle, args->sender_core,
+                               tsc_hz, args->slot_s, origin, 13, 14, 4, -1,
                               "gate-a:anchor:negative")) {
             reason = "MOCK_LIFECYCLE_EVIDENCE_FAILURE";
             rc = 4;
@@ -1304,12 +1375,22 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
             goto cleanup;
         }
     }
-    for (int epoch = 0; epoch < 3; epoch++) {
-        if (gate_a_validate_epoch(&epochs[epoch])) {
-            reason = "SENDER_EPOCH_CUSTODY_FAILURE";
-            rc = 4;
-            goto cleanup;
-        }
+    if (gate_a_driven_slot(6) && gate_a_validate_epoch(&epochs[0])) {
+        reason = "SENDER_EPOCH_CUSTODY_FAILURE";
+        rc = 4;
+        goto cleanup;
+    }
+    if (gate_a_split_step() && gate_a_validate_epoch(&epochs[1])) {
+        reason = "SENDER_EPOCH_CUSTODY_FAILURE";
+        rc = 4;
+        goto cleanup;
+    }
+    if (gate_a_pilot_variant != GATE_A_PILOT_ANCHOR_SHAM &&
+        (gate_a_validate_epoch(&epochs[2]) ||
+         gate_a_validate_epoch(&epochs[3]))) {
+        reason = "SENDER_EPOCH_CUSTODY_FAILURE";
+        rc = 4;
+        goto cleanup;
     }
     uint64_t deadline = origin + (uint64_t)(8.0 * tsc_hz);
     while (count > 0 && timestamps[count - 1] >= deadline) count--;
@@ -1424,20 +1505,22 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
         }
         GateASender *slot_sender = NULL;
         const char *state = "not_created";
-        if (slot >= 6 && slot <= 9) {
-            slot_sender = &epochs[0];
+        if (slot >= 6 && slot <= 9 && gate_a_driven_slot(slot)) {
+            slot_sender = gate_a_split_step() && slot >= 8
+                ? &epochs[1] : &epochs[0];
             state = "active";
-        } else if (slot == 12) {
-            slot_sender = &epochs[1];
-            state = "active";
-        } else if (slot == 13) {
+        } else if (slot == 12 && gate_a_driven_slot(slot)) {
             slot_sender = &epochs[2];
             state = "active";
-        } else if (slot == 10 || slot == 11) {
-            slot_sender = &epochs[0];
+        } else if (slot == 13 && gate_a_driven_slot(slot)) {
+            slot_sender = &epochs[3];
+            state = "active";
+        } else if ((slot >= gate_a_step_end_slot() && slot <= 11) &&
+                   gate_a_driven_slot(6)) {
+            slot_sender = gate_a_split_step() ? &epochs[1] : &epochs[0];
             state = "joined";
         } else if (slot == 14 || slot == 15) {
-            slot_sender = &epochs[2];
+            slot_sender = &epochs[3];
             state = "joined";
         }
         if (gate_a_lifecycle_record(
@@ -1500,7 +1583,7 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
     }
 
 cleanup:
-    for (int epoch = 0; epoch < 3; epoch++) {
+    for (int epoch = 0; epoch < 4; epoch++) {
         if (epochs[epoch].alive && gate_a_sender_abort(&epochs[epoch]) && rc == 0) {
             reason = "SENDER_ABORT_JOIN_FAILURE";
             rc = 4;
