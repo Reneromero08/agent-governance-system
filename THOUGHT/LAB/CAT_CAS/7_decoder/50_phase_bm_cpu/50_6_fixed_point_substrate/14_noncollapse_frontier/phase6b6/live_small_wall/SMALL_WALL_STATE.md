@@ -6,7 +6,7 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`CONTROLLED_COHERENCE_STATE_FOUND`
+`CODED_PREPROJECTION_QUERY_SCRAMBLE_CONTROL_NULL`
 
 **Active wall:**
 The current wall is now restoration-clean physical coupling for a declared
@@ -20,8 +20,10 @@ query can retain a fold-odd coordinate only when it acts before projection.
 coordinate under a fixed single-run coded mapping, but its neutral pre/post probe did
 not restore because the first neutral slot carried a large cold-response offset.
 `coded_preprojection_loop_2` repaired the warmup geometry and produced a restored
-opposed fold-odd candidate. The active wall has moved to physical killing controls:
-query-scramble, query-off, and declaration-sham need the same warm-restored geometry
+opposed fold-odd candidate. `coded_preprojection_warm_query_scramble_0` then used the
+same warm-restored geometry with a scrambled public query binding and decoded null
+under the frozen quadrature weights. The active wall remains physical killing
+controls: query-off and declaration-sham still need the same warm-restored geometry
 before any Small Wall crossing claim.
 
 ## Established
@@ -803,11 +805,50 @@ Checkpoint:
 
 `CODED_PREPROJECTION_RESTORED_CHECKPOINT_20260712.json`
 
-**Status:** restored physical fold-odd response candidate. Do not claim
-`SMALL_WALL_CROSSED`: the repaired warm loop clears source-off, post-projection,
-private-fold sign, and neutral-restoration checks, but physical query-scramble,
-query-off, and declaration-sham killing controls remain pending under the repaired
-geometry.
+The first query-scramble attempt failed before worker execution because the new pilot
+variant was missing from `live_gate_a_target.py`'s CLI choices. The retained local
+stderr is under:
+
+`runs/coded_preprojection_warm_query_scramble_0_argparse_failed/`
+
+Policy4 and policy5 were verified restored to `800000-3200000` kHz after that failure,
+and no CAT_CAS worker process remained. After the exact CLI-choice defect was repaired,
+the same run ID was executed once:
+
+```text
+run id        coded_preprojection_warm_query_scramble_0
+schedule      WU WU N0 QS0 QS1 QS2 QS3 QM0 QM1 QM2 QM3 C0 C1 C2 C3 N1
+source bundle c74a03e8f38cac8b9e554104dc80096ef3ec358f27e73f8a54d205acdfc124bc
+schedule hash 88a93ac2a565f612a3a3789b515a187dbb1e4196519962d56a2be09df2eb0ca7
+```
+
+The query-scramble transaction completed, copied back, cleaned the remote run root,
+restored policies 4 and 5 to `800000-3200000` kHz by readback, and performed zero
+voltage access and zero MSR access. Capture was accepted with service spikes, all 16
+slots had 1000 samples, all stimulus bursts completed inside their slots, there were
+no skipped deadlines, no missing slots, no sender spill, and no record-integrity
+failure.
+
+The frozen quadrature decoder produced a null control:
+
+```text
+query-scramble plus  imag -0.9868607954545379
+query-scramble minus imag +1.93072916666668
+post control         imag +1.4726562499999991
+null bound                 5.0
+neutral delta              0.306984374999999
+neutral tolerance          5.0
+```
+
+Checkpoint:
+
+`CODED_PREPROJECTION_QUERY_SCRAMBLE_CHECKPOINT_20260712.json`
+
+**Status:** restored physical fold-odd response candidate with query-scramble killed.
+Do not claim `SMALL_WALL_CROSSED`: the repaired warm loop clears source-off,
+post-projection, private-fold sign, neutral restoration, and query-scramble, but
+physical query-off and declaration-sham killing controls remain pending under the
+repaired geometry.
 
 ### H6 - Alternative carriers remain available
 
@@ -827,8 +868,9 @@ operator, observability, or restoration wall that it can attack.
 
 ## Cheapest current discriminator
 
-Build the next warm-restored killing control: either a physical query-scramble run or a
-declaration-sham run using the same restored neutral geometry as `coded_preprojection_loop_2`.
+Build the next warm-restored killing control: physical query-off or declaration-sham
+using the same restored neutral geometry as `coded_preprojection_loop_2` and
+`coded_preprojection_warm_query_scramble_0`.
 
 The next probe should answer:
 
@@ -838,7 +880,7 @@ The next probe should answer:
 2. Does the fixed quadrature observable
    `z = (2/K) * sum(response_k * exp(i * theta_k))` retain a fold-odd coordinate only
    for pre-projection coupling?
-3. Do post-projection, query-scramble, query-off, source-off, declaration-sham, and
+3. Do post-projection, query-off, source-off, declaration-sham, and
    private-fold controls behave as predicted before any promotion?
 4. Does the killing control stay fold-odd null while preserving the post-warmup neutral
    restoration class?
@@ -853,9 +895,10 @@ with the model's controls preserved.
 
 The next major scientific threshold is a physical coded pre-projection response with
 restoration and killing controls. `coded_preprojection_loop_2` is a restored physical
-fold-odd response candidate, but the next useful marker remains short of
-`SMALL_WALL_CROSSED` until query-scramble/query-off/declaration-sham physical controls
-are run under the same restored geometry.
+fold-odd response candidate, and `coded_preprojection_warm_query_scramble_0` killed the
+physical query-scramble alternative, but the next useful marker remains short of
+`SMALL_WALL_CROSSED` until query-off and declaration-sham physical controls are run
+under the same restored geometry.
 
 ## State update rule
 

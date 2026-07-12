@@ -96,6 +96,7 @@ def execute(run_id: str, *, pilot_variant: str, keep_remote: bool) -> dict[str, 
             "coded-preprojection-loop",
             "coded-preprojection-restored-loop",
             "coded-preprojection-warm-restored-loop",
+            "coded-preprojection-warm-query-scramble-loop",
         },
         "pilot variant is not closed",
     )
@@ -190,6 +191,7 @@ def parse_args() -> argparse.Namespace:
             "coded-preprojection-loop",
             "coded-preprojection-restored-loop",
             "coded-preprojection-warm-restored-loop",
+            "coded-preprojection-warm-query-scramble-loop",
         ),
         default="pn",
     )
