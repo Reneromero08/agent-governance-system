@@ -257,6 +257,57 @@ Marker:
 This does not establish path memory, noncommutation, physical holonomy, OrbitState
 coupling, fold-odd recovery, or a Small Wall crossing.
 
+### Dual-observed path pilot
+
+The corrected actor-core observation pilot also ran cleanly, but it was not an
+accepted path-memory result.
+
+Run:
+
+`runs/f10_path_dual_0`
+
+Checkpoint:
+
+`F10_PATH_DUAL_OBSERVE_CHECKPOINT_20260712.json`
+
+The change was deliberately narrow: keep the same carrier, line sets, operator
+sequence, and PMU event group, but observe each path step on the core that actually
+performed that byte-preserving ownership transfer.
+
+Result:
+
+```text
+forward          -1.121283871354e-11
+reverse          +1.195600729067e-11
+shuffle          -1.649816877011e-08
+reverse_shuffle  -3.254551708822e-09
+identity          0.0
+```
+
+Acceptance:
+
+```text
+all_windows_ok        true
+all_unmultiplexed     true
+bytes_unchanged       true
+sign_reversal         true
+controls_small        false
+path_dependence_pilot false
+```
+
+The useful signal is diagnostic, not promotional: actor-core observation made both
+transfer directions visible and produced forward/reverse sign reversal, but the
+paired-shuffle controls were larger than the forward/reverse area. The current wall is
+therefore not PMU availability or home-step invisibility; it is operator/line-set
+symmetry and control cancellation.
+
+Marker:
+
+`PATH_DUAL_OBSERVE_NOT_ESTABLISHED`
+
+This does not establish path memory, noncommutation, physical holonomy, OrbitState
+coupling, fold-odd recovery, or a Small Wall crossing.
+
 ### Information-law boundary
 
 The unchanged public cosine representation is fold-even. If the complete declared
@@ -301,8 +352,10 @@ f10_pmc_first_light_target.py
 run_f10_pmc_first_light.py
 run_f10_coherence_operators.py
 run_f10_path_dependence.py
+run_f10_path_dual_observe.py
 READONLY_OCCUPANCY_BASELINE_CLOSURE.json
 F10_PATH_DEPENDENCE_PILOT_CHECKPOINT_20260712.json
+F10_PATH_DUAL_OBSERVE_CHECKPOINT_20260712.json
 ```
 
 Historical V2 Gate A source was restored and should remain a sealed reference. New
@@ -370,11 +423,14 @@ identity, read-shared, and same-core store controls while restoring bytes.
 `f10_path_pilot_0` then showed that a path built from remote stores plus home-core
 restoration does not yet produce a valid antisymmetric path observable, because the
 home steps are nearly invisible in the core-5 PMU window and one shuffle control is
-large.
+large. `f10_path_dual_0` corrected the observation geometry and obtained
+forward/reverse sign reversal, but paired-shuffle controls were larger than the
+oriented signal.
 
-**Status:** established at controlled-operator level; first path-memory construction
-was negative. Continue only with an operator pair or observation geometry that makes
-both sides of the loop visible.
+**Status:** established at controlled-operator level; first fixed-observer path was
+negative, and the first dual-observed path was control-limited. Continue only with a
+construction that cancels line-set and route/order controls before claiming any path
+invariant.
 
 ### H3 - Shared L3 or Northbridge routing is the dominant relational carrier
 
@@ -480,6 +536,11 @@ The next probe should answer:
    reversal while identity and shuffled controls cancel?
 3. Can the carrier return to a measured equivalence class beyond byte equality?
 4. Does the result survive a fresh process start without route or label leakage?
+
+The immediate cheap repair is not repetition. It is a balanced control-canceling
+construction: line-swap or route-swap the same actor-observed path, subtract
+per-line/per-core baselines before promotion, and require both paired shuffles to stay
+small before any candidate marker.
 
 ## Current claim ceiling
 

@@ -37,6 +37,13 @@ MODES: dict[str, dict[str, Any]] = {
         "failed_status": "F10_PATH_DEPENDENCE_TARGET_FAILED",
         "claim_ceiling": "Path-dependence pilot only; no coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
     },
+    "path-dual-observe": {
+        "worker_args": ["--path-dual-observe"],
+        "result_file": "F10_PATH_DUAL_OBSERVE_RESULT.json",
+        "complete_status": "F10_PATH_DUAL_OBSERVE_TARGET_COMPLETE",
+        "failed_status": "F10_PATH_DUAL_OBSERVE_TARGET_FAILED",
+        "claim_ceiling": "Dual-observed path pilot only; no coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
+    },
 }
 FORBIDDEN_PROCESS_MARKERS = (
     "f10_pmc_first_light_worker",

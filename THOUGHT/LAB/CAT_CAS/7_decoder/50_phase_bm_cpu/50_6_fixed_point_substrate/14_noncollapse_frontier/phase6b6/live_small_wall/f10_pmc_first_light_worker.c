@@ -33,6 +33,7 @@
 #define RESULT_SCHEMA "CAT_CAS_F10_PMC_FIRST_LIGHT_RESULT_V1"
 #define COHERENCE_RESULT_SCHEMA "CAT_CAS_F10_COHERENCE_OPERATOR_RESULT_V1"
 #define PATH_RESULT_SCHEMA "CAT_CAS_F10_PATH_DEPENDENCE_PILOT_RESULT_V1"
+#define PATH_DUAL_OBSERVE_RESULT_SCHEMA "CAT_CAS_F10_PATH_DUAL_OBSERVE_RESULT_V1"
 
 struct event_def {
     const char *name;
@@ -343,6 +344,12 @@ static int run_path_step_operator(struct carrier *carrier, const struct path_ste
         store_same_value_subset_on_core(carrier, CATCAS_CORE_A, step->line_set);
         return 0;
     }
+    return -1;
+}
+
+static int path_step_actor_core(const struct path_step *step) {
+    if (step->op == PATH_REMOTE_STORE) return CATCAS_CORE_B;
+    if (step->op == PATH_HOME_STORE) return CATCAS_CORE_A;
     return -1;
 }
 
@@ -689,6 +696,7 @@ static int measure_coherence_window(
 static int measure_path_step(
     const struct event_def group[MAX_GROUP_EVENTS],
     const struct path_step *step,
+    int observed_core,
     struct carrier *carrier,
     struct group_result *result,
     uint64_t *duration_ns,
@@ -699,7 +707,7 @@ static int measure_path_step(
     uint64_t ids[MAX_GROUP_EVENTS];
     memset(result, 0, sizeof(*result));
     *digest_before = fnv1a64(carrier->bytes, carrier->byte_count);
-    int opened = open_group(group, CATCAS_CORE_B, fds, ids);
+    int opened = open_group(group, observed_core, fds, ids);
     if (opened != 0) {
         result->open_errno = -opened;
         return opened;
@@ -992,7 +1000,8 @@ static int measure_path_sequence(
     uint64_t digest_before[4],
     uint64_t digest_after[4],
     int rc[4],
-    uint64_t initial_digest
+    uint64_t initial_digest,
+    bool observe_actor_core
 ) {
     home_core_restore(carrier);
     for (int i = 0; i < 4; i++) {
@@ -1000,7 +1009,12 @@ static int measure_path_sequence(
         durations[i] = 0;
         digest_before[i] = 0;
         digest_after[i] = 0;
-        rc[i] = measure_path_step(primary_group, &steps[i], carrier, &results[i],
+        int observed_core = observe_actor_core ? path_step_actor_core(&steps[i]) : CATCAS_CORE_B;
+        if (observed_core < 0) {
+            rc[i] = -EINVAL;
+            continue;
+        }
+        rc[i] = measure_path_step(primary_group, &steps[i], observed_core, carrier, &results[i],
             &durations[i], &digest_before[i], &digest_after[i]);
     }
     home_core_restore(carrier);
@@ -1017,13 +1031,16 @@ static void print_path_steps(
     const uint64_t digest_after[4],
     const int rc[4],
     long double area,
-    uint64_t initial_digest
+    uint64_t initial_digest,
+    bool observe_actor_core
 ) {
     fprintf(out, "    {\"name\": \"%s\", \"signed_area_cycles_normalized\": %.12Le, \"steps\": [\n", name, area);
     for (int i = 0; i < 4; i++) {
-        fprintf(out, "      {\"name\": \"%s\", \"line_set\": %d, \"rc\": %d, \"duration_ns\": %" PRIu64 ", \"carrier_digest_before_hex\": \"0x%016" PRIx64 "\", \"carrier_digest_after_hex\": \"0x%016" PRIx64 "\", \"bytes_unchanged\": %s, \"group\": ",
+        int observed_core = observe_actor_core ? path_step_actor_core(&steps[i]) : CATCAS_CORE_B;
+        fprintf(out, "      {\"name\": \"%s\", \"line_set\": %d, \"observed_core\": %d, \"rc\": %d, \"duration_ns\": %" PRIu64 ", \"carrier_digest_before_hex\": \"0x%016" PRIx64 "\", \"carrier_digest_after_hex\": \"0x%016" PRIx64 "\", \"bytes_unchanged\": %s, \"group\": ",
             steps[i].name,
             steps[i].line_set,
+            observed_core,
             rc[i],
             durations[i],
             digest_before[i],
@@ -1035,13 +1052,32 @@ static void print_path_steps(
     fprintf(out, "    ]}");
 }
 
-static int run_path_dependence_mode(const char *output_root, struct carrier *carrier, uint64_t initial_digest) {
+static int probe_primary_group_on_core(int core) {
     int primary_fds[MAX_GROUP_EVENTS];
     uint64_t primary_ids[MAX_GROUP_EVENTS];
-    int primary_open_rc = open_group(primary_group, CATCAS_CORE_B, primary_fds, primary_ids);
+    int primary_open_rc = open_group(primary_group, core, primary_fds, primary_ids);
     if (primary_open_rc == 0) {
         for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(primary_fds[i]);
     }
+    return primary_open_rc;
+}
+
+static int run_path_mode(
+    const char *output_root,
+    struct carrier *carrier,
+    uint64_t initial_digest,
+    bool observe_actor_core
+) {
+    const char *schema_id = observe_actor_core ? PATH_DUAL_OBSERVE_RESULT_SCHEMA : PATH_RESULT_SCHEMA;
+    const char *result_file = observe_actor_core ? "F10_PATH_DUAL_OBSERVE_RESULT.json" : "F10_PATH_DEPENDENCE_PILOT_RESULT.json";
+    const char *positive_status = observe_actor_core ? "PATH_DUAL_OBSERVE_CANDIDATE" : "PATH_DEPENDENCE_PILOT_OBSERVED";
+    const char *negative_status = observe_actor_core ? "PATH_DUAL_OBSERVE_NOT_ESTABLISHED" : "PATH_DEPENDENCE_NOT_ESTABLISHED";
+    const char *claim_ceiling = observe_actor_core ?
+        "Dual-observed path pilot only; no coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim" :
+        "Path-dependence pilot only; no coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim";
+    int primary_open_rc = probe_primary_group_on_core(CATCAS_CORE_B);
+    int home_open_rc = observe_actor_core ? probe_primary_group_on_core(CATCAS_CORE_A) : 0;
+    bool groups_available = primary_open_rc == 0 && home_open_rc == 0;
 
     const struct path_step forward[4] = {
         {"remote_store_set0", PATH_REMOTE_STORE, 0},
@@ -1079,14 +1115,14 @@ static int run_path_dependence_mode(const char *output_root, struct carrier *car
     uint64_t forward_before[4], reverse_before[4], shuffle_before[4], reverse_shuffle_before[4], identity_before[4];
     uint64_t forward_after[4], reverse_after[4], shuffle_after[4], reverse_shuffle_after[4], identity_after[4];
     int forward_rc[4], reverse_rc[4], shuffle_rc[4], reverse_shuffle_rc[4], identity_rc[4];
-    int forward_restore = primary_open_rc == 0 ? measure_path_sequence(forward, carrier, forward_results, forward_durations, forward_before, forward_after, forward_rc, initial_digest) : -ENODEV;
-    int reverse_restore = primary_open_rc == 0 ? measure_path_sequence(reverse, carrier, reverse_results, reverse_durations, reverse_before, reverse_after, reverse_rc, initial_digest) : -ENODEV;
-    int shuffle_restore = primary_open_rc == 0 ? measure_path_sequence(shuffle, carrier, shuffle_results, shuffle_durations, shuffle_before, shuffle_after, shuffle_rc, initial_digest) : -ENODEV;
-    int reverse_shuffle_restore = primary_open_rc == 0 ? measure_path_sequence(reverse_shuffle, carrier, reverse_shuffle_results, reverse_shuffle_durations, reverse_shuffle_before, reverse_shuffle_after, reverse_shuffle_rc, initial_digest) : -ENODEV;
-    int identity_restore = primary_open_rc == 0 ? measure_path_sequence(identity, carrier, identity_results, identity_durations, identity_before, identity_after, identity_rc, initial_digest) : -ENODEV;
+    int forward_restore = groups_available ? measure_path_sequence(forward, carrier, forward_results, forward_durations, forward_before, forward_after, forward_rc, initial_digest, observe_actor_core) : -ENODEV;
+    int reverse_restore = groups_available ? measure_path_sequence(reverse, carrier, reverse_results, reverse_durations, reverse_before, reverse_after, reverse_rc, initial_digest, observe_actor_core) : -ENODEV;
+    int shuffle_restore = groups_available ? measure_path_sequence(shuffle, carrier, shuffle_results, shuffle_durations, shuffle_before, shuffle_after, shuffle_rc, initial_digest, observe_actor_core) : -ENODEV;
+    int reverse_shuffle_restore = groups_available ? measure_path_sequence(reverse_shuffle, carrier, reverse_shuffle_results, reverse_shuffle_durations, reverse_shuffle_before, reverse_shuffle_after, reverse_shuffle_rc, initial_digest, observe_actor_core) : -ENODEV;
+    int identity_restore = groups_available ? measure_path_sequence(identity, carrier, identity_results, identity_durations, identity_before, identity_after, identity_rc, initial_digest, observe_actor_core) : -ENODEV;
 
-    bool all_windows_ok = primary_open_rc == 0;
-    bool all_unmultiplexed = primary_open_rc == 0;
+    bool all_windows_ok = groups_available;
+    bool all_unmultiplexed = groups_available;
     bool bytes_unchanged = forward_restore == 0 && reverse_restore == 0 &&
         shuffle_restore == 0 && reverse_shuffle_restore == 0 && identity_restore == 0;
     for (int i = 0; i < 4; i++) {
@@ -1119,7 +1155,7 @@ static int run_path_dependence_mode(const char *output_root, struct carrier *car
         sign_reversal && controls_small;
 
     char result_path[4096];
-    int n = snprintf(result_path, sizeof(result_path), "%s/F10_PATH_DEPENDENCE_PILOT_RESULT.json", output_root);
+    int n = snprintf(result_path, sizeof(result_path), "%s/%s", output_root, result_file);
     if (n <= 0 || (size_t)n >= sizeof(result_path)) return 1;
     FILE *out = fopen(result_path, "w");
     if (!out) {
@@ -1127,28 +1163,33 @@ static int run_path_dependence_mode(const char *output_root, struct carrier *car
         return 1;
     }
     fprintf(out, "{\n");
-    fprintf(out, "  \"schema_id\": \"%s\",\n", PATH_RESULT_SCHEMA);
-    fprintf(out, "  \"status\": \"%s\",\n", path_pilot ? "PATH_DEPENDENCE_PILOT_OBSERVED" : "PATH_DEPENDENCE_NOT_ESTABLISHED");
-    fprintf(out, "  \"claim_ceiling\": \"Path-dependence pilot only; no coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim\",\n");
-    fprintf(out, "  \"cores\": {\"home_core\": %d, \"observed_core\": %d},\n", CATCAS_CORE_A, CATCAS_CORE_B);
+    fprintf(out, "  \"schema_id\": \"%s\",\n", schema_id);
+    fprintf(out, "  \"status\": \"%s\",\n", path_pilot ? positive_status : negative_status);
+    fprintf(out, "  \"claim_ceiling\": \"%s\",\n", claim_ceiling);
+    fprintf(out, "  \"cores\": {\"home_core\": %d, \"remote_core\": %d, \"fixed_observed_core\": %d, \"observe_actor_core\": %s},\n",
+        CATCAS_CORE_A,
+        CATCAS_CORE_B,
+        CATCAS_CORE_B,
+        json_bool(observe_actor_core));
     fprintf(out, "  \"source_constraints\": {\"direct_msr_access\": false, \"voltage_access\": false, \"frequency_writes\": 0, \"experiment_owned_memory_only\": true},\n");
     fprintf(out, "  \"carrier\": {\"line_sets\": 2, \"line_count\": %zu, \"line_bytes\": %d, \"byte_count\": %zu, \"digest_kind\": \"fnv1a64\", \"initial_digest_hex\": \"0x%016" PRIx64 "\"},\n", carrier->line_count, CACHE_LINE_BYTES, carrier->byte_count, initial_digest);
     fprintf(out, "  \"selected_group\": \"primary_nb_coherence\",\n");
     fprintf(out, "  \"group_open_rc\": %d,\n", primary_open_rc);
+    fprintf(out, "  \"home_group_open_rc\": %d,\n", home_open_rc);
     fprintf(out, "  \"selected_events\": ");
     print_group_defs(out, primary_group);
     fprintf(out, ",\n");
     fprintf(out, "  \"predeclared_observable\": {\"coordinate_x\": \"cache_block_commands_change_to_dirty / cpu_cycles_not_halted\", \"coordinate_y\": \"probe_responses_dirty / cpu_cycles_not_halted\", \"signed_area\": \"sum((x_i * y_next) - (y_i * x_next)) / 2 over four path steps\"},\n");
     fprintf(out, "  \"paths\": [\n");
-    print_path_steps(out, "forward", forward, forward_results, forward_durations, forward_before, forward_after, forward_rc, forward_area, initial_digest);
+    print_path_steps(out, "forward", forward, forward_results, forward_durations, forward_before, forward_after, forward_rc, forward_area, initial_digest, observe_actor_core);
     fprintf(out, ",\n");
-    print_path_steps(out, "reverse", reverse, reverse_results, reverse_durations, reverse_before, reverse_after, reverse_rc, reverse_area, initial_digest);
+    print_path_steps(out, "reverse", reverse, reverse_results, reverse_durations, reverse_before, reverse_after, reverse_rc, reverse_area, initial_digest, observe_actor_core);
     fprintf(out, ",\n");
-    print_path_steps(out, "shuffle", shuffle, shuffle_results, shuffle_durations, shuffle_before, shuffle_after, shuffle_rc, shuffle_area, initial_digest);
+    print_path_steps(out, "shuffle", shuffle, shuffle_results, shuffle_durations, shuffle_before, shuffle_after, shuffle_rc, shuffle_area, initial_digest, observe_actor_core);
     fprintf(out, ",\n");
-    print_path_steps(out, "reverse_shuffle", reverse_shuffle, reverse_shuffle_results, reverse_shuffle_durations, reverse_shuffle_before, reverse_shuffle_after, reverse_shuffle_rc, reverse_shuffle_area, initial_digest);
+    print_path_steps(out, "reverse_shuffle", reverse_shuffle, reverse_shuffle_results, reverse_shuffle_durations, reverse_shuffle_before, reverse_shuffle_after, reverse_shuffle_rc, reverse_shuffle_area, initial_digest, observe_actor_core);
     fprintf(out, ",\n");
-    print_path_steps(out, "identity", identity, identity_results, identity_durations, identity_before, identity_after, identity_rc, identity_area, initial_digest);
+    print_path_steps(out, "identity", identity, identity_results, identity_durations, identity_before, identity_after, identity_rc, identity_area, initial_digest, observe_actor_core);
     fprintf(out, "\n  ],\n");
     fprintf(out, "  \"areas_cycles_normalized\": {\"forward\": %.12Le, \"reverse\": %.12Le, \"shuffle\": %.12Le, \"reverse_shuffle\": %.12Le, \"identity\": %.12Le},\n",
         forward_area, reverse_area, shuffle_area, reverse_shuffle_area, identity_area);
@@ -1162,15 +1203,24 @@ static int run_path_dependence_mode(const char *output_root, struct carrier *car
     fprintf(out, "}\n");
     fclose(out);
     printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"primary_nb_coherence\"}\n",
-        path_pilot ? "PATH_DEPENDENCE_PILOT_OBSERVED" : "PATH_DEPENDENCE_NOT_ESTABLISHED",
+        path_pilot ? positive_status : negative_status,
         result_path);
     return 0;
+}
+
+static int run_path_dependence_mode(const char *output_root, struct carrier *carrier, uint64_t initial_digest) {
+    return run_path_mode(output_root, carrier, initial_digest, false);
+}
+
+static int run_path_dual_observe_mode(const char *output_root, struct carrier *carrier, uint64_t initial_digest) {
+    return run_path_mode(output_root, carrier, initial_digest, true);
 }
 
 int main(int argc, char **argv) {
     const char *output_root = NULL;
     bool coherence_operator_mode = false;
     bool path_dependence_mode = false;
+    bool path_dual_observe_mode = false;
     if (argc == 3 && strcmp(argv[1], "--output-root") == 0) {
         output_root = argv[2];
     } else if (argc == 4 && strcmp(argv[1], "--coherence-operators") == 0 &&
@@ -1181,10 +1231,14 @@ int main(int argc, char **argv) {
                strcmp(argv[2], "--output-root") == 0) {
         path_dependence_mode = true;
         output_root = argv[3];
+    } else if (argc == 4 && strcmp(argv[1], "--path-dual-observe") == 0 &&
+               strcmp(argv[2], "--output-root") == 0) {
+        path_dual_observe_mode = true;
+        output_root = argv[3];
     } else if (argc == 2 && strcmp(argv[1], "--self-test") == 0) {
         return self_test();
     } else {
-        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root>\n", argv[0]);
+        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root>\n", argv[0]);
         return 2;
     }
     if (output_root[0] != '/') {
@@ -1213,6 +1267,11 @@ int main(int argc, char **argv) {
     }
     if (path_dependence_mode) {
         int rc = run_path_dependence_mode(output_root, &carrier, initial_digest);
+        free(carrier.bytes);
+        return rc;
+    }
+    if (path_dual_observe_mode) {
+        int rc = run_path_dual_observe_mode(output_root, &carrier, initial_digest);
         free(carrier.bytes);
         return rc;
     }

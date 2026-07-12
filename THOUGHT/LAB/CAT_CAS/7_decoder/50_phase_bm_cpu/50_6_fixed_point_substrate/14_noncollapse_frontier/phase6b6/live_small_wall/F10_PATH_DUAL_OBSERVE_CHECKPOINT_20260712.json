@@ -1,0 +1,112 @@
+{
+  "schema_id": "CAT_CAS_F10_PATH_DUAL_OBSERVE_CHECKPOINT_V1",
+  "classification": "PATH_DUAL_OBSERVE_NOT_ESTABLISHED",
+  "claim_ceiling": "Dual-observed path pilot only; no coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim.",
+  "claim_exclusions": [
+    "path memory",
+    "coherence holonomy",
+    "OrbitState coupling",
+    "fold-odd recovery",
+    "Small Wall crossing"
+  ],
+  "run": {
+    "run_id": "f10_path_dual_0",
+    "local_run_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/f10_path_dual_0",
+    "remote_run_path": "/root/catcas_live_small_wall/f10_path_dual_0",
+    "command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_path_dual_observe.py --run-id f10_path_dual_0",
+    "target_status": "F10_PATH_DUAL_OBSERVE_TARGET_COMPLETE",
+    "worker_status": "PATH_DUAL_OBSERVE_NOT_ESTABLISHED",
+    "copy_verified": true,
+    "remote_cleaned": true
+  },
+  "source_binding": {
+    "source_bundle_sha256": "4e1b3b709525c8279bf71c84948accfbebb7fc4139d080dab0fa0dba90484031",
+    "source_hashes": {
+      "f10_pmc_first_light_target.py": "751f6a256b60f89cab6702b766990c7a0a1ed31cfb5ee6f78a459ded7bb8decf",
+      "f10_pmc_first_light_worker.c": "f6ee6cd4b7372937d8dbc6b1f0393cda66b858ce7ebd9d779f6032330982bd93"
+    }
+  },
+  "source_constraints": {
+    "perf_interface": "perf_event_open PERF_TYPE_RAW",
+    "experiment_owned_memory_only": true,
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "direct_msr_access": false
+  },
+  "temperature": {
+    "veto_c": 68.0,
+    "preflight_c": 50.5,
+    "post_c": 50.5,
+    "below_veto": true
+  },
+  "geometry": {
+    "home_core": 4,
+    "remote_core": 5,
+    "observe_actor_core": true,
+    "line_sets": 2,
+    "line_count": 4096,
+    "line_bytes": 64,
+    "byte_count": 262144,
+    "digest_kind": "fnv1a64",
+    "initial_digest_hex": "0xc816a7aba6b50383",
+    "all_path_windows_restored": true
+  },
+  "selected_events": [
+    {
+      "name": "cpu_cycles_not_halted",
+      "event_select_hex": "0x076",
+      "unit_mask_hex": "0x00",
+      "raw_config_hex": "0x76"
+    },
+    {
+      "name": "dc_refills_from_nb_all_states",
+      "event_select_hex": "0x043",
+      "unit_mask_hex": "0x1f",
+      "raw_config_hex": "0x1f43"
+    },
+    {
+      "name": "cache_block_commands_change_to_dirty",
+      "event_select_hex": "0x0ea",
+      "unit_mask_hex": "0x20",
+      "raw_config_hex": "0x20ea"
+    },
+    {
+      "name": "probe_responses_dirty",
+      "event_select_hex": "0x0ec",
+      "unit_mask_hex": "0x0c",
+      "raw_config_hex": "0xcec"
+    }
+  ],
+  "areas_cycles_normalized": {
+    "forward": -1.121283871354e-11,
+    "reverse": 1.195600729067e-11,
+    "shuffle": -1.649816877011e-08,
+    "reverse_shuffle": -3.254551708822e-09,
+    "identity": 0.0
+  },
+  "acceptance": {
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "bytes_unchanged": true,
+    "sign_reversal": true,
+    "controls_small": false,
+    "path_dependence_pilot": false
+  },
+  "interpretation": {
+    "surviving_wall": "Actor-core observation made both transfer directions visible and produced forward/reverse sign reversal, but the paired-shuffle controls were larger than the oriented signal. The observation is therefore explained by line-set/operator ordering imbalance rather than a closed path invariant.",
+    "next_discriminator": "Use a carrier or operator construction where identity and paired shuffles cancel before looking for path reversal: balanced line-swap, route-swap, or a two-coordinate observable that subtracts per-line and per-core baselines."
+  },
+  "focused_validation": [
+    {
+      "command": ".\\.venv\\Scripts\\python.exe -m py_compile THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\f10_pmc_first_light_target.py THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_path_dual_observe.py THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_path_dependence.py",
+      "result": "pass"
+    },
+    {
+      "command": "wsl bash -lc 'cd \"/mnt/d/CCC 2.0/AI/agent-governance-system\" && cc -std=c11 -Wall -Wextra -Werror -pedantic -O2 -march=amdfam10 -mtune=amdfam10 -fno-lto -pthread THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/f10_pmc_first_light_worker.c -o /tmp/f10_path_dual_worker_check && /tmp/f10_path_dual_worker_check --self-test'",
+      "result": "pass",
+      "stdout": "F10_PMC_FIRST_LIGHT_WORKER_SELF_TEST_OK"
+    }
+  ]
+}
