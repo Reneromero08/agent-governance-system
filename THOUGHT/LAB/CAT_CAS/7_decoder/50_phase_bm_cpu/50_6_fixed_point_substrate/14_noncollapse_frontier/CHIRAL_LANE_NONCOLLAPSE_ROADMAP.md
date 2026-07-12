@@ -1,11 +1,16 @@
 # Phase 6B Non-Collapse Frontier Roadmap
 
-**Status:** `PHASE6_V2_EXACT_HEAD_GATE_R_INTEGRATION_APPROVED__PHASE6B6_NOT_ENTERED`
+**Status:** `PHASE6B6_FREQUENCY_PREPARATION_SOURCE_INTEGRATED__NO_ACTIVE_AUTHORITY`
 **Binding directives:** `COURSE_CORRECTION.md`, `COURSE_CORRECTION_ADDENDUM_2026-06-19.md`, and `PHASE6_V2_ENGINEERING_QUALIFICATION_ADDENDUM_2026-06-22.md`
-**Immediate engineering gate:** V2 exact generated head qualified, sealed-snapshot custody corrected, final evidence review complete, Gate R review complete, and project-owner integration approval recorded
-**Immediate scientific gate:** Phase 6B.6 remains a separate future phase requiring separate explicit authority
-**Next physical control:** reversed/randomized tone order, proposed but unauthorized
+**Immediate engineering gate:** Phase 6B.6 entered; two singleton smoke authorities stopped fail-closed before physical runtime. The separate frequency preparation/restoration core, authority transport, and process-custody repair are integrated and exact-head reviewed; their PRs #44-46 created no authority artifact and performed no live frequency write or preparation-lane target contact
+**Immediate scientific gate:** engineering smoke is not authorized, no third attempt is authorized, and calibration, acquisition, restoration, target coupling, Small Wall work, and Gate B remain unauthorized
+**Next engineering boundary:** `PROJECT_OWNER_DECISION_FOR_ONE_NO_RETRY_FREQUENCY_PREPARATION_QUALIFICATION_AUTHORITY`; no preparation authority, target contact, or third smoke is authorized
+**Next scientific control:** reversed/randomized tone order remains proposed, downstream, and unauthorized
 **Observability implementation authorization:** false
+**Target bundle qualified:** true
+**Engineering smoke executor implemented:** true
+**Engineering smoke authorized:** false
+**Hardware ran:** false
 
 **THE ALGORITHM IS DEAD.** The unresolved relation is the object; scalar traversal is local and subordinate.
 
@@ -287,7 +292,7 @@ The V2 lane qualifies a corrected physical interface without promoting it into o
 
 The current V2 schedule is ascending-order engineering calibration. It is not the reversed/randomized tone-order scientific control.
 
-Current exact-head qualification binding:
+Qualification lineage and current Phase 6B.6 binding:
 
 ```text
 source repair commit: ba48125d15009a044bb869b5716c412b1a8baa1b
@@ -310,15 +315,53 @@ Gate R integration: approved
 Gate R reviewer: assistant review chain
 project-owner approval: complete
 separate external-human review pending: false
-Phase 6B.6: not entered
-phase6b6_entered: false
+Phase 6B.6: entered through the approved software-entry boundary
+phase6b6_entered: true
+target_bundle_qualified: true
+engineering_smoke_executor_implemented: true
+engineering_smoke_attempts_consumed: 2
+first_attempt_evidence: gate_a_engineering_smoke_7e1e8835
+first_attempt_result: failed closed at temperature unobservable
+second_attempt_evidence: gate_a_engineering_smoke_1dabfc7b
+second_attempt_result: FAILED_CLOSED_FREQUENCY_VETO
+second_attempt_temperature: 38.5 C, observable and below the 68 C veto threshold
+second_attempt_core_4_frequency_khz: 800000
+second_attempt_core_5_frequency_khz: 800000
+required_frequency_khz: 1600000
+physical_runtime_executions: 0
+sender_starts: 0
+capture_starts: 0
 hardware_ran: false
-authorization_artifact_created: false
+active_execution_authority_artifact_present: false
+engineering_smoke_authorized: false
+third_attempt_authorized: false
+frequency_precondition_observation: gate_a_frequency_precondition_observation_dde70523_01
+frequency_precondition_observation_result: FAIL_REQUIRED_FREQUENCY_NOT_OBSERVED
+frequency_precondition_source_commit: dde70523d639d34defa37f1b55982e789ea52c18
+frequency_precondition_evidence_commit: f617e288d93eb20d3845356b4c233d15d8cf5c2d
+frequency_precondition_source_review_comment: 4948537605
+frequency_precondition_observation_samples: 200 paired samples at 10 ms; both cores always 800000 kHz
+frequency_precondition_required_frequency_supported: true
+frequency_precondition_integration_commit: 8726b3d92e80fe4c3047f0b9708248d0da0c92ea
+frequency_preparation_restoration_source_integrated: true
+frequency_preparation_restoration_reviewed_head: 1d096f15839aa9f12c2099ff44aeab9822244e0f
+frequency_preparation_restoration_integration_commit: 3cf5ae149251d0ba1e77a3c018177dba1e055e00
+frequency_preparation_authority_transport_integrated: true
+frequency_preparation_authority_transport_reviewed_head: 5c40a467fc8a1d38cee043293064b3f3cb18339e
+frequency_preparation_authority_transport_integration_commit: f095f30de4821e15587b0f0e86a0842ce2d5aa5c
+frequency_preparation_process_custody_reviewed_head: 6576ae4024a3fe5d813a559a079e705b8f1b30b2
+frequency_preparation_process_custody_integration_commit: 726f036f0021bdda90513430f4f0cca35aa65668
+frequency_preparation_authority_artifact_present: false
+live_frequency_preparation_authorized: false
+preparation_qualification_authorized: false
+target_contact_authorized: false
+next_boundary: PROJECT_OWNER_DECISION_FOR_ONE_NO_RETRY_FREQUENCY_PREPARATION_QUALIFICATION_AUTHORITY
 calibration_authorized: false
 scientific_acquisition_authorized: false
 restoration_authorized: false
 target_coupling_authorized: false
 small_wall_authorized: false
+gate_b_authorized: false
 ```
 
 ### Gate R — L4B.5B0 integration review
@@ -329,7 +372,7 @@ Prerequisites:
 - [x] Phase 6B.5C/5D outputs bound to exact evidence
 - [x] V2 engineering lane closed cleanly for independent integration review
 
-Review `4585403632` passed. Project-owner Gate R integration approval is recorded as `APPROVED_FOR_INTEGRATION` on 2026-06-27. The approval integrates the reviewed engineering lane only; it does not authorize calibration, acquisition, restoration, target coupling, Small Wall work, or Phase 6B.6 entry.
+Review `4585403632` passed. Project-owner Gate R integration approval is recorded as `APPROVED_FOR_INTEGRATION` on 2026-06-27. The approval integrates the reviewed engineering lane only; it did not itself authorize calibration, acquisition, restoration, target coupling, Small Wall work, or Phase 6B.6 entry. Phase 6B.6 was entered later through the approved software-entry boundary. Two still-later exact, singleton Gate A engineering-smoke authorities were consumed; neither authorizes downstream work.
 
 ### Phase 6B.6 — Observable state and operator identification
 
@@ -337,7 +380,22 @@ Prerequisites:
 
 - [x] carrier scope frozen or narrowed
 - [x] L4B.5B0 Gate R integration review accepted
-- [ ] explicit acquisition authorization recorded
+- [x] target-qualified execution bundle sealed
+- [x] bounded Gate A engineering-smoke executor implemented
+- [x] first singleton owner authority consumed by a fail-closed temperature-unobservable result before physical runtime
+- [x] second singleton owner authority consumed by a fail-closed frequency veto before physical runtime
+- [x] separate read-only frequency-precondition observation sealed with no control writes
+- [x] frequency preparation/restoration core independently exact-head reviewed and integrated
+- [x] authority-gated transport independently exact-head reviewed and integrated
+- [x] process-custody self-hit repaired, exact-head reviewed, and integrated
+- [ ] project-owner decision for one no-retry preparation-only qualification authority
+- [ ] if approved, one exact preparation authority artifact recorded before target contact
+
+Phase 6B.6 is entered but blocked at the Gate A precondition boundary. The first attempt, sealed at `gate_a_engineering_smoke_7e1e8835`, stopped because temperature was unobservable. The second, sealed at `gate_a_engineering_smoke_1dabfc7b`, observed 38.5 C and then vetoed because cores 4 and 5 were each at 800000 kHz rather than the required 1600000 kHz. Neither attempt started the physical runtime, sender, or capture.
+
+The separate non-driving packet `gate_a_frequency_precondition_observation_dde70523_01` sampled both cores 200 times at 10 ms. The required 1600000 kHz state is supported but was never observed; both cores remained at 800000 kHz for every paired sample. Its result is `FAIL_REQUIRED_FREQUENCY_NOT_OBSERVED`. It is evidence only and authorizes no smoke.
+
+No active Gate A execution authority or frequency-preparation authority exists, and no third attempt is authorized. The separate preparation/restoration core and authority transport are integrated source only; no live frequency write or preparation-lane target contact occurred during their implementation and integration in PRs #44-46. The earlier PR #43 observation retains its one read-only SSH contact. The next boundary is a project-owner decision for at most one no-retry preparation-only qualification authority. Gate A smoke completion, calibration, scientific acquisition, restoration beyond that bounded transaction, target coupling, Small Wall work, and Gate B remain blocked.
 
 Execution:
 

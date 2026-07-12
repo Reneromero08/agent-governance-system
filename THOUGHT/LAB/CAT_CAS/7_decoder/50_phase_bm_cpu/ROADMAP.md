@@ -1773,27 +1773,66 @@ Directories numbered 01-14 chronologically by build order.
 | PDN catalytic tape post-mortem | 11 | DONE | Explains sim/hardware gap |
 | Chiral lane frontier | 12 | **CLOSED** | All no-smuggle tracks fail orientation |
 | Substrate L2/L3/L4 attempt | 13 | PARTIAL | L2/L3 pass, L4 blocked by fold symmetry |
-| Noncollapse OrbitState frontier | 14 | **ACTIVE** | L4B.1-L4B.5 open |
+| Noncollapse OrbitState frontier | 14 | **PHASE 6B.6 ENTERED** | Target bundle qualified; Gate A smoke executor implemented; 2/2 exact smoke authorities consumed on pre-runtime fail-closed outcomes; hardware runtime not reached |
 
 ### Open Work
 
-1. **14_noncollapse_frontier L4B.1-L4B.5** -- Complex phase-bearing OrbitState,
-   reversible path-history accumulator, expanded .holo transcript, invariant family
-   beyond fold_symmetry, physical substrate mapping.
+1. **Project-owner decision for one no-retry frequency-preparation
+   qualification authority** -- The two sealed Gate A smoke packets and the
+   separately authorized read-only frequency observation at
+   `50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/evidence/gate_a_frequency_precondition_observation_dde70523_01`
+   are sealed and independently validated.
+   That observation sampled both cores in 200 paired samples at 10 ms intervals;
+   both remained at `800000 kHz`. The required `1600000 kHz` state is supported
+   but was never observed, so the result is
+   `FAIL_REQUIRED_FREQUENCY_NOT_OBSERVED`. The reviewed probe source was
+   integrated at `dde70523d639d34defa37f1b55982e789ea52c18`; the closed
+   observation packet was sealed at
+   `f617e288d93eb20d3845356b4c233d15d8cf5c2d` and integrated with its
+   validators in `8726b3d92e80fe4c3047f0b9708248d0da0c92ea`.
 
-2. **10_cross_core_wormhole PDN lock-in** -- Pull `result_slot2_pdn.json` from the
-   Phenom box, evaluate v4:s5 pair, fire trials=300/mode for strict witness.
+2. **One preparation-only qualification, only if separately authorized** -- The
+   bounded preparation/restoration core, authority-gated transport, and final
+   process-custody repair are implemented, exact-head reviewed, and integrated
+   at `3cf5ae149251d0ba1e77a3c018177dba1e055e00`,
+   `f095f30de4821e15587b0f0e86a0842ce2d5aa5c`, and
+   `726f036f0021bdda90513430f4f0cca35aa65668`. No authority artifact exists.
+   A future owner decision may authorize at most one preparation-only pin,
+   200-pair observation, and restoration transaction with no retry. It would
+   not authorize a third smoke.
+
+3. **10_cross_core_wormhole PDN lock-in** -- The existing separate lane remains
+   `LIVE`: pull `result_slot2_pdn.json`, evaluate the `v4:s5` pair, and run the
+   pending `trials=300/mode` strict witness only under its own authorization.
+   The Gate A preparation boundary does not authorize that target activity.
 
 ### Gate
 
-Phase 6 Mode C does not run until Phase 5.10C passes (reproducible basin selection).
-See `50_5_10_encoding_wall/PHASE5_10_TO_PHASE6_HANDOFF.md`.
+Phase 6B.6 has entered. The target bundle is qualified and the frozen Gate A
+engineering-smoke executor is implemented. Two exact one-shot smoke authorities
+were consumed. The first attempt failed closed because temperature was
+unobservable. The second passed its `38.5 C` temperature preflight, then failed
+closed on the frequency veto because cores 4 and 5 were observed at
+`800000 kHz` rather than the
+required `1600000 kHz`. Neither attempt started the physical runtime, sender, or
+capture.
+
+The active Gate A execution-authority artifact and the frequency-preparation
+authority artifact are absent. No live preparation, target contact, third Gate A
+smoke, hardware execution, calibration, or scientific acquisition is
+authorized. The preparation/restoration and authority-transport source lanes
+are integrated engineering objects only. The exact next boundary is
+`PROJECT_OWNER_DECISION_FOR_ONE_NO_RETRY_FREQUENCY_PREPARATION_QUALIFICATION_AUTHORITY`.
 
 ### Verdict (TERMINUS)
 
 The construct/substrate frontier is measured-closed at the orientation boundary.
 The Phenom is a real/scalar substrate; the orientation quadrature is physically
 absent from public cosines. Full account: `50_6_fixed_point_substrate/TERMINUS.md`.
+
+This remains the pre-Phase 6B.6 scientific verdict. Phase 6B.6 entry and the
+fail-closed Gate A preflight evidence do not supersede it: no physical runtime or
+scientific acquisition occurred.
 
 
 ## Phase 7: The Endgame Experiments
@@ -1899,5 +1938,3 @@ are the current paths toward this channel.
 12. **Catalytic XOR tape survives /tmp wipe and full recompilation — fully reproducible** — All Phase 3 binaries and data regenerated from source in a single pipeline with identical results. Python and C implementations produce identical XOR semantics on shared L3 cache.
 
 13. **.holo eigenbasis architecture physically instantiated on consumer silicon** — Shared reference (Phase Master) + rotation chain (PPU layers) + computed output (XOR slot) + reversible restoration (SHA-256). Architecture matches the wormhole compression format: one SVh frame, two rotation layers, zero bits erased. First bare-metal demonstration of the .holo paradigm.
-
-
