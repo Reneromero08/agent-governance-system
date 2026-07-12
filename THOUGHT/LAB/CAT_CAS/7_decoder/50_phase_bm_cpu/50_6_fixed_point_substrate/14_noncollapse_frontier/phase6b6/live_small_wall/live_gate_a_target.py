@@ -42,6 +42,7 @@ CODED_PREPROJECTION_WARM_DECLARATION_SHAM_SCHEDULE_SHA256 = "89e53ef27c3799cc9c3
 CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_SCHEDULE_SHA256 = "51f3fb66cd4f03dff2d3e9aab9196d4f94d85e221cd552b04eda4929669cca2e"
 CODED_PREPROJECTION_WARM_PHASE_LOCAL_SCHEDULE_SHA256 = "1144b929905e30f3da1261fdedf5e6393c30d31a41c9a4dd2dc39e8573f4cbc4"
 CODED_PREPROJECTION_ACTIVE_QUERY_SCHEDULE_SHA256 = "5a0ac285435ba33a80a3272020f19c85004fc63949f1df4325a3ad90fdcd87f2"
+CODED_PREPROJECTION_SOURCE_PHASE_CHOP_SCHEDULE_SHA256 = "0308e6518c6e8e4fd60862f3825750a3865d3f8cb4cbef59d140eefb6d2e0fb1"
 READONLY_MICRO_READ_HZ = 2_000
 CODED_PREPROJECTION_READ_HZ = 2_000
 LEGACY_READ_HZ = 8_000
@@ -70,6 +71,7 @@ CODED_PREPROJECTION_VARIANTS = frozenset({
     "coded-preprojection-warm-phase-local-sham-loop",
     "coded-preprojection-warm-phase-local-loop",
     "coded-preprojection-active-query-loop",
+    "coded-preprojection-source-phase-chop-loop",
 })
 CODED_PREPROJECTION_RESTORED_VARIANTS = frozenset({
     "coded-preprojection-restored-loop",
@@ -82,6 +84,7 @@ CODED_PREPROJECTION_WARM_RESTORED_VARIANTS = frozenset({
     "coded-preprojection-warm-phase-local-sham-loop",
     "coded-preprojection-warm-phase-local-loop",
     "coded-preprojection-active-query-loop",
+    "coded-preprojection-source-phase-chop-loop",
 })
 CODED_PREPROJECTION_QUERY_SCRAMBLE_VARIANTS = frozenset({
     "coded-preprojection-warm-query-scramble-loop",
@@ -99,9 +102,13 @@ CODED_PREPROJECTION_PHASE_LOCAL_VARIANTS = frozenset({
     "coded-preprojection-warm-phase-local-sham-loop",
     "coded-preprojection-warm-phase-local-loop",
     "coded-preprojection-active-query-loop",
+    "coded-preprojection-source-phase-chop-loop",
 })
 CODED_PREPROJECTION_ACTIVE_QUERY_VARIANTS = frozenset({
     "coded-preprojection-active-query-loop",
+})
+CODED_PREPROJECTION_SOURCE_PHASE_CHOP_VARIANTS = frozenset({
+    "coded-preprojection-source-phase-chop-loop",
 })
 CODED_PREPROJECTION_NULL_CONTROL_VARIANTS = (
     CODED_PREPROJECTION_QUERY_SCRAMBLE_VARIANTS |
@@ -131,6 +138,8 @@ FORBIDDEN_PROCESS_MARKERS = (
 
 
 def coded_preprojection_schedule_sha256(pilot_variant: str) -> str:
+    if pilot_variant in CODED_PREPROJECTION_SOURCE_PHASE_CHOP_VARIANTS:
+        return CODED_PREPROJECTION_SOURCE_PHASE_CHOP_SCHEDULE_SHA256
     if pilot_variant in CODED_PREPROJECTION_ACTIVE_QUERY_VARIANTS:
         return CODED_PREPROJECTION_ACTIVE_QUERY_SCHEDULE_SHA256
     if pilot_variant in CODED_PREPROJECTION_QUERY_SCRAMBLE_VARIANTS:
@@ -1134,6 +1143,97 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
         if neutral_before is not None and neutral_after is not None
         else None
     )
+    source_phase_chop = pilot_variant in CODED_PREPROJECTION_SOURCE_PHASE_CHOP_VARIANTS
+    source_phase_chop_slots: dict[int, dict[str, Any]] = {}
+    source_phase_chop_sufficient = True
+    source_phase_chop_plus_mean: float | None = None
+    source_phase_chop_minus_mean: float | None = None
+    source_phase_chop_control_mean: float | None = None
+    source_phase_chop_control_floor: float | None = None
+    source_phase_chop_opposed = False
+    source_phase_chop_exceeds_controls = False
+    source_phase_chop_signal = False
+    if source_phase_chop:
+        for slot in stimulus_slots:
+            burst = burst_by_slot[slot]
+            burst_start = int(burst["burst_start_tsc"])
+            burst_finish = int(burst["burst_finish_tsc"])
+            require(burst_finish > burst_start, "source phase-chop burst has nonpositive span")
+            segment_values: list[list[float]] = [[] for _ in range(4)]
+            span = burst_finish - burst_start
+            for index, (_tsc, value) in enumerate(raw):
+                row = timing_rows[index]
+                if row["actual_slot"] != slot or row["valid_measurement"] != 1:
+                    continue
+                sample_mid = (row["started_tsc"] + row["finished_tsc"]) // 2
+                if sample_mid < burst_start or sample_mid >= burst_finish:
+                    continue
+                segment = int(((sample_mid - burst_start) * 4) // span)
+                segment = max(0, min(3, segment))
+                segment_values[segment].append(value)
+            segment_counts = [len(values) for values in segment_values]
+            segment_means = [_mean(values) for values in segment_values]
+            if any(count < 2 for count in segment_counts) or any(value is None for value in segment_means):
+                source_phase_chop_sufficient = False
+            token = str(lockin[slot]["token"])
+            phase_digit = int(token[1]) if len(token) == 2 and token[1].isdigit() else 0
+            if all(value is not None for value in segment_means):
+                raw_coordinate = reconstruct_coded_complex([float(value) for value in segment_means])
+                z = complex(raw_coordinate["real"], raw_coordinate["imag"])
+                phase = CODED_PHASES[phase_digit % len(CODED_PHASES)]
+                aligned = z * complex(math.cos(-phase), math.sin(-phase))
+                aligned_coordinate = {
+                    "real": aligned.real,
+                    "imag": aligned.imag,
+                    "abs": abs(aligned),
+                }
+            else:
+                raw_coordinate = None
+                aligned_coordinate = None
+            source_phase_chop_slots[slot] = {
+                "slot_index": slot,
+                "token": token,
+                "segment_sample_counts": segment_counts,
+                "segment_mean_response_cycles": segment_means,
+                "raw_lockin_coordinate": raw_coordinate,
+                "phase_aligned_coordinate": aligned_coordinate,
+                "phase_aligned_real": (
+                    aligned_coordinate["real"] if aligned_coordinate is not None else None
+                ),
+            }
+        plus_aligned = [
+            source_phase_chop_slots[slot]["phase_aligned_real"]
+            for slot in plus_slots
+            if source_phase_chop_slots[slot]["phase_aligned_real"] is not None
+        ]
+        minus_aligned = [
+            source_phase_chop_slots[slot]["phase_aligned_real"]
+            for slot in minus_slots
+            if source_phase_chop_slots[slot]["phase_aligned_real"] is not None
+        ]
+        control_aligned = [
+            source_phase_chop_slots[slot]["phase_aligned_real"]
+            for slot in post_slots
+            if source_phase_chop_slots[slot]["phase_aligned_real"] is not None
+        ]
+        require(
+            len(plus_aligned) == 4 and len(minus_aligned) == 4 and len(control_aligned) == 4,
+            "source phase-chop missing aligned coordinates",
+        )
+        source_phase_chop_plus_mean = statistics.fmean(plus_aligned)
+        source_phase_chop_minus_mean = statistics.fmean(minus_aligned)
+        source_phase_chop_control_mean = statistics.fmean(control_aligned)
+        control_spread = max(control_aligned) - min(control_aligned)
+        source_phase_chop_control_floor = max(
+            abs(source_phase_chop_control_mean),
+            control_spread,
+            source_off_range or 0.0,
+        )
+        source_phase_chop_opposed = source_phase_chop_plus_mean * source_phase_chop_minus_mean < 0.0
+        source_phase_chop_exceeds_controls = (
+            min(abs(source_phase_chop_plus_mean), abs(source_phase_chop_minus_mean)) >
+            3.0 * source_phase_chop_control_floor
+        )
     fold_odd_opposed = plus_z["imag"] * minus_z["imag"] < 0.0
     fold_odd_balance = abs(abs(plus_z["imag"]) - abs(minus_z["imag"]))
     control_floor = max(abs(post_z["imag"]), source_off_range or 0.0)
@@ -1148,6 +1248,18 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
         and fold_odd_exceeds_controls
         and all(bool(burst_by_slot[slot].get("completed_before_slot_end")) for slot in stimulus_slots)
     )
+    if source_phase_chop:
+        fold_odd_opposed = source_phase_chop_opposed
+        fold_odd_balance = abs(abs(float(source_phase_chop_plus_mean)) - abs(float(source_phase_chop_minus_mean)))
+        control_floor = float(source_phase_chop_control_floor)
+        fold_odd_exceeds_controls = source_phase_chop_exceeds_controls
+        source_phase_chop_signal = bool(
+            source_phase_chop_sufficient
+            and source_phase_chop_opposed
+            and source_phase_chop_exceeds_controls
+            and all(bool(burst_by_slot[slot].get("completed_before_slot_end")) for slot in stimulus_slots)
+        )
+        fold_odd_signal_candidate = source_phase_chop_signal
     null_control_kind = (
         "query_scramble"
         if pilot_variant in CODED_PREPROJECTION_QUERY_SCRAMBLE_VARIANTS
@@ -1181,18 +1293,25 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
     )
     active_query = pilot_variant in CODED_PREPROJECTION_ACTIVE_QUERY_VARIANTS
     measurement_mode = (
-        "catcas_active_query_delta_cycles"
-        if active_query else "catcas_coded_preprojection_response_cycles"
+        "catcas_source_phase_chop_response_cycles"
+        if source_phase_chop else (
+            "catcas_active_query_delta_cycles"
+            if active_query else "catcas_coded_preprojection_response_cycles"
+        )
     )
     primary_coordinate = (
-        "active-query balanced subbank delta quadrature fold-odd response"
-        if active_query else "post-control-centered quadrature fold-odd response"
+        "source-side in-slot phase-chop lock-in aligned by public token phase"
+        if source_phase_chop else (
+            "active-query balanced subbank delta quadrature fold-odd response"
+            if active_query else "post-control-centered quadrature fold-odd response"
+        )
     )
     return {
         "schema_id": "CAT_CAS_CODED_PREPROJECTION_LOOP_ANALYSIS_V1",
         "pilot_variant": pilot_variant,
         "measurement_mode": measurement_mode,
         "active_query_receiver_delta": active_query,
+        "source_phase_chop": source_phase_chop,
         "schedule": {
             "schedule_sha256": schedule_sha256,
             "slot_count": 16,
@@ -1225,6 +1344,20 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
             "pre_projection_private_fold_minus": minus_z,
             "post_projection_control": post_z,
         },
+        "source_phase_chop_lockin": (
+            {
+                "slots": source_phase_chop_slots,
+                "sufficient_segment_samples": source_phase_chop_sufficient,
+                "pre_projection_private_fold_plus_mean": source_phase_chop_plus_mean,
+                "pre_projection_private_fold_minus_mean": source_phase_chop_minus_mean,
+                "post_projection_control_mean": source_phase_chop_control_mean,
+                "control_floor_cycles": source_phase_chop_control_floor,
+                "opposed_sign": source_phase_chop_opposed,
+                "exceeds_controls": source_phase_chop_exceeds_controls,
+                "signal_candidate": source_phase_chop_signal,
+            }
+            if source_phase_chop else None
+        ),
         "source_off_whole_slot_range_cycles": source_off_range,
         "neutral_restoration": {
             "before_slot": neutral_before_slot,
@@ -1266,9 +1399,12 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
             f"{null_control_kind.replace('_', '-')} killing control only; no OrbitState coupling, path memory, holonomy, or Small Wall claim"
             if coded_null_control
             else (
-                "active-query coded-loop physical mapping only; requires matched active-query controls before any Small Wall claim"
-                if active_query
-                else "single coded-loop physical mapping; no OrbitState coupling, path memory, holonomy, or Small Wall claim"
+                "source-phase-chop coded-loop physical mapping only; requires matched source-phase sham before any Small Wall claim"
+                if source_phase_chop else (
+                    "active-query coded-loop physical mapping only; requires matched active-query controls before any Small Wall claim"
+                    if active_query
+                    else "single coded-loop physical mapping; no OrbitState coupling, path memory, holonomy, or Small Wall claim"
+                )
             )
         ),
     }
@@ -1408,6 +1544,7 @@ def execute(source_root: Path, output_root: Path, pilot_variant: str) -> dict[st
             "coded-preprojection-warm-phase-local-sham-loop",
             "coded-preprojection-warm-phase-local-loop",
             "coded-preprojection-active-query-loop",
+            "coded-preprojection-source-phase-chop-loop",
         },
         "unknown pilot variant",
     )
@@ -1564,6 +1701,7 @@ def parse_args() -> argparse.Namespace:
             "coded-preprojection-warm-phase-local-sham-loop",
             "coded-preprojection-warm-phase-local-loop",
             "coded-preprojection-active-query-loop",
+            "coded-preprojection-source-phase-chop-loop",
         ),
         default="pn",
     )

@@ -1,0 +1,180 @@
+{
+  "schema_id": "CAT_CAS_CODED_PREPROJECTION_SOURCE_PHASE_CHOP_CHECKPOINT_V1",
+  "checkpoint_date": "2026-07-12",
+  "starting_commit": "1b58eb9d7e8a243541a0e9d9276db7d94834b877",
+  "run": {
+    "run_id": "coded_preprojection_source_phase_chop_0",
+    "pilot_variant": "coded-preprojection-source-phase-chop-loop",
+    "local_run": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/coded_preprojection_source_phase_chop_0",
+    "remote_run": "/root/catcas_live_small_wall/coded_preprojection_source_phase_chop_0",
+    "command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_gate_a_first_light.py --run-id coded_preprojection_source_phase_chop_0 --pilot-variant coded-preprojection-source-phase-chop-loop",
+    "lab_device": "root@192.168.137.100",
+    "controller_status": "GATE_A_FIRST_LIGHT_COMPLETE",
+    "remote_returncode": 0,
+    "copy_verified": true,
+    "remote_cleaned": true,
+    "verified_file_count": 15
+  },
+  "source_binding": {
+    "source_bundle_sha256": "e9764a8163ca9d7635562ccc3d756264bf9afd3f5dc1e1b4d3b0aa79706271b3",
+    "schedule_sha256": "0308e6518c6e8e4fd60862f3825750a3865d3f8cb4cbef59d140eefb6d2e0fb1",
+    "schedule_tokens": "WU WU N0 P0 C0 M0 M1 C1 P1 P2 C2 M2 M3 C3 P3 N1",
+    "access_law": "CAT_CAS_SOURCE_PHASE_CHOP_V1",
+    "measurement_mode": "catcas_source_phase_chop_response_cycles",
+    "observation_kind": "experiment_owned_source_phase_chopped_buffer_cycles_per_access"
+  },
+  "predeclared_discriminator": {
+    "wall": "access-model selection after active-query receiver delta failed to clear controls",
+    "carrier": "CAT_CAS-owned occupancy and response buffers with source-side four-segment public phase waveform",
+    "operator": "same phase-local public P/C/M sequence, but each source burst is internally chopped into large/equal/small/equal or small/equal/large/equal segments before scalar receiver recording",
+    "observable": "passive receiver timing response segmented by burst time, reconstructed as an in-slot complex lock-in and phase-aligned by public token index",
+    "strongest_alternative_explanation": "source segment service curvature or control-slot timing spread rather than a restored pre-projection fold-odd carrier",
+    "killing_controls_present_in_run": "C slots, N0/N1 neutral restoration, balanced public phase sequence, one sender epoch, complete burst coverage",
+    "additional_control_needed_if_positive": "matched source-phase sham/null before any crossing claim",
+    "restoration_class": "neutral timing response restoration plus policy4/policy5 readback and verified copy-back"
+  },
+  "decoded_observables": {
+    "source_phase_chop_plus_mean": 35.98411458333335,
+    "source_phase_chop_minus_mean": -28.657747395833333,
+    "source_phase_chop_control_mean": -0.4480468749999995,
+    "source_phase_chop_control_floor": 27.4125,
+    "three_x_control_floor": 82.2375,
+    "opposed_sign": true,
+    "exceeds_controls": false,
+    "signal_candidate": false,
+    "neutral_absolute_delta_cycles": 0.5588281249999909,
+    "neutral_restoration_passed": true,
+    "sufficient_segment_samples": true
+  },
+  "integrity": {
+    "capture_quality_classification": "CAPTURE_ACCEPTED_WITH_SERVICE_SPIKES",
+    "sample_count": 16000,
+    "sample_count_per_slot": [
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000
+    ],
+    "all_bursts_completed_inside_slots": true,
+    "record_integrity_failure": false,
+    "missing_slot": false,
+    "sender_spill": false,
+    "skipped_deadline_count": 0,
+    "missed_deadline_count": 0,
+    "step_sender_epoch_count": 1,
+    "runtime_execution_count": 1
+  },
+  "lab_device_boundary": {
+    "temperature_preflight_c": 41.5,
+    "temperature_veto_c": 68.0,
+    "frequency_write_attempt_count": 8,
+    "restoration_complete": true,
+    "restoration_readback": {
+      "policy4": {
+        "scaling_min_freq": 800000,
+        "scaling_max_freq": 3200000,
+        "resolved_path": "/sys/devices/system/cpu/cpufreq/policy4"
+      },
+      "policy5": {
+        "scaling_min_freq": 800000,
+        "scaling_max_freq": 3200000,
+        "resolved_path": "/sys/devices/system/cpu/cpufreq/policy5"
+      }
+    },
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "physical_address_access": false,
+    "cache_set_mapping": false,
+    "experiment_owned_memory_only": true,
+    "forbidden_process_matches_before": 0,
+    "forbidden_process_matches_after": 0
+  },
+  "focused_validation": [
+    {
+      "command": "git diff --check -- THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": ".\\.venv\\Scripts\\python.exe -m py_compile THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\live_gate_a_target.py THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_gate_a_first_light.py",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": "gate_a_worker_local_check --validate-only && gate_a_worker_local_check --self-test-coded-preprojection-source-phase-chop",
+      "exit_code": 0,
+      "output": "{\"automatic_retry\":false,\"control_writes\":0,\"engineering_smoke_executor_implemented\":true,\"hardware_executions\":0,\"msr_reads\":0,\"msr_writes\":0,\"receiver_captures\":0,\"sender_starts\":0,\"slot_count\":16,\"status\":\"GATE_A_WORKER_VALIDATE_ONLY_OK\",\"validate_only\":true,\"live_execution_bound\":false}\n{\"status\":\"GATE_A_WORKER_MOCK_SELF_TEST_OK\",\"network_connections\":0,\"hardware_executions\":0,\"frequency_writes\":0,\"voltage_writes\":0,\"msr_reads\":0,\"msr_writes\":0,\"slot_count\":16,\"sample_count\":16000,\"step_sender_epoch_count\":1,\"temperature_receipt_count\":2}"
+    },
+    {
+      "command": "gate_a_worker_local_check --self-test-coded-preprojection-source-phase-chop-retain <ignored runtime dir>; analyze_runtime(..., coded-preprojection-source-phase-chop-loop)",
+      "exit_code": 0,
+      "output": "{\"analysis_ok\": true, \"engineering_candidate\": false, \"measurement_mode\": \"catcas_source_phase_chop_response_cycles\", \"schema_id\": \"CAT_CAS_CODED_PREPROJECTION_LOOP_ANALYSIS_V1\", \"source_phase_chop\": true}"
+    }
+  ],
+  "raw_outputs": {
+    "CONTROLLER_RESULT.json": {
+      "size": 791,
+      "sha256": "614a6de99a6102b15876b7a0ba884b7b63ec622d7b3e441a237f62c1e19b8708"
+    },
+    "FINAL_RESULT.json": {
+      "size": 8150,
+      "sha256": "f69eac70872c29b3e85d6b1da6ed1036e424be3dbb3af51360b697a98113d374"
+    },
+    "FIRST_LIGHT_ANALYSIS.json": {
+      "size": 22980,
+      "sha256": "21bf160fe4cfe7bbebac59b6f034b3824ce98e6fbdd761f66b3111554a93f48a"
+    },
+    "FILE_MANIFEST.json": {
+      "size": 1953,
+      "sha256": "ddeb459a6e4d95c7c3fb80a303df0aa00d575f309090d799fff1850037fdbc63"
+    },
+    "CONTROLLER_STDOUT.txt": {
+      "size": 8280,
+      "sha256": "8f2f17898c12cd15ce98abe9ec4720147e64b4263457f8dd4e0329a0943efd6c"
+    },
+    "CONTROLLER_STDERR.txt": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "FREQUENCY_WRITE_LEDGER.json": {
+      "size": 3966,
+      "sha256": "551308654fc2945f7931a8d52576318aa526ba4f45b00593d76808958f10dc11"
+    },
+    "PINNED_OBSERVATION.json": {
+      "size": 45810,
+      "sha256": "0391df48e0885cc08ffb0ac9915299b9dec194dd7821180d41e583f1dc53f576"
+    },
+    "POLICY_SNAPSHOT.json": {
+      "size": 2300,
+      "sha256": "a91d64655d220d267c0b746ac672475e51097db9e715326ccb0773f0fe50cc34"
+    },
+    "RUNTIME_MONITOR.json": {
+      "size": 18680,
+      "sha256": "43cbfd84e6a573d2151f5ffbb53acd196679e5cca6de945fc59f3d2630fc0040"
+    },
+    "RUNTIME_PROCESS.json": {
+      "size": 4766,
+      "sha256": "f36bbfc751b91080fba04cf196b9350d0aa2512b356442bc8a2d7f461f50cd89"
+    }
+  },
+  "classification": {
+    "marker": "CODED_PREPROJECTION_SOURCE_PHASE_CHOP_RESPONSE_NOT_ESTABLISHED",
+    "mechanical_failure": false,
+    "scientific_result": "negative for source-side phase-chop access model under this schedule",
+    "interpretation": "The source-side phase waveform produced opposed signs and restored cleanly, but the control floor was too large. This kills the exact source-phase-chop mapping without killing all source-owned carrier or query-algebra directions.",
+    "claim_ceiling_after_run": "EVICTION_SENTINEL_RESPONSE_FOUND"
+  }
+}

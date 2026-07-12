@@ -6,21 +6,24 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`CODED_PREPROJECTION_ACTIVE_QUERY_RESPONSE_NOT_ESTABLISHED`
+`CODED_PREPROJECTION_SOURCE_PHASE_CHOP_RESPONSE_NOT_ESTABLISHED`
 
 **Active wall:**
 The current wall is still carrier/access-model selection. Timing, ownership-intent PMU
 footprint, IBS availability, WC/flush-order, eviction-sentinel PMU/timing
-phase-local mappings, and the first active-query receiver-delta access model either
-failed controls or did not expose a usable fold-odd carrier. The eviction-sentinel
+phase-local mappings, the first active-query receiver-delta access model, and the
+first source-side phase-chopped access model either failed controls or did not expose a
+usable fold-odd carrier. The eviction-sentinel
 first-light run remains useful because it changed restoration from byte equality to a
 measured carrier equivalence class, but the phase-local remaps did not promote it. The
 new `coded_preprojection_active_query_0` run moved the query into the receiver's
 measured workload before scalar recording and restored cleanly, but its opposed
-fold-odd candidate did not clear the post-control floor. The active wall is now a
-stronger carrier or access model that preserves a conjugate/source-side coordinate
-before the public fold-even projection while retaining a direct restoration law and a
-killing control.
+fold-odd candidate did not clear the post-control floor. The follow-on
+`coded_preprojection_source_phase_chop_0` moved the public phase waveform into the
+source burst before scalar recording and also restored cleanly, but its control floor
+was too large for the `3x` rule. The active wall is now a materially stronger
+source-owned carrier/query algebra, not another remap of phase-local timing,
+active-query subbank order, or source burst segmentation.
 
 ## Established
 
@@ -568,6 +571,7 @@ F10_ROUTE_STATE_PILOT_CHECKPOINT_20260712.json
 CODED_PREPROJECTION_DECLARATION_SHAM_CHECKPOINT_20260712.json
 CODED_PREPROJECTION_PHASE_LOCAL_CHECKPOINT_20260712.json
 CODED_PREPROJECTION_ACTIVE_QUERY_CHECKPOINT_20260712.json
+CODED_PREPROJECTION_SOURCE_PHASE_CHOP_CHECKPOINT_20260712.json
 ```
 
 Historical V2 Gate A source was restored and should remain a sealed reference. New
@@ -1074,6 +1078,48 @@ access model and restores cleanly, but does not establish a control-clean fold-o
 carrier. H5 remains alive only for a materially stronger carrier/query algebra, not a
 repeat of this phase-local active-query delta schedule.
 
+The source-phase-chop discriminator then kept the receiver passive and moved the
+public phase waveform into the source burst itself. Each driven slot used four
+source-side segments over CAT_CAS-owned occupancy buffers before scalar receiver
+recording:
+
+```text
+run id        coded_preprojection_source_phase_chop_0
+variant       coded-preprojection-source-phase-chop-loop
+source bundle e9764a8163ca9d7635562ccc3d756264bf9afd3f5dc1e1b4d3b0aa79706271b3
+schedule hash 0308e6518c6e8e4fd60862f3825750a3865d3f8cb4cbef59d140eefb6d2e0fb1
+schedule      WU WU N0 P0 C0 M0 M1 C1 P1 P2 C2 M2 M3 C3 P3 N1
+```
+
+The transaction completed with verified copy-back and remote cleanup. It restored
+policy4 and policy5 to `800000-3200000` kHz by readback, performed zero voltage
+access and zero MSR access, stayed below the 68 C temperature veto, produced all
+16,000 samples, completed every stimulus burst inside its slot, skipped no deadlines,
+had no missing slot, no sender spill, and no record-integrity failure. Capture was
+accepted with service spikes.
+
+Primary source-phase lock-in:
+
+```text
+plus mean          +35.98411458333335
+minus mean         -28.657747395833333
+control mean        -0.4480468749999995
+control floor      27.4125
+three-times floor  82.2375
+opposed sign        true
+signal candidate    false
+neutral delta        0.5588281249999909
+```
+
+Checkpoint:
+
+`CODED_PREPROJECTION_SOURCE_PHASE_CHOP_CHECKPOINT_20260712.json`
+
+**Status:** this exact source-side phase-chop mapping is negative. It produces opposed
+signs and restores cleanly, but the control floor is too large for the `3x` rule. H5
+remains alive only for a materially stronger source-owned carrier/query algebra, not a
+repeat of this phase-local burst-segmentation schedule.
+
 ### H6 - Alternative carriers remain available
 
 Candidate families:
@@ -1385,25 +1431,28 @@ carrier family or access model rather than continuing eviction-sentinel remaps.
 ## Cheapest current discriminator
 
 Change carrier family or access model again, not another remap of the same
-phase-local timing/PMU/eviction/active-query geometry. The run must stay closed:
-CAT_CAS-owned buffers only, predetermined geometry, no physical-address access, no
-cache-set mapping, no unrelated-process observation, and no MSR or voltage access.
+phase-local timing/PMU/eviction/active-query/source-phase-chop geometry. The run must
+stay closed: CAT_CAS-owned buffers only, predetermined geometry, no physical-address
+access, no cache-set mapping, no unrelated-process observation, and no MSR or voltage
+access.
 
 The next probe should answer:
 
 1. Is there a source-owned runtime carrier whose state survives long enough to couple
    before the public fold-even projection?
 2. Can the query algebra preserve a conjugate/source-side coordinate without turning
-   into receiver-order service curvature?
+   into receiver-order service curvature or source-segment timing spread?
 3. Does a killing control remove the response without relying on route, line-set,
-   eviction-prep, active-query subbank order, or sequence-position imbalance?
+   eviction-prep, active-query subbank order, source-segment timing spread, or
+   sequence-position imbalance?
 4. Does the carrier restore beyond byte equality under the new observable?
 
 Do not rerun the same timing coded loop, another scalar PMU route metric,
 unconditioned transient timing repeat, IBS availability probe, WC/flush-order pair, or
 unlabeled cache-line rectangle unchanged. Do not rerun
 `coded_preprojection_active_query_0` or the same active-query receiver-delta schedule
-unchanged.
+unchanged. Do not rerun `coded_preprojection_source_phase_chop_0` or the same
+source-phase-chop schedule unchanged.
 
 ## Current claim ceiling
 
@@ -1431,10 +1480,12 @@ candidate signs, but did not exceed the three-times-sham threshold.
 contrast collapses the sign. `f10_eviction_duration_1` extended the rejection to a
 duration-primary observable. `coded_preprojection_active_query_0` then changed the
 access model by measuring a balanced active-query receiver delta before scalar
-recording, but the opposed candidate did not clear the post-control floor. The current
-marker remains short of `SMALL_WALL_CROSSED`; the next move must change carrier family
-or access model rather than keep remapping the same eviction-sentinel PMU/timing or
-active-query phase-local geometry.
+recording, but the opposed candidate did not clear the post-control floor.
+`coded_preprojection_source_phase_chop_0` then moved the public phase waveform into the
+source burst before scalar recording, but its control floor was too large for the
+`3x` rule. The current marker remains short of `SMALL_WALL_CROSSED`; the next move
+must change carrier family or access model rather than keep remapping the same
+eviction-sentinel PMU/timing, active-query phase-local, or source-phase-chop geometry.
 
 ## State update rule
 
