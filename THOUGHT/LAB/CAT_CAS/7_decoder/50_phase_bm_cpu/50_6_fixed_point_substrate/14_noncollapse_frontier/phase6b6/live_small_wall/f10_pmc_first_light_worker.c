@@ -1,0 +1,657 @@
+#define _GNU_SOURCE
+
+#include <errno.h>
+#include <fcntl.h>
+#include <inttypes.h>
+#include <linux/perf_event.h>
+#include <pthread.h>
+#include <sched.h>
+#include <stdatomic.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/ioctl.h>
+#include <sys/stat.h>
+#include <sys/syscall.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <time.h>
+#include <unistd.h>
+
+#define CATCAS_CORE_A 4
+#define CATCAS_CORE_B 5
+#define CACHE_LINE_BYTES 64
+#define CARRIER_LINES 4096
+#define READ_ITERATIONS 512
+#define WRITE_ITERATIONS 512
+#define PINGPONG_ITERATIONS 192
+#define MAX_GROUP_EVENTS 4
+#define SUPPORT_EVENTS 8
+#define RESULT_SCHEMA "CAT_CAS_F10_PMC_FIRST_LIGHT_RESULT_V1"
+
+struct event_def {
+    const char *name;
+    unsigned int event_select;
+    unsigned int unit_mask;
+    const char *kind;
+};
+
+struct event_result {
+    uint64_t value;
+    uint64_t id;
+};
+
+struct group_result {
+    bool opened;
+    bool unmultiplexed;
+    int open_errno;
+    uint64_t time_enabled;
+    uint64_t time_running;
+    struct event_result events[MAX_GROUP_EVENTS];
+};
+
+struct carrier {
+    unsigned char *bytes;
+    size_t byte_count;
+    size_t line_count;
+};
+
+struct pingpong_context {
+    struct carrier *carrier;
+    atomic_int turn;
+    atomic_int ready;
+    atomic_int done;
+    volatile uint64_t sink_a;
+    volatile uint64_t sink_b;
+};
+
+static const struct event_def support_events[SUPPORT_EVENTS] = {
+    {"cpu_cycles_not_halted", 0x076, 0x00, "core"},
+    {"dc_refills_l2_or_nb_all_states", 0x042, 0x1f, "core"},
+    {"dc_refills_from_nb_all_states", 0x043, 0x1f, "core"},
+    {"dc_refills_from_nb_owned_modified", 0x043, 0x18, "core"},
+    {"dc_lines_evicted_modified", 0x044, 0x10, "core"},
+    {"cache_block_commands_change_to_dirty", 0x0ea, 0x20, "northbridge"},
+    {"probe_responses_dirty", 0x0ec, 0x0c, "northbridge"},
+    {"locked_ops_executed", 0x024, 0x01, "core"}
+};
+
+static const struct event_def primary_group[MAX_GROUP_EVENTS] = {
+    {"cpu_cycles_not_halted", 0x076, 0x00, "core"},
+    {"dc_refills_from_nb_all_states", 0x043, 0x1f, "core"},
+    {"cache_block_commands_change_to_dirty", 0x0ea, 0x20, "northbridge"},
+    {"probe_responses_dirty", 0x0ec, 0x0c, "northbridge"}
+};
+
+static const struct event_def fallback_group[MAX_GROUP_EVENTS] = {
+    {"cpu_cycles_not_halted", 0x076, 0x00, "core"},
+    {"dc_refills_l2_or_nb_all_states", 0x042, 0x1f, "core"},
+    {"dc_refills_from_nb_all_states", 0x043, 0x1f, "core"},
+    {"dc_lines_evicted_modified", 0x044, 0x10, "core"}
+};
+
+struct read_group_payload {
+    uint64_t nr;
+    uint64_t time_enabled;
+    uint64_t time_running;
+    struct {
+        uint64_t value;
+        uint64_t id;
+    } values[MAX_GROUP_EVENTS];
+};
+
+static long perf_event_open_call(
+    struct perf_event_attr *attr,
+    pid_t pid,
+    int cpu,
+    int group_fd,
+    unsigned long flags
+) {
+    return syscall(__NR_perf_event_open, attr, pid, cpu, group_fd, flags);
+}
+
+static uint64_t raw_config(unsigned int event_select, unsigned int unit_mask) {
+    return (uint64_t)(event_select & 0xffu) |
+           ((uint64_t)(unit_mask & 0xffu) << 8) |
+           ((uint64_t)(event_select & 0xf00u) << 24);
+}
+
+static int self_test(void) {
+    if (raw_config(0x076u, 0x00u) != 0x76ull) return 1;
+    if (raw_config(0x0eau, 0x20u) != 0x20eaull) return 1;
+    if (raw_config(0x0ecu, 0x0cu) != 0x0cecull) return 1;
+    if (raw_config(0x1abu, 0xcdu) != 0x10000cdabull) return 1;
+    printf("F10_PMC_FIRST_LIGHT_WORKER_SELF_TEST_OK\n");
+    return 0;
+}
+
+static void fill_attr(struct perf_event_attr *attr, const struct event_def *event, bool disabled) {
+    memset(attr, 0, sizeof(*attr));
+    attr->type = PERF_TYPE_RAW;
+    attr->size = sizeof(*attr);
+    attr->config = raw_config(event->event_select, event->unit_mask);
+    attr->disabled = disabled ? 1u : 0u;
+    attr->exclude_kernel = 1u;
+    attr->exclude_hv = 1u;
+    attr->read_format = PERF_FORMAT_GROUP |
+        PERF_FORMAT_TOTAL_TIME_ENABLED |
+        PERF_FORMAT_TOTAL_TIME_RUNNING |
+        PERF_FORMAT_ID;
+}
+
+static int pin_to_core(int core) {
+    cpu_set_t set;
+    CPU_ZERO(&set);
+    CPU_SET(core, &set);
+    return sched_setaffinity(0, sizeof(set), &set);
+}
+
+static uint64_t monotonic_ns(void) {
+    struct timespec ts;
+    if (clock_gettime(CLOCK_MONOTONIC, &ts) != 0) return 0;
+    return (uint64_t)ts.tv_sec * 1000000000ull + (uint64_t)ts.tv_nsec;
+}
+
+static uint64_t fnv1a64(const unsigned char *data, size_t len) {
+    uint64_t hash = 1469598103934665603ull;
+    for (size_t i = 0; i < len; i++) {
+        hash ^= (uint64_t)data[i];
+        hash *= 1099511628211ull;
+    }
+    return hash;
+}
+
+static void init_carrier(struct carrier *carrier) {
+    for (size_t i = 0; i < carrier->byte_count; i++) {
+        carrier->bytes[i] = (unsigned char)((i * 131u + 17u) & 0xffu);
+    }
+}
+
+static void prefault_carrier(struct carrier *carrier) {
+    volatile unsigned char sink = 0;
+    for (size_t line = 0; line < carrier->line_count; line++) {
+        unsigned char *p = carrier->bytes + line * CACHE_LINE_BYTES;
+        sink ^= *p;
+        *p = (unsigned char)(*p ^ 0u);
+    }
+    if (sink == 255u) {
+        carrier->bytes[0] ^= sink;
+    }
+}
+
+static void idle_pause(void) {
+    struct timespec ts;
+    ts.tv_sec = 0;
+    ts.tv_nsec = 100000000L;
+    nanosleep(&ts, NULL);
+}
+
+__attribute__((noinline, noclone))
+static void core4_read_sweep(struct carrier *carrier) {
+    volatile uint64_t sink = 0;
+    if (pin_to_core(CATCAS_CORE_A) != 0) return;
+    for (int iter = 0; iter < READ_ITERATIONS; iter++) {
+        for (size_t line = 0; line < carrier->line_count; line++) {
+            volatile uint64_t *p = (volatile uint64_t *)(void *)(carrier->bytes + line * CACHE_LINE_BYTES);
+            sink += *p;
+        }
+    }
+    if (sink == 0xfeedfaceull) carrier->bytes[0] ^= 1u;
+}
+
+__attribute__((noinline, noclone))
+static void core4_write_sweep(struct carrier *carrier) {
+    if (pin_to_core(CATCAS_CORE_A) != 0) return;
+    for (int iter = 0; iter < WRITE_ITERATIONS; iter++) {
+        for (size_t line = 0; line < carrier->line_count; line++) {
+            volatile uint64_t *p = (volatile uint64_t *)(void *)(carrier->bytes + line * CACHE_LINE_BYTES);
+            *p += 1u;
+        }
+    }
+}
+
+static void *pingpong_core_a(void *arg) {
+    struct pingpong_context *ctx = (struct pingpong_context *)arg;
+    if (pin_to_core(CATCAS_CORE_A) != 0) {
+        atomic_store(&ctx->done, 1);
+        return NULL;
+    }
+    atomic_fetch_add(&ctx->ready, 1);
+    for (int iter = 0; iter < PINGPONG_ITERATIONS; iter++) {
+        while (atomic_load_explicit(&ctx->turn, memory_order_acquire) != 0) {
+            if (atomic_load_explicit(&ctx->done, memory_order_acquire) != 0) {
+                return NULL;
+            }
+            sched_yield();
+        }
+        if (atomic_load_explicit(&ctx->done, memory_order_acquire) != 0) {
+            return NULL;
+        }
+        for (size_t line = 0; line < ctx->carrier->line_count; line++) {
+            volatile uint64_t *p = (volatile uint64_t *)(void *)(ctx->carrier->bytes + line * CACHE_LINE_BYTES);
+            *p += 3u;
+            ctx->sink_a += *p;
+        }
+        atomic_store_explicit(&ctx->turn, 1, memory_order_release);
+    }
+    return NULL;
+}
+
+static void *pingpong_core_b(void *arg) {
+    struct pingpong_context *ctx = (struct pingpong_context *)arg;
+    if (pin_to_core(CATCAS_CORE_B) != 0) {
+        atomic_store(&ctx->done, 1);
+        return NULL;
+    }
+    atomic_fetch_add(&ctx->ready, 1);
+    for (int iter = 0; iter < PINGPONG_ITERATIONS; iter++) {
+        while (atomic_load_explicit(&ctx->turn, memory_order_acquire) != 1) {
+            if (atomic_load_explicit(&ctx->done, memory_order_acquire) != 0) {
+                return NULL;
+            }
+            sched_yield();
+        }
+        if (atomic_load_explicit(&ctx->done, memory_order_acquire) != 0) {
+            return NULL;
+        }
+        for (size_t line = 0; line < ctx->carrier->line_count; line++) {
+            volatile uint64_t *p = (volatile uint64_t *)(void *)(ctx->carrier->bytes + line * CACHE_LINE_BYTES);
+            *p += 5u;
+            ctx->sink_b += *p;
+        }
+        atomic_store_explicit(&ctx->turn, 0, memory_order_release);
+    }
+    return NULL;
+}
+
+__attribute__((noinline, noclone))
+static int cross_core_pingpong_write(struct carrier *carrier) {
+    pthread_t a;
+    pthread_t b;
+    struct pingpong_context ctx;
+    memset(&ctx, 0, sizeof(ctx));
+    ctx.carrier = carrier;
+    atomic_init(&ctx.turn, 0);
+    atomic_init(&ctx.ready, 0);
+    atomic_init(&ctx.done, 0);
+    if (pthread_create(&a, NULL, pingpong_core_a, &ctx) != 0) return -1;
+    if (pthread_create(&b, NULL, pingpong_core_b, &ctx) != 0) {
+        atomic_store_explicit(&ctx.done, 1, memory_order_release);
+        pthread_join(a, NULL);
+        return -1;
+    }
+    while (atomic_load(&ctx.ready) < 2 && atomic_load(&ctx.done) == 0) {
+        sched_yield();
+    }
+    pthread_join(a, NULL);
+    pthread_join(b, NULL);
+    return atomic_load(&ctx.done) == 0 ? 0 : -1;
+}
+
+static int open_single_event(const struct event_def *event, int core, uint64_t *id_out) {
+    struct perf_event_attr attr;
+    fill_attr(&attr, event, true);
+    int fd = (int)perf_event_open_call(&attr, -1, core, -1, PERF_FLAG_FD_CLOEXEC);
+    if (fd < 0) return -errno;
+    uint64_t id = 0;
+    if (ioctl(fd, PERF_EVENT_IOC_ID, &id) == 0 && id_out) *id_out = id;
+    close(fd);
+    return 0;
+}
+
+static int open_group(const struct event_def group[MAX_GROUP_EVENTS], int core, int fds[MAX_GROUP_EVENTS], uint64_t ids[MAX_GROUP_EVENTS]) {
+    for (int i = 0; i < MAX_GROUP_EVENTS; i++) {
+        fds[i] = -1;
+        ids[i] = 0;
+    }
+    for (int i = 0; i < MAX_GROUP_EVENTS; i++) {
+        struct perf_event_attr attr;
+        fill_attr(&attr, &group[i], i == 0);
+        int group_fd = i == 0 ? -1 : fds[0];
+        fds[i] = (int)perf_event_open_call(&attr, -1, core, group_fd, PERF_FLAG_FD_CLOEXEC);
+        if (fds[i] < 0) {
+            int saved = errno;
+            for (int j = 0; j < i; j++) close(fds[j]);
+            return -saved;
+        }
+        if (ioctl(fds[i], PERF_EVENT_IOC_ID, &ids[i]) != 0) {
+            int saved = errno;
+            for (int j = 0; j <= i; j++) close(fds[j]);
+            return -saved;
+        }
+    }
+    return 0;
+}
+
+static int read_group(int leader_fd, struct group_result *result) {
+    struct read_group_payload payload;
+    memset(&payload, 0, sizeof(payload));
+    ssize_t got = read(leader_fd, &payload, sizeof(payload));
+    if (got < 0) return -errno;
+    if ((size_t)got < sizeof(uint64_t) * 3u) return -EIO;
+    if (payload.nr != MAX_GROUP_EVENTS) return -EIO;
+    result->time_enabled = payload.time_enabled;
+    result->time_running = payload.time_running;
+    result->unmultiplexed = payload.time_enabled == payload.time_running;
+    for (int i = 0; i < MAX_GROUP_EVENTS; i++) {
+        result->events[i].value = payload.values[i].value;
+        result->events[i].id = payload.values[i].id;
+    }
+    return 0;
+}
+
+static int measure_window(
+    const struct event_def group[MAX_GROUP_EVENTS],
+    const char *window_name,
+    struct carrier *carrier,
+    struct group_result *result,
+    uint64_t *duration_ns,
+    uint64_t *digest_before,
+    uint64_t *digest_after_restore
+) {
+    int fds[MAX_GROUP_EVENTS];
+    uint64_t ids[MAX_GROUP_EVENTS];
+    memset(result, 0, sizeof(*result));
+    init_carrier(carrier);
+    prefault_carrier(carrier);
+    *digest_before = fnv1a64(carrier->bytes, carrier->byte_count);
+    int opened = open_group(group, CATCAS_CORE_A, fds, ids);
+    if (opened != 0) {
+        result->open_errno = -opened;
+        return opened;
+    }
+    result->opened = true;
+    if (ioctl(fds[0], PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t start = monotonic_ns();
+    if (ioctl(fds[0], PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    int work_rc = 0;
+    if (strcmp(window_name, "idle_pause") == 0) {
+        idle_pause();
+    } else if (strcmp(window_name, "core4_read_sweep") == 0) {
+        core4_read_sweep(carrier);
+    } else if (strcmp(window_name, "core4_write_sweep") == 0) {
+        core4_write_sweep(carrier);
+    } else if (strcmp(window_name, "cross_core_pingpong_write") == 0) {
+        work_rc = cross_core_pingpong_write(carrier);
+    } else {
+        work_rc = -1;
+    }
+    if (ioctl(fds[0], PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t end = monotonic_ns();
+    int read_rc = read_group(fds[0], result);
+    for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+    if (read_rc != 0) return read_rc;
+    if (work_rc != 0) return -EIO;
+    *duration_ns = end >= start ? end - start : 0;
+    init_carrier(carrier);
+    *digest_after_restore = fnv1a64(carrier->bytes, carrier->byte_count);
+    return 0;
+}
+
+static const char *json_bool(bool value) {
+    return value ? "true" : "false";
+}
+
+static void print_event_def(FILE *out, const struct event_def *event) {
+    fprintf(
+        out,
+        "{\"name\":\"%s\",\"event_select_hex\":\"0x%03x\",\"unit_mask_hex\":\"0x%02x\",\"raw_config_hex\":\"0x%llx\",\"kind\":\"%s\"}",
+        event->name,
+        event->event_select,
+        event->unit_mask,
+        (unsigned long long)raw_config(event->event_select, event->unit_mask),
+        event->kind
+    );
+}
+
+static void print_group_defs(FILE *out, const struct event_def group[MAX_GROUP_EVENTS]) {
+    fprintf(out, "[");
+    for (int i = 0; i < MAX_GROUP_EVENTS; i++) {
+        if (i) fprintf(out, ",");
+        print_event_def(out, &group[i]);
+    }
+    fprintf(out, "]");
+}
+
+static void print_group_result(FILE *out, const struct event_def group[MAX_GROUP_EVENTS], const struct group_result *result) {
+    fprintf(
+        out,
+        "{\"opened\":%s,\"unmultiplexed\":%s,\"open_errno\":%d,\"time_enabled\":%" PRIu64 ",\"time_running\":%" PRIu64 ",\"counts\":[",
+        json_bool(result->opened),
+        json_bool(result->unmultiplexed),
+        result->open_errno,
+        result->time_enabled,
+        result->time_running
+    );
+    for (int i = 0; i < MAX_GROUP_EVENTS; i++) {
+        if (i) fprintf(out, ",");
+        fprintf(
+            out,
+            "{\"name\":\"%s\",\"id\":%" PRIu64 ",\"value\":%" PRIu64 "}",
+            group[i].name,
+            result->events[i].id,
+            result->events[i].value
+        );
+    }
+    fprintf(out, "]}");
+}
+
+static uint64_t event_value_by_name(const struct group_result *result, const struct event_def group[MAX_GROUP_EVENTS], const char *name) {
+    for (int i = 0; i < MAX_GROUP_EVENTS; i++) {
+        if (strcmp(group[i].name, name) == 0) return result->events[i].value;
+    }
+    return 0;
+}
+
+static int ensure_dir(const char *path) {
+    if (mkdir(path, 0700) == 0) return 0;
+    if (errno == EEXIST) return 0;
+    return -1;
+}
+
+int main(int argc, char **argv) {
+    const char *output_root = NULL;
+    if (argc == 3 && strcmp(argv[1], "--output-root") == 0) {
+        output_root = argv[2];
+    } else if (argc == 2 && strcmp(argv[1], "--self-test") == 0) {
+        return self_test();
+    } else {
+        fprintf(stderr, "usage: %s --output-root <absolute-output-root>\n", argv[0]);
+        return 2;
+    }
+    if (output_root[0] != '/') {
+        fprintf(stderr, "output root must be absolute\n");
+        return 2;
+    }
+    if (ensure_dir(output_root) != 0) {
+        fprintf(stderr, "cannot create output root: %s\n", strerror(errno));
+        return 1;
+    }
+
+    struct carrier carrier;
+    carrier.line_count = CARRIER_LINES;
+    carrier.byte_count = CARRIER_LINES * CACHE_LINE_BYTES;
+    if (posix_memalign((void **)&carrier.bytes, CACHE_LINE_BYTES, carrier.byte_count) != 0) {
+        fprintf(stderr, "carrier allocation failed\n");
+        return 1;
+    }
+    init_carrier(&carrier);
+    uint64_t initial_digest = fnv1a64(carrier.bytes, carrier.byte_count);
+
+    uint64_t support_ids[SUPPORT_EVENTS];
+    int support_rc[SUPPORT_EVENTS];
+    for (int i = 0; i < SUPPORT_EVENTS; i++) {
+        support_ids[i] = 0;
+        support_rc[i] = open_single_event(&support_events[i], CATCAS_CORE_A, &support_ids[i]);
+    }
+
+    int primary_fds[MAX_GROUP_EVENTS];
+    uint64_t primary_ids[MAX_GROUP_EVENTS];
+    int primary_open_rc = open_group(primary_group, CATCAS_CORE_A, primary_fds, primary_ids);
+    if (primary_open_rc == 0) {
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(primary_fds[i]);
+    }
+    int fallback_fds[MAX_GROUP_EVENTS];
+    uint64_t fallback_ids[MAX_GROUP_EVENTS];
+    int fallback_open_rc = open_group(fallback_group, CATCAS_CORE_A, fallback_fds, fallback_ids);
+    if (fallback_open_rc == 0) {
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fallback_fds[i]);
+    }
+
+    const struct event_def *selected_group = NULL;
+    const char *selected_group_name = NULL;
+    if (primary_open_rc == 0) {
+        selected_group = primary_group;
+        selected_group_name = "primary_nb_coherence";
+    } else if (fallback_open_rc == 0) {
+        selected_group = fallback_group;
+        selected_group_name = "fallback_core_cache";
+    } else {
+        selected_group = primary_group;
+        selected_group_name = "none_opened";
+    }
+
+    const char *windows[] = {
+        "idle_pause",
+        "core4_read_sweep",
+        "core4_write_sweep",
+        "cross_core_pingpong_write"
+    };
+    enum { WINDOW_COUNT = 4 };
+    struct group_result results[WINDOW_COUNT];
+    uint64_t durations[WINDOW_COUNT];
+    uint64_t digest_before[WINDOW_COUNT];
+    uint64_t digest_after[WINDOW_COUNT];
+    int window_rc[WINDOW_COUNT];
+    for (int i = 0; i < WINDOW_COUNT; i++) {
+        memset(&results[i], 0, sizeof(results[i]));
+        durations[i] = 0;
+        digest_before[i] = 0;
+        digest_after[i] = 0;
+        if (strcmp(selected_group_name, "none_opened") == 0) {
+            window_rc[i] = -ENODEV;
+        } else {
+            window_rc[i] = measure_window(
+                selected_group,
+                windows[i],
+                &carrier,
+                &results[i],
+                &durations[i],
+                &digest_before[i],
+                &digest_after[i]
+            );
+        }
+    }
+
+    bool all_unmultiplexed = true;
+    bool all_restored = true;
+    bool all_windows_ok = true;
+    for (int i = 0; i < WINDOW_COUNT; i++) {
+        all_windows_ok = all_windows_ok && window_rc[i] == 0;
+        all_unmultiplexed = all_unmultiplexed && results[i].unmultiplexed;
+        all_restored = all_restored && digest_after[i] == initial_digest;
+    }
+
+    uint64_t idle_c2d = event_value_by_name(&results[0], selected_group, "cache_block_commands_change_to_dirty");
+    uint64_t read_c2d = event_value_by_name(&results[1], selected_group, "cache_block_commands_change_to_dirty");
+    uint64_t ping_c2d = event_value_by_name(&results[3], selected_group, "cache_block_commands_change_to_dirty");
+    uint64_t idle_probe = event_value_by_name(&results[0], selected_group, "probe_responses_dirty");
+    uint64_t read_probe = event_value_by_name(&results[1], selected_group, "probe_responses_dirty");
+    uint64_t ping_probe = event_value_by_name(&results[3], selected_group, "probe_responses_dirty");
+    uint64_t c2d_control = idle_c2d > read_c2d ? idle_c2d : read_c2d;
+    uint64_t probe_control = idle_probe > read_probe ? idle_probe : read_probe;
+    bool c2d_moved = ping_c2d > c2d_control + 32u && ping_c2d > c2d_control * 3u;
+    bool probe_moved = ping_probe > probe_control + 32u && ping_probe > probe_control * 3u;
+    bool first_light = strcmp(selected_group_name, "primary_nb_coherence") == 0 &&
+        all_windows_ok && all_unmultiplexed && all_restored && (c2d_moved || probe_moved);
+
+    char result_path[4096];
+    int n = snprintf(result_path, sizeof(result_path), "%s/F10_PMC_FIRST_LIGHT_RESULT.json", output_root);
+    if (n <= 0 || (size_t)n >= sizeof(result_path)) {
+        free(carrier.bytes);
+        return 1;
+    }
+    FILE *out = fopen(result_path, "w");
+    if (!out) {
+        fprintf(stderr, "cannot open result: %s\n", strerror(errno));
+        free(carrier.bytes);
+        return 1;
+    }
+
+    fprintf(out, "{\n");
+    fprintf(out, "  \"schema_id\": \"%s\",\n", RESULT_SCHEMA);
+    fprintf(out, "  \"status\": \"%s\",\n", first_light ? "F10_PMC_FIRST_LIGHT" : "F10_PMC_FIRST_LIGHT_NOT_ESTABLISHED");
+    fprintf(out, "  \"claim_ceiling\": \"Family 10h PMU first-light discriminator only; no coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim\",\n");
+    fprintf(out, "  \"cores\": {\"observed_core\": %d, \"partner_core\": %d},\n", CATCAS_CORE_A, CATCAS_CORE_B);
+    fprintf(out, "  \"perf_interface\": {\"type\": \"PERF_TYPE_RAW\", \"event_format\": \"config:0-7,32-35\", \"umask_format\": \"config:8-15\", \"exclude_kernel\": true, \"exclude_hv\": true},\n");
+    fprintf(out, "  \"source_constraints\": {\"direct_msr_access\": false, \"voltage_access\": false, \"frequency_writes\": 0, \"experiment_owned_memory_only\": true},\n");
+    fprintf(out, "  \"carrier\": {\"line_count\": %zu, \"line_bytes\": %d, \"byte_count\": %zu, \"digest_kind\": \"fnv1a64\", \"initial_digest_hex\": \"0x%016" PRIx64 "\"},\n", carrier.line_count, CACHE_LINE_BYTES, carrier.byte_count, initial_digest);
+    fprintf(out, "  \"event_support_matrix\": [\n");
+    for (int i = 0; i < SUPPORT_EVENTS; i++) {
+        fprintf(out, "    {\"event\": ");
+        print_event_def(out, &support_events[i]);
+        fprintf(out, ", \"open_rc\": %d, \"supported\": %s, \"id\": %" PRIu64 "}%s\n",
+            support_rc[i],
+            json_bool(support_rc[i] == 0),
+            support_ids[i],
+            i + 1 == SUPPORT_EVENTS ? "" : ",");
+    }
+    fprintf(out, "  ],\n");
+    fprintf(out, "  \"group_support\": {\n");
+    fprintf(out, "    \"primary_nb_coherence\": {\"open_rc\": %d, \"supported\": %s, \"events\": ", primary_open_rc, json_bool(primary_open_rc == 0));
+    print_group_defs(out, primary_group);
+    fprintf(out, "},\n");
+    fprintf(out, "    \"fallback_core_cache\": {\"open_rc\": %d, \"supported\": %s, \"events\": ", fallback_open_rc, json_bool(fallback_open_rc == 0));
+    print_group_defs(out, fallback_group);
+    fprintf(out, "}\n");
+    fprintf(out, "  },\n");
+    fprintf(out, "  \"selected_group\": \"%s\",\n", selected_group_name);
+    fprintf(out, "  \"selected_events\": ");
+    print_group_defs(out, selected_group);
+    fprintf(out, ",\n");
+    fprintf(out, "  \"windows\": [\n");
+    for (int i = 0; i < WINDOW_COUNT; i++) {
+        fprintf(out, "    {\"name\": \"%s\", \"rc\": %d, \"duration_ns\": %" PRIu64 ", \"carrier_digest_before_hex\": \"0x%016" PRIx64 "\", \"carrier_digest_after_restore_hex\": \"0x%016" PRIx64 "\", \"carrier_restored\": %s, \"group\": ",
+            windows[i],
+            window_rc[i],
+            durations[i],
+            digest_before[i],
+            digest_after[i],
+            json_bool(digest_after[i] == initial_digest));
+        print_group_result(out, selected_group, &results[i]);
+        fprintf(out, "}%s\n", i + 1 == WINDOW_COUNT ? "" : ",");
+    }
+    fprintf(out, "  ],\n");
+    fprintf(out, "  \"predeclared_observable\": {\"primary\": \"cache_block_commands_change_to_dirty\", \"secondary\": \"probe_responses_dirty\", \"comparison\": \"cross_core_pingpong_write greater than idle_pause and core4_read_sweep controls\"},\n");
+    fprintf(out, "  \"acceptance\": {\"all_windows_ok\": %s, \"all_unmultiplexed\": %s, \"carrier_restored\": %s, \"change_to_dirty_moved\": %s, \"probe_dirty_moved\": %s, \"first_light\": %s},\n",
+        json_bool(all_windows_ok),
+        json_bool(all_unmultiplexed),
+        json_bool(all_restored),
+        json_bool(c2d_moved),
+        json_bool(probe_moved),
+        json_bool(first_light));
+    fprintf(out, "  \"contrast_counts\": {\"change_to_dirty\": {\"idle\": %" PRIu64 ", \"read_control\": %" PRIu64 ", \"cross_core_transition\": %" PRIu64 "}, \"probe_dirty\": {\"idle\": %" PRIu64 ", \"read_control\": %" PRIu64 ", \"cross_core_transition\": %" PRIu64 "}}\n",
+        idle_c2d, read_c2d, ping_c2d, idle_probe, read_probe, ping_probe);
+    fprintf(out, "}\n");
+    fclose(out);
+    printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"%s\"}\n",
+        first_light ? "F10_PMC_FIRST_LIGHT" : "F10_PMC_FIRST_LIGHT_NOT_ESTABLISHED",
+        result_path,
+        selected_group_name);
+    free(carrier.bytes);
+    return 0;
+}

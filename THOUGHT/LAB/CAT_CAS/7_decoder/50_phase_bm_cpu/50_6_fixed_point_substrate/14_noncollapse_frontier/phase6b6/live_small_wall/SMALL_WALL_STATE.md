@@ -6,7 +6,7 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`OBSERVABLE_READONLY_OCCUPANCY_RESPONSE_FOUND`
+`F10_PMC_FIRST_LIGHT`
 
 **Active wall:**
 Move from a calibrated footprint-dependent timing sensor to a relational,
@@ -78,6 +78,60 @@ Schedule hash:
 
 `57f6aa152d2c099429e7ca2c4d843102739c81b2158e46c4d49f07a96b6f4758`
 
+### Family 10h PMU first light
+
+The ordinary Linux `perf_event_open` route works for a minimal Family 10h raw-event
+discriminator on the user's AMD Phenom II X6 lab device.
+
+Run:
+
+`runs/f10_pmc_first_light_1`
+
+Checkpoint:
+
+`F10_PMC_FIRST_LIGHT_PMU_CHECKPOINT_20260712.json`
+
+The run used only CAT_CAS-owned synthetic memory and ordinary PMU reads. It performed
+zero CPU-frequency writes, zero voltage access, zero MSR reads, and zero MSR writes.
+Temperature stayed below the 68 C veto, output copy-back verified, and the temporary
+remote run root was cleaned after copy verification.
+
+Supported and grouped raw events included:
+
+```text
+cpu_cycles_not_halted                   event 0x076 umask 0x00
+dc_refills_from_nb_all_states           event 0x043 umask 0x1f
+cache_block_commands_change_to_dirty    event 0x0ea umask 0x20
+probe_responses_dirty                   event 0x0ec umask 0x0c
+```
+
+The selected `primary_nb_coherence` group was unmultiplexed in every window
+(`time_enabled == time_running`). The deliberately generated cross-core write
+transition on cores 4 and 5 moved both predeclared physical counters relative to idle
+and same-core controls:
+
+```text
+change_to_dirty: idle 0, read control 28, cross-core transition 235733
+probe_dirty:     idle 0, read control 3934, cross-core transition 1153514
+```
+
+The carrier bytes restored to the initial digest after every window:
+
+`0xc816a7aba6b50383`
+
+Accepted marker:
+
+`F10_PMC_FIRST_LIGHT`
+
+Claim ceiling:
+
+> A minimal ordinary-Linux Family 10h PMU path can observe a CAT_CAS-owned cross-core
+> coherence-transition-like physical response on the AMD Phenom II X6 under bounded
+> controls.
+
+This still does not establish controlled preparation of a named coherence state, path
+memory, holonomy, OrbitState coupling, fold-odd recovery, or a Small Wall crossing.
+
 ### Information-law boundary
 
 The unchanged public cosine representation is fold-even. If the complete declared
@@ -117,6 +171,9 @@ small_wall_runtime.h
 small_wall_worker.c
 live_gate_a_target.py
 run_gate_a_first_light.py
+f10_pmc_first_light_worker.c
+f10_pmc_first_light_target.py
+run_f10_pmc_first_light.py
 READONLY_OCCUPANCY_BASELINE_CLOSURE.json
 ```
 
@@ -145,12 +202,16 @@ line bytes and measured carrier coordinates to the accepted home-state class.
 **What it would explain:** which physical transitions produce the calibrated timing
 response and whether a richer state exists than footprint size alone.
 
-**Cheapest discriminator:** `F10_PMC_FIRST_LIGHT` using one cycles leader plus a small
-raw-event pack, with idle, same-core, and deliberately generated transition controls.
+**Cheapest discriminator:** complete. The next discriminator is whether named
+coherence-state operators can be prepared and killed with matched controls, using the
+PMU coordinates as observables.
 
-**Current evidence:** untested on the live device.
+**Current evidence:** `f10_pmc_first_light_1` opened the intended raw event support
+matrix, ran the `primary_nb_coherence` group without multiplexing, and observed a large
+cross-core transition response in `cache_block_commands_change_to_dirty` and
+`probe_responses_dirty` while carrier bytes restored.
 
-**Status:** strongest immediate opening.
+**Status:** established at first-light level; promote H2/H3 controlled operator tests.
 
 ### H2 - MOESI ownership paths carry oriented relational memory
 
@@ -175,10 +236,11 @@ state or equivalence class.
 **Cheapest discriminator:** forward and reverse two-line paths with the same operation
 multiset, identity and shuffled controls, and a predeclared signed area.
 
-**Current evidence:** sensor is calibrated; coherence state is not yet directly
-observed.
+**Current evidence:** sensor is calibrated, and Family 10h PMU first light now observes
+cross-core transition-sensitive counters. A named coherence-state operator library is
+not yet built.
 
-**Status:** active after or alongside H1.
+**Status:** strongest immediate opening.
 
 ### H3 - Shared L3 or Northbridge routing is the dominant relational carrier
 
@@ -197,7 +259,8 @@ traffic coordinates to baseline.
 **Cheapest discriminator:** compare same operation sequence across route assignments
 4->5 and 2->3 with matched controls.
 
-**Current evidence:** Phase 6B.6 already treats route as context; no live PMU result.
+**Current evidence:** Phase 6B.6 already treats route as context; the PMU route is live
+on cores 4 and 5 but route assignment 2->3 versus 4->5 has not been tested.
 
 **Status:** alive.
 
@@ -270,28 +333,26 @@ operator, observability, or restoration wall that it can attack.
 
 ## Cheapest current discriminator
 
-Inspect the current kernel and processor support, then implement a minimal Family 10h
-`perf_event_open` probe under `live_small_wall/`.
+Build the thinnest controlled coherence-state operator discriminator over
+experiment-owned aligned cache lines.
 
-The probe should answer:
+The next probe should answer:
 
-1. Which intended raw events open successfully on this kernel and CPU?
-2. Can four or fewer grouped counters run without multiplexing?
-3. Does a deliberately generated CAT_CAS-owned coherence transition move at least one
-   expected counter relative to idle or same-core controls?
-4. Can the event window be synchronized with the calibrated timing sensor without
-   breaking capture integrity?
-
-Do not treat this path as mandatory. If primary-source inspection or direct calibration
-shows the intended events are unavailable or misleading, reclassify the substrate wall
-and choose the best adjacent discriminator.
+1. Can `READ_SHARED`, `PREFETCHW_OWNERSHIP_REQUEST`, `LOCKED_LOGICAL_NOOP`,
+   `CROSS_CORE_READ`, and `HOME_CORE_RESTORE` be expressed as closed CAT_CAS
+   operators with byte restoration?
+2. Does at least one named operator move a predeclared PMU coordinate while matched
+   same-core, identity, and reset controls do not?
+3. Can a restoration equivalence class be measured beyond byte equality, using PMU
+   coordinates and the calibrated timing sensor?
+4. Which route or operator family gives the cheapest path toward a noncommuting loop?
 
 ## Current claim ceiling
 
-`OBSERVABLE_READONLY_OCCUPANCY_RESPONSE_FOUND`
+`F10_PMC_FIRST_LIGHT`
 
-The next major scientific threshold is a controlled physical state beyond footprint
-size. The next useful marker may be `F10_PMC_FIRST_LIGHT`,
+The next major scientific threshold is controlled preparation of a physical state
+beyond footprint size. The next useful marker is likely
 `CONTROLLED_COHERENCE_STATE_FOUND`, or a better mechanism-specific marker discovered by
 the loop.
 

@@ -1,0 +1,162 @@
+{
+  "schema_id": "CAT_CAS_F10_PMC_FIRST_LIGHT_CHECKPOINT_V1",
+  "classification": "F10_PMC_FIRST_LIGHT",
+  "claim_ceiling": "Family 10h PMU visibility of a controlled CAT_CAS-owned physical transition; no controlled restored coherence state, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim.",
+  "command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_pmc_first_light.py --run-id f10_pmc_first_light_1",
+  "run_id": "f10_pmc_first_light_1",
+  "local_run_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/f10_pmc_first_light_1",
+  "remote_run_path": "/root/catcas_live_small_wall/f10_pmc_first_light_1",
+  "controller": {
+    "copy_verified": true,
+    "remote_cleaned": true,
+    "remote_returncode": 0,
+    "verified_file_count": 2
+  },
+  "lab_device": {
+    "host": "root@192.168.137.100",
+    "cpu": {
+      "vendor_id": "AuthenticAMD",
+      "model_name": "AMD Phenom(tm) II X6 1090T Processor",
+      "cpu_family": "16",
+      "model": "10",
+      "stepping": "0"
+    },
+    "kernel": "6.12.86+deb13-amd64",
+    "pmu_sysfs": {
+      "cpu_pmu_type": "4",
+      "event_format": "config:0-7,32-35",
+      "umask_format": "config:8-15",
+      "perf_event_paranoid": "3"
+    }
+  },
+  "source_binding": {
+    "source_bundle_sha256": "33c274c5f16bbba20bc049aa9596b7c8688cc34473e0ba412c94d5ff9ef19be7",
+    "source_hashes": {
+      "f10_pmc_first_light_worker.c": "a8203b55de74f798ceba520173188d8698be8a799138d8e0583b1d844313669b",
+      "f10_pmc_first_light_target.py": "d480b0767326eb608e082fd2cd2a1aeea088377c9cb84d8b963bc453b60efea8",
+      "run_f10_pmc_first_light.py": "83d39d6255fd8c09a0842e570383f12ff28543413551d41681781ba8183b5399"
+    },
+    "compile_command": [
+      "cc",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-pedantic",
+      "-O2",
+      "-march=amdfam10",
+      "-mtune=amdfam10",
+      "-fno-lto",
+      "-pthread",
+      "/root/catcas_live_small_wall/f10_pmc_first_light_1/source/f10_pmc_first_light_worker.c",
+      "-o",
+      "/root/catcas_live_small_wall/f10_pmc_first_light_1/source/f10_pmc_first_light_worker"
+    ]
+  },
+  "pmu_events": {
+    "selected_group": "primary_nb_coherence",
+    "events": [
+      {
+        "name": "cpu_cycles_not_halted",
+        "event_select_hex": "0x076",
+        "unit_mask_hex": "0x00",
+        "raw_config_hex": "0x76"
+      },
+      {
+        "name": "dc_refills_from_nb_all_states",
+        "event_select_hex": "0x043",
+        "unit_mask_hex": "0x1f",
+        "raw_config_hex": "0x1f43"
+      },
+      {
+        "name": "cache_block_commands_change_to_dirty",
+        "event_select_hex": "0x0ea",
+        "unit_mask_hex": "0x20",
+        "raw_config_hex": "0x20ea"
+      },
+      {
+        "name": "probe_responses_dirty",
+        "event_select_hex": "0x0ec",
+        "unit_mask_hex": "0x0c",
+        "raw_config_hex": "0xcec"
+      }
+    ]
+  },
+  "acceptance": {
+    "target_status": "F10_PMC_FIRST_LIGHT_TARGET_COMPLETE",
+    "worker_status": "F10_PMC_FIRST_LIGHT",
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "carrier_restored": true,
+    "change_to_dirty_moved": true,
+    "probe_dirty_moved": true,
+    "first_light": true,
+    "temperature_below_veto": true,
+    "preflight_temperature_c": 51.0,
+    "post_temperature_c": 51.375,
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "process_cleanup_forbidden_matches": []
+  },
+  "windows": [
+    {
+      "name": "idle_pause",
+      "duration_ns": 100080757,
+      "time_enabled": 100073177,
+      "time_running": 100073177,
+      "carrier_restored": true,
+      "counts": {
+        "cpu_cycles_not_halted": 0,
+        "dc_refills_from_nb_all_states": 0,
+        "cache_block_commands_change_to_dirty": 0,
+        "probe_responses_dirty": 0
+      }
+    },
+    {
+      "name": "core4_read_sweep",
+      "duration_ns": 6569764,
+      "time_enabled": 6563919,
+      "time_running": 6563919,
+      "carrier_restored": true,
+      "counts": {
+        "cpu_cycles_not_halted": 20898660,
+        "dc_refills_from_nb_all_states": 4187,
+        "cache_block_commands_change_to_dirty": 28,
+        "probe_responses_dirty": 3934
+      }
+    },
+    {
+      "name": "core4_write_sweep",
+      "duration_ns": 9873446,
+      "time_enabled": 9870808,
+      "time_running": 9870808,
+      "carrier_restored": true,
+      "counts": {
+        "cpu_cycles_not_halted": 31706226,
+        "dc_refills_from_nb_all_states": 86,
+        "cache_block_commands_change_to_dirty": 96,
+        "probe_responses_dirty": 179
+      }
+    },
+    {
+      "name": "cross_core_pingpong_write",
+      "duration_ns": 27568747,
+      "time_enabled": 27565644,
+      "time_running": 27565644,
+      "carrier_restored": true,
+      "counts": {
+        "cpu_cycles_not_halted": 50272357,
+        "dc_refills_from_nb_all_states": 987343,
+        "cache_block_commands_change_to_dirty": 235733,
+        "probe_responses_dirty": 1153514
+      }
+    }
+  ],
+  "next_boundary": {
+    "active_wall": "Move from PMU-visible cross-core transition to controlled, restored coherence-state preparation.",
+    "cheapest_next_discriminator": "Build a minimal operator slice that compares named coherence operators against matched controls, with PMU coordinates and timing response as restoration checks.",
+    "next_likely_marker": "CONTROLLED_COHERENCE_STATE_FOUND"
+  }
+}
