@@ -1,0 +1,79 @@
+{
+  "schema_id": "CAT_CAS_F10_HISTORY_SENTINEL_CHECKPOINT_V1",
+  "checkpoint_date": "2026-07-12",
+  "starting_head": "cd9c81682ffe0b02498953a44cc1d3da6b481044",
+  "run_id": "f10_history_sentinel_0",
+  "mode": "history-sentinel",
+  "mechanism": {
+    "carrier": "4096 aligned 64-byte CAT_CAS-owned cache lines",
+    "history": "balanced ownership-transfer sequences over the same two line sets",
+    "restore": "common home-core byte restore before the sentinel window",
+    "sentinel": "remote_store_same_value measured on observed core with primary_nb_coherence PMU group",
+    "observable": "forward/reverse sentinel delta compared with max(32, 3 * neutral/shuffle control spread)"
+  },
+  "command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_coherence_operators.py --run-id f10_history_sentinel_0 --mode history-sentinel",
+  "local_run": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/f10_history_sentinel_0",
+  "remote_run": "/root/catcas_live_small_wall/f10_history_sentinel_0",
+  "source_bundle_sha256": "1be38c8d87a43ad24c6b52bd8762e3c9d907cc01c34d1dc3a4091281f15c9c71",
+  "source_hashes": {
+    "f10_pmc_first_light_target.py": "b3534e5f66ded37b340bbc7b3d390e54f08e7adbda1fd58efc9e3674fd4a5bba",
+    "f10_pmc_first_light_worker.c": "c5d662efc3a5064e2af6b8e54a60a7efd086a8c5a830bf63c6e65f522502a4ca"
+  },
+  "result": {
+    "target_status": "F10_HISTORY_SENTINEL_TARGET_COMPLETE",
+    "worker_status": "HISTORY_SENTINEL_RESPONSE_NOT_ESTABLISHED",
+    "capture_group": "primary_nb_coherence",
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "bytes_unchanged_after_history": true,
+    "restored_before_sentinel": true,
+    "restored_after_sentinel": true,
+    "history_sentinel_response": false
+  },
+  "contrast_counts": {
+    "cache_block_commands_change_to_dirty": {
+      "identity": 2348,
+      "forward": 2003,
+      "reverse": 1958,
+      "shuffle": 2022,
+      "forward_reverse_delta": 45,
+      "control_floor": 326,
+      "threshold": 978,
+      "signal": false
+    },
+    "probe_responses_dirty": {
+      "identity": 4708,
+      "forward": 5802,
+      "reverse": 5701,
+      "shuffle": 5657,
+      "forward_reverse_delta": 101,
+      "control_floor": 949,
+      "threshold": 2847,
+      "signal": false
+    }
+  },
+  "safety_and_custody": {
+    "lab_device": "root@192.168.137.100",
+    "copy_verified": true,
+    "remote_cleaned": true,
+    "temperature_preflight_c": 40.5,
+    "temperature_post_c": 41.0,
+    "temperature_veto_c": 68.0,
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "preflight_forbidden_process_matches": [],
+    "cleanup_forbidden_process_matches": []
+  },
+  "raw_file_hashes": {
+    "CONTROLLER_RESULT.json": "3a8bac167aa31b9816c2b4ec9ab225dfd3ebf3ec2a3003edfa2af5df45e4acad",
+    "CONTROLLER_STDERR.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "CONTROLLER_STDOUT.txt": "07af087d5f0b91a3b5f10b108fe914425878ab5afba2440aca9162fbc31fb191",
+    "F10_HISTORY_SENTINEL_RESULT.json": "857b19dfc76e2fa4ab90c584ae0e19826c580136b7c5179bcb412840950fd419",
+    "FILE_MANIFEST.json": "899038c66a63b25c84318067a1d0fedfe68347120ad4682395da05e7223f6da7",
+    "FINAL_RESULT.json": "6078c2e54793fbd66e266862d2242c21fbb9e866a480248516978f219ee9b733"
+  },
+  "interpretation": "Balanced restored history did not alter the later sentinel beyond the neutral/shuffle control floor. Do not repeat this restored history-sentinel discriminator unchanged.",
+  "claim_ceiling": "EVICTION_SENTINEL_RESPONSE_FOUND"
+}

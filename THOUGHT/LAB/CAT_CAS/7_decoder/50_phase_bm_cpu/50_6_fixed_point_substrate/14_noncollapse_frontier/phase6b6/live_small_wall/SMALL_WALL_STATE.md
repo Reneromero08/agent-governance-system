@@ -6,14 +6,14 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`CODED_PREPROJECTION_SOURCE_PHASE_CHOP_RESPONSE_NOT_ESTABLISHED`
+`HISTORY_SENTINEL_RESPONSE_NOT_ESTABLISHED`
 
 **Active wall:**
 The current wall is still carrier/access-model selection. Timing, ownership-intent PMU
 footprint, IBS availability, WC/flush-order, eviction-sentinel PMU/timing
-phase-local mappings, the first active-query receiver-delta access model, and the
-first source-side phase-chopped access model either failed controls or did not expose a
-usable fold-odd carrier. The eviction-sentinel
+phase-local mappings, restored history-sentinel PMU mapping, the first active-query
+receiver-delta access model, and the first source-side phase-chopped access model
+either failed controls or did not expose a usable fold-odd carrier. The eviction-sentinel
 first-light run remains useful because it changed restoration from byte equality to a
 measured carrier equivalence class, but the phase-local remaps did not promote it. The
 new `coded_preprojection_active_query_0` run moved the query into the receiver's
@@ -21,9 +21,13 @@ measured workload before scalar recording and restored cleanly, but its opposed
 fold-odd candidate did not clear the post-control floor. The follow-on
 `coded_preprojection_source_phase_chop_0` moved the public phase waveform into the
 source burst before scalar recording and also restored cleanly, but its control floor
-was too large for the `3x` rule. The active wall is now a materially stronger
-source-owned carrier/query algebra, not another remap of phase-local timing,
-active-query subbank order, or source burst segmentation.
+was too large for the `3x` rule. The restored history-sentinel run
+`f10_history_sentinel_0` then asked whether balanced ownership histories survive a
+common home-core restore strongly enough to perturb a later remote-store sentinel; it
+also restored cleanly, but forward/reverse deltas stayed below the neutral/shuffle
+control floor. The active wall is now a materially stronger source-owned carrier/query
+algebra, not another remap of phase-local timing, active-query subbank order,
+source burst segmentation, or restored two-line-set ownership history.
 
 ## Established
 
@@ -374,6 +378,68 @@ route-selective.
 This does not establish path memory, noncommutation, physical holonomy, OrbitState
 coupling, fold-odd recovery, or a Small Wall crossing.
 
+### Restored history-sentinel pilot
+
+A restored history-sentinel PMU discriminator ran cleanly and was negative.
+
+Run:
+
+`runs/f10_history_sentinel_0`
+
+Checkpoint:
+
+`F10_HISTORY_SENTINEL_CHECKPOINT_20260712.json`
+
+Mechanism:
+
+- carrier: 4096 aligned 64-byte CAT_CAS-owned lines;
+- forward/reverse histories: balanced ownership-transfer sequences over the same two
+  line sets;
+- restoration: common home-core byte restore before the sentinel;
+- sentinel: `remote_store_same_value` measured on core 5 with `primary_nb_coherence`;
+- control: neutral restore-only versus balanced shuffle history.
+
+The transaction completed with verified copy-back and remote cleanup. It performed
+zero frequency writes, zero voltage access, zero MSR reads, and zero MSR writes.
+Temperature stayed below the 68 C veto. Every window was unmultiplexed, bytes stayed
+unchanged after history, and the carrier digest restored before and after the sentinel.
+
+Result:
+
+```text
+cache_block_commands_change_to_dirty:
+  identity 2348
+  forward  2003
+  reverse  1958
+  shuffle  2022
+  forward/reverse delta 45
+  control floor         326
+  threshold             978
+  signal                false
+
+probe_responses_dirty:
+  identity 4708
+  forward  5802
+  reverse  5701
+  shuffle  5657
+  forward/reverse delta 101
+  control floor         949
+  threshold             2847
+  signal                false
+```
+
+Marker:
+
+`HISTORY_SENTINEL_RESPONSE_NOT_ESTABLISHED`
+
+This kills the simple restored two-line-set ownership-history sentinel. The measured
+coherence sentinel remains useful, but this construction did not preserve a
+forward/reverse relation across the common restore strongly enough to clear the
+neutral/shuffle control floor.
+
+This does not establish path memory, noncommutation, physical holonomy, OrbitState
+coupling, fold-odd recovery, or a Small Wall crossing.
+
 ### Transient timing-response pivot
 
 A focused phase/timing pivot repaired the legacy 16-slot timing custody path and ran a
@@ -568,6 +634,7 @@ F10_PATH_DUAL_OBSERVE_CHECKPOINT_20260712.json
 F10_PATH_RW_OBSERVE_CHECKPOINT_20260712.json
 F10_ROUTE_OPERATOR_COMPARISON_CHECKPOINT_20260712.json
 F10_ROUTE_STATE_PILOT_CHECKPOINT_20260712.json
+F10_HISTORY_SENTINEL_CHECKPOINT_20260712.json
 CODED_PREPROJECTION_DECLARATION_SHAM_CHECKPOINT_20260712.json
 CODED_PREPROJECTION_PHASE_LOCAL_CHECKPOINT_20260712.json
 CODED_PREPROJECTION_ACTIVE_QUERY_CHECKPOINT_20260712.json
@@ -1431,10 +1498,10 @@ carrier family or access model rather than continuing eviction-sentinel remaps.
 ## Cheapest current discriminator
 
 Change carrier family or access model again, not another remap of the same
-phase-local timing/PMU/eviction/active-query/source-phase-chop geometry. The run must
-stay closed: CAT_CAS-owned buffers only, predetermined geometry, no physical-address
-access, no cache-set mapping, no unrelated-process observation, and no MSR or voltage
-access.
+phase-local timing/PMU/eviction/active-query/source-phase-chop/restored-history
+geometry. The run must stay closed: CAT_CAS-owned buffers only, predetermined
+geometry, no physical-address access, no cache-set mapping, no unrelated-process
+observation, and no MSR or voltage access.
 
 The next probe should answer:
 
@@ -1449,7 +1516,8 @@ The next probe should answer:
 
 Do not rerun the same timing coded loop, another scalar PMU route metric,
 unconditioned transient timing repeat, IBS availability probe, WC/flush-order pair, or
-unlabeled cache-line rectangle unchanged. Do not rerun
+unlabeled cache-line rectangle unchanged. Do not rerun the same restored
+history-sentinel ownership sequence unchanged. Do not rerun
 `coded_preprojection_active_query_0` or the same active-query receiver-delta schedule
 unchanged. Do not rerun `coded_preprojection_source_phase_chop_0` or the same
 source-phase-chop schedule unchanged.
@@ -1483,9 +1551,13 @@ access model by measuring a balanced active-query receiver delta before scalar
 recording, but the opposed candidate did not clear the post-control floor.
 `coded_preprojection_source_phase_chop_0` then moved the public phase waveform into the
 source burst before scalar recording, but its control floor was too large for the
-`3x` rule. The current marker remains short of `SMALL_WALL_CROSSED`; the next move
-must change carrier family or access model rather than keep remapping the same
-eviction-sentinel PMU/timing, active-query phase-local, or source-phase-chop geometry.
+`3x` rule. `f10_history_sentinel_0` then tested whether balanced ownership-transfer
+history survives a common home-core restore strongly enough to perturb a later
+remote-store sentinel; it restored cleanly, but forward/reverse deltas stayed below the
+neutral/shuffle floor. The current marker remains short of `SMALL_WALL_CROSSED`; the
+next move must change carrier family or access model rather than keep remapping the
+same eviction-sentinel PMU/timing, active-query phase-local, source-phase-chop, or
+restored two-line-set ownership-history geometry.
 
 ## State update rule
 

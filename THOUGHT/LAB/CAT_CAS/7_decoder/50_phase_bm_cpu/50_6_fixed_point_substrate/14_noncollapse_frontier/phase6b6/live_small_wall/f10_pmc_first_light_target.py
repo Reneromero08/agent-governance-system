@@ -130,6 +130,13 @@ MODES: dict[str, dict[str, Any]] = {
         "failed_status": "F10_EVICTION_PHASE_BRACKETED_DURATION_TARGET_FAILED",
         "claim_ceiling": "Bracketed duration eviction-sentinel discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
     },
+    "history-sentinel": {
+        "worker_args": ["--history-sentinel"],
+        "result_file": "F10_HISTORY_SENTINEL_RESULT.json",
+        "complete_status": "F10_HISTORY_SENTINEL_TARGET_COMPLETE",
+        "failed_status": "F10_HISTORY_SENTINEL_TARGET_FAILED",
+        "claim_ceiling": "Restored history-sentinel PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
+    },
 }
 FORBIDDEN_PROCESS_MARKERS = (
     "f10_pmc_first_light_worker",

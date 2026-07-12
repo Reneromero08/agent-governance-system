@@ -48,6 +48,7 @@
 #define EVICTION_PHASE_BRACKETED_RESULT_SCHEMA "CAT_CAS_F10_EVICTION_PHASE_BRACKETED_RESULT_V1"
 #define EVICTION_PHASE_BRACKETED_C2D_RESULT_SCHEMA "CAT_CAS_F10_EVICTION_PHASE_BRACKETED_C2D_RESULT_V1"
 #define EVICTION_PHASE_BRACKETED_DURATION_RESULT_SCHEMA "CAT_CAS_F10_EVICTION_PHASE_BRACKETED_DURATION_RESULT_V1"
+#define HISTORY_SENTINEL_RESULT_SCHEMA "CAT_CAS_F10_HISTORY_SENTINEL_RESULT_V1"
 #define PHASE_LOCAL_BANK_LINES 512u
 #define EVICTION_LINES 262144u
 #define EVICTION_ITERATIONS 3
@@ -176,6 +177,12 @@ struct eviction_bracket_token_spec {
     const char *role;
     int phase_index;
     enum eviction_prep_op center_prep;
+};
+
+struct history_sequence_spec {
+    const char *name;
+    const struct path_step *steps;
+    size_t step_count;
 };
 
 static const struct event_def support_events[SUPPORT_EVENTS] = {
@@ -1107,6 +1114,70 @@ static int measure_path_step(
     return 0;
 }
 
+static int apply_history_sequence(struct carrier *carrier, const struct history_sequence_spec *sequence) {
+    if (!sequence) return 0;
+    for (size_t index = 0; index < sequence->step_count; index++) {
+        if (run_path_step_operator(carrier, &sequence->steps[index]) != 0) {
+            return -1;
+        }
+    }
+    return 0;
+}
+
+static int measure_history_sentinel_window(
+    const struct event_def group[MAX_GROUP_EVENTS],
+    const struct history_sequence_spec *sequence,
+    struct carrier *carrier,
+    struct group_result *result,
+    uint64_t *duration_ns,
+    uint64_t *digest_after_history,
+    uint64_t *digest_before_sentinel,
+    uint64_t *digest_after_restore
+) {
+    int fds[MAX_GROUP_EVENTS];
+    uint64_t ids[MAX_GROUP_EVENTS];
+    memset(result, 0, sizeof(*result));
+    init_carrier(carrier);
+    prefault_carrier(carrier);
+    restore_on_core(carrier, CATCAS_CORE_A);
+    if (apply_history_sequence(carrier, sequence) != 0) return -EIO;
+    *digest_after_history = fnv1a64(carrier->bytes, carrier->byte_count);
+    restore_on_core(carrier, CATCAS_CORE_A);
+    *digest_before_sentinel = fnv1a64(carrier->bytes, carrier->byte_count);
+    int opened = open_group(group, CATCAS_CORE_B, fds, ids);
+    if (opened != 0) {
+        result->open_errno = -opened;
+        return opened;
+    }
+    result->opened = true;
+    if (ioctl(fds[0], PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t start = monotonic_ns();
+    if (ioctl(fds[0], PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    int work_rc = run_coherence_operator(carrier, OP_REMOTE_STORE_SAME_VALUE);
+    if (ioctl(fds[0], PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t end = monotonic_ns();
+    int read_rc = read_group(fds[0], result);
+    for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+    if (read_rc != 0) return read_rc;
+    if (work_rc != 0) return -EIO;
+    *duration_ns = end >= start ? end - start : 0;
+    restore_on_core(carrier, CATCAS_CORE_A);
+    *digest_after_restore = fnv1a64(carrier->bytes, carrier->byte_count);
+    return 0;
+}
+
 __attribute__((unused))
 static int measure_route_window(
     const struct event_def group[MAX_GROUP_EVENTS],
@@ -1451,6 +1522,165 @@ static uint64_t min_u64(uint64_t a, uint64_t b) {
 
 static uint64_t abs_diff_u64(uint64_t a, uint64_t b) {
     return a > b ? a - b : b - a;
+}
+
+static int run_history_sentinel_mode(const char *output_root, struct carrier *carrier, uint64_t initial_digest) {
+    int primary_fds[MAX_GROUP_EVENTS];
+    uint64_t primary_ids[MAX_GROUP_EVENTS];
+    int primary_open_rc = open_group(primary_group, CATCAS_CORE_B, primary_fds, primary_ids);
+    if (primary_open_rc == 0) {
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(primary_fds[i]);
+    }
+
+    const struct path_step forward_steps[] = {
+        {"remote_store_set0", PATH_REMOTE_STORE, 0},
+        {"home_store_set1", PATH_HOME_STORE, 1},
+        {"remote_store_set1", PATH_REMOTE_STORE, 1},
+        {"home_store_set0", PATH_HOME_STORE, 0},
+    };
+    const struct path_step reverse_steps[] = {
+        {"remote_store_set1", PATH_REMOTE_STORE, 1},
+        {"home_store_set0", PATH_HOME_STORE, 0},
+        {"remote_store_set0", PATH_REMOTE_STORE, 0},
+        {"home_store_set1", PATH_HOME_STORE, 1},
+    };
+    const struct path_step shuffle_steps[] = {
+        {"home_store_set0", PATH_HOME_STORE, 0},
+        {"remote_store_set1", PATH_REMOTE_STORE, 1},
+        {"home_store_set1", PATH_HOME_STORE, 1},
+        {"remote_store_set0", PATH_REMOTE_STORE, 0},
+    };
+    const struct history_sequence_spec sequences[] = {
+        {"identity_restore_only", NULL, 0},
+        {"forward_balanced_history", forward_steps, sizeof(forward_steps) / sizeof(forward_steps[0])},
+        {"reverse_balanced_history", reverse_steps, sizeof(reverse_steps) / sizeof(reverse_steps[0])},
+        {"shuffle_balanced_history", shuffle_steps, sizeof(shuffle_steps) / sizeof(shuffle_steps[0])},
+    };
+    enum { HISTORY_WINDOW_COUNT = 4 };
+    struct group_result results[HISTORY_WINDOW_COUNT];
+    uint64_t durations[HISTORY_WINDOW_COUNT];
+    uint64_t digest_after_history[HISTORY_WINDOW_COUNT];
+    uint64_t digest_before_sentinel[HISTORY_WINDOW_COUNT];
+    uint64_t digest_after_restore[HISTORY_WINDOW_COUNT];
+    int window_rc[HISTORY_WINDOW_COUNT];
+    for (int i = 0; i < HISTORY_WINDOW_COUNT; i++) {
+        memset(&results[i], 0, sizeof(results[i]));
+        durations[i] = 0;
+        digest_after_history[i] = 0;
+        digest_before_sentinel[i] = 0;
+        digest_after_restore[i] = 0;
+        if (primary_open_rc != 0) {
+            window_rc[i] = -ENODEV;
+        } else {
+            window_rc[i] = measure_history_sentinel_window(
+                primary_group,
+                &sequences[i],
+                carrier,
+                &results[i],
+                &durations[i],
+                &digest_after_history[i],
+                &digest_before_sentinel[i],
+                &digest_after_restore[i]);
+        }
+    }
+
+    bool all_windows_ok = true;
+    bool all_unmultiplexed = true;
+    bool bytes_unchanged_after_history = true;
+    bool restored_before_sentinel = true;
+    bool restored_after_sentinel = true;
+    for (int i = 0; i < HISTORY_WINDOW_COUNT; i++) {
+        all_windows_ok = all_windows_ok && window_rc[i] == 0;
+        all_unmultiplexed = all_unmultiplexed && results[i].unmultiplexed;
+        bytes_unchanged_after_history =
+            bytes_unchanged_after_history && digest_after_history[i] == initial_digest;
+        restored_before_sentinel =
+            restored_before_sentinel && digest_before_sentinel[i] == initial_digest;
+        restored_after_sentinel =
+            restored_after_sentinel && digest_after_restore[i] == initial_digest;
+    }
+
+    uint64_t identity_c2d = event_value_by_name(&results[0], primary_group, "cache_block_commands_change_to_dirty");
+    uint64_t forward_c2d = event_value_by_name(&results[1], primary_group, "cache_block_commands_change_to_dirty");
+    uint64_t reverse_c2d = event_value_by_name(&results[2], primary_group, "cache_block_commands_change_to_dirty");
+    uint64_t shuffle_c2d = event_value_by_name(&results[3], primary_group, "cache_block_commands_change_to_dirty");
+    uint64_t identity_probe = event_value_by_name(&results[0], primary_group, "probe_responses_dirty");
+    uint64_t forward_probe = event_value_by_name(&results[1], primary_group, "probe_responses_dirty");
+    uint64_t reverse_probe = event_value_by_name(&results[2], primary_group, "probe_responses_dirty");
+    uint64_t shuffle_probe = event_value_by_name(&results[3], primary_group, "probe_responses_dirty");
+    uint64_t c2d_delta = abs_diff_u64(forward_c2d, reverse_c2d);
+    uint64_t probe_delta = abs_diff_u64(forward_probe, reverse_probe);
+    uint64_t c2d_control = abs_diff_u64(identity_c2d, shuffle_c2d);
+    uint64_t probe_control = abs_diff_u64(identity_probe, shuffle_probe);
+    uint64_t c2d_threshold = max_u64(32u, 3u * c2d_control);
+    uint64_t probe_threshold = max_u64(32u, 3u * probe_control);
+    bool c2d_history_signal = c2d_delta > c2d_threshold;
+    bool probe_history_signal = probe_delta > probe_threshold;
+    bool history_sentinel_response = primary_open_rc == 0 && all_windows_ok &&
+        all_unmultiplexed && bytes_unchanged_after_history &&
+        restored_before_sentinel && restored_after_sentinel &&
+        (c2d_history_signal || probe_history_signal);
+
+    char result_path[4096];
+    int n = snprintf(result_path, sizeof(result_path), "%s/F10_HISTORY_SENTINEL_RESULT.json", output_root);
+    if (n <= 0 || (size_t)n >= sizeof(result_path)) return 1;
+    FILE *out = fopen(result_path, "w");
+    if (!out) {
+        fprintf(stderr, "cannot open result: %s\n", strerror(errno));
+        return 1;
+    }
+    fprintf(out, "{\n");
+    fprintf(out, "  \"schema_id\": \"%s\",\n", HISTORY_SENTINEL_RESULT_SCHEMA);
+    fprintf(out, "  \"status\": \"%s\",\n", history_sentinel_response ? "HISTORY_SENTINEL_RESPONSE_FOUND" : "HISTORY_SENTINEL_RESPONSE_NOT_ESTABLISHED");
+    fprintf(out, "  \"claim_ceiling\": \"Restored history-sentinel PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim\",\n");
+    fprintf(out, "  \"cores\": {\"home_core\": %d, \"observed_core\": %d},\n", CATCAS_CORE_A, CATCAS_CORE_B);
+    fprintf(out, "  \"perf_interface\": {\"type\": \"PERF_TYPE_RAW\", \"event_format\": \"config:0-7,32-35\", \"umask_format\": \"config:8-15\", \"exclude_kernel\": true, \"exclude_hv\": true},\n");
+    fprintf(out, "  \"source_constraints\": {\"direct_msr_access\": false, \"voltage_access\": false, \"frequency_writes\": 0, \"experiment_owned_memory_only\": true, \"physical_address_access\": false, \"cache_set_mapping\": false},\n");
+    fprintf(out, "  \"carrier\": {\"line_count\": %zu, \"line_bytes\": %d, \"byte_count\": %zu, \"digest_kind\": \"fnv1a64\", \"initial_digest_hex\": \"0x%016" PRIx64 "\"},\n", carrier->line_count, CACHE_LINE_BYTES, carrier->byte_count, initial_digest);
+    fprintf(out, "  \"selected_group\": \"primary_nb_coherence\",\n");
+    fprintf(out, "  \"group_open_rc\": %d,\n", primary_open_rc);
+    fprintf(out, "  \"selected_events\": ");
+    print_group_defs(out, primary_group);
+    fprintf(out, ",\n");
+    fprintf(out, "  \"predeclared_observable\": {\"history\": \"balanced ownership-transfer sequence over same line sets\", \"restore\": \"common home-core byte restore before sentinel\", \"sentinel\": \"remote_store_same_value measured on observed core\", \"acceptance\": \"forward/reverse sentinel delta exceeds max(32, 3 * neutral/shuffle control spread) for an established coherence counter\"},\n");
+    fprintf(out, "  \"windows\": [\n");
+    for (int i = 0; i < HISTORY_WINDOW_COUNT; i++) {
+        fprintf(out, "    {\"name\": \"%s\", \"rc\": %d, \"duration_ns\": %" PRIu64 ", \"history_step_count\": %zu, \"digest_after_history_hex\": \"0x%016" PRIx64 "\", \"digest_before_sentinel_hex\": \"0x%016" PRIx64 "\", \"digest_after_restore_hex\": \"0x%016" PRIx64 "\", \"bytes_unchanged_after_history\": %s, \"restored_before_sentinel\": %s, \"restored_after_sentinel\": %s, \"group\": ",
+            sequences[i].name,
+            window_rc[i],
+            durations[i],
+            sequences[i].step_count,
+            digest_after_history[i],
+            digest_before_sentinel[i],
+            digest_after_restore[i],
+            json_bool(digest_after_history[i] == initial_digest),
+            json_bool(digest_before_sentinel[i] == initial_digest),
+            json_bool(digest_after_restore[i] == initial_digest));
+        print_group_result(out, primary_group, &results[i]);
+        fprintf(out, "}%s\n", i + 1 == HISTORY_WINDOW_COUNT ? "" : ",");
+    }
+    fprintf(out, "  ],\n");
+    fprintf(out, "  \"contrast_counts\": {\n");
+    fprintf(out, "    \"cache_block_commands_change_to_dirty\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s},\n",
+        identity_c2d, forward_c2d, reverse_c2d, shuffle_c2d, c2d_delta, c2d_control, c2d_threshold, json_bool(c2d_history_signal));
+    fprintf(out, "    \"probe_responses_dirty\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s}\n",
+        identity_probe, forward_probe, reverse_probe, shuffle_probe, probe_delta, probe_control, probe_threshold, json_bool(probe_history_signal));
+    fprintf(out, "  },\n");
+    fprintf(out, "  \"acceptance\": {\"all_windows_ok\": %s, \"all_unmultiplexed\": %s, \"bytes_unchanged_after_history\": %s, \"restored_before_sentinel\": %s, \"restored_after_sentinel\": %s, \"change_to_dirty_history_signal\": %s, \"probe_dirty_history_signal\": %s, \"history_sentinel_response\": %s}\n",
+        json_bool(all_windows_ok),
+        json_bool(all_unmultiplexed),
+        json_bool(bytes_unchanged_after_history),
+        json_bool(restored_before_sentinel),
+        json_bool(restored_after_sentinel),
+        json_bool(c2d_history_signal),
+        json_bool(probe_history_signal),
+        json_bool(history_sentinel_response));
+    fprintf(out, "}\n");
+    fclose(out);
+    printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"primary_nb_coherence\"}\n",
+        history_sentinel_response ? "HISTORY_SENTINEL_RESPONSE_FOUND" : "HISTORY_SENTINEL_RESPONSE_NOT_ESTABLISHED",
+        result_path);
+    return 0;
 }
 
 static int measure_wc_flush_window(
@@ -3304,6 +3534,7 @@ int main(int argc, char **argv) {
     bool eviction_phase_bracketed_mode = false;
     bool eviction_phase_bracketed_c2d_mode = false;
     bool eviction_phase_bracketed_duration_mode = false;
+    bool history_sentinel_mode = false;
     if (argc == 3 && strcmp(argv[1], "--output-root") == 0) {
         output_root = argv[2];
     } else if (argc == 4 && strcmp(argv[1], "--coherence-operators") == 0 &&
@@ -3358,10 +3589,14 @@ int main(int argc, char **argv) {
                strcmp(argv[2], "--output-root") == 0) {
         eviction_phase_bracketed_duration_mode = true;
         output_root = argv[3];
+    } else if (argc == 4 && strcmp(argv[1], "--history-sentinel") == 0 &&
+               strcmp(argv[2], "--output-root") == 0) {
+        history_sentinel_mode = true;
+        output_root = argv[3];
     } else if (argc == 2 && strcmp(argv[1], "--self-test") == 0) {
         return self_test();
     } else {
-        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root> | --eviction-phase-bracketed --output-root <absolute-output-root> | --eviction-phase-bracketed-c2d --output-root <absolute-output-root> | --eviction-phase-bracketed-duration --output-root <absolute-output-root>\n", argv[0]);
+        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root> | --eviction-phase-bracketed --output-root <absolute-output-root> | --eviction-phase-bracketed-c2d --output-root <absolute-output-root> | --eviction-phase-bracketed-duration --output-root <absolute-output-root> | --history-sentinel --output-root <absolute-output-root>\n", argv[0]);
         return 2;
     }
     if (output_root[0] != '/') {
@@ -3445,6 +3680,11 @@ int main(int argc, char **argv) {
     }
     if (eviction_phase_bracketed_duration_mode) {
         int rc = run_eviction_phase_bracketed_mode(output_root, &carrier, initial_digest, false, true);
+        free(carrier.bytes);
+        return rc;
+    }
+    if (history_sentinel_mode) {
+        int rc = run_history_sentinel_mode(output_root, &carrier, initial_digest);
         free(carrier.bytes);
         return rc;
     }
