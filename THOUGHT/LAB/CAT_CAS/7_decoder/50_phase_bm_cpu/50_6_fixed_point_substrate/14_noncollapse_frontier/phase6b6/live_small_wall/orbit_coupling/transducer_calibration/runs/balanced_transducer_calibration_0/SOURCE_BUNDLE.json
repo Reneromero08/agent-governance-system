@@ -1,0 +1,36 @@
+{
+  "compile_command": [
+    "cc",
+    "-std=c11",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-pedantic",
+    "-O2",
+    "-march=amdfam10",
+    "-mtune=amdfam10",
+    "-fno-lto",
+    "-pthread",
+    "-I",
+    "/root/catcas_live_small_wall/balanced_transducer_calibration_0/source",
+    "/root/catcas_live_small_wall/balanced_transducer_calibration_0/source/balanced_transducer_runtime.c",
+    "-o",
+    "/root/catcas_live_small_wall/balanced_transducer_calibration_0/source/balanced_transducer_runtime"
+  ],
+  "contract_sha256": "95b05c0781a7eeae0374790421ffafc1e92ea9f472d5957d1496aa6a006fa6bb",
+  "public_trial_schedule_sha256": "3c6d499c6085ad9e9168a238ca30c63d0f642f8d26a3af13d25fd2b8f12adff1",
+  "runtime_binary_sha256": "33abff53d787831f76ef5782b7c8e7acb4000ec90d7f1d4b16bcb3a1ddc99525",
+  "schema_id": "CAT_CAS_BALANCED_TRANSDUCER_SOURCE_BUNDLE_V1",
+  "source_bundle_sha256": "92270f7488bf66c707da1065c0f69b51ca4d023bf51fc726f3a15bb9159ce117",
+  "source_hashes": {
+    "BALANCED_TRANSDUCER_CONTRACT.md": "95b05c0781a7eeae0374790421ffafc1e92ea9f472d5957d1496aa6a006fa6bb",
+    "FIRST_LIGHT_TRANSDUCER_AUDIT.md": "e8bb73b9f01355b4322e6a66e019af215d693d249aa12204a8a8b58e758a714d",
+    "PUBLIC_TRIAL_SCHEDULE.json": "3c6d499c6085ad9e9168a238ca30c63d0f642f8d26a3af13d25fd2b8f12adff1",
+    "PUBLIC_TRIAL_SCHEDULE.sha256": "619766778c5490d0c7edb27cc190881cb641debaff65117f2137644696d039ff",
+    "PUBLIC_TRIAL_SCHEDULE.tsv": "c2379addceb6dcb712d776c1b905680ea79666a2ebaa526fbe805f9905f109fc",
+    "balanced_transducer_public.py": "0addae6e1c1d4dc587e1eaf807b4bc4e098936e5001dc48faebde8fab7a388f3",
+    "balanced_transducer_runtime.c": "fccc2fe82edb8b7ee26e6f2137d6b0294b40f813f482375609d03799ac9060d3",
+    "balanced_transducer_runtime.h": "124e79ea826d2d3511c3360b393786f190568cf6bd727dc6c1c6dca074577296",
+    "balanced_transducer_target.py": "5cb1715e7ff3c39ca5b85100ebb0f3536fc08c1c77cb7209a2668742b0387fd9"
+  }
+}

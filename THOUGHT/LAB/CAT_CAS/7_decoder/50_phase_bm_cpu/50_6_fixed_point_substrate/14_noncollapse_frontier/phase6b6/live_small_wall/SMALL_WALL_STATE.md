@@ -2358,13 +2358,18 @@ and also stayed negative.
 also stayed negative.
 `f10_owned_recovery_history_0` then tested equal-count synchronous recovery of
 CAT_CAS-owned pages before a fixed no-recovery sentinel and also stayed negative with
-integrity closed. The next useful move must change authorization class rather than
-keep remapping the same eviction-sentinel PMU/timing, active-query phase-local,
-source-phase-chop, restored two-line-set ownership-history, simple branch-history,
-indirect-target-history, translation-footprint, store/load alias-history,
-locked-history, prefetch-stream, combined active-query/source-chop, source-process
-lifecycle, compiled code-footprint history, return-stack history, FP pipeline history,
-owned page-permission, or owned page-recovery geometry.
+integrity closed. `balanced_transducer_calibration_0` then added the public balanced
+transducer lane and consumed the one authorized target contact, but the target stopped
+before raw capture or adjudication with an undefined schedule TSV path; copied failure
+evidence and remote cleanup are retained, and the target path is locally repaired but
+not rerun. The next useful move must change authorization class rather than keep
+remapping the same eviction-sentinel PMU/timing, active-query
+phase-local, source-phase-chop, restored two-line-set ownership-history, simple
+branch-history, indirect-target-history, translation-footprint, store/load
+alias-history, locked-history, prefetch-stream, combined active-query/source-chop,
+source-process lifecycle, compiled code-footprint history, return-stack history, FP
+pipeline history, owned page-permission, owned page-recovery geometry, or public
+transducer schedule-binding defect.
 
 ## State update rule
 

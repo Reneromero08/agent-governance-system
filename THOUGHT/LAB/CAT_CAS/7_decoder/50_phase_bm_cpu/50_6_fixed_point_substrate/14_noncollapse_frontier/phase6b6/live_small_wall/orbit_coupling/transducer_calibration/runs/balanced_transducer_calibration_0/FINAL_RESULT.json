@@ -1,0 +1,11 @@
+{
+  "cache_set_mapping": false,
+  "failure": "NameError: name 'schedule_tsv_path' is not defined",
+  "frequency_writes": 0,
+  "msr_reads": 0,
+  "msr_writes": 0,
+  "physical_address_access": false,
+  "schema_id": "CAT_CAS_BALANCED_TRANSDUCER_TARGET_RESULT_V1",
+  "status": "BALANCED_TRANSDUCER_TARGET_FAILED",
+  "voltage_writes": 0
+}

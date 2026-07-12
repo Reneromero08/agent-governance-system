@@ -1,0 +1,20 @@
+{
+  "adjudication_status": null,
+  "copy_verified": true,
+  "eligible_coordinates": null,
+  "failure": "NameError: name 'schedule_tsv_path' is not defined",
+  "final_status": "BALANCED_TRANSDUCER_TARGET_FAILED",
+  "local_run": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\transducer_calibration\\runs\\balanced_transducer_calibration_0",
+  "primary_coordinate": null,
+  "public_trial_schedule_sha256": null,
+  "raw_capture_sha256": null,
+  "remote_cleaned": true,
+  "remote_returncode": 1,
+  "remote_run": "/root/catcas_live_small_wall/balanced_transducer_calibration_0",
+  "restoration_sentinels_sha256": null,
+  "run_id": "balanced_transducer_calibration_0",
+  "schema_id": "CAT_CAS_BALANCED_TRANSDUCER_CONTROLLER_V1",
+  "source_bundle_sha256": null,
+  "target": "root@192.168.137.100",
+  "verified_file_count": 5
+}
