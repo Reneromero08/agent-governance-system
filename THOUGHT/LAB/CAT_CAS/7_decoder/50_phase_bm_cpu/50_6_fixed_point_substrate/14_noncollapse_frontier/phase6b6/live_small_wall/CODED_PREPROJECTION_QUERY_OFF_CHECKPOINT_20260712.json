@@ -1,0 +1,120 @@
+{
+  "schema_id": "CAT_CAS_CODED_PREPROJECTION_QUERY_OFF_CHECKPOINT_V1",
+  "claim_ceiling": "CONTROLLED_COHERENCE_STATE_FOUND",
+  "run": {
+    "run_id": "coded_preprojection_warm_query_off_0",
+    "pilot_variant": "coded-preprojection-warm-query-off-loop",
+    "source_bundle_sha256": "b8595447f1b4c42321ad39f925aa9c3a574fc8cee90afaf6f7a32d570571665e",
+    "schedule_sha256": "95d25a543007bdfcdb002ff0ce36642e9f64ef2280d262261e5ea17557482137",
+    "schedule_tokens": [
+      "WU",
+      "WU",
+      "N0",
+      "QO0",
+      "QO1",
+      "QO2",
+      "QO3",
+      "QO4",
+      "QO5",
+      "QO6",
+      "QO7",
+      "C0",
+      "C1",
+      "C2",
+      "C3",
+      "N1"
+    ],
+    "final_status": "GATE_A_FIRST_LIGHT_COMPLETE",
+    "capture_quality_classification": "CAPTURE_ACCEPTED",
+    "copy_verified": true,
+    "remote_cleaned": true,
+    "restoration_complete": true,
+    "preflight_temperature_c": 41.0,
+    "frequency_write_attempt_count": 8,
+    "restoration_readback": {
+      "policy4": {
+        "scaling_min_freq": 800000,
+        "scaling_max_freq": 3200000
+      },
+      "policy5": {
+        "scaling_min_freq": 800000,
+        "scaling_max_freq": 3200000
+      }
+    },
+    "forbidden_access": {
+      "voltage_writes": 0,
+      "msr_reads": 0,
+      "msr_writes": 0
+    },
+    "integrity": {
+      "sample_count_per_slot": [
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000
+      ],
+      "skipped_deadline_count": 0,
+      "missed_deadline_count": 0,
+      "record_integrity_failure": false,
+      "missing_slot": false,
+      "sender_spill": false,
+      "sufficient_during_burst_samples": true,
+      "all_bursts_completed_inside_slots": true
+    },
+    "decoded_coordinates": {
+      "query_off_plus": {
+        "real": 37.764453124999996,
+        "imag": 6.980078124999999,
+        "abs": 38.40410668745499
+      },
+      "query_off_minus": {
+        "real": 1.1496093749999983,
+        "imag": 29.004501488095237,
+        "abs": 29.02727524739459
+      },
+      "post_projection_control": {
+        "real": -1.741015624999995,
+        "imag": 4.615625000000001,
+        "abs": 4.933064924275691
+      }
+    },
+    "neutral_restoration": {
+      "before_slot": 2,
+      "after_slot": 15,
+      "before_mean_response_cycles": 83.083921875,
+      "after_mean_response_cycles": 82.802109375,
+      "absolute_delta_cycles": 0.2818125000000009,
+      "tolerance_cycles": 5.0,
+      "passed": true
+    },
+    "query_off_null_bound_cycles": 13.846875000000004,
+    "query_off_null_passed": false,
+    "fold_odd_opposed": false,
+    "fold_odd_signal_candidate": false,
+    "engineering_candidate": false,
+    "result_path": "runs/coded_preprojection_warm_query_off_0"
+  },
+  "adjudication": {
+    "marker": "CODED_PREPROJECTION_QUERY_OFF_RESIDUAL_CURVATURE",
+    "h5_confirmed": false,
+    "h5_killed": false,
+    "small_wall_crossed": false,
+    "rationale": "The query-off control completed with full integrity and neutral restoration, but the frozen decoder did not satisfy the predeclared null bound. It also did not reproduce the restored candidate's opposed fold-odd signature: both query-off imag components were positive. This exposes residual same-sign timing curvature in the query-off geometry and leaves declaration-sham or a stronger null-balancing control as the next discriminator.",
+    "remaining_killing_controls": [
+      "declaration-sham",
+      "stronger query-off baseline cancellation"
+    ]
+  }
+}

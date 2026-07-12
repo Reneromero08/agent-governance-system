@@ -6,7 +6,7 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`CODED_PREPROJECTION_QUERY_SCRAMBLE_CONTROL_NULL`
+`CODED_PREPROJECTION_QUERY_OFF_RESIDUAL_CURVATURE`
 
 **Active wall:**
 The current wall is now restoration-clean physical coupling for a declared
@@ -22,9 +22,13 @@ not restore because the first neutral slot carried a large cold-response offset.
 `coded_preprojection_loop_2` repaired the warmup geometry and produced a restored
 opposed fold-odd candidate. `coded_preprojection_warm_query_scramble_0` then used the
 same warm-restored geometry with a scrambled public query binding and decoded null
-under the frozen quadrature weights. The active wall remains physical killing
-controls: query-off and declaration-sham still need the same warm-restored geometry
-before any Small Wall crossing claim.
+under the frozen quadrature weights. `coded_preprojection_warm_query_off_0` completed
+and restored with equal physical footprint through the query window, but it did not
+satisfy the predeclared null bound; it produced same-sign residual curvature rather
+than the candidate's opposed fold-odd response. The active wall is now null-control
+baseline curvature: declaration-sham or a stronger query-off cancellation must
+distinguish declaration/slot curvature from true pre-projection coupling before any
+Small Wall crossing claim.
 
 ## Established
 
@@ -850,6 +854,46 @@ post-projection, private-fold sign, neutral restoration, and query-scramble, but
 physical query-off and declaration-sham killing controls remain pending under the
 repaired geometry.
 
+The query-off run used the same warm-restored geometry with equal footprint in the
+query window:
+
+```text
+run id        coded_preprojection_warm_query_off_0
+schedule      WU WU N0 QO0 QO1 QO2 QO3 QO4 QO5 QO6 QO7 C0 C1 C2 C3 N1
+source bundle b8595447f1b4c42321ad39f925aa9c3a574fc8cee90afaf6f7a32d570571665e
+schedule hash 95d25a543007bdfcdb002ff0ce36642e9f64ef2280d262261e5ea17557482137
+```
+
+The transaction completed, copied back, cleaned the remote run root, restored policies
+4 and 5 to `800000-3200000` kHz by readback, and performed zero voltage access and
+zero MSR access. Capture was accepted, all 16 slots had 1000 samples, all stimulus
+bursts completed inside their slots, there were no skipped deadlines, no missing slots,
+no sender spill, and no record-integrity failure.
+
+The frozen decoder did not pass the query-off null bound:
+
+```text
+query-off plus   imag  +6.980078124999999
+query-off minus  imag +29.004501488095237
+post control     imag  +4.615625000000001
+null bound             13.846875000000004
+neutral delta           0.2818125000000009
+neutral tolerance       5.0
+```
+
+This does not reproduce the restored candidate's opposed fold-odd signature because
+both query-off imag components are positive. It does expose residual same-sign
+baseline curvature in the query-off geometry.
+
+Checkpoint:
+
+`CODED_PREPROJECTION_QUERY_OFF_CHECKPOINT_20260712.json`
+
+**Status:** H5 remains unresolved rather than confirmed. Query-scramble is killed;
+query-off is not clean-null because equal-footprint query slots retain same-sign
+curvature. The next useful discriminator is declaration-sham or a stronger
+baseline-canceling query-off control, not a new PMU/MOESI branch.
+
 ### H6 - Alternative carriers remain available
 
 Candidate families:
@@ -868,9 +912,10 @@ operator, observability, or restoration wall that it can attack.
 
 ## Cheapest current discriminator
 
-Build the next warm-restored killing control: physical query-off or declaration-sham
-using the same restored neutral geometry as `coded_preprojection_loop_2` and
-`coded_preprojection_warm_query_scramble_0`.
+Build the next warm-restored discriminator: declaration-sham using the same restored
+neutral geometry as `coded_preprojection_loop_2`,
+`coded_preprojection_warm_query_scramble_0`, and
+`coded_preprojection_warm_query_off_0`.
 
 The next probe should answer:
 
@@ -882,8 +927,8 @@ The next probe should answer:
    for pre-projection coupling?
 3. Do post-projection, query-off, source-off, declaration-sham, and
    private-fold controls behave as predicted before any promotion?
-4. Does the killing control stay fold-odd null while preserving the post-warmup neutral
-   restoration class?
+4. Does declaration alone reproduce the query-off same-sign curvature, or does it stay
+   null while preserving the post-warmup neutral restoration class?
 
 Do not run another scalar PMU route metric, unconditioned transient timing repeat, or
 unlabeled cache-line rectangle unchanged. The useful build now is a coded physical loop
@@ -896,9 +941,11 @@ with the model's controls preserved.
 The next major scientific threshold is a physical coded pre-projection response with
 restoration and killing controls. `coded_preprojection_loop_2` is a restored physical
 fold-odd response candidate, and `coded_preprojection_warm_query_scramble_0` killed the
-physical query-scramble alternative, but the next useful marker remains short of
-`SMALL_WALL_CROSSED` until query-off and declaration-sham physical controls are run
-under the same restored geometry.
+physical query-scramble alternative. `coded_preprojection_warm_query_off_0` exposed a
+same-sign residual-curvature wall instead of a clean null or an opposed fold-odd kill.
+The next useful marker remains short of `SMALL_WALL_CROSSED` until declaration-sham or
+a stronger query-off baseline-canceling control resolves that wall under the same
+restored geometry.
 
 ## State update rule
 
