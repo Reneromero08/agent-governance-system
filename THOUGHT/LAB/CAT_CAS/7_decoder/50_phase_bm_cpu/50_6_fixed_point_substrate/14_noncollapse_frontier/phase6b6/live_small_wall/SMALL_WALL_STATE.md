@@ -6,7 +6,7 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`STORE_LOAD_ALIAS_HISTORY_RESPONSE_NOT_ESTABLISHED`
+`LOCKED_HISTORY_RESPONSE_NOT_ESTABLISHED`
 
 **Active wall:**
 The current wall is still carrier/access-model selection. Timing, ownership-intent PMU
@@ -16,10 +16,10 @@ receiver-delta access model, the first source-side phase-chopped access model,
 same-core public branch-history, read-only translation/page-footprint, same-core
 stream/stride prefetching, and a source-process/fresh-measurement-process lifecycle
 carrier, same-core public indirect-target history, and same-page-offset store/load
-alias-history either failed controls or did not expose a usable fold-odd carrier. The
-eviction-sentinel first-light run remains useful because it changed restoration from
-byte equality to a measured carrier equivalence class, but the phase-local remaps did
-not promote it.
+alias-history, and a locked no-op history carrier either failed controls or did not
+expose a usable fold-odd carrier. The eviction-sentinel first-light run remains useful
+because it changed restoration from byte equality to a measured carrier equivalence
+class, but the phase-local remaps did not promote it.
 `coded_preprojection_active_query_0` moved the query into the receiver's measured
 workload before scalar recording and restored cleanly, but its opposed fold-odd
 candidate did not clear the post-control floor.
@@ -1852,15 +1852,75 @@ store/load alias history, but the forward/reverse residuals remain inside
 neutral/shuffle controls. Do not rerun this neutral/forward/reverse/shuffle store/load
 alias sequence unchanged.
 
+The locked-history discriminator then tested a stronger serializing ownership carrier:
+core 4 trained neutral, forward, reverse, or shuffle balanced locked logical no-op
+histories over CAT_CAS-owned line subsets; core 5 then measured a fixed locked no-op
+sentinel under the `locked_history_group` PMU group:
+
+```text
+run id        f10_locked_history_0
+source bundle 03aa41ab9d5269c9db0299ea97a1cf932a2ea895bb4b57603581cf90db26f0e6
+worker status LOCKED_HISTORY_RESPONSE_NOT_ESTABLISHED
+```
+
+The transaction completed with verified copy-back and remote cleanup. It performed
+zero frequency writes, zero voltage access, zero MSR reads/writes, stayed below the
+68 C temperature veto, found no forbidden CAT_CAS process residue, all PMU windows
+were unmultiplexed, and the buffer digest was unchanged after history and after
+neutral restore.
+
+Locked-history sentinel contrasts:
+
+```text
+cache_block_commands_change_to_dirty:
+  identity 18
+  forward  35
+  reverse  47
+  shuffle  29
+  delta    12
+  floor    11
+  threshold 33
+  signal false
+
+probe_responses_dirty:
+  identity 4090
+  forward  4183
+  reverse  4167
+  shuffle  4168
+  delta      16
+  floor      78
+  threshold 234
+  signal false
+
+duration_ns:
+  identity 9382770
+  forward  9356826
+  reverse  9354514
+  shuffle  9353048
+  delta       2312
+  floor      29722
+  threshold 89166
+  signal false
+```
+
+Checkpoint:
+
+`F10_LOCKED_HISTORY_CHECKPOINT_20260712.json`
+
+**Status:** this exact locked no-op history carrier is negative. It changes the
+ownership operator to serializing locked logical no-ops, but the forward/reverse
+residuals remain inside neutral/shuffle controls. Do not rerun this
+neutral/forward/reverse/shuffle locked-history sequence unchanged.
+
 ## Cheapest current discriminator
 
 Change carrier family or access model again, not another remap of the same
 phase-local timing/PMU/eviction/active-query/source-phase-chop/restored-history,
 simple branch-history/indirect-target-history/translation-footprint/prefetch-stream
-geometry, same-page-offset store/load alias-history, or the current fresh
-source-process lifecycle sentinel. The run must stay closed: CAT_CAS-owned buffers
-only, predetermined geometry, no physical-address access, no cache-set mapping, no
-unrelated-process observation, and no MSR or voltage access.
+geometry, same-page-offset store/load alias-history, locked no-op history, or the
+current fresh source-process lifecycle sentinel. The run must stay closed:
+CAT_CAS-owned buffers only, predetermined geometry, no physical-address access, no
+cache-set mapping, no unrelated-process observation, and no MSR or voltage access.
 
 The next probe should answer:
 
@@ -1887,7 +1947,8 @@ same neutral/forward/reverse/shuffle child-process read-store lifecycle sentinel
 unchanged. Do not rerun `f10_indirect_target_history_0` or the same
 neutral/forward/reverse/shuffle indirect-target sequence unchanged. Do not rerun
 `f10_store_load_alias_0` or the same neutral/forward/reverse/shuffle same-offset
-store/load alias sequence unchanged.
+store/load alias sequence unchanged. Do not rerun `f10_locked_history_0` or the same
+neutral/forward/reverse/shuffle locked-history sequence unchanged.
 
 ## Current claim ceiling
 
@@ -1933,11 +1994,13 @@ separate exited child process before a fresh remote-store sentinel and also stay
 negative. `f10_indirect_target_history_0` then changed the public branch carrier from
 conditional outcomes to indirect target selection and also stayed negative.
 `f10_store_load_alias_0` then changed carrier family to same-page-offset store/load
-alias history and also stayed negative. The next move must change carrier family or
-access model rather than keep remapping the same eviction-sentinel PMU/timing,
-active-query phase-local, source-phase-chop, restored two-line-set ownership-history,
-simple branch-history, indirect-target-history, translation-footprint, store/load
-alias-history, prefetch-stream, or source-process lifecycle geometry.
+alias history and also stayed negative. `f10_locked_history_0` then changed the
+ownership operator to serializing locked logical no-ops and also stayed negative. The
+next move must change carrier family or access model rather than keep remapping the
+same eviction-sentinel PMU/timing, active-query phase-local, source-phase-chop,
+restored two-line-set ownership-history, simple branch-history, indirect-target-
+history, translation-footprint, store/load alias-history, locked-history,
+prefetch-stream, or source-process lifecycle geometry.
 
 ## State update rule
 

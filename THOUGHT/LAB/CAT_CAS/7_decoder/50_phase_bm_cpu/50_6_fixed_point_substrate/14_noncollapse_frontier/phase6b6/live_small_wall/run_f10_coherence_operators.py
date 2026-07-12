@@ -88,6 +88,7 @@ def execute(run_id: str, *, mode: str, keep_remote: bool) -> dict[str, Any]:
             "eviction-phase-bracketed-c2d",
             "eviction-phase-bracketed-duration",
             "history-sentinel",
+            "locked-history",
             "branch-history",
             "indirect-target-history",
             "translation-history",
@@ -161,6 +162,7 @@ def execute(run_id: str, *, mode: str, keep_remote: bool) -> dict[str, Any]:
         "eviction-phase-bracketed-c2d": "F10_EVICTION_PHASE_BRACKETED_C2D_RESULT.json",
         "eviction-phase-bracketed-duration": "F10_EVICTION_PHASE_BRACKETED_DURATION_RESULT.json",
         "history-sentinel": "F10_HISTORY_SENTINEL_RESULT.json",
+        "locked-history": "F10_LOCKED_HISTORY_RESULT.json",
         "branch-history": "F10_BRANCH_HISTORY_RESULT.json",
         "indirect-target-history": "F10_INDIRECT_TARGET_HISTORY_RESULT.json",
         "translation-history": "F10_TRANSLATION_HISTORY_RESULT.json",
@@ -206,6 +208,8 @@ def execute(run_id: str, *, mode: str, keep_remote: bool) -> dict[str, Any]:
         controller["duration_phase_local_signal"] = bool(worker["acceptance"]["duration_phase_local_signal"])
     elif mode == "history-sentinel":
         controller["history_sentinel_response"] = bool(worker["acceptance"]["history_sentinel_response"])
+    elif mode == "locked-history":
+        controller["locked_history_response"] = bool(worker["acceptance"]["locked_history_response"])
     elif mode == "branch-history":
         controller["branch_history_response"] = bool(worker["acceptance"]["branch_history_response"])
     elif mode == "indirect-target-history":
@@ -232,7 +236,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--run-id", default=default_run_id())
     parser.add_argument(
         "--mode",
-        choices=("coherence-operators", "coherence-operators-route45", "coherence-operators-route23", "phase-local-pmu", "ibs-first-light", "wc-flush-order", "eviction-sentinel", "eviction-phase-local", "eviction-phase-bracketed", "eviction-phase-bracketed-c2d", "eviction-phase-bracketed-duration", "history-sentinel", "branch-history", "indirect-target-history", "translation-history", "store-load-alias-history", "prefetch-stream", "process-lifecycle"),
+        choices=("coherence-operators", "coherence-operators-route45", "coherence-operators-route23", "phase-local-pmu", "ibs-first-light", "wc-flush-order", "eviction-sentinel", "eviction-phase-local", "eviction-phase-bracketed", "eviction-phase-bracketed-c2d", "eviction-phase-bracketed-duration", "history-sentinel", "locked-history", "branch-history", "indirect-target-history", "translation-history", "store-load-alias-history", "prefetch-stream", "process-lifecycle"),
         default="coherence-operators",
     )
     parser.add_argument("--keep-remote", action="store_true")

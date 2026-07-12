@@ -51,6 +51,7 @@
 #define EVICTION_PHASE_BRACKETED_C2D_RESULT_SCHEMA "CAT_CAS_F10_EVICTION_PHASE_BRACKETED_C2D_RESULT_V1"
 #define EVICTION_PHASE_BRACKETED_DURATION_RESULT_SCHEMA "CAT_CAS_F10_EVICTION_PHASE_BRACKETED_DURATION_RESULT_V1"
 #define HISTORY_SENTINEL_RESULT_SCHEMA "CAT_CAS_F10_HISTORY_SENTINEL_RESULT_V1"
+#define LOCKED_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_LOCKED_HISTORY_RESULT_V1"
 #define BRANCH_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_BRANCH_HISTORY_RESULT_V1"
 #define INDIRECT_TARGET_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_INDIRECT_TARGET_HISTORY_RESULT_V1"
 #define TRANSLATION_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_TRANSLATION_HISTORY_RESULT_V1"
@@ -64,6 +65,7 @@
 #define BRANCH_RESTORE_LOOPS 128u
 #define BRANCH_HISTORY_LOOPS 256u
 #define BRANCH_SENTINEL_LOOPS 128u
+#define LOCKED_HISTORY_LOOPS 4u
 #define INDIRECT_TARGET_PATTERN_BYTES 4096u
 #define INDIRECT_TARGET_RESTORE_LOOPS 128u
 #define INDIRECT_TARGET_HISTORY_LOOPS 256u
@@ -218,6 +220,19 @@ struct history_sequence_spec {
     size_t step_count;
 };
 
+enum locked_history_kind {
+    LOCKED_HISTORY_NEUTRAL = 0,
+    LOCKED_HISTORY_FORWARD = 1,
+    LOCKED_HISTORY_REVERSE = 2,
+    LOCKED_HISTORY_SHUFFLE = 3
+};
+
+struct locked_history_sequence_spec {
+    const char *name;
+    enum locked_history_kind history_pattern;
+    unsigned int history_loops;
+};
+
 enum branch_pattern_kind {
     BRANCH_PATTERN_NEUTRAL = 0,
     BRANCH_PATTERN_FORWARD = 1,
@@ -331,6 +346,13 @@ static const struct event_def branch_history_group[MAX_GROUP_EVENTS] = {
     {"retired_instructions", 0x0c0, 0x00, "core"},
     {"retired_branch_instructions", 0x0c2, 0x00, "core"},
     {"retired_mispredicted_branch_instructions", 0x0c3, 0x00, "core"}
+};
+
+static const struct event_def locked_history_group[MAX_GROUP_EVENTS] = {
+    {"cpu_cycles_not_halted", 0x076, 0x00, "core"},
+    {"locked_ops_executed", 0x024, 0x01, "core"},
+    {"cache_block_commands_change_to_dirty", 0x0ea, 0x20, "northbridge"},
+    {"probe_responses_dirty", 0x0ec, 0x0c, "northbridge"}
 };
 
 static const struct event_def translation_history_group[MAX_GROUP_EVENTS] = {
@@ -627,6 +649,19 @@ static void read_subset_on_core(struct carrier *carrier, int core, int line_set)
         }
     }
     if (sink == 0x12345678ull) carrier->bytes[0] ^= 1u;
+}
+
+__attribute__((noinline, noclone))
+static void locked_noop_subset_on_core(struct carrier *carrier, int core, int line_set) {
+    if (pin_to_core(core) != 0) return;
+    size_t start = line_set == 0 ? 0u : 1u;
+    for (int iter = 0; iter < OPERATOR_ITERATIONS; iter++) {
+        for (size_t line = start; line < carrier->line_count; line += 2u) {
+            volatile uint64_t *p = (volatile uint64_t *)(void *)(carrier->bytes + line * CACHE_LINE_BYTES);
+            __asm__ __volatile__("lock orq $0, %0" : "+m"(*p) : : "memory", "cc");
+        }
+    }
+    __asm__ __volatile__("mfence" : : : "memory");
 }
 
 __attribute__((noinline, noclone))
@@ -1816,6 +1851,239 @@ static int run_history_sentinel_mode(const char *output_root, struct carrier *ca
     fclose(out);
     printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"primary_nb_coherence\"}\n",
         history_sentinel_response ? "HISTORY_SENTINEL_RESPONSE_FOUND" : "HISTORY_SENTINEL_RESPONSE_NOT_ESTABLISHED",
+        result_path);
+    return 0;
+}
+
+static void run_locked_history_pattern(
+    struct carrier *carrier,
+    int core,
+    enum locked_history_kind pattern,
+    unsigned int loops
+) {
+    for (unsigned int loop = 0; loop < loops; loop++) {
+        switch (pattern) {
+            case LOCKED_HISTORY_NEUTRAL:
+                locked_noop_subset_on_core(carrier, core, 0);
+                locked_noop_subset_on_core(carrier, core, 1);
+                locked_noop_subset_on_core(carrier, core, 1);
+                locked_noop_subset_on_core(carrier, core, 0);
+                break;
+            case LOCKED_HISTORY_FORWARD:
+                locked_noop_subset_on_core(carrier, core, 0);
+                locked_noop_subset_on_core(carrier, core, 0);
+                locked_noop_subset_on_core(carrier, core, 1);
+                locked_noop_subset_on_core(carrier, core, 1);
+                break;
+            case LOCKED_HISTORY_REVERSE:
+                locked_noop_subset_on_core(carrier, core, 1);
+                locked_noop_subset_on_core(carrier, core, 1);
+                locked_noop_subset_on_core(carrier, core, 0);
+                locked_noop_subset_on_core(carrier, core, 0);
+                break;
+            case LOCKED_HISTORY_SHUFFLE:
+                locked_noop_subset_on_core(carrier, core, 0);
+                locked_noop_subset_on_core(carrier, core, 1);
+                locked_noop_subset_on_core(carrier, core, 0);
+                locked_noop_subset_on_core(carrier, core, 1);
+                break;
+        }
+    }
+}
+
+static int measure_locked_history_window(
+    const struct event_def group[MAX_GROUP_EVENTS],
+    const struct locked_history_sequence_spec *sequence,
+    struct carrier *carrier,
+    struct group_result *result,
+    uint64_t *duration_ns,
+    uint64_t *digest_after_history,
+    uint64_t *digest_after_restore
+) {
+    int fds[MAX_GROUP_EVENTS];
+    uint64_t ids[MAX_GROUP_EVENTS];
+    memset(result, 0, sizeof(*result));
+    init_carrier(carrier);
+    prefault_carrier(carrier);
+    restore_on_core(carrier, CATCAS_CORE_A);
+    run_locked_history_pattern(carrier, CATCAS_CORE_A, sequence->history_pattern,
+                               sequence->history_loops);
+    *digest_after_history = fnv1a64(carrier->bytes, carrier->byte_count);
+    int opened = open_group(group, CATCAS_CORE_B, fds, ids);
+    if (opened != 0) {
+        result->open_errno = -opened;
+        return opened;
+    }
+    result->opened = true;
+    if (ioctl(fds[0], PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t start = monotonic_ns();
+    if (ioctl(fds[0], PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    run_locked_history_pattern(carrier, CATCAS_CORE_B, LOCKED_HISTORY_NEUTRAL, 1u);
+    if (ioctl(fds[0], PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t end = monotonic_ns();
+    int read_rc = read_group(fds[0], result);
+    for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+    if (read_rc != 0) return read_rc;
+    restore_on_core(carrier, CATCAS_CORE_A);
+    *digest_after_restore = fnv1a64(carrier->bytes, carrier->byte_count);
+    *duration_ns = end >= start ? end - start : 0;
+    return 0;
+}
+
+static int run_locked_history_mode(const char *output_root, struct carrier *carrier, uint64_t initial_digest) {
+    int locked_fds[MAX_GROUP_EVENTS];
+    uint64_t locked_ids[MAX_GROUP_EVENTS];
+    int locked_open_rc = open_group(locked_history_group, CATCAS_CORE_B,
+                                    locked_fds, locked_ids);
+    if (locked_open_rc == 0) {
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(locked_fds[i]);
+    }
+
+    const struct locked_history_sequence_spec sequences[] = {
+        {"neutral_locked_history", LOCKED_HISTORY_NEUTRAL, LOCKED_HISTORY_LOOPS},
+        {"forward_locked_history", LOCKED_HISTORY_FORWARD, LOCKED_HISTORY_LOOPS},
+        {"reverse_locked_history", LOCKED_HISTORY_REVERSE, LOCKED_HISTORY_LOOPS},
+        {"shuffle_locked_history", LOCKED_HISTORY_SHUFFLE, LOCKED_HISTORY_LOOPS},
+    };
+    enum { LOCKED_HISTORY_WINDOW_COUNT = 4 };
+    struct group_result results[LOCKED_HISTORY_WINDOW_COUNT];
+    uint64_t durations[LOCKED_HISTORY_WINDOW_COUNT];
+    uint64_t digest_after_history[LOCKED_HISTORY_WINDOW_COUNT];
+    uint64_t digest_after_restore[LOCKED_HISTORY_WINDOW_COUNT];
+    int window_rc[LOCKED_HISTORY_WINDOW_COUNT];
+    for (int i = 0; i < LOCKED_HISTORY_WINDOW_COUNT; i++) {
+        memset(&results[i], 0, sizeof(results[i]));
+        durations[i] = 0;
+        digest_after_history[i] = 0;
+        digest_after_restore[i] = 0;
+        if (locked_open_rc != 0) {
+            window_rc[i] = -ENODEV;
+        } else {
+            window_rc[i] = measure_locked_history_window(
+                locked_history_group,
+                &sequences[i],
+                carrier,
+                &results[i],
+                &durations[i],
+                &digest_after_history[i],
+                &digest_after_restore[i]);
+        }
+    }
+
+    bool all_windows_ok = true;
+    bool all_unmultiplexed = true;
+    bool bytes_unchanged_after_history = true;
+    bool bytes_unchanged_after_restore = true;
+    for (int i = 0; i < LOCKED_HISTORY_WINDOW_COUNT; i++) {
+        all_windows_ok = all_windows_ok && window_rc[i] == 0;
+        all_unmultiplexed = all_unmultiplexed && results[i].unmultiplexed;
+        bytes_unchanged_after_history =
+            bytes_unchanged_after_history && digest_after_history[i] == initial_digest;
+        bytes_unchanged_after_restore =
+            bytes_unchanged_after_restore && digest_after_restore[i] == initial_digest;
+    }
+
+    uint64_t identity_c2d = event_value_by_name(&results[0], locked_history_group, "cache_block_commands_change_to_dirty");
+    uint64_t forward_c2d = event_value_by_name(&results[1], locked_history_group, "cache_block_commands_change_to_dirty");
+    uint64_t reverse_c2d = event_value_by_name(&results[2], locked_history_group, "cache_block_commands_change_to_dirty");
+    uint64_t shuffle_c2d = event_value_by_name(&results[3], locked_history_group, "cache_block_commands_change_to_dirty");
+    uint64_t c2d_delta = abs_diff_u64(forward_c2d, reverse_c2d);
+    uint64_t c2d_control = abs_diff_u64(identity_c2d, shuffle_c2d);
+    uint64_t c2d_threshold = max_u64(32u, 3u * c2d_control);
+    bool c2d_signal = c2d_delta > c2d_threshold;
+
+    uint64_t identity_probe = event_value_by_name(&results[0], locked_history_group, "probe_responses_dirty");
+    uint64_t forward_probe = event_value_by_name(&results[1], locked_history_group, "probe_responses_dirty");
+    uint64_t reverse_probe = event_value_by_name(&results[2], locked_history_group, "probe_responses_dirty");
+    uint64_t shuffle_probe = event_value_by_name(&results[3], locked_history_group, "probe_responses_dirty");
+    uint64_t probe_delta = abs_diff_u64(forward_probe, reverse_probe);
+    uint64_t probe_control = abs_diff_u64(identity_probe, shuffle_probe);
+    uint64_t probe_threshold = max_u64(32u, 3u * probe_control);
+    bool probe_signal = probe_delta > probe_threshold;
+
+    uint64_t identity_duration = durations[0];
+    uint64_t forward_duration = durations[1];
+    uint64_t reverse_duration = durations[2];
+    uint64_t shuffle_duration = durations[3];
+    uint64_t duration_delta = abs_diff_u64(forward_duration, reverse_duration);
+    uint64_t duration_control = abs_diff_u64(identity_duration, shuffle_duration);
+    uint64_t duration_threshold = max_u64(1000u, 3u * duration_control);
+    bool duration_signal = duration_delta > duration_threshold;
+    bool locked_history_response = locked_open_rc == 0 && all_windows_ok &&
+        all_unmultiplexed && bytes_unchanged_after_history &&
+        bytes_unchanged_after_restore && (c2d_signal || probe_signal || duration_signal);
+
+    char result_path[4096];
+    int n = snprintf(result_path, sizeof(result_path), "%s/F10_LOCKED_HISTORY_RESULT.json", output_root);
+    if (n <= 0 || (size_t)n >= sizeof(result_path)) return 1;
+    FILE *out = fopen(result_path, "w");
+    if (!out) {
+        fprintf(stderr, "cannot open result: %s\n", strerror(errno));
+        return 1;
+    }
+    fprintf(out, "{\n");
+    fprintf(out, "  \"schema_id\": \"%s\",\n", LOCKED_HISTORY_RESULT_SCHEMA);
+    fprintf(out, "  \"status\": \"%s\",\n", locked_history_response ? "LOCKED_HISTORY_RESPONSE_FOUND" : "LOCKED_HISTORY_RESPONSE_NOT_ESTABLISHED");
+    fprintf(out, "  \"claim_ceiling\": \"Locked no-op history discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim\",\n");
+    fprintf(out, "  \"cores\": {\"source_core\": %d, \"sentinel_core\": %d},\n", CATCAS_CORE_A, CATCAS_CORE_B);
+    fprintf(out, "  \"perf_interface\": {\"type\": \"PERF_TYPE_RAW\", \"event_format\": \"config:0-7,32-35\", \"umask_format\": \"config:8-15\", \"exclude_kernel\": true, \"exclude_hv\": true},\n");
+    fprintf(out, "  \"source_constraints\": {\"direct_msr_access\": false, \"voltage_access\": false, \"frequency_writes\": 0, \"experiment_owned_memory_only\": true, \"physical_address_access\": false, \"cache_set_mapping\": false, \"unrelated_process_observation\": false},\n");
+    fprintf(out, "  \"locked_history_carrier\": {\"line_count\": %zu, \"line_bytes\": %d, \"byte_count\": %zu, \"history_loops\": %u, \"digest_kind\": \"fnv1a64\", \"initial_digest_hex\": \"0x%016" PRIx64 "\"},\n",
+        carrier->line_count, CACHE_LINE_BYTES, carrier->byte_count, LOCKED_HISTORY_LOOPS, initial_digest);
+    fprintf(out, "  \"selected_group\": \"locked_history_group\",\n");
+    fprintf(out, "  \"group_open_rc\": %d,\n", locked_open_rc);
+    fprintf(out, "  \"selected_events\": ");
+    print_group_defs(out, locked_history_group);
+    fprintf(out, ",\n");
+    fprintf(out, "  \"predeclared_observable\": {\"history\": \"balanced locked logical no-op histories over CAT_CAS-owned line subsets on source core\", \"sentinel\": \"fixed locked logical no-op sequence on observer core\", \"primary_acceptance\": \"forward/reverse PMU or duration delta exceeds max(floor, 3 * neutral/shuffle control spread)\"},\n");
+    fprintf(out, "  \"windows\": [\n");
+    for (int i = 0; i < LOCKED_HISTORY_WINDOW_COUNT; i++) {
+        fprintf(out, "    {\"name\": \"%s\", \"rc\": %d, \"duration_ns\": %" PRIu64 ", \"history_loops\": %u, \"digest_after_history_hex\": \"0x%016" PRIx64 "\", \"digest_after_restore_hex\": \"0x%016" PRIx64 "\", \"bytes_unchanged_after_history\": %s, \"bytes_unchanged_after_restore\": %s, \"group\": ",
+            sequences[i].name,
+            window_rc[i],
+            durations[i],
+            sequences[i].history_loops,
+            digest_after_history[i],
+            digest_after_restore[i],
+            json_bool(digest_after_history[i] == initial_digest),
+            json_bool(digest_after_restore[i] == initial_digest));
+        print_group_result(out, locked_history_group, &results[i]);
+        fprintf(out, "}%s\n", i + 1 == LOCKED_HISTORY_WINDOW_COUNT ? "" : ",");
+    }
+    fprintf(out, "  ],\n");
+    fprintf(out, "  \"contrast_counts\": {\n");
+    fprintf(out, "    \"cache_block_commands_change_to_dirty\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s},\n",
+        identity_c2d, forward_c2d, reverse_c2d, shuffle_c2d, c2d_delta, c2d_control, c2d_threshold, json_bool(c2d_signal));
+    fprintf(out, "    \"probe_responses_dirty\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s},\n",
+        identity_probe, forward_probe, reverse_probe, shuffle_probe, probe_delta, probe_control, probe_threshold, json_bool(probe_signal));
+    fprintf(out, "    \"duration_ns\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s}\n",
+        identity_duration, forward_duration, reverse_duration, shuffle_duration, duration_delta, duration_control, duration_threshold, json_bool(duration_signal));
+    fprintf(out, "  },\n");
+    fprintf(out, "  \"acceptance\": {\"all_windows_ok\": %s, \"all_unmultiplexed\": %s, \"bytes_unchanged_after_history\": %s, \"bytes_unchanged_after_restore\": %s, \"change_to_dirty_signal\": %s, \"probe_dirty_signal\": %s, \"duration_signal\": %s, \"locked_history_response\": %s}\n",
+        json_bool(all_windows_ok),
+        json_bool(all_unmultiplexed),
+        json_bool(bytes_unchanged_after_history),
+        json_bool(bytes_unchanged_after_restore),
+        json_bool(c2d_signal),
+        json_bool(probe_signal),
+        json_bool(duration_signal),
+        json_bool(locked_history_response));
+    fprintf(out, "}\n");
+    fclose(out);
+    printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"locked_history_group\"}\n",
+        locked_history_response ? "LOCKED_HISTORY_RESPONSE_FOUND" : "LOCKED_HISTORY_RESPONSE_NOT_ESTABLISHED",
         result_path);
     return 0;
 }
@@ -5540,6 +5808,7 @@ int main(int argc, char **argv) {
     bool eviction_phase_bracketed_c2d_mode = false;
     bool eviction_phase_bracketed_duration_mode = false;
     bool history_sentinel_mode = false;
+    bool locked_history_mode = false;
     bool branch_history_mode = false;
     bool indirect_target_history_mode = false;
     bool translation_history_mode = false;
@@ -5604,6 +5873,10 @@ int main(int argc, char **argv) {
                strcmp(argv[2], "--output-root") == 0) {
         history_sentinel_mode = true;
         output_root = argv[3];
+    } else if (argc == 4 && strcmp(argv[1], "--locked-history") == 0 &&
+               strcmp(argv[2], "--output-root") == 0) {
+        locked_history_mode = true;
+        output_root = argv[3];
     } else if (argc == 4 && strcmp(argv[1], "--branch-history") == 0 &&
                strcmp(argv[2], "--output-root") == 0) {
         branch_history_mode = true;
@@ -5631,7 +5904,7 @@ int main(int argc, char **argv) {
     } else if (argc == 2 && strcmp(argv[1], "--self-test") == 0) {
         return self_test();
     } else {
-        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root> | --eviction-phase-bracketed --output-root <absolute-output-root> | --eviction-phase-bracketed-c2d --output-root <absolute-output-root> | --eviction-phase-bracketed-duration --output-root <absolute-output-root> | --history-sentinel --output-root <absolute-output-root> | --branch-history --output-root <absolute-output-root> | --indirect-target-history --output-root <absolute-output-root> | --translation-history --output-root <absolute-output-root> | --store-load-alias-history --output-root <absolute-output-root> | --prefetch-stream --output-root <absolute-output-root> | --process-lifecycle --output-root <absolute-output-root>\n", argv[0]);
+        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root> | --eviction-phase-bracketed --output-root <absolute-output-root> | --eviction-phase-bracketed-c2d --output-root <absolute-output-root> | --eviction-phase-bracketed-duration --output-root <absolute-output-root> | --history-sentinel --output-root <absolute-output-root> | --locked-history --output-root <absolute-output-root> | --branch-history --output-root <absolute-output-root> | --indirect-target-history --output-root <absolute-output-root> | --translation-history --output-root <absolute-output-root> | --store-load-alias-history --output-root <absolute-output-root> | --prefetch-stream --output-root <absolute-output-root> | --process-lifecycle --output-root <absolute-output-root>\n", argv[0]);
         return 2;
     }
     if (output_root[0] != '/') {
@@ -5720,6 +5993,11 @@ int main(int argc, char **argv) {
     }
     if (history_sentinel_mode) {
         int rc = run_history_sentinel_mode(output_root, &carrier, initial_digest);
+        free(carrier.bytes);
+        return rc;
+    }
+    if (locked_history_mode) {
+        int rc = run_locked_history_mode(output_root, &carrier, initial_digest);
         free(carrier.bytes);
         return rc;
     }

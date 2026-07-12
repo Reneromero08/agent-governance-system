@@ -1,0 +1,93 @@
+{
+  "schema_id": "CAT_CAS_SMALL_WALL_LOCKED_HISTORY_CHECKPOINT_V1",
+  "result": "LOCKED_HISTORY_RESPONSE_NOT_ESTABLISHED",
+  "run_id": "f10_locked_history_0",
+  "mode": "locked-history",
+  "source_binding": {
+    "source_bundle_sha256": "03aa41ab9d5269c9db0299ea97a1cf932a2ea895bb4b57603581cf90db26f0e6",
+    "source_hashes": {
+      "f10_pmc_first_light_target.py": "0db91c821ffb12171a853c34e10d307d33e64b6151574b8f3027616617a0f805",
+      "f10_pmc_first_light_worker.c": "8a99cb09474a8582f8ae5d279b725d70cb329aa5fd2d36d0ac4d1aebe7cb7fe4"
+    }
+  },
+  "run_paths": {
+    "local_run": "runs/f10_locked_history_0",
+    "worker_result": "runs/f10_locked_history_0/F10_LOCKED_HISTORY_RESULT.json",
+    "final_result": "runs/f10_locked_history_0/FINAL_RESULT.json",
+    "controller_result": "runs/f10_locked_history_0/CONTROLLER_RESULT.json"
+  },
+  "lab_device": {
+    "host": "root@192.168.137.100",
+    "cpu_model": "AMD Phenom(tm) II X6 1090T Processor",
+    "kernel": "6.12.86+deb13-amd64"
+  },
+  "predeclared_experiment": {
+    "carrier": "CAT_CAS-owned locked logical no-op ownership history",
+    "source_operator": "neutral, forward, reverse, or shuffle balanced locked no-op histories over line subsets on source core 4",
+    "sentinel": "fixed locked no-op sequence on observer core 5",
+    "observable": "locked_history_group PMU counters and sentinel duration",
+    "killing_control": "neutral versus shuffle locked-history control spread",
+    "restoration_class": "buffer digest unchanged after history and after neutral restore; no physical restoration claim beyond the measured equivalence"
+  },
+  "transaction_integrity": {
+    "target_status": "F10_LOCKED_HISTORY_TARGET_COMPLETE",
+    "worker_status": "LOCKED_HISTORY_RESPONSE_NOT_ESTABLISHED",
+    "copy_verified": true,
+    "remote_cleaned": true,
+    "remote_returncode": 0,
+    "temperature_preflight_c": 48.0,
+    "temperature_post_c": 48.75,
+    "temperature_veto_c": 68.0,
+    "temperature_below_veto": true,
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "forbidden_process_matches_preflight": 0,
+    "forbidden_process_matches_cleanup": 0
+  },
+  "observed_counts": {
+    "cache_block_commands_change_to_dirty": {
+      "identity": 18,
+      "forward": 35,
+      "reverse": 47,
+      "shuffle": 29,
+      "forward_reverse_delta": 12,
+      "control_floor": 11,
+      "threshold": 33,
+      "signal": false
+    },
+    "probe_responses_dirty": {
+      "identity": 4090,
+      "forward": 4183,
+      "reverse": 4167,
+      "shuffle": 4168,
+      "forward_reverse_delta": 16,
+      "control_floor": 78,
+      "threshold": 234,
+      "signal": false
+    },
+    "duration_ns": {
+      "identity": 9382770,
+      "forward": 9356826,
+      "reverse": 9354514,
+      "shuffle": 9353048,
+      "forward_reverse_delta": 2312,
+      "control_floor": 29722,
+      "threshold": 89166,
+      "signal": false
+    }
+  },
+  "acceptance": {
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "bytes_unchanged_after_history": true,
+    "bytes_unchanged_after_restore": true,
+    "change_to_dirty_signal": false,
+    "probe_dirty_signal": false,
+    "duration_signal": false,
+    "locked_history_response": false
+  },
+  "claim_ceiling": "Locked no-op history discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
+  "frontier_update": "The locked no-op history carrier is negative under this sentinel. Do not rerun this neutral/forward/reverse/shuffle locked-history sequence unchanged."
+}
