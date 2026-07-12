@@ -17,7 +17,6 @@ from typing import Any
 
 HERE = Path(__file__).resolve().parent
 FRONTIER = HERE.parents[1]
-ADAPTER = FRONTIER / "phase6b6" / "acquisition" / "gate_a" / "adapter"
 FREQUENCY = FRONTIER / "phase6b6" / "acquisition" / "gate_a" / "frequency_preparation"
 RUNTIME = FRONTIER / "holo_runtime_v2"
 TARGET = "root@192.168.137.100"
@@ -25,9 +24,9 @@ REMOTE_BASE = "/root/catcas_live_small_wall"
 FILES = {
     HERE / "live_gate_a_target.py": "live_gate_a_target.py",
     FREQUENCY / "gate_a_frequency_preparation.py": "gate_a_frequency_preparation.py",
-    ADAPTER / "gate_a_worker.c": "gate_a_worker.c",
-    RUNTIME / "gate_a_engineering_smoke_runtime.c": "gate_a_engineering_smoke_runtime.c",
-    RUNTIME / "gate_a_engineering_smoke_runtime.h": "gate_a_engineering_smoke_runtime.h",
+    HERE / "small_wall_worker.c": "small_wall_worker.c",
+    HERE / "small_wall_runtime.c": "small_wall_runtime.c",
+    HERE / "small_wall_runtime.h": "small_wall_runtime.h",
     RUNTIME / "combined_pdn_hardware.c": "combined_pdn_hardware.c",
     RUNTIME / "combined_pdn_hardware.h": "combined_pdn_hardware.h",
     RUNTIME / "capture_quality_contract.h": "capture_quality_contract.h",
@@ -92,6 +91,8 @@ def execute(run_id: str, *, pilot_variant: str, keep_remote: bool) -> dict[str, 
             "phase-forward", "phase-reverse",
             "value-forward", "value-reverse", "value-equal",
             "occupancy-forward", "occupancy-reverse", "occupancy-equal",
+            "readonly-occupancy-forward", "readonly-occupancy-reverse",
+            "readonly-occupancy-equal",
         },
         "pilot variant is not closed",
     )
@@ -181,6 +182,8 @@ def parse_args() -> argparse.Namespace:
             "phase-forward", "phase-reverse",
             "value-forward", "value-reverse", "value-equal",
             "occupancy-forward", "occupancy-reverse", "occupancy-equal",
+            "readonly-occupancy-forward", "readonly-occupancy-reverse",
+            "readonly-occupancy-equal",
         ),
         default="pn",
     )

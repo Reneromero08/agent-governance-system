@@ -1,5 +1,5 @@
-#ifndef CATCAS_GATE_A_ENGINEERING_SMOKE_RUNTIME_H
-#define CATCAS_GATE_A_ENGINEERING_SMOKE_RUNTIME_H
+#ifndef CATCAS_SMALL_WALL_RUNTIME_H
+#define CATCAS_SMALL_WALL_RUNTIME_H
 
 #include "combined_pdn_hardware.h"
 
@@ -14,6 +14,18 @@
 #define GATE_A_TEMPERATURE_MIN_MILLIDEGREES (-40000L)
 #define GATE_A_TEMPERATURE_MAX_MILLIDEGREES 125000L
 
+/* Fixed CAT_CAS-owned cache-response geometry shared by runtime and worker. */
+#define GATE_A_CACHE_LINE_BYTES 64U
+#define GATE_A_OCCUPANCY_SMALL_BYTES (256U * 1024U)
+#define GATE_A_OCCUPANCY_EQUAL_BYTES (4U * 1024U * 1024U)
+#define GATE_A_OCCUPANCY_LARGE_BYTES (32U * 1024U * 1024U)
+#define GATE_A_RESPONSE_BUFFER_BYTES (2U * 1024U * 1024U)
+#define GATE_A_RESPONSE_TOUCHES 64U
+#define GATE_A_OCCUPANCY_BURST_TOUCHES 256U
+#define GATE_A_READONLY_SLOT_TOUCHES 1000003U
+#define GATE_A_OCCUPANCY_LINE_STRIDE 8191U
+#define GATE_A_RESPONSE_LINE_STRIDE 4093U
+
 enum {
     GATE_A_PILOT_PN = 0,
     GATE_A_PILOT_NP = 1,
@@ -21,7 +33,16 @@ enum {
     GATE_A_PILOT_IMPULSE = 3,
     GATE_A_PILOT_STEP_SHAM = 4,
     GATE_A_PILOT_PHASE_FORWARD = 5,
-    GATE_A_PILOT_PHASE_REVERSE = 6
+    GATE_A_PILOT_PHASE_REVERSE = 6,
+    GATE_A_PILOT_VALUE_FORWARD = 7,
+    GATE_A_PILOT_VALUE_REVERSE = 8,
+    GATE_A_PILOT_VALUE_EQUAL = 9,
+    GATE_A_PILOT_OCCUPANCY_FORWARD = 10,
+    GATE_A_PILOT_OCCUPANCY_REVERSE = 11,
+    GATE_A_PILOT_OCCUPANCY_EQUAL = 12,
+    GATE_A_PILOT_READONLY_OCCUPANCY_FORWARD = 13,
+    GATE_A_PILOT_READONLY_OCCUPANCY_REVERSE = 14,
+    GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL = 15
 };
 
 typedef struct {
@@ -58,6 +79,13 @@ typedef struct {
     int voltage_writes;
     int msr_reads;
     int msr_writes;
+    char occupancy_digest_before[65];
+    char occupancy_digest_after[65];
+    int occupancy_digest_unchanged;
+    int occupancy_prefaulted;
+    uint64_t occupancy_touch_count[16];
+    uint64_t occupancy_initial_cursor[16];
+    uint64_t occupancy_final_cursor[16];
 } GateASmokeResult;
 
 int run_gate_a_engineering_smoke(const GateASmokeArgs *, GateASmokeResult *);

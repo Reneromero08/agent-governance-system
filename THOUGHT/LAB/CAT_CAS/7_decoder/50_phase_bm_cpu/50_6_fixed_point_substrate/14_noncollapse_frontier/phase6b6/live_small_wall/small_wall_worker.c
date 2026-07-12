@@ -1,6 +1,6 @@
 #define _POSIX_C_SOURCE 200809L
 
-#include "gate_a_engineering_smoke_runtime.h"
+#include "small_wall_runtime.h"
 
 #include <errno.h>
 #include <math.h>
@@ -123,6 +123,45 @@ static int pilot_variant_value(const char *text) {
     if (string_equal(text, "step-sham")) return GATE_A_PILOT_STEP_SHAM;
     if (string_equal(text, "phase-forward")) return GATE_A_PILOT_PHASE_FORWARD;
     if (string_equal(text, "phase-reverse")) return GATE_A_PILOT_PHASE_REVERSE;
+    if (string_equal(text, "value-forward")) return GATE_A_PILOT_VALUE_FORWARD;
+    if (string_equal(text, "value-reverse")) return GATE_A_PILOT_VALUE_REVERSE;
+    if (string_equal(text, "value-equal")) return GATE_A_PILOT_VALUE_EQUAL;
+    if (string_equal(text, "occupancy-forward")) return GATE_A_PILOT_OCCUPANCY_FORWARD;
+    if (string_equal(text, "occupancy-reverse")) return GATE_A_PILOT_OCCUPANCY_REVERSE;
+    if (string_equal(text, "occupancy-equal")) return GATE_A_PILOT_OCCUPANCY_EQUAL;
+    if (string_equal(text, "readonly-occupancy-forward")) return GATE_A_PILOT_READONLY_OCCUPANCY_FORWARD;
+    if (string_equal(text, "readonly-occupancy-reverse")) return GATE_A_PILOT_READONLY_OCCUPANCY_REVERSE;
+    if (string_equal(text, "readonly-occupancy-equal")) return GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL;
+    return -1;
+}
+
+static size_t pilot_working_set_bytes(int slot, int pilot) {
+    if (slot < 6 || slot > 9) return 0;
+    if (pilot == GATE_A_PILOT_OCCUPANCY_EQUAL ||
+        pilot == GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL) {
+        return GATE_A_OCCUPANCY_EQUAL_BYTES;
+    }
+    if (pilot == GATE_A_PILOT_OCCUPANCY_FORWARD ||
+        pilot == GATE_A_PILOT_READONLY_OCCUPANCY_FORWARD) {
+        return slot == 6 || slot == 9
+            ? GATE_A_OCCUPANCY_SMALL_BYTES : GATE_A_OCCUPANCY_LARGE_BYTES;
+    }
+    if (pilot == GATE_A_PILOT_OCCUPANCY_REVERSE) {
+        return slot == 6 || slot == 9
+            ? GATE_A_OCCUPANCY_LARGE_BYTES : GATE_A_OCCUPANCY_SMALL_BYTES;
+    }
+    return 0;
+}
+
+static int pilot_value(int slot, int pilot) {
+    if (slot < 6 || slot > 9) return -1;
+    if (pilot == GATE_A_PILOT_VALUE_EQUAL) return 42;
+    if (pilot == GATE_A_PILOT_VALUE_FORWARD) {
+        return slot == 6 || slot == 9 ? 125 : 131;
+    }
+    if (pilot == GATE_A_PILOT_VALUE_REVERSE) {
+        return slot == 6 || slot == 9 ? 131 : 125;
+    }
     return -1;
 }
 
@@ -159,16 +198,29 @@ static void emit_slot_records(int pilot) {
                driven ? "true" : "false");
         if (!driven) {
             fputs("null,\"phase_index\":null,\"sign\":null,"
+                  "\"orbit_value\":null,\"working_set_bytes\":0,"
                   "\"sender_epoch_id\":null}", stdout);
         } else {
             int phase = pilot_phase(slot, pilot);
             int sign = phase == 4 ? -1 : 1;
+            int orbit_value = pilot_value(slot, pilot);
             const char *epoch;
             if (slot >= 6 && slot <= 9) {
                 if (pilot == GATE_A_PILOT_PHASE_FORWARD ||
                     pilot == GATE_A_PILOT_PHASE_REVERSE) {
                     epoch = slot < 8 ? "gate-a:phase:first"
                                      : "gate-a:phase:second";
+                } else if (pilot == GATE_A_PILOT_VALUE_FORWARD ||
+                           pilot == GATE_A_PILOT_VALUE_REVERSE ||
+                           pilot == GATE_A_PILOT_VALUE_EQUAL) {
+                    epoch = "gate-a:value:epoch0";
+                } else if (pilot == GATE_A_PILOT_OCCUPANCY_FORWARD ||
+                           pilot == GATE_A_PILOT_OCCUPANCY_REVERSE ||
+                           pilot == GATE_A_PILOT_OCCUPANCY_EQUAL ||
+                           pilot == GATE_A_PILOT_READONLY_OCCUPANCY_FORWARD ||
+                           pilot == GATE_A_PILOT_READONLY_OCCUPANCY_REVERSE ||
+                           pilot == GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL) {
+                    epoch = "gate-a:occupancy:epoch0";
                 } else {
                     epoch = "gate-a:step:epoch0";
                 }
@@ -176,8 +228,12 @@ static void emit_slot_records(int pilot) {
                 epoch = phase == 4 ? "gate-a:anchor:negative"
                                    : "gate-a:anchor:positive";
             }
-            printf("2,\"phase_index\":%d,\"sign\":%d,"
-                   "\"sender_epoch_id\":\"%s\"}", phase, sign, epoch);
+            printf("2,\"phase_index\":%d,\"sign\":%d,\"orbit_value\":",
+                   phase, sign);
+            if (orbit_value >= 0) printf("%d", orbit_value);
+            else fputs("null", stdout);
+            printf(",\"working_set_bytes\":%zu,\"sender_epoch_id\":\"%s\"}",
+                   pilot_working_set_bytes(slot, pilot), epoch);
         }
     }
     putchar(']');
@@ -242,7 +298,7 @@ static int execute_authorized(int argc, char **argv) {
         parse_double_exact(slot_text, &slot_s) || slot_s != 0.5 ||
         parse_double_exact(temp_text, &temp) || temp != 68.0 ||
         parse_long_exact(frequency_text, &frequency) || frequency != 1600000 ||
-        pilot < GATE_A_PILOT_PN || pilot > GATE_A_PILOT_PHASE_REVERSE ||
+        pilot < GATE_A_PILOT_PN || pilot > GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL ||
         validate_schedule_semantics()) {
         fputs("execute-authorized requires a worker compiled for the exact validated authority and frozen geometry\n", stderr);
         return 2;
@@ -270,7 +326,7 @@ static int execute_authorized(int argc, char **argv) {
     return 0;
 }
 
-static int self_test(const char *retained_output) {
+static int self_test(const char *retained_output, int pilot) {
     char base[] = "/tmp/gate_a_worker_selftest_XXXXXX";
     char output[CP_PATH_MAX];
     if (retained_output) {
@@ -294,6 +350,7 @@ static int self_test(const char *retained_output) {
         .slot_s = 0.5,
         .temperature_veto_c = 68.0,
         .required_frequency_khz = 1600000,
+        .pilot_variant = pilot,
         .backend = BACKEND_MOCK,
     };
     GateASmokeResult result = {0};
@@ -309,6 +366,17 @@ static int self_test(const char *retained_output) {
                 result.capture_deadline_tsc - result.capture_last_sample_tsc > 400000ULL ||
                 result.frequency_writes || result.voltage_writes ||
                 result.msr_reads || result.msr_writes)) rc = 1;
+    if (!rc && pilot >= GATE_A_PILOT_READONLY_OCCUPANCY_FORWARD) {
+        if (!result.occupancy_prefaulted ||
+            !result.occupancy_digest_unchanged ||
+            strcmp(result.occupancy_digest_before,
+                   result.occupancy_digest_after)) rc = 1;
+        for (int slot = 6; slot <= 9; slot++) {
+            if (result.occupancy_touch_count[slot] !=
+                    GATE_A_READONLY_SLOT_TOUCHES ||
+                result.occupancy_initial_cursor[slot] != 0) rc = 1;
+        }
+    }
     const char *names[] = {
         "raw_samples.bin", "slot_trace.jsonl", "LOCKIN_IQ.jsonl",
         "SENDER_LIFECYCLE.jsonl", GATE_A_TEMPERATURE_RECEIPT_FILE,
@@ -335,14 +403,61 @@ static int self_test(const char *retained_output) {
     return 0;
 }
 
+static int cache_response_self_test(void) {
+    const size_t forward[4] = {
+        pilot_working_set_bytes(6, GATE_A_PILOT_OCCUPANCY_FORWARD),
+        pilot_working_set_bytes(7, GATE_A_PILOT_OCCUPANCY_FORWARD),
+        pilot_working_set_bytes(8, GATE_A_PILOT_OCCUPANCY_FORWARD),
+        pilot_working_set_bytes(9, GATE_A_PILOT_OCCUPANCY_FORWARD),
+    };
+    const size_t reverse[4] = {
+        pilot_working_set_bytes(6, GATE_A_PILOT_OCCUPANCY_REVERSE),
+        pilot_working_set_bytes(7, GATE_A_PILOT_OCCUPANCY_REVERSE),
+        pilot_working_set_bytes(8, GATE_A_PILOT_OCCUPANCY_REVERSE),
+        pilot_working_set_bytes(9, GATE_A_PILOT_OCCUPANCY_REVERSE),
+    };
+    for (int index = 0; index < 4; index++) {
+        size_t expected_forward = index == 0 || index == 3
+            ? GATE_A_OCCUPANCY_SMALL_BYTES : GATE_A_OCCUPANCY_LARGE_BYTES;
+        size_t expected_reverse = index == 0 || index == 3
+            ? GATE_A_OCCUPANCY_LARGE_BYTES : GATE_A_OCCUPANCY_SMALL_BYTES;
+        if (forward[index] != expected_forward ||
+            reverse[index] != expected_reverse ||
+            pilot_working_set_bytes(
+                index + 6, GATE_A_PILOT_OCCUPANCY_EQUAL) !=
+                GATE_A_OCCUPANCY_EQUAL_BYTES) return 1;
+        if (pilot_working_set_bytes(
+                index + 6, GATE_A_PILOT_READONLY_OCCUPANCY_FORWARD) !=
+                    expected_forward ||
+            pilot_working_set_bytes(
+                index + 6, GATE_A_PILOT_READONLY_OCCUPANCY_REVERSE) !=
+                    expected_reverse ||
+            pilot_working_set_bytes(
+                index + 6, GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL) !=
+                    GATE_A_OCCUPANCY_EQUAL_BYTES) return 1;
+    }
+    if (self_test(NULL, GATE_A_PILOT_OCCUPANCY_EQUAL)) return 1;
+    return self_test(NULL, GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL);
+}
+
 int main(int argc, char **argv) {
     if (argc == 2 && string_equal(argv[1], "--validate-only")) return validate_only();
     if (argc == 2 && string_equal(argv[1], "--probe-only")) return probe_only();
-    if (argc == 2 && string_equal(argv[1], "--self-test")) return self_test(NULL);
-    if (argc == 3 && string_equal(argv[1], "--self-test-retain")) return self_test(argv[2]);
+    if (argc == 2 && string_equal(argv[1], "--self-test")) {
+        return self_test(NULL, GATE_A_PILOT_PN);
+    }
+    if (argc == 2 && string_equal(argv[1], "--self-test-cache-response")) {
+        return cache_response_self_test();
+    }
+    if (argc == 3 && string_equal(argv[1], "--self-test-retain")) {
+        return self_test(argv[2], GATE_A_PILOT_PN);
+    }
+    if (argc == 3 && string_equal(argv[1], "--self-test-cache-response-retain")) {
+        return self_test(argv[2], GATE_A_PILOT_OCCUPANCY_EQUAL);
+    }
     if (argc >= 2 && string_equal(argv[1], "--execute-authorized")) {
         return execute_authorized(argc, argv);
     }
-    fputs("usage: gate_a_worker --validate-only | --self-test | --self-test-retain ABSOLUTE_OUTPUT | --execute-authorized ...\n", stderr);
+    fputs("usage: gate_a_worker --validate-only | --self-test | --self-test-cache-response | --self-test-retain ABSOLUTE_OUTPUT | --self-test-cache-response-retain ABSOLUTE_OUTPUT | --execute-authorized ...\n", stderr);
     return 2;
 }

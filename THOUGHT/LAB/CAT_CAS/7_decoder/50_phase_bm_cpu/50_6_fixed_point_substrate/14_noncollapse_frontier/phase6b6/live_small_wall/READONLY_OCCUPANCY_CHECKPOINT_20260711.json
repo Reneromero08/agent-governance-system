@@ -1,0 +1,163 @@
+{
+  "schema_id": "CAT_CAS_READONLY_OCCUPANCY_CHECKPOINT_V1",
+  "checkpoint_date": "2026-07-11",
+  "repository": "D:/CCC 2.0/AI/agent-governance-system",
+  "branch": "main",
+  "pre_commit_head": "4bae0a13f3514bd3173c5d3ba604ecf852d854a3",
+  "validation_status": "FIRST_LIGHT_COMPLETE_EXTENDED_SEQUENCE_BLOCKED",
+  "current_mechanism": {
+    "description": "Experiment-owned read-only shared-cache occupancy stimulus with separate CAT_CAS-owned response measurement buffer",
+    "schedule": "I I I I C0 D0 S0E S0E S0E S0E O0 O0 A0P A0N T T",
+    "sender_core": 4,
+    "receiver_core": 5,
+    "read_hz": 8000,
+    "slot_seconds": 0.5,
+    "slot_count": 16,
+    "nominal_duration_seconds": 8,
+    "temperature_veto_c": 68,
+    "required_frequency_khz": 1600000,
+    "readonly_touches_per_s0e_slot": 1000003,
+    "response_buffer_bytes": 2097152,
+    "response_touches_per_sample": 64,
+    "occupancy_small_bytes": 262144,
+    "occupancy_equal_bytes": 4194304,
+    "occupancy_large_bytes": 33554432,
+    "safety_boundary": "CAT_CAS-controlled threads, synthetic experiment-owned memory, predetermined footprints, aggregate timing response only, no address discovery, no cache-set mapping, no unrelated-process observation, no voltage access, no MSR access"
+  },
+  "implementation_summary": [
+    "Restored the prior Gate A engineering-smoke runtime, header, and adapter worker files out of the live Small Wall mechanism.",
+    "Moved the active mechanism into phase6b6/live_small_wall/small_wall_runtime.c, small_wall_runtime.h, and small_wall_worker.c.",
+    "Added readonly-occupancy-forward, readonly-occupancy-reverse, and readonly-occupancy-equal variants.",
+    "Isolated the read-only occupancy path from the older dirty occupancy burst path.",
+    "Recorded before/after occupancy-buffer digests and failed closed until the read-only digest remained unchanged.",
+    "Made receiver completion join at the fixed 8-second deadline so planned sample-capacity completion is not rejected as a timing race."
+  ],
+  "lab_device": {
+    "host": "root@192.168.137.100",
+    "actions_performed": [
+      "authenticated file transfer of experiment-owned source bundle",
+      "remote compile of the transferred worker",
+      "temporary policy4 and policy5 cpufreq min/max pinning to 1600000 kHz for each transaction",
+      "bounded 8-second CAT_CAS-controlled stimulus and timing-response capture per transaction",
+      "copy-back verification of retained output files",
+      "remote temporary run-root cleanup",
+      "readback restoration of policy4 and policy5 cpufreq min/max limits after each transaction"
+    ],
+    "actions_not_performed": [
+      "voltage write",
+      "MSR read",
+      "MSR write",
+      "address discovery",
+      "cache-set mapping",
+      "unrelated-process observation",
+      "persistence",
+      "private-data-dependent input"
+    ],
+    "restored_frequency_limits_khz": {
+      "policy4": {"scaling_min_freq": 800000, "scaling_max_freq": 3200000},
+      "policy5": {"scaling_min_freq": 800000, "scaling_max_freq": 3200000}
+    },
+    "max_observed_temperature_c": 45.0,
+    "max_monitor_temperature_c": 44.5,
+    "hardware_state_restored": true,
+    "copy_back_verified": true,
+    "remote_temporary_roots_cleaned": true
+  },
+  "run_records": [
+    {
+      "run_id": "readonly_occ_equal_first_20260711e",
+      "variant": "readonly-occupancy-equal",
+      "status": "GATE_A_FIRST_LIGHT_COMPLETE",
+      "local_raw_root": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/readonly_occ_equal_first_20260711e",
+      "source_bundle_sha256": "40d9bfba2a48691a02f699bf10119d09c03d546a41b0d457062ebe254fb3c416",
+      "schedule_sha256": "418ff6e9801ba5def3f17fb25c7d56f044599e6e5bc8cc3260e0368d4877d116",
+      "sample_count": 64000,
+      "raw_samples_sha256": "1838b32edda5e89983ef7801b4fada8fba6e42c6e06053761b69162137c5fb81",
+      "runtime_result_sha256": "02298b72d93f1458410b907a47252484b29ebe8b296cf6e4f3d995b46f384ca0",
+      "step_minus_off_magnitude": 0.745333,
+      "symmetric_slot_contrast_cycles": 10.965734,
+      "occupancy_digest_unchanged": true,
+      "restoration_complete": true
+    },
+    {
+      "run_id": "readonly_occ_forward_first_20260711a",
+      "variant": "readonly-occupancy-forward",
+      "status": "GATE_A_FIRST_LIGHT_COMPLETE",
+      "local_raw_root": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/readonly_occ_forward_first_20260711a",
+      "source_bundle_sha256": "40d9bfba2a48691a02f699bf10119d09c03d546a41b0d457062ebe254fb3c416",
+      "schedule_sha256": "418ff6e9801ba5def3f17fb25c7d56f044599e6e5bc8cc3260e0368d4877d116",
+      "sample_count": 64000,
+      "raw_samples_sha256": "ee0acfd8b55452111c1793eba38c98be72cef9cd3dfc91a5006e63abb2def324",
+      "runtime_result_sha256": "b07974544d54e1b23f3da72de58dfde0328d586bdd2184678551386704a037a2",
+      "step_minus_off_magnitude": 2.277626,
+      "symmetric_slot_contrast_cycles": -30.525824,
+      "occupancy_digest_unchanged": true,
+      "restoration_complete": true
+    },
+    {
+      "run_id": "readonly_occ_reverse_first_20260711a",
+      "variant": "readonly-occupancy-reverse",
+      "status": "GATE_A_FIRST_LIGHT_COMPLETE",
+      "local_raw_root": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/readonly_occ_reverse_first_20260711a",
+      "source_bundle_sha256": "40d9bfba2a48691a02f699bf10119d09c03d546a41b0d457062ebe254fb3c416",
+      "schedule_sha256": "418ff6e9801ba5def3f17fb25c7d56f044599e6e5bc8cc3260e0368d4877d116",
+      "sample_count": 64000,
+      "raw_samples_sha256": "3ebc1e4769fd994a7bc34422fc613a275c85e6615b1143f6ddeb40eb3f7653ae",
+      "runtime_result_sha256": "bdba87fcc87371a8fc49ba5cbbd2acea3bf81e80234dc05b8ef831bf060facd9",
+      "step_minus_off_magnitude": 0.461581,
+      "symmetric_slot_contrast_cycles": 20.324652,
+      "occupancy_digest_unchanged": true,
+      "restoration_complete": true
+    },
+    {
+      "run_id": "readonly_occ_ext_equal0_20260711a",
+      "variant": "readonly-occupancy-equal",
+      "status": "GATE_A_FIRST_LIGHT_COMPLETE",
+      "local_raw_root": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/readonly_occ_ext_equal0_20260711a",
+      "source_bundle_sha256": "40d9bfba2a48691a02f699bf10119d09c03d546a41b0d457062ebe254fb3c416",
+      "schedule_sha256": "418ff6e9801ba5def3f17fb25c7d56f044599e6e5bc8cc3260e0368d4877d116",
+      "sample_count": 64000,
+      "raw_samples_sha256": "9c267bec3a94be5133be6406da88167b3812ac52dff7c6e389791feeef200049",
+      "runtime_result_sha256": "1598ab5070dd31f4d5f5d02b5feaaacf7bd48b82a5501d82cc180ab5e5375548",
+      "step_minus_off_magnitude": 0.071369,
+      "symmetric_slot_contrast_cycles": 3.204402,
+      "occupancy_digest_unchanged": true,
+      "restoration_complete": true
+    },
+    {
+      "run_id": "readonly_occ_ext_forward1_20260711a",
+      "variant": "readonly-occupancy-forward",
+      "status": "GATE_A_FIRST_LIGHT_FAILED",
+      "failure_reason": "PATHOLOGICAL_TIMESTAMP_GAP",
+      "local_raw_root": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/readonly_occ_ext_forward1_20260711a",
+      "source_bundle_sha256": "40d9bfba2a48691a02f699bf10119d09c03d546a41b0d457062ebe254fb3c416",
+      "schedule_sha256": "418ff6e9801ba5def3f17fb25c7d56f044599e6e5bc8cc3260e0368d4877d116",
+      "raw_samples_sha256": "b853adcb16fde795e0385c4ff56dde06eaac047b4e29a5ee79fd854d61d57ba1",
+      "runtime_failure_sha256": "bf619b93bca2303a2bbbf21926ff2e6811dc3c5e07c2fddfb85c3a4424c33272",
+      "step_minus_off_magnitude": 0.417107,
+      "symmetric_slot_contrast_cycles": -20.51442,
+      "restoration_complete": true
+    }
+  ],
+  "exact_commands": [
+    ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_gate_a_first_light.py --run-id readonly_occ_equal_first_20260711e --pilot-variant readonly-occupancy-equal",
+    ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_gate_a_first_light.py --run-id readonly_occ_forward_first_20260711a --pilot-variant readonly-occupancy-forward",
+    ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_gate_a_first_light.py --run-id readonly_occ_reverse_first_20260711a --pilot-variant readonly-occupancy-reverse",
+    ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_gate_a_first_light.py --run-id readonly_occ_ext_equal0_20260711a --pilot-variant readonly-occupancy-equal",
+    ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_gate_a_first_light.py --run-id readonly_occ_ext_forward1_20260711a --pilot-variant readonly-occupancy-forward",
+    "git diff --check",
+    ".\\.venv\\Scripts\\python.exe -m py_compile THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_gate_a_first_light.py THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\live_gate_a_target.py"
+  ],
+  "observed_result": "Read-only occupancy first-light controls completed for equal, forward, and reverse with digest closure and restored hardware state. The extended sequence started and stopped at the first forward extended repetition because capture quality failed closed with PATHOLOGICAL_TIMESTAMP_GAP.",
+  "current_bottleneck": "The next engineering blocker is timestamp-gap hardening or capture scheduler robustness for repeated read-only occupancy transactions; no F10 PMU or MOESI phase was started after the extended-sequence quality failure.",
+  "validation_pending": [
+    "Complete extended equal/forward/reverse sequence",
+    "F10_PMC_FIRST_LIGHT",
+    "PHYSICAL_COHERENCE_HOLONOMY_CANDIDATE",
+    "Any Small Wall claim"
+  ],
+  "superseded_debug_runs_retained_locally": [
+    "readonly_occ_equal_first_20260711c",
+    "readonly_occ_equal_first_20260711d"
+  ]
+}
