@@ -151,6 +151,13 @@ MODES: dict[str, dict[str, Any]] = {
         "failed_status": "F10_TRANSLATION_HISTORY_TARGET_FAILED",
         "claim_ceiling": "Translation-footprint timing/PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
     },
+    "prefetch-stream": {
+        "worker_args": ["--prefetch-stream"],
+        "result_file": "F10_PREFETCH_STREAM_RESULT.json",
+        "complete_status": "F10_PREFETCH_STREAM_TARGET_COMPLETE",
+        "failed_status": "F10_PREFETCH_STREAM_TARGET_FAILED",
+        "claim_ceiling": "Prefetch-stream timing/PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
+    },
 }
 FORBIDDEN_PROCESS_MARKERS = (
     "f10_pmc_first_light_worker",

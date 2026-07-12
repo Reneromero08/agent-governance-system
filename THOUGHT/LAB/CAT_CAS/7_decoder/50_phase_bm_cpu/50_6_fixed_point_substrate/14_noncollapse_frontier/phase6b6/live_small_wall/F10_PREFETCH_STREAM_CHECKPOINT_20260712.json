@@ -1,0 +1,83 @@
+{
+  "schema_id": "CAT_CAS_F10_PREFETCH_STREAM_CHECKPOINT_V1",
+  "checkpoint_date": "2026-07-12",
+  "starting_head": "b52bd17577952dd25097dd123237d6ed8ef55aa0",
+  "run_id": "f10_prefetch_stream_0",
+  "mode": "prefetch-stream",
+  "mechanism": {
+    "carrier": "same-core public stream/stride read state over CAT_CAS-owned aligned lines",
+    "restore": "neutral stream wash before every measured window",
+    "sentinel": "fixed forward public line-read stream over flushed sentinel lines",
+    "primary_observable": "cache_misses",
+    "secondary_observable": "duration_ns",
+    "acceptance": "forward/reverse cache-miss delta exceeds max(32, 3 * neutral/shuffle control spread)"
+  },
+  "command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_coherence_operators.py --run-id f10_prefetch_stream_0 --mode prefetch-stream",
+  "local_run": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/f10_prefetch_stream_0",
+  "remote_run": "/root/catcas_live_small_wall/f10_prefetch_stream_0",
+  "source_bundle_sha256": "d1163c8e2dcdcc4fb502021dc7c98adbe5fa01ddb0365e9333bfe3aceb8e47c9",
+  "source_hashes": {
+    "f10_pmc_first_light_target.py": "5f42d870e5220c54897e4fb502920fdaa3650bae5c892d94d1cefe6047cc6573",
+    "f10_pmc_first_light_worker.c": "a06d16bc0eae747c4a1ac4adea0c3555bb4e5e0f281674be271a6fff64ec949d"
+  },
+  "result": {
+    "target_status": "F10_PREFETCH_STREAM_TARGET_COMPLETE",
+    "worker_status": "PREFETCH_STREAM_RESPONSE_NOT_ESTABLISHED",
+    "capture_group": "prefetch_stream_group",
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "bytes_unchanged_after_history": true,
+    "bytes_unchanged_after_restore": true,
+    "cache_miss_signal": false,
+    "duration_signal": false,
+    "prefetch_stream_response": false
+  },
+  "contrast_counts": {
+    "cache_misses": {
+      "identity": 1294,
+      "forward": 1284,
+      "reverse": 1280,
+      "shuffle": 1283,
+      "forward_reverse_delta": 4,
+      "control_floor": 11,
+      "threshold": 33,
+      "signal": false
+    },
+    "duration_ns": {
+      "identity": 330652,
+      "forward": 325813,
+      "reverse": 324974,
+      "shuffle": 325392,
+      "forward_reverse_delta": 839,
+      "control_floor": 5260,
+      "threshold": 15780,
+      "signal": false
+    }
+  },
+  "safety_and_custody": {
+    "lab_device": "root@192.168.137.100",
+    "copy_verified": true,
+    "remote_cleaned": true,
+    "temperature_preflight_c": 50.0,
+    "temperature_post_c": 50.0,
+    "temperature_veto_c": 68.0,
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "physical_address_access": false,
+    "cache_set_mapping": false,
+    "preflight_forbidden_process_matches": [],
+    "cleanup_forbidden_process_matches": []
+  },
+  "raw_file_hashes": {
+    "CONTROLLER_RESULT.json": "c677aa493ec831f05b55daad93edd90f1248491e9164839e39f462e6ffa71cec",
+    "CONTROLLER_STDERR.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "CONTROLLER_STDOUT.txt": "74a4ef33bfaf523886a8dfe6b2317ea239032bc1ea898f12cfbc53a26e18d818",
+    "F10_PREFETCH_STREAM_RESULT.json": "a95aa9145a789729150b26da4dd11a23e39e1a12d89ce9e254bb5a280dafa4ec",
+    "FILE_MANIFEST.json": "118b3aa43231c4f9bc5080e7d37c658581e8367b5746154183d98c857f4d53fc",
+    "FINAL_RESULT.json": "cd26d5b01106aba359c79f793716495e66803e62f4bed17bea44d4b20c75d3c3"
+  },
+  "interpretation": "Same-core stream/stride prefetch history did not create a control-clean forward/reverse sentinel response. Do not repeat this prefetch-stream discriminator unchanged.",
+  "claim_ceiling": "EVICTION_SENTINEL_RESPONSE_FOUND"
+}
