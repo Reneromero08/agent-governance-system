@@ -1,0 +1,204 @@
+{
+  "acceptance": {
+    "declaration_sham_fold_odd_null": true,
+    "model_boundary_discriminator_passed": true,
+    "new_access_model_declared": true,
+    "old_boundary_preserved": true,
+    "old_passive_sine_was_excluded": true,
+    "post_projection_fold_odd_null": true,
+    "pre_projection_exceeds_controls": true,
+    "pre_projection_fold_odd_sign_reversal": true,
+    "query_law_has_no_branch_route": true,
+    "query_off_fold_odd_null": true,
+    "query_scramble_fold_odd_null": true,
+    "source_off_fold_odd_null": true
+  },
+  "claim_ceiling": "Access-model discriminator only: a public coded query can preserve a fold-odd coordinate in the model if and only if it acts before the fold-even projection. No physical coupling, restoration, OrbitState carrier coupling, or Small Wall crossing claim.",
+  "controls": {
+    "declaration_sham": "declared phases present, source emits unphased folded scalar",
+    "post_projection": "fold-odd null after scalar projection",
+    "private_fold": "internal private fold changes sign of the pre-projection odd coordinate without changing query law",
+    "query_off": "zero response when coded query is absent",
+    "query_scramble": "non-quadrature public phase schedule decoded by frozen quadrature weights",
+    "source_off": "zero response when source coupling is absent"
+  },
+  "declared_new_access_model": {
+    "projection_boundary": "pre_projection responses are measured before scalar cos projection; post_projection controls apply the same decoder after scalar loss",
+    "query_law": {
+      "N": 256,
+      "acts_before_projection": true,
+      "decoder": "z = (2/K) * sum_k response_k * exp(i * theta_k)",
+      "forbidden_receiver_inputs": [
+        "private_branch_label",
+        "orientation_label",
+        "target_identity",
+        "session_chronology",
+        "future_value"
+      ],
+      "phase_names": [
+        "0",
+        "pi/2",
+        "pi",
+        "3pi/2"
+      ],
+      "phase_radians": [
+        0.0,
+        1.5707963267948966,
+        3.141592653589793,
+        4.71238898038469
+      ],
+      "public_fold_distance": 23,
+      "schema_id": "CAT_CAS_PUBLIC_CODED_QUERY_LAW_V1"
+    },
+    "query_law_sha256": "cbb810973735adbf1720a917419865fbeb51f8cfa0da4d0c696cb7b646e74eb9",
+    "receiver_query_payload_sha256": "a3b4152eebf4e90594940ac522dabd75d021aebe1125ca31fba80b360c9f78a1"
+  },
+  "lab_device_contact": false,
+  "live_hardware_operations": 0,
+  "next_experiment_contract": {
+    "carrier": "public coded query mapped onto CAT_CAS-owned timing or ownership-intent carrier",
+    "killing_controls": [
+      "post_projection",
+      "query_scramble",
+      "query_off",
+      "source_off",
+      "declaration_sham",
+      "private_fold"
+    ],
+    "name": "coded_preprojection_loop_0",
+    "operator": "four public phases 0, pi/2, pi, 3pi/2 before projection",
+    "primary_observable": "quadrature reconstructed fold-odd coordinate from fixed response weights",
+    "restoration_class": "buffer digest closure plus neutral pre/post physical-state probe; exact live tolerance not yet claimed",
+    "status": "MODEL_READY_LIVE_MAPPING_PENDING"
+  },
+  "old_passive_boundary": {
+    "N": 256,
+    "branch_pair": [
+      23,
+      233
+    ],
+    "cos_minus": 0.8448535652497071,
+    "cos_plus": 0.8448535652497071,
+    "excluded_coordinate": "sin(2*pi*d/N)",
+    "fold_even_difference": 0.0,
+    "hidden_sine_minus": -0.5349976198870972,
+    "hidden_sine_plus": 0.5349976198870972,
+    "public_projection": "cos(2*pi*d/N)"
+  },
+  "responses": {
+    "declaration_sham_control": {
+      "fold_even_coordinate": -7.759854108234625e-17,
+      "fold_odd_coordinate": 5.551115123125783e-17,
+      "name": "declaration_sham_control",
+      "reconstructed_complex": {
+        "abs": 9.540975573351058e-17,
+        "imag": 5.551115123125783e-17,
+        "real": -7.759854108234625e-17
+      },
+      "responses": [
+        0.8448535652497071,
+        0.8448535652497071,
+        0.8448535652497071,
+        0.8448535652497071
+      ]
+    },
+    "post_projection_control": {
+      "fold_even_coordinate": 0.8448535652497071,
+      "fold_odd_coordinate": 5.1732360721564166e-17,
+      "name": "post_projection_control",
+      "reconstructed_complex": {
+        "abs": 0.8448535652497071,
+        "imag": 5.1732360721564166e-17,
+        "real": 0.8448535652497071
+      },
+      "responses": [
+        0.8448535652497071,
+        5.1732360721564166e-17,
+        -0.8448535652497071,
+        -1.551970821646925e-16
+      ]
+    },
+    "pre_projection_private_fold_minus": {
+      "fold_even_coordinate": 0.8448535652497071,
+      "fold_odd_coordinate": -0.534997619887097,
+      "name": "pre_projection_private_fold_minus",
+      "reconstructed_complex": {
+        "abs": 1.0,
+        "imag": -0.534997619887097,
+        "real": 0.8448535652497071
+      },
+      "responses": [
+        0.8448535652497071,
+        -0.534997619887097,
+        -0.8448535652497072,
+        0.5349976198870969
+      ]
+    },
+    "pre_projection_private_fold_plus": {
+      "fold_even_coordinate": 0.8448535652497071,
+      "fold_odd_coordinate": 0.5349976198870972,
+      "name": "pre_projection_private_fold_plus",
+      "reconstructed_complex": {
+        "abs": 1.0,
+        "imag": 0.5349976198870972,
+        "real": 0.8448535652497071
+      },
+      "responses": [
+        0.8448535652497071,
+        0.5349976198870972,
+        -0.8448535652497071,
+        -0.5349976198870973
+      ]
+    },
+    "query_off_control": {
+      "fold_even_coordinate": 0.0,
+      "fold_odd_coordinate": 0.0,
+      "name": "query_off_control",
+      "reconstructed_complex": {
+        "abs": 0.0,
+        "imag": 0.0,
+        "real": 0.0
+      },
+      "responses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "query_scramble_control": {
+      "fold_even_coordinate": 7.759854108234625e-17,
+      "fold_odd_coordinate": 5.551115123125783e-17,
+      "name": "query_scramble_control",
+      "reconstructed_complex": {
+        "abs": 9.540975573351058e-17,
+        "imag": 5.551115123125783e-17,
+        "real": 7.759854108234625e-17
+      },
+      "responses": [
+        0.8448535652497071,
+        -0.8448535652497071,
+        0.8448535652497071,
+        -0.8448535652497071
+      ]
+    },
+    "source_off_control": {
+      "fold_even_coordinate": 0.0,
+      "fold_odd_coordinate": 0.0,
+      "name": "source_off_control",
+      "reconstructed_complex": {
+        "abs": 0.0,
+        "imag": 0.0,
+        "real": 0.0
+      },
+      "responses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "result_sha256": "720d3b1bc835ac8bb90a87f02158b4421893d8e8e6d027aa4beea817e99e58b6",
+  "schema_id": "CAT_CAS_CODED_PREPROJECTION_QUERY_MODEL_V1"
+}

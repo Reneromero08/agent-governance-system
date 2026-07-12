@@ -9,12 +9,16 @@
 `CONTROLLED_COHERENCE_STATE_FOUND`
 
 **Active wall:**
-The current wall is carrier/access-model selection after several cheap physical
-discriminators. A byte-preserving remote ownership-intent store is visible, but the
-simple cache-line path, route-vector, and transient timing pivots have not produced a
-repeatable antisymmetric or restored relational coordinate. The next build should
-either construct a stronger balanced carrier loop with killing controls or move toward
-a declared pre-projection query access model.
+The current wall is now physical coupling for a declared pre-projection coded-query
+access model. Several cheap physical discriminators made a byte-preserving remote
+ownership-intent store visible, but simple cache-line paths, route-vector state, and
+transient timing pivots did not produce a repeatable antisymmetric or restored
+relational coordinate. A non-driving coded-query model now preserves the old passive
+fold-even boundary while showing that a public quadrature query can retain a fold-odd
+coordinate only when it acts before projection. The next build is the smallest physical
+mapping of that coded query onto an experiment-owned timing or ownership-intent
+carrier with post-projection, query-scramble, source-off, query-off, declaration-sham,
+private-fold, and neutral-restoration controls.
 
 ## Established
 
@@ -716,10 +720,26 @@ post-processing solved the original fold-even interface.
 **Cheapest discriminator:** pre-projection mask versus post-projection mask, mask
 scramble, source-off, declaration sham, and private-fold controls.
 
-**Current evidence:** mathematical rationale is strong; physical coupling not built.
+**Current evidence:** `coded_preprojection_query_model.py` generated
+`CODED_PREPROJECTION_QUERY_MODEL_CHECKPOINT_20260712.json`. The checker preserved the
+old passive fold-even boundary, reconstructed a pre-projection fold-odd coordinate
+that flips under the private fold:
 
-**Status:** likely required near the final crossing, but not necessarily the next
-engineering move.
+```text
+pre_projection_private_fold_plus  +0.5349976198870972
+pre_projection_private_fold_minus -0.534997619887097
+post_projection_control           +5.1732360721564166e-17
+```
+
+Source-off, query-off, declaration-sham, and query-scramble controls were fold-odd
+null. The receiver query payload contains only the public fold distance and public
+phase schedule; it does not route a private branch, orientation, target identity,
+session chronology, or future value. This is a model/access-law result only. Physical
+coupling is not built.
+
+**Status:** promoted to the next engineering move at non-driving model/checker level.
+Build the minimal physical coded loop next. Do not claim physical coupling,
+restoration, fold-odd recovery, or Small Wall crossing from the model alone.
 
 ### H6 - Alternative carriers remain available
 
@@ -739,47 +759,34 @@ operator, observability, or restoration wall that it can attack.
 
 ## Cheapest current discriminator
 
-Build the thinnest corrected path-dependence discriminator over experiment-owned
-aligned cache lines.
+Build `coded_preprojection_loop_0`: the thinnest physical mapping of the model-passed
+public quadrature query onto an experiment-owned carrier.
 
 The next probe should answer:
 
-1. Can two noncommuting byte-preserving carrier operators be made visible in one
-   observation geometry, or can complementary core observations be combined without
-   label leakage?
-2. Does a predeclared antisymmetric observable, such as signed area in
-   `(change_to_dirty, probe_dirty)` or a timing-plus-PMU plane, flip under path
-   reversal while identity and shuffled controls cancel?
-3. Can the carrier return to a measured equivalence class beyond byte equality?
-4. Does the result survive a fresh process start without route or label leakage?
+1. Can the public query phases `0, pi/2, pi, 3pi/2` be mapped to a CAT_CAS-owned
+   physical timing or ownership-intent carrier without branch, orientation, target,
+   chronology, or future-value routing?
+2. Does the fixed quadrature observable
+   `z = (2/K) * sum(response_k * exp(i * theta_k))` retain a fold-odd coordinate only
+   for pre-projection coupling?
+3. Do post-projection, query-scramble, query-off, source-off, declaration-sham, and
+   private-fold controls behave as predicted before any promotion?
+4. Does a neutral pre/post probe show restoration to a measured physical equivalence
+   class beyond byte equality?
 
-The immediate cheap repair is not repetition. It is either:
-
-1. a balanced control-canceling construction for the dual-observed loop: line-swap or
-   route-swap the same actor-observed path, subtract per-line/per-core baselines before
-   promotion, and require both paired shuffles to stay small; or
-2. a carrier pivot to shared-L3/Northbridge route state or phase-native timing, because
-   the simple cache-line path rectangles are currently dominated by first-touch,
-   per-line, and route/order effects.
-
-The route comparison says route stability exists, but route reassignment alone is not
-the missing coordinate. Promote a true route-state observable only if it tests route
-history or route-conditioned loop closure directly.
-
-After `f10_route_state_0` and `transient_full_3` / `transient_step_sham_0`, another
-scalar PMU route metric or unconditioned transient timing repeat is not the cheapest
-move. The strongest remaining near-term opening is either a balanced, control-canceling
-carrier loop with a stronger restoration observable, or a declared active
-pre-projection query that can lawfully expose a fold-odd coordinate before the old
-projection discards it.
+Do not run another scalar PMU route metric, unconditioned transient timing repeat, or
+unlabeled cache-line rectangle unchanged. The useful build now is a coded physical loop
+with the model's controls preserved.
 
 ## Current claim ceiling
 
 `CONTROLLED_COHERENCE_STATE_FOUND`
 
-The next major scientific threshold is path-dependent, restored physical evolution.
-The next useful marker is likely `PHYSICAL_COHERENCE_HOLONOMY_CANDIDATE`, or a better
-mechanism-specific marker discovered by the loop.
+The next major scientific threshold is a physical coded pre-projection response with
+restoration and killing controls. The next useful marker is likely
+`FOLD_ODD_BOUNDARY_SIGNAL`, but only after physical coupling and restoration are shown;
+the model checkpoint does not reach that marker.
 
 ## State update rule
 
