@@ -61,6 +61,7 @@
 #define CODE_FOOTPRINT_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_CODE_FOOTPRINT_HISTORY_RESULT_V1"
 #define RETURN_STACK_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_RETURN_STACK_HISTORY_RESULT_V1"
 #define FP_PIPELINE_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_FP_PIPELINE_HISTORY_RESULT_V1"
+#define PAGE_PERMISSION_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_PAGE_PERMISSION_HISTORY_RESULT_V1"
 #define PHASE_LOCAL_BANK_LINES 512u
 #define EVICTION_LINES 262144u
 #define EVICTION_ITERATIONS 3
@@ -99,6 +100,10 @@
 #define FP_PIPELINE_RESTORE_LOOPS 64u
 #define FP_PIPELINE_HISTORY_LOOPS 128u
 #define FP_PIPELINE_SENTINEL_LOOPS 64u
+#define PAGE_PERMISSION_PAGE_COUNT 256u
+#define PAGE_PERMISSION_RESTORE_LOOPS 2u
+#define PAGE_PERMISSION_HISTORY_LOOPS 2u
+#define PAGE_PERMISSION_SENTINEL_LOOPS 64u
 
 struct event_def {
     const char *name;
@@ -370,6 +375,20 @@ struct fp_pipeline_sequence_spec {
     unsigned int history_loops;
 };
 
+enum page_permission_kind {
+    PAGE_PERMISSION_NEUTRAL = 0,
+    PAGE_PERMISSION_FORWARD = 1,
+    PAGE_PERMISSION_REVERSE = 2,
+    PAGE_PERMISSION_SHUFFLE = 3,
+    PAGE_PERMISSION_SENTINEL = 4
+};
+
+struct page_permission_sequence_spec {
+    const char *name;
+    enum page_permission_kind history_pattern;
+    unsigned int history_loops;
+};
+
 static const struct event_def support_events[SUPPORT_EVENTS] = {
     {"cpu_cycles_not_halted", 0x076, 0x00, "core"},
     {"dc_refills_l2_or_nb_all_states", 0x042, 0x1f, "core"},
@@ -438,6 +457,13 @@ static const struct event_def return_stack_group[MAX_GROUP_EVENTS] = {
 };
 
 static const struct event_def fp_pipeline_group[MAX_GROUP_EVENTS] = {
+    {"cpu_cycles_not_halted", 0x076, 0x00, "core"},
+    {"retired_instructions", 0x0c0, 0x00, "core"},
+    {"cache_references", 0x07d, 0x07, "core"},
+    {"cache_misses", 0x07e, 0x07, "core"}
+};
+
+static const struct event_def page_permission_group[MAX_GROUP_EVENTS] = {
     {"cpu_cycles_not_halted", 0x076, 0x00, "core"},
     {"retired_instructions", 0x0c0, 0x00, "core"},
     {"cache_references", 0x07d, 0x07, "core"},
@@ -4558,6 +4584,314 @@ static int run_fp_pipeline_history_mode(const char *output_root) {
     return 0;
 }
 
+static volatile uint64_t page_permission_sink = 0;
+
+static size_t page_permission_index(enum page_permission_kind kind, size_t i, size_t page_count) {
+    size_t mask = page_count - 1u;
+    switch (kind) {
+        case PAGE_PERMISSION_NEUTRAL:
+            return ((i * 17u) + (i >> 2)) & mask;
+        case PAGE_PERMISSION_FORWARD:
+            return i & mask;
+        case PAGE_PERMISSION_REVERSE:
+            return (page_count - 1u - (i & mask)) & mask;
+        case PAGE_PERMISSION_SHUFFLE:
+            return ((i * 1103515245u) + 12345u) & mask;
+        case PAGE_PERMISSION_SENTINEL:
+            return ((i * 37u) ^ (i >> 1) ^ 0x5au) & mask;
+    }
+    return i & mask;
+}
+
+static int restore_page_permissions(unsigned char *pages, size_t page_size, size_t page_count) {
+    for (size_t page = 0; page < page_count; page++) {
+        unsigned char *addr = pages + (page * page_size);
+        if (mprotect(addr, page_size, PROT_READ | PROT_WRITE) != 0) return -errno;
+        addr[0] = (unsigned char)((addr[0] + 0u) & 0xffu);
+    }
+    return 0;
+}
+
+static int run_page_permission_history_pattern(
+    unsigned char *pages,
+    size_t page_size,
+    size_t page_count,
+    enum page_permission_kind kind,
+    unsigned int loops
+) {
+    uint64_t acc = page_permission_sink + page_count + loops + (uint64_t)kind;
+    size_t span = page_count;
+    for (unsigned int round = 0; round < loops; round++) {
+        for (size_t i = 0; i < span; i++) {
+            size_t index = page_permission_index(kind, i + ((size_t)round * 29u), page_count);
+            unsigned char *addr = pages + (index * page_size);
+            if (mprotect(addr, page_size, PROT_NONE) != 0) return -errno;
+            if (mprotect(addr, page_size, PROT_READ | PROT_WRITE) != 0) return -errno;
+            acc ^= ((uint64_t)index + 1u) * 0x9e3779b97f4a7c15ull;
+            addr[0] = (unsigned char)((addr[0] + 0u) & 0xffu);
+            __asm__ __volatile__("" : "+r"(acc) :: "memory");
+        }
+    }
+    page_permission_sink = acc;
+    return 0;
+}
+
+__attribute__((noinline))
+static void run_page_permission_sentinel(
+    volatile unsigned char *pages,
+    size_t page_size,
+    size_t page_count,
+    unsigned int loops
+) {
+    uint64_t acc = page_permission_sink + loops + 0x94d049bb133111ebull;
+    size_t span = page_count * 2u;
+    for (unsigned int round = 0; round < loops; round++) {
+        for (size_t i = 0; i < span; i++) {
+            size_t index = page_permission_index(
+                PAGE_PERMISSION_SENTINEL, i + ((size_t)round * 43u), page_count);
+            acc += (uint64_t)pages[index * page_size];
+            acc ^= ((uint64_t)index + 1u) * 0xbf58476d1ce4e5b9ull;
+            __asm__ __volatile__("" : "+r"(acc) :: "memory");
+        }
+    }
+    page_permission_sink = acc;
+}
+
+static int measure_page_permission_window(
+    const struct event_def group[MAX_GROUP_EVENTS],
+    const struct page_permission_sequence_spec *sequence,
+    unsigned char *pages,
+    size_t page_size,
+    size_t page_count,
+    struct group_result *result,
+    uint64_t *duration_ns,
+    uint64_t *digest_after_history,
+    uint64_t *digest_after_restore,
+    int *permission_restore_probe_rc
+) {
+    int fds[MAX_GROUP_EVENTS];
+    uint64_t ids[MAX_GROUP_EVENTS];
+    memset(result, 0, sizeof(*result));
+    if (pin_to_core(CATCAS_CORE_B) != 0) return -EINVAL;
+    int restore_rc = restore_page_permissions(pages, page_size, page_count);
+    if (restore_rc != 0) return restore_rc;
+    for (unsigned int i = 0; i < PAGE_PERMISSION_RESTORE_LOOPS; i++) {
+        int wash_rc = run_page_permission_history_pattern(
+            pages, page_size, page_count, PAGE_PERMISSION_NEUTRAL, 1u);
+        if (wash_rc != 0) return wash_rc;
+    }
+    if (sequence->history_loops > 0u) {
+        int history_rc = run_page_permission_history_pattern(
+            pages, page_size, page_count, sequence->history_pattern,
+            sequence->history_loops);
+        if (history_rc != 0) return history_rc;
+    }
+    *digest_after_history = fnv1a64(pages, page_size * page_count);
+    int opened = open_group(group, CATCAS_CORE_B, fds, ids);
+    if (opened != 0) {
+        result->open_errno = -opened;
+        return opened;
+    }
+    result->opened = true;
+    if (ioctl(fds[0], PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t start = monotonic_ns();
+    if (ioctl(fds[0], PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    run_page_permission_sentinel(pages, page_size, page_count, PAGE_PERMISSION_SENTINEL_LOOPS);
+    if (ioctl(fds[0], PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t end = monotonic_ns();
+    int read_rc = read_group(fds[0], result);
+    for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+    if (read_rc != 0) return read_rc;
+    int final_restore_rc = restore_page_permissions(pages, page_size, page_count);
+    if (permission_restore_probe_rc) *permission_restore_probe_rc = final_restore_rc;
+    if (final_restore_rc != 0) return final_restore_rc;
+    *digest_after_restore = fnv1a64(pages, page_size * page_count);
+    *duration_ns = end >= start ? end - start : 0;
+    return 0;
+}
+
+static int run_page_permission_history_mode(const char *output_root) {
+    long page_size_long = sysconf(_SC_PAGESIZE);
+    if (page_size_long <= 0) {
+        fprintf(stderr, "page size unavailable\n");
+        return 1;
+    }
+    size_t page_size = (size_t)page_size_long;
+    size_t byte_count = page_size * PAGE_PERMISSION_PAGE_COUNT;
+    unsigned char *pages = NULL;
+    if (posix_memalign((void **)&pages, page_size, byte_count) != 0) {
+        fprintf(stderr, "page permission buffer allocation failed\n");
+        return 1;
+    }
+    for (size_t page = 0; page < PAGE_PERMISSION_PAGE_COUNT; page++) {
+        pages[page * page_size] = (unsigned char)((page * 97u + 23u) & 0xffu);
+    }
+    uint64_t initial_digest = fnv1a64(pages, byte_count);
+
+    int permission_fds[MAX_GROUP_EVENTS];
+    uint64_t permission_ids[MAX_GROUP_EVENTS];
+    int permission_open_rc = open_group(page_permission_group, CATCAS_CORE_B,
+                                        permission_fds, permission_ids);
+    if (permission_open_rc == 0) {
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(permission_fds[i]);
+    }
+
+    const struct page_permission_sequence_spec sequences[] = {
+        {"neutral_restore_only", PAGE_PERMISSION_NEUTRAL, 0u},
+        {"forward_page_permission_history", PAGE_PERMISSION_FORWARD, PAGE_PERMISSION_HISTORY_LOOPS},
+        {"reverse_page_permission_history", PAGE_PERMISSION_REVERSE, PAGE_PERMISSION_HISTORY_LOOPS},
+        {"shuffle_page_permission_history", PAGE_PERMISSION_SHUFFLE, PAGE_PERMISSION_HISTORY_LOOPS},
+    };
+    enum { PAGE_PERMISSION_WINDOW_COUNT = 4 };
+    struct group_result results[PAGE_PERMISSION_WINDOW_COUNT];
+    uint64_t durations[PAGE_PERMISSION_WINDOW_COUNT];
+    uint64_t digest_after_history[PAGE_PERMISSION_WINDOW_COUNT];
+    uint64_t digest_after_restore[PAGE_PERMISSION_WINDOW_COUNT];
+    int restore_probe_rc[PAGE_PERMISSION_WINDOW_COUNT];
+    int window_rc[PAGE_PERMISSION_WINDOW_COUNT];
+    for (int i = 0; i < PAGE_PERMISSION_WINDOW_COUNT; i++) {
+        memset(&results[i], 0, sizeof(results[i]));
+        durations[i] = 0;
+        digest_after_history[i] = 0;
+        digest_after_restore[i] = 0;
+        restore_probe_rc[i] = -1;
+        if (permission_open_rc != 0) {
+            window_rc[i] = -ENODEV;
+        } else {
+            window_rc[i] = measure_page_permission_window(
+                page_permission_group,
+                &sequences[i],
+                pages,
+                page_size,
+                PAGE_PERMISSION_PAGE_COUNT,
+                &results[i],
+                &durations[i],
+                &digest_after_history[i],
+                &digest_after_restore[i],
+                &restore_probe_rc[i]);
+        }
+    }
+
+    bool all_windows_ok = true;
+    bool all_unmultiplexed = true;
+    bool bytes_unchanged_after_history = true;
+    bool bytes_unchanged_after_restore = true;
+    bool permissions_restored = true;
+    for (int i = 0; i < PAGE_PERMISSION_WINDOW_COUNT; i++) {
+        all_windows_ok = all_windows_ok && window_rc[i] == 0;
+        all_unmultiplexed = all_unmultiplexed && results[i].unmultiplexed;
+        bytes_unchanged_after_history =
+            bytes_unchanged_after_history && digest_after_history[i] == initial_digest;
+        bytes_unchanged_after_restore =
+            bytes_unchanged_after_restore && digest_after_restore[i] == initial_digest;
+        permissions_restored = permissions_restored && restore_probe_rc[i] == 0;
+    }
+
+    uint64_t identity_misses = event_value_by_name(&results[0], page_permission_group, "cache_misses");
+    uint64_t forward_misses = event_value_by_name(&results[1], page_permission_group, "cache_misses");
+    uint64_t reverse_misses = event_value_by_name(&results[2], page_permission_group, "cache_misses");
+    uint64_t shuffle_misses = event_value_by_name(&results[3], page_permission_group, "cache_misses");
+    uint64_t miss_delta = abs_diff_u64(forward_misses, reverse_misses);
+    uint64_t miss_control = abs_diff_u64(identity_misses, shuffle_misses);
+    uint64_t miss_threshold = max_u64(32u, 3u * miss_control);
+    bool miss_signal = miss_delta > miss_threshold;
+
+    uint64_t identity_duration = durations[0];
+    uint64_t forward_duration = durations[1];
+    uint64_t reverse_duration = durations[2];
+    uint64_t shuffle_duration = durations[3];
+    uint64_t duration_delta = abs_diff_u64(forward_duration, reverse_duration);
+    uint64_t duration_control = abs_diff_u64(identity_duration, shuffle_duration);
+    uint64_t duration_threshold = max_u64(10000u, 3u * duration_control);
+    bool duration_signal = duration_delta > duration_threshold;
+
+    bool page_permission_history_response = permission_open_rc == 0 && all_windows_ok &&
+        all_unmultiplexed && bytes_unchanged_after_history &&
+        bytes_unchanged_after_restore && permissions_restored &&
+        (miss_signal || duration_signal);
+
+    char result_path[4096];
+    int n = snprintf(result_path, sizeof(result_path), "%s/F10_PAGE_PERMISSION_HISTORY_RESULT.json", output_root);
+    if (n <= 0 || (size_t)n >= sizeof(result_path)) {
+        free(pages);
+        return 1;
+    }
+    FILE *out = fopen(result_path, "w");
+    if (!out) {
+        fprintf(stderr, "cannot open result: %s\n", strerror(errno));
+        free(pages);
+        return 1;
+    }
+    fprintf(out, "{\n");
+    fprintf(out, "  \"schema_id\": \"%s\",\n", PAGE_PERMISSION_HISTORY_RESULT_SCHEMA);
+    fprintf(out, "  \"status\": \"%s\",\n", page_permission_history_response ? "PAGE_PERMISSION_HISTORY_RESPONSE_FOUND" : "PAGE_PERMISSION_HISTORY_RESPONSE_NOT_ESTABLISHED");
+    fprintf(out, "  \"claim_ceiling\": \"Owned page-permission-state timing/PMU discriminator only; no memory disclosure, isolation bypass, path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, target coupling, or Small Wall crossing claim\",\n");
+    fprintf(out, "  \"cores\": {\"page_permission_core\": %d},\n", CATCAS_CORE_B);
+    fprintf(out, "  \"perf_interface\": {\"type\": \"PERF_TYPE_RAW\", \"event_format\": \"config:0-7,32-35\", \"umask_format\": \"config:8-15\", \"exclude_kernel\": true, \"exclude_hv\": true},\n");
+    fprintf(out, "  \"source_constraints\": {\"direct_msr_access\": false, \"voltage_access\": false, \"frequency_writes\": 0, \"experiment_owned_pages_only\": true, \"synthetic_public_contents_only\": true, \"measured_page_faults\": false, \"physical_address_access\": false, \"cache_set_mapping\": false, \"unrelated_process_observation\": false, \"cross_domain_observation\": false},\n");
+    fprintf(out, "  \"page_permission_carrier\": {\"page_count\": %u, \"page_bytes\": %zu, \"byte_count\": %zu, \"restore_loops\": %u, \"history_loops\": %u, \"sentinel_loops\": %u, \"permission_mutation_outside_measured_window\": true, \"digest_kind\": \"fnv1a64\", \"initial_digest_hex\": \"0x%016" PRIx64 "\"},\n",
+        PAGE_PERMISSION_PAGE_COUNT, page_size, byte_count,
+        PAGE_PERMISSION_RESTORE_LOOPS, PAGE_PERMISSION_HISTORY_LOOPS,
+        PAGE_PERMISSION_SENTINEL_LOOPS, initial_digest);
+    fprintf(out, "  \"selected_group\": \"page_permission_group\",\n");
+    fprintf(out, "  \"group_open_rc\": %d,\n", permission_open_rc);
+    fprintf(out, "  \"selected_events\": ");
+    print_group_defs(out, page_permission_group);
+    fprintf(out, ",\n");
+    fprintf(out, "  \"predeclared_observable\": {\"history\": \"owned-page mprotect PROT_NONE then PROT_READ|PROT_WRITE flips outside the measured window\", \"restore\": \"all owned pages restored to PROT_READ|PROT_WRITE and deterministically probed\", \"sentinel\": \"fixed owned-page read sequence with no intentional page fault\", \"primary_acceptance\": \"forward/reverse cache_misses delta exceeds max(32, 3 * neutral/shuffle control spread) or duration delta exceeds max(10000 ns, 3 * neutral/shuffle control spread)\"},\n");
+    fprintf(out, "  \"windows\": [\n");
+    for (int i = 0; i < PAGE_PERMISSION_WINDOW_COUNT; i++) {
+        fprintf(out, "    {\"name\": \"%s\", \"rc\": %d, \"duration_ns\": %" PRIu64 ", \"history_loops\": %u, \"permission_restore_probe_rc\": %d, \"digest_after_history_hex\": \"0x%016" PRIx64 "\", \"digest_after_restore_hex\": \"0x%016" PRIx64 "\", \"bytes_unchanged_after_history\": %s, \"bytes_unchanged_after_restore\": %s, \"group\": ",
+            sequences[i].name,
+            window_rc[i],
+            durations[i],
+            sequences[i].history_loops,
+            restore_probe_rc[i],
+            digest_after_history[i],
+            digest_after_restore[i],
+            json_bool(digest_after_history[i] == initial_digest),
+            json_bool(digest_after_restore[i] == initial_digest));
+        print_group_result(out, page_permission_group, &results[i]);
+        fprintf(out, "}%s\n", i + 1 == PAGE_PERMISSION_WINDOW_COUNT ? "" : ",");
+    }
+    fprintf(out, "  ],\n");
+    fprintf(out, "  \"contrast_counts\": {\n");
+    fprintf(out, "    \"cache_misses\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s},\n",
+        identity_misses, forward_misses, reverse_misses, shuffle_misses, miss_delta, miss_control, miss_threshold, json_bool(miss_signal));
+    fprintf(out, "    \"duration_ns\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s}\n",
+        identity_duration, forward_duration, reverse_duration, shuffle_duration, duration_delta, duration_control, duration_threshold, json_bool(duration_signal));
+    fprintf(out, "  },\n");
+    fprintf(out, "  \"acceptance\": {\"all_windows_ok\": %s, \"all_unmultiplexed\": %s, \"bytes_unchanged_after_history\": %s, \"bytes_unchanged_after_restore\": %s, \"permissions_restored\": %s, \"cache_miss_signal\": %s, \"duration_signal\": %s, \"page_permission_history_response\": %s}\n",
+        json_bool(all_windows_ok),
+        json_bool(all_unmultiplexed),
+        json_bool(bytes_unchanged_after_history),
+        json_bool(bytes_unchanged_after_restore),
+        json_bool(permissions_restored),
+        json_bool(miss_signal),
+        json_bool(duration_signal),
+        json_bool(page_permission_history_response));
+    fprintf(out, "}\n");
+    fclose(out);
+    printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"page_permission_group\"}\n",
+        page_permission_history_response ? "PAGE_PERMISSION_HISTORY_RESPONSE_FOUND" : "PAGE_PERMISSION_HISTORY_RESPONSE_NOT_ESTABLISHED",
+        result_path);
+    restore_page_permissions(pages, page_size, PAGE_PERMISSION_PAGE_COUNT);
+    free(pages);
+    return 0;
+}
+
 static int wait_child_ok(pid_t pid, int *child_status) {
     int status = 0;
     pid_t waited = 0;
@@ -6743,6 +7077,7 @@ int main(int argc, char **argv) {
     bool code_footprint_history_mode = false;
     bool return_stack_history_mode = false;
     bool fp_pipeline_history_mode = false;
+    bool page_permission_history_mode = false;
     if (argc == 3 && strcmp(argv[1], "--output-root") == 0) {
         output_root = argv[2];
     } else if (argc == 4 && strcmp(argv[1], "--coherence-operators") == 0 &&
@@ -6841,10 +7176,14 @@ int main(int argc, char **argv) {
                strcmp(argv[2], "--output-root") == 0) {
         fp_pipeline_history_mode = true;
         output_root = argv[3];
+    } else if (argc == 4 && strcmp(argv[1], "--page-permission-history") == 0 &&
+               strcmp(argv[2], "--output-root") == 0) {
+        page_permission_history_mode = true;
+        output_root = argv[3];
     } else if (argc == 2 && strcmp(argv[1], "--self-test") == 0) {
         return self_test();
     } else {
-        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root> | --eviction-phase-bracketed --output-root <absolute-output-root> | --eviction-phase-bracketed-c2d --output-root <absolute-output-root> | --eviction-phase-bracketed-duration --output-root <absolute-output-root> | --history-sentinel --output-root <absolute-output-root> | --locked-history --output-root <absolute-output-root> | --branch-history --output-root <absolute-output-root> | --indirect-target-history --output-root <absolute-output-root> | --translation-history --output-root <absolute-output-root> | --store-load-alias-history --output-root <absolute-output-root> | --prefetch-stream --output-root <absolute-output-root> | --process-lifecycle --output-root <absolute-output-root> | --code-footprint-history --output-root <absolute-output-root> | --return-stack-history --output-root <absolute-output-root> | --fp-pipeline-history --output-root <absolute-output-root>\n", argv[0]);
+        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root> | --eviction-phase-bracketed --output-root <absolute-output-root> | --eviction-phase-bracketed-c2d --output-root <absolute-output-root> | --eviction-phase-bracketed-duration --output-root <absolute-output-root> | --history-sentinel --output-root <absolute-output-root> | --locked-history --output-root <absolute-output-root> | --branch-history --output-root <absolute-output-root> | --indirect-target-history --output-root <absolute-output-root> | --translation-history --output-root <absolute-output-root> | --store-load-alias-history --output-root <absolute-output-root> | --prefetch-stream --output-root <absolute-output-root> | --process-lifecycle --output-root <absolute-output-root> | --code-footprint-history --output-root <absolute-output-root> | --return-stack-history --output-root <absolute-output-root> | --fp-pipeline-history --output-root <absolute-output-root> | --page-permission-history --output-root <absolute-output-root>\n", argv[0]);
         return 2;
     }
     if (output_root[0] != '/') {
@@ -6983,6 +7322,11 @@ int main(int argc, char **argv) {
     }
     if (fp_pipeline_history_mode) {
         int rc = run_fp_pipeline_history_mode(output_root);
+        free(carrier.bytes);
+        return rc;
+    }
+    if (page_permission_history_mode) {
+        int rc = run_page_permission_history_mode(output_root);
         free(carrier.bytes);
         return rc;
     }

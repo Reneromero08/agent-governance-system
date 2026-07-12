@@ -835,6 +835,7 @@ F10_PREFETCH_STREAM_CHECKPOINT_20260712.json
 F10_CODE_FOOTPRINT_HISTORY_CHECKPOINT_20260712.json
 F10_RETURN_STACK_HISTORY_CHECKPOINT_20260712.json
 F10_FP_PIPELINE_HISTORY_CHECKPOINT_20260712.json
+F10_PAGE_PERMISSION_HISTORY_CHECKPOINT_20260712.json
 CODED_PREPROJECTION_DECLARATION_SHAM_CHECKPOINT_20260712.json
 CODED_PREPROJECTION_PHASE_LOCAL_CHECKPOINT_20260712.json
 CODED_PREPROJECTION_ACTIVE_QUERY_CHECKPOINT_20260712.json
@@ -2121,15 +2122,69 @@ translation, prefetch, alias, locked, and process-lifecycle carriers, but the
 forward/reverse residuals remain inside neutral/shuffle controls. Do not rerun this
 neutral/forward/reverse/shuffle FP pipeline sequence unchanged.
 
+### Owned page-permission history carrier
+
+The page-permission history discriminator changed carrier family to CAT_CAS-owned
+user-space page-permission state over synthetic pages. It used `mprotect` flips outside
+the measured window, then measured a fixed owned-page read sentinel with no intentional
+page faults under the `page_permission_group` PMU group:
+
+```text
+run id        f10_page_permission_history_0
+source bundle 056e59ae54944c6314163fe550272d9ad4e1a848c8a4ac6e8f0774493d99bb72
+worker status PAGE_PERMISSION_HISTORY_RESPONSE_NOT_ESTABLISHED
+```
+
+The transaction completed with verified copy-back and remote cleanup. It performed
+zero frequency writes, zero voltage access, zero MSR reads/writes, stayed below the
+68 C temperature veto, found no forbidden CAT_CAS process residue, all PMU windows
+were unmultiplexed, all pages restored to `PROT_READ|PROT_WRITE`, and buffer digests
+were unchanged after history and restore.
+
+Page-permission sentinel contrasts:
+
+```text
+cache_misses:
+  identity 19929
+  forward  19882
+  reverse  19897
+  shuffle  19861
+  delta       15
+  floor       68
+  threshold  204
+  signal false
+
+duration_ns:
+  identity 233550
+  forward  231235
+  reverse  230727
+  shuffle  230769
+  delta       508
+  floor      2781
+  threshold 10000
+  signal false
+```
+
+Checkpoint:
+
+`F10_PAGE_PERMISSION_HISTORY_CHECKPOINT_20260712.json`
+
+**Status:** this exact owned page-permission-state carrier is negative. It changes the
+access model to owned user-space permission flips without measured page faults,
+address discovery, cache-set mapping, unrelated-process observation, memory disclosure,
+or isolation-boundary claims, but the forward/reverse residuals remain inside
+neutral/shuffle controls. Do not rerun this neutral/forward/reverse/shuffle
+page-permission sequence unchanged.
+
 ## Cheapest current discriminator
 
 Change carrier family or access model again, not another remap of the same
 phase-local timing/PMU/eviction/active-query/source-phase-chop/restored-history,
 simple branch-history/indirect-target-history/translation-footprint/prefetch-stream
 geometry, same-page-offset store/load alias-history, locked no-op history,
-compiled code-footprint history, return-stack history, FP pipeline history, the
-combined active-query/source-phase-chop schedule, or the current fresh source-process
-lifecycle sentinel.
+compiled code-footprint history, return-stack history, FP pipeline history, owned
+page-permission history, the combined active-query/source-phase-chop schedule, or the
+current fresh source-process lifecycle sentinel.
 The run must stay closed:
 CAT_CAS-owned buffers only, predetermined geometry, no physical-address access, no
 cache-set mapping, no unrelated-process observation, and no MSR or voltage access.
@@ -2167,7 +2222,8 @@ neutral/forward/reverse/shuffle locked-history sequence unchanged. Do not rerun
 code-footprint sequence unchanged. Do not rerun `f10_return_stack_history_0` or the
 same neutral/forward/reverse/shuffle return-stack sequence unchanged. Do not rerun
 `f10_fp_pipeline_history_0` or the same neutral/forward/reverse/shuffle FP pipeline
-sequence unchanged.
+sequence unchanged. Do not rerun `f10_page_permission_history_0` or the same
+neutral/forward/reverse/shuffle owned page-permission sequence unchanged.
 
 ## Current claim ceiling
 
@@ -2222,12 +2278,15 @@ then tested compiled instruction-stream/code-footprint state and also stayed neg
 also stayed negative.
 `f10_fp_pipeline_history_0` then tested floating-point/division execution-unit history
 and also stayed negative.
+`f10_page_permission_history_0` then tested owned user-space page-permission state and
+also stayed negative.
 The next move must change carrier family or access model rather than keep remapping the
 same eviction-sentinel PMU/timing, active-query phase-local, source-phase-chop,
 restored two-line-set ownership-history, simple branch-history, indirect-target-
 history, translation-footprint, store/load alias-history, locked-history,
 prefetch-stream, combined active-query/source-chop, source-process lifecycle,
-compiled code-footprint history, return-stack history, or FP pipeline history geometry.
+compiled code-footprint history, return-stack history, FP pipeline history, or owned
+page-permission history geometry.
 
 ## State update rule
 

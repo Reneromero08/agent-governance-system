@@ -207,6 +207,13 @@ MODES: dict[str, dict[str, Any]] = {
         "failed_status": "F10_FP_PIPELINE_HISTORY_TARGET_FAILED",
         "claim_ceiling": "Floating-point/division pipeline timing/PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, target coupling, or Small Wall crossing claim",
     },
+    "page-permission-history": {
+        "worker_args": ["--page-permission-history"],
+        "result_file": "F10_PAGE_PERMISSION_HISTORY_RESULT.json",
+        "complete_status": "F10_PAGE_PERMISSION_HISTORY_TARGET_COMPLETE",
+        "failed_status": "F10_PAGE_PERMISSION_HISTORY_TARGET_FAILED",
+        "claim_ceiling": "Owned page-permission-state timing/PMU discriminator only; no memory disclosure, isolation bypass, path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, target coupling, or Small Wall crossing claim",
+    },
 }
 FORBIDDEN_PROCESS_MARKERS = (
     "f10_pmc_first_light_worker",

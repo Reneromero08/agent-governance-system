@@ -1,0 +1,84 @@
+{
+  "schema_id": "CAT_CAS_SMALL_WALL_PAGE_PERMISSION_HISTORY_CHECKPOINT_V1",
+  "result": "PAGE_PERMISSION_HISTORY_RESPONSE_NOT_ESTABLISHED",
+  "run_id": "f10_page_permission_history_0",
+  "mode": "page-permission-history",
+  "source_binding": {
+    "source_bundle_sha256": "056e59ae54944c6314163fe550272d9ad4e1a848c8a4ac6e8f0774493d99bb72",
+    "source_hashes": {
+      "f10_pmc_first_light_target.py": "dcf41ba176f2055adde6244d22c38d2fbe17112fc22a061d2d5dfc7b2ee6a04e",
+      "f10_pmc_first_light_worker.c": "6d88cdfa2e82c39c61f9d1299d3d5da5bc18147102897648b310d118ed05173a"
+    }
+  },
+  "run_paths": {
+    "local_run": "runs/f10_page_permission_history_0",
+    "worker_result": "runs/f10_page_permission_history_0/F10_PAGE_PERMISSION_HISTORY_RESULT.json",
+    "final_result": "runs/f10_page_permission_history_0/FINAL_RESULT.json",
+    "controller_result": "runs/f10_page_permission_history_0/CONTROLLER_RESULT.json"
+  },
+  "lab_device": {
+    "host": "root@192.168.137.100",
+    "cpu_model": "AMD Phenom(tm) II X6 1090T Processor",
+    "kernel": "6.12.86+deb13-amd64"
+  },
+  "predeclared_experiment": {
+    "carrier": "CAT_CAS-owned user-space page-permission state over synthetic pages",
+    "source_operator": "neutral, forward, reverse, or shuffle mprotect permission flips outside the measured window",
+    "sentinel": "fixed owned-page read sequence with no intentional page fault",
+    "observable": "page_permission_group PMU cache counters and sentinel duration",
+    "killing_control": "neutral versus shuffle page-permission control spread",
+    "restoration_class": "all owned pages restored to PROT_READ|PROT_WRITE, deterministic probe succeeds, and buffer digest remains unchanged"
+  },
+  "transaction_integrity": {
+    "target_status": "F10_PAGE_PERMISSION_HISTORY_TARGET_COMPLETE",
+    "worker_status": "PAGE_PERMISSION_HISTORY_RESPONSE_NOT_ESTABLISHED",
+    "copy_verified": true,
+    "verified_file_count": 2,
+    "remote_cleaned": true,
+    "remote_returncode": 0,
+    "temperature_preflight_c": 44.25,
+    "temperature_post_c": 44.875,
+    "temperature_veto_c": 68.0,
+    "temperature_below_veto": true,
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "forbidden_process_matches_preflight": 0,
+    "forbidden_process_matches_cleanup": 0
+  },
+  "observed_counts": {
+    "cache_misses": {
+      "identity": 19929,
+      "forward": 19882,
+      "reverse": 19897,
+      "shuffle": 19861,
+      "forward_reverse_delta": 15,
+      "control_floor": 68,
+      "threshold": 204,
+      "signal": false
+    },
+    "duration_ns": {
+      "identity": 233550,
+      "forward": 231235,
+      "reverse": 230727,
+      "shuffle": 230769,
+      "forward_reverse_delta": 508,
+      "control_floor": 2781,
+      "threshold": 10000,
+      "signal": false
+    }
+  },
+  "acceptance": {
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "bytes_unchanged_after_history": true,
+    "bytes_unchanged_after_restore": true,
+    "permissions_restored": true,
+    "cache_miss_signal": false,
+    "duration_signal": false,
+    "page_permission_history_response": false
+  },
+  "claim_ceiling": "Owned page-permission-state timing/PMU discriminator only; no memory disclosure, isolation bypass, path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, target coupling, or Small Wall crossing claim",
+  "frontier_update": "The owned page-permission-state carrier is negative under this sentinel. Do not rerun this neutral/forward/reverse/shuffle page-permission sequence unchanged."
+}
