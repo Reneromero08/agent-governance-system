@@ -6,7 +6,7 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`INDIRECT_TARGET_HISTORY_RESPONSE_NOT_ESTABLISHED`
+`STORE_LOAD_ALIAS_HISTORY_RESPONSE_NOT_ESTABLISHED`
 
 **Active wall:**
 The current wall is still carrier/access-model selection. Timing, ownership-intent PMU
@@ -15,10 +15,11 @@ phase-local mappings, restored history-sentinel PMU mapping, the first active-qu
 receiver-delta access model, the first source-side phase-chopped access model,
 same-core public branch-history, read-only translation/page-footprint, same-core
 stream/stride prefetching, and a source-process/fresh-measurement-process lifecycle
-carrier, and a same-core public indirect-target history carrier either failed controls
-or did not expose a usable fold-odd carrier. The eviction-sentinel first-light run
-remains useful because it changed restoration from byte equality to a measured carrier
-equivalence class, but the phase-local remaps did not promote it.
+carrier, same-core public indirect-target history, and same-page-offset store/load
+alias-history either failed controls or did not expose a usable fold-odd carrier. The
+eviction-sentinel first-light run remains useful because it changed restoration from
+byte equality to a measured carrier equivalence class, but the phase-local remaps did
+not promote it.
 `coded_preprojection_active_query_0` moved the query into the receiver's measured
 workload before scalar recording and restored cleanly, but its opposed fold-odd
 candidate did not clear the post-control floor.
@@ -1800,14 +1801,66 @@ the branch carrier from conditional outcome history to indirect target selection
 the forward/reverse residuals remain inside neutral/shuffle controls. Do not rerun this
 neutral/forward/reverse/shuffle indirect-target sequence unchanged.
 
+The store/load alias-history discriminator then changed carrier family to the
+memory-ordering surface: core 5 trained neutral, forward, reverse, or shuffle balanced
+same-page-offset store/load histories over CAT_CAS-owned pages, then measured a fixed
+same-offset store/load sentinel under the `translation_history_group` PMU group:
+
+```text
+run id        f10_store_load_alias_0
+source bundle bb182c0bf6adb1cedbf82bd64881f9bfadffc1e81ce500d9badca027f139ff71
+worker status STORE_LOAD_ALIAS_HISTORY_RESPONSE_NOT_ESTABLISHED
+```
+
+The transaction completed with verified copy-back and remote cleanup. It performed
+zero frequency writes, zero voltage access, zero MSR reads/writes, stayed below the
+68 C temperature veto, found no forbidden CAT_CAS process residue, all PMU windows
+were unmultiplexed, and the pattern-plus-byte digest was unchanged after history and
+after neutral restore.
+
+Store/load alias sentinel contrasts:
+
+```text
+duration_ns:
+  identity 883239
+  forward  879674
+  reverse  879728
+  shuffle  879439
+  delta        54
+  floor      3800
+  threshold 11400
+  signal false
+
+cache_misses:
+  identity 1
+  forward  0
+  reverse  0
+  shuffle  0
+  delta    0
+  floor    1
+  threshold 32
+  signal false
+```
+
+Checkpoint:
+
+`F10_STORE_LOAD_ALIAS_CHECKPOINT_20260712.json`
+
+**Status:** this exact same-page-offset store/load alias-history carrier is negative.
+It changes the runtime access model away from branch/cache-line ownership and into
+store/load alias history, but the forward/reverse residuals remain inside
+neutral/shuffle controls. Do not rerun this neutral/forward/reverse/shuffle store/load
+alias sequence unchanged.
+
 ## Cheapest current discriminator
 
 Change carrier family or access model again, not another remap of the same
 phase-local timing/PMU/eviction/active-query/source-phase-chop/restored-history,
 simple branch-history/indirect-target-history/translation-footprint/prefetch-stream
-geometry, or the current fresh source-process lifecycle sentinel. The run must stay
-closed: CAT_CAS-owned buffers only, predetermined geometry, no physical-address access,
-no cache-set mapping, no unrelated-process observation, and no MSR or voltage access.
+geometry, same-page-offset store/load alias-history, or the current fresh
+source-process lifecycle sentinel. The run must stay closed: CAT_CAS-owned buffers
+only, predetermined geometry, no physical-address access, no cache-set mapping, no
+unrelated-process observation, and no MSR or voltage access.
 
 The next probe should answer:
 
@@ -1832,7 +1885,9 @@ unchanged. Do not rerun `coded_preprojection_source_phase_chop_0` or the same
 source-phase-chop schedule unchanged. Do not rerun `f10_process_lifecycle_0` or the
 same neutral/forward/reverse/shuffle child-process read-store lifecycle sentinel
 unchanged. Do not rerun `f10_indirect_target_history_0` or the same
-neutral/forward/reverse/shuffle indirect-target sequence unchanged.
+neutral/forward/reverse/shuffle indirect-target sequence unchanged. Do not rerun
+`f10_store_load_alias_0` or the same neutral/forward/reverse/shuffle same-offset
+store/load alias sequence unchanged.
 
 ## Current claim ceiling
 
@@ -1876,11 +1931,13 @@ tested a flushed sentinel stream after adjacent forward/reverse stream training 
 also stayed negative. `f10_process_lifecycle_0` then forced the source history into a
 separate exited child process before a fresh remote-store sentinel and also stayed
 negative. `f10_indirect_target_history_0` then changed the public branch carrier from
-conditional outcomes to indirect target selection and also stayed negative. The next
-move must change carrier family or access model rather than keep remapping the same
-eviction-sentinel PMU/timing, active-query phase-local, source-phase-chop, restored
-two-line-set ownership-history, simple branch-history, indirect-target-history,
-translation-footprint, prefetch-stream, or source-process lifecycle geometry.
+conditional outcomes to indirect target selection and also stayed negative.
+`f10_store_load_alias_0` then changed carrier family to same-page-offset store/load
+alias history and also stayed negative. The next move must change carrier family or
+access model rather than keep remapping the same eviction-sentinel PMU/timing,
+active-query phase-local, source-phase-chop, restored two-line-set ownership-history,
+simple branch-history, indirect-target-history, translation-footprint, store/load
+alias-history, prefetch-stream, or source-process lifecycle geometry.
 
 ## State update rule
 

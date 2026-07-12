@@ -54,6 +54,7 @@
 #define BRANCH_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_BRANCH_HISTORY_RESULT_V1"
 #define INDIRECT_TARGET_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_INDIRECT_TARGET_HISTORY_RESULT_V1"
 #define TRANSLATION_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_TRANSLATION_HISTORY_RESULT_V1"
+#define STORE_LOAD_ALIAS_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_STORE_LOAD_ALIAS_HISTORY_RESULT_V1"
 #define PREFETCH_STREAM_RESULT_SCHEMA "CAT_CAS_F10_PREFETCH_STREAM_RESULT_V1"
 #define PROCESS_LIFECYCLE_RESULT_SCHEMA "CAT_CAS_F10_PROCESS_LIFECYCLE_RESULT_V1"
 #define PHASE_LOCAL_BANK_LINES 512u
@@ -71,6 +72,12 @@
 #define TRANSLATION_RESTORE_LOOPS 4u
 #define TRANSLATION_HISTORY_LOOPS 8u
 #define TRANSLATION_SENTINEL_LOOPS 16u
+#define STORE_LOAD_ALIAS_PAGE_BYTES 4096u
+#define STORE_LOAD_ALIAS_PAGE_COUNT 16u
+#define STORE_LOAD_ALIAS_PATTERN_BYTES 4096u
+#define STORE_LOAD_ALIAS_RESTORE_LOOPS 64u
+#define STORE_LOAD_ALIAS_HISTORY_LOOPS 128u
+#define STORE_LOAD_ALIAS_SENTINEL_LOOPS 64u
 #define PREFETCH_STREAM_LINES 65536u
 #define PREFETCH_HISTORY_LINES 8192u
 #define PREFETCH_SENTINEL_LINES 8192u
@@ -250,6 +257,20 @@ enum translation_pattern_kind {
 struct translation_sequence_spec {
     const char *name;
     enum translation_pattern_kind history_pattern;
+    unsigned int history_loops;
+};
+
+enum store_load_alias_pattern_kind {
+    STORE_LOAD_ALIAS_PATTERN_NEUTRAL = 0,
+    STORE_LOAD_ALIAS_PATTERN_FORWARD = 1,
+    STORE_LOAD_ALIAS_PATTERN_REVERSE = 2,
+    STORE_LOAD_ALIAS_PATTERN_SHUFFLE = 3,
+    STORE_LOAD_ALIAS_PATTERN_SENTINEL = 4
+};
+
+struct store_load_alias_sequence_spec {
+    const char *name;
+    enum store_load_alias_pattern_kind history_pattern;
     unsigned int history_loops;
 };
 
@@ -2719,6 +2740,374 @@ static int run_translation_history_mode(const char *output_root) {
     return 0;
 }
 
+static volatile uint64_t store_load_alias_sink = 0;
+
+static void fill_store_load_alias_pattern(
+    unsigned char *pattern,
+    size_t len,
+    enum store_load_alias_pattern_kind kind
+) {
+    static const unsigned char neutral_seq[8] = {0u, 1u, 2u, 3u, 3u, 2u, 1u, 0u};
+    static const unsigned char forward_seq[8] = {0u, 1u, 2u, 3u, 0u, 1u, 2u, 3u};
+    static const unsigned char reverse_seq[8] = {3u, 2u, 1u, 0u, 3u, 2u, 1u, 0u};
+    static const unsigned char shuffle_seq[8] = {0u, 2u, 3u, 1u, 1u, 3u, 2u, 0u};
+    static const unsigned char sentinel_seq[8] = {1u, 3u, 0u, 2u, 2u, 0u, 3u, 1u};
+    const unsigned char *seq = neutral_seq;
+    switch (kind) {
+        case STORE_LOAD_ALIAS_PATTERN_NEUTRAL:
+            seq = neutral_seq;
+            break;
+        case STORE_LOAD_ALIAS_PATTERN_FORWARD:
+            seq = forward_seq;
+            break;
+        case STORE_LOAD_ALIAS_PATTERN_REVERSE:
+            seq = reverse_seq;
+            break;
+        case STORE_LOAD_ALIAS_PATTERN_SHUFFLE:
+            seq = shuffle_seq;
+            break;
+        case STORE_LOAD_ALIAS_PATTERN_SENTINEL:
+            seq = sentinel_seq;
+            break;
+    }
+    for (size_t i = 0; i < len; i++) {
+        pattern[i] = seq[(i + (i >> 6)) & 7u];
+    }
+}
+
+static unsigned char *store_load_alias_pattern_by_kind(
+    unsigned char *neutral,
+    unsigned char *forward,
+    unsigned char *reverse,
+    unsigned char *shuffle,
+    unsigned char *sentinel,
+    enum store_load_alias_pattern_kind kind
+) {
+    switch (kind) {
+        case STORE_LOAD_ALIAS_PATTERN_NEUTRAL:
+            return neutral;
+        case STORE_LOAD_ALIAS_PATTERN_FORWARD:
+            return forward;
+        case STORE_LOAD_ALIAS_PATTERN_REVERSE:
+            return reverse;
+        case STORE_LOAD_ALIAS_PATTERN_SHUFFLE:
+            return shuffle;
+        case STORE_LOAD_ALIAS_PATTERN_SENTINEL:
+            return sentinel;
+    }
+    return neutral;
+}
+
+static uint64_t store_load_alias_pattern_digest(
+    const unsigned char *neutral,
+    const unsigned char *forward,
+    const unsigned char *reverse,
+    const unsigned char *shuffle,
+    const unsigned char *sentinel,
+    const unsigned char *bytes,
+    size_t byte_count
+) {
+    uint64_t digest = fnv1a64(neutral, STORE_LOAD_ALIAS_PATTERN_BYTES);
+    digest ^= fnv1a64(forward, STORE_LOAD_ALIAS_PATTERN_BYTES) + 0x9e3779b97f4a7c15ull;
+    digest ^= fnv1a64(reverse, STORE_LOAD_ALIAS_PATTERN_BYTES) + 0xbf58476d1ce4e5b9ull;
+    digest ^= fnv1a64(shuffle, STORE_LOAD_ALIAS_PATTERN_BYTES) + 0x94d049bb133111ebull;
+    digest ^= fnv1a64(sentinel, STORE_LOAD_ALIAS_PATTERN_BYTES) + 0x2545f4914f6cdd1dull;
+    digest ^= fnv1a64(bytes, byte_count);
+    return digest;
+}
+
+static void init_store_load_alias_bytes(unsigned char *bytes, size_t byte_count) {
+    for (size_t i = 0; i < byte_count; i++) {
+        bytes[i] = (unsigned char)((i * 131u + (i >> 3) + 17u) & 0xffu);
+    }
+}
+
+__attribute__((noinline))
+static void run_store_load_alias_pattern(
+    unsigned char *bytes,
+    const volatile unsigned char *pattern,
+    size_t len,
+    unsigned int loops
+) {
+    uint64_t acc = store_load_alias_sink + len + loops + 0xd6e8feb86659fd93ull;
+    for (unsigned int round = 0; round < loops; round++) {
+        size_t offset = ((size_t)round * 23u) & (len - 1u);
+        for (size_t i = 0; i < len; i++) {
+            size_t pattern_index = (i + offset) & (len - 1u);
+            size_t pair = (size_t)(pattern[pattern_index] & 3u);
+            size_t line_offset = ((i + ((size_t)round * 5u)) & 7u) * CACHE_LINE_BYTES;
+            size_t store_page = pair * 2u;
+            size_t load_page = store_page + 1u;
+            volatile uint64_t *store_ptr = (volatile uint64_t *)(void *)
+                (bytes + (store_page * STORE_LOAD_ALIAS_PAGE_BYTES) + line_offset);
+            volatile uint64_t *load_ptr = (volatile uint64_t *)(void *)
+                (bytes + (load_page * STORE_LOAD_ALIAS_PAGE_BYTES) + line_offset);
+            uint64_t same_value = *store_ptr;
+            *store_ptr = same_value;
+            acc ^= *load_ptr + same_value + (uint64_t)pattern_index;
+            __asm__ __volatile__("" : "+r"(acc) :: "memory");
+        }
+    }
+    store_load_alias_sink = acc;
+}
+
+static int measure_store_load_alias_window(
+    const struct event_def group[MAX_GROUP_EVENTS],
+    const struct store_load_alias_sequence_spec *sequence,
+    unsigned char *bytes,
+    unsigned char *neutral,
+    unsigned char *forward,
+    unsigned char *reverse,
+    unsigned char *shuffle,
+    unsigned char *sentinel,
+    struct group_result *result,
+    uint64_t *duration_ns,
+    uint64_t *digest_after_history,
+    uint64_t *digest_after_restore
+) {
+    int fds[MAX_GROUP_EVENTS];
+    uint64_t ids[MAX_GROUP_EVENTS];
+    memset(result, 0, sizeof(*result));
+    if (pin_to_core(CATCAS_CORE_B) != 0) return -EINVAL;
+    size_t byte_count = STORE_LOAD_ALIAS_PAGE_BYTES * STORE_LOAD_ALIAS_PAGE_COUNT;
+    run_store_load_alias_pattern(bytes, neutral, STORE_LOAD_ALIAS_PATTERN_BYTES,
+                                 STORE_LOAD_ALIAS_RESTORE_LOOPS);
+    if (sequence->history_loops > 0u) {
+        unsigned char *history = store_load_alias_pattern_by_kind(
+            neutral, forward, reverse, shuffle, sentinel, sequence->history_pattern);
+        run_store_load_alias_pattern(bytes, history, STORE_LOAD_ALIAS_PATTERN_BYTES,
+                                     sequence->history_loops);
+    }
+    *digest_after_history = store_load_alias_pattern_digest(
+        neutral, forward, reverse, shuffle, sentinel, bytes, byte_count);
+    int opened = open_group(group, CATCAS_CORE_B, fds, ids);
+    if (opened != 0) {
+        result->open_errno = -opened;
+        return opened;
+    }
+    result->opened = true;
+    if (ioctl(fds[0], PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t start = monotonic_ns();
+    if (ioctl(fds[0], PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    run_store_load_alias_pattern(bytes, sentinel, STORE_LOAD_ALIAS_PATTERN_BYTES,
+                                 STORE_LOAD_ALIAS_SENTINEL_LOOPS);
+    if (ioctl(fds[0], PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t end = monotonic_ns();
+    int read_rc = read_group(fds[0], result);
+    for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+    if (read_rc != 0) return read_rc;
+    run_store_load_alias_pattern(bytes, neutral, STORE_LOAD_ALIAS_PATTERN_BYTES,
+                                 STORE_LOAD_ALIAS_RESTORE_LOOPS);
+    *digest_after_restore = store_load_alias_pattern_digest(
+        neutral, forward, reverse, shuffle, sentinel, bytes, byte_count);
+    *duration_ns = end >= start ? end - start : 0;
+    return 0;
+}
+
+static int run_store_load_alias_history_mode(const char *output_root) {
+    unsigned char *bytes = NULL;
+    unsigned char *neutral = NULL;
+    unsigned char *forward = NULL;
+    unsigned char *reverse = NULL;
+    unsigned char *shuffle = NULL;
+    unsigned char *sentinel = NULL;
+    size_t byte_count = STORE_LOAD_ALIAS_PAGE_BYTES * STORE_LOAD_ALIAS_PAGE_COUNT;
+    if (posix_memalign((void **)&bytes, STORE_LOAD_ALIAS_PAGE_BYTES, byte_count) != 0 ||
+        posix_memalign((void **)&neutral, CACHE_LINE_BYTES, STORE_LOAD_ALIAS_PATTERN_BYTES) != 0 ||
+        posix_memalign((void **)&forward, CACHE_LINE_BYTES, STORE_LOAD_ALIAS_PATTERN_BYTES) != 0 ||
+        posix_memalign((void **)&reverse, CACHE_LINE_BYTES, STORE_LOAD_ALIAS_PATTERN_BYTES) != 0 ||
+        posix_memalign((void **)&shuffle, CACHE_LINE_BYTES, STORE_LOAD_ALIAS_PATTERN_BYTES) != 0 ||
+        posix_memalign((void **)&sentinel, CACHE_LINE_BYTES, STORE_LOAD_ALIAS_PATTERN_BYTES) != 0) {
+        free(bytes);
+        free(neutral);
+        free(forward);
+        free(reverse);
+        free(shuffle);
+        free(sentinel);
+        fprintf(stderr, "store/load alias allocation failed\n");
+        return 1;
+    }
+    init_store_load_alias_bytes(bytes, byte_count);
+    fill_store_load_alias_pattern(neutral, STORE_LOAD_ALIAS_PATTERN_BYTES,
+                                  STORE_LOAD_ALIAS_PATTERN_NEUTRAL);
+    fill_store_load_alias_pattern(forward, STORE_LOAD_ALIAS_PATTERN_BYTES,
+                                  STORE_LOAD_ALIAS_PATTERN_FORWARD);
+    fill_store_load_alias_pattern(reverse, STORE_LOAD_ALIAS_PATTERN_BYTES,
+                                  STORE_LOAD_ALIAS_PATTERN_REVERSE);
+    fill_store_load_alias_pattern(shuffle, STORE_LOAD_ALIAS_PATTERN_BYTES,
+                                  STORE_LOAD_ALIAS_PATTERN_SHUFFLE);
+    fill_store_load_alias_pattern(sentinel, STORE_LOAD_ALIAS_PATTERN_BYTES,
+                                  STORE_LOAD_ALIAS_PATTERN_SENTINEL);
+    uint64_t initial_digest = store_load_alias_pattern_digest(
+        neutral, forward, reverse, shuffle, sentinel, bytes, byte_count);
+
+    int alias_fds[MAX_GROUP_EVENTS];
+    uint64_t alias_ids[MAX_GROUP_EVENTS];
+    int alias_open_rc = open_group(translation_history_group, CATCAS_CORE_B,
+                                   alias_fds, alias_ids);
+    if (alias_open_rc == 0) {
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(alias_fds[i]);
+    }
+
+    const struct store_load_alias_sequence_spec sequences[] = {
+        {"neutral_store_load_alias_history", STORE_LOAD_ALIAS_PATTERN_NEUTRAL,
+         STORE_LOAD_ALIAS_HISTORY_LOOPS},
+        {"forward_store_load_alias_history", STORE_LOAD_ALIAS_PATTERN_FORWARD,
+         STORE_LOAD_ALIAS_HISTORY_LOOPS},
+        {"reverse_store_load_alias_history", STORE_LOAD_ALIAS_PATTERN_REVERSE,
+         STORE_LOAD_ALIAS_HISTORY_LOOPS},
+        {"shuffle_store_load_alias_history", STORE_LOAD_ALIAS_PATTERN_SHUFFLE,
+         STORE_LOAD_ALIAS_HISTORY_LOOPS},
+    };
+    enum { STORE_LOAD_ALIAS_WINDOW_COUNT = 4 };
+    struct group_result results[STORE_LOAD_ALIAS_WINDOW_COUNT];
+    uint64_t durations[STORE_LOAD_ALIAS_WINDOW_COUNT];
+    uint64_t digest_after_history[STORE_LOAD_ALIAS_WINDOW_COUNT];
+    uint64_t digest_after_restore[STORE_LOAD_ALIAS_WINDOW_COUNT];
+    int window_rc[STORE_LOAD_ALIAS_WINDOW_COUNT];
+    for (int i = 0; i < STORE_LOAD_ALIAS_WINDOW_COUNT; i++) {
+        memset(&results[i], 0, sizeof(results[i]));
+        durations[i] = 0;
+        digest_after_history[i] = 0;
+        digest_after_restore[i] = 0;
+        if (alias_open_rc != 0) {
+            window_rc[i] = -ENODEV;
+        } else {
+            window_rc[i] = measure_store_load_alias_window(
+                translation_history_group,
+                &sequences[i],
+                bytes,
+                neutral,
+                forward,
+                reverse,
+                shuffle,
+                sentinel,
+                &results[i],
+                &durations[i],
+                &digest_after_history[i],
+                &digest_after_restore[i]);
+        }
+    }
+
+    bool all_windows_ok = true;
+    bool all_unmultiplexed = true;
+    bool bytes_unchanged_after_history = true;
+    bool bytes_unchanged_after_restore = true;
+    for (int i = 0; i < STORE_LOAD_ALIAS_WINDOW_COUNT; i++) {
+        all_windows_ok = all_windows_ok && window_rc[i] == 0;
+        all_unmultiplexed = all_unmultiplexed && results[i].unmultiplexed;
+        bytes_unchanged_after_history =
+            bytes_unchanged_after_history && digest_after_history[i] == initial_digest;
+        bytes_unchanged_after_restore =
+            bytes_unchanged_after_restore && digest_after_restore[i] == initial_digest;
+    }
+
+    uint64_t identity_misses = event_value_by_name(&results[0], translation_history_group, "cache_misses");
+    uint64_t forward_misses = event_value_by_name(&results[1], translation_history_group, "cache_misses");
+    uint64_t reverse_misses = event_value_by_name(&results[2], translation_history_group, "cache_misses");
+    uint64_t shuffle_misses = event_value_by_name(&results[3], translation_history_group, "cache_misses");
+    uint64_t miss_delta = abs_diff_u64(forward_misses, reverse_misses);
+    uint64_t miss_control = abs_diff_u64(identity_misses, shuffle_misses);
+    uint64_t miss_threshold = max_u64(32u, 3u * miss_control);
+    bool miss_signal = miss_delta > miss_threshold;
+
+    uint64_t identity_duration = durations[0];
+    uint64_t forward_duration = durations[1];
+    uint64_t reverse_duration = durations[2];
+    uint64_t shuffle_duration = durations[3];
+    uint64_t duration_delta = abs_diff_u64(forward_duration, reverse_duration);
+    uint64_t duration_control = abs_diff_u64(identity_duration, shuffle_duration);
+    uint64_t duration_threshold = max_u64(1000u, 3u * duration_control);
+    bool duration_signal = duration_delta > duration_threshold;
+    bool store_load_alias_response = alias_open_rc == 0 && all_windows_ok &&
+        all_unmultiplexed && bytes_unchanged_after_history &&
+        bytes_unchanged_after_restore && duration_signal;
+
+    char result_path[4096];
+    int n = snprintf(result_path, sizeof(result_path),
+                     "%s/F10_STORE_LOAD_ALIAS_HISTORY_RESULT.json", output_root);
+    if (n <= 0 || (size_t)n >= sizeof(result_path)) return 1;
+    FILE *out = fopen(result_path, "w");
+    if (!out) {
+        fprintf(stderr, "cannot open result: %s\n", strerror(errno));
+        return 1;
+    }
+    fprintf(out, "{\n");
+    fprintf(out, "  \"schema_id\": \"%s\",\n", STORE_LOAD_ALIAS_HISTORY_RESULT_SCHEMA);
+    fprintf(out, "  \"status\": \"%s\",\n", store_load_alias_response ? "STORE_LOAD_ALIAS_HISTORY_RESPONSE_FOUND" : "STORE_LOAD_ALIAS_HISTORY_RESPONSE_NOT_ESTABLISHED");
+    fprintf(out, "  \"claim_ceiling\": \"Store/load alias-history discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim\",\n");
+    fprintf(out, "  \"cores\": {\"alias_history_core\": %d},\n", CATCAS_CORE_B);
+    fprintf(out, "  \"perf_interface\": {\"type\": \"PERF_TYPE_RAW\", \"event_format\": \"config:0-7,32-35\", \"umask_format\": \"config:8-15\", \"exclude_kernel\": true, \"exclude_hv\": true},\n");
+    fprintf(out, "  \"source_constraints\": {\"direct_msr_access\": false, \"voltage_access\": false, \"frequency_writes\": 0, \"experiment_owned_memory_only\": true, \"physical_address_access\": false, \"cache_set_mapping\": false, \"unrelated_process_observation\": false},\n");
+    fprintf(out, "  \"alias_history_carrier\": {\"page_bytes\": %u, \"page_count\": %u, \"pattern_bytes\": %u, \"restore_loops\": %u, \"history_loops\": %u, \"sentinel_loops\": %u, \"digest_kind\": \"fnv1a64\", \"initial_digest_hex\": \"0x%016" PRIx64 "\"},\n",
+        STORE_LOAD_ALIAS_PAGE_BYTES,
+        STORE_LOAD_ALIAS_PAGE_COUNT,
+        STORE_LOAD_ALIAS_PATTERN_BYTES,
+        STORE_LOAD_ALIAS_RESTORE_LOOPS,
+        STORE_LOAD_ALIAS_HISTORY_LOOPS,
+        STORE_LOAD_ALIAS_SENTINEL_LOOPS,
+        initial_digest);
+    fprintf(out, "  \"selected_group\": \"translation_history_group\",\n");
+    fprintf(out, "  \"group_open_rc\": %d,\n", alias_open_rc);
+    fprintf(out, "  \"selected_events\": ");
+    print_group_defs(out, translation_history_group);
+    fprintf(out, ",\n");
+    fprintf(out, "  \"predeclared_observable\": {\"history\": \"balanced same-page-offset store/load pairs over CAT_CAS-owned pages\", \"restore\": \"neutral store/load alias wash before every window\", \"sentinel\": \"fixed same-page-offset store/load sequence\", \"primary_acceptance\": \"forward/reverse sentinel duration delta exceeds max(1000 ns, 3 * neutral/shuffle control spread)\", \"secondary_observable\": \"cache_misses\"},\n");
+    fprintf(out, "  \"windows\": [\n");
+    for (int i = 0; i < STORE_LOAD_ALIAS_WINDOW_COUNT; i++) {
+        fprintf(out, "    {\"name\": \"%s\", \"rc\": %d, \"duration_ns\": %" PRIu64 ", \"history_loops\": %u, \"digest_after_history_hex\": \"0x%016" PRIx64 "\", \"digest_after_restore_hex\": \"0x%016" PRIx64 "\", \"bytes_unchanged_after_history\": %s, \"bytes_unchanged_after_restore\": %s, \"group\": ",
+            sequences[i].name,
+            window_rc[i],
+            durations[i],
+            sequences[i].history_loops,
+            digest_after_history[i],
+            digest_after_restore[i],
+            json_bool(digest_after_history[i] == initial_digest),
+            json_bool(digest_after_restore[i] == initial_digest));
+        print_group_result(out, translation_history_group, &results[i]);
+        fprintf(out, "}%s\n", i + 1 == STORE_LOAD_ALIAS_WINDOW_COUNT ? "" : ",");
+    }
+    fprintf(out, "  ],\n");
+    fprintf(out, "  \"contrast_counts\": {\n");
+    fprintf(out, "    \"cache_misses\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s},\n",
+        identity_misses, forward_misses, reverse_misses, shuffle_misses, miss_delta, miss_control, miss_threshold, json_bool(miss_signal));
+    fprintf(out, "    \"duration_ns\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s}\n",
+        identity_duration, forward_duration, reverse_duration, shuffle_duration, duration_delta, duration_control, duration_threshold, json_bool(duration_signal));
+    fprintf(out, "  },\n");
+    fprintf(out, "  \"acceptance\": {\"all_windows_ok\": %s, \"all_unmultiplexed\": %s, \"bytes_unchanged_after_history\": %s, \"bytes_unchanged_after_restore\": %s, \"cache_miss_signal\": %s, \"duration_signal\": %s, \"store_load_alias_history_response\": %s}\n",
+        json_bool(all_windows_ok),
+        json_bool(all_unmultiplexed),
+        json_bool(bytes_unchanged_after_history),
+        json_bool(bytes_unchanged_after_restore),
+        json_bool(miss_signal),
+        json_bool(duration_signal),
+        json_bool(store_load_alias_response));
+    fprintf(out, "}\n");
+    fclose(out);
+    printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"translation_history_group\"}\n",
+        store_load_alias_response ? "STORE_LOAD_ALIAS_HISTORY_RESPONSE_FOUND" : "STORE_LOAD_ALIAS_HISTORY_RESPONSE_NOT_ESTABLISHED",
+        result_path);
+    free(bytes);
+    free(neutral);
+    free(forward);
+    free(reverse);
+    free(shuffle);
+    free(sentinel);
+    return 0;
+}
+
 static volatile uint64_t prefetch_stream_sink = 0;
 
 static size_t prefetch_stream_sentinel_start(void) {
@@ -5154,6 +5543,7 @@ int main(int argc, char **argv) {
     bool branch_history_mode = false;
     bool indirect_target_history_mode = false;
     bool translation_history_mode = false;
+    bool store_load_alias_history_mode = false;
     bool prefetch_stream_mode = false;
     bool process_lifecycle_mode = false;
     if (argc == 3 && strcmp(argv[1], "--output-root") == 0) {
@@ -5226,6 +5616,10 @@ int main(int argc, char **argv) {
                strcmp(argv[2], "--output-root") == 0) {
         translation_history_mode = true;
         output_root = argv[3];
+    } else if (argc == 4 && strcmp(argv[1], "--store-load-alias-history") == 0 &&
+               strcmp(argv[2], "--output-root") == 0) {
+        store_load_alias_history_mode = true;
+        output_root = argv[3];
     } else if (argc == 4 && strcmp(argv[1], "--prefetch-stream") == 0 &&
                strcmp(argv[2], "--output-root") == 0) {
         prefetch_stream_mode = true;
@@ -5237,7 +5631,7 @@ int main(int argc, char **argv) {
     } else if (argc == 2 && strcmp(argv[1], "--self-test") == 0) {
         return self_test();
     } else {
-        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root> | --eviction-phase-bracketed --output-root <absolute-output-root> | --eviction-phase-bracketed-c2d --output-root <absolute-output-root> | --eviction-phase-bracketed-duration --output-root <absolute-output-root> | --history-sentinel --output-root <absolute-output-root> | --branch-history --output-root <absolute-output-root> | --indirect-target-history --output-root <absolute-output-root> | --translation-history --output-root <absolute-output-root> | --prefetch-stream --output-root <absolute-output-root> | --process-lifecycle --output-root <absolute-output-root>\n", argv[0]);
+        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root> | --eviction-phase-bracketed --output-root <absolute-output-root> | --eviction-phase-bracketed-c2d --output-root <absolute-output-root> | --eviction-phase-bracketed-duration --output-root <absolute-output-root> | --history-sentinel --output-root <absolute-output-root> | --branch-history --output-root <absolute-output-root> | --indirect-target-history --output-root <absolute-output-root> | --translation-history --output-root <absolute-output-root> | --store-load-alias-history --output-root <absolute-output-root> | --prefetch-stream --output-root <absolute-output-root> | --process-lifecycle --output-root <absolute-output-root>\n", argv[0]);
         return 2;
     }
     if (output_root[0] != '/') {
@@ -5341,6 +5735,11 @@ int main(int argc, char **argv) {
     }
     if (translation_history_mode) {
         int rc = run_translation_history_mode(output_root);
+        free(carrier.bytes);
+        return rc;
+    }
+    if (store_load_alias_history_mode) {
+        int rc = run_store_load_alias_history_mode(output_root);
         free(carrier.bytes);
         return rc;
     }

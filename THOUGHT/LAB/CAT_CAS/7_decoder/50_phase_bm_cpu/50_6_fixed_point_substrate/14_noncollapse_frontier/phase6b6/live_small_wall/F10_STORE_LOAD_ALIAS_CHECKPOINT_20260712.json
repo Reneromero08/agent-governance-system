@@ -1,0 +1,82 @@
+{
+  "schema_id": "CAT_CAS_SMALL_WALL_STORE_LOAD_ALIAS_CHECKPOINT_V1",
+  "result": "STORE_LOAD_ALIAS_HISTORY_RESPONSE_NOT_ESTABLISHED",
+  "run_id": "f10_store_load_alias_0",
+  "mode": "store-load-alias-history",
+  "source_binding": {
+    "source_bundle_sha256": "bb182c0bf6adb1cedbf82bd64881f9bfadffc1e81ce500d9badca027f139ff71",
+    "source_hashes": {
+      "f10_pmc_first_light_target.py": "e0ed9545e528f592633b90a15210868d6ebddb5da6207b5464759e04e60c83d4",
+      "f10_pmc_first_light_worker.c": "a39a852df2f114f3a628dfd4c65a9af6cceb7a49bfebe5684cbee9752352c33b"
+    }
+  },
+  "run_paths": {
+    "local_run": "runs/f10_store_load_alias_0",
+    "worker_result": "runs/f10_store_load_alias_0/F10_STORE_LOAD_ALIAS_HISTORY_RESULT.json",
+    "final_result": "runs/f10_store_load_alias_0/FINAL_RESULT.json",
+    "controller_result": "runs/f10_store_load_alias_0/CONTROLLER_RESULT.json"
+  },
+  "lab_device": {
+    "host": "root@192.168.137.100",
+    "cpu_model": "AMD Phenom(tm) II X6 1090T Processor",
+    "kernel": "6.12.86+deb13-amd64"
+  },
+  "predeclared_experiment": {
+    "carrier": "CAT_CAS-owned same-page-offset store/load alias-history over separate pages",
+    "source_operator": "neutral, forward, reverse, or shuffle balanced same-offset store/load histories on core 5",
+    "sentinel": "fixed same-offset store/load sequence",
+    "observable": "sentinel duration with translation_history_group cache counters",
+    "killing_control": "neutral versus shuffle store/load alias-history control spread",
+    "restoration_class": "pattern plus byte digest unchanged after history and after neutral restore; no physical restoration claim beyond the measured equivalence"
+  },
+  "transaction_integrity": {
+    "target_status": "F10_STORE_LOAD_ALIAS_HISTORY_TARGET_COMPLETE",
+    "worker_status": "STORE_LOAD_ALIAS_HISTORY_RESPONSE_NOT_ESTABLISHED",
+    "copy_verified": true,
+    "remote_cleaned": true,
+    "remote_returncode": 0,
+    "temperature_preflight_c": 48.5,
+    "temperature_post_c": 49.0,
+    "temperature_veto_c": 68.0,
+    "temperature_below_veto": true,
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "forbidden_process_matches_preflight": 0,
+    "forbidden_process_matches_cleanup": 0
+  },
+  "observed_counts": {
+    "duration_ns": {
+      "identity": 883239,
+      "forward": 879674,
+      "reverse": 879728,
+      "shuffle": 879439,
+      "forward_reverse_delta": 54,
+      "control_floor": 3800,
+      "threshold": 11400,
+      "signal": false
+    },
+    "cache_misses": {
+      "identity": 1,
+      "forward": 0,
+      "reverse": 0,
+      "shuffle": 0,
+      "forward_reverse_delta": 0,
+      "control_floor": 1,
+      "threshold": 32,
+      "signal": false
+    }
+  },
+  "acceptance": {
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "bytes_unchanged_after_history": true,
+    "bytes_unchanged_after_restore": true,
+    "cache_miss_signal": false,
+    "duration_signal": false,
+    "store_load_alias_history_response": false
+  },
+  "claim_ceiling": "Store/load alias-history discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
+  "frontier_update": "The same-page-offset store/load alias-history carrier is negative under this sentinel. Do not rerun this neutral/forward/reverse/shuffle store-load alias sequence unchanged."
+}

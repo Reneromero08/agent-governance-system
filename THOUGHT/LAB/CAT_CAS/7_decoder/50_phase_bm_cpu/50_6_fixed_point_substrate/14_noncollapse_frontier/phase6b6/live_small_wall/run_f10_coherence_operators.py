@@ -91,6 +91,7 @@ def execute(run_id: str, *, mode: str, keep_remote: bool) -> dict[str, Any]:
             "branch-history",
             "indirect-target-history",
             "translation-history",
+            "store-load-alias-history",
             "prefetch-stream",
             "process-lifecycle",
         },
@@ -163,6 +164,7 @@ def execute(run_id: str, *, mode: str, keep_remote: bool) -> dict[str, Any]:
         "branch-history": "F10_BRANCH_HISTORY_RESULT.json",
         "indirect-target-history": "F10_INDIRECT_TARGET_HISTORY_RESULT.json",
         "translation-history": "F10_TRANSLATION_HISTORY_RESULT.json",
+        "store-load-alias-history": "F10_STORE_LOAD_ALIAS_HISTORY_RESULT.json",
         "prefetch-stream": "F10_PREFETCH_STREAM_RESULT.json",
         "process-lifecycle": "F10_PROCESS_LIFECYCLE_RESULT.json",
     }
@@ -210,6 +212,8 @@ def execute(run_id: str, *, mode: str, keep_remote: bool) -> dict[str, Any]:
         controller["indirect_target_history_response"] = bool(worker["acceptance"]["indirect_target_history_response"])
     elif mode == "translation-history":
         controller["translation_history_response"] = bool(worker["acceptance"]["translation_history_response"])
+    elif mode == "store-load-alias-history":
+        controller["store_load_alias_history_response"] = bool(worker["acceptance"]["store_load_alias_history_response"])
     elif mode == "prefetch-stream":
         controller["prefetch_stream_response"] = bool(worker["acceptance"]["prefetch_stream_response"])
     elif mode == "process-lifecycle":
@@ -228,7 +232,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--run-id", default=default_run_id())
     parser.add_argument(
         "--mode",
-        choices=("coherence-operators", "coherence-operators-route45", "coherence-operators-route23", "phase-local-pmu", "ibs-first-light", "wc-flush-order", "eviction-sentinel", "eviction-phase-local", "eviction-phase-bracketed", "eviction-phase-bracketed-c2d", "eviction-phase-bracketed-duration", "history-sentinel", "branch-history", "indirect-target-history", "translation-history", "prefetch-stream", "process-lifecycle"),
+        choices=("coherence-operators", "coherence-operators-route45", "coherence-operators-route23", "phase-local-pmu", "ibs-first-light", "wc-flush-order", "eviction-sentinel", "eviction-phase-local", "eviction-phase-bracketed", "eviction-phase-bracketed-c2d", "eviction-phase-bracketed-duration", "history-sentinel", "branch-history", "indirect-target-history", "translation-history", "store-load-alias-history", "prefetch-stream", "process-lifecycle"),
         default="coherence-operators",
     )
     parser.add_argument("--keep-remote", action="store_true")

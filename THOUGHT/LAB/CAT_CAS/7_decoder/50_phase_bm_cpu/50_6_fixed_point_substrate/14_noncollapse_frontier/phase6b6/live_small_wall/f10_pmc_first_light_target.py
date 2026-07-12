@@ -158,6 +158,13 @@ MODES: dict[str, dict[str, Any]] = {
         "failed_status": "F10_TRANSLATION_HISTORY_TARGET_FAILED",
         "claim_ceiling": "Translation-footprint timing/PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
     },
+    "store-load-alias-history": {
+        "worker_args": ["--store-load-alias-history"],
+        "result_file": "F10_STORE_LOAD_ALIAS_HISTORY_RESULT.json",
+        "complete_status": "F10_STORE_LOAD_ALIAS_HISTORY_TARGET_COMPLETE",
+        "failed_status": "F10_STORE_LOAD_ALIAS_HISTORY_TARGET_FAILED",
+        "claim_ceiling": "Store/load alias-history discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
+    },
     "prefetch-stream": {
         "worker_args": ["--prefetch-stream"],
         "result_file": "F10_PREFETCH_STREAM_RESULT.json",
