@@ -12,3 +12,9 @@ THOUGHT/LAB/CAT_CAS/44_phase_ssh_linux/**
 # objects. Fixed FAILED_CLOSED status labels are historical evidence, not a
 # hardening gate; M-5's null-model heuristic is not applicable.
 THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/adapter/verify_gate_a_second_attempt_closure.py
+
+# Phase 6B.6 Gate A frequency preparation target runner
+# This is an authority-gated deterministic transaction and evidence-custody
+# state machine. Its GATE_A ... FAILURE schema label is not a statistical
+# hardening gate, so M-5's null-model heuristic is not applicable.
+THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/frequency_preparation/gate_a_frequency_preparation_target.py

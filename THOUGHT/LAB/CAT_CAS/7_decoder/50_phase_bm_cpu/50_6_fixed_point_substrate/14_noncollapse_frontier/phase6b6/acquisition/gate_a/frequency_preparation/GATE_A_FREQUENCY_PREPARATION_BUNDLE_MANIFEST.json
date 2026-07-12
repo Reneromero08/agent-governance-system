@@ -1,0 +1,55 @@
+{
+  "authority_artifact_created": false,
+  "bundle_sha256": "b3a552ee86e56d0e6ba03fbab6ce7469732af0c662cfe4699c8b2392cc4b0be2",
+  "deterministic_archive_sha256": "544be159277953f118817f4757c5b1243eb2d8c6f1525dfc7b0a7b0f3d18049d",
+  "files": [
+    {
+      "byte_size": 19245,
+      "git_blob_sha1": "c78714a5d798b24728a2763bda01dbaad147ad19",
+      "git_mode": "100644",
+      "package_path": "gate_a_frequency_preparation.py",
+      "role": "reviewed_preparation_core",
+      "sha256": "5be4c797f5753484d7498c93bc64411486c111bc78c9cb0528e9f7ef27d70a42",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/frequency_preparation/gate_a_frequency_preparation.py"
+    },
+    {
+      "byte_size": 13905,
+      "git_blob_sha1": "b397b6a11bb291b40b708410c61d3c49e8d9454f",
+      "git_mode": "100644",
+      "package_path": "gate_a_frequency_preparation_authority.py",
+      "role": "authority_validator",
+      "sha256": "2413777b495b2f50297194e547bbe7dd47cccf0c05b6216c2921ed15858c5e94",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/frequency_preparation/gate_a_frequency_preparation_authority.py"
+    },
+    {
+      "byte_size": 6244,
+      "git_blob_sha1": "957ae87c6b9f0394aec860af3a19724d9bc2fe87",
+      "git_mode": "100644",
+      "package_path": "gate_a_frequency_preparation_bundle.py",
+      "role": "target_bundle",
+      "sha256": "dba1cf1156bd7dca62986b8d449fe54e100abcdc6441908fbcc48734669b2888",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/frequency_preparation/gate_a_frequency_preparation_bundle.py"
+    },
+    {
+      "byte_size": 7818,
+      "git_blob_sha1": "0eb9720116615206b723a4476cb5184b6bc69142",
+      "git_mode": "100644",
+      "package_path": "gate_a_frequency_preparation_live.py",
+      "role": "live_transaction",
+      "sha256": "f0b329dbd9ef736254e89eed3f567720ac3d43973d75c85d1c437b889bd99ec2",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/frequency_preparation/gate_a_frequency_preparation_live.py"
+    },
+    {
+      "byte_size": 14568,
+      "git_blob_sha1": "5a518b0cf711500223a5096005e313e68f6e6e07",
+      "git_mode": "100644",
+      "package_path": "gate_a_frequency_preparation_target.py",
+      "role": "target_runner",
+      "sha256": "87511160349b588a9db549f77bd77939c5c8f1b03be4e42214623609e0f67c7e",
+      "source_repository_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/acquisition/gate_a/frequency_preparation/gate_a_frequency_preparation_target.py"
+    }
+  ],
+  "live_frequency_preparation_authorized": false,
+  "schema_id": "CAT_CAS_PHASE6B6_GATE_A_FREQUENCY_PREPARATION_BUNDLE_MANIFEST_V1",
+  "target_contact_authorized": false
+}
