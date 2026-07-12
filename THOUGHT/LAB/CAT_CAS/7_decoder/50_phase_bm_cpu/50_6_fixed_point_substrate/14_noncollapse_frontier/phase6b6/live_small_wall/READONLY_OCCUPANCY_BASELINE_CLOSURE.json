@@ -1,0 +1,1936 @@
+{
+  "acceptance": {
+    "all_runs_accepted": true,
+    "allowed_capture_classifications": [
+      "CAPTURE_ACCEPTED",
+      "CAPTURE_ACCEPTED_WITH_SERVICE_SPIKES"
+    ],
+    "copied_output_verified_before_remote_cleanup": true,
+    "every_stimulus_burst_completed_within_slot": true,
+    "no_missing_slot": true,
+    "no_record_integrity_failure": true,
+    "no_sender_spill": true,
+    "no_skipped_deadlines": true,
+    "occupancy_buffer_digest_unchanged": true,
+    "policies_4_and_5_restored_exactly": true,
+    "sufficient_valid_measurements_during_every_stimulus_burst": true,
+    "temperature_remained_below_68c": true
+  },
+  "claim_ceiling": "A controlled read-only CAT_CAS-owned memory-footprint stimulus produces a repeatable, footprint-dependent aggregate timing response in a separate CAT_CAS-owned measurement workload on the AMD Phenom II X6.",
+  "claim_exclusions": [
+    "path memory",
+    "directionality",
+    "coherence holonomy",
+    "physical restoration beyond logical buffer and device-state closure",
+    "target coupling",
+    "fold-odd recovery",
+    "Small Wall crossing"
+  ],
+  "classification": "OBSERVABLE_READONLY_OCCUPANCY_RESPONSE_FOUND",
+  "emitted_signal": "OBSERVABLE_READONLY_OCCUPANCY_RESPONSE_FOUND",
+  "runs": {
+    "equal": {
+      "buffer_digests": {
+        "copied_output_digests": {
+          "FILE_MANIFEST.json": {
+            "path": "FILE_MANIFEST.json",
+            "sha256": "9418c05299b5eaac9192ab2c5bec8443c333f2a446caf07b3a21d11fb88325cd",
+            "size": 1949
+          },
+          "FINAL_RESULT.json": {
+            "path": "FINAL_RESULT.json",
+            "sha256": "4df462afa8043aabe763051a4b01b93c26a7cb9bd75fcc0401b75e476fcf382a",
+            "size": 5844
+          },
+          "FIRST_LIGHT_ANALYSIS.json": {
+            "path": "FIRST_LIGHT_ANALYSIS.json",
+            "sha256": "4e6c1d224b626f1fee990aa422cd3001eebcfe71749eb67b28c6ee532756d5f5",
+            "size": 7443
+          },
+          "FREQUENCY_WRITE_LEDGER.json": {
+            "path": "FREQUENCY_WRITE_LEDGER.json",
+            "sha256": "1c1b31b0cc2703e09c6f604f36359b51e64b054d11e2c5de782ae6526820268a",
+            "size": 3837
+          },
+          "POLICY_SNAPSHOT.json": {
+            "path": "POLICY_SNAPSHOT.json",
+            "sha256": "a91d64655d220d267c0b746ac672475e51097db9e715326ccb0773f0fe50cc34",
+            "size": 2300
+          },
+          "RUNTIME_MONITOR.json": {
+            "path": "RUNTIME_MONITOR.json",
+            "sha256": "aa5f92b687e33a95d0d7ca76712f0c4e92b4a15556b78c4d498226d040ef6436",
+            "size": 10302
+          },
+          "RUNTIME_PROCESS.json": {
+            "path": "RUNTIME_PROCESS.json",
+            "sha256": "0e7f83f6a3a7e8d85d329558e5d916b5920ccca84c362c0d693b949657230531",
+            "size": 2634
+          },
+          "runtime/TIMING_DIAGNOSTIC_SUMMARY.json": {
+            "path": "runtime/TIMING_DIAGNOSTIC_SUMMARY.json",
+            "sha256": "4546bd6e596d1737e3654293e7d9e118e1a403c672a5f3424c20507c7ffe473f",
+            "size": 2804
+          },
+          "runtime/raw_samples.bin": {
+            "path": "runtime/raw_samples.bin",
+            "sha256": "54475b70f796445995feb79ea0b65df1e2c8cf8145b11a65061d9d4a72c55561",
+            "size": 128000
+          },
+          "runtime/runtime_result.json": {
+            "path": "runtime/runtime_result.json",
+            "sha256": "d09511aca9c2531964aec5cc5ca891506eacfd543f1f261209b3ea517ecb3543",
+            "size": 2324
+          },
+          "runtime/sample_timing.bin": {
+            "path": "runtime/sample_timing.bin",
+            "sha256": "1f6866473ac3de15cc6df01e8e7a9bd4839036cda29f8148b517e7147a25ef61",
+            "size": 640000
+          }
+        },
+        "occupancy_digest_after": "eae2dd971fb0047d071e8db85f054e1fb74c9f10e1607166ed0ad77795494e81",
+        "occupancy_digest_before": "eae2dd971fb0047d071e8db85f054e1fb74c9f10e1607166ed0ad77795494e81",
+        "occupancy_digest_unchanged": true
+      },
+      "burst_boundaries": [
+        {
+          "burst_duration_ticks": 32572013,
+          "burst_finish_tsc": 420869153590811,
+          "burst_start_tsc": 420869121018798,
+          "completed_before_slot_end": true,
+          "final_cursor": 7613,
+          "footprint_bytes": 4194304,
+          "initial_cursor": 0,
+          "requested_slot_end_tsc": 420870689738725,
+          "requested_slot_start_tsc": 420869082342437,
+          "slot_index": 2,
+          "touch_count": 1000003
+        },
+        {
+          "burst_duration_ticks": 31192169,
+          "burst_finish_tsc": 420870720931843,
+          "burst_start_tsc": 420870689739674,
+          "completed_before_slot_end": true,
+          "final_cursor": 7613,
+          "footprint_bytes": 4194304,
+          "initial_cursor": 0,
+          "requested_slot_end_tsc": 420872297135013,
+          "requested_slot_start_tsc": 420870689738725,
+          "slot_index": 3,
+          "touch_count": 1000003
+        },
+        {
+          "burst_duration_ticks": 31090786,
+          "burst_finish_tsc": 420872328226637,
+          "burst_start_tsc": 420872297135851,
+          "completed_before_slot_end": true,
+          "final_cursor": 7613,
+          "footprint_bytes": 4194304,
+          "initial_cursor": 0,
+          "requested_slot_end_tsc": 420873904531301,
+          "requested_slot_start_tsc": 420872297135013,
+          "slot_index": 4,
+          "touch_count": 1000003
+        },
+        {
+          "burst_duration_ticks": 31097032,
+          "burst_finish_tsc": 420873935628899,
+          "burst_start_tsc": 420873904531867,
+          "completed_before_slot_end": true,
+          "final_cursor": 7613,
+          "footprint_bytes": 4194304,
+          "initial_cursor": 0,
+          "requested_slot_end_tsc": 420875511927589,
+          "requested_slot_start_tsc": 420873904531301,
+          "slot_index": 5,
+          "touch_count": 1000003
+        }
+      ],
+      "contrasts": {
+        "during_burst_second_minus_first": -29.11171875000001,
+        "whole_slot_second_minus_first": -10.307265625
+      },
+      "controller": {
+        "copy_verified": true,
+        "remote_cleaned": true,
+        "remote_returncode": 0,
+        "remote_run": "/root/catcas_live_small_wall/micro_equal_1",
+        "verified_file_count": 15
+      },
+      "cpufreq": {
+        "frequency_write_attempt_count": 8,
+        "policy_snapshot": {
+          "4": {
+            "affected_cpus": [
+              4
+            ],
+            "available_frequencies_khz": [
+              3200000,
+              2400000,
+              1600000,
+              800000
+            ],
+            "available_frequencies_sha256": "2a62a29d59837d30085d9cefba0fb93948f2a7eac93549fe8dc30f52fce2c5ab",
+            "core": 4,
+            "cpuinfo_max_freq": {
+              "raw_sha256": "3b3cffc4d28921f75b7204d87e2df76d47d11a4a158e2a52095bd1f04b47392c",
+              "value": 3200000
+            },
+            "cpuinfo_min_freq": {
+              "raw_sha256": "20906f772bf0b93e695828b6019fcd7284341cbe95ee2865a6e86b8e400551ed",
+              "value": 800000
+            },
+            "driver": {
+              "sha256": "c1c62c8b56a9fcaa32c1f9998f1baa9ee5870119f1b567bad2419896f17d75a0",
+              "text": "acpi-cpufreq"
+            },
+            "governor": {
+              "sha256": "370afcec441b514ced2d8c7a6dce776d58ec2fd19d52cc3efe8e80eea1875140",
+              "text": "schedutil"
+            },
+            "identity": {
+              "device": 22,
+              "inode": 30960,
+              "requested_path": "/sys/devices/system/cpu/cpufreq/policy4",
+              "resolved_path": "/sys/devices/system/cpu/cpufreq/policy4"
+            },
+            "policy_path": "/sys/devices/system/cpu/cpufreq/policy4",
+            "related_cpus": [
+              4
+            ],
+            "scaling_max_freq": {
+              "raw_sha256": "3b3cffc4d28921f75b7204d87e2df76d47d11a4a158e2a52095bd1f04b47392c",
+              "raw_text": "3200000",
+              "value": 3200000
+            },
+            "scaling_min_freq": {
+              "raw_sha256": "20906f772bf0b93e695828b6019fcd7284341cbe95ee2865a6e86b8e400551ed",
+              "raw_text": "800000",
+              "value": 800000
+            }
+          },
+          "5": {
+            "affected_cpus": [
+              5
+            ],
+            "available_frequencies_khz": [
+              3200000,
+              2400000,
+              1600000,
+              800000
+            ],
+            "available_frequencies_sha256": "2a62a29d59837d30085d9cefba0fb93948f2a7eac93549fe8dc30f52fce2c5ab",
+            "core": 5,
+            "cpuinfo_max_freq": {
+              "raw_sha256": "3b3cffc4d28921f75b7204d87e2df76d47d11a4a158e2a52095bd1f04b47392c",
+              "value": 3200000
+            },
+            "cpuinfo_min_freq": {
+              "raw_sha256": "20906f772bf0b93e695828b6019fcd7284341cbe95ee2865a6e86b8e400551ed",
+              "value": 800000
+            },
+            "driver": {
+              "sha256": "c1c62c8b56a9fcaa32c1f9998f1baa9ee5870119f1b567bad2419896f17d75a0",
+              "text": "acpi-cpufreq"
+            },
+            "governor": {
+              "sha256": "370afcec441b514ced2d8c7a6dce776d58ec2fd19d52cc3efe8e80eea1875140",
+              "text": "schedutil"
+            },
+            "identity": {
+              "device": 22,
+              "inode": 30985,
+              "requested_path": "/sys/devices/system/cpu/cpufreq/policy5",
+              "resolved_path": "/sys/devices/system/cpu/cpufreq/policy5"
+            },
+            "policy_path": "/sys/devices/system/cpu/cpufreq/policy5",
+            "related_cpus": [
+              5
+            ],
+            "scaling_max_freq": {
+              "raw_sha256": "3b3cffc4d28921f75b7204d87e2df76d47d11a4a158e2a52095bd1f04b47392c",
+              "raw_text": "3200000",
+              "value": 3200000
+            },
+            "scaling_min_freq": {
+              "raw_sha256": "20906f772bf0b93e695828b6019fcd7284341cbe95ee2865a6e86b8e400551ed",
+              "raw_text": "800000",
+              "value": 800000
+            }
+          }
+        },
+        "restoration_matches_policy_snapshot": true,
+        "restoration_readback": {
+          "4": {
+            "identity": {
+              "device": 22,
+              "inode": 30960,
+              "requested_path": "/sys/devices/system/cpu/cpufreq/policy4",
+              "resolved_path": "/sys/devices/system/cpu/cpufreq/policy4"
+            },
+            "scaling_max_freq": 3200000,
+            "scaling_min_freq": 800000
+          },
+          "5": {
+            "identity": {
+              "device": 22,
+              "inode": 30985,
+              "requested_path": "/sys/devices/system/cpu/cpufreq/policy5",
+              "resolved_path": "/sys/devices/system/cpu/cpufreq/policy5"
+            },
+            "scaling_max_freq": 3200000,
+            "scaling_min_freq": 800000
+          }
+        },
+        "write_ledger": [
+          {
+            "core": 4,
+            "end_monotonic_ns": 130881912844292,
+            "failure": null,
+            "field": "scaling_min_freq",
+            "path": "/sys/devices/system/cpu/cpufreq/policy4/scaling_min_freq",
+            "payload_sha256": "278eaadc6e181356f184303673c00bc371fa97bb7b620cb383f64430b30efd99",
+            "phase": "prepare",
+            "readback_khz": 1600000,
+            "readback_samples": [
+              {
+                "attempt": 1,
+                "monotonic_ns": 130881912785374,
+                "value_khz": 1600000
+              }
+            ],
+            "requested_value_khz": 1600000,
+            "sequence": 1,
+            "start_monotonic_ns": 130881912709576,
+            "write_call_returned": true
+          },
+          {
+            "core": 4,
+            "end_monotonic_ns": 130881913035580,
+            "failure": null,
+            "field": "scaling_max_freq",
+            "path": "/sys/devices/system/cpu/cpufreq/policy4/scaling_max_freq",
+            "payload_sha256": "278eaadc6e181356f184303673c00bc371fa97bb7b620cb383f64430b30efd99",
+            "phase": "prepare",
+            "readback_khz": 1600000,
+            "readback_samples": [
+              {
+                "attempt": 1,
+                "monotonic_ns": 130881912981673,
+                "value_khz": 1600000
+              }
+            ],
+            "requested_value_khz": 1600000,
+            "sequence": 2,
+            "start_monotonic_ns": 130881912937219,
+            "write_call_returned": true
+          },
+          {
+            "core": 5,
+            "end_monotonic_ns": 130881913211146,
+            "failure": null,
+            "field": "scaling_min_freq",
+            "path": "/sys/devices/system/cpu/cpufreq/policy5/scaling_min_freq",
+            "payload_sha256": "278eaadc6e181356f184303673c00bc371fa97bb7b620cb383f64430b30efd99",
+            "phase": "prepare",
+            "readback_khz": 1600000,
+            "readback_samples": [
+              {
+                "attempt": 1,
+                "monotonic_ns": 130881913159169,
+                "value_khz": 1600000
+              }
+            ],
+            "requested_value_khz": 1600000,
+            "sequence": 3,
+            "start_monotonic_ns": 130881913121618,
+            "write_call_returned": true
+          },
+          {
+            "core": 5,
+            "end_monotonic_ns": 130881913380925,
+            "failure": null,
+            "field": "scaling_max_freq",
+            "path": "/sys/devices/system/cpu/cpufreq/policy5/scaling_max_freq",
+            "payload_sha256": "278eaadc6e181356f184303673c00bc371fa97bb7b620cb383f64430b30efd99",
+            "phase": "prepare",
+            "readback_khz": 1600000,
+            "readback_samples": [
+              {
+                "attempt": 1,
+                "monotonic_ns": 130881913328956,
+                "value_khz": 1600000
+              }
+            ],
+            "requested_value_khz": 1600000,
+            "sequence": 4,
+            "start_monotonic_ns": 130881913293677,
+            "write_call_returned": true
+          },
+          {
+            "core": 4,
+            "end_monotonic_ns": 130889376331963,
+            "failure": null,
+            "field": "scaling_min_freq",
+            "path": "/sys/devices/system/cpu/cpufreq/policy4/scaling_min_freq",
+            "payload_sha256": "20906f772bf0b93e695828b6019fcd7284341cbe95ee2865a6e86b8e400551ed",
+            "phase": "restore",
+            "readback_khz": 800000,
+            "readback_samples": [
+              {
+                "attempt": 1,
+                "monotonic_ns": 130889355956356,
+                "value_khz": 1600000
+              },
+              {
+                "attempt": 2,
+                "monotonic_ns": 130889376086676,
+                "value_khz": 800000
+              }
+            ],
+            "requested_value_khz": 800000,
+            "sequence": 5,
+            "start_monotonic_ns": 130889355766301,
+            "write_call_returned": true
+          },
+          {
+            "core": 4,
+            "end_monotonic_ns": 130889377094420,
+            "failure": null,
+            "field": "scaling_max_freq",
+            "path": "/sys/devices/system/cpu/cpufreq/policy4/scaling_max_freq",
+            "payload_sha256": "3b3cffc4d28921f75b7204d87e2df76d47d11a4a158e2a52095bd1f04b47392c",
+            "phase": "restore",
+            "readback_khz": 3200000,
+            "readback_samples": [
+              {
+                "attempt": 1,
+                "monotonic_ns": 130889376878114,
+                "value_khz": 3200000
+              }
+            ],
+            "requested_value_khz": 3200000,
+            "sequence": 6,
+            "start_monotonic_ns": 130889376708593,
+            "write_call_returned": true
+          },
+          {
+            "core": 5,
+            "end_monotonic_ns": 130889377838464,
+            "failure": null,
+            "field": "scaling_min_freq",
+            "path": "/sys/devices/system/cpu/cpufreq/policy5/scaling_min_freq",
+            "payload_sha256": "20906f772bf0b93e695828b6019fcd7284341cbe95ee2865a6e86b8e400551ed",
+            "phase": "restore",
+            "readback_khz": 800000,
+            "readback_samples": [
+              {
+                "attempt": 1,
+                "monotonic_ns": 130889377624467,
+                "value_khz": 800000
+              }
+            ],
+            "requested_value_khz": 800000,
+            "sequence": 7,
+            "start_monotonic_ns": 130889377446143,
+            "write_call_returned": true
+          },
+          {
+            "core": 5,
+            "end_monotonic_ns": 130889378537596,
+            "failure": null,
+            "field": "scaling_max_freq",
+            "path": "/sys/devices/system/cpu/cpufreq/policy5/scaling_max_freq",
+            "payload_sha256": "3b3cffc4d28921f75b7204d87e2df76d47d11a4a158e2a52095bd1f04b47392c",
+            "phase": "restore",
+            "readback_khz": 3200000,
+            "readback_samples": [
+              {
+                "attempt": 1,
+                "monotonic_ns": 130889378327344,
+                "value_khz": 3200000
+              }
+            ],
+            "requested_value_khz": 3200000,
+            "sequence": 8,
+            "start_monotonic_ns": 130889378181076,
+            "write_call_returned": true
+          }
+        ]
+      },
+      "local_run_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/micro_equal_1",
+      "pilot_variant": "readonly-occupancy-equal",
+      "run_id": "micro_equal_1",
+      "runtime_guards": {
+        "automatic_retry": false,
+        "capture": {
+          "continuous": true,
+          "covers_complete_sequence": true,
+          "deadline_tsc": 420878726720165,
+          "first_sample_tsc": 420865867550634,
+          "last_sample_tsc": 420878725112987,
+          "origin_tsc": 420865867549862,
+          "sample_count": 8000,
+          "slot_sample_counts": [
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000
+          ],
+          "tsc_hz": 3214792575.879745
+        },
+        "hardware_executed": true,
+        "msr_reads": 0,
+        "msr_writes": 0,
+        "runtime_execution_count": 1,
+        "runtime_frequency_writes": 0,
+        "step_sender_epoch_count": 1,
+        "voltage_writes": 0
+      },
+      "scheduler_statistics": {
+        "analysis_skipped_deadline_count": 0,
+        "capture_timestamp_coordinate": "actual_start_tsc",
+        "max_finish_gap_ticks": 1613208,
+        "missed_deadline_count": 0,
+        "requested_actual_slot_mismatch_count": 7,
+        "sample_count": 8000,
+        "sample_count_per_slot": [
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000
+        ],
+        "sample_timing_record_bytes": 80,
+        "sample_timing_schema_id": "CAT_CAS_READONLY_OCCUPANCY_SAMPLE_TIMING_V2",
+        "scheduler_lateness": {
+          "max_sample_index": 0,
+          "max_slot_index": 0,
+          "max_ticks": 772,
+          "p50_ticks": 215,
+          "p95_ticks": 273,
+          "p99_ticks": 281,
+          "reject_threshold_ticks": 6429585
+        },
+        "service_cycles_per_access": {
+          "max": 353.765625,
+          "p50": 82.296875,
+          "p95": 223.828125,
+          "p99": 273.546875
+        },
+        "service_ticks": {
+          "max": 22641,
+          "p50": 5267,
+          "p95": 14325,
+          "p99": 17507
+        },
+        "skipped_deadline_count": 0
+      },
+      "slot_means": {
+        "during_burst_response_cycles": {
+          "2": {
+            "mean_response_cycles": 181.68125,
+            "sample_count": 20,
+            "token": "F0"
+          },
+          "3": {
+            "mean_response_cycles": 120.2671875,
+            "sample_count": 20,
+            "token": "F1"
+          },
+          "4": {
+            "mean_response_cycles": 110.828125,
+            "sample_count": 20,
+            "token": "F1"
+          },
+          "5": {
+            "mean_response_cycles": 107.6375,
+            "sample_count": 20,
+            "token": "F0"
+          }
+        },
+        "whole_slot_response_cycles": {
+          "2": {
+            "mean_response_cycles": 119.65646875,
+            "sample_count": 1000,
+            "token": "F0"
+          },
+          "3": {
+            "mean_response_cycles": 97.898609375,
+            "sample_count": 1000,
+            "token": "F1"
+          },
+          "4": {
+            "mean_response_cycles": 95.5100625,
+            "sample_count": 1000,
+            "token": "F1"
+          },
+          "5": {
+            "mean_response_cycles": 94.366734375,
+            "sample_count": 1000,
+            "token": "F0"
+          }
+        }
+      },
+      "source_and_schedule": {
+        "analysis_schedule": {
+          "duration_s": 4.0,
+          "minimum_during_burst_samples_per_stimulus_slot": 10,
+          "primary_coordinate": "during_burst_response_cycles",
+          "read_hz": 2000,
+          "schedule_sha256": "57f6aa152d2c099429e7ca2c4d843102739c81b2158e46c4d49f07a96b6f4758",
+          "slot_count": 8,
+          "slot_duration_s": 0.5,
+          "stimulus_slots": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "tokens": [
+            "I",
+            "I",
+            "F0",
+            "F1",
+            "F1",
+            "F0",
+            "I",
+            "I"
+          ]
+        },
+        "runtime_execution_bundle_sha256": "aa2b63f31bac6ed377a32c532da90325c894ce78caaa7e9b7879c28a84a04e6d",
+        "schedule_sha256": "57f6aa152d2c099429e7ca2c4d843102739c81b2158e46c4d49f07a96b6f4758",
+        "source_bundle_sha256": "aa2b63f31bac6ed377a32c532da90325c894ce78caaa7e9b7879c28a84a04e6d",
+        "source_hashes": {
+          "capture_quality_contract.h": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140",
+          "captured_file.c": "16eb25af4116d0683ce2dee03aad2539ac7728ef58d07fbf4e83598c7d788a51",
+          "captured_file.h": "81c94e8c29bffc915f9a3fa2db50605387f8f1544e2f561a674b8c82e4043469",
+          "combined_pdn_hardware.c": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976",
+          "combined_pdn_hardware.h": "a85e202fd65c520cad4853eea9168d2af9d92aa0b05b640bb8b180aed34141ae",
+          "gate_a_frequency_preparation.py": "5be4c797f5753484d7498c93bc64411486c111bc78c9cb0528e9f7ef27d70a42",
+          "live_gate_a_target.py": "fa9ab25acfbcfe3a504b994f0ad4ffe0255f71c7629a67e9f9c6a312ee2e73d4",
+          "small_wall_runtime.c": "c455182b4c95e1eea44f4c9f7398b4aeae334b76b4eb4b6565dc91cf40499b2a",
+          "small_wall_runtime.h": "466be54de0b0baa6f98537f54dbc9e1c6c2d692017890682d9fe999888cbe81d",
+          "small_wall_worker.c": "81aa6a98b56de144142e32d187f7df055786595db4de3fc4d1247350a8491992"
+        }
+      },
+      "status": {
+        "all_bursts_completed_inside_slots": true,
+        "capture_quality_classification": "CAPTURE_ACCEPTED_WITH_SERVICE_SPIKES",
+        "final_status": "GATE_A_FIRST_LIGHT_COMPLETE",
+        "missing_slot": false,
+        "process_cleanup_forbidden_matches": [],
+        "record_integrity_failure": false,
+        "restoration_complete": true,
+        "restoration_errors": [],
+        "runtime_status": "GATE_A_ENGINEERING_SMOKE_COMPLETE",
+        "sender_spill": false,
+        "sufficient_during_burst_samples": true
+      },
+      "temperature": {
+        "below_veto": true,
+        "max_monitor_temperature_c": 43.5,
+        "preflight_temperature_c": 44.0,
+        "veto_c": 68.0
+      }
+    },
+    "forward": {
+      "buffer_digests": {
+        "copied_output_digests": {
+          "FILE_MANIFEST.json": {
+            "path": "FILE_MANIFEST.json",
+            "sha256": "0438fb9eadf85e69df9ab171d45612c84c6f8b9bf132579e0a441eb64c35b756",
+            "size": 1949
+          },
+          "FINAL_RESULT.json": {
+            "path": "FINAL_RESULT.json",
+            "sha256": "2ee8bc376480514ea6eba267a2d45bfe067d50570277ac83dffc7c536e52ae85",
+            "size": 5862
+          },
+          "FIRST_LIGHT_ANALYSIS.json": {
+            "path": "FIRST_LIGHT_ANALYSIS.json",
+            "sha256": "639e7d0a8e8e7823db96e18a03c1b6163c5e84a3c68bf5bdeaa3225c58d71369",
+            "size": 7469
+          },
+          "FREQUENCY_WRITE_LEDGER.json": {
+            "path": "FREQUENCY_WRITE_LEDGER.json",
+            "sha256": "787d2c25fd2f4de31d723a8d864ea4f6a4aa56b0abbc5f4768afa7ed746c26ce",
+            "size": 3901
+          },
+          "POLICY_SNAPSHOT.json": {
+            "path": "POLICY_SNAPSHOT.json",
+            "sha256": "a91d64655d220d267c0b746ac672475e51097db9e715326ccb0773f0fe50cc34",
+            "size": 2300
+          },
+          "RUNTIME_MONITOR.json": {
+            "path": "RUNTIME_MONITOR.json",
+            "sha256": "6761edce9829c5709943c8c5b3b0aa5748212e3792947d9f2c258a3c47bc19b6",
+            "size": 10098
+          },
+          "RUNTIME_PROCESS.json": {
+            "path": "RUNTIME_PROCESS.json",
+            "sha256": "cce8d05bb5852a9d47c3a6f91f37e0d7d9c3dd542977a9e81a50b3a7b8a84c90",
+            "size": 2636
+          },
+          "runtime/TIMING_DIAGNOSTIC_SUMMARY.json": {
+            "path": "runtime/TIMING_DIAGNOSTIC_SUMMARY.json",
+            "sha256": "307794b36ba7782bd0e94958f0595c22652b115b83bdbdf092785d707dec5a48",
+            "size": 2804
+          },
+          "runtime/raw_samples.bin": {
+            "path": "runtime/raw_samples.bin",
+            "sha256": "834b8acda6473cee301964fc305fa045ef242934610eb798c869bcf9398bf32e",
+            "size": 128000
+          },
+          "runtime/runtime_result.json": {
+            "path": "runtime/runtime_result.json",
+            "sha256": "b50622fd952cbc0d8498b10a2562618cffc853ed3f3400f392a093a6b3b88eb9",
+            "size": 2329
+          },
+          "runtime/sample_timing.bin": {
+            "path": "runtime/sample_timing.bin",
+            "sha256": "165ad46e894c415a9fe733d7057e273dd742a0d0bf0136503ccb28759efc4e2e",
+            "size": 640000
+          }
+        },
+        "occupancy_digest_after": "eae2dd971fb0047d071e8db85f054e1fb74c9f10e1607166ed0ad77795494e81",
+        "occupancy_digest_before": "eae2dd971fb0047d071e8db85f054e1fb74c9f10e1607166ed0ad77795494e81",
+        "occupancy_digest_unchanged": true
+      },
+      "burst_boundaries": [
+        {
+          "burst_duration_ticks": 16149209,
+          "burst_finish_tsc": 419464370357494,
+          "burst_start_tsc": 419464354208285,
+          "completed_before_slot_end": true,
+          "final_cursor": 3517,
+          "footprint_bytes": 262144,
+          "initial_cursor": 0,
+          "requested_slot_end_tsc": 419465929770935,
+          "requested_slot_start_tsc": 419464322393036,
+          "slot_index": 2,
+          "touch_count": 1000003
+        },
+        {
+          "burst_duration_ticks": 47691842,
+          "burst_finish_tsc": 419465977463637,
+          "burst_start_tsc": 419465929771795,
+          "completed_before_slot_end": true,
+          "final_cursor": 73149,
+          "footprint_bytes": 33554432,
+          "initial_cursor": 0,
+          "requested_slot_end_tsc": 419467537148834,
+          "requested_slot_start_tsc": 419465929770935,
+          "slot_index": 3,
+          "touch_count": 1000003
+        },
+        {
+          "burst_duration_ticks": 47286048,
+          "burst_finish_tsc": 419467584435723,
+          "burst_start_tsc": 419467537149675,
+          "completed_before_slot_end": true,
+          "final_cursor": 73149,
+          "footprint_bytes": 33554432,
+          "initial_cursor": 0,
+          "requested_slot_end_tsc": 419469144526733,
+          "requested_slot_start_tsc": 419467537148834,
+          "slot_index": 4,
+          "touch_count": 1000003
+        },
+        {
+          "burst_duration_ticks": 16110061,
+          "burst_finish_tsc": 419469160638035,
+          "burst_start_tsc": 419469144527974,
+          "completed_before_slot_end": true,
+          "final_cursor": 3517,
+          "footprint_bytes": 262144,
+          "initial_cursor": 0,
+          "requested_slot_end_tsc": 419470751904632,
+          "requested_slot_start_tsc": 419469144526733,
+          "slot_index": 5,
+          "touch_count": 1000003
+        }
+      ],
+      "contrasts": {
+        "during_burst_second_minus_first": 174.91927083333331,
+        "whole_slot_second_minus_first": 66.93909374999998
+      },
+      "controller": {
+        "copy_verified": true,
+        "remote_cleaned": true,
+        "remote_returncode": 0,
+        "remote_run": "/root/catcas_live_small_wall/micro_forward_0",
+        "verified_file_count": 15
+      },
+      "cpufreq": {
+        "frequency_write_attempt_count": 8,
+        "policy_snapshot": {
+          "4": {
+            "affected_cpus": [
+              4
+            ],
+            "available_frequencies_khz": [
+              3200000,
+              2400000,
+              1600000,
+              800000
+            ],
+            "available_frequencies_sha256": "2a62a29d59837d30085d9cefba0fb93948f2a7eac93549fe8dc30f52fce2c5ab",
+            "core": 4,
+            "cpuinfo_max_freq": {
+              "raw_sha256": "3b3cffc4d28921f75b7204d87e2df76d47d11a4a158e2a52095bd1f04b47392c",
+              "value": 3200000
+            },
+            "cpuinfo_min_freq": {
+              "raw_sha256": "20906f772bf0b93e695828b6019fcd7284341cbe95ee2865a6e86b8e400551ed",
+              "value": 800000
+            },
+            "driver": {
+              "sha256": "c1c62c8b56a9fcaa32c1f9998f1baa9ee5870119f1b567bad2419896f17d75a0",
+              "text": "acpi-cpufreq"
+            },
+            "governor": {
+              "sha256": "370afcec441b514ced2d8c7a6dce776d58ec2fd19d52cc3efe8e80eea1875140",
+              "text": "schedutil"
+            },
+            "identity": {
+              "device": 22,
+              "inode": 30960,
+              "requested_path": "/sys/devices/system/cpu/cpufreq/policy4",
+              "resolved_path": "/sys/devices/system/cpu/cpufreq/policy4"
+            },
+            "policy_path": "/sys/devices/system/cpu/cpufreq/policy4",
+            "related_cpus": [
+              4
+            ],
+            "scaling_max_freq": {
+              "raw_sha256": "3b3cffc4d28921f75b7204d87e2df76d47d11a4a158e2a52095bd1f04b47392c",
+              "raw_text": "3200000",
+              "value": 3200000
+            },
+            "scaling_min_freq": {
+              "raw_sha256": "20906f772bf0b93e695828b6019fcd7284341cbe95ee2865a6e86b8e400551ed",
+              "raw_text": "800000",
+              "value": 800000
+            }
+          },
+          "5": {
+            "affected_cpus": [
+              5
+            ],
+            "available_frequencies_khz": [
+              3200000,
+              2400000,
+              1600000,
+              800000
+            ],
+            "available_frequencies_sha256": "2a62a29d59837d30085d9cefba0fb93948f2a7eac93549fe8dc30f52fce2c5ab",
+            "core": 5,
+            "cpuinfo_max_freq": {
+              "raw_sha256": "3b3cffc4d28921f75b7204d87e2df76d47d11a4a158e2a52095bd1f04b47392c",
+              "value": 3200000
+            },
+            "cpuinfo_min_freq": {
+              "raw_sha256": "20906f772bf0b93e695828b6019fcd7284341cbe95ee2865a6e86b8e400551ed",
+              "value": 800000
+            },
+            "driver": {
+              "sha256": "c1c62c8b56a9fcaa32c1f9998f1baa9ee5870119f1b567bad2419896f17d75a0",
+              "text": "acpi-cpufreq"
+            },
+            "governor": {
+              "sha256": "370afcec441b514ced2d8c7a6dce776d58ec2fd19d52cc3efe8e80eea1875140",
+              "text": "schedutil"
+            },
+            "identity": {
+              "device": 22,
+              "inode": 30985,
+              "requested_path": "/sys/devices/system/cpu/cpufreq/policy5",
+              "resolved_path": "/sys/devices/system/cpu/cpufreq/policy5"
+            },
+            "policy_path": "/sys/devices/system/cpu/cpufreq/policy5",
+            "related_cpus": [
+              5
+            ],
+            "scaling_max_freq": {
+              "raw_sha256": "3b3cffc4d28921f75b7204d87e2df76d47d11a4a158e2a52095bd1f04b47392c",
+              "raw_text": "3200000",
+              "value": 3200000
+            },
+            "scaling_min_freq": {
+              "raw_sha256": "20906f772bf0b93e695828b6019fcd7284341cbe95ee2865a6e86b8e400551ed",
+              "raw_text": "800000",
+              "value": 800000
+            }
+          }
+        },
+        "restoration_matches_policy_snapshot": true,
+        "restoration_readback": {
+          "4": {
+            "identity": {
+              "device": 22,
+              "inode": 30960,
+              "requested_path": "/sys/devices/system/cpu/cpufreq/policy4",
+              "resolved_path": "/sys/devices/system/cpu/cpufreq/policy4"
+            },
+            "scaling_max_freq": 3200000,
+            "scaling_min_freq": 800000
+          },
+          "5": {
+            "identity": {
+              "device": 22,
+              "inode": 30985,
+              "requested_path": "/sys/devices/system/cpu/cpufreq/policy5",
+              "resolved_path": "/sys/devices/system/cpu/cpufreq/policy5"
+            },
+            "scaling_max_freq": 3200000,
+            "scaling_min_freq": 800000
+          }
+        },
+        "write_ledger": [
+          {
+            "core": 4,
+            "end_monotonic_ns": 130444928713052,
+            "failure": null,
+            "field": "scaling_min_freq",
+            "path": "/sys/devices/system/cpu/cpufreq/policy4/scaling_min_freq",
+            "payload_sha256": "278eaadc6e181356f184303673c00bc371fa97bb7b620cb383f64430b30efd99",
+            "phase": "prepare",
+            "readback_khz": 1600000,
+            "readback_samples": [
+              {
+                "attempt": 1,
+                "monotonic_ns": 130444908567233,
+                "value_khz": 800000
+              },
+              {
+                "attempt": 2,
+                "monotonic_ns": 130444928644716,
+                "value_khz": 1600000
+              }
+            ],
+            "requested_value_khz": 1600000,
+            "sequence": 1,
+            "start_monotonic_ns": 130444908502825,
+            "write_call_returned": true
+          },
+          {
+            "core": 4,
+            "end_monotonic_ns": 130444949059400,
+            "failure": null,
+            "field": "scaling_max_freq",
+            "path": "/sys/devices/system/cpu/cpufreq/policy4/scaling_max_freq",
+            "payload_sha256": "278eaadc6e181356f184303673c00bc371fa97bb7b620cb383f64430b30efd99",
+            "phase": "prepare",
+            "readback_khz": 1600000,
+            "readback_samples": [
+              {
+                "attempt": 1,
+                "monotonic_ns": 130444928850579,
+                "value_khz": 3200000
+              },
+              {
+                "attempt": 2,
+                "monotonic_ns": 130444948944578,
+                "value_khz": 1600000
+              }
+            ],
+            "requested_value_khz": 1600000,
+            "sequence": 2,
+            "start_monotonic_ns": 130444928811070,
+            "write_call_returned": true
+          },
+          {
+            "core": 5,
+            "end_monotonic_ns": 130444949422841,
+            "failure": null,
+            "field": "scaling_min_freq",
+            "path": "/sys/devices/system/cpu/cpufreq/policy5/scaling_min_freq",
+            "payload_sha256": "278eaadc6e181356f184303673c00bc371fa97bb7b620cb383f64430b30efd99",
+            "phase": "prepare",
+            "readback_khz": 1600000,
+            "readback_samples": [
+              {
+                "attempt": 1,
+                "monotonic_ns": 130444949315504,
+                "value_khz": 1600000
+              }
+            ],
+            "requested_value_khz": 1600000,
+            "sequence": 3,
+            "start_monotonic_ns": 130444949237287,
+            "write_call_returned": true
+          },
+          {
+            "core": 5,
+            "end_monotonic_ns": 130444949775446,
+            "failure": null,
+            "field": "scaling_max_freq",
+            "path": "/sys/devices/system/cpu/cpufreq/policy5/scaling_max_freq",
+            "payload_sha256": "278eaadc6e181356f184303673c00bc371fa97bb7b620cb383f64430b30efd99",
+            "phase": "prepare",
+            "readback_khz": 1600000,
+            "readback_samples": [
+              {
+                "attempt": 1,
+                "monotonic_ns": 130444949667837,
+                "value_khz": 1600000
+              }
+            ],
+            "requested_value_khz": 1600000,
+            "sequence": 4,
+            "start_monotonic_ns": 130444949594753,
+            "write_call_returned": true
+          },
+          {
+            "core": 4,
+            "end_monotonic_ns": 130452299245530,
+            "failure": null,
+            "field": "scaling_min_freq",
+            "path": "/sys/devices/system/cpu/cpufreq/policy4/scaling_min_freq",
+            "payload_sha256": "20906f772bf0b93e695828b6019fcd7284341cbe95ee2865a6e86b8e400551ed",
+            "phase": "restore",
+            "readback_khz": 800000,
+            "readback_samples": [
+              {
+                "attempt": 1,
+                "monotonic_ns": 130452299016468,
+                "value_khz": 800000
+              }
+            ],
+            "requested_value_khz": 800000,
+            "sequence": 5,
+            "start_monotonic_ns": 130452298794174,
+            "write_call_returned": true
+          },
+          {
+            "core": 4,
+            "end_monotonic_ns": 130452299984038,
+            "failure": null,
+            "field": "scaling_max_freq",
+            "path": "/sys/devices/system/cpu/cpufreq/policy4/scaling_max_freq",
+            "payload_sha256": "3b3cffc4d28921f75b7204d87e2df76d47d11a4a158e2a52095bd1f04b47392c",
+            "phase": "restore",
+            "readback_khz": 3200000,
+            "readback_samples": [
+              {
+                "attempt": 1,
+                "monotonic_ns": 130452299769309,
+                "value_khz": 3200000
+              }
+            ],
+            "requested_value_khz": 3200000,
+            "sequence": 6,
+            "start_monotonic_ns": 130452299609297,
+            "write_call_returned": true
+          },
+          {
+            "core": 5,
+            "end_monotonic_ns": 130452300782573,
+            "failure": null,
+            "field": "scaling_min_freq",
+            "path": "/sys/devices/system/cpu/cpufreq/policy5/scaling_min_freq",
+            "payload_sha256": "20906f772bf0b93e695828b6019fcd7284341cbe95ee2865a6e86b8e400551ed",
+            "phase": "restore",
+            "readback_khz": 800000,
+            "readback_samples": [
+              {
+                "attempt": 1,
+                "monotonic_ns": 130452300565180,
+                "value_khz": 800000
+              }
+            ],
+            "requested_value_khz": 800000,
+            "sequence": 7,
+            "start_monotonic_ns": 130452300384043,
+            "write_call_returned": true
+          },
+          {
+            "core": 5,
+            "end_monotonic_ns": 130452301489035,
+            "failure": null,
+            "field": "scaling_max_freq",
+            "path": "/sys/devices/system/cpu/cpufreq/policy5/scaling_max_freq",
+            "payload_sha256": "3b3cffc4d28921f75b7204d87e2df76d47d11a4a158e2a52095bd1f04b47392c",
+            "phase": "restore",
+            "readback_khz": 3200000,
+            "readback_samples": [
+              {
+                "attempt": 1,
+                "monotonic_ns": 130452301277289,
+                "value_khz": 3200000
+              }
+            ],
+            "requested_value_khz": 3200000,
+            "sequence": 8,
+            "start_monotonic_ns": 130452301126831,
+            "write_call_returned": true
+          }
+        ]
+      },
+      "local_run_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/micro_forward_0",
+      "pilot_variant": "readonly-occupancy-forward",
+      "run_id": "micro_forward_0",
+      "runtime_guards": {
+        "automatic_retry": false,
+        "capture": {
+          "continuous": true,
+          "covers_complete_sequence": true,
+          "deadline_tsc": 419473966660430,
+          "first_sample_tsc": 419461107638170,
+          "last_sample_tsc": 419473965053331,
+          "origin_tsc": 419461107637239,
+          "sample_count": 8000,
+          "slot_sample_counts": [
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000
+          ],
+          "tsc_hz": 3214755797.990674
+        },
+        "hardware_executed": true,
+        "msr_reads": 0,
+        "msr_writes": 0,
+        "runtime_execution_count": 1,
+        "runtime_frequency_writes": 0,
+        "step_sender_epoch_count": 1,
+        "voltage_writes": 0
+      },
+      "scheduler_statistics": {
+        "analysis_skipped_deadline_count": 0,
+        "capture_timestamp_coordinate": "actual_start_tsc",
+        "max_finish_gap_ticks": 1691928,
+        "missed_deadline_count": 0,
+        "requested_actual_slot_mismatch_count": 7,
+        "sample_count": 8000,
+        "sample_count_per_slot": [
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000
+        ],
+        "sample_timing_record_bytes": 80,
+        "sample_timing_schema_id": "CAT_CAS_READONLY_OCCUPANCY_SAMPLE_TIMING_V2",
+        "scheduler_lateness": {
+          "max_sample_index": 6728,
+          "max_slot_index": 6,
+          "max_ticks": 83436,
+          "p50_ticks": 216,
+          "p95_ticks": 273,
+          "p99_ticks": 281,
+          "reject_threshold_ticks": 6429511
+        },
+        "service_cycles_per_access": {
+          "max": 364.65625,
+          "p50": 82.046875,
+          "p95": 270.125,
+          "p99": 284.875
+        },
+        "service_ticks": {
+          "max": 23338,
+          "p50": 5251,
+          "p95": 17288,
+          "p99": 18232
+        },
+        "skipped_deadline_count": 0
+      },
+      "slot_means": {
+        "during_burst_response_cycles": {
+          "2": {
+            "mean_response_cycles": 81.99375,
+            "sample_count": 10,
+            "token": "F0"
+          },
+          "3": {
+            "mean_response_cycles": 266.7234375,
+            "sample_count": 30,
+            "token": "F1"
+          },
+          "4": {
+            "mean_response_cycles": 247.59322916666667,
+            "sample_count": 30,
+            "token": "F1"
+          },
+          "5": {
+            "mean_response_cycles": 82.484375,
+            "sample_count": 11,
+            "token": "F0"
+          }
+        },
+        "whole_slot_response_cycles": {
+          "2": {
+            "mean_response_cycles": 82.55003125,
+            "sample_count": 1000,
+            "token": "F0"
+          },
+          "3": {
+            "mean_response_cycles": 149.235890625,
+            "sample_count": 1000,
+            "token": "F1"
+          },
+          "4": {
+            "mean_response_cycles": 149.72565625,
+            "sample_count": 1000,
+            "token": "F1"
+          },
+          "5": {
+            "mean_response_cycles": 82.533328125,
+            "sample_count": 1000,
+            "token": "F0"
+          }
+        }
+      },
+      "source_and_schedule": {
+        "analysis_schedule": {
+          "duration_s": 4.0,
+          "minimum_during_burst_samples_per_stimulus_slot": 10,
+          "primary_coordinate": "during_burst_response_cycles",
+          "read_hz": 2000,
+          "schedule_sha256": "57f6aa152d2c099429e7ca2c4d843102739c81b2158e46c4d49f07a96b6f4758",
+          "slot_count": 8,
+          "slot_duration_s": 0.5,
+          "stimulus_slots": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "tokens": [
+            "I",
+            "I",
+            "F0",
+            "F1",
+            "F1",
+            "F0",
+            "I",
+            "I"
+          ]
+        },
+        "runtime_execution_bundle_sha256": "aa2b63f31bac6ed377a32c532da90325c894ce78caaa7e9b7879c28a84a04e6d",
+        "schedule_sha256": "57f6aa152d2c099429e7ca2c4d843102739c81b2158e46c4d49f07a96b6f4758",
+        "source_bundle_sha256": "aa2b63f31bac6ed377a32c532da90325c894ce78caaa7e9b7879c28a84a04e6d",
+        "source_hashes": {
+          "capture_quality_contract.h": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140",
+          "captured_file.c": "16eb25af4116d0683ce2dee03aad2539ac7728ef58d07fbf4e83598c7d788a51",
+          "captured_file.h": "81c94e8c29bffc915f9a3fa2db50605387f8f1544e2f561a674b8c82e4043469",
+          "combined_pdn_hardware.c": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976",
+          "combined_pdn_hardware.h": "a85e202fd65c520cad4853eea9168d2af9d92aa0b05b640bb8b180aed34141ae",
+          "gate_a_frequency_preparation.py": "5be4c797f5753484d7498c93bc64411486c111bc78c9cb0528e9f7ef27d70a42",
+          "live_gate_a_target.py": "fa9ab25acfbcfe3a504b994f0ad4ffe0255f71c7629a67e9f9c6a312ee2e73d4",
+          "small_wall_runtime.c": "c455182b4c95e1eea44f4c9f7398b4aeae334b76b4eb4b6565dc91cf40499b2a",
+          "small_wall_runtime.h": "466be54de0b0baa6f98537f54dbc9e1c6c2d692017890682d9fe999888cbe81d",
+          "small_wall_worker.c": "81aa6a98b56de144142e32d187f7df055786595db4de3fc4d1247350a8491992"
+        }
+      },
+      "status": {
+        "all_bursts_completed_inside_slots": true,
+        "capture_quality_classification": "CAPTURE_ACCEPTED_WITH_SERVICE_SPIKES",
+        "final_status": "GATE_A_FIRST_LIGHT_COMPLETE",
+        "missing_slot": false,
+        "process_cleanup_forbidden_matches": [],
+        "record_integrity_failure": false,
+        "restoration_complete": true,
+        "restoration_errors": [],
+        "runtime_status": "GATE_A_ENGINEERING_SMOKE_COMPLETE",
+        "sender_spill": false,
+        "sufficient_during_burst_samples": true
+      },
+      "temperature": {
+        "below_veto": true,
+        "max_monitor_temperature_c": 43.625,
+        "preflight_temperature_c": 44.125,
+        "veto_c": 68.0
+      }
+    },
+    "reverse": {
+      "buffer_digests": {
+        "copied_output_digests": {
+          "FILE_MANIFEST.json": {
+            "path": "FILE_MANIFEST.json",
+            "sha256": "9306cbcf3d382153a62c984ce4aaa85ca90e3c9e55023a792d29e0af58dacc64",
+            "size": 1949
+          },
+          "FINAL_RESULT.json": {
+            "path": "FINAL_RESULT.json",
+            "sha256": "289242d3834c71d8d0150b64cef580c89e4d3f10088e9507ce9e0a0e94bebdfc",
+            "size": 5861
+          },
+          "FIRST_LIGHT_ANALYSIS.json": {
+            "path": "FIRST_LIGHT_ANALYSIS.json",
+            "sha256": "66e41c655002f1e6e21d68a0f6dfba80d3407115992fd5f5e40aaa76f79d3a0c",
+            "size": 7461
+          },
+          "FREQUENCY_WRITE_LEDGER.json": {
+            "path": "FREQUENCY_WRITE_LEDGER.json",
+            "sha256": "da014381e2960e25ea8c6996f3dd7c0ebac4bbda6de6cfe9aeefab6115a557b2",
+            "size": 3966
+          },
+          "POLICY_SNAPSHOT.json": {
+            "path": "POLICY_SNAPSHOT.json",
+            "sha256": "a91d64655d220d267c0b746ac672475e51097db9e715326ccb0773f0fe50cc34",
+            "size": 2300
+          },
+          "RUNTIME_MONITOR.json": {
+            "path": "RUNTIME_MONITOR.json",
+            "sha256": "8e683f028d93d32636f3c8518314e2b774d3b25880937f80a054c39e83a66486",
+            "size": 10291
+          },
+          "RUNTIME_PROCESS.json": {
+            "path": "RUNTIME_PROCESS.json",
+            "sha256": "8a2be26369034852ac2490812c9bf295e3ea035f3e8c66aebdc2b414417a9560",
+            "size": 2637
+          },
+          "runtime/TIMING_DIAGNOSTIC_SUMMARY.json": {
+            "path": "runtime/TIMING_DIAGNOSTIC_SUMMARY.json",
+            "sha256": "1ecf1d48de9e132ef0ccdb0f698ec55e636a7e58c5089ff0e768aea9d8b0161b",
+            "size": 2802
+          },
+          "runtime/raw_samples.bin": {
+            "path": "runtime/raw_samples.bin",
+            "sha256": "a8800708a2eec55e34807aabef95516f2881f0ad8f55de9c5cdacd0fd3fdf01e",
+            "size": 128000
+          },
+          "runtime/runtime_result.json": {
+            "path": "runtime/runtime_result.json",
+            "sha256": "9921a60088075b50c48f4c93d589f6d82a3e733732c7656c25599d5489ec1753",
+            "size": 2327
+          },
+          "runtime/sample_timing.bin": {
+            "path": "runtime/sample_timing.bin",
+            "sha256": "b194018c75de5ed071baa696a78f952c3f5544ed9174083f9b2ef1fa7d6f1c73",
+            "size": 640000
+          }
+        },
+        "occupancy_digest_after": "eae2dd971fb0047d071e8db85f054e1fb74c9f10e1607166ed0ad77795494e81",
+        "occupancy_digest_before": "eae2dd971fb0047d071e8db85f054e1fb74c9f10e1607166ed0ad77795494e81",
+        "occupancy_digest_unchanged": true
+      },
+      "burst_boundaries": [
+        {
+          "burst_duration_ticks": 47413622,
+          "burst_finish_tsc": 419524288657283,
+          "burst_start_tsc": 419524241243661,
+          "completed_before_slot_end": true,
+          "final_cursor": 73149,
+          "footprint_bytes": 33554432,
+          "initial_cursor": 0,
+          "requested_slot_end_tsc": 419525816964415,
+          "requested_slot_start_tsc": 419524209574165,
+          "slot_index": 2,
+          "touch_count": 1000003
+        },
+        {
+          "burst_duration_ticks": 16118623,
+          "burst_finish_tsc": 419525833084173,
+          "burst_start_tsc": 419525816965550,
+          "completed_before_slot_end": true,
+          "final_cursor": 3517,
+          "footprint_bytes": 262144,
+          "initial_cursor": 0,
+          "requested_slot_end_tsc": 419527424354664,
+          "requested_slot_start_tsc": 419525816964415,
+          "slot_index": 3,
+          "touch_count": 1000003
+        },
+        {
+          "burst_duration_ticks": 16007821,
+          "burst_finish_tsc": 419527440363002,
+          "burst_start_tsc": 419527424355181,
+          "completed_before_slot_end": true,
+          "final_cursor": 3517,
+          "footprint_bytes": 262144,
+          "initial_cursor": 0,
+          "requested_slot_end_tsc": 419529031744914,
+          "requested_slot_start_tsc": 419527424354664,
+          "slot_index": 4,
+          "touch_count": 1000003
+        },
+        {
+          "burst_duration_ticks": 47003096,
+          "burst_finish_tsc": 419529078748942,
+          "burst_start_tsc": 419529031745846,
+          "completed_before_slot_end": true,
+          "final_cursor": 73149,
+          "footprint_bytes": 33554432,
+          "initial_cursor": 0,
+          "requested_slot_end_tsc": 419530639135164,
+          "requested_slot_start_tsc": 419529031744914,
+          "slot_index": 5,
+          "touch_count": 1000003
+        }
+      ],
+      "contrasts": {
+        "during_burst_second_minus_first": -176.20307765151517,
+        "whole_slot_second_minus_first": -67.48690624999998
+      },
+      "controller": {
+        "copy_verified": true,
+        "remote_cleaned": true,
+        "remote_returncode": 0,
+        "remote_run": "/root/catcas_live_small_wall/micro_reverse_0",
+        "verified_file_count": 15
+      },
+      "cpufreq": {
+        "frequency_write_attempt_count": 8,
+        "policy_snapshot": {
+          "4": {
+            "affected_cpus": [
+              4
+            ],
+            "available_frequencies_khz": [
+              3200000,
+              2400000,
+              1600000,
+              800000
+            ],
+            "available_frequencies_sha256": "2a62a29d59837d30085d9cefba0fb93948f2a7eac93549fe8dc30f52fce2c5ab",
+            "core": 4,
+            "cpuinfo_max_freq": {
+              "raw_sha256": "3b3cffc4d28921f75b7204d87e2df76d47d11a4a158e2a52095bd1f04b47392c",
+              "value": 3200000
+            },
+            "cpuinfo_min_freq": {
+              "raw_sha256": "20906f772bf0b93e695828b6019fcd7284341cbe95ee2865a6e86b8e400551ed",
+              "value": 800000
+            },
+            "driver": {
+              "sha256": "c1c62c8b56a9fcaa32c1f9998f1baa9ee5870119f1b567bad2419896f17d75a0",
+              "text": "acpi-cpufreq"
+            },
+            "governor": {
+              "sha256": "370afcec441b514ced2d8c7a6dce776d58ec2fd19d52cc3efe8e80eea1875140",
+              "text": "schedutil"
+            },
+            "identity": {
+              "device": 22,
+              "inode": 30960,
+              "requested_path": "/sys/devices/system/cpu/cpufreq/policy4",
+              "resolved_path": "/sys/devices/system/cpu/cpufreq/policy4"
+            },
+            "policy_path": "/sys/devices/system/cpu/cpufreq/policy4",
+            "related_cpus": [
+              4
+            ],
+            "scaling_max_freq": {
+              "raw_sha256": "3b3cffc4d28921f75b7204d87e2df76d47d11a4a158e2a52095bd1f04b47392c",
+              "raw_text": "3200000",
+              "value": 3200000
+            },
+            "scaling_min_freq": {
+              "raw_sha256": "20906f772bf0b93e695828b6019fcd7284341cbe95ee2865a6e86b8e400551ed",
+              "raw_text": "800000",
+              "value": 800000
+            }
+          },
+          "5": {
+            "affected_cpus": [
+              5
+            ],
+            "available_frequencies_khz": [
+              3200000,
+              2400000,
+              1600000,
+              800000
+            ],
+            "available_frequencies_sha256": "2a62a29d59837d30085d9cefba0fb93948f2a7eac93549fe8dc30f52fce2c5ab",
+            "core": 5,
+            "cpuinfo_max_freq": {
+              "raw_sha256": "3b3cffc4d28921f75b7204d87e2df76d47d11a4a158e2a52095bd1f04b47392c",
+              "value": 3200000
+            },
+            "cpuinfo_min_freq": {
+              "raw_sha256": "20906f772bf0b93e695828b6019fcd7284341cbe95ee2865a6e86b8e400551ed",
+              "value": 800000
+            },
+            "driver": {
+              "sha256": "c1c62c8b56a9fcaa32c1f9998f1baa9ee5870119f1b567bad2419896f17d75a0",
+              "text": "acpi-cpufreq"
+            },
+            "governor": {
+              "sha256": "370afcec441b514ced2d8c7a6dce776d58ec2fd19d52cc3efe8e80eea1875140",
+              "text": "schedutil"
+            },
+            "identity": {
+              "device": 22,
+              "inode": 30985,
+              "requested_path": "/sys/devices/system/cpu/cpufreq/policy5",
+              "resolved_path": "/sys/devices/system/cpu/cpufreq/policy5"
+            },
+            "policy_path": "/sys/devices/system/cpu/cpufreq/policy5",
+            "related_cpus": [
+              5
+            ],
+            "scaling_max_freq": {
+              "raw_sha256": "3b3cffc4d28921f75b7204d87e2df76d47d11a4a158e2a52095bd1f04b47392c",
+              "raw_text": "3200000",
+              "value": 3200000
+            },
+            "scaling_min_freq": {
+              "raw_sha256": "20906f772bf0b93e695828b6019fcd7284341cbe95ee2865a6e86b8e400551ed",
+              "raw_text": "800000",
+              "value": 800000
+            }
+          }
+        },
+        "restoration_matches_policy_snapshot": true,
+        "restoration_readback": {
+          "4": {
+            "identity": {
+              "device": 22,
+              "inode": 30960,
+              "requested_path": "/sys/devices/system/cpu/cpufreq/policy4",
+              "resolved_path": "/sys/devices/system/cpu/cpufreq/policy4"
+            },
+            "scaling_max_freq": 3200000,
+            "scaling_min_freq": 800000
+          },
+          "5": {
+            "identity": {
+              "device": 22,
+              "inode": 30985,
+              "requested_path": "/sys/devices/system/cpu/cpufreq/policy5",
+              "resolved_path": "/sys/devices/system/cpu/cpufreq/policy5"
+            },
+            "scaling_max_freq": 3200000,
+            "scaling_min_freq": 800000
+          }
+        },
+        "write_ledger": [
+          {
+            "core": 4,
+            "end_monotonic_ns": 130463561032374,
+            "failure": null,
+            "field": "scaling_min_freq",
+            "path": "/sys/devices/system/cpu/cpufreq/policy4/scaling_min_freq",
+            "payload_sha256": "278eaadc6e181356f184303673c00bc371fa97bb7b620cb383f64430b30efd99",
+            "phase": "prepare",
+            "readback_khz": 1600000,
+            "readback_samples": [
+              {
+                "attempt": 1,
+                "monotonic_ns": 130463540889303,
+                "value_khz": 800000
+              },
+              {
+                "attempt": 2,
+                "monotonic_ns": 130463560965773,
+                "value_khz": 1600000
+              }
+            ],
+            "requested_value_khz": 1600000,
+            "sequence": 1,
+            "start_monotonic_ns": 130463540826763,
+            "write_call_returned": true
+          },
+          {
+            "core": 4,
+            "end_monotonic_ns": 130463581403777,
+            "failure": null,
+            "field": "scaling_max_freq",
+            "path": "/sys/devices/system/cpu/cpufreq/policy4/scaling_max_freq",
+            "payload_sha256": "278eaadc6e181356f184303673c00bc371fa97bb7b620cb383f64430b30efd99",
+            "phase": "prepare",
+            "readback_khz": 1600000,
+            "readback_samples": [
+              {
+                "attempt": 1,
+                "monotonic_ns": 130463561166492,
+                "value_khz": 3200000
+              },
+              {
+                "attempt": 2,
+                "monotonic_ns": 130463581273904,
+                "value_khz": 1600000
+              }
+            ],
+            "requested_value_khz": 1600000,
+            "sequence": 2,
+            "start_monotonic_ns": 130463561127640,
+            "write_call_returned": true
+          },
+          {
+            "core": 5,
+            "end_monotonic_ns": 130463581771981,
+            "failure": null,
+            "field": "scaling_min_freq",
+            "path": "/sys/devices/system/cpu/cpufreq/policy5/scaling_min_freq",
+            "payload_sha256": "278eaadc6e181356f184303673c00bc371fa97bb7b620cb383f64430b30efd99",
+            "phase": "prepare",
+            "readback_khz": 1600000,
+            "readback_samples": [
+              {
+                "attempt": 1,
+                "monotonic_ns": 130463581664708,
+                "value_khz": 1600000
+              }
+            ],
+            "requested_value_khz": 1600000,
+            "sequence": 3,
+            "start_monotonic_ns": 130463581583210,
+            "write_call_returned": true
+          },
+          {
+            "core": 5,
+            "end_monotonic_ns": 130463582116632,
+            "failure": null,
+            "field": "scaling_max_freq",
+            "path": "/sys/devices/system/cpu/cpufreq/policy5/scaling_max_freq",
+            "payload_sha256": "278eaadc6e181356f184303673c00bc371fa97bb7b620cb383f64430b30efd99",
+            "phase": "prepare",
+            "readback_khz": 1600000,
+            "readback_samples": [
+              {
+                "attempt": 1,
+                "monotonic_ns": 130463582010066,
+                "value_khz": 1600000
+              }
+            ],
+            "requested_value_khz": 1600000,
+            "sequence": 4,
+            "start_monotonic_ns": 130463581939632,
+            "write_call_returned": true
+          },
+          {
+            "core": 4,
+            "end_monotonic_ns": 130471048557503,
+            "failure": null,
+            "field": "scaling_min_freq",
+            "path": "/sys/devices/system/cpu/cpufreq/policy4/scaling_min_freq",
+            "payload_sha256": "20906f772bf0b93e695828b6019fcd7284341cbe95ee2865a6e86b8e400551ed",
+            "phase": "restore",
+            "readback_khz": 800000,
+            "readback_samples": [
+              {
+                "attempt": 1,
+                "monotonic_ns": 130471028180243,
+                "value_khz": 1600000
+              },
+              {
+                "attempt": 2,
+                "monotonic_ns": 130471048316131,
+                "value_khz": 800000
+              }
+            ],
+            "requested_value_khz": 800000,
+            "sequence": 5,
+            "start_monotonic_ns": 130471027956935,
+            "write_call_returned": true
+          },
+          {
+            "core": 4,
+            "end_monotonic_ns": 130471049318269,
+            "failure": null,
+            "field": "scaling_max_freq",
+            "path": "/sys/devices/system/cpu/cpufreq/policy4/scaling_max_freq",
+            "payload_sha256": "3b3cffc4d28921f75b7204d87e2df76d47d11a4a158e2a52095bd1f04b47392c",
+            "phase": "restore",
+            "readback_khz": 3200000,
+            "readback_samples": [
+              {
+                "attempt": 1,
+                "monotonic_ns": 130471049098119,
+                "value_khz": 3200000
+              }
+            ],
+            "requested_value_khz": 3200000,
+            "sequence": 6,
+            "start_monotonic_ns": 130471048935636,
+            "write_call_returned": true
+          },
+          {
+            "core": 5,
+            "end_monotonic_ns": 130471050069292,
+            "failure": null,
+            "field": "scaling_min_freq",
+            "path": "/sys/devices/system/cpu/cpufreq/policy5/scaling_min_freq",
+            "payload_sha256": "20906f772bf0b93e695828b6019fcd7284341cbe95ee2865a6e86b8e400551ed",
+            "phase": "restore",
+            "readback_khz": 800000,
+            "readback_samples": [
+              {
+                "attempt": 1,
+                "monotonic_ns": 130471049849545,
+                "value_khz": 800000
+              }
+            ],
+            "requested_value_khz": 800000,
+            "sequence": 7,
+            "start_monotonic_ns": 130471049675270,
+            "write_call_returned": true
+          },
+          {
+            "core": 5,
+            "end_monotonic_ns": 130471050783797,
+            "failure": null,
+            "field": "scaling_max_freq",
+            "path": "/sys/devices/system/cpu/cpufreq/policy5/scaling_max_freq",
+            "payload_sha256": "3b3cffc4d28921f75b7204d87e2df76d47d11a4a158e2a52095bd1f04b47392c",
+            "phase": "restore",
+            "readback_khz": 3200000,
+            "readback_samples": [
+              {
+                "attempt": 1,
+                "monotonic_ns": 130471050567323,
+                "value_khz": 3200000
+              }
+            ],
+            "requested_value_khz": 3200000,
+            "sequence": 8,
+            "start_monotonic_ns": 130471050417292,
+            "write_call_returned": true
+          }
+        ]
+      },
+      "local_run_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/micro_reverse_0",
+      "pilot_variant": "readonly-occupancy-reverse",
+      "run_id": "micro_reverse_0",
+      "runtime_guards": {
+        "automatic_retry": false,
+        "capture": {
+          "continuous": true,
+          "covers_complete_sequence": true,
+          "deadline_tsc": 419533853915663,
+          "first_sample_tsc": 419520994794413,
+          "last_sample_tsc": 419533852308523,
+          "origin_tsc": 419520994793666,
+          "sample_count": 8000,
+          "slot_sample_counts": [
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000
+          ],
+          "tsc_hz": 3214780499.369605
+        },
+        "hardware_executed": true,
+        "msr_reads": 0,
+        "msr_writes": 0,
+        "runtime_execution_count": 1,
+        "runtime_frequency_writes": 0,
+        "step_sender_epoch_count": 1,
+        "voltage_writes": 0
+      },
+      "scheduler_statistics": {
+        "analysis_skipped_deadline_count": 0,
+        "capture_timestamp_coordinate": "actual_start_tsc",
+        "max_finish_gap_ticks": 1615160,
+        "missed_deadline_count": 0,
+        "requested_actual_slot_mismatch_count": 7,
+        "sample_count": 8000,
+        "sample_count_per_slot": [
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000
+        ],
+        "sample_timing_record_bytes": 80,
+        "sample_timing_schema_id": "CAT_CAS_READONLY_OCCUPANCY_SAMPLE_TIMING_V2",
+        "scheduler_lateness": {
+          "max_sample_index": 0,
+          "max_slot_index": 0,
+          "max_ticks": 747,
+          "p50_ticks": 216,
+          "p95_ticks": 273,
+          "p99_ticks": 281,
+          "reject_threshold_ticks": 6429560
+        },
+        "service_cycles_per_access": {
+          "max": 344.640625,
+          "p50": 81.546875,
+          "p95": 265.8125,
+          "p99": 280.5625
+        },
+        "service_ticks": {
+          "max": 22057,
+          "p50": 5219,
+          "p95": 17012,
+          "p99": 17956
+        },
+        "skipped_deadline_count": 0
+      },
+      "slot_means": {
+        "during_burst_response_cycles": {
+          "2": {
+            "mean_response_cycles": 258.9322916666667,
+            "sample_count": 30,
+            "token": "F0"
+          },
+          "3": {
+            "mean_response_cycles": 82.30113636363636,
+            "sample_count": 11,
+            "token": "F1"
+          },
+          "4": {
+            "mean_response_cycles": 81.525,
+            "sample_count": 10,
+            "token": "F1"
+          },
+          "5": {
+            "mean_response_cycles": 257.3,
+            "sample_count": 30,
+            "token": "F0"
+          }
+        },
+        "whole_slot_response_cycles": {
+          "2": {
+            "mean_response_cycles": 149.839671875,
+            "sample_count": 1000,
+            "token": "F0"
+          },
+          "3": {
+            "mean_response_cycles": 82.122984375,
+            "sample_count": 1000,
+            "token": "F1"
+          },
+          "4": {
+            "mean_response_cycles": 82.191546875,
+            "sample_count": 1000,
+            "token": "F1"
+          },
+          "5": {
+            "mean_response_cycles": 149.448671875,
+            "sample_count": 1000,
+            "token": "F0"
+          }
+        }
+      },
+      "source_and_schedule": {
+        "analysis_schedule": {
+          "duration_s": 4.0,
+          "minimum_during_burst_samples_per_stimulus_slot": 10,
+          "primary_coordinate": "during_burst_response_cycles",
+          "read_hz": 2000,
+          "schedule_sha256": "57f6aa152d2c099429e7ca2c4d843102739c81b2158e46c4d49f07a96b6f4758",
+          "slot_count": 8,
+          "slot_duration_s": 0.5,
+          "stimulus_slots": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "tokens": [
+            "I",
+            "I",
+            "F0",
+            "F1",
+            "F1",
+            "F0",
+            "I",
+            "I"
+          ]
+        },
+        "runtime_execution_bundle_sha256": "aa2b63f31bac6ed377a32c532da90325c894ce78caaa7e9b7879c28a84a04e6d",
+        "schedule_sha256": "57f6aa152d2c099429e7ca2c4d843102739c81b2158e46c4d49f07a96b6f4758",
+        "source_bundle_sha256": "aa2b63f31bac6ed377a32c532da90325c894ce78caaa7e9b7879c28a84a04e6d",
+        "source_hashes": {
+          "capture_quality_contract.h": "99893d151cb3c346aa30b575573bf326728ec766f067eeff9cbca543c63be140",
+          "captured_file.c": "16eb25af4116d0683ce2dee03aad2539ac7728ef58d07fbf4e83598c7d788a51",
+          "captured_file.h": "81c94e8c29bffc915f9a3fa2db50605387f8f1544e2f561a674b8c82e4043469",
+          "combined_pdn_hardware.c": "c95e90c3344a05d67799f44158036f316da66faf0fd66e47336ae045e8b4c976",
+          "combined_pdn_hardware.h": "a85e202fd65c520cad4853eea9168d2af9d92aa0b05b640bb8b180aed34141ae",
+          "gate_a_frequency_preparation.py": "5be4c797f5753484d7498c93bc64411486c111bc78c9cb0528e9f7ef27d70a42",
+          "live_gate_a_target.py": "fa9ab25acfbcfe3a504b994f0ad4ffe0255f71c7629a67e9f9c6a312ee2e73d4",
+          "small_wall_runtime.c": "c455182b4c95e1eea44f4c9f7398b4aeae334b76b4eb4b6565dc91cf40499b2a",
+          "small_wall_runtime.h": "466be54de0b0baa6f98537f54dbc9e1c6c2d692017890682d9fe999888cbe81d",
+          "small_wall_worker.c": "81aa6a98b56de144142e32d187f7df055786595db4de3fc4d1247350a8491992"
+        }
+      },
+      "status": {
+        "all_bursts_completed_inside_slots": true,
+        "capture_quality_classification": "CAPTURE_ACCEPTED_WITH_SERVICE_SPIKES",
+        "final_status": "GATE_A_FIRST_LIGHT_COMPLETE",
+        "missing_slot": false,
+        "process_cleanup_forbidden_matches": [],
+        "record_integrity_failure": false,
+        "restoration_complete": true,
+        "restoration_errors": [],
+        "runtime_status": "GATE_A_ENGINEERING_SMOKE_COMPLETE",
+        "sender_spill": false,
+        "sufficient_during_burst_samples": true
+      },
+      "temperature": {
+        "below_veto": true,
+        "max_monitor_temperature_c": 44.125,
+        "preflight_temperature_c": 44.5,
+        "veto_c": 68.0
+      }
+    }
+  },
+  "schedule_binding": {
+    "duration_s": 4.0,
+    "primary_coordinate": "during_burst_response_cycles",
+    "read_hz": 2000,
+    "schedule_sha256": "57f6aa152d2c099429e7ca2c4d843102739c81b2158e46c4d49f07a96b6f4758",
+    "slot_count": 8,
+    "slot_duration_s": 0.5,
+    "stimulus_slots": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "tokens": [
+      "I",
+      "I",
+      "F0",
+      "F1",
+      "F1",
+      "F0",
+      "I",
+      "I"
+    ]
+  },
+  "schema_id": "CAT_CAS_READONLY_OCCUPANCY_BASELINE_CLOSURE_V1",
+  "source_binding": {
+    "all_runs_match_expected_source_bundle": true,
+    "expected_post_fix_source_bundle_sha256": "aa2b63f31bac6ed377a32c532da90325c894ce78caaa7e9b7879c28a84a04e6d"
+  },
+  "triad": {
+    "acceptance_math": {
+      "directional_exceeds_equal_bound": true,
+      "min_abs_forward_reverse": 174.91927083333331,
+      "sign_forward_is_negative_sign_reverse": true,
+      "three_times_abs_equal": 87.33515625000003
+    },
+    "during_burst_contrasts": {
+      "crossed_forward_minus_reverse": 351.1223484848485,
+      "equal": -29.11171875000001,
+      "forward": 174.91927083333331,
+      "reverse": -176.20307765151517
+    },
+    "equal_run_id": "micro_equal_1",
+    "forward_run_id": "micro_forward_0",
+    "reverse_run_id": "micro_reverse_0",
+    "whole_slot_contrasts": {
+      "crossed_forward_minus_reverse": 134.42599999999996,
+      "equal": -10.307265625,
+      "forward": 66.93909374999998,
+      "reverse": -67.48690624999998
+    }
+  }
+}
