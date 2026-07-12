@@ -1,0 +1,84 @@
+{
+  "schema_id": "CAT_CAS_F10_TRANSLATION_HISTORY_CHECKPOINT_V1",
+  "checkpoint_date": "2026-07-12",
+  "starting_head": "e49847aa03942e8f796bb9435e7dbc49e4f3092d",
+  "run_id": "f10_translation_history_0",
+  "mode": "translation-history",
+  "mechanism": {
+    "carrier": "read-only translation/page-footprint state over CAT_CAS-owned page-aligned synthetic buffers",
+    "restore": "neutral page-footprint wash before every measured window",
+    "sentinel": "fixed public page-footprint sequence",
+    "primary_observable": "sentinel duration",
+    "secondary_observable": "cache_misses",
+    "acceptance": "forward/reverse sentinel duration delta exceeds max(10000 ns, 3 * neutral/shuffle control spread)"
+  },
+  "command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_coherence_operators.py --run-id f10_translation_history_0 --mode translation-history",
+  "local_run": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/f10_translation_history_0",
+  "remote_run": "/root/catcas_live_small_wall/f10_translation_history_0",
+  "source_bundle_sha256": "65a1230733a0a51de2ee9eb2bdf1e3b18bcc82f9455ab066ee721597be6000c6",
+  "source_hashes": {
+    "f10_pmc_first_light_target.py": "45fa39b402ac3dfde4055a3733184e7fa674bbccb8c7ab7328c8e65ea52bb95e",
+    "f10_pmc_first_light_worker.c": "3769a06aeb382e8dc67898745548320dc96b525977eb5754df2b15f04f2575a3"
+  },
+  "result": {
+    "target_status": "F10_TRANSLATION_HISTORY_TARGET_COMPLETE",
+    "worker_status": "TRANSLATION_HISTORY_RESPONSE_NOT_ESTABLISHED",
+    "capture_group": "translation_history_group",
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "bytes_unchanged_after_history": true,
+    "bytes_unchanged_after_restore": true,
+    "duration_signal": false,
+    "cache_miss_signal": false,
+    "translation_history_response": false
+  },
+  "contrast_counts": {
+    "duration_ns": {
+      "identity": 7859489,
+      "forward": 7843796,
+      "reverse": 7858476,
+      "shuffle": 9864812,
+      "forward_reverse_delta": 14680,
+      "control_floor": 2005323,
+      "threshold": 6015969,
+      "signal": false
+    },
+    "cache_misses": {
+      "identity": 262784,
+      "forward": 262769,
+      "reverse": 262777,
+      "shuffle": 263479,
+      "forward_reverse_delta": 8,
+      "control_floor": 695,
+      "threshold": 2085,
+      "signal": false
+    }
+  },
+  "safety_and_custody": {
+    "lab_device": "root@192.168.137.100",
+    "copy_verified": true,
+    "remote_cleaned": true,
+    "temperature_preflight_c": 49.75,
+    "temperature_post_c": 50.0,
+    "temperature_veto_c": 68.0,
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "physical_address_access": false,
+    "cache_set_mapping": false,
+    "page_table_mutation": false,
+    "preflight_forbidden_process_matches": [],
+    "cleanup_forbidden_process_matches": []
+  },
+  "raw_file_hashes": {
+    "CONTROLLER_RESULT.json": "a44be2439322831707a59a005134fc97e8771d97236723035989679f48c1a150",
+    "CONTROLLER_STDERR.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "CONTROLLER_STDOUT.txt": "ffce3b037c0a9d1c321882e7fde5d4f60057968253882c529d1bb2dab92bb6cb",
+    "F10_TRANSLATION_HISTORY_RESULT.json": "a31fc4e58de72682d24cd30d55ade3ab1e7e2fd2c31b01192c6306e4ffb75e82",
+    "FILE_MANIFEST.json": "92269d787de9d7351f9a59c5a2ce00cea831df5315bd653a23d8ca27b027f8ff",
+    "FINAL_RESULT.json": "7b45c874e0b520e7ababd128aebc49921672f25c51c9d14b73c69b9d8aa3e5c8"
+  },
+  "interpretation": "Read-only translation/page-footprint history did not create a control-clean forward/reverse sentinel response. Do not repeat this translation-history discriminator unchanged.",
+  "claim_ceiling": "EVICTION_SENTINEL_RESPONSE_FOUND"
+}

@@ -50,6 +50,7 @@
 #define EVICTION_PHASE_BRACKETED_DURATION_RESULT_SCHEMA "CAT_CAS_F10_EVICTION_PHASE_BRACKETED_DURATION_RESULT_V1"
 #define HISTORY_SENTINEL_RESULT_SCHEMA "CAT_CAS_F10_HISTORY_SENTINEL_RESULT_V1"
 #define BRANCH_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_BRANCH_HISTORY_RESULT_V1"
+#define TRANSLATION_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_TRANSLATION_HISTORY_RESULT_V1"
 #define PHASE_LOCAL_BANK_LINES 512u
 #define EVICTION_LINES 262144u
 #define EVICTION_ITERATIONS 3
@@ -57,6 +58,10 @@
 #define BRANCH_RESTORE_LOOPS 128u
 #define BRANCH_HISTORY_LOOPS 256u
 #define BRANCH_SENTINEL_LOOPS 128u
+#define TRANSLATION_PAGE_COUNT 8192u
+#define TRANSLATION_RESTORE_LOOPS 4u
+#define TRANSLATION_HISTORY_LOOPS 8u
+#define TRANSLATION_SENTINEL_LOOPS 16u
 
 struct event_def {
     const char *name;
@@ -204,6 +209,20 @@ struct branch_sequence_spec {
     unsigned int history_loops;
 };
 
+enum translation_pattern_kind {
+    TRANSLATION_PATTERN_NEUTRAL = 0,
+    TRANSLATION_PATTERN_FORWARD = 1,
+    TRANSLATION_PATTERN_REVERSE = 2,
+    TRANSLATION_PATTERN_SHUFFLE = 3,
+    TRANSLATION_PATTERN_SENTINEL = 4
+};
+
+struct translation_sequence_spec {
+    const char *name;
+    enum translation_pattern_kind history_pattern;
+    unsigned int history_loops;
+};
+
 static const struct event_def support_events[SUPPORT_EVENTS] = {
     {"cpu_cycles_not_halted", 0x076, 0x00, "core"},
     {"dc_refills_l2_or_nb_all_states", 0x042, 0x1f, "core"},
@@ -234,6 +253,13 @@ static const struct event_def branch_history_group[MAX_GROUP_EVENTS] = {
     {"retired_instructions", 0x0c0, 0x00, "core"},
     {"retired_branch_instructions", 0x0c2, 0x00, "core"},
     {"retired_mispredicted_branch_instructions", 0x0c3, 0x00, "core"}
+};
+
+static const struct event_def translation_history_group[MAX_GROUP_EVENTS] = {
+    {"cpu_cycles_not_halted", 0x076, 0x00, "core"},
+    {"retired_instructions", 0x0c0, 0x00, "core"},
+    {"cache_references", 0x07d, 0x07, "core"},
+    {"cache_misses", 0x07e, 0x07, "core"}
 };
 
 struct read_group_payload {
@@ -2013,6 +2039,261 @@ static int run_branch_history_mode(const char *output_root) {
     free(reverse);
     free(shuffle);
     free(sentinel);
+    return 0;
+}
+
+static volatile uint64_t translation_history_sink = 0;
+
+static size_t translation_index(enum translation_pattern_kind kind, size_t i, size_t page_count) {
+    size_t mask = page_count - 1u;
+    switch (kind) {
+        case TRANSLATION_PATTERN_NEUTRAL:
+            return (i * 257u + (i >> 3)) & mask;
+        case TRANSLATION_PATTERN_FORWARD:
+            return i & mask;
+        case TRANSLATION_PATTERN_REVERSE:
+            return (page_count - 1u - (i & mask)) & mask;
+        case TRANSLATION_PATTERN_SHUFFLE:
+            return ((i * 1103515245u) + 12345u) & mask;
+        case TRANSLATION_PATTERN_SENTINEL:
+            return ((i * 521u) ^ (i >> 1) ^ 0x5a5au) & mask;
+    }
+    return i & mask;
+}
+
+__attribute__((noinline))
+static void run_translation_pattern(
+    volatile unsigned char *pages,
+    size_t page_size,
+    size_t page_count,
+    enum translation_pattern_kind kind,
+    unsigned int loops
+) {
+    uint64_t acc = translation_history_sink + page_count + loops;
+    size_t span = page_count * 2u;
+    for (unsigned int round = 0; round < loops; round++) {
+        for (size_t i = 0; i < span; i++) {
+            size_t index = translation_index(kind, i + ((size_t)round * 131u), page_count);
+            acc += (uint64_t)pages[index * page_size];
+            acc ^= ((uint64_t)index + 1u) * 0x94d049bb133111ebull;
+            __asm__ __volatile__("" : "+r"(acc) :: "memory");
+        }
+    }
+    translation_history_sink = acc;
+}
+
+static int measure_translation_history_window(
+    const struct event_def group[MAX_GROUP_EVENTS],
+    const struct translation_sequence_spec *sequence,
+    unsigned char *pages,
+    size_t page_size,
+    size_t page_count,
+    struct group_result *result,
+    uint64_t *duration_ns,
+    uint64_t *digest_after_history,
+    uint64_t *digest_after_restore
+) {
+    int fds[MAX_GROUP_EVENTS];
+    uint64_t ids[MAX_GROUP_EVENTS];
+    memset(result, 0, sizeof(*result));
+    if (pin_to_core(CATCAS_CORE_B) != 0) return -EINVAL;
+    run_translation_pattern(pages, page_size, page_count, TRANSLATION_PATTERN_NEUTRAL,
+                            TRANSLATION_RESTORE_LOOPS);
+    if (sequence->history_loops > 0u) {
+        run_translation_pattern(pages, page_size, page_count, sequence->history_pattern,
+                                sequence->history_loops);
+    }
+    *digest_after_history = fnv1a64(pages, page_size * page_count);
+    int opened = open_group(group, CATCAS_CORE_B, fds, ids);
+    if (opened != 0) {
+        result->open_errno = -opened;
+        return opened;
+    }
+    result->opened = true;
+    if (ioctl(fds[0], PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t start = monotonic_ns();
+    if (ioctl(fds[0], PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    run_translation_pattern(pages, page_size, page_count, TRANSLATION_PATTERN_SENTINEL,
+                            TRANSLATION_SENTINEL_LOOPS);
+    if (ioctl(fds[0], PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t end = monotonic_ns();
+    int read_rc = read_group(fds[0], result);
+    for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+    if (read_rc != 0) return read_rc;
+    run_translation_pattern(pages, page_size, page_count, TRANSLATION_PATTERN_NEUTRAL,
+                            TRANSLATION_RESTORE_LOOPS);
+    *digest_after_restore = fnv1a64(pages, page_size * page_count);
+    *duration_ns = end >= start ? end - start : 0;
+    return 0;
+}
+
+static int run_translation_history_mode(const char *output_root) {
+    long page_size_long = sysconf(_SC_PAGESIZE);
+    if (page_size_long <= 0) {
+        fprintf(stderr, "page size unavailable\n");
+        return 1;
+    }
+    size_t page_size = (size_t)page_size_long;
+    size_t byte_count = page_size * TRANSLATION_PAGE_COUNT;
+    unsigned char *pages = NULL;
+    if (posix_memalign((void **)&pages, page_size, byte_count) != 0) {
+        fprintf(stderr, "translation buffer allocation failed\n");
+        return 1;
+    }
+    for (size_t page = 0; page < TRANSLATION_PAGE_COUNT; page++) {
+        pages[page * page_size] = (unsigned char)((page * 131u + 17u) & 0xffu);
+    }
+    uint64_t initial_digest = fnv1a64(pages, byte_count);
+
+    int translation_fds[MAX_GROUP_EVENTS];
+    uint64_t translation_ids[MAX_GROUP_EVENTS];
+    int translation_open_rc = open_group(translation_history_group, CATCAS_CORE_B,
+                                         translation_fds, translation_ids);
+    if (translation_open_rc == 0) {
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(translation_fds[i]);
+    }
+
+    const struct translation_sequence_spec sequences[] = {
+        {"neutral_restore_only", TRANSLATION_PATTERN_NEUTRAL, 0u},
+        {"forward_translation_history", TRANSLATION_PATTERN_FORWARD, TRANSLATION_HISTORY_LOOPS},
+        {"reverse_translation_history", TRANSLATION_PATTERN_REVERSE, TRANSLATION_HISTORY_LOOPS},
+        {"shuffle_translation_history", TRANSLATION_PATTERN_SHUFFLE, TRANSLATION_HISTORY_LOOPS},
+    };
+    enum { TRANSLATION_WINDOW_COUNT = 4 };
+    struct group_result results[TRANSLATION_WINDOW_COUNT];
+    uint64_t durations[TRANSLATION_WINDOW_COUNT];
+    uint64_t digest_after_history[TRANSLATION_WINDOW_COUNT];
+    uint64_t digest_after_restore[TRANSLATION_WINDOW_COUNT];
+    int window_rc[TRANSLATION_WINDOW_COUNT];
+    for (int i = 0; i < TRANSLATION_WINDOW_COUNT; i++) {
+        memset(&results[i], 0, sizeof(results[i]));
+        durations[i] = 0;
+        digest_after_history[i] = 0;
+        digest_after_restore[i] = 0;
+        if (translation_open_rc != 0) {
+            window_rc[i] = -ENODEV;
+        } else {
+            window_rc[i] = measure_translation_history_window(
+                translation_history_group,
+                &sequences[i],
+                pages,
+                page_size,
+                TRANSLATION_PAGE_COUNT,
+                &results[i],
+                &durations[i],
+                &digest_after_history[i],
+                &digest_after_restore[i]);
+        }
+    }
+
+    bool all_windows_ok = true;
+    bool all_unmultiplexed = true;
+    bool bytes_unchanged_after_history = true;
+    bool bytes_unchanged_after_restore = true;
+    for (int i = 0; i < TRANSLATION_WINDOW_COUNT; i++) {
+        all_windows_ok = all_windows_ok && window_rc[i] == 0;
+        all_unmultiplexed = all_unmultiplexed && results[i].unmultiplexed;
+        bytes_unchanged_after_history =
+            bytes_unchanged_after_history && digest_after_history[i] == initial_digest;
+        bytes_unchanged_after_restore =
+            bytes_unchanged_after_restore && digest_after_restore[i] == initial_digest;
+    }
+
+    uint64_t identity_duration = durations[0];
+    uint64_t forward_duration = durations[1];
+    uint64_t reverse_duration = durations[2];
+    uint64_t shuffle_duration = durations[3];
+    uint64_t duration_delta = abs_diff_u64(forward_duration, reverse_duration);
+    uint64_t duration_control = abs_diff_u64(identity_duration, shuffle_duration);
+    uint64_t duration_threshold = max_u64(10000u, 3u * duration_control);
+    bool duration_signal = duration_delta > duration_threshold;
+
+    uint64_t identity_misses = event_value_by_name(&results[0], translation_history_group, "cache_misses");
+    uint64_t forward_misses = event_value_by_name(&results[1], translation_history_group, "cache_misses");
+    uint64_t reverse_misses = event_value_by_name(&results[2], translation_history_group, "cache_misses");
+    uint64_t shuffle_misses = event_value_by_name(&results[3], translation_history_group, "cache_misses");
+    uint64_t miss_delta = abs_diff_u64(forward_misses, reverse_misses);
+    uint64_t miss_control = abs_diff_u64(identity_misses, shuffle_misses);
+    uint64_t miss_threshold = max_u64(32u, 3u * miss_control);
+    bool miss_signal = miss_delta > miss_threshold;
+    bool translation_history_response = translation_open_rc == 0 && all_windows_ok &&
+        all_unmultiplexed && bytes_unchanged_after_history &&
+        bytes_unchanged_after_restore && duration_signal;
+
+    char result_path[4096];
+    int n = snprintf(result_path, sizeof(result_path), "%s/F10_TRANSLATION_HISTORY_RESULT.json", output_root);
+    if (n <= 0 || (size_t)n >= sizeof(result_path)) {
+        free(pages);
+        return 1;
+    }
+    FILE *out = fopen(result_path, "w");
+    if (!out) {
+        fprintf(stderr, "cannot open result: %s\n", strerror(errno));
+        free(pages);
+        return 1;
+    }
+    fprintf(out, "{\n");
+    fprintf(out, "  \"schema_id\": \"%s\",\n", TRANSLATION_HISTORY_RESULT_SCHEMA);
+    fprintf(out, "  \"status\": \"%s\",\n", translation_history_response ? "TRANSLATION_HISTORY_RESPONSE_FOUND" : "TRANSLATION_HISTORY_RESPONSE_NOT_ESTABLISHED");
+    fprintf(out, "  \"claim_ceiling\": \"Translation-footprint timing/PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim\",\n");
+    fprintf(out, "  \"cores\": {\"translation_core\": %d},\n", CATCAS_CORE_B);
+    fprintf(out, "  \"perf_interface\": {\"type\": \"PERF_TYPE_RAW\", \"event_format\": \"config:0-7,32-35\", \"umask_format\": \"config:8-15\", \"exclude_kernel\": true, \"exclude_hv\": true},\n");
+    fprintf(out, "  \"source_constraints\": {\"direct_msr_access\": false, \"voltage_access\": false, \"frequency_writes\": 0, \"experiment_owned_memory_only\": true, \"physical_address_access\": false, \"cache_set_mapping\": false, \"unrelated_process_observation\": false, \"page_table_mutation\": false},\n");
+    fprintf(out, "  \"translation_carrier\": {\"page_count\": %u, \"page_bytes\": %zu, \"byte_count\": %zu, \"restore_loops\": %u, \"history_loops\": %u, \"sentinel_loops\": %u, \"digest_kind\": \"fnv1a64\", \"initial_digest_hex\": \"0x%016" PRIx64 "\"},\n",
+        TRANSLATION_PAGE_COUNT, page_size, byte_count, TRANSLATION_RESTORE_LOOPS, TRANSLATION_HISTORY_LOOPS, TRANSLATION_SENTINEL_LOOPS, initial_digest);
+    fprintf(out, "  \"selected_group\": \"translation_history_group\",\n");
+    fprintf(out, "  \"group_open_rc\": %d,\n", translation_open_rc);
+    fprintf(out, "  \"selected_events\": ");
+    print_group_defs(out, translation_history_group);
+    fprintf(out, ",\n");
+    fprintf(out, "  \"predeclared_observable\": {\"history\": \"balanced public page-footprint training pattern\", \"restore\": \"neutral page-footprint wash before every measured window\", \"sentinel\": \"fixed public page-footprint sequence\", \"primary_acceptance\": \"forward/reverse sentinel duration delta exceeds max(10000 ns, 3 * neutral/shuffle control spread)\"},\n");
+    fprintf(out, "  \"windows\": [\n");
+    for (int i = 0; i < TRANSLATION_WINDOW_COUNT; i++) {
+        fprintf(out, "    {\"name\": \"%s\", \"rc\": %d, \"duration_ns\": %" PRIu64 ", \"history_loops\": %u, \"digest_after_history_hex\": \"0x%016" PRIx64 "\", \"digest_after_restore_hex\": \"0x%016" PRIx64 "\", \"bytes_unchanged_after_history\": %s, \"bytes_unchanged_after_restore\": %s, \"group\": ",
+            sequences[i].name,
+            window_rc[i],
+            durations[i],
+            sequences[i].history_loops,
+            digest_after_history[i],
+            digest_after_restore[i],
+            json_bool(digest_after_history[i] == initial_digest),
+            json_bool(digest_after_restore[i] == initial_digest));
+        print_group_result(out, translation_history_group, &results[i]);
+        fprintf(out, "}%s\n", i + 1 == TRANSLATION_WINDOW_COUNT ? "" : ",");
+    }
+    fprintf(out, "  ],\n");
+    fprintf(out, "  \"contrast_counts\": {\n");
+    fprintf(out, "    \"duration_ns\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s},\n",
+        identity_duration, forward_duration, reverse_duration, shuffle_duration, duration_delta, duration_control, duration_threshold, json_bool(duration_signal));
+    fprintf(out, "    \"cache_misses\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s}\n",
+        identity_misses, forward_misses, reverse_misses, shuffle_misses, miss_delta, miss_control, miss_threshold, json_bool(miss_signal));
+    fprintf(out, "  },\n");
+    fprintf(out, "  \"acceptance\": {\"all_windows_ok\": %s, \"all_unmultiplexed\": %s, \"bytes_unchanged_after_history\": %s, \"bytes_unchanged_after_restore\": %s, \"duration_signal\": %s, \"cache_miss_signal\": %s, \"translation_history_response\": %s}\n",
+        json_bool(all_windows_ok),
+        json_bool(all_unmultiplexed),
+        json_bool(bytes_unchanged_after_history),
+        json_bool(bytes_unchanged_after_restore),
+        json_bool(duration_signal),
+        json_bool(miss_signal),
+        json_bool(translation_history_response));
+    fprintf(out, "}\n");
+    fclose(out);
+    printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"translation_history_group\"}\n",
+        translation_history_response ? "TRANSLATION_HISTORY_RESPONSE_FOUND" : "TRANSLATION_HISTORY_RESPONSE_NOT_ESTABLISHED",
+        result_path);
+    free(pages);
     return 0;
 }
 
@@ -3869,6 +4150,7 @@ int main(int argc, char **argv) {
     bool eviction_phase_bracketed_duration_mode = false;
     bool history_sentinel_mode = false;
     bool branch_history_mode = false;
+    bool translation_history_mode = false;
     if (argc == 3 && strcmp(argv[1], "--output-root") == 0) {
         output_root = argv[2];
     } else if (argc == 4 && strcmp(argv[1], "--coherence-operators") == 0 &&
@@ -3931,10 +4213,14 @@ int main(int argc, char **argv) {
                strcmp(argv[2], "--output-root") == 0) {
         branch_history_mode = true;
         output_root = argv[3];
+    } else if (argc == 4 && strcmp(argv[1], "--translation-history") == 0 &&
+               strcmp(argv[2], "--output-root") == 0) {
+        translation_history_mode = true;
+        output_root = argv[3];
     } else if (argc == 2 && strcmp(argv[1], "--self-test") == 0) {
         return self_test();
     } else {
-        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root> | --eviction-phase-bracketed --output-root <absolute-output-root> | --eviction-phase-bracketed-c2d --output-root <absolute-output-root> | --eviction-phase-bracketed-duration --output-root <absolute-output-root> | --history-sentinel --output-root <absolute-output-root> | --branch-history --output-root <absolute-output-root>\n", argv[0]);
+        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root> | --eviction-phase-bracketed --output-root <absolute-output-root> | --eviction-phase-bracketed-c2d --output-root <absolute-output-root> | --eviction-phase-bracketed-duration --output-root <absolute-output-root> | --history-sentinel --output-root <absolute-output-root> | --branch-history --output-root <absolute-output-root> | --translation-history --output-root <absolute-output-root>\n", argv[0]);
         return 2;
     }
     if (output_root[0] != '/') {
@@ -4028,6 +4314,11 @@ int main(int argc, char **argv) {
     }
     if (branch_history_mode) {
         int rc = run_branch_history_mode(output_root);
+        free(carrier.bytes);
+        return rc;
+    }
+    if (translation_history_mode) {
+        int rc = run_translation_history_mode(output_root);
         free(carrier.bytes);
         return rc;
     }

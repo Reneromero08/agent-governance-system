@@ -6,15 +6,15 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`BRANCH_HISTORY_RESPONSE_NOT_ESTABLISHED`
+`TRANSLATION_HISTORY_RESPONSE_NOT_ESTABLISHED`
 
 **Active wall:**
 The current wall is still carrier/access-model selection. Timing, ownership-intent PMU
 footprint, IBS availability, WC/flush-order, eviction-sentinel PMU/timing
 phase-local mappings, restored history-sentinel PMU mapping, the first active-query
 receiver-delta access model, the first source-side phase-chopped access model, and a
-same-core public branch-history carrier either failed controls or did not expose a
-usable fold-odd carrier. The eviction-sentinel
+same-core public branch-history carrier, and a read-only translation/page-footprint
+carrier either failed controls or did not expose a usable fold-odd carrier. The eviction-sentinel
 first-light run remains useful because it changed restoration from byte equality to a
 measured carrier equivalence class, but the phase-local remaps did not promote it. The
 new `coded_preprojection_active_query_0` run moved the query into the receiver's
@@ -28,10 +28,13 @@ common home-core restore strongly enough to perturb a later remote-store sentine
 also restored cleanly, but forward/reverse deltas stayed below the neutral/shuffle
 control floor. The follow-on `f10_branch_history_0` changed carrier family to a
 same-core public branch-history sentinel and ran cleanly, but branch-miss and duration
-deltas stayed inside controls. The active wall is now a materially stronger
-source-owned carrier/query algebra, not another remap of phase-local timing,
-active-query subbank order, source burst segmentation, restored two-line-set ownership
-history, or simple branch-history training.
+deltas stayed inside controls. `f10_translation_history_0` then moved to read-only
+page-footprint/translation history and also ran cleanly, but forward/reverse timing and
+cache-miss deltas were tiny against the shuffle floor. The active wall is now a
+materially stronger source-owned carrier/query algebra, not another remap of
+phase-local timing, active-query subbank order, source burst segmentation, restored
+two-line-set ownership history, simple branch-history training, or read-only
+translation-footprint history.
 
 ## Established
 
@@ -506,6 +509,69 @@ that survived neutral wash and cleared the shuffle control.
 This does not establish path memory, noncommutation, physical holonomy, OrbitState
 coupling, fold-odd recovery, or a Small Wall crossing.
 
+### Translation/page-footprint carrier pilot
+
+A read-only translation/page-footprint discriminator ran cleanly and was negative.
+
+Run:
+
+`runs/f10_translation_history_0`
+
+Checkpoint:
+
+`F10_TRANSLATION_HISTORY_CHECKPOINT_20260712.json`
+
+Mechanism:
+
+- carrier: read-only translation/page-footprint state over CAT_CAS-owned page-aligned
+  synthetic buffers;
+- restoration: neutral page-footprint wash before every measured window;
+- sentinel: fixed public page-footprint sequence;
+- primary observable: sentinel duration;
+- secondary observable: cache misses;
+- control: neutral restore-only versus balanced shuffle page-footprint history.
+
+The transaction completed with verified copy-back and remote cleanup. It performed
+zero frequency writes, zero voltage access, zero MSR reads, and zero MSR writes. It
+performed no physical-address access, cache-set mapping, or page-table mutation.
+Temperature stayed below the 68 C veto. Every PMU window was unmultiplexed, and the
+page-buffer digest was unchanged after history and after restore.
+
+Result:
+
+```text
+duration_ns:
+  identity 7859489
+  forward  7843796
+  reverse  7858476
+  shuffle  9864812
+  forward/reverse delta 14680
+  control floor         2005323
+  threshold             6015969
+  signal                false
+
+cache_misses:
+  identity 262784
+  forward  262769
+  reverse  262777
+  shuffle  263479
+  forward/reverse delta 8
+  control floor         695
+  threshold             2085
+  signal                false
+```
+
+Marker:
+
+`TRANSLATION_HISTORY_RESPONSE_NOT_ESTABLISHED`
+
+This kills the simple read-only translation/page-footprint history sentinel. The
+carrier was mechanically measurable, but forward/reverse deltas stayed tiny relative
+to the shuffle control floor.
+
+This does not establish path memory, noncommutation, physical holonomy, OrbitState
+coupling, fold-odd recovery, or a Small Wall crossing.
+
 ### Transient timing-response pivot
 
 A focused phase/timing pivot repaired the legacy 16-slot timing custody path and ran a
@@ -702,6 +768,7 @@ F10_ROUTE_OPERATOR_COMPARISON_CHECKPOINT_20260712.json
 F10_ROUTE_STATE_PILOT_CHECKPOINT_20260712.json
 F10_HISTORY_SENTINEL_CHECKPOINT_20260712.json
 F10_BRANCH_HISTORY_CHECKPOINT_20260712.json
+F10_TRANSLATION_HISTORY_CHECKPOINT_20260712.json
 CODED_PREPROJECTION_DECLARATION_SHAM_CHECKPOINT_20260712.json
 CODED_PREPROJECTION_PHASE_LOCAL_CHECKPOINT_20260712.json
 CODED_PREPROJECTION_ACTIVE_QUERY_CHECKPOINT_20260712.json
@@ -1566,9 +1633,9 @@ carrier family or access model rather than continuing eviction-sentinel remaps.
 
 Change carrier family or access model again, not another remap of the same
 phase-local timing/PMU/eviction/active-query/source-phase-chop/restored-history
-or simple branch-history geometry. The run must stay closed: CAT_CAS-owned buffers
-only, predetermined geometry, no physical-address access, no cache-set mapping, no
-unrelated-process observation, and no MSR or voltage access.
+or simple branch-history/translation-footprint geometry. The run must stay closed:
+CAT_CAS-owned buffers only, predetermined geometry, no physical-address access, no
+cache-set mapping, no unrelated-process observation, and no MSR or voltage access.
 
 The next probe should answer:
 
@@ -1585,7 +1652,8 @@ Do not rerun the same timing coded loop, another scalar PMU route metric,
 unconditioned transient timing repeat, IBS availability probe, WC/flush-order pair, or
 unlabeled cache-line rectangle unchanged. Do not rerun the same restored
 history-sentinel ownership sequence unchanged. Do not rerun the same branch-history
-training/sentinel discriminator unchanged. Do not rerun
+training/sentinel discriminator unchanged. Do not rerun the same translation-history
+page-footprint discriminator unchanged. Do not rerun
 `coded_preprojection_active_query_0` or the same active-query receiver-delta schedule
 unchanged. Do not rerun `coded_preprojection_source_phase_chop_0` or the same
 source-phase-chop schedule unchanged.
@@ -1625,10 +1693,12 @@ remote-store sentinel; it restored cleanly, but forward/reverse deltas stayed be
 neutral/shuffle floor. `f10_branch_history_0` then changed carrier family to
 same-core public branch-history state; it also ran cleanly, but branch-miss and
 duration deltas stayed inside the neutral/shuffle controls. The current marker remains
-short of `SMALL_WALL_CROSSED`; the next move must change carrier family or access
-model rather than keep remapping the same eviction-sentinel PMU/timing, active-query
-phase-local, source-phase-chop, restored two-line-set ownership-history, or simple
-branch-history geometry.
+short of `SMALL_WALL_CROSSED`. `f10_translation_history_0` then moved to read-only
+translation/page-footprint state and stayed negative: forward/reverse timing and
+cache-miss deltas were tiny against the shuffle floor. The next move must change
+carrier family or access model rather than keep remapping the same eviction-sentinel
+PMU/timing, active-query phase-local, source-phase-chop, restored two-line-set
+ownership-history, simple branch-history, or translation-footprint geometry.
 
 ## State update rule
 
