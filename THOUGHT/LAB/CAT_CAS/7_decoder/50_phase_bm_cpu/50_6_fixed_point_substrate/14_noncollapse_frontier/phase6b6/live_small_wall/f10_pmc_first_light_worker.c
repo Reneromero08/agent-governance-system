@@ -46,6 +46,7 @@
 #define EVICTION_SENTINEL_RESULT_SCHEMA "CAT_CAS_F10_EVICTION_SENTINEL_RESULT_V1"
 #define EVICTION_PHASE_LOCAL_RESULT_SCHEMA "CAT_CAS_F10_EVICTION_PHASE_LOCAL_RESULT_V1"
 #define EVICTION_PHASE_BRACKETED_RESULT_SCHEMA "CAT_CAS_F10_EVICTION_PHASE_BRACKETED_RESULT_V1"
+#define EVICTION_PHASE_BRACKETED_C2D_RESULT_SCHEMA "CAT_CAS_F10_EVICTION_PHASE_BRACKETED_C2D_RESULT_V1"
 #define PHASE_LOCAL_BANK_LINES 512u
 #define EVICTION_LINES 262144u
 #define EVICTION_ITERATIONS 3
@@ -2416,7 +2417,12 @@ static int run_eviction_phase_local_mode(const char *output_root, struct carrier
     return 0;
 }
 
-static int run_eviction_phase_bracketed_mode(const char *output_root, struct carrier *carrier, uint64_t initial_digest) {
+static int run_eviction_phase_bracketed_mode(
+    const char *output_root,
+    struct carrier *carrier,
+    uint64_t initial_digest,
+    bool c2d_strong_mode
+) {
     struct carrier eviction;
     eviction.line_count = EVICTION_LINES;
     eviction.byte_count = EVICTION_LINES * CACHE_LINE_BYTES;
@@ -2440,11 +2446,11 @@ static int run_eviction_phase_bracketed_mode(const char *output_root, struct car
         EVICTION_BRACKET_WINDOW_COUNT = 3
     };
     const enum eviction_prep_op control_prep = EVICT_PREP_REMOTE_READ;
-    const enum eviction_prep_op high_prep = EVICT_PREP_HOME_READ;
+    const enum eviction_prep_op high_prep = c2d_strong_mode ? EVICT_PREP_NONE : EVICT_PREP_HOME_READ;
     const enum eviction_prep_op low_prep = EVICT_PREP_HOME_WRITE;
     const char *variant_names[EVICTION_BRACKET_VARIANT_COUNT] = {
         "equal_bracket_sham",
-        "bracketed_high_low_candidate"
+        c2d_strong_mode ? "bracketed_none_home_write_candidate" : "bracketed_high_low_candidate"
     };
     const char *bracket_window_names[EVICTION_BRACKET_WINDOW_COUNT] = {
         "control_before",
@@ -2463,13 +2469,13 @@ static int run_eviction_phase_bracketed_mode(const char *output_root, struct car
             {"P3", "P", 3, EVICT_PREP_REMOTE_READ}
         },
         {
-            {"P0", "P", 0, EVICT_PREP_HOME_READ},
+            {"P0", "P", 0, c2d_strong_mode ? EVICT_PREP_NONE : EVICT_PREP_HOME_READ},
             {"M0", "M", 0, EVICT_PREP_HOME_WRITE},
             {"M1", "M", 1, EVICT_PREP_HOME_WRITE},
-            {"P1", "P", 1, EVICT_PREP_HOME_READ},
-            {"P2", "P", 2, EVICT_PREP_HOME_READ},
+            {"P1", "P", 1, c2d_strong_mode ? EVICT_PREP_NONE : EVICT_PREP_HOME_READ},
+            {"P2", "P", 2, c2d_strong_mode ? EVICT_PREP_NONE : EVICT_PREP_HOME_READ},
             {"M2", "M", 2, EVICT_PREP_HOME_WRITE},
-            {"M3", "M", 3, EVICT_PREP_HOME_READ},
+            {"M3", "M", 3, c2d_strong_mode ? EVICT_PREP_NONE : EVICT_PREP_HOME_READ},
             {"P3", "P", 3, EVICT_PREP_HOME_WRITE}
         }
     };
@@ -2537,9 +2543,20 @@ static int run_eviction_phase_bracketed_mode(const char *output_root, struct car
     bool probe_signal = phase_decode_signal(&sham_probe, &candidate_probe);
     bool eviction_phase_bracketed_captured = primary_open_rc == 0 && all_windows_ok && all_unmultiplexed &&
         carrier_restored && eviction_restored && (c2d_signal || probe_signal);
+    const char *result_schema = c2d_strong_mode ?
+        EVICTION_PHASE_BRACKETED_C2D_RESULT_SCHEMA : EVICTION_PHASE_BRACKETED_RESULT_SCHEMA;
+    const char *result_file_name = c2d_strong_mode ?
+        "F10_EVICTION_PHASE_BRACKETED_C2D_RESULT.json" : "F10_EVICTION_PHASE_BRACKETED_RESULT.json";
+    const char *found_status = c2d_strong_mode ?
+        "EVICTION_PHASE_BRACKETED_C2D_RESPONSE_FOUND" : "EVICTION_PHASE_BRACKETED_CODED_RESPONSE_FOUND";
+    const char *not_found_status = c2d_strong_mode ?
+        "EVICTION_PHASE_BRACKETED_C2D_RESPONSE_NOT_ESTABLISHED" : "EVICTION_PHASE_BRACKETED_CODED_RESPONSE_NOT_ESTABLISHED";
+    const char *candidate_description = c2d_strong_mode ?
+        "P uses no-prep centers and M uses home-write centers across imaginary quadrature phases" :
+        "P and M centers swap high/low preps across imaginary quadrature phases";
 
     char result_path[4096];
-    int n = snprintf(result_path, sizeof(result_path), "%s/F10_EVICTION_PHASE_BRACKETED_RESULT.json", output_root);
+    int n = snprintf(result_path, sizeof(result_path), "%s/%s", output_root, result_file_name);
     if (n <= 0 || (size_t)n >= sizeof(result_path)) {
         free(eviction.bytes);
         return 1;
@@ -2552,8 +2569,8 @@ static int run_eviction_phase_bracketed_mode(const char *output_root, struct car
     }
 
     fprintf(out, "{\n");
-    fprintf(out, "  \"schema_id\": \"%s\",\n", EVICTION_PHASE_BRACKETED_RESULT_SCHEMA);
-    fprintf(out, "  \"status\": \"%s\",\n", eviction_phase_bracketed_captured ? "EVICTION_PHASE_BRACKETED_CODED_RESPONSE_FOUND" : "EVICTION_PHASE_BRACKETED_CODED_RESPONSE_NOT_ESTABLISHED");
+    fprintf(out, "  \"schema_id\": \"%s\",\n", result_schema);
+    fprintf(out, "  \"status\": \"%s\",\n", eviction_phase_bracketed_captured ? found_status : not_found_status);
     fprintf(out, "  \"claim_ceiling\": \"Bracketed phase-local eviction-sentinel PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim\",\n");
     fprintf(out, "  \"cores\": {\"home_core\": %d, \"observed_core\": %d},\n", CATCAS_CORE_A, CATCAS_CORE_B);
     fprintf(out, "  \"source_constraints\": {\"direct_msr_access\": false, \"voltage_access\": false, \"frequency_writes\": 0, \"experiment_owned_memory_only\": true, \"physical_address_access\": false, \"cache_set_mapping\": false, \"private_branch_routing\": false},\n");
@@ -2569,7 +2586,7 @@ static int run_eviction_phase_bracketed_mode(const char *output_root, struct car
     print_group_defs(out, primary_group);
     fprintf(out, ",\n");
     fprintf(out, "  \"phase_local_layout\": {\"token_sequence\": \"P0 M0 M1 P1 P2 M2 M3 P3\", \"bracket\": \"control_before token control_after\", \"phases\": [\"0\", \"pi/2\", \"pi\", \"3pi/2\"], \"plus\": \"P - local_control_mean\", \"minus\": \"M - local_control_mean\", \"decode\": \"z=(2/4)*sum(response_k*exp(i*theta_k))\"},\n");
-    fprintf(out, "  \"predeclared_observable\": {\"sentinel\": \"remote_store_same_value over carrier after each eviction-buffer precondition\", \"sham\": \"all token centers and bracket controls use control prep\", \"candidate\": \"P and M centers swap high/low preps across imaginary quadrature phases\", \"acceptance\": \"opposed candidate Im plus/minus and min(abs(candidate imag)) > 3 * sham_floor for either established coherence counter\"},\n");
+    fprintf(out, "  \"predeclared_observable\": {\"sentinel\": \"remote_store_same_value over carrier after each eviction-buffer precondition\", \"sham\": \"all token centers and bracket controls use control prep\", \"candidate\": \"%s\", \"acceptance\": \"opposed candidate Im plus/minus and min(abs(candidate imag)) > 3 * sham_floor for either established coherence counter\"},\n", candidate_description);
     fprintf(out, "  \"variants\": [\n");
     for (int variant = 0; variant < EVICTION_BRACKET_VARIANT_COUNT; variant++) {
         fprintf(out, "    {\"name\": \"%s\", \"tokens\": [\n", variant_names[variant]);
@@ -2616,7 +2633,7 @@ static int run_eviction_phase_bracketed_mode(const char *output_root, struct car
     fclose(out);
     free(eviction.bytes);
     printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"primary_nb_coherence\"}\n",
-        eviction_phase_bracketed_captured ? "EVICTION_PHASE_BRACKETED_CODED_RESPONSE_FOUND" : "EVICTION_PHASE_BRACKETED_CODED_RESPONSE_NOT_ESTABLISHED",
+        eviction_phase_bracketed_captured ? found_status : not_found_status,
         result_path);
     return 0;
 }
@@ -3243,6 +3260,7 @@ int main(int argc, char **argv) {
     bool eviction_sentinel_mode = false;
     bool eviction_phase_local_mode = false;
     bool eviction_phase_bracketed_mode = false;
+    bool eviction_phase_bracketed_c2d_mode = false;
     if (argc == 3 && strcmp(argv[1], "--output-root") == 0) {
         output_root = argv[2];
     } else if (argc == 4 && strcmp(argv[1], "--coherence-operators") == 0 &&
@@ -3289,10 +3307,14 @@ int main(int argc, char **argv) {
                strcmp(argv[2], "--output-root") == 0) {
         eviction_phase_bracketed_mode = true;
         output_root = argv[3];
+    } else if (argc == 4 && strcmp(argv[1], "--eviction-phase-bracketed-c2d") == 0 &&
+               strcmp(argv[2], "--output-root") == 0) {
+        eviction_phase_bracketed_c2d_mode = true;
+        output_root = argv[3];
     } else if (argc == 2 && strcmp(argv[1], "--self-test") == 0) {
         return self_test();
     } else {
-        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root> | --eviction-phase-bracketed --output-root <absolute-output-root>\n", argv[0]);
+        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root> | --eviction-phase-bracketed --output-root <absolute-output-root> | --eviction-phase-bracketed-c2d --output-root <absolute-output-root>\n", argv[0]);
         return 2;
     }
     if (output_root[0] != '/') {
@@ -3365,7 +3387,12 @@ int main(int argc, char **argv) {
         return rc;
     }
     if (eviction_phase_bracketed_mode) {
-        int rc = run_eviction_phase_bracketed_mode(output_root, &carrier, initial_digest);
+        int rc = run_eviction_phase_bracketed_mode(output_root, &carrier, initial_digest, false);
+        free(carrier.bytes);
+        return rc;
+    }
+    if (eviction_phase_bracketed_c2d_mode) {
+        int rc = run_eviction_phase_bracketed_mode(output_root, &carrier, initial_digest, true);
         free(carrier.bytes);
         return rc;
     }
