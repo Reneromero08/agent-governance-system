@@ -1,0 +1,280 @@
+{
+  "schema_id": "CAT_CAS_F10_PATH_DEPENDENCE_PILOT_CHECKPOINT_V1",
+  "classification": "PATH_DEPENDENCE_NOT_ESTABLISHED",
+  "claim_ceiling": "Path-dependence pilot only; no coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim.",
+  "claim_exclusions": [
+    "path memory",
+    "coherence holonomy",
+    "OrbitState coupling",
+    "fold-odd recovery",
+    "Small Wall crossing"
+  ],
+  "run": {
+    "run_id": "f10_path_pilot_0",
+    "local_run_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/f10_path_pilot_0",
+    "remote_run_path": "/root/catcas_live_small_wall/f10_path_pilot_0",
+    "command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_path_dependence.py --run-id f10_path_pilot_0",
+    "target_status": "F10_PATH_DEPENDENCE_TARGET_COMPLETE",
+    "worker_status": "PATH_DEPENDENCE_NOT_ESTABLISHED",
+    "copy_verified": true,
+    "remote_cleaned": true
+  },
+  "source_binding": {
+    "source_bundle_sha256": "6985b1bd33e1dbd349ca003e0ed443c93fad0cbf6e35deb775b208a98d996cc9",
+    "source_hashes": {
+      "f10_pmc_first_light_target.py": "d6c25967ce47761d88b110ded5a04e613330e683f9b83150e4217b91c705451c",
+      "f10_pmc_first_light_worker.c": "784ff3c2f95e245ad376dc514eea977343aaad7d1f401db69534fd147a1d3f82"
+    }
+  },
+  "environment": {
+    "device": "user-owned AMD Phenom II X6 lab computer",
+    "cpu_model": "AMD Phenom(tm) II X6 1090T Processor",
+    "cpu_family": "16",
+    "model": "10",
+    "stepping": "0",
+    "kernel": "6.12.86+deb13-amd64",
+    "perf_event_paranoid": "3",
+    "cpu_online": "0-5",
+    "pmu_event_format": "config:0-7,32-35",
+    "pmu_umask_format": "config:8-15"
+  },
+  "source_constraints": {
+    "perf_interface": "perf_event_open PERF_TYPE_RAW",
+    "experiment_owned_memory_only": true,
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "direct_msr_access": false
+  },
+  "temperature": {
+    "veto_c": 68.0,
+    "preflight_c": 50.5,
+    "post_c": 51.0,
+    "below_veto": true
+  },
+  "geometry": {
+    "home_core": 4,
+    "observed_core": 5,
+    "line_sets": 2,
+    "line_count": 4096,
+    "line_bytes": 64,
+    "byte_count": 262144,
+    "digest_kind": "fnv1a64",
+    "initial_digest_hex": "0xc816a7aba6b50383",
+    "all_path_windows_restored": true
+  },
+  "selected_events": [
+    {
+      "name": "cpu_cycles_not_halted",
+      "event_select_hex": "0x076",
+      "unit_mask_hex": "0x00",
+      "raw_config_hex": "0x76"
+    },
+    {
+      "name": "dc_refills_from_nb_all_states",
+      "event_select_hex": "0x043",
+      "unit_mask_hex": "0x1f",
+      "raw_config_hex": "0x1f43"
+    },
+    {
+      "name": "cache_block_commands_change_to_dirty",
+      "event_select_hex": "0x0ea",
+      "unit_mask_hex": "0x20",
+      "raw_config_hex": "0x20ea"
+    },
+    {
+      "name": "probe_responses_dirty",
+      "event_select_hex": "0x0ec",
+      "unit_mask_hex": "0x0c",
+      "raw_config_hex": "0xcec"
+    }
+  ],
+  "predeclared_observable": {
+    "coordinate_x": "cache_block_commands_change_to_dirty / cpu_cycles_not_halted",
+    "coordinate_y": "probe_responses_dirty / cpu_cycles_not_halted",
+    "signed_area": "sum((x_i * y_next) - (y_i * x_next)) / 2 over four path steps"
+  },
+  "areas_cycles_normalized": {
+    "forward": -3.273910155164e-07,
+    "reverse": -3.389224951895e-07,
+    "shuffle": -4.274523839239e-09,
+    "reverse_shuffle": 3.650610783264e-07,
+    "identity": 0.0
+  },
+  "acceptance": {
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "bytes_unchanged": true,
+    "sign_reversal": false,
+    "controls_small": false,
+    "path_dependence_pilot": false
+  },
+  "step_counts": {
+    "forward": [
+      {
+        "step": "remote_store_set0",
+        "cycles": 2578064,
+        "change_to_dirty": 1368,
+        "probe_dirty": 3438,
+        "duration_ns": 885328
+      },
+      {
+        "step": "remote_store_set1",
+        "cycles": 2505671,
+        "change_to_dirty": 2046,
+        "probe_dirty": 2050,
+        "duration_ns": 788327
+      },
+      {
+        "step": "home_store_set0",
+        "cycles": 267,
+        "change_to_dirty": 0,
+        "probe_dirty": 0,
+        "duration_ns": 830642
+      },
+      {
+        "step": "home_store_set1",
+        "cycles": 0,
+        "change_to_dirty": 0,
+        "probe_dirty": 0,
+        "duration_ns": 796103
+      }
+    ],
+    "reverse": [
+      {
+        "step": "remote_store_set1",
+        "cycles": 2541806,
+        "change_to_dirty": 1304,
+        "probe_dirty": 3421,
+        "duration_ns": 829049
+      },
+      {
+        "step": "remote_store_set0",
+        "cycles": 2504664,
+        "change_to_dirty": 2044,
+        "probe_dirty": 2053,
+        "duration_ns": 786684
+      },
+      {
+        "step": "home_store_set1",
+        "cycles": 184,
+        "change_to_dirty": 0,
+        "probe_dirty": 0,
+        "duration_ns": 827514
+      },
+      {
+        "step": "home_store_set0",
+        "cycles": 0,
+        "change_to_dirty": 0,
+        "probe_dirty": 0,
+        "duration_ns": 794929
+      }
+    ],
+    "shuffle": [
+      {
+        "step": "remote_store_set0",
+        "cycles": 2538380,
+        "change_to_dirty": 1253,
+        "probe_dirty": 3297,
+        "duration_ns": 821741
+      },
+      {
+        "step": "home_store_set0",
+        "cycles": 424,
+        "change_to_dirty": 0,
+        "probe_dirty": 1,
+        "duration_ns": 825190
+      },
+      {
+        "step": "remote_store_set1",
+        "cycles": 2506744,
+        "change_to_dirty": 2017,
+        "probe_dirty": 2052,
+        "duration_ns": 811855
+      },
+      {
+        "step": "home_store_set1",
+        "cycles": 429,
+        "change_to_dirty": 0,
+        "probe_dirty": 1,
+        "duration_ns": 822692
+      }
+    ],
+    "reverse_shuffle": [
+      {
+        "step": "remote_store_set1",
+        "cycles": 2537380,
+        "change_to_dirty": 1215,
+        "probe_dirty": 3236,
+        "duration_ns": 821449
+      },
+      {
+        "step": "home_store_set1",
+        "cycles": 229,
+        "change_to_dirty": 0,
+        "probe_dirty": 0,
+        "duration_ns": 826415
+      },
+      {
+        "step": "remote_store_set0",
+        "cycles": 2507786,
+        "change_to_dirty": 1979,
+        "probe_dirty": 2054,
+        "duration_ns": 811183
+      },
+      {
+        "step": "home_store_set0",
+        "cycles": 425,
+        "change_to_dirty": 0,
+        "probe_dirty": 1,
+        "duration_ns": 823537
+      }
+    ],
+    "identity": [
+      {
+        "step": "home_store_set0",
+        "cycles": 0,
+        "change_to_dirty": 0,
+        "probe_dirty": 0,
+        "duration_ns": 774087
+      },
+      {
+        "step": "home_store_set1",
+        "cycles": 0,
+        "change_to_dirty": 0,
+        "probe_dirty": 0,
+        "duration_ns": 774393
+      },
+      {
+        "step": "home_store_set0",
+        "cycles": 0,
+        "change_to_dirty": 0,
+        "probe_dirty": 0,
+        "duration_ns": 773586
+      },
+      {
+        "step": "home_store_set1",
+        "cycles": 0,
+        "change_to_dirty": 0,
+        "probe_dirty": 0,
+        "duration_ns": 774172
+      }
+    ]
+  },
+  "interpretation": {
+    "surviving_wall": "The pilot used one visible remote ownership-intent operator plus a home-core restoration operator that was almost invisible from the observed core. Forward and reverse signed areas therefore kept the same sign, and the reverse-shuffle control was large.",
+    "next_discriminator": "Use two noncommuting operators that are both visible in the same observation geometry, or measure complementary core perspectives before making another path-memory claim."
+  },
+  "focused_validation": [
+    {
+      "command": ".\\.venv\\Scripts\\python.exe -m py_compile THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\f10_pmc_first_light_target.py THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_path_dependence.py",
+      "result": "pass"
+    },
+    {
+      "command": "wsl bash -lc 'cd \"/mnt/d/CCC 2.0/AI/agent-governance-system\" && cc -std=c11 -Wall -Wextra -Werror -pedantic -O2 -march=amdfam10 -mtune=amdfam10 -fno-lto -pthread THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/f10_pmc_first_light_worker.c -o /tmp/f10_path_worker_check && /tmp/f10_path_worker_check --self-test'",
+      "result": "pass",
+      "stdout": "F10_PMC_FIRST_LIGHT_WORKER_SELF_TEST_OK"
+    }
+  ]
+}

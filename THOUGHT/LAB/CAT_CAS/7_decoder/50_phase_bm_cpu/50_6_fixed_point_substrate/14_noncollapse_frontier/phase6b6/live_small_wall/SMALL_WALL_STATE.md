@@ -9,9 +9,12 @@
 `CONTROLLED_COHERENCE_STATE_FOUND`
 
 **Active wall:**
-Move from a calibrated footprint-dependent timing sensor to a relational,
-path-dependent, restored physical carrier that can lawfully couple to unresolved
-`OrbitState` and expose a fold-odd boundary invariant.
+The current wall is operator algebra and observation geometry. A byte-preserving
+remote ownership-intent store is visible, but the first forward/reverse path pilot
+combined that visible operator with home-core restoration steps that were nearly
+invisible from the observed core. The next build must create two noncommuting
+operators that are both visible in the same measurement geometry, or explicitly
+measure complementary core perspectives.
 
 ## Established
 
@@ -190,6 +193,70 @@ Claim ceiling:
 This still does not establish path memory, noncommutation, physical holonomy,
 OrbitState coupling, fold-odd recovery, or a Small Wall crossing.
 
+### Path-dependence pilot
+
+The first direct path-memory discriminator ran cleanly but was negative.
+
+Run:
+
+`runs/f10_path_pilot_0`
+
+Checkpoint:
+
+`F10_PATH_DEPENDENCE_PILOT_CHECKPOINT_20260712.json`
+
+Geometry:
+
+- home/preparation core: 4;
+- observed/operator core: 5;
+- carrier: two public line sets, even and odd 64-byte CAT_CAS-owned lines;
+- forward path: `remote_store_set0`, `remote_store_set1`, `home_store_set0`,
+  `home_store_set1`;
+- reverse path: `remote_store_set1`, `remote_store_set0`, `home_store_set1`,
+  `home_store_set0`;
+- controls: identity, paired shuffle, and reverse paired shuffle;
+- observable: predeclared signed area in
+  `(change_to_dirty / cycles, probe_dirty / cycles)`.
+
+The run used ordinary `perf_event_open` raw PMU groups only. It performed zero
+CPU-frequency writes, zero voltage access, zero MSR reads, and zero MSR writes.
+Temperature stayed below the 68 C veto, output copy-back verified, and the temporary
+remote run root was cleaned after copy verification. Carrier bytes were unchanged
+for every path step.
+
+Result:
+
+```text
+forward          -3.273910155164e-07
+reverse          -3.389224951895e-07
+shuffle          -4.274523839239e-09
+reverse_shuffle  +3.650610783264e-07
+identity          0.0
+```
+
+Acceptance:
+
+```text
+all_windows_ok        true
+all_unmultiplexed     true
+bytes_unchanged       true
+sign_reversal         false
+controls_small        false
+path_dependence_pilot false
+```
+
+The important diagnostic is that the home-store steps were nearly invisible from the
+core-5 observation window, while remote-store steps dominated both forward and
+reverse. This makes the pilot an operator/geometry failure rather than evidence
+against the broader H2 carrier hypothesis.
+
+Marker:
+
+`PATH_DEPENDENCE_NOT_ESTABLISHED`
+
+This does not establish path memory, noncommutation, physical holonomy, OrbitState
+coupling, fold-odd recovery, or a Small Wall crossing.
+
 ### Information-law boundary
 
 The unchanged public cosine representation is fold-even. If the complete declared
@@ -233,7 +300,9 @@ f10_pmc_first_light_worker.c
 f10_pmc_first_light_target.py
 run_f10_pmc_first_light.py
 run_f10_coherence_operators.py
+run_f10_path_dependence.py
 READONLY_OCCUPANCY_BASELINE_CLOSURE.json
+F10_PATH_DEPENDENCE_PILOT_CHECKPOINT_20260712.json
 ```
 
 Historical V2 Gate A source was restored and should remain a sealed reference. New
@@ -298,9 +367,14 @@ multiset, identity and shuffled controls, and a predeclared signed area.
 **Current evidence:** `f10_coherence_ops_2` established that `remote_store_same_value`
 moves `cache_block_commands_change_to_dirty` and `probe_responses_dirty` relative to
 identity, read-shared, and same-core store controls while restoring bytes.
+`f10_path_pilot_0` then showed that a path built from remote stores plus home-core
+restoration does not yet produce a valid antisymmetric path observable, because the
+home steps are nearly invisible in the core-5 PMU window and one shuffle control is
+large.
 
-**Status:** established at controlled-operator level; next test is path memory and
-noncommutation.
+**Status:** established at controlled-operator level; first path-memory construction
+was negative. Continue only with an operator pair or observation geometry that makes
+both sides of the loop visible.
 
 ### H3 - Shared L3 or Northbridge routing is the dominant relational carrier
 
@@ -393,13 +467,14 @@ operator, observability, or restoration wall that it can attack.
 
 ## Cheapest current discriminator
 
-Build the thinnest path-dependence discriminator over experiment-owned aligned cache
-lines.
+Build the thinnest corrected path-dependence discriminator over experiment-owned
+aligned cache lines.
 
 The next probe should answer:
 
-1. Can two or more carrier lines execute forward and reverse paths with the same
-   operation multiset and byte-identical endpoints?
+1. Can two noncommuting byte-preserving carrier operators be made visible in one
+   observation geometry, or can complementary core observations be combined without
+   label leakage?
 2. Does a predeclared antisymmetric observable, such as signed area in
    `(change_to_dirty, probe_dirty)` or a timing-plus-PMU plane, flip under path
    reversal while identity and shuffled controls cancel?

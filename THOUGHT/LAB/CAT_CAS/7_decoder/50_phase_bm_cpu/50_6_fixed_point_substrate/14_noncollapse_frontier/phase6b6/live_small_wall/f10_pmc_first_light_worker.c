@@ -32,6 +32,7 @@
 #define SUPPORT_EVENTS 8
 #define RESULT_SCHEMA "CAT_CAS_F10_PMC_FIRST_LIGHT_RESULT_V1"
 #define COHERENCE_RESULT_SCHEMA "CAT_CAS_F10_COHERENCE_OPERATOR_RESULT_V1"
+#define PATH_RESULT_SCHEMA "CAT_CAS_F10_PATH_DEPENDENCE_PILOT_RESULT_V1"
 
 struct event_def {
     const char *name;
@@ -86,6 +87,17 @@ struct operator_context {
     atomic_int ready;
     atomic_int done;
     volatile uint64_t sink;
+};
+
+enum path_op {
+    PATH_REMOTE_STORE = 0,
+    PATH_HOME_STORE = 1
+};
+
+struct path_step {
+    const char *name;
+    enum path_op op;
+    int line_set;
 };
 
 static const struct event_def support_events[SUPPORT_EVENTS] = {
@@ -242,6 +254,7 @@ static void same_core_locked_noop(struct carrier *carrier) {
             __asm__ __volatile__("lock orq $0, %0" : "+m"(*p) : : "memory", "cc");
         }
     }
+    __asm__ __volatile__("mfence" : : : "memory");
 }
 
 __attribute__((noinline, noclone))
@@ -254,6 +267,7 @@ static void same_core_store_same_value(struct carrier *carrier) {
             *p = value;
         }
     }
+    __asm__ __volatile__("mfence" : : : "memory");
 }
 
 __attribute__((noinline, noclone))
@@ -289,6 +303,7 @@ static void remote_locked_noop(struct carrier *carrier) {
             __asm__ __volatile__("lock orq $0, %0" : "+m"(*p) : : "memory", "cc");
         }
     }
+    __asm__ __volatile__("mfence" : : : "memory");
 }
 
 __attribute__((noinline, noclone))
@@ -301,6 +316,34 @@ static void remote_store_same_value(struct carrier *carrier) {
             *p = value;
         }
     }
+    __asm__ __volatile__("mfence" : : : "memory");
+}
+
+__attribute__((noinline, noclone))
+static void store_same_value_subset_on_core(struct carrier *carrier, int core, int line_set) {
+    if (pin_to_core(core) != 0) return;
+    size_t start = line_set == 0 ? 0u : 1u;
+    for (int iter = 0; iter < OPERATOR_ITERATIONS; iter++) {
+        for (size_t line = start; line < carrier->line_count; line += 2u) {
+            volatile uint64_t *p = (volatile uint64_t *)(void *)(carrier->bytes + line * CACHE_LINE_BYTES);
+            uint64_t value = *p;
+            *p = value;
+        }
+    }
+    __asm__ __volatile__("mfence" : : : "memory");
+}
+
+static int run_path_step_operator(struct carrier *carrier, const struct path_step *step) {
+    if (step->line_set != 0 && step->line_set != 1) return -1;
+    if (step->op == PATH_REMOTE_STORE) {
+        store_same_value_subset_on_core(carrier, CATCAS_CORE_B, step->line_set);
+        return 0;
+    }
+    if (step->op == PATH_HOME_STORE) {
+        store_same_value_subset_on_core(carrier, CATCAS_CORE_A, step->line_set);
+        return 0;
+    }
+    return -1;
 }
 
 static void idle_pause(void) {
@@ -643,6 +686,85 @@ static int measure_coherence_window(
     return 0;
 }
 
+static int measure_path_step(
+    const struct event_def group[MAX_GROUP_EVENTS],
+    const struct path_step *step,
+    struct carrier *carrier,
+    struct group_result *result,
+    uint64_t *duration_ns,
+    uint64_t *digest_before,
+    uint64_t *digest_after
+) {
+    int fds[MAX_GROUP_EVENTS];
+    uint64_t ids[MAX_GROUP_EVENTS];
+    memset(result, 0, sizeof(*result));
+    *digest_before = fnv1a64(carrier->bytes, carrier->byte_count);
+    int opened = open_group(group, CATCAS_CORE_B, fds, ids);
+    if (opened != 0) {
+        result->open_errno = -opened;
+        return opened;
+    }
+    result->opened = true;
+    if (ioctl(fds[0], PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t start = monotonic_ns();
+    if (ioctl(fds[0], PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    int work_rc = run_path_step_operator(carrier, step);
+    if (ioctl(fds[0], PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t end = monotonic_ns();
+    int read_rc = read_group(fds[0], result);
+    for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+    if (read_rc != 0) return read_rc;
+    if (work_rc != 0) return -EIO;
+    *duration_ns = end >= start ? end - start : 0;
+    *digest_after = fnv1a64(carrier->bytes, carrier->byte_count);
+    return 0;
+}
+
+static uint64_t event_value_by_name(const struct group_result *result, const struct event_def group[MAX_GROUP_EVENTS], const char *name);
+
+static long double normalized_event_value(
+    const struct group_result *result,
+    const struct event_def group[MAX_GROUP_EVENTS],
+    const char *name
+) {
+    uint64_t cycles = event_value_by_name(result, group, "cpu_cycles_not_halted");
+    if (cycles == 0) cycles = 1;
+    return (long double)event_value_by_name(result, group, name) / (long double)cycles;
+}
+
+static long double path_signed_area(
+    const struct group_result *results,
+    const struct event_def group[MAX_GROUP_EVENTS],
+    int count
+) {
+    long double area = 0.0L;
+    for (int i = 0; i < count; i++) {
+        int next = (i + 1) % count;
+        long double x0 = normalized_event_value(&results[i], group, "cache_block_commands_change_to_dirty");
+        long double y0 = normalized_event_value(&results[i], group, "probe_responses_dirty");
+        long double x1 = normalized_event_value(&results[next], group, "cache_block_commands_change_to_dirty");
+        long double y1 = normalized_event_value(&results[next], group, "probe_responses_dirty");
+        area += x0 * y1 - y0 * x1;
+    }
+    return area * 0.5L;
+}
+
+static long double abs_ld(long double value) {
+    return value < 0.0L ? -value : value;
+}
+
 static const char *json_bool(bool value) {
     return value ? "true" : "false";
 }
@@ -862,19 +984,207 @@ static int run_coherence_operator_mode(const char *output_root, struct carrier *
     return 0;
 }
 
+static int measure_path_sequence(
+    const struct path_step steps[4],
+    struct carrier *carrier,
+    struct group_result results[4],
+    uint64_t durations[4],
+    uint64_t digest_before[4],
+    uint64_t digest_after[4],
+    int rc[4],
+    uint64_t initial_digest
+) {
+    home_core_restore(carrier);
+    for (int i = 0; i < 4; i++) {
+        memset(&results[i], 0, sizeof(results[i]));
+        durations[i] = 0;
+        digest_before[i] = 0;
+        digest_after[i] = 0;
+        rc[i] = measure_path_step(primary_group, &steps[i], carrier, &results[i],
+            &durations[i], &digest_before[i], &digest_after[i]);
+    }
+    home_core_restore(carrier);
+    return fnv1a64(carrier->bytes, carrier->byte_count) == initial_digest ? 0 : -1;
+}
+
+static void print_path_steps(
+    FILE *out,
+    const char *name,
+    const struct path_step steps[4],
+    const struct group_result results[4],
+    const uint64_t durations[4],
+    const uint64_t digest_before[4],
+    const uint64_t digest_after[4],
+    const int rc[4],
+    long double area,
+    uint64_t initial_digest
+) {
+    fprintf(out, "    {\"name\": \"%s\", \"signed_area_cycles_normalized\": %.12Le, \"steps\": [\n", name, area);
+    for (int i = 0; i < 4; i++) {
+        fprintf(out, "      {\"name\": \"%s\", \"line_set\": %d, \"rc\": %d, \"duration_ns\": %" PRIu64 ", \"carrier_digest_before_hex\": \"0x%016" PRIx64 "\", \"carrier_digest_after_hex\": \"0x%016" PRIx64 "\", \"bytes_unchanged\": %s, \"group\": ",
+            steps[i].name,
+            steps[i].line_set,
+            rc[i],
+            durations[i],
+            digest_before[i],
+            digest_after[i],
+            json_bool(digest_before[i] == initial_digest && digest_after[i] == initial_digest));
+        print_group_result(out, primary_group, &results[i]);
+        fprintf(out, "}%s\n", i + 1 == 4 ? "" : ",");
+    }
+    fprintf(out, "    ]}");
+}
+
+static int run_path_dependence_mode(const char *output_root, struct carrier *carrier, uint64_t initial_digest) {
+    int primary_fds[MAX_GROUP_EVENTS];
+    uint64_t primary_ids[MAX_GROUP_EVENTS];
+    int primary_open_rc = open_group(primary_group, CATCAS_CORE_B, primary_fds, primary_ids);
+    if (primary_open_rc == 0) {
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(primary_fds[i]);
+    }
+
+    const struct path_step forward[4] = {
+        {"remote_store_set0", PATH_REMOTE_STORE, 0},
+        {"remote_store_set1", PATH_REMOTE_STORE, 1},
+        {"home_store_set0", PATH_HOME_STORE, 0},
+        {"home_store_set1", PATH_HOME_STORE, 1}
+    };
+    const struct path_step reverse[4] = {
+        {"remote_store_set1", PATH_REMOTE_STORE, 1},
+        {"remote_store_set0", PATH_REMOTE_STORE, 0},
+        {"home_store_set1", PATH_HOME_STORE, 1},
+        {"home_store_set0", PATH_HOME_STORE, 0}
+    };
+    const struct path_step shuffle[4] = {
+        {"remote_store_set0", PATH_REMOTE_STORE, 0},
+        {"home_store_set0", PATH_HOME_STORE, 0},
+        {"remote_store_set1", PATH_REMOTE_STORE, 1},
+        {"home_store_set1", PATH_HOME_STORE, 1}
+    };
+    const struct path_step reverse_shuffle[4] = {
+        {"remote_store_set1", PATH_REMOTE_STORE, 1},
+        {"home_store_set1", PATH_HOME_STORE, 1},
+        {"remote_store_set0", PATH_REMOTE_STORE, 0},
+        {"home_store_set0", PATH_HOME_STORE, 0}
+    };
+    const struct path_step identity[4] = {
+        {"home_store_set0", PATH_HOME_STORE, 0},
+        {"home_store_set1", PATH_HOME_STORE, 1},
+        {"home_store_set0", PATH_HOME_STORE, 0},
+        {"home_store_set1", PATH_HOME_STORE, 1}
+    };
+
+    struct group_result forward_results[4], reverse_results[4], shuffle_results[4], reverse_shuffle_results[4], identity_results[4];
+    uint64_t forward_durations[4], reverse_durations[4], shuffle_durations[4], reverse_shuffle_durations[4], identity_durations[4];
+    uint64_t forward_before[4], reverse_before[4], shuffle_before[4], reverse_shuffle_before[4], identity_before[4];
+    uint64_t forward_after[4], reverse_after[4], shuffle_after[4], reverse_shuffle_after[4], identity_after[4];
+    int forward_rc[4], reverse_rc[4], shuffle_rc[4], reverse_shuffle_rc[4], identity_rc[4];
+    int forward_restore = primary_open_rc == 0 ? measure_path_sequence(forward, carrier, forward_results, forward_durations, forward_before, forward_after, forward_rc, initial_digest) : -ENODEV;
+    int reverse_restore = primary_open_rc == 0 ? measure_path_sequence(reverse, carrier, reverse_results, reverse_durations, reverse_before, reverse_after, reverse_rc, initial_digest) : -ENODEV;
+    int shuffle_restore = primary_open_rc == 0 ? measure_path_sequence(shuffle, carrier, shuffle_results, shuffle_durations, shuffle_before, shuffle_after, shuffle_rc, initial_digest) : -ENODEV;
+    int reverse_shuffle_restore = primary_open_rc == 0 ? measure_path_sequence(reverse_shuffle, carrier, reverse_shuffle_results, reverse_shuffle_durations, reverse_shuffle_before, reverse_shuffle_after, reverse_shuffle_rc, initial_digest) : -ENODEV;
+    int identity_restore = primary_open_rc == 0 ? measure_path_sequence(identity, carrier, identity_results, identity_durations, identity_before, identity_after, identity_rc, initial_digest) : -ENODEV;
+
+    bool all_windows_ok = primary_open_rc == 0;
+    bool all_unmultiplexed = primary_open_rc == 0;
+    bool bytes_unchanged = forward_restore == 0 && reverse_restore == 0 &&
+        shuffle_restore == 0 && reverse_shuffle_restore == 0 && identity_restore == 0;
+    for (int i = 0; i < 4; i++) {
+        all_windows_ok = all_windows_ok && forward_rc[i] == 0 && reverse_rc[i] == 0 &&
+            shuffle_rc[i] == 0 && reverse_shuffle_rc[i] == 0 && identity_rc[i] == 0;
+        all_unmultiplexed = all_unmultiplexed && forward_results[i].unmultiplexed &&
+            reverse_results[i].unmultiplexed && shuffle_results[i].unmultiplexed &&
+            reverse_shuffle_results[i].unmultiplexed && identity_results[i].unmultiplexed;
+        bytes_unchanged = bytes_unchanged &&
+            forward_before[i] == initial_digest && forward_after[i] == initial_digest &&
+            reverse_before[i] == initial_digest && reverse_after[i] == initial_digest &&
+            shuffle_before[i] == initial_digest && shuffle_after[i] == initial_digest &&
+            reverse_shuffle_before[i] == initial_digest && reverse_shuffle_after[i] == initial_digest &&
+            identity_before[i] == initial_digest && identity_after[i] == initial_digest;
+    }
+
+    long double forward_area = path_signed_area(forward_results, primary_group, 4);
+    long double reverse_area = path_signed_area(reverse_results, primary_group, 4);
+    long double shuffle_area = path_signed_area(shuffle_results, primary_group, 4);
+    long double reverse_shuffle_area = path_signed_area(reverse_shuffle_results, primary_group, 4);
+    long double identity_area = path_signed_area(identity_results, primary_group, 4);
+    long double min_oriented = abs_ld(forward_area) < abs_ld(reverse_area) ? abs_ld(forward_area) : abs_ld(reverse_area);
+    bool sign_reversal = (forward_area < 0.0L && reverse_area > 0.0L) ||
+        (forward_area > 0.0L && reverse_area < 0.0L);
+    bool controls_small = min_oriented > 0.0L &&
+        abs_ld(shuffle_area) * 4.0L < min_oriented &&
+        abs_ld(reverse_shuffle_area) * 4.0L < min_oriented &&
+        abs_ld(identity_area) * 4.0L < min_oriented;
+    bool path_pilot = all_windows_ok && all_unmultiplexed && bytes_unchanged &&
+        sign_reversal && controls_small;
+
+    char result_path[4096];
+    int n = snprintf(result_path, sizeof(result_path), "%s/F10_PATH_DEPENDENCE_PILOT_RESULT.json", output_root);
+    if (n <= 0 || (size_t)n >= sizeof(result_path)) return 1;
+    FILE *out = fopen(result_path, "w");
+    if (!out) {
+        fprintf(stderr, "cannot open result: %s\n", strerror(errno));
+        return 1;
+    }
+    fprintf(out, "{\n");
+    fprintf(out, "  \"schema_id\": \"%s\",\n", PATH_RESULT_SCHEMA);
+    fprintf(out, "  \"status\": \"%s\",\n", path_pilot ? "PATH_DEPENDENCE_PILOT_OBSERVED" : "PATH_DEPENDENCE_NOT_ESTABLISHED");
+    fprintf(out, "  \"claim_ceiling\": \"Path-dependence pilot only; no coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim\",\n");
+    fprintf(out, "  \"cores\": {\"home_core\": %d, \"observed_core\": %d},\n", CATCAS_CORE_A, CATCAS_CORE_B);
+    fprintf(out, "  \"source_constraints\": {\"direct_msr_access\": false, \"voltage_access\": false, \"frequency_writes\": 0, \"experiment_owned_memory_only\": true},\n");
+    fprintf(out, "  \"carrier\": {\"line_sets\": 2, \"line_count\": %zu, \"line_bytes\": %d, \"byte_count\": %zu, \"digest_kind\": \"fnv1a64\", \"initial_digest_hex\": \"0x%016" PRIx64 "\"},\n", carrier->line_count, CACHE_LINE_BYTES, carrier->byte_count, initial_digest);
+    fprintf(out, "  \"selected_group\": \"primary_nb_coherence\",\n");
+    fprintf(out, "  \"group_open_rc\": %d,\n", primary_open_rc);
+    fprintf(out, "  \"selected_events\": ");
+    print_group_defs(out, primary_group);
+    fprintf(out, ",\n");
+    fprintf(out, "  \"predeclared_observable\": {\"coordinate_x\": \"cache_block_commands_change_to_dirty / cpu_cycles_not_halted\", \"coordinate_y\": \"probe_responses_dirty / cpu_cycles_not_halted\", \"signed_area\": \"sum((x_i * y_next) - (y_i * x_next)) / 2 over four path steps\"},\n");
+    fprintf(out, "  \"paths\": [\n");
+    print_path_steps(out, "forward", forward, forward_results, forward_durations, forward_before, forward_after, forward_rc, forward_area, initial_digest);
+    fprintf(out, ",\n");
+    print_path_steps(out, "reverse", reverse, reverse_results, reverse_durations, reverse_before, reverse_after, reverse_rc, reverse_area, initial_digest);
+    fprintf(out, ",\n");
+    print_path_steps(out, "shuffle", shuffle, shuffle_results, shuffle_durations, shuffle_before, shuffle_after, shuffle_rc, shuffle_area, initial_digest);
+    fprintf(out, ",\n");
+    print_path_steps(out, "reverse_shuffle", reverse_shuffle, reverse_shuffle_results, reverse_shuffle_durations, reverse_shuffle_before, reverse_shuffle_after, reverse_shuffle_rc, reverse_shuffle_area, initial_digest);
+    fprintf(out, ",\n");
+    print_path_steps(out, "identity", identity, identity_results, identity_durations, identity_before, identity_after, identity_rc, identity_area, initial_digest);
+    fprintf(out, "\n  ],\n");
+    fprintf(out, "  \"areas_cycles_normalized\": {\"forward\": %.12Le, \"reverse\": %.12Le, \"shuffle\": %.12Le, \"reverse_shuffle\": %.12Le, \"identity\": %.12Le},\n",
+        forward_area, reverse_area, shuffle_area, reverse_shuffle_area, identity_area);
+    fprintf(out, "  \"acceptance\": {\"all_windows_ok\": %s, \"all_unmultiplexed\": %s, \"bytes_unchanged\": %s, \"sign_reversal\": %s, \"controls_small\": %s, \"path_dependence_pilot\": %s}\n",
+        json_bool(all_windows_ok),
+        json_bool(all_unmultiplexed),
+        json_bool(bytes_unchanged),
+        json_bool(sign_reversal),
+        json_bool(controls_small),
+        json_bool(path_pilot));
+    fprintf(out, "}\n");
+    fclose(out);
+    printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"primary_nb_coherence\"}\n",
+        path_pilot ? "PATH_DEPENDENCE_PILOT_OBSERVED" : "PATH_DEPENDENCE_NOT_ESTABLISHED",
+        result_path);
+    return 0;
+}
+
 int main(int argc, char **argv) {
     const char *output_root = NULL;
     bool coherence_operator_mode = false;
+    bool path_dependence_mode = false;
     if (argc == 3 && strcmp(argv[1], "--output-root") == 0) {
         output_root = argv[2];
     } else if (argc == 4 && strcmp(argv[1], "--coherence-operators") == 0 &&
                strcmp(argv[2], "--output-root") == 0) {
         coherence_operator_mode = true;
         output_root = argv[3];
+    } else if (argc == 4 && strcmp(argv[1], "--path-dependence") == 0 &&
+               strcmp(argv[2], "--output-root") == 0) {
+        path_dependence_mode = true;
+        output_root = argv[3];
     } else if (argc == 2 && strcmp(argv[1], "--self-test") == 0) {
         return self_test();
     } else {
-        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root>\n", argv[0]);
+        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root>\n", argv[0]);
         return 2;
     }
     if (output_root[0] != '/') {
@@ -898,6 +1208,11 @@ int main(int argc, char **argv) {
 
     if (coherence_operator_mode) {
         int rc = run_coherence_operator_mode(output_root, &carrier, initial_digest);
+        free(carrier.bytes);
+        return rc;
+    }
+    if (path_dependence_mode) {
+        int rc = run_path_dependence_mode(output_root, &carrier, initial_digest);
         free(carrier.bytes);
         return rc;
     }

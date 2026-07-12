@@ -30,6 +30,13 @@ MODES: dict[str, dict[str, Any]] = {
         "failed_status": "F10_COHERENCE_OPERATOR_TARGET_FAILED",
         "claim_ceiling": "Controlled coherence-operator PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
     },
+    "path-dependence": {
+        "worker_args": ["--path-dependence"],
+        "result_file": "F10_PATH_DEPENDENCE_PILOT_RESULT.json",
+        "complete_status": "F10_PATH_DEPENDENCE_TARGET_COMPLETE",
+        "failed_status": "F10_PATH_DEPENDENCE_TARGET_FAILED",
+        "claim_ceiling": "Path-dependence pilot only; no coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
+    },
 }
 FORBIDDEN_PROCESS_MARKERS = (
     "f10_pmc_first_light_worker",
