@@ -1,0 +1,83 @@
+{
+  "schema_id": "CAT_CAS_SMALL_WALL_FP_PIPELINE_HISTORY_CHECKPOINT_V1",
+  "result": "FP_PIPELINE_HISTORY_RESPONSE_NOT_ESTABLISHED",
+  "run_id": "f10_fp_pipeline_history_0",
+  "mode": "fp-pipeline-history",
+  "source_binding": {
+    "source_bundle_sha256": "7136c00d272d5016ea277976c6d12fea2e724d687dedc1e4703222aac878ac46",
+    "source_hashes": {
+      "f10_pmc_first_light_target.py": "b1202c75e73d6d40b48c211097f410deb029c1869a742351384cb71d045e695a",
+      "f10_pmc_first_light_worker.c": "674c365addf6bd01020de971d1ee88461353efabab059654cb02b91ad93e26b6"
+    }
+  },
+  "run_paths": {
+    "local_run": "runs/f10_fp_pipeline_history_0",
+    "worker_result": "runs/f10_fp_pipeline_history_0/F10_FP_PIPELINE_HISTORY_RESULT.json",
+    "final_result": "runs/f10_fp_pipeline_history_0/FINAL_RESULT.json",
+    "controller_result": "runs/f10_fp_pipeline_history_0/CONTROLLER_RESULT.json"
+  },
+  "lab_device": {
+    "host": "root@192.168.137.100",
+    "cpu_model": "AMD Phenom(tm) II X6 1090T Processor",
+    "kernel": "6.12.86+deb13-amd64"
+  },
+  "predeclared_experiment": {
+    "carrier": "CAT_CAS-owned floating-point/division execution-unit history over compiled arithmetic blocks",
+    "source_operator": "neutral, forward, reverse, or shuffle floating-point add/multiply/divide block histories on core 5",
+    "sentinel": "fixed floating-point arithmetic block sequence on core 5",
+    "observable": "fp_pipeline_group PMU cycle counters and sentinel duration",
+    "killing_control": "neutral versus shuffle FP pipeline control spread",
+    "restoration_class": "static arithmetic-pattern digest unchanged after history and after neutral restore; no physical restoration claim beyond the measured equivalence"
+  },
+  "transaction_integrity": {
+    "target_status": "F10_FP_PIPELINE_HISTORY_TARGET_COMPLETE",
+    "worker_status": "FP_PIPELINE_HISTORY_RESPONSE_NOT_ESTABLISHED",
+    "copy_verified": true,
+    "verified_file_count": 2,
+    "remote_cleaned": true,
+    "remote_returncode": 0,
+    "temperature_preflight_c": 43.5,
+    "temperature_post_c": 44.0,
+    "temperature_veto_c": 68.0,
+    "temperature_below_veto": true,
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "forbidden_process_matches_preflight": 0,
+    "forbidden_process_matches_cleanup": 0
+  },
+  "observed_counts": {
+    "cpu_cycles_not_halted": {
+      "identity": 941920,
+      "forward": 941023,
+      "reverse": 940987,
+      "shuffle": 944397,
+      "forward_reverse_delta": 36,
+      "control_floor": 2477,
+      "threshold": 10000,
+      "signal": false
+    },
+    "duration_ns": {
+      "identity": 301335,
+      "forward": 297959,
+      "reverse": 297771,
+      "shuffle": 298930,
+      "forward_reverse_delta": 188,
+      "control_floor": 2405,
+      "threshold": 10000,
+      "signal": false
+    }
+  },
+  "acceptance": {
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "patterns_unchanged_after_history": true,
+    "patterns_unchanged_after_restore": true,
+    "cycle_signal": false,
+    "duration_signal": false,
+    "fp_pipeline_history_response": false
+  },
+  "claim_ceiling": "Floating-point/division pipeline timing/PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, target coupling, or Small Wall crossing claim",
+  "frontier_update": "The floating-point/division execution-unit history carrier is negative under this sentinel. Do not rerun this neutral/forward/reverse/shuffle FP pipeline sequence unchanged."
+}

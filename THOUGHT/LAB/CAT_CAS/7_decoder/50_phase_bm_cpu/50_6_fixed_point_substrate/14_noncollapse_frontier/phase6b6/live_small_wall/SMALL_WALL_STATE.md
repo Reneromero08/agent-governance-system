@@ -834,6 +834,7 @@ F10_TRANSLATION_HISTORY_CHECKPOINT_20260712.json
 F10_PREFETCH_STREAM_CHECKPOINT_20260712.json
 F10_CODE_FOOTPRINT_HISTORY_CHECKPOINT_20260712.json
 F10_RETURN_STACK_HISTORY_CHECKPOINT_20260712.json
+F10_FP_PIPELINE_HISTORY_CHECKPOINT_20260712.json
 CODED_PREPROJECTION_DECLARATION_SHAM_CHECKPOINT_20260712.json
 CODED_PREPROJECTION_PHASE_LOCAL_CHECKPOINT_20260712.json
 CODED_PREPROJECTION_ACTIVE_QUERY_CHECKPOINT_20260712.json
@@ -2067,14 +2068,68 @@ call/return depth, but the forward/reverse residuals remain inside neutral/shuff
 controls. Do not rerun this neutral/forward/reverse/shuffle return-stack sequence
 unchanged.
 
+### Floating-point/division pipeline history carrier
+
+The FP pipeline history discriminator changed carrier family to execution-unit state:
+compiled floating-point add/multiply/divide blocks with
+neutral/forward/reverse/shuffle histories and a fixed arithmetic sentinel on core 5
+under the `fp_pipeline_group` PMU group:
+
+```text
+run id        f10_fp_pipeline_history_0
+source bundle 7136c00d272d5016ea277976c6d12fea2e724d687dedc1e4703222aac878ac46
+worker status FP_PIPELINE_HISTORY_RESPONSE_NOT_ESTABLISHED
+```
+
+The transaction completed with verified copy-back and remote cleanup. It performed
+zero frequency writes, zero voltage access, zero MSR reads/writes, stayed below the
+68 C temperature veto, found no forbidden CAT_CAS process residue, all PMU windows
+were unmultiplexed, and the static arithmetic-pattern digest was unchanged after
+history and after neutral restore.
+
+FP pipeline sentinel contrasts:
+
+```text
+cpu_cycles_not_halted:
+  identity 941920
+  forward  941023
+  reverse  940987
+  shuffle  944397
+  delta        36
+  floor      2477
+  threshold 10000
+  signal false
+
+duration_ns:
+  identity 301335
+  forward  297959
+  reverse  297771
+  shuffle  298930
+  delta       188
+  floor      2405
+  threshold 10000
+  signal false
+```
+
+Checkpoint:
+
+`F10_FP_PIPELINE_HISTORY_CHECKPOINT_20260712.json`
+
+**Status:** this exact floating-point/division execution-unit history carrier is
+negative. It moves away from cache-line ownership, branch prediction, code footprint,
+translation, prefetch, alias, locked, and process-lifecycle carriers, but the
+forward/reverse residuals remain inside neutral/shuffle controls. Do not rerun this
+neutral/forward/reverse/shuffle FP pipeline sequence unchanged.
+
 ## Cheapest current discriminator
 
 Change carrier family or access model again, not another remap of the same
 phase-local timing/PMU/eviction/active-query/source-phase-chop/restored-history,
 simple branch-history/indirect-target-history/translation-footprint/prefetch-stream
 geometry, same-page-offset store/load alias-history, locked no-op history,
-compiled code-footprint history, return-stack history, the combined active-query/
-source-phase-chop schedule, or the current fresh source-process lifecycle sentinel.
+compiled code-footprint history, return-stack history, FP pipeline history, the
+combined active-query/source-phase-chop schedule, or the current fresh source-process
+lifecycle sentinel.
 The run must stay closed:
 CAT_CAS-owned buffers only, predetermined geometry, no physical-address access, no
 cache-set mapping, no unrelated-process observation, and no MSR or voltage access.
@@ -2110,7 +2165,9 @@ store/load alias sequence unchanged. Do not rerun `f10_locked_history_0` or the 
 neutral/forward/reverse/shuffle locked-history sequence unchanged. Do not rerun
 `f10_code_footprint_history_0` or the same neutral/forward/reverse/shuffle compiled
 code-footprint sequence unchanged. Do not rerun `f10_return_stack_history_0` or the
-same neutral/forward/reverse/shuffle return-stack sequence unchanged.
+same neutral/forward/reverse/shuffle return-stack sequence unchanged. Do not rerun
+`f10_fp_pipeline_history_0` or the same neutral/forward/reverse/shuffle FP pipeline
+sequence unchanged.
 
 ## Current claim ceiling
 
@@ -2163,12 +2220,14 @@ with source-side phase chopping and also stayed negative. `f10_code_footprint_hi
 then tested compiled instruction-stream/code-footprint state and also stayed negative.
 `f10_return_stack_history_0` then tested recursive call/return depth-history state and
 also stayed negative.
+`f10_fp_pipeline_history_0` then tested floating-point/division execution-unit history
+and also stayed negative.
 The next move must change carrier family or access model rather than keep remapping the
 same eviction-sentinel PMU/timing, active-query phase-local, source-phase-chop,
 restored two-line-set ownership-history, simple branch-history, indirect-target-
 history, translation-footprint, store/load alias-history, locked-history,
 prefetch-stream, combined active-query/source-chop, source-process lifecycle,
-compiled code-footprint history, or return-stack history geometry.
+compiled code-footprint history, return-stack history, or FP pipeline history geometry.
 
 ## State update rule
 

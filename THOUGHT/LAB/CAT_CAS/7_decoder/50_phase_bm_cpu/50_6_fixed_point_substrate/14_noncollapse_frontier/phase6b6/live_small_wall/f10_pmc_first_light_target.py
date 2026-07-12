@@ -200,6 +200,13 @@ MODES: dict[str, dict[str, Any]] = {
         "failed_status": "F10_RETURN_STACK_HISTORY_TARGET_FAILED",
         "claim_ceiling": "Return-stack call/return timing/PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, target coupling, or Small Wall crossing claim",
     },
+    "fp-pipeline-history": {
+        "worker_args": ["--fp-pipeline-history"],
+        "result_file": "F10_FP_PIPELINE_HISTORY_RESULT.json",
+        "complete_status": "F10_FP_PIPELINE_HISTORY_TARGET_COMPLETE",
+        "failed_status": "F10_FP_PIPELINE_HISTORY_TARGET_FAILED",
+        "claim_ceiling": "Floating-point/division pipeline timing/PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, target coupling, or Small Wall crossing claim",
+    },
 }
 FORBIDDEN_PROCESS_MARKERS = (
     "f10_pmc_first_light_worker",

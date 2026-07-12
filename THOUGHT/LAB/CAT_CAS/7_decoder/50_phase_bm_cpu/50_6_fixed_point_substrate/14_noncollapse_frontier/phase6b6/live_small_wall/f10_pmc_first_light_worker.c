@@ -60,6 +60,7 @@
 #define PROCESS_LIFECYCLE_RESULT_SCHEMA "CAT_CAS_F10_PROCESS_LIFECYCLE_RESULT_V1"
 #define CODE_FOOTPRINT_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_CODE_FOOTPRINT_HISTORY_RESULT_V1"
 #define RETURN_STACK_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_RETURN_STACK_HISTORY_RESULT_V1"
+#define FP_PIPELINE_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_FP_PIPELINE_HISTORY_RESULT_V1"
 #define PHASE_LOCAL_BANK_LINES 512u
 #define EVICTION_LINES 262144u
 #define EVICTION_ITERATIONS 3
@@ -95,6 +96,9 @@
 #define RETURN_STACK_RESTORE_LOOPS 64u
 #define RETURN_STACK_HISTORY_LOOPS 128u
 #define RETURN_STACK_SENTINEL_LOOPS 64u
+#define FP_PIPELINE_RESTORE_LOOPS 64u
+#define FP_PIPELINE_HISTORY_LOOPS 128u
+#define FP_PIPELINE_SENTINEL_LOOPS 64u
 
 struct event_def {
     const char *name;
@@ -352,6 +356,20 @@ struct return_stack_sequence_spec {
     unsigned int history_loops;
 };
 
+enum fp_pipeline_kind {
+    FP_PIPELINE_NEUTRAL = 0,
+    FP_PIPELINE_FORWARD = 1,
+    FP_PIPELINE_REVERSE = 2,
+    FP_PIPELINE_SHUFFLE = 3,
+    FP_PIPELINE_SENTINEL = 4
+};
+
+struct fp_pipeline_sequence_spec {
+    const char *name;
+    enum fp_pipeline_kind history_pattern;
+    unsigned int history_loops;
+};
+
 static const struct event_def support_events[SUPPORT_EVENTS] = {
     {"cpu_cycles_not_halted", 0x076, 0x00, "core"},
     {"dc_refills_l2_or_nb_all_states", 0x042, 0x1f, "core"},
@@ -417,6 +435,13 @@ static const struct event_def return_stack_group[MAX_GROUP_EVENTS] = {
     {"retired_instructions", 0x0c0, 0x00, "core"},
     {"retired_branch_instructions", 0x0c2, 0x00, "core"},
     {"retired_mispredicted_branch_instructions", 0x0c3, 0x00, "core"}
+};
+
+static const struct event_def fp_pipeline_group[MAX_GROUP_EVENTS] = {
+    {"cpu_cycles_not_halted", 0x076, 0x00, "core"},
+    {"retired_instructions", 0x0c0, 0x00, "core"},
+    {"cache_references", 0x07d, 0x07, "core"},
+    {"cache_misses", 0x07e, 0x07, "core"}
 };
 
 struct read_group_payload {
@@ -4240,6 +4265,299 @@ static int run_return_stack_history_mode(const char *output_root) {
     return 0;
 }
 
+static volatile double fp_pipeline_sink = 1.125;
+
+__attribute__((noinline))
+static double fp_pipeline_block0(double input) {
+    volatile double x = input + 0.000000101;
+    for (unsigned int i = 0; i < 16u; i++) {
+        x = (x * 1.000000119) + 0.000000013;
+        __asm__ __volatile__("" ::: "memory");
+    }
+    return x;
+}
+
+__attribute__((noinline))
+static double fp_pipeline_block1(double input) {
+    volatile double x = input + 0.000000211;
+    for (unsigned int i = 0; i < 16u; i++) {
+        x = (x + 0.000000017) / 1.000000171;
+        __asm__ __volatile__("" ::: "memory");
+    }
+    return x;
+}
+
+__attribute__((noinline))
+static double fp_pipeline_block2(double input) {
+    volatile double x = input + 0.000000307;
+    for (unsigned int i = 0; i < 16u; i++) {
+        x = (x * 0.999999881) + 0.000000031;
+        __asm__ __volatile__("" ::: "memory");
+    }
+    return x;
+}
+
+__attribute__((noinline))
+static double fp_pipeline_block3(double input) {
+    volatile double x = input + 0.000000409;
+    for (unsigned int i = 0; i < 16u; i++) {
+        x = ((x / 1.000000233) * 1.000000017) + 0.000000007;
+        __asm__ __volatile__("" ::: "memory");
+    }
+    return x;
+}
+
+__attribute__((noinline))
+static double run_fp_pipeline_block(unsigned int block, double input) {
+    switch (block & 3u) {
+        case 0u:
+            return fp_pipeline_block0(input);
+        case 1u:
+            return fp_pipeline_block1(input);
+        case 2u:
+            return fp_pipeline_block2(input);
+        default:
+            return fp_pipeline_block3(input);
+    }
+}
+
+static unsigned int fp_pipeline_block_index(enum fp_pipeline_kind kind, unsigned int i) {
+    static const unsigned int neutral_seq[8] = {0u, 2u, 1u, 3u, 3u, 1u, 2u, 0u};
+    static const unsigned int forward_seq[8] = {0u, 1u, 2u, 3u, 0u, 1u, 2u, 3u};
+    static const unsigned int reverse_seq[8] = {3u, 2u, 1u, 0u, 3u, 2u, 1u, 0u};
+    static const unsigned int shuffle_seq[8] = {1u, 3u, 0u, 2u, 2u, 0u, 3u, 1u};
+    static const unsigned int sentinel_seq[8] = {0u, 3u, 1u, 2u, 1u, 0u, 2u, 3u};
+    const unsigned int *seq = neutral_seq;
+    switch (kind) {
+        case FP_PIPELINE_NEUTRAL:
+            seq = neutral_seq;
+            break;
+        case FP_PIPELINE_FORWARD:
+            seq = forward_seq;
+            break;
+        case FP_PIPELINE_REVERSE:
+            seq = reverse_seq;
+            break;
+        case FP_PIPELINE_SHUFFLE:
+            seq = shuffle_seq;
+            break;
+        case FP_PIPELINE_SENTINEL:
+            seq = sentinel_seq;
+            break;
+    }
+    return seq[i & 7u];
+}
+
+__attribute__((noinline))
+static void run_fp_pipeline_pattern(enum fp_pipeline_kind kind, unsigned int loops) {
+    double x = fp_pipeline_sink + (double)(kind + 1u) * 0.000001;
+    for (unsigned int loop = 0; loop < loops; loop++) {
+        for (unsigned int i = 0; i < 32u; i++) {
+            unsigned int mixed = i + (loop * 7u);
+            x = run_fp_pipeline_block(fp_pipeline_block_index(kind, mixed), x);
+            __asm__ __volatile__("" ::: "memory");
+        }
+    }
+    fp_pipeline_sink = x;
+}
+
+static uint64_t fp_pipeline_static_digest(void) {
+    static const unsigned char patterns[] = {
+        0u, 2u, 1u, 3u, 3u, 1u, 2u, 0u,
+        0u, 1u, 2u, 3u, 0u, 1u, 2u, 3u,
+        3u, 2u, 1u, 0u, 3u, 2u, 1u, 0u,
+        1u, 3u, 0u, 2u, 2u, 0u, 3u, 1u,
+        0u, 3u, 1u, 2u, 1u, 0u, 2u, 3u,
+        'C', 'A', 'T', '_', 'C', 'A', 'S', '_',
+        'F', 'P', '_', 'P', 'I', 'P', 'E', '_', 'V', '1'
+    };
+    return fnv1a64(patterns, sizeof(patterns));
+}
+
+static int measure_fp_pipeline_window(
+    const struct event_def group[MAX_GROUP_EVENTS],
+    const struct fp_pipeline_sequence_spec *sequence,
+    struct group_result *result,
+    uint64_t *duration_ns,
+    uint64_t *digest_after_history,
+    uint64_t *digest_after_restore
+) {
+    int fds[MAX_GROUP_EVENTS];
+    uint64_t ids[MAX_GROUP_EVENTS];
+    memset(result, 0, sizeof(*result));
+    if (pin_to_core(CATCAS_CORE_B) != 0) return -EINVAL;
+    run_fp_pipeline_pattern(FP_PIPELINE_NEUTRAL, FP_PIPELINE_RESTORE_LOOPS);
+    if (sequence->history_loops > 0u) {
+        run_fp_pipeline_pattern(sequence->history_pattern, sequence->history_loops);
+    }
+    *digest_after_history = fp_pipeline_static_digest();
+    int opened = open_group(group, CATCAS_CORE_B, fds, ids);
+    if (opened != 0) {
+        result->open_errno = -opened;
+        return opened;
+    }
+    result->opened = true;
+    if (ioctl(fds[0], PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t start = monotonic_ns();
+    if (ioctl(fds[0], PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    run_fp_pipeline_pattern(FP_PIPELINE_SENTINEL, FP_PIPELINE_SENTINEL_LOOPS);
+    if (ioctl(fds[0], PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t end = monotonic_ns();
+    int read_rc = read_group(fds[0], result);
+    for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+    if (read_rc != 0) return read_rc;
+    run_fp_pipeline_pattern(FP_PIPELINE_NEUTRAL, FP_PIPELINE_RESTORE_LOOPS);
+    *digest_after_restore = fp_pipeline_static_digest();
+    *duration_ns = end >= start ? end - start : 0;
+    return 0;
+}
+
+static int run_fp_pipeline_history_mode(const char *output_root) {
+    uint64_t initial_digest = fp_pipeline_static_digest();
+    int fp_fds[MAX_GROUP_EVENTS];
+    uint64_t fp_ids[MAX_GROUP_EVENTS];
+    int fp_open_rc = open_group(fp_pipeline_group, CATCAS_CORE_B, fp_fds, fp_ids);
+    if (fp_open_rc == 0) {
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fp_fds[i]);
+    }
+
+    const struct fp_pipeline_sequence_spec sequences[] = {
+        {"neutral_restore_only", FP_PIPELINE_NEUTRAL, 0u},
+        {"forward_fp_pipeline_history", FP_PIPELINE_FORWARD, FP_PIPELINE_HISTORY_LOOPS},
+        {"reverse_fp_pipeline_history", FP_PIPELINE_REVERSE, FP_PIPELINE_HISTORY_LOOPS},
+        {"shuffle_fp_pipeline_history", FP_PIPELINE_SHUFFLE, FP_PIPELINE_HISTORY_LOOPS},
+    };
+    enum { FP_PIPELINE_WINDOW_COUNT = 4 };
+    struct group_result results[FP_PIPELINE_WINDOW_COUNT];
+    uint64_t durations[FP_PIPELINE_WINDOW_COUNT];
+    uint64_t digest_after_history[FP_PIPELINE_WINDOW_COUNT];
+    uint64_t digest_after_restore[FP_PIPELINE_WINDOW_COUNT];
+    int window_rc[FP_PIPELINE_WINDOW_COUNT];
+    for (int i = 0; i < FP_PIPELINE_WINDOW_COUNT; i++) {
+        memset(&results[i], 0, sizeof(results[i]));
+        durations[i] = 0;
+        digest_after_history[i] = 0;
+        digest_after_restore[i] = 0;
+        if (fp_open_rc != 0) {
+            window_rc[i] = -ENODEV;
+        } else {
+            window_rc[i] = measure_fp_pipeline_window(
+                fp_pipeline_group,
+                &sequences[i],
+                &results[i],
+                &durations[i],
+                &digest_after_history[i],
+                &digest_after_restore[i]);
+        }
+    }
+
+    bool all_windows_ok = true;
+    bool all_unmultiplexed = true;
+    bool patterns_unchanged_after_history = true;
+    bool patterns_unchanged_after_restore = true;
+    for (int i = 0; i < FP_PIPELINE_WINDOW_COUNT; i++) {
+        all_windows_ok = all_windows_ok && window_rc[i] == 0;
+        all_unmultiplexed = all_unmultiplexed && results[i].unmultiplexed;
+        patterns_unchanged_after_history =
+            patterns_unchanged_after_history && digest_after_history[i] == initial_digest;
+        patterns_unchanged_after_restore =
+            patterns_unchanged_after_restore && digest_after_restore[i] == initial_digest;
+    }
+
+    uint64_t identity_cycles = event_value_by_name(&results[0], fp_pipeline_group, "cpu_cycles_not_halted");
+    uint64_t forward_cycles = event_value_by_name(&results[1], fp_pipeline_group, "cpu_cycles_not_halted");
+    uint64_t reverse_cycles = event_value_by_name(&results[2], fp_pipeline_group, "cpu_cycles_not_halted");
+    uint64_t shuffle_cycles = event_value_by_name(&results[3], fp_pipeline_group, "cpu_cycles_not_halted");
+    uint64_t cycles_delta = abs_diff_u64(forward_cycles, reverse_cycles);
+    uint64_t cycles_control = abs_diff_u64(identity_cycles, shuffle_cycles);
+    uint64_t cycles_threshold = max_u64(10000u, 3u * cycles_control);
+    bool cycles_signal = cycles_delta > cycles_threshold;
+
+    uint64_t identity_duration = durations[0];
+    uint64_t forward_duration = durations[1];
+    uint64_t reverse_duration = durations[2];
+    uint64_t shuffle_duration = durations[3];
+    uint64_t duration_delta = abs_diff_u64(forward_duration, reverse_duration);
+    uint64_t duration_control = abs_diff_u64(identity_duration, shuffle_duration);
+    uint64_t duration_threshold = max_u64(10000u, 3u * duration_control);
+    bool duration_signal = duration_delta > duration_threshold;
+
+    bool fp_pipeline_history_response = fp_open_rc == 0 && all_windows_ok &&
+        all_unmultiplexed && patterns_unchanged_after_history &&
+        patterns_unchanged_after_restore && (cycles_signal || duration_signal);
+
+    char result_path[4096];
+    int n = snprintf(result_path, sizeof(result_path), "%s/F10_FP_PIPELINE_HISTORY_RESULT.json", output_root);
+    if (n <= 0 || (size_t)n >= sizeof(result_path)) return 1;
+    FILE *out = fopen(result_path, "w");
+    if (!out) {
+        fprintf(stderr, "cannot open result: %s\n", strerror(errno));
+        return 1;
+    }
+    fprintf(out, "{\n");
+    fprintf(out, "  \"schema_id\": \"%s\",\n", FP_PIPELINE_HISTORY_RESULT_SCHEMA);
+    fprintf(out, "  \"status\": \"%s\",\n", fp_pipeline_history_response ? "FP_PIPELINE_HISTORY_RESPONSE_FOUND" : "FP_PIPELINE_HISTORY_RESPONSE_NOT_ESTABLISHED");
+    fprintf(out, "  \"claim_ceiling\": \"Floating-point/division pipeline timing/PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, target coupling, or Small Wall crossing claim\",\n");
+    fprintf(out, "  \"cores\": {\"fp_pipeline_core\": %d},\n", CATCAS_CORE_B);
+    fprintf(out, "  \"perf_interface\": {\"type\": \"PERF_TYPE_RAW\", \"event_format\": \"config:0-7,32-35\", \"umask_format\": \"config:8-15\", \"exclude_kernel\": true, \"exclude_hv\": true},\n");
+    fprintf(out, "  \"source_constraints\": {\"direct_msr_access\": false, \"voltage_access\": false, \"frequency_writes\": 0, \"experiment_owned_compute_only\": true, \"generated_executable_memory\": false, \"physical_address_access\": false, \"cache_set_mapping\": false, \"unrelated_process_observation\": false},\n");
+    fprintf(out, "  \"fp_pipeline_carrier\": {\"compiled_blocks\": 4, \"restore_loops\": %u, \"history_loops\": %u, \"sentinel_loops\": %u, \"operations_per_block\": 16, \"sentinel_blocks_per_loop\": 32, \"digest_kind\": \"fnv1a64_static_pattern\", \"initial_digest_hex\": \"0x%016" PRIx64 "\"},\n",
+        FP_PIPELINE_RESTORE_LOOPS, FP_PIPELINE_HISTORY_LOOPS, FP_PIPELINE_SENTINEL_LOOPS, initial_digest);
+    fprintf(out, "  \"selected_group\": \"fp_pipeline_group\",\n");
+    fprintf(out, "  \"group_open_rc\": %d,\n", fp_open_rc);
+    fprintf(out, "  \"selected_events\": ");
+    print_group_defs(out, fp_pipeline_group);
+    fprintf(out, ",\n");
+    fprintf(out, "  \"predeclared_observable\": {\"history\": \"balanced public floating-point add/multiply/divide block order over CAT_CAS-owned compiled code\", \"restore\": \"neutral FP pipeline wash before and after every measured window\", \"sentinel\": \"fixed FP arithmetic block sequence on the same core\", \"primary_acceptance\": \"forward/reverse cpu_cycles_not_halted delta exceeds max(10000, 3 * neutral/shuffle control spread) or duration delta exceeds max(10000 ns, 3 * neutral/shuffle control spread)\"},\n");
+    fprintf(out, "  \"windows\": [\n");
+    for (int i = 0; i < FP_PIPELINE_WINDOW_COUNT; i++) {
+        fprintf(out, "    {\"name\": \"%s\", \"rc\": %d, \"duration_ns\": %" PRIu64 ", \"history_loops\": %u, \"digest_after_history_hex\": \"0x%016" PRIx64 "\", \"digest_after_restore_hex\": \"0x%016" PRIx64 "\", \"patterns_unchanged_after_history\": %s, \"patterns_unchanged_after_restore\": %s, \"group\": ",
+            sequences[i].name,
+            window_rc[i],
+            durations[i],
+            sequences[i].history_loops,
+            digest_after_history[i],
+            digest_after_restore[i],
+            json_bool(digest_after_history[i] == initial_digest),
+            json_bool(digest_after_restore[i] == initial_digest));
+        print_group_result(out, fp_pipeline_group, &results[i]);
+        fprintf(out, "}%s\n", i + 1 == FP_PIPELINE_WINDOW_COUNT ? "" : ",");
+    }
+    fprintf(out, "  ],\n");
+    fprintf(out, "  \"contrast_counts\": {\n");
+    fprintf(out, "    \"cpu_cycles_not_halted\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s},\n",
+        identity_cycles, forward_cycles, reverse_cycles, shuffle_cycles, cycles_delta, cycles_control, cycles_threshold, json_bool(cycles_signal));
+    fprintf(out, "    \"duration_ns\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s}\n",
+        identity_duration, forward_duration, reverse_duration, shuffle_duration, duration_delta, duration_control, duration_threshold, json_bool(duration_signal));
+    fprintf(out, "  },\n");
+    fprintf(out, "  \"acceptance\": {\"all_windows_ok\": %s, \"all_unmultiplexed\": %s, \"patterns_unchanged_after_history\": %s, \"patterns_unchanged_after_restore\": %s, \"cycle_signal\": %s, \"duration_signal\": %s, \"fp_pipeline_history_response\": %s}\n",
+        json_bool(all_windows_ok),
+        json_bool(all_unmultiplexed),
+        json_bool(patterns_unchanged_after_history),
+        json_bool(patterns_unchanged_after_restore),
+        json_bool(cycles_signal),
+        json_bool(duration_signal),
+        json_bool(fp_pipeline_history_response));
+    fprintf(out, "}\n");
+    fclose(out);
+    printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"fp_pipeline_group\"}\n",
+        fp_pipeline_history_response ? "FP_PIPELINE_HISTORY_RESPONSE_FOUND" : "FP_PIPELINE_HISTORY_RESPONSE_NOT_ESTABLISHED",
+        result_path);
+    return 0;
+}
+
 static int wait_child_ok(pid_t pid, int *child_status) {
     int status = 0;
     pid_t waited = 0;
@@ -6424,6 +6742,7 @@ int main(int argc, char **argv) {
     bool process_lifecycle_mode = false;
     bool code_footprint_history_mode = false;
     bool return_stack_history_mode = false;
+    bool fp_pipeline_history_mode = false;
     if (argc == 3 && strcmp(argv[1], "--output-root") == 0) {
         output_root = argv[2];
     } else if (argc == 4 && strcmp(argv[1], "--coherence-operators") == 0 &&
@@ -6518,10 +6837,14 @@ int main(int argc, char **argv) {
                strcmp(argv[2], "--output-root") == 0) {
         return_stack_history_mode = true;
         output_root = argv[3];
+    } else if (argc == 4 && strcmp(argv[1], "--fp-pipeline-history") == 0 &&
+               strcmp(argv[2], "--output-root") == 0) {
+        fp_pipeline_history_mode = true;
+        output_root = argv[3];
     } else if (argc == 2 && strcmp(argv[1], "--self-test") == 0) {
         return self_test();
     } else {
-        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root> | --eviction-phase-bracketed --output-root <absolute-output-root> | --eviction-phase-bracketed-c2d --output-root <absolute-output-root> | --eviction-phase-bracketed-duration --output-root <absolute-output-root> | --history-sentinel --output-root <absolute-output-root> | --locked-history --output-root <absolute-output-root> | --branch-history --output-root <absolute-output-root> | --indirect-target-history --output-root <absolute-output-root> | --translation-history --output-root <absolute-output-root> | --store-load-alias-history --output-root <absolute-output-root> | --prefetch-stream --output-root <absolute-output-root> | --process-lifecycle --output-root <absolute-output-root> | --code-footprint-history --output-root <absolute-output-root> | --return-stack-history --output-root <absolute-output-root>\n", argv[0]);
+        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root> | --eviction-phase-bracketed --output-root <absolute-output-root> | --eviction-phase-bracketed-c2d --output-root <absolute-output-root> | --eviction-phase-bracketed-duration --output-root <absolute-output-root> | --history-sentinel --output-root <absolute-output-root> | --locked-history --output-root <absolute-output-root> | --branch-history --output-root <absolute-output-root> | --indirect-target-history --output-root <absolute-output-root> | --translation-history --output-root <absolute-output-root> | --store-load-alias-history --output-root <absolute-output-root> | --prefetch-stream --output-root <absolute-output-root> | --process-lifecycle --output-root <absolute-output-root> | --code-footprint-history --output-root <absolute-output-root> | --return-stack-history --output-root <absolute-output-root> | --fp-pipeline-history --output-root <absolute-output-root>\n", argv[0]);
         return 2;
     }
     if (output_root[0] != '/') {
@@ -6655,6 +6978,11 @@ int main(int argc, char **argv) {
     }
     if (return_stack_history_mode) {
         int rc = run_return_stack_history_mode(output_root);
+        free(carrier.bytes);
+        return rc;
+    }
+    if (fp_pipeline_history_mode) {
+        int rc = run_fp_pipeline_history_mode(output_root);
         free(carrier.bytes);
         return rc;
     }
