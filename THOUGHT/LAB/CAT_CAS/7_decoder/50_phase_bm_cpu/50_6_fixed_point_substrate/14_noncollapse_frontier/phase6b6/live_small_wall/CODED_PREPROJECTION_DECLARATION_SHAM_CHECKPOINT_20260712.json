@@ -1,0 +1,122 @@
+{
+  "schema_id": "CAT_CAS_CODED_PREPROJECTION_DECLARATION_SHAM_CHECKPOINT_V1",
+  "claim_ceiling": "CONTROLLED_COHERENCE_STATE_FOUND",
+  "run": {
+    "run_id": "coded_preprojection_warm_declaration_sham_0",
+    "pilot_variant": "coded-preprojection-warm-declaration-sham-loop",
+    "source_bundle_sha256": "168bf9320acd35efb15ca6366c92788b04fcdebdf588a95c048f40f28aed7f52",
+    "schedule_sha256": "89e53ef27c3799cc9c319283821e728e304a8b36a92ac1a76088f28934992310",
+    "schedule_tokens": [
+      "WU",
+      "WU",
+      "N0",
+      "P0",
+      "P1",
+      "P2",
+      "P3",
+      "M0",
+      "M1",
+      "M2",
+      "M3",
+      "C0",
+      "C1",
+      "C2",
+      "C3",
+      "N1"
+    ],
+    "physical_footprint_pattern": {
+      "P": ["equal", "equal", "equal", "equal"],
+      "M": ["equal", "equal", "equal", "equal"],
+      "C": ["equal", "equal", "equal", "equal"]
+    },
+    "final_status": "GATE_A_FIRST_LIGHT_COMPLETE",
+    "capture_quality_classification": "CAPTURE_ACCEPTED_WITH_SERVICE_SPIKES",
+    "copy_verified": true,
+    "remote_cleaned": true,
+    "restoration_complete": true,
+    "preflight_temperature_c": 41.5,
+    "frequency_write_attempt_count": 8,
+    "restoration_readback": {
+      "policy4": {
+        "scaling_min_freq": 800000,
+        "scaling_max_freq": 3200000
+      },
+      "policy5": {
+        "scaling_min_freq": 800000,
+        "scaling_max_freq": 3200000
+      }
+    },
+    "forbidden_access": {
+      "voltage_writes": 0,
+      "msr_reads": 0,
+      "msr_writes": 0
+    },
+    "integrity": {
+      "sample_count_per_slot": [
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000
+      ],
+      "skipped_deadline_count": 0,
+      "missed_deadline_count": 0,
+      "record_integrity_failure": false,
+      "missing_slot": false,
+      "sender_spill": false,
+      "sufficient_during_burst_samples": true,
+      "all_bursts_completed_inside_slots": true
+    },
+    "decoded_coordinates": {
+      "declaration_sham_plus": {
+        "real": 41.055859375,
+        "imag": 7.241796874999999,
+        "abs": 41.689653524568115
+      },
+      "declaration_sham_minus": {
+        "real": 32.59126420454545,
+        "imag": 17.296093750000004,
+        "abs": 36.89641393766168
+      },
+      "post_projection_control": {
+        "real": -1.830468750000001,
+        "imag": 1.1906249999999974,
+        "abs": 2.1836217015205635
+      }
+    },
+    "neutral_restoration": {
+      "before_slot": 2,
+      "after_slot": 15,
+      "before_mean_response_cycles": 83.01796875,
+      "after_mean_response_cycles": 82.542109375,
+      "absolute_delta_cycles": 0.47585937499999886,
+      "tolerance_cycles": 5.0,
+      "passed": true
+    },
+    "declaration_sham_null_bound_cycles": 5.0,
+    "declaration_sham_null_passed": false,
+    "fold_odd_opposed": false,
+    "fold_odd_signal_candidate": false,
+    "engineering_candidate": false,
+    "result_path": "runs/coded_preprojection_warm_declaration_sham_0"
+  },
+  "adjudication": {
+    "marker": "CODED_PREPROJECTION_DECLARATION_SHAM_RESIDUAL_CURVATURE",
+    "h5_confirmed": false,
+    "h5_killed": false,
+    "small_wall_crossed": false,
+    "rationale": "The declaration-sham control completed with full integrity, verified copy-back, remote cleanup, and neutral restoration. It kept the restored candidate's P/M/C declaration and timing but made all P, M, and C physical footprints equal. The frozen decoder did not satisfy the strict null bound, but it also did not reproduce the restored candidate's opposed fold-odd signature: both declaration-sham imag components were positive. This confirms an equal-footprint residual-curvature wall while arguing against label declaration alone as the source of the restored candidate's opposed fold-odd response.",
+    "remaining_wall": "baseline-canceling equal-footprint curvature control or a stronger physical restoration law"
+  }
+}

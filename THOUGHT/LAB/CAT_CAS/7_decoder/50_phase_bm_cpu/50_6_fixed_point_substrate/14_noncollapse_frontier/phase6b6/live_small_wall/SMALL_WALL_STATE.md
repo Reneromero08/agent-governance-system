@@ -6,7 +6,7 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`CODED_PREPROJECTION_QUERY_OFF_RESIDUAL_CURVATURE`
+`CODED_PREPROJECTION_DECLARATION_SHAM_RESIDUAL_CURVATURE`
 
 **Active wall:**
 The current wall is now restoration-clean physical coupling for a declared
@@ -25,10 +25,14 @@ same warm-restored geometry with a scrambled public query binding and decoded nu
 under the frozen quadrature weights. `coded_preprojection_warm_query_off_0` completed
 and restored with equal physical footprint through the query window, but it did not
 satisfy the predeclared null bound; it produced same-sign residual curvature rather
-than the candidate's opposed fold-odd response. The active wall is now null-control
-baseline curvature: declaration-sham or a stronger query-off cancellation must
-distinguish declaration/slot curvature from true pre-projection coupling before any
-Small Wall crossing claim.
+than the candidate's opposed fold-odd response. `coded_preprojection_warm_declaration_sham_0`
+then kept the candidate's P/M/C declarations and timing while making every P, M, and C
+physical footprint equal. It also produced same-sign residual curvature and no opposed
+fold-odd coordinate. The active wall is now phase-local baseline cancellation:
+equal-footprint curvature is real enough to break strict null bounds, but declaration
+alone does not reproduce the restored candidate's opposed response. Any next promotion
+needs a schedule that cancels slot/decay curvature by construction rather than
+subtracting it after labels are visible.
 
 ## Established
 
@@ -573,6 +577,7 @@ F10_PATH_DUAL_OBSERVE_CHECKPOINT_20260712.json
 F10_PATH_RW_OBSERVE_CHECKPOINT_20260712.json
 F10_ROUTE_OPERATOR_COMPARISON_CHECKPOINT_20260712.json
 F10_ROUTE_STATE_PILOT_CHECKPOINT_20260712.json
+CODED_PREPROJECTION_DECLARATION_SHAM_CHECKPOINT_20260712.json
 ```
 
 Historical V2 Gate A source was restored and should remain a sealed reference. New
@@ -851,8 +856,8 @@ Checkpoint:
 **Status:** restored physical fold-odd response candidate with query-scramble killed.
 Do not claim `SMALL_WALL_CROSSED`: the repaired warm loop clears source-off,
 post-projection, private-fold sign, neutral restoration, and query-scramble, but
-physical query-off and declaration-sham killing controls remain pending under the
-repaired geometry.
+equal-footprint baseline curvature still has to be canceled by construction before
+promotion.
 
 The query-off run used the same warm-restored geometry with equal footprint in the
 query window:
@@ -891,8 +896,46 @@ Checkpoint:
 
 **Status:** H5 remains unresolved rather than confirmed. Query-scramble is killed;
 query-off is not clean-null because equal-footprint query slots retain same-sign
-curvature. The next useful discriminator is declaration-sham or a stronger
-baseline-canceling query-off control, not a new PMU/MOESI branch.
+curvature. It did not reproduce the restored candidate's opposed fold-odd signature.
+
+The declaration-sham run kept the restored candidate's public P/M/C declaration and
+timing, but forced every P, M, and C physical footprint to the equal footprint:
+
+```text
+run id        coded_preprojection_warm_declaration_sham_0
+schedule      WU WU N0 P0 P1 P2 P3 M0 M1 M2 M3 C0 C1 C2 C3 N1
+source bundle 168bf9320acd35efb15ca6366c92788b04fcdebdf588a95c048f40f28aed7f52
+schedule hash 89e53ef27c3799cc9c319283821e728e304a8b36a92ac1a76088f28934992310
+```
+
+The transaction completed, copied back, cleaned the remote run root, restored policies
+4 and 5 to `800000-3200000` kHz by readback, and performed zero voltage access and
+zero MSR access. Capture was accepted with service spikes, all 16 slots had 1000
+samples, all stimulus bursts completed inside their slots, there were no skipped
+deadlines, no missing slots, no sender spill, and no record-integrity failure.
+
+The frozen decoder again did not pass the strict null bound, but it stayed same-signed
+instead of reproducing the restored candidate's opposed fold-odd coordinate:
+
+```text
+declaration-sham plus   imag  +7.241796874999999
+declaration-sham minus  imag +17.296093750000004
+post control            imag  +1.1906249999999974
+null bound                    5.0
+neutral delta                 0.47585937499999886
+neutral tolerance             5.0
+```
+
+Checkpoint:
+
+`CODED_PREPROJECTION_DECLARATION_SHAM_CHECKPOINT_20260712.json`
+
+**Status:** H5 remains unresolved rather than confirmed or killed. Query-scramble is a
+clean null; query-off and declaration-sham expose equal-footprint same-sign curvature;
+declaration alone does not produce the opposed response. The next useful discriminator
+is a phase-local baseline-canceling schedule that places matched controls adjacent to
+each public phase before decoding, not another PMU/MOESI branch or an unchanged
+query-off repeat.
 
 ### H6 - Alternative carriers remain available
 
@@ -912,10 +955,11 @@ operator, observability, or restoration wall that it can attack.
 
 ## Cheapest current discriminator
 
-Build the next warm-restored discriminator: declaration-sham using the same restored
-neutral geometry as `coded_preprojection_loop_2`,
-`coded_preprojection_warm_query_scramble_0`, and
-`coded_preprojection_warm_query_off_0`.
+Build the next warm-restored discriminator as a phase-local baseline-canceling coded
+loop. The current sequential layout lets equal-footprint slot curvature leak into the
+same quadrature decoder. The next schedule should interleave each public query phase
+with its matched post/equal control so the primary observable is phase-local before
+the four-point lock-in is reconstructed.
 
 The next probe should answer:
 
@@ -927,8 +971,9 @@ The next probe should answer:
    for pre-projection coupling?
 3. Do post-projection, query-off, source-off, declaration-sham, and
    private-fold controls behave as predicted before any promotion?
-4. Does declaration alone reproduce the query-off same-sign curvature, or does it stay
-   null while preserving the post-warmup neutral restoration class?
+4. Does phase-local baseline cancellation remove the equal-footprint same-sign
+   curvature while preserving sensitivity to the restored candidate's physical
+   P/M footprint contrast?
 
 Do not run another scalar PMU route metric, unconditioned transient timing repeat, or
 unlabeled cache-line rectangle unchanged. The useful build now is a coded physical loop
@@ -941,11 +986,11 @@ with the model's controls preserved.
 The next major scientific threshold is a physical coded pre-projection response with
 restoration and killing controls. `coded_preprojection_loop_2` is a restored physical
 fold-odd response candidate, and `coded_preprojection_warm_query_scramble_0` killed the
-physical query-scramble alternative. `coded_preprojection_warm_query_off_0` exposed a
-same-sign residual-curvature wall instead of a clean null or an opposed fold-odd kill.
-The next useful marker remains short of `SMALL_WALL_CROSSED` until declaration-sham or
-a stronger query-off baseline-canceling control resolves that wall under the same
-restored geometry.
+physical query-scramble alternative. `coded_preprojection_warm_query_off_0` and
+`coded_preprojection_warm_declaration_sham_0` exposed a same-sign residual-curvature
+wall instead of a clean null or an opposed fold-odd kill. The next useful marker
+remains short of `SMALL_WALL_CROSSED` until a phase-local baseline-canceling control
+resolves that wall under the same restored geometry.
 
 ## State update rule
 

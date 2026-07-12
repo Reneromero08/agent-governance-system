@@ -38,6 +38,7 @@ CODED_PREPROJECTION_RESTORED_SCHEDULE_SHA256 = "90538e09de19f90699adabdb2e283a73
 CODED_PREPROJECTION_WARM_RESTORED_SCHEDULE_SHA256 = "94cbace65638dd457983475db0944e37b9e9bf9fec96ae1a8dbb4515db663c3b"
 CODED_PREPROJECTION_WARM_QUERY_SCRAMBLE_SCHEDULE_SHA256 = "88a93ac2a565f612a3a3789b515a187dbb1e4196519962d56a2be09df2eb0ca7"
 CODED_PREPROJECTION_WARM_QUERY_OFF_SCHEDULE_SHA256 = "95d25a543007bdfcdb002ff0ce36642e9f64ef2280d262261e5ea17557482137"
+CODED_PREPROJECTION_WARM_DECLARATION_SHAM_SCHEDULE_SHA256 = "89e53ef27c3799cc9c319283821e728e304a8b36a92ac1a76088f28934992310"
 READONLY_MICRO_READ_HZ = 2_000
 CODED_PREPROJECTION_READ_HZ = 2_000
 LEGACY_READ_HZ = 8_000
@@ -62,6 +63,7 @@ CODED_PREPROJECTION_VARIANTS = frozenset({
     "coded-preprojection-warm-restored-loop",
     "coded-preprojection-warm-query-scramble-loop",
     "coded-preprojection-warm-query-off-loop",
+    "coded-preprojection-warm-declaration-sham-loop",
 })
 CODED_PREPROJECTION_RESTORED_VARIANTS = frozenset({
     "coded-preprojection-restored-loop",
@@ -70,6 +72,7 @@ CODED_PREPROJECTION_WARM_RESTORED_VARIANTS = frozenset({
     "coded-preprojection-warm-restored-loop",
     "coded-preprojection-warm-query-scramble-loop",
     "coded-preprojection-warm-query-off-loop",
+    "coded-preprojection-warm-declaration-sham-loop",
 })
 CODED_PREPROJECTION_QUERY_SCRAMBLE_VARIANTS = frozenset({
     "coded-preprojection-warm-query-scramble-loop",
@@ -77,8 +80,13 @@ CODED_PREPROJECTION_QUERY_SCRAMBLE_VARIANTS = frozenset({
 CODED_PREPROJECTION_QUERY_OFF_VARIANTS = frozenset({
     "coded-preprojection-warm-query-off-loop",
 })
+CODED_PREPROJECTION_DECLARATION_SHAM_VARIANTS = frozenset({
+    "coded-preprojection-warm-declaration-sham-loop",
+})
 CODED_PREPROJECTION_NULL_CONTROL_VARIANTS = (
-    CODED_PREPROJECTION_QUERY_SCRAMBLE_VARIANTS | CODED_PREPROJECTION_QUERY_OFF_VARIANTS
+    CODED_PREPROJECTION_QUERY_SCRAMBLE_VARIANTS |
+    CODED_PREPROJECTION_QUERY_OFF_VARIANTS |
+    CODED_PREPROJECTION_DECLARATION_SHAM_VARIANTS
 )
 READONLY_TIMING_VARIANTS = READONLY_VARIANTS | CODED_PREPROJECTION_VARIANTS
 SOURCE_NAMES = (
@@ -99,6 +107,20 @@ FORBIDDEN_PROCESS_MARKERS = (
     "explicit_slot_runtime",
     "gate_a_worker_live",
 )
+
+
+def coded_preprojection_schedule_sha256(pilot_variant: str) -> str:
+    if pilot_variant in CODED_PREPROJECTION_QUERY_SCRAMBLE_VARIANTS:
+        return CODED_PREPROJECTION_WARM_QUERY_SCRAMBLE_SCHEDULE_SHA256
+    if pilot_variant in CODED_PREPROJECTION_QUERY_OFF_VARIANTS:
+        return CODED_PREPROJECTION_WARM_QUERY_OFF_SCHEDULE_SHA256
+    if pilot_variant in CODED_PREPROJECTION_DECLARATION_SHAM_VARIANTS:
+        return CODED_PREPROJECTION_WARM_DECLARATION_SHAM_SCHEDULE_SHA256
+    if pilot_variant in CODED_PREPROJECTION_WARM_RESTORED_VARIANTS:
+        return CODED_PREPROJECTION_WARM_RESTORED_SCHEDULE_SHA256
+    if pilot_variant in CODED_PREPROJECTION_RESTORED_VARIANTS:
+        return CODED_PREPROJECTION_RESTORED_SCHEDULE_SHA256
+    return CODED_PREPROJECTION_SCHEDULE_SHA256
 
 
 class LiveGateAError(RuntimeError):
@@ -482,23 +504,7 @@ def run_worker_monitored(
     pilot_variant: str,
 ) -> tuple[int, str, str, list[dict[str, Any]], str | None]:
     if pilot_variant in CODED_PREPROJECTION_VARIANTS:
-        schedule_sha256 = (
-            CODED_PREPROJECTION_WARM_QUERY_SCRAMBLE_SCHEDULE_SHA256
-            if pilot_variant in CODED_PREPROJECTION_QUERY_SCRAMBLE_VARIANTS
-            else (
-                CODED_PREPROJECTION_WARM_QUERY_OFF_SCHEDULE_SHA256
-                if pilot_variant in CODED_PREPROJECTION_QUERY_OFF_VARIANTS
-                else (
-                    CODED_PREPROJECTION_WARM_RESTORED_SCHEDULE_SHA256
-                    if pilot_variant in CODED_PREPROJECTION_WARM_RESTORED_VARIANTS
-                    else (
-                        CODED_PREPROJECTION_RESTORED_SCHEDULE_SHA256
-                        if pilot_variant in CODED_PREPROJECTION_RESTORED_VARIANTS
-                        else CODED_PREPROJECTION_SCHEDULE_SHA256
-                    )
-                )
-            )
-        )
+        schedule_sha256 = coded_preprojection_schedule_sha256(pilot_variant)
         read_hz = CODED_PREPROJECTION_READ_HZ
     elif pilot_variant in READONLY_VARIANTS:
         schedule_sha256 = READONLY_MICRO_SCHEDULE_SHA256
@@ -988,15 +994,7 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
         source_off_slots = (2, 15)
         neutral_before_slot = 2
         neutral_after_slot = 15
-        schedule_sha256 = (
-            CODED_PREPROJECTION_WARM_QUERY_SCRAMBLE_SCHEDULE_SHA256
-            if pilot_variant in CODED_PREPROJECTION_QUERY_SCRAMBLE_VARIANTS
-            else (
-                CODED_PREPROJECTION_WARM_QUERY_OFF_SCHEDULE_SHA256
-                if pilot_variant in CODED_PREPROJECTION_QUERY_OFF_VARIANTS
-                else CODED_PREPROJECTION_WARM_RESTORED_SCHEDULE_SHA256
-            )
-        )
+        schedule_sha256 = coded_preprojection_schedule_sha256(pilot_variant)
     elif pilot_variant in CODED_PREPROJECTION_RESTORED_VARIANTS:
         plus_slots = [2, 3, 4, 5]
         minus_slots = [6, 7, 8, 9]
@@ -1117,7 +1115,15 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
     null_control_kind = (
         "query_scramble"
         if pilot_variant in CODED_PREPROJECTION_QUERY_SCRAMBLE_VARIANTS
-        else ("query_off" if pilot_variant in CODED_PREPROJECTION_QUERY_OFF_VARIANTS else None)
+        else (
+            "query_off"
+            if pilot_variant in CODED_PREPROJECTION_QUERY_OFF_VARIANTS
+            else (
+                "declaration_sham"
+                if pilot_variant in CODED_PREPROJECTION_DECLARATION_SHAM_VARIANTS
+                else None
+            )
+        )
     )
     coded_null_control = pilot_variant in CODED_PREPROJECTION_NULL_CONTROL_VARIANTS
     coded_null_bound = max(5.0, 3.0 * control_floor)
@@ -1194,6 +1200,9 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
         "query_off_control": pilot_variant in CODED_PREPROJECTION_QUERY_OFF_VARIANTS,
         "query_off_null_bound_cycles": coded_null_bound if pilot_variant in CODED_PREPROJECTION_QUERY_OFF_VARIANTS else None,
         "query_off_null_passed": coded_null_passed if pilot_variant in CODED_PREPROJECTION_QUERY_OFF_VARIANTS else None,
+        "declaration_sham_control": pilot_variant in CODED_PREPROJECTION_DECLARATION_SHAM_VARIANTS,
+        "declaration_sham_null_bound_cycles": coded_null_bound if pilot_variant in CODED_PREPROJECTION_DECLARATION_SHAM_VARIANTS else None,
+        "declaration_sham_null_passed": coded_null_passed if pilot_variant in CODED_PREPROJECTION_DECLARATION_SHAM_VARIANTS else None,
         "sufficient_during_burst_samples": sufficient,
         "all_bursts_completed_inside_slots": all(
             bool(burst_by_slot[slot].get("completed_before_slot_end")) for slot in stimulus_slots
@@ -1338,6 +1347,7 @@ def execute(source_root: Path, output_root: Path, pilot_variant: str) -> dict[st
             "coded-preprojection-warm-restored-loop",
             "coded-preprojection-warm-query-scramble-loop",
             "coded-preprojection-warm-query-off-loop",
+            "coded-preprojection-warm-declaration-sham-loop",
         },
         "unknown pilot variant",
     )
@@ -1441,23 +1451,7 @@ def execute(source_root: Path, output_root: Path, pilot_variant: str) -> dict[st
         "source_hashes": source_digest(source_root)[1],
         "user_directive_sha256": USER_DIRECTIVE_SHA256,
         "schedule_sha256": (
-            (
-                CODED_PREPROJECTION_WARM_QUERY_SCRAMBLE_SCHEDULE_SHA256
-                if pilot_variant in CODED_PREPROJECTION_QUERY_SCRAMBLE_VARIANTS
-                else (
-                    CODED_PREPROJECTION_WARM_QUERY_OFF_SCHEDULE_SHA256
-                    if pilot_variant in CODED_PREPROJECTION_QUERY_OFF_VARIANTS
-                    else (
-                        CODED_PREPROJECTION_WARM_RESTORED_SCHEDULE_SHA256
-                        if pilot_variant in CODED_PREPROJECTION_WARM_RESTORED_VARIANTS
-                        else (
-                            CODED_PREPROJECTION_RESTORED_SCHEDULE_SHA256
-                            if pilot_variant in CODED_PREPROJECTION_RESTORED_VARIANTS
-                            else CODED_PREPROJECTION_SCHEDULE_SHA256
-                        )
-                    )
-                )
-            )
+            coded_preprojection_schedule_sha256(pilot_variant)
             if pilot_variant in CODED_PREPROJECTION_VARIANTS
             else (READONLY_MICRO_SCHEDULE_SHA256 if pilot_variant in READONLY_VARIANTS else SCHEDULE_SHA256)
         ),
@@ -1506,6 +1500,7 @@ def parse_args() -> argparse.Namespace:
             "coded-preprojection-warm-restored-loop",
             "coded-preprojection-warm-query-scramble-loop",
             "coded-preprojection-warm-query-off-loop",
+            "coded-preprojection-warm-declaration-sham-loop",
         ),
         default="pn",
     )
