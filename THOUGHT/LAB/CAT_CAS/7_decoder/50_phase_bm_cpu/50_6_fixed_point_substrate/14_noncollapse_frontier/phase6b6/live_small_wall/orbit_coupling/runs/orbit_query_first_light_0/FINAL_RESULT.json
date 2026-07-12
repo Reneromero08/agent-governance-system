@@ -1,0 +1,124 @@
+{
+  "adjudication_status": "ORBITSTATE_PHYSICAL_QUERY_COUPLING_NOT_ESTABLISHED",
+  "cache_set_mapping": false,
+  "capture_manifest_sha256": "1106eaec1029bea9a442d7cc9b454532e567345bc03f46f991dee9c47d4ac6fd",
+  "claim_ceiling": "ORBITSTATE_PHYSICAL_QUERY_COUPLING_CANDIDATE; SMALL_WALL_CROSSED forbidden",
+  "compile_command": [
+    "cc",
+    "-std=c11",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-pedantic",
+    "-O2",
+    "-march=amdfam10",
+    "-mtune=amdfam10",
+    "-fno-lto",
+    "-pthread",
+    "-I",
+    "/root/catcas_live_small_wall/orbit_query_first_light_0/source",
+    "/root/catcas_live_small_wall/orbit_query_first_light_0/source/orbit_query_runtime.c",
+    "-lm",
+    "-o",
+    "/root/catcas_live_small_wall/orbit_query_first_light_0/source/orbit_query_runtime"
+  ],
+  "cpu_frequency_policy_restored": true,
+  "failure": null,
+  "feature_freeze_receipt_sha256": "e90cfc0446665a082d12fb104fa458ff16f84423f1c6f1b047c83e0b5a87d1a3",
+  "feature_record_count": 20,
+  "features_frozen_sha256": "f639cdc2e22d8939bcc4a055da5df249501e6f5a6e80ee7ddf765dc6673ca13e",
+  "frequency_writes": 0,
+  "msr_reads": 0,
+  "msr_writes": 0,
+  "physical_address_access": false,
+  "policy_after": {
+    "policy4": {
+      "resolved_path": "/sys/devices/system/cpu/cpufreq/policy4",
+      "scaling_cur_freq": 3200000,
+      "scaling_max_freq": 3200000,
+      "scaling_min_freq": 800000
+    },
+    "policy5": {
+      "resolved_path": "/sys/devices/system/cpu/cpufreq/policy5",
+      "scaling_cur_freq": 3200000,
+      "scaling_max_freq": 3200000,
+      "scaling_min_freq": 800000
+    }
+  },
+  "policy_before": {
+    "policy4": {
+      "resolved_path": "/sys/devices/system/cpu/cpufreq/policy4",
+      "scaling_cur_freq": 1600000,
+      "scaling_max_freq": 3200000,
+      "scaling_min_freq": 800000
+    },
+    "policy5": {
+      "resolved_path": "/sys/devices/system/cpu/cpufreq/policy5",
+      "scaling_cur_freq": 3200000,
+      "scaling_max_freq": 3200000,
+      "scaling_min_freq": 800000
+    }
+  },
+  "preflight_processes": {
+    "forbidden_matches": [],
+    "observed_process_count": 139
+  },
+  "process_cleanup": {
+    "forbidden_matches": [],
+    "observed_process_count": 139
+  },
+  "raw_capture_sha256": "42591a3a721d6d8bc81cb3dac09398bccf2cb39449c5c2793bfab6608153b969",
+  "raw_record_count": 80,
+  "runtime_duration_ns": 240109931,
+  "runtime_results": [
+    {
+      "command": [
+        "/root/catcas_live_small_wall/orbit_query_first_light_0/source/orbit_query_runtime",
+        "--output-root",
+        "/root/catcas_live_small_wall/orbit_query_first_light_0/output/batch_0",
+        "--replicate",
+        "0"
+      ],
+      "post_temperature_c": 47.625,
+      "pre_temperature_c": 47.5,
+      "replicate": 0,
+      "returncode": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "a63292f8c27c2b51b74f3a8115ba748752f28d928628d3ff59344b66d75bfaeb"
+    },
+    {
+      "command": [
+        "/root/catcas_live_small_wall/orbit_query_first_light_0/source/orbit_query_runtime",
+        "--output-root",
+        "/root/catcas_live_small_wall/orbit_query_first_light_0/output/batch_1",
+        "--replicate",
+        "1"
+      ],
+      "post_temperature_c": 47.75,
+      "pre_temperature_c": 47.625,
+      "replicate": 1,
+      "returncode": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "9800f0280c35583cae75462812eeef65762484cd70abc37f5ed32771ee38c208"
+    }
+  ],
+  "schema_id": "CAT_CAS_ORBIT_QUERY_TARGET_RESULT_V1",
+  "source_bundle_sha256": "9ff0640ba34182752d4e7fef8be081fd6380817812a84b336c13d2a72ab56633",
+  "source_hashes": {
+    "orbit_query_model.py": "70121427842dde552a7fb366d29e6872e553db0beb4f58217040161964b49575",
+    "orbit_query_public.py": "e7677fdd7280e20d243670bc472a71d4c5819b472e635c663b72fe483295664d",
+    "orbit_query_runtime.c": "5fbbca6d311a90b84b9a91b570bd10702d9dd1f6c62d615a62bdc4e90c400474",
+    "orbit_query_runtime.h": "d432c359eeb83b285a64bd89387a1f80aa77a5aa710c4f8d9c03a92d79d1c28a",
+    "orbit_query_target.py": "41e764d88c181dd643388dd6531437db00a9b8cc89a57b6f035898a811717326"
+  },
+  "status": "ORBIT_QUERY_TARGET_COMPLETE",
+  "temperature": {
+    "below_veto": true,
+    "path": "/sys/class/hwmon/hwmon0/temp1_input",
+    "post_c": 48.0,
+    "preflight_c": 47.125,
+    "veto_c": 68.0
+  },
+  "unblinding_read_after_features_sha256": true,
+  "voltage_writes": 0
+}

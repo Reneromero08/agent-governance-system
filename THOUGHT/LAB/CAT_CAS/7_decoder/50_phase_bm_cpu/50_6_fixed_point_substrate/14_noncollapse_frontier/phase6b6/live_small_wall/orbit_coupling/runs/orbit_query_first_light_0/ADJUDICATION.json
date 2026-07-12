@@ -1,0 +1,467 @@
+{
+  "acceptance": {
+    "aggregate_bank_swap_complex_transform": true,
+    "aggregate_fold_even_reals_match": false,
+    "aggregate_fold_odd_exceeds_null_ceiling": false,
+    "aggregate_fold_odd_magnitudes_balanced": true,
+    "aggregate_label_swap_complex_invariant": false,
+    "aggregate_opposed_fold_odd_signs": true,
+    "all_replicates_pass_frozen_law": false,
+    "expected_condition_set_present": true,
+    "expected_feature_count_present": true,
+    "expected_replicates_present": true,
+    "restoration_passed": true,
+    "source_work_receipt_matches_frozen_law": true
+  },
+  "adjudication_sha256": "e412bbec7d45a57f06d0990ef0a2a6cf3183398b569f077f586f72393f2e104b",
+  "claim_ceiling": "ORBITSTATE_PHYSICAL_QUERY_COUPLING_CANDIDATE; SMALL_WALL_CROSSED forbidden",
+  "primary_response": "change_to_dirty_delta",
+  "replicate_results": [
+    {
+      "checks": {
+        "bank_swap_complex_transform": false,
+        "fold_even_reals_match": false,
+        "fold_odd_exceeds_null_ceiling": false,
+        "fold_odd_magnitudes_balanced": false,
+        "label_swap_complex_invariant": false,
+        "null_controls_below_ceiling": true,
+        "opposed_fold_odd_signs": true,
+        "restoration_passed": true,
+        "source_work_receipt_matches_frozen_law": true
+      },
+      "passed": false,
+      "replicate_index": 0,
+      "z": {
+        "null_ceiling": 97.5,
+        "physical_bank_swap": {
+          "abs": 19.474342094150437,
+          "imag": -16.999999999999993,
+          "real": 9.49999999999999
+        },
+        "pre_projection_d": {
+          "abs": 118.70130580579136,
+          "imag": -109.0,
+          "real": 46.99999999999997
+        },
+        "pre_projection_fold": {
+          "abs": 33.55964838909967,
+          "imag": 30.5,
+          "real": 13.999999999999998
+        },
+        "public_label_swap": {
+          "abs": 161.01707983937604,
+          "imag": -104.49999999999999,
+          "real": -122.50000000000001
+        },
+        "required_floor": 292.5
+      }
+    },
+    {
+      "checks": {
+        "bank_swap_complex_transform": false,
+        "fold_even_reals_match": false,
+        "fold_odd_exceeds_null_ceiling": false,
+        "fold_odd_magnitudes_balanced": false,
+        "label_swap_complex_invariant": false,
+        "null_controls_below_ceiling": true,
+        "opposed_fold_odd_signs": false,
+        "restoration_passed": true,
+        "source_work_receipt_matches_frozen_law": true
+      },
+      "passed": false,
+      "replicate_index": 1,
+      "z": {
+        "null_ceiling": 95.99999999999999,
+        "physical_bank_swap": {
+          "abs": 96.81554627228006,
+          "imag": 83.5,
+          "real": 49.0
+        },
+        "pre_projection_d": {
+          "abs": 86.81301745706115,
+          "imag": 32.500000000000014,
+          "real": -80.50000000000001
+        },
+        "pre_projection_fold": {
+          "abs": 87.0,
+          "imag": 87.0,
+          "real": 6.618418505007517e-17
+        },
+        "public_label_swap": {
+          "abs": 85.85598406634219,
+          "imag": -26.999999999999986,
+          "real": -81.50000000000003
+        },
+        "required_floor": 287.99999999999994
+      }
+    }
+  ],
+  "schema_id": "CAT_CAS_ORBIT_QUERY_ADJUDICATION_V1",
+  "source_work_results": [
+    {
+      "condition": "pre_projection_d",
+      "phase_ordinals_expected": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "phase_ordinals_receipt": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "replicate_index": 0,
+      "rows_passed": true
+    },
+    {
+      "condition": "pre_projection_fold",
+      "phase_ordinals_expected": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "phase_ordinals_receipt": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "replicate_index": 0,
+      "rows_passed": true
+    },
+    {
+      "condition": "source_off",
+      "phase_ordinals_expected": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "phase_ordinals_receipt": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "replicate_index": 0,
+      "rows_passed": true
+    },
+    {
+      "condition": "query_off",
+      "phase_ordinals_expected": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "phase_ordinals_receipt": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "replicate_index": 0,
+      "rows_passed": true
+    },
+    {
+      "condition": "post_projection",
+      "phase_ordinals_expected": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "phase_ordinals_receipt": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "replicate_index": 0,
+      "rows_passed": true
+    },
+    {
+      "condition": "declaration_sham",
+      "phase_ordinals_expected": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "phase_ordinals_receipt": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "replicate_index": 0,
+      "rows_passed": true
+    },
+    {
+      "condition": "query_scramble",
+      "phase_ordinals_expected": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "phase_ordinals_receipt": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "replicate_index": 0,
+      "rows_passed": true
+    },
+    {
+      "condition": "equal_orbit_odd_zero",
+      "phase_ordinals_expected": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "phase_ordinals_receipt": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "replicate_index": 0,
+      "rows_passed": true
+    },
+    {
+      "condition": "physical_bank_swap",
+      "phase_ordinals_expected": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "phase_ordinals_receipt": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "replicate_index": 0,
+      "rows_passed": true
+    },
+    {
+      "condition": "public_label_swap",
+      "phase_ordinals_expected": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "phase_ordinals_receipt": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "replicate_index": 0,
+      "rows_passed": true
+    },
+    {
+      "condition": "pre_projection_d",
+      "phase_ordinals_expected": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "phase_ordinals_receipt": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "replicate_index": 1,
+      "rows_passed": true
+    },
+    {
+      "condition": "pre_projection_fold",
+      "phase_ordinals_expected": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "phase_ordinals_receipt": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "replicate_index": 1,
+      "rows_passed": true
+    },
+    {
+      "condition": "source_off",
+      "phase_ordinals_expected": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "phase_ordinals_receipt": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "replicate_index": 1,
+      "rows_passed": true
+    },
+    {
+      "condition": "query_off",
+      "phase_ordinals_expected": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "phase_ordinals_receipt": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "replicate_index": 1,
+      "rows_passed": true
+    },
+    {
+      "condition": "post_projection",
+      "phase_ordinals_expected": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "phase_ordinals_receipt": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "replicate_index": 1,
+      "rows_passed": true
+    },
+    {
+      "condition": "declaration_sham",
+      "phase_ordinals_expected": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "phase_ordinals_receipt": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "replicate_index": 1,
+      "rows_passed": true
+    },
+    {
+      "condition": "query_scramble",
+      "phase_ordinals_expected": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "phase_ordinals_receipt": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "replicate_index": 1,
+      "rows_passed": true
+    },
+    {
+      "condition": "equal_orbit_odd_zero",
+      "phase_ordinals_expected": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "phase_ordinals_receipt": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "replicate_index": 1,
+      "rows_passed": true
+    },
+    {
+      "condition": "physical_bank_swap",
+      "phase_ordinals_expected": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "phase_ordinals_receipt": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "replicate_index": 1,
+      "rows_passed": true
+    },
+    {
+      "condition": "public_label_swap",
+      "phase_ordinals_expected": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "phase_ordinals_receipt": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "replicate_index": 1,
+      "rows_passed": true
+    }
+  ],
+  "status": "ORBITSTATE_PHYSICAL_QUERY_COUPLING_NOT_ESTABLISHED",
+  "z_summary": {
+    "null_ceiling": 47.249999999999986,
+    "physical_bank_swap": {
+      "abs": 44.28459099957907,
+      "imag": 33.25,
+      "real": 29.249999999999993
+    },
+    "pre_projection_d": {
+      "abs": 41.75673598355121,
+      "imag": -38.24999999999999,
+      "real": -16.75000000000002
+    },
+    "pre_projection_fold": {
+      "abs": 59.16555163268572,
+      "imag": 58.75,
+      "real": 6.999999999999999
+    },
+    "public_label_swap": {
+      "abs": 121.355109080747,
+      "imag": -65.74999999999999,
+      "real": -102.00000000000003
+    },
+    "required_floor": 141.74999999999994
+  }
+}

@@ -1,0 +1,1 @@
+{"schema_id":"CAT_CAS_ORBIT_QUERY_RUNTIME_EXECUTION_V1","status":"ORBIT_QUERY_RUNTIME_COMPLETE","replicate_index":1,"output_root":"/root/catcas_live_small_wall/orbit_query_first_light_0/output/batch_1"}

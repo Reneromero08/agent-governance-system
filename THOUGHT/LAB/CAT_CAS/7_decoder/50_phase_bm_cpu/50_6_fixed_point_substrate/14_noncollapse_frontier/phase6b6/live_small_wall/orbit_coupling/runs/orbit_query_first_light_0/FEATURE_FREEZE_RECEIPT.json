@@ -1,0 +1,8 @@
+{
+  "capture_manifest_sha256": "1106eaec1029bea9a442d7cc9b454532e567345bc03f46f991dee9c47d4ac6fd",
+  "feature_model_sha256": "e7677fdd7280e20d243670bc472a71d4c5819b472e635c663b72fe483295664d",
+  "features_frozen_sha256": "f639cdc2e22d8939bcc4a055da5df249501e6f5a6e80ee7ddf765dc6673ca13e",
+  "raw_capture_sha256": "42591a3a721d6d8bc81cb3dac09398bccf2cb39449c5c2793bfab6608153b969",
+  "schema_id": "CAT_CAS_ORBIT_QUERY_FEATURE_FREEZE_RECEIPT_V1",
+  "unblinding_loaded": false
+}

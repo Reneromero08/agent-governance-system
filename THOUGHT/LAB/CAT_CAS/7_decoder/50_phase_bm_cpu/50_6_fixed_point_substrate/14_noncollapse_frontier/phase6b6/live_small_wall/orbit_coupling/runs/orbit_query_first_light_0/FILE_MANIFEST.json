@@ -1,0 +1,105 @@
+{
+  "files": [
+    {
+      "path": "ADJUDICATION.json",
+      "sha256": "9baa9b9e20ba789cce6e0f3fdb879a29346433732e904ffa0541d85523f837c1",
+      "size": 9517
+    },
+    {
+      "path": "CAPTURE_MANIFEST.json",
+      "sha256": "1106eaec1029bea9a442d7cc9b454532e567345bc03f46f991dee9c47d4ac6fd",
+      "size": 16252
+    },
+    {
+      "path": "FEATURES_FROZEN.json",
+      "sha256": "f639cdc2e22d8939bcc4a055da5df249501e6f5a6e80ee7ddf765dc6673ca13e",
+      "size": 18827
+    },
+    {
+      "path": "FEATURES_FROZEN.sha256",
+      "sha256": "b66ca96d14d8bf6922dc3b79d51f1bc571e029263f0d7249d4c36f5752b5548d",
+      "size": 65
+    },
+    {
+      "path": "FEATURE_FREEZE_RECEIPT.json",
+      "sha256": "e90cfc0446665a082d12fb104fa458ff16f84423f1c6f1b047c83e0b5a87d1a3",
+      "size": 476
+    },
+    {
+      "path": "FINAL_RESULT.json",
+      "sha256": "d3472911c91a22d13a1adf157a86548457b4945017f8922948bbbbe67136b441",
+      "size": 4442
+    },
+    {
+      "path": "RAW_CAPTURE.jsonl",
+      "sha256": "42591a3a721d6d8bc81cb3dac09398bccf2cb39449c5c2793bfab6608153b969",
+      "size": 62039
+    },
+    {
+      "path": "RUNTIME_STDERR_0.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "RUNTIME_STDERR_1.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "RUNTIME_STDOUT_0.txt",
+      "sha256": "a63292f8c27c2b51b74f3a8115ba748752f28d928628d3ff59344b66d75bfaeb",
+      "size": 203
+    },
+    {
+      "path": "RUNTIME_STDOUT_1.txt",
+      "sha256": "9800f0280c35583cae75462812eeef65762484cd70abc37f5ed32771ee38c208",
+      "size": 203
+    },
+    {
+      "path": "UNBLINDING_MAP.json",
+      "sha256": "f6fbf8dd7644fc24aef76fb6f51ebd9368b621ae6e460246ac5806208e9a24f5",
+      "size": 37610
+    },
+    {
+      "path": "batch_0/CAPTURE_MANIFEST.json",
+      "sha256": "d25c32246ae0d84513f1b9f82c9381743b82c46bf2ab9ac47875d2136172808d",
+      "size": 5318
+    },
+    {
+      "path": "batch_0/RAW_CAPTURE.jsonl",
+      "sha256": "de146ab46979ca5173ff905587f7db8de9b903ee52d7bbb857b439ecea48cf32",
+      "size": 29133
+    },
+    {
+      "path": "batch_0/RUNTIME_SUMMARY.json",
+      "sha256": "0713773b73237364d9ec8a7fbeeb27c4a97d6e89e075abf6aab77aaf1756722b",
+      "size": 463
+    },
+    {
+      "path": "batch_0/UNBLINDING_MAP.json",
+      "sha256": "3f1de467c6a56c16bb07fd1731c13f905ba21cdf60ba65af086f149f69a38a02",
+      "size": 10741
+    },
+    {
+      "path": "batch_1/CAPTURE_MANIFEST.json",
+      "sha256": "3f2fc28c70d6b26fc05b28e5acb287e18d96a3da1dbddf25ab75e7a9f3b40a48",
+      "size": 5318
+    },
+    {
+      "path": "batch_1/RAW_CAPTURE.jsonl",
+      "sha256": "ed0720265408561d530b3193c8c96bb28b422f96e1933d589ffe8f6491756918",
+      "size": 29146
+    },
+    {
+      "path": "batch_1/RUNTIME_SUMMARY.json",
+      "sha256": "4abf2c0d688899ca9bdedf63ec4a04fb6f9425216306dca4d8ef3b02c87b675e",
+      "size": 463
+    },
+    {
+      "path": "batch_1/UNBLINDING_MAP.json",
+      "sha256": "52f860241c37652df9aa03c4d08a3ac8c41f6d2ea1498b4751e5b521b730605a",
+      "size": 10741
+    }
+  ],
+  "schema_id": "CAT_CAS_ORBIT_QUERY_FILE_MANIFEST_V1"
+}

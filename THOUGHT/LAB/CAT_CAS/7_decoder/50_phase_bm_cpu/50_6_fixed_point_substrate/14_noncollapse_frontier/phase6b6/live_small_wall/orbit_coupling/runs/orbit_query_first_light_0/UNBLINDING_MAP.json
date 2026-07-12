@@ -1,0 +1,1546 @@
+{
+  "fresh_process_replicates": 2,
+  "groups": [
+    {
+      "bank_swap": false,
+      "condition": "post_projection",
+      "group_id": "g7c19r0",
+      "member": 23,
+      "public_label_swap": false,
+      "quantized_work": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 0,
+          "positive_work": 2913,
+          "q_theta": 865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 1,
+          "positive_work": 2048,
+          "q_theta": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 2,
+          "positive_work": 1183,
+          "q_theta": -865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 3,
+          "positive_work": 2048,
+          "q_theta": 0,
+          "total_work": 4096
+        }
+      ],
+      "replicate_index": 0,
+      "response_mode": 3,
+      "source_work_receipt": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 0,
+          "positive_work": 2913,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 1,
+          "positive_work": 2048,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 2,
+          "positive_work": 1183,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 3,
+          "positive_work": 2048,
+          "source_rc": 0,
+          "total_work": 4096
+        }
+      ]
+    },
+    {
+      "bank_swap": false,
+      "condition": "pre_projection_d",
+      "group_id": "g2f80r0",
+      "member": 23,
+      "public_label_swap": false,
+      "quantized_work": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 0,
+          "positive_work": 2913,
+          "q_theta": 865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1500,
+          "phase_ordinal": 1,
+          "positive_work": 2596,
+          "q_theta": 548,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 2,
+          "positive_work": 1183,
+          "q_theta": -865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2596,
+          "phase_ordinal": 3,
+          "positive_work": 1500,
+          "q_theta": -548,
+          "total_work": 4096
+        }
+      ],
+      "replicate_index": 0,
+      "response_mode": 0,
+      "source_work_receipt": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 0,
+          "positive_work": 2913,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1500,
+          "phase_ordinal": 1,
+          "positive_work": 2596,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 2,
+          "positive_work": 1183,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2596,
+          "phase_ordinal": 3,
+          "positive_work": 1500,
+          "source_rc": 0,
+          "total_work": 4096
+        }
+      ]
+    },
+    {
+      "bank_swap": false,
+      "condition": "query_scramble",
+      "group_id": "g9a04r0",
+      "member": 23,
+      "public_label_swap": false,
+      "quantized_work": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 0,
+          "positive_work": 2913,
+          "q_theta": 865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 1,
+          "positive_work": 1183,
+          "q_theta": -865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 2,
+          "positive_work": 2913,
+          "q_theta": 865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 3,
+          "positive_work": 1183,
+          "q_theta": -865,
+          "total_work": 4096
+        }
+      ],
+      "replicate_index": 0,
+      "response_mode": 0,
+      "source_work_receipt": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 0,
+          "positive_work": 2913,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 1,
+          "positive_work": 1183,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 2,
+          "positive_work": 2913,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 3,
+          "positive_work": 1183,
+          "source_rc": 0,
+          "total_work": 4096
+        }
+      ]
+    },
+    {
+      "bank_swap": false,
+      "condition": "source_off",
+      "group_id": "g41der0",
+      "member": null,
+      "public_label_swap": false,
+      "quantized_work": [
+        {
+          "dummy_work": 4096,
+          "negative_work": 0,
+          "phase_ordinal": 0,
+          "positive_work": 0,
+          "q_theta": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 4096,
+          "negative_work": 0,
+          "phase_ordinal": 1,
+          "positive_work": 0,
+          "q_theta": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 4096,
+          "negative_work": 0,
+          "phase_ordinal": 2,
+          "positive_work": 0,
+          "q_theta": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 4096,
+          "negative_work": 0,
+          "phase_ordinal": 3,
+          "positive_work": 0,
+          "q_theta": 0,
+          "total_work": 4096
+        }
+      ],
+      "replicate_index": 0,
+      "response_mode": 1,
+      "source_work_receipt": [
+        {
+          "dummy_work": 4096,
+          "negative_work": 0,
+          "phase_ordinal": 0,
+          "positive_work": 0,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 4096,
+          "negative_work": 0,
+          "phase_ordinal": 1,
+          "positive_work": 0,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 4096,
+          "negative_work": 0,
+          "phase_ordinal": 2,
+          "positive_work": 0,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 4096,
+          "negative_work": 0,
+          "phase_ordinal": 3,
+          "positive_work": 0,
+          "source_rc": 0,
+          "total_work": 4096
+        }
+      ]
+    },
+    {
+      "bank_swap": true,
+      "condition": "physical_bank_swap",
+      "group_id": "gc633r0",
+      "member": 23,
+      "public_label_swap": false,
+      "quantized_work": [
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 0,
+          "positive_work": 1183,
+          "q_theta": -865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2596,
+          "phase_ordinal": 1,
+          "positive_work": 1500,
+          "q_theta": -548,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 2,
+          "positive_work": 2913,
+          "q_theta": 865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1500,
+          "phase_ordinal": 3,
+          "positive_work": 2596,
+          "q_theta": 548,
+          "total_work": 4096
+        }
+      ],
+      "replicate_index": 0,
+      "response_mode": 0,
+      "source_work_receipt": [
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 0,
+          "positive_work": 1183,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2596,
+          "phase_ordinal": 1,
+          "positive_work": 1500,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 2,
+          "positive_work": 2913,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1500,
+          "phase_ordinal": 3,
+          "positive_work": 2596,
+          "source_rc": 0,
+          "total_work": 4096
+        }
+      ]
+    },
+    {
+      "bank_swap": false,
+      "condition": "pre_projection_fold",
+      "group_id": "g0b72r0",
+      "member": 233,
+      "public_label_swap": false,
+      "quantized_work": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 0,
+          "positive_work": 2913,
+          "q_theta": 865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2596,
+          "phase_ordinal": 1,
+          "positive_work": 1500,
+          "q_theta": -548,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 2,
+          "positive_work": 1183,
+          "q_theta": -865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1500,
+          "phase_ordinal": 3,
+          "positive_work": 2596,
+          "q_theta": 548,
+          "total_work": 4096
+        }
+      ],
+      "replicate_index": 0,
+      "response_mode": 0,
+      "source_work_receipt": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 0,
+          "positive_work": 2913,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2596,
+          "phase_ordinal": 1,
+          "positive_work": 1500,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 2,
+          "positive_work": 1183,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1500,
+          "phase_ordinal": 3,
+          "positive_work": 2596,
+          "source_rc": 0,
+          "total_work": 4096
+        }
+      ]
+    },
+    {
+      "bank_swap": false,
+      "condition": "declaration_sham",
+      "group_id": "gde58r0",
+      "member": 23,
+      "public_label_swap": false,
+      "quantized_work": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 0,
+          "positive_work": 2913,
+          "q_theta": 865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 1,
+          "positive_work": 2913,
+          "q_theta": 865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 2,
+          "positive_work": 2913,
+          "q_theta": 865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 3,
+          "positive_work": 2913,
+          "q_theta": 865,
+          "total_work": 4096
+        }
+      ],
+      "replicate_index": 0,
+      "response_mode": 4,
+      "source_work_receipt": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 0,
+          "positive_work": 2913,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 1,
+          "positive_work": 2913,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 2,
+          "positive_work": 2913,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 3,
+          "positive_work": 2913,
+          "source_rc": 0,
+          "total_work": 4096
+        }
+      ]
+    },
+    {
+      "bank_swap": false,
+      "condition": "public_label_swap",
+      "group_id": "g6f31r0",
+      "member": 23,
+      "public_label_swap": true,
+      "quantized_work": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 0,
+          "positive_work": 2913,
+          "q_theta": 865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1500,
+          "phase_ordinal": 1,
+          "positive_work": 2596,
+          "q_theta": 548,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 2,
+          "positive_work": 1183,
+          "q_theta": -865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2596,
+          "phase_ordinal": 3,
+          "positive_work": 1500,
+          "q_theta": -548,
+          "total_work": 4096
+        }
+      ],
+      "replicate_index": 0,
+      "response_mode": 0,
+      "source_work_receipt": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 0,
+          "positive_work": 2913,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1500,
+          "phase_ordinal": 1,
+          "positive_work": 2596,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 2,
+          "positive_work": 1183,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2596,
+          "phase_ordinal": 3,
+          "positive_work": 1500,
+          "source_rc": 0,
+          "total_work": 4096
+        }
+      ]
+    },
+    {
+      "bank_swap": false,
+      "condition": "query_off",
+      "group_id": "g83aar0",
+      "member": 23,
+      "public_label_swap": false,
+      "quantized_work": [
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 0,
+          "positive_work": 2048,
+          "q_theta": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 1,
+          "positive_work": 2048,
+          "q_theta": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 2,
+          "positive_work": 2048,
+          "q_theta": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 3,
+          "positive_work": 2048,
+          "q_theta": 0,
+          "total_work": 4096
+        }
+      ],
+      "replicate_index": 0,
+      "response_mode": 2,
+      "source_work_receipt": [
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 0,
+          "positive_work": 2048,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 1,
+          "positive_work": 2048,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 2,
+          "positive_work": 2048,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 3,
+          "positive_work": 2048,
+          "source_rc": 0,
+          "total_work": 4096
+        }
+      ]
+    },
+    {
+      "bank_swap": false,
+      "condition": "equal_orbit_odd_zero",
+      "group_id": "g14e5r0",
+      "member": 0,
+      "public_label_swap": false,
+      "quantized_work": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1024,
+          "phase_ordinal": 0,
+          "positive_work": 3072,
+          "q_theta": 1024,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 1,
+          "positive_work": 2048,
+          "q_theta": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 3072,
+          "phase_ordinal": 2,
+          "positive_work": 1024,
+          "q_theta": -1024,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 3,
+          "positive_work": 2048,
+          "q_theta": 0,
+          "total_work": 4096
+        }
+      ],
+      "replicate_index": 0,
+      "response_mode": 0,
+      "source_work_receipt": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1024,
+          "phase_ordinal": 0,
+          "positive_work": 3072,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 1,
+          "positive_work": 2048,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 3072,
+          "phase_ordinal": 2,
+          "positive_work": 1024,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 3,
+          "positive_work": 2048,
+          "source_rc": 0,
+          "total_work": 4096
+        }
+      ]
+    },
+    {
+      "bank_swap": false,
+      "condition": "post_projection",
+      "group_id": "g7c19r1",
+      "member": 23,
+      "public_label_swap": false,
+      "quantized_work": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 0,
+          "positive_work": 2913,
+          "q_theta": 865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 1,
+          "positive_work": 2048,
+          "q_theta": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 2,
+          "positive_work": 1183,
+          "q_theta": -865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 3,
+          "positive_work": 2048,
+          "q_theta": 0,
+          "total_work": 4096
+        }
+      ],
+      "replicate_index": 1,
+      "response_mode": 3,
+      "source_work_receipt": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 0,
+          "positive_work": 2913,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 1,
+          "positive_work": 2048,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 2,
+          "positive_work": 1183,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 3,
+          "positive_work": 2048,
+          "source_rc": 0,
+          "total_work": 4096
+        }
+      ]
+    },
+    {
+      "bank_swap": false,
+      "condition": "pre_projection_d",
+      "group_id": "g2f80r1",
+      "member": 23,
+      "public_label_swap": false,
+      "quantized_work": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 0,
+          "positive_work": 2913,
+          "q_theta": 865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1500,
+          "phase_ordinal": 1,
+          "positive_work": 2596,
+          "q_theta": 548,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 2,
+          "positive_work": 1183,
+          "q_theta": -865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2596,
+          "phase_ordinal": 3,
+          "positive_work": 1500,
+          "q_theta": -548,
+          "total_work": 4096
+        }
+      ],
+      "replicate_index": 1,
+      "response_mode": 0,
+      "source_work_receipt": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 0,
+          "positive_work": 2913,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1500,
+          "phase_ordinal": 1,
+          "positive_work": 2596,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 2,
+          "positive_work": 1183,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2596,
+          "phase_ordinal": 3,
+          "positive_work": 1500,
+          "source_rc": 0,
+          "total_work": 4096
+        }
+      ]
+    },
+    {
+      "bank_swap": false,
+      "condition": "query_scramble",
+      "group_id": "g9a04r1",
+      "member": 23,
+      "public_label_swap": false,
+      "quantized_work": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 0,
+          "positive_work": 2913,
+          "q_theta": 865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 1,
+          "positive_work": 1183,
+          "q_theta": -865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 2,
+          "positive_work": 2913,
+          "q_theta": 865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 3,
+          "positive_work": 1183,
+          "q_theta": -865,
+          "total_work": 4096
+        }
+      ],
+      "replicate_index": 1,
+      "response_mode": 0,
+      "source_work_receipt": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 0,
+          "positive_work": 2913,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 1,
+          "positive_work": 1183,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 2,
+          "positive_work": 2913,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 3,
+          "positive_work": 1183,
+          "source_rc": 0,
+          "total_work": 4096
+        }
+      ]
+    },
+    {
+      "bank_swap": false,
+      "condition": "source_off",
+      "group_id": "g41der1",
+      "member": null,
+      "public_label_swap": false,
+      "quantized_work": [
+        {
+          "dummy_work": 4096,
+          "negative_work": 0,
+          "phase_ordinal": 0,
+          "positive_work": 0,
+          "q_theta": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 4096,
+          "negative_work": 0,
+          "phase_ordinal": 1,
+          "positive_work": 0,
+          "q_theta": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 4096,
+          "negative_work": 0,
+          "phase_ordinal": 2,
+          "positive_work": 0,
+          "q_theta": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 4096,
+          "negative_work": 0,
+          "phase_ordinal": 3,
+          "positive_work": 0,
+          "q_theta": 0,
+          "total_work": 4096
+        }
+      ],
+      "replicate_index": 1,
+      "response_mode": 1,
+      "source_work_receipt": [
+        {
+          "dummy_work": 4096,
+          "negative_work": 0,
+          "phase_ordinal": 0,
+          "positive_work": 0,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 4096,
+          "negative_work": 0,
+          "phase_ordinal": 1,
+          "positive_work": 0,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 4096,
+          "negative_work": 0,
+          "phase_ordinal": 2,
+          "positive_work": 0,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 4096,
+          "negative_work": 0,
+          "phase_ordinal": 3,
+          "positive_work": 0,
+          "source_rc": 0,
+          "total_work": 4096
+        }
+      ]
+    },
+    {
+      "bank_swap": true,
+      "condition": "physical_bank_swap",
+      "group_id": "gc633r1",
+      "member": 23,
+      "public_label_swap": false,
+      "quantized_work": [
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 0,
+          "positive_work": 1183,
+          "q_theta": -865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2596,
+          "phase_ordinal": 1,
+          "positive_work": 1500,
+          "q_theta": -548,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 2,
+          "positive_work": 2913,
+          "q_theta": 865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1500,
+          "phase_ordinal": 3,
+          "positive_work": 2596,
+          "q_theta": 548,
+          "total_work": 4096
+        }
+      ],
+      "replicate_index": 1,
+      "response_mode": 0,
+      "source_work_receipt": [
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 0,
+          "positive_work": 1183,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2596,
+          "phase_ordinal": 1,
+          "positive_work": 1500,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 2,
+          "positive_work": 2913,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1500,
+          "phase_ordinal": 3,
+          "positive_work": 2596,
+          "source_rc": 0,
+          "total_work": 4096
+        }
+      ]
+    },
+    {
+      "bank_swap": false,
+      "condition": "pre_projection_fold",
+      "group_id": "g0b72r1",
+      "member": 233,
+      "public_label_swap": false,
+      "quantized_work": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 0,
+          "positive_work": 2913,
+          "q_theta": 865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2596,
+          "phase_ordinal": 1,
+          "positive_work": 1500,
+          "q_theta": -548,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 2,
+          "positive_work": 1183,
+          "q_theta": -865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1500,
+          "phase_ordinal": 3,
+          "positive_work": 2596,
+          "q_theta": 548,
+          "total_work": 4096
+        }
+      ],
+      "replicate_index": 1,
+      "response_mode": 0,
+      "source_work_receipt": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 0,
+          "positive_work": 2913,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2596,
+          "phase_ordinal": 1,
+          "positive_work": 1500,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 2,
+          "positive_work": 1183,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1500,
+          "phase_ordinal": 3,
+          "positive_work": 2596,
+          "source_rc": 0,
+          "total_work": 4096
+        }
+      ]
+    },
+    {
+      "bank_swap": false,
+      "condition": "declaration_sham",
+      "group_id": "gde58r1",
+      "member": 23,
+      "public_label_swap": false,
+      "quantized_work": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 0,
+          "positive_work": 2913,
+          "q_theta": 865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 1,
+          "positive_work": 2913,
+          "q_theta": 865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 2,
+          "positive_work": 2913,
+          "q_theta": 865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 3,
+          "positive_work": 2913,
+          "q_theta": 865,
+          "total_work": 4096
+        }
+      ],
+      "replicate_index": 1,
+      "response_mode": 4,
+      "source_work_receipt": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 0,
+          "positive_work": 2913,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 1,
+          "positive_work": 2913,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 2,
+          "positive_work": 2913,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 3,
+          "positive_work": 2913,
+          "source_rc": 0,
+          "total_work": 4096
+        }
+      ]
+    },
+    {
+      "bank_swap": false,
+      "condition": "public_label_swap",
+      "group_id": "g6f31r1",
+      "member": 23,
+      "public_label_swap": true,
+      "quantized_work": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 0,
+          "positive_work": 2913,
+          "q_theta": 865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1500,
+          "phase_ordinal": 1,
+          "positive_work": 2596,
+          "q_theta": 548,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 2,
+          "positive_work": 1183,
+          "q_theta": -865,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2596,
+          "phase_ordinal": 3,
+          "positive_work": 1500,
+          "q_theta": -548,
+          "total_work": 4096
+        }
+      ],
+      "replicate_index": 1,
+      "response_mode": 0,
+      "source_work_receipt": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1183,
+          "phase_ordinal": 0,
+          "positive_work": 2913,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 1500,
+          "phase_ordinal": 1,
+          "positive_work": 2596,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2913,
+          "phase_ordinal": 2,
+          "positive_work": 1183,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2596,
+          "phase_ordinal": 3,
+          "positive_work": 1500,
+          "source_rc": 0,
+          "total_work": 4096
+        }
+      ]
+    },
+    {
+      "bank_swap": false,
+      "condition": "query_off",
+      "group_id": "g83aar1",
+      "member": 23,
+      "public_label_swap": false,
+      "quantized_work": [
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 0,
+          "positive_work": 2048,
+          "q_theta": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 1,
+          "positive_work": 2048,
+          "q_theta": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 2,
+          "positive_work": 2048,
+          "q_theta": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 3,
+          "positive_work": 2048,
+          "q_theta": 0,
+          "total_work": 4096
+        }
+      ],
+      "replicate_index": 1,
+      "response_mode": 2,
+      "source_work_receipt": [
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 0,
+          "positive_work": 2048,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 1,
+          "positive_work": 2048,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 2,
+          "positive_work": 2048,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 3,
+          "positive_work": 2048,
+          "source_rc": 0,
+          "total_work": 4096
+        }
+      ]
+    },
+    {
+      "bank_swap": false,
+      "condition": "equal_orbit_odd_zero",
+      "group_id": "g14e5r1",
+      "member": 0,
+      "public_label_swap": false,
+      "quantized_work": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1024,
+          "phase_ordinal": 0,
+          "positive_work": 3072,
+          "q_theta": 1024,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 1,
+          "positive_work": 2048,
+          "q_theta": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 3072,
+          "phase_ordinal": 2,
+          "positive_work": 1024,
+          "q_theta": -1024,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 3,
+          "positive_work": 2048,
+          "q_theta": 0,
+          "total_work": 4096
+        }
+      ],
+      "replicate_index": 1,
+      "response_mode": 0,
+      "source_work_receipt": [
+        {
+          "dummy_work": 0,
+          "negative_work": 1024,
+          "phase_ordinal": 0,
+          "positive_work": 3072,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 1,
+          "positive_work": 2048,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 3072,
+          "phase_ordinal": 2,
+          "positive_work": 1024,
+          "source_rc": 0,
+          "total_work": 4096
+        },
+        {
+          "dummy_work": 0,
+          "negative_work": 2048,
+          "phase_ordinal": 3,
+          "positive_work": 2048,
+          "source_rc": 0,
+          "total_work": 4096
+        }
+      ]
+    }
+  ],
+  "schema_id": "CAT_CAS_ORBIT_QUERY_UNBLINDING_MAP_V1"
+}

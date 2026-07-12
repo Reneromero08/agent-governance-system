@@ -38,6 +38,24 @@ prefetching, execution-unit state, user-space permission flips, or synchronous o
 page recovery; it is a changed authorization class for stronger coupling/access-model
 work or representation-level access that preserves a coordinate before fold-even loss.
 
+`orbit_query_first_light_0` introduced a real source-side `OrbitState` physical-query
+lane with a public-only receiver freeze, private post-freeze adjudication, fresh
+zero-page measured banks, and an independently checked source-work receipt. The
+single bounded live run completed and copied back cleanly, but it did not establish
+the coupling candidate: `ORBITSTATE_PHYSICAL_QUERY_COUPLING_NOT_ESTABLISHED`.
+The work/restoration/custody laws passed; the fold signal did not clear the frozen
+null floor and the aggregate real/label laws failed. The remote root was removed
+after verified copy-back. Evidence root:
+`phase6b6/live_small_wall/orbit_coupling/runs/orbit_query_first_light_0`.
+Key hashes: source bundle
+`9ff0640ba34182752d4e7fef8be081fd6380817812a84b336c13d2a72ab56633`,
+features
+`f639cdc2e22d8939bcc4a055da5df249501e6f5a6e80ee7ddf765dc6673ca13e`,
+raw capture
+`42591a3a721d6d8bc81cb3dac09398bccf2cb39449c5c2793bfab6608153b969`,
+adjudication
+`e412bbec7d45a57f06d0990ef0a2a6cf3183398b569f077f586f72393f2e104b`.
+
 ## Established
 
 ### Live transaction and restoration

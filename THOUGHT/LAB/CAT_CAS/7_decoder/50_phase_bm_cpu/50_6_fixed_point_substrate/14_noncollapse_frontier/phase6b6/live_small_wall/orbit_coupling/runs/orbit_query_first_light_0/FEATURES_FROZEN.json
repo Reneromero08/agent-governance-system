@@ -1,0 +1,807 @@
+{
+  "features": [
+    {
+      "decoded": {
+        "change_to_dirty_delta": {
+          "abs": 101.1385188738692,
+          "imag": 25.000000000000014,
+          "real": 97.99999999999999,
+          "responses": [
+            322.0,
+            224.0,
+            126.0,
+            174.0
+          ]
+        },
+        "duration_delta_ns": {
+          "abs": 12676.791332983279,
+          "imag": 2917.499999999999,
+          "real": 12336.5,
+          "responses": [
+            15036.0,
+            -2452.0,
+            -9637.0,
+            -8287.0
+          ]
+        },
+        "probe_dirty_delta": {
+          "abs": 179.69488028321797,
+          "imag": -28.000000000000057,
+          "real": 177.50000000000009,
+          "responses": [
+            -750.0,
+            -909.0,
+            -1105.0,
+            -853.0
+          ]
+        }
+      },
+      "group_id": "g7c19r0",
+      "replicate_index": 0,
+      "restoration_passed": true
+    },
+    {
+      "decoded": {
+        "change_to_dirty_delta": {
+          "abs": 118.70130580579136,
+          "imag": -109.0,
+          "real": 46.99999999999997,
+          "responses": [
+            190.0,
+            103.0,
+            96.0,
+            321.0
+          ]
+        },
+        "duration_delta_ns": {
+          "abs": 6779.939693684598,
+          "imag": -5410.0,
+          "real": 4086.4999999999995,
+          "responses": [
+            2050.0,
+            -4993.0,
+            -6123.0,
+            5827.0
+          ]
+        },
+        "probe_dirty_delta": {
+          "abs": 166.87869846088807,
+          "imag": 118.49999999999994,
+          "real": 117.50000000000009,
+          "responses": [
+            -738.0,
+            -677.0,
+            -973.0,
+            -914.0
+          ]
+        }
+      },
+      "group_id": "g2f80r0",
+      "replicate_index": 0,
+      "restoration_passed": true
+    },
+    {
+      "decoded": {
+        "change_to_dirty_delta": {
+          "abs": 27.54087870784083,
+          "imag": 1.500000000000007,
+          "real": -27.500000000000007,
+          "responses": [
+            106.0,
+            94.0,
+            161.0,
+            91.0
+          ]
+        },
+        "duration_delta_ns": {
+          "abs": 2295.629815540825,
+          "imag": -1368.0,
+          "real": 1843.5000000000002,
+          "responses": [
+            -1453.0,
+            -10715.0,
+            -5140.0,
+            -7979.0
+          ]
+        },
+        "probe_dirty_delta": {
+          "abs": 190.02236710450697,
+          "imag": -77.5,
+          "real": 173.50000000000003,
+          "responses": [
+            -580.0,
+            -1047.0,
+            -927.0,
+            -892.0
+          ]
+        }
+      },
+      "group_id": "g9a04r0",
+      "replicate_index": 0,
+      "restoration_passed": true
+    },
+    {
+      "decoded": {
+        "change_to_dirty_delta": {
+          "abs": 1.5,
+          "imag": -1.5,
+          "real": 7.499414193186067e-16,
+          "responses": [
+            5.0,
+            -16.0,
+            5.0,
+            -13.0
+          ]
+        },
+        "duration_delta_ns": {
+          "abs": 8338.804245813664,
+          "imag": -1880.4999999999982,
+          "real": -8123.999999999999,
+          "responses": [
+            4148.0,
+            -24656.0,
+            20396.0,
+            -20895.0
+          ]
+        },
+        "probe_dirty_delta": {
+          "abs": 1048.0917183147662,
+          "imag": -97.99999999999977,
+          "real": -1043.4999999999998,
+          "responses": [
+            27.0,
+            -2214.0,
+            2114.0,
+            -2018.0
+          ]
+        }
+      },
+      "group_id": "g41der0",
+      "replicate_index": 0,
+      "restoration_passed": true
+    },
+    {
+      "decoded": {
+        "change_to_dirty_delta": {
+          "abs": 19.474342094150437,
+          "imag": -16.999999999999993,
+          "real": 9.49999999999999,
+          "responses": [
+            175.0,
+            89.0,
+            156.0,
+            123.0
+          ]
+        },
+        "duration_delta_ns": {
+          "abs": 2265.043321881504,
+          "imag": -2196.5,
+          "real": -553.0000000000001,
+          "responses": [
+            -5423.0,
+            -8308.0,
+            -4317.0,
+            -3915.0
+          ]
+        },
+        "probe_dirty_delta": {
+          "abs": 381.58681843061606,
+          "imag": -197.5,
+          "real": -326.49999999999994,
+          "responses": [
+            -1408.0,
+            -1089.0,
+            -755.0,
+            -694.0
+          ]
+        }
+      },
+      "group_id": "gc633r0",
+      "replicate_index": 0,
+      "restoration_passed": true
+    },
+    {
+      "decoded": {
+        "change_to_dirty_delta": {
+          "abs": 33.55964838909967,
+          "imag": 30.5,
+          "real": 13.999999999999998,
+          "responses": [
+            108.0,
+            154.0,
+            80.0,
+            93.0
+          ]
+        },
+        "duration_delta_ns": {
+          "abs": 3003.6406243091074,
+          "imag": -2519.000000000001,
+          "real": 1636.0000000000002,
+          "responses": [
+            -5295.0,
+            -11515.0,
+            -8567.0,
+            -6477.0
+          ]
+        },
+        "probe_dirty_delta": {
+          "abs": 237.04693628056032,
+          "imag": -109.00000000000006,
+          "real": 210.50000000000003,
+          "responses": [
+            -676.0,
+            -1002.0,
+            -1097.0,
+            -784.0
+          ]
+        }
+      },
+      "group_id": "g0b72r0",
+      "replicate_index": 0,
+      "restoration_passed": true
+    },
+    {
+      "decoded": {
+        "change_to_dirty_delta": {
+          "abs": 100.2920734654539,
+          "imag": -97.5,
+          "real": -23.500000000000025,
+          "responses": [
+            37.0,
+            109.0,
+            84.0,
+            304.0
+          ]
+        },
+        "duration_delta_ns": {
+          "abs": 13099.668707642953,
+          "imag": -12820.5,
+          "real": -2690.0000000000014,
+          "responses": [
+            -8908.0,
+            -8491.0,
+            -3528.0,
+            17150.0
+          ]
+        },
+        "probe_dirty_delta": {
+          "abs": 195.13713126926925,
+          "imag": -191.50000000000006,
+          "real": -37.5,
+          "responses": [
+            -859.0,
+            -978.0,
+            -784.0,
+            -595.0
+          ]
+        }
+      },
+      "group_id": "gde58r0",
+      "replicate_index": 0,
+      "restoration_passed": true
+    },
+    {
+      "decoded": {
+        "change_to_dirty_delta": {
+          "abs": 161.01707983937604,
+          "imag": -104.49999999999999,
+          "real": -122.50000000000001,
+          "responses": [
+            -48.0,
+            6.0,
+            197.0,
+            215.0
+          ]
+        },
+        "duration_delta_ns": {
+          "abs": 1185.6348510397283,
+          "imag": 1182.9999999999995,
+          "real": -78.9999999999992,
+          "responses": [
+            -7297.0,
+            -6261.0,
+            -7139.0,
+            -8627.0
+          ]
+        },
+        "probe_dirty_delta": {
+          "abs": 415.8368069327197,
+          "imag": 379.49999999999994,
+          "real": 170.0000000000001,
+          "responses": [
+            -941.0,
+            -606.0,
+            -1281.0,
+            -1365.0
+          ]
+        }
+      },
+      "group_id": "g6f31r0",
+      "replicate_index": 0,
+      "restoration_passed": true
+    },
+    {
+      "decoded": {
+        "change_to_dirty_delta": {
+          "abs": 35.41539213392957,
+          "imag": -17.999999999999993,
+          "real": -30.50000000000001,
+          "responses": [
+            113.0,
+            94.0,
+            174.0,
+            130.0
+          ]
+        },
+        "duration_delta_ns": {
+          "abs": 3697.4846179531296,
+          "imag": -3436.5,
+          "real": -1364.5,
+          "responses": [
+            -9165.0,
+            -16274.0,
+            -6436.0,
+            -9401.0
+          ]
+        },
+        "probe_dirty_delta": {
+          "abs": 28.935272592460617,
+          "imag": -28.500000000000057,
+          "real": -4.99999999999993,
+          "responses": [
+            -975.0,
+            -817.0,
+            -965.0,
+            -760.0
+          ]
+        }
+      },
+      "group_id": "g83aar0",
+      "replicate_index": 0,
+      "restoration_passed": true
+    },
+    {
+      "decoded": {
+        "change_to_dirty_delta": {
+          "abs": 45.83121207212396,
+          "imag": 45.500000000000014,
+          "real": -5.499999999999999,
+          "responses": [
+            108.0,
+            156.0,
+            119.0,
+            65.0
+          ]
+        },
+        "duration_delta_ns": {
+          "abs": 580.5783754154126,
+          "imag": 560.9999999999995,
+          "real": 149.50000000000068,
+          "responses": [
+            -8036.0,
+            -6419.0,
+            -8335.0,
+            -7541.0
+          ]
+        },
+        "probe_dirty_delta": {
+          "abs": 100.767058109285,
+          "imag": -65.00000000000011,
+          "real": 77.00000000000003,
+          "responses": [
+            -883.0,
+            -1078.0,
+            -1037.0,
+            -948.0
+          ]
+        }
+      },
+      "group_id": "g14e5r0",
+      "replicate_index": 0,
+      "restoration_passed": true
+    },
+    {
+      "decoded": {
+        "change_to_dirty_delta": {
+          "abs": 176.9477323957558,
+          "imag": -74.49999999999997,
+          "real": -160.50000000000003,
+          "responses": [
+            74.0,
+            196.0,
+            395.0,
+            345.0
+          ]
+        },
+        "duration_delta_ns": {
+          "abs": 9168.818898854966,
+          "imag": -2381.999999999999,
+          "real": -8854.0,
+          "responses": [
+            -6203.0,
+            2891.0,
+            11505.0,
+            7655.0
+          ]
+        },
+        "probe_dirty_delta": {
+          "abs": 63.54919354327,
+          "imag": 2.499999999999943,
+          "real": -63.49999999999992,
+          "responses": [
+            -1086.0,
+            -871.0,
+            -959.0,
+            -876.0
+          ]
+        }
+      },
+      "group_id": "g7c19r1",
+      "replicate_index": 1,
+      "restoration_passed": true
+    },
+    {
+      "decoded": {
+        "change_to_dirty_delta": {
+          "abs": 86.81301745706115,
+          "imag": 32.500000000000014,
+          "real": -80.50000000000001,
+          "responses": [
+            145.0,
+            207.0,
+            306.0,
+            142.0
+          ]
+        },
+        "duration_delta_ns": {
+          "abs": 4600.025679276148,
+          "imag": -136.5,
+          "real": -4597.999999999999,
+          "responses": [
+            -6913.0,
+            -7137.0,
+            2283.0,
+            -6864.0
+          ]
+        },
+        "probe_dirty_delta": {
+          "abs": 415.2929688785979,
+          "imag": -56.000000000000114,
+          "real": 411.50000000000006,
+          "responses": [
+            -586.0,
+            -1149.0,
+            -1409.0,
+            -1037.0
+          ]
+        }
+      },
+      "group_id": "g2f80r1",
+      "replicate_index": 1,
+      "restoration_passed": true
+    },
+    {
+      "decoded": {
+        "change_to_dirty_delta": {
+          "abs": 155.24174696260025,
+          "imag": -95.99999999999999,
+          "real": -122.00000000000003,
+          "responses": [
+            35.0,
+            76.0,
+            279.0,
+            268.0
+          ]
+        },
+        "duration_delta_ns": {
+          "abs": 11687.680362244682,
+          "imag": -5395.999999999999,
+          "real": -10367.5,
+          "responses": [
+            -10488.0,
+            -9685.0,
+            10247.0,
+            1107.0
+          ]
+        },
+        "probe_dirty_delta": {
+          "abs": 271.8478434713065,
+          "imag": 80.99999999999994,
+          "real": -259.4999999999999,
+          "responses": [
+            -1082.0,
+            -939.0,
+            -563.0,
+            -1101.0
+          ]
+        }
+      },
+      "group_id": "g9a04r1",
+      "replicate_index": 1,
+      "restoration_passed": true
+    },
+    {
+      "decoded": {
+        "change_to_dirty_delta": {
+          "abs": 1.2133379398157466e-15,
+          "imag": -8.881784197001252e-16,
+          "real": -8.266365894244633e-16,
+          "responses": [
+            -10.0,
+            9.0,
+            -10.0,
+            9.0
+          ]
+        },
+        "duration_delta_ns": {
+          "abs": 11136.89656053247,
+          "imag": 1695.9999999999982,
+          "real": 11006.999999999998,
+          "responses": [
+            -2472.0,
+            24662.0,
+            -24486.0,
+            21270.0
+          ]
+        },
+        "probe_dirty_delta": {
+          "abs": 1079.9241871538943,
+          "imag": 216.49999999999977,
+          "real": 1057.9999999999998,
+          "responses": [
+            -33.0,
+            2262.0,
+            -2149.0,
+            1829.0
+          ]
+        }
+      },
+      "group_id": "g41der1",
+      "replicate_index": 1,
+      "restoration_passed": true
+    },
+    {
+      "decoded": {
+        "change_to_dirty_delta": {
+          "abs": 96.81554627228006,
+          "imag": 83.5,
+          "real": 49.0,
+          "responses": [
+            230.0,
+            332.0,
+            132.0,
+            165.0
+          ]
+        },
+        "duration_delta_ns": {
+          "abs": 4918.325248496687,
+          "imag": 3241.4999999999995,
+          "real": -3698.9999999999995,
+          "responses": [
+            -16452.0,
+            2517.0,
+            -9054.0,
+            -3966.0
+          ]
+        },
+        "probe_dirty_delta": {
+          "abs": 410.07346902719763,
+          "imag": -230.0000000000001,
+          "real": -339.49999999999994,
+          "responses": [
+            -1826.0,
+            -1298.0,
+            -1147.0,
+            -838.0
+          ]
+        }
+      },
+      "group_id": "gc633r1",
+      "replicate_index": 1,
+      "restoration_passed": true
+    },
+    {
+      "decoded": {
+        "change_to_dirty_delta": {
+          "abs": 87.0,
+          "imag": 87.0,
+          "real": 6.618418505007517e-17,
+          "responses": [
+            146.0,
+            328.0,
+            146.0,
+            154.0
+          ]
+        },
+        "duration_delta_ns": {
+          "abs": 9735.822127586349,
+          "imag": 9023.5,
+          "real": -3655.4999999999995,
+          "responses": [
+            -9994.0,
+            12411.0,
+            -2683.0,
+            -5636.0
+          ]
+        },
+        "probe_dirty_delta": {
+          "abs": 115.10864433221347,
+          "imag": -37.00000000000006,
+          "real": 109.00000000000007,
+          "responses": [
+            -907.0,
+            -874.0,
+            -1125.0,
+            -800.0
+          ]
+        }
+      },
+      "group_id": "g0b72r1",
+      "replicate_index": 1,
+      "restoration_passed": true
+    },
+    {
+      "decoded": {
+        "change_to_dirty_delta": {
+          "abs": 50.700098619233486,
+          "imag": 40.500000000000014,
+          "real": -30.5,
+          "responses": [
+            94.0,
+            151.0,
+            155.0,
+            70.0
+          ]
+        },
+        "duration_delta_ns": {
+          "abs": 1500.6991703869242,
+          "imag": -1473.000000000001,
+          "real": -286.9999999999995,
+          "responses": [
+            -8252.0,
+            -8761.0,
+            -7678.0,
+            -5815.0
+          ]
+        },
+        "probe_dirty_delta": {
+          "abs": 105.32093808925165,
+          "imag": 31.499999999999943,
+          "real": -100.49999999999991,
+          "responses": [
+            -776.0,
+            -813.0,
+            -575.0,
+            -876.0
+          ]
+        }
+      },
+      "group_id": "gde58r1",
+      "replicate_index": 1,
+      "restoration_passed": true
+    },
+    {
+      "decoded": {
+        "change_to_dirty_delta": {
+          "abs": 85.85598406634219,
+          "imag": -26.999999999999986,
+          "real": -81.50000000000003,
+          "responses": [
+            5.0,
+            182.0,
+            168.0,
+            236.0
+          ]
+        },
+        "duration_delta_ns": {
+          "abs": 670.377692051279,
+          "imag": 659.9999999999995,
+          "real": 117.50000000000058,
+          "responses": [
+            -10744.0,
+            -5082.0,
+            -10979.0,
+            -6402.0
+          ]
+        },
+        "probe_dirty_delta": {
+          "abs": 86.09587678861281,
+          "imag": 37.499999999999886,
+          "real": 77.50000000000004,
+          "responses": [
+            -937.0,
+            -1027.0,
+            -1092.0,
+            -1102.0
+          ]
+        }
+      },
+      "group_id": "g6f31r1",
+      "replicate_index": 1,
+      "restoration_passed": true
+    },
+    {
+      "decoded": {
+        "change_to_dirty_delta": {
+          "abs": 17.204650534085246,
+          "imag": 10.0,
+          "real": 13.999999999999991,
+          "responses": [
+            123.0,
+            203.0,
+            95.0,
+            183.0
+          ]
+        },
+        "duration_delta_ns": {
+          "abs": 1872.304796233775,
+          "imag": 1812.999999999999,
+          "real": 467.50000000000085,
+          "responses": [
+            -11641.0,
+            -5715.0,
+            -12576.0,
+            -9341.0
+          ]
+        },
+        "probe_dirty_delta": {
+          "abs": 116.79255113233896,
+          "imag": 59.499999999999886,
+          "real": 100.50000000000011,
+          "responses": [
+            -1040.0,
+            -1158.0,
+            -1241.0,
+            -1277.0
+          ]
+        }
+      },
+      "group_id": "g83aar1",
+      "replicate_index": 1,
+      "restoration_passed": true
+    },
+    {
+      "decoded": {
+        "change_to_dirty_delta": {
+          "abs": 40.99390198553924,
+          "imag": -35.499999999999986,
+          "real": 20.49999999999998,
+          "responses": [
+            170.0,
+            176.0,
+            129.0,
+            247.0
+          ]
+        },
+        "duration_delta_ns": {
+          "abs": 3403.209734941412,
+          "imag": -1494.5,
+          "real": -3057.4999999999995,
+          "responses": [
+            -9480.0,
+            -8129.0,
+            -3365.0,
+            -5140.0
+          ]
+        },
+        "probe_dirty_delta": {
+          "abs": 83.25863318599471,
+          "imag": -76.00000000000011,
+          "real": 34.00000000000002,
+          "responses": [
+            -905.0,
+            -1035.0,
+            -973.0,
+            -883.0
+          ]
+        }
+      },
+      "group_id": "g14e5r1",
+      "replicate_index": 1,
+      "restoration_passed": true
+    }
+  ],
+  "features_sha256": "6fb57f60c674e9c5df558f21fb71fe2bbbb7c423d6cbca0be1f1892688e277df",
+  "primary_response": "change_to_dirty_delta",
+  "schema_id": "CAT_CAS_ORBIT_QUERY_FEATURES_FROZEN_V1"
+}

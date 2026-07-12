@@ -1,0 +1,15 @@
+{
+  "adjudication_status": "ORBITSTATE_PHYSICAL_QUERY_COUPLING_NOT_ESTABLISHED",
+  "copy_verified": true,
+  "failure": null,
+  "features_frozen_sha256": "f639cdc2e22d8939bcc4a055da5df249501e6f5a6e80ee7ddf765dc6673ca13e",
+  "final_status": "ORBIT_QUERY_TARGET_COMPLETE",
+  "local_run": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\runs\\orbit_query_first_light_0",
+  "remote_cleaned": true,
+  "remote_returncode": 0,
+  "remote_run": "/root/catcas_live_small_wall/orbit_query_first_light_0",
+  "run_id": "orbit_query_first_light_0",
+  "schema_id": "CAT_CAS_ORBIT_QUERY_FIRST_LIGHT_CONTROLLER_V1",
+  "target": "root@192.168.137.100",
+  "verified_file_count": 20
+}
