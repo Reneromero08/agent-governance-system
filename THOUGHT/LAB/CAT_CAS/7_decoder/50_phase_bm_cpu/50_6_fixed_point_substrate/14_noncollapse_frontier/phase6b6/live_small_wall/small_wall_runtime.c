@@ -65,6 +65,7 @@ static int gate_a_coded_preprojection_query_off_pilot(void);
 static int gate_a_coded_preprojection_declaration_sham_pilot(void);
 static int gate_a_coded_preprojection_phase_local_sham_pilot(void);
 static int gate_a_coded_preprojection_phase_local_pilot(void);
+static int gate_a_coded_preprojection_active_query_pilot(void);
 static int gate_a_coded_preprojection_stimulus_first_slot(void);
 static int gate_a_coded_preprojection_stimulus_end_slot(void);
 static int gate_a_readonly_occupancy_pilot(void);
@@ -136,7 +137,8 @@ static int gate_a_occupancy_pilot(void) {
            gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_QUERY_OFF_LOOP ||
            gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_DECLARATION_SHAM_LOOP ||
            gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_LOOP ||
-           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP;
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP ||
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_ACTIVE_QUERY_LOOP;
 }
 
 static int gate_a_coded_preprojection_pilot(void) {
@@ -147,7 +149,8 @@ static int gate_a_coded_preprojection_pilot(void) {
            gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_QUERY_OFF_LOOP ||
            gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_DECLARATION_SHAM_LOOP ||
            gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_LOOP ||
-           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP;
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP ||
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_ACTIVE_QUERY_LOOP;
 }
 
 static int gate_a_coded_preprojection_query_scramble_pilot(void) {
@@ -168,7 +171,12 @@ static int gate_a_coded_preprojection_phase_local_sham_pilot(void) {
 
 static int gate_a_coded_preprojection_phase_local_pilot(void) {
     return gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_LOOP ||
-           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP;
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP ||
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_ACTIVE_QUERY_LOOP;
+}
+
+static int gate_a_coded_preprojection_active_query_pilot(void) {
+    return gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_ACTIVE_QUERY_LOOP;
 }
 
 static int gate_a_coded_preprojection_warm_restored_pilot(void) {
@@ -205,7 +213,8 @@ static int gate_a_variant_is_readonly_occupancy(int variant) {
            variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_QUERY_OFF_LOOP ||
            variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_DECLARATION_SHAM_LOOP ||
            variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_LOOP ||
-           variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP;
+           variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP ||
+           variant == GATE_A_PILOT_CODED_PREPROJECTION_ACTIVE_QUERY_LOOP;
 }
 
 static int gate_a_slot_count(void) {
@@ -324,6 +333,9 @@ static size_t gate_a_occupancy_bytes(int slot) {
 }
 
 static const char *gate_a_measurement_mode(void) {
+    if (gate_a_coded_preprojection_active_query_pilot()) {
+        return "catcas_active_query_delta_cycles";
+    }
     if (gate_a_coded_preprojection_pilot()) {
         return "catcas_coded_preprojection_response_cycles";
     }
@@ -336,6 +348,9 @@ static const char *gate_a_measurement_mode(void) {
 }
 
 static const char *gate_a_observation_kind(void) {
+    if (gate_a_coded_preprojection_active_query_pilot()) {
+        return "experiment_owned_balanced_query_subbank_delta_cycles_per_access";
+    }
     if (gate_a_coded_preprojection_pilot()) {
         return "experiment_owned_coded_preprojection_buffer_cycles_per_access";
     }
@@ -348,6 +363,7 @@ static const char *gate_a_observation_kind(void) {
 }
 
 static const char *gate_a_occupancy_classification(void) {
+    if (gate_a_coded_preprojection_active_query_pilot()) return "ACTIVE_QUERY_PREPROJECTION_DELTA";
     if (gate_a_coded_preprojection_pilot()) return "CODED_PREPROJECTION";
     if (gate_a_readonly_occupancy_pilot()) return "READONLY_OCCUPANCY";
     if (gate_a_occupancy_pilot()) return "DIRTY_OCCUPANCY_FABRIC_PRESSURE";
@@ -563,7 +579,9 @@ typedef struct {
     const uint64_t *response_bank;
     size_t response_line_count;
     size_t response_index;
+    size_t active_query_index[8];
     int cache_response_mode;
+    int active_query_mode;
     uint64_t receiver_epoch;
     int count;
     int realtime_attempted;
@@ -1569,6 +1587,87 @@ static int gate_a_sender_stop_join(GateASender *sender, FILE *lifecycle,
     return 0;
 }
 
+static int gate_a_query_phase_from_slot(int slot) {
+    int phase_index = gate_a_phase_index(slot);
+    int phase = (phase_index / 2) % 4;
+    return phase < 0 ? phase + 4 : phase;
+}
+
+static int gate_a_chase_response_subbank(
+        const uint64_t *response_bank,
+        size_t words_per_line,
+        size_t bank_base,
+        size_t bank_lines,
+        size_t *cursor,
+        uint64_t *duration_ticks) {
+    if (!response_bank || !cursor || !duration_ticks ||
+        !gate_a_power_of_two(bank_lines)) return -1;
+    size_t line = *cursor & (bank_lines - 1U);
+    uint64_t start = rdtscp_now();
+    for (size_t touch = 0; touch < GATE_A_RESPONSE_TOUCHES; touch++) {
+        uint64_t next = response_bank[(bank_base + line) * words_per_line];
+        if (next < bank_base || next >= bank_base + bank_lines) return -1;
+        line = (size_t)(next - bank_base);
+    }
+    uint64_t finish = rdtscp_now();
+    if (finish < start) return -1;
+    *cursor = line;
+    *duration_ticks = finish - start;
+    return 0;
+}
+
+static int gate_a_active_query_sample(
+        GateAReceiver *receiver,
+        int slot,
+        uint64_t requested_sample_index,
+        uint64_t *started,
+        uint64_t *finished,
+        uint64_t *service_ticks,
+        double *observation) {
+    if (!receiver || !started || !finished || !service_ticks || !observation ||
+        receiver->response_line_count < 8U) return -1;
+    size_t bank_count = 8U;
+    size_t bank_lines = receiver->response_line_count / bank_count;
+    if (!gate_a_power_of_two(bank_lines) ||
+        bank_lines * bank_count != receiver->response_line_count) return -1;
+    size_t words_per_line = GATE_A_CACHE_LINE_BYTES / sizeof(uint64_t);
+    int phase = gate_a_query_phase_from_slot(slot);
+    size_t positive_bank = (size_t)phase * 2U;
+    size_t negative_bank = positive_bank + 1U;
+    uint64_t positive_ticks = 0;
+    uint64_t negative_ticks = 0;
+    if (!*started) *started = rdtscp_now();
+    if (requested_sample_index & 1U) {
+        if (gate_a_chase_response_subbank(
+                receiver->response_bank, words_per_line,
+                negative_bank * bank_lines, bank_lines,
+                &receiver->active_query_index[negative_bank],
+                &negative_ticks) ||
+            gate_a_chase_response_subbank(
+                receiver->response_bank, words_per_line,
+                positive_bank * bank_lines, bank_lines,
+                &receiver->active_query_index[positive_bank],
+                &positive_ticks)) return -1;
+    } else {
+        if (gate_a_chase_response_subbank(
+                receiver->response_bank, words_per_line,
+                positive_bank * bank_lines, bank_lines,
+                &receiver->active_query_index[positive_bank],
+                &positive_ticks) ||
+            gate_a_chase_response_subbank(
+                receiver->response_bank, words_per_line,
+                negative_bank * bank_lines, bank_lines,
+                &receiver->active_query_index[negative_bank],
+                &negative_ticks)) return -1;
+    }
+    *finished = rdtscp_now();
+    if (*finished < *started) return -1;
+    *service_ticks = *finished - *started;
+    *observation = ((double)positive_ticks - (double)negative_ticks) /
+        (double)GATE_A_RESPONSE_TOUCHES;
+    return 0;
+}
+
 static SMALL_WALL_CRITICAL void *gate_a_receiver_loop(void *opaque) {
     GateAReceiver *receiver = opaque;
     if (pin_core(receiver->core)) {
@@ -1602,7 +1701,17 @@ static SMALL_WALL_CRITICAL void *gate_a_receiver_loop(void *opaque) {
             while (rdtsc_now() < requested && !interrupted) {
                 __asm__ volatile("pause");
             }
+            int requested_slot = slot_ticks > 0.0
+                ? (int)(((double)(requested - receiver->origin)) / slot_ticks)
+                : -1;
+            if (requested_slot < 0 || requested_slot >= receiver->slot_count) {
+                count = -1;
+                break;
+            }
             uint64_t started = rdtscp_now();
+            uint64_t finished = 0;
+            uint64_t service = 0;
+            double response_cycles = 0.0;
             if (started >= end) break;
             uint64_t scheduler_lateness =
                 started > requested ? started - requested : 0;
@@ -1615,44 +1724,56 @@ static SMALL_WALL_CRITICAL void *gate_a_receiver_loop(void *opaque) {
                 receiver->skipped_deadline_count += missed;
                 continue;
             }
-            int valid = 1;
-            for (size_t touch = 0; touch < GATE_A_RESPONSE_TOUCHES; touch++) {
-                if (index >= receiver->response_line_count) {
-                    valid = 0;
+            if (receiver->active_query_mode) {
+                if (gate_a_active_query_sample(
+                        receiver, requested_slot, requested_sample_index,
+                        &started, &finished, &service,
+                        &response_cycles)) {
+                    count = -1;
                     break;
                 }
-                index = (size_t)receiver->response_bank[index * words_per_line];
+            } else {
+                int valid = 1;
+                for (size_t touch = 0; touch < GATE_A_RESPONSE_TOUCHES; touch++) {
+                    if (index >= receiver->response_line_count) {
+                        valid = 0;
+                        break;
+                    }
+                    index = (size_t)receiver->response_bank[index * words_per_line];
+                }
+                if (!valid || index >= receiver->response_line_count) {
+                    count = -1;
+                    break;
+                }
+                finished = rdtscp_now();
+                if (finished < started) {
+                    count = -1;
+                    break;
+                }
+                service = finished - started;
+                response_cycles =
+                    (double)service / GATE_A_RESPONSE_TOUCHES;
             }
-            if (!valid || index >= receiver->response_line_count) {
-                count = -1;
-                break;
-            }
-            uint64_t finished = rdtscp_now();
             if (started < requested || finished < started ||
                 (count > 0 && finished < previous_finished)) {
                 count = -1;
                 break;
             }
-            uint64_t service = finished - started;
             uint64_t finish_gap = count > 0 ? finished - previous_finished : 0;
-            double response_cycles =
-                (double)service / GATE_A_RESPONSE_TOUCHES;
-            int requested_slot = slot_ticks > 0.0
-                ? (int)(((double)(requested - receiver->origin)) / slot_ticks)
-                : -1;
             int actual_slot = slot_ticks > 0.0 && started >= receiver->origin
                 ? (int)(((double)(started - receiver->origin)) / slot_ticks)
                 : -1;
-            if (requested_slot < 0 || requested_slot >= receiver->slot_count ||
-                actual_slot < 0 || actual_slot >= receiver->slot_count) {
+            if (actual_slot < 0 || actual_slot >= receiver->slot_count) {
                 count = -1;
                 break;
             }
             if (scheduler_lateness > receiver->max_sample_delay_tsc) {
                 receiver->max_sample_delay_tsc = scheduler_lateness;
             }
-            if (response_cycles > receiver->max_response_cycles_per_access) {
-                receiver->max_response_cycles_per_access = response_cycles;
+            double response_magnitude = response_cycles < 0.0
+                ? -response_cycles : response_cycles;
+            if (response_magnitude > receiver->max_response_cycles_per_access) {
+                receiver->max_response_cycles_per_access = response_magnitude;
             }
             receiver->timestamps[count] = started;
             receiver->requested_sample_index[count] = requested_sample_index;
@@ -2002,6 +2123,7 @@ static int gate_a_run_real_capture(const GateASmokeArgs *args,
         ? GATE_A_RESPONSE_BUFFER_BYTES / GATE_A_CACHE_LINE_BYTES : 0;
     receiver.response_index = 0;
     receiver.cache_response_mode = gate_a_occupancy_pilot();
+    receiver.active_query_mode = gate_a_coded_preprojection_active_query_pilot();
     atomic_init(&receiver.ready, 0);
     atomic_init(&receiver.done, 0);
     atomic_init(&receiver.ready_tsc, 0);
@@ -2662,7 +2784,7 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
         args->slot_s != 0.5 || args->temperature_veto_c != 68.0 ||
         args->required_frequency_khz != 1600000 ||
         args->pilot_variant < GATE_A_PILOT_PN ||
-        args->pilot_variant > GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP) {
+        args->pilot_variant > GATE_A_PILOT_CODED_PREPROJECTION_ACTIVE_QUERY_LOOP) {
         return 2;
     }
     gate_a_pilot_variant = args->pilot_variant;
@@ -2786,9 +2908,28 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
         memset(response_bank, 0, response_words * sizeof(*response_bank));
         memset((void *)occupancy_bank, 0,
                occupancy_words * sizeof(*occupancy_bank));
-        for (size_t line = 0; line < response_lines; line++) {
-            response_bank[line * words_per_line] =
-                (line + GATE_A_RESPONSE_LINE_STRIDE) & (response_lines - 1U);
+        if (gate_a_coded_preprojection_active_query_pilot()) {
+            size_t bank_count = 8U;
+            size_t bank_lines = response_lines / bank_count;
+            if (!gate_a_power_of_two(bank_lines) ||
+                bank_lines * bank_count != response_lines) {
+                reason = "ACTIVE_QUERY_RESPONSE_GEOMETRY_FAILURE";
+                rc = 5;
+                goto cleanup;
+            }
+            for (size_t bank = 0; bank < bank_count; bank++) {
+                size_t base = bank * bank_lines;
+                for (size_t line = 0; line < bank_lines; line++) {
+                    response_bank[(base + line) * words_per_line] =
+                        base + ((line + GATE_A_RESPONSE_LINE_STRIDE) &
+                                (bank_lines - 1U));
+                }
+            }
+        } else {
+            for (size_t line = 0; line < response_lines; line++) {
+                response_bank[line * words_per_line] =
+                    (line + GATE_A_RESPONSE_LINE_STRIDE) & (response_lines - 1U);
+            }
         }
         for (size_t word = 0; word < occupancy_words; word++) {
             occupancy_bank[word] =

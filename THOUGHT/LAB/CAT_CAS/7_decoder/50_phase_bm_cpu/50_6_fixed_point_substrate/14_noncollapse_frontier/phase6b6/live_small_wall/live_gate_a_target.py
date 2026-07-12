@@ -41,6 +41,7 @@ CODED_PREPROJECTION_WARM_QUERY_OFF_SCHEDULE_SHA256 = "95d25a543007bdfcdb002ff0ce
 CODED_PREPROJECTION_WARM_DECLARATION_SHAM_SCHEDULE_SHA256 = "89e53ef27c3799cc9c319283821e728e304a8b36a92ac1a76088f28934992310"
 CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_SCHEDULE_SHA256 = "51f3fb66cd4f03dff2d3e9aab9196d4f94d85e221cd552b04eda4929669cca2e"
 CODED_PREPROJECTION_WARM_PHASE_LOCAL_SCHEDULE_SHA256 = "1144b929905e30f3da1261fdedf5e6393c30d31a41c9a4dd2dc39e8573f4cbc4"
+CODED_PREPROJECTION_ACTIVE_QUERY_SCHEDULE_SHA256 = "5a0ac285435ba33a80a3272020f19c85004fc63949f1df4325a3ad90fdcd87f2"
 READONLY_MICRO_READ_HZ = 2_000
 CODED_PREPROJECTION_READ_HZ = 2_000
 LEGACY_READ_HZ = 8_000
@@ -68,6 +69,7 @@ CODED_PREPROJECTION_VARIANTS = frozenset({
     "coded-preprojection-warm-declaration-sham-loop",
     "coded-preprojection-warm-phase-local-sham-loop",
     "coded-preprojection-warm-phase-local-loop",
+    "coded-preprojection-active-query-loop",
 })
 CODED_PREPROJECTION_RESTORED_VARIANTS = frozenset({
     "coded-preprojection-restored-loop",
@@ -79,6 +81,7 @@ CODED_PREPROJECTION_WARM_RESTORED_VARIANTS = frozenset({
     "coded-preprojection-warm-declaration-sham-loop",
     "coded-preprojection-warm-phase-local-sham-loop",
     "coded-preprojection-warm-phase-local-loop",
+    "coded-preprojection-active-query-loop",
 })
 CODED_PREPROJECTION_QUERY_SCRAMBLE_VARIANTS = frozenset({
     "coded-preprojection-warm-query-scramble-loop",
@@ -95,6 +98,10 @@ CODED_PREPROJECTION_PHASE_LOCAL_SHAM_VARIANTS = frozenset({
 CODED_PREPROJECTION_PHASE_LOCAL_VARIANTS = frozenset({
     "coded-preprojection-warm-phase-local-sham-loop",
     "coded-preprojection-warm-phase-local-loop",
+    "coded-preprojection-active-query-loop",
+})
+CODED_PREPROJECTION_ACTIVE_QUERY_VARIANTS = frozenset({
+    "coded-preprojection-active-query-loop",
 })
 CODED_PREPROJECTION_NULL_CONTROL_VARIANTS = (
     CODED_PREPROJECTION_QUERY_SCRAMBLE_VARIANTS |
@@ -124,6 +131,8 @@ FORBIDDEN_PROCESS_MARKERS = (
 
 
 def coded_preprojection_schedule_sha256(pilot_variant: str) -> str:
+    if pilot_variant in CODED_PREPROJECTION_ACTIVE_QUERY_VARIANTS:
+        return CODED_PREPROJECTION_ACTIVE_QUERY_SCHEDULE_SHA256
     if pilot_variant in CODED_PREPROJECTION_QUERY_SCRAMBLE_VARIANTS:
         return CODED_PREPROJECTION_WARM_QUERY_SCRAMBLE_SCHEDULE_SHA256
     if pilot_variant in CODED_PREPROJECTION_QUERY_OFF_VARIANTS:
@@ -1170,10 +1179,20 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
         and neutral_restoration_passed
         and not coded_null_control
     )
+    active_query = pilot_variant in CODED_PREPROJECTION_ACTIVE_QUERY_VARIANTS
+    measurement_mode = (
+        "catcas_active_query_delta_cycles"
+        if active_query else "catcas_coded_preprojection_response_cycles"
+    )
+    primary_coordinate = (
+        "active-query balanced subbank delta quadrature fold-odd response"
+        if active_query else "post-control-centered quadrature fold-odd response"
+    )
     return {
         "schema_id": "CAT_CAS_CODED_PREPROJECTION_LOOP_ANALYSIS_V1",
         "pilot_variant": pilot_variant,
-        "measurement_mode": "catcas_coded_preprojection_response_cycles",
+        "measurement_mode": measurement_mode,
+        "active_query_receiver_delta": active_query,
         "schedule": {
             "schedule_sha256": schedule_sha256,
             "slot_count": 16,
@@ -1181,7 +1200,7 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
             "duration_s": 8.0,
             "read_hz": CODED_PREPROJECTION_READ_HZ,
             "tokens": [row["token"] for row in lockin],
-            "primary_coordinate": "post-control-centered quadrature fold-odd response",
+            "primary_coordinate": primary_coordinate,
             "stimulus_slots": stimulus_slots,
             "pre_plus_slots": plus_slots,
             "pre_minus_slots": minus_slots,
@@ -1246,7 +1265,11 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
         "claim_ceiling": (
             f"{null_control_kind.replace('_', '-')} killing control only; no OrbitState coupling, path memory, holonomy, or Small Wall claim"
             if coded_null_control
-            else "single coded-loop physical mapping; no OrbitState coupling, path memory, holonomy, or Small Wall claim"
+            else (
+                "active-query coded-loop physical mapping only; requires matched active-query controls before any Small Wall claim"
+                if active_query
+                else "single coded-loop physical mapping; no OrbitState coupling, path memory, holonomy, or Small Wall claim"
+            )
         ),
     }
 
@@ -1384,6 +1407,7 @@ def execute(source_root: Path, output_root: Path, pilot_variant: str) -> dict[st
             "coded-preprojection-warm-declaration-sham-loop",
             "coded-preprojection-warm-phase-local-sham-loop",
             "coded-preprojection-warm-phase-local-loop",
+            "coded-preprojection-active-query-loop",
         },
         "unknown pilot variant",
     )
@@ -1539,6 +1563,7 @@ def parse_args() -> argparse.Namespace:
             "coded-preprojection-warm-declaration-sham-loop",
             "coded-preprojection-warm-phase-local-sham-loop",
             "coded-preprojection-warm-phase-local-loop",
+            "coded-preprojection-active-query-loop",
         ),
         default="pn",
     )

@@ -1,0 +1,203 @@
+{
+  "schema_id": "CAT_CAS_CODED_PREPROJECTION_ACTIVE_QUERY_CHECKPOINT_V1",
+  "checkpoint_date": "2026-07-12",
+  "starting_commit": "563e923d68b8c895013ce6073a5406427005937b",
+  "run": {
+    "run_id": "coded_preprojection_active_query_0",
+    "pilot_variant": "coded-preprojection-active-query-loop",
+    "local_run": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/coded_preprojection_active_query_0",
+    "remote_run": "/root/catcas_live_small_wall/coded_preprojection_active_query_0",
+    "command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_gate_a_first_light.py --run-id coded_preprojection_active_query_0 --pilot-variant coded-preprojection-active-query-loop",
+    "lab_device": "root@192.168.137.100",
+    "controller_status": "GATE_A_FIRST_LIGHT_COMPLETE",
+    "remote_returncode": 0,
+    "copy_verified": true,
+    "remote_cleaned": true,
+    "verified_file_count": 15
+  },
+  "source_binding": {
+    "source_bundle_sha256": "e04ea5136af49a170792ba8672555c8c3c94431510fe8f12e2f542dd0670aad3",
+    "schedule_sha256": "5a0ac285435ba33a80a3272020f19c85004fc63949f1df4325a3ad90fdcd87f2",
+    "schedule_tokens": "WU WU N0 P0 C0 M0 M1 C1 P1 P2 C2 M2 M3 C3 P3 N1",
+    "access_law": "CAT_CAS_ACTIVE_QUERY_DELTA_V1",
+    "measurement_mode": "catcas_active_query_delta_cycles",
+    "observation_kind": "experiment_owned_balanced_query_subbank_delta_cycles_per_access",
+    "source_hashes": {
+      "live_gate_a_target.py": "23738e461cf41d52e65b0d0bdbb5fd5d388e5d7355f0c4a847304fd487cb8597",
+      "small_wall_runtime.c": "2f3d16b9bb9cdafe273010c881901fd9afe3e16d9b0ac603526aec43ac4efc19",
+      "small_wall_runtime.h": "d0ea06d41688943b66f5aa75262394321d4fa88651816741cc3144b74df9af4a",
+      "small_wall_worker.c": "fb00531b01d337bd20f76eabef353dcb1979654a9bde2d62c44d1376d8ca1d87"
+    }
+  },
+  "predeclared_discriminator": {
+    "wall": "access-model selection after timing, ownership-intent PMU, IBS, WC/flush-order, and eviction-sentinel phase-local carriers failed controls",
+    "carrier": "CAT_CAS-owned response and occupancy buffers with active receiver-side balanced subbank query",
+    "operator": "existing phase-local public P/C/M footprint sequence over 16 fixed 0.5 s slots",
+    "observable": "balanced positive-minus-negative response-subbank pointer-chase delta per access, decoded by the frozen quadrature fold-odd coordinate",
+    "strongest_alternative_explanation": "receiver query/order leakage or local service curvature rather than a restored pre-projection fold-odd carrier",
+    "killing_controls_present_in_run": "neutral N0/N1 restoration, post-projection C slots, balanced P/C/M schedule, alternating positive/negative subbank order",
+    "additional_control_needed_if_positive": "matched active-query sham/null before any crossing claim",
+    "restoration_class": "neutral active-query response restoration plus policy4/policy5 readback and verified copy-back"
+  },
+  "decoded_observables": {
+    "pre_projection_private_fold_plus": {
+      "real": 10.739075969827587,
+      "imag": -0.5096472537878798,
+      "abs": 10.751162402690317
+    },
+    "pre_projection_private_fold_minus": {
+      "real": 2.431522253787879,
+      "imag": 0.12953361742424174,
+      "abs": 2.434970108380942
+    },
+    "post_projection_control": {
+      "real": 0.14023437499999955,
+      "imag": -3.407421875,
+      "abs": 3.4103063666128524
+    },
+    "control_floor_cycles": 3.407421875,
+    "fold_odd_balance_error_cycles": 0.38011363636363804,
+    "source_off_whole_slot_range_cycles": 0.24153124999999998,
+    "fold_odd_opposed": true,
+    "fold_odd_exceeds_controls": false,
+    "fold_odd_signal_candidate": false,
+    "engineering_candidate": false
+  },
+  "integrity": {
+    "capture_quality_classification": "CAPTURE_ACCEPTED_WITH_SERVICE_SPIKES",
+    "sample_count": 16000,
+    "sample_count_per_slot": [
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000
+    ],
+    "sufficient_during_burst_samples": true,
+    "all_bursts_completed_inside_slots": true,
+    "record_integrity_failure": false,
+    "missing_slot": false,
+    "sender_spill": false,
+    "skipped_deadline_count": 0,
+    "missed_deadline_count": 0,
+    "step_sender_epoch_count": 1,
+    "runtime_execution_count": 1
+  },
+  "lab_device_boundary": {
+    "temperature_preflight_c": 50.0,
+    "temperature_veto_c": 68.0,
+    "frequency_write_attempt_count": 8,
+    "written_paths": [
+      "/sys/devices/system/cpu/cpufreq/policy4/scaling_max_freq",
+      "/sys/devices/system/cpu/cpufreq/policy4/scaling_min_freq",
+      "/sys/devices/system/cpu/cpufreq/policy5/scaling_max_freq",
+      "/sys/devices/system/cpu/cpufreq/policy5/scaling_min_freq"
+    ],
+    "restoration_complete": true,
+    "restoration_readback": {
+      "policy4": {
+        "scaling_min_freq": 800000,
+        "scaling_max_freq": 3200000,
+        "resolved_path": "/sys/devices/system/cpu/cpufreq/policy4"
+      },
+      "policy5": {
+        "scaling_min_freq": 800000,
+        "scaling_max_freq": 3200000,
+        "resolved_path": "/sys/devices/system/cpu/cpufreq/policy5"
+      }
+    },
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "physical_address_access": false,
+    "cache_set_mapping": false,
+    "experiment_owned_memory_only": true,
+    "forbidden_process_matches_before": 0,
+    "forbidden_process_matches_after": 0
+  },
+  "focused_validation": [
+    {
+      "command": "git diff --check -- THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": ".\\.venv\\Scripts\\python.exe -m py_compile THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\live_gate_a_target.py THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_gate_a_first_light.py",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": "wsl sh -lc \"cd '/mnt/d/CCC 2.0/AI/agent-governance-system' && cc -std=c11 -Wall -Wextra -Werror -pedantic -O2 -pthread -I 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall' -I 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2' 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/small_wall_worker.c' 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/small_wall_runtime.c' 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime_v2/captured_file.c' -lm -o 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/gate_a_worker_local_check' && 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/gate_a_worker_local_check' --validate-only && 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/gate_a_worker_local_check' --self-test-coded-preprojection-active-query\"",
+      "exit_code": 0,
+      "output": "{\"automatic_retry\":false,\"control_writes\":0,\"engineering_smoke_executor_implemented\":true,\"hardware_executions\":0,\"msr_reads\":0,\"msr_writes\":0,\"receiver_captures\":0,\"sender_starts\":0,\"slot_count\":16,\"status\":\"GATE_A_WORKER_VALIDATE_ONLY_OK\",\"validate_only\":true,\"live_execution_bound\":false}\n{\"status\":\"GATE_A_WORKER_MOCK_SELF_TEST_OK\",\"network_connections\":0,\"hardware_executions\":0,\"frequency_writes\":0,\"voltage_writes\":0,\"msr_reads\":0,\"msr_writes\":0,\"slot_count\":16,\"sample_count\":16000,\"step_sender_epoch_count\":1,\"temperature_receipt_count\":2}"
+    }
+  ],
+  "raw_outputs": {
+    "CONTROLLER_RESULT.json": {
+      "size": 771,
+      "sha256": "b721db90fa93a9038c3a6f2d2a86b4c73b00b01c0a635e64f9d6410c947db5a0"
+    },
+    "FINAL_RESULT.json": {
+      "size": 8110,
+      "sha256": "84b032b05ad763e03f0be6f5888ab8842151d4e14cc2bd9153b927a2c358485c"
+    },
+    "FIRST_LIGHT_ANALYSIS.json": {
+      "size": 17802,
+      "sha256": "ffd0a71f53f266685358f11c96fdd6d3c4847b275f77bf6477287a50a1b5bab1"
+    },
+    "FILE_MANIFEST.json": {
+      "size": 1953,
+      "sha256": "172c78236596c5d4b27851f44283b16354ee134c66349941d208693db76564f6"
+    },
+    "CONTROLLER_STDOUT.txt": {
+      "size": 8240,
+      "sha256": "a338296e663dd8ca194f8d3419e48b8673092cfdfd37b78d7fe62e56853f1a0a"
+    },
+    "CONTROLLER_STDERR.txt": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "FREQUENCY_WRITE_LEDGER.json": {
+      "size": 3901,
+      "sha256": "23b48e95d27da5426cce86005f607dfe114eeba49054a4ea896b74172a27a5e4"
+    },
+    "PINNED_OBSERVATION.json": {
+      "size": 46434,
+      "sha256": "4f5b74fd879aa26f548846b17e2dcb01ee6dd7036f43b5960497bb1880f0946d"
+    },
+    "POLICY_SNAPSHOT.json": {
+      "size": 2300,
+      "sha256": "a91d64655d220d267c0b746ac672475e51097db9e715326ccb0773f0fe50cc34"
+    },
+    "RUNTIME_MONITOR.json": {
+      "size": 18686,
+      "sha256": "58955ffe02fa806ef06ac7cb1afd49455089404e7e85a06c1ba9c6cf72ae2e39"
+    },
+    "RUNTIME_PROCESS.json": {
+      "size": 4761,
+      "sha256": "dbf7ea9992058ac26aa839160dcd5f0c00040b58fe7faabe089161a5d3b41120"
+    }
+  },
+  "custody": {
+    "stash_at_0": "inspected only; current main already contains or supersedes useful PMU first-light changes; stash left untouched",
+    "subagent_boundary": "read-only architecture subagent was not given checkout mutation, lab-device contact, or Git write authority; it produced no committed mutation or live transaction"
+  },
+  "classification": {
+    "marker": "CODED_PREPROJECTION_ACTIVE_QUERY_RESPONSE_NOT_ESTABLISHED",
+    "mechanical_failure": false,
+    "scientific_result": "negative for active-query receiver-delta access model under this schedule",
+    "interpretation": "The active-query access law was implemented and captured cleanly. The candidate signs were opposed, but the fold-odd magnitude did not clear the post-control floor. This kills this exact active-query receiver-delta mapping without killing the broader access-model family.",
+    "claim_ceiling_after_run": "EVICTION_SENTINEL_RESPONSE_FOUND"
+  }
+}

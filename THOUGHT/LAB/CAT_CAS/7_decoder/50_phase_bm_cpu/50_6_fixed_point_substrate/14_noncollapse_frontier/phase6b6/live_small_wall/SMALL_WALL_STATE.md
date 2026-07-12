@@ -6,31 +6,21 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`EVICTION_PHASE_BRACKETED_DURATION_RESPONSE_NOT_ESTABLISHED`
+`CODED_PREPROJECTION_ACTIVE_QUERY_RESPONSE_NOT_ESTABLISHED`
 
 **Active wall:**
-The current wall is phase-local use of a newly visible restoration-sentinel carrier
-for the declared pre-projection coded-query access model. Timing, ownership-intent PMU
-footprint, IBS availability, and WC/flush-order probes either failed controls or did
-not expose a usable carrier. The eviction-sentinel first-light run changed the access
-model from "bytes restored" to a measured restoration equivalence class: a
-predetermined CAT_CAS-owned eviction-buffer preconditioner measurably changes a later
-byte-preserving ownership-intent sentinel while both the carrier and eviction buffer
-restore. That is a useful physical carrier, not path memory, holonomy, fold-odd
-recovery, or a Small Wall crossing. The next discriminator must map the public
-P/C/M phases onto this eviction-sentinel carrier with matched equal-prep sham
-controls, fixed quadrature weights, and no private branch routing. The first such
-mapping, `f10_eviction_phase_local_0`, completed and restored but failed the
-phase-local rule: the equal-prep sham curvature was larger than the candidate in the
-primary decoded coordinate. The active wall is now sequence-position cancellation for
-the eviction-sentinel carrier, not carrier absence. The bracketed follow-on
-`f10_eviction_bracket_0` reduced the sham floor and produced opposed candidate signs
-in Change-to-Dirty, but missed the three-times-sham rule. The active wall is now prep
-contrast under local bracketing. The stronger `none` versus `home_write_eviction`
-contrast did not preserve the opposed-sign geometry, so the eviction-sentinel carrier
-is not yet a control-clean phase-local fold-odd carrier. A duration-primary bracketed
-run also preserved opposed signs but remained below the three-times-sham rule. The
-active wall is now carrier-family selection beyond eviction-sentinel PMU/timing.
+The current wall is still carrier/access-model selection. Timing, ownership-intent PMU
+footprint, IBS availability, WC/flush-order, eviction-sentinel PMU/timing
+phase-local mappings, and the first active-query receiver-delta access model either
+failed controls or did not expose a usable fold-odd carrier. The eviction-sentinel
+first-light run remains useful because it changed restoration from byte equality to a
+measured carrier equivalence class, but the phase-local remaps did not promote it. The
+new `coded_preprojection_active_query_0` run moved the query into the receiver's
+measured workload before scalar recording and restored cleanly, but its opposed
+fold-odd candidate did not clear the post-control floor. The active wall is now a
+stronger carrier or access model that preserves a conjugate/source-side coordinate
+before the public fold-even projection while retaining a direct restoration law and a
+killing control.
 
 ## Established
 
@@ -577,6 +567,7 @@ F10_ROUTE_OPERATOR_COMPARISON_CHECKPOINT_20260712.json
 F10_ROUTE_STATE_PILOT_CHECKPOINT_20260712.json
 CODED_PREPROJECTION_DECLARATION_SHAM_CHECKPOINT_20260712.json
 CODED_PREPROJECTION_PHASE_LOCAL_CHECKPOINT_20260712.json
+CODED_PREPROJECTION_ACTIVE_QUERY_CHECKPOINT_20260712.json
 ```
 
 Historical V2 Gate A source was restored and should remain a sealed reference. New
@@ -1025,6 +1016,64 @@ Checkpoint:
 ownership-intent PMU footprint carrier is not established. Do not repeat the same
 timing or PMU footprint discriminator unchanged.
 
+The active-query receiver-delta discriminator then moved the query basis into the
+measurement workload before scalar recording. Instead of measuring a passive response
+buffer and decoding later, the receiver alternated matched positive/negative
+CAT_CAS-owned response sub-banks and recorded the balanced delta directly:
+
+```text
+run id        coded_preprojection_active_query_0
+variant       coded-preprojection-active-query-loop
+source bundle e04ea5136af49a170792ba8672555c8c3c94431510fe8f12e2f542dd0670aad3
+schedule hash 5a0ac285435ba33a80a3272020f19c85004fc63949f1df4325a3ad90fdcd87f2
+schedule      WU WU N0 P0 C0 M0 M1 C1 P1 P2 C2 M2 M3 C3 P3 N1
+```
+
+The transaction completed with verified copy-back and remote cleanup. It restored
+policy4 and policy5 to `800000-3200000` kHz by readback, performed zero voltage
+access and zero MSR access, stayed below the 68 C temperature veto, produced all
+16,000 samples, completed every stimulus burst inside its slot, skipped no deadlines,
+had no missing slot, no sender spill, and no record-integrity failure. Capture was
+accepted with service spikes.
+
+Decoded active-query observables:
+
+```text
+pre_projection_private_fold_plus:
+  real +10.739075969827587
+  imag  -0.5096472537878798
+  abs  +10.751162402690317
+
+pre_projection_private_fold_minus:
+  real  +2.431522253787879
+  imag  +0.12953361742424174
+  abs   +2.434970108380942
+
+post_projection_control:
+  real  +0.14023437499999955
+  imag  -3.407421875
+  abs   +3.4103063666128524
+```
+
+The candidate signs were opposed, but the active-query fold-odd magnitude did not
+clear the post-control floor:
+
+```text
+fold_odd_opposed          true
+fold_odd_exceeds_controls false
+fold_odd_signal_candidate false
+neutral N0/N1 range       0.24153124999999998
+```
+
+Checkpoint:
+
+`CODED_PREPROJECTION_ACTIVE_QUERY_CHECKPOINT_20260712.json`
+
+**Status:** this exact active-query receiver-delta mapping is negative. It changes the
+access model and restores cleanly, but does not establish a control-clean fold-odd
+carrier. H5 remains alive only for a materially stronger carrier/query algebra, not a
+repeat of this phase-local active-query delta schedule.
+
 ### H6 - Alternative carriers remain available
 
 Candidate families:
@@ -1335,23 +1384,26 @@ carrier family or access model rather than continuing eviction-sentinel remaps.
 
 ## Cheapest current discriminator
 
-Change carrier family or access model. The run must stay closed: CAT_CAS-owned buffers
-only, predetermined geometry, no physical-address access, no cache-set mapping, no
-unrelated-process observation, and no MSR or voltage access.
+Change carrier family or access model again, not another remap of the same
+phase-local timing/PMU/eviction/active-query geometry. The run must stay closed:
+CAT_CAS-owned buffers only, predetermined geometry, no physical-address access, no
+cache-set mapping, no unrelated-process observation, and no MSR or voltage access.
 
 The next probe should answer:
 
-1. Can the active pre-projection query be expressed as a declared source-side phase
-   rather than as a post-hoc PMU or duration label?
-2. Is there a source-owned runtime carrier whose state survives long enough to couple
+1. Is there a source-owned runtime carrier whose state survives long enough to couple
    before the public fold-even projection?
+2. Can the query algebra preserve a conjugate/source-side coordinate without turning
+   into receiver-order service curvature?
 3. Does a killing control remove the response without relying on route, line-set,
-   eviction-prep, or sequence-position imbalance?
+   eviction-prep, active-query subbank order, or sequence-position imbalance?
 4. Does the carrier restore beyond byte equality under the new observable?
 
 Do not rerun the same timing coded loop, another scalar PMU route metric,
 unconditioned transient timing repeat, IBS availability probe, WC/flush-order pair, or
-unlabeled cache-line rectangle unchanged.
+unlabeled cache-line rectangle unchanged. Do not rerun
+`coded_preprojection_active_query_0` or the same active-query receiver-delta schedule
+unchanged.
 
 ## Current claim ceiling
 
@@ -1377,9 +1429,12 @@ response because the equal-prep sham curvature exceeded the candidate.
 candidate signs, but did not exceed the three-times-sham threshold.
 `f10_eviction_bracket_c2d_0` then showed that simply strengthening the bracketed prep
 contrast collapses the sign. `f10_eviction_duration_1` extended the rejection to a
-duration-primary observable. The current marker remains short of
-`SMALL_WALL_CROSSED`; the next move must change carrier family or access model rather
-than keep remapping the same eviction-sentinel PMU/timing phase-local geometry.
+duration-primary observable. `coded_preprojection_active_query_0` then changed the
+access model by measuring a balanced active-query receiver delta before scalar
+recording, but the opposed candidate did not clear the post-control floor. The current
+marker remains short of `SMALL_WALL_CROSSED`; the next move must change carrier family
+or access model rather than keep remapping the same eviction-sentinel PMU/timing or
+active-query phase-local geometry.
 
 ## State update rule
 
