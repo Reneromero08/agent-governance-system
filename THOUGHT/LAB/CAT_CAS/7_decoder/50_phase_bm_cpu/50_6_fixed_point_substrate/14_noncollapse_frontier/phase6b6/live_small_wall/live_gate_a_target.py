@@ -36,6 +36,9 @@ USER_DIRECTIVE_SHA256 = hashlib.sha256(
     b"CAT_CAS_EXPLICIT_USER_LIVE_AUTHORIZATION__SMALL_WALL_GOAL__2026-07-11"
 ).hexdigest()
 OFF_TOKENS = frozenset({"I", "C0", "D0", "O0", "T"})
+SAMPLE_TIMING_RECORD = struct.Struct("<QQQQQQQQ")
+SAMPLE_TIMING_RECORD_BYTES = 64
+SAMPLE_TIMING_SCHEMA_ID = "CAT_CAS_READONLY_OCCUPANCY_SAMPLE_TIMING_V1"
 SOURCE_NAMES = (
     "live_gate_a_target.py",
     "gate_a_frequency_preparation.py",
@@ -541,6 +544,113 @@ def exact_permutation_p(step: list[float], off: list[float]) -> float:
     return exceed / total
 
 
+def parse_sample_timing(path: Path) -> list[dict[str, int]]:
+    data = path.read_bytes()
+    require(len(data) % SAMPLE_TIMING_RECORD_BYTES == 0, "sample timing file has partial record")
+    require(len(data) % SAMPLE_TIMING_RECORD.size == 0, "sample timing parser size mismatch")
+    rows: list[dict[str, int]] = []
+    previous_requested: int | None = None
+    previous_finished: int | None = None
+    for index, record in enumerate(SAMPLE_TIMING_RECORD.iter_unpack(data)):
+        (
+            sample_index,
+            requested_tsc,
+            started_tsc,
+            finished_tsc,
+            scheduler_lateness_ticks,
+            service_ticks,
+            finish_gap_ticks,
+            slot_index,
+        ) = (int(value) for value in record)
+        require(sample_index == index, "sample timing index drift")
+        require(slot_index < 16, "sample timing slot out of range")
+        require(started_tsc >= requested_tsc, "sample timing started before requested")
+        require(finished_tsc >= started_tsc, "sample timing finished before started")
+        require(
+            scheduler_lateness_ticks == max(0, started_tsc - requested_tsc),
+            "sample timing lateness mismatch",
+        )
+        require(service_ticks == finished_tsc - started_tsc, "sample timing service mismatch")
+        if previous_requested is not None:
+            require(requested_tsc > previous_requested, "sample timing requested timestamp went backward")
+            require(finished_tsc >= int(previous_finished), "sample timing finished timestamp went backward")
+            require(finish_gap_ticks == finished_tsc - int(previous_finished), "sample timing finish-gap mismatch")
+        else:
+            require(finish_gap_ticks == 0, "first sample finish-gap must be zero")
+        rows.append(
+            {
+                "sample_index": sample_index,
+                "requested_tsc": requested_tsc,
+                "started_tsc": started_tsc,
+                "finished_tsc": finished_tsc,
+                "scheduler_lateness_ticks": scheduler_lateness_ticks,
+                "service_ticks": service_ticks,
+                "finish_gap_ticks": finish_gap_ticks,
+                "slot_index": slot_index,
+            }
+        )
+        previous_requested = requested_tsc
+        previous_finished = finished_tsc
+    return rows
+
+
+def sample_timing_summary(runtime_root: Path, expected_count: int) -> dict[str, Any] | None:
+    path = runtime_root / "sample_timing.bin"
+    diagnostic_path = runtime_root / "TIMING_DIAGNOSTIC_SUMMARY.json"
+    if not path.is_file():
+        return None
+    rows = parse_sample_timing(path)
+    require(len(rows) == expected_count, "sample timing count does not match raw samples")
+    diagnostic = json.loads(diagnostic_path.read_text(encoding="utf-8"))
+    require(
+        diagnostic.get("sample_timing_schema_id") == SAMPLE_TIMING_SCHEMA_ID,
+        "sample timing schema mismatch",
+    )
+    slot_counts = [0 for _ in range(16)]
+    for row in rows:
+        slot_counts[row["slot_index"]] += 1
+    require(slot_counts == diagnostic.get("sample_count_per_slot"), "diagnostic slot counts mismatch")
+    lateness = [row["scheduler_lateness_ticks"] for row in rows]
+    service_cycles = [row["service_ticks"] / 64.0 for row in rows]
+    return {
+        "sample_timing_schema_id": SAMPLE_TIMING_SCHEMA_ID,
+        "sample_timing_record_bytes": SAMPLE_TIMING_RECORD_BYTES,
+        "sample_count": len(rows),
+        "max_scheduler_lateness_ticks": max(lateness) if lateness else 0,
+        "max_service_cycles_per_access": max(service_cycles) if service_cycles else 0.0,
+        "diagnostic_classification": diagnostic["capture_quality_classification"],
+        "diagnostic": diagnostic,
+    }
+
+
+def self_test_timing_parser() -> int:
+    import tempfile
+
+    with tempfile.TemporaryDirectory(prefix="gate_a_timing_parser_") as directory:
+        root = Path(directory)
+        records = [
+            (0, 1000, 1000, 1064, 0, 64, 0, 0),
+            (1, 2000, 2010, 2074, 10, 64, 1010, 0),
+            (2, 3000, 3000, 3130, 0, 130, 1056, 1),
+        ]
+        payload = b"".join(SAMPLE_TIMING_RECORD.pack(*record) for record in records)
+        (root / "sample_timing.bin").write_bytes(payload)
+        (root / "TIMING_DIAGNOSTIC_SUMMARY.json").write_text(
+            json.dumps(
+                {
+                    "sample_timing_schema_id": SAMPLE_TIMING_SCHEMA_ID,
+                    "sample_count_per_slot": [2, 1] + [0] * 14,
+                    "capture_quality_classification": "CAPTURE_ACCEPTED",
+                }
+            ),
+            encoding="utf-8",
+        )
+        summary = sample_timing_summary(root, 3)
+        require(summary is not None and summary["sample_count"] == 3, "parser self-test failed")
+    print(json.dumps({"status": "GATE_A_TIMING_PARSER_SELF_TEST_OK", "hardware_executions": 0}))
+    return 0
+
+
 def analyze_runtime(runtime_root: Path, pilot_variant: str) -> dict[str, Any]:
     lockin = [json.loads(line) for line in (runtime_root / "LOCKIN_IQ.jsonl").read_text().splitlines() if line]
     require(len(lockin) == 16, "expected 16 lock-in records")
@@ -550,6 +660,7 @@ def analyze_runtime(runtime_root: Path, pilot_variant: str) -> dict[str, Any]:
     raw_bytes = (runtime_root / "raw_samples.bin").read_bytes()
     require(len(raw_bytes) % 16 == 0, "raw sample file is not packed Qd records")
     raw = [record for record in struct.iter_unpack("<Qd", raw_bytes)]
+    timing_summary = sample_timing_summary(runtime_root, len(raw))
     groups: dict[str, list[dict[str, Any]]] = {
         "off": [row for row in lockin if row["token"] in OFF_TOKENS],
         "step": [row for row in lockin if row["token"] == "S0E"],
@@ -619,6 +730,7 @@ def analyze_runtime(runtime_root: Path, pilot_variant: str) -> dict[str, Any]:
             "readonly-occupancy-equal": ["positive", "negative"],
         }[pilot_variant],
         "groups": summaries,
+        "sample_timing": timing_summary,
         "step_minus_off_magnitude": step_mean - off_mean,
         "step_vs_off_exact_permutation_p": exact_permutation_p(step_magnitudes, off_magnitudes),
         "anchor_phase_delta_rad": phase_delta,
@@ -791,8 +903,9 @@ def execute(source_root: Path, output_root: Path, pilot_variant: str) -> dict[st
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--source-root", type=Path, required=True)
-    parser.add_argument("--output-root", type=Path, required=True)
+    parser.add_argument("--self-test-timing-parser", action="store_true")
+    parser.add_argument("--source-root", type=Path)
+    parser.add_argument("--output-root", type=Path)
     parser.add_argument(
         "--pilot-variant",
         choices=(
@@ -810,6 +923,15 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
+    if args.self_test_timing_parser:
+        try:
+            return self_test_timing_parser()
+        except Exception as exc:
+            print(f"live_gate_a_target: {exc}", file=sys.stderr)
+            return 1
+    if args.source_root is None or args.output_root is None:
+        print("live_gate_a_target: --source-root and --output-root are required", file=sys.stderr)
+        return 2
     try:
         result = execute(args.source_root.resolve(), args.output_root.resolve(), args.pilot_variant)
     except Exception as exc:

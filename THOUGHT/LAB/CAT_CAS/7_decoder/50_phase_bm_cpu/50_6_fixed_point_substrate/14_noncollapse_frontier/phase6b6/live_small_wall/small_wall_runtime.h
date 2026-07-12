@@ -9,6 +9,11 @@
 #define GATE_A_TEMPERATURE_DRIVER_NAME "k10temp"
 #define GATE_A_TEMPERATURE_INPUT "temp1_input"
 #define GATE_A_TEMPERATURE_RECEIPT_FILE "TEMPERATURE_RECEIPTS.jsonl"
+#define GATE_A_SAMPLE_TIMING_FILE "sample_timing.bin"
+#define GATE_A_TIMING_DIAGNOSTIC_FILE "TIMING_DIAGNOSTIC_SUMMARY.json"
+#define GATE_A_SAMPLE_TIMING_SCHEMA_ID \
+    "CAT_CAS_READONLY_OCCUPANCY_SAMPLE_TIMING_V1"
+#define GATE_A_SAMPLE_TIMING_RECORD_BYTES 64U
 #define GATE_A_TEMPERATURE_MILLIDEGREES_PER_C 1000L
 #define GATE_A_TEMPERATURE_VETO_MILLIDEGREES 68000L
 #define GATE_A_TEMPERATURE_MIN_MILLIDEGREES (-40000L)
@@ -70,6 +75,8 @@ typedef struct {
     uint64_t capture_first_sample_tsc;
     uint64_t capture_last_sample_tsc;
     double capture_tsc_hz;
+    uint64_t capture_max_sample_delay_tsc;
+    double capture_max_response_cycles_per_access;
     int step_sender_epoch_count;
     int hardware_executed;
     int sender_start_count;
@@ -79,16 +86,31 @@ typedef struct {
     int voltage_writes;
     int msr_reads;
     int msr_writes;
+    int scheduler_priority_attempt_count;
+    int scheduler_priority_success_count;
+    uint64_t max_scheduler_lateness_ticks;
+    uint64_t scheduler_lateness_reject_threshold_ticks;
+    uint64_t missed_deadline_count;
+    uint64_t max_finish_gap_ticks;
+    char capture_quality_classification[64];
     char occupancy_digest_before[65];
     char occupancy_digest_after[65];
     int occupancy_digest_unchanged;
     int occupancy_prefaulted;
+    uint64_t occupancy_requested_slot_start_tsc[16];
+    uint64_t occupancy_requested_slot_end_tsc[16];
+    uint64_t occupancy_burst_start_tsc[16];
+    uint64_t occupancy_burst_finish_tsc[16];
+    uint64_t occupancy_burst_duration_ticks[16];
     uint64_t occupancy_touch_count[16];
+    uint64_t occupancy_footprint_bytes[16];
     uint64_t occupancy_initial_cursor[16];
     uint64_t occupancy_final_cursor[16];
+    int occupancy_completed_before_slot_end[16];
 } GateASmokeResult;
 
 int run_gate_a_engineering_smoke(const GateASmokeArgs *, GateASmokeResult *);
+int gate_a_test_readonly_timing_diagnostics(void);
 
 #ifdef GATE_A_NATIVE_TEMPERATURE_TESTING
 int gate_a_test_observe_temperature(const char *hwmon_root,

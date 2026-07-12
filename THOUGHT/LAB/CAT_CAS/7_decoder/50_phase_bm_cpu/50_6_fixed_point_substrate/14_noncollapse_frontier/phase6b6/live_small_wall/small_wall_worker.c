@@ -146,7 +146,8 @@ static size_t pilot_working_set_bytes(int slot, int pilot) {
         return slot == 6 || slot == 9
             ? GATE_A_OCCUPANCY_SMALL_BYTES : GATE_A_OCCUPANCY_LARGE_BYTES;
     }
-    if (pilot == GATE_A_PILOT_OCCUPANCY_REVERSE) {
+    if (pilot == GATE_A_PILOT_OCCUPANCY_REVERSE ||
+        pilot == GATE_A_PILOT_READONLY_OCCUPANCY_REVERSE) {
         return slot == 6 || slot == 9
             ? GATE_A_OCCUPANCY_LARGE_BYTES : GATE_A_OCCUPANCY_SMALL_BYTES;
     }
@@ -370,11 +371,18 @@ static int self_test(const char *retained_output, int pilot) {
         if (!result.occupancy_prefaulted ||
             !result.occupancy_digest_unchanged ||
             strcmp(result.occupancy_digest_before,
-                   result.occupancy_digest_after)) rc = 1;
+                   result.occupancy_digest_after) ||
+            strcmp(result.capture_quality_classification,
+                   "CAPTURE_ACCEPTED")) rc = 1;
         for (int slot = 6; slot <= 9; slot++) {
             if (result.occupancy_touch_count[slot] !=
                     GATE_A_READONLY_SLOT_TOUCHES ||
-                result.occupancy_initial_cursor[slot] != 0) rc = 1;
+                !result.occupancy_burst_start_tsc[slot] ||
+                !result.occupancy_burst_finish_tsc[slot] ||
+                result.occupancy_burst_finish_tsc[slot] <=
+                    result.occupancy_burst_start_tsc[slot] ||
+                result.occupancy_footprint_bytes[slot] == 0 ||
+                !result.occupancy_completed_before_slot_end[slot]) rc = 1;
         }
     }
     const char *names[] = {
@@ -387,6 +395,19 @@ static int self_test(const char *retained_output, int pilot) {
         if (snprintf(path, sizeof(path), "%s/%s", output, names[i]) < (int)sizeof(path)) {
             if (access(path, F_OK)) rc = 1;
             if (!retained_output) unlink(path);
+        }
+    }
+    if (!rc && pilot >= GATE_A_PILOT_READONLY_OCCUPANCY_FORWARD) {
+        const char *readonly_names[] = {
+            GATE_A_SAMPLE_TIMING_FILE,
+            GATE_A_TIMING_DIAGNOSTIC_FILE,
+        };
+        for (size_t i = 0; i < sizeof(readonly_names) / sizeof(readonly_names[0]); i++) {
+            char path[CP_PATH_MAX];
+            if (snprintf(path, sizeof(path), "%s/%s", output, readonly_names[i]) < (int)sizeof(path)) {
+                if (access(path, F_OK)) rc = 1;
+                if (!retained_output) unlink(path);
+            }
         }
     }
     if (!retained_output) {
@@ -440,6 +461,16 @@ static int cache_response_self_test(void) {
     return self_test(NULL, GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL);
 }
 
+static int timing_diagnostics_self_test(void) {
+    if (gate_a_test_readonly_timing_diagnostics()) return 1;
+    puts("{\"status\":\"GATE_A_WORKER_TIMING_DIAGNOSTICS_SELF_TEST_OK\","
+         "\"network_connections\":0,\"hardware_executions\":0,"
+         "\"long_service_time\":\"accepted_as_physical_data\","
+         "\"scheduler_lateness\":\"rejected\","
+         "\"sender_spill\":\"rejected\"}");
+    return 0;
+}
+
 int main(int argc, char **argv) {
     if (argc == 2 && string_equal(argv[1], "--validate-only")) return validate_only();
     if (argc == 2 && string_equal(argv[1], "--probe-only")) return probe_only();
@@ -449,15 +480,21 @@ int main(int argc, char **argv) {
     if (argc == 2 && string_equal(argv[1], "--self-test-cache-response")) {
         return cache_response_self_test();
     }
+    if (argc == 2 && string_equal(argv[1], "--self-test-timing-diagnostics")) {
+        return timing_diagnostics_self_test();
+    }
     if (argc == 3 && string_equal(argv[1], "--self-test-retain")) {
         return self_test(argv[2], GATE_A_PILOT_PN);
     }
     if (argc == 3 && string_equal(argv[1], "--self-test-cache-response-retain")) {
         return self_test(argv[2], GATE_A_PILOT_OCCUPANCY_EQUAL);
     }
+    if (argc == 3 && string_equal(argv[1], "--self-test-readonly-cache-response-retain")) {
+        return self_test(argv[2], GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL);
+    }
     if (argc >= 2 && string_equal(argv[1], "--execute-authorized")) {
         return execute_authorized(argc, argv);
     }
-    fputs("usage: gate_a_worker --validate-only | --self-test | --self-test-cache-response | --self-test-retain ABSOLUTE_OUTPUT | --self-test-cache-response-retain ABSOLUTE_OUTPUT | --execute-authorized ...\n", stderr);
+    fputs("usage: gate_a_worker --validate-only | --self-test | --self-test-cache-response | --self-test-timing-diagnostics | --self-test-retain ABSOLUTE_OUTPUT | --self-test-cache-response-retain ABSOLUTE_OUTPUT | --self-test-readonly-cache-response-retain ABSOLUTE_OUTPUT | --execute-authorized ...\n", stderr);
     return 2;
 }

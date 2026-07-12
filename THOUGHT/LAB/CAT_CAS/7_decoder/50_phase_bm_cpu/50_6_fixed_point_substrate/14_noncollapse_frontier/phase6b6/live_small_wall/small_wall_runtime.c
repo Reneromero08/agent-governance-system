@@ -144,6 +144,14 @@ static int gate_a_occupancy_geometry_valid(void) {
     return 1;
 }
 
+static int small_wall_request_realtime_thread(void) {
+    struct sched_param param;
+    memset(&param, 0, sizeof(param));
+    param.sched_priority = sched_get_priority_max(SCHED_FIFO);
+    if (param.sched_priority < 1) param.sched_priority = 1;
+    return sched_setscheduler(0, SCHED_FIFO, &param) == 0;
+}
+
 static int gate_a_orbit_value(int slot) {
     if (slot < 6 || slot > 9 || !gate_a_value_pilot()) return -1;
     if (gate_a_pilot_variant == GATE_A_PILOT_VALUE_EQUAL) return 42;
@@ -223,6 +231,10 @@ static int gate_a_cycle_state(int slot, uint64_t now, uint64_t session_origin,
 #define GATE_A_JOIN_GUARD_SECONDS 0.002
 #define GATE_A_SENDER_START_SKEW_SECONDS 0.050
 #define GATE_A_SENDER_JOIN_SKEW_SECONDS 0.050
+#define GATE_A_SCHEDULER_REJECT_MULTIPLE 4.0
+#define GATE_A_SCHEDULER_MISSED_MULTIPLE 1.0
+#define GATE_A_SCHEDULER_MISSED_FRACTION_MAX 0.01
+#define GATE_A_SERVICE_SPIKE_MULTIPLE 4.0
 
 typedef struct {
     atomic_int stop;
@@ -259,6 +271,10 @@ typedef struct {
     uint64_t stop_requested_tsc;
     uint64_t thread_join_start_tsc;
     uint64_t thread_join_tsc;
+    int realtime_attempted;
+    int realtime_applied;
+    uint64_t burst_start_tsc[16];
+    uint64_t burst_finish_tsc[16];
 } GateASender;
 
 typedef struct {
@@ -280,11 +296,551 @@ typedef struct {
     int cache_response_mode;
     uint64_t receiver_epoch;
     int count;
+    int realtime_attempted;
+    int realtime_applied;
+    uint64_t max_sample_delay_tsc;
+    double max_response_cycles_per_access;
+    int samples_per_slot;
+    uint64_t *started_tsc;
+    uint64_t *finished_tsc;
+    uint64_t *scheduler_lateness_ticks;
+    uint64_t *service_ticks;
+    uint64_t *finish_gap_ticks;
+    int *timing_slot_index;
 } GateAReceiver;
+
+typedef struct {
+    uint64_t p50_scheduler_lateness_ticks;
+    uint64_t p95_scheduler_lateness_ticks;
+    uint64_t p99_scheduler_lateness_ticks;
+    uint64_t max_scheduler_lateness_ticks;
+    uint64_t max_scheduler_lateness_sample_index;
+    uint64_t max_scheduler_lateness_slot_index;
+    uint64_t p50_service_ticks;
+    uint64_t p95_service_ticks;
+    uint64_t p99_service_ticks;
+    uint64_t max_service_ticks;
+    double p50_service_cycles_per_access;
+    double p95_service_cycles_per_access;
+    double p99_service_cycles_per_access;
+    double max_service_cycles_per_access;
+    uint64_t missed_deadline_count;
+    uint64_t max_finish_gap_ticks;
+    uint64_t scheduler_lateness_reject_threshold_ticks;
+    int sender_spill;
+    int record_integrity_failure;
+    int missing_slot;
+    int service_spikes;
+    const char *classification;
+} GateATimingDiagnostic;
+
+static int gate_a_copy_classification(char destination[64],
+                                      const char *classification) {
+    size_t length = strlen(classification);
+    if (length >= 64U) return -1;
+    memcpy(destination, classification, length + 1U);
+    return 0;
+}
+
+static int gate_a_u64_compare(const void *left, const void *right) {
+    uint64_t a = *(const uint64_t *)left;
+    uint64_t b = *(const uint64_t *)right;
+    return (a > b) - (a < b);
+}
+
+static uint64_t gate_a_sorted_percentile(const uint64_t *sorted,
+                                         int count,
+                                         unsigned percentile) {
+    if (!sorted || count <= 0) return 0;
+    uint64_t numerator = (uint64_t)(count - 1) * percentile + 99U;
+    uint64_t index = numerator / 100U;
+    if (index >= (uint64_t)count) index = (uint64_t)count - 1U;
+    return sorted[index];
+}
+
+static int gate_a_write_u64_le(FILE *file, uint64_t value) {
+    unsigned char bytes[8];
+    for (int index = 0; index < 8; index++) {
+        bytes[index] = (unsigned char)((value >> (unsigned)(index * 8)) & 0xffU);
+    }
+    return fwrite(bytes, 1U, sizeof(bytes), file) == sizeof(bytes) ? 0 : -1;
+}
+
+static int gate_a_write_sample_timing_file(
+        const char *output_dir,
+        const uint64_t *requested_tsc,
+        const uint64_t *started_tsc,
+        const uint64_t *finished_tsc,
+        const uint64_t *scheduler_lateness_ticks,
+        const uint64_t *service_ticks,
+        const uint64_t *finish_gap_ticks,
+        const int *slot_index,
+        int count) {
+    char path[CP_PATH_MAX];
+    if (joinp(path, sizeof(path), output_dir, GATE_A_SAMPLE_TIMING_FILE)) return -1;
+    FILE *file = fopen(path, "wx");
+    if (!file) return -1;
+    for (int sample = 0; sample < count; sample++) {
+        if (gate_a_write_u64_le(file, (uint64_t)sample) ||
+            gate_a_write_u64_le(file, requested_tsc[sample]) ||
+            gate_a_write_u64_le(file, started_tsc[sample]) ||
+            gate_a_write_u64_le(file, finished_tsc[sample]) ||
+            gate_a_write_u64_le(file, scheduler_lateness_ticks[sample]) ||
+            gate_a_write_u64_le(file, service_ticks[sample]) ||
+            gate_a_write_u64_le(file, finish_gap_ticks[sample]) ||
+            gate_a_write_u64_le(file, (uint64_t)slot_index[sample])) {
+            fclose(file);
+            unlink(path);
+            return -1;
+        }
+    }
+    return close_sync(&file);
+}
 
 static int gate_a_json_u64(FILE *f, uint64_t value) {
     if (!value) return fputs("null", f) < 0 ? -1 : 0;
     return fprintf(f, "%llu", (unsigned long long)value) < 0 ? -1 : 0;
+}
+
+static int gate_a_retain_readonly_burst_geometry(
+        const GateASmokeArgs *args,
+        GateASmokeResult *result,
+        const GateASender epochs[4]) {
+    if (!args || !result || !epochs) return -1;
+    for (int slot = 6; slot <= 9; slot++) {
+        const GateASender *sender = &epochs[0];
+        uint64_t requested_start = result->capture_origin_tsc +
+            (uint64_t)(slot * args->slot_s * result->capture_tsc_hz);
+        uint64_t requested_end = result->capture_origin_tsc +
+            (uint64_t)((slot + 1) * args->slot_s * result->capture_tsc_hz);
+        uint64_t burst_start = sender->burst_start_tsc[slot];
+        uint64_t burst_finish = sender->burst_finish_tsc[slot];
+        result->occupancy_requested_slot_start_tsc[slot] = requested_start;
+        result->occupancy_requested_slot_end_tsc[slot] = requested_end;
+        result->occupancy_burst_start_tsc[slot] = burst_start;
+        result->occupancy_burst_finish_tsc[slot] = burst_finish;
+        result->occupancy_burst_duration_ticks[slot] =
+            burst_finish >= burst_start ? burst_finish - burst_start : 0;
+        result->occupancy_footprint_bytes[slot] =
+            (uint64_t)gate_a_occupancy_bytes(slot);
+        result->occupancy_completed_before_slot_end[slot] =
+            burst_start >= requested_start &&
+            burst_finish >= burst_start &&
+            burst_finish <= requested_end &&
+            sender->occupancy_slot_complete[slot];
+    }
+    return 0;
+}
+
+static int gate_a_readonly_timing_diagnostic(
+        const GateASmokeArgs *args,
+        GateASmokeResult *result,
+        const uint64_t *requested_tsc,
+        const uint64_t *started_tsc,
+        const uint64_t *finished_tsc,
+        const uint64_t *scheduler_lateness_ticks,
+        const uint64_t *service_ticks,
+        const uint64_t *finish_gap_ticks,
+        const int *slot_index,
+        int count,
+        GateATimingDiagnostic *diagnostic) {
+    if (!args || !result || !requested_tsc || !started_tsc || !finished_tsc ||
+        !scheduler_lateness_ticks || !service_ticks || !finish_gap_ticks ||
+        !slot_index || count <= 0 || !diagnostic ||
+        !isfinite(result->capture_tsc_hz) || result->capture_tsc_hz <= 0.0 ||
+        args->read_hz <= 0 || args->slot_s <= 0.0) return -1;
+    memset(diagnostic, 0, sizeof(*diagnostic));
+    diagnostic->classification = "CAPTURE_ACCEPTED";
+    double nominal_spacing = result->capture_tsc_hz / (double)args->read_hz;
+    if (!isfinite(nominal_spacing) || nominal_spacing <= 0.0 ||
+        nominal_spacing > (double)UINT64_MAX / GATE_A_SCHEDULER_REJECT_MULTIPLE) {
+        diagnostic->record_integrity_failure = 1;
+    }
+    uint64_t scheduler_reject_threshold = diagnostic->record_integrity_failure
+        ? 0 : (uint64_t)(nominal_spacing * GATE_A_SCHEDULER_REJECT_MULTIPLE);
+    uint64_t missed_threshold = diagnostic->record_integrity_failure
+        ? 0 : (uint64_t)(nominal_spacing * GATE_A_SCHEDULER_MISSED_MULTIPLE);
+    diagnostic->scheduler_lateness_reject_threshold_ticks =
+        scheduler_reject_threshold;
+    result->scheduler_lateness_reject_threshold_ticks =
+        scheduler_reject_threshold;
+    uint64_t *lateness_sorted = calloc((size_t)count, sizeof(*lateness_sorted));
+    uint64_t *service_sorted = calloc((size_t)count, sizeof(*service_sorted));
+    if (!lateness_sorted || !service_sorted) {
+        free(lateness_sorted);
+        free(service_sorted);
+        return -1;
+    }
+    for (int sample = 0; sample < count; sample++) {
+        int slot = slot_index[sample];
+        if (slot < 0 || slot >= 16) diagnostic->record_integrity_failure = 1;
+        if (sample > 0) {
+            if (requested_tsc[sample] <= requested_tsc[sample - 1] ||
+                finished_tsc[sample] < finished_tsc[sample - 1]) {
+                diagnostic->record_integrity_failure = 1;
+            }
+        }
+        if (started_tsc[sample] < requested_tsc[sample] ||
+            finished_tsc[sample] < started_tsc[sample]) {
+            diagnostic->record_integrity_failure = 1;
+        }
+        uint64_t expected_lateness = started_tsc[sample] > requested_tsc[sample]
+            ? started_tsc[sample] - requested_tsc[sample] : 0;
+        uint64_t expected_service = finished_tsc[sample] - started_tsc[sample];
+        uint64_t expected_finish_gap = sample
+            ? finished_tsc[sample] - finished_tsc[sample - 1] : 0;
+        if (scheduler_lateness_ticks[sample] != expected_lateness ||
+            service_ticks[sample] != expected_service ||
+            finish_gap_ticks[sample] != expected_finish_gap) {
+            diagnostic->record_integrity_failure = 1;
+        }
+        if (scheduler_lateness_ticks[sample] >
+            diagnostic->max_scheduler_lateness_ticks) {
+            diagnostic->max_scheduler_lateness_ticks =
+                scheduler_lateness_ticks[sample];
+            diagnostic->max_scheduler_lateness_sample_index = (uint64_t)sample;
+            diagnostic->max_scheduler_lateness_slot_index =
+                slot >= 0 ? (uint64_t)slot : UINT64_MAX;
+        }
+        if (scheduler_lateness_ticks[sample] > missed_threshold) {
+            diagnostic->missed_deadline_count++;
+        }
+        if (service_ticks[sample] > diagnostic->max_service_ticks) {
+            diagnostic->max_service_ticks = service_ticks[sample];
+        }
+        if (finish_gap_ticks[sample] > diagnostic->max_finish_gap_ticks) {
+            diagnostic->max_finish_gap_ticks = finish_gap_ticks[sample];
+        }
+        lateness_sorted[sample] = scheduler_lateness_ticks[sample];
+        service_sorted[sample] = service_ticks[sample];
+    }
+    qsort(lateness_sorted, (size_t)count, sizeof(*lateness_sorted),
+          gate_a_u64_compare);
+    qsort(service_sorted, (size_t)count, sizeof(*service_sorted),
+          gate_a_u64_compare);
+    diagnostic->p50_scheduler_lateness_ticks =
+        gate_a_sorted_percentile(lateness_sorted, count, 50U);
+    diagnostic->p95_scheduler_lateness_ticks =
+        gate_a_sorted_percentile(lateness_sorted, count, 95U);
+    diagnostic->p99_scheduler_lateness_ticks =
+        gate_a_sorted_percentile(lateness_sorted, count, 99U);
+    diagnostic->p50_service_ticks =
+        gate_a_sorted_percentile(service_sorted, count, 50U);
+    diagnostic->p95_service_ticks =
+        gate_a_sorted_percentile(service_sorted, count, 95U);
+    diagnostic->p99_service_ticks =
+        gate_a_sorted_percentile(service_sorted, count, 99U);
+    diagnostic->p50_service_cycles_per_access =
+        (double)diagnostic->p50_service_ticks / GATE_A_RESPONSE_TOUCHES;
+    diagnostic->p95_service_cycles_per_access =
+        (double)diagnostic->p95_service_ticks / GATE_A_RESPONSE_TOUCHES;
+    diagnostic->p99_service_cycles_per_access =
+        (double)diagnostic->p99_service_ticks / GATE_A_RESPONSE_TOUCHES;
+    diagnostic->max_service_cycles_per_access =
+        (double)diagnostic->max_service_ticks / GATE_A_RESPONSE_TOUCHES;
+    free(lateness_sorted);
+    free(service_sorted);
+
+    int min_slot_samples = (int)(0.9 * args->read_hz * args->slot_s);
+    if (min_slot_samples <= 0) diagnostic->record_integrity_failure = 1;
+    for (int slot = 0; slot < 16; slot++) {
+        if (result->slot_sample_counts[slot] < min_slot_samples) {
+            diagnostic->missing_slot = 1;
+        }
+    }
+    if (!result->capture_origin_tsc ||
+        result->capture_first_sample_tsc < result->capture_origin_tsc ||
+        result->capture_last_sample_tsc >= result->capture_deadline_tsc ||
+        count != result->sample_count) {
+        diagnostic->record_integrity_failure = 1;
+    }
+    for (int slot = 6; slot <= 9; slot++) {
+        if (result->occupancy_touch_count[slot] !=
+                GATE_A_READONLY_SLOT_TOUCHES ||
+            !result->occupancy_completed_before_slot_end[slot] ||
+            result->occupancy_burst_start_tsc[slot] <
+                result->occupancy_requested_slot_start_tsc[slot] ||
+            result->occupancy_burst_finish_tsc[slot] >
+                result->occupancy_requested_slot_end_tsc[slot] ||
+            result->occupancy_burst_finish_tsc[slot] <
+                result->occupancy_burst_start_tsc[slot]) {
+            diagnostic->sender_spill = 1;
+        }
+    }
+    if (!result->occupancy_digest_unchanged) {
+        diagnostic->sender_spill = 1;
+    }
+    uint64_t missed_limit =
+        (uint64_t)(count * GATE_A_SCHEDULER_MISSED_FRACTION_MAX);
+    if (missed_limit < 1U) missed_limit = 1U;
+    if (diagnostic->record_integrity_failure) {
+        diagnostic->classification = "CAPTURE_REJECTED_RECORD_INTEGRITY";
+    } else if (diagnostic->missing_slot) {
+        diagnostic->classification = "CAPTURE_REJECTED_MISSING_SLOT";
+    } else if (diagnostic->sender_spill) {
+        diagnostic->classification = "CAPTURE_REJECTED_SENDER_SPILL";
+    } else if (diagnostic->max_scheduler_lateness_ticks >
+                   scheduler_reject_threshold ||
+               diagnostic->missed_deadline_count > missed_limit) {
+        diagnostic->classification = "CAPTURE_REJECTED_SCHEDULER_LATENESS";
+    } else if (diagnostic->p50_service_ticks > 0 &&
+               diagnostic->max_service_ticks >
+                   (uint64_t)(diagnostic->p50_service_ticks *
+                              GATE_A_SERVICE_SPIKE_MULTIPLE)) {
+        diagnostic->service_spikes = 1;
+        diagnostic->classification =
+            "CAPTURE_ACCEPTED_WITH_SERVICE_SPIKES";
+    }
+    result->max_scheduler_lateness_ticks =
+        diagnostic->max_scheduler_lateness_ticks;
+    result->missed_deadline_count = diagnostic->missed_deadline_count;
+    result->max_finish_gap_ticks = diagnostic->max_finish_gap_ticks;
+    if (gate_a_copy_classification(result->capture_quality_classification,
+                                   diagnostic->classification)) return -1;
+    return 0;
+}
+
+static int gate_a_write_timing_diagnostic_summary(
+        const GateASmokeArgs *args,
+        const GateASmokeResult *result,
+        const GateATimingDiagnostic *diagnostic) {
+    char path[CP_PATH_MAX];
+    if (!args || !result || !diagnostic ||
+        joinp(path, sizeof(path), args->output_dir,
+              GATE_A_TIMING_DIAGNOSTIC_FILE)) return -1;
+    FILE *file = fopen(path, "wx");
+    if (!file) return -1;
+    if (fprintf(file,
+            "{\n"
+            "  \"schema_id\": \"CAT_CAS_READONLY_OCCUPANCY_TIMING_DIAGNOSTIC_V1\",\n"
+            "  \"sample_timing_schema_id\": \"%s\",\n"
+            "  \"sample_timing_file\": \"%s\",\n"
+            "  \"sample_timing_record_bytes\": %u,\n"
+            "  \"measurement_mode\": \"%s\",\n"
+            "  \"quality_thresholds\": {\n"
+            "    \"scheduler_reject_multiple_of_nominal_spacing\": %.17g,\n"
+            "    \"scheduler_missed_deadline_multiple_of_nominal_spacing\": %.17g,\n"
+            "    \"scheduler_missed_deadline_fraction_max\": %.17g,\n"
+            "    \"min_slot_coverage_fraction\": %.17g,\n"
+            "    \"service_spike_multiple_of_p50\": %.17g\n"
+            "  },\n"
+            "  \"scheduler_lateness\": {\n"
+            "    \"p50_ticks\": %llu,\n"
+            "    \"p95_ticks\": %llu,\n"
+            "    \"p99_ticks\": %llu,\n"
+            "    \"max_ticks\": %llu,\n"
+            "    \"max_sample_index\": %llu,\n"
+            "    \"max_slot_index\": %llu,\n"
+            "    \"reject_threshold_ticks\": %llu\n"
+            "  },\n"
+            "  \"service_cycles_per_access\": {\n"
+            "    \"p50\": %.17g,\n"
+            "    \"p95\": %.17g,\n"
+            "    \"p99\": %.17g,\n"
+            "    \"max\": %.17g\n"
+            "  },\n"
+            "  \"service_ticks\": {\n"
+            "    \"p50\": %llu,\n"
+            "    \"p95\": %llu,\n"
+            "    \"p99\": %llu,\n"
+            "    \"max\": %llu\n"
+            "  },\n"
+            "  \"missed_deadline_count\": %llu,\n"
+            "  \"max_finish_gap_ticks\": %llu,\n"
+            "  \"sample_count_per_slot\": [",
+            GATE_A_SAMPLE_TIMING_SCHEMA_ID,
+            GATE_A_SAMPLE_TIMING_FILE,
+            GATE_A_SAMPLE_TIMING_RECORD_BYTES,
+            gate_a_measurement_mode(),
+            GATE_A_SCHEDULER_REJECT_MULTIPLE,
+            GATE_A_SCHEDULER_MISSED_MULTIPLE,
+            GATE_A_SCHEDULER_MISSED_FRACTION_MAX,
+            0.9,
+            GATE_A_SERVICE_SPIKE_MULTIPLE,
+            (unsigned long long)diagnostic->p50_scheduler_lateness_ticks,
+            (unsigned long long)diagnostic->p95_scheduler_lateness_ticks,
+            (unsigned long long)diagnostic->p99_scheduler_lateness_ticks,
+            (unsigned long long)diagnostic->max_scheduler_lateness_ticks,
+            (unsigned long long)diagnostic->max_scheduler_lateness_sample_index,
+            (unsigned long long)diagnostic->max_scheduler_lateness_slot_index,
+            (unsigned long long)diagnostic->scheduler_lateness_reject_threshold_ticks,
+            diagnostic->p50_service_cycles_per_access,
+            diagnostic->p95_service_cycles_per_access,
+            diagnostic->p99_service_cycles_per_access,
+            diagnostic->max_service_cycles_per_access,
+            (unsigned long long)diagnostic->p50_service_ticks,
+            (unsigned long long)diagnostic->p95_service_ticks,
+            (unsigned long long)diagnostic->p99_service_ticks,
+            (unsigned long long)diagnostic->max_service_ticks,
+            (unsigned long long)diagnostic->missed_deadline_count,
+            (unsigned long long)diagnostic->max_finish_gap_ticks) < 0) {
+        goto write_error;
+    }
+    for (int slot = 0; slot < 16; slot++) {
+        if ((slot && fputc(',', file) == EOF) ||
+            fprintf(file, "%d", result->slot_sample_counts[slot]) < 0) {
+            goto write_error;
+        }
+    }
+    if (fputs("],\n  \"sender_burst_boundaries\": [", file) < 0) goto write_error;
+    for (int slot = 6; slot <= 9; slot++) {
+        if ((slot > 6 && fputc(',', file) == EOF) ||
+            fprintf(file,
+                "\n"
+                "    {\"slot_index\": %d, \"requested_slot_start_tsc\": %llu,"
+                " \"requested_slot_end_tsc\": %llu,"
+                " \"burst_start_tsc\": %llu,"
+                " \"burst_finish_tsc\": %llu,"
+                " \"burst_duration_ticks\": %llu,"
+                " \"touch_count\": %llu,"
+                " \"footprint_bytes\": %llu,"
+                " \"initial_cursor\": %llu,"
+                " \"final_cursor\": %llu,"
+                " \"completed_before_slot_end\": %s}",
+                slot,
+                (unsigned long long)result->occupancy_requested_slot_start_tsc[slot],
+                (unsigned long long)result->occupancy_requested_slot_end_tsc[slot],
+                (unsigned long long)result->occupancy_burst_start_tsc[slot],
+                (unsigned long long)result->occupancy_burst_finish_tsc[slot],
+                (unsigned long long)result->occupancy_burst_duration_ticks[slot],
+                (unsigned long long)result->occupancy_touch_count[slot],
+                (unsigned long long)result->occupancy_footprint_bytes[slot],
+                (unsigned long long)result->occupancy_initial_cursor[slot],
+                (unsigned long long)result->occupancy_final_cursor[slot],
+                result->occupancy_completed_before_slot_end[slot]
+                    ? "true" : "false") < 0) {
+            goto write_error;
+        }
+    }
+    if (fprintf(file,
+            "\n  ],\n"
+            "  \"record_integrity_failure\": %s,\n"
+            "  \"missing_slot\": %s,\n"
+            "  \"sender_spill\": %s,\n"
+            "  \"service_spikes\": %s,\n"
+            "  \"capture_quality_classification\": \"%s\"\n"
+            "}\n",
+            diagnostic->record_integrity_failure ? "true" : "false",
+            diagnostic->missing_slot ? "true" : "false",
+            diagnostic->sender_spill ? "true" : "false",
+            diagnostic->service_spikes ? "true" : "false",
+            diagnostic->classification) < 0) goto write_error;
+    return close_sync(&file);
+
+write_error:
+    fclose(file);
+    unlink(path);
+    return -1;
+}
+
+static void gate_a_test_fill_timing_case(
+        GateASmokeResult *result,
+        uint64_t requested_tsc[32],
+        uint64_t started_tsc[32],
+        uint64_t finished_tsc[32],
+        uint64_t scheduler_lateness_ticks[32],
+        uint64_t service_ticks[32],
+        uint64_t finish_gap_ticks[32],
+        int slot_index[32],
+        uint64_t service_per_sample,
+        int late_last_sample,
+        int sender_spill) {
+    memset(result, 0, sizeof(*result));
+    uint64_t origin = 1000000000ULL;
+    uint64_t spacing = 800000ULL;
+    result->slot_count = 16;
+    result->sample_count = 32;
+    result->capture_origin_tsc = origin;
+    result->capture_deadline_tsc = origin + 25600000ULL;
+    result->capture_first_sample_tsc = origin;
+    result->capture_last_sample_tsc = origin + 31ULL * spacing;
+    result->capture_tsc_hz = 3200000.0;
+    result->occupancy_digest_unchanged = 1;
+    uint64_t previous_finished = 0;
+    for (int sample = 0; sample < 32; sample++) {
+        uint64_t late = (late_last_sample && sample == 31) ? 4000000ULL : 0ULL;
+        requested_tsc[sample] = origin + (uint64_t)sample * spacing;
+        started_tsc[sample] = requested_tsc[sample] + late;
+        finished_tsc[sample] = started_tsc[sample] + service_per_sample;
+        scheduler_lateness_ticks[sample] = late;
+        service_ticks[sample] = service_per_sample;
+        finish_gap_ticks[sample] =
+            sample ? finished_tsc[sample] - previous_finished : 0;
+        slot_index[sample] = sample / 2;
+        result->slot_sample_counts[slot_index[sample]]++;
+        previous_finished = finished_tsc[sample];
+    }
+    for (int slot = 6; slot <= 9; slot++) {
+        uint64_t start = origin + (uint64_t)slot * 1600000ULL;
+        uint64_t end = start + 1600000ULL;
+        result->occupancy_requested_slot_start_tsc[slot] = start;
+        result->occupancy_requested_slot_end_tsc[slot] = end;
+        result->occupancy_burst_start_tsc[slot] = start + 10ULL;
+        result->occupancy_burst_finish_tsc[slot] =
+            sender_spill && slot == 7 ? end + 1ULL : end - 10ULL;
+        result->occupancy_burst_duration_ticks[slot] =
+            result->occupancy_burst_finish_tsc[slot] -
+            result->occupancy_burst_start_tsc[slot];
+        result->occupancy_touch_count[slot] = GATE_A_READONLY_SLOT_TOUCHES;
+        result->occupancy_footprint_bytes[slot] =
+            (uint64_t)GATE_A_OCCUPANCY_EQUAL_BYTES;
+        result->occupancy_completed_before_slot_end[slot] =
+            !sender_spill || slot != 7;
+    }
+}
+
+int gate_a_test_readonly_timing_diagnostics(void) {
+    GateASmokeArgs args = {
+        .read_hz = 4,
+        .slot_s = 0.5,
+        .pilot_variant = GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL,
+    };
+    GateASmokeResult result;
+    GateATimingDiagnostic diagnostic;
+    uint64_t requested[32], started[32], finished[32], lateness[32];
+    uint64_t service[32], finish_gap[32];
+    int slot_index[32];
+    gate_a_pilot_variant = GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL;
+
+    gate_a_test_fill_timing_case(
+        &result, requested, started, finished, lateness, service,
+        finish_gap, slot_index, 6400ULL, 0, 0);
+    if (gate_a_readonly_timing_diagnostic(
+            &args, &result, requested, started, finished, lateness, service,
+            finish_gap, slot_index, 32, &diagnostic) ||
+        strcmp(diagnostic.classification, "CAPTURE_ACCEPTED")) return 1;
+
+    gate_a_test_fill_timing_case(
+        &result, requested, started, finished, lateness, service,
+        finish_gap, slot_index, 6400ULL, 0, 0);
+    service[15] = 64000ULL;
+    finished[15] = started[15] + service[15];
+    finish_gap[15] = finished[15] - finished[14];
+    finish_gap[16] = finished[16] - finished[15];
+    if (gate_a_readonly_timing_diagnostic(
+            &args, &result, requested, started, finished, lateness, service,
+            finish_gap, slot_index, 32, &diagnostic) ||
+        strcmp(diagnostic.classification,
+               "CAPTURE_ACCEPTED_WITH_SERVICE_SPIKES")) return 1;
+
+    gate_a_test_fill_timing_case(
+        &result, requested, started, finished, lateness, service,
+        finish_gap, slot_index, 6400ULL, 1, 0);
+    if (gate_a_readonly_timing_diagnostic(
+            &args, &result, requested, started, finished, lateness, service,
+            finish_gap, slot_index, 32, &diagnostic) ||
+        strcmp(diagnostic.classification,
+               "CAPTURE_REJECTED_SCHEDULER_LATENESS")) return 1;
+
+    gate_a_test_fill_timing_case(
+        &result, requested, started, finished, lateness, service,
+        finish_gap, slot_index, 6400ULL, 0, 1);
+    if (gate_a_readonly_timing_diagnostic(
+            &args, &result, requested, started, finished, lateness, service,
+            finish_gap, slot_index, 32, &diagnostic) ||
+        strcmp(diagnostic.classification,
+               "CAPTURE_REJECTED_SENDER_SPILL")) return 1;
+    return 0;
 }
 
 static int gate_a_lifecycle_record(FILE *f, const char *record_type,
@@ -417,6 +973,8 @@ static SMALL_WALL_CRITICAL void *gate_a_sender_loop(void *opaque) {
         atomic_store_explicit(&sender->thread_exit_tsc, rdtsc_now(), memory_order_release);
         return (void *)1;
     }
+    sender->realtime_attempted = 1;
+    sender->realtime_applied = small_wall_request_realtime_thread();
     uint64_t ready = rdtsc_now();
     atomic_store_explicit(&sender->ready_tsc, ready, memory_order_release);
     atomic_store_explicit(&sender->epoch_start_tsc, ready, memory_order_release);
@@ -454,9 +1012,13 @@ static SMALL_WALL_CRITICAL void *gate_a_sender_loop(void *opaque) {
                     memory_order_release, memory_order_relaxed);
                 size_t occupancy_bytes = gate_a_occupancy_bytes(slot);
                 if (!occupancy_bytes) return (void *)1;
+                sender->occupancy_initial_cursor[slot] =
+                    sender->occupancy_cursor;
+                sender->burst_start_tsc[slot] = rdtscp_now();
                 sink += small_wall_readonly_occupancy_reads(
                     &seed, sender->occupancy_bank, occupancy_bytes,
                     &sender->occupancy_cursor);
+                sender->burst_finish_tsc[slot] = rdtscp_now();
                 sender->occupancy_touch_count[slot] =
                     GATE_A_READONLY_SLOT_TOUCHES;
                 sender->occupancy_final_cursor[slot] = sender->occupancy_cursor;
@@ -632,6 +1194,8 @@ static SMALL_WALL_CRITICAL void *gate_a_receiver_loop(void *opaque) {
         atomic_store_explicit(&receiver->done, 1, memory_order_release);
         return (void *)1;
     }
+    receiver->realtime_attempted = 1;
+    receiver->realtime_applied = small_wall_request_realtime_thread();
     atomic_store_explicit(&receiver->ready_tsc, rdtsc_now(), memory_order_release);
     atomic_store_explicit(&receiver->ready, 1, memory_order_release);
     if (receiver->cache_response_mode) {
@@ -644,9 +1208,15 @@ static SMALL_WALL_CRITICAL void *gate_a_receiver_loop(void *opaque) {
         size_t words_per_line = GATE_A_CACHE_LINE_BYTES / sizeof(uint64_t);
         size_t index = receiver->response_index;
         int count = 0;
+        uint64_t previous_requested = 0;
+        uint64_t previous_finished = 0;
         while (count < receiver->capacity && !interrupted) {
             uint64_t requested = receiver->origin + (uint64_t)(count * spacing);
             if (requested >= end) break;
+            if (count > 0 && requested <= previous_requested) {
+                count = -1;
+                break;
+            }
             while (rdtsc_now() < requested && !interrupted) {
                 __asm__ volatile("pause");
             }
@@ -664,9 +1234,35 @@ static SMALL_WALL_CRITICAL void *gate_a_receiver_loop(void *opaque) {
                 break;
             }
             uint64_t finished = rdtscp_now();
-            receiver->timestamps[count] = finished;
-            receiver->observations[count] =
-                (double)(finished - started) / GATE_A_RESPONSE_TOUCHES;
+            if (started < requested || finished < started ||
+                (count > 0 && finished < previous_finished)) {
+                count = -1;
+                break;
+            }
+            uint64_t scheduler_lateness =
+                started > requested ? started - requested : 0;
+            uint64_t service = finished - started;
+            uint64_t finish_gap = count > 0 ? finished - previous_finished : 0;
+            double response_cycles =
+                (double)service / GATE_A_RESPONSE_TOUCHES;
+            if (scheduler_lateness > receiver->max_sample_delay_tsc) {
+                receiver->max_sample_delay_tsc = scheduler_lateness;
+            }
+            if (response_cycles > receiver->max_response_cycles_per_access) {
+                receiver->max_response_cycles_per_access = response_cycles;
+            }
+            receiver->timestamps[count] = requested;
+            receiver->observations[count] = response_cycles;
+            receiver->started_tsc[count] = started;
+            receiver->finished_tsc[count] = finished;
+            receiver->scheduler_lateness_ticks[count] = scheduler_lateness;
+            receiver->service_ticks[count] = service;
+            receiver->finish_gap_ticks[count] = finish_gap;
+            receiver->timing_slot_index[count] =
+                receiver->samples_per_slot > 0
+                    ? count / receiver->samples_per_slot : -1;
+            previous_requested = requested;
+            previous_finished = finished;
             count++;
         }
         receiver->response_index = index;
@@ -720,6 +1316,17 @@ static int gate_a_write_result(const GateASmokeArgs *args,
             "  \"capture_first_sample_tsc\": %llu,\n"
             "  \"capture_last_sample_tsc\": %llu,\n"
             "  \"capture_tsc_hz\": %.17g,\n"
+            "  \"capture_timestamp_coordinate\": \"%s\",\n"
+            "  \"capture_max_sample_delay_tsc\": %llu,\n"
+            "  \"capture_max_response_cycles_per_access\": %.17g,\n"
+            "  \"sample_timing_schema_id\": \"%s\",\n"
+            "  \"sample_timing_file\": \"%s\",\n"
+            "  \"timing_diagnostic_file\": \"%s\",\n"
+            "  \"capture_quality_classification\": \"%s\",\n"
+            "  \"max_scheduler_lateness_ticks\": %llu,\n"
+            "  \"scheduler_lateness_reject_threshold_ticks\": %llu,\n"
+            "  \"missed_deadline_count\": %llu,\n"
+            "  \"max_finish_gap_ticks\": %llu,\n"
             "  \"step_sender_epoch_count\": %d,\n"
             "  \"hardware_executed\": %s,\n"
             "  \"sender_start_count\": %d,\n"
@@ -739,6 +1346,9 @@ static int gate_a_write_result(const GateASmokeArgs *args,
             "  \"voltage_writes\": 0,\n"
             "  \"msr_reads\": 0,\n"
             "  \"msr_writes\": 0,\n"
+            "  \"scheduler_policy_requested\": \"SCHED_FIFO\",\n"
+            "  \"scheduler_priority_attempt_count\": %d,\n"
+            "  \"scheduler_priority_success_count\": %d,\n"
             "  \"automatic_retry\": false,\n"
             "  \"occupancy_slot_touch_count\": [",
             args->authority_sha256, args->execution_bundle_sha256,
@@ -748,6 +1358,22 @@ static int gate_a_write_result(const GateASmokeArgs *args,
             (unsigned long long)result->capture_first_sample_tsc,
             (unsigned long long)result->capture_last_sample_tsc,
             result->capture_tsc_hz,
+            gate_a_occupancy_pilot()
+                ? "scheduled_request_tsc" : "measurement_finish_tsc",
+            (unsigned long long)result->capture_max_sample_delay_tsc,
+            result->capture_max_response_cycles_per_access,
+            gate_a_readonly_occupancy_pilot()
+                ? GATE_A_SAMPLE_TIMING_SCHEMA_ID : "not_applicable",
+            gate_a_readonly_occupancy_pilot()
+                ? GATE_A_SAMPLE_TIMING_FILE : "not_applicable",
+            gate_a_readonly_occupancy_pilot()
+                ? GATE_A_TIMING_DIAGNOSTIC_FILE : "not_applicable",
+            result->capture_quality_classification[0]
+                ? result->capture_quality_classification : "NOT_EVALUATED",
+            (unsigned long long)result->max_scheduler_lateness_ticks,
+            (unsigned long long)result->scheduler_lateness_reject_threshold_ticks,
+            (unsigned long long)result->missed_deadline_count,
+            (unsigned long long)result->max_finish_gap_ticks,
             result->step_sender_epoch_count,
             result->hardware_executed ? "true" : "false",
             result->sender_start_count,
@@ -762,7 +1388,9 @@ static int gate_a_write_result(const GateASmokeArgs *args,
             result->occupancy_prefaulted ? "true" : "false",
             result->occupancy_digest_before,
             result->occupancy_digest_after,
-            result->occupancy_digest_unchanged ? "true" : "false") < 0) {
+            result->occupancy_digest_unchanged ? "true" : "false",
+            result->scheduler_priority_attempt_count,
+            result->scheduler_priority_success_count) < 0) {
         fclose(f);
         unlink(path);
         return -1;
@@ -833,6 +1461,7 @@ static int gate_a_mock_epoch(GateASender *sender, FILE *lifecycle,
     if (phase_index == 4) first_drive += (uint64_t)(0.5 / tone(0) * tsc_hz);
     atomic_init(&sender->first_drive_tsc, first_drive);
     atomic_init(&sender->thread_exit_tsc, sender->planned_stop_tsc + 3);
+    size_t readonly_cursor = 0;
     for (int slot = 0; slot < 16; slot++) {
         uint64_t value = slot >= first_slot && slot < end_slot
             ? session_origin + (uint64_t)(slot * slot_s * tsc_hz) + 3 : 0;
@@ -841,13 +1470,21 @@ static int gate_a_mock_epoch(GateASender *sender, FILE *lifecycle,
             slot >= 6 && slot <= 9) {
             size_t line_count = gate_a_occupancy_bytes(slot) /
                 GATE_A_CACHE_LINE_BYTES;
-            sender->occupancy_initial_cursor[slot] = 0;
+            size_t line_mask = line_count - 1U;
+            size_t line = readonly_cursor & line_mask;
+            sender->occupancy_initial_cursor[slot] = readonly_cursor;
+            line = (line + GATE_A_READONLY_SLOT_TOUCHES *
+                    GATE_A_OCCUPANCY_LINE_STRIDE) & line_mask;
             sender->occupancy_final_cursor[slot] =
-                (GATE_A_READONLY_SLOT_TOUCHES *
-                 GATE_A_OCCUPANCY_LINE_STRIDE) & (line_count - 1U);
+                line;
+            readonly_cursor = line;
             sender->occupancy_touch_count[slot] =
                 GATE_A_READONLY_SLOT_TOUCHES;
             sender->occupancy_slot_complete[slot] = 1;
+            sender->burst_start_tsc[slot] = value;
+            sender->burst_finish_tsc[slot] =
+                session_origin + (uint64_t)((slot + 1) * slot_s * tsc_hz) -
+                3U;
         }
     }
     if (gate_a_lifecycle_record(lifecycle, "sender_state", "starting",
@@ -905,6 +1542,12 @@ static int gate_a_validate_epoch(const GateASender *sender) {
 static int gate_a_run_real_capture(const GateASmokeArgs *args,
                                    double tsc_hz, uint64_t origin,
                                    uint64_t *timestamps, double *observations,
+                                   uint64_t *started_tsc,
+                                   uint64_t *finished_tsc,
+                                   uint64_t *scheduler_lateness_ticks,
+                                   uint64_t *service_ticks,
+                                   uint64_t *finish_gap_ticks,
+                                   int *timing_slot_index,
                                    const uint64_t *response_bank,
                                    volatile uint64_t *occupancy_bank,
                                    int capacity, FILE *lifecycle,
@@ -920,6 +1563,13 @@ static int gate_a_run_real_capture(const GateASmokeArgs *args,
     receiver.capacity = capacity;
     receiver.timestamps = timestamps;
     receiver.observations = observations;
+    receiver.started_tsc = started_tsc;
+    receiver.finished_tsc = finished_tsc;
+    receiver.scheduler_lateness_ticks = scheduler_lateness_ticks;
+    receiver.service_ticks = service_ticks;
+    receiver.finish_gap_ticks = finish_gap_ticks;
+    receiver.timing_slot_index = timing_slot_index;
+    receiver.samples_per_slot = (int)(args->read_hz * args->slot_s + 0.5);
     receiver.response_bank = response_bank;
     receiver.response_line_count = gate_a_occupancy_pilot()
         ? GATE_A_RESPONSE_BUFFER_BYTES / GATE_A_CACHE_LINE_BYTES : 0;
@@ -987,6 +1637,17 @@ static int gate_a_run_real_capture(const GateASmokeArgs *args,
         int join_rc = pthread_join(receiver.thread, &receiver_result);
         receiver.alive = 0;
         if (join_rc || receiver_result) return -1;
+    }
+    result->scheduler_priority_attempt_count += receiver.realtime_attempted;
+    result->scheduler_priority_success_count += receiver.realtime_applied;
+    result->capture_max_sample_delay_tsc = receiver.max_sample_delay_tsc;
+    result->capture_max_response_cycles_per_access =
+        receiver.max_response_cycles_per_access;
+    for (int index = 0; index < 4; index++) {
+        result->scheduler_priority_attempt_count +=
+            epochs[index].realtime_attempted;
+        result->scheduler_priority_success_count +=
+            epochs[index].realtime_applied;
     }
     *receiver_epoch = receiver.receiver_epoch;
     return receiver.count;
@@ -1534,6 +2195,12 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
     FILE *raw = NULL, *trace = NULL, *lifecycle = NULL;
     FILE *temperature_receipts = NULL;
     uint64_t *timestamps = NULL;
+    uint64_t *started_tsc = NULL;
+    uint64_t *finished_tsc = NULL;
+    uint64_t *scheduler_lateness_ticks = NULL;
+    uint64_t *service_ticks = NULL;
+    uint64_t *finish_gap_ticks = NULL;
+    int *timing_slot_index = NULL;
     double *observations = NULL;
     uint64_t *response_bank = NULL;
     volatile uint64_t *occupancy_bank = NULL;
@@ -1707,7 +2374,16 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
     int cap = (int)(args->read_hz * args->slot_s * 16.0) + 32;
     timestamps = calloc((size_t)cap, sizeof(*timestamps));
     observations = calloc((size_t)cap, sizeof(*observations));
-    if (!timestamps || !observations) {
+    started_tsc = calloc((size_t)cap, sizeof(*started_tsc));
+    finished_tsc = calloc((size_t)cap, sizeof(*finished_tsc));
+    scheduler_lateness_ticks =
+        calloc((size_t)cap, sizeof(*scheduler_lateness_ticks));
+    service_ticks = calloc((size_t)cap, sizeof(*service_ticks));
+    finish_gap_ticks = calloc((size_t)cap, sizeof(*finish_gap_ticks));
+    timing_slot_index = calloc((size_t)cap, sizeof(*timing_slot_index));
+    if (!timestamps || !observations || !started_tsc || !finished_tsc ||
+        !scheduler_lateness_ticks || !service_ticks || !finish_gap_ticks ||
+        !timing_slot_index) {
         reason = "OOM";
         rc = 5;
         goto cleanup;
@@ -1738,6 +2414,8 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
             goto cleanup;
         }
         receiver_epoch = origin;
+        uint64_t previous_finished = 0;
+        int samples_per_slot = (int)(args->read_hz * args->slot_s + 0.5);
         for (int i = 0; i < count; i++) {
             timestamps[i] = origin + (uint64_t)(i * spacing);
             observations[i] = 100.0 + (double)(i % 17) * 0.001;
@@ -1750,10 +2428,23 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
                 double seconds = (double)(timestamps[i] - epoch_origin) / tsc_hz;
                 observations[i] += 0.25 * cos(2.0 * M_PI * tone(0) * seconds + phase);
             }
+            uint64_t service = (uint64_t)(observations[i] *
+                                          GATE_A_RESPONSE_TOUCHES + 0.5);
+            started_tsc[i] = timestamps[i];
+            finished_tsc[i] = started_tsc[i] + service;
+            scheduler_lateness_ticks[i] = 0;
+            service_ticks[i] = service;
+            finish_gap_ticks[i] =
+                i ? finished_tsc[i] - previous_finished : 0;
+            timing_slot_index[i] =
+                samples_per_slot > 0 ? i / samples_per_slot : -1;
+            previous_finished = finished_tsc[i];
         }
     } else {
         count = gate_a_run_real_capture(
             args, tsc_hz, origin, timestamps, observations,
+            started_tsc, finished_tsc, scheduler_lateness_ticks,
+            service_ticks, finish_gap_ticks, timing_slot_index,
             response_bank, occupancy_bank, cap, lifecycle, epochs,
             &receiver_epoch, result);
         if (count < 0) {
@@ -1787,19 +2478,25 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
         goto cleanup;
     }
     if (count > 0) {
+        int samples_per_slot = (int)(args->read_hz * args->slot_s + 0.5);
+        if (samples_per_slot <= 0) {
+            reason = "SLOT_SAMPLE_GEOMETRY_FAILURE";
+            rc = 5;
+            goto cleanup;
+        }
         result->capture_origin_tsc = origin;
         result->capture_deadline_tsc = deadline;
         result->capture_first_sample_tsc = timestamps[0];
         result->capture_last_sample_tsc = timestamps[count - 1];
         result->capture_tsc_hz = tsc_hz;
+        result->sample_count = count;
         for (int i = 0; i < count; i++) {
             if (raw_record(raw, timestamps[i], observations[i])) {
                 reason = "RAW_WRITER_FAILURE";
                 rc = 5;
                 goto cleanup;
             }
-            double offset = (double)(timestamps[i] - origin) / tsc_hz;
-            int slot = (int)(offset / args->slot_s);
+            int slot = i / samples_per_slot;
             if (slot >= 0 && slot < 16) {
                 if (starts[slot] < 0) starts[slot] = i;
                 ends[slot] = i + 1;
@@ -1809,6 +2506,15 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
     }
     if (close_sync(&raw)) {
         reason = "RAW_SYNC_FAILURE";
+        rc = 5;
+        goto cleanup;
+    }
+    if (gate_a_readonly_occupancy_pilot() &&
+        gate_a_write_sample_timing_file(
+            args->output_dir, timestamps, started_tsc, finished_tsc,
+            scheduler_lateness_ticks, service_ticks, finish_gap_ticks,
+            timing_slot_index, count)) {
+        reason = "SAMPLE_TIMING_WRITER_FAILURE";
         rc = 5;
         goto cleanup;
     }
@@ -1836,7 +2542,7 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
         double gap = (double)(timestamps[i] - timestamps[i - 1]);
         if (gap > max_gap) max_gap = gap;
     }
-    if (!mock) {
+    if (!mock && !gate_a_readonly_occupancy_pilot()) {
         const char *quality = catcas_capture_quality_failure(
             timestamps[0], timestamps[count - 1], (size_t)count,
             origin, deadline, tsc_hz, args->read_hz, tone(0), max_gap);
@@ -1849,6 +2555,8 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
     for (int slot = 0; slot < 16; slot++) {
         uint64_t requested = origin +
             (uint64_t)(slot * args->slot_s * tsc_hz);
+        uint64_t requested_end = origin +
+            (uint64_t)((slot + 1) * args->slot_s * tsc_hz);
         uint64_t actual = timestamps[starts[slot]];
         uint64_t skew = actual > requested ? actual - requested : requested - actual;
         if (!actual || (!mock && skew > (uint64_t)(MAX_EPOCH_SKEW_SECONDS * tsc_hz)) ||
@@ -1892,19 +2600,40 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
             if ((orbit_value >= 0 && fprintf(trace, "%d", orbit_value) < 0) ||
                 (orbit_value < 0 && fputs("null", trace) < 0) ||
                 fprintf(trace, ",\"working_set_bytes\":%zu,"
-                        "\"touch_count\":%zu,\"initial_cursor\":%zu,"
+                        "\"touch_count\":%zu,\"requested_slot_start_tsc\":%llu,"
+                        "\"requested_slot_end_tsc\":%llu,"
+                        "\"burst_start_tsc\":%llu,"
+                        "\"burst_finish_tsc\":%llu,"
+                        "\"burst_duration_ticks\":%llu,"
+                        "\"initial_cursor\":%zu,"
                         "\"final_cursor\":%zu,"
+                        "\"completed_before_slot_end\":%s,"
                         "\"sender_epoch_id\":\"%s\"}\n",
                         gate_a_occupancy_bytes(slot),
                         geometry_sender ? geometry_sender->occupancy_touch_count[slot] : 0U,
+                        (unsigned long long)requested,
+                        (unsigned long long)requested_end,
+                        (unsigned long long)(geometry_sender ? geometry_sender->burst_start_tsc[slot] : 0U),
+                        (unsigned long long)(geometry_sender ? geometry_sender->burst_finish_tsc[slot] : 0U),
+                        (unsigned long long)(
+                            geometry_sender &&
+                            geometry_sender->burst_finish_tsc[slot] >=
+                                geometry_sender->burst_start_tsc[slot]
+                                ? geometry_sender->burst_finish_tsc[slot] -
+                                  geometry_sender->burst_start_tsc[slot]
+                                : 0U),
                         geometry_sender ? geometry_sender->occupancy_initial_cursor[slot] : 0U,
                         geometry_sender ? geometry_sender->occupancy_final_cursor[slot] : 0U,
+                        geometry_sender &&
+                            geometry_sender->burst_start_tsc[slot] >= requested &&
+                            geometry_sender->burst_finish_tsc[slot] <= requested_end
+                                ? "true" : "false",
                         gate_a_epoch(slot)) < 0) {
                 reason = "TRACE_WRITER_FAILURE";
                 rc = 5;
                 goto cleanup;
             }
-        } else if (fputs("null,\"phase_index\":null,\"sign\":null,\"orbit_value\":null,\"working_set_bytes\":0,\"touch_count\":0,\"initial_cursor\":0,\"final_cursor\":0,\"sender_epoch_id\":null}\n", trace) < 0) {
+        } else if (fputs("null,\"phase_index\":null,\"sign\":null,\"orbit_value\":null,\"working_set_bytes\":0,\"touch_count\":0,\"requested_slot_start_tsc\":null,\"requested_slot_end_tsc\":null,\"burst_start_tsc\":null,\"burst_finish_tsc\":null,\"burst_duration_ticks\":null,\"initial_cursor\":0,\"final_cursor\":0,\"completed_before_slot_end\":false,\"sender_epoch_id\":null}\n", trace) < 0) {
             reason = "TRACE_WRITER_FAILURE";
             rc = 5;
             goto cleanup;
@@ -1936,15 +2665,13 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
         }
         if (gate_a_lifecycle_record(
                 lifecycle, "slot_transition", state, slot, actual,
-                requested, origin +
-                    (uint64_t)((slot + 1) * args->slot_s * tsc_hz),
+                requested, requested_end,
                 slot_sender)) {
             reason = "LIFECYCLE_WRITER_FAILURE";
             rc = 5;
             goto cleanup;
         }
     }
-    result->sample_count = count;
     if (close_sync(&trace)) {
         reason = "TRACE_SYNC_FAILURE";
         rc = 5;
@@ -2005,17 +2732,41 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
                     epochs[0].occupancy_final_cursor[slot];
                 if (!epochs[0].occupancy_slot_complete[slot] ||
                     result->occupancy_touch_count[slot] !=
-                        GATE_A_READONLY_SLOT_TOUCHES ||
-                    result->occupancy_initial_cursor[slot] != 0) {
+                        GATE_A_READONLY_SLOT_TOUCHES) {
                     reason = "READONLY_OCCUPANCY_EXACT_COUNT_FAILURE";
                     rc = 5;
                     goto cleanup;
                 }
             }
+            if (gate_a_retain_readonly_burst_geometry(args, result, epochs)) {
+                reason = "READONLY_OCCUPANCY_BURST_EVIDENCE_FAILURE";
+                rc = 5;
+                goto cleanup;
+            }
             if (!result->occupancy_digest_unchanged) {
                 reason = "READONLY_OCCUPANCY_BUFFER_MUTATED";
                 rc = 5;
                 goto cleanup;
+            }
+            {
+                GateATimingDiagnostic diagnostic;
+                if (gate_a_readonly_timing_diagnostic(
+                        args, result, timestamps, started_tsc, finished_tsc,
+                        scheduler_lateness_ticks, service_ticks,
+                        finish_gap_ticks, timing_slot_index, count,
+                        &diagnostic) ||
+                    gate_a_write_timing_diagnostic_summary(
+                        args, result, &diagnostic)) {
+                    reason = "READONLY_OCCUPANCY_DIAGNOSTIC_FAILURE";
+                    rc = 5;
+                    goto cleanup;
+                }
+                if (strncmp(diagnostic.classification,
+                            "CAPTURE_REJECTED_", 17U) == 0) {
+                    reason = diagnostic.classification;
+                    rc = 5;
+                    goto cleanup;
+                }
             }
         }
     }
@@ -2054,6 +2805,12 @@ cleanup:
         rc = 5;
     }
     free(timestamps);
+    free(started_tsc);
+    free(finished_tsc);
+    free(scheduler_lateness_ticks);
+    free(service_ticks);
+    free(finish_gap_ticks);
+    free(timing_slot_index);
     free(observations);
     free(response_bank);
     free((void *)occupancy_bank);

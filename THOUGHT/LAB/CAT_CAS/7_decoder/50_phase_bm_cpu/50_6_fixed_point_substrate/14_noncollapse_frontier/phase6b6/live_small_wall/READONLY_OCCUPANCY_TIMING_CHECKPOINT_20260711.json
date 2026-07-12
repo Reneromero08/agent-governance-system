@@ -1,0 +1,149 @@
+{
+  "schema_id": "CAT_CAS_READONLY_OCCUPANCY_TIMING_CHECKPOINT_V1",
+  "checkpoint_subject": "timestamp-observable read-only occupancy capture",
+  "base_commit": "3bc37b7bb8d568881c430581aad3b24dee164217",
+  "claim_ceiling": "INCONCLUSIVE_CAPTURE_INTEGRITY; no observable read-only occupancy response claim",
+  "mechanism": {
+    "sample_timing_record": {
+      "file": "sample_timing.bin",
+      "schema_id": "CAT_CAS_READONLY_OCCUPANCY_SAMPLE_TIMING_V1",
+      "record_bytes": 64,
+      "fields": [
+        "sample_index",
+        "requested_tsc",
+        "started_tsc",
+        "finished_tsc",
+        "scheduler_lateness_ticks",
+        "service_ticks",
+        "finish_gap_ticks",
+        "slot_index"
+      ]
+    },
+    "diagnostic_summary": "TIMING_DIAGNOSTIC_SUMMARY.json",
+    "quality_thresholds": {
+      "scheduler_reject_multiple_of_nominal_spacing": 4.0,
+      "scheduler_missed_deadline_multiple_of_nominal_spacing": 1.0,
+      "scheduler_missed_deadline_fraction_max": 0.01,
+      "min_slot_coverage_fraction": 0.9,
+      "service_spike_multiple_of_p50": 4.0
+    },
+    "scheduler_mechanism_change_after_first_rejection": "SCHED_FIFO priority request changed from minimum to maximum; thresholds unchanged"
+  },
+  "focused_validation": [
+    {
+      "command": "git diff --check",
+      "result": "pass"
+    },
+    {
+      "command": "py -m py_compile THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/live_gate_a_target.py THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/run_gate_a_first_light.py",
+      "result": "pass"
+    },
+    {
+      "command": "PYTHONPATH=phase6b6/acquisition/gate_a/frequency_preparation py phase6b6/live_small_wall/live_gate_a_target.py --self-test-timing-parser",
+      "result": "pass",
+      "stdout": "{\"status\": \"GATE_A_TIMING_PARSER_SELF_TEST_OK\", \"hardware_executions\": 0}"
+    },
+    {
+      "command": "WSL cc -std=c11 -Wall -Wextra -Werror -pedantic -O2 -march=amdfam10 -mtune=amdfam10 -fno-lto -pthread ...; /tmp/gate_a_worker_lab --validate-only; --self-test; --self-test-cache-response; --self-test-timing-diagnostics",
+      "result": "pass",
+      "hardware_executions": 0,
+      "network_connections": 0
+    }
+  ],
+  "live_runs": [
+    {
+      "run_id": "readonly_occ_obs_equal_20260711a",
+      "command": "py phase6b6/live_small_wall/run_gate_a_first_light.py --run-id readonly_occ_obs_equal_20260711a --pilot-variant readonly-occupancy-equal",
+      "local_run": "phase6b6/live_small_wall/runs/readonly_occ_obs_equal_20260711a",
+      "status": "GATE_A_FIRST_LIGHT_FAILED",
+      "classification": "CAPTURE_REJECTED_SCHEDULER_LATENESS",
+      "mechanism_version": "initial timestamp split with SCHED_FIFO minimum priority",
+      "max_scheduler_lateness_ticks": 7009936,
+      "max_scheduler_lateness_sample": 57486,
+      "max_scheduler_lateness_slot": 14,
+      "p99_scheduler_lateness_ticks": 297,
+      "missed_deadline_count": 35,
+      "sender_spill": false,
+      "record_integrity_failure": false,
+      "missing_slot": false,
+      "restoration_complete": true,
+      "raw_outputs": [
+        "runtime/sample_timing.bin",
+        "runtime/TIMING_DIAGNOSTIC_SUMMARY.json",
+        "runtime/raw_samples.bin",
+        "runtime/slot_trace.jsonl",
+        "runtime/runtime_failure.json"
+      ]
+    },
+    {
+      "run_id": "readonly_occ_obs2_equal_20260711a",
+      "command": "py phase6b6/live_small_wall/run_gate_a_first_light.py --run-id readonly_occ_obs2_equal_20260711a --pilot-variant readonly-occupancy-equal",
+      "local_run": "phase6b6/live_small_wall/runs/readonly_occ_obs2_equal_20260711a",
+      "status": "GATE_A_FIRST_LIGHT_COMPLETE",
+      "classification": "CAPTURE_ACCEPTED_WITH_SERVICE_SPIKES",
+      "mechanism_version": "SCHED_FIFO maximum priority",
+      "max_scheduler_lateness_ticks": 34059,
+      "max_scheduler_lateness_sample": 28412,
+      "max_scheduler_lateness_slot": 7,
+      "p99_scheduler_lateness_ticks": 296,
+      "missed_deadline_count": 0,
+      "max_service_cycles_per_access": 325.75,
+      "step_minus_off_magnitude": 0.13261473383711328,
+      "sender_spill": false,
+      "record_integrity_failure": false,
+      "missing_slot": false,
+      "restoration_complete": true,
+      "raw_outputs": [
+        "runtime/sample_timing.bin",
+        "runtime/TIMING_DIAGNOSTIC_SUMMARY.json",
+        "runtime/raw_samples.bin",
+        "runtime/slot_trace.jsonl",
+        "runtime/runtime_result.json",
+        "FIRST_LIGHT_ANALYSIS.json"
+      ]
+    },
+    {
+      "run_id": "readonly_occ_obs2_forward_20260711a",
+      "command": "py phase6b6/live_small_wall/run_gate_a_first_light.py --run-id readonly_occ_obs2_forward_20260711a --pilot-variant readonly-occupancy-forward",
+      "local_run": "phase6b6/live_small_wall/runs/readonly_occ_obs2_forward_20260711a",
+      "status": "GATE_A_FIRST_LIGHT_FAILED",
+      "classification": "CAPTURE_REJECTED_SCHEDULER_LATENESS",
+      "mechanism_version": "SCHED_FIFO maximum priority",
+      "max_scheduler_lateness_ticks": 6870573,
+      "max_scheduler_lateness_sample": 55941,
+      "max_scheduler_lateness_slot": 13,
+      "p99_scheduler_lateness_ticks": 297,
+      "missed_deadline_count": 33,
+      "max_service_cycles_per_access": 329.203125,
+      "step_minus_off_magnitude": 0.40430296679769867,
+      "sender_spill": false,
+      "record_integrity_failure": false,
+      "missing_slot": false,
+      "restoration_complete": true,
+      "raw_outputs": [
+        "runtime/sample_timing.bin",
+        "runtime/TIMING_DIAGNOSTIC_SUMMARY.json",
+        "runtime/raw_samples.bin",
+        "runtime/slot_trace.jsonl",
+        "runtime/runtime_failure.json",
+        "FIRST_LIGHT_ANALYSIS.json"
+      ]
+    }
+  ],
+  "stop_reason": "precise capture-integrity blocker: recurrent late-slot scheduler pause survives SCHED_FIFO maximum priority and rejects forward before an accepted forward/reverse pair exists",
+  "not_run": [
+    "readonly_occ_obs2_reverse_20260711a",
+    "counterbalanced sequence",
+    "PMU",
+    "MOESI"
+  ],
+  "safety_readbacks": {
+    "policy4_restored_min_khz": 800000,
+    "policy4_restored_max_khz": 3200000,
+    "policy5_restored_min_khz": 800000,
+    "policy5_restored_max_khz": 3200000,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0
+  }
+}
