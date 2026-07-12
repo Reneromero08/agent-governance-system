@@ -6,40 +6,29 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`PREFETCH_STREAM_RESPONSE_NOT_ESTABLISHED`
+`PROCESS_LIFECYCLE_RESPONSE_NOT_ESTABLISHED`
 
 **Active wall:**
 The current wall is still carrier/access-model selection. Timing, ownership-intent PMU
 footprint, IBS availability, WC/flush-order, eviction-sentinel PMU/timing
 phase-local mappings, restored history-sentinel PMU mapping, the first active-query
-receiver-delta access model, the first source-side phase-chopped access model, and a
-same-core public branch-history carrier, and a read-only translation/page-footprint
-carrier, and a same-core stream/stride prefetch carrier either failed controls or did
-not expose a usable fold-odd carrier. The eviction-sentinel
-first-light run remains useful because it changed restoration from byte equality to a
-measured carrier equivalence class, but the phase-local remaps did not promote it. The
-new `coded_preprojection_active_query_0` run moved the query into the receiver's
-measured workload before scalar recording and restored cleanly, but its opposed
-fold-odd candidate did not clear the post-control floor. The follow-on
+receiver-delta access model, the first source-side phase-chopped access model,
+same-core public branch-history, read-only translation/page-footprint, same-core
+stream/stride prefetching, and a source-process/fresh-measurement-process lifecycle
+carrier either failed controls or did not expose a usable fold-odd carrier. The
+eviction-sentinel first-light run remains useful because it changed restoration from
+byte equality to a measured carrier equivalence class, but the phase-local remaps did
+not promote it. `coded_preprojection_active_query_0` moved the query into the
+receiver's measured workload before scalar recording and restored cleanly, but its
+opposed fold-odd candidate did not clear the post-control floor.
 `coded_preprojection_source_phase_chop_0` moved the public phase waveform into the
 source burst before scalar recording and also restored cleanly, but its control floor
-was too large for the `3x` rule. The restored history-sentinel run
-`f10_history_sentinel_0` then asked whether balanced ownership histories survive a
-common home-core restore strongly enough to perturb a later remote-store sentinel; it
-also restored cleanly, but forward/reverse deltas stayed below the neutral/shuffle
-control floor. The follow-on `f10_branch_history_0` changed carrier family to a
-same-core public branch-history sentinel and ran cleanly, but branch-miss and duration
-deltas stayed inside controls. `f10_translation_history_0` then moved to read-only
-page-footprint/translation history and also ran cleanly, but forward/reverse timing and
-cache-miss deltas were tiny against the shuffle floor. The active wall is now a
-materially stronger source-owned carrier/query algebra, not another remap of
-phase-local timing, active-query subbank order, source burst segmentation, restored
-two-line-set ownership history, simple branch-history training, or read-only
-translation-footprint history. `f10_prefetch_stream_0` then trained public
-forward/reverse stream state adjacent to a flushed sentinel line stream; it ran cleanly,
-but cache-miss and duration deltas stayed inside the neutral/shuffle controls. The
-remaining wall is no longer ordinary local history over cache lines, branch outcomes,
-page footprints, or stream prefetching; it is a stronger coupling/access-model change.
+was too large for the `3x` rule. The restored history-sentinel, branch-history,
+translation-history, prefetch-stream, and process-lifecycle probes all ran cleanly and
+stayed inside neutral/shuffle controls. The remaining wall is no longer ordinary local
+history over cache lines, branch outcomes, page footprints, stream prefetching, or
+simple source-process lifecycle residue; it is a stronger coupling/access-model or
+representation-level carrier that preserves a coordinate before fold-even loss.
 
 ## Established
 
@@ -1697,14 +1686,76 @@ useful restoration-sentinel calibration, but the tested PMU and duration phase-l
 uses do not establish a control-clean fold-odd response. The next move should change
 carrier family or access model rather than continuing eviction-sentinel remaps.
 
+The process-lifecycle discriminator then tested whether a source-owned runtime carrier
+survives source-process exit strongly enough to perturb a fresh sentinel. A child
+process on core 4 applied neutral, forward, reverse, or shuffle balanced read/store
+history over CAT_CAS-owned shared anonymous memory and exited. A fresh measurement
+process on core 5 then ran the byte-preserving `remote_store_same_value` sentinel under
+the established `primary_nb_coherence` PMU group:
+
+```text
+run id        f10_process_lifecycle_0
+source bundle 28ef9ca7752f7ee92981edb3c413992809b62f411e0bf1279d5b3978dee15e1a
+worker status PROCESS_LIFECYCLE_RESPONSE_NOT_ESTABLISHED
+```
+
+The transaction completed with verified copy-back and remote cleanup. It performed
+zero frequency writes, zero voltage access, zero MSR reads/writes, stayed below the
+68 C temperature veto, found no forbidden CAT_CAS process residue, all PMU windows
+were unmultiplexed, both source and sentinel children exited cleanly, and the shared
+buffer digest was unchanged after source and after restore.
+
+Fresh-process sentinel contrasts:
+
+```text
+cache_block_commands_change_to_dirty:
+  identity 2206
+  forward  2194
+  reverse  2181
+  shuffle  2314
+  delta      13
+  floor     108
+  threshold 324
+  signal false
+
+probe_responses_dirty:
+  identity 3926
+  forward  3956
+  reverse  3834
+  shuffle  4016
+  delta     122
+  floor      90
+  threshold 270
+  signal false
+
+duration_ns:
+  identity 2231595
+  forward  2192989
+  reverse  2185991
+  shuffle  2183831
+  delta       6998
+  floor      47764
+  threshold 143292
+  signal false
+```
+
+Checkpoint:
+
+`F10_PROCESS_LIFECYCLE_CHECKPOINT_20260712.json`
+
+**Status:** this exact source-process lifecycle carrier is negative. It changes the
+access model by forcing the source process to exit before the sentinel, but the
+forward/reverse residuals remain inside neutral/shuffle controls. Do not rerun this
+neutral/forward/reverse/shuffle child-process read-store history unchanged.
+
 ## Cheapest current discriminator
 
 Change carrier family or access model again, not another remap of the same
-phase-local timing/PMU/eviction/active-query/source-phase-chop/restored-history
-or simple branch-history/translation-footprint/prefetch-stream geometry. The run must
-stay closed: CAT_CAS-owned buffers only, predetermined geometry, no physical-address
-access, no cache-set mapping, no unrelated-process observation, and no MSR or voltage
-access.
+phase-local timing/PMU/eviction/active-query/source-phase-chop/restored-history,
+simple branch-history/translation-footprint/prefetch-stream geometry, or the current
+fresh source-process lifecycle sentinel. The run must stay closed: CAT_CAS-owned
+buffers only, predetermined geometry, no physical-address access, no cache-set mapping,
+no unrelated-process observation, and no MSR or voltage access.
 
 The next probe should answer:
 
@@ -1714,7 +1765,7 @@ The next probe should answer:
    into receiver-order service curvature or source-segment timing spread?
 3. Does a killing control remove the response without relying on route, line-set,
    eviction-prep, active-query subbank order, source-segment timing spread, or
-   sequence-position imbalance?
+   sequence-position or process-lifecycle imbalance?
 4. Does the carrier restore beyond byte equality under the new observable?
 
 Do not rerun the same timing coded loop, another scalar PMU route metric,
@@ -1726,7 +1777,9 @@ page-footprint discriminator unchanged. Do not rerun the same prefetch-stream
 sentinel discriminator unchanged. Do not rerun
 `coded_preprojection_active_query_0` or the same active-query receiver-delta schedule
 unchanged. Do not rerun `coded_preprojection_source_phase_chop_0` or the same
-source-phase-chop schedule unchanged.
+source-phase-chop schedule unchanged. Do not rerun `f10_process_lifecycle_0` or the
+same neutral/forward/reverse/shuffle child-process read-store lifecycle sentinel
+unchanged.
 
 ## Current claim ceiling
 
@@ -1767,10 +1820,12 @@ short of `SMALL_WALL_CROSSED`. `f10_translation_history_0` then moved to read-on
 translation/page-footprint state and stayed negative: forward/reverse timing and
 cache-miss deltas were tiny against the shuffle floor. `f10_prefetch_stream_0` then
 tested a flushed sentinel stream after adjacent forward/reverse stream training and
-also stayed negative. The next move must change carrier family or access model rather
-than keep remapping the same eviction-sentinel PMU/timing, active-query phase-local,
+also stayed negative. `f10_process_lifecycle_0` then forced the source history into a
+separate exited child process before a fresh remote-store sentinel and also stayed
+negative. The next move must change carrier family or access model rather than keep
+remapping the same eviction-sentinel PMU/timing, active-query phase-local,
 source-phase-chop, restored two-line-set ownership-history, simple branch-history,
-translation-footprint, or prefetch-stream geometry.
+translation-footprint, prefetch-stream, or source-process lifecycle geometry.
 
 ## State update rule
 

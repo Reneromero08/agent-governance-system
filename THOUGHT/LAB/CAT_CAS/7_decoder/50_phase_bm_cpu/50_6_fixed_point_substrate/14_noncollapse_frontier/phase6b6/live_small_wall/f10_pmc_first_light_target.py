@@ -158,6 +158,13 @@ MODES: dict[str, dict[str, Any]] = {
         "failed_status": "F10_PREFETCH_STREAM_TARGET_FAILED",
         "claim_ceiling": "Prefetch-stream timing/PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
     },
+    "process-lifecycle": {
+        "worker_args": ["--process-lifecycle"],
+        "result_file": "F10_PROCESS_LIFECYCLE_RESULT.json",
+        "complete_status": "F10_PROCESS_LIFECYCLE_TARGET_COMPLETE",
+        "failed_status": "F10_PROCESS_LIFECYCLE_TARGET_FAILED",
+        "claim_ceiling": "Process-lifecycle CAT_CAS-owned carrier discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
+    },
 }
 FORBIDDEN_PROCESS_MARKERS = (
     "f10_pmc_first_light_worker",

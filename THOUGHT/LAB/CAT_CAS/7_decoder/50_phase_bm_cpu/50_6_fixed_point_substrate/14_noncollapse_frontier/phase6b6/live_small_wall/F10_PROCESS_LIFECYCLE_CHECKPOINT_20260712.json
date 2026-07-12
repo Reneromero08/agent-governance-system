@@ -1,0 +1,94 @@
+{
+  "schema_id": "CAT_CAS_SMALL_WALL_PROCESS_LIFECYCLE_CHECKPOINT_V1",
+  "result": "PROCESS_LIFECYCLE_RESPONSE_NOT_ESTABLISHED",
+  "run_id": "f10_process_lifecycle_0",
+  "mode": "process-lifecycle",
+  "source_binding": {
+    "source_bundle_sha256": "28ef9ca7752f7ee92981edb3c413992809b62f411e0bf1279d5b3978dee15e1a",
+    "source_hashes": {
+      "f10_pmc_first_light_target.py": "29b477fedcaa41b8b308f345a20cd2af28c0094c291b672eba50a188d233b7ea",
+      "f10_pmc_first_light_worker.c": "87ff462b9304e421164a88a7247f2956d6ffcefe13d766b2f2e4cae8bd75966c"
+    }
+  },
+  "run_paths": {
+    "local_run": "runs/f10_process_lifecycle_0",
+    "worker_result": "runs/f10_process_lifecycle_0/F10_PROCESS_LIFECYCLE_RESULT.json",
+    "final_result": "runs/f10_process_lifecycle_0/FINAL_RESULT.json",
+    "controller_result": "runs/f10_process_lifecycle_0/CONTROLLER_RESULT.json"
+  },
+  "lab_device": {
+    "host": "root@192.168.137.100",
+    "cpu_model": "AMD Phenom(tm) II X6 1090T Processor",
+    "kernel": "6.12.86+deb13-amd64"
+  },
+  "predeclared_experiment": {
+    "carrier": "CAT_CAS-owned shared anonymous memory plus source-process lifecycle residue",
+    "source_operator": "separate source process on core 4 applies neutral, forward, reverse, or shuffle balanced read/store history and exits",
+    "sentinel": "fresh measurement process on core 5 performs byte-preserving remote_store_same_value",
+    "observable": "primary_nb_coherence PMU counters and sentinel duration",
+    "killing_control": "neutral versus shuffle source-process control spread",
+    "restoration_class": "shared-buffer digest unchanged after source and after neutral restore; no physical restoration claim beyond the measured equivalence"
+  },
+  "transaction_integrity": {
+    "target_status": "F10_PROCESS_LIFECYCLE_TARGET_COMPLETE",
+    "worker_status": "PROCESS_LIFECYCLE_RESPONSE_NOT_ESTABLISHED",
+    "copy_verified": true,
+    "remote_cleaned": true,
+    "remote_returncode": 0,
+    "temperature_preflight_c": 49.625,
+    "temperature_post_c": 50.0,
+    "temperature_veto_c": 68.0,
+    "temperature_below_veto": true,
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "forbidden_process_matches_preflight": 0,
+    "forbidden_process_matches_cleanup": 0
+  },
+  "observed_counts": {
+    "cache_block_commands_change_to_dirty": {
+      "identity": 2206,
+      "forward": 2194,
+      "reverse": 2181,
+      "shuffle": 2314,
+      "forward_reverse_delta": 13,
+      "control_floor": 108,
+      "threshold": 324,
+      "signal": false
+    },
+    "probe_responses_dirty": {
+      "identity": 3926,
+      "forward": 3956,
+      "reverse": 3834,
+      "shuffle": 4016,
+      "forward_reverse_delta": 122,
+      "control_floor": 90,
+      "threshold": 270,
+      "signal": false
+    },
+    "duration_ns": {
+      "identity": 2231595,
+      "forward": 2192989,
+      "reverse": 2185991,
+      "shuffle": 2183831,
+      "forward_reverse_delta": 6998,
+      "control_floor": 47764,
+      "threshold": 143292,
+      "signal": false
+    }
+  },
+  "acceptance": {
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "children_exited_cleanly": true,
+    "bytes_unchanged_after_source": true,
+    "bytes_unchanged_after_restore": true,
+    "change_to_dirty_lifecycle_signal": false,
+    "probe_dirty_lifecycle_signal": false,
+    "duration_lifecycle_signal": false,
+    "process_lifecycle_response": false
+  },
+  "claim_ceiling": "Process-lifecycle CAT_CAS-owned carrier discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
+  "frontier_update": "The fresh source-process lifecycle carrier is negative under this sentinel. Do not rerun this neutral/forward/reverse/shuffle read-store child-process history unchanged."
+}

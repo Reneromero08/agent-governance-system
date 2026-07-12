@@ -13,10 +13,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/ioctl.h>
+#include <sys/mman.h>
 #include <sys/stat.h>
 #include <sys/syscall.h>
 #include <sys/time.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <time.h>
 #include <unistd.h>
 
@@ -52,6 +54,7 @@
 #define BRANCH_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_BRANCH_HISTORY_RESULT_V1"
 #define TRANSLATION_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_TRANSLATION_HISTORY_RESULT_V1"
 #define PREFETCH_STREAM_RESULT_SCHEMA "CAT_CAS_F10_PREFETCH_STREAM_RESULT_V1"
+#define PROCESS_LIFECYCLE_RESULT_SCHEMA "CAT_CAS_F10_PROCESS_LIFECYCLE_RESULT_V1"
 #define PHASE_LOCAL_BANK_LINES 512u
 #define EVICTION_LINES 262144u
 #define EVICTION_ITERATIONS 3
@@ -69,6 +72,7 @@
 #define PREFETCH_RESTORE_LOOPS 2u
 #define PREFETCH_HISTORY_LOOPS 8u
 #define PREFETCH_SENTINEL_LOOPS 8u
+#define PROCESS_LIFECYCLE_SOURCE_LOOPS 4u
 
 struct event_def {
     const char *name;
@@ -242,6 +246,19 @@ struct prefetch_stream_sequence_spec {
     const char *name;
     enum prefetch_stream_kind history_pattern;
     unsigned int history_loops;
+};
+
+enum process_lifecycle_kind {
+    PROCESS_LIFECYCLE_NEUTRAL = 0,
+    PROCESS_LIFECYCLE_FORWARD = 1,
+    PROCESS_LIFECYCLE_REVERSE = 2,
+    PROCESS_LIFECYCLE_SHUFFLE = 3
+};
+
+struct process_lifecycle_sequence_spec {
+    const char *name;
+    enum process_lifecycle_kind source_pattern;
+    unsigned int source_loops;
 };
 
 static const struct event_def support_events[SUPPORT_EVENTS] = {
@@ -2582,6 +2599,329 @@ static int run_prefetch_stream_mode(const char *output_root) {
     return 0;
 }
 
+static int wait_child_ok(pid_t pid, int *child_status) {
+    int status = 0;
+    pid_t waited = 0;
+    do {
+        waited = waitpid(pid, &status, 0);
+    } while (waited < 0 && errno == EINTR);
+    if (waited < 0) {
+        if (child_status) *child_status = -errno;
+        return -errno;
+    }
+    if (WIFEXITED(status)) {
+        int code = WEXITSTATUS(status);
+        if (child_status) *child_status = code;
+        return code == 0 ? 0 : -EIO;
+    }
+    if (WIFSIGNALED(status)) {
+        int code = 128 + WTERMSIG(status);
+        if (child_status) *child_status = code;
+        return -EIO;
+    }
+    if (child_status) *child_status = -EIO;
+    return -EIO;
+}
+
+static int run_process_lifecycle_source_pattern(
+    struct carrier *carrier,
+    enum process_lifecycle_kind pattern,
+    unsigned int loops
+) {
+    if (pin_to_core(CATCAS_CORE_A) != 0) return -errno;
+    for (unsigned int loop = 0; loop < loops; loop++) {
+        switch (pattern) {
+            case PROCESS_LIFECYCLE_NEUTRAL:
+                store_same_value_subset_on_core(carrier, CATCAS_CORE_A, 0);
+                read_subset_on_core(carrier, CATCAS_CORE_A, 0);
+                store_same_value_subset_on_core(carrier, CATCAS_CORE_A, 1);
+                read_subset_on_core(carrier, CATCAS_CORE_A, 1);
+                break;
+            case PROCESS_LIFECYCLE_FORWARD:
+                store_same_value_subset_on_core(carrier, CATCAS_CORE_A, 0);
+                read_subset_on_core(carrier, CATCAS_CORE_A, 1);
+                store_same_value_subset_on_core(carrier, CATCAS_CORE_A, 1);
+                read_subset_on_core(carrier, CATCAS_CORE_A, 0);
+                break;
+            case PROCESS_LIFECYCLE_REVERSE:
+                store_same_value_subset_on_core(carrier, CATCAS_CORE_A, 1);
+                read_subset_on_core(carrier, CATCAS_CORE_A, 0);
+                store_same_value_subset_on_core(carrier, CATCAS_CORE_A, 0);
+                read_subset_on_core(carrier, CATCAS_CORE_A, 1);
+                break;
+            case PROCESS_LIFECYCLE_SHUFFLE:
+                read_subset_on_core(carrier, CATCAS_CORE_A, 0);
+                store_same_value_subset_on_core(carrier, CATCAS_CORE_A, 1);
+                read_subset_on_core(carrier, CATCAS_CORE_A, 1);
+                store_same_value_subset_on_core(carrier, CATCAS_CORE_A, 0);
+                break;
+            default:
+                return -EINVAL;
+        }
+    }
+    return 0;
+}
+
+static int fork_lifecycle_source_process(
+    struct carrier *carrier,
+    const struct process_lifecycle_sequence_spec *sequence,
+    int *child_status
+) {
+    pid_t pid = fork();
+    if (pid < 0) return -errno;
+    if (pid == 0) {
+        int rc = run_process_lifecycle_source_pattern(
+            carrier, sequence->source_pattern, sequence->source_loops);
+        _exit(rc == 0 ? 0 : 101);
+    }
+    return wait_child_ok(pid, child_status);
+}
+
+static int fork_lifecycle_sentinel_process(struct carrier *carrier, int *child_status) {
+    pid_t pid = fork();
+    if (pid < 0) return -errno;
+    if (pid == 0) {
+        if (pin_to_core(CATCAS_CORE_B) != 0) _exit(101);
+        remote_store_same_value(carrier);
+        _exit(0);
+    }
+    return wait_child_ok(pid, child_status);
+}
+
+static int measure_process_lifecycle_window(
+    const struct event_def group[MAX_GROUP_EVENTS],
+    const struct process_lifecycle_sequence_spec *sequence,
+    struct carrier *carrier,
+    struct group_result *result,
+    uint64_t *duration_ns,
+    uint64_t *digest_after_source,
+    uint64_t *digest_after_restore,
+    int *source_child_status,
+    int *sentinel_child_status
+) {
+    int fds[MAX_GROUP_EVENTS];
+    uint64_t ids[MAX_GROUP_EVENTS];
+    memset(result, 0, sizeof(*result));
+    init_carrier(carrier);
+    prefault_carrier(carrier);
+    restore_on_core(carrier, CATCAS_CORE_A);
+    int source_rc = fork_lifecycle_source_process(carrier, sequence, source_child_status);
+    *digest_after_source = fnv1a64(carrier->bytes, carrier->byte_count);
+    if (source_rc != 0) return source_rc;
+    int opened = open_group(group, CATCAS_CORE_B, fds, ids);
+    if (opened != 0) {
+        result->open_errno = -opened;
+        return opened;
+    }
+    result->opened = true;
+    if (ioctl(fds[0], PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t start = monotonic_ns();
+    if (ioctl(fds[0], PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    int sentinel_rc = fork_lifecycle_sentinel_process(carrier, sentinel_child_status);
+    if (ioctl(fds[0], PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t end = monotonic_ns();
+    int read_rc = read_group(fds[0], result);
+    for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+    if (read_rc != 0) return read_rc;
+    if (sentinel_rc != 0) return sentinel_rc;
+    *duration_ns = end >= start ? end - start : 0;
+    restore_on_core(carrier, CATCAS_CORE_A);
+    *digest_after_restore = fnv1a64(carrier->bytes, carrier->byte_count);
+    return 0;
+}
+
+static int run_process_lifecycle_mode(const char *output_root) {
+    size_t byte_count = (size_t)CARRIER_LINES * CACHE_LINE_BYTES;
+    unsigned char *bytes = mmap(NULL, byte_count, PROT_READ | PROT_WRITE,
+        MAP_SHARED | MAP_ANONYMOUS, -1, 0);
+    if (bytes == MAP_FAILED) {
+        fprintf(stderr, "process lifecycle shared carrier allocation failed: %s\n", strerror(errno));
+        return 1;
+    }
+    struct carrier shared_carrier = {
+        .bytes = bytes,
+        .byte_count = byte_count,
+        .line_count = CARRIER_LINES,
+    };
+    init_carrier(&shared_carrier);
+    uint64_t initial_digest = fnv1a64(shared_carrier.bytes, shared_carrier.byte_count);
+
+    int primary_fds[MAX_GROUP_EVENTS];
+    uint64_t primary_ids[MAX_GROUP_EVENTS];
+    int primary_open_rc = open_group(primary_group, CATCAS_CORE_B, primary_fds, primary_ids);
+    if (primary_open_rc == 0) {
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(primary_fds[i]);
+    }
+
+    const struct process_lifecycle_sequence_spec sequences[] = {
+        {"neutral_source_process", PROCESS_LIFECYCLE_NEUTRAL, PROCESS_LIFECYCLE_SOURCE_LOOPS},
+        {"forward_source_process", PROCESS_LIFECYCLE_FORWARD, PROCESS_LIFECYCLE_SOURCE_LOOPS},
+        {"reverse_source_process", PROCESS_LIFECYCLE_REVERSE, PROCESS_LIFECYCLE_SOURCE_LOOPS},
+        {"shuffle_source_process", PROCESS_LIFECYCLE_SHUFFLE, PROCESS_LIFECYCLE_SOURCE_LOOPS},
+    };
+    enum { PROCESS_LIFECYCLE_WINDOW_COUNT = 4 };
+    struct group_result results[PROCESS_LIFECYCLE_WINDOW_COUNT];
+    uint64_t durations[PROCESS_LIFECYCLE_WINDOW_COUNT];
+    uint64_t digest_after_source[PROCESS_LIFECYCLE_WINDOW_COUNT];
+    uint64_t digest_after_restore[PROCESS_LIFECYCLE_WINDOW_COUNT];
+    int source_child_status[PROCESS_LIFECYCLE_WINDOW_COUNT];
+    int sentinel_child_status[PROCESS_LIFECYCLE_WINDOW_COUNT];
+    int window_rc[PROCESS_LIFECYCLE_WINDOW_COUNT];
+    for (int i = 0; i < PROCESS_LIFECYCLE_WINDOW_COUNT; i++) {
+        memset(&results[i], 0, sizeof(results[i]));
+        durations[i] = 0;
+        digest_after_source[i] = 0;
+        digest_after_restore[i] = 0;
+        source_child_status[i] = -1;
+        sentinel_child_status[i] = -1;
+        if (primary_open_rc != 0) {
+            window_rc[i] = -ENODEV;
+        } else {
+            window_rc[i] = measure_process_lifecycle_window(
+                primary_group,
+                &sequences[i],
+                &shared_carrier,
+                &results[i],
+                &durations[i],
+                &digest_after_source[i],
+                &digest_after_restore[i],
+                &source_child_status[i],
+                &sentinel_child_status[i]);
+        }
+    }
+
+    bool all_windows_ok = true;
+    bool all_unmultiplexed = true;
+    bool bytes_unchanged_after_source = true;
+    bool bytes_unchanged_after_restore = true;
+    bool children_exited_cleanly = true;
+    for (int i = 0; i < PROCESS_LIFECYCLE_WINDOW_COUNT; i++) {
+        all_windows_ok = all_windows_ok && window_rc[i] == 0;
+        all_unmultiplexed = all_unmultiplexed && results[i].unmultiplexed;
+        bytes_unchanged_after_source =
+            bytes_unchanged_after_source && digest_after_source[i] == initial_digest;
+        bytes_unchanged_after_restore =
+            bytes_unchanged_after_restore && digest_after_restore[i] == initial_digest;
+        children_exited_cleanly = children_exited_cleanly &&
+            source_child_status[i] == 0 && sentinel_child_status[i] == 0;
+    }
+
+    uint64_t identity_c2d = event_value_by_name(&results[0], primary_group, "cache_block_commands_change_to_dirty");
+    uint64_t forward_c2d = event_value_by_name(&results[1], primary_group, "cache_block_commands_change_to_dirty");
+    uint64_t reverse_c2d = event_value_by_name(&results[2], primary_group, "cache_block_commands_change_to_dirty");
+    uint64_t shuffle_c2d = event_value_by_name(&results[3], primary_group, "cache_block_commands_change_to_dirty");
+    uint64_t c2d_delta = abs_diff_u64(forward_c2d, reverse_c2d);
+    uint64_t c2d_control = abs_diff_u64(identity_c2d, shuffle_c2d);
+    uint64_t c2d_threshold = max_u64(32u, 3u * c2d_control);
+    bool c2d_signal = c2d_delta > c2d_threshold;
+
+    uint64_t identity_probe = event_value_by_name(&results[0], primary_group, "probe_responses_dirty");
+    uint64_t forward_probe = event_value_by_name(&results[1], primary_group, "probe_responses_dirty");
+    uint64_t reverse_probe = event_value_by_name(&results[2], primary_group, "probe_responses_dirty");
+    uint64_t shuffle_probe = event_value_by_name(&results[3], primary_group, "probe_responses_dirty");
+    uint64_t probe_delta = abs_diff_u64(forward_probe, reverse_probe);
+    uint64_t probe_control = abs_diff_u64(identity_probe, shuffle_probe);
+    uint64_t probe_threshold = max_u64(32u, 3u * probe_control);
+    bool probe_signal = probe_delta > probe_threshold;
+
+    uint64_t identity_duration = durations[0];
+    uint64_t forward_duration = durations[1];
+    uint64_t reverse_duration = durations[2];
+    uint64_t shuffle_duration = durations[3];
+    uint64_t duration_delta = abs_diff_u64(forward_duration, reverse_duration);
+    uint64_t duration_control = abs_diff_u64(identity_duration, shuffle_duration);
+    uint64_t duration_threshold = max_u64(10000u, 3u * duration_control);
+    bool duration_signal = duration_delta > duration_threshold;
+
+    bool process_lifecycle_response = primary_open_rc == 0 && all_windows_ok &&
+        all_unmultiplexed && children_exited_cleanly &&
+        bytes_unchanged_after_source && bytes_unchanged_after_restore &&
+        (c2d_signal || probe_signal || duration_signal);
+
+    char result_path[4096];
+    int n = snprintf(result_path, sizeof(result_path), "%s/F10_PROCESS_LIFECYCLE_RESULT.json", output_root);
+    if (n <= 0 || (size_t)n >= sizeof(result_path)) {
+        munmap(bytes, byte_count);
+        return 1;
+    }
+    FILE *out = fopen(result_path, "w");
+    if (!out) {
+        fprintf(stderr, "cannot open result: %s\n", strerror(errno));
+        munmap(bytes, byte_count);
+        return 1;
+    }
+    fprintf(out, "{\n");
+    fprintf(out, "  \"schema_id\": \"%s\",\n", PROCESS_LIFECYCLE_RESULT_SCHEMA);
+    fprintf(out, "  \"status\": \"%s\",\n", process_lifecycle_response ? "PROCESS_LIFECYCLE_RESPONSE_FOUND" : "PROCESS_LIFECYCLE_RESPONSE_NOT_ESTABLISHED");
+    fprintf(out, "  \"claim_ceiling\": \"Process-lifecycle CAT_CAS-owned carrier discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim\",\n");
+    fprintf(out, "  \"cores\": {\"source_core\": %d, \"measurement_core\": %d},\n", CATCAS_CORE_A, CATCAS_CORE_B);
+    fprintf(out, "  \"perf_interface\": {\"type\": \"PERF_TYPE_RAW\", \"event_format\": \"config:0-7,32-35\", \"umask_format\": \"config:8-15\", \"exclude_kernel\": true, \"exclude_hv\": true},\n");
+    fprintf(out, "  \"source_constraints\": {\"direct_msr_access\": false, \"voltage_access\": false, \"frequency_writes\": 0, \"experiment_owned_memory_only\": true, \"shared_anonymous_memory_only\": true, \"physical_address_access\": false, \"cache_set_mapping\": false, \"unrelated_process_observation\": false},\n");
+    fprintf(out, "  \"carrier\": {\"line_count\": %zu, \"line_bytes\": %d, \"byte_count\": %zu, \"source_loops\": %u, \"digest_kind\": \"fnv1a64\", \"initial_digest_hex\": \"0x%016" PRIx64 "\"},\n",
+        shared_carrier.line_count, CACHE_LINE_BYTES, shared_carrier.byte_count,
+        PROCESS_LIFECYCLE_SOURCE_LOOPS, initial_digest);
+    fprintf(out, "  \"selected_group\": \"primary_nb_coherence\",\n");
+    fprintf(out, "  \"group_open_rc\": %d,\n", primary_open_rc);
+    fprintf(out, "  \"selected_events\": ");
+    print_group_defs(out, primary_group);
+    fprintf(out, ",\n");
+    fprintf(out, "  \"predeclared_observable\": {\"source\": \"separate source process applies balanced public read/store history over shared CAT_CAS-owned lines and exits\", \"sentinel\": \"fresh measurement process on the observer core performs byte-preserving remote_store_same_value\", \"primary_acceptance\": \"forward/reverse fresh-process sentinel delta exceeds max(32, 3 * neutral/shuffle control spread) for an established coherence counter\", \"secondary_acceptance\": \"duration delta exceeds max(10000 ns, 3 * neutral/shuffle control spread)\"},\n");
+    fprintf(out, "  \"windows\": [\n");
+    for (int i = 0; i < PROCESS_LIFECYCLE_WINDOW_COUNT; i++) {
+        fprintf(out, "    {\"name\": \"%s\", \"rc\": %d, \"duration_ns\": %" PRIu64 ", \"source_loops\": %u, \"source_child_status\": %d, \"sentinel_child_status\": %d, \"digest_after_source_hex\": \"0x%016" PRIx64 "\", \"digest_after_restore_hex\": \"0x%016" PRIx64 "\", \"bytes_unchanged_after_source\": %s, \"bytes_unchanged_after_restore\": %s, \"group\": ",
+            sequences[i].name,
+            window_rc[i],
+            durations[i],
+            sequences[i].source_loops,
+            source_child_status[i],
+            sentinel_child_status[i],
+            digest_after_source[i],
+            digest_after_restore[i],
+            json_bool(digest_after_source[i] == initial_digest),
+            json_bool(digest_after_restore[i] == initial_digest));
+        print_group_result(out, primary_group, &results[i]);
+        fprintf(out, "}%s\n", i + 1 == PROCESS_LIFECYCLE_WINDOW_COUNT ? "" : ",");
+    }
+    fprintf(out, "  ],\n");
+    fprintf(out, "  \"contrast_counts\": {\n");
+    fprintf(out, "    \"cache_block_commands_change_to_dirty\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s},\n",
+        identity_c2d, forward_c2d, reverse_c2d, shuffle_c2d, c2d_delta, c2d_control, c2d_threshold, json_bool(c2d_signal));
+    fprintf(out, "    \"probe_responses_dirty\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s},\n",
+        identity_probe, forward_probe, reverse_probe, shuffle_probe, probe_delta, probe_control, probe_threshold, json_bool(probe_signal));
+    fprintf(out, "    \"duration_ns\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s}\n",
+        identity_duration, forward_duration, reverse_duration, shuffle_duration, duration_delta, duration_control, duration_threshold, json_bool(duration_signal));
+    fprintf(out, "  },\n");
+    fprintf(out, "  \"acceptance\": {\"all_windows_ok\": %s, \"all_unmultiplexed\": %s, \"children_exited_cleanly\": %s, \"bytes_unchanged_after_source\": %s, \"bytes_unchanged_after_restore\": %s, \"change_to_dirty_lifecycle_signal\": %s, \"probe_dirty_lifecycle_signal\": %s, \"duration_lifecycle_signal\": %s, \"process_lifecycle_response\": %s}\n",
+        json_bool(all_windows_ok),
+        json_bool(all_unmultiplexed),
+        json_bool(children_exited_cleanly),
+        json_bool(bytes_unchanged_after_source),
+        json_bool(bytes_unchanged_after_restore),
+        json_bool(c2d_signal),
+        json_bool(probe_signal),
+        json_bool(duration_signal),
+        json_bool(process_lifecycle_response));
+    fprintf(out, "}\n");
+    fclose(out);
+    printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"primary_nb_coherence\"}\n",
+        process_lifecycle_response ? "PROCESS_LIFECYCLE_RESPONSE_FOUND" : "PROCESS_LIFECYCLE_RESPONSE_NOT_ESTABLISHED",
+        result_path);
+    munmap(bytes, byte_count);
+    return 0;
+}
+
 static int measure_wc_flush_window(
     const struct event_def group[MAX_GROUP_EVENTS],
     enum wc_flush_op op,
@@ -4437,6 +4777,7 @@ int main(int argc, char **argv) {
     bool branch_history_mode = false;
     bool translation_history_mode = false;
     bool prefetch_stream_mode = false;
+    bool process_lifecycle_mode = false;
     if (argc == 3 && strcmp(argv[1], "--output-root") == 0) {
         output_root = argv[2];
     } else if (argc == 4 && strcmp(argv[1], "--coherence-operators") == 0 &&
@@ -4507,10 +4848,14 @@ int main(int argc, char **argv) {
                strcmp(argv[2], "--output-root") == 0) {
         prefetch_stream_mode = true;
         output_root = argv[3];
+    } else if (argc == 4 && strcmp(argv[1], "--process-lifecycle") == 0 &&
+               strcmp(argv[2], "--output-root") == 0) {
+        process_lifecycle_mode = true;
+        output_root = argv[3];
     } else if (argc == 2 && strcmp(argv[1], "--self-test") == 0) {
         return self_test();
     } else {
-        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root> | --eviction-phase-bracketed --output-root <absolute-output-root> | --eviction-phase-bracketed-c2d --output-root <absolute-output-root> | --eviction-phase-bracketed-duration --output-root <absolute-output-root> | --history-sentinel --output-root <absolute-output-root> | --branch-history --output-root <absolute-output-root> | --translation-history --output-root <absolute-output-root> | --prefetch-stream --output-root <absolute-output-root>\n", argv[0]);
+        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root> | --eviction-phase-bracketed --output-root <absolute-output-root> | --eviction-phase-bracketed-c2d --output-root <absolute-output-root> | --eviction-phase-bracketed-duration --output-root <absolute-output-root> | --history-sentinel --output-root <absolute-output-root> | --branch-history --output-root <absolute-output-root> | --translation-history --output-root <absolute-output-root> | --prefetch-stream --output-root <absolute-output-root> | --process-lifecycle --output-root <absolute-output-root>\n", argv[0]);
         return 2;
     }
     if (output_root[0] != '/') {
@@ -4614,6 +4959,11 @@ int main(int argc, char **argv) {
     }
     if (prefetch_stream_mode) {
         int rc = run_prefetch_stream_mode(output_root);
+        free(carrier.bytes);
+        return rc;
+    }
+    if (process_lifecycle_mode) {
+        int rc = run_process_lifecycle_mode(output_root);
         free(carrier.bytes);
         return rc;
     }
