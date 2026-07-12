@@ -1,0 +1,82 @@
+{
+  "schema_id": "CAT_CAS_SMALL_WALL_INDIRECT_TARGET_HISTORY_CHECKPOINT_V1",
+  "result": "INDIRECT_TARGET_HISTORY_RESPONSE_NOT_ESTABLISHED",
+  "run_id": "f10_indirect_target_history_0",
+  "mode": "indirect-target-history",
+  "source_binding": {
+    "source_bundle_sha256": "091c2f6636081b09654bab944b297d619e8c503cdb1e7465e335048b96343308",
+    "source_hashes": {
+      "f10_pmc_first_light_target.py": "397cdcfb25b28b5115beb8b862a7920f013a7ba3a73c937419f8f45e453bcf8d",
+      "f10_pmc_first_light_worker.c": "1f445eae4f3448227179623df9e00cd900a2bbbd90f193fb40c9e3628c512d58"
+    }
+  },
+  "run_paths": {
+    "local_run": "runs/f10_indirect_target_history_0",
+    "worker_result": "runs/f10_indirect_target_history_0/F10_INDIRECT_TARGET_HISTORY_RESULT.json",
+    "final_result": "runs/f10_indirect_target_history_0/FINAL_RESULT.json",
+    "controller_result": "runs/f10_indirect_target_history_0/CONTROLLER_RESULT.json"
+  },
+  "lab_device": {
+    "host": "root@192.168.137.100",
+    "cpu_model": "AMD Phenom(tm) II X6 1090T Processor",
+    "kernel": "6.12.86+deb13-amd64"
+  },
+  "predeclared_experiment": {
+    "carrier": "CAT_CAS-owned indirect target history at one public call site",
+    "source_operator": "neutral, forward, reverse, or shuffle balanced public indirect-target sequence on core 5",
+    "sentinel": "fixed public indirect-target sequence at the same call site",
+    "observable": "branch_history_group PMU counters and sentinel duration",
+    "killing_control": "neutral versus shuffle target-history control spread",
+    "restoration_class": "pattern digest unchanged after history and after neutral restore; no physical restoration claim beyond the measured equivalence"
+  },
+  "transaction_integrity": {
+    "target_status": "F10_INDIRECT_TARGET_HISTORY_TARGET_COMPLETE",
+    "worker_status": "INDIRECT_TARGET_HISTORY_RESPONSE_NOT_ESTABLISHED",
+    "copy_verified": true,
+    "remote_cleaned": true,
+    "remote_returncode": 0,
+    "temperature_preflight_c": 48.625,
+    "temperature_post_c": 49.0,
+    "temperature_veto_c": 68.0,
+    "temperature_below_veto": true,
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "forbidden_process_matches_preflight": 0,
+    "forbidden_process_matches_cleanup": 0
+  },
+  "observed_counts": {
+    "retired_mispredicted_branch_instructions": {
+      "identity": 20804,
+      "forward": 20782,
+      "reverse": 20779,
+      "shuffle": 20778,
+      "forward_reverse_delta": 3,
+      "control_floor": 26,
+      "threshold": 78,
+      "signal": false
+    },
+    "duration_ns": {
+      "identity": 1793079,
+      "forward": 1791799,
+      "reverse": 1791670,
+      "shuffle": 1791491,
+      "forward_reverse_delta": 129,
+      "control_floor": 1588,
+      "threshold": 4764,
+      "signal": false
+    }
+  },
+  "acceptance": {
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "patterns_unchanged_after_history": true,
+    "patterns_unchanged_after_restore": true,
+    "branch_miss_signal": false,
+    "duration_signal": false,
+    "indirect_target_history_response": false
+  },
+  "claim_ceiling": "Indirect-target history PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
+  "frontier_update": "The same-core public indirect-target history carrier is negative under this sentinel. Do not rerun this neutral/forward/reverse/shuffle indirect-target sequence unchanged."
+}

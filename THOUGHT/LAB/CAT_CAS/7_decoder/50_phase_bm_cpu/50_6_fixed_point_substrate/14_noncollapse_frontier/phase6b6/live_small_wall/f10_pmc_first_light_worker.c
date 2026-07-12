@@ -52,6 +52,7 @@
 #define EVICTION_PHASE_BRACKETED_DURATION_RESULT_SCHEMA "CAT_CAS_F10_EVICTION_PHASE_BRACKETED_DURATION_RESULT_V1"
 #define HISTORY_SENTINEL_RESULT_SCHEMA "CAT_CAS_F10_HISTORY_SENTINEL_RESULT_V1"
 #define BRANCH_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_BRANCH_HISTORY_RESULT_V1"
+#define INDIRECT_TARGET_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_INDIRECT_TARGET_HISTORY_RESULT_V1"
 #define TRANSLATION_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_TRANSLATION_HISTORY_RESULT_V1"
 #define PREFETCH_STREAM_RESULT_SCHEMA "CAT_CAS_F10_PREFETCH_STREAM_RESULT_V1"
 #define PROCESS_LIFECYCLE_RESULT_SCHEMA "CAT_CAS_F10_PROCESS_LIFECYCLE_RESULT_V1"
@@ -62,6 +63,10 @@
 #define BRANCH_RESTORE_LOOPS 128u
 #define BRANCH_HISTORY_LOOPS 256u
 #define BRANCH_SENTINEL_LOOPS 128u
+#define INDIRECT_TARGET_PATTERN_BYTES 4096u
+#define INDIRECT_TARGET_RESTORE_LOOPS 128u
+#define INDIRECT_TARGET_HISTORY_LOOPS 256u
+#define INDIRECT_TARGET_SENTINEL_LOOPS 128u
 #define TRANSLATION_PAGE_COUNT 8192u
 #define TRANSLATION_RESTORE_LOOPS 4u
 #define TRANSLATION_HISTORY_LOOPS 8u
@@ -217,6 +222,20 @@ enum branch_pattern_kind {
 struct branch_sequence_spec {
     const char *name;
     enum branch_pattern_kind history_pattern;
+    unsigned int history_loops;
+};
+
+enum indirect_target_pattern_kind {
+    INDIRECT_TARGET_PATTERN_NEUTRAL = 0,
+    INDIRECT_TARGET_PATTERN_FORWARD = 1,
+    INDIRECT_TARGET_PATTERN_REVERSE = 2,
+    INDIRECT_TARGET_PATTERN_SHUFFLE = 3,
+    INDIRECT_TARGET_PATTERN_SENTINEL = 4
+};
+
+struct indirect_target_sequence_spec {
+    const char *name;
+    enum indirect_target_pattern_kind history_pattern;
     unsigned int history_loops;
 };
 
@@ -2078,6 +2097,364 @@ static int run_branch_history_mode(const char *output_root) {
     fclose(out);
     printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"branch_history_group\"}\n",
         branch_history_response ? "BRANCH_HISTORY_RESPONSE_FOUND" : "BRANCH_HISTORY_RESPONSE_NOT_ESTABLISHED",
+        result_path);
+    free(neutral);
+    free(forward);
+    free(reverse);
+    free(shuffle);
+    free(sentinel);
+    return 0;
+}
+
+static volatile uint64_t indirect_target_history_sink = 0;
+
+typedef uint64_t (*indirect_target_fn)(uint64_t);
+
+__attribute__((noinline))
+static uint64_t indirect_target_0(uint64_t x) {
+    return (x + 0x9e3779b97f4a7c15ull) ^ (x << 7);
+}
+
+__attribute__((noinline))
+static uint64_t indirect_target_1(uint64_t x) {
+    return (x + 0xbf58476d1ce4e5b9ull) ^ (x >> 5);
+}
+
+__attribute__((noinline))
+static uint64_t indirect_target_2(uint64_t x) {
+    return (x + 0x94d049bb133111ebull) ^ (x << 11);
+}
+
+__attribute__((noinline))
+static uint64_t indirect_target_3(uint64_t x) {
+    return (x + 0x2545f4914f6cdd1dull) ^ (x >> 9);
+}
+
+static indirect_target_fn volatile indirect_target_table[4] = {
+    indirect_target_0,
+    indirect_target_1,
+    indirect_target_2,
+    indirect_target_3
+};
+
+static void fill_indirect_target_pattern(
+    unsigned char *pattern,
+    size_t len,
+    enum indirect_target_pattern_kind kind
+) {
+    static const unsigned char neutral_seq[8] = {0u, 1u, 2u, 3u, 3u, 2u, 1u, 0u};
+    static const unsigned char forward_seq[8] = {0u, 1u, 2u, 3u, 0u, 1u, 2u, 3u};
+    static const unsigned char reverse_seq[8] = {3u, 2u, 1u, 0u, 3u, 2u, 1u, 0u};
+    static const unsigned char shuffle_seq[8] = {0u, 2u, 3u, 1u, 1u, 3u, 2u, 0u};
+    static const unsigned char sentinel_seq[8] = {0u, 3u, 1u, 2u, 2u, 1u, 3u, 0u};
+    const unsigned char *seq = neutral_seq;
+    switch (kind) {
+        case INDIRECT_TARGET_PATTERN_NEUTRAL:
+            seq = neutral_seq;
+            break;
+        case INDIRECT_TARGET_PATTERN_FORWARD:
+            seq = forward_seq;
+            break;
+        case INDIRECT_TARGET_PATTERN_REVERSE:
+            seq = reverse_seq;
+            break;
+        case INDIRECT_TARGET_PATTERN_SHUFFLE:
+            seq = shuffle_seq;
+            break;
+        case INDIRECT_TARGET_PATTERN_SENTINEL:
+            seq = sentinel_seq;
+            break;
+    }
+    for (size_t i = 0; i < len; i++) {
+        pattern[i] = seq[(i + (i >> 5)) & 7u];
+    }
+}
+
+static unsigned char *indirect_target_pattern_by_kind(
+    unsigned char *neutral,
+    unsigned char *forward,
+    unsigned char *reverse,
+    unsigned char *shuffle,
+    unsigned char *sentinel,
+    enum indirect_target_pattern_kind kind
+) {
+    switch (kind) {
+        case INDIRECT_TARGET_PATTERN_NEUTRAL:
+            return neutral;
+        case INDIRECT_TARGET_PATTERN_FORWARD:
+            return forward;
+        case INDIRECT_TARGET_PATTERN_REVERSE:
+            return reverse;
+        case INDIRECT_TARGET_PATTERN_SHUFFLE:
+            return shuffle;
+        case INDIRECT_TARGET_PATTERN_SENTINEL:
+            return sentinel;
+    }
+    return neutral;
+}
+
+static uint64_t indirect_target_pattern_digest(
+    const unsigned char *neutral,
+    const unsigned char *forward,
+    const unsigned char *reverse,
+    const unsigned char *shuffle,
+    const unsigned char *sentinel
+) {
+    unsigned char combined[INDIRECT_TARGET_PATTERN_BYTES * 5u];
+    memcpy(combined, neutral, INDIRECT_TARGET_PATTERN_BYTES);
+    memcpy(combined + INDIRECT_TARGET_PATTERN_BYTES, forward, INDIRECT_TARGET_PATTERN_BYTES);
+    memcpy(combined + (INDIRECT_TARGET_PATTERN_BYTES * 2u), reverse, INDIRECT_TARGET_PATTERN_BYTES);
+    memcpy(combined + (INDIRECT_TARGET_PATTERN_BYTES * 3u), shuffle, INDIRECT_TARGET_PATTERN_BYTES);
+    memcpy(combined + (INDIRECT_TARGET_PATTERN_BYTES * 4u), sentinel, INDIRECT_TARGET_PATTERN_BYTES);
+    return fnv1a64(combined, sizeof(combined));
+}
+
+__attribute__((noinline))
+static void run_indirect_target_pattern(
+    const volatile unsigned char *pattern,
+    size_t len,
+    unsigned int loops
+) {
+    uint64_t acc = indirect_target_history_sink + len + loops + 0x517cc1b727220a95ull;
+    for (unsigned int round = 0; round < loops; round++) {
+        size_t offset = ((size_t)round * 19u) & (len - 1u);
+        for (size_t i = 0; i < len; i++) {
+            size_t pattern_index = (i + offset) & (len - 1u);
+            unsigned int target_index = (unsigned int)(pattern[pattern_index] & 3u);
+            indirect_target_fn fn = indirect_target_table[target_index];
+            acc ^= fn(acc + ((uint64_t)round << 32) + (uint64_t)i);
+            __asm__ __volatile__("" : "+r"(acc) :: "memory");
+        }
+    }
+    indirect_target_history_sink = acc;
+}
+
+static int measure_indirect_target_history_window(
+    const struct event_def group[MAX_GROUP_EVENTS],
+    const struct indirect_target_sequence_spec *sequence,
+    unsigned char *neutral,
+    unsigned char *forward,
+    unsigned char *reverse,
+    unsigned char *shuffle,
+    unsigned char *sentinel,
+    struct group_result *result,
+    uint64_t *duration_ns,
+    uint64_t *pattern_digest_after_history,
+    uint64_t *pattern_digest_after_restore
+) {
+    int fds[MAX_GROUP_EVENTS];
+    uint64_t ids[MAX_GROUP_EVENTS];
+    memset(result, 0, sizeof(*result));
+    if (pin_to_core(CATCAS_CORE_B) != 0) return -EINVAL;
+    run_indirect_target_pattern(neutral, INDIRECT_TARGET_PATTERN_BYTES, INDIRECT_TARGET_RESTORE_LOOPS);
+    if (sequence->history_loops > 0u) {
+        unsigned char *history = indirect_target_pattern_by_kind(
+            neutral, forward, reverse, shuffle, sentinel, sequence->history_pattern);
+        run_indirect_target_pattern(history, INDIRECT_TARGET_PATTERN_BYTES, sequence->history_loops);
+    }
+    *pattern_digest_after_history =
+        indirect_target_pattern_digest(neutral, forward, reverse, shuffle, sentinel);
+    int opened = open_group(group, CATCAS_CORE_B, fds, ids);
+    if (opened != 0) {
+        result->open_errno = -opened;
+        return opened;
+    }
+    result->opened = true;
+    if (ioctl(fds[0], PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t start = monotonic_ns();
+    if (ioctl(fds[0], PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    run_indirect_target_pattern(sentinel, INDIRECT_TARGET_PATTERN_BYTES, INDIRECT_TARGET_SENTINEL_LOOPS);
+    if (ioctl(fds[0], PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t end = monotonic_ns();
+    int read_rc = read_group(fds[0], result);
+    for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+    if (read_rc != 0) return read_rc;
+    run_indirect_target_pattern(neutral, INDIRECT_TARGET_PATTERN_BYTES, INDIRECT_TARGET_RESTORE_LOOPS);
+    *pattern_digest_after_restore =
+        indirect_target_pattern_digest(neutral, forward, reverse, shuffle, sentinel);
+    *duration_ns = end >= start ? end - start : 0;
+    return 0;
+}
+
+static int run_indirect_target_history_mode(const char *output_root) {
+    unsigned char *neutral = NULL;
+    unsigned char *forward = NULL;
+    unsigned char *reverse = NULL;
+    unsigned char *shuffle = NULL;
+    unsigned char *sentinel = NULL;
+    if (posix_memalign((void **)&neutral, CACHE_LINE_BYTES, INDIRECT_TARGET_PATTERN_BYTES) != 0 ||
+        posix_memalign((void **)&forward, CACHE_LINE_BYTES, INDIRECT_TARGET_PATTERN_BYTES) != 0 ||
+        posix_memalign((void **)&reverse, CACHE_LINE_BYTES, INDIRECT_TARGET_PATTERN_BYTES) != 0 ||
+        posix_memalign((void **)&shuffle, CACHE_LINE_BYTES, INDIRECT_TARGET_PATTERN_BYTES) != 0 ||
+        posix_memalign((void **)&sentinel, CACHE_LINE_BYTES, INDIRECT_TARGET_PATTERN_BYTES) != 0) {
+        free(neutral);
+        free(forward);
+        free(reverse);
+        free(shuffle);
+        free(sentinel);
+        fprintf(stderr, "indirect target pattern allocation failed\n");
+        return 1;
+    }
+    fill_indirect_target_pattern(neutral, INDIRECT_TARGET_PATTERN_BYTES, INDIRECT_TARGET_PATTERN_NEUTRAL);
+    fill_indirect_target_pattern(forward, INDIRECT_TARGET_PATTERN_BYTES, INDIRECT_TARGET_PATTERN_FORWARD);
+    fill_indirect_target_pattern(reverse, INDIRECT_TARGET_PATTERN_BYTES, INDIRECT_TARGET_PATTERN_REVERSE);
+    fill_indirect_target_pattern(shuffle, INDIRECT_TARGET_PATTERN_BYTES, INDIRECT_TARGET_PATTERN_SHUFFLE);
+    fill_indirect_target_pattern(sentinel, INDIRECT_TARGET_PATTERN_BYTES, INDIRECT_TARGET_PATTERN_SENTINEL);
+    uint64_t initial_digest =
+        indirect_target_pattern_digest(neutral, forward, reverse, shuffle, sentinel);
+
+    int branch_fds[MAX_GROUP_EVENTS];
+    uint64_t branch_ids[MAX_GROUP_EVENTS];
+    int branch_open_rc = open_group(branch_history_group, CATCAS_CORE_B, branch_fds, branch_ids);
+    if (branch_open_rc == 0) {
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(branch_fds[i]);
+    }
+
+    const struct indirect_target_sequence_spec sequences[] = {
+        {"neutral_indirect_target_history", INDIRECT_TARGET_PATTERN_NEUTRAL, INDIRECT_TARGET_HISTORY_LOOPS},
+        {"forward_indirect_target_history", INDIRECT_TARGET_PATTERN_FORWARD, INDIRECT_TARGET_HISTORY_LOOPS},
+        {"reverse_indirect_target_history", INDIRECT_TARGET_PATTERN_REVERSE, INDIRECT_TARGET_HISTORY_LOOPS},
+        {"shuffle_indirect_target_history", INDIRECT_TARGET_PATTERN_SHUFFLE, INDIRECT_TARGET_HISTORY_LOOPS},
+    };
+    enum { INDIRECT_TARGET_WINDOW_COUNT = 4 };
+    struct group_result results[INDIRECT_TARGET_WINDOW_COUNT];
+    uint64_t durations[INDIRECT_TARGET_WINDOW_COUNT];
+    uint64_t digest_after_history[INDIRECT_TARGET_WINDOW_COUNT];
+    uint64_t digest_after_restore[INDIRECT_TARGET_WINDOW_COUNT];
+    int window_rc[INDIRECT_TARGET_WINDOW_COUNT];
+    for (int i = 0; i < INDIRECT_TARGET_WINDOW_COUNT; i++) {
+        memset(&results[i], 0, sizeof(results[i]));
+        durations[i] = 0;
+        digest_after_history[i] = 0;
+        digest_after_restore[i] = 0;
+        if (branch_open_rc != 0) {
+            window_rc[i] = -ENODEV;
+        } else {
+            window_rc[i] = measure_indirect_target_history_window(
+                branch_history_group,
+                &sequences[i],
+                neutral,
+                forward,
+                reverse,
+                shuffle,
+                sentinel,
+                &results[i],
+                &durations[i],
+                &digest_after_history[i],
+                &digest_after_restore[i]);
+        }
+    }
+
+    bool all_windows_ok = true;
+    bool all_unmultiplexed = true;
+    bool patterns_unchanged_after_history = true;
+    bool patterns_unchanged_after_restore = true;
+    for (int i = 0; i < INDIRECT_TARGET_WINDOW_COUNT; i++) {
+        all_windows_ok = all_windows_ok && window_rc[i] == 0;
+        all_unmultiplexed = all_unmultiplexed && results[i].unmultiplexed;
+        patterns_unchanged_after_history =
+            patterns_unchanged_after_history && digest_after_history[i] == initial_digest;
+        patterns_unchanged_after_restore =
+            patterns_unchanged_after_restore && digest_after_restore[i] == initial_digest;
+    }
+
+    uint64_t identity_misses = event_value_by_name(
+        &results[0], branch_history_group, "retired_mispredicted_branch_instructions");
+    uint64_t forward_misses = event_value_by_name(
+        &results[1], branch_history_group, "retired_mispredicted_branch_instructions");
+    uint64_t reverse_misses = event_value_by_name(
+        &results[2], branch_history_group, "retired_mispredicted_branch_instructions");
+    uint64_t shuffle_misses = event_value_by_name(
+        &results[3], branch_history_group, "retired_mispredicted_branch_instructions");
+    uint64_t miss_delta = abs_diff_u64(forward_misses, reverse_misses);
+    uint64_t miss_control = abs_diff_u64(identity_misses, shuffle_misses);
+    uint64_t miss_threshold = max_u64(32u, 3u * miss_control);
+    bool miss_signal = miss_delta > miss_threshold;
+
+    uint64_t identity_duration = durations[0];
+    uint64_t forward_duration = durations[1];
+    uint64_t reverse_duration = durations[2];
+    uint64_t shuffle_duration = durations[3];
+    uint64_t duration_delta = abs_diff_u64(forward_duration, reverse_duration);
+    uint64_t duration_control = abs_diff_u64(identity_duration, shuffle_duration);
+    uint64_t duration_threshold = max_u64(1000u, 3u * duration_control);
+    bool duration_signal = duration_delta > duration_threshold;
+    bool indirect_target_response = branch_open_rc == 0 && all_windows_ok &&
+        all_unmultiplexed && patterns_unchanged_after_history &&
+        patterns_unchanged_after_restore && miss_signal;
+
+    char result_path[4096];
+    int n = snprintf(result_path, sizeof(result_path), "%s/F10_INDIRECT_TARGET_HISTORY_RESULT.json", output_root);
+    if (n <= 0 || (size_t)n >= sizeof(result_path)) return 1;
+    FILE *out = fopen(result_path, "w");
+    if (!out) {
+        fprintf(stderr, "cannot open result: %s\n", strerror(errno));
+        return 1;
+    }
+    fprintf(out, "{\n");
+    fprintf(out, "  \"schema_id\": \"%s\",\n", INDIRECT_TARGET_HISTORY_RESULT_SCHEMA);
+    fprintf(out, "  \"status\": \"%s\",\n", indirect_target_response ? "INDIRECT_TARGET_HISTORY_RESPONSE_FOUND" : "INDIRECT_TARGET_HISTORY_RESPONSE_NOT_ESTABLISHED");
+    fprintf(out, "  \"claim_ceiling\": \"Indirect-target history PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim\",\n");
+    fprintf(out, "  \"cores\": {\"target_history_core\": %d},\n", CATCAS_CORE_B);
+    fprintf(out, "  \"perf_interface\": {\"type\": \"PERF_TYPE_RAW\", \"event_format\": \"config:0-7,32-35\", \"umask_format\": \"config:8-15\", \"exclude_kernel\": true, \"exclude_hv\": true},\n");
+    fprintf(out, "  \"source_constraints\": {\"direct_msr_access\": false, \"voltage_access\": false, \"frequency_writes\": 0, \"experiment_owned_code_and_data_only\": true, \"physical_address_access\": false, \"cache_set_mapping\": false, \"unrelated_process_observation\": false},\n");
+    fprintf(out, "  \"target_history_carrier\": {\"pattern_bytes\": %u, \"restore_loops\": %u, \"history_loops\": %u, \"sentinel_loops\": %u, \"target_count\": 4, \"digest_kind\": \"fnv1a64\", \"initial_digest_hex\": \"0x%016" PRIx64 "\"},\n",
+        INDIRECT_TARGET_PATTERN_BYTES,
+        INDIRECT_TARGET_RESTORE_LOOPS,
+        INDIRECT_TARGET_HISTORY_LOOPS,
+        INDIRECT_TARGET_SENTINEL_LOOPS,
+        initial_digest);
+    fprintf(out, "  \"selected_group\": \"branch_history_group\",\n");
+    fprintf(out, "  \"group_open_rc\": %d,\n", branch_open_rc);
+    fprintf(out, "  \"selected_events\": ");
+    print_group_defs(out, branch_history_group);
+    fprintf(out, ",\n");
+    fprintf(out, "  \"predeclared_observable\": {\"history\": \"balanced public indirect-target training pattern at one CAT_CAS-owned call site\", \"restore\": \"neutral target-history wash before every window\", \"sentinel\": \"fixed public indirect-target sequence measured at the same call site\", \"primary_acceptance\": \"forward/reverse retired_mispredicted_branch_instructions delta exceeds max(32, 3 * neutral/shuffle control spread)\"},\n");
+    fprintf(out, "  \"windows\": [\n");
+    for (int i = 0; i < INDIRECT_TARGET_WINDOW_COUNT; i++) {
+        fprintf(out, "    {\"name\": \"%s\", \"rc\": %d, \"duration_ns\": %" PRIu64 ", \"history_loops\": %u, \"pattern_digest_after_history_hex\": \"0x%016" PRIx64 "\", \"pattern_digest_after_restore_hex\": \"0x%016" PRIx64 "\", \"patterns_unchanged_after_history\": %s, \"patterns_unchanged_after_restore\": %s, \"group\": ",
+            sequences[i].name,
+            window_rc[i],
+            durations[i],
+            sequences[i].history_loops,
+            digest_after_history[i],
+            digest_after_restore[i],
+            json_bool(digest_after_history[i] == initial_digest),
+            json_bool(digest_after_restore[i] == initial_digest));
+        print_group_result(out, branch_history_group, &results[i]);
+        fprintf(out, "}%s\n", i + 1 == INDIRECT_TARGET_WINDOW_COUNT ? "" : ",");
+    }
+    fprintf(out, "  ],\n");
+    fprintf(out, "  \"contrast_counts\": {\n");
+    fprintf(out, "    \"retired_mispredicted_branch_instructions\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s},\n",
+        identity_misses, forward_misses, reverse_misses, shuffle_misses, miss_delta, miss_control, miss_threshold, json_bool(miss_signal));
+    fprintf(out, "    \"duration_ns\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s}\n",
+        identity_duration, forward_duration, reverse_duration, shuffle_duration, duration_delta, duration_control, duration_threshold, json_bool(duration_signal));
+    fprintf(out, "  },\n");
+    fprintf(out, "  \"acceptance\": {\"all_windows_ok\": %s, \"all_unmultiplexed\": %s, \"patterns_unchanged_after_history\": %s, \"patterns_unchanged_after_restore\": %s, \"branch_miss_signal\": %s, \"duration_signal\": %s, \"indirect_target_history_response\": %s}\n",
+        json_bool(all_windows_ok),
+        json_bool(all_unmultiplexed),
+        json_bool(patterns_unchanged_after_history),
+        json_bool(patterns_unchanged_after_restore),
+        json_bool(miss_signal),
+        json_bool(duration_signal),
+        json_bool(indirect_target_response));
+    fprintf(out, "}\n");
+    fclose(out);
+    printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"branch_history_group\"}\n",
+        indirect_target_response ? "INDIRECT_TARGET_HISTORY_RESPONSE_FOUND" : "INDIRECT_TARGET_HISTORY_RESPONSE_NOT_ESTABLISHED",
         result_path);
     free(neutral);
     free(forward);
@@ -4775,6 +5152,7 @@ int main(int argc, char **argv) {
     bool eviction_phase_bracketed_duration_mode = false;
     bool history_sentinel_mode = false;
     bool branch_history_mode = false;
+    bool indirect_target_history_mode = false;
     bool translation_history_mode = false;
     bool prefetch_stream_mode = false;
     bool process_lifecycle_mode = false;
@@ -4840,6 +5218,10 @@ int main(int argc, char **argv) {
                strcmp(argv[2], "--output-root") == 0) {
         branch_history_mode = true;
         output_root = argv[3];
+    } else if (argc == 4 && strcmp(argv[1], "--indirect-target-history") == 0 &&
+               strcmp(argv[2], "--output-root") == 0) {
+        indirect_target_history_mode = true;
+        output_root = argv[3];
     } else if (argc == 4 && strcmp(argv[1], "--translation-history") == 0 &&
                strcmp(argv[2], "--output-root") == 0) {
         translation_history_mode = true;
@@ -4855,7 +5237,7 @@ int main(int argc, char **argv) {
     } else if (argc == 2 && strcmp(argv[1], "--self-test") == 0) {
         return self_test();
     } else {
-        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root> | --eviction-phase-bracketed --output-root <absolute-output-root> | --eviction-phase-bracketed-c2d --output-root <absolute-output-root> | --eviction-phase-bracketed-duration --output-root <absolute-output-root> | --history-sentinel --output-root <absolute-output-root> | --branch-history --output-root <absolute-output-root> | --translation-history --output-root <absolute-output-root> | --prefetch-stream --output-root <absolute-output-root> | --process-lifecycle --output-root <absolute-output-root>\n", argv[0]);
+        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root> | --eviction-phase-bracketed --output-root <absolute-output-root> | --eviction-phase-bracketed-c2d --output-root <absolute-output-root> | --eviction-phase-bracketed-duration --output-root <absolute-output-root> | --history-sentinel --output-root <absolute-output-root> | --branch-history --output-root <absolute-output-root> | --indirect-target-history --output-root <absolute-output-root> | --translation-history --output-root <absolute-output-root> | --prefetch-stream --output-root <absolute-output-root> | --process-lifecycle --output-root <absolute-output-root>\n", argv[0]);
         return 2;
     }
     if (output_root[0] != '/') {
@@ -4949,6 +5331,11 @@ int main(int argc, char **argv) {
     }
     if (branch_history_mode) {
         int rc = run_branch_history_mode(output_root);
+        free(carrier.bytes);
+        return rc;
+    }
+    if (indirect_target_history_mode) {
+        int rc = run_indirect_target_history_mode(output_root);
         free(carrier.bytes);
         return rc;
     }

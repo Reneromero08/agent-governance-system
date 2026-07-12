@@ -144,6 +144,13 @@ MODES: dict[str, dict[str, Any]] = {
         "failed_status": "F10_BRANCH_HISTORY_TARGET_FAILED",
         "claim_ceiling": "Branch-history PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
     },
+    "indirect-target-history": {
+        "worker_args": ["--indirect-target-history"],
+        "result_file": "F10_INDIRECT_TARGET_HISTORY_RESULT.json",
+        "complete_status": "F10_INDIRECT_TARGET_HISTORY_TARGET_COMPLETE",
+        "failed_status": "F10_INDIRECT_TARGET_HISTORY_TARGET_FAILED",
+        "claim_ceiling": "Indirect-target history PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
+    },
     "translation-history": {
         "worker_args": ["--translation-history"],
         "result_file": "F10_TRANSLATION_HISTORY_RESULT.json",

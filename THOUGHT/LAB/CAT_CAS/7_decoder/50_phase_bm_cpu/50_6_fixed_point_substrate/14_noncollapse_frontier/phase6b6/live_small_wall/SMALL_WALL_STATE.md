@@ -6,7 +6,7 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`PROCESS_LIFECYCLE_RESPONSE_NOT_ESTABLISHED`
+`INDIRECT_TARGET_HISTORY_RESPONSE_NOT_ESTABLISHED`
 
 **Active wall:**
 The current wall is still carrier/access-model selection. Timing, ownership-intent PMU
@@ -15,12 +15,13 @@ phase-local mappings, restored history-sentinel PMU mapping, the first active-qu
 receiver-delta access model, the first source-side phase-chopped access model,
 same-core public branch-history, read-only translation/page-footprint, same-core
 stream/stride prefetching, and a source-process/fresh-measurement-process lifecycle
-carrier either failed controls or did not expose a usable fold-odd carrier. The
-eviction-sentinel first-light run remains useful because it changed restoration from
-byte equality to a measured carrier equivalence class, but the phase-local remaps did
-not promote it. `coded_preprojection_active_query_0` moved the query into the
-receiver's measured workload before scalar recording and restored cleanly, but its
-opposed fold-odd candidate did not clear the post-control floor.
+carrier, and a same-core public indirect-target history carrier either failed controls
+or did not expose a usable fold-odd carrier. The eviction-sentinel first-light run
+remains useful because it changed restoration from byte equality to a measured carrier
+equivalence class, but the phase-local remaps did not promote it.
+`coded_preprojection_active_query_0` moved the query into the receiver's measured
+workload before scalar recording and restored cleanly, but its opposed fold-odd
+candidate did not clear the post-control floor.
 `coded_preprojection_source_phase_chop_0` moved the public phase waveform into the
 source burst before scalar recording and also restored cleanly, but its control floor
 was too large for the `3x` rule. The restored history-sentinel, branch-history,
@@ -1748,14 +1749,65 @@ access model by forcing the source process to exit before the sentinel, but the
 forward/reverse residuals remain inside neutral/shuffle controls. Do not rerun this
 neutral/forward/reverse/shuffle child-process read-store history unchanged.
 
+The indirect-target discriminator then changed the public branch carrier from
+conditional branch outcomes to indirect target selection at one CAT_CAS-owned call
+site. Core 5 trained neutral, forward, reverse, or shuffle balanced target sequences,
+then measured a fixed sentinel target sequence under the established
+`branch_history_group` PMU group:
+
+```text
+run id        f10_indirect_target_history_0
+source bundle 091c2f6636081b09654bab944b297d619e8c503cdb1e7465e335048b96343308
+worker status INDIRECT_TARGET_HISTORY_RESPONSE_NOT_ESTABLISHED
+```
+
+The transaction completed with verified copy-back and remote cleanup. It performed
+zero frequency writes, zero voltage access, zero MSR reads/writes, stayed below the
+68 C temperature veto, found no forbidden CAT_CAS process residue, all PMU windows
+were unmultiplexed, and the target-pattern digest was unchanged after history and
+after neutral restore.
+
+Indirect-target sentinel contrasts:
+
+```text
+retired_mispredicted_branch_instructions:
+  identity 20804
+  forward  20782
+  reverse  20779
+  shuffle  20778
+  delta        3
+  floor       26
+  threshold   78
+  signal false
+
+duration_ns:
+  identity 1793079
+  forward  1791799
+  reverse  1791670
+  shuffle  1791491
+  delta        129
+  floor       1588
+  threshold   4764
+  signal false
+```
+
+Checkpoint:
+
+`F10_INDIRECT_TARGET_HISTORY_CHECKPOINT_20260712.json`
+
+**Status:** this exact public indirect-target history carrier is negative. It changes
+the branch carrier from conditional outcome history to indirect target selection, but
+the forward/reverse residuals remain inside neutral/shuffle controls. Do not rerun this
+neutral/forward/reverse/shuffle indirect-target sequence unchanged.
+
 ## Cheapest current discriminator
 
 Change carrier family or access model again, not another remap of the same
 phase-local timing/PMU/eviction/active-query/source-phase-chop/restored-history,
-simple branch-history/translation-footprint/prefetch-stream geometry, or the current
-fresh source-process lifecycle sentinel. The run must stay closed: CAT_CAS-owned
-buffers only, predetermined geometry, no physical-address access, no cache-set mapping,
-no unrelated-process observation, and no MSR or voltage access.
+simple branch-history/indirect-target-history/translation-footprint/prefetch-stream
+geometry, or the current fresh source-process lifecycle sentinel. The run must stay
+closed: CAT_CAS-owned buffers only, predetermined geometry, no physical-address access,
+no cache-set mapping, no unrelated-process observation, and no MSR or voltage access.
 
 The next probe should answer:
 
@@ -1779,7 +1831,8 @@ sentinel discriminator unchanged. Do not rerun
 unchanged. Do not rerun `coded_preprojection_source_phase_chop_0` or the same
 source-phase-chop schedule unchanged. Do not rerun `f10_process_lifecycle_0` or the
 same neutral/forward/reverse/shuffle child-process read-store lifecycle sentinel
-unchanged.
+unchanged. Do not rerun `f10_indirect_target_history_0` or the same
+neutral/forward/reverse/shuffle indirect-target sequence unchanged.
 
 ## Current claim ceiling
 
@@ -1822,9 +1875,11 @@ cache-miss deltas were tiny against the shuffle floor. `f10_prefetch_stream_0` t
 tested a flushed sentinel stream after adjacent forward/reverse stream training and
 also stayed negative. `f10_process_lifecycle_0` then forced the source history into a
 separate exited child process before a fresh remote-store sentinel and also stayed
-negative. The next move must change carrier family or access model rather than keep
-remapping the same eviction-sentinel PMU/timing, active-query phase-local,
-source-phase-chop, restored two-line-set ownership-history, simple branch-history,
+negative. `f10_indirect_target_history_0` then changed the public branch carrier from
+conditional outcomes to indirect target selection and also stayed negative. The next
+move must change carrier family or access model rather than keep remapping the same
+eviction-sentinel PMU/timing, active-query phase-local, source-phase-chop, restored
+two-line-set ownership-history, simple branch-history, indirect-target-history,
 translation-footprint, prefetch-stream, or source-process lifecycle geometry.
 
 ## State update rule
