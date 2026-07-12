@@ -257,6 +257,55 @@ Marker:
 This does not establish path memory, noncommutation, physical holonomy, OrbitState
 coupling, fold-odd recovery, or a Small Wall crossing.
 
+### Read/store same-core path pilot
+
+A same-observer read/store operator-pair pilot ran cleanly and was negative.
+
+Run:
+
+`runs/f10_path_rw_0`
+
+Checkpoint:
+
+`F10_PATH_RW_OBSERVE_CHECKPOINT_20260712.json`
+
+The change was to avoid the remote/home inverse-operator geometry and use two visible
+operators on core 5: `remote_read_subset` and
+`remote_store_same_value_subset`.
+
+Result:
+
+```text
+forward          +3.149513983986e-09
+reverse          +3.024465315700e-09
+shuffle          +9.150610884539e-10
+reverse_shuffle  -1.986661616106e-10
+identity          0.0
+```
+
+Acceptance:
+
+```text
+all_windows_ok        true
+all_unmultiplexed     true
+bytes_unchanged       true
+sign_reversal         false
+controls_small        false
+path_dependence_pilot false
+```
+
+This kills the simple same-core read/store rectangle as a path-memory candidate. Both
+operators are visible, but forward and reverse keep the same sign. The result is
+consistent with first-touch and per-line state effects rather than an antisymmetric
+closed path invariant.
+
+Marker:
+
+`PATH_RW_OBSERVE_NOT_ESTABLISHED`
+
+This does not establish path memory, noncommutation, physical holonomy, OrbitState
+coupling, fold-odd recovery, or a Small Wall crossing.
+
 ### Dual-observed path pilot
 
 The corrected actor-core observation pilot also ran cleanly, but it was not an
@@ -353,9 +402,11 @@ run_f10_pmc_first_light.py
 run_f10_coherence_operators.py
 run_f10_path_dependence.py
 run_f10_path_dual_observe.py
+run_f10_path_rw_observe.py
 READONLY_OCCUPANCY_BASELINE_CLOSURE.json
 F10_PATH_DEPENDENCE_PILOT_CHECKPOINT_20260712.json
 F10_PATH_DUAL_OBSERVE_CHECKPOINT_20260712.json
+F10_PATH_RW_OBSERVE_CHECKPOINT_20260712.json
 ```
 
 Historical V2 Gate A source was restored and should remain a sealed reference. New
@@ -425,12 +476,14 @@ restoration does not yet produce a valid antisymmetric path observable, because 
 home steps are nearly invisible in the core-5 PMU window and one shuffle control is
 large. `f10_path_dual_0` corrected the observation geometry and obtained
 forward/reverse sign reversal, but paired-shuffle controls were larger than the
-oriented signal.
+oriented signal. `f10_path_rw_0` tried a same-core visible read/store pair; it remained
+same-signed under reversal and is not a path candidate.
 
 **Status:** established at controlled-operator level; first fixed-observer path was
-negative, and the first dual-observed path was control-limited. Continue only with a
-construction that cancels line-set and route/order controls before claiming any path
-invariant.
+negative, the first dual-observed path was control-limited, and the simple same-core
+read/store rectangle was negative. Continue only with a construction that cancels
+line-set and route/order controls before claiming any path invariant, or promote a
+different carrier family.
 
 ### H3 - Shared L3 or Northbridge routing is the dominant relational carrier
 
@@ -537,10 +590,14 @@ The next probe should answer:
 3. Can the carrier return to a measured equivalence class beyond byte equality?
 4. Does the result survive a fresh process start without route or label leakage?
 
-The immediate cheap repair is not repetition. It is a balanced control-canceling
-construction: line-swap or route-swap the same actor-observed path, subtract
-per-line/per-core baselines before promotion, and require both paired shuffles to stay
-small before any candidate marker.
+The immediate cheap repair is not repetition. It is either:
+
+1. a balanced control-canceling construction for the dual-observed loop: line-swap or
+   route-swap the same actor-observed path, subtract per-line/per-core baselines before
+   promotion, and require both paired shuffles to stay small; or
+2. a carrier pivot to shared-L3/Northbridge route state or phase-native timing, because
+   the simple cache-line path rectangles are currently dominated by first-touch,
+   per-line, and route/order effects.
 
 ## Current claim ceiling
 
