@@ -88,6 +88,7 @@ def execute(run_id: str, *, mode: str, keep_remote: bool) -> dict[str, Any]:
             "eviction-phase-bracketed-c2d",
             "eviction-phase-bracketed-duration",
             "history-sentinel",
+            "branch-history",
         },
         f"unsupported coherence mode: {mode}",
     )
@@ -155,6 +156,7 @@ def execute(run_id: str, *, mode: str, keep_remote: bool) -> dict[str, Any]:
         "eviction-phase-bracketed-c2d": "F10_EVICTION_PHASE_BRACKETED_C2D_RESULT.json",
         "eviction-phase-bracketed-duration": "F10_EVICTION_PHASE_BRACKETED_DURATION_RESULT.json",
         "history-sentinel": "F10_HISTORY_SENTINEL_RESULT.json",
+        "branch-history": "F10_BRANCH_HISTORY_RESULT.json",
     }
     worker_result_file = worker_result_files.get(mode, "F10_COHERENCE_OPERATOR_RESULT.json")
     worker = json.loads((local_run / worker_result_file).read_text(encoding="utf-8"))
@@ -194,6 +196,8 @@ def execute(run_id: str, *, mode: str, keep_remote: bool) -> dict[str, Any]:
         controller["duration_phase_local_signal"] = bool(worker["acceptance"]["duration_phase_local_signal"])
     elif mode == "history-sentinel":
         controller["history_sentinel_response"] = bool(worker["acceptance"]["history_sentinel_response"])
+    elif mode == "branch-history":
+        controller["branch_history_response"] = bool(worker["acceptance"]["branch_history_response"])
     else:
         controller["controlled_state_found"] = bool(worker["acceptance"]["controlled_state_found"])
     (local_run / "CONTROLLER_RESULT.json").write_text(
@@ -208,7 +212,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--run-id", default=default_run_id())
     parser.add_argument(
         "--mode",
-        choices=("coherence-operators", "coherence-operators-route45", "coherence-operators-route23", "phase-local-pmu", "ibs-first-light", "wc-flush-order", "eviction-sentinel", "eviction-phase-local", "eviction-phase-bracketed", "eviction-phase-bracketed-c2d", "eviction-phase-bracketed-duration", "history-sentinel"),
+        choices=("coherence-operators", "coherence-operators-route45", "coherence-operators-route23", "phase-local-pmu", "ibs-first-light", "wc-flush-order", "eviction-sentinel", "eviction-phase-local", "eviction-phase-bracketed", "eviction-phase-bracketed-c2d", "eviction-phase-bracketed-duration", "history-sentinel", "branch-history"),
         default="coherence-operators",
     )
     parser.add_argument("--keep-remote", action="store_true")

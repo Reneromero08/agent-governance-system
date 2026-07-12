@@ -1,0 +1,80 @@
+{
+  "schema_id": "CAT_CAS_F10_BRANCH_HISTORY_CHECKPOINT_V1",
+  "checkpoint_date": "2026-07-12",
+  "starting_head": "d8598ff6521cef296363426889a8f631a11eed24",
+  "run_id": "f10_branch_history_0",
+  "mode": "branch-history",
+  "mechanism": {
+    "carrier": "same-core public branch-history state over CAT_CAS-owned synthetic outcome patterns",
+    "restore": "neutral branch-history wash before every measured window",
+    "sentinel": "fixed public branch-outcome sequence measured on the same static branch site",
+    "primary_observable": "retired_mispredicted_branch_instructions",
+    "acceptance": "forward/reverse branch-miss delta exceeds max(32, 3 * neutral/shuffle control spread)"
+  },
+  "command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_coherence_operators.py --run-id f10_branch_history_0 --mode branch-history",
+  "local_run": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/f10_branch_history_0",
+  "remote_run": "/root/catcas_live_small_wall/f10_branch_history_0",
+  "source_bundle_sha256": "f3e52dc75870fa163f55683df2ceeca1dfc723e5ede9f59eca4b8e374e1697c6",
+  "source_hashes": {
+    "f10_pmc_first_light_target.py": "656e0f55886666dcea0e5ed276b9f167c7c30e5a6026d55986023ba5ab8a4d26",
+    "f10_pmc_first_light_worker.c": "f4924ff168ce537a11570c28b7a0d33bf8d2b9fafa30bfc3e6975c628e7e4dc8"
+  },
+  "result": {
+    "target_status": "F10_BRANCH_HISTORY_TARGET_COMPLETE",
+    "worker_status": "BRANCH_HISTORY_RESPONSE_NOT_ESTABLISHED",
+    "capture_group": "branch_history_group",
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "patterns_unchanged_after_history": true,
+    "patterns_unchanged_after_restore": true,
+    "branch_miss_signal": false,
+    "duration_signal": false,
+    "branch_history_response": false
+  },
+  "contrast_counts": {
+    "retired_mispredicted_branch_instructions": {
+      "identity": 24906,
+      "forward": 24761,
+      "reverse": 24755,
+      "shuffle": 24759,
+      "forward_reverse_delta": 6,
+      "control_floor": 147,
+      "threshold": 441,
+      "signal": false
+    },
+    "duration_ns": {
+      "identity": 978538,
+      "forward": 964595,
+      "reverse": 964261,
+      "shuffle": 964402,
+      "forward_reverse_delta": 334,
+      "control_floor": 14136,
+      "threshold": 42408,
+      "signal": false
+    }
+  },
+  "safety_and_custody": {
+    "lab_device": "root@192.168.137.100",
+    "copy_verified": true,
+    "remote_cleaned": true,
+    "temperature_preflight_c": 49.125,
+    "temperature_post_c": 49.5,
+    "temperature_veto_c": 68.0,
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "preflight_forbidden_process_matches": [],
+    "cleanup_forbidden_process_matches": []
+  },
+  "raw_file_hashes": {
+    "CONTROLLER_RESULT.json": "36416bed458cf94fac356df752937953afa4ece6e3b5716754061426bc0de8fb",
+    "CONTROLLER_STDERR.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "CONTROLLER_STDOUT.txt": "69c877c5b0f16ae1563c4ad46b87532ccdf40fc1bd30b6219071fe57f2d1c712",
+    "F10_BRANCH_HISTORY_RESULT.json": "9a2d0b7224b149dac618e9b5f6e031793dc25c581d3d88d08f983791cd24bdd8",
+    "FILE_MANIFEST.json": "23a2e050cef14eb816cba137d04b969614235fb03ba0d734abf8b8b39d1373ce",
+    "FINAL_RESULT.json": "433ec64a89467028162b6fbb658de8d1446bfd0f39006566fa18f956b3bf643c"
+  },
+  "interpretation": "Same-core public branch-history state did not create a control-clean forward/reverse sentinel response. Do not repeat this branch-history discriminator unchanged.",
+  "claim_ceiling": "EVICTION_SENTINEL_RESPONSE_FOUND"
+}

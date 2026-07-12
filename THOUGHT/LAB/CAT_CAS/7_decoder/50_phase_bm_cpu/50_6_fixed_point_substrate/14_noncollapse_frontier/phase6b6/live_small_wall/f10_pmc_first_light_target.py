@@ -137,6 +137,13 @@ MODES: dict[str, dict[str, Any]] = {
         "failed_status": "F10_HISTORY_SENTINEL_TARGET_FAILED",
         "claim_ceiling": "Restored history-sentinel PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
     },
+    "branch-history": {
+        "worker_args": ["--branch-history"],
+        "result_file": "F10_BRANCH_HISTORY_RESULT.json",
+        "complete_status": "F10_BRANCH_HISTORY_TARGET_COMPLETE",
+        "failed_status": "F10_BRANCH_HISTORY_TARGET_FAILED",
+        "claim_ceiling": "Branch-history PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
+    },
 }
 FORBIDDEN_PROCESS_MARKERS = (
     "f10_pmc_first_light_worker",

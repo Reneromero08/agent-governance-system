@@ -49,9 +49,14 @@
 #define EVICTION_PHASE_BRACKETED_C2D_RESULT_SCHEMA "CAT_CAS_F10_EVICTION_PHASE_BRACKETED_C2D_RESULT_V1"
 #define EVICTION_PHASE_BRACKETED_DURATION_RESULT_SCHEMA "CAT_CAS_F10_EVICTION_PHASE_BRACKETED_DURATION_RESULT_V1"
 #define HISTORY_SENTINEL_RESULT_SCHEMA "CAT_CAS_F10_HISTORY_SENTINEL_RESULT_V1"
+#define BRANCH_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_BRANCH_HISTORY_RESULT_V1"
 #define PHASE_LOCAL_BANK_LINES 512u
 #define EVICTION_LINES 262144u
 #define EVICTION_ITERATIONS 3
+#define BRANCH_PATTERN_BYTES 4096u
+#define BRANCH_RESTORE_LOOPS 128u
+#define BRANCH_HISTORY_LOOPS 256u
+#define BRANCH_SENTINEL_LOOPS 128u
 
 struct event_def {
     const char *name;
@@ -185,6 +190,20 @@ struct history_sequence_spec {
     size_t step_count;
 };
 
+enum branch_pattern_kind {
+    BRANCH_PATTERN_NEUTRAL = 0,
+    BRANCH_PATTERN_FORWARD = 1,
+    BRANCH_PATTERN_REVERSE = 2,
+    BRANCH_PATTERN_SHUFFLE = 3,
+    BRANCH_PATTERN_SENTINEL = 4
+};
+
+struct branch_sequence_spec {
+    const char *name;
+    enum branch_pattern_kind history_pattern;
+    unsigned int history_loops;
+};
+
 static const struct event_def support_events[SUPPORT_EVENTS] = {
     {"cpu_cycles_not_halted", 0x076, 0x00, "core"},
     {"dc_refills_l2_or_nb_all_states", 0x042, 0x1f, "core"},
@@ -208,6 +227,13 @@ static const struct event_def fallback_group[MAX_GROUP_EVENTS] = {
     {"dc_refills_l2_or_nb_all_states", 0x042, 0x1f, "core"},
     {"dc_refills_from_nb_all_states", 0x043, 0x1f, "core"},
     {"dc_lines_evicted_modified", 0x044, 0x10, "core"}
+};
+
+static const struct event_def branch_history_group[MAX_GROUP_EVENTS] = {
+    {"cpu_cycles_not_halted", 0x076, 0x00, "core"},
+    {"retired_instructions", 0x0c0, 0x00, "core"},
+    {"retired_branch_instructions", 0x0c2, 0x00, "core"},
+    {"retired_mispredicted_branch_instructions", 0x0c3, 0x00, "core"}
 };
 
 struct read_group_payload {
@@ -1680,6 +1706,313 @@ static int run_history_sentinel_mode(const char *output_root, struct carrier *ca
     printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"primary_nb_coherence\"}\n",
         history_sentinel_response ? "HISTORY_SENTINEL_RESPONSE_FOUND" : "HISTORY_SENTINEL_RESPONSE_NOT_ESTABLISHED",
         result_path);
+    return 0;
+}
+
+static volatile uint64_t branch_history_sink = 0;
+
+static void fill_branch_pattern(unsigned char *pattern, size_t len, enum branch_pattern_kind kind) {
+    for (size_t i = 0; i < len; i++) {
+        unsigned int value = 0;
+        switch (kind) {
+            case BRANCH_PATTERN_NEUTRAL:
+                value = (unsigned int)(((i * 0x9e3779b1u) ^ (i >> 3)) & 1u);
+                break;
+            case BRANCH_PATTERN_FORWARD:
+                value = (unsigned int)((i & 7u) < 4u);
+                break;
+            case BRANCH_PATTERN_REVERSE:
+                value = (unsigned int)((i & 7u) >= 4u);
+                break;
+            case BRANCH_PATTERN_SHUFFLE:
+                value = (unsigned int)(((i & 3u) == 0u) || ((i & 3u) == 3u));
+                break;
+            case BRANCH_PATTERN_SENTINEL:
+                value = (unsigned int)((((i * 13u) + (i >> 2) + 7u) & 15u) < 8u);
+                break;
+        }
+        pattern[i] = (unsigned char)value;
+    }
+}
+
+static unsigned char *branch_pattern_by_kind(
+    unsigned char *neutral,
+    unsigned char *forward,
+    unsigned char *reverse,
+    unsigned char *shuffle,
+    unsigned char *sentinel,
+    enum branch_pattern_kind kind
+) {
+    switch (kind) {
+        case BRANCH_PATTERN_NEUTRAL:
+            return neutral;
+        case BRANCH_PATTERN_FORWARD:
+            return forward;
+        case BRANCH_PATTERN_REVERSE:
+            return reverse;
+        case BRANCH_PATTERN_SHUFFLE:
+            return shuffle;
+        case BRANCH_PATTERN_SENTINEL:
+            return sentinel;
+    }
+    return neutral;
+}
+
+static uint64_t branch_pattern_digest(
+    const unsigned char *neutral,
+    const unsigned char *forward,
+    const unsigned char *reverse,
+    const unsigned char *shuffle,
+    const unsigned char *sentinel
+) {
+    unsigned char combined[BRANCH_PATTERN_BYTES * 5u];
+    memcpy(combined, neutral, BRANCH_PATTERN_BYTES);
+    memcpy(combined + BRANCH_PATTERN_BYTES, forward, BRANCH_PATTERN_BYTES);
+    memcpy(combined + (BRANCH_PATTERN_BYTES * 2u), reverse, BRANCH_PATTERN_BYTES);
+    memcpy(combined + (BRANCH_PATTERN_BYTES * 3u), shuffle, BRANCH_PATTERN_BYTES);
+    memcpy(combined + (BRANCH_PATTERN_BYTES * 4u), sentinel, BRANCH_PATTERN_BYTES);
+    return fnv1a64(combined, sizeof(combined));
+}
+
+__attribute__((noinline))
+static void run_branch_pattern(const volatile unsigned char *pattern, size_t len, unsigned int loops) {
+    uint64_t acc = branch_history_sink + len + loops;
+    for (unsigned int round = 0; round < loops; round++) {
+        size_t offset = ((size_t)round * 17u) & (len - 1u);
+        for (size_t i = 0; i < len; i++) {
+            size_t index = (i + offset) & (len - 1u);
+            if (pattern[index] != 0u) {
+                acc += ((uint64_t)index ^ (uint64_t)round) + 0x9e3779b97f4a7c15ull;
+            } else {
+                acc ^= (((uint64_t)index + 1u) * 0xbf58476d1ce4e5b9ull) ^ (uint64_t)round;
+            }
+            __asm__ __volatile__("" : "+r"(acc) :: "memory");
+        }
+    }
+    branch_history_sink = acc;
+}
+
+static int measure_branch_history_window(
+    const struct event_def group[MAX_GROUP_EVENTS],
+    const struct branch_sequence_spec *sequence,
+    unsigned char *neutral,
+    unsigned char *forward,
+    unsigned char *reverse,
+    unsigned char *shuffle,
+    unsigned char *sentinel,
+    struct group_result *result,
+    uint64_t *duration_ns,
+    uint64_t *pattern_digest_after_history,
+    uint64_t *pattern_digest_after_restore
+) {
+    int fds[MAX_GROUP_EVENTS];
+    uint64_t ids[MAX_GROUP_EVENTS];
+    memset(result, 0, sizeof(*result));
+    if (pin_to_core(CATCAS_CORE_B) != 0) return -EINVAL;
+    run_branch_pattern(neutral, BRANCH_PATTERN_BYTES, BRANCH_RESTORE_LOOPS);
+    if (sequence->history_loops > 0u) {
+        unsigned char *history = branch_pattern_by_kind(neutral, forward, reverse, shuffle, sentinel,
+                                                        sequence->history_pattern);
+        run_branch_pattern(history, BRANCH_PATTERN_BYTES, sequence->history_loops);
+    }
+    *pattern_digest_after_history = branch_pattern_digest(neutral, forward, reverse, shuffle, sentinel);
+    int opened = open_group(group, CATCAS_CORE_B, fds, ids);
+    if (opened != 0) {
+        result->open_errno = -opened;
+        return opened;
+    }
+    result->opened = true;
+    if (ioctl(fds[0], PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t start = monotonic_ns();
+    if (ioctl(fds[0], PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    run_branch_pattern(sentinel, BRANCH_PATTERN_BYTES, BRANCH_SENTINEL_LOOPS);
+    if (ioctl(fds[0], PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t end = monotonic_ns();
+    int read_rc = read_group(fds[0], result);
+    for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+    if (read_rc != 0) return read_rc;
+    run_branch_pattern(neutral, BRANCH_PATTERN_BYTES, BRANCH_RESTORE_LOOPS);
+    *pattern_digest_after_restore = branch_pattern_digest(neutral, forward, reverse, shuffle, sentinel);
+    *duration_ns = end >= start ? end - start : 0;
+    return 0;
+}
+
+static int run_branch_history_mode(const char *output_root) {
+    unsigned char *neutral = NULL;
+    unsigned char *forward = NULL;
+    unsigned char *reverse = NULL;
+    unsigned char *shuffle = NULL;
+    unsigned char *sentinel = NULL;
+    if (posix_memalign((void **)&neutral, CACHE_LINE_BYTES, BRANCH_PATTERN_BYTES) != 0 ||
+        posix_memalign((void **)&forward, CACHE_LINE_BYTES, BRANCH_PATTERN_BYTES) != 0 ||
+        posix_memalign((void **)&reverse, CACHE_LINE_BYTES, BRANCH_PATTERN_BYTES) != 0 ||
+        posix_memalign((void **)&shuffle, CACHE_LINE_BYTES, BRANCH_PATTERN_BYTES) != 0 ||
+        posix_memalign((void **)&sentinel, CACHE_LINE_BYTES, BRANCH_PATTERN_BYTES) != 0) {
+        free(neutral);
+        free(forward);
+        free(reverse);
+        free(shuffle);
+        free(sentinel);
+        fprintf(stderr, "branch pattern allocation failed\n");
+        return 1;
+    }
+    fill_branch_pattern(neutral, BRANCH_PATTERN_BYTES, BRANCH_PATTERN_NEUTRAL);
+    fill_branch_pattern(forward, BRANCH_PATTERN_BYTES, BRANCH_PATTERN_FORWARD);
+    fill_branch_pattern(reverse, BRANCH_PATTERN_BYTES, BRANCH_PATTERN_REVERSE);
+    fill_branch_pattern(shuffle, BRANCH_PATTERN_BYTES, BRANCH_PATTERN_SHUFFLE);
+    fill_branch_pattern(sentinel, BRANCH_PATTERN_BYTES, BRANCH_PATTERN_SENTINEL);
+    uint64_t initial_digest = branch_pattern_digest(neutral, forward, reverse, shuffle, sentinel);
+
+    int branch_fds[MAX_GROUP_EVENTS];
+    uint64_t branch_ids[MAX_GROUP_EVENTS];
+    int branch_open_rc = open_group(branch_history_group, CATCAS_CORE_B, branch_fds, branch_ids);
+    if (branch_open_rc == 0) {
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(branch_fds[i]);
+    }
+
+    const struct branch_sequence_spec sequences[] = {
+        {"neutral_restore_only", BRANCH_PATTERN_NEUTRAL, 0u},
+        {"forward_branch_history", BRANCH_PATTERN_FORWARD, BRANCH_HISTORY_LOOPS},
+        {"reverse_branch_history", BRANCH_PATTERN_REVERSE, BRANCH_HISTORY_LOOPS},
+        {"shuffle_branch_history", BRANCH_PATTERN_SHUFFLE, BRANCH_HISTORY_LOOPS},
+    };
+    enum { BRANCH_WINDOW_COUNT = 4 };
+    struct group_result results[BRANCH_WINDOW_COUNT];
+    uint64_t durations[BRANCH_WINDOW_COUNT];
+    uint64_t digest_after_history[BRANCH_WINDOW_COUNT];
+    uint64_t digest_after_restore[BRANCH_WINDOW_COUNT];
+    int window_rc[BRANCH_WINDOW_COUNT];
+    for (int i = 0; i < BRANCH_WINDOW_COUNT; i++) {
+        memset(&results[i], 0, sizeof(results[i]));
+        durations[i] = 0;
+        digest_after_history[i] = 0;
+        digest_after_restore[i] = 0;
+        if (branch_open_rc != 0) {
+            window_rc[i] = -ENODEV;
+        } else {
+            window_rc[i] = measure_branch_history_window(
+                branch_history_group,
+                &sequences[i],
+                neutral,
+                forward,
+                reverse,
+                shuffle,
+                sentinel,
+                &results[i],
+                &durations[i],
+                &digest_after_history[i],
+                &digest_after_restore[i]);
+        }
+    }
+
+    bool all_windows_ok = true;
+    bool all_unmultiplexed = true;
+    bool patterns_unchanged_after_history = true;
+    bool patterns_unchanged_after_restore = true;
+    for (int i = 0; i < BRANCH_WINDOW_COUNT; i++) {
+        all_windows_ok = all_windows_ok && window_rc[i] == 0;
+        all_unmultiplexed = all_unmultiplexed && results[i].unmultiplexed;
+        patterns_unchanged_after_history =
+            patterns_unchanged_after_history && digest_after_history[i] == initial_digest;
+        patterns_unchanged_after_restore =
+            patterns_unchanged_after_restore && digest_after_restore[i] == initial_digest;
+    }
+
+    uint64_t identity_misses = event_value_by_name(&results[0], branch_history_group, "retired_mispredicted_branch_instructions");
+    uint64_t forward_misses = event_value_by_name(&results[1], branch_history_group, "retired_mispredicted_branch_instructions");
+    uint64_t reverse_misses = event_value_by_name(&results[2], branch_history_group, "retired_mispredicted_branch_instructions");
+    uint64_t shuffle_misses = event_value_by_name(&results[3], branch_history_group, "retired_mispredicted_branch_instructions");
+    uint64_t miss_delta = abs_diff_u64(forward_misses, reverse_misses);
+    uint64_t miss_control = abs_diff_u64(identity_misses, shuffle_misses);
+    uint64_t miss_threshold = max_u64(32u, 3u * miss_control);
+    bool miss_signal = miss_delta > miss_threshold;
+
+    uint64_t identity_duration = durations[0];
+    uint64_t forward_duration = durations[1];
+    uint64_t reverse_duration = durations[2];
+    uint64_t shuffle_duration = durations[3];
+    uint64_t duration_delta = abs_diff_u64(forward_duration, reverse_duration);
+    uint64_t duration_control = abs_diff_u64(identity_duration, shuffle_duration);
+    uint64_t duration_threshold = max_u64(1000u, 3u * duration_control);
+    bool duration_signal = duration_delta > duration_threshold;
+    bool branch_history_response = branch_open_rc == 0 && all_windows_ok &&
+        all_unmultiplexed && patterns_unchanged_after_history &&
+        patterns_unchanged_after_restore && miss_signal;
+
+    char result_path[4096];
+    int n = snprintf(result_path, sizeof(result_path), "%s/F10_BRANCH_HISTORY_RESULT.json", output_root);
+    if (n <= 0 || (size_t)n >= sizeof(result_path)) return 1;
+    FILE *out = fopen(result_path, "w");
+    if (!out) {
+        fprintf(stderr, "cannot open result: %s\n", strerror(errno));
+        return 1;
+    }
+    fprintf(out, "{\n");
+    fprintf(out, "  \"schema_id\": \"%s\",\n", BRANCH_HISTORY_RESULT_SCHEMA);
+    fprintf(out, "  \"status\": \"%s\",\n", branch_history_response ? "BRANCH_HISTORY_RESPONSE_FOUND" : "BRANCH_HISTORY_RESPONSE_NOT_ESTABLISHED");
+    fprintf(out, "  \"claim_ceiling\": \"Branch-history PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim\",\n");
+    fprintf(out, "  \"cores\": {\"branch_core\": %d},\n", CATCAS_CORE_B);
+    fprintf(out, "  \"perf_interface\": {\"type\": \"PERF_TYPE_RAW\", \"event_format\": \"config:0-7,32-35\", \"umask_format\": \"config:8-15\", \"exclude_kernel\": true, \"exclude_hv\": true},\n");
+    fprintf(out, "  \"source_constraints\": {\"direct_msr_access\": false, \"voltage_access\": false, \"frequency_writes\": 0, \"experiment_owned_memory_only\": true, \"physical_address_access\": false, \"cache_set_mapping\": false, \"unrelated_process_observation\": false},\n");
+    fprintf(out, "  \"branch_carrier\": {\"pattern_bytes\": %u, \"restore_loops\": %u, \"history_loops\": %u, \"sentinel_loops\": %u, \"digest_kind\": \"fnv1a64\", \"initial_digest_hex\": \"0x%016" PRIx64 "\"},\n",
+        BRANCH_PATTERN_BYTES, BRANCH_RESTORE_LOOPS, BRANCH_HISTORY_LOOPS, BRANCH_SENTINEL_LOOPS, initial_digest);
+    fprintf(out, "  \"selected_group\": \"branch_history_group\",\n");
+    fprintf(out, "  \"group_open_rc\": %d,\n", branch_open_rc);
+    fprintf(out, "  \"selected_events\": ");
+    print_group_defs(out, branch_history_group);
+    fprintf(out, ",\n");
+    fprintf(out, "  \"predeclared_observable\": {\"history\": \"balanced public branch-outcome training pattern\", \"restore\": \"neutral branch-history wash before every window\", \"sentinel\": \"fixed public branch-outcome sequence measured on the same static branch site\", \"primary_acceptance\": \"forward/reverse retired_mispredicted_branch_instructions delta exceeds max(32, 3 * neutral/shuffle control spread)\"},\n");
+    fprintf(out, "  \"windows\": [\n");
+    for (int i = 0; i < BRANCH_WINDOW_COUNT; i++) {
+        fprintf(out, "    {\"name\": \"%s\", \"rc\": %d, \"duration_ns\": %" PRIu64 ", \"history_loops\": %u, \"pattern_digest_after_history_hex\": \"0x%016" PRIx64 "\", \"pattern_digest_after_restore_hex\": \"0x%016" PRIx64 "\", \"patterns_unchanged_after_history\": %s, \"patterns_unchanged_after_restore\": %s, \"group\": ",
+            sequences[i].name,
+            window_rc[i],
+            durations[i],
+            sequences[i].history_loops,
+            digest_after_history[i],
+            digest_after_restore[i],
+            json_bool(digest_after_history[i] == initial_digest),
+            json_bool(digest_after_restore[i] == initial_digest));
+        print_group_result(out, branch_history_group, &results[i]);
+        fprintf(out, "}%s\n", i + 1 == BRANCH_WINDOW_COUNT ? "" : ",");
+    }
+    fprintf(out, "  ],\n");
+    fprintf(out, "  \"contrast_counts\": {\n");
+    fprintf(out, "    \"retired_mispredicted_branch_instructions\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s},\n",
+        identity_misses, forward_misses, reverse_misses, shuffle_misses, miss_delta, miss_control, miss_threshold, json_bool(miss_signal));
+    fprintf(out, "    \"duration_ns\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s}\n",
+        identity_duration, forward_duration, reverse_duration, shuffle_duration, duration_delta, duration_control, duration_threshold, json_bool(duration_signal));
+    fprintf(out, "  },\n");
+    fprintf(out, "  \"acceptance\": {\"all_windows_ok\": %s, \"all_unmultiplexed\": %s, \"patterns_unchanged_after_history\": %s, \"patterns_unchanged_after_restore\": %s, \"branch_miss_signal\": %s, \"duration_signal\": %s, \"branch_history_response\": %s}\n",
+        json_bool(all_windows_ok),
+        json_bool(all_unmultiplexed),
+        json_bool(patterns_unchanged_after_history),
+        json_bool(patterns_unchanged_after_restore),
+        json_bool(miss_signal),
+        json_bool(duration_signal),
+        json_bool(branch_history_response));
+    fprintf(out, "}\n");
+    fclose(out);
+    printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"branch_history_group\"}\n",
+        branch_history_response ? "BRANCH_HISTORY_RESPONSE_FOUND" : "BRANCH_HISTORY_RESPONSE_NOT_ESTABLISHED",
+        result_path);
+    free(neutral);
+    free(forward);
+    free(reverse);
+    free(shuffle);
+    free(sentinel);
     return 0;
 }
 
@@ -3535,6 +3868,7 @@ int main(int argc, char **argv) {
     bool eviction_phase_bracketed_c2d_mode = false;
     bool eviction_phase_bracketed_duration_mode = false;
     bool history_sentinel_mode = false;
+    bool branch_history_mode = false;
     if (argc == 3 && strcmp(argv[1], "--output-root") == 0) {
         output_root = argv[2];
     } else if (argc == 4 && strcmp(argv[1], "--coherence-operators") == 0 &&
@@ -3593,10 +3927,14 @@ int main(int argc, char **argv) {
                strcmp(argv[2], "--output-root") == 0) {
         history_sentinel_mode = true;
         output_root = argv[3];
+    } else if (argc == 4 && strcmp(argv[1], "--branch-history") == 0 &&
+               strcmp(argv[2], "--output-root") == 0) {
+        branch_history_mode = true;
+        output_root = argv[3];
     } else if (argc == 2 && strcmp(argv[1], "--self-test") == 0) {
         return self_test();
     } else {
-        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root> | --eviction-phase-bracketed --output-root <absolute-output-root> | --eviction-phase-bracketed-c2d --output-root <absolute-output-root> | --eviction-phase-bracketed-duration --output-root <absolute-output-root> | --history-sentinel --output-root <absolute-output-root>\n", argv[0]);
+        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root> | --eviction-phase-bracketed --output-root <absolute-output-root> | --eviction-phase-bracketed-c2d --output-root <absolute-output-root> | --eviction-phase-bracketed-duration --output-root <absolute-output-root> | --history-sentinel --output-root <absolute-output-root> | --branch-history --output-root <absolute-output-root>\n", argv[0]);
         return 2;
     }
     if (output_root[0] != '/') {
@@ -3685,6 +4023,11 @@ int main(int argc, char **argv) {
     }
     if (history_sentinel_mode) {
         int rc = run_history_sentinel_mode(output_root, &carrier, initial_digest);
+        free(carrier.bytes);
+        return rc;
+    }
+    if (branch_history_mode) {
+        int rc = run_branch_history_mode(output_root);
         free(carrier.bytes);
         return rc;
     }
