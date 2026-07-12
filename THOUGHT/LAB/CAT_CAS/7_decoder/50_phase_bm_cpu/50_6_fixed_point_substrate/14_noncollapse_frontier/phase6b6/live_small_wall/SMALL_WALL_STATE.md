@@ -6,7 +6,7 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`IBS_FIRST_LIGHT_NOT_AVAILABLE`
+`WC_FLUSH_ORDER_RESPONSE_NOT_ESTABLISHED`
 
 **Active wall:**
 The current wall is now restoration-clean physical coupling for a declared
@@ -42,7 +42,12 @@ IBS availability probe found that the lab kernel exposes `ibs_fetch` and `ibs_op
 event sources, but every tested ordinary `perf_event_open` form returned `EINVAL`,
 including direct IBS sources and precise raw `r076:p`/`r0C1:p` attempts. IBS is not a
 near-term carrier without changing kernel/tool access or adding a different sampling
-implementation.
+implementation. A user-space write-combining/flush-order probe then showed that
+`clflush` and non-temporal same-value store operators are measurable and restore, but
+the tested order pair did not produce a control-clean order response. The active wall
+is now a stronger restoration-sentinel carrier: the next useful probe must measure a
+physical state beyond byte equality without repeating timing, PMU footprint, IBS, or
+WC/flush-order geometry unchanged.
 
 ## Established
 
@@ -1084,22 +1089,68 @@ Checkpoint:
 `perf_event_open` access path. Do not spend the next loop on IBS unless the mechanism
 changes to a real sampler or the kernel/tool boundary changes.
 
+The write-combining/flush-order probe used only ordinary user-space `clflush`,
+non-temporal same-value stores, CAT_CAS-owned aligned lines, and the existing
+`primary_nb_coherence` PMU group:
+
+```text
+run id        f10_wc_flush_order_0
+source bundle 09275480cfa7139869b094068b188a3eb88f3329890959806169585845cbdef0
+worker status WC_FLUSH_ORDER_RESPONSE_NOT_ESTABLISHED
+```
+
+The transaction completed with verified copy-back and remote cleanup, zero frequency
+writes, zero voltage access, zero MSR reads/writes, no physical-address access, no
+cache-set mapping, temperature below veto, every PMU window unmultiplexed, and carrier
+byte digest restored after every window.
+
+The operators were measurable, but the order pair was not:
+
+```text
+change_to_dirty:
+  identity                 0
+  flush_only              21
+  normal_store_same     1933
+  nt_store_same          132
+  flush_then_nt_store     62
+  nt_store_then_flush     56
+  order_delta              6
+  control_range         1933
+
+probe_dirty:
+  identity                 0
+  flush_only            4178
+  normal_store_same     6019
+  nt_store_same         4358
+  flush_then_nt_store   4221
+  nt_store_then_flush   4210
+  order_delta             11
+  control_range         6019
+```
+
+Checkpoint:
+
+`F10_WC_FLUSH_ORDER_CHECKPOINT_20260712.json`
+
+**Status:** user-space flush and non-temporal same-value store operators are visible,
+but this order pair does not carry the needed relation. Do not repeat this WC/flush
+order discriminator unchanged.
+
 ## Cheapest current discriminator
 
 Build the next discriminator by changing carrier/observable, not by repeating the same
 timing-response coded loop or the same ownership-intent PMU footprint loop. The
-cheapest useful route is now a non-IBS, non-PMU-footprint carrier probe. The most
-direct candidate is write-combining or flush-order state because it changes the
-physical buffering/order carrier while keeping CAT_CAS-owned bytes, public phase
-queries, and ordinary user-space instructions. If that cannot be built without new
-privilege, use a cache-line eviction/topology carrier that measures restoration by a
-sentinel response rather than by byte digest alone.
+cheapest useful route is now a restoration-sentinel eviction/topology carrier. It must
+stay closed: CAT_CAS-owned buffers only, predetermined geometry, no physical-address
+access, no cache-set mapping, no unrelated-process observation, and no MSR or voltage
+access. The point is not another scalar PMU magnitude; it is to define a measurable
+restoration equivalence class using a sentinel response before and after a closed
+operator loop.
 
 The next probe should answer:
 
-1. Can a CAT_CAS-owned write-combining, flush-order, or eviction/topology carrier be
-   prepared and restored without voltage, MSR, kernel, physical-address, or cache-set
-   access?
+1. Can a CAT_CAS-owned eviction/topology carrier be prepared and restored without
+   voltage, MSR, kernel, physical-address, or cache-set access?
 2. Does its sentinel response provide a stronger restoration law than byte equality?
 3. Does the fixed quadrature observable
    `z = (2/K) * sum(response_k * exp(i * theta_k))` show lower sham curvature than
@@ -1125,10 +1176,11 @@ physical query-scramble alternative. `coded_preprojection_warm_query_off_0` and
 `coded_preprojection_warm_phase_local_0` did not produce an opposed fold-odd signal.
 `f10_phase_local_pmu_0` then produced opposed PMU signs but stayed below the
 three-times-sham-floor rule. `f10_ibs_first_light_1` showed that IBS is exposed in
-sysfs but not usable through the tested ordinary `perf_event_open` forms. The next
-useful marker remains short of
+sysfs but not usable through the tested ordinary `perf_event_open` forms.
+`f10_wc_flush_order_0` made flush/non-temporal operators visible but not order-sensitive
+under controls. The next useful marker remains short of
 `SMALL_WALL_CROSSED`; the next move must change carrier/observable rather than promote
-the timing, PMU footprint, or IBS availability result.
+the timing, PMU footprint, IBS availability, or WC/flush-order result.
 
 ## State update rule
 

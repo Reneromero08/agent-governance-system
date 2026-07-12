@@ -1,0 +1,81 @@
+{
+  "schema_id": "CAT_CAS_F10_WC_FLUSH_ORDER_CHECKPOINT_V1",
+  "starting_head": "208baaf7383b2f4e181f3de9a11434f3b73787fe",
+  "run_id": "f10_wc_flush_order_0",
+  "mode": "wc-flush-order",
+  "command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_coherence_operators.py --run-id f10_wc_flush_order_0 --mode wc-flush-order",
+  "local_run": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/f10_wc_flush_order_0",
+  "source_bundle_sha256": "09275480cfa7139869b094068b188a3eb88f3329890959806169585845cbdef0",
+  "result_hashes": {
+    "CONTROLLER_RESULT.json": "13c82ecce96d29a8a59cada345be9ae695f8b26e18b1b66ee3157c8ccd5ae57a",
+    "CONTROLLER_STDERR.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "CONTROLLER_STDOUT.txt": "8de02fb068c916682ac3843573b6ab687192e8db785e9531ec8da319df2f96cf",
+    "F10_WC_FLUSH_ORDER_RESULT.json": "364691095a4669b523bc021db96f2b2a0f61c508a303cdef3c0f9649487d40d2",
+    "FILE_MANIFEST.json": "aa296f7b6ac3ab20fcb5ced31f407e3313e953ea3302788728849f4f9d4db65a",
+    "FINAL_RESULT.json": "dd25470a69eb80457f84e380d1ea08e9c6b37751fe6d909742669e2c05d073a3"
+  },
+  "target_status": "F10_WC_FLUSH_ORDER_TARGET_COMPLETE",
+  "worker_status": "WC_FLUSH_ORDER_RESPONSE_NOT_ESTABLISHED",
+  "copy_verified": true,
+  "remote_cleaned": true,
+  "remote_returncode": 0,
+  "temperature": {
+    "preflight_c": 50.0,
+    "post_c": 50.0,
+    "veto_c": 68.0,
+    "below_veto": true
+  },
+  "device_access": {
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "physical_address_access": false,
+    "cache_set_mapping": false,
+    "forbidden_process_matches_after": []
+  },
+  "contrast_counts": {
+    "change_to_dirty": {
+      "identity": 0,
+      "flush_only": 21,
+      "normal_store_same_value": 1933,
+      "nt_store_same_value": 132,
+      "flush_then_nt_store": 62,
+      "nt_store_then_flush": 56,
+      "order_delta": 6,
+      "control_range": 1933
+    },
+    "probe_dirty": {
+      "identity": 0,
+      "flush_only": 4178,
+      "normal_store_same_value": 6019,
+      "nt_store_same_value": 4358,
+      "flush_then_nt_store": 4221,
+      "nt_store_then_flush": 4210,
+      "order_delta": 11,
+      "control_range": 6019
+    }
+  },
+  "acceptance": {
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "carrier_restored": true,
+    "change_to_dirty_order_response": false,
+    "probe_dirty_order_response": false,
+    "wc_flush_order_response": false
+  },
+  "adjudication": {
+    "marker": "WC_FLUSH_ORDER_RESPONSE_NOT_ESTABLISHED",
+    "meaning": "User-space flush and non-temporal same-value store operators were measurable and restored, but the tested order pair did not produce a control-clean order response.",
+    "claim_ceiling": "CONTROLLED_COHERENCE_STATE_FOUND",
+    "excluded_claims": [
+      "write-combining order memory",
+      "path memory",
+      "coherence holonomy",
+      "OrbitState coupling",
+      "fold-odd recovery",
+      "Small Wall crossing"
+    ],
+    "next_wall": "The remaining cheap path is a restoration-sentinel eviction/topology carrier or a stronger phase-native sensor; do not repeat this WC/flush order pair unchanged."
+  }
+}

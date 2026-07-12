@@ -88,6 +88,13 @@ MODES: dict[str, dict[str, Any]] = {
         "failed_status": "F10_IBS_FIRST_LIGHT_TARGET_FAILED",
         "claim_ceiling": "IBS availability and first-light probe only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
     },
+    "wc-flush-order": {
+        "worker_args": ["--wc-flush-order"],
+        "result_file": "F10_WC_FLUSH_ORDER_RESULT.json",
+        "complete_status": "F10_WC_FLUSH_ORDER_TARGET_COMPLETE",
+        "failed_status": "F10_WC_FLUSH_ORDER_TARGET_FAILED",
+        "claim_ceiling": "Write-combining/flush-order PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
+    },
 }
 FORBIDDEN_PROCESS_MARKERS = (
     "f10_pmc_first_light_worker",

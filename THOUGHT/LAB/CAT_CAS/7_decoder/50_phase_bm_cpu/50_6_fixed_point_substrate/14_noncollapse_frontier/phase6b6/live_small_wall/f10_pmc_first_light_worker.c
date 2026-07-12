@@ -42,6 +42,7 @@
 #define ROUTE_STATE_RESULT_SCHEMA "CAT_CAS_F10_ROUTE_STATE_PILOT_RESULT_V1"
 #define PHASE_LOCAL_PMU_RESULT_SCHEMA "CAT_CAS_F10_PHASE_LOCAL_PMU_RESULT_V1"
 #define IBS_FIRST_LIGHT_RESULT_SCHEMA "CAT_CAS_F10_IBS_FIRST_LIGHT_RESULT_V1"
+#define WC_FLUSH_ORDER_RESULT_SCHEMA "CAT_CAS_F10_WC_FLUSH_ORDER_RESULT_V1"
 #define PHASE_LOCAL_BANK_LINES 512u
 
 struct event_def {
@@ -121,6 +122,15 @@ enum route_op {
     ROUTE_IDENTITY = 0,
     ROUTE_READ = 1,
     ROUTE_STORE = 2
+};
+
+enum wc_flush_op {
+    WC_OP_IDENTITY = 0,
+    WC_OP_FLUSH_ONLY = 1,
+    WC_OP_NORMAL_STORE_SAME = 2,
+    WC_OP_NT_STORE_SAME = 3,
+    WC_OP_FLUSH_THEN_NT_STORE = 4,
+    WC_OP_NT_STORE_THEN_FLUSH = 5
 };
 
 struct route_spec {
@@ -287,6 +297,14 @@ static uint64_t fnv1a64(const unsigned char *data, size_t len) {
 
 static unsigned char carrier_pattern_byte(size_t index) {
     return (unsigned char)((index * 131u + 17u) & 0xffu);
+}
+
+static uint64_t carrier_pattern_u64(size_t index) {
+    uint64_t value = 0;
+    for (size_t offset = 0; offset < sizeof(uint64_t); offset++) {
+        value |= ((uint64_t)carrier_pattern_byte(index + offset)) << (offset * 8u);
+    }
+    return value;
 }
 
 static void init_carrier(struct carrier *carrier) {
@@ -463,6 +481,32 @@ static void store_same_value_all_on_core(struct carrier *carrier, int core) {
 }
 
 __attribute__((noinline, noclone))
+static void flush_all_on_core(struct carrier *carrier, int core) {
+    if (pin_to_core(core) != 0) return;
+    for (int iter = 0; iter < OPERATOR_ITERATIONS; iter++) {
+        for (size_t line = 0; line < carrier->line_count; line++) {
+            void *p = carrier->bytes + line * CACHE_LINE_BYTES;
+            __asm__ __volatile__("clflush (%0)" : : "r"(p) : "memory");
+        }
+    }
+    __asm__ __volatile__("mfence" : : : "memory");
+}
+
+__attribute__((noinline, noclone))
+static void nt_store_same_value_all_on_core(struct carrier *carrier, int core) {
+    if (pin_to_core(core) != 0) return;
+    for (int iter = 0; iter < OPERATOR_ITERATIONS; iter++) {
+        for (size_t line = 0; line < carrier->line_count; line++) {
+            size_t base = line * CACHE_LINE_BYTES;
+            uint64_t value = carrier_pattern_u64(base);
+            volatile uint64_t *p = (volatile uint64_t *)(void *)(carrier->bytes + base);
+            __asm__ __volatile__("movnti %1, %0" : "=m"(*p) : "r"(value) : "memory");
+        }
+    }
+    __asm__ __volatile__("sfence" : : : "memory");
+}
+
+__attribute__((noinline, noclone))
 static void store_same_value_rotated_span_on_core(struct carrier *carrier, int core, size_t line_count, size_t start_bank) {
     if (pin_to_core(core) != 0) return;
     if (line_count > carrier->line_count) line_count = carrier->line_count;
@@ -521,6 +565,43 @@ static int run_route_operator(struct carrier *carrier, enum route_op op, int rem
     }
     if (op == ROUTE_STORE) {
         store_same_value_all_on_core(carrier, remote_core);
+        return 0;
+    }
+    return -1;
+}
+
+static const char *wc_flush_op_name(enum wc_flush_op op) {
+    if (op == WC_OP_IDENTITY) return "identity";
+    if (op == WC_OP_FLUSH_ONLY) return "flush_only";
+    if (op == WC_OP_NORMAL_STORE_SAME) return "normal_store_same_value";
+    if (op == WC_OP_NT_STORE_SAME) return "nt_store_same_value";
+    if (op == WC_OP_FLUSH_THEN_NT_STORE) return "flush_then_nt_store";
+    if (op == WC_OP_NT_STORE_THEN_FLUSH) return "nt_store_then_flush";
+    return "unknown";
+}
+
+static int run_wc_flush_operator(struct carrier *carrier, enum wc_flush_op op) {
+    if (op == WC_OP_IDENTITY) return 0;
+    if (op == WC_OP_FLUSH_ONLY) {
+        flush_all_on_core(carrier, CATCAS_CORE_B);
+        return 0;
+    }
+    if (op == WC_OP_NORMAL_STORE_SAME) {
+        store_same_value_all_on_core(carrier, CATCAS_CORE_B);
+        return 0;
+    }
+    if (op == WC_OP_NT_STORE_SAME) {
+        nt_store_same_value_all_on_core(carrier, CATCAS_CORE_B);
+        return 0;
+    }
+    if (op == WC_OP_FLUSH_THEN_NT_STORE) {
+        flush_all_on_core(carrier, CATCAS_CORE_B);
+        nt_store_same_value_all_on_core(carrier, CATCAS_CORE_B);
+        return 0;
+    }
+    if (op == WC_OP_NT_STORE_THEN_FLUSH) {
+        nt_store_same_value_all_on_core(carrier, CATCAS_CORE_B);
+        flush_all_on_core(carrier, CATCAS_CORE_B);
         return 0;
     }
     return -1;
@@ -1257,6 +1338,192 @@ static int run_coherence_operator_mode(const char *output_root, struct carrier *
     fclose(out);
     printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"primary_nb_coherence\"}\n",
         controlled_state_found ? "CONTROLLED_COHERENCE_STATE_FOUND" : "CONTROLLED_COHERENCE_STATE_NOT_ESTABLISHED",
+        result_path);
+    return 0;
+}
+
+static uint64_t max_u64(uint64_t a, uint64_t b) {
+    return a > b ? a : b;
+}
+
+static uint64_t min_u64(uint64_t a, uint64_t b) {
+    return a < b ? a : b;
+}
+
+static uint64_t abs_diff_u64(uint64_t a, uint64_t b) {
+    return a > b ? a - b : b - a;
+}
+
+static int measure_wc_flush_window(
+    const struct event_def group[MAX_GROUP_EVENTS],
+    enum wc_flush_op op,
+    struct carrier *carrier,
+    struct group_result *result,
+    uint64_t *duration_ns,
+    uint64_t *digest_before,
+    uint64_t *digest_after_restore
+) {
+    int fds[MAX_GROUP_EVENTS];
+    uint64_t ids[MAX_GROUP_EVENTS];
+    memset(result, 0, sizeof(*result));
+    restore_on_core(carrier, CATCAS_CORE_A);
+    prefault_carrier(carrier);
+    restore_on_core(carrier, CATCAS_CORE_A);
+    *digest_before = fnv1a64(carrier->bytes, carrier->byte_count);
+    int opened = open_group(group, CATCAS_CORE_B, fds, ids);
+    if (opened != 0) {
+        result->open_errno = -opened;
+        return opened;
+    }
+    result->opened = true;
+    if (ioctl(fds[0], PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t start = monotonic_ns();
+    if (ioctl(fds[0], PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    int work_rc = run_wc_flush_operator(carrier, op);
+    if (ioctl(fds[0], PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t end = monotonic_ns();
+    int read_rc = read_group(fds[0], result);
+    for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+    if (read_rc != 0) return read_rc;
+    if (work_rc != 0) return -EIO;
+    *duration_ns = end >= start ? end - start : 0;
+    home_core_restore(carrier);
+    *digest_after_restore = fnv1a64(carrier->bytes, carrier->byte_count);
+    return 0;
+}
+
+static int run_wc_flush_order_mode(const char *output_root, struct carrier *carrier, uint64_t initial_digest) {
+    int primary_fds[MAX_GROUP_EVENTS];
+    uint64_t primary_ids[MAX_GROUP_EVENTS];
+    int primary_open_rc = open_group(primary_group, CATCAS_CORE_B, primary_fds, primary_ids);
+    if (primary_open_rc == 0) {
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(primary_fds[i]);
+    }
+
+    const enum wc_flush_op ops[] = {
+        WC_OP_IDENTITY,
+        WC_OP_FLUSH_ONLY,
+        WC_OP_NORMAL_STORE_SAME,
+        WC_OP_NT_STORE_SAME,
+        WC_OP_FLUSH_THEN_NT_STORE,
+        WC_OP_NT_STORE_THEN_FLUSH
+    };
+    enum { WC_WINDOW_COUNT = 6 };
+    struct group_result results[WC_WINDOW_COUNT];
+    uint64_t durations[WC_WINDOW_COUNT];
+    uint64_t digest_before[WC_WINDOW_COUNT];
+    uint64_t digest_after[WC_WINDOW_COUNT];
+    int window_rc[WC_WINDOW_COUNT];
+    for (int i = 0; i < WC_WINDOW_COUNT; i++) {
+        memset(&results[i], 0, sizeof(results[i]));
+        durations[i] = 0;
+        digest_before[i] = 0;
+        digest_after[i] = 0;
+        if (primary_open_rc != 0) {
+            window_rc[i] = -ENODEV;
+        } else {
+            window_rc[i] = measure_wc_flush_window(
+                primary_group,
+                ops[i],
+                carrier,
+                &results[i],
+                &durations[i],
+                &digest_before[i],
+                &digest_after[i]
+            );
+        }
+    }
+
+    bool all_windows_ok = true;
+    bool all_unmultiplexed = true;
+    bool all_restored = true;
+    for (int i = 0; i < WC_WINDOW_COUNT; i++) {
+        all_windows_ok = all_windows_ok && window_rc[i] == 0;
+        all_unmultiplexed = all_unmultiplexed && results[i].unmultiplexed;
+        all_restored = all_restored && digest_after[i] == initial_digest;
+    }
+
+    uint64_t c2d[WC_WINDOW_COUNT];
+    uint64_t probe[WC_WINDOW_COUNT];
+    for (int i = 0; i < WC_WINDOW_COUNT; i++) {
+        c2d[i] = event_value_by_name(&results[i], primary_group, "cache_block_commands_change_to_dirty");
+        probe[i] = event_value_by_name(&results[i], primary_group, "probe_responses_dirty");
+    }
+    uint64_t c2d_control_min = min_u64(min_u64(c2d[0], c2d[1]), min_u64(c2d[2], c2d[3]));
+    uint64_t c2d_control_max = max_u64(max_u64(c2d[0], c2d[1]), max_u64(c2d[2], c2d[3]));
+    uint64_t probe_control_min = min_u64(min_u64(probe[0], probe[1]), min_u64(probe[2], probe[3]));
+    uint64_t probe_control_max = max_u64(max_u64(probe[0], probe[1]), max_u64(probe[2], probe[3]));
+    uint64_t c2d_order_delta = abs_diff_u64(c2d[4], c2d[5]);
+    uint64_t probe_order_delta = abs_diff_u64(probe[4], probe[5]);
+    bool c2d_order_response = c2d_order_delta > 32u && c2d_order_delta > (c2d_control_max - c2d_control_min) * 3u;
+    bool probe_order_response = probe_order_delta > 32u && probe_order_delta > (probe_control_max - probe_control_min) * 3u;
+    bool wc_flush_order_response = primary_open_rc == 0 && all_windows_ok && all_unmultiplexed &&
+        all_restored && (c2d_order_response || probe_order_response);
+
+    char result_path[4096];
+    int n = snprintf(result_path, sizeof(result_path), "%s/F10_WC_FLUSH_ORDER_RESULT.json", output_root);
+    if (n <= 0 || (size_t)n >= sizeof(result_path)) return 1;
+    FILE *out = fopen(result_path, "w");
+    if (!out) {
+        fprintf(stderr, "cannot open result: %s\n", strerror(errno));
+        return 1;
+    }
+
+    fprintf(out, "{\n");
+    fprintf(out, "  \"schema_id\": \"%s\",\n", WC_FLUSH_ORDER_RESULT_SCHEMA);
+    fprintf(out, "  \"status\": \"%s\",\n", wc_flush_order_response ? "WC_FLUSH_ORDER_RESPONSE_FOUND" : "WC_FLUSH_ORDER_RESPONSE_NOT_ESTABLISHED");
+    fprintf(out, "  \"claim_ceiling\": \"Write-combining/flush-order PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim\",\n");
+    fprintf(out, "  \"cores\": {\"home_core\": %d, \"observed_core\": %d},\n", CATCAS_CORE_A, CATCAS_CORE_B);
+    fprintf(out, "  \"source_constraints\": {\"direct_msr_access\": false, \"voltage_access\": false, \"frequency_writes\": 0, \"experiment_owned_memory_only\": true, \"physical_address_access\": false, \"cache_set_mapping\": false},\n");
+    fprintf(out, "  \"carrier\": {\"line_count\": %zu, \"line_bytes\": %d, \"byte_count\": %zu, \"digest_kind\": \"fnv1a64\", \"initial_digest_hex\": \"0x%016" PRIx64 "\"},\n", carrier->line_count, CACHE_LINE_BYTES, carrier->byte_count, initial_digest);
+    fprintf(out, "  \"selected_group\": \"primary_nb_coherence\",\n");
+    fprintf(out, "  \"group_open_rc\": %d,\n", primary_open_rc);
+    fprintf(out, "  \"selected_events\": ");
+    print_group_defs(out, primary_group);
+    fprintf(out, ",\n");
+    fprintf(out, "  \"predeclared_observable\": {\"primary\": \"difference between flush-then-non-temporal-store and non-temporal-store-then-flush\", \"control_floor\": \"identity, flush-only, normal same-value store, and non-temporal same-value store range\", \"acceptance\": \"order delta > 32 and > 3 * control range for either established coherence counter\"},\n");
+    fprintf(out, "  \"operators\": [\n");
+    for (int i = 0; i < WC_WINDOW_COUNT; i++) {
+        fprintf(out, "    {\"name\": \"%s\", \"rc\": %d, \"duration_ns\": %" PRIu64 ", \"carrier_digest_before_hex\": \"0x%016" PRIx64 "\", \"carrier_digest_after_restore_hex\": \"0x%016" PRIx64 "\", \"carrier_restored\": %s, \"group\": ",
+            wc_flush_op_name(ops[i]),
+            window_rc[i],
+            durations[i],
+            digest_before[i],
+            digest_after[i],
+            json_bool(digest_after[i] == initial_digest));
+        print_group_result(out, primary_group, &results[i]);
+        fprintf(out, "}%s\n", i + 1 == WC_WINDOW_COUNT ? "" : ",");
+    }
+    fprintf(out, "  ],\n");
+    fprintf(out, "  \"contrast_counts\": {\n");
+    fprintf(out, "    \"change_to_dirty\": {\"identity\": %" PRIu64 ", \"flush_only\": %" PRIu64 ", \"normal_store_same_value\": %" PRIu64 ", \"nt_store_same_value\": %" PRIu64 ", \"flush_then_nt_store\": %" PRIu64 ", \"nt_store_then_flush\": %" PRIu64 ", \"order_delta\": %" PRIu64 ", \"control_range\": %" PRIu64 "},\n",
+        c2d[0], c2d[1], c2d[2], c2d[3], c2d[4], c2d[5], c2d_order_delta, c2d_control_max - c2d_control_min);
+    fprintf(out, "    \"probe_dirty\": {\"identity\": %" PRIu64 ", \"flush_only\": %" PRIu64 ", \"normal_store_same_value\": %" PRIu64 ", \"nt_store_same_value\": %" PRIu64 ", \"flush_then_nt_store\": %" PRIu64 ", \"nt_store_then_flush\": %" PRIu64 ", \"order_delta\": %" PRIu64 ", \"control_range\": %" PRIu64 "}\n",
+        probe[0], probe[1], probe[2], probe[3], probe[4], probe[5], probe_order_delta, probe_control_max - probe_control_min);
+    fprintf(out, "  },\n");
+    fprintf(out, "  \"acceptance\": {\"all_windows_ok\": %s, \"all_unmultiplexed\": %s, \"carrier_restored\": %s, \"change_to_dirty_order_response\": %s, \"probe_dirty_order_response\": %s, \"wc_flush_order_response\": %s}\n",
+        json_bool(all_windows_ok),
+        json_bool(all_unmultiplexed),
+        json_bool(all_restored),
+        json_bool(c2d_order_response),
+        json_bool(probe_order_response),
+        json_bool(wc_flush_order_response));
+    fprintf(out, "}\n");
+    fclose(out);
+    printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"primary_nb_coherence\"}\n",
+        wc_flush_order_response ? "WC_FLUSH_ORDER_RESPONSE_FOUND" : "WC_FLUSH_ORDER_RESPONSE_NOT_ESTABLISHED",
         result_path);
     return 0;
 }
@@ -2215,6 +2482,7 @@ int main(int argc, char **argv) {
     bool route_state_mode = false;
     bool phase_local_pmu_mode = false;
     bool ibs_first_light_mode = false;
+    bool wc_flush_order_mode = false;
     if (argc == 3 && strcmp(argv[1], "--output-root") == 0) {
         output_root = argv[2];
     } else if (argc == 4 && strcmp(argv[1], "--coherence-operators") == 0 &&
@@ -2245,10 +2513,14 @@ int main(int argc, char **argv) {
                strcmp(argv[2], "--output-root") == 0) {
         ibs_first_light_mode = true;
         output_root = argv[3];
+    } else if (argc == 4 && strcmp(argv[1], "--wc-flush-order") == 0 &&
+               strcmp(argv[2], "--output-root") == 0) {
+        wc_flush_order_mode = true;
+        output_root = argv[3];
     } else if (argc == 2 && strcmp(argv[1], "--self-test") == 0) {
         return self_test();
     } else {
-        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root>\n", argv[0]);
+        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root>\n", argv[0]);
         return 2;
     }
     if (output_root[0] != '/') {
@@ -2302,6 +2574,11 @@ int main(int argc, char **argv) {
     }
     if (ibs_first_light_mode) {
         int rc = run_ibs_first_light_mode(output_root, &carrier, initial_digest);
+        free(carrier.bytes);
+        return rc;
+    }
+    if (wc_flush_order_mode) {
+        int rc = run_wc_flush_order_mode(output_root, &carrier, initial_digest);
         free(carrier.bytes);
         return rc;
     }
