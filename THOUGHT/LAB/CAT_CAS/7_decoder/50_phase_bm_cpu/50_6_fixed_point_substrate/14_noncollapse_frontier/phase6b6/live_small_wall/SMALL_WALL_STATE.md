@@ -2303,7 +2303,32 @@ page-recovery sequence unchanged.
 
 ## Current claim ceiling
 
-`BALANCED_PHYSICAL_TRANSDUCER_PARTIAL`
+`V1_PARTIAL_V2_TRANSFER_CANDIDATE`
+
+This is a retrospective offline interpretation only. The historical V1 run remains
+`BALANCED_PHYSICAL_TRANSDUCER_PARTIAL`; no retained file under
+`runs/balanced_transducer_calibration_1/` was edited, and no new target contact was
+made. The V2 audit in
+`orbit_coupling/transducer_calibration/adjudication_v2/` verified the retained
+schedule, raw capture, and restoration-sentinel hashes, reproduced the original V1
+partial classification from those inputs, and then applied corrected q0, paired
+crossover, nonzero order, and unit-specific floor laws.
+
+The strongest lawful retained-evidence interpretation is now that
+`change_to_dirty` is a fresh-confirmation transfer candidate: it passes held-out q0
+null, sign, oddness, gain, monotonicity, nonzero paired logical crossover, nonzero
+paired physical reversal, nonzero source/receiver order, gain-normalized order,
+stratum transfer, replicate consistency, coordinate-specific restoration, and custody
+integrity. V1 rejected that coordinate through q0-dominated relative-error controls:
+all four failed V1 control maxima for `change_to_dirty` occurred at `q = 0`, while
+the largest nonzero failed-control maximum was 0.043235, below the frozen 0.25
+tolerance.
+
+This does not establish `BALANCED_PHYSICAL_TRANSDUCER_CALIBRATED`, an OrbitState
+coupling candidate, or `SMALL_WALL_CROSSED`. It requires the frozen prospective
+confirmation contract in
+`orbit_coupling/transducer_calibration/adjudication_v2/CONFIRMATION_CONTRACT_V2.md`
+before the retrospective-law concern can be removed.
 
 The next major scientific threshold is a physical coded pre-projection response with
 restoration and killing controls. `coded_preprojection_loop_2` is a restored physical
