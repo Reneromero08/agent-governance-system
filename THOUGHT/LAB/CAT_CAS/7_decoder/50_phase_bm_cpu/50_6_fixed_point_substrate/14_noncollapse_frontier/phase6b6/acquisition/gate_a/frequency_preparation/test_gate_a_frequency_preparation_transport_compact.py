@@ -215,6 +215,11 @@ class CompactAuthorityTransportTests(unittest.TestCase):
             source_review_binding={"reviewed_source_commit": "a" * 40},
         )
 
+    def test_process_scan_command_hides_forbidden_markers(self) -> None:
+        command = " ".join(transport._remote_python(transport.PROCESS_SCRIPT))
+        self.assertNotIn("gate_a_frequency_preparation_target.py", command)
+        self.assertNotIn("catcas_phase6b6_gate_a_freqprep_", command)
+
     def test_namespace_collision_never_consumes_claim(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             request = self.request(Path(temporary))
