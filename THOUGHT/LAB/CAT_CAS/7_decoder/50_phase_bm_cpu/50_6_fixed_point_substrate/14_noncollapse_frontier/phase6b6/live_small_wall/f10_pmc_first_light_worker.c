@@ -58,6 +58,7 @@
 #define STORE_LOAD_ALIAS_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_STORE_LOAD_ALIAS_HISTORY_RESULT_V1"
 #define PREFETCH_STREAM_RESULT_SCHEMA "CAT_CAS_F10_PREFETCH_STREAM_RESULT_V1"
 #define PROCESS_LIFECYCLE_RESULT_SCHEMA "CAT_CAS_F10_PROCESS_LIFECYCLE_RESULT_V1"
+#define CODE_FOOTPRINT_HISTORY_RESULT_SCHEMA "CAT_CAS_F10_CODE_FOOTPRINT_HISTORY_RESULT_V1"
 #define PHASE_LOCAL_BANK_LINES 512u
 #define EVICTION_LINES 262144u
 #define EVICTION_ITERATIONS 3
@@ -87,6 +88,9 @@
 #define PREFETCH_HISTORY_LOOPS 8u
 #define PREFETCH_SENTINEL_LOOPS 8u
 #define PROCESS_LIFECYCLE_SOURCE_LOOPS 4u
+#define CODE_FOOTPRINT_RESTORE_LOOPS 64u
+#define CODE_FOOTPRINT_HISTORY_LOOPS 128u
+#define CODE_FOOTPRINT_SENTINEL_LOOPS 64u
 
 struct event_def {
     const char *name;
@@ -316,6 +320,20 @@ struct process_lifecycle_sequence_spec {
     unsigned int source_loops;
 };
 
+enum code_footprint_kind {
+    CODE_FOOTPRINT_NEUTRAL = 0,
+    CODE_FOOTPRINT_FORWARD = 1,
+    CODE_FOOTPRINT_REVERSE = 2,
+    CODE_FOOTPRINT_SHUFFLE = 3,
+    CODE_FOOTPRINT_SENTINEL = 4
+};
+
+struct code_footprint_sequence_spec {
+    const char *name;
+    enum code_footprint_kind history_pattern;
+    unsigned int history_loops;
+};
+
 static const struct event_def support_events[SUPPORT_EVENTS] = {
     {"cpu_cycles_not_halted", 0x076, 0x00, "core"},
     {"dc_refills_l2_or_nb_all_states", 0x042, 0x1f, "core"},
@@ -363,6 +381,13 @@ static const struct event_def translation_history_group[MAX_GROUP_EVENTS] = {
 };
 
 static const struct event_def prefetch_stream_group[MAX_GROUP_EVENTS] = {
+    {"cpu_cycles_not_halted", 0x076, 0x00, "core"},
+    {"retired_instructions", 0x0c0, 0x00, "core"},
+    {"cache_references", 0x07d, 0x07, "core"},
+    {"cache_misses", 0x07e, 0x07, "core"}
+};
+
+static const struct event_def code_footprint_group[MAX_GROUP_EVENTS] = {
     {"cpu_cycles_not_halted", 0x076, 0x00, "core"},
     {"retired_instructions", 0x0c0, 0x00, "core"},
     {"cache_references", 0x07d, 0x07, "core"},
@@ -3633,6 +3658,309 @@ static int run_prefetch_stream_mode(const char *output_root) {
     return 0;
 }
 
+static volatile uint64_t code_footprint_sink = 0;
+
+__attribute__((noinline, aligned(64)))
+static void code_footprint_block0(uint64_t *acc) {
+    uint64_t x = *acc + 0x9e3779b97f4a7c15ull;
+    for (unsigned int i = 0; i < 8u; i++) {
+        x ^= x >> 33;
+        x *= 0xff51afd7ed558ccdull;
+        __asm__ __volatile__(".rept 64\nnop\n.endr" : "+r"(x) :: "memory");
+    }
+    *acc = x;
+}
+
+__attribute__((noinline, aligned(64)))
+static void code_footprint_block1(uint64_t *acc) {
+    uint64_t x = *acc ^ 0xc2b2ae3d27d4eb4full;
+    for (unsigned int i = 0; i < 8u; i++) {
+        x = (x << 17) | (x >> 47);
+        x += 0x165667b19e3779f9ull;
+        __asm__ __volatile__(".rept 64\nnop\n.endr" : "+r"(x) :: "memory");
+    }
+    *acc = x;
+}
+
+__attribute__((noinline, aligned(64)))
+static void code_footprint_block2(uint64_t *acc) {
+    uint64_t x = *acc + 0xd6e8feb86659fd93ull;
+    for (unsigned int i = 0; i < 8u; i++) {
+        x ^= x << 29;
+        x += (x >> 11) ^ 0x94d049bb133111ebull;
+        __asm__ __volatile__(".rept 64\nnop\n.endr" : "+r"(x) :: "memory");
+    }
+    *acc = x;
+}
+
+__attribute__((noinline, aligned(64)))
+static void code_footprint_block3(uint64_t *acc) {
+    uint64_t x = *acc ^ 0x2545f4914f6cdd1dull;
+    for (unsigned int i = 0; i < 8u; i++) {
+        x *= 0x369dea0f31a53f85ull;
+        x ^= x >> 27;
+        __asm__ __volatile__(".rept 64\nnop\n.endr" : "+r"(x) :: "memory");
+    }
+    *acc = x;
+}
+
+__attribute__((noinline))
+static void run_code_footprint_block(unsigned int block, uint64_t *acc) {
+    switch (block & 3u) {
+        case 0u:
+            code_footprint_block0(acc);
+            break;
+        case 1u:
+            code_footprint_block1(acc);
+            break;
+        case 2u:
+            code_footprint_block2(acc);
+            break;
+        default:
+            code_footprint_block3(acc);
+            break;
+    }
+}
+
+static unsigned int code_footprint_block_index(enum code_footprint_kind kind, unsigned int i) {
+    static const unsigned int neutral_seq[8] = {0u, 2u, 1u, 3u, 3u, 1u, 2u, 0u};
+    static const unsigned int forward_seq[8] = {0u, 1u, 2u, 3u, 0u, 1u, 2u, 3u};
+    static const unsigned int reverse_seq[8] = {3u, 2u, 1u, 0u, 3u, 2u, 1u, 0u};
+    static const unsigned int shuffle_seq[8] = {1u, 3u, 0u, 2u, 2u, 0u, 3u, 1u};
+    static const unsigned int sentinel_seq[8] = {0u, 3u, 1u, 2u, 1u, 0u, 2u, 3u};
+    const unsigned int *seq = neutral_seq;
+    switch (kind) {
+        case CODE_FOOTPRINT_NEUTRAL:
+            seq = neutral_seq;
+            break;
+        case CODE_FOOTPRINT_FORWARD:
+            seq = forward_seq;
+            break;
+        case CODE_FOOTPRINT_REVERSE:
+            seq = reverse_seq;
+            break;
+        case CODE_FOOTPRINT_SHUFFLE:
+            seq = shuffle_seq;
+            break;
+        case CODE_FOOTPRINT_SENTINEL:
+            seq = sentinel_seq;
+            break;
+    }
+    return seq[i & 7u];
+}
+
+__attribute__((noinline))
+static void run_code_footprint_pattern(enum code_footprint_kind kind, unsigned int loops) {
+    uint64_t acc = code_footprint_sink ^ ((uint64_t)kind << 32) ^ loops;
+    for (unsigned int loop = 0; loop < loops; loop++) {
+        for (unsigned int i = 0; i < 32u; i++) {
+            unsigned int mixed = i + (loop * 3u);
+            run_code_footprint_block(code_footprint_block_index(kind, mixed), &acc);
+            __asm__ __volatile__("" : "+r"(acc) :: "memory");
+        }
+    }
+    code_footprint_sink = acc;
+}
+
+static uint64_t code_footprint_static_digest(void) {
+    static const unsigned char patterns[] = {
+        0u, 2u, 1u, 3u, 3u, 1u, 2u, 0u,
+        0u, 1u, 2u, 3u, 0u, 1u, 2u, 3u,
+        3u, 2u, 1u, 0u, 3u, 2u, 1u, 0u,
+        1u, 3u, 0u, 2u, 2u, 0u, 3u, 1u,
+        0u, 3u, 1u, 2u, 1u, 0u, 2u, 3u,
+        'C', 'A', 'T', '_', 'C', 'A', 'S', '_',
+        'C', 'O', 'D', 'E', '_', 'F', 'O', 'O',
+        'T', 'P', 'R', 'I', 'N', 'T', '_', 'V', '1'
+    };
+    return fnv1a64(patterns, sizeof(patterns));
+}
+
+static int measure_code_footprint_window(
+    const struct event_def group[MAX_GROUP_EVENTS],
+    const struct code_footprint_sequence_spec *sequence,
+    struct group_result *result,
+    uint64_t *duration_ns,
+    uint64_t *digest_after_history,
+    uint64_t *digest_after_restore
+) {
+    int fds[MAX_GROUP_EVENTS];
+    uint64_t ids[MAX_GROUP_EVENTS];
+    memset(result, 0, sizeof(*result));
+    if (pin_to_core(CATCAS_CORE_B) != 0) return -EINVAL;
+    run_code_footprint_pattern(CODE_FOOTPRINT_NEUTRAL, CODE_FOOTPRINT_RESTORE_LOOPS);
+    if (sequence->history_loops > 0u) {
+        run_code_footprint_pattern(sequence->history_pattern, sequence->history_loops);
+    }
+    *digest_after_history = code_footprint_static_digest();
+    int opened = open_group(group, CATCAS_CORE_B, fds, ids);
+    if (opened != 0) {
+        result->open_errno = -opened;
+        return opened;
+    }
+    result->opened = true;
+    if (ioctl(fds[0], PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t start = monotonic_ns();
+    if (ioctl(fds[0], PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    run_code_footprint_pattern(CODE_FOOTPRINT_SENTINEL, CODE_FOOTPRINT_SENTINEL_LOOPS);
+    if (ioctl(fds[0], PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t end = monotonic_ns();
+    int read_rc = read_group(fds[0], result);
+    for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+    if (read_rc != 0) return read_rc;
+    run_code_footprint_pattern(CODE_FOOTPRINT_NEUTRAL, CODE_FOOTPRINT_RESTORE_LOOPS);
+    *digest_after_restore = code_footprint_static_digest();
+    *duration_ns = end >= start ? end - start : 0;
+    return 0;
+}
+
+static int run_code_footprint_history_mode(const char *output_root) {
+    uint64_t initial_digest = code_footprint_static_digest();
+    int footprint_fds[MAX_GROUP_EVENTS];
+    uint64_t footprint_ids[MAX_GROUP_EVENTS];
+    int footprint_open_rc = open_group(code_footprint_group, CATCAS_CORE_B,
+                                       footprint_fds, footprint_ids);
+    if (footprint_open_rc == 0) {
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(footprint_fds[i]);
+    }
+
+    const struct code_footprint_sequence_spec sequences[] = {
+        {"neutral_restore_only", CODE_FOOTPRINT_NEUTRAL, 0u},
+        {"forward_code_history", CODE_FOOTPRINT_FORWARD, CODE_FOOTPRINT_HISTORY_LOOPS},
+        {"reverse_code_history", CODE_FOOTPRINT_REVERSE, CODE_FOOTPRINT_HISTORY_LOOPS},
+        {"shuffle_code_history", CODE_FOOTPRINT_SHUFFLE, CODE_FOOTPRINT_HISTORY_LOOPS},
+    };
+    enum { CODE_FOOTPRINT_WINDOW_COUNT = 4 };
+    struct group_result results[CODE_FOOTPRINT_WINDOW_COUNT];
+    uint64_t durations[CODE_FOOTPRINT_WINDOW_COUNT];
+    uint64_t digest_after_history[CODE_FOOTPRINT_WINDOW_COUNT];
+    uint64_t digest_after_restore[CODE_FOOTPRINT_WINDOW_COUNT];
+    int window_rc[CODE_FOOTPRINT_WINDOW_COUNT];
+    for (int i = 0; i < CODE_FOOTPRINT_WINDOW_COUNT; i++) {
+        memset(&results[i], 0, sizeof(results[i]));
+        durations[i] = 0;
+        digest_after_history[i] = 0;
+        digest_after_restore[i] = 0;
+        if (footprint_open_rc != 0) {
+            window_rc[i] = -ENODEV;
+        } else {
+            window_rc[i] = measure_code_footprint_window(
+                code_footprint_group,
+                &sequences[i],
+                &results[i],
+                &durations[i],
+                &digest_after_history[i],
+                &digest_after_restore[i]);
+        }
+    }
+
+    bool all_windows_ok = true;
+    bool all_unmultiplexed = true;
+    bool patterns_unchanged_after_history = true;
+    bool patterns_unchanged_after_restore = true;
+    for (int i = 0; i < CODE_FOOTPRINT_WINDOW_COUNT; i++) {
+        all_windows_ok = all_windows_ok && window_rc[i] == 0;
+        all_unmultiplexed = all_unmultiplexed && results[i].unmultiplexed;
+        patterns_unchanged_after_history =
+            patterns_unchanged_after_history && digest_after_history[i] == initial_digest;
+        patterns_unchanged_after_restore =
+            patterns_unchanged_after_restore && digest_after_restore[i] == initial_digest;
+    }
+
+    uint64_t identity_misses = event_value_by_name(&results[0], code_footprint_group, "cache_misses");
+    uint64_t forward_misses = event_value_by_name(&results[1], code_footprint_group, "cache_misses");
+    uint64_t reverse_misses = event_value_by_name(&results[2], code_footprint_group, "cache_misses");
+    uint64_t shuffle_misses = event_value_by_name(&results[3], code_footprint_group, "cache_misses");
+    uint64_t miss_delta = abs_diff_u64(forward_misses, reverse_misses);
+    uint64_t miss_control = abs_diff_u64(identity_misses, shuffle_misses);
+    uint64_t miss_threshold = max_u64(32u, 3u * miss_control);
+    bool miss_signal = miss_delta > miss_threshold;
+
+    uint64_t identity_duration = durations[0];
+    uint64_t forward_duration = durations[1];
+    uint64_t reverse_duration = durations[2];
+    uint64_t shuffle_duration = durations[3];
+    uint64_t duration_delta = abs_diff_u64(forward_duration, reverse_duration);
+    uint64_t duration_control = abs_diff_u64(identity_duration, shuffle_duration);
+    uint64_t duration_threshold = max_u64(10000u, 3u * duration_control);
+    bool duration_signal = duration_delta > duration_threshold;
+
+    bool code_footprint_history_response = footprint_open_rc == 0 && all_windows_ok &&
+        all_unmultiplexed && patterns_unchanged_after_history &&
+        patterns_unchanged_after_restore && (miss_signal || duration_signal);
+
+    char result_path[4096];
+    int n = snprintf(result_path, sizeof(result_path), "%s/F10_CODE_FOOTPRINT_HISTORY_RESULT.json", output_root);
+    if (n <= 0 || (size_t)n >= sizeof(result_path)) return 1;
+    FILE *out = fopen(result_path, "w");
+    if (!out) {
+        fprintf(stderr, "cannot open result: %s\n", strerror(errno));
+        return 1;
+    }
+    fprintf(out, "{\n");
+    fprintf(out, "  \"schema_id\": \"%s\",\n", CODE_FOOTPRINT_HISTORY_RESULT_SCHEMA);
+    fprintf(out, "  \"status\": \"%s\",\n", code_footprint_history_response ? "CODE_FOOTPRINT_HISTORY_RESPONSE_FOUND" : "CODE_FOOTPRINT_HISTORY_RESPONSE_NOT_ESTABLISHED");
+    fprintf(out, "  \"claim_ceiling\": \"Compiled code-footprint timing/PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, target coupling, or Small Wall crossing claim\",\n");
+    fprintf(out, "  \"cores\": {\"code_core\": %d},\n", CATCAS_CORE_B);
+    fprintf(out, "  \"perf_interface\": {\"type\": \"PERF_TYPE_RAW\", \"event_format\": \"config:0-7,32-35\", \"umask_format\": \"config:8-15\", \"exclude_kernel\": true, \"exclude_hv\": true},\n");
+    fprintf(out, "  \"source_constraints\": {\"direct_msr_access\": false, \"voltage_access\": false, \"frequency_writes\": 0, \"experiment_owned_code_only\": true, \"generated_executable_memory\": false, \"physical_address_access\": false, \"cache_set_mapping\": false, \"unrelated_process_observation\": false},\n");
+    fprintf(out, "  \"code_footprint_carrier\": {\"compiled_blocks\": 4, \"restore_loops\": %u, \"history_loops\": %u, \"sentinel_loops\": %u, \"sentinel_calls_per_loop\": 32, \"digest_kind\": \"fnv1a64_static_pattern\", \"initial_digest_hex\": \"0x%016" PRIx64 "\"},\n",
+        CODE_FOOTPRINT_RESTORE_LOOPS, CODE_FOOTPRINT_HISTORY_LOOPS, CODE_FOOTPRINT_SENTINEL_LOOPS, initial_digest);
+    fprintf(out, "  \"selected_group\": \"code_footprint_group\",\n");
+    fprintf(out, "  \"group_open_rc\": %d,\n", footprint_open_rc);
+    fprintf(out, "  \"selected_events\": ");
+    print_group_defs(out, code_footprint_group);
+    fprintf(out, ",\n");
+    fprintf(out, "  \"predeclared_observable\": {\"history\": \"balanced compiled CAT_CAS-owned code-block call order over fixed noinline blocks\", \"restore\": \"neutral compiled-code footprint wash before and after every measured window\", \"sentinel\": \"fixed compiled-code block-call sequence on the same core\", \"primary_acceptance\": \"forward/reverse sentinel cache_misses delta exceeds max(32, 3 * neutral/shuffle control spread) or duration delta exceeds max(10000 ns, 3 * neutral/shuffle control spread)\"},\n");
+    fprintf(out, "  \"windows\": [\n");
+    for (int i = 0; i < CODE_FOOTPRINT_WINDOW_COUNT; i++) {
+        fprintf(out, "    {\"name\": \"%s\", \"rc\": %d, \"duration_ns\": %" PRIu64 ", \"history_loops\": %u, \"digest_after_history_hex\": \"0x%016" PRIx64 "\", \"digest_after_restore_hex\": \"0x%016" PRIx64 "\", \"patterns_unchanged_after_history\": %s, \"patterns_unchanged_after_restore\": %s, \"group\": ",
+            sequences[i].name,
+            window_rc[i],
+            durations[i],
+            sequences[i].history_loops,
+            digest_after_history[i],
+            digest_after_restore[i],
+            json_bool(digest_after_history[i] == initial_digest),
+            json_bool(digest_after_restore[i] == initial_digest));
+        print_group_result(out, code_footprint_group, &results[i]);
+        fprintf(out, "}%s\n", i + 1 == CODE_FOOTPRINT_WINDOW_COUNT ? "" : ",");
+    }
+    fprintf(out, "  ],\n");
+    fprintf(out, "  \"contrast_counts\": {\n");
+    fprintf(out, "    \"cache_misses\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s},\n",
+        identity_misses, forward_misses, reverse_misses, shuffle_misses, miss_delta, miss_control, miss_threshold, json_bool(miss_signal));
+    fprintf(out, "    \"duration_ns\": {\"identity\": %" PRIu64 ", \"forward\": %" PRIu64 ", \"reverse\": %" PRIu64 ", \"shuffle\": %" PRIu64 ", \"forward_reverse_delta\": %" PRIu64 ", \"control_floor\": %" PRIu64 ", \"threshold\": %" PRIu64 ", \"signal\": %s}\n",
+        identity_duration, forward_duration, reverse_duration, shuffle_duration, duration_delta, duration_control, duration_threshold, json_bool(duration_signal));
+    fprintf(out, "  },\n");
+    fprintf(out, "  \"acceptance\": {\"all_windows_ok\": %s, \"all_unmultiplexed\": %s, \"patterns_unchanged_after_history\": %s, \"patterns_unchanged_after_restore\": %s, \"cache_miss_signal\": %s, \"duration_signal\": %s, \"code_footprint_history_response\": %s}\n",
+        json_bool(all_windows_ok),
+        json_bool(all_unmultiplexed),
+        json_bool(patterns_unchanged_after_history),
+        json_bool(patterns_unchanged_after_restore),
+        json_bool(miss_signal),
+        json_bool(duration_signal),
+        json_bool(code_footprint_history_response));
+    fprintf(out, "}\n");
+    fclose(out);
+    printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"code_footprint_group\"}\n",
+        code_footprint_history_response ? "CODE_FOOTPRINT_HISTORY_RESPONSE_FOUND" : "CODE_FOOTPRINT_HISTORY_RESPONSE_NOT_ESTABLISHED",
+        result_path);
+    return 0;
+}
+
 static int wait_child_ok(pid_t pid, int *child_status) {
     int status = 0;
     pid_t waited = 0;
@@ -5815,6 +6143,7 @@ int main(int argc, char **argv) {
     bool store_load_alias_history_mode = false;
     bool prefetch_stream_mode = false;
     bool process_lifecycle_mode = false;
+    bool code_footprint_history_mode = false;
     if (argc == 3 && strcmp(argv[1], "--output-root") == 0) {
         output_root = argv[2];
     } else if (argc == 4 && strcmp(argv[1], "--coherence-operators") == 0 &&
@@ -5901,10 +6230,14 @@ int main(int argc, char **argv) {
                strcmp(argv[2], "--output-root") == 0) {
         process_lifecycle_mode = true;
         output_root = argv[3];
+    } else if (argc == 4 && strcmp(argv[1], "--code-footprint-history") == 0 &&
+               strcmp(argv[2], "--output-root") == 0) {
+        code_footprint_history_mode = true;
+        output_root = argv[3];
     } else if (argc == 2 && strcmp(argv[1], "--self-test") == 0) {
         return self_test();
     } else {
-        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root> | --eviction-phase-bracketed --output-root <absolute-output-root> | --eviction-phase-bracketed-c2d --output-root <absolute-output-root> | --eviction-phase-bracketed-duration --output-root <absolute-output-root> | --history-sentinel --output-root <absolute-output-root> | --locked-history --output-root <absolute-output-root> | --branch-history --output-root <absolute-output-root> | --indirect-target-history --output-root <absolute-output-root> | --translation-history --output-root <absolute-output-root> | --store-load-alias-history --output-root <absolute-output-root> | --prefetch-stream --output-root <absolute-output-root> | --process-lifecycle --output-root <absolute-output-root>\n", argv[0]);
+        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root> | --eviction-phase-bracketed --output-root <absolute-output-root> | --eviction-phase-bracketed-c2d --output-root <absolute-output-root> | --eviction-phase-bracketed-duration --output-root <absolute-output-root> | --history-sentinel --output-root <absolute-output-root> | --locked-history --output-root <absolute-output-root> | --branch-history --output-root <absolute-output-root> | --indirect-target-history --output-root <absolute-output-root> | --translation-history --output-root <absolute-output-root> | --store-load-alias-history --output-root <absolute-output-root> | --prefetch-stream --output-root <absolute-output-root> | --process-lifecycle --output-root <absolute-output-root> | --code-footprint-history --output-root <absolute-output-root>\n", argv[0]);
         return 2;
     }
     if (output_root[0] != '/') {
@@ -6028,6 +6361,11 @@ int main(int argc, char **argv) {
     }
     if (process_lifecycle_mode) {
         int rc = run_process_lifecycle_mode(output_root);
+        free(carrier.bytes);
+        return rc;
+    }
+    if (code_footprint_history_mode) {
+        int rc = run_code_footprint_history_mode(output_root);
         free(carrier.bytes);
         return rc;
     }

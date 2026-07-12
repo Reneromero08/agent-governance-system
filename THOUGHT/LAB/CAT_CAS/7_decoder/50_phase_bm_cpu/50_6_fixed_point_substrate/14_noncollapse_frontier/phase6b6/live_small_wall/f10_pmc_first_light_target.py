@@ -186,6 +186,13 @@ MODES: dict[str, dict[str, Any]] = {
         "failed_status": "F10_PROCESS_LIFECYCLE_TARGET_FAILED",
         "claim_ceiling": "Process-lifecycle CAT_CAS-owned carrier discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
     },
+    "code-footprint-history": {
+        "worker_args": ["--code-footprint-history"],
+        "result_file": "F10_CODE_FOOTPRINT_HISTORY_RESULT.json",
+        "complete_status": "F10_CODE_FOOTPRINT_HISTORY_TARGET_COMPLETE",
+        "failed_status": "F10_CODE_FOOTPRINT_HISTORY_TARGET_FAILED",
+        "claim_ceiling": "Compiled code-footprint timing/PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, target coupling, or Small Wall crossing claim",
+    },
 }
 FORBIDDEN_PROCESS_MARKERS = (
     "f10_pmc_first_light_worker",

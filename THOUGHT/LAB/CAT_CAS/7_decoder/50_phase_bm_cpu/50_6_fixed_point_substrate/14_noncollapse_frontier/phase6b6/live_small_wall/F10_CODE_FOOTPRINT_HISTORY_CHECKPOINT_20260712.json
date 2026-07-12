@@ -1,0 +1,83 @@
+{
+  "schema_id": "CAT_CAS_SMALL_WALL_CODE_FOOTPRINT_HISTORY_CHECKPOINT_V1",
+  "result": "CODE_FOOTPRINT_HISTORY_RESPONSE_NOT_ESTABLISHED",
+  "run_id": "f10_code_footprint_history_0",
+  "mode": "code-footprint-history",
+  "source_binding": {
+    "source_bundle_sha256": "654c2958493adf6b8a0014e62e2d01c2590af8b662222ed9dfb8af1ea8e73630",
+    "source_hashes": {
+      "f10_pmc_first_light_target.py": "a5e3b707597be8f3d39bc7aeefc238a3105858ec034bb958e8bc2cb0bf3d8069",
+      "f10_pmc_first_light_worker.c": "62574c77b57259edd63cd3a88a9c4efdad318ade33acda18c7799c1740bb75a1"
+    }
+  },
+  "run_paths": {
+    "local_run": "runs/f10_code_footprint_history_0",
+    "worker_result": "runs/f10_code_footprint_history_0/F10_CODE_FOOTPRINT_HISTORY_RESULT.json",
+    "final_result": "runs/f10_code_footprint_history_0/FINAL_RESULT.json",
+    "controller_result": "runs/f10_code_footprint_history_0/CONTROLLER_RESULT.json"
+  },
+  "lab_device": {
+    "host": "root@192.168.137.100",
+    "cpu_model": "AMD Phenom(tm) II X6 1090T Processor",
+    "kernel": "6.12.86+deb13-amd64"
+  },
+  "predeclared_experiment": {
+    "carrier": "compiled CAT_CAS-owned instruction-stream/code-footprint state over fixed noinline code blocks",
+    "source_operator": "neutral, forward, reverse, or shuffle balanced code-block call histories on core 5",
+    "sentinel": "fixed compiled code-block call sequence on core 5",
+    "observable": "code_footprint_group PMU counters and sentinel duration",
+    "killing_control": "neutral versus shuffle code-footprint control spread",
+    "restoration_class": "static code-pattern digest unchanged after history and after neutral restore; no physical restoration claim beyond the measured equivalence"
+  },
+  "transaction_integrity": {
+    "target_status": "F10_CODE_FOOTPRINT_HISTORY_TARGET_COMPLETE",
+    "worker_status": "CODE_FOOTPRINT_HISTORY_RESPONSE_NOT_ESTABLISHED",
+    "copy_verified": true,
+    "verified_file_count": 2,
+    "remote_cleaned": true,
+    "remote_returncode": 0,
+    "temperature_preflight_c": 39.625,
+    "temperature_post_c": 40.0,
+    "temperature_veto_c": 68.0,
+    "temperature_below_veto": true,
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "forbidden_process_matches_preflight": 0,
+    "forbidden_process_matches_cleanup": 0
+  },
+  "observed_counts": {
+    "cache_misses": {
+      "identity": 6,
+      "forward": 0,
+      "reverse": 0,
+      "shuffle": 0,
+      "forward_reverse_delta": 0,
+      "control_floor": 6,
+      "threshold": 32,
+      "signal": false
+    },
+    "duration_ns": {
+      "identity": 290979,
+      "forward": 285395,
+      "reverse": 190402,
+      "shuffle": 190053,
+      "forward_reverse_delta": 94993,
+      "control_floor": 100926,
+      "threshold": 302778,
+      "signal": false
+    }
+  },
+  "acceptance": {
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "patterns_unchanged_after_history": true,
+    "patterns_unchanged_after_restore": true,
+    "cache_miss_signal": false,
+    "duration_signal": false,
+    "code_footprint_history_response": false
+  },
+  "claim_ceiling": "Compiled code-footprint timing/PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, target coupling, or Small Wall crossing claim",
+  "frontier_update": "The compiled code-footprint history carrier is negative under this sentinel. Do not rerun this neutral/forward/reverse/shuffle code-footprint sequence unchanged."
+}

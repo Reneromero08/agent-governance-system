@@ -832,6 +832,7 @@ F10_HISTORY_SENTINEL_CHECKPOINT_20260712.json
 F10_BRANCH_HISTORY_CHECKPOINT_20260712.json
 F10_TRANSLATION_HISTORY_CHECKPOINT_20260712.json
 F10_PREFETCH_STREAM_CHECKPOINT_20260712.json
+F10_CODE_FOOTPRINT_HISTORY_CHECKPOINT_20260712.json
 CODED_PREPROJECTION_DECLARATION_SHAM_CHECKPOINT_20260712.json
 CODED_PREPROJECTION_PHASE_LOCAL_CHECKPOINT_20260712.json
 CODED_PREPROJECTION_ACTIVE_QUERY_CHECKPOINT_20260712.json
@@ -1958,14 +1959,68 @@ It changed the access model by combining source-side pre-projection phase choppi
 receiver active-query deltas, but the resulting fold-odd coordinate was same-signed and
 below controls. Do not rerun this exact combined schedule unchanged.
 
+### Code-footprint history carrier
+
+The code-footprint history discriminator changed carrier family to compiled
+CAT_CAS-owned instruction-stream/code-footprint state. It used fixed noinline code
+blocks, neutral/forward/reverse/shuffle call-order histories, and a fixed code-block
+sentinel on core 5 under the `code_footprint_group` PMU group:
+
+```text
+run id        f10_code_footprint_history_0
+source bundle 654c2958493adf6b8a0014e62e2d01c2590af8b662222ed9dfb8af1ea8e73630
+worker status CODE_FOOTPRINT_HISTORY_RESPONSE_NOT_ESTABLISHED
+```
+
+The transaction completed with verified copy-back and remote cleanup. It performed
+zero frequency writes, zero voltage access, zero MSR reads/writes, stayed below the
+68 C temperature veto, found no forbidden CAT_CAS process residue, all PMU windows
+were unmultiplexed, and the static code-pattern digest was unchanged after history and
+after neutral restore.
+
+Code-footprint sentinel contrasts:
+
+```text
+cache_misses:
+  identity 6
+  forward  0
+  reverse  0
+  shuffle  0
+  delta    0
+  floor    6
+  threshold 32
+  signal false
+
+duration_ns:
+  identity 290979
+  forward  285395
+  reverse  190402
+  shuffle  190053
+  delta     94993
+  floor    100926
+  threshold 302778
+  signal false
+```
+
+Checkpoint:
+
+`F10_CODE_FOOTPRINT_HISTORY_CHECKPOINT_20260712.json`
+
+**Status:** this exact compiled code-footprint history carrier is negative. It changes
+the carrier away from data-cache/coherence ownership, branch outcomes, indirect
+targets, translation footprint, prefetch streams, store/load aliasing, locked no-ops,
+process lifecycle, and active-query/source-chop schedules, but the forward/reverse
+residuals remain inside neutral/shuffle controls. Do not rerun this
+neutral/forward/reverse/shuffle code-footprint sequence unchanged.
+
 ## Cheapest current discriminator
 
 Change carrier family or access model again, not another remap of the same
 phase-local timing/PMU/eviction/active-query/source-phase-chop/restored-history,
 simple branch-history/indirect-target-history/translation-footprint/prefetch-stream
-geometry, same-page-offset store/load alias-history, locked no-op history, the
-combined active-query/source-phase-chop schedule, or the current fresh source-process
-lifecycle sentinel. The run must stay closed:
+geometry, same-page-offset store/load alias-history, locked no-op history,
+compiled code-footprint history, the combined active-query/source-phase-chop schedule,
+or the current fresh source-process lifecycle sentinel. The run must stay closed:
 CAT_CAS-owned buffers only, predetermined geometry, no physical-address access, no
 cache-set mapping, no unrelated-process observation, and no MSR or voltage access.
 
@@ -1997,7 +2052,9 @@ Do not rerun `f10_indirect_target_history_0` or the same
 neutral/forward/reverse/shuffle indirect-target sequence unchanged. Do not rerun
 `f10_store_load_alias_0` or the same neutral/forward/reverse/shuffle same-offset
 store/load alias sequence unchanged. Do not rerun `f10_locked_history_0` or the same
-neutral/forward/reverse/shuffle locked-history sequence unchanged.
+neutral/forward/reverse/shuffle locked-history sequence unchanged. Do not rerun
+`f10_code_footprint_history_0` or the same neutral/forward/reverse/shuffle compiled
+code-footprint sequence unchanged.
 
 ## Current claim ceiling
 
@@ -2046,13 +2103,14 @@ conditional outcomes to indirect target selection and also stayed negative.
 alias history and also stayed negative. `f10_locked_history_0` then changed the
 ownership operator to serializing locked logical no-ops and also stayed negative.
 `coded_preprojection_active_source_chop_0` then combined receiver active-query deltas
-with source-side phase chopping and also stayed negative. The next move must change
-carrier family or access model rather than keep remapping the
+with source-side phase chopping and also stayed negative. `f10_code_footprint_history_0`
+then tested compiled instruction-stream/code-footprint state and also stayed negative.
+The next move must change carrier family or access model rather than keep remapping the
 same eviction-sentinel PMU/timing, active-query phase-local, source-phase-chop,
 restored two-line-set ownership-history, simple branch-history, indirect-target-
 history, translation-footprint, store/load alias-history, locked-history,
-prefetch-stream, combined active-query/source-chop, or source-process lifecycle
-geometry.
+prefetch-stream, combined active-query/source-chop, source-process lifecycle, or
+compiled code-footprint history geometry.
 
 ## State update rule
 
