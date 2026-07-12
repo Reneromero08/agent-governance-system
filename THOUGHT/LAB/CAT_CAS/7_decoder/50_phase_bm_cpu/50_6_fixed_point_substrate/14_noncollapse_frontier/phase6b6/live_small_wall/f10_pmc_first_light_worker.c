@@ -44,6 +44,7 @@
 #define IBS_FIRST_LIGHT_RESULT_SCHEMA "CAT_CAS_F10_IBS_FIRST_LIGHT_RESULT_V1"
 #define WC_FLUSH_ORDER_RESULT_SCHEMA "CAT_CAS_F10_WC_FLUSH_ORDER_RESULT_V1"
 #define EVICTION_SENTINEL_RESULT_SCHEMA "CAT_CAS_F10_EVICTION_SENTINEL_RESULT_V1"
+#define EVICTION_PHASE_LOCAL_RESULT_SCHEMA "CAT_CAS_F10_EVICTION_PHASE_LOCAL_RESULT_V1"
 #define PHASE_LOCAL_BANK_LINES 512u
 #define EVICTION_LINES 262144u
 #define EVICTION_ITERATIONS 3
@@ -158,6 +159,13 @@ struct phase_local_window_spec {
     int phase_index;
     size_t line_count;
     size_t start_bank;
+};
+
+struct eviction_phase_window_spec {
+    const char *token;
+    const char *role;
+    int phase_index;
+    enum eviction_prep_op prep;
 };
 
 static const struct event_def support_events[SUPPORT_EVENTS] = {
@@ -2116,6 +2124,39 @@ static void decode_phase_observable(
     decoded->minus_imag = 0.5L * (minus[1] - minus[3]);
 }
 
+static void decode_eviction_phase_observable(
+    const struct eviction_phase_window_spec windows[12],
+    const struct group_result results[12],
+    const char *event_name,
+    struct phase_decode *decoded
+) {
+    long double p[4] = {0.0L, 0.0L, 0.0L, 0.0L};
+    long double c[4] = {0.0L, 0.0L, 0.0L, 0.0L};
+    long double m[4] = {0.0L, 0.0L, 0.0L, 0.0L};
+    for (int i = 0; i < 12; i++) {
+        int phase = windows[i].phase_index;
+        if (phase < 0 || phase >= 4) continue;
+        long double value = normalized_event_value(&results[i], primary_group, event_name);
+        if (strcmp(windows[i].role, "P") == 0) {
+            p[phase] = value;
+        } else if (strcmp(windows[i].role, "C") == 0) {
+            c[phase] = value;
+        } else if (strcmp(windows[i].role, "M") == 0) {
+            m[phase] = value;
+        }
+    }
+    long double plus[4];
+    long double minus[4];
+    for (int phase = 0; phase < 4; phase++) {
+        plus[phase] = p[phase] - c[phase];
+        minus[phase] = m[phase] - c[phase];
+    }
+    decoded->plus_real = 0.5L * (plus[0] - plus[2]);
+    decoded->plus_imag = 0.5L * (plus[1] - plus[3]);
+    decoded->minus_real = 0.5L * (minus[0] - minus[2]);
+    decoded->minus_imag = 0.5L * (minus[1] - minus[3]);
+}
+
 static bool opposed_sign(long double a, long double b) {
     return (a > 0.0L && b < 0.0L) || (a < 0.0L && b > 0.0L);
 }
@@ -2147,6 +2188,197 @@ static bool phase_decode_signal(const struct phase_decode *sham, const struct ph
     long double min_candidate = abs_ld(candidate->plus_imag) < abs_ld(candidate->minus_imag) ?
         abs_ld(candidate->plus_imag) : abs_ld(candidate->minus_imag);
     return opposed_sign(candidate->plus_imag, candidate->minus_imag) && min_candidate > 3.0L * sham_floor;
+}
+
+static int run_eviction_phase_local_mode(const char *output_root, struct carrier *carrier, uint64_t initial_digest) {
+    struct carrier eviction;
+    eviction.line_count = EVICTION_LINES;
+    eviction.byte_count = EVICTION_LINES * CACHE_LINE_BYTES;
+    if (posix_memalign((void **)&eviction.bytes, CACHE_LINE_BYTES, eviction.byte_count) != 0) {
+        fprintf(stderr, "eviction allocation failed\n");
+        return 1;
+    }
+    init_carrier(&eviction);
+    uint64_t eviction_initial_digest = fnv1a64(eviction.bytes, eviction.byte_count);
+
+    int primary_fds[MAX_GROUP_EVENTS];
+    uint64_t primary_ids[MAX_GROUP_EVENTS];
+    int primary_open_rc = open_group(primary_group, CATCAS_CORE_B, primary_fds, primary_ids);
+    if (primary_open_rc == 0) {
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(primary_fds[i]);
+    }
+
+    enum { EVICTION_PHASE_VARIANT_COUNT = 2, EVICTION_PHASE_WINDOW_COUNT = 12 };
+    const enum eviction_prep_op control_prep = EVICT_PREP_REMOTE_READ;
+    const enum eviction_prep_op high_prep = EVICT_PREP_HOME_READ;
+    const enum eviction_prep_op low_prep = EVICT_PREP_HOME_WRITE;
+    const char *variant_names[EVICTION_PHASE_VARIANT_COUNT] = {
+        "equal_prep_sham",
+        "high_low_candidate"
+    };
+    const struct eviction_phase_window_spec windows[EVICTION_PHASE_VARIANT_COUNT][EVICTION_PHASE_WINDOW_COUNT] = {
+        {
+            {"P0", "P", 0, EVICT_PREP_REMOTE_READ},
+            {"C0", "C", 0, EVICT_PREP_REMOTE_READ},
+            {"M0", "M", 0, EVICT_PREP_REMOTE_READ},
+            {"M1", "M", 1, EVICT_PREP_REMOTE_READ},
+            {"C1", "C", 1, EVICT_PREP_REMOTE_READ},
+            {"P1", "P", 1, EVICT_PREP_REMOTE_READ},
+            {"P2", "P", 2, EVICT_PREP_REMOTE_READ},
+            {"C2", "C", 2, EVICT_PREP_REMOTE_READ},
+            {"M2", "M", 2, EVICT_PREP_REMOTE_READ},
+            {"M3", "M", 3, EVICT_PREP_REMOTE_READ},
+            {"C3", "C", 3, EVICT_PREP_REMOTE_READ},
+            {"P3", "P", 3, EVICT_PREP_REMOTE_READ}
+        },
+        {
+            {"P0", "P", 0, EVICT_PREP_HOME_READ},
+            {"C0", "C", 0, EVICT_PREP_REMOTE_READ},
+            {"M0", "M", 0, EVICT_PREP_HOME_WRITE},
+            {"M1", "M", 1, EVICT_PREP_HOME_WRITE},
+            {"C1", "C", 1, EVICT_PREP_REMOTE_READ},
+            {"P1", "P", 1, EVICT_PREP_HOME_READ},
+            {"P2", "P", 2, EVICT_PREP_HOME_READ},
+            {"C2", "C", 2, EVICT_PREP_REMOTE_READ},
+            {"M2", "M", 2, EVICT_PREP_HOME_WRITE},
+            {"M3", "M", 3, EVICT_PREP_HOME_READ},
+            {"C3", "C", 3, EVICT_PREP_REMOTE_READ},
+            {"P3", "P", 3, EVICT_PREP_HOME_WRITE}
+        }
+    };
+
+    struct group_result results[EVICTION_PHASE_VARIANT_COUNT][EVICTION_PHASE_WINDOW_COUNT];
+    uint64_t durations[EVICTION_PHASE_VARIANT_COUNT][EVICTION_PHASE_WINDOW_COUNT];
+    uint64_t digest_before[EVICTION_PHASE_VARIANT_COUNT][EVICTION_PHASE_WINDOW_COUNT];
+    uint64_t digest_after[EVICTION_PHASE_VARIANT_COUNT][EVICTION_PHASE_WINDOW_COUNT];
+    uint64_t eviction_digest_after[EVICTION_PHASE_VARIANT_COUNT][EVICTION_PHASE_WINDOW_COUNT];
+    int window_rc[EVICTION_PHASE_VARIANT_COUNT][EVICTION_PHASE_WINDOW_COUNT];
+
+    for (int variant = 0; variant < EVICTION_PHASE_VARIANT_COUNT; variant++) {
+        for (int i = 0; i < EVICTION_PHASE_WINDOW_COUNT; i++) {
+            memset(&results[variant][i], 0, sizeof(results[variant][i]));
+            durations[variant][i] = 0;
+            digest_before[variant][i] = 0;
+            digest_after[variant][i] = 0;
+            eviction_digest_after[variant][i] = 0;
+            if (primary_open_rc != 0) {
+                window_rc[variant][i] = -ENODEV;
+            } else {
+                window_rc[variant][i] = measure_eviction_sentinel_window(
+                    primary_group,
+                    windows[variant][i].prep,
+                    carrier,
+                    &eviction,
+                    &results[variant][i],
+                    &durations[variant][i],
+                    &digest_before[variant][i],
+                    &digest_after[variant][i],
+                    &eviction_digest_after[variant][i]
+                );
+            }
+        }
+    }
+
+    bool all_windows_ok = true;
+    bool all_unmultiplexed = true;
+    bool carrier_restored = true;
+    bool eviction_restored = true;
+    for (int variant = 0; variant < EVICTION_PHASE_VARIANT_COUNT; variant++) {
+        for (int i = 0; i < EVICTION_PHASE_WINDOW_COUNT; i++) {
+            all_windows_ok = all_windows_ok && window_rc[variant][i] == 0;
+            all_unmultiplexed = all_unmultiplexed && results[variant][i].unmultiplexed;
+            carrier_restored = carrier_restored && digest_after[variant][i] == initial_digest;
+            eviction_restored = eviction_restored && eviction_digest_after[variant][i] == eviction_initial_digest;
+        }
+    }
+
+    struct phase_decode sham_c2d;
+    struct phase_decode candidate_c2d;
+    struct phase_decode sham_probe;
+    struct phase_decode candidate_probe;
+    decode_eviction_phase_observable(windows[0], results[0], "cache_block_commands_change_to_dirty", &sham_c2d);
+    decode_eviction_phase_observable(windows[1], results[1], "cache_block_commands_change_to_dirty", &candidate_c2d);
+    decode_eviction_phase_observable(windows[0], results[0], "probe_responses_dirty", &sham_probe);
+    decode_eviction_phase_observable(windows[1], results[1], "probe_responses_dirty", &candidate_probe);
+    bool c2d_signal = phase_decode_signal(&sham_c2d, &candidate_c2d);
+    bool probe_signal = phase_decode_signal(&sham_probe, &candidate_probe);
+    bool eviction_phase_local_captured = primary_open_rc == 0 && all_windows_ok && all_unmultiplexed &&
+        carrier_restored && eviction_restored && (c2d_signal || probe_signal);
+
+    char result_path[4096];
+    int n = snprintf(result_path, sizeof(result_path), "%s/F10_EVICTION_PHASE_LOCAL_RESULT.json", output_root);
+    if (n <= 0 || (size_t)n >= sizeof(result_path)) {
+        free(eviction.bytes);
+        return 1;
+    }
+    FILE *out = fopen(result_path, "w");
+    if (!out) {
+        fprintf(stderr, "cannot open result: %s\n", strerror(errno));
+        free(eviction.bytes);
+        return 1;
+    }
+
+    fprintf(out, "{\n");
+    fprintf(out, "  \"schema_id\": \"%s\",\n", EVICTION_PHASE_LOCAL_RESULT_SCHEMA);
+    fprintf(out, "  \"status\": \"%s\",\n", eviction_phase_local_captured ? "EVICTION_PHASE_LOCAL_CODED_RESPONSE_FOUND" : "EVICTION_PHASE_LOCAL_CODED_RESPONSE_NOT_ESTABLISHED");
+    fprintf(out, "  \"claim_ceiling\": \"Phase-local eviction-sentinel PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim\",\n");
+    fprintf(out, "  \"cores\": {\"home_core\": %d, \"observed_core\": %d},\n", CATCAS_CORE_A, CATCAS_CORE_B);
+    fprintf(out, "  \"source_constraints\": {\"direct_msr_access\": false, \"voltage_access\": false, \"frequency_writes\": 0, \"experiment_owned_memory_only\": true, \"physical_address_access\": false, \"cache_set_mapping\": false, \"private_branch_routing\": false},\n");
+    fprintf(out, "  \"carrier\": {\"line_count\": %zu, \"line_bytes\": %d, \"byte_count\": %zu, \"digest_kind\": \"fnv1a64\", \"initial_digest_hex\": \"0x%016" PRIx64 "\"},\n", carrier->line_count, CACHE_LINE_BYTES, carrier->byte_count, initial_digest);
+    fprintf(out, "  \"eviction_buffer\": {\"line_count\": %zu, \"line_bytes\": %d, \"byte_count\": %zu, \"iterations\": %d, \"digest_kind\": \"fnv1a64\", \"initial_digest_hex\": \"0x%016" PRIx64 "\"},\n", eviction.line_count, CACHE_LINE_BYTES, eviction.byte_count, EVICTION_ITERATIONS, eviction_initial_digest);
+    fprintf(out, "  \"prep_mapping\": {\"control\": \"%s\", \"high\": \"%s\", \"low\": \"%s\"},\n",
+        eviction_prep_op_name(control_prep),
+        eviction_prep_op_name(high_prep),
+        eviction_prep_op_name(low_prep));
+    fprintf(out, "  \"selected_group\": \"primary_nb_coherence\",\n");
+    fprintf(out, "  \"group_open_rc\": %d,\n", primary_open_rc);
+    fprintf(out, "  \"selected_events\": ");
+    print_group_defs(out, primary_group);
+    fprintf(out, ",\n");
+    fprintf(out, "  \"phase_local_layout\": {\"sequence\": \"P0 C0 M0 M1 C1 P1 P2 C2 M2 M3 C3 P3\", \"phases\": [\"0\", \"pi/2\", \"pi\", \"3pi/2\"], \"plus\": \"P-C\", \"minus\": \"M-C\", \"decode\": \"z=(2/4)*sum(response_k*exp(i*theta_k))\"},\n");
+    fprintf(out, "  \"predeclared_observable\": {\"sentinel\": \"remote_store_same_value over carrier after each eviction-buffer precondition\", \"sham\": \"all P/C/M windows use control prep\", \"candidate\": \"P and M swap high/low preps across imaginary quadrature phases\", \"acceptance\": \"opposed candidate Im plus/minus and min(abs(candidate imag)) > 3 * sham_floor for either established coherence counter\"},\n");
+    fprintf(out, "  \"variants\": [\n");
+    for (int variant = 0; variant < EVICTION_PHASE_VARIANT_COUNT; variant++) {
+        fprintf(out, "    {\"name\": \"%s\", \"windows\": [\n", variant_names[variant]);
+        for (int i = 0; i < EVICTION_PHASE_WINDOW_COUNT; i++) {
+            fprintf(out, "      {\"token\": \"%s\", \"role\": \"%s\", \"phase_index\": %d, \"prep\": \"%s\", \"rc\": %d, \"duration_ns\": %" PRIu64 ", \"carrier_digest_before_hex\": \"0x%016" PRIx64 "\", \"carrier_digest_after_restore_hex\": \"0x%016" PRIx64 "\", \"carrier_restored\": %s, \"eviction_digest_after_hex\": \"0x%016" PRIx64 "\", \"eviction_restored\": %s, \"group\": ",
+                windows[variant][i].token,
+                windows[variant][i].role,
+                windows[variant][i].phase_index,
+                eviction_prep_op_name(windows[variant][i].prep),
+                window_rc[variant][i],
+                durations[variant][i],
+                digest_before[variant][i],
+                digest_after[variant][i],
+                json_bool(digest_after[variant][i] == initial_digest),
+                eviction_digest_after[variant][i],
+                json_bool(eviction_digest_after[variant][i] == eviction_initial_digest));
+            print_group_result(out, primary_group, &results[variant][i]);
+            fprintf(out, "}%s\n", i + 1 == EVICTION_PHASE_WINDOW_COUNT ? "" : ",");
+        }
+        fprintf(out, "    ]}%s\n", variant + 1 == EVICTION_PHASE_VARIANT_COUNT ? "" : ",");
+    }
+    fprintf(out, "  ],\n");
+    fprintf(out, "  \"decoded_observables\": [");
+    print_phase_decode(out, "cache_block_commands_change_to_dirty", &sham_c2d, &candidate_c2d);
+    fprintf(out, ",");
+    print_phase_decode(out, "probe_responses_dirty", &sham_probe, &candidate_probe);
+    fprintf(out, "],\n");
+    fprintf(out, "  \"acceptance\": {\"all_windows_ok\": %s, \"all_unmultiplexed\": %s, \"carrier_restored\": %s, \"eviction_buffer_restored\": %s, \"change_to_dirty_phase_local_signal\": %s, \"probe_dirty_phase_local_signal\": %s, \"eviction_phase_local_captured\": %s}\n",
+        json_bool(all_windows_ok),
+        json_bool(all_unmultiplexed),
+        json_bool(carrier_restored),
+        json_bool(eviction_restored),
+        json_bool(c2d_signal),
+        json_bool(probe_signal),
+        json_bool(eviction_phase_local_captured));
+    fprintf(out, "}\n");
+    fclose(out);
+    free(eviction.bytes);
+    printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"primary_nb_coherence\"}\n",
+        eviction_phase_local_captured ? "EVICTION_PHASE_LOCAL_CODED_RESPONSE_FOUND" : "EVICTION_PHASE_LOCAL_CODED_RESPONSE_NOT_ESTABLISHED",
+        result_path);
+    return 0;
 }
 
 static int run_phase_local_pmu_mode(const char *output_root, struct carrier *carrier, uint64_t initial_digest) {
@@ -2769,6 +3001,7 @@ int main(int argc, char **argv) {
     bool ibs_first_light_mode = false;
     bool wc_flush_order_mode = false;
     bool eviction_sentinel_mode = false;
+    bool eviction_phase_local_mode = false;
     if (argc == 3 && strcmp(argv[1], "--output-root") == 0) {
         output_root = argv[2];
     } else if (argc == 4 && strcmp(argv[1], "--coherence-operators") == 0 &&
@@ -2807,10 +3040,14 @@ int main(int argc, char **argv) {
                strcmp(argv[2], "--output-root") == 0) {
         eviction_sentinel_mode = true;
         output_root = argv[3];
+    } else if (argc == 4 && strcmp(argv[1], "--eviction-phase-local") == 0 &&
+               strcmp(argv[2], "--output-root") == 0) {
+        eviction_phase_local_mode = true;
+        output_root = argv[3];
     } else if (argc == 2 && strcmp(argv[1], "--self-test") == 0) {
         return self_test();
     } else {
-        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root>\n", argv[0]);
+        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root> | --ibs-first-light --output-root <absolute-output-root> | --wc-flush-order --output-root <absolute-output-root> | --eviction-sentinel --output-root <absolute-output-root> | --eviction-phase-local --output-root <absolute-output-root>\n", argv[0]);
         return 2;
     }
     if (output_root[0] != '/') {
@@ -2874,6 +3111,11 @@ int main(int argc, char **argv) {
     }
     if (eviction_sentinel_mode) {
         int rc = run_eviction_sentinel_mode(output_root, &carrier, initial_digest);
+        free(carrier.bytes);
+        return rc;
+    }
+    if (eviction_phase_local_mode) {
+        int rc = run_eviction_phase_local_mode(output_root, &carrier, initial_digest);
         free(carrier.bytes);
         return rc;
     }

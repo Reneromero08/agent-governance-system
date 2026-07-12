@@ -1,0 +1,107 @@
+{
+  "schema_id": "CAT_CAS_F10_EVICTION_PHASE_LOCAL_CHECKPOINT_V1",
+  "checkpoint_date": "2026-07-12",
+  "starting_commit": "3e44e6cf2715fe131aee406c3a2a5c00bc538390",
+  "source_bundle_sha256": "46f9e54c27d59b0bf315c326054386f1cb0c8403c6954ada56953b338283e647",
+  "run": {
+    "run_id": "f10_eviction_phase_local_0",
+    "mode": "eviction-phase-local",
+    "local_run": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/f10_eviction_phase_local_0",
+    "remote_run": "/root/catcas_live_small_wall/f10_eviction_phase_local_0",
+    "command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_coherence_operators.py --run-id f10_eviction_phase_local_0 --mode eviction-phase-local",
+    "lab_device": "root@192.168.137.100",
+    "remote_returncode": 0,
+    "lab_device_status": "F10_EVICTION_PHASE_LOCAL_TARGET_COMPLETE",
+    "worker_status": "EVICTION_PHASE_LOCAL_CODED_RESPONSE_NOT_ESTABLISHED",
+    "copy_verified": true,
+    "remote_cleaned": true
+  },
+  "predeclared_observable": {
+    "carrier": "eviction-sentinel PMU response after predetermined CAT_CAS-owned eviction-buffer preconditioning",
+    "sequence": "P0 C0 M0 M1 C1 P1 P2 C2 M2 M3 C3 P3",
+    "control_prep": "remote_read_eviction",
+    "high_prep": "home_read_eviction",
+    "low_prep": "home_write_eviction",
+    "sham": "all P/C/M windows use control prep",
+    "candidate": "P and M swap high/low preps across imaginary quadrature phases",
+    "decode": "z=(2/4)*sum(response_k*exp(i*theta_k))",
+    "acceptance": "opposed candidate Im plus/minus and min(abs(candidate imag)) > 3 * sham_floor for either established coherence counter"
+  },
+  "decoded_observables": {
+    "cache_block_commands_change_to_dirty": {
+      "sham_floor": 0.00001668580446326,
+      "sham_plus_imag": -0.00001071616244111,
+      "sham_minus_imag": -0.00001668580446326,
+      "candidate_plus_imag": 0.0000004686098717265,
+      "candidate_minus_imag": -0.000004409157976248,
+      "opposed_sign": true,
+      "exceeds_three_x_sham_floor": false,
+      "phase_local_signal": false
+    },
+    "probe_responses_dirty": {
+      "sham_floor": 0.00002003894391992,
+      "sham_plus_imag": -0.000003935934931505,
+      "sham_minus_imag": -0.00002003894391992,
+      "candidate_plus_imag": 0.000003147384793339,
+      "candidate_minus_imag": 0.0000003938122407007,
+      "opposed_sign": false,
+      "exceeds_three_x_sham_floor": false,
+      "phase_local_signal": false
+    }
+  },
+  "acceptance": {
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "carrier_restored": true,
+    "eviction_buffer_restored": true,
+    "change_to_dirty_phase_local_signal": false,
+    "probe_dirty_phase_local_signal": false,
+    "eviction_phase_local_captured": false
+  },
+  "lab_device_boundary": {
+    "temperature_preflight_c": 49.5,
+    "temperature_post_c": 49.5,
+    "temperature_veto_c": 68.0,
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "forbidden_process_matches_before": 0,
+    "forbidden_process_matches_after": 0,
+    "physical_address_access": false,
+    "cache_set_mapping": false,
+    "experiment_owned_memory_only": true
+  },
+  "raw_outputs": {
+    "F10_EVICTION_PHASE_LOCAL_RESULT.json": {
+      "size": 20217,
+      "sha256": "9db1666994e9234d1625637eb2fa8bd64500ea86085760c4d4f5f84ffffe7d54"
+    },
+    "FINAL_RESULT.json": {
+      "size": 2668,
+      "sha256": "0de09ee562317933c1ba24a3cfd22b8da8ef402176725d6d03181da62f2a53f3"
+    },
+    "CONTROLLER_RESULT.json": {
+      "size": 890,
+      "sha256": "4b1c6251a47ab0127a727ddca7720e7f3a5a3d0811a935393c5be6bac688a205"
+    },
+    "FILE_MANIFEST.json": {
+      "size": 325,
+      "sha256": "9bf6e70a67d06f87f005a624e168da0ac7a0c69b7edb802f20e0fe6147aaad9f"
+    },
+    "CONTROLLER_STDOUT.txt": {
+      "size": 2798,
+      "sha256": "dbab0a4f0b984e0d9870dfea209c3f2877742d124cb8fc217980e77295c4f9cc"
+    },
+    "CONTROLLER_STDERR.txt": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "classification": {
+    "marker": "EVICTION_PHASE_LOCAL_CODED_RESPONSE_NOT_ESTABLISHED",
+    "mechanical_failure": false,
+    "scientific_result": "negative for this high/low phase-local mapping",
+    "interpretation": "The eviction-sentinel carrier exists and restored, but this mapping did not overcome equal-prep sham curvature. Do not promote a fold-odd, path-memory, holonomy, or Small Wall claim from this run."
+  }
+}

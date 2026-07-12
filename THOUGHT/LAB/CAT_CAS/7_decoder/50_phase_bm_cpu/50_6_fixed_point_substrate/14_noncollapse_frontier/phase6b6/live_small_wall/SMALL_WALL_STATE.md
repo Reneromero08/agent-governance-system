@@ -6,7 +6,7 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`EVICTION_SENTINEL_RESPONSE_FOUND`
+`EVICTION_PHASE_LOCAL_CODED_RESPONSE_NOT_ESTABLISHED`
 
 **Active wall:**
 The current wall is phase-local use of a newly visible restoration-sentinel carrier
@@ -19,7 +19,11 @@ byte-preserving ownership-intent sentinel while both the carrier and eviction bu
 restore. That is a useful physical carrier, not path memory, holonomy, fold-odd
 recovery, or a Small Wall crossing. The next discriminator must map the public
 P/C/M phases onto this eviction-sentinel carrier with matched equal-prep sham
-controls, fixed quadrature weights, and no private branch routing.
+controls, fixed quadrature weights, and no private branch routing. The first such
+mapping, `f10_eviction_phase_local_0`, completed and restored but failed the
+phase-local rule: the equal-prep sham curvature was larger than the candidate in the
+primary decoded coordinate. The active wall is now sequence-position cancellation for
+the eviction-sentinel carrier, not carrier absence.
 
 ## Established
 
@@ -1156,21 +1160,63 @@ phase-local coded discriminator on this carrier, with an equal-prep sham and fix
 public quadrature weights. This still does not establish path memory, holonomy,
 fold-odd recovery, or a Small Wall crossing.
 
+The first phase-local eviction-sentinel discriminator used the established sentinel
+carrier with public P/C/M phases, an all-control equal-prep sham, and a high/low
+candidate split:
+
+```text
+run id        f10_eviction_phase_local_0
+source bundle 46f9e54c27d59b0bf315c326054386f1cb0c8403c6954ada56953b338283e647
+worker status EVICTION_PHASE_LOCAL_CODED_RESPONSE_NOT_ESTABLISHED
+```
+
+The transaction completed with verified copy-back and remote cleanup, zero frequency
+writes, zero voltage access, zero MSR reads/writes, no physical-address access, no
+cache-set mapping, no unrelated-process observation, temperature below veto, every PMU
+window unmultiplexed, and both carrier and eviction-buffer digests restored.
+
+Decoded observables:
+
+```text
+cache_block_commands_change_to_dirty:
+  sham floor       1.668580446326e-05
+  candidate plus   4.686098717265e-07
+  candidate minus -4.409157976248e-06
+  opposed sign     true
+  signal           false
+
+probe_responses_dirty:
+  sham floor       2.003894391992e-05
+  candidate plus   3.147384793339e-06
+  candidate minus  3.938122407007e-07
+  opposed sign     false
+  signal           false
+```
+
+Checkpoint:
+
+`F10_EVICTION_PHASE_LOCAL_CHECKPOINT_20260712.json`
+
+**Status:** this high/low phase-local mapping is negative. The carrier remains alive,
+but the equal-prep sham exposed sequence-position curvature. The next discriminator
+must cancel local drift by construction, for example by bracketing each P or M token
+with immediate control-prep sentinel windows before decoding.
+
 ## Cheapest current discriminator
 
-Build a phase-local coded discriminator on the eviction-sentinel carrier. The run must
-stay closed: CAT_CAS-owned buffers only, predetermined geometry, no physical-address
-access, no cache-set mapping, no unrelated-process observation, and no MSR or voltage
-access.
+Build a bracketed phase-local coded discriminator on the eviction-sentinel carrier.
+The run must stay closed: CAT_CAS-owned buffers only, predetermined geometry, no
+physical-address access, no cache-set mapping, no unrelated-process observation, and no
+MSR or voltage access.
 
 The next probe should answer:
 
-1. Can the public P/C/M phases be mapped to fixed eviction preconditioners without
-   private branch routing?
-2. Does the equal-prep sham stay bounded under the same phase-local quadrature law?
+1. Can immediate control bracketing remove the sequence-position sham curvature seen
+   in `f10_eviction_phase_local_0`?
+2. Does an equal-bracket sham stay bounded under the same quadrature law?
 3. Does a candidate P/M prep split produce opposed signs in
    `probe_responses_dirty` or `cache_block_commands_change_to_dirty` with magnitude
-   greater than three times the sham floor?
+   greater than three times the bracketed sham floor?
 4. Do carrier bytes and the eviction buffer still restore after every window?
 
 Do not rerun the same timing coded loop, another scalar PMU route metric,
@@ -1195,8 +1241,10 @@ sysfs but not usable through the tested ordinary `perf_event_open` forms.
 under controls. `f10_eviction_sentinel_0` then established a measured
 restoration-sentinel carrier by showing that predetermined eviction-buffer
 preconditioning changes the later ownership-intent sentinel while both buffers restore.
-This marker remains short of `SMALL_WALL_CROSSED`; the next move must use this carrier
-in a phase-local coded discriminator with equal-prep killing controls.
+`f10_eviction_phase_local_0` did not promote that carrier into a phase-local coded
+response because the equal-prep sham curvature exceeded the candidate. This marker
+remains short of `SMALL_WALL_CROSSED`; the next move must cancel sequence-position
+curvature by construction before another promotion attempt.
 
 ## State update rule
 
