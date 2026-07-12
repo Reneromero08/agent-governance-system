@@ -99,6 +99,8 @@ def execute(run_id: str, *, pilot_variant: str, keep_remote: bool) -> dict[str, 
             "coded-preprojection-warm-query-scramble-loop",
             "coded-preprojection-warm-query-off-loop",
             "coded-preprojection-warm-declaration-sham-loop",
+            "coded-preprojection-warm-phase-local-sham-loop",
+            "coded-preprojection-warm-phase-local-loop",
         },
         "pilot variant is not closed",
     )
@@ -196,6 +198,8 @@ def parse_args() -> argparse.Namespace:
             "coded-preprojection-warm-query-scramble-loop",
             "coded-preprojection-warm-query-off-loop",
             "coded-preprojection-warm-declaration-sham-loop",
+            "coded-preprojection-warm-phase-local-sham-loop",
+            "coded-preprojection-warm-phase-local-loop",
         ),
         default="pn",
     )

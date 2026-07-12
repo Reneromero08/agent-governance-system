@@ -1,0 +1,224 @@
+{
+  "schema_id": "CAT_CAS_CODED_PREPROJECTION_PHASE_LOCAL_CHECKPOINT_V1",
+  "claim_ceiling": "CONTROLLED_COHERENCE_STATE_FOUND",
+  "phase_local_layout": {
+    "tokens": [
+      "WU",
+      "WU",
+      "N0",
+      "P0",
+      "C0",
+      "M0",
+      "M1",
+      "C1",
+      "P1",
+      "P2",
+      "C2",
+      "M2",
+      "M3",
+      "C3",
+      "P3",
+      "N1"
+    ],
+    "pre_plus_slots": [3, 8, 9, 14],
+    "pre_minus_slots": [5, 6, 11, 12],
+    "post_projection_control_slots": [4, 7, 10, 13],
+    "baseline_cancellation": "phase-local P/C/M and M/C/P triples balance each public phase around matched adjacent controls before four-point lock-in reconstruction"
+  },
+  "runs": {
+    "phase_local_sham": {
+      "run_id": "coded_preprojection_warm_phase_local_sham_0",
+      "pilot_variant": "coded-preprojection-warm-phase-local-sham-loop",
+      "source_bundle_sha256": "93eecef06f1fabf0e51a4f81601f214720b13c8e01f05e31564c921bc105036e",
+      "schedule_sha256": "51f3fb66cd4f03dff2d3e9aab9196d4f94d85e221cd552b04eda4929669cca2e",
+      "physical_footprint_pattern": {
+        "P": ["equal", "equal", "equal", "equal"],
+        "M": ["equal", "equal", "equal", "equal"],
+        "C": ["equal", "equal", "equal", "equal"]
+      },
+      "final_status": "GATE_A_FIRST_LIGHT_COMPLETE",
+      "capture_quality_classification": "CAPTURE_ACCEPTED",
+      "copy_verified": true,
+      "remote_cleaned": true,
+      "restoration_complete": true,
+      "preflight_temperature_c": 41.125,
+      "frequency_write_attempt_count": 8,
+      "restoration_readback": {
+        "policy4": {
+          "scaling_min_freq": 800000,
+          "scaling_max_freq": 3200000
+        },
+        "policy5": {
+          "scaling_min_freq": 800000,
+          "scaling_max_freq": 3200000
+        }
+      },
+      "forbidden_access": {
+        "voltage_writes": 0,
+        "msr_reads": 0,
+        "msr_writes": 0
+      },
+      "integrity": {
+        "sample_count_per_slot": [
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000
+        ],
+        "skipped_deadline_count": 0,
+        "missed_deadline_count": 0,
+        "record_integrity_failure": false,
+        "missing_slot": false,
+        "sender_spill": false,
+        "sufficient_during_burst_samples": true,
+        "all_bursts_completed_inside_slots": true
+      },
+      "decoded_coordinates": {
+        "phase_local_sham_plus": {
+          "real": 28.751618303571433,
+          "imag": -23.801065340909098,
+          "abs": 37.32487463390183
+        },
+        "phase_local_sham_minus": {
+          "real": -4.232812499999996,
+          "imag": -29.318252840909096,
+          "abs": 29.622232382175902
+        },
+        "post_projection_control": {
+          "real": 6.338281249999998,
+          "imag": 31.972549715909096,
+          "abs": 32.59475026043888
+        }
+      },
+      "neutral_restoration": {
+        "before_slot": 2,
+        "after_slot": 15,
+        "before_mean_response_cycles": 83.718484375,
+        "after_mean_response_cycles": 83.100453125,
+        "absolute_delta_cycles": 0.6180312500000014,
+        "tolerance_cycles": 5.0,
+        "passed": true
+      },
+      "control_floor_cycles": 31.972549715909096,
+      "phase_local_sham_null_bound_cycles": 95.91764914772729,
+      "phase_local_sham_null_passed": true,
+      "fold_odd_opposed": false,
+      "fold_odd_exceeds_controls": false,
+      "fold_odd_signal_candidate": false,
+      "engineering_candidate": false,
+      "result_path": "runs/coded_preprojection_warm_phase_local_sham_0"
+    },
+    "phase_local_candidate": {
+      "run_id": "coded_preprojection_warm_phase_local_0",
+      "pilot_variant": "coded-preprojection-warm-phase-local-loop",
+      "source_bundle_sha256": "13cca32cbdeb5d06a72109d73901c880c83a40872ba93a5a08b8abec92333fa5",
+      "schedule_sha256": "1144b929905e30f3da1261fdedf5e6393c30d31a41c9a4dd2dc39e8573f4cbc4",
+      "physical_footprint_pattern": {
+        "P": ["large", "large", "small", "small"],
+        "M": ["large", "small", "small", "large"],
+        "C": ["equal", "equal", "equal", "equal"]
+      },
+      "final_status": "GATE_A_FIRST_LIGHT_COMPLETE",
+      "capture_quality_classification": "CAPTURE_ACCEPTED_WITH_SERVICE_SPIKES",
+      "copy_verified": true,
+      "remote_cleaned": true,
+      "restoration_complete": true,
+      "preflight_temperature_c": 41.375,
+      "frequency_write_attempt_count": 8,
+      "restoration_readback": {
+        "policy4": {
+          "scaling_min_freq": 800000,
+          "scaling_max_freq": 3200000
+        },
+        "policy5": {
+          "scaling_min_freq": 800000,
+          "scaling_max_freq": 3200000
+        }
+      },
+      "forbidden_access": {
+        "voltage_writes": 0,
+        "msr_reads": 0,
+        "msr_writes": 0
+      },
+      "integrity": {
+        "sample_count_per_slot": [
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000,
+          1000
+        ],
+        "skipped_deadline_count": 0,
+        "missed_deadline_count": 0,
+        "record_integrity_failure": false,
+        "missing_slot": false,
+        "sender_spill": false,
+        "sufficient_during_burst_samples": true,
+        "all_bursts_completed_inside_slots": true
+      },
+      "decoded_coordinates": {
+        "phase_local_candidate_plus": {
+          "real": 82.53708400974025,
+          "imag": 93.25494115259741,
+          "abs": 124.53455057214173
+        },
+        "phase_local_candidate_minus": {
+          "real": 83.64548836580083,
+          "imag": 5.027810470779222,
+          "abs": 83.7964593648407
+        },
+        "post_projection_control": {
+          "real": 9.233891369047626,
+          "imag": -3.0811011904761902,
+          "abs": 9.734368719199312
+        }
+      },
+      "neutral_restoration": {
+        "before_slot": 2,
+        "after_slot": 15,
+        "before_mean_response_cycles": 83.488671875,
+        "after_mean_response_cycles": 82.85425,
+        "absolute_delta_cycles": 0.634421875000001,
+        "tolerance_cycles": 5.0,
+        "passed": true
+      },
+      "control_floor_cycles": 3.0811011904761902,
+      "fold_odd_opposed": false,
+      "fold_odd_exceeds_controls": false,
+      "fold_odd_signal_candidate": false,
+      "engineering_candidate": false,
+      "result_path": "runs/coded_preprojection_warm_phase_local_0"
+    }
+  },
+  "adjudication": {
+    "marker": "CODED_PREPROJECTION_PHASE_LOCAL_CANDIDATE_NOT_ESTABLISHED",
+    "h5_physical_timing_path_confirmed": false,
+    "h5_physical_timing_path_killed_for_this_layout": true,
+    "small_wall_crossed": false,
+    "rationale": "The phase-local sham removed the previous strict-null failure mode under the predeclared null rule: it did not produce an opposed fold-odd signal and did not exceed its control floor. The matched phase-local physical candidate completed with full custody and neutral restoration, but its plus and minus decoded imaginary components were both positive, so the opposed fold-odd criterion failed. The earlier sequential warm-restored candidate is therefore demoted as layout/baseline-sensitive and cannot be promoted as a Small Wall crossing.",
+    "next_wall": "the timing carrier does not preserve a phase-local fold-odd coordinate under this physical P/M footprint contrast; the next move must change the carrier/observable or the access model rather than repeat the same timing layout"
+  }
+}

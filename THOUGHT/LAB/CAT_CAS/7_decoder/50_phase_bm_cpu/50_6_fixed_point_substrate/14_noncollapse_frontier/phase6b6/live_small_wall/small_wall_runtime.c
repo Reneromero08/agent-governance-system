@@ -52,12 +52,19 @@ static const char *coded_preprojection_warm_query_off_tokens[GATE_A_CODED_PREPRO
     "QO5", "QO6", "QO7", "C0", "C1", "C2", "C3", "N1"
 };
 
+static const char *coded_preprojection_warm_phase_local_sham_tokens[GATE_A_CODED_PREPROJECTION_SLOT_COUNT] = {
+    "WU", "WU", "N0", "P0", "C0", "M0", "M1", "C1",
+    "P1", "P2", "C2", "M2", "M3", "C3", "P3", "N1"
+};
+
 static int gate_a_pilot_variant = GATE_A_PILOT_PN;
 
 static int gate_a_coded_preprojection_pilot(void);
 static int gate_a_coded_preprojection_query_scramble_pilot(void);
 static int gate_a_coded_preprojection_query_off_pilot(void);
 static int gate_a_coded_preprojection_declaration_sham_pilot(void);
+static int gate_a_coded_preprojection_phase_local_sham_pilot(void);
+static int gate_a_coded_preprojection_phase_local_pilot(void);
 static int gate_a_coded_preprojection_stimulus_first_slot(void);
 static int gate_a_coded_preprojection_stimulus_end_slot(void);
 static int gate_a_readonly_occupancy_pilot(void);
@@ -127,7 +134,9 @@ static int gate_a_occupancy_pilot(void) {
            gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_RESTORED_LOOP ||
            gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_QUERY_SCRAMBLE_LOOP ||
            gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_QUERY_OFF_LOOP ||
-           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_DECLARATION_SHAM_LOOP;
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_DECLARATION_SHAM_LOOP ||
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_LOOP ||
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP;
 }
 
 static int gate_a_coded_preprojection_pilot(void) {
@@ -136,7 +145,9 @@ static int gate_a_coded_preprojection_pilot(void) {
            gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_RESTORED_LOOP ||
            gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_QUERY_SCRAMBLE_LOOP ||
            gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_QUERY_OFF_LOOP ||
-           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_DECLARATION_SHAM_LOOP;
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_DECLARATION_SHAM_LOOP ||
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_LOOP ||
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP;
 }
 
 static int gate_a_coded_preprojection_query_scramble_pilot(void) {
@@ -151,11 +162,21 @@ static int gate_a_coded_preprojection_declaration_sham_pilot(void) {
     return gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_DECLARATION_SHAM_LOOP;
 }
 
+static int gate_a_coded_preprojection_phase_local_sham_pilot(void) {
+    return gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_LOOP;
+}
+
+static int gate_a_coded_preprojection_phase_local_pilot(void) {
+    return gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_LOOP ||
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP;
+}
+
 static int gate_a_coded_preprojection_warm_restored_pilot(void) {
     return gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_RESTORED_LOOP ||
            gate_a_coded_preprojection_query_scramble_pilot() ||
            gate_a_coded_preprojection_query_off_pilot() ||
-           gate_a_coded_preprojection_declaration_sham_pilot();
+           gate_a_coded_preprojection_declaration_sham_pilot() ||
+           gate_a_coded_preprojection_phase_local_pilot();
 }
 
 static int gate_a_coded_preprojection_stimulus_first_slot(void) {
@@ -182,7 +203,9 @@ static int gate_a_variant_is_readonly_occupancy(int variant) {
            variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_RESTORED_LOOP ||
            variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_QUERY_SCRAMBLE_LOOP ||
            variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_QUERY_OFF_LOOP ||
-           variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_DECLARATION_SHAM_LOOP;
+           variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_DECLARATION_SHAM_LOOP ||
+           variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_LOOP ||
+           variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP;
 }
 
 static int gate_a_slot_count(void) {
@@ -204,12 +227,14 @@ static const char *gate_a_slot_token(int slot) {
                 ? coded_preprojection_warm_query_scramble_tokens[slot]
                 : (gate_a_coded_preprojection_query_off_pilot()
                     ? coded_preprojection_warm_query_off_tokens[slot]
+                : (gate_a_coded_preprojection_phase_local_pilot()
+                    ? coded_preprojection_warm_phase_local_sham_tokens[slot]
                 : (gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_RESTORED_LOOP ||
                    gate_a_coded_preprojection_declaration_sham_pilot()
                     ? coded_preprojection_warm_restored_tokens[slot]
                 : (gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_RESTORED_LOOP
                     ? coded_preprojection_restored_tokens[slot]
-                    : coded_preprojection_tokens[slot]))))
+                    : coded_preprojection_tokens[slot])))))
             : "OUT_OF_RANGE";
     }
     if (gate_a_readonly_occupancy_pilot()) {
@@ -240,6 +265,22 @@ static size_t gate_a_occupancy_bytes(int slot) {
         int first_slot = gate_a_coded_preprojection_stimulus_first_slot();
         int relative = slot - first_slot;
         if (relative < 0 || relative >= 12) return 0;
+        if (gate_a_coded_preprojection_phase_local_pilot()) {
+            const char *token = gate_a_slot_token(slot);
+            if (gate_a_coded_preprojection_phase_local_sham_pilot()) {
+                return GATE_A_OCCUPANCY_EQUAL_BYTES;
+            }
+            if (token[0] == 'C') return GATE_A_OCCUPANCY_EQUAL_BYTES;
+            if (token[0] == 'P') {
+                return token[1] == '0' || token[1] == '1'
+                    ? GATE_A_OCCUPANCY_LARGE_BYTES : GATE_A_OCCUPANCY_SMALL_BYTES;
+            }
+            if (token[0] == 'M') {
+                return token[1] == '0' || token[1] == '3'
+                    ? GATE_A_OCCUPANCY_LARGE_BYTES : GATE_A_OCCUPANCY_SMALL_BYTES;
+            }
+            return GATE_A_OCCUPANCY_EQUAL_BYTES;
+        }
         if (relative >= 8) return GATE_A_OCCUPANCY_EQUAL_BYTES;
         if (gate_a_coded_preprojection_query_off_pilot() ||
             gate_a_coded_preprojection_declaration_sham_pilot()) {
@@ -353,8 +394,18 @@ static int gate_a_orbit_value(int slot) {
     return slot == 6 || slot == 9 ? 131 : 125;
 }
 
+static int gate_a_coded_phase_index_from_token(const char *token) {
+    if (!token || strlen(token) != 2U) return 0;
+    if (!(token[0] == 'P' || token[0] == 'M' || token[0] == 'C')) return 0;
+    if (token[1] < '0' || token[1] > '3') return 0;
+    return (token[1] - '0') * 2;
+}
+
 static int gate_a_phase_index(int slot) {
     if (gate_a_coded_preprojection_pilot()) {
+        if (gate_a_coded_preprojection_phase_local_pilot()) {
+            return gate_a_coded_phase_index_from_token(gate_a_slot_token(slot));
+        }
         int relative = slot - gate_a_coded_preprojection_stimulus_first_slot();
         if (relative >= 0 && relative < 12) return (relative % 4) * 2;
         return 0;
@@ -2611,7 +2662,7 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
         args->slot_s != 0.5 || args->temperature_veto_c != 68.0 ||
         args->required_frequency_khz != 1600000 ||
         args->pilot_variant < GATE_A_PILOT_PN ||
-        args->pilot_variant > GATE_A_PILOT_CODED_PREPROJECTION_WARM_DECLARATION_SHAM_LOOP) {
+        args->pilot_variant > GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP) {
         return 2;
     }
     gate_a_pilot_variant = args->pilot_variant;

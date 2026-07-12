@@ -39,6 +39,8 @@ CODED_PREPROJECTION_WARM_RESTORED_SCHEDULE_SHA256 = "94cbace65638dd457983475db09
 CODED_PREPROJECTION_WARM_QUERY_SCRAMBLE_SCHEDULE_SHA256 = "88a93ac2a565f612a3a3789b515a187dbb1e4196519962d56a2be09df2eb0ca7"
 CODED_PREPROJECTION_WARM_QUERY_OFF_SCHEDULE_SHA256 = "95d25a543007bdfcdb002ff0ce36642e9f64ef2280d262261e5ea17557482137"
 CODED_PREPROJECTION_WARM_DECLARATION_SHAM_SCHEDULE_SHA256 = "89e53ef27c3799cc9c319283821e728e304a8b36a92ac1a76088f28934992310"
+CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_SCHEDULE_SHA256 = "51f3fb66cd4f03dff2d3e9aab9196d4f94d85e221cd552b04eda4929669cca2e"
+CODED_PREPROJECTION_WARM_PHASE_LOCAL_SCHEDULE_SHA256 = "1144b929905e30f3da1261fdedf5e6393c30d31a41c9a4dd2dc39e8573f4cbc4"
 READONLY_MICRO_READ_HZ = 2_000
 CODED_PREPROJECTION_READ_HZ = 2_000
 LEGACY_READ_HZ = 8_000
@@ -64,6 +66,8 @@ CODED_PREPROJECTION_VARIANTS = frozenset({
     "coded-preprojection-warm-query-scramble-loop",
     "coded-preprojection-warm-query-off-loop",
     "coded-preprojection-warm-declaration-sham-loop",
+    "coded-preprojection-warm-phase-local-sham-loop",
+    "coded-preprojection-warm-phase-local-loop",
 })
 CODED_PREPROJECTION_RESTORED_VARIANTS = frozenset({
     "coded-preprojection-restored-loop",
@@ -73,6 +77,8 @@ CODED_PREPROJECTION_WARM_RESTORED_VARIANTS = frozenset({
     "coded-preprojection-warm-query-scramble-loop",
     "coded-preprojection-warm-query-off-loop",
     "coded-preprojection-warm-declaration-sham-loop",
+    "coded-preprojection-warm-phase-local-sham-loop",
+    "coded-preprojection-warm-phase-local-loop",
 })
 CODED_PREPROJECTION_QUERY_SCRAMBLE_VARIANTS = frozenset({
     "coded-preprojection-warm-query-scramble-loop",
@@ -83,10 +89,18 @@ CODED_PREPROJECTION_QUERY_OFF_VARIANTS = frozenset({
 CODED_PREPROJECTION_DECLARATION_SHAM_VARIANTS = frozenset({
     "coded-preprojection-warm-declaration-sham-loop",
 })
+CODED_PREPROJECTION_PHASE_LOCAL_SHAM_VARIANTS = frozenset({
+    "coded-preprojection-warm-phase-local-sham-loop",
+})
+CODED_PREPROJECTION_PHASE_LOCAL_VARIANTS = frozenset({
+    "coded-preprojection-warm-phase-local-sham-loop",
+    "coded-preprojection-warm-phase-local-loop",
+})
 CODED_PREPROJECTION_NULL_CONTROL_VARIANTS = (
     CODED_PREPROJECTION_QUERY_SCRAMBLE_VARIANTS |
     CODED_PREPROJECTION_QUERY_OFF_VARIANTS |
-    CODED_PREPROJECTION_DECLARATION_SHAM_VARIANTS
+    CODED_PREPROJECTION_DECLARATION_SHAM_VARIANTS |
+    CODED_PREPROJECTION_PHASE_LOCAL_SHAM_VARIANTS
 )
 READONLY_TIMING_VARIANTS = READONLY_VARIANTS | CODED_PREPROJECTION_VARIANTS
 SOURCE_NAMES = (
@@ -116,6 +130,10 @@ def coded_preprojection_schedule_sha256(pilot_variant: str) -> str:
         return CODED_PREPROJECTION_WARM_QUERY_OFF_SCHEDULE_SHA256
     if pilot_variant in CODED_PREPROJECTION_DECLARATION_SHAM_VARIANTS:
         return CODED_PREPROJECTION_WARM_DECLARATION_SHAM_SCHEDULE_SHA256
+    if pilot_variant == "coded-preprojection-warm-phase-local-loop":
+        return CODED_PREPROJECTION_WARM_PHASE_LOCAL_SCHEDULE_SHA256
+    if pilot_variant in CODED_PREPROJECTION_PHASE_LOCAL_SHAM_VARIANTS:
+        return CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_SCHEDULE_SHA256
     if pilot_variant in CODED_PREPROJECTION_WARM_RESTORED_VARIANTS:
         return CODED_PREPROJECTION_WARM_RESTORED_SCHEDULE_SHA256
     if pilot_variant in CODED_PREPROJECTION_RESTORED_VARIANTS:
@@ -987,7 +1005,16 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
     burst_by_slot = {
         int(row["slot_index"]): row for row in diagnostic.get("sender_burst_boundaries", [])
     }
-    if pilot_variant in CODED_PREPROJECTION_WARM_RESTORED_VARIANTS:
+    if pilot_variant in CODED_PREPROJECTION_PHASE_LOCAL_VARIANTS:
+        slot_by_token = {str(row["token"]): int(row["slot_index"]) for row in lockin}
+        plus_slots = [slot_by_token[f"P{index}"] for index in range(4)]
+        minus_slots = [slot_by_token[f"M{index}"] for index in range(4)]
+        post_slots = [slot_by_token[f"C{index}"] for index in range(4)]
+        source_off_slots = (2, 15)
+        neutral_before_slot = 2
+        neutral_after_slot = 15
+        schedule_sha256 = coded_preprojection_schedule_sha256(pilot_variant)
+    elif pilot_variant in CODED_PREPROJECTION_WARM_RESTORED_VARIANTS:
         plus_slots = [3, 4, 5, 6]
         minus_slots = [7, 8, 9, 10]
         post_slots = [11, 12, 13, 14]
@@ -1121,7 +1148,11 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
             else (
                 "declaration_sham"
                 if pilot_variant in CODED_PREPROJECTION_DECLARATION_SHAM_VARIANTS
-                else None
+                else (
+                    "phase_local_sham"
+                    if pilot_variant in CODED_PREPROJECTION_PHASE_LOCAL_SHAM_VARIANTS
+                    else None
+                )
             )
         )
     )
@@ -1203,6 +1234,9 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
         "declaration_sham_control": pilot_variant in CODED_PREPROJECTION_DECLARATION_SHAM_VARIANTS,
         "declaration_sham_null_bound_cycles": coded_null_bound if pilot_variant in CODED_PREPROJECTION_DECLARATION_SHAM_VARIANTS else None,
         "declaration_sham_null_passed": coded_null_passed if pilot_variant in CODED_PREPROJECTION_DECLARATION_SHAM_VARIANTS else None,
+        "phase_local_sham_control": pilot_variant in CODED_PREPROJECTION_PHASE_LOCAL_SHAM_VARIANTS,
+        "phase_local_sham_null_bound_cycles": coded_null_bound if pilot_variant in CODED_PREPROJECTION_PHASE_LOCAL_SHAM_VARIANTS else None,
+        "phase_local_sham_null_passed": coded_null_passed if pilot_variant in CODED_PREPROJECTION_PHASE_LOCAL_SHAM_VARIANTS else None,
         "sufficient_during_burst_samples": sufficient,
         "all_bursts_completed_inside_slots": all(
             bool(burst_by_slot[slot].get("completed_before_slot_end")) for slot in stimulus_slots
@@ -1348,6 +1382,8 @@ def execute(source_root: Path, output_root: Path, pilot_variant: str) -> dict[st
             "coded-preprojection-warm-query-scramble-loop",
             "coded-preprojection-warm-query-off-loop",
             "coded-preprojection-warm-declaration-sham-loop",
+            "coded-preprojection-warm-phase-local-sham-loop",
+            "coded-preprojection-warm-phase-local-loop",
         },
         "unknown pilot variant",
     )
@@ -1501,6 +1537,8 @@ def parse_args() -> argparse.Namespace:
             "coded-preprojection-warm-query-scramble-loop",
             "coded-preprojection-warm-query-off-loop",
             "coded-preprojection-warm-declaration-sham-loop",
+            "coded-preprojection-warm-phase-local-sham-loop",
+            "coded-preprojection-warm-phase-local-loop",
         ),
         default="pn",
     )

@@ -6,7 +6,7 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`CODED_PREPROJECTION_DECLARATION_SHAM_RESIDUAL_CURVATURE`
+`CODED_PREPROJECTION_PHASE_LOCAL_CANDIDATE_NOT_ESTABLISHED`
 
 **Active wall:**
 The current wall is now restoration-clean physical coupling for a declared
@@ -28,11 +28,13 @@ satisfy the predeclared null bound; it produced same-sign residual curvature rat
 than the candidate's opposed fold-odd response. `coded_preprojection_warm_declaration_sham_0`
 then kept the candidate's P/M/C declarations and timing while making every P, M, and C
 physical footprint equal. It also produced same-sign residual curvature and no opposed
-fold-odd coordinate. The active wall is now phase-local baseline cancellation:
-equal-footprint curvature is real enough to break strict null bounds, but declaration
-alone does not reproduce the restored candidate's opposed response. Any next promotion
-needs a schedule that cancels slot/decay curvature by construction rather than
-subtracting it after labels are visible.
+fold-odd coordinate. `coded_preprojection_warm_phase_local_sham_0` then placed matched
+controls adjacent to each public phase and passed the phase-local null classification.
+The matched physical candidate `coded_preprojection_warm_phase_local_0` restored and
+ran cleanly, but it did not produce an opposed fold-odd coordinate. The active wall is
+now carrier/observable selection for the declared pre-projection access model: the
+current timing carrier is layout-sensitive and does not preserve a phase-local
+fold-odd response under the tested P/M footprint contrast.
 
 ## Established
 
@@ -578,6 +580,7 @@ F10_PATH_RW_OBSERVE_CHECKPOINT_20260712.json
 F10_ROUTE_OPERATOR_COMPARISON_CHECKPOINT_20260712.json
 F10_ROUTE_STATE_PILOT_CHECKPOINT_20260712.json
 CODED_PREPROJECTION_DECLARATION_SHAM_CHECKPOINT_20260712.json
+CODED_PREPROJECTION_PHASE_LOCAL_CHECKPOINT_20260712.json
 ```
 
 Historical V2 Gate A source was restored and should remain a sealed reference. New
@@ -930,12 +933,59 @@ Checkpoint:
 
 `CODED_PREPROJECTION_DECLARATION_SHAM_CHECKPOINT_20260712.json`
 
-**Status:** H5 remains unresolved rather than confirmed or killed. Query-scramble is a
-clean null; query-off and declaration-sham expose equal-footprint same-sign curvature;
-declaration alone does not produce the opposed response. The next useful discriminator
-is a phase-local baseline-canceling schedule that places matched controls adjacent to
-each public phase before decoding, not another PMU/MOESI branch or an unchanged
-query-off repeat.
+**Status before phase-local repair:** H5 remained unresolved rather than confirmed or
+killed. Query-scramble was a clean null; query-off and declaration-sham exposed
+equal-footprint same-sign curvature; declaration alone did not produce the opposed
+response. That made phase-local baseline cancellation the next required discriminator.
+
+The phase-local schedule used balanced P/C/M and M/C/P triples:
+
+```text
+WU WU N0 P0 C0 M0 M1 C1 P1 P2 C2 M2 M3 C3 P3 N1
+```
+
+The equal-footprint sham passed the null classification:
+
+```text
+run id        coded_preprojection_warm_phase_local_sham_0
+source bundle 93eecef06f1fabf0e51a4f81601f214720b13c8e01f05e31564c921bc105036e
+schedule hash 51f3fb66cd4f03dff2d3e9aab9196d4f94d85e221cd552b04eda4929669cca2e
+sham plus     imag -23.801065340909098
+sham minus    imag -29.318252840909096
+post control  imag +31.972549715909096
+null bound          95.91764914772729
+null passed         true
+neutral delta        0.6180312500000014
+```
+
+The matched physical P/M footprint candidate restored and ran cleanly, but did not
+produce an opposed fold-odd coordinate:
+
+```text
+run id        coded_preprojection_warm_phase_local_0
+source bundle 13cca32cbdeb5d06a72109d73901c880c83a40872ba93a5a08b8abec92333fa5
+schedule hash 1144b929905e30f3da1261fdedf5e6393c30d31a41c9a4dd2dc39e8573f4cbc4
+candidate plus   imag +93.25494115259741
+candidate minus  imag  +5.027810470779222
+post control     imag  -3.0811011904761902
+fold_odd_opposed       false
+fold_odd_signal        false
+neutral delta           0.634421875000001
+```
+
+Both phase-local transactions completed with verified copy-back, remote cleanup,
+policy4/policy5 restoration to `800000-3200000` kHz by readback, zero voltage access,
+zero MSR reads/writes, no skipped deadlines, no missing slots, no sender spill, and no
+record-integrity failure.
+
+Checkpoint:
+
+`CODED_PREPROJECTION_PHASE_LOCAL_CHECKPOINT_20260712.json`
+
+**Status:** the current timing-carrier implementation of H5 is not established under
+phase-local baseline cancellation. The earlier sequential restored candidate is
+demoted as layout/baseline-sensitive. H5 remains alive only as an access-model family
+that now needs a different carrier/observable or a stronger physical restoration law.
 
 ### H6 - Alternative carriers remain available
 
@@ -955,11 +1005,12 @@ operator, observability, or restoration wall that it can attack.
 
 ## Cheapest current discriminator
 
-Build the next warm-restored discriminator as a phase-local baseline-canceling coded
-loop. The current sequential layout lets equal-footprint slot curvature leak into the
-same quadrature decoder. The next schedule should interleave each public query phase
-with its matched post/equal control so the primary observable is phase-local before
-the four-point lock-in is reconstructed.
+Build the next discriminator by changing carrier/observable, not by repeating the same
+timing-response coded loop. The cheapest useful route is a phase-local query loop on
+the already-established ownership-intent/PMU surface: use CAT_CAS-owned aligned lines,
+the ordinary `perf_event_open` coherence group, and matched sham/equal controls to ask
+whether `Change-to-Dirty` and dirty-probe coordinates preserve anything fold-odd that
+the timing carrier discarded.
 
 The next probe should answer:
 
@@ -971,13 +1022,13 @@ The next probe should answer:
    for pre-projection coupling?
 3. Do post-projection, query-off, source-off, declaration-sham, and
    private-fold controls behave as predicted before any promotion?
-4. Does phase-local baseline cancellation remove the equal-footprint same-sign
-   curvature while preserving sensitivity to the restored candidate's physical
-   P/M footprint contrast?
+4. Does a coherence-event observable preserve a phase-local relation that the timing
+   carrier collapses, while still restoring bytes and device state?
 
-Do not run another scalar PMU route metric, unconditioned transient timing repeat, or
-unlabeled cache-line rectangle unchanged. The useful build now is a coded physical loop
-with the model's controls preserved.
+Do not rerun the same timing coded loop, another scalar PMU route metric,
+unconditioned transient timing repeat, or unlabeled cache-line rectangle unchanged. The
+useful build now is a coded physical loop on a different measured carrier, with the
+model's controls preserved.
 
 ## Current claim ceiling
 
@@ -987,10 +1038,11 @@ The next major scientific threshold is a physical coded pre-projection response 
 restoration and killing controls. `coded_preprojection_loop_2` is a restored physical
 fold-odd response candidate, and `coded_preprojection_warm_query_scramble_0` killed the
 physical query-scramble alternative. `coded_preprojection_warm_query_off_0` and
-`coded_preprojection_warm_declaration_sham_0` exposed a same-sign residual-curvature
-wall instead of a clean null or an opposed fold-odd kill. The next useful marker
-remains short of `SMALL_WALL_CROSSED` until a phase-local baseline-canceling control
-resolves that wall under the same restored geometry.
+`coded_preprojection_warm_declaration_sham_0` exposed same-sign residual curvature.
+`coded_preprojection_warm_phase_local_sham_0` passed the phase-local null rule, but
+`coded_preprojection_warm_phase_local_0` did not produce an opposed fold-odd signal.
+The next useful marker remains short of `SMALL_WALL_CROSSED`; the next move must
+change carrier/observable rather than promote the timing result.
 
 ## State update rule
 

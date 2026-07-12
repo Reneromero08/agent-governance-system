@@ -27,6 +27,10 @@ static const char *coded_preprojection_warm_query_off_schedule_sha256 =
     "95d25a543007bdfcdb002ff0ce36642e9f64ef2280d262261e5ea17557482137";
 static const char *coded_preprojection_warm_declaration_sham_schedule_sha256 =
     "89e53ef27c3799cc9c319283821e728e304a8b36a92ac1a76088f28934992310";
+static const char *coded_preprojection_warm_phase_local_sham_schedule_sha256 =
+    "51f3fb66cd4f03dff2d3e9aab9196d4f94d85e221cd552b04eda4929669cca2e";
+static const char *coded_preprojection_warm_phase_local_schedule_sha256 =
+    "1144b929905e30f3da1261fdedf5e6393c30d31a41c9a4dd2dc39e8573f4cbc4";
 #ifdef GATE_A_COMPILED_AUTHORITY_SHA256
 static const char *compiled_authority_sha256 = GATE_A_COMPILED_AUTHORITY_SHA256;
 #else
@@ -69,6 +73,11 @@ static const char *coded_preprojection_warm_query_scramble_sequence[16] = {
 static const char *coded_preprojection_warm_query_off_sequence[16] = {
     "WU", "WU", "N0", "QO0", "QO1", "QO2", "QO3", "QO4",
     "QO5", "QO6", "QO7", "C0", "C1", "C2", "C3", "N1"
+};
+
+static const char *coded_preprojection_warm_phase_local_sham_sequence[16] = {
+    "WU", "WU", "N0", "P0", "C0", "M0", "M1", "C1",
+    "P1", "P2", "C2", "M2", "M3", "C3", "P3", "N1"
 };
 
 static bool string_equal(const char *left, const char *right) {
@@ -143,7 +152,9 @@ static int coded_preprojection_variant(int pilot) {
            pilot == GATE_A_PILOT_CODED_PREPROJECTION_WARM_RESTORED_LOOP ||
            pilot == GATE_A_PILOT_CODED_PREPROJECTION_WARM_QUERY_SCRAMBLE_LOOP ||
            pilot == GATE_A_PILOT_CODED_PREPROJECTION_WARM_QUERY_OFF_LOOP ||
-           pilot == GATE_A_PILOT_CODED_PREPROJECTION_WARM_DECLARATION_SHAM_LOOP;
+           pilot == GATE_A_PILOT_CODED_PREPROJECTION_WARM_DECLARATION_SHAM_LOOP ||
+           pilot == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_LOOP ||
+           pilot == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP;
 }
 
 static int coded_preprojection_restored_variant(int pilot) {
@@ -162,11 +173,21 @@ static int coded_preprojection_declaration_sham_variant(int pilot) {
     return pilot == GATE_A_PILOT_CODED_PREPROJECTION_WARM_DECLARATION_SHAM_LOOP;
 }
 
+static int coded_preprojection_phase_local_sham_variant(int pilot) {
+    return pilot == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_LOOP;
+}
+
+static int coded_preprojection_phase_local_variant(int pilot) {
+    return pilot == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_LOOP ||
+           pilot == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP;
+}
+
 static int coded_preprojection_warm_restored_variant(int pilot) {
     return pilot == GATE_A_PILOT_CODED_PREPROJECTION_WARM_RESTORED_LOOP ||
            coded_preprojection_query_scramble_variant(pilot) ||
            coded_preprojection_query_off_variant(pilot) ||
-           coded_preprojection_declaration_sham_variant(pilot);
+           coded_preprojection_declaration_sham_variant(pilot) ||
+           coded_preprojection_phase_local_variant(pilot);
 }
 
 static int readonly_timing_variant(int pilot) {
@@ -292,6 +313,25 @@ static int validate_coded_preprojection_warm_declaration_sham_schedule_semantics
     return validate_coded_preprojection_warm_restored_schedule_semantics();
 }
 
+static int validate_coded_preprojection_warm_phase_local_sham_schedule_semantics(void) {
+    return string_equal(coded_preprojection_warm_phase_local_sham_sequence[0], "WU") &&
+           string_equal(coded_preprojection_warm_phase_local_sham_sequence[1], "WU") &&
+           string_equal(coded_preprojection_warm_phase_local_sham_sequence[2], "N0") &&
+           string_equal(coded_preprojection_warm_phase_local_sham_sequence[3], "P0") &&
+           string_equal(coded_preprojection_warm_phase_local_sham_sequence[4], "C0") &&
+           string_equal(coded_preprojection_warm_phase_local_sham_sequence[5], "M0") &&
+           string_equal(coded_preprojection_warm_phase_local_sham_sequence[6], "M1") &&
+           string_equal(coded_preprojection_warm_phase_local_sham_sequence[7], "C1") &&
+           string_equal(coded_preprojection_warm_phase_local_sham_sequence[8], "P1") &&
+           string_equal(coded_preprojection_warm_phase_local_sham_sequence[9], "P2") &&
+           string_equal(coded_preprojection_warm_phase_local_sham_sequence[10], "C2") &&
+           string_equal(coded_preprojection_warm_phase_local_sham_sequence[11], "M2") &&
+           string_equal(coded_preprojection_warm_phase_local_sham_sequence[12], "M3") &&
+           string_equal(coded_preprojection_warm_phase_local_sham_sequence[13], "C3") &&
+           string_equal(coded_preprojection_warm_phase_local_sham_sequence[14], "P3") &&
+           string_equal(coded_preprojection_warm_phase_local_sham_sequence[15], "N1") ? 0 : 1;
+}
+
 static int validate_only(void) {
     if (validate_schedule_semantics() != 0 ||
         validate_readonly_micro_schedule_semantics() != 0 ||
@@ -300,7 +340,8 @@ static int validate_only(void) {
         validate_coded_preprojection_warm_restored_schedule_semantics() != 0 ||
         validate_coded_preprojection_warm_query_scramble_schedule_semantics() != 0 ||
         validate_coded_preprojection_warm_query_off_schedule_semantics() != 0 ||
-        validate_coded_preprojection_warm_declaration_sham_schedule_semantics() != 0) {
+        validate_coded_preprojection_warm_declaration_sham_schedule_semantics() != 0 ||
+        validate_coded_preprojection_warm_phase_local_sham_schedule_semantics() != 0) {
         fputs("{\"status\":\"GATE_A_WORKER_VALIDATE_ONLY_FAILED\"}\n", stderr);
         return 1;
     }
@@ -359,6 +400,12 @@ static int pilot_variant_value(const char *text) {
     if (string_equal(text, "coded-preprojection-warm-declaration-sham-loop")) {
         return GATE_A_PILOT_CODED_PREPROJECTION_WARM_DECLARATION_SHAM_LOOP;
     }
+    if (string_equal(text, "coded-preprojection-warm-phase-local-sham-loop")) {
+        return GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_LOOP;
+    }
+    if (string_equal(text, "coded-preprojection-warm-phase-local-loop")) {
+        return GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP;
+    }
     return -1;
 }
 
@@ -366,6 +413,23 @@ static size_t pilot_working_set_bytes(int slot, int pilot) {
     if (coded_preprojection_variant(pilot)) {
         int relative = slot - readonly_stimulus_first_slot(pilot);
         if (relative < 0 || relative >= 12) return 0;
+        if (coded_preprojection_phase_local_variant(pilot)) {
+            const char *token = slot >= 0 && slot < 16
+                ? coded_preprojection_warm_phase_local_sham_sequence[slot] : "";
+            if (coded_preprojection_phase_local_sham_variant(pilot)) {
+                return GATE_A_OCCUPANCY_EQUAL_BYTES;
+            }
+            if (token[0] == 'C') return GATE_A_OCCUPANCY_EQUAL_BYTES;
+            if (token[0] == 'P') {
+                return token[1] == '0' || token[1] == '1'
+                    ? GATE_A_OCCUPANCY_LARGE_BYTES : GATE_A_OCCUPANCY_SMALL_BYTES;
+            }
+            if (token[0] == 'M') {
+                return token[1] == '0' || token[1] == '3'
+                    ? GATE_A_OCCUPANCY_LARGE_BYTES : GATE_A_OCCUPANCY_SMALL_BYTES;
+            }
+            return GATE_A_OCCUPANCY_EQUAL_BYTES;
+        }
         if (relative >= 8) return GATE_A_OCCUPANCY_EQUAL_BYTES;
         if (coded_preprojection_query_off_variant(pilot) ||
             coded_preprojection_declaration_sham_variant(pilot)) {
@@ -442,6 +506,16 @@ static int pilot_driven(int slot, int pilot) {
 
 static int pilot_phase(int slot, int pilot) {
     if (coded_preprojection_variant(pilot)) {
+        if (coded_preprojection_phase_local_variant(pilot)) {
+            const char *token = slot >= 0 && slot < 16
+                ? coded_preprojection_warm_phase_local_sham_sequence[slot] : "";
+            if (strlen(token) == 2U &&
+                (token[0] == 'P' || token[0] == 'M' || token[0] == 'C') &&
+                token[1] >= '0' && token[1] <= '3') {
+                return (token[1] - '0') * 2;
+            }
+            return 0;
+        }
         int relative = slot - readonly_stimulus_first_slot(pilot);
         if (relative >= 0 && relative < 12) return (relative % 4) * 2;
         return 0;
@@ -469,11 +543,13 @@ static void emit_slot_records(int pilot) {
                 ? coded_preprojection_warm_query_scramble_sequence[slot]
                 : (coded_preprojection_query_off_variant(pilot)
                     ? coded_preprojection_warm_query_off_sequence[slot]
+                : (coded_preprojection_phase_local_variant(pilot)
+                    ? coded_preprojection_warm_phase_local_sham_sequence[slot]
                 : (coded_preprojection_warm_restored_variant(pilot)
                     ? coded_preprojection_warm_restored_sequence[slot]
                 : (coded_preprojection_restored_variant(pilot)
                     ? coded_preprojection_restored_sequence[slot]
-                    : coded_preprojection_sequence[slot]))))
+                    : coded_preprojection_sequence[slot])))))
             : (readonly_micro_variant(pilot)
                 ? readonly_micro_sequence[slot] : expected_sequence[slot]);
         printf("{\"index\":%d,\"token\":\"%s\",\"requested_start_s\":%.1f,"
@@ -584,6 +660,10 @@ static int execute_authorized(int argc, char **argv) {
             ? coded_preprojection_warm_query_off_schedule_sha256
         : (coded_preprojection_declaration_sham_variant(pilot)
             ? coded_preprojection_warm_declaration_sham_schedule_sha256
+        : (coded_preprojection_phase_local_sham_variant(pilot)
+            ? coded_preprojection_warm_phase_local_sham_schedule_sha256
+        : (pilot == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP
+            ? coded_preprojection_warm_phase_local_schedule_sha256
         : (coded_preprojection_warm_restored_variant(pilot)
             ? coded_preprojection_warm_restored_schedule_sha256
             : (coded_preprojection_restored_variant(pilot)
@@ -591,7 +671,7 @@ static int execute_authorized(int argc, char **argv) {
             : (coded_preprojection_variant(pilot)
                 ? coded_preprojection_schedule_sha256
                 : (readonly_micro_variant(pilot)
-                    ? readonly_micro_schedule_sha256 : expected_schedule_sha256))))));
+                    ? readonly_micro_schedule_sha256 : expected_schedule_sha256))))))));
     long required_read_hz = readonly_timing_variant(pilot)
         ? GATE_A_READONLY_MICRO_READ_HZ : 8000L;
     if (!compiled_authority_sha256 || !compiled_output_root ||
@@ -605,13 +685,17 @@ static int execute_authorized(int argc, char **argv) {
         parse_double_exact(slot_text, &slot_s) || slot_s != 0.5 ||
         parse_double_exact(temp_text, &temp) || temp != 68.0 ||
         parse_long_exact(frequency_text, &frequency) || frequency != 1600000 ||
-        pilot < GATE_A_PILOT_PN || pilot > GATE_A_PILOT_CODED_PREPROJECTION_WARM_DECLARATION_SHAM_LOOP ||
+        pilot < GATE_A_PILOT_PN || pilot > GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP ||
         (coded_preprojection_query_scramble_variant(pilot)
             ? validate_coded_preprojection_warm_query_scramble_schedule_semantics()
             : (coded_preprojection_query_off_variant(pilot)
                 ? validate_coded_preprojection_warm_query_off_schedule_semantics()
             : (coded_preprojection_declaration_sham_variant(pilot)
                 ? validate_coded_preprojection_warm_declaration_sham_schedule_semantics()
+            : (coded_preprojection_phase_local_sham_variant(pilot)
+                ? validate_coded_preprojection_warm_phase_local_sham_schedule_semantics()
+            : (pilot == GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP
+                ? validate_coded_preprojection_warm_phase_local_sham_schedule_semantics()
             : (coded_preprojection_warm_restored_variant(pilot)
                 ? validate_coded_preprojection_warm_restored_schedule_semantics()
                 : (coded_preprojection_restored_variant(pilot)
@@ -620,7 +704,7 @@ static int execute_authorized(int argc, char **argv) {
                     ? validate_coded_preprojection_schedule_semantics()
                     : (readonly_micro_variant(pilot)
                         ? validate_readonly_micro_schedule_semantics()
-                        : validate_schedule_semantics())))))))) {
+                        : validate_schedule_semantics())))))))))) {
         fputs("execute-authorized requires a worker compiled for the exact validated authority and frozen geometry\n", stderr);
         return 2;
     }
@@ -798,8 +882,23 @@ static int cache_response_self_test(void) {
         if (pilot_working_set_bytes(
                 slot, GATE_A_PILOT_CODED_PREPROJECTION_WARM_DECLARATION_SHAM_LOOP) !=
                 GATE_A_OCCUPANCY_EQUAL_BYTES) return 1;
+        if (pilot_working_set_bytes(
+                slot, GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_LOOP) !=
+                GATE_A_OCCUPANCY_EQUAL_BYTES) return 1;
     }
-    return self_test(NULL, GATE_A_PILOT_CODED_PREPROJECTION_WARM_DECLARATION_SHAM_LOOP);
+    if (pilot_working_set_bytes(3, GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP) !=
+            GATE_A_OCCUPANCY_LARGE_BYTES ||
+        pilot_working_set_bytes(5, GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP) !=
+            GATE_A_OCCUPANCY_LARGE_BYTES ||
+        pilot_working_set_bytes(8, GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP) !=
+            GATE_A_OCCUPANCY_LARGE_BYTES ||
+        pilot_working_set_bytes(11, GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP) !=
+            GATE_A_OCCUPANCY_SMALL_BYTES ||
+        pilot_working_set_bytes(14, GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP) !=
+            GATE_A_OCCUPANCY_SMALL_BYTES) return 1;
+    if (self_test(NULL, GATE_A_PILOT_CODED_PREPROJECTION_WARM_DECLARATION_SHAM_LOOP)) return 1;
+    if (self_test(NULL, GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_LOOP)) return 1;
+    return self_test(NULL, GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP);
 }
 
 static int timing_diagnostics_self_test(void) {
@@ -842,6 +941,12 @@ int main(int argc, char **argv) {
     if (argc == 2 && string_equal(argv[1], "--self-test-coded-preprojection-warm-declaration-sham")) {
         return self_test(NULL, GATE_A_PILOT_CODED_PREPROJECTION_WARM_DECLARATION_SHAM_LOOP);
     }
+    if (argc == 2 && string_equal(argv[1], "--self-test-coded-preprojection-warm-phase-local-sham")) {
+        return self_test(NULL, GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_LOOP);
+    }
+    if (argc == 2 && string_equal(argv[1], "--self-test-coded-preprojection-warm-phase-local")) {
+        return self_test(NULL, GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP);
+    }
     if (argc == 3 && string_equal(argv[1], "--self-test-retain")) {
         return self_test(argv[2], GATE_A_PILOT_PN);
     }
@@ -869,9 +974,15 @@ int main(int argc, char **argv) {
     if (argc == 3 && string_equal(argv[1], "--self-test-coded-preprojection-warm-declaration-sham-retain")) {
         return self_test(argv[2], GATE_A_PILOT_CODED_PREPROJECTION_WARM_DECLARATION_SHAM_LOOP);
     }
+    if (argc == 3 && string_equal(argv[1], "--self-test-coded-preprojection-warm-phase-local-sham-retain")) {
+        return self_test(argv[2], GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_SHAM_LOOP);
+    }
+    if (argc == 3 && string_equal(argv[1], "--self-test-coded-preprojection-warm-phase-local-retain")) {
+        return self_test(argv[2], GATE_A_PILOT_CODED_PREPROJECTION_WARM_PHASE_LOCAL_LOOP);
+    }
     if (argc >= 2 && string_equal(argv[1], "--execute-authorized")) {
         return execute_authorized(argc, argv);
     }
-    fputs("usage: gate_a_worker --validate-only | --self-test | --self-test-cache-response | --self-test-timing-diagnostics | --self-test-coded-preprojection | --self-test-coded-preprojection-restored | --self-test-coded-preprojection-warm-restored | --self-test-coded-preprojection-warm-query-scramble | --self-test-coded-preprojection-warm-query-off | --self-test-coded-preprojection-warm-declaration-sham | --self-test-retain ABSOLUTE_OUTPUT | --self-test-cache-response-retain ABSOLUTE_OUTPUT | --self-test-readonly-cache-response-retain ABSOLUTE_OUTPUT | --self-test-coded-preprojection-retain ABSOLUTE_OUTPUT | --self-test-coded-preprojection-restored-retain ABSOLUTE_OUTPUT | --self-test-coded-preprojection-warm-restored-retain ABSOLUTE_OUTPUT | --self-test-coded-preprojection-warm-query-scramble-retain ABSOLUTE_OUTPUT | --self-test-coded-preprojection-warm-query-off-retain ABSOLUTE_OUTPUT | --self-test-coded-preprojection-warm-declaration-sham-retain ABSOLUTE_OUTPUT | --execute-authorized ...\n", stderr);
+    fputs("usage: gate_a_worker --validate-only | --self-test | --self-test-cache-response | --self-test-timing-diagnostics | --self-test-coded-preprojection | --self-test-coded-preprojection-restored | --self-test-coded-preprojection-warm-restored | --self-test-coded-preprojection-warm-query-scramble | --self-test-coded-preprojection-warm-query-off | --self-test-coded-preprojection-warm-declaration-sham | --self-test-coded-preprojection-warm-phase-local-sham | --self-test-coded-preprojection-warm-phase-local | --self-test-retain ABSOLUTE_OUTPUT | --self-test-cache-response-retain ABSOLUTE_OUTPUT | --self-test-readonly-cache-response-retain ABSOLUTE_OUTPUT | --self-test-coded-preprojection-retain ABSOLUTE_OUTPUT | --self-test-coded-preprojection-restored-retain ABSOLUTE_OUTPUT | --self-test-coded-preprojection-warm-restored-retain ABSOLUTE_OUTPUT | --self-test-coded-preprojection-warm-query-scramble-retain ABSOLUTE_OUTPUT | --self-test-coded-preprojection-warm-query-off-retain ABSOLUTE_OUTPUT | --self-test-coded-preprojection-warm-declaration-sham-retain ABSOLUTE_OUTPUT | --self-test-coded-preprojection-warm-phase-local-sham-retain ABSOLUTE_OUTPUT | --self-test-coded-preprojection-warm-phase-local-retain ABSOLUTE_OUTPUT | --execute-authorized ...\n", stderr);
     return 2;
 }
