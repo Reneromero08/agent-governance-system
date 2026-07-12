@@ -833,6 +833,7 @@ F10_BRANCH_HISTORY_CHECKPOINT_20260712.json
 F10_TRANSLATION_HISTORY_CHECKPOINT_20260712.json
 F10_PREFETCH_STREAM_CHECKPOINT_20260712.json
 F10_CODE_FOOTPRINT_HISTORY_CHECKPOINT_20260712.json
+F10_RETURN_STACK_HISTORY_CHECKPOINT_20260712.json
 CODED_PREPROJECTION_DECLARATION_SHAM_CHECKPOINT_20260712.json
 CODED_PREPROJECTION_PHASE_LOCAL_CHECKPOINT_20260712.json
 CODED_PREPROJECTION_ACTIVE_QUERY_CHECKPOINT_20260712.json
@@ -2013,14 +2014,68 @@ process lifecycle, and active-query/source-chop schedules, but the forward/rever
 residuals remain inside neutral/shuffle controls. Do not rerun this
 neutral/forward/reverse/shuffle code-footprint sequence unchanged.
 
+### Return-stack history carrier
+
+The return-stack history discriminator changed the code-side carrier from branch
+outcomes, indirect targets, and plain code footprint to recursive call/return depth
+history. It used neutral/forward/reverse/shuffle call-depth histories and a fixed
+call-depth sentinel on core 5 under the `return_stack_group` PMU group:
+
+```text
+run id        f10_return_stack_history_0
+source bundle 31d0a95f3d7701b26028659e2f632152a62669ac892112814425987c0c93a8d5
+worker status RETURN_STACK_HISTORY_RESPONSE_NOT_ESTABLISHED
+```
+
+The transaction completed with verified copy-back and remote cleanup. It performed
+zero frequency writes, zero voltage access, zero MSR reads/writes, stayed below the
+68 C temperature veto, found no forbidden CAT_CAS process residue, all PMU windows
+were unmultiplexed, and the static return-depth pattern digest was unchanged after
+history and after neutral restore.
+
+Return-stack sentinel contrasts:
+
+```text
+retired_mispredicted_branch_instructions:
+  identity 863
+  forward  842
+  reverse  839
+  shuffle  861
+  delta      3
+  floor      2
+  threshold 32
+  signal false
+
+duration_ns:
+  identity 56158
+  forward  52429
+  reverse  42479
+  shuffle  43058
+  delta     9950
+  floor    13100
+  threshold 39300
+  signal false
+```
+
+Checkpoint:
+
+`F10_RETURN_STACK_HISTORY_CHECKPOINT_20260712.json`
+
+**Status:** this exact return-stack depth-history carrier is negative. It changes the
+branch predictor subcarrier from conditional outcomes and indirect targets to
+call/return depth, but the forward/reverse residuals remain inside neutral/shuffle
+controls. Do not rerun this neutral/forward/reverse/shuffle return-stack sequence
+unchanged.
+
 ## Cheapest current discriminator
 
 Change carrier family or access model again, not another remap of the same
 phase-local timing/PMU/eviction/active-query/source-phase-chop/restored-history,
 simple branch-history/indirect-target-history/translation-footprint/prefetch-stream
 geometry, same-page-offset store/load alias-history, locked no-op history,
-compiled code-footprint history, the combined active-query/source-phase-chop schedule,
-or the current fresh source-process lifecycle sentinel. The run must stay closed:
+compiled code-footprint history, return-stack history, the combined active-query/
+source-phase-chop schedule, or the current fresh source-process lifecycle sentinel.
+The run must stay closed:
 CAT_CAS-owned buffers only, predetermined geometry, no physical-address access, no
 cache-set mapping, no unrelated-process observation, and no MSR or voltage access.
 
@@ -2054,7 +2109,8 @@ neutral/forward/reverse/shuffle indirect-target sequence unchanged. Do not rerun
 store/load alias sequence unchanged. Do not rerun `f10_locked_history_0` or the same
 neutral/forward/reverse/shuffle locked-history sequence unchanged. Do not rerun
 `f10_code_footprint_history_0` or the same neutral/forward/reverse/shuffle compiled
-code-footprint sequence unchanged.
+code-footprint sequence unchanged. Do not rerun `f10_return_stack_history_0` or the
+same neutral/forward/reverse/shuffle return-stack sequence unchanged.
 
 ## Current claim ceiling
 
@@ -2105,12 +2161,14 @@ ownership operator to serializing locked logical no-ops and also stayed negative
 `coded_preprojection_active_source_chop_0` then combined receiver active-query deltas
 with source-side phase chopping and also stayed negative. `f10_code_footprint_history_0`
 then tested compiled instruction-stream/code-footprint state and also stayed negative.
+`f10_return_stack_history_0` then tested recursive call/return depth-history state and
+also stayed negative.
 The next move must change carrier family or access model rather than keep remapping the
 same eviction-sentinel PMU/timing, active-query phase-local, source-phase-chop,
 restored two-line-set ownership-history, simple branch-history, indirect-target-
 history, translation-footprint, store/load alias-history, locked-history,
-prefetch-stream, combined active-query/source-chop, source-process lifecycle, or
-compiled code-footprint history geometry.
+prefetch-stream, combined active-query/source-chop, source-process lifecycle,
+compiled code-footprint history, or return-stack history geometry.
 
 ## State update rule
 

@@ -1,0 +1,83 @@
+{
+  "schema_id": "CAT_CAS_SMALL_WALL_RETURN_STACK_HISTORY_CHECKPOINT_V1",
+  "result": "RETURN_STACK_HISTORY_RESPONSE_NOT_ESTABLISHED",
+  "run_id": "f10_return_stack_history_0",
+  "mode": "return-stack-history",
+  "source_binding": {
+    "source_bundle_sha256": "31d0a95f3d7701b26028659e2f632152a62669ac892112814425987c0c93a8d5",
+    "source_hashes": {
+      "f10_pmc_first_light_target.py": "c36b7b54bf19fb6c2755e2f5ba27908c8e4275c440c58e3ded20cd908144994f",
+      "f10_pmc_first_light_worker.c": "a904c9d4faf6297e8fd55cbe03323f53b0198287a2b65c3ff972986af18f3344"
+    }
+  },
+  "run_paths": {
+    "local_run": "runs/f10_return_stack_history_0",
+    "worker_result": "runs/f10_return_stack_history_0/F10_RETURN_STACK_HISTORY_RESULT.json",
+    "final_result": "runs/f10_return_stack_history_0/FINAL_RESULT.json",
+    "controller_result": "runs/f10_return_stack_history_0/CONTROLLER_RESULT.json"
+  },
+  "lab_device": {
+    "host": "root@192.168.137.100",
+    "cpu_model": "AMD Phenom(tm) II X6 1090T Processor",
+    "kernel": "6.12.86+deb13-amd64"
+  },
+  "predeclared_experiment": {
+    "carrier": "CAT_CAS-owned return-stack/call-return depth history over compiled recursive code",
+    "source_operator": "neutral, forward, reverse, or shuffle recursive call-depth histories on core 5",
+    "sentinel": "fixed recursive call-depth sequence on core 5",
+    "observable": "return_stack_group PMU branch counters and sentinel duration",
+    "killing_control": "neutral versus shuffle return-stack control spread",
+    "restoration_class": "static depth-pattern digest unchanged after history and after neutral restore; no physical restoration claim beyond the measured equivalence"
+  },
+  "transaction_integrity": {
+    "target_status": "F10_RETURN_STACK_HISTORY_TARGET_COMPLETE",
+    "worker_status": "RETURN_STACK_HISTORY_RESPONSE_NOT_ESTABLISHED",
+    "copy_verified": true,
+    "verified_file_count": 2,
+    "remote_cleaned": true,
+    "remote_returncode": 0,
+    "temperature_preflight_c": 44.0,
+    "temperature_post_c": 44.0,
+    "temperature_veto_c": 68.0,
+    "temperature_below_veto": true,
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "forbidden_process_matches_preflight": 0,
+    "forbidden_process_matches_cleanup": 0
+  },
+  "observed_counts": {
+    "retired_mispredicted_branch_instructions": {
+      "identity": 863,
+      "forward": 842,
+      "reverse": 839,
+      "shuffle": 861,
+      "forward_reverse_delta": 3,
+      "control_floor": 2,
+      "threshold": 32,
+      "signal": false
+    },
+    "duration_ns": {
+      "identity": 56158,
+      "forward": 52429,
+      "reverse": 42479,
+      "shuffle": 43058,
+      "forward_reverse_delta": 9950,
+      "control_floor": 13100,
+      "threshold": 39300,
+      "signal": false
+    }
+  },
+  "acceptance": {
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "patterns_unchanged_after_history": true,
+    "patterns_unchanged_after_restore": true,
+    "branch_miss_signal": false,
+    "duration_signal": false,
+    "return_stack_history_response": false
+  },
+  "claim_ceiling": "Return-stack call/return timing/PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, target coupling, or Small Wall crossing claim",
+  "frontier_update": "The return-stack call/return depth-history carrier is negative under this sentinel. Do not rerun this neutral/forward/reverse/shuffle return-stack sequence unchanged."
+}
