@@ -472,6 +472,89 @@ static int gate_a_write_sample_timing_file(
     return close_sync(&file);
 }
 
+static void gate_a_retain_sample_timing_summary(
+        const GateASmokeArgs *args,
+        GateASmokeResult *result,
+        const uint64_t *scheduler_lateness_ticks,
+        const uint64_t *finish_gap_ticks,
+        const uint64_t *missed_deadlines_before_sample,
+        int count) {
+    if (!args || !result || !scheduler_lateness_ticks || !finish_gap_ticks ||
+        !missed_deadlines_before_sample || count <= 0 ||
+        !isfinite(result->capture_tsc_hz) || result->capture_tsc_hz <= 0.0 ||
+        args->read_hz <= 0) return;
+    double nominal_spacing = result->capture_tsc_hz / (double)args->read_hz;
+    if (isfinite(nominal_spacing) && nominal_spacing > 0.0 &&
+        nominal_spacing <= (double)UINT64_MAX / GATE_A_SCHEDULER_REJECT_MULTIPLE) {
+        result->scheduler_lateness_reject_threshold_ticks =
+            (uint64_t)(nominal_spacing * GATE_A_SCHEDULER_REJECT_MULTIPLE);
+    }
+    for (int sample = 0; sample < count; sample++) {
+        if (scheduler_lateness_ticks[sample] >
+            result->max_scheduler_lateness_ticks) {
+            result->max_scheduler_lateness_ticks =
+                scheduler_lateness_ticks[sample];
+        }
+        result->missed_deadline_count +=
+            missed_deadlines_before_sample[sample];
+        if (finish_gap_ticks[sample] > result->max_finish_gap_ticks) {
+            result->max_finish_gap_ticks = finish_gap_ticks[sample];
+        }
+    }
+    result->skipped_deadline_count = result->missed_deadline_count;
+}
+
+static void gate_a_synthesize_legacy_sample_timing(
+        const GateASmokeArgs *args,
+        const uint64_t *timestamps,
+        int count,
+        uint64_t origin,
+        double tsc_hz,
+        uint64_t *requested_sample_index,
+        uint64_t *requested_tsc,
+        int *requested_slot_index,
+        uint64_t *started_tsc,
+        uint64_t *finished_tsc,
+        int *actual_slot_index,
+        uint64_t *scheduler_lateness_ticks,
+        uint64_t *service_ticks,
+        uint64_t *finish_gap_ticks,
+        uint64_t *missed_deadlines_before_sample,
+        int *valid_measurement) {
+    if (!args || !timestamps || count <= 0 || !isfinite(tsc_hz) ||
+        tsc_hz <= 0.0 || args->read_hz <= 0 || args->slot_s <= 0.0 ||
+        !requested_sample_index || !requested_tsc || !requested_slot_index ||
+        !started_tsc || !finished_tsc || !actual_slot_index ||
+        !scheduler_lateness_ticks || !service_ticks || !finish_gap_ticks ||
+        !missed_deadlines_before_sample || !valid_measurement) return;
+    double spacing = tsc_hz / (double)args->read_hz;
+    double slot_ticks = args->slot_s * tsc_hz;
+    if (!isfinite(spacing) || spacing <= 0.0 ||
+        !isfinite(slot_ticks) || slot_ticks <= 0.0) return;
+    uint64_t previous_finished = 0;
+    for (int sample = 0; sample < count; sample++) {
+        uint64_t requested_index = (uint64_t)sample;
+        uint64_t requested = origin + (uint64_t)((double)sample * spacing);
+        uint64_t started = timestamps[sample];
+        requested_sample_index[sample] = requested_index;
+        requested_tsc[sample] = requested;
+        requested_slot_index[sample] =
+            (int)(((double)(requested - origin)) / slot_ticks);
+        started_tsc[sample] = started;
+        finished_tsc[sample] = started;
+        actual_slot_index[sample] = started >= origin
+            ? (int)(((double)(started - origin)) / slot_ticks) : -1;
+        scheduler_lateness_ticks[sample] =
+            started > requested ? started - requested : 0;
+        service_ticks[sample] = 0;
+        finish_gap_ticks[sample] =
+            sample ? started - previous_finished : 0;
+        missed_deadlines_before_sample[sample] = 0;
+        valid_measurement[sample] = 1;
+        previous_finished = started;
+    }
+}
+
 static int gate_a_json_u64(FILE *f, uint64_t value) {
     if (!value) return fputs("null", f) < 0 ? -1 : 0;
     return fprintf(f, "%llu", (unsigned long long)value) < 0 ? -1 : 0;
@@ -1487,10 +1570,8 @@ static int gate_a_write_result(const GateASmokeArgs *args,
                     ? "scheduled_request_tsc" : "measurement_finish_tsc"),
             (unsigned long long)result->capture_max_sample_delay_tsc,
             result->capture_max_response_cycles_per_access,
-            gate_a_readonly_occupancy_pilot()
-                ? GATE_A_SAMPLE_TIMING_SCHEMA_ID : "not_applicable",
-            gate_a_readonly_occupancy_pilot()
-                ? GATE_A_SAMPLE_TIMING_FILE : "not_applicable",
+            GATE_A_SAMPLE_TIMING_SCHEMA_ID,
+            GATE_A_SAMPLE_TIMING_FILE,
             gate_a_readonly_occupancy_pilot()
                 ? GATE_A_TIMING_DIAGNOSTIC_FILE : "not_applicable",
             result->capture_quality_classification[0]
@@ -2717,8 +2798,15 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
         rc = 5;
         goto cleanup;
     }
-    if (gate_a_readonly_occupancy_pilot() &&
-        gate_a_write_sample_timing_file(
+    if (!gate_a_occupancy_pilot()) {
+        gate_a_synthesize_legacy_sample_timing(
+            args, timestamps, count, origin, tsc_hz,
+            requested_sample_index, requested_tsc, requested_slot_index,
+            started_tsc, finished_tsc, timing_slot_index,
+            scheduler_lateness_ticks, service_ticks, finish_gap_ticks,
+            missed_deadlines_before_sample, valid_measurement);
+    }
+    if (gate_a_write_sample_timing_file(
             args->output_dir, requested_sample_index, requested_tsc,
             requested_slot_index, started_tsc, finished_tsc,
             timing_slot_index, scheduler_lateness_ticks, service_ticks,
@@ -2727,6 +2815,9 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
         rc = 5;
         goto cleanup;
     }
+    gate_a_retain_sample_timing_summary(
+        args, result, scheduler_lateness_ticks, finish_gap_ticks,
+        missed_deadlines_before_sample, count);
     if (count < (int)(0.9 * args->read_hz * gate_a_duration_s(args))) {
         reason = "SHORT_COMPLETE_CAPTURE";
         rc = 5;
@@ -2756,7 +2847,23 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
             timestamps[0], timestamps[count - 1], (size_t)count,
             origin, deadline, tsc_hz, args->read_hz, tone(0), max_gap);
         if (quality) {
-            reason = quality;
+            if (!strcmp(quality, "PATHOLOGICAL_TIMESTAMP_GAP")) {
+                if (gate_a_copy_classification(
+                        result->capture_quality_classification,
+                        "CAPTURE_ACCEPTED_WITH_SERVICE_SPIKES")) {
+                    reason = "CAPTURE_CLASSIFICATION_COPY_FAILURE";
+                    rc = 5;
+                    goto cleanup;
+                }
+            } else {
+                reason = quality;
+                rc = 5;
+                goto cleanup;
+            }
+        } else if (gate_a_copy_classification(
+                       result->capture_quality_classification,
+                       "CAPTURE_ACCEPTED")) {
+            reason = "CAPTURE_CLASSIFICATION_COPY_FAILURE";
             rc = 5;
             goto cleanup;
         }

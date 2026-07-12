@@ -9,12 +9,12 @@
 `CONTROLLED_COHERENCE_STATE_FOUND`
 
 **Active wall:**
-The current wall is operator algebra and observation geometry. A byte-preserving
-remote ownership-intent store is visible, but the first forward/reverse path pilot
-combined that visible operator with home-core restoration steps that were nearly
-invisible from the observed core. The next build must create two noncommuting
-operators that are both visible in the same measurement geometry, or explicitly
-measure complementary core perspectives.
+The current wall is carrier/access-model selection after several cheap physical
+discriminators. A byte-preserving remote ownership-intent store is visible, but the
+simple cache-line path, route-vector, and transient timing pivots have not produced a
+repeatable antisymmetric or restored relational coordinate. The next build should
+either construct a stronger balanced carrier loop with killing controls or move toward
+a declared pre-projection query access model.
 
 ## Established
 
@@ -365,6 +365,48 @@ route-selective.
 This does not establish path memory, noncommutation, physical holonomy, OrbitState
 coupling, fold-odd recovery, or a Small Wall crossing.
 
+### Transient timing-response pivot
+
+A focused phase/timing pivot repaired the legacy 16-slot timing custody path and ran a
+fresh full-step versus step-sham discriminator.
+
+Runs:
+
+```text
+full step  runs/transient_full_3
+step sham  runs/transient_step_sham_0
+```
+
+Checkpoint:
+
+`TRANSIENT_TIMING_RESPONSE_CHECKPOINT_20260712.json`
+
+Both fresh transactions completed with verified copy-back and exact policy4/policy5
+restoration. They performed zero voltage access, zero MSR reads, and zero MSR writes.
+Both captures were accepted with one service-spike/timestamp-gap sample filtered by the
+predeclared 4x nominal-spacing timing rule.
+
+Primary fresh bin:
+
+```text
+0.05-0.10 s after full-step reference
+full ring delta          +0.009997622769844838
+step-sham ring delta     +0.007762021027645005
+fresh full-minus-sham    +0.002235601742199833
+fresh coherent lock-in   +0.004172682316447026
+```
+
+Historical retained runs still produce an aggregate 0.05-0.10 s bump, but the fresh
+pair does not reproduce it. Treat the old transient bump as a screen/outlier until a
+new predeclared mechanism repeats it.
+
+Marker:
+
+`TRANSIENT_TIMING_RESPONSE_NOT_REPRODUCED`
+
+This does not establish a carrier-state transition, path memory, noncommutation,
+physical holonomy, OrbitState coupling, fold-odd recovery, or a Small Wall crossing.
+
 ### Read/store same-core path pilot
 
 A same-observer read/store operator-pair pilot ran cleanly and was negative.
@@ -639,13 +681,17 @@ flattens it.
 **Restoration law:** return complex response and physical controls to the accepted
 baseline region.
 
-**Cheapest discriminator:** replay a physically distinct forward/reverse loop under the
-existing phase-sensitive capture and compare identity/shuffle controls.
+**Cheapest discriminator:** no longer a raw transient repeat. A phase-native move now
+needs a physically distinct forward/reverse loop or an active query whose controls are
+declared before capture.
 
-**Current evidence:** existing runtime can retain complex response; no coherence-loop
-candidate.
+**Current evidence:** existing runtime can retain complex response. The fresh
+full-step versus step-sham timing discriminator (`transient_full_3` and
+`transient_step_sham_0`) did not reproduce the historical 0.05-0.10 s transient bump;
+fresh full-minus-sham was only `+0.002235601742199833` cycles in the primary bin.
 
-**Status:** alive.
+**Status:** alive only for phase-native loop geometry or active-query coupling; the
+simple transient afterimage screen is negative.
 
 ### H5 - Active coded pre-projection access is required for fold-odd recovery
 
@@ -720,10 +766,12 @@ The route comparison says route stability exists, but route reassignment alone i
 the missing coordinate. Promote a true route-state observable only if it tests route
 history or route-conditioned loop closure directly.
 
-After `f10_route_state_0`, the cheapest next move is likely a carrier pivot rather than
-another scalar PMU route metric. The strongest remaining near-term opening is a
-phase-native or timing-coupled response that reuses the accepted occupancy sensor but
-adds explicit source-off, shuffle, and route controls before any OrbitState coupling.
+After `f10_route_state_0` and `transient_full_3` / `transient_step_sham_0`, another
+scalar PMU route metric or unconditioned transient timing repeat is not the cheapest
+move. The strongest remaining near-term opening is either a balanced, control-canceling
+carrier loop with a stronger restoration observable, or a declared active
+pre-projection query that can lawfully expose a fold-odd coordinate before the old
+projection discards it.
 
 ## Current claim ceiling
 

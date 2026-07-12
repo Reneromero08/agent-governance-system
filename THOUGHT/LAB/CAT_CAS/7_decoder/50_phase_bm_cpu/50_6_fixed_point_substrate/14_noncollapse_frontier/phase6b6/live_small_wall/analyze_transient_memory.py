@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import struct
 from pathlib import Path
 from typing import Any
 
@@ -21,8 +22,11 @@ DEFAULT_RUNS = (
     "pilot_step_sham_20260711a",
 )
 RAW_DTYPE = np.dtype([("timestamp_tsc", "<u8"), ("ring_period", "<f8")])
+TIMING_RECORD = struct.Struct("<QQQQQQQQQQ")
 BIN_EDGES_S = (0.0, 0.005, 0.02, 0.05, 0.1, 0.25, 0.5)
 TONE_HZ = math.exp(math.log(20.0)) * (1.0 + 0.013 * math.sin(2.399963))
+LEGACY_READ_HZ = 8_000
+SERVICE_GAP_MULTIPLE_MAX = 4.0
 
 
 class TransientError(RuntimeError):
@@ -50,8 +54,75 @@ def lockin(timestamps: np.ndarray, values: np.ndarray, *, origin_tsc: float, tsc
     )
 
 
+def timing_filter(run: Path, sample_count: int, *, tsc_hz: float) -> dict[str, Any]:
+    path = run / "runtime" / "sample_timing.bin"
+    if not path.is_file():
+        return {
+            "available": False,
+            "sample_count": sample_count,
+            "valid_count": sample_count,
+            "excluded_count": 0,
+            "service_gap_multiple_max": SERVICE_GAP_MULTIPLE_MAX,
+            "mask": np.ones(sample_count, dtype=bool),
+        }
+    data = path.read_bytes()
+    require(len(data) % TIMING_RECORD.size == 0, "sample timing file has partial record")
+    rows = list(TIMING_RECORD.iter_unpack(data))
+    require(len(rows) == sample_count, "sample timing/raw sample count mismatch")
+    nominal_spacing = tsc_hz / LEGACY_READ_HZ
+    threshold = nominal_spacing * SERVICE_GAP_MULTIPLE_MAX
+    mask = np.zeros(sample_count, dtype=bool)
+    excluded_by_service = 0
+    excluded_by_finish_gap = 0
+    excluded_by_deadline_skip = 0
+    excluded_by_validity = 0
+    for index, row in enumerate(rows):
+        (
+            _requested_sample_index,
+            _requested_tsc,
+            _requested_slot_index,
+            _started_tsc,
+            _finished_tsc,
+            _actual_slot_index,
+            _scheduler_lateness_ticks,
+            service_ticks,
+            missed_deadlines_before_sample,
+            valid_measurement,
+        ) = (int(value) for value in row)
+        finish_gap_ticks = 0 if index == 0 else int(row[4]) - int(rows[index - 1][4])
+        keep = True
+        if valid_measurement != 1:
+            excluded_by_validity += 1
+            keep = False
+        if service_ticks > threshold:
+            excluded_by_service += 1
+            keep = False
+        if finish_gap_ticks > threshold:
+            excluded_by_finish_gap += 1
+            keep = False
+        if missed_deadlines_before_sample:
+            excluded_by_deadline_skip += 1
+            keep = False
+        mask[index] = keep
+    return {
+        "available": True,
+        "sample_count": sample_count,
+        "valid_count": int(mask.sum()),
+        "excluded_count": int(sample_count - mask.sum()),
+        "excluded_by_service": excluded_by_service,
+        "excluded_by_finish_gap": excluded_by_finish_gap,
+        "excluded_by_deadline_skip": excluded_by_deadline_skip,
+        "excluded_by_validity": excluded_by_validity,
+        "service_gap_multiple_max": SERVICE_GAP_MULTIPLE_MAX,
+        "nominal_spacing_ticks": nominal_spacing,
+        "threshold_ticks": threshold,
+        "mask": mask,
+    }
+
+
 def summarize_reference(
     raw: np.ndarray,
+    sample_mask: np.ndarray,
     *,
     reference_tsc: float,
     phase_origin_tsc: float,
@@ -63,7 +134,7 @@ def summarize_reference(
     for start_s, end_s in zip(BIN_EDGES_S, BIN_EDGES_S[1:]):
         start = reference_tsc + start_s * tsc_hz
         end = reference_tsc + end_s * tsc_hz
-        selected = raw[(timestamps >= start) & (timestamps < end)]
+        selected = raw[(timestamps >= start) & (timestamps < end) & sample_mask]
         values = selected["ring_period"].astype(np.float64)
         require(len(values) >= 10, f"transient bin lacks samples: {start_s}-{end_s}")
         response = lockin(
@@ -96,9 +167,15 @@ def load_run(root: Path, run_id: str) -> dict[str, Any]:
     raw = np.fromfile(run / "runtime" / "raw_samples.bin", dtype=RAW_DTYPE)
     origin = float(runtime["capture_origin_tsc"])
     tsc_hz = float(runtime["capture_tsc_hz"])
+    filter_result = timing_filter(run, len(raw), tsc_hz=tsc_hz)
+    sample_mask = filter_result.pop("mask")
     phase_origin = origin + 3.0 * tsc_hz
     timestamps = raw["timestamp_tsc"]
-    pre = raw[(timestamps >= origin + 2.0 * tsc_hz) & (timestamps < origin + 3.0 * tsc_hz)]
+    pre = raw[
+        (timestamps >= origin + 2.0 * tsc_hz) &
+        (timestamps < origin + 3.0 * tsc_hz) &
+        sample_mask
+    ]
     require(len(pre) > 100, "pre-drive baseline incomplete")
     baseline = float(pre["ring_period"].mean())
     variant = final.get("pilot_variant", "pn")
@@ -106,8 +183,11 @@ def load_run(root: Path, run_id: str) -> dict[str, Any]:
         "run_id": run_id,
         "variant": variant,
         "baseline_ring_period": baseline,
+        "capture_quality_classification": runtime.get("capture_quality_classification", "UNKNOWN"),
+        "timing_filter": filter_result,
         "after_impulse_time": summarize_reference(
             raw,
+            sample_mask,
             reference_tsc=origin + 3.5 * tsc_hz,
             phase_origin_tsc=phase_origin,
             tsc_hz=tsc_hz,
@@ -115,6 +195,7 @@ def load_run(root: Path, run_id: str) -> dict[str, Any]:
         ),
         "after_full_step_time": summarize_reference(
             raw,
+            sample_mask,
             reference_tsc=origin + 5.0 * tsc_hz,
             phase_origin_tsc=phase_origin,
             tsc_hz=tsc_hz,

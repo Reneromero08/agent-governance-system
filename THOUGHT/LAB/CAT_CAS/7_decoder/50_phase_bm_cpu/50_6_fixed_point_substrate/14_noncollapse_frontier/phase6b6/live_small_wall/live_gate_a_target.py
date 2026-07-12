@@ -663,30 +663,40 @@ def sample_timing_summary(runtime_root: Path, expected_count: int) -> dict[str, 
         return None
     rows = parse_sample_timing(path)
     require(len(rows) == expected_count, "sample timing count does not match raw samples")
-    diagnostic = json.loads(diagnostic_path.read_text(encoding="utf-8"))
-    require(
-        diagnostic.get("sample_timing_schema_id") in {SAMPLE_TIMING_SCHEMA_ID, SAMPLE_TIMING_RECORD_V1_SCHEMA_ID},
-        "sample timing schema mismatch",
-    )
-    slot_count = len(diagnostic.get("sample_count_per_slot", [])) or 16
+    diagnostic = json.loads(diagnostic_path.read_text(encoding="utf-8")) if diagnostic_path.is_file() else None
+    if diagnostic is not None:
+        require(
+            diagnostic.get("sample_timing_schema_id") in {SAMPLE_TIMING_SCHEMA_ID, SAMPLE_TIMING_RECORD_V1_SCHEMA_ID},
+            "sample timing schema mismatch",
+        )
+    slot_count = len(diagnostic.get("sample_count_per_slot", [])) if diagnostic is not None else 0
+    if slot_count <= 0:
+        slot_count = max((row["actual_slot"] for row in rows), default=15) + 1
+        slot_count = max(slot_count, 16)
     slot_counts = [0 for _ in range(slot_count)]
     for row in rows:
         if 0 <= row["actual_slot"] < slot_count:
             slot_counts[row["actual_slot"]] += 1
-    require(slot_counts == diagnostic.get("sample_count_per_slot"), "diagnostic slot counts mismatch")
+    if diagnostic is not None:
+        require(slot_counts == diagnostic.get("sample_count_per_slot"), "diagnostic slot counts mismatch")
     lateness = [row["scheduler_lateness_ticks"] for row in rows]
     service_cycles = [row["service_ticks"] / 64.0 for row in rows]
     return {
-        "sample_timing_schema_id": rows[0]["schema_id"] if rows else diagnostic.get("sample_timing_schema_id"),
+        "sample_timing_schema_id": rows[0]["schema_id"] if rows else (
+            diagnostic.get("sample_timing_schema_id") if diagnostic is not None else None
+        ),
         "sample_timing_record_bytes": SAMPLE_TIMING_RECORD_BYTES if rows and rows[0]["schema_id"] == SAMPLE_TIMING_SCHEMA_ID else SAMPLE_TIMING_RECORD_V1_BYTES,
         "sample_count": len(rows),
+        "sample_count_per_slot": slot_counts,
         "max_scheduler_lateness_ticks": max(lateness) if lateness else 0,
         "max_service_cycles_per_access": max(service_cycles) if service_cycles else 0.0,
         "skipped_deadline_count": sum(row["missed_deadlines_before_sample"] for row in rows),
         "requested_actual_slot_mismatch_count": sum(
             1 for row in rows if row["requested_slot"] != row["actual_slot"]
         ),
-        "diagnostic_classification": diagnostic["capture_quality_classification"],
+        "diagnostic_classification": (
+            diagnostic["capture_quality_classification"] if diagnostic is not None else "BASIC_TIMING_FILE_ONLY"
+        ),
         "diagnostic": diagnostic,
     }
 
@@ -745,6 +755,23 @@ def self_test_timing_parser() -> int:
             legacy_summary is not None
             and legacy_summary["sample_timing_record_bytes"] == SAMPLE_TIMING_RECORD_V1_BYTES,
             "parser V1 self-test failed",
+        )
+        basic = root / "basic"
+        basic.mkdir()
+        basic_records = [
+            (0, 1000, 0, 1000, 1000, 0, 0, 0, 0, 1),
+            (1, 2000, 0, 2010, 2010, 0, 10, 0, 0, 1),
+            (2, 3000, 1, 3020, 3020, 1, 20, 0, 0, 1),
+        ]
+        (basic / "sample_timing.bin").write_bytes(
+            b"".join(SAMPLE_TIMING_RECORD_V2.pack(*record) for record in basic_records)
+        )
+        basic_summary = sample_timing_summary(basic, 3)
+        require(
+            basic_summary is not None
+            and basic_summary["diagnostic_classification"] == "BASIC_TIMING_FILE_ONLY"
+            and basic_summary["sample_count_per_slot"][:2] == [2, 1],
+            "basic timing parser self-test failed",
         )
     print(json.dumps({"status": "GATE_A_TIMING_PARSER_SELF_TEST_OK", "hardware_executions": 0}))
     return 0

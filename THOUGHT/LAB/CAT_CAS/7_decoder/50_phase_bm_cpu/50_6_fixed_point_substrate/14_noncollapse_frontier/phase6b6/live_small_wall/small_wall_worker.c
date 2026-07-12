@@ -443,7 +443,8 @@ static int self_test(const char *retained_output, int pilot) {
         }
     }
     const char *names[] = {
-        "raw_samples.bin", "slot_trace.jsonl", "LOCKIN_IQ.jsonl",
+        "raw_samples.bin", GATE_A_SAMPLE_TIMING_FILE,
+        "slot_trace.jsonl", "LOCKIN_IQ.jsonl",
         "SENDER_LIFECYCLE.jsonl", GATE_A_TEMPERATURE_RECEIPT_FILE,
         "runtime_result.json"
     };
@@ -456,7 +457,6 @@ static int self_test(const char *retained_output, int pilot) {
     }
     if (!rc && pilot >= GATE_A_PILOT_READONLY_OCCUPANCY_FORWARD) {
         const char *readonly_names[] = {
-            GATE_A_SAMPLE_TIMING_FILE,
             GATE_A_TIMING_DIAGNOSTIC_FILE,
         };
         for (size_t i = 0; i < sizeof(readonly_names) / sizeof(readonly_names[0]); i++) {
