@@ -6,7 +6,7 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`CODED_PREPROJECTION_PHASE_LOCAL_CANDIDATE_NOT_ESTABLISHED`
+`PHASE_LOCAL_PMU_CODED_RESPONSE_NOT_ESTABLISHED`
 
 **Active wall:**
 The current wall is now restoration-clean physical coupling for a declared
@@ -31,10 +31,13 @@ physical footprint equal. It also produced same-sign residual curvature and no o
 fold-odd coordinate. `coded_preprojection_warm_phase_local_sham_0` then placed matched
 controls adjacent to each public phase and passed the phase-local null classification.
 The matched physical candidate `coded_preprojection_warm_phase_local_0` restored and
-ran cleanly, but it did not produce an opposed fold-odd coordinate. The active wall is
-now carrier/observable selection for the declared pre-projection access model: the
-current timing carrier is layout-sensitive and does not preserve a phase-local
-fold-odd response under the tested P/M footprint contrast.
+ran cleanly, but it did not produce an opposed fold-odd coordinate. A follow-on
+ownership-intent PMU carrier discriminator, `f10_phase_local_pmu_0`, also restored and
+ran cleanly. It produced opposed candidate signs in both established coherence
+counters, but the magnitudes stayed below the predeclared three-times-sham-floor rule.
+The active wall is now carrier/observable selection for the declared pre-projection
+access model: neither the current timing carrier nor the tested PMU ownership-intent
+footprint carrier preserves a control-clean phase-local fold-odd response.
 
 ## Established
 
@@ -987,6 +990,48 @@ phase-local baseline cancellation. The earlier sequential restored candidate is
 demoted as layout/baseline-sensitive. H5 remains alive only as an access-model family
 that now needs a different carrier/observable or a stronger physical restoration law.
 
+The follow-on PMU carrier discriminator implemented the same phase-local public query
+shape on the established ownership-intent surface, using ordinary `perf_event_open`,
+rotated CAT_CAS-owned line-bank spans, and the already accepted
+`remote_store_same_value` operator:
+
+```text
+run id        f10_phase_local_pmu_0
+source bundle 4adb43d6206daadcafa438062008a424fe73e7542afda515b441da6f8dbef9df
+sequence      P0 C0 M0 M1 C1 P1 P2 C2 M2 M3 C3 P3
+worker status PHASE_LOCAL_PMU_CODED_RESPONSE_NOT_ESTABLISHED
+```
+
+The transaction completed with verified copy-back and remote cleanup. It performed
+zero frequency writes, zero voltage access, zero MSR reads, and zero MSR writes.
+Temperature stayed below the 68 C veto. Every PMU window completed, all windows were
+unmultiplexed, and the carrier byte digest restored after every window.
+
+The decoded PMU quadrature produced opposed candidate signs, but neither established
+coherence counter cleared the sham floor:
+
+```text
+cache_block_commands_change_to_dirty:
+  sham floor       1.228536697394e-05
+  candidate plus   9.575332079936e-06
+  candidate minus -1.644057619436e-06
+  signal           false
+
+probe_responses_dirty:
+  sham floor       2.224560787476e-05
+  candidate plus   1.129175296055e-05
+  candidate minus -1.098277509839e-05
+  signal           false
+```
+
+Checkpoint:
+
+`F10_PHASE_LOCAL_PMU_CHECKPOINT_20260712.json`
+
+**Status:** H5 remains alive as an access-model family, but the tested
+ownership-intent PMU footprint carrier is not established. Do not repeat the same
+timing or PMU footprint discriminator unchanged.
+
 ### H6 - Alternative carriers remain available
 
 Candidate families:
@@ -1006,29 +1051,29 @@ operator, observability, or restoration wall that it can attack.
 ## Cheapest current discriminator
 
 Build the next discriminator by changing carrier/observable, not by repeating the same
-timing-response coded loop. The cheapest useful route is a phase-local query loop on
-the already-established ownership-intent/PMU surface: use CAT_CAS-owned aligned lines,
-the ordinary `perf_event_open` coherence group, and matched sham/equal controls to ask
-whether `Change-to-Dirty` and dirty-probe coordinates preserve anything fold-odd that
-the timing carrier discarded.
+timing-response coded loop or the same ownership-intent PMU footprint loop. The
+cheapest useful route is now an IBS or phase-native availability probe on the Phenom II
+ordinary Linux performance interface: first establish whether the lab kernel exposes an
+IBS fetch/op or adjacent event source usable through `perf_event_open`, then run the
+smallest CAT_CAS-owned read/store sample that tells whether it preserves a
+pre-projection phase-local coordinate with lower sham curvature than the timing and
+PMU footprint carriers.
 
 The next probe should answer:
 
-1. Can the public query phases `0, pi/2, pi, 3pi/2` be mapped to a CAT_CAS-owned
-   physical timing or ownership-intent carrier without branch, orientation, target,
-   chronology, or future-value routing?
-2. Does the fixed quadrature observable
-   `z = (2/K) * sum(response_k * exp(i * theta_k))` retain a fold-odd coordinate only
-   for pre-projection coupling?
-3. Do post-projection, query-off, source-off, declaration-sham, and
-   private-fold controls behave as predicted before any promotion?
-4. Does a coherence-event observable preserve a phase-local relation that the timing
-   carrier collapses, while still restoring bytes and device state?
+1. Does the lab kernel expose an IBS fetch/op or adjacent phase-native event source
+   through ordinary `perf_event_open` without MSR access?
+2. Can that carrier measure a CAT_CAS-owned synthetic read/store stimulus without
+   observing unrelated processes, private data, cache sets, or physical addresses?
+3. Does the fixed quadrature observable
+   `z = (2/K) * sum(response_k * exp(i * theta_k))` show lower sham curvature than
+   `f10_phase_local_pmu_0`?
+4. What restoration class is directly measurable for that carrier beyond byte equality?
 
 Do not rerun the same timing coded loop, another scalar PMU route metric,
 unconditioned transient timing repeat, or unlabeled cache-line rectangle unchanged. The
-useful build now is a coded physical loop on a different measured carrier, with the
-model's controls preserved.
+useful build now is a first-light check for a different measured carrier, followed only
+if available by a coded physical loop with the model's controls preserved.
 
 ## Current claim ceiling
 
@@ -1041,8 +1086,10 @@ physical query-scramble alternative. `coded_preprojection_warm_query_off_0` and
 `coded_preprojection_warm_declaration_sham_0` exposed same-sign residual curvature.
 `coded_preprojection_warm_phase_local_sham_0` passed the phase-local null rule, but
 `coded_preprojection_warm_phase_local_0` did not produce an opposed fold-odd signal.
-The next useful marker remains short of `SMALL_WALL_CROSSED`; the next move must
-change carrier/observable rather than promote the timing result.
+`f10_phase_local_pmu_0` then produced opposed PMU signs but stayed below the
+three-times-sham-floor rule. The next useful marker remains short of
+`SMALL_WALL_CROSSED`; the next move must change carrier/observable rather than promote
+the timing or PMU footprint result.
 
 ## State update rule
 

@@ -1,0 +1,81 @@
+{
+  "schema_id": "CAT_CAS_F10_PHASE_LOCAL_PMU_CHECKPOINT_V1",
+  "starting_head": "09172d99b04cfa06ceea31de037d24858c10c6f1",
+  "run_id": "f10_phase_local_pmu_0",
+  "mode": "phase-local-pmu",
+  "command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\run_f10_coherence_operators.py --run-id f10_phase_local_pmu_0 --mode phase-local-pmu",
+  "local_run": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/f10_phase_local_pmu_0",
+  "source_bundle_sha256": "4adb43d6206daadcafa438062008a424fe73e7542afda515b441da6f8dbef9df",
+  "source_hashes": {
+    "f10_pmc_first_light_target.py": "d3a039d461dbc31b329d6643e8bf6dc5c130ae1fba69df79ab37f93b9caa0c99",
+    "f10_pmc_first_light_worker.c": "0a5ca46eda126a470939edbb7618ec3e1298a59878a767fcde52caaa200a5439"
+  },
+  "result_hashes": {
+    "CONTROLLER_RESULT.json": "4b61ba7f6b49e5f7700c684f6ddc35fbca1c1f8d2db1240441ed7e6becaa8606",
+    "CONTROLLER_STDERR.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "CONTROLLER_STDOUT.txt": "c25009940630a178e8b067f26aa3c1889387d074df40ff7898f96cc94023e891",
+    "F10_PHASE_LOCAL_PMU_RESULT.json": "cfc729836d85323cb6a2b639af591c02a3ed552e83ea46a76956ab3456291dd1",
+    "FILE_MANIFEST.json": "f22890840e2d1e02d2536019b0754986116b23215f16fefe90187ac0b9c74138",
+    "FINAL_RESULT.json": "3d0f048262c8b6f8a52b32ef2c1d4f681efb37395c1e6ab4132fa2f7f4a4acf5"
+  },
+  "target_status": "F10_PHASE_LOCAL_PMU_TARGET_COMPLETE",
+  "worker_status": "PHASE_LOCAL_PMU_CODED_RESPONSE_NOT_ESTABLISHED",
+  "copy_verified": true,
+  "remote_cleaned": true,
+  "remote_returncode": 0,
+  "selected_group": "primary_nb_coherence",
+  "temperature": {
+    "preflight_c": 40.5,
+    "post_c": 41.125,
+    "veto_c": 68.0,
+    "below_veto": true
+  },
+  "device_access": {
+    "frequency_writes": 0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "forbidden_process_matches_after": []
+  },
+  "acceptance": {
+    "all_windows_ok": true,
+    "all_unmultiplexed": true,
+    "carrier_restored": true,
+    "change_to_dirty_phase_local_signal": false,
+    "probe_dirty_phase_local_signal": false,
+    "phase_local_pmu_captured": false
+  },
+  "decoded_observables": {
+    "cache_block_commands_change_to_dirty": {
+      "sham_plus_imag": 1.228536697394e-05,
+      "sham_minus_imag": 3.827644687729e-07,
+      "sham_floor": 1.228536697394e-05,
+      "candidate_plus_imag": 9.575332079936e-06,
+      "candidate_minus_imag": -1.644057619436e-06,
+      "opposed_sign": true,
+      "exceeds_three_x_sham_floor": false
+    },
+    "probe_responses_dirty": {
+      "sham_plus_imag": 2.224560787476e-05,
+      "sham_minus_imag": -1.309288530834e-06,
+      "sham_floor": 2.224560787476e-05,
+      "candidate_plus_imag": 1.129175296055e-05,
+      "candidate_minus_imag": -1.098277509839e-05,
+      "opposed_sign": true,
+      "exceeds_three_x_sham_floor": false
+    }
+  },
+  "adjudication": {
+    "marker": "PHASE_LOCAL_PMU_CODED_RESPONSE_NOT_ESTABLISHED",
+    "meaning": "The ownership-intent PMU carrier produced opposed candidate signs, but both established coherence counters stayed below the predeclared three-times-sham-floor acceptance rule.",
+    "claim_ceiling": "CONTROLLED_COHERENCE_STATE_FOUND",
+    "excluded_claims": [
+      "path memory",
+      "coherence holonomy",
+      "OrbitState coupling",
+      "fold-odd recovery",
+      "Small Wall crossing"
+    ],
+    "next_wall": "The declared pre-projection access model needs a stronger restoration-clean carrier or a non-cache-line phase-native observable; repeating the same timing or PMU footprint discriminator unchanged is not useful."
+  }
+}

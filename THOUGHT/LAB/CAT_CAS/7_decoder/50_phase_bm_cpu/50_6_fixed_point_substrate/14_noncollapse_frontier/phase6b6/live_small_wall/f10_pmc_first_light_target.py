@@ -74,6 +74,13 @@ MODES: dict[str, dict[str, Any]] = {
         "failed_status": "F10_ROUTE_STATE_TARGET_FAILED",
         "claim_ceiling": "Route-state PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
     },
+    "phase-local-pmu": {
+        "worker_args": ["--phase-local-pmu"],
+        "result_file": "F10_PHASE_LOCAL_PMU_RESULT.json",
+        "complete_status": "F10_PHASE_LOCAL_PMU_TARGET_COMPLETE",
+        "failed_status": "F10_PHASE_LOCAL_PMU_TARGET_FAILED",
+        "claim_ceiling": "Phase-local ownership-intent PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim",
+    },
 }
 FORBIDDEN_PROCESS_MARKERS = (
     "f10_pmc_first_light_worker",

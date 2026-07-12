@@ -40,6 +40,8 @@
 #define PATH_DUAL_OBSERVE_RESULT_SCHEMA "CAT_CAS_F10_PATH_DUAL_OBSERVE_RESULT_V1"
 #define PATH_RW_OBSERVE_RESULT_SCHEMA "CAT_CAS_F10_PATH_RW_OBSERVE_RESULT_V1"
 #define ROUTE_STATE_RESULT_SCHEMA "CAT_CAS_F10_ROUTE_STATE_PILOT_RESULT_V1"
+#define PHASE_LOCAL_PMU_RESULT_SCHEMA "CAT_CAS_F10_PHASE_LOCAL_PMU_RESULT_V1"
+#define PHASE_LOCAL_BANK_LINES 512u
 
 struct event_def {
     const char *name;
@@ -124,6 +126,14 @@ struct route_spec {
     const char *name;
     int home_core;
     int remote_core;
+};
+
+struct phase_local_window_spec {
+    const char *token;
+    const char *role;
+    int phase_index;
+    size_t line_count;
+    size_t start_bank;
 };
 
 static const struct event_def support_events[SUPPORT_EVENTS] = {
@@ -391,6 +401,24 @@ static void store_same_value_all_on_core(struct carrier *carrier, int core) {
     if (pin_to_core(core) != 0) return;
     for (int iter = 0; iter < OPERATOR_ITERATIONS; iter++) {
         for (size_t line = 0; line < carrier->line_count; line++) {
+            volatile uint64_t *p = (volatile uint64_t *)(void *)(carrier->bytes + line * CACHE_LINE_BYTES);
+            uint64_t value = *p;
+            *p = value;
+        }
+    }
+    __asm__ __volatile__("mfence" : : : "memory");
+}
+
+__attribute__((noinline, noclone))
+static void store_same_value_rotated_span_on_core(struct carrier *carrier, int core, size_t line_count, size_t start_bank) {
+    if (pin_to_core(core) != 0) return;
+    if (line_count > carrier->line_count) line_count = carrier->line_count;
+    size_t bank_lines = PHASE_LOCAL_BANK_LINES;
+    if (bank_lines == 0u || bank_lines > carrier->line_count) bank_lines = carrier->line_count;
+    size_t start_line = (start_bank * bank_lines) % carrier->line_count;
+    for (int iter = 0; iter < OPERATOR_ITERATIONS; iter++) {
+        for (size_t idx = 0; idx < line_count; idx++) {
+            size_t line = (start_line + idx) % carrier->line_count;
             volatile uint64_t *p = (volatile uint64_t *)(void *)(carrier->bytes + line * CACHE_LINE_BYTES);
             uint64_t value = *p;
             *p = value;
@@ -1151,6 +1179,294 @@ static int run_coherence_operator_mode(const char *output_root, struct carrier *
     return 0;
 }
 
+struct phase_decode {
+    long double plus_real;
+    long double plus_imag;
+    long double minus_real;
+    long double minus_imag;
+};
+
+static int measure_phase_local_pmu_window(
+    const struct event_def group[MAX_GROUP_EVENTS],
+    const struct phase_local_window_spec *window,
+    struct carrier *carrier,
+    struct group_result *result,
+    uint64_t *duration_ns,
+    uint64_t *digest_before,
+    uint64_t *digest_after_restore
+) {
+    int fds[MAX_GROUP_EVENTS];
+    uint64_t ids[MAX_GROUP_EVENTS];
+    memset(result, 0, sizeof(*result));
+    restore_on_core(carrier, CATCAS_CORE_A);
+    prefault_carrier(carrier);
+    restore_on_core(carrier, CATCAS_CORE_A);
+    *digest_before = fnv1a64(carrier->bytes, carrier->byte_count);
+    int opened = open_group(group, CATCAS_CORE_B, fds, ids);
+    if (opened != 0) {
+        result->open_errno = -opened;
+        return opened;
+    }
+    result->opened = true;
+    if (ioctl(fds[0], PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t start = monotonic_ns();
+    if (ioctl(fds[0], PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    store_same_value_rotated_span_on_core(carrier, CATCAS_CORE_B, window->line_count, window->start_bank);
+    if (ioctl(fds[0], PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        int saved = errno;
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+        return -saved;
+    }
+    uint64_t end = monotonic_ns();
+    int read_rc = read_group(fds[0], result);
+    for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(fds[i]);
+    if (read_rc != 0) return read_rc;
+    *duration_ns = end >= start ? end - start : 0;
+    home_core_restore(carrier);
+    *digest_after_restore = fnv1a64(carrier->bytes, carrier->byte_count);
+    return 0;
+}
+
+static void decode_phase_observable(
+    const struct phase_local_window_spec windows[12],
+    const struct group_result results[12],
+    const char *event_name,
+    struct phase_decode *decoded
+) {
+    long double p[4] = {0.0L, 0.0L, 0.0L, 0.0L};
+    long double c[4] = {0.0L, 0.0L, 0.0L, 0.0L};
+    long double m[4] = {0.0L, 0.0L, 0.0L, 0.0L};
+    for (int i = 0; i < 12; i++) {
+        int phase = windows[i].phase_index;
+        if (phase < 0 || phase >= 4) continue;
+        long double value = normalized_event_value(&results[i], primary_group, event_name);
+        if (strcmp(windows[i].role, "P") == 0) {
+            p[phase] = value;
+        } else if (strcmp(windows[i].role, "C") == 0) {
+            c[phase] = value;
+        } else if (strcmp(windows[i].role, "M") == 0) {
+            m[phase] = value;
+        }
+    }
+    long double plus[4];
+    long double minus[4];
+    for (int phase = 0; phase < 4; phase++) {
+        plus[phase] = p[phase] - c[phase];
+        minus[phase] = m[phase] - c[phase];
+    }
+    decoded->plus_real = 0.5L * (plus[0] - plus[2]);
+    decoded->plus_imag = 0.5L * (plus[1] - plus[3]);
+    decoded->minus_real = 0.5L * (minus[0] - minus[2]);
+    decoded->minus_imag = 0.5L * (minus[1] - minus[3]);
+}
+
+static bool opposed_sign(long double a, long double b) {
+    return (a > 0.0L && b < 0.0L) || (a < 0.0L && b > 0.0L);
+}
+
+static void print_phase_decode(
+    FILE *out,
+    const char *event_name,
+    const struct phase_decode *sham,
+    const struct phase_decode *candidate
+) {
+    long double sham_floor = abs_ld(sham->plus_imag);
+    if (abs_ld(sham->minus_imag) > sham_floor) sham_floor = abs_ld(sham->minus_imag);
+    long double min_candidate = abs_ld(candidate->plus_imag) < abs_ld(candidate->minus_imag) ?
+        abs_ld(candidate->plus_imag) : abs_ld(candidate->minus_imag);
+    bool opposed = opposed_sign(candidate->plus_imag, candidate->minus_imag);
+    bool exceeds_sham = min_candidate > 3.0L * sham_floor;
+    fprintf(out, "{\"event\":\"%s\",", event_name);
+    fprintf(out, "\"sham\":{\"plus\":{\"real\":%.12Le,\"imag\":%.12Le},\"minus\":{\"real\":%.12Le,\"imag\":%.12Le}},",
+        sham->plus_real, sham->plus_imag, sham->minus_real, sham->minus_imag);
+    fprintf(out, "\"candidate\":{\"plus\":{\"real\":%.12Le,\"imag\":%.12Le},\"minus\":{\"real\":%.12Le,\"imag\":%.12Le}},",
+        candidate->plus_real, candidate->plus_imag, candidate->minus_real, candidate->minus_imag);
+    fprintf(out, "\"sham_floor\":%.12Le,\"opposed_sign\":%s,\"exceeds_three_x_sham_floor\":%s,\"phase_local_signal\":%s}",
+        sham_floor, json_bool(opposed), json_bool(exceeds_sham), json_bool(opposed && exceeds_sham));
+}
+
+static bool phase_decode_signal(const struct phase_decode *sham, const struct phase_decode *candidate) {
+    long double sham_floor = abs_ld(sham->plus_imag);
+    if (abs_ld(sham->minus_imag) > sham_floor) sham_floor = abs_ld(sham->minus_imag);
+    long double min_candidate = abs_ld(candidate->plus_imag) < abs_ld(candidate->minus_imag) ?
+        abs_ld(candidate->plus_imag) : abs_ld(candidate->minus_imag);
+    return opposed_sign(candidate->plus_imag, candidate->minus_imag) && min_candidate > 3.0L * sham_floor;
+}
+
+static int run_phase_local_pmu_mode(const char *output_root, struct carrier *carrier, uint64_t initial_digest) {
+    int primary_fds[MAX_GROUP_EVENTS];
+    uint64_t primary_ids[MAX_GROUP_EVENTS];
+    int primary_open_rc = open_group(primary_group, CATCAS_CORE_B, primary_fds, primary_ids);
+    if (primary_open_rc == 0) {
+        for (int i = 0; i < MAX_GROUP_EVENTS; i++) close(primary_fds[i]);
+    }
+
+    enum { PHASE_LOCAL_VARIANT_COUNT = 2, PHASE_LOCAL_WINDOW_COUNT = 12 };
+    const size_t small_lines = PHASE_LOCAL_BANK_LINES * 2u;
+    const size_t equal_lines = PHASE_LOCAL_BANK_LINES * 4u;
+    const size_t large_lines = CARRIER_LINES;
+    const char *variant_names[PHASE_LOCAL_VARIANT_COUNT] = {
+        "phase_local_sham",
+        "phase_local_candidate"
+    };
+    const struct phase_local_window_spec windows[PHASE_LOCAL_VARIANT_COUNT][PHASE_LOCAL_WINDOW_COUNT] = {
+        {
+            {"P0", "P", 0, PHASE_LOCAL_BANK_LINES * 4u, 0u},
+            {"C0", "C", 0, PHASE_LOCAL_BANK_LINES * 4u, 0u},
+            {"M0", "M", 0, PHASE_LOCAL_BANK_LINES * 4u, 0u},
+            {"M1", "M", 1, PHASE_LOCAL_BANK_LINES * 4u, 2u},
+            {"C1", "C", 1, PHASE_LOCAL_BANK_LINES * 4u, 2u},
+            {"P1", "P", 1, PHASE_LOCAL_BANK_LINES * 4u, 2u},
+            {"P2", "P", 2, PHASE_LOCAL_BANK_LINES * 4u, 4u},
+            {"C2", "C", 2, PHASE_LOCAL_BANK_LINES * 4u, 4u},
+            {"M2", "M", 2, PHASE_LOCAL_BANK_LINES * 4u, 4u},
+            {"M3", "M", 3, PHASE_LOCAL_BANK_LINES * 4u, 6u},
+            {"C3", "C", 3, PHASE_LOCAL_BANK_LINES * 4u, 6u},
+            {"P3", "P", 3, PHASE_LOCAL_BANK_LINES * 4u, 6u}
+        },
+        {
+            {"P0", "P", 0, CARRIER_LINES, 0u},
+            {"C0", "C", 0, PHASE_LOCAL_BANK_LINES * 4u, 0u},
+            {"M0", "M", 0, CARRIER_LINES, 0u},
+            {"M1", "M", 1, PHASE_LOCAL_BANK_LINES * 2u, 2u},
+            {"C1", "C", 1, PHASE_LOCAL_BANK_LINES * 4u, 2u},
+            {"P1", "P", 1, CARRIER_LINES, 0u},
+            {"P2", "P", 2, PHASE_LOCAL_BANK_LINES * 2u, 4u},
+            {"C2", "C", 2, PHASE_LOCAL_BANK_LINES * 4u, 4u},
+            {"M2", "M", 2, PHASE_LOCAL_BANK_LINES * 2u, 4u},
+            {"M3", "M", 3, CARRIER_LINES, 0u},
+            {"C3", "C", 3, PHASE_LOCAL_BANK_LINES * 4u, 6u},
+            {"P3", "P", 3, PHASE_LOCAL_BANK_LINES * 2u, 6u}
+        }
+    };
+
+    struct group_result results[PHASE_LOCAL_VARIANT_COUNT][PHASE_LOCAL_WINDOW_COUNT];
+    uint64_t durations[PHASE_LOCAL_VARIANT_COUNT][PHASE_LOCAL_WINDOW_COUNT];
+    uint64_t digest_before[PHASE_LOCAL_VARIANT_COUNT][PHASE_LOCAL_WINDOW_COUNT];
+    uint64_t digest_after[PHASE_LOCAL_VARIANT_COUNT][PHASE_LOCAL_WINDOW_COUNT];
+    int window_rc[PHASE_LOCAL_VARIANT_COUNT][PHASE_LOCAL_WINDOW_COUNT];
+
+    for (int variant = 0; variant < PHASE_LOCAL_VARIANT_COUNT; variant++) {
+        for (int i = 0; i < PHASE_LOCAL_WINDOW_COUNT; i++) {
+            memset(&results[variant][i], 0, sizeof(results[variant][i]));
+            durations[variant][i] = 0;
+            digest_before[variant][i] = 0;
+            digest_after[variant][i] = 0;
+            if (primary_open_rc != 0) {
+                window_rc[variant][i] = -ENODEV;
+            } else {
+                window_rc[variant][i] = measure_phase_local_pmu_window(
+                    primary_group,
+                    &windows[variant][i],
+                    carrier,
+                    &results[variant][i],
+                    &durations[variant][i],
+                    &digest_before[variant][i],
+                    &digest_after[variant][i]
+                );
+            }
+        }
+    }
+
+    bool all_windows_ok = true;
+    bool all_unmultiplexed = true;
+    bool all_restored = true;
+    for (int variant = 0; variant < PHASE_LOCAL_VARIANT_COUNT; variant++) {
+        for (int i = 0; i < PHASE_LOCAL_WINDOW_COUNT; i++) {
+            all_windows_ok = all_windows_ok && window_rc[variant][i] == 0;
+            all_unmultiplexed = all_unmultiplexed && results[variant][i].unmultiplexed;
+            all_restored = all_restored && digest_after[variant][i] == initial_digest;
+        }
+    }
+
+    struct phase_decode sham_c2d;
+    struct phase_decode candidate_c2d;
+    struct phase_decode sham_probe;
+    struct phase_decode candidate_probe;
+    decode_phase_observable(windows[0], results[0], "cache_block_commands_change_to_dirty", &sham_c2d);
+    decode_phase_observable(windows[1], results[1], "cache_block_commands_change_to_dirty", &candidate_c2d);
+    decode_phase_observable(windows[0], results[0], "probe_responses_dirty", &sham_probe);
+    decode_phase_observable(windows[1], results[1], "probe_responses_dirty", &candidate_probe);
+    bool c2d_signal = phase_decode_signal(&sham_c2d, &candidate_c2d);
+    bool probe_signal = phase_decode_signal(&sham_probe, &candidate_probe);
+    bool phase_local_pmu_captured = primary_open_rc == 0 && all_windows_ok && all_unmultiplexed &&
+        all_restored && (c2d_signal || probe_signal);
+
+    char result_path[4096];
+    int n = snprintf(result_path, sizeof(result_path), "%s/F10_PHASE_LOCAL_PMU_RESULT.json", output_root);
+    if (n <= 0 || (size_t)n >= sizeof(result_path)) return 1;
+    FILE *out = fopen(result_path, "w");
+    if (!out) {
+        fprintf(stderr, "cannot open result: %s\n", strerror(errno));
+        return 1;
+    }
+
+    fprintf(out, "{\n");
+    fprintf(out, "  \"schema_id\": \"%s\",\n", PHASE_LOCAL_PMU_RESULT_SCHEMA);
+    fprintf(out, "  \"status\": \"%s\",\n", phase_local_pmu_captured ? "PHASE_LOCAL_PMU_CODED_RESPONSE_FOUND" : "PHASE_LOCAL_PMU_CODED_RESPONSE_NOT_ESTABLISHED");
+    fprintf(out, "  \"claim_ceiling\": \"Phase-local ownership-intent PMU discriminator only; no path memory, coherence holonomy, OrbitState coupling, fold-odd recovery, or Small Wall crossing claim\",\n");
+    fprintf(out, "  \"cores\": {\"home_core\": %d, \"observed_core\": %d},\n", CATCAS_CORE_A, CATCAS_CORE_B);
+    fprintf(out, "  \"perf_interface\": {\"type\": \"PERF_TYPE_RAW\", \"event_format\": \"config:0-7,32-35\", \"umask_format\": \"config:8-15\", \"exclude_kernel\": true, \"exclude_hv\": true},\n");
+    fprintf(out, "  \"source_constraints\": {\"direct_msr_access\": false, \"voltage_access\": false, \"frequency_writes\": 0, \"experiment_owned_memory_only\": true},\n");
+    fprintf(out, "  \"carrier\": {\"line_count\": %zu, \"line_bytes\": %d, \"byte_count\": %zu, \"digest_kind\": \"fnv1a64\", \"initial_digest_hex\": \"0x%016" PRIx64 "\"},\n", carrier->line_count, CACHE_LINE_BYTES, carrier->byte_count, initial_digest);
+    fprintf(out, "  \"footprint_lines\": {\"small\": %zu, \"equal\": %zu, \"large\": %zu, \"bank_lines\": %u, \"bank_plan\": \"rotated contiguous bank spans; not fixed-prefix\"},\n",
+        small_lines, equal_lines, large_lines, (unsigned int)PHASE_LOCAL_BANK_LINES);
+    fprintf(out, "  \"selected_group\": \"primary_nb_coherence\",\n");
+    fprintf(out, "  \"group_open_rc\": %d,\n", primary_open_rc);
+    fprintf(out, "  \"selected_events\": ");
+    print_group_defs(out, primary_group);
+    fprintf(out, ",\n");
+    fprintf(out, "  \"phase_local_layout\": {\"sequence\": \"P0 C0 M0 M1 C1 P1 P2 C2 M2 M3 C3 P3\", \"phases\": [\"0\", \"pi/2\", \"pi\", \"3pi/2\"], \"plus\": \"P-C\", \"minus\": \"M-C\", \"decode\": \"z=(2/4)*sum(response_k*exp(i*theta_k))\"},\n");
+    fprintf(out, "  \"predeclared_observable\": {\"primary\": \"cache_block_commands_change_to_dirty/cpu_cycles_not_halted\", \"secondary\": \"probe_responses_dirty/cpu_cycles_not_halted\", \"acceptance\": \"opposed candidate Im plus/minus and min(abs(candidate imag)) > 3 * sham_floor for either event\"},\n");
+    fprintf(out, "  \"variants\": [\n");
+    for (int variant = 0; variant < PHASE_LOCAL_VARIANT_COUNT; variant++) {
+        fprintf(out, "    {\"name\": \"%s\", \"windows\": [\n", variant_names[variant]);
+        for (int i = 0; i < PHASE_LOCAL_WINDOW_COUNT; i++) {
+            fprintf(out, "      {\"token\": \"%s\", \"role\": \"%s\", \"phase_index\": %d, \"line_count\": %zu, \"start_bank\": %zu, \"rc\": %d, \"duration_ns\": %" PRIu64 ", \"carrier_digest_before_hex\": \"0x%016" PRIx64 "\", \"carrier_digest_after_restore_hex\": \"0x%016" PRIx64 "\", \"carrier_restored\": %s, \"group\": ",
+                windows[variant][i].token,
+                windows[variant][i].role,
+                windows[variant][i].phase_index,
+                windows[variant][i].line_count,
+                windows[variant][i].start_bank,
+                window_rc[variant][i],
+                durations[variant][i],
+                digest_before[variant][i],
+                digest_after[variant][i],
+                json_bool(digest_after[variant][i] == initial_digest));
+            print_group_result(out, primary_group, &results[variant][i]);
+            fprintf(out, "}%s\n", i + 1 == PHASE_LOCAL_WINDOW_COUNT ? "" : ",");
+        }
+        fprintf(out, "    ]}%s\n", variant + 1 == PHASE_LOCAL_VARIANT_COUNT ? "" : ",");
+    }
+    fprintf(out, "  ],\n");
+    fprintf(out, "  \"decoded_observables\": [");
+    print_phase_decode(out, "cache_block_commands_change_to_dirty", &sham_c2d, &candidate_c2d);
+    fprintf(out, ",");
+    print_phase_decode(out, "probe_responses_dirty", &sham_probe, &candidate_probe);
+    fprintf(out, "],\n");
+    fprintf(out, "  \"acceptance\": {\"all_windows_ok\": %s, \"all_unmultiplexed\": %s, \"carrier_restored\": %s, \"change_to_dirty_phase_local_signal\": %s, \"probe_dirty_phase_local_signal\": %s, \"phase_local_pmu_captured\": %s}\n",
+        json_bool(all_windows_ok),
+        json_bool(all_unmultiplexed),
+        json_bool(all_restored),
+        json_bool(c2d_signal),
+        json_bool(probe_signal),
+        json_bool(phase_local_pmu_captured));
+    fprintf(out, "}\n");
+    fclose(out);
+    printf("{\"status\":\"%s\",\"result_path\":\"%s\",\"selected_group\":\"primary_nb_coherence\"}\n",
+        phase_local_pmu_captured ? "PHASE_LOCAL_PMU_CODED_RESPONSE_FOUND" : "PHASE_LOCAL_PMU_CODED_RESPONSE_NOT_ESTABLISHED",
+        result_path);
+    return 0;
+}
+
 static int measure_path_sequence(
     const struct path_step steps[4],
     struct carrier *carrier,
@@ -1601,6 +1917,7 @@ int main(int argc, char **argv) {
     bool path_dual_observe_mode = false;
     bool path_rw_observe_mode = false;
     bool route_state_mode = false;
+    bool phase_local_pmu_mode = false;
     if (argc == 3 && strcmp(argv[1], "--output-root") == 0) {
         output_root = argv[2];
     } else if (argc == 4 && strcmp(argv[1], "--coherence-operators") == 0 &&
@@ -1623,10 +1940,14 @@ int main(int argc, char **argv) {
                strcmp(argv[2], "--output-root") == 0) {
         route_state_mode = true;
         output_root = argv[3];
+    } else if (argc == 4 && strcmp(argv[1], "--phase-local-pmu") == 0 &&
+               strcmp(argv[2], "--output-root") == 0) {
+        phase_local_pmu_mode = true;
+        output_root = argv[3];
     } else if (argc == 2 && strcmp(argv[1], "--self-test") == 0) {
         return self_test();
     } else {
-        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root>\n", argv[0]);
+        fprintf(stderr, "usage: %s --output-root <absolute-output-root> | --coherence-operators --output-root <absolute-output-root> | --path-dependence --output-root <absolute-output-root> | --path-dual-observe --output-root <absolute-output-root> | --path-rw-observe --output-root <absolute-output-root> | --route-state --output-root <absolute-output-root> | --phase-local-pmu --output-root <absolute-output-root>\n", argv[0]);
         return 2;
     }
     if (output_root[0] != '/') {
@@ -1670,6 +1991,11 @@ int main(int argc, char **argv) {
     }
     if (route_state_mode) {
         int rc = run_route_state_mode(output_root, &carrier, initial_digest);
+        free(carrier.bytes);
+        return rc;
+    }
+    if (phase_local_pmu_mode) {
+        int rc = run_phase_local_pmu_mode(output_root, &carrier, initial_digest);
         free(carrier.bytes);
         return rc;
     }
