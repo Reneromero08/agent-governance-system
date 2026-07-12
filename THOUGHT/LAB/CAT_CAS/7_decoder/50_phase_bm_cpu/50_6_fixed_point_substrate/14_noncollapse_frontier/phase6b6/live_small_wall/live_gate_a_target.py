@@ -34,6 +34,8 @@ TRANSACTION_TIMEOUT_S = 45
 SCHEDULE_SHA256 = "418ff6e9801ba5def3f17fb25c7d56f044599e6e5bc8cc3260e0368d4877d116"
 READONLY_MICRO_SCHEDULE_SHA256 = "57f6aa152d2c099429e7ca2c4d843102739c81b2158e46c4d49f07a96b6f4758"
 CODED_PREPROJECTION_SCHEDULE_SHA256 = "35496568999774114af1057ac70fda4b6aeb8a8989e8daf1d1672e508523d07c"
+CODED_PREPROJECTION_RESTORED_SCHEDULE_SHA256 = "90538e09de19f90699adabdb2e283a73039f8e5e1e4e71b2501d56e966dbb7cf"
+CODED_PREPROJECTION_WARM_RESTORED_SCHEDULE_SHA256 = "94cbace65638dd457983475db0944e37b9e9bf9fec96ae1a8dbb4515db663c3b"
 READONLY_MICRO_READ_HZ = 2_000
 CODED_PREPROJECTION_READ_HZ = 2_000
 LEGACY_READ_HZ = 8_000
@@ -54,6 +56,14 @@ READONLY_VARIANTS = frozenset({
 })
 CODED_PREPROJECTION_VARIANTS = frozenset({
     "coded-preprojection-loop",
+    "coded-preprojection-restored-loop",
+    "coded-preprojection-warm-restored-loop",
+})
+CODED_PREPROJECTION_RESTORED_VARIANTS = frozenset({
+    "coded-preprojection-restored-loop",
+})
+CODED_PREPROJECTION_WARM_RESTORED_VARIANTS = frozenset({
+    "coded-preprojection-warm-restored-loop",
 })
 READONLY_TIMING_VARIANTS = READONLY_VARIANTS | CODED_PREPROJECTION_VARIANTS
 SOURCE_NAMES = (
@@ -457,7 +467,15 @@ def run_worker_monitored(
     pilot_variant: str,
 ) -> tuple[int, str, str, list[dict[str, Any]], str | None]:
     if pilot_variant in CODED_PREPROJECTION_VARIANTS:
-        schedule_sha256 = CODED_PREPROJECTION_SCHEDULE_SHA256
+        schedule_sha256 = (
+            CODED_PREPROJECTION_WARM_RESTORED_SCHEDULE_SHA256
+            if pilot_variant in CODED_PREPROJECTION_WARM_RESTORED_VARIANTS
+            else (
+                CODED_PREPROJECTION_RESTORED_SCHEDULE_SHA256
+                if pilot_variant in CODED_PREPROJECTION_RESTORED_VARIANTS
+                else CODED_PREPROJECTION_SCHEDULE_SHA256
+            )
+        )
         read_hz = CODED_PREPROJECTION_READ_HZ
     elif pilot_variant in READONLY_VARIANTS:
         schedule_sha256 = READONLY_MICRO_SCHEDULE_SHA256
@@ -525,7 +543,7 @@ def run_worker_monitored(
             elif elapsed >= 0.5 and frequencies["5"] != REQUIRED_FREQUENCY_KHZ:
                 veto = f"active receiver frequency drift during runtime: {frequencies}"
             elif readonly_timing and (
-                (coded_preprojection and 1.05 <= elapsed <= 6.95)
+                (coded_preprojection and 1.05 <= elapsed <= 7.45)
                 or ((not coded_preprojection) and 1.05 <= elapsed <= 2.95)
             ) and frequencies["4"] != REQUIRED_FREQUENCY_KHZ:
                 veto = f"active micro-stimulus frequency drift during runtime: {frequencies}"
@@ -545,7 +563,7 @@ def run_worker_monitored(
                     (
                         readonly_timing
                         and (
-                            (coded_preprojection and 1.05 <= elapsed <= 6.95)
+                            (coded_preprojection and 1.05 <= elapsed <= 7.45)
                             or ((not coded_preprojection) and 1.05 <= elapsed <= 2.95)
                         )
                     )
@@ -940,7 +958,32 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
     burst_by_slot = {
         int(row["slot_index"]): row for row in diagnostic.get("sender_burst_boundaries", [])
     }
-    require(all(slot in burst_by_slot for slot in range(2, 14)), "coded-loop burst boundary missing")
+    if pilot_variant in CODED_PREPROJECTION_WARM_RESTORED_VARIANTS:
+        plus_slots = [3, 4, 5, 6]
+        minus_slots = [7, 8, 9, 10]
+        post_slots = [11, 12, 13, 14]
+        source_off_slots = (2, 15)
+        neutral_before_slot = 2
+        neutral_after_slot = 15
+        schedule_sha256 = CODED_PREPROJECTION_WARM_RESTORED_SCHEDULE_SHA256
+    elif pilot_variant in CODED_PREPROJECTION_RESTORED_VARIANTS:
+        plus_slots = [2, 3, 4, 5]
+        minus_slots = [6, 7, 8, 9]
+        post_slots = [10, 11, 12, 13]
+        source_off_slots = (1, 14)
+        neutral_before_slot = 1
+        neutral_after_slot = 14
+        schedule_sha256 = CODED_PREPROJECTION_RESTORED_SCHEDULE_SHA256
+    else:
+        plus_slots = [2, 3, 4, 5]
+        minus_slots = [6, 7, 8, 9]
+        post_slots = [10, 11, 12, 13]
+        source_off_slots = (1, 15)
+        neutral_before_slot = 0
+        neutral_after_slot = 14
+        schedule_sha256 = CODED_PREPROJECTION_SCHEDULE_SHA256
+    stimulus_slots = plus_slots + minus_slots + post_slots
+    require(all(slot in burst_by_slot for slot in stimulus_slots), "coded-loop burst boundary missing")
 
     slot_summaries: list[dict[str, Any]] = []
     during_means: dict[int, float | None] = {}
@@ -976,7 +1019,9 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
             {
                 "slot_index": slot,
                 "token": lockin[slot]["token"],
-                "phase_index": None if slot < 2 or slot > 13 else ((slot - 2) % 4) * 2,
+                "phase_index": None if slot not in stimulus_slots else (
+                    (stimulus_slots.index(slot) % 4) * 2
+                ),
                 "whole_slot": {
                     "sample_count": len(slot_values),
                     "mean_response_cycles": whole_means[slot],
@@ -997,9 +1042,6 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
             }
         )
 
-    plus_slots = [2, 3, 4, 5]
-    minus_slots = [6, 7, 8, 9]
-    post_slots = [10, 11, 12, 13]
     require(
         all(during_means[slot] is not None for slot in plus_slots + minus_slots + post_slots),
         "coded-loop missing during-burst mean",
@@ -1015,13 +1057,13 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
     minus_z = reconstruct_coded_complex(minus_net)
     post_z = reconstruct_coded_complex(post_net)
     source_off_values = [
-        value for slot in (1, 15)
+        value for slot in source_off_slots
         for value in [whole_means[slot]]
         if value is not None
     ]
     source_off_range = max(source_off_values) - min(source_off_values) if source_off_values else None
-    neutral_before = whole_means[0]
-    neutral_after = whole_means[14]
+    neutral_before = whole_means[neutral_before_slot]
+    neutral_after = whole_means[neutral_after_slot]
     neutral_delta = (
         abs(neutral_after - neutral_before)
         if neutral_before is not None and neutral_after is not None
@@ -1031,7 +1073,7 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
     fold_odd_balance = abs(abs(plus_z["imag"]) - abs(minus_z["imag"]))
     control_floor = max(abs(post_z["imag"]), source_off_range or 0.0)
     fold_odd_exceeds_controls = min(abs(plus_z["imag"]), abs(minus_z["imag"])) > 3.0 * control_floor
-    neutral_restoration_tolerance = max(5.0, 3.0 * (source_off_range or 0.0))
+    neutral_restoration_tolerance = 5.0
     neutral_restoration_passed = (
         neutral_delta is not None and neutral_delta <= neutral_restoration_tolerance
     )
@@ -1039,7 +1081,7 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
         sufficient
         and fold_odd_opposed
         and fold_odd_exceeds_controls
-        and all(bool(burst_by_slot[slot].get("completed_before_slot_end")) for slot in range(2, 14))
+        and all(bool(burst_by_slot[slot].get("completed_before_slot_end")) for slot in stimulus_slots)
     )
     engineering_candidate = bool(
         fold_odd_signal_candidate
@@ -1050,17 +1092,19 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
         "pilot_variant": pilot_variant,
         "measurement_mode": "catcas_coded_preprojection_response_cycles",
         "schedule": {
-            "schedule_sha256": CODED_PREPROJECTION_SCHEDULE_SHA256,
+            "schedule_sha256": schedule_sha256,
             "slot_count": 16,
             "slot_duration_s": 0.5,
             "duration_s": 8.0,
             "read_hz": CODED_PREPROJECTION_READ_HZ,
             "tokens": [row["token"] for row in lockin],
             "primary_coordinate": "post-control-centered quadrature fold-odd response",
-            "stimulus_slots": list(range(2, 14)),
+            "stimulus_slots": stimulus_slots,
             "pre_plus_slots": plus_slots,
             "pre_minus_slots": minus_slots,
             "post_projection_control_slots": post_slots,
+            "neutral_restoration_slots": [neutral_before_slot, neutral_after_slot],
+            "source_off_control_slots": list(source_off_slots),
         },
         "sample_timing": timing_summary,
         "slot_response_summaries": slot_summaries,
@@ -1081,8 +1125,8 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
         },
         "source_off_whole_slot_range_cycles": source_off_range,
         "neutral_restoration": {
-            "before_slot": 0,
-            "after_slot": 14,
+            "before_slot": neutral_before_slot,
+            "after_slot": neutral_after_slot,
             "before_mean_response_cycles": neutral_before,
             "after_mean_response_cycles": neutral_after,
             "absolute_delta_cycles": neutral_delta,
@@ -1096,7 +1140,7 @@ def analyze_coded_preprojection_runtime(runtime_root: Path, pilot_variant: str) 
         "fold_odd_signal_candidate": fold_odd_signal_candidate,
         "sufficient_during_burst_samples": sufficient,
         "all_bursts_completed_inside_slots": all(
-            bool(burst_by_slot[slot].get("completed_before_slot_end")) for slot in range(2, 14)
+            bool(burst_by_slot[slot].get("completed_before_slot_end")) for slot in stimulus_slots
         ),
         "engineering_candidate": engineering_candidate,
         "engineering_first_light_candidate": engineering_candidate,
@@ -1230,6 +1274,8 @@ def execute(source_root: Path, output_root: Path, pilot_variant: str) -> dict[st
             "readonly-occupancy-forward", "readonly-occupancy-reverse",
             "readonly-occupancy-equal",
             "coded-preprojection-loop",
+            "coded-preprojection-restored-loop",
+            "coded-preprojection-warm-restored-loop",
         },
         "unknown pilot variant",
     )
@@ -1333,7 +1379,15 @@ def execute(source_root: Path, output_root: Path, pilot_variant: str) -> dict[st
         "source_hashes": source_digest(source_root)[1],
         "user_directive_sha256": USER_DIRECTIVE_SHA256,
         "schedule_sha256": (
-            CODED_PREPROJECTION_SCHEDULE_SHA256
+            (
+                CODED_PREPROJECTION_WARM_RESTORED_SCHEDULE_SHA256
+                if pilot_variant in CODED_PREPROJECTION_WARM_RESTORED_VARIANTS
+                else (
+                    CODED_PREPROJECTION_RESTORED_SCHEDULE_SHA256
+                    if pilot_variant in CODED_PREPROJECTION_RESTORED_VARIANTS
+                    else CODED_PREPROJECTION_SCHEDULE_SHA256
+                )
+            )
             if pilot_variant in CODED_PREPROJECTION_VARIANTS
             else (READONLY_MICRO_SCHEDULE_SHA256 if pilot_variant in READONLY_VARIANTS else SCHEDULE_SHA256)
         ),
@@ -1378,6 +1432,8 @@ def parse_args() -> argparse.Namespace:
             "readonly-occupancy-forward", "readonly-occupancy-reverse",
             "readonly-occupancy-equal",
             "coded-preprojection-loop",
+            "coded-preprojection-restored-loop",
+            "coded-preprojection-warm-restored-loop",
         ),
         default="pn",
     )

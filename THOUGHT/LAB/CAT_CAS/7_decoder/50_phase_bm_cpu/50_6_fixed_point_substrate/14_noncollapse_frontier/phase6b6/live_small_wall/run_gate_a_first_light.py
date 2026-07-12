@@ -94,6 +94,8 @@ def execute(run_id: str, *, pilot_variant: str, keep_remote: bool) -> dict[str, 
             "readonly-occupancy-forward", "readonly-occupancy-reverse",
             "readonly-occupancy-equal",
             "coded-preprojection-loop",
+            "coded-preprojection-restored-loop",
+            "coded-preprojection-warm-restored-loop",
         },
         "pilot variant is not closed",
     )
@@ -186,6 +188,8 @@ def parse_args() -> argparse.Namespace:
             "readonly-occupancy-forward", "readonly-occupancy-reverse",
             "readonly-occupancy-equal",
             "coded-preprojection-loop",
+            "coded-preprojection-restored-loop",
+            "coded-preprojection-warm-restored-loop",
         ),
         default="pn",
     )

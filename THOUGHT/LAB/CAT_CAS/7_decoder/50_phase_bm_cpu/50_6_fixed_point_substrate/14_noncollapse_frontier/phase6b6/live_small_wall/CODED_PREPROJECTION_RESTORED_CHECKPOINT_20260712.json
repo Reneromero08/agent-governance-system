@@ -1,0 +1,99 @@
+{
+  "schema_id": "CAT_CAS_CODED_PREPROJECTION_RESTORED_CHECKPOINT_V1",
+  "claim_ceiling": "Restored physical coded-loop candidate only: a fixed public pre-projection memory-footprint query produced an opposed fold-odd aggregate timing coordinate with neutral restoration on the CAT_CAS-owned timing-response workload. This does not claim OrbitState coupling, path memory, coherence holonomy, target coupling, fold-odd recovery under all killing controls, or Small Wall crossing.",
+  "runs": {
+    "coded_preprojection_loop_0": {
+      "pilot_variant": "coded-preprojection-loop",
+      "source_bundle_sha256": "b3213de1068b8787a9ca1d4783e4797a036d6ec37e53464a92a0d3545d0f62dd",
+      "schedule_sha256": "35496568999774114af1057ac70fda4b6aeb8a8989e8daf1d1672e508523d07c",
+      "fold_odd_signal_candidate": true,
+      "neutral_restoration_passed": false,
+      "plus_imag_cycles": 84.45585937499999,
+      "minus_imag_cycles": -91.50247395833333,
+      "post_projection_imag_cycles": 0.9222656250000005,
+      "neutral_delta_cycles": 85.478234375
+    },
+    "coded_preprojection_loop_1": {
+      "pilot_variant": "coded-preprojection-restored-loop",
+      "source_bundle_sha256": "b4b1fac016385b62cbf0cbb7562e82811723e39f24f88ebd2f8323e98b372351",
+      "schedule_sha256": "90538e09de19f90699adabdb2e283a73039f8e5e1e4e71b2501d56e966dbb7cf",
+      "fold_odd_signal_candidate": true,
+      "neutral_restoration_passed": false,
+      "plus_imag_cycles": 89.24049479166666,
+      "minus_imag_cycles": -91.32659801136364,
+      "post_projection_imag_cycles": 1.0777343749999977,
+      "neutral_delta_cycles": 20.870921874999993
+    },
+    "coded_preprojection_loop_2": {
+      "pilot_variant": "coded-preprojection-warm-restored-loop",
+      "source_bundle_sha256": "50d730f44a68bb56522ce32020107ee9b7087d016e7cf5a42d753638f33868b5",
+      "schedule_sha256": "94cbace65638dd457983475db0944e37b9e9bf9fec96ae1a8dbb4515db663c3b",
+      "fold_odd_signal_candidate": true,
+      "engineering_candidate": true,
+      "neutral_restoration_passed": true,
+      "plus_imag_cycles": 86.49127604166668,
+      "minus_imag_cycles": -85.87754498106062,
+      "post_projection_imag_cycles": 2.519140625000005,
+      "source_off_range_cycles": 0.4185156249999977,
+      "neutral_delta_cycles": 0.4185156249999977,
+      "neutral_tolerance_cycles": 5.0,
+      "control_floor_cycles": 2.519140625000005,
+      "fold_odd_balance_error_cycles": 0.6137310606060566,
+      "fold_odd_exceeds_controls": true
+    }
+  },
+  "loop_2_integrity": {
+    "final_status": "GATE_A_FIRST_LIGHT_COMPLETE",
+    "copy_verified": true,
+    "remote_cleaned": true,
+    "restoration_complete": true,
+    "policy4_restored_khz": {
+      "scaling_min_freq": 800000,
+      "scaling_max_freq": 3200000
+    },
+    "policy5_restored_khz": {
+      "scaling_min_freq": 800000,
+      "scaling_max_freq": 3200000
+    },
+    "preflight_temperature_c": 41.0,
+    "voltage_writes": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "forbidden_process_matches_before": 0,
+    "forbidden_process_matches_after": 0,
+    "capture_classification": "CAPTURE_ACCEPTED_WITH_SERVICE_SPIKES",
+    "sample_count": 16000,
+    "slot_count": 16,
+    "read_hz": 2000,
+    "sample_count_per_slot": [
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000
+    ],
+    "record_integrity_failure": false,
+    "missing_slot": false,
+    "sender_spill": false,
+    "skipped_deadline_count": 0,
+    "all_bursts_completed_inside_slots": true,
+    "sufficient_during_burst_samples": true
+  },
+  "adjudication": {
+    "marker": "RESTORED_CODED_FOLD_ODD_PHYSICAL_RESPONSE_CANDIDATE",
+    "small_wall_crossed": false,
+    "why_not_crossed": "The restored warm-loop clears source-off, post-projection, private-fold sign, and neutral-restoration checks in one run, but physical query-scramble, query-off, and declaration-sham killing controls are not yet run under the repaired warm-restored geometry.",
+    "next_bottleneck": "Run the same warm-restored geometry with a physical query-scramble or declaration-sham control while preserving neutral restoration."
+  }
+}

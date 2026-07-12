@@ -32,9 +32,21 @@ static const char *coded_preprojection_tokens[GATE_A_CODED_PREPROJECTION_SLOT_CO
     "M2", "M3", "C0", "C1", "C2", "C3", "N1", "SO"
 };
 
+static const char *coded_preprojection_restored_tokens[GATE_A_CODED_PREPROJECTION_SLOT_COUNT] = {
+    "WU", "N0", "P0", "P1", "P2", "P3", "M0", "M1",
+    "M2", "M3", "C0", "C1", "C2", "C3", "N1", "T"
+};
+
+static const char *coded_preprojection_warm_restored_tokens[GATE_A_CODED_PREPROJECTION_SLOT_COUNT] = {
+    "WU", "WU", "N0", "P0", "P1", "P2", "P3", "M0",
+    "M1", "M2", "M3", "C0", "C1", "C2", "C3", "N1"
+};
+
 static int gate_a_pilot_variant = GATE_A_PILOT_PN;
 
 static int gate_a_coded_preprojection_pilot(void);
+static int gate_a_coded_preprojection_stimulus_first_slot(void);
+static int gate_a_coded_preprojection_stimulus_end_slot(void);
 static int gate_a_readonly_occupancy_pilot(void);
 
 /* Closed CAT_CAS-owned shared-cache response geometry.  These buffers contain
@@ -54,7 +66,8 @@ static const char *gate_a_runtime_output_root = NULL;
 
 static int gate_a_driven_slot(int slot) {
     if (gate_a_coded_preprojection_pilot()) {
-        return slot >= 2 && slot <= 13;
+        return slot >= gate_a_coded_preprojection_stimulus_first_slot() &&
+               slot < gate_a_coded_preprojection_stimulus_end_slot();
     }
     if (gate_a_readonly_occupancy_pilot()) {
         return slot >= 2 && slot <= 5;
@@ -71,7 +84,9 @@ static int gate_a_driven_slot(int slot) {
 }
 
 static int gate_a_step_end_slot(void) {
-    if (gate_a_coded_preprojection_pilot()) return 14;
+    if (gate_a_coded_preprojection_pilot()) {
+        return gate_a_coded_preprojection_stimulus_end_slot();
+    }
     if (gate_a_readonly_occupancy_pilot()) return 6;
     return gate_a_pilot_variant == GATE_A_PILOT_IMPULSE ? 7 : 10;
 }
@@ -94,11 +109,27 @@ static int gate_a_occupancy_pilot(void) {
            gate_a_pilot_variant == GATE_A_PILOT_READONLY_OCCUPANCY_FORWARD ||
            gate_a_pilot_variant == GATE_A_PILOT_READONLY_OCCUPANCY_REVERSE ||
            gate_a_pilot_variant == GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL ||
-           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_LOOP;
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_LOOP ||
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_RESTORED_LOOP ||
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_RESTORED_LOOP;
 }
 
 static int gate_a_coded_preprojection_pilot(void) {
-    return gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_LOOP;
+    return gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_LOOP ||
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_RESTORED_LOOP ||
+           gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_RESTORED_LOOP;
+}
+
+static int gate_a_coded_preprojection_warm_restored_pilot(void) {
+    return gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_RESTORED_LOOP;
+}
+
+static int gate_a_coded_preprojection_stimulus_first_slot(void) {
+    return gate_a_coded_preprojection_warm_restored_pilot() ? 3 : 2;
+}
+
+static int gate_a_coded_preprojection_stimulus_end_slot(void) {
+    return gate_a_coded_preprojection_warm_restored_pilot() ? 15 : 14;
 }
 
 static int gate_a_readonly_occupancy_pilot(void) {
@@ -112,7 +143,9 @@ static int gate_a_variant_is_readonly_occupancy(int variant) {
     return variant == GATE_A_PILOT_READONLY_OCCUPANCY_FORWARD ||
            variant == GATE_A_PILOT_READONLY_OCCUPANCY_REVERSE ||
            variant == GATE_A_PILOT_READONLY_OCCUPANCY_EQUAL ||
-           variant == GATE_A_PILOT_CODED_PREPROJECTION_LOOP;
+           variant == GATE_A_PILOT_CODED_PREPROJECTION_LOOP ||
+           variant == GATE_A_PILOT_CODED_PREPROJECTION_RESTORED_LOOP ||
+           variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_RESTORED_LOOP;
 }
 
 static int gate_a_slot_count(void) {
@@ -130,7 +163,12 @@ static double gate_a_duration_s(const GateASmokeArgs *args) {
 static const char *gate_a_slot_token(int slot) {
     if (gate_a_coded_preprojection_pilot()) {
         return slot >= 0 && slot < GATE_A_CODED_PREPROJECTION_SLOT_COUNT
-            ? coded_preprojection_tokens[slot] : "OUT_OF_RANGE";
+            ? (gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_WARM_RESTORED_LOOP
+                ? coded_preprojection_warm_restored_tokens[slot]
+                : (gate_a_pilot_variant == GATE_A_PILOT_CODED_PREPROJECTION_RESTORED_LOOP
+                    ? coded_preprojection_restored_tokens[slot]
+                    : coded_preprojection_tokens[slot]))
+            : "OUT_OF_RANGE";
     }
     if (gate_a_readonly_occupancy_pilot()) {
         return slot >= 0 && slot < GATE_A_READONLY_MICRO_SLOT_COUNT
@@ -141,21 +179,27 @@ static const char *gate_a_slot_token(int slot) {
 }
 
 static int gate_a_readonly_stimulus_first_slot(void) {
-    if (gate_a_coded_preprojection_pilot()) return 2;
+    if (gate_a_coded_preprojection_pilot()) {
+        return gate_a_coded_preprojection_stimulus_first_slot();
+    }
     return gate_a_readonly_occupancy_pilot() ? 2 : 6;
 }
 
 static int gate_a_readonly_stimulus_end_slot(void) {
-    if (gate_a_coded_preprojection_pilot()) return 14;
+    if (gate_a_coded_preprojection_pilot()) {
+        return gate_a_coded_preprojection_stimulus_end_slot();
+    }
     return gate_a_readonly_occupancy_pilot() ? 6 : 10;
 }
 
 static size_t gate_a_occupancy_bytes(int slot) {
     if (!gate_a_occupancy_pilot()) return 0;
     if (gate_a_coded_preprojection_pilot()) {
-        if (slot < 2 || slot > 13) return 0;
-        if (slot >= 10 && slot <= 13) return GATE_A_OCCUPANCY_EQUAL_BYTES;
-        if (slot == 2 || slot == 3 || slot == 6 || slot == 9) {
+        int first_slot = gate_a_coded_preprojection_stimulus_first_slot();
+        int relative = slot - first_slot;
+        if (relative < 0 || relative >= 12) return 0;
+        if (relative >= 8) return GATE_A_OCCUPANCY_EQUAL_BYTES;
+        if (relative == 0 || relative == 1 || relative == 4 || relative == 7) {
             return GATE_A_OCCUPANCY_LARGE_BYTES;
         }
         return GATE_A_OCCUPANCY_SMALL_BYTES;
@@ -259,7 +303,8 @@ static int gate_a_orbit_value(int slot) {
 
 static int gate_a_phase_index(int slot) {
     if (gate_a_coded_preprojection_pilot()) {
-        if (slot >= 2 && slot <= 13) return ((slot - 2) % 4) * 2;
+        int relative = slot - gate_a_coded_preprojection_stimulus_first_slot();
+        if (relative >= 0 && relative < 12) return (relative % 4) * 2;
         return 0;
     }
     if (gate_a_readonly_occupancy_pilot()) return 0;
@@ -287,7 +332,8 @@ static int gate_a_expected_origin_state(int slot) {
 
 static const char *gate_a_epoch(int slot) {
     if (gate_a_coded_preprojection_pilot()) {
-        return slot >= 2 && slot <= 13
+        return slot >= gate_a_coded_preprojection_stimulus_first_slot() &&
+               slot < gate_a_coded_preprojection_stimulus_end_slot()
             ? "coded-preprojection:loop:epoch0" : NULL;
     }
     if (gate_a_readonly_occupancy_pilot()) {
@@ -322,8 +368,10 @@ static int gate_a_policy_limits_exact(int core, long required_khz) {
 static uint64_t gate_a_epoch_origin(int slot, uint64_t session_origin,
                                     double slot_s, double tsc_hz) {
     int epoch_slot = slot;
-    if (gate_a_coded_preprojection_pilot() && slot >= 2 && slot <= 13) {
-        epoch_slot = 2;
+    if (gate_a_coded_preprojection_pilot() &&
+        slot >= gate_a_coded_preprojection_stimulus_first_slot() &&
+        slot < gate_a_coded_preprojection_stimulus_end_slot()) {
+        epoch_slot = gate_a_coded_preprojection_stimulus_first_slot();
     } else if (gate_a_readonly_occupancy_pilot() && slot >= 2 && slot <= 5) {
         epoch_slot = 2;
     } else if (slot >= 6 && slot <= 9) {
@@ -1872,7 +1920,8 @@ static int gate_a_run_real_capture(const GateASmokeArgs *args,
             __asm__ volatile("pause");
         }
         if (atomic_load_explicit(&receiver.done, memory_order_acquire)) goto failure;
-        int first_step_slot = gate_a_readonly_occupancy_pilot() ? 2 : 6;
+        int first_step_slot = gate_a_readonly_occupancy_pilot()
+            ? gate_a_readonly_stimulus_first_slot() : 6;
         int first_step_end = gate_a_split_step() ? 8 : gate_a_step_end_slot();
         if (slot == first_step_slot && gate_a_driven_slot(slot) && gate_a_sender_arm(
                 &epochs[0], lifecycle, &receiver, result,
@@ -2510,7 +2559,7 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
         args->slot_s != 0.5 || args->temperature_veto_c != 68.0 ||
         args->required_frequency_khz != 1600000 ||
         args->pilot_variant < GATE_A_PILOT_PN ||
-        args->pilot_variant > GATE_A_PILOT_CODED_PREPROJECTION_LOOP) {
+        args->pilot_variant > GATE_A_PILOT_CODED_PREPROJECTION_WARM_RESTORED_LOOP) {
         return 2;
     }
     gate_a_pilot_variant = args->pilot_variant;
@@ -2723,7 +2772,8 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
     if (mock) {
         count = (int)(args->read_hz * gate_a_duration_s(args));
         double spacing = tsc_hz / args->read_hz;
-        int first_step_slot = gate_a_readonly_occupancy_pilot() ? 2 : 6;
+        int first_step_slot = gate_a_readonly_occupancy_pilot()
+            ? gate_a_readonly_stimulus_first_slot() : 6;
         int first_step_end = gate_a_split_step() ? 8 : gate_a_step_end_slot();
         if (gate_a_mock_epoch(&epochs[0], lifecycle, args->sender_core,
                               tsc_hz, args->slot_s, origin,
@@ -2798,7 +2848,8 @@ int run_gate_a_engineering_smoke(const GateASmokeArgs *args,
             goto cleanup;
         }
     }
-    int first_stimulus_slot = gate_a_readonly_occupancy_pilot() ? 2 : 6;
+    int first_stimulus_slot = gate_a_readonly_occupancy_pilot()
+        ? gate_a_readonly_stimulus_first_slot() : 6;
     if (gate_a_driven_slot(first_stimulus_slot) &&
         gate_a_validate_epoch(&epochs[0])) {
         reason = "SENDER_EPOCH_CUSTODY_FAILURE";

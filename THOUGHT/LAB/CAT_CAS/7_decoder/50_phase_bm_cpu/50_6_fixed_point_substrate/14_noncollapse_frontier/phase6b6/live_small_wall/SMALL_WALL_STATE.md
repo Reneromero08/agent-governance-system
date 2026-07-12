@@ -18,9 +18,11 @@ preserved the old passive fold-even boundary while showing that a public quadrat
 query can retain a fold-odd coordinate only when it acts before projection.
 `coded_preprojection_loop_0` then produced an opposed physical fold-odd timing
 coordinate under a fixed single-run coded mapping, but its neutral pre/post probe did
-not restore because the first neutral slot carried a large cold-response offset. The
-next build must separate warmup from the neutral restoration probe before promoting any
-fold-odd boundary signal.
+not restore because the first neutral slot carried a large cold-response offset.
+`coded_preprojection_loop_2` repaired the warmup geometry and produced a restored
+opposed fold-odd candidate. The active wall has moved to physical killing controls:
+query-scramble, query-off, and declaration-sham need the same warm-restored geometry
+before any Small Wall crossing claim.
 
 ## Established
 
@@ -774,10 +776,38 @@ Checkpoint:
 
 `CODED_PREPROJECTION_LOOP_0_CHECKPOINT_20260712.json`
 
-**Status:** physical fold-odd signal candidate with neutral restoration failure. Do
-not claim `FOLD_ODD_BOUNDARY_SIGNAL`, restoration, OrbitState coupling, or Small Wall
-crossing. The next H5 move is a repaired schedule that treats the first slot as warmup
-and compares a post-warmup neutral probe against the post-loop neutral probe.
+Two subsequent repair loops separated warmup from neutral restoration. Loop 1 still had
+a high neutral delta; loop 2 used:
+
+```text
+WU WU N0 P0 P1 P2 P3 M0 M1 M2 M3 C0 C1 C2 C3 N1
+```
+
+Loop 2 completed, copied back, cleaned the remote run root, restored policies 4 and 5
+to `800000-3200000` kHz by readback, and performed zero voltage access and zero MSR
+access. Capture was accepted with service spikes, all 16 slots had 1000 samples, all
+stimulus bursts completed inside their slots, there were no skipped deadlines, no
+missing slots, no sender spill, and no record-integrity failure.
+
+The repaired warm-restored physical decoder produced:
+
+```text
+pre_projection_private_fold_plus   imag +86.49127604166668
+pre_projection_private_fold_minus  imag -85.87754498106062
+post_projection_control            imag  +2.519140625000005
+source-off / neutral delta                0.4185156249999977
+neutral tolerance                         5.0
+```
+
+Checkpoint:
+
+`CODED_PREPROJECTION_RESTORED_CHECKPOINT_20260712.json`
+
+**Status:** restored physical fold-odd response candidate. Do not claim
+`SMALL_WALL_CROSSED`: the repaired warm loop clears source-off, post-projection,
+private-fold sign, and neutral-restoration checks, but physical query-scramble,
+query-off, and declaration-sham killing controls remain pending under the repaired
+geometry.
 
 ### H6 - Alternative carriers remain available
 
@@ -797,9 +827,8 @@ operator, observability, or restoration wall that it can attack.
 
 ## Cheapest current discriminator
 
-Build `coded_preprojection_loop_1`: the thinnest repair of the physical coded loop
-that separates first-slot warmup from the neutral restoration probe while preserving
-the same public quadrature mapping and post-projection/source-off controls.
+Build the next warm-restored killing control: either a physical query-scramble run or a
+declaration-sham run using the same restored neutral geometry as `coded_preprojection_loop_2`.
 
 The next probe should answer:
 
@@ -811,8 +840,8 @@ The next probe should answer:
    for pre-projection coupling?
 3. Do post-projection, query-scramble, query-off, source-off, declaration-sham, and
    private-fold controls behave as predicted before any promotion?
-4. Does a post-warmup neutral pre/post probe show restoration to a measured physical
-   equivalence class beyond byte equality?
+4. Does the killing control stay fold-odd null while preserving the post-warmup neutral
+   restoration class?
 
 Do not run another scalar PMU route metric, unconditioned transient timing repeat, or
 unlabeled cache-line rectangle unchanged. The useful build now is a coded physical loop
@@ -823,10 +852,10 @@ with the model's controls preserved.
 `CONTROLLED_COHERENCE_STATE_FOUND`
 
 The next major scientific threshold is a physical coded pre-projection response with
-restoration and killing controls. `coded_preprojection_loop_0` reached only
-`FOLD_ODD_BOUNDARY_SIGNAL_CANDIDATE_WITH_NEUTRAL_RESTORATION_FAILURE`. The next useful
-marker remains `FOLD_ODD_BOUNDARY_SIGNAL`, but only after the neutral restoration probe
-is repaired and control-clean.
+restoration and killing controls. `coded_preprojection_loop_2` is a restored physical
+fold-odd response candidate, but the next useful marker remains short of
+`SMALL_WALL_CROSSED` until query-scramble/query-off/declaration-sham physical controls
+are run under the same restored geometry.
 
 ## State update rule
 
