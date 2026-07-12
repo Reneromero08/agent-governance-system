@@ -12,8 +12,12 @@
 #define GATE_A_SAMPLE_TIMING_FILE "sample_timing.bin"
 #define GATE_A_TIMING_DIAGNOSTIC_FILE "TIMING_DIAGNOSTIC_SUMMARY.json"
 #define GATE_A_SAMPLE_TIMING_SCHEMA_ID \
-    "CAT_CAS_READONLY_OCCUPANCY_SAMPLE_TIMING_V1"
-#define GATE_A_SAMPLE_TIMING_RECORD_BYTES 64U
+    "CAT_CAS_READONLY_OCCUPANCY_SAMPLE_TIMING_V2"
+#define GATE_A_SAMPLE_TIMING_RECORD_BYTES 80U
+#define GATE_A_REALTIME_PRIORITY 10
+#define GATE_A_LEGACY_SLOT_COUNT 16
+#define GATE_A_READONLY_MICRO_SLOT_COUNT 8
+#define GATE_A_READONLY_MICRO_READ_HZ 2000L
 #define GATE_A_TEMPERATURE_MILLIDEGREES_PER_C 1000L
 #define GATE_A_TEMPERATURE_VETO_MILLIDEGREES 68000L
 #define GATE_A_TEMPERATURE_MIN_MILLIDEGREES (-40000L)
@@ -91,6 +95,7 @@ typedef struct {
     uint64_t max_scheduler_lateness_ticks;
     uint64_t scheduler_lateness_reject_threshold_ticks;
     uint64_t missed_deadline_count;
+    uint64_t skipped_deadline_count;
     uint64_t max_finish_gap_ticks;
     char capture_quality_classification[64];
     char occupancy_digest_before[65];

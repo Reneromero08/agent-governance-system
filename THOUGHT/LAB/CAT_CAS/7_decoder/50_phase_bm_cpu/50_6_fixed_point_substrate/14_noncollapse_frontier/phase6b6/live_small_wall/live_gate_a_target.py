@@ -32,13 +32,24 @@ MONITOR_INTERVAL_S = 0.1
 WORKER_TIMEOUT_S = 20.0
 TRANSACTION_TIMEOUT_S = 45
 SCHEDULE_SHA256 = "418ff6e9801ba5def3f17fb25c7d56f044599e6e5bc8cc3260e0368d4877d116"
+READONLY_MICRO_SCHEDULE_SHA256 = "57f6aa152d2c099429e7ca2c4d843102739c81b2158e46c4d49f07a96b6f4758"
+READONLY_MICRO_READ_HZ = 2_000
+LEGACY_READ_HZ = 8_000
 USER_DIRECTIVE_SHA256 = hashlib.sha256(
     b"CAT_CAS_EXPLICIT_USER_LIVE_AUTHORIZATION__SMALL_WALL_GOAL__2026-07-11"
 ).hexdigest()
 OFF_TOKENS = frozenset({"I", "C0", "D0", "O0", "T"})
-SAMPLE_TIMING_RECORD = struct.Struct("<QQQQQQQQ")
-SAMPLE_TIMING_RECORD_BYTES = 64
-SAMPLE_TIMING_SCHEMA_ID = "CAT_CAS_READONLY_OCCUPANCY_SAMPLE_TIMING_V1"
+SAMPLE_TIMING_RECORD_V1 = struct.Struct("<QQQQQQQQ")
+SAMPLE_TIMING_RECORD_V1_BYTES = 64
+SAMPLE_TIMING_RECORD_V1_SCHEMA_ID = "CAT_CAS_READONLY_OCCUPANCY_SAMPLE_TIMING_V1"
+SAMPLE_TIMING_RECORD_V2 = struct.Struct("<QQQQQQQQQQ")
+SAMPLE_TIMING_RECORD_BYTES = 80
+SAMPLE_TIMING_SCHEMA_ID = "CAT_CAS_READONLY_OCCUPANCY_SAMPLE_TIMING_V2"
+READONLY_VARIANTS = frozenset({
+    "readonly-occupancy-forward",
+    "readonly-occupancy-reverse",
+    "readonly-occupancy-equal",
+})
 SOURCE_NAMES = (
     "live_gate_a_target.py",
     "gate_a_frequency_preparation.py",
@@ -439,13 +450,15 @@ def run_worker_monitored(
     temp_path: Path,
     pilot_variant: str,
 ) -> tuple[int, str, str, list[dict[str, Any]], str | None]:
+    schedule_sha256 = READONLY_MICRO_SCHEDULE_SHA256 if pilot_variant in READONLY_VARIANTS else SCHEDULE_SHA256
+    read_hz = READONLY_MICRO_READ_HZ if pilot_variant in READONLY_VARIANTS else LEGACY_READ_HZ
     command = [
         str(binary),
         "--execute-authorized",
         "--authority-sha256",
         USER_DIRECTIVE_SHA256,
         "--schedule-sha256",
-        SCHEDULE_SHA256,
+        schedule_sha256,
         "--execution-bundle-sha256",
         bundle_sha256,
         "--output-root",
@@ -455,7 +468,7 @@ def run_worker_monitored(
         "--receiver-core",
         "5",
         "--read-hz",
-        "8000",
+        str(read_hz),
         "--slot-s",
         "0.5",
         "--temperature-veto-c",
@@ -472,6 +485,7 @@ def run_worker_monitored(
     receiver_exact_seen = False
     sender_step_exact_seen = False
     sender_anchor_exact_seen = False
+    readonly_micro = pilot_variant in READONLY_VARIANTS
     try:
         while process.poll() is None:
             elapsed = time.monotonic() - start
@@ -496,11 +510,13 @@ def run_worker_monitored(
                 veto = f"frequency limit drift during runtime: {limits}"
             elif elapsed >= 0.5 and frequencies["5"] != REQUIRED_FREQUENCY_KHZ:
                 veto = f"active receiver frequency drift during runtime: {frequencies}"
-            elif pilot_variant not in {"step-sham"} and 3.15 <= elapsed <= (
+            elif readonly_micro and 1.05 <= elapsed <= 2.95 and frequencies["4"] != REQUIRED_FREQUENCY_KHZ:
+                veto = f"active micro-stimulus frequency drift during runtime: {frequencies}"
+            elif (not readonly_micro) and pilot_variant not in {"step-sham"} and 3.15 <= elapsed <= (
                 3.35 if pilot_variant == "impulse" else 4.85
             ) and frequencies["4"] != REQUIRED_FREQUENCY_KHZ:
                 veto = f"active step-sender frequency drift during runtime: {frequencies}"
-            elif 6.15 <= elapsed <= 6.85 and frequencies["4"] != REQUIRED_FREQUENCY_KHZ:
+            elif (not readonly_micro) and 6.15 <= elapsed <= 6.85 and frequencies["4"] != REQUIRED_FREQUENCY_KHZ:
                 veto = f"active anchor-sender frequency drift during runtime: {frequencies}"
             elif elapsed > WORKER_TIMEOUT_S:
                 veto = "worker timeout"
@@ -508,11 +524,18 @@ def run_worker_monitored(
                 elapsed >= 0.5 and frequencies["5"] == REQUIRED_FREQUENCY_KHZ
             )
             sender_step_exact_seen = sender_step_exact_seen or (
-                3.15 <= elapsed <= (3.35 if pilot_variant == "impulse" else 4.85)
+                (
+                    (readonly_micro and 1.05 <= elapsed <= 2.95)
+                    or (
+                        (not readonly_micro)
+                        and 3.15 <= elapsed <= (3.35 if pilot_variant == "impulse" else 4.85)
+                    )
+                )
                 and frequencies["4"] == REQUIRED_FREQUENCY_KHZ
             )
             sender_anchor_exact_seen = sender_anchor_exact_seen or (
-                6.15 <= elapsed <= 6.85 and frequencies["4"] == REQUIRED_FREQUENCY_KHZ
+                (readonly_micro or 6.15 <= elapsed <= 6.85)
+                and frequencies["4"] == REQUIRED_FREQUENCY_KHZ
             )
             if veto is not None:
                 stop_process(process)
@@ -521,7 +544,7 @@ def run_worker_monitored(
         stdout, stderr = process.communicate(timeout=3)
     finally:
         stop_process(process)
-    anchor_complete = pilot_variant == "anchor-sham" or sender_anchor_exact_seen
+    anchor_complete = readonly_micro or pilot_variant == "anchor-sham" or sender_anchor_exact_seen
     step_complete = pilot_variant == "step-sham" or sender_step_exact_seen
     if veto is None and not (receiver_exact_seen and step_complete and anchor_complete):
         veto = "scheduled active-frequency observation incomplete"
@@ -546,24 +569,62 @@ def exact_permutation_p(step: list[float], off: list[float]) -> float:
 
 def parse_sample_timing(path: Path) -> list[dict[str, int]]:
     data = path.read_bytes()
-    require(len(data) % SAMPLE_TIMING_RECORD_BYTES == 0, "sample timing file has partial record")
-    require(len(data) % SAMPLE_TIMING_RECORD.size == 0, "sample timing parser size mismatch")
+    diagnostic_path = path.with_name("TIMING_DIAGNOSTIC_SUMMARY.json")
+    declared_schema: str | None = None
+    declared_record_bytes: int | None = None
+    if diagnostic_path.is_file():
+        diagnostic = json.loads(diagnostic_path.read_text(encoding="utf-8"))
+        declared_schema = diagnostic.get("sample_timing_schema_id")
+        declared_record_bytes = diagnostic.get("sample_timing_record_bytes")
+    if declared_schema == SAMPLE_TIMING_SCHEMA_ID or declared_record_bytes == SAMPLE_TIMING_RECORD_BYTES:
+        schema = SAMPLE_TIMING_SCHEMA_ID
+        record_struct = SAMPLE_TIMING_RECORD_V2
+    elif declared_schema == SAMPLE_TIMING_RECORD_V1_SCHEMA_ID or declared_record_bytes == SAMPLE_TIMING_RECORD_V1_BYTES:
+        schema = SAMPLE_TIMING_RECORD_V1_SCHEMA_ID
+        record_struct = SAMPLE_TIMING_RECORD_V1
+    elif len(data) % SAMPLE_TIMING_RECORD_BYTES == 0:
+        schema = SAMPLE_TIMING_SCHEMA_ID
+        record_struct = SAMPLE_TIMING_RECORD_V2
+    elif len(data) % SAMPLE_TIMING_RECORD_V1_BYTES == 0:
+        schema = SAMPLE_TIMING_RECORD_V1_SCHEMA_ID
+        record_struct = SAMPLE_TIMING_RECORD_V1
+    else:
+        raise LiveGateAError("sample timing file has partial record")
+    require(len(data) % record_struct.size == 0, "sample timing file has partial record")
     rows: list[dict[str, int]] = []
     previous_requested: int | None = None
     previous_finished: int | None = None
-    for index, record in enumerate(SAMPLE_TIMING_RECORD.iter_unpack(data)):
-        (
-            sample_index,
-            requested_tsc,
-            started_tsc,
-            finished_tsc,
-            scheduler_lateness_ticks,
-            service_ticks,
-            finish_gap_ticks,
-            slot_index,
-        ) = (int(value) for value in record)
-        require(sample_index == index, "sample timing index drift")
-        require(slot_index < 16, "sample timing slot out of range")
+    for index, record in enumerate(record_struct.iter_unpack(data)):
+        values = [int(value) for value in record]
+        if schema == SAMPLE_TIMING_SCHEMA_ID:
+            (
+                requested_sample_index,
+                requested_tsc,
+                requested_slot,
+                started_tsc,
+                finished_tsc,
+                actual_slot,
+                scheduler_lateness_ticks,
+                service_ticks,
+                missed_deadlines_before_sample,
+                valid_measurement,
+            ) = values
+        else:
+            (
+                requested_sample_index,
+                requested_tsc,
+                started_tsc,
+                finished_tsc,
+                scheduler_lateness_ticks,
+                service_ticks,
+                _finish_gap_ticks,
+                requested_slot,
+            ) = values
+            actual_slot = requested_slot
+            missed_deadlines_before_sample = 0
+            valid_measurement = 1
+        require(requested_sample_index >= index, "sample timing requested index drift")
+        require(requested_slot < 16 and actual_slot < 16, "sample timing slot out of range")
         require(started_tsc >= requested_tsc, "sample timing started before requested")
         require(finished_tsc >= started_tsc, "sample timing finished before started")
         require(
@@ -574,19 +635,20 @@ def parse_sample_timing(path: Path) -> list[dict[str, int]]:
         if previous_requested is not None:
             require(requested_tsc > previous_requested, "sample timing requested timestamp went backward")
             require(finished_tsc >= int(previous_finished), "sample timing finished timestamp went backward")
-            require(finish_gap_ticks == finished_tsc - int(previous_finished), "sample timing finish-gap mismatch")
-        else:
-            require(finish_gap_ticks == 0, "first sample finish-gap must be zero")
         rows.append(
             {
-                "sample_index": sample_index,
+                "sample_index": index,
+                "requested_sample_index": requested_sample_index,
                 "requested_tsc": requested_tsc,
+                "requested_slot": requested_slot,
                 "started_tsc": started_tsc,
                 "finished_tsc": finished_tsc,
+                "actual_slot": actual_slot,
                 "scheduler_lateness_ticks": scheduler_lateness_ticks,
                 "service_ticks": service_ticks,
-                "finish_gap_ticks": finish_gap_ticks,
-                "slot_index": slot_index,
+                "missed_deadlines_before_sample": missed_deadlines_before_sample,
+                "valid_measurement": valid_measurement,
+                "schema_id": schema,
             }
         )
         previous_requested = requested_tsc
@@ -603,21 +665,27 @@ def sample_timing_summary(runtime_root: Path, expected_count: int) -> dict[str, 
     require(len(rows) == expected_count, "sample timing count does not match raw samples")
     diagnostic = json.loads(diagnostic_path.read_text(encoding="utf-8"))
     require(
-        diagnostic.get("sample_timing_schema_id") == SAMPLE_TIMING_SCHEMA_ID,
+        diagnostic.get("sample_timing_schema_id") in {SAMPLE_TIMING_SCHEMA_ID, SAMPLE_TIMING_RECORD_V1_SCHEMA_ID},
         "sample timing schema mismatch",
     )
-    slot_counts = [0 for _ in range(16)]
+    slot_count = len(diagnostic.get("sample_count_per_slot", [])) or 16
+    slot_counts = [0 for _ in range(slot_count)]
     for row in rows:
-        slot_counts[row["slot_index"]] += 1
+        if 0 <= row["actual_slot"] < slot_count:
+            slot_counts[row["actual_slot"]] += 1
     require(slot_counts == diagnostic.get("sample_count_per_slot"), "diagnostic slot counts mismatch")
     lateness = [row["scheduler_lateness_ticks"] for row in rows]
     service_cycles = [row["service_ticks"] / 64.0 for row in rows]
     return {
-        "sample_timing_schema_id": SAMPLE_TIMING_SCHEMA_ID,
-        "sample_timing_record_bytes": SAMPLE_TIMING_RECORD_BYTES,
+        "sample_timing_schema_id": rows[0]["schema_id"] if rows else diagnostic.get("sample_timing_schema_id"),
+        "sample_timing_record_bytes": SAMPLE_TIMING_RECORD_BYTES if rows and rows[0]["schema_id"] == SAMPLE_TIMING_SCHEMA_ID else SAMPLE_TIMING_RECORD_V1_BYTES,
         "sample_count": len(rows),
         "max_scheduler_lateness_ticks": max(lateness) if lateness else 0,
         "max_service_cycles_per_access": max(service_cycles) if service_cycles else 0.0,
+        "skipped_deadline_count": sum(row["missed_deadlines_before_sample"] for row in rows),
+        "requested_actual_slot_mismatch_count": sum(
+            1 for row in rows if row["requested_slot"] != row["actual_slot"]
+        ),
         "diagnostic_classification": diagnostic["capture_quality_classification"],
         "diagnostic": diagnostic,
     }
@@ -629,29 +697,176 @@ def self_test_timing_parser() -> int:
     with tempfile.TemporaryDirectory(prefix="gate_a_timing_parser_") as directory:
         root = Path(directory)
         records = [
-            (0, 1000, 1000, 1064, 0, 64, 0, 0),
-            (1, 2000, 2010, 2074, 10, 64, 1010, 0),
-            (2, 3000, 3000, 3130, 0, 130, 1056, 1),
+            (0, 1000, 0, 1000, 1064, 0, 0, 64, 0, 1),
+            (1, 2000, 0, 2010, 2074, 1, 10, 64, 0, 1),
+            (4, 5000, 1, 5010, 5140, 1, 10, 130, 2, 1),
         ]
-        payload = b"".join(SAMPLE_TIMING_RECORD.pack(*record) for record in records)
+        payload = b"".join(SAMPLE_TIMING_RECORD_V2.pack(*record) for record in records)
         (root / "sample_timing.bin").write_bytes(payload)
         (root / "TIMING_DIAGNOSTIC_SUMMARY.json").write_text(
             json.dumps(
                 {
                     "sample_timing_schema_id": SAMPLE_TIMING_SCHEMA_ID,
-                    "sample_count_per_slot": [2, 1] + [0] * 14,
+                    "sample_count_per_slot": [1, 2] + [0] * 14,
                     "capture_quality_classification": "CAPTURE_ACCEPTED",
                 }
             ),
             encoding="utf-8",
         )
         summary = sample_timing_summary(root, 3)
-        require(summary is not None and summary["sample_count"] == 3, "parser self-test failed")
+        require(
+            summary is not None
+            and summary["sample_count"] == 3
+            and summary["skipped_deadline_count"] == 2
+            and summary["requested_actual_slot_mismatch_count"] == 1,
+            "parser V2 self-test failed",
+        )
+        legacy = root / "legacy"
+        legacy.mkdir()
+        legacy_records = [
+            (0, 1000, 1000, 1064, 0, 64, 0, 0),
+            (1, 2000, 2010, 2074, 10, 64, 1010, 0),
+            (2, 3000, 3000, 3130, 0, 130, 1056, 1),
+        ]
+        legacy_payload = b"".join(SAMPLE_TIMING_RECORD_V1.pack(*record) for record in legacy_records)
+        (legacy / "sample_timing.bin").write_bytes(legacy_payload)
+        (legacy / "TIMING_DIAGNOSTIC_SUMMARY.json").write_text(
+            json.dumps(
+                {
+                    "sample_timing_schema_id": SAMPLE_TIMING_RECORD_V1_SCHEMA_ID,
+                    "sample_count_per_slot": [2, 1] + [0] * 14,
+                    "capture_quality_classification": "CAPTURE_ACCEPTED",
+                }
+            ),
+            encoding="utf-8",
+        )
+        legacy_summary = sample_timing_summary(legacy, 3)
+        require(
+            legacy_summary is not None
+            and legacy_summary["sample_timing_record_bytes"] == SAMPLE_TIMING_RECORD_V1_BYTES,
+            "parser V1 self-test failed",
+        )
     print(json.dumps({"status": "GATE_A_TIMING_PARSER_SELF_TEST_OK", "hardware_executions": 0}))
     return 0
 
 
+def _mean(values: list[float]) -> float | None:
+    return statistics.fmean(values) if values else None
+
+
+def analyze_readonly_micro_runtime(runtime_root: Path, pilot_variant: str) -> dict[str, Any]:
+    lockin = [json.loads(line) for line in (runtime_root / "LOCKIN_IQ.jsonl").read_text().splitlines() if line]
+    require(len(lockin) == 8, "expected 8 micro-schedule lock-in records")
+    raw_bytes = (runtime_root / "raw_samples.bin").read_bytes()
+    require(len(raw_bytes) % 16 == 0, "raw sample file is not packed Qd records")
+    raw = [(int(tsc), float(value)) for tsc, value in struct.iter_unpack("<Qd", raw_bytes)]
+    timing_summary = sample_timing_summary(runtime_root, len(raw))
+    require(timing_summary is not None, "micro timing summary missing")
+    timing_rows = parse_sample_timing(runtime_root / "sample_timing.bin")
+    require(len(timing_rows) == len(raw), "micro raw/timing count mismatch")
+    diagnostic = timing_summary["diagnostic"]
+    burst_by_slot = {
+        int(row["slot_index"]): row for row in diagnostic.get("sender_burst_boundaries", [])
+    }
+    require(all(slot in burst_by_slot for slot in range(2, 6)), "micro burst boundary missing")
+
+    slot_summaries: list[dict[str, Any]] = []
+    during_means: dict[int, float | None] = {}
+    whole_means: dict[int, float | None] = {}
+    sufficient = True
+    for slot in range(8):
+        slot_values = [
+            value for index, (_tsc, value) in enumerate(raw)
+            if timing_rows[index]["actual_slot"] == slot and timing_rows[index]["valid_measurement"] == 1
+        ]
+        burst = burst_by_slot.get(slot)
+        before_values: list[float] = []
+        during_values: list[float] = []
+        after_values: list[float] = []
+        if burst is not None:
+            burst_start = int(burst["burst_start_tsc"])
+            burst_finish = int(burst["burst_finish_tsc"])
+            for index, (_tsc, value) in enumerate(raw):
+                row = timing_rows[index]
+                if row["actual_slot"] != slot or row["valid_measurement"] != 1:
+                    continue
+                if row["finished_tsc"] <= burst_start:
+                    before_values.append(value)
+                elif row["started_tsc"] >= burst_finish:
+                    after_values.append(value)
+                elif row["started_tsc"] < burst_finish and row["finished_tsc"] > burst_start:
+                    during_values.append(value)
+            if len(during_values) < 10:
+                sufficient = False
+        whole_means[slot] = _mean(slot_values)
+        during_means[slot] = _mean(during_values)
+        slot_summaries.append(
+            {
+                "slot_index": slot,
+                "token": lockin[slot]["token"],
+                "whole_slot": {
+                    "sample_count": len(slot_values),
+                    "mean_response_cycles": whole_means[slot],
+                },
+                "before_burst": {
+                    "sample_count": len(before_values),
+                    "mean_response_cycles": _mean(before_values),
+                },
+                "during_burst": {
+                    "sample_count": len(during_values),
+                    "mean_response_cycles": during_means[slot],
+                },
+                "after_burst": {
+                    "sample_count": len(after_values),
+                    "mean_response_cycles": _mean(after_values),
+                },
+                "burst": burst,
+            }
+        )
+
+    first_slots = [2, 5]
+    second_slots = [3, 4]
+    during_first = [during_means[slot] for slot in first_slots if during_means[slot] is not None]
+    during_second = [during_means[slot] for slot in second_slots if during_means[slot] is not None]
+    whole_first = [whole_means[slot] for slot in first_slots if whole_means[slot] is not None]
+    whole_second = [whole_means[slot] for slot in second_slots if whole_means[slot] is not None]
+    primary_contrast = None
+    whole_slot_contrast = None
+    if len(during_first) == 2 and len(during_second) == 2:
+        primary_contrast = statistics.fmean(during_second) - statistics.fmean(during_first)
+    if len(whole_first) == 2 and len(whole_second) == 2:
+        whole_slot_contrast = statistics.fmean(whole_second) - statistics.fmean(whole_first)
+    return {
+        "schema_id": "CAT_CAS_READONLY_OCCUPANCY_MICRO_ANALYSIS_V1",
+        "pilot_variant": pilot_variant,
+        "measurement_mode": "catcas_readonly_occupancy_response_cycles",
+        "schedule": {
+            "schedule_sha256": READONLY_MICRO_SCHEDULE_SHA256,
+            "slot_count": 8,
+            "slot_duration_s": 0.5,
+            "duration_s": 4.0,
+            "read_hz": READONLY_MICRO_READ_HZ,
+            "tokens": [row["token"] for row in lockin],
+            "stimulus_slots": [2, 3, 4, 5],
+            "primary_coordinate": "during_burst_response_cycles",
+            "minimum_during_burst_samples_per_stimulus_slot": 10,
+        },
+        "sample_timing": timing_summary,
+        "slot_response_summaries": slot_summaries,
+        "during_burst_second_minus_first": primary_contrast,
+        "whole_slot_second_minus_first": whole_slot_contrast,
+        "sufficient_during_burst_samples": sufficient,
+        "all_bursts_completed_inside_slots": all(
+            bool(burst_by_slot[slot].get("completed_before_slot_end")) for slot in range(2, 6)
+        ),
+        "engineering_first_light_candidate": False,
+        "claim_ceiling": "micro-triad engineering diagnostic only; no final occupancy or Small Wall claim",
+    }
+
+
 def analyze_runtime(runtime_root: Path, pilot_variant: str) -> dict[str, Any]:
+    if pilot_variant in READONLY_VARIANTS:
+        return analyze_readonly_micro_runtime(runtime_root, pilot_variant)
     lockin = [json.loads(line) for line in (runtime_root / "LOCKIN_IQ.jsonl").read_text().splitlines() if line]
     require(len(lockin) == 16, "expected 16 lock-in records")
     measurement_modes = {str(row.get("measurement_mode", "ring_period_cycles")) for row in lockin}
@@ -874,7 +1089,7 @@ def execute(source_root: Path, output_root: Path, pilot_variant: str) -> dict[st
         "source_bundle_sha256": bundle_sha256,
         "source_hashes": source_digest(source_root)[1],
         "user_directive_sha256": USER_DIRECTIVE_SHA256,
-        "schedule_sha256": SCHEDULE_SHA256,
+        "schedule_sha256": READONLY_MICRO_SCHEDULE_SHA256 if pilot_variant in READONLY_VARIANTS else SCHEDULE_SHA256,
         "compile_command": compile_command,
         "preflight_temperature_c": pre_temperature,
         "temperature_path": str(temp_path),

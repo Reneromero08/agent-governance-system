@@ -1,0 +1,280 @@
+{
+  "automatic_retry": false,
+  "claim_ceiling": "This triad is an engineering diagnostic only and does not establish the final occupancy or Small Wall claim.",
+  "classification": "MICRO_TRIAD_CAPTURE_INTEGRITY_FAILURE",
+  "crossed_forward_minus_reverse_contrast": 351.1223484848485,
+  "equal_symmetric_contrast": -17.73582589285712,
+  "forward_symmetric_contrast": 174.91927083333331,
+  "live_run_count": 3,
+  "live_run_ids": [
+    "micro_equal_0",
+    "micro_forward_0",
+    "micro_reverse_0"
+  ],
+  "notes": [
+    "micro_equal_0 retained a pre-fix C diagnostic failure caused by passing actual-start timestamps into the requested-TSC diagnostic argument; raw timing and Python micro analysis were retained.",
+    "No equal rerun was performed; total live transactions remained exactly the three named run IDs."
+  ],
+  "reverse_symmetric_contrast": -176.20307765151517,
+  "runs": {
+    "equal": {
+      "all_bursts_completed_inside_slots": true,
+      "capture_quality_classification": "CAPTURE_REJECTED_RECORD_INTEGRITY",
+      "controller": {
+        "copy_verified": true,
+        "engineering_first_light_candidate": false,
+        "final_status": "GATE_A_FIRST_LIGHT_FAILED",
+        "local_run": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\runs\\micro_equal_0",
+        "pilot_variant": "readonly-occupancy-equal",
+        "remote_cleaned": true,
+        "remote_returncode": 1,
+        "remote_run": "/root/catcas_live_small_wall/micro_equal_0",
+        "restoration_complete": true,
+        "run_id": "micro_equal_0",
+        "schema_id": "CAT_CAS_GATE_A_FIRST_LIGHT_CONTROLLER_V1",
+        "target": "root@192.168.137.100",
+        "verified_file_count": 15
+      },
+      "copy_verified": true,
+      "during_burst_second_minus_first": -17.73582589285712,
+      "during_burst_slot_means": {
+        "2": 174.77008928571428,
+        "3": 128.8375,
+        "4": 105.9671875,
+        "5": 95.50625
+      },
+      "file_manifest_sha256": "5c86819f1cba46609c00a53c3197f9c27bfb88042dcabe9b73fd1d004e72f0b1",
+      "final_status": "GATE_A_FIRST_LIGHT_FAILED",
+      "msr_reads": 0,
+      "msr_writes": 0,
+      "name": "equal",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/micro_equal_0",
+      "record_integrity_failure": true,
+      "remote_cleaned": true,
+      "requested_actual_slot_mismatch_count": 7,
+      "restoration_complete": true,
+      "restoration_readback": {
+        "4": {
+          "identity": {
+            "device": 22,
+            "inode": 30960,
+            "requested_path": "/sys/devices/system/cpu/cpufreq/policy4",
+            "resolved_path": "/sys/devices/system/cpu/cpufreq/policy4"
+          },
+          "scaling_max_freq": 3200000,
+          "scaling_min_freq": 800000
+        },
+        "5": {
+          "identity": {
+            "device": 22,
+            "inode": 30985,
+            "requested_path": "/sys/devices/system/cpu/cpufreq/policy5",
+            "resolved_path": "/sys/devices/system/cpu/cpufreq/policy5"
+          },
+          "scaling_max_freq": 3200000,
+          "scaling_min_freq": 800000
+        }
+      },
+      "run_id": "micro_equal_0",
+      "runtime_error": "Gate A worker failed: Gate A runtime failed closed (rc=5)",
+      "schedule_sha256": "57f6aa152d2c099429e7ca2c4d843102739c81b2158e46c4d49f07a96b6f4758",
+      "scheduler_statistics": {
+        "max_sample_index": 0,
+        "max_slot_index": 0,
+        "max_ticks": 743,
+        "p50_ticks": 215,
+        "p95_ticks": 273,
+        "p99_ticks": 282,
+        "reject_threshold_ticks": 6429578
+      },
+      "skipped_deadline_count": 0,
+      "source_bundle_sha256": "76c0d61c8f080c4b425919353543a94563c3b80b67e6c1ee54928e7a9db93cb6",
+      "sufficient_during_burst_samples": true,
+      "voltage_writes": 0,
+      "whole_slot_means": {
+        "0": 168.701640625,
+        "1": 82.27909375,
+        "2": 122.107484375,
+        "3": 104.11303125,
+        "4": 90.67559375,
+        "5": 88.859,
+        "6": 82.97109375,
+        "7": 81.926484375
+      },
+      "whole_slot_second_minus_first": -8.088929687499984
+    },
+    "forward": {
+      "all_bursts_completed_inside_slots": true,
+      "capture_quality_classification": "CAPTURE_ACCEPTED_WITH_SERVICE_SPIKES",
+      "controller": {
+        "copy_verified": true,
+        "engineering_first_light_candidate": false,
+        "final_status": "GATE_A_FIRST_LIGHT_COMPLETE",
+        "local_run": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\runs\\micro_forward_0",
+        "pilot_variant": "readonly-occupancy-forward",
+        "remote_cleaned": true,
+        "remote_returncode": 0,
+        "remote_run": "/root/catcas_live_small_wall/micro_forward_0",
+        "restoration_complete": true,
+        "run_id": "micro_forward_0",
+        "schema_id": "CAT_CAS_GATE_A_FIRST_LIGHT_CONTROLLER_V1",
+        "target": "root@192.168.137.100",
+        "verified_file_count": 15
+      },
+      "copy_verified": true,
+      "during_burst_second_minus_first": 174.91927083333331,
+      "during_burst_slot_means": {
+        "2": 81.99375,
+        "3": 266.7234375,
+        "4": 247.59322916666667,
+        "5": 82.484375
+      },
+      "file_manifest_sha256": "0438fb9eadf85e69df9ab171d45612c84c6f8b9bf132579e0a441eb64c35b756",
+      "final_status": "GATE_A_FIRST_LIGHT_COMPLETE",
+      "msr_reads": 0,
+      "msr_writes": 0,
+      "name": "forward",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/micro_forward_0",
+      "record_integrity_failure": false,
+      "remote_cleaned": true,
+      "requested_actual_slot_mismatch_count": 7,
+      "restoration_complete": true,
+      "restoration_readback": {
+        "4": {
+          "identity": {
+            "device": 22,
+            "inode": 30960,
+            "requested_path": "/sys/devices/system/cpu/cpufreq/policy4",
+            "resolved_path": "/sys/devices/system/cpu/cpufreq/policy4"
+          },
+          "scaling_max_freq": 3200000,
+          "scaling_min_freq": 800000
+        },
+        "5": {
+          "identity": {
+            "device": 22,
+            "inode": 30985,
+            "requested_path": "/sys/devices/system/cpu/cpufreq/policy5",
+            "resolved_path": "/sys/devices/system/cpu/cpufreq/policy5"
+          },
+          "scaling_max_freq": 3200000,
+          "scaling_min_freq": 800000
+        }
+      },
+      "run_id": "micro_forward_0",
+      "runtime_error": null,
+      "schedule_sha256": "57f6aa152d2c099429e7ca2c4d843102739c81b2158e46c4d49f07a96b6f4758",
+      "scheduler_statistics": {
+        "max_sample_index": 6728,
+        "max_slot_index": 6,
+        "max_ticks": 83436,
+        "p50_ticks": 216,
+        "p95_ticks": 273,
+        "p99_ticks": 281,
+        "reject_threshold_ticks": 6429511
+      },
+      "skipped_deadline_count": 0,
+      "source_bundle_sha256": "aa2b63f31bac6ed377a32c532da90325c894ce78caaa7e9b7879c28a84a04e6d",
+      "sufficient_during_burst_samples": true,
+      "voltage_writes": 0,
+      "whole_slot_means": {
+        "0": 168.770609375,
+        "1": 82.449484375,
+        "2": 82.55003125,
+        "3": 149.235890625,
+        "4": 149.72565625,
+        "5": 82.533328125,
+        "6": 129.923390625,
+        "7": 107.014703125
+      },
+      "whole_slot_second_minus_first": 66.93909374999998
+    },
+    "reverse": {
+      "all_bursts_completed_inside_slots": true,
+      "capture_quality_classification": "CAPTURE_ACCEPTED_WITH_SERVICE_SPIKES",
+      "controller": {
+        "copy_verified": true,
+        "engineering_first_light_candidate": false,
+        "final_status": "GATE_A_FIRST_LIGHT_COMPLETE",
+        "local_run": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\runs\\micro_reverse_0",
+        "pilot_variant": "readonly-occupancy-reverse",
+        "remote_cleaned": true,
+        "remote_returncode": 0,
+        "remote_run": "/root/catcas_live_small_wall/micro_reverse_0",
+        "restoration_complete": true,
+        "run_id": "micro_reverse_0",
+        "schema_id": "CAT_CAS_GATE_A_FIRST_LIGHT_CONTROLLER_V1",
+        "target": "root@192.168.137.100",
+        "verified_file_count": 15
+      },
+      "copy_verified": true,
+      "during_burst_second_minus_first": -176.20307765151517,
+      "during_burst_slot_means": {
+        "2": 258.9322916666667,
+        "3": 82.30113636363636,
+        "4": 81.525,
+        "5": 257.3
+      },
+      "file_manifest_sha256": "9306cbcf3d382153a62c984ce4aaa85ca90e3c9e55023a792d29e0af58dacc64",
+      "final_status": "GATE_A_FIRST_LIGHT_COMPLETE",
+      "msr_reads": 0,
+      "msr_writes": 0,
+      "name": "reverse",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/runs/micro_reverse_0",
+      "record_integrity_failure": false,
+      "remote_cleaned": true,
+      "requested_actual_slot_mismatch_count": 7,
+      "restoration_complete": true,
+      "restoration_readback": {
+        "4": {
+          "identity": {
+            "device": 22,
+            "inode": 30960,
+            "requested_path": "/sys/devices/system/cpu/cpufreq/policy4",
+            "resolved_path": "/sys/devices/system/cpu/cpufreq/policy4"
+          },
+          "scaling_max_freq": 3200000,
+          "scaling_min_freq": 800000
+        },
+        "5": {
+          "identity": {
+            "device": 22,
+            "inode": 30985,
+            "requested_path": "/sys/devices/system/cpu/cpufreq/policy5",
+            "resolved_path": "/sys/devices/system/cpu/cpufreq/policy5"
+          },
+          "scaling_max_freq": 3200000,
+          "scaling_min_freq": 800000
+        }
+      },
+      "run_id": "micro_reverse_0",
+      "runtime_error": null,
+      "schedule_sha256": "57f6aa152d2c099429e7ca2c4d843102739c81b2158e46c4d49f07a96b6f4758",
+      "scheduler_statistics": {
+        "max_sample_index": 0,
+        "max_slot_index": 0,
+        "max_ticks": 747,
+        "p50_ticks": 216,
+        "p95_ticks": 273,
+        "p99_ticks": 281,
+        "reject_threshold_ticks": 6429560
+      },
+      "skipped_deadline_count": 0,
+      "source_bundle_sha256": "aa2b63f31bac6ed377a32c532da90325c894ce78caaa7e9b7879c28a84a04e6d",
+      "sufficient_during_burst_samples": true,
+      "voltage_writes": 0,
+      "whole_slot_means": {
+        "0": 168.940921875,
+        "1": 82.345,
+        "2": 149.839671875,
+        "3": 82.122984375,
+        "4": 82.191546875,
+        "5": 149.448671875,
+        "6": 82.56421875,
+        "7": 82.570890625
+      },
+      "whole_slot_second_minus_first": -67.48690624999998
+    }
+  },
+  "schema_id": "CAT_CAS_READONLY_OCCUPANCY_MICRO_TRIAD_RESULT_V1"
+}
