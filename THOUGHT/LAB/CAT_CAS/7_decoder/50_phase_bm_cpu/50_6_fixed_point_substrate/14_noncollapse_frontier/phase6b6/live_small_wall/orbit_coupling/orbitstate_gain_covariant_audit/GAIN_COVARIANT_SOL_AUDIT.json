@@ -1,0 +1,51 @@
+{
+  "schema": "GAIN_COVARIANT_SOL_AUDIT_V1",
+  "model": "GPT-5.6 Sol",
+  "effort": "Extra High",
+  "custody": {
+    "read_only": true,
+    "no_checkout_mutation": true,
+    "no_lab_device_contact": true,
+    "no_git_write": true
+  },
+  "thread_id": "019f5da0-fe2a-7783-9e55-418c4135ea16",
+  "audited_head": "5b7b1338921cb6d5b3ce10a958f4262039592065",
+  "audited_artifacts": [
+    "runs/orbitstate_independent_v2_1",
+    "orbitstate_gain_covariant_audit/GAIN_COVARIANT_ADJUDICATION.json",
+    "orbitstate_gain_covariant_audit/GAIN_COVARIANT_SELF_TEST.json",
+    "orbitstate_gain_covariant_audit/GAIN_COVARIANT_LAW_AUDIT.md"
+  ],
+  "direct_disposition": "NEW_PROSPECTIVE_CONFIRMATION_REQUIRED",
+  "findings": {
+    "original_absolute_real_law_assumed_unit_carrier_gain": true,
+    "post_projection_and_equal_orbit_are_valid_predeclared_gain_controls": true,
+    "gain_estimator_rule_was_not_prospectively_frozen": true,
+    "control_only_gain_uses_private_target_fold_or_polarity": false,
+    "target_fold_polarity_match_after_control_normalization": true,
+    "maximum_component_error": 0.0275584579965194,
+    "maximum_angular_error_rad": 0.0018368306285109215,
+    "scalar_public_artifact_alone_plausibly_explains_full_geometry": false,
+    "phase_failures_concentrated_near_zero": true,
+    "unique_failed_cells_near_zero": 16,
+    "unique_failed_cells_total": 18,
+    "strong_signal_mapping_failures_materially_defeat_decoded_geometry": false,
+    "strong_signal_failures_remain_formal_hard_gate_failures": true,
+    "existing_evidence_sufficient_for_wall_crossing_claim": false
+  },
+  "material_blockers": [
+    "Official retained class remains ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE.",
+    "Retrospective gain correction does not repair the two strong phase-transfer failures.",
+    "Retrospective geometry class does not require the phase-transfer partition to pass.",
+    "The repaired analysis had to be sealed as a new exact-head artifact before use."
+  ],
+  "contract_freeze_required": true,
+  "contract_requirements": [
+    "Freeze the control-gain formula and combination rule.",
+    "Freeze target-independent input boundaries.",
+    "Freeze normalized vector thresholds.",
+    "Freeze exact near-zero statistics and bounds.",
+    "Freeze treatment of strong mapping failures.",
+    "Freeze final evidence hashes before any new live authorization."
+  ]
+}

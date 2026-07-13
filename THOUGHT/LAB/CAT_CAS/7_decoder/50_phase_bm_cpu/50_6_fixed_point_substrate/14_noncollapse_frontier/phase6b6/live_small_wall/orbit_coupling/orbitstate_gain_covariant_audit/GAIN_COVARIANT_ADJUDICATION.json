@@ -1,0 +1,2301 @@
+{
+  "cross_replicate_control_calibration": {
+    "replicate_0_predicts_replicate_1": {
+      "passed": true,
+      "targets": {
+        "Z_d": {
+          "complex_relative_error": 0.001513913277475747,
+          "component_relative_error": {
+            "imag": 0.00027769523138493997,
+            "real": 0.001513913277475747
+          },
+          "observed": {
+            "imag": 1522.7499999999998,
+            "real": 2409.0
+          },
+          "passed": true,
+          "predicted": {
+            "imag": 1523.1729778725294,
+            "real": 2405.352982914561
+          },
+          "source_g_control": 1.853557917407246,
+          "source_gain_scope": "replicate_0",
+          "target_scope": "replicate_1"
+        },
+        "Z_fold": {
+          "complex_relative_error": 0.01380836654417004,
+          "component_relative_error": {
+            "imag": 0.01380836654417004,
+            "real": 0.01227677531482972
+          },
+          "observed": {
+            "imag": -1544.5,
+            "real": 2435.25
+          },
+          "passed": true,
+          "predicted": {
+            "imag": -1523.1729778725294,
+            "real": 2405.352982914561
+          },
+          "source_g_control": 1.853557917407246,
+          "source_gain_scope": "replicate_0",
+          "target_scope": "replicate_1"
+        },
+        "Z_polarity_inversion": {
+          "complex_relative_error": 0.00244562657768339,
+          "component_relative_error": {
+            "imag": 0.001426612672425721,
+            "real": 0.00244562657768339
+          },
+          "observed": {
+            "imag": -1521.0,
+            "real": -2411.25
+          },
+          "passed": true,
+          "predicted": {
+            "imag": -1523.1729778725294,
+            "real": -2405.352982914561
+          },
+          "source_g_control": 1.853557917407246,
+          "source_gain_scope": "replicate_0",
+          "target_scope": "replicate_1"
+        }
+      }
+    },
+    "replicate_1_predicts_replicate_0": {
+      "passed": true,
+      "targets": {
+        "Z_d": {
+          "complex_relative_error": 0.009062920775775637,
+          "component_relative_error": {
+            "imag": 0.005024198709372444,
+            "real": 0.009062920775775637
+          },
+          "observed": {
+            "imag": 1556.5,
+            "real": 2468.0
+          },
+          "passed": true,
+          "predicted": {
+            "imag": 1548.6798347088618,
+            "real": 2445.6327115253857
+          },
+          "source_g_control": 1.884597357525986,
+          "source_gain_scope": "replicate_1",
+          "target_scope": "replicate_0"
+        },
+        "Z_fold": {
+          "complex_relative_error": 0.011266338578780784,
+          "component_relative_error": {
+            "imag": 0.0072565162122680835,
+            "real": 0.011266338578780784
+          },
+          "observed": {
+            "imag": -1560.0,
+            "real": 2473.5
+          },
+          "passed": true,
+          "predicted": {
+            "imag": -1548.6798347088618,
+            "real": 2445.6327115253857
+          },
+          "source_g_control": 1.884597357525986,
+          "source_gain_scope": "replicate_1",
+          "target_scope": "replicate_0"
+        },
+        "Z_polarity_inversion": {
+          "complex_relative_error": 0.0009232603646127972,
+          "component_relative_error": {
+            "imag": 0.0009232603646127972,
+            "real": 0.0008649937594175345
+          },
+          "observed": {
+            "imag": -1547.25,
+            "real": -2447.75
+          },
+          "passed": true,
+          "predicted": {
+            "imag": -1548.6798347088618,
+            "real": -2445.6327115253857
+          },
+          "source_g_control": 1.884597357525986,
+          "source_gain_scope": "replicate_1",
+          "target_scope": "replicate_0"
+        }
+      }
+    }
+  },
+  "decodes": {
+    "aggregate": {
+      "Z_d": {
+        "map0": {
+          "imag": 1511.7499999999998,
+          "real": 2423.75
+        },
+        "map1": {
+          "imag": 1567.5,
+          "real": 2453.25
+        }
+      },
+      "Z_declaration_sham": {
+        "map0": {
+          "imag": 4.500000000000227,
+          "real": 1.499999999999842
+        },
+        "map1": {
+          "imag": 2.2737367544323206e-13,
+          "real": -3.5000000000002274
+        }
+      },
+      "Z_equal_orbit": {
+        "map0": {
+          "imag": -3.0000000000001887,
+          "real": 2816.0
+        },
+        "map1": {
+          "imag": 1.9999999999998295,
+          "real": 2885.25
+        }
+      },
+      "Z_fold": {
+        "map0": {
+          "imag": -1536.5000000000002,
+          "real": 2451.75
+        },
+        "map1": {
+          "imag": -1568.0,
+          "real": 2457.0
+        }
+      },
+      "Z_polarity_inversion": {
+        "map0": {
+          "imag": -1526.9999999999998,
+          "real": -2437.5
+        },
+        "map1": {
+          "imag": -1541.25,
+          "real": -2421.5
+        }
+      },
+      "Z_post_projection": {
+        "map0": {
+          "imag": 15.999999999999844,
+          "real": 2462.0
+        },
+        "map1": {
+          "imag": 2.4999999999998654,
+          "real": 2423.25
+        }
+      },
+      "Z_query_off": {
+        "map0": {
+          "imag": -30.500000000000007,
+          "real": -25.999999999999986
+        },
+        "map1": {
+          "imag": 14.25,
+          "real": 41.74999999999999
+        }
+      },
+      "Z_query_scramble": {
+        "map0": {
+          "imag": -6.749999999999773,
+          "real": -7.7499999999998535
+        },
+        "map1": {
+          "imag": 7.750000000000227,
+          "real": -7.24999999999979
+        }
+      },
+      "Z_source_off": {
+        "map0": {
+          "imag": 0.25,
+          "real": 0.25000000000000006
+        },
+        "map1": {
+          "imag": 0.0,
+          "real": -0.25
+        }
+      }
+    },
+    "replicate": {
+      "0": {
+        "Z_d": {
+          "map0": {
+            "imag": 1537.9999999999998,
+            "real": 2434.0
+          },
+          "map1": {
+            "imag": 1575.0,
+            "real": 2502.0
+          }
+        },
+        "Z_declaration_sham": {
+          "map0": {
+            "imag": 24.500000000000227,
+            "real": -25.500000000000156
+          },
+          "map1": {
+            "imag": 10.500000000000227,
+            "real": -3.50000000000024
+          }
+        },
+        "Z_equal_orbit": {
+          "map0": {
+            "imag": -20.00000000000019,
+            "real": 2734.0
+          },
+          "map1": {
+            "imag": 24.499999999999844,
+            "real": 2835.5
+          }
+        },
+        "Z_fold": {
+          "map0": {
+            "imag": -1559.5,
+            "real": 2472.5
+          },
+          "map1": {
+            "imag": -1560.5,
+            "real": 2474.5
+          }
+        },
+        "Z_polarity_inversion": {
+          "map0": {
+            "imag": -1566.4999999999998,
+            "real": -2427.5
+          },
+          "map1": {
+            "imag": -1528.0,
+            "real": -2468.0
+          }
+        },
+        "Z_post_projection": {
+          "map0": {
+            "imag": -2.0000000000001563,
+            "real": 2449.5
+          },
+          "map1": {
+            "imag": -13.500000000000142,
+            "real": 2466.5
+          }
+        },
+        "Z_query_off": {
+          "map0": {
+            "imag": 30.499999999999993,
+            "real": -27.499999999999986
+          },
+          "map1": {
+            "imag": -10.0,
+            "real": 46.99999999999999
+          }
+        },
+        "Z_query_scramble": {
+          "map0": {
+            "imag": -10.999999999999773,
+            "real": -22.99999999999976
+          },
+          "map1": {
+            "imag": -3.4999999999997726,
+            "real": -17.499999999999773
+          }
+        },
+        "Z_source_off": {
+          "map0": {
+            "imag": 0.5,
+            "real": 9.184850993605148e-17
+          },
+          "map1": {
+            "imag": 0.0,
+            "real": -0.5
+          }
+        }
+      },
+      "1": {
+        "Z_d": {
+          "map0": {
+            "imag": 1485.4999999999998,
+            "real": 2413.5
+          },
+          "map1": {
+            "imag": 1559.9999999999998,
+            "real": 2404.5
+          }
+        },
+        "Z_declaration_sham": {
+          "map0": {
+            "imag": -15.499999999999863,
+            "real": 28.499999999999773
+          },
+          "map1": {
+            "imag": -10.499999999999773,
+            "real": -3.500000000000147
+          }
+        },
+        "Z_equal_orbit": {
+          "map0": {
+            "imag": 13.999999999999812,
+            "real": 2898.0
+          },
+          "map1": {
+            "imag": -20.50000000000017,
+            "real": 2935.0
+          }
+        },
+        "Z_fold": {
+          "map0": {
+            "imag": -1513.5,
+            "real": 2431.0
+          },
+          "map1": {
+            "imag": -1575.5,
+            "real": 2439.5
+          }
+        },
+        "Z_polarity_inversion": {
+          "map0": {
+            "imag": -1487.4999999999998,
+            "real": -2447.5
+          },
+          "map1": {
+            "imag": -1554.5,
+            "real": -2375.0
+          }
+        },
+        "Z_post_projection": {
+          "map0": {
+            "imag": 33.999999999999844,
+            "real": 2474.5
+          },
+          "map1": {
+            "imag": 18.49999999999987,
+            "real": 2380.0
+          }
+        },
+        "Z_query_off": {
+          "map0": {
+            "imag": -91.50000000000001,
+            "real": -24.499999999999996
+          },
+          "map1": {
+            "imag": 38.5,
+            "real": 36.49999999999999
+          }
+        },
+        "Z_query_scramble": {
+          "map0": {
+            "imag": -2.4999999999997726,
+            "real": 7.500000000000147
+          },
+          "map1": {
+            "imag": 19.00000000000016,
+            "real": 3.0000000000002274
+          }
+        },
+        "Z_source_off": {
+          "map0": {
+            "imag": 0.0,
+            "real": 0.5
+          },
+          "map1": {
+            "imag": 0.0,
+            "real": 0.0
+          }
+        }
+      }
+    }
+  },
+  "evidence_root": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\runs\\orbitstate_independent_v2_1",
+  "evidence_verification": {
+    "failures": [],
+    "observed_hashes": {
+      "COPYBACK_MANIFEST.json": "c8ab1065cf08bf3b2b9c2cb01e09dadbf1016727c4b35f9a4139dc2854efe97e",
+      "ORBITSTATE_ADJUDICATION.json": "4ff6e51770b81bf76329428f3aa6edb6be83a1445a0979637e13d50403f36bfd",
+      "ORBITSTATE_FEATURE_FREEZE_RECEIPT.json": "e0183c5bbc549e7630491bffef0702ee26fe8077bdfd193914808ff4b79f6365",
+      "ORBITSTATE_INDEPENDENT_V2_MANIFEST.json": "41273b4294a2308961e5f177f1a99159944dcbaf2b46ca6d1bd85ce542b900b3",
+      "ORBITSTATE_RECEIVER_FEATURES.json": "70ac1c25cf795b90da4196672d530549dc0519aa6e98e589d5e75ad2f1f8a26a",
+      "ORBITSTATE_RECEIVER_SENTINELS.jsonl": "da68625bb05d09846bf0ef216cb7502d1549c208f50326c4888e8e2cbc1e7950",
+      "ORBITSTATE_SOURCE_RECEIPTS.jsonl": "5a67264693eef2e3d5a4fc3bb1fc5a857fb83245e3af4fd78fa1debed9fe8feb",
+      "ORBITSTATE_STAGE_RECEIPTS.jsonl": "0c7c18174d90531763d785db91b8d11a9e218f0062c4843b1f0adab36eb05b3a",
+      "RAW_ORBITSTATE_RECEIVER_CAPTURE.jsonl": "721ca48c2f5b682d871521b106be9fcff9d511325eb2473a4ed298b23d54f623"
+    },
+    "passed": true,
+    "policy_snapshot_count": 2,
+    "process_snapshot_count": 4,
+    "record_counts": {
+      "raw_component_windows": 288,
+      "receiver_feature_rows": 144,
+      "sentinels": 288,
+      "source_receipts": 288,
+      "stage_receipts": 2016
+    },
+    "temperature_range_c": {
+      "max": 52.5,
+      "min": 51.25
+    }
+  },
+  "feature_freeze_law": {
+    "passed": true
+  },
+  "gain_covariant_adjudication_sha256": "a7daa6112b5f1949daca3b0b449aab312c788d56697f765212c8de17b00f1d55",
+  "gain_covariant_geometry": {
+    "aggregate": {
+      "control_gain": {
+        "allowed_gain_conditions": [
+          "equal_orbit_odd_zero",
+          "post_projection"
+        ],
+        "control_gain_relative_error": 0.014027656951047917,
+        "equal_orbit_re": 2850.625,
+        "expected_equal_orbit_re": 1536.0,
+        "expected_post_projection_re": 1297.6950762235501,
+        "g_control": 1.8690776374666158,
+        "g_equal": 1.8558756510416667,
+        "g_post": 1.8822796238915651,
+        "passed": true,
+        "post_projection_re": 2442.625,
+        "target_derived_gain_inputs_used": []
+      },
+      "gain_consistency": {
+        "all_gains_positive": true,
+        "diagnostic_gains": {
+          "Z_d": 1.8775202665234911,
+          "Z_fold": 1.8906494301298804,
+          "Z_polarity_inversion": 1.8706542710829797
+        },
+        "max_pairwise_gain_disagreement": 0.010575815234835553,
+        "with_g_control": {
+          "Z_d": 0.00449669130470059,
+          "Z_fold": 0.011409726372055494,
+          "Z_polarity_inversion": 0.0008428246954746378
+        },
+        "with_g_equal": {
+          "Z_d": 0.01152829925074664,
+          "Z_fold": 0.01839250499539983,
+          "Z_polarity_inversion": 0.00790024125235986
+        },
+        "with_g_post": {
+          "Z_d": 0.0025285070866538574,
+          "Z_fold": 0.004426947748711043,
+          "Z_polarity_inversion": 0.006176209241722722
+        }
+      },
+      "passed": true,
+      "relational_geometry": {
+        "angle_errors_rad": {
+          "Z_d": 0.001329471140084637,
+          "Z_fold": 0.0005719059951355687,
+          "Z_polarity_inversion": 0.001275783208903647
+        },
+        "fold_conjugacy_error": 0.008133354807537446,
+        "fold_conjugacy_passed": true,
+        "odd_magnitude_min": 1539.625,
+        "odd_magnitude_passed": true,
+        "polarity_inversion_error": 0.0036907935206069303,
+        "polarity_inversion_passed": true
+      },
+      "vectors": {
+        "Z_d": {
+          "angular_error_rad": 0.001329471140084637,
+          "component_relative_error": {
+            "imag": 0.002402269194969398,
+            "real": 0.0053340794668964115
+          },
+          "control_calibrated_complex_relative_error": 0.0053340794668964115,
+          "control_calibrated_passed": true,
+          "control_only_predicted": {
+            "imag": 1535.9264062906952,
+            "real": 2425.492847219973
+          },
+          "ideal": {
+            "imag": 821.7563441465812,
+            "real": 1297.6950762235501
+          },
+          "observed": {
+            "imag": 1539.625,
+            "real": 2438.5
+          },
+          "orthogonal_residual": 3.8340256971059845,
+          "positive_least_squares_gain": 1.8775202665234911,
+          "relative_vector_residual": 0.0013294707484459865
+        },
+        "Z_fold": {
+          "angular_error_rad": 0.0005719059951355687,
+          "component_relative_error": {
+            "imag": 0.01051608549480094,
+            "real": 0.011767620180301258
+          },
+          "control_calibrated_complex_relative_error": 0.011767620180301258,
+          "control_calibrated_passed": true,
+          "control_only_predicted": {
+            "imag": -1535.9264062906952,
+            "real": 2425.492847219973
+          },
+          "ideal": {
+            "imag": -821.7563441465812,
+            "real": 1297.6950762235501
+          },
+          "observed": {
+            "imag": -1552.25,
+            "real": 2454.375
+          },
+          "orthogonal_residual": 1.6608366515362833,
+          "positive_least_squares_gain": 1.8906494301298804,
+          "relative_vector_residual": 0.0005719059639593659
+        },
+        "Z_polarity_inversion": {
+          "angular_error_rad": 0.001275783208903647,
+          "component_relative_error": {
+            "imag": 0.00117284674794132,
+            "real": 0.001649373443106359
+          },
+          "control_calibrated_complex_relative_error": 0.001649373443106359,
+          "control_calibrated_passed": true,
+          "control_only_predicted": {
+            "imag": -1535.9264062906952,
+            "real": -2425.492847219973
+          },
+          "ideal": {
+            "imag": -821.7563441465812,
+            "real": -1297.6950762235501
+          },
+          "observed": {
+            "imag": -1534.125,
+            "real": -2429.5
+          },
+          "orthogonal_residual": 3.6657417269956087,
+          "positive_least_squares_gain": 1.8706542710829797,
+          "relative_vector_residual": 0.0012757828628211986
+        }
+      }
+    },
+    "replicate_0": {
+      "control_gain": {
+        "allowed_gain_conditions": [
+          "equal_orbit_odd_zero",
+          "post_projection"
+        ],
+        "control_gain_relative_error": 0.04283727997187876,
+        "equal_orbit_re": 2784.75,
+        "expected_equal_orbit_re": 1536.0,
+        "expected_post_projection_re": 1297.6950762235501,
+        "g_control": 1.853557917407246,
+        "g_equal": 1.81298828125,
+        "g_post": 1.894127553564492,
+        "passed": true,
+        "post_projection_re": 2458.0,
+        "target_derived_gain_inputs_used": []
+      },
+      "gain_consistency": {
+        "all_gains_positive": true,
+        "diagnostic_gains": {
+          "Z_d": 1.8996239546813436,
+          "Z_fold": 1.9038682165813947,
+          "Z_polarity_inversion": 1.885263920384298
+        },
+        "max_pairwise_gain_disagreement": 0.009771840317027172,
+        "with_g_control": {
+          "Z_d": 0.024250082317910638,
+          "Z_fold": 0.026425305457583786,
+          "Z_polarity_inversion": 0.01681780605581679
+        },
+        "with_g_equal": {
+          "Z_d": 0.045606749282058025,
+          "Z_fold": 0.047734362357589884,
+          "Z_polarity_inversion": 0.03833714651451301
+        },
+        "with_g_post": {
+          "Z_d": 0.0028934153537633635,
+          "Z_fold": 0.005116248557577808,
+          "Z_polarity_inversion": 0.004679533415536741
+        }
+      },
+      "passed": true,
+      "relational_geometry": {
+        "angle_errors_rad": {
+          "Z_d": 0.0018368306285109215,
+          "Z_fold": 0.0018277772625223678,
+          "Z_polarity_inversion": 0.0008083336968525145
+        },
+        "fold_conjugacy_error": 0.0022435897435897434,
+        "fold_conjugacy_passed": true,
+        "odd_magnitude_min": 1556.5,
+        "odd_magnitude_passed": true,
+        "polarity_inversion_error": 0.008205024311183143,
+        "polarity_inversion_passed": true
+      },
+      "vectors": {
+        "Z_d": {
+          "angular_error_rad": 0.0018368306285109215,
+          "component_relative_error": {
+            "imag": 0.02141151437678807,
+            "real": 0.02538371843008066
+          },
+          "control_calibrated_complex_relative_error": 0.02538371843008066,
+          "control_calibrated_passed": true,
+          "control_only_predicted": {
+            "imag": 1523.1729778725294,
+            "real": 2405.352982914561
+          },
+          "ideal": {
+            "imag": 821.7563441465812,
+            "real": 1297.6950762235501
+          },
+          "observed": {
+            "imag": 1556.5,
+            "real": 2468.0
+          },
+          "orthogonal_residual": 5.359551570186754,
+          "positive_least_squares_gain": 1.8996239546813436,
+          "relative_vector_residual": 0.0018368295956162684
+        },
+        "Z_fold": {
+          "angular_error_rad": 0.0018277772625223678,
+          "component_relative_error": {
+            "imag": 0.023607065466327324,
+            "real": 0.02755084579965194
+          },
+          "control_calibrated_complex_relative_error": 0.02755084579965194,
+          "control_calibrated_passed": true,
+          "control_only_predicted": {
+            "imag": -1523.1729778725294,
+            "real": 2405.352982914561
+          },
+          "ideal": {
+            "imag": -821.7563441465812,
+            "real": 1297.6950762235501
+          },
+          "observed": {
+            "imag": -1560.0,
+            "real": 2473.5
+          },
+          "orthogonal_residual": 5.345051001191875,
+          "positive_least_squares_gain": 1.9038682165813947,
+          "relative_vector_residual": 0.0018277762448254303
+        },
+        "Z_polarity_inversion": {
+          "angular_error_rad": 0.0008083336968525145,
+          "component_relative_error": {
+            "imag": 0.015561171192419213,
+            "real": 0.017320811800812613
+          },
+          "control_calibrated_complex_relative_error": 0.017320811800812613,
+          "control_calibrated_passed": true,
+          "control_only_predicted": {
+            "imag": -1523.1729778725294,
+            "real": -2405.352982914561
+          },
+          "ideal": {
+            "imag": -821.7563441465812,
+            "real": -1297.6950762235501
+          },
+          "observed": {
+            "imag": -1547.25,
+            "real": -2447.75
+          },
+          "orthogonal_residual": 2.3407452460325096,
+          "positive_least_squares_gain": 1.885263920384298,
+          "relative_vector_residual": 0.0008083336088245735
+        }
+      }
+    },
+    "replicate_1": {
+      "control_gain": {
+        "allowed_gain_conditions": [
+          "equal_orbit_odd_zero",
+          "post_projection"
+        ],
+        "control_gain_relative_error": 0.01492093868684077,
+        "equal_orbit_re": 2916.5,
+        "expected_equal_orbit_re": 1536.0,
+        "expected_post_projection_re": 1297.6950762235501,
+        "g_control": 1.884597357525986,
+        "g_equal": 1.8987630208333333,
+        "g_post": 1.8704316942186385,
+        "passed": true,
+        "post_projection_re": 2427.25,
+        "target_derived_gain_inputs_used": []
+      },
+      "gain_consistency": {
+        "all_gains_positive": true,
+        "diagnostic_gains": {
+          "Z_d": 1.8554165783656391,
+          "Z_fold": 1.8774306436783665,
+          "Z_polarity_inversion": 1.8560446217816609
+        },
+        "max_pairwise_gain_disagreement": 0.011725634385937286,
+        "with_g_control": {
+          "Z_d": 0.015483826847053472,
+          "Z_fold": 0.0038027824983409733,
+          "Z_polarity_inversion": 0.015150576132510283
+        },
+        "with_g_equal": {
+          "Z_d": 0.022828779574962526,
+          "Z_fold": 0.011234881299512733,
+          "Z_polarity_inversion": 0.02249801506715886
+        },
+        "with_g_post": {
+          "Z_d": 0.008027620521727681,
+          "Z_fold": 0.00372794035470481,
+          "Z_polarity_inversion": 0.007691845942007409
+        }
+      },
+      "passed": true,
+      "relational_geometry": {
+        "angle_errors_rad": {
+          "Z_d": 0.0008100225371211467,
+          "Z_fold": 0.000701652003571529,
+          "Z_polarity_inversion": 0.0017505911030175623
+        },
+        "fold_conjugacy_error": 0.01408222725801245,
+        "fold_conjugacy_passed": true,
+        "odd_magnitude_min": 1522.7499999999998,
+        "odd_magnitude_passed": true,
+        "polarity_inversion_error": 0.00114923657855838,
+        "polarity_inversion_passed": true
+      },
+      "vectors": {
+        "Z_d": {
+          "angular_error_rad": 0.0008100225371211467,
+          "component_relative_error": {
+            "imag": 0.01674318611744344,
+            "real": 0.01497882791342664
+          },
+          "control_calibrated_complex_relative_error": 0.01674318611744344,
+          "control_calibrated_passed": true,
+          "control_only_predicted": {
+            "imag": 1548.6798347088618,
+            "real": 2445.6327115253857
+          },
+          "ideal": {
+            "imag": 821.7563441465812,
+            "real": 1297.6950762235501
+          },
+          "observed": {
+            "imag": 1522.7499999999998,
+            "real": 2409.0
+          },
+          "orthogonal_residual": 2.308499824025547,
+          "positive_least_squares_gain": 1.8554165783656391,
+          "relative_vector_residual": 0.0008100224485402151
+        },
+        "Z_fold": {
+          "angular_error_rad": 0.000701652003571529,
+          "component_relative_error": {
+            "imag": 0.0026989663164611183,
+            "real": 0.004245409164039944
+          },
+          "control_calibrated_complex_relative_error": 0.004245409164039944,
+          "control_calibrated_passed": true,
+          "control_only_predicted": {
+            "imag": -1548.6798347088618,
+            "real": 2445.6327115253857
+          },
+          "ideal": {
+            "imag": -821.7563441465812,
+            "real": 1297.6950762235501
+          },
+          "observed": {
+            "imag": -1544.5,
+            "real": 2435.25
+          },
+          "orthogonal_residual": 2.023377698119167,
+          "positive_least_squares_gain": 1.8774306436783665,
+          "relative_vector_residual": 0.0007016519459990994
+        },
+        "Z_polarity_inversion": {
+          "angular_error_rad": 0.0017505911030175623,
+          "component_relative_error": {
+            "imag": 0.017873180814074043,
+            "real": 0.014058820592050637
+          },
+          "control_calibrated_complex_relative_error": 0.017873180814074043,
+          "control_calibrated_passed": true,
+          "control_only_predicted": {
+            "imag": -1548.6798347088618,
+            "real": -2445.6327115253857
+          },
+          "ideal": {
+            "imag": -821.7563441465812,
+            "real": -1297.6950762235501
+          },
+          "observed": {
+            "imag": -1521.0,
+            "real": -2411.25
+          },
+          "orthogonal_residual": 4.990738207958374,
+          "positive_least_squares_gain": 1.8560446217816609,
+          "relative_vector_residual": 0.0017505902088831896
+        }
+      }
+    }
+  },
+  "ideal_vectors": {
+    "Z_d": {
+      "imag": 821.7563441465812,
+      "real": 1297.6950762235501
+    },
+    "Z_fold": {
+      "imag": -821.7563441465812,
+      "real": 1297.6950762235501
+    },
+    "Z_polarity_inversion": {
+      "imag": -821.7563441465812,
+      "real": -1297.6950762235501
+    }
+  },
+  "near_zero_law_audit": {
+    "interpretation": "The retained raw-leg law bounds single randomized windows, while the decoded null controls are first-harmonic cancellations across phases and mapping legs. The two quantities are not the same statistic and should not share one absolute ceiling without a prospective derivation.",
+    "prospective_absolute_near_zero_law": {
+      "decoded_first_harmonic_imag_bound": 152.0,
+      "paired_logical_average_bound": 152.0,
+      "paired_physical_reversal_average_bound": 152.0,
+      "raw_leg_bound": 152.0,
+      "rule": "Freeze one absolute count bound before execution, apply it separately to algebraically identical one-leg quantities and two-leg averaged residual quantities, and do not derive the ceiling from a same-sized held-out sample maximum."
+    },
+    "rows": [
+      {
+        "complex_first_harmonic": {
+          "imag": -20.00000000000019,
+          "real": 2734.0
+        },
+        "condition": "equal_orbit_odd_zero",
+        "decoded_imaginary_null": 2.2499999999998277,
+        "decoded_mapping_average": {
+          "imag": 2.2499999999998277,
+          "real": 2784.75
+        },
+        "logical_pair_average": 8.0,
+        "logical_pair_difference": -382.0,
+        "map0_response": -183.0,
+        "map1_response": 199.0,
+        "phase": 1,
+        "physical_reversal_sum": -382.0,
+        "reason": "equal_orbit_imaginary_phase",
+        "replicate": 0
+      },
+      {
+        "complex_first_harmonic": {
+          "imag": -20.00000000000019,
+          "real": 2734.0
+        },
+        "condition": "equal_orbit_odd_zero",
+        "decoded_imaginary_null": 2.2499999999998277,
+        "decoded_mapping_average": {
+          "imag": 2.2499999999998277,
+          "real": 2784.75
+        },
+        "logical_pair_average": 3.5,
+        "logical_pair_difference": -293.0,
+        "map0_response": -143.0,
+        "map1_response": 150.0,
+        "phase": 3,
+        "physical_reversal_sum": -293.0,
+        "reason": "equal_orbit_imaginary_phase",
+        "replicate": 0
+      },
+      {
+        "complex_first_harmonic": {
+          "imag": -2.0000000000001563,
+          "real": 2449.5
+        },
+        "condition": "post_projection",
+        "decoded_imaginary_null": -7.750000000000149,
+        "decoded_mapping_average": {
+          "imag": -7.750000000000149,
+          "real": 2458.0
+        },
+        "logical_pair_average": 21.5,
+        "logical_pair_difference": -331.0,
+        "map0_response": -144.0,
+        "map1_response": 187.0,
+        "phase": 1,
+        "physical_reversal_sum": -331.0,
+        "reason": "post_projection_imaginary_phase",
+        "replicate": 0
+      },
+      {
+        "complex_first_harmonic": {
+          "imag": -2.0000000000001563,
+          "real": 2449.5
+        },
+        "condition": "post_projection",
+        "decoded_imaginary_null": -7.750000000000149,
+        "decoded_mapping_average": {
+          "imag": -7.750000000000149,
+          "real": 2458.0
+        },
+        "logical_pair_average": 37.0,
+        "logical_pair_difference": -354.0,
+        "map0_response": -140.0,
+        "map1_response": 214.0,
+        "phase": 3,
+        "physical_reversal_sum": -354.0,
+        "reason": "post_projection_imaginary_phase",
+        "replicate": 0
+      },
+      {
+        "complex_first_harmonic": {
+          "imag": 30.499999999999993,
+          "real": -27.499999999999986
+        },
+        "condition": "query_off",
+        "decoded_imaginary_null": 10.249999999999996,
+        "decoded_mapping_average": {
+          "imag": 10.249999999999996,
+          "real": 9.750000000000004
+        },
+        "logical_pair_average": 0.0,
+        "logical_pair_difference": -374.0,
+        "map0_response": -187.0,
+        "map1_response": 187.0,
+        "phase": 0,
+        "physical_reversal_sum": -374.0,
+        "reason": "near_zero_condition",
+        "replicate": 0
+      },
+      {
+        "complex_first_harmonic": {
+          "imag": 30.499999999999993,
+          "real": -27.499999999999986
+        },
+        "condition": "query_off",
+        "decoded_imaginary_null": 10.249999999999996,
+        "decoded_mapping_average": {
+          "imag": 10.249999999999996,
+          "real": 9.750000000000004
+        },
+        "logical_pair_average": 1.0,
+        "logical_pair_difference": -244.0,
+        "map0_response": -121.0,
+        "map1_response": 123.0,
+        "phase": 1,
+        "physical_reversal_sum": -244.0,
+        "reason": "near_zero_condition",
+        "replicate": 0
+      },
+      {
+        "complex_first_harmonic": {
+          "imag": 30.499999999999993,
+          "real": -27.499999999999986
+        },
+        "condition": "query_off",
+        "decoded_imaginary_null": 10.249999999999996,
+        "decoded_mapping_average": {
+          "imag": 10.249999999999996,
+          "real": 9.750000000000004
+        },
+        "logical_pair_average": -19.5,
+        "logical_pair_difference": -225.0,
+        "map0_response": -132.0,
+        "map1_response": 93.0,
+        "phase": 2,
+        "physical_reversal_sum": -225.0,
+        "reason": "near_zero_condition",
+        "replicate": 0
+      },
+      {
+        "complex_first_harmonic": {
+          "imag": 30.499999999999993,
+          "real": -27.499999999999986
+        },
+        "condition": "query_off",
+        "decoded_imaginary_null": 10.249999999999996,
+        "decoded_mapping_average": {
+          "imag": 10.249999999999996,
+          "real": 9.750000000000004
+        },
+        "logical_pair_average": -19.5,
+        "logical_pair_difference": -325.0,
+        "map0_response": -182.0,
+        "map1_response": 143.0,
+        "phase": 3,
+        "physical_reversal_sum": -325.0,
+        "reason": "near_zero_condition",
+        "replicate": 0
+      },
+      {
+        "complex_first_harmonic": {
+          "imag": 0.5,
+          "real": 9.184850993605148e-17
+        },
+        "condition": "source_off",
+        "decoded_imaginary_null": 0.25,
+        "decoded_mapping_average": {
+          "imag": 0.25,
+          "real": -0.24999999999999994
+        },
+        "logical_pair_average": -0.5,
+        "logical_pair_difference": 1.0,
+        "map0_response": 0.0,
+        "map1_response": -1.0,
+        "phase": 0,
+        "physical_reversal_sum": 1.0,
+        "reason": "near_zero_condition",
+        "replicate": 0
+      },
+      {
+        "complex_first_harmonic": {
+          "imag": 0.5,
+          "real": 9.184850993605148e-17
+        },
+        "condition": "source_off",
+        "decoded_imaginary_null": 0.25,
+        "decoded_mapping_average": {
+          "imag": 0.25,
+          "real": -0.24999999999999994
+        },
+        "logical_pair_average": 0.0,
+        "logical_pair_difference": 0.0,
+        "map0_response": 0.0,
+        "map1_response": 0.0,
+        "phase": 1,
+        "physical_reversal_sum": 0.0,
+        "reason": "near_zero_condition",
+        "replicate": 0
+      },
+      {
+        "complex_first_harmonic": {
+          "imag": 0.5,
+          "real": 9.184850993605148e-17
+        },
+        "condition": "source_off",
+        "decoded_imaginary_null": 0.25,
+        "decoded_mapping_average": {
+          "imag": 0.25,
+          "real": -0.24999999999999994
+        },
+        "logical_pair_average": 0.0,
+        "logical_pair_difference": 0.0,
+        "map0_response": 0.0,
+        "map1_response": 0.0,
+        "phase": 2,
+        "physical_reversal_sum": 0.0,
+        "reason": "near_zero_condition",
+        "replicate": 0
+      },
+      {
+        "complex_first_harmonic": {
+          "imag": 0.5,
+          "real": 9.184850993605148e-17
+        },
+        "condition": "source_off",
+        "decoded_imaginary_null": 0.25,
+        "decoded_mapping_average": {
+          "imag": 0.25,
+          "real": -0.24999999999999994
+        },
+        "logical_pair_average": -0.5,
+        "logical_pair_difference": -1.0,
+        "map0_response": -1.0,
+        "map1_response": 0.0,
+        "phase": 3,
+        "physical_reversal_sum": -1.0,
+        "reason": "near_zero_condition",
+        "replicate": 0
+      },
+      {
+        "complex_first_harmonic": {
+          "imag": 13.999999999999812,
+          "real": 2898.0
+        },
+        "condition": "equal_orbit_odd_zero",
+        "decoded_imaginary_null": -3.2500000000001794,
+        "decoded_mapping_average": {
+          "imag": -3.2500000000001794,
+          "real": 2916.5
+        },
+        "logical_pair_average": -2.5,
+        "logical_pair_difference": -295.0,
+        "map0_response": -150.0,
+        "map1_response": 145.0,
+        "phase": 1,
+        "physical_reversal_sum": -295.0,
+        "reason": "equal_orbit_imaginary_phase",
+        "replicate": 1
+      },
+      {
+        "complex_first_harmonic": {
+          "imag": 13.999999999999812,
+          "real": 2898.0
+        },
+        "condition": "equal_orbit_odd_zero",
+        "decoded_imaginary_null": -3.2500000000001794,
+        "decoded_mapping_average": {
+          "imag": -3.2500000000001794,
+          "real": 2916.5
+        },
+        "logical_pair_average": 4.0,
+        "logical_pair_difference": -364.0,
+        "map0_response": -178.0,
+        "map1_response": 186.0,
+        "phase": 3,
+        "physical_reversal_sum": -364.0,
+        "reason": "equal_orbit_imaginary_phase",
+        "replicate": 1
+      },
+      {
+        "complex_first_harmonic": {
+          "imag": 33.999999999999844,
+          "real": 2474.5
+        },
+        "condition": "post_projection",
+        "decoded_imaginary_null": 26.249999999999858,
+        "decoded_mapping_average": {
+          "imag": 26.249999999999858,
+          "real": 2427.25
+        },
+        "logical_pair_average": 4.5,
+        "logical_pair_difference": -249.0,
+        "map0_response": -120.0,
+        "map1_response": 129.0,
+        "phase": 1,
+        "physical_reversal_sum": -249.0,
+        "reason": "post_projection_imaginary_phase",
+        "replicate": 1
+      },
+      {
+        "complex_first_harmonic": {
+          "imag": 33.999999999999844,
+          "real": 2474.5
+        },
+        "condition": "post_projection",
+        "decoded_imaginary_null": 26.249999999999858,
+        "decoded_mapping_average": {
+          "imag": 26.249999999999858,
+          "real": 2427.25
+        },
+        "logical_pair_average": -48.0,
+        "logical_pair_difference": -280.0,
+        "map0_response": -188.0,
+        "map1_response": 92.0,
+        "phase": 3,
+        "physical_reversal_sum": -280.0,
+        "reason": "post_projection_imaginary_phase",
+        "replicate": 1
+      },
+      {
+        "complex_first_harmonic": {
+          "imag": -91.50000000000001,
+          "real": -24.499999999999996
+        },
+        "condition": "query_off",
+        "decoded_imaginary_null": -26.500000000000007,
+        "decoded_mapping_average": {
+          "imag": -26.500000000000007,
+          "real": 5.999999999999998
+        },
+        "logical_pair_average": -8.5,
+        "logical_pair_difference": -387.0,
+        "map0_response": -202.0,
+        "map1_response": 185.0,
+        "phase": 0,
+        "physical_reversal_sum": -387.0,
+        "reason": "near_zero_condition",
+        "replicate": 1
+      },
+      {
+        "complex_first_harmonic": {
+          "imag": -91.50000000000001,
+          "real": -24.499999999999996
+        },
+        "condition": "query_off",
+        "decoded_imaginary_null": -26.500000000000007,
+        "decoded_mapping_average": {
+          "imag": -26.500000000000007,
+          "real": 5.999999999999998
+        },
+        "logical_pair_average": -53.5,
+        "logical_pair_difference": -533.0,
+        "map0_response": -320.0,
+        "map1_response": 213.0,
+        "phase": 1,
+        "physical_reversal_sum": -533.0,
+        "reason": "near_zero_condition",
+        "replicate": 1
+      },
+      {
+        "complex_first_harmonic": {
+          "imag": -91.50000000000001,
+          "real": -24.499999999999996
+        },
+        "condition": "query_off",
+        "decoded_imaginary_null": -26.500000000000007,
+        "decoded_mapping_average": {
+          "imag": -26.500000000000007,
+          "real": 5.999999999999998
+        },
+        "logical_pair_average": -20.5,
+        "logical_pair_difference": -265.0,
+        "map0_response": -153.0,
+        "map1_response": 112.0,
+        "phase": 2,
+        "physical_reversal_sum": -265.0,
+        "reason": "near_zero_condition",
+        "replicate": 1
+      },
+      {
+        "complex_first_harmonic": {
+          "imag": -91.50000000000001,
+          "real": -24.499999999999996
+        },
+        "condition": "query_off",
+        "decoded_imaginary_null": -26.500000000000007,
+        "decoded_mapping_average": {
+          "imag": -26.500000000000007,
+          "real": 5.999999999999998
+        },
+        "logical_pair_average": -0.5,
+        "logical_pair_difference": -273.0,
+        "map0_response": -137.0,
+        "map1_response": 136.0,
+        "phase": 3,
+        "physical_reversal_sum": -273.0,
+        "reason": "near_zero_condition",
+        "replicate": 1
+      },
+      {
+        "complex_first_harmonic": {
+          "imag": 0.0,
+          "real": 0.5
+        },
+        "condition": "source_off",
+        "decoded_imaginary_null": 0.0,
+        "decoded_mapping_average": {
+          "imag": 0.0,
+          "real": 0.25
+        },
+        "logical_pair_average": 0.5,
+        "logical_pair_difference": 1.0,
+        "map0_response": 1.0,
+        "map1_response": 0.0,
+        "phase": 0,
+        "physical_reversal_sum": 1.0,
+        "reason": "near_zero_condition",
+        "replicate": 1
+      },
+      {
+        "complex_first_harmonic": {
+          "imag": 0.0,
+          "real": 0.5
+        },
+        "condition": "source_off",
+        "decoded_imaginary_null": 0.0,
+        "decoded_mapping_average": {
+          "imag": 0.0,
+          "real": 0.25
+        },
+        "logical_pair_average": 0.0,
+        "logical_pair_difference": 0.0,
+        "map0_response": 0.0,
+        "map1_response": 0.0,
+        "phase": 1,
+        "physical_reversal_sum": 0.0,
+        "reason": "near_zero_condition",
+        "replicate": 1
+      },
+      {
+        "complex_first_harmonic": {
+          "imag": 0.0,
+          "real": 0.5
+        },
+        "condition": "source_off",
+        "decoded_imaginary_null": 0.0,
+        "decoded_mapping_average": {
+          "imag": 0.0,
+          "real": 0.25
+        },
+        "logical_pair_average": 0.0,
+        "logical_pair_difference": 0.0,
+        "map0_response": 0.0,
+        "map1_response": 0.0,
+        "phase": 2,
+        "physical_reversal_sum": 0.0,
+        "reason": "near_zero_condition",
+        "replicate": 1
+      },
+      {
+        "complex_first_harmonic": {
+          "imag": 0.0,
+          "real": 0.5
+        },
+        "condition": "source_off",
+        "decoded_imaginary_null": 0.0,
+        "decoded_mapping_average": {
+          "imag": 0.0,
+          "real": 0.25
+        },
+        "logical_pair_average": 0.0,
+        "logical_pair_difference": 0.0,
+        "map0_response": 0.0,
+        "map1_response": 0.0,
+        "phase": 3,
+        "physical_reversal_sum": 0.0,
+        "reason": "near_zero_condition",
+        "replicate": 1
+      }
+    ]
+  },
+  "official_retained_class": "ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE",
+  "phase_transfer_partition": {
+    "duplicate_failure_normalization": {
+      "event_count": 18,
+      "events": [
+        {
+          "event": "0, 'equal_orbit_odd_zero', 1",
+          "law_labels": [
+            "logical mapping invariance",
+            "physical reversal",
+            "map1 near-zero response outside fixed bound",
+            "map0 near-zero response outside fixed bound"
+          ]
+        },
+        {
+          "event": "0, 'equal_orbit_odd_zero', 3",
+          "law_labels": [
+            "logical mapping invariance",
+            "physical reversal"
+          ]
+        },
+        {
+          "event": "0, 'post_projection', 1",
+          "law_labels": [
+            "logical mapping invariance",
+            "physical reversal",
+            "map1 near-zero response outside fixed bound"
+          ]
+        },
+        {
+          "event": "0, 'post_projection', 3",
+          "law_labels": [
+            "logical mapping invariance",
+            "physical reversal",
+            "map1 near-zero response outside fixed bound"
+          ]
+        },
+        {
+          "event": "0, 'query_off', 0",
+          "law_labels": [
+            "logical mapping invariance",
+            "physical reversal",
+            "map0 near-zero response outside fixed bound",
+            "map1 near-zero response outside fixed bound"
+          ]
+        },
+        {
+          "event": "0, 'query_off', 1",
+          "law_labels": [
+            "logical mapping invariance",
+            "physical reversal"
+          ]
+        },
+        {
+          "event": "0, 'query_off', 2",
+          "law_labels": [
+            "logical mapping invariance",
+            "physical reversal"
+          ]
+        },
+        {
+          "event": "0, 'query_off', 3",
+          "law_labels": [
+            "logical mapping invariance",
+            "physical reversal",
+            "map0 near-zero response outside fixed bound"
+          ]
+        },
+        {
+          "event": "1, 'equal_orbit_odd_zero', 1",
+          "law_labels": [
+            "logical mapping invariance",
+            "physical reversal"
+          ]
+        },
+        {
+          "event": "1, 'equal_orbit_odd_zero', 3",
+          "law_labels": [
+            "logical mapping invariance",
+            "physical reversal",
+            "map1 near-zero response outside fixed bound",
+            "map0 near-zero response outside fixed bound"
+          ]
+        },
+        {
+          "event": "1, 'post_projection', 1",
+          "law_labels": [
+            "logical mapping invariance",
+            "physical reversal"
+          ]
+        },
+        {
+          "event": "1, 'post_projection', 3",
+          "law_labels": [
+            "logical mapping invariance",
+            "physical reversal",
+            "map0 near-zero response outside fixed bound"
+          ]
+        },
+        {
+          "event": "1, 'pre_projection_d', 1",
+          "law_labels": [
+            "logical mapping invariance",
+            "physical reversal"
+          ]
+        },
+        {
+          "event": "1, 'query_off', 0",
+          "law_labels": [
+            "logical mapping invariance",
+            "physical reversal",
+            "map1 near-zero response outside fixed bound",
+            "map0 near-zero response outside fixed bound"
+          ]
+        },
+        {
+          "event": "1, 'query_off', 1",
+          "law_labels": [
+            "logical mapping invariance",
+            "physical reversal",
+            "map1 near-zero response outside fixed bound",
+            "map0 near-zero response outside fixed bound"
+          ]
+        },
+        {
+          "event": "1, 'query_off', 2",
+          "law_labels": [
+            "logical mapping invariance",
+            "physical reversal",
+            "map0 near-zero response outside fixed bound"
+          ]
+        },
+        {
+          "event": "1, 'query_off', 3",
+          "law_labels": [
+            "logical mapping invariance",
+            "physical reversal"
+          ]
+        },
+        {
+          "event": "1, 'source_polarity_inversion_d', 3",
+          "law_labels": [
+            "logical mapping invariance",
+            "physical reversal"
+          ]
+        }
+      ]
+    },
+    "exact_two_strong_failures_verified": true,
+    "expected_exact_two_strong_mapping_reversal_failures": [
+      {
+        "condition": "pre_projection_d",
+        "phase": 1,
+        "replicate": 1
+      },
+      {
+        "condition": "source_polarity_inversion_d",
+        "phase": 3,
+        "replicate": 1
+      }
+    ],
+    "mixed": {
+      "count": 0,
+      "events": []
+    },
+    "near_zero": {
+      "counts": {
+        "individual_response_bound_violations": 15,
+        "mapping_reversal_violations": 32,
+        "pair_residual_violations": 8,
+        "total_pair_cells": 24
+      },
+      "failure_events": [
+        {
+          "condition": "equal_orbit_odd_zero",
+          "individual_response_bound_violations": {
+            "map0": true,
+            "map1": true
+          },
+          "logical_mapping_passed": false,
+          "logical_mapping_relative_error": 1.9195979899497488,
+          "map0_logical_response": -183.0,
+          "map0_physical_a_minus_b": -183.0,
+          "map1_logical_response": 199.0,
+          "map1_physical_a_minus_b": -199.0,
+          "pair_residual_bound_violations": {
+            "logical_pair_average": false,
+            "physical_reversal_average": true
+          },
+          "pair_residuals_for_absolute_law": {
+            "logical_pair_average": 8.0,
+            "physical_reversal_average": -191.0
+          },
+          "phase": 1,
+          "physical_residuals": {
+            "logical_mapping_difference": -382.0,
+            "physical_reversal_sum": -382.0
+          },
+          "physical_reversal_passed": false,
+          "physical_reversal_relative_error": 1.9195979899497488,
+          "q_theta": {
+            "map0": 0,
+            "map1": 0
+          },
+          "replicate": 0,
+          "source_execution_order": {
+            "map0": "pos_first",
+            "map1": "pos_first"
+          },
+          "strong_sign_passed": false,
+          "subcapture_order": {
+            "map0": "pos_then_neg",
+            "map1": "neg_then_pos"
+          }
+        },
+        {
+          "condition": "equal_orbit_odd_zero",
+          "individual_response_bound_violations": {
+            "map0": false,
+            "map1": false
+          },
+          "logical_mapping_passed": false,
+          "logical_mapping_relative_error": 1.9276315789473684,
+          "map0_logical_response": -143.0,
+          "map0_physical_a_minus_b": -143.0,
+          "map1_logical_response": 150.0,
+          "map1_physical_a_minus_b": -150.0,
+          "pair_residual_bound_violations": {
+            "logical_pair_average": false,
+            "physical_reversal_average": false
+          },
+          "pair_residuals_for_absolute_law": {
+            "logical_pair_average": 3.5,
+            "physical_reversal_average": -146.5
+          },
+          "phase": 3,
+          "physical_residuals": {
+            "logical_mapping_difference": -293.0,
+            "physical_reversal_sum": -293.0
+          },
+          "physical_reversal_passed": false,
+          "physical_reversal_relative_error": 1.9276315789473684,
+          "q_theta": {
+            "map0": 0,
+            "map1": 0
+          },
+          "replicate": 0,
+          "source_execution_order": {
+            "map0": "pos_first",
+            "map1": "pos_first"
+          },
+          "strong_sign_passed": false,
+          "subcapture_order": {
+            "map0": "pos_then_neg",
+            "map1": "pos_then_neg"
+          }
+        },
+        {
+          "condition": "post_projection",
+          "individual_response_bound_violations": {
+            "map0": false,
+            "map1": true
+          },
+          "logical_mapping_passed": false,
+          "logical_mapping_relative_error": 1.7700534759358288,
+          "map0_logical_response": -144.0,
+          "map0_physical_a_minus_b": -144.0,
+          "map1_logical_response": 187.0,
+          "map1_physical_a_minus_b": -187.0,
+          "pair_residual_bound_violations": {
+            "logical_pair_average": false,
+            "physical_reversal_average": true
+          },
+          "pair_residuals_for_absolute_law": {
+            "logical_pair_average": 21.5,
+            "physical_reversal_average": -165.5
+          },
+          "phase": 1,
+          "physical_residuals": {
+            "logical_mapping_difference": -331.0,
+            "physical_reversal_sum": -331.0
+          },
+          "physical_reversal_passed": false,
+          "physical_reversal_relative_error": 1.7700534759358288,
+          "q_theta": {
+            "map0": 0,
+            "map1": 0
+          },
+          "replicate": 0,
+          "source_execution_order": {
+            "map0": "pos_first",
+            "map1": "pos_first"
+          },
+          "strong_sign_passed": false,
+          "subcapture_order": {
+            "map0": "neg_then_pos",
+            "map1": "neg_then_pos"
+          }
+        },
+        {
+          "condition": "post_projection",
+          "individual_response_bound_violations": {
+            "map0": false,
+            "map1": true
+          },
+          "logical_mapping_passed": false,
+          "logical_mapping_relative_error": 1.6542056074766356,
+          "map0_logical_response": -140.0,
+          "map0_physical_a_minus_b": -140.0,
+          "map1_logical_response": 214.0,
+          "map1_physical_a_minus_b": -214.0,
+          "pair_residual_bound_violations": {
+            "logical_pair_average": false,
+            "physical_reversal_average": true
+          },
+          "pair_residuals_for_absolute_law": {
+            "logical_pair_average": 37.0,
+            "physical_reversal_average": -177.0
+          },
+          "phase": 3,
+          "physical_residuals": {
+            "logical_mapping_difference": -354.0,
+            "physical_reversal_sum": -354.0
+          },
+          "physical_reversal_passed": false,
+          "physical_reversal_relative_error": 1.6542056074766356,
+          "q_theta": {
+            "map0": 0,
+            "map1": 0
+          },
+          "replicate": 0,
+          "source_execution_order": {
+            "map0": "neg_first",
+            "map1": "neg_first"
+          },
+          "strong_sign_passed": false,
+          "subcapture_order": {
+            "map0": "neg_then_pos",
+            "map1": "pos_then_neg"
+          }
+        },
+        {
+          "condition": "query_off",
+          "individual_response_bound_violations": {
+            "map0": true,
+            "map1": true
+          },
+          "logical_mapping_passed": false,
+          "logical_mapping_relative_error": 2.0,
+          "map0_logical_response": -187.0,
+          "map0_physical_a_minus_b": -187.0,
+          "map1_logical_response": 187.0,
+          "map1_physical_a_minus_b": -187.0,
+          "pair_residual_bound_violations": {
+            "logical_pair_average": false,
+            "physical_reversal_average": true
+          },
+          "pair_residuals_for_absolute_law": {
+            "logical_pair_average": 0.0,
+            "physical_reversal_average": -187.0
+          },
+          "phase": 0,
+          "physical_residuals": {
+            "logical_mapping_difference": -374.0,
+            "physical_reversal_sum": -374.0
+          },
+          "physical_reversal_passed": false,
+          "physical_reversal_relative_error": 2.0,
+          "q_theta": {
+            "map0": 0,
+            "map1": 0
+          },
+          "replicate": 0,
+          "source_execution_order": {
+            "map0": "pos_first",
+            "map1": "pos_first"
+          },
+          "strong_sign_passed": false,
+          "subcapture_order": {
+            "map0": "pos_then_neg",
+            "map1": "neg_then_pos"
+          }
+        },
+        {
+          "condition": "query_off",
+          "individual_response_bound_violations": {
+            "map0": false,
+            "map1": false
+          },
+          "logical_mapping_passed": false,
+          "logical_mapping_relative_error": 1.605263157894737,
+          "map0_logical_response": -121.0,
+          "map0_physical_a_minus_b": -121.0,
+          "map1_logical_response": 123.0,
+          "map1_physical_a_minus_b": -123.0,
+          "pair_residual_bound_violations": {
+            "logical_pair_average": false,
+            "physical_reversal_average": false
+          },
+          "pair_residuals_for_absolute_law": {
+            "logical_pair_average": 1.0,
+            "physical_reversal_average": -122.0
+          },
+          "phase": 1,
+          "physical_residuals": {
+            "logical_mapping_difference": -244.0,
+            "physical_reversal_sum": -244.0
+          },
+          "physical_reversal_passed": false,
+          "physical_reversal_relative_error": 1.605263157894737,
+          "q_theta": {
+            "map0": 0,
+            "map1": 0
+          },
+          "replicate": 0,
+          "source_execution_order": {
+            "map0": "pos_first",
+            "map1": "pos_first"
+          },
+          "strong_sign_passed": false,
+          "subcapture_order": {
+            "map0": "neg_then_pos",
+            "map1": "pos_then_neg"
+          }
+        },
+        {
+          "condition": "query_off",
+          "individual_response_bound_violations": {
+            "map0": false,
+            "map1": false
+          },
+          "logical_mapping_passed": false,
+          "logical_mapping_relative_error": 1.480263157894737,
+          "map0_logical_response": -132.0,
+          "map0_physical_a_minus_b": -132.0,
+          "map1_logical_response": 93.0,
+          "map1_physical_a_minus_b": -93.0,
+          "pair_residual_bound_violations": {
+            "logical_pair_average": false,
+            "physical_reversal_average": false
+          },
+          "pair_residuals_for_absolute_law": {
+            "logical_pair_average": -19.5,
+            "physical_reversal_average": -112.5
+          },
+          "phase": 2,
+          "physical_residuals": {
+            "logical_mapping_difference": -225.0,
+            "physical_reversal_sum": -225.0
+          },
+          "physical_reversal_passed": false,
+          "physical_reversal_relative_error": 1.480263157894737,
+          "q_theta": {
+            "map0": 0,
+            "map1": 0
+          },
+          "replicate": 0,
+          "source_execution_order": {
+            "map0": "pos_first",
+            "map1": "neg_first"
+          },
+          "strong_sign_passed": false,
+          "subcapture_order": {
+            "map0": "pos_then_neg",
+            "map1": "neg_then_pos"
+          }
+        },
+        {
+          "condition": "query_off",
+          "individual_response_bound_violations": {
+            "map0": true,
+            "map1": false
+          },
+          "logical_mapping_passed": false,
+          "logical_mapping_relative_error": 1.7857142857142858,
+          "map0_logical_response": -182.0,
+          "map0_physical_a_minus_b": -182.0,
+          "map1_logical_response": 143.0,
+          "map1_physical_a_minus_b": -143.0,
+          "pair_residual_bound_violations": {
+            "logical_pair_average": false,
+            "physical_reversal_average": true
+          },
+          "pair_residuals_for_absolute_law": {
+            "logical_pair_average": -19.5,
+            "physical_reversal_average": -162.5
+          },
+          "phase": 3,
+          "physical_residuals": {
+            "logical_mapping_difference": -325.0,
+            "physical_reversal_sum": -325.0
+          },
+          "physical_reversal_passed": false,
+          "physical_reversal_relative_error": 1.7857142857142858,
+          "q_theta": {
+            "map0": 0,
+            "map1": 0
+          },
+          "replicate": 0,
+          "source_execution_order": {
+            "map0": "neg_first",
+            "map1": "neg_first"
+          },
+          "strong_sign_passed": false,
+          "subcapture_order": {
+            "map0": "neg_then_pos",
+            "map1": "neg_then_pos"
+          }
+        },
+        {
+          "condition": "equal_orbit_odd_zero",
+          "individual_response_bound_violations": {
+            "map0": false,
+            "map1": false
+          },
+          "logical_mapping_passed": false,
+          "logical_mapping_relative_error": 1.9407894736842106,
+          "map0_logical_response": -150.0,
+          "map0_physical_a_minus_b": -150.0,
+          "map1_logical_response": 145.0,
+          "map1_physical_a_minus_b": -145.0,
+          "pair_residual_bound_violations": {
+            "logical_pair_average": false,
+            "physical_reversal_average": false
+          },
+          "pair_residuals_for_absolute_law": {
+            "logical_pair_average": -2.5,
+            "physical_reversal_average": -147.5
+          },
+          "phase": 1,
+          "physical_residuals": {
+            "logical_mapping_difference": -295.0,
+            "physical_reversal_sum": -295.0
+          },
+          "physical_reversal_passed": false,
+          "physical_reversal_relative_error": 1.9407894736842106,
+          "q_theta": {
+            "map0": 0,
+            "map1": 0
+          },
+          "replicate": 1,
+          "source_execution_order": {
+            "map0": "neg_first",
+            "map1": "pos_first"
+          },
+          "strong_sign_passed": false,
+          "subcapture_order": {
+            "map0": "pos_then_neg",
+            "map1": "neg_then_pos"
+          }
+        },
+        {
+          "condition": "equal_orbit_odd_zero",
+          "individual_response_bound_violations": {
+            "map0": true,
+            "map1": true
+          },
+          "logical_mapping_passed": false,
+          "logical_mapping_relative_error": 1.956989247311828,
+          "map0_logical_response": -178.0,
+          "map0_physical_a_minus_b": -178.0,
+          "map1_logical_response": 186.0,
+          "map1_physical_a_minus_b": -186.0,
+          "pair_residual_bound_violations": {
+            "logical_pair_average": false,
+            "physical_reversal_average": true
+          },
+          "pair_residuals_for_absolute_law": {
+            "logical_pair_average": 4.0,
+            "physical_reversal_average": -182.0
+          },
+          "phase": 3,
+          "physical_residuals": {
+            "logical_mapping_difference": -364.0,
+            "physical_reversal_sum": -364.0
+          },
+          "physical_reversal_passed": false,
+          "physical_reversal_relative_error": 1.956989247311828,
+          "q_theta": {
+            "map0": 0,
+            "map1": 0
+          },
+          "replicate": 1,
+          "source_execution_order": {
+            "map0": "neg_first",
+            "map1": "pos_first"
+          },
+          "strong_sign_passed": false,
+          "subcapture_order": {
+            "map0": "neg_then_pos",
+            "map1": "neg_then_pos"
+          }
+        },
+        {
+          "condition": "post_projection",
+          "individual_response_bound_violations": {
+            "map0": false,
+            "map1": false
+          },
+          "logical_mapping_passed": false,
+          "logical_mapping_relative_error": 1.638157894736842,
+          "map0_logical_response": -120.0,
+          "map0_physical_a_minus_b": -120.0,
+          "map1_logical_response": 129.0,
+          "map1_physical_a_minus_b": -129.0,
+          "pair_residual_bound_violations": {
+            "logical_pair_average": false,
+            "physical_reversal_average": false
+          },
+          "pair_residuals_for_absolute_law": {
+            "logical_pair_average": 4.5,
+            "physical_reversal_average": -124.5
+          },
+          "phase": 1,
+          "physical_residuals": {
+            "logical_mapping_difference": -249.0,
+            "physical_reversal_sum": -249.0
+          },
+          "physical_reversal_passed": false,
+          "physical_reversal_relative_error": 1.638157894736842,
+          "q_theta": {
+            "map0": 0,
+            "map1": 0
+          },
+          "replicate": 1,
+          "source_execution_order": {
+            "map0": "pos_first",
+            "map1": "neg_first"
+          },
+          "strong_sign_passed": false,
+          "subcapture_order": {
+            "map0": "neg_then_pos",
+            "map1": "pos_then_neg"
+          }
+        },
+        {
+          "condition": "post_projection",
+          "individual_response_bound_violations": {
+            "map0": true,
+            "map1": false
+          },
+          "logical_mapping_passed": false,
+          "logical_mapping_relative_error": 1.4893617021276595,
+          "map0_logical_response": -188.0,
+          "map0_physical_a_minus_b": -188.0,
+          "map1_logical_response": 92.0,
+          "map1_physical_a_minus_b": -92.0,
+          "pair_residual_bound_violations": {
+            "logical_pair_average": false,
+            "physical_reversal_average": false
+          },
+          "pair_residuals_for_absolute_law": {
+            "logical_pair_average": -48.0,
+            "physical_reversal_average": -140.0
+          },
+          "phase": 3,
+          "physical_residuals": {
+            "logical_mapping_difference": -280.0,
+            "physical_reversal_sum": -280.0
+          },
+          "physical_reversal_passed": false,
+          "physical_reversal_relative_error": 1.4893617021276595,
+          "q_theta": {
+            "map0": 0,
+            "map1": 0
+          },
+          "replicate": 1,
+          "source_execution_order": {
+            "map0": "pos_first",
+            "map1": "neg_first"
+          },
+          "strong_sign_passed": false,
+          "subcapture_order": {
+            "map0": "pos_then_neg",
+            "map1": "neg_then_pos"
+          }
+        },
+        {
+          "condition": "query_off",
+          "individual_response_bound_violations": {
+            "map0": true,
+            "map1": true
+          },
+          "logical_mapping_passed": false,
+          "logical_mapping_relative_error": 1.9158415841584158,
+          "map0_logical_response": -202.0,
+          "map0_physical_a_minus_b": -202.0,
+          "map1_logical_response": 185.0,
+          "map1_physical_a_minus_b": -185.0,
+          "pair_residual_bound_violations": {
+            "logical_pair_average": false,
+            "physical_reversal_average": true
+          },
+          "pair_residuals_for_absolute_law": {
+            "logical_pair_average": -8.5,
+            "physical_reversal_average": -193.5
+          },
+          "phase": 0,
+          "physical_residuals": {
+            "logical_mapping_difference": -387.0,
+            "physical_reversal_sum": -387.0
+          },
+          "physical_reversal_passed": false,
+          "physical_reversal_relative_error": 1.9158415841584158,
+          "q_theta": {
+            "map0": 0,
+            "map1": 0
+          },
+          "replicate": 1,
+          "source_execution_order": {
+            "map0": "pos_first",
+            "map1": "pos_first"
+          },
+          "strong_sign_passed": false,
+          "subcapture_order": {
+            "map0": "pos_then_neg",
+            "map1": "pos_then_neg"
+          }
+        },
+        {
+          "condition": "query_off",
+          "individual_response_bound_violations": {
+            "map0": true,
+            "map1": true
+          },
+          "logical_mapping_passed": false,
+          "logical_mapping_relative_error": 1.665625,
+          "map0_logical_response": -320.0,
+          "map0_physical_a_minus_b": -320.0,
+          "map1_logical_response": 213.0,
+          "map1_physical_a_minus_b": -213.0,
+          "pair_residual_bound_violations": {
+            "logical_pair_average": false,
+            "physical_reversal_average": true
+          },
+          "pair_residuals_for_absolute_law": {
+            "logical_pair_average": -53.5,
+            "physical_reversal_average": -266.5
+          },
+          "phase": 1,
+          "physical_residuals": {
+            "logical_mapping_difference": -533.0,
+            "physical_reversal_sum": -533.0
+          },
+          "physical_reversal_passed": false,
+          "physical_reversal_relative_error": 1.665625,
+          "q_theta": {
+            "map0": 0,
+            "map1": 0
+          },
+          "replicate": 1,
+          "source_execution_order": {
+            "map0": "pos_first",
+            "map1": "neg_first"
+          },
+          "strong_sign_passed": false,
+          "subcapture_order": {
+            "map0": "pos_then_neg",
+            "map1": "pos_then_neg"
+          }
+        },
+        {
+          "condition": "query_off",
+          "individual_response_bound_violations": {
+            "map0": true,
+            "map1": false
+          },
+          "logical_mapping_passed": false,
+          "logical_mapping_relative_error": 1.7320261437908497,
+          "map0_logical_response": -153.0,
+          "map0_physical_a_minus_b": -153.0,
+          "map1_logical_response": 112.0,
+          "map1_physical_a_minus_b": -112.0,
+          "pair_residual_bound_violations": {
+            "logical_pair_average": false,
+            "physical_reversal_average": false
+          },
+          "pair_residuals_for_absolute_law": {
+            "logical_pair_average": -20.5,
+            "physical_reversal_average": -132.5
+          },
+          "phase": 2,
+          "physical_residuals": {
+            "logical_mapping_difference": -265.0,
+            "physical_reversal_sum": -265.0
+          },
+          "physical_reversal_passed": false,
+          "physical_reversal_relative_error": 1.7320261437908497,
+          "q_theta": {
+            "map0": 0,
+            "map1": 0
+          },
+          "replicate": 1,
+          "source_execution_order": {
+            "map0": "pos_first",
+            "map1": "neg_first"
+          },
+          "strong_sign_passed": false,
+          "subcapture_order": {
+            "map0": "pos_then_neg",
+            "map1": "neg_then_pos"
+          }
+        },
+        {
+          "condition": "query_off",
+          "individual_response_bound_violations": {
+            "map0": false,
+            "map1": false
+          },
+          "logical_mapping_passed": false,
+          "logical_mapping_relative_error": 1.7960526315789473,
+          "map0_logical_response": -137.0,
+          "map0_physical_a_minus_b": -137.0,
+          "map1_logical_response": 136.0,
+          "map1_physical_a_minus_b": -136.0,
+          "pair_residual_bound_violations": {
+            "logical_pair_average": false,
+            "physical_reversal_average": false
+          },
+          "pair_residuals_for_absolute_law": {
+            "logical_pair_average": -0.5,
+            "physical_reversal_average": -136.5
+          },
+          "phase": 3,
+          "physical_residuals": {
+            "logical_mapping_difference": -273.0,
+            "physical_reversal_sum": -273.0
+          },
+          "physical_reversal_passed": false,
+          "physical_reversal_relative_error": 1.7960526315789473,
+          "q_theta": {
+            "map0": 0,
+            "map1": 0
+          },
+          "replicate": 1,
+          "source_execution_order": {
+            "map0": "pos_first",
+            "map1": "pos_first"
+          },
+          "strong_sign_passed": false,
+          "subcapture_order": {
+            "map0": "pos_then_neg",
+            "map1": "pos_then_neg"
+          }
+        }
+      ]
+    },
+    "observed_strong_mapping_reversal_failures": [
+      {
+        "condition": "pre_projection_d",
+        "phase": 1,
+        "replicate": 1
+      },
+      {
+        "condition": "source_polarity_inversion_d",
+        "phase": 3,
+        "replicate": 1
+      }
+    ],
+    "strong": {
+      "counts": {
+        "logical_mapping_failures": 2,
+        "logical_mapping_passes": 46,
+        "physical_reversal_failures": 2,
+        "physical_reversal_passes": 46,
+        "sign_passes": 48,
+        "total_pair_cells": 48
+      },
+      "failure_events": [
+        {
+          "condition": "pre_projection_d",
+          "logical_mapping_passed": false,
+          "logical_mapping_relative_error": 0.26321905868681,
+          "map0_logical_response": 1268.0,
+          "map0_physical_a_minus_b": 1268.0,
+          "map1_logical_response": 1721.0,
+          "map1_physical_a_minus_b": -1721.0,
+          "phase": 1,
+          "physical_residuals": {
+            "logical_mapping_difference": -453.0,
+            "physical_reversal_sum": -453.0
+          },
+          "physical_reversal_passed": false,
+          "physical_reversal_relative_error": 0.26321905868681,
+          "q_theta": {
+            "map0": 822,
+            "map1": 822
+          },
+          "replicate": 1,
+          "source_execution_order": {
+            "map0": "neg_first",
+            "map1": "pos_first"
+          },
+          "strong_sign_passed": true,
+          "subcapture_order": {
+            "map0": "neg_then_pos",
+            "map1": "pos_then_neg"
+          }
+        },
+        {
+          "condition": "source_polarity_inversion_d",
+          "logical_mapping_passed": false,
+          "logical_mapping_relative_error": 0.2695402298850575,
+          "map0_logical_response": 1271.0,
+          "map0_physical_a_minus_b": 1271.0,
+          "map1_logical_response": 1740.0,
+          "map1_physical_a_minus_b": -1740.0,
+          "phase": 3,
+          "physical_residuals": {
+            "logical_mapping_difference": -469.0,
+            "physical_reversal_sum": -469.0
+          },
+          "physical_reversal_passed": false,
+          "physical_reversal_relative_error": 0.2695402298850575,
+          "q_theta": {
+            "map0": 822,
+            "map1": 822
+          },
+          "replicate": 1,
+          "source_execution_order": {
+            "map0": "neg_first",
+            "map1": "neg_first"
+          },
+          "strong_sign_passed": true,
+          "subcapture_order": {
+            "map0": "neg_then_pos",
+            "map1": "pos_then_neg"
+          }
+        }
+      ]
+    }
+  },
+  "retrospective_gain_covariant_class": "PRIVATE_ORBITSTATE_GAIN_COVARIANT_GEOMETRY_ESTABLISHED",
+  "retrospective_result_vocabulary": [
+    "PRIVATE_ORBITSTATE_GAIN_COVARIANT_GEOMETRY_ESTABLISHED",
+    "PRIVATE_ORBITSTATE_GAIN_COVARIANT_GEOMETRY_PARTIAL",
+    "PRIVATE_ORBITSTATE_GAIN_COVARIANT_GEOMETRY_NOT_ESTABLISHED"
+  ],
+  "schema": "GAIN_COVARIANT_ADJUDICATION_V1",
+  "small_wall_crossed_promoted": false,
+  "source_bundle_sha256": "9deb038e2dbdf95ab4412caef1d41292a94343cc4c689153534e8cdc2699e117",
+  "source_formula_law": {
+    "failures": [],
+    "passed": true,
+    "receipt_count": 288
+  },
+  "unit_gain_defect": {
+    "diagnosis": "The failed law directly compared physical Change-to-Dirty counts with source work units. That is a unit-carrier-gain assumption, not an independently established physical calibration.",
+    "expected_phi": 0.5645049299419159,
+    "expected_phi_formula": "2*pi*23/256",
+    "expected_re": 1297.6950762235501,
+    "expected_re_formula": "1536*cos(expected_phi)",
+    "official_real_geometry_failures": [
+      "replicate_0 Re(Z_d) geometry",
+      "replicate_0 Re(Z_fold) geometry",
+      "replicate_1 Re(Z_d) geometry",
+      "replicate_1 Re(Z_fold) geometry",
+      "aggregate Re(Z_d) geometry",
+      "aggregate Re(Z_fold) geometry"
+    ],
+    "unit_gain_law_failed": true
+  }
+}

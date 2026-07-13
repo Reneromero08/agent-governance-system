@@ -1,0 +1,73 @@
+{
+  "gain_covariant_self_test_sha256": "907e8e87365babf5a21c762cd514ccb9c5a197a0541584b57207796c228d834c",
+  "passed": true,
+  "schema": "GAIN_COVARIANT_SELF_TEST_V1",
+  "tests": [
+    {
+      "details": [],
+      "name": "all evidence hash verification",
+      "passed": true
+    },
+    {
+      "details": null,
+      "name": "all JSON and JSONL parsing",
+      "passed": true
+    },
+    {
+      "details": null,
+      "name": "record-count verification",
+      "passed": true
+    },
+    {
+      "details": null,
+      "name": "receiver-feature digest verification",
+      "passed": true
+    },
+    {
+      "details": null,
+      "name": "unit-gain defect regression",
+      "passed": true
+    },
+    {
+      "details": null,
+      "name": "control-only gain regression",
+      "passed": true
+    },
+    {
+      "details": null,
+      "name": "target-derived-gain smuggling rejection",
+      "passed": true
+    },
+    {
+      "details": null,
+      "name": "cross-replicate calibration",
+      "passed": true
+    },
+    {
+      "details": null,
+      "name": "angle and vector-residual regression",
+      "passed": true
+    },
+    {
+      "details": [
+        {
+          "condition": "pre_projection_d",
+          "phase": 1,
+          "replicate": 1
+        },
+        {
+          "condition": "source_polarity_inversion_d",
+          "phase": 3,
+          "replicate": 1
+        }
+      ],
+      "name": "strong/near-zero partition regression",
+      "passed": true
+    },
+    {
+      "details": null,
+      "name": "duplicate failure-event normalization",
+      "passed": true
+    }
+  ]
+}

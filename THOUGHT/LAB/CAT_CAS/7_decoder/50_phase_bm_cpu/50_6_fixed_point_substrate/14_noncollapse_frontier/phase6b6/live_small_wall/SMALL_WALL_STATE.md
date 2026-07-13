@@ -6,7 +6,7 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`ORBITSTATE_INDEPENDENT_V2_RETRY1_CONSUMED_CANDIDATE`
+`FINAL_GAIN_COVARIANT_CONFIRMATION_FROZEN_AWAITING_AUTHORIZATION`
 
 **Latest live result:**
 `orbitstate_independent_v2_1` completed the one authorized retry-one private
@@ -57,6 +57,34 @@ execution manifest `41273b4294a2308961e5f177f1a99159944dcbaf2b46ca6d1bd85ce542b9
 copy-back manifest `c8ab1065cf08bf3b2b9c2cb01e09dadbf1016727c4b35f9a4139dc2854efe97e`,
 controller result
 `18b60342bfeb527ba2509996ff1e69dad9ea6d1e614b501d3244d5b41400a2ef`.
+
+**Latest offline gain-covariant audit:**
+`orbitstate_gain_covariant_audit` is an offline-only explanatory audit of the
+committed retry-one evidence. It does not rerun the unit-gain adjudicator, does not
+contact the target, does not rewrite the official class, and does not promote
+`SMALL_WALL_CROSSED`.
+
+The audit diagnoses the official real-geometry failure as a unit-carrier-gain
+assumption: the original law compared physical Change-to-Dirty counts directly with
+the source-domain value `1536*cos(2*pi*23/256) = 1297.6950762235501`. Using only
+predeclared controls, `post_projection` and `equal_orbit_odd_zero`, the retained
+evidence establishes the retrospective explanatory class
+`PRIVATE_ORBITSTATE_GAIN_COVARIANT_GEOMETRY_ESTABLISHED`. Aggregate
+`g_control = 1.8690776374666158`; replicate controls are
+`1.853557917407246` and `1.884597357525986`. The maximum gain-normalized private
+vector error is 0.02755084579965194 and the maximum angular error is
+0.0018368306285109215 rad.
+
+Sol read-only methodology audit returned
+`NEW_PROSPECTIVE_CONFIRMATION_REQUIRED`: the gain-covariant geometry is strong, but
+the gain estimator and threshold law were not prospectively frozen, and the two
+strong-signal phase-transfer failures remain formal hard-gate failures under the
+retained law. A final prospective confirmation contract is now frozen at
+`orbit_coupling/orbitstate_gain_covariant_audit/FINAL_CONFIRMATION_CONTRACT.md`; it
+predeclares a new identity `orbitstate_gain_covariant_confirmation_v1_0`, a new public
+seed, control-only per-replicate gain estimation, gain-normalized private geometry,
+strong-signal mapping/reversal/sign hard gates, and a fixed near-zero absolute law.
+No live transaction is authorized by the contract.
 
 **Latest offline freeze:**
 `orbitstate_independent_v2_0` freezes the private OrbitState independent-window
