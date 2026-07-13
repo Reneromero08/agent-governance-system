@@ -1,0 +1,33 @@
+{
+  "adjudication_sha256": "4ff6e51770b81bf76329428f3aa6edb6be83a1445a0979637e13d50403f36bfd",
+  "events": [
+    {
+      "event": "receiver_feature_process_started",
+      "timestamp_ns": 1783934779730699332
+    },
+    {
+      "event": "receiver_feature_process_completed",
+      "timestamp_ns": 1783934779890750872
+    },
+    {
+      "event": "receiver_feature_hash_frozen",
+      "receiver_features_sha256": "1a0c6e9d8bc60b780610ee0c13ba36fbadc3c2b31091ed5f148557ddc2bad2ef",
+      "timestamp_ns": 1783934779890755823
+    },
+    {
+      "event": "private_map_opened_for_adjudication",
+      "timestamp_ns": 1783934779973962655
+    },
+    {
+      "event": "adjudication_started",
+      "timestamp_ns": 1783934779975112657
+    }
+  ],
+  "feature_freeze_receipt_sha256": "7bc12eda0d3f3890545497e005a4b2cc453f93091685389c6d92254fb08bb6ef",
+  "private_map_opened_after_feature_hash_frozen": true,
+  "receiver_features_sha256": "1a0c6e9d8bc60b780610ee0c13ba36fbadc3c2b31091ed5f148557ddc2bad2ef",
+  "run_id": "orbitstate_independent_v2_1",
+  "schema": "ORBITSTATE_FEATURE_FREEZE_RECEIPT_V2",
+  "science_package_id": "orbitstate_independent_v2_0",
+  "transaction_run_id": "orbitstate_independent_v2_1"
+}

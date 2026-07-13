@@ -1,0 +1,98 @@
+{
+  "adjudication_sha256": "4ff6e51770b81bf76329428f3aa6edb6be83a1445a0979637e13d50403f36bfd",
+  "contract_sha256": "1f586b4648a516723f5a77cfc381d0e4a8c305dd9446a28289975a3ad3c49507",
+  "execution_manifest_sha256": "4c2d1d4ee56b6c7fc9a5ebed5751699a12d8b7c398cf8dd5335b98fc660a8bd1",
+  "feature_freeze_receipt_sha256": "e0183c5bbc549e7630491bffef0702ee26fe8077bdfd193914808ff4b79f6365",
+  "final_evidence_hashes": {
+    "FINAL_RESULT_ORBITSTATE_INDEPENDENT_V2.json": "ecf422d4ef1aada7ce8d8062d82a29ce79778cc795bf5507b56e9013bd0a20f9",
+    "LIVE_CUSTODY_LOG.json": "72080771248f9034c020c70e13ae8937c574039983294410dcb421d7bbfec8ad",
+    "ORBITSTATE_ADJUDICATION.json": "4ff6e51770b81bf76329428f3aa6edb6be83a1445a0979637e13d50403f36bfd",
+    "ORBITSTATE_FEATURE_FREEZE_RECEIPT.json": "e0183c5bbc549e7630491bffef0702ee26fe8077bdfd193914808ff4b79f6365",
+    "ORBITSTATE_PMU_PREFLIGHT.json": "b120a86b54aa0fb7f760f5c901060288f11efa6171800d86abe847fd5d211692",
+    "ORBITSTATE_RECEIVER_FEATURES.json": "70ac1c25cf795b90da4196672d530549dc0519aa6e98e589d5e75ad2f1f8a26a",
+    "ORBITSTATE_RECEIVER_FEATURES.sha256": "aaf4a59aead676231e44296c18c2050d47145974a61efd09d56ec7d497d6d3e2",
+    "ORBITSTATE_RECEIVER_SENTINELS.jsonl": "da68625bb05d09846bf0ef216cb7502d1549c208f50326c4888e8e2cbc1e7950",
+    "ORBITSTATE_SOURCE_BUNDLE.tar.gz": "9deb038e2dbdf95ab4412caef1d41292a94343cc4c689153534e8cdc2699e117",
+    "ORBITSTATE_SOURCE_HASHES.json": "8cf210d94a406f562deae50086667c9fe17f959595b12d470e122a4f8de8f3fa",
+    "ORBITSTATE_SOURCE_RECEIPTS.jsonl": "5a67264693eef2e3d5a4fc3bb1fc5a857fb83245e3af4fd78fa1debed9fe8feb",
+    "ORBITSTATE_STAGE_RECEIPTS.jsonl": "0c7c18174d90531763d785db91b8d11a9e218f0062c4843b1f0adab36eb05b3a",
+    "RAW_ORBITSTATE_RECEIVER_CAPTURE.jsonl": "721ca48c2f5b682d871521b106be9fcff9d511325eb2473a4ed298b23d54f623",
+    "orbitstate_independent_runtime": "1c1bce08246dd78e1765d6615aa4ed08dfa1744d9bb638fbaabe59610ed3453b"
+  },
+  "final_result_sha256": "ecf422d4ef1aada7ce8d8062d82a29ce79778cc795bf5507b56e9013bd0a20f9",
+  "implementation_manifest_canonical_sha256": "8b3250d32736a905113f3571a153b00676add37495b3e1dcbd1464bbb38ad1ed",
+  "implementation_manifest_file_sha256": "32fe5ed2d78ba372895ea3b0ad35b819e4a195bb9474109815c4e7d2eff46696",
+  "live_runtime_binary_sha256": "1c1bce08246dd78e1765d6615aa4ed08dfa1744d9bb638fbaabe59610ed3453b",
+  "pmu_preflight_sha256": "b120a86b54aa0fb7f760f5c901060288f11efa6171800d86abe847fd5d211692",
+  "private_source_map_canonical_sha256": "b952f2a161e782dfe41e9dfca21ba4f6bf2902bc69392d9ad52915daa3955464",
+  "private_source_map_file_sha256": "619189f66d32610053c3899616d656d16a21814a45074191f37f95acdbf58325",
+  "public_schedule_json_sha256": "709063e1d789971f8ac36d2fc94094738015150baae8e75065909c774a079b7b",
+  "public_schedule_tsv_sha256": "57aaf5635e0ea1bcecd17f6efc0383f6ce08a893751d9203d1c87b0e4c7a7876",
+  "raw_capture_sha256": "721ca48c2f5b682d871521b106be9fcff9d511325eb2473a4ed298b23d54f623",
+  "receiver_features_sha256": "70ac1c25cf795b90da4196672d530549dc0519aa6e98e589d5e75ad2f1f8a26a",
+  "record_counts": {
+    "independent_component_windows": 288,
+    "mapping_leg_records": 144,
+    "source_receipts": 288,
+    "stage_receipts": 2016
+  },
+  "run_id": "orbitstate_independent_v2_1",
+  "schema": "ORBITSTATE_SUCCESS_EXECUTION_MANIFEST_V2",
+  "science_package_id": "orbitstate_independent_v2_0",
+  "sentinels_sha256": "da68625bb05d09846bf0ef216cb7502d1549c208f50326c4888e8e2cbc1e7950",
+  "source_bundle_sha256": "9deb038e2dbdf95ab4412caef1d41292a94343cc4c689153534e8cdc2699e117",
+  "source_hash_receipt": {
+    "ORBITSTATE_INDEPENDENT_CONTRACT_V2.md": {
+      "sha256": "1f586b4648a516723f5a77cfc381d0e4a8c305dd9446a28289975a3ad3c49507",
+      "size": 6607
+    },
+    "ORBITSTATE_PRIVATE_SOURCE_MAP.json": {
+      "sha256": "619189f66d32610053c3899616d656d16a21814a45074191f37f95acdbf58325",
+      "size": 91663
+    },
+    "ORBITSTATE_PRIVATE_SOURCE_MAP.sha256": {
+      "sha256": "0a2d121b2f5f2c4d43ddc35f51de8e1365e37d3746ceeb069a3616b0abd5f45d",
+      "size": 102
+    },
+    "ORBITSTATE_PUBLIC_SCHEDULE.json": {
+      "sha256": "709063e1d789971f8ac36d2fc94094738015150baae8e75065909c774a079b7b",
+      "size": 63485
+    },
+    "ORBITSTATE_PUBLIC_SCHEDULE.sha256": {
+      "sha256": "1d5f50d78d313c343f5a2c7ebf563a0d913127465e316750ef3967085f90d347",
+      "size": 255
+    },
+    "ORBITSTATE_PUBLIC_SCHEDULE.tsv": {
+      "sha256": "57aaf5635e0ea1bcecd17f6efc0383f6ce08a893751d9203d1c87b0e4c7a7876",
+      "size": 14782
+    },
+    "PUBLIC_TRANSDUCER_REFERENCE.json": {
+      "sha256": "c608723329322df07b036a9237d72c2e3bed87ec10d75c105b03b07a50e460c1",
+      "size": 1453
+    },
+    "orbitstate_independent_public.py": {
+      "sha256": "45b66b38b806403f72e5a9c1bea5dd63b8ebeee34fe293398e29fced8bd72596",
+      "size": 61166
+    },
+    "orbitstate_independent_runtime.c": {
+      "sha256": "821b13fa3886a5aaabd7bf7a7d2bcd14ae9855e2b45f2572182fcfc590da984a",
+      "size": 42951
+    },
+    "orbitstate_independent_runtime.h": {
+      "sha256": "da79fc592a275a47a75bca38a20e7024650c497bcfd6c3c38e765b1bfd7f51a9",
+      "size": 870
+    },
+    "orbitstate_independent_target.py": {
+      "sha256": "c746ac45e38fe20b91368c96de750d3555ad4eb6fe4ef868ce57c7a35cdaeede",
+      "size": 65877
+    },
+    "run_orbitstate_independent_v2.py": {
+      "sha256": "dee4755d68f500b9d7a51e2fde101b23579302ad43899e6c8feb89da2230c5a5",
+      "size": 65652
+    }
+  },
+  "source_hashes_sha256": "8cf210d94a406f562deae50086667c9fe17f959595b12d470e122a4f8de8f3fa",
+  "source_receipts_sha256": "5a67264693eef2e3d5a4fc3bb1fc5a857fb83245e3af4fd78fa1debed9fe8feb",
+  "stage_receipts_sha256": "0c7c18174d90531763d785db91b8d11a9e218f0062c4843b1f0adab36eb05b3a",
+  "transaction_run_id": "orbitstate_independent_v2_1"
+}

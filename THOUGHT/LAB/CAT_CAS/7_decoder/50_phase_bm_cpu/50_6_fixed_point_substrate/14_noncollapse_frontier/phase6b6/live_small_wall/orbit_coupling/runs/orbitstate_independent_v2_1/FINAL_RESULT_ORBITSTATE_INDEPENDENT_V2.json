@@ -1,0 +1,19 @@
+{
+  "adjudication_sha256": "4ff6e51770b81bf76329428f3aa6edb6be83a1445a0979637e13d50403f36bfd",
+  "allowed_result_classes": [
+    "ORBITSTATE_INDEPENDENT_COUPLING_CONFIRMED",
+    "ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE",
+    "ORBITSTATE_INDEPENDENT_COUPLING_NOT_ESTABLISHED"
+  ],
+  "feature_freeze_receipt_sha256": "e0183c5bbc549e7630491bffef0702ee26fe8077bdfd193914808ff4b79f6365",
+  "forbidden_result_classes": [
+    "SMALL_WALL_CROSSED"
+  ],
+  "receiver_features_sha256": "1a0c6e9d8bc60b780610ee0c13ba36fbadc3c2b31091ed5f148557ddc2bad2ef",
+  "result_class": "ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE",
+  "run_id": "orbitstate_independent_v2_1",
+  "science_package_id": "orbitstate_independent_v2_0",
+  "scientific_classification_emitted": true,
+  "status": "ORBITSTATE_INDEPENDENT_TARGET_COMPLETE",
+  "transaction_run_id": "orbitstate_independent_v2_1"
+}

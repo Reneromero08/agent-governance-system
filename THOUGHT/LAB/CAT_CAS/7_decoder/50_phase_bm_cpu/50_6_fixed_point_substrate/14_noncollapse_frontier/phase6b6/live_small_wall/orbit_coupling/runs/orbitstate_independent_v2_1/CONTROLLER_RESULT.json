@@ -1,0 +1,189 @@
+{
+  "commands": [
+    [
+      "ssh",
+      "root@192.168.137.100",
+      "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_independent_v2_1; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_independent_v2_1/source"
+    ],
+    [
+      "scp",
+      "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_INDEPENDENT_CONTRACT_V2.md",
+      "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_INDEPENDENT_CONTRACT_V2.md"
+    ],
+    [
+      "scp",
+      "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\PUBLIC_TRANSDUCER_REFERENCE.json",
+      "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/PUBLIC_TRANSDUCER_REFERENCE.json"
+    ],
+    [
+      "scp",
+      "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_public.py",
+      "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_public.py"
+    ],
+    [
+      "scp",
+      "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_runtime.c",
+      "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_runtime.c"
+    ],
+    [
+      "scp",
+      "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_runtime.h",
+      "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_runtime.h"
+    ],
+    [
+      "scp",
+      "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_target.py",
+      "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_target.py"
+    ],
+    [
+      "scp",
+      "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\run_orbitstate_independent_v2.py",
+      "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/run_orbitstate_independent_v2.py"
+    ],
+    [
+      "scp",
+      "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.json",
+      "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.json"
+    ],
+    [
+      "scp",
+      "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.tsv",
+      "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.tsv"
+    ],
+    [
+      "scp",
+      "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.sha256",
+      "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.sha256"
+    ],
+    [
+      "scp",
+      "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PRIVATE_SOURCE_MAP.json",
+      "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PRIVATE_SOURCE_MAP.json"
+    ],
+    [
+      "scp",
+      "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PRIVATE_SOURCE_MAP.sha256",
+      "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PRIVATE_SOURCE_MAP.sha256"
+    ],
+    [
+      "scp",
+      "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_IMPLEMENTATION_MANIFEST.json",
+      "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_IMPLEMENTATION_MANIFEST.json"
+    ],
+    [
+      "ssh",
+      "root@192.168.137.100",
+      "cd /root/catcas_live_small_wall/orbitstate_independent_v2_1/source && timeout --signal=TERM --kill-after=5s 900s env ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=0a1de197b77ad5c68ed14177d368293cb2f88c53 ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=32fe5ed2d78ba372895ea3b0ad35b819e4a195bb9474109815c4e7d2eff46696 ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_1 python3 /root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_independent_v2_1/source --output-root /root/catcas_live_small_wall/orbitstate_independent_v2_1/output --run-id orbitstate_independent_v2_1 --expected-manifest-sha 32fe5ed2d78ba372895ea3b0ad35b819e4a195bb9474109815c4e7d2eff46696 --expected-commit-binding 0a1de197b77ad5c68ed14177d368293cb2f88c53"
+    ],
+    [
+      "ssh",
+      "root@192.168.137.100",
+      "test -d /root/catcas_live_small_wall/orbitstate_independent_v2_1/output"
+    ],
+    [
+      "scp",
+      "-r",
+      "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/output/.",
+      "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\runs\\orbitstate_independent_v2_1"
+    ],
+    [
+      "ssh",
+      "root@192.168.137.100",
+      "rm -rf -- /root/catcas_live_small_wall/orbitstate_independent_v2_1"
+    ],
+    [
+      "ssh",
+      "root@192.168.137.100",
+      "test ! -e /root/catcas_live_small_wall/orbitstate_independent_v2_1"
+    ]
+  ],
+  "final": {
+    "adjudication_sha256": "4ff6e51770b81bf76329428f3aa6edb6be83a1445a0979637e13d50403f36bfd",
+    "allowed_result_classes": [
+      "ORBITSTATE_INDEPENDENT_COUPLING_CONFIRMED",
+      "ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE",
+      "ORBITSTATE_INDEPENDENT_COUPLING_NOT_ESTABLISHED"
+    ],
+    "feature_freeze_receipt_sha256": "e0183c5bbc549e7630491bffef0702ee26fe8077bdfd193914808ff4b79f6365",
+    "forbidden_result_classes": [
+      "SMALL_WALL_CROSSED"
+    ],
+    "receiver_features_sha256": "1a0c6e9d8bc60b780610ee0c13ba36fbadc3c2b31091ed5f148557ddc2bad2ef",
+    "result_class": "ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE",
+    "run_id": "orbitstate_independent_v2_1",
+    "science_package_id": "orbitstate_independent_v2_0",
+    "scientific_classification_emitted": true,
+    "status": "ORBITSTATE_INDEPENDENT_TARGET_COMPLETE",
+    "transaction_run_id": "orbitstate_independent_v2_1"
+  },
+  "local_root": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\runs\\orbitstate_independent_v2_1",
+  "pretransport_gate": {
+    "attempt0_receipt": {
+      "controller_result_sha256": "5a5b82542d1c9268bbfaba051c4528d9859446b26c781c6c0a7a0e86e835f669",
+      "controller_status": "ORBITSTATE_CONTROLLER_TARGET_FAILED_NO_COPYBACK",
+      "target_returncode": 1
+    },
+    "deployment_layout_self_test_sha256": "0333a1b851a2b0706031738a1ba7af986fe0207b16e149466d4990f232f46017",
+    "frozen_hashes": {
+      "failures": [],
+      "observed": {
+        "contract_sha256": "1f586b4648a516723f5a77cfc381d0e4a8c305dd9446a28289975a3ad3c49507",
+        "private_source_map_canonical_sha256": "b952f2a161e782dfe41e9dfca21ba4f6bf2902bc69392d9ad52915daa3955464",
+        "private_source_map_file_sha256": "619189f66d32610053c3899616d656d16a21814a45074191f37f95acdbf58325",
+        "public_null_law_audit_sha256": "fc6321f2b898a3f97766e90d68267b67bea79aa32b26ad110cf085deda09c01e",
+        "public_schedule_json_sha256": "709063e1d789971f8ac36d2fc94094738015150baae8e75065909c774a079b7b",
+        "public_schedule_tsv_sha256": "57aaf5635e0ea1bcecd17f6efc0383f6ce08a893751d9203d1c87b0e4c7a7876"
+      },
+      "passed": true
+    },
+    "git_state": {
+      "branch": "main",
+      "head": "0a1de197b77ad5c68ed14177d368293cb2f88c53",
+      "origin_main": "0a1de197b77ad5c68ed14177d368293cb2f88c53",
+      "status_porcelain": ""
+    },
+    "local_run_root_absent": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\runs\\orbitstate_independent_v2_1",
+    "manifest_canonical_sha256": "8b3250d32736a905113f3571a153b00676add37495b3e1dcbd1464bbb38ad1ed",
+    "manifest_file_sha256": "32fe5ed2d78ba372895ea3b0ad35b819e4a195bb9474109815c4e7d2eff46696",
+    "passed": true,
+    "source_bundle": {
+      "expected_source_bundle_sha256": "379c54daac84fdfe69f762ffe4961e8b4dfa8a504d5ead8357e23b2274efb74e",
+      "observed_source_bundle_sha256": "379c54daac84fdfe69f762ffe4961e8b4dfa8a504d5ead8357e23b2274efb74e",
+      "passed": true
+    },
+    "validate_only_sha256": "4b8963feff835dac2b353ab54c72c451f7214a02ab4b1763e6916b0579ced245"
+  },
+  "remote_cleaned": true,
+  "remote_retained": false,
+  "remote_root": "/root/catcas_live_small_wall/orbitstate_independent_v2_1",
+  "status": "ORBITSTATE_CONTROLLER_TARGET_COMPLETE",
+  "success_evidence": {
+    "copyback": {
+      "copyback_manifest_sha256": "fe694df420df3b3027751696f699fe230f886be269a464893b77817a8523ee0b",
+      "entry_count": 15,
+      "passed": true
+    },
+    "execution_manifest_sha256": "4c2d1d4ee56b6c7fc9a5ebed5751699a12d8b7c398cf8dd5335b98fc660a8bd1",
+    "final": {
+      "adjudication_sha256": "4ff6e51770b81bf76329428f3aa6edb6be83a1445a0979637e13d50403f36bfd",
+      "allowed_result_classes": [
+        "ORBITSTATE_INDEPENDENT_COUPLING_CONFIRMED",
+        "ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE",
+        "ORBITSTATE_INDEPENDENT_COUPLING_NOT_ESTABLISHED"
+      ],
+      "feature_freeze_receipt_sha256": "e0183c5bbc549e7630491bffef0702ee26fe8077bdfd193914808ff4b79f6365",
+      "forbidden_result_classes": [
+        "SMALL_WALL_CROSSED"
+      ],
+      "receiver_features_sha256": "1a0c6e9d8bc60b780610ee0c13ba36fbadc3c2b31091ed5f148557ddc2bad2ef",
+      "result_class": "ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE",
+      "run_id": "orbitstate_independent_v2_1",
+      "science_package_id": "orbitstate_independent_v2_0",
+      "scientific_classification_emitted": true,
+      "status": "ORBITSTATE_INDEPENDENT_TARGET_COMPLETE",
+      "transaction_run_id": "orbitstate_independent_v2_1"
+    },
+    "passed": true,
+    "result_class": "ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE"
+  }
+}

@@ -1,0 +1,311 @@
+{
+  "adjudication_sha256": "9d6139eec89c814a30cf57a86abe7edb5a106f82082bfa56ba96f92e9c4b68d9",
+  "allowed_result_classes": [
+    "ORBITSTATE_INDEPENDENT_COUPLING_CONFIRMED",
+    "ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE",
+    "ORBITSTATE_INDEPENDENT_COUPLING_NOT_ESTABLISHED"
+  ],
+  "decodes": {
+    "aggregate": {
+      "declaration_sham": {
+        "map0": {
+          "imag": 4.500000000000227,
+          "real": 1.499999999999842
+        },
+        "map1": {
+          "imag": 2.2737367544323206e-13,
+          "real": -3.5000000000002274
+        }
+      },
+      "equal_orbit_odd_zero": {
+        "map0": {
+          "imag": -3.0000000000001887,
+          "real": 2816.0
+        },
+        "map1": {
+          "imag": 1.9999999999998295,
+          "real": 2885.25
+        }
+      },
+      "post_projection": {
+        "map0": {
+          "imag": 15.999999999999844,
+          "real": 2462.0
+        },
+        "map1": {
+          "imag": 2.4999999999998654,
+          "real": 2423.25
+        }
+      },
+      "pre_projection_d": {
+        "map0": {
+          "imag": 1511.7499999999998,
+          "real": 2423.75
+        },
+        "map1": {
+          "imag": 1567.5,
+          "real": 2453.25
+        }
+      },
+      "pre_projection_fold": {
+        "map0": {
+          "imag": -1536.5000000000002,
+          "real": 2451.75
+        },
+        "map1": {
+          "imag": -1568.0,
+          "real": 2457.0
+        }
+      },
+      "query_off": {
+        "map0": {
+          "imag": -30.500000000000007,
+          "real": -25.999999999999986
+        },
+        "map1": {
+          "imag": 14.25,
+          "real": 41.74999999999999
+        }
+      },
+      "query_scramble": {
+        "map0": {
+          "imag": -6.749999999999773,
+          "real": -7.7499999999998535
+        },
+        "map1": {
+          "imag": 7.750000000000227,
+          "real": -7.24999999999979
+        }
+      },
+      "source_off": {
+        "map0": {
+          "imag": 0.25,
+          "real": 0.25000000000000006
+        },
+        "map1": {
+          "imag": 0.0,
+          "real": -0.25
+        }
+      },
+      "source_polarity_inversion_d": {
+        "map0": {
+          "imag": -1526.9999999999998,
+          "real": -2437.5
+        },
+        "map1": {
+          "imag": -1541.25,
+          "real": -2421.5
+        }
+      }
+    }
+  },
+  "failed_laws": [
+    "phase_transfer_law",
+    "target_fold_geometry_law"
+  ],
+  "feature_freeze_law": {
+    "passed": true
+  },
+  "forbidden_result_classes": [
+    "SMALL_WALL_CROSSED"
+  ],
+  "phase_transfer_law": {
+    "failures": [
+      "(1, 'query_off', 0) logical mapping invariance",
+      "(1, 'query_off', 0) physical reversal",
+      "(1, 'query_off', 0) map1 near-zero response outside fixed bound",
+      "(1, 'query_off', 0) map0 near-zero response outside fixed bound",
+      "(1, 'source_polarity_inversion_d', 3) logical mapping invariance",
+      "(1, 'source_polarity_inversion_d', 3) physical reversal",
+      "(0, 'equal_orbit_odd_zero', 1) logical mapping invariance",
+      "(0, 'equal_orbit_odd_zero', 1) physical reversal",
+      "(0, 'equal_orbit_odd_zero', 1) map1 near-zero response outside fixed bound",
+      "(0, 'equal_orbit_odd_zero', 1) map0 near-zero response outside fixed bound",
+      "(0, 'query_off', 0) logical mapping invariance",
+      "(0, 'query_off', 0) physical reversal",
+      "(0, 'query_off', 0) map0 near-zero response outside fixed bound",
+      "(0, 'query_off', 0) map1 near-zero response outside fixed bound",
+      "(1, 'query_off', 2) logical mapping invariance",
+      "(1, 'query_off', 2) physical reversal",
+      "(1, 'query_off', 2) map0 near-zero response outside fixed bound",
+      "(1, 'post_projection', 3) logical mapping invariance",
+      "(1, 'post_projection', 3) physical reversal",
+      "(1, 'post_projection', 3) map0 near-zero response outside fixed bound",
+      "(0, 'query_off', 1) logical mapping invariance",
+      "(0, 'query_off', 1) physical reversal",
+      "(1, 'equal_orbit_odd_zero', 1) logical mapping invariance",
+      "(1, 'equal_orbit_odd_zero', 1) physical reversal",
+      "(0, 'equal_orbit_odd_zero', 3) logical mapping invariance",
+      "(0, 'equal_orbit_odd_zero', 3) physical reversal",
+      "(1, 'equal_orbit_odd_zero', 3) logical mapping invariance",
+      "(1, 'equal_orbit_odd_zero', 3) physical reversal",
+      "(1, 'equal_orbit_odd_zero', 3) map1 near-zero response outside fixed bound",
+      "(1, 'equal_orbit_odd_zero', 3) map0 near-zero response outside fixed bound",
+      "(1, 'pre_projection_d', 1) logical mapping invariance",
+      "(1, 'pre_projection_d', 1) physical reversal",
+      "(0, 'post_projection', 3) logical mapping invariance",
+      "(0, 'post_projection', 3) physical reversal",
+      "(0, 'post_projection', 3) map1 near-zero response outside fixed bound",
+      "(1, 'query_off', 3) logical mapping invariance",
+      "(1, 'query_off', 3) physical reversal",
+      "(0, 'query_off', 3) logical mapping invariance",
+      "(0, 'query_off', 3) physical reversal",
+      "(0, 'query_off', 3) map0 near-zero response outside fixed bound",
+      "(0, 'query_off', 2) logical mapping invariance",
+      "(0, 'query_off', 2) physical reversal",
+      "(1, 'query_off', 1) logical mapping invariance",
+      "(1, 'query_off', 1) physical reversal",
+      "(1, 'query_off', 1) map1 near-zero response outside fixed bound",
+      "(1, 'query_off', 1) map0 near-zero response outside fixed bound",
+      "(1, 'post_projection', 1) logical mapping invariance",
+      "(1, 'post_projection', 1) physical reversal",
+      "(0, 'post_projection', 1) logical mapping invariance",
+      "(0, 'post_projection', 1) physical reversal",
+      "(0, 'post_projection', 1) map1 near-zero response outside fixed bound"
+    ],
+    "passed": false
+  },
+  "primary_coordinate": "change_to_dirty",
+  "receiver_feature_freeze_sha256": "1a0c6e9d8bc60b780610ee0c13ba36fbadc3c2b31091ed5f148557ddc2bad2ef",
+  "result_class": "ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE",
+  "schema": "ORBITSTATE_ADJUDICATION_V2",
+  "small_wall_crossed_emitted": false,
+  "source_formula_law": {
+    "failures": [],
+    "passed": true,
+    "receipt_count": 288
+  },
+  "target_fold_geometry_law": {
+    "details": {
+      "aggregate": {
+        "Z_d": {
+          "imag": 1539.625,
+          "real": 2438.5
+        },
+        "Z_fold": {
+          "imag": -1552.25,
+          "real": 2454.375
+        },
+        "Z_polarity": {
+          "imag": -1534.125,
+          "real": -2429.5
+        },
+        "nulls": {
+          "declaration_sham": {
+            "imag": 2.2500000000002274,
+            "real": -1.0000000000001927
+          },
+          "equal_orbit_odd_zero": {
+            "imag": -0.5000000000001796,
+            "real": 2850.625
+          },
+          "post_projection": {
+            "imag": 9.249999999999854,
+            "real": 2442.625
+          },
+          "query_off": {
+            "imag": -8.125000000000004,
+            "real": 7.8750000000000036
+          },
+          "query_scramble": {
+            "imag": 0.5000000000002274,
+            "real": -7.499999999999822
+          },
+          "source_off": {
+            "imag": 0.125,
+            "real": 2.7755575615628914e-17
+          }
+        }
+      },
+      "replicate_0": {
+        "Z_d": {
+          "imag": 1556.5,
+          "real": 2468.0
+        },
+        "Z_fold": {
+          "imag": -1560.0,
+          "real": 2473.5
+        },
+        "Z_polarity": {
+          "imag": -1547.25,
+          "real": -2447.75
+        },
+        "nulls": {
+          "declaration_sham": {
+            "imag": 17.500000000000227,
+            "real": -14.500000000000199
+          },
+          "equal_orbit_odd_zero": {
+            "imag": 2.2499999999998277,
+            "real": 2784.75
+          },
+          "post_projection": {
+            "imag": -7.750000000000149,
+            "real": 2458.0
+          },
+          "query_off": {
+            "imag": 10.249999999999996,
+            "real": 9.750000000000004
+          },
+          "query_scramble": {
+            "imag": -7.249999999999773,
+            "real": -20.249999999999766
+          },
+          "source_off": {
+            "imag": 0.25,
+            "real": -0.24999999999999994
+          }
+        }
+      },
+      "replicate_1": {
+        "Z_d": {
+          "imag": 1522.7499999999998,
+          "real": 2409.0
+        },
+        "Z_fold": {
+          "imag": -1544.5,
+          "real": 2435.25
+        },
+        "Z_polarity": {
+          "imag": -1521.0,
+          "real": -2411.25
+        },
+        "nulls": {
+          "declaration_sham": {
+            "imag": -12.999999999999819,
+            "real": 12.499999999999813
+          },
+          "equal_orbit_odd_zero": {
+            "imag": -3.2500000000001794,
+            "real": 2916.5
+          },
+          "post_projection": {
+            "imag": 26.249999999999858,
+            "real": 2427.25
+          },
+          "query_off": {
+            "imag": -26.500000000000007,
+            "real": 5.999999999999998
+          },
+          "query_scramble": {
+            "imag": 8.250000000000194,
+            "real": 5.250000000000187
+          },
+          "source_off": {
+            "imag": 0.0,
+            "real": 0.25
+          }
+        }
+      }
+    },
+    "failures": [
+      "replicate_0 Re(Z_d) geometry",
+      "replicate_0 Re(Z_fold) geometry",
+      "replicate_1 Re(Z_d) geometry",
+      "replicate_1 Re(Z_fold) geometry",
+      "aggregate Re(Z_d) geometry",
+      "aggregate Re(Z_fold) geometry"
+    ],
+    "passed": false
+  }
+}

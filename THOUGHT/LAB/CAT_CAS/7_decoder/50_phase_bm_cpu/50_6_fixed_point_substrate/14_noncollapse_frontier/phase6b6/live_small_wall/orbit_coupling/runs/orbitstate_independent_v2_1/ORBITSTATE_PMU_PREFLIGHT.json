@@ -1,0 +1,21 @@
+{
+  "change_to_dirty": 0,
+  "change_to_dirty_id": 12145,
+  "cpu": -1,
+  "cycles": 80345,
+  "cycles_id": 12144,
+  "duration_ns": 36752,
+  "exclude_hv": 1,
+  "exclude_kernel": 1,
+  "group_count": 3,
+  "pid": 0,
+  "probe_dirty": 0,
+  "probe_dirty_id": 12146,
+  "read_size": 72,
+  "receiver_cpu_after": 5,
+  "receiver_cpu_before": 5,
+  "scientific_classification_emitted": false,
+  "status": "ORBITSTATE_RUNTIME_PMU_PREFLIGHT_OK",
+  "time_enabled": 31935,
+  "time_running": 31935
+}

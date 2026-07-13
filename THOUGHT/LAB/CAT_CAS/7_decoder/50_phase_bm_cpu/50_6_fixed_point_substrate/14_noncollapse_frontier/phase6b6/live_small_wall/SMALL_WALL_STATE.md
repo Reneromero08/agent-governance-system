@@ -6,29 +6,57 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`ORBITSTATE_INDEPENDENT_V2_RETRY1_FROZEN_AWAITING_AUTHORIZATION`
+`ORBITSTATE_INDEPENDENT_V2_RETRY1_CONSUMED_CANDIDATE`
 
 **Latest live result:**
-`independent_window_transducer_v3_0` completed the one authorized V3 live
-transaction at commit `0af8c0fd937fff6744ed2ea009afa54cdf4fa62c` with target
-status `INDEPENDENT_WINDOW_V3_TARGET_COMPLETE` and controller status
-`INDEPENDENT_WINDOW_V3_CONTROLLER_TARGET_COMPLETE`. The fresh V3 class is
-`PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE`, not
-`PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CONFIRMED`: Change-to-Dirty preserved a direct,
-odd, monotonic public transfer with clean restoration, complete PMU custody, complete
-stage/source receipts, and consistent replicate sign convention, but confirmation was
-blocked by held-out q0 null failure and paired logical mapping-invariance failure
-(replicate 0 also failed paired physical reversal). Pre-V3 evidence remains
-`V1_PARTIAL_V2_TRANSFER_CANDIDATE`; V3 did not pool historical evidence and does not
-establish private OrbitState coupling or `SMALL_WALL_CROSSED`. Evidence root:
-`phase6b6/live_small_wall/orbit_coupling/transducer_calibration/runs/independent_window_transducer_v3_0`.
-Key hashes: raw
-`0c3ea99f1cd2a771980012a1f53e22677e48e7cd3778054744af41fa251aac2d`,
-sentinels `6c8a48219874fff2126d29b2056383ec4caeeb2a519ee83eb418c2679a218fb8`,
-stage receipts `cf4586c09a94cdb4de5ef438151e5f8c7bfec76271e13056cca786a98de40992`,
-source receipts `402d1e436dafdca7d7beb1172c48b2c3ab57ac6787720174edb4786c23d70bf5`,
-features `3601718af96514755fff8e548fbf61df667f98587d350de600b6171b813298ae`,
-adjudication `2b0445c5110aca5b1630064c071ea18f0755aa89829b88618697cb3345cd7f43`.
+`orbitstate_independent_v2_1` completed the one authorized retry-one private
+OrbitState live invocation at starting commit
+`0a1de197b77ad5c68ed14177d368293cb2f88c53`. The target status is
+`ORBITSTATE_INDEPENDENT_TARGET_COMPLETE`, controller status is
+`ORBITSTATE_CONTROLLER_TARGET_COMPLETE`, and the fresh private class is
+`ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE`, not
+`ORBITSTATE_INDEPENDENT_COUPLING_CONFIRMED`. Science package identity remains
+`orbitstate_independent_v2_0`; transaction/run identity is
+`orbitstate_independent_v2_1`.
+
+The retry-one run produced complete copied evidence with 144 mapping legs, 288
+independent component windows, 2016 unique ordered stage receipts, 288 unique source
+receipts, two fresh completed replicates, clean PMU/source CPU/process/policy custody,
+and feature freeze before private unblinding. Receiver extraction remained
+receiver-only, did not open the private source map, and saw no private source fields.
+Temperature stayed in the 51.25-52.5 C range, below the 68 C veto. The retry-one
+remote root `/root/catcas_live_small_wall/orbitstate_independent_v2_1` was removed
+after verified copy-back. Attempt zero remains preserved separately and was not reused
+or mutated.
+
+The surviving private geometry is strong but not promotable: both fresh replicates and
+the aggregate show `Z_fold` as the conjugate transform of `Z_d`, opposite-sign odd
+imaginary components above the 456 floor, and `Z_polarity_inversion` close to `-Z_d`.
+Confirmation is blocked by failed `phase_transfer_law` and
+`target_fold_geometry_law`. The target-fold blocker is the predeclared real-geometry
+law: `Re(Z_d)` and `Re(Z_fold)` are about 2409-2474 rather than the frozen expected
+`1536*cos(2*pi*23/256) = 1297.6950762235501`, failing all replicate and aggregate
+real-geometry checks. The phase-transfer blocker consists of phase-level logical
+mapping-invariance, physical-reversal, and fixed-bound near-zero response failures;
+source-formula, feature-freeze, PMU, process, policy, source-CPU, copy-back, and
+no-smuggle custody passed. No GPT-5.6 Sol claim audit was triggered because the fresh
+class was not confirmed, and `SMALL_WALL_CROSSED` remains unpromoted.
+
+Evidence root:
+`phase6b6/live_small_wall/orbit_coupling/runs/orbitstate_independent_v2_1`.
+Key live hashes: runtime
+`1c1bce08246dd78e1765d6615aa4ed08dfa1744d9bb638fbaabe59610ed3453b`, raw capture
+`721ca48c2f5b682d871521b106be9fcff9d511325eb2473a4ed298b23d54f623`, sentinels
+`da68625bb05d09846bf0ef216cb7502d1549c208f50326c4888e8e2cbc1e7950`, stage
+receipts `0c7c18174d90531763d785db91b8d11a9e218f0062c4843b1f0adab36eb05b3a`,
+source receipts `5a67264693eef2e3d5a4fc3bb1fc5a857fb83245e3af4fd78fa1debed9fe8feb`,
+receiver features `70ac1c25cf795b90da4196672d530549dc0519aa6e98e589d5e75ad2f1f8a26a`,
+feature-freeze receipt `e0183c5bbc549e7630491bffef0702ee26fe8077bdfd193914808ff4b79f6365`,
+adjudication `4ff6e51770b81bf76329428f3aa6edb6be83a1445a0979637e13d50403f36bfd`,
+execution manifest `41273b4294a2308961e5f177f1a99159944dcbaf2b46ca6d1bd85ce542b900b3`,
+copy-back manifest `c8ab1065cf08bf3b2b9c2cb01e09dadbf1016727c4b35f9a4139dc2854efe97e`,
+controller result
+`18b60342bfeb527ba2509996ff1e69dad9ea6d1e614b501d3244d5b41400a2ef`.
 
 **Latest offline freeze:**
 `orbitstate_independent_v2_0` freezes the private OrbitState independent-window
@@ -65,9 +93,9 @@ controller self-test `e94d8ef893b14e8495eb0f7c20a0742df9b65d8ec3d12b62e4feb86d90
 transport simulation `52a040ce658ed6e97fb459a0fd370c786863dfbc585242bc7a32f78c8aa136e4`,
 and Sol audit `21b56d61b9fc43b2d2ae3da7321f00ef189fbb7e925fac20ce4e0adc8ef2b9b8`.
 
-The attempt-zero live authorization was consumed and is not reusable. Current
-authorization, if granted later, must use the retry-one transaction identity recorded
-below.
+The attempt-zero and retry-one live authorizations were both consumed and are not
+reusable. No further OrbitState Independent V2 live invocation is authorized by the
+retained frozen package.
 
 Allowed target classes are `ORBITSTATE_INDEPENDENT_COUPLING_CONFIRMED`,
 `ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE`, and
@@ -90,14 +118,19 @@ and local controller receipt hash is
 preflight, hardware execution, source execution, raw capture, feature freeze,
 unblinding, adjudication, or scientific classification occurred.
 
-Retry one keeps science package `orbitstate_independent_v2_0` unchanged and freezes
-the operational transaction as `orbitstate_independent_v2_1`. The expected local root
-is
-`D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\phase6b6\live_small_wall\orbit_coupling\runs\orbitstate_independent_v2_1`;
-the expected remote root is
-`/root/catcas_live_small_wall/orbitstate_independent_v2_1`. Scientific state remains
-`PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE` and
-`PRIVATE_ORBITSTATE_COUPLING_NOT_YET_OBSERVED`.
+Retry one, `orbitstate_independent_v2_1`, consumed the one authorized retry-one live
+invocation at commit `0a1de197b77ad5c68ed14177d368293cb2f88c53`. It completed with
+target status `ORBITSTATE_INDEPENDENT_TARGET_COMPLETE`, controller status
+`ORBITSTATE_CONTROLLER_TARGET_COMPLETE`, target return code `0`, verified copy-back,
+and verified removal of the retry-one remote root
+`/root/catcas_live_small_wall/orbitstate_independent_v2_1`. The local evidence root is
+`D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\phase6b6\live_small_wall\orbit_coupling\runs\orbitstate_independent_v2_1`.
+
+The fresh class is `ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE`. This is the first
+private OrbitState scientific observation, but it is not confirmation and does not
+promote `SMALL_WALL_CROSSED`. No second live invocation is authorized. Scientific
+state is now `ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE` with
+`SMALL_WALL_CROSSED_NOT_PROMOTED`.
 
 **Active wall:**
 The current wall is still carrier/access-model selection. Timing, ownership-intent PMU

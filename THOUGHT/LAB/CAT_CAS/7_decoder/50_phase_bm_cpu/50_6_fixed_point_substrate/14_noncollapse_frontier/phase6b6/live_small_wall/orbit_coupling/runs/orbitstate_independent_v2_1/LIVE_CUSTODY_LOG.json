@@ -1,0 +1,277 @@
+{
+  "identity": {
+    "capabilities": {
+      "CapBnd": "000001ffffffffff",
+      "CapEff": "000001ffffffffff",
+      "CapPrm": "000001ffffffffff"
+    },
+    "core4_online": "1",
+    "core5_online": "1",
+    "cpu": {
+      "cpu_family": 16,
+      "model_name": "AMD Phenom(tm) II X6 1090T Processor",
+      "vendor_id": "AuthenticAMD"
+    },
+    "cpu_pmu_type": "4",
+    "egid": 0,
+    "euid": 0,
+    "event_format": "config:0-7,32-35",
+    "gid": 0,
+    "perf_event_paranoid": "3",
+    "uid": 0,
+    "umask_format": "config:8-15"
+  },
+  "policy_snapshots": [
+    {
+      "label": "before execution",
+      "policies": {
+        "cpu4": {
+          "scaling_cur_freq": "3200000",
+          "scaling_driver": "acpi-cpufreq",
+          "scaling_governor": "schedutil",
+          "scaling_max_freq": "3200000",
+          "scaling_min_freq": "800000"
+        },
+        "cpu5": {
+          "scaling_cur_freq": "3200000",
+          "scaling_driver": "acpi-cpufreq",
+          "scaling_governor": "schedutil",
+          "scaling_max_freq": "3200000",
+          "scaling_min_freq": "800000"
+        }
+      },
+      "timestamp_ns": 1783934773396289345
+    },
+    {
+      "label": "final",
+      "policies": {
+        "cpu4": {
+          "scaling_cur_freq": "3200000",
+          "scaling_driver": "acpi-cpufreq",
+          "scaling_governor": "schedutil",
+          "scaling_max_freq": "3200000",
+          "scaling_min_freq": "800000"
+        },
+        "cpu5": {
+          "scaling_cur_freq": "3200000",
+          "scaling_driver": "acpi-cpufreq",
+          "scaling_governor": "schedutil",
+          "scaling_max_freq": "3200000",
+          "scaling_min_freq": "800000"
+        }
+      },
+      "timestamp_ns": 1783934780014294701
+    }
+  ],
+  "process_snapshots": [
+    {
+      "forbidden_process_hits": [],
+      "forbidden_terms": [
+        "stress",
+        "stress-ng",
+        "perf record",
+        "perf stat",
+        "cpupower",
+        "turbostat"
+      ],
+      "label": "before execution",
+      "scan_returncode": 0,
+      "timestamp_ns": 1783934773393558585
+    },
+    {
+      "forbidden_process_hits": [],
+      "forbidden_terms": [
+        "stress",
+        "stress-ng",
+        "perf record",
+        "perf stat",
+        "cpupower",
+        "turbostat"
+      ],
+      "label": "after replicate 0",
+      "scan_returncode": 0,
+      "timestamp_ns": 1783934776614370462
+    },
+    {
+      "forbidden_process_hits": [],
+      "forbidden_terms": [
+        "stress",
+        "stress-ng",
+        "perf record",
+        "perf stat",
+        "cpupower",
+        "turbostat"
+      ],
+      "label": "after replicate 1",
+      "scan_returncode": 0,
+      "timestamp_ns": 1783934779729659827
+    },
+    {
+      "forbidden_process_hits": [],
+      "forbidden_terms": [
+        "stress",
+        "stress-ng",
+        "perf record",
+        "perf stat",
+        "cpupower",
+        "turbostat"
+      ],
+      "label": "final",
+      "scan_returncode": 0,
+      "timestamp_ns": 1783934780011341089
+    }
+  ],
+  "run_id": "orbitstate_independent_v2_1",
+  "schema": "LIVE_CUSTODY_LOG_V2",
+  "science_package_id": "orbitstate_independent_v2_0",
+  "temperatures": [
+    {
+      "k10temp": {
+        "sensors": [
+          {
+            "hwmon": "/sys/class/hwmon/hwmon0",
+            "name": "k10temp",
+            "temp_inputs": [
+              "/sys/class/hwmon/hwmon0/temp1_input"
+            ],
+            "temperatures_c": [
+              52.25
+            ]
+          }
+        ],
+        "strict": true
+      },
+      "label": "before compilation",
+      "max_c": 52.25,
+      "timestamp_ns": 1783934772720755218
+    },
+    {
+      "k10temp": {
+        "sensors": [
+          {
+            "hwmon": "/sys/class/hwmon/hwmon0",
+            "name": "k10temp",
+            "temp_inputs": [
+              "/sys/class/hwmon/hwmon0/temp1_input"
+            ],
+            "temperatures_c": [
+              52.5
+            ]
+          }
+        ],
+        "strict": true
+      },
+      "label": "before PMU preflight",
+      "max_c": 52.5,
+      "timestamp_ns": 1783934773342753771
+    },
+    {
+      "k10temp": {
+        "sensors": [
+          {
+            "hwmon": "/sys/class/hwmon/hwmon0",
+            "name": "k10temp",
+            "temp_inputs": [
+              "/sys/class/hwmon/hwmon0/temp1_input"
+            ],
+            "temperatures_c": [
+              52.375
+            ]
+          }
+        ],
+        "strict": true
+      },
+      "label": "before replicate 0",
+      "max_c": 52.375,
+      "timestamp_ns": 1783934773398359332
+    },
+    {
+      "k10temp": {
+        "sensors": [
+          {
+            "hwmon": "/sys/class/hwmon/hwmon0",
+            "name": "k10temp",
+            "temp_inputs": [
+              "/sys/class/hwmon/hwmon0/temp1_input"
+            ],
+            "temperatures_c": [
+              51.375
+            ]
+          }
+        ],
+        "strict": true
+      },
+      "label": "after replicate 0",
+      "max_c": 51.375,
+      "timestamp_ns": 1783934776588945158
+    },
+    {
+      "k10temp": {
+        "sensors": [
+          {
+            "hwmon": "/sys/class/hwmon/hwmon0",
+            "name": "k10temp",
+            "temp_inputs": [
+              "/sys/class/hwmon/hwmon0/temp1_input"
+            ],
+            "temperatures_c": [
+              51.25
+            ]
+          }
+        ],
+        "strict": true
+      },
+      "label": "before replicate 1",
+      "max_c": 51.25,
+      "timestamp_ns": 1783934776616582400
+    },
+    {
+      "k10temp": {
+        "sensors": [
+          {
+            "hwmon": "/sys/class/hwmon/hwmon0",
+            "name": "k10temp",
+            "temp_inputs": [
+              "/sys/class/hwmon/hwmon0/temp1_input"
+            ],
+            "temperatures_c": [
+              51.5
+            ]
+          }
+        ],
+        "strict": true
+      },
+      "label": "after replicate 1",
+      "max_c": 51.5,
+      "timestamp_ns": 1783934779702594782
+    },
+    {
+      "k10temp": {
+        "sensors": [
+          {
+            "hwmon": "/sys/class/hwmon/hwmon0",
+            "name": "k10temp",
+            "temp_inputs": [
+              "/sys/class/hwmon/hwmon0/temp1_input"
+            ],
+            "temperatures_c": [
+              51.5
+            ]
+          }
+        ],
+        "strict": true
+      },
+      "label": "before final success",
+      "max_c": 51.5,
+      "timestamp_ns": 1783934780016561161
+    }
+  ],
+  "transaction_run_id": "orbitstate_independent_v2_1",
+  "zero_cache_set_mapping": 0,
+  "zero_frequency_writes": 0,
+  "zero_msr_reads": 0,
+  "zero_msr_writes": 0,
+  "zero_physical_address_access": 0,
+  "zero_sysctl_writes": 0,
+  "zero_voltage_writes": 0
+}

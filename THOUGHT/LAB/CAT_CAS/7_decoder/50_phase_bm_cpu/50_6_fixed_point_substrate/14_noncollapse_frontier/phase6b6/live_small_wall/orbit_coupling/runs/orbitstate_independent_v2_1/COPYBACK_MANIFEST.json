@@ -1,0 +1,85 @@
+{
+  "copyback_manifest_sha256": "fe694df420df3b3027751696f699fe230f886be269a464893b77817a8523ee0b",
+  "entries": [
+    {
+      "path": "FINAL_RESULT_ORBITSTATE_INDEPENDENT_V2.json",
+      "sha256": "ecf422d4ef1aada7ce8d8062d82a29ce79778cc795bf5507b56e9013bd0a20f9",
+      "size": 861
+    },
+    {
+      "path": "LIVE_CUSTODY_LOG.json",
+      "sha256": "72080771248f9034c020c70e13ae8937c574039983294410dcb421d7bbfec8ad",
+      "size": 6656
+    },
+    {
+      "path": "ORBITSTATE_ADJUDICATION.json",
+      "sha256": "4ff6e51770b81bf76329428f3aa6edb6be83a1445a0979637e13d50403f36bfd",
+      "size": 9553
+    },
+    {
+      "path": "ORBITSTATE_FEATURE_FREEZE_RECEIPT.json",
+      "sha256": "e0183c5bbc549e7630491bffef0702ee26fe8077bdfd193914808ff4b79f6365",
+      "size": 1197
+    },
+    {
+      "path": "ORBITSTATE_INDEPENDENT_V2_MANIFEST.json",
+      "sha256": "41273b4294a2308961e5f177f1a99159944dcbaf2b46ca6d1bd85ce542b900b3",
+      "size": 5751
+    },
+    {
+      "path": "ORBITSTATE_PMU_PREFLIGHT.json",
+      "sha256": "b120a86b54aa0fb7f760f5c901060288f11efa6171800d86abe847fd5d211692",
+      "size": 478
+    },
+    {
+      "path": "ORBITSTATE_RECEIVER_FEATURES.json",
+      "sha256": "70ac1c25cf795b90da4196672d530549dc0519aa6e98e589d5e75ad2f1f8a26a",
+      "size": 47494
+    },
+    {
+      "path": "ORBITSTATE_RECEIVER_FEATURES.sha256",
+      "sha256": "aaf4a59aead676231e44296c18c2050d47145974a61efd09d56ec7d497d6d3e2",
+      "size": 100
+    },
+    {
+      "path": "ORBITSTATE_RECEIVER_SENTINELS.jsonl",
+      "sha256": "da68625bb05d09846bf0ef216cb7502d1549c208f50326c4888e8e2cbc1e7950",
+      "size": 94752
+    },
+    {
+      "path": "ORBITSTATE_SOURCE_BUNDLE.tar.gz",
+      "sha256": "9deb038e2dbdf95ab4412caef1d41292a94343cc4c689153534e8cdc2699e117",
+      "size": 61636
+    },
+    {
+      "path": "ORBITSTATE_SOURCE_HASHES.json",
+      "sha256": "8cf210d94a406f562deae50086667c9fe17f959595b12d470e122a4f8de8f3fa",
+      "size": 1744
+    },
+    {
+      "path": "ORBITSTATE_SOURCE_RECEIPTS.jsonl",
+      "sha256": "5a67264693eef2e3d5a4fc3bb1fc5a857fb83245e3af4fd78fa1debed9fe8feb",
+      "size": 83888
+    },
+    {
+      "path": "ORBITSTATE_STAGE_RECEIPTS.jsonl",
+      "sha256": "0c7c18174d90531763d785db91b8d11a9e218f0062c4843b1f0adab36eb05b3a",
+      "size": 503712
+    },
+    {
+      "path": "RAW_ORBITSTATE_RECEIVER_CAPTURE.jsonl",
+      "sha256": "721ca48c2f5b682d871521b106be9fcff9d511325eb2473a4ed298b23d54f623",
+      "size": 160482
+    },
+    {
+      "path": "orbitstate_independent_runtime",
+      "sha256": "1c1bce08246dd78e1765d6615aa4ed08dfa1744d9bb638fbaabe59610ed3453b",
+      "size": 39576
+    }
+  ],
+  "entry_count": 15,
+  "run_id": "orbitstate_independent_v2_1",
+  "schema": "ORBITSTATE_COPYBACK_MANIFEST_V2",
+  "science_package_id": "orbitstate_independent_v2_0",
+  "transaction_run_id": "orbitstate_independent_v2_1"
+}
