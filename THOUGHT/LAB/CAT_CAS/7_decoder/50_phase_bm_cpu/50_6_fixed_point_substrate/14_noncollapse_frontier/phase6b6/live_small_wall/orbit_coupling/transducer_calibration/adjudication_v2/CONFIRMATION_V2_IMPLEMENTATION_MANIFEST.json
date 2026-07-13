@@ -1,0 +1,78 @@
+{
+  "allowed_classifications": [
+    "V1_PARTIAL_CONFIRMED",
+    "V1_PARTIAL_V2_TRANSFER_CANDIDATE",
+    "V1_PARTIAL_V2_NOT_ESTABLISHED"
+  ],
+  "contract_sha256": "6a0dee41851f417d6572facad7880d2bb92a364e46ceb4f9c5bc6b00890bead4",
+  "expected_command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\transducer_calibration\\adjudication_v2\\run_confirmation_v2.py --run-id balanced_transducer_confirmation_v2_0 --contract THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\transducer_calibration\\adjudication_v2\\CONFIRMATION_CONTRACT_V2.md",
+  "expected_evidence_root": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/transducer_calibration/runs/balanced_transducer_confirmation_v2_0",
+  "expected_run_id": "balanced_transducer_confirmation_v2_0",
+  "expected_runtime_binary_sha256": "517dc2e3c86bb5c34b98a8c43b7d8b0f388e2a6f6c6c9eff2bd21b7af7571341",
+  "expected_source_bundle_sha256": "cd0856596368673a07810e6e8efdcdf756b9f8c2629a78ed82d71769f7686ae1",
+  "final_commit": "AWAITING_LIVE_AUTHORIZATION",
+  "final_commit_binding": {
+    "authorized_commit_env": "CONFIRMATION_V2_AUTHORIZED_COMMIT",
+    "live_controller_requirement": "before SSH/SCP, current clean git HEAD must equal the 40-character SHA supplied in CONFIRMATION_V2_AUTHORIZED_COMMIT",
+    "mode": "exact_authorized_head_environment_gate",
+    "placeholder_value": "AWAITING_LIVE_AUTHORIZATION"
+  },
+  "forbidden_classifications": [
+    "BALANCED_PHYSICAL_TRANSDUCER_CALIBRATED",
+    "ORBITSTATE_PHYSICAL_QUERY_COUPLING_CANDIDATE",
+    "SMALL_WALL_CROSSED"
+  ],
+  "implementation_manifest_sha256": "dbadf83e29a4414edd0b89432b9a389942c5c0e930ce31a6980476f501b09f93",
+  "no_live_contact_attestation": {
+    "frequency_writes": 0,
+    "hardware_executions": 0,
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "network_connections": 0,
+    "scp_executions": 0,
+    "ssh_executions": 0,
+    "voltage_writes": 0
+  },
+  "primary_coordinate": "change_to_dirty",
+  "public_self_test_sha256": "8372aa6371c4ab8e16116fc3fcfa5baa8313bef77d2056c55e3ba790b83aae22",
+  "schedule_json_sha256": "886bd84209da46e7a9722fd8edfcea74a44bf2b98ade90231709656a99dd67a5",
+  "schedule_semantic_sha256": "ecb3369ca21bbc7fa79b58222b8e05febbef0b15b79a48bed42a212fde746527",
+  "schedule_tsv_sha256": "570f165d4a24dff4680bc60046dd62523e9d596dffb4fac381da850df072c744",
+  "schema_id": "CAT_CAS_CONFIRMATION_V2_IMPLEMENTATION_MANIFEST",
+  "self_test_sha256": "24b0cc4ebb64b07b0b0fa0de2f0e13f3aa04b83bf3b841609e76cf6a1654dcca",
+  "sol_audit_disposition": {
+    "auditor": "gpt-5.6-sol",
+    "blocking_findings_repaired": [
+      "invalid_or_v1_rows_fail_closed_and_do_not_feed_transfer_shape",
+      "copyback_manifest_seals_final_result_and_confirmation_v2_execution_manifest",
+      "live_execution_requires_exact_authorized_commit_env_before_ssh_scp"
+    ],
+    "no_live_contact": true,
+    "post_repair_self_test": "PASS",
+    "post_repair_validate_only": "PASS",
+    "prepare_only_zero_live_contact": true,
+    "status": "READ_ONLY_SOL_AUDIT_BLOCKERS_REPAIRED_OFFLINE"
+  },
+  "source_hashes": {
+    "ADJUDICATION_LAW_AUDIT.md": "8e8f452769349eca152f0409c04456092774664c0ad54fa7ed9b10f336477335",
+    "CONFIRMATION_CONTRACT_V2.md": "6a0dee41851f417d6572facad7880d2bb92a364e46ceb4f9c5bc6b00890bead4",
+    "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.json": "886bd84209da46e7a9722fd8edfcea74a44bf2b98ade90231709656a99dd67a5",
+    "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.sha256": "f81d95103205c50fd6db31bff0ee60fffa997ade6ecfa0c46b923b283e5ffba8",
+    "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.tsv": "570f165d4a24dff4680bc60046dd62523e9d596dffb4fac381da850df072c744",
+    "balanced_transducer_adjudication_v2.py": "042f9b38ccf8d8e375cfad00e02156a1645e28c65cb9651db5f0f4d3ccf3c971",
+    "balanced_transducer_public.py": "0addae6e1c1d4dc587e1eaf807b4bc4e098936e5001dc48faebde8fab7a388f3",
+    "confirmation_v2_public.py": "f875e231d23d7cd012ce4bee81107d36238f4cf88eefa548c424ead5ee7c52e0",
+    "confirmation_v2_runtime.c": "bdeb39bd08c2cd087db5e434d390e4bd116f1643af7feaea6d1e95cdcdc0fba2",
+    "confirmation_v2_runtime.h": "76f654ee902dfdad5dddaea643a551e9799a1532842cc46173ed9f78814ce07c",
+    "confirmation_v2_target.py": "e9ea131678bcfd85379af4d60ecaec917d61c567601af0075966646241a9d77f",
+    "run_confirmation_v2.py": "cd02fda2e65bc9e63ec9d802e3884cd0aa6d5d20bea4c990c7c22821ddda5667"
+  },
+  "starting_commit": "a1dee7dd97c385b5134bc72f1f1ce2af32bb8462",
+  "target_self_test_sha256": "0f41b435e955e0a095a4107a7291b7523ce6316429bbc426c0249b77178f53e5",
+  "trial_counts": {
+    "replicates": 2,
+    "restoration_sentinel_records": 112,
+    "total_trial_legs": 112,
+    "trials_per_replicate": 56
+  }
+}
