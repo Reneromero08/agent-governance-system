@@ -7,7 +7,8 @@
   "bank_lines": 4096,
   "base_work": 2048,
   "contract_sha256": "1fe8d156273bd76eead8923b3ebf972c583e14a457b5281e05489e8a8488ec5a",
-  "expected_source_bundle_sha256": "eba5efdf2a52f60462ef57ecab60f052de6e9c42317caa15ad6dfa6f21c0d43b",
+  "controller_self_test_sha256": "6b70c7f8df032eec9800b02ec76897c24422ffc7e149b11a1db602badd078bdf",
+  "expected_source_bundle_sha256": "e8b7cd2262f07def56d21cad12148cac39596747ed5d5a02a512c61079b769cc",
   "final_commit": "AWAITING_LIVE_AUTHORIZATION",
   "forbidden_classes": [
     "BALANCED_PHYSICAL_TRANSDUCER_CALIBRATED",
@@ -24,7 +25,7 @@
   },
   "future_expected_run_root": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\transducer_calibration\\runs\\independent_window_transducer_v3_0",
   "future_remote_run_root": "/root/catcas_live_small_wall/independent_window_transducer_v3_0",
-  "git_status_porcelain_at_freeze_build": "?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/transducer_calibration/independent_window_v3/\n",
+  "git_status_porcelain_at_freeze_build": " M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/transducer_calibration/independent_window_v3/INDEPENDENT_WINDOW_IMPLEMENTATION_MANIFEST.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/transducer_calibration/independent_window_v3/INDEPENDENT_WINDOW_SELF_TEST.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/transducer_calibration/independent_window_v3/INDEPENDENT_WINDOW_V3_SOL_AUDIT.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/transducer_calibration/independent_window_v3/independent_window_runtime.c\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/transducer_calibration/independent_window_v3/independent_window_runtime.h\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/transducer_calibration/independent_window_v3/independent_window_target.py\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/transducer_calibration/independent_window_v3/run_independent_window_v3.py\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/transducer_calibration/independent_window_v3/LIVE_EXECUTION_COMPLETION_AUDIT.md\n",
   "governance_gates": {
     "critic": {
       "command": [
@@ -46,13 +47,15 @@
       "status": "REQUIRED_AFTER_COHERENT_COMMIT_BEFORE_PUSH"
     }
   },
-  "head_at_freeze_build": "524b9e580cb13f547fd7e0638dcf25b3b66e1112",
-  "implementation_manifest_sha256": "435824c15b2a2076cf5703cd11a0c242bd827316f4acd201bbb445fffc6929a4",
+  "hardware_executions": 0,
+  "head_at_freeze_build": "f13599f80f55703d7eb2cec9c4be2c8f1b0bdf5a",
+  "implementation_manifest_sha256": "811b922205c02d3ab05b2ec7a332a9c96e6aa4f7f144111221f2da48020a50fb",
   "line_bytes": 64,
+  "live_execution_completion_audit_sha256": "eaa66cbab77042d28ffa7aeb24193fba2fbd0168df71d3812ba1a932c52bd9fd",
   "mapping_leg_source_work": 8192,
   "network_connections": 0,
-  "offline_validation_binary_sha256": "4146fa034865b4c2d35c59e9ab31e631a04557188b6f18da2067494353d792e5",
-  "origin_main_at_freeze_build": "524b9e580cb13f547fd7e0638dcf25b3b66e1112",
+  "offline_validation_binary_sha256": "694e2d3699eb13a3e065aac93649e5bda2ca7b56beb341c4e16566bcb61a06c9",
+  "origin_main_at_freeze_build": "f13599f80f55703d7eb2cec9c4be2c8f1b0bdf5a",
   "permutation": {
     "a": 257,
     "b": 43
@@ -98,6 +101,7 @@
   "run_id": "independent_window_transducer_v3_0",
   "runtime_compile": {
     "available": true,
+    "binary_sha256": "694e2d3699eb13a3e065aac93649e5bda2ca7b56beb341c4e16566bcb61a06c9",
     "command": [
       "wsl",
       "--",
@@ -108,12 +112,15 @@
       "-Werror",
       "-pedantic",
       "-O2",
+      "-march=amdfam10",
+      "-mtune=amdfam10",
       "-fno-lto",
+      "-pthread",
       "-I",
       "/mnt/d/CCC 2.0/AI/agent-governance-system/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/transducer_calibration/independent_window_v3",
       "/mnt/d/CCC 2.0/AI/agent-governance-system/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/transducer_calibration/independent_window_v3/independent_window_runtime.c",
       "-o",
-      "/mnt/c/Users/rene_/AppData/Local/Temp/independent_window_v3_compile_wci7o99w/independent_window_runtime"
+      "<compile-temp>/independent_window_runtime"
     ],
     "compiler": "wsl:gcc",
     "disassembly": {
@@ -123,7 +130,7 @@
         "--",
         "objdump",
         "-d",
-        "/mnt/c/Users/rene_/AppData/Local/Temp/independent_window_v3_compile_wci7o99w/independent_window_runtime"
+        "<compile-temp>/independent_window_runtime"
       ],
       "forbidden_instruction_matches": [],
       "forbidden_instruction_set": [
@@ -133,18 +140,23 @@
         "wbinvd",
         "invd"
       ],
-      "line_count": 688,
-      "normalized_stdout_sha256": "cff8fbbc4dbd95461c3702a1331d67a195080d6009edcb82c5299627b0def8ba",
+      "line_count": 3960,
+      "normalized_stdout_sha256": "598d33089be9066dc5b08e18431a5130c48b1378a7d61187c0115f9c170dd3c0",
       "passed": true,
       "returncode": 0,
       "stderr": ""
     },
     "passed": true,
     "returncode": 0,
-    "runtime_binary_sha256": "4146fa034865b4c2d35c59e9ab31e631a04557188b6f18da2067494353d792e5",
-    "schedule_check_stderr": "",
+    "runtime_binary_sha256": "694e2d3699eb13a3e065aac93649e5bda2ca7b56beb341c4e16566bcb61a06c9",
+    "runtime_command": [
+      "wsl",
+      "--",
+      "<compile-temp>/independent_window_runtime"
+    ],
+    "schedule_check_returncode": 0,
     "schedule_check_stdout": "INDEPENDENT_WINDOW_V3_SCHEDULE_TSV_OK",
-    "self_test_stderr": "",
+    "self_test_returncode": 0,
     "self_test_stdout": "INDEPENDENT_WINDOW_V3_RUNTIME_SELF_TEST_OK",
     "stderr": "",
     "stdout": ""
@@ -156,7 +168,7 @@
       "--",
       "objdump",
       "-d",
-      "/mnt/c/Users/rene_/AppData/Local/Temp/independent_window_v3_compile_wci7o99w/independent_window_runtime"
+      "<compile-temp>/independent_window_runtime"
     ],
     "forbidden_instruction_matches": [],
     "forbidden_instruction_set": [
@@ -166,8 +178,8 @@
       "wbinvd",
       "invd"
     ],
-    "line_count": 688,
-    "normalized_stdout_sha256": "cff8fbbc4dbd95461c3702a1331d67a195080d6009edcb82c5299627b0def8ba",
+    "line_count": 3960,
+    "normalized_stdout_sha256": "598d33089be9066dc5b08e18431a5130c48b1378a7d61187c0115f9c170dd3c0",
     "passed": true,
     "returncode": 0,
     "stderr": ""
@@ -177,47 +189,74 @@
   "schedule_tsv_sha256": "a8cb36dce7319329fa91f1046bfe821fbe3903f4db4f7775696bc55fd3939aa4",
   "schema_id": "CAT_CAS_INDEPENDENT_WINDOW_IMPLEMENTATION_MANIFEST_V3",
   "scp_executions": 0,
-  "self_test_path_sha256": "775418e0f2dc56640cb386fbe0669249f1bd8e09a05d6159ada18af66d4d4f60",
-  "self_test_sha256": "7638de3f92de71e62dbb6cabd338234bff93f38784a6d2f22eba8de9d4f01628",
+  "self_test_path_sha256": "c8a5f0e5365e6fdb6600cdd60dbbbf96a1855a116c94287bb15ab8e520a6e1b0",
+  "self_test_sha256": "6b70c7f8df032eec9800b02ec76897c24422ffc7e149b11a1db602badd078bdf",
   "sol_audit": {
-    "audit_agent_id": "019f59a0-6bd4-7380-9c55-b6127193b85e",
+    "audit_agent_id": "019f59f7-6c4a-7a32-8014-2d9feee2c81a",
+    "audit_contact": {
+      "execute_authorized": 0,
+      "lab_device_contact": 0,
+      "ping": 0,
+      "repository_mutation": 0,
+      "scp": 0,
+      "ssh": 0
+    },
     "audit_mode": "read_only_no_checkout_no_git_write_no_lab_contact",
     "audit_model": "gpt-5.6-sol",
-    "audit_record_sha256": "7c5f8da89452cce7ca35e4063278c7fd46782c08ac4ffdd93e8802c6a1d14fc3",
-    "final_reaudit_manifest_sha256": "5a8aa73d1f491ca03fdba55c32fbc6d588d5dadb1e5b3ab200356103ecbd8168",
+    "audit_operation": "Read-only V3 live-executor re-audit after root-immutability repair",
+    "audit_record_sha256": "2726db2d882ba08f06566bd962181e613954ab831efef86bb21852d07933935d",
+    "audited_head": "f13599f80f55703d7eb2cec9c4be2c8f1b0bdf5a",
+    "evidence_file_line_references": {
+      "authorized_bounded_transaction": [
+        "run_independent_window_v3.py:543-560",
+        "run_independent_window_v3.py:563-622",
+        "run_independent_window_v3.py:704-729"
+      ],
+      "raw_components_control_derived_coordinates": [
+        "independent_window_public.py:454-468",
+        "independent_window_public.py:538-539",
+        "independent_window_public.py:655-697"
+      ],
+      "real_independent_c_capture": [
+        "independent_window_runtime.c:430-571",
+        "independent_window_runtime.c:812-899",
+        "independent_window_runtime.c:934-971"
+      ],
+      "root_immutability_repair": [
+        "independent_window_target.py:900-908",
+        "independent_window_target.py:1106-1109",
+        "independent_window_runtime.c:1132-1163",
+        "independent_window_runtime.c:1144-1149"
+      ],
+      "root_regression_tests": [
+        "independent_window_target.py:1188-1227",
+        "independent_window_target.py:1252-1261"
+      ]
+    },
     "final_reaudit_status": "PASS",
     "initial_status": "FAIL",
     "material_findings": [
       {
-        "finding": "Integrity failures could emit PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE.",
-        "repair": "Adjudication now gates candidate emission on schedule/raw integrity and exact self-test outcomes force integrity violations to NOT_ESTABLISHED."
-      },
-      {
-        "finding": "Authorization gate was not manifest-bound.",
-        "repair": "Authorization now requires INDEPENDENT_WINDOW_TRANSDUCER_V3_MANIFEST_SHA256 and revalidates manifest digest, source hashes, schedule artifacts, self-test, runtime binary hash, and disassembly hash."
-      },
-      {
-        "finding": "Independent subcapture sequencing was asserted but not mechanically proven.",
-        "repair": "Raw validation now requires per-component stage sequences and unique stage receipt IDs; mocks cover out-of-order zero-return-code and reused-baseline receipt rejection."
-      },
-      {
-        "finding": "Offline closure lacked disassembly and governance-gate receipts.",
-        "repair": "Runtime compile receipts now include objdump-based forbidden-instruction scanning, and self-test/validate receipts include the critic gate with the full gate declared as the clean-tree pre-push requirement."
-      },
-      {
-        "finding": "Second re-audit found stage receipt uniqueness was not capture-wide.",
-        "repair": "Raw validation now tracks stage receipt IDs across the entire capture and rejects reuse across trials; cross-trial receipt reuse is an explicit self-test case."
-      },
-      {
-        "finding": "Second re-audit found adjudication accepted tampered features with a stale hash.",
-        "repair": "Adjudication now recomputes features_sha256 before evaluating transfer laws and returns NOT_ESTABLISHED on hash mismatch; tampered feature mutation is an explicit regression."
+        "finding": "Earlier-root immutability was not package-wide because target failure evidence could write into an existing output root and C capture accepted an existing output directory.",
+        "repair": "Target live execution now refuses an existing output root before creating it and does not seal failure evidence into pre-existing roots; C capture root creation is exclusive; target self-test includes target and C pre-existing-root regressions."
       }
     ],
-    "network_connections": 0,
-    "post_repair_status": "PASS",
+    "recommended_repairs": [],
     "remaining_material_findings": [],
-    "scp_executions": 0,
-    "ssh_executions": 0,
+    "verified_points": {
+      "authorized_bounded_transaction": true,
+      "closed_success_and_failure_copyback": true,
+      "earlier_roots_not_modified_or_cleaned": true,
+      "exact_128_mapping_leg_records": true,
+      "exact_256_component_windows": true,
+      "fresh_component_baseline_and_encoding": true,
+      "no_live_contact_during_audit": true,
+      "offline_zero_transport": true,
+      "raw_components_determine_derived_coordinates": true,
+      "runtime_real_independent_window_capture": true,
+      "scientific_laws_and_thresholds_unchanged": true,
+      "target_live_mode": true
+    },
     "zero_live_contact": true
   },
   "source_core": 4,
@@ -226,19 +265,22 @@
     "INDEPENDENT_WINDOW_PUBLIC_SCHEDULE.json": "a1e07bd96005bf7c912c9fc3b1d632a60cf44d5d72c6dc33c2ba7275452033a8",
     "INDEPENDENT_WINDOW_PUBLIC_SCHEDULE.sha256": "cb472ccfdccb4cdc34971127e394495f1c419c5aa03b644d1b5cc57d7856cc56",
     "INDEPENDENT_WINDOW_PUBLIC_SCHEDULE.tsv": "a8cb36dce7319329fa91f1046bfe821fbe3903f4db4f7775696bc55fd3939aa4",
-    "INDEPENDENT_WINDOW_V3_SOL_AUDIT.json": "7c5f8da89452cce7ca35e4063278c7fd46782c08ac4ffdd93e8802c6a1d14fc3",
+    "INDEPENDENT_WINDOW_V3_SOL_AUDIT.json": "2726db2d882ba08f06566bd962181e613954ab831efef86bb21852d07933935d",
+    "LIVE_EXECUTION_COMPLETION_AUDIT.md": "eaa66cbab77042d28ffa7aeb24193fba2fbd0168df71d3812ba1a932c52bd9fd",
     "RETRY1_MEASUREMENT_TOPOLOGY_AUDIT.md": "0f2a7ecf68533e247c0c302dee5d480f347b1c7f4b7188b6d45c943dd22eebd7",
     "independent_window_public.py": "26ae0424e0c5acda711fa435be2c43f5de225a5356b21f776e41f5159f79a748",
-    "independent_window_runtime.c": "b86688c256786f0bf5e27820f77aab749077e5a641a7590befa6ace7a8ec6548",
-    "independent_window_runtime.h": "f4d5adc16621f324a2621cfd27ba6c318e64a84a460104acb8dcfa10cf44cec0",
-    "independent_window_target.py": "7b96afaac3970df06b6f25c9e4ea2b30621e75508bceb569708b20ab3287b3a0",
-    "run_independent_window_v3.py": "516b4c46f215dd15cc308967a743b7d46a9f88cfdbb239291de71d737a20a426"
+    "independent_window_runtime.c": "59b2894949524c658843e1166857b9f0960e33bf5d378e67a3f18463c12e2fc1",
+    "independent_window_runtime.h": "b80a45b109079d2567f89ecbd6cce7e9afda4ea71e256ec17e0e8ccfedd554eb",
+    "independent_window_target.py": "ce528d66da2faa36daf5450b28244f824d8df6d50e9a598466c1ad38653ebcb2",
+    "run_independent_window_v3.py": "41eb0c0e883a5069a15673d3e4416e85b952c4d4c9873642bcfb506824277e22"
   },
   "ssh_executions": 0,
-  "starting_commit": "524b9e580cb13f547fd7e0638dcf25b3b66e1112",
+  "starting_commit": "f13599f80f55703d7eb2cec9c4be2c8f1b0bdf5a",
   "subcapture_source_work": 4096,
+  "target_self_test_sha256": "f7e09c889e1fb6c6fc7978efb8b98e02e09e700e08d1196d8b911aeecfe15c10",
   "topology_audit_sha256": "0f2a7ecf68533e247c0c302dee5d480f347b1c7f4b7188b6d45c943dd22eebd7",
   "total_component_measurement_windows": 256,
   "total_mapping_leg_records": 128,
+  "transport_simulation_sha256": "f69de86406d6393eaaa9b37e6c4826fb87873ef74883c1d9369599d0a39eed67",
   "zero_live_contact": true
 }

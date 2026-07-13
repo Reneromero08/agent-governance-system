@@ -1,40 +1,67 @@
 {
-  "audit_agent_id": "019f59a0-6bd4-7380-9c55-b6127193b85e",
-  "audit_model": "gpt-5.6-sol",
+  "audit_agent_id": "019f59f7-6c4a-7a32-8014-2d9feee2c81a",
   "audit_mode": "read_only_no_checkout_no_git_write_no_lab_contact",
+  "audit_model": "gpt-5.6-sol",
+  "audit_operation": "Read-only V3 live-executor re-audit after root-immutability repair",
+  "audited_head": "f13599f80f55703d7eb2cec9c4be2c8f1b0bdf5a",
+  "final_reaudit_status": "PASS",
   "initial_status": "FAIL",
   "material_findings": [
     {
-      "finding": "Integrity failures could emit PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE.",
-      "repair": "Adjudication now gates candidate emission on schedule/raw integrity and exact self-test outcomes force integrity violations to NOT_ESTABLISHED."
-    },
-    {
-      "finding": "Authorization gate was not manifest-bound.",
-      "repair": "Authorization now requires INDEPENDENT_WINDOW_TRANSDUCER_V3_MANIFEST_SHA256 and revalidates manifest digest, source hashes, schedule artifacts, self-test, runtime binary hash, and disassembly hash."
-    },
-    {
-      "finding": "Independent subcapture sequencing was asserted but not mechanically proven.",
-      "repair": "Raw validation now requires per-component stage sequences and unique stage receipt IDs; mocks cover out-of-order zero-return-code and reused-baseline receipt rejection."
-    },
-    {
-      "finding": "Offline closure lacked disassembly and governance-gate receipts.",
-      "repair": "Runtime compile receipts now include objdump-based forbidden-instruction scanning, and self-test/validate receipts include the critic gate with the full gate declared as the clean-tree pre-push requirement."
-    },
-    {
-      "finding": "Second re-audit found stage receipt uniqueness was not capture-wide.",
-      "repair": "Raw validation now tracks stage receipt IDs across the entire capture and rejects reuse across trials; cross-trial receipt reuse is an explicit self-test case."
-    },
-    {
-      "finding": "Second re-audit found adjudication accepted tampered features with a stale hash.",
-      "repair": "Adjudication now recomputes features_sha256 before evaluating transfer laws and returns NOT_ESTABLISHED on hash mismatch; tampered feature mutation is an explicit regression."
+      "finding": "Earlier-root immutability was not package-wide because target failure evidence could write into an existing output root and C capture accepted an existing output directory.",
+      "repair": "Target live execution now refuses an existing output root before creating it and does not seal failure evidence into pre-existing roots; C capture root creation is exclusive; target self-test includes target and C pre-existing-root regressions."
     }
   ],
-  "final_reaudit_manifest_sha256": "5a8aa73d1f491ca03fdba55c32fbc6d588d5dadb1e5b3ab200356103ecbd8168",
-  "final_reaudit_status": "PASS",
   "remaining_material_findings": [],
-  "post_repair_status": "PASS",
-  "zero_live_contact": true,
-  "network_connections": 0,
-  "ssh_executions": 0,
-  "scp_executions": 0
+  "recommended_repairs": [],
+  "verified_points": {
+    "authorized_bounded_transaction": true,
+    "offline_zero_transport": true,
+    "target_live_mode": true,
+    "runtime_real_independent_window_capture": true,
+    "fresh_component_baseline_and_encoding": true,
+    "exact_128_mapping_leg_records": true,
+    "exact_256_component_windows": true,
+    "raw_components_determine_derived_coordinates": true,
+    "closed_success_and_failure_copyback": true,
+    "earlier_roots_not_modified_or_cleaned": true,
+    "scientific_laws_and_thresholds_unchanged": true,
+    "no_live_contact_during_audit": true
+  },
+  "evidence_file_line_references": {
+    "root_immutability_repair": [
+      "independent_window_target.py:900-908",
+      "independent_window_target.py:1106-1109",
+      "independent_window_runtime.c:1132-1163",
+      "independent_window_runtime.c:1144-1149"
+    ],
+    "root_regression_tests": [
+      "independent_window_target.py:1188-1227",
+      "independent_window_target.py:1252-1261"
+    ],
+    "authorized_bounded_transaction": [
+      "run_independent_window_v3.py:543-560",
+      "run_independent_window_v3.py:563-622",
+      "run_independent_window_v3.py:704-729"
+    ],
+    "real_independent_c_capture": [
+      "independent_window_runtime.c:430-571",
+      "independent_window_runtime.c:812-899",
+      "independent_window_runtime.c:934-971"
+    ],
+    "raw_components_control_derived_coordinates": [
+      "independent_window_public.py:454-468",
+      "independent_window_public.py:538-539",
+      "independent_window_public.py:655-697"
+    ]
+  },
+  "audit_contact": {
+    "ssh": 0,
+    "scp": 0,
+    "ping": 0,
+    "execute_authorized": 0,
+    "lab_device_contact": 0,
+    "repository_mutation": 0
+  },
+  "zero_live_contact": true
 }
