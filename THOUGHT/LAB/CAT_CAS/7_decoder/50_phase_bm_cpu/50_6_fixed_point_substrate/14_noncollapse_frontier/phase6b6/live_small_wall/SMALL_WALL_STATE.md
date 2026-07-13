@@ -6,7 +6,29 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`V1_PARTIAL_V2_TRANSFER_CANDIDATE`
+`PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE`
+
+**Latest live result:**
+`independent_window_transducer_v3_0` completed the one authorized V3 live
+transaction at commit `0af8c0fd937fff6744ed2ea009afa54cdf4fa62c` with target
+status `INDEPENDENT_WINDOW_V3_TARGET_COMPLETE` and controller status
+`INDEPENDENT_WINDOW_V3_CONTROLLER_TARGET_COMPLETE`. The fresh V3 class is
+`PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE`, not
+`PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CONFIRMED`: Change-to-Dirty preserved a direct,
+odd, monotonic public transfer with clean restoration, complete PMU custody, complete
+stage/source receipts, and consistent replicate sign convention, but confirmation was
+blocked by held-out q0 null failure and paired logical mapping-invariance failure
+(replicate 0 also failed paired physical reversal). Pre-V3 evidence remains
+`V1_PARTIAL_V2_TRANSFER_CANDIDATE`; V3 did not pool historical evidence and does not
+establish private OrbitState coupling or `SMALL_WALL_CROSSED`. Evidence root:
+`phase6b6/live_small_wall/orbit_coupling/transducer_calibration/runs/independent_window_transducer_v3_0`.
+Key hashes: raw
+`0c3ea99f1cd2a771980012a1f53e22677e48e7cd3778054744af41fa251aac2d`,
+sentinels `6c8a48219874fff2126d29b2056383ec4caeeb2a519ee83eb418c2679a218fb8`,
+stage receipts `cf4586c09a94cdb4de5ef438151e5f8c7bfec76271e13056cca786a98de40992`,
+source receipts `402d1e436dafdca7d7beb1172c48b2c3ab57ac6787720174edb4786c23d70bf5`,
+features `3601718af96514755fff8e548fbf61df667f98587d350de600b6171b813298ae`,
+adjudication `2b0445c5110aca5b1630064c071ea18f0755aa89829b88618697cb3345cd7f43`.
 
 **Active wall:**
 The current wall is still carrier/access-model selection. Timing, ownership-intent PMU

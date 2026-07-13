@@ -1,0 +1,151 @@
+{
+  "files": [
+    {
+      "path": "FINAL_RESULT_INDEPENDENT_WINDOW_V3.json",
+      "sha256": "23a9ebeb62da9518237491ca17e858d4a0c9792f97430f62cfe1a632f47833d8",
+      "size": 2011
+    },
+    {
+      "path": "INDEPENDENT_WINDOW_ADJUDICATION.json",
+      "sha256": "2b0445c5110aca5b1630064c071ea18f0755aa89829b88618697cb3345cd7f43",
+      "size": 55547
+    },
+    {
+      "path": "INDEPENDENT_WINDOW_FEATURES.json",
+      "sha256": "3601718af96514755fff8e548fbf61df667f98587d350de600b6171b813298ae",
+      "size": 398997
+    },
+    {
+      "path": "INDEPENDENT_WINDOW_PUBLIC_SCHEDULE.json",
+      "sha256": "a1e07bd96005bf7c912c9fc3b1d632a60cf44d5d72c6dc33c2ba7275452033a8",
+      "size": 95814
+    },
+    {
+      "path": "INDEPENDENT_WINDOW_PUBLIC_SCHEDULE.sha256",
+      "sha256": "cb472ccfdccb4cdc34971127e394495f1c419c5aa03b644d1b5cc57d7856cc56",
+      "size": 65
+    },
+    {
+      "path": "INDEPENDENT_WINDOW_PUBLIC_SCHEDULE.tsv",
+      "sha256": "a8cb36dce7319329fa91f1046bfe821fbe3903f4db4f7775696bc55fd3939aa4",
+      "size": 3316
+    },
+    {
+      "path": "INDEPENDENT_WINDOW_RUNTIME_STDERR_REPLICATE_0.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "INDEPENDENT_WINDOW_RUNTIME_STDERR_REPLICATE_1.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "INDEPENDENT_WINDOW_RUNTIME_STDOUT_REPLICATE_0.txt",
+      "sha256": "34b2cff28129e285a09369436ff9d387ca5d45da25c46046fa663fec99009e77",
+      "size": 89
+    },
+    {
+      "path": "INDEPENDENT_WINDOW_RUNTIME_STDOUT_REPLICATE_1.txt",
+      "sha256": "4aaa991ef730d27354d50edfd5d12271b99ccae62fbafea082e3fa4405452060",
+      "size": 89
+    },
+    {
+      "path": "INDEPENDENT_WINDOW_SENTINELS.jsonl",
+      "sha256": "6c8a48219874fff2126d29b2056383ec4caeeb2a519ee83eb418c2679a218fb8",
+      "size": 609739
+    },
+    {
+      "path": "INDEPENDENT_WINDOW_SOURCE_BUNDLE.tar.gz",
+      "sha256": "e8b7cd2262f07def56d21cad12148cac39596747ed5d5a02a512c61079b769cc",
+      "size": 58781
+    },
+    {
+      "path": "INDEPENDENT_WINDOW_SOURCE_HASHES.json",
+      "sha256": "4171e679763a2c983370485e89902596e39531a4aeaba2584ea9beae1238a0be",
+      "size": 1391
+    },
+    {
+      "path": "INDEPENDENT_WINDOW_SOURCE_RECEIPTS.jsonl",
+      "sha256": "402d1e436dafdca7d7beb1172c48b2c3ab57ac6787720174edb4786c23d70bf5",
+      "size": 112432
+    },
+    {
+      "path": "INDEPENDENT_WINDOW_STAGE_RECEIPTS.jsonl",
+      "sha256": "cf4586c09a94cdb4de5ef438151e5f8c7bfec76271e13056cca786a98de40992",
+      "size": 544880
+    },
+    {
+      "path": "INDEPENDENT_WINDOW_V3_MANIFEST.json",
+      "sha256": "9b33afc5f9b3b9be98cfb688c3801d4979f976589aa1a54d40173182947cee8c",
+      "size": 2025
+    },
+    {
+      "path": "LIVE_CUSTODY_LOG.json",
+      "sha256": "a75aedd495d7e2d319ac1a0f888c7de60f1f1f13f4094a25d784791e485bef5f",
+      "size": 12373
+    },
+    {
+      "path": "RAW_INDEPENDENT_WINDOW_CAPTURE.jsonl",
+      "sha256": "0c3ea99f1cd2a771980012a1f53e22677e48e7cd3778054744af41fa251aac2d",
+      "size": 753992
+    },
+    {
+      "path": "independent_window_runtime",
+      "sha256": "ef85ba8513cdd153dd31c5ba30c7be94240a75babfb20361d9585ef666e7b2a8",
+      "size": 39248
+    },
+    {
+      "path": "replicate_0/INDEPENDENT_WINDOW_SENTINELS.jsonl",
+      "sha256": "321774e0fa281159b8be0a5367fd59c390622cc631a5013c99cd7657ee9e184d",
+      "size": 304189
+    },
+    {
+      "path": "replicate_0/INDEPENDENT_WINDOW_SOURCE_RECEIPTS.jsonl",
+      "sha256": "bd8add36daecfd483bb32edb978e04f63ae4f302d31dfe184cd7026b615e7ba6",
+      "size": 56216
+    },
+    {
+      "path": "replicate_0/INDEPENDENT_WINDOW_STAGE_RECEIPTS.jsonl",
+      "sha256": "b4401bef7819f30e8acbb92ff3a2282b751201636f65d9aaf35137f24f6995b8",
+      "size": 272440
+    },
+    {
+      "path": "replicate_0/RAW_INDEPENDENT_WINDOW_CAPTURE.jsonl",
+      "sha256": "9d586fcea7f18675f63374742b94764433df9033d19062479d065eae617b5e9a",
+      "size": 376660
+    },
+    {
+      "path": "replicate_0/RUNTIME_SUMMARY.json",
+      "sha256": "9d372787decb0ab6389d0116f292c501a34bf4e90c173667b70503df365a6b55",
+      "size": 510
+    },
+    {
+      "path": "replicate_1/INDEPENDENT_WINDOW_SENTINELS.jsonl",
+      "sha256": "7f397777f83cfc44ee906ea940a17d3655b36c17f48479147d3fff74c2bcbd4e",
+      "size": 305550
+    },
+    {
+      "path": "replicate_1/INDEPENDENT_WINDOW_SOURCE_RECEIPTS.jsonl",
+      "sha256": "4a7095be2437d6f6945a8a8026f5811109fc65c02d0ad67eb794a9d8c8bb8a71",
+      "size": 56216
+    },
+    {
+      "path": "replicate_1/INDEPENDENT_WINDOW_STAGE_RECEIPTS.jsonl",
+      "sha256": "fc1dff524a7010c6610939c475816015ed6e41a26e0fc7e901c51d49f9c7d1f4",
+      "size": 272440
+    },
+    {
+      "path": "replicate_1/RAW_INDEPENDENT_WINDOW_CAPTURE.jsonl",
+      "sha256": "10f018b5e898d65b58c81a72132b4de9fe687dae3a5683ebee4c52aa36672d85",
+      "size": 377332
+    },
+    {
+      "path": "replicate_1/RUNTIME_SUMMARY.json",
+      "sha256": "89e7ce47cbfc1cc6f46a08cfb9a7d845b5680ebce3843e0adcc4a725a5a1a7c7",
+      "size": 510
+    }
+  ],
+  "run_id": "independent_window_transducer_v3_0",
+  "schema_id": "CAT_CAS_INDEPENDENT_WINDOW_COPYBACK_MANIFEST_V3"
+}

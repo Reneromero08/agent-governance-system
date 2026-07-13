@@ -1,0 +1,430 @@
+{
+  "cache_set_mapping": false,
+  "compile": {
+    "available": true,
+    "binary_sha256": "ef85ba8513cdd153dd31c5ba30c7be94240a75babfb20361d9585ef666e7b2a8",
+    "command": [
+      "/usr/bin/cc",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-pedantic",
+      "-O2",
+      "-march=amdfam10",
+      "-mtune=amdfam10",
+      "-fno-lto",
+      "-pthread",
+      "-I",
+      "/root/catcas_live_small_wall/independent_window_transducer_v3_0/source",
+      "/root/catcas_live_small_wall/independent_window_transducer_v3_0/source/independent_window_runtime.c",
+      "-o",
+      "/root/catcas_live_small_wall/independent_window_transducer_v3_0/output/independent_window_runtime"
+    ],
+    "compiler": "/usr/bin/cc",
+    "passed": true,
+    "returncode": 0,
+    "runtime_command": [
+      "/root/catcas_live_small_wall/independent_window_transducer_v3_0/output/independent_window_runtime"
+    ],
+    "stderr": "",
+    "stdout": ""
+  },
+  "frequency_writes": 0,
+  "hardware_execution_began": true,
+  "msr_reads": 0,
+  "msr_writes": 0,
+  "phases_completed": [
+    "create_output_root",
+    "process_preflight",
+    "policy_before",
+    "privilege_snapshot",
+    "pmu_platform_snapshot",
+    "temperature_before_compilation",
+    "source_manifest_schedule_verification",
+    "source_bundle",
+    "strict_compile",
+    "runtime_self_test",
+    "runtime_schedule_validation",
+    "runtime_pmu_preflight",
+    "temperature_before_replicate_0",
+    "execute_replicate_0",
+    "post_replicate_0_temperature_process",
+    "temperature_before_replicate_1",
+    "execute_replicate_1",
+    "post_replicate_1_temperature_process",
+    "combine_and_extract",
+    "policy_after",
+    "final_temperature_process"
+  ],
+  "physical_address_access": false,
+  "pmu_platform_snapshot": {
+    "core_online": {
+      "4": "1",
+      "5": "1"
+    },
+    "cpu_family": "16",
+    "effective_uid": 0,
+    "event_format": "config:0-7,32-35",
+    "passed": true,
+    "perf_event_paranoid": "3",
+    "perf_event_paranoid_role": "diagnostic_only_for_root",
+    "pmu_type": "4",
+    "umask_format": "config:8-15",
+    "vendor_id": "AuthenticAMD"
+  },
+  "pmu_preflight_began": true,
+  "pmu_preflight_completed": true,
+  "pmu_preflight_receipt": {
+    "actual_read_size": 72,
+    "bytes_unchanged": true,
+    "command": [
+      "/root/catcas_live_small_wall/independent_window_transducer_v3_0/output/independent_window_runtime",
+      "--pmu-preflight"
+    ],
+    "cpu": -1,
+    "event_count": 3,
+    "events": [
+      {
+        "config": 118,
+        "id": 8301,
+        "index": 0,
+        "name": "cpu_cycles_not_halted"
+      },
+      {
+        "config": 8426,
+        "id": 8302,
+        "index": 1,
+        "name": "cache_block_commands_change_to_dirty"
+      },
+      {
+        "config": 3308,
+        "id": 8303,
+        "index": 2,
+        "name": "probe_responses_dirty"
+      }
+    ],
+    "exclude_hv": true,
+    "exclude_kernel": true,
+    "expected_read_size": 72,
+    "failed_event_index": -1,
+    "failure_stage": "",
+    "final_a_digest": "c816a7aba6b50383",
+    "final_b_digest": "c816a7aba6b50383",
+    "initial_a_digest": "c816a7aba6b50383",
+    "initial_b_digest": "c816a7aba6b50383",
+    "passed": true,
+    "perf_format_group": true,
+    "perf_format_id": true,
+    "perf_format_total_time_enabled": true,
+    "perf_format_total_time_running": true,
+    "pid": 0,
+    "preflight_change_to_dirty": 50,
+    "preflight_cpu_after": 5,
+    "preflight_cpu_before": 5,
+    "preflight_cycles": 4751,
+    "preflight_duration_ns": 11467,
+    "preflight_event_ids": [
+      8301,
+      8302,
+      8303
+    ],
+    "preflight_event_order_ok": true,
+    "preflight_failed_event_index": -1,
+    "preflight_open_errno": 0,
+    "preflight_opened": true,
+    "preflight_probe_dirty": 85,
+    "preflight_read_errno": 0,
+    "preflight_read_ok": true,
+    "preflight_time_enabled": 8231,
+    "preflight_time_running": 8231,
+    "preflight_unmultiplexed": true,
+    "receiver_core": 5,
+    "returncode": 0,
+    "schema_id": "CAT_CAS_INDEPENDENT_WINDOW_PMU_PREFLIGHT_V3",
+    "scientific_classification_emitted": false,
+    "status": "INDEPENDENT_WINDOW_V3_PMU_PREFLIGHT_OK",
+    "stderr": "",
+    "syscall_errno": 0
+  },
+  "policy_comparison": {
+    "after_phase": "after",
+    "before_phase": "before",
+    "failures": [],
+    "passed": true
+  },
+  "policy_snapshots": [
+    {
+      "phase": "before",
+      "policies": {
+        "4": {
+          "affected_cpus": "4",
+          "cpu_membership": [
+            4
+          ],
+          "policy_id": 4,
+          "related_cpus": "4",
+          "resolved_policy_path": "/sys/devices/system/cpu/cpufreq/policy4",
+          "scaling_cur_freq": "3200000",
+          "scaling_driver": "acpi-cpufreq",
+          "scaling_max_freq": "3200000",
+          "scaling_min_freq": "800000"
+        },
+        "5": {
+          "affected_cpus": "5",
+          "cpu_membership": [
+            5
+          ],
+          "policy_id": 5,
+          "related_cpus": "5",
+          "resolved_policy_path": "/sys/devices/system/cpu/cpufreq/policy5",
+          "scaling_cur_freq": "3200000",
+          "scaling_driver": "acpi-cpufreq",
+          "scaling_max_freq": "3200000",
+          "scaling_min_freq": "800000"
+        }
+      },
+      "timestamp_monotonic_ns": 210566794994886
+    },
+    {
+      "phase": "after",
+      "policies": {
+        "4": {
+          "affected_cpus": "4",
+          "cpu_membership": [
+            4
+          ],
+          "policy_id": 4,
+          "related_cpus": "4",
+          "resolved_policy_path": "/sys/devices/system/cpu/cpufreq/policy4",
+          "scaling_cur_freq": "3200000",
+          "scaling_driver": "acpi-cpufreq",
+          "scaling_max_freq": "3200000",
+          "scaling_min_freq": "800000"
+        },
+        "5": {
+          "affected_cpus": "5",
+          "cpu_membership": [
+            5
+          ],
+          "policy_id": 5,
+          "related_cpus": "5",
+          "resolved_policy_path": "/sys/devices/system/cpu/cpufreq/policy5",
+          "scaling_cur_freq": "3200000",
+          "scaling_driver": "acpi-cpufreq",
+          "scaling_max_freq": "3200000",
+          "scaling_min_freq": "800000"
+        }
+      },
+      "timestamp_monotonic_ns": 210568880601970
+    }
+  ],
+  "privilege_capability_snapshot": {
+    "cap_bnd": "000001ffffffffff",
+    "cap_eff": "000001ffffffffff",
+    "cap_perfmon_bounding": true,
+    "cap_perfmon_effective": true,
+    "cap_perfmon_permitted": true,
+    "cap_prm": "000001ffffffffff",
+    "capability_fields": {
+      "CapBnd": "000001ffffffffff",
+      "CapEff": "000001ffffffffff",
+      "CapPrm": "000001ffffffffff"
+    },
+    "effective_gid": 0,
+    "effective_uid": 0,
+    "effective_uid_zero_required": true,
+    "nonroot_cap_perfmon_path_supported": false,
+    "passed": true,
+    "real_gid": 0,
+    "real_uid": 0,
+    "status_path": "/proc/self/status"
+  },
+  "process_snapshots": [
+    {
+      "command": [
+        "ps",
+        "-eo",
+        "pid=,comm=,args="
+      ],
+      "forbidden_markers": [
+        "independent_window_runtime",
+        "confirmation_v2_runtime",
+        "balanced_transducer_runtime",
+        "orbit_query_runtime",
+        "f10_pmc_first_light_worker",
+        "gate_a_worker_live",
+        "combined_pdn_runner",
+        "run_combined_campaign"
+      ],
+      "forbidden_matches": [],
+      "identity_source": "comm_exe_or_interpreter_script_only",
+      "observed_process_count": 139,
+      "phase": "process_preflight",
+      "timestamp_monotonic_ns": 210566794218395
+    },
+    {
+      "command": [
+        "ps",
+        "-eo",
+        "pid=,comm=,args="
+      ],
+      "forbidden_markers": [
+        "independent_window_runtime",
+        "confirmation_v2_runtime",
+        "balanced_transducer_runtime",
+        "orbit_query_runtime",
+        "f10_pmc_first_light_worker",
+        "gate_a_worker_live",
+        "combined_pdn_runner",
+        "run_combined_campaign"
+      ],
+      "forbidden_matches": [],
+      "identity_source": "comm_exe_or_interpreter_script_only",
+      "observed_process_count": 139,
+      "phase": "after_replicate_0",
+      "timestamp_monotonic_ns": 210568077649105
+    },
+    {
+      "command": [
+        "ps",
+        "-eo",
+        "pid=,comm=,args="
+      ],
+      "forbidden_markers": [
+        "independent_window_runtime",
+        "confirmation_v2_runtime",
+        "balanced_transducer_runtime",
+        "orbit_query_runtime",
+        "f10_pmc_first_light_worker",
+        "gate_a_worker_live",
+        "combined_pdn_runner",
+        "run_combined_campaign"
+      ],
+      "forbidden_matches": [],
+      "identity_source": "comm_exe_or_interpreter_script_only",
+      "observed_process_count": 139,
+      "phase": "after_replicate_1",
+      "timestamp_monotonic_ns": 210568716635840
+    },
+    {
+      "command": [
+        "ps",
+        "-eo",
+        "pid=,comm=,args="
+      ],
+      "forbidden_markers": [
+        "independent_window_runtime",
+        "confirmation_v2_runtime",
+        "balanced_transducer_runtime",
+        "orbit_query_runtime",
+        "f10_pmc_first_light_worker",
+        "gate_a_worker_live",
+        "combined_pdn_runner",
+        "run_combined_campaign"
+      ],
+      "forbidden_matches": [],
+      "identity_source": "comm_exe_or_interpreter_script_only",
+      "observed_process_count": 139,
+      "phase": "final",
+      "timestamp_monotonic_ns": 210568907997391
+    }
+  ],
+  "replicate_states": {
+    "0": {
+      "began": true,
+      "completed": true
+    },
+    "1": {
+      "began": true,
+      "completed": true
+    }
+  },
+  "run_id": "independent_window_transducer_v3_0",
+  "runtime_schedule_validation": {
+    "command": [
+      "/root/catcas_live_small_wall/independent_window_transducer_v3_0/output/independent_window_runtime",
+      "--validate-schedule-tsv",
+      "/root/catcas_live_small_wall/independent_window_transducer_v3_0/output/INDEPENDENT_WINDOW_PUBLIC_SCHEDULE.tsv"
+    ],
+    "passed": true,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "INDEPENDENT_WINDOW_V3_SCHEDULE_TSV_OK"
+  },
+  "runtime_self_test": {
+    "command": [
+      "/root/catcas_live_small_wall/independent_window_transducer_v3_0/output/independent_window_runtime",
+      "--self-test"
+    ],
+    "passed": true,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "INDEPENDENT_WINDOW_V3_RUNTIME_SELF_TEST_OK"
+  },
+  "schema_id": "CAT_CAS_INDEPENDENT_WINDOW_LIVE_CUSTODY_LOG_V3",
+  "sysctl_writes": 0,
+  "temperature_observations": [
+    {
+      "below_veto": true,
+      "hwmon_path": "/sys/class/hwmon/hwmon0",
+      "input_path": "/sys/class/hwmon/hwmon0/temp1_input",
+      "phase": "before_compilation",
+      "raw_millidegrees_c": "52500",
+      "temperature_c": 52.5,
+      "timestamp_monotonic_ns": 210566796418443,
+      "veto_c": 68.0
+    },
+    {
+      "below_veto": true,
+      "hwmon_path": "/sys/class/hwmon/hwmon0",
+      "input_path": "/sys/class/hwmon/hwmon0/temp1_input",
+      "phase": "before_replicate_0",
+      "raw_millidegrees_c": "52500",
+      "temperature_c": 52.5,
+      "timestamp_monotonic_ns": 210567451060583,
+      "veto_c": 68.0
+    },
+    {
+      "below_veto": true,
+      "hwmon_path": "/sys/class/hwmon/hwmon0",
+      "input_path": "/sys/class/hwmon/hwmon0/temp1_input",
+      "phase": "after_replicate_0",
+      "raw_millidegrees_c": "52500",
+      "temperature_c": 52.5,
+      "timestamp_monotonic_ns": 210568042154163,
+      "veto_c": 68.0
+    },
+    {
+      "below_veto": true,
+      "hwmon_path": "/sys/class/hwmon/hwmon0",
+      "input_path": "/sys/class/hwmon/hwmon0/temp1_input",
+      "phase": "before_replicate_1",
+      "raw_millidegrees_c": "52500",
+      "temperature_c": 52.5,
+      "timestamp_monotonic_ns": 210568078767253,
+      "veto_c": 68.0
+    },
+    {
+      "below_veto": true,
+      "hwmon_path": "/sys/class/hwmon/hwmon0",
+      "input_path": "/sys/class/hwmon/hwmon0/temp1_input",
+      "phase": "after_replicate_1",
+      "raw_millidegrees_c": "52000",
+      "temperature_c": 52.0,
+      "timestamp_monotonic_ns": 210568683956093,
+      "veto_c": 68.0
+    },
+    {
+      "below_veto": true,
+      "hwmon_path": "/sys/class/hwmon/hwmon0",
+      "input_path": "/sys/class/hwmon/hwmon0/temp1_input",
+      "phase": "final",
+      "raw_millidegrees_c": "52375",
+      "temperature_c": 52.375,
+      "timestamp_monotonic_ns": 210568880894391,
+      "veto_c": 68.0
+    }
+  ],
+  "voltage_writes": 0
+}

@@ -1,0 +1,34 @@
+{
+  "adjudication_sha256": "2b0445c5110aca5b1630064c071ea18f0755aa89829b88618697cb3345cd7f43",
+  "adjudication_status": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE",
+  "allowed_classifications": [
+    "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CONFIRMED",
+    "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE",
+    "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED"
+  ],
+  "binary_custody_mode": "target_compile_bound_by_source_and_compiler_contract",
+  "component_window_count": 256,
+  "features_sha256": "3601718af96514755fff8e548fbf61df667f98587d350de600b6171b813298ae",
+  "forbidden_classifications": [
+    "BALANCED_PHYSICAL_TRANSDUCER_CALIBRATED",
+    "V1_PARTIAL_CONFIRMED",
+    "ORBITSTATE_PHYSICAL_QUERY_COUPLING_CANDIDATE",
+    "SMALL_WALL_CROSSED"
+  ],
+  "implementation_manifest_sha256": "811b922205c02d3ab05b2ec7a332a9c96e6aa4f7f144111221f2da48020a50fb",
+  "live_runtime_binary_sha256": "ef85ba8513cdd153dd31c5ba30c7be94240a75babfb20361d9585ef666e7b2a8",
+  "offline_validation_binary_sha256": "694e2d3699eb13a3e065aac93649e5bda2ca7b56beb341c4e16566bcb61a06c9",
+  "primary_coordinate": "change_to_dirty",
+  "raw_capture_sha256": "0c3ea99f1cd2a771980012a1f53e22677e48e7cd3778054744af41fa251aac2d",
+  "raw_record_count": 128,
+  "run_id": "independent_window_transducer_v3_0",
+  "schedule_json_sha256": "a1e07bd96005bf7c912c9fc3b1d632a60cf44d5d72c6dc33c2ba7275452033a8",
+  "schedule_tsv_sha256": "a8cb36dce7319329fa91f1046bfe821fbe3903f4db4f7775696bc55fd3939aa4",
+  "schema_id": "CAT_CAS_INDEPENDENT_WINDOW_TARGET_RESULT_V3",
+  "scientific_classification_emitted": true,
+  "sentinels_sha256": "6c8a48219874fff2126d29b2056383ec4caeeb2a519ee83eb418c2679a218fb8",
+  "source_bundle_sha256": "e8b7cd2262f07def56d21cad12148cac39596747ed5d5a02a512c61079b769cc",
+  "source_receipts_sha256": "402d1e436dafdca7d7beb1172c48b2c3ab57ac6787720174edb4786c23d70bf5",
+  "stage_receipts_sha256": "cf4586c09a94cdb4de5ef438151e5f8c7bfec76271e13056cca786a98de40992",
+  "status": "INDEPENDENT_WINDOW_V3_TARGET_COMPLETE"
+}
