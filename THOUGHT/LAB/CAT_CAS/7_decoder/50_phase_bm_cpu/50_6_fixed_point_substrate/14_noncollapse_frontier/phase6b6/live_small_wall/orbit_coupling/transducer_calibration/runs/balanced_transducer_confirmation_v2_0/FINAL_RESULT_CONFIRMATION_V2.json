@@ -1,0 +1,7 @@
+{
+  "failure_sha256": "95a2104044a068c6eba89c2b00fd3ac4fdb392a15f39127c33c89baa7a5f1eb9",
+  "run_id": "balanced_transducer_confirmation_v2_0",
+  "schema_id": "CAT_CAS_BALANCED_TRANSDUCER_CONFIRMATION_TARGET_RESULT_V2",
+  "scientific_classification_emitted": false,
+  "status": "CONFIRMATION_V2_TARGET_FAILED"
+}

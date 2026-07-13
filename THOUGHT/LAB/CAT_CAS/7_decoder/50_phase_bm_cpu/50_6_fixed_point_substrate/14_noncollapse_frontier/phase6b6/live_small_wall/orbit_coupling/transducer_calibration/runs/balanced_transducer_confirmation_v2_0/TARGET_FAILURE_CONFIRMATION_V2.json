@@ -1,0 +1,79 @@
+{
+  "exception_message": "perf_event_paranoid too restrictive",
+  "exception_type": "TargetError",
+  "failure_phase": "pmu_platform",
+  "hardware_execution_began": false,
+  "policy_snapshots": [
+    {
+      "phase": "before",
+      "policies": {
+        "4": {
+          "affected_cpus": "4",
+          "cpu_membership": [
+            4
+          ],
+          "policy_id": 4,
+          "related_cpus": "4",
+          "resolved_policy_path": "/sys/devices/system/cpu/cpufreq/policy4",
+          "scaling_cur_freq": "3200000",
+          "scaling_driver": "acpi-cpufreq",
+          "scaling_max_freq": "3200000",
+          "scaling_min_freq": "800000"
+        },
+        "5": {
+          "affected_cpus": "5",
+          "cpu_membership": [
+            5
+          ],
+          "policy_id": 5,
+          "related_cpus": "5",
+          "resolved_policy_path": "/sys/devices/system/cpu/cpufreq/policy5",
+          "scaling_cur_freq": "3200000",
+          "scaling_driver": "acpi-cpufreq",
+          "scaling_max_freq": "3200000",
+          "scaling_min_freq": "800000"
+        }
+      },
+      "timestamp_monotonic_ns": 199179601118644
+    }
+  ],
+  "process_snapshots": [
+    {
+      "command": [
+        "ps",
+        "-eo",
+        "pid=,comm=,args="
+      ],
+      "forbidden_markers": [
+        "confirmation_v2_runtime",
+        "balanced_transducer_runtime",
+        "orbit_query_runtime",
+        "f10_pmc_first_light_worker",
+        "gate_a_worker_live",
+        "combined_pdn_runner",
+        "run_combined_campaign"
+      ],
+      "forbidden_matches": [],
+      "identity_source": "comm_exe_or_interpreter_script_only",
+      "observed_process_count": 141,
+      "phase": "before_execution",
+      "timestamp_monotonic_ns": 199179600129208
+    }
+  ],
+  "replicates": {
+    "0": {
+      "began": false,
+      "completed": false
+    },
+    "1": {
+      "began": false,
+      "completed": false
+    }
+  },
+  "run_id": "balanced_transducer_confirmation_v2_0",
+  "schema_id": "CAT_CAS_CONFIRMATION_V2_TARGET_FAILURE",
+  "scientific_classification_emitted": false,
+  "source_and_schedule_hashes_verified_so_far": {},
+  "status": "CONFIRMATION_V2_TARGET_FAILED",
+  "temperature_observations": []
+}

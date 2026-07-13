@@ -6,7 +6,7 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`OWNED_RECOVERY_HISTORY_RESPONSE_NOT_ESTABLISHED`
+`CONFIRMATION_V2_TARGET_FAILED_PMU_PLATFORM`
 
 **Active wall:**
 The current wall is still carrier/access-model selection. Timing, ownership-intent PMU
@@ -2329,6 +2329,18 @@ coupling candidate, or `SMALL_WALL_CROSSED`. It requires the frozen prospective
 confirmation contract in
 `orbit_coupling/transducer_calibration/adjudication_v2/CONFIRMATION_CONTRACT_V2.md`
 before the retrospective-law concern can be removed.
+
+`balanced_transducer_confirmation_v2_0` consumed the single authorized frozen
+Confirmation V2 live invocation at commit
+`4af98a2db8d838c028ba09203b5619d0d13ab52a`. The target stopped before hardware
+execution, raw capture, restoration sentinels, or adjudication because the
+`pmu_platform` preflight rejected the target setting as `perf_event_paranoid too
+restrictive`. No fresh scientific classification was emitted, no replicates began,
+and no Sol read-only claim audit was triggered. Copied failure evidence is retained
+under
+`orbit_coupling/transducer_calibration/runs/balanced_transducer_confirmation_v2_0`;
+the remote failure root is intentionally retained at
+`/root/catcas_live_small_wall/balanced_transducer_confirmation_v2_0`.
 
 The next major scientific threshold is a physical coded pre-projection response with
 restoration and killing controls. `coded_preprojection_loop_2` is a restored physical

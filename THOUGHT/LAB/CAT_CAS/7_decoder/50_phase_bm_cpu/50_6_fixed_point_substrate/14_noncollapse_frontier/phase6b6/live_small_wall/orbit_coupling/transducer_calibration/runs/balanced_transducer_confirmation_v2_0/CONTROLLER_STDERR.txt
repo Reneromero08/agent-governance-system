@@ -1,0 +1,1 @@
+confirmation_v2_target: perf_event_paranoid too restrictive

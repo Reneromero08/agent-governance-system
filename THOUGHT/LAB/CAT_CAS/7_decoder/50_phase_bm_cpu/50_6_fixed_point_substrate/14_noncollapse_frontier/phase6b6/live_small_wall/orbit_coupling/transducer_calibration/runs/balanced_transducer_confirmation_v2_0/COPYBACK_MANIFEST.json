@@ -1,0 +1,25 @@
+{
+  "files": [
+    {
+      "path": "CONFIRMATION_V2_FAILURE_MANIFEST.json",
+      "sha256": "24594d2715c096c0e60baae70a06bf2a0ed23e3cea47c101f4bcbc814203b06a",
+      "size": 345
+    },
+    {
+      "path": "FINAL_RESULT_CONFIRMATION_V2.json",
+      "sha256": "436b36a9603fd1ad8a47897fd37a07d0f7f4810bb21047d17bca73ea9625f8ce",
+      "size": 311
+    },
+    {
+      "path": "LIVE_CUSTODY_LOG.json",
+      "sha256": "68c5a83cc687e2ea7f17257a85bbfaff56d0dda03810161f440105cdebae10cf",
+      "size": 1835
+    },
+    {
+      "path": "TARGET_FAILURE_CONFIRMATION_V2.json",
+      "sha256": "95a2104044a068c6eba89c2b00fd3ac4fdb392a15f39127c33c89baa7a5f1eb9",
+      "size": 2196
+    }
+  ],
+  "schema_id": "CAT_CAS_CONFIRMATION_V2_COPYBACK_MANIFEST"
+}
