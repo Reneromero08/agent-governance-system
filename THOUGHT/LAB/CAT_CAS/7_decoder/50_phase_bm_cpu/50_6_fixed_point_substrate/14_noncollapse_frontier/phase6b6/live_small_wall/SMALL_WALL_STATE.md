@@ -6,7 +6,7 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`CONFIRMATION_V2_TARGET_FAILED_PMU_PLATFORM`
+`V1_PARTIAL_V2_TRANSFER_CANDIDATE`
 
 **Active wall:**
 The current wall is still carrier/access-model selection. Timing, ownership-intent PMU
@@ -2341,6 +2341,32 @@ under
 `orbit_coupling/transducer_calibration/runs/balanced_transducer_confirmation_v2_0`;
 the remote failure root is intentionally retained at
 `/root/catcas_live_small_wall/balanced_transducer_confirmation_v2_0`.
+
+`balanced_transducer_confirmation_v2_1` consumed the single authorized retry-one live
+invocation at commit `e2e815ec067166652a57a5f540d99ed6f888c5b7`. The target completed:
+112 raw records, 112 restoration sentinels, runtime self-test passed, exact-event PMU
+preflight passed, policy/process/temperature custody passed, copy-back verified, and
+the retry-one remote root was removed after verified copy-back. The fresh adjudication
+remained `V1_PARTIAL_V2_TRANSFER_CANDIDATE`, not `V1_PARTIAL_CONFIRMED`, because
+`paired_logical_pointer_invariance_law` failed at aggregate scope and in replicate 0.
+Replicate 1 passed the full law set, restoration max error was 0.0, and the aggregate
+`change_to_dirty` ladder was q=-1536:-1903.4375, -1024:-1272.875, -512:-640.0625,
+0:-9.9375, +512:+641.25, +1024:+1265.25, +1536:+1885.4375. Evidence root:
+`orbit_coupling/transducer_calibration/runs/balanced_transducer_confirmation_v2_1`.
+Key hashes: live runtime
+`0a0e9df6c7a87b478b01eac8c834f6d57123c5e49e6a16e5c665438339c6b0db`, raw capture
+`105a919bd18b22e038a676ce9c3b985bd5d82340282560035ce593cc1c19b631`,
+restoration sentinels
+`811d7379f43b193623a670e30c922a3d627e5317bf4f2c56bafbbec641022167`, features
+`40573a1f87be5b96fe0351c44e3d36c2ffec49335a3a9b00402dde9332b4e4b4`,
+adjudication
+`a29853a1bbeb1164122faef226d7374576228961133452eb9d9b06188a599bff`,
+copyback manifest
+`335b9cb639d2e22f9b8b6dd395fede77bb879518563547b7015384f24dfdb856`.
+No Sol claim audit was triggered because the fresh result was not
+`V1_PARTIAL_CONFIRMED`. This does not establish
+`BALANCED_PHYSICAL_TRANSDUCER_CALIBRATED`, an OrbitState coupling candidate, or
+`SMALL_WALL_CROSSED`.
 
 The next major scientific threshold is a physical coded pre-projection response with
 restoration and killing controls. `coded_preprojection_loop_2` is a restored physical

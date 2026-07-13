@@ -1,0 +1,471 @@
+{
+  "adjudication_sha256": "a29853a1bbeb1164122faef226d7374576228961133452eb9d9b06188a599bff",
+  "adjudication_status": "V1_PARTIAL_V2_TRANSFER_CANDIDATE",
+  "binary_custody_mode": "target_compile_bound_by_source_and_compiler_contract",
+  "cache_set_mapping": false,
+  "compile_command": [
+    "cc",
+    "-std=c11",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-pedantic",
+    "-O2",
+    "-march=amdfam10",
+    "-mtune=amdfam10",
+    "-fno-lto",
+    "-pthread",
+    "-I",
+    "/root/catcas_live_small_wall/balanced_transducer_confirmation_v2_1/source",
+    "/root/catcas_live_small_wall/balanced_transducer_confirmation_v2_1/source/confirmation_v2_runtime.c",
+    "-o",
+    "/root/catcas_live_small_wall/balanced_transducer_confirmation_v2_1/source/confirmation_v2_runtime"
+  ],
+  "cpuinfo": {
+    "TLB size": "1024 4K pages",
+    "address sizes": "48 bits physical, 48 bits virtual",
+    "apicid": "0",
+    "bogomips": "6430.09",
+    "bugs": "tlb_mmatch fxsave_leak sysret_ss_attrs null_seg amd_e400 spectre_v1 spectre_v2",
+    "cache size": "512 KB",
+    "cache_alignment": "64",
+    "clflush size": "64",
+    "core id": "0",
+    "cpu MHz": "2847.488",
+    "cpu cores": "6",
+    "cpu family": "16",
+    "cpuid level": "6",
+    "flags": "fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni monitor cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr cpb hw_pstate vmmcall npt lbrv svm_lock nrip_save pausefilter",
+    "fpu": "yes",
+    "fpu_exception": "yes",
+    "initial apicid": "0",
+    "microcode": "0x10000dc",
+    "model": "10",
+    "model name": "AMD Phenom(tm) II X6 1090T Processor",
+    "physical id": "0",
+    "power management": "ts ttp tm stc 100mhzsteps hwpstate cpb",
+    "processor": "0",
+    "siblings": "6",
+    "stepping": "0",
+    "vendor_id": "AuthenticAMD",
+    "wp": "yes"
+  },
+  "features_sha256": "40573a1f87be5b96fe0351c44e3d36c2ffec49335a3a9b00402dde9332b4e4b4",
+  "frequency_writes": 0,
+  "live_runtime_binary_sha256": "0a0e9df6c7a87b478b01eac8c834f6d57123c5e49e6a16e5c665438339c6b0db",
+  "msr_reads": 0,
+  "msr_writes": 0,
+  "offline_validation_binary_sha256": "d187e5851282b85f2b9e05cc499d0e822b732e3beffe12ad78ba023209606876",
+  "physical_address_access": false,
+  "pmu_platform": {
+    "cores": {
+      "4": {
+        "online": "1",
+        "online_path": "/sys/devices/system/cpu/cpu4/online"
+      },
+      "5": {
+        "online": "1",
+        "online_path": "/sys/devices/system/cpu/cpu5/online"
+      }
+    },
+    "cpuinfo": {
+      "cpu_family": "16",
+      "flags": "fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni monitor cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr cpb hw_pstate vmmcall npt lbrv svm_lock nrip_save pausefilter",
+      "model": "10",
+      "model_name": "AMD Phenom(tm) II X6 1090T Processor",
+      "vendor_id": "AuthenticAMD"
+    },
+    "definitive_permission_gate": "exact_event_perf_event_open_preflight",
+    "event_source_cpu_type": "4",
+    "failures": [],
+    "format_dir": "/sys/bus/event_source/devices/cpu/format",
+    "formats": {
+      "cmask": "config:24-31",
+      "edge": "config:18",
+      "event": "config:0-7,32-35",
+      "inv": "config:23",
+      "umask": "config:8-15"
+    },
+    "identity": {
+      "cap_bnd": "000001ffffffffff",
+      "cap_eff": "000001ffffffffff",
+      "cap_perfmon_bounding": true,
+      "cap_perfmon_effective": true,
+      "cap_perfmon_permitted": true,
+      "cap_prm": "000001ffffffffff",
+      "capability_fields": {
+        "CapBnd": "000001ffffffffff",
+        "CapEff": "000001ffffffffff",
+        "CapPrm": "000001ffffffffff"
+      },
+      "effective_gid": 0,
+      "effective_uid": 0,
+      "effective_uid_zero_required": true,
+      "nonroot_cap_perfmon_path_supported": false,
+      "passed": true,
+      "real_gid": 0,
+      "real_uid": 0,
+      "status_path": "/proc/self/status"
+    },
+    "msr_reads": 0,
+    "msr_writes": 0,
+    "passed": true,
+    "perf_event_paranoid_numeric": true,
+    "perf_event_paranoid_raw": "3",
+    "perf_event_paranoid_semantics": "diagnostic_only_for_effective_uid_zero",
+    "perf_event_paranoid_value": 3,
+    "timestamp_monotonic_ns": 201629460394516
+  },
+  "pmu_preflight_began": true,
+  "pmu_preflight_completed": true,
+  "pmu_preflight_receipt": {
+    "actual_read_size": 72,
+    "bytes_unchanged": true,
+    "command": [
+      "/root/catcas_live_small_wall/balanced_transducer_confirmation_v2_1/source/confirmation_v2_runtime",
+      "--pmu-preflight"
+    ],
+    "cpu": -1,
+    "event_count": 3,
+    "events": [
+      {
+        "config": 118,
+        "id": 6282,
+        "index": 0,
+        "name": "cpu_cycles_not_halted"
+      },
+      {
+        "config": 8426,
+        "id": 6283,
+        "index": 1,
+        "name": "cache_block_commands_change_to_dirty"
+      },
+      {
+        "config": 3308,
+        "id": 6284,
+        "index": 2,
+        "name": "probe_responses_dirty"
+      }
+    ],
+    "exclude_hv": true,
+    "exclude_kernel": true,
+    "expected_read_size": 72,
+    "failed_event_index": -1,
+    "failure_stage": "",
+    "final_a_digest": 14417895612751348611,
+    "final_b_digest": 14417895612751348611,
+    "initial_a_digest": 14417895612751348611,
+    "initial_b_digest": 14417895612751348611,
+    "passed": true,
+    "pid": 0,
+    "preflight_change_to_dirty": 52,
+    "preflight_cpu_after": 5,
+    "preflight_cpu_before": 5,
+    "preflight_cycles": 5264,
+    "preflight_duration_ns": 11147,
+    "preflight_event_ids": [
+      6282,
+      6283,
+      6284
+    ],
+    "preflight_event_order_ok": true,
+    "preflight_open_errno": 0,
+    "preflight_opened": true,
+    "preflight_probe_dirty": 78,
+    "preflight_read_errno": 0,
+    "preflight_read_ok": true,
+    "preflight_time_enabled": 7986,
+    "preflight_time_running": 7986,
+    "preflight_unmultiplexed": true,
+    "receiver_core": 5,
+    "returncode": 0,
+    "schema_id": "CAT_CAS_CONFIRMATION_V2_PMU_PREFLIGHT",
+    "scientific_classification_emitted": false,
+    "status": "CONFIRMATION_V2_PMU_PREFLIGHT_OK",
+    "stderr": "",
+    "syscall_errno": 0
+  },
+  "policy_comparison": {
+    "failures": [],
+    "frequency_writes": 0,
+    "passed": true,
+    "scaling_cur_freq_diagnostic_only": true
+  },
+  "policy_snapshots": [
+    {
+      "phase": "before",
+      "policies": {
+        "4": {
+          "affected_cpus": "4",
+          "cpu_membership": [
+            4
+          ],
+          "policy_id": 4,
+          "related_cpus": "4",
+          "resolved_policy_path": "/sys/devices/system/cpu/cpufreq/policy4",
+          "scaling_cur_freq": "3200000",
+          "scaling_driver": "acpi-cpufreq",
+          "scaling_max_freq": "3200000",
+          "scaling_min_freq": "800000"
+        },
+        "5": {
+          "affected_cpus": "5",
+          "cpu_membership": [
+            5
+          ],
+          "policy_id": 5,
+          "related_cpus": "5",
+          "resolved_policy_path": "/sys/devices/system/cpu/cpufreq/policy5",
+          "scaling_cur_freq": "3200000",
+          "scaling_driver": "acpi-cpufreq",
+          "scaling_max_freq": "3200000",
+          "scaling_min_freq": "800000"
+        }
+      },
+      "timestamp_monotonic_ns": 201629458420865
+    },
+    {
+      "phase": "after",
+      "policies": {
+        "4": {
+          "affected_cpus": "4",
+          "cpu_membership": [
+            4
+          ],
+          "policy_id": 4,
+          "related_cpus": "4",
+          "resolved_policy_path": "/sys/devices/system/cpu/cpufreq/policy4",
+          "scaling_cur_freq": "3200000",
+          "scaling_driver": "acpi-cpufreq",
+          "scaling_max_freq": "3200000",
+          "scaling_min_freq": "800000"
+        },
+        "5": {
+          "affected_cpus": "5",
+          "cpu_membership": [
+            5
+          ],
+          "policy_id": 5,
+          "related_cpus": "5",
+          "resolved_policy_path": "/sys/devices/system/cpu/cpufreq/policy5",
+          "scaling_cur_freq": "3200000",
+          "scaling_driver": "acpi-cpufreq",
+          "scaling_max_freq": "3200000",
+          "scaling_min_freq": "800000"
+        }
+      },
+      "timestamp_monotonic_ns": 201630680883167
+    }
+  ],
+  "primary_coordinate": "change_to_dirty",
+  "process_snapshots": [
+    {
+      "command": [
+        "ps",
+        "-eo",
+        "pid=,comm=,args="
+      ],
+      "forbidden_markers": [
+        "confirmation_v2_runtime",
+        "balanced_transducer_runtime",
+        "orbit_query_runtime",
+        "f10_pmc_first_light_worker",
+        "gate_a_worker_live",
+        "combined_pdn_runner",
+        "run_combined_campaign"
+      ],
+      "forbidden_matches": [],
+      "identity_source": "comm_exe_or_interpreter_script_only",
+      "observed_process_count": 139,
+      "phase": "before_execution",
+      "timestamp_monotonic_ns": 201629457430726
+    },
+    {
+      "command": [
+        "ps",
+        "-eo",
+        "pid=,comm=,args="
+      ],
+      "forbidden_markers": [
+        "confirmation_v2_runtime",
+        "balanced_transducer_runtime",
+        "orbit_query_runtime",
+        "f10_pmc_first_light_worker",
+        "gate_a_worker_live",
+        "combined_pdn_runner",
+        "run_combined_campaign"
+      ],
+      "forbidden_matches": [],
+      "identity_source": "comm_exe_or_interpreter_script_only",
+      "observed_process_count": 139,
+      "phase": "after_replicate_0",
+      "timestamp_monotonic_ns": 201630339745652
+    },
+    {
+      "command": [
+        "ps",
+        "-eo",
+        "pid=,comm=,args="
+      ],
+      "forbidden_markers": [
+        "confirmation_v2_runtime",
+        "balanced_transducer_runtime",
+        "orbit_query_runtime",
+        "f10_pmc_first_light_worker",
+        "gate_a_worker_live",
+        "combined_pdn_runner",
+        "run_combined_campaign"
+      ],
+      "forbidden_matches": [],
+      "identity_source": "comm_exe_or_interpreter_script_only",
+      "observed_process_count": 139,
+      "phase": "after_replicate_1",
+      "timestamp_monotonic_ns": 201630584381150
+    },
+    {
+      "command": [
+        "ps",
+        "-eo",
+        "pid=,comm=,args="
+      ],
+      "forbidden_markers": [
+        "confirmation_v2_runtime",
+        "balanced_transducer_runtime",
+        "orbit_query_runtime",
+        "f10_pmc_first_light_worker",
+        "gate_a_worker_live",
+        "combined_pdn_runner",
+        "run_combined_campaign"
+      ],
+      "forbidden_matches": [],
+      "identity_source": "comm_exe_or_interpreter_script_only",
+      "observed_process_count": 139,
+      "phase": "final_success",
+      "timestamp_monotonic_ns": 201630703212765
+    }
+  ],
+  "raw_capture_sha256": "105a919bd18b22e038a676ce9c3b985bd5d82340282560035ce593cc1c19b631",
+  "raw_record_count": 112,
+  "replicate_0_began": true,
+  "replicate_0_completed": true,
+  "replicate_1_began": true,
+  "replicate_1_completed": true,
+  "restoration_sentinels_sha256": "811d7379f43b193623a670e30c922a3d627e5317bf4f2c56bafbbec641022167",
+  "run_id": "balanced_transducer_confirmation_v2_1",
+  "runtime_binary_self_test": {
+    "command": [
+      "/root/catcas_live_small_wall/balanced_transducer_confirmation_v2_1/source/confirmation_v2_runtime",
+      "--self-test"
+    ],
+    "passed": true,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "CONFIRMATION_V2_RUNTIME_SELF_TEST_OK"
+  },
+  "runtime_binary_sha256": "0a0e9df6c7a87b478b01eac8c834f6d57123c5e49e6a16e5c665438339c6b0db",
+  "runtime_duration_ns": 1274089848,
+  "runtime_results": [
+    {
+      "command": [
+        "/root/catcas_live_small_wall/balanced_transducer_confirmation_v2_1/source/confirmation_v2_runtime",
+        "--schedule-tsv",
+        "/root/catcas_live_small_wall/balanced_transducer_confirmation_v2_1/output/CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.tsv",
+        "--output-root",
+        "/root/catcas_live_small_wall/balanced_transducer_confirmation_v2_1/output/batch_0",
+        "--replicate",
+        "0"
+      ],
+      "replicate": 0,
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/root/catcas_live_small_wall/balanced_transducer_confirmation_v2_1/source/confirmation_v2_runtime",
+        "--schedule-tsv",
+        "/root/catcas_live_small_wall/balanced_transducer_confirmation_v2_1/output/CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.tsv",
+        "--output-root",
+        "/root/catcas_live_small_wall/balanced_transducer_confirmation_v2_1/output/batch_1",
+        "--replicate",
+        "1"
+      ],
+      "replicate": 1,
+      "returncode": 0
+    }
+  ],
+  "schedule_json_sha256": "86eaa3286240e7c344ba058c5ff10bb776fdd0d076b00ee512ee1e564b378f66",
+  "schedule_tsv_sha256": "570f165d4a24dff4680bc60046dd62523e9d596dffb4fac381da850df072c744",
+  "schema_id": "CAT_CAS_BALANCED_TRANSDUCER_CONFIRMATION_TARGET_RESULT_V2",
+  "sentinel_record_count": 112,
+  "source_bundle_sha256": "a670684fea5ed1e383e84923021fbb0b633557ade932e9501f3337bf6ae50517",
+  "source_hashes": {
+    "ADJUDICATION_LAW_AUDIT.md": "8e8f452769349eca152f0409c04456092774664c0ad54fa7ed9b10f336477335",
+    "CONFIRMATION_CONTRACT_V2.md": "6a0dee41851f417d6572facad7880d2bb92a364e46ceb4f9c5bc6b00890bead4",
+    "CONFIRMATION_CONTRACT_V2_RETRY1.md": "678a206198b84a8ea5802d0f6b5c41d08b161ecf0460de96366ad9c3fb43bdb3",
+    "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.json": "86eaa3286240e7c344ba058c5ff10bb776fdd0d076b00ee512ee1e564b378f66",
+    "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.sha256": "407e8f48a030368d11df0c32ede76b194f081eca044e38bfa6a776be8818bc79",
+    "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.tsv": "570f165d4a24dff4680bc60046dd62523e9d596dffb4fac381da850df072c744",
+    "CONFIRMATION_V2_RETRY1_GEOMETRY_RECEIPT.json": "3cb427edc036f211ae233dc7af66a2112df32395c089c61fe4704f303fc5366d",
+    "CONFIRMATION_V2_RETRY1_SOL_AUDIT.json": "f1c1b9a26e39cd6e0cf7072e5172132a1e4e52f6b35faa50ce1cd9be02e2649c",
+    "balanced_transducer_adjudication_v2.py": "042f9b38ccf8d8e375cfad00e02156a1645e28c65cb9651db5f0f4d3ccf3c971",
+    "balanced_transducer_public.py": "0addae6e1c1d4dc587e1eaf807b4bc4e098936e5001dc48faebde8fab7a388f3",
+    "confirmation_v2_public.py": "d8fe0094a385c8bf1a60125aeb477268e3b3589c455b02e435d8d2107e587e26",
+    "confirmation_v2_runtime.c": "f3d55a5d8ef3b65e7b9eb00d9962ca860a9f030acb03bd6e1b64d937ba28b310",
+    "confirmation_v2_runtime.h": "76f654ee902dfdad5dddaea643a551e9799a1532842cc46173ed9f78814ce07c",
+    "confirmation_v2_target.py": "8fa3ecf0d0f1642174c24530b02f9794bb8567d9b6cd173110d386ceb65d0c54",
+    "run_confirmation_v2.py": "d4c72b572f6647987c4b434f7b480a065a29c1357fe25b898a2613543cc329a1"
+  },
+  "status": "CONFIRMATION_V2_TARGET_COMPLETE",
+  "temperature_observations": [
+    {
+      "below_veto": true,
+      "hwmon_path": "/sys/class/hwmon/hwmon0",
+      "input_path": "/sys/class/hwmon/hwmon0/temp1_input",
+      "phase": "before_compilation",
+      "raw_millidegrees_c": "51000",
+      "temperature_c": 51.0,
+      "timestamp_monotonic_ns": 201629463568316,
+      "veto_c": 68.0
+    },
+    {
+      "below_veto": true,
+      "hwmon_path": "/sys/class/hwmon/hwmon0",
+      "input_path": "/sys/class/hwmon/hwmon0/temp1_input",
+      "phase": "after_pmu_preflight",
+      "raw_millidegrees_c": "51000",
+      "temperature_c": 51.0,
+      "timestamp_monotonic_ns": 201630100267743,
+      "veto_c": 68.0
+    },
+    {
+      "below_veto": true,
+      "hwmon_path": "/sys/class/hwmon/hwmon0",
+      "input_path": "/sys/class/hwmon/hwmon0/temp1_input",
+      "phase": "after_replicate_0",
+      "raw_millidegrees_c": "51125",
+      "temperature_c": 51.125,
+      "timestamp_monotonic_ns": 201630303307630,
+      "veto_c": 68.0
+    },
+    {
+      "below_veto": true,
+      "hwmon_path": "/sys/class/hwmon/hwmon0",
+      "input_path": "/sys/class/hwmon/hwmon0/temp1_input",
+      "phase": "after_replicate_1",
+      "raw_millidegrees_c": "51250",
+      "temperature_c": 51.25,
+      "timestamp_monotonic_ns": 201630549580703,
+      "veto_c": 68.0
+    },
+    {
+      "below_veto": true,
+      "hwmon_path": "/sys/class/hwmon/hwmon0",
+      "input_path": "/sys/class/hwmon/hwmon0/temp1_input",
+      "phase": "final_success",
+      "raw_millidegrees_c": "51125",
+      "temperature_c": 51.125,
+      "timestamp_monotonic_ns": 201630681622300,
+      "veto_c": 68.0
+    }
+  ],
+  "voltage_writes": 0
+}

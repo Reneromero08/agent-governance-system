@@ -1,0 +1,30 @@
+{
+  "adjudication_sha256": "e581fe96c6955f4a51b4d21701ed6905b15c355a9ddf4a7713b829c8e06536e0",
+  "allowed_classifications": [
+    "V1_PARTIAL_CONFIRMED",
+    "V1_PARTIAL_V2_TRANSFER_CANDIDATE",
+    "V1_PARTIAL_V2_NOT_ESTABLISHED"
+  ],
+  "binary_custody_mode": "target_compile_bound_by_source_and_compiler_contract",
+  "features_sha256": "3b2be90d58b0d0c60e259dc48e6f2e8e2ec372a2e47a8dd613ab401c07657ee7",
+  "final_result_sha256": "84fcec1ae80e7e5842acd89fd737a1f4ffbcd4d2fb365f3c2e7a5a9e79325e3f",
+  "forbidden_classifications": [
+    "BALANCED_PHYSICAL_TRANSDUCER_CALIBRATED",
+    "ORBITSTATE_PHYSICAL_QUERY_COUPLING_CANDIDATE",
+    "SMALL_WALL_CROSSED"
+  ],
+  "implementation_manifest_sha256": "49b16bf60e1ff04f5a50716fdd11e9af506d7d6d3a2d6cf7e7ca10a660c5e1bd",
+  "live_runtime_binary_sha256": "0a0e9df6c7a87b478b01eac8c834f6d57123c5e49e6a16e5c665438339c6b0db",
+  "manifest_sha256": "17a8382c0f577bb44e985b00a996c50e0d7ef676258a3a7ec3949982774dc7a4",
+  "offline_validation_binary_sha256": "d187e5851282b85f2b9e05cc499d0e822b732e3beffe12ad78ba023209606876",
+  "primary_coordinate": "change_to_dirty",
+  "raw_capture_sha256": "105a919bd18b22e038a676ce9c3b985bd5d82340282560035ce593cc1c19b631",
+  "raw_record_count": 112,
+  "restoration_sentinels_sha256": "811d7379f43b193623a670e30c922a3d627e5317bf4f2c56bafbbec641022167",
+  "run_id": "balanced_transducer_confirmation_v2_1",
+  "schedule_json_sha256": "86eaa3286240e7c344ba058c5ff10bb776fdd0d076b00ee512ee1e564b378f66",
+  "schedule_tsv_sha256": "570f165d4a24dff4680bc60046dd62523e9d596dffb4fac381da850df072c744",
+  "schema_id": "CAT_CAS_CONFIRMATION_V2_MANIFEST",
+  "sentinel_record_count": 112,
+  "source_bundle_sha256": "a670684fea5ed1e383e84923021fbb0b633557ade932e9501f3337bf6ae50517"
+}
