@@ -1,0 +1,18 @@
+{
+  "checks": {
+    "adjudication_cli_receiver_features_argument": true,
+    "adjudication_subprocess": true,
+    "feature_hash_frozen_before_adjudication": true,
+    "feature_mutation_rejected": true,
+    "private_validator_subprocess": true,
+    "public_schedule_validation_split": true,
+    "receiver_feature_subprocess": true,
+    "receiver_subprocess_denies_private_paths": true,
+    "receiver_subprocess_has_no_private_args": true,
+    "receiver_subprocess_isolated_inputs": true
+  },
+  "feature_boundary_self_test_sha256": "62423d34d6fb71d8a94c8b0a7e47bb86579375f202443ec9b60bee29827e6cea",
+  "passed": true,
+  "schema": "ORBITSTATE_FEATURE_BOUNDARY_SELF_TEST_V2",
+  "zero_live_contact": true
+}

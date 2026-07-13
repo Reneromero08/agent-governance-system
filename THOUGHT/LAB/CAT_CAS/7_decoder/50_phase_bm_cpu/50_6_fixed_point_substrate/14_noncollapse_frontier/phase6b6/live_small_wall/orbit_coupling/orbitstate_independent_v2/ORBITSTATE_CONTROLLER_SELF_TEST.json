@@ -1,16 +1,18 @@
 {
   "failure_exit_status_law": {
-    "copyback_failure_status": "ORBITSTATE_CONTROLLER_TARGET_FAILED",
+    "cleanup_failure_status": "ORBITSTATE_CONTROLLER_CLEANUP_FAILED",
+    "copyback_sha_mismatch_status": "ORBITSTATE_CONTROLLER_SUCCESS_EVIDENCE_INVALID",
+    "copyback_size_mismatch_status": "ORBITSTATE_CONTROLLER_SUCCESS_EVIDENCE_INVALID",
     "passed": true,
     "success_status": "ORBITSTATE_CONTROLLER_TARGET_COMPLETE",
-    "target_failure_status": "ORBITSTATE_CONTROLLER_TARGET_FAILED"
+    "target_failure_status": "ORBITSTATE_CONTROLLER_TARGET_FAILED_EVIDENCE_RETAINED"
   },
   "schema": "ORBITSTATE_CONTROLLER_SELF_TEST_V2",
   "self_test_passed": true,
-  "self_test_sha256": "aad0ceb024082841371c66ab9c6f40a0b8cc3e202d00726e7a1b34e51d1ef01e",
+  "self_test_sha256": "bad7ffe1e9da7632b06bf2569a89016b9b030a859e800f1919a0e76d1745ce77",
   "transport_passed": true,
-  "transport_simulation_sha256": "5e29d8e32dd682e675d6e5f89e5c99d33196955f0db184cdb199fef1d61d8b02",
+  "transport_simulation_sha256": "726628b397a766d6059a27f5eaeab860c1d17f6c4e2ca547bd23a1760836a49b",
   "validate_only_passed": true,
-  "validate_only_sha256": "17106c1900a9a624797c607f675212450bb7dd28a72d6f03bfe78736c5c8b89a",
+  "validate_only_stable_sha256": "7522412fb1388968858cd761b60673a010d24ef0f3a242fa79c5473d665b734c",
   "zero_live_contact": true
 }

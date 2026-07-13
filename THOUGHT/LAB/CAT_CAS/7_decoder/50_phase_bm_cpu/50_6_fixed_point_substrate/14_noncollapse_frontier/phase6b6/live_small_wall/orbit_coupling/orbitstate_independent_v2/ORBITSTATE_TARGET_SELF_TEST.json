@@ -1,8 +1,75 @@
 {
+  "failure_copyback_self_test": {
+    "copyback_coverage_exact": true,
+    "copyback_manifest_self_digest": true,
+    "ownership_marker_absent": true,
+    "passed": true,
+    "required_failure_files_listed": true,
+    "result_class_absent": true,
+    "scientific_classification_emitted": false
+  },
+  "feature_boundary_static_proof": {
+    "checks": {
+      "adjudication_cli_receiver_features_argument": true,
+      "adjudication_subprocess": true,
+      "feature_hash_frozen_before_adjudication": true,
+      "feature_mutation_rejected": true,
+      "private_validator_subprocess": true,
+      "public_schedule_validation_split": true,
+      "receiver_feature_subprocess": true,
+      "receiver_subprocess_denies_private_paths": true,
+      "receiver_subprocess_has_no_private_args": true,
+      "receiver_subprocess_isolated_inputs": true
+    },
+    "feature_boundary_self_test_sha256": "62423d34d6fb71d8a94c8b0a7e47bb86579375f202443ec9b60bee29827e6cea",
+    "passed": true,
+    "schema": "ORBITSTATE_FEATURE_BOUNDARY_SELF_TEST_V2",
+    "zero_live_contact": true
+  },
   "offline_validate_passed": true,
-  "offline_validate_sha256": "39c6222704d640457d5782f2300a7457e759e2916917e81c922f579c493089cf",
+  "offline_validate_sha256": "2d049a8d111b4a415092a582ca2f0a17358ced3b947f77e82ea866e541be3d98",
+  "physical_protocol_static_proof": {
+    "checks": {
+      "affine_line_permutation": true,
+      "dummy_bank_separate": true,
+      "full_two_bank_baseline": true,
+      "full_two_bank_rebaseline": true,
+      "full_two_bank_restoration": true,
+      "identical_bank_bytes": true,
+      "pair_allocation": true,
+      "sequential_modulo_not_used": true,
+      "source_off_dummy_only": true,
+      "stage_receipt_count_contract": true,
+      "v3_pattern_materialization": true,
+      "v3_segmented_sentinels": true
+    },
+    "passed": true
+  },
+  "pmu_runtime_static_proof": {
+    "checks": {
+      "complete_group_count_checked": true,
+      "event_ids_checked": true,
+      "group_read_format": true,
+      "hardcoded_cycles_removed": true,
+      "multiplexing_checked": true,
+      "no_system_wide_cpu_counting": true,
+      "pmu_preflight_present": true,
+      "positive_cycles_checked": true,
+      "process_scoped_pid_zero": true,
+      "read_size_checked": true,
+      "receiver_cpu_checked": true,
+      "userspace_only": true
+    },
+    "passed": true
+  },
+  "root_custody_self_test": {
+    "existing_output_root_preserved": true,
+    "existing_output_root_rejected": true,
+    "fresh_output_root_created": true,
+    "passed": true
+  },
   "schema": "ORBITSTATE_TARGET_SELF_TEST_V2",
   "self_test_passed": true,
-  "self_test_sha256": "36c5e6d395d79061fca331194cb80a269a445487a95aad272abcbc2e07f99090",
+  "self_test_sha256": "0e4c8905324bdea8dcdd8d164d9a574676268d3bdd2fdd16095ba44a8ed97a22",
   "zero_live_contact": true
 }

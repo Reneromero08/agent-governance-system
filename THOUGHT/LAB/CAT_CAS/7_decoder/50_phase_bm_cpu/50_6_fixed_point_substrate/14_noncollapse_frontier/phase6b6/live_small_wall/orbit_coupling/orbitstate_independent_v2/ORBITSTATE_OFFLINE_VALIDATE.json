@@ -19,20 +19,82 @@
     ]
   },
   "disassembly": {
-    "line_count": 2806,
+    "line_count": 3618,
     "passed": true,
     "path": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_RUNTIME_DISASSEMBLY_NORMALIZED.txt",
-    "sha256": "a0485bce7547eefe9521b47f30dbd753bae5a26cc2b07d18c96bd970946dd7de"
+    "sha256": "58d1d5e844da302202cef2d8eebaca8d02e5f9e2ac8a3c747e443f0e8ea39a71"
+  },
+  "failure_copyback_self_test": {
+    "copyback_coverage_exact": true,
+    "copyback_manifest_self_digest": true,
+    "ownership_marker_absent": true,
+    "passed": true,
+    "required_failure_files_listed": true,
+    "result_class_absent": true,
+    "scientific_classification_emitted": false
+  },
+  "feature_boundary_static_proof": {
+    "checks": {
+      "adjudication_cli_receiver_features_argument": true,
+      "adjudication_subprocess": true,
+      "feature_hash_frozen_before_adjudication": true,
+      "feature_mutation_rejected": true,
+      "private_validator_subprocess": true,
+      "public_schedule_validation_split": true,
+      "receiver_feature_subprocess": true,
+      "receiver_subprocess_denies_private_paths": true,
+      "receiver_subprocess_has_no_private_args": true,
+      "receiver_subprocess_isolated_inputs": true
+    },
+    "feature_boundary_self_test_sha256": "62423d34d6fb71d8a94c8b0a7e47bb86579375f202443ec9b60bee29827e6cea",
+    "passed": true,
+    "schema": "ORBITSTATE_FEATURE_BOUNDARY_SELF_TEST_V2",
+    "zero_live_contact": true
   },
   "hardware_executions": 0,
   "network_connections": 0,
-  "offline_validate_sha256": "39c6222704d640457d5782f2300a7457e759e2916917e81c922f579c493089cf",
+  "offline_validate_sha256": "2d049a8d111b4a415092a582ca2f0a17358ced3b947f77e82ea866e541be3d98",
   "passed": true,
+  "physical_protocol_static_proof": {
+    "checks": {
+      "affine_line_permutation": true,
+      "dummy_bank_separate": true,
+      "full_two_bank_baseline": true,
+      "full_two_bank_rebaseline": true,
+      "full_two_bank_restoration": true,
+      "identical_bank_bytes": true,
+      "pair_allocation": true,
+      "sequential_modulo_not_used": true,
+      "source_off_dummy_only": true,
+      "stage_receipt_count_contract": true,
+      "v3_pattern_materialization": true,
+      "v3_segmented_sentinels": true
+    },
+    "passed": true
+  },
+  "pmu_runtime_static_proof": {
+    "checks": {
+      "complete_group_count_checked": true,
+      "event_ids_checked": true,
+      "group_read_format": true,
+      "hardcoded_cycles_removed": true,
+      "multiplexing_checked": true,
+      "no_system_wide_cpu_counting": true,
+      "pmu_preflight_present": true,
+      "positive_cycles_checked": true,
+      "process_scoped_pid_zero": true,
+      "read_size_checked": true,
+      "receiver_cpu_checked": true,
+      "userspace_only": true
+    },
+    "passed": true
+  },
   "process_boundary_static_proof": {
     "passed": true,
     "receiver_parses_private_map": false,
     "source_child_after_process_separation": true,
-    "source_child_opens_private_map": true
+    "source_child_opens_private_map": true,
+    "source_cpu_recorded": true
   },
   "public_manifest_blindness": {
     "forbidden_hits": [],
@@ -40,9 +102,15 @@
   },
   "public_self_test_passed": true,
   "public_self_test_sha256": "e8528bccbd3a9b3a919f189d8b2c5cf01b8e692694d6e9f7d2a252fc7a6d2b59",
+  "root_custody_self_test": {
+    "existing_output_root_preserved": true,
+    "existing_output_root_rejected": true,
+    "fresh_output_root_created": true,
+    "passed": true
+  },
   "runtime_compile": {
     "binary": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_runtime",
-    "binary_sha256": "f6c8f43f4b780b40350dca2789ced4a4559d5a5cce218f25c1fef330bdd74f83",
+    "binary_sha256": "a2b7a5c834350516a57839b80dc36163b674a3e1dedf152a42a84f509b7e67a7",
     "command": [
       "wsl",
       "--",
@@ -83,6 +151,7 @@
   },
   "runtime_schedule_validation": {
     "data": {
+      "mapping_pair_allocation": "grouped_two_leg_pairs",
       "replicate_0": 72,
       "replicate_1": 72,
       "rows": 144,
@@ -91,10 +160,12 @@
     "passed": true,
     "returncode": 0,
     "stderr": "",
-    "stdout": "{\"status\":\"ORBITSTATE_PUBLIC_SCHEDULE_TSV_OK\",\"rows\":144,\"replicate_0\":72,\"replicate_1\":72}\n"
+    "stdout": "{\"status\":\"ORBITSTATE_PUBLIC_SCHEDULE_TSV_OK\",\"rows\":144,\"replicate_0\":72,\"replicate_1\":72,\"mapping_pair_allocation\":\"grouped_two_leg_pairs\"}\n"
   },
   "runtime_self_test": {
     "data": {
+      "affine_line_permutation": "line(i)=(257*i+43) mod 4096",
+      "bank_initialization": "physical A and B identical",
       "d_q0": 1298,
       "d_q1": 822,
       "fold_q0": 1298,
@@ -106,36 +177,82 @@
     "passed": true,
     "returncode": 0,
     "stderr": "",
-    "stdout": "{\"status\":\"ORBITSTATE_RUNTIME_SELF_TEST_OK\",\"d_q0\":1298,\"fold_q0\":1298,\"d_q1\":822,\"polarity_q0\":-1298,\"source_off_q\":0,\"process_boundary\":\"source_child_opens_private_map_after_fork\"}\n"
+    "stdout": "{\"status\":\"ORBITSTATE_RUNTIME_SELF_TEST_OK\",\"d_q0\":1298,\"fold_q0\":1298,\"d_q1\":822,\"polarity_q0\":-1298,\"source_off_q\":0,\"affine_line_permutation\":\"line(i)=(257*i+43) mod 4096\",\"bank_initialization\":\"physical A and B identical\",\"process_boundary\":\"source_child_opens_private_map_after_fork\"}\n"
   },
   "schedule": {
     "mapping_leg_records": 144,
     "passed": true,
-    "private_source_map_sha256": "b952f2a161e782dfe41e9dfca21ba4f6bf2902bc69392d9ad52915daa3955464",
-    "public_reference_sha256": "dd631d80c2a6693e8873f16246c13812f5f9e2339f44379f2464e5cde20db638",
-    "public_schedule_canonical_sha256": "c0c0e826d6a3549d7f9cbc993e87754b5aee5a2196c3da3e09185bb204ef8bd6",
-    "public_schedule_json_sha256": "709063e1d789971f8ac36d2fc94094738015150baae8e75065909c774a079b7b",
-    "public_schedule_tsv_sha256": "57aaf5635e0ea1bcecd17f6efc0383f6ce08a893751d9203d1c87b0e4c7a7876"
+    "private_source_map_validator": {
+      "canonical_sha256": "b952f2a161e782dfe41e9dfca21ba4f6bf2902bc69392d9ad52915daa3955464",
+      "file_sha256": "619189f66d32610053c3899616d656d16a21814a45074191f37f95acdbf58325",
+      "passed": true,
+      "record_count": 144,
+      "schema_identifier": "ORBITSTATE_PRIVATE_SOURCE_MAP_V2"
+    },
+    "public_schedule": {
+      "mapping_leg_records": 144,
+      "passed": true,
+      "public_reference_sha256": "dd631d80c2a6693e8873f16246c13812f5f9e2339f44379f2464e5cde20db638",
+      "public_schedule_canonical_sha256": "c0c0e826d6a3549d7f9cbc993e87754b5aee5a2196c3da3e09185bb204ef8bd6",
+      "public_schedule_json_sha256": "709063e1d789971f8ac36d2fc94094738015150baae8e75065909c774a079b7b",
+      "public_schedule_tsv_sha256": "57aaf5635e0ea1bcecd17f6efc0383f6ce08a893751d9203d1c87b0e4c7a7876"
+    }
   },
   "schema": "ORBITSTATE_TARGET_OFFLINE_VALIDATE_V2",
   "source_bundle": {
     "file_count": 12,
     "path": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_SOURCE_BUNDLE.tar.gz",
-    "sha256": "10eb4c48ee8b1c2e8f4371f6b2a8c7a022359e4c27105ee86fe1bcf83c549b0d"
+    "sha256": "f100fe46afdc57d72c1c0448a97adb6081008ffa5b0d990f977f2faf5f0c8078"
   },
   "source_hashes": {
-    "ORBITSTATE_INDEPENDENT_CONTRACT_V2.md": "1f586b4648a516723f5a77cfc381d0e4a8c305dd9446a28289975a3ad3c49507",
-    "ORBITSTATE_PRIVATE_SOURCE_MAP.json": "619189f66d32610053c3899616d656d16a21814a45074191f37f95acdbf58325",
-    "ORBITSTATE_PRIVATE_SOURCE_MAP.sha256": "0a2d121b2f5f2c4d43ddc35f51de8e1365e37d3746ceeb069a3616b0abd5f45d",
-    "ORBITSTATE_PUBLIC_SCHEDULE.json": "709063e1d789971f8ac36d2fc94094738015150baae8e75065909c774a079b7b",
-    "ORBITSTATE_PUBLIC_SCHEDULE.sha256": "1d5f50d78d313c343f5a2c7ebf563a0d913127465e316750ef3967085f90d347",
-    "ORBITSTATE_PUBLIC_SCHEDULE.tsv": "57aaf5635e0ea1bcecd17f6efc0383f6ce08a893751d9203d1c87b0e4c7a7876",
-    "PUBLIC_TRANSDUCER_REFERENCE.json": "c608723329322df07b036a9237d72c2e3bed87ec10d75c105b03b07a50e460c1",
-    "orbitstate_independent_public.py": "45b66b38b806403f72e5a9c1bea5dd63b8ebeee34fe293398e29fced8bd72596",
-    "orbitstate_independent_runtime.c": "7ad971b8f087a50f33265448862de8cbd5b4496a3e538f5f56d9672fa5ab0bb9",
-    "orbitstate_independent_runtime.h": "7c344d6a7c3e03e71ced165fb6a1a0fd2bbdb2f5f07a6f924cce8e677944f9f0",
-    "orbitstate_independent_target.py": "13a0eb92f8003243f6706a72a717115dc804ee869553cb351a43a25f523c8a45",
-    "run_orbitstate_independent_v2.py": "df3303117cae14ac1f5bb2f3f6bb532ffcad084c721bc280afe184c4e27fdb45"
+    "ORBITSTATE_INDEPENDENT_CONTRACT_V2.md": {
+      "sha256": "1f586b4648a516723f5a77cfc381d0e4a8c305dd9446a28289975a3ad3c49507",
+      "size": 6607
+    },
+    "ORBITSTATE_PRIVATE_SOURCE_MAP.json": {
+      "sha256": "619189f66d32610053c3899616d656d16a21814a45074191f37f95acdbf58325",
+      "size": 91663
+    },
+    "ORBITSTATE_PRIVATE_SOURCE_MAP.sha256": {
+      "sha256": "0a2d121b2f5f2c4d43ddc35f51de8e1365e37d3746ceeb069a3616b0abd5f45d",
+      "size": 102
+    },
+    "ORBITSTATE_PUBLIC_SCHEDULE.json": {
+      "sha256": "709063e1d789971f8ac36d2fc94094738015150baae8e75065909c774a079b7b",
+      "size": 63485
+    },
+    "ORBITSTATE_PUBLIC_SCHEDULE.sha256": {
+      "sha256": "1d5f50d78d313c343f5a2c7ebf563a0d913127465e316750ef3967085f90d347",
+      "size": 255
+    },
+    "ORBITSTATE_PUBLIC_SCHEDULE.tsv": {
+      "sha256": "57aaf5635e0ea1bcecd17f6efc0383f6ce08a893751d9203d1c87b0e4c7a7876",
+      "size": 14782
+    },
+    "PUBLIC_TRANSDUCER_REFERENCE.json": {
+      "sha256": "c608723329322df07b036a9237d72c2e3bed87ec10d75c105b03b07a50e460c1",
+      "size": 1453
+    },
+    "orbitstate_independent_public.py": {
+      "sha256": "45b66b38b806403f72e5a9c1bea5dd63b8ebeee34fe293398e29fced8bd72596",
+      "size": 61166
+    },
+    "orbitstate_independent_runtime.c": {
+      "sha256": "6bd20004cdd3132bc3f72f70504afcd3d08a30938f24628e06cf33e7d30bfd91",
+      "size": 42951
+    },
+    "orbitstate_independent_runtime.h": {
+      "sha256": "da79fc592a275a47a75bca38a20e7024650c497bcfd6c3c38e765b1bfd7f51a9",
+      "size": 870
+    },
+    "orbitstate_independent_target.py": {
+      "sha256": "9740374d9bedbb3a6be9c2f7ae9b38716acc3e1a6c44a9b326f99074e0ae40c9",
+      "size": 64574
+    },
+    "run_orbitstate_independent_v2.py": {
+      "sha256": "86bfea7807ea0464fbf613dbaf244e712ad0b670188e13db87c0c0e6524621a1",
+      "size": 51613
+    }
   },
   "zero_live_contact": true
 }
