@@ -1,4 +1,5 @@
 {
+  "binary_custody_mode": "target_compile_bound_by_source_and_compiler_contract",
   "compile_test": {
     "available": true,
     "command": [
@@ -27,19 +28,23 @@
     "runtime_self_test_returncode": 0,
     "runtime_self_test_stdout": "CONFIRMATION_V2_RUNTIME_SELF_TEST_OK"
   },
+  "copyback_failure_status_aware": true,
   "frequency_writes": 0,
   "hardware_executions": 0,
   "msr_reads": 0,
   "msr_writes": 0,
   "network_connections": 0,
+  "offline_validation_binary_sha256": "517dc2e3c86bb5c34b98a8c43b7d8b0f388e2a6f6c6c9eff2bd21b7af7571341",
   "public_self_test_passed": true,
   "public_self_test_sha256": "8372aa6371c4ab8e16116fc3fcfa5baa8313bef77d2056c55e3ba790b83aae22",
   "schema_id": "CAT_CAS_CONFIRMATION_V2_CONTROLLER_SELF_TEST",
   "scp_executions": 0,
   "self_test_passed": true,
-  "self_test_sha256": "24b0cc4ebb64b07b0b0fa0de2f0e13f3aa04b83bf3b841609e76cf6a1654dcca",
+  "self_test_sha256": "0da5f9c7a9bce83420a599bbb55417bf57345aba5c6b0fc532d710a76b8e690f",
   "ssh_executions": 0,
+  "success_copyback_requires_execution_manifest": true,
+  "target_binary_self_test_required": true,
   "target_self_test_passed": true,
-  "target_self_test_sha256": "0f41b435e955e0a095a4107a7291b7523ce6316429bbc426c0249b77178f53e5",
+  "target_self_test_sha256": "54cf33667ab89fbab920db5fddc8b0d70f0047b6e46df86581ebe13119eed91d",
   "voltage_writes": 0
 }
