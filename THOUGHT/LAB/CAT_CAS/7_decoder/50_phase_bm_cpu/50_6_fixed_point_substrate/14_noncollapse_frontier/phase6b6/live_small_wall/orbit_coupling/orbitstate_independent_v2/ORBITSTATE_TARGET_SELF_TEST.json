@@ -27,7 +27,7 @@
     "zero_live_contact": true
   },
   "offline_validate_passed": true,
-  "offline_validate_sha256": "2d049a8d111b4a415092a582ca2f0a17358ced3b947f77e82ea866e541be3d98",
+  "offline_validate_sha256": "59164f37034f1c0847740efc6786156761b07db2039b2a665e9f7de2d0f33898",
   "physical_protocol_static_proof": {
     "checks": {
       "affine_line_permutation": true,
@@ -70,6 +70,6 @@
   },
   "schema": "ORBITSTATE_TARGET_SELF_TEST_V2",
   "self_test_passed": true,
-  "self_test_sha256": "0e4c8905324bdea8dcdd8d164d9a574676268d3bdd2fdd16095ba44a8ed97a22",
+  "self_test_sha256": "71f00171f78d77bad4c3c722b21583613ceedb56c15dafbdf7bd7d901ad686ef",
   "zero_live_contact": true
 }

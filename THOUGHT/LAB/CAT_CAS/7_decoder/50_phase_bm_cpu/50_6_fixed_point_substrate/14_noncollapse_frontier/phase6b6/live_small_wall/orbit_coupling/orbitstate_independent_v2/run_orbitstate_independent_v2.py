@@ -9,7 +9,9 @@ import json
 import os
 import re
 import shlex
+import shutil
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 from typing import Any
@@ -19,24 +21,32 @@ import orbitstate_independent_target as target
 
 
 HERE = Path(__file__).resolve().parent
-REPO_ROOT = HERE.parents[9]
 ORBIT_COUPLING_ROOT = HERE.parent
 LIVE_SMALL_WALL_ROOT = ORBIT_COUPLING_ROOT.parent
 RUNS_ROOT = ORBIT_COUPLING_ROOT / "runs"
-EXPECTED_LOCAL_RUN_ROOT = RUNS_ROOT / public.RUN_ID
-EXPECTED_REMOTE_RUN_ROOT = f"/root/catcas_live_small_wall/{public.RUN_ID}"
+SCIENCE_PACKAGE_ID = public.RUN_ID
+TRANSACTION_RUN_ID = "orbitstate_independent_v2_1"
+ATTEMPT0_RUN_ID = SCIENCE_PACKAGE_ID
+ATTEMPT0_LOCAL_RUN_ROOT = RUNS_ROOT / ATTEMPT0_RUN_ID
+ATTEMPT0_REMOTE_RUN_ROOT = f"/root/catcas_live_small_wall/{ATTEMPT0_RUN_ID}"
+ATTEMPT0_CONTROLLER_RESULT_SHA256 = "5a5b82542d1c9268bbfaba051c4528d9859446b26c781c6c0a7a0e86e835f669"
+EXPECTED_LOCAL_RUN_ROOT = RUNS_ROOT / TRANSACTION_RUN_ID
+EXPECTED_REMOTE_RUN_ROOT = f"/root/catcas_live_small_wall/{TRANSACTION_RUN_ID}"
 EXPECTED_REMOTE_SOURCE_ROOT = f"{EXPECTED_REMOTE_RUN_ROOT}/source"
 EXPECTED_REMOTE_OUTPUT_ROOT = f"{EXPECTED_REMOTE_RUN_ROOT}/output"
 TARGET_HOST = "root@192.168.137.100"
 REMOTE_TIMEOUT_SECONDS = 900
 LOCAL_SSH_TIMEOUT_SECONDS = 930
 
-EXPECTED_STARTING_COMMIT = "3c9e3296fec49390de4bae4f0b10232ece293625"
+EXPECTED_STARTING_COMMIT = "384388e7bf27a1bc691ee9f13eba07f72f0b231c"
 
 COMMIT_ENV = "ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING"
 MANIFEST_ENV = "ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256"
 AUTHORITY_ENV = "ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY"
-AUTHORITY_VALUE = public.RUN_ID
+AUTHORITY_VALUE = TRANSACTION_RUN_ID
+ATTEMPT0_RECEIPT_PATH = HERE / "ORBITSTATE_ATTEMPT0_PREEXECUTION_FAILURE.json"
+RETRY1_AUTHORITY_PATH = HERE / "ORBITSTATE_INDEPENDENT_V2_RETRY1_AUTHORITY.md"
+DEPLOYMENT_LAYOUT_TEST_PATH = HERE / "ORBITSTATE_DEPLOYMENT_LAYOUT_SELF_TEST.json"
 
 FROZEN_HASHES = {
     "contract_sha256": "1f586b4648a516723f5a77cfc381d0e4a8c305dd9446a28289975a3ad3c49507",
@@ -139,6 +149,185 @@ def validate_frozen_hashes() -> dict[str, Any]:
     return {"passed": not failures, "observed": observed, "failures": failures}
 
 
+def attempt0_controller_result_path() -> Path:
+    return ATTEMPT0_LOCAL_RUN_ROOT / "CONTROLLER_RESULT.json"
+
+
+def attempt0_controller_receipt() -> dict[str, Any]:
+    path = attempt0_controller_result_path()
+    require(path.exists(), f"attempt-zero controller receipt missing: {path}")
+    observed_sha = sha256_file(path)
+    require(
+        observed_sha == ATTEMPT0_CONTROLLER_RESULT_SHA256,
+        f"attempt-zero controller receipt drift: {observed_sha}",
+    )
+    result = read_json(path)
+    return {
+        "schema": "ORBITSTATE_ATTEMPT0_PREEXECUTION_FAILURE_V1",
+        "science_package_id": SCIENCE_PACKAGE_ID,
+        "transaction_run_id": ATTEMPT0_RUN_ID,
+        "starting_commit": EXPECTED_STARTING_COMMIT,
+        "controller_result_sha256": observed_sha,
+        "controller_status": result.get("status"),
+        "target_returncode": result.get("target_returncode"),
+        "exact_exception": "IndexError: 9",
+        "stderr_excerpt": result.get("stderr", ""),
+        "remote_root_retained": result.get("remote_retained") is True,
+        "local_root_retained": ATTEMPT0_LOCAL_RUN_ROOT.exists(),
+        "target_output_absent": result.get("output_root_exists") is False,
+        "hardware_execution_began": False,
+        "pmu_preflight_executed": False,
+        "replicate_0_executed": False,
+        "replicate_1_executed": False,
+        "feature_freeze_executed": False,
+        "unblinding_executed": False,
+        "scientific_classification_emitted": False,
+    }
+
+
+def write_attempt0_failure_receipt() -> dict[str, Any]:
+    receipt = attempt0_controller_receipt()
+    require(receipt["controller_status"] == "ORBITSTATE_CONTROLLER_TARGET_FAILED_NO_COPYBACK", "attempt-zero status drift")
+    require(receipt["target_returncode"] == 1, "attempt-zero target return code drift")
+    require("IndexError: 9" in receipt["stderr_excerpt"], "attempt-zero exception drift")
+    require(receipt["target_output_absent"], "attempt-zero target output root was created")
+    write_json(ATTEMPT0_RECEIPT_PATH, receipt)
+    return {**receipt, "receipt_sha256": sha256_file(ATTEMPT0_RECEIPT_PATH)}
+
+
+def transferred_python_files(source_root: Path) -> list[Path]:
+    return [source_root / name for name in target.SOURCE_FILE_NAMES if name.endswith(".py")]
+
+
+def fixed_parent_depth_static_rejection(source_root: Path = HERE) -> dict[str, Any]:
+    forbidden_patterns = [
+        re.compile(r"\.parents\[[0-9]+\]"),
+        re.compile(r"^\s*REPO_ROOT\s*=", re.MULTILINE),
+        re.compile(r"Path\(__file__\)\.parents\[[0-9]+\]"),
+    ]
+    hits: list[dict[str, Any]] = []
+    for path in transferred_python_files(source_root):
+        text = path.read_text(encoding="utf-8")
+        for line_number, line in enumerate(text.splitlines(), start=1):
+            if any(pattern.search(line) for pattern in forbidden_patterns):
+                hits.append({"file": path.name, "line": line_number, "text": line.strip()})
+
+    historical_hits: list[dict[str, Any]] = []
+    try:
+        repo_root = Path(git_text("rev-parse", "--show-toplevel"))
+        for path in transferred_python_files(HERE):
+            rel = path.relative_to(repo_root).as_posix()
+            completed = run(["git", "show", f"{EXPECTED_STARTING_COMMIT}:{rel}"], timeout=30.0, check=False)
+            if completed.returncode != 0:
+                continue
+            for line_number, line in enumerate(completed.stdout.splitlines(), start=1):
+                if any(pattern.search(line) for pattern in forbidden_patterns):
+                    historical_hits.append({"file": path.name, "line": line_number, "text": line.strip()})
+    except Exception as exc:
+        historical_hits.append({"file": "<historical-check>", "line": 0, "text": str(exc)})
+
+    return {
+        "schema": "ORBITSTATE_FIXED_PARENT_DEPTH_STATIC_REJECTION_V1",
+        "zero_live_contact": True,
+        "current_hits": hits,
+        "starting_commit": EXPECTED_STARTING_COMMIT,
+        "starting_commit_hits": historical_hits,
+        "starting_commit_would_fail": bool(historical_hits),
+        "passed": not hits and bool(historical_hits),
+    }
+
+
+def copy_shallow_deployment_source(destination: Path) -> None:
+    destination.mkdir(mode=0o700)
+    names = list(target.SOURCE_FILE_NAMES) + ["ORBITSTATE_IMPLEMENTATION_MANIFEST.json"]
+    for name in names:
+        shutil.copyfile(HERE / name, destination / name)
+
+
+def deployment_layout_self_test() -> dict[str, Any]:
+    static = fixed_parent_depth_static_rejection(HERE)
+    with tempfile.TemporaryDirectory(prefix="orbitstate_shallow_deploy_") as temp:
+        root = Path(temp)
+        source = root / "source"
+        copy_shallow_deployment_source(source)
+        import_completed = run(
+            [
+                sys.executable,
+                "-c",
+                (
+                    "import sys; "
+                    f"sys.path.insert(0, {str(source)!r}); "
+                    "import orbitstate_independent_target; "
+                    "print('ORBITSTATE_SHALLOW_IMPORT_OK')"
+                ),
+            ],
+            timeout=60.0,
+            check=False,
+        )
+        offline_completed = run(
+            [
+                sys.executable,
+                str(source / "orbitstate_independent_target.py"),
+                "--offline-validate",
+                "--source-root",
+                str(source),
+                "--output-root",
+                str(root / "offline_validate_out"),
+            ],
+            timeout=180.0,
+            check=False,
+        )
+        self_completed = run(
+            [
+                sys.executable,
+                str(source / "orbitstate_independent_target.py"),
+                "--self-test",
+                "--source-root",
+                str(source),
+                "--output-root",
+                str(root / "self_test_out"),
+            ],
+            timeout=240.0,
+            check=False,
+        )
+
+    offline_data = json.loads(offline_completed.stdout) if offline_completed.returncode == 0 else {}
+    self_data = json.loads(self_completed.stdout) if self_completed.returncode == 0 else {}
+    checks = {
+        "fixed_parent_depth_static_rejection": static["passed"],
+        "module_import_succeeds": import_completed.returncode == 0
+        and "ORBITSTATE_SHALLOW_IMPORT_OK" in import_completed.stdout,
+        "offline_validation_succeeds": offline_data.get("passed") is True,
+        "target_self_test_succeeds": self_data.get("self_test_passed") is True,
+        "no_index_error": "IndexError" not in import_completed.stderr
+        and "IndexError" not in offline_completed.stderr
+        and "IndexError" not in self_completed.stderr,
+        "zero_network_contact": True,
+        "zero_hardware_execution": True,
+        "starting_commit_layout_would_fail": static["starting_commit_would_fail"],
+    }
+    result = {
+        "schema": "ORBITSTATE_DEPLOYMENT_LAYOUT_SELF_TEST_V1",
+        "science_package_id": SCIENCE_PACKAGE_ID,
+        "transaction_run_id": TRANSACTION_RUN_ID,
+        "zero_live_contact": True,
+        "python_executable_name": Path(sys.executable).name,
+        "static_rejection": static,
+        "import_returncode": import_completed.returncode,
+        "offline_validate_returncode": offline_completed.returncode,
+        "target_self_test_returncode": self_completed.returncode,
+        "offline_validate_passed": offline_data.get("passed") is True,
+        "target_self_test_passed": self_data.get("self_test_passed") is True,
+        "checks": checks,
+    }
+    result["passed"] = all(checks.values())
+    result["deployment_layout_self_test_sha256"] = public.digest(
+        {key: value for key, value in result.items() if key != "deployment_layout_self_test_sha256"}
+    )
+    write_json(DEPLOYMENT_LAYOUT_TEST_PATH, result)
+    return result
+
+
 def build_source_file_map(include_manifest: bool) -> dict[str, dict[str, Any]]:
     files = list(target.source_files(HERE))
     if include_manifest:
@@ -172,6 +361,8 @@ def build_manifest() -> dict[str, Any]:
     transport = read_json(transport_path) if transport_path.exists() else {}
     feature_boundary_path = HERE / "ORBITSTATE_FEATURE_BOUNDARY_SELF_TEST.json"
     feature_boundary = read_json(feature_boundary_path) if feature_boundary_path.exists() else {}
+    deployment_layout = read_json(DEPLOYMENT_LAYOUT_TEST_PATH) if DEPLOYMENT_LAYOUT_TEST_PATH.exists() else {}
+    attempt0_receipt = read_json(ATTEMPT0_RECEIPT_PATH) if ATTEMPT0_RECEIPT_PATH.exists() else {}
     repair_audit_path = HERE / "LIVE_CUSTODY_AND_PROTOCOL_REPAIR_AUDIT.md"
     sol_path = HERE / "ORBITSTATE_SOL_AUDIT.json"
     if not sol_path.exists():
@@ -186,10 +377,23 @@ def build_manifest() -> dict[str, Any]:
         "branch_at_freeze_build": git_state["branch"],
         "git_status_porcelain_at_freeze_build": git_state["status_porcelain"],
         "final_commit": "AWAITING_COHERENT_COMMIT",
-        "run_id": public.RUN_ID,
+        "science_package_id": SCIENCE_PACKAGE_ID,
+        "transaction_run_id": TRANSACTION_RUN_ID,
+        "run_id": TRANSACTION_RUN_ID,
         "expected_local_root": str(EXPECTED_LOCAL_RUN_ROOT),
         "expected_remote_root": EXPECTED_REMOTE_RUN_ROOT,
         "expected_remote_output_root": EXPECTED_REMOTE_OUTPUT_ROOT,
+        "attempt_zero": {
+            "transaction_run_id": ATTEMPT0_RUN_ID,
+            "local_root": str(ATTEMPT0_LOCAL_RUN_ROOT),
+            "remote_root": ATTEMPT0_REMOTE_RUN_ROOT,
+            "controller_result_sha256": ATTEMPT0_CONTROLLER_RESULT_SHA256,
+            "failure_receipt_sha256": file_hash_or_none(ATTEMPT0_RECEIPT_PATH),
+            "controller_status": attempt0_receipt.get("controller_status"),
+            "target_returncode": attempt0_receipt.get("target_returncode"),
+            "scientific_classification_emitted": attempt0_receipt.get("scientific_classification_emitted"),
+            "hardware_execution_began": attempt0_receipt.get("hardware_execution_began"),
+        },
         "zero_live_contact_attestation": {
             "network_connections": 0,
             "hardware_executions": 0,
@@ -230,6 +434,9 @@ def build_manifest() -> dict[str, Any]:
             "controller_self_test_sha256": file_hash_or_none(HERE / "ORBITSTATE_CONTROLLER_SELF_TEST.json"),
             "transport_simulation_sha256": file_hash_or_none(transport_path),
             "feature_boundary_self_test_sha256": file_hash_or_none(feature_boundary_path),
+            "deployment_layout_self_test_sha256": file_hash_or_none(DEPLOYMENT_LAYOUT_TEST_PATH),
+            "attempt0_failure_receipt_sha256": file_hash_or_none(ATTEMPT0_RECEIPT_PATH),
+            "retry1_authority_overlay_sha256": file_hash_or_none(RETRY1_AUTHORITY_PATH),
             "sol_audit_sha256": sha256_file(sol_path),
         },
         "offline_validation": {
@@ -243,6 +450,11 @@ def build_manifest() -> dict[str, Any]:
         "feature_boundary_self_test": {
             "passed": feature_boundary.get("passed"),
             "sha256": file_hash_or_none(feature_boundary_path),
+        },
+        "deployment_layout_self_test": {
+            "passed": deployment_layout.get("passed"),
+            "sha256": file_hash_or_none(DEPLOYMENT_LAYOUT_TEST_PATH),
+            "starting_commit_layout_would_fail": deployment_layout.get("checks", {}).get("starting_commit_layout_would_fail"),
         },
         "sol_audit": {
             "status": sol.get("status"),
@@ -319,8 +531,13 @@ def pretransport_gate(
     require(os.environ.get(COMMIT_ENV) == commit_binding, "commit binding environment mismatch")
     require(os.environ.get(AUTHORITY_ENV) == AUTHORITY_VALUE, "live authority mismatch")
     require(canonical_manifest_digest(manifest) == manifest["manifest_canonical_sha256"], "manifest canonical digest drift")
-    local_root = local_runs_root / public.RUN_ID
+    require(manifest.get("science_package_id") == SCIENCE_PACKAGE_ID, "manifest science package identity drift")
+    require(manifest.get("transaction_run_id") == TRANSACTION_RUN_ID, "manifest transaction identity drift")
+    local_root = local_runs_root / TRANSACTION_RUN_ID
     require(not local_root.exists(), f"local run root already exists: {local_root}")
+    attempt0 = attempt0_controller_receipt()
+    deployment = read_json(DEPLOYMENT_LAYOUT_TEST_PATH)
+    require(deployment.get("passed") is True, "deployment-layout self-test did not pass")
     frozen = validate_frozen_hashes()
     require(frozen["passed"], f"frozen hashes drifted: {frozen['failures']}")
     source_file_map = build_source_file_map(include_manifest=False)
@@ -335,6 +552,12 @@ def pretransport_gate(
         "manifest_file_sha256": actual_manifest_sha,
         "manifest_canonical_sha256": manifest["manifest_canonical_sha256"],
         "frozen_hashes": frozen,
+        "attempt0_receipt": {
+            "controller_result_sha256": attempt0["controller_result_sha256"],
+            "controller_status": attempt0["controller_status"],
+            "target_returncode": attempt0["target_returncode"],
+        },
+        "deployment_layout_self_test_sha256": sha256_file(DEPLOYMENT_LAYOUT_TEST_PATH),
         "source_bundle": bundle,
         "validate_only_sha256": validate["validate_only_sha256"],
         "local_run_root_absent": str(local_root),
@@ -370,9 +593,21 @@ def run_controller_command(
     timeout: float,
     executed: list[list[str]],
 ) -> subprocess.CompletedProcess[str]:
+    require(not command_mutates_attempt0_root(command), f"attempt-zero root mutation command blocked: {' '.join(command)}")
     completed = runner(command, text=True, capture_output=True, timeout=timeout, check=False)
     executed.append(command)
     return completed
+
+
+def command_mutates_attempt0_root(command: list[str]) -> bool:
+    text = " ".join(command)
+    if ATTEMPT0_REMOTE_RUN_ROOT not in text:
+        return False
+    if command and command[0] == "scp" and any(f":{ATTEMPT0_REMOTE_RUN_ROOT}/" in item for item in command[1:]):
+        return True
+    if command and command[0] == "ssh" and ("rm -rf" in text or "--execute-live" in text or "install -d" in text):
+        return True
+    return False
 
 
 def verify_copyback_manifest(local_root: Path) -> dict[str, Any]:
@@ -487,7 +722,7 @@ def execute_transport_transaction(
     manifest_sha: str | None = None,
     enforce_pretransport: bool = False,
 ) -> dict[str, Any]:
-    local_root = local_runs_root / public.RUN_ID
+    local_root = local_runs_root / TRANSACTION_RUN_ID
     commit_binding = commit_binding or git_text("rev-parse", "HEAD")
     manifest_path = HERE / "ORBITSTATE_IMPLEMENTATION_MANIFEST.json"
     manifest_sha = manifest_sha or sha256_file(manifest_path)
@@ -554,7 +789,7 @@ def execute_transport_transaction(
         f"{AUTHORITY_ENV}={sh_quote(AUTHORITY_VALUE)} "
         f"python3 {sh_quote(EXPECTED_REMOTE_SOURCE_ROOT + '/orbitstate_independent_target.py')} "
         f"--execute-live --source-root {sh_quote(EXPECTED_REMOTE_SOURCE_ROOT)} "
-        f"--output-root {sh_quote(EXPECTED_REMOTE_OUTPUT_ROOT)} --run-id {sh_quote(public.RUN_ID)} "
+        f"--output-root {sh_quote(EXPECTED_REMOTE_OUTPUT_ROOT)} --run-id {sh_quote(TRANSACTION_RUN_ID)} "
         f"--expected-manifest-sha {sh_quote(manifest_sha)} "
         f"--expected-commit-binding {sh_quote(commit_binding)}"
     )
@@ -706,7 +941,9 @@ def write_copyback_manifest_for_fake(local_root: Path, corrupt: str | None = Non
         entries[0]["sha256"] = "0" * 64
     manifest = {
         "schema": "ORBITSTATE_COPYBACK_MANIFEST_V2",
-        "run_id": public.RUN_ID,
+        "science_package_id": SCIENCE_PACKAGE_ID,
+        "transaction_run_id": TRANSACTION_RUN_ID,
+        "run_id": TRANSACTION_RUN_ID,
         "entries": entries,
         "entry_count": len(entries),
     }
@@ -741,7 +978,9 @@ def write_fake_success_evidence(local_root: Path, manifest_sha: str, corrupt: st
         write_json(local_root / name, {"schema": name, "fake_transport": True})
     final = {
         "status": "ORBITSTATE_INDEPENDENT_TARGET_COMPLETE",
-        "run_id": public.RUN_ID,
+        "science_package_id": SCIENCE_PACKAGE_ID,
+        "transaction_run_id": TRANSACTION_RUN_ID,
+        "run_id": TRANSACTION_RUN_ID,
         "result_class": public.RESULT_CONFIRMED,
         "scientific_classification_emitted": True,
         "fake_transport": True,
@@ -754,7 +993,9 @@ def write_fake_success_evidence(local_root: Path, manifest_sha: str, corrupt: st
     }
     execution_manifest = {
         "schema": "ORBITSTATE_SUCCESS_EXECUTION_MANIFEST_V2",
-        "run_id": public.RUN_ID,
+        "science_package_id": SCIENCE_PACKAGE_ID,
+        "transaction_run_id": TRANSACTION_RUN_ID,
+        "run_id": TRANSACTION_RUN_ID,
         "implementation_manifest_file_sha256": manifest_sha,
         "implementation_manifest_canonical_sha256": "fake-canonical",
         "result_class": public.RESULT_CONFIRMED,
@@ -776,7 +1017,9 @@ def write_fake_failure_evidence(local_root: Path, corrupt: str | None = None) ->
     write_json(local_root / "TARGET_FAILURE_ORBITSTATE_INDEPENDENT_V2.json", {"failure_phase": "fake_target", "fake_transport": True})
     final = {
         "status": "ORBITSTATE_INDEPENDENT_TARGET_FAILED",
-        "run_id": public.RUN_ID,
+        "science_package_id": SCIENCE_PACKAGE_ID,
+        "transaction_run_id": TRANSACTION_RUN_ID,
+        "run_id": TRANSACTION_RUN_ID,
         "failure_phase": "fake_target",
         "scientific_classification_emitted": False,
         "fake_transport": True,
@@ -785,7 +1028,9 @@ def write_fake_failure_evidence(local_root: Path, corrupt: str | None = None) ->
     write_json(local_root / "LIVE_CUSTODY_LOG.json", {"schema": "LIVE_CUSTODY_LOG_V2", "fake_transport": True})
     failure_manifest = {
         "schema": "ORBITSTATE_FAILURE_MANIFEST_V2",
-        "run_id": public.RUN_ID,
+        "science_package_id": SCIENCE_PACKAGE_ID,
+        "transaction_run_id": TRANSACTION_RUN_ID,
+        "run_id": TRANSACTION_RUN_ID,
         "scientific_classification_emitted": False,
         "failure_files": {
             "TARGET_FAILURE_ORBITSTATE_INDEPENDENT_V2.json": sha256_file(local_root / "TARGET_FAILURE_ORBITSTATE_INDEPENDENT_V2.json"),
@@ -821,8 +1066,11 @@ class FakeRunner:
             if self.mode == "target_failure":
                 returncode = 7
                 stderr = "fake target failure"
+            elif self.mode == "preexecution_no_output":
+                returncode = 12
+                stderr = "fake pre-execution failure before output root"
         elif command[0] == "ssh" and f"test -d {EXPECTED_REMOTE_OUTPUT_ROOT}" in text:
-            returncode = 0
+            returncode = 1 if self.mode == "preexecution_no_output" else 0
         elif command[0] == "scp" and command[1] == "-r" and EXPECTED_REMOTE_OUTPUT_ROOT in command[2]:
             if self.mode == "copyback_command_failure":
                 returncode = 8
@@ -881,6 +1129,7 @@ def fake_transport_self_tests() -> dict[str, Any]:
             "cleanup_failure": FakeRunner("cleanup_failure", root / "runs_cleanup_failure", manifest_sha),
             "cleanup_absence_failure": FakeRunner("cleanup_absence_failure", root / "runs_cleanup_absence", manifest_sha),
             "remote_root_exists": FakeRunner("remote_root_exists", root / "runs_remote_exists", manifest_sha),
+            "preexecution_no_output": FakeRunner("preexecution_no_output", root / "runs_preexecution_no_output", manifest_sha),
         }
         results = {
             name: execute_transport_transaction(
@@ -906,6 +1155,7 @@ def fake_transport_self_tests() -> dict[str, Any]:
         name: sum(1 for command in result["commands"] if command[0] == "ssh" and "--execute-live" in " ".join(command))
         for name, result in results.items()
     }
+    all_commands = [command for result in results.values() for command in result["commands"]]
     regressions = {
         "existing_remote_root_rejected": results["remote_root_exists"]["status"] == "ORBITSTATE_CONTROLLER_REMOTE_ROOT_NOT_ABSENT"
         and target_invocations["remote_root_exists"] == 0,
@@ -916,7 +1166,14 @@ def fake_transport_self_tests() -> dict[str, Any]:
         "copyback_sha_mismatch_fails": results["copyback_sha_mismatch"]["status"] == "ORBITSTATE_CONTROLLER_SUCCESS_EVIDENCE_INVALID",
         "target_failure_evidence_copied": results["target_failure"]["status"] == "ORBITSTATE_CONTROLLER_TARGET_FAILED_EVIDENCE_RETAINED",
         "target_failure_retains_remote_root": results["target_failure"]["remote_retained"] is True,
+        "preexecution_no_output_failure_retains_retry1_root": results["preexecution_no_output"]["status"]
+        == "ORBITSTATE_CONTROLLER_TARGET_FAILED_NO_COPYBACK"
+        and results["preexecution_no_output"]["remote_retained"] is True
+        and results["preexecution_no_output"]["output_root_exists"] is False,
         "success_cleanup_targets_exact_root": len(cleanup_commands) == 1 and EXPECTED_REMOTE_RUN_ROOT in " ".join(cleanup_commands[0]),
+        "attempt0_cleanup_target_rejected": not any(command_mutates_attempt0_root(command) for command in all_commands),
+        "attempt0_root_not_used_for_transfer_or_execution": ATTEMPT0_REMOTE_RUN_ROOT
+        not in "\n".join(" ".join(command) for command in all_commands),
         "cleanup_absence_verified": len(absence_commands) >= 1,
         "cleanup_failure_retains_remote": results["cleanup_failure"]["remote_retained"] is True,
         "cleanup_absence_failure_retains_remote": results["cleanup_absence_failure"]["remote_retained"] is True,
@@ -936,9 +1193,11 @@ def fake_transport_self_tests() -> dict[str, Any]:
 
 
 def freeze_artifacts() -> dict[str, Any]:
+    attempt0 = write_attempt0_failure_receipt()
     public_hashes = public.write_artifacts(HERE)
     offline = target.offline_validate(HERE, HERE)
     self_tests = write_self_test_artifacts()
+    deployment = deployment_layout_self_test()
     transport = fake_transport_self_tests()
     manifest = build_manifest()
     write_json(HERE / "ORBITSTATE_IMPLEMENTATION_MANIFEST.json", manifest)
@@ -948,10 +1207,13 @@ def freeze_artifacts() -> dict[str, Any]:
         "public_hashes": public_hashes,
         "offline_validate_passed": offline["passed"],
         "offline_validate_sha256": offline["offline_validate_sha256"],
+        "attempt0_failure_receipt_sha256": attempt0["receipt_sha256"],
         "self_tests": {
             "public_self_test_sha256": self_tests["public_self_test"]["self_test_sha256"],
             "target_self_test_sha256": self_tests["target_self_test"]["self_test_sha256"],
         },
+        "deployment_layout_passed": deployment["passed"],
+        "deployment_layout_self_test_sha256": deployment["deployment_layout_self_test_sha256"],
         "transport_passed": transport["passed"],
         "transport_simulation_sha256": transport["transport_simulation_sha256"],
         "manifest_canonical_sha256": manifest["manifest_canonical_sha256"],
@@ -969,9 +1231,13 @@ def validate_only() -> dict[str, Any]:
     feature_boundary = target.feature_boundary_static_proof(HERE)
     pmu = target.pmu_runtime_static_proof(HERE)
     physical = target.physical_protocol_static_proof(HERE)
+    fixed_parent_depth = fixed_parent_depth_static_rejection(HERE)
+    deployment = deployment_layout_self_test()
+    attempt0 = attempt0_controller_receipt()
     frozen = validate_frozen_hashes()
     public_self = public.self_test()
     manifest = read_json(HERE / "ORBITSTATE_IMPLEMENTATION_MANIFEST.json")
+    source_bundle = validate_source_bundle_against_manifest(manifest)
     result = {
         "schema": "ORBITSTATE_VALIDATE_ONLY_V2",
         "zero_live_contact": True,
@@ -981,7 +1247,16 @@ def validate_only() -> dict[str, Any]:
         "feature_boundary": feature_boundary,
         "pmu_runtime_static_proof": pmu,
         "physical_protocol_static_proof": physical,
+        "fixed_parent_depth_static_rejection": fixed_parent_depth,
+        "deployment_layout": deployment,
+        "attempt0_controller_receipt": {
+            "controller_result_sha256": attempt0["controller_result_sha256"],
+            "controller_status": attempt0["controller_status"],
+            "target_returncode": attempt0["target_returncode"],
+            "target_output_absent": attempt0["target_output_absent"],
+        },
         "frozen_hashes": frozen,
+        "source_bundle_reconstruction": source_bundle,
         "public_self_test_passed": public_self["self_test_passed"],
         "manifest_canonical_sha256": canonical_manifest_digest(manifest),
         "manifest_file_sha256": sha256_file(HERE / "ORBITSTATE_IMPLEMENTATION_MANIFEST.json"),
@@ -994,7 +1269,10 @@ def validate_only() -> dict[str, Any]:
             feature_boundary["passed"],
             pmu["passed"],
             physical["passed"],
+            fixed_parent_depth["passed"],
+            deployment["passed"],
             frozen["passed"],
+            source_bundle["passed"],
             public_self["self_test_passed"],
             result["manifest_canonical_sha256"] == manifest["manifest_canonical_sha256"],
         ]

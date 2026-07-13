@@ -25,7 +25,7 @@
 #define M_PI 3.14159265358979323846
 #endif
 
-#define ORBITSTATE_LIVE_AUTHORITY_VALUE "orbitstate_independent_v2_0"
+#define ORBITSTATE_LIVE_AUTHORITY_VALUE "orbitstate_independent_v2_1"
 
 typedef struct {
     uint64_t value;

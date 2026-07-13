@@ -1,0 +1,21 @@
+{
+  "controller_result_sha256": "5a5b82542d1c9268bbfaba051c4528d9859446b26c781c6c0a7a0e86e835f669",
+  "controller_status": "ORBITSTATE_CONTROLLER_TARGET_FAILED_NO_COPYBACK",
+  "exact_exception": "IndexError: 9",
+  "feature_freeze_executed": false,
+  "hardware_execution_began": false,
+  "local_root_retained": true,
+  "pmu_preflight_executed": false,
+  "remote_root_retained": true,
+  "replicate_0_executed": false,
+  "replicate_1_executed": false,
+  "schema": "ORBITSTATE_ATTEMPT0_PREEXECUTION_FAILURE_V1",
+  "science_package_id": "orbitstate_independent_v2_0",
+  "scientific_classification_emitted": false,
+  "starting_commit": "384388e7bf27a1bc691ee9f13eba07f72f0b231c",
+  "stderr_excerpt": "Traceback (most recent call last):\n  File \"/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_target.py\", line 32, in <module>\n    REPO_ROOT = HERE.parents[9]\n                ~~~~~~~~~~~~^^^\n  File \"/usr/lib/python3.13/pathlib/_local.py\", line 48, in __getitem__\n    raise IndexError(idx)\nIndexError: 9\n",
+  "target_output_absent": true,
+  "target_returncode": 1,
+  "transaction_run_id": "orbitstate_independent_v2_0",
+  "unblinding_executed": false
+}

@@ -1,6 +1,8 @@
 {
   "passed": true,
   "regressions": {
+    "attempt0_cleanup_target_rejected": true,
+    "attempt0_root_not_used_for_transfer_or_execution": true,
     "cleanup_absence_failure_retains_remote": true,
     "cleanup_absence_verified": true,
     "cleanup_failure_retains_remote": true,
@@ -10,6 +12,7 @@
     "existing_remote_root_rejected": true,
     "explicit_manifest_bound_transfer_used": true,
     "no_automatic_retry": true,
+    "preexecution_no_output_failure_retains_retry1_root": true,
     "recursive_unbound_transfer_not_used": true,
     "success_cleanup_targets_exact_root": true,
     "target_failure_evidence_copied": true,
@@ -22,106 +25,108 @@
         [
           "ssh",
           "root@192.168.137.100",
-          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_independent_v2_0; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_independent_v2_0/source"
+          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_independent_v2_1; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_independent_v2_1/source"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_INDEPENDENT_CONTRACT_V2.md",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_INDEPENDENT_CONTRACT_V2.md"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_INDEPENDENT_CONTRACT_V2.md"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\PUBLIC_TRANSDUCER_REFERENCE.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/PUBLIC_TRANSDUCER_REFERENCE.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/PUBLIC_TRANSDUCER_REFERENCE.json"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_public.py",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_public.py"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_public.py"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_runtime.c",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_runtime.c"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_runtime.c"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_runtime.h",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_runtime.h"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_runtime.h"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_target.py",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_target.py"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_target.py"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\run_orbitstate_independent_v2.py",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/run_orbitstate_independent_v2.py"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/run_orbitstate_independent_v2.py"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PUBLIC_SCHEDULE.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.json"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.tsv",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PUBLIC_SCHEDULE.tsv"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.tsv"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.sha256",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PUBLIC_SCHEDULE.sha256"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.sha256"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PRIVATE_SOURCE_MAP.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PRIVATE_SOURCE_MAP.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PRIVATE_SOURCE_MAP.json"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PRIVATE_SOURCE_MAP.sha256",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PRIVATE_SOURCE_MAP.sha256"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PRIVATE_SOURCE_MAP.sha256"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_IMPLEMENTATION_MANIFEST.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_IMPLEMENTATION_MANIFEST.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_IMPLEMENTATION_MANIFEST.json"
         ],
         [
           "ssh",
           "root@192.168.137.100",
-          "cd /root/catcas_live_small_wall/orbitstate_independent_v2_0/source && timeout --signal=TERM --kill-after=5s 900s env ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=<commit> ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=<sha256> ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_0 python3 /root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_independent_v2_0/source --output-root /root/catcas_live_small_wall/orbitstate_independent_v2_0/output --run-id orbitstate_independent_v2_0 --expected-manifest-sha <sha256> --expected-commit-binding <commit>"
+          "cd /root/catcas_live_small_wall/orbitstate_independent_v2_1/source && timeout --signal=TERM --kill-after=5s 900s env ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=<commit> ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=<sha256> ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_1 python3 /root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_independent_v2_1/source --output-root /root/catcas_live_small_wall/orbitstate_independent_v2_1/output --run-id orbitstate_independent_v2_1 --expected-manifest-sha <sha256> --expected-commit-binding <commit>"
         ],
         [
           "ssh",
           "root@192.168.137.100",
-          "test -d /root/catcas_live_small_wall/orbitstate_independent_v2_0/output"
+          "test -d /root/catcas_live_small_wall/orbitstate_independent_v2_1/output"
         ],
         [
           "scp",
           "-r",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/output/.",
-          "<fake_transport_root>\\runs_cleanup_absence\\orbitstate_independent_v2_0"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/output/.",
+          "<fake_transport_root>\\runs_cleanup_absence\\orbitstate_independent_v2_1"
         ],
         [
           "ssh",
           "root@192.168.137.100",
-          "rm -rf -- /root/catcas_live_small_wall/orbitstate_independent_v2_0"
+          "rm -rf -- /root/catcas_live_small_wall/orbitstate_independent_v2_1"
         ],
         [
           "ssh",
           "root@192.168.137.100",
-          "test ! -e /root/catcas_live_small_wall/orbitstate_independent_v2_0"
+          "test ! -e /root/catcas_live_small_wall/orbitstate_independent_v2_1"
         ]
       ],
       "final": {
         "fake_transport": true,
         "result_class": "ORBITSTATE_INDEPENDENT_COUPLING_CONFIRMED",
-        "run_id": "orbitstate_independent_v2_0",
+        "run_id": "orbitstate_independent_v2_1",
+        "science_package_id": "orbitstate_independent_v2_0",
         "scientific_classification_emitted": true,
-        "status": "ORBITSTATE_INDEPENDENT_TARGET_COMPLETE"
+        "status": "ORBITSTATE_INDEPENDENT_TARGET_COMPLETE",
+        "transaction_run_id": "orbitstate_independent_v2_1"
       },
       "pretransport_gate": {
         "passed": true,
@@ -137,101 +142,103 @@
         [
           "ssh",
           "root@192.168.137.100",
-          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_independent_v2_0; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_independent_v2_0/source"
+          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_independent_v2_1; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_independent_v2_1/source"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_INDEPENDENT_CONTRACT_V2.md",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_INDEPENDENT_CONTRACT_V2.md"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_INDEPENDENT_CONTRACT_V2.md"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\PUBLIC_TRANSDUCER_REFERENCE.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/PUBLIC_TRANSDUCER_REFERENCE.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/PUBLIC_TRANSDUCER_REFERENCE.json"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_public.py",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_public.py"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_public.py"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_runtime.c",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_runtime.c"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_runtime.c"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_runtime.h",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_runtime.h"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_runtime.h"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_target.py",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_target.py"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_target.py"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\run_orbitstate_independent_v2.py",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/run_orbitstate_independent_v2.py"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/run_orbitstate_independent_v2.py"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PUBLIC_SCHEDULE.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.json"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.tsv",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PUBLIC_SCHEDULE.tsv"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.tsv"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.sha256",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PUBLIC_SCHEDULE.sha256"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.sha256"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PRIVATE_SOURCE_MAP.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PRIVATE_SOURCE_MAP.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PRIVATE_SOURCE_MAP.json"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PRIVATE_SOURCE_MAP.sha256",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PRIVATE_SOURCE_MAP.sha256"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PRIVATE_SOURCE_MAP.sha256"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_IMPLEMENTATION_MANIFEST.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_IMPLEMENTATION_MANIFEST.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_IMPLEMENTATION_MANIFEST.json"
         ],
         [
           "ssh",
           "root@192.168.137.100",
-          "cd /root/catcas_live_small_wall/orbitstate_independent_v2_0/source && timeout --signal=TERM --kill-after=5s 900s env ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=<commit> ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=<sha256> ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_0 python3 /root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_independent_v2_0/source --output-root /root/catcas_live_small_wall/orbitstate_independent_v2_0/output --run-id orbitstate_independent_v2_0 --expected-manifest-sha <sha256> --expected-commit-binding <commit>"
+          "cd /root/catcas_live_small_wall/orbitstate_independent_v2_1/source && timeout --signal=TERM --kill-after=5s 900s env ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=<commit> ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=<sha256> ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_1 python3 /root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_independent_v2_1/source --output-root /root/catcas_live_small_wall/orbitstate_independent_v2_1/output --run-id orbitstate_independent_v2_1 --expected-manifest-sha <sha256> --expected-commit-binding <commit>"
         ],
         [
           "ssh",
           "root@192.168.137.100",
-          "test -d /root/catcas_live_small_wall/orbitstate_independent_v2_0/output"
+          "test -d /root/catcas_live_small_wall/orbitstate_independent_v2_1/output"
         ],
         [
           "scp",
           "-r",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/output/.",
-          "<fake_transport_root>\\runs_cleanup_failure\\orbitstate_independent_v2_0"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/output/.",
+          "<fake_transport_root>\\runs_cleanup_failure\\orbitstate_independent_v2_1"
         ],
         [
           "ssh",
           "root@192.168.137.100",
-          "rm -rf -- /root/catcas_live_small_wall/orbitstate_independent_v2_0"
+          "rm -rf -- /root/catcas_live_small_wall/orbitstate_independent_v2_1"
         ]
       ],
       "final": {
         "fake_transport": true,
         "result_class": "ORBITSTATE_INDEPENDENT_COUPLING_CONFIRMED",
-        "run_id": "orbitstate_independent_v2_0",
+        "run_id": "orbitstate_independent_v2_1",
+        "science_package_id": "orbitstate_independent_v2_0",
         "scientific_classification_emitted": true,
-        "status": "ORBITSTATE_INDEPENDENT_TARGET_COMPLETE"
+        "status": "ORBITSTATE_INDEPENDENT_TARGET_COMPLETE",
+        "transaction_run_id": "orbitstate_independent_v2_1"
       },
       "pretransport_gate": {
         "passed": true,
@@ -246,88 +253,88 @@
         [
           "ssh",
           "root@192.168.137.100",
-          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_independent_v2_0; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_independent_v2_0/source"
+          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_independent_v2_1; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_independent_v2_1/source"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_INDEPENDENT_CONTRACT_V2.md",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_INDEPENDENT_CONTRACT_V2.md"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_INDEPENDENT_CONTRACT_V2.md"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\PUBLIC_TRANSDUCER_REFERENCE.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/PUBLIC_TRANSDUCER_REFERENCE.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/PUBLIC_TRANSDUCER_REFERENCE.json"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_public.py",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_public.py"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_public.py"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_runtime.c",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_runtime.c"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_runtime.c"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_runtime.h",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_runtime.h"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_runtime.h"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_target.py",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_target.py"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_target.py"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\run_orbitstate_independent_v2.py",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/run_orbitstate_independent_v2.py"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/run_orbitstate_independent_v2.py"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PUBLIC_SCHEDULE.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.json"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.tsv",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PUBLIC_SCHEDULE.tsv"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.tsv"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.sha256",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PUBLIC_SCHEDULE.sha256"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.sha256"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PRIVATE_SOURCE_MAP.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PRIVATE_SOURCE_MAP.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PRIVATE_SOURCE_MAP.json"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PRIVATE_SOURCE_MAP.sha256",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PRIVATE_SOURCE_MAP.sha256"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PRIVATE_SOURCE_MAP.sha256"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_IMPLEMENTATION_MANIFEST.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_IMPLEMENTATION_MANIFEST.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_IMPLEMENTATION_MANIFEST.json"
         ],
         [
           "ssh",
           "root@192.168.137.100",
-          "cd /root/catcas_live_small_wall/orbitstate_independent_v2_0/source && timeout --signal=TERM --kill-after=5s 900s env ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=<commit> ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=<sha256> ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_0 python3 /root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_independent_v2_0/source --output-root /root/catcas_live_small_wall/orbitstate_independent_v2_0/output --run-id orbitstate_independent_v2_0 --expected-manifest-sha <sha256> --expected-commit-binding <commit>"
+          "cd /root/catcas_live_small_wall/orbitstate_independent_v2_1/source && timeout --signal=TERM --kill-after=5s 900s env ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=<commit> ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=<sha256> ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_1 python3 /root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_independent_v2_1/source --output-root /root/catcas_live_small_wall/orbitstate_independent_v2_1/output --run-id orbitstate_independent_v2_1 --expected-manifest-sha <sha256> --expected-commit-binding <commit>"
         ],
         [
           "ssh",
           "root@192.168.137.100",
-          "test -d /root/catcas_live_small_wall/orbitstate_independent_v2_0/output"
+          "test -d /root/catcas_live_small_wall/orbitstate_independent_v2_1/output"
         ],
         [
           "scp",
           "-r",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/output/.",
-          "<fake_transport_root>\\runs_copy_command\\orbitstate_independent_v2_0"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/output/.",
+          "<fake_transport_root>\\runs_copy_command\\orbitstate_independent_v2_1"
         ]
       ],
       "copyback_error": {
@@ -349,88 +356,88 @@
         [
           "ssh",
           "root@192.168.137.100",
-          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_independent_v2_0; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_independent_v2_0/source"
+          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_independent_v2_1; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_independent_v2_1/source"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_INDEPENDENT_CONTRACT_V2.md",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_INDEPENDENT_CONTRACT_V2.md"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_INDEPENDENT_CONTRACT_V2.md"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\PUBLIC_TRANSDUCER_REFERENCE.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/PUBLIC_TRANSDUCER_REFERENCE.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/PUBLIC_TRANSDUCER_REFERENCE.json"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_public.py",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_public.py"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_public.py"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_runtime.c",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_runtime.c"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_runtime.c"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_runtime.h",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_runtime.h"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_runtime.h"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_target.py",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_target.py"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_target.py"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\run_orbitstate_independent_v2.py",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/run_orbitstate_independent_v2.py"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/run_orbitstate_independent_v2.py"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PUBLIC_SCHEDULE.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.json"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.tsv",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PUBLIC_SCHEDULE.tsv"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.tsv"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.sha256",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PUBLIC_SCHEDULE.sha256"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.sha256"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PRIVATE_SOURCE_MAP.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PRIVATE_SOURCE_MAP.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PRIVATE_SOURCE_MAP.json"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PRIVATE_SOURCE_MAP.sha256",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PRIVATE_SOURCE_MAP.sha256"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PRIVATE_SOURCE_MAP.sha256"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_IMPLEMENTATION_MANIFEST.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_IMPLEMENTATION_MANIFEST.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_IMPLEMENTATION_MANIFEST.json"
         ],
         [
           "ssh",
           "root@192.168.137.100",
-          "cd /root/catcas_live_small_wall/orbitstate_independent_v2_0/source && timeout --signal=TERM --kill-after=5s 900s env ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=<commit> ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=<sha256> ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_0 python3 /root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_independent_v2_0/source --output-root /root/catcas_live_small_wall/orbitstate_independent_v2_0/output --run-id orbitstate_independent_v2_0 --expected-manifest-sha <sha256> --expected-commit-binding <commit>"
+          "cd /root/catcas_live_small_wall/orbitstate_independent_v2_1/source && timeout --signal=TERM --kill-after=5s 900s env ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=<commit> ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=<sha256> ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_1 python3 /root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_independent_v2_1/source --output-root /root/catcas_live_small_wall/orbitstate_independent_v2_1/output --run-id orbitstate_independent_v2_1 --expected-manifest-sha <sha256> --expected-commit-binding <commit>"
         ],
         [
           "ssh",
           "root@192.168.137.100",
-          "test -d /root/catcas_live_small_wall/orbitstate_independent_v2_0/output"
+          "test -d /root/catcas_live_small_wall/orbitstate_independent_v2_1/output"
         ],
         [
           "scp",
           "-r",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/output/.",
-          "<fake_transport_root>\\runs_copy_sha\\orbitstate_independent_v2_0"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/output/.",
+          "<fake_transport_root>\\runs_copy_sha\\orbitstate_independent_v2_1"
         ]
       ],
       "evidence_error": "copyback SHA mismatch: FINAL_RESULT_ORBITSTATE_INDEPENDENT_V2.json",
@@ -447,88 +454,88 @@
         [
           "ssh",
           "root@192.168.137.100",
-          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_independent_v2_0; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_independent_v2_0/source"
+          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_independent_v2_1; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_independent_v2_1/source"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_INDEPENDENT_CONTRACT_V2.md",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_INDEPENDENT_CONTRACT_V2.md"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_INDEPENDENT_CONTRACT_V2.md"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\PUBLIC_TRANSDUCER_REFERENCE.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/PUBLIC_TRANSDUCER_REFERENCE.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/PUBLIC_TRANSDUCER_REFERENCE.json"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_public.py",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_public.py"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_public.py"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_runtime.c",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_runtime.c"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_runtime.c"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_runtime.h",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_runtime.h"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_runtime.h"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_target.py",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_target.py"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_target.py"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\run_orbitstate_independent_v2.py",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/run_orbitstate_independent_v2.py"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/run_orbitstate_independent_v2.py"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PUBLIC_SCHEDULE.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.json"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.tsv",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PUBLIC_SCHEDULE.tsv"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.tsv"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.sha256",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PUBLIC_SCHEDULE.sha256"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.sha256"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PRIVATE_SOURCE_MAP.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PRIVATE_SOURCE_MAP.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PRIVATE_SOURCE_MAP.json"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PRIVATE_SOURCE_MAP.sha256",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PRIVATE_SOURCE_MAP.sha256"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PRIVATE_SOURCE_MAP.sha256"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_IMPLEMENTATION_MANIFEST.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_IMPLEMENTATION_MANIFEST.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_IMPLEMENTATION_MANIFEST.json"
         ],
         [
           "ssh",
           "root@192.168.137.100",
-          "cd /root/catcas_live_small_wall/orbitstate_independent_v2_0/source && timeout --signal=TERM --kill-after=5s 900s env ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=<commit> ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=<sha256> ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_0 python3 /root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_independent_v2_0/source --output-root /root/catcas_live_small_wall/orbitstate_independent_v2_0/output --run-id orbitstate_independent_v2_0 --expected-manifest-sha <sha256> --expected-commit-binding <commit>"
+          "cd /root/catcas_live_small_wall/orbitstate_independent_v2_1/source && timeout --signal=TERM --kill-after=5s 900s env ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=<commit> ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=<sha256> ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_1 python3 /root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_independent_v2_1/source --output-root /root/catcas_live_small_wall/orbitstate_independent_v2_1/output --run-id orbitstate_independent_v2_1 --expected-manifest-sha <sha256> --expected-commit-binding <commit>"
         ],
         [
           "ssh",
           "root@192.168.137.100",
-          "test -d /root/catcas_live_small_wall/orbitstate_independent_v2_0/output"
+          "test -d /root/catcas_live_small_wall/orbitstate_independent_v2_1/output"
         ],
         [
           "scp",
           "-r",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/output/.",
-          "<fake_transport_root>\\runs_copy_size\\orbitstate_independent_v2_0"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/output/.",
+          "<fake_transport_root>\\runs_copy_size\\orbitstate_independent_v2_1"
         ]
       ],
       "evidence_error": "copyback size mismatch: FINAL_RESULT_ORBITSTATE_INDEPENDENT_V2.json",
@@ -540,12 +547,108 @@
       "remote_retained": true,
       "status": "ORBITSTATE_CONTROLLER_SUCCESS_EVIDENCE_INVALID"
     },
+    "preexecution_no_output": {
+      "commands": [
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_independent_v2_1; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_independent_v2_1/source"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_INDEPENDENT_CONTRACT_V2.md",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_INDEPENDENT_CONTRACT_V2.md"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\PUBLIC_TRANSDUCER_REFERENCE.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/PUBLIC_TRANSDUCER_REFERENCE.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_public.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_public.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_runtime.c",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_runtime.c"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_runtime.h",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_runtime.h"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_target.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_target.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\run_orbitstate_independent_v2.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/run_orbitstate_independent_v2.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.tsv",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.tsv"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.sha256",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.sha256"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PRIVATE_SOURCE_MAP.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PRIVATE_SOURCE_MAP.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PRIVATE_SOURCE_MAP.sha256",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PRIVATE_SOURCE_MAP.sha256"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_IMPLEMENTATION_MANIFEST.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_IMPLEMENTATION_MANIFEST.json"
+        ],
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "cd /root/catcas_live_small_wall/orbitstate_independent_v2_1/source && timeout --signal=TERM --kill-after=5s 900s env ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=<commit> ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=<sha256> ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_1 python3 /root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_independent_v2_1/source --output-root /root/catcas_live_small_wall/orbitstate_independent_v2_1/output --run-id orbitstate_independent_v2_1 --expected-manifest-sha <sha256> --expected-commit-binding <commit>"
+        ],
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "test -d /root/catcas_live_small_wall/orbitstate_independent_v2_1/output"
+        ]
+      ],
+      "copyback_error": null,
+      "output_root_exists": false,
+      "pretransport_gate": {
+        "passed": true,
+        "simulated": true
+      },
+      "remote_cleaned": false,
+      "remote_retained": true,
+      "status": "ORBITSTATE_CONTROLLER_TARGET_FAILED_NO_COPYBACK",
+      "stderr": "fake pre-execution failure before output root",
+      "stdout": "",
+      "target_returncode": 12
+    },
     "remote_root_exists": {
       "commands": [
         [
           "ssh",
           "root@192.168.137.100",
-          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_independent_v2_0; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_independent_v2_0/source"
+          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_independent_v2_1; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_independent_v2_1/source"
         ]
       ],
       "pretransport_gate": {
@@ -564,115 +667,117 @@
         [
           "ssh",
           "root@192.168.137.100",
-          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_independent_v2_0; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_independent_v2_0/source"
+          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_independent_v2_1; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_independent_v2_1/source"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_INDEPENDENT_CONTRACT_V2.md",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_INDEPENDENT_CONTRACT_V2.md"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_INDEPENDENT_CONTRACT_V2.md"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\PUBLIC_TRANSDUCER_REFERENCE.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/PUBLIC_TRANSDUCER_REFERENCE.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/PUBLIC_TRANSDUCER_REFERENCE.json"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_public.py",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_public.py"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_public.py"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_runtime.c",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_runtime.c"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_runtime.c"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_runtime.h",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_runtime.h"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_runtime.h"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_target.py",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_target.py"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_target.py"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\run_orbitstate_independent_v2.py",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/run_orbitstate_independent_v2.py"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/run_orbitstate_independent_v2.py"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PUBLIC_SCHEDULE.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.json"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.tsv",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PUBLIC_SCHEDULE.tsv"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.tsv"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.sha256",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PUBLIC_SCHEDULE.sha256"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.sha256"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PRIVATE_SOURCE_MAP.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PRIVATE_SOURCE_MAP.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PRIVATE_SOURCE_MAP.json"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PRIVATE_SOURCE_MAP.sha256",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PRIVATE_SOURCE_MAP.sha256"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PRIVATE_SOURCE_MAP.sha256"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_IMPLEMENTATION_MANIFEST.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_IMPLEMENTATION_MANIFEST.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_IMPLEMENTATION_MANIFEST.json"
         ],
         [
           "ssh",
           "root@192.168.137.100",
-          "cd /root/catcas_live_small_wall/orbitstate_independent_v2_0/source && timeout --signal=TERM --kill-after=5s 900s env ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=<commit> ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=<sha256> ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_0 python3 /root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_independent_v2_0/source --output-root /root/catcas_live_small_wall/orbitstate_independent_v2_0/output --run-id orbitstate_independent_v2_0 --expected-manifest-sha <sha256> --expected-commit-binding <commit>"
+          "cd /root/catcas_live_small_wall/orbitstate_independent_v2_1/source && timeout --signal=TERM --kill-after=5s 900s env ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=<commit> ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=<sha256> ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_1 python3 /root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_independent_v2_1/source --output-root /root/catcas_live_small_wall/orbitstate_independent_v2_1/output --run-id orbitstate_independent_v2_1 --expected-manifest-sha <sha256> --expected-commit-binding <commit>"
         ],
         [
           "ssh",
           "root@192.168.137.100",
-          "test -d /root/catcas_live_small_wall/orbitstate_independent_v2_0/output"
+          "test -d /root/catcas_live_small_wall/orbitstate_independent_v2_1/output"
         ],
         [
           "scp",
           "-r",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/output/.",
-          "<fake_transport_root>\\runs_success\\orbitstate_independent_v2_0"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/output/.",
+          "<fake_transport_root>\\runs_success\\orbitstate_independent_v2_1"
         ],
         [
           "ssh",
           "root@192.168.137.100",
-          "rm -rf -- /root/catcas_live_small_wall/orbitstate_independent_v2_0"
+          "rm -rf -- /root/catcas_live_small_wall/orbitstate_independent_v2_1"
         ],
         [
           "ssh",
           "root@192.168.137.100",
-          "test ! -e /root/catcas_live_small_wall/orbitstate_independent_v2_0"
+          "test ! -e /root/catcas_live_small_wall/orbitstate_independent_v2_1"
         ]
       ],
       "final": {
         "fake_transport": true,
         "result_class": "ORBITSTATE_INDEPENDENT_COUPLING_CONFIRMED",
-        "run_id": "orbitstate_independent_v2_0",
+        "run_id": "orbitstate_independent_v2_1",
+        "science_package_id": "orbitstate_independent_v2_0",
         "scientific_classification_emitted": true,
-        "status": "ORBITSTATE_INDEPENDENT_TARGET_COMPLETE"
+        "status": "ORBITSTATE_INDEPENDENT_TARGET_COMPLETE",
+        "transaction_run_id": "orbitstate_independent_v2_1"
       },
-      "local_root": "<fake_transport_root>\\runs_success\\orbitstate_independent_v2_0",
+      "local_root": "<fake_transport_root>\\runs_success\\orbitstate_independent_v2_1",
       "pretransport_gate": {
         "passed": true,
         "simulated": true
       },
       "remote_cleaned": true,
       "remote_retained": false,
-      "remote_root": "/root/catcas_live_small_wall/orbitstate_independent_v2_0",
+      "remote_root": "/root/catcas_live_small_wall/orbitstate_independent_v2_1",
       "status": "ORBITSTATE_CONTROLLER_TARGET_COMPLETE",
       "success_evidence": {
         "copyback": {
@@ -684,9 +789,11 @@
         "final": {
           "fake_transport": true,
           "result_class": "ORBITSTATE_INDEPENDENT_COUPLING_CONFIRMED",
-          "run_id": "orbitstate_independent_v2_0",
+          "run_id": "orbitstate_independent_v2_1",
+          "science_package_id": "orbitstate_independent_v2_0",
           "scientific_classification_emitted": true,
-          "status": "ORBITSTATE_INDEPENDENT_TARGET_COMPLETE"
+          "status": "ORBITSTATE_INDEPENDENT_TARGET_COMPLETE",
+          "transaction_run_id": "orbitstate_independent_v2_1"
         },
         "passed": true,
         "result_class": "ORBITSTATE_INDEPENDENT_COUPLING_CONFIRMED"
@@ -697,88 +804,88 @@
         [
           "ssh",
           "root@192.168.137.100",
-          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_independent_v2_0; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_independent_v2_0/source"
+          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_independent_v2_1; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_independent_v2_1/source"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_INDEPENDENT_CONTRACT_V2.md",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_INDEPENDENT_CONTRACT_V2.md"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_INDEPENDENT_CONTRACT_V2.md"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\PUBLIC_TRANSDUCER_REFERENCE.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/PUBLIC_TRANSDUCER_REFERENCE.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/PUBLIC_TRANSDUCER_REFERENCE.json"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_public.py",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_public.py"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_public.py"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_runtime.c",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_runtime.c"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_runtime.c"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_runtime.h",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_runtime.h"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_runtime.h"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_target.py",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_target.py"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_target.py"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\run_orbitstate_independent_v2.py",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/run_orbitstate_independent_v2.py"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/run_orbitstate_independent_v2.py"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PUBLIC_SCHEDULE.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.json"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.tsv",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PUBLIC_SCHEDULE.tsv"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.tsv"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PUBLIC_SCHEDULE.sha256",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PUBLIC_SCHEDULE.sha256"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PUBLIC_SCHEDULE.sha256"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PRIVATE_SOURCE_MAP.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PRIVATE_SOURCE_MAP.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PRIVATE_SOURCE_MAP.json"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_PRIVATE_SOURCE_MAP.sha256",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_PRIVATE_SOURCE_MAP.sha256"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_PRIVATE_SOURCE_MAP.sha256"
         ],
         [
           "scp",
           "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_IMPLEMENTATION_MANIFEST.json",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/ORBITSTATE_IMPLEMENTATION_MANIFEST.json"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/source/ORBITSTATE_IMPLEMENTATION_MANIFEST.json"
         ],
         [
           "ssh",
           "root@192.168.137.100",
-          "cd /root/catcas_live_small_wall/orbitstate_independent_v2_0/source && timeout --signal=TERM --kill-after=5s 900s env ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=<commit> ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=<sha256> ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_0 python3 /root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_independent_v2_0/source --output-root /root/catcas_live_small_wall/orbitstate_independent_v2_0/output --run-id orbitstate_independent_v2_0 --expected-manifest-sha <sha256> --expected-commit-binding <commit>"
+          "cd /root/catcas_live_small_wall/orbitstate_independent_v2_1/source && timeout --signal=TERM --kill-after=5s 900s env ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=<commit> ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=<sha256> ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_1 python3 /root/catcas_live_small_wall/orbitstate_independent_v2_1/source/orbitstate_independent_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_independent_v2_1/source --output-root /root/catcas_live_small_wall/orbitstate_independent_v2_1/output --run-id orbitstate_independent_v2_1 --expected-manifest-sha <sha256> --expected-commit-binding <commit>"
         ],
         [
           "ssh",
           "root@192.168.137.100",
-          "test -d /root/catcas_live_small_wall/orbitstate_independent_v2_0/output"
+          "test -d /root/catcas_live_small_wall/orbitstate_independent_v2_1/output"
         ],
         [
           "scp",
           "-r",
-          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/output/.",
-          "<fake_transport_root>\\runs_failure\\orbitstate_independent_v2_0"
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_1/output/.",
+          "<fake_transport_root>\\runs_failure\\orbitstate_independent_v2_1"
         ]
       ],
       "failure_evidence": {
@@ -809,10 +916,11 @@
     "copyback_command_failure": 1,
     "copyback_sha_mismatch": 1,
     "copyback_size_mismatch": 1,
+    "preexecution_no_output": 1,
     "remote_root_exists": 0,
     "success": 1,
     "target_failure": 1
   },
-  "transport_simulation_sha256": "726628b397a766d6059a27f5eaeab860c1d17f6c4e2ca547bd23a1760836a49b",
+  "transport_simulation_sha256": "02285e77eee5e6e46317bdc8c17e6806306ffe33809031fc0857a574f2808aac",
   "zero_live_contact": true
 }

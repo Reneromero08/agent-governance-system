@@ -53,7 +53,7 @@
   },
   "hardware_executions": 0,
   "network_connections": 0,
-  "offline_validate_sha256": "2d049a8d111b4a415092a582ca2f0a17358ced3b947f77e82ea866e541be3d98",
+  "offline_validate_sha256": "59164f37034f1c0847740efc6786156761b07db2039b2a665e9f7de2d0f33898",
   "passed": true,
   "physical_protocol_static_proof": {
     "checks": {
@@ -110,7 +110,7 @@
   },
   "runtime_compile": {
     "binary": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\orbitstate_independent_runtime",
-    "binary_sha256": "a2b7a5c834350516a57839b80dc36163b674a3e1dedf152a42a84f509b7e67a7",
+    "binary_sha256": "b6d1135a5f720be0beb7fc96e4c8477cb9ed67899d28f16173d559b117908e30",
     "command": [
       "wsl",
       "--",
@@ -202,7 +202,7 @@
   "source_bundle": {
     "file_count": 12,
     "path": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\ORBITSTATE_SOURCE_BUNDLE.tar.gz",
-    "sha256": "f100fe46afdc57d72c1c0448a97adb6081008ffa5b0d990f977f2faf5f0c8078"
+    "sha256": "379c54daac84fdfe69f762ffe4961e8b4dfa8a504d5ead8357e23b2274efb74e"
   },
   "source_hashes": {
     "ORBITSTATE_INDEPENDENT_CONTRACT_V2.md": {
@@ -238,7 +238,7 @@
       "size": 61166
     },
     "orbitstate_independent_runtime.c": {
-      "sha256": "6bd20004cdd3132bc3f72f70504afcd3d08a30938f24628e06cf33e7d30bfd91",
+      "sha256": "821b13fa3886a5aaabd7bf7a7d2bcd14ae9855e2b45f2572182fcfc590da984a",
       "size": 42951
     },
     "orbitstate_independent_runtime.h": {
@@ -246,12 +246,12 @@
       "size": 870
     },
     "orbitstate_independent_target.py": {
-      "sha256": "9740374d9bedbb3a6be9c2f7ae9b38716acc3e1a6c44a9b326f99074e0ae40c9",
-      "size": 64574
+      "sha256": "c746ac45e38fe20b91368c96de750d3555ad4eb6fe4ef868ce57c7a35cdaeede",
+      "size": 65877
     },
     "run_orbitstate_independent_v2.py": {
-      "sha256": "86bfea7807ea0464fbf613dbaf244e712ad0b670188e13db87c0c0e6524621a1",
-      "size": 51613
+      "sha256": "dee4755d68f500b9d7a51e2fde101b23579302ad43899e6c8feb89da2230c5a5",
+      "size": 65652
     }
   },
   "zero_live_contact": true

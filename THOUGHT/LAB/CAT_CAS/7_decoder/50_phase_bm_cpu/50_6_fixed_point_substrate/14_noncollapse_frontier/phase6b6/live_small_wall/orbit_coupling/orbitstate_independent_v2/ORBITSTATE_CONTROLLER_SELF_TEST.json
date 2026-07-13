@@ -9,10 +9,10 @@
   },
   "schema": "ORBITSTATE_CONTROLLER_SELF_TEST_V2",
   "self_test_passed": true,
-  "self_test_sha256": "bad7ffe1e9da7632b06bf2569a89016b9b030a859e800f1919a0e76d1745ce77",
+  "self_test_sha256": "c175b1aae1697ce61b600435456ad2b1f11c9e42b57e68d8a275c75c985fa2a3",
   "transport_passed": true,
-  "transport_simulation_sha256": "726628b397a766d6059a27f5eaeab860c1d17f6c4e2ca547bd23a1760836a49b",
+  "transport_simulation_sha256": "02285e77eee5e6e46317bdc8c17e6806306ffe33809031fc0857a574f2808aac",
   "validate_only_passed": true,
-  "validate_only_stable_sha256": "7522412fb1388968858cd761b60673a010d24ef0f3a242fa79c5473d665b734c",
+  "validate_only_stable_sha256": "734c862a3d0adf4a3875e773cdb99501ce252992329cf96cdbddd365e318220b",
   "zero_live_contact": true
 }

@@ -1,0 +1,44 @@
+{
+  "checks": {
+    "fixed_parent_depth_static_rejection": true,
+    "module_import_succeeds": true,
+    "no_index_error": true,
+    "offline_validation_succeeds": true,
+    "starting_commit_layout_would_fail": true,
+    "target_self_test_succeeds": true,
+    "zero_hardware_execution": true,
+    "zero_network_contact": true
+  },
+  "deployment_layout_self_test_sha256": "331a36a6277711fb1a41273bd621e0f8cc699ffbd37bd5ad7c1f2ed2d999a3ae",
+  "import_returncode": 0,
+  "offline_validate_passed": true,
+  "offline_validate_returncode": 0,
+  "passed": true,
+  "python_executable_name": "python.exe",
+  "schema": "ORBITSTATE_DEPLOYMENT_LAYOUT_SELF_TEST_V1",
+  "science_package_id": "orbitstate_independent_v2_0",
+  "static_rejection": {
+    "current_hits": [],
+    "passed": true,
+    "schema": "ORBITSTATE_FIXED_PARENT_DEPTH_STATIC_REJECTION_V1",
+    "starting_commit": "384388e7bf27a1bc691ee9f13eba07f72f0b231c",
+    "starting_commit_hits": [
+      {
+        "file": "orbitstate_independent_target.py",
+        "line": 32,
+        "text": "REPO_ROOT = HERE.parents[9]"
+      },
+      {
+        "file": "run_orbitstate_independent_v2.py",
+        "line": 22,
+        "text": "REPO_ROOT = HERE.parents[9]"
+      }
+    ],
+    "starting_commit_would_fail": true,
+    "zero_live_contact": true
+  },
+  "target_self_test_passed": true,
+  "target_self_test_returncode": 0,
+  "transaction_run_id": "orbitstate_independent_v2_1",
+  "zero_live_contact": true
+}

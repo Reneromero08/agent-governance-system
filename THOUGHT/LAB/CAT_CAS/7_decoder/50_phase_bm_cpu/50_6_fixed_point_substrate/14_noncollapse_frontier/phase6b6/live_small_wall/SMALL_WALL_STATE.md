@@ -6,7 +6,7 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`ORBITSTATE_INDEPENDENT_WALL_CROSSING_PACKAGE_FROZEN_AWAITING_AUTHORIZATION`
+`ORBITSTATE_INDEPENDENT_V2_RETRY1_FROZEN_AWAITING_AUTHORIZATION`
 
 **Latest live result:**
 `independent_window_transducer_v3_0` completed the one authorized V3 live
@@ -43,9 +43,9 @@ scientific classes remain `BALANCED_PHYSICAL_TRANSDUCER_PARTIAL`,
 
 Frozen package root:
 `phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2`.
-Expected local evidence root:
+Attempt-zero local evidence root:
 `D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\phase6b6\live_small_wall\orbit_coupling\runs\orbitstate_independent_v2_0`.
-Expected remote root:
+Attempt-zero remote root:
 `/root/catcas_live_small_wall/orbitstate_independent_v2_0`.
 
 Key frozen hashes: public null-law audit
@@ -65,12 +65,9 @@ controller self-test `e94d8ef893b14e8495eb0f7c20a0742df9b65d8ec3d12b62e4feb86d90
 transport simulation `52a040ce658ed6e97fb459a0fd370c786863dfbc585242bc7a32f78c8aa136e4`,
 and Sol audit `21b56d61b9fc43b2d2ae3da7321f00ef189fbb7e925fac20ce4e0adc8ef2b9b8`.
 
-Future live authorization requires all three exact environment variables:
-`ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=<final_commit>`,
-`ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=7ff1ee4d1886c747afaf0baf0ed695015c82cec65aa0802c92bd89d5bd5ea677`,
-and `ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_0`.
-The exact future command is:
-`ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=<final_commit> ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=7ff1ee4d1886c747afaf0baf0ed695015c82cec65aa0802c92bd89d5bd5ea677 ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_0 python orbitstate_independent_v2/run_orbitstate_independent_v2.py --execute-authorized`.
+The attempt-zero live authorization was consumed and is not reusable. Current
+authorization, if granted later, must use the retry-one transaction identity recorded
+below.
 
 Allowed target classes are `ORBITSTATE_INDEPENDENT_COUPLING_CONFIRMED`,
 `ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE`, and
@@ -80,6 +77,27 @@ Allowed target classes are `ORBITSTATE_INDEPENDENT_COUPLING_CONFIRMED`,
 feature freeze before unblinding, no private field in receiver extraction,
 restoration and mapping controls passing, a no-material-blocker GPT-5.6 Sol
 read-only post-run audit, and GPT-5.5 independent verification of copied evidence.
+
+**OrbitState Independent V2 retry state:**
+Attempt zero, `orbitstate_independent_v2_0`, consumed the sole live authorization at
+commit `384388e7bf27a1bc691ee9f13eba07f72f0b231c` and failed before target
+output-root creation on the transferred target import path:
+`IndexError: 9` from `HERE.parents[9]`. Controller status was
+`ORBITSTATE_CONTROLLER_TARGET_FAILED_NO_COPYBACK`, target return code was `1`, the
+remote root `/root/catcas_live_small_wall/orbitstate_independent_v2_0` is retained,
+and local controller receipt hash is
+`5a5b82542d1c9268bbfaba051c4528d9859446b26c781c6c0a7a0e86e835f669`. No PMU
+preflight, hardware execution, source execution, raw capture, feature freeze,
+unblinding, adjudication, or scientific classification occurred.
+
+Retry one keeps science package `orbitstate_independent_v2_0` unchanged and freezes
+the operational transaction as `orbitstate_independent_v2_1`. The expected local root
+is
+`D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\phase6b6\live_small_wall\orbit_coupling\runs\orbitstate_independent_v2_1`;
+the expected remote root is
+`/root/catcas_live_small_wall/orbitstate_independent_v2_1`. Scientific state remains
+`PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE` and
+`PRIVATE_ORBITSTATE_COUPLING_NOT_YET_OBSERVED`.
 
 **Active wall:**
 The current wall is still carrier/access-model selection. Timing, ownership-intent PMU

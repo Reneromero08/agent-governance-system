@@ -1,55 +1,49 @@
 {
   "audit_threads": [
-    "019f5a85-8866-7871-9be3-449a32facfd7"
+    "019f5a85-8866-7871-9be3-449a32facfd7",
+    "019f5ab4-5ce0-7b70-b3fe-2d5ff581f4ca"
   ],
-  "closure_evidence": {
-    "ADJUDICATION_CLI_UNREACHABLE": [
-      "parser.add_argument(\"--receiver-features\", type=Path)",
-      "feature_boundary_static_proof.adjudication_cli_receiver_features_argument"
-    ],
-    "FAILURE_COPYBACK_REJECTS_REAL_PACKET": [
-      "execute_live creates the absent output root before authorization checks",
-      "seal_failure_evidence removes the ownership marker before manifesting copy-back files",
-      "failure_copyback_self_test verifies exact failure-packet coverage"
-    ],
-    "FEATURE_PROCESS_NOT_DENIED_PRIVATE_ACCESS": [
-      "receiver feature subprocess runs from a mode-0700 isolated input directory",
-      "receiver feature inputs are copied public-only files",
-      "receiver feature output uses a separate directory and denies private/source-receipt path names"
-    ],
-    "PMU_PREFLIGHT_ACCEPTS_ZERO_CYCLES": [
-      "runtime measure_store_window fails when cycles are zero",
-      "target run_runtime_pmu_preflight requires cycles > 0"
-    ],
-    "SUCCESS_DIGEST_BINDINGS_ARE_STALE": [
-      "final target result no longer embeds self-referential execution/copyback manifest digests",
-      "success execution manifest is emitted after final result is stable",
-      "copyback manifest is emitted last and independently verified by the controller"
-    ],
-    "V3_CARRIER_NOT_EXACTLY_INHERITED": [
-      "runtime materializes A/B using the V3 pattern_byte(index) = (index * 131 + 17) & 0xff",
-      "runtime uses segmented V3 sentinel PMU windows over starts 0, 1024, 2048, and 3072",
-      "runtime keeps affine line(i) = (257*i + 43) mod 4096 for baseline, source work, sentinels, and restoration"
-    ]
-  },
   "custody": "READ_ONLY",
   "effort": "xhigh",
-  "material_findings": [
-    "ADJUDICATION_CLI_UNREACHABLE",
-    "FAILURE_COPYBACK_REJECTS_REAL_PACKET",
-    "FEATURE_PROCESS_NOT_DENIED_PRIVATE_ACCESS",
-    "V3_CARRIER_NOT_EXACTLY_INHERITED",
-    "PMU_PREFLIGHT_ACCEPTS_ZERO_CYCLES",
-    "SUCCESS_DIGEST_BINDINGS_ARE_STALE"
-  ],
-  "material_findings_closed_by_repair": true,
+  "material_findings": [],
   "model": "gpt-5.6-sol",
   "network_or_lab_probe": false,
   "no_checkout_mutation": true,
   "no_git_write": true,
   "no_lab_device_contact": true,
-  "read_only_audit_verdict": "FAIL_MATERIAL_FINDINGS_FOUND",
+  "previous_repair_audit": {
+    "material_findings": [
+      "ADJUDICATION_CLI_UNREACHABLE",
+      "FAILURE_COPYBACK_REJECTS_REAL_PACKET",
+      "FEATURE_PROCESS_NOT_DENIED_PRIVATE_ACCESS",
+      "V3_CARRIER_NOT_EXACTLY_INHERITED",
+      "PMU_PREFLIGHT_ACCEPTS_ZERO_CYCLES",
+      "SUCCESS_DIGEST_BINDINGS_ARE_STALE"
+    ],
+    "status": "SOL_AUDIT_MATERIAL_FINDINGS_REPAIRED_OFFLINE",
+    "thread_id": "019f5a85-8866-7871-9be3-449a32facfd7"
+  },
+  "read_only_audit_verdict": "NO_MATERIAL_BLOCKERS",
+  "retry1_deployment_audit": {
+    "checks": [
+      "no transferred Python file assumes repository depth",
+      "shallow deployment layout imports and validates",
+      "attempt-zero roots are immutable provenance",
+      "retry one uses distinct local and remote roots",
+      "frozen science artifacts are byte-identical",
+      "science was not rerandomized or adapted",
+      "runtime authority uses retry-one transaction identity",
+      "controller cleanup targets only retry-one root",
+      "offline modes perform zero target contact",
+      "retry remains first scientific private observation"
+    ],
+    "non_material_notes": [
+      "Earlier state text still carried attempt-zero authorization values before this record's state update"
+    ],
+    "thread_id": "019f5ab4-5ce0-7b70-b3fe-2d5ff581f4ca",
+    "verdict": "NO_MATERIAL_BLOCKERS"
+  },
   "schema": "ORBITSTATE_SOL_AUDIT_V2",
-  "status": "SOL_AUDIT_MATERIAL_FINDINGS_REPAIRED_OFFLINE",
+  "status": "RETRY1_DEPLOYMENT_SOL_AUDIT_NO_MATERIAL_BLOCKERS",
   "target_contact": false
 }

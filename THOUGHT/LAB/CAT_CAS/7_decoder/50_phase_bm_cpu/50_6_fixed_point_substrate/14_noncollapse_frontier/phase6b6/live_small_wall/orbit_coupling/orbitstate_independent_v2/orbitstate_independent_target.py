@@ -29,11 +29,12 @@ import orbitstate_independent_public as public
 
 
 HERE = Path(__file__).resolve().parent
-REPO_ROOT = HERE.parents[9]
+SCIENCE_PACKAGE_ID = public.RUN_ID
+TRANSACTION_RUN_ID = "orbitstate_independent_v2_1"
 COMMIT_ENV = "ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING"
 MANIFEST_ENV = "ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256"
 AUTHORITY_ENV = "ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY"
-AUTHORITY_VALUE = public.RUN_ID
+AUTHORITY_VALUE = TRANSACTION_RUN_ID
 OUTPUT_ROOT_MARKER = ".orbitstate_independent_v2_owned"
 
 SOURCE_FILE_NAMES = [
@@ -546,7 +547,12 @@ def failure_copyback_self_test() -> dict[str, Any]:
     with tempfile.TemporaryDirectory(prefix="orbitstate_failure_packet_") as temp:
         output_root = Path(temp) / "output"
         create_absent_output_root(output_root)
-        custody = {"schema": "LIVE_CUSTODY_LOG_V2", "run_id": public.RUN_ID}
+        custody = {
+            "schema": "LIVE_CUSTODY_LOG_V2",
+            "science_package_id": SCIENCE_PACKAGE_ID,
+            "transaction_run_id": TRANSACTION_RUN_ID,
+            "run_id": TRANSACTION_RUN_ID,
+        }
         state = {"hardware_execution_began": False, "source_and_schedule_hashes_verified": True}
         seal_failure_evidence(
             output_root,
@@ -882,7 +888,9 @@ def run_adjudication_subprocess(
         receipt_path,
         {
             "schema": "ORBITSTATE_FEATURE_FREEZE_RECEIPT_V2",
-            "run_id": public.RUN_ID,
+            "science_package_id": SCIENCE_PACKAGE_ID,
+            "transaction_run_id": TRANSACTION_RUN_ID,
+            "run_id": TRANSACTION_RUN_ID,
             "events": chronology,
             "receiver_features_sha256": receiver_features_sha256,
         },
@@ -962,7 +970,9 @@ def write_copyback_manifest(output_root: Path) -> dict[str, Any]:
     ]
     manifest = {
         "schema": "ORBITSTATE_COPYBACK_MANIFEST_V2",
-        "run_id": public.RUN_ID,
+        "science_package_id": SCIENCE_PACKAGE_ID,
+        "transaction_run_id": TRANSACTION_RUN_ID,
+        "run_id": TRANSACTION_RUN_ID,
         "entries": entries,
         "entry_count": len(entries),
     }
@@ -1006,7 +1016,9 @@ def success_execution_manifest(
     source_count = len(public.read_jsonl(output_root / "ORBITSTATE_SOURCE_RECEIPTS.jsonl"))
     manifest = {
         "schema": "ORBITSTATE_SUCCESS_EXECUTION_MANIFEST_V2",
-        "run_id": public.RUN_ID,
+        "science_package_id": SCIENCE_PACKAGE_ID,
+        "transaction_run_id": TRANSACTION_RUN_ID,
+        "run_id": TRANSACTION_RUN_ID,
         "contract_sha256": sha256_file(source_root / "ORBITSTATE_INDEPENDENT_CONTRACT_V2.md"),
         "implementation_manifest_file_sha256": implementation_manifest_file_sha256,
         "implementation_manifest_canonical_sha256": implementation_manifest_canonical_sha256,
@@ -1050,7 +1062,9 @@ def seal_failure_evidence(
 ) -> dict[str, Any]:
     failure = {
         "schema": "TARGET_FAILURE_ORBITSTATE_INDEPENDENT_V2",
-        "run_id": public.RUN_ID,
+        "science_package_id": SCIENCE_PACKAGE_ID,
+        "transaction_run_id": TRANSACTION_RUN_ID,
+        "run_id": TRANSACTION_RUN_ID,
         "failure_phase": phase,
         "exception_type": type(exc).__name__,
         "exception_message": str(exc),
@@ -1075,7 +1089,9 @@ def seal_failure_evidence(
     write_json(output_root / "TARGET_FAILURE_ORBITSTATE_INDEPENDENT_V2.json", failure)
     final = {
         "status": "ORBITSTATE_INDEPENDENT_TARGET_FAILED",
-        "run_id": public.RUN_ID,
+        "science_package_id": SCIENCE_PACKAGE_ID,
+        "transaction_run_id": TRANSACTION_RUN_ID,
+        "run_id": TRANSACTION_RUN_ID,
         "failure_phase": phase,
         "exception_type": type(exc).__name__,
         "exception_message": str(exc),
@@ -1094,7 +1110,9 @@ def seal_failure_evidence(
     }
     manifest = {
         "schema": "ORBITSTATE_FAILURE_MANIFEST_V2",
-        "run_id": public.RUN_ID,
+        "science_package_id": SCIENCE_PACKAGE_ID,
+        "transaction_run_id": TRANSACTION_RUN_ID,
+        "run_id": TRANSACTION_RUN_ID,
         "failure_phase": phase,
         "scientific_classification_emitted": False,
         "failure_files": files,
@@ -1116,6 +1134,8 @@ def execute_live(
     phase = "authorization"
     custody: dict[str, Any] = {
         "schema": "LIVE_CUSTODY_LOG_V2",
+        "science_package_id": SCIENCE_PACKAGE_ID,
+        "transaction_run_id": run_id,
         "run_id": run_id,
         "zero_frequency_writes": 0,
         "zero_sysctl_writes": 0,
@@ -1132,11 +1152,13 @@ def execute_live(
     require(not output_root.exists(), f"output root already exists: {output_root}")
     create_absent_output_root(output_root)
     try:
-        require(run_id == public.RUN_ID, "run id mismatch")
+        require(run_id == TRANSACTION_RUN_ID, "transaction run id mismatch")
         manifest_path = source_root / "ORBITSTATE_IMPLEMENTATION_MANIFEST.json"
         require(manifest_path.exists(), "implementation manifest missing")
         require(sha256_file(manifest_path) == expected_manifest_sha, "manifest file hash mismatch")
         implementation_manifest = read_json(manifest_path)
+        require(implementation_manifest.get("science_package_id") == SCIENCE_PACKAGE_ID, "science package identity mismatch")
+        require(implementation_manifest.get("transaction_run_id") == TRANSACTION_RUN_ID, "transaction identity mismatch")
         require(
             canonical_digest({key: value for key, value in implementation_manifest.items() if key != "manifest_canonical_sha256"})
             == implementation_manifest["manifest_canonical_sha256"],
@@ -1235,6 +1257,8 @@ def execute_live(
         adjudication = read_json(output_root / "ORBITSTATE_ADJUDICATION.json")
         final = {
             "status": "ORBITSTATE_INDEPENDENT_TARGET_COMPLETE",
+            "science_package_id": SCIENCE_PACKAGE_ID,
+            "transaction_run_id": run_id,
             "run_id": run_id,
             "result_class": adjudication_receipt["result_class"],
             "allowed_result_classes": public.ALLOWED_RESULT_CLASSES,
@@ -1301,7 +1325,7 @@ def parse_args() -> argparse.Namespace:
     modes.add_argument("--adjudicate-frozen", action="store_true")
     parser.add_argument("--source-root", type=Path, default=HERE)
     parser.add_argument("--output-root", type=Path, default=HERE / "_target_out")
-    parser.add_argument("--run-id", default=public.RUN_ID)
+    parser.add_argument("--run-id", default=TRANSACTION_RUN_ID)
     parser.add_argument("--expected-manifest-sha")
     parser.add_argument("--expected-commit-binding")
     parser.add_argument("--schedule-json", type=Path)

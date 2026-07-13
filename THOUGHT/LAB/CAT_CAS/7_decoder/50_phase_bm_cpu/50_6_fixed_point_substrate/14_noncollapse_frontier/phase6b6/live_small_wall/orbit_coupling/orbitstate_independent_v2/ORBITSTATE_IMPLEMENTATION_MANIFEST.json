@@ -4,10 +4,26 @@
     "ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE",
     "ORBITSTATE_INDEPENDENT_COUPLING_NOT_ESTABLISHED"
   ],
+  "attempt_zero": {
+    "controller_result_sha256": "5a5b82542d1c9268bbfaba051c4528d9859446b26c781c6c0a7a0e86e835f669",
+    "controller_status": "ORBITSTATE_CONTROLLER_TARGET_FAILED_NO_COPYBACK",
+    "failure_receipt_sha256": "1b580d2ea2f8f53bca6983c6359d6038de83443bed7d1a97119e3ccb42a5f374",
+    "hardware_execution_began": false,
+    "local_root": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\runs\\orbitstate_independent_v2_0",
+    "remote_root": "/root/catcas_live_small_wall/orbitstate_independent_v2_0",
+    "scientific_classification_emitted": false,
+    "target_returncode": 1,
+    "transaction_run_id": "orbitstate_independent_v2_0"
+  },
   "branch_at_freeze_build": "main",
-  "expected_local_root": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\runs\\orbitstate_independent_v2_0",
-  "expected_remote_output_root": "/root/catcas_live_small_wall/orbitstate_independent_v2_0/output",
-  "expected_remote_root": "/root/catcas_live_small_wall/orbitstate_independent_v2_0",
+  "deployment_layout_self_test": {
+    "passed": true,
+    "sha256": "0333a1b851a2b0706031738a1ba7af986fe0207b16e149466d4990f232f46017",
+    "starting_commit_layout_would_fail": true
+  },
+  "expected_local_root": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\runs\\orbitstate_independent_v2_1",
+  "expected_remote_output_root": "/root/catcas_live_small_wall/orbitstate_independent_v2_1/output",
+  "expected_remote_root": "/root/catcas_live_small_wall/orbitstate_independent_v2_1",
   "feature_boundary_self_test": {
     "passed": true,
     "sha256": "2a986d0917cdfe097237088e28d556c4a403849e6109262273146b646ba30e4d"
@@ -34,18 +50,20 @@
   "future_authorization": {
     "commit_binding_env": "ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING",
     "live_authority_env": "ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY",
-    "live_authority_value": "orbitstate_independent_v2_0",
+    "live_authority_value": "orbitstate_independent_v2_1",
     "manifest_binding_env": "ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256",
-    "powershell_command": "$env:ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING = \"<new-final-commit>\"\n$env:ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256 = \"<new-manifest-file-sha>\"\n$env:ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY = \"orbitstate_independent_v2_0\"\n\n.\\.venv\\Scripts\\python.exe \"THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\run_orbitstate_independent_v2.py\" --execute-authorized"
+    "powershell_command": "$env:ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING = \"<new-final-commit>\"\n$env:ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256 = \"<new-manifest-file-sha>\"\n$env:ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY = \"orbitstate_independent_v2_1\"\n\n.\\.venv\\Scripts\\python.exe \"THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2\\run_orbitstate_independent_v2.py\" --execute-authorized"
   },
-  "git_status_porcelain_at_freeze_build": " M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/ORBITSTATE_CONTROLLER_SELF_TEST.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/ORBITSTATE_IMPLEMENTATION_MANIFEST.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/ORBITSTATE_OFFLINE_VALIDATE.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/ORBITSTATE_RUNTIME_DISASSEMBLY_NORMALIZED.txt\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/ORBITSTATE_SOL_AUDIT.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/ORBITSTATE_SOURCE_BUNDLE.tar.gz\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/ORBITSTATE_TARGET_SELF_TEST.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/ORBITSTATE_TRANSPORT_SIMULATION.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/orbitstate_independent_runtime\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/orbitstate_independent_runtime.c\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/orbitstate_independent_runtime.h\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/orbitstate_independent_target.py\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/run_orbitstate_independent_v2.py\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/LIVE_CUSTODY_AND_PROTOCOL_REPAIR_AUDIT.md\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/ORBITSTATE_FEATURE_BOUNDARY_SELF_TEST.json\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/ORBITSTATE_SOURCE_HASHES.json\n",
+  "git_status_porcelain_at_freeze_build": " M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/SMALL_WALL_STATE.md\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/ORBITSTATE_CONTROLLER_SELF_TEST.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/ORBITSTATE_IMPLEMENTATION_MANIFEST.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/ORBITSTATE_OFFLINE_VALIDATE.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/ORBITSTATE_SOL_AUDIT.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/ORBITSTATE_SOURCE_BUNDLE.tar.gz\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/ORBITSTATE_SOURCE_HASHES.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/ORBITSTATE_TARGET_SELF_TEST.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/ORBITSTATE_TRANSPORT_SIMULATION.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/orbitstate_independent_runtime\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/orbitstate_independent_runtime.c\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/orbitstate_independent_target.py\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/run_orbitstate_independent_v2.py\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/ORBITSTATE_ATTEMPT0_PREEXECUTION_FAILURE.json\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/ORBITSTATE_DEPLOYMENT_LAYOUT_SELF_TEST.json\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/ORBITSTATE_INDEPENDENT_V2_RETRY1_AUTHORITY.md\n",
   "hashes": {
+    "attempt0_failure_receipt_sha256": "1b580d2ea2f8f53bca6983c6359d6038de83443bed7d1a97119e3ccb42a5f374",
     "contract_sha256": "1f586b4648a516723f5a77cfc381d0e4a8c305dd9446a28289975a3ad3c49507",
-    "controller_self_test_sha256": "f1a1de7d9951b525a38c45509bf8cfe93918e5e804d1bc648fe1b7f7d2764cc2",
+    "controller_self_test_sha256": "1d43268ff1039a5a8e34a2abc215fbe9a09d29ce13a12f36e6e0a4b96e60b596",
+    "deployment_layout_self_test_sha256": "0333a1b851a2b0706031738a1ba7af986fe0207b16e149466d4990f232f46017",
     "disassembly_sha256": "58d1d5e844da302202cef2d8eebaca8d02e5f9e2ac8a3c747e443f0e8ea39a71",
     "feature_boundary_self_test_sha256": "2a986d0917cdfe097237088e28d556c4a403849e6109262273146b646ba30e4d",
     "live_custody_repair_audit_sha256": "e9282545b09242bb9a2e8d5f1723c705c329fa1cc196f8bad9c6b56934d3bf91",
-    "offline_binary_sha256": "a2b7a5c834350516a57839b80dc36163b674a3e1dedf152a42a84f509b7e67a7",
+    "offline_binary_sha256": "b6d1135a5f720be0beb7fc96e4c8477cb9ed67899d28f16173d559b117908e30",
     "private_source_map_canonical_sha256": "b952f2a161e782dfe41e9dfca21ba4f6bf2902bc69392d9ad52915daa3955464",
     "private_source_map_file_sha256": "619189f66d32610053c3899616d656d16a21814a45074191f37f95acdbf58325",
     "public_null_law_audit_sha256": "fc6321f2b898a3f97766e90d68267b67bea79aa32b26ad110cf085deda09c01e",
@@ -53,19 +71,20 @@
     "public_schedule_sha256_file_sha256": "1d5f50d78d313c343f5a2c7ebf563a0d913127465e316750ef3967085f90d347",
     "public_schedule_tsv_sha256": "57aaf5635e0ea1bcecd17f6efc0383f6ce08a893751d9203d1c87b0e4c7a7876",
     "public_transducer_reference_file_sha256": "c608723329322df07b036a9237d72c2e3bed87ec10d75c105b03b07a50e460c1",
+    "retry1_authority_overlay_sha256": "cc4d7630322cbd7016c3013a4cf6bbb22152f72ab379279435566a1b72892fee",
     "self_test_sha256": "d3208059cca5859713a2e73eb693e9f6e696af8aebfeb0c0755cb5c281988780",
-    "sol_audit_sha256": "e7c7b51d75bab914e9e16d70acccc4c7c85469b0deca68fe55729c24adba3dda",
-    "source_bundle_sha256": "f100fe46afdc57d72c1c0448a97adb6081008ffa5b0d990f977f2faf5f0c8078",
-    "target_self_test_sha256": "c4d386bb49357e50b666703d169442cf9a27fb5c74bc293ad46e8ff4c9087c37",
-    "transport_simulation_sha256": "9f39e2a31f9a84d1c0c8b9329d452948e68718c6bbeebff47fb9aeec94206d91"
+    "sol_audit_sha256": "fffb983e2ace5a65dcff693f722fc900f432caf0041bc1743fa7f71378cc8eb6",
+    "source_bundle_sha256": "379c54daac84fdfe69f762ffe4961e8b4dfa8a504d5ead8357e23b2274efb74e",
+    "target_self_test_sha256": "43385be628af8c69c5e9e6d8c7962604da8bf886681dbd6afccd6f48a01c0934",
+    "transport_simulation_sha256": "dc53ee66cae0a07c3a31fd0219c2615195e806e2612744b9fbcf9791708529b7"
   },
-  "head_at_freeze_build": "3c9e3296fec49390de4bae4f0b10232ece293625",
-  "manifest_canonical_sha256": "b5f99eadc032a0d35fbc64fdb343bb48a068cc43e0fc3845feea931076ec51fe",
+  "head_at_freeze_build": "384388e7bf27a1bc691ee9f13eba07f72f0b231c",
+  "manifest_canonical_sha256": "8b3250d32736a905113f3571a153b00676add37495b3e1dcbd1464bbb38ad1ed",
   "offline_validation": {
-    "offline_validate_sha256": "2d049a8d111b4a415092a582ca2f0a17358ced3b947f77e82ea866e541be3d98",
+    "offline_validate_sha256": "59164f37034f1c0847740efc6786156761b07db2039b2a665e9f7de2d0f33898",
     "passed": true
   },
-  "origin_main_at_freeze_build": "3c9e3296fec49390de4bae4f0b10232ece293625",
+  "origin_main_at_freeze_build": "384388e7bf27a1bc691ee9f13eba07f72f0b231c",
   "public_transducer_reference": {
     "aggregate_change_to_dirty_means": {
       "-1024": -1274.625,
@@ -101,8 +120,9 @@
     "retained_result_class": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE",
     "source_commit": "4762b5b49b308ae4aca8e141113e4fafe4b0f81e"
   },
-  "run_id": "orbitstate_independent_v2_0",
+  "run_id": "orbitstate_independent_v2_1",
   "schema": "ORBITSTATE_IMPLEMENTATION_MANIFEST_V2",
+  "science_package_id": "orbitstate_independent_v2_0",
   "small_wall_post_audit_promotion_law": [
     "fresh target result is ORBITSTATE_INDEPENDENT_COUPLING_CONFIRMED",
     "both fresh replicates independently pass",
@@ -113,16 +133,9 @@
     "GPT-5.5 independently verifies copied source and evidence"
   ],
   "sol_audit": {
-    "material_findings": [
-      "ADJUDICATION_CLI_UNREACHABLE",
-      "FAILURE_COPYBACK_REJECTS_REAL_PACKET",
-      "FEATURE_PROCESS_NOT_DENIED_PRIVATE_ACCESS",
-      "V3_CARRIER_NOT_EXACTLY_INHERITED",
-      "PMU_PREFLIGHT_ACCEPTS_ZERO_CYCLES",
-      "SUCCESS_DIGEST_BINDINGS_ARE_STALE"
-    ],
-    "sha256": "e7c7b51d75bab914e9e16d70acccc4c7c85469b0deca68fe55729c24adba3dda",
-    "status": "SOL_AUDIT_MATERIAL_FINDINGS_REPAIRED_OFFLINE"
+    "material_findings": [],
+    "sha256": "fffb983e2ace5a65dcff693f722fc900f432caf0041bc1743fa7f71378cc8eb6",
+    "status": "RETRY1_DEPLOYMENT_SOL_AUDIT_NO_MATERIAL_BLOCKERS"
   },
   "source_file_map": {
     "ORBITSTATE_INDEPENDENT_CONTRACT_V2.md": {
@@ -158,7 +171,7 @@
       "size": 61166
     },
     "orbitstate_independent_runtime.c": {
-      "sha256": "6bd20004cdd3132bc3f72f70504afcd3d08a30938f24628e06cf33e7d30bfd91",
+      "sha256": "821b13fa3886a5aaabd7bf7a7d2bcd14ae9855e2b45f2572182fcfc590da984a",
       "size": 42951
     },
     "orbitstate_independent_runtime.h": {
@@ -166,18 +179,19 @@
       "size": 870
     },
     "orbitstate_independent_target.py": {
-      "sha256": "9740374d9bedbb3a6be9c2f7ae9b38716acc3e1a6c44a9b326f99074e0ae40c9",
-      "size": 64574
+      "sha256": "c746ac45e38fe20b91368c96de750d3555ad4eb6fe4ef868ce57c7a35cdaeede",
+      "size": 65877
     },
     "run_orbitstate_independent_v2.py": {
-      "sha256": "86bfea7807ea0464fbf613dbaf244e712ad0b670188e13db87c0c0e6524621a1",
-      "size": 51613
+      "sha256": "dee4755d68f500b9d7a51e2fde101b23579302ad43899e6c8feb89da2230c5a5",
+      "size": 65652
     }
   },
-  "starting_commit": "3c9e3296fec49390de4bae4f0b10232ece293625",
+  "starting_commit": "384388e7bf27a1bc691ee9f13eba07f72f0b231c",
+  "transaction_run_id": "orbitstate_independent_v2_1",
   "transport_simulation": {
     "passed": true,
-    "sha256": "9f39e2a31f9a84d1c0c8b9329d452948e68718c6bbeebff47fb9aeec94206d91"
+    "sha256": "dc53ee66cae0a07c3a31fd0219c2615195e806e2612744b9fbcf9791708529b7"
   },
   "zero_live_contact_attestation": {
     "hardware_executions": 0,
