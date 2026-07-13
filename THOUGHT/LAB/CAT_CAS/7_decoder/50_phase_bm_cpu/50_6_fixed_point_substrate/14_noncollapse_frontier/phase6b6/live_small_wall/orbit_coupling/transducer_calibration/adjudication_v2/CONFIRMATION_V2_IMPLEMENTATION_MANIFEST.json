@@ -4,10 +4,20 @@
     "V1_PARTIAL_V2_TRANSFER_CANDIDATE",
     "V1_PARTIAL_V2_NOT_ESTABLISHED"
   ],
+  "attempt_zero_failure_evidence_hashes": {
+    "controller_result_sha256": "6c450d04c8db101d357326c8b8001474658ac4bc942476fe17f7f6ee6b616298",
+    "copyback_manifest_sha256": "3dfb0ac86c36b8e64aeeaeae3cca4e879675a16f0f295ad0a2b2134ec56a5127",
+    "failure_manifest_sha256": "24594d2715c096c0e60baae70a06bf2a0ed23e3cea47c101f4bcbc814203b06a",
+    "final_result_sha256": "436b36a9603fd1ad8a47897fd37a07d0f7f4810bb21047d17bca73ea9625f8ce",
+    "live_custody_log_sha256": "68c5a83cc687e2ea7f17257a85bbfaff56d0dda03810161f440105cdebae10cf",
+    "target_failure_sha256": "95a2104044a068c6eba89c2b00fd3ac4fdb392a15f39127c33c89baa7a5f1eb9"
+  },
+  "attempt_zero_run_id": "balanced_transducer_confirmation_v2_0",
+  "attempt_zero_source_commit": "6e4acd3340fbb5865193228275de43bdaedad883",
   "binary_custody": {
     "live_runtime_binary_sha256": "RECORDED_ON_TARGET_AFTER_TARGET_COMPILE",
     "mode": "target_compile_bound_by_source_and_compiler_contract",
-    "offline_validation_binary_sha256": "517dc2e3c86bb5c34b98a8c43b7d8b0f388e2a6f6c6c9eff2bd21b7af7571341",
+    "offline_validation_binary_sha256": "d187e5851282b85f2b9e05cc499d0e822b732e3beffe12ad78ba023209606876",
     "offline_validation_command": [
       "wsl",
       "--",
@@ -63,17 +73,18 @@
     ],
     "transferred_live_binary_sha256": null
   },
-  "contract_sha256": "6a0dee41851f417d6572facad7880d2bb92a364e46ceb4f9c5bc6b00890bead4",
-  "expected_command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\transducer_calibration\\adjudication_v2\\run_confirmation_v2.py --run-id balanced_transducer_confirmation_v2_0 --contract THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\transducer_calibration\\adjudication_v2\\CONFIRMATION_CONTRACT_V2.md --execute-authorized",
-  "expected_evidence_root": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/transducer_calibration/runs/balanced_transducer_confirmation_v2_0",
-  "expected_run_id": "balanced_transducer_confirmation_v2_0",
-  "expected_source_bundle_sha256": "e18585e6abd8be686a1d99f7c2c5aaf99a424c2c54f2741a446f961616290a2e",
+  "contract_sha256": "678a206198b84a8ea5802d0f6b5c41d08b161ecf0460de96366ad9c3fb43bdb3",
+  "expected_command": ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\transducer_calibration\\adjudication_v2\\run_confirmation_v2.py --run-id balanced_transducer_confirmation_v2_1 --contract THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\transducer_calibration\\adjudication_v2\\CONFIRMATION_CONTRACT_V2_RETRY1.md --execute-authorized",
+  "expected_evidence_root": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/transducer_calibration/runs/balanced_transducer_confirmation_v2_1",
+  "expected_remote_root": "/root/catcas_live_small_wall/balanced_transducer_confirmation_v2_1",
+  "expected_run_id": "balanced_transducer_confirmation_v2_1",
+  "expected_source_bundle_sha256": "a670684fea5ed1e383e84923021fbb0b633557ade932e9501f3337bf6ae50517",
   "final_commit": "AWAITING_LIVE_AUTHORIZATION",
   "final_commit_binding": {
-    "commit_binding_env": "CONFIRMATION_V2_COMMIT_BINDING",
-    "live_authority_env": "CONFIRMATION_V2_LIVE_AUTHORITY",
-    "live_authority_required_value": "balanced_transducer_confirmation_v2_0",
-    "live_controller_requirement": "before SSH/SCP, current clean git HEAD and origin/main must equal the 40-character SHA supplied in CONFIRMATION_V2_COMMIT_BINDING; CONFIRMATION_V2_LIVE_AUTHORITY must separately equal the closed run ID",
+    "commit_binding_env": "CONFIRMATION_V2_RETRY1_COMMIT_BINDING",
+    "live_authority_env": "CONFIRMATION_V2_RETRY1_LIVE_AUTHORITY",
+    "live_authority_required_value": "balanced_transducer_confirmation_v2_1",
+    "live_controller_requirement": "before SSH/SCP, current clean git HEAD and origin/main must equal the 40-character SHA supplied in CONFIRMATION_V2_RETRY1_COMMIT_BINDING; CONFIRMATION_V2_RETRY1_LIVE_AUTHORITY must separately equal the closed run ID",
     "mode": "exact_authorized_head_environment_gate",
     "placeholder_value": "AWAITING_LIVE_AUTHORIZATION"
   },
@@ -82,7 +93,8 @@
     "ORBITSTATE_PHYSICAL_QUERY_COUPLING_CANDIDATE",
     "SMALL_WALL_CROSSED"
   ],
-  "implementation_manifest_sha256": "b43c1b267dee16ade8da38f49f69a99ad16d0c69798b994a260fcc7c94ad1659",
+  "geometry_equivalence_receipt_sha256": "3f915faa1ed1290c096479db95a1f557ef41fba60b0805bd1b44933e66acaadb",
+  "implementation_manifest_sha256": "49b16bf60e1ff04f5a50716fdd11e9af506d7d6d3a2d6cf7e7ca10a660c5e1bd",
   "no_live_contact_attestation": {
     "frequency_writes": 0,
     "hardware_executions": 0,
@@ -93,49 +105,74 @@
     "ssh_executions": 0,
     "voltage_writes": 0
   },
+  "original_contract_sha256": "6a0dee41851f417d6572facad7880d2bb92a364e46ceb4f9c5bc6b00890bead4",
+  "pmu_custody_semantics": {
+    "definitive_permission_gate": "target_runtime_exact_event_perf_event_open_preflight",
+    "perf_event_paranoid": "diagnostic_only_when_effective_uid_is_zero",
+    "required_effective_uid": 0,
+    "retained_empirical_fact": "balanced_transducer_calibration_1 previously completed 224 PMU records on the same host while perf_event_paranoid was 3",
+    "sysctl_mutation_authorized": false
+  },
+  "pmu_preflight_self_test_sha256": "558bec51ef18f872305e647666c4eb678369cc2df816a78b0d26af87bbd0ce77",
   "primary_coordinate": "change_to_dirty",
   "public_self_test_sha256": "8372aa6371c4ab8e16116fc3fcfa5baa8313bef77d2056c55e3ba790b83aae22",
-  "schedule_json_sha256": "886bd84209da46e7a9722fd8edfcea74a44bf2b98ade90231709656a99dd67a5",
-  "schedule_semantic_sha256": "ecb3369ca21bbc7fa79b58222b8e05febbef0b15b79a48bed42a212fde746527",
+  "retry_contract_sha256": "678a206198b84a8ea5802d0f6b5c41d08b161ecf0460de96366ad9c3fb43bdb3",
+  "schedule_json_sha256": "86eaa3286240e7c344ba058c5ff10bb776fdd0d076b00ee512ee1e564b378f66",
+  "schedule_semantic_sha256": "ea749f375fcd36dcfe7c80c91ab9a98adee9f2ad15c2dd85fc7afc98090b0b48",
   "schedule_tsv_sha256": "570f165d4a24dff4680bc60046dd62523e9d596dffb4fac381da850df072c744",
   "schema_id": "CAT_CAS_CONFIRMATION_V2_IMPLEMENTATION_MANIFEST",
-  "self_test_sha256": "0da5f9c7a9bce83420a599bbb55417bf57345aba5c6b0fc532d710a76b8e690f",
+  "self_test_sha256": "3c18473e20d84f9927fade16f95b56cf76f84671bf0ffcbd879a7709e013958c",
   "sol_audit_disposition": {
-    "auditor": "gpt-5.6-sol",
-    "blocking_findings_repaired": [
-      "execution_requires_explicit_execute_authorized_mode_and_separate_live_authority",
-      "process_identity_matching_uses_command_identity_slots_and_per_replicate_snapshots",
-      "failure_copyback_is_status_aware_and_preserves_failure_manifest",
-      "pmu_type_and_perf_event_paranoid_are_enforced",
-      "policy_identity_requires_cpu_membership_and_driver",
-      "source_bundle_gzip_header_is_path_independent"
-    ],
-    "lab_contact_performed": false,
-    "live_authorization_consumed": false,
-    "mode": "offline_read_only_no_live_contact",
-    "post_repair_self_test": "PASS",
-    "status": "READ_ONLY_SOL_AUDIT_BLOCKERS_REPAIRED_OFFLINE"
+    "audit_record_sha256": "f1c1b9a26e39cd6e0cf7072e5172132a1e4e52f6b35faa50ce1cd9be02e2649c",
+    "custody": {
+      "git_write": false,
+      "lab_device_contact": false,
+      "read_only": true,
+      "target_contact": false
+    },
+    "findings": [],
+    "material_findings": false,
+    "model": "GPT-5.6 Sol",
+    "operation": "Read-only privileged PMU preflight and retry-package audit",
+    "reviewed_assertions": {
+      "attempt_zero_roots_untouched": true,
+      "effective_uid_zero_verified": true,
+      "exact_event_pmu_preflight_tests_permission": true,
+      "failure_packets_retain_pmu_snapshot": true,
+      "no_offline_target_contact": true,
+      "no_scientific_evidence_from_pmu_preflight": true,
+      "no_sysctl_write_introduced": true,
+      "perf_event_paranoid_diagnostic_for_root": true,
+      "retry_one_separate_identity": true,
+      "trial_geometry_and_laws_unchanged": true
+    },
+    "schema_id": "CAT_CAS_CONFIRMATION_V2_RETRY1_SOL_AUDIT",
+    "status": "PASS"
   },
   "source_hashes": {
     "ADJUDICATION_LAW_AUDIT.md": "8e8f452769349eca152f0409c04456092774664c0ad54fa7ed9b10f336477335",
     "CONFIRMATION_CONTRACT_V2.md": "6a0dee41851f417d6572facad7880d2bb92a364e46ceb4f9c5bc6b00890bead4",
-    "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.json": "886bd84209da46e7a9722fd8edfcea74a44bf2b98ade90231709656a99dd67a5",
-    "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.sha256": "f81d95103205c50fd6db31bff0ee60fffa997ade6ecfa0c46b923b283e5ffba8",
+    "CONFIRMATION_CONTRACT_V2_RETRY1.md": "678a206198b84a8ea5802d0f6b5c41d08b161ecf0460de96366ad9c3fb43bdb3",
+    "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.json": "86eaa3286240e7c344ba058c5ff10bb776fdd0d076b00ee512ee1e564b378f66",
+    "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.sha256": "407e8f48a030368d11df0c32ede76b194f081eca044e38bfa6a776be8818bc79",
     "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.tsv": "570f165d4a24dff4680bc60046dd62523e9d596dffb4fac381da850df072c744",
+    "CONFIRMATION_V2_RETRY1_GEOMETRY_RECEIPT.json": "3cb427edc036f211ae233dc7af66a2112df32395c089c61fe4704f303fc5366d",
+    "CONFIRMATION_V2_RETRY1_SOL_AUDIT.json": "f1c1b9a26e39cd6e0cf7072e5172132a1e4e52f6b35faa50ce1cd9be02e2649c",
     "balanced_transducer_adjudication_v2.py": "042f9b38ccf8d8e375cfad00e02156a1645e28c65cb9651db5f0f4d3ccf3c971",
     "balanced_transducer_public.py": "0addae6e1c1d4dc587e1eaf807b4bc4e098936e5001dc48faebde8fab7a388f3",
-    "confirmation_v2_public.py": "f875e231d23d7cd012ce4bee81107d36238f4cf88eefa548c424ead5ee7c52e0",
-    "confirmation_v2_runtime.c": "bdeb39bd08c2cd087db5e434d390e4bd116f1643af7feaea6d1e95cdcdc0fba2",
+    "confirmation_v2_public.py": "d8fe0094a385c8bf1a60125aeb477268e3b3589c455b02e435d8d2107e587e26",
+    "confirmation_v2_runtime.c": "f3d55a5d8ef3b65e7b9eb00d9962ca860a9f030acb03bd6e1b64d937ba28b310",
     "confirmation_v2_runtime.h": "76f654ee902dfdad5dddaea643a551e9799a1532842cc46173ed9f78814ce07c",
-    "confirmation_v2_target.py": "bea5d2a878f0ab623b1accdd5dd460f4b6e337523969de4a3eb297ac39a370fc",
-    "run_confirmation_v2.py": "4fbfcb306397934be695ffcfbf8d9ca6606c220e25e394e2da0dead4d3fdd7d6"
+    "confirmation_v2_target.py": "8fa3ecf0d0f1642174c24530b02f9794bb8567d9b6cd173110d386ceb65d0c54",
+    "run_confirmation_v2.py": "d4c72b572f6647987c4b434f7b480a065a29c1357fe25b898a2613543cc329a1"
   },
-  "starting_commit": "8281578a785a27338e5caf8154758ac71adf425c",
-  "target_self_test_sha256": "54cf33667ab89fbab920db5fddc8b0d70f0047b6e46df86581ebe13119eed91d",
+  "starting_commit": "6e4acd3340fbb5865193228275de43bdaedad883",
+  "target_self_test_sha256": "558bec51ef18f872305e647666c4eb678369cc2df816a78b0d26af87bbd0ce77",
   "trial_counts": {
     "replicates": 2,
     "restoration_sentinel_records": 112,
     "total_trial_legs": 112,
     "trials_per_replicate": 56
-  }
+  },
+  "unchanged_scientific_laws": true
 }

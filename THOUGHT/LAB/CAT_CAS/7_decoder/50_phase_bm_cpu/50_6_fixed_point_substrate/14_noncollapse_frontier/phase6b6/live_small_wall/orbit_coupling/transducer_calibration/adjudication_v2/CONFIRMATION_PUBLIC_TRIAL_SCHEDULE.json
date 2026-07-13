@@ -20,9 +20,9 @@
     1024,
     1536
   ],
-  "run_id": "balanced_transducer_confirmation_v2_0",
-  "schedule_semantic_sha256": "ecb3369ca21bbc7fa79b58222b8e05febbef0b15b79a48bed42a212fde746527",
-  "schedule_sha256": "2fbf267076eec27837ebe82c578d312dd56fc664f333ef591aad745d77790a2a",
+  "run_id": "balanced_transducer_confirmation_v2_1",
+  "schedule_semantic_sha256": "ea749f375fcd36dcfe7c80c91ab9a98adee9f2ad15c2dd85fc7afc98090b0b48",
+  "schedule_sha256": "fa0a250a21e0ac80ee5ed99828074fed36a795943a581cece17d65384182b1a5",
   "schema_id": "CAT_CAS_BALANCED_TRANSDUCER_CONFIRMATION_PUBLIC_SCHEDULE_V2",
   "total_trial_legs": 112,
   "total_work": 4096,

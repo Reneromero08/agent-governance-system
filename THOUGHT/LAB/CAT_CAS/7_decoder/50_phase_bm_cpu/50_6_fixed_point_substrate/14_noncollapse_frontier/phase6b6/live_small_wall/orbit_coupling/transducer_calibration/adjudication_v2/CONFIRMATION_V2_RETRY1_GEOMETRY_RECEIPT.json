@@ -1,0 +1,31 @@
+{
+  "attempt_one_future_evidence_root": "phase6b6/live_small_wall/orbit_coupling/transducer_calibration/runs/balanced_transducer_confirmation_v2_1/",
+  "attempt_one_run_id": "balanced_transducer_confirmation_v2_1",
+  "attempt_zero_commit": "6e4acd3340fbb5865193228275de43bdaedad883",
+  "attempt_zero_failure_root_immutable": "phase6b6/live_small_wall/orbit_coupling/transducer_calibration/runs/balanced_transducer_confirmation_v2_0/",
+  "attempt_zero_run_id": "balanced_transducer_confirmation_v2_0",
+  "attempt_zero_schedule_json_sha256": "d135a03370df6e35999e22db92605da5d45e95d36c61e3b0dff5de27b388919a",
+  "bank_allocation_pairing_identical_by_trial": true,
+  "changed_top_level_fields": [
+    "run_id",
+    "schedule_semantic_sha256",
+    "schedule_sha256"
+  ],
+  "geometry_equivalence_passed": true,
+  "geometry_receipt_sha256": "3f915faa1ed1290c096479db95a1f557ef41fba60b0805bd1b44933e66acaadb",
+  "leg_indices_identical_by_trial": true,
+  "mapping_order_identical_by_trial": true,
+  "new_trial_count": 112,
+  "no_measurement_data_produced_in_attempt_zero": true,
+  "old_trial_count": 112,
+  "only_run_identity_and_hash_metadata_changed": true,
+  "pair_indices_identical_by_trial": true,
+  "q0_roles_identical_by_trial": true,
+  "q_values_identical_by_trial": true,
+  "receiver_order_identical_by_trial": true,
+  "replicate_identities_identical_by_trial": true,
+  "schema_id": "CAT_CAS_CONFIRMATION_V2_RETRY1_GEOMETRY_RECEIPT",
+  "source_order_identical_by_trial": true,
+  "trial_global_indices_identical": true,
+  "tsv_trial_payload_identical": true
+}

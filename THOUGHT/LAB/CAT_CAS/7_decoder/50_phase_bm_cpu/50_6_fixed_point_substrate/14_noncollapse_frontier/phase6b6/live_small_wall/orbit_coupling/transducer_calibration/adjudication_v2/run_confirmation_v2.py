@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import gzip
+import hashlib
 import io
 import json
 import os
@@ -28,15 +29,24 @@ TARGET = "root@192.168.137.100"
 REMOTE_BASE = "/root/catcas_live_small_wall"
 IMPLEMENTATION_MANIFEST = HERE / "CONFIRMATION_V2_IMPLEMENTATION_MANIFEST.json"
 SELF_TEST_PATH = HERE / "CONFIRMATION_V2_SELF_TEST.json"
-COMMIT_BINDING_ENV = "CONFIRMATION_V2_COMMIT_BINDING"
-LIVE_AUTHORITY_ENV = "CONFIRMATION_V2_LIVE_AUTHORITY"
-LIVE_AUTHORITY_VALUE = "balanced_transducer_confirmation_v2_0"
+ORIGINAL_CONTRACT = HERE / "CONFIRMATION_CONTRACT_V2.md"
+RETRY_CONTRACT = HERE / "CONFIRMATION_CONTRACT_V2_RETRY1.md"
+GEOMETRY_RECEIPT = HERE / "CONFIRMATION_V2_RETRY1_GEOMETRY_RECEIPT.json"
+SOL_AUDIT_PATH = HERE / "CONFIRMATION_V2_RETRY1_SOL_AUDIT.json"
+ATTEMPT_ZERO_RUN_ID = "balanced_transducer_confirmation_v2_0"
+ATTEMPT_ZERO_COMMIT = "6e4acd3340fbb5865193228275de43bdaedad883"
+COMMIT_BINDING_ENV = "CONFIRMATION_V2_RETRY1_COMMIT_BINDING"
+LIVE_AUTHORITY_ENV = "CONFIRMATION_V2_RETRY1_LIVE_AUTHORITY"
+LIVE_AUTHORITY_VALUE = "balanced_transducer_confirmation_v2_1"
 SOURCE_FILE_MAP = {
-    HERE / "CONFIRMATION_CONTRACT_V2.md": "CONFIRMATION_CONTRACT_V2.md",
+    ORIGINAL_CONTRACT: "CONFIRMATION_CONTRACT_V2.md",
+    RETRY_CONTRACT: "CONFIRMATION_CONTRACT_V2_RETRY1.md",
     HERE / "ADJUDICATION_LAW_AUDIT.md": "ADJUDICATION_LAW_AUDIT.md",
     HERE / "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.json": "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.json",
     HERE / "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.sha256": "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.sha256",
     HERE / "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.tsv": "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.tsv",
+    GEOMETRY_RECEIPT: "CONFIRMATION_V2_RETRY1_GEOMETRY_RECEIPT.json",
+    SOL_AUDIT_PATH: "CONFIRMATION_V2_RETRY1_SOL_AUDIT.json",
     HERE / "CONFIRMATION_V2_IMPLEMENTATION_MANIFEST.json": "CONFIRMATION_V2_IMPLEMENTATION_MANIFEST.json",
     HERE / "confirmation_v2_public.py": "confirmation_v2_public.py",
     HERE / "confirmation_v2_runtime.c": "confirmation_v2_runtime.c",
@@ -131,8 +141,86 @@ def git_origin_main() -> str:
     return run(["git", "rev-parse", "origin/main"], timeout=10).stdout.strip()
 
 
+def attempt_zero_schedule_from_git() -> tuple[dict[str, Any], str]:
+    rel = (HERE / "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.json").relative_to(Path.cwd()).as_posix()
+    completed = run(["git", "show", f"{ATTEMPT_ZERO_COMMIT}:{rel}"], timeout=10)
+    return json.loads(completed.stdout), hashlib.sha256(completed.stdout.encode("utf-8")).hexdigest()
+
+
+def build_geometry_receipt(new_schedule: dict[str, Any]) -> dict[str, Any]:
+    old_schedule, old_schedule_sha = attempt_zero_schedule_from_git()
+    old_trials = sorted(old_schedule["trials"], key=lambda item: int(item["global_trial_index"]))
+    new_trials = sorted(new_schedule["trials"], key=lambda item: int(item["global_trial_index"]))
+    checked_fields = {
+        "q_values_identical_by_trial": "q",
+        "replicate_identities_identical_by_trial": "replicate_index",
+        "pair_indices_identical_by_trial": "pair_index",
+        "leg_indices_identical_by_trial": "leg_index",
+        "mapping_order_identical_by_trial": "mapping_order_first",
+        "source_order_identical_by_trial": "source_order",
+        "receiver_order_identical_by_trial": "measurement_order",
+        "q0_roles_identical_by_trial": "q0_role",
+        "bank_allocation_pairing_identical_by_trial": "bank_allocation_id",
+    }
+    field_results = {}
+    for result_key, field in checked_fields.items():
+        field_results[result_key] = [old.get(field) for old in old_trials] == [new.get(field) for new in new_trials]
+    old_tsv = public.schedule_tsv(old_schedule)
+    new_tsv = public.schedule_tsv(new_schedule)
+    allowed_top_level_changes = {"run_id", "schedule_sha256", "schedule_semantic_sha256"}
+    top_level_changes = sorted(
+        key
+        for key in set(old_schedule) | set(new_schedule)
+        if key != "trials" and old_schedule.get(key) != new_schedule.get(key)
+    )
+    receipt = {
+        "schema_id": "CAT_CAS_CONFIRMATION_V2_RETRY1_GEOMETRY_RECEIPT",
+        "attempt_zero_run_id": ATTEMPT_ZERO_RUN_ID,
+        "attempt_one_run_id": public.RUN_ID,
+        "attempt_zero_commit": ATTEMPT_ZERO_COMMIT,
+        "attempt_zero_schedule_json_sha256": old_schedule_sha,
+        "old_trial_count": len(old_trials),
+        "new_trial_count": len(new_trials),
+        "trial_global_indices_identical": [old["global_trial_index"] for old in old_trials] == [new["global_trial_index"] for new in new_trials],
+        **field_results,
+        "tsv_trial_payload_identical": old_tsv == new_tsv,
+        "changed_top_level_fields": top_level_changes,
+        "only_run_identity_and_hash_metadata_changed": set(top_level_changes).issubset(allowed_top_level_changes),
+        "no_measurement_data_produced_in_attempt_zero": True,
+        "attempt_zero_failure_root_immutable": (
+            "phase6b6/live_small_wall/orbit_coupling/transducer_calibration/"
+            "runs/balanced_transducer_confirmation_v2_0/"
+        ),
+        "attempt_one_future_evidence_root": (
+            "phase6b6/live_small_wall/orbit_coupling/transducer_calibration/"
+            "runs/balanced_transducer_confirmation_v2_1/"
+        ),
+    }
+    receipt["geometry_equivalence_passed"] = (
+        receipt["old_trial_count"] == public.TOTAL_TRIALS
+        and receipt["new_trial_count"] == public.TOTAL_TRIALS
+        and receipt["trial_global_indices_identical"]
+        and all(field_results.values())
+        and receipt["tsv_trial_payload_identical"]
+        and receipt["only_run_identity_and_hash_metadata_changed"]
+    )
+    receipt["geometry_receipt_sha256"] = public.digest({k: v for k, v in receipt.items() if k != "geometry_receipt_sha256"})
+    write_json(GEOMETRY_RECEIPT, receipt)
+    return receipt
+
+
 def is_full_sha(value: str) -> bool:
     return re.fullmatch(r"[0-9a-f]{40}", value) is not None
+
+
+def sol_audit_disposition(sol_audit: dict[str, Any] | None = None) -> dict[str, Any]:
+    if sol_audit is not None:
+        return sol_audit
+    if SOL_AUDIT_PATH.is_file():
+        audit = json.loads(SOL_AUDIT_PATH.read_text(encoding="utf-8"))
+        audit["audit_record_sha256"] = sha256_file(SOL_AUDIT_PATH)
+        return audit
+    return {"status": "PENDING_READ_ONLY_SOL_AUDIT"}
 
 
 def compile_runtime_if_available() -> dict[str, Any]:
@@ -307,18 +395,47 @@ def build_self_test() -> dict[str, Any]:
         )
     except ControllerError:
         success_copyback_requires_execution_manifest = True
+    attempt_zero_root = CALIBRATION_ROOT / "runs" / ATTEMPT_ZERO_RUN_ID
+    attempt_zero_expected_hashes = {
+        "TARGET_FAILURE_CONFIRMATION_V2.json": "95a2104044a068c6eba89c2b00fd3ac4fdb392a15f39127c33c89baa7a5f1eb9",
+        "CONFIRMATION_V2_FAILURE_MANIFEST.json": "24594d2715c096c0e60baae70a06bf2a0ed23e3cea47c101f4bcbc814203b06a",
+        "FINAL_RESULT_CONFIRMATION_V2.json": "436b36a9603fd1ad8a47897fd37a07d0f7f4810bb21047d17bca73ea9625f8ce",
+        "LIVE_CUSTODY_LOG.json": "68c5a83cc687e2ea7f17257a85bbfaff56d0dda03810161f440105cdebae10cf",
+        "COPYBACK_MANIFEST.json": "3dfb0ac86c36b8e64aeeaeae3cca4e879675a16f0f295ad0a2b2134ec56a5127",
+        "CONTROLLER_RESULT.json": "6c450d04c8db101d357326c8b8001474658ac4bc942476fe17f7f6ee6b616298",
+    }
+    attempt_zero_evidence_hashes_unchanged = all(
+        (attempt_zero_root / name).is_file() and sha256_file(attempt_zero_root / name) == expected
+        for name, expected in attempt_zero_expected_hashes.items()
+    )
     result = {
         "schema_id": "CAT_CAS_CONFIRMATION_V2_CONTROLLER_SELF_TEST",
         "public_self_test_sha256": public_test["self_test_sha256"],
         "public_self_test_passed": public_test["self_test_passed"],
         "target_self_test_sha256": target_test["self_test_sha256"],
         "target_self_test_passed": target_test["self_test_passed"],
+        "pmu_preflight_self_test_sha256": target_test["self_test_sha256"],
+        "pmu_preflight_self_test_passed": (
+            target_test["root_perf_event_paranoid_3_allowed"]
+            and target_test["root_perf_event_paranoid_4_allowed"]
+            and target_test["successful_pmu_preflight_emits_no_scientific_classification"]
+            and target_test["pmu_syscall_eperm_fails_closed_with_errno"]
+            and target_test["pmu_syscall_einval_fails_closed_with_errno"]
+            and target_test["partial_pmu_group_fails_closed"]
+            and target_test["multiplexed_pmu_preflight_fails_closed"]
+            and target_test["event_id_drift_fails_closed"]
+            and target_test["wrong_cpu_affinity_fails_closed"]
+        ),
         "compile_test": compile_test,
         "binary_custody_mode": "target_compile_bound_by_source_and_compiler_contract",
         "offline_validation_binary_sha256": compile_test.get("runtime_binary_sha256"),
         "target_binary_self_test_required": True,
         "copyback_failure_status_aware": copyback_failure_status_aware,
         "success_copyback_requires_execution_manifest": success_copyback_requires_execution_manifest,
+        "attempt_zero_evidence_hashes_unchanged": attempt_zero_evidence_hashes_unchanged,
+        "attempt_zero_remote_root_not_targeted": f"{REMOTE_BASE}/{public.RUN_ID}" != f"{REMOTE_BASE}/{ATTEMPT_ZERO_RUN_ID}",
+        "attempt_one_local_root_must_be_absent": True,
+        "attempt_one_remote_root_must_be_absent": True,
         "network_connections": 0,
         "ssh_executions": 0,
         "scp_executions": 0,
@@ -331,8 +448,13 @@ def build_self_test() -> dict[str, Any]:
     result["self_test_passed"] = (
         public_test["self_test_passed"]
         and target_test["self_test_passed"]
+        and result["pmu_preflight_self_test_passed"]
         and copyback_failure_status_aware
         and success_copyback_requires_execution_manifest
+        and attempt_zero_evidence_hashes_unchanged
+        and result["attempt_zero_remote_root_not_targeted"]
+        and result["attempt_one_local_root_must_be_absent"]
+        and result["attempt_one_remote_root_must_be_absent"]
     )
     result["self_test_sha256"] = public.digest({k: v for k, v in result.items() if k != "self_test_sha256"})
     write_json(SELF_TEST_PATH, result)
@@ -341,22 +463,40 @@ def build_self_test() -> dict[str, Any]:
 
 def build_manifest(*, sol_audit: dict[str, Any] | None = None, final_commit: str = "AWAITING_LIVE_AUTHORIZATION") -> dict[str, Any]:
     schedule_hashes = public.write_schedule_artifacts(HERE)
+    schedule = json.loads((HERE / "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.json").read_text(encoding="utf-8"))
+    geometry_receipt = build_geometry_receipt(schedule)
+    require(geometry_receipt["geometry_equivalence_passed"], "retry-one schedule geometry drifted from attempt zero")
     self_test = build_self_test()
     with tempfile.TemporaryDirectory(prefix="confirmation_v2_bundle_") as temp:
         source_bundle_sha = deterministic_source_bundle(Path(temp) / "CONFIRMATION_SOURCE_BUNDLE.tar.gz")
-    contract_sha = sha256_file(HERE / "CONFIRMATION_CONTRACT_V2.md")
+    original_contract_sha = sha256_file(ORIGINAL_CONTRACT)
+    retry_contract_sha = sha256_file(RETRY_CONTRACT)
     manifest = {
         "schema_id": "CAT_CAS_CONFIRMATION_V2_IMPLEMENTATION_MANIFEST",
-        "starting_commit": "8281578a785a27338e5caf8154758ac71adf425c",
+        "starting_commit": ATTEMPT_ZERO_COMMIT,
         "final_commit": final_commit,
-        "contract_sha256": contract_sha,
+        "original_contract_sha256": original_contract_sha,
+        "contract_sha256": retry_contract_sha,
+        "retry_contract_sha256": retry_contract_sha,
+        "attempt_zero_run_id": ATTEMPT_ZERO_RUN_ID,
+        "attempt_zero_source_commit": ATTEMPT_ZERO_COMMIT,
+        "attempt_zero_failure_evidence_hashes": {
+            "target_failure_sha256": "95a2104044a068c6eba89c2b00fd3ac4fdb392a15f39127c33c89baa7a5f1eb9",
+            "failure_manifest_sha256": "24594d2715c096c0e60baae70a06bf2a0ed23e3cea47c101f4bcbc814203b06a",
+            "final_result_sha256": "436b36a9603fd1ad8a47897fd37a07d0f7f4810bb21047d17bca73ea9625f8ce",
+            "live_custody_log_sha256": "68c5a83cc687e2ea7f17257a85bbfaff56d0dda03810161f440105cdebae10cf",
+            "copyback_manifest_sha256": "3dfb0ac86c36b8e64aeeaeae3cca4e879675a16f0f295ad0a2b2134ec56a5127",
+            "controller_result_sha256": "6c450d04c8db101d357326c8b8001474658ac4bc942476fe17f7f6ee6b616298",
+        },
         "source_hashes": source_hashes(),
         "schedule_json_sha256": schedule_hashes["schedule_json_sha256"],
         "schedule_tsv_sha256": schedule_hashes["schedule_tsv_sha256"],
         "schedule_semantic_sha256": schedule_hashes["schedule_semantic_sha256"],
+        "geometry_equivalence_receipt_sha256": geometry_receipt["geometry_receipt_sha256"],
         "self_test_sha256": self_test["self_test_sha256"],
         "public_self_test_sha256": self_test["public_self_test_sha256"],
         "target_self_test_sha256": self_test["target_self_test_sha256"],
+        "pmu_preflight_self_test_sha256": self_test["pmu_preflight_self_test_sha256"],
         "expected_source_bundle_sha256": source_bundle_sha,
         "binary_custody": {
             "mode": "target_compile_bound_by_source_and_compiler_contract",
@@ -382,14 +522,15 @@ def build_manifest(*, sol_audit: dict[str, Any] | None = None, final_commit: str
         "expected_evidence_root": (
             "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/"
             "14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/"
-            "transducer_calibration/runs/balanced_transducer_confirmation_v2_0"
+            "transducer_calibration/runs/balanced_transducer_confirmation_v2_1"
         ),
+        "expected_remote_root": "/root/catcas_live_small_wall/balanced_transducer_confirmation_v2_1",
         "expected_command": (
             ".\\.venv\\Scripts\\python.exe THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\"
             "14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\transducer_calibration\\adjudication_v2\\"
-            "run_confirmation_v2.py --run-id balanced_transducer_confirmation_v2_0 --contract THOUGHT\\LAB\\CAT_CAS\\"
+            "run_confirmation_v2.py --run-id balanced_transducer_confirmation_v2_1 --contract THOUGHT\\LAB\\CAT_CAS\\"
             "7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\"
-            "orbit_coupling\\transducer_calibration\\adjudication_v2\\CONFIRMATION_CONTRACT_V2.md --execute-authorized"
+            "orbit_coupling\\transducer_calibration\\adjudication_v2\\CONFIRMATION_CONTRACT_V2_RETRY1.md --execute-authorized"
         ),
         "allowed_classifications": list(public.ALLOWED_CLASSES),
         "forbidden_classifications": list(public.FORBIDDEN_CLASSES),
@@ -410,7 +551,18 @@ def build_manifest(*, sol_audit: dict[str, Any] | None = None, final_commit: str
             "msr_reads": 0,
             "msr_writes": 0,
         },
-        "sol_audit_disposition": sol_audit or {"status": "PENDING_READ_ONLY_SOL_AUDIT"},
+        "pmu_custody_semantics": {
+            "perf_event_paranoid": "diagnostic_only_when_effective_uid_is_zero",
+            "required_effective_uid": 0,
+            "definitive_permission_gate": "target_runtime_exact_event_perf_event_open_preflight",
+            "sysctl_mutation_authorized": False,
+            "retained_empirical_fact": (
+                "balanced_transducer_calibration_1 previously completed 224 PMU records on the same host while "
+                "perf_event_paranoid was 3"
+            ),
+        },
+        "unchanged_scientific_laws": True,
+        "sol_audit_disposition": sol_audit_disposition(sol_audit),
         "final_commit_binding": {
             "mode": "exact_authorized_head_environment_gate",
             "placeholder_value": final_commit,
@@ -431,8 +583,14 @@ def build_manifest(*, sol_audit: dict[str, Any] | None = None, final_commit: str
 def validate_only() -> dict[str, Any]:
     schedule = json.loads((HERE / "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.json").read_text(encoding="utf-8"))
     public.validate_schedule(schedule)
+    require(schedule["run_id"] == public.RUN_ID == LIVE_AUTHORITY_VALUE, "retry-one schedule identity mismatch")
     require((HERE / "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.tsv").read_text(encoding="utf-8") == public.schedule_tsv(schedule), "TSV round-trip mismatch")
     require(sha256_file(HERE / "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.json") == (HERE / "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.sha256").read_text(encoding="utf-8").strip(), "schedule sha mismatch")
+    geometry_receipt = json.loads(GEOMETRY_RECEIPT.read_text(encoding="utf-8"))
+    require(geometry_receipt["geometry_receipt_sha256"] == public.digest({k: v for k, v in geometry_receipt.items() if k != "geometry_receipt_sha256"}), "geometry receipt self digest mismatch")
+    require(geometry_receipt["geometry_equivalence_passed"], "geometry receipt did not pass")
+    require(geometry_receipt["attempt_zero_run_id"] == ATTEMPT_ZERO_RUN_ID, "geometry receipt attempt-zero mismatch")
+    require(geometry_receipt["attempt_one_run_id"] == public.RUN_ID, "geometry receipt attempt-one mismatch")
     manifest = json.loads(IMPLEMENTATION_MANIFEST.read_text(encoding="utf-8"))
     self_test = json.loads(SELF_TEST_PATH.read_text(encoding="utf-8"))
     require(manifest["implementation_manifest_sha256"] == manifest_digest(manifest), "manifest self digest mismatch")
@@ -444,6 +602,8 @@ def validate_only() -> dict[str, Any]:
     require(source_hashes() == manifest["source_hashes"], "source hashes drifted")
     require(sha256_file(HERE / "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.json") == manifest["schedule_json_sha256"], "manifest schedule JSON mismatch")
     require(sha256_file(HERE / "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.tsv") == manifest["schedule_tsv_sha256"], "manifest schedule TSV mismatch")
+    require(sha256_file(GEOMETRY_RECEIPT) == manifest["source_hashes"]["CONFIRMATION_V2_RETRY1_GEOMETRY_RECEIPT.json"], "manifest geometry receipt file hash mismatch")
+    require(geometry_receipt["geometry_receipt_sha256"] == manifest["geometry_equivalence_receipt_sha256"], "manifest geometry receipt digest mismatch")
     with tempfile.TemporaryDirectory(prefix="confirmation_v2_validate_bundle_") as temp:
         require(
             deterministic_source_bundle(Path(temp) / "CONFIRMATION_SOURCE_BUNDLE.tar.gz") == manifest["expected_source_bundle_sha256"],
@@ -500,7 +660,7 @@ def verify_copy(local_root: Path) -> dict[str, Any]:
 
 def live_execute(run_id: str, contract: Path, *, keep_remote: bool) -> dict[str, Any]:
     require(run_id == public.RUN_ID, "run ID mismatch")
-    require(contract.resolve() == (HERE / "CONFIRMATION_CONTRACT_V2.md").resolve(), "contract path mismatch")
+    require(contract.resolve() == RETRY_CONTRACT.resolve(), "contract path mismatch")
     require(re.fullmatch(r"[a-z0-9_]{8,80}", run_id) is not None, "run ID is not closed")
     manifest = json.loads(IMPLEMENTATION_MANIFEST.read_text(encoding="utf-8"))
     require(manifest["implementation_manifest_sha256"] == manifest_digest(manifest), "implementation manifest self digest mismatch")
@@ -511,6 +671,7 @@ def live_execute(run_id: str, contract: Path, *, keep_remote: bool) -> dict[str,
     require(source_hashes() == manifest["source_hashes"], "source hashes drifted")
     require(sha256_file(HERE / "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.json") == manifest["schedule_json_sha256"], "manifest schedule JSON mismatch")
     require(sha256_file(HERE / "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.tsv") == manifest["schedule_tsv_sha256"], "manifest schedule TSV mismatch")
+    require(sha256_file(GEOMETRY_RECEIPT) == manifest["source_hashes"]["CONFIRMATION_V2_RETRY1_GEOMETRY_RECEIPT.json"], "geometry receipt source hash mismatch")
     with tempfile.TemporaryDirectory(prefix="confirmation_v2_live_bundle_") as temp:
         require(
             deterministic_source_bundle(Path(temp) / "CONFIRMATION_SOURCE_BUNDLE.tar.gz") == manifest["expected_source_bundle_sha256"],
@@ -529,6 +690,7 @@ def live_execute(run_id: str, contract: Path, *, keep_remote: bool) -> dict[str,
     remote_output = f"{remote_run}/output"
     local_run = CALIBRATION_ROOT / "runs" / run_id
     require(not local_run.exists(), f"local run already exists: {local_run}")
+    require(run_id != ATTEMPT_ZERO_RUN_ID, "attempt-zero run ID is immutable and cannot be targeted")
     validation = validate_only()
     require(validation["network_connections"] == 0 and validation["ssh_executions"] == 0 and validation["scp_executions"] == 0, "validate-only preflight used live transport")
     local_run.mkdir(mode=0o700, parents=True, exist_ok=False)
@@ -666,7 +828,7 @@ def live_execute(run_id: str, contract: Path, *, keep_remote: bool) -> dict[str,
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--run-id", default=public.RUN_ID)
-    parser.add_argument("--contract", type=Path, default=HERE / "CONFIRMATION_CONTRACT_V2.md")
+    parser.add_argument("--contract", type=Path, default=RETRY_CONTRACT)
     parser.add_argument("--keep-remote", action="store_true")
     modes = parser.add_mutually_exclusive_group(required=True)
     modes.add_argument("--self-test", action="store_true")

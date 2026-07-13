@@ -221,7 +221,10 @@ static void fill_perf_attr(struct perf_event_attr *attr, uint64_t config, int di
         PERF_FORMAT_ID;
 }
 
-static int open_perf_group(int fds[EVENT_COUNT], uint64_t ids[EVENT_COUNT]) {
+static int open_perf_group_detailed(int fds[EVENT_COUNT], uint64_t ids[EVENT_COUNT], int *failed_event_index) {
+    if (failed_event_index) {
+        *failed_event_index = -1;
+    }
     for (int index = 0; index < EVENT_COUNT; index++) {
         fds[index] = -1;
         ids[index] = 0;
@@ -233,6 +236,9 @@ static int open_perf_group(int fds[EVENT_COUNT], uint64_t ids[EVENT_COUNT]) {
         int fd = (int)perf_event_open_call(&attr, 0, -1, group_fd, PERF_FLAG_FD_CLOEXEC);
         if (fd < 0) {
             int saved = errno;
+            if (failed_event_index) {
+                *failed_event_index = index;
+            }
             for (int close_index = 0; close_index < index; close_index++) {
                 close(fds[close_index]);
             }
@@ -241,6 +247,9 @@ static int open_perf_group(int fds[EVENT_COUNT], uint64_t ids[EVENT_COUNT]) {
         fds[index] = fd;
         if (ioctl(fd, PERF_EVENT_IOC_ID, &ids[index]) != 0) {
             int saved = errno;
+            if (failed_event_index) {
+                *failed_event_index = index;
+            }
             for (int close_index = 0; close_index <= index; close_index++) {
                 close(fds[close_index]);
             }
@@ -248,6 +257,10 @@ static int open_perf_group(int fds[EVENT_COUNT], uint64_t ids[EVENT_COUNT]) {
         }
     }
     return 0;
+}
+
+static int open_perf_group(int fds[EVENT_COUNT], uint64_t ids[EVENT_COUNT]) {
+    return open_perf_group_detailed(fds, ids, NULL);
 }
 
 static void close_perf_group(int fds[EVENT_COUNT]) {
@@ -412,6 +425,152 @@ static int window_ok(const PerfWindow *window) {
         window->time_running > 0u &&
         window->cpu_before == BALANCED_TRANSDUCER_RECEIVER_CORE &&
         window->cpu_after == BALANCED_TRANSDUCER_RECEIVER_CORE;
+}
+
+static int pmu_preflight(void) {
+    TrialBanks banks;
+    PerfWindow window;
+    int fds[EVENT_COUNT];
+    uint64_t ids[EVENT_COUNT];
+    int failed_event_index = -1;
+    int rc = 0;
+    ssize_t got = -1;
+    size_t expected = sizeof(uint64_t) * 3u + (sizeof(uint64_t) * 2u * EVENT_COUNT);
+    int bytes_unchanged = 0;
+    const char *failure_stage = "";
+    memset(&banks, 0, sizeof(banks));
+    memset(&window, 0, sizeof(window));
+    if (allocate_banks(&banks) != 0) {
+        failure_stage = "allocate_buffer";
+        rc = ENOMEM;
+        goto done;
+    }
+    materialize_banks(&banks);
+    if (pin_to_core(BALANCED_TRANSDUCER_RECEIVER_CORE) != 0) {
+        failure_stage = "pin_receiver_core";
+        rc = errno;
+        goto done;
+    }
+    rc = open_perf_group_detailed(fds, ids, &failed_event_index);
+    if (rc != 0) {
+        failure_stage = "perf_event_open";
+        window.open_errno = -rc;
+        rc = -rc;
+        goto done;
+    }
+    window.opened = 1;
+    for (int index = 0; index < EVENT_COUNT; index++) {
+        window.ids[index] = ids[index];
+    }
+    if (ioctl(fds[0], PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP) != 0) {
+        failure_stage = "perf_event_reset";
+        rc = errno;
+        window.read_errno = rc;
+        close_perf_group(fds);
+        goto done;
+    }
+    window.cpu_before = sched_getcpu();
+    uint64_t start = monotonic_ns();
+    if (ioctl(fds[0], PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        failure_stage = "perf_event_enable";
+        rc = errno;
+        window.read_errno = rc;
+        close_perf_group(fds);
+        goto done;
+    }
+    same_value_store_prefix(banks.a, 64u);
+    if (ioctl(fds[0], PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP) != 0) {
+        failure_stage = "perf_event_disable";
+        rc = errno;
+        window.read_errno = rc;
+        close_perf_group(fds);
+        goto done;
+    }
+    uint64_t finish = monotonic_ns();
+    window.cpu_after = sched_getcpu();
+    window.duration_ns = finish - start;
+    PerfReadPayload payload;
+    memset(&payload, 0, sizeof(payload));
+    got = read(fds[0], &payload, sizeof(payload));
+    close_perf_group(fds);
+    if (got != (ssize_t)expected) {
+        failure_stage = "perf_event_read";
+        rc = got < 0 ? errno : EIO;
+        window.read_errno = rc;
+        goto done;
+    }
+    window.read_ok = 1;
+    int decode_rc = decode_perf_payload(&payload, ids, &window);
+    if (decode_rc != 0) {
+        failure_stage = "decode_group";
+        rc = -decode_rc;
+    }
+done:
+    if (banks.a && banks.b) {
+        banks.final_a_digest = fnv1a64(banks.a, BALANCED_TRANSDUCER_BANK_BYTES);
+        banks.final_b_digest = fnv1a64(banks.b, BALANCED_TRANSDUCER_BANK_BYTES);
+        bytes_unchanged = banks_match_pattern(&banks) &&
+            banks.initial_a_digest == banks.final_a_digest &&
+            banks.initial_b_digest == banks.final_b_digest;
+    }
+    int passed = rc == 0 &&
+        window.opened &&
+        window.read_ok &&
+        window.event_order_ok &&
+        window.unmultiplexed &&
+        window.time_enabled > 0u &&
+        window.time_enabled == window.time_running &&
+        window.cpu_before == BALANCED_TRANSDUCER_RECEIVER_CORE &&
+        window.cpu_after == BALANCED_TRANSDUCER_RECEIVER_CORE &&
+        window.cycles > 0u &&
+        bytes_unchanged;
+    printf("{"
+        "\"schema_id\":\"CAT_CAS_CONFIRMATION_V2_PMU_PREFLIGHT\","
+        "\"status\":\"%s\","
+        "\"scientific_classification_emitted\":false,"
+        "\"receiver_core\":%d,"
+        "\"pid\":0,"
+        "\"cpu\":-1,"
+        "\"exclude_kernel\":true,"
+        "\"exclude_hv\":true,"
+        "\"event_count\":%d,"
+        "\"expected_read_size\":%zu,"
+        "\"actual_read_size\":%zd,"
+        "\"failed_event_index\":%d,"
+        "\"failure_stage\":\"%s\","
+        "\"syscall_errno\":%d,"
+        "\"bytes_unchanged\":%s,"
+        "\"initial_a_digest\":%" PRIu64 ","
+        "\"final_a_digest\":%" PRIu64 ","
+        "\"initial_b_digest\":%" PRIu64 ","
+        "\"final_b_digest\":%" PRIu64 ",",
+        passed ? "CONFIRMATION_V2_PMU_PREFLIGHT_OK" : "CONFIRMATION_V2_PMU_PREFLIGHT_FAILED",
+        BALANCED_TRANSDUCER_RECEIVER_CORE,
+        EVENT_COUNT,
+        expected,
+        got,
+        failed_event_index,
+        failure_stage,
+        rc,
+        bytes_unchanged ? "true" : "false",
+        banks.initial_a_digest,
+        banks.final_a_digest,
+        banks.initial_b_digest,
+        banks.final_b_digest);
+    printf("\"events\":[");
+    for (int index = 0; index < EVENT_COUNT; index++) {
+        printf("%s{\"index\":%d,\"name\":\"%s\",\"config\":%" PRIu64 ",\"id\":%" PRIu64 "}",
+               index == 0 ? "" : ",",
+               index,
+               PERF_EVENTS[index].name,
+               PERF_EVENTS[index].config,
+               window.ids[index]);
+    }
+    printf("],");
+    print_window(stdout, "preflight", &window);
+    printf("}\n");
+    free_banks(&banks);
+    return passed ? 0 : 1;
 }
 
 static int load_schedule(const char *path, int replicate, BalancedTrial *trials, size_t limit) {
@@ -859,6 +1018,9 @@ int main(int argc, char **argv) {
     if (argc == 2 && strcmp(argv[1], "--self-test") == 0) {
         return self_test();
     }
+    if (argc == 2 && strcmp(argv[1], "--pmu-preflight") == 0) {
+        return pmu_preflight();
+    }
     for (int index = 1; index < argc; index++) {
         if (strcmp(argv[index], "--schedule-tsv") == 0 && index + 1 < argc) {
             schedule_path = argv[++index];
@@ -867,12 +1029,12 @@ int main(int argc, char **argv) {
         } else if (strcmp(argv[index], "--replicate") == 0 && index + 1 < argc) {
             replicate = atoi(argv[++index]);
         } else {
-            fprintf(stderr, "usage: %s --schedule-tsv <path> --output-root <path> --replicate <0|1>\n", argv[0]);
+            fprintf(stderr, "usage: %s --self-test | --pmu-preflight | --schedule-tsv <path> --output-root <path> --replicate <0|1>\n", argv[0]);
             return 2;
         }
     }
     if (!schedule_path || !output_root || (replicate != 0 && replicate != 1)) {
-        fprintf(stderr, "usage: %s --schedule-tsv <path> --output-root <path> --replicate <0|1>\n", argv[0]);
+        fprintf(stderr, "usage: %s --self-test | --pmu-preflight | --schedule-tsv <path> --output-root <path> --replicate <0|1>\n", argv[0]);
         return 2;
     }
     return run_capture(schedule_path, output_root, replicate);

@@ -1,0 +1,26 @@
+{
+  "custody": {
+    "git_write": false,
+    "lab_device_contact": false,
+    "read_only": true,
+    "target_contact": false
+  },
+  "findings": [],
+  "material_findings": false,
+  "model": "GPT-5.6 Sol",
+  "operation": "Read-only privileged PMU preflight and retry-package audit",
+  "reviewed_assertions": {
+    "attempt_zero_roots_untouched": true,
+    "effective_uid_zero_verified": true,
+    "exact_event_pmu_preflight_tests_permission": true,
+    "failure_packets_retain_pmu_snapshot": true,
+    "no_offline_target_contact": true,
+    "no_scientific_evidence_from_pmu_preflight": true,
+    "no_sysctl_write_introduced": true,
+    "perf_event_paranoid_diagnostic_for_root": true,
+    "retry_one_separate_identity": true,
+    "trial_geometry_and_laws_unchanged": true
+  },
+  "schema_id": "CAT_CAS_CONFIRMATION_V2_RETRY1_SOL_AUDIT",
+  "status": "PASS"
+}

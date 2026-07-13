@@ -36,8 +36,8 @@ PROCESS_SCAN_COMMAND = ("ps", "-eo", "pid=,comm=,args=")
 POLICY_IDS = (4, 5)
 PMU_EVENT_FORMAT = "config:0-7,32-35"
 PMU_UMASK_FORMAT = "config:8-15"
-PERF_EVENT_PARANOID_ALLOWED_MAX = 2
 CPU_EVENT_SOURCE_TYPE_MIN = 0
+CAP_PERFMON_BIT = 38
 BINARY_CUSTODY_MODE = "target_compile_bound_by_source_and_compiler_contract"
 STRICT_C_FLAGS = (
     "-std=c11",
@@ -53,10 +53,13 @@ STRICT_C_FLAGS = (
 )
 SOURCE_FILES = (
     "CONFIRMATION_CONTRACT_V2.md",
+    "CONFIRMATION_CONTRACT_V2_RETRY1.md",
     "ADJUDICATION_LAW_AUDIT.md",
     "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.json",
     "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.sha256",
     "CONFIRMATION_PUBLIC_TRIAL_SCHEDULE.tsv",
+    "CONFIRMATION_V2_RETRY1_GEOMETRY_RECEIPT.json",
+    "CONFIRMATION_V2_RETRY1_SOL_AUDIT.json",
     "confirmation_v2_public.py",
     "confirmation_v2_runtime.c",
     "confirmation_v2_runtime.h",
@@ -191,6 +194,53 @@ def run_runtime_self_test(binary: Path) -> dict[str, Any]:
         "stderr": completed.stderr.strip(),
         "passed": completed.returncode == 0 and "CONFIRMATION_V2_RUNTIME_SELF_TEST_OK" in completed.stdout,
     }
+
+
+def run_runtime_pmu_preflight(binary: Path, *, runner: Any = subprocess.run) -> dict[str, Any]:
+    completed = runner(
+        [str(binary), "--pmu-preflight"],
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        timeout=20,
+        check=False,
+    )
+    receipt: dict[str, Any]
+    try:
+        receipt = json.loads(completed.stdout.strip())
+    except json.JSONDecodeError:
+        receipt = {
+            "schema_id": "CAT_CAS_CONFIRMATION_V2_PMU_PREFLIGHT",
+            "status": "CONFIRMATION_V2_PMU_PREFLIGHT_FAILED",
+            "scientific_classification_emitted": False,
+            "parse_error": "stdout was not valid JSON",
+        }
+    receipt["command"] = [str(binary), "--pmu-preflight"]
+    receipt["returncode"] = completed.returncode
+    receipt["stderr"] = completed.stderr.strip()
+    try:
+        invariant_passed = (
+            receipt.get("event_count") == 3
+            and receipt.get("preflight_opened") is True
+            and receipt.get("preflight_read_ok") is True
+            and receipt.get("preflight_event_order_ok") is True
+            and receipt.get("preflight_unmultiplexed") is True
+            and int(receipt.get("preflight_time_enabled", 0)) > 0
+            and int(receipt.get("preflight_time_enabled", -1)) == int(receipt.get("preflight_time_running", -2))
+            and int(receipt.get("preflight_cpu_before", -1)) == 5
+            and int(receipt.get("preflight_cpu_after", -1)) == 5
+            and int(receipt.get("preflight_cycles", 0)) > 0
+            and receipt.get("bytes_unchanged") is True
+        )
+    except (TypeError, ValueError):
+        invariant_passed = False
+    receipt["passed"] = (
+        completed.returncode == 0
+        and receipt.get("status") == "CONFIRMATION_V2_PMU_PREFLIGHT_OK"
+        and receipt.get("scientific_classification_emitted") is False
+        and invariant_passed
+    )
+    return receipt
 
 
 def combine_batch_jsonl(output_root: Path, batch_roots: list[Path], name: str) -> list[dict[str, Any]]:
@@ -358,6 +408,55 @@ def cpuinfo_snapshot() -> dict[str, str]:
     return info
 
 
+def _capability_enabled(value: str | None, bit: int) -> bool:
+    if value is None:
+        return False
+    try:
+        return bool(int(value, 16) & (1 << bit))
+    except ValueError:
+        return False
+
+
+def privileged_identity_snapshot(
+    *,
+    status_path: Path = Path("/proc/self/status"),
+    uid: int | None = None,
+    euid: int | None = None,
+    gid: int | None = None,
+    egid: int | None = None,
+) -> dict[str, Any]:
+    fields: dict[str, str] = {}
+    status_text = _read_required(status_path)
+    for line in status_text.splitlines():
+        if ":" not in line:
+            continue
+        key, value = line.split(":", 1)
+        key = key.strip()
+        if key in {"CapEff", "CapPrm", "CapBnd"}:
+            fields[key] = value.strip().split()[0]
+    missing = sorted(set(("CapEff", "CapPrm", "CapBnd")) - set(fields))
+    if missing:
+        raise TargetError(f"missing capability fields: {missing}")
+    snapshot = {
+        "real_uid": os.getuid() if uid is None else uid,
+        "effective_uid": os.geteuid() if euid is None else euid,
+        "real_gid": os.getgid() if gid is None else gid,
+        "effective_gid": os.getegid() if egid is None else egid,
+        "status_path": str(status_path),
+        "capability_fields": fields,
+        "cap_eff": fields["CapEff"],
+        "cap_prm": fields["CapPrm"],
+        "cap_bnd": fields["CapBnd"],
+        "cap_perfmon_effective": _capability_enabled(fields["CapEff"], CAP_PERFMON_BIT),
+        "cap_perfmon_permitted": _capability_enabled(fields["CapPrm"], CAP_PERFMON_BIT),
+        "cap_perfmon_bounding": _capability_enabled(fields["CapBnd"], CAP_PERFMON_BIT),
+    }
+    snapshot["effective_uid_zero_required"] = True
+    snapshot["nonroot_cap_perfmon_path_supported"] = False
+    snapshot["passed"] = snapshot["effective_uid"] == 0
+    return snapshot
+
+
 def temperature_observation(phase: str, *, hwmon_root: Path = Path("/sys/class/hwmon")) -> dict[str, Any]:
     candidates = []
     for hwmon in sorted(hwmon_root.glob("hwmon*")):
@@ -449,11 +548,14 @@ def compare_policy_snapshots(before: dict[str, Any], after: dict[str, Any]) -> d
 def pmu_platform_snapshot(
     *,
     cpuinfo: dict[str, str] | None = None,
+    identity: dict[str, Any] | None = None,
     event_source_root: Path = Path("/sys/bus/event_source/devices/cpu"),
     cpu_root: Path = Path("/sys/devices/system/cpu"),
     perf_event_paranoid: Path = Path("/proc/sys/kernel/perf_event_paranoid"),
+    raise_on_failure: bool = True,
 ) -> dict[str, Any]:
     info = cpuinfo or cpuinfo_snapshot()
+    identity_snapshot = identity or privileged_identity_snapshot()
     format_dir = event_source_root / "format"
     formats = {
         path.name: _read_required(path)
@@ -466,8 +568,16 @@ def pmu_platform_snapshot(
         cores[str(core)] = {"online_path": str(online_path), "online": _read_required(online_path)}
     event_source_type = _read_required(event_source_root / "type")
     paranoid_raw = _read_required(perf_event_paranoid)
+    paranoid_value: int | None = None
+    paranoid_numeric = False
+    try:
+        paranoid_value = int(paranoid_raw)
+        paranoid_numeric = True
+    except ValueError:
+        paranoid_value = None
     snapshot = {
         "timestamp_monotonic_ns": _now_ns(),
+        "identity": identity_snapshot,
         "cpuinfo": {
             "vendor_id": info.get("vendor_id"),
             "cpu_family": info.get("cpu family"),
@@ -478,8 +588,15 @@ def pmu_platform_snapshot(
         "event_source_cpu_type": event_source_type,
         "format_dir": str(format_dir),
         "formats": formats,
-        "perf_event_paranoid": paranoid_raw,
-        "perf_event_paranoid_allowed_max": PERF_EVENT_PARANOID_ALLOWED_MAX,
+        "perf_event_paranoid_raw": paranoid_raw,
+        "perf_event_paranoid_value": paranoid_value,
+        "perf_event_paranoid_numeric": paranoid_numeric,
+        "perf_event_paranoid_semantics": (
+            "diagnostic_only_for_effective_uid_zero"
+            if identity_snapshot["effective_uid"] == 0
+            else "nonroot_fails_closed_without_audited_cap_perfmon_path"
+        ),
+        "definitive_permission_gate": "exact_event_perf_event_open_preflight",
         "cores": cores,
         "msr_reads": 0,
         "msr_writes": 0,
@@ -498,17 +615,16 @@ def pmu_platform_snapshot(
             failures.append("PMU event source type negative")
     except ValueError:
         failures.append("PMU event source type is not numeric")
-    try:
-        if int(paranoid_raw) > PERF_EVENT_PARANOID_ALLOWED_MAX:
-            failures.append("perf_event_paranoid too restrictive")
-    except ValueError:
+    if not paranoid_numeric:
         failures.append("perf_event_paranoid is not numeric")
+    if identity_snapshot["effective_uid"] != 0:
+        failures.append("effective UID is not zero")
     for core, core_state in cores.items():
         if core_state["online"] != "1":
             failures.append(f"CPU core {core} is not online")
     snapshot["passed"] = not failures
     snapshot["failures"] = failures
-    if failures:
+    if failures and raise_on_failure:
         raise TargetError("; ".join(failures))
     return snapshot
 
@@ -557,8 +673,19 @@ def failure_evidence(
             "temperature_observations": state["custody"].get("temperature_observations", []),
             "process_snapshots": state["custody"].get("process_snapshots", []),
             "policy_snapshots": state["custody"].get("policy_snapshots", []),
+            "pmu_platform": state["custody"].get("pmu_platform"),
+            "pmu_preflight_receipt": state.get("pmu_preflight_receipt"),
+            "target_compile": state.get("target_compile"),
+            "target_binary_self_test": state.get("target_binary_self_test"),
+            "custody_events": state["custody"].get("events", []),
             "source_and_schedule_hashes_verified_so_far": state.get("verified_hashes", {}),
             "hardware_execution_began": bool(state.get("hardware_execution_began")),
+            "pmu_preflight_began": bool(state.get("pmu_preflight_began")),
+            "pmu_preflight_completed": bool(state.get("pmu_preflight_completed")),
+            "replicate_0_began": bool(state.get("replicate_0_began")),
+            "replicate_0_completed": bool(state.get("replicate_0_completed")),
+            "replicate_1_began": bool(state.get("replicate_1_began")),
+            "replicate_1_completed": bool(state.get("replicate_1_completed")),
             "replicates": state.get("replicates", {}),
             "scientific_classification_emitted": False,
         }
@@ -608,6 +735,12 @@ def execute(source_root: Path, output_root: Path, *, run_id: str, expected_manif
         "custody": custody,
         "verified_hashes": {},
         "hardware_execution_began": False,
+        "pmu_preflight_began": False,
+        "pmu_preflight_completed": False,
+        "replicate_0_began": False,
+        "replicate_0_completed": False,
+        "replicate_1_began": False,
+        "replicate_1_completed": False,
         "replicates": {str(rep): {"began": False, "completed": False} for rep in public.REPLICATES},
     }
     try:
@@ -625,9 +758,10 @@ def execute(source_root: Path, output_root: Path, *, run_id: str, expected_manif
 
         state["phase"] = "pmu_platform"
         cpuinfo = cpuinfo_snapshot()
-        pmu = pmu_platform_snapshot(cpuinfo=cpuinfo)
+        pmu = pmu_platform_snapshot(cpuinfo=cpuinfo, raise_on_failure=False)
         custody["pmu_platform"] = pmu
         write_custody_log(output_root, custody)
+        require(pmu["passed"], "; ".join(pmu["failures"]))
 
         state["phase"] = "temperature_before_compilation"
         append_temperature(custody, "before_compilation")
@@ -665,7 +799,14 @@ def execute(source_root: Path, output_root: Path, *, run_id: str, expected_manif
         state["phase"] = "compile_runtime"
         binary = source_root / "confirmation_v2_runtime"
         compile_command, live_runtime_binary_sha = compile_runtime(source_root, binary)
+        state["target_compile"] = {
+            "compile_command": compile_command,
+            "binary_custody_mode": BINARY_CUSTODY_MODE,
+            "offline_validation_binary_sha256": offline_validation_binary_sha,
+            "live_runtime_binary_sha256": live_runtime_binary_sha,
+        }
         runtime_self_test = run_runtime_self_test(binary)
+        state["target_binary_self_test"] = runtime_self_test
         require(runtime_self_test["passed"], "target runtime binary self-test failed")
         custody["events"].append(
             {
@@ -679,20 +820,26 @@ def execute(source_root: Path, output_root: Path, *, run_id: str, expected_manif
         )
         write_custody_log(output_root, custody)
 
+        state["phase"] = "runtime_pmu_preflight"
+        state["hardware_execution_began"] = True
+        state["pmu_preflight_began"] = True
+        pmu_preflight = run_runtime_pmu_preflight(binary)
+        state["pmu_preflight_receipt"] = pmu_preflight
+        custody["events"].append({"phase": "runtime_pmu_preflight", "pmu_preflight": pmu_preflight})
+        write_custody_log(output_root, custody)
+        require(pmu_preflight["passed"], f"target runtime PMU preflight failed: {pmu_preflight}")
+        state["pmu_preflight_completed"] = True
+
+        state["phase"] = "temperature_after_pmu_preflight"
+        append_temperature(custody, "after_pmu_preflight")
+        write_custody_log(output_root, custody)
+
         batch_roots = []
         runtime_results = []
         for rep in public.REPLICATES:
-            state["phase"] = f"process_before_replicate_{rep}"
-            append_process_snapshot(custody, f"before_replicate_{rep}", reject_forbidden=True)
-            write_custody_log(output_root, custody)
-
-            state["phase"] = f"temperature_before_replicate_{rep}"
-            append_temperature(custody, f"before_replicate_{rep}")
-            write_custody_log(output_root, custody)
-
             state["phase"] = f"runtime_replicate_{rep}"
-            state["hardware_execution_began"] = True
             state["replicates"][str(rep)]["began"] = True
+            state[f"replicate_{rep}_began"] = True
             batch_root = output_root / f"batch_{rep}"
             command = runtime_command(binary, schedule_tsv, batch_root, rep)
             completed = subprocess.run(command, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=120, check=False)
@@ -700,6 +847,7 @@ def execute(source_root: Path, output_root: Path, *, run_id: str, expected_manif
             (output_root / f"CONFIRMATION_RUNTIME_STDERR_REPLICATE_{rep}.txt").write_text(completed.stderr, encoding="utf-8")
             require(completed.returncode == 0, f"runtime replicate {rep} failed")
             state["replicates"][str(rep)]["completed"] = True
+            state[f"replicate_{rep}_completed"] = True
             runtime_results.append({"replicate": rep, "returncode": completed.returncode, "command": command})
             batch_roots.append(batch_root)
 
@@ -711,18 +859,6 @@ def execute(source_root: Path, output_root: Path, *, run_id: str, expected_manif
             append_process_snapshot(custody, f"after_replicate_{rep}", reject_forbidden=True)
             write_custody_log(output_root, custody)
 
-        state["phase"] = "process_post_replicates"
-        append_process_snapshot(custody, "after_replicates", reject_forbidden=True)
-        write_custody_log(output_root, custody)
-
-        state["phase"] = "policy_after"
-        policy_after = policy_snapshot("after")
-        custody["policy_snapshots"].append(policy_after)
-        policy_comparison = compare_policy_snapshots(policy_before, policy_after)
-        custody["policy_comparison"] = policy_comparison
-        require(policy_comparison["passed"], "CPU policy changed during confirmation")
-        write_custody_log(output_root, custody)
-
         state["phase"] = "adjudication"
         raw_records = combine_batch_jsonl(output_root, batch_roots, "RAW_TRANSDUCER_CAPTURE.jsonl")
         sentinels = combine_batch_jsonl(output_root, batch_roots, "RESTORATION_SENTINELS.jsonl")
@@ -733,8 +869,20 @@ def execute(source_root: Path, output_root: Path, *, run_id: str, expected_manif
         write_json(output_root / "TRANSDUCER_FEATURES_V2.json", features)
         write_json(output_root / "TRANSDUCER_ADJUDICATION_CONFIRMATION_V2.json", adjudication)
 
-        state["phase"] = "temperature_before_final_success"
-        append_temperature(custody, "before_final_success")
+        state["phase"] = "policy_after"
+        policy_after = policy_snapshot("after")
+        custody["policy_snapshots"].append(policy_after)
+        policy_comparison = compare_policy_snapshots(policy_before, policy_after)
+        custody["policy_comparison"] = policy_comparison
+        require(policy_comparison["passed"], "CPU policy changed during confirmation")
+        write_custody_log(output_root, custody)
+
+        state["phase"] = "temperature_final_success"
+        append_temperature(custody, "final_success")
+        write_custody_log(output_root, custody)
+
+        state["phase"] = "process_final_success"
+        append_process_snapshot(custody, "final_success", reject_forbidden=True)
         write_custody_log(output_root, custody)
 
         state["phase"] = "final_success"
@@ -763,6 +911,13 @@ def execute(source_root: Path, output_root: Path, *, run_id: str, expected_manif
             "runtime_results": runtime_results,
             "cpuinfo": cpuinfo,
             "pmu_platform": pmu,
+            "pmu_preflight_receipt": pmu_preflight,
+            "pmu_preflight_began": state["pmu_preflight_began"],
+            "pmu_preflight_completed": state["pmu_preflight_completed"],
+            "replicate_0_began": state["replicate_0_began"],
+            "replicate_0_completed": state["replicate_0_completed"],
+            "replicate_1_began": state["replicate_1_began"],
+            "replicate_1_completed": state["replicate_1_completed"],
             "temperature_observations": custody["temperature_observations"],
             "process_snapshots": custody["process_snapshots"],
             "policy_snapshots": custody["policy_snapshots"],
@@ -949,18 +1104,79 @@ def self_test(source_root: Path, output_root: Path) -> dict[str, Any]:
         paranoid_path.write_text(paranoid_value + "\n", encoding="utf-8")
         return {"event": event_root, "cpu": cpu_root, "paranoid": paranoid_path}
 
+    def fake_identity(euid: int = 0, cap_eff: str = "0000000000000000") -> dict[str, Any]:
+        return {
+            "real_uid": euid,
+            "effective_uid": euid,
+            "real_gid": 0,
+            "effective_gid": 0,
+            "status_path": "/synthetic/status",
+            "capability_fields": {"CapEff": cap_eff, "CapPrm": cap_eff, "CapBnd": cap_eff},
+            "cap_eff": cap_eff,
+            "cap_prm": cap_eff,
+            "cap_bnd": cap_eff,
+            "cap_perfmon_effective": _capability_enabled(cap_eff, CAP_PERFMON_BIT),
+            "cap_perfmon_permitted": _capability_enabled(cap_eff, CAP_PERFMON_BIT),
+            "cap_perfmon_bounding": _capability_enabled(cap_eff, CAP_PERFMON_BIT),
+            "effective_uid_zero_required": True,
+            "nonroot_cap_perfmon_path_supported": False,
+            "passed": euid == 0,
+        }
+
+    root_paranoid3_allowed = False
+    root_paranoid4_allowed = False
+    nonroot_without_cap_perfmon_fails_closed = False
+    malformed_paranoid_rejected = False
     pmu_event_format_drift_rejected = False
     pmu_umask_format_drift_rejected = False
     pmu_type_drift_rejected = False
-    paranoid_drift_rejected = False
     cpu_vendor_drift_rejected = False
     cpu_family_drift_rejected = False
     core_offline_rejected = False
     with tempfile_dir(output_root, "pmu_tests") as pmu_root:
+        paths = fake_pmu_root(pmu_root / "root_paranoid3", paranoid_value="3")
+        root_paranoid3_allowed = pmu_platform_snapshot(
+            cpuinfo={"vendor_id": "AuthenticAMD", "cpu family": "16"},
+            identity=fake_identity(0),
+            event_source_root=paths["event"],
+            cpu_root=paths["cpu"],
+            perf_event_paranoid=paths["paranoid"],
+        )["passed"]
+        paths = fake_pmu_root(pmu_root / "root_paranoid4", paranoid_value="4")
+        root_paranoid4_allowed = pmu_platform_snapshot(
+            cpuinfo={"vendor_id": "AuthenticAMD", "cpu family": "16"},
+            identity=fake_identity(0),
+            event_source_root=paths["event"],
+            cpu_root=paths["cpu"],
+            perf_event_paranoid=paths["paranoid"],
+        )["passed"]
+        try:
+            paths = fake_pmu_root(pmu_root / "nonroot", paranoid_value="1")
+            pmu_platform_snapshot(
+                cpuinfo={"vendor_id": "AuthenticAMD", "cpu family": "16"},
+                identity=fake_identity(1000),
+                event_source_root=paths["event"],
+                cpu_root=paths["cpu"],
+                perf_event_paranoid=paths["paranoid"],
+            )
+        except Exception:
+            nonroot_without_cap_perfmon_fails_closed = True
+        try:
+            paths = fake_pmu_root(pmu_root / "paranoid_malformed", paranoid_value="not-numeric")
+            pmu_platform_snapshot(
+                cpuinfo={"vendor_id": "AuthenticAMD", "cpu family": "16"},
+                identity=fake_identity(0),
+                event_source_root=paths["event"],
+                cpu_root=paths["cpu"],
+                perf_event_paranoid=paths["paranoid"],
+            )
+        except Exception:
+            malformed_paranoid_rejected = True
         try:
             paths = fake_pmu_root(pmu_root / "event_bad", event="config:0-7")
             pmu_platform_snapshot(
                 cpuinfo={"vendor_id": "AuthenticAMD", "cpu family": "16"},
+                identity=fake_identity(0),
                 event_source_root=paths["event"],
                 cpu_root=paths["cpu"],
                 perf_event_paranoid=paths["paranoid"],
@@ -971,6 +1187,7 @@ def self_test(source_root: Path, output_root: Path) -> dict[str, Any]:
             paths = fake_pmu_root(pmu_root / "umask_bad", umask="config:8-14")
             pmu_platform_snapshot(
                 cpuinfo={"vendor_id": "AuthenticAMD", "cpu family": "16"},
+                identity=fake_identity(0),
                 event_source_root=paths["event"],
                 cpu_root=paths["cpu"],
                 perf_event_paranoid=paths["paranoid"],
@@ -981,6 +1198,7 @@ def self_test(source_root: Path, output_root: Path) -> dict[str, Any]:
             paths = fake_pmu_root(pmu_root / "type_bad", event_type="not-numeric")
             pmu_platform_snapshot(
                 cpuinfo={"vendor_id": "AuthenticAMD", "cpu family": "16"},
+                identity=fake_identity(0),
                 event_source_root=paths["event"],
                 cpu_root=paths["cpu"],
                 perf_event_paranoid=paths["paranoid"],
@@ -988,19 +1206,10 @@ def self_test(source_root: Path, output_root: Path) -> dict[str, Any]:
         except Exception:
             pmu_type_drift_rejected = True
         try:
-            paths = fake_pmu_root(pmu_root / "paranoid_bad", paranoid_value="3")
-            pmu_platform_snapshot(
-                cpuinfo={"vendor_id": "AuthenticAMD", "cpu family": "16"},
-                event_source_root=paths["event"],
-                cpu_root=paths["cpu"],
-                perf_event_paranoid=paths["paranoid"],
-            )
-        except Exception:
-            paranoid_drift_rejected = True
-        try:
             paths = fake_pmu_root(pmu_root / "vendor_bad")
             pmu_platform_snapshot(
                 cpuinfo={"vendor_id": "GenuineIntel", "cpu family": "16"},
+                identity=fake_identity(0),
                 event_source_root=paths["event"],
                 cpu_root=paths["cpu"],
                 perf_event_paranoid=paths["paranoid"],
@@ -1011,6 +1220,7 @@ def self_test(source_root: Path, output_root: Path) -> dict[str, Any]:
             paths = fake_pmu_root(pmu_root / "family_bad")
             pmu_platform_snapshot(
                 cpuinfo={"vendor_id": "AuthenticAMD", "cpu family": "17"},
+                identity=fake_identity(0),
                 event_source_root=paths["event"],
                 cpu_root=paths["cpu"],
                 perf_event_paranoid=paths["paranoid"],
@@ -1021,12 +1231,88 @@ def self_test(source_root: Path, output_root: Path) -> dict[str, Any]:
             paths = fake_pmu_root(pmu_root / "core_bad", core5_online="0")
             pmu_platform_snapshot(
                 cpuinfo={"vendor_id": "AuthenticAMD", "cpu family": "16"},
+                identity=fake_identity(0),
                 event_source_root=paths["event"],
                 cpu_root=paths["cpu"],
                 perf_event_paranoid=paths["paranoid"],
             )
         except Exception:
             core_offline_rejected = True
+
+    def pmu_preflight_stdout(**overrides: Any) -> str:
+        receipt = {
+            "schema_id": "CAT_CAS_CONFIRMATION_V2_PMU_PREFLIGHT",
+            "status": "CONFIRMATION_V2_PMU_PREFLIGHT_OK",
+            "scientific_classification_emitted": False,
+            "event_count": 3,
+            "failed_event_index": -1,
+            "failure_stage": "",
+            "syscall_errno": 0,
+            "bytes_unchanged": True,
+            "preflight_opened": True,
+            "preflight_read_ok": True,
+            "preflight_event_order_ok": True,
+            "preflight_unmultiplexed": True,
+            "preflight_time_enabled": 100,
+            "preflight_time_running": 100,
+            "preflight_cpu_before": 5,
+            "preflight_cpu_after": 5,
+            "preflight_cycles": 100,
+            "preflight_change_to_dirty": 0,
+            "preflight_probe_dirty": 0,
+        }
+        receipt.update(overrides)
+        return json.dumps(receipt, sort_keys=True)
+
+    def pmu_runner(stdout: str, returncode: int = 0, stderr: str = ""):
+        return lambda *args, **kwargs: subprocess.CompletedProcess(args[0], returncode, stdout=stdout, stderr=stderr)
+
+    successful_pmu_preflight_no_classification = run_runtime_pmu_preflight(
+        Path("/synthetic/confirmation_v2_runtime"),
+        runner=pmu_runner(pmu_preflight_stdout()),
+    )["passed"]
+    pmu_syscall_eperm_fails_closed = not run_runtime_pmu_preflight(
+        Path("/synthetic/confirmation_v2_runtime"),
+        runner=pmu_runner(
+            pmu_preflight_stdout(
+                status="CONFIRMATION_V2_PMU_PREFLIGHT_FAILED",
+                failure_stage="perf_event_open",
+                failed_event_index=0,
+                syscall_errno=1,
+                preflight_opened=False,
+            ),
+            returncode=1,
+        ),
+    )["passed"]
+    pmu_syscall_einval_fails_closed = not run_runtime_pmu_preflight(
+        Path("/synthetic/confirmation_v2_runtime"),
+        runner=pmu_runner(
+            pmu_preflight_stdout(
+                status="CONFIRMATION_V2_PMU_PREFLIGHT_FAILED",
+                failure_stage="perf_event_open",
+                failed_event_index=1,
+                syscall_errno=22,
+                preflight_opened=False,
+            ),
+            returncode=1,
+        ),
+    )["passed"]
+    partial_pmu_group_fails_closed = not run_runtime_pmu_preflight(
+        Path("/synthetic/confirmation_v2_runtime"),
+        runner=pmu_runner(pmu_preflight_stdout(event_count=2)),
+    )["passed"]
+    multiplexed_pmu_preflight_fails_closed = not run_runtime_pmu_preflight(
+        Path("/synthetic/confirmation_v2_runtime"),
+        runner=pmu_runner(pmu_preflight_stdout(preflight_unmultiplexed=False, preflight_time_running=50)),
+    )["passed"]
+    event_id_drift_fails_closed = not run_runtime_pmu_preflight(
+        Path("/synthetic/confirmation_v2_runtime"),
+        runner=pmu_runner(pmu_preflight_stdout(preflight_event_order_ok=False)),
+    )["passed"]
+    wrong_cpu_affinity_fails_closed = not run_runtime_pmu_preflight(
+        Path("/synthetic/confirmation_v2_runtime"),
+        runner=pmu_runner(pmu_preflight_stdout(preflight_cpu_after=4)),
+    )["passed"]
 
     synthetic_files = {
         "RAW_TRANSDUCER_CAPTURE.jsonl": "{}\n",
@@ -1111,13 +1397,23 @@ def self_test(source_root: Path, output_root: Path) -> dict[str, Any]:
         "missing_policy_membership_rejected": missing_policy_membership_rejected,
         "missing_policy_driver_rejected": missing_policy_driver_rejected,
         "scaling_cur_freq_variation_allowed": policy_cur_freq_variation_allowed,
+        "root_perf_event_paranoid_3_allowed": root_paranoid3_allowed,
+        "root_perf_event_paranoid_4_allowed": root_paranoid4_allowed,
+        "nonroot_without_cap_perfmon_fails_closed": nonroot_without_cap_perfmon_fails_closed,
+        "malformed_perf_event_paranoid_fails_closed": malformed_paranoid_rejected,
         "pmu_event_format_drift_rejected": pmu_event_format_drift_rejected,
         "pmu_umask_format_drift_rejected": pmu_umask_format_drift_rejected,
         "pmu_type_drift_rejected": pmu_type_drift_rejected,
-        "perf_event_paranoid_drift_rejected": paranoid_drift_rejected,
         "cpu_vendor_drift_rejected": cpu_vendor_drift_rejected,
         "cpu_family_drift_rejected": cpu_family_drift_rejected,
         "core_offline_rejected": core_offline_rejected,
+        "successful_pmu_preflight_emits_no_scientific_classification": successful_pmu_preflight_no_classification,
+        "pmu_syscall_eperm_fails_closed_with_errno": pmu_syscall_eperm_fails_closed,
+        "pmu_syscall_einval_fails_closed_with_errno": pmu_syscall_einval_fails_closed,
+        "partial_pmu_group_fails_closed": partial_pmu_group_fails_closed,
+        "multiplexed_pmu_preflight_fails_closed": multiplexed_pmu_preflight_fails_closed,
+        "event_id_drift_fails_closed": event_id_drift_fails_closed,
+        "wrong_cpu_affinity_fails_closed": wrong_cpu_affinity_fails_closed,
         "binary_hash_semantics_coherent": binary_hash_semantics_coherent,
         "target_binary_self_test_required": target_binary_self_test_required,
         "failure_evidence_sealing_succeeded": failure_evidence_sealing_succeeded,
@@ -1152,13 +1448,23 @@ def self_test(source_root: Path, output_root: Path) -> dict[str, Any]:
         and missing_policy_membership_rejected
         and missing_policy_driver_rejected
         and policy_cur_freq_variation_allowed
+        and root_paranoid3_allowed
+        and root_paranoid4_allowed
+        and nonroot_without_cap_perfmon_fails_closed
+        and malformed_paranoid_rejected
         and pmu_event_format_drift_rejected
         and pmu_umask_format_drift_rejected
         and pmu_type_drift_rejected
-        and paranoid_drift_rejected
         and cpu_vendor_drift_rejected
         and cpu_family_drift_rejected
         and core_offline_rejected
+        and successful_pmu_preflight_no_classification
+        and pmu_syscall_eperm_fails_closed
+        and pmu_syscall_einval_fails_closed
+        and partial_pmu_group_fails_closed
+        and multiplexed_pmu_preflight_fails_closed
+        and event_id_drift_fails_closed
+        and wrong_cpu_affinity_fails_closed
         and binary_hash_semantics_coherent
         and target_binary_self_test_required
         and failure_evidence_sealing_succeeded
