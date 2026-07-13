@@ -1,0 +1,244 @@
+{
+  "allowed_classes": [
+    "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CONFIRMED",
+    "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE",
+    "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED"
+  ],
+  "bank_lines": 4096,
+  "base_work": 2048,
+  "contract_sha256": "1fe8d156273bd76eead8923b3ebf972c583e14a457b5281e05489e8a8488ec5a",
+  "expected_source_bundle_sha256": "eba5efdf2a52f60462ef57ecab60f052de6e9c42317caa15ad6dfa6f21c0d43b",
+  "final_commit": "AWAITING_LIVE_AUTHORIZATION",
+  "forbidden_classes": [
+    "BALANCED_PHYSICAL_TRANSDUCER_CALIBRATED",
+    "V1_PARTIAL_CONFIRMED",
+    "ORBITSTATE_PHYSICAL_QUERY_COUPLING_CANDIDATE",
+    "SMALL_WALL_CROSSED"
+  ],
+  "future_authorization": {
+    "command": "INDEPENDENT_WINDOW_TRANSDUCER_V3_COMMIT_BINDING=<final_commit> INDEPENDENT_WINDOW_TRANSDUCER_V3_MANIFEST_SHA256=<implementation_manifest_sha256> INDEPENDENT_WINDOW_TRANSDUCER_V3_LIVE_AUTHORITY=independent_window_transducer_v3_0 python independent_window_v3/run_independent_window_v3.py --execute-authorized",
+    "commit_binding_env": "INDEPENDENT_WINDOW_TRANSDUCER_V3_COMMIT_BINDING",
+    "live_authority_env": "INDEPENDENT_WINDOW_TRANSDUCER_V3_LIVE_AUTHORITY",
+    "live_authority_value": "independent_window_transducer_v3_0",
+    "manifest_binding_env": "INDEPENDENT_WINDOW_TRANSDUCER_V3_MANIFEST_SHA256"
+  },
+  "future_expected_run_root": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\transducer_calibration\\runs\\independent_window_transducer_v3_0",
+  "future_remote_run_root": "/root/catcas_live_small_wall/independent_window_transducer_v3_0",
+  "git_status_porcelain_at_freeze_build": "?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/transducer_calibration/independent_window_v3/\n",
+  "governance_gates": {
+    "critic": {
+      "command": [
+        "D:\\CCC 2.0\\AI\\agent-governance-system\\.venv\\Scripts\\python.exe",
+        "D:\\CCC 2.0\\AI\\agent-governance-system\\CAPABILITY\\TOOLS\\governance\\critic.py"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "[critic] Running governance checks...\n[critic] All checks passed"
+    },
+    "full_gate": {
+      "command": [
+        "D:\\CCC 2.0\\AI\\agent-governance-system\\.venv\\Scripts\\python.exe",
+        "D:\\CCC 2.0\\AI\\agent-governance-system\\CAPABILITY\\TOOLS\\utilities\\ci_local_gate.py",
+        "--full"
+      ],
+      "reason": "full gate is clean-tree and HEAD-bound; final push proof records the executed receipt",
+      "status": "REQUIRED_AFTER_COHERENT_COMMIT_BEFORE_PUSH"
+    }
+  },
+  "head_at_freeze_build": "524b9e580cb13f547fd7e0638dcf25b3b66e1112",
+  "implementation_manifest_sha256": "435824c15b2a2076cf5703cd11a0c242bd827316f4acd201bbb445fffc6929a4",
+  "line_bytes": 64,
+  "mapping_leg_source_work": 8192,
+  "network_connections": 0,
+  "offline_validation_binary_sha256": "4146fa034865b4c2d35c59e9ab31e631a04557188b6f18da2067494353d792e5",
+  "origin_main_at_freeze_build": "524b9e580cb13f547fd7e0638dcf25b3b66e1112",
+  "permutation": {
+    "a": 257,
+    "b": 43
+  },
+  "primary_coordinate": "change_to_dirty",
+  "prior_classifications_preserved": [
+    "BALANCED_PHYSICAL_TRANSDUCER_PARTIAL",
+    "V1_PARTIAL_V2_TRANSFER_CANDIDATE"
+  ],
+  "q0_split": "repeat 0 null_build; repeat 1 held-out null_test; null_test never builds its own ceiling",
+  "q_ladder": [
+    -1536,
+    -1024,
+    -512,
+    0,
+    512,
+    1024,
+    1536
+  ],
+  "receiver_core": 5,
+  "retry1_evidence": {
+    "adjudication_sha256_claim": "a29853a1bbeb1164122faef226d7374576228961133452eb9d9b06188a599bff",
+    "controller_classification": "V1_PARTIAL_V2_TRANSFER_CANDIDATE",
+    "controller_status": "CONFIRMATION_V2_CONTROLLER_TARGET_COMPLETE",
+    "features_sha256_claim": "40573a1f87be5b96fe0351c44e3d36c2ffec49335a3a9b00402dde9332b4e4b4",
+    "files": {
+      "CONFIRMATION_SOURCE_BUNDLE.tar.gz": "a670684fea5ed1e383e84923021fbb0b633557ade932e9501f3337bf6ae50517",
+      "CONFIRMATION_V2_MANIFEST.json": "53b1570f1a3a345c3b88cfa267f6bfab155c338c87c92323426bc0ea49a49c74",
+      "CONTROLLER_RESULT.json": "b2dda94aab230c0c893a038778a3b0804758f0912d287eab40d28d31d46d5293",
+      "COPYBACK_MANIFEST.json": "335b9cb639d2e22f9b8b6dd395fede77bb879518563547b7015384f24dfdb856",
+      "FINAL_RESULT_CONFIRMATION_V2.json": "84fcec1ae80e7e5842acd89fd737a1f4ffbcd4d2fb365f3c2e7a5a9e79325e3f",
+      "RAW_TRANSDUCER_CAPTURE.jsonl": "105a919bd18b22e038a676ce9c3b985bd5d82340282560035ce593cc1c19b631",
+      "RESTORATION_SENTINELS.jsonl": "811d7379f43b193623a670e30c922a3d627e5317bf4f2c56bafbbec641022167",
+      "TRANSDUCER_ADJUDICATION_CONFIRMATION_V2.json": "e581fe96c6955f4a51b4d21701ed6905b15c355a9ddf4a7713b829c8e06536e0",
+      "TRANSDUCER_FEATURES_V2.json": "3b2be90d58b0d0c60e259dc48e6f2e8e2ec372a2e47a8dd613ab401c07657ee7"
+    },
+    "final_status": "CONFIRMATION_V2_TARGET_COMPLETE",
+    "raw_capture_sha256_claim": "105a919bd18b22e038a676ce9c3b985bd5d82340282560035ce593cc1c19b631",
+    "restoration_sentinels_sha256_claim": "811d7379f43b193623a670e30c922a3d627e5317bf4f2c56bafbbec641022167",
+    "retained_classification": "V1_PARTIAL_V2_TRANSFER_CANDIDATE",
+    "root": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\transducer_calibration\\runs\\balanced_transducer_confirmation_v2_1"
+  },
+  "run_id": "independent_window_transducer_v3_0",
+  "runtime_compile": {
+    "available": true,
+    "command": [
+      "wsl",
+      "--",
+      "gcc",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-pedantic",
+      "-O2",
+      "-fno-lto",
+      "-I",
+      "/mnt/d/CCC 2.0/AI/agent-governance-system/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/transducer_calibration/independent_window_v3",
+      "/mnt/d/CCC 2.0/AI/agent-governance-system/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/transducer_calibration/independent_window_v3/independent_window_runtime.c",
+      "-o",
+      "/mnt/c/Users/rene_/AppData/Local/Temp/independent_window_v3_compile_wci7o99w/independent_window_runtime"
+    ],
+    "compiler": "wsl:gcc",
+    "disassembly": {
+      "available": true,
+      "command": [
+        "wsl",
+        "--",
+        "objdump",
+        "-d",
+        "/mnt/c/Users/rene_/AppData/Local/Temp/independent_window_v3_compile_wci7o99w/independent_window_runtime"
+      ],
+      "forbidden_instruction_matches": [],
+      "forbidden_instruction_set": [
+        "rdmsr",
+        "wrmsr",
+        "clflush",
+        "wbinvd",
+        "invd"
+      ],
+      "line_count": 688,
+      "normalized_stdout_sha256": "cff8fbbc4dbd95461c3702a1331d67a195080d6009edcb82c5299627b0def8ba",
+      "passed": true,
+      "returncode": 0,
+      "stderr": ""
+    },
+    "passed": true,
+    "returncode": 0,
+    "runtime_binary_sha256": "4146fa034865b4c2d35c59e9ab31e631a04557188b6f18da2067494353d792e5",
+    "schedule_check_stderr": "",
+    "schedule_check_stdout": "INDEPENDENT_WINDOW_V3_SCHEDULE_TSV_OK",
+    "self_test_stderr": "",
+    "self_test_stdout": "INDEPENDENT_WINDOW_V3_RUNTIME_SELF_TEST_OK",
+    "stderr": "",
+    "stdout": ""
+  },
+  "runtime_disassembly": {
+    "available": true,
+    "command": [
+      "wsl",
+      "--",
+      "objdump",
+      "-d",
+      "/mnt/c/Users/rene_/AppData/Local/Temp/independent_window_v3_compile_wci7o99w/independent_window_runtime"
+    ],
+    "forbidden_instruction_matches": [],
+    "forbidden_instruction_set": [
+      "rdmsr",
+      "wrmsr",
+      "clflush",
+      "wbinvd",
+      "invd"
+    ],
+    "line_count": 688,
+    "normalized_stdout_sha256": "cff8fbbc4dbd95461c3702a1331d67a195080d6009edcb82c5299627b0def8ba",
+    "passed": true,
+    "returncode": 0,
+    "stderr": ""
+  },
+  "schedule_json_sha256": "a1e07bd96005bf7c912c9fc3b1d632a60cf44d5d72c6dc33c2ba7275452033a8",
+  "schedule_semantic_sha256": "ae3088ecd676106ee040d8b16e9a65f0c2e5c652eca1cebd47073a22ee837fb2",
+  "schedule_tsv_sha256": "a8cb36dce7319329fa91f1046bfe821fbe3903f4db4f7775696bc55fd3939aa4",
+  "schema_id": "CAT_CAS_INDEPENDENT_WINDOW_IMPLEMENTATION_MANIFEST_V3",
+  "scp_executions": 0,
+  "self_test_path_sha256": "775418e0f2dc56640cb386fbe0669249f1bd8e09a05d6159ada18af66d4d4f60",
+  "self_test_sha256": "7638de3f92de71e62dbb6cabd338234bff93f38784a6d2f22eba8de9d4f01628",
+  "sol_audit": {
+    "audit_agent_id": "019f59a0-6bd4-7380-9c55-b6127193b85e",
+    "audit_mode": "read_only_no_checkout_no_git_write_no_lab_contact",
+    "audit_model": "gpt-5.6-sol",
+    "audit_record_sha256": "7c5f8da89452cce7ca35e4063278c7fd46782c08ac4ffdd93e8802c6a1d14fc3",
+    "final_reaudit_manifest_sha256": "5a8aa73d1f491ca03fdba55c32fbc6d588d5dadb1e5b3ab200356103ecbd8168",
+    "final_reaudit_status": "PASS",
+    "initial_status": "FAIL",
+    "material_findings": [
+      {
+        "finding": "Integrity failures could emit PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE.",
+        "repair": "Adjudication now gates candidate emission on schedule/raw integrity and exact self-test outcomes force integrity violations to NOT_ESTABLISHED."
+      },
+      {
+        "finding": "Authorization gate was not manifest-bound.",
+        "repair": "Authorization now requires INDEPENDENT_WINDOW_TRANSDUCER_V3_MANIFEST_SHA256 and revalidates manifest digest, source hashes, schedule artifacts, self-test, runtime binary hash, and disassembly hash."
+      },
+      {
+        "finding": "Independent subcapture sequencing was asserted but not mechanically proven.",
+        "repair": "Raw validation now requires per-component stage sequences and unique stage receipt IDs; mocks cover out-of-order zero-return-code and reused-baseline receipt rejection."
+      },
+      {
+        "finding": "Offline closure lacked disassembly and governance-gate receipts.",
+        "repair": "Runtime compile receipts now include objdump-based forbidden-instruction scanning, and self-test/validate receipts include the critic gate with the full gate declared as the clean-tree pre-push requirement."
+      },
+      {
+        "finding": "Second re-audit found stage receipt uniqueness was not capture-wide.",
+        "repair": "Raw validation now tracks stage receipt IDs across the entire capture and rejects reuse across trials; cross-trial receipt reuse is an explicit self-test case."
+      },
+      {
+        "finding": "Second re-audit found adjudication accepted tampered features with a stale hash.",
+        "repair": "Adjudication now recomputes features_sha256 before evaluating transfer laws and returns NOT_ESTABLISHED on hash mismatch; tampered feature mutation is an explicit regression."
+      }
+    ],
+    "network_connections": 0,
+    "post_repair_status": "PASS",
+    "remaining_material_findings": [],
+    "scp_executions": 0,
+    "ssh_executions": 0,
+    "zero_live_contact": true
+  },
+  "source_core": 4,
+  "source_hashes": {
+    "INDEPENDENT_WINDOW_CONTRACT_V3.md": "1fe8d156273bd76eead8923b3ebf972c583e14a457b5281e05489e8a8488ec5a",
+    "INDEPENDENT_WINDOW_PUBLIC_SCHEDULE.json": "a1e07bd96005bf7c912c9fc3b1d632a60cf44d5d72c6dc33c2ba7275452033a8",
+    "INDEPENDENT_WINDOW_PUBLIC_SCHEDULE.sha256": "cb472ccfdccb4cdc34971127e394495f1c419c5aa03b644d1b5cc57d7856cc56",
+    "INDEPENDENT_WINDOW_PUBLIC_SCHEDULE.tsv": "a8cb36dce7319329fa91f1046bfe821fbe3903f4db4f7775696bc55fd3939aa4",
+    "INDEPENDENT_WINDOW_V3_SOL_AUDIT.json": "7c5f8da89452cce7ca35e4063278c7fd46782c08ac4ffdd93e8802c6a1d14fc3",
+    "RETRY1_MEASUREMENT_TOPOLOGY_AUDIT.md": "0f2a7ecf68533e247c0c302dee5d480f347b1c7f4b7188b6d45c943dd22eebd7",
+    "independent_window_public.py": "26ae0424e0c5acda711fa435be2c43f5de225a5356b21f776e41f5159f79a748",
+    "independent_window_runtime.c": "b86688c256786f0bf5e27820f77aab749077e5a641a7590befa6ace7a8ec6548",
+    "independent_window_runtime.h": "f4d5adc16621f324a2621cfd27ba6c318e64a84a460104acb8dcfa10cf44cec0",
+    "independent_window_target.py": "7b96afaac3970df06b6f25c9e4ea2b30621e75508bceb569708b20ab3287b3a0",
+    "run_independent_window_v3.py": "516b4c46f215dd15cc308967a743b7d46a9f88cfdbb239291de71d737a20a426"
+  },
+  "ssh_executions": 0,
+  "starting_commit": "524b9e580cb13f547fd7e0638dcf25b3b66e1112",
+  "subcapture_source_work": 4096,
+  "topology_audit_sha256": "0f2a7ecf68533e247c0c302dee5d480f347b1c7f4b7188b6d45c943dd22eebd7",
+  "total_component_measurement_windows": 256,
+  "total_mapping_leg_records": 128,
+  "zero_live_contact": true
+}

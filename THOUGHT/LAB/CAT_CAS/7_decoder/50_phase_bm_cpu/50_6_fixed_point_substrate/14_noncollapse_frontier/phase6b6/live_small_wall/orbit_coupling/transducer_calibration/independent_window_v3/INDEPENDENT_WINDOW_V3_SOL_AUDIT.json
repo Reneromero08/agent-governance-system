@@ -1,0 +1,40 @@
+{
+  "audit_agent_id": "019f59a0-6bd4-7380-9c55-b6127193b85e",
+  "audit_model": "gpt-5.6-sol",
+  "audit_mode": "read_only_no_checkout_no_git_write_no_lab_contact",
+  "initial_status": "FAIL",
+  "material_findings": [
+    {
+      "finding": "Integrity failures could emit PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE.",
+      "repair": "Adjudication now gates candidate emission on schedule/raw integrity and exact self-test outcomes force integrity violations to NOT_ESTABLISHED."
+    },
+    {
+      "finding": "Authorization gate was not manifest-bound.",
+      "repair": "Authorization now requires INDEPENDENT_WINDOW_TRANSDUCER_V3_MANIFEST_SHA256 and revalidates manifest digest, source hashes, schedule artifacts, self-test, runtime binary hash, and disassembly hash."
+    },
+    {
+      "finding": "Independent subcapture sequencing was asserted but not mechanically proven.",
+      "repair": "Raw validation now requires per-component stage sequences and unique stage receipt IDs; mocks cover out-of-order zero-return-code and reused-baseline receipt rejection."
+    },
+    {
+      "finding": "Offline closure lacked disassembly and governance-gate receipts.",
+      "repair": "Runtime compile receipts now include objdump-based forbidden-instruction scanning, and self-test/validate receipts include the critic gate with the full gate declared as the clean-tree pre-push requirement."
+    },
+    {
+      "finding": "Second re-audit found stage receipt uniqueness was not capture-wide.",
+      "repair": "Raw validation now tracks stage receipt IDs across the entire capture and rejects reuse across trials; cross-trial receipt reuse is an explicit self-test case."
+    },
+    {
+      "finding": "Second re-audit found adjudication accepted tampered features with a stale hash.",
+      "repair": "Adjudication now recomputes features_sha256 before evaluating transfer laws and returns NOT_ESTABLISHED on hash mismatch; tampered feature mutation is an explicit regression."
+    }
+  ],
+  "final_reaudit_manifest_sha256": "5a8aa73d1f491ca03fdba55c32fbc6d588d5dadb1e5b3ab200356103ecbd8168",
+  "final_reaudit_status": "PASS",
+  "remaining_material_findings": [],
+  "post_repair_status": "PASS",
+  "zero_live_contact": true,
+  "network_connections": 0,
+  "ssh_executions": 0,
+  "scp_executions": 0
+}

@@ -1,0 +1,1627 @@
+{
+  "governance_gates": {
+    "critic": {
+      "command": [
+        "D:\\CCC 2.0\\AI\\agent-governance-system\\.venv\\Scripts\\python.exe",
+        "D:\\CCC 2.0\\AI\\agent-governance-system\\CAPABILITY\\TOOLS\\governance\\critic.py"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "[critic] Running governance checks...\n[critic] All checks passed"
+    },
+    "full_gate": {
+      "command": [
+        "D:\\CCC 2.0\\AI\\agent-governance-system\\.venv\\Scripts\\python.exe",
+        "D:\\CCC 2.0\\AI\\agent-governance-system\\CAPABILITY\\TOOLS\\utilities\\ci_local_gate.py",
+        "--full"
+      ],
+      "reason": "full gate is clean-tree and HEAD-bound; final push proof records the executed receipt",
+      "status": "REQUIRED_AFTER_COHERENT_COMMIT_BEFORE_PUSH"
+    }
+  },
+  "public_self_test": {
+    "cases": {
+      "byte_restoration_failure": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "failed_law_count": 387,
+        "failed_law_sample": [
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "byte_restoration_failure"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "ownership_sentinel_restoration_failure"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "byte_restoration_failure"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "ownership_sentinel_restoration_failure"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              2
+            ],
+            "law": "byte_restoration_failure"
+          },
+          {
+            "key": [
+              0,
+              2
+            ],
+            "law": "ownership_sentinel_restoration_failure"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "component_order_drift": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "failed_law_count": 515,
+        "failed_law_sample": [
+          {
+            "actual": [
+              "positive",
+              "negative"
+            ],
+            "expected": [
+              "negative",
+              "positive"
+            ],
+            "key": [
+              0,
+              0
+            ],
+            "law": "component_order_drift"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "positive_sequence_index_drift"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "negative_sequence_index_drift"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "actual": [
+              "positive",
+              "negative"
+            ],
+            "expected": [
+              "negative",
+              "positive"
+            ],
+            "key": [
+              0,
+              1
+            ],
+            "law": "component_order_drift"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "positive_sequence_index_drift"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "negative_sequence_index_drift"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "trial_ok_false"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "contradictory_replicates": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "failed_law_count": 8,
+        "failed_law_sample": [
+          {
+            "law": "sign_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "gain_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "monotonicity_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "gain_normalized_source_order_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "gain_normalized_subcapture_order_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "stratum_transfer_law",
+            "scope": "aggregate"
+          },
+          {
+            "conventions": [
+              "direct",
+              "reversed"
+            ],
+            "law": "same_sign_convention",
+            "scope": "replicate"
+          },
+          {
+            "law": "fresh_process_consistency",
+            "max_error": 2.0,
+            "scope": "replicate"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "cross_trial_receipt_reuse": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "failed_law_count": 14,
+        "failed_law_sample": [
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "receipt_reused_across_trials",
+            "previous_key": [
+              0,
+              0
+            ]
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "receipt_reused_across_trials",
+            "previous_key": [
+              0,
+              0
+            ]
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "receipt_reused_across_trials",
+            "previous_key": [
+              0,
+              0
+            ]
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "receipt_reused_across_trials",
+            "previous_key": [
+              0,
+              0
+            ]
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "receipt_reused_across_trials",
+            "previous_key": [
+              0,
+              0
+            ]
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "receipt_reused_across_trials",
+            "previous_key": [
+              0,
+              0
+            ]
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "receipt_reused_across_trials",
+            "previous_key": [
+              0,
+              0
+            ]
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "receipt_reused_across_trials",
+            "previous_key": [
+              0,
+              0
+            ]
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "different_permutation": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "failed_law_count": 259,
+        "failed_law_sample": [
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "different_line_permutation"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "different_line_permutation"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              2
+            ],
+            "law": "different_line_permutation"
+          },
+          {
+            "key": [
+              0,
+              2
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              3
+            ],
+            "law": "different_line_permutation"
+          },
+          {
+            "key": [
+              0,
+              3
+            ],
+            "law": "trial_ok_false"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "event_id_drift": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "failed_law_count": 291,
+        "failed_law_sample": [
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "negative_measure_pmu_window"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "negative_measure_pmu_window"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              2
+            ],
+            "law": "negative_measure_pmu_window"
+          },
+          {
+            "key": [
+              0,
+              2
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              3
+            ],
+            "law": "negative_measure_pmu_window"
+          },
+          {
+            "key": [
+              0,
+              3
+            ],
+            "law": "trial_ok_false"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "fixed_physical_bank_bias": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE",
+        "failed_law_count": 18,
+        "failed_law_sample": [
+          {
+            "law": "gain_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "paired_logical_mapping_invariance_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "paired_physical_reversal_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "gain_normalized_source_order_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "gain_normalized_subcapture_order_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "stratum_transfer_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "gain_law",
+            "scope": "replicate_0"
+          },
+          {
+            "law": "paired_logical_mapping_invariance_law",
+            "scope": "replicate_0"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "forged_derived_delta": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "failed_law_count": 259,
+        "failed_law_sample": [
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "forged_or_precomputed_derived_field"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "forged_or_precomputed_derived_field"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              2
+            ],
+            "law": "forged_or_precomputed_derived_field"
+          },
+          {
+            "key": [
+              0,
+              2
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              3
+            ],
+            "law": "forged_or_precomputed_derived_field"
+          },
+          {
+            "key": [
+              0,
+              3
+            ],
+            "law": "trial_ok_false"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "independent_no_carryover": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CONFIRMED",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CONFIRMED",
+        "failed_law_count": 0,
+        "failed_law_sample": [],
+        "mode": "equals",
+        "passed": true
+      },
+      "insufficient_gain": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE",
+        "failed_law_count": 12,
+        "failed_law_sample": [
+          {
+            "law": "gain_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "gain_normalized_source_order_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "gain_normalized_subcapture_order_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "stratum_transfer_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "gain_law",
+            "scope": "replicate_0"
+          },
+          {
+            "law": "gain_normalized_source_order_law",
+            "scope": "replicate_0"
+          },
+          {
+            "law": "gain_normalized_subcapture_order_law",
+            "scope": "replicate_0"
+          },
+          {
+            "law": "stratum_transfer_law",
+            "scope": "replicate_0"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "legacy_carryover": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE",
+        "failed_law_count": 6,
+        "failed_law_sample": [
+          {
+            "law": "heldout_q0_null_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "paired_logical_mapping_invariance_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "paired_physical_reversal_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "heldout_q0_null_law",
+            "scope": "replicate_0"
+          },
+          {
+            "law": "paired_logical_mapping_invariance_law",
+            "scope": "replicate_0"
+          },
+          {
+            "law": "paired_physical_reversal_law",
+            "scope": "replicate_0"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "mapping_role_drift": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "failed_law_count": 133,
+        "failed_law_sample": [
+          {
+            "field": "logical_positive_physical",
+            "key": [
+              0,
+              0
+            ],
+            "law": "mapping_role_drift"
+          },
+          {
+            "field": "logical_negative_physical",
+            "key": [
+              0,
+              0
+            ],
+            "law": "mapping_role_drift"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              2
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              3
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              4
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              5
+            ],
+            "law": "trial_ok_false"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "missing_rebaseline": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "failed_law_count": 393,
+        "failed_law_sample": [
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "positive_missing_rebaseline"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "negative_missing_rebaseline"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "positive_missing_rebaseline"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "negative_missing_rebaseline"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              2
+            ],
+            "law": "positive_missing_rebaseline"
+          },
+          {
+            "key": [
+              0,
+              2
+            ],
+            "law": "negative_missing_rebaseline"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "missing_reencoding": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "failed_law_count": 393,
+        "failed_law_sample": [
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "positive_missing_source_encoding"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "negative_missing_source_encoding"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "positive_missing_source_encoding"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "negative_missing_source_encoding"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              2
+            ],
+            "law": "positive_missing_source_encoding"
+          },
+          {
+            "key": [
+              0,
+              2
+            ],
+            "law": "negative_missing_source_encoding"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "multiplexed_pmu": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "failed_law_count": 1411,
+        "failed_law_sample": [
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "positive_measure_pmu_window"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "positive_pre_a_sentinel_window"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "positive_pre_b_sentinel_window"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "positive_post_a_sentinel_window"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "positive_post_b_sentinel_window"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "negative_measure_pmu_window"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "negative_pre_a_sentinel_window"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "negative_pre_b_sentinel_window"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "non_monotonic_response": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE",
+        "failed_law_count": 12,
+        "failed_law_sample": [
+          {
+            "law": "monotonicity_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "gain_normalized_source_order_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "gain_normalized_subcapture_order_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "stratum_transfer_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "monotonicity_law",
+            "scope": "replicate_0"
+          },
+          {
+            "law": "gain_normalized_source_order_law",
+            "scope": "replicate_0"
+          },
+          {
+            "law": "gain_normalized_subcapture_order_law",
+            "scope": "replicate_0"
+          },
+          {
+            "law": "stratum_transfer_law",
+            "scope": "replicate_0"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "non_odd_response": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "failed_law_count": 16,
+        "failed_law_sample": [
+          {
+            "law": "sign_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "oddness_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "gain_normalized_source_order_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "gain_normalized_subcapture_order_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "stratum_transfer_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "sign_law",
+            "scope": "replicate_0"
+          },
+          {
+            "law": "oddness_law",
+            "scope": "replicate_0"
+          },
+          {
+            "law": "gain_normalized_source_order_law",
+            "scope": "replicate_0"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "out_of_order_zero_rc": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "failed_law_count": 259,
+        "failed_law_sample": [
+          {
+            "actual": [
+              "receiver_baseline",
+              "pre_sentinel",
+              "source_encoding",
+              "rebaseline",
+              "measure_logical_bank",
+              "restore_both_banks",
+              "post_sentinel"
+            ],
+            "expected": [
+              "receiver_baseline",
+              "pre_sentinel",
+              "rebaseline",
+              "source_encoding",
+              "measure_logical_bank",
+              "restore_both_banks",
+              "post_sentinel"
+            ],
+            "key": [
+              0,
+              0
+            ],
+            "law": "positive_stage_sequence_drift"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "actual": [
+              "receiver_baseline",
+              "pre_sentinel",
+              "source_encoding",
+              "rebaseline",
+              "measure_logical_bank",
+              "restore_both_banks",
+              "post_sentinel"
+            ],
+            "expected": [
+              "receiver_baseline",
+              "pre_sentinel",
+              "rebaseline",
+              "source_encoding",
+              "measure_logical_bank",
+              "restore_both_banks",
+              "post_sentinel"
+            ],
+            "key": [
+              0,
+              1
+            ],
+            "law": "positive_stage_sequence_drift"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "actual": [
+              "receiver_baseline",
+              "pre_sentinel",
+              "source_encoding",
+              "rebaseline",
+              "measure_logical_bank",
+              "restore_both_banks",
+              "post_sentinel"
+            ],
+            "expected": [
+              "receiver_baseline",
+              "pre_sentinel",
+              "rebaseline",
+              "source_encoding",
+              "measure_logical_bank",
+              "restore_both_banks",
+              "post_sentinel"
+            ],
+            "key": [
+              0,
+              2
+            ],
+            "law": "positive_stage_sequence_drift"
+          },
+          {
+            "key": [
+              0,
+              2
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "actual": [
+              "receiver_baseline",
+              "pre_sentinel",
+              "source_encoding",
+              "rebaseline",
+              "measure_logical_bank",
+              "restore_both_banks",
+              "post_sentinel"
+            ],
+            "expected": [
+              "receiver_baseline",
+              "pre_sentinel",
+              "rebaseline",
+              "source_encoding",
+              "measure_logical_bank",
+              "restore_both_banks",
+              "post_sentinel"
+            ],
+            "key": [
+              0,
+              3
+            ],
+            "law": "positive_stage_sequence_drift"
+          },
+          {
+            "key": [
+              0,
+              3
+            ],
+            "law": "trial_ok_false"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "ownership_sentinel_restoration_failure": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "failed_law_count": 271,
+        "failed_law_sample": [
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "ownership_sentinel_restoration_failure"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "ownership_sentinel_restoration_failure"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              2
+            ],
+            "law": "ownership_sentinel_restoration_failure"
+          },
+          {
+            "key": [
+              0,
+              2
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              3
+            ],
+            "law": "ownership_sentinel_restoration_failure"
+          },
+          {
+            "key": [
+              0,
+              3
+            ],
+            "law": "trial_ok_false"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "q0_null_test_leakage": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE",
+        "failed_law_count": 6,
+        "failed_law_sample": [
+          {
+            "law": "heldout_q0_null_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "paired_logical_mapping_invariance_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "heldout_q0_null_law",
+            "scope": "replicate_0"
+          },
+          {
+            "law": "paired_logical_mapping_invariance_law",
+            "scope": "replicate_0"
+          },
+          {
+            "law": "heldout_q0_null_law",
+            "scope": "replicate_1"
+          },
+          {
+            "law": "paired_logical_mapping_invariance_law",
+            "scope": "replicate_1"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "retained_evidence_pooling": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "failed_law_count": 1,
+        "failed_law_sample": [
+          {
+            "actual": 130,
+            "expected": 128,
+            "law": "raw_record_count"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "reused_baseline_receipt": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "failed_law_count": 259,
+        "failed_law_sample": [
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "cross_component_receipt_reuse"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "cross_component_receipt_reuse"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              2
+            ],
+            "law": "cross_component_receipt_reuse"
+          },
+          {
+            "key": [
+              0,
+              2
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              3
+            ],
+            "law": "cross_component_receipt_reuse"
+          },
+          {
+            "key": [
+              0,
+              3
+            ],
+            "law": "trial_ok_false"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "same_raw_window_reused": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "failed_law_count": 278,
+        "failed_law_sample": [
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "same_raw_window_reused_twice"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "same_raw_window_reused_twice"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              2
+            ],
+            "law": "same_raw_window_reused_twice"
+          },
+          {
+            "key": [
+              0,
+              2
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              3
+            ],
+            "law": "same_raw_window_reused_twice"
+          },
+          {
+            "key": [
+              0,
+              3
+            ],
+            "law": "trial_ok_false"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "single_q0_outlier": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE",
+        "failed_law_count": 6,
+        "failed_law_sample": [
+          {
+            "law": "heldout_q0_null_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "paired_logical_mapping_invariance_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "paired_physical_reversal_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "heldout_q0_null_law",
+            "scope": "replicate_0"
+          },
+          {
+            "law": "paired_logical_mapping_invariance_law",
+            "scope": "replicate_0"
+          },
+          {
+            "law": "paired_physical_reversal_law",
+            "scope": "replicate_0"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "subcapture_order_bias": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE",
+        "failed_law_count": 15,
+        "failed_law_sample": [
+          {
+            "law": "oddness_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "independent_subcapture_order_invariance_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "gain_normalized_source_order_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "gain_normalized_subcapture_order_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "stratum_transfer_law",
+            "scope": "aggregate"
+          },
+          {
+            "law": "oddness_law",
+            "scope": "replicate_0"
+          },
+          {
+            "law": "independent_subcapture_order_invariance_law",
+            "scope": "replicate_0"
+          },
+          {
+            "law": "gain_normalized_source_order_law",
+            "scope": "replicate_0"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "translated_v1_v2_smuggling": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "failed_law_count": 148,
+        "failed_law_sample": [
+          {
+            "law": "raw_schema",
+            "schema": "CAT_CAS_BALANCED_TRANSDUCER_CONFIRMATION_RAW_RECORD_V2"
+          },
+          {
+            "law": "raw_schema",
+            "schema": "CAT_CAS_BALANCED_TRANSDUCER_CONFIRMATION_RAW_RECORD_V2"
+          },
+          {
+            "law": "raw_schema",
+            "schema": "CAT_CAS_BALANCED_TRANSDUCER_CONFIRMATION_RAW_RECORD_V2"
+          },
+          {
+            "law": "raw_schema",
+            "schema": "CAT_CAS_BALANCED_TRANSDUCER_CONFIRMATION_RAW_RECORD_V2"
+          },
+          {
+            "law": "raw_schema",
+            "schema": "CAT_CAS_BALANCED_TRANSDUCER_CONFIRMATION_RAW_RECORD_V2"
+          },
+          {
+            "law": "raw_schema",
+            "schema": "CAT_CAS_BALANCED_TRANSDUCER_CONFIRMATION_RAW_RECORD_V2"
+          },
+          {
+            "law": "raw_schema",
+            "schema": "CAT_CAS_BALANCED_TRANSDUCER_CONFIRMATION_RAW_RECORD_V2"
+          },
+          {
+            "law": "raw_schema",
+            "schema": "CAT_CAS_BALANCED_TRANSDUCER_CONFIRMATION_RAW_RECORD_V2"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "unequal_source_work": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "failed_law_count": 387,
+        "failed_law_sample": [
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "negative_subcapture_source_work"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "mapping_leg_source_work"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "negative_subcapture_source_work"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "mapping_leg_source_work"
+          },
+          {
+            "key": [
+              0,
+              1
+            ],
+            "law": "trial_ok_false"
+          },
+          {
+            "key": [
+              0,
+              2
+            ],
+            "law": "negative_subcapture_source_work"
+          },
+          {
+            "key": [
+              0,
+              2
+            ],
+            "law": "mapping_leg_source_work"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      },
+      "wrong_core": {
+        "actual": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "expected": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_NOT_ESTABLISHED",
+        "failed_law_count": 1411,
+        "failed_law_sample": [
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "positive_measure_pmu_window"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "positive_pre_a_sentinel_window"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "positive_pre_b_sentinel_window"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "positive_post_a_sentinel_window"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "positive_post_b_sentinel_window"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "negative_measure_pmu_window"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "negative_pre_a_sentinel_window"
+          },
+          {
+            "key": [
+              0,
+              0
+            ],
+            "law": "negative_pre_b_sentinel_window"
+          }
+        ],
+        "mode": "equals",
+        "passed": true
+      }
+    },
+    "regressions": {
+      "component_windows_256": true,
+      "legacy_carryover_distinguished": true,
+      "null_test_not_used_to_build_ceiling": true,
+      "q0_build_pairs_per_replicate_4": true,
+      "q0_test_pairs_per_replicate_4": true,
+      "schedule_per_replicate_64": true,
+      "schedule_total_records_128": true,
+      "tampered_features_hash_rejected": true
+    },
+    "schema_id": "CAT_CAS_INDEPENDENT_WINDOW_SELF_TEST_V3",
+    "self_test_passed": true,
+    "self_test_sha256": "d2063bed48a1658e53e5088cbcbe0ef0e8b620b753b5b99d17adf5b32922704b"
+  },
+  "run_id": "independent_window_transducer_v3_0",
+  "schema_id": "CAT_CAS_INDEPENDENT_WINDOW_CONTROLLER_SELF_TEST_V3",
+  "self_test_passed": true,
+  "self_test_sha256": "7638de3f92de71e62dbb6cabd338234bff93f38784a6d2f22eba8de9d4f01628",
+  "target_offline_validation": {
+    "compile_passed": true,
+    "passed": true,
+    "runtime_binary_sha256": "4146fa034865b4c2d35c59e9ab31e631a04557188b6f18da2067494353d792e5",
+    "runtime_schedule_validation_passed": true,
+    "runtime_self_test_passed": true,
+    "source_bundle_sha256": "2f803e7646790bb9363f3e1c8eb4116fc5bdd0ad3d3f4a1f4babdf8a848f7ade"
+  }
+}
