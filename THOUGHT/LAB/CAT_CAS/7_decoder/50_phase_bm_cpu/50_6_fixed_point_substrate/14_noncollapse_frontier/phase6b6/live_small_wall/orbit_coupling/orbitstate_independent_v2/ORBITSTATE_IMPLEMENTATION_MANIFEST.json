@@ -1,0 +1,108 @@
+{
+  "allowed_target_classes": [
+    "ORBITSTATE_INDEPENDENT_COUPLING_CONFIRMED",
+    "ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE",
+    "ORBITSTATE_INDEPENDENT_COUPLING_NOT_ESTABLISHED"
+  ],
+  "branch_at_freeze_build": "main",
+  "expected_local_root": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\runs\\orbitstate_independent_v2_0",
+  "expected_remote_root": "/root/catcas_live_small_wall/orbitstate_independent_v2_0",
+  "final_commit": "AWAITING_COHERENT_COMMIT",
+  "forbidden_target_classes": [
+    "SMALL_WALL_CROSSED"
+  ],
+  "future_authorization": {
+    "command": "ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=<final_commit> ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=<manifest_file_sha256> ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_0 python orbitstate_independent_v2/run_orbitstate_independent_v2.py --execute-authorized",
+    "commit_binding_env": "ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING",
+    "live_authority_env": "ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY",
+    "live_authority_value": "orbitstate_independent_v2_0",
+    "manifest_binding_env": "ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256"
+  },
+  "git_status_porcelain_at_freeze_build": " M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/SMALL_WALL_STATE.md\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/PUBLIC_TRANSDUCER_NULL_LAW_AUDIT.md\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2/\n",
+  "hashes": {
+    "contract_sha256": "1f586b4648a516723f5a77cfc381d0e4a8c305dd9446a28289975a3ad3c49507",
+    "controller_self_test_sha256": "e94d8ef893b14e8495eb0f7c20a0742df9b65d8ec3d12b62e4feb86d9048a31b",
+    "disassembly_sha256": "a0485bce7547eefe9521b47f30dbd753bae5a26cc2b07d18c96bd970946dd7de",
+    "offline_binary_sha256": "f6c8f43f4b780b40350dca2789ced4a4559d5a5cce218f25c1fef330bdd74f83",
+    "private_source_map_canonical_sha256": "b952f2a161e782dfe41e9dfca21ba4f6bf2902bc69392d9ad52915daa3955464",
+    "private_source_map_file_sha256": "619189f66d32610053c3899616d656d16a21814a45074191f37f95acdbf58325",
+    "public_null_law_audit_sha256": "fc6321f2b898a3f97766e90d68267b67bea79aa32b26ad110cf085deda09c01e",
+    "public_schedule_json_sha256": "709063e1d789971f8ac36d2fc94094738015150baae8e75065909c774a079b7b",
+    "public_schedule_sha256_file_sha256": "1d5f50d78d313c343f5a2c7ebf563a0d913127465e316750ef3967085f90d347",
+    "public_schedule_tsv_sha256": "57aaf5635e0ea1bcecd17f6efc0383f6ce08a893751d9203d1c87b0e4c7a7876",
+    "public_transducer_reference_file_sha256": "c608723329322df07b036a9237d72c2e3bed87ec10d75c105b03b07a50e460c1",
+    "self_test_sha256": "d3208059cca5859713a2e73eb693e9f6e696af8aebfeb0c0755cb5c281988780",
+    "sol_audit_sha256": "21b56d61b9fc43b2d2ae3da7321f00ef189fbb7e925fac20ce4e0adc8ef2b9b8",
+    "source_bundle_sha256": "10eb4c48ee8b1c2e8f4371f6b2a8c7a022359e4c27105ee86fe1bcf83c549b0d",
+    "target_self_test_sha256": "28771166bd630d5f2082f1494fafbe8d538d8c86be108fe8b10cb1cc79012f28",
+    "transport_simulation_sha256": "52a040ce658ed6e97fb459a0fd370c786863dfbc585242bc7a32f78c8aa136e4"
+  },
+  "head_at_freeze_build": "4762b5b49b308ae4aca8e141113e4fafe4b0f81e",
+  "manifest_canonical_sha256": "65ff536d36034005e47a2c7ddf86158da71976ca8e94a75a54cf0d86837cdc31",
+  "offline_validation": {
+    "offline_validate_sha256": "39c6222704d640457d5782f2300a7457e759e2916917e81c922f579c493089cf",
+    "passed": true
+  },
+  "origin_main_at_freeze_build": "4762b5b49b308ae4aca8e141113e4fafe4b0f81e",
+  "public_transducer_reference": {
+    "aggregate_change_to_dirty_means": {
+      "-1024": -1274.625,
+      "-1536": -1901.3125,
+      "-512": -633.9375,
+      "0": 4.4375,
+      "1024": 1276.5,
+      "1536": 1913.6875,
+      "512": 633.8125
+    },
+    "bound_freeze_rationale": {
+      "aggregate_build_ceiling": 76.0,
+      "largest_retained_heldout_mapping": 100.0,
+      "largest_retained_heldout_pair_residual": 127.0,
+      "predeclared_physical_pair_bound": 152.0,
+      "refit_after_private_evidence": false
+    },
+    "engineering_state": [
+      "PUBLIC_CHANGE_TO_DIRTY_ODD_TRANSDUCER_REPRODUCED",
+      "PUBLIC_MAX_NULL_GATE_NOT_A_VALID_REASON_TO_DELAY_PRIVATE_COUPLING"
+    ],
+    "primary_coordinate": "change_to_dirty",
+    "private_odd_signal_floor": 456.0,
+    "public_q0_absolute_bound": 152.0,
+    "retained_hashes": {
+      "adjudication": "2b0445c5110aca5b1630064c071ea18f0755aa89829b88618697cb3345cd7f43",
+      "features": "3601718af96514755fff8e548fbf61df667f98587d350de600b6171b813298ae",
+      "raw": "0c3ea99f1cd2a771980012a1f53e22677e48e7cd3778054744af41fa251aac2d",
+      "sentinels": "6c8a48219874fff2126d29b2056383ec4caeeb2a519ee83eb418c2679a218fb8",
+      "source_receipts": "402d1e436dafdca7d7beb1172c48b2c3ab57ac6787720174edb4786c23d70bf5",
+      "stage_receipts": "cf4586c09a94cdb4de5ef438151e5f8c7bfec76271e13056cca786a98de40992"
+    },
+    "retained_result_class": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE",
+    "source_commit": "4762b5b49b308ae4aca8e141113e4fafe4b0f81e"
+  },
+  "run_id": "orbitstate_independent_v2_0",
+  "schema": "ORBITSTATE_IMPLEMENTATION_MANIFEST_V2",
+  "small_wall_post_audit_promotion_law": [
+    "fresh target result is ORBITSTATE_INDEPENDENT_COUPLING_CONFIRMED",
+    "both fresh replicates independently pass",
+    "receiver feature hash frozen before unblinding",
+    "no private source field entered receiver feature extraction",
+    "restoration and physical mapping controls pass",
+    "GPT-5.6 Sol Extra High read-only audit has no material blocker",
+    "GPT-5.5 independently verifies copied source and evidence"
+  ],
+  "sol_audit": {
+    "material_findings": [],
+    "sha256": "21b56d61b9fc43b2d2ae3da7321f00ef189fbb7e925fac20ce4e0adc8ef2b9b8",
+    "status": "SOL_AUDIT_MATERIAL_FINDINGS_CLOSED"
+  },
+  "starting_commit": "4762b5b49b308ae4aca8e141113e4fafe4b0f81e",
+  "transport_simulation": {
+    "passed": true,
+    "sha256": "52a040ce658ed6e97fb459a0fd370c786863dfbc585242bc7a32f78c8aa136e4"
+  },
+  "zero_live_contact_attestation": {
+    "hardware_executions": 0,
+    "network_connections": 0,
+    "ssh_scp_ping_target_contact": 0
+  }
+}

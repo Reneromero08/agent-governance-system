@@ -1,0 +1,32 @@
+{
+  "audit_threads": [
+    "019f5a31-bf88-7311-b509-f572d56049bd",
+    "019f5a38-b88d-74e2-94da-5b92857b5c68",
+    "019f5a3f-d962-7cd3-b8f2-985ac3ad8cb5",
+    "019f5a44-fb48-7041-b4bf-36dd4ed11d92",
+    "019f5a49-d476-7361-93fe-3256bb74f9ea",
+    "019f5a54-7a50-7b02-96f8-474511ea1683",
+    "019f5a5b-a205-7fe0-b71b-67759026b225"
+  ],
+  "custody": "READ_ONLY",
+  "effort": "xhigh",
+  "final_verdict": "PASS_NO_MATERIAL_BLOCKERS",
+  "material_findings": [],
+  "model": "gpt-5.6-sol",
+  "network_or_lab_probe": false,
+  "no_checkout_mutation": true,
+  "no_git_write": true,
+  "no_lab_device_contact": true,
+  "non_material_findings": [
+    "The public q0 maximum-law defect is diagnosed without rewriting the retained V3 scientific class.",
+    "The private package preserves the receiver/source no-smuggle boundary and freezes receiver features before unblinding.",
+    "The source computes q from a real OrbitState structure across a process boundary.",
+    "The fixed 152 public-noise bound and 456 private signal floor are prospective constants.",
+    "Both fresh replicates must pass target/fold, polarity, null, mapping, source-formula, restoration, PMU, and custody laws.",
+    "Offline modes perform zero target contact; live execution remains blocked by exact commit, manifest, and authority environment gates.",
+    "Controller failure statuses return nonzero and only the three allowed OrbitState result classes can be emitted."
+  ],
+  "schema": "ORBITSTATE_SOL_AUDIT_V2",
+  "status": "SOL_AUDIT_MATERIAL_FINDINGS_CLOSED",
+  "target_contact": false
+}

@@ -6,7 +6,7 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE`
+`ORBITSTATE_INDEPENDENT_WALL_CROSSING_PACKAGE_FROZEN_AWAITING_AUTHORIZATION`
 
 **Latest live result:**
 `independent_window_transducer_v3_0` completed the one authorized V3 live
@@ -29,6 +29,57 @@ stage receipts `cf4586c09a94cdb4de5ef438151e5f8c7bfec76271e13056cca786a98de40992
 source receipts `402d1e436dafdca7d7beb1172c48b2c3ab57ac6787720174edb4786c23d70bf5`,
 features `3601718af96514755fff8e548fbf61df667f98587d350de600b6171b813298ae`,
 adjudication `2b0445c5110aca5b1630064c071ea18f0755aa89829b88618697cb3345cd7f43`.
+
+**Latest offline freeze:**
+`orbitstate_independent_v2_0` freezes the private OrbitState independent-window
+wall-crossing package at source head `4762b5b49b308ae4aca8e141113e4fafe4b0f81e`
+without SSH, SCP, ping, target inspection, PMU hardware execution, or lab-device
+contact. The public calibration loop is closed only as an engineering audit:
+`PUBLIC_CHANGE_TO_DIRTY_ODD_TRANSDUCER_REPRODUCED` and
+`PUBLIC_MAX_NULL_GATE_NOT_A_VALID_REASON_TO_DELAY_PRIVATE_COUPLING`. The retained
+scientific classes remain `BALANCED_PHYSICAL_TRANSDUCER_PARTIAL`,
+`V1_PARTIAL_V2_TRANSFER_CANDIDATE`, and
+`PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE`; V3 is not retroactively rewritten.
+
+Frozen package root:
+`phase6b6/live_small_wall/orbit_coupling/orbitstate_independent_v2`.
+Expected local evidence root:
+`D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\phase6b6\live_small_wall\orbit_coupling\runs\orbitstate_independent_v2_0`.
+Expected remote root:
+`/root/catcas_live_small_wall/orbitstate_independent_v2_0`.
+
+Key frozen hashes: public null-law audit
+`fc6321f2b898a3f97766e90d68267b67bea79aa32b26ad110cf085deda09c01e`,
+contract `1f586b4648a516723f5a77cfc381d0e4a8c305dd9446a28289975a3ad3c49507`,
+manifest canonical `65ff536d36034005e47a2c7ddf86158da71976ca8e94a75a54cf0d86837cdc31`,
+manifest file `7ff1ee4d1886c747afaf0baf0ed695015c82cec65aa0802c92bd89d5bd5ea677`,
+public schedule JSON `709063e1d789971f8ac36d2fc94094738015150baae8e75065909c774a079b7b`,
+public schedule TSV `57aaf5635e0ea1bcecd17f6efc0383f6ce08a893751d9203d1c87b0e4c7a7876`,
+private source map `b952f2a161e782dfe41e9dfca21ba4f6bf2902bc69392d9ad52915daa3955464`,
+source bundle `10eb4c48ee8b1c2e8f4371f6b2a8c7a022359e4c27105ee86fe1bcf83c549b0d`,
+offline binary `f6c8f43f4b780b40350dca2789ced4a4559d5a5cce218f25c1fef330bdd74f83`,
+disassembly `a0485bce7547eefe9521b47f30dbd753bae5a26cc2b07d18c96bd970946dd7de`,
+public self-test `d3208059cca5859713a2e73eb693e9f6e696af8aebfeb0c0755cb5c281988780`,
+target self-test `28771166bd630d5f2082f1494fafbe8d538d8c86be108fe8b10cb1cc79012f28`,
+controller self-test `e94d8ef893b14e8495eb0f7c20a0742df9b65d8ec3d12b62e4feb86d9048a31b`,
+transport simulation `52a040ce658ed6e97fb459a0fd370c786863dfbc585242bc7a32f78c8aa136e4`,
+and Sol audit `21b56d61b9fc43b2d2ae3da7321f00ef189fbb7e925fac20ce4e0adc8ef2b9b8`.
+
+Future live authorization requires all three exact environment variables:
+`ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=<final_commit>`,
+`ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=7ff1ee4d1886c747afaf0baf0ed695015c82cec65aa0802c92bd89d5bd5ea677`,
+and `ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_0`.
+The exact future command is:
+`ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=<final_commit> ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=7ff1ee4d1886c747afaf0baf0ed695015c82cec65aa0802c92bd89d5bd5ea677 ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_0 python orbitstate_independent_v2/run_orbitstate_independent_v2.py --execute-authorized`.
+
+Allowed target classes are `ORBITSTATE_INDEPENDENT_COUPLING_CONFIRMED`,
+`ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE`, and
+`ORBITSTATE_INDEPENDENT_COUPLING_NOT_ESTABLISHED`. The package cannot emit
+`SMALL_WALL_CROSSED`; that persistent state may be promoted only after a fresh
+`ORBITSTATE_INDEPENDENT_COUPLING_CONFIRMED` result, both replicates passing,
+feature freeze before unblinding, no private field in receiver extraction,
+restoration and mapping controls passing, a no-material-blocker GPT-5.6 Sol
+read-only post-run audit, and GPT-5.5 independent verification of copied evidence.
 
 **Active wall:**
 The current wall is still carrier/access-model selection. Timing, ownership-intent PMU

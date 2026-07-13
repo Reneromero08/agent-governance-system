@@ -1,0 +1,112 @@
+{
+  "copyback_failure": {
+    "commands": [
+      [
+        "ssh",
+        "root@192.168.137.100",
+        "mkdir -p /root/catcas_live_small_wall/orbitstate_independent_v2_0/source /root/catcas_live_small_wall/orbitstate_independent_v2_0/output"
+      ],
+      [
+        "scp",
+        "-r",
+        "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2",
+        "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/"
+      ],
+      [
+        "ssh",
+        "root@192.168.137.100",
+        "ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=4762b5b49b308ae4aca8e141113e4fafe4b0f81e ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=8dd62b104631239586ffadf07518c88ebf7b57b179df2e8741bdd8a1a24af4b7 ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_0 python3 /root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_v2/orbitstate_independent_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_v2 --output-root /root/catcas_live_small_wall/orbitstate_independent_v2_0/output --run-id orbitstate_independent_v2_0 --expected-manifest-sha 8dd62b104631239586ffadf07518c88ebf7b57b179df2e8741bdd8a1a24af4b7 --expected-commit-binding 4762b5b49b308ae4aca8e141113e4fafe4b0f81e"
+      ],
+      [
+        "scp",
+        "-r",
+        "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/output",
+        "C:\\Users\\rene_\\AppData\\Local\\Temp\\orbitstate_transport_lhjtriwv\\runs_copy_failure\\orbitstate_independent_v2_0"
+      ]
+    ],
+    "failed_command": [
+      "scp",
+      "-r",
+      "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/output",
+      "C:\\Users\\rene_\\AppData\\Local\\Temp\\orbitstate_transport_lhjtriwv\\runs_copy_failure\\orbitstate_independent_v2_0"
+    ],
+    "remote_cleaned": false,
+    "remote_retained": true,
+    "returncode": 8,
+    "status": "ORBITSTATE_CONTROLLER_TARGET_FAILED",
+    "stderr": "fake copyback failure",
+    "stdout": ""
+  },
+  "no_automatic_retry": true,
+  "passed": true,
+  "schema": "ORBITSTATE_TRANSPORT_SIMULATION_V2",
+  "success": {
+    "commands": [
+      [
+        "ssh",
+        "root@192.168.137.100",
+        "mkdir -p /root/catcas_live_small_wall/orbitstate_independent_v2_0/source /root/catcas_live_small_wall/orbitstate_independent_v2_0/output"
+      ],
+      [
+        "scp",
+        "-r",
+        "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2",
+        "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/"
+      ],
+      [
+        "ssh",
+        "root@192.168.137.100",
+        "ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=4762b5b49b308ae4aca8e141113e4fafe4b0f81e ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=8dd62b104631239586ffadf07518c88ebf7b57b179df2e8741bdd8a1a24af4b7 ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_0 python3 /root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_v2/orbitstate_independent_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_v2 --output-root /root/catcas_live_small_wall/orbitstate_independent_v2_0/output --run-id orbitstate_independent_v2_0 --expected-manifest-sha 8dd62b104631239586ffadf07518c88ebf7b57b179df2e8741bdd8a1a24af4b7 --expected-commit-binding 4762b5b49b308ae4aca8e141113e4fafe4b0f81e"
+      ],
+      [
+        "scp",
+        "-r",
+        "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/output",
+        "C:\\Users\\rene_\\AppData\\Local\\Temp\\orbitstate_transport_lhjtriwv\\runs_success\\orbitstate_independent_v2_0"
+      ]
+    ],
+    "final": {
+      "fake_transport": true,
+      "result_class": "ORBITSTATE_INDEPENDENT_COUPLING_CONFIRMED",
+      "status": "ORBITSTATE_INDEPENDENT_TARGET_COMPLETE"
+    },
+    "local_root": "C:\\Users\\rene_\\AppData\\Local\\Temp\\orbitstate_transport_lhjtriwv\\runs_success\\orbitstate_independent_v2_0",
+    "remote_cleaned": true,
+    "remote_retained": false,
+    "remote_root": "/root/catcas_live_small_wall/orbitstate_independent_v2_0",
+    "status": "ORBITSTATE_CONTROLLER_TARGET_COMPLETE"
+  },
+  "target_failure": {
+    "commands": [
+      [
+        "ssh",
+        "root@192.168.137.100",
+        "mkdir -p /root/catcas_live_small_wall/orbitstate_independent_v2_0/source /root/catcas_live_small_wall/orbitstate_independent_v2_0/output"
+      ],
+      [
+        "scp",
+        "-r",
+        "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_independent_v2",
+        "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_independent_v2_0/source/"
+      ],
+      [
+        "ssh",
+        "root@192.168.137.100",
+        "ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=4762b5b49b308ae4aca8e141113e4fafe4b0f81e ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=8dd62b104631239586ffadf07518c88ebf7b57b179df2e8741bdd8a1a24af4b7 ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_0 python3 /root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_v2/orbitstate_independent_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_v2 --output-root /root/catcas_live_small_wall/orbitstate_independent_v2_0/output --run-id orbitstate_independent_v2_0 --expected-manifest-sha 8dd62b104631239586ffadf07518c88ebf7b57b179df2e8741bdd8a1a24af4b7 --expected-commit-binding 4762b5b49b308ae4aca8e141113e4fafe4b0f81e"
+      ]
+    ],
+    "failed_command": [
+      "ssh",
+      "root@192.168.137.100",
+      "ORBITSTATE_INDEPENDENT_V2_COMMIT_BINDING=4762b5b49b308ae4aca8e141113e4fafe4b0f81e ORBITSTATE_INDEPENDENT_V2_MANIFEST_SHA256=8dd62b104631239586ffadf07518c88ebf7b57b179df2e8741bdd8a1a24af4b7 ORBITSTATE_INDEPENDENT_V2_LIVE_AUTHORITY=orbitstate_independent_v2_0 python3 /root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_v2/orbitstate_independent_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_independent_v2_0/source/orbitstate_independent_v2 --output-root /root/catcas_live_small_wall/orbitstate_independent_v2_0/output --run-id orbitstate_independent_v2_0 --expected-manifest-sha 8dd62b104631239586ffadf07518c88ebf7b57b179df2e8741bdd8a1a24af4b7 --expected-commit-binding 4762b5b49b308ae4aca8e141113e4fafe4b0f81e"
+    ],
+    "remote_cleaned": false,
+    "remote_retained": true,
+    "returncode": 7,
+    "status": "ORBITSTATE_CONTROLLER_TARGET_FAILED",
+    "stderr": "fake target failure",
+    "stdout": ""
+  },
+  "transport_simulation_sha256": "bac02c46c6084d457bc05bbee4a9032f3b307b3f8959bf39a0f4c7de014fd1ce",
+  "zero_live_contact": true
+}

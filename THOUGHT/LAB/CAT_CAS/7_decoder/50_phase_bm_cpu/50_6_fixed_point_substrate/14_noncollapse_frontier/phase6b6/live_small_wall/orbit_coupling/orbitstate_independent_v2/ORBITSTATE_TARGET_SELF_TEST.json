@@ -1,0 +1,8 @@
+{
+  "offline_validate_passed": true,
+  "offline_validate_sha256": "39c6222704d640457d5782f2300a7457e759e2916917e81c922f579c493089cf",
+  "schema": "ORBITSTATE_TARGET_SELF_TEST_V2",
+  "self_test_passed": true,
+  "self_test_sha256": "36c5e6d395d79061fca331194cb80a269a445487a95aad272abcbc2e07f99090",
+  "zero_live_contact": true
+}

@@ -1,0 +1,35 @@
+{
+  "aggregate_change_to_dirty_means": {
+    "-1024": -1274.625,
+    "-1536": -1901.3125,
+    "-512": -633.9375,
+    "0": 4.4375,
+    "1024": 1276.5,
+    "1536": 1913.6875,
+    "512": 633.8125
+  },
+  "bound_freeze_rationale": {
+    "aggregate_build_ceiling": 76.0,
+    "largest_retained_heldout_mapping": 100.0,
+    "largest_retained_heldout_pair_residual": 127.0,
+    "predeclared_physical_pair_bound": 152.0,
+    "refit_after_private_evidence": false
+  },
+  "engineering_state": [
+    "PUBLIC_CHANGE_TO_DIRTY_ODD_TRANSDUCER_REPRODUCED",
+    "PUBLIC_MAX_NULL_GATE_NOT_A_VALID_REASON_TO_DELAY_PRIVATE_COUPLING"
+  ],
+  "primary_coordinate": "change_to_dirty",
+  "private_odd_signal_floor": 456.0,
+  "public_q0_absolute_bound": 152.0,
+  "retained_hashes": {
+    "adjudication": "2b0445c5110aca5b1630064c071ea18f0755aa89829b88618697cb3345cd7f43",
+    "features": "3601718af96514755fff8e548fbf61df667f98587d350de600b6171b813298ae",
+    "raw": "0c3ea99f1cd2a771980012a1f53e22677e48e7cd3778054744af41fa251aac2d",
+    "sentinels": "6c8a48219874fff2126d29b2056383ec4caeeb2a519ee83eb418c2679a218fb8",
+    "source_receipts": "402d1e436dafdca7d7beb1172c48b2c3ab57ac6787720174edb4786c23d70bf5",
+    "stage_receipts": "cf4586c09a94cdb4de5ef438151e5f8c7bfec76271e13056cca786a98de40992"
+  },
+  "retained_result_class": "PUBLIC_INDEPENDENT_WINDOW_TRANSDUCER_CANDIDATE",
+  "source_commit": "4762b5b49b308ae4aca8e141113e4fafe4b0f81e"
+}
