@@ -6,7 +6,16 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`FINAL_GAIN_COVARIANT_CONFIRMATION_LIVE_PACKAGE_FROZEN_AWAITING_AUTHORIZATION`
+`GAIN_COVARIANT_FINAL_CONFIRMATION_PACKAGE_RETIRED__QUERY_SEPARATED_ARCHITECTURE_BLOCKED`
+
+**Current status tokens:**
+
+```text
+GAIN_COVARIANT_PROJECTION_TRANSDUCTION_ESTABLISHED
+GAIN_COVARIANT_FINAL_CONFIRMATION_PACKAGE_RETIRED
+QUERY_SEPARATED_ORBITSTATE_ARCHITECTURE_BLOCKED
+SMALL_WALL_CROSSED_NOT_PROMOTED
+```
 
 **Latest live result:**
 `orbitstate_independent_v2_1` completed the one authorized retry-one private
@@ -68,8 +77,8 @@ The audit diagnoses the official real-geometry failure as a unit-carrier-gain
 assumption: the original law compared physical Change-to-Dirty counts directly with
 the source-domain value `1536*cos(2*pi*23/256) = 1297.6950762235501`. Using only
 predeclared controls, `post_projection` and `equal_orbit_odd_zero`, the retained
-evidence establishes the retrospective explanatory class
-`PRIVATE_ORBITSTATE_GAIN_COVARIANT_GEOMETRY_ESTABLISHED`. Aggregate
+evidence establishes the corrected retrospective claim ceiling
+`GAIN_COVARIANT_ORBITSTATE_PROJECTION_TRANSDUCTION_ESTABLISHED`. Aggregate
 `g_control = 1.8690776374666158`; replicate controls are
 `1.853557917407246` and `1.884597357525986`. The maximum gain-normalized private
 vector error is 0.02755084579965194 and the maximum angular error is
@@ -86,13 +95,47 @@ seed, control-only per-replicate gain estimation, gain-normalized private geomet
 strong-signal mapping/reversal/sign hard gates, and a fixed near-zero absolute law.
 No live transaction is authorized by the contract.
 
-**Latest offline freeze:**
-`orbitstate_gain_covariant_confirmation_v1_0` freezes the final prospective
+**Latest offline retirement and successor review:**
+`orbitstate_gain_covariant_confirmation_v1_0` is permanently retired as a live
+vehicle. The package source, evidence, contract, schedules, manifests, hashes,
+self-tests, and audit history remain preserved. Its live invocation count is zero,
+and live authority is permanently withheld by the retirement receipt:
+
+`phase6b6/live_small_wall/orbit_coupling/orbitstate_gain_covariant_confirmation_v1/GAIN_COVARIANT_CONFIRMATION_V1_RETIREMENT.json`.
+
+The retained result is a successful gain-covariant source-to-PMU
+projection-transduction lane, not an unresolved OrbitState accessor:
+
+```text
+GAIN_COVARIANT_ORBITSTATE_PROJECTION_TRANSDUCTION_ESTABLISHED
+```
+
+The query-separated successor design root is:
+
+`phase6b6/live_small_wall/orbit_coupling/orbitstate_query_separated_successor`.
+
+Five independent read-only Sol design reviewers returned `MATERIAL_BLOCKER`. Candidate
+B, shared pair topology, remains the provisional strongest direction, but the
+architecture is not frozen. Blocking mechanisms include all-query source-answer
+vectors, no frozen nonseparability law, an underdefined scalar adversary, insufficient
+receiver OS capability denial, no exact tuple-multiset/executed-sequence law, and an
+incomplete R2 forward-displacement plus equivalence contract.
+
+Final design decision:
+
+```text
+QUERY_SEPARATED_ARCHITECTURE_BLOCKED
+```
+
+No live transaction is authorized.
+
+**Retired offline freeze:**
+`orbitstate_gain_covariant_confirmation_v1_0` originally froze the final prospective
 gain-covariant OrbitState confirmation live package at starting head
 `4ff588cea11343bf38d4c96c1281d34cbf1961ed`, without SSH, SCP, ping, target
-inspection, PMU hardware execution, or lab-device contact. This is a live-capable
-package freeze only; it does not authorize or execute the target transaction and
-does not promote `SMALL_WALL_CROSSED`.
+inspection, PMU hardware execution, or lab-device contact. That package is now
+retired; it must not be repaired into another Small Wall attempt and must not be
+executed live.
 
 Frozen package root:
 `phase6b6/live_small_wall/orbit_coupling/orbitstate_gain_covariant_confirmation_v1`.
@@ -104,9 +147,8 @@ per-replicate control-only gain estimation from `post_projection` and
 `equal_orbit_odd_zero`, gain-normalized target/fold/polarity geometry, strong
 signal phase controls, a fixed near-zero absolute law, no target-derived gain
 fitting, no post-run threshold revision, and both fresh replicates as hard gates.
-The future live invocation remains blocked unless the final committed head,
-manifest file SHA, and explicit live authority environment variables are supplied
-after this offline package has been reviewed.
+The future live invocation is permanently withheld. Supplying head, manifest hash, or
+authority variables must not authorize this retired package.
 
 **Previous offline freeze:**
 `orbitstate_independent_v2_0` freezes the private OrbitState independent-window
@@ -147,14 +189,14 @@ The attempt-zero and retry-one live authorizations were both consumed and are no
 reusable. No further OrbitState Independent V2 live invocation is authorized by the
 retained frozen package.
 
-Allowed target classes are `ORBITSTATE_INDEPENDENT_COUPLING_CONFIRMED`,
+Allowed target classes were `ORBITSTATE_INDEPENDENT_COUPLING_CONFIRMED`,
 `ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE`, and
 `ORBITSTATE_INDEPENDENT_COUPLING_NOT_ESTABLISHED`. The package cannot emit
-`SMALL_WALL_CROSSED`; that persistent state may be promoted only after a fresh
-`ORBITSTATE_INDEPENDENT_COUPLING_CONFIRMED` result, both replicates passing,
-feature freeze before unblinding, no private field in receiver extraction,
-restoration and mapping controls passing, a no-material-blocker GPT-5.6 Sol
-read-only post-run audit, and GPT-5.5 independent verification of copied evidence.
+`SMALL_WALL_CROSSED`. A first two-replicate package, even if perfect and audited,
+must remain `SMALL_WALL_CROSSED_NOT_PROMOTED`. Any future `SMALL_WALL_CROSSED` claim
+requires a separate evaluator with multi-seed, multi-session, route/order/sham
+survival, scaling, old-boundary exclusion, R2+ closure, no-smuggle controls, and
+independent implementation or machine reproduction.
 
 **OrbitState Independent V2 retry state:**
 Attempt zero, `orbitstate_independent_v2_0`, consumed the sole live authorization at
@@ -2476,6 +2518,15 @@ neutral/forward/reverse/shuffle owned page-permission sequence unchanged. Do not
 page-recovery sequence unchanged.
 
 ## Current claim ceiling
+
+```text
+GAIN_COVARIANT_ORBITSTATE_PROJECTION_TRANSDUCTION_ESTABLISHED
+QUERY_SEPARATED_ARCHITECTURE_BLOCKED
+SMALL_WALL_CROSSED_NOT_PROMOTED
+```
+
+The old transducer-calibration ceiling below is retained as historical context, not
+the active frontier ceiling.
 
 `V1_PARTIAL_V2_TRANSFER_CANDIDATE`
 

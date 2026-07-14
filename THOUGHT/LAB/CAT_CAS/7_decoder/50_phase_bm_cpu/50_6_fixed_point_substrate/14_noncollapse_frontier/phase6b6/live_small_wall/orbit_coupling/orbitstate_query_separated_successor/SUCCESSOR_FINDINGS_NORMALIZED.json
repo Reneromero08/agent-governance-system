@@ -1,0 +1,325 @@
+{
+  "agents": {
+    "Euler": {
+      "agent_id": "019f5e39-6881-7561-ae16-34a0fb882e80",
+      "confidence": "HIGH",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "max",
+      "role": "Experimental-design and controls auditor",
+      "verdict": "MATERIAL_BLOCKER"
+    },
+    "Kierkegaard": {
+      "agent_id": "019f5e39-5461-7bb2-b230-8039f6f22ad4",
+      "confidence": "HIGH",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "max",
+      "role": "Causal no-smuggle attacker",
+      "verdict": "MATERIAL_BLOCKER"
+    },
+    "Maxwell": {
+      "agent_id": "019f5e39-2440-7ed1-ba8d-7c5697cbc436",
+      "confidence": "HIGH",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "max",
+      "role": "Relational-mechanism architect",
+      "verdict": "MATERIAL_BLOCKER"
+    },
+    "Mendel": {
+      "agent_id": "019f5e39-7c9c-7393-8860-9f82fb9fc747",
+      "confidence": "HIGH",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "max",
+      "role": "Claim and Small Wall adjudicator",
+      "verdict": "MATERIAL_BLOCKER"
+    },
+    "Schrodinger": {
+      "agent_id": "019f5e39-38dd-78e1-b411-2154c60842fd",
+      "confidence": "HIGH",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "max",
+      "role": "Physical-carrier and restoration adversary",
+      "verdict": "MATERIAL_BLOCKER"
+    }
+  },
+  "design_package_id": "orbitstate_query_separated_successor_v1_0",
+  "findings": {
+    "CAPABILITY-BOUNDARY-01": {
+      "consequence": "A receiver can still read private paths, receipts, inherited descriptors, /proc data, environment values, shared memory, or private symbols and fabricate features.",
+      "evidence_reports": [
+        "CNSA-04",
+        "CNSA-05",
+        "CAP-01",
+        "EDCA-04"
+      ],
+      "independently_reproduced": true,
+      "mechanism": "Receiver separation is stated as a policy or generic separate executable, but not as an exact OS-enforced deny matrix over the deployed image.",
+      "minimal_repair": "Freeze a receiver capability manifest requiring a distinct receiver executable and OS-enforced namespace/UID/mount/FD/proc/env/shared-memory denial; require negative-access regressions before decoding.",
+      "originating_agents": [
+        "Kierkegaard",
+        "Schrodinger",
+        "Euler"
+      ],
+      "parent_disposition": "unresolved_material_blocker",
+      "required_regression": "The actual deployed receiver must fail to open private maps, source receipts, module private files, inherited descriptors, /proc private paths, private environment values, shared memory, and private source symbols.",
+      "source_files": [
+        "CAUSAL_SEPARATION_CONTRACT.md",
+        "NO_SMUGGLE_CAPABILITY_MODEL.md",
+        "final_confirmation_subagent_review/03_NO_SMUGGLE_Kepler.md"
+      ]
+    },
+    "CLAIM-CEILING-01": {
+      "consequence": "A first two-replicate package could be misread as a Wall crossing despite the corrected acceptance law.",
+      "evidence_reports": [
+        "Mendel finding 1",
+        "ICA-03"
+      ],
+      "independently_reproduced": true,
+      "mechanism": "The draft successor law prohibited two-replicate promotion, but SMALL_WALL_STATE.md still carried stale predecessor promotion language.",
+      "minimal_repair": "Update SMALL_WALL_STATE.md to make SMALL_WALL_CROSSED_NOT_PROMOTED unconditional for every first two-replicate package and require a separate multi-seed/session/route/scaling/reproduction evaluator.",
+      "originating_agents": [
+        "Mendel"
+      ],
+      "parent_disposition": "repaired_in_this_commit",
+      "required_regression": "A perfect first two-replicate result remains SMALL_WALL_CROSSED_NOT_PROMOTED.",
+      "source_files": [
+        "SMALL_WALL_STATE.md",
+        "CLAIM_AND_PROMOTION_LAW.md"
+      ]
+    },
+    "EXACT-COVERAGE-01": {
+      "consequence": "A diagonal subset, missing replicate, missing control arm, or runtime regrouping can preserve marginal sets while omitting required evidence or changing physical order.",
+      "evidence_reports": [
+        "CNSA-06",
+        "Mendel finding 3",
+        "EDCA-04",
+        "CNSI-03",
+        "NSA-03"
+      ],
+      "independently_reproduced": true,
+      "mechanism": "Exact coverage lists marginal sets, but not one machine-readable expected tuple multiset with exact cardinalities, multiplicities, routes, banks, control arms, restoration arms, and executed order.",
+      "minimal_repair": "Freeze one expected tuple multiset and one global event sequence consumed directly by classification; compare schedule, raw capture, query receipts, source receipts, restoration rows, features, and copy-back identities before decoding.",
+      "originating_agents": [
+        "Kierkegaard",
+        "Mendel",
+        "Euler"
+      ],
+      "parent_disposition": "unresolved_material_blocker",
+      "required_regression": "Omit a replicate, omit a query-control cell, submit a diagonal subset, duplicate an ID, add an unknown ID, or regroup execution order and assert hard rejection before classification.",
+      "source_files": [
+        "NO_SMUGGLE_CAPABILITY_MODEL.md",
+        "CLAIM_AND_PROMOTION_LAW.md",
+        "CONTROL_AND_KILL_MATRIX.md"
+      ]
+    },
+    "GATE-REGISTRY-01": {
+      "consequence": "The successor could repeat V1's computed-but-not-hard-gated failure class.",
+      "evidence_reports": [
+        "EDCA-03",
+        "Mendel finding 3",
+        "SLAW-05"
+      ],
+      "independently_reproduced": true,
+      "mechanism": "Control matrix, implementation requirements, and candidate-class wording contained different mandatory gate sets.",
+      "minimal_repair": "Create one authoritative mandatory-gate registry consumed directly by classification, including scalar adversary, exact coverage, receiver capability, all controls, near-zero law, bank reversal, R2, and custody closure.",
+      "originating_agents": [
+        "Euler",
+        "Mendel"
+      ],
+      "parent_disposition": "unresolved_material_blocker",
+      "required_regression": "A missing query-scramble, schedule-null, receiver-capability, restoration-negative, or bank-reversal gate prevents candidate classification.",
+      "source_files": [
+        "CLAIM_AND_PROMOTION_LAW.md",
+        "CONTROL_AND_KILL_MATRIX.md",
+        "IMPLEMENTATION_REQUIREMENTS.md"
+      ]
+    },
+    "METRIC-DOMAINS-01": {
+      "consequence": "The future adjudicator could reuse malformed V1-style floors or omit absolute/SNR, complex norm, phase, or quadrature controls.",
+      "evidence_reports": [
+        "EDCA-03",
+        "SLAW-01",
+        "SLAW-02",
+        "SLAW-03",
+        "CNSI-02"
+      ],
+      "independently_reproduced": true,
+      "mechanism": "Metric names are separated, but equations, denominators, equivalence margins, calibration populations, multiplicity, thresholds, and quadrature coverage are not frozen.",
+      "minimal_repair": "Define formulas, units, denominators, zero behavior, calibration population, threshold provenance, multiplicity law, absolute/SNR floors, complex vector norms, angular gates, estimator-matched null bounds, and independent bank-resolved reversal.",
+      "originating_agents": [
+        "Euler"
+      ],
+      "parent_disposition": "unresolved_material_blocker",
+      "required_regression": "Known V1 low-gain/null, 39:1 gain, anisotropic quadrature, and raw-leg/decoded-null mismatch counterexamples fail named gates.",
+      "source_files": [
+        "IMPLEMENTATION_REQUIREMENTS.md",
+        "CONTROL_AND_KILL_MATRIX.md",
+        "RESTORATION_TIER_CONTRACT.md"
+      ]
+    },
+    "NONSEPARABILITY-01": {
+      "consequence": "The design can pass with two additive branch-local states sharing addresses, not one unresolved relational process-object.",
+      "evidence_reports": [
+        "RM-01",
+        "PCRA-01",
+        "EDCA-02"
+      ],
+      "independently_reproduced": true,
+      "mechanism": "The draft asserted shared topology but did not freeze a measurable joint-state or nonseparability law.",
+      "minimal_repair": "Freeze a joint-interaction observable such as J_q = Y_q(a,b) - Y_q(a,empty) - Y_q(empty,b) + Y_q(empty,empty), require predicted nonzero shared-topology response, and require separated-topology and cross-pair controls null.",
+      "originating_agents": [
+        "Maxwell",
+        "Schrodinger",
+        "Euler"
+      ],
+      "parent_disposition": "unresolved_material_blocker",
+      "required_regression": "Synthetic additive branch-lane data and separable topology data fail the joint nonseparability gate while a declared accessor-specific synthetic effect passes.",
+      "source_files": [
+        "PHYSICAL_CARRIER_ARCHITECTURES.md",
+        "CONTROL_AND_KILL_MATRIX.md",
+        "UNRESOLVED_RELATIONAL_OBJECT.md"
+      ]
+    },
+    "PHYSICAL-MECHANISM-01": {
+      "consequence": "Candidate B is not implementable as a frozen physical experiment and cannot be reviewed for carrier false positives.",
+      "evidence_reports": [
+        "PCRA-01",
+        "EDCA-02",
+        "RM-04"
+      ],
+      "independently_reproduced": true,
+      "mechanism": "The draft did not freeze exact physical addresses/pages, cache sets, banks, cores, ownership states, state lifetime, source encoder P(R), query action Q, observable h(P(R),q), or restoration map.",
+      "minimal_repair": "Freeze exact preparation, handoff, query, restoration, branch-local marginals, pair topology mutation, physical trace equivalence, and manipulated physical degree of freedom.",
+      "originating_agents": [
+        "Schrodinger",
+        "Euler",
+        "Maxwell"
+      ],
+      "parent_disposition": "unresolved_material_blocker",
+      "required_regression": "A relation mutation that changes only route, bank, cache-set conflict, alias topology, or probe order fails ordinary-explanation controls.",
+      "source_files": [
+        "PHYSICAL_CARRIER_ARCHITECTURES.md",
+        "CONTROL_AND_KILL_MATRIX.md"
+      ]
+    },
+    "QUERY-CHOOSER-01": {
+      "consequence": "A controller can preselect the query and publish it later, or select measurement windows after peeking.",
+      "evidence_reports": [
+        "CNSA-03",
+        "Mendel finding 2"
+      ],
+      "independently_reproduced": true,
+      "mechanism": "Delayed publication is not proven delayed choice; no independent high-entropy chooser, monotonic commitment, source-death attestation, or pre-measurement window seal is frozen.",
+      "minimal_repair": "Generate the query through an independent high-entropy chooser only after attested source death and capability revocation; seal query, operator, order, and windows before carrier measurement.",
+      "originating_agents": [
+        "Kierkegaard",
+        "Mendel"
+      ],
+      "parent_disposition": "unresolved_material_blocker",
+      "required_regression": "Preselected query, shared PRNG state, source-visible query seed, and post-measurement window choice all classify custody-invalid.",
+      "source_files": [
+        "CAUSAL_SEPARATION_CONTRACT.md",
+        "QUERY_AND_COLLAPSE_BOUNDARY.md"
+      ]
+    },
+    "RESTORATION-R2-01": {
+      "consequence": "Natural relaxation, destructive probes, global reset, or insensitive observables can produce false restoration.",
+      "evidence_reports": [
+        "R2-01",
+        "EDCA-05",
+        "CNSA-07",
+        "ICA-02"
+      ],
+      "independently_reproduced": true,
+      "mechanism": "R2 was a checklist, not a concrete equivalence contract with forward displacement, standardized readout, baseline distribution, equivalence region, confidence law, and negative controls.",
+      "minimal_repair": "Define R2 as forward displacement plus confidence-bound equivalence to baseline over a frozen independent state vector, with natural-relaxation, time-matched no-op, no-restoration, wrong-inverse, reordered-inverse, and carrier-off controls.",
+      "originating_agents": [
+        "Schrodinger",
+        "Euler",
+        "Kierkegaard"
+      ],
+      "parent_disposition": "unresolved_material_blocker",
+      "required_regression": "Byte-equal but physically perturbed, spontaneous-return, wrong-inverse, reordered-inverse, no-restoration, and carrier-off packets fail R2.",
+      "source_files": [
+        "RESTORATION_TIER_CONTRACT.md",
+        "COURSE_CORRECTION.md",
+        "CHIRAL_LANE_NONCOLLAPSE_ROADMAP.md"
+      ]
+    },
+    "SCALAR-REPLAY-01": {
+      "consequence": "A source can precompute every response for a finite public query family and encode the complete answer vector before closure; the receiver later selects a coordinate.",
+      "evidence_reports": [
+        "RM-02",
+        "PCRA-02",
+        "CNSA-01",
+        "CNSA-02",
+        "EDCA-01",
+        "Mendel finding 2"
+      ],
+      "independently_reproduced": true,
+      "mechanism": "Query separation does not by itself reject finite-query answer-cache scalar replay; the adversary lacked realized-query input, model classes, metrics, tolerances, and held-out tests.",
+      "minimal_repair": "Give the scalar adversary complete source view and realized query at scoring time; include finite lookup table, additive branch, nonlinear workload, bank, route, order, timing, and total-work models with held-out relation/query/seed/session tests.",
+      "originating_agents": [
+        "Maxwell",
+        "Schrodinger",
+        "Kierkegaard",
+        "Euler",
+        "Mendel"
+      ],
+      "parent_disposition": "unresolved_material_blocker",
+      "required_regression": "Pure scalar/query-table synthetic data fails named gates and accessor-specific synthetic data passes.",
+      "source_files": [
+        "NO_SMUGGLE_CAPABILITY_MODEL.md",
+        "CAUSAL_SEPARATION_CONTRACT.md",
+        "QUERY_AND_COLLAPSE_BOUNDARY.md"
+      ]
+    },
+    "VALUE-ORIENTATION-01": {
+      "consequence": "A value-derived orientation such as min(a,N-a) to bank A and max(a,N-a) to bank B survives label swap while leaking branch orientation.",
+      "evidence_reports": [
+        "RM-03",
+        "PCRA counterexample 2",
+        "CNSA-05"
+      ],
+      "independently_reproduced": true,
+      "mechanism": "Label-name swapping does not prove physical label invariance when physical branch-to-lane assignment can be derived from values or metadata.",
+      "minimal_repair": "Replace label-name swap with blinded physical branch-to-lane permutation, prohibit value-based canonical orientation, and require full receiver-visible metadata exchangeability.",
+      "originating_agents": [
+        "Maxwell",
+        "Schrodinger",
+        "Kierkegaard"
+      ],
+      "parent_disposition": "unresolved_material_blocker",
+      "required_regression": "Value-derived lane assignment, route assignment, bank assignment, and metadata row-shape dictionaries fail label-invariance and opaque-ID gates.",
+      "source_files": [
+        "UNRESOLVED_RELATIONAL_OBJECT.md",
+        "NO_SMUGGLE_CAPABILITY_MODEL.md",
+        "CONTROL_AND_KILL_MATRIX.md"
+      ]
+    }
+  },
+  "parent_decision": "QUERY_SEPARATED_ARCHITECTURE_BLOCKED",
+  "review_status": "COMPLETE",
+  "schema": "QUERY_SEPARATED_SUCCESSOR_FINDINGS_NORMALIZED_V1",
+  "selected_architecture": "SHARED_PAIR_TOPOLOGY_QUERY_SEPARATED_CARRIER",
+  "selected_architecture_status": "PROVISIONAL_STRONGEST_DIRECTION_NOT_FROZEN",
+  "subagent_execution": {
+    "exposed_reports_to_each_other_before_completion": false,
+    "live_authority_variables_set": false,
+    "network_or_target_contact": 0,
+    "pmu_hardware_execution": 0,
+    "read_only": true
+  },
+  "surviving_direction": "Candidate B remains a plausible research direction only after repair.",
+  "unresolved_material_blockers": [
+    "SCALAR-REPLAY-01",
+    "NONSEPARABILITY-01",
+    "PHYSICAL-MECHANISM-01",
+    "QUERY-CHOOSER-01",
+    "CAPABILITY-BOUNDARY-01",
+    "EXACT-COVERAGE-01",
+    "GATE-REGISTRY-01",
+    "METRIC-DOMAINS-01",
+    "RESTORATION-R2-01",
+    "VALUE-ORIENTATION-01"
+  ]
+}

@@ -48,6 +48,20 @@ MANIFEST_ENV = "ORBITSTATE_GAIN_COVARIANT_V1_MANIFEST_SHA256"
 AUTHORITY_ENV = "ORBITSTATE_GAIN_COVARIANT_V1_LIVE_AUTHORITY"
 AUTHORITY_VALUE = TRANSACTION_RUN_ID
 DEPLOYMENT_LAYOUT_TEST_PATH = HERE / "GAIN_COVARIANT_DEPLOYMENT_LAYOUT_SELF_TEST.json"
+RETIREMENT_RECEIPT_PATH = HERE / "GAIN_COVARIANT_CONFIRMATION_V1_RETIREMENT.json"
+RETIREMENT_SCHEMA = "GAIN_COVARIANT_CONFIRMATION_V1_RETIREMENT_V1"
+RETIREMENT_STATUS = "GAIN_COVARIANT_CONFIRMATION_V1_RETIRED_LIVE_AUTHORITY_WITHHELD"
+RETIREMENT_EXPECTED_VALUES = {
+    "schema": RETIREMENT_SCHEMA,
+    "retired_package_id": SCIENCE_PACKAGE_ID,
+    "retired_package_head": "02379dc0dcfa7e2b1f420888e9af6e5c4e9f5406",
+    "subagent_review_commit": "0b7ac8a8c40f37f9027bdc0495c308b1d65fbaab",
+    "retirement_reason": "SMALL_WALL_CLAIM_BOUNDARY_AND_MATERIAL_IMPLEMENTATION_BLOCKERS",
+    "live_invocation_count": 0,
+    "live_authority_permanently_withheld": True,
+    "historical_result_preserved": True,
+    "replacement_required": "QUERY_SEPARATED_UNRESOLVED_RELATIONAL_CARRIER",
+}
 
 FROZEN_HASHES = {
     "contract_sha256": "31af6869bdf4e25634b1e408830015af2b2c4f20202b2df28492b2e1a9a90860",
@@ -74,6 +88,32 @@ def write_json(path: Path, value: Any) -> None:
 
 def read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def validate_retirement_receipt() -> dict[str, Any]:
+    require(RETIREMENT_RECEIPT_PATH.exists(), "retirement receipt missing")
+    receipt = read_json(RETIREMENT_RECEIPT_PATH)
+    failures = [
+        f"{key} {receipt.get(key)!r} != {expected!r}"
+        for key, expected in RETIREMENT_EXPECTED_VALUES.items()
+        if receipt.get(key) != expected
+    ]
+    forbidden = set(receipt.get("forbidden_claims", []))
+    for claim in [
+        "PRIVATE_ORBITSTATE_ACCESSOR_ESTABLISHED",
+        "CATALYTIC_BORROWING_ESTABLISHED",
+        "PHYSICAL_RELATIONAL_MEMORY_ESTABLISHED",
+        "SMALL_WALL_CROSSED",
+    ]:
+        if claim not in forbidden:
+            failures.append(f"forbidden claim not recorded: {claim}")
+    require(not failures, "retirement receipt invalid: " + "; ".join(failures))
+    return {
+        "passed": True,
+        "path": str(RETIREMENT_RECEIPT_PATH),
+        "sha256": sha256_file(RETIREMENT_RECEIPT_PATH),
+        "receipt": receipt,
+    }
 
 
 def sha256_file(path: Path) -> str:
@@ -1274,7 +1314,100 @@ def controller_result_success(result: dict[str, Any]) -> bool:
     return result.get("status") == "GAIN_COVARIANT_CONTROLLER_TARGET_COMPLETE"
 
 
+def retirement_status() -> dict[str, Any]:
+    retirement = validate_retirement_receipt()
+    frozen = validate_frozen_hashes()
+    manifest_path = HERE / "GAIN_COVARIANT_IMPLEMENTATION_MANIFEST.json"
+    manifest = read_json(manifest_path) if manifest_path.exists() else {}
+    return {
+        "schema": "GAIN_COVARIANT_CONFIRMATION_V1_RETIREMENT_STATUS_V1",
+        "status": RETIREMENT_STATUS,
+        "passed": False,
+        "retirement_receipt": {
+            "passed": retirement["passed"],
+            "path": retirement["path"],
+            "sha256": retirement["sha256"],
+        },
+        "retired_package_id": SCIENCE_PACKAGE_ID,
+        "transaction_run_id": TRANSACTION_RUN_ID,
+        "live_authority_permanently_withheld": True,
+        "scientific_classification_emitted": False,
+        "result_class_absent": True,
+        "no_network_contact": True,
+        "no_ssh": True,
+        "no_scp": True,
+        "no_remote_root_creation": True,
+        "no_local_run_root_creation": True,
+        "authority_variables_required": False,
+        "historical_result_preserved": True,
+        "official_retained_class": "ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE",
+        "corrected_retained_claim_ceiling": "GAIN_COVARIANT_ORBITSTATE_PROJECTION_TRANSDUCTION_ESTABLISHED",
+        "manifest_present": manifest_path.exists(),
+        "manifest_file_sha256": sha256_file(manifest_path) if manifest_path.exists() else None,
+        "manifest_canonical_sha256": manifest.get("manifest_canonical_sha256"),
+        "frozen_hashes": frozen,
+    }
+
+
+def retirement_gate_self_test() -> dict[str, Any]:
+    before_exists = EXPECTED_LOCAL_RUN_ROOT.exists()
+    original_transport = execute_transport_transaction
+    original_git_state = git_head_and_status
+    called = {"transport": False, "git_state": False}
+    old_env = {key: os.environ.get(key) for key in [COMMIT_ENV, MANIFEST_ENV, AUTHORITY_ENV]}
+
+    def forbidden_transport(*args: Any, **kwargs: Any) -> dict[str, Any]:
+        called["transport"] = True
+        raise AssertionError("retired controller reached transport")
+
+    def forbidden_git_state() -> dict[str, str]:
+        called["git_state"] = True
+        raise AssertionError("retired controller read git/authority path")
+
+    try:
+        for key in [COMMIT_ENV, MANIFEST_ENV, AUTHORITY_ENV]:
+            os.environ.pop(key, None)
+        globals()["execute_transport_transaction"] = forbidden_transport
+        globals()["git_head_and_status"] = forbidden_git_state
+        result = execute_authorized()
+    finally:
+        globals()["execute_transport_transaction"] = original_transport
+        globals()["git_head_and_status"] = original_git_state
+        for key, value in old_env.items():
+            if value is None:
+                os.environ.pop(key, None)
+            else:
+                os.environ[key] = value
+
+    after_exists = EXPECTED_LOCAL_RUN_ROOT.exists()
+    checks = {
+        "retirement_receipt_validates": validate_retirement_receipt()["passed"] is True,
+        "execute_authorized_returns_retired_status": result.get("status") == RETIREMENT_STATUS,
+        "retired_controller_cannot_invoke_ssh": result.get("no_ssh") is True,
+        "retired_controller_cannot_invoke_scp": result.get("no_scp") is True,
+        "retired_controller_cannot_create_local_run_root": before_exists == after_exists,
+        "retired_controller_cannot_create_remote_run_root": result.get("no_remote_root_creation") is True,
+        "retired_controller_cannot_reach_transport": called["transport"] is False,
+        "retired_controller_cannot_consume_authority": called["git_state"] is False
+        and result.get("authority_variables_required") is False,
+        "retired_controller_emits_no_scientific_class": "result_class" not in result
+        and result.get("scientific_classification_emitted") is False,
+        "offline_historical_inspection_remains_possible": result.get("manifest_present") is True
+        and result.get("frozen_hashes", {}).get("passed") is True,
+    }
+    return {
+        "schema": "GAIN_COVARIANT_CONFIRMATION_V1_RETIREMENT_SELF_TEST_V1",
+        "zero_live_contact": True,
+        "status": "RETIREMENT_GATE_SELF_TEST_COMPLETE",
+        "checks": checks,
+        "retirement_status": result,
+        "passed": all(checks.values()),
+    }
+
+
 def execute_authorized() -> dict[str, Any]:
+    if RETIREMENT_RECEIPT_PATH.exists():
+        return retirement_status()
     manifest_file_sha = sha256_file(HERE / "GAIN_COVARIANT_IMPLEMENTATION_MANIFEST.json")
     git_state = git_head_and_status()
     commit_binding = os.environ.get(COMMIT_ENV, "")
@@ -1299,6 +1432,8 @@ def parse_args() -> argparse.Namespace:
     modes.add_argument("--prepare-only", action="store_true")
     modes.add_argument("--validate-only", action="store_true")
     modes.add_argument("--self-test", action="store_true")
+    modes.add_argument("--retirement-status", action="store_true")
+    modes.add_argument("--retirement-self-test", action="store_true")
     modes.add_argument("--execute-authorized", action="store_true")
     return parser.parse_args()
 
@@ -1312,6 +1447,10 @@ def main() -> int:
             result = validate_only()
         elif args.self_test:
             result = controller_self_test()
+        elif args.retirement_status:
+            result = retirement_status()
+        elif args.retirement_self_test:
+            result = retirement_gate_self_test()
         else:
             result = execute_authorized()
         print(json.dumps(result, indent=2, sort_keys=True))

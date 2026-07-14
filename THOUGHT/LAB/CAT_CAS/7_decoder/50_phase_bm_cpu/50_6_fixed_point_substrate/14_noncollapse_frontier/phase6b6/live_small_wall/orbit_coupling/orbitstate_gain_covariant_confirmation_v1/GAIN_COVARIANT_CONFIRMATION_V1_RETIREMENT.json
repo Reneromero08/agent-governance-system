@@ -1,0 +1,20 @@
+{
+  "corrected_retained_claim_ceiling": "GAIN_COVARIANT_ORBITSTATE_PROJECTION_TRANSDUCTION_ESTABLISHED",
+  "forbidden_claims": [
+    "PRIVATE_ORBITSTATE_ACCESSOR_ESTABLISHED",
+    "CATALYTIC_BORROWING_ESTABLISHED",
+    "PHYSICAL_RELATIONAL_MEMORY_ESTABLISHED",
+    "SMALL_WALL_CROSSED"
+  ],
+  "historical_result_preserved": true,
+  "live_authority_permanently_withheld": true,
+  "live_invocation_count": 0,
+  "official_retained_class": "ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE",
+  "replacement_required": "QUERY_SEPARATED_UNRESOLVED_RELATIONAL_CARRIER",
+  "retired_package_head": "02379dc0dcfa7e2b1f420888e9af6e5c4e9f5406",
+  "retired_package_id": "orbitstate_gain_covariant_confirmation_v1_0",
+  "retirement_reason": "SMALL_WALL_CLAIM_BOUNDARY_AND_MATERIAL_IMPLEMENTATION_BLOCKERS",
+  "schema": "GAIN_COVARIANT_CONFIRMATION_V1_RETIREMENT_V1",
+  "subagent_review_commit": "0b7ac8a8c40f37f9027bdc0495c308b1d65fbaab",
+  "target_contact_count": 0
+}
