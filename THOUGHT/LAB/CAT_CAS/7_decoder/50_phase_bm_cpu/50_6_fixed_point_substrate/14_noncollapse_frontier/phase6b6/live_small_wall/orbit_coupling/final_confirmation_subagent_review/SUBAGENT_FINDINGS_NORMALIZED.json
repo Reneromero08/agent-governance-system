@@ -1,0 +1,271 @@
+{
+  "schema": "FINAL_CONFIRMATION_SUBAGENT_FINDINGS_NORMALIZED_V1",
+  "review_head": "f6ef90374de424723e0edba34786778e8e3f1a29",
+  "package_reviewed": "orbitstate_gain_covariant_confirmation_v1_0",
+  "final_decision": "BLOCKED_FOR_OFFLINE_REPAIR",
+  "agents": {
+    "Feynman": {
+      "agent_id": "019f5dfd-060f-7012-9400-ea090c99b287",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "max",
+      "role": "Scientific-Law Adversary",
+      "report": "01_SCIENTIFIC_LAW_Feynman.md",
+      "verdict": "MATERIAL_BLOCKER"
+    },
+    "Boole": {
+      "agent_id": "019f5dfd-5d2a-7641-b714-3f9287516275",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "max",
+      "role": "Carrier, Noise, and Statistical Investigator",
+      "report": "02_CARRIER_NOISE_Boole.md",
+      "verdict": "MATERIAL_BLOCKER"
+    },
+    "Kepler": {
+      "agent_id": "019f5dfd-b44c-7590-b623-f161901ba96a",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "max",
+      "role": "No-Smuggle and Ordinary-Explanation Attacker",
+      "report": "03_NO_SMUGGLE_Kepler.md",
+      "verdict": "MATERIAL_BLOCKER"
+    },
+    "Socrates": {
+      "agent_id": "019f5dfe-18e5-7e02-a1f1-ca0f073dcf8d",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "max",
+      "role": "Implementation and Custody Auditor",
+      "report": "04_IMPLEMENTATION_CUSTODY_Socrates.md",
+      "verdict": "MATERIAL_BLOCKER"
+    },
+    "Tesla": {
+      "agent_id": "019f5dfe-6bb2-71c2-874d-59a0dbe37822",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "max",
+      "role": "Independent Claim Adjudicator",
+      "report": "05_CLAIM_ADJUDICATOR_Tesla.md",
+      "verdict": "MATERIAL_BLOCKER"
+    }
+  },
+  "findings": {
+    "SLAW-01": {
+      "originating_agent": "Feynman",
+      "exact_report": "01_SCIENTIFIC_LAW_Feynman.md",
+      "cited_source_file_function_line": "gain_covariant_confirmation_public.py:704-710 rel_error/complex_rel_error; gain_covariant_confirmation_public.py:977-992 estimate_control_gain; gain_covariant_confirmation_public.py:1022-1037 geometry checks",
+      "mechanism": "The count-valued floor 152 is reused for dimensionless gain agreement, making the nominal 25% gain-agreement gate nearly vacuous and allowing incompatible controls to be averaged.",
+      "consequence": "Counterexamples with widely different g_post and g_equal, including one-count nonlinear response, can classify as CONFIRMED when target/fold/polarity are centered on the mean.",
+      "minimal_repair": "Define domain-specific dimensionless gain errors without the count floor; estimate a common slope only after both control residuals pass; predeclare weighting.",
+      "required_regression": "The 39:1 gain construction and one-count sign(q) construction must fail at named gain/geometry gates.",
+      "parent_disposition": "material_blocker_survives_blocks_live_authorization",
+      "independently_reproduced": true
+    },
+    "SLAW-02": {
+      "originating_agent": "Feynman",
+      "exact_report": "01_SCIENTIFIC_LAW_Feynman.md",
+      "cited_source_file_function_line": "FINAL_CONFIRMATION_CONTRACT.md:115,141-168; gain_covariant_confirmation_public.py:31-32,1028-1047",
+      "mechanism": "The target odd floor scales as 456*g_control while the null ceiling remains absolute 152, so low gain can make required target odd signal smaller than accepted null.",
+      "consequence": "A low-gain packet can pass every law even when accepted source-off null exceeds target odd amplitude.",
+      "minimal_repair": "Require an absolute or SNR floor in addition to normalized geometry, such as odd > max(456*g_control, 3*152), or freeze an equivalent separation law.",
+      "required_regression": "The g approximately 0.1, target-odd 82, source-off-null 100 packet must fail at the absolute/SNR gate.",
+      "parent_disposition": "material_blocker_survives_blocks_live_authorization",
+      "independently_reproduced": false
+    },
+    "SLAW-03": {
+      "originating_agent": "Feynman",
+      "exact_report": "01_SCIENTIFIC_LAW_Feynman.md",
+      "cited_source_file_function_line": "gain_covariant_confirmation_public.py:240-268,709-710,967-974,1022-1036",
+      "mechanism": "Both gain controls are real-axis probes and do not probe the 822 quadrature; symmetric componentwise error has no explicit phase gate.",
+      "consequence": "Anisotropic real/imaginary gains can pass while phase and Euclidean vector error drift materially.",
+      "minimal_repair": "Define complex error against predicted complex norm, add explicit magnitude and phase gates, and freeze a linearly independent control covering |q|=822.",
+      "required_regression": "Anisotropic constructions must fail on named phase, norm, or linearity gates while exact multiplicative gains pass.",
+      "parent_disposition": "material_blocker_survives_blocks_live_authorization",
+      "independently_reproduced": false
+    },
+    "SLAW-04": {
+      "originating_agent": "Feynman",
+      "exact_report": "01_SCIENTIFIC_LAW_Feynman.md",
+      "cited_source_file_function_line": "gain_covariant_confirmation_public.py:569-589,672-689,822-827; gain_covariant_confirmation_runtime.c:732-751,801-825",
+      "mechanism": "Physical reversal is computed as a sign transform of logical responses; measured_bank is emitted but not validated or used.",
+      "consequence": "Physical reversal is not independent evidence, and bank crossover failure can be represented as passing when logical numbers agree.",
+      "minimal_repair": "Validate exact mapping/component to measured_bank assignment and replace duplicate comparison with independent bank-resolved evidence.",
+      "required_regression": "All-A bank labels must fail extraction, and logical-pass/bank-fail packets must fail only the physical gate.",
+      "parent_disposition": "material_blocker_survives_blocks_live_authorization",
+      "independently_reproduced": false
+    },
+    "SLAW-05": {
+      "originating_agent": "Feynman",
+      "exact_report": "01_SCIENTIFIC_LAW_Feynman.md",
+      "cited_source_file_function_line": "gain_covariant_confirmation_public.py:146-168,258-264,902-925,1199-1202,1399-1468",
+      "mechanism": "declaration_sham and query_scramble have ideal first harmonic zero but their decodes are excluded from every decoded-null gate.",
+      "consequence": "Built-in sham and scramble leakage mutations can return CONFIRMED with no failed laws.",
+      "minimal_repair": "Freeze per-replicate real and imaginary first-harmonic null gates for both active controls and include them in final classification.",
+      "required_regression": "sham_first_harmonic_leakage and query_scramble_leakage must fail their specific null gates.",
+      "parent_disposition": "material_blocker_survives_blocks_live_authorization",
+      "independently_reproduced": false
+    },
+    "CNSI-01": {
+      "originating_agent": "Boole",
+      "exact_report": "02_CARRIER_NOISE_Boole.md",
+      "cited_source_file_function_line": "gain_covariant_confirmation_runtime.c:399 source_apply_encoding; gain_covariant_confirmation_public.py:1173 build_mock_capture; GAIN_COVARIANT_SELF_TEST.json:6950",
+      "mechanism": "The private condition determines q; hardware receives M+q and M-q; an ordinary odd-linear channel F(q)=gq reproduces encoded conjugate, phase, and polarity geometry.",
+      "consequence": "A positive result establishes stable scalar carrier transduction, not accessor-specific OrbitState coupling.",
+      "minimal_repair": "Add fixed-q interventions holding physical work and order factors constant while changing only claimed accessor semantics.",
+      "required_regression": "Pure F(q)=gq+noise must not confirm; fixed-q label permutation must null; accessor-specific synthetic effect must confirm.",
+      "parent_disposition": "material_blocker_survives_blocks_live_authorization",
+      "independently_reproduced": false
+    },
+    "CNSI-02": {
+      "originating_agent": "Boole",
+      "exact_report": "02_CARRIER_NOISE_Boole.md",
+      "cited_source_file_function_line": "FINAL_CONFIRMATION_CONTRACT.md:141; ORBITSTATE_INDEPENDENT_CONTRACT_V2.md:31; GAIN_COVARIANT_LAW_AUDIT.md:39",
+      "mechanism": "The 152 bound originated as a physical-pair bound but is applied to individual raw legs and several different averages.",
+      "consequence": "Confirmation becomes practically unreachable under already observed carrier noise and mapping asymmetry.",
+      "minimal_repair": "Apply 152 only to the pair/decoded estimator from which it was justified, or make one-shot raw legs diagnostic.",
+      "required_regression": "Replay V3 and predecessor evidence to prove each hard gate uses the same statistical object as its calibration; inject shared-NB excursions.",
+      "parent_disposition": "material_blocker_survives_blocks_live_authorization",
+      "independently_reproduced": false
+    },
+    "CNSI-03": {
+      "originating_agent": "Boole",
+      "exact_report": "02_CARRIER_NOISE_Boole.md",
+      "cited_source_file_function_line": "gain_covariant_confirmation_public.py:339 build_schedule; gain_covariant_confirmation_runtime.c:881 rows_form_pair; gain_covariant_confirmation_runtime.c:995 receiver_run_schedule",
+      "mechanism": "mapping_order is generated and parsed but never consumed; runtime pulls later mapping mates forward, making physical execution order differ from randomized row order.",
+      "consequence": "Thermal/mapping order is not prospectively blocked per replicate.",
+      "minimal_repair": "Freeze an explicit pair-level schedule with coherent mapping-first field, balanced thermal blocks, and exact pair execution.",
+      "required_regression": "Reconstruct execution from stage receipts and require exact equality to the frozen pair sequence and declared balance.",
+      "parent_disposition": "material_blocker_survives_blocks_live_authorization",
+      "independently_reproduced": false
+    },
+    "NSA-01": {
+      "originating_agent": "Kepler",
+      "exact_report": "03_NO_SMUGGLE_Kepler.md",
+      "cited_source_file_function_line": "gain_covariant_confirmation_public.py:104-177,221-268,320-413; gain_covariant_confirmation_target.py:924 receiver_features_main",
+      "mechanism": "Group IDs expose condition index and run IDs are reproducible from the public seed; receiver-loaded module publishes condition table, phase sequences, q_theta formulas, and private source map builder.",
+      "consequence": "Receiver-visible code and public schedule can reconstruct condition/q_theta and declare ideal logical/physical responses without PMU measurement.",
+      "minimal_repair": "Move condition/formula/map-building code out of receiver artifact and replace public-seed-derived identifiers with independently random private assignments.",
+      "required_regression": "An attacker with deployed receiver image and public schedule must be unable to map opaque IDs to conditions; private labels, phase tables, q_theta, and map builders must be absent.",
+      "parent_disposition": "material_blocker_survives_blocks_live_authorization",
+      "independently_reproduced": false
+    },
+    "NSA-02": {
+      "originating_agent": "Kepler",
+      "exact_report": "03_NO_SMUGGLE_Kepler.md",
+      "cited_source_file_function_line": "gain_covariant_confirmation_target.py:876 run_receiver_feature_subprocess/receiver_features_main/execute_live; gain_covariant_confirmation_runtime.c:652 source_child_loop/main",
+      "mechanism": "Receiver subprocess runs target script from private-bearing source directory under same UID; deny checks are relative to temp CWD and do not enforce filesystem capability boundary.",
+      "consequence": "Receiver can potentially read map or receipts and fabricate receipt-coherent ideal features before freeze.",
+      "minimal_repair": "Use a separate receiver-only executable under distinct unprivileged UID and enforced mount namespace/chroot or equivalent.",
+      "required_regression": "Actual deployed receiver process must fail to open module-directory map, sibling source receipts, private argv/proc paths, and private symbols.",
+      "parent_disposition": "material_blocker_survives_blocks_live_authorization",
+      "independently_reproduced": false
+    },
+    "NSA-03": {
+      "originating_agent": "Kepler",
+      "exact_report": "03_NO_SMUGGLE_Kepler.md",
+      "cited_source_file_function_line": "gain_covariant_confirmation_public.py:935 build_condition_decodes; gain_covariant_geometry_law; adjudicate",
+      "mechanism": "Adjudication never enforces exact feature-row coverage or row identity equality to the public schedule; replicate laws iterate only present keys.",
+      "consequence": "A missing replicate-1 feature set can still produce ORBITSTATE_GAIN_COVARIANT_CONFIRMATION_CONFIRMED.",
+      "minimal_repair": "Require exactly 144 unique feature rows, exact schedule identity fields, both replicates, all groups, phases, and mappings before decoding; iterate explicit REPLICATES.",
+      "required_regression": "Omit replicate 1, omit a phase cell, duplicate a run ID, or relabel replicate/phase/mapping and assert hard rejection before classification.",
+      "parent_disposition": "material_blocker_survives_blocks_live_authorization",
+      "independently_reproduced": true
+    },
+    "GC-CUST-01": {
+      "originating_agent": "Socrates",
+      "exact_report": "04_IMPLEMENTATION_CUSTODY_Socrates.md",
+      "cited_source_file_function_line": "gain_covariant_confirmation_target.py:1228 execute_live lines 1243-1252; run_gain_covariant_confirmation_v1.py:581 verify_success_evidence",
+      "mechanism": "Target validates manifest, schedule, and private map but records actual source hashes/bundle without comparing them with frozen manifest.",
+      "consequence": "Altered or TOCTOU-modified code can compile, execute, and classify successfully, invalidating executed-source custody.",
+      "minimal_repair": "Before compilation, require exact source-file key/hash/size equality and reconstructed-bundle equality against manifest; compile from immutable snapshot and rehash.",
+      "required_regression": "Mutate every transferred file before compilation and mutate runtime C between initial hashing and compilation; both must fail before PMU access.",
+      "parent_disposition": "material_blocker_survives_blocks_live_authorization",
+      "independently_reproduced": false
+    },
+    "GC-EVID-02": {
+      "originating_agent": "Socrates",
+      "exact_report": "04_IMPLEMENTATION_CUSTODY_Socrates.md",
+      "cited_source_file_function_line": "run_gain_covariant_confirmation_v1.py:552 verify_copyback_manifest; run_gain_covariant_confirmation_v1.py:581-603 verify_success_evidence; run_gain_covariant_confirmation_v1.py:1291-1292 execute_authorized; gain_covariant_confirmation_target.py:55 unused success allowlist",
+      "mechanism": "An internally consistent packet containing only final result, execution manifest, and copyback manifest can be accepted as success.",
+      "consequence": "Remote evidence could be cleaned after incomplete local evidence acceptance, harming evidence integrity.",
+      "minimal_repair": "Enforce exact required evidence set and hash-key set, validate record counts and cross-file identities, and put controller metadata outside copied-output namespace.",
+      "required_regression": "Reject demonstrated three-file packet and every single-file omission; verify completed local evidence tree again after controller-result persistence.",
+      "parent_disposition": "material_blocker_survives_blocks_live_authorization",
+      "independently_reproduced": false
+    },
+    "GC-POLICY-03": {
+      "originating_agent": "Socrates",
+      "exact_report": "04_IMPLEMENTATION_CUSTODY_Socrates.md",
+      "cited_source_file_function_line": "gain_covariant_confirmation_target.py:709 read_text_or_none; gain_covariant_confirmation_target.py:802-813 policy_snapshot; gain_covariant_confirmation_target.py:1324-1332 final comparison",
+      "mechanism": "Unreadable policy fields become None; two all-None snapshots compare equal.",
+      "consequence": "Exact CPU-policy restoration is not established.",
+      "minimal_repair": "Hard-fail unless driver, governor, min, and max frequency are readable and structurally valid for both cores before comparing values.",
+      "required_regression": "Missing, unreadable, empty, malformed, or partially populated policy fields must fail before hardware execution and at final custody.",
+      "parent_disposition": "material_blocker_survives_blocks_live_authorization",
+      "independently_reproduced": false
+    },
+    "GC-TIME-04": {
+      "originating_agent": "Socrates",
+      "exact_report": "04_IMPLEMENTATION_CUSTODY_Socrates.md",
+      "cited_source_file_function_line": "run_gain_covariant_confirmation_v1.py:34 timeout constants; run_gain_covariant_confirmation_v1.py:724-739 remote wrapper; gain_covariant_confirmation_target.py:1274 replicate loop",
+      "mechanism": "Outer target timeout is shorter than combined valid inner replicate and subprocess budgets.",
+      "consequence": "GNU timeout can terminate Python before exception handler seals failure evidence, consuming hardware execution with partial packet.",
+      "minimal_repair": "Use coordinated deadline whose outer timeout exceeds every sealable path plus cleanup margin, or shorten inner budgets and install signal-safe failure sealing.",
+      "required_regression": "Delayed first replicate followed by second-replicate timeout must produce valid copyable failure packet before any outer timeout fires.",
+      "parent_disposition": "material_blocker_survives_blocks_live_authorization",
+      "independently_reproduced": false
+    },
+    "GC-CLASS-05": {
+      "originating_agent": "Socrates",
+      "exact_report": "04_IMPLEMENTATION_CUSTODY_Socrates.md",
+      "cited_source_file_function_line": "gain_covariant_confirmation_target.py:995 adjudicate_frozen_main; gain_covariant_confirmation_target.py:1316-1347 execute_live; gain_covariant_confirmation_target.py:1127-1195 seal_failure_evidence; run_gain_covariant_confirmation_v1.py:613 failure verification",
+      "mechanism": "Adjudication writes and returns result_class before final process scan, policy comparison, and temperature gate.",
+      "consequence": "CONFIRMED can remain in adjudication artifact even when final custody later fails.",
+      "minimal_repair": "Keep adjudication output unclassified until final custody gates pass; classify as last atomic step and detect contradictory packets.",
+      "required_regression": "Inject failure into final process, policy, and temperature gates; no artifact may contain result_class, and controller must reject contradictory packets.",
+      "parent_disposition": "material_blocker_survives_blocks_live_authorization",
+      "independently_reproduced": false
+    },
+    "ICA-01": {
+      "originating_agent": "Tesla",
+      "exact_report": "05_CLAIM_ADJUDICATOR_Tesla.md",
+      "cited_source_file_function_line": "gain_covariant_confirmation_public.py:104-177 and 240-297; gain_covariant_confirmation_runtime.c:399 source_apply_encoding lines 399-458; COURSE_CORRECTION.md:471-505",
+      "mechanism": "Private records disclose d/fold/phase/response/polarity to source; source computes scalar q_theta and writes 2048+q versus 2048-q stores.",
+      "consequence": "Perfect result confirms controlled source-to-PMU transduction, not unresolved OrbitState coupling or private relational accessor.",
+      "minimal_repair": "Rescope package as transducer confirmation or freeze successor where unresolved pair remains one object and branch/phase/sign cannot control source workload.",
+      "required_regression": "Label swap must be null; relation mutation must be predicted with sender workload traces invariant; carrier-off and geometry-null must kill effect; scalar replay from receipts must not reconstruct claimed invariant.",
+      "parent_disposition": "material_blocker_survives_for_small_wall_or_accessor_claim",
+      "independently_reproduced": false
+    },
+    "ICA-02": {
+      "originating_agent": "Tesla",
+      "exact_report": "05_CLAIM_ADJUDICATOR_Tesla.md",
+      "cited_source_file_function_line": "gain_covariant_confirmation_runtime.c:763-857; gain_covariant_confirmation_public.py:539 validate_raw_against_schedule lines 539-655; CHIRAL_LANE_NONCOLLAPSE_ROADMAP.md:412-430",
+      "mechanism": "Pre/post sentinels record only cycle values while pass/fail checks compare byte digests and booleans; no frozen PMU carrier restoration metric is adjudicated.",
+      "consequence": "At most byte/hash return and deterministic re-preparation are established, not physical carrier restoration or catalytic closure.",
+      "minimal_repair": "Predeclare R2+ physical equivalence metric and tolerance using independent carrier observables, and gate every replicate on it.",
+      "required_regression": "Matching bytes with perturbed post-restoration carrier sentinel must block confirmation; no-restoration, wrong-inverse, and reordered-restoration controls must fail.",
+      "parent_disposition": "material_blocker_survives_for_small_wall_or_restoration_claim",
+      "independently_reproduced": false
+    },
+    "ICA-03": {
+      "originating_agent": "Tesla",
+      "exact_report": "05_CLAIM_ADJUDICATOR_Tesla.md",
+      "cited_source_file_function_line": "GAIN_COVARIANT_IMPLEMENTATION_MANIFEST.json:112-120; gain_covariant_confirmation_target.py:1274-1322; COURSE_CORRECTION.md:584-622",
+      "mechanism": "Two replicates use one seed, device, route, schedule, and live session; promotion list omits explicit Small Wall acceptance properties.",
+      "consequence": "A perfect result satisfies narrow confirmation rule but not substantive Small Wall acceptance law or reusable primitive claim.",
+      "minimal_repair": "Add separate promotion evaluator requiring every Small Wall acceptance property plus multi-seed/session evidence and independent reproduction.",
+      "required_regression": "Perfect two-replicate result must remain SMALL_WALL_CROSSED_NOT_PROMOTED; omission of any crossing property must prevent promotion.",
+      "parent_disposition": "material_blocker_survives_for_small_wall_promotion",
+      "independently_reproduced": false
+    },
+    "ICA-04": {
+      "originating_agent": "Tesla",
+      "exact_report": "05_CLAIM_ADJUDICATOR_Tesla.md",
+      "cited_source_file_function_line": "FINAL_CONFIRMATION_CONTRACT.md:173-214; gain_covariant_confirmation_target.py:1335-1367; run_gain_covariant_confirmation_v1.py:742-856",
+      "mechanism": "Target writes scientific CONFIRMED class before copy-back verification, cleanup, and remote-root absence verification.",
+      "consequence": "Custody-invalid target confirmation can exist despite contract requiring all custody gates before final confirmation.",
+      "minimal_repair": "Make target result provisional; only controller/post-run promoter may seal CONFIRMED after verified copy-back, cleanup, source reconstruction, and audit.",
+      "required_regression": "Confirmed target payloads combined with copy-back failure, SHA mismatch, cleanup failure, or absence failure must produce no authoritative scientific class.",
+      "parent_disposition": "material_blocker_survives_blocks_live_authorization",
+      "independently_reproduced": false
+    }
+  }
+}
+
