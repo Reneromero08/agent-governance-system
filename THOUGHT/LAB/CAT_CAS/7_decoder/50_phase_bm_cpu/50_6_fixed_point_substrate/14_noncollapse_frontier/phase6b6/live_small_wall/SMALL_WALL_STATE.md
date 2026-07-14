@@ -6,14 +6,15 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`GAIN_COVARIANT_FINAL_CONFIRMATION_PACKAGE_RETIRED__QUERY_SEPARATED_ARCHITECTURE_BLOCKED`
+`GAIN_COVARIANT_FINAL_CONFIRMATION_PACKAGE_RETIRED__QUERY_SEPARATED_IDENTIFIABILITY_NOT_RESOLVED`
 
 **Current status tokens:**
 
 ```text
 GAIN_COVARIANT_PROJECTION_TRANSDUCTION_ESTABLISHED
 GAIN_COVARIANT_FINAL_CONFIRMATION_PACKAGE_RETIRED
-QUERY_SEPARATED_ORBITSTATE_ARCHITECTURE_BLOCKED
+QUERY_SEPARATED_ARCHITECTURE_BLOCKED
+QUERY_SEPARATED_IDENTIFIABILITY_NOT_RESOLVED
 SMALL_WALL_CROSSED_NOT_PROMOTED
 ```
 
@@ -125,6 +126,21 @@ Final design decision:
 
 ```text
 QUERY_SEPARATED_ARCHITECTURE_BLOCKED
+```
+
+The focused mechanism-resolution package under
+`orbitstate_query_separated_successor/mechanism_resolution` adjudicates the three root
+blockers and leaves them unresolved for the current Family 10h access model. It
+establishes the finite-query equivalence theorem: delayed query selection over a
+finite public query family does not distinguish a relational state from a
+source-authored answer cache. It defines a bounded `B_old` predictor class and a
+synthetic joint observable
+`J_q = Y_q(a,b) - Y_q(a,empty) - Y_q(empty,b) + Y_q(empty,empty)`, but does not freeze
+an exact Family 10h physical state, preparation capacity, relation mutation, or
+restoration map. The new subordinate decision is:
+
+```text
+QUERY_SEPARATED_IDENTIFIABILITY_NOT_RESOLVED
 ```
 
 No live transaction is authorized.

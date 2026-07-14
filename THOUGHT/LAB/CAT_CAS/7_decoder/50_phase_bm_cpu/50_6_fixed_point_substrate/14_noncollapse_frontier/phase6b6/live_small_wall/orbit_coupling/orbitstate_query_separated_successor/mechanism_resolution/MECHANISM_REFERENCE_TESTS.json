@@ -1,0 +1,27 @@
+{
+  "schema": "MECHANISM_REFERENCE_TESTS_V1",
+  "tolerance": 1e-09,
+  "relation": {
+    "a": 23,
+    "b": 233,
+    "N": 256
+  },
+  "closed_queries": [0, 1, 2, 3],
+  "held_out_query": 7,
+  "bounded_cache_capacity": 2,
+  "expected": {
+    "additive_model_fails_joint_state_gate": true,
+    "value_orientation_attack_fails_blinded_permutation": true,
+    "unbounded_finite_lookup_indistinguishable_on_closed_set": true,
+    "adequate_answer_cache_passes_closed_set": true,
+    "bounded_answer_cache_fails_held_out_query_or_capacity_gate": true,
+    "compressed_answer_generator_not_rejected": true,
+    "ordinary_nonlinear_pair_false_positive_possible": true,
+    "route_bank_order_artifact_not_rejected_by_reference_model": true,
+    "query_preselection_invalid_example": true,
+    "capacity_separation_established": false,
+    "synthetic_joint_witness_passes_prospective_joint_gate": true,
+    "family10h_physical_witness_frozen": false,
+    "decision": "QUERY_SEPARATED_IDENTIFIABILITY_NOT_RESOLVED"
+  }
+}

@@ -1,0 +1,264 @@
+{
+  "schema": "MECHANISM_FINDINGS_NORMALIZED_V1",
+  "decision": "QUERY_SEPARATED_IDENTIFIABILITY_NOT_RESOLVED",
+  "parent_architecture_decision": "QUERY_SEPARATED_ARCHITECTURE_BLOCKED",
+  "small_wall_state": "SMALL_WALL_CROSSED_NOT_PROMOTED",
+  "review_status": "COMPLETE",
+  "subagent_execution": {
+    "read_only": true,
+    "network_or_target_contact": 0,
+    "pmu_hardware_execution": 0,
+    "live_authority_variables_set": false,
+    "exposed_reports_to_each_other_before_completion": false
+  },
+  "agents": {
+    "Bacon": {
+      "agent_id": "019f6299-ae05-7ca1-81b4-c40a7d3b632e",
+      "role": "information-theoretic identifiability auditor",
+      "requested_model": "gpt-5.6-sol",
+      "requested_reasoning_effort": "max",
+      "self_reported_model_effort": "OpenAI Codex, GPT-5 family; high reasoning effort",
+      "verdict": "NEGATIVE_DISPOSITION_CORRECT",
+      "confidence": "HIGH",
+      "recommended_disposition": "QUERY_SEPARATED_IDENTIFIABILITY_NOT_RESOLVED"
+    },
+    "Dirac": {
+      "agent_id": "019f6299-c271-7e93-9e10-48cb94567147",
+      "role": "physical coherence-mechanism auditor",
+      "requested_model": "gpt-5.6-sol",
+      "requested_reasoning_effort": "max",
+      "self_reported_model_effort": "GPT-5 Codex / high-effort read-only audit",
+      "verdict": "MATERIAL_BLOCKER",
+      "confidence": "HIGH",
+      "recommended_disposition": "QUERY_SEPARATED_IDENTIFIABILITY_NOT_RESOLVED"
+    },
+    "Hegel": {
+      "agent_id": "019f6299-e65e-7da0-8abc-684ba8b16711",
+      "role": "relational nonseparability adversary",
+      "requested_model": "gpt-5.6-sol",
+      "requested_reasoning_effort": "max",
+      "self_reported_model_effort": "GPT-5-based Codex / high",
+      "verdict": "MATERIAL_BLOCKER",
+      "confidence": "HIGH",
+      "recommended_disposition": "QUERY_SEPARATED_IDENTIFIABILITY_NOT_RESOLVED"
+    },
+    "Lovelace": {
+      "agent_id": "019f6299-fa92-7603-aa25-9e474202006d",
+      "role": "causal query/no-smuggle auditor",
+      "requested_model": "gpt-5.6-sol",
+      "requested_reasoning_effort": "max",
+      "self_reported_model_effort": "GPT-5 Codex / high",
+      "verdict": "MATERIAL_BLOCKER",
+      "confidence": "HIGH",
+      "recommended_disposition": "QUERY_SEPARATED_IDENTIFIABILITY_NOT_RESOLVED"
+    },
+    "Einstein": {
+      "agent_id": "019f629a-0ecb-7452-af72-6c5ff45b8c07",
+      "role": "claim-boundary adjudicator",
+      "requested_model": "gpt-5.6-sol",
+      "requested_reasoning_effort": "max",
+      "self_reported_model_effort": "GPT-5 Codex / high",
+      "verdict": "DECISION_UPHELD_STATE_REPAIR_REQUIRED",
+      "confidence": "HIGH",
+      "recommended_disposition": "QUERY_SEPARATED_IDENTIFIABILITY_NOT_RESOLVED"
+    }
+  },
+  "findings": {
+    "SCALAR-REPLAY-01": {
+      "originating_agents": ["Bacon", "Dirac", "Hegel", "Lovelace", "Einstein"],
+      "exact_report": "MECHANISM_SUBAGENT_REVIEW_REPORTS.md",
+      "cited_source_file_function_line": [
+        "FINITE_QUERY_EQUIVALENCE_THEOREM.md:Theorem",
+        "OLD_BOUNDARY_MODEL_CLASS.md:Class Definition",
+        "CARRIER_CAPACITY_AND_QUERY_SPACE.md:Required Inequality",
+        "MECHANISM_REFERENCE_MODEL.py:FiniteAnswerCache",
+        "MECHANISM_REFERENCE_MODEL.py:compressed_answer_generator"
+      ],
+      "mechanism": "For finite public query families, a source knowing R can precompute or compactly generate h(R,q) for the query family before closure; delayed query selection selects a coordinate or recomputes an answer-equivalent function.",
+      "consequence": "Query separation alone cannot identify a relational state, and the current packet cannot reject finite answer caches, compressed generators, formulas, low-rank bases, circuits, seeds, or compact ordinary encodings of R.",
+      "minimal_repair": "Freeze measured preparation capacity and a minimum ordinary answer-equivalent code-length bound, or require held-out relation/query/seed/session generalization against bounded ordinary predictors while admitting unbounded lookup indistinguishability.",
+      "required_regression": "Unbounded lookup is reported indistinguishable on closed finite sets; adequate closed-set caches pass; inadequate bounded caches fail held-out/capacity gates for the correct reason; compressed or algorithmic answer generators are included in B_old.",
+      "parent_disposition": "unresolved_material_blocker",
+      "independently_reproduced": true,
+      "failure_domain": "identifiability_not_resolved"
+    },
+    "NONSEPARABILITY-01": {
+      "originating_agents": ["Bacon", "Dirac", "Hegel", "Lovelace", "Einstein"],
+      "exact_report": "MECHANISM_SUBAGENT_REVIEW_REPORTS.md",
+      "cited_source_file_function_line": [
+        "NONSEPARABILITY_AND_INTERVENTION_LAW.md:Joint Observable",
+        "NONSEPARABILITY_AND_INTERVENTION_LAW.md:Required Interpretation",
+        "MECHANISM_REFERENCE_MODEL.py:joint_observable",
+        "MECHANISM_REFERENCE_MODEL.py:ordinary_nonlinear_pair_readout"
+      ],
+      "mechanism": "The inclusion-exclusion observable J_q cancels strict additive branch-local response but can be nonzero for ordinary nonlinear readout, shared-resource contention, route coupling, probe disturbance, cache conflict, or saturation.",
+      "consequence": "A nonzero J_q proves only observed nonadditivity under valid factorial arms; it does not prove unresolved OrbitState, physical relational memory, or a Family 10h relational state.",
+      "minimal_repair": "Bind J_q to exact physical arms and require separated topology, additive synthetic, ordinary nonlinear, cross-pair, carrier-off, geometry-null, blinded-orientation, relation-mutation, route/bank/order, and R2 restoration controls.",
+      "required_regression": "Strict additive data must null; ordinary nonlinear/readout and route-contention false positives must fail; only a declared physically bound shared-pair state may pass.",
+      "parent_disposition": "partially_formalized_not_physical",
+      "independently_reproduced": true,
+      "failure_domain": "physical_nonseparability_not_established"
+    },
+    "PHYSICAL-MECHANISM-01": {
+      "originating_agents": ["Bacon", "Dirac", "Hegel", "Lovelace", "Einstein"],
+      "exact_report": "MECHANISM_SUBAGENT_REVIEW_REPORTS.md",
+      "cited_source_file_function_line": [
+        "SHARED_PAIR_WITNESS_MECHANISM.md:Required Family 10h Physical Instantiation",
+        "SHARED_PAIR_WITNESS_MECHANISM.md:Selected Physical Witness Mechanism",
+        "IDENTIFIABILITY_DECISION.md:Why This Is Not A Witness Freeze",
+        "MECHANISM_REFERENCE_MODEL.py:family10h_physical_witness_frozen"
+      ],
+      "mechanism": "The packet lists needed physical fields but freezes no exact pages, cache lines, banks, cores, ownership states, state lifetime, source-death handoff, query operation, measurement window, disturbance law, or restoration operation.",
+      "consequence": "Candidate B remains a research direction only and cannot be implemented or falsified as a physical witness.",
+      "minimal_repair": "Freeze one exact R -> P(R) -> Q(q) -> Y -> Restoration map with physical resources, source lifetime, query operation, measurement windows, disturbance law, and restoration equivalence.",
+      "required_regression": "Route, bank, address, timing, order, alias, nonlinear readout, value orientation, destructive probe, and restoration false-positive packets must all fail named gates.",
+      "parent_disposition": "unresolved_material_blocker",
+      "independently_reproduced": true,
+      "failure_domain": "physical_mechanism_not_frozen"
+    },
+    "PHYSICAL-CONTROL-01": {
+      "originating_agents": ["Dirac", "Hegel", "Lovelace", "Einstein"],
+      "exact_report": "MECHANISM_SUBAGENT_REVIEW_REPORTS.md",
+      "cited_source_file_function_line": [
+        "NONSEPARABILITY_AND_INTERVENTION_LAW.md:Relation Mutations",
+        "CONTROL_AND_KILL_MATRIX.md:Blocked Control Repair",
+        "PHYSICAL_CARRIER_ARCHITECTURES.md:Candidate B"
+      ],
+      "mechanism": "No physically realizable mutation changes only joint incidence while preserving pages, bank population, route/core allocation, operation count, timing, order, and branch-local occupancy.",
+      "consequence": "Relation mutation can be confounded with ordinary physical carrier variables.",
+      "minimal_repair": "Define a blinded incidence intervention over fixed physical vertices and bind exact pairwise traces, not merely marginals.",
+      "required_regression": "Mutations that change route, bank, cache-set conflict, aliasing, timing, order, or occupancy must fail before decoding.",
+      "parent_disposition": "unresolved_material_blocker",
+      "independently_reproduced": true,
+      "failure_domain": "control_not_orthogonal"
+    },
+    "VALUE-ORIENTATION-01": {
+      "originating_agents": ["Bacon", "Dirac", "Hegel", "Lovelace", "Einstein"],
+      "exact_report": "MECHANISM_SUBAGENT_REVIEW_REPORTS.md",
+      "cited_source_file_function_line": [
+        "VALUE_ORIENTATION_SYMMETRY_LAW.md:Required Blinded Action",
+        "MECHANISM_REFERENCE_MODEL.py:value_orientation_trace",
+        "MECHANISM_REFERENCE_MODEL.py:blinded_permutation_trace"
+      ],
+      "mechanism": "A value-derived lane, bank, route, address, or order rule can survive label-name swap while encoding branch orientation.",
+      "consequence": "Label-swap nulls do not prove physical label invariance.",
+      "minimal_repair": "Implement blinded physical branch-to-lane permutation with P, Y_q, J_q, and receiver-visible metadata equivariance.",
+      "required_regression": "min/max lane assignment, value-derived bank/route/order assignment, and metadata row-shape dictionaries must fail.",
+      "parent_disposition": "unresolved_material_blocker",
+      "independently_reproduced": true,
+      "failure_domain": "orientation_not_blinded"
+    },
+    "QUERY-CHOOSER-01": {
+      "originating_agents": ["Bacon", "Dirac", "Hegel", "Lovelace", "Einstein"],
+      "exact_report": "MECHANISM_SUBAGENT_REVIEW_REPORTS.md",
+      "cited_source_file_function_line": [
+        "QUERY_CHOOSER_CUSTODY.md:Required Causal Mechanism",
+        "MECHANISM_REFERENCE_MODEL.py:query_preselection_valid"
+      ],
+      "mechanism": "The custody law is documentary; the reference predicate is two booleans and cannot prove independent entropy, source death, capability revocation, anti-replay, or premeasurement window sealing.",
+      "consequence": "Preselection, delayed publication, shared PRNG, source helper survival, stale closure receipts, and post-observation window choice remain possible failure modes.",
+      "minimal_repair": "Freeze and implement a chooser custody verifier over source-capable principals, closure monotonicity, chooser identity, conditional query min-entropy, seed independence, anti-replay, and query/operator/window commitments.",
+      "required_regression": "Preselected query, shared PRNG, source-visible seed, source still alive, forged closure order, stale closure receipt, and post-measurement operator/window choice classify custody-invalid.",
+      "parent_disposition": "unresolved_material_blocker",
+      "independently_reproduced": true,
+      "failure_domain": "custody_invalid_if_present"
+    },
+    "CAPACITY-BOUND-01": {
+      "originating_agents": ["Bacon", "Hegel", "Lovelace", "Einstein"],
+      "exact_report": "MECHANISM_SUBAGENT_REVIEW_REPORTS.md",
+      "cited_source_file_function_line": [
+        "CARRIER_CAPACITY_AND_QUERY_SPACE.md:Required Inequality",
+        "OLD_BOUNDARY_MODEL_CLASS.md:Complexity And Capacity Bound"
+      ],
+      "mechanism": "Raw answer table size is not an information-theoretic lower bound because answers may be compressed or generated algorithmically using public side information and compact ordinary encodings.",
+      "consequence": "A future capacity argument that uses only |Q| * response_bits can falsely reject ordinary answer-equivalent mechanisms.",
+      "minimal_repair": "Use conditional code length, rate-distortion, or a frozen state/program/compute bound over all admissible ordinary encodings.",
+      "required_regression": "Compressed tables, formulas, circuits, low-rank bases, seeds, coefficients, and compact encodings of R must be admitted to B_old.",
+      "parent_disposition": "prospective_material_blocker",
+      "independently_reproduced": true,
+      "failure_domain": "capacity_separation_not_established"
+    },
+    "REFMODEL-LIMIT-01": {
+      "originating_agents": ["Bacon", "Dirac", "Hegel", "Lovelace", "Einstein"],
+      "exact_report": "MECHANISM_SUBAGENT_REVIEW_REPORTS.md",
+      "cited_source_file_function_line": [
+        "MECHANISM_REFERENCE_MODEL.py:run_tests",
+        "MECHANISM_REFERENCE_TESTS.json:expected"
+      ],
+      "mechanism": "The reference model is illustrative and self-consistency oriented; it does not derive the negative decision from physical evidence.",
+      "consequence": "Passing self-tests cannot be used as evidence of a frozen witness or as an attack-kill suite.",
+      "minimal_repair": "For a future positive protocol, add hard expected failures for adequate/inadequate cache cases, nonlinear ordinary pair interactions, route/bank/order artifacts, query custody violations, relation-mutation confounds, and physical restoration false positives.",
+      "required_regression": "Every causal and identifiability result must have a typed failure domain and exact decision token.",
+      "parent_disposition": "documented_limitation_repaired_in_packet",
+      "independently_reproduced": true,
+      "failure_domain": "reference_model_is_diagnostic_only"
+    },
+    "STATE-TOKEN-01": {
+      "originating_agents": ["Bacon", "Einstein"],
+      "exact_report": "MECHANISM_SUBAGENT_REVIEW_REPORTS.md",
+      "cited_source_file_function_line": [
+        "SMALL_WALL_STATE.md:Current status tokens"
+      ],
+      "mechanism": "The active state previously used QUERY_SEPARATED_ORBITSTATE_ARCHITECTURE_BLOCKED instead of the exact retained token QUERY_SEPARATED_ARCHITECTURE_BLOCKED.",
+      "consequence": "Automation or later review could miss exact token preservation.",
+      "minimal_repair": "Keep QUERY_SEPARATED_ARCHITECTURE_BLOCKED active and add QUERY_SEPARATED_IDENTIFIABILITY_NOT_RESOLVED as a subordinate decision.",
+      "required_regression": "State file contains exact retained gain projection, architecture-blocked, identifiability-not-resolved, and not-promoted tokens.",
+      "parent_disposition": "repaired_in_this_packet",
+      "independently_reproduced": true,
+      "failure_domain": "state_metadata"
+    },
+    "STATE-WORDING-01": {
+      "originating_agents": ["Einstein"],
+      "exact_report": "MECHANISM_SUBAGENT_REVIEW_REPORTS.md",
+      "cited_source_file_function_line": [
+        "SMALL_WALL_STATE.md:Latest offline retirement and successor review"
+      ],
+      "mechanism": "The state update used wording that could imply the root blockers were closed instead of adjudicated as unresolved.",
+      "consequence": "Downstream review could misread the negative decision as a passed repair.",
+      "minimal_repair": "State that the package adjudicates the blockers and leaves them unresolved for the current access model.",
+      "required_regression": "No state text claims SCALAR-REPLAY-01, NONSEPARABILITY-01, or PHYSICAL-MECHANISM-01 are resolved or passed.",
+      "parent_disposition": "repaired_in_this_packet",
+      "independently_reproduced": false,
+      "failure_domain": "state_metadata"
+    }
+  },
+  "attack_results": {
+    "unbounded_lookup_table_equivalence": "survives; finite closed evidence cannot reject it",
+    "bounded_answer_cache": "not defeated physically; capacity and compressed generators remain unresolved",
+    "additive_branch_replay": "strict additivity is synthetically killed by J_q, but ordinary nonlinear interactions survive",
+    "value_derived_orientation": "survives current architecture; future blinded law only",
+    "route_bank_order_artifact": "survives; diagnostic output only, no physical rejecting gate",
+    "query_preselection": "survives current reference logic; future custody law only",
+    "relation_mutation_confound": "survives; no matched physical intervention exists",
+    "joint_observable_false_positive": "survives; J_q proves only nonadditivity"
+  },
+  "parent_artifacts": [
+    "FINITE_QUERY_EQUIVALENCE_THEOREM.md",
+    "OLD_BOUNDARY_MODEL_CLASS.md",
+    "IDENTIFIABILITY_DECISION.md",
+    "CARRIER_CAPACITY_AND_QUERY_SPACE.md",
+    "SHARED_PAIR_WITNESS_MECHANISM.md",
+    "NONSEPARABILITY_AND_INTERVENTION_LAW.md",
+    "SCALAR_REPLAY_ADVERSARY_SPEC.md",
+    "VALUE_ORIENTATION_SYMMETRY_LAW.md",
+    "QUERY_CHOOSER_CUSTODY.md",
+    "MECHANISM_REFERENCE_MODEL.py",
+    "MECHANISM_REFERENCE_TESTS.json",
+    "MECHANISM_RESOLUTION_REVIEW.md",
+    "MECHANISM_SUBAGENT_REVIEW_REPORTS.md"
+  ],
+  "remaining_blockers": [
+    "SCALAR-REPLAY-01",
+    "NONSEPARABILITY-01",
+    "PHYSICAL-MECHANISM-01",
+    "PHYSICAL-CONTROL-01",
+    "QUERY-CHOOSER-01",
+    "CAPABILITY-BOUNDARY-01",
+    "EXACT-COVERAGE-01",
+    "GATE-REGISTRY-01",
+    "METRIC-DOMAINS-01",
+    "RESTORATION-R2-01",
+    "VALUE-ORIENTATION-01",
+    "CAPACITY-BOUND-01"
+  ]
+}
